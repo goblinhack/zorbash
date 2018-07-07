@@ -1,0 +1,1094 @@
+/*
+ * Copyright (C) 2015 goblinhack@gmail.com
+ *
+ * See the README file for license info.
+ */
+
+#include "my_main.h"
+#include "my_sdl.h"
+#include "my_tile.h"
+#include "my_tex.h"
+#include "my_time_util.h"
+#include "my_thing_template.h"
+#include "my_thing_tile.h"
+#include "my_string.h"
+#include "my_ttf.h"
+#include "my_font.h"
+#include "my_ascii.h"
+#include "my_math_util.h"
+#include <wchar.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct ascii_ ascii;
+
+typedef struct {
+    tilep fg_tile;
+    tilep bg_tile;
+
+    texp tex;
+    double tx;
+    double ty;
+    double dx;
+    double dy;
+    
+    color fg_color_tl;
+    color fg_color_bl;
+    color fg_color_tr;
+    color fg_color_br;
+    color bg_color_tl;
+    color bg_color_bl;
+    color bg_color_tr;
+    color bg_color_br;
+    /*
+     * Is reset each frame, and so although a pointer potentially should be 
+     * zeroed out on game load once it is used.
+     */
+    void *context;
+
+} ascii_cell;
+
+static ascii_cell cells[ASCII_WIDTH][ASCII_HEIGHT];
+
+/*
+ * For drawing the mouse cursor.
+ */
+static fpoint mouse_tile_tl;
+static fpoint mouse_tile_br;
+static int mouse_found = false;
+
+static point scissors_tl;
+static point scissors_br;
+static bool scissors_enabled = false;
+
+void ascii_clear_scissors (void)
+{
+    scissors_enabled = false;
+}
+
+void ascii_set_scissors (point tl, point br)
+{
+    scissors_enabled = true;
+    scissors_tl = tl;
+    scissors_br = br;
+}
+
+void pixel_to_ascii (int *x, int *y)
+{
+    *x = (int)(floor((double)(*x) / ((double)game.video_pix_width / ASCII_WIDTH)));
+    *y = (int)(floor((double)(*y) / ((double)game.video_pix_height / ASCII_HEIGHT)));
+}
+
+int ascii_ok (int x, int y)
+{
+    if (x < 0) {
+        return (false);
+    }
+
+    if (x >= ASCII_WIDTH) {
+        return (false);
+    }
+
+    if (y < 0) {
+        return (false);
+    }
+
+    if (y >= ASCII_HEIGHT) {
+        return (false);
+    }
+
+    return (true);
+}
+
+int ascii_ok_for_scissors (int x, int y)
+{
+    if (scissors_enabled) {
+        if ((x < scissors_tl.x) || (x > scissors_br.x)) {
+            return (false);
+        }
+
+        if ((y < scissors_tl.y) || (y > scissors_br.y)) {
+            return (false);
+        }
+    }
+
+    return (ascii_ok(x, y));
+}
+
+int ascii_xyz_ok (int x, int y, int z)
+{
+    if (x < 0) {
+        return (false);
+    }
+
+    if (x >= ASCII_WIDTH) {
+        return (false);
+    }
+
+    if (y < 0) {
+        return (false);
+    }
+
+    if (y >= ASCII_HEIGHT) {
+        return (false);
+    }
+
+    if (z < 0) {
+        return (false);
+    }
+
+    if (z > MAP_DEPTH) {
+        return (false);
+    }
+
+    return (true);
+}
+
+void ascii_set_fg (int x, int y, color c)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->fg_color_tl = c;
+    cell->fg_color_tr = c;
+    cell->fg_color_bl = c;
+    cell->fg_color_br = c;
+}
+
+void ascii_set_bg (int x, int y, color c)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->bg_color_tl = c;
+    cell->bg_color_tr = c;
+    cell->bg_color_bl = c;
+    cell->bg_color_br = c;
+}
+
+void ascii_set_context (int x, int y, void *context)
+{
+    if (!context) {
+        return;
+    }
+
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->context = context;
+}
+
+void *ascii_get_context (int x, int y)
+{
+    if (!ascii_ok(x, y)) {
+        return (0);
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    return (cell->context);
+}
+
+void ascii_dim (int x, int y, double dim)
+{
+    if (!ascii_ok(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->fg_color_tl.a = ((double) cell->fg_color_tl.a) * dim;
+    cell->fg_color_tl.r = ((double) cell->fg_color_tl.r) * dim;
+    cell->fg_color_tl.g = ((double) cell->fg_color_tl.g) * dim;
+    cell->fg_color_tl.b = ((double) cell->fg_color_tl.b) * dim;
+
+    cell->fg_color_tr.a = ((double) cell->fg_color_tr.a) * dim;
+    cell->fg_color_tr.r = ((double) cell->fg_color_tr.r) * dim;
+    cell->fg_color_tr.g = ((double) cell->fg_color_tr.g) * dim;
+    cell->fg_color_tr.b = ((double) cell->fg_color_tr.b) * dim;
+
+    cell->fg_color_bl.a = ((double) cell->fg_color_bl.a) * dim;
+    cell->fg_color_bl.r = ((double) cell->fg_color_bl.r) * dim;
+    cell->fg_color_bl.g = ((double) cell->fg_color_bl.g) * dim;
+    cell->fg_color_bl.b = ((double) cell->fg_color_bl.b) * dim;
+
+    cell->fg_color_br.a = ((double) cell->fg_color_br.a) * dim;
+    cell->fg_color_br.r = ((double) cell->fg_color_br.r) * dim;
+    cell->fg_color_br.g = ((double) cell->fg_color_br.g) * dim;
+    cell->fg_color_br.b = ((double) cell->fg_color_br.b) * dim;
+
+    cell->bg_color_tl.a = ((double) cell->bg_color_tl.a) * dim;
+    cell->bg_color_tl.r = ((double) cell->bg_color_tl.r) * dim;
+    cell->bg_color_tl.g = ((double) cell->bg_color_tl.g) * dim;
+    cell->bg_color_tl.b = ((double) cell->bg_color_tl.b) * dim;
+
+    cell->bg_color_tr.a = ((double) cell->bg_color_tr.a) * dim;
+    cell->bg_color_tr.r = ((double) cell->bg_color_tr.r) * dim;
+    cell->bg_color_tr.g = ((double) cell->bg_color_tr.g) * dim;
+    cell->bg_color_tr.b = ((double) cell->bg_color_tr.b) * dim;
+
+    cell->bg_color_bl.a = ((double) cell->bg_color_bl.a) * dim;
+    cell->bg_color_bl.r = ((double) cell->bg_color_bl.r) * dim;
+    cell->bg_color_bl.g = ((double) cell->bg_color_bl.g) * dim;
+    cell->bg_color_bl.b = ((double) cell->bg_color_bl.b) * dim;
+
+    cell->bg_color_br.a = ((double) cell->bg_color_br.a) * dim;
+    cell->bg_color_br.r = ((double) cell->bg_color_br.r) * dim;
+    cell->bg_color_br.g = ((double) cell->bg_color_br.g) * dim;
+    cell->bg_color_br.b = ((double) cell->bg_color_br.b) * dim;
+}
+
+void ascii_set_bg (int x, int y, const texp tex, double tx, double ty,
+                   double dx, double dy)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->tex = tex;
+    cell->tx = tx;
+    cell->ty = ty;
+    cell->dx = dx;
+    cell->dy = dy;
+}
+
+void ascii_set_bg (int x, int y, const tilep tile)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->bg_tile = tile;
+}
+
+void ascii_set_bg (int x, int y, const char *tilename)
+{
+    ascii_set_bg(x, y, tile_find(tilename));
+}
+
+void ascii_set_bg (int x, int y, const wchar_t c)
+{
+    ascii_set_bg(x, y, fixed_font->unicode_to_tile(c));
+}
+
+void ascii_set_fg (int x, int y, const tilep tile)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->fg_tile = tile;
+}
+
+void ascii_set_fg (int x, int y, const char *tilename)
+{
+    tilep tile;
+
+    if (tilename) {
+        tile = tile_find(tilename);
+        if (!tile) {
+            return;
+        }
+    } else {
+        tile = 0;
+    }
+
+    ascii_set_fg(x, y, tile);
+}
+
+void ascii_set_fg (int x, int y, const wchar_t c)
+{
+    ascii_set_fg(x, y, fixed_font->unicode_to_tile(c));
+}
+
+void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
+{_
+    tilep tile;
+    int bg_set = false;
+    auto text_iter = text.begin();
+
+//printf("ascii_putf__ [%S]/%ld\n", text.c_str(), text.size());
+    if (y < 0) {
+        return;
+    }
+
+    if (y >= ASCII_HEIGHT) {
+        return;
+    }
+
+    if (bg != COLOR_NONE) {
+        bg_set = true;
+    }
+
+    while (text_iter != text.end()) {
+        auto c = *text_iter;
+        text_iter++;
+
+        if (c == L'`') {
+            c = L' ';
+        }
+
+        if (c == L'%') {
+            if (std::string(text_iter, text_iter + 3) == "fg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                fg = string2color(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "bg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                bg = string2color(tmp, &len);
+                text_iter += len + 1;
+
+                bg_set = true;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                auto tp = string2tp(tmp, &len);
+                text_iter += len + 1;
+
+                tile = tp_first_tile(tp);
+                continue;
+            } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                text_iter += 4;
+                continue;
+            } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                text_iter += 5;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                tile = string2tile(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            }
+        }
+
+        if (!ascii_ok_for_scissors(x, y)) {
+            x++;
+            continue;
+        }
+
+        auto is_cursor = (c == ASCII_CURSOR_UCHAR);
+
+        tile = fixed_font->unicode_to_tile(c);
+        if (tile == nullptr) {
+            tile = fixed_font->unicode_to_tile(L'▋');
+            if (tile == nullptr) {
+                tile = fixed_font->unicode_to_tile(L'?');
+                if (tile == nullptr) {
+                    x++;
+                    continue;
+                }
+            }
+        }
+
+        auto saved_fg = fg;
+
+        if (is_cursor) {
+            static uint32_t last;
+            static uint8_t first = true;
+
+            if (first) {
+                first = false;
+                last = time_get_time_ms();
+            }
+
+            if (time_have_x_tenths_passed_since(10, last)) {
+                fg = CONSOLE_CURSOR_COLOR;
+                last = time_get_time_ms();
+            } else if (time_have_x_tenths_passed_since(5, last)) {
+                fg = CONSOLE_CURSOR_COLOR;
+            } else {
+                fg = CONSOLE_CURSOR_OTHER_COLOR;
+            }
+
+            tile = fixed_font->unicode_to_tile(L'▋');
+        }
+
+        ascii_cell *cell = &cells[x++][y];
+
+        cell->fg_tile = tile;
+
+        cell->fg_color_tl = fg;
+        cell->fg_color_tr = fg;
+        cell->fg_color_bl = fg;
+        cell->fg_color_br = fg;
+
+        if (bg_set) {
+            if (bg.r || bg.g || bg.b || bg.a) {
+                tile = fixed_font->unicode_to_tile(L'▋');
+
+                cell->bg_tile = tile;
+            } else {
+                cell->bg_tile = 0;
+            }
+
+            cell->bg_color_tl = bg;
+            cell->bg_color_tr = bg;
+            cell->bg_color_bl = bg;
+            cell->bg_color_br = bg;
+        }
+
+        if (is_cursor) {
+            fg = saved_fg;
+        }
+    }
+}
+
+int ascii_strlen (std::wstring &text)
+{_
+    auto text_iter = text.begin();
+    int x = 0;
+
+    while (text_iter != text.end()) {
+        auto c = *text_iter;
+        text_iter++;
+
+        if (c == L'`') {
+            c = L' ';
+        }
+
+        if (c == L'%') {
+            if (text_iter != text.end()) {
+                if (*text_iter == L'%') {
+                    text_iter++;
+                }
+            }
+
+            if (std::string(text_iter, text_iter + 3) == "fg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "bg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                auto tp = string2tp(tmp, &len);
+                text_iter += len + 1;
+
+                continue;
+            } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                text_iter += 4;
+                continue;
+            } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                text_iter += 5;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tile(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            }
+        }
+
+        x++;
+    }
+
+    return (x);
+}
+
+int ascii_strlen (std::wstring &text, std::wstring *col)
+{_
+    auto text_iter = text.begin();
+    int x = 0;
+
+    for (;;) {
+        auto c = *text_iter;
+        text_iter++;
+
+        if (c == L'\0') {
+            break;
+        }
+
+        if (c == L'`') {
+            c = L' ';
+        }
+
+        if (c == L'%') {
+            if (text_iter != text.end()) {
+                if (*text_iter == L'%') {
+                    text_iter++;
+                }
+            }
+
+            if (std::string(text_iter, text_iter + 3) == "fg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "bg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tp(tmp, &len);
+                text_iter += len + 1;
+
+                continue;
+            } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                text_iter += 4;
+                continue;
+            } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                text_iter += 5;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tile(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            }
+        }
+
+        x++;
+    }
+
+    return (x);
+}
+
+static void ascii_putf_ (int x, int y, 
+                         color fg,
+                         color bg,
+                         std::wstring fmt, va_list args)
+{_
+    wchar_t buf[MAXSTR];
+
+    auto wrote = vswprintf(buf, sizeof(buf), fmt.c_str(), args);
+
+    /*
+     * Only a single nul is written, but as we read 2 at a time...
+     */
+    if (wrote && (wrote < MAXSTR - 1)) {
+        buf[wrote+1] = '\0';
+    }
+
+    auto b = std::wstring(buf);
+
+    ascii_putf__(x, y, fg, bg, b);
+}
+
+static void ascii_putf_ (int x, int y, 
+                         color fg,
+                         color bg,
+                         const wchar_t *fmt, va_list args)
+{_
+    wchar_t buf[MAXSTR];
+
+    auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
+
+    /*
+     * Only a single nul is written, but as we read 2 at a time...
+     */
+    if (wrote && (wrote < MAXSTR - 1)) {
+        buf[wrote+1] = '\0';
+    }
+
+    auto b = std::wstring(buf);
+
+    ascii_putf__(x, y, fg, bg, b);
+}
+
+void ascii_putf (int x, int y, const wchar_t *fmt, ...)
+{_
+    va_list args;
+
+    va_start(args, fmt);
+    ascii_putf_(x, y, WHITE, COLOR_NONE, fmt, args);
+    va_end(args);
+}
+
+void ascii_putf (int x, int y, color fg, const wchar_t *fmt, ...)
+{_
+    va_list args;
+
+    va_start(args, fmt);
+    ascii_putf_(x, y, fg, COLOR_NONE, fmt, args);
+    va_end(args);
+}
+
+void ascii_putf (int x, int y, color fg, color bg, const wchar_t *fmt, ...)
+{_
+    va_list args;
+
+    va_start(args, fmt);
+    ascii_putf_(x, y, fg, bg, fmt, args);
+    va_end(args);
+}
+
+void ascii_putf (int x, int y, std::wstring fmt, ...)
+{_
+    va_list args;
+
+    va_start(args, fmt);
+    ascii_putf_(x, y, WHITE, COLOR_NONE, fmt, args);
+    va_end(args);
+}
+
+void ascii_putf (int x, int y, color fg, std::wstring fmt, ...)
+{_
+    va_list args;
+
+    va_start(args, fmt);
+    ascii_putf_(x, y, fg, COLOR_NONE, fmt, args);
+    va_end(args);
+}
+
+void ascii_putf (int x, int y, color fg, color bg, std::wstring fmt, ...)
+{_
+    va_list args;
+
+    va_start(args, fmt);
+    ascii_putf_(x, y, fg, bg, fmt, args);
+    va_end(args);
+}
+
+static void ascii_display_mouse (fpoint mouse_tile_tl, 
+                                 fpoint mouse_tile_br,
+                                 point mouse_at)
+{_
+    static uint32_t ts;
+    static int alpha = 100;
+
+    if (time_have_x_hundredths_passed_since(5, ts)) {
+        static int alpha_mod = 1;
+
+        alpha += alpha_mod;
+
+        if (alpha > 255) {
+            alpha = 255;
+            alpha_mod = -1;
+        }
+
+        if (alpha < 150) {
+            alpha = 150;
+            alpha_mod = 1;
+        }
+    }
+
+    color c = CONSOLE_CURSOR_OTHER_COLOR;
+    c.a = alpha;
+    glcolor(c);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    gl_blitsquare(mouse_tile_tl.x, mouse_tile_tl.y,
+                  mouse_tile_br.x, mouse_tile_br.y);
+
+    /*
+     * Save where we are at
+     */
+    ascii.mouse_at = mouse_at;
+}
+
+void ascii_put_bg_square (int tlx, int tly, int brx, int bry, 
+                          tilep tile, color c)
+{_
+    int x;
+    int y;
+
+    for (x = tlx; x <= brx; x++) {
+        for (y = tly; y <= bry; y++) {
+            ascii_set_bg(x, y, tile);
+            ascii_set_bg(x, y, c);
+        }
+    }
+}
+
+void ascii_put_bg_square (int tlx, int tly, int brx, int bry, 
+                          const char *tilename, color c)
+{_
+    ascii_put_bg_square (tlx, tly, brx, bry, tile_find(tilename), c);
+}
+
+void ascii_put_bg_square (int tlx, int tly, int brx, int bry, 
+                          wchar_t what, color c)
+{_
+    ascii_put_bg_square (tlx, tly, brx, bry, 
+                         fixed_font->unicode_to_tile(what), c);
+}
+
+void ascii_put_shaded_line (int x1, int x2, int y,
+                            tilep tile,
+                            color col_tl, color col_mid, color col_br,
+                            void *context)
+{_
+    int x;
+    int w = 5;
+
+    for (x = x1; x <= x2; x++) {
+        ascii_set_bg(x, y, tile);
+        ascii_set_bg(x, y, col_mid);
+    }
+
+    color c;
+    auto put_on_lhs = 0;
+    double d = 0.0;
+    double d_scale = 2;
+    double e_min = 0.25;
+
+    for (x = x1, d = 1.0; x < x1 + w; d /= d_scale, x++) {
+        double e = 1.0 - d;
+        e = fmax(e_min, e);
+        c = col_tl;
+        c.a = 255.0 * e;
+        ascii_set_bg(x, y, c);
+        put_on_lhs++;
+    }
+
+    for (x = x2 - 1, d = 1.0; put_on_lhs > 0; d /= d_scale, x--, put_on_lhs--) {
+        double e = 1.0 - d;
+        e = fmax(e_min, e);
+        c = col_br;
+        c.a = 255.0 * e;
+        ascii_set_bg(x, y, c);
+    }
+
+    for (x = x1; x <= x2; x++) {
+        ascii_set_context(x, y, context);
+    }
+}
+
+void ascii_put_shaded_line (int x1, int x2, int y, const char *tilename,
+                            color col_tl, color col_mid, color col_br,
+                            void *context)
+{_
+    ascii_put_shaded_line(x1, x2, y, tile_find(tilename), col_tl, col_mid, col_br,
+                          context);
+}
+
+void ascii_put_shaded_line (int x1, int x2, int y, wchar_t c, 
+                            color col_tl, color col_mid, color col_br,
+                            void *context)
+{_
+    ascii_put_shaded_line(x1, x2, y, fixed_font->unicode_to_tile(c),
+                          col_tl, col_mid, col_br, context);
+}
+
+void ascii_put_solid_line (int x1, int x2, int y, tilep tile, color col,
+                           void *context)
+{_
+    for (auto x = x1; x <= x2; x++) {
+        ascii_set_bg(x, y, tile);
+        ascii_set_bg(x, y, col);
+    }
+}
+
+void ascii_put_solid_line (int x1, int x2, int y, const char *tilename,
+                            color col, void *context)
+{_
+    ascii_put_solid_line(x1, x2, y, tile_find(tilename), col, context);
+}
+
+void ascii_put_solid_line (int x1, int x2, int y, wchar_t c, color col, 
+                           void *context)
+{_
+    ascii_put_solid_line(x1, x2, y, fixed_font->unicode_to_tile(c), col, 
+                         context);
+}
+
+static void ascii_map_thing_replace (int x, int y, tilep tile, color c)
+{_
+    ascii_set_bg(x, y, tile);
+    ascii_set_bg(x, y, c);
+}
+
+static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in, 
+                           int flag, tilep tile, color c)
+{_
+    double temp;
+    double dx;
+    double dy;
+    double tdy;
+    double dydx;
+    double p;
+    double x;
+    double y;
+    double i;
+
+    double x0 = x0_in;
+    double y0 = y0_in;
+    double x1 = x1_in;
+    double y1 = y1_in;
+
+    if (x0 > x1) {
+        temp = x0;
+        x0 = x1;
+        x1 = temp;
+
+        temp = y0;
+        y0 = y1;
+        y1 = temp;
+    }
+
+    dx = x1 - x0;
+    dy = y1 - y0;
+
+    tdy = 2.0 * dy;
+    dydx = tdy - (2.0 * dx);
+
+    p = tdy - dx;
+    x = x0;
+    y = y0;
+
+    if (flag == 0) {
+        ascii_map_thing_replace((int)x, (int)y, tile, c);
+    } else if (flag == 1) {
+        ascii_map_thing_replace((int)y, (int)x, tile, c);
+    } else if (flag == 2) {
+        ascii_map_thing_replace((int)y, (int)-x, tile, c);
+    } else if (flag == 3) {
+        ascii_map_thing_replace((int)x, (int)-y, tile, c);
+    }
+
+    for (i = 1; i <= dx; i++){
+        x++;
+
+        if (p < 0) {
+            p += tdy;
+        } else {
+            p += dydx;
+            y++;
+        }
+
+        if (flag == 0) {
+            ascii_map_thing_replace((int)x, (int)y, tile, c);
+        } else if (flag == 1) {
+            ascii_map_thing_replace((int)y, (int)x, tile, c);
+        } else if (flag == 2) {
+            ascii_map_thing_replace((int)y, (int)-x, tile, c);
+        } else if (flag == 3) {
+            ascii_map_thing_replace((int)x, (int)-y, tile, c);
+        }
+    }
+}
+
+void ascii_draw_line (int x0, int y0, int x1, int y1, tilep tile, color c)
+{_
+    double slope = 100.0;
+
+    if (x0 != x1) {
+        slope = (y1 - y0) * (1.0 / (x1 - x0));
+    }
+
+    if ((0 <= slope) && (slope <= 1)) {
+        do_ascii_line(x0, y0, x1, y1, 0, tile, c);
+    } else if ((-1 <= slope) && (slope <= 0)) {
+        do_ascii_line(x0, -y0, x1, -y1, 3, tile, c);
+    } else if (slope > 1) {
+        do_ascii_line(y0, x0, y1, x1, 1, tile, c);
+    } else {
+        do_ascii_line(-y0, x0, -y1, x1, 2, tile, c);
+    }
+}
+
+void ascii_draw_line (int x0, int y0, int x1, int y1, wchar_t what, color c)
+{_
+    ascii_draw_line (x0, y0, x1, y1, fixed_font->unicode_to_tile(what), c);
+}
+
+void ascii_draw_line (int x0, int y0, int x1, int y1, 
+                      const char *tilename, color c)
+{_
+    ascii_draw_line (x0, y0, x1, y1, tile_find(tilename), c);
+}
+
+/*
+ * Display one z layer of the ascii.
+ */
+void ascii_blit (int no_color)
+{_
+    /*
+     * Get the mouse position to use. We use this to find the mouse tile that 
+     * we are over.
+     */
+    double tw = game.video_gl_width  / (double)ASCII_WIDTH;
+    double th = game.video_gl_height / (double)ASCII_HEIGHT;
+
+    /*
+     * Screen walkers
+     */
+    int x;
+    int y;
+    double tile_x;
+    double tile_y;
+
+    glcolor(WHITE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    tile_y = 0;
+    for (y = 0; y < ASCII_HEIGHT; y++) {
+
+        tile_x = 0;
+        for (x = 0; x < ASCII_WIDTH; x++) {
+
+            const ascii_cell *cell = &cells[x][y];
+
+            fpoint tile_tl;
+            fpoint tile_br;
+
+            tile_tl.x = tile_x;
+            tile_tl.y = tile_y;
+            tile_br.x = tile_x + tw;
+            tile_br.y = tile_y + th;
+
+            int mx1 = tile_tl.x * game.video_pix_width;
+            int my1 = tile_tl.y * game.video_pix_height;
+            int mx2 = tile_br.x * game.video_pix_width;
+            int my2 = tile_br.y * game.video_pix_height;
+
+            if (!mouse_found) {
+                if ((mx1 < mouse_x) && 
+                    (my1 < mouse_y) &&
+                    (mx2 >= mouse_x) &&
+                    (my2 >= mouse_y)) {
+                    mouse_found = true;
+
+                    mouse_tile_tl = tile_tl;
+                    mouse_tile_br = tile_br;
+
+                    ascii.mouse_at = point(x, y);
+                }
+            }
+
+            /*
+             * Background
+             */
+            if (cell->tex) {
+		texp tex = cell->tex;
+
+		blit(tex_get_gl_binding(tex), 
+                     cell->tx, 
+                     cell->ty, 
+                     cell->tx + cell->dx, 
+                     cell->ty + cell->dy,
+                     tile_tl.x, 
+                     tile_tl.y, 
+                     tile_br.x,
+                     tile_br.y);
+            } else if (cell->bg_tile) {
+                tile_br.x = tile_x + tw * 2.4;
+                color bg_color_tl = cell->bg_color_tl;
+                color bg_color_tr = cell->bg_color_tr;
+                color bg_color_bl = cell->bg_color_bl;
+                color bg_color_br = cell->bg_color_br;
+
+                if (no_color) {
+                    bg_color_tl = color_to_mono(bg_color_tl);
+                    bg_color_tr = color_to_mono(bg_color_tr);
+                    bg_color_bl = color_to_mono(bg_color_bl);
+                    bg_color_br = color_to_mono(bg_color_br);
+                }
+
+                tile_blit_colored_fat(0, 
+                                      cell->bg_tile, 
+                                      tile_tl, 
+                                      tile_br,
+                                      bg_color_tl,
+                                      bg_color_tr,
+                                      bg_color_bl,
+                                      bg_color_br);
+            }
+
+            /*
+             * Foreground
+             */
+            {
+                tile_br.x = tile_x + tw * 2.4;
+                tilep tile = cell->fg_tile;
+
+                if (tile) {
+                    color fg_color_tl = cell->fg_color_tl;
+                    color fg_color_tr = cell->fg_color_tr;
+                    color fg_color_bl = cell->fg_color_bl;
+                    color fg_color_br = cell->fg_color_br;
+
+                    if (no_color) {
+                        fg_color_tl = color_to_mono(fg_color_tl);
+                        fg_color_tr = color_to_mono(fg_color_tr);
+                        fg_color_bl = color_to_mono(fg_color_bl);
+                        fg_color_br = color_to_mono(fg_color_br);
+                    }
+
+                    tile_blit_colored_fat(0,
+                                          tile,
+                                          tile_tl, 
+                                          tile_br,
+                                          fg_color_tl,
+                                          fg_color_tr,
+                                          fg_color_bl,
+                                          fg_color_br);
+                }
+            }
+
+            tile_x += tw;
+        }
+
+        tile_y += th;
+    }
+}
+
+/*
+ * The big ascii renderer
+ */
+void ascii_display (void)
+{_
+    mouse_found = false;
+
+    blit_init();
+    ascii_blit(false /* no color */);
+    blit_flush();
+
+    if (mouse_found) {
+        ascii_display_mouse(mouse_tile_tl, mouse_tile_br, ascii.mouse_at);
+    }
+
+    memset(cells, 0, sizeof(cells));
+}

@@ -1,0 +1,22 @@
+import mm
+
+def hello():
+    mm.con(" ")
+    mm.con("%%fg=red$@@@@@@@@   @@@@@@   @@@@@@@   @@@@@@@    @@@@@@    @@@@@@   @@@  @@@")
+    mm.con("%%fg=red$@@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@   @@@  @@@")
+    mm.con("%%fg=red$     @@!  @@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  !@@       @@!  @@@")
+    mm.con("%%fg=red$    !@!   !@!  @!@  !@!  @!@  !@   @!@  !@!  @!@  !@!       !@!  @!@")
+    mm.con("%%fg=red$   @!!    @!@  !@!  @!@!!@!   @!@!@!@   @!@!@!@!  !!@@!!    @!@!@!@!")
+    mm.con("%%fg=red$  !!!     !@!  !!!  !!@!@!    !!!@!!!!  !!!@!!!!   !!@!!!   !!!@!!!!")
+    mm.con("%%fg=red$ !!:      !!:  !!!  !!: :!!   !!:  !!!  !!:  !!!       !:!  !!:  !!!")
+    mm.con("%%fg=red$:!:       :!:  !:!  :!:  !:!  :!:  !:!  :!:  !:!      !:!   :!:  !:!")
+    mm.con("%%fg=red$::: ::::  ::::: ::  ::   :::   :: ::::  ::   :::  :::: ::   ::   :::")
+    mm.con("%%fg=red$: :: : :   : :  :    :   : :   : : ::    :   : :  :: : :     :   : :")
+    mm.con("%%fg=red$: :  : :   :    :    :   :     : : ::    :   : :  :  : :     :   : :")
+    mm.con("%%fg=red$. .  . :   : .  :    .   : .   : . ::    :   : .  .. : :     .   : :")
+    mm.con(" ")
+    mm.con("%fg=green$Version " + mm.VERSION + "%fg=reset$")
+    mm.con(" ")
+    mm.con("Press %fg=yellow$<tab>%fg=reset$ to complete commands.")
+    mm.con("Press %fg=yellow$?%fg=reset$ to show command options.")
+    mm.con("You can also enter raw python code here.")

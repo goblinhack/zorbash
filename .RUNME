@@ -1,0 +1,699 @@
+#!/bin/bash
+# 
+# Copyright (C) 2014 Neil McGill
+#
+# This game is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This game is distributed in the hope that it will be fun,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this game; if not, write to the Free
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+. ./scripts/common.sh
+
+case `uname` in
+    *MING*|*MSYS*)
+        # Goog link for mingw install hints
+        #         log_info "Installing python dependancies:"
+        log_info "Installing python dependancies:"
+        pacman --force --noconfirm -S mingw-w64-x86_64-python3
+        pacman --force --noconfirm -S mingw-w64-x86_64-python3-pip
+        pacman --force --noconfirm -S mingw-w64-x86_64-python3-cx_Freeze
+        /mingw64/bin/pip3 install colored
+        /mingw64/bin/pip3 install hexdump
+    ;;
+    *Darwin*)
+        # sudo python3 -m pip install --upgrade pip
+        port install python3-pip
+        python3 -m pip install colored
+        python3 -m pip install hexdump
+    ;;
+    *)
+        apt-get install python3-pip3
+        pip3 install colored
+        pip3 install hexdump
+    ;;
+esac
+
+case `uname` in
+    *MING*|*MSYS*)
+        for i in \
+            /mingw/bin/sdl2-config \
+            /mingw64/bin/sdl2-config
+        do
+            if [ -x $i ]
+            then
+                SDL2_CONFIG=$i
+                break
+            fi
+        done
+    ;;
+    *)
+        for i in \
+            /opt/local/bin/sdl2-config \
+            /usr/local/bin/sdl2-config \
+            /usr/bin/sdl2-config 
+        do
+            if [ -x $i ]
+            then
+                SDL2_CONFIG=$i
+                break
+            fi
+        done
+    ;;
+esac
+
+
+#
+# Prefer SDL over SDL2 as it seems more common
+#
+case `uname` in
+    *MING*|*MSYS*)
+        for i in \
+            /mingw/bin/sdl-config \
+            /mingw64/bin/sdl-config 
+        do
+            if [ -x $i ]
+            then
+                SDL1_CONFIG=$i
+                break
+            fi
+        done
+    ;;
+    *)
+        for i in \
+            /opt/local/bin/sdl-config \
+            /usr/local/bin/sdl-config \
+            /usr/bin/sdl-config
+        do
+            if [ -x $i ]
+            then
+                SDL1_CONFIG=$i
+                break
+            fi
+        done
+    ;;
+esac
+
+
+sdl_help()
+{
+    log_warn "Is SDL 1.2 or 1.3 installed? If not:"
+
+    case `uname` in
+    *MING*|*MSYS*)
+        log_warn "   Installed already:"
+        pacman -Ss | grep '^mingw64/' | grep SDL | sed 's/^mingw64.//g' | grep installed
+        log_warn "   Will try to install needed packages:"
+
+        pacman -S \
+            mingw-w64-x86_64-SDL \
+            mingw-w64-x86_64-SDL2 \
+            mingw-w64-x86_64-SDL2_gfx \
+            mingw-w64-x86_64-SDL2_image \
+            mingw-w64-x86_64-SDL2_mixer \
+            mingw-w64-x86_64-SDL2_net \
+            mingw-w64-x86_64-SDL2_ttf \
+            mingw-w64-x86_64-SDL_gfx \
+            mingw-w64-x86_64-SDL_image \
+            mingw-w64-x86_64-SDL_mixer \
+            mingw-w64-x86_64-SDL_net \
+            mingw-w64-x86_64-SDL_ttf
+
+        log_warn "Ok, try RUNME again"
+        exit 1
+        ;;
+
+    *Darwin*)
+        log_warn "Install MAC ports then install:"
+        log_warn "   sudo port install libsdl2"
+        log_warn "   sudo port install libsdl2_mixer"
+        log_warn "   sudo port install libsdl2_ttf"
+        ;;
+
+    *)
+        log_warn "  For ubuntu SDL2 do: "
+        log_warn "   sudo apt-get install libsdl2-dev"
+        log_warn "   sudo apt-get install libsdl2-mixer-dev"
+        log_warn ""
+        log_warn "  For ubuntu SDL1.2 do: "
+        log_warn "   sudo apt-get install libsdl1.2-dev"
+        log_warn "   sudo apt-get install libsdl-mixer1.2-dev"
+        ;;
+    esac
+}
+
+SDL1_SCORE=0
+SDL2_SCORE=0
+
+if [ "$SDL1_CONFIG" != "" ]; then
+    SDL1_INC_PATH=`$SDL1_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
+
+    find $SDL1_INC_PATH | grep -q SDL_mixer.h
+    if [ $? -eq 0 ]; then
+        SDL1_SCORE=`expr $SDL1_SCORE + 1`
+        SDL1_MIXER=`find $SDL1_INC_PATH -name SDL_mixer.h`
+    fi
+fi
+
+if [ "$SDL2_CONFIG" != "" ]; then
+    SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
+
+    find $SDL2_INC_PATH | grep -q SDL_mixer.h
+    if [ $? -eq 0 ]; then
+        SDL2_SCORE=`expr $SDL2_SCORE + 1`
+        SDL2_MIXER=`find $SDL2_INC_PATH -name SDL_mixer.h`
+    fi
+fi
+
+if [[ "$SDL1_CONFIG" != "" ]]; then
+    log_info "SDL1 config      : $SDL1_CONFIG"
+    log_info "SDL1 version     : "`$SDL1_CONFIG --version`
+    log_info "SDL1 include path: $SDL1_INC_PATH"
+    log_info "SDL1 mixer.h     : $SDL1_MIXER"
+    log_info "SDL1 score       : $SDL1_SCORE"
+fi
+
+if [[ "$SDL2_CONFIG" != "" ]]; then
+    log_info "SDL2 config      : $SDL2_CONFIG"
+    log_info "SDL2 version     : "`$SDL2_CONFIG --version`
+    log_info "SDL2 include path: $SDL2_INC_PATH"
+    log_info "SDL2 mixer.h     : $SDL2_MIXER"
+    log_info "SDL2 score       : $SDL2_SCORE"
+fi
+
+USE_SDL1=0
+USE_SDL2=0
+
+if [[ $SDL1_SCORE = "0" ]]; then
+    if [[ $SDL2_SCORE = "0" ]]; then
+        log_err "I need SDL1 or SDL2 and SDL mixer"
+        sdl_help
+        exit 1
+    else
+        SDL_CONFIG=$SDL2_CONFIG
+        USE_SDL2=1
+    fi
+elif [[ $SDL2_SCORE = "0" ]]; then
+    if [[ $SDL1_SCORE = "0" ]]; then
+        log_err "I need SDL1 or SDL2 and SDL mixer"
+        sdl_help
+        exit 1
+    else
+        SDL_CONFIG=$SDL1_CONFIG
+        USE_SDL1=1
+    fi
+else
+    if [[ $SDL2_SCORE -ge $SDL1_SCORE ]]; then
+        log_info "Prefer SDL2 as it has more headers"
+        SDL_CONFIG=$SDL2_CONFIG
+        USE_SDL2=1
+    else
+        log_info "Prefer SDL1 as it has more headers"
+        SDL_CONFIG=$SDL1_CONFIG
+        USE_SDL1=1
+    fi
+fi
+
+#
+# Gives warings at runtime on MACOS
+#
+SDL_LIBS=`$SDL_CONFIG --libs`
+
+if [ $? -ne 0 ]
+then
+    log_err "Please install SDL 1.2 or 1.3. $SDL_CONFIG failed."
+    log_err "SDL-1.2.14.tar.gz is in support/"
+    exit 1
+fi
+
+C_FLAGS=`$SDL_CONFIG --cflags`
+if [ $? -ne 0 ]
+then
+    log_err "Please install SDL 1.2 or 1.3. $SDL_CONFIG failed."
+    log_err "SDL-1.2.14.tar.gz is in support/"
+    exit 1
+fi
+
+log_info "SDL version:" `$SDL_CONFIG --version`
+log_info "  ($SDL_CONFIG)"
+
+#
+# -funwind-tables and -rdynamic for backtrace info on linux.
+# But it seemed to help little.
+#
+LDLIBS="$SDL_LIBS"
+
+if [ "$USE_SDL2" = "1" ]
+then
+    # ENABLE_GENERATE_TTF
+    LDLIBS="$LDLIBS -lSDL2_ttf"
+    LDLIBS="$LDLIBS -lSDL2_mixer"
+else
+    # ENABLE_GENERATE_TTF
+    #LDLIBS="$LDLIBS -lSDL_ttf"
+    LDLIBS="$LDLIBS -lSDL_mixer"
+fi
+
+case `uname` in
+    *MING*|*MSYS*)
+        for i in \
+            /mingw/bin/python3-config \
+            /mingw64/bin/python3-config 
+        do
+            if [ -x $i ]
+            then
+                Python3_CONFIG=$i
+                break
+            fi
+        done
+    ;;
+    *)
+        for i in \
+            /usr/local/bin/python3-config \
+            /opt/local/bin/python3-config \
+            /usr/bin/python3-config 
+        do
+            if [ -x $i ]
+            then
+                Python3_CONFIG=$i
+                break
+            fi
+        done
+    ;;
+esac
+
+
+#
+# Prefer Python over Python3 as it seems more common
+#
+case `uname` in
+    *MING*|*MSYS*)
+        for i in \
+            /mingw/bin/python-config \
+            /mingw64/bin/python-config 
+        do
+            if [ -x $i ]
+            then
+                Python2_CONFIG=$i
+                break
+            fi
+        done
+    ;;
+    *)
+        for i in \
+            /opt/local/bin/python-config \
+            /usr/local/bin/python-config \
+            /usr/bin/python-config
+        do
+            if [ -x $i ]
+            then
+                Python2_CONFIG=$i
+                break
+            fi
+        done
+    ;;
+esac
+
+
+python_help()
+{
+    log_warn "Is python3 installed ?"
+
+    case `uname` in
+    *MING*|*MSYS*)
+        log_warn "   Installed already:"
+        pacman -Ss | grep '^mingw64/' | grep python3 | sed 's/^mingw64.//g' | grep installed
+        log_warn "   Will try to install needed packages:"
+
+        pacman -S \
+            mingw-w64-x86_64-python3 \
+            mingw-w64-x86_64-python3-pip \
+            mingw-w64-x86_64-python3-py
+
+        log_warn "Ok, try RUNME again"
+        exit 1
+        ;;
+
+    *Darwin*)
+        log_warn "Install MAC ports then install:"
+        log_warn "   sudo port install python3*"
+        ;;
+
+    *)
+        log_warn "  For ubuntu Python3 do: "
+        log_warn "   sudo apt-get install python3-dev"
+        log_warn "   sudo apt-get install python3-pip"
+        ;;
+    esac
+}
+
+Python2_SCORE=0
+Python3_SCORE=0
+
+if [ "$Python2_CONFIG" != "" ]; then
+    Python2_INC_PATH=`$Python2_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
+
+    find $Python2_INC_PATH | grep -q Python.h
+    if [ $? -eq 0 ]; then
+        Python2_SCORE=`expr $Python2_SCORE + 1`
+    fi
+fi
+
+if [ "$Python3_CONFIG" != "" ]; then
+    Python3_INC_PATH=`$Python3_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
+
+    find $Python3_INC_PATH | grep -q Python.h
+    if [ $? -eq 0 ]; then
+        Python3_SCORE=`expr $Python3_SCORE + 1`
+    fi
+fi
+
+if [ "$Python2_CONFIG" != "" ]; then
+    log_info "Python2 config      : $Python2_CONFIG"
+    log_info "Python2             : "`$Python2_CONFIG --exec-prefix`
+    log_info "Python2 include path: $Python2_INC_PATH"
+    log_info "Python2 score       : $Python2_SCORE"
+fi
+
+if [[ "$Python3_CONFIG" != "" ]]; then
+    log_info "Python3 config      : $Python3_CONFIG"
+    log_info "Python3             : "`$Python3_CONFIG --exec-prefix`
+    log_info "Python3 include path: $Python3_INC_PATH"
+    log_info "Python3 score       : $Python3_SCORE"
+fi
+
+USE_Python2=0
+USE_Python3=0
+
+if [[ $Python2_SCORE = "0" ]]; then
+    if [[ $Python3_SCORE = "0" ]]; then
+        log_err "I need Python3"
+        python_help
+        exit 1
+    else
+        Python_CONFIG=$Python3_CONFIG
+        USE_Python3=1
+    fi
+elif [[ $Python3_SCORE = "0" ]]; then
+    if [[ $Python2_SCORE = "0" ]]; then
+        log_err "I need Python3"
+        python_help
+        exit 1
+    else
+#        Python_CONFIG=$Python2_CONFIG
+#        USE_Python2=1
+        log_err "I need Python3"
+        python_help
+        exit 1
+    fi
+else
+    if [[ $Python3_SCORE -ge $Python2_SCORE ]]; then
+        log_info "Prefer Python3"
+        Python_CONFIG=$Python3_CONFIG
+        USE_Python3=1
+    else
+        log_err "I need Python3"
+        python_help
+        exit 1
+#        log_info "Prefer Python2"
+#        Python_CONFIG=$Python2_CONFIG
+#        USE_Python2=1
+    fi
+fi
+
+/bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
+
+### #
+### # Make the ramdisk
+### #
+### RAMDISK_FILES=.ramdisk_files
+### 
+### log_info "Creating ramdisk filelist"
+### 
+### find data -type f | grep -v Resources | grep -v DS_Store | grep -v "\.ttf$" | grep -v "xcf" | grep -v "mp3" | grep -v "\.session" | grep -v "^\." > $RAMDISK_FILES
+### if [ ! -s $ramdisk_files ]
+### then
+###     cd src
+###     log_die "Failed to build list of ramdisk files"
+### fi
+### 
+### mkdir -p src/asm
+### scripts/RUNME.ramdisk.pl $RAMDISK_FILES
+### if [ $? -ne 0 ]
+### then
+###     log_die "Failed to make ramdisk files"
+### fi
+### 
+### /bin/rm -f $RAMDISK_FILES
+
+#
+# Make the makefile
+#
+cd src
+
+rm -f Makefile
+cat Makefile.base | sed '/DO NOT DELETE/,$d' > Makefile.tmp
+mv Makefile.tmp Makefile
+
+case `uname` in
+    *MING*|*MSYS*)
+        makedepend *.cpp -p .o/ 2>/dev/null
+
+        if [ $? -ne 0 ]; then
+            ../third-party/makedepend *.cpp -p .o/ 2>/dev/null
+        fi
+        ;;
+    *)
+        makedepend *.cpp -p .o/ 2>/dev/null
+        ;;
+esac
+
+if [ $? -ne 0 ]; then
+
+    log_warn "Is makedepend installed? If not:"
+    log_warn "  For ubuntu do: sudo apt-get install xutils-dev"
+    log_warn "  For MAC    do: sudo port install makedepend"
+    log_warn "  For MingW  do: look in third-party for Win32 binary"
+
+    case `uname` in
+        *MING*|*MSYS*)
+            echo
+            log_warn "If you still can't find it, I have the source in third-party"
+            log_warn "  cd third-party"
+            log_warn "  tar xvf makedepend-1.0.5.tar.gz"
+            log_warn "  cd makedepend-1.0.5"
+            log_warn "  ./configure"
+            ;;
+    esac
+
+    log_warn "Hit enter to continue; I'll ignore this error."
+    log_warn "It's not essential. Rebuilds will be slower is all."
+    read dummy
+
+    makedepend *.cpp -p .o/ 2>/dev/null
+fi
+
+cd ..
+
+#
+# Gives warings at runtime on MACOS
+#
+Python_LIBS=`$Python_CONFIG --ldflags`
+
+if [ $? -ne 0 ]
+then
+    log_err "Please install Python 3. $Python_CONFIG failed."
+    exit 1
+fi
+
+#
+# Filter some junk out of the python config that can cause link errors
+#
+C_FLAGS="$C_FLAGS `$Python_CONFIG --cflags | \
+           tr ' ' '\n' | \
+           grep -v specs                | \
+           grep -v debug-prefix         | \
+           grep -v O3                   | \
+           grep -v O2                   | \
+           grep -v Os                   | \
+           grep -v wrapv                | \
+           grep -v strict-proto         | \
+           grep -v no-strict-aliasing   | \
+           tr '\n' ' '                  | \
+           sed 's/\-arch i386/ /g'      \
+           `"
+#
+# -funwind-tables and -rdynamic for backtrace info on linux.
+# But it seemed to help little.
+#
+LDLIBS="$LDLIBS $Python_LIBS"
+
+#
+# for backtraces, but it doesn't help much
+#
+case `uname` in
+    *MSYS*)
+        PATH=/mingw64/bin:$PATH
+        export PATH
+
+	EXE=".exe"
+        C_FLAGS="$C_FLAGS -mwin32"
+        C_FLAGS="$C_FLAGS -I/mingw64/x86_64-w64-mingw32/include"
+        LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-mingw32/lib/"
+	LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
+	LDLIBS="$LDLIBS -lopengl32"
+	LDLIBS="$LDLIBS -funwind-tables"
+        ;;
+    *Darwin*)
+	EXE=""
+	LDLIBS="$LDLIBS -funwind-tables"
+	LDLIBS="$LDLIBS -rdynamic"
+	LDLIBS="$LDLIBS -Wl,-framework,Opengl"
+	DSYM="dsymutil ../zorbash"
+        WERROR="-Werror"
+        COMPILER_WARN="-Wmissing-prototypes"
+	;;
+    *MING*)
+	EXE=""
+	LDLIBS="$LDLIBS -funwind-tables"
+	LDLIBS="$LDLIBS -lopengl32"
+	LDLIBS="$LDLIBS -Wl,-framework,Opengl"
+	DSYM="dsymutil ../zorbash"
+        WERROR="-Werror"
+        COMPILER_WARN="-Wmissing-prototypes"
+	;;
+    *)
+	EXE=""
+	LDLIBS="$LDLIBS -funwind-tables"
+	LDLIBS="$LDLIBS -lGL"
+        #
+        # Better to leave off for production
+        #
+        WERROR="-Werror"
+        COMPILER_WARN="-Wmissing-prototypes"
+	;;
+esac
+
+C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
+
+#
+# Better to leave off for production
+#
+#WERROR=""
+
+#LDLIBS="$LDLIBS -lpthread"
+
+cd src
+
+echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O2 # AUTOGEN" > .Makefile
+echo "    " >> .Makefile
+echo "CLANG_COMPILER_WARNINGS=-Wall -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -Wno-trigraphs $COMPILER_WARN -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-sign-conversion -std=c++11 -stdlib=libc++ # AUTOGEN" >> .Makefile
+echo "GXX_COMPILER_WARNINGS=-x c++ -Wall -fmessage-length=0 -Wno-trigraphs -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -std=c++11 -fstack-protector-all -fstack-protector-strong # AUTOGEN" >> .Makefile
+
+`g++ --version >/dev/null 2>/dev/null`
+if [ $? -eq 0 ]
+then
+    echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+    echo "COMPILER_WARNINGS=\$(GXX_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+    echo "# CC=clang++ # AUTOGEN" >> .Makefile
+    echo "CC=g++ # AUTOGEN" >> .Makefile
+else
+    `clang++ --version >/dev/null 2>/dev/null`
+    if [ $? -eq 0 ]
+    then
+        echo "COMPILER_WARNINGS=\$(GXX_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+        echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+        echo "CC=clang++ # AUTOGEN" >> .Makefile
+        echo "# CC=g++ # AUTOGEN" >> .Makefile
+    fi
+fi
+
+case `uname` in
+    *MSYS*)
+        echo "CC=/mingw64/bin/x86_64-w64-mingw32-gcc.exe # AUTOGEN" >> .Makefile
+
+        LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /mingw64/lib/libSDL2main.a -L/mingw64/lib -lSDL2main -lSDL2"
+    ;;
+esac
+
+echo "    " >> .Makefile
+echo "EXE=$EXE # AUTOGEN" >> .Makefile
+echo "DSYM=$DSYM # AUTOGEN" >> .Makefile
+echo "LDLIBS=$LDLIBS # AUTOGEN" >> .Makefile
+echo "CFLAGS=\$(COMPILER_FLAGS) \$(COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+
+cat Makefile | grep -v AUTOGEN | grep -v "^    $" >> .Makefile
+
+if [ -s .Makefile ]
+then
+    mv .Makefile Makefile
+    if [ ! -f Makefile ]
+    then
+	log_err "No makefile?!"
+	exit 1
+    fi
+else 
+    log_err "Makefile create fail?!"
+    exit 1
+fi
+
+log_info "Cleaning"
+make clobber | sed 's/^/  /g'
+
+CORES=""
+
+case `uname` in
+    *Darwin*)
+	CORES=`/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g'`
+    ;;
+
+    *inux*)
+	CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
+    ;;
+esac
+
+if [ "$CORES" != "" ]
+then
+    log_info "Compiling ($CORES cpus)"
+
+    CORES="-j $CORES"
+else
+    log_info "Compiling"
+fi
+
+make $CORES $* all
+
+if [ $? -eq 0 ]
+then
+    echo
+    case `uname` in
+        *MING*|*MSYS*)
+
+            log_info "You likely will need the following to run:"
+            log_info "export PYTHONPATH=/mingw64/lib/python3.5/:/mingw64/lib/python3.5/lib-dynload:/mingw64/lib/python3.5/site-packages/"
+            log_info "Run ./zorbash.exe to start"
+            ;;
+        *)
+            log_info "Run ./zorbash to start"
+            ;;
+    esac
+
+    rm -f Makefile.bak
+else
+    cd ..
+    log_die "Build failed"
+    sdl_help
+    exit 1
+fi
+
+cd ..
+exit 0
