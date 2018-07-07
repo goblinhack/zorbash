@@ -1,0 +1,104 @@
+
+NAME=zorbash
+OBJDIR=.o
+
+#include Makefile.ramdisk.deps
+#    $(RAMDISK_OBJ)			
+
+GAME_OBJECTS=				\
+    $(OBJDIR)/ascii.o 		        \
+    $(OBJDIR)/ascii_box.o 		\
+    $(OBJDIR)/ascii_button.o 		\
+    $(OBJDIR)/backtrace.o 		\
+    $(OBJDIR)/color.o			\
+    $(OBJDIR)/command.o 		\
+    $(OBJDIR)/config.o			\
+    $(OBJDIR)/dir.o 			\
+    $(OBJDIR)/dmap.o 			\
+    $(OBJDIR)/file.o 			\
+    $(OBJDIR)/font.o 			\
+    $(OBJDIR)/game.o 			\
+    $(OBJDIR)/geo.o 			\
+    $(OBJDIR)/gl.o 			\
+    $(OBJDIR)/hacklib.o 		\
+    $(OBJDIR)/log.o 			\
+    $(OBJDIR)/main.o 			\
+    $(OBJDIR)/math.o 			\
+    $(OBJDIR)/music.o 			\
+    $(OBJDIR)/pcg_basic.o 		\
+    $(OBJDIR)/pixel.o 			\
+    $(OBJDIR)/point.o 			\
+    $(OBJDIR)/ptrcheck.o 		\
+    $(OBJDIR)/py_dmap.o 		\
+    $(OBJDIR)/py_game.o 		\
+    $(OBJDIR)/py_sdl.o 			\
+    $(OBJDIR)/py_tex.o 			\
+    $(OBJDIR)/py_thing.o 		\
+    $(OBJDIR)/py_tile.o 		\
+    $(OBJDIR)/py_tp.o 			\
+    $(OBJDIR)/py_ttf.o 			\
+    $(OBJDIR)/py_wid.o 			\
+    $(OBJDIR)/py_wid_tiles.o 		\
+    $(OBJDIR)/python.o 			\
+    $(OBJDIR)/ramdisk_read.o 		\
+    $(OBJDIR)/rand.o 			\
+    $(OBJDIR)/sdl.o 			\
+    $(OBJDIR)/slre.o 			\
+    $(OBJDIR)/sound.o 			\
+    $(OBJDIR)/stb_image.o 		\
+    $(OBJDIR)/string.o 			\
+    $(OBJDIR)/term.o 		        \
+    $(OBJDIR)/tex.o 			\
+    $(OBJDIR)/thing.o 			\
+    $(OBJDIR)/thing_anim.o 		\
+    $(OBJDIR)/thing_dir.o 		\
+    $(OBJDIR)/thing_map.o 		\
+    $(OBJDIR)/thing_template.o 		\
+    $(OBJDIR)/thing_tile.o 		\
+    $(OBJDIR)/tile.o 			\
+    $(OBJDIR)/time.o 			\
+    $(OBJDIR)/timer.o 			\
+    $(OBJDIR)/token.o 			\
+    $(OBJDIR)/ttf.o 			\
+    $(OBJDIR)/util.o 			\
+    $(OBJDIR)/wid.o 			\
+    $(OBJDIR)/wid_anim.o 		\
+    $(OBJDIR)/wid_console.o 		\
+    $(OBJDIR)/wid_tiles.o 		\
+    $(OBJDIR)/map_jigsaw.o 		\
+    
+#
+# compile
+#
+$(OBJDIR)/%.o: %.cpp
+	@echo $(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(EXTRA_CFLAGS) $(CFLAGS) -c -o $@ $<
+
+#
+# link
+#
+TARGET_GAME=$(NAME)$(EXE)
+$(TARGET_GAME): $(GAME_OBJECTS)
+	$(CC) $(GAME_OBJECTS) $(LDLIBS) -o ../$(TARGET_GAME)
+
+#
+# To force clean and avoid "up to date" warning.
+#
+.PHONY: clean
+.PHONY: clobber
+
+clean:
+	rm -rf ../$(TARGET_GAME) ../stdout.txt ../stderr.txt
+	rm -rf $(GAME_OBJECTS) $(TARGET_GAME) stdout.txt stderr.txt
+
+clobber: clean
+	rm -rf $(OBJDIR)
+	mkdir -p $(OBJDIR)
+
+valgrind:
+	valgrind --gen-suppressions=all --leak-check=full --suppressions=valgrind.suppress --error-limit=no ../$(NAME)
+
+all: $(TARGET_GAME)
+	$(DSYM)
+
+#include Makefile.ramdisk
