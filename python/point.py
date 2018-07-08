@@ -1,5 +1,5 @@
 import math
-import mm
+import zx
 
 
 class Point(object):
@@ -16,9 +16,9 @@ class Point(object):
         return Point(self.x + p.x, self.y + p.y, self.z + p.z)
 
     def oob(self):
-        if 0 <= self.x < mm.MAP_WIDTH and \
-           0 <= self.y < mm.MAP_HEIGHT and \
-           0 <= self.z < mm.MAP_DEPTH:
+        if 0 <= self.x < zx.MAP_WIDTH and \
+           0 <= self.y < zx.MAP_HEIGHT and \
+           0 <= self.z < zx.MAP_DEPTH:
             return False
         return True
 

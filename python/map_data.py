@@ -61,11 +61,11 @@ def map_data_init():
          'ssssss.ssssss')
         ]
 
-    mm.map_add(
-        is_rotatable = True,
-        is_h_hlip = True,
-        is_v_hlip = True,
-        data)
+#    zx.map_add(
+#        is_rotatable = True,
+#        is_h_hlip = True,
+#        is_v_hlip = True,
+#        data)
 
 #    fragments = [
 #        ('...'
@@ -78,7 +78,7 @@ def map_data_init():
 #         '   '),
 #        ]
 #
-#    mm.fragment_add(
+#    zx.fragment_add(
 #        is_fragment = True,
 #        is_rotatable = True,
 #        is_h_hlip = True,

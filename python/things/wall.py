@@ -21,12 +21,13 @@ def wall_init(name, short_name, tiles=[]):
     x.thing_init = thing_init
 
 def init():
-    wall_init(name="wall1", short_name="A boring wall", tiles=["wall1"])
-    wall_init(name="wall2", short_name="A boring wall", tiles=["wall2"])
-    wall_init(name="wall3", short_name="A boring wall", tiles=["wall3"])
-    wall_init(name="wall4", short_name="A boring wall", tiles=["wall4"])
-    wall_init(name="wall5", short_name="A boring wall", tiles=["wall5"])
-    wall_init(name="wall6", short_name="A boring wall", tiles=["wall6"])
-    wall_init(name="wall7", short_name="A boring wall", tiles=["wall7"])
+    #wall_init(name="wall1", short_name="A boring wall", tiles=["wall1"])
+    #wall_init(name="wall2", short_name="A boring wall", tiles=["wall2"])
+    #wall_init(name="wall3", short_name="A boring wall", tiles=["wall3"])
+    #wall_init(name="wall4", short_name="A boring wall", tiles=["wall4"])
+    #wall_init(name="wall5", short_name="A boring wall", tiles=["wall5"])
+    #wall_init(name="wall6", short_name="A boring wall", tiles=["wall6"])
+    #wall_init(name="wall7", short_name="A boring wall", tiles=["wall7"])
+    return
 
 init()

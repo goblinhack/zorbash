@@ -1,5 +1,5 @@
 import traceback
-import mm
+import zx
 import thing
 import sys
 import os
@@ -23,29 +23,29 @@ class Level:
         #
         self.all_things = {}
 
-        self.things_at = [[[[] for z in range(mm.MAP_DEPTH)]
-                          for y in range(mm.MAP_HEIGHT)]
-                          for x in range(mm.MAP_WIDTH)]
+        self.things_at = [[[[] for z in range(zx.MAP_DEPTH)]
+                          for y in range(zx.MAP_HEIGHT)]
+                          for x in range(zx.MAP_WIDTH)]
 
         self.version = self.__class__.class_version
 
     def log(self, msg):
-        mm.log("Level {}: {}".format(str(self), msg))
+        zx.log("Level {}: {}".format(str(self), msg))
 
     def con(self, msg):
-        mm.con("Level {}: {}".format(str(self), msg))
+        zx.con("Level {}: {}".format(str(self), msg))
 
     def debug(self, msg):
         return
-        mm.log("Level {}: {}".format(str(self), msg))
+        zx.log("Level {}: {}".format(str(self), msg))
 
     def err(self, msg):
-        mm.con("".join(traceback.format_stack()))
-        mm.err("Level {}: ERROR: {}".format(self, msg))
+        zx.con("".join(traceback.format_stack()))
+        zx.err("Level {}: ERROR: {}".format(self, msg))
 
     def die(self, msg):
-        mm.con("".join(traceback.format_stack()))
-        mm.die("Level {}: FATAL ERROR: {}".format(self, msg))
+        zx.con("".join(traceback.format_stack()))
+        zx.die("Level {}: FATAL ERROR: {}".format(self, msg))
 
     def __str__(self):
         return "level.{}.{}.{}".format(
@@ -81,7 +81,7 @@ class Level:
 
         to = os.path.normcase(os.path.join(path, str(self)))
         self.log("Save level to {}".format(to))
-        mm.tip("Save level to {}".format(to))
+        zx.tip("Save level to {}".format(to))
 
         with open(to, 'wb') as f:
             pickle.dump(self.where, f, pickle.HIGHEST_PROTOCOL)
@@ -192,9 +192,9 @@ class Level:
     #
     def tp_is_where(self, value):
 
-        for z in range(mm.MAP_DEPTH):
-            for y in range(mm.MAP_HEIGHT):
-                for x in range(mm.MAP_WIDTH):
+        for z in range(zx.MAP_DEPTH):
+            for y in range(zx.MAP_HEIGHT):
+                for x in range(zx.MAP_WIDTH):
                     for t in self.things_at[x][y][z]:
                         v = getattr(t.tp, value)
                         if v is not None:
@@ -205,16 +205,16 @@ class Level:
 
     def things_remove_all(self):
 
-        for z in range(mm.MAP_DEPTH):
-            for y in range(mm.MAP_HEIGHT):
-                for x in range(mm.MAP_WIDTH):
+        for z in range(zx.MAP_DEPTH):
+            for y in range(zx.MAP_HEIGHT):
+                for x in range(zx.MAP_WIDTH):
                     while self.things_at[x][y][z]:
                         for t in self.things_at[x][y][z]:
                             t.destroy("via things remove all")
 
     def things_flood_fill_(self, p, tp, walked):
 
-        sys.setrecursionlimit(mm.MAP_WIDTH * mm.MAP_HEIGHT)
+        sys.setrecursionlimit(zx.MAP_WIDTH * zx.MAP_HEIGHT)
 
         if p.oob():
             return
@@ -249,8 +249,8 @@ class Level:
         if tp is None:
             return
 
-        walked = [[0 for i in range(mm.MAP_HEIGHT)]
-                  for j in range(mm.MAP_WIDTH)]
+        walked = [[0 for i in range(zx.MAP_HEIGHT)]
+                  for j in range(zx.MAP_WIDTH)]
 
         self.things_flood_fill_(p, tp, walked)
 

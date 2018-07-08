@@ -1,14 +1,14 @@
-import mm
+import zx
 import game
 
 
 def hook_new_game():
-    mm.con("New game hook")
+    zx.con("New game hook")
     game.game_new()
 
 
 def hook_destroy_game():
-    mm.con("Destroy game hook")
+    zx.con("Destroy game hook")
 
     if game.g:
         game.g.destroy()
