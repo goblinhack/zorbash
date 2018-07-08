@@ -18,37 +18,46 @@
 ```
 ```
 
-                       Deep in caverns cold,
-              Dwelled Zorbash, forgotten beast of old.
-
-                       From the Abyss he came.
-                 With temptations, gold and gleaming,
-            To tempt fools to Zorbanadu with his scheming.
-
-                     Many fell before his throne.
-                     Heroes they all fell asunder,
-              His gaze of lightning and roar like thunder.
-
-                With a thousand eyes he reached for more.
-                  Quenchless, thirsting, dripping gore,
-                   Until at last his mettle was tested.
-
-                   With the greatest sacrifice of all,
-                         Four met his stare, 
-                  and into darkness did Zorbash fall?
-
-                   As godlings, three friends arose
-                    In unison, with fame and glory,
-                but what now of Zorbanadu and this story?
-
-                     A curse, most dark and foul,
-                   A betrayal the ages could not heal,
-                and a new Queen full of vengeance bloody.
-
-                        Zorbash has returned,
-                     The Dark Queen by his side,
-                 The halls of Zorbanadu seem doomed...
-
+                       Hark! Hear now a tale untold
+                       since ancient times of yore
+                       of Zorbash, forgotten beast of old, 
+                       who dwelled deep near the Earth’s core
+                       
+                       ‘Twas from the Abyss he first arose,
+                       Forged treasures gold and gleaming. 
+                       A deadly lure to tempt all those
+                       Prone to greed and scheming
+                       
+                       Many fell before his throne, 
+                       Heroes fell asunder.
+                       His lightning gaze turned flesh to bone
+                       His roar was loud as thunder.
+                       
+                       Quenchless, thirsting, dripping gore
+                       His thousand eyes unmatched
+                       Until one tenacious band of four
+                       From him vict’ry snatched. 
+                       
+                       Although, ‘twas not an easy fight -
+                       A sacrifice was made.
+                       A volunteer, their faithful knight,
+                       Made sure the price was paid. 
+                       
+                       As godlings, the remaining three
+                       rose with fame and glory
+                       But that’s not yet the finale
+                       Of Zorbanadu’s dark story.
+                       
+                       For in the depths of Zorbash’s den, 
+                       A necromancer schemed.
+                       She planned to raise the beast again,
+                       And rule as his Dark Queen.
+                       
+                       So now Zorbash has come to life - 
+                       (Though ‘tis more like life’s dark shadow)
+                       With his fiersome undead wife
+                       Can you save us all, dear hero? 
+                       
 ```
 
 ```diff
@@ -72,3 +81,39 @@
         ./RUNME.windows.msys2
 
 If it doesn't build, just email goblinhack@gmail.com for help
+
+<!--                       Secret Verses:                                         -->
+<!--                       Twas not an easy fight, it’s true                      -->
+<!--                       But not in the way you think.                          -->
+<!--                       Our swords cut deep, drew blood-like goo               -->
+<!--                       We fought in perfect sync.                             -->
+<!--                                                                              -->
+<!--                       But as we slashed, great Zorbash did                   -->
+<!--                       Let loose an awful cry                                 -->
+<!--                       For though blood streamed from each eyelid,            -->
+<!--                       He could not seem to die.                              -->
+<!--                                                                              -->
+<!--                       We fought for days; the beast did roar                 -->
+<!--                       And cry all the more miserably                         -->
+<!--                       I found myself filled more and more                    -->
+<!--                       with a surprising sympathy.                            -->
+<!--                                                                              -->
+<!--                       In my own house, I had much gold.                      -->
+<!--                       A stash I’d saved away.                                -->
+<!--                       How would I feel if someone strolled                   -->
+<!--                       Into my house one day?                                 -->
+<!--                                                                              -->
+<!--                       ‘Twas after all, his residence                         -->
+<!--                       We’d strolled into so boldly.                          -->
+<!--                       He’d every right, after our offense,                   -->
+<!--                       To try and kill us slowly                              -->
+<!--                                                                              -->
+<!--                       I shared my doubts with my dear friends,               -->
+<!--                       And received an unhappy surprise                       -->
+<!--                       “Betrayal!” they said. “Well, that debate’s at an end. -->
+<!--                       You should be the one that dies!”                      -->
+<!--                                                                              -->
+<!--                       As it turns out, they’d already decided                -->
+<!--                       To resort to the darkest extremes.                     -->
+<!--                       My weakness, my pity had provided                      -->
+<!--                       An excuse for our glorious team.                       -->
