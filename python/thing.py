@@ -1,5 +1,5 @@
 import traceback
-import mm
+import zx
 import tp
 import game
 import point
@@ -51,7 +51,7 @@ class Thing:
         self.level.all_things[self.thing_id] = self
 
         self.name = str(self)
-        mm.thing_new(self, self.thing_id, tp_name)
+        zx.thing_new(self, self.thing_id, tp_name)
 
         if self.tp.thing_init is not None:
             self.tp.thing_init(self)
@@ -89,22 +89,22 @@ class Thing:
         return "{}:{}".format(self.thing_id, self.tp_name)
 
     def log(self, msg):
-        mm.log("Thing {}: {}".format(str(self), msg))
+        zx.log("Thing {}: {}".format(str(self), msg))
 
     def con(self, msg):
-        mm.con("Thing {}: {}".format(str(self), msg))
+        zx.con("Thing {}: {}".format(str(self), msg))
 
     def debug(self, msg):
-        #mm.log("Thing {} ({}, {}): {}".format(str(self), self.at.x, self.at.y, msg))
+        #zx.log("Thing {} ({}, {}): {}".format(str(self), self.at.x, self.at.y, msg))
         return
 
     def err(self, msg):
-        mm.con("".join(traceback.format_stack()))
-        mm.err("Thing {}: ERROR: {}".format(self, msg))
+        zx.con("".join(traceback.format_stack()))
+        zx.err("Thing {}: ERROR: {}".format(self, msg))
 
     def die(self, msg):
-        mm.con("".join(traceback.format_stack()))
-        mm.die("Thing {}: FATAL ERROR: {}".format(self, msg))
+        zx.con("".join(traceback.format_stack()))
+        zx.die("Thing {}: FATAL ERROR: {}".format(self, msg))
 
     def dump(self):
         self.log("@ {},{} on level {}".format(str(self.at), self.level))
@@ -123,7 +123,7 @@ class Thing:
         if self.thing_id in self.level.all_things:
             del self.level.all_things[self.thing_id]
 
-        mm.thing_destroyed(self, reason)
+        zx.thing_destroyed(self, reason)
 
         self.debug("} " + "Destroyed thing, {}".format(reason))
         del self
@@ -151,7 +151,7 @@ class Thing:
         self.level = level
         self.tp = tp.all_tps[self.tp_name]
 
-        mm.thing_new(self, self.thing_id, self.tp_name)
+        zx.thing_new(self, self.thing_id, self.tp_name)
 
         if self.on_level:
             self.on_level = False
@@ -173,7 +173,7 @@ class Thing:
 
         self.update_pos(to)
 
-        mm.thing_move_to(self, to.x, to.y)
+        zx.thing_move_to(self, to.x, to.y)
 
     def update_pos(self, at):
 
@@ -198,7 +198,7 @@ class Thing:
 
         self.level.thing_push(self.at, self)
 
-        mm.thing_push(self)
+        zx.thing_push(self)
 
         if hasattr(self.tp, "thing_pushed"):
             if self.tp.thing_pushed is not None:
@@ -215,15 +215,15 @@ class Thing:
         self.debug("pop")
 
         self.level.thing_pop(self.at, self)
-        mm.thing_pop(self)
+        zx.thing_pop(self)
 
     def set_long_name(self, value=""):
         self.long_name = value
 
     def set_tilename(self, name):
         self.tilename = name
-        mm.set_tilename(self, name)
+        zx.set_tilename(self, name)
 
     def set_tp(self, tp_name):
         self.tp = tp.all_tps[tp_name]
-        mm.thing_set_tp(self, tp_name)
+        zx.thing_set_tp(self, tp_name)
