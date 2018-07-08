@@ -11,6 +11,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ascii_button.o 		\
     $(OBJDIR)/backtrace.o 		\
     $(OBJDIR)/color.o			\
+    $(OBJDIR)/cereal.o			\
     $(OBJDIR)/command.o 		\
     $(OBJDIR)/config.o			\
     $(OBJDIR)/dir.o 			\
