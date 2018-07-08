@@ -55,8 +55,7 @@
 - **** WORK IN PROGRESS - NOT PLAYABLE YET *****
 ```
 
-- ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) 
-To build:
+![#1589F0](https://placehold.it/15/1589F0/000000?text=+) To build:
 
     git clone git@github.com:goblinhack/zorbash.git
 
