@@ -201,10 +201,6 @@ void quit (void)
     blit_fini();
 }
 
-#if 0
-    miniz_fini();
-#endif
-
     if (EXEC_FULL_PATH_AND_NAME) {
         myfree(EXEC_FULL_PATH_AND_NAME);
         EXEC_FULL_PATH_AND_NAME = 0;
@@ -541,6 +537,11 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
+#if 1
+    extern int cereal_test(void);
+    cereal_test();
+    exit(0);
+#endif
     /*
     mcheck(0);
      */
