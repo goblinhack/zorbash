@@ -537,11 +537,6 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
-#if 1
-    extern int cereal_test(void);
-    cereal_test();
-    exit(0);
-#endif
     /*
     mcheck(0);
      */
@@ -583,6 +578,11 @@ int32_t main (int32_t argc, char *argv[])
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
     LOG_STDERR = fopen(err, "w+");
     myfree(err);
+
+    char *save_file = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "saved.json");
+    extern int cereal_test(const std::string);
+    cereal_test(std::string(save_file));
+    myfree(save_file);
 
     ramdisk_init();
 

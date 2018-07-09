@@ -559,26 +559,16 @@ _
     auto t = std::make_shared< class thing_tile >();
     auto result = tiles->insert(std::make_pair(index, t));
 
-_
     if (result.second == false) {
         DIE("tile insert name [%s] failed", tile);
     }
 
-_
     t->tile = tile_find(tile);
     if (!t->tile) {
         DIE("%s, cannot find tile %s for tp %s", __FUNCTION__, tile, tp_name);
     }
 
-_
     t->tilename = std::string(tile ? tile : "");
-    t->fg_tilename = std::string(fg ? fg : "");
-    t->bg_tilename = std::string(bg ? bg : "");
-    t->fg_color = std::string(fg_color ? fg_color : "");
-    t->bg_color = std::string(bg_color ? bg_color : "");
-    t->fg_color_val = color_find(fg_color ? fg_color : "");
-    t->bg_color_val = color_find(bg_color ? bg_color : "");
-
     t->index = index;
     t->delay_ms = delay_ms;
     t->is_moving = is_moving;
@@ -755,8 +745,6 @@ TP_BODY_SET_INT(is_rrr39)
 TP_BODY_SET_INT(is_rrr40)
 TP_BODY_SET_INT(is_rrr41)
 TP_BODY_SET_INT(is_grass)
-TP_BODY_SET_INT(is_road)
-TP_BODY_SET_INT(is_trees)
 TP_BODY_SET_INT(is_animated_walk_flip)
 TP_BODY_SET_INT(z_depth)
 TP_BODY_SET_INT(is_movable)

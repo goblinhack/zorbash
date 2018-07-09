@@ -26,18 +26,6 @@ public:
     tilep tile;
 
     /*
-     * Ascii
-     */
-    std::string fg_tilename;
-    std::string bg_tilename;
-    std::string fg_color;
-    std::string bg_color;
-    color fg_color_val;
-    color bg_color_val;
-    tilep fg_tile;
-    tilep bg_tile;
-
-    /*
      * Delay in ms between frames.
      */
     uint32_t delay_ms {};
