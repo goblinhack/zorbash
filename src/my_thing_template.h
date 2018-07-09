@@ -104,7 +104,6 @@ public:
     bool is_monst {};
     bool is_movement_blocking {};
     bool is_player {};
-    bool is_solid_ground {};
     bool is_wall {};
     bool is_water {};
     bool is_rrr1 {};
@@ -149,8 +148,6 @@ public:
     bool is_rrr40 {};
     bool is_rrr41 {};
     bool is_grass {};
-    bool is_road {};
-    bool is_trees {};
     bool is_animated_walk_flip {};
     bool is_movable {};
     uint8_t z_depth {};
@@ -476,16 +473,6 @@ static inline uint8_t tp_is_grass (tpp t)
     return (t->is_grass);
 }
 
-static inline uint8_t tp_is_road (tpp t)
-{
-    return (t->is_road);
-}
-
-static inline uint8_t tp_is_trees (tpp t)
-{
-    return (t->is_trees);
-}
-
 static inline uint8_t tp_is_animated_walk_flip (tpp t)
 {
     return (t->is_animated_walk_flip);
@@ -499,11 +486,6 @@ static inline uint8_t tp_z_depth (tpp t)
 static inline uint8_t tp_is_movable (tpp t)
 {
     return (t->is_movable);
-}
-
-static inline uint8_t tp_is_solid_ground (tpp t)
-{
-    return (t->is_solid_ground);
 }
 
 static inline uint8_t tp_is_movement_blocking (tpp t)

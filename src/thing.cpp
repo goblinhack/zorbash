@@ -354,11 +354,6 @@ void thing::set_tilename (std::string name)
     if (!t->first_tile) {
         t->first_tile = tile;
     }
-
-    t->tile_coll = tile_find(name + "-coll");
-    if (!t->tile_coll) {
-        t->tile_coll = t->tile;
-    }
 }
 
 void thing::set_left_tilename (std::string name)

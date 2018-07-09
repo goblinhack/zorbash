@@ -55,13 +55,6 @@ public:
      */
     fpoint3d at;
 
-    double xmin {};
-    double xmax {};
-    double ymin {};
-    double ymax {};
-    double zmin {};
-    double zmax {};
-
     /*
      * Allocated in python
      */
@@ -93,7 +86,6 @@ public:
      * Animation
      */
     tilep tile;
-    tilep tile_coll; /* for collision */
     tilep top_tile;
     tilep bot_tile;
     tilep left_tile;
@@ -137,9 +129,6 @@ public:
     bool is_sleeping {};
     bool is_moving {};
     bool has_ever_moved {};
-    bool is_over_grass {};
-    bool is_over_road {};
-    bool is_over_trees {};
     bool is_open {};
     
     /*
@@ -179,26 +168,6 @@ public:
     uint8_t is_player (void)
     {
         return (tp_is_player(tp));
-    }
-
-    uint8_t is_grass (void)
-    {
-        return (tp_is_grass(tp));
-    }
-
-    uint8_t is_road (void)
-    {
-        return (tp_is_road(tp));
-    }
-
-    uint8_t is_trees (void)
-    {
-        return (tp_is_trees(tp));
-    }
-
-    uint8_t is_solid_ground (void)
-    {
-        return (tp_is_solid_ground(tp));
     }
 
     uint8_t is_movable (void)
@@ -301,13 +270,6 @@ thingp get_front_thing(thingp a, thingp b);
  * thing_map.c
  */
 extern void thing_render_all(void);
-extern void thing_map_scroll_fast();
-
-/*
- * thing_dir.c
- */
-void thing_dir(thingp t, double *dx, double *dy);
-int thing_angle_to_dir(double dx, double dy);
 
 /*
  * thing animate

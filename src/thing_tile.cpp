@@ -196,31 +196,3 @@ thing_tilep thing_tile_next (thing_tiles tiles, thing_tilep in)
 
     return (thing_tile);
 }
-
-const std::string thing_fg_tilename (thing_tilep t)
-{_
-    return (t->fg_tilename);
-}
-
-const std::string thing_bg_tilename (thing_tilep t)
-{_
-    return (t->bg_tilename);
-}
-
-const tilep thing_get_fg_tile (thing_tilep t)
-{_
-    if (!t->fg_tile) {
-        if (t->fg_tilename == "") {
-            return (0);
-        }
-
-        t->fg_tile = tile_find(t->fg_tilename);
-    }
-
-    return (t->fg_tile);
-}
-
-color thing_get_fg_color (thing_tilep t)
-{_
-    return (t->fg_color_val);
-}
