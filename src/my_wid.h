@@ -8,11 +8,25 @@
 
 #ifndef _MY_WID_H_
 #define _MY_WID_H_
-#include <SDL.h>
 
+typedef std::shared_ptr< class wid > widp;
+
+#include <SDL.h>
 #include "my_sdl.h"
 #include "my_enum.h"
-#include "my_timer.h"
+#include "my_size.h"
+#include "my_wid_tiles.h"
+
+#ifdef ENABLE_WID_DEBUG
+void WID_LOG(widp, const char *fmt, ...) \
+                     __attribute__ ((format (printf, 2, 3)));
+
+void WID_DBG(widp, const char *fmt, ...) \
+                     __attribute__ ((format (printf, 2, 3)));
+#else
+#define WID_DBG(...)
+#define WID_LOG(...)
+#endif
 
 typedef enum {
     WID_COLOR_BG,
@@ -253,8 +267,6 @@ void wid_dump(widp w, int depth);
 extern std::wstring history[HISTORY_MAX];
 extern uint32_t history_at;
 extern uint32_t history_walk;
-
-extern action_timers wid_timers;
 
 typedef struct {
     /*

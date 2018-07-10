@@ -4,7 +4,11 @@
  * See the README file for license info for license.
  */
 
+#include "my_main.h"
+#include "my_color.h"
 #include "my_glapi.h"
+#include "my_string.h"
+#include <stdlib.h>
 
 color COLOR_NONE;
 color ALICE_BLUE;

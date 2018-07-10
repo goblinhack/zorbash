@@ -7,6 +7,14 @@
 #ifndef _MY_THING_TILE_H
 #define _MY_THING_TILE_H
 
+#include <map>
+
+typedef std::shared_ptr< class thing_tile > thing_tilep;
+typedef std::map< unsigned int, std::shared_ptr< class thing_tile > > thing_tiles;
+
+#include "my_ptrcheck.h"
+#include "my_tile.h"
+
 class thing_tile {
 private:
 
@@ -101,10 +109,5 @@ uint8_t thing_tile_is_dead_on_end_of_anim(thing_tilep);
 thing_tilep thing_tile_first(thing_tiles root);
 thing_tilep thing_tile_random(thing_tiles root);
 thing_tilep thing_tile_next(thing_tiles root, thing_tilep in);
-
-const tilep thing_get_fg_tile(thing_tilep);
-const tilep thing_get_bg_tile(thing_tilep);
-color thing_get_bg_color(thing_tilep);
-color thing_get_fg_color(thing_tilep);
 
 #endif /* THING_TILE_H */

@@ -14,9 +14,6 @@
 #include "my_command.h"
 #include "my_time_util.h"
 #include "my_wid_console.h"
-#include "my_wid_tooltip.h"
-#include "my_sound.h"
-#include "my_timer.h"
 #include "my_math_util.h"
 #include "my_thing.h"
 #include "my_wid_tiles.h"
@@ -24,7 +21,8 @@
 #include "my_game.h"
 #include "my_string.h"
 #include "my_ascii.h"
-#include "stdlib.h"
+#include "my_glapi.h"
+#include <stdlib.h>
 
 #define WID_FULL_LOGNAME
 #undef DEBUG_WID_MOTION
@@ -157,8 +155,6 @@ static uint8_t wid_init_done;
 static uint8_t wid_exiting;
 
 static int wid_refresh_overlay_count;
-
-action_timers wid_timers;
 
 uint8_t wid_init (void)
 {_
@@ -5251,8 +5247,6 @@ void wid_joy_button (int32_t x, int32_t y)
 
     widp w;
 
-    sound_play_click();
-
     w = wid_joy_button_handler(x, y);
     if (!w) {
         wid_fake_joy_button(x, y);
@@ -5314,8 +5308,6 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     if (!ascii_ok(x, y)) {
         return;
     }
-
-    sound_play_click();
 
     w = wid_mouse_down_handler(x, y);
     if (!w) {
@@ -6384,8 +6376,6 @@ void wid_tick_all (void)
 
         (w.get()->on_tick)(w);
     }
-
-    action_timers_tick(&wid_timers);
 }
 
 static int saved_mouse_x;
@@ -6447,8 +6437,6 @@ void wid_display_all (void)
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
-
-    game_display();
 
     glBindTexture(GL_TEXTURE_2D, 0);
 

@@ -17,29 +17,7 @@
 #include "my_python.h"
 #include "my_ascii.h"
 
-void game_map_create (void)
-{_
-}
-
-void game_map_created (void)
-{_
-}
-
-void game_map_destroy (void)
-{_
-}
-
-void game_display (void)
-{_
-    /*
-     * thing_render_all must come before thing_move_all as it populates
-     * all the things into the map for collisions.
-     */
-    thing_render_all();
-
-//extern void test_display(void); test_display();
-//    ascii_display();
-}
+struct game_ game;
 
 uint8_t
 game_mouse_motion (int32_t tx, int32_t ty,

@@ -6,6 +6,7 @@
 
 #include "my_main.h"
 #include "my_tile.h"
+#include "my_thing.h"
 #include "my_thing_tile.h"
 #include "my_python.h"
 #include "my_config.h"

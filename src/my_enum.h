@@ -9,6 +9,9 @@
 #ifndef _MY__ENUM_H__
 #define _MY__ENUM_H__
 
+#include <map>
+typedef std::map< std::string, uint32_t > enum_map;
+
 /*
  * Enum list macros .h definitions
  */
@@ -23,8 +26,6 @@ typedef enum {                                                  \
 extern const char *enum_name ## _val2str(enum_name val);        \
 extern enum_name enum_name ## _str2val(const char *val);        \
 extern void enum_name ## _destroy(void);                        \
-
-typedef std::map< std::string, uint32_t > enum_map;
 
 /*
  * Enum list macros .c definitions

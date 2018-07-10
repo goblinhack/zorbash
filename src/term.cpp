@@ -4,9 +4,11 @@
  * See the README file for license info for license.
  */
 
+#include <stdio.h>
+
 #include "my_main.h"
 #include "my_term.h"
-#include <stdio.h>
+#include "my_string.h"
 
 static inline void term_puts_fg (unsigned char a)
 {_

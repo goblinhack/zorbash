@@ -6,6 +6,8 @@
 
 
 #include "my_main.h"
+#include "my_string.h"
+#include "my_game.h"
 #include "my_time_util.h"
 
 uint32_t time_now;

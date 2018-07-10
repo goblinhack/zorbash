@@ -9,11 +9,24 @@
 #ifndef _MY_STRING_UTILL_H_
 #define _MY_STRING_UTILL_H_
 
-#include "my_main.h"
-#include "my_enum.h"
-
 #include <stdarg.h>
 #include <wchar.h>
+#include <map>
+#include "my_thing_template.h"
+
+typedef std::shared_ptr< std::vector< std::string > > shared_vector_string;
+typedef std::shared_ptr< std::vector< std::wstring > > shared_vector_wstring;
+
+extern size_t
+strlcpy_(char * dst, const char * src, size_t size);
+
+extern size_t
+strlcat_(char * dst, const char * src, size_t size);
+
+/*
+ * Max long string size
+ */
+#define MAXSTR                          4096
 
 std::wstring string_to_wstring(const std::string& s);
 std::string wstring_to_string(const std::wstring& s);

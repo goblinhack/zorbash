@@ -9,7 +9,11 @@
 #ifndef _MY_FONT_H_
 #define _MY_FONT_H_
 
+typedef std::shared_ptr< class font > fontp;
+extern fontp fixed_font;
+
 #include "SDL_ttf.h"
+#include "my_main.h"
 #include "my_tile.h"
 
 typedef struct {

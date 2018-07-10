@@ -42,8 +42,8 @@ class Game:
         self.where = point.Point(0, 0, 0)
         self.new_level(self.seed)
 
-        t = g.push_block(tp_name="player1", at=point.Point(8, 8, 0))
-        g.player = t
+        #t = g.push_block(tp_name="player1", at=point.Point(8, 8, 0))
+        #g.player = t
 
         #g.push_block(tp_name="wall3", at=point.Point(8, 8, 1))
         #g.push_block(tp_name="wall3", at=point.Point(8, 8, 2))
@@ -86,166 +86,8 @@ class Game:
 
     def new_level(self, seed):
 
-        self.game_map_create()
         self.level = level.Level(at=self.where, seed=seed)
         self.level.load(self.where.x, self.where.y)
-        self.game_map_created()
-
-    def load_level_finalize(self):
-        self.zzz1 = 0.0
-        zx.game_set_zzz1(self.zzz1)
-        self.zzz2 = 0.0
-        zx.game_set_zzz2(self.zzz2)
-        self.zzz3 = 0.0
-        zx.game_set_zzz3(self.zzz3)
-        self.zzz4 = 0.0
-        zx.game_set_zzz4(self.zzz4)
-        self.zzz5 = 0.0
-        zx.game_set_zzz5(self.zzz5)
-        self.zzz6 = 0.0
-        zx.game_set_zzz6(self.zzz6)
-        self.zzz7 = 0.0
-        zx.game_set_zzz7(self.zzz7)
-        self.zzz8 = 0.0
-        zx.game_set_zzz8(self.zzz8)
-        self.zzz9 = 0.0
-        zx.game_set_zzz9(self.zzz9)
-        self.zzz10 = 0.0
-        zx.game_set_zzz10(self.zzz10)
-        self.zzz11 = 0.0
-        zx.game_set_zzz11(self.zzz11)
-        self.zzz12 = 0.0
-        zx.game_set_zzz12(self.zzz12)
-        self.zzz13 = 0.0
-        zx.game_set_zzz13(self.zzz13)
-        self.zzz14 = 0.0
-        zx.game_set_zzz14(self.zzz14)
-        self.zzz15 = 0.0
-        zx.game_set_zzz15(self.zzz15)
-        self.zzz16 = 0.0
-        zx.game_set_zzz16(self.zzz16)
-        self.zzz17 = 0.0
-        zx.game_set_zzz17(self.zzz17)
-        self.zzz18 = 0.0
-        zx.game_set_zzz18(self.zzz18)
-        self.zzz19 = 0.0
-        zx.game_set_zzz19(self.zzz19)
-        self.zzz20 = 0.0
-        zx.game_set_zzz20(self.zzz20)
-        self.zzz21 = 0.0
-        zx.game_set_zzz21(self.zzz21)
-        self.zzz22 = 0.0
-        zx.game_set_zzz22(self.zzz22)
-        self.zzz23 = 0.0
-        zx.game_set_zzz23(self.zzz23)
-        self.zzz24 = 0.0
-        zx.game_set_zzz24(self.zzz24)
-        self.zzz25 = 0.0
-        zx.game_set_zzz25(self.zzz25)
-        self.zzz26 = 0.0
-        zx.game_set_zzz26(self.zzz26)
-        self.zzz27 = 0.0
-        zx.game_set_zzz27(self.zzz27)
-        self.zzz28 = 0.0
-        zx.game_set_zzz28(self.zzz28)
-        self.zzz29 = 0.0
-        zx.game_set_zzz29(self.zzz29)
-        self.zzz30 = 0.0
-        zx.game_set_zzz30(self.zzz30)
-        self.zzz31 = 0.0
-        zx.game_set_zzz31(self.zzz31)
-        self.zzz32 = 0.0
-        zx.game_set_zzz32(self.zzz32)
-        self.zzz33 = 0.0
-        zx.game_set_zzz33(self.zzz33)
-        self.zzz34 = 0.0
-        zx.game_set_zzz34(self.zzz34)
-        self.zzz35 = 0.0
-        zx.game_set_zzz35(self.zzz35)
-        self.zzz36 = 0.0
-        zx.game_set_zzz36(self.zzz36)
-        self.zzz37 = 0.0
-        zx.game_set_zzz37(self.zzz37)
-        self.zzz38 = 0.0
-        zx.game_set_zzz38(self.zzz38)
-        self.zzz39 = 0.0
-        zx.game_set_zzz39(self.zzz39)
-        self.zzz40 = 0.0
-        zx.game_set_zzz40(self.zzz40)
-        self.zzz41 = 0.0
-        zx.game_set_zzz41(self.zzz41)
-        self.zzz42 = 0.0
-        zx.game_set_zzz42(self.zzz42)
-        self.zzz43 = 0.0
-        zx.game_set_zzz43(self.zzz43)
-        self.zzz44 = 0.0
-        zx.game_set_zzz44(self.zzz44)
-        self.zzz45 = 0.0
-        zx.game_set_zzz45(self.zzz45)
-        self.zzz46 = 0.0
-        zx.game_set_zzz46(self.zzz46)
-        self.zzz47 = 0.0
-        zx.game_set_zzz47(self.zzz47)
-        self.zzz48 = 0.0
-        zx.game_set_zzz48(self.zzz48)
-        self.zzz49 = 0.0
-        zx.game_set_zzz49(self.zzz49)
-        self.zzz50 = 0.0
-        zx.game_set_zzz50(self.zzz50)
-        self.zzz51 = 0.0
-        zx.game_set_zzz51(self.zzz51)
-        self.zzz52 = 0.0
-        zx.game_set_zzz52(self.zzz52)
-        self.zzz53 = 0.0
-        zx.game_set_zzz53(self.zzz53)
-        self.zzz54 = 0.0
-        zx.game_set_zzz54(self.zzz54)
-        self.zzz55 = 0.0
-        zx.game_set_zzz55(self.zzz55)
-        self.zzz56 = 0.0
-        zx.game_set_zzz56(self.zzz56)
-        self.zzz57 = 0.0
-        zx.game_set_zzz57(self.zzz57)
-        self.zzz58 = 0.0
-        zx.game_set_zzz58(self.zzz58)
-        self.zzz59 = 0.0
-        zx.game_set_zzz59(self.zzz59)
-        self.zzz60 = 0.0
-        zx.game_set_zzz60(self.zzz60)
-        self.zzz61 = 0.0
-        zx.game_set_zzz61(self.zzz61)
-        self.zzz62 = 0.0
-        zx.game_set_zzz62(self.zzz62)
-        self.zzz63 = 0.0
-        zx.game_set_zzz63(self.zzz63)
-        self.zzz64 = 0.0
-        zx.game_set_zzz64(self.zzz64)
-        self.zzz65 = 0.0
-        zx.game_set_zzz65(self.zzz65)
-        self.zzz66 = 0.0
-        zx.game_set_zzz66(self.zzz66)
-        self.zzz67 = 0.0
-        zx.game_set_zzz67(self.zzz67)
-        self.zzz68 = 0.0
-        zx.game_set_zzz68(self.zzz68)
-        self.zzz69 = 0.0
-        zx.game_set_zzz69(self.zzz69)
-        self.zzz70 = 0.0
-        zx.game_set_zzz70(self.zzz70)
-        self.zzz71 = 0.0
-        zx.game_set_zzz71(self.zzz71)
-        self.zzz72 = 0.0
-        zx.game_set_zzz72(self.zzz72)
-        self.zzz73 = 0.0
-        zx.game_set_zzz73(self.zzz73)
-        self.zzz74 = 0.0
-        zx.game_set_zzz74(self.zzz74)
-        self.zzz75 = 0.0
-        zx.game_set_zzz75(self.zzz75)
-        self.zzz76 = 0.0
-        zx.game_set_zzz76(self.zzz76)
-        self.zzz77 = 0.0
-        zx.game_set_zzz77(self.zzz77)
 
     def save(self):
         l = self.level
@@ -525,8 +367,6 @@ def game_restore():
     else:
         return False
 
-    g.load_level_finalize()
-
 
 def game_new_or_restore():
     global g
@@ -542,7 +382,6 @@ def game_new_or_restore():
         zx.con("Cannot find saved game at {}, make a new game".format(s))
         g.new_game()
 
-    g.load_level_finalize()
     zx.tip("Press h for help.")
 
 
@@ -558,8 +397,6 @@ def game_restore():
         g.load()
     else:
         return False
-
-    g.load_level_finalize()
 
 
 def game_saved_exists():

@@ -9,15 +9,14 @@
 #ifndef _MY_THING_H
 #define _MY_THING_H
 
+typedef std::shared_ptr< class thing > thingp;
+typedef std::map< std::string, thingp > things;
+
 #include "my_config.h"
 #include "my_thing_template.h"
+#include "my_thing_tile.h"
 #include "my_time_util.h"
-#include <stdlib.h>
-#include <math.h>
-#include <Python.h>
 
-uint8_t thing_init(void);
-void thing_fini(void);
 thingp thing_new(std::string name, long int thing_id, std::string tp_name);
 thingp thing_find(std::string name);
 
@@ -175,7 +174,6 @@ public:
         return (tp_is_movable(tp));
     }
 
-    PyObject *push(fpoint3d);
     bool can_move_delta(fpoint3d delta);
     std::string logname(void);
     std::string short_name(void);

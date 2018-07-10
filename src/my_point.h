@@ -24,6 +24,9 @@
 #ifndef _MY_POINT_H_
 #define _MY_POINT_H_
 
+#include <cereal/types/memory.hpp>
+#include "my_math_util.h"
+
 template<class T> class my_apoint
 {
 public:
@@ -36,6 +39,12 @@ public:
     my_apoint (T x, T y) : x(x), y(y) { }
 
     my_apoint (const my_apoint &a) : x(a.x), y(a.y) { }
+
+    template <class Archive>
+    void serialize (Archive & archive )
+    {
+        archive(x, y);
+    }
 
     void operator+= (my_apoint a)
     {
@@ -205,6 +214,12 @@ public:
     my_apoint3d (T x, T y, T z) : x(x), y(y), z(z) { }
 
     my_apoint3d (const my_apoint3d &a) : x(a.x), y(a.y), z(a.z) { }
+
+    template <class Archive>
+    void serialize (Archive & archive )
+    {
+        archive(x, y, z);
+    }
 
     void operator+= (my_apoint3d a)
     {

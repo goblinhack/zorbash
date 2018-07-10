@@ -11,8 +11,7 @@
 
 #include <SDL.h>
 #include <SDL_keyboard.h>
-
-#include "my_main.h"
+#include "my_command.h"
 
 uint8_t sdl_init(void);
 void sdl_fini(void);
@@ -89,4 +88,5 @@ extern int32_t sdl_joy2_up;
 
 extern uint8_t sdl_joy_buttons[SDL_MAX_BUTTONS];
 extern void sdl_screenshot(void);
+extern uint8_t fps_enable(tokensp, void *context);
 #endif

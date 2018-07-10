@@ -11,23 +11,10 @@
 #include "my_config.h"
 #include "my_math_util.h"
 #include "my_time_util.h"
+#include "my_thing.h"
 #include "my_thing_tile.h"
-
-static int thing_init_done;
-
-uint8_t thing_init (void)
-{_
-    thing_init_done = true;
-
-    return (true);
-}
-
-void thing_fini (void)
-{_
-    if (thing_init_done) {
-        thing_init_done = false;
-    }
-}
+#include "my_string.h"
+#include "my_game.h"
 
 thingp thing_new (std::string name,
                   long int thing_id,
@@ -247,6 +234,7 @@ void thing::set_tp (std::string tp_name)
     }
 }
 
+#if 0
 PyObject *thing::push (fpoint3d p)
 {_
     auto t = this;
@@ -261,6 +249,7 @@ PyObject *thing::push (fpoint3d p)
 
     Py_RETURN_NONE;
 }
+#endif
 
 void thing::pop (void)
 {_
@@ -785,4 +774,226 @@ thing_tiles thing::get_tiles (void)
 void thing::dead (thingp killer, const char * , ...)
 {_
     ERR("thing dead TBD");
+}
+
+void thing::set_dir_none (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_NONE) {
+        t->dir = THING_DIR_NONE;
+    }
+}
+
+uint8_t thing::is_dir_none (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_NONE);
+}
+
+void thing::set_dir_down (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_DOWN) {
+        t->dir = THING_DIR_DOWN;
+    }
+}
+
+uint8_t thing::is_dir_down (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_DOWN);
+}
+
+void thing::set_dir_up (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_UP) {
+        t->dir = THING_DIR_UP;
+    }
+}
+
+uint8_t thing::is_dir_up (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_UP);
+}
+
+void thing::set_dir_left (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_LEFT) {
+        t->dir = THING_DIR_LEFT;
+    }
+}
+
+uint8_t thing::is_dir_left (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_LEFT);
+}
+
+void thing::set_dir_right (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_RIGHT) {
+        t->dir = THING_DIR_RIGHT;
+    }
+}
+
+uint8_t thing::is_dir_right (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_RIGHT);
+}
+
+void thing::set_dir_tl (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_TL) {
+        t->dir = THING_DIR_TL;
+    }
+}
+
+uint8_t thing::is_dir_tl (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_TL);
+}
+
+void thing::set_dir_bl (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_BL) {
+        t->dir = THING_DIR_BL;
+    }
+}
+
+uint8_t thing::is_dir_bl (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_BL);
+}
+
+void thing::set_dir_tr (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_TR) {
+        t->dir = THING_DIR_TR;
+    }
+}
+
+uint8_t thing::is_dir_tr (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_TR);
+}
+
+void thing::set_dir_br (void)
+{_
+    auto t = this;
+
+    if (tp_is_animated_no_dir(t->tp)) {
+        return;
+    }
+
+    if (t->dir != THING_DIR_BR) {
+        t->dir = THING_DIR_BR;
+    }
+}
+
+uint8_t thing::is_dir_br (void)
+{_
+    auto t = this;
+
+    return (t->dir == THING_DIR_BR);
+}
+
+void thing_dir (thingp t, double *dx, double *dy)
+{_
+    *dx = 0;
+    *dy = 0;
+
+    if (t->is_dir_down()) {
+        *dy = 1.0;
+    }
+
+    if (t->is_dir_up()) {
+        *dy = -1.0;
+    }
+
+    if (t->is_dir_right()) {
+        *dx = 1.0;
+    }
+
+    if (t->is_dir_left()) {
+        *dx = -1.0;
+    }
+
+    if (t->is_dir_tl()) {
+        *dx = -1.0;
+        *dy = -1.0;
+    }
+
+    if (t->is_dir_tr()) {
+        *dx = 1.0;
+        *dy = -1.0;
+    }
+
+    if (t->is_dir_bl()) {
+        *dx = -1.0;
+        *dy = 1.0;
+    }
+
+    if (t->is_dir_br()) {
+        *dx = 1.0;
+        *dy = 1.0;
+    }
 }

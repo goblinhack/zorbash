@@ -9,6 +9,7 @@
 #ifndef _MY_PYTHON_H_
 #define _MY_PYTHON_H_
 
+#include "my_point.h"
 #include <Python.h>
 
 void python_init(char *argv[]);
@@ -96,93 +97,6 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_get_size_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *wid_tiles_load_(PyObject *obj, PyObject *args, PyObject *keywds);
-
-PyObject *game_set_sound_volume_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_music_volume_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_display_sync_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_full_screen_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz1_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz2_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz3_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz4_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz5_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz6_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz7_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz8_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz9_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz10_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz11_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz12_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz13_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz14_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz15_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz16_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz17_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz18_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz19_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz20_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz21_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz22_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz23_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz24_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz25_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz26_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz27_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz28_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz29_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz30_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz31_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz32_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz33_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz34_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz35_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz36_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz37_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz38_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz39_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz40_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz41_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz42_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz43_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz44_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz45_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz46_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz47_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz48_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz49_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz50_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz51_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz52_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz53_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz54_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz55_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz56_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz57_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz58_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz59_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz60_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz61_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz62_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz63_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz64_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz65_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz66_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz67_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz68_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz69_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz70_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz71_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz72_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz73_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz74_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz75_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz76_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_zzz77_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_move_down_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_move_left_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_move_right_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_move_up_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *game_set_sdl_delay_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define PY_PROTO(__fn__)                                                    \
 PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds);

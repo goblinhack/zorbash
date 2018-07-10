@@ -38,10 +38,6 @@ def load_one_plugin(filename):
     #
     # Make aliases for imports so we can reference their functions
     #
-    if basename(filename) == "my-config.py":
-        global config
-        config = py_mod
-
     if basename(filename) == "hooks.py":
         global hooks
         hooks = py_mod
@@ -87,21 +83,6 @@ def init1():
 
     sys.stderr = open(os.path.normcase(
             os.path.join(os.environ["APPDATA"], "stderr.txt")), "a")
-
-    """ game defaults """
-    zx.game_video_pix_width = 0
-    zx.game_video_pix_height = 0
-    zx.game_sound_volume = 10
-    zx.game_music_volume = 5
-    zx.game_display_sync = 1
-    zx.game_full_screen = 0
-    zx.game_fps_counter = 1
-    zx.game_set_sdl_delay(0)
-    zx.game_set_display_sync(1)
-
-    load_plugin('my-config.py')
-    load_plugin('zorbash-config.py')
-    config.save_game_config()
 
 
 def init2():

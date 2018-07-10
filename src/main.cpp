@@ -17,9 +17,9 @@
 #include <libgen.h>
 #endif
 
+#include "my_main.h"
 #include "my_slre.h"
 #include "my_python.h"
-
 #include "my_glapi.h"
 #include "my_wid.h"
 #include "my_wid_console.h"
@@ -29,8 +29,6 @@
 #include "my_math_util.h"
 #include "my_tex.h"
 #include "my_wid_tiles.h"
-#include "my_music.h"
-#include "my_sound.h"
 #include "my_tile.h"
 #include "my_dir.h"
 #include "my_file.h"
@@ -114,13 +112,6 @@ void quit (void)
     signal(SIGINT, 0);    // uninstall our handler
 #endif
 
-    /*
-     * Save the player name.
-     */
-{_
-    config_save();
-}
-
 {_
     python_fini();
 }
@@ -134,11 +125,6 @@ void quit (void)
 {_
     LOG("Finishing: tp_fini");
     tp_fini();
-}
-
-{_
-    LOG("Finishing: thing_fini");
-    thing_fini();
 }
 
 {_
@@ -172,16 +158,6 @@ void quit (void)
 }
 
 {_
-    LOG("Finishing: music_fini");
-    music_fini();
-}
-
-{_
-    LOG("Finishing: sound_fini");
-    sound_fini();
-}
-
-{_
     LOG("Finishing: tile_fini");
     tile_fini();
 }
@@ -189,11 +165,6 @@ void quit (void)
 {_
     LOG("Finishing: sdl_fini");
     sdl_fini();
-}
-
-{_
-    LOG("Finishing: config_fini");
-    config_fini();
 }
 
 {_
@@ -584,29 +555,17 @@ int32_t main (int32_t argc, char *argv[])
     cereal_test(std::string(save_file));
     myfree(save_file);
 
-    ramdisk_init();
-
     ARGV = argv;
 
     dospath2unix(ARGV[0]);
 
     parse_args(argc, argv);
 
-    math_init();
-
     color_init();
 
     find_file_locations();
 
     python_init(argv);
-
-    if (!config_init()) {
-	ERR("Config init");
-    }
-
-    if (!config_load()) {
-	ERR("Config read");
-    }
 
     if (!sdl_init()) {
 	ERR("SDL init");
@@ -618,14 +577,6 @@ int32_t main (int32_t argc, char *argv[])
 
     if (!wid_tiles_init()) {
 	ERR("wid tiles init");
-    }
-
-    if (!music_init()) {
-	ERR("music init");
-    }
-
-    if (!sound_init()) {
-	ERR("sound init");
     }
 
     if (!tile_init()) {
@@ -661,7 +612,6 @@ int32_t main (int32_t argc, char *argv[])
     py_call_void("init2");
 
     tp_init();
-    thing_init();
 
     gl_init_2d_mode();
     sdl_loop();

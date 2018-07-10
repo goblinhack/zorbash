@@ -10,7 +10,4 @@
 #define _MY_PY_GAME_H_
 
 #include "my_python.h"
-PY_PROTO(game_map_destroy)
-PY_PROTO(game_map_create)
-PY_PROTO(game_map_created)
 #endif

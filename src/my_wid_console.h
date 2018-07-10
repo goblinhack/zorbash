@@ -12,6 +12,8 @@ void wid_console_log(std::wstring s);
 void wid_console_log(std::string s);
 void wid_console_hello(void);
 
+#include "my_wid.h"
+
 /*
  * Global widgets.
  */

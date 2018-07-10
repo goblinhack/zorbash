@@ -6,6 +6,7 @@
 
 #include "my_main.h"
 #include "my_python.h"
+#include "my_thing.h"
 #include "my_py_thing.h"
 
 PyObject *thing_new_python (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -231,7 +232,8 @@ PyObject *thing_push (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;	
     }	
 	
-    o = t->push(p);
+    CON("TBD thing_push");
+//    o = t->push(p);
 	
 done:	
     if (thing_name) {	

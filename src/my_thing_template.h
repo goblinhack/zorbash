@@ -9,6 +9,12 @@
 #ifndef _MY_THING_TEMPLATE_H
 #define _MY_THING_TEMPLATE_H
 
+typedef std::shared_ptr< class thing_template > tpp;
+typedef std::map< std::string, tpp > thing_templates;
+typedef std::map< unsigned int, tpp > thing_templates_create_order;
+
+#include "my_thing_tile.h"
+
 enum {
     IS_JOIN_HORIZ,
     IS_JOIN_VERT,

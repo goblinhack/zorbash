@@ -4,8 +4,11 @@
  * See the README file for license info for license.
  */
 
+#include <stdio.h>
 #include <dirent.h>
 #include <sys/param.h>
+#include <unistd.h>
+#include <sys/stat.h>
 
 #include "my_main.h"
 #include "my_dir.h"
@@ -41,8 +44,7 @@ uint8_t dir_exists (const char *indir)
 file_nodes dirlist (const char *dir,
                     const char *include_suffix,
                     const char *exclude_suffix,
-                    uint8_t include_dirs,
-                    uint8_t include_ramdisk)
+                    uint8_t include_dirs)
 {_
     file_nodes files;
     struct dirent * e;
@@ -122,42 +124,6 @@ file_nodes dirlist (const char *dir,
         node->name = std::string(mybasename(dir_and_file, "KEY: dirlist2"));
 
         myfree(dir_and_file);
-    }
-
-    if (include_ramdisk) {
-        extern ramdisk_t ramdisk_data[];
-
-        ramdisk_t *ramfile;
-
-        ramfile = ramdisk_data;
-
-        while (ramfile->filename) {
-            char *dir_and_file = dupstr(ramfile->filename, "ramdisk name");
-
-            if (include_suffix) {
-                if (!strstr(dir_and_file, include_suffix)) {
-                    myfree(dir_and_file);
-                    ramfile++;
-                    continue;
-                }
-            }
-
-            auto node = std::make_shared< class file_node >();
-            auto result = files.insert(
-              std::make_pair(std::string(dir_and_file), node));
-
-            if (result.second == false) {
-                ERR("insert dir(2) %s", dir_and_file);
-                continue;
-            }
-
-            node->is_file = true;
-            node->name = std::string(mybasename(dir_and_file, "KEY: dirlist2"));
-
-            ramfile++;
-
-            myfree(dir_and_file);
-        }
     }
 
     closedir(d);
