@@ -11,15 +11,13 @@
 #include "my_wid.h"
 #include "my_time_util.h"
 #include "my_command.h"
-#include "my_wid_tooltip.h"
 #include "my_wid.h"
-#include "my_sound.h"
 #include "my_wid_console.h"
 #include "my_python.h"
 #include "my_term.h"
 #include "my_string.h"
+#include "my_thing.h"
 
-uint8_t debug_enabled = 0;
 uint8_t croaked;
 
 /*
@@ -496,11 +494,8 @@ void DYING (const char *fmt, ...)
 
 void DBG (const char *fmt, ...)
 {_
+    return;
     va_list args;
-
-    if (!debug_enabled) {
-        return;
-    }
 
     va_start(args, fmt);
     log_(fmt, args);
@@ -533,42 +528,6 @@ void CROAK (const char *fmt, ...)
     va_end(args);
 
     quit();
-}
-
-static void msg_ (uint32_t level,
-                  thingp t,
-                  double x,
-                  double y,
-                  const char *fmt, va_list args)
-{_
-    uint32_t len;
-    char buf[MAXSTR];
-
-    buf[0] = '\0';
-
-    switch (level) {
-    case WARNING:
-        wid_console_log(buf);
-        break;
-
-    case CRITICAL:
-
-        timestamp(buf, sizeof(buf));
-        len = (uint32_t)strlen(buf);
-        vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
-
-        putf(MY_STDOUT, buf);
-        fflush(MY_STDOUT);
-
-        wid_console_log(buf);
-        break;
-
-    case INFO:
-        vsnprintf(buf, sizeof(buf), fmt, args);
-
-        wid_console_log(buf);
-        break;
-    }
 }
 
 void thing::log_ (const char *fmt, va_list args)
@@ -683,35 +642,9 @@ void thing::dbg (const char *fmt, ...)
 
     va_list args;
 
-    if (!debug_enabled) {
-        return;
-    }
-
     va_start(args, fmt);
     t->log_(fmt, args);
     va_end(args);
-}
-
-/*
- * User has entered a command, run it
- */
-uint8_t debug_enable (tokens_t *tokens, void *context)
-{_
-    char *s = tokens->args[2];
-
-    if (!s || (*s == '\0')) {
-        debug_enabled = 1;
-    } else {
-        debug_enabled = strtol(s, 0, 10) ? 1 : 0;
-    }
-
-    if (!debug_enabled) {
-        debug_enabled = 0;
-    }
-
-    CON("Debug mode set to %u", debug_enabled);
-
-    return (true);
 }
 
 #ifdef ENABLE_WID_DEBUG
@@ -748,30 +681,11 @@ void WID_DBG (widp t, const char *fmt, ...)
 
     verify(t.get());
 
-    if (!debug_enabled) {
-        return;
-    }
-
     va_start(args, fmt);
     wid_log_(t, fmt, args);
     va_end(args);
 }
 #endif
-
-void MESG (uint32_t level, const char *fmt, ...)
-{_
-    va_list args;
-
-    va_start(args, fmt);
-
-    msg_(level,
-         0, // thing
-         0, // x
-         0, // y
-         fmt, args);
-
-    va_end(args);
-}
 
 static void msgerr_ (const char *fmt, va_list args)
 {_

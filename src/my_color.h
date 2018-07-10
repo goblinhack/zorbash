@@ -24,6 +24,8 @@
 #ifndef _MY_MY_COLOR_H_
 #define _MY_MY_COLOR_H_
 
+#include <map>
+
 template<class T> class my_acolor3d
 {
 public:
@@ -35,7 +37,7 @@ public:
 
     my_acolor3d (void) : r(0), g(0), b(0), a(0) { }
 
-    my_acolor3d (T r, T g, uint8_t b) : r(r), g(g), b(b), a(255) { }
+    my_acolor3d (T r, T g, unsigned char b) : r(r), g(g), b(b), a(255) { }
 
     my_acolor3d (T r, T g, double b) : r(r), g(g), b(b), a(1.0) { }
 
@@ -99,7 +101,7 @@ public:
     }
 };
 
-typedef my_acolor3d<uint8_t> color;
+typedef my_acolor3d<unsigned char> color;
 typedef my_acolor3d<double> colorf;
 
 typedef std::map< std::string, color > colors;

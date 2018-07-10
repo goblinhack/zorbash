@@ -9,6 +9,7 @@
 #include "my_tile.h"
 #include "my_py_tp.h"
 #include "my_config.h"
+#include "my_thing.h"
 #include "my_thing_tile.h"
 #include "my_thing_template.h"
 

@@ -24,6 +24,8 @@
 #ifndef _MY_GETPUT_PIXEL_MACROS_H_
 #define _MY_GETPUT_PIXEL_MACROS_H_
 
+#include "my_main.h"
+
 /*
  * Quick row-color bit-shift lookups for certain common color screen size widths:
  *

@@ -361,6 +361,8 @@ extern void stbi_install_YCbCr_to_RGB(stbi_YCbCr_to_RGB_run func);
 #ifndef STBI_NO_STDIO
 #endif
 #include "my_main.h"
+#include <stdlib.h>
+#include <math.h>
 
 // implementation:
 typedef   signed short int16;

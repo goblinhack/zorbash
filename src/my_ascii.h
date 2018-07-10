@@ -7,6 +7,8 @@
 #pragma once
 
 #include "wchar.h"
+#include "my_point.h"
+#include "my_color.h"
 
 #define ASCII_MAP_WIDTH             79
 #define ASCII_MAP_HEIGHT            29

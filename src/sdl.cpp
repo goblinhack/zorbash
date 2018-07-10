@@ -274,8 +274,6 @@ uint8_t sdl_init (void)
         game.video_pix_width = 0;
         game.video_pix_height = 0;
 
-        config_save();
-
         SDL_MSG_BOX("Couldn't set windowed display %ux%u: %s",
                     video_width, video_height,
                     SDL_GetError());
@@ -379,22 +377,6 @@ static int32_t sdl_filter_events (void *userdata, SDL_Event *event)
         default:
             return (0);
     }
-}
-
-static void print_joystick_calib (char *tmp, int pos, int len)
-{_
-    int i;
-
-    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "[");
-
-    for (i = 0; i < len; ++i) {
-        if (i == pos) {
-            snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "#");
-        } else {
-            snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), " ");
-        }
-    }
-    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "]");
 }
 
 static void sdl_event (SDL_Event * event)
@@ -832,24 +814,6 @@ static void sdl_tick (void)
 
         if (wid_mouse_visible) {
             sdl_mouse_warp(x, y);
-        }
-    }
-
-    if (debug_enabled) {
-        char tmp[MAXSTR];
-        *tmp = 0;
-
-        int i;
-        for (i = 0; i < joy_naxes; ++i) {
-            int len = 80 - 20;
-
-            *tmp = 0;
-            snprintf(tmp + strlen(tmp),
-                        sizeof(tmp) - strlen(tmp),
-                        "  %2d: %6d  ", i, sdl_joy_axes[i]);
-
-            print_joystick_calib(tmp, (sdl_joy_axes[i] + 32767) * (len-1) / 65534, len);
-            DBG("%s", tmp);
         }
     }
 }

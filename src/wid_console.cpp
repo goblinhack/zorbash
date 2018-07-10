@@ -8,7 +8,6 @@
 
 #include "my_sdl.h"
 #include "my_slre.h"
-
 #include "my_main.h"
 #include "my_wid_console.h"
 #include "my_command.h"
@@ -65,8 +64,6 @@ void wid_console_fini (void)
 uint8_t wid_console_init (void)
 {_
     wid_console_inited = true;
-
-    command_add(debug_enable, "set debug [01]", "enable/disable debug mode");
 
     command_add(fps_enable, "set fps [01]", "frames per sec counter");
 

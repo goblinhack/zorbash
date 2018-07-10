@@ -9,6 +9,9 @@
 #ifndef _MY_COMMAND_H_
 #define _MY_COMMAND_H_
 
+typedef struct tokens_t_ *tokenp;
+typedef struct tokens_t_ *tokensp;
+
 typedef uint8_t(*command_fn_t)(tokenp, void *context);
 
 #include "my_token.h"

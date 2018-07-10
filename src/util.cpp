@@ -6,6 +6,7 @@
 
 
 #include "my_main.h"
+#include "stdlib.h"
 
 void *myzalloc_ (uint32_t size,
                  const char *what,

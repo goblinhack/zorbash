@@ -13,25 +13,20 @@ GAME_OBJECTS=				\
     $(OBJDIR)/color.o			\
     $(OBJDIR)/cereal.o			\
     $(OBJDIR)/command.o 		\
-    $(OBJDIR)/config.o			\
     $(OBJDIR)/dir.o 			\
     $(OBJDIR)/dmap.o 			\
     $(OBJDIR)/file.o 			\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
-    $(OBJDIR)/geo.o 			\
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/main.o 			\
-    $(OBJDIR)/math.o 			\
-    $(OBJDIR)/music.o 			\
     $(OBJDIR)/pcg_basic.o 		\
     $(OBJDIR)/pixel.o 			\
     $(OBJDIR)/point.o 			\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_dmap.o 		\
-    $(OBJDIR)/py_game.o 		\
     $(OBJDIR)/py_sdl.o 			\
     $(OBJDIR)/py_tex.o 			\
     $(OBJDIR)/py_thing.o 		\
@@ -42,10 +37,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/py_wid_tiles.o 		\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/ramdisk_read.o 		\
-    $(OBJDIR)/rand.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
-    $(OBJDIR)/sound.o 			\
     $(OBJDIR)/stb_image.o 		\
     $(OBJDIR)/string.o 			\
     $(OBJDIR)/term.o 		        \
@@ -57,7 +50,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_tile.o 		\
     $(OBJDIR)/tile.o 			\
     $(OBJDIR)/time.o 			\
-    $(OBJDIR)/timer.o 			\
     $(OBJDIR)/token.o 			\
     $(OBJDIR)/ttf.o 			\
     $(OBJDIR)/util.o 			\

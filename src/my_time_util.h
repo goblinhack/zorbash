@@ -16,9 +16,16 @@
 #include <mach/mach_time.h>
 #endif
 #include <unistd.h>
-
 #include <sys/time.h>
+
+#include "my_main.h"
 #include "my_sdl.h"
+
+/*
+ * Misc
+ */
+#undef ONESEC
+#define ONESEC                          1000
 
 uint8_t time_have_x_thousandths_passed_since(uint32_t tenths, uint32_t since);
 uint8_t time_have_x_hundredths_passed_since(uint32_t tenths, uint32_t since);

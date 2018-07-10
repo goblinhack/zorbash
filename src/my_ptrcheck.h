@@ -16,6 +16,24 @@
  */
 #define PTRCHECK_AT             __FILE__, __PRETTY_FUNCTION__, __LINE__
 
+/*
+ * util.c
+ */
+void *myzalloc_(uint32_t size, const char *what, const char *func,
+                const char *file, const uint32_t line);
+
+void *mymalloc_(uint32_t size, const char *what, const char *func,
+                const char *file, const uint32_t line);
+
+void *myrealloc_(void *ptr, uint32_t size, const char *what, const char *func,
+                 const char *file, const uint32_t line);
+
+void myfree_(void *ptr, const char *func, const char *file,
+             const uint32_t line);
+
+char *dupstr_(const char *in, const char *what, const char *func,
+              const char *file, const uint32_t line);
+
 #define myzalloc(__size__, __what__) \
     myzalloc_((__size__), (__what__), PTRCHECK_AT)
 

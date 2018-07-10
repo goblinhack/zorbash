@@ -6,6 +6,9 @@
 
 #pragma once
 
+#include "my_config.h"
+#include "my_point.h"
+
 typedef struct dmap_ {
     int16_t val[MAP_WIDTH][MAP_HEIGHT];
 } dmap;
