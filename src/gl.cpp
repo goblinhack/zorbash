@@ -32,7 +32,8 @@ void gl_init_2d_mode (void)
     /*
      * Setup our viewport
      */
-    glViewport(0, 0, game.drawable_gl_width, game.drawable_gl_height);
+    glViewport(0, 0, game.config.drawable_gl_width, 
+               game.config.drawable_gl_height);
 
     /*
      * Make sure we're changing the model view and not the projection
@@ -68,7 +69,7 @@ void gl_enter_2d_mode (void)
      * 2D projection
      */
     glOrtho(0,
-             game.video_gl_width, game.video_gl_height,
+             game.config.video_gl_width, game.config.video_gl_height,
              0, -1200.0, 1200.0);
 
     /*
@@ -144,8 +145,8 @@ static void gl_init_fbo_ (
     GLuint *fbo_id,
     GLuint *fbo_tex_id)
 {_
-    GLuint tex_width = game.drawable_gl_width;
-    GLuint tex_height = game.drawable_gl_height;
+    GLuint tex_width = game.config.drawable_gl_width;
+    GLuint tex_height = game.config.drawable_gl_height;
 
     glGenTextures(1, fbo_tex_id);
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);

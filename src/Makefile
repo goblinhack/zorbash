@@ -39,15 +39,11 @@ GAME_OBJECTS=				\
     $(OBJDIR)/pixel.o 			\
     $(OBJDIR)/point.o 			\
     $(OBJDIR)/ptrcheck.o 		\
-    $(OBJDIR)/py_dmap.o 		\
     $(OBJDIR)/py_sdl.o 			\
     $(OBJDIR)/py_tex.o 			\
-    $(OBJDIR)/py_thing.o 		\
     $(OBJDIR)/py_tile.o 		\
     $(OBJDIR)/py_tp.o 			\
     $(OBJDIR)/py_ttf.o 			\
-    $(OBJDIR)/py_wid.o 			\
-    $(OBJDIR)/py_wid_tiles.o 		\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/ramdisk_read.o 		\
     $(OBJDIR)/sdl.o 			\
@@ -67,7 +63,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ttf.o 			\
     $(OBJDIR)/util.o 			\
     $(OBJDIR)/wid.o 			\
-    $(OBJDIR)/wid_anim.o 		\
     $(OBJDIR)/wid_console.o 		\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/map_jigsaw.o 		\
@@ -413,7 +408,66 @@ all: $(TARGET_GAME)
 .o/backtrace.o: /usr/include/sys/_types/_rsize_t.h
 .o/backtrace.o: /usr/include/sys/_types/_wint_t.h
 .o/backtrace.o: /usr/include/__cxxabi_config.h
-.o/cereal.o: my_ptrcheck.h
+.o/cereal.o: my_ptrcheck.h my_game.h my_sdl.h my_command.h my_token.h
+.o/cereal.o: my_string.h /usr/include/wchar.h /usr/include/_types.h
+.o/cereal.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
+.o/cereal.o: /usr/include/sys/_symbol_aliasing.h
+.o/cereal.o: /usr/include/sys/_posix_availability.h
+.o/cereal.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/cereal.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/cereal.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
+.o/cereal.o: /usr/include/sys/_types/_null.h
+.o/cereal.o: /usr/include/sys/_types/_size_t.h
+.o/cereal.o: /usr/include/sys/_types/_mbstate_t.h
+.o/cereal.o: /usr/include/sys/_types/_ct_rune_t.h
+.o/cereal.o: /usr/include/sys/_types/_rune_t.h
+.o/cereal.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdio.h
+.o/cereal.o: /usr/include/sys/_types/_va_list.h /usr/include/sys/stdio.h
+.o/cereal.o: /usr/include/sys/_types/_off_t.h
+.o/cereal.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
+.o/cereal.o: /usr/include/secure/_common.h /usr/include/time.h
+.o/cereal.o: /usr/include/sys/_types/_clock_t.h
+.o/cereal.o: /usr/include/sys/_types/_time_t.h
+.o/cereal.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
+.o/cereal.o: /usr/include/sys/_types/_wint_t.h
+.o/cereal.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
+.o/cereal.o: /usr/include/runetype.h my_thing_template.h my_thing_tile.h
+.o/cereal.o: my_tile.h my_config.h my_point.h my_math_util.h my_color.h
+.o/cereal.o: my_tex.h my_slre.h my_dmap.h my_thing.h my_time_util.h
+.o/cereal.o: /usr/include/assert.h /usr/include/unistd.h
+.o/cereal.o: /usr/include/sys/unistd.h
+.o/cereal.o: /usr/include/sys/_types/_posix_vdisable.h
+.o/cereal.o: /usr/include/sys/_types/_seek_set.h
+.o/cereal.o: /usr/include/_types/_uint64_t.h /usr/include/sys/_types/_uid_t.h
+.o/cereal.o: /usr/include/sys/_types/_gid_t.h
+.o/cereal.o: /usr/include/sys/_types/_intptr_t.h
+.o/cereal.o: /usr/include/sys/_types/_pid_t.h
+.o/cereal.o: /usr/include/sys/_types/_useconds_t.h /usr/include/sys/select.h
+.o/cereal.o: /usr/include/sys/appleapiopts.h
+.o/cereal.o: /usr/include/sys/_types/_fd_def.h
+.o/cereal.o: /usr/include/sys/_types/_timeval.h
+.o/cereal.o: /usr/include/sys/_types/_suseconds_t.h
+.o/cereal.o: /usr/include/sys/_types/_sigset_t.h
+.o/cereal.o: /usr/include/sys/_types/_fd_setsize.h
+.o/cereal.o: /usr/include/sys/_types/_fd_set.h
+.o/cereal.o: /usr/include/sys/_types/_fd_clr.h
+.o/cereal.o: /usr/include/sys/_types/_fd_isset.h
+.o/cereal.o: /usr/include/sys/_types/_fd_zero.h
+.o/cereal.o: /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h
+.o/cereal.o: /usr/include/sys/_types/_dev_t.h
+.o/cereal.o: /usr/include/sys/_types/_mode_t.h
+.o/cereal.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
+.o/cereal.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
+.o/cereal.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
+.o/cereal.o: /usr/include/stdint.h /usr/include/sys/_types/_int8_t.h
+.o/cereal.o: /usr/include/sys/_types/_int16_t.h
+.o/cereal.o: /usr/include/sys/_types/_int32_t.h
+.o/cereal.o: /usr/include/sys/_types/_int64_t.h
+.o/cereal.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
+.o/cereal.o: /usr/include/_types/_uint32_t.h
+.o/cereal.o: /usr/include/sys/_types/_uintptr_t.h
+.o/cereal.o: /usr/include/_types/_intmax_t.h /usr/include/_types/_uintmax_t.h
+.o/cereal.o: my_callstack.h
 .o/color.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
 .o/color.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/color.o: /usr/include/sys/_posix_availability.h
@@ -1172,32 +1226,6 @@ all: $(TARGET_GAME)
 .o/ptrcheck.o: /usr/include/ctype.h /usr/include/runetype.h
 .o/ptrcheck.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h my_tile.h
 .o/ptrcheck.o: my_config.h my_point.h my_math_util.h my_color.h my_tex.h
-.o/py_dmap.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
-.o/py_dmap.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
-.o/py_dmap.o: /usr/include/sys/_posix_availability.h
-.o/py_dmap.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
-.o/py_dmap.o: /usr/include/_types.h /usr/include/sys/_types.h
-.o/py_dmap.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
-.o/py_dmap.o: /usr/include/sys/_pthread/_pthread_types.h
-.o/py_dmap.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
-.o/py_dmap.o: /usr/include/sys/_types/_int8_t.h
-.o/py_dmap.o: /usr/include/sys/_types/_int16_t.h
-.o/py_dmap.o: /usr/include/sys/_types/_int32_t.h
-.o/py_dmap.o: /usr/include/sys/_types/_int64_t.h
-.o/py_dmap.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
-.o/py_dmap.o: /usr/include/_types/_uint32_t.h /usr/include/_types/_uint64_t.h
-.o/py_dmap.o: /usr/include/sys/_types/_intptr_t.h
-.o/py_dmap.o: /usr/include/sys/_types/_uintptr_t.h
-.o/py_dmap.o: /usr/include/_types/_intmax_t.h
-.o/py_dmap.o: /usr/include/_types/_uintmax_t.h my_callstack.h
-.o/py_dmap.o: /usr/include/stdio.h /usr/include/sys/_types/_va_list.h
-.o/py_dmap.o: /usr/include/sys/_types/_size_t.h
-.o/py_dmap.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
-.o/py_dmap.o: /usr/include/sys/_types/_off_t.h
-.o/py_dmap.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
-.o/py_dmap.o: /usr/include/secure/_common.h my_python.h my_point.h
-.o/py_dmap.o: my_math_util.h my_tile.h my_config.h my_color.h my_tex.h
-.o/py_dmap.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h my_dmap.h
 .o/py_sdl.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
 .o/py_sdl.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/py_sdl.o: /usr/include/sys/_posix_availability.h
@@ -1260,67 +1288,6 @@ all: $(TARGET_GAME)
 .o/py_tex.o: /usr/include/runetype.h my_thing_template.h my_thing_tile.h
 .o/py_tex.o: my_ptrcheck.h my_tile.h my_config.h my_tex.h my_slre.h
 .o/py_tex.o: my_pixel.h
-.o/py_thing.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
-.o/py_thing.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
-.o/py_thing.o: /usr/include/sys/_posix_availability.h
-.o/py_thing.o: /usr/include/Availability.h
-.o/py_thing.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
-.o/py_thing.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
-.o/py_thing.o: /usr/include/i386/_types.h
-.o/py_thing.o: /usr/include/sys/_pthread/_pthread_types.h
-.o/py_thing.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
-.o/py_thing.o: /usr/include/sys/_types/_int8_t.h
-.o/py_thing.o: /usr/include/sys/_types/_int16_t.h
-.o/py_thing.o: /usr/include/sys/_types/_int32_t.h
-.o/py_thing.o: /usr/include/sys/_types/_int64_t.h
-.o/py_thing.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
-.o/py_thing.o: /usr/include/_types/_uint32_t.h
-.o/py_thing.o: /usr/include/_types/_uint64_t.h
-.o/py_thing.o: /usr/include/sys/_types/_intptr_t.h
-.o/py_thing.o: /usr/include/sys/_types/_uintptr_t.h
-.o/py_thing.o: /usr/include/_types/_intmax_t.h
-.o/py_thing.o: /usr/include/_types/_uintmax_t.h my_callstack.h
-.o/py_thing.o: /usr/include/stdio.h /usr/include/sys/_types/_va_list.h
-.o/py_thing.o: /usr/include/sys/_types/_size_t.h
-.o/py_thing.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
-.o/py_thing.o: /usr/include/sys/_types/_off_t.h
-.o/py_thing.o: /usr/include/sys/_types/_ssize_t.h
-.o/py_thing.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
-.o/py_thing.o: my_python.h my_point.h my_math_util.h my_thing.h my_config.h
-.o/py_thing.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h my_tile.h
-.o/py_thing.o: my_color.h my_tex.h my_time_util.h /usr/include/assert.h
-.o/py_thing.o: /usr/include/unistd.h /usr/include/sys/unistd.h
-.o/py_thing.o: /usr/include/sys/_types/_posix_vdisable.h
-.o/py_thing.o: /usr/include/sys/_types/_seek_set.h
-.o/py_thing.o: /usr/include/sys/_types/_uid_t.h
-.o/py_thing.o: /usr/include/sys/_types/_gid_t.h
-.o/py_thing.o: /usr/include/sys/_types/_pid_t.h
-.o/py_thing.o: /usr/include/sys/_types/_useconds_t.h
-.o/py_thing.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
-.o/py_thing.o: /usr/include/sys/_types/_fd_def.h
-.o/py_thing.o: /usr/include/sys/_types/_timespec.h
-.o/py_thing.o: /usr/include/sys/_types/_timeval.h
-.o/py_thing.o: /usr/include/sys/_types/_time_t.h
-.o/py_thing.o: /usr/include/sys/_types/_suseconds_t.h
-.o/py_thing.o: /usr/include/sys/_types/_sigset_t.h
-.o/py_thing.o: /usr/include/sys/_types/_fd_setsize.h
-.o/py_thing.o: /usr/include/sys/_types/_fd_set.h
-.o/py_thing.o: /usr/include/sys/_types/_fd_clr.h
-.o/py_thing.o: /usr/include/sys/_types/_fd_isset.h
-.o/py_thing.o: /usr/include/sys/_types/_fd_zero.h
-.o/py_thing.o: /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h
-.o/py_thing.o: /usr/include/sys/_types/_dev_t.h
-.o/py_thing.o: /usr/include/sys/_types/_mode_t.h
-.o/py_thing.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
-.o/py_thing.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
-.o/py_thing.o: /usr/include/time.h /usr/include/sys/_types/_clock_t.h
-.o/py_thing.o: my_sdl.h my_command.h my_token.h my_string.h
-.o/py_thing.o: /usr/include/wchar.h /usr/include/sys/_types/_mbstate_t.h
-.o/py_thing.o: /usr/include/sys/_types/_ct_rune_t.h
-.o/py_thing.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
-.o/py_thing.o: /usr/include/sys/_types/_wint_t.h
-.o/py_thing.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/py_thing.o: /usr/include/runetype.h my_slre.h my_py_thing.h
 .o/py_tile.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
 .o/py_tile.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/py_tile.o: /usr/include/sys/_posix_availability.h
@@ -1438,74 +1405,6 @@ all: $(TARGET_GAME)
 .o/py_ttf.o: /usr/include/runetype.h my_thing_template.h my_thing_tile.h
 .o/py_ttf.o: my_ptrcheck.h my_tile.h my_config.h my_color.h my_tex.h
 .o/py_ttf.o: my_slre.h my_font.h my_ttf.h my_enum.h my_ascii.h
-.o/py_wid.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
-.o/py_wid.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
-.o/py_wid.o: /usr/include/sys/_posix_availability.h
-.o/py_wid.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
-.o/py_wid.o: /usr/include/_types.h /usr/include/sys/_types.h
-.o/py_wid.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
-.o/py_wid.o: /usr/include/sys/_pthread/_pthread_types.h
-.o/py_wid.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
-.o/py_wid.o: /usr/include/sys/_types/_int8_t.h
-.o/py_wid.o: /usr/include/sys/_types/_int16_t.h
-.o/py_wid.o: /usr/include/sys/_types/_int32_t.h
-.o/py_wid.o: /usr/include/sys/_types/_int64_t.h
-.o/py_wid.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
-.o/py_wid.o: /usr/include/_types/_uint32_t.h /usr/include/_types/_uint64_t.h
-.o/py_wid.o: /usr/include/sys/_types/_intptr_t.h
-.o/py_wid.o: /usr/include/sys/_types/_uintptr_t.h
-.o/py_wid.o: /usr/include/_types/_intmax_t.h /usr/include/_types/_uintmax_t.h
-.o/py_wid.o: my_callstack.h /usr/include/stdio.h
-.o/py_wid.o: /usr/include/sys/_types/_va_list.h
-.o/py_wid.o: /usr/include/sys/_types/_size_t.h
-.o/py_wid.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
-.o/py_wid.o: /usr/include/sys/_types/_off_t.h
-.o/py_wid.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
-.o/py_wid.o: /usr/include/secure/_common.h my_python.h my_point.h
-.o/py_wid.o: my_math_util.h my_py_wid.h my_string.h /usr/include/wchar.h
-.o/py_wid.o: /usr/include/sys/_types/_mbstate_t.h
-.o/py_wid.o: /usr/include/sys/_types/_ct_rune_t.h
-.o/py_wid.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
-.o/py_wid.o: /usr/include/sys/_types/_clock_t.h
-.o/py_wid.o: /usr/include/sys/_types/_time_t.h
-.o/py_wid.o: /usr/include/sys/_types/_timespec.h /usr/include/_wctype.h
-.o/py_wid.o: /usr/include/sys/_types/_wint_t.h
-.o/py_wid.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/py_wid.o: /usr/include/runetype.h my_thing_template.h my_thing_tile.h
-.o/py_wid.o: my_ptrcheck.h my_tile.h my_config.h my_color.h my_tex.h my_wid.h
-.o/py_wid.o: my_sdl.h my_command.h my_token.h my_slre.h my_enum.h my_size.h
-.o/py_wid.o: my_wid_tiles.h my_ascii.h
-.o/py_wid_tiles.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
-.o/py_wid_tiles.o: /usr/include/sys/cdefs.h
-.o/py_wid_tiles.o: /usr/include/sys/_symbol_aliasing.h
-.o/py_wid_tiles.o: /usr/include/sys/_posix_availability.h
-.o/py_wid_tiles.o: /usr/include/Availability.h
-.o/py_wid_tiles.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
-.o/py_wid_tiles.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
-.o/py_wid_tiles.o: /usr/include/i386/_types.h
-.o/py_wid_tiles.o: /usr/include/sys/_pthread/_pthread_types.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_int8_t.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_int16_t.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_int32_t.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_int64_t.h
-.o/py_wid_tiles.o: /usr/include/_types/_uint8_t.h
-.o/py_wid_tiles.o: /usr/include/_types/_uint16_t.h
-.o/py_wid_tiles.o: /usr/include/_types/_uint32_t.h
-.o/py_wid_tiles.o: /usr/include/_types/_uint64_t.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_intptr_t.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_uintptr_t.h
-.o/py_wid_tiles.o: /usr/include/_types/_intmax_t.h
-.o/py_wid_tiles.o: /usr/include/_types/_uintmax_t.h my_callstack.h
-.o/py_wid_tiles.o: /usr/include/stdio.h /usr/include/sys/_types/_va_list.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_size_t.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_off_t.h
-.o/py_wid_tiles.o: /usr/include/sys/_types/_ssize_t.h
-.o/py_wid_tiles.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
-.o/py_wid_tiles.o: my_python.h my_point.h my_math_util.h my_wid_tiles.h
-.o/py_wid_tiles.o: my_tile.h my_config.h my_color.h my_tex.h
-.o/py_wid_tiles.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h
 .o/python.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
 .o/python.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/python.o: /usr/include/sys/_posix_availability.h
@@ -1530,8 +1429,8 @@ all: $(TARGET_GAME)
 .o/python.o: /usr/include/sys/_types/_off_t.h
 .o/python.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
 .o/python.o: /usr/include/secure/_common.h my_python.h my_point.h
-.o/python.o: my_math_util.h my_py_tp.h my_py_thing.h my_py_wid.h my_py_game.h
-.o/python.o: my_py_sdl.h my_config.h my_string.h /usr/include/wchar.h
+.o/python.o: my_math_util.h my_py_tp.h my_py_game.h my_py_sdl.h my_config.h
+.o/python.o: my_string.h /usr/include/wchar.h
 .o/python.o: /usr/include/sys/_types/_mbstate_t.h
 .o/python.o: /usr/include/sys/_types/_ct_rune_t.h
 .o/python.o: /usr/include/sys/_types/_rune_t.h /usr/include/time.h
@@ -1543,7 +1442,7 @@ all: $(TARGET_GAME)
 .o/python.o: /usr/include/runetype.h my_thing_template.h my_thing_tile.h
 .o/python.o: my_ptrcheck.h my_tile.h my_color.h my_tex.h my_wid.h my_sdl.h
 .o/python.o: my_command.h my_token.h my_slre.h my_enum.h my_size.h
-.o/python.o: my_wid_tiles.h my_ascii.h my_wid_console.h
+.o/python.o: my_wid_tiles.h my_ascii.h
 .o/ramdisk_read.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
 .o/ramdisk_read.o: /usr/include/sys/cdefs.h
 .o/ramdisk_read.o: /usr/include/sys/_symbol_aliasing.h
@@ -2374,68 +2273,6 @@ all: $(TARGET_GAME)
 .o/wid.o: /usr/include/sys/_types/_u_int16_t.h
 .o/wid.o: /usr/include/sys/_types/_u_int32_t.h
 .o/wid.o: /usr/include/sys/_types/_u_int64_t.h
-.o/wid_anim.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
-.o/wid_anim.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
-.o/wid_anim.o: /usr/include/sys/_posix_availability.h
-.o/wid_anim.o: /usr/include/Availability.h
-.o/wid_anim.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
-.o/wid_anim.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
-.o/wid_anim.o: /usr/include/i386/_types.h
-.o/wid_anim.o: /usr/include/sys/_pthread/_pthread_types.h
-.o/wid_anim.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
-.o/wid_anim.o: /usr/include/sys/_types/_int8_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_int16_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_int32_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_int64_t.h
-.o/wid_anim.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
-.o/wid_anim.o: /usr/include/_types/_uint32_t.h
-.o/wid_anim.o: /usr/include/_types/_uint64_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_intptr_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_uintptr_t.h
-.o/wid_anim.o: /usr/include/_types/_intmax_t.h
-.o/wid_anim.o: /usr/include/_types/_uintmax_t.h my_callstack.h
-.o/wid_anim.o: /usr/include/stdio.h /usr/include/sys/_types/_va_list.h
-.o/wid_anim.o: /usr/include/sys/_types/_size_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
-.o/wid_anim.o: /usr/include/sys/_types/_off_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_ssize_t.h
-.o/wid_anim.o: /usr/include/secure/_stdio.h /usr/include/secure/_common.h
-.o/wid_anim.o: my_thing_tile.h my_ptrcheck.h my_tile.h my_config.h my_point.h
-.o/wid_anim.o: my_math_util.h my_color.h my_tex.h my_thing_template.h
-.o/wid_anim.o: my_time_util.h /usr/include/assert.h /usr/include/unistd.h
-.o/wid_anim.o: /usr/include/sys/unistd.h
-.o/wid_anim.o: /usr/include/sys/_types/_posix_vdisable.h
-.o/wid_anim.o: /usr/include/sys/_types/_seek_set.h
-.o/wid_anim.o: /usr/include/sys/_types/_uid_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_gid_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_pid_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_useconds_t.h
-.o/wid_anim.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
-.o/wid_anim.o: /usr/include/sys/_types/_fd_def.h
-.o/wid_anim.o: /usr/include/sys/_types/_timespec.h
-.o/wid_anim.o: /usr/include/sys/_types/_timeval.h
-.o/wid_anim.o: /usr/include/sys/_types/_time_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_suseconds_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_sigset_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_fd_setsize.h
-.o/wid_anim.o: /usr/include/sys/_types/_fd_set.h
-.o/wid_anim.o: /usr/include/sys/_types/_fd_clr.h
-.o/wid_anim.o: /usr/include/sys/_types/_fd_isset.h
-.o/wid_anim.o: /usr/include/sys/_types/_fd_zero.h
-.o/wid_anim.o: /usr/include/sys/_types/_fd_copy.h /usr/include/sys/_select.h
-.o/wid_anim.o: /usr/include/sys/_types/_dev_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_mode_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
-.o/wid_anim.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
-.o/wid_anim.o: /usr/include/time.h /usr/include/sys/_types/_clock_t.h
-.o/wid_anim.o: my_sdl.h my_command.h my_token.h my_string.h
-.o/wid_anim.o: /usr/include/wchar.h /usr/include/sys/_types/_mbstate_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_ct_rune_t.h
-.o/wid_anim.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
-.o/wid_anim.o: /usr/include/sys/_types/_wint_t.h
-.o/wid_anim.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/wid_anim.o: /usr/include/runetype.h my_slre.h my_wid.h my_enum.h my_size.h
-.o/wid_anim.o: my_wid_tiles.h
 .o/wid_console.o: my_sdl.h my_command.h my_token.h my_string.h
 .o/wid_console.o: /usr/include/wchar.h /usr/include/_types.h
 .o/wid_console.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h

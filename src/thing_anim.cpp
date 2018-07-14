@@ -10,7 +10,7 @@
 #include "my_thing_tile.h"
 #include "my_thing.h"
 
-void thing::animate (void)
+void Thing::animate (void)
 {_
     auto t = this;
 
@@ -29,7 +29,7 @@ void thing::animate (void)
         /*
          * If within the animate time of this frame, keep with it.
          */
-        if (t->timestamp_change_to_next_frame > time_get_time_ms_cached()) {
+        if (t->next_frame_ms > time_get_time_ms_cached()) {
             return;
         }
 
@@ -46,7 +46,7 @@ void thing::animate (void)
         }
     }
 
-    tiles = t->get_tiles();
+    tiles = tp_get_tiles(tp);
     if (tiles.empty()) {
         return;
     }
@@ -60,8 +60,8 @@ void thing::animate (void)
         /*
          * If walking and now we've stopped, choose the idle no dir tile.
          */
-        if (t->is_player() && !t->is_dead && !t->is_moving &&
-            (time_get_time_ms() >= t->last_move + 5000)) {
+        if (tp_is_player(tp) && !t->is_dead && !t->is_moving &&
+            (time_get_time_ms() >= t->last_move_ms + 5000)) {
 
             thing_tilep new_tile;
 
@@ -238,7 +238,7 @@ void thing::animate (void)
 #endif
 //CON("set %s", thing_tile_name(tile).c_str());
 
-    t->set_tilename(thing_tile_name(tile));
+//    t->set_tilename(thing_tile_name(tile));
     t->current_tile = tile;
 
     /*
@@ -249,5 +249,5 @@ void thing::animate (void)
         delay = delay + (myrand() % delay) / 10;
     }
 
-    t->timestamp_change_to_next_frame = time_get_time_ms_cached() + delay;
+    t->next_frame_ms = time_get_time_ms_cached() + delay;
 }

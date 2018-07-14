@@ -17,11 +17,10 @@
 #include "my_python.h"
 #include "my_ascii.h"
 
-struct game_ game;
+class Game game;
 
 uint8_t
-game_mouse_motion (int32_t tx, int32_t ty,
-                   int32_t x, int32_t y,
+game_mouse_motion (int32_t x, int32_t y,
                    int32_t wheelx, int32_t wheely)
 {_
 //    int mouse_held = mouse_down &&
@@ -32,8 +31,7 @@ CON("TBD %s", __FUNCTION__);
 }
 
 void
-game_mouse_over (int32_t tx, int32_t ty,
-                 int32_t x, int32_t y,
+game_mouse_over (int32_t x, int32_t y,
                  int32_t wheelx, int32_t wheely)
 {_
 //    int mouse_held = mouse_down &&
@@ -43,8 +41,7 @@ CON("TBD %s", __FUNCTION__);
 }
 
 uint8_t
-game_mouse_down (int32_t tx, int32_t ty,
-                 int32_t x, int32_t y, uint32_t button)
+game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
 CON("TBD %s", __FUNCTION__);
     return (false);

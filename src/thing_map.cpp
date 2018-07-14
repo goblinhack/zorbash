@@ -32,7 +32,7 @@ void thing_render_all (void)
     size_t i;
 
     for (i = 0; i < things_draw_list_count; i++) {
-	thingp t = things_draw_list[i];
+	Thingp t = things_draw_list[i];
 
         if (tp_is_animated(thing_tp(t))) {
             thing_animate(t);
@@ -42,7 +42,7 @@ void thing_render_all (void)
     blit_init();
 
     for (i = 0; i < things_draw_list_count; i++) {
-	thingp t = things_draw_list[i];
+	Thingp t = things_draw_list[i];
 
         double X = t->at.x;
         double Y = t->at.y;

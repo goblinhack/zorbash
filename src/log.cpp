@@ -530,7 +530,7 @@ void CROAK (const char *fmt, ...)
     quit();
 }
 
-void thing::log_ (const char *fmt, va_list args)
+void Thing::log_ (const char *fmt, va_list args)
 {_
     auto t = this;
 
@@ -550,7 +550,7 @@ void thing::log_ (const char *fmt, va_list args)
     fflush(MY_STDOUT);
 }
 
-void thing::log (const char *fmt, ...)
+void Thing::log (const char *fmt, ...)
 {_
     auto t = this;
 
@@ -561,7 +561,7 @@ void thing::log (const char *fmt, ...)
     va_end(args);
 }
 
-void thing::con_ (const char *fmt, va_list args)
+void Thing::con_ (const char *fmt, va_list args)
 {_
     auto t = this;
 
@@ -583,7 +583,7 @@ void thing::con_ (const char *fmt, va_list args)
     wid_console_log(buf);
 }
 
-void thing::con (const char *fmt, ...)
+void Thing::con (const char *fmt, ...)
 {_
     auto t = this;
 
@@ -594,7 +594,7 @@ void thing::con (const char *fmt, ...)
     va_end(args);
 }
 
-void thing::err_ (const char *fmt, va_list args)
+void Thing::err_ (const char *fmt, va_list args)
 {_
     auto t = this;
 
@@ -625,7 +625,7 @@ void thing::err_ (const char *fmt, va_list args)
     wid_console_log(buf);
 }
 
-void thing::err (const char *fmt, ...)
+void Thing::err (const char *fmt, ...)
 {_
     auto t = this;
 
@@ -636,7 +636,7 @@ void thing::err (const char *fmt, ...)
     va_end(args);
 }
 
-void thing::dbg (const char *fmt, ...)
+void Thing::dbg (const char *fmt, ...)
 {_
     auto t = this;
 

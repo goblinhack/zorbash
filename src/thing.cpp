@@ -16,226 +16,47 @@
 #include "my_string.h"
 #include "my_game.h"
 
-thingp thing_new (std::string name,
-                  long int thing_id,
-                  std::string tp_name)
-{_
-#ifdef ENABLE_THING_SANITY
-    if (thing_find(name)) {
-        ERR("thing name [%s] already used", name.c_str());
-    }
-#endif
+static uint32_t thing_id;
 
-    auto t = std::make_shared< class thing >();
-    auto result = game.all_things.insert(std::make_pair(name, t));
+Thingp thing_new (std::string tp_name)
+{_
+    auto id = ++thing_id;
+
+    auto t = std::make_shared< class Thing >();
+    auto result = game.state.map.all_things.insert(std::make_pair(id, t));
 
     if (result.second == false) {
-        DIE("thing insert name [%s] failed", name.c_str());
+        DIE("thing insert [%d] failed", id);
     }
 
-    t->name = name;
-    t->thing_id = thing_id;
+    t->id = id;
     t->tp = tp_find(tp_name);
     if (!t->tp) {
-        t->err("thing [%s] not found", tp_name.c_str());
+        DIE("thing [%s] not found", tp_name.c_str());
     }
 
-    {
-        auto tiles = t->get_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_left_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_left_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_right_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_right_tilename(thing_tile_name(tile));
-        }
-    }
-    {
-        auto tiles = t->get_top_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_top_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_bot_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_bot_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_tl_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_tl_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_tr_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_tr_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_br_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_br_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_bl_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_bl_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_horiz_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_horiz_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_vert_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_vert_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_l90_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_l90_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_l180_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_l180_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_l_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_l_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_l270_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_l270_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_t_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_t_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_t90_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_t90_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_t180_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_t180_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_t270_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_t270_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_x_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_x_tilename(thing_tile_name(tile));
-        }
-    }
-
-    {
-        auto tiles = t->get_tiles();
-        auto tile = thing_tile_random(tiles);
-        if (tile) {
-            t->set_node_tilename(thing_tile_name(tile));
-        }
-    }
-
+    t->dir                          = THING_DIR_NONE;
+    t->is_on_map                    = false;
+    t->is_dead                      = false;
+    t->is_sleeping                  = false;
+    t->is_moving                    = false;
+    t->has_ever_moved               = false;
+    t->is_open                      = false;
+    
 //    log(t, "created");
 
     return (t);
 }
 
-void thing::destroyed (std::string reason)
+void Thing::destroyed (std::string reason)
 {_
     auto t = this;
 
-    /*
-     * Too slow with level changes.
-     */
-//    log(t, "Destroyed thing");
-
-    game.all_things.erase(t->name);
-}
-
-void thing::set_tp (std::string tp_name)
-{_
-    auto t = this;
-
-    t->tp = tp_find(tp_name);
-    if (!t->tp) {
-        t->err("thing [%s] not found", tp_name.c_str());
-    }
+    game.state.map.all_things.erase(t->id);
 }
 
 #if 0
-PyObject *thing::push (fpoint3d p)
+PyObject *Thing::push (fpoint p)
 {_
     auto t = this;
 
@@ -251,7 +72,7 @@ PyObject *thing::push (fpoint3d p)
 }
 #endif
 
-void thing::pop (void)
+void Thing::pop (void)
 {_
     auto t = this;
 
@@ -261,13 +82,13 @@ void thing::pop (void)
 
     t->is_on_map = false;
 
-    fpoint3d oob = { -1, -1, -1 };
+    fpoint oob = { -1, -1 };
     t->at = oob;
 
     t->log("pop");
 }
 
-void thing::move_to (fpoint3d to)
+void Thing::move_to (fpoint to)
 {_
     auto t = this;
 
@@ -286,11 +107,11 @@ void thing::move_to (fpoint3d to)
      * track of when we moved.
      */
     t->at = to;
-    t->last_move = time_get_time_ms_cached();
-    t->end_move = t->last_move + ONESEC / 10;
+    t->last_move_ms = time_get_time_ms_cached();
+    t->end_move_ms = t->last_move_ms + ONESEC / 10;
 }
 
-void thing::move_delta (fpoint3d delta)
+void Thing::move_delta (fpoint delta)
 {_
     auto t = this;
 
@@ -299,7 +120,7 @@ void thing::move_delta (fpoint3d delta)
      * idle animation.
      */
     if (t->is_dir_none()) {
-        t->timestamp_change_to_next_frame = time_get_time_ms_cached();
+        t->next_frame_ms = time_get_time_ms_cached();
     }
 
     if (delta.x > 0) {
@@ -330,280 +151,20 @@ void thing::move_delta (fpoint3d delta)
     t->move_to(t->at + delta);
 }
 
-void thing::set_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find thing tile %s", name.c_str());
-    }
-
-    t->tile = tile;
-    if (!t->first_tile) {
-        t->first_tile = tile;
-    }
-}
-
-void thing::set_left_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find left tile %s", name.c_str());
-    }
-
-    t->left_tile = tile;
-}
-
-void thing::set_right_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find right tile %s", name.c_str());
-    }
-
-    t->right_tile = tile;
-}
-
-void thing::set_top_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find top tile %s", name.c_str());
-    }
-
-    t->top_tile = tile;
-}
-
-void thing::set_bot_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find bot tile %s", name.c_str());
-    }
-
-    t->bot_tile = tile;
-}
-
-void thing::set_tl_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find tl tile %s", name.c_str());
-    }
-
-    t->tl_tile = tile;
-}
-
-void thing::set_tr_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find tr tile %s", name.c_str());
-    }
-
-    t->tr_tile = tile;
-}
-
-void thing::set_bl_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find bl tile %s", name.c_str());
-    }
-
-    t->bl_tile = tile;
-}
-
-void thing::set_br_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find br tile %s", name.c_str());
-    }
-
-    t->br_tile = tile;
-}
-
-void thing::set_node_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find node tile %s", name.c_str());
-    }
-
-    t->node_tile = tile;
-}
-
-void thing::set_l90_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find l90 tile %s", name.c_str());
-    }
-
-    t->l90_tile = tile;
-}
-
-void thing::set_l180_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find l180 tile %s", name.c_str());
-    }
-
-    t->l180_tile = tile;
-}
-
-void thing::set_l_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find l tile %s", name.c_str());
-    }
-
-    t->l_tile = tile;
-}
-
-void thing::set_l270_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find l270 tile %s", name.c_str());
-    }
-
-    t->l270_tile = tile;
-}
-
-void thing::set_t_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find t tile %s", name.c_str());
-    }
-
-    t->t_tile = tile;
-}
-
-void thing::set_t90_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find t90 tile %s", name.c_str());
-    }
-
-    t->t90_tile = tile;
-}
-
-void thing::set_t180_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find t180 tile %s", name.c_str());
-    }
-
-    t->t180_tile = tile;
-}
-
-void thing::set_t270_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find t270 tile %s", name.c_str());
-    }
-
-    t->t270_tile = tile;
-}
-
-void thing::set_x_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find x tile %s", name.c_str());
-    }
-
-    t->x_tile = tile;
-}
-
-void thing::set_horiz_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find horiz tile %s", name.c_str());
-    }
-
-    t->horiz_tile = tile;
-}
-
-void thing::set_vert_tilename (std::string name)
-{_
-    auto t = this;
-
-    tilep tile = tile_find(name);
-    if (!tile) {
-        ERR("failed to find vert tile %s", name.c_str());
-    }
-
-    t->vert_tile = tile;
-}
-
 /*
  * Find an existing thing.
  */
-thingp thing_find (std::string name)
+Thingp thing_find (uint32_t id)
 {_
-    if (name == "") {
-        DIE("no name for thing find");
-    }
-
-    auto result = game.all_things.find(name);
-
-    if (result == game.all_things.end()) {
+    auto result = game.state.map.all_things.find(id);
+    if (result == game.state.map.all_things.end()) {
         return (0);
     }
 
     return (result->second);
 }
 
-std::string thing::logname (void)
+std::string Thing::logname (void)
 {_
     auto t = this;
 
@@ -617,166 +178,18 @@ std::string thing::logname (void)
         loop = 0;
     }
 
-    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%s at (%g,%g,%g)",
-             t->name.c_str(),
-             t->at.x, t->at.y, t->at.z);
+    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u at (%g,%g)",
+             t->id, t->at.x, t->at.y);
 
     return (tmp[loop++]);
 }
 
-thing_tiles thing::get_left_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_left_tiles(t->tp));
-}
-
-thing_tiles thing::get_right_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_right_tiles(t->tp));
-}
-
-thing_tiles thing::get_top_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_top_tiles(t->tp));
-}
-
-thing_tiles thing::get_bot_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_bot_tiles(t->tp));
-}
-
-thing_tiles thing::get_tl_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_tl_tiles(t->tp));
-}
-
-thing_tiles thing::get_tr_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_tr_tiles(t->tp));
-}
-
-thing_tiles thing::get_br_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_br_tiles(t->tp));
-}
-
-thing_tiles thing::get_bl_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_bl_tiles(t->tp));
-}
-
-thing_tiles thing::get_horiz_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_horiz_tiles(t->tp));
-}
-
-thing_tiles thing::get_vert_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_vert_tiles(t->tp));
-}
-
-thing_tiles thing::get_l90_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_l90_tiles(t->tp));
-}
-
-thing_tiles thing::get_l180_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_l180_tiles(t->tp));
-}
-
-thing_tiles thing::get_l_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_l_tiles(t->tp));
-}
-
-thing_tiles thing::get_l270_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_l270_tiles(t->tp));
-}
-
-thing_tiles thing::get_t_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_t_tiles(t->tp));
-}
-
-thing_tiles thing::get_t90_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_t90_tiles(t->tp));
-}
-
-thing_tiles thing::get_t180_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_t180_tiles(t->tp));
-}
-
-thing_tiles thing::get_t270_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_t270_tiles(t->tp));
-}
-
-thing_tiles thing::get_x_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_x_tiles(t->tp));
-}
-
-void thing::set_is_dead (uint8_t val)
-{_
-    auto t = this;
-
-    t->is_dead = val;
-}
-
-thing_tiles thing::get_tiles (void)
-{_
-    auto t = this;
-
-    return (tp_get_tiles(t->tp));
-}
-
-void thing::dead (thingp killer, const char * , ...)
+void Thing::dead (Thingp killer, const char * , ...)
 {_
     ERR("thing dead TBD");
 }
 
-void thing::set_dir_none (void)
+void Thing::set_dir_none (void)
 {_
     auto t = this;
 
@@ -789,14 +202,14 @@ void thing::set_dir_none (void)
     }
 }
 
-uint8_t thing::is_dir_none (void)
+uint8_t Thing::is_dir_none (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_NONE);
 }
 
-void thing::set_dir_down (void)
+void Thing::set_dir_down (void)
 {_
     auto t = this;
 
@@ -809,14 +222,14 @@ void thing::set_dir_down (void)
     }
 }
 
-uint8_t thing::is_dir_down (void)
+uint8_t Thing::is_dir_down (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_DOWN);
 }
 
-void thing::set_dir_up (void)
+void Thing::set_dir_up (void)
 {_
     auto t = this;
 
@@ -829,14 +242,14 @@ void thing::set_dir_up (void)
     }
 }
 
-uint8_t thing::is_dir_up (void)
+uint8_t Thing::is_dir_up (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_UP);
 }
 
-void thing::set_dir_left (void)
+void Thing::set_dir_left (void)
 {_
     auto t = this;
 
@@ -849,14 +262,14 @@ void thing::set_dir_left (void)
     }
 }
 
-uint8_t thing::is_dir_left (void)
+uint8_t Thing::is_dir_left (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_LEFT);
 }
 
-void thing::set_dir_right (void)
+void Thing::set_dir_right (void)
 {_
     auto t = this;
 
@@ -869,14 +282,14 @@ void thing::set_dir_right (void)
     }
 }
 
-uint8_t thing::is_dir_right (void)
+uint8_t Thing::is_dir_right (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_RIGHT);
 }
 
-void thing::set_dir_tl (void)
+void Thing::set_dir_tl (void)
 {_
     auto t = this;
 
@@ -889,14 +302,14 @@ void thing::set_dir_tl (void)
     }
 }
 
-uint8_t thing::is_dir_tl (void)
+uint8_t Thing::is_dir_tl (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_TL);
 }
 
-void thing::set_dir_bl (void)
+void Thing::set_dir_bl (void)
 {_
     auto t = this;
 
@@ -909,14 +322,14 @@ void thing::set_dir_bl (void)
     }
 }
 
-uint8_t thing::is_dir_bl (void)
+uint8_t Thing::is_dir_bl (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_BL);
 }
 
-void thing::set_dir_tr (void)
+void Thing::set_dir_tr (void)
 {_
     auto t = this;
 
@@ -929,14 +342,14 @@ void thing::set_dir_tr (void)
     }
 }
 
-uint8_t thing::is_dir_tr (void)
+uint8_t Thing::is_dir_tr (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_TR);
 }
 
-void thing::set_dir_br (void)
+void Thing::set_dir_br (void)
 {_
     auto t = this;
 
@@ -949,14 +362,14 @@ void thing::set_dir_br (void)
     }
 }
 
-uint8_t thing::is_dir_br (void)
+uint8_t Thing::is_dir_br (void)
 {_
     auto t = this;
 
     return (t->dir == THING_DIR_BR);
 }
 
-void thing_dir (thingp t, double *dx, double *dy)
+void thing_dir (Thingp t, double *dx, double *dy)
 {_
     *dx = 0;
     *dy = 0;
