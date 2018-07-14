@@ -24,17 +24,11 @@ game_mouse_motion (int32_t tx, int32_t ty,
                    int32_t x, int32_t y,
                    int32_t wheelx, int32_t wheely)
 {_
-    int mouse_held = mouse_down &&
-        time_have_x_tenths_passed_since(1, mouse_down_when);
+//    int mouse_held = mouse_down &&
+//        time_have_x_tenths_passed_since(1, mouse_down_when);
 
-    py_call_void_module_ptr_iiiiiii("game",
-                                    "game_mouse_over",
-                                    0, 
-                                    tx, ty,
-                                    x, y,
-                                    wheelx, wheely,
-                                    mouse_held);
-    return (true);
+CON("TBD %s", __FUNCTION__);
+    return (false);
 }
 
 void
@@ -42,59 +36,23 @@ game_mouse_over (int32_t tx, int32_t ty,
                  int32_t x, int32_t y,
                  int32_t wheelx, int32_t wheely)
 {_
-    int mouse_held = mouse_down &&
-        time_have_x_tenths_passed_since(1, mouse_down_when);
+//    int mouse_held = mouse_down &&
+//        time_have_x_tenths_passed_since(1, mouse_down_when);
 
-    py_call_void_module_ptr_iiiiiii("game",
-                                    "game_mouse_over",
-                                    0, 
-                                    tx, ty,
-                                    x, y,
-                                    wheelx, wheely,
-                                    mouse_held);
+CON("TBD %s", __FUNCTION__);
 }
 
 uint8_t
 game_mouse_down (int32_t tx, int32_t ty,
                  int32_t x, int32_t y, uint32_t button)
 {_
-    int ret;
-
-    game_update_player_nexthop();
-
-    ret = py_call_int_module_ptr_iiiii("game",
-                                       "game_mouse_down",
-                                       0, 
-                                       tx, ty,
-                                       x, y,
-                                       button);
-    return (ret);
+CON("TBD %s", __FUNCTION__);
+    return (false);
 }
 
 uint8_t
 game_key_down (const struct SDL_KEYSYM *key)
 {_
-    int ret;
-
-    ret = py_call_int_module_ptr_ii("game",
-                                    "game_key_down",
-                                    0,
-                                    key->sym, key->mod);
-    return (ret);
-}
-
-void game_update_player_nexthop (point nexthop)
-{_
-    std::vector<point> nexthops = { nexthop };
-
-    game.player_mouse_path = nexthops;
-
-    game_update_player_nexthop();
-}
-
-void game_update_player_nexthop (void)
-{_
-    py_call_void_module_with_list_of_points("hooks",
-                                            "hook_update_player_nexthops", 
-                                            game.player_mouse_path);
+CON("TBD %s", __FUNCTION__);
+    return (false);
 }

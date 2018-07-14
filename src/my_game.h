@@ -76,7 +76,4 @@ game_mouse_down(int32_t tx, int32_t ty,
 extern uint8_t
 game_key_down(const struct SDL_KEYSYM *key);
 
-extern void game_update_player_nexthop(point nexthop);
-extern void game_update_player_nexthop(void);
-
 #endif

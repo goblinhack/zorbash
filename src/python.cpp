@@ -3007,7 +3007,7 @@ void python_init (char *argv[])
     }
 #endif
 
-    LOG("Calling PyImport_AppendInittab for zx module");
+    LOG("Calling PyImport_AppendInittab zx module");
     PyImport_AppendInittab("zx", python_m_y_module_create);
 
     LOG("Calling Py_Initialize");
