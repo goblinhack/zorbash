@@ -6061,11 +6061,6 @@ static void wid_display (widp w,
         }
     }
 
-    /*
-     * Widget tiles and textures.
-     */
-    wid_animate(w);
-
     tilep tile = wid_get_tile(w);
 
     auto width = wid_get_width(w);
