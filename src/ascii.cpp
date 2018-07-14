@@ -78,8 +78,8 @@ void ascii_set_scissors (point tl, point br)
 
 void pixel_to_ascii (int *x, int *y)
 {
-    *x = (int)(floor((double)(*x) / ((double)game.video_pix_width / ASCII_WIDTH)));
-    *y = (int)(floor((double)(*y) / ((double)game.video_pix_height / ASCII_HEIGHT)));
+    *x = (int)(floor((double)(*x) / ((double)game.config.video_pix_width / ASCII_WIDTH)));
+    *y = (int)(floor((double)(*y) / ((double)game.config.video_pix_height / ASCII_HEIGHT)));
 }
 
 int ascii_ok (int x, int y)
@@ -952,8 +952,8 @@ void ascii_blit (int no_color)
      * Get the mouse position to use. We use this to find the mouse tile that 
      * we are over.
      */
-    double tw = game.video_gl_width  / (double)ASCII_WIDTH;
-    double th = game.video_gl_height / (double)ASCII_HEIGHT;
+    double tw = game.config.video_gl_width  / (double)ASCII_WIDTH;
+    double th = game.config.video_gl_height / (double)ASCII_HEIGHT;
 
     /*
      * Screen walkers
@@ -982,10 +982,10 @@ void ascii_blit (int no_color)
             tile_br.x = tile_x + tw;
             tile_br.y = tile_y + th;
 
-            int mx1 = tile_tl.x * game.video_pix_width;
-            int my1 = tile_tl.y * game.video_pix_height;
-            int mx2 = tile_br.x * game.video_pix_width;
-            int my2 = tile_br.y * game.video_pix_height;
+            int mx1 = tile_tl.x * game.config.video_pix_width;
+            int my1 = tile_tl.y * game.config.video_pix_height;
+            int mx2 = tile_br.x * game.config.video_pix_width;
+            int my2 = tile_br.y * game.config.video_pix_height;
 
             if (!mouse_found) {
                 if ((mx1 < mouse_x) && 

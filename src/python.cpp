@@ -9,8 +9,6 @@
 #include "my_main.h"
 #include "my_python.h"
 #include "my_py_tp.h"
-#include "my_py_thing.h"
-#include "my_py_wid.h"
 #include "my_py_game.h"
 #include "my_python.h"
 #include "my_py_sdl.h"
@@ -19,13 +17,9 @@
 #include "my_string.h"
 #include "my_wid.h"
 #include "my_ascii.h"
-#include "my_wid_console.h"
 
 static PyObject *zx_mod;
 PyMODINIT_FUNC python_m_y_module_create(void);
-
-PY_PROTO(wid_mouse_hide)
-PY_BODY_INT_FN(wid_mouse_hide, value)
 
 void py_call_void_module_int (const char *module, const char *name, int val1)
 {_
@@ -1561,13 +1555,6 @@ static PyMethodDef python_c_METHODS[] = {
         METH_VARARGS,
         "exit game with error"},
 
-    PY_DECL(wid_mouse_hide)
-
-    {"wid_tiles_load",
-        (PyCFunction)wid_tiles_load_,
-        METH_VARARGS | METH_KEYWORDS,
-        "load a block of wid tiles"},
-
     {"text_size",
         (PyCFunction)text_size_,
         METH_VARARGS | METH_KEYWORDS,
@@ -1612,241 +1599,6 @@ static PyMethodDef python_c_METHODS[] = {
         (PyCFunction)tp_load_,
         METH_VARARGS | METH_KEYWORDS,
         "load a thing template"},
-
-    {"thing_new",
-        (PyCFunction)thing_new_python,
-        METH_VARARGS | METH_KEYWORDS,
-        "create a thing template"},
-
-    {"thing_set_tilename",
-        (PyCFunction)thing_set_tilename,
-        METH_VARARGS | METH_KEYWORDS,
-        "thing function"},
-
-    {"thing_destroyed",
-        (PyCFunction)thing_destroyed,
-        METH_VARARGS | METH_KEYWORDS,
-        "thing function"},
-
-    {"thing_push",
-        (PyCFunction)thing_push,
-        METH_VARARGS | METH_KEYWORDS,
-        "thing function"},
-
-    {"thing_pop",
-        (PyCFunction)thing_pop,
-        METH_VARARGS | METH_KEYWORDS,
-        "thing function"},
-
-    {"thing_move_to",
-        (PyCFunction)thing_move_to,
-        METH_VARARGS | METH_KEYWORDS,
-        "thing function"},
-
-    {"wid_new",
-        (PyCFunction)wid_new_,
-        METH_VARARGS | METH_KEYWORDS,
-        "create a wid"},
-
-    {"wid_destroy",
-        (PyCFunction)wid_destroy_,
-        METH_VARARGS | METH_KEYWORDS,
-        "destroy a wid"},
-
-    {"wid_new_scrollbar",
-        (PyCFunction)wid_new_scrollbar_,
-        METH_VARARGS | METH_KEYWORDS,
-        "create scrollbars"},
-
-    {"wid_set_tooltip",
-        (PyCFunction)wid_set_tooltip_,
-        METH_VARARGS | METH_KEYWORDS,
-        "set wid tooltip"},
-
-    {"wid_set_tiles",
-        (PyCFunction)wid_set_tiles_,
-        METH_VARARGS | METH_KEYWORDS,
-        "set wid tiles"},
-
-    {"wid_set_pos",
-        (PyCFunction)wid_set_pos_,
-        METH_VARARGS | METH_KEYWORDS,
-        "set bounds"},
-
-    {"wid_set_pos_pct",
-        (PyCFunction)wid_set_pos_pct_,
-        METH_VARARGS | METH_KEYWORDS,
-        "set bounds in percent"},
-
-    {"wid_set_text",
-        (PyCFunction)wid_set_text_,
-        METH_VARARGS | METH_KEYWORDS,
-        "set text"},
-
-    {"wid_set_color",
-        (PyCFunction)wid_set_color_,
-        METH_VARARGS | METH_KEYWORDS,
-        "set color"},
-
-    {"wid_set_tex",
-        (PyCFunction)wid_set_tex_,
-        METH_VARARGS | METH_KEYWORDS,
-        "set texture"},
-
-    {"wid_raise",
-        (PyCFunction)wid_set_raise_,
-        METH_VARARGS | METH_KEYWORDS,
-        "raise wid"},
-
-    {"wid_lower",
-        (PyCFunction)wid_set_lower_,
-        METH_VARARGS | METH_KEYWORDS,
-        "lower wid"},
-
-    {"wid_update",
-        (PyCFunction)wid_set_update_,
-        METH_VARARGS | METH_KEYWORDS,
-        "update wid"},
-
-    {"wid_set_cursor",
-        (PyCFunction)wid_set_cursor_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_cursor"},
-
-    {"wid_set_do_not_lower",
-        (PyCFunction)wid_set_do_not_lower_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_do_not_lower"},
-
-    {"wid_set_do_not_raise",
-        (PyCFunction)wid_set_do_not_raise_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_do_not_raise"},
-
-    {"wid_set_ignore_events",
-        (PyCFunction)wid_set_ignore_events_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_ignore_events"},
-
-    {"wid_set_focusable",
-        (PyCFunction)wid_set_focusable_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_focusable"},
-
-    {"wid_set_movable",
-        (PyCFunction)wid_set_movable_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_movable"},
-
-    {"wid_set_movable_bounded",
-        (PyCFunction)wid_set_movable_bounded_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_movable_bounded"},
-
-    {"wid_set_movable_no_user_scroll",
-        (PyCFunction)wid_set_movable_no_user_scroll_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_movable_no_user_scroll"},
-
-    {"wid_set_movable_horiz",
-        (PyCFunction)wid_set_movable_horiz_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_movable_horiz"},
-
-    {"wid_set_movable_vert",
-        (PyCFunction)wid_set_movable_vert_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_set_movable_vert"},
-
-    {"wid_get_size",
-        (PyCFunction)wid_get_size_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_get_size"},
-
-    {"wid_get_size_pct",
-        (PyCFunction)wid_get_size_pct_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_get_size_pct"},
-
-    {"wid_get_pos",
-        (PyCFunction)wid_get_pos_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_get_pos"},
-
-    {"wid_get_pos_pct",
-        (PyCFunction)wid_get_pos_pct_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_get_pos_pct"},
-
-    {"wid_get_parent",
-        (PyCFunction)wid_get_parent_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_get_parent"},
-
-    {"wid_get_top_parent",
-        (PyCFunction)wid_get_top_parent_,
-        METH_VARARGS | METH_KEYWORDS,
-        "wid_get_top_parent"},
-
-    WID_DECL(wid_move_to_horiz_vert_pct_in)
-    WID_DECL(wid_move_to_abs_centered_in)
-    WID_DECL(wid_move_to_centered_in)
-    WID_DECL(wid_move_delta_pct_in)
-    WID_DECL(wid_move_to_abs_in)
-    WID_DECL(wid_move_delta_in)
-    WID_DECL(wid_move_to_pct_centered_in)
-    WID_DECL(wid_move_to_abs_poffset_in)
-    WID_DECL(wid_move_to_pct_in)
-
-    WID_DECL(wid_move_delta)
-    WID_DECL(wid_move_delta_pct)
-    WID_DECL(wid_move_to_abs)
-    WID_DECL(wid_move_to_abs_centered)
-    WID_DECL(wid_move_to_pct)
-    WID_DECL(wid_move_to_pct_centered)
-    WID_DECL(wid_move_to_vert_pct_in)
-    WID_DECL(wid_move_to_horiz_pct_in)
-
-    WID_DECL(wid_move_to_vert_pct)
-    WID_DECL(wid_move_to_horiz_pct)
-
-    WID_DECL(wid_move_to_bottom)
-    WID_DECL(wid_move_to_left)
-    WID_DECL(wid_move_to_right)
-    WID_DECL(wid_move_to_top)
-    WID_DECL(wid_move_end)
-
-    WID_DECL(wid_destroy_in)
-    WID_DECL(wid_visible)
-    WID_DECL(wid_hide)
-    WID_DECL(wid_toggle_hidden)
-    WID_DECL(wid_mouse_hide)
-
-    WID_DECL(wid_set_on_key_down)
-    WID_DECL(wid_set_on_key_up)
-    WID_DECL(wid_set_on_joy_button)
-    WID_DECL(wid_set_on_m_down)
-    WID_DECL(wid_set_on_m_motion)
-    WID_DECL(wid_set_on_m_focus_b)
-    WID_DECL(wid_set_on_m_focus_e)
-    WID_DECL(wid_set_on_m_over_b)
-    WID_DECL(wid_set_on_m_over_e)
-    WID_DECL(wid_set_on_m_up)
-    WID_DECL(wid_set_on_destroy)
-    WID_DECL(wid_set_on_destroy_b)
-    WID_DECL(wid_set_on_tick)
-
-    WID_DECL(wid_update)
-    WID_DECL(wid_raise)
-    WID_DECL(wid_lower)
-    WID_DECL(wid_scroll_text)
-    WID_DECL(wid_set_focus)
-    WID_DECL(wid_set_shape_square)
-    WID_DECL(wid_set_shape_none)
-    WID_DECL(wid_set_shape_box)
-    WID_DECL(wid_set_active)
-    WID_DECL(wid_focus_lock)
-    WID_DECL(wid_animate)
 
     TP_SET_DECL(tile)
     TP_SET_DECL(left_tile)

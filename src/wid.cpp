@@ -5311,9 +5311,7 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
 
     w = wid_mouse_down_handler(x, y);
     if (!w) {
-        if (game_mouse_down(game.player_mouse_focus_tile_at.x,
-                            game.player_mouse_focus_tile_at.y,
-                            x, y, button)) {
+        if (game_mouse_down(x, y, button)) {
             return;
         }
         return;
@@ -6357,10 +6355,10 @@ void wid_gc_all (void)
 void wid_tick_all (void)
 {_
 //    wid_time = time_get_time_ms_cached();
-    if (!game.sdl_delay) {
+    if (!game.config.sdl_delay) {
         wid_time += 100/1;
     } else {
-        wid_time += 100/game.sdl_delay;
+        wid_time += 100/game.config.sdl_delay;
     }
 
     widp w;
@@ -6485,10 +6483,10 @@ void wid_display_all (void)
     /*
      * FPS counter.
      */
-    if (game.fps_counter) {
+    if (game.config.fps_counter) {
         ascii_putf(0, 1, 
                    GREEN, ASCII_UI_BOX_INACTIVE_MID_COLOR, 
-                   L"%u FPS", game.fps_count);
+                   L"%u FPS", game.state.fps_count);
     }
 
     ascii_display();
@@ -6505,7 +6503,7 @@ void wid_display_all (void)
     blit_init();
     glcolor(WHITE);
     blit(fbo_tex_id_wid, 0.0, 1.0, 1.0, 0.0, 0, 0, 
-         game.video_gl_width, game.video_gl_height);
+         game.config.video_gl_width, game.config.video_gl_height);
     blit_flush();
 
     if (inverted_gfx) {
@@ -6641,7 +6639,7 @@ static void wid_move_enqueue (widp w,
          * If this is not a widget with a thing, then just zoom it to the
          * destination. We don't need queues.
          */
-        thingp t = wid_get_thing(w);
+        Thingp t = wid_get_thing(w);
         if (!t) {
             w->moving_end.x = moving_end_x;
             w->moving_end.y = moving_end_y;
@@ -6651,7 +6649,7 @@ static void wid_move_enqueue (widp w,
         }
 
         if (w->moving == WID_MAX_MOVE_QUEUE) {
-            thingp t = wid_get_thing(w);
+            Thingp t = wid_get_thing(w);
 
             ERR("too many moves queued up for widget %s",
                 wid_logname(w));

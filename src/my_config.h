@@ -6,13 +6,8 @@
 
 #pragma once
 
-#define ENABLE_MATH_ESTIMATES      // Enable estimated versions of sin/cos/...
 #define ENABLE_ASSERT              // DIE on errors
-#define ENABLE_DEBUG               // More debugs
-#undef  ENABLE_LEAKCHECK           // Memory leak check
 #undef  ENABLE_PTRCHECK            // Check validity of pointers too
-#undef  ENABLE_PTRCHECK_HISTORY    // Slower
-#undef  ENABLE_WID_DEBUG           // Widget debug
 #undef  ENABLE_CRASH_HANDLER       // Intercept SEGV
 #undef  ENABLE_GENERATE_TTF        // Edit .RUNME, look for ENABLE_GENERATE_TTF
 #define ENABLE_INVERTED_GFX        // For vision impaired
@@ -32,7 +27,7 @@
  */
 #define MAP_WIDTH                   256
 #define MAP_HEIGHT                  256
-#define MAP_DEPTH                   16
+#define MAP_DEPTH                   1
 
 #define TILES_ACROSS                40 // per screen
 #define TILES_DOWN                  24
@@ -42,8 +37,6 @@
 
 #define TILE_WIDTH                  32
 #define TILE_HEIGHT                 32
-
-#define ONE_PIXEL (1.0 / TILE_WIDTH)
 
 /*
  * Console

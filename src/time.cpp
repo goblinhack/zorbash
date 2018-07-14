@@ -107,15 +107,6 @@ uint8_t time_have_x_tenths_passed_since (uint32_t val, uint32_t since)
     return ((int32_t)(delay / 100) >= (int32_t)val);
 }
 
-uint8_t time_have_x_ticks_passed_since (uint32_t val, uint32_t since)
-{_
-    if (game.tick > since + val) {
-        return (true);
-    } else {
-        return (false);
-    }
-}
-
 uint8_t time_have_x_secs_passed_since (uint32_t val, uint32_t since)
 {_
     time_get_time_ms();
@@ -126,41 +117,4 @@ uint8_t time_have_x_secs_passed_since (uint32_t val, uint32_t since)
     int32_t delay = time_now - since;
 
     return ((int32_t)(delay / ONESEC) >= (int32_t)val);
-}
-
-const char *unixtime2str (time_t *time)
-{_
-    static char buf_[MAXSTR];
-
-    const struct tm *tm = localtime(time);
-
-    *buf_ = '\0';
-
-    (void) strftime(buf_, sizeof(buf_), "%a, %d %b %y %H:%M:%S %z", tm);
-
-    return (buf_);
-}
-
-long long
-timeval_diff (struct timeval *difference,
-              struct timeval *end_time,
-              struct timeval *start_time)
-{_
-    struct timeval temp_diff;
-
-    if (!difference) {
-        difference = &temp_diff;
-    }
-
-    difference->tv_sec =end_time->tv_sec -start_time->tv_sec ;
-    difference->tv_usec=end_time->tv_usec-start_time->tv_usec;
-
-    /* Using while instead of if below makes the code slightly more robust. */
-
-    while (difference->tv_usec < 0) {
-        difference->tv_usec += 1000000;
-        difference->tv_sec -=1;
-    }
-
-    return (1000000LL * difference->tv_sec + difference->tv_usec);
 }

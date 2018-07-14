@@ -214,9 +214,9 @@ uint8_t sdl_init (void)
     /*
      * If we have a saved setting, use that.
      */
-    if (game.video_pix_width && game.video_pix_height) {
-        video_width = game.video_pix_width;
-        video_height = game.video_pix_height;
+    if (game.config.video_pix_width && game.config.video_pix_height) {
+        video_width = game.config.video_pix_width;
+        video_height = game.config.video_pix_height;
     } else {
         /*
          * Else guess.
@@ -224,18 +224,18 @@ uint8_t sdl_init (void)
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
 
-        game.video_pix_width = mode.w;
-        game.video_pix_height = mode.h;
+        game.config.video_pix_width = mode.w;
+        game.config.video_pix_height = mode.h;
 
-        video_width = game.video_pix_width;
-        video_height = game.video_pix_height;
+        video_width = game.config.video_pix_width;
+        video_height = game.config.video_pix_height;
     }
 
-    game.video_gl_width = 1.0;
-    game.video_gl_height = 1.0;
+    game.config.video_gl_width = 1.0;
+    game.config.video_gl_height = 1.0;
 
     LOG("- SDL video   : %dx%d (chosen or from saved file)",
-        game.video_pix_width, game.video_pix_height);
+        game.config.video_pix_width, game.config.video_pix_height);
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
@@ -255,7 +255,7 @@ uint8_t sdl_init (void)
 
     video_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS;
 
-    if (game.full_screen) {
+    if (game.config.full_screen) {
         video_flags |= SDL_WINDOW_FULLSCREEN;
     }
 
@@ -274,8 +274,8 @@ uint8_t sdl_init (void)
                             video_height,
                             video_flags);
     if (!window) {
-        game.video_pix_width = 0;
-        game.video_pix_height = 0;
+        game.config.video_pix_width = 0;
+        game.config.video_pix_height = 0;
 
         SDL_MSG_BOX("Couldn't set windowed display %ux%u: %s",
                     video_width, video_height,
@@ -288,17 +288,17 @@ uint8_t sdl_init (void)
 
     if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
         SDL_GL_GetDrawableSize(window,
-                               &game.drawable_gl_width,
-                               &game.drawable_gl_height);
+                               &game.config.drawable_gl_width,
+                               &game.config.drawable_gl_height);
     } else {
         SDL_GetWindowSize(window,
-                          &game.drawable_gl_width,
-                          &game.drawable_gl_height);
+                          &game.config.drawable_gl_width,
+                          &game.config.drawable_gl_height);
     }
 
     LOG("Calling SDL_GL_CreateContext (drawable size %dx%d)...", 
-        game.drawable_gl_width,
-        game.drawable_gl_height);
+        game.config.drawable_gl_width,
+        game.config.drawable_gl_height);
 
     context = SDL_GL_CreateContext(window);
 
@@ -309,8 +309,8 @@ uint8_t sdl_init (void)
     }
 
     LOG("Calling SDL_GL_CreateContext (drawable size %dx%d) done", 
-        game.drawable_gl_width,
-        game.drawable_gl_height);
+        game.config.drawable_gl_width,
+        game.config.drawable_gl_height);
 
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
@@ -663,8 +663,8 @@ void sdl_mouse_center (void)
 {_
     int x, y;
 
-    x = game.video_pix_width / 2;
-    y = game.video_pix_height / 2;
+    x = game.config.video_pix_width / 2;
+    y = game.config.video_pix_height / 2;
 
     sdl_mouse_warp(x, y);
 }
@@ -675,13 +675,13 @@ void sdl_mouse_warp (int32_t x, int32_t y)
 
     if (x <= 0) {
         x = border;
-    } else if (x >= game.video_pix_width - border) {
-        x = game.video_pix_width - border;
+    } else if (x >= game.config.video_pix_width - border) {
+        x = game.config.video_pix_width - border;
     }
     if (y <= 0) {
         y = border;
-    } else if (y >= game.video_pix_height - border) {
-        y = game.video_pix_height - border;
+    } else if (y >= game.config.video_pix_height - border) {
+        y = game.config.video_pix_height - border;
     }
 
     SDL_WarpMouseInWindow(window, x, y);
@@ -807,12 +807,12 @@ static void sdl_tick (void)
             y = 0;
         }
 
-        if (x > game.video_pix_width - 1) {
-            x = game.video_pix_width - 1;
+        if (x > game.config.video_pix_width - 1) {
+            x = game.config.video_pix_width - 1;
         }
 
-        if (y > game.video_pix_height - 1) {
-            y = game.video_pix_height - 1;
+        if (y > game.config.video_pix_height - 1) {
+            y = game.config.video_pix_height - 1;
         }
 
         if (wid_mouse_visible) {
@@ -844,12 +844,12 @@ uint8_t fps_enable (tokens_t *tokens, void *context)
     char *s = tokens->args[2];
 
     if (!s || (*s == '\0')) {
-        game.fps_counter = true;
+        game.config.fps_counter = true;
     } else {
-        game.fps_counter = strtol(s, 0, 10) ? 1 : 0;
+        game.config.fps_counter = strtol(s, 0, 10) ? 1 : 0;
     }
 
-    DBG("FPS mode set to %u", game.fps_counter);
+    DBG("FPS mode set to %u", game.config.fps_counter);
 
     return (true);
 }
@@ -904,7 +904,7 @@ void sdl_loop (void)
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
      */
 
-    if (game.display_sync) {
+    if (game.config.display_sync) {
         SDL_GL_SetSwapInterval(1);
     } else {
         SDL_GL_SetSwapInterval(0);
@@ -994,18 +994,18 @@ void sdl_loop (void)
 
                 timestamp_then2 = timestamp_now;
 
-                if (game.fps_counter) {
+                if (game.config.fps_counter) {
                     /*
                      * Update FPS counter.
                      */
-                    game.fps_count = frames;
+                    game.state.fps_count = frames;
 
                     frames = 0;
                 }
             }
         }
 
-        SDL_Delay(game.sdl_delay);
+        SDL_Delay(game.config.sdl_delay);
 
         time_get_time_ms();
 
@@ -1035,8 +1035,8 @@ void sdl_screenshot (void)
 static void sdl_screenshot_ (void)
 {_
     FILE *fp;
-    int w = game.video_pix_width;
-    int h = game.video_pix_height;
+    int w = game.config.video_pix_width;
+    int h = game.config.video_pix_height;
 
     static int count;
     char *filename = dynprintf("screenshot.%d.ppm", ++count);

@@ -26,15 +26,11 @@ GAME_OBJECTS=				\
     $(OBJDIR)/pixel.o 			\
     $(OBJDIR)/point.o 			\
     $(OBJDIR)/ptrcheck.o 		\
-    $(OBJDIR)/py_dmap.o 		\
     $(OBJDIR)/py_sdl.o 			\
     $(OBJDIR)/py_tex.o 			\
-    $(OBJDIR)/py_thing.o 		\
     $(OBJDIR)/py_tile.o 		\
     $(OBJDIR)/py_tp.o 			\
     $(OBJDIR)/py_ttf.o 			\
-    $(OBJDIR)/py_wid.o 			\
-    $(OBJDIR)/py_wid_tiles.o 		\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/ramdisk_read.o 		\
     $(OBJDIR)/sdl.o 			\
@@ -54,7 +50,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ttf.o 			\
     $(OBJDIR)/util.o 			\
     $(OBJDIR)/wid.o 			\
-    $(OBJDIR)/wid_anim.o 		\
     $(OBJDIR)/wid_console.o 		\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/map_jigsaw.o 		\
