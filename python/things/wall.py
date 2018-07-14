@@ -1,10 +1,6 @@
 import tp
 
 
-def thing_init(t):
-    return
-
-
 def wall_init(name, short_name, tiles=[]):
     x = tp.Tp(name, is_wall = True)
 

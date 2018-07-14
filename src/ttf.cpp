@@ -193,7 +193,7 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, font *f,
     SDL_Surface *g1 =
             TTF_RenderUNICODE_Blended(ttf, text, f->foreground);
     if (!g1) {
-        LOG("Error TTF_RenderUNICODE_Blended failed for font glyph %u in %s, err: %s", 
+        DBG("Error TTF_RenderUNICODE_Blended failed for font glyph %u in %s, err: %s", 
             c, name, TTF_GetError());
         return;
     }

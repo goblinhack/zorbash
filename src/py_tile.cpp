@@ -47,7 +47,7 @@ PyObject *tile_load_arr_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     memset(arr, 0, sizeof(arr));
 
-    LOG("Python: tile_load_arr(tex_name=%s, width=%d, height=%d, ...)", tex_name, width, height);
+    DBG("Python: tile_load_arr(tex_name=%s, width=%d, height=%d, ...)", tex_name, width, height);
 
     for (i=0; i<numLines; i++){
         PyObject * strObj;

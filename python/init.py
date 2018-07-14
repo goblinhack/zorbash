@@ -35,18 +35,6 @@ def load_one_plugin(filename):
     elif file_ext.lower() == '.pyc':
         py_mod = imp.load_compiled(mod_name, filename)
 
-    #
-    # Make aliases for imports so we can reference their functions
-    #
-    if basename(filename) == "hooks.py":
-        global hooks
-        hooks = py_mod
-
-    if basename(filename) == "game.py":
-        global game
-        game = py_mod
-
-
 def load_all_plugins():
     plug_path = os.path.normcase(os.path.join(dirname(__file__), ""))
     zx.log("Init module, load all plugins from " + plug_path)
@@ -58,43 +46,13 @@ def load_plugin(plugin):
     for filename in find_plugins(os.getcwd(), plugin):
         load_one_plugin(filename)
 
-    for filename in find_plugins(os.environ["APPDATA"], plugin):
-        load_one_plugin(filename)
-
-
 def init1():
 
     zx.con("Init module: running in: {}".format(os.getcwd()))
 
-    if "APPDATA" not in os.environ:
-        os.environ['APPDATA'] = "appdata"
-
-    if not os.path.isdir(os.environ['APPDATA']):
-        os.mkdir(os.environ['APPDATA'])
-
-    os.environ['APPDATA'] = os.path.normcase(
-            os.path.join(os.environ["APPDATA"], "zorbash"))
-
-    if not os.path.isdir(os.environ['APPDATA']):
-        os.mkdir(os.environ['APPDATA'])
-
-    sys.stdout = open(os.path.normcase(
-            os.path.join(os.environ["APPDATA"], "stdout.txt")), "a")
-
-    sys.stderr = open(os.path.normcase(
-            os.path.join(os.environ["APPDATA"], "stderr.txt")), "a")
-
-
 def init2():
 
     load_all_plugins()
-
-    (tile_width, tile_height) = zx.tile_size(name="door1")
-    zx.game_tile_width = int(tile_width)
-    zx.game_tile_height = int(tile_height)
-
-    game.game_init()
-    game.game_new_or_restore()
 
     zx.tip2("Welcome mortal, to Zorbash version " + zx.VERSION)
     console.hello()

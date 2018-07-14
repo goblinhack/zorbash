@@ -199,8 +199,11 @@ uint8_t sdl_init (void)
 
     LOG("SDL version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
 
-    sdl_init_joystick();
-    sdl_init_rumble();
+    int x = 0;
+    if (x) {
+        sdl_init_joystick();
+        sdl_init_rumble();
+    }
 
     LOG("SDL init video:");
 
@@ -971,8 +974,6 @@ void sdl_loop (void)
             if (!sdl_main_loop_running) {
                 break;
             }
-
-            py_call_void_module_void("hooks", "hook_game_tick");
         }
 
         glcolor(WHITE);
