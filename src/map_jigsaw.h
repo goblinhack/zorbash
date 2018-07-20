@@ -21,14 +21,14 @@
  * one so we can have a small border and center the tiles.
  */
 #define MAP_JIGSAW_PIECES_ACROSS    5
-#define MAP_JIGSAW_PIECES_DOWN      2
+#define MAP_JIGSAW_PIECES_DOWN      5
 
 /*
  * The map is made up of jigsaw pieces that are joined togethere. This is the 
  * size of one piece in tiles.
  */
-#define JIGPIECE_WIDTH              13
-#define JIGPIECE_HEIGHT             13
+#define JIGPIECE_WIDTH              9
+#define JIGPIECE_HEIGHT             10
 
 /*
  * A single jigpiece used to build the level.
@@ -97,7 +97,7 @@ enum {
     MAP_ROCK            = 'r',
     MAP_WALL            = 'x',
     MAP_CORRIDOR        = ',',
-    MAP_HARD_WALL   = '+',
+    MAP_HARD_WALL       = '+',
     MAP_MONST           = 'm',
     MAP_MONST_OR_MOB    = 'M',
     MAP_TRAP            = 't',

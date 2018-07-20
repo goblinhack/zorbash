@@ -41,6 +41,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_sdl.o 			\
     $(OBJDIR)/py_tex.o 			\
+    $(OBJDIR)/py_map.o 			\
     $(OBJDIR)/py_tile.o 		\
     $(OBJDIR)/py_tp.o 			\
     $(OBJDIR)/py_ttf.o 			\
@@ -65,7 +66,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid.o 			\
     $(OBJDIR)/wid_console.o 		\
     $(OBJDIR)/wid_tiles.o 		\
-    $(OBJDIR)/map_jigsaw.o 		\
 #
 # compile
 #
@@ -1060,70 +1060,6 @@ all: $(TARGET_GAME)
 .o/main.o: my_thing_tile.h my_ptrcheck.h my_tile.h my_config.h my_tex.h
 .o/main.o: my_enum.h my_size.h my_wid_tiles.h my_wid_console.h my_ttf.h
 .o/main.o: my_font.h my_dir.h my_file.h my_ramdisk.h my_term.h
-.o/map_jigsaw.o: /usr/include/time.h /usr/include/_types.h
-.o/map_jigsaw.o: /usr/include/sys/_types.h /usr/include/sys/cdefs.h
-.o/map_jigsaw.o: /usr/include/sys/_symbol_aliasing.h
-.o/map_jigsaw.o: /usr/include/sys/_posix_availability.h
-.o/map_jigsaw.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
-.o/map_jigsaw.o: /usr/include/sys/_pthread/_pthread_types.h
-.o/map_jigsaw.o: /usr/include/Availability.h
-.o/map_jigsaw.o: /usr/include/AvailabilityInternal.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_clock_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_null.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_size_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_time_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_timespec.h /usr/include/unistd.h
-.o/map_jigsaw.o: /usr/include/sys/unistd.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_posix_vdisable.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_seek_set.h
-.o/map_jigsaw.o: /usr/include/_types/_uint64_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_ssize_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_uid_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_gid_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_intptr_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_off_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_pid_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_useconds_t.h
-.o/map_jigsaw.o: /usr/include/sys/select.h /usr/include/sys/appleapiopts.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_fd_def.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_timeval.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_suseconds_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_sigset_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_fd_setsize.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_fd_set.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_fd_clr.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_fd_isset.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_fd_zero.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_fd_copy.h
-.o/map_jigsaw.o: /usr/include/sys/_select.h /usr/include/sys/_types/_dev_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_mode_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_uuid_t.h /usr/include/gethostuuid.h
-.o/map_jigsaw.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_int8_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_int16_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_int32_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_int64_t.h
-.o/map_jigsaw.o: /usr/include/_types/_uint8_t.h
-.o/map_jigsaw.o: /usr/include/_types/_uint16_t.h
-.o/map_jigsaw.o: /usr/include/_types/_uint32_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_uintptr_t.h
-.o/map_jigsaw.o: /usr/include/_types/_intmax_t.h
-.o/map_jigsaw.o: /usr/include/_types/_uintmax_t.h my_callstack.h
-.o/map_jigsaw.o: /usr/include/stdio.h /usr/include/sys/_types/_va_list.h
-.o/map_jigsaw.o: /usr/include/sys/stdio.h /usr/include/secure/_stdio.h
-.o/map_jigsaw.o: /usr/include/secure/_common.h map_jigsaw.h my_bits.h
-.o/map_jigsaw.o: my_color.h my_dmap.h my_config.h my_point.h my_math_util.h
-.o/map_jigsaw.o: my_thing.h my_thing_template.h my_thing_tile.h my_ptrcheck.h
-.o/map_jigsaw.o: my_tile.h my_tex.h my_time_util.h /usr/include/assert.h
-.o/map_jigsaw.o: /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h
-.o/map_jigsaw.o: my_sdl.h my_command.h my_token.h my_string.h
-.o/map_jigsaw.o: /usr/include/wchar.h /usr/include/sys/_types/_mbstate_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_ct_rune_t.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_rune_t.h /usr/include/_wctype.h
-.o/map_jigsaw.o: /usr/include/sys/_types/_wint_t.h
-.o/map_jigsaw.o: /usr/include/_types/_wctype_t.h /usr/include/ctype.h
-.o/map_jigsaw.o: /usr/include/runetype.h my_slre.h
 .o/pcg_basic.o: my_pcg_basic.h /usr/include/inttypes.h
 .o/pcg_basic.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/pcg_basic.o: /usr/include/sys/_posix_availability.h
@@ -1226,6 +1162,32 @@ all: $(TARGET_GAME)
 .o/ptrcheck.o: /usr/include/ctype.h /usr/include/runetype.h
 .o/ptrcheck.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h my_tile.h
 .o/ptrcheck.o: my_config.h my_point.h my_math_util.h my_color.h my_tex.h
+.o/py_map.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
+.o/py_map.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
+.o/py_map.o: /usr/include/sys/_posix_availability.h
+.o/py_map.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
+.o/py_map.o: /usr/include/_types.h /usr/include/sys/_types.h
+.o/py_map.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/py_map.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/py_map.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/py_map.o: /usr/include/sys/_types/_int8_t.h
+.o/py_map.o: /usr/include/sys/_types/_int16_t.h
+.o/py_map.o: /usr/include/sys/_types/_int32_t.h
+.o/py_map.o: /usr/include/sys/_types/_int64_t.h
+.o/py_map.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
+.o/py_map.o: /usr/include/_types/_uint32_t.h /usr/include/_types/_uint64_t.h
+.o/py_map.o: /usr/include/sys/_types/_intptr_t.h
+.o/py_map.o: /usr/include/sys/_types/_uintptr_t.h
+.o/py_map.o: /usr/include/_types/_intmax_t.h /usr/include/_types/_uintmax_t.h
+.o/py_map.o: my_callstack.h /usr/include/stdio.h
+.o/py_map.o: /usr/include/sys/_types/_va_list.h
+.o/py_map.o: /usr/include/sys/_types/_size_t.h
+.o/py_map.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/py_map.o: /usr/include/sys/_types/_off_t.h
+.o/py_map.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
+.o/py_map.o: /usr/include/secure/_common.h my_python.h my_point.h
+.o/py_map.o: my_math_util.h my_tile.h my_config.h my_color.h my_tex.h
+.o/py_map.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h
 .o/py_sdl.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
 .o/py_sdl.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/py_sdl.o: /usr/include/sys/_posix_availability.h

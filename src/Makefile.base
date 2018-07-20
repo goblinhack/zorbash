@@ -28,6 +28,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_sdl.o 			\
     $(OBJDIR)/py_tex.o 			\
+    $(OBJDIR)/py_map.o 			\
     $(OBJDIR)/py_tile.o 		\
     $(OBJDIR)/py_tp.o 			\
     $(OBJDIR)/py_ttf.o 			\
@@ -52,7 +53,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid.o 			\
     $(OBJDIR)/wid_console.o 		\
     $(OBJDIR)/wid_tiles.o 		\
-    $(OBJDIR)/map_jigsaw.o 		\
     
 #
 # compile
