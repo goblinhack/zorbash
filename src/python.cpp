@@ -1600,6 +1600,11 @@ static PyMethodDef python_c_METHODS[] = {
         METH_VARARGS | METH_KEYWORDS,
         "load a thing template"},
 
+    {"map_load_chunk",
+        (PyCFunction)map_load_chunk_,
+        METH_VARARGS | METH_KEYWORDS,
+        "load a chunk of map fragments"},
+
     TP_SET_DECL(tile)
     TP_SET_DECL(left_tile)
     TP_SET_DECL(right_tile)

@@ -910,9 +910,7 @@ def init_tiles():
             "",
     ]
 
-    zx.tile_load_arr(tex_name="tiles",
-                     width=32, height=32,
-                     arr=tiles)
+    zx.tile_load_arr(tex_name="tiles", width=32, height=32, arr=tiles)
 
 init_text()
 init_tiles()

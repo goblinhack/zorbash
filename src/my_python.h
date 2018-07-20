@@ -95,8 +95,7 @@ PyObject *tex_pixel_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_get_size_(PyObject *obj, PyObject *args, PyObject *keywds);
-
-PyObject *wid_tiles_load_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *map_load_chunk_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define PY_PROTO(__fn__)                                                    \
 PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds);

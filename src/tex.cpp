@@ -81,7 +81,7 @@ static unsigned char *load_raw_image (std::string filename,
 
     ramdisk_data = ramdisk_load(filename.c_str(), &len);
     if (!ramdisk_data) {
-        DIE("could not read file, %s", filename.c_str());
+        DIE("could not read file, '%s'", filename.c_str());
     }
 
     if (filename.find(".tga")) {
@@ -97,14 +97,14 @@ static unsigned char *load_raw_image (std::string filename,
         image_data = stbi_png_load_from_memory(ramdisk_data,
                                                len, x, y, comp, 0);
     } else {
-        DIE("unknown suffix for image, %s", filename.c_str());
+        DIE("unknown suffix for image, '%s'", filename.c_str());
     }
 
     if (!image_data) {
-        DIE("could not read memory for file, %s", filename.c_str());
+        DIE("could not read memory for file, '%s'", filename.c_str());
     }
 
-    DBG("Load %s, %ux%u", filename.c_str(), *x, *y);
+    DBG("Load '%s', %ux%u", filename.c_str(), *x, *y);
 
     myfree(ramdisk_data);
 
@@ -125,7 +125,7 @@ static SDL_Surface *load_image (std::string filename)
 
     image_data = load_raw_image(filename, &x, &y, &comp);
     if (!image_data) {
-        DIE("could not read memory for file, %s", filename.c_str());
+        DIE("could not read memory for file, '%s'", filename.c_str());
     }
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -188,7 +188,7 @@ texp tex_load (std::string file, std::string name, int mode)
             DIE("no file for tex");
             return (0);
         } else {
-            DIE("no file for tex loading %s", name.c_str());
+            DIE("no file for tex loading '%s'", name.c_str());
             return (0);
         }
     }
@@ -197,7 +197,7 @@ texp tex_load (std::string file, std::string name, int mode)
     surface = load_image(file);
 
     if (!surface) {
-        DIE("could not make surface from file, %s", file.c_str());
+        DIE("could not make surface from file '%s'", file.c_str());
     }
 
     t = tex_from_surface(surface, file, name, mode);
@@ -233,7 +233,7 @@ texp tex_from_surface (SDL_Surface *surface,
     texp t;
 
     if (!surface) {
-        DIE("could not make surface from file, %s", file.c_str());
+        DIE("could not make surface from file, '%s'", file.c_str());
     }
 
     /*
@@ -254,7 +254,7 @@ texp tex_from_surface (SDL_Surface *surface,
         */
     }
 
-    DBG("Texture: %s, %dx%d", file.c_str(), surface->w, surface->h);
+    DBG("Texture: '%s', %dx%d", file.c_str(), surface->w, surface->h);
 
     /*
      * Get the number of channels in the SDL surface
@@ -281,11 +281,11 @@ texp tex_from_surface (SDL_Surface *surface,
 #ifdef GL_BGR
             textureFormat = GL_BGR;
 #else
-            DIE("%s Need support for GL_BGR", file);
+            DIE("'%s' need support for GL_BGR", file);
 #endif
         }
     } else {
-        DIE("%s is not truecolor, need %d bytes per pixel", file.c_str(),
+        DIE("'%s' is not truecolor, need %d bytes per pixel", file.c_str(),
             channels);
     }
 
@@ -343,7 +343,7 @@ texp tex_from_surface (SDL_Surface *surface,
     auto result = textures.insert(std::make_pair(name, t));
 
     if (result.second == false) {
-        DIE("tex insert name [%s] failed", name.c_str());
+        DIE("tex insert name '%s' failed", name.c_str());
     }
 
     t->width = surface->w;
@@ -422,7 +422,7 @@ texp string2tex (const char **s)
 
     auto result = textures.find(tmp);
     if (result == textures.end()) {
-        DIE("unknown tex [%s]", tmp);
+        DIE("unknown tex '%s'", tmp);
     }
 
     return (result->second);
@@ -449,12 +449,12 @@ texp string2tex (std::string &s, int *len)
     }
 
     if (iter == s.end()) {
-        DIE("unknown tex [%s]", out.c_str());
+        DIE("unknown tex '%s'", out.c_str());
     }
 
     auto result = textures.find(out);
     if (result == textures.end()) {
-        DIE("unknown tex [%s]", out.c_str());
+        DIE("unknown tex '%s'", out.c_str());
     }
 
     return (result->second);
