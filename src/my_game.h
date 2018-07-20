@@ -11,46 +11,6 @@
 #include "my_dmap.h"
 #include "my_thing.h"
 
-#if 0
-typedef std::map< fpoint3d, Thingp > display_sorted_things;
-
-struct game_ {
-    std::vector<Thingp> the_map[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
-
-    double tile_width;
-    double tile_height;
-
-    /*
-     * Map co-ordinates, not screen co-ords.
-     */
-    point player_tile_at;
-    point player_mouse_focus_tile_at;
-    std::vector<point> player_mouse_path;
-
-    tilep highlighted_tile = {};
-    tilep selected_tile = {};
-
-    display_sorted_things display_sorted_all_things;
-    things all_things;
-    Thingp player;
-
-    uint32_t tick;
-
-
-    int fps_counter = false;
-    int fps_count = true;
-
-    int display_sync = true;
-    int full_screen = false;
-
-    /*
-     * Where we're looking in the map
-     */
-    fpoint map_at;
-    fpoint map_wanted_at;
-};
-#endif
-
 class Map {
 public:
     Things             all_things;

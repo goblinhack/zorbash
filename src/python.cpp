@@ -1176,6 +1176,42 @@ err_out:
     return (outstr);
 }
 
+std::string py_obj_to_string (const PyObject *py_str)
+{_
+    PyObject *py_encstr;
+    std::string outstr;
+    char *str;
+
+    py_encstr = 0;
+    str = 0;
+
+    if (!PyUnicode_Check((PyObject *)py_str)) {
+        ERR("Object is a %s, not a string object.",
+            Py_TYPE((PyObject *)py_str)->tp_name);
+        goto err_out;
+    }
+
+    py_encstr = PyUnicode_AsEncodedString((PyObject *)py_str, "utf-8", 0);
+    if (!py_encstr) {
+        goto err_out;
+    }
+
+    str = PyBytes_AS_STRING(py_encstr);
+    if (!str) {
+        goto err_out;
+    }
+
+    outstr = std::string(str);
+
+err_out:
+
+    if (py_encstr) {
+        Py_XDECREF(py_encstr);
+    }
+
+    return (outstr);
+}
+
 int py_obj_to_int (PyObject *py_obj)
 {_
     int val;
@@ -1600,10 +1636,10 @@ static PyMethodDef python_c_METHODS[] = {
         METH_VARARGS | METH_KEYWORDS,
         "load a thing template"},
 
-    {"map_load_chunk",
-        (PyCFunction)map_load_chunk_,
+    {"map_load_room",
+        (PyCFunction)map_load_room_,
         METH_VARARGS | METH_KEYWORDS,
-        "load a chunk of map fragments"},
+        "load a room"},
 
     TP_SET_DECL(tile)
     TP_SET_DECL(left_tile)

@@ -41,7 +41,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_sdl.o 			\
     $(OBJDIR)/py_tex.o 			\
-    $(OBJDIR)/py_map.o 			\
+    $(OBJDIR)/py_room.o 		\
     $(OBJDIR)/py_tile.o 		\
     $(OBJDIR)/py_tp.o 			\
     $(OBJDIR)/py_ttf.o 			\
@@ -1162,32 +1162,32 @@ all: $(TARGET_GAME)
 .o/ptrcheck.o: /usr/include/ctype.h /usr/include/runetype.h
 .o/ptrcheck.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h my_tile.h
 .o/ptrcheck.o: my_config.h my_point.h my_math_util.h my_color.h my_tex.h
-.o/py_map.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
-.o/py_map.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
-.o/py_map.o: /usr/include/sys/_posix_availability.h
-.o/py_map.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
-.o/py_map.o: /usr/include/_types.h /usr/include/sys/_types.h
-.o/py_map.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
-.o/py_map.o: /usr/include/sys/_pthread/_pthread_types.h
-.o/py_map.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
-.o/py_map.o: /usr/include/sys/_types/_int8_t.h
-.o/py_map.o: /usr/include/sys/_types/_int16_t.h
-.o/py_map.o: /usr/include/sys/_types/_int32_t.h
-.o/py_map.o: /usr/include/sys/_types/_int64_t.h
-.o/py_map.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
-.o/py_map.o: /usr/include/_types/_uint32_t.h /usr/include/_types/_uint64_t.h
-.o/py_map.o: /usr/include/sys/_types/_intptr_t.h
-.o/py_map.o: /usr/include/sys/_types/_uintptr_t.h
-.o/py_map.o: /usr/include/_types/_intmax_t.h /usr/include/_types/_uintmax_t.h
-.o/py_map.o: my_callstack.h /usr/include/stdio.h
-.o/py_map.o: /usr/include/sys/_types/_va_list.h
-.o/py_map.o: /usr/include/sys/_types/_size_t.h
-.o/py_map.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
-.o/py_map.o: /usr/include/sys/_types/_off_t.h
-.o/py_map.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
-.o/py_map.o: /usr/include/secure/_common.h my_python.h my_point.h
-.o/py_map.o: my_math_util.h my_tile.h my_config.h my_color.h my_tex.h
-.o/py_map.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h
+.o/py_room.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
+.o/py_room.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
+.o/py_room.o: /usr/include/sys/_posix_availability.h
+.o/py_room.o: /usr/include/Availability.h /usr/include/AvailabilityInternal.h
+.o/py_room.o: /usr/include/_types.h /usr/include/sys/_types.h
+.o/py_room.o: /usr/include/machine/_types.h /usr/include/i386/_types.h
+.o/py_room.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/py_room.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/py_room.o: /usr/include/sys/_types/_int8_t.h
+.o/py_room.o: /usr/include/sys/_types/_int16_t.h
+.o/py_room.o: /usr/include/sys/_types/_int32_t.h
+.o/py_room.o: /usr/include/sys/_types/_int64_t.h
+.o/py_room.o: /usr/include/_types/_uint8_t.h /usr/include/_types/_uint16_t.h
+.o/py_room.o: /usr/include/_types/_uint32_t.h /usr/include/_types/_uint64_t.h
+.o/py_room.o: /usr/include/sys/_types/_intptr_t.h
+.o/py_room.o: /usr/include/sys/_types/_uintptr_t.h
+.o/py_room.o: /usr/include/_types/_intmax_t.h
+.o/py_room.o: /usr/include/_types/_uintmax_t.h my_callstack.h
+.o/py_room.o: /usr/include/stdio.h /usr/include/sys/_types/_va_list.h
+.o/py_room.o: /usr/include/sys/_types/_size_t.h
+.o/py_room.o: /usr/include/sys/_types/_null.h /usr/include/sys/stdio.h
+.o/py_room.o: /usr/include/sys/_types/_off_t.h
+.o/py_room.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
+.o/py_room.o: /usr/include/secure/_common.h my_python.h my_point.h
+.o/py_room.o: my_math_util.h my_tile.h my_config.h my_color.h my_tex.h
+.o/py_room.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h
 .o/py_sdl.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
 .o/py_sdl.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/py_sdl.o: /usr/include/sys/_posix_availability.h

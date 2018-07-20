@@ -74,6 +74,7 @@ void py_call_void(const char *name);
 void py_err(void);
 void py_trace(void);
 char *py_obj_to_str(const PyObject *py_str);
+std::string py_obj_to_string(const PyObject *py_str);
 int py_obj_to_int(PyObject *py_obj);
 uint64_t py_obj_to_uint64(PyObject *py_obj);
 double py_obj_to_double(PyObject *py_obj);
@@ -95,7 +96,7 @@ PyObject *tex_pixel_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_get_size_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *map_load_chunk_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define PY_PROTO(__fn__)                                                    \
 PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds);
