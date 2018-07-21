@@ -12,7 +12,6 @@
 typedef std::shared_ptr< class Thing > Thingp;
 typedef std::map< uint32_t, Thingp > Things;
 
-#include "my_config.h"
 #include "my_thing_template.h"
 #include "my_thing_tile.h"
 #include "my_time_util.h"

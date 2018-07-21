@@ -4,18 +4,12 @@
  * See the LICENSE file for license.
  */
 
-#include <SDL.h>
-
 #include "my_main.h"
-#include "my_python.h"
 #include "my_py_tp.h"
-#include "my_py_game.h"
 #include "my_python.h"
 #include "my_py_sdl.h"
 #include "frameobject.h"
-#include "my_config.h"
 #include "my_string.h"
-#include "my_wid.h"
 #include "my_ascii.h"
 
 static PyObject *zx_mod;

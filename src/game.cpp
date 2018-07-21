@@ -4,18 +4,8 @@
  * See the README file for license info for license.
  */
 
-#include <SDL.h>
 
-#include "my_main.h"
-#include "my_sdl.h"
 #include "my_game.h"
-#include "my_thing.h"
-#include "my_glapi.h"
-#include "my_tile.h"
-#include "my_game.h"
-#include "my_time_util.h"
-#include "my_python.h"
-#include "my_ascii.h"
 
 class Game game;
 

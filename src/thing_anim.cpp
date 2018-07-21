@@ -4,9 +4,6 @@
  * See the LICENSE file for license.
  */
 
-#include "my_main.h"
-#include "my_tile.h"
-#include "my_time_util.h"
 #include "my_thing_tile.h"
 #include "my_thing.h"
 

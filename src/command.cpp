@@ -4,13 +4,7 @@
  * See the README file for license info for license.
  */
 
-#include <fcntl.h>
-#include "my_slre.h"
-#include "stdlib.h"
-
 #include "my_main.h"
-#include "my_command.h"
-#include "my_string.h"
 #include "my_wid.h"
 #include "my_python.h"
 

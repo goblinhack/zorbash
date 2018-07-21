@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include "my_config.h"
 #include "my_point.h"
 
 typedef struct dmap_ {

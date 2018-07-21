@@ -12,7 +12,7 @@
 typedef std::shared_ptr< class tile > tilep;
 
 #include <map>
-#include "my_config.h"
+#include "my_main.h"
 #include "my_point.h"
 #include "my_color.h"
 #include "my_tex.h"

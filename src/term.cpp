@@ -4,8 +4,6 @@
  * See the README file for license info for license.
  */
 
-#include <stdio.h>
-
 #include "my_main.h"
 #include "my_term.h"
 #include "my_string.h"

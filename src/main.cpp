@@ -5,35 +5,21 @@
  */
 
 #define __MAIN__
-#include "my_main.h"
 
 #ifdef ENABLE_CRASH_HANDLER
-#include <signal.h>
 #endif
-#include <stdlib.h>
-#include <unistd.h>
 
 #ifndef _MSC_VER
 #include <libgen.h>
 #endif
 
 #include "my_main.h"
-#include "my_slre.h"
 #include "my_python.h"
 #include "my_glapi.h"
-#include "my_wid.h"
 #include "my_wid_console.h"
-#include "my_command.h"
-#include "my_ttf.h"
 #include "my_font.h"
-#include "my_math_util.h"
-#include "my_tex.h"
-#include "my_wid_tiles.h"
-#include "my_tile.h"
 #include "my_dir.h"
 #include "my_file.h"
-#include "my_ramdisk.h"
-#include "my_term.h"
 
 static char **ARGV;
 char *EXEC_FULL_PATH_AND_NAME;

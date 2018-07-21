@@ -4,18 +4,8 @@
  * See the README file for license info.
  */
 
-#include "my_main.h"
-#include "my_sdl.h"
-#include "my_tile.h"
 #include "my_time_util.h"
-#include "my_thing_template.h"
-#include "my_thing_tile.h"
-#include "my_string.h"
-#include "my_ttf.h"
 #include "my_ascii.h"
-#include "my_math_util.h"
-#include <string.h>
-#include <stdlib.h>
 
 static void ascii_put_button_ (int x, 
                                int y, 

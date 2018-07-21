@@ -14,7 +14,6 @@
 #include "my_string.h"
 #include "my_thing_tile.h"
 #include "my_font.h"
-#include "my_config.h"
 
 #include "my_bits.h"
 #include "my_math_util.h"

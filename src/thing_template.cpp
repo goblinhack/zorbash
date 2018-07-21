@@ -4,11 +4,9 @@
  * See the LICENSE file for license.
  */
 
-
 #include "my_main.h"
 #include "my_thing_tile.h"
 #include "my_tile.h"
-#include "my_config.h"
 
 thing_templates thing_templates_map;
 thing_templates_create_order thing_templates_create_order_map;

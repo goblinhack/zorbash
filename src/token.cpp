@@ -4,9 +4,8 @@
  * See the README file for license info for license.
  */
 
-#include "my_slre.h"
-
 #include "my_main.h"
+#include "my_slre.h"
 #include "my_token.h"
 
 static tokens_t *tokens_parse (const char *input, tokens_t *tokens)

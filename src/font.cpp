@@ -4,14 +4,8 @@
  * See the README file for license info for license.
  */
 
-#include <SDL.h>
 
-#include "my_main.h"
-#include "my_sdl.h"
 #include "my_ttf.h"
-#include "my_font.h"
-#include "my_config.h"
-#include "my_string.h"
 
 static int32_t font_inited;
 

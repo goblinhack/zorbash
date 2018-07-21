@@ -4,8 +4,6 @@
  * See the README file for license info for license.
  */
 
-#include <stdio.h>
-#include <dirent.h>
 #include <sys/param.h>
 #include <unistd.h>
 #include <sys/stat.h>
@@ -13,7 +11,6 @@
 #include "my_main.h"
 #include "my_dir.h"
 #include "my_string.h"
-#include "my_ramdisk.h"
 
 /*
  * Does the requested dir exist?

@@ -4,12 +4,10 @@
  * See the README file for license info for license.
  */
 
-#include "my_slre.h"
 
 #include "my_main.h"
 #include "my_backtrace.h"
 #include "my_time_util.h"
-#include "my_command.h"
 
 /*
  * How many times we've seen a given pointer and record a traceback at that
