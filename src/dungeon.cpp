@@ -1,4 +1,12 @@
+/*
+ * Copyright (C) 2018 goblinhack@gmail.com
+ *
+ * See the LICENSE file for license.
+ */
 
+#include "my_main.h"
+#include "my_tile.h"
+#include "my_room.h"
 
 class Dungeon {
 public:
