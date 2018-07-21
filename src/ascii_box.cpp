@@ -14,6 +14,7 @@
 #include "my_ttf.h"
 #include "my_ascii.h"
 #include "my_font.h"
+#include "my_ascii.h"
 #include "my_math_util.h"
 #include <string.h>
 #include <stdlib.h>

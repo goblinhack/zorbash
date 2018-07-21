@@ -382,22 +382,6 @@ SDL_Surface *tex_get_surface (texp tex)
     return (tex->surface);
 }
 
-/*
- * Blits a whole tex.
- */
-void tex_blit (texp tex, point at)
-{_
-    static point tl, br;
-
-    tl.x = at.x - tex->width/2;
-    br.y = at.y - tex->height/2;
-    br.x = at.x + tex->width/2;
-    tl.y = at.y + tex->height/2;
-
-    blit(tex->gl_surface_binding,
-         0.0f, 1.0f, 1.0f, 0.0f, tl.x, tl.y, br.x, br.y);
-}
-
 texp string2tex (const char **s)
 {_
     static char tmp[MAXSTR];

@@ -229,7 +229,6 @@ void wid_set_tooltip2(widp, std::wstring string);
 void wid_set_top(widp, uint8_t val);
 void wid_setx_tl_br_pct(widp, fpoint tl, fpoint br);
 void wid_sety_tl_br_pct(widp, fpoint tl, fpoint br);
-void wid_this_hide(widp, uint32_t delay);
 void wid_this_visible(widp);
 void wid_tick_all(void);
 void wid_toggle_hidden(widp);
@@ -452,7 +451,6 @@ public:
     uint8_t do_not_lower                {};
     uint8_t can_be_attached_now         {};
     uint8_t disable_scissors            {};
-    uint8_t animate                     {};
     uint8_t square                      {};
     uint8_t box                         {};
 
@@ -511,11 +509,6 @@ public:
     uint32_t destroy_when {};
     uint32_t timestamp_created {};
     uint32_t timestamp_last_mode_change {};
-
-    /*
-     * When to change frame for animation.
-     */
-    uint32_t timestamp_change_to_next_frame {};
 
     widp *destroy_ptr {};
 

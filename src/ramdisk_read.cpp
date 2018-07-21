@@ -5,6 +5,7 @@
  */
 
 #include "my_main.h"
+#include "my_ramdisk.h"
 #include "my_string.h"
 
 #define nUSE_ZLIB

@@ -153,7 +153,6 @@ public:
     bool is_rrr39 {};
     bool is_rrr40 {};
     bool is_rrr41 {};
-    bool is_grass {};
     bool is_animated_walk_flip {};
     bool is_movable {};
     uint8_t z_depth {};
@@ -472,11 +471,6 @@ static inline uint8_t tp_is_rrr40 (tpp t)
 static inline uint8_t tp_is_rrr41 (tpp t)
 {
     return (t->is_rrr41);
-}
-
-static inline uint8_t tp_is_grass (tpp t)
-{
-    return (t->is_grass);
 }
 
 static inline uint8_t tp_is_animated_walk_flip (tpp t)

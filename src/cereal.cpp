@@ -7,8 +7,7 @@
 #include <fstream>
 #include "my_ptrcheck.h"
 #include "my_game.h"
-//#include "my_main.h"
-//#include "my_point.h"
+#include "my_main.h"
     
 int cereal_test (const std::string save_file)
 {
