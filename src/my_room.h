@@ -26,19 +26,13 @@ public:
         oldptr(this);
     }
 
-    static Roomp room_new (void)
-    {_
-        auto r = std::make_shared< class Room >();
-        Room::all_rooms.insert(std::make_pair(r->id, r));
-        return (r);
-    }
-
     /*
      * Unique per room.
      */
-    uint32_t           id {};
-
+    uint32_t                 id {};
     std::vector<std::string> floor_data;
     std::vector<std::string> walls_data;
     std::vector<std::string> items_data;
+
+    static Roomp room_new (void);
 };

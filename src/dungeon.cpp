@@ -5,1996 +5,755 @@
  */
 
 #include "my_main.h"
+#include "my_point.h"
 #include "my_tile.h"
 #include "my_room.h"
-
-class Charmap;
-class Charmap {
-public:
-    enum {
-        SPACE     = ' ',
-        CORRIDOR  = '#',
-        DOOR      = 'D',
-        WALL      = 'x',
-        CWALL     = 'X',
-        FLOOR     = '.',
-        DUSTY     = '\"',
-        START     = 'S',
-        EXIT      = 'E',
-        KEY       = 'k',
-        CHASM     = 'C',
-        LAVA      = 'L',
-        WATER     = '_',
-        ROCK      = 'r',
-        TREASURE  = '$',
-    };
-
-    enum {
-        DEPTH_UNDER,
-        DEPTH_FLOOR,
-        DEPTH_WALL,
-        DEPTH_OBJ,
-        DEPTH_MAX,
-    };
-
-    std::string fg;
-    std::string bg;
-    char c;
-    bool is_movement_blocking {false};
-    bool is_wall              {false};
-    bool is_cwall             {false};
-    bool is_floor             {false};
-    bool is_dusty             {false};
-    bool is_corridor          {false};
-    bool is_door              {false};
-    bool is_dungeon_way_up    {false};
-    bool is_dungeon_way_down  {false};
-    bool is_key               {false};
-    bool is_chasm             {false};
-    bool is_dissolves_walls   {false};
-    bool is_lava              {false};
-    bool is_water             {false};
-    bool is_rock              {false};
-    bool is_treasure          {false};
-};
+#include "my_charmap.h"
+#include "my_dmap.h"
+#include "my_range.h"
+#include <stack>
+#include <list>
 
 class Dungeon {
 public:
     std::vector<char>              cells;
-    std::vector<Charmap>           charmap;
-    int rooms_on_level             {10};
-    int fixed_room_chance          {50};
-    int map_width                  {80};
-    int map_height                 {80};
-    int map_depth                  {80};
+    std::vector<int>               roomno_cells;
+    int map_width                  {MAP_WIDTH};
+    int map_height                 {MAP_HEIGHT};
+    int map_depth                  {Charmap::DEPTH_MAX};
+
+    //
+    // All possible rooms we will choose from. Initially these are fixed
+    // rooms and we add more random ones onto this list.
+    //
+    Rooms                          rooms;
+
+    //
+    // Set if we fail to generate
+    //
+    bool generate_failed           {false};
+
+    //
+    // How many rooms on the level currently.
+    //
+    int rooms_on_level             {};
+    int rooms_on_level_target      {};
+
+    //
+    // First range of rooms are fixed; rest randomly generated
+    //
+    int fixed_room_count           {};
+
+    //
+    // What chance for fixed versus random rooms
+    //
+    int fixed_room_chance          {20};
+
+    //
+    // Chance of a corridor splitting
+    //
+    int corridor_fork_chance       {35};
+    int tunnel_fork_chance         {95};
+
+    //
+    // Lower, longer corridors
+    //
+    int corridor_grow_chance       {2};
+    int tunnel_grow_chance         {1};
+
+    //
+    // How often a random room is locked
+    //
+    int room_locked_chance         {5};
+
+    //
+    // How close corridors should be to each other
+    //
+    int corridor_spacing           {3};
+
+    //
+    // For random shape rooms, how large?
+    //
+    int min_room_size              {10};
+
+    //
+    // Depth is how many rooms from the start room we are
+    //
+    std::map< int, int > roomno_depth;
+
+    //
+    // Rooms that have all doors locked
+    //
+    std::map< int, bool > roomno_locked;
+
+    //
+    // Exits from each room
+    //
+    std::map< int, std::list<point> > roomno_exits;
+
+    //
+    // The tiles of a each romm
+    //
+    std::map< int, std::list<point> > room_occupiable_tiles;
+
+    //
+    // z depths of the level
+    //
+    dmap *depth_map                {};
 
     void finish_constructor (void)
     {
-        this->init_charmap();
+        Charmap::init_charmaps();
+        rooms = Room::all_rooms;
+        fixed_room_count = rooms.size();
+
         cells.resize(map_width * map_height * Charmap::DEPTH_MAX);
+        roomno_cells.resize(map_width * map_height);
     }
 
-    Dungeon (int rooms_on_level,
-             int fixed_room_chance,
-             int map_width,
-             int map_height) :
-        rooms_on_level             (rooms_on_level), 
-        fixed_room_chance          (fixed_room_chance),
+    Dungeon (int map_width,
+             int map_height,
+             int rooms_on_level_target) :
         map_width                  (map_width),
-        map_height                 (map_height)
+        map_height                 (map_height),
+        rooms_on_level_target      (rooms_on_level_target)
     {
-        this->finish_constructor();
+        finish_constructor();
     }
 
     Dungeon ()
     {
-        this->finish_constructor();
+        finish_constructor();
+    }
+
+    int cell_offset (const int x, const int y, const int z)
+    {
+        auto offset = (map_width * map_height) * z;
+        offset += (map_height) * y;
+        offset += x;
+
+        return (offset);
+    }
+
+    bool is_oob (const int x, const int y, const int z)
+    {
+        return ((x < 0) || (x >= map_width) ||
+                (y < 0) || (y >= map_height) ||
+                (z < 0) || (z >= map_depth));
+    }
+
+    bool is_oob (const int x, const int y)
+    {
+        return ((x < 0) || (x >= map_width) ||
+                (y < 0) || (y >= map_height));
+    }
+
+    char *cell_addr (const int x, const int y, const int z)
+    {
+        if (is_oob(x, y, z)) {
+            LOG("out of bounds on %d,%d,%d vs %d,%d,%d", 
+                x, y, z, map_width, map_height, map_depth);
+            return (nullptr);
+        }
+
+        return (&cells[cell_offset(x, y, z)]);
+    }
+
+    int room_offset (const int x, const int y)
+    {
+        auto offset = (map_height) * y;
+        offset += x;
+
+        return (offset);
+    }
+
+    int *roomno_addr (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            LOG("out of bounds on room cells at %d,%d vs %d,%d", 
+                x, y, map_width, map_height);
+            return (nullptr);
+        }
+
+        return (&roomno_cells[room_offset(x, y)]);
+    }
+
+    /*
+     * Puts a tile on the map
+     */
+    void putc (const int x, const int y, const int z, const char c)
+    {
+        char *p = cell_addr(x, y, z);
+        if (p != nullptr) {
+            *p = c;
+        }
+    }
+
+    /*
+     * Gets a tile of the map or None
+     */
+    char getc (const int x, const int y, const int z)
+    {
+        char *p = cell_addr(x, y, z);
+        if (p != nullptr) {
+            return (*p);
+        }
+        return (Charmap::NONE);
+    }
+
+    /*
+     * Puts a roomno on the map
+     */
+    void putr (const int x, const int y, const int c)
+    {
+        int *p = roomno_addr(x, y);
+        if (p != nullptr) {
+            *p = 0;
+        }
+    }
+
+    /*
+     * Gets a roomno of the map or None
+     */
+    int getr (const int x, const int y)
+    {
+        int *p = roomno_addr(x, y);
+        if (p != nullptr) {
+            return (*p);
+        }
+        return (Charmap::NONE);
+    }
+
+    bool is_anything_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            if (c != Charmap::SPACE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_floor_or_corridor_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_floor ||
+                charmap.is_corridor) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_floor_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_floor) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_dusty_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_dusty) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_corridor_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_corridor) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_wall_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_wall) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_cwall_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_cwall) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_door_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_door) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_dungeon_way_up_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_dungeon_way_up) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_dungeon_way_down_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_dungeon_way_down) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_lava_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_lava) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_water_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_water) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_any_chasm_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
+
+            if (charmap.is_chasm) {
+                return true;
+            }
+        }
+        return false;
     }
     
-    void init_charmap (void)
+    bool is_any_treasure_at (const int x, const int y)
     {
-        charmap.resize(255);
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
 
-        auto char_index        = Charmap::SPACE;
-        auto c = charmap[char_index];
-        c.bg                   = "black",
-        c.fg                   = "black",
+            if (charmap.is_treasure) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        char_index             = Charmap::WALL;
-        c = charmap[char_index];
-        c.bg                   = "magenta",
-        c.fg                   = "black",
-        c.is_wall              = true;
-        c.is_movement_blocking = true;
+    bool is_any_dissolves_walls_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
 
-        char_index             = Charmap::CWALL;
-        c = charmap[char_index];
-        c.bg                   = "blue",
-        c.fg                   = "black",
-        c.is_cwall             = true;
+            if (charmap.is_dissolves_walls) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        char_index             = Charmap::FLOOR;
-        c = charmap[char_index];
-        c.bg                   = "black",
-        c.fg                   = "white",
-        c.is_floor             = true;
+    bool is_any_key_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
 
-        char_index             = Charmap::DUSTY;
-        c = charmap[char_index];
-        c.bg                   = "black",
-        c.fg                   = "white",
-        c.is_dusty             = true;
+            if (charmap.is_key) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        char_index             = Charmap::CORRIDOR;
-        c = charmap[char_index];
-        c.bg                   = "black",
-        c.fg                   = "yellow",
-        c.is_corridor          = true;
+    bool is_movement_blocking_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto charmap = Charmap::all_charmaps[c];
 
-        char_index             = Charmap::DOOR;
-        c = charmap[char_index];
-        c.bg                   = "green",
-        c.fg                   = "green",
-        c.is_door              = true;
-        c.is_movement_blocking = true;
+            if (charmap.is_wall             ||
+                charmap.is_treasure         ||
+                charmap.is_dungeon_way_down ||
+                charmap.is_dungeon_way_up   ||
+                charmap.is_door) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        char_index             = Charmap::START;
-        c = charmap[char_index];
-        c.bg                   = "white",
-        c.fg                   = "red",
-        c.is_dungeon_way_up    = true;
-        c.is_movement_blocking = true;
+    std::vector<point> get_line_ (point a, point b, int flag)
+    {
+        int temp, dx, dy, tdy, dydx, p, x, y, i;
 
-        char_index             = Charmap::EXIT;
-        c = charmap[char_index];
-        c.bg                   = "white",
-        c.fg                   = "red",
-        c.is_dungeon_way_down  = true;
-        c.is_movement_blocking = true;
+        if (a.x > b.x) {
+            temp = a.x; a.x = b.x; b.x = temp;
+            temp = a.y; a.y = b.y; b.y = temp;
+        }
 
-        char_index             = Charmap::KEY;
-        c = charmap[char_index];
-        c.bg                   = "white",
-        c.fg                   = "yellow",
-        c.is_key               = true;
-        c.is_movement_blocking = true;
+        dx = b.x - a.x;
+        dy = b.y - a.y;
+        tdy = 2 * dy;
+        dydx = tdy - 2 * dx;
+        p = tdy - dx;   /* p0 = 2dy - dx */
+        x = a.x;
+        y = a.y;
 
-        char_index             = Charmap::CHASM;
-        c = charmap[char_index];
-        c.bg                   = "black",
-        c.fg                   = "black",
-        c.is_chasm             = true;
-        c.is_dissolves_walls   = true;
+        std::vector<point> r;
 
-        char_index             = Charmap::LAVA;
-        c = charmap[char_index];
-        c.bg                   = "red",
-        c.fg                   = "yellow",
-        c.is_lava              = true;
-        c.is_dissolves_walls   = true;
+        switch (flag) {
+            case 0: r.push_back(point(x, y)); break;
+            case 1: r.push_back(point(y, x)); break;
+            case 2: r.push_back(point(y, -x)); break;
+            case 3: r.push_back(point(x, -y)); break;
+        }
 
-        char_index             = Charmap::WATER;
-        c = charmap[char_index];
-        c.bg                   = "black",
-        c.fg                   = "blue",
-        c.is_water             = true;
-        c.is_dissolves_walls   = true;
+        const int step = 10;
+        int s = 0;
 
-        char_index             = Charmap::ROCK;
-        c = charmap[char_index];
-        c.bg                   = "black",
-        c.fg                   = "red",
-        c.is_rock              = true;
+        for (i = 1; i <= dx; i++){
 
-        char_index             = Charmap::TREASURE;
-        c = charmap[char_index];
-        c.bg                   = "black",
-        c.fg                   = "yellow",
-        c.is_treasure          = true;
+            x++;
+            if (p < 0) p += tdy;
+            else { p += dydx; y++; }
+
+            if (s++ != step) {
+                continue;
+            }
+            s = 0;
+
+            switch (flag) {
+                case 0: r.push_back(point(x, y)); break;
+                case 1: r.push_back(point(y, x)); break;
+                case 2: r.push_back(point(y, -x)); break;
+                case 3: r.push_back(point(x, -y)); break;
+            }
+        }
+
+        return (r);
+    }
+
+    std::vector<point> get_line (point a, point b)
+    {
+        int x0 = a.x;
+        int x1 = b.x;
+        int y0 = a.y;
+        int y1 = b.y;
+
+        float slope = 100;
+
+        if (x0 != x1) slope = (y1 - y0) * 1.0 / (x1 - x0);
+
+        /* call helper function depending on the line slope */
+        if ((0 <= slope) && (slope <= 1))
+            return get_line_(point(x0, y0), point(x1, y1), 0);
+        else if ((-1 <= slope) && (slope <= 0))
+            return get_line_(point(x0, -y0), point(x1, -y1), 3);
+        else if (slope > 1)
+            return get_line_(point(y0, x0), point(y1, x1), 1);
+        else
+            return get_line_(point(-y0, x0), point(-y1, x1), 2);
+    }
+
+    /*
+     * Line between points
+     */
+    void line_draw(point start, point end, int depth, char rchar)
+    {
+        auto points = get_line(start, end);
+        for (auto p : points) {
+            putc(p.x, p.y, depth, rchar);
+        }
+    }
+
+    /*
+     * Flood fill empty space.
+     */
+    void flood_fill(int x, int y, int depth, char rchar)
+    {
+        std::stack<point> s;
+        
+        s.push(point(x, y));
+        while (s.size() > 0) {
+
+            point p = s.top();
+            auto x = p.x;
+            auto y = p.y;
+            s.pop();
+
+            if (is_oob(x, y)) {
+                continue;
+            }
+
+            if (is_any_floor_or_corridor_at(x, y)) {
+                continue;
+            }
+
+            putc(x, y, depth, rchar);
+
+            s.push(point(x + 1, y));
+            s.push(point(x - 1, y));
+            s.push(point(x, y + 1));
+            s.push(point(x, y - 1));
+        }
+    }
+
+    /*
+     * Flood fill empty space and return the points.
+     * Used to get all the tiles in a room.
+     */
+    std::vector<point> flood_erase (const int x, const int y, 
+                                    const size_t max_size)
+    {
+        bool walked[map_width][map_height];
+        std::vector<point> r;
+        std::stack<point> s;
+        
+        for (auto i = 0; i < map_width; i++) {
+            for (auto j = 0; j < map_height; j++) {
+                walked[i][j] = false;
+            }
+        }
+
+        s.push(point(x, y));
+
+        while (s.size() > 0) {
+            point p = s.top();
+            auto x = p.x;
+            auto y = p.y;
+            s.pop();
+
+            if ((x >= map_width) || (y >= map_height) || (x < 0) || (y < 0)) {
+                continue;
+            }
+
+            if (walked[x][y]) {
+                continue;
+            }
+
+            walked[x][y] = true;
+
+            auto c = getc(x, y, Charmap::DEPTH_FLOOR);
+            if (c != Charmap::FLOOR) {
+                continue;
+            }
+
+            putc(x, y, Charmap::DEPTH_FLOOR, Charmap::NONE);
+            r.push_back(point(x, y));
+
+            // To limit room size
+            if (r.size() > max_size) {
+                break;
+            }
+
+            if ((x < map_width - 1) and not walked[x + 1][y]) {
+                s.push(point(x + 1, y));
+            }
+            if ((x > 1) and not walked[x - 1][y]) {
+                s.push(point(x - 1, y));
+            }
+            if ((y < map_height - 1) and !walked[x][y + 1]) {
+                s.push(point(x, y + 1));
+            }
+            if ((y > 1) and not walked[x][y - 1]) {
+                s.push(point(x, y - 1));
+            }
+        }
+        return (r);
+    }
+
+    /*
+     * Flood fill empty space and return the points.
+     * Used to get all the tiles in a room.
+     */
+    std::vector<point> flood_find (const int x, const int y, 
+                                   std::function<bool (char)> callback)
+    {
+        bool walked[map_width][map_height];
+        std::vector<point> r;
+        std::stack<point> s;
+        
+        for (auto i = 0; i < map_width; i++) {
+            for (auto j = 0; j < map_height; j++) {
+                walked[i][j] = false;
+            }
+        }
+
+        s.push(point(x, y));
+
+        while (s.size() > 0) {
+            point p = s.top();
+            auto x = p.x;
+            auto y = p.y;
+            s.pop();
+
+            if ((x >= map_width) || (y >= map_height) || (x < 0) || (y < 0)) {
+                continue;
+            }
+
+            if (walked[x][y]) {
+                continue;
+            }
+
+            walked[x][y] = true;
+
+            auto c = getc(x, y, Charmap::DEPTH_FLOOR);
+            if (!callback(c)) {
+                continue;
+            }
+
+            r.push_back(point(x, y));
+
+            if ((x < map_width - 1) and not walked[x + 1][y]) {
+                s.push(point(x + 1, y));
+            }
+            if ((x > 1) and not walked[x - 1][y]) {
+                s.push(point(x - 1, y));
+            }
+            if ((y < map_height - 1) and !walked[x][y + 1]) {
+                s.push(point(x, y + 1));
+            }
+            if ((y > 1) and not walked[x][y - 1]) {
+                s.push(point(x, y - 1));
+            }
+        }
+        return (r);
+    }
+
+    bool Callback(char c);
+    void t (void)
+    {
+        auto f = std::bind(&Dungeon::Callback, this, std::placeholders::_1);
+        flood_find (0, 0, f);
+        flood_find (0, 0, [](char c) { return true; });
+    }
+
+    /*
+     * Find all adjacent characters of the same type.
+     */
+    void flood_replace (const int x, const int y, const int z,
+                        const char old,
+                        const char with)
+    {
+        bool walked[map_width][map_height];
+        std::stack<point> s;
+        
+        for (auto i = 0; i < map_width; i++) {
+            for (auto j = 0; j < map_height; j++) {
+                walked[i][j] = false;
+            }
+        }
+
+        s.push(point(x, y));
+
+        while (s.size() > 0) {
+            point p = s.top();
+            auto x = p.x;
+            auto y = p.y;
+            s.pop();
+
+            if ((x >= map_width) || (y >= map_height) || (x < 0) || (y < 0)) {
+                continue;
+            }
+
+            if (walked[x][y]) {
+                continue;
+            }
+
+            walked[x][y] = true;
+
+            auto c = getc(x, y, z);
+            if (c != old) {
+                continue;
+            }
+
+            putc(x, y, z, with);
+
+            if ((x < map_width - 1) and not walked[x + 1][y]) {
+                s.push(point(x + 1, y));
+            }
+            if ((x > 1) and not walked[x - 1][y]) {
+                s.push(point(x - 1, y));
+            }
+            if ((y < map_height - 1) and !walked[x][y + 1]) {
+                s.push(point(x, y + 1));
+            }
+            if ((y > 1) and not walked[x][y - 1]) {
+                s.push(point(x, y - 1));
+            }
+        }
     }
 };
 
 class Dungeon *dungeon_test (void)
 {
-    auto d = new Dungeon();
+    auto d = new Dungeon(80, 80, 20);
+
     return (d);
 }
-
-#if 0
-        self.charmap = charmap
-
-        #
-        # Set if we fail to generate
-        #
-        self.generate_failed = false
-
-        #
-        # All possible rooms we will choose from. Initially these are fixed
-        # rooms and we add more random ones onto this list.
-        #
-        self.rooms = rooms
-
-        #
-        # First range of rooms are fixed; rest randomly generated
-        #
-        self.fixed_room_count = len(self.rooms)
-
-        #
-        # How many rooms on the level.
-        #
-        self.rooms_on_level = 0
-
-        #
-        # Chance of a corridor splitting
-        #
-        self.corridor_fork_chance = 35
-        self.tunnel_fork_chance = 95
-
-        #
-        # Lower, longer corridors
-        #
-        self.corridor_grow_chance = 2
-        self.tunnel_grow_chance = 1
-
-        #
-        # How often a random room is locked
-        #
-        self.room_locked_chance = 5
-
-        #
-        # How close corridors should be to each other
-        #
-        self.corridor_spacing = 3
-
-        #
-        # What chance for fixed versus random rooms
-        #
-        self.fixed_room_chance = fixed_room_chance
-
-        #
-        # For random shape rooms, how large?
-        #
-        self.min_room_size = 10
-
-        #
-        # Depth is how many rooms from the start room we are
-        #
-        self.roomno_depth = {}
-
-        #
-        # Rooms that have all doors locked
-        #
-        self.roomno_locked = {}
-
-        #
-        # Exits from each room
-        #
-        self.room_exits = {}
-
-        #
-        # The tiles of a each romm
-        #
-        self.room_occupiable_tiles = {}
-
-        #
-        # z Depths of the level
-        #
-        self.depth_map = None
-
-        #
-        # The map
-        #
-        self.cells = [[[' ' for d in range(Charmap::DEPTH_MAX)]
-                       for i in range(self.height)]
-                      for j in range(self.width)]
-        self.roomno_cells = [[-1 for i in range(self.height)]
-                             for j in range(self.width)]
-
-        #
-        # Create all randomly shaped rooms.
-        #
-        for count in range(0, 2):
-            self.rooms_all_create_random_shapes()
-
-        #
-        # Total of fixed and random room
-        #
-        self.fixed_roomno_list = list(range(0, self.fixed_room_count))
-        random.shuffle(self.fixed_roomno_list)
-
-        self.random_roomno_list = list(range(self.fixed_room_count,
-                                             len(self.rooms)))
-        random.shuffle(self.random_roomno_list)
-
-        #
-        # First room goes in the center. The rest hang off of its
-        # corridors.
-        #
-        if not self.rooms_place_all(rooms_on_level):
-            self.generate_failed = true
-            return
-
-        self.debug("^^^ placed all rooms ^^^")
-
-        #
-        # Remove dangling corridors that go nowhere.
-        #
-        self.rooms_trim_corridors()
-        self.debug("^^^ trimmed all corridors ^^^")
-
-        #
-        # Remove corridors that go nowhere.
-        #
-        self.rooms_trim_looped_corridors()
-        self.debug("^^^ trimmed all looped corridors ^^^")
-
-        #
-        # How far from the start is each room?
-        #
-        self.rooms_set_depth()
-        self.debug("^^^ calculated depth ^^^")
-
-#        self.rooms_dump_info()
-
-        #
-        # Randomly lock some rooms
-        #
-        self.rooms_randomly_lock()
-        self.debug("^^^ locked some rooms ^^^")
-
-        #
-        # Redo the depth. Rooms that are locked add extra depth points.
-        #
-        self.rooms_set_depth()
-        self.debug("^^^ calculated depth ^^^")
-
-        #
-        # Plug gaps in the wall that go nowhere.
-        #
-        self.rooms_plug_walls()
-        self.debug("^^^ plugged all walls ^^^")
-
-        #
-        # Any dead end doors with no corridor, zap em
-        #
-        self.rooms_plug_doors()
-        self.debug("^^^ removed dead end doors ^^^")
-
-        #
-        # Find where we can place stuff like exits
-        #
-        self.rooms_find_occupiable_tiles()
-
-        #
-        # Place start and exit of the dungeon
-        #
-        if not self.rooms_place_start():
-            self.generate_failed = true
-            return
-        self.debug("^^^ placed start ^^^")
-
-        if not self.rooms_place_exit():
-            self.generate_failed = true
-            return
-        self.debug("^^^ placed exit ^^^")
-
-        if not self.rooms_place_keys():
-            self.generate_failed = true
-            return
-        self.debug("^^^ placed keys ^^^")
-
-        #
-        # Create a random depth map for the level
-        #
-        self.add_depth_map()
-        self.debug("^^^ placed depth map ^^^")
-
-        for i in range(random.randint(0, 2)):
-            self.add_chasm()
-
-        #
-        # Water or lava levels?
-        #
-        if random.randint(0, 100) < 100:
-            for i in range(random.randint(0, 3)):
-                self.add_lava()
-
-            for i in range(random.randint(0, 100)):
-                self.add_water()
-
-        if random.randint(0, 100) < 2:
-            for i in range(random.randint(0, 3)):
-                self.add_water()
-
-            for i in range(random.randint(0, 100)):
-                self.add_lava()
-
-        self.debug("^^^ placed hazards ^^^")
-
-        #
-        # Water next to a chasm or lava? remove it
-        #
-        self.remove_chasm_next_to_water()
-        self.remove_lava_next_to_water()
-
-        #
-        # Let lava melt through walls
-        #
-        self.dissolve_room_walls()
-        self.debug("^^^ dissolved walls ^^^")
-
-        self.dissolve_room_cwalls()
-        self.debug("^^^ dissolved cwalls ^^^")
-
-        #
-        # Bridges rise and fall
-        #
-        self.rooms_corridor_bridge_height()
-        self.debug("^^^ calculated bridge height ^^^")
-
-        #
-        # Add walls around corridors?
-        #
-        self.add_cwall()
-        self.debug("^^^ add corridor walls ^^^")
-
-        #
-        # Add random bridges in the darkness
-        #
-        self.add_chasm_bridges()
-        self.add_lava_bridges()
-        self.add_water_bridges()
-        self.debug("^^^ add chasm bridges ^^^")
-
-        #
-        # Bridges rise and fall
-        #
-        self.rooms_corridor_bridge_height()
-        self.debug("^^^ calculated bridge height ^^^")
-        self.rooms_corridor_bridge_smooth()
-
-        self.add_rock()
-        self.debug("^^^ add rock ^^^")
-
-        self.add_tunnels()
-        self.debug("^^^ add tunnels ^^^")
-
-        self.add_treasure()
-        self.debug("^^^ add treasure ^^^")
-
-    def debug(self, s):
-        return
-        self.dump()
-        mm.log(s)
-
-    #
-    # Check for room overlaps
-    #
-    def room_can_be_placed(self, roomno, x, y):
-        room = self.rooms[roomno]
-
-        if x < 2:
-            return false
-        elif x + room.width >= self.width - 2:
-            return false
-
-        if y < 2:
-            return false
-        elif y + room.height >= self.height - 2:
-            return false
-
-        vert_floor_slice = room.vert_slice["floor"]
-
-        for ry in range(room.height):
-            for rx in range(room.width):
-                if vert_floor_slice[rx][ry] == charmap.FLOOR:
-                    if self.is_any_floor_at(x + rx, y + ry):
-                        return false
-        return true
-
-    #
-    # Dump a room onto the level. No checks
-    #
-    def room_place(self, roomno, x, y):
-        room = self.rooms[roomno]
-
-        self.roomno_locked[roomno] = false
-
-        for d in range(Charmap::DEPTH_MAX):
-            dname = charmap.depth.to_name[d]
-            if dname in room.vert_slice:
-                rvert_slice = room.vert_slice[dname]
-                for ry in range(room.height):
-                    for rx in range(room.width):
-                        rchar = rvert_slice[rx][ry]
-                        tx = x + rx
-                        ty = y + ry
-                        if rchar != charmap.SPACE:
-                            self.putc(tx, ty, d, rchar)
-                            self.putr(tx, ty, roomno)
-                        if rchar == charmap.DOOR:
-                            self.roomno_locked[roomno] = true
-
-        self.rooms_on_level += 1
-
-        #
-        # Keep track of what rooms we've added. We'll work out what joins
-        # onto what later.
-        #
-        self.room_connection[roomno] = set()
-        self.roomnos.add(roomno)
-
-    #
-    # Try to push a room on the level
-    #
-    def room_place_if_no_overlaps(self, roomno, x, y):
-        if not self.room_can_be_placed(roomno, x, y):
-            return false
-
-        self.room_place(roomno, x, y)
-        return true
-
-    #
-    # Grow a corridor in the given direction
-    #
-    def room_corridor_draw(self, x, y, dx, dy, clen=0, fork_count=0,
-                           c=charmap.CORRIDOR):
-        x += dx
-        y += dy
-
-        if x < 2:
-            return
-        elif x >= self.width - 3:
-            return
-
-        if y < 2:
-            return
-        elif y >= self.height - 3:
-            return
-
-        if self.getc(x, y, Charmap::DEPTH_FLOOR) is None:
-            return
-
-        if self.is_any_floor_at(x, y):
-            return
-
-        clen += 1
-
-        self.putc(x, y, Charmap::DEPTH_FLOOR, c)
-
-        #
-        # Reached the end of a corridor?
-        #
-        if random.randint(1, 100) < clen * self.corridor_grow_chance:
-            self.corridor_ends.append((x, y))
-            return
-
-        #
-        # Stopped growing. Fork the corridor.
-        # Don't do corridors forks adjacent to each other.
-        #
-        if fork_count < 3 and clen % 2 == 0:
-            if random.randint(1, 100) < self.corridor_fork_chance:
-                self.room_corridor_draw(x, y, dy, dx, clen, fork_count + 1,
-                                        c=c)
-
-            if random.randint(1, 100) < self.corridor_fork_chance:
-                self.room_corridor_draw(x, y, -dy, -dx, clen,
-                                        fork_count + 1, c=c)
-
-        #
-        # Keep on growing
-        #
-        self.room_corridor_draw(x, y, dx, dy, clen, fork_count + 1, c=c)
-
-    #
-    # Grow a tunnel in the given direction
-    #
-    def room_tunnel_draw(self, x, y, dx, dy, clen=0, fork_count=0,
-                         c=charmap.DUSTY):
-        x += dx
-        y += dy
-
-        if x < 2:
-            return
-        elif x >= self.width - 3:
-            return
-
-        if y < 2:
-            return
-        elif y >= self.height - 3:
-            return
-
-        if not self.is_rock_at(x, y):
-
-            if random.randint(1, 100) < 20:
-                for dx, dy in biome.ALL_DELTAS:
-                    tx = x + dx
-                    ty = y + dy
-
-                    if not self.is_wall_at(tx, ty) and \
-                       not self.is_cwall_at(tx, ty) and \
-                       not self.is_corridor_at(tx, ty) and \
-                       not self.is_dusty_at(tx, ty):
-                        self.putc(tx, ty, Charmap::DEPTH_WALL, charmap.SPACE)
-                        self.putc(tx, ty, Charmap::DEPTH_FLOOR, charmap.FLOOR)
-            return
-
-        clen += 1
-
-        self.putc(x, y, Charmap::DEPTH_WALL, charmap.SPACE)
-        self.putc(x, y, Charmap::DEPTH_FLOOR, c)
-
-        #
-        # Reached the end of a corridor?
-        #
-        if random.randint(1, 100) < clen * self.corridor_grow_chance:
-            return
-
-        #
-        # Stopped growing. Fork the corridor.
-        # Don't do tunnels forks adjacent to each other.
-        #
-        if fork_count < 3 and clen % 2 == 0:
-            if random.randint(1, 100) < self.tunnel_fork_chance:
-                self.room_tunnel_draw(x, y, dy, dx, clen, fork_count + 1, c)
-
-            if random.randint(1, 100) < self.tunnel_fork_chance:
-                self.room_tunnel_draw(x, y, -dy, -dx, clen, fork_count + 1, c)
-
-        #
-        # Keep on growing
-        #
-        self.room_tunnel_draw(x, y, dx, dy, clen, fork_count + 1, c)
-
-    #
-    # Search the whole level for possible room exits
-    #
-    def rooms_find_all_exits(self):
-        self.inuse = [[0 for i in range(self.height)]
-                      for j in range(self.width)]
-        cand = [[0 for i in range(self.height)]
-                for j in range(self.width)]
-
-        #
-        # First pass find all the places we could place a corridor
-        #
-        border = self.corridor_spacing
-        for y in range(border + 1, self.height - (border + 1)):
-            for x in range(border + 1, self.width - (border + 1)):
-
-                if not self.is_floor_at_fast(x, y):
-                    continue
-
-                if self.is_wall_at(x, y):
-                    self.inuse[x][y] = 1
-                    continue
-
-                if self.is_corridor_at(x, y):
-                    self.inuse[x][y] = 1
-                    continue
-
-                if not self.is_any_floor_at(x + 1, y):
-                    cand[x][y] = 1
-                elif not self.is_any_floor_at(x - 1, y):
-                    cand[x][y] = 1
-                elif not self.is_any_floor_at(x, y - 1):
-                    cand[x][y] = 1
-                elif not self.is_any_floor_at(x, y + 1):
-                    cand[x][y] = 1
-
-        possible_new_corridors = []
-
-        #
-        # Next pass filter all places we could start that are too near
-        # to other corridors that already exist, or are candidates to
-        # create.
-        #
-        for y in range(border + 1, self.height - (border + 1)):
-            for x in range(border + 1, self.width - (border + 1)):
-
-                if not cand[x][y]:
-                    continue
-
-                c = - self.corridor_spacing
-                d = self.corridor_spacing + 1
-
-                #
-                # Check no corridor adjacent to any other one nearby. Or
-                # any new one we plan.
-                #
-                skip = false
-                for dx in range(c, d):
-                    for dy in range(c, d):
-                        if dx == 0 and dy == 0:
-                            continue
-
-                        if cand[x + dx][y + dy]:
-                            self.inuse[x + dx][y + dy] = 1
-                            skip = true
-                            break
-
-                        if self.is_corridor_at(x + dx, y + dy):
-                            self.inuse[x + dx][y + dy] = 1
-                            skip = true
-                            break
-                    if skip:
-                        break
-                if skip:
-                    continue
-
-                possible_new_corridors.append((x, y))
-
-        #
-        # Return the final list of corridor starts
-        #
-        return possible_new_corridors
-
-    #
-    # For each room exit (and we search the whole room) grow corridors
-    #
-    def rooms_all_grow_new_corridors(self):
-
-        possible_new_corridors = self.rooms_find_all_exits()
-
-        #
-        # For each possible direction of a corridor, sprout one.
-        #
-        for coord in possible_new_corridors:
-            x, y = coord
-
-            # a b c
-            # d * f
-            # g h i
-            b = self.inuse[x][y-1]
-            d = self.inuse[x-1][y]
-            f = self.inuse[x+1][y]
-            h = self.inuse[x][y+1]
-
-            if not b:
-                self.room_corridor_draw(x, y, 0, - 1, c=charmap.CORRIDOR)
-            if not d:
-                self.room_corridor_draw(x, y, -1, 0, c=charmap.CORRIDOR)
-            if not f:
-                self.room_corridor_draw(x, y, 1, 0, c=charmap.CORRIDOR)
-            if not h:
-                self.room_corridor_draw(x, y, 0, 1, c=charmap.CORRIDOR)
-
-    #
-    # From a fixed list of random roomnos, return the next one. This
-    # ensures no room will ever appear more than once.
-    #
-    def rooms_get_next_roomno(self):
-        while true:
-            if random.randint(0, 100) <= self.fixed_room_chance:
-                roomno = self.fixed_roomno_list.pop(0)
-                self.fixed_roomno_list.append(roomno)
-            else:
-                roomno = self.random_roomno_list.pop(0)
-                self.random_roomno_list.append(roomno)
-
-            #
-            # Make sure we never place the same room twice.
-            #
-            if roomno not in self.roomnos:
-                return roomno
-
-        return roomno
-
-    #
-    # Search for corridor end points and try to dump rooms there.
-    #
-    def rooms_all_try_to_place_at_end_of_corridors(self):
-
-        roomno = self.rooms_get_next_roomno()
-        room = self.rooms[roomno]
-        placed_a_room = false
-
-        #
-        # For all corridor end points.
-        #
-        for coord in self.corridor_ends:
-            cx, cy = coord
-
-            #
-            # Try to attach room only by it's edges. This is a bit quicker
-            # than searching the room for exits.
-            #
-            for edge in room.edge_exits:
-                rx, ry = edge
-
-                x = cx - rx
-                y = cy - ry
-
-                if self.room_place_if_no_overlaps(roomno, x - 1, y):
-                    placed_a_room = true
-                elif self.room_place_if_no_overlaps(roomno, x + 1, y):
-                    placed_a_room = true
-                elif self.room_place_if_no_overlaps(roomno, x, y - 1):
-                    placed_a_room = true
-                elif self.room_place_if_no_overlaps(roomno, x, y + 1):
-                    placed_a_room = true
-
-                if placed_a_room:
-                    break
-
-            if placed_a_room:
-                break
-
-        #
-        # Placed at least one?
-        #
-        return placed_a_room
-
-    #
-    # Place the first room in a level, in the center ish. First room should
-    # not be a fixed room.
-    #
-    def room_place_first(self):
-        self.room_connection = {}
-
-        room_place_tries = 0
-        while true:
-            room_place_tries += 1
-
-            #
-            # First room should not be fixed.
-            #
-            roomno = self.rooms_get_next_roomno()
-            if roomno < self.fixed_room_count:
-                room = self.rooms[roomno]
-                if room.can_be_placed_as_first_room is not true:
-                    if room_place_tries < 100:
-                        continue
-
-            room = self.rooms[roomno]
-            x = int(self.width / 2)
-            y = int(self.height / 2)
-            room = self.rooms[roomno]
-            x -= int(room.width / 2)
-            y -= int(room.height / 2)
-
-            if self.room_place_if_no_overlaps(roomno, x, y):
-                self.roomno_first = roomno
-
-                room = self.rooms[roomno]
-                room.can_be_placed_as_start = true
-                room.can_be_placed_as_exit = false
-                return true
-
-            if room_place_tries > 1000:
-                mm.err("Could not place first room")
-                return false
-
-    #
-    # Place remaining rooms hanging off of the corridors of the last.
-    #
-    def rooms_place_remaining(self, rooms_on_level):
-        self.corridor_ends = []
-        self.rooms_all_grow_new_corridors()
-
-        room_place_tries = 0
-        while self.rooms_on_level < rooms_on_level:
-            room_place_tries += 1
-            if room_place_tries > rooms_on_level * 10:
-                mm.log("Tried to place rooms for too long, made {0} rooms".
-                       format(self.rooms_on_level))
-#                self.dump()
-                return false
-
-            #
-            # If we place at least one new room, we will have new corridors
-            # to grow.
-            #
-            if self.rooms_all_try_to_place_at_end_of_corridors():
-                self.rooms_all_grow_new_corridors()
-
-        return true
-
-    #
-    # Place all rooms
-    #
-    def rooms_place_all(self, rooms_on_level):
-        self.roomnos = set()
-        if not self.room_place_first():
-            return false
-        if not self.rooms_place_remaining(rooms_on_level):
-            return false
-        self.roomnos = sorted(self.roomnos)
-        return true
-
-    #
-    # Remove dangling corridors that go nowhere.
-    #
-    def rooms_trim_corridors(self):
-        trimmed = true
-        while trimmed:
-            trimmed = false
-            for y in range(self.height):
-                for x in range(self.width):
-                    if not self.is_corridor_at(x, y):
-                        continue
-
-                    nbrs = 0
-                    if self.is_corridor_or_floor_at(x - 1, y):
-                        if not self.is_wall_at(x - 1, y):
-                            nbrs += 1
-                    if self.is_corridor_or_floor_at(x + 1, y):
-                        if not self.is_wall_at(x + 1, y):
-                            nbrs += 1
-                    if self.is_corridor_or_floor_at(x, y - 1):
-                        if not self.is_wall_at(x, y - 1):
-                            nbrs += 1
-                    if self.is_corridor_or_floor_at(x, y + 1):
-                        if not self.is_wall_at(x, y + 1):
-                            nbrs += 1
-                    if nbrs < 2:
-                        self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.SPACE)
-                        trimmed = true
-
-    #
-    # Remove dangling corridors that go nowhere.
-    #
-    def rooms_trim_looped_corridors(self):
-
-        walked = [[0 for i in range(self.height)]
-                  for j in range(self.width)]
-
-        for y in range(1, self.height - 1):
-            for x in range(1, self.width - 1):
-                if walked[x][y]:
-                    continue
-
-                if not self.is_corridor_at(x, y) and \
-                   not self.is_door_at(x, y):
-                    continue
-
-                roomno = None
-                corridor = self.flood_find(x, y, self.is_corridor_or_door_at)
-
-                #
-                # We've found all tiles in this corridor. Now find all rooms
-                # adjacent to the corridor and connect many to many
-                #
-                rooms_adjoining_this_corridor = set()
-                for c in corridor:
-                    cx, cy = c
-
-                    walked[cx][cy] = 1
-
-                    for dx, dy in biome.XY_DELTAS:
-                        if self.is_movement_blocking_at(cx + dx, cy + dy):
-                            continue
-
-                        fx = cx + dx
-                        fy = cy + dy
-
-                        if not self.is_floor_at(fx, fy) and \
-                           not self.is_door_at(fx, fy):
-                            continue
-
-                        #
-                        # Keep track of all room exits so we can use them
-                        # later to place doors perhaps
-                        #
-                        roomno = self.getr(fx, fy)
-                        if roomno not in self.room_exits:
-                            self.room_exits[roomno] = set()
-                        self.room_exits[roomno].add((fx, fy))
-
-                        #
-                        # Add this room to the list of adjoining rooms
-                        #
-                        rooms_adjoining_this_corridor.add(roomno)
-
-                #
-                # Connect each room to each other to build a graph
-                #
-                for roomno in rooms_adjoining_this_corridor:
-                    for n in rooms_adjoining_this_corridor:
-                        self.room_connection[n].add(roomno)
-                        self.room_connection[roomno].add(n)
-
-                if len(rooms_adjoining_this_corridor) < 2:
-                    self.flood_replace(x, y,
-                                       Charmap::DEPTH_FLOOR,
-                                       charmap.CORRIDOR,
-                                       charmap.SPACE)
-
-    #
-    # Display room connectivity info
-    #
-    def rooms_dump_info(self):
-
-        for r in self.roomnos:
-            mm.log("room {0} --> neighbor {1}".format(r,
-                                                      self.room_connection[r]))
-            for e in self.room_exits[r]:
-                mm.log("    exit at {0}".format(e))
-
-    #
-    # Lock some rooms - not the first room
-    #
-    def rooms_randomly_lock(self):
-
-        for roomno in self.roomnos:
-            if roomno not in self.roomno_depth:
-                self.dump()
-                sys.exit(1)
-
-            if self.roomno_locked[roomno]:
-                continue
-
-            if self.roomno_depth[roomno] > 0:
-                if random.randint(0, 100) < self.room_locked_chance:
-                    for e in self.room_exits[roomno]:
-                        ex, ey = e
-                        self.putc(ex, ey, Charmap::DEPTH_WALL, charmap.DOOR)
-                        self.roomno_locked[roomno] = true
-
-    #
-    # Starting from the first room, do a breadth first search to find out
-    # the depth of all rooms from the first.
-    #
-    def rooms_set_depth(self):
-
-        roomno = self.roomno_first
-        stack = [roomno]
-
-        self.roomno_depth = {}
-        self.roomno_depth[roomno] = 0
-
-        while len(stack) > 0:
-            roomno = stack.pop(0)
-
-            #
-            # Rooms are harder to get to
-            #
-            if roomno in self.roomno_locked:
-                if self.roomno_locked[roomno]:
-                    self.roomno_depth[roomno] = self.roomno_depth[roomno] + 2
-
-            for neb in self.room_connection[roomno]:
-                if neb not in self.roomno_depth:
-                    stack.append(neb)
-                    self.roomno_depth[neb] = self.roomno_depth[roomno] + 1
-
-    #
-    # Make corridors rise up
-    #
-    def rooms_corridor_bridge_height(self):
-
-        self.bridge_height = [[0 for i in range(self.height)]
-                              for j in range(self.width)]
-
-        for y in range(self.height):
-            for x in range(self.width):
-                if not self.is_corridor_at(x, y) and \
-                   not self.is_dusty_at(x, y):
-                    continue
-
-                if self.is_wall_at(x, y) or \
-                   self.is_cwall_at(x, y):
-                    continue
-
-                score = 0
-
-                #
-                # Bridges only span obstacles
-                #
-                for dx, dy in biome.XY_DELTAS:
-                    tx = x + dx
-                    ty = y + dy
-
-                    if self.is_water_at(tx, ty):
-                        score += 1
-
-                    if self.is_chasm_at(tx, ty):
-                        score += 1
-
-                    if self.is_lava_at(tx, ty):
-                        score += 1
-
-                    #
-                    # Part of a bridge?
-                    #
-                    if self.bridge_height[tx][ty]:
-                        score += 1
-
-                if score < 1:
-                    continue
-
-                #
-                # Find the bridge size
-                #
-                for x1 in range(x, 0, -1):
-                    if not self.is_corridor_at(x1, y) and \
-                       not self.is_dusty_at(x1, y):
-                        break
-
-                for x2 in range(x + 1, self.width, 1):
-                    if not self.is_corridor_at(x2, y) and \
-                       not self.is_dusty_at(x2, y):
-                        break
-
-                cw = x2 - x1
-
-                for y1 in range(y, 0, -1):
-                    if not self.is_corridor_at(x, y1) and \
-                       not self.is_dusty_at(x, y1):
-                        break
-
-                for y2 in range(y + 1, self.height, 1):
-                    if not self.is_corridor_at(x, y2) and \
-                       not self.is_dusty_at(x, y2):
-                        break
-
-                ch = y2 - y1
-
-                #
-                # Which dimension of bridge is thickest?
-                #
-                if cw > ch:
-                    step = (x - x1) / cw
-                    if step < 0.5:
-                        self.bridge_height[x][y] = (x - x1)
-                    else:
-                        self.bridge_height[x][y] = (x2 - x)
-                else:
-                    step = (y - y1) / ch
-                    if step < 0.5:
-                        self.bridge_height[x][y] = (y - y1)
-                    else:
-                        self.bridge_height[x][y] = (y2 - y)
-
-    def rooms_corridor_bridge_smooth(self):
-
-        new_bridge_height = [[0 for i in range(self.height)]
-                             for j in range(self.width)]
-
-        for y in range(1, self.height - 1):
-            for x in range(1, self.width - 1):
-
-                if not self.is_floor_at(x, y) and \
-                   not self.is_corridor_at(x, y) and \
-                   not self.is_dusty_at(x, y):
-                    continue
-
-                count = 1
-                h = 0
-
-                for dx, dy in biome.XY_DELTAS:
-                    tx = x + dx
-                    ty = y + dy
-
-                    if self.bridge_height[tx][ty] != 0:
-                        count += 1.0
-                        h += self.bridge_height[tx][ty]
-
-                if count == 0:
-                    continue
-
-                h = h / count
-
-                new_bridge_height[x][y] = h
-
-        for y in range(1, self.height - 1):
-            for x in range(1, self.width - 1):
-                self.bridge_height[x][y] = new_bridge_height[x][y]
-
-    #
-    # Any rooms opening onto nothing, fill them in
-    #
-    def rooms_plug_walls(self):
-        for y in range(self.height):
-            for x in range(self.width):
-                if not self.is_floor_at_fast(x, y):
-                    continue
-
-                if self.is_door_at(x, y):
-                    continue
-
-                if self.is_movement_blocking_at(x, y):
-                    continue
-
-                for dx in range(-1, 2):
-                    for dy in range(-1, 2):
-                        if not self.is_any_floor_at(x + dx, y + dy):
-                            self.putc(x + dx, y + dy,
-                                      Charmap::DEPTH_WALL, charmap.WALL)
-                            self.putc(x + dx, y + dy,
-                                      Charmap::DEPTH_FLOOR, charmap.FLOOR)
-
-    #
-    # Wrap corridors in walls that are not bridges
-    #
-    def add_cwall(self):
-        for y in range(1, self.height - 1):
-            for x in range(1, self.width - 1):
-                if not self.is_corridor_at(x, y):
-                    continue
-
-                if self.bridge_height[x][y] == 0:
-
-                    if self.bridge_height[x+1][y] != 0:
-                        self.bridge_height[x][y] = self.bridge_height[x+1][y]
-                    if self.bridge_height[x-1][y] != 0:
-                        self.bridge_height[x][y] = self.bridge_height[x-1][y]
-                    if self.bridge_height[x][y-1] != 0:
-                        self.bridge_height[x][y] = self.bridge_height[x][y-1]
-                    if self.bridge_height[x][y+1] != 0:
-                        self.bridge_height[x][y] = self.bridge_height[x][y+1]
-
-                    for dx, dy in biome.ALL_DELTAS_BAR_MID:
-                        tx = x + dx
-                        ty = y + dy
-                        if not self.is_anything_at(tx, ty):
-                            self.putc(tx, ty, Charmap::DEPTH_WALL,
-                                      charmap.CWALL)
-
-    #
-    # Dissolve walls
-    #
-    def dissolve_room_walls(self):
-        for y in range(1, self.height - 1):
-            for x in range(1, self.width - 1):
-                if not self.is_wall_at(x, y):
-                    continue
-
-                if random.randint(0, 100) < 90:
-                    continue
-
-                for dx, dy in biome.XY_DELTAS:
-                    tx = x + dx
-                    ty = y + dy
-
-                    if self.is_wall_at(tx, ty):
-                        continue
-
-                    if self.is_cwall_at(tx, ty):
-                        continue
-
-                    if self.is_floor_at(tx, ty):
-                        continue
-
-                    if self.is_dissolves_walls_at(tx, ty):
-                        if self.is_door_at(x + 1, y) or \
-                           self.is_door_at(x - 1, y) or \
-                           self.is_door_at(x, y + 1) or \
-                           self.is_door_at(x, y - 1):
-                            self.putc(x, y, Charmap::DEPTH_WALL, charmap.DOOR)
-                        else:
-                            self.putc(x, y, Charmap::DEPTH_WALL, charmap.SPACE)
-
-                        break
-
-    #
-    # Dissolve corridor walls
-    #
-    def dissolve_room_cwalls(self):
-        for y in range(1, self.height - 1):
-            for x in range(1, self.width - 1):
-                if not self.is_cwall_at(x, y):
-                    continue
-
-                if random.randint(0, 100) < 50:
-                    continue
-
-                for dx, dy in biome.XY_DELTAS:
-                    tx = x + dx
-                    ty = y + dy
-
-                    if self.is_wall_at(tx, ty):
-                        continue
-
-                    if self.is_cwall_at(tx, ty):
-                        continue
-
-                    if self.is_floor_at(tx, ty):
-                        continue
-
-                    if self.is_dissolves_walls_at(tx, ty):
-                        self.putc(x, y, Charmap::DEPTH_WALL, charmap.SPACE)
-                        break
-
-    #
-    # Any dead end doors with no corridor, zap em
-    #
-    def rooms_plug_doors(self):
-        for y in range(self.height):
-            for x in range(self.width):
-                if not self.is_door_at(x, y):
-                    continue
-
-                ok = false
-                for dx, dy in biome.XY_DELTAS:
-                    if self.is_corridor_at(x + dx, y + dy):
-                        ok = true
-                        break
-
-                if not ok:
-                    self.putc(x, y, Charmap::DEPTH_WALL, charmap.WALL)
-
-    #
-    # Find all tiles where we can place objects
-    #
-    def rooms_find_occupiable_tiles(self):
-        for roomno in self.roomnos:
-            self.room_occupiable_tiles[roomno] = []
-
-        for y in range(self.height):
-            for x in range(self.width):
-                if not self.is_floor_at_fast(x, y):
-                    continue
-
-                if self.is_movement_blocking_at(x, y):
-                    continue
-
-                roomno = self.getr(x, y)
-
-                self.room_occupiable_tiles[roomno].append((x, y))
-
-    #
-    # Any dead end doors with no corridor, zap em
-    #
-    def rooms_place_start(self):
-        tries = 0
-        while true:
-            tries = tries + 1
-            if tries > 100:
-                return false
-
-            while true:
-                roomno = random.choice(self.roomnos)
-                room = self.rooms[roomno]
-
-                if room.can_be_placed_as_start:
-                    break
-
-            x, y = random.choice(self.room_occupiable_tiles[roomno])
-
-            obstacle = false
-            for dx, dy in biome.ALL_DELTAS:
-                if self.is_movement_blocking_at(x + dx, y + dy):
-                    obstacle = true
-                    break
-
-            if obstacle:
-                continue
-
-            self.putc(x, y, Charmap::DEPTH_WALL, charmap.START)
-            return true
-
-    #
-    # Any dead end doors with no corridor, zap em
-    #
-    def rooms_place_exit(self):
-        tries = 0
-        while true:
-            tries = tries + 1
-            if tries > 100:
-                return false
-
-            while true:
-                roomno = random.choice(self.roomnos)
-                room = self.rooms[roomno]
-
-                if room.can_be_placed_as_exit:
-                    break
-
-            x, y = random.choice(self.room_occupiable_tiles[roomno])
-
-            obstacle = false
-            for dx, dy in biome.ALL_DELTAS:
-                if self.is_movement_blocking_at(x + dx, y + dy):
-                    obstacle = true
-                    break
-
-            if obstacle:
-                continue
-
-            self.putc(x, y, Charmap::DEPTH_WALL, charmap.EXIT)
-            return true
-
-    #
-    # For each locked room place a key at a dungeon depth less than
-    # that of the room. This then allows nested locks.
-    #
-    def room_place_key(self, roomno):
-
-        #
-        # Find a room at a lower depth for this key. We should be able
-        # to reach such rooms.
-        #
-        tries = 0
-        while true:
-            tries = tries + 1
-            if tries > 100:
-                return false
-
-            key_roomno = random.choice(self.roomnos)
-            if key_roomno == roomno:
-                continue
-
-            if self.roomno_depth[key_roomno] >= self.roomno_depth[roomno]:
-                continue
-
-            break
-
-        #
-        # Now place the key
-        #
-        tries = 0
-        while true:
-            tries = tries + 1
-            if tries > 100:
-                break
-
-            #
-            # Make sure there is space around the key
-            #
-            x, y = random.choice(self.room_occupiable_tiles[key_roomno])
-
-            obstacle = false
-            for dx, dy in biome.ALL_DELTAS:
-                if self.is_movement_blocking_at(x + dx, y + dy):
-                    obstacle = true
-                    break
-
-            if obstacle:
-                continue
-
-            self.putc(x, y, Charmap::DEPTH_WALL, charmap.KEY)
-            return true
-
-    def rooms_place_keys(self):
-
-        for roomno in self.roomnos:
-            if not self.roomno_locked[roomno]:
-                continue
-
-            tries = 0
-            while true:
-                tries = tries + 1
-                if tries > 100:
-                    return false
-
-                if self.room_place_key(roomno):
-                    break
-
-        return true
-
-    #
-    # Make randomly shaped rooms
-    #
-    # We use the map as a scratchpad for creating the room.
-    #
-    def rooms_all_create_random_shapes(self):
-        cnt = 0
-
-        #
-        # First draw some random lines
-        #
-        while cnt < 10:
-            x1 = random.randint(-10, self.width + 10)
-            y1 = random.randint(-10, self.height + 10)
-            x2 = random.randint(-10, self.width + 10)
-            y2 = random.randint(-10, self.height + 10)
-            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
-                           charmap.FLOOR)
-            cnt += 1
-        #
-        # Next draw straight across lines.
-        #
-        cnt = 0
-        while cnt < 10:
-            x1 = random.randint(-10, self.width + 10)
-            y1 = random.randint(-10, self.height + 10)
-            x2 = x1 + 10
-            y2 = y1
-            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
-                           charmap.FLOOR)
-            cnt += 1
-        #
-        # Next draw straight down lines.
-        #
-        cnt = 0
-        while cnt < 10:
-            x1 = random.randint(-10, self.width + 10)
-            y1 = random.randint(-10, self.height + 10)
-            x2 = x1
-            y2 = y1 + 10
-            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
-                           charmap.FLOOR)
-            cnt += 1
-        #
-        # Next randomly fill in with floor tiles. This will make large
-        # patches of connected floor tiles.
-        #
-        cnt = 0
-        while cnt < 10:
-            x = random.randint(0, self.width - 1)
-            y = random.randint(0, self.height - 1)
-            self.flood_fill(x, y, Charmap::DEPTH_FLOOR, charmap.FLOOR)
-            cnt += 1
-        #
-        # Now carve out some empty regions. We could just do smaller
-        # regions above, but somehow this looks better.
-        #
-        cnt = 0
-        while cnt < 10:
-            x1 = random.randint(-10, self.width + 10)
-            y1 = random.randint(-10, self.height + 10)
-            x2 = random.randint(-10, self.width + 10)
-            y2 = random.randint(-10, self.height + 10)
-            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
-                           charmap.SPACE)
-            cnt += 1
-        cnt = 0
-        while cnt < 10:
-            x1 = random.randint(-10, self.width + 10)
-            y1 = random.randint(-10, self.height + 10)
-            x2 = x1 + 10
-            y2 = y1
-            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
-                           charmap.SPACE)
-            cnt += 1
-        cnt = 0
-        while cnt < 10:
-            x1 = random.randint(-10, self.width + 10)
-            y1 = random.randint(-10, self.height + 10)
-            x2 = x1
-            y2 = y1 + 10
-            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
-                           charmap.SPACE)
-            cnt += 1
-        #
-        # Now pull each room out of the level with a kind of inverse
-        # flood fill.
-        #
-        cnt = 0
-        for y in range(self.height):
-            for x in range(self.width):
-                if self.is_floor_at_fast(x, y):
-                    roomno = self.flood_erase(x, y)
-                    cnt += 1
-                    #
-                    # Filter to rooms of a certain size.
-                    #
-                    if len(roomno) < self.min_room_size:
-                        continue
-
-                    #
-                    # Find the size of this random room.
-                    #
-                    minx = dmap.WALL
-                    maxx = -dmap.WALL
-                    miny = dmap.WALL
-                    maxy = -dmap.WALL
-                    for p in roomno:
-                        rx, ry = p
-                        if rx < minx:
-                            minx = rx
-                        if ry < miny:
-                            miny = ry
-                        if rx > maxx:
-                            maxx = rx
-                        if ry > maxy:
-                            maxy = ry
-
-                    rw = maxx - minx + 1
-                    rh = maxy - miny + 1
-                    rw += 2
-                    rh += 2
-
-                    #
-                    # Now we need to create the floor and wall vertical
-                    # room slices.
-                    #
-                    rcells = [[' ' for i in range(rh)] for j in range(rw)]
-                    for p in roomno:
-                        rx, ry = p
-                        rx -= minx
-                        ry -= miny
-                        rx += 1
-                        ry += 1
-                        rcells[rx][ry] = charmap.FLOOR
-
-                    for ry in range(rh):
-                        for rx in range(rw):
-                            if rcells[rx][ry] == charmap.FLOOR:
-                                if rcells[rx-1][ry] == charmap.SPACE:
-                                    rcells[rx-1][ry] = charmap.WALL
-                                if rcells[rx+1][ry] == charmap.SPACE:
-                                    rcells[rx+1][ry] = charmap.WALL
-                                if rcells[rx][ry-1] == charmap.SPACE:
-                                    rcells[rx][ry-1] = charmap.WALL
-                                if rcells[rx][ry+1] == charmap.SPACE:
-                                    rcells[rx][ry+1] = charmap.WALL
-
-                    vert_floor_slice = copy.deepcopy(rcells)
-                    vert_wall_slice = copy.deepcopy(rcells)
-                    vert_obj_slice = [[' ' for i in range(rh)]
-                                      for j in range(rw)]
-
-                    for ry in range(0, rh):
-                        for rx in range(0, rw):
-                            if vert_floor_slice[rx][ry] == charmap.WALL:
-                                vert_floor_slice[rx][ry] = charmap.FLOOR
-                            if vert_wall_slice[rx][ry] == charmap.FLOOR:
-                                vert_wall_slice[rx][ry] = charmap.SPACE
-                            if vert_wall_slice[rx][ry] == charmap.WALL:
-                                if rx % 2 == 0 and ry % 2 == 0:
-                                    if random.randint(0, 100) < 50:
-                                        vert_wall_slice[rx][ry] = charmap.SPACE
-                    #
-                    # To dump the room:
-                    #
-                    if false:
-                        for ry in range(rh):
-                            for rx in range(rw):
-                                mm.puts(vert_floor_slice[rx][ry])
-                            mm.puts("\n")
-
-                        for ry in range(rh):
-                            for rx in range(rw):
-                                mm.puts(vert_wall_slice[rx][ry])
-                            mm.puts("\n")
-
-                    #
-                    # Add to the rooms list.
-                    #
-                    r = room.Room()
-                    r.vert_slice_add("floor", vert_floor_slice)
-                    r.vert_slice_add("wall", vert_wall_slice)
-                    r.vert_slice_add("obj", vert_obj_slice)
-                    r.finalize()
-                    r.can_be_placed_as_exit = true
-                    self.rooms.append(r)
-
-        #
-        # Zero out the map as we were lazy and used it for a scratchpad
-        # when creating rooms.
-        #
-        self.cells = [[[' ' for d in range(Charmap::DEPTH_MAX)]
-                       for i in range(self.height)]
-                      for j in range(self.width)]
-
-    def add_depth_map(self):
-
-        wall = dmap.WALL
-        floor = dmap.FLOOR
-        goal = dmap.GOAL
-
-        self.depth_map = dmap.Dmap(width=self.width, height=self.height)
-
-        for y in range(self.height):
-            for x in range(self.width):
-                self.depth_map.cells[x][y] = floor
-
-        for x in [0, self.width - 1]:
-            for y in range(self.height):
-                self.depth_map.cells[x][y] = wall
-
-        for y in [0, self.height - 1]:
-            for x in range(self.width):
-                self.depth_map.cells[x][y] = wall
-
-        for i in range(0, 100):
-            x = random.randint(0, self.width - 1)
-            y = random.randint(0, self.height - 1)
-            self.depth_map.cells[x][y] = wall
-
-        for i in range(0, 100):
-            border = random.randint(1, 3)
-            x = random.randint(border, self.width - border)
-            y = random.randint(border, self.height - border)
-            for dx in range(-border, border):
-                for dy in range(-border, border):
-                    if random.randint(0, 100) < 25:
-                        self.depth_map.cells[x + dx][y + dy] = wall
-
-        for i in range(0, 10):
-            border = random.randint(1, 10)
-            x = random.randint(border, self.width - border)
-            y = random.randint(border, self.height - border)
-            for dx in range(-border, border):
-                for dy in range(-border, border):
-                    if random.randint(0, 100) < 5:
-                        self.depth_map.cells[x + dx][y + dy] = goal
-
-        self.depth_map.process()
-
-        if false:
-            self.depth_map.dump()
-
-    def depth_map_flood(self, x, y, depth, c):
-        walked = [[0 for i in range(self.height)]
-                  for j in range(self.width)]
-
-        stack = [(x, y)]
-        while len(stack) > 0:
-            x, y = stack.pop(0)
-
-            if self.is_oob(x, y):
-                continue
-
-            if walked[x][y]:
-                continue
-
-            walked[x][y] = 1
-
-            if self.depth_map.cells[x][y] >= dmap.WALL:
-                continue
-
-            self.putc(x, y, depth, c)
-            stack.append((x + 1, y))
-            stack.append((x - 1, y))
-            stack.append((x, y + 1))
-            stack.append((x, y - 1))
-
-    def add_water(self):
-        x = random.randint(0, self.width - 1)
-        y = random.randint(0, self.height - 1)
-        self.depth_map_flood(x, y, Charmap::DEPTH_UNDER, charmap.WATER)
-
-    def remove_chasm_next_to_water(self):
-        for y in range(self.height):
-            for x in range(self.width):
-                if not self.is_water_at(x, y):
-                    continue
-
-                for dx, dy in biome.ALL_DELTAS_BAR_MID:
-                    tx = x + dx
-                    ty = y + dy
-                    if self.is_chasm_at(tx, ty):
-                        self.putc(tx, ty, Charmap::DEPTH_UNDER, charmap.WATER)
-
-    def remove_lava_next_to_water(self):
-        for y in range(self.height):
-            for x in range(self.width):
-                if not self.is_water_at(x, y):
-                    continue
-
-                for dx, dy in biome.ALL_DELTAS_BAR_MID:
-                    tx = x + dx
-                    ty = y + dy
-                    if self.is_lava_at(tx, ty):
-                        self.putc(x, y, Charmap::DEPTH_UNDER, charmap.ROCK)
-                        break
-
-    def add_lava(self):
-        x = random.randint(0, self.width - 1)
-        y = random.randint(0, self.height - 1)
-        self.depth_map_flood(x, y, Charmap::DEPTH_UNDER, charmap.LAVA)
-
-    def add_chasm(self):
-        x = random.randint(0, self.width - 1)
-        y = random.randint(0, self.height - 1)
-        self.depth_map_flood(x, y, Charmap::DEPTH_UNDER, charmap.CHASM)
-
-    #
-    # Find empty spots in chasms and create some random bridges
-    #
-    def add_chasm_bridges(self):
-        for y in range(1, self.height, 2):
-            for x in range(1, self.width, 2):
-                if not self.is_chasm_at(x, y):
-                    continue
-
-                if not self.is_chasm_at(x - 1, y - 1) or \
-                   not self.is_chasm_at(x, y - 1) or \
-                   not self.is_chasm_at(x + 1, y - 1) or \
-                   not self.is_chasm_at(x - 1, y) or \
-                   not self.is_chasm_at(x + 1, y) or \
-                   not self.is_chasm_at(x - 1, y + 1) or \
-                   not self.is_chasm_at(x, y + 1) or \
-                   not self.is_chasm_at(x + 1, y + 1):
-                    continue
-
-                if random.randint(0, 1000) < 995:
-                    continue
-
-                self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.DUSTY)
-
-                self.room_corridor_draw(x, y, 0, - 1, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, -1, 0, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, 1, 0, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, 0, 1, c=charmap.DUSTY)
-
-    #
-    # Find empty spots in lavas and create some random bridges
-    #
-    def add_lava_bridges(self):
-        for y in range(1, self.height, 2):
-            for x in range(1, self.width, 2):
-                if not self.is_lava_at(x, y):
-                    continue
-
-                if not self.is_lava_at(x - 1, y - 1) or \
-                   not self.is_lava_at(x, y - 1) or \
-                   not self.is_lava_at(x + 1, y - 1) or \
-                   not self.is_lava_at(x - 1, y) or \
-                   not self.is_lava_at(x + 1, y) or \
-                   not self.is_lava_at(x - 1, y + 1) or \
-                   not self.is_lava_at(x, y + 1) or \
-                   not self.is_lava_at(x + 1, y + 1):
-                    continue
-
-                if random.randint(0, 1000) < 995:
-                    continue
-
-                self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.DUSTY)
-
-                self.room_corridor_draw(x, y, 0, - 1, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, -1, 0, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, 1, 0, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, 0, 1, c=charmap.DUSTY)
-
-    #
-    # Find empty spots in waters and create some random bridges
-    #
-    def add_water_bridges(self):
-        for y in range(1, self.height, 2):
-            for x in range(1, self.width, 2):
-                if not self.is_water_at(x, y):
-                    continue
-
-                if not self.is_water_at(x - 1, y - 1) or \
-                   not self.is_water_at(x, y - 1) or \
-                   not self.is_water_at(x + 1, y - 1) or \
-                   not self.is_water_at(x - 1, y) or \
-                   not self.is_water_at(x + 1, y) or \
-                   not self.is_water_at(x - 1, y + 1) or \
-                   not self.is_water_at(x, y + 1) or \
-                   not self.is_water_at(x + 1, y + 1):
-                    continue
-
-                if random.randint(0, 1000) < 995:
-                    continue
-
-                self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.DUSTY)
-
-                self.room_corridor_draw(x, y, 0, - 1, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, -1, 0, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, 1, 0, c=charmap.DUSTY)
-                self.room_corridor_draw(x, y, 0, 1, c=charmap.DUSTY)
-
-    #
-    # Find empty spots in waters and create some random tunnels
-    #
-    def add_tunnels(self):
-        for y in range(3, self.height, 4):
-            for x in range(3, self.width, 4):
-
-                if not self.is_rock_at(x - 1, y - 1) or \
-                   not self.is_rock_at(x, y - 1) or \
-                   not self.is_rock_at(x + 1, y - 1) or \
-                   not self.is_rock_at(x - 1, y) or \
-                   not self.is_rock_at(x + 1, y) or \
-                   not self.is_rock_at(x - 1, y + 1) or \
-                   not self.is_rock_at(x, y + 1) or \
-                   not self.is_rock_at(x + 1, y + 1):
-                    continue
-
-                if random.randint(0, 100) < 75:
-                    continue
-
-                self.putc(x, y, Charmap::DEPTH_WALL, charmap.SPACE)
-                self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.DUSTY)
-
-                self.room_tunnel_draw(x, y, 0, - 1, c=charmap.DUSTY)
-                self.room_tunnel_draw(x, y, -1, 0, c=charmap.DUSTY)
-                self.room_tunnel_draw(x, y, 1, 0, c=charmap.DUSTY)
-                self.room_tunnel_draw(x, y, 0, 1, c=charmap.DUSTY)
-
-    #
-    # Find empty spots in waters and create some random tunnels
-    #
-    def add_treasure(self):
-
-        for t in range(20):
-            x = random.randint(0, self.width - 1)
-            y = random.randint(0, self.height - 1)
-
-            if not self.is_floor_at(x, y) and \
-               not self.is_corridor_at(x, y) and \
-               not self.is_dusty_at(x, y):
-                continue
-
-            if self.is_wall_at(x, y) or \
-               self.is_cwall_at(x, y) or \
-               self.is_door_at(x, y) or \
-               self.is_obj_at(x, y) or \
-               self.is_dungeon_way_up_at(x, y) or \
-               self.is_dungeon_way_down_at(x, y) or \
-               self.is_key_at(x, y) or \
-               self.is_rock_at(x, y):
-                continue
-
-            self.putc(x, y, Charmap::DEPTH_OBJ, charmap.TREASURE)
-
-    def add_rock(self):
-        for y in range(self.height):
-            for x in range(self.width):
-                for d in reversed(range(Charmap::DEPTH_MAX)):
-                    c = self.cells[x][y][d]
-                    if c != " ":
-                        break
-
-                if c == charmap.SPACE:
-                    self.putc(x, y, Charmap::DEPTH_WALL, charmap.ROCK)
-
-    def dump(self, max_depth=Charmap::DEPTH_MAX):
-        return
-        from colored import fg, bg, attr
-
-        for y in range(self.height):
-            for x in range(self.width):
-                for d in reversed(range(max_depth)):
-                    c = self.cells[x][y][d]
-                    cmap = charmap.charmap[c]
-                    fg_name = cmap["fg"]
-                    bg_name = cmap["bg"]
-                    if c != " ":
-                        break
-
-                res = attr('reset')
-                if c == charmap.FLOOR:
-                    r = self.roomno_cells[x][y]
-                    if r == -1:
-                        c = "!"
-                        color = fg("white") + bg("red")
-                    else:
-                        if self.depth_map is not None:
-                            depth = self.depth_map.cells[x][y] % 64
-                            color = fg(r + depth % 255) + bg(0)
-                        else:
-                            color = fg(r % 255) + bg(0)
-
-                    r = self.getr(x, y)
-                    if r is None:
-                        mm.log("No room depth at {0},{1}".format(x, y))
-                    else:
-                        if r in self.roomno_depth:
-                            d = self.roomno_depth[r]
-                            c = chr(ord('0') + d)
-                elif c == charmap.WATER:
-                    if self.depth_map is not None:
-                        depth = self.depth_map.cells[x][y] % 64
-                        color = fg(depth % 255) + bg(0)
-                    else:
-                        color = fg(fg_name) + bg(bg_name)
-                else:
-                    color = fg(fg_name) + bg(bg_name)
-
-                mm.puts(color + c + res)
-            mm.puts("\n")
-
-    def dump_depth(self, max_depth=Charmap::DEPTH_MAX):
-        return
-        from colored import fg, bg, attr
-
-        for y in range(self.height):
-            for x in range(self.width):
-                for d in reversed(range(max_depth)):
-                    c = self.cells[x][y][d]
-                    if c != " ":
-                        break
-
-                color = None
-
-                res = attr('reset')
-                if c != charmap.SPACE:
-                    if self.depth_map is not None:
-                        d = self.depth_map.cells[x][y] % 64
-                        c = chr(ord('0') + d)
-                        color = fg(d % 32) + bg(0)
-
-                if color:
-                    mm.puts(color + c + res)
-                else:
-                    mm.puts(" ")
-
-            mm.puts("\n")
-#endif

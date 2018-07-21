@@ -108,32 +108,32 @@ printf("  ");
                     a = D->val[x-1][y-1];
                 }
 
-                b =  D->val[x  ][y-1];
+                b = D->val[x  ][y-1];
 
                 if ((D->val[x+1][y] == DMAP_IS_WALL) ||
                     (D->val[x][y-1] == DMAP_IS_WALL)) {
                     c = DMAP_IS_WALL;
                 } else {
-                    c =  D->val[x+1][y-1];
+                    c = D->val[x+1][y-1];
                 }
 
-                d =  D->val[x-1][y];
-                f =  D->val[x+1][y];
+                d = D->val[x-1][y];
+                f = D->val[x+1][y];
 
                 if ((D->val[x-1][y] == DMAP_IS_WALL) ||
                     (D->val[x][y+1] == DMAP_IS_WALL)) {
                     g = DMAP_IS_WALL;
                 } else {
-                    g =  D->val[x-1][y+1];
+                    g = D->val[x-1][y+1];
                 }
 
-                h =  D->val[x  ][y+1];
+                h = D->val[x  ][y+1];
 
                 if ((D->val[x+1][y] == DMAP_IS_WALL) ||
                     (D->val[x][y+1] == DMAP_IS_WALL)) {
                     i = DMAP_IS_WALL;
                 } else {
-                    i =  D->val[x+1][y+1];
+                    i = D->val[x+1][y+1];
                 }
 
                 if (a < b) {

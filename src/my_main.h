@@ -73,9 +73,12 @@
  * Enhanced random number generator.
  */
 #include "my_pcg_basic.h"
-#define myrand() pcg32_random()
-#define mysrand(a) pcg32_srandom(a,a)
+#define myrand()           pcg32_random()
+#define mysrand(a)         pcg32_srandom(a,a)
+#define random_range(a, b) (pcg32_boundedrand(b - a) + a)
+
 //#define myrand() rand()
+
 //#define mysrand(a) srand(a)
 
 /*
