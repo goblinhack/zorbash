@@ -1144,11 +1144,6 @@ void wid_set_debug (widp w, uint8_t val)
     w->debug = val;
 }
 
-void wid_set_animate (widp w, uint8_t val)
-{_
-    w->animate = val;
-}
-
 void wid_set_text (widp w, std::wstring text)
 {_
     verify(w.get());
@@ -2174,7 +2169,6 @@ static widp wid_new (widp parent)
     wid_set_tex_br(w, sz2);
 
     w->visible = true;
-    w->animate = true;
 
     return (w);
 }
@@ -3268,19 +3262,6 @@ void wid_hide (widp w)
     if (w == wid_focus) {
         wid_find_top_focus();
     }
-}
-
-void wid_this_hide (widp w)
-{_
-    verify(w.get());
-
-    if (!w) {
-        return;
-    }
-
-    w->hidden = true;
-
-    w->visible = false;
 }
 
 static uint8_t wid_scroll_trough_mouse_down (widp w,

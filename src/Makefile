@@ -2,10 +2,10 @@ COMPILER_FLAGS=-Werror -I/opt/local/include/SDL2 -D_THREAD_SAFE -I/Library/Frame
     
 CLANG_COMPILER_WARNINGS=-Wall -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -Wno-trigraphs -Wmissing-prototypes -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-sign-conversion -std=c++11 -stdlib=libc++ # AUTOGEN
 GXX_COMPILER_WARNINGS=-x c++ -Wall -fmessage-length=0 -Wno-trigraphs -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -std=c++11 -fstack-protector-all -fstack-protector-strong # AUTOGEN
-COMPILER_WARNINGS=$(CLANG_COMPILER_WARNINGS) # AUTOGEN
 COMPILER_WARNINGS=$(GXX_COMPILER_WARNINGS) # AUTOGEN
-# CC=clang++ # AUTOGEN
+COMPILER_WARNINGS=$(CLANG_COMPILER_WARNINGS) # AUTOGEN
 CC=g++ # AUTOGEN
+CC=clang++ # AUTOGEN
     
 EXE= # AUTOGEN
 DSYM=dsymutil ../zorbash # AUTOGEN
@@ -47,6 +47,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/py_ttf.o 			\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/ramdisk_read.o 		\
+    $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/stb_image.o 		\
@@ -1187,7 +1188,7 @@ all: $(TARGET_GAME)
 .o/py_room.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
 .o/py_room.o: /usr/include/secure/_common.h my_python.h my_point.h
 .o/py_room.o: my_math_util.h my_tile.h my_config.h my_color.h my_tex.h
-.o/py_room.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h
+.o/py_room.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h my_room.h
 .o/py_sdl.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
 .o/py_sdl.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/py_sdl.o: /usr/include/sys/_posix_availability.h
@@ -1445,6 +1446,31 @@ all: $(TARGET_GAME)
 .o/ramdisk_read.o: /usr/include/runetype.h my_thing_template.h
 .o/ramdisk_read.o: my_thing_tile.h my_ptrcheck.h my_tile.h my_config.h
 .o/ramdisk_read.o: my_point.h my_math_util.h my_color.h my_tex.h my_file.h
+.o/room.o: my_main.h my_pcg_basic.h /usr/include/inttypes.h
+.o/room.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
+.o/room.o: /usr/include/sys/_posix_availability.h /usr/include/Availability.h
+.o/room.o: /usr/include/AvailabilityInternal.h /usr/include/_types.h
+.o/room.o: /usr/include/sys/_types.h /usr/include/machine/_types.h
+.o/room.o: /usr/include/i386/_types.h
+.o/room.o: /usr/include/sys/_pthread/_pthread_types.h
+.o/room.o: /usr/include/sys/_types/_wchar_t.h /usr/include/stdint.h
+.o/room.o: /usr/include/sys/_types/_int8_t.h
+.o/room.o: /usr/include/sys/_types/_int16_t.h
+.o/room.o: /usr/include/sys/_types/_int32_t.h
+.o/room.o: /usr/include/sys/_types/_int64_t.h /usr/include/_types/_uint8_t.h
+.o/room.o: /usr/include/_types/_uint16_t.h /usr/include/_types/_uint32_t.h
+.o/room.o: /usr/include/_types/_uint64_t.h
+.o/room.o: /usr/include/sys/_types/_intptr_t.h
+.o/room.o: /usr/include/sys/_types/_uintptr_t.h
+.o/room.o: /usr/include/_types/_intmax_t.h /usr/include/_types/_uintmax_t.h
+.o/room.o: my_callstack.h /usr/include/stdio.h
+.o/room.o: /usr/include/sys/_types/_va_list.h
+.o/room.o: /usr/include/sys/_types/_size_t.h /usr/include/sys/_types/_null.h
+.o/room.o: /usr/include/sys/stdio.h /usr/include/sys/_types/_off_t.h
+.o/room.o: /usr/include/sys/_types/_ssize_t.h /usr/include/secure/_stdio.h
+.o/room.o: /usr/include/secure/_common.h my_python.h my_point.h
+.o/room.o: my_math_util.h my_tile.h my_config.h my_color.h my_tex.h
+.o/room.o: my_thing_template.h my_thing_tile.h my_ptrcheck.h my_room.h
 .o/sdl.o: my_glapi.h my_color.h my_time_util.h /usr/include/assert.h
 .o/sdl.o: /usr/include/sys/cdefs.h /usr/include/sys/_symbol_aliasing.h
 .o/sdl.o: /usr/include/sys/_posix_availability.h /usr/include/unistd.h

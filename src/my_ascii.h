@@ -8,6 +8,7 @@
 
 #include "wchar.h"
 #include "my_point.h"
+#include "my_tile.h"
 #include "my_color.h"
 
 #define ASCII_MAP_WIDTH             79
@@ -71,6 +72,7 @@ void ascii_set_bg(int x, int y, texp, double tx, double ty,
 
 void ascii_dim(int x, int y, int z, double alpha);
 
+void ascii_putf(int x, int y, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, color bg, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, const std::wstring fmt, ...);
@@ -113,6 +115,9 @@ void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename,
 void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, tilep what, color c);
 
+void ascii_put_shaded_box(int x1, int y1, int x2, int y2,
+                          color col_border_text, color col_tl, color col_mid, color col_br,
+                          void *context);
 void ascii_put_shaded_box(int x1, int x2, int y1, int y2, const char *tilename, 
                           color c1, color c2, color c3, int alpha,
                           void *context);

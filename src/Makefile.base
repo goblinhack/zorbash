@@ -34,6 +34,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/py_ttf.o 			\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/ramdisk_read.o 		\
+    $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/stb_image.o 		\

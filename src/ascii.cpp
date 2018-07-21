@@ -5,6 +5,7 @@
  */
 
 #include "my_main.h"
+#include "my_ascii.h"
 #include "my_sdl.h"
 #include "my_tile.h"
 #include "my_tex.h"
@@ -103,7 +104,7 @@ int ascii_ok (int x, int y)
     return (true);
 }
 
-int ascii_ok_for_scissors (int x, int y)
+static int ascii_ok_for_scissors (int x, int y)
 {
     if (scissors_enabled) {
         if ((x < scissors_tl.x) || (x > scissors_br.x)) {
@@ -199,55 +200,6 @@ void *ascii_get_context (int x, int y)
     ascii_cell *cell = &cells[x][y];
 
     return (cell->context);
-}
-
-void ascii_dim (int x, int y, double dim)
-{
-    if (!ascii_ok(x, y)) {
-        return;
-    }
-
-    ascii_cell *cell = &cells[x][y];
-
-    cell->fg_color_tl.a = ((double) cell->fg_color_tl.a) * dim;
-    cell->fg_color_tl.r = ((double) cell->fg_color_tl.r) * dim;
-    cell->fg_color_tl.g = ((double) cell->fg_color_tl.g) * dim;
-    cell->fg_color_tl.b = ((double) cell->fg_color_tl.b) * dim;
-
-    cell->fg_color_tr.a = ((double) cell->fg_color_tr.a) * dim;
-    cell->fg_color_tr.r = ((double) cell->fg_color_tr.r) * dim;
-    cell->fg_color_tr.g = ((double) cell->fg_color_tr.g) * dim;
-    cell->fg_color_tr.b = ((double) cell->fg_color_tr.b) * dim;
-
-    cell->fg_color_bl.a = ((double) cell->fg_color_bl.a) * dim;
-    cell->fg_color_bl.r = ((double) cell->fg_color_bl.r) * dim;
-    cell->fg_color_bl.g = ((double) cell->fg_color_bl.g) * dim;
-    cell->fg_color_bl.b = ((double) cell->fg_color_bl.b) * dim;
-
-    cell->fg_color_br.a = ((double) cell->fg_color_br.a) * dim;
-    cell->fg_color_br.r = ((double) cell->fg_color_br.r) * dim;
-    cell->fg_color_br.g = ((double) cell->fg_color_br.g) * dim;
-    cell->fg_color_br.b = ((double) cell->fg_color_br.b) * dim;
-
-    cell->bg_color_tl.a = ((double) cell->bg_color_tl.a) * dim;
-    cell->bg_color_tl.r = ((double) cell->bg_color_tl.r) * dim;
-    cell->bg_color_tl.g = ((double) cell->bg_color_tl.g) * dim;
-    cell->bg_color_tl.b = ((double) cell->bg_color_tl.b) * dim;
-
-    cell->bg_color_tr.a = ((double) cell->bg_color_tr.a) * dim;
-    cell->bg_color_tr.r = ((double) cell->bg_color_tr.r) * dim;
-    cell->bg_color_tr.g = ((double) cell->bg_color_tr.g) * dim;
-    cell->bg_color_tr.b = ((double) cell->bg_color_tr.b) * dim;
-
-    cell->bg_color_bl.a = ((double) cell->bg_color_bl.a) * dim;
-    cell->bg_color_bl.r = ((double) cell->bg_color_bl.r) * dim;
-    cell->bg_color_bl.g = ((double) cell->bg_color_bl.g) * dim;
-    cell->bg_color_bl.b = ((double) cell->bg_color_bl.b) * dim;
-
-    cell->bg_color_br.a = ((double) cell->bg_color_br.a) * dim;
-    cell->bg_color_br.r = ((double) cell->bg_color_br.r) * dim;
-    cell->bg_color_br.g = ((double) cell->bg_color_br.g) * dim;
-    cell->bg_color_br.b = ((double) cell->bg_color_br.b) * dim;
 }
 
 void ascii_set_bg (int x, int y, const texp tex, double tx, double ty,
@@ -946,7 +898,7 @@ void ascii_draw_line (int x0, int y0, int x1, int y1,
 /*
  * Display one z layer of the ascii.
  */
-void ascii_blit (int no_color)
+static void ascii_blit (int no_color)
 {_
     /*
      * Get the mouse position to use. We use this to find the mouse tile that 

@@ -11,9 +11,9 @@
 #include "my_thing_tile.h"
 #include "my_tex.h"
 
+#if 0
 void thing_render_all (void)
 {_
-#if 0
     double mx = game.video_pix_width / 2;
     double my = game.video_pix_width / 4;
     my += game.video_pix_width / 16;
@@ -74,5 +74,5 @@ void thing_render_all (void)
     }
 
     blit_flush();
-#endif
 }
+#endif

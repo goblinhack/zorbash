@@ -95,7 +95,6 @@ tilep string2tile(const char **s);
 tilep string2tile(std::string &s, int *len);
 tilep string2tile(std::wstring &s, int *len);
 void tile_get_coords(tilep, float *x1, float *y1, float *x2, float *y2);
-
 void tile_blit_colored_fat(tpp tp,
                            tilep tile,
                            fpoint tl,
@@ -104,4 +103,16 @@ void tile_blit_colored_fat(tpp tp,
                            color color_tr,
                            color color_bl,
                            color color_br);
+void tile_blit_fat(tpp tp, tilep tile, char *name, fpoint *tl, fpoint *br);
+void tile_blit_fat_with_offset(tpp tp, tilep tile, 
+                               char *name, fpoint *tl,
+                               fpoint *br,
+                               double left_off,
+                               double right_off,
+                               double top_off,
+                               double bot_off);
+void tile_get_blit_size(tpp tp, tilep tile, char *name, 
+                        fpoint *tl, fpoint *br);
+void tile_blit_at(tilep tile, char *name, fpoint tl, fpoint br);
+void tile_blit(tilep tile, char *name, point at);
 #endif
