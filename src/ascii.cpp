@@ -4,25 +4,11 @@
  * See the README file for license info.
  */
 
-#include "my_main.h"
 #include "my_ascii.h"
-#include "my_sdl.h"
-#include "my_tile.h"
-#include "my_tex.h"
-#include "my_time_util.h"
-#include "my_thing_template.h"
-#include "my_thing_tile.h"
-#include "my_string.h"
-#include "my_ttf.h"
 #include "my_font.h"
 #include "my_ascii.h"
 #include "my_game.h"
-#include "my_math_util.h"
-#include "my_color.h"
 #include "my_glapi.h"
-#include <wchar.h>
-#include <string.h>
-#include <stdlib.h>
 
 struct ascii_ ascii;
 

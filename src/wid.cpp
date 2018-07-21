@@ -4,9 +4,8 @@
  * See the README file for license info for license.
  */
 
-#include "my_slre.h"
-
 #include "my_main.h"
+#include "my_slre.h"
 #include "my_wid.h"
 #include "my_tex.h"
 #include "my_tile.h"
@@ -17,7 +16,6 @@
 #include "my_math_util.h"
 #include "my_thing.h"
 #include "my_wid_tiles.h"
-#include "my_config.h"
 #include "my_game.h"
 #include "my_string.h"
 #include "my_ascii.h"

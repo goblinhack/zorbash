@@ -4,16 +4,7 @@
  * See the LICENSE file for license.
  */
 
-#include "my_main.h"
-#include "my_tile.h"
 #include "my_thing_tile.h"
-#include "my_python.h"
-#include "my_config.h"
-#include "my_math_util.h"
-#include "my_time_util.h"
-#include "my_thing.h"
-#include "my_thing_tile.h"
-#include "my_string.h"
 #include "my_game.h"
 
 static uint32_t thing_id;

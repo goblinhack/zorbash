@@ -6,14 +6,13 @@
 
 #include <SDL.h>
 
+#include "my_main.h"
 #include "my_sdl.h"
 #include "my_slre.h"
-#include "my_main.h"
 #include "my_wid_console.h"
 #include "my_command.h"
 #include "my_ttf.h"
 #include "my_string.h"
-#include "my_config.h"
 #include "my_wid.h"
 #include "my_ascii.h"
 

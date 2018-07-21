@@ -4,18 +4,12 @@
  * See the README file for license info for license.
  */
 
-#include "my_slre.h"
 #include "my_main.h"
-#include "my_sdl.h"
 #include "my_backtrace.h"
-#include "my_wid.h"
-#include "my_time_util.h"
-#include "my_command.h"
 #include "my_wid.h"
 #include "my_wid_console.h"
 #include "my_python.h"
 #include "my_term.h"
-#include "my_string.h"
 #include "my_thing.h"
 
 uint8_t croaked;

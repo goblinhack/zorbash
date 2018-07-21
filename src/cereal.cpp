@@ -1,13 +1,7 @@
-#include <cereal/types/memory.hpp>
-#include <cereal/types/vector.hpp>
 #include <cereal/types/map.hpp>
 #include <cereal/archives/json.hpp>
-#include <limits>
-#include <random>
 #include <fstream>
-#include "my_ptrcheck.h"
 #include "my_game.h"
-#include "my_main.h"
     
 int cereal_test (const std::string save_file)
 {

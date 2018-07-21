@@ -5,13 +5,6 @@
  */
 
 #include "my_glapi.h"
-#include "my_time_util.h"
-#include "my_ttf.h"
-#include "my_slre.h"
-#include "my_command.h"
-#include "my_term.h"
-#include "my_python.h"
-#include "my_config.h"
 #include "my_game.h"
 #include "my_wid.h"
 

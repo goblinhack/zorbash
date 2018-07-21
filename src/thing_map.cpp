@@ -4,12 +4,6 @@
  * See the LICENSE file for license.
  */
 
-#include "my_main.h"
-#include "my_python.h"
-#include "my_thing.h"
-#include "my_tile.h"
-#include "my_thing_tile.h"
-#include "my_tex.h"
 
 #if 0
 void thing_render_all (void)

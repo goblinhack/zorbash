@@ -4,20 +4,9 @@
  * See the README file for license info.
  */
 
-#include "my_main.h"
 #include "my_sdl.h"
-#include "my_tile.h"
-#include "my_time_util.h"
-#include "my_thing_template.h"
-#include "my_thing_tile.h"
-#include "my_string.h"
-#include "my_ttf.h"
-#include "my_ascii.h"
 #include "my_font.h"
 #include "my_ascii.h"
-#include "my_math_util.h"
-#include <string.h>
-#include <stdlib.h>
 
 void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
                            color col_border_text, color col_tl, color col_mid, color col_br,

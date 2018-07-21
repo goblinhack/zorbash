@@ -5,16 +5,9 @@
  */
 
 #include <libgen.h>
-#include <string>
-#include <algorithm>
 
-#include <SDL.h>
 #include "my_main.h"
 #include "my_sdl.h"
-#include "my_string.h"
-#include "my_tex.h"
-#include "my_tile.h"
-#include "my_wid.h"
 
 std::wstring string_to_wstring(const std::string& s);
 std::string wstring_to_string(const std::wstring& s);
@@ -1297,11 +1290,7 @@ int32_t snprintf_realloc (char **str,
     }
 }
 
-#include <iostream>
 #include <string>
-#include <cstdio>
-#include <new>          // std::bad_alloc
-#include <stdarg.h>
 
 std::string string_sprintf (const char *format, ...)
 {_
