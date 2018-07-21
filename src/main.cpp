@@ -541,6 +541,9 @@ int32_t main (int32_t argc, char *argv[])
     cereal_test(std::string(save_file));
     myfree(save_file);
 
+    extern int dungeon_test();
+    dungeon_test();
+
     ARGV = argv;
 
     dospath2unix(ARGV[0]);

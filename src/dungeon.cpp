@@ -29,6 +29,14 @@ public:
         TREASURE  = '$',
     };
 
+    enum {
+        DEPTH_UNDER,
+        DEPTH_FLOOR,
+        DEPTH_WALL,
+        DEPTH_OBJ,
+        DEPTH_MAX,
+    };
+
     std::string fg;
     std::string bg;
     char c;
@@ -52,14 +60,41 @@ public:
 
 class Dungeon {
 public:
+    std::vector<char>              cells;
+    std::vector<Charmap>           charmap;
     int rooms_on_level             {10};
     int fixed_room_chance          {50};
     int map_width                  {80};
     int map_height                 {80};
+    int map_depth                  {80};
 
-    static class Charmap charmap[255];
-    static void init_charmap (void)
+    void finish_constructor (void)
     {
+        this->init_charmap();
+        cells.resize(map_width * map_height * Charmap::DEPTH_MAX);
+    }
+
+    Dungeon (int rooms_on_level,
+             int fixed_room_chance,
+             int map_width,
+             int map_height) :
+        rooms_on_level             (rooms_on_level), 
+        fixed_room_chance          (fixed_room_chance),
+        map_width                  (map_width),
+        map_height                 (map_height)
+    {
+        this->finish_constructor();
+    }
+
+    Dungeon ()
+    {
+        this->finish_constructor();
+    }
+    
+    void init_charmap (void)
+    {
+        charmap.resize(255);
+
         auto char_index        = Charmap::SPACE;
         auto c = charmap[char_index];
         c.bg                   = "black",
@@ -157,18 +192,13 @@ public:
         c.fg                   = "yellow",
         c.is_treasure          = true;
     }
-
-    Dungeon (int rooms_on_level,
-             int fixed_room_chance,
-             int map_width,
-             int map_height) :
-        rooms_on_level             (rooms_on_level), 
-        fixed_room_chance          (fixed_room_chance),
-        map_width                  (map_width),
-        map_height                 (map_height)
-    {
-    }
 };
+
+class Dungeon *dungeon_test (void)
+{
+    auto d = new Dungeon();
+    return (d);
+}
 
 #if 0
         self.charmap = charmap
@@ -254,7 +284,7 @@ public:
         #
         # The map
         #
-        self.cells = [[[' ' for d in range(charmap.depth.max)]
+        self.cells = [[[' ' for d in range(Charmap::DEPTH_MAX)]
                        for i in range(self.height)]
                       for j in range(self.width)]
         self.roomno_cells = [[-1 for i in range(self.height)]
@@ -470,7 +500,7 @@ public:
 
         self.roomno_locked[roomno] = false
 
-        for d in range(charmap.depth.max):
+        for d in range(Charmap::DEPTH_MAX):
             dname = charmap.depth.to_name[d]
             if dname in room.vert_slice:
                 rvert_slice = room.vert_slice[dname]
@@ -522,7 +552,7 @@ public:
         elif y >= self.height - 3:
             return
 
-        if self.getc(x, y, charmap.depth.floor) is None:
+        if self.getc(x, y, Charmap::DEPTH_FLOOR) is None:
             return
 
         if self.is_any_floor_at(x, y):
@@ -530,7 +560,7 @@ public:
 
         clen += 1
 
-        self.putc(x, y, charmap.depth.floor, c)
+        self.putc(x, y, Charmap::DEPTH_FLOOR, c)
 
         #
         # Reached the end of a corridor?
@@ -586,14 +616,14 @@ public:
                        not self.is_cwall_at(tx, ty) and \
                        not self.is_corridor_at(tx, ty) and \
                        not self.is_dusty_at(tx, ty):
-                        self.putc(tx, ty, charmap.depth.wall, charmap.SPACE)
-                        self.putc(tx, ty, charmap.depth.floor, charmap.FLOOR)
+                        self.putc(tx, ty, Charmap::DEPTH_WALL, charmap.SPACE)
+                        self.putc(tx, ty, Charmap::DEPTH_FLOOR, charmap.FLOOR)
             return
 
         clen += 1
 
-        self.putc(x, y, charmap.depth.wall, charmap.SPACE)
-        self.putc(x, y, charmap.depth.floor, c)
+        self.putc(x, y, Charmap::DEPTH_WALL, charmap.SPACE)
+        self.putc(x, y, Charmap::DEPTH_FLOOR, c)
 
         #
         # Reached the end of a corridor?
@@ -899,7 +929,7 @@ public:
                         if not self.is_wall_at(x, y + 1):
                             nbrs += 1
                     if nbrs < 2:
-                        self.putc(x, y, charmap.depth.floor, charmap.SPACE)
+                        self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.SPACE)
                         trimmed = true
 
     #
@@ -967,7 +997,7 @@ public:
 
                 if len(rooms_adjoining_this_corridor) < 2:
                     self.flood_replace(x, y,
-                                       charmap.depth.floor,
+                                       Charmap::DEPTH_FLOOR,
                                        charmap.CORRIDOR,
                                        charmap.SPACE)
 
@@ -999,7 +1029,7 @@ public:
                 if random.randint(0, 100) < self.room_locked_chance:
                     for e in self.room_exits[roomno]:
                         ex, ey = e
-                        self.putc(ex, ey, charmap.depth.wall, charmap.DOOR)
+                        self.putc(ex, ey, Charmap::DEPTH_WALL, charmap.DOOR)
                         self.roomno_locked[roomno] = true
 
     #
@@ -1171,9 +1201,9 @@ public:
                     for dy in range(-1, 2):
                         if not self.is_any_floor_at(x + dx, y + dy):
                             self.putc(x + dx, y + dy,
-                                      charmap.depth.wall, charmap.WALL)
+                                      Charmap::DEPTH_WALL, charmap.WALL)
                             self.putc(x + dx, y + dy,
-                                      charmap.depth.floor, charmap.FLOOR)
+                                      Charmap::DEPTH_FLOOR, charmap.FLOOR)
 
     #
     # Wrap corridors in walls that are not bridges
@@ -1199,7 +1229,7 @@ public:
                         tx = x + dx
                         ty = y + dy
                         if not self.is_anything_at(tx, ty):
-                            self.putc(tx, ty, charmap.depth.wall,
+                            self.putc(tx, ty, Charmap::DEPTH_WALL,
                                       charmap.CWALL)
 
     #
@@ -1232,9 +1262,9 @@ public:
                            self.is_door_at(x - 1, y) or \
                            self.is_door_at(x, y + 1) or \
                            self.is_door_at(x, y - 1):
-                            self.putc(x, y, charmap.depth.wall, charmap.DOOR)
+                            self.putc(x, y, Charmap::DEPTH_WALL, charmap.DOOR)
                         else:
-                            self.putc(x, y, charmap.depth.wall, charmap.SPACE)
+                            self.putc(x, y, Charmap::DEPTH_WALL, charmap.SPACE)
 
                         break
 
@@ -1264,7 +1294,7 @@ public:
                         continue
 
                     if self.is_dissolves_walls_at(tx, ty):
-                        self.putc(x, y, charmap.depth.wall, charmap.SPACE)
+                        self.putc(x, y, Charmap::DEPTH_WALL, charmap.SPACE)
                         break
 
     #
@@ -1283,7 +1313,7 @@ public:
                         break
 
                 if not ok:
-                    self.putc(x, y, charmap.depth.wall, charmap.WALL)
+                    self.putc(x, y, Charmap::DEPTH_WALL, charmap.WALL)
 
     #
     # Find all tiles where we can place objects
@@ -1332,7 +1362,7 @@ public:
             if obstacle:
                 continue
 
-            self.putc(x, y, charmap.depth.wall, charmap.START)
+            self.putc(x, y, Charmap::DEPTH_WALL, charmap.START)
             return true
 
     #
@@ -1363,7 +1393,7 @@ public:
             if obstacle:
                 continue
 
-            self.putc(x, y, charmap.depth.wall, charmap.EXIT)
+            self.putc(x, y, Charmap::DEPTH_WALL, charmap.EXIT)
             return true
 
     #
@@ -1414,7 +1444,7 @@ public:
             if obstacle:
                 continue
 
-            self.putc(x, y, charmap.depth.wall, charmap.KEY)
+            self.putc(x, y, Charmap::DEPTH_WALL, charmap.KEY)
             return true
 
     def rooms_place_keys(self):
@@ -1450,7 +1480,7 @@ public:
             y1 = random.randint(-10, self.height + 10)
             x2 = random.randint(-10, self.width + 10)
             y2 = random.randint(-10, self.height + 10)
-            self.line_draw((x1, y1), (x2, y2), charmap.depth.floor,
+            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
                            charmap.FLOOR)
             cnt += 1
         #
@@ -1462,7 +1492,7 @@ public:
             y1 = random.randint(-10, self.height + 10)
             x2 = x1 + 10
             y2 = y1
-            self.line_draw((x1, y1), (x2, y2), charmap.depth.floor,
+            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
                            charmap.FLOOR)
             cnt += 1
         #
@@ -1474,7 +1504,7 @@ public:
             y1 = random.randint(-10, self.height + 10)
             x2 = x1
             y2 = y1 + 10
-            self.line_draw((x1, y1), (x2, y2), charmap.depth.floor,
+            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
                            charmap.FLOOR)
             cnt += 1
         #
@@ -1485,7 +1515,7 @@ public:
         while cnt < 10:
             x = random.randint(0, self.width - 1)
             y = random.randint(0, self.height - 1)
-            self.flood_fill(x, y, charmap.depth.floor, charmap.FLOOR)
+            self.flood_fill(x, y, Charmap::DEPTH_FLOOR, charmap.FLOOR)
             cnt += 1
         #
         # Now carve out some empty regions. We could just do smaller
@@ -1497,7 +1527,7 @@ public:
             y1 = random.randint(-10, self.height + 10)
             x2 = random.randint(-10, self.width + 10)
             y2 = random.randint(-10, self.height + 10)
-            self.line_draw((x1, y1), (x2, y2), charmap.depth.floor,
+            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
                            charmap.SPACE)
             cnt += 1
         cnt = 0
@@ -1506,7 +1536,7 @@ public:
             y1 = random.randint(-10, self.height + 10)
             x2 = x1 + 10
             y2 = y1
-            self.line_draw((x1, y1), (x2, y2), charmap.depth.floor,
+            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
                            charmap.SPACE)
             cnt += 1
         cnt = 0
@@ -1515,7 +1545,7 @@ public:
             y1 = random.randint(-10, self.height + 10)
             x2 = x1
             y2 = y1 + 10
-            self.line_draw((x1, y1), (x2, y2), charmap.depth.floor,
+            self.line_draw((x1, y1), (x2, y2), Charmap::DEPTH_FLOOR,
                            charmap.SPACE)
             cnt += 1
         #
@@ -1626,7 +1656,7 @@ public:
         # Zero out the map as we were lazy and used it for a scratchpad
         # when creating rooms.
         #
-        self.cells = [[[' ' for d in range(charmap.depth.max)]
+        self.cells = [[[' ' for d in range(Charmap::DEPTH_MAX)]
                        for i in range(self.height)]
                       for j in range(self.width)]
 
@@ -1706,7 +1736,7 @@ public:
     def add_water(self):
         x = random.randint(0, self.width - 1)
         y = random.randint(0, self.height - 1)
-        self.depth_map_flood(x, y, charmap.depth.under, charmap.WATER)
+        self.depth_map_flood(x, y, Charmap::DEPTH_UNDER, charmap.WATER)
 
     def remove_chasm_next_to_water(self):
         for y in range(self.height):
@@ -1718,7 +1748,7 @@ public:
                     tx = x + dx
                     ty = y + dy
                     if self.is_chasm_at(tx, ty):
-                        self.putc(tx, ty, charmap.depth.under, charmap.WATER)
+                        self.putc(tx, ty, Charmap::DEPTH_UNDER, charmap.WATER)
 
     def remove_lava_next_to_water(self):
         for y in range(self.height):
@@ -1730,18 +1760,18 @@ public:
                     tx = x + dx
                     ty = y + dy
                     if self.is_lava_at(tx, ty):
-                        self.putc(x, y, charmap.depth.under, charmap.ROCK)
+                        self.putc(x, y, Charmap::DEPTH_UNDER, charmap.ROCK)
                         break
 
     def add_lava(self):
         x = random.randint(0, self.width - 1)
         y = random.randint(0, self.height - 1)
-        self.depth_map_flood(x, y, charmap.depth.under, charmap.LAVA)
+        self.depth_map_flood(x, y, Charmap::DEPTH_UNDER, charmap.LAVA)
 
     def add_chasm(self):
         x = random.randint(0, self.width - 1)
         y = random.randint(0, self.height - 1)
-        self.depth_map_flood(x, y, charmap.depth.under, charmap.CHASM)
+        self.depth_map_flood(x, y, Charmap::DEPTH_UNDER, charmap.CHASM)
 
     #
     # Find empty spots in chasms and create some random bridges
@@ -1765,7 +1795,7 @@ public:
                 if random.randint(0, 1000) < 995:
                     continue
 
-                self.putc(x, y, charmap.depth.floor, charmap.DUSTY)
+                self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.DUSTY)
 
                 self.room_corridor_draw(x, y, 0, - 1, c=charmap.DUSTY)
                 self.room_corridor_draw(x, y, -1, 0, c=charmap.DUSTY)
@@ -1794,7 +1824,7 @@ public:
                 if random.randint(0, 1000) < 995:
                     continue
 
-                self.putc(x, y, charmap.depth.floor, charmap.DUSTY)
+                self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.DUSTY)
 
                 self.room_corridor_draw(x, y, 0, - 1, c=charmap.DUSTY)
                 self.room_corridor_draw(x, y, -1, 0, c=charmap.DUSTY)
@@ -1823,7 +1853,7 @@ public:
                 if random.randint(0, 1000) < 995:
                     continue
 
-                self.putc(x, y, charmap.depth.floor, charmap.DUSTY)
+                self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.DUSTY)
 
                 self.room_corridor_draw(x, y, 0, - 1, c=charmap.DUSTY)
                 self.room_corridor_draw(x, y, -1, 0, c=charmap.DUSTY)
@@ -1850,8 +1880,8 @@ public:
                 if random.randint(0, 100) < 75:
                     continue
 
-                self.putc(x, y, charmap.depth.wall, charmap.SPACE)
-                self.putc(x, y, charmap.depth.floor, charmap.DUSTY)
+                self.putc(x, y, Charmap::DEPTH_WALL, charmap.SPACE)
+                self.putc(x, y, Charmap::DEPTH_FLOOR, charmap.DUSTY)
 
                 self.room_tunnel_draw(x, y, 0, - 1, c=charmap.DUSTY)
                 self.room_tunnel_draw(x, y, -1, 0, c=charmap.DUSTY)
@@ -1882,20 +1912,20 @@ public:
                self.is_rock_at(x, y):
                 continue
 
-            self.putc(x, y, charmap.depth.obj, charmap.TREASURE)
+            self.putc(x, y, Charmap::DEPTH_OBJ, charmap.TREASURE)
 
     def add_rock(self):
         for y in range(self.height):
             for x in range(self.width):
-                for d in reversed(range(charmap.depth.max)):
+                for d in reversed(range(Charmap::DEPTH_MAX)):
                     c = self.cells[x][y][d]
                     if c != " ":
                         break
 
                 if c == charmap.SPACE:
-                    self.putc(x, y, charmap.depth.wall, charmap.ROCK)
+                    self.putc(x, y, Charmap::DEPTH_WALL, charmap.ROCK)
 
-    def dump(self, max_depth=charmap.depth.max):
+    def dump(self, max_depth=Charmap::DEPTH_MAX):
         return
         from colored import fg, bg, attr
 
@@ -1941,7 +1971,7 @@ public:
                 mm.puts(color + c + res)
             mm.puts("\n")
 
-    def dump_depth(self, max_depth=charmap.depth.max):
+    def dump_depth(self, max_depth=Charmap::DEPTH_MAX):
         return
         from colored import fg, bg, attr
 
