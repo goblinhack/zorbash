@@ -541,7 +541,7 @@ int32_t main (int32_t argc, char *argv[])
     cereal_test(std::string(save_file));
     myfree(save_file);
 
-    extern int dungeon_test();
+    extern int dungeon_test(void);
     dungeon_test();
 
     ARGV = argv;
