@@ -8,20 +8,175 @@
 #include "my_tile.h"
 #include "my_room.h"
 
+class Charmap;
+class Charmap {
+public:
+    enum {
+        SPACE     = ' ',
+        CORRIDOR  = '#',
+        DOOR      = 'D',
+        WALL      = 'x',
+        CWALL     = 'X',
+        FLOOR     = '.',
+        DUSTY     = '\"',
+        START     = 'S',
+        EXIT      = 'E',
+        KEY       = 'k',
+        CHASM     = 'C',
+        LAVA      = 'L',
+        WATER     = '_',
+        ROCK      = 'r',
+        TREASURE  = '$',
+    };
+
+    std::string fg;
+    std::string bg;
+    char c;
+    bool is_movement_blocking {false};
+    bool is_wall              {false};
+    bool is_cwall             {false};
+    bool is_floor             {false};
+    bool is_dusty             {false};
+    bool is_corridor          {false};
+    bool is_door              {false};
+    bool is_dungeon_way_up    {false};
+    bool is_dungeon_way_down  {false};
+    bool is_key               {false};
+    bool is_chasm             {false};
+    bool is_dissolves_walls   {false};
+    bool is_lava              {false};
+    bool is_water             {false};
+    bool is_rock              {false};
+    bool is_treasure          {false};
+};
+
 class Dungeon {
 public:
-    Dugeon (rooms,
-            rooms_on_level=20,
-            fixed_room_chance=10):
+    int rooms_on_level             {10};
+    int fixed_room_chance          {50};
+    int map_width                  {80};
+    int map_height                 {80};
 
-        self.width = mm.MAP_WIDTH
-        self.height = mm.MAP_HEIGHT
+    static class Charmap charmap[255];
+    static void init_charmap (void)
+    {
+        auto char_index        = Charmap::SPACE;
+        auto c = charmap[char_index];
+        c.bg                   = "black",
+        c.fg                   = "black",
+
+        char_index             = Charmap::WALL;
+        c = charmap[char_index];
+        c.bg                   = "magenta",
+        c.fg                   = "black",
+        c.is_wall              = true;
+        c.is_movement_blocking = true;
+
+        char_index             = Charmap::CWALL;
+        c = charmap[char_index];
+        c.bg                   = "blue",
+        c.fg                   = "black",
+        c.is_cwall             = true;
+
+        char_index             = Charmap::FLOOR;
+        c = charmap[char_index];
+        c.bg                   = "black",
+        c.fg                   = "white",
+        c.is_floor             = true;
+
+        char_index             = Charmap::DUSTY;
+        c = charmap[char_index];
+        c.bg                   = "black",
+        c.fg                   = "white",
+        c.is_dusty             = true;
+
+        char_index             = Charmap::CORRIDOR;
+        c = charmap[char_index];
+        c.bg                   = "black",
+        c.fg                   = "yellow",
+        c.is_corridor          = true;
+
+        char_index             = Charmap::DOOR;
+        c = charmap[char_index];
+        c.bg                   = "green",
+        c.fg                   = "green",
+        c.is_door              = true;
+        c.is_movement_blocking = true;
+
+        char_index             = Charmap::START;
+        c = charmap[char_index];
+        c.bg                   = "white",
+        c.fg                   = "red",
+        c.is_dungeon_way_up    = true;
+        c.is_movement_blocking = true;
+
+        char_index             = Charmap::EXIT;
+        c = charmap[char_index];
+        c.bg                   = "white",
+        c.fg                   = "red",
+        c.is_dungeon_way_down  = true;
+        c.is_movement_blocking = true;
+
+        char_index             = Charmap::KEY;
+        c = charmap[char_index];
+        c.bg                   = "white",
+        c.fg                   = "yellow",
+        c.is_key               = true;
+        c.is_movement_blocking = true;
+
+        char_index             = Charmap::CHASM;
+        c = charmap[char_index];
+        c.bg                   = "black",
+        c.fg                   = "black",
+        c.is_chasm             = true;
+        c.is_dissolves_walls   = true;
+
+        char_index             = Charmap::LAVA;
+        c = charmap[char_index];
+        c.bg                   = "red",
+        c.fg                   = "yellow",
+        c.is_lava              = true;
+        c.is_dissolves_walls   = true;
+
+        char_index             = Charmap::WATER;
+        c = charmap[char_index];
+        c.bg                   = "black",
+        c.fg                   = "blue",
+        c.is_water             = true;
+        c.is_dissolves_walls   = true;
+
+        char_index             = Charmap::ROCK;
+        c = charmap[char_index];
+        c.bg                   = "black",
+        c.fg                   = "red",
+        c.is_rock              = true;
+
+        char_index             = Charmap::TREASURE;
+        c = charmap[char_index];
+        c.bg                   = "black",
+        c.fg                   = "yellow",
+        c.is_treasure          = true;
+    }
+
+    Dungeon (int rooms_on_level,
+             int fixed_room_chance,
+             int map_width,
+             int map_height) :
+        rooms_on_level             (rooms_on_level), 
+        fixed_room_chance          (fixed_room_chance),
+        map_width                  (map_width),
+        map_height                 (map_height)
+    {
+    }
+};
+
+#if 0
         self.charmap = charmap
 
         #
         # Set if we fail to generate
         #
-        self.generate_failed = False
+        self.generate_failed = false
 
         #
         # All possible rooms we will choose from. Initially these are fixed
@@ -126,7 +281,7 @@ public:
         # corridors.
         #
         if not self.rooms_place_all(rooms_on_level):
-            self.generate_failed = True
+            self.generate_failed = true
             return
 
         self.debug("^^^ placed all rooms ^^^")
@@ -184,17 +339,17 @@ public:
         # Place start and exit of the dungeon
         #
         if not self.rooms_place_start():
-            self.generate_failed = True
+            self.generate_failed = true
             return
         self.debug("^^^ placed start ^^^")
 
         if not self.rooms_place_exit():
-            self.generate_failed = True
+            self.generate_failed = true
             return
         self.debug("^^^ placed exit ^^^")
 
         if not self.rooms_place_keys():
-            self.generate_failed = True
+            self.generate_failed = true
             return
         self.debug("^^^ placed keys ^^^")
 
@@ -289,14 +444,14 @@ public:
         room = self.rooms[roomno]
 
         if x < 2:
-            return False
+            return false
         elif x + room.width >= self.width - 2:
-            return False
+            return false
 
         if y < 2:
-            return False
+            return false
         elif y + room.height >= self.height - 2:
-            return False
+            return false
 
         vert_floor_slice = room.vert_slice["floor"]
 
@@ -304,8 +459,8 @@ public:
             for rx in range(room.width):
                 if vert_floor_slice[rx][ry] == charmap.FLOOR:
                     if self.is_any_floor_at(x + rx, y + ry):
-                        return False
-        return True
+                        return false
+        return true
 
     #
     # Dump a room onto the level. No checks
@@ -313,7 +468,7 @@ public:
     def room_place(self, roomno, x, y):
         room = self.rooms[roomno]
 
-        self.roomno_locked[roomno] = False
+        self.roomno_locked[roomno] = false
 
         for d in range(charmap.depth.max):
             dname = charmap.depth.to_name[d]
@@ -328,7 +483,7 @@ public:
                             self.putc(tx, ty, d, rchar)
                             self.putr(tx, ty, roomno)
                         if rchar == charmap.DOOR:
-                            self.roomno_locked[roomno] = True
+                            self.roomno_locked[roomno] = true
 
         self.rooms_on_level += 1
 
@@ -344,10 +499,10 @@ public:
     #
     def room_place_if_no_overlaps(self, roomno, x, y):
         if not self.room_can_be_placed(roomno, x, y):
-            return False
+            return false
 
         self.room_place(roomno, x, y)
-        return True
+        return true
 
     #
     # Grow a corridor in the given direction
@@ -518,7 +673,7 @@ public:
                 # Check no corridor adjacent to any other one nearby. Or
                 # any new one we plan.
                 #
-                skip = False
+                skip = false
                 for dx in range(c, d):
                     for dy in range(c, d):
                         if dx == 0 and dy == 0:
@@ -526,12 +681,12 @@ public:
 
                         if cand[x + dx][y + dy]:
                             self.inuse[x + dx][y + dy] = 1
-                            skip = True
+                            skip = true
                             break
 
                         if self.is_corridor_at(x + dx, y + dy):
                             self.inuse[x + dx][y + dy] = 1
-                            skip = True
+                            skip = true
                             break
                     if skip:
                         break
@@ -580,7 +735,7 @@ public:
     # ensures no room will ever appear more than once.
     #
     def rooms_get_next_roomno(self):
-        while True:
+        while true:
             if random.randint(0, 100) <= self.fixed_room_chance:
                 roomno = self.fixed_roomno_list.pop(0)
                 self.fixed_roomno_list.append(roomno)
@@ -603,7 +758,7 @@ public:
 
         roomno = self.rooms_get_next_roomno()
         room = self.rooms[roomno]
-        placed_a_room = False
+        placed_a_room = false
 
         #
         # For all corridor end points.
@@ -622,13 +777,13 @@ public:
                 y = cy - ry
 
                 if self.room_place_if_no_overlaps(roomno, x - 1, y):
-                    placed_a_room = True
+                    placed_a_room = true
                 elif self.room_place_if_no_overlaps(roomno, x + 1, y):
-                    placed_a_room = True
+                    placed_a_room = true
                 elif self.room_place_if_no_overlaps(roomno, x, y - 1):
-                    placed_a_room = True
+                    placed_a_room = true
                 elif self.room_place_if_no_overlaps(roomno, x, y + 1):
-                    placed_a_room = True
+                    placed_a_room = true
 
                 if placed_a_room:
                     break
@@ -649,7 +804,7 @@ public:
         self.room_connection = {}
 
         room_place_tries = 0
-        while True:
+        while true:
             room_place_tries += 1
 
             #
@@ -658,7 +813,7 @@ public:
             roomno = self.rooms_get_next_roomno()
             if roomno < self.fixed_room_count:
                 room = self.rooms[roomno]
-                if room.can_be_placed_as_first_room is not True:
+                if room.can_be_placed_as_first_room is not true:
                     if room_place_tries < 100:
                         continue
 
@@ -673,13 +828,13 @@ public:
                 self.roomno_first = roomno
 
                 room = self.rooms[roomno]
-                room.can_be_placed_as_start = True
-                room.can_be_placed_as_exit = False
-                return True
+                room.can_be_placed_as_start = true
+                room.can_be_placed_as_exit = false
+                return true
 
             if room_place_tries > 1000:
                 mm.err("Could not place first room")
-                return False
+                return false
 
     #
     # Place remaining rooms hanging off of the corridors of the last.
@@ -695,7 +850,7 @@ public:
                 mm.log("Tried to place rooms for too long, made {0} rooms".
                        format(self.rooms_on_level))
 #                self.dump()
-                return False
+                return false
 
             #
             # If we place at least one new room, we will have new corridors
@@ -704,7 +859,7 @@ public:
             if self.rooms_all_try_to_place_at_end_of_corridors():
                 self.rooms_all_grow_new_corridors()
 
-        return True
+        return true
 
     #
     # Place all rooms
@@ -712,19 +867,19 @@ public:
     def rooms_place_all(self, rooms_on_level):
         self.roomnos = set()
         if not self.room_place_first():
-            return False
+            return false
         if not self.rooms_place_remaining(rooms_on_level):
-            return False
+            return false
         self.roomnos = sorted(self.roomnos)
-        return True
+        return true
 
     #
     # Remove dangling corridors that go nowhere.
     #
     def rooms_trim_corridors(self):
-        trimmed = True
+        trimmed = true
         while trimmed:
-            trimmed = False
+            trimmed = false
             for y in range(self.height):
                 for x in range(self.width):
                     if not self.is_corridor_at(x, y):
@@ -745,7 +900,7 @@ public:
                             nbrs += 1
                     if nbrs < 2:
                         self.putc(x, y, charmap.depth.floor, charmap.SPACE)
-                        trimmed = True
+                        trimmed = true
 
     #
     # Remove dangling corridors that go nowhere.
@@ -845,7 +1000,7 @@ public:
                     for e in self.room_exits[roomno]:
                         ex, ey = e
                         self.putc(ex, ey, charmap.depth.wall, charmap.DOOR)
-                        self.roomno_locked[roomno] = True
+                        self.roomno_locked[roomno] = true
 
     #
     # Starting from the first room, do a breadth first search to find out
@@ -1121,10 +1276,10 @@ public:
                 if not self.is_door_at(x, y):
                     continue
 
-                ok = False
+                ok = false
                 for dx, dy in biome.XY_DELTAS:
                     if self.is_corridor_at(x + dx, y + dy):
-                        ok = True
+                        ok = true
                         break
 
                 if not ok:
@@ -1154,12 +1309,12 @@ public:
     #
     def rooms_place_start(self):
         tries = 0
-        while True:
+        while true:
             tries = tries + 1
             if tries > 100:
-                return False
+                return false
 
-            while True:
+            while true:
                 roomno = random.choice(self.roomnos)
                 room = self.rooms[roomno]
 
@@ -1168,29 +1323,29 @@ public:
 
             x, y = random.choice(self.room_occupiable_tiles[roomno])
 
-            obstacle = False
+            obstacle = false
             for dx, dy in biome.ALL_DELTAS:
                 if self.is_movement_blocking_at(x + dx, y + dy):
-                    obstacle = True
+                    obstacle = true
                     break
 
             if obstacle:
                 continue
 
             self.putc(x, y, charmap.depth.wall, charmap.START)
-            return True
+            return true
 
     #
     # Any dead end doors with no corridor, zap em
     #
     def rooms_place_exit(self):
         tries = 0
-        while True:
+        while true:
             tries = tries + 1
             if tries > 100:
-                return False
+                return false
 
-            while True:
+            while true:
                 roomno = random.choice(self.roomnos)
                 room = self.rooms[roomno]
 
@@ -1199,17 +1354,17 @@ public:
 
             x, y = random.choice(self.room_occupiable_tiles[roomno])
 
-            obstacle = False
+            obstacle = false
             for dx, dy in biome.ALL_DELTAS:
                 if self.is_movement_blocking_at(x + dx, y + dy):
-                    obstacle = True
+                    obstacle = true
                     break
 
             if obstacle:
                 continue
 
             self.putc(x, y, charmap.depth.wall, charmap.EXIT)
-            return True
+            return true
 
     #
     # For each locked room place a key at a dungeon depth less than
@@ -1222,10 +1377,10 @@ public:
         # to reach such rooms.
         #
         tries = 0
-        while True:
+        while true:
             tries = tries + 1
             if tries > 100:
-                return False
+                return false
 
             key_roomno = random.choice(self.roomnos)
             if key_roomno == roomno:
@@ -1240,7 +1395,7 @@ public:
         # Now place the key
         #
         tries = 0
-        while True:
+        while true:
             tries = tries + 1
             if tries > 100:
                 break
@@ -1250,17 +1405,17 @@ public:
             #
             x, y = random.choice(self.room_occupiable_tiles[key_roomno])
 
-            obstacle = False
+            obstacle = false
             for dx, dy in biome.ALL_DELTAS:
                 if self.is_movement_blocking_at(x + dx, y + dy):
-                    obstacle = True
+                    obstacle = true
                     break
 
             if obstacle:
                 continue
 
             self.putc(x, y, charmap.depth.wall, charmap.KEY)
-            return True
+            return true
 
     def rooms_place_keys(self):
 
@@ -1269,15 +1424,15 @@ public:
                 continue
 
             tries = 0
-            while True:
+            while true:
                 tries = tries + 1
                 if tries > 100:
-                    return False
+                    return false
 
                 if self.room_place_key(roomno):
                     break
 
-        return True
+        return true
 
     #
     # Make randomly shaped rooms
@@ -1445,7 +1600,7 @@ public:
                     #
                     # To dump the room:
                     #
-                    if False:
+                    if false:
                         for ry in range(rh):
                             for rx in range(rw):
                                 mm.puts(vert_floor_slice[rx][ry])
@@ -1464,7 +1619,7 @@ public:
                     r.vert_slice_add("wall", vert_wall_slice)
                     r.vert_slice_add("obj", vert_obj_slice)
                     r.finalize()
-                    r.can_be_placed_as_exit = True
+                    r.can_be_placed_as_exit = true
                     self.rooms.append(r)
 
         #
@@ -1520,7 +1675,7 @@ public:
 
         self.depth_map.process()
 
-        if False:
+        if false:
             self.depth_map.dump()
 
     def depth_map_flood(self, x, y, depth, c):
@@ -1812,3 +1967,4 @@ public:
                     mm.puts(" ")
 
             mm.puts("\n")
+#endif
