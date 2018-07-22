@@ -75,7 +75,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             continue;
         }
 
-        r->floor_data.push_back(py_obj_to_string(o));
+        r->data[Charmap::DEPTH_FLOOR].push_back(py_obj_to_string(o));
     }
 
     for (i=0; i<walls_lines; i++){
@@ -84,7 +84,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             continue;
         }
 
-        r->walls_data.push_back(py_obj_to_string(o));
+        r->data[Charmap::DEPTH_WALLS].push_back(py_obj_to_string(o));
     }
 
     for (i=0; i<items_lines; i++){
@@ -93,7 +93,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             continue;
         }
 
-        r->items_data.push_back(py_obj_to_string(o));
+        r->data[Charmap::DEPTH_ITEMS].push_back(py_obj_to_string(o));
     }
 
     r->finalize();

@@ -25,10 +25,10 @@ template <class T> std::vector<T> make_range (T start, T stop) {
  */
 #include <random>
 #include <algorithm>
+extern std::default_random_engine rng;
 template <class T> std::vector<T> make_shuffled_range (const size_t how_many) {
     std::vector<T> v(how_many);
     std::generate(v.begin(), v.end(), [n = 0] () mutable { return n++; });
-    extern std::default_random_engine rng;
     std::shuffle(v.begin(), v.end(), rng);
     return (v);
 }
