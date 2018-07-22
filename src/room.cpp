@@ -17,3 +17,29 @@ Roomp Room::room_new (void)
     Room::all_rooms.insert(std::make_pair(r->id, r));
     return (r);
 }
+
+void Room::finalize (void)
+{
+    width = floor_data[0].size();
+
+    int floor_lines = floor_data.size();
+    int walls_lines = walls_data.size();
+    int items_lines = items_data.size();
+
+    if (floor_lines != walls_lines) {
+        DIE("mismatch in room %d floor vs wall lines, %d vs %d", id, floor_lines, walls_lines);
+    }
+
+    if (items_lines != walls_lines) {
+        DIE("mismatch in room %d items vs wall lines, %d vs %d", id, items_lines, walls_lines);
+    }
+
+    height = floor_lines;
+
+    for (auto h = 0; h < height; h++) {
+        std::cout << floor_data[h] << std::endl;
+    }
+    for (auto h = 0; h < height; h++) {
+        std::cout << walls_data[h] << std::endl;
+    }
+}

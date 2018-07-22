@@ -412,6 +412,13 @@ static void err_ (const char *fmt, va_list args)
 
 static void croak_ (const char *fmt, va_list args)
 {_
+    static int croaked;
+    if (croaked) {
+        fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
+        exit(1);
+    }
+    croaked = 1;
+
     char buf[MAXSTR];
     uint32_t len;
     uint32_t tslen;

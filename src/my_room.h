@@ -33,6 +33,9 @@ public:
     std::vector<std::string> floor_data;
     std::vector<std::string> walls_data;
     std::vector<std::string> items_data;
+    int                      width {};
+    int                      height {};
 
     static Roomp room_new (void);
+    void finalize(void);
 };
