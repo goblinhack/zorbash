@@ -9,12 +9,20 @@
 #include "my_room.h"
 
 uint32_t                    Room::last_id = 0;
-std::map< uint32_t, Roomp > Room::all_rooms;
+std::map< uint32_t, Roomp > Room::all_fixed_rooms;
+std::map< uint32_t, Roomp > Room::all_random_rooms;
 
-Roomp Room::room_new (void)
+Roomp Room::random_room_new (void)
 {_
     auto r = std::make_shared< class Room >();
-    Room::all_rooms.insert(std::make_pair(r->id, r));
+    Room::all_random_rooms.insert(std::make_pair(r->id, r));
+    return (r);
+}
+
+Roomp Room::fixed_room_new (void)
+{_
+    auto r = std::make_shared< class Room >();
+    Room::all_fixed_rooms.insert(std::make_pair(r->id, r));
     return (r);
 }
 
