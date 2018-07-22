@@ -4,6 +4,8 @@
  * See the LICENSE file for license.
  */
 
+#pragma once
+
 class Charmap;
 class Charmap {
 public:
@@ -29,8 +31,8 @@ public:
     enum {
         DEPTH_UNDER,
         DEPTH_FLOOR,
-        DEPTH_WALL,
-        DEPTH_OBJ,
+        DEPTH_WALLS,
+        DEPTH_ITEMS,
         DEPTH_MAX,
     };
 

@@ -43,11 +43,20 @@ public:
     // All possible rooms we will choose from. Initially these are fixed
     // rooms and we add more random ones onto this list.
     //
-    Rooms                                     fixed_rooms;
-    Rooms                                     random_rooms;
+    std::vector<Roomp>                        fixed_rooms;
+    std::vector<Roomp>                        random_rooms;
 
-    int fixed_room_count                      {};
-    int random_room_count                     {};
+    //
+    // Random lists of rooms to try and place
+    //
+    std::vector<Roomp>                        fixed_rooms_in_use;
+    std::vector<Roomp>                        random_rooms_in_use;
+    std::vector<Roomp>                        all_rooms_in_use;
+
+    //
+    // What rooms connect to what other rooms.
+    //
+    std::vector< std::vector<uint32_t> >      room_connection;
 
     //
     // Set if we fail to generate
@@ -63,24 +72,24 @@ public:
     //
     // What chance for fixed versus random rooms
     //
-    int fixed_room_chance                     {20};
+    uint32_t fixed_room_chance                {20};
 
     //
     // Chance of a corridor splitting
     //
-    int corridor_fork_chance                  {35};
-    int tunnel_fork_chance                    {95};
+    uint32_t corridor_fork_chance             {35};
+    uint32_t tunnel_fork_chance               {95};
 
     //
     // Lower, longer corridors
     //
-    int corridor_grow_chance                  {2};
-    int tunnel_grow_chance                    {1};
+    uint32_t corridor_grow_chance             {2};
+    uint32_t tunnel_grow_chance               {1};
 
     //
     // How often a random room is locked
     //
-    int room_locked_chance                    {5};
+    uint32_t room_locked_chance               {5};
 
     //
     // How close corridors should be to each other
@@ -97,12 +106,6 @@ public:
     // Dmap for z depths of the level
     //
     dmap *depth_map                           {};
-
-    //
-    // Random lists of rooms to try and place
-    //
-    std::vector<int>                          fixed_roomno_list;
-    std::vector<int>                          random_roomno_list;
 
     //
     // Depth is how many rooms from the start room we are
@@ -144,14 +147,22 @@ public:
         //
         // Total of fixed and random room
         //
-        fixed_rooms = Room::all_fixed_rooms;
-        fixed_room_count = fixed_rooms.size();
-
         random_rooms = Room::all_random_rooms;
-        random_room_count = random_rooms.size();
+        std::shuffle(random_rooms.begin(), random_rooms.end(), rng);
 
-        fixed_roomno_list = make_shuffled_range<int>(fixed_room_count);
-        random_roomno_list = make_shuffled_range<int>(random_room_count);
+        fixed_rooms = Room::all_fixed_rooms;
+        std::shuffle(fixed_rooms.begin(), fixed_rooms.end(), rng);
+        
+        //
+        // First room goes in the center. The rest hang off of its
+        // corridors.
+        //
+#if 0
+        if (not rooms_place_all(rooms_on_level_target)) {
+            generate_failed = true;
+            return;
+        }
+#endif
     }
 
     Dungeon (int map_width,
@@ -1035,10 +1046,10 @@ public:
         //
         auto cnt = 0;
         while (cnt < map_carve_lines_cnt) {
-            auto x1 = random_range(-10, map_width + 10);
-            auto y1 = random_range(-10, map_height + 10);
-            auto x2 = random_range(-10, map_width + 10);
-            auto y2 = random_range(-10, map_height + 10);
+            auto x1 = random_range(0, map_width);
+            auto y1 = random_range(0, map_height);
+            auto x2 = random_range(0, map_width);
+            auto y2 = random_range(0, map_height);
             line_draw(point(x1, y1), 
                       point(x1, y2), 
                       Charmap::DEPTH_FLOOR,
@@ -1164,7 +1175,7 @@ public:
                             walls += ' ';
                         }
                     }
-                    r->walls_data.push_back(walls);
+                    r->data[Charmap::DEPTH_WALLS].push_back(walls);
                 }
 
                 for (auto rx = 0; rx < rw; rx++) {
@@ -1177,7 +1188,7 @@ public:
                             floor += ' ';
                         }
                     }
-                    r->floor_data.push_back(floor);
+                    r->data[Charmap::DEPTH_FLOOR].push_back(floor);
                 }
 
                 for (auto rx = 0; rx < rw; rx++) {
@@ -1185,7 +1196,7 @@ public:
                     for (auto ry = 0; ry < rh; ry++) {
                         items += ' ';
                     }
-                    r->items_data.push_back(items);
+                    r->data[Charmap::DEPTH_ITEMS].push_back(items);
                 }
 
                 r->finalize();
@@ -1198,11 +1209,166 @@ public:
         //
         std::fill(cells.begin(), cells.end(), Charmap::NONE);
     }
+
+    //
+    // Dump a room onto the level. No checks
+    //
+    void room_place(Roomp room, int x, int y)
+    {
+        int roomno = room->roomno;
+        roomno_locked[roomno] = false;
+
+        for (auto d = 0 ; d < Charmap::DEPTH_MAX; d++) {
+            if (not room->data[d].size()) {
+                continue;
+            }
+
+            auto dy = 0;
+            for (auto s : room->data[d]) {
+                auto dx = 0;
+                for (auto c : s) {
+                    if (c == Charmap::DOOR) {
+                        roomno_locked[roomno] = true;
+                    }
+
+                    if (c != Charmap::SPACE) {
+                        putc(x + dx, y + dy, d, c);
+                        putr(x + dx, y + dy, roomno);
+                    }
+                    dx++;
+                }
+                dy++;
+            }
+        }
+        rooms_on_level++;
+    }
+
+#if 0
+        for d in range(Charmap::DEPTH_MAX)
+            dname = Charmap:depth.to_name[d]
+            if dname in room.vert_slice:
+                rvert_slice = room.vert_slice[dname]
+                for ry in range(room.height)
+                    for rx in range(room.width)
+                        rchar = rvert_slice[rx][ry]
+                        tx = x + rx
+                        ty = y + ry
+                        if rchar != Charmap:SPACE:
+                            putc(tx, ty, d, rchar)
+                            putr(tx, ty, roomno)
+                        if rchar == Charmap:DOOR:
+                            roomno_locked[roomno] = true
+
+        rooms_on_level ++;
+
+        //
+        // Keep track of what rooms we've added. We'll work out what joins
+        // onto what later.
+        //
+        room_connection[roomno] = set()
+        roomnos.add(roomno)
+
+    //
+    // Try to push a room on the level
+    //
+    def room_place_if_no_overlaps(self, roomno, x, y)
+        if not room_can_be_placed(roomno, x, y)
+            return false
+
+        room_place(roomno, x, y)
+        return true
+#endif
+
+    //
+    // From a fixed list of random roomnos, return the next one. This
+    // ensures no room will ever appear more than once.
+    //
+    Roomp get_next_room (void)
+    {
+        Roomp place;
+
+        if (random_range(0, 100) <= fixed_room_chance) {
+            place = fixed_rooms.back();
+            fixed_rooms.pop_back();
+            fixed_rooms_in_use.push_back(place);
+        } else {
+            place = random_rooms.back();
+            random_rooms.pop_back();
+            random_rooms_in_use.push_back(place);
+        }
+        all_rooms_in_use.push_back(place);
+
+        return (place);
+    }
+
+#if 0
+    //
+    // Place the first room in a level, in the center ish. First room should
+    // not be a fixed room.
+    //
+    void room_place_first (void)
+    {
+        room_connection.resize(0);
+        room_connection.resize(Room::room_count);
+
+        auto room_place_tries = 0
+        for (;;) {
+            room_place_tries ++;
+
+            //
+            // First room should not be fixed.
+            //
+            roomno = get_next_room()
+            if roomno < fixed_room_count:
+                room = rooms[roomno]
+                if room.can_be_placed_as_first_room is not true:
+                    if room_place_tries < 100:
+                        continue
+
+            room = rooms[roomno]
+            x = int(map_width / 2)
+            y = int(map_height / 2)
+            room = rooms[roomno]
+            x -= int(room.width / 2)
+            y -= int(room.height / 2)
+
+            if room_place_if_no_overlaps(roomno, x, y)
+                roomno_first = roomno
+
+                room = rooms[roomno]
+                room.can_be_placed_as_start = true
+                room.can_be_placed_as_exit = false
+                return true
+
+            if room_place_tries > 1000:
+                mm.err("Could not place first room")
+                return false
+        }
+    }
+    
+    //
+    // Place all rooms
+    //
+    bool rooms_place_all (rooms_on_level)
+    {
+        roomnos = set()
+        if not room_place_first()
+            return false
+        if not rooms_place_remaining(rooms_on_level)
+            return false
+        roomnos = sorted(roomnos)
+        return true
+    }
+#endif
 };
 
 class Dungeon *dungeon_test (void)
 {
-    auto d = new Dungeon(80, 80, 20);
+    for (;;) {
+        auto d = new Dungeon(80, 80, 20);
 
-    return (d);
+        if (not d->generate_failed) {
+            return (d);
+        }
+    }
 }

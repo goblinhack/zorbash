@@ -4,20 +4,23 @@
  * See the LICENSE file for license.
  */
 
+#include "my_charmap.h"
+
 typedef std::shared_ptr< class Room > Roomp;
-typedef std::map< uint32_t, Roomp > Rooms;
+typedef std::vector<Roomp> Rooms;
 
 class Room
 {
 private:
 public:
-    static uint32_t last_id;
+    static uint32_t room_count;
     static Rooms all_random_rooms;
     static Rooms all_fixed_rooms;
 
     Room (void)
     {
-        this->id = ++this->last_id;
+        this->roomno = this->room_count;
+        this->room_count++;
 
         newptr(this, "room");
     }
@@ -30,10 +33,8 @@ public:
     /*
      * Unique per room.
      */
-    uint32_t                 id {};
-    std::vector<std::string> floor_data;
-    std::vector<std::string> walls_data;
-    std::vector<std::string> items_data;
+    uint32_t                 roomno {};
+    std::vector<std::string> data[Charmap::DEPTH_MAX];
     int                      width {};
     int                      height {};
 
