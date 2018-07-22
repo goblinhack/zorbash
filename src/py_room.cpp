@@ -96,5 +96,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         r->items_data.push_back(py_obj_to_string(o));
     }
 
+    r->finalize();
+
     Py_RETURN_NONE;
 }
