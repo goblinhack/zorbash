@@ -21,6 +21,9 @@
 #include "my_dir.h"
 #include "my_file.h"
 
+#include <random>       // std::default_random_engine
+std::default_random_engine rng;
+
 static char **ARGV;
 char *EXEC_FULL_PATH_AND_NAME;
 char *EXEC_DIR;
@@ -477,7 +480,6 @@ static void parse_args (int32_t argc, char *argv[])
     }
 
     for (i = 1; i < argc; i++) {
-
         /*
          * Bad argument.
          */
@@ -494,6 +496,12 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
+    double mean = 1.0;
+    double std = 0.5;
+    std::normal_distribution<double> distribution;
+    distribution.param(std::normal_distribution<double>(mean, std).param());
+    rng.seed(std::random_device{}());
+
     /*
     mcheck(0);
      */

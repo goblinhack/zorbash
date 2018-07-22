@@ -12,7 +12,8 @@ class Room
 private:
 public:
     static uint32_t last_id;
-    static Rooms all_rooms;
+    static Rooms all_random_rooms;
+    static Rooms all_fixed_rooms;
 
     Room (void)
     {
@@ -36,6 +37,7 @@ public:
     int                      width {};
     int                      height {};
 
-    static Roomp room_new (void);
+    static Roomp fixed_room_new(void);
+    static Roomp random_room_new(void);
     void finalize(void);
 };

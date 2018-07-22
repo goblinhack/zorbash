@@ -52,7 +52,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    auto r = Room::room_new();
+    auto r = Room::fixed_room_new();
 
     int floor_lines = PyList_Size(py_floor);
     int walls_lines = PyList_Size(py_walls);

@@ -4,20 +4,34 @@
  * See the LICENSE file for license.
  */
 
-#if 0
-template <class T> std::vector<T> range (const size_t how_many) {
+/*
+ * Create a vector of numbers
+ */
+template <class T> std::vector<T> make_range (const size_t how_many) {
     std::vector<T> v(how_many);
     std::generate(v.begin(), v.end(), [n = 0] () mutable { return n++; });
     return (v);
 }
 
-template <class T> std::vector<T> range (T start, T stop) {
+template <class T> std::vector<T> make_range (T start, T stop) {
     size_t how_many = stop - start;
     std::vector<T> v(how_many);
     std::generate(v.begin(), v.end(), [n = start] () mutable { return n++; });
     return (v);
 }
-#endif
+
+/*
+ * Create a vector of numbers and then shuffle them
+ */
+#include <random>
+#include <algorithm>
+template <class T> std::vector<T> make_shuffled_range (const size_t how_many) {
+    std::vector<T> v(how_many);
+    std::generate(v.begin(), v.end(), [n = 0] () mutable { return n++; });
+    extern std::default_random_engine rng;
+    std::shuffle(v.begin(), v.end(), rng);
+    return (v);
+}
 
 /*
  * This one is better as does not create a vector

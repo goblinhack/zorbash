@@ -13,6 +13,9 @@
 #include "my_range.h"
 #include <stack>
 #include <list>
+#include <algorithm>
+#include <random>       // std::default_random_engine
+#include <chrono>       // std::chrono::system_clock
 
 static bool debug = false;
 
@@ -40,7 +43,11 @@ public:
     // All possible rooms we will choose from. Initially these are fixed
     // rooms and we add more random ones onto this list.
     //
-    Rooms                                     rooms;
+    Rooms                                     fixed_rooms;
+    Rooms                                     random_rooms;
+
+    int fixed_room_count                      {};
+    int random_room_count                     {};
 
     //
     // Set if we fail to generate
@@ -52,11 +59,6 @@ public:
     //
     int rooms_on_level                        {};
     int rooms_on_level_target                 {};
-
-    //
-    // First range of rooms are fixed; rest randomly generated
-    //
-    int fixed_room_count                      {};
 
     //
     // What chance for fixed versus random rooms
@@ -97,6 +99,12 @@ public:
     dmap *depth_map                           {};
 
     //
+    // Random lists of rooms to try and place
+    //
+    std::vector<int>                          fixed_roomno_list;
+    std::vector<int>                          random_roomno_list;
+
+    //
     // Depth is how many rooms from the start room we are
     //
     std::map< int, int > roomno_depth;
@@ -119,8 +127,6 @@ public:
     void finish_constructor (void)
     {
         Charmap::init_charmaps();
-        rooms = Room::all_rooms;
-        fixed_room_count = rooms.size();
 
         cells.resize(map_width * map_height * Charmap::DEPTH_MAX);
         tmp.resize(map_width * map_height * Charmap::DEPTH_MAX);
@@ -134,6 +140,18 @@ public:
         for (auto c : range<int>(0, 2)) {
             rooms_all_create_random_shapes(c);
         }
+
+        //
+        // Total of fixed and random room
+        //
+        fixed_rooms = Room::all_fixed_rooms;
+        fixed_room_count = fixed_rooms.size();
+
+        random_rooms = Room::all_random_rooms;
+        random_room_count = random_rooms.size();
+
+        fixed_roomno_list = make_shuffled_range<int>(fixed_room_count);
+        random_roomno_list = make_shuffled_range<int>(random_room_count);
     }
 
     Dungeon (int map_width,
@@ -1124,7 +1142,7 @@ public:
                     }
                 }
 
-                auto r = Room::room_new();
+                auto r = Room::random_room_new();
                 for (auto rx = 0; rx < rw; rx++) {
                     std::string walls;
                     for (auto ry = 0; ry < rh; ry++) {
