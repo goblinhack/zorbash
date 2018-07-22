@@ -14,68 +14,87 @@
 #include <stack>
 #include <list>
 
+static bool debug = false;
+
 class Dungeon {
 public:
-    std::vector<char>              cells;
-    std::vector<int>               roomno_cells;
-    int map_width                  {MAP_WIDTH};
-    int map_height                 {MAP_HEIGHT};
-    int map_depth                  {Charmap::DEPTH_MAX};
+    std::vector<char>                         cells;
+    std::vector<char>                         tmp;
+    std::vector<int>                          roomno_cells;
+    int map_width                             {MAP_WIDTH};
+    int map_height                            {MAP_HEIGHT};
+    int map_depth                             {Charmap::DEPTH_MAX};
+
+    uint32_t map_cellular_automata_fill_chance = 50;
+    int map_cellular_automata_r1               = 5;
+    int map_cellular_automata_r2               = 2;
+    int map_cellular_automata_generations      = 8;
+
+    //
+    // After the cellular stage we erase portions of the map with
+    // lines to makes isolated islands we then pull out as "rooms"
+    //
+    int map_carve_lines_cnt                    = 50;
 
     //
     // All possible rooms we will choose from. Initially these are fixed
     // rooms and we add more random ones onto this list.
     //
-    Rooms                          rooms;
+    Rooms                                     rooms;
 
     //
     // Set if we fail to generate
     //
-    bool generate_failed           {false};
+    bool generate_failed                      {false};
 
     //
     // How many rooms on the level currently.
     //
-    int rooms_on_level             {};
-    int rooms_on_level_target      {};
+    int rooms_on_level                        {};
+    int rooms_on_level_target                 {};
 
     //
     // First range of rooms are fixed; rest randomly generated
     //
-    int fixed_room_count           {};
+    int fixed_room_count                      {};
 
     //
     // What chance for fixed versus random rooms
     //
-    int fixed_room_chance          {20};
+    int fixed_room_chance                     {20};
 
     //
     // Chance of a corridor splitting
     //
-    int corridor_fork_chance       {35};
-    int tunnel_fork_chance         {95};
+    int corridor_fork_chance                  {35};
+    int tunnel_fork_chance                    {95};
 
     //
     // Lower, longer corridors
     //
-    int corridor_grow_chance       {2};
-    int tunnel_grow_chance         {1};
+    int corridor_grow_chance                  {2};
+    int tunnel_grow_chance                    {1};
 
     //
     // How often a random room is locked
     //
-    int room_locked_chance         {5};
+    int room_locked_chance                    {5};
 
     //
     // How close corridors should be to each other
     //
-    int corridor_spacing           {3};
+    int corridor_spacing                      {3};
 
     //
     // For random shape rooms, how large?
     //
-    size_t min_room_size           {10};
-    size_t max_room_size           {100};
+    size_t min_room_size                      {10};
+    size_t max_room_size                      {100};
+
+    //
+    // Dmap for z depths of the level
+    //
+    dmap *depth_map                           {};
 
     //
     // Depth is how many rooms from the start room we are
@@ -97,11 +116,6 @@ public:
     //
     std::map< int, std::list<point> > room_occupiable_tiles;
 
-    //
-    // z depths of the level
-    //
-    dmap *depth_map                {};
-
     void finish_constructor (void)
     {
         Charmap::init_charmaps();
@@ -109,6 +123,8 @@ public:
         fixed_room_count = rooms.size();
 
         cells.resize(map_width * map_height * Charmap::DEPTH_MAX);
+        tmp.resize(map_width * map_height * Charmap::DEPTH_MAX);
+
         std::fill(cells.begin(), cells.end(), Charmap::NONE);
         roomno_cells.resize(map_width * map_height);
 
@@ -160,12 +176,23 @@ public:
     char *cell_addr (const int x, const int y, const int z)
     {
         if (is_oob(x, y, z)) {
-            LOG("out of bounds on %d,%d,%d vs %d,%d,%d", 
+            LOG("out of bounds on cell map %d,%d,%d vs %d,%d,%d", 
                 x, y, z, map_width, map_height, map_depth);
             return (nullptr);
         }
 
         return (&cells[cell_offset(x, y, z)]);
+    }
+
+    char *tmp_addr (const int x, const int y, const int z)
+    {
+        if (is_oob(x, y, z)) {
+            LOG("out of bounds on tmp map %d,%d,%d vs %d,%d,%d", 
+                x, y, z, map_width, map_height, map_depth);
+            return (nullptr);
+        }
+
+        return (&tmp[cell_offset(x, y, z)]);
     }
 
     int room_offset (const int x, const int y)
@@ -204,6 +231,29 @@ public:
     char getc (const int x, const int y, const int z)
     {
         char *p = cell_addr(x, y, z);
+        if (p != nullptr) {
+            return (*p);
+        }
+        return (Charmap::NONE);
+    }
+
+    /*
+     * Puts a tile on the map
+     */
+    void puttmp (const int x, const int y, const int z, const char c)
+    {
+        char *p = tmp_addr(x, y, z);
+        if (p != nullptr) {
+            *p = c;
+        }
+    }
+
+    /*
+     * Gets a tile of the map or None
+     */
+    char gettmp (const int x, const int y, const int z)
+    {
+        char *p = tmp_addr(x, y, z);
         if (p != nullptr) {
             return (*p);
         }
@@ -757,6 +807,10 @@ public:
 
     void dump (void)
     {
+        if (!debug) {
+            return;
+        }
+
         printf("-------------------------------------------------------------\n");
         for (auto y = 0; y < map_height; y++) {
             for (auto x = 0; x < map_width; x++) {
@@ -770,6 +824,181 @@ public:
         }
     }
 
+    /*
+     * Cellular Automata Method for Generating Random Cave-Like Levels
+     */
+    char map_cellular_automata_random_tile (void)
+    {
+        if (random_range(0, 100) < map_cellular_automata_fill_chance) {
+            return (Charmap::WALL);
+        } else {
+            return (Charmap::FLOOR);
+        }
+    }
+
+    //
+    // Grow our cells
+    //
+    void cave_generation (void)
+    {
+        int x, y, i, j;
+
+        for (y=1; y < map_height-1; y++) {
+            for (x=1; x < map_width-1; x++) {
+
+                int adjcount_r1 = 0,
+                adjcount_r2 = 0;
+
+                //
+                // Count adjacent room tiles.
+                //
+                for (i=-1; i <= 1; i++) {
+                    for (j=-1; j <= 1; j++) {
+                        if (getc(x+j, y+i, Charmap::DEPTH_FLOOR) != 
+                              Charmap::FLOOR) {
+                            adjcount_r1++;
+                        }
+                    }
+                }
+
+                for (i=y-2; i <= y+2; i++) {
+                    for (j=x-2; j <= x+2; j++) {
+
+                        if ((abs(i-y) == 2) && (abs(j-x)==2)) {
+                            //
+                            // Too close to the edge.
+                            //
+                            continue;
+                        }
+
+                        if (i < 0 || j < 0 || i>=map_height || j>=map_width) {
+                            //
+                            // Out of bounds.
+                            //
+                            continue;
+                        }
+
+                        if (getc(j, i, Charmap::DEPTH_FLOOR) != Charmap::FLOOR) {
+                            adjcount_r2++;
+                        }
+                    }
+                }
+
+                //
+                // Adjust for the grow threshold for rock or flow.
+                //
+                if ((adjcount_r1 >= map_cellular_automata_r1) ||
+                    (adjcount_r2 <= map_cellular_automata_r2)) {
+                    puttmp(x, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+                } else {
+                    puttmp(x, y, Charmap::DEPTH_FLOOR, Charmap::FLOOR);
+                }
+            }
+        }
+
+        for (y=1; y < map_height-1; y++) {
+            for (x=1; x < map_width-1; x++) {
+                putc(x, y, 
+                     Charmap::DEPTH_FLOOR,
+                     gettmp(x, y, Charmap::DEPTH_FLOOR));
+            }
+        }
+    }
+
+    //
+    // Generate a cave!
+    //
+    void make_cave (void)
+    {
+        int x, y, i;
+
+        for (y=1; y < map_height-1; y++) {
+            for (x=1; x < map_width-1; x++) {
+                putc(x, y, Charmap::DEPTH_FLOOR,
+                     map_cellular_automata_random_tile());
+            }
+        }
+
+        for (y=0; y < map_height; y++) {
+            for (x=0; x < map_width; x++) {
+                puttmp(x, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            }
+        }
+
+        for (y=0; y < map_height; y++) {
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(map_width-1, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(map_width-2, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(map_width-3, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(map_width-4, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(map_width-5, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(1, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(2, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(3, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(4, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+        }
+
+        for (x=0; x < map_width; x++) {
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, map_height-1, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, map_height-2, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, map_height-3, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, map_height-4, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, map_height-5, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 1, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 2, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 3, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
+            putc(x, 4, Charmap::DEPTH_FLOOR, Charmap::WALL);
+        }
+
+        map_cellular_automata_generations = 3 + (rand() % 10);
+
+        for (i=0; i < map_cellular_automata_generations; i++) {
+            cave_generation();
+        }
+    }
+
+    //
+    // Generate the cave
+    //
+    void cave_gen (void)
+    {_
+        std::fill(cells.begin(), cells.end(), Charmap::NONE);
+        std::fill(tmp.begin(), tmp.end(), Charmap::NONE);
+        make_cave();
+
+        //
+        // We only want the floor in the end to make rooms
+        //
+        for (int y=1; y < map_height-1; y++) {
+            for (int x=1; x < map_width-1; x++) {
+                if (getc(x, y, Charmap::DEPTH_FLOOR) == Charmap::WALL) {
+                    putc(x, y, Charmap::DEPTH_FLOOR, Charmap::SPACE);
+                }
+            }
+        }
+    }
+
     //
     // Make randomly shaped rooms
     //
@@ -777,125 +1006,33 @@ public:
     //
     void rooms_all_create_random_shapes (int which)
     {
-#if 0
+        //
+        // Create a cellular automata like cave first
+        //
+        cave_gen();
+        dump();
+
+        //
+        // Now carve out some empty regions in the cave
+        //
         auto cnt = 0;
-        auto lines_cnt = 40;
-
-        //
-        // First draw some random lines
-        //
-        while (cnt < lines_cnt) {
+        while (cnt < map_carve_lines_cnt) {
             auto x1 = random_range(-10, map_width + 10);
             auto y1 = random_range(-10, map_height + 10);
             auto x2 = random_range(-10, map_width + 10);
             auto y2 = random_range(-10, map_height + 10);
             line_draw(point(x1, y1), 
-                      point(x2, y2), 
+                      point(x1, y2), 
                       Charmap::DEPTH_FLOOR,
-                      Charmap::FLOOR);
-            cnt ++;
-        }
-
-        dump();
-        //
-        // Next draw straight across lines.
-        //
-        cnt = 0;
-        while (cnt < lines_cnt * 2) {
-            auto x1 = random_range(-10, map_width + 10);
-            auto y1 = random_range(-10, map_height + 10);
-            auto x2 = x1 + map_width / 2;
-            auto y2 = y1;
+                      Charmap::SPACE);
             line_draw(point(x1, y1), 
-                      point(x2, y2), 
-                      Charmap::DEPTH_FLOOR,
-                      Charmap::FLOOR);
-            cnt ++;
-        }
-        dump();
-
-        //
-        // Next draw straight down lines.
-        //
-        cnt = 0;
-        while (cnt < lines_cnt * 2) {
-            auto x1 = random_range(-10, map_width + 10);
-            auto y1 = random_range(-10, map_height + 10);
-            auto x2 = x1;
-            auto y2 = y1 + map_width / 2;
-            line_draw(point(x1, y1), 
-                      point(x2, y2), 
-                      Charmap::DEPTH_FLOOR,
-                      Charmap::FLOOR);
-            cnt ++;
-        }
-        dump();
-
-        //
-        // Next randomly fill in with floor tiles. This will make large
-        // patches of connected floor tiles.
-        //
-        cnt = 0;
-        while (cnt < lines_cnt) {
-            auto x = random_range(0, map_width - 1);
-            auto y = random_range(0, map_height - 1);
-            flood_fill(x, y, Charmap::DEPTH_FLOOR, Charmap::FLOOR);
-            cnt ++;
-        }
-        dump();
-
-        //
-        // Now carve out some empty regions. We could just do smaller
-        // regions above, but somehow this looks better.
-        //
-        cnt = 0;
-        while (cnt < lines_cnt) {
-            auto x1 = random_range(-10, map_width + 10);
-            auto y1 = random_range(-10, map_height + 10);
-            auto x2 = random_range(-10, map_width + 10);
-            auto y2 = random_range(-10, map_height + 10);
-            line_draw(point(x1, y1), point(x2, y2), 
+                      point(x2, y1), 
                       Charmap::DEPTH_FLOOR,
                       Charmap::SPACE);
             cnt ++;
         }
         dump();
 
-        cnt = 0;
-        while (cnt < lines_cnt) {
-            auto x1 = random_range(-10, map_width + 10);
-            auto y1 = random_range(-10, map_height + 10);
-            auto x2 = x1 + 10;
-            auto y2 = y1;
-            line_draw(point(x1, y1), 
-                      point(x2, y2), 
-                      Charmap::DEPTH_FLOOR,
-                      Charmap::SPACE);
-            cnt ++;
-        }
-        dump();
-
-        cnt = 0;
-        while (cnt < lines_cnt) {
-            auto x1 = random_range(-10, map_width + 10);
-            auto y1 = random_range(-10, map_height + 10);
-            auto x2 = x1;
-            auto y2 = y1 + 10;
-            line_draw(point(x1, y1), 
-                      point(x2, y2), 
-                      Charmap::DEPTH_FLOOR,
-                      Charmap::SPACE);
-            cnt ++;
-        }
-        dump();
-#endif
-        for (auto i = 0; i < (map_width * map_height) / 2; i++) {
-            auto x = random_range(0, map_width);
-            auto y = random_range(0, map_height);
-            putc(x, y, Charmap::DEPTH_FLOOR, Charmap::FLOOR);
-        }
-
-        dump();
         //
         // Now pull each room out of the level with a kind of inverse
         // flood fill.

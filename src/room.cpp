@@ -36,10 +36,14 @@ void Room::finalize (void)
 
     height = floor_lines;
 
-    for (auto h = 0; h < height; h++) {
-        std::cout << floor_data[h] << std::endl;
-    }
-    for (auto h = 0; h < height; h++) {
-        std::cout << walls_data[h] << std::endl;
+    int debug = false;
+
+    if (debug) {
+        for (auto h = 0; h < height; h++) {
+            std::cout << floor_data[h] << std::endl;
+        }
+        for (auto h = 0; h < height; h++) {
+            std::cout << walls_data[h] << std::endl;
+        }
     }
 }
