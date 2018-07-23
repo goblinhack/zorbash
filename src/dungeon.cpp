@@ -22,8 +22,26 @@ static bool debug = false;
 class Dungeon {
 public:
     std::vector<char>                         cells;
+    //
+    // If a cell has something in it
+    //
+    std::vector<int>                         in_use;
+    //
+    // Next to a space that could be an exit
+    //
+    std::vector<int>                         exit_candidate;
+    //
+    // Used temporarily for room generation
+    // 
     std::vector<char>                         tmp;
+    //
+    // Map of room numbers
+    //
     std::vector<int>                          roomno_cells;
+    //
+    // Possible start points for corridors.
+    //
+    std::vector<point>                        possible_new_corridors;
     int map_width                             {MAP_WIDTH};
     int map_height                            {MAP_HEIGHT};
     int map_depth                             {Charmap::DEPTH_MAX};
@@ -136,10 +154,15 @@ public:
     {
         Charmap::init_charmaps();
 
-        cells.resize(map_width * map_height * Charmap::DEPTH_MAX);
-        tmp.resize(map_width * map_height * Charmap::DEPTH_MAX);
+        cells.resize(map_width * map_height * Charmap::DEPTH_MAX, 
+                     Charmap::NONE);
+        tmp.resize(map_width * map_height * Charmap::DEPTH_MAX, 
+                   Charmap::NONE);
+        in_use.resize(map_width * map_height * Charmap::DEPTH_MAX, 
+                      false);
+        exit_candidate.resize(map_width * map_height * Charmap::DEPTH_MAX, 
+                              false);
 
-        std::fill(cells.begin(), cells.end(), Charmap::NONE);
         roomno_cells.resize(map_width * map_height);
 
         //
@@ -185,10 +208,18 @@ public:
         finish_constructor();
     }
 
-    int cell_offset (const int x, const int y, const int z)
+    int offset (const int x, const int y, const int z)
     {
         auto offset = (map_width * map_height) * z;
         offset += (map_width) * y;
+        offset += x;
+
+        return (offset);
+    }
+
+    int offset (const int x, const int y)
+    {
+        auto offset = (map_width) * y;
         offset += x;
 
         return (offset);
@@ -215,7 +246,7 @@ public:
             return (nullptr);
         }
 
-        return (&cells[cell_offset(x, y, z)]);
+        return (&cells[offset(x, y, z)]);
     }
 
     char *tmp_addr (const int x, const int y, const int z)
@@ -226,7 +257,29 @@ public:
             return (nullptr);
         }
 
-        return (&tmp[cell_offset(x, y, z)]);
+        return (&tmp[offset(x, y, z)]);
+    }
+
+    int *in_use_addr (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            LOG("out of bounds on in_use map %d,%d vs %d,%d", 
+                x, y, map_width, map_height);
+            return (nullptr);
+        }
+
+        return (&in_use[offset(x, y)]);
+    }
+
+    int *exit_candidate_addr (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            LOG("out of bounds on in_use map %d,%d vs %d,%d", 
+                x, y, map_width, map_height);
+            return (nullptr);
+        }
+
+        return (&exit_candidate[offset(x, y)]);
     }
 
     int room_offset (const int x, const int y)
@@ -253,7 +306,7 @@ public:
      */
     void putc (const int x, const int y, const int z, const char c)
     {
-        char *p = cell_addr(x, y, z);
+        auto p = cell_addr(x, y, z);
         if (p != nullptr) {
             *p = c;
         }
@@ -264,7 +317,7 @@ public:
      */
     char getc (const int x, const int y, const int z)
     {
-        char *p = cell_addr(x, y, z);
+        auto p = cell_addr(x, y, z);
         if (p != nullptr) {
             return (*p);
         }
@@ -276,7 +329,7 @@ public:
      */
     void puttmp (const int x, const int y, const int z, const char c)
     {
-        char *p = tmp_addr(x, y, z);
+        auto p = tmp_addr(x, y, z);
         if (p != nullptr) {
             *p = c;
         }
@@ -287,7 +340,7 @@ public:
      */
     char gettmp (const int x, const int y, const int z)
     {
-        char *p = tmp_addr(x, y, z);
+        auto p = tmp_addr(x, y, z);
         if (p != nullptr) {
             return (*p);
         }
@@ -295,11 +348,57 @@ public:
     }
 
     /*
+     * Puts a tile on the map
+     */
+    void put_exit_candidate (const int x, const int y, const bool v)
+    {
+        auto p = exit_candidate_addr(x, y);
+        if (p != nullptr) {
+            *p = v;
+        }
+    }
+
+    /*
+     * Gets a tile of the map or None
+     */
+    bool get_exit_candidate (const int x, const int y)
+    {
+        auto p = exit_candidate_addr(x, y);
+        if (p != nullptr) {
+            return (*p);
+        }
+        return (false);
+    }
+
+    /*
+     * Puts a tile on the map
+     */
+    void put_in_use (const int x, const int y, const bool v)
+    {
+        auto p = in_use_addr(x, y);
+        if (p != nullptr) {
+            *p = v;
+        }
+    }
+
+    /*
+     * Gets a tile of the map or None
+     */
+    bool get_in_use (const int x, const int y)
+    {
+        auto p = in_use_addr(x, y);
+        if (p != nullptr) {
+            return (*p);
+        }
+        return (false);
+    }
+
+    /*
      * Puts a roomno on the map
      */
     void putr (const int x, const int y, const int c)
     {
-        int *p = roomno_addr(x, y);
+        auto p = roomno_addr(x, y);
         if (p != nullptr) {
             *p = 0;
         }
@@ -310,7 +409,7 @@ public:
      */
     int getr (const int x, const int y)
     {
-        int *p = roomno_addr(x, y);
+        auto p = roomno_addr(x, y);
         if (p != nullptr) {
             return (*p);
         }
@@ -1325,6 +1424,9 @@ public:
         return (place);
     }
 
+    //
+    // Limit to only random rooms
+    //
     Roomp get_next_random_room (void)
     {
         Roomp place;
@@ -1370,6 +1472,75 @@ public:
             room_place_tries ++;
         }
     }
+
+    //
+    // Search the whole level for possible room exits
+    //
+    void rooms_find_all_exits (void)
+    {
+        std::fill(in_use.begin(), in_use.end(), false);
+        std::fill(exit_candidate.begin(), exit_candidate.end(), false);
+
+        possible_new_corridors.resize(0);
+
+        //
+        // First pass find all the places we could place a corridor
+        //
+        for (auto y : range<int>(corridor_spacing, 
+                                 map_height - corridor_spacing)) {
+            for (auto x : range<int>(corridor_spacing, 
+                                     map_width - corridor_spacing)) {
+
+                if (not is_floor_at(x, y)) {
+                    continue;
+                }
+
+                if (is_wall_at(x, y)) {
+                    put_in_use(x, y, true);
+                    continue;
+                }
+
+                if (is_corridor_at(x, y)) {
+                    put_in_use(x, y, true);
+                    continue;
+                }
+
+                if (not is_floor_or_corridor_at(x + 1, y) ||
+                    not is_floor_or_corridor_at(x - 1, y) ||
+                    not is_floor_or_corridor_at(x, y - 1) ||
+                    not is_floor_or_corridor_at(x, y + 1)) {
+                    put_exit_candidate(x, y, true);
+                }
+            }
+        }
+    }
+
+#if 0
+    //
+    // Place remaining rooms hanging off of the corridors of the last.
+    //
+    bool rooms_place_remaining (int place)
+        corridor_ends = []
+        rooms_all_grow_new_corridors()
+
+        room_place_tries = 0
+        while place < rooms_on_level:
+            room_place_tries ++;
+            if room_place_tries > rooms_on_level * 10:
+                mm.log("Tried to place rooms for too long, made {0} rooms".
+                       format(rooms_on_level))
+//                dump()
+                return false
+
+            //
+            // If we place at least one new room, we will have new corridors
+            // to grow.
+            //
+            if rooms_all_try_to_place_at_end_of_corridors()
+                rooms_all_grow_new_corridors()
+
+        return true
+#endif
     
     //
     // Place all rooms
