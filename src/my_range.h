@@ -51,8 +51,7 @@ private:
     T begin_val;
     T end_val;
 public:
-    range(T begin_val, T end_val) : 
-        begin_val(begin_val), end_val(end_val) { }
+    range(T begin_val, T end_val) : begin_val(begin_val), end_val(end_val) { }
     iter begin() { return iter(begin_val); }
     iter end() { return iter(end_val); }
 };
