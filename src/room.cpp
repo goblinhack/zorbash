@@ -7,6 +7,7 @@
 #include "my_main.h"
 #include "my_tile.h"
 #include "my_room.h"
+#include "my_range.h"
 
 uint32_t           Room::room_count = 0;
 std::vector<Roomp> Room::all_fixed_rooms;
@@ -24,6 +25,63 @@ Roomp Room::fixed_room_new (void)
     auto r = std::make_shared< class Room >();
     Room::all_fixed_rooms.push_back(r);
     return (r);
+}
+
+//
+// Find the floor tiles at the edge of the room. We choose
+// these for corridor starts.
+//
+void Room::find_edge_exits (void)
+{
+    int x, y;
+
+    y = 0;
+    for (auto x : range<int>(0, width)) {
+        if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::WALL) {
+            continue;
+        }
+        if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
+            edge_exits.push_back(point(x, y));
+        }
+    }
+
+    y = height - 1;
+    for (auto x : range<int>(0, width)) {
+        if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::WALL) {
+            continue;
+        }
+        if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
+            edge_exits.push_back(point(x, y));
+        }
+	}
+
+    x = 0;
+    for (auto y : range<int>(0, height)) {
+        if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::WALL) {
+            continue;
+        }
+        if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
+            edge_exits.push_back(point(x, y));
+        }
+	}
+
+    x = width - 1;
+    for (auto y : range<int>(0, height)) {
+        if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::WALL) {
+            continue;
+        }
+        if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
+            edge_exits.push_back(point(x, y));
+        }
+	}
+
+    for (auto x : range<int>(0, width)) {
+		for (auto y : range<int>(0, height)) {
+			if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::DOOR) {
+				continue;
+			}
+		}
+	}
 }
 
 void Room::finalize (void)
@@ -54,4 +112,6 @@ void Room::finalize (void)
             std::cout << data[Charmap::DEPTH_FLOOR][h] << std::endl;
         }
     }
+
+    find_edge_exits();
 }

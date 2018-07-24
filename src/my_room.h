@@ -37,8 +37,11 @@ public:
     std::vector<std::string> data[Charmap::DEPTH_MAX];
     int                      width {};
     int                      height {};
+    std::vector<point>       edge_exits;
 
     static Roomp fixed_room_new(void);
     static Roomp random_room_new(void);
+
+    void find_edge_exits(void);
     void finalize(void);
 };
