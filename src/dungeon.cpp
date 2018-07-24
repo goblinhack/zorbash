@@ -39,13 +39,21 @@ public:
     //
     std::vector<int>                          roomno_cells;
     //
-    // Possible start points for corridors.
+    // And the end of a corridor
     //
-    std::vector<point>                        possible_new_corridors;
+    std::vector<point>                        corridor_ends;
+
+    //
+    // The. Map.
+    //
     int map_width                             {MAP_WIDTH};
     int map_height                            {MAP_HEIGHT};
     int map_depth                             {Charmap::DEPTH_MAX};
 
+    //
+    // We generate a cellular automata map and then carve that into
+    // room fragments so we get curvy rooms.
+    //
     uint32_t map_cellular_automata_fill_chance = 50;
     int map_cellular_automata_r1               = 5;
     int map_cellular_automata_r2               = 2;
@@ -1476,12 +1484,10 @@ public:
     //
     // Search the whole level for possible room exits
     //
-    void rooms_find_all_exits (void)
+    std::vector<point> rooms_find_all_exits (void)
     {
         std::fill(in_use.begin(), in_use.end(), false);
         std::fill(exit_candidate.begin(), exit_candidate.end(), false);
-
-        possible_new_corridors.resize(0);
 
         //
         // First pass find all the places we could place a corridor
@@ -1513,34 +1519,250 @@ public:
                 }
             }
         }
+
+        //
+        // Possible start points for corridors.
+        //
+        std::vector<point> possible_new_corridors;
+
+        //
+        // Next pass filter all places we could start that are too near
+        // to other corridors that already exist, or are candidates to
+        // create.
+        //
+        auto border = corridor_spacing;
+
+        for (auto y : range<int>(border + 1, map_height - (border + 1))) {
+            for (auto x : range<int>(border + 1, map_width - (border + 1))) {
+
+                if (not get_exit_candidate(x, y)) {
+                    continue;
+                }
+
+                auto c = - corridor_spacing;
+                auto d = corridor_spacing + 1;
+
+                //
+                // Check no corridor adjacent to any other one nearby. Or
+                // any new one we plan.
+                //
+                auto skip = false;
+                for (auto dx : range<int>(c, d)) {
+                    for (auto dy : range<int>(c, d)) {
+                        if ((dx == 0) and (dy == 0)) {
+                            continue;
+                        }
+
+                        if (get_exit_candidate(x + dx, y + dy)) {
+                            put_in_use(x + dx, y + dy, true);
+                            skip = true;
+                            break;
+                        }
+
+                        if (is_corridor_at(x + dx, y + dy)) {
+                            put_in_use(x + dx, y + dy, true);
+                            skip = true;
+                            break;
+                        }
+                    }
+                    if (skip) {
+                        break;
+                    }
+                }
+                if (skip) {
+                    continue;
+                }
+
+                possible_new_corridors.push_back(point(x, y));
+            }
+        }
+
+        //
+        // Return the final list of corridor starts
+        //
+        return possible_new_corridors;
     }
 
+    //
+    // Grow a corridor in the given direction
+    //
+    void room_corridor_draw(int x, int y, int dx, int dy, 
+                            int clen=0, 
+                            int fork_count=0,
+                            char c=Charmap::CORRIDOR)
+    {
+        x += dx;
+        y += dy;
+
+        if (x < 2) {
+            return;
+        } else if (x >= map_width - 3) {
+            return;
+        }
+
+        if (y < 2) {
+            return;
+        } else if (y >= map_height - 3) {
+            return;
+        }
+
+        if (getc(x, y, Charmap::DEPTH_FLOOR) == Charmap::NONE) {
+            return;
+        }
+
+        if (is_floor_or_corridor_at(x, y)) {
+            return;
+        }
+
+        clen ++;
+
+        putc(x, y, Charmap::DEPTH_FLOOR, c);
+
+        //
+        // Reached the end of a corridor?
+        //
+        if (random_range(1, 100) < clen * corridor_grow_chance) {
+            corridor_ends.push_back(point(x, y));
+            return;
+        }
+
+        //
+        // Stopped growing. Fork the corridor.
+        // Don't do corridors forks adjacent to each other.
+        //
+        if ((fork_count < 3) and ((clen % 2) == 0)) {
+            if (random_range(1, 100) < corridor_fork_chance) {
+                room_corridor_draw(x, y, dy, dx, clen, fork_count + 1, c);
+            }
+
+            if (random_range(1, 100) < corridor_fork_chance) {
+                room_corridor_draw(x, y, -dy, -dx, clen, fork_count + 1, c);
+            }
+        }
+
+        //
+        // Keep on growing
+        //
+        room_corridor_draw(x, y, dx, dy, clen, fork_count + 1, c);
+    }
+
+    //
+    // For each room exit (and we search the whole room) grow corridors
+    //
+    void rooms_all_grow_new_corridors (void)
+    {
+        auto possible_new_corridors = rooms_find_all_exits();
+
+        //
+        // For each possible direction of a corridor, sprout one.
+        //
+        for (auto coord : possible_new_corridors) {
+            auto x = coord.x;
+            auto y = coord.y;
+
+            // a b c
+            // d * f
+            // g h i
+            auto b = get_in_use(x, y-1);
+            auto d = get_in_use(x-1, y);
+            auto f = get_in_use(x+1, y);
+            auto h = get_in_use(x, y+1);
+
+            if (not b) {
+                room_corridor_draw(x, y, 0, -1, Charmap::CORRIDOR);
+            }
+            if (not d) {
+                room_corridor_draw(x, y, -1, 0, Charmap::CORRIDOR);
+            }
+            if (not f) {
+                room_corridor_draw(x, y, 1, 0, Charmap::CORRIDOR);
+            }
+            if (not h) {
+                room_corridor_draw(x, y, 0, 1, Charmap::CORRIDOR);
+            }
+        }
+    }
+
+    //
+    // Search for corridor end points and try to dump rooms there.
+    //
 #if 0
+    void rooms_all_try_to_place_at_end_of_corridors (void)
+    {
+        auto room = get_next_room();
+        auto placed_a_room = false
+
+        //
+        // For all corridor end points.
+        //
+        for (coord : corridor_ends) {
+            auto cx = coord.x;
+            auto cy = coord.y;
+
+            //
+            // Try to attach room only by it's edges. This is a bit quicker
+            // than searching the room for exits.
+            //
+            for (edge in room.edge_exits:
+                rx, ry = edge
+
+                x = cx - rx
+                y = cy - ry
+
+                if room_place_if_no_overlaps(roomno, x - 1, y)
+                    placed_a_room = true
+                else if room_place_if_no_overlaps(roomno, x + 1, y)
+                    placed_a_room = true
+                else if room_place_if_no_overlaps(roomno, x, y - 1)
+                    placed_a_room = true
+                else if room_place_if_no_overlaps(roomno, x, y + 1)
+                    placed_a_room = true
+
+                if placed_a_room:
+                    break
+
+            if placed_a_room:
+                break
+        }
+
+        //
+        // Placed at least one?
+        //
+        return placed_a_room;
+    }
+#endif
+
     //
     // Place remaining rooms hanging off of the corridors of the last.
     //
     bool rooms_place_remaining (int place)
-        corridor_ends = []
-        rooms_all_grow_new_corridors()
+    {
+        corridor_ends.resize(0);
+        rooms_all_grow_new_corridors();
 
-        room_place_tries = 0
-        while place < rooms_on_level:
+        auto room_place_tries = 0;
+        while (place < rooms_on_level) {
             room_place_tries ++;
-            if room_place_tries > rooms_on_level * 10:
-                mm.log("Tried to place rooms for too long, made {0} rooms".
-                       format(rooms_on_level))
-//                dump()
-                return false
+            if (room_place_tries > rooms_on_level * 10) {
+                LOG("Tried to place rooms for too long, made %d rooms",
+                     rooms_on_level);
+                dump();
+                return false;
+            }
 
             //
             // If we place at least one new room, we will have new corridors
             // to grow.
             //
-            if rooms_all_try_to_place_at_end_of_corridors()
-                rooms_all_grow_new_corridors()
-
-        return true
+#if 0
+            if (rooms_all_try_to_place_at_end_of_corridors()) {
+                rooms_all_grow_new_corridors();
+            }
 #endif
+        }
+
+        return true;
+    }
     
     //
     // Place all rooms
