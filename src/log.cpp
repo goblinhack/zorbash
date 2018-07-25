@@ -97,19 +97,19 @@ static void putf (FILE *fp, const char *s)
 	    }
 	} else if (looking_for_start) {
 	    if (c == '%') {
-		if (!strncmp(s, "fg=", 3)) {
-		    s += 3;
-		    putfg(color_to_index(&s), fp);
-		    looking_for_start = false;
-		    continue;
-		}
+            if (!strncmp(s, "fg=", 3)) {
+                s += 3;
+                putfg(color_to_index(&s), fp);
+                looking_for_start = false;
+                continue;
+            }
 
-		if (!strncmp(s, "bg=", 3)) {
-		    s += 3;
-		    putbg(color_to_index(&s), fp);
-		    looking_for_start = false;
-		    continue;
-		}
+            if (!strncmp(s, "bg=", 3)) {
+                s += 3;
+                putbg(color_to_index(&s), fp);
+                looking_for_start = false;
+                continue;
+            }
 	    }
 
 	    putc(c, fp);

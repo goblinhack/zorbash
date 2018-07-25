@@ -17,7 +17,7 @@
 #include <random>       // std::default_random_engine
 #include <chrono>       // std::chrono::system_clock
 
-static bool debug = false;
+static bool dungeon_debug = true;
 
 class Dungeon {
 public:
@@ -193,12 +193,19 @@ public:
         // First room goes in the center. The rest hang off of its
         // corridors.
         //
-#if 0
         if (not rooms_place_all(rooms_on_level_target)) {
             generate_failed = true;
             return;
         }
-#endif
+
+        debug("^^^ placed all rooms ^^^");
+    }
+
+    void debug(std::string s)
+    {
+        // return
+        dump();
+        LOG("%s", s.c_str());
     }
 
     Dungeon (int map_width,
@@ -428,9 +435,18 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            if (c != Charmap::SPACE) {
+            if ((c != Charmap::SPACE) && (c != Charmap::NONE)) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    bool is_anything_at (const int x, const int y, const int z)
+    {
+        auto c = getc(x, y, z);
+        if ((c != Charmap::SPACE) && (c != Charmap::NONE)) {
+            return true;
         }
         return false;
     }
@@ -948,20 +964,34 @@ public:
 
     void dump (void)
     {
-        if (!debug) {
+        if (!dungeon_debug) {
             return;
         }
 
-        printf("-------------------------------------------------------------\n");
+        LOG("map debug:");
         for (auto y = 0; y < map_height; y++) {
+            std::string s;
             for (auto x = 0; x < map_width; x++) {
-                if (is_floor_at(x, y)) {
-                    printf(".");
-                } else {
-                    printf(" ");
+                bool got_one = false;
+                for (auto d = 0; d < map_depth; d++) {
+                    if (!is_anything_at(x, y, d)) {
+                        continue;
+                    }
+
+                    auto m = getc(x, y, d);
+                    auto cr = Charmap::all_charmaps[m];
+                    auto c = cr.c;
+
+                    s += c;
+                    got_one = true;
+                    break;
+                }
+                if (!got_one) {
+                    s += " ";
                 }
             }
-            printf("\n");
+            LOG("%s", s.c_str());
+            CON("%s", s.c_str());
         }
     }
 
@@ -1069,46 +1099,26 @@ public:
         for (y=0; y < map_height; y++) {
             putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(map_width-1, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(map_width-2, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(map_width-3, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(map_width-4, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(map_width-5, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(1, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(2, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(3, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(0, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(4, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
         }
 
         for (x=0; x < map_width; x++) {
             putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, map_height-1, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, map_height-2, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, map_height-3, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, map_height-4, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, map_height-5, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, 1, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, 2, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, 3, Charmap::DEPTH_FLOOR, Charmap::WALL);
-            putc(x, 0, Charmap::DEPTH_FLOOR, Charmap::WALL);
             putc(x, 4, Charmap::DEPTH_FLOOR, Charmap::WALL);
         }
 
@@ -1274,8 +1284,9 @@ public:
                             /*
                              * Random holes in the walls of rooms
                              */
+#if 0 
                             if (!(rx % 2) and !(ry % 2)) {
-                                if (random_range(0, 100) < 10) {
+                                if (random_range(0, 1000) < 10) {
                                     walls += c;
                                 } else {
                                     walls += ' ';
@@ -1283,6 +1294,9 @@ public:
                             } else {
                                 walls += c;
                             }
+#else
+                                walls += c;
+#endif
                         } else {
                             walls += ' ';
                         }
@@ -1312,6 +1326,21 @@ public:
                 }
 
                 r->finalize();
+
+                LOG("room debug:");
+                CON("room debug:");
+                for (auto y = 0; y < rh; y++) {
+                    std::string s;
+                    for (auto x = 0; x < rw; x++) {
+                        auto m = rcells[x][y];
+                        auto cr = Charmap::all_charmaps[m];
+                        auto c = cr.c;
+
+                        s += c;
+                    }
+                    LOG("%s", s.c_str());
+                    CON("%s", s.c_str());
+                }
             }
         }
 
@@ -1686,16 +1715,15 @@ public:
     //
     // Search for corridor end points and try to dump rooms there.
     //
-#if 0
-    void rooms_all_try_to_place_at_end_of_corridors (void)
+    bool rooms_all_try_to_place_at_end_of_corridors (void)
     {
         auto room = get_next_room();
-        auto placed_a_room = false
+        auto placed_a_room = false;
 
         //
         // For all corridor end points.
         //
-        for (coord : corridor_ends) {
+        for (auto coord : corridor_ends) {
             auto cx = coord.x;
             auto cy = coord.y;
 
@@ -1703,26 +1731,27 @@ public:
             // Try to attach room only by it's edges. This is a bit quicker
             // than searching the room for exits.
             //
-            for (edge in room.edge_exits:
-                rx, ry = edge
+            for (auto edge : room->edge_exits) {
+                auto rx = edge.x;
+                auto ry = edge.y;
+                auto x = cx - rx;
+                auto y = cy - ry;
 
-                x = cx - rx
-                y = cy - ry
+                if (room_place_if_no_overlaps(room, x - 1, y) ||
+                    room_place_if_no_overlaps(room, x + 1, y) ||
+                    room_place_if_no_overlaps(room, x, y - 1) ||
+                    room_place_if_no_overlaps(room, x, y + 1)) {
+                    placed_a_room = true;
+                }
 
-                if room_place_if_no_overlaps(roomno, x - 1, y)
-                    placed_a_room = true
-                else if room_place_if_no_overlaps(roomno, x + 1, y)
-                    placed_a_room = true
-                else if room_place_if_no_overlaps(roomno, x, y - 1)
-                    placed_a_room = true
-                else if room_place_if_no_overlaps(roomno, x, y + 1)
-                    placed_a_room = true
+                if (placed_a_room) {
+                    break;
+                }
+            }
 
-                if placed_a_room:
-                    break
-
-            if placed_a_room:
-                break
+            if (placed_a_room) {
+                break;
+            }
         }
 
         //
@@ -1730,7 +1759,6 @@ public:
         //
         return placed_a_room;
     }
-#endif
 
     //
     // Place remaining rooms hanging off of the corridors of the last.
@@ -1754,11 +1782,9 @@ public:
             // If we place at least one new room, we will have new corridors
             // to grow.
             //
-#if 0
             if (rooms_all_try_to_place_at_end_of_corridors()) {
                 rooms_all_grow_new_corridors();
             }
-#endif
         }
 
         return true;
@@ -1773,12 +1799,10 @@ public:
             return false;
         }
 
-#if 0
-        if (not rooms_place_remaining(int place)) {
-            return false
+        if (not rooms_place_remaining(place)) {
+            return false;
         }
 
-#endif
         return true;
     }
 };
