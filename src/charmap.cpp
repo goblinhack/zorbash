@@ -57,7 +57,7 @@ void Charmap::init_charmaps (void)
 
     char_index             = Charmap::CORRIDOR;
     c = &all_charmaps[char_index];
-    c->c                    = '_',
+    c->c                    = '#',
     c->bg                   = "black",
     c->fg                   = "yellow",
     c->is_corridor          = true;

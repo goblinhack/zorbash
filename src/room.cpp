@@ -53,7 +53,7 @@ void Room::find_edge_exits (void)
         if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
             edge_exits.push_back(point(x, y));
         }
-	}
+    }
 
     x = 0;
     for (auto y : range<int>(0, height)) {
@@ -63,7 +63,7 @@ void Room::find_edge_exits (void)
         if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
             edge_exits.push_back(point(x, y));
         }
-	}
+    }
 
     x = width - 1;
     for (auto y : range<int>(0, height)) {
@@ -73,15 +73,29 @@ void Room::find_edge_exits (void)
         if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
             edge_exits.push_back(point(x, y));
         }
-	}
+    }
 
     for (auto x : range<int>(0, width)) {
-		for (auto y : range<int>(0, height)) {
-			if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::DOOR) {
-				continue;
-			}
-		}
-	}
+        for (auto y : range<int>(0, height)) {
+            if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::DOOR) {
+                continue;
+            }
+        }
+    }
+
+
+    /*
+     * Convert the vector to a sorted vector, via a set
+     */
+    std::set<point> s;
+    for (auto v : edge_exits) {
+        s.insert(v);
+    }
+    edge_exits.assign(s.begin(), s.end());
+
+    if (!edge_exits.size()) {
+        DIE("room with no exits!");
+    }
 }
 
 void Room::finalize (void)
@@ -102,14 +116,16 @@ void Room::finalize (void)
 
     height = floor_lines;
 
-    int debug = false;
+    int debug = true;
 
     if (debug) {
+        CON("room floor:");
         for (auto h = 0; h < height; h++) {
-            std::cout << data[Charmap::DEPTH_FLOOR][h] << std::endl;
+            CON("[%s]", data[Charmap::DEPTH_FLOOR][h].c_str());
         }
+        CON("room walls:");
         for (auto h = 0; h < height; h++) {
-            std::cout << data[Charmap::DEPTH_FLOOR][h] << std::endl;
+            CON("[%s]", data[Charmap::DEPTH_WALLS][h].c_str());
         }
     }
 

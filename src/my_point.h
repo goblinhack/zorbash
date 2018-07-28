@@ -76,14 +76,14 @@ public:
         x /= a; y /= a;
     }
 
-    friend my_apoint operator< (my_apoint a, my_apoint b)
+    friend bool operator< (my_apoint a, my_apoint b)
     {
-        return (a.x + a.y < b.x + b.y);
+        return (a.y < b.y) && (a.x < b.x);
     }
 
-    friend my_apoint operator> (my_apoint a, my_apoint b)
+    friend bool operator> (my_apoint a, my_apoint b)
     {
-        return (a.x + a.y > b.x + b.y);
+        return (a.y > b.y) && (a.x > b.x);
     }
 
     friend my_apoint operator+ (my_apoint a, my_apoint b)
@@ -229,16 +229,6 @@ public:
     void operator-= (my_apoint3d a)
     {
         x -= a.x; y -= a.y; z -= a.z;
-    }
-
-    friend my_apoint3d operator< (my_apoint3d a, my_apoint3d b)
-    {
-        return (a.x + a.y + a.z < b.x + b.y + b.z);
-    }
-
-    friend my_apoint3d operator> (my_apoint3d a, my_apoint3d b)
-    {
-        return (a.x + a.y + a.z > b.x + b.y + b.z);
     }
 
     friend my_apoint3d operator+ (my_apoint3d a, my_apoint3d b)
