@@ -159,7 +159,7 @@ public:
     std::map< uint32_t, std::map<uint32_t, Roomp > > room_connection;
 
     void finish_constructor (void)
-    {
+    {_
         Charmap::init_charmaps();
 
         cells.resize(map_width * map_height * Charmap::DEPTH_MAX, 
@@ -176,9 +176,9 @@ public:
         //
         // Create all randomly shaped rooms.
         //
-        for (auto c : range<int>(0, 2)) {
-            rooms_all_create_random_shapes(c);
-        }
+        //for (auto c : range<int>(0, 2)) {
+            rooms_all_create_random_shapes();
+        //}
 
         //
         // Total of fixed and random room
@@ -202,7 +202,7 @@ public:
     }
 
     void debug(std::string s)
-    {
+    {_
         // return
         dump();
         LOG("%s", s.c_str());
@@ -214,17 +214,17 @@ public:
         map_width                  (map_width),
         map_height                 (map_height),
         rooms_on_level_target      (rooms_on_level_target)
-    {
+    {_
         finish_constructor();
     }
 
     Dungeon ()
-    {
+    {_
         finish_constructor();
     }
 
     int offset (const int x, const int y, const int z)
-    {
+    {_
         auto offset = (map_width * map_height) * z;
         offset += (map_width) * y;
         offset += x;
@@ -233,7 +233,7 @@ public:
     }
 
     int offset (const int x, const int y)
-    {
+    {_
         auto offset = (map_width) * y;
         offset += x;
 
@@ -241,20 +241,20 @@ public:
     }
 
     bool is_oob (const int x, const int y, const int z)
-    {
+    {_
         return ((x < 0) || (x >= map_width) ||
                 (y < 0) || (y >= map_height) ||
                 (z < 0) || (z >= map_depth));
     }
 
     bool is_oob (const int x, const int y)
-    {
+    {_
         return ((x < 0) || (x >= map_width) ||
                 (y < 0) || (y >= map_height));
     }
 
     char *cell_addr (const int x, const int y, const int z)
-    {
+    {_
         if (is_oob(x, y, z)) {
             LOG("out of bounds on cell map %d,%d,%d vs %d,%d,%d", 
                 x, y, z, map_width, map_height, map_depth);
@@ -265,7 +265,7 @@ public:
     }
 
     char *tmp_addr (const int x, const int y, const int z)
-    {
+    {_
         if (is_oob(x, y, z)) {
             LOG("out of bounds on tmp map %d,%d,%d vs %d,%d,%d", 
                 x, y, z, map_width, map_height, map_depth);
@@ -276,7 +276,7 @@ public:
     }
 
     int *in_use_addr (const int x, const int y)
-    {
+    {_
         if (is_oob(x, y)) {
             LOG("out of bounds on in_use map %d,%d vs %d,%d", 
                 x, y, map_width, map_height);
@@ -287,7 +287,7 @@ public:
     }
 
     int *exit_candidate_addr (const int x, const int y)
-    {
+    {_
         if (is_oob(x, y)) {
             LOG("out of bounds on in_use map %d,%d vs %d,%d", 
                 x, y, map_width, map_height);
@@ -298,7 +298,7 @@ public:
     }
 
     int room_offset (const int x, const int y)
-    {
+    {_
         auto offset = (map_height) * y;
         offset += x;
 
@@ -306,7 +306,7 @@ public:
     }
 
     int *roomno_addr (const int x, const int y)
-    {
+    {_
         if (is_oob(x, y)) {
             LOG("out of bounds on room cells at %d,%d vs %d,%d", 
                 x, y, map_width, map_height);
@@ -320,7 +320,7 @@ public:
      * Puts a tile on the map
      */
     void putc (const int x, const int y, const int z, const char c)
-    {
+    {_
         auto p = cell_addr(x, y, z);
         if (p != nullptr) {
             *p = c;
@@ -331,7 +331,7 @@ public:
      * Gets a tile of the map or None
      */
     char getc (const int x, const int y, const int z)
-    {
+    {_
         auto p = cell_addr(x, y, z);
         if (p != nullptr) {
             return (*p);
@@ -343,7 +343,7 @@ public:
      * Puts a tile on the map
      */
     void puttmp (const int x, const int y, const int z, const char c)
-    {
+    {_
         auto p = tmp_addr(x, y, z);
         if (p != nullptr) {
             *p = c;
@@ -354,7 +354,7 @@ public:
      * Gets a tile of the map or None
      */
     char gettmp (const int x, const int y, const int z)
-    {
+    {_
         auto p = tmp_addr(x, y, z);
         if (p != nullptr) {
             return (*p);
@@ -366,7 +366,7 @@ public:
      * Puts a tile on the map
      */
     void put_exit_candidate (const int x, const int y, const bool v)
-    {
+    {_
         auto p = exit_candidate_addr(x, y);
         if (p != nullptr) {
             *p = v;
@@ -377,7 +377,7 @@ public:
      * Gets a tile of the map or None
      */
     bool get_exit_candidate (const int x, const int y)
-    {
+    {_
         auto p = exit_candidate_addr(x, y);
         if (p != nullptr) {
             return (*p);
@@ -389,7 +389,7 @@ public:
      * Puts a tile on the map
      */
     void put_in_use (const int x, const int y, const bool v)
-    {
+    {_
         auto p = in_use_addr(x, y);
         if (p != nullptr) {
             *p = v;
@@ -400,7 +400,7 @@ public:
      * Gets a tile of the map or None
      */
     bool get_in_use (const int x, const int y)
-    {
+    {_
         auto p = in_use_addr(x, y);
         if (p != nullptr) {
             return (*p);
@@ -412,7 +412,7 @@ public:
      * Puts a roomno on the map
      */
     void putr (const int x, const int y, const int c)
-    {
+    {_
         auto p = roomno_addr(x, y);
         if (p != nullptr) {
             *p = 0;
@@ -423,7 +423,7 @@ public:
      * Gets a roomno of the map or None
      */
     int getr (const int x, const int y)
-    {
+    {_
         auto p = roomno_addr(x, y);
         if (p != nullptr) {
             return (*p);
@@ -432,7 +432,7 @@ public:
     }
 
     bool is_anything_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             if ((c != Charmap::SPACE) && (c != Charmap::NONE)) {
@@ -443,7 +443,7 @@ public:
     }
 
     bool is_anything_at (const int x, const int y, const int z)
-    {
+    {_
         auto c = getc(x, y, z);
         if ((c != Charmap::SPACE) && (c != Charmap::NONE)) {
             return true;
@@ -452,7 +452,7 @@ public:
     }
 
     bool is_floor_or_corridor_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -466,7 +466,7 @@ public:
     }
 
     bool is_floor_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -479,7 +479,7 @@ public:
     }
 
     bool is_dusty_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -492,7 +492,7 @@ public:
     }
 
     bool is_corridor_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -505,7 +505,7 @@ public:
     }
 
     bool is_wall_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -518,7 +518,7 @@ public:
     }
 
     bool is_cwall_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -531,7 +531,7 @@ public:
     }
 
     bool is_door_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -544,7 +544,7 @@ public:
     }
 
     bool is_dungeon_way_up_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -557,7 +557,7 @@ public:
     }
 
     bool is_dungeon_way_down_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -570,7 +570,7 @@ public:
     }
 
     bool is_lava_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -583,7 +583,7 @@ public:
     }
 
     bool is_water_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -596,7 +596,7 @@ public:
     }
 
     bool is_chasm_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -609,7 +609,7 @@ public:
     }
     
     bool is_treasure_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -622,7 +622,7 @@ public:
     }
 
     bool is_dissolves_walls_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -635,7 +635,7 @@ public:
     }
 
     bool is_key_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -648,7 +648,7 @@ public:
     }
 
     bool is_movement_blocking_at (const int x, const int y)
-    {
+    {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -665,7 +665,7 @@ public:
     }
 
     std::vector<point> get_line_ (point a, point b, int flag)
-    {
+    {_
         int temp, dx, dy, tdy, dydx, p, x, y, i;
 
         if (a.x > b.x) {
@@ -712,7 +712,7 @@ public:
     }
 
     std::vector<point> get_line (point a, point b)
-    {
+    {_
         int x0 = a.x;
         int x1 = b.x;
         int y0 = a.y;
@@ -736,8 +736,8 @@ public:
     /*
      * Line between points
      */
-    void line_draw(point start, point end, int depth, char rchar)
-    {
+    void line_draw (point start, point end, int depth, char rchar)
+    {_
         auto points = get_line(start, end);
         for (auto p : points) {
             putc(p.x, p.y, depth, rchar);
@@ -748,7 +748,7 @@ public:
      * Flood fill empty space.
      */
     void flood_fill(int x, int y, int depth, char rchar)
-    {
+    {_
         std::stack<point> s;
         
         s.push(point(x, y));
@@ -782,7 +782,7 @@ public:
      */
     std::vector<point> flood_erase (const int x, const int y, 
                                     const size_t max_size)
-    {
+    {_
         bool walked[map_width][map_height];
         std::vector<point> r;
         std::stack<point> s;
@@ -846,7 +846,7 @@ public:
      */
     std::vector<point> flood_find (const int x, const int y, 
                                    std::function<bool (char)> callback)
-    {
+    {_
         bool walked[map_width][map_height];
         std::vector<point> r;
         std::stack<point> s;
@@ -900,7 +900,7 @@ public:
 
     bool Callback(char c);
     void t (void)
-    {
+    {_
         auto f = std::bind(&Dungeon::Callback, this, std::placeholders::_1);
         flood_find (0, 0, f);
         flood_find (0, 0, [](char c) { return true; });
@@ -912,7 +912,7 @@ public:
     void flood_replace (const int x, const int y, const int z,
                         const char old,
                         const char with)
-    {
+    {_
         bool walked[map_width][map_height];
         std::stack<point> s;
         
@@ -963,17 +963,17 @@ public:
     }
 
     void dump (void)
-    {
+    {_
         if (!dungeon_debug) {
             return;
         }
 
-        LOG("map debug:");
+        CON("map debug:");
         for (auto y = 0; y < map_height; y++) {
             std::string s;
             for (auto x = 0; x < map_width; x++) {
                 bool got_one = false;
-                for (auto d = 0; d < map_depth; d++) {
+                for (auto d = map_depth - 1; d >= 0; d--) {
                     if (!is_anything_at(x, y, d)) {
                         continue;
                     }
@@ -990,7 +990,6 @@ public:
                     s += " ";
                 }
             }
-            LOG("%s", s.c_str());
             CON("%s", s.c_str());
         }
     }
@@ -999,7 +998,7 @@ public:
      * Cellular Automata Method for Generating Random Cave-Like Levels
      */
     char map_cellular_automata_random_tile (void)
-    {
+    {_
         if (random_range(0, 100) < map_cellular_automata_fill_chance) {
             return (Charmap::WALL);
         } else {
@@ -1011,7 +1010,7 @@ public:
     // Grow our cells
     //
     void cave_generation (void)
-    {
+    {_
         int x, y, i, j;
 
         for (y=1; y < map_height-1; y++) {
@@ -1080,7 +1079,7 @@ public:
     // Generate a cave!
     //
     void make_cave (void)
-    {
+    {_
         int x, y, i;
 
         for (y=1; y < map_height-1; y++) {
@@ -1155,23 +1154,25 @@ public:
     //
     // We use the map as a scratchpad for creating the room.
     //
-    void rooms_all_create_random_shapes (int which)
-    {
+    void rooms_all_create_random_shapes (void)
+    {_
+LOG(" ");
         //
         // Create a cellular automata like cave first
         //
         cave_gen();
         dump();
+LOG(" ");
 
         //
         // Now carve out some empty regions in the cave
         //
         auto cnt = 0;
         while (cnt < map_carve_lines_cnt) {
-            auto x1 = random_range(0, map_width);
-            auto y1 = random_range(0, map_height);
-            auto x2 = random_range(0, map_width);
-            auto y2 = random_range(0, map_height);
+            auto x1 = random_range(4, map_width - 8);
+            auto y1 = random_range(4, map_height - 8);
+            auto x2 = random_range(4, map_width - 8);
+            auto y2 = random_range(4, map_height - 8);
             line_draw(point(x1, y1), 
                       point(x1, y2), 
                       Charmap::DEPTH_FLOOR,
@@ -1183,13 +1184,16 @@ public:
             cnt ++;
         }
         dump();
+LOG(" ");
 
         //
         // Now pull each room out of the level with a kind of inverse
         // flood fill.
         //
+LOG(" ");
         for (auto y = 0; y < map_height; y++) {
             for (auto x = 0; x < map_width; x++) {
+                _
                 if (!is_floor_at(x, y)) {
                     continue;
                 }
@@ -1228,18 +1232,14 @@ public:
                     }
                 }
 
-                auto rw = maxx - minx + 1;
-                auto rh = maxy - miny + 1;
-                rw += 2;
-                rh += 2;
-
+                _
                 //
                 // Now we need to create the floor and wall vertical
                 // room slices.
                 //
-                char rcells[rw][rh];
-                memset(rcells, Charmap::NONE, sizeof(rcells));
+                std::fill(tmp.begin(), tmp.end(), Charmap::SPACE);
 
+LOG(" ");
                 //
                 // Copy the room points into the new array
                 //
@@ -1247,115 +1247,162 @@ public:
                     auto rx = p.x;
                     auto ry = p.y;
 
-                    rx -= minx;
-                    ry -= miny;
-                    rx ++;
-                    ry ++;
-                    rcells[rx][ry] = Charmap::FLOOR;
-                }
-
-                for (auto ry = 0; ry < rh; ry++) {
-                    for (auto rx = 0; rx < rw; rx++) {
-                        if (rcells[rx][ry] != Charmap::FLOOR) {
-                            continue;
-                        }
-
-                        if (rcells[rx-1][ry] == Charmap::NONE) {
-                            rcells[rx-1][ry] = Charmap::WALL;
-                        }
-                        if (rcells[rx+1][ry] == Charmap::NONE) {
-                            rcells[rx+1][ry] = Charmap::WALL;
-                        }
-                        if (rcells[rx][ry-1] == Charmap::NONE) {
-                            rcells[rx][ry-1] = Charmap::WALL;
-                        }
-                        if (rcells[rx][ry+1] == Charmap::NONE) {
-                            rcells[rx][ry+1] = Charmap::WALL;
-                        }
-                    }
+                    puttmp(rx, ry, Charmap::DEPTH_FLOOR, Charmap::FLOOR);
                 }
 
                 auto r = Room::random_room_new();
-                for (auto rx = 0; rx < rw; rx++) {
-                    std::string walls;
-                    for (auto ry = 0; ry < rh; ry++) {
-                        auto c = rcells[rx][ry+1];
-                        if (c == Charmap::WALL) {
-                            /*
-                             * Random holes in the walls of rooms
-                             */
-#if 0 
-                            if (!(rx % 2) and !(ry % 2)) {
-                                if (random_range(0, 1000) < 10) {
-                                    walls += c;
-                                } else {
-                                    walls += ' ';
-                                }
-                            } else {
-                                walls += c;
+
+LOG(" ");
+                /*
+                 * Make wall outline of the room
+                 */
+                for (auto ry = miny; ry <= maxy; ry++) {
+                    for (auto rx = minx; rx <= maxx; rx++) {
+                        auto c = gettmp(rx, ry, Charmap::DEPTH_FLOOR);
+
+                        if (c != Charmap::FLOOR) {
+                            continue;
+                        }
+
+                        if (gettmp(rx - 1, ry, Charmap::DEPTH_FLOOR) == 
+                              Charmap::SPACE) {
+                            puttmp(rx - 1, ry, Charmap::DEPTH_FLOOR,
+                              Charmap::WALL);
+                        }
+
+                        if (gettmp(rx + 1, ry, Charmap::DEPTH_FLOOR) == 
+                              Charmap::SPACE) {
+                            puttmp(rx + 1, ry, Charmap::DEPTH_FLOOR,
+                              Charmap::WALL);
+                        }
+
+                        if (gettmp(rx, ry - 1, Charmap::DEPTH_FLOOR) == 
+                              Charmap::SPACE) {
+                            puttmp(rx, ry - 1, Charmap::DEPTH_FLOOR,
+                              Charmap::WALL);
+                        }
+
+                        if (gettmp(rx, ry + 1, Charmap::DEPTH_FLOOR) == 
+                              Charmap::SPACE) {
+                            puttmp(rx, ry + 1, Charmap::DEPTH_FLOOR,
+                              Charmap::WALL);
+                        }
+                    }
+                }
+
+                /*
+                 * Find possible exits, start with doors with a bit of
+                 * a gap, then try smaller gaps if we can't find any.
+                 */
+                std::vector<point> possible_doors;
+
+LOG(" ");
+                for (auto step = 5; step > 0; step--) {
+                    for (auto ry = miny-1; ry <= maxy+1; ry+=step) {
+                        for (auto rx = minx-1; rx <= maxx+1; rx+=step) {
+                            auto c = gettmp(rx, ry, Charmap::DEPTH_FLOOR);
+
+                            if (c != Charmap::WALL) {
+                                continue;
                             }
-#else
-                                walls += c;
-#endif
+
+                            if (gettmp(rx - 1, ry, Charmap::DEPTH_FLOOR) == 
+                                Charmap::SPACE) {
+                                possible_doors.push_back(point(rx, ry));
+                            }
+
+                            if (gettmp(rx + 1, ry, Charmap::DEPTH_FLOOR) == 
+                                Charmap::SPACE) {
+                                possible_doors.push_back(point(rx, ry));
+                            }
+
+                            if (gettmp(rx, ry - 1, Charmap::DEPTH_FLOOR) == 
+                                Charmap::SPACE) {
+                                possible_doors.push_back(point(rx, ry));
+                            }
+
+                            if (gettmp(rx, ry + 1, Charmap::DEPTH_FLOOR) == 
+                                Charmap::SPACE) {
+                                possible_doors.push_back(point(rx, ry));
+                            }
+                        }
+                    }
+                    if (possible_doors.size()) {
+                        break;
+                    }
+                }
+LOG(" ");
+
+                if (possible_doors.size()) {
+                    auto gaps = random_range(1, 6);
+                    CON("placing %d gaps in walls", gaps);
+
+                    while (gaps--) {
+                        auto m = possible_doors.size();
+                        auto n = random_range(0, m - 1);
+                        auto edge = possible_doors[n];
+                        auto rx = edge.x;
+                        auto ry = edge.y;
+
+                        if (random_range(1, 100) < 70) {
+                            puttmp(rx, ry, Charmap::DEPTH_FLOOR, Charmap::CORRIDOR);
+                        } else {
+                            puttmp(rx, ry, Charmap::DEPTH_FLOOR, Charmap::DOOR);
+                        }
+
+                        r->edge_exits.push_back(edge);
+                    }
+                }
+
+LOG(" ");
+                for (auto ry = miny-1; ry <= maxy+1; ry++) {
+                    std::string walls;
+                    std::string items;
+                    std::string floor;
+
+                    for (auto rx = minx-1; rx <= maxx+1; rx++) {
+                        auto c = gettmp(rx, ry, Charmap::DEPTH_FLOOR);
+
+                        if (c == Charmap::WALL) {
+                            walls += c;
+                            floor += Charmap::FLOOR;
                         } else {
                             walls += ' ';
-                        }
-                    }
-                    r->data[Charmap::DEPTH_WALLS].push_back(walls);
-                }
-
-                for (auto rx = 0; rx < rw; rx++) {
-                    std::string floor;
-                    for (auto ry = 0; ry < rh; ry++) {
-                        auto c = rcells[rx][ry+1];
-                        if (c == Charmap::FLOOR) {
                             floor += c;
-                        } else {
-                            floor += ' ';
                         }
-                    }
-                    r->data[Charmap::DEPTH_FLOOR].push_back(floor);
-                }
 
-                for (auto rx = 0; rx < rw; rx++) {
-                    std::string items;
-                    for (auto ry = 0; ry < rh; ry++) {
                         items += ' ';
                     }
+
+                    r->data[Charmap::DEPTH_WALLS].push_back(walls);
+                    r->data[Charmap::DEPTH_FLOOR].push_back(floor);
                     r->data[Charmap::DEPTH_ITEMS].push_back(items);
                 }
 
+LOG(" ");
                 r->finalize();
 
-                LOG("room debug:");
-                CON("room debug:");
-                for (auto y = 0; y < rh; y++) {
-                    std::string s;
-                    for (auto x = 0; x < rw; x++) {
-                        auto m = rcells[x][y];
-                        auto cr = Charmap::all_charmaps[m];
-                        auto c = cr.c;
-
-                        s += c;
-                    }
-                    LOG("%s", s.c_str());
-                    CON("%s", s.c_str());
+LOG(" ");
+                if (!possible_doors.size()) {
+                    DIE("room had no exits");
                 }
             }
         }
 
+LOG(" ");
         //
         // Zero out the map as we were lazy and used it for a scratchpad
         // when creating rooms.
         //
         std::fill(cells.begin(), cells.end(), Charmap::NONE);
+LOG(" ");
     }
 
     //
     // Check for room overlaps
     //
-    bool room_can_be_placed(Roomp room, int x, int y)
-    {
+    bool room_can_be_placed (Roomp room, int x, int y)
+    {_
         if (x < 2) {
             return false;
         }
@@ -1396,8 +1443,10 @@ public:
     //
     // Dump a room onto the level. No checks
     //
-    void room_place(Roomp room, int x, int y)
-    {
+    void room_place (Roomp room, int x, int y)
+    {_
+        CON("place room %d", room->roomno);
+
         all_rooms_placed.push_back(room);
 
         int roomno = room->roomno;
@@ -1431,8 +1480,8 @@ public:
     //
     // Try to push a room on the level
     //
-    bool room_place_if_no_overlaps(Roomp room, int x, int y)
-    {
+    bool room_place_if_no_overlaps (Roomp room, int x, int y)
+    {_
         if (not room_can_be_placed(room, x, y)) {
             return false;
         }
@@ -1446,7 +1495,7 @@ public:
     // ensures no room will ever appear more than once.
     //
     Roomp get_next_room (void)
-    {
+    {_
         Roomp place;
 
         if (fixed_rooms.size() and
@@ -1465,7 +1514,7 @@ public:
     // Limit to only random rooms
     //
     Roomp get_next_random_room (void)
-    {
+    {_
         Roomp place;
 
         place = random_rooms.back();
@@ -1479,7 +1528,7 @@ public:
     // not be a fixed room.
     //
     bool room_place_first (void)
-    {
+    {_
         auto room_place_tries = 0;
         for (;;) {
             //
@@ -1514,7 +1563,7 @@ public:
     // Search the whole level for possible room exits
     //
     std::vector<point> rooms_find_all_exits (void)
-    {
+    {_
         std::fill(in_use.begin(), in_use.end(), false);
         std::fill(exit_candidate.begin(), exit_candidate.end(), false);
 
@@ -1619,7 +1668,7 @@ public:
                             int clen=0, 
                             int fork_count=0,
                             char c=Charmap::CORRIDOR)
-    {
+    {_
         x += dx;
         y += dy;
 
@@ -1679,7 +1728,7 @@ public:
     // For each room exit (and we search the whole room) grow corridors
     //
     void rooms_all_grow_new_corridors (void)
-    {
+    {_
         auto possible_new_corridors = rooms_find_all_exits();
 
         //
@@ -1716,7 +1765,7 @@ public:
     // Search for corridor end points and try to dump rooms there.
     //
     bool rooms_all_try_to_place_at_end_of_corridors (void)
-    {
+    {_
         auto room = get_next_room();
         auto placed_a_room = false;
 
@@ -1745,6 +1794,7 @@ public:
                 }
 
                 if (placed_a_room) {
+                    debug("^^^ placed a room at the end of a corridor ^^^");
                     break;
                 }
             }
@@ -1764,14 +1814,15 @@ public:
     // Place remaining rooms hanging off of the corridors of the last.
     //
     bool rooms_place_remaining (int place)
-    {
+    {_
         corridor_ends.resize(0);
         rooms_all_grow_new_corridors();
+        debug("^^^ grown new corridors ^^^");
 
         auto room_place_tries = 0;
         while (place < rooms_on_level) {
             room_place_tries ++;
-            if (room_place_tries > rooms_on_level * 10) {
+            if (room_place_tries > rooms_on_level * 100) {
                 LOG("Tried to place rooms for too long, made %d rooms",
                      rooms_on_level);
                 dump();
@@ -1784,6 +1835,7 @@ public:
             //
             if (rooms_all_try_to_place_at_end_of_corridors()) {
                 rooms_all_grow_new_corridors();
+                debug("^^^ grown new corridors after room placing ^^^");
             }
         }
 
@@ -1794,10 +1846,11 @@ public:
     // Place all rooms
     //
     bool rooms_place_all (int place)
-    {
+    {_
         if (not room_place_first()) {
             return false;
         }
+        debug("^^^ placed first rooms ^^^");
 
         if (not rooms_place_remaining(place)) {
             return false;
