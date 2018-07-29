@@ -115,7 +115,6 @@ void Charmap::init_charmaps (void)
     c->c                    = 'W',
     c->bg                   = "black",
     c->fg                   = "blue",
-    c->is_water             = true;
     c->is_dissolves_walls   = true;
 
     char_index             = Charmap::ROCK;

@@ -63,7 +63,7 @@ public:
     // After the cellular stage we erase portions of the map with
     // lines to makes isolated islands we then pull out as "rooms"
     //
-    int map_carve_lines_cnt                    = 50;
+    int map_carve_lines_cnt                    = 30;
 
     //
     // All possible rooms we will choose from. Initially these are fixed
@@ -101,13 +101,13 @@ public:
     //
     // Chance of a corridor splitting
     //
-    uint32_t corridor_fork_chance             {35};
+    uint32_t corridor_fork_chance             {80};
     uint32_t tunnel_fork_chance               {95};
 
     //
     // Lower, longer corridors
     //
-    uint32_t corridor_grow_chance             {2};
+    uint32_t corridor_stop_chance_per_step    {3};
     uint32_t tunnel_grow_chance               {1};
 
     //
@@ -163,9 +163,9 @@ public:
         Charmap::init_charmaps();
 
         cells.resize(map_width * map_height * Charmap::DEPTH_MAX, 
-                     Charmap::NONE);
+                     Charmap::SPACE);
         tmp.resize(map_width * map_height * Charmap::DEPTH_MAX, 
-                   Charmap::NONE);
+                   Charmap::SPACE);
         in_use.resize(map_width * map_height * Charmap::DEPTH_MAX, 
                       false);
         exit_candidate.resize(map_width * map_height * Charmap::DEPTH_MAX, 
@@ -176,9 +176,8 @@ public:
         //
         // Create all randomly shaped rooms.
         //
-        //for (auto c : range<int>(0, 2)) {
-            rooms_all_create_random_shapes();
-        //}
+        rooms_all_create_random_shapes();
+        debug("^^^ made all room shapes ^^^");
 
         //
         // Total of fixed and random room
@@ -435,7 +434,7 @@ public:
     {_
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            if ((c != Charmap::SPACE) && (c != Charmap::NONE)) {
+            if (c != Charmap::SPACE) {
                 return true;
             }
         }
@@ -445,7 +444,7 @@ public:
     bool is_anything_at (const int x, const int y, const int z)
     {_
         auto c = getc(x, y, z);
-        if ((c != Charmap::SPACE) && (c != Charmap::NONE)) {
+        if (c != Charmap::SPACE) {
             return true;
         }
         return false;
@@ -816,7 +815,7 @@ public:
                 continue;
             }
 
-            putc(x, y, Charmap::DEPTH_FLOOR, Charmap::NONE);
+            putc(x, y, Charmap::DEPTH_FLOOR, Charmap::SPACE);
             r.push_back(point(x, y));
 
             // To limit room size
@@ -1000,7 +999,7 @@ public:
     char map_cellular_automata_random_tile (void)
     {_
         if (random_range(0, 100) < map_cellular_automata_fill_chance) {
-            return (Charmap::WALL);
+            return (Charmap::SPACE);
         } else {
             return (Charmap::FLOOR);
         }
@@ -1059,7 +1058,8 @@ public:
                 //
                 if ((adjcount_r1 >= map_cellular_automata_r1) ||
                     (adjcount_r2 <= map_cellular_automata_r2)) {
-                    puttmp(x, y, Charmap::DEPTH_FLOOR, Charmap::WALL);
+                    // gives smaller rooms
+                    // puttmp(x, y, Charmap::DEPTH_FLOOR, Charmap::SPACE);
                 } else {
                     puttmp(x, y, Charmap::DEPTH_FLOOR, Charmap::FLOOR);
                 }
@@ -1133,8 +1133,8 @@ public:
     //
     void cave_gen (void)
     {_
-        std::fill(cells.begin(), cells.end(), Charmap::NONE);
-        std::fill(tmp.begin(), tmp.end(), Charmap::NONE);
+        std::fill(cells.begin(), cells.end(), Charmap::SPACE);
+        std::fill(tmp.begin(), tmp.end(), Charmap::SPACE);
         make_cave();
 
         //
@@ -1156,23 +1156,21 @@ public:
     //
     void rooms_all_create_random_shapes (void)
     {_
-LOG(" ");
         //
         // Create a cellular automata like cave first
         //
         cave_gen();
-        dump();
-LOG(" ");
+        debug("^^^ made random cave shapes ^^^");
 
         //
         // Now carve out some empty regions in the cave
         //
         auto cnt = 0;
         while (cnt < map_carve_lines_cnt) {
-            auto x1 = random_range(4, map_width - 8);
-            auto y1 = random_range(4, map_height - 8);
-            auto x2 = random_range(4, map_width - 8);
-            auto y2 = random_range(4, map_height - 8);
+            auto x1 = random_range(0, map_width);
+            auto y1 = random_range(0, map_height);
+            auto x2 = random_range(0, map_width);
+            auto y2 = random_range(0, map_height);
             line_draw(point(x1, y1), 
                       point(x1, y2), 
                       Charmap::DEPTH_FLOOR,
@@ -1183,14 +1181,23 @@ LOG(" ");
                       Charmap::SPACE);
             cnt ++;
         }
-        dump();
-LOG(" ");
+
+        /*
+         * No tall rooms
+         */
+        for (auto y = 0; y < map_height; y += 21) {
+            line_draw(point(0, y), 
+                      point(map_width, y), 
+                      Charmap::DEPTH_FLOOR,
+                      Charmap::SPACE);
+        }
+
+        debug("^^^ erased random portions of the map ^^^");
 
         //
         // Now pull each room out of the level with a kind of inverse
         // flood fill.
         //
-LOG(" ");
         for (auto y = 0; y < map_height; y++) {
             for (auto x = 0; x < map_width; x++) {
                 _
@@ -1239,7 +1246,6 @@ LOG(" ");
                 //
                 std::fill(tmp.begin(), tmp.end(), Charmap::SPACE);
 
-LOG(" ");
                 //
                 // Copy the room points into the new array
                 //
@@ -1252,7 +1258,6 @@ LOG(" ");
 
                 auto r = Room::random_room_new();
 
-LOG(" ");
                 /*
                  * Make wall outline of the room
                  */
@@ -1296,7 +1301,6 @@ LOG(" ");
                  */
                 std::vector<point> possible_doors;
 
-LOG(" ");
                 for (auto step = 5; step > 0; step--) {
                     for (auto ry = miny-1; ry <= maxy+1; ry+=step) {
                         for (auto rx = minx-1; rx <= maxx+1; rx+=step) {
@@ -1331,7 +1335,6 @@ LOG(" ");
                         break;
                     }
                 }
-LOG(" ");
 
                 if (possible_doors.size()) {
                     auto gaps = random_range(1, 6);
@@ -1344,17 +1347,14 @@ LOG(" ");
                         auto rx = edge.x;
                         auto ry = edge.y;
 
-                        if (random_range(1, 100) < 70) {
-                            puttmp(rx, ry, Charmap::DEPTH_FLOOR, Charmap::CORRIDOR);
-                        } else {
-                            puttmp(rx, ry, Charmap::DEPTH_FLOOR, Charmap::DOOR);
-                        }
+                        puttmp(rx, ry, Charmap::DEPTH_FLOOR, Charmap::CORRIDOR);
 
-                        r->edge_exits.push_back(edge);
+                        auto ex = edge.x - minx + 1;
+                        auto ey = edge.y - miny + 1;
+                        r->edge_exits.push_back(point(ex, ey));
                     }
                 }
 
-LOG(" ");
                 for (auto ry = miny-1; ry <= maxy+1; ry++) {
                     std::string walls;
                     std::string items;
@@ -1379,23 +1379,20 @@ LOG(" ");
                     r->data[Charmap::DEPTH_ITEMS].push_back(items);
                 }
 
-LOG(" ");
                 r->finalize();
 
-LOG(" ");
                 if (!possible_doors.size()) {
                     DIE("room had no exits");
                 }
             }
         }
+        debug("^^^ pulled out random rooms from the map ^^^");
 
-LOG(" ");
         //
         // Zero out the map as we were lazy and used it for a scratchpad
         // when creating rooms.
         //
-        std::fill(cells.begin(), cells.end(), Charmap::NONE);
-LOG(" ");
+        std::fill(cells.begin(), cells.end(), Charmap::SPACE);
     }
 
     //
@@ -1575,7 +1572,7 @@ LOG(" ");
             for (auto x : range<int>(corridor_spacing, 
                                      map_width - corridor_spacing)) {
 
-                if (not is_floor_at(x, y)) {
+                if (not is_floor_or_corridor_at(x, y)) {
                     continue;
                 }
 
@@ -1584,8 +1581,7 @@ LOG(" ");
                     continue;
                 }
 
-                if (is_corridor_at(x, y)) {
-                    put_in_use(x, y, true);
+                if (not is_corridor_at(x, y)) {
                     continue;
                 }
 
@@ -1664,10 +1660,10 @@ LOG(" ");
     //
     // Grow a corridor in the given direction
     //
-    void room_corridor_draw(int x, int y, int dx, int dy, 
-                            int clen=0, 
-                            int fork_count=0,
-                            char c=Charmap::CORRIDOR)
+    void room_corridor_draw (int x, int y, int dx, int dy, 
+                             int clen=0, 
+                             int fork_count=0,
+                             char c=Charmap::CORRIDOR)
     {_
         x += dx;
         y += dy;
@@ -1699,7 +1695,9 @@ LOG(" ");
         //
         // Reached the end of a corridor?
         //
-        if (random_range(1, 100) < clen * corridor_grow_chance) {
+        auto stop_chance = clen * corridor_stop_chance_per_step;
+        auto r = random_range(1, 100);
+        if (r < stop_chance) {
             corridor_ends.push_back(point(x, y));
             return;
         }
@@ -1747,18 +1745,19 @@ LOG(" ");
             auto h = get_in_use(x, y+1);
 
             if (not b) {
-                room_corridor_draw(x, y, 0, -1, Charmap::CORRIDOR);
+                room_corridor_draw(x, y, 0, -1, 0, 0, Charmap::CORRIDOR);
             }
             if (not d) {
-                room_corridor_draw(x, y, -1, 0, Charmap::CORRIDOR);
+                room_corridor_draw(x, y, -1, 0, 0, 0, Charmap::CORRIDOR);
             }
             if (not f) {
-                room_corridor_draw(x, y, 1, 0, Charmap::CORRIDOR);
+                room_corridor_draw(x, y, 1, 0, 0, 0, Charmap::CORRIDOR);
             }
             if (not h) {
-                room_corridor_draw(x, y, 0, 1, Charmap::CORRIDOR);
+                room_corridor_draw(x, y, 0, 1, 0, 0, Charmap::CORRIDOR);
             }
         }
+        dump();
     }
 
     //
@@ -1820,7 +1819,7 @@ LOG(" ");
         debug("^^^ grown new corridors ^^^");
 
         auto room_place_tries = 0;
-        while (place < rooms_on_level) {
+        while (place--) {
             room_place_tries ++;
             if (room_place_tries > rooms_on_level * 100) {
                 LOG("Tried to place rooms for too long, made %d rooms",
