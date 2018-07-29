@@ -549,9 +549,6 @@ int32_t main (int32_t argc, char *argv[])
     cereal_test(std::string(save_file));
     myfree(save_file);
 
-    extern int dungeon_test(void);
-    dungeon_test();
-
     ARGV = argv;
 
     dospath2unix(ARGV[0]);
@@ -564,6 +561,14 @@ int32_t main (int32_t argc, char *argv[])
 
     python_init(argv);
 
+    extern int dungeon_test(void);
+    dungeon_test();
+    int x = 1;
+    if (x) {
+    DIE("x");
+    }
+
+    gl_init_2d_mode();
     if (!sdl_init()) {
 	ERR("SDL init");
     }
@@ -610,7 +615,6 @@ int32_t main (int32_t argc, char *argv[])
 
     tp_init();
 
-    gl_init_2d_mode();
     sdl_loop();
     gl_leave_2d_mode();
 
