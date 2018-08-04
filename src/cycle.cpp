@@ -131,6 +131,7 @@ public:
      * to adjoining levels.
      */
     int level                                 {0};
+    int x, y;
     /*
      * Not necessarily an actual key or lock, but something allowing access
      * to the other node. Only one key per node level.
@@ -143,6 +144,10 @@ public:
     bool is_down                              {false};
     bool is_left                              {false};
     bool is_right                             {false};
+    bool is_secret_up                         {false};
+    bool is_secret_down                       {false};
+    bool is_secret_left                       {false};
+    bool is_secret_right                      {false};
 };
 
 class Nodes {
@@ -153,26 +158,22 @@ public:
 
     void finish_constructor (void)
     {_
-        nodes.resize(nodes_width * nodes_height);
+        init_nodes();
 
-        auto n = getn(1, 1);
-        n->level = 1;
-        n->is_exit = true;
-        n->is_down = true;
+        auto depth = 1;
+        while (depth < 10) {
+            if (!snake_walk(depth, 10)) {
+                break;
+            }
+            depth++;
+        debug("walk");
+        }
 
-        n = getn(3, 3);
-        n->level = 2;
-        n->is_exit = true;
-        n->is_up = true;
-        n->is_right = true;
-
-        n = getn(3, 4);
-        n->level = 3;
-        n->is_exit = true;
-        n->is_up = true;
-        n->is_right = true;
-
-        debug("test");
+        for (auto join = 1; join < depth; join++) {
+            join_level(join);
+        debug("join");
+        }
+        debug("done snake walk");
     }
 
     Nodes (int nodes_width, int nodes_height) :
@@ -225,6 +226,26 @@ public:
                     out[oy][ox+2] = '_';
                     out[oy][ox+3] = '_';
                 }
+                if (node->is_secret_down) {
+                    out[oy+1][ox] = '?';
+                    out[oy+2][ox] = '?';
+                    out[oy+3][ox] = '?';
+                }
+                if (node->is_secret_up) {
+                    out[oy-1][ox] = '?';
+                    out[oy-2][ox] = '?';
+                    out[oy-3][ox] = '?';
+                }
+                if (node->is_secret_left) {
+                    out[oy][ox-1] = '?';
+                    out[oy][ox-2] = '?';
+                    out[oy][ox-3] = '?';
+                }
+                if (node->is_secret_right) {
+                    out[oy][ox+1] = '?';
+                    out[oy][ox+2] = '?';
+                    out[oy][ox+3] = '?';
+                }
                 if (node->is_entrance) {
                     out[oy-1][ox-1] = 'S';
                 }
@@ -273,8 +294,6 @@ public:
     Node *node_addr (const int x, const int y)
     {_
         if (is_oob(x, y)) {
-            DIE("out of bounds on node map %d,%d vs size %d,%d", 
-                x, y, nodes_width, nodes_height);
             return (nullptr);
         }
 
@@ -293,6 +312,327 @@ public:
     {_
         auto p = node_addr(x, y);
         return (p);
+    }
+
+    point random_dir (void)
+    {
+        auto dx = 0, dy = 0;
+
+        switch (random_range(0, 4)) {
+            case 0: dx = -1; dy =  0; break;
+            case 1: dx =  1; dy =  0; break;
+            case 2: dx =  0; dy = -1; break;
+            case 3: dx =  0; dy =  1; break;
+        }
+        return (point(dx, dy));
+    }
+
+    void random_dir (int *dx, int *dy)
+    {
+        switch (random_range(0, 4)) {
+            case 0: *dx = -1; *dy =  0; break;
+            case 1: *dx =  1; *dy =  0; break;
+            case 2: *dx =  0; *dy = -1; break;
+            case 3: *dx =  0; *dy =  1; break;
+        }
+    }
+
+    //
+    // Set up nodes so they know their coords
+    //
+    void init_nodes (void)
+    {
+        nodes.resize(nodes_width * nodes_height);
+
+        std::vector< std::pair<point, point> > s;
+
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+
+                auto n = getn(x, y);
+                n->x = x;
+                n->y = y;
+                n->level = 0;
+            }
+        }
+    }
+
+    //
+    // Walk the level randomly, ala snake until you hit your own tail,
+    // forking randomly also
+    //
+    int snake_walk (int level, int max_placed)
+    {
+        std::list<point> s;
+
+        auto dx = 0;
+        auto dy = 0;
+        auto x = 0;
+        auto y = 0;
+
+        if (level == 1) {
+            //
+            // Start anywhere
+            //
+            x = random_range(0, nodes_width);
+            y = random_range(0, nodes_height);
+            s.push_back(point(x, y));
+            random_dir(&dx, &dy);
+        } else {
+            //
+            // Else start adjacent next to the old level
+            //
+            auto tries = 1000;
+            while (tries--) {
+                x = random_range(0, nodes_width);
+                y = random_range(0, nodes_height);
+                random_dir(&dx, &dy);
+
+                auto o = getn(x, y);
+                auto n = getn(x + dx, y + dy);
+
+                if (o && !o->level && n && (n->level == level - 1)) {
+                    s.push_back(point(x, y));
+                    break;
+                }
+            }
+
+            if (tries < 0) {
+                return (0);
+            }
+        }
+
+        auto placed = 0;
+
+        do {
+            auto p = s.front();
+            s.pop_front();
+
+            auto x = p.x;
+            auto y = p.y;
+
+            //
+            // Get next empty cell
+            //
+            auto n = getn(x, y);
+            if (!n || n->level) {
+                continue;
+            }
+
+            placed++;
+            n->level = level;
+
+            //
+            // Change dir
+            //
+            if (random_range(0, 100) < 30) {
+                switch (random_range(0, 4)) {
+                    random_dir(&dx, &dy);
+                }
+            }
+
+            //
+            // Create forks but make sure the old corridor knows
+            // where the fork corridor is
+            //
+            switch (random_range(0, 4)) {
+                case 0: 
+                    s.push_back(point(x + 1, y    )); 
+                    n->is_right = true;
+                    break;
+                case 1: 
+                    s.push_back(point(x - 1, y    ));
+                    n->is_left = true;
+                    break;
+                case 2: 
+                    s.push_back(point(x    , y + 1));
+                    n->is_down = true;
+                    break;
+                case 3: 
+                    s.push_back(point(x    , y - 1));
+                    n->is_up = true;
+                    break;
+            }
+
+            placed++;
+            n->level = level;
+
+            auto o = n;
+
+            //
+            // Get the next moved, or change dir again if blocked.
+            //
+            n = getn(x + dx, y + dy);
+            if (!n || n->level) {
+                auto tries = 20;
+                while (tries--) {
+                    random_dir(&dx, &dy);
+                    n = getn(x + dx, y + dy);
+                    if (n && !n->level) {
+                        break;
+                    }
+                }
+
+                if (tries < 0) {
+                    continue;
+                }
+            }
+
+            s.push_back(point(x + dx, y + dy));
+
+            if (dx == 1) {
+                o->is_right = true;
+            }
+            if (dx == -1) {
+                o->is_left = true;
+            }
+            if (dy == 1) {
+                o->is_down = true;
+            }
+            if (dy == -1) {
+                o->is_up = true;
+            }
+
+        } while (s.size() && (placed < max_placed));
+
+        //
+        // Connect up the nodes on the same level
+        //
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+                auto o = getn(x, y);
+                if (o->level != level) {
+                    continue;
+                }
+
+                if (o->is_right) {
+                    auto n = getn(x + 1, y);
+                    if (n && (n->level == level)) {
+                        n->is_left = true;
+                    } else {
+                        o->is_right = false;
+                    }
+                }
+
+                if (o->is_left) {
+                    auto n = getn(x - 1, y);
+                    if (n && (n->level == level)) {
+                        n->is_right = true;
+                    } else {
+                        o->is_left = false;
+                    }
+                }
+
+                if (o->is_down) {
+                    auto n = getn(x, y + 1);
+                    if (n && (n->level == level)) {
+                        n->is_up = true;
+                    } else {
+                        o->is_down = false;
+                    }
+                }
+
+                if (o->is_up) {
+                    auto n = getn(x, y - 1);
+                    if (n && (n->level == level)) {
+                        n->is_down = true;
+                    } else {
+                        o->is_up = false;
+                    }
+                }
+            }
+        }
+        return (placed);
+    }
+
+    //
+    // Connect up the nodes to the next level. We need at least one.
+    //
+    void join_level (int level)
+    {
+        std::vector< std::pair<point, point> > s;
+
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+                auto o = getn(x, y);
+                if (o->level != level) {
+                    continue;
+                }
+
+                auto n = getn(x + 1, y);
+                if (n && (n->level == level + 1)) {
+                    s.push_back(
+                        std::make_pair(point(x, y), point(x + 1 , y)));
+                }
+
+                n = getn(x - 1, y);
+                if (n && (n->level == level + 1)) {
+                    s.push_back(
+                        std::make_pair(point(x, y), point(x - 1 , y)));
+                }
+
+                n = getn(x, y + 1);
+                if (n && (n->level == level + 1)) {
+                    s.push_back(
+                        std::make_pair(point(x, y), point(x, y + 1)));
+                }
+
+                n = getn(x, y - 1);
+                if (n && (n->level == level + 1)) {
+                    s.push_back(
+                        std::make_pair(point(x, y), point(x, y - 1)));
+                }
+            }
+        }
+
+        if (!s.size()) {
+            DIE("no exits from %d to %d", level, level + 1);
+        }
+
+        auto r = random_range(0, s.size());
+        if (!r) {
+            r = 1;
+        }
+
+        while (r--) {
+            auto i = random_range(0, s.size());
+CON("%d size %ld", i, s.size());
+            auto p = s[i];
+            auto a = p.first;
+            auto b = p.second;
+
+            auto dx = b.x - a.x;
+            auto dy = b.y - a.y;
+
+            auto n = getn(b.x, b.y);
+            if (!n) {
+                DIE("no new pos");
+            }
+            auto o = getn(a.x, a.y);
+            if (!o) {
+                DIE("no old pos");
+            }
+
+            if (dx == 1) {
+                o->is_right = true;
+                n->is_left = true;
+            }
+
+            if (dx == -1) {
+                o->is_left = true;
+                n->is_right = true;
+            }
+
+            if (dy == 1) {
+                o->is_down = true;
+                n->is_up = true;
+            }
+
+            if (dy == -1) {
+                o->is_up = true;
+                n->is_down = true;
+            }
+        }
     }
 };
 
