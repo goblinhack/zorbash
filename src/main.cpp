@@ -561,16 +561,18 @@ int32_t main (int32_t argc, char *argv[])
 
     python_init(argv);
 
+#if 0
     extern int grid_test(void);
     grid_test();
     int x = 1;
     if (x) {
     DIE("x");
     }
+#endif
 
     extern int dungeon_test(void);
     dungeon_test();
-    x = 1;
+    auto x = 1;
     if (x) {
     DIE("x");
     }
