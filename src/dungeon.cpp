@@ -11,6 +11,7 @@
 #include "my_charmap.h"
 #include "my_dmap.h"
 #include "my_range.h"
+#include "my_dungeon_grid.h"
 #include <stack>
 #include <list>
 #include <algorithm>
@@ -25,11 +26,11 @@ public:
     //
     // If a cell has something in it
     //
-    std::vector<int>                         in_use;
+    std::vector<int>                          in_use;
     //
     // Next to a space that could be an exit
     //
-    std::vector<int>                         exit_candidate;
+    std::vector<int>                          exit_candidate;
     //
     // Used temporarily for room generation
     // 
@@ -49,6 +50,8 @@ public:
     int map_width                             {MAP_WIDTH};
     int map_height                            {MAP_HEIGHT};
     int map_depth                             {Charmap::DEPTH_MAX};
+    int room_width                            {12};
+    int room_height                           {12};
 
     //
     // We generate a cellular automata map and then carve that into
@@ -56,8 +59,8 @@ public:
     //
     uint32_t map_cellular_automata_fill_chance = 50;
     int map_cellular_automata_r1               = 5;
-    int map_cellular_automata_r2               = 2;
-    int map_cellular_automata_generations      = 8;
+    int map_cellular_automata_r2               = 5;
+    int map_cellular_automata_generations      = 5;
 
     //
     // After the cellular stage we erase portions of the map with
@@ -86,12 +89,6 @@ public:
     // Set if we fail to generate
     //
     bool generate_failed                      {false};
-
-    //
-    // How many rooms on the level currently.
-    //
-    int rooms_on_level                        {};
-    int rooms_on_level_target                 {};
 
     //
     // What chance for fixed versus random rooms
@@ -177,7 +174,7 @@ public:
         // Create all randomly shaped rooms.
         //
         rooms_all_create_random_shapes();
-        debug("^^^ made all room shapes ^^^");
+        //debug("^^^ made all room shapes ^^^");
 
         //
         // Total of fixed and random room
@@ -188,6 +185,7 @@ public:
         fixed_rooms = Room::all_fixed_rooms;
         std::shuffle(fixed_rooms.begin(), fixed_rooms.end(), rng);
         
+#if 0
         //
         // First room goes in the center. The rest hang off of its
         // corridors.
@@ -198,9 +196,10 @@ public:
         }
 
         debug("^^^ placed all rooms ^^^");
+#endif
     }
 
-    void debug(std::string s)
+    void debug (std::string s)
     {_
         // return
         dump();
@@ -208,11 +207,9 @@ public:
     }
 
     Dungeon (int map_width,
-             int map_height,
-             int rooms_on_level_target) :
+             int map_height) :
         map_width                  (map_width),
-        map_height                 (map_height),
-        rooms_on_level_target      (rooms_on_level_target)
+        map_height                 (map_height)
     {_
         finish_constructor();
     }
@@ -1160,11 +1157,12 @@ public:
         // Create a cellular automata like cave first
         //
         cave_gen();
-        debug("^^^ made random cave shapes ^^^");
+        //debug("^^^ made random cave shapes ^^^");
 
         //
         // Now carve out some empty regions in the cave
         //
+#if 0
         auto cnt = 0;
         while (cnt < map_carve_lines_cnt) {
             auto x1 = random_range(0, map_width);
@@ -1181,18 +1179,29 @@ public:
                       Charmap::SPACE);
             cnt ++;
         }
+#endif
 
         /*
          * No tall rooms
          */
-        for (auto y = 0; y < map_height; y += 21) {
+        for (auto y = 0; y < map_height; y += room_height) {
             line_draw(point(0, y), 
                       point(map_width, y), 
                       Charmap::DEPTH_FLOOR,
                       Charmap::SPACE);
         }
 
-        debug("^^^ erased random portions of the map ^^^");
+        /*
+         * No tall rooms
+         */
+        for (auto x = 0; x < map_width; x += room_width) {
+            line_draw(point(x, 0), 
+                      point(x, map_height), 
+                      Charmap::DEPTH_FLOOR,
+                      Charmap::SPACE);
+        }
+
+        //debug("^^^ erased random portions of the map ^^^");
 
         //
         // Now pull each room out of the level with a kind of inverse
@@ -1295,6 +1304,7 @@ public:
                     }
                 }
 
+#if 0
                 /*
                  * Find possible exits, start with doors with a bit of
                  * a gap, then try smaller gaps if we can't find any.
@@ -1354,6 +1364,7 @@ public:
                         r->edge_exits.push_back(point(ex, ey));
                     }
                 }
+#endif
 
                 for (auto ry = miny-1; ry <= maxy+1; ry++) {
                     std::string walls;
@@ -1381,12 +1392,13 @@ public:
 
                 r->finalize();
 
+#if 0
                 if (!possible_doors.size()) {
                     DIE("room had no exits");
                 }
+#endif
             }
         }
-        debug("^^^ pulled out random rooms from the map ^^^");
 
         //
         // Zero out the map as we were lazy and used it for a scratchpad
@@ -1395,6 +1407,7 @@ public:
         std::fill(cells.begin(), cells.end(), Charmap::SPACE);
     }
 
+#if 0
     //
     // Check for room overlaps
     //
@@ -1486,6 +1499,7 @@ public:
         room_place(room, x, y);
         return true;
     }
+#endif
 
     //
     // From a fixed list of random roomnos, return the next one. This
@@ -1524,6 +1538,7 @@ public:
     // Place the first room in a level, in the center ish. First room should
     // not be a fixed room.
     //
+#if 0
     bool room_place_first (void)
     {_
         auto room_place_tries = 0;
@@ -1555,6 +1570,7 @@ public:
             room_place_tries ++;
         }
     }
+#endif
 
     //
     // Search the whole level for possible room exits
@@ -1757,12 +1773,12 @@ public:
                 room_corridor_draw(x, y, 0, 1, 0, 0, Charmap::CORRIDOR);
             }
         }
-        dump();
     }
 
     //
     // Search for corridor end points and try to dump rooms there.
     //
+#if 0
     bool rooms_all_try_to_place_at_end_of_corridors (void)
     {_
         auto room = get_next_room();
@@ -1857,12 +1873,13 @@ public:
 
         return true;
     }
+#endif
 };
 
 class Dungeon *dungeon_test (void)
 {
     for (;;) {
-        auto d = new Dungeon(80, 80, 20);
+        auto d = new Dungeon(70, 70);
 
         if (not d->generate_failed) {
             return (d);
