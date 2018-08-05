@@ -83,7 +83,6 @@ void Room::find_edge_exits (void)
         }
     }
 
-
     /*
      * Convert the vector to a sorted vector, via a set
      */
@@ -92,10 +91,6 @@ void Room::find_edge_exits (void)
         s.insert(v);
     }
     edge_exits.assign(s.begin(), s.end());
-
-    if (!edge_exits.size()) {
-        DIE("room with no exits!");
-    }
 }
 
 void Room::finalize (void)
