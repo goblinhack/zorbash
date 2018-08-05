@@ -46,7 +46,7 @@
  *
  *    x x x x x
  *
- * The above is level 1 of our loop. Choose an adjacent node for level 2
+ * The above is depth 1 of our loop. Choose an adjacent node for depth 2
  *
  *    1-1-1-1 x
  *          |
@@ -60,7 +60,7 @@
  *
  * Again stop when a loop. Choose random 1 - 2 connections and make those doors.
  *
- * Repeat for level 3
+ * Repeat for depth 3
  *
  *    1-1-1-1 x
  *          |
@@ -108,7 +108,7 @@
  *      |   | |
  *      2-2-2 E
  *
- * Place a key room one per level. A key need not be a real key, but
+ * Place a key room one per depth. A key need not be a real key, but
  * something that unlocks an node between 1 and 2
  *
  *      S-1-1  
@@ -127,15 +127,19 @@ static bool debug_enabled = true;
 class Node {
 public:
     /*
-     * Nodes have a level number, optional key, start and exit and corridors
-     * to adjoining levels.
+     * Nodes have a depth number, optional key, start and exit and corridors
+     * to adjoining depths. Depth increases as we get closer to the exit.
      */
-    int level                                 {0};
+    int depth                                 {0};
+    /*
+     * pass 1 is the main dungeon
+     * pass 2 are secret levels
+     */
     int pass                                  {0};
     int x, y;
     /*
      * Not necessarily an actual key or lock, but something allowing access
-     * to the other node. Only one key per node level.
+     * to the other node. Only one key per node depth.
      */
     bool is_key                               {false};
     bool is_lock                              {false};
@@ -156,55 +160,105 @@ public:
     std::vector<Node>                         nodes;
     int nodes_width                           {5};
     int nodes_height                          {5};
+    int max_depth                             {0};
 
     void finish_constructor (void)
     {_
+redo:
         init_nodes();
 
+        //
+        // Place the depth and join up the nodes. Add occasional
+        // secret jumps between nodes in the depth
+        //
         auto pass = 1;
-        auto level = 1;
-        while (level < 10) {
-            auto placed = snake_walk(level, 10, pass);
+        auto depth = 1;
+        while (depth < 10) {
+            auto placed = snake_walk(depth, 10, pass);
 
-            CON("level %d placecd %d nodes", level, placed);
+            CON("depth %d placed %d nodes", depth, placed);
             if (!placed) {
                 break;
             }
 
-            join_nodes_of_same_level(level, pass);
-            level++;
+            //
+            // We need at least 2 nodes per depth as one can be a lock
+            // and the other a key per depth
+            //
+            if (depth == 1) {
+                //
+                // Need an extra one on level one for the entrance
+                if (placed < 3) {
+                    debug("failed initial level");
+                    LOG("depth %d placed only %d nodes, redo", depth, placed);
+                    goto redo;
+                }
+            } else {
+                if (placed < 2) {
+                    debug("failed level");
+                    LOG("depth %d placed only %d nodes, redo", depth, placed);
+                    goto redo;
+                }
+            }
+
+            join_nodes_of_same_depth(depth, pass);
+            depth++;
         }
 
-        for (auto join = 1; join < level - 1; join++) {
-            join_level_to_next_level(join, pass);
+        for (auto join = 1; join < depth - 1; join++) {
+            join_depth_to_next_depth(join, pass);
         }
-        for (auto join = 1; join < level - 2; join++) {
-            join_level_secret(join, pass);
+        for (auto join = 1; join < depth - 2; join++) {
+            join_depth_secret(join, pass);
         }
         debug("done first pass of rooms");
 
+        //
+        // Now place secret rooms and join them to the main
+        // depth via secret doors
+        //
         pass = 2;
-        auto secret_level = 1;
-        while (secret_level < 10) {
-            auto placed = snake_walk(secret_level, 10, pass);
+        auto secret_depth = 1;
+        while (secret_depth < 10) {
+            auto placed = snake_walk(secret_depth, 10, pass);
 
-            CON("level %d placecd %d secret nodes", secret_level, placed);
+            CON("depth %d placecd %d secret nodes", secret_depth, placed);
             if (!placed) {
                 break;
             }
 
-            join_nodes_of_same_level(secret_level, pass);
-            secret_level++;
+            join_nodes_of_same_depth(secret_depth, pass);
+            secret_depth++;
         }
 
-        for (auto join = 1; join < level; join++) {
-            join_level_to_next_level(join, pass);
+        for (auto join = 1; join < depth; join++) {
+            join_depth_to_next_depth(join, pass);
         }
-        for (auto join = 1; join < level; join++) {
-            join_level_secret(join, pass);
+        for (auto join = 1; join < depth; join++) {
+            join_depth_secret(join, pass);
         }
 
         debug("done second pass of secret rooms");
+
+        set_max_depth();
+
+        //
+        // Add keys for moving between levels
+        //
+        for (auto depth = 2; depth <= max_depth; depth++) {
+            place_lock(depth, 1);
+        }
+        for (auto depth = 1; depth < max_depth; depth++) {
+            place_key(depth, 1);
+        }
+
+        //
+        // Add start and exit
+        //
+        place_entrance();
+        place_exit();
+
+        debug("placed exits");
     }
 
     Nodes (int nodes_width, int nodes_height) :
@@ -290,8 +344,8 @@ public:
                     out[oy-1][ox-1] = 'K';
                 }
 
-                if (node->level) {
-                    out[oy][ox] = '0' + node->level;
+                if (node->depth) {
+                    out[oy][ox] = '0' + node->depth;
                 } else {
                     out[oy][ox] = '.';
                 }
@@ -381,19 +435,16 @@ public:
             for (auto y = 0; y < nodes_height; y++) {
 
                 auto n = getn(x, y);
-                n->x = x;
-                n->y = y;
-                n->level = 0;
-                n->pass = 0;
+                memset(n, 0, sizeof(*n));
             }
         }
     }
 
     //
-    // Walk the level randomly, ala snake until you hit your own tail,
+    // Walk the depth randomly, ala snake until you hit your own tail,
     // forking randomly also
     //
-    int snake_walk (int level, int max_placed, int pass)
+    int snake_walk (int depth, int max_placed, int pass)
     {
         std::list<point> s;
 
@@ -402,7 +453,7 @@ public:
         auto x = 0;
         auto y = 0;
 
-        if (level == 1) {
+        if (depth == 1) {
             //
             // Start anywhere
             //
@@ -412,7 +463,7 @@ public:
                 y = random_range(0, nodes_height);
 
                 auto o = getn(x, y);
-                if (o && !o->level) {
+                if (o && !o->depth) {
                     s.push_back(point(x, y));
                     random_dir(&dx, &dy);
                     break;
@@ -424,7 +475,7 @@ public:
             }
         } else {
             //
-            // Else start adjacent next to the old level
+            // Else start adjacent next to the old depth
             //
             auto tries = 1000;
             while (tries--) {
@@ -435,7 +486,7 @@ public:
                 auto o = getn(x, y);
                 auto n = getn(x + dx, y + dy);
 
-                if (o && !o->level && n && (n->pass == pass) && (n->level == level - 1)) {
+                if (o && !o->depth && n && (n->pass == pass) && (n->depth == depth - 1)) {
                     s.push_back(point(x, y));
                     break;
                 }
@@ -459,7 +510,7 @@ public:
             // Get next empty cell
             //
             auto n = getn(x, y);
-            if (!n || n->level) {
+            if (!n || n->depth) {
                 continue;
             }
 
@@ -468,7 +519,7 @@ public:
             }
 
             placed++;
-            n->level = level;
+            n->depth = depth;
             n->pass = pass;
 
             //
@@ -509,12 +560,12 @@ public:
             // Get the next moved, or change dir again if blocked.
             //
             n = getn(x + dx, y + dy);
-            if (!n || n->level) {
+            if (!n || n->depth) {
                 auto tries = 20;
                 while (tries--) {
                     random_dir(&dx, &dy);
                     n = getn(x + dx, y + dy);
-                    if (n && !n->level) {
+                    if (n && !n->depth) {
                         break;
                     }
                 }
@@ -544,15 +595,15 @@ public:
         return (placed);
     }
 
-    void join_nodes_of_same_level (int level, int pass)
+    void join_nodes_of_same_depth (int depth, int pass)
     {
         //
-        // Connect up the nodes on the same level
+        // Connect up the nodes on the same depth
         //
         for (auto x = 0; x < nodes_width; x++) {
             for (auto y = 0; y < nodes_height; y++) {
                 auto o = getn(x, y);
-                if (o->level != level) {
+                if (o->depth != depth) {
                     continue;
                 }
 
@@ -562,7 +613,7 @@ public:
 
                 if (o->has_exit_right) {
                     auto n = getn(x + 1, y);
-                    if (n && (n->pass == pass) && (n->level == level)) {
+                    if (n && (n->pass == pass) && (n->depth == depth)) {
                         n->has_exit_left = true;
                     } else {
                         o->has_exit_right = false;
@@ -571,7 +622,7 @@ public:
 
                 if (o->has_exit_left) {
                     auto n = getn(x - 1, y);
-                    if (n && (n->pass == pass) && (n->level == level)) {
+                    if (n && (n->pass == pass) && (n->depth == depth)) {
                         n->has_exit_right = true;
                     } else {
                         o->has_exit_left = false;
@@ -580,7 +631,7 @@ public:
 
                 if (o->has_exit_down) {
                     auto n = getn(x, y + 1);
-                    if (n && (n->pass == pass) && (n->level == level)) {
+                    if (n && (n->pass == pass) && (n->depth == depth)) {
                         n->has_exit_up = true;
                     } else {
                         o->has_exit_down = false;
@@ -589,7 +640,7 @@ public:
 
                 if (o->has_exit_up) {
                     auto n = getn(x, y - 1);
-                    if (n && (n->pass == pass) && (n->level == level)) {
+                    if (n && (n->pass == pass) && (n->depth == depth)) {
                         n->has_exit_down = true;
                     } else {
                         o->has_exit_up = false;
@@ -600,16 +651,16 @@ public:
     }
 
     //
-    // Connect up the nodes to the next level. We need at least one.
+    // Connect up the nodes to the next depth. We need at least one.
     //
-    void join_level_to_next_level (int level, int pass)
+    void join_depth_to_next_depth (int depth, int pass)
     {
         std::vector< std::pair<point, point> > s;
 
         for (auto x = 0; x < nodes_width; x++) {
             for (auto y = 0; y < nodes_height; y++) {
                 auto o = getn(x, y);
-                if (o->level != level) {
+                if (o->depth != depth) {
                     continue;
                 }
                 if (o->pass && (o->pass != pass)) {
@@ -617,25 +668,25 @@ public:
                 }
 
                 auto n = getn(x + 1, y);
-                if (n && (n->pass == pass) && (n->level == level + 1)) {
+                if (n && (n->pass == pass) && (n->depth == depth + 1)) {
                     s.push_back(
                         std::make_pair(point(x, y), point(x + 1 , y)));
                 }
 
                 n = getn(x - 1, y);
-                if (n && (n->pass == pass) && (n->level == level + 1)) {
+                if (n && (n->pass == pass) && (n->depth == depth + 1)) {
                     s.push_back(
                         std::make_pair(point(x, y), point(x - 1 , y)));
                 }
 
                 n = getn(x, y + 1);
-                if (n && (n->pass == pass) && (n->level == level + 1)) {
+                if (n && (n->pass == pass) && (n->depth == depth + 1)) {
                     s.push_back(
                         std::make_pair(point(x, y), point(x, y + 1)));
                 }
 
                 n = getn(x, y - 1);
-                if (n && (n->pass == pass) && (n->level == level + 1)) {
+                if (n && (n->pass == pass) && (n->depth == depth + 1)) {
                     s.push_back(
                         std::make_pair(point(x, y), point(x, y - 1)));
                 }
@@ -645,7 +696,7 @@ public:
         if (!s.size()) {
             if (pass == 1) {
                 debug("error");
-                DIE("no exits from %d to %d", level, level + 1);
+                DIE("no exits from %d to %d", depth, depth + 1);
             }
             return;
         }
@@ -696,14 +747,14 @@ public:
         }
     }
 
-    void join_level_secret (int level, int pass)
+    void join_depth_secret (int depth, int pass)
     {
         std::vector< std::pair<point, point> > s;
 
         for (auto x = 0; x < nodes_width; x++) {
             for (auto y = 0; y < nodes_height; y++) {
                 auto o = getn(x, y);
-                if (o->level != level) {
+                if (o->depth != depth) {
                     continue;
                 }
                 if (o->pass && (o->pass != pass)) {
@@ -712,49 +763,49 @@ public:
 
                 if (pass == 1) {
                     auto n = getn(x + 1, y);
-                    if (n && (n->pass == pass) && (n->level > level + 1)) {
+                    if (n && (n->pass == pass) && (n->depth > depth + 1)) {
                         s.push_back(
                             std::make_pair(point(x, y), point(x + 1 , y)));
                     }
 
                     n = getn(x - 1, y);
-                    if (n && (n->pass == pass) && (n->level > level + 1)) {
+                    if (n && (n->pass == pass) && (n->depth > depth + 1)) {
                         s.push_back(
                             std::make_pair(point(x, y), point(x - 1 , y)));
                     }
 
                     n = getn(x, y + 1);
-                    if (n && (n->pass == pass) && (n->level > level + 1)) {
+                    if (n && (n->pass == pass) && (n->depth > depth + 1)) {
                         s.push_back(
                             std::make_pair(point(x, y), point(x, y + 1)));
                     }
 
                     n = getn(x, y - 1);
-                    if (n && (n->pass == pass) && (n->level > level + 1)) {
+                    if (n && (n->pass == pass) && (n->depth > depth + 1)) {
                         s.push_back(
                             std::make_pair(point(x, y), point(x, y - 1)));
                     }
                 } else {
                     auto n = getn(x + 1, y);
-                    if (n && (n->pass != pass) && (n->level >= level)) {
+                    if (n && (n->pass != pass) && (n->depth >= depth)) {
                         s.push_back(
                             std::make_pair(point(x, y), point(x + 1 , y)));
                     }
 
                     n = getn(x - 1, y);
-                    if (n && (n->pass != pass) && (n->level >= level)) {
+                    if (n && (n->pass != pass) && (n->depth >= depth)) {
                         s.push_back(
                             std::make_pair(point(x, y), point(x - 1 , y)));
                     }
 
                     n = getn(x, y + 1);
-                    if (n && (n->pass != pass) && (n->level >= level)) {
+                    if (n && (n->pass != pass) && (n->depth >= depth)) {
                         s.push_back(
                             std::make_pair(point(x, y), point(x, y + 1)));
                     }
 
                     n = getn(x, y - 1);
-                    if (n && (n->pass != pass) && (n->level >= level)) {
+                    if (n && (n->pass != pass) && (n->depth >= depth)) {
                         s.push_back(
                             std::make_pair(point(x, y), point(x, y - 1)));
                     }
@@ -814,13 +865,186 @@ public:
             }
         }
     }
+
+    void place_lock (int depth, int pass)
+    {
+        std::vector<point> s;
+
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+                auto o = getn(x, y);
+                if (o->pass != pass) {
+                    continue;
+                }
+                if (o->depth != depth) {
+                    continue;
+                }
+
+                auto n = getn(x + 1, y);
+                if (n && (n->pass == pass) && (n->depth == depth - 1) &&
+                    o->has_exit_right) {
+                    s.push_back(point(x, y));
+                }
+                n = getn(x - 1, y);
+                if (n && (n->pass == pass) && (n->depth == depth - 1) &&
+                    o->has_exit_left) {
+                    s.push_back(point(x, y));
+                }
+                n = getn(x, y - 1);
+                if (n && (n->pass == pass) && (n->depth == depth - 1) &&
+                    o->has_exit_up) {
+                    s.push_back(point(x, y));
+                }
+                n = getn(x, y + 1);
+                if (n && (n->pass == pass) && (n->depth == depth - 1) &&
+                    o->has_exit_down) {
+                    s.push_back(point(x, y));
+                }
+            }
+        }
+
+        if (!s.size()) {
+            DIE("no lock placed for depth %d", depth);
+            return;
+        }
+
+        auto i = random_range(0, s.size());
+        auto p = s[i];
+        auto n = getn(p.x, p.y);
+        n->is_lock = true;
+    }
+
+    void place_key (int depth, int pass)
+    {
+        std::vector<point> s;
+
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+                auto o = getn(x, y);
+                if (o->pass != pass) {
+                    continue;
+                }
+                if (o->depth != depth) {
+                    continue;
+                }
+                if (o->is_lock) {
+                    continue;
+                }
+
+                s.push_back(point(x, y));
+            }
+        }
+
+        if (!s.size()) {
+            DIE("no key placed for depth %d", depth);
+            return;
+        }
+
+        auto i = random_range(0, s.size());
+        auto p = s[i];
+        auto n = getn(p.x, p.y);
+        n->is_key = true;
+    }
+
+    void place_entrance (void)
+    {
+        std::vector<point> s;
+
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+                auto o = getn(x, y);
+                if (o->pass != 1) {
+                    continue;
+                }
+                if (o->depth != 1) {
+                    continue;
+                }
+                if (o->is_key) {
+                    continue;
+                }
+                if (o->is_lock) {
+                    continue;
+                }
+
+                s.push_back(point(x, y));
+            }
+        }
+
+        if (!s.size()) {
+            DIE("no entrance");
+            return;
+        }
+
+        auto i = random_range(0, s.size());
+        auto p = s[i];
+        auto n = getn(p.x, p.y);
+        n->is_entrance = true;
+    }
+
+    void place_exit (void)
+    {
+        std::vector<point> s;
+
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+                auto o = getn(x, y);
+                if (o->pass != 1) {
+                    continue;
+                }
+
+                if (o->is_key) {
+                    continue;
+                }
+                if (o->is_lock) {
+                    continue;
+                }
+
+                if (o->depth == max_depth) {
+                    s.push_back(point(x, y));
+                }
+            }
+        }
+
+        if (!s.size()) {
+            DIE("no exit");
+            return;
+        }
+
+        auto i = random_range(0, s.size());
+        auto p = s[i];
+        auto n = getn(p.x, p.y);
+        n->is_exit = true;
+    }
+
+    void set_max_depth (void)
+    {
+        std::vector<point> s;
+        auto max_depth_ = 0;
+
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+                auto o = getn(x, y);
+                if (o->pass != 1) {
+                    continue;
+                }
+
+                if (o->depth > max_depth_) {
+                    max_depth_ = o->depth;
+                }
+            }
+        }
+        max_depth = max_depth_;
+    }
 };
 
 class Nodes *grid_test (void)
 {
-    for (;;) {
-        auto d = new Nodes(5, 5);
+    auto x = 10;
+    while (x--) {
+        /* auto d = */ new Nodes(5, 5);
 
-        return (d);
+        continue;
+//        return (d);
     }
+        return (nullptr);
 }
