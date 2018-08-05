@@ -248,6 +248,9 @@ redo:
         for (auto depth = 2; depth <= max_depth; depth++) {
             place_lock(depth, 1);
         }
+        for (auto depth = 2; depth <= max_depth; depth++) {
+            hide_other_locks(depth, 1);
+        }
         for (auto depth = 1; depth < max_depth; depth++) {
             place_key(depth, 1);
         }
@@ -912,6 +915,59 @@ redo:
         auto p = s[i];
         auto n = getn(p.x, p.y);
         n->is_lock = true;
+    }
+
+    void hide_other_locks (int depth, int pass)
+    {
+        std::vector<point> s;
+
+        for (auto x = 0; x < nodes_width; x++) {
+            for (auto y = 0; y < nodes_height; y++) {
+                auto o = getn(x, y);
+                if (o->pass != pass) {
+                    continue;
+                }
+                if (o->depth != depth) {
+                    continue;
+                }
+                if (o->is_lock) {
+                    continue;
+                }
+
+                auto n = getn(x + 1, y);
+                if (n && (n->pass == pass) && (n->depth == depth - 1) &&
+                    o->has_exit_right) {
+                    o->has_exit_right = false;
+                    o->has_exit_secret_right = true;
+                    n->has_exit_left = false;
+                    n->has_exit_secret_left = true;
+                }
+                n = getn(x - 1, y);
+                if (n && (n->pass == pass) && (n->depth == depth - 1) &&
+                    o->has_exit_left) {
+                    o->has_exit_left = false;
+                    o->has_exit_secret_left = true;
+                    n->has_exit_right = false;
+                    n->has_exit_secret_right = true;
+                }
+                n = getn(x, y - 1);
+                if (n && (n->pass == pass) && (n->depth == depth - 1) &&
+                    o->has_exit_up) {
+                    o->has_exit_up = false;
+                    o->has_exit_secret_up = true;
+                    n->has_exit_down = false;
+                    n->has_exit_secret_down = true;
+                }
+                n = getn(x, y + 1);
+                if (n && (n->pass == pass) && (n->depth == depth - 1) &&
+                    o->has_exit_down) {
+                    o->has_exit_down = false;
+                    o->has_exit_secret_down = true;
+                    n->has_exit_up = false;
+                    n->has_exit_secret_up = true;
+                }
+            }
+        }
     }
 
     void place_key (int depth, int pass)
