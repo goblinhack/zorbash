@@ -17,7 +17,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/dmap.o 			\
     $(OBJDIR)/charmap.o 		\
     $(OBJDIR)/dungeon.o 		\
-    $(OBJDIR)/cycle.o 		        \
+    $(OBJDIR)/dungeon_grid.o 		\
     $(OBJDIR)/file.o 			\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
