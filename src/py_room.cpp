@@ -56,7 +56,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     int floor_lines = PyList_Size(py_floor);
     int walls_lines = PyList_Size(py_walls);
-    int items_lines  = PyList_Size(py_items);
+    int items_lines = PyList_Size(py_items);
     int i;
 
     if (floor_lines != walls_lines) {

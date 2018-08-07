@@ -298,7 +298,9 @@ void Nodes::debug (std::string msg)
                 out[oy-1][ox-1] = 'K';
             }
 
-            if (node->depth) {
+            if (node->depth == depth_obstacle) {
+                out[oy][ox] = '-';
+            } else if (node->depth) {
                 out[oy][ox] = '0' + node->depth;
             } else {
                 out[oy][ox] = '.';
@@ -391,6 +393,19 @@ void Nodes::init_nodes (void)
             auto n = getn(x, y);
             memset(n, 0, sizeof(*n));
         }
+    }
+
+    auto obstacles = random_range(0, (nodes_width * nodes_height) / 2);
+    if (obstacles < 3) {
+        obstacles = 3;
+    }
+
+    while (obstacles--) {
+        auto x = random_range(0, nodes_width);
+        auto y = random_range(0, nodes_height);
+
+        auto o = getn(x, y);
+        o->depth = depth_obstacle;
     }
 }
 
@@ -489,23 +504,25 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         // Create forks but make sure the old corridor knows
         // where the fork corridor is
         //
-        switch (random_range(0, 4)) {
-            case 0: 
-                s.push_back(point(x + 1, y    )); 
-                n->has_exit_right = true;
-                break;
-            case 1: 
-                s.push_back(point(x - 1, y    ));
-                n->has_exit_left = true;
-                break;
-            case 2: 
-                s.push_back(point(x    , y + 1));
-                n->has_exit_down = true;
-                break;
-            case 3: 
-                s.push_back(point(x    , y - 1));
-                n->has_exit_up = true;
-                break;
+        if (random_range(0, 100) < 10) {
+            switch (random_range(0, 4)) {
+                case 0: 
+                    s.push_back(point(x + 1, y    )); 
+                    n->has_exit_right = true;
+                    break;
+                case 1: 
+                    s.push_back(point(x - 1, y    ));
+                    n->has_exit_left = true;
+                    break;
+                case 2: 
+                    s.push_back(point(x    , y + 1));
+                    n->has_exit_down = true;
+                    break;
+                case 3: 
+                    s.push_back(point(x    , y - 1));
+                    n->has_exit_up = true;
+                    break;
+            }
         }
 
         auto o = n;
@@ -515,7 +532,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         //
         n = getn(x + dx, y + dy);
         if (!n || n->depth) {
-            auto tries = 20;
+            auto tries = 5;
             while (tries--) {
                 random_dir(&dx, &dy);
                 n = getn(x + dx, y + dy);
