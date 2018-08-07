@@ -37,6 +37,12 @@ public:
     std::vector<std::string> data[Charmap::DEPTH_MAX];
     int                      width {};
     int                      height {};
+
+    /*
+     * Final placement of this room in the dungeon. 
+     */
+    point                    at {};
+
     std::vector<point>       edge_exits;
 
     static Roomp fixed_room_new(void);

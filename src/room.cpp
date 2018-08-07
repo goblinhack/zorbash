@@ -111,7 +111,7 @@ void Room::finalize (void)
 
     height = floor_lines;
 
-    int debug = true;
+    int debug = false;
 
     if (debug) {
         CON("room floor:");

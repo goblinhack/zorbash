@@ -46,6 +46,11 @@ public:
     int nodes_height                          {5};
     int max_depth                             {0};
 
+    /*
+     * Water, rocks etc...
+     */
+    int depth_obstacle                        {-1};
+
     Nodes (int nodes_width, int nodes_height) :
         nodes_width                  (nodes_width),
         nodes_height                 (nodes_height)
