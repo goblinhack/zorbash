@@ -20,6 +20,7 @@
 #include "my_font.h"
 #include "my_dir.h"
 #include "my_file.h"
+#include "my_charmap.h"
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;
@@ -558,6 +559,8 @@ int32_t main (int32_t argc, char *argv[])
     color_init();
 
     find_file_locations();
+
+    Charmap::init_charmaps();
 
     python_init(argv);
 
