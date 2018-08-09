@@ -134,8 +134,6 @@ public:
 
     void finish_constructor (void)
     {_
-        Charmap::init_charmaps();
-
         cells.resize(map_width * map_height * Charmap::DEPTH_MAX, 
                      Charmap::SPACE);
         tmp.resize(map_width * map_height * Charmap::DEPTH_MAX, 
