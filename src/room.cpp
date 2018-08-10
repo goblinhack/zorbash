@@ -124,5 +124,47 @@ void Room::finalize (void)
         }
     }
 
+
+    char tmp[width + 4][height + 4];
+    memset(tmp, ' ', sizeof(tmp));
+
+    for (auto h = 1; h < height + 1; h++) {
+        for (auto w = 1; w < width + 1; w++) {
+            auto c = data[Charmap::DEPTH_FLOOR][h-1][w-1];
+            if (c && (c != ' ')) {
+                tmp[w - 1][h - 1] = 'x';
+                tmp[w    ][h - 1] = 'x';
+                tmp[w + 1][h - 1] = 'x';
+                tmp[w - 1][h] = 'x';
+                tmp[w + 1][h] = 'x';
+                tmp[w - 1][h + 1] = 'x';
+                tmp[w    ][h + 1] = 'x';
+                tmp[w + 1][h + 1] = 'x';
+            }
+        }
+    }
+
+    for (auto h = 1; h < height + 1; h++) {
+        for (auto w = 1; w < width + 1; w++) {
+            auto c = data[Charmap::DEPTH_FLOOR][h-1][w-1];
+            if (c && (c != ' ')) {
+                tmp[w][h] = c;
+            }
+        }
+    }
+
+    printf("ZZZ    zx.map_load_room(combo=[\n");
+    for (auto h = 1; h < height + 1; h++) {
+        printf("ZZZ                            \"");
+        for (auto w = 1; w < width + 1; w++) {
+            std::cout << tmp[w][h];
+        }
+        if (h == height) {
+            printf("\"])\n");
+        } else {
+            printf("\",");
+        }
+        std::cout << std::endl;
+    }
     find_edge_exits();
 }
