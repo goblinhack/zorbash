@@ -43,11 +43,14 @@ public:
      */
     point                    at {};
 
-    std::vector<point>       edge_exits;
+    std::vector<point>       left_exits;
+    std::vector<point>       right_exits;
+    std::vector<point>       up_exits;
+    std::vector<point>       down_exits;
 
     static Roomp fixed_room_new(void);
     static Roomp random_room_new(void);
 
-    void find_edge_exits(void);
+    void find_exits(void);
     void finalize(void);
 };

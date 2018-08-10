@@ -574,7 +574,7 @@ int32_t main (int32_t argc, char *argv[])
 #endif
 
     extern int dungeon_test(void);
-    dungeon_test();
+    //dungeon_test();
     auto x = 1;
     if (x) {
     DIE("x");

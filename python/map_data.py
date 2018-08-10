@@ -207,13 +207,13 @@ def map_data_init():
                     "xxx......xx     ",
                     "  xxxxxxDx      "])
     zx.map_load_room(combo=[
-                    " xxxx     ",
+                    " xxDx     ",
                     " x..xx    ",
                     "xx...x    ",
                     "x....xx   ",
-                    "x.....xx  ",
+                    "D.....xx  ",
                     "x......xx ",
-                    "xxxx....xx",
+                    "xDxx....xx",
                     "   xx....x",
                     "    x....x",
                     "    xx...x",
