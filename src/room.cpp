@@ -28,69 +28,87 @@ Roomp Room::fixed_room_new (void)
 }
 
 //
-// Find the floor tiles at the edge of the room. We choose
-// these for corridor starts.
+// Find all door exits from a room
 //
-void Room::find_edge_exits (void)
+void Room::find_exits (void)
 {
-    int x, y;
-
-    y = 0;
-    for (auto x : range<int>(0, width)) {
-        if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::WALL) {
-            continue;
-        }
-        if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
-            edge_exits.push_back(point(x, y));
-        }
-    }
-
-    y = height - 1;
-    for (auto x : range<int>(0, width)) {
-        if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::WALL) {
-            continue;
-        }
-        if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
-            edge_exits.push_back(point(x, y));
-        }
-    }
-
-    x = 0;
-    for (auto y : range<int>(0, height)) {
-        if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::WALL) {
-            continue;
-        }
-        if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
-            edge_exits.push_back(point(x, y));
-        }
-    }
-
-    x = width - 1;
-    for (auto y : range<int>(0, height)) {
-        if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::WALL) {
-            continue;
-        }
-        if (data[Charmap::DEPTH_FLOOR][y][x] == Charmap::FLOOR) {
-            edge_exits.push_back(point(x, y));
-        }
-    }
-
     for (auto x : range<int>(0, width)) {
         for (auto y : range<int>(0, height)) {
-            if (data[Charmap::DEPTH_WALLS][y][x] == Charmap::DOOR) {
+            if (data[Charmap::DEPTH_WALLS][y][x] != Charmap::DOOR) {
                 continue;
+            }
+
+            bool valid = true;
+
+            for (auto dx = x; dx >= 0; dx--) {
+                if ((data[Charmap::DEPTH_FLOOR][y][dx] != Charmap::SPACE) ||
+                    (data[Charmap::DEPTH_WALLS][y][dx] != Charmap::SPACE)) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) {
+                left_exits.push_back(point(x, y));
+            }
+
+            valid = true;
+            for (auto dx = x; dx <= width; dx++) {
+                if ((data[Charmap::DEPTH_FLOOR][y][dx] != Charmap::SPACE) ||
+                    (data[Charmap::DEPTH_WALLS][y][dx] != Charmap::SPACE)) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (valid) {
+                right_exits.push_back(point(x, y));
+            }
+
+            valid = true;
+            for (auto dy = x; dy >= 0; dy--) {
+                if ((data[Charmap::DEPTH_FLOOR][dy][y] != Charmap::SPACE) ||
+                    (data[Charmap::DEPTH_WALLS][dy][y] != Charmap::SPACE)) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) {
+                up_exits.push_back(point(x, y));
+            }
+
+            valid = true;
+            for (auto dy = x; dy <= height; dy++) {
+                if ((data[Charmap::DEPTH_FLOOR][dy][y] != Charmap::SPACE) ||
+                    (data[Charmap::DEPTH_WALLS][dy][y] != Charmap::SPACE)) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) {
+                down_exits.push_back(point(x, y));
             }
         }
     }
 
-    /*
-     * Convert the vector to a sorted vector, via a set
-     */
-    std::set<point> s;
-    for (auto v : edge_exits) {
-        s.insert(v);
+    if (!left_exits.size() &&
+        !right_exits.size() &&
+        !up_exits.size() &&
+        !down_exits.size()) {
+        DIE("room has no exits");
     }
-    edge_exits.assign(s.begin(), s.end());
+
+    if (left_exits.size()) {
+        CON("room has left exit");
+    }
+    if (right_exits.size()) {
+        CON("room has right exit");
+    }
+    if (up_exits.size()) {
+        CON("room has up exit");
+    }
+    if (down_exits.size()) {
+        CON("room has down exit");
+    }
 }
 
 void Room::finalize (void)
@@ -114,57 +132,28 @@ void Room::finalize (void)
     int debug = true;
 
     if (debug) {
-        CON("room floor:");
+        char tmp[width + 1][height + 1];
+        memset(tmp, ' ', sizeof(tmp));
+
         for (auto h = 0; h < height; h++) {
-            CON("[%s]", data[Charmap::DEPTH_FLOOR][h].c_str());
-        }
-        CON("room walls:");
-        for (auto h = 0; h < height; h++) {
-            CON("[%s]", data[Charmap::DEPTH_WALLS][h].c_str());
-        }
-    }
-
-
-    char tmp[width + 4][height + 4];
-    memset(tmp, ' ', sizeof(tmp));
-
-    for (auto h = 1; h < height + 1; h++) {
-        for (auto w = 1; w < width + 1; w++) {
-            auto c = data[Charmap::DEPTH_FLOOR][h-1][w-1];
-            if (c && (c != ' ')) {
-                tmp[w - 1][h - 1] = 'x';
-                tmp[w    ][h - 1] = 'x';
-                tmp[w + 1][h - 1] = 'x';
-                tmp[w - 1][h] = 'x';
-                tmp[w + 1][h] = 'x';
-                tmp[w - 1][h + 1] = 'x';
-                tmp[w    ][h + 1] = 'x';
-                tmp[w + 1][h + 1] = 'x';
-            }
-        }
-    }
-
-    for (auto h = 1; h < height + 1; h++) {
-        for (auto w = 1; w < width + 1; w++) {
-            auto c = data[Charmap::DEPTH_FLOOR][h-1][w-1];
-            if (c && (c != ' ')) {
+            for (auto w = 0; w < width; w++) {
+                auto c = data[Charmap::DEPTH_WALLS][h][w];
+                if (!c || (c == ' ')) {
+                    c = data[Charmap::DEPTH_FLOOR][h][w];
+                }
                 tmp[w][h] = c;
             }
         }
+
+        CON("ROOM(%d): width %d height %d", roomno, width, height);
+        for (auto h = 0; h < height; h++) {
+            std::string s;
+            for (auto w = 0; w < width; w++) {
+                s += tmp[w][h];
+            }
+            CON("ROOM(%d): %s", roomno, s.c_str());
+        }
     }
 
-    printf("ZZZ    zx.map_load_room(combo=[\n");
-    for (auto h = 1; h < height + 1; h++) {
-        printf("ZZZ                            \"");
-        for (auto w = 1; w < width + 1; w++) {
-            std::cout << tmp[w][h];
-        }
-        if (h == height) {
-            printf("\"])\n");
-        } else {
-            printf("\",");
-        }
-        std::cout << std::endl;
-    }
-    find_edge_exits();
+    find_exits();
 }
