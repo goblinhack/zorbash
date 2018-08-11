@@ -26,6 +26,7 @@ public:
         WATER     = '_',
         ROCK      = 'r',
         TREASURE  = '$',
+        DEBUG     = '@',
     };
 
     enum {

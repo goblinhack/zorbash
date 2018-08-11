@@ -130,4 +130,10 @@ void Charmap::init_charmaps (void)
     c->bg                   = "black";
     c->fg                   = "yellow";
     c->is_treasure          = true;
+
+    char_index             = Charmap::DEBUG;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->bg                   = "black";
+    c->fg                   = "yellow";
 }

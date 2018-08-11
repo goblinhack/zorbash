@@ -146,7 +146,9 @@ public:
         room_width  = map_width / nodes_width;
         room_height  = map_height / nodes_height;
 
-        place_rooms();
+        while (!place_rooms()) {
+            LOG("try again to create the dungeon");
+        }
     }
 
     void debug (std::string s)
@@ -174,7 +176,7 @@ public:
     }
 
     int offset (const int x, const int y, const int z)
-    {_
+    {
         auto offset = (map_width * map_height) * z;
         offset += (map_width) * y;
         offset += x;
@@ -183,7 +185,7 @@ public:
     }
 
     int offset (const int x, const int y)
-    {_
+    {
         auto offset = (map_width) * y;
         offset += x;
 
@@ -191,23 +193,21 @@ public:
     }
 
     bool is_oob (const int x, const int y, const int z)
-    {_
+    {
         return ((x < 0) || (x >= map_width) ||
                 (y < 0) || (y >= map_height) ||
                 (z < 0) || (z >= map_depth));
     }
 
     bool is_oob (const int x, const int y)
-    {_
+    {
         return ((x < 0) || (x >= map_width) ||
                 (y < 0) || (y >= map_height));
     }
 
     char *cell_addr (const int x, const int y, const int z)
-    {_
+    {
         if (is_oob(x, y, z)) {
-            LOG("out of bounds on cell map %d,%d,%d vs %d,%d,%d", 
-                x, y, z, map_width, map_height, map_depth);
             return (nullptr);
         }
 
@@ -215,7 +215,7 @@ public:
     }
 
     char *tmp_addr (const int x, const int y, const int z)
-    {_
+    {
         if (is_oob(x, y, z)) {
             LOG("out of bounds on tmp map %d,%d,%d vs %d,%d,%d", 
                 x, y, z, map_width, map_height, map_depth);
@@ -226,7 +226,7 @@ public:
     }
 
     int *in_use_addr (const int x, const int y)
-    {_
+    {
         if (is_oob(x, y)) {
             LOG("out of bounds on in_use map %d,%d vs %d,%d", 
                 x, y, map_width, map_height);
@@ -237,7 +237,7 @@ public:
     }
 
     int *exit_candidate_addr (const int x, const int y)
-    {_
+    {
         if (is_oob(x, y)) {
             LOG("out of bounds on in_use map %d,%d vs %d,%d", 
                 x, y, map_width, map_height);
@@ -251,7 +251,7 @@ public:
      * Puts a tile on the map
      */
     void putc (const int x, const int y, const int z, const char c)
-    {_
+    {
         if (!c) {
             DIE("putting nul char at %d,%d,%d", x, y, z);
         }
@@ -265,7 +265,7 @@ public:
      * Gets a tile of the map or None
      */
     char getc (const int x, const int y, const int z)
-    {_
+    {
         auto p = cell_addr(x, y, z);
         if (p != nullptr) {
             return (*p);
@@ -277,7 +277,7 @@ public:
      * Puts a tile on the map
      */
     void puttmp (const int x, const int y, const int z, const char c)
-    {_
+    {
         auto p = tmp_addr(x, y, z);
         if (p != nullptr) {
             *p = c;
@@ -288,7 +288,7 @@ public:
      * Gets a tile of the map or None
      */
     char gettmp (const int x, const int y, const int z)
-    {_
+    {
         auto p = tmp_addr(x, y, z);
         if (p != nullptr) {
             return (*p);
@@ -300,7 +300,7 @@ public:
      * Puts a tile on the map
      */
     void put_exit_candidate (const int x, const int y, const bool v)
-    {_
+    {
         auto p = exit_candidate_addr(x, y);
         if (p != nullptr) {
             *p = v;
@@ -311,7 +311,7 @@ public:
      * Gets a tile of the map or None
      */
     bool get_exit_candidate (const int x, const int y)
-    {_
+    {
         auto p = exit_candidate_addr(x, y);
         if (p != nullptr) {
             return (*p);
@@ -323,7 +323,7 @@ public:
      * Puts a tile on the map
      */
     void put_in_use (const int x, const int y, const bool v)
-    {_
+    {
         auto p = in_use_addr(x, y);
         if (p != nullptr) {
             *p = v;
@@ -334,7 +334,7 @@ public:
      * Gets a tile of the map or None
      */
     bool get_in_use (const int x, const int y)
-    {_
+    {
         auto p = in_use_addr(x, y);
         if (p != nullptr) {
             return (*p);
@@ -343,10 +343,10 @@ public:
     }
 
     bool is_anything_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            if (c != Charmap::SPACE) {
+            if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
                 return true;
             }
         }
@@ -354,16 +354,16 @@ public:
     }
 
     bool is_anything_at (const int x, const int y, const int z)
-    {_
+    {
         auto c = getc(x, y, z);
-        if (c != Charmap::SPACE) {
+        if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
             return true;
         }
         return false;
     }
 
     bool is_floor_or_corridor_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -377,7 +377,7 @@ public:
     }
 
     bool is_floor_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -390,7 +390,7 @@ public:
     }
 
     bool is_dusty_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -403,7 +403,7 @@ public:
     }
 
     bool is_corridor_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -416,7 +416,7 @@ public:
     }
 
     bool is_wall_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -429,7 +429,7 @@ public:
     }
 
     bool is_cwall_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -442,7 +442,7 @@ public:
     }
 
     bool is_door_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -455,7 +455,7 @@ public:
     }
 
     bool is_dungeon_way_up_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -468,7 +468,7 @@ public:
     }
 
     bool is_dungeon_way_down_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -481,7 +481,7 @@ public:
     }
 
     bool is_lava_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -494,7 +494,7 @@ public:
     }
 
     bool is_water_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -507,7 +507,7 @@ public:
     }
 
     bool is_chasm_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -520,7 +520,7 @@ public:
     }
     
     bool is_treasure_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -533,7 +533,7 @@ public:
     }
 
     bool is_dissolves_walls_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -546,7 +546,7 @@ public:
     }
 
     bool is_key_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -559,7 +559,7 @@ public:
     }
 
     bool is_movement_blocking_at (const int x, const int y)
-    {_
+    {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -1094,7 +1094,24 @@ public:
                 auto dx = 0;
                 for (auto c : s) {
                     if (c != Charmap::SPACE) {
-                        if (is_anything_at(x + dx, y + dy)) {
+                        if (is_anything_at(x + dx,     y + dy)) {
+                            return false;
+                        }
+                    }
+                    dx++;
+                }
+                dy++;
+            }
+
+            dy = 0;
+            for (auto s : room->data[d]) {
+                auto dx = 0;
+                for (auto c : s) {
+                    if (c != Charmap::SPACE) {
+                        if (is_anything_at(x + dx - 1, y + dy) ||
+                            is_anything_at(x + dx + 1, y + dy) ||
+                            is_anything_at(x + dx, y + dy - 1) ||
+                            is_anything_at(x + dx, y + dy + 1)) {
                             return false;
                         }
                     }
@@ -1152,12 +1169,25 @@ public:
     //
     Roomp get_next_room (void)
     {_
-        Roomp place;
+        Roomp r;
 
-        place = all_rooms.back();
+        if (!all_rooms.size()) {
+            all_rooms = Room::all_rooms;
+            std::shuffle(all_rooms.begin(), all_rooms.end(), rng);
+        }
+
+        r = all_rooms.back();
         all_rooms.pop_back();
 
-        return (place);
+        if (!r) {
+            all_rooms = Room::all_rooms;
+            std::shuffle(all_rooms.begin(), all_rooms.end(), rng);
+        }
+
+        if (r->placed) {
+            return (get_next_room());
+        }
+        return (r);
     }
 
     //
@@ -1501,7 +1531,7 @@ public:
     }
 #endif
 
-    void draw_corridor (point start, point end, char w)
+    bool draw_corridor (point start, point end, char w)
     {
         dmap d;
         for (auto x = 0; x < map_width; x++) {
@@ -1519,27 +1549,59 @@ public:
 
         dmap_process(&d);
         auto p = dmap_solve(&d, start, end);
+
+        //
+        // Too long a corridor?
+        //
+        if (p.size() > 20) {
+            for (auto c : p) {
+                putc(c.x, c.y, Charmap::DEPTH_FLOOR, Charmap::DEBUG);
+            }
+            debug("^^^ failed to create corridor, too long a corridor ^^^");
+            return (false);
+        }
+
+        //
+        // Check we can reach the end point
+        //
+        bool got_goal = false;
+        for (auto c : p) {
+            if (c == end) {
+                got_goal = true;
+                break;
+            }
+        }
+
+        if (!got_goal) {
+            for (auto c : p) {
+                putc(c.x, c.y, Charmap::DEPTH_FLOOR, Charmap::DEBUG);
+            }
+            debug("^^^ failed to create corridor, end not found ^^^");
+            return (false);
+        }
+
         for (auto c : p) {
             putc(c.x, c.y, Charmap::DEPTH_FLOOR, w);
         }
+
+        putc(start.x, start.y, Charmap::DEPTH_WALLS, Charmap::DOOR);
+        putc(end.x, end.y, Charmap::DEPTH_WALLS, Charmap::DOOR);
+
+        return (true);
     }
 
-    void place_rooms (void)
+    bool place_rooms (void)
     {
-        auto tries = 1000;
-
         std::vector<Roomp> rooms;
 
-        if (!tries--) {
-            DIE("too many tries to place rooms");
-        }
         std::fill(cells.begin(), cells.end(), Charmap::SPACE);
-
-        all_rooms = Room::all_rooms;
-        std::shuffle(all_rooms.begin(), all_rooms.end(), rng);
 
         Roomp room_node[nodes_width][nodes_height];
         memset(room_node, 0, sizeof(room_node));
+
+        for (auto r : Room::all_rooms) {
+            r->placed = false;
+        }
 
         //
         // Place the initial rooms. Choose only small ones we know will
@@ -1590,8 +1652,8 @@ public:
                     r->at.x = x * room_width;
                     r->at.y = y * room_height;
 
-                    rooms.push_back(r);
                     room_node[x][y] = r;
+                    r->placed = true;
 
                     if (room_place_if_no_overlaps(r, r->at.x, r->at.y)) {
                         placed = true;
@@ -1600,94 +1662,176 @@ public:
                 }
 
                 if (!placed) {
-                    debug("^^^ cannot place initial rooms ^^^");
                     DIE("could not place initial rooms");
                 }
             }
         }
 
+        debug("^^^ placed initial rooms ^^^");
+
         //
-        // Join the corridors of each room
+        // Repeatedly try to place larger rooms
         //
+        auto place_large_room_tries = 10;
+        while (place_large_room_tries--) {
+            std::fill(cells.begin(), cells.end(), Charmap::SPACE);
+
+            Roomp skip_room = nullptr;
+
+            //
+            // Choose a room to skip
+            //
+            for (auto x = 0; x < nodes->nodes_width; x++) {
+                for (auto y = 0; y < nodes->nodes_height; y++) {
+                    auto r = room_node[x][y];
+                    if (!r) {
+                        continue;
+                    }
+
+                    //
+                    // Already larger
+                    //
+                    if ((r->width > room_width) ||
+                        (r->height > room_height)) {
+                        continue;
+                    }
+
+                    if (random_range(0, 100) < 10) {
+                        skip_room = r;
+                    }
+                }
+            }
+
+            if (!skip_room) {
+                continue;
+            }
+
+            //
+            // Place all rooms bar the skip room
+            //
+            for (auto x = 0; x < nodes->nodes_width; x++) {
+                for (auto y = 0; y < nodes->nodes_height; y++) {
+                    auto r = room_node[x][y];
+                    if (!r) {
+                        continue;
+                    }
+
+                    if (r == skip_room) {
+                        continue;
+                    }
+
+                    auto rx = r->at.x;
+                    auto ry = r->at.y;
+                    if (!room_place_if_no_overlaps(r, rx, ry)) {
+                        DIE("could not place base room when trying to find larger rooms");
+                        break;
+                    }
+                }
+            }
+
+            //
+            // Now place a larger room where the skip room is
+            //
+            for (auto x = 0; x < nodes->nodes_width; x++) {
+                for (auto y = 0; y < nodes->nodes_height; y++) {
+                    auto r = room_node[x][y];
+                    if (!r) {
+                        continue;
+                    }
+
+                    if (r != skip_room) {
+                        continue;
+                    }
+
+                    auto n = nodes->getn(x, y);
+                    for (auto place_room = 0; place_room < nrooms; place_room++) {
+                        auto r = get_next_room();
+
+                        if (r->width < room_width) {
+                            continue;
+                        }
+
+                        if (r->height < room_height) {
+                            continue;
+                        }
+
+                        if ((n->has_exit_down || n->has_secret_exit_down) &&
+                            !r->down_exits.size()) {
+                            continue;
+                        }
+                        if ((n->has_exit_up || n->has_secret_exit_up) &&
+                            !r->up_exits.size()) {
+                            continue;
+                        }
+                        if ((n->has_exit_left || n->has_secret_exit_left) &&
+                            !r->left_exits.size()) {
+                            continue;
+                        }
+                        if ((n->has_exit_right || n->has_secret_exit_right) &&
+                            !r->right_exits.size()) {
+                            continue;
+                        }
+
+                        auto offsets = 3;
+                        for (auto dx = -offsets; dx < offsets; dx++) {
+                            for (auto dy = -offsets; dy < offsets; dy++) {
+                                auto rx = dx + x * room_width;
+                                auto ry = dy + y * room_height;
+
+                                if (room_place_if_no_overlaps(r, rx, ry)) {
+                                    room_node[x][y]->placed = false;
+                                    r->placed = true;
+                                    room_node[x][y] = r;
+                                    r->at.x = rx;
+                                    r->at.y = ry;
+                                    debug("^^^ placed larger room ^^^");
+                                    goto next;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+next:
+            continue;
+        }
+
+        //
+        // Remake the dungeon with the larger rooms
+        //
+        std::fill(cells.begin(), cells.end(), Charmap::SPACE);
         for (auto x = 0; x < nodes->nodes_width; x++) {
             for (auto y = 0; y < nodes->nodes_height; y++) {
-
-                auto n = nodes->getn(x, y);
-                if (!n->depth) {
-                    continue;
-                }
-
-                if (n->depth == nodes->depth_obstacle) {
-                    continue;
-                }
-
                 auto r = room_node[x][y];
-
-                if (n->has_exit_down) {
-                    auto o = room_node[x][y+1];
-                    auto rdoori = random_range(0, r->down_exits.size());
-                    auto odoori = random_range(0, o->up_exits.size());
-                    auto rdoor = r->down_exits[rdoori];
-                    auto odoor = o->up_exits[odoori];
-
-                    auto start = r->at + rdoor;
-                    auto end = o->at + odoor;
-                    draw_corridor(start, end, Charmap::CORRIDOR);
+                if (!r) {
+                    continue;
                 }
 
-                if (n->has_exit_right) {
-                    auto o = room_node[x+1][y];
-                    auto rdoori = random_range(0, r->right_exits.size());
-                    auto odoori = random_range(0, o->left_exits.size());
-                    auto rdoor = r->right_exits[rdoori];
-                    auto odoor = o->left_exits[odoori];
-
-                    auto start = r->at + rdoor;
-                    auto end = o->at + odoor;
-                    draw_corridor(start, end, Charmap::CORRIDOR);
+                auto rx = r->at.x;
+                auto ry = r->at.y;
+                if (!room_place_if_no_overlaps(r, rx, ry)) {
+                    DIE("could not place base room(2) when trying to find larger rooms");
+                    break;
                 }
 
-                if (n->has_secret_exit_down) {
-                    auto o = room_node[x][y+1];
-                    auto rdoori = random_range(0, r->down_exits.size());
-                    auto odoori = random_range(0, o->up_exits.size());
-                    auto rdoor = r->down_exits[rdoori];
-                    auto odoor = o->up_exits[odoori];
-
-                    auto start = r->at + rdoor;
-                    auto end = o->at + odoor;
-                    draw_corridor(start, end, Charmap::DUSTY);
-                }
-
-                if (n->has_secret_exit_right) {
-                    auto o = room_node[x+1][y];
-                    auto rdoori = random_range(0, r->right_exits.size());
-                    auto odoori = random_range(0, o->left_exits.size());
-                    auto rdoor = r->right_exits[rdoori];
-                    auto odoor = o->left_exits[odoori];
-
-                    auto start = r->at + rdoor;
-                    auto end = o->at + odoor;
-                    draw_corridor(start, end, Charmap::DUSTY);
-                }
+                //
+                // We are sticking with this room, so keep track of it
+                //
+                rooms.push_back(r);
             }
         }
 
-        debug("^^^ initial placement of rooms ^^^");
+        debug("^^^ placed rooms ^^^");
 
         auto mx = map_width / 2;
         auto my = map_height / 2;
-
-        if (mx) {
-            DIE("mx");
-        }
 
         /*
          * Repeat placing all rooms bar one random one. Try to move
          * that random one closer to the center. Repeat.
          */
-        tries = 50;
-        while (tries--) {
+        auto attempts_to_move_rooms_closer = 50;
+        while (attempts_to_move_rooms_closer--) {
             for (unsigned int rs = 0; 
                  rs < (unsigned int) rooms.size(); 
                  rs++) {
@@ -1779,8 +1923,95 @@ public:
                     }
                 }
             }
+        debug("^^^ ^^^");
         }
-        debug("^^^ placed all rooms ^^^");
+        debug("^^^ placed compressed layout ^^^");
+
+        for (auto x = 0; x < map_width; x++) {
+            for (auto y = 0; y < map_height; y++) {
+                if (getc(x, y, Charmap::DEPTH_WALLS) == Charmap::DOOR) {
+                    putc(x, y, Charmap::DEPTH_WALLS, Charmap::WALL);
+                }
+            }
+        }
+
+        //
+        // Join the corridors of each room
+        //
+        for (auto x = 0; x < nodes->nodes_width; x++) {
+            for (auto y = 0; y < nodes->nodes_height; y++) {
+
+                auto n = nodes->getn(x, y);
+                if (!n->depth) {
+                    continue;
+                }
+
+                if (n->depth == nodes->depth_obstacle) {
+                    continue;
+                }
+
+                auto r = room_node[x][y];
+
+                if (n->has_exit_down) {
+                    auto o = room_node[x][y+1];
+                    auto rdoori = random_range(0, r->down_exits.size());
+                    auto odoori = random_range(0, o->up_exits.size());
+                    auto rdoor = r->down_exits[rdoori];
+                    auto odoor = o->up_exits[odoori];
+
+                    auto start = r->at + rdoor;
+                    auto end = o->at + odoor;
+                    if (!draw_corridor(start, end, Charmap::CORRIDOR)) {
+                        return (false);
+                    }
+                }
+
+                if (n->has_exit_right) {
+                    auto o = room_node[x+1][y];
+                    auto rdoori = random_range(0, r->right_exits.size());
+                    auto odoori = random_range(0, o->left_exits.size());
+                    auto rdoor = r->right_exits[rdoori];
+                    auto odoor = o->left_exits[odoori];
+
+                    auto start = r->at + rdoor;
+                    auto end = o->at + odoor;
+                    if (!draw_corridor(start, end, Charmap::CORRIDOR)) {
+                        return (false);
+                    }
+                }
+
+                if (n->has_secret_exit_down) {
+                    auto o = room_node[x][y+1];
+                    auto rdoori = random_range(0, r->down_exits.size());
+                    auto odoori = random_range(0, o->up_exits.size());
+                    auto rdoor = r->down_exits[rdoori];
+                    auto odoor = o->up_exits[odoori];
+
+                    auto start = r->at + rdoor;
+                    auto end = o->at + odoor;
+                    if (!draw_corridor(start, end, Charmap::DUSTY)) {
+                        return (false);
+                    }
+                }
+
+                if (n->has_secret_exit_right) {
+                    auto o = room_node[x+1][y];
+                    auto rdoori = random_range(0, r->right_exits.size());
+                    auto odoori = random_range(0, o->left_exits.size());
+                    auto rdoor = r->right_exits[rdoori];
+                    auto odoor = o->left_exits[odoori];
+
+                    auto start = r->at + rdoor;
+                    auto end = o->at + odoor;
+                    if (!draw_corridor(start, end, Charmap::DUSTY)) {
+                        return (false);
+                    }
+                }
+            }
+        }
+
+        debug("^^^ placed corridors ^^^");
+        return (true);
     }
 };
 
