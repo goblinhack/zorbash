@@ -40,7 +40,7 @@ void Room::find_exits (void)
 
             bool valid = true;
 
-            for (auto dx = x; dx >= 0; dx--) {
+            for (auto dx = x - 1; dx >= 0; dx--) {
                 if ((data[Charmap::DEPTH_FLOOR][y][dx] != Charmap::SPACE) ||
                     (data[Charmap::DEPTH_WALLS][y][dx] != Charmap::SPACE)) {
                     valid = false;
@@ -52,7 +52,7 @@ void Room::find_exits (void)
             }
 
             valid = true;
-            for (auto dx = x; dx <= width; dx++) {
+            for (auto dx = x + 1; dx < width; dx++) {
                 if ((data[Charmap::DEPTH_FLOOR][y][dx] != Charmap::SPACE) ||
                     (data[Charmap::DEPTH_WALLS][y][dx] != Charmap::SPACE)) {
                     valid = false;
@@ -65,9 +65,9 @@ void Room::find_exits (void)
             }
 
             valid = true;
-            for (auto dy = x; dy >= 0; dy--) {
-                if ((data[Charmap::DEPTH_FLOOR][dy][y] != Charmap::SPACE) ||
-                    (data[Charmap::DEPTH_WALLS][dy][y] != Charmap::SPACE)) {
+            for (auto dy = y - 1; dy >= 0; dy--) {
+                if ((data[Charmap::DEPTH_FLOOR][dy][x] != Charmap::SPACE) ||
+                    (data[Charmap::DEPTH_WALLS][dy][x] != Charmap::SPACE)) {
                     valid = false;
                     break;
                 }
@@ -77,9 +77,9 @@ void Room::find_exits (void)
             }
 
             valid = true;
-            for (auto dy = x; dy <= height; dy++) {
-                if ((data[Charmap::DEPTH_FLOOR][dy][y] != Charmap::SPACE) ||
-                    (data[Charmap::DEPTH_WALLS][dy][y] != Charmap::SPACE)) {
+            for (auto dy = y + 1; dy < height; dy++) {
+                if ((data[Charmap::DEPTH_FLOOR][dy][x] != Charmap::SPACE) ||
+                    (data[Charmap::DEPTH_WALLS][dy][x] != Charmap::SPACE)) {
                     valid = false;
                     break;
                 }
@@ -113,21 +113,31 @@ void Room::find_exits (void)
 
 void Room::finalize (void)
 {
-    width = data[Charmap::DEPTH_FLOOR].size();
+    height = data[Charmap::DEPTH_FLOOR].size();
+    width = data[Charmap::DEPTH_FLOOR][0].size();
 
-    int floor_lines = data[Charmap::DEPTH_FLOOR].size();
-    int walls_lines = data[Charmap::DEPTH_WALLS].size();
-    int items_lines = data[Charmap::DEPTH_ITEMS].size();
+    int floor_height = data[Charmap::DEPTH_FLOOR].size();
+    int walls_height = data[Charmap::DEPTH_WALLS].size();
+    int items_height = data[Charmap::DEPTH_ITEMS].size();
+    int floor_width = data[Charmap::DEPTH_FLOOR][0].size();
+    int walls_width = data[Charmap::DEPTH_WALLS][0].size();
+    int items_width = data[Charmap::DEPTH_ITEMS][0].size();
 
-    if (floor_lines != walls_lines) {
-        DIE("mismatch in room %d floor vs wall lines, %d vs %d", roomno, floor_lines, walls_lines);
+    if (floor_height != walls_height) {
+        DIE("mismatch in room %d floor vs wall lines, %d vs %d", roomno, floor_height, walls_height);
     }
 
-    if (items_lines != walls_lines) {
-        DIE("mismatch in room %d items vs wall lines, %d vs %d", roomno, items_lines, walls_lines);
+    if (items_height != walls_height) {
+        DIE("mismatch in room %d items vs wall lines, %d vs %d", roomno, items_height, walls_height);
     }
 
-    height = floor_lines;
+    if (floor_width != walls_width) {
+        DIE("mismatch in room %d floor vs wall lines, %d vs %d", roomno, floor_width, walls_width);
+    }
+
+    if (items_width != walls_width) {
+        DIE("mismatch in room %d items vs wall lines, %d vs %d", roomno, items_width, walls_width);
+    }
 
     int debug = true;
 
