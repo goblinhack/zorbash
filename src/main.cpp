@@ -571,19 +571,20 @@ int32_t main (int32_t argc, char *argv[])
     if (x) {
     DIE("x");
     }
-#endif
 
+#endif
     extern int dungeon_test(void);
-    //dungeon_test();
+    dungeon_test();
     auto x = 1;
     if (x) {
     DIE("x");
     }
 
-    gl_init_2d_mode();
     if (!sdl_init()) {
 	ERR("SDL init");
     }
+
+    gl_init_2d_mode();
 
     if (!tex_init()) {
 	ERR("tex init");
@@ -633,7 +634,6 @@ int32_t main (int32_t argc, char *argv[])
     quit();
 
     LOG("Goodbye cruel world");
-    fprintf(MY_STDOUT, "Exited\n");
 
     return (0);
 }

@@ -53,7 +53,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         }
     }
 
-    auto r = Room::fixed_room_new();
+    auto r = Room::room_new();
 
     if (py_combo) {
         int combo_lines = PyList_Size(py_combo);

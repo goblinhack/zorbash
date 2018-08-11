@@ -265,22 +265,22 @@ void Nodes::debug (std::string msg)
                 out[oy][ox+2] = '_';
                 out[oy][ox+3] = '_';
             }
-            if (node->has_exit_secret_down) {
+            if (node->has_secret_exit_down) {
                 out[oy+1][ox] = '?';
                 out[oy+2][ox] = ' ';
                 out[oy+3][ox] = '?';
             }
-            if (node->has_exit_secret_up) {
+            if (node->has_secret_exit_up) {
                 out[oy-1][ox] = '?';
                 out[oy-2][ox] = ' ';
                 out[oy-3][ox] = '?';
             }
-            if (node->has_exit_secret_left) {
+            if (node->has_secret_exit_left) {
                 out[oy][ox-1] = '?';
                 out[oy][ox-2] = ' ';
                 out[oy][ox-3] = '?';
             }
-            if (node->has_exit_secret_right) {
+            if (node->has_secret_exit_right) {
                 out[oy][ox+1] = '?';
                 out[oy][ox+2] = ' ';
                 out[oy][ox+3] = '?';
@@ -816,23 +816,23 @@ void Nodes::join_depth_secret (int depth, int pass)
         }
 
         if (dx == 1) {
-            o->has_exit_secret_right = true;
-            n->has_exit_secret_left = true;
+            o->has_secret_exit_right = true;
+            n->has_secret_exit_left = true;
         }
 
         if (dx == -1) {
-            o->has_exit_secret_left = true;
-            n->has_exit_secret_right = true;
+            o->has_secret_exit_left = true;
+            n->has_secret_exit_right = true;
         }
 
         if (dy == 1) {
-            o->has_exit_secret_down = true;
-            n->has_exit_secret_up = true;
+            o->has_secret_exit_down = true;
+            n->has_secret_exit_up = true;
         }
 
         if (dy == -1) {
-            o->has_exit_secret_up = true;
-            n->has_exit_secret_down = true;
+            o->has_secret_exit_up = true;
+            n->has_secret_exit_down = true;
         }
     }
 }
@@ -906,33 +906,33 @@ void Nodes::hide_other_locks (int depth, int pass)
             if (n && (n->pass == pass) && (n->depth == depth - 1) &&
                 o->has_exit_right) {
                 o->has_exit_right = false;
-                o->has_exit_secret_right = true;
+                o->has_secret_exit_right = true;
                 n->has_exit_left = false;
-                n->has_exit_secret_left = true;
+                n->has_secret_exit_left = true;
             }
             n = getn(x - 1, y);
             if (n && (n->pass == pass) && (n->depth == depth - 1) &&
                 o->has_exit_left) {
                 o->has_exit_left = false;
-                o->has_exit_secret_left = true;
+                o->has_secret_exit_left = true;
                 n->has_exit_right = false;
-                n->has_exit_secret_right = true;
+                n->has_secret_exit_right = true;
             }
             n = getn(x, y - 1);
             if (n && (n->pass == pass) && (n->depth == depth - 1) &&
                 o->has_exit_up) {
                 o->has_exit_up = false;
-                o->has_exit_secret_up = true;
+                o->has_secret_exit_up = true;
                 n->has_exit_down = false;
-                n->has_exit_secret_down = true;
+                n->has_secret_exit_down = true;
             }
             n = getn(x, y + 1);
             if (n && (n->pass == pass) && (n->depth == depth - 1) &&
                 o->has_exit_down) {
                 o->has_exit_down = false;
-                o->has_exit_secret_down = true;
+                o->has_secret_exit_down = true;
                 n->has_exit_up = false;
-                n->has_exit_secret_up = true;
+                n->has_secret_exit_up = true;
             }
         }
     }
