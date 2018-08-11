@@ -10,20 +10,12 @@
 #include "my_range.h"
 
 uint32_t           Room::room_count = 0;
-std::vector<Roomp> Room::all_fixed_rooms;
-std::vector<Roomp> Room::all_random_rooms;
+std::vector<Roomp> Room::all_rooms;
 
-Roomp Room::random_room_new (void)
+Roomp Room::room_new (void)
 {_
     auto r = std::make_shared< class Room >();
-    Room::all_random_rooms.push_back(r);
-    return (r);
-}
-
-Roomp Room::fixed_room_new (void)
-{_
-    auto r = std::make_shared< class Room >();
-    Room::all_fixed_rooms.push_back(r);
+    Room::all_rooms.push_back(r);
     return (r);
 }
 
@@ -97,6 +89,7 @@ void Room::find_exits (void)
         DIE("room has no exits");
     }
 
+#if 0
     if (left_exits.size()) {
         CON("room has left exit");
     }
@@ -109,6 +102,7 @@ void Room::find_exits (void)
     if (down_exits.size()) {
         CON("room has down exit");
     }
+#endif
 }
 
 void Room::finalize (void)
@@ -139,7 +133,7 @@ void Room::finalize (void)
         DIE("mismatch in room %d items vs wall lines, %d vs %d", roomno, items_width, walls_width);
     }
 
-    int debug = true;
+    int debug = false;
 
     if (debug) {
         char tmp[width + 1][height + 1];

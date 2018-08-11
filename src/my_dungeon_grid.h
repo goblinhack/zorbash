@@ -33,10 +33,10 @@ public:
     bool has_exit_down                        {false};
     bool has_exit_left                        {false};
     bool has_exit_right                       {false};
-    bool has_exit_secret_up                   {false};
-    bool has_exit_secret_down                 {false};
-    bool has_exit_secret_left                 {false};
-    bool has_exit_secret_right                {false};
+    bool has_secret_exit_up                   {false};
+    bool has_secret_exit_down                 {false};
+    bool has_secret_exit_left                 {false};
+    bool has_secret_exit_right                {false};
 };
 
 class Nodes {
