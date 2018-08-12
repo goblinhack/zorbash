@@ -1576,7 +1576,10 @@ public:
             for (auto c : p) {
                 putc(c.x, c.y, Charmap::DEPTH_FLOOR, Charmap::DEBUG);
             }
-            debug("^^^ failed to create corridor, end not found ^^^");
+            debug("^^^ failed to create corridor, end not ^^^");
+            DIE("^^^ failed to create corridor, end not found between %d,%d and %d,%d ^^^",
+                start.x, start.y,
+                end.x, end.y);
             return (false);
         }
 
