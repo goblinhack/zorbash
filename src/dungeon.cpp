@@ -21,6 +21,125 @@
 
 static bool dungeon_debug = true;
 
+#define MAX_NODES_WIDTH 10
+#define MAX_NODES_HEIGHT 10
+
+//
+// The algorithm
+//
+// - Create a cyclic dungeon map. Different 'levels' of the dungeon can be
+// cycles with a door of some kind to the next level.
+//
+//    K         S    D    K
+//    1____1____1____2____2    -
+//    |    |    |         |
+//    |    |    |         |
+//    |    |    |         |
+//    |    |    |        D|   D
+//    1    1____1    -    3____4
+//    ?                   |    |
+//    ?                   |    |
+//    ?                   |    |
+//    ?                  K|   E|
+//    1____1____2    -    3    4
+//
+//  - Place initial small rooms
+//
+//  - Now we know we have a possible level, replace some of the small rooms
+//  with larger rooms, so it looks more interesting.
+//
+//  xDxxxxx                                                         xDxxx
+// xx.....D               xDx      xDxxDx                           D...xxx
+// D......x               D.xx     x.xx.x      xxDxxx               x.....x
+// x......x               x..xx    x....x      x..$.D               x.....x
+// xxxxDxxx               x...x    x....x      D....x              xx..x..x
+//                        x...xx   xx...x      x....x              x......D
+//                        xxx..x    xxx.D      xxxDxx              x...xxxx
+//                          xDxx      xDx                          xDxxx
+//                                 xDx              xxxxx
+//                                 x.x              D...D         xxxxx
+//                                xx.xx             x...x         D...D
+//   xxxxDxxxxx                  xx...xDx           x...xxxxDxxxx x...xxxxxxxxx
+//   x........D                  x......x           x...........D x...........D
+//   xxxx..xxxx          xDxxxx  x......xx          x...........x xxxx...xxxxxx
+//      D..D             D....D  D.......x          x...........x    D...x
+//   xxxx..xxxx          x....xx xDxxxxxxx          x...........x xxxx...x
+//   D........x          xx....D                    xxxDxxxxxxxxx x......x
+//   xxxxxDxxxx           xx...x                                  xxxDxxxx
+//                         xx..x
+//           xxxxDx         xxDx  xDxx
+//           D....x               D..xx                             xxxxxDx
+//           x....D  xxDxx        x...xx                xxxxDxx     x.xx..D
+//           x...xx xx...D        x....D                x.....D     x.....x
+//           D.xxx  D....x        x.xDxx                D.....x     x.....x
+//           xDx    xx..xx        xDx                   x.....x     xxxxxxx
+//                   xx.x                               xxxDxxx
+//                    xDx
+//
+//
+//  - Drag all the rooms to the center of the map, making sure to keep enough
+//  of a gap for corridors
+//
+//                                                   xDxxx
+//                                  xDxxDx           D...xxx
+//                  xDxxxxx         x.xx.x           x.....x
+//                 xx.....D  xDx    x....x  xxDxxx   x.....x
+//                 D......x  D.xx   x....x  x..$.D  xx..x..x
+//                 x......x  x..xx  xx...x  D....x  x......D  xxxxx
+//                 xxxxDxxx  x...x   xxx.D  x....x  x...xxxx  D...D
+//                           x...xx    xDx  xxxDxx  xDxxx     x...xxxxxxxxx
+//                           xxx..x                           x...........D
+//              xxxxDxxxxx     xDxx    xDx                    xxxx...xxxxxx
+//              x........D             x.x      xxxxx            D...x
+//              xxxx..xxxx            xx.xx     D...D         xxxx...x
+//                 D..D     xDxxxx   xx...xDx   x...x         x......x
+//              xxxx..xxxx  D....D   x......x   x...xxxxDxxxx xxxDxxxx
+//              D........x  x....xx  x......xx  x...........D
+//              xxxxxDxxxx  xx....D  D.......x  x...........x
+//                           xx...x  xDxxxxxxx  x...........x
+//                            xx..x             x...........x
+//                     xxxxDx  xxDx             xxxDxxxxxxxxx
+//                     D....x         xDxx
+//                     x....D         D..xx            xxxxxDx
+//                     x...xx  xxDxx  x...xx  xxxxDxx  x.xx..D
+//                     D.xxx  xx...D  x....D  x.....D  x.....x
+//                     xDx    D....x  x.xDxx  D.....x  x.....x
+//                            xx..xx  xDx     x.....x  xxxxxxx
+//                             xx.x           xxxDxxx
+//                              xDx
+//
+//  - Now draw corridors, according to the original node layout. Make sure no
+//  corridors overlap or touch.
+//
+//                                                   xxxxx
+//                                  xxxxxx          #D...xxx
+//                  xxxxxxx         x.xx.x         ##x.....x
+//                 xx.....D# xxx    x....x  xxxxxx## x.....x
+//                 x......x##D.xx   x....x  x..$.D# xx..x..x
+//                 x......x  x..xx  xx...x #D....x  x......x  xxxxx
+//                 xxxxDxxx  x...x   xxx.D##x....x  x...xxxx  x...x
+//                   ###     x...xx    xDx  xxxxxx  xDxxx     x...xxxxxxxxx
+//                  ##       xxx..x     #            #        x...........x
+//              xxxxDxxxxx     xDxx    xDx           #        xxxx...xxxxxx
+//              x........x    ###      x.x      xxxxx##      ####D...x
+//              xxxx..xxxx   ##       xx.xx     x...x ##     #xxxx...x
+//                 x..x     xDxxxx   xx...xxx   x...x  ##    #x......x
+//              xxxx..xxxx  x....x   x......x   x...xxxxDxxxx#xxxDxxxx
+//              x........x  x....xx  x......xx  x...........D#   #
+//              xxxxxDxxxx  xx....D##D.......x  x...........x    #
+//                   ??????  xx...x  xxxxxxxxx  x...........x   ##
+//                        ??  xx..x             x...........x  ##
+//                     xxxxDx  xxxx             xxxDxxxxxxxxx ##
+//                     x....x         xxxx         #        ###
+//                     x....D#       #D..xx       ##   xxxxxDx
+//                     x...xx# xxxxx##x...xx  xxxxDxx  x.xx..x
+//                     x.xxx #xx...D# x....x  x.....x  x.....x
+//                     xxx   #D....x  x.xxxx  x.....x  x.....x
+//                            xx..xx  xxx     x.....x  xxxxxxx
+//                             xx.x           xxxxxxx
+//                              xxx
+//
+//
 class Dungeon {
 public:
     std::vector<char>                         cells;
@@ -42,22 +161,47 @@ public:
     Nodes                                     *nodes;
 
     //
+    // Room pointers on the above nodes map
+    //
+    Roomp                                     node_rooms[MAX_NODES_WIDTH]
+                                                        [MAX_NODES_HEIGHT];
+
+    //
     // All possible rooms we will choose from. Initially these are fixed
     // rooms and we add more random ones onto this list.
     //
     std::vector<Roomp>                        all_possible_rooms;
+    int                                       nrooms;
+
+    //
+    // Placed rooms
+    //
+    std::vector<Roomp>                        placed_rooms;
 
     void finish_constructor (void)
     {_
-        cells.resize(map_width * map_height * Charmap::DEPTH_MAX, 
-                     Charmap::SPACE);
+        create_node_map();
 
-        nodes = new Nodes(nodes_width, nodes_height);
-        room_width  = map_width / nodes_width;
-        room_height  = map_height / nodes_height;
+        for (;;) {
+            init_rooms();
 
-        while (!place_rooms()) {
-            LOG("try again to create the dungeon");
+            if (!place_initial_small_rooms()) {
+                continue;
+            }
+
+            if (!replace_small_rooms_randomly_with_larger_rooms()) {
+                continue;
+            }
+
+            if (!compress_room_layout()) {
+                continue;
+            }
+
+            if (!create_room_corridors()) {
+                continue;
+            }
+
+            break;
         }
     }
 
@@ -326,7 +470,7 @@ public:
         }
         return false;
     }
-    
+
     bool is_treasure_at (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
@@ -383,6 +527,22 @@ public:
         return false;
     }
 
+    void create_node_map (void)
+    {
+        if (nodes_width >= MAX_NODES_WIDTH) {
+            DIE("nodes width overflow");
+        }
+
+        if (nodes_height >= MAX_NODES_HEIGHT) {
+            DIE("nodes height overflow");
+        }
+
+        nodes = new Nodes(nodes_width, nodes_height);
+        room_width  = map_width / nodes_width;
+        room_height  = map_height / nodes_height;
+    }
+
+#if 0
     std::vector<point> get_line_ (point a, point b, int flag)
     {_
         int temp, dx, dy, tdy, dydx, p, x, y, i;
@@ -469,7 +629,7 @@ public:
     void flood_fill(int x, int y, int depth, char rchar)
     {_
         std::stack<point> s;
-        
+
         s.push(point(x, y));
         while (s.size() > 0) {
 
@@ -499,13 +659,13 @@ public:
      * Flood fill empty space and return the points.
      * Used to get all the tiles in a room.
      */
-    std::vector<point> flood_erase (const int x, const int y, 
+    std::vector<point> flood_erase (const int x, const int y,
                                     const size_t max_size)
     {_
         bool walked[map_width][map_height];
         std::vector<point> r;
         std::stack<point> s;
-        
+
         for (auto i = 0; i < map_width; i++) {
             for (auto j = 0; j < map_height; j++) {
                 walked[i][j] = false;
@@ -563,13 +723,13 @@ public:
      * Flood fill empty space and return the points.
      * Used to get all the tiles in a room.
      */
-    std::vector<point> flood_find (const int x, const int y, 
+    std::vector<point> flood_find (const int x, const int y,
                                    std::function<bool (char)> callback)
     {_
         bool walked[map_width][map_height];
         std::vector<point> r;
         std::stack<point> s;
-        
+
         for (auto i = 0; i < map_width; i++) {
             for (auto j = 0; j < map_height; j++) {
                 walked[i][j] = false;
@@ -634,7 +794,7 @@ public:
     {_
         bool walked[map_width][map_height];
         std::stack<point> s;
-        
+
         for (auto i = 0; i < map_width; i++) {
             for (auto j = 0; j < map_height; j++) {
                 walked[i][j] = false;
@@ -680,6 +840,7 @@ public:
             }
         }
     }
+#endif
 
     void dump (void)
     {_
@@ -944,24 +1105,29 @@ public:
         return (true);
     }
 
-    bool place_rooms (void)
+    void init_rooms (void)
     {
-        std::vector<Roomp> rooms;
+        cells.resize(map_width * map_height * Charmap::DEPTH_MAX,
+                     Charmap::SPACE);
 
         std::fill(cells.begin(), cells.end(), Charmap::SPACE);
 
-        Roomp room_node[nodes_width][nodes_height];
-        memset(room_node, 0, sizeof(room_node));
+        placed_rooms.resize(0);
 
+        memset(node_rooms, 0, sizeof(node_rooms));
+
+        nrooms = (int) Room::all_rooms.size();
         for (auto r : Room::all_rooms) {
             r->placed = false;
         }
+    }
 
+    bool place_initial_small_rooms (void)
+    {
         //
         // Place the initial rooms. Choose only small ones we know will
         // fit.
         //
-        auto nrooms = (int) Room::all_rooms.size();
         for (auto x = 0; x < nodes->nodes_width; x++) {
             for (auto y = 0; y < nodes->nodes_height; y++) {
 
@@ -1006,7 +1172,7 @@ public:
                     r->at.x = x * room_width + random_range(0, room_width);
                     r->at.y = y * room_height + random_range(0, room_height);
 
-                    room_node[x][y] = r;
+                    node_rooms[x][y] = r;
                     r->placed = true;
 
                     if (room_place_if_no_overlaps(r, r->at.x, r->at.y)) {
@@ -1023,7 +1189,11 @@ public:
         }
 
         debug("^^^ placed initial small rooms ^^^");
+        return (true);
+    }
 
+    bool replace_small_rooms_randomly_with_larger_rooms (void)
+    {
         //
         // Repeatedly try to place larger rooms
         //
@@ -1038,7 +1208,7 @@ public:
             //
             for (auto x = 0; x < nodes->nodes_width; x++) {
                 for (auto y = 0; y < nodes->nodes_height; y++) {
-                    auto r = room_node[x][y];
+                    auto r = node_rooms[x][y];
                     if (!r) {
                         continue;
                     }
@@ -1066,7 +1236,7 @@ public:
             //
             for (auto x = 0; x < nodes->nodes_width; x++) {
                 for (auto y = 0; y < nodes->nodes_height; y++) {
-                    auto r = room_node[x][y];
+                    auto r = node_rooms[x][y];
                     if (!r) {
                         continue;
                     }
@@ -1089,7 +1259,7 @@ public:
             //
             for (auto x = 0; x < nodes->nodes_width; x++) {
                 for (auto y = 0; y < nodes->nodes_height; y++) {
-                    auto r = room_node[x][y];
+                    auto r = node_rooms[x][y];
                     if (!r) {
                         continue;
                     }
@@ -1134,9 +1304,9 @@ public:
                                 auto ry = dy + y * room_height;
 
                                 if (room_place_if_no_overlaps(r, rx, ry)) {
-                                    room_node[x][y]->placed = false;
+                                    node_rooms[x][y]->placed = false;
                                     r->placed = true;
-                                    room_node[x][y] = r;
+                                    node_rooms[x][y] = r;
                                     r->at.x = rx;
                                     r->at.y = ry;
                                     goto next;
@@ -1154,9 +1324,10 @@ next:
         // Remake the dungeon with the larger rooms
         //
         std::fill(cells.begin(), cells.end(), Charmap::SPACE);
+
         for (auto x = 0; x < nodes->nodes_width; x++) {
             for (auto y = 0; y < nodes->nodes_height; y++) {
-                auto r = room_node[x][y];
+                auto r = node_rooms[x][y];
                 if (!r) {
                     continue;
                 }
@@ -1171,12 +1342,17 @@ next:
                 //
                 // We are sticking with this room, so keep track of it
                 //
-                rooms.push_back(r);
+                placed_rooms.push_back(r);
             }
         }
 
         debug("^^^ placed larger rooms ^^^");
 
+        return (true);
+    }
+
+    bool compress_room_layout (void)
+    {
         auto mx = map_width / 2;
         auto my = map_height / 2;
 
@@ -1186,11 +1362,11 @@ next:
          */
         auto attempts_to_move_rooms_closer = 50;
         while (attempts_to_move_rooms_closer--) {
-            for (unsigned int rs = 0; 
-                 rs < (unsigned int) rooms.size(); 
+            for (unsigned int rs = 0;
+                 rs < (unsigned int) placed_rooms.size();
                  rs++) {
 
-                auto r = rooms[rs];
+                auto r = placed_rooms[rs];
                 auto skip_roomno = r->roomno;
 
                 std::fill(cells.begin(), cells.end(), Charmap::SPACE);
@@ -1207,7 +1383,7 @@ next:
                             continue;
                         }
 
-                        auto r = rooms[ri++];
+                        auto r = placed_rooms[ri++];
                         if (r->roomno == skip_roomno) {
                             continue;
                         }
@@ -1235,7 +1411,7 @@ next:
                             continue;
                         }
 
-                        auto r = rooms[ri++];
+                        auto r = placed_rooms[ri++];
                         if (r->roomno != skip_roomno) {
                             continue;
                         }
@@ -1280,6 +1456,11 @@ next:
         }
         debug("^^^ placed compressed layout ^^^");
 
+        return (true);
+    }
+
+    bool create_room_corridors (void)
+    {
         for (auto x = 0; x < map_width; x++) {
             for (auto y = 0; y < map_height; y++) {
                 if (getc(x, y, Charmap::DEPTH_WALLS) == Charmap::DOOR) {
@@ -1303,10 +1484,10 @@ next:
                     continue;
                 }
 
-                auto r = room_node[x][y];
+                auto r = node_rooms[x][y];
 
                 if (n->has_exit_down) {
-                    auto o = room_node[x][y+1];
+                    auto o = node_rooms[x][y+1];
                     if (!o) {
                         debug("^^^ bug ^^^");
                         DIE("had exit down at %d,%d, but no node exists", x, y);
@@ -1315,7 +1496,7 @@ next:
                     auto odoori = random_range(0, o->up_exits.size());
                     if (odoori >= o->up_exits.size()) {
                         debug("^^^ bug ^^^");
-                        DIE("no left exit [%d] at %d,%d, but only have %ld exits", 
+                        DIE("no left exit [%d] at %d,%d, but only have %ld exits",
                             odoori, x, y, o->up_exits.size());
                     }
 
@@ -1330,7 +1511,7 @@ next:
                 }
 
                 if (n->has_exit_right) {
-                    auto o = room_node[x+1][y];
+                    auto o = node_rooms[x+1][y];
                     if (!o) {
                         debug("^^^ bug ^^^");
                         DIE("had exit right at %d,%d, but no node exists", x, y);
@@ -1339,7 +1520,7 @@ next:
                     auto odoori = random_range(0, o->left_exits.size());
                     if (odoori >= o->left_exits.size()) {
                         debug("^^^ bug ^^^");
-                        DIE("no left exit [%d] at %d,%d, but only have %ld exits", 
+                        DIE("no left exit [%d] at %d,%d, but only have %ld exits",
                             odoori, x, y, o->left_exits.size());
                     }
 
@@ -1354,7 +1535,7 @@ next:
                 }
 
                 if (n->has_secret_exit_down) {
-                    auto o = room_node[x][y+1];
+                    auto o = node_rooms[x][y+1];
                     if (!o) {
                         debug("^^^ bug ^^^");
                         DIE("had secret exit down at %d,%d, but no node exists", x, y);
@@ -1363,7 +1544,7 @@ next:
                     auto odoori = random_range(0, o->up_exits.size());
                     if (odoori >= o->up_exits.size()) {
                         debug("^^^ bug ^^^");
-                        DIE("no left exit [%d] at %d,%d, but only have %ld exits", 
+                        DIE("no left exit [%d] at %d,%d, but only have %ld exits",
                             odoori, x, y, o->up_exits.size());
                     }
 
@@ -1378,7 +1559,7 @@ next:
                 }
 
                 if (n->has_secret_exit_right) {
-                    auto o = room_node[x+1][y];
+                    auto o = node_rooms[x+1][y];
                     if (!o) {
                         debug("^^^ bug ^^^");
                         DIE("had secret exit right at %d,%d, but no node exists", x, y);
@@ -1387,7 +1568,7 @@ next:
                     auto odoori = random_range(0, o->left_exits.size());
                     if (odoori >= o->left_exits.size()) {
                         debug("^^^ bug ^^^");
-                        DIE("no left exit [%d] at %d,%d, but only have %ld exits", 
+                        DIE("no left exit [%d] at %d,%d, but only have %ld exits",
                             odoori, x, y, o->left_exits.size());
                     }
 
