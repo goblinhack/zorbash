@@ -504,7 +504,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         // Create forks but make sure the old corridor knows
         // where the fork corridor is
         //
-        if (random_range(0, 100) < 10) {
+        if (random_range(0, 100) < 50) {
             switch (random_range(0, 4)) {
                 case 0: 
                     s.push_back(point(x + 1, y    )); 
