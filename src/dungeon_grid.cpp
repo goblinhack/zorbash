@@ -129,7 +129,6 @@ void Nodes::finish_constructor (void)
 {_
 redo:
     init_nodes();
-    debug("init level with obstacles");
 
     //
     // Place the depth and join up the nodes. Add occasional
@@ -207,11 +206,15 @@ redo:
     for (auto join = 1; join < depth; join++) {
         join_depth_to_next_depth(join, pass);
     }
+    debug("done first pass of secret rooms and joined rooms to next depth");
+
     for (auto join = 1; join < depth; join++) {
         join_depth_secret(join, pass);
     }
+    debug("done second pass of secret rooms and joined secret rooms to next depth");
 
-    debug("done second pass of secret rooms");
+    remove_stubs();
+    debug("removed stubs");
 
     set_max_depth();
 
@@ -227,6 +230,7 @@ redo:
     for (auto depth = 1; depth < max_depth; depth++) {
         place_key(depth, 1);
     }
+    debug("placed locks");
 
     //
     // Add start and exit
@@ -565,7 +569,7 @@ void Nodes::init_nodes (void)
         }
     }
 
-    auto obstacles = random_range(0, (nodes_width * nodes_height) / 2);
+    auto obstacles = random_range(0, (nodes_width * nodes_height) / 3);
     if (obstacles < 3) {
         obstacles = 3;
     }
@@ -1301,6 +1305,12 @@ void Nodes::place_entrance (void)
             if (o->is_lock) {
                 continue;
             }
+            if (o->is_entrance) {
+                continue;
+            }
+            if (o->is_exit) {
+                continue;
+            }
 
             s.push_back(point(x, y));
         }
@@ -1332,6 +1342,12 @@ void Nodes::place_exit (void)
                 continue;
             }
             if (o->is_lock) {
+                continue;
+            }
+            if (o->is_entrance) {
+                continue;
+            }
+            if (o->is_exit) {
                 continue;
             }
 

@@ -564,7 +564,7 @@ int32_t main (int32_t argc, char *argv[])
 
     python_init(argv);
 
-#if 1
+#if 0
     extern int grid_test(void);
     grid_test();
     int x = 1;
