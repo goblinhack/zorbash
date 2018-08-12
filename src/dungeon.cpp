@@ -1581,6 +1581,34 @@ public:
         }
 
         for (auto c : p) {
+            auto o = getc(c.x - 1, c.y, Charmap::DEPTH_FLOOR);
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+                debug("^^^ failed to create corridor, adjoins another corridor ^^^");
+                return (false);
+            }
+            o = getc(c.x + 1, c.y, Charmap::DEPTH_FLOOR);
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+                debug("^^^ failed to create corridor, adjoins another corridor ^^^");
+                return (false);
+            }
+            o = getc(c.x, c.y + 1, Charmap::DEPTH_FLOOR);
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+                debug("^^^ failed to create corridor, adjoins another corridor ^^^");
+                return (false);
+            }
+            o = getc(c.x, c.y - 1, Charmap::DEPTH_FLOOR);
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+                debug("^^^ failed to create corridor, adjoins another corridor ^^^");
+                return (false);
+            }
+            o = getc(c.x, c.y, Charmap::DEPTH_FLOOR);
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+                debug("^^^ failed to create corridor, overlaps another corridor ^^^");
+                return (false);
+            }
+        }
+
+        for (auto c : p) {
             putc(c.x, c.y, Charmap::DEPTH_FLOOR, w);
         }
 
@@ -1662,12 +1690,13 @@ public:
                 }
 
                 if (!placed) {
+                    debug("^^^ placed initial small rooms ^^^");
                     DIE("could not place initial rooms");
                 }
             }
         }
 
-        debug("^^^ placed initial rooms ^^^");
+        debug("^^^ placed initial small rooms ^^^");
 
         //
         // Repeatedly try to place larger rooms
@@ -1784,7 +1813,6 @@ public:
                                     room_node[x][y] = r;
                                     r->at.x = rx;
                                     r->at.y = ry;
-                                    debug("^^^ placed larger room ^^^");
                                     goto next;
                                 }
                             }
@@ -1821,7 +1849,7 @@ next:
             }
         }
 
-        debug("^^^ placed rooms ^^^");
+        debug("^^^ placed larger rooms ^^^");
 
         auto mx = map_width / 2;
         auto my = map_height / 2;
@@ -1923,7 +1951,6 @@ next:
                     }
                 }
             }
-        debug("^^^ ^^^");
         }
         debug("^^^ placed compressed layout ^^^");
 
@@ -2018,7 +2045,7 @@ next:
 class Dungeon *dungeon_test (void)
 {
     for (;;) {
-        auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3);
+        auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 7, 3);
 
         if (not d->generate_failed) {
             return (d);
