@@ -1553,7 +1553,7 @@ public:
         //
         // Too long a corridor?
         //
-        if (p.size() > 20) {
+        if (p.size() > 15) {
             for (auto c : p) {
                 putc(c.x, c.y, Charmap::DEPTH_FLOOR, Charmap::DEBUG);
             }
@@ -2045,7 +2045,10 @@ next:
 class Dungeon *dungeon_test (void)
 {
     for (;;) {
-        auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 7, 3);
+        //
+        // smaller node numbers mean larger rooms
+        //
+        auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3);
 
         if (not d->generate_failed) {
             return (d);
