@@ -89,11 +89,6 @@ public:
     std::vector<Roomp>                        all_rooms_placed;
 
     //
-    // Set if we fail to generate
-    //
-    bool generate_failed                      {false};
-
-    //
     // What chance for fixed versus random rooms
     //
     uint32_t fixed_room_chance                {20};
@@ -1534,6 +1529,17 @@ public:
     bool draw_corridor (point start, point end, char w)
     {
         dmap d;
+
+        if (w == Charmap::CORRIDOR) {
+            LOG("create corridor, between %d,%d and %d,%d ^^^",
+                start.x, start.y,
+                end.x, end.y);
+        } else {
+            LOG("create secret corridor, between %d,%d and %d,%d ^^^",
+                start.x, start.y,
+                end.x, end.y);
+        }
+
         for (auto x = 0; x < map_width; x++) {
             for (auto y = 0; y < map_height; y++) {
                 if (is_anything_at(x, y)) {
@@ -1548,12 +1554,13 @@ public:
         d.val[start.x][start.y] = DMAP_IS_PASSABLE;
 
         dmap_process(&d);
+        //dmap_print(&d);
         auto p = dmap_solve(&d, start, end);
 
         //
         // Too long a corridor?
         //
-        if (p.size() > 15) {
+        if (p.size() > 25) {
             for (auto c : p) {
                 putc(c.x, c.y, Charmap::DEPTH_FLOOR, Charmap::DEBUG);
             }
@@ -1576,8 +1583,9 @@ public:
             for (auto c : p) {
                 putc(c.x, c.y, Charmap::DEPTH_FLOOR, Charmap::DEBUG);
             }
-            debug("^^^ failed to create corridor, end not ^^^");
-            DIE("^^^ failed to create corridor, end not found between %d,%d and %d,%d ^^^",
+
+            debug("^^^ failed to create corridor, end not found ^^^");
+            LOG("^^^ failed to create corridor, end not found between %d,%d and %d,%d ^^^",
                 start.x, start.y,
                 end.x, end.y);
             return (false);
@@ -1585,27 +1593,27 @@ public:
 
         for (auto c : p) {
             auto o = getc(c.x - 1, c.y, Charmap::DEPTH_FLOOR);
-            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::SECRET_CORRIDOR)) {
                 debug("^^^ failed to create corridor, adjoins another corridor ^^^");
                 return (false);
             }
             o = getc(c.x + 1, c.y, Charmap::DEPTH_FLOOR);
-            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::SECRET_CORRIDOR)) {
                 debug("^^^ failed to create corridor, adjoins another corridor ^^^");
                 return (false);
             }
             o = getc(c.x, c.y + 1, Charmap::DEPTH_FLOOR);
-            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::SECRET_CORRIDOR)) {
                 debug("^^^ failed to create corridor, adjoins another corridor ^^^");
                 return (false);
             }
             o = getc(c.x, c.y - 1, Charmap::DEPTH_FLOOR);
-            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::SECRET_CORRIDOR)) {
                 debug("^^^ failed to create corridor, adjoins another corridor ^^^");
                 return (false);
             }
             o = getc(c.x, c.y, Charmap::DEPTH_FLOOR);
-            if ((o == Charmap::CORRIDOR) || (o == Charmap::DUSTY)) {
+            if ((o == Charmap::CORRIDOR) || (o == Charmap::SECRET_CORRIDOR)) {
                 debug("^^^ failed to create corridor, overlaps another corridor ^^^");
                 return (false);
             }
@@ -1618,6 +1626,7 @@ public:
         putc(start.x, start.y, Charmap::DEPTH_WALLS, Charmap::DOOR);
         putc(end.x, end.y, Charmap::DEPTH_WALLS, Charmap::DOOR);
 
+        //debug("^^^ placed corridor ^^^");
         return (true);
     }
 
@@ -2049,7 +2058,7 @@ next:
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
-                    if (!draw_corridor(start, end, Charmap::DUSTY)) {
+                    if (!draw_corridor(start, end, Charmap::SECRET_CORRIDOR)) {
                         return (false);
                     }
                 }
@@ -2073,7 +2082,7 @@ next:
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
-                    if (!draw_corridor(start, end, Charmap::DUSTY)) {
+                    if (!draw_corridor(start, end, Charmap::SECRET_CORRIDOR)) {
                         return (false);
                     }
                 }
@@ -2087,14 +2096,13 @@ next:
 
 class Dungeon *dungeon_test (void)
 {
-    for (;;) {
+    auto x = 1000 ;
+    while (x--) {
         //
         // smaller node numbers mean larger rooms
         //
-        auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3);
-
-        if (not d->generate_failed) {
-            return (d);
-        }
+        /* auto d = new */ Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3);
     }
+
+    return (nullptr);
 }

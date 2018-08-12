@@ -41,6 +41,47 @@ public:
     /*
      * Update init_nodes on changes
      */
+
+    void set_has_exit_up (bool v)
+    {
+        has_exit_up = v;
+        has_secret_exit_up = false;
+    }
+    void set_has_exit_down (bool v)
+    {
+        has_exit_down = v;
+        has_secret_exit_down = false;
+    }
+    void set_has_exit_right (bool v)
+    {
+        has_exit_right = v;
+        has_secret_exit_right = false;
+    }
+    void set_has_exit_left (bool v)
+    {
+        has_exit_left = v;
+        has_secret_exit_left = false;
+    }
+    void set_has_secret_exit_up (bool v)
+    {
+        has_secret_exit_up = v;
+        has_exit_up = false;
+    }
+    void set_has_secret_exit_down (bool v)
+    {
+        has_secret_exit_down = v;
+        has_exit_down = false;
+    }
+    void set_has_secret_exit_right (bool v)
+    {
+        has_secret_exit_right = v;
+        has_exit_right = false;
+    }
+    void set_has_secret_exit_left (bool v)
+    {
+        has_secret_exit_left = v;
+        has_exit_left = false;
+    }
 };
 
 class Nodes {

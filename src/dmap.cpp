@@ -338,6 +338,10 @@ std::vector<point> dmap_solve (const dmap *D,
                 continue;
             }
 
+            if (D->val[tx][ty] == DMAP_IS_PASSABLE) {
+                continue;
+            }
+
             auto c = D->val[tx][ty];
             if (c <= lowest) {
                 got = true;
