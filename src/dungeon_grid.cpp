@@ -129,6 +129,7 @@ void Nodes::finish_constructor (void)
 {_
 redo:
     init_nodes();
+    debug("init level with obstacles");
 
     //
     // Place the depth and join up the nodes. Add occasional
@@ -139,7 +140,7 @@ redo:
     while (depth < 10) {
         auto placed = snake_walk(depth, 10, pass);
 
-        CON("depth %d placed %d nodes", depth, placed);
+        CON("level depth %d placed %d nodes", depth, placed);
         if (!placed) {
             break;
         }
@@ -168,13 +169,17 @@ redo:
         depth++;
     }
 
+    debug("done first pass of rooms at same depth");
+
     for (auto join = 1; join < depth - 1; join++) {
         join_depth_to_next_depth(join, pass);
     }
+    debug("done first pass of rooms and joined rooms to next depth");
+
     for (auto join = 1; join < depth - 2; join++) {
         join_depth_secret(join, pass);
     }
-    debug("done first pass of rooms");
+    debug("done first pass of rooms and joined secret rooms");
 
     //
     // Now place secret rooms and join them to the main
@@ -193,6 +198,7 @@ redo:
         join_nodes_of_same_depth(secret_depth, pass);
         secret_depth++;
     }
+    debug("done snake walk of secret rooms");
 
     for (auto join = 1; join < depth; join++) {
         join_depth_to_next_depth(join, pass);
@@ -267,22 +273,22 @@ void Nodes::debug (std::string msg)
             }
             if (node->has_secret_exit_down) {
                 out[oy+1][ox] = '?';
-                out[oy+2][ox] = ' ';
+                out[oy+2][ox] = '?';
                 out[oy+3][ox] = '?';
             }
             if (node->has_secret_exit_up) {
                 out[oy-1][ox] = '?';
-                out[oy-2][ox] = ' ';
+                out[oy-2][ox] = '?';
                 out[oy-3][ox] = '?';
             }
             if (node->has_secret_exit_left) {
                 out[oy][ox-1] = '?';
-                out[oy][ox-2] = ' ';
+                out[oy][ox-2] = '?';
                 out[oy][ox-3] = '?';
             }
             if (node->has_secret_exit_right) {
                 out[oy][ox+1] = '?';
-                out[oy][ox+2] = ' ';
+                out[oy][ox+2] = '?';
                 out[oy][ox+3] = '?';
             }
             if (node->is_entrance) {
@@ -443,26 +449,90 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             return (0);
         }
     } else {
-        //
-        // Else start adjacent next to the old depth
-        //
-        auto tries = 1000;
-        while (tries--) {
-            x = random_range(0, nodes_width);
-            y = random_range(0, nodes_height);
-            random_dir(&dx, &dy);
+        if (depth == 1) {
+            //
+            // Start adjacent to a non hidden level node and connect to it
+            //
+            auto tries = 1000;
+            while (tries--) {
+                x = random_range(0, nodes_width);
+                y = random_range(0, nodes_height);
+                random_dir(&dx, &dy);
 
-            auto o = getn(x, y);
-            auto n = getn(x + dx, y + dy);
+                auto o = getn(x, y);
+                auto n = getn(x + dx, y + dy);
 
-            if (o && !o->depth && n && (n->pass == pass) && (n->depth == depth - 1)) {
-                s.push_back(point(x, y));
-                break;
+                if (o && !o->depth && n && n->depth && (n->pass != pass)) {
+                    s.push_back(point(x, y));
+
+                    if (dx == 1) {
+                        n->has_secret_exit_right = true;
+                        o->has_secret_exit_left = true;
+                    }
+
+                    if (dx == -1) {
+                        n->has_secret_exit_left = true;
+                        o->has_secret_exit_right = true;
+                    }
+
+                    if (dy == 1) {
+                        n->has_secret_exit_down = true;
+                        o->has_secret_exit_up = true;
+                    }
+
+                    if (dy == -1) {
+                        n->has_secret_exit_up = true;
+                        o->has_secret_exit_down = true;
+                    }
+                    break;
+                }
             }
-        }
 
-        if (tries < 0) {
-            return (0);
+            if (tries < 0) {
+                return (0);
+            }
+        } else {
+            //
+            // Else start adjacent next to the old secret depth
+            //
+            auto tries = 1000;
+            while (tries--) {
+                x = random_range(0, nodes_width);
+                y = random_range(0, nodes_height);
+                random_dir(&dx, &dy);
+
+                auto o = getn(x, y);
+                auto n = getn(x + dx, y + dy);
+
+                if (o && !o->depth && n && (n->pass == pass) && (n->depth == depth - 1)) {
+                    s.push_back(point(x, y));
+
+                    if (dx == 1) {
+                        n->has_secret_exit_right = true;
+                        o->has_secret_exit_left = true;
+                    }
+
+                    if (dx == -1) {
+                        n->has_secret_exit_left = true;
+                        o->has_secret_exit_right = true;
+                    }
+
+                    if (dy == 1) {
+                        n->has_secret_exit_down = true;
+                        o->has_secret_exit_up = true;
+                    }
+
+                    if (dy == -1) {
+                        n->has_secret_exit_up = true;
+                        o->has_secret_exit_down = true;
+                    }
+                    break;
+                }
+            }
+
+            if (tries < 0) {
+                return (0);
+            }
         }
     }
 
