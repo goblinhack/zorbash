@@ -17,7 +17,7 @@ public:
         WALL            = 'x',
         CWALL           = 'X',
         FLOOR           = '.',
-        SECRET_CORRIDOR = '&',
+        SECRET_CORRIDOR = '?',
         START           = 'S',
         EXIT            = 'E',
         KEY             = 'k',
