@@ -9,6 +9,8 @@
 #ifndef _MY_MATH_UTIL_H_
 #define _MY_MATH_UTIL_H_
 
+#include <math.h>
+
 #undef SQUARED
 #define SQUARED(x) ((x) * (x))
 

@@ -9,6 +9,8 @@
 #ifndef _MY_FONT_H_
 #define _MY_FONT_H_
 
+#include <memory>
+
 typedef std::shared_ptr< class font > fontp;
 extern fontp fixed_font;
 

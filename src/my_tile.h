@@ -9,6 +9,7 @@
 #ifndef _MY_TILE_H_
 #define _MY_TILE_H_
 
+#include <memory>
 typedef std::shared_ptr< class tile > tilep;
 
 #include <map>

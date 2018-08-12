@@ -9,6 +9,8 @@
 #ifndef _MY_WID_H_
 #define _MY_WID_H_
 
+#include <memory>
+
 typedef std::shared_ptr< class wid > widp;
 
 #include <SDL.h>

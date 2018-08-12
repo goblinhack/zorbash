@@ -19,29 +19,29 @@
 
 . ./scripts/common.sh
 
-case `uname` in
-    *MING*|*MSYS*)
-        # Goog link for mingw install hints
-        #         log_info "Installing python dependancies:"
-        log_info "Installing python dependancies:"
-        pacman --force --noconfirm -S mingw-w64-x86_64-python3
-        pacman --force --noconfirm -S mingw-w64-x86_64-python3-pip
-        pacman --force --noconfirm -S mingw-w64-x86_64-python3-cx_Freeze
-        /mingw64/bin/pip3 install colored
-        /mingw64/bin/pip3 install hexdump
-    ;;
-    *Darwin*)
-        # sudo python3 -m pip install --upgrade pip
-        port install python3-pip
-        python3 -m pip install colored
-        python3 -m pip install hexdump
-    ;;
-    *)
-        apt-get install python3-pip3
-        pip3 install colored
-        pip3 install hexdump
-    ;;
-esac
+#case `uname` in
+#    *MING*|*MSYS*)
+#        # Good link for mingw install hints
+#        #         log_info "Installing python dependancies:"
+#        log_info "Installing python dependancies:"
+#        pacman --force --noconfirm -S mingw-w64-x86_64-python3
+#        pacman --force --noconfirm -S mingw-w64-x86_64-python3-pip
+#        pacman --force --noconfirm -S mingw-w64-x86_64-python3-cx_Freeze
+#        /mingw64/bin/pip3 install colored
+#        /mingw64/bin/pip3 install hexdump
+#    ;;
+#    *Darwin*)
+#        # sudo python3 -m pip install --upgrade pip
+#        port install python3-pip
+#        python3 -m pip install colored
+#        python3 -m pip install hexdump
+#    ;;
+#    *)
+#        apt-get install python3-pip3
+#        pip3 install colored
+#        pip3 install hexdump
+#    ;;
+#esac
 
 case `uname` in
     *MING*|*MSYS*)
@@ -83,7 +83,7 @@ case `uname` in
         do
             if [ -x $i ]
             then
-                SDL1_CONFIG=$i
+                SDL2_CONFIG=$i
                 break
             fi
         done
@@ -96,7 +96,7 @@ case `uname` in
         do
             if [ -x $i ]
             then
-                SDL1_CONFIG=$i
+                SDL2_CONFIG=$i
                 break
             fi
         done
@@ -143,26 +143,12 @@ sdl_help()
         log_warn "  For ubuntu SDL2 do: "
         log_warn "   sudo apt-get install libsdl2-dev"
         log_warn "   sudo apt-get install libsdl2-mixer-dev"
-        log_warn ""
-        log_warn "  For ubuntu SDL1.2 do: "
-        log_warn "   sudo apt-get install libsdl1.2-dev"
-        log_warn "   sudo apt-get install libsdl-mixer1.2-dev"
+        log_warn "   sudo apt-get install libsdl2-ttf-dev"
         ;;
     esac
 }
 
-SDL1_SCORE=0
 SDL2_SCORE=0
-
-if [ "$SDL1_CONFIG" != "" ]; then
-    SDL1_INC_PATH=`$SDL1_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
-
-    find $SDL1_INC_PATH | grep -q SDL_mixer.h
-    if [ $? -eq 0 ]; then
-        SDL1_SCORE=`expr $SDL1_SCORE + 1`
-        SDL1_MIXER=`find $SDL1_INC_PATH -name SDL_mixer.h`
-    fi
-fi
 
 if [ "$SDL2_CONFIG" != "" ]; then
     SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
@@ -174,94 +160,58 @@ if [ "$SDL2_CONFIG" != "" ]; then
     fi
 fi
 
-if [[ "$SDL1_CONFIG" != "" ]]; then
-    log_info "SDL1 config      : $SDL1_CONFIG"
-    log_info "SDL1 version     : "`$SDL1_CONFIG --version`
-    log_info "SDL1 include path: $SDL1_INC_PATH"
-    log_info "SDL1 mixer.h     : $SDL1_MIXER"
-    log_info "SDL1 score       : $SDL1_SCORE"
+if [ "$SDL2_CONFIG" != "" ]; then
+    SDL2_INC_PATH=`$SDL2_CONFIG --cflags | sed 's/.*-I\([a-zA-Z\/_0-9:\.]*\) .*/\1/g'`
+
+    find $SDL2_INC_PATH | grep -q SDL_ttf.h
+    if [ $? -eq 0 ]; then
+        SDL2_SCORE=`expr $SDL2_SCORE + 1`
+        SDL2_TTF=`find $SDL2_INC_PATH -name SDL_ttf.h`
+    fi
 fi
 
-if [[ "$SDL2_CONFIG" != "" ]]; then
-    log_info "SDL2 config      : $SDL2_CONFIG"
-    log_info "SDL2 version     : "`$SDL2_CONFIG --version`
-    log_info "SDL2 include path: $SDL2_INC_PATH"
-    log_info "SDL2 mixer.h     : $SDL2_MIXER"
-    log_info "SDL2 score       : $SDL2_SCORE"
-fi
+log_info "SDL2 config      : $SDL2_CONFIG"
+log_info "SDL2 version     : "`$SDL2_CONFIG --version`
+log_info "SDL2 include path: $SDL2_INC_PATH"
+log_info "SDL2 mixer.h     : $SDL2_MIXER"
+log_info "SDL2 ttf.h       : $SDL2_TTF"
+log_info "SDL2 score       : $SDL2_SCORE"
 
-USE_SDL1=0
-USE_SDL2=0
-
-if [[ $SDL1_SCORE = "0" ]]; then
-    if [[ $SDL2_SCORE = "0" ]]; then
-        log_err "I need SDL1 or SDL2 and SDL mixer"
-        sdl_help
-        exit 1
-    else
-        SDL_CONFIG=$SDL2_CONFIG
-        USE_SDL2=1
-    fi
-elif [[ $SDL2_SCORE = "0" ]]; then
-    if [[ $SDL1_SCORE = "0" ]]; then
-        log_err "I need SDL1 or SDL2 and SDL mixer"
-        sdl_help
-        exit 1
-    else
-        SDL_CONFIG=$SDL1_CONFIG
-        USE_SDL1=1
-    fi
-else
-    if [[ $SDL2_SCORE -ge $SDL1_SCORE ]]; then
-        log_info "Prefer SDL2 as it has more headers"
-        SDL_CONFIG=$SDL2_CONFIG
-        USE_SDL2=1
-    else
-        log_info "Prefer SDL1 as it has more headers"
-        SDL_CONFIG=$SDL1_CONFIG
-        USE_SDL1=1
-    fi
+if [[ $SDL2_SCORE != "2" ]]; then
+    log_err "I need SDL2, SDL mixer and SDL ttf installed"
+    sdl_help
+    exit 1
 fi
 
 #
 # Gives warings at runtime on MACOS
 #
-SDL_LIBS=`$SDL_CONFIG --libs`
-
+SDL_LIBS=`$SDL2_CONFIG --libs`
 if [ $? -ne 0 ]
 then
-    log_err "Please install SDL 1.2 or 1.3. $SDL_CONFIG failed."
-    log_err "SDL-1.2.14.tar.gz is in support/"
+    log_err "Please install SDL2."
+    sdl_help
     exit 1
 fi
 
-C_FLAGS=`$SDL_CONFIG --cflags`
+C_FLAGS=`$SDL2_CONFIG --cflags`
 if [ $? -ne 0 ]
 then
-    log_err "Please install SDL 1.2 or 1.3. $SDL_CONFIG failed."
-    log_err "SDL-1.2.14.tar.gz is in support/"
+    log_err "Please install SDL 2."
+    sdl_help
     exit 1
 fi
 
-log_info "SDL version:" `$SDL_CONFIG --version`
-log_info "  ($SDL_CONFIG)"
+log_info "SDL version:" `$SDL2_CONFIG --version`
+log_info "  ($SDL2_CONFIG)"
 
 #
 # -funwind-tables and -rdynamic for backtrace info on linux.
 # But it seemed to help little.
 #
 LDLIBS="$SDL_LIBS"
-
-if [ "$USE_SDL2" = "1" ]
-then
-    # ENABLE_GENERATE_TTF
-    LDLIBS="$LDLIBS -lSDL2_ttf"
-    LDLIBS="$LDLIBS -lSDL2_mixer"
-else
-    # ENABLE_GENERATE_TTF
-    #LDLIBS="$LDLIBS -lSDL_ttf"
-    LDLIBS="$LDLIBS -lSDL_mixer"
-fi
+LDLIBS="$LDLIBS -lSDL2_ttf"
+LDLIBS="$LDLIBS -lSDL2_mixer"
 
 case `uname` in
     *MING*|*MSYS*)

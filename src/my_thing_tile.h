@@ -8,6 +8,7 @@
 #define _MY_THING_TILE_H
 
 #include <map>
+#include <memory>
 
 typedef std::shared_ptr< class thing_tile > thing_tilep;
 typedef std::map< unsigned int, std::shared_ptr< class thing_tile > > thing_tiles;

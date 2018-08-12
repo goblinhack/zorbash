@@ -564,7 +564,7 @@ int32_t main (int32_t argc, char *argv[])
 
     python_init(argv);
 
-#if 0
+#if 1
     extern int grid_test(void);
     grid_test();
     int x = 1;
@@ -575,8 +575,8 @@ int32_t main (int32_t argc, char *argv[])
 #endif
     extern int dungeon_test(void);
     dungeon_test();
-    auto x = 1;
-    if (x) {
+    auto y = 1;
+    if (y) {
     DIE("x");
     }
 

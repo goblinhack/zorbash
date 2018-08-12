@@ -10,6 +10,7 @@
 #define _MY_TEX_H_
 
 #include <SDL.h>
+#include <memory>
 
 typedef std::shared_ptr< class tex > texp;
 

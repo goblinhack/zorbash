@@ -21,6 +21,7 @@ void traceback_stderr(tracebackp);
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <execinfo.h>
 #include <cxxabi.h>
 

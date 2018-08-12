@@ -691,7 +691,6 @@ void WID_DBG (widp t, const char *fmt, ...)
 static void msgerr_ (const char *fmt, va_list args)
 {_
     char buf[MAXSTR];
-    uint32_t ts_len;
     uint32_t len;
 
     buf[0] = '\0';
@@ -701,7 +700,6 @@ static void msgerr_ (const char *fmt, va_list args)
     snprintf(buf + len, sizeof(buf) - len, "ERROR: %%%%fg=red$");
 
     len = (uint32_t)strlen(buf);
-    ts_len = len;
 
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
