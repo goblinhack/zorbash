@@ -48,7 +48,7 @@ void Charmap::init_charmaps (void)
     c->fg                   = "white";
     c->is_floor             = true;
 
-    char_index             = Charmap::DUSTY;
+    char_index             = Charmap::SECRET_CORRIDOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->bg                   = "black";

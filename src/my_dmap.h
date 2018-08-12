@@ -19,6 +19,6 @@ extern std::vector<point> dmap_solve(const dmap *d, const point end,
 extern void dmap_l_shaped_path_to_diag(const dmap *D, 
                                        std::vector<point> &path);
 
-#define DMAP_IS_WALL     MAP_WIDTH
-#define DMAP_IS_PASSABLE (MAP_WIDTH - 1)
+#define DMAP_IS_WALL     999
+#define DMAP_IS_PASSABLE 998
 #define DMAP_IS_GOAL     0
