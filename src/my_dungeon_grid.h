@@ -37,6 +37,10 @@ public:
     bool has_secret_exit_down                 {false};
     bool has_secret_exit_left                 {false};
     bool has_secret_exit_right                {false};
+
+    /*
+     * Update init_nodes on changes
+     */
 };
 
 class Nodes {
@@ -83,4 +87,7 @@ public:
     void place_entrance(void);
     void place_exit(void);
     void set_max_depth(void);
+    bool node_is_free(Node *n);
+    bool node_is_a_room(Node *n);
+    void remove_stubs();
 };

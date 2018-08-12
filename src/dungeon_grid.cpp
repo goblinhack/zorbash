@@ -140,7 +140,7 @@ redo:
     while (depth < 10) {
         auto placed = snake_walk(depth, 10, pass);
 
-        CON("level depth %d placed %d nodes", depth, placed);
+        CON("cyclic-dungeon: level depth %d placed %d nodes", depth, placed);
         if (!placed) {
             break;
         }
@@ -152,15 +152,16 @@ redo:
         if (depth == 1) {
             //
             // Need an extra one on level one for the entrance
+            //
             if (placed < 3) {
-                debug("failed initial level");
-                LOG("depth %d placed only %d nodes, redo", depth, placed);
+                debug("failed initial level, did not place enough nodes");
+                CON("cyclic-dungeon: failed level depth %d placed only %d nodes, redo", depth, placed);
                 goto redo;
             }
         } else {
             if (placed < 2) {
-                debug("failed level");
-                LOG("depth %d placed only %d nodes, redo", depth, placed);
+                debug("failed level, did not place enough nodes at depth");
+                CON("cyclic-dungeon: failed level depth %d placed only %d nodes, redo", depth, placed);
                 goto redo;
             }
         }
@@ -176,6 +177,9 @@ redo:
     }
     debug("done first pass of rooms and joined rooms to next depth");
 
+    remove_stubs();
+    debug("removed stubs");
+
     for (auto join = 1; join < depth - 2; join++) {
         join_depth_secret(join, pass);
     }
@@ -190,7 +194,7 @@ redo:
     while (secret_depth < 10) {
         auto placed = snake_walk(secret_depth, 10, pass);
 
-        CON("depth %d placecd %d secret nodes", secret_depth, placed);
+        CON("cyclic-dungeon: level depth %d placed %d secret nodes", secret_depth, placed);
         if (!placed) {
             break;
         }
@@ -230,7 +234,7 @@ redo:
     place_entrance();
     place_exit();
 
-    debug("placed exits");
+    debug("final map");
 }
 
 void Nodes::debug (std::string msg)
@@ -239,10 +243,10 @@ void Nodes::debug (std::string msg)
         return;
     }
 
-    auto step = 7;
+    auto step = 5;
     auto center = 3;
 
-    char out[nodes_height * step][nodes_width * step];
+    char out[(nodes_height+1) * step][(nodes_width+1) * step];
 
     memset(out, ' ', sizeof(out));
 
@@ -254,42 +258,34 @@ void Nodes::debug (std::string msg)
             if (node->has_exit_down) {
                 out[oy+1][ox] = '|';
                 out[oy+2][ox] = '|';
-                out[oy+3][ox] = '|';
             }
             if (node->has_exit_up) {
                 out[oy-1][ox] = '|';
                 out[oy-2][ox] = '|';
-                out[oy-3][ox] = '|';
             }
             if (node->has_exit_left) {
                 out[oy][ox-1] = '_';
                 out[oy][ox-2] = '_';
-                out[oy][ox-3] = '_';
             }
             if (node->has_exit_right) {
                 out[oy][ox+1] = '_';
                 out[oy][ox+2] = '_';
-                out[oy][ox+3] = '_';
             }
             if (node->has_secret_exit_down) {
                 out[oy+1][ox] = '?';
                 out[oy+2][ox] = '?';
-                out[oy+3][ox] = '?';
             }
             if (node->has_secret_exit_up) {
                 out[oy-1][ox] = '?';
                 out[oy-2][ox] = '?';
-                out[oy-3][ox] = '?';
             }
             if (node->has_secret_exit_left) {
                 out[oy][ox-1] = '?';
                 out[oy][ox-2] = '?';
-                out[oy][ox-3] = '?';
             }
             if (node->has_secret_exit_right) {
                 out[oy][ox+1] = '?';
                 out[oy][ox+2] = '?';
-                out[oy][ox+3] = '?';
             }
             if (node->is_entrance) {
                 out[oy-1][ox-1] = 'S';
@@ -322,6 +318,160 @@ void Nodes::debug (std::string msg)
         CON("cyclic-dungeon: %s", s.c_str());
     }
     CON("cyclic-dungeon: ^^^^^ %s ^^^^^", msg.c_str());
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto node = getn(x, y);
+            if (node->has_exit_down) {
+                if (y == nodes_height - 1) {
+                    DIE("node %d,%d has exit down off end of map", x, y);
+                }
+            }
+            if (node->has_exit_right) {
+                if (x == nodes_width - 1) {
+                    DIE("node %d,%d has exit right off end of map", x, y);
+                }
+            }
+            if (node->has_exit_left) {
+                if (x == 0) {
+                    DIE("node %d,%d has exit left off end of map", x, y);
+                }
+            }
+            if (node->has_exit_up) {
+                if (y == 0) {
+                    DIE("node %d,%d has exit up off end of map", x, y);
+                }
+            }
+            if (node->has_secret_exit_down) {
+                if (y == nodes_height - 1) {
+                    DIE("node %d,%d has secret exit down off end of map", x, y);
+                }
+            }
+            if (node->has_secret_exit_right) {
+                if (x == nodes_width - 1) {
+                    DIE("node %d,%d has secret exit right off end of map", x, y);
+                }
+            }
+            if (node->has_secret_exit_left) {
+                if (x == 0) {
+                    DIE("node %d,%d has secret exit left off end of map", x, y);
+                }
+            }
+            if (node->has_secret_exit_up) {
+                if (y == 0) {
+                    DIE("node %d,%d has secret exit up off end of map", x, y);
+                }
+            }
+        }
+    }
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto node = getn(x, y);
+            if (node->has_exit_down) {
+                auto o = getn(x, y + 1);
+                if (!o || !o->depth) {
+                    DIE("node %d,%d has exit down but no node exists", x, y);
+                }
+            }
+            if (node->has_exit_right) {
+                auto o = getn(x + 1, y);
+                if (!o || !o->depth) {
+                    DIE("node %d,%d has exit right but no node exists", x, y);
+                }
+            }
+            if (node->has_exit_left) {
+                auto o = getn(x - 1, y);
+                if (!o || !o->depth) {
+                    DIE("node %d,%d has exit left but no node exists", x, y);
+                }
+            }
+            if (node->has_exit_up) {
+                auto o = getn(x, y - 1);
+                if (!o || !o->depth) {
+                    DIE("node %d,%d has exit up but no node exists", x, y);
+                }
+            }
+            if (node->has_secret_exit_down) {
+                auto o = getn(x, y + 1);
+                if (!o || !o->depth) {
+                    DIE("node %d,%d has secret exit down but no node exists", x, y);
+                }
+            }
+            if (node->has_secret_exit_right) {
+                auto o = getn(x + 1, y);
+                if (!o || !o->depth) {
+                    DIE("node %d,%d has secret exit right but no node exists", x, y);
+                }
+            }
+            if (node->has_secret_exit_left) {
+                auto o = getn(x - 1, y);
+                if (!o || !o->depth) {
+                    DIE("node %d,%d has secret exit left but no node exists", x, y);
+                }
+            }
+            if (node->has_secret_exit_up) {
+                auto o = getn(x, y - 1);
+                if (!o || !o->depth) {
+                    DIE("node %d,%d has secret exit up but no node exists", x, y);
+                }
+            }
+        }
+    }
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto node = getn(x, y);
+            if (node->has_exit_down) {
+                auto o = getn(x, y + 1);
+                if ((o->depth == depth_obstacle)) {
+                    DIE("node %d,%d has exit down but that node is an obstacle", x, y);
+                }
+            }
+            if (node->has_exit_right) {
+                auto o = getn(x + 1, y);
+                if ((o->depth == depth_obstacle)) {
+                    DIE("node %d,%d has exit right but that node is an obstacle", x, y);
+                }
+            }
+            if (node->has_exit_left) {
+                auto o = getn(x - 1, y);
+                if ((o->depth == depth_obstacle)) {
+                    DIE("node %d,%d has exit left but that node is an obstacle", x, y);
+                }
+            }
+            if (node->has_exit_up) {
+                auto o = getn(x, y - 1);
+                if ((o->depth == depth_obstacle)) {
+                    DIE("node %d,%d has exit up but that node is an obstacle", x, y);
+                }
+            }
+            if (node->has_secret_exit_down) {
+                auto o = getn(x, y + 1);
+                if ((o->depth == depth_obstacle)) {
+                    DIE("node %d,%d has secret exit down but that node is an obstacle", x, y);
+                }
+            }
+            if (node->has_secret_exit_right) {
+                auto o = getn(x + 1, y);
+                if ((o->depth == depth_obstacle)) {
+                    DIE("node %d,%d has secret exit right but that node is an obstacle", x, y);
+                }
+            }
+            if (node->has_secret_exit_left) {
+                auto o = getn(x - 1, y);
+                if ((o->depth == depth_obstacle)) {
+                    DIE("node %d,%d has secret exit left but that node is an obstacle", x, y);
+                }
+            }
+            if (node->has_secret_exit_up) {
+                auto o = getn(x, y - 1);
+                if ((o->depth == depth_obstacle)) {
+                    DIE("node %d,%d has secret exit up but that node is an obstacle", x, y);
+                }
+            }
+        }
+    }
 }
 
 int Nodes::offset (const int x, const int y)
@@ -395,9 +545,23 @@ void Nodes::init_nodes (void)
 
     for (auto x = 0; x < nodes_width; x++) {
         for (auto y = 0; y < nodes_height; y++) {
-
             auto n = getn(x, y);
-            memset(n, 0, sizeof(*n));
+            n->depth                                 = 0;
+            n->pass                                  = 0;
+            n->x                                     = 0;
+            n->y                                     = 0;
+            n->is_key                                = false;
+            n->is_lock                               = false;
+            n->is_entrance                           = false;
+            n->is_exit                               = false;
+            n->has_exit_up                           = false;
+            n->has_exit_down                         = false;
+            n->has_exit_left                         = false;
+            n->has_exit_right                        = false;
+            n->has_secret_exit_up                    = false;
+            n->has_secret_exit_down                  = false;
+            n->has_secret_exit_left                  = false;
+            n->has_secret_exit_right                 = false;
         }
     }
 
@@ -413,12 +577,24 @@ void Nodes::init_nodes (void)
         auto o = getn(x, y);
         o->depth = depth_obstacle;
     }
+
+    max_depth = 0;
 }
 
 //
 // Walk the depth randomly, ala snake until you hit your own tail,
 // forking randomly also
 //
+bool Nodes::node_is_free (Node *n)
+{
+    return (n && !n->depth);
+}
+
+bool Nodes::node_is_a_room (Node *n)
+{
+    return (n && n->depth && (n->depth != depth_obstacle));
+}
+
 int Nodes::snake_walk (int depth, int max_placed, int pass)
 {
     std::list<point> s;
@@ -429,27 +605,27 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
     auto y = 0;
 
     if (depth == 1) {
-        //
-        // Start anywhere
-        //
-        auto tries = 1000;
-        while (tries--) {
-            x = random_range(0, nodes_width);
-            y = random_range(0, nodes_height);
+        if (pass == 1) {
+            //
+            // Start anywhere
+            //
+            auto tries = 1000;
+            while (tries--) {
+                x = random_range(0, nodes_width);
+                y = random_range(0, nodes_height);
 
-            auto o = getn(x, y);
-            if (o && !o->depth) {
-                s.push_back(point(x, y));
-                random_dir(&dx, &dy);
-                break;
+                auto o = getn(x, y);
+                if (node_is_free(o)) {
+                    s.push_back(point(x, y));
+                    random_dir(&dx, &dy);
+                    break;
+                }
             }
-        }
 
-        if (tries < 0) {
-            return (0);
-        }
-    } else {
-        if (depth == 1) {
+            if (tries < 0) {
+                return (0);
+            }
+        } else {
             //
             // Start adjacent to a non hidden level node and connect to it
             //
@@ -462,27 +638,72 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                 auto o = getn(x, y);
                 auto n = getn(x + dx, y + dy);
 
-                if (o && !o->depth && n && n->depth && (n->pass != pass)) {
+                if (node_is_free(o) && node_is_a_room(n) && (n->pass != pass)) {
                     s.push_back(point(x, y));
 
                     if (dx == 1) {
-                        n->has_secret_exit_right = true;
-                        o->has_secret_exit_left = true;
+                        o->has_secret_exit_right = true;
+                        n->has_secret_exit_left = true;
                     }
 
                     if (dx == -1) {
-                        n->has_secret_exit_left = true;
-                        o->has_secret_exit_right = true;
+                        o->has_secret_exit_left = true;
+                        n->has_secret_exit_right = true;
                     }
 
                     if (dy == 1) {
-                        n->has_secret_exit_down = true;
-                        o->has_secret_exit_up = true;
+                        o->has_secret_exit_down = true;
+                        n->has_secret_exit_up = true;
                     }
 
                     if (dy == -1) {
-                        n->has_secret_exit_up = true;
-                        o->has_secret_exit_down = true;
+                        o->has_secret_exit_up = true;
+                        n->has_secret_exit_down = true;
+                    }
+                    break;
+                }
+            }
+
+            if (tries < 0) {
+                return (0);
+            }
+        }
+    } else {
+        if (pass == 1) {
+            //
+            // Else start adjacent next to the old secret depth
+            //
+            auto tries = 1000;
+            while (tries--) {
+                x = random_range(0, nodes_width);
+                y = random_range(0, nodes_height);
+                random_dir(&dx, &dy);
+
+                auto o = getn(x, y);
+                auto n = getn(x + dx, y + dy);
+
+                if (node_is_free(o) && node_is_a_room(n) && 
+                    (n->pass == pass) && (n->depth == depth - 1)) {
+                    s.push_back(point(x, y));
+
+                    if (dx == 1) {
+                        o->has_exit_right = true;
+                        n->has_exit_left = true;
+                    }
+
+                    if (dx == -1) {
+                        o->has_exit_left = true;
+                        n->has_exit_right = true;
+                    }
+
+                    if (dy == 1) {
+                        o->has_exit_down = true;
+                        n->has_exit_up = true;
+                    }
+
+                    if (dy == -1) {
+                        o->has_exit_up = true;
+                        n->has_exit_down = true;
                     }
                     break;
                 }
@@ -504,27 +725,28 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                 auto o = getn(x, y);
                 auto n = getn(x + dx, y + dy);
 
-                if (o && !o->depth && n && (n->pass == pass) && (n->depth == depth - 1)) {
+                if (node_is_free(o) && node_is_a_room(n) && 
+                    (n->pass == pass) && (n->depth == depth - 1)) {
                     s.push_back(point(x, y));
 
                     if (dx == 1) {
-                        n->has_secret_exit_right = true;
-                        o->has_secret_exit_left = true;
+                        o->has_secret_exit_right = true;
+                        n->has_secret_exit_left = true;
                     }
 
                     if (dx == -1) {
-                        n->has_secret_exit_left = true;
-                        o->has_secret_exit_right = true;
+                        o->has_secret_exit_left = true;
+                        n->has_secret_exit_right = true;
                     }
 
                     if (dy == 1) {
-                        n->has_secret_exit_down = true;
-                        o->has_secret_exit_up = true;
+                        o->has_secret_exit_down = true;
+                        n->has_secret_exit_up = true;
                     }
 
                     if (dy == -1) {
-                        n->has_secret_exit_up = true;
-                        o->has_secret_exit_down = true;
+                        o->has_secret_exit_up = true;
+                        n->has_secret_exit_down = true;
                     }
                     break;
                 }
@@ -565,73 +787,93 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         // Change dir
         //
         if (random_range(0, 100) < 30) {
-            switch (random_range(0, 4)) {
-                random_dir(&dx, &dy);
-            }
+            random_dir(&dx, &dy);
         }
+
+        auto old = n;
 
         //
         // Create forks but make sure the old corridor knows
         // where the fork corridor is
         //
-        if (random_range(0, 100) < 50) {
-            switch (random_range(0, 4)) {
+        if (placed < max_placed) {
+            if (random_range(0, 100) < 50) {
+                switch (random_range(0, 4)) {
                 case 0: 
-                    s.push_back(point(x + 1, y    )); 
-                    n->has_exit_right = true;
+                    if (x < nodes_width - 1) {
+                        auto f = getn(x + 1, y);
+                        if (node_is_free(f)) {
+                            s.push_back(point(x + 1, y    )); 
+                            n->has_exit_right = true;
+                        }
+                    }
                     break;
                 case 1: 
-                    s.push_back(point(x - 1, y    ));
-                    n->has_exit_left = true;
+                    if (x > 0){
+                        auto f = getn(x - 1, y);
+                        if (node_is_free(f)) {
+                            s.push_back(point(x - 1, y    ));
+                            n->has_exit_left = true;
+                        }
+                    }
                     break;
                 case 2: 
-                    s.push_back(point(x    , y + 1));
-                    n->has_exit_down = true;
+                    if (y < nodes_height - 1) {
+                        auto f = getn(x, y + 1);
+                        if (node_is_free(f)) {
+                            s.push_back(point(x    , y + 1));
+                            n->has_exit_down = true;
+                        }
+                    }
                     break;
                 case 3: 
-                    s.push_back(point(x    , y - 1));
-                    n->has_exit_up = true;
-                    break;
-            }
-        }
-
-        auto o = n;
-
-        //
-        // Get the next moved, or change dir again if blocked.
-        //
-        n = getn(x + dx, y + dy);
-        if (!n || n->depth) {
-            auto tries = 5;
-            while (tries--) {
-                random_dir(&dx, &dy);
-                n = getn(x + dx, y + dy);
-                if (n && !n->depth) {
+                    if (y > 0){
+                        auto f = getn(x, y - 1);
+                        if (node_is_free(f)) {
+                            s.push_back(point(x    , y - 1));
+                            n->has_exit_up = true;
+                        }
+                    }
                     break;
                 }
             }
 
-            if (tries < 0) {
-                continue;
+            //
+            // Get the next move, or change dir again if blocked.
+            //
+            n = getn(x + dx, y + dy);
+            if (!node_is_free(n)) {
+                auto tries = 5;
+                while (tries--) {
+                    random_dir(&dx, &dy);
+                    n = getn(x + dx, y + dy);
+                    if (node_is_free(n)) {
+                        break;
+                    }
+                }
+
+                if (tries < 0) {
+                    continue;
+                }
+            }
+
+            s.push_back(point(x + dx, y + dy));
+
+            if (dx == 1) {
+                old->has_exit_right = true;
+            }
+            if (dx == -1) {
+                old->has_exit_left = true;
+            }
+            if (dy == 1) {
+                old->has_exit_down = true;
+            }
+            if (dy == -1) {
+                old->has_exit_up = true;
             }
         }
 
-        s.push_back(point(x + dx, y + dy));
-
-        if (dx == 1) {
-            o->has_exit_right = true;
-        }
-        if (dx == -1) {
-            o->has_exit_left = true;
-        }
-        if (dy == 1) {
-            o->has_exit_down = true;
-        }
-        if (dy == -1) {
-            o->has_exit_up = true;
-        }
-
-    } while (s.size() && (placed < max_placed));
+    } while (s.size());
 
     return (placed);
 }
@@ -1108,6 +1350,66 @@ void Nodes::place_exit (void)
     auto p = s[i];
     auto n = getn(p.x, p.y);
     n->is_exit = true;
+}
+
+void Nodes::remove_stubs (void)
+{
+    std::vector<point> s;
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto node = getn(x, y);
+
+            if (node->has_exit_down) {
+                auto o = getn(x, y + 1);
+                if (!o->has_exit_up) {
+                    node->has_exit_down = false;
+                }
+            }
+            if (node->has_exit_up) {
+                auto o = getn(x, y - 1);
+                if (!o->has_exit_down) {
+                    node->has_exit_up = false;
+                }
+            }
+            if (node->has_exit_right) {
+                auto o = getn(x + 1, y);
+                if (!o->has_exit_left) {
+                    node->has_exit_right = false;
+                }
+            }
+            if (node->has_exit_left) {
+                auto o = getn(x - 1, y);
+                if (!o->has_exit_right) {
+                    node->has_exit_left = false;
+                }
+            }
+            if (node->has_secret_exit_down) {
+                auto o = getn(x, y + 1);
+                if (!o->has_secret_exit_up) {
+                    node->has_secret_exit_down = false;
+                }
+            }
+            if (node->has_secret_exit_up) {
+                auto o = getn(x, y - 1);
+                if (!o->has_secret_exit_down) {
+                    node->has_secret_exit_up = false;
+                }
+            }
+            if (node->has_secret_exit_right) {
+                auto o = getn(x + 1, y);
+                if (!o->has_secret_exit_left) {
+                    node->has_secret_exit_right = false;
+                }
+            }
+            if (node->has_secret_exit_left) {
+                auto o = getn(x - 1, y);
+                if (!o->has_secret_exit_right) {
+                    node->has_secret_exit_left = false;
+                }
+            }
+        }
+    }
 }
 
 void Nodes::set_max_depth (void)

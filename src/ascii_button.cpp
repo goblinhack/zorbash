@@ -63,12 +63,14 @@ void ascii_put_button (button_args b, const wchar_t *fmt, ...)
     /*
      * Mouse over button
      */
+#ifdef UNUSED
     int over = false;
 
     if ((ascii.mouse_at.y == y) &&
         (ascii.mouse_at.x >= x) && (ascii.mouse_at.x <= x + w)) {
         over = true;
     }
+#endif
 
     /*
      * Draw the button

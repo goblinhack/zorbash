@@ -66,6 +66,8 @@
 */
 
 #include "my_stb_image.h"
+#include <string.h>
+#include <stdarg.h>
 
 #ifndef STBI_INCLUDE_STB_IMAGE_H
 #define STBI_INCLUDE_STB_IMAGE_H

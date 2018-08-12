@@ -6100,8 +6100,6 @@ static void wid_display (widp w,
     w_box_args.c3_active = col;
 #endif
 
-    bool bg_set = false;
-
     bool is_button = (bry == tly) && w->square;
 
     if (w == wid_over) {
@@ -6109,8 +6107,6 @@ static void wid_display (widp w,
         w_button_args.over = true;
 
         if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG]) {
-            bg_set = true;
-            
             auto c = w->cfg[WID_MODE_OVER].colors[WID_COLOR_TEXT];
             w_box_args.col_border_text = c;
             w_button_args.col_border_text = c;
@@ -6122,8 +6118,6 @@ static void wid_display (widp w,
         }
     } else {
         if (w->cfg[WID_MODE_NORMAL].color_set[WID_COLOR_BG]) {
-            bg_set = true;
-
             w_box_args.col_border_text = COLOR_NONE;
             w_button_args.col_border_text = COLOR_NONE;
 

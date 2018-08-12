@@ -1984,8 +1984,18 @@ next:
 
                 if (n->has_exit_down) {
                     auto o = room_node[x][y+1];
+                    if (!o) {
+                        debug("^^^ bug ^^^");
+                        DIE("had exit down at %d,%d, but no node exists", x, y);
+                    }
                     auto rdoori = random_range(0, r->down_exits.size());
                     auto odoori = random_range(0, o->up_exits.size());
+                    if (odoori >= o->up_exits.size()) {
+                        debug("^^^ bug ^^^");
+                        DIE("no left exit [%d] at %d,%d, but only have %ld exits", 
+                            odoori, x, y, o->up_exits.size());
+                    }
+
                     auto rdoor = r->down_exits[rdoori];
                     auto odoor = o->up_exits[odoori];
 
@@ -1998,8 +2008,18 @@ next:
 
                 if (n->has_exit_right) {
                     auto o = room_node[x+1][y];
+                    if (!o) {
+                        debug("^^^ bug ^^^");
+                        DIE("had exit right at %d,%d, but no node exists", x, y);
+                    }
                     auto rdoori = random_range(0, r->right_exits.size());
                     auto odoori = random_range(0, o->left_exits.size());
+                    if (odoori >= o->left_exits.size()) {
+                        debug("^^^ bug ^^^");
+                        DIE("no left exit [%d] at %d,%d, but only have %ld exits", 
+                            odoori, x, y, o->left_exits.size());
+                    }
+
                     auto rdoor = r->right_exits[rdoori];
                     auto odoor = o->left_exits[odoori];
 
@@ -2012,8 +2032,18 @@ next:
 
                 if (n->has_secret_exit_down) {
                     auto o = room_node[x][y+1];
+                    if (!o) {
+                        debug("^^^ bug ^^^");
+                        DIE("had secret exit down at %d,%d, but no node exists", x, y);
+                    }
                     auto rdoori = random_range(0, r->down_exits.size());
                     auto odoori = random_range(0, o->up_exits.size());
+                    if (odoori >= o->up_exits.size()) {
+                        debug("^^^ bug ^^^");
+                        DIE("no left exit [%d] at %d,%d, but only have %ld exits", 
+                            odoori, x, y, o->up_exits.size());
+                    }
+
                     auto rdoor = r->down_exits[rdoori];
                     auto odoor = o->up_exits[odoori];
 
@@ -2026,8 +2056,18 @@ next:
 
                 if (n->has_secret_exit_right) {
                     auto o = room_node[x+1][y];
+                    if (!o) {
+                        debug("^^^ bug ^^^");
+                        DIE("had secret exit right at %d,%d, but no node exists", x, y);
+                    }
                     auto rdoori = random_range(0, r->right_exits.size());
                     auto odoori = random_range(0, o->left_exits.size());
+                    if (odoori >= o->left_exits.size()) {
+                        debug("^^^ bug ^^^");
+                        DIE("no left exit [%d] at %d,%d, but only have %ld exits", 
+                            odoori, x, y, o->left_exits.size());
+                    }
+
                     auto rdoor = r->right_exits[rdoori];
                     auto odoor = o->left_exits[odoori];
 

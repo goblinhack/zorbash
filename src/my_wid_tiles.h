@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <memory>
 typedef std::shared_ptr< class wid_tiles > wid_tilesp;
 
 #include "my_tile.h"

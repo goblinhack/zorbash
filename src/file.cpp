@@ -8,6 +8,7 @@
 #include <sys/errno.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <string.h>
 
 #include "my_main.h"
 #include "my_file.h"
