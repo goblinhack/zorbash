@@ -19,6 +19,81 @@ Roomp Room::room_new (void)
     return (r);
 }
 
+void Room::create_rotated_clones (void)
+{_
+    {
+        std::vector<std::string> rot[Charmap::DEPTH_MAX];
+
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            for (auto w = 0; w < width; w++) {
+                std::string s;
+                for (auto h = 0; h < height; h++) {
+                    if (!data[d].size()) {
+                        s += ' ';
+                    } else {
+                        s += data[d][h][width - w - 1];
+                    }
+                }
+                rot[d].push_back(s);
+            }
+        }
+
+        auto r = Room::room_new();
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            r->data[d] = rot[d];
+        }
+        r->finalize();
+    }
+
+    {
+        std::vector<std::string> rot[Charmap::DEPTH_MAX];
+
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            for (auto w = 0; w < width; w++) {
+                std::string s;
+                for (auto h = 0; h < height; h++) {
+                    if (!data[d].size()) {
+                        s += ' ';
+                    } else {
+                        s += data[d][h][w];
+                    }
+                }
+                rot[d].push_back(s);
+            }
+        }
+
+        auto r = Room::room_new();
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            r->data[d] = rot[d];
+        }
+        r->finalize();
+    }
+
+    {
+        std::vector<std::string> rot[Charmap::DEPTH_MAX];
+
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            for (auto w = 0; w < width; w++) {
+                std::string s;
+                for (auto h = 0; h < height; h++) {
+                    if (!data[d].size()) {
+                        s += ' ';
+                    } else {
+                        s += data[d][height - h - 1][w];
+                    }
+                }
+                rot[d].push_back(s);
+            }
+        }
+
+        auto r = Room::room_new();
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            r->data[d] = rot[d];
+        }
+        r->finalize();
+    }
+}
+
 //
 // Find all door exits from a room
 //

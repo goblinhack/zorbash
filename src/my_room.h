@@ -50,6 +50,7 @@ public:
 
     static Roomp room_new(void);
 
+    void create_rotated_clones(void);
     void find_exits(void);
     void finalize(void);
 };

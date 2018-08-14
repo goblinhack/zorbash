@@ -153,6 +153,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     r->finalize();
+    r->create_rotated_clones();
 
     Py_RETURN_NONE;
 }
