@@ -1182,7 +1182,7 @@ def map_data_init():
                     "x.xx....xx..x",
                     "x..x....xxx.x",
                     "x...x..xxxx.x",
-                    "x...xxx....x",
+                    "x...xxx.....x",
                     "D...x  x....x",
                     "xxxxx  xDxxxx"])
     zx.map_load_room(combo=[
@@ -1341,7 +1341,7 @@ def map_data_init():
                     "x...xx..x",
                     "xDxxxx..x",
                     "    D...x",
-                    "   xx..x",
+                    "   xx...x",
                     "   x....x",
                     "   D...xx",
                     "   xDxxx "])
@@ -1713,7 +1713,7 @@ def map_data_init():
                     "x......xxxx",
                     "x.....xx   ",
                     "x.....D    ",
-                    "x.....xx  ",
+                    "x.....xx   ",
                     "x.......x  ",
                     "xxxxxxx.D  ",
                     "      xDx  "])
@@ -1763,7 +1763,7 @@ def map_data_init():
     zx.map_load_room(combo=[
                     "xxxxxxxxxxxxxxx",
                     "x.............x",
-                    "x.....xxxxxxDx",
+                    "x.....xxxxxxxDx",
                     "x.....xxx      ",
                     "x...x...xx     ",
                     "x........x     ",
@@ -1970,7 +1970,7 @@ def map_data_init():
                     "xx.........xx   ",
                     "D.x........x    ",
                     "x..........D    ",
-                    "x........xx    ",
+                    "x........xx     ",
                     "xDxxxxxxxx      "])
     zx.map_load_room(combo=[
                     "xxxxxxxxxx xxxx",
@@ -2002,7 +2002,7 @@ def map_data_init():
     zx.map_load_room(combo=[
                     " xDxxxxxDx ",
                     " x.......D ",
-                    "xx..xx...x",
+                    "xx..xx...x ",
                     "x.........D",
                     "x....LxL..x",
                     "x...LxLxL.x",
@@ -2096,7 +2096,7 @@ def map_data_init():
                     " xx......x",
                     "xx.......x",
                     "D........x",
-                    "x....xxx",
+                    "x....xxx  ",
                     "xx..xx    ",
                     " xDxx     "])
     zx.map_load_room(combo=[

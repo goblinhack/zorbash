@@ -31,7 +31,11 @@ void Room::create_rotated_clones (void)
                     if (!data[d].size()) {
                         s += ' ';
                     } else {
-                        s += data[d][h][width - w - 1];
+                        auto c = data[d][h][width - w - 1];
+                        if (!c) {
+                            DIE("room has nul char");
+                        }
+                        s += c;
                     }
                 }
                 rot[d].push_back(s);
@@ -55,7 +59,11 @@ void Room::create_rotated_clones (void)
                     if (!data[d].size()) {
                         s += ' ';
                     } else {
-                        s += data[d][h][w];
+                        auto c = data[d][h][w];
+                        if (!c) {
+                            DIE("room has nul char");
+                        }
+                        s += c;
                     }
                 }
                 rot[d].push_back(s);
@@ -79,7 +87,11 @@ void Room::create_rotated_clones (void)
                     if (!data[d].size()) {
                         s += ' ';
                     } else {
-                        s += data[d][height - h - 1][w];
+                        auto c = data[d][height - h - 1][w];
+                        if (!c) {
+                            DIE("room has nul char");
+                        }
+                        s += c;
                     }
                 }
                 rot[d].push_back(s);
