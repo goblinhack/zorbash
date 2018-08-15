@@ -564,6 +564,8 @@ public:
         nodes = new Nodes(nodes_width, nodes_height);
         room_width  = map_width / nodes_width;
         room_height  = map_height / nodes_height;
+        room_width--;
+        room_height--;
     }
 
 #if 0
@@ -1194,9 +1196,9 @@ public:
                         continue;
                     }
 
-                    r->at.x = x * room_width + 
+                    r->at.x = x * (room_width+1) + 
                                     random_range(-room_width/2, room_width/2);
-                    r->at.y = y * room_height + 
+                    r->at.y = y * (room_height+1) + 
                                     random_range(-room_width/2, room_height/2);
 
                     node_rooms[x][y] = r;
