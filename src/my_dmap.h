@@ -13,7 +13,7 @@ typedef struct dmap_ {
 } dmap;
 
 extern void dmap_process(dmap *d);
-extern void dmap_process(dmap *D, point start, point end, int border);
+extern void dmap_process(dmap *D, point start, point end);
 extern void dmap_print(dmap *d);
 extern void dmap_print_walls(dmap *d);
 extern std::vector<point> dmap_solve(const dmap *d, const point end, 

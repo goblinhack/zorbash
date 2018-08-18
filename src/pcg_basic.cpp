@@ -29,6 +29,7 @@
  */
 
 #include "my_pcg_basic.h"
+#include <stdio.h>
 
 // state for global RNGs
 
@@ -107,8 +108,9 @@ uint32_t pcg32_boundedrand_r(pcg32_random_t* rng, uint32_t bound)
     // is eliminated.
     for (;/*ever*/;) {
         uint32_t r = pcg32_random_r(rng);
-        if (r >= threshold)
+        if (r >= threshold) {
             return r % bound;
+        }
     }
 }
 
