@@ -231,7 +231,7 @@ void dmap_process (dmap *D)
 #endif
 }
 
-void dmap_process (dmap *D, point start, point end, int border)
+void dmap_process (dmap *D, point start, point end)
 {_
     int16_t x;
     int16_t y;
@@ -265,10 +265,6 @@ void dmap_process (dmap *D, point start, point end, int border)
         miny = end.y;
         maxy = start.y;
     }
-    minx -= border;
-    miny -= border;
-    maxx += border;
-    maxy += border;
 
     if (minx < 0) {
         minx = 0;
@@ -295,6 +291,7 @@ void dmap_process (dmap *D, point start, point end, int border)
         D->val[x][miny] = DMAP_IS_WALL;
         D->val[x][maxy] = DMAP_IS_WALL;
     }
+
 #if 0
     CON("dmap bounds %d,%d to %d,%d", minx, miny, maxx, maxy);
     dmap_print(D);
