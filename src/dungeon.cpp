@@ -145,7 +145,6 @@ public:
     //
     // The. Map.
     //
-    uint32_t                                  corridor_seed;
     std::vector<char>                         cells;
     std::vector<char>                         cells_saved;
 
@@ -167,6 +166,16 @@ public:
     int nodes_height                          {0};
     Nodes                                     *nodes;
 
+    //
+    // Root seed for the dungeon
+    //
+    uint32_t                                  seed;
+    
+    //
+    // Used in rollback so we use the same seed for corridors
+    //
+    uint32_t                                  corridor_seed;
+    
     //
     // Room pointers on the above nodes map
     //
@@ -218,31 +227,35 @@ public:
             //
             // Drag rooms to the center of the map
             //
-            if (!compress_room_layout()) {
-                continue;
+            if (compress_room_layout()) {
+                break;
             }
-
-            break;
+            
+            debug("failed, redo from scratch");
         }
+        
         dump();
+        debug("success, created dungeon");
     }
 
     void debug (std::string s)
     {_
         //return;
         dump();
-        CON("dungeon: %s", s.c_str());
+        CON("dungeon (%u): %s", seed, s.c_str());
         //CON("dungeon: %s hash %llx", s.c_str(), level_hash());
     }
 
     Dungeon (int map_width,
              int map_height,
              int nodes_width,
-             int nodes_height) :
+             int nodes_height,
+             int seed) :
         map_width                  (map_width),
         map_height                 (map_height),
         nodes_width                (nodes_width),
-        nodes_height               (nodes_height)
+        nodes_height               (nodes_height),
+        seed                       (seed)
     {_
         make_dungeon();
     }
@@ -1103,7 +1116,7 @@ public:
             return;
         }
 
-        CON("map debug:");
+        CON("dungeon: seed %u", seed);
         for (auto y = 0; y < map_height; y++) {
             std::string s;
             for (auto x = 0; x < map_width; x++) {
@@ -1381,17 +1394,11 @@ public:
         for (auto y = miny + 1; y < maxy - 1; y++) {
             for (auto x = minx + 1; x < maxx - 1; x++) {
                 if (is_corridor_at_fast(x, y)) {
-                    d.val[x-1][y-1] = DMAP_IS_WALL;
                     d.val[x-1][y] = DMAP_IS_WALL;
-                    d.val[x-1][y+1] = DMAP_IS_WALL;
-
                     d.val[x][y-1] = DMAP_IS_WALL;
                     d.val[x][y] = DMAP_IS_WALL;
                     d.val[x][y+1] = DMAP_IS_WALL;
-
-                    d.val[x+1][y-1] = DMAP_IS_WALL;
                     d.val[x+1][y] = DMAP_IS_WALL;
-                    d.val[x+1][y+1] = DMAP_IS_WALL;
                 }
             }
         }
@@ -1415,16 +1422,9 @@ public:
             for (auto c : p) {
                 putc(c.x, c.y, Charmap::DEPTH_FLOOR, Charmap::DEBUG);
             }
-            debug("dungeon: failed to create corridor, too long a corridor");
+            debug("failed to create corridor, too long a corridor");
             return (false);
         }
-
-#if 0
-        for (auto c : p) {
-            printf("[%d %d] ", c.x, c.y);
-        }
-        printf("\n");
-#endif
 
         //
         // Check we can reach the end point
@@ -1444,7 +1444,7 @@ public:
             putc(start.x, start.y, Charmap::DEPTH_WALLS, Charmap::DEBUG);
             putc(end.x, end.y, Charmap::DEPTH_WALLS, Charmap::DEBUG);
 
-            debug("dungeon: failed to create corridor, end not found");
+            debug("failed to create corridor, end not found");
             LOG("dungeon: failed to create corridor, end not found between %d,%d and %d,%d",
                 start.x, start.y,
                 end.x, end.y);
@@ -1458,7 +1458,7 @@ public:
         putc(start.x, start.y, Charmap::DEPTH_WALLS, Charmap::DOOR);
         putc(end.x, end.y, Charmap::DEPTH_WALLS, Charmap::DOOR);
 
-        //debug("dungeon: placed corridor");
+        //debug("placed corridor");
         return (true);
     }
 
@@ -1540,14 +1540,19 @@ public:
                 }
 
                 if (!placed) {
-                    // debug("dungeon: failed to place initial small rooms");
+                    // debug("failed to place initial small rooms");
                     LOG("failed to place initial small rooms");
                     return (false);
                 }
             }
         }
 
-        debug("dungeon: placed initial small rooms");
+        if (!draw_corridors()) {
+            debug("failed, placed initial small rooms but is unsolvable");
+            return (false);
+        }
+        
+        debug("success, placed initial small rooms");
         return (true);
     }
 
@@ -1556,7 +1561,7 @@ public:
     //
     bool replace_small_rooms_randomly_with_larger_rooms (void)
     {
-        auto place_large_room_tries = 100;
+        auto place_large_room_tries = 4;
         while (place_large_room_tries--) {
             std::fill(cells.begin(), cells.end(), Charmap::SPACE);
 
@@ -1702,8 +1707,8 @@ next:
             mysrand(corridor_seed);
             if (success) {
                 if (!draw_corridors()) {
-                    dump();
-                    debug("failed to place solvable larger level, rollback");
+                    debug("failed to place unsolvable larger level");
+                    
                     for (auto x = 0; x < nodes->nodes_width; x++) {
                         for (auto y = 0; y < nodes->nodes_height; y++) {
                             if (node_rooms[x][y]) {
@@ -1714,12 +1719,10 @@ next:
                         }
                     }
                 } else {
-                    dump();
-                    debug("placed solvable larger level");
+                    debug("success, placed solvable larger level");
                 }
             } else {
-                dump();
-                debug("failed to place larger room");
+                debug("failed to place larger room on level");
             }
         }
 
@@ -1744,7 +1747,7 @@ next:
             }
         }
 
-        debug("placed larger rooms");
+        debug("success, placed larger rooms");
 
         return (true);
     }
@@ -1753,40 +1756,22 @@ next:
     {
         cells_saved = cells;
 
-#if 0
-        printf("save    level %llx rooms: ", level_hash());
-#endif
         for (unsigned int rs = 0;
                 rs < (unsigned int) all_placed_rooms.size(); rs++) {
             auto r = all_placed_rooms[rs];
-#if 0
-            printf("(%d %d) ", r->at.x, r->at.y);
-#endif
             r->rollback_at = r->at;
         }
-#if 0
-        printf("\n");
-#endif
     }
 
     void restore_level (void)
     {
         cells = cells_saved;
 
-#if 0
-        printf("restore level %llx rooms: ", level_hash());
-#endif
         for (unsigned int rs = 0;
                 rs < (unsigned int) all_placed_rooms.size(); rs++) {
             auto r = all_placed_rooms[rs];
-#if 0
-            printf("(%d %d) ", r->at.x, r->at.y);
-#endif
             r->at = r->rollback_at;
         }
-#if 0
-        printf("\n");
-#endif
     }
 
     //
@@ -1832,7 +1817,7 @@ next:
         debug("level before adding corridors is solvable");
 
         auto failed_attempts = 0;
-        auto attempts_to_move_rooms_closer = 100;
+        auto attempts_to_move_rooms_closer = 200;
 
         while (attempts_to_move_rooms_closer--) {
 
@@ -1954,16 +1939,16 @@ next:
                         DIE("rolled back level was not solvable");
                     }
 
-                    if (failed_attempts++ > 20) {
+                    if (failed_attempts++ > 10) {
+                        debug("success, placed compressed layout");
                         return (true);
                     }
 
                     restore_level();
-                    CON("dungeon: roll back (failed attempts %u)", failed_attempts);
-                    //debug("roll back to last good dungeon");
-
+                    debug("failed to placing corridors, rollback");
                     mysrand(attempts_to_move_rooms_closer);
                 } else {
+                    debug("success, placed corridors");
                     failed_attempts = 0;
                     good_seed = last_seed;
                     cells = cells_ok;
@@ -1971,7 +1956,7 @@ next:
                 }
             }
         }
-        debug("placed compressed layout");
+        debug("success, placed compressed layout");
 
         return (draw_corridors());
     }
@@ -2006,16 +1991,18 @@ next:
                 if (n->has_exit_down) {
                     auto o = node_rooms[x][y+1];
                     if (!o) {
-                        debug("dungeon: bug");
+                        debug("bug");
                         DIE("had exit down at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->down_exits.size());
                     auto odoori = random_range(0, o->up_exits.size());
                     if (rdoori >= r->down_exits.size()) {
-                        debug("dungeon: bug");
+                        debug("bug");
+                        DIE("bug");
                     }
                     if (odoori >= o->up_exits.size()) {
-                        debug("dungeon: bug");
+                        debug("bug");
+                        DIE("bug");
                     }
 
                     auto rdoor = r->down_exits[rdoori];
@@ -2023,10 +2010,7 @@ next:
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
-#if 0
-printf("  node %d %d %d %d down room (%d,%d) to (%d,%d), doors %d,%d to %d,%d\n", x, y, rdoori, odoori,
-       r->at.x, r->at.y, o->at.x, o->at.y, start.x, start.y, end.x, end.y);
-#endif
+                    
                     if (!draw_corridor(start, end, Charmap::CORRIDOR)) {
                         return (false);
                     }
@@ -2035,16 +2019,18 @@ printf("  node %d %d %d %d down room (%d,%d) to (%d,%d), doors %d,%d to %d,%d\n"
                 if (n->has_exit_right) {
                     auto o = node_rooms[x+1][y];
                     if (!o) {
-                        debug("dungeon: bug");
+                        debug("bug");
                         DIE("had exit right at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->right_exits.size());
                     auto odoori = random_range(0, o->left_exits.size());
                     if (rdoori >= r->right_exits.size()) {
-                        debug("dungeon: bug");
+                        debug("bug");
+                        DIE("bug");
                     }
                     if (odoori >= o->left_exits.size()) {
-                        debug("dungeon: bug");
+                        debug("bug");
+                        DIE("bug");
                     }
 
                     auto rdoor = r->right_exits[rdoori];
@@ -2052,10 +2038,7 @@ printf("  node %d %d %d %d down room (%d,%d) to (%d,%d), doors %d,%d to %d,%d\n"
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
-#if 0
-printf("  node %d %d %d %d right room (%d,%d) to (%d,%d), doors %d,%d to %d,%d\n", x, y, rdoori, odoori,
-       r->at.x, r->at.y, o->at.x, o->at.y, start.x, start.y, end.x, end.y);
-#endif
+                    
                     if (!draw_corridor(start, end, Charmap::CORRIDOR)) {
                         return (false);
                     }
@@ -2064,16 +2047,18 @@ printf("  node %d %d %d %d right room (%d,%d) to (%d,%d), doors %d,%d to %d,%d\n
                 if (n->has_secret_exit_down) {
                     auto o = node_rooms[x][y+1];
                     if (!o) {
-                        debug("dungeon: bug");
+                        debug("bug");
                         DIE("had secret exit down at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->down_exits.size());
                     auto odoori = random_range(0, o->up_exits.size());
                     if (rdoori >= r->down_exits.size()) {
-                        debug("dungeon: bug");
+                        debug("bug");
+                        DIE("bug");
                     }
                     if (odoori >= o->up_exits.size()) {
-                        debug("dungeon: bug");
+                        debug("bug");
+                        DIE("bug");
                     }
 
                     auto rdoor = r->down_exits[rdoori];
@@ -2081,10 +2066,7 @@ printf("  node %d %d %d %d right room (%d,%d) to (%d,%d), doors %d,%d to %d,%d\n
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
-#if 0
-printf("  node %d %d %d %d secret down room (%d,%d) to (%d,%d), doors %d,%d to %d,%d\n", x, y, rdoori, odoori,
-       r->at.x, r->at.y, o->at.x, o->at.y, start.x, start.y, end.x, end.y);
-#endif
+                    
                     if (!draw_corridor(start, end, Charmap::SECRET_CORRIDOR)) {
                         return (false);
                     }
@@ -2093,16 +2075,17 @@ printf("  node %d %d %d %d secret down room (%d,%d) to (%d,%d), doors %d,%d to %
                 if (n->has_secret_exit_right) {
                     auto o = node_rooms[x+1][y];
                     if (!o) {
-                        debug("dungeon: bug");
+                        debug("bug");
                         DIE("had secret exit right at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->right_exits.size());
                     auto odoori = random_range(0, o->left_exits.size());
                     if (rdoori >= r->right_exits.size()) {
-                        debug("dungeon: bug");
+                        debug("bug");
                     }
                     if (odoori >= o->left_exits.size()) {
-                        debug("dungeon: bug");
+                        debug("bug");
+                        DIE("bug");
                     }
 
                     auto rdoor = r->right_exits[rdoori];
@@ -2110,10 +2093,7 @@ printf("  node %d %d %d %d secret down room (%d,%d) to (%d,%d), doors %d,%d to %
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
-#if 0
-printf("  node %d %d %d %d secret right room (%d,%d) to (%d,%d), doors %d,%d to %d,%d\n", x, y, rdoori, odoori,
-       r->at.x, r->at.y, o->at.x, o->at.y, start.x, start.y, end.x, end.y);
-#endif
+                    
                     if (!draw_corridor(start, end, Charmap::SECRET_CORRIDOR)) {
                         return (false);
                     }
@@ -2133,7 +2113,7 @@ class Dungeon *dungeon_test (void)
         //
         // smaller node numbers mean larger rooms
         //
-        /* auto d = new */ Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3);
+        /* auto d = new */ Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3, x);
     }
 
     return (nullptr);
@@ -2141,7 +2121,7 @@ class Dungeon *dungeon_test (void)
 int x = 666;
 CON("seed: %d", x);
 mysrand(x);
-    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3);
+    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3, x);
 
     return (d);
 #endif
