@@ -41,6 +41,7 @@ public:
      * Final placement of this room in the dungeon. 
      */
     point                    at {};
+    point                    rollback_at {};
     bool                     placed {false};
 
     std::vector<point>       left_exits;

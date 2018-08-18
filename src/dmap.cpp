@@ -7,6 +7,34 @@
 #include "my_main.h"
 #include "my_dmap.h"
 
+void dmap_print_walls (dmap *d)
+{_
+    int16_t x;
+    int16_t y;
+
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
+            int16_t e = d->val[x][y];
+            if (e == DMAP_IS_WALL) {
+                printf("O");
+                continue;
+            }
+            if (e == DMAP_IS_PASSABLE) {
+                printf(" ");
+                continue;
+            }
+
+            if (e > 0) {
+                printf("%d", e % 10);
+            } else {
+                printf(".");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 void dmap_print (dmap *d)
 {_
     int16_t x;
@@ -16,7 +44,11 @@ void dmap_print (dmap *d)
         for (x = 0; x < MAP_WIDTH; x++) {
             int16_t e = d->val[x][y];
             if (e == DMAP_IS_WALL) {
-                printf("#  ");
+                printf("O  ");
+                continue;
+            }
+            if (e == DMAP_IS_PASSABLE) {
+                printf("_  ");
                 continue;
             }
 
@@ -29,6 +61,20 @@ void dmap_print (dmap *d)
         printf("\n");
     }
     printf("\n");
+}
+
+uint64_t dmap_hash (dmap *d)
+{_
+    uint64_t hash = 0;
+
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            int16_t e = d->val[x][y];
+            hash += e * x * y;
+            hash --;
+        }
+    }
+    return (hash);
 }
 
 /*
@@ -56,6 +102,19 @@ void dmap_process (dmap *D)
     memset(valid, 1, sizeof(valid));
     memset(orig_valid, 1, sizeof(valid));
 
+    //
+    // Need a wall around the dmap or the search will sort of
+    // trickle off the map
+    //
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        D->val[0][y] = DMAP_IS_WALL;
+        D->val[MAP_WIDTH - 1][y] = DMAP_IS_WALL;
+    }
+    for (x = 0; x < MAP_WIDTH; x++) {
+        D->val[x][0] = DMAP_IS_WALL;
+        D->val[x][MAP_HEIGHT - 1] = DMAP_IS_WALL;
+    }
+
     for (y = 1; y < MAP_HEIGHT - 1; y++) {
         for (x = 1; x < MAP_WIDTH - 1; x++) {
             e = &D->val[x ][y];
@@ -80,19 +139,13 @@ void dmap_process (dmap *D)
         printf("run %d %d %d\n", count, x, y);
         count++;
 #endif
-        for (y = 1; y < MAP_HEIGHT - 1; y++) {
-            for (x = 1; x < MAP_WIDTH - 1; x++) {
+        for (y = 1; y < MAP_HEIGHT - 2; y++) {
+            for (x = 1; x < MAP_WIDTH - 2; x++) {
                 if (!orig_valid[x][y]) {
-#if 0
-printf("# ");
-#endif
                     continue;
                 }
 
                 if (!valid[x][y]) {
-#if 0
-printf("  ");
-#endif
                     continue;
                 }
 
@@ -163,25 +216,206 @@ printf("  ");
 
                     *e = lowest + 1;
                     changed = true;
-#if 0
-printf("* ");
-                } else {
-printf("%-2d", lowest);
                 }
             }
-printf("\n");
-#else
-                }
-            }
-#endif
         }
 
+#if 0
+        dmap_print(D);
+#endif
         memcpy(valid, new_valid, sizeof(new_valid));
 
     } while (changed);
 #if 0
     dmap_print(D);
 #endif
+}
+
+void dmap_process (dmap *D, point start, point end, int border)
+{_
+    int16_t x;
+    int16_t y;
+    int16_t a;
+    int16_t b;
+    int16_t c;
+    int16_t d;
+    int16_t *e;
+    int16_t f;
+    int16_t g;
+    int16_t h;
+    int16_t i;
+    int16_t lowest;
+    int16_t changed;
+    static uint8_t valid[MAP_WIDTH][MAP_HEIGHT];
+    static uint8_t new_valid[MAP_WIDTH][MAP_HEIGHT];
+    static uint8_t orig_valid[MAP_WIDTH][MAP_HEIGHT];
+
+    int minx, miny, maxx, maxy;
+    if (start.x < end.x) {
+        minx = start.x;
+        maxx = end.x;
+    } else {
+        minx = end.x;
+        maxx = start.x;
+    }
+    if (start.y < end.y) {
+        miny = start.y;
+        maxy = end.y;
+    } else {
+        miny = end.y;
+        maxy = start.y;
+    }
+    minx -= border;
+    miny -= border;
+    maxx += border;
+    maxy += border;
+
+    if (minx < 0) {
+        minx = 0;
+    }
+    if (miny < 0) {
+        miny = 0;
+    }
+    if (maxx >= MAP_WIDTH) {
+        maxx = MAP_WIDTH - 1;
+    }
+    if (maxy >= MAP_HEIGHT) {
+        maxy = MAP_HEIGHT - 1;
+    }
+
+    //
+    // Need a wall around the dmap or the search will sort of
+    // trickle off the map
+    //
+    for (y = miny; y < MAP_HEIGHT; y++) {
+        D->val[minx][y] = DMAP_IS_WALL;
+        D->val[maxx][y] = DMAP_IS_WALL;
+    }
+    for (x = 0; x < MAP_WIDTH; x++) {
+        D->val[x][miny] = DMAP_IS_WALL;
+        D->val[x][maxy] = DMAP_IS_WALL;
+    }
+#if 0
+    CON("dmap bounds %d,%d to %d,%d", minx, miny, maxx, maxy);
+    dmap_print(D);
+#endif
+
+    memset(valid, 1, sizeof(valid));
+    memset(orig_valid, 1, sizeof(valid));
+
+    for (y = miny + 1; y < maxy; y++) {
+        for (x = minx + 1; x < maxx; x++) {
+            e = &D->val[x ][y];
+            if (*e != DMAP_IS_WALL) {
+                continue;
+            }
+
+            valid[x][y] = 0;
+            orig_valid[x][y] = 0;
+        }
+    }
+
+#if 0
+    dmap_print(D);
+
+    int16_t count = 1;
+#endif
+
+    do {
+        changed = false;
+        memset(new_valid, 0, sizeof(new_valid));
+
+#if 0
+        printf("run %d %d %d\n", count, x, y);
+        count++;
+#endif
+        for (y = miny + 1; y < maxy - 1; y++) {
+            for (x = minx + 1; x < maxx - 1; x++) {
+                if (!orig_valid[x][y]) {
+                    continue;
+                }
+
+                if (!valid[x][y]) {
+                    continue;
+                }
+
+                e = &D->val[x  ][y];
+
+                /*
+                 * Avoid diagonal moves.
+                 */
+                if ((D->val[x-1][y] == DMAP_IS_WALL) ||
+                    (D->val[x][y-1] == DMAP_IS_WALL)) {
+                    a = DMAP_IS_WALL;
+                } else {
+                    a = D->val[x-1][y-1];
+                }
+
+                b = D->val[x  ][y-1];
+
+                if ((D->val[x+1][y] == DMAP_IS_WALL) ||
+                    (D->val[x][y-1] == DMAP_IS_WALL)) {
+                    c = DMAP_IS_WALL;
+                } else {
+                    c = D->val[x+1][y-1];
+                }
+
+                d = D->val[x-1][y];
+                f = D->val[x+1][y];
+
+                if ((D->val[x-1][y] == DMAP_IS_WALL) ||
+                    (D->val[x][y+1] == DMAP_IS_WALL)) {
+                    g = DMAP_IS_WALL;
+                } else {
+                    g = D->val[x-1][y+1];
+                }
+
+                h = D->val[x  ][y+1];
+
+                if ((D->val[x+1][y] == DMAP_IS_WALL) ||
+                    (D->val[x][y+1] == DMAP_IS_WALL)) {
+                    i = DMAP_IS_WALL;
+                } else {
+                    i = D->val[x+1][y+1];
+                }
+
+                if (a < b) {
+                    lowest = a;
+                } else {
+                    lowest = b;
+                }
+
+                if (c < lowest) { lowest = c; }
+                if (d < lowest) { lowest = d; }
+                if (f < lowest) { lowest = f; }
+                if (g < lowest) { lowest = g; }
+                if (h < lowest) { lowest = h; }
+                if (i < lowest) { lowest = i; }
+
+                if (*e - lowest >= 2) {
+
+                    new_valid[x-1][y-1] = 1;
+                    new_valid[x-1][y  ] = 1;
+                    new_valid[x-1][y+1] = 1;
+                    new_valid[x  ][y-1] = 1;
+                    new_valid[x  ][y  ] = 1;
+                    new_valid[x  ][y+1] = 1;
+                    new_valid[x+1][y-1] = 1;
+                    new_valid[x+1][y  ] = 1;
+                    new_valid[x+1][y+1] = 1;
+
+                    *e = lowest + 1;
+                    changed = true;
+                }
+            }
+        }
+#if 0
+        dmap_print(D);
+#endif
+
+        memcpy(valid, new_valid, sizeof(new_valid));
+
+    } while (changed);
 }
 
 static bool is_movement_blocking_at (const dmap *D, int x, int y)
