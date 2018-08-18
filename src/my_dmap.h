@@ -13,11 +13,14 @@ typedef struct dmap_ {
 } dmap;
 
 extern void dmap_process(dmap *d);
+extern void dmap_process(dmap *D, point start, point end, int border);
 extern void dmap_print(dmap *d);
+extern void dmap_print_walls(dmap *d);
 extern std::vector<point> dmap_solve(const dmap *d, const point end, 
                                      const point start);
 extern void dmap_l_shaped_path_to_diag(const dmap *D, 
                                        std::vector<point> &path);
+extern uint64_t dmap_hash(dmap *d);
 
 #define DMAP_IS_WALL     999
 #define DMAP_IS_PASSABLE 998
