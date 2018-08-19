@@ -13,7 +13,7 @@ public:
         NONE            = '\0',
         SPACE           = ' ',
         CORRIDOR        = '#',
-        SECRET_DOOR     = 'S',
+        SECRET_DOOR     = '$',
         DOOR            = 'D',
         WALL            = 'x',
         CWALL           = 'X',
