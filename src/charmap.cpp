@@ -69,6 +69,14 @@ void Charmap::init_charmaps (void)
     c->fg                   = "green";
     c->is_door              = true;
     c->is_movement_blocking = true;
+    
+    char_index             = Charmap::SECRET_DOOR;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->bg                   = "green";
+    c->fg                   = "green";
+    c->is_secret_door       = true;
+    c->is_movement_blocking = true;
 
     char_index             = Charmap::START;
     c = &all_charmaps[char_index];

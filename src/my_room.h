@@ -32,22 +32,56 @@ public:
     /*
      * Unique per room.
      */
-    uint32_t                 roomno {};
+    uint32_t                 roomno {0};
     std::vector<std::string> data[Charmap::DEPTH_MAX];
     int                      width {};
     int                      height {};
-
+    
     /*
-     * Final placement of this room in the dungeon. 
+     * All possible exits
      */
-    point                    at {};
-    point                    rollback_at {};
-    bool                     placed {false};
-
     std::vector<point>       left_exits;
     std::vector<point>       right_exits;
     std::vector<point>       up_exits;
     std::vector<point>       down_exits;
+    
+    /***********************************************************************
+     * This is all room status that changes when rooms are placed.
+     * The above is const.
+     ***********************************************************************/
+    point                    at {};
+    point                    rollback_at {};
+    
+    /*
+     * Set when a node uses this room
+     */
+    uint32_t                 depth {0};
+
+    /*
+     * Final placement of this room in the dungeon. 
+     */
+    bool                     placed {false};
+
+    
+    point                   left_door_at;
+    point                   right_door_at;
+    point                   up_door_at;
+    point                   down_door_at;
+    
+    point                   left_secret_door_at;
+    point                   right_secret_door_at;
+    point                   up_secret_door_at;
+    point                   down_secret_door_at;
+    
+    Roomp                   left_room {};
+    Roomp                   right_room {};
+    Roomp                   up_room {};
+    Roomp                   down_room {};
+    
+    Roomp                   secret_left_room {};
+    Roomp                   secret_right_room {};
+    Roomp                   secret_up_room {};
+    Roomp                   secret_down_room {};
 
     static Roomp room_new(void);
 

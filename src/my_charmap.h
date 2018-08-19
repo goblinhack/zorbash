@@ -13,6 +13,7 @@ public:
         NONE            = '\0',
         SPACE           = ' ',
         CORRIDOR        = '#',
+        SECRET_DOOR     = 'S',
         DOOR            = 'D',
         WALL            = 'x',
         CWALL           = 'X',
@@ -47,6 +48,7 @@ public:
     bool                      is_dusty             {false};
     bool                      is_corridor          {false};
     bool                      is_door              {false};
+    bool                      is_secret_door       {false};
     bool                      is_dungeon_way_up    {false};
     bool                      is_dungeon_way_down  {false};
     bool                      is_key               {false};
