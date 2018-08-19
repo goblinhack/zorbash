@@ -239,6 +239,8 @@ public:
         remove_all_doors();
         place_doors_between_depth_changes();
         
+        // center dungeon
+        // secret to secret 
         dump();
         debug("success, created dungeon");
     }
@@ -248,7 +250,7 @@ public:
         //return;
         //dump();
         //CON("dungeon (%u): %s", seed, s.c_str());
-        CON("dungeon (%u) %s hash %llx", seed, s.c_str(), level_hash());
+        CON("dungeon (%u) %s: hash %llx", seed, s.c_str(), level_hash());
     }
 
     Dungeon (int map_width,
@@ -1551,6 +1553,9 @@ public:
                      Charmap::SPACE);
         cells_room.resize(map_width * map_height, nullptr);
 
+        std::fill(cells.begin(), cells.end(), Charmap::SPACE);
+        std::fill(cells_room.begin(), cells_room.end(), nullptr);
+        
         memset(node_rooms, 0, sizeof(node_rooms));
 
         how_many_possible_rooms = (int) Room::all_rooms.size();
@@ -1622,8 +1627,7 @@ public:
                 }
 
                 if (!placed) {
-                    // debug("failed to place initial small rooms");
-                    LOG("failed to place initial small rooms");
+                    debug("failed to place initial small rooms");
                     return (false);
                 }
             }
@@ -2071,6 +2075,26 @@ next:
 
         for (auto x = 0; x < nodes->nodes_width; x++) {
             for (auto y = 0; y < nodes->nodes_height; y++) {
+                auto r = node_rooms[x][y];
+
+                if (!r) {
+                    continue;
+                }
+                
+                r->down_room = nullptr;
+                r->up_room = nullptr;
+                r->left_room = nullptr;
+                r->right_room = nullptr;
+                
+                r->secret_down_room = nullptr;
+                r->secret_up_room = nullptr;
+                r->secret_left_room = nullptr;
+                r->secret_right_room = nullptr;
+            }
+        }
+
+        for (auto x = 0; x < nodes->nodes_width; x++) {
+            for (auto y = 0; y < nodes->nodes_height; y++) {
 
                 auto n = nodes->getn(x, y);
                 if (!n->depth) {
@@ -2083,16 +2107,6 @@ next:
 
                 auto r = node_rooms[x][y];
 
-                r->down_room = nullptr;
-                r->up_room = nullptr;
-                r->left_room = nullptr;
-                r->right_room = nullptr;
-                
-                r->secret_down_room = nullptr;
-                r->secret_up_room = nullptr;
-                r->secret_left_room = nullptr;
-                r->secret_right_room = nullptr;
-                
                 if (n->has_exit_down) {
                     auto o = node_rooms[x][y+1];
                     if (!o) {
@@ -2301,52 +2315,52 @@ next:
                     }
                 }
                 
-                if (r->down_room) {
-                    auto o = r->down_room;
+                if (r->secret_down_room) {
+                    auto o = r->secret_down_room;
                     if (!o) {
                         DIE("room linkage bug");
                     }
                     
-                    if (r->depth > o->depth) {
-                        putc(r->down_secret_door_at.x, r->down_secret_door_at.y, 
-                             Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
-                    }
+                    putc(r->down_secret_door_at.x, r->down_secret_door_at.y, 
+                         Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
+                    putc(o->up_secret_door_at.x, o->up_secret_door_at.y, 
+                         Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
                 }
                 
-                if (r->up_room) {
-                    auto o = r->up_room;
+                if (r->secret_up_room) {
+                    auto o = r->secret_up_room;
                     if (!o) {
                         DIE("room linkage bug");
                     }
                     
-                    if (r->depth > o->depth) {
-                        putc(r->up_secret_door_at.x, r->up_secret_door_at.y, 
-                             Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
-                    }
+                    putc(r->up_secret_door_at.x, r->up_secret_door_at.y, 
+                         Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
+                    putc(o->down_secret_door_at.x, o->down_secret_door_at.y, 
+                         Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
                 }
                 
-                if (r->right_room) {
-                    auto o = r->right_room;
+                if (r->secret_right_room) {
+                    auto o = r->secret_right_room;
                     if (!o) {
                         DIE("room linkage bug");
                     }
                     
-                    if (r->depth > o->depth) {
-                        putc(r->right_secret_door_at.x, r->right_secret_door_at.y, 
-                             Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
-                    }
+                    putc(r->right_secret_door_at.x, r->right_secret_door_at.y, 
+                         Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
+                    putc(o->left_secret_door_at.x, o->left_secret_door_at.y, 
+                         Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
                 }
                 
-                if (r->left_room) {
-                    auto o = r->left_room;
+                if (r->secret_left_room) {
+                    auto o = r->secret_left_room;
                     if (!o) {
                         DIE("room linkage bug");
                     }
                     
-                    if (r->depth > o->depth) {
-                        putc(r->left_secret_door_at.x, r->left_secret_door_at.y, 
-                             Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
-                    }
+                    putc(r->left_secret_door_at.x, r->left_secret_door_at.y, 
+                         Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
+                    putc(o->right_secret_door_at.x, o->right_secret_door_at.y, 
+                         Charmap::DEPTH_WALLS, Charmap::SECRET_DOOR);
                 }
             }
         }
@@ -2355,7 +2369,7 @@ next:
 
 class Dungeon *dungeon_test (void)
 {
-#if 0
+#if 1
     auto x = 1000 ;
     while (x--) {
         //
