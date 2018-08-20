@@ -62,7 +62,6 @@ public:
      */
     bool                     placed {false};
 
-    
     point                   left_door_at;
     point                   right_door_at;
     point                   up_door_at;
@@ -82,6 +81,15 @@ public:
     Roomp                   secret_right_room {};
     Roomp                   secret_up_room {};
     Roomp                   secret_down_room {};
+    
+    uint8_t                 which_secret_door_up {0};
+    uint8_t                 which_secret_door_down {0};
+    uint8_t                 which_secret_door_left {0};
+    uint8_t                 which_secret_door_right {0};
+    uint8_t                 which_door_up {0};
+    uint8_t                 which_door_down {0};
+    uint8_t                 which_door_left {0};
+    uint8_t                 which_door_right {0};
 
     static Roomp room_new(void);
 
