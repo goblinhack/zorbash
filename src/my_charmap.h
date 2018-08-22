@@ -13,9 +13,10 @@ public:
         NONE            = '\0',
         SPACE           = ' ',
         CORRIDOR        = '#',
-        SECRET_DOOR     = '$',
+        SECRET_DOOR     = 'd',
         DOOR            = 'D',
         WALL            = 'x',
+        LADDER          = 'H',
         CWALL           = 'X',
         FLOOR           = '.',
         SECRET_CORRIDOR = '?',
@@ -27,6 +28,8 @@ public:
         WATER           = '_',
         ROCK            = 'r',
         TREASURE        = '$',
+        TRAP            = 'i',
+        MONST           = 'm',
         DEBUG           = '@',
     };
 
@@ -38,11 +41,10 @@ public:
         DEPTH_MAX,
     };
 
-    std::string               fg;
-    std::string               bg;
     char                      c;
     bool                      is_movement_blocking {false};
     bool                      is_wall              {false};
+    bool                      is_ladder            {false};
     bool                      is_cwall             {false};
     bool                      is_floor             {false};
     bool                      is_dusty             {false};
@@ -58,6 +60,8 @@ public:
     bool                      is_water             {false};
     bool                      is_rock              {false};
     bool                      is_treasure          {false};
+    bool                      is_monst             {false};
+    bool                      is_trap              {false};
 
     static std::vector<Charmap> all_charmaps;
     static void init_charmaps(void);
