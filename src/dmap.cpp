@@ -8,13 +8,13 @@
 #include "my_dmap.h"
 
 void dmap_print_walls (dmap *d)
-{_
-    int16_t x;
-    int16_t y;
+{
+    uint8_t x;
+    uint8_t y;
 
     for (y = 0; y < MAP_HEIGHT; y++) {
         for (x = 0; x < MAP_WIDTH; x++) {
-            int16_t e = d->val[x][y];
+            uint8_t e = d->val[x][y];
             if (e == DMAP_IS_WALL) {
                 printf("O");
                 continue;
@@ -36,13 +36,13 @@ void dmap_print_walls (dmap *d)
 }
 
 void dmap_print (dmap *d)
-{_
-    int16_t x;
-    int16_t y;
+{
+    uint8_t x;
+    uint8_t y;
 
     for (y = 0; y < MAP_HEIGHT; y++) {
         for (x = 0; x < MAP_WIDTH; x++) {
-            int16_t e = d->val[x][y];
+            uint8_t e = d->val[x][y];
             if (e == DMAP_IS_WALL) {
                 printf("O  ");
                 continue;
@@ -64,12 +64,12 @@ void dmap_print (dmap *d)
 }
 
 uint64_t dmap_hash (dmap *d)
-{_
+{
     uint64_t hash = 0;
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            int16_t e = d->val[x][y];
+            uint8_t e = d->val[x][y];
             hash += e * x * y;
             hash --;
         }
@@ -81,20 +81,20 @@ uint64_t dmap_hash (dmap *d)
  * An optimized djkstra map that only looks at map areas that change.
  */
 void dmap_process (dmap *D)
-{_
-    int16_t x;
-    int16_t y;
-    int16_t a;
-    int16_t b;
-    int16_t c;
-    int16_t d;
-    int16_t *e;
-    int16_t f;
-    int16_t g;
-    int16_t h;
-    int16_t i;
-    int16_t lowest;
-    int16_t changed;
+{
+    uint8_t x;
+    uint8_t y;
+    uint8_t a;
+    uint8_t b;
+    uint8_t c;
+    uint8_t d;
+    uint8_t *e;
+    uint8_t f;
+    uint8_t g;
+    uint8_t h;
+    uint8_t i;
+    uint8_t lowest;
+    uint8_t changed;
     static uint8_t valid[MAP_WIDTH][MAP_HEIGHT];
     static uint8_t new_valid[MAP_WIDTH][MAP_HEIGHT];
     static uint8_t orig_valid[MAP_WIDTH][MAP_HEIGHT];
@@ -128,7 +128,7 @@ void dmap_process (dmap *D)
     }
 
 #if 0
-    int16_t count = 1;
+    uint8_t count = 1;
 #endif
 
     do {
@@ -232,22 +232,21 @@ void dmap_process (dmap *D)
 }
 
 void dmap_process (dmap *D, point start, point end)
-{_
-    int16_t x;
-    int16_t y;
-    int16_t a;
-    int16_t b;
-    int16_t c;
-    int16_t d;
-    int16_t *e;
-    int16_t f;
-    int16_t g;
-    int16_t h;
-    int16_t i;
-    int16_t lowest;
-    int16_t changed;
+{
+    uint8_t x;
+    uint8_t y;
+    uint8_t a;
+    uint8_t b;
+    uint8_t c;
+    uint8_t d;
+    uint8_t *e;
+    uint8_t f;
+    uint8_t g;
+    uint8_t h;
+    uint8_t i;
+    uint8_t lowest;
+    uint8_t changed;
     static uint8_t valid[MAP_WIDTH][MAP_HEIGHT];
-    static uint8_t new_valid[MAP_WIDTH][MAP_HEIGHT];
     static uint8_t orig_valid[MAP_WIDTH][MAP_HEIGHT];
 
     int minx, miny, maxx, maxy;
@@ -315,12 +314,11 @@ void dmap_process (dmap *D, point start, point end)
 #if 0
     dmap_print(D);
 
-    int16_t count = 1;
+    uint8_t count = 1;
 #endif
 
     do {
         changed = false;
-        memset(new_valid, 0, sizeof(new_valid));
 
 #if 0
         printf("run %d %d %d\n", count, x, y);
@@ -390,17 +388,6 @@ void dmap_process (dmap *D, point start, point end)
                 if (i < lowest) { lowest = i; }
 
                 if (*e - lowest >= 2) {
-
-                    new_valid[x-1][y-1] = 1;
-                    new_valid[x-1][y  ] = 1;
-                    new_valid[x-1][y+1] = 1;
-                    new_valid[x  ][y-1] = 1;
-                    new_valid[x  ][y  ] = 1;
-                    new_valid[x  ][y+1] = 1;
-                    new_valid[x+1][y-1] = 1;
-                    new_valid[x+1][y  ] = 1;
-                    new_valid[x+1][y+1] = 1;
-
                     *e = lowest + 1;
                     changed = true;
                 }
@@ -409,14 +396,11 @@ void dmap_process (dmap *D, point start, point end)
 #if 0
         dmap_print(D);
 #endif
-
-        memcpy(valid, new_valid, sizeof(new_valid));
-
     } while (changed);
 }
 
 static bool is_movement_blocking_at (const dmap *D, int x, int y)
-{_
+{
     if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
         return (true);
     }
@@ -432,7 +416,7 @@ static bool is_movement_blocking_at (const dmap *D, int x, int y)
  * Make L shaped moves into diagonal ones
  */
 void dmap_l_shaped_path_to_diag (const dmap *D, std::vector<point> &path)
-{_
+{
     for (;/*ever*/;) {
         auto modified = false;
         size_t i = 0;
@@ -522,7 +506,7 @@ void dmap_l_shaped_path_to_diag (const dmap *D, std::vector<point> &path)
 std::vector<point> dmap_solve (const dmap *D, 
                                const point start,
                                const point end)
-{_
+{
     static const std::vector<point> all_deltas = {
         point(0, -1),
         point(-1, 0),

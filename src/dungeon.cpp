@@ -173,11 +173,6 @@ public:
     uint32_t                                  seed;
     
     //
-    // Used in rollback so we use the same seed for corridors
-    //
-    uint32_t                                  corridor_seed;
-    
-    //
     // Room pointers on the above nodes map
     //
     Roomp                                     node_rooms[MAX_NODES_WIDTH]
@@ -216,8 +211,6 @@ public:
                 continue;
             }
 
-            corridor_seed = myrand();
-            
             //
             // Now try and replace some of the small rooms with larger ones
             //
@@ -233,7 +226,11 @@ public:
             //
             // Drag rooms to the center of the map
             //
-            if (compress_room_layout_to_center_of_map()) {
+            if (!compress_room_layout_to_center_of_map()) {
+                continue;
+            }
+            
+            if (compress_room_corridors()) {
                 break;
             }
             
@@ -251,8 +248,8 @@ public:
 
     void debug (std::string s)
     {_
-        //return;
-        dump();
+        return;
+        //dump();
         //CON("dungeon (%u): %s", seed, s.c_str());
         CON("dungeon (%u) %s: hash %llx", seed, s.c_str(), level_hash());
     }
@@ -329,6 +326,17 @@ public:
             DIE("putting nul char at %d,%d,%d", x, y, z);
         }
         auto p = cell_addr(x, y, z);
+        if (p != nullptr) {
+            *p = c;
+        }
+    }
+    
+    /*
+     * Puts a tile on the map
+     */
+    void putc_fast (const int x, const int y, const int z, const char c)
+    {
+        auto p = cell_addr_fast(x, y, z);
         if (p != nullptr) {
             *p = c;
         }
@@ -643,29 +651,20 @@ public:
 
     bool is_floor_or_corridor_at_fast (const int x, const int y)
     {
-        for (auto d = 0; d < map_depth; d++) {
-            auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+        const auto d = Charmap::DEPTH_FLOOR;
+        auto c = getc_fast(x, y, d);
+        auto v = Charmap::all_charmaps[c];
 
-            if (v.is_floor ||
-                v.is_corridor) {
-                return true;
-            }
-        }
-        return false;
+        return (v.is_floor || v.is_corridor);
     }
 
     bool is_floor_at_fast (const int x, const int y)
     {
-        for (auto d = 0; d < map_depth; d++) {
-            auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+        const auto d = Charmap::DEPTH_FLOOR;
+        auto c = getc_fast(x, y, d);
+        auto v = Charmap::all_charmaps[c];
 
-            if (v.is_floor) {
-                return true;
-            }
-        }
-        return false;
+        return (v.is_floor);
     }
 
     bool is_dusty_at_fast (const int x, const int y)
@@ -683,15 +682,11 @@ public:
 
     bool is_corridor_at_fast (const int x, const int y)
     {
-        for (auto d = 0; d < map_depth; d++) {
-            auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+        const auto d = Charmap::DEPTH_FLOOR;
+        auto c = getc_fast(x, y, d);
+        auto v = Charmap::all_charmaps[c];
 
-            if (v.is_corridor || v.is_dusty) {
-                return true;
-            }
-        }
-        return false;
+        return (v.is_corridor || v.is_dusty);
     }
 
     bool is_wall_at_fast (const int x, const int y)
@@ -1302,7 +1297,7 @@ public:
                 auto dx = 0;
                 for (auto c : s) {
                     if (c != Charmap::SPACE) {
-                        putc(x + dx, y + dy, d, c);
+                        putc_fast(x + dx, y + dy, d, c);
                     }
                     dx++;
                 }
@@ -1409,7 +1404,7 @@ public:
         printf("\n");
     }
 
-    bool draw_corridor (point start, point end, char w)
+    int draw_corridor (point start, point end, char w)
     {
         dmap d;
 
@@ -1417,11 +1412,11 @@ public:
 
 #if 0
         if (w == Charmap::CORRIDOR) {
-            CON("create corridor, between %d,%d and %d,%d",
+            LOG("create corridor, between %d,%d and %d,%d",
                 start.x, start.y,
                 end.x, end.y);
         } else {
-            CON("create secret corridor, between %d,%d and %d,%d",
+            LOG("create secret corridor, between %d,%d and %d,%d",
                 start.x, start.y,
                 end.x, end.y);
         }
@@ -1445,7 +1440,7 @@ public:
             maxy = dmap_start.y;
         }
 
-        auto border = 4;
+        auto border = 3;
         minx -= border;
         miny -= border;
         maxx += border;
@@ -1501,7 +1496,7 @@ public:
         dmap_process(&d, dmap_start, dmap_end);
         //dmap_print_walls(&d);
 
-        //CON("dmap hash: %llx level hash %llx", dmap_hash(&d), level_hash());
+        //LOG("dmap hash: %llx level hash %llx", dmap_hash(&d), level_hash());
         auto p = dmap_solve(&d, start, end);
 
         //
@@ -1512,7 +1507,7 @@ public:
                 putc(c.x, c.y, Charmap::DEPTH_FLOOR, Charmap::DEBUG);
             }
             debug("failed to create corridor, too long a corridor");
-            return (false);
+            return (0);
         }
 
         //
@@ -1534,10 +1529,10 @@ public:
             putc(end.x, end.y, Charmap::DEPTH_WALLS, Charmap::DEBUG);
 
             debug("failed to create corridor, end not found");
-            CON("dungeon: failed to create corridor, end not found between %d,%d and %d,%d",
+            LOG("dungeon: failed to create corridor, end not found between %d,%d and %d,%d",
                 start.x, start.y,
                 end.x, end.y);
-            return (false);
+            return (0);
         }
 
         for (auto c : p) {
@@ -1548,7 +1543,7 @@ public:
         putc(end.x, end.y, Charmap::DEPTH_WALLS, Charmap::DOOR);
 
         //debug("placed corridor");
-        return (true);
+        return (p.size());
     }
 
     void reset_possible_rooms (void)
@@ -1794,7 +1789,6 @@ public:
                 }
             }
 next:
-            mysrand(corridor_seed);
             if (success) {
                 if (!draw_corridors()) {
                     debug("failed to place unsolvable larger level");
@@ -1896,8 +1890,6 @@ next:
         // Make sure we start with a solvable room
         //
         save_level();
-        auto good_seed = corridor_seed;
-        mysrand(good_seed);
         if (!draw_corridors()) {
             debug("level before adding corridors is NOT solvable");
             return (false);
@@ -1918,9 +1910,6 @@ next:
             for (unsigned int rs = 0;
                  rs < (unsigned int) all_placed_rooms.size();
                  rs++) {
-
-                auto last_seed = myrand();
-                mysrand(last_seed);
 
                 auto r = all_placed_rooms[rs];
                 auto skip_roomno = r->roomno;
@@ -2027,29 +2016,294 @@ next:
                 std::vector<char> cells_ok = cells;
 
                 if (!draw_corridors()) {
-                    mysrand(good_seed);
+                    debug("failed to placing corridors, rollback");
                     restore_level();
-                    if (!draw_corridors()) {
-                        DIE("rolled back level was not solvable");
-                    }
 
                     if (failed_attempts++ > 20) {
                         debug("success, placed compressed layout");
                         return (true);
                     }
-
-                    restore_level();
-                    debug("failed to placing corridors, rollback");
                 } else {
                     debug("success, placed corridors");
                     failed_attempts = 0;
-                    good_seed = last_seed;
                     cells = cells_ok;
                     save_level();
                 }
             }
         }
+        
         debug("success, placed compressed layout");
+        return (true);
+    }
+    
+    bool compress_room_corridors (void)
+    {
+        auto delta = 1;
+
+        all_placed_rooms.resize(0);
+
+        for (auto r : Room::all_rooms) {
+            r->placed = false;
+        }
+
+        for (auto x = 0; x < nodes->nodes_width; x++) {
+            for (auto y = 0; y < nodes->nodes_height; y++) {
+                auto r = node_rooms[x][y];
+                if (!r) {
+                    continue;
+                }
+
+                all_placed_rooms.push_back(r);
+                r->placed = true;
+            }
+        }
+
+        //
+        // Make sure we start with a solvable room
+        //
+        save_level();
+        auto corridor_count = draw_corridors();
+        if (!corridor_count) {
+            debug("level before adding corridors is NOT solvable");
+            return (false);
+        }
+
+        dump();
+        debug("level before adding shorter corridors is solvable");
+        restore_level();
+
+        auto failed_to_place_all_corridors = 0;
+        auto failed_to_make_shorter_corridors = 0;
+        auto attempts_to_move_rooms_closer = 200;
+
+        choose_room_doors();
+        
+        while (attempts_to_move_rooms_closer--) {
+
+            center_room_layout();
+            
+            for (unsigned int rs = 0;
+                 rs < (unsigned int) all_placed_rooms.size();
+                 rs++) {
+
+                std::fill(cells.begin(), cells.end(), Charmap::SPACE);
+                
+                /*
+                 * which rooms shall we move?
+                 */
+                for (auto x = 0; x < nodes->nodes_width; x++) {
+                    for (auto y = 0; y < nodes->nodes_height; y++) {
+                        auto r = node_rooms[x][y];
+                        if (r) {
+                            r->skip = (random_range(0, 100) < 10);
+                        }
+                    }
+                }
+                
+                /*
+                 * Place all rooms that are not going to move
+                 */
+                for (auto x = 0; x < nodes->nodes_width; x++) {
+                    for (auto y = 0; y < nodes->nodes_height; y++) {
+                        auto r = node_rooms[x][y];
+                        if (!r) {
+                            continue;
+                        }
+                        if (!r->skip) {
+                            map_place_room_chars(r, r->at.x, r->at.y);
+                        }
+                    }
+                }
+
+                /*
+                 * Place the rooms we want to move
+                 */
+                auto moved = false;
+                for (auto x = 0; x < nodes->nodes_width; x++) {
+                    for (auto y = 0; y < nodes->nodes_height; y++) {
+                        auto r = node_rooms[x][y];
+                        if (!r) {
+                            continue;
+                        }
+                        if (!r->skip) {
+                            continue;
+                        }
+
+                        auto moved_one = false;
+                        switch (random_range(0, 4)) {
+                        case 0:
+                            if (map_can_room_be_places(r, r->at.x - delta, r->at.y)) {
+                                r->at.x--;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x + delta, r->at.y)) {
+                                r->at.x++;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x, r->at.y - delta)) {
+                                r->at.y--;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x, r->at.y + delta)) {
+                                r->at.y++;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            break;
+
+                        case 1:
+                            if (map_can_room_be_places(r, r->at.x + delta, r->at.y)) {
+                                r->at.x++;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x - delta, r->at.y)) {
+                                r->at.x--;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x, r->at.y - delta)) {
+                                r->at.y--;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x, r->at.y + delta)) {
+                                r->at.y++;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            break;
+                            
+                        case 2:
+                            if (map_can_room_be_places(r, r->at.x, r->at.y - delta)) {
+                                r->at.y--;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x - delta, r->at.y)) {
+                                r->at.x--;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x + delta, r->at.y)) {
+                                r->at.x++;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x, r->at.y + delta)) {
+                                r->at.y++;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            break;
+
+                        case 3:
+                            if (map_can_room_be_places(r, r->at.x, r->at.y + delta)) {
+                                r->at.y++;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x - delta, r->at.y)) {
+                                r->at.x--;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x + delta, r->at.y)) {
+                                r->at.x++;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            if (map_can_room_be_places(r, r->at.x, r->at.y - delta)) {
+                                r->at.y--;
+                                map_place_room_chars(r, r->at.x, r->at.y);
+                                moved_one = true;
+                                break;
+                            }
+                            break;
+                        case 4:
+                            DIE("wtf");
+                        }
+                        
+                        if (moved_one) {
+                            moved = true;
+                        } else {
+                            map_place_room_chars(r, r->at.x, r->at.y);
+                        }
+                    }
+                }
+
+                if (!moved) {
+                    continue;
+                }
+
+                //
+                // Ok we've moved one room. If we can still place corridors
+                // then we can keep going. If not, rollback the room to the
+                // last that was solvable.
+                //
+                std::vector<char> cells_ok = cells;
+
+                auto new_corridor_count = draw_corridors();
+//CON("corridor_count %d new_corridor_count %d 
+//failed_to_make_shorter_corridors %d ",corridor_count, new_corridor_count, 
+//failed_to_make_shorter_corridors);
+                if (new_corridor_count >= corridor_count) {
+                    debug("failed to place shorter corridors, rollback");
+                    
+                    restore_level();
+                    if (!draw_corridors()) {
+                        DIE("rolled back level was not solvable");
+                    }
+
+                    if (failed_to_make_shorter_corridors++ > 100) {
+                        debug("success, placed shorter corridor layout");
+                        return (true);
+                    }
+
+                    restore_level();
+                } else if (!new_corridor_count) {
+                    debug("failed to place all corridors, rollback");
+                    
+                    restore_level();
+                    if (!draw_corridors()) {
+                        DIE("rolled back level was not solvable");
+                    }
+
+                    if (failed_to_place_all_corridors++ > 20) {
+                        debug("success, placed shorter corridor layout");
+                        return (true);
+                    }
+
+                    restore_level();
+                } else {
+                    corridor_count = new_corridor_count;
+                    debug("success, placed corridors");
+                    failed_to_place_all_corridors = 0;
+                    failed_to_make_shorter_corridors = 0;
+                    cells = cells_ok;
+                    save_level();
+                }
+            }
+        }
+        debug("success, placed shorter corridor layout");
 
         return (draw_corridors());
     }
@@ -2194,7 +2448,7 @@ next:
     //
     // Join the corridors of each room
     //
-    bool draw_corridors (void)
+    int draw_corridors (void)
     {
         for (auto x = 0; x < map_width; x++) {
             for (auto y = 0; y < map_height; y++) {
@@ -2204,6 +2458,8 @@ next:
             }
         }
 
+        auto corridor_count = 0;
+        
         for (auto x = 0; x < nodes->nodes_width; x++) {
             for (auto y = 0; y < nodes->nodes_height; y++) {
 
@@ -2233,9 +2489,11 @@ next:
                     r->down_door_at = start;
                     o->up_door_at = end;
                     
-                    if (!draw_corridor(start, end, Charmap::CORRIDOR)) {
-                        return (false);
+                    auto cnt = draw_corridor(start, end, Charmap::CORRIDOR);
+                    if (!cnt) {
+                        return (0);
                     }
+                    corridor_count += cnt;
                 }
 
                 if (n->has_exit_right) {
@@ -2253,9 +2511,11 @@ next:
                     r->right_door_at = start;
                     o->left_door_at = end;
                     
-                    if (!draw_corridor(start, end, Charmap::CORRIDOR)) {
-                        return (false);
+                    auto cnt = draw_corridor(start, end, Charmap::CORRIDOR);
+                    if (!cnt) {
+                        return (0);
                     }
+                    corridor_count += cnt;
                 }
 
                 if (n->has_secret_exit_down) {
@@ -2273,9 +2533,11 @@ next:
                     r->down_secret_door_at = start;
                     o->up_secret_door_at = end;
                     
-                    if (!draw_corridor(start, end, Charmap::SECRET_CORRIDOR)) {
-                        return (false);
+                    auto cnt = draw_corridor(start, end, Charmap::SECRET_CORRIDOR);
+                    if (!cnt) {
+                        return (0);
                     }
+                    corridor_count += cnt;
                 }
 
                 if (n->has_secret_exit_right) {
@@ -2293,14 +2555,16 @@ next:
                     r->right_secret_door_at = start;
                     o->left_secret_door_at = end;
                     
-                    if (!draw_corridor(start, end, Charmap::SECRET_CORRIDOR)) {
-                        return (false);
+                    auto cnt = draw_corridor(start, end, Charmap::SECRET_CORRIDOR);
+                    if (!cnt) {
+                        return (0);
                     }
+                    corridor_count += cnt;
                 }
             }
         }
 
-        return (true);
+        return (corridor_count);
     }
     
     void assign_rooms_to_tiles (void)

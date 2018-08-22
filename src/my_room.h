@@ -90,6 +90,11 @@ public:
     uint8_t                 which_door_down {0};
     uint8_t                 which_door_left {0};
     uint8_t                 which_door_right {0};
+    
+    //
+    // Temp used for skipping rooms in dungeon placement
+    // 
+    bool                    skip {};
 
     static Roomp room_new(void);
 
