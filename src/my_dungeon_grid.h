@@ -7,6 +7,7 @@
 //
 // Implements layered cycles that can be used to then create a dungeon
 //
+#include "my_dmap.h"
 
 class Node {
 public:
@@ -37,11 +38,19 @@ public:
     bool has_secret_exit_down                 {false};
     bool has_secret_exit_left                 {false};
     bool has_secret_exit_right                {false};
+    bool has_path_up                          {false};
+    bool has_path_down                        {false};
+    bool has_path_left                        {false};
+    bool has_path_right                       {false};
 
     /*
      * Update init_nodes on changes
      */
-
+    bool has_path (void)
+    {
+        return (has_path_down || has_path_up || has_path_left || has_path_right);
+    }
+    
     void set_has_exit_up (bool v)
     {
         has_exit_up = v;
@@ -131,4 +140,6 @@ public:
     bool node_is_free(Node *n);
     bool node_is_a_room(Node *n);
     void remove_stubs();
+    void create_path_to_exit(int pass);
+    void dmap_print_walls(dmap *d);
 };

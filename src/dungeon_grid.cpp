@@ -237,6 +237,17 @@ redo:
     //
     place_entrance();
     place_exit();
+    
+    //
+    // First time we consider secret exitsd
+    //
+    create_path_to_exit(1);
+
+    //
+    // Second time we ignore them to ensure they are not considered
+    // as on the main path
+    //
+    create_path_to_exit(2);
 
     debug("final map");
 }
@@ -290,6 +301,18 @@ void Nodes::debug (std::string msg)
             if (node->has_secret_exit_right) {
                 out[oy][ox+1] = '?';
                 out[oy][ox+2] = '?';
+            }
+            if (node->has_path_up) {
+                out[oy+1][ox+1] = '^';
+            }
+            if (node->has_path_down) {
+                out[oy+1][ox+1] = 'v';
+            }
+            if (node->has_path_left) {
+                out[oy+1][ox+1] = '<';
+            }
+            if (node->has_path_right) {
+                out[oy+1][ox+1] = '>';
             }
             if (node->is_entrance) {
                 out[oy-1][ox-1] = 'S';
@@ -1448,6 +1471,171 @@ void Nodes::remove_stubs (void)
                 auto o = getn(x - 1, y);
                 if (!o->has_secret_exit_right) {
                     node->set_has_secret_exit_left(false);
+                }
+            }
+        }
+    }
+}
+
+void Nodes::dmap_print_walls (dmap *d)
+{
+    for (auto y = 0; y < nodes_height * 2 + 1; y++) {
+        for (auto x = 0; x < nodes_width * 2 + 1; x++) {
+            int16_t e = d->val[x][y];
+            if (e == DMAP_IS_WALL) {
+                printf("#");
+                continue;
+            }
+            if (e == DMAP_IS_PASSABLE) {
+                printf(".");
+                continue;
+            }
+
+            if (e > 0) {
+                printf("%d", e % 10);
+            } else {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void Nodes::create_path_to_exit (int pass)
+{
+    //
+    // Choose start and end of the dmap
+    //
+    point start;
+    point end;
+    
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto n = getn(x, y);
+            if (!n) {
+                continue;
+            }
+            if (n->is_entrance) {
+                start = point(x, y);
+            }
+            if (n->is_exit) {
+                end = point(x, y);
+            }
+        }
+    }
+    
+    dmap d;
+
+    memset(&d, 0, sizeof(d));
+
+    int minx, miny, maxx, maxy;
+    
+    minx = 0;
+    miny = 0;
+    maxx = nodes_width * 2 + 1;
+    maxy = nodes_height * 2 + 1;
+    
+    //
+    // Set up obstacles for the exit search
+    //
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            d.val[x][y] = DMAP_IS_WALL;
+        }
+    }
+
+    if (pass == 1) {
+        for (auto y = 0; y < nodes_height; y++) {
+            for (auto x = 0; x < nodes_width; x++) {
+                auto n = getn(x, y);
+                auto X = (x * 2) + 1;
+                auto Y = (y * 2) + 1;
+                if (n && node_is_a_room(n)) {
+                    if (n->has_exit_up || n->has_secret_exit_up) {
+                        d.val[X][Y-1] = DMAP_IS_PASSABLE;
+                    }
+                    if (n->has_exit_down || n->has_secret_exit_down) {
+                        d.val[X][Y+1] = DMAP_IS_PASSABLE;
+                    }
+                    if (n->has_exit_right || n->has_secret_exit_right) {
+                        d.val[X+1][Y] = DMAP_IS_PASSABLE;
+                    }
+                    if (n->has_exit_left || n->has_secret_exit_left) {
+                        d.val[X-1][Y] = DMAP_IS_PASSABLE;
+                    }
+                    d.val[X][Y] = DMAP_IS_PASSABLE;
+                } else {
+                    d.val[X][Y] = DMAP_IS_WALL;
+                }
+            }
+        }
+    } else {
+        for (auto y = 0; y < nodes_height; y++) {
+            for (auto x = 0; x < nodes_width; x++) {
+                auto n = getn(x, y);
+                auto X = (x * 2) + 1;
+                auto Y = (y * 2) + 1;
+                if (n && node_is_a_room(n)) {
+                    if (n->has_exit_up) {
+                        d.val[X][Y-1] = DMAP_IS_PASSABLE;
+                    }
+                    if (n->has_exit_down) {
+                        d.val[X][Y+1] = DMAP_IS_PASSABLE;
+                    }
+                    if (n->has_exit_right) {
+                        d.val[X+1][Y] = DMAP_IS_PASSABLE;
+                    }
+                    if (n->has_exit_left) {
+                        d.val[X-1][Y] = DMAP_IS_PASSABLE;
+                    }
+                    d.val[X][Y] = DMAP_IS_PASSABLE;
+                } else {
+                    d.val[X][Y] = DMAP_IS_WALL;
+                }
+            }
+        }
+
+    }
+        
+    d.val[end.x*2+1][end.y*2+1] = DMAP_IS_GOAL;
+    d.val[start.x*2+1][start.y*2+1] = DMAP_IS_PASSABLE;
+
+    point dmap_start(minx, miny);
+    point dmap_end(maxx, maxy);
+    dmap_process(&d, dmap_start, dmap_end);
+    dmap_print_walls(&d);
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto n = getn(x, y);
+            auto X = x*2 + 1;
+            auto Y = y*2 + 1;
+            
+            if (n && node_is_a_room(n)) {
+                if (d.val[X+1][Y] < d.val[X][Y]) {
+                    auto o = getn(x+1, y);
+                    if (o && node_is_a_room(o)) {
+                        n->has_path_right = true;
+                    }
+                }
+                if (d.val[X-1][Y] < d.val[X][Y]) {
+                    auto o = getn(x-1, y);
+                    if (o && node_is_a_room(o)) {
+                        n->has_path_left = true;
+                    }
+                }
+                if (d.val[X][Y+1] < d.val[X][Y]) {
+                    auto o = getn(x, y+1);
+                    if (o && node_is_a_room(o)) {
+                        n->has_path_down = true;
+                    }
+                }
+                if (d.val[X][Y-1] < d.val[X][Y]) {
+                    auto o = getn(x, y-1);
+                    if (o && node_is_a_room(o)) {
+                        n->has_path_up = true;
+                    }
                 }
             }
         }
