@@ -139,7 +139,7 @@ redo:
     while (depth < 10) {
         auto placed = snake_walk(depth, 10, pass);
 
-        CON("cyclic-dungeon: level depth %d placed %d nodes", depth, placed);
+        CON("node-grid: level depth %d placed %d nodes", depth, placed);
         if (!placed) {
             break;
         }
@@ -154,13 +154,13 @@ redo:
             //
             if (placed < 3) {
                 debug("failed initial level, did not place enough nodes");
-                CON("cyclic-dungeon: failed level depth %d placed only %d nodes, redo", depth, placed);
+                CON("node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
                 goto redo;
             }
         } else {
             if (placed < 2) {
                 debug("failed level, did not place enough nodes at depth");
-                CON("cyclic-dungeon: failed level depth %d placed only %d nodes, redo", depth, placed);
+                CON("node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
                 goto redo;
             }
         }
@@ -193,7 +193,7 @@ redo:
     while (secret_depth < 10) {
         auto placed = snake_walk(secret_depth, 10, pass);
 
-        CON("cyclic-dungeon: level depth %d placed %d secret nodes", secret_depth, placed);
+        CON("node-grid: level depth %d placed %d secret nodes", secret_depth, placed);
         if (!placed) {
             break;
         }
@@ -242,13 +242,28 @@ redo:
     // First time we consider secret exitsd
     //
     create_path_to_exit(1);
+    debug("created path to exit");
 
     //
     // Second time we ignore them to ensure they are not considered
     // as on the main path
     //
     create_path_to_exit(2);
+    debug("created path to exit, ignoring secret paths");
 
+    //
+    // Ensure each key can reach each lock
+    //
+    for (auto depth = 1; depth < max_depth; depth++) {
+        create_path_lock_to_key(depth);
+    }
+    debug("created path from keys to locks");
+
+    //
+    // Make nodes not on the direct path to the exit, bi directional
+    // so you cannot get stuck
+    //
+    make_paths_off_critical_path_reachable();
     debug("final map");
 }
 
@@ -279,12 +294,12 @@ void Nodes::debug (std::string msg)
                 out[oy-2][ox] = '|';
             }
             if (node->has_exit_left) {
-                out[oy][ox-1] = '_';
-                out[oy][ox-2] = '_';
+                out[oy][ox-1] = '-';
+                out[oy][ox-2] = '-';
             }
             if (node->has_exit_right) {
-                out[oy][ox+1] = '_';
-                out[oy][ox+2] = '_';
+                out[oy][ox+1] = '-';
+                out[oy][ox+2] = '-';
             }
             if (node->has_secret_exit_down) {
                 out[oy+1][ox] = '?';
@@ -302,29 +317,29 @@ void Nodes::debug (std::string msg)
                 out[oy][ox+1] = '?';
                 out[oy][ox+2] = '?';
             }
-            if (node->has_path_up) {
-                out[oy+1][ox+1] = '^';
+            if (node->dir_up) {
+                out[oy-1][ox-1] = '^';
             }
-            if (node->has_path_down) {
-                out[oy+1][ox+1] = 'v';
+            if (node->dir_down) {
+                out[oy-1][ox+1] = 'v';
             }
-            if (node->has_path_left) {
-                out[oy+1][ox+1] = '<';
+            if (node->dir_left) {
+                out[oy+1][ox-1] = '<';
             }
-            if (node->has_path_right) {
+            if (node->dir_right) {
                 out[oy+1][ox+1] = '>';
             }
             if (node->is_entrance) {
-                out[oy-1][ox-1] = 'S';
+                out[oy][ox-1] = 'S';
             }
             if (node->is_exit) {
-                out[oy-1][ox-1] = 'E';
+                out[oy][ox-1] = 'E';
             }
             if (node->is_lock) {
-                out[oy-1][ox-1] = 'D';
+                out[oy][ox-1] = 'D';
             }
             if (node->is_key) {
-                out[oy-1][ox-1] = 'K';
+                out[oy][ox-1] = 'K';
             }
 
             if (node->depth == depth_obstacle) {
@@ -342,9 +357,9 @@ void Nodes::debug (std::string msg)
         for (auto x = 0; x < nodes_width * step; x++) {
             s += out[y][x];
         }
-        CON("cyclic-dungeon: %s", s.c_str());
+        CON("node-grid: %s", s.c_str());
     }
-    CON("cyclic-dungeon: ^^^^^ %s ^^^^^", msg.c_str());
+    CON("node-grid: ^^^^^ %s ^^^^^", msg.c_str());
 
     for (auto y = 0; y < nodes_height; y++) {
         for (auto x = 0; x < nodes_width; x++) {
@@ -665,7 +680,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             auto tries = 1000;
             while (tries--) {
                 x = random_range(0, nodes_width);
-                y = random_range(0, nodes_height);
+                y = random_range(0, depth + 1);
 
                 auto o = getn(x, y);
                 if (node_is_free(o)) {
@@ -839,7 +854,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         //
         // Change dir
         //
-        if (random_range(0, 100) < 30) {
+        if (random_range(0, 100) < 90) {
             random_dir(&dx, &dy);
         }
 
@@ -850,7 +865,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         // where the fork corridor is
         //
         if (placed < max_placed) {
-            if (random_range(0, 100) < 50) {
+            if (random_range(0, 100) < 90) {
                 switch (random_range(0, 4)) {
                 case 0: 
                     if (x < nodes_width - 1) {
@@ -1340,7 +1355,7 @@ void Nodes::place_entrance (void)
     std::vector<point> s;
 
     for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+        for (auto y = 0; y < 1; y++) {
             auto o = getn(x, y);
             if (o->pass != 1) {
                 continue;
@@ -1604,7 +1619,7 @@ void Nodes::create_path_to_exit (int pass)
     point dmap_start(minx, miny);
     point dmap_end(maxx, maxy);
     dmap_process(&d, dmap_start, dmap_end);
-    dmap_print_walls(&d);
+    //dmap_print_walls(&d);
 
     for (auto y = 0; y < nodes_height; y++) {
         for (auto x = 0; x < nodes_width; x++) {
@@ -1616,26 +1631,306 @@ void Nodes::create_path_to_exit (int pass)
                 if (d.val[X+1][Y] < d.val[X][Y]) {
                     auto o = getn(x+1, y);
                     if (o && node_is_a_room(o)) {
-                        n->has_path_right = true;
+                        n->dir_up = false;
+                        n->dir_down = false;
+                        n->dir_left = false;
+                        n->dir_right = false;
+                        n->dir_right = true;
                     }
                 }
                 if (d.val[X-1][Y] < d.val[X][Y]) {
                     auto o = getn(x-1, y);
                     if (o && node_is_a_room(o)) {
-                        n->has_path_left = true;
+                        n->dir_up = false;
+                        n->dir_down = false;
+                        n->dir_left = false;
+                        n->dir_right = false;
+                        n->dir_left = true;
                     }
                 }
                 if (d.val[X][Y+1] < d.val[X][Y]) {
                     auto o = getn(x, y+1);
                     if (o && node_is_a_room(o)) {
-                        n->has_path_down = true;
+                        n->dir_up = false;
+                        n->dir_down = false;
+                        n->dir_left = false;
+                        n->dir_right = false;
+                        n->dir_down = true;
                     }
                 }
                 if (d.val[X][Y-1] < d.val[X][Y]) {
                     auto o = getn(x, y-1);
                     if (o && node_is_a_room(o)) {
-                        n->has_path_up = true;
+                        n->dir_up = false;
+                        n->dir_down = false;
+                        n->dir_left = false;
+                        n->dir_right = false;
+                        n->dir_up = true;
                     }
+                }
+            }
+        }
+    }
+}
+
+void Nodes::create_path_lock_to_key (int depth)
+{
+    //
+    // Choose start and end of the dmap
+    //
+    point start;
+    point end;
+    
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto n = getn(x, y);
+            if (!n) {
+                continue;
+            }
+            if (n->depth != depth) {
+                continue;
+            }
+            if (n->is_key) {
+                end = point(x, y);
+            }
+            if (n->is_lock) {
+                start = point(x, y);
+            }
+        }
+    }
+    
+    dmap d;
+
+    memset(&d, 0, sizeof(d));
+
+    int minx, miny, maxx, maxy;
+    
+    minx = 0;
+    miny = 0;
+    maxx = nodes_width * 2 + 1;
+    maxy = nodes_height * 2 + 1;
+    
+    //
+    // Set up obstacles for the exit search
+    //
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            d.val[x][y] = DMAP_IS_WALL;
+        }
+    }
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto n = getn(x, y);
+            auto X = (x * 2) + 1;
+            auto Y = (y * 2) + 1;
+            if (n && (n->pass == 1) && 
+                (n->depth == depth) && node_is_a_room(n)) {
+                if (n->has_exit_up) {
+                    d.val[X][Y-1] = DMAP_IS_PASSABLE;
+                }
+                if (n->has_exit_down) {
+                    d.val[X][Y+1] = DMAP_IS_PASSABLE;
+                }
+                if (n->has_exit_right) {
+                    d.val[X+1][Y] = DMAP_IS_PASSABLE;
+                }
+                if (n->has_exit_left) {
+                    d.val[X-1][Y] = DMAP_IS_PASSABLE;
+                }
+                d.val[X][Y] = DMAP_IS_PASSABLE;
+            } else {
+                d.val[X][Y] = DMAP_IS_WALL;
+            }
+        }
+    }
+        
+    d.val[end.x*2+1][end.y*2+1] = DMAP_IS_GOAL;
+    d.val[start.x*2+1][start.y*2+1] = DMAP_IS_PASSABLE;
+
+    point dmap_start(minx, miny);
+    point dmap_end(maxx, maxy);
+    dmap_process(&d, dmap_start, dmap_end);
+    dmap_print_walls(&d);
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto n = getn(x, y);
+            auto X = x*2 + 1;
+            auto Y = y*2 + 1;
+            
+            if (n && (n->depth == depth) && node_is_a_room(n)) {
+                if (d.val[X+1][Y] < d.val[X][Y]) {
+                    auto o = getn(x+1, y);
+                    if (o && (o->depth == depth) && node_is_a_room(o)) {
+                        n->dir_right = true;
+                    }
+                }
+                if (d.val[X-1][Y] < d.val[X][Y]) {
+                    auto o = getn(x-1, y);
+                    if (o && (o->depth == depth) && node_is_a_room(o)) {
+                        n->dir_left = true;
+                    }
+                }
+                if (d.val[X][Y+1] < d.val[X][Y]) {
+                    auto o = getn(x, y+1);
+                    if (o && (o->depth == depth) && node_is_a_room(o)) {
+                        n->dir_down = true;
+                    }
+                }
+                if (d.val[X][Y-1] < d.val[X][Y]) {
+                    auto o = getn(x, y-1);
+                    if (o && (o->depth == depth) && node_is_a_room(o)) {
+                        n->dir_up = true;
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Nodes::make_paths_off_critical_path_reachable (void)
+{
+    //
+    // Choose start and end of the dmap
+    //
+    point start;
+    point end;
+    
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto n = getn(x, y);
+            if (!n) {
+                continue;
+            }
+            if (n->is_entrance) {
+                start = point(x, y);
+            }
+            if (n->is_exit) {
+                end = point(x, y);
+            }
+        }
+    }
+    
+    int minx, miny, maxx, maxy;
+    
+    minx = 0;
+    miny = 0;
+    maxx = nodes_width * 2 + 1;
+    maxy = nodes_height * 2 + 1;
+    
+    dmap d;
+    memset(&d, 0, sizeof(d));
+
+    //
+    // Set up obstacles for the exit search
+    //
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            d.val[x][y] = DMAP_IS_WALL;
+        }
+    }
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto n = getn(x, y);
+            auto X = (x * 2) + 1;
+            auto Y = (y * 2) + 1;
+
+            if (node_is_a_room(n)) {
+                if (n->has_exit_up) {
+                    d.val[X][Y-1] = DMAP_IS_PASSABLE;
+                }
+                if (n->has_exit_down) {
+                    d.val[X][Y+1] = DMAP_IS_PASSABLE;
+                }
+                if (n->has_exit_right) {
+                    d.val[X+1][Y] = DMAP_IS_PASSABLE;
+                }
+                if (n->has_exit_left) {
+                    d.val[X-1][Y] = DMAP_IS_PASSABLE;
+                }
+                d.val[X][Y] = DMAP_IS_PASSABLE;
+            }
+        }
+    }
+
+    point dmap_start(minx, miny);
+    point dmap_end(maxx, maxy);
+
+    start.x = (start.x * 2) + 1;
+    start.y = (start.y * 2) + 1;
+    end.x = (end.x * 2) + 1;
+    end.y = (end.y * 2) + 1;
+
+    d.val[end.x][end.y] = DMAP_IS_GOAL;
+    d.val[start.x][start.y] = DMAP_IS_PASSABLE;
+
+    dmap_process(&d, dmap_start, dmap_end);
+    //dmap_print_walls(&d);
+
+    bool on_critical_path[nodes_width][nodes_height];
+    memset(on_critical_path, 0, sizeof(on_critical_path));
+
+    auto p = dmap_solve(&d, start, end);
+    for (auto c : p) {
+        auto X = (c.x - 1) / 2;
+        auto Y = (c.y - 1) / 2;
+
+        if (X >= nodes_width) {
+            DIE("bug");
+        }
+        if (Y >= nodes_height) {
+            DIE("bug");
+        }
+        if (X < 0) {
+            DIE("bug");
+        }
+        if (Y < 0) {
+            DIE("bug");
+        }
+
+        on_critical_path[X][Y] = true;
+    }
+
+    for (auto y = 0; y < nodes_height; y++) {
+        for (auto x = 0; x < nodes_width; x++) {
+            auto n = getn(x, y);
+
+            if (on_critical_path[x][y]) {
+                continue;
+            }
+
+            if (!node_is_a_room(n)) {
+                continue;
+            }
+
+            if (n->has_exit_up) {
+                auto o = getn(x, y-1);
+                if (o && (o->pass == n->pass)) {
+                    n->dir_up = true;
+                    o->dir_down = true;
+                }
+            }
+            if (n->has_exit_down) {
+                auto o = getn(x, y+1);
+                if (o && (o->pass == n->pass)) {
+                    n->dir_down = true;
+                    o->dir_up = true;
+                }
+            }
+            if (n->has_exit_right) {
+                auto o = getn(x+1, y);
+                if (o && (o->pass == n->pass)) {
+                    n->dir_right = true;
+                    o->dir_left = true;
+                }
+            }
+            if (n->has_exit_left) {
+                auto o = getn(x-1, y);
+                if (o && (o->pass == n->pass)) {
+                    n->dir_left = true;
+                    o->dir_right = true;
                 }
             }
         }

@@ -21,6 +21,50 @@ Roomp Room::room_new (void)
 
 void Room::create_rotated_clones (void)
 {_
+    if ((dir_left || dir_right) && (dir_left != dir_right)) {
+        std::vector<std::string> rot[Charmap::DEPTH_MAX];
+
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            if (!data[d].size()) {
+                continue;
+            }
+            for (auto h = 0; h < height; h++) {
+                std::string s;
+                for (auto w = width - 1; w >= 0; w--) {
+                    auto c = data[d][h][w];
+                    if (!c) {
+                        DIE("room has nul char");
+                    }
+                    s += c;
+                }
+                rot[d].push_back(s);
+            }
+        }
+
+        auto r = Room::room_new();
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            r->data[d] = rot[d];
+        }
+
+        r->dir_up      = dir_up;
+        r->dir_down    = dir_down;
+        r->is_entrance = is_entrance;
+        r->is_exit     = is_exit;
+        r->is_lock     = is_lock;
+        r->is_key      = is_key;
+
+        if (dir_left) {
+            r->dir_left = false;
+            r->dir_right = true;
+        } else {
+            r->dir_left = true;
+            r->dir_right = false;
+        }
+
+        r->finalize();
+    }
+
+#if 0
     {
         std::vector<std::string> rot[Charmap::DEPTH_MAX];
 
@@ -32,6 +76,35 @@ void Room::create_rotated_clones (void)
                         s += ' ';
                     } else {
                         auto c = data[d][h][width - w - 1];
+                        if (!c) {
+                            DIE("room has nul char");
+                        }
+                        s += c;
+                    }
+                }
+                rot[d].push_back(s);
+            }
+        }
+
+        auto r = Room::room_new();
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            r->data[d] = rot[d];
+        }
+
+        r->finalize();
+    }
+
+    {
+        std::vector<std::string> rot[Charmap::DEPTH_MAX];
+
+        for (auto d = 0; d < Charmap::DEPTH_MAX; d++) {
+            for (auto w = 0; w < width; w++) {
+                std::string s;
+                for (auto h = 0; h < height; h++) {
+                    if (!data[d].size()) {
+                        s += ' ';
+                    } else {
+                        auto c = data[d][h][w];
                         if (!c) {
                             DIE("room has nul char");
                         }
@@ -104,6 +177,7 @@ void Room::create_rotated_clones (void)
         }
         r->finalize();
     }
+#endif
 }
 
 //
@@ -221,30 +295,39 @@ void Room::finalize (void)
     }
 
     int debug = false;
-
     if (debug) {
-        char tmp[width + 1][height + 1];
-        memset(tmp, ' ', sizeof(tmp));
-
-        for (auto h = 0; h < height; h++) {
-            for (auto w = 0; w < width; w++) {
-                auto c = data[Charmap::DEPTH_WALLS][h][w];
-                if (!c || (c == ' ')) {
-                    c = data[Charmap::DEPTH_FLOOR][h][w];
-                }
-                tmp[w][h] = c;
-            }
-        }
-
-        CON("ROOM(%d): width %d height %d", roomno, width, height);
-        for (auto h = 0; h < height; h++) {
-            std::string s;
-            for (auto w = 0; w < width; w++) {
-                s += tmp[w][h];
-            }
-            CON("ROOM(%d): %s", roomno, s.c_str());
-        }
+        dump();
     }
 
     find_exits();
+}
+
+void Room::dump (void)
+{
+    height = data[Charmap::DEPTH_FLOOR].size();
+    width = data[Charmap::DEPTH_FLOOR][0].size();
+
+    char tmp[width + 1][height + 1];
+    memset(tmp, ' ', sizeof(tmp));
+
+    for (auto h = 0; h < height; h++) {
+        for (auto w = 0; w < width; w++) {
+            auto c = data[Charmap::DEPTH_WALLS][h][w];
+            if (!c || (c == ' ')) {
+                c = data[Charmap::DEPTH_FLOOR][h][w];
+            }
+            tmp[w][h] = c;
+        }
+    }
+
+    CON("ROOM(%d): width %d height %d", roomno, width, height);
+    CON("ROOM(%d): up %d down %d left %d right %d",
+        roomno, dir_up, dir_down, dir_left, dir_right);
+    for (auto h = 0; h < height; h++) {
+        std::string s;
+        for (auto w = 0; w < width; w++) {
+            s += tmp[w][h];
+        }
+        CON("ROOM(%d): %s", roomno, s.c_str());
+    }
 }
