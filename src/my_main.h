@@ -28,8 +28,8 @@
 /*
  * Dungeon size
  */
-#define MAP_WIDTH                   79
-#define MAP_HEIGHT                  29
+#define MAP_WIDTH                   80
+#define MAP_HEIGHT                  60
 #define MAP_DEPTH                   1
 
 #define TILES_ACROSS                40 // per screen

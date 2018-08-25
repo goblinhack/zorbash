@@ -38,17 +38,17 @@ public:
     bool has_secret_exit_down                 {false};
     bool has_secret_exit_left                 {false};
     bool has_secret_exit_right                {false};
-    bool has_path_up                          {false};
-    bool has_path_down                        {false};
-    bool has_path_left                        {false};
-    bool has_path_right                       {false};
+    bool dir_up                          {false};
+    bool dir_down                        {false};
+    bool dir_left                        {false};
+    bool dir_right                       {false};
 
     /*
      * Update init_nodes on changes
      */
     bool has_path (void)
     {
-        return (has_path_down || has_path_up || has_path_left || has_path_right);
+        return (dir_down || dir_up || dir_left || dir_right);
     }
     
     void set_has_exit_up (bool v)
@@ -141,5 +141,7 @@ public:
     bool node_is_a_room(Node *n);
     void remove_stubs();
     void create_path_to_exit(int pass);
+    void create_path_lock_to_key(int depth);
+    void make_paths_off_critical_path_reachable(void);
     void dmap_print_walls(dmap *d);
 };

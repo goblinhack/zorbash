@@ -189,6 +189,19 @@ public:
     //
     std::vector<Roomp>                        all_placed_rooms;
 
+    void sanity (void)
+    {
+        auto exits = 0;
+        for (auto r : Room::all_rooms) {
+            if (r->placed && r->is_exit) {
+                exits++;
+            }
+        }
+        if (exits > 1) {
+            DIE("WTF");
+        }
+    }
+
     void make_dungeon (void)
     {_
         //
@@ -240,7 +253,8 @@ public:
         assign_rooms_to_tiles();
         remove_all_doors();
         place_doors_between_depth_changes();
-        
+        sanity();
+
         // secret to secret 
         dump();
         debug("success, created dungeon");
@@ -248,7 +262,7 @@ public:
 
     void debug (std::string s)
     {_
-        return;
+        //return;
         //dump();
         //CON("dungeon (%u): %s", seed, s.c_str());
         CON("dungeon (%u) %s: hash %llx", seed, s.c_str(), level_hash());
@@ -850,6 +864,7 @@ public:
         }
 
         nodes = new Nodes(nodes_width, nodes_height);
+        DIE("x");
         room_width  = map_width / nodes_width;
         room_height  = map_height / nodes_height;
         room_width--;
@@ -1352,16 +1367,85 @@ public:
     // From a fixed list of random roomnos, return the next one. This
     // ensures no room will ever appear more than once.
     //
-    Roomp get_next_room (void)
+    Roomp get_next_room (int node_x, int node_y)
     {
-        for (;;) {
+        auto n = nodes->getn(node_x, node_y);
+
+        auto tries = 100000;
+        while (tries-- > 0) {
             auto ri = random_range(0, Room::all_rooms.size());
             auto r = Room::all_rooms[ri];
             
-            if (!r->placed) {
-                return (r);
+            if (r->placed) {
+                continue;
             }
+            if (n->dir_left != r->dir_left) {
+                continue;
+            }
+            if (n->dir_right != r->dir_right) {
+                continue;
+            }
+            if (n->dir_up != r->dir_up) {
+                continue;
+            }
+            if (n->dir_down != r->dir_down) {
+                continue;
+            }
+            if (n->is_exit != r->is_exit) {
+                continue;
+            }
+            if (n->is_entrance != r->is_entrance) {
+                continue;
+            }
+            if (n->is_lock != r->is_lock) {
+                continue;
+            }
+            if (n->is_key != r->is_key) {
+                continue;
+            }
+#if 0
+            LOG("place node %d,%d room(%d) %d,%d - placed %d u %d d %d l %d r %d S %d E %d L %d k %d", 
+                node_x, node_y,
+                r->roomno,
+                r->at.x, r->at.y,
+                r->placed,
+                r->dir_up, r->dir_down, r->dir_left, r->dir_right,
+                r->is_entrance,
+                r->is_exit,
+                r->is_lock,
+                r->is_key);
+            r->dump();
+#endif
+            return (r);
         }
+
+        LOG("room dump:");
+        for (auto r : Room::all_rooms) {
+#if 0
+            CON("node %d,%d - want %d %d %d %d got %d %d %d %d", 
+                node_x, node_y,
+                n->dir_up, n->dir_down, n->dir_left, n->dir_right,
+                r->dir_up, r->dir_down, r->dir_left, r->dir_right);
+            r->dump();
+#endif
+            LOG("room(%d) %d,%d - placed %d u %d d %d l %d r %d S %d E %d L %d k %d", 
+                r->roomno,
+                r->at.x, r->at.y,
+                r->placed,
+                r->dir_up, r->dir_down, r->dir_left, r->dir_right,
+                r->is_entrance,
+                r->is_exit,
+                r->is_lock,
+                r->is_key);
+        }
+        dump();
+        DIE("could not satisfy node %d,%d - u %d d %d l %d r %d S %d E %d L %d k %d", 
+            node_x, node_y,
+            n->dir_up, n->dir_down, n->dir_left, n->dir_right,
+            n->is_entrance,
+            n->is_exit,
+            n->is_lock,
+            n->is_key);
     }
 
     void dmap_print_walls (dmap *d)
@@ -1555,8 +1639,6 @@ public:
         std::fill(cells.begin(), cells.end(), Charmap::SPACE);
         std::fill(cells_room.begin(), cells_room.end(), nullptr);
         
-        memset(node_rooms, 0, sizeof(node_rooms));
-
         how_many_possible_rooms = (int) Room::all_rooms.size();
         for (auto r : Room::all_rooms) {
             r->placed = false;
@@ -1569,6 +1651,12 @@ public:
     //
     bool place_initial_small_rooms (void)
     {
+        for (auto x = 0; x < nodes->nodes_width; x++) {
+            for (auto y = 0; y < nodes->nodes_height; y++) {
+                node_rooms[x][y] = nullptr;
+            }
+        }
+
         for (auto x = 0; x < nodes->nodes_width; x++) {
             for (auto y = 0; y < nodes->nodes_height; y++) {
 
@@ -1584,7 +1672,7 @@ public:
                 auto placed = false;
                 for (auto roomi = 0; roomi < how_many_possible_rooms; roomi++) {
 
-                    auto r = get_next_room();
+                    auto r = get_next_room(x, y);
 
                     if (r->width >= room_width) {
                         continue;
@@ -1616,10 +1704,13 @@ public:
                     r->at.y = y * (room_height+1) + 
                                     random_range(-room_width/2, room_height/2);
 
-                    node_rooms[x][y] = r;
-                    r->placed = true;
-
                     if (map_room_place_if_no_overlaps(r, r->at.x, r->at.y)) {
+                        if (node_rooms[x][y]) {
+                            DIE("x");
+                        }
+
+                        node_rooms[x][y] = r;
+                        r->placed = true;
                         placed = true;
                         break;
                     }
@@ -1734,7 +1825,7 @@ public:
                     auto n = nodes->getn(x, y);
                     for (auto roomi = 0; roomi < how_many_possible_rooms; roomi++) {
 
-                        auto r = get_next_room();
+                        auto r = get_next_room(x, y);
 
                         //
                         // Filter out small rooms
@@ -2765,7 +2856,7 @@ class Dungeon *dungeon_test (void)
 int x = 666;
 CON("seed: %d", x);
 mysrand(x);
-    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3, x);
+    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 8, 5, x);
 
     return (d);
 #endif

@@ -18,6 +18,14 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     PyObject *py_floor = 0;
     PyObject *py_walls = 0;
     PyObject *py_items = 0;
+    int up = false;
+    int down = false;
+    int left = false;
+    int right = false;
+    int is_entrance = false;
+    int is_exit = false;
+    int is_lock = false;
+    int is_key = false;
 
     static char *kwlist[] = {
         (char*) "combo", 
@@ -27,10 +35,18 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         (char*) "xxx", 
         (char*) "yyy", 
         (char*) "room_name", 
+        (char*) "up", 
+        (char*) "down", 
+        (char*) "left", 
+        (char*) "right", 
+        (char*) "entrance", 
+        (char*) "exit", 
+        (char*) "lock", 
+        (char*) "key", 
         0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, 
-                                     "|OOOOiis", 
+                                     "|OOOOiisiiiiiiii", 
                                      kwlist, 
                                      &py_combo,
                                      &py_floor,
@@ -38,7 +54,15 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                                      &py_items,
                                      &xxx, 
                                      &yyy, 
-                                     &room_name)) {
+                                     &room_name,
+                                     &up,
+                                     &down,
+                                     &left,
+                                     &right,
+                                     &is_entrance,
+                                     &is_exit,
+                                     &is_lock,
+                                     &is_key)) {
         Py_RETURN_NONE;
     }
 
@@ -94,7 +118,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     walls_string += Charmap::SPACE;
                 }
 
-                if (m.is_treasure ||
+                if (m.is_trap ||
+                    m.is_treasure ||
                     m.is_key) {
                     items_string += c;
                 } else {
@@ -151,6 +176,17 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             r->data[Charmap::DEPTH_ITEMS].push_back(py_obj_to_string(o));
         }
     }
+
+    // remember to update create_rotated_clones
+    r->dir_up      = up ? true : false;
+    r->dir_down    = down ? true : false;
+    r->dir_left    = left ? true : false;
+    r->dir_right   = right ? true : false;
+    r->is_entrance = is_entrance ? true : false;
+    r->is_exit     = is_exit ? true : false;
+    r->is_lock     = is_lock ? true : false;
+    r->is_key      = is_key ? true : false;
+    // remember to update create_rotated_clones
 
     r->finalize();
     r->create_rotated_clones();
