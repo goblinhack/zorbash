@@ -137,6 +137,8 @@ redo:
     auto pass = 1;
     auto depth = 1;
     while (depth < 10) {
+        set_max_depth();
+
         auto placed = snake_walk(depth, 10, pass);
 
         CON("node-grid: level depth %d placed %d nodes", depth, placed);
@@ -219,20 +221,6 @@ redo:
     set_max_depth();
 
     //
-    // Add keys for moving between levels
-    //
-    for (auto depth = 2; depth <= max_depth; depth++) {
-        place_lock(depth, 1);
-    }
-    for (auto depth = 2; depth <= max_depth; depth++) {
-        hide_other_locks(depth, 1);
-    }
-    for (auto depth = 1; depth < max_depth; depth++) {
-        place_key(depth, 1);
-    }
-    debug("placed locks");
-
-    //
     // Add start and exit
     //
     place_entrance();
@@ -252,6 +240,13 @@ redo:
     debug("created path to exit, ignoring secret paths");
 
     //
+    // Make nodes not on the direct path to the exit, bi directional
+    // so you cannot get stuck
+    //
+    make_paths_off_critical_path_reachable();
+    debug("made critical paths reachable");
+
+    //
     // Ensure each key can reach each lock
     //
     for (auto depth = 1; depth < max_depth; depth++) {
@@ -260,10 +255,21 @@ redo:
     debug("created path from keys to locks");
 
     //
-    // Make nodes not on the direct path to the exit, bi directional
-    // so you cannot get stuck
+    // Add keys for moving between levels
     //
-    make_paths_off_critical_path_reachable();
+    for (auto depth = 2; depth <= max_depth; depth++) {
+        place_lock(depth, 1);
+    }
+    for (auto depth = 2; depth <= max_depth; depth++) {
+        hide_other_locks(depth, 1);
+    }
+    for (auto depth = 1; depth < max_depth; depth++) {
+        if (!place_key(depth, 1)) {
+            goto redo;
+        }
+    }
+    debug("placed locks");
+
     debug("final map");
 }
 
@@ -343,7 +349,7 @@ void Nodes::debug (std::string msg)
             }
 
             if (node->depth == depth_obstacle) {
-                out[oy][ox] = '-';
+                out[oy][ox] = 'O';
             } else if (node->depth) {
                 out[oy][ox] = '0' + node->depth;
             } else {
@@ -622,6 +628,11 @@ void Nodes::init_nodes (void)
             n->is_lock                               = false;
             n->is_entrance                           = false;
             n->is_exit                               = false;
+            n->on_critical_path                      = false;
+            n->dir_up                                = false;
+            n->dir_down                              = false;
+            n->dir_left                              = false;
+            n->dir_right                             = false;
             n->set_has_exit_up(false);
             n->set_has_exit_down(false);
             n->set_has_exit_left(false);
@@ -633,20 +644,23 @@ void Nodes::init_nodes (void)
         }
     }
 
-    auto obstacles = random_range(0, (nodes_width * nodes_height) / 3);
+#if 0
+    auto obstacles = random_range(0, (nodes_width * nodes_height) / 4);
     if (obstacles < 3) {
         obstacles = 3;
     }
 
     while (obstacles--) {
         auto x = random_range(0, nodes_width);
-        auto y = random_range(0, nodes_height);
+        auto y = random_range(1, nodes_height);
 
         auto o = getn(x, y);
         o->depth = depth_obstacle;
     }
+#endif
 
     max_depth = 0;
+    max_vdepth = 0;
 }
 
 //
@@ -680,12 +694,13 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             auto tries = 1000;
             while (tries--) {
                 x = random_range(0, nodes_width);
-                y = random_range(0, depth + 1);
+                y = 0;
 
                 auto o = getn(x, y);
                 if (node_is_free(o)) {
                     s.push_back(point(x, y));
                     random_dir(&dx, &dy);
+                    dy = 0;
                     break;
                 }
             }
@@ -739,12 +754,13 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
     } else {
         if (pass == 1) {
             //
-            // Else start adjacent next to the old secret depth
+            // Else start adjacent next to the old max depth
             //
             auto tries = 1000;
             while (tries--) {
                 x = random_range(0, nodes_width);
-                y = random_range(0, nodes_height);
+                y = max_vdepth;
+
                 random_dir(&dx, &dy);
 
                 auto o = getn(x, y);
@@ -827,6 +843,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
     }
 
     auto placed = 0;
+    dy = 0;
 
     do {
         auto p = s.front();
@@ -854,8 +871,16 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         //
         // Change dir
         //
-        if (random_range(0, 100) < 90) {
-            random_dir(&dx, &dy);
+        random_dir(&dx, &dy);
+        if (dy < 0) {
+            if (random_range(0, 1000) < 990) {
+                dy = 0;
+            }
+        }
+        if (dy > 0) {
+            if (random_range(0, 100) < 20) {
+                dy = 0;
+            }
         }
 
         auto old = n;
@@ -866,7 +891,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
         //
         if (placed < max_placed) {
             if (random_range(0, 100) < 90) {
-                switch (random_range(0, 4)) {
+                switch (random_range(0, 2)) {
                 case 0: 
                     if (x < nodes_width - 1) {
                         auto f = getn(x + 1, y);
@@ -885,16 +910,21 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                         }
                     }
                     break;
-                case 2: 
-                    if (y < nodes_height - 1) {
-                        auto f = getn(x, y + 1);
-                        if (node_is_free(f)) {
-                            s.push_back(point(x, y + 1));
-                            n->set_has_exit_down(true);
-                        }
+                }
+            }
+
+            if (random_range(0, 100) < 10) {
+                if (y < nodes_height - 1) {
+                    auto f = getn(x, y + 1);
+                    if (node_is_free(f)) {
+                        s.push_back(point(x, y + 1));
+                        n->set_has_exit_down(true);
                     }
-                    break;
-                case 3: 
+                }
+            }
+
+            if (y < depth + 2) {
+                if (random_range(0, 100) < 5) {
                     if (y > 0){
                         auto f = getn(x, y - 1);
                         if (node_is_free(f)) {
@@ -902,8 +932,10 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                             n->set_has_exit_up(true);
                         }
                     }
-                    break;
                 }
+            }
+            if (dy < 0) {
+                dy = 0;
             }
 
             //
@@ -914,6 +946,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                 auto tries = 5;
                 while (tries--) {
                     random_dir(&dx, &dy);
+                    dy = 0;
                     n = getn(x + dx, y + dy);
                     if (node_is_free(n)) {
                         break;
@@ -1318,7 +1351,7 @@ void Nodes::hide_other_locks (int depth, int pass)
     }
 }
 
-void Nodes::place_key (int depth, int pass)
+bool Nodes::place_key (int depth, int pass)
 {
     std::vector<point> s;
 
@@ -1334,20 +1367,31 @@ void Nodes::place_key (int depth, int pass)
             if (o->is_lock) {
                 continue;
             }
+            if (o->is_entrance) {
+                continue;
+            }
+            if (o->is_exit) {
+                continue;
+            }
+            if (!o->on_critical_path) {
+                continue;
+            }
 
             s.push_back(point(x, y));
         }
     }
 
     if (!s.size()) {
-        DIE("no key placed for depth %d", depth);
-        return;
+        debug("no key placed");
+        CON("no key placed for depth %d", depth);
+        return (false);
     }
 
     auto i = random_range(0, s.size());
     auto p = s[i];
     auto n = getn(p.x, p.y);
     n->is_key = true;
+    return (true);
 }
 
 void Nodes::place_entrance (void)
@@ -1891,6 +1935,9 @@ void Nodes::make_paths_off_critical_path_reachable (void)
         }
 
         on_critical_path[X][Y] = true;
+        auto n = getn(X, Y);
+
+        n->on_critical_path = true;
     }
 
     for (auto y = 0; y < nodes_height; y++) {
@@ -1941,6 +1988,7 @@ void Nodes::set_max_depth (void)
 {
     std::vector<point> s;
     auto max_depth_ = 0;
+    auto max_vdepth_ = 0;
 
     for (auto x = 0; x < nodes_width; x++) {
         for (auto y = 0; y < nodes_height; y++) {
@@ -1952,9 +2000,14 @@ void Nodes::set_max_depth (void)
             if (o->depth > max_depth_) {
                 max_depth_ = o->depth;
             }
+            if (y > max_vdepth_) {
+                max_vdepth_ = y;
+            }
         }
     }
+
     max_depth = max_depth_;
+    max_vdepth = max_depth_;
 }
 
 class Nodes *grid_test (void)

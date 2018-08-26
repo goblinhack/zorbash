@@ -30,6 +30,7 @@ public:
     bool is_lock                              {false};
     bool is_entrance                          {false};
     bool is_exit                              {false};
+    bool on_critical_path                     {false};
     bool has_exit_up                          {false};
     bool has_exit_down                        {false};
     bool has_exit_left                        {false};
@@ -38,10 +39,10 @@ public:
     bool has_secret_exit_down                 {false};
     bool has_secret_exit_left                 {false};
     bool has_secret_exit_right                {false};
-    bool dir_up                          {false};
-    bool dir_down                        {false};
-    bool dir_left                        {false};
-    bool dir_right                       {false};
+    bool dir_up                               {false};
+    bool dir_down                             {false};
+    bool dir_left                             {false};
+    bool dir_right                            {false};
 
     /*
      * Update init_nodes on changes
@@ -99,6 +100,7 @@ public:
     int nodes_width                           {5};
     int nodes_height                          {5};
     int max_depth                             {0};
+    int max_vdepth                            {0};
 
     /*
      * Water, rocks etc...
@@ -133,7 +135,7 @@ public:
     void join_depth_secret(int depth, int pass);
     void place_lock(int depth, int pass);
     void hide_other_locks(int depth, int pass);
-    void place_key(int depth, int pass);
+    bool place_key(int depth, int pass);
     void place_entrance(void);
     void place_exit(void);
     void set_max_depth(void);

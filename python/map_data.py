@@ -6,199 +6,343 @@ def map_data_init():
     #
     # entrance rooms
     #
-    zx.map_load_room(entrance=True, left=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x.........x",
-                    "x....SS...x",
-                    "D...SSSS..x",
-                    "x....SS...D",
-                    "x.........x",
-                    "xxxDxxxxxxx" ])
-    zx.map_load_room(entrance=True, left=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x.....S...x",
-                    "x....SS...x",
-                    "D...SSSSS.x",
-                    "x....SS...D",
-                    "x.....S...x",
-                    "xxxDxxxxxxx" ])
-    zx.map_load_room(entrance=True, up=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x....S....x",
-                    "x...SSS...x",
-                    "x..SSSSS..x",
-                    "D....S....x",
-                    "x....S....D",
-                    "xxDxxxxxxxx" ])
-    zx.map_load_room(entrance=True, down=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x....S....x",
-                    "D....S....x",
-                    "x..SSSSS..D",
-                    "x...SSS...x",
-                    "x....S....x",
-                    "xxDxxxxxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xx.........xx",
+                    "......S......",
+                    ".....xxx.....",
+                    ".....xxx.....",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xx.........xx",
+                    "......S....xx",
+                    ".....xxx...xx",
+                    ".....xxx...xx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xx........xxx",
+                    "x..S.......xx",
+                    "xxxxx......xx",
+                    "xxxxx......xx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
 
 
     #
     # exit rooms
     #
-    zx.map_load_room(exit=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x.........x",
-                    "D...E.E...x",
-                    "x....E....D",
-                    "x...E.E...x",
-                    "x.........x",
-                    "xxDxxxxxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    ".............",
+                    "..E..........",
+                    ".xxx.........",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxx.......xxx",
+                    ".............",
+                    "......E......",
+                    ".....xxx.....",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "............x",
+                    "..........E.x",
+                    "..........xxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx.......x",
+                    "xxxxx....E..x",
+                    "xxxxx..xxxx.x",
+                    "xxxxx...xxx.x",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx....xxxx",
+                    "xxxxx.....xxx",
+                    "...........xx",
+                    "........E..xx",
+                    ".......xxx.xx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "...........xx",
+                    ".......E...xx",
+                    "......xxx..xx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx......xx",
+                    "xxxxx......xx",
+                    "xxxxx...E..xx",
+                    "xxxxx..xxx.xx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_entrance=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxx.......x",
+                    "xxxxx....E..x",
+                    "xxxxx...xxx.x",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
 
     #
     # lock rooms
     #
-    zx.map_load_room(lock=True, left=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x.........x",
-                    "x....LL...x",
-                    "D...LLLL..x",
-                    "x....LL...D",
-                    "x.........x",
-                    "xxxDxxxxxxx" ])
-    zx.map_load_room(lock=True, left=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x.....L...x",
-                    "x....LL...x",
-                    "D...LLLLL.x",
-                    "x....LL...D",
-                    "x.....L...x",
-                    "xxxDxxxxxxx" ])
-    zx.map_load_room(lock=True, up=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x....L....x",
-                    "x...LLL...x",
-                    "x..LLLLL..x",
-                    "D....L....x",
-                    "x....L....D",
-                    "xxDxxxxxxxx" ])
-    zx.map_load_room(lock=True, down=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x....L....x",
-                    "D....L....x",
-                    "x..LLLLL..D",
-                    "x...LLL...x",
-                    "x....L....x",
-                    "xxDxxxxxxxx" ])
+    zx.map_load_room(is_lock=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    ".............",
+                    ".....xxx.....",
+                    ".............",
+                    "xLLLx...xLLLx",
+                    "xLLLx...xLLLx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_lock=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    ".............",
+                    ".............",
+                    ".............",
+                    "xLLLLLLLLLLLx",
+                    "xLLLLLLLLLLLx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_lock=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxxx..xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "xLLLx..xxxxxx",
+                    "xLLLx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_lock=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxxx..xxxxx",
+                    "xx......xxxxx",
+                    "xx......xxxxx",
+                    "xxLLLLxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xx......xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_lock=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxxx..xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "xLLLxLLxxxxxx",
+                    "xLLLxLLxxxxxx",
+                    "xxxxxxxxxxxxx" ])
 
     #
     # key rooms
     #
-    zx.map_load_room(key=True, left=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x.........x",
-                    "x...kkk...x",
-                    "D...kkk...x",
-                    "x...kkk...D",
-                    "x.........x",
-                    "xxxDxxxxxxx" ])
-    zx.map_load_room(key=True, left=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x.....k...x",
-                    "x....kk...x",
-                    "D...kkkkk.x",
-                    "x....kk...D",
-                    "x.....k...x",
-                    "xxxDxxxxxxx" ])
-    zx.map_load_room(key=True, up=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x....k....x",
-                    "x...kkk...x",
-                    "x..kkkkk..x",
-                    "D....k....x",
-                    "x....k....D",
-                    "xxDxxxxxxxx" ])
-    zx.map_load_room(key=True, down=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x....k....x",
-                    "D....k....x",
-                    "x..kkkkk..D",
-                    "x...kkk...x",
-                    "x....k....x",
-                    "xxDxxxxxxxx" ])
+    zx.map_load_room(is_key=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "x..........xx",
+                    "....k........",
+                    "...xxx.......",
+                    ".............",
+                    "xxx........xx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_key=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "x...........x",
+                    "........k....",
+                    ".......xxx...",
+                    ".............",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_key=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxxx.....xx",
+                    ".........k.xx",
+                    "........xx.xx",
+                    "...........xx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_key=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xx......xxxxx",
+                    "xx.........xx",
+                    "xx..k......xx",
+                    "xxxxx......xx",
+                    "xxxxx..xxxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(is_key=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx......xx",
+                    "xxxxx....k.xx",
+                    "........xx.xx",
+                    "...........xx",
+                    "...........xx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_key=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxx.......xx",
+                    "xxx....k...xx",
+                    "......xxx..xx",
+                    "..........xxx",
+                    "...........xx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_key=True, combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xx........xxx",
+                    "xxk.......xxx",
+                    "xxx....x..xxx",
+                    "xx....x...xxx",
+                    "xx........xxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(is_key=True, combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xx.........xx",
+                    "xx.........xx",
+                    "xx.......k.xx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
 
     #
     # normal rooms
     #
-    zx.map_load_room(left=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x...i.i...x",
-                    "x..i...i..x",
-                    "D.iiiiiii.x",
-                    "x..i...i..D",
-                    "x...i.i...x",
-                    "xxxDxxxxxxx" ])
-    zx.map_load_room(left=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x...i.....x",
-                    "x..i......x",
-                    "D.iiiiiii.x",
-                    "x..i......D",
-                    "x...i.....x",
-                    "xxxDxxxxxxx" ])
-    zx.map_load_room(up=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x....i....x",
-                    "x...iii...x",
-                    "x..i.i.i..x",
-                    "D....i....x",
-                    "x....i....D",
-                    "xxDxxxxxxxx" ])
-    zx.map_load_room(down=True, combo=[
-                    "xDxxxxxxxxx",
-                    "x....i....x",
-                    "D....i....x",
-                    "x..i.i.i..D",
-                    "x...iii...x",
-                    "x....i....x",
-                    "xxDxxxxxxxx" ])
-    zx.map_load_room(left=True, combo=[
-                    "xDxxxxxxxxxxx",
-                    "x...........x",
-                    "x...i...i...x",
-                    "x..i.....i..x",
-                    "D.iiiiiiiii.x",
-                    "x..i.....i..D",
-                    "x...i...i...x",
-                    "x...........x",
-                    "xxxDxxxxxxxxx" ])
-    zx.map_load_room(left=True, combo=[
-                    "xDxxxxxxxxxxx",
-                    "x...........x",
-                    "x...i.......x",
-                    "x..i........x",
-                    "D.iiiiiiiii.x",
-                    "x..i........D",
-                    "x...i.......x",
-                    "x...........x",
-                    "xxxDxxxxxxxxx" ])
-    zx.map_load_room(up=True, combo=[
-                    "xDxxxxxxxxxxx",
-                    "x.....i.....x",
-                    "x....iii....x",
-                    "x...i.i.i...x",
-                    "D.....i.....x",
-                    "x.....i.....D",
-                    "x.....i.....x",
-                    "x.....i.....x",
-                    "xxxDxxxxxxxxx" ])
-    zx.map_load_room(down=True, combo=[
-                    "xDxxxxxxxxxxx",
-                    "x.....i.....x",
-                    "x.....i.....x",
-                    "x.....i.....x",
-                    "D.....i.....x",
-                    "x...i.i.i...D",
-                    "x....iii....x",
-                    "x.....i.....x",
-                    "xxxDxxxxxxxxx" ])
+    zx.map_load_room(combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    ".............",
+                    ".............",
+                    ".............",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    ".............",
+                    ".............",
+                    ".............",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
+    zx.map_load_room(combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "........xxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(combo=[
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx" ])
+    zx.map_load_room(combo=[
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxxxxxxxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx",
+                    "xxxxx...xxxxx" ])
 map_data_init()
 map_data_init()
 map_data_init()
