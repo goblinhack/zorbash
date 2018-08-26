@@ -2854,9 +2854,10 @@ class Dungeon *dungeon_test (void)
     return (nullptr);
 #else
 int x = 666;
+x = myrand();
 CON("seed: %d", x);
 mysrand(x);
-    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 8, 5, x);
+    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 8, 7, x);
 
     return (d);
 #endif
