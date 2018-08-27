@@ -17,13 +17,11 @@ public:
         DOOR            = 'D',
         WALL            = 'x',
         LADDER          = 'H',
-        CWALL           = 'X',
         FLOOR           = '.',
         SECRET_CORRIDOR = '?',
-        START           = 'S',
+        ENTRANCE        = 'S',
         EXIT            = 'E',
         KEY             = 'k',
-        CHASM           = 'C',
         LAVA            = 'L',
         WATER           = '_',
         ROCK            = 'r',
@@ -42,20 +40,15 @@ public:
     };
 
     char                      c;
-    bool                      is_movement_blocking {false};
     bool                      is_wall              {false};
     bool                      is_ladder            {false};
-    bool                      is_cwall             {false};
     bool                      is_floor             {false};
     bool                      is_dusty             {false};
-    bool                      is_corridor          {false};
     bool                      is_door              {false};
     bool                      is_secret_door       {false};
-    bool                      is_dungeon_way_up    {false};
-    bool                      is_dungeon_way_down  {false};
+    bool                      is_entrance          {false};
+    bool                      is_exit              {false};
     bool                      is_key               {false};
-    bool                      is_chasm             {false};
-    bool                      is_dissolves_walls   {false};
     bool                      is_lava              {false};
     bool                      is_water             {false};
     bool                      is_rock              {false};

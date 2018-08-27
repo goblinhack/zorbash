@@ -6,7 +6,7 @@ def map_data_init():
     #
     # entrance rooms
     #
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xx.........xx",
@@ -16,7 +16,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xx.........xx",
@@ -26,7 +26,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xx........xxx",
@@ -41,7 +41,7 @@ def map_data_init():
     #
     # exit rooms
     #
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -51,7 +51,7 @@ def map_data_init():
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxx.......xxx",
@@ -61,7 +61,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -71,7 +71,7 @@ def map_data_init():
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -81,7 +81,7 @@ def map_data_init():
                     "xxxxx...xxx.x",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx....xxxx",
                     "xxxxx.....xxx",
@@ -91,7 +91,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
@@ -101,7 +101,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -111,7 +111,7 @@ def map_data_init():
                     "xxxxx..xxx.xx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_entrance=True, combo=[
+    zx.map_load_room(entrance=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
@@ -125,7 +125,7 @@ def map_data_init():
     #
     # lock rooms
     #
-    zx.map_load_room(is_lock=True, combo=[
+    zx.map_load_room(lock=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -135,7 +135,7 @@ def map_data_init():
                     "xLLLx...xLLLx",
                     "xLLLx...xLLLx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_lock=True, combo=[
+    zx.map_load_room(lock=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
@@ -145,7 +145,7 @@ def map_data_init():
                     "xLLLLLLLLLLLx",
                     "xLLLLLLLLLLLx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_lock=True, combo=[
+    zx.map_load_room(lock=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxxx..xxxxx",
@@ -155,7 +155,7 @@ def map_data_init():
                     "xLLLx..xxxxxx",
                     "xLLLx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_lock=True, combo=[
+    zx.map_load_room(lock=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxxx..xxxxx",
                     "xx......xxxxx",
@@ -165,7 +165,7 @@ def map_data_init():
                     "xx......xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_lock=True, combo=[
+    zx.map_load_room(lock=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxxx..xxxxx",
@@ -179,7 +179,7 @@ def map_data_init():
     #
     # key rooms
     #
-    zx.map_load_room(is_key=True, combo=[
+    zx.map_load_room(key=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "x..........xx",
@@ -189,7 +189,7 @@ def map_data_init():
                     "xxx........xx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_key=True, combo=[
+    zx.map_load_room(key=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "x...........x",
@@ -199,7 +199,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_key=True, combo=[
+    zx.map_load_room(key=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxxx.....xx",
@@ -209,7 +209,7 @@ def map_data_init():
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_key=True, combo=[
+    zx.map_load_room(key=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xx......xxxxx",
@@ -219,7 +219,7 @@ def map_data_init():
                     "xxxxx..xxxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(is_key=True, combo=[
+    zx.map_load_room(key=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx......xx",
                     "xxxxx....k.xx",
@@ -229,7 +229,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_key=True, combo=[
+    zx.map_load_room(key=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxx.......xx",
                     "xxx....k...xx",
@@ -239,7 +239,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_key=True, combo=[
+    zx.map_load_room(key=True, room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xx........xxx",
@@ -249,7 +249,7 @@ def map_data_init():
                     "xx........xxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(is_key=True, combo=[
+    zx.map_load_room(key=True, room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
@@ -263,7 +263,7 @@ def map_data_init():
     #
     # normal rooms
     #
-    zx.map_load_room(combo=[
+    zx.map_load_room(room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -273,7 +273,7 @@ def map_data_init():
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(combo=[
+    zx.map_load_room(room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
@@ -283,7 +283,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(combo=[
+    zx.map_load_room(room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -293,7 +293,7 @@ def map_data_init():
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(combo=[
+    zx.map_load_room(room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -303,7 +303,7 @@ def map_data_init():
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx" ])
-    zx.map_load_room(combo=[
+    zx.map_load_room(room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -313,7 +313,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(combo=[
+    zx.map_load_room(room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
@@ -323,7 +323,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(combo=[
+    zx.map_load_room(room_data=[
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
                     "xxxxx...xxxxx",
@@ -333,7 +333,7 @@ def map_data_init():
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx" ])
-    zx.map_load_room(combo=[
+    zx.map_load_room(room_data=[
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",
                     "xxxxxxxxxxxxx",

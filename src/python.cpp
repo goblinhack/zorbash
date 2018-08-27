@@ -1963,7 +1963,6 @@ static void python_add_consts (void)
 
     PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH", MAP_DEPTH);
 
     PyModule_AddIntConstant(zx_mod, "KMOD_LSHIFT", KMOD_LSHIFT);
     PyModule_AddIntConstant(zx_mod, "KMOD_RSHIFT", KMOD_RSHIFT);

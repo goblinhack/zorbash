@@ -97,8 +97,8 @@ public:
 class Nodes {
 public:
     std::vector<Node>                         nodes;
-    int nodes_width                           {5};
-    int nodes_height                          {5};
+    int grid_width                           {5};
+    int grid_height                          {5};
     int max_depth                             {0};
     int max_vdepth                            {0};
 
@@ -107,9 +107,9 @@ public:
      */
     int depth_obstacle                        {-1};
 
-    Nodes (int nodes_width, int nodes_height) :
-        nodes_width                  (nodes_width),
-        nodes_height                 (nodes_height)
+    Nodes (int grid_width, int grid_height) :
+        grid_width                  (grid_width),
+        grid_height                 (grid_height)
     {_
         finish_constructor();
     }

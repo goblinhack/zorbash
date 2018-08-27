@@ -55,7 +55,6 @@ struct ascii_ {
 extern struct ascii_ ascii;
 
 int ascii_ok(int x, int y);
-int ascii_xyz_ok(int x, int y, int z);
 void pixel_to_ascii(int *x, int *y);
 
 void ascii_set_bg_solid(int x, int y);
