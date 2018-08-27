@@ -16,10 +16,22 @@
 #include <stack>
 #include <list>
 #include <algorithm>
-#include <random>       // std::default_random_engine
-#include <chrono>       // std::chrono::system_clock
 
 static bool dungeon_debug = true;
+
+class Grid {
+public:
+    Roomp node_rooms[GRID_WIDTH][GRID_HEIGHT] = {};
+
+    Grid()
+    {
+        for (auto dy = 0; dy < GRID_HEIGHT; dy++) {
+            for (auto dx = 0; dx < GRID_WIDTH; dx++) {
+                node_rooms[dx][dy] = nullptr;
+            }
+        }
+    }
+};
 
 class Dungeon {
 public:
@@ -37,18 +49,17 @@ public:
     //
     int grid_width                           {0};
     int grid_height                          {0};
-    Nodes                                     *nodes;
+    Nodes                                    *nodes;
 
     //
     // Root seed for the dungeon
     //
-    uint32_t                                  seed;
+    uint32_t                                 seed;
     
     //
     // Room pointers on the above nodes map
     //
-    Roomp                                     node_rooms[GRID_WIDTH]
-                                                        [GRID_HEIGHT];
+    Grid                                     grid {};
 
     void make_dungeon (void)
     {_
@@ -64,6 +75,7 @@ public:
             //
             reset_possible_rooms();
 
+            solve(&grid);
             DIE("x");
             debug("failed, redo from scratch");
         }
@@ -76,7 +88,7 @@ public:
         //return;
         //dump();
         //CON("dungeon (%u): %s", seed, s.c_str());
-        CON("dungeon (%u) %s: hash %llx", seed, s.c_str(), level_hash());
+        CON("dungeon (%u) %s", seed, s.c_str());
     }
 
     Dungeon (int map_width,
@@ -86,8 +98,8 @@ public:
              int seed) :
         map_width                  (map_width),
         map_height                 (map_height),
-        grid_width                (grid_width),
-        grid_height               (grid_height),
+        grid_width                 (grid_width),
+        grid_height                (grid_height),
         seed                       (seed)
     {_
         make_dungeon();
@@ -336,23 +348,6 @@ public:
         return false;
     }
 
-    bool is_movement_blocking_at (const int x, const int y)
-    {
-        for (auto d = 0; d < map_depth; d++) {
-            auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
-
-            if (v.is_wall             ||
-                v.is_treasure         ||
-                v.is_exit ||
-                v.is_entrance   ||
-                v.is_door) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     bool is_anything_at_fast (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
@@ -481,23 +476,6 @@ public:
         return false;
     }
 
-    bool is_movement_blocking_at_fast (const int x, const int y)
-    {
-        for (auto d = 0; d < map_depth; d++) {
-            auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
-
-            if (v.is_wall             ||
-                v.is_treasure         ||
-                v.is_exit ||
-                v.is_entrance   ||
-                v.is_door) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     void create_node_map (void)
     {
         if (grid_width > GRID_WIDTH) {
@@ -539,10 +517,14 @@ public:
 
                     if (!(x % 2) && !(y % 2)) {
                         if (!is_wall_at(x, y) && is_floor_at(x, y)) {
-                            Roomp r = node_rooms[x][y];
+#if 0
+                            auto X = x / ROOM_WIDTH;
+                            auto Y = y / ROOM_HEIGHT;
+                            Roomp r = grid.node_rooms[X][Y];
                             if (r) {
                                 c = '0' + r->depth;
                             }
+#endif
                         }
                     }
                     
@@ -556,25 +538,6 @@ public:
             }
             CON("%s", s.c_str());
         }
-    }
-
-    uint64_t level_hash (void)
-    {_
-        uint64_t h = 0;
-
-        for (auto y = 0; y < map_height; y++) {
-            for (auto x = 0; x < map_width; x++) {
-                for (auto d = map_depth - 1; d >= 0; d--) {
-                    auto m = getc(x, y, d);
-                    auto cr = Charmap::all_charmaps[m];
-                    auto c = cr.c;
-
-                    h += (c - 32) * x * y;
-                    h--;
-                }
-            }
-        }
-        return (h);
     }
 
     //
@@ -594,91 +557,6 @@ public:
         }
     }
     
-    //
-    // From a fixed list of random roomnos, return the next one. This
-    // ensures no room will ever appear more than once.
-    //
-    Roomp get_next_room (int node_x, int node_y)
-    {
-        auto n = nodes->getn(node_x, node_y);
-
-        auto tries = 100000;
-        while (tries-- > 0) {
-            auto ri = random_range(0, Room::all_rooms.size());
-            auto r = Room::all_rooms[ri];
-            
-            if (r->placed) {
-                continue;
-            }
-#if 0
-            if (n->dir_left != r->dir_left) {
-                continue;
-            }
-            if (n->dir_right != r->dir_right) {
-                continue;
-            }
-            if (n->dir_up != r->dir_up) {
-                continue;
-            }
-            if (n->dir_down != r->dir_down) {
-                continue;
-            }
-#endif
-            if (n->is_exit != r->is_exit) {
-                continue;
-            }
-            if (n->is_entrance != r->is_entrance) {
-                continue;
-            }
-            if (n->is_lock != r->is_lock) {
-                continue;
-            }
-            if (n->is_key != r->is_key) {
-                continue;
-            }
-            return (r);
-        }
-        DIE("failed to get a room");
-    }
-
-    void dmap_print_walls (dmap *d)
-    {
-        int16_t x;
-        int16_t y;
-
-        for (y = 0; y < MAP_HEIGHT; y++) {
-            for (x = 0; x < MAP_WIDTH; x++) {
-                int16_t e = d->val[x][y];
-                if (e == DMAP_IS_WALL) {
-                    if (is_floor_at(x, y)) {
-                        printf(".");
-                    } else if (is_wall_at(x, y)) {
-                        printf("x");
-                    } else {
-                        printf("_");
-                    }
-                    continue;
-                }
-                if (e == DMAP_IS_PASSABLE) {
-                    if (is_floor_at(x, y)) {
-                        printf(".");
-                    } else {
-                        printf(" ");
-                    }
-                    continue;
-                }
-
-                if (e > 0) {
-                    printf("%d", e % 10);
-                } else {
-                    printf(" ");
-                }
-            }
-            printf("\n");
-        }
-        printf("\n");
-    }
-
     void reset_possible_rooms (void)
     {
         cells.resize(map_width * map_height * Charmap::DEPTH_MAX,
@@ -689,6 +567,181 @@ public:
         for (auto r : Room::all_rooms) {
             r->placed = false;
         }
+    }
+
+    void room_print_at (Roomp r, int x, int y)
+    {
+        for (auto z = 0 ; z < Charmap::DEPTH_MAX; z++) {
+            for (auto dy = 0; dy < r->height; dy++) {
+                for (auto dx = 0; dx < r->width; dx++) {
+                    auto c = r->data[dx][dy][z];
+                    if (c && (c != Charmap::SPACE)) {
+                        putc(x + dx, y + dy, z, c);
+                    }
+                }
+            }
+        }
+    }
+
+    void rooms_print_all (Grid *g)
+    {
+        std::fill(cells.begin(), cells.end(), Charmap::SPACE);
+
+        for (auto x = 0; x < grid_width; x++) {
+            for (auto y = 0; y < grid_height; y++) {
+                Roomp r = g->node_rooms[x][y];
+                if (r) {
+                    room_print_at(r, x * ROOM_WIDTH, y * ROOM_HEIGHT);
+                }
+            }
+        }
+        dump();
+    }
+
+    bool room_is_a_candidate (const Node *n, Roomp r)
+    {
+        if (n->has_exit_up != r->has_exit_up) { 
+            return (false); 
+        }
+        if (n->has_exit_down != r->has_exit_down) { 
+            return (false); 
+        }
+        if (n->has_exit_left != r->has_exit_left) { 
+            return (false); 
+        }
+        if (n->has_exit_right != r->has_exit_right) { 
+            return (false); 
+        }
+#if 0
+        if (n->dir_left != r->dir_left) {
+            return (false);
+        }
+        if (n->dir_right != r->dir_right) {
+            return (false);
+        }
+        if (n->dir_up != r->dir_up) {
+            return (false);
+        }
+        if (n->dir_down != r->dir_down) {
+            return (false);
+        }
+#endif
+        if (n->is_exit != r->is_exit) {
+            return (false);
+        }
+        if (n->is_entrance != r->is_entrance) {
+            return (false);
+        }
+        if (n->is_lock != r->is_lock) {
+            return (false);
+        }
+        if (n->is_key != r->is_key) {
+            return (false);
+        }
+        return (true);
+    }
+
+    bool solve (int x, int y, Grid *g)
+    {
+CON("solve %d %d",x, y);
+        auto n = nodes->getn(x, y);
+
+        if (!nodes->node_is_a_room(n)) {
+            return (true);
+        }
+
+        if (g->node_rooms[x][y]) {
+            return (true);
+        }
+
+        std::vector<Roomp> candidates;
+
+        for (auto r : Room::all_rooms) {
+            if (!room_is_a_candidate(n, r)) {
+                continue;
+            }
+CON("room %d is a cand", r->roomno);
+
+            if (n->has_exit_down) {
+                auto o = g->node_rooms[x][y+1];
+                if (o && !(r->down_exits & o->up_exits)) {
+                    continue;
+                }
+            }
+            if (n->has_exit_up) {
+                auto o = g->node_rooms[x][y-1];
+                if (o && !(r->up_exits & o->down_exits)) {
+                    continue;
+                }
+            }
+            if (n->has_exit_right) {
+                auto o = g->node_rooms[x+1][y];
+                if (o && !(r->right_exits & o->left_exits)) {
+                    continue;
+                }
+            }
+            if (n->has_exit_left) {
+                auto o = g->node_rooms[x-1][y];
+                if (o && !(r->left_exits & o->right_exits)) {
+                    continue;
+                }
+            }
+            candidates.push_back(r);
+        }
+
+        auto ncandidates = candidates.size();
+	if (!ncandidates) {
+            CON("no candidates at %d %d",x, y);
+	    return (false);
+	}
+
+        auto r = candidates[random_range(0, ncandidates)];
+        g->node_rooms[x][y] = r;
+        
+        rooms_print_all(g);
+
+        if (n->has_exit_down) {
+            Grid old = *g;
+            if (!solve(x, y+1, g)) {
+                *g = old;
+            }
+        }
+        if (n->has_exit_up) {
+            Grid old = *g;
+            if (!solve(x, y-1, g)) {
+                *g = old;
+            }
+        }
+        if (n->has_exit_right) {
+            Grid old = *g;
+            if (!solve(x+1, y, g)) {
+                *g = old;
+            }
+        }
+        if (n->has_exit_left) {
+            Grid old = *g;
+            if (!solve(x-1, y, g)) {
+                *g = old;
+            }
+        }
+        return (true);
+    }
+
+    bool solve (Grid *g)
+    {
+        for (auto x = 0; x < grid_width; x++) {
+            for (auto y = 0; y < grid_height; y++) {
+                auto n = nodes->getn(x, y);
+                if (!n->is_entrance) {
+                    continue;
+                }
+                if (!solve(x, y, g)) {
+                    DIE("could not solve level");
+                }
+                break;
+            }
+        }
+        return (true);
     }
 };
 

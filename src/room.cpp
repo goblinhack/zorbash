@@ -8,6 +8,7 @@
 #include "my_tile.h"
 #include "my_room.h"
 #include "my_range.h"
+#include <bitset>
 
 uint32_t           Room::room_count = 0;
 std::vector<Roomp> Room::all_rooms;
@@ -28,26 +29,26 @@ void Room::create_h_flip (void)
     for (auto z = 0; z < Charmap::DEPTH_MAX; z++) {
         for (auto y = 0; y < height; y++) {
             std::string s;
-            for (auto x = width - 1; x >= 0; x--) {
-                r->data[x][y][z] = data[x][y][z];
+            for (auto x = 0; x < width; x++) {
+                r->data[x][y][z] = data[width - x - 1][y][z];
             }
         }
     }
 
-    r->dir_up      = dir_up;
-    r->dir_down    = dir_down;
-    r->is_entrance = is_entrance;
-    r->is_exit     = is_exit;
-    r->is_lock     = is_lock;
-    r->is_key      = is_key;
+    r->has_exit_up    = has_exit_up;
+    r->has_exit_down  = has_exit_down;
+    r->has_exit_left  = has_exit_right;
+    r->has_exit_right = has_exit_left;
 
-    if (dir_left) {
-        r->dir_left = false;
-        r->dir_right = true;
-    } else {
-        r->dir_left = true;
-        r->dir_right = false;
-    }
+    r->dir_up         = dir_up;
+    r->dir_down       = dir_down;
+    r->dir_left       = dir_right;
+    r->dir_right      = dir_left;
+
+    r->is_entrance    = is_entrance;
+    r->is_exit        = is_exit;
+    r->is_lock        = is_lock;
+    r->is_key         = is_key;
 
     r->finalize();
 }
@@ -57,27 +58,59 @@ void Room::create_h_flip (void)
 //
 void Room::find_exits (void)
 {
-    uint32_t e = 0;
+    uint32_t wall_bitmap = 0;
     int x, y = 0;
     int z = Charmap::DEPTH_WALLS;
 
-    for (e = 0, x = 0; x < width; x++) {
-        e = e << 1;
+    for (wall_bitmap = 0, x = 0, y = 0; x < width; x++) {
+        wall_bitmap = wall_bitmap << 1;
         if (data[x][y][z] != Charmap::SPACE) {
-            e |= 1;
+            wall_bitmap |= 1;
+        } else {
+            has_exit_up = true;
         }
     }
+    up_exits = ~wall_bitmap;
 
+    for (wall_bitmap = 0, x = 0, y = height - 1; x < width; x++) {
+        wall_bitmap = wall_bitmap << 1;
+        if (data[x][y][z] != Charmap::SPACE) {
+            wall_bitmap |= 1;
+        } else {
+            has_exit_down = true;
+        }
+    }
+    down_exits = ~wall_bitmap;
+
+    for (wall_bitmap = 0, x = 0, y = 0; y < height; y++) {
+        wall_bitmap = wall_bitmap << 1;
+        if (data[x][y][z] != Charmap::SPACE) {
+            wall_bitmap |= 1;
+        } else {
+            has_exit_left = true;
+        }
+    }
+    left_exits = ~wall_bitmap;
+
+    for (wall_bitmap = 0, x = width - 1, y = 0; y < height; y++) {
+        wall_bitmap = wall_bitmap << 1;
+        if (data[x][y][z] != Charmap::SPACE) {
+            wall_bitmap |= 1;
+        } else {
+            has_exit_right = true;
+        }
+    }
+    right_exits = ~wall_bitmap;
 }
 
 void Room::finalize (void)
 {
-    int debug = false;
+    find_exits();
+
+    int debug = true;
     if (debug) {
         dump();
     }
-
-    find_exits();
 }
 
 void Room::dump (void)
@@ -87,17 +120,27 @@ void Room::dump (void)
 
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
-            auto c = data[Charmap::DEPTH_WALLS][y][x];
+            auto c = data[x][y][Charmap::DEPTH_WALLS];
             if (!c || (c == ' ')) {
-                c = data[Charmap::DEPTH_FLOOR][y][x];
+                c = data[x][y][Charmap::DEPTH_FLOOR];
             }
             tmp[x][y] = c;
         }
     }
 
     CON("ROOM(%d): width %d height %d", roomno, width, height);
-    CON("ROOM(%d): up %d down %d left %d right %d",
+    auto b = std::bitset<32>(left_exits);
+    CON("ROOM(%d):   left  exits: %s", roomno, b.to_string().c_str());
+    b = std::bitset<32>(right_exits);
+    CON("ROOM(%d):   right exits: %s", roomno, b.to_string().c_str());
+    b = std::bitset<32>(up_exits);
+    CON("ROOM(%d):   up    exits: %s", roomno, b.to_string().c_str());
+    b = std::bitset<32>(down_exits);
+    CON("ROOM(%d):   down  exits: %s", roomno, b.to_string().c_str());
+    CON("ROOM(%d): direction: up %d down %d left %d right %d",
         roomno, dir_up, dir_down, dir_left, dir_right);
+    CON("ROOM(%d): exits:     up %d down %d left %d right %d",
+        roomno, has_exit_up, has_exit_down, has_exit_left, has_exit_right);
     for (auto y = 0; y < height; y++) {
         std::string s;
         for (auto x = 0; x < width; x++) {
@@ -105,4 +148,5 @@ void Room::dump (void)
         }
         CON("ROOM(%d): %s", roomno, s.c_str());
     }
+    CON(" ");
 }
