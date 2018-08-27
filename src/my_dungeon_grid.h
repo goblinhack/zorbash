@@ -97,8 +97,8 @@ public:
 class Nodes {
 public:
     std::vector<Node>                         nodes;
-    int grid_width                           {5};
-    int grid_height                          {5};
+    int grid_width                            {5};
+    int grid_height                           {5};
     int max_depth                             {0};
     int max_vdepth                            {0};
 

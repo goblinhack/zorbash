@@ -1797,9 +1797,8 @@ void Nodes::create_path_lock_to_key (int depth)
 
     point dmap_start(minx, miny);
     point dmap_end(maxx, maxy);
-    dmap_print_walls(&d);
     dmap_process(&d, dmap_start, dmap_end);
-    dmap_print_walls(&d);
+    //dmap_print_walls(&d);
 
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {

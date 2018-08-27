@@ -45,11 +45,21 @@ public:
     uint16_t                right_exits;
     uint16_t                up_exits;
     uint16_t                down_exits;
+
+    bool                    has_exit_up    {false};
+    bool                    has_exit_down  {false};
+    bool                    has_exit_left  {false};
+    bool                    has_exit_right {false};
     
+    /*
+     * Direction is the flow of the level, like can a player only go one
+     * way and not return
+     */
     bool                    dir_up       {false};
     bool                    dir_down     {false};
     bool                    dir_left     {false};
     bool                    dir_right    {false};
+
     bool                    is_entrance  {false};
     bool                    is_exit      {false};
     bool                    is_lock      {false};
