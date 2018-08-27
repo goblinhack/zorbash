@@ -28,9 +28,14 @@
 /*
  * Dungeon size
  */
-#define MAP_WIDTH                   80
-#define MAP_HEIGHT                  60
-#define MAP_DEPTH                   1
+#define GRID_WIDTH                  8
+#define GRID_HEIGHT                 7
+
+#define ROOM_WIDTH                  13
+#define ROOM_HEIGHT                 9
+
+#define MAP_WIDTH                   (GRID_WIDTH * ROOM_WIDTH)
+#define MAP_HEIGHT                  (GRID_HEIGHT * ROOM_HEIGHT)
 
 #define TILES_ACROSS                40 // per screen
 #define TILES_DOWN                  24

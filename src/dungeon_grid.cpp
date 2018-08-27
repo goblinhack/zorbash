@@ -247,14 +247,6 @@ redo:
     debug("made critical paths reachable");
 
     //
-    // Ensure each key can reach each lock
-    //
-    for (auto depth = 1; depth < max_depth; depth++) {
-        create_path_lock_to_key(depth);
-    }
-    debug("created path from keys to locks");
-
-    //
     // Add keys for moving between levels
     //
     for (auto depth = 2; depth <= max_depth; depth++) {
@@ -268,7 +260,16 @@ redo:
             goto redo;
         }
     }
-    debug("placed locks");
+    debug("placed keys");
+
+    //
+    // Ensure each key can reach each lock
+    //
+    for (auto depth = 1; depth < max_depth; depth++) {
+        create_path_lock_to_key(depth);
+    }
+    debug("created path from keys to locks");
+
 
     debug("final map");
 }
@@ -282,12 +283,12 @@ void Nodes::debug (std::string msg)
     auto step = 5;
     auto center = 3;
 
-    char out[(nodes_height+1) * step][(nodes_width+1) * step];
+    char out[(grid_height+1) * step][(grid_width+1) * step];
 
     memset(out, ' ', sizeof(out));
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto ox = (x * step) + center;
             auto oy = (y * step) + center;
             auto node = getn(x, y);
@@ -358,25 +359,25 @@ void Nodes::debug (std::string msg)
         }
     }
 
-    for (auto y = 0; y < nodes_height * step; y++) {
+    for (auto y = 0; y < grid_height * step; y++) {
         std::string s;
-        for (auto x = 0; x < nodes_width * step; x++) {
+        for (auto x = 0; x < grid_width * step; x++) {
             s += out[y][x];
         }
         CON("node-grid: %s", s.c_str());
     }
     CON("node-grid: ^^^^^ %s ^^^^^", msg.c_str());
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
             if (node->has_exit_down) {
-                if (y == nodes_height - 1) {
+                if (y == grid_height - 1) {
                     DIE("node %d,%d has exit down off end of map", x, y);
                 }
             }
             if (node->has_exit_right) {
-                if (x == nodes_width - 1) {
+                if (x == grid_width - 1) {
                     DIE("node %d,%d has exit right off end of map", x, y);
                 }
             }
@@ -391,12 +392,12 @@ void Nodes::debug (std::string msg)
                 }
             }
             if (node->has_secret_exit_down) {
-                if (y == nodes_height - 1) {
+                if (y == grid_height - 1) {
                     DIE("node %d,%d has secret exit down off end of map", x, y);
                 }
             }
             if (node->has_secret_exit_right) {
-                if (x == nodes_width - 1) {
+                if (x == grid_width - 1) {
                     DIE("node %d,%d has secret exit right off end of map", x, y);
                 }
             }
@@ -413,8 +414,8 @@ void Nodes::debug (std::string msg)
         }
     }
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
             if (node->has_exit_down) {
                 auto o = getn(x, y + 1);
@@ -467,8 +468,8 @@ void Nodes::debug (std::string msg)
         }
     }
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
             if (node->has_exit_down) {
                 auto o = getn(x, y + 1);
@@ -521,8 +522,8 @@ void Nodes::debug (std::string msg)
         }
     }
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
             if (node->has_exit_down) {
                 if (node->has_secret_exit_down) {
@@ -550,7 +551,7 @@ void Nodes::debug (std::string msg)
 
 int Nodes::offset (const int x, const int y)
 {_
-    auto offset = nodes_width * y;
+    auto offset = grid_width * y;
     offset += x;
 
     return (offset);
@@ -558,8 +559,8 @@ int Nodes::offset (const int x, const int y)
 
 bool Nodes::is_oob (const int x, const int y)
 {_
-    return ((x < 0) || (x >= nodes_width) ||
-            (y < 0) || (y >= nodes_height));
+    return ((x < 0) || (x >= grid_width) ||
+            (y < 0) || (y >= grid_height));
 }
 
 Node *Nodes::node_addr (const int x, const int y)
@@ -613,12 +614,12 @@ void Nodes::random_dir (int *dx, int *dy)
 //
 void Nodes::init_nodes (void)
 {
-    nodes.resize(nodes_width * nodes_height);
+    nodes.resize(grid_width * grid_height);
 
     std::vector< std::pair<point, point> > s;
 
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto n = getn(x, y);
             n->depth                                 = 0;
             n->pass                                  = 0;
@@ -645,14 +646,14 @@ void Nodes::init_nodes (void)
     }
 
 #if 0
-    auto obstacles = random_range(0, (nodes_width * nodes_height) / 4);
+    auto obstacles = random_range(0, (grid_width * grid_height) / 4);
     if (obstacles < 3) {
         obstacles = 3;
     }
 
     while (obstacles--) {
-        auto x = random_range(0, nodes_width);
-        auto y = random_range(1, nodes_height);
+        auto x = random_range(0, grid_width);
+        auto y = random_range(1, grid_height);
 
         auto o = getn(x, y);
         o->depth = depth_obstacle;
@@ -693,7 +694,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             //
             auto tries = 1000;
             while (tries--) {
-                x = random_range(0, nodes_width);
+                x = random_range(0, grid_width);
                 y = 0;
 
                 auto o = getn(x, y);
@@ -714,8 +715,8 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             //
             auto tries = 1000;
             while (tries--) {
-                x = random_range(0, nodes_width);
-                y = random_range(0, nodes_height);
+                x = random_range(0, grid_width);
+                y = random_range(0, grid_height);
                 random_dir(&dx, &dy);
 
                 auto o = getn(x, y);
@@ -758,7 +759,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             //
             auto tries = 1000;
             while (tries--) {
-                x = random_range(0, nodes_width);
+                x = random_range(0, grid_width);
                 y = max_vdepth;
 
                 random_dir(&dx, &dy);
@@ -802,8 +803,8 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             //
             auto tries = 1000;
             while (tries--) {
-                x = random_range(0, nodes_width);
-                y = random_range(0, nodes_height);
+                x = random_range(0, grid_width);
+                y = random_range(0, grid_height);
                 random_dir(&dx, &dy);
 
                 auto o = getn(x, y);
@@ -893,7 +894,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             if (random_range(0, 100) < 90) {
                 switch (random_range(0, 2)) {
                 case 0: 
-                    if (x < nodes_width - 1) {
+                    if (x < grid_width - 1) {
                         auto f = getn(x + 1, y);
                         if (node_is_free(f)) {
                             s.push_back(point(x + 1, y    )); 
@@ -914,7 +915,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             }
 
             if (random_range(0, 100) < 10) {
-                if (y < nodes_height - 1) {
+                if (y < grid_height - 1) {
                     auto f = getn(x, y + 1);
                     if (node_is_free(f)) {
                         s.push_back(point(x, y + 1));
@@ -984,8 +985,8 @@ void Nodes::join_nodes_of_same_depth (int depth, int pass)
     //
     // Connect up the nodes on the same depth
     //
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->depth != depth) {
                 continue;
@@ -1041,8 +1042,8 @@ void Nodes::join_depth_to_next_depth (int depth, int pass)
 {
     std::vector< std::pair<point, point> > s;
 
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->depth != depth) {
                 continue;
@@ -1135,8 +1136,8 @@ void Nodes::join_depth_secret (int depth, int pass)
 {
     std::vector< std::pair<point, point> > s;
 
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->depth != depth) {
                 continue;
@@ -1254,8 +1255,8 @@ void Nodes::place_lock (int depth, int pass)
 {
     std::vector<point> s;
 
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->pass != pass) {
                 continue;
@@ -1302,8 +1303,8 @@ void Nodes::hide_other_locks (int depth, int pass)
 {
     std::vector<point> s;
 
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->pass != pass) {
                 continue;
@@ -1355,8 +1356,8 @@ bool Nodes::place_key (int depth, int pass)
 {
     std::vector<point> s;
 
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->pass != pass) {
                 continue;
@@ -1398,7 +1399,7 @@ void Nodes::place_entrance (void)
 {
     std::vector<point> s;
 
-    for (auto x = 0; x < nodes_width; x++) {
+    for (auto x = 0; x < grid_width; x++) {
         for (auto y = 0; y < 1; y++) {
             auto o = getn(x, y);
             if (o->pass != 1) {
@@ -1439,8 +1440,8 @@ void Nodes::place_exit (void)
 {
     std::vector<point> s;
 
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->pass != 1) {
                 continue;
@@ -1480,8 +1481,8 @@ void Nodes::remove_stubs (void)
 {
     std::vector<point> s;
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
 
             if (node->has_exit_down) {
@@ -1538,8 +1539,8 @@ void Nodes::remove_stubs (void)
 
 void Nodes::dmap_print_walls (dmap *d)
 {
-    for (auto y = 0; y < nodes_height * 2 + 1; y++) {
-        for (auto x = 0; x < nodes_width * 2 + 1; x++) {
+    for (auto y = 0; y < grid_height * 2 + 1; y++) {
+        for (auto x = 0; x < grid_width * 2 + 1; x++) {
             int16_t e = d->val[x][y];
             if (e == DMAP_IS_WALL) {
                 printf("#");
@@ -1569,8 +1570,8 @@ void Nodes::create_path_to_exit (int pass)
     point start;
     point end;
     
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
             if (!n) {
                 continue;
@@ -1592,8 +1593,8 @@ void Nodes::create_path_to_exit (int pass)
     
     minx = 0;
     miny = 0;
-    maxx = nodes_width * 2 + 1;
-    maxy = nodes_height * 2 + 1;
+    maxx = grid_width * 2 + 1;
+    maxy = grid_height * 2 + 1;
     
     //
     // Set up obstacles for the exit search
@@ -1605,8 +1606,8 @@ void Nodes::create_path_to_exit (int pass)
     }
 
     if (pass == 1) {
-        for (auto y = 0; y < nodes_height; y++) {
-            for (auto x = 0; x < nodes_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
+            for (auto x = 0; x < grid_width; x++) {
                 auto n = getn(x, y);
                 auto X = (x * 2) + 1;
                 auto Y = (y * 2) + 1;
@@ -1630,8 +1631,8 @@ void Nodes::create_path_to_exit (int pass)
             }
         }
     } else {
-        for (auto y = 0; y < nodes_height; y++) {
-            for (auto x = 0; x < nodes_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
+            for (auto x = 0; x < grid_width; x++) {
                 auto n = getn(x, y);
                 auto X = (x * 2) + 1;
                 auto Y = (y * 2) + 1;
@@ -1665,8 +1666,8 @@ void Nodes::create_path_to_exit (int pass)
     dmap_process(&d, dmap_start, dmap_end);
     //dmap_print_walls(&d);
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
             auto X = x*2 + 1;
             auto Y = y*2 + 1;
@@ -1725,20 +1726,22 @@ void Nodes::create_path_lock_to_key (int depth)
     point start;
     point end;
     
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
             if (!n) {
                 continue;
             }
-            if (n->depth != depth) {
+            if (n->depth == depth) {
+                if (n->is_key) {
+                    end = point(x, y);
+                }
                 continue;
             }
-            if (n->is_key) {
-                end = point(x, y);
-            }
-            if (n->is_lock) {
-                start = point(x, y);
+            if (n->depth == depth + 1) {
+                if (n->is_lock) {
+                    start = point(x, y);
+                }
             }
         }
     }
@@ -1751,8 +1754,8 @@ void Nodes::create_path_lock_to_key (int depth)
     
     minx = 0;
     miny = 0;
-    maxx = nodes_width * 2 + 1;
-    maxy = nodes_height * 2 + 1;
+    maxx = grid_width * 2 + 1;
+    maxy = grid_height * 2 + 1;
     
     //
     // Set up obstacles for the exit search
@@ -1763,8 +1766,8 @@ void Nodes::create_path_lock_to_key (int depth)
         }
     }
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
             auto X = (x * 2) + 1;
             auto Y = (y * 2) + 1;
@@ -1794,38 +1797,46 @@ void Nodes::create_path_lock_to_key (int depth)
 
     point dmap_start(minx, miny);
     point dmap_end(maxx, maxy);
+    dmap_print_walls(&d);
     dmap_process(&d, dmap_start, dmap_end);
     dmap_print_walls(&d);
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
             auto X = x*2 + 1;
             auto Y = y*2 + 1;
             
-            if (n && (n->depth == depth) && node_is_a_room(n)) {
+            if (d.val[X][Y] == DMAP_IS_WALL) {
+                continue;
+            }
+            if (n && node_is_a_room(n)) {
                 if (d.val[X+1][Y] < d.val[X][Y]) {
                     auto o = getn(x+1, y);
-                    if (o && (o->depth == depth) && node_is_a_room(o)) {
+                    if (o && node_is_a_room(o)) {
                         n->dir_right = true;
+                        o->dir_left = true;
                     }
                 }
                 if (d.val[X-1][Y] < d.val[X][Y]) {
                     auto o = getn(x-1, y);
-                    if (o && (o->depth == depth) && node_is_a_room(o)) {
+                    if (o && node_is_a_room(o)) {
                         n->dir_left = true;
+                        o->dir_right = true;
                     }
                 }
                 if (d.val[X][Y+1] < d.val[X][Y]) {
                     auto o = getn(x, y+1);
-                    if (o && (o->depth == depth) && node_is_a_room(o)) {
+                    if (o && node_is_a_room(o)) {
                         n->dir_down = true;
+                        o->dir_up = true;
                     }
                 }
                 if (d.val[X][Y-1] < d.val[X][Y]) {
                     auto o = getn(x, y-1);
-                    if (o && (o->depth == depth) && node_is_a_room(o)) {
+                    if (o && node_is_a_room(o)) {
                         n->dir_up = true;
+                        o->dir_down = true;
                     }
                 }
             }
@@ -1841,8 +1852,8 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     point start;
     point end;
     
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
             if (!n) {
                 continue;
@@ -1860,8 +1871,8 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     
     minx = 0;
     miny = 0;
-    maxx = nodes_width * 2 + 1;
-    maxy = nodes_height * 2 + 1;
+    maxx = grid_width * 2 + 1;
+    maxy = grid_height * 2 + 1;
     
     dmap d;
     memset(&d, 0, sizeof(d));
@@ -1875,8 +1886,8 @@ void Nodes::make_paths_off_critical_path_reachable (void)
         }
     }
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
             auto X = (x * 2) + 1;
             auto Y = (y * 2) + 1;
@@ -1913,7 +1924,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     dmap_process(&d, dmap_start, dmap_end);
     //dmap_print_walls(&d);
 
-    bool on_critical_path[nodes_width][nodes_height];
+    bool on_critical_path[grid_width][grid_height];
     memset(on_critical_path, 0, sizeof(on_critical_path));
 
     auto p = dmap_solve(&d, start, end);
@@ -1921,10 +1932,10 @@ void Nodes::make_paths_off_critical_path_reachable (void)
         auto X = (c.x - 1) / 2;
         auto Y = (c.y - 1) / 2;
 
-        if (X >= nodes_width) {
+        if (X >= grid_width) {
             DIE("bug");
         }
-        if (Y >= nodes_height) {
+        if (Y >= grid_height) {
             DIE("bug");
         }
         if (X < 0) {
@@ -1940,8 +1951,8 @@ void Nodes::make_paths_off_critical_path_reachable (void)
         n->on_critical_path = true;
     }
 
-    for (auto y = 0; y < nodes_height; y++) {
-        for (auto x = 0; x < nodes_width; x++) {
+    for (auto y = 0; y < grid_height; y++) {
+        for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
 
             if (on_critical_path[x][y]) {
@@ -1990,8 +2001,8 @@ void Nodes::set_max_depth (void)
     auto max_depth_ = 0;
     auto max_vdepth_ = 0;
 
-    for (auto x = 0; x < nodes_width; x++) {
-        for (auto y = 0; y < nodes_height; y++) {
+    for (auto x = 0; x < grid_width; x++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->pass != 1) {
                 continue;

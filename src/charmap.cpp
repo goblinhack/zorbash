@@ -26,17 +26,11 @@ void Charmap::init_charmaps (void)
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_wall              = true;
-    c->is_movement_blocking = true;
     
     char_index              = Charmap::LADDER;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_ladder            = true;
-
-    char_index              = Charmap::CWALL;
-    c = &all_charmaps[char_index];
-    c->c                    = char_index;
-    c->is_cwall             = true;
 
     char_index              = Charmap::FLOOR;
     c = &all_charmaps[char_index];
@@ -48,57 +42,40 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_dusty             = true;
 
-    char_index              = Charmap::CORRIDOR;
-    c = &all_charmaps[char_index];
-    c->c                    = char_index;
-    c->is_corridor          = true;
-
     char_index              = Charmap::DOOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_door              = true;
-    c->is_movement_blocking = true;
     
     char_index              = Charmap::SECRET_DOOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_secret_door       = true;
-    c->is_movement_blocking = true;
 
-    char_index              = Charmap::START;
+    char_index              = Charmap::ENTRANCE;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_dungeon_way_up    = true;
-    c->is_movement_blocking = true;
+    c->is_entrance    = true;
 
     char_index              = Charmap::EXIT;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_dungeon_way_down  = true;
-    c->is_movement_blocking = true;
+    c->is_exit  = true;
 
     char_index              = Charmap::KEY;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_key               = true;
-    c->is_movement_blocking = true;
-
-    char_index              = Charmap::CHASM;
-    c = &all_charmaps[char_index];
-    c->c                    = char_index;
-    c->is_chasm             = true;
-    c->is_dissolves_walls   = true;
 
     char_index              = Charmap::LAVA;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_lava              = true;
-    c->is_dissolves_walls   = true;
 
     char_index              = Charmap::WATER;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_dissolves_walls   = true;
+    c->is_water             = true;
 
     char_index              = Charmap::ROCK;
     c = &all_charmaps[char_index];

@@ -14,10 +14,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     char *room_name = 0;
     int xxx = 0;
     int yyy = 0;
-    PyObject *py_combo = 0;
-    PyObject *py_floor = 0;
-    PyObject *py_walls = 0;
-    PyObject *py_items = 0;
+    PyObject *py_room_data = 0;
     int up = false;
     int down = false;
     int left = false;
@@ -28,10 +25,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     int is_key = false;
 
     static char *kwlist[] = {
-        (char*) "combo", 
-        (char*) "floor", 
-        (char*) "walls", 
-        (char*) "items", 
+        (char*) "room_data", 
         (char*) "xxx", 
         (char*) "yyy", 
         (char*) "room_name", 
@@ -46,12 +40,9 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, 
-                                     "|OOOOiisiiiiiiii", 
+                                     "|Oiisiiiiiiii", 
                                      kwlist, 
-                                     &py_combo,
-                                     &py_floor,
-                                     &py_walls,
-                                     &py_items,
+                                     &py_room_data,
                                      &xxx, 
                                      &yyy, 
                                      &room_name,
@@ -66,118 +57,79 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    if (!py_combo) {
-        if (!py_floor) {
-            ERR("map_load_room, missing floor data");
-            Py_RETURN_NONE;
-        }
-        if (!py_walls) {
-            ERR("map_load_room, missing walls data");
-            Py_RETURN_NONE;
-        }
+    if (!py_room_data) {
+        DIE("map_load_room, missing floor data");
     }
 
     auto r = Room::room_new();
 
-    if (py_combo) {
-        int combo_lines = PyList_Size(py_combo);
+    int room_data_lines = PyList_Size(py_room_data);
+    if (room_data_lines > ROOM_HEIGHT) {
+        DIE("room too tall");
+    }
 
-        for (auto i=0; i<combo_lines; i++){
-            auto o = PyList_GetItem(py_combo, i); /* Can't fail */
-            if (!o) {
-                continue;
-            }
-
-            std::string floor_string;
-            std::string walls_string;
-            std::string items_string;
-
-            for (auto c : py_obj_to_string(o)) {
-                auto m = Charmap::all_charmaps[c];
-
-                if (m.is_floor ||
-                    m.is_dusty ||
-                    m.is_corridor ||
-                    m.is_chasm ||
-                    m.is_lava ||
-                    m.is_water) {
-                    floor_string += c;
-                } else {
-                    floor_string += Charmap::SPACE;
-                }
-
-                if (m.is_movement_blocking ||
-                    m.is_wall ||
-                    m.is_cwall ||
-                    m.is_door ||
-                    m.is_dungeon_way_up ||
-                    m.is_dungeon_way_down ||
-                    m.is_rock) {
-                    walls_string += c;
-                } else {
-                    walls_string += Charmap::SPACE;
-                }
-
-                if (m.is_trap ||
-                    m.is_treasure ||
-                    m.is_key) {
-                    items_string += c;
-                } else {
-                    items_string += Charmap::SPACE;
-                }
-            }
-            r->data[Charmap::DEPTH_FLOOR].push_back(floor_string);
-            r->data[Charmap::DEPTH_WALLS].push_back(walls_string);
-            r->data[Charmap::DEPTH_ITEMS].push_back(items_string);
+    for (auto y=0; y<room_data_lines; y++){
+        auto o = PyList_GetItem(py_room_data, y); /* Can't fail */
+        if (!o) {
+            continue;
         }
-    } else {
-        int floor_lines = PyList_Size(py_floor);
-        int walls_lines = PyList_Size(py_walls);
-        int items_lines = PyList_Size(py_items);
-        int i;
 
-        if (floor_lines) {
-            if (floor_lines != walls_lines) {
-                ERR("mismatch in floor vs wall lines");
-                py_err();
+        std::string floor_string;
+        std::string walls_string;
+        std::string items_string;
+
+        for (auto c : py_obj_to_string(o)) {
+            auto m = Charmap::all_charmaps[c];
+
+            if (m.is_floor ||
+                m.is_dusty ||
+                m.is_lava ||
+                m.is_water) {
+                floor_string += c;
+            } else {
+                floor_string += Charmap::SPACE;
             }
-            if (items_lines) {
-                if (items_lines != walls_lines) {
-                    ERR("mismatch in items vs wall lines");
-                    py_err();
-                }
+
+            if (m.is_wall ||
+                m.is_door ||
+                m.is_entrance ||
+                m.is_exit ||
+                m.is_rock) {
+                walls_string += c;
+            } else {
+                walls_string += Charmap::SPACE;
+            }
+
+            if (m.is_trap ||
+                m.is_treasure ||
+                m.is_key) {
+                items_string += c;
+            } else {
+                items_string += Charmap::SPACE;
             }
         }
 
-        for (i=0; i<floor_lines; i++){
-            auto o = PyList_GetItem(py_floor, i); /* Can't fail */
-            if (!o) {
-                continue;
-            }
-
-            r->data[Charmap::DEPTH_FLOOR].push_back(py_obj_to_string(o));
+        if (floor_string.size() != ROOM_WIDTH){
+            DIE("room floor width mismatch, %zu, expected %d",
+                floor_string.size(), ROOM_WIDTH);
+        }
+        if (walls_string.size() != ROOM_WIDTH){
+            DIE("room walls width mismatch, %zu, expected %d",
+                walls_string.size(), ROOM_WIDTH);
+        }
+        if (items_string.size() != ROOM_WIDTH){
+            DIE("room items width mismatch, %zu, expected %d",
+                items_string.size(), ROOM_WIDTH);
         }
 
-        for (i=0; i<walls_lines; i++){
-            auto o = PyList_GetItem(py_walls, i); /* Can't fail */
-            if (!o) {
-                continue;
-            }
-
-            r->data[Charmap::DEPTH_WALLS].push_back(py_obj_to_string(o));
-        }
-
-        for (i=0; i<items_lines; i++){
-            auto o = PyList_GetItem(py_items, i); /* Can't fail */
-            if (!o) {
-                continue;
-            }
-
-            r->data[Charmap::DEPTH_ITEMS].push_back(py_obj_to_string(o));
+        for (auto x = 0; x < ROOM_WIDTH; x++) {
+            r->data[x][y][Charmap::DEPTH_FLOOR] = floor_string[x];
+            r->data[x][y][Charmap::DEPTH_WALLS] = walls_string[x];
+            r->data[x][y][Charmap::DEPTH_ITEMS] = items_string[x];
         }
     }
 
-    // remember to update create_rotated_clones
+    // remember to update create_h_flip
     r->dir_up      = up ? true : false;
     r->dir_down    = down ? true : false;
     r->dir_left    = left ? true : false;
@@ -186,10 +138,10 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     r->is_exit     = is_exit ? true : false;
     r->is_lock     = is_lock ? true : false;
     r->is_key      = is_key ? true : false;
-    // remember to update create_rotated_clones
+    // remember to update create_h_flip
 
     r->finalize();
-    r->create_rotated_clones();
+    r->create_h_flip();
 
     Py_RETURN_NONE;
 }

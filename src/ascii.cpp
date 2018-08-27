@@ -105,35 +105,6 @@ static int ascii_ok_for_scissors (int x, int y)
     return (ascii_ok(x, y));
 }
 
-int ascii_xyz_ok (int x, int y, int z)
-{
-    if (x < 0) {
-        return (false);
-    }
-
-    if (x >= ASCII_WIDTH) {
-        return (false);
-    }
-
-    if (y < 0) {
-        return (false);
-    }
-
-    if (y >= ASCII_HEIGHT) {
-        return (false);
-    }
-
-    if (z < 0) {
-        return (false);
-    }
-
-    if (z > MAP_DEPTH) {
-        return (false);
-    }
-
-    return (true);
-}
-
 void ascii_set_fg (int x, int y, color c)
 {
     if (!ascii_ok_for_scissors(x, y)) {

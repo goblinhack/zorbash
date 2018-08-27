@@ -16,8 +16,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/dir.o 			\
     $(OBJDIR)/dmap.o 			\
     $(OBJDIR)/charmap.o 		\
-    $(OBJDIR)/dungeon.o 		\
-    $(OBJDIR)/dungeon_grid.o 		\
     $(OBJDIR)/file.o 			\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
@@ -38,6 +36,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/ramdisk_read.o 		\
     $(OBJDIR)/room.o 			\
+    $(OBJDIR)/dungeon.o 		\
+    $(OBJDIR)/dungeon_grid.o 		\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/stb_image.o 		\
