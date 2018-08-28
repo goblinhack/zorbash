@@ -26,6 +26,7 @@ public:
      * Not necessarily an actual key or lock, but something allowing access
      * to the other node. Only one key per node depth.
      */
+    bool is_secret                            {false};
     bool is_key                               {false};
     bool is_lock                              {false};
     bool is_entrance                          {false};
@@ -121,6 +122,7 @@ public:
 
     void finish_constructor(void);
     void debug(std::string msg);
+    void dump(void);
     int offset(const int x, const int y);
     bool is_oob(const int x, const int y);
     Node *node_addr(const int x, const int y);
@@ -133,17 +135,18 @@ public:
     void join_nodes_of_same_depth(int depth, int pass);
     void join_depth_to_next_depth(int depth, int pass);
     void join_depth_secret(int depth, int pass);
-    void place_lock(int depth, int pass);
+    bool place_lock(int depth, int pass);
     void hide_other_locks(int depth, int pass);
     bool place_key(int depth, int pass);
-    void place_entrance(void);
-    void place_exit(void);
+    bool place_entrance(void);
+    bool place_exit(void);
     void set_max_depth(void);
     bool node_is_free(Node *n);
     bool node_is_a_room(Node *n);
     void remove_stubs();
-    void create_path_to_exit(int pass);
+    bool create_path_to_exit(int pass);
     void create_path_lock_to_key(int depth);
     void make_paths_off_critical_path_reachable(void);
     void dmap_print_walls(dmap *d);
+    void remove_redundant_directions(void);
 };

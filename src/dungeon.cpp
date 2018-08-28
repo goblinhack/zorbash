@@ -68,19 +68,14 @@ public:
         //
         create_node_map();
 
-        for (;;) {
-            //
-            // Reset the list of rooms we can place. We only place one of
-            // each possible room once per level
-            //
-            reset_possible_rooms();
+        //
+        // Reset the list of rooms we can place. We only place one of
+        // each possible room once per level
+        //
+        reset_possible_rooms();
 
-            solve(&grid);
-            DIE("x");
-            debug("failed, redo from scratch");
-        }
-        
-        debug("success, created dungeon");
+        solve(&grid);
+        debug("created dungeon");
     }
 
     void debug (std::string s)
@@ -612,7 +607,6 @@ public:
         if (n->has_exit_right != r->has_exit_right) { 
             return (false); 
         }
-#if 0
         if (n->dir_left != r->dir_left) {
             return (false);
         }
@@ -625,7 +619,53 @@ public:
         if (n->dir_down != r->dir_down) {
             return (false);
         }
-#endif
+        if (n->is_exit != r->is_exit) {
+            return (false);
+        }
+        if (n->is_entrance != r->is_entrance) {
+            return (false);
+        }
+        if (n->is_lock != r->is_lock) {
+            return (false);
+        }
+        if (n->is_key != r->is_key) {
+            return (false);
+        }
+        if (n->is_secret != r->is_secret) {
+            return (false);
+        }
+        if (n->depth != r->depth) {
+            return (false);
+        }
+        return (true);
+    }
+
+    bool room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
+    {
+        if (n->has_exit_up != r->has_exit_up) { 
+            return (false); 
+        }
+        if (n->has_exit_down != r->has_exit_down) { 
+            return (false); 
+        }
+        if (n->has_exit_left != r->has_exit_left) { 
+            return (false); 
+        }
+        if (n->has_exit_right != r->has_exit_right) { 
+            return (false); 
+        }
+        if (r->dir_left) {
+            return (false);
+        }
+        if (r->dir_right) {
+            return (false);
+        }
+        if (r->dir_up) {
+            return (false);
+        }
+        if (r->dir_down) {
+            return (false);
+        }
         if (n->is_exit != r->is_exit) {
             return (false);
         }
@@ -641,9 +681,90 @@ public:
         return (true);
     }
 
+    bool room_is_a_candidate_less_restrictive2 (const Node *n, Roomp r)
+    {
+        if (n->has_exit_up != r->has_exit_up) { 
+LOG("   %d",__LINE__);
+            return (false); 
+        }
+        if (n->has_exit_down != r->has_exit_down) { 
+LOG("   %d",__LINE__);
+            return (false); 
+        }
+        if (n->has_exit_left != r->has_exit_left) { 
+LOG("   %d",__LINE__);
+            return (false); 
+        }
+        if (n->has_exit_right != r->has_exit_right) { 
+LOG("   %d",__LINE__);
+            return (false); 
+        }
+        if (r->dir_left) {
+LOG("   %d",__LINE__);
+            return (false);
+        }
+        if (r->dir_right) {
+LOG("   %d",__LINE__);
+            return (false);
+        }
+        if (r->dir_up) {
+LOG("   %d",__LINE__);
+            return (false);
+        }
+        if (r->dir_down) {
+LOG("   %d",__LINE__);
+            return (false);
+        }
+        if (n->is_exit != r->is_exit) {
+LOG("   %d",__LINE__);
+            return (false);
+        }
+        if (n->is_entrance != r->is_entrance) {
+LOG("   %d",__LINE__);
+            return (false);
+        }
+        if (n->is_lock != r->is_lock) {
+LOG("   %d",__LINE__);
+            return (false);
+        }
+        if (n->is_key != r->is_key) {
+LOG("   %d",__LINE__);
+            return (false);
+        }
+        return (true);
+    }
+
+    bool room_fits_existing_rooms (Grid *g, Node *n, Roomp r, int x, int y)
+    {
+        if (n->has_exit_down) {
+            auto o = g->node_rooms[x][y+1];
+            if (o && !(r->down_exits & o->up_exits)) {
+                return (false);
+            }
+        }
+        if (n->has_exit_up) {
+            auto o = g->node_rooms[x][y-1];
+            if (o && !(r->up_exits & o->down_exits)) {
+                return (false);
+            }
+        }
+        if (n->has_exit_right) {
+            auto o = g->node_rooms[x+1][y];
+            if (o && !(r->right_exits & o->left_exits)) {
+                return (false);
+            }
+        }
+        if (n->has_exit_left) {
+            auto o = g->node_rooms[x-1][y];
+            if (o && !(r->left_exits & o->right_exits)) {
+                return (false);
+            }
+        }
+        return (true);
+    }
+
     bool solve (int x, int y, Grid *g)
     {
-CON("solve %d %d",x, y);
         auto n = nodes->getn(x, y);
 
         if (!nodes->node_is_a_room(n)) {
@@ -660,46 +781,53 @@ CON("solve %d %d",x, y);
             if (!room_is_a_candidate(n, r)) {
                 continue;
             }
-CON("room %d is a cand", r->roomno);
 
-            if (n->has_exit_down) {
-                auto o = g->node_rooms[x][y+1];
-                if (o && !(r->down_exits & o->up_exits)) {
-                    continue;
-                }
-            }
-            if (n->has_exit_up) {
-                auto o = g->node_rooms[x][y-1];
-                if (o && !(r->up_exits & o->down_exits)) {
-                    continue;
-                }
-            }
-            if (n->has_exit_right) {
-                auto o = g->node_rooms[x+1][y];
-                if (o && !(r->right_exits & o->left_exits)) {
-                    continue;
-                }
-            }
-            if (n->has_exit_left) {
-                auto o = g->node_rooms[x-1][y];
-                if (o && !(r->left_exits & o->right_exits)) {
-                    continue;
-                }
+            if (!room_fits_existing_rooms(g, n, r, x, y)) {
+                continue;
             }
             candidates.push_back(r);
         }
 
         auto ncandidates = candidates.size();
 	if (!ncandidates) {
-            CON("no candidates at %d %d",x, y);
-	    return (false);
+            for (auto r : Room::all_rooms) {
+                if (!room_is_a_candidate_less_restrictive(n, r)) {
+                    continue;
+                }
+
+                if (!room_fits_existing_rooms(g, n, r, x, y)) {
+                    continue;
+                }
+                candidates.push_back(r);
+            }
+
+            ncandidates = candidates.size();
+            if (!ncandidates) {
+                for (auto r : Room::all_rooms) {
+                    if (!room_is_a_candidate_less_restrictive2(n, r)) {
+LOG("room %d is not a cand", r->roomno);
+                        continue;
+                    }
+
+                    if (!room_fits_existing_rooms(g, n, r, x, y)) {
+LOG("room %d does not fit", r->roomno);
+                        continue;
+                    }
+                    candidates.push_back(r);
+                }
+
+                ncandidates = candidates.size();
+                if (!ncandidates) {
+                    rooms_print_all(g);
+                    DIE("no candidates at %d %d",x, y);
+                    return (false);
+                }
+            }
 	}
 
         auto r = candidates[random_range(0, ncandidates)];
         g->node_rooms[x][y] = r;
         
-        rooms_print_all(g);
-
         if (n->has_exit_down) {
             Grid old = *g;
             if (!solve(x, y+1, g)) {
@@ -736,11 +864,25 @@ CON("room %d is a cand", r->roomno);
                     continue;
                 }
                 if (!solve(x, y, g)) {
-                    DIE("could not solve level");
+                    dump();
+                    DIE("could not solve level at %d,%d", x, y);
                 }
                 break;
             }
         }
+
+        for (auto x = 0; x < grid_width; x++) {
+            for (auto y = 0; y < grid_height; y++) {
+                auto n = nodes->getn(x, y);
+                if (!n->is_secret) {
+                    continue;
+                }
+                solve(x, y, g);
+            }
+        }
+
+        rooms_print_all(g);
+
         return (true);
     }
 };
@@ -753,16 +895,17 @@ class Dungeon *dungeon_test (void)
         //
         // smaller node numbers mean larger rooms
         //
-        /* auto d = new */ Dungeon(MAP_WIDTH, MAP_HEIGHT, 6, 3, x);
+        mysrand(x);
+        new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
     }
 
     return (nullptr);
 #else
-int x = -577749009;
+int x = 663;
 //x = myrand();
 CON("seed: %d", x);
 mysrand(x);
-    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 7, 5, x);
+    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
 
     return (d);
 #endif
