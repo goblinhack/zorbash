@@ -13,13 +13,11 @@ class Room
 {
 private:
 public:
-    static uint32_t room_count;
     static Rooms all_rooms;
 
     Room (void)
     {
-        this->roomno = this->room_count;
-        this->room_count++;
+        this->roomno = all_rooms.size();
 
         newptr(this, "room");
     }
@@ -64,11 +62,9 @@ public:
     bool                    is_exit      {false};
     bool                    is_lock      {false};
     bool                    is_key       {false};
+    bool                    is_secret    {false};
 
-    /*
-     * Set when a node uses this room
-     */
-    uint32_t                depth {0};
+    uint8_t                 depth {0};
 
     /*
      * Final placement of this room in the dungeon. 

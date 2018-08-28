@@ -29,10 +29,10 @@
  * Dungeon size
  */
 #define GRID_WIDTH                  8
-#define GRID_HEIGHT                 7
+#define GRID_HEIGHT                 4
 
-#define ROOM_WIDTH                  13
-#define ROOM_HEIGHT                 9
+#define ROOM_WIDTH                  10
+#define ROOM_HEIGHT                 8
 
 #define MAP_WIDTH                   (GRID_WIDTH * ROOM_WIDTH)
 #define MAP_HEIGHT                  (GRID_HEIGHT * ROOM_HEIGHT)

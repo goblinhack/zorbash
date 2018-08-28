@@ -10,7 +10,8 @@
 #include "my_range.h"
 #include <bitset>
 
-uint32_t           Room::room_count = 0;
+static int debug_enabled = false;
+
 std::vector<Roomp> Room::all_rooms;
 
 Roomp Room::room_new (void)
@@ -49,6 +50,9 @@ void Room::create_h_flip (void)
     r->is_exit        = is_exit;
     r->is_lock        = is_lock;
     r->is_key         = is_key;
+    r->is_secret      = is_secret;
+
+    r->depth          = depth;
 
     r->finalize();
 }
@@ -107,8 +111,7 @@ void Room::finalize (void)
 {
     find_exits();
 
-    int debug = true;
-    if (debug) {
+    if (debug_enabled) {
         dump();
     }
 }
