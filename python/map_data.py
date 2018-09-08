@@ -8,7 +8,7 @@ zx.map_load_room(entrance=True, room_data=[
 "xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
 "xx......xx","xx......xx","xx......xx","xx......xx","xx......xx","xx......xx",
 "..........","..........","..........","..........","..........","..........",
-"....S.....","....S.....","....S.....","....S.....","....S.....","....S.....",
+".x..S.....","....S.....","....S.....","....S.....","....S.....","....S.....",
 "...xxx....","...xxx....","...xxx....","...xxx....","...xxx....","...xxx....",
 "xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
 "xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
@@ -463,12 +463,12 @@ zx.map_load_room(depth=1, room_data=[
 zx.map_load_room(depth=1, room_data=[
 "xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
 "xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
+"xxxxxxxxxx","xxxxxxxxxx","xxx......x","xxxxxxxxxx","x........x","xx......xx",
+"..........","..........",".....x....","...xxx....","...xxx....","....x.....",
+"..........","..........",".....x....","....x.....",".....x....","....xxx...",
+"..........","....xx....",".....x....","...xxx....","...xxx....",".....x....",
+"xx...xx..x","xxx....xxx","xxx......x","xx.....xxx","x........x","xxx.....xx",
+"xxLLLxxLLx","xxxxLLxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
 zx.map_load_room(depth=1, room_data=[
 "xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
 "xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
@@ -1046,252 +1046,6 @@ zx.map_load_room(key=True, room_data=[
 "xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
 
 #
-# normal rooms
-#
-zx.map_load_room(depth=1, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"......xxxx","......xxxx","......xxxx","......xxxx","......xxxx","......xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"..........","..........","..........","..........","..........","..........",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, left=True, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"x........x","x........x","x........x","x........x","x........x","x........x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",
-".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",
-".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, left=True, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"x........x","x........x","x........x","x........x","x........x","x........x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-".xx.......",".xx.......",".xx.......",".xx.......",".xx.......",".xx.......",
-".xxxxxx...",".xxxxxx...",".xxxxxx...",".xxxxxx...",".xxxxxx...",".xxxxxx...",
-".xx.......",".xx.......",".xx.......",".xx.......",".xx.......",".xx.......",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, left=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x........x","x........x","x........x","x........x","x........x","x........x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",
-".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",
-".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, left=True, room_data=[
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
-"x........x","x........x","x........x","x........x","x........x","x........x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",
-".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",
-".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, left=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x........x","x........x","x........x","x........x","x........x","x........x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",
-".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",".xxxxxx..x",
-".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",".xx......x",
-"x.x......x","x.x......x","x.x......x","x.x......x","x.x......x","x.x......x",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, up=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x",
-"x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, up=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x",
-"x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, up=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x",
-"..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x",
-"....x....x","....x....x","....x....x","....x....x","....x....x","....x....x",
-"....x....x","....x....x","....x....x","....x....x","....x....x","....x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, up=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x",
-"..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x",
-"....x....x","....x....x","....x....x","....x....x","....x....x","....x....x",
-"....x....x","....x....x","....x....x","....x....x","....x....x","....x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, up=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x",
-"..xxxxx...","..xxxxx...","..xxxxx...","..xxxxx...","..xxxxx...","..xxxxx...",
-"....x.....","....x.....","....x.....","....x.....","....x.....","....x.....",
-"....x.....","....x.....","....x.....","....x.....","....x.....","....x.....",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, down=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x",
-"x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, down=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x","x.xxxxx..x",
-"x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x","x..xxx...x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, down=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"....x....x","....x....x","....x....x","....x....x","....x....x","....x....x",
-"..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x",
-"...xxx...x","...xxx...x","...xxx...x","...xxx...x","...xxx...x","...xxx...x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
-zx.map_load_room(depth=1, down=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"....x....x","....x....x","....x....x","....x....x","....x....x","....x....x",
-"..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x","..xxxxx..x",
-"...xxx...x","...xxx...x","...xxx...x","...xxx...x","...xxx...x","...xxx...x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-zx.map_load_room(depth=1, down=True, room_data=[
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"....x.....","....x.....","....x.....","....x.....","....x.....","....x.....",
-"..xxxxx...","..xxxxx...","..xxxxx...","..xxxxx...","..xxxxx...","..xxxxx...",
-"...xxx....","...xxx....","...xxx....","...xxx....","...xxx....","...xxx....",
-"x...x....x","x...x....x","x...x....x","x...x....x","x...x....x","x...x....x",
-"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
-#
 # normal, depth 2
 #
 zx.map_load_room(depth=2, room_data=[
@@ -1303,6 +1057,7 @@ zx.map_load_room(depth=2, room_data=[
 "..........","..........","..........","..........","..........","..........",
 "xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
 "xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
+
 #
 # secret rooms
 #
