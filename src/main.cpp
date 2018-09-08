@@ -571,14 +571,17 @@ int32_t main (int32_t argc, char *argv[])
     if (x) {
     DIE("x");
     }
-
 #endif
+
+#if 0
     extern int dungeon_test(void);
     dungeon_test();
+
     auto y = 1;
     if (y) {
     DIE("x");
     }
+#endif
 
     if (!sdl_init()) {
 	ERR("SDL init");
