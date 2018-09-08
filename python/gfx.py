@@ -543,8 +543,8 @@ def init_tiles():
     tiles = [
             "player1.1",
             "player1.2",
-            "",
-            "",
+            "monst1.1",
+            "monst1.2",
             "",
             "",
             "",

@@ -12,10 +12,8 @@ class Tp:
                  name,
                  is_treasure=False,
                  is_wall=False,
-                 is_grass=False,
-                 is_road=False,
-                 is_trees=False,
                  is_player=False,
+                 is_monst=False,
                  d1000_appearing_roll=0):
 
         self.name = name
@@ -33,18 +31,6 @@ class Tp:
         self.is_wall = is_wall
         if is_wall:
             self.set_is_wall(is_wall)
-
-        self.is_grass = is_grass
-        if is_grass:
-            self.set_is_grass(is_grass)
-
-        self.is_road = is_road
-        if is_road:
-            self.set_is_road(is_road)
-
-        self.is_trees = is_trees
-        if is_trees:
-            self.set_is_trees(is_trees)
 
         self.is_treasure = is_treasure
         if is_treasure:
@@ -111,9 +97,6 @@ class Tp:
         self.is_rrr39 = False
         self.is_rrr40 = False
         self.is_rrr41 = False
-        self.is_grass = False
-        self.is_road = False
-        self.is_trees = False
         self.is_animated_walk_flip = False
         self.z_depth = False
         self.is_movable = False
@@ -378,18 +361,6 @@ class Tp:
         self.is_rrr41 = value
         zx.tp_set_is_rrr41(self, value)
 
-    def set_is_grass(self, value):
-        self.is_grass = value
-        zx.tp_set_is_grass(self, value)
-
-    def set_is_road(self, value):
-        self.is_road = value
-        zx.tp_set_is_road(self, value)
-
-    def set_is_trees(self, value):
-        self.is_trees = value
-        zx.tp_set_is_trees(self, value)
-
     def set_is_animated_walk_flip(self, value):
         self.is_animated_walk_flip = value
         zx.tp_set_is_animated_walk_flip(self, value)
@@ -426,18 +397,3 @@ def get_random_treasure(toughness=0):
         if roll >= tp.d1000_appearing_roll:
             return tp
 
-
-def same_type(tp1, tp2):
-    if tp1.is_monst and tp2.is_monst:
-        return True
-    if tp1.is_player and tp2.is_player:
-        return True
-    if tp1.is_wall and tp2.is_wall:
-        return True
-    if tp1.is_grass and tp2.is_grass:
-        return True
-    if tp1.is_road and tp2.is_road:
-        return True
-    if tp1.is_trees and tp2.is_trees:
-        return True
-    return False

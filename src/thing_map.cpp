@@ -14,7 +14,7 @@
 #include <algorithm>
 
 static void thing_map_scroll_do (int tw, int th)
-{_
+{
     const double step = 20.0;
 
     auto dx = game.state.map_at.x - game.state.map_wanted_at.x;
@@ -44,7 +44,7 @@ static void thing_map_scroll_do (int tw, int th)
 }
 
 static void thing_map_scroll_follow_player (void)
-{_
+{
     if (!game.state.player) {
         CON("no player");
         return;
@@ -77,28 +77,6 @@ static void thing_map_scroll_follow_player (void)
 #endif
 }
 
-static void thing_map_blit_foreground (int tw, int th)
-{
-    static Texp tex;
-    
-    if (!tex) {
-        tex = tex_find("foreground");
-        if (!tex) {
-            return;
-        }
-    }
-
-    double tx = game.state.map_at.x * tw;
-    double ty = game.state.map_at.y * th;
-
-    glcolor(WHITE);
-    blit_init();
-    blit(tex_get_gl_binding(tex), 0.0, 0.0, 1.0, 1.0, 
-         -tx, -ty, 
-         tw * MAP_WIDTH - tx, th * MAP_HEIGHT - ty);
-    blit_flush();
-}
-
 static void thing_map_blit_background (int tw, int th)
 {
     static Texp tex;
@@ -110,14 +88,14 @@ static void thing_map_blit_background (int tw, int th)
         }
     }
 
-    double tdx = 1.0 / (double)MAP_WIDTH;
-    double tdy = 1.0 / (double)MAP_HEIGHT;
+    static const double tdx = 1.0 / (double)MAP_WIDTH;
+    static const double tdy = 1.0 / (double)MAP_HEIGHT;
 
     double tlx = tdx * game.state.map_at.x;
     double tly = tdy * game.state.map_at.y;
 
-    double brx = tdx * (game.state.map_at.x + TILES_ACROSS);
-    double bry = tdy * (game.state.map_at.y + TILES_DOWN);
+    double brx = tdx * (game.state.map_at.x + (double)TILES_ACROSS);
+    double bry = tdy * (game.state.map_at.y + (double)TILES_DOWN);
 
     glcolor(WHITE);
     blit_init();
@@ -129,7 +107,7 @@ static void thing_blit_wall (Thingp t,
                              int tw, int th, 
                              int x, int y,
                              fpoint tl, fpoint br)
-{_  
+{  
     auto tp = t->tp;
     int dw = tw * 2 / 3;
     int dh = th * 2 / 3;
@@ -219,7 +197,7 @@ static void thing_blit_ladder (Thingp t,
                                int tw, int th, 
                                int x, int y,
                                fpoint tl, fpoint br)
-{_  
+{  
     auto tp = t->tp;
     int dh = th;
 
@@ -235,7 +213,7 @@ static void thing_blit_ladder (Thingp t,
 static void thing_blit_things (int tw, int th, 
                                int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
-{_
+{
     glcolor(WHITE);
     blit_init();
 
@@ -250,10 +228,14 @@ static void thing_blit_things (int tw, int th,
 
                     double tx = t->at.x - game.state.map_at.x;
                     double ty = t->at.y - game.state.map_at.y;
-                    tl.x = tx * tw;
-                    tl.y = ty * th;
-                    br.x = tl.x + tw;
-                    br.y = tl.y + th;
+
+                    static const double tdx = 1.0 / (double)TILES_ACROSS;
+                    static const double tdy = 1.0 / (double)TILES_DOWN;
+
+                    tl.x = tx * tdx;
+                    tl.y = ty * tdy;
+                    br.x = (tx+1) * tdx;
+                    br.y = (ty+1) * tdy;
     
                     Tpp tp = t->tp;
 
@@ -263,11 +245,6 @@ static void thing_blit_things (int tw, int th,
                         }
                     }
 
-                    tile_blit_fat(tp, t->current_tile->tile, 0, &tl, &br);
-                    tl.x = 0;
-                    tl.y = 0;
-                    br.x = 4;
-                    br.y = 4;
                     tile_blit_fat(tp, t->current_tile->tile, 0, &tl, &br);
 
                     //if (!tp) { // t->top_tile) {
@@ -288,7 +265,7 @@ static void thing_blit_things (int tw, int th,
 static void thing_blit_editor (int tw, int th, 
                                int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
-{_
+{
     blit_init();
     color c = RED;
     c.a = 50;
@@ -342,7 +319,7 @@ static void thing_map_reset (void)
 static void thing_find_all (int tw, int th, 
                             int minx, int miny, int minz,
                             int maxx, int maxy, int maxz)
-{_
+{
     game.state.player = nullptr;
 
     /*
@@ -375,7 +352,7 @@ static void thing_find_all (int tw, int th,
 }
 
 void thing_render_all (void)
-{_
+{
     /*
      * Get the bounds
      */
@@ -385,12 +362,12 @@ void thing_render_all (void)
     int minz = 0;
     int maxz = MAP_DEPTH;
 
-    int minx = std::max(1, 
+    int minx = std::max(0, 
                         (int) game.state.map_at.x - TILES_ACROSS / 2);
     int maxx = std::min(MAP_WIDTH - 1, 
                         (int)game.state.map_at.x + TILES_ACROSS + TILES_ACROSS / 2);
 
-    int miny = std::max(1, 
+    int miny = std::max(0, 
                         (int) game.state.map_at.y - TILES_DOWN / 2);
     int maxy = std::min(MAP_HEIGHT - 1, 
                         (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
@@ -410,5 +387,4 @@ void thing_render_all (void)
     }
 
     thing_blit_things(tw, th, minx, miny, minz, maxx, maxy, maxz);
-    thing_map_blit_foreground(tw, th);
 }

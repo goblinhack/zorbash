@@ -13,7 +13,12 @@ void game_display (void)
     static int first = true;
     if (first) {
         auto t = thing_new("player1");
-        t->move_to(fpoint(20, 30));
+        t->move_to(fpoint(5, 4));
+
+        for (auto x = 0; x < 20; x++) {
+            t = thing_new("monst1");
+            t->move_to(fpoint(x, x));
+        }
     }
     first = false;
 

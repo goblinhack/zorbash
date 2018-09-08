@@ -17,35 +17,37 @@
 #define ENABLE_THING_SANITY        // Checks on thing insert
 
 /*
- * How much the wheel mouse moves.
- */
-#define ENABLE_WHEEL_SCROLL_SPEED_SCALE         1.0
-#define ENABLE_WHEEL_MAX_SCROLL_SPEED_SCALE     10
-
-#define ENABLE_JOY_SCROLL_SPEED_SCALE           1.0
-#define ENABLE_JOY_MAX_SCROLL_SPEED_SCALE       1.5
-
-/*
- * Dungeon size
+ * Dungeon size; composed of a grid of rooms
  */
 #define GRID_WIDTH                  8
 #define GRID_HEIGHT                 4
-
 #define ROOM_WIDTH                  10
 #define ROOM_HEIGHT                 8
 
+/*
+ * Dungeon has a pad of tiles around the edges
+ */
 #define MAP_BORDER                  4
-#define MAP_WIDTH                   ((GRID_WIDTH * ROOM_WIDTH) + MAP_BORDER)
-#define MAP_HEIGHT                  ((GRID_HEIGHT * ROOM_HEIGHT) + MAP_BORDER)
+#define MAP_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
+#define MAP_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 
-#define TILES_ACROSS                20 // per screen
+/*
+ * Per screen
+ */
+#define TILES_ACROSS                20
 #define TILES_DOWN                  12
 
-#define MAX_TILE_WIDTH              64
-#define MAX_TILE_HEIGHT             64
-
+/*
+ * Tile size of the player
+ */
 #define TILE_WIDTH                  32
 #define TILE_HEIGHT                 32
+
+/*
+ * Largest tile for collisions
+ */
+#define MAX_TILE_WIDTH              64
+#define MAX_TILE_HEIGHT             64
 
 /*
  * Console
@@ -72,6 +74,15 @@
  * the message format in tx updates.
  */
 #define TP_MAX                      10000
+
+/*
+ * How much the wheel mouse moves.
+ */
+#define ENABLE_WHEEL_SCROLL_SPEED_SCALE         1.0
+#define ENABLE_WHEEL_MAX_SCROLL_SPEED_SCALE     10
+
+#define ENABLE_JOY_SCROLL_SPEED_SCALE           1.0
+#define ENABLE_JOY_MAX_SCROLL_SPEED_SCALE       1.5
 
 #include <string>
 
