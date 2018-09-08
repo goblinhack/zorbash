@@ -535,9 +535,14 @@ def init_tiles():
 
     zx.tex_load(
             file="data/gfx/platform.tga",
-            name="tiles")
+            name="platform")
+    zx.tex_load(
+            file="data/gfx/platform-bg.tga",
+            name="platform-bg")
 
     tiles = [
+            "player.1",
+            "player.2",
             "",
             "",
             "",
@@ -568,11 +573,10 @@ def init_tiles():
             "",
             "",
             "",
-            "",
-            "",
+            ########################################################
     ]
 
-    zx.tile_load_arr(tex_name="tiles", width=32, height=32, arr=tiles)
+    zx.tile_load_arr(tex_name="platform", width=32, height=32, arr=tiles)
 
 init_text()
 init_tiles()
