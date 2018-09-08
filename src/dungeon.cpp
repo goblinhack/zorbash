@@ -5,6 +5,7 @@
  */
 
 #include "my_main.h"
+#include "my_game.h"
 #include "my_point.h"
 #include "my_tile.h"
 #include "my_room.h"
@@ -42,7 +43,7 @@ public:
 
     int map_width                             {MAP_WIDTH};
     int map_height                            {MAP_HEIGHT};
-    int map_depth                             {Charmap::DEPTH_MAX};
+    int map_depth                             {MAP_DEPTH};
 
     //
     // High level view of the map.
@@ -246,7 +247,7 @@ public:
 
     bool is_wall_at (const int x, const int y)
     {
-        auto d = Charmap::DEPTH_WALLS;
+        auto d = MAP_DEPTH_WALLS;
         auto c = getc(x, y, d);
         auto v = Charmap::all_charmaps[c];
         return (v.is_wall);
@@ -365,7 +366,7 @@ public:
 
     bool is_floor_at_fast (const int x, const int y)
     {
-        const auto d = Charmap::DEPTH_FLOOR;
+        const auto d = MAP_DEPTH_FLOOR;
         auto c = getc_fast(x, y, d);
         auto v = Charmap::all_charmaps[c];
 
@@ -374,7 +375,7 @@ public:
 
     bool is_wall_at_fast (const int x, const int y)
     {
-        auto d = Charmap::DEPTH_WALLS;
+        auto d = MAP_DEPTH_WALLS;
         auto c = getc_fast(x, y, d);
         auto v = Charmap::all_charmaps[c];
         return (v.is_wall);
@@ -540,7 +541,7 @@ public:
     //
     void map_place_room_chars (Roomp room, int x, int y)
     {
-        for (auto z = 0 ; z < Charmap::DEPTH_MAX; z++) {
+        for (auto z = 0 ; z < MAP_DEPTH; z++) {
             for (auto dy = 0; dy < room->height; dy++) {
                 for (auto dx = 0; dx < room->width; dx++) {
                     auto c = room->data[dx][dy][z];
@@ -554,7 +555,7 @@ public:
     
     void reset_possible_rooms (void)
     {
-        cells.resize(map_width * map_height * Charmap::DEPTH_MAX,
+        cells.resize(map_width * map_height * MAP_DEPTH,
                      Charmap::SPACE);
 
         std::fill(cells.begin(), cells.end(), Charmap::SPACE);
@@ -566,7 +567,7 @@ public:
 
     void room_print_at (Roomp r, int x, int y)
     {
-        for (auto z = 0 ; z < Charmap::DEPTH_MAX; z++) {
+        for (auto z = 0 ; z < MAP_DEPTH; z++) {
             for (auto dy = 0; dy < r->height; dy++) {
                 for (auto dx = 0; dx < r->width; dx++) {
                     auto c = r->data[dx][dy][z];

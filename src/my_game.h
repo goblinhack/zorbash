@@ -11,9 +11,19 @@
 #include "my_dmap.h"
 #include "my_thing.h"
 
+enum {
+    MAP_DEPTH_FLOOR,
+    MAP_DEPTH_WALLS,
+    MAP_DEPTH_ITEMS,
+    MAP_DEPTH,
+};
+
 class Map {
 public:
-    Things             all_things;
+    Things              all_things;
+    std::vector<Thingp> things[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
+    uint8_t             is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t             is_ladder[MAP_WIDTH][MAP_HEIGHT] = {};
   
     template <class Archive>
     void serialize (Archive & archive)
@@ -27,10 +37,21 @@ public:
     uint32_t           fps_count                    = {};
     Map                map;
 
+    /*
+     * Where we're looking in the map
+     */
+    fpoint             map_at;
+    fpoint             map_wanted_at;
+    point              map_tile_over;
+    Thingp             player;
+
     template <class Archive>
     void serialize (Archive & archive)
     {
-        archive(cereal::make_nvp("map",             map));
+        archive(cereal::make_nvp("map",             map),
+                cereal::make_nvp("map_at",          map_at),
+                cereal::make_nvp("map_wanted_at",   map_wanted_at),
+                cereal::make_nvp("map_tile_over",   map_tile_over));
     }
 };
 
@@ -48,6 +69,7 @@ public:
     int32_t            drawable_gl_width            = {};
     int32_t            drawable_gl_height           = {};
     uint32_t           sdl_delay                    = 5;
+    bool               editor_mode                  = false;
 
     template <class Archive>
     void serialize (Archive & archive)
@@ -63,7 +85,8 @@ public:
                 cereal::make_nvp("video_gl_height",    video_gl_height),
                 cereal::make_nvp("drawable_gl_width",  drawable_gl_width),
                 cereal::make_nvp("drawable_gl_height", drawable_gl_height),
-                cereal::make_nvp("sdl_delay",          sdl_delay));
+                cereal::make_nvp("sdl_delay",          sdl_delay),
+                cereal::make_nvp("editor_mode",        editor_mode));
     }
 };
 

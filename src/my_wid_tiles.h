@@ -26,7 +26,7 @@ public:
     int tile_w = {};
     int tile_h = {};
     double scale = {};
-    tilep tile[32][32] = {};
+    Tilep tile[32][32] = {};
 };
 
 uint8_t wid_tiles_init(void);

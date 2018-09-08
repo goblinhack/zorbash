@@ -11,8 +11,8 @@
 
 #include <memory>
 
-typedef std::shared_ptr< class font > fontp;
-extern fontp fixed_font;
+typedef std::shared_ptr< class Font > Fontp;
+extern Fontp fixed_font;
 
 #include "SDL_ttf.h"
 #include "my_main.h"
@@ -35,21 +35,21 @@ typedef struct {
 typedef struct {
     SDL_Surface *image = {};
     uint32_t tex;
-    texp tex_p = {};
+    Texp tex_p = {};
 } glyphtex;
 
 void font_fini(void);
 uint8_t font_init(void);
-fontp font_find(std::string);
+Fontp font_find(std::string);
 
-class font {
+class Font {
 
 public:
-    font (void)
+    Font (void)
     {
     }
 
-    ~font (void)
+    ~Font (void)
     {
     }
 
@@ -59,9 +59,9 @@ public:
     SDL_Color background = {};
     int u_to_c[TTF_GLYPH_MAX+1]= {};
     int valid[TTF_GLYPH_MAX+1]= {};
-    tilep cache[TTF_GLYPH_MAX+1] = {};
+    Tilep cache[TTF_GLYPH_MAX+1] = {};
 
-    tilep unicode_to_tile (int u)
+    Tilep unicode_to_tile (int u)
     {
         if ((u < 0) || (u >= TTF_GLYPH_MAX)) {
             if (u == L'?') {

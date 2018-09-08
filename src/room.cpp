@@ -23,11 +23,11 @@ Roomp Room::room_new (void)
 
 void Room::create_h_flip (void)
 {_
-    std::vector<std::string> rot[Charmap::DEPTH_MAX];
+    std::vector<std::string> rot[MAP_DEPTH];
 
     auto r = Room::room_new();
 
-    for (auto z = 0; z < Charmap::DEPTH_MAX; z++) {
+    for (auto z = 0; z < MAP_DEPTH; z++) {
         for (auto y = 0; y < height; y++) {
             std::string s;
             for (auto x = 0; x < width; x++) {
@@ -64,7 +64,7 @@ void Room::find_exits (void)
 {
     uint32_t wall_bitmap = 0;
     int x, y = 0;
-    int z = Charmap::DEPTH_WALLS;
+    int z = MAP_DEPTH_WALLS;
 
     for (wall_bitmap = 0, x = 0, y = 0; x < width; x++) {
         wall_bitmap = wall_bitmap << 1;
@@ -123,9 +123,9 @@ void Room::dump (void)
 
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
-            auto c = data[x][y][Charmap::DEPTH_WALLS];
+            auto c = data[x][y][MAP_DEPTH_WALLS];
             if (!c || (c == ' ')) {
-                c = data[x][y][Charmap::DEPTH_FLOOR];
+                c = data[x][y][MAP_DEPTH_FLOOR];
             }
             tmp[x][y] = c;
         }

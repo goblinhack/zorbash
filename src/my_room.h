@@ -5,6 +5,7 @@
  */
 
 #include "my_charmap.h"
+#include "my_game.h"
 
 typedef std::shared_ptr< class Room > Roomp;
 typedef std::vector<Roomp> Rooms;
@@ -34,7 +35,7 @@ public:
     uint8_t                 width  {ROOM_WIDTH};
     uint8_t                 height {ROOM_HEIGHT};
 
-    char                    data[ROOM_WIDTH][ROOM_HEIGHT][Charmap::DEPTH_MAX];
+    char                    data[ROOM_WIDTH][ROOM_HEIGHT][MAP_DEPTH];
     
     /*
      * A bitmap of possible exits.

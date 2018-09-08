@@ -10,7 +10,7 @@
 #define _MY_TILE_H_
 
 #include <memory>
-typedef std::shared_ptr< class tile > tilep;
+typedef std::shared_ptr< class Tile > Tilep;
 
 #include <map>
 #include "my_main.h"
@@ -19,14 +19,14 @@ typedef std::shared_ptr< class tile > tilep;
 #include "my_tex.h"
 #include "my_thing_template.h"
 
-class tile {
+class Tile {
 
 public:
-    tile (void)
+    Tile (void)
     {
     }
 
-    ~tile (void)
+    ~Tile (void)
     {
     }
 
@@ -68,12 +68,12 @@ public:
 #endif
 
     int32_t gl_surface_binding {};
-    texp tex;
+    Texp tex;
     uint8_t pix[MAX_TILE_WIDTH][MAX_TILE_HEIGHT] = {};
 };
 
-extern std::map<std::string, std::shared_ptr< class tile > > tiles;
-typedef std::shared_ptr< class tile > tilep;
+extern std::map<std::string, std::shared_ptr< class Tile > > all_tiles;
+typedef std::shared_ptr< class Tile > Tilep;
 
 uint8_t tile_init(void);
 void tile_fini(void);
@@ -82,38 +82,38 @@ void tile_load(std::string file, uint32_t width, uint32_t height,
 void tile_load_arr(std::string tex,
                    uint32_t width, uint32_t height,
                    uint32_t nargs, const char * arr[]);
-tilep tile_find(std::string name);
-tilep tile_from_surface(SDL_Surface *surface,
+Tilep tile_find(std::string name);
+Tilep tile_from_surface(SDL_Surface *surface,
                         std::string optional_file,
                         std::string name);
-int32_t tile_get_gl_binding(tilep);
-std::string tile_get_name(tilep);
-int32_t tile_get_width(tilep);
-int32_t tile_get_height(tilep);
-texp tile_get_tex(tilep);
-uint32_t tile_get_index(tilep);
-tilep string2tile(const char **s);
-tilep string2tile(std::string &s, int *len);
-tilep string2tile(std::wstring &s, int *len);
-void tile_get_coords(tilep, float *x1, float *y1, float *x2, float *y2);
-void tile_blit_colored_fat(tpp tp,
-                           tilep tile,
+int32_t tile_get_gl_binding(Tilep);
+std::string tile_get_name(Tilep);
+int32_t tile_get_width(Tilep);
+int32_t tile_get_height(Tilep);
+Texp tile_get_tex(Tilep);
+uint32_t tile_get_index(Tilep);
+Tilep string2tile(const char **s);
+Tilep string2tile(std::string &s, int *len);
+Tilep string2tile(std::wstring &s, int *len);
+void tile_get_coords(Tilep, float *x1, float *y1, float *x2, float *y2);
+void tile_blit_colored_fat(Tpp tp,
+                           Tilep tile,
                            fpoint tl,
                            fpoint br,
                            color color_tl,
                            color color_tr,
                            color color_bl,
                            color color_br);
-void tile_blit_fat(tpp tp, tilep tile, char *name, fpoint *tl, fpoint *br);
-void tile_blit_fat_with_offset(tpp tp, tilep tile, 
+void tile_blit_fat(Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br);
+void tile_blit_fat_with_offset(Tpp tp, Tilep tile, 
                                char *name, fpoint *tl,
                                fpoint *br,
                                double left_off,
                                double right_off,
                                double top_off,
                                double bot_off);
-void tile_get_blit_size(tpp tp, tilep tile, char *name, 
+void tile_get_blit_size(Tpp tp, Tilep tile, char *name, 
                         fpoint *tl, fpoint *br);
-void tile_blit_at(tilep tile, char *name, fpoint tl, fpoint br);
-void tile_blit(tilep tile, char *name, point at);
+void tile_blit_at(Tilep tile, char *name, fpoint tl, fpoint br);
+void tile_blit(Tilep tile, char *name, point at);
 #endif

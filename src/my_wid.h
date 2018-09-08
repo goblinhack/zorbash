@@ -65,10 +65,10 @@ std::wstring wid_get_text_with_cursor(widp);
 std::wstring wid_get_tooltip(widp);
 std::string wid_logname(widp);
 std::string wid_name(widp);
-texp wid_get_tex(widp, fsize *size);
-tilep wid_get_tile(widp);
-tilep wid_get_tile2(widp);
-tpp wid_get_thing_template(widp);
+Texp wid_get_tex(widp, fsize *size);
+Tilep wid_get_tile(widp);
+Tilep wid_get_tile2(widp);
+Tpp wid_get_thing_template(widp);
 typedef uint8_t(*on_joy_button_t)(widp, int32_t x, int32_t y);
 typedef uint8_t(*on_key_down_t)(widp, const struct SDL_KEYSYM *);
 typedef uint8_t(*on_key_up_t)(widp, const struct SDL_KEYSYM *);
@@ -224,7 +224,7 @@ void wid_set_text_lhs(widp, uint8_t val);
 void wid_set_text_pos(widp, uint8_t val, int32_t x, int32_t y);
 void wid_set_text_rhs(widp, uint8_t val);
 void wid_set_text_top(widp, uint8_t val);
-void wid_set_thing_template(widp, tpp);
+void wid_set_thing_template(widp, Tpp);
 void wid_set_tilename(widp, std::string name);
 void wid_set_tooltip(widp, std::wstring string);
 void wid_set_tooltip2(widp, std::wstring string);
@@ -465,7 +465,7 @@ public:
     widp scrollbar_vert {};
     widp scrollbar_owner {};
 
-    tpp tp {};
+    Tpp tp {};
 
     /*
      * The real position after scrollbar adjustments.
@@ -473,10 +473,10 @@ public:
     point abs_tl {};
     point abs_br {};
 
-    texp tex {};
-    tilep tile {};
-    tilep first_tile {};
-    thing_tilep current_tile {};
+    Texp tex {};
+    Tilep tile {};
+    Tilep first_tile {};
+    Tileinfop current_tile {};
 
     fsize texuv {};
 
@@ -602,7 +602,7 @@ extern std::wstring wid_tooltip_string;
 extern std::wstring wid_tooltip2_string;
 
 static inline
-void wid_set_tile (widp w, tilep tile)
+void wid_set_tile (widp w, Tilep tile)
 {
     verify(w.get());
 

@@ -22,14 +22,14 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
         for (x = x1; x <= x2; x++) {
             ascii_set_bg(x, y, c);
             ascii_set_bg(x, y, col_mid);
-            ascii_set_fg(x, y, (tilep)nullptr);
+            ascii_set_fg(x, y, (Tilep)nullptr);
         }
     } else {
         for (y = y1; y <= y2; y++) {
             for (x = x1; x <= x2; x++) {
                 ascii_set_bg(x, y, c);
                 ascii_set_bg(x, y, col_tl);
-                ascii_set_fg(x, y, (tilep)nullptr);
+                ascii_set_fg(x, y, (Tilep)nullptr);
             }
         }
 
@@ -37,7 +37,7 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
             for (x = x1 + 1; x <= x2; x++) {
                 ascii_set_bg(x, y, c);
                 ascii_set_bg(x, y, col_br);
-                ascii_set_fg(x, y, (tilep)nullptr);
+                ascii_set_fg(x, y, (Tilep)nullptr);
             }
             ascii_set_bg(x1, y2, c);
             ascii_set_bg(x1, y2, col_br);
@@ -47,7 +47,7 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
             for (x = x1 + 1; x <= x2 - 1; x++) {
                 ascii_set_bg(x, y, c);
                 ascii_set_bg(x, y, col_mid);
-                ascii_set_fg(x, y, (tilep)nullptr);
+                ascii_set_fg(x, y, (Tilep)nullptr);
             }
         }
     }
@@ -55,7 +55,7 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
     for (x = x1; x <= x2; x++) {
         for (y = y1; y <= y2; y++) {
             ascii_set_context(x, y, context);
-            ascii_set_fg(x, y, (tilep)nullptr);
+            ascii_set_fg(x, y, (Tilep)nullptr);
         }
     }
 

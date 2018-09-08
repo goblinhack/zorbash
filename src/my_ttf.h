@@ -12,9 +12,9 @@
 #ifndef _MY_TTF_H_
 #define _MY_TTF_H_
 
-fontp ttf_new(std::string name, int pointSize, int style);
-void ttf_free(fontp);
+Fontp ttf_new(std::string name, int pointSize, int style);
+void ttf_free(Fontp);
 void ttf2tga(void);
-fontp ttf_read_tga(fontp, const char *name, int pointsize);
-fontp ttf_write_tga(std::string name, int pointsize, int style);
+Fontp ttf_read_tga(Fontp, const char *name, int pointsize);
+Fontp ttf_write_tga(std::string name, int pointsize, int style);
 #endif

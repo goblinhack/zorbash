@@ -5,11 +5,11 @@
  */
 
 #include "my_main.h"
-#include "my_thing_tile.h"
+#include "my_tile_info.h"
 #include "my_tile.h"
 
-thing_templates thing_templates_map;
-thing_templates_create_order thing_templates_create_order_map;
+Tpmap tp_map;
+Tpmap_create_order tp_create_order_map;
 
 static uint8_t tp_init_done;
 
@@ -27,7 +27,7 @@ void tp_fini (void)
     }
 }
 
-tpp tp_load (int id, std::string name)
+Tpp tp_load (int id, std::string name)
 {_
     if (tp_find(name)) {
         ERR("thing template name [%s] already used", name.c_str());
@@ -37,10 +37,10 @@ tpp tp_load (int id, std::string name)
         ERR("too many thing templates");
     }
 
-    auto t = std::make_shared< class thing_template >();
+    auto t = std::make_shared< class Tp >();
 
     {
-        auto result = thing_templates_map.insert(std::make_pair(name, t));
+        auto result = tp_map.insert(std::make_pair(name, t));
 
         if (result.second == false) {
             DIE("thing insert name [%s] failed", name.c_str());
@@ -51,7 +51,7 @@ tpp tp_load (int id, std::string name)
         static unsigned int id;
         id++;
 
-        auto result = thing_templates_create_order_map.insert(std::make_pair(id, t));
+        auto result = tp_create_order_map.insert(std::make_pair(id, t));
         if (result.second == false) {
             ERR("thing template insert create order [%s] failed", name.c_str());
         }
@@ -62,7 +62,7 @@ tpp tp_load (int id, std::string name)
     return (t);
 }
 
-void tp_update (tpp t)
+void tp_update (Tpp t)
 {_
     /*
      * Hook point to modify tps post python config.
@@ -72,28 +72,28 @@ void tp_update (tpp t)
 /*
  * Find an existing thing.
  */
-tpp tp_find (std::string name)
+Tpp tp_find (std::string name)
 {_
     if (name == "") {
         ERR("no name for tp find");
     }
 
-    auto result = thing_templates_map.find(name);
+    auto result = tp_map.find(name);
 
-    if (result == thing_templates_map.end()) {
+    if (result == tp_map.end()) {
         return (0);
     }
 
     return (result->second);
 }
 
-tpp tp_find_short_name (std::string name)
+Tpp tp_find_short_name (std::string name)
 {_
-    for (auto ti : thing_templates_map) {
-        auto tpp = ti.second;
+    for (auto ti : tp_map) {
+        auto Tpp = ti.second;
 
-        if (!strcasecmp(name.c_str(), tpp->short_name.c_str())) {
-            return (tpp);
+        if (!strcasecmp(name.c_str(), Tpp->short_name.c_str())) {
+            return (Tpp);
         }
     }
 
@@ -102,122 +102,122 @@ tpp tp_find_short_name (std::string name)
     return (0);
 }
 
-std::string tp_name (tpp t)
+std::string tp_name (Tpp t)
 {_
     return (t->short_name);
 }
 
-std::string tp_short_name (tpp t)
+std::string tp_short_name (Tpp t)
 {_
     return (t->short_name);
 }
 
-std::string tp_raw_name (tpp t)
+std::string tp_raw_name (Tpp t)
 {_
     return (t->raw_name);
 }
 
-thing_tiles tp_get_tiles (tpp t)
+Tileinfomap tp_get_tiles (Tpp t)
 {_
     return (t->tiles);
 }
 
-thing_tiles tp_get_left_tiles (tpp t)
+Tileinfomap tp_get_left_tiles (Tpp t)
 {_
     return (t->left_tiles);
 }
 
-thing_tiles tp_get_right_tiles (tpp t)
+Tileinfomap tp_get_right_tiles (Tpp t)
 {_
     return (t->right_tiles);
 }
 
-thing_tiles tp_get_top_tiles (tpp t)
+Tileinfomap tp_get_top_tiles (Tpp t)
 {_
     return (t->top_tiles);
 }
 
-thing_tiles tp_get_bot_tiles (tpp t)
+Tileinfomap tp_get_bot_tiles (Tpp t)
 {_
     return (t->bot_tiles);
 }
 
-thing_tiles tp_get_tl_tiles (tpp t)
+Tileinfomap tp_get_tl_tiles (Tpp t)
 {_
     return (t->tl_tiles);
 }
 
-thing_tiles tp_get_tr_tiles (tpp t)
+Tileinfomap tp_get_tr_tiles (Tpp t)
 {_
     return (t->tr_tiles);
 }
 
-thing_tiles tp_get_bl_tiles (tpp t)
+Tileinfomap tp_get_bl_tiles (Tpp t)
 {_
     return (t->bl_tiles);
 }
 
-thing_tiles tp_get_br_tiles (tpp t)
+Tileinfomap tp_get_br_tiles (Tpp t)
 {_
     return (t->br_tiles);
 }
 
-thing_tiles tp_get_horiz_tiles (tpp t)
+Tileinfomap tp_get_horiz_tiles (Tpp t)
 {_
     return (t->horiz_tiles);
 }
 
-thing_tiles tp_get_vert_tiles (tpp t)
+Tileinfomap tp_get_vert_tiles (Tpp t)
 {_
     return (t->vert_tiles);
 }
 
-thing_tiles tp_get_l90_tiles (tpp t)
+Tileinfomap tp_get_l90_tiles (Tpp t)
 {_
     return (t->l90_tiles);
 }
 
-thing_tiles tp_get_l180_tiles (tpp t)
+Tileinfomap tp_get_l180_tiles (Tpp t)
 {_
     return (t->l180_tiles);
 }
 
-thing_tiles tp_get_l_tiles (tpp t)
+Tileinfomap tp_get_l_tiles (Tpp t)
 {_
     return (t->l_tiles);
 }
 
-thing_tiles tp_get_l270_tiles (tpp t)
+Tileinfomap tp_get_l270_tiles (Tpp t)
 {_
     return (t->l270_tiles);
 }
 
-thing_tiles tp_get_t_tiles (tpp t)
+Tileinfomap tp_get_t_tiles (Tpp t)
 {_
     return (t->t_tiles);
 }
 
-thing_tiles tp_get_t90_tiles (tpp t)
+Tileinfomap tp_get_t90_tiles (Tpp t)
 {_
     return (t->t90_tiles);
 }
 
-thing_tiles tp_get_t180_tiles (tpp t)
+Tileinfomap tp_get_t180_tiles (Tpp t)
 {_
     return (t->t180_tiles);
 }
 
-thing_tiles tp_get_t270_tiles (tpp t)
+Tileinfomap tp_get_t270_tiles (Tpp t)
 {_
     return (t->t270_tiles);
 }
 
-thing_tiles tp_get_x_tiles (tpp t)
+Tileinfomap tp_get_x_tiles (Tpp t)
 {_
     return (t->x_tiles);
 }
 
-tilep tp_first_tile (tpp tp)
+Tilep tp_first_tile (Tpp tp)
 {_
     auto tiles = tp_get_tiles(tp);
 
@@ -228,7 +228,7 @@ tilep tp_first_tile (tpp tp)
     /*
      * Get the first anim tile.
      */
-    auto thing_tile = thing_tile_first(tiles);
+    auto Tileinfo = tile_info_first(tiles);
 
-    return (thing_tile->tile);
+    return (Tileinfo->tile);
 }
