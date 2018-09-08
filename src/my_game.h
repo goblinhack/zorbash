@@ -114,10 +114,8 @@ extern void
 game_mouse_over(int32_t x, int32_t yu,
                 int32_t wheelx, int32_t wheely);
 
-extern uint8_t
-game_mouse_down(int32_t x, int32_t y, uint32_t button);
-
-extern uint8_t
-game_key_down(const struct SDL_KEYSYM *key);
+extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
+extern uint8_t game_key_down(const struct SDL_KEYSYM *key);
+extern void game_display(void);
 
 #endif

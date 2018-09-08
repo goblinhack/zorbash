@@ -34,11 +34,12 @@
 #define ROOM_WIDTH                  10
 #define ROOM_HEIGHT                 8
 
-#define MAP_WIDTH                   (GRID_WIDTH * ROOM_WIDTH)
-#define MAP_HEIGHT                  (GRID_HEIGHT * ROOM_HEIGHT)
+#define MAP_BORDER                  4
+#define MAP_WIDTH                   ((GRID_WIDTH * ROOM_WIDTH) + MAP_BORDER)
+#define MAP_HEIGHT                  ((GRID_HEIGHT * ROOM_HEIGHT) + MAP_BORDER)
 
-#define TILES_ACROSS                40 // per screen
-#define TILES_DOWN                  24
+#define TILES_ACROSS                20 // per screen
+#define TILES_DOWN                  12
 
 #define MAX_TILE_WIDTH              64
 #define MAX_TILE_HEIGHT             64

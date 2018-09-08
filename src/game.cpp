@@ -4,10 +4,31 @@
  * See the README file for license info for license.
  */
 
-
 #include "my_game.h"
 
 class Game game;
+
+void game_display (void)
+{_
+    static int first = true;
+    if (first) {
+        auto t = thing_new("player1");
+        t->move_to(fpoint(20, 30));
+    }
+    first = false;
+
+    /*
+     * thing_render_all must come before thing_move_all as it populates
+     * all the things into the map for collisions.
+     */
+    thing_render_all();
+
+#if 0
+    if (!game.editor_mode) {
+        thing_move_all();
+    }
+#endif
+}
 
 uint8_t
 game_mouse_motion (int32_t x, int32_t y,

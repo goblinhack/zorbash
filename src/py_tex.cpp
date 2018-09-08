@@ -35,7 +35,7 @@ PyObject *tex_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     DBG("Python: tex_load(file=%s, name=%s)", a, b);
 
-    tex_load(a, b, GL_LINEAR);
+    tex_load(a, b, GL_NEAREST);
 
     Py_RETURN_NONE;
 }

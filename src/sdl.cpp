@@ -261,11 +261,11 @@ uint8_t sdl_init (void)
 
     LOG("Calling SDL_CreateWindow");
     window = SDL_CreateWindow("zorbash",
-                            SDL_WINDOWPOS_CENTERED,
-                            SDL_WINDOWPOS_CENTERED,
-                            video_width, 
-                            video_height,
-                            video_flags);
+                              SDL_WINDOWPOS_CENTERED,
+                              SDL_WINDOWPOS_CENTERED,
+                              video_width, 
+                              video_height,
+                              video_flags);
     if (!window) {
         game.config.video_pix_width = 0;
         game.config.video_pix_height = 0;
