@@ -14,14 +14,14 @@
 #include "my_math_util.h"
 #include "my_string.h"
 
-class tex {
+class Tex {
 
 public:
-    tex (void)
+    Tex (void)
     {
     }
 
-    ~tex (void)
+    ~Tex (void)
     {
         SDL_FreeSurface(this->surface);
 
@@ -41,7 +41,7 @@ public:
     SDL_Surface *surface = {};
 };
 
-std::map<std::string, std::shared_ptr< class tex > > textures;
+std::map<std::string, std::shared_ptr< class Tex > > textures;
 
 static uint8_t tex_init_done;
 
@@ -52,7 +52,7 @@ uint8_t tex_init (void)
     return (true);
 }
 
-static void tex_destroy (texp t)
+static void tex_destroy (Texp t)
 {_
 }
 
@@ -175,9 +175,9 @@ static SDL_Surface *load_image (std::string filename)
 /*
  * Load a texture
  */
-texp tex_load (std::string file, std::string name, int mode)
+Texp tex_load (std::string file, std::string name, int mode)
 {_
-    texp t = tex_find(name);
+    Texp t = tex_find(name);
 
     if (t) {
         return (t);
@@ -208,7 +208,7 @@ texp tex_load (std::string file, std::string name, int mode)
 /*
  * Find an existing tex.
  */
-texp tex_find (std::string file)
+Texp tex_find (std::string file)
 {_
     if (file == "") {
         DIE("no filename given for tex find");
@@ -225,12 +225,12 @@ texp tex_find (std::string file)
 /*
  * Creae a texture from a surface
  */
-texp tex_from_surface (SDL_Surface *surface,
+Texp tex_from_surface (SDL_Surface *surface,
                        std::string file,
                        std::string name,
                        int mode)
 {_
-    texp t;
+    Texp t;
 
     if (!surface) {
         DIE("could not make surface from file, '%s'", file.c_str());
@@ -338,7 +338,7 @@ texp tex_from_surface (SDL_Surface *surface,
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    t = std::make_shared< class tex >();
+    t = std::make_shared< class Tex >();
 
     auto result = textures.insert(std::make_pair(name, t));
 
@@ -354,12 +354,12 @@ texp tex_from_surface (SDL_Surface *surface,
     return (t);
 }
 
-int32_t tex_get_gl_binding (texp tex)
+int32_t tex_get_gl_binding (Texp tex)
 {_
     return (tex->gl_surface_binding);
 }
 
-uint32_t tex_get_width (texp tex)
+uint32_t tex_get_width (Texp tex)
 {_
     if (!tex) {
         DIE("no texture");
@@ -368,7 +368,7 @@ uint32_t tex_get_width (texp tex)
     return (tex->width);
 }
 
-uint32_t tex_get_height (texp tex)
+uint32_t tex_get_height (Texp tex)
 {_
     if (!tex) {
         DIE("no texture");
@@ -377,12 +377,12 @@ uint32_t tex_get_height (texp tex)
     return (tex->height);
 }
 
-SDL_Surface *tex_get_surface (texp tex)
+SDL_Surface *tex_get_surface (Texp tex)
 {_
     return (tex->surface);
 }
 
-texp string2tex (const char **s)
+Texp string2tex (const char **s)
 {_
     static char tmp[MAXSTR];
     static std::string eo_tmp = tmp + MAXSTR;
@@ -412,7 +412,7 @@ texp string2tex (const char **s)
     return (result->second);
 }
 
-texp string2tex (std::string &s, int *len)
+Texp string2tex (std::string &s, int *len)
 {_
     auto iter = s.begin();
     std::string out;
@@ -444,7 +444,7 @@ texp string2tex (std::string &s, int *len)
     return (result->second);
 }
 
-texp string2tex (std::wstring &s, int *len)
+Texp string2tex (std::wstring &s, int *len)
 {_
     auto v = wstring_to_string(s);
     return (string2tex(v, len));

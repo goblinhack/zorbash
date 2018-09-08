@@ -44,7 +44,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
     PyObject *py_class = 0;	                                                \
     char *tp_name = 0;	                                                        \
     char *value = 0;	                                                        \
-    tpp tp;                                                                  \
+    Tpp tp;                                                                  \
 	                                                                        \
     static char *kwlist[] = {(char*) "class", (char*) "value", 0};	        \
 	                                                                        \
@@ -94,7 +94,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
     PyObject *py_class = 0;	                                                \
     char *tp_name = 0;	                                                        \
     char *value = 0;	                                                        \
-    tpp tp;                                                                     \
+    Tpp tp;                                                                     \
 	                                                                        \
     static char *kwlist[] = {(char*) "class", (char*) "value", 0};	        \
 	                                                                        \
@@ -145,7 +145,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
     PyObject *py_class = 0;	                                                \
     char *tp_name = 0;	                                                        \
     char *value = 0;	                                                        \
-    tpp tp;                                                                     \
+    Tpp tp;                                                                     \
 	                                                                        \
     static char *kwlist[] = {(char*) "class", (char*) "value", 0};	        \
 	                                                                        \
@@ -201,7 +201,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
     PyObject *py_class = 0;	                                                \
     char *tp_name = 0;	                                                        \
     int value = 0;	                                                        \
-    tpp tp;                                                                     \
+    Tpp tp;                                                                     \
 	                                                                        \
     static char *kwlist[] = {(char*) "class", (char*) "value", 0};	        \
 	                                                                        \
@@ -245,7 +245,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
     PyObject *py_class = 0;	                                                \
     char *tp_name = 0;	                                                        \
     double value = 0;	                                                        \
-    tpp tp;                                                                     \
+    Tpp tp;                                                                     \
 	                                                                        \
     static char *kwlist[] = {(char*) "class", (char*) "value", 0};	        \
 	                                                                        \
@@ -453,7 +453,7 @@ _
         return (0);	
     }	
 	
-    tpp tp;
+    Tpp tp;
 
 _
     tp_name = py_obj_attr_str(py_class, "name");	
@@ -472,7 +472,7 @@ _
     static unsigned int index;
     index++;
 
-    thing_tiles *tiles;
+    Tileinfomap *tiles;
     switch (dir) {
     case THING_DIR_NONE:
         tiles = &tp->tiles;
@@ -552,7 +552,7 @@ _
         tiles = &tp->x_tiles;
     }
 
-    auto t = std::make_shared< class thing_tile >();
+    auto t = std::make_shared< class Tileinfo >();
     auto result = tiles->insert(std::make_pair(index, t));
 
     if (result.second == false) {
@@ -739,7 +739,7 @@ TP_BODY_SET_INT(is_rrr37)
 TP_BODY_SET_INT(is_rrr38)
 TP_BODY_SET_INT(is_rrr39)
 TP_BODY_SET_INT(is_rrr40)
-TP_BODY_SET_INT(is_rrr41)
+TP_BODY_SET_INT(is_ladder)
 TP_BODY_SET_INT(is_animated_walk_flip)
 TP_BODY_SET_INT(z_depth)
 TP_BODY_SET_INT(is_movable)
@@ -752,7 +752,7 @@ PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
     PyObject *py_class = 0;	                                                
     char *tp_name = 0;	                                                        
     int value = 0;	                                                        
-    tpp tp;                                                                     
+    Tpp tp;                                                                     
 	                                                                        
     static char *kwlist[] = {(char*) "class", (char*) "value", 0};	        
 	                                                                        

@@ -12,7 +12,7 @@
 #include "my_ramdisk.h"
 #include "my_time_util.h"
 #include "my_string.h"
-#include "my_thing_tile.h"
+#include "my_tile_info.h"
 #include "my_font.h"
 
 #include "my_bits.h"
@@ -21,18 +21,18 @@
 #include "my_stb_image.h"
 
 static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name,
-                                     font *f, 
+                                     Font *f, 
                                      uint16_t c,
                                      uint16_t d);
 
 /*
  * Load a new font and create textures for each glyph
  */
-fontp ttf_new (std::string name, int pointSize, int style)
+Fontp ttf_new (std::string name, int pointSize, int style)
 {_
     TTF_Font *ttf;
 
-    auto f = std::make_shared< class font >();
+    auto f = std::make_shared< class Font >();
 
     DBG("Load TTF: %s", name.c_str());
 
@@ -152,7 +152,7 @@ ttf_set_color_key (SDL_Surface *glyph_surface,
  * Given a single character, make it into an opengl tex
  */
 static void
-ttf_create_tex_from_char (TTF_Font *ttf, const char *name, font *f, 
+ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f, 
                           uint16_t c,
                           uint16_t d)
 {_
@@ -211,12 +211,12 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, font *f,
     f->glyphs[d].texMaxY = texcoord[3];
 }
 
-fontp
-ttf_read_tga (fontp f, const char *name, int pointsize)
+Fontp
+ttf_read_tga (Fontp f, const char *name, int pointsize)
 {_
     char filename[MAXSTR];
     uint32_t c;
-    texp tex;
+    Texp tex;
 
     snprintf(filename, sizeof(filename), "%s_pointsize%u.tga",
              name, pointsize);
@@ -237,7 +237,7 @@ ttf_read_tga (fontp f, const char *name, int pointsize)
     return (f);
 }
 
-fontp
+Fontp
 ttf_write_tga (std::string name, int pointsize, int style)
 {_
     uint32_t rmask, gmask, bmask, amask;
@@ -251,7 +251,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     int x;
     int y;
     double h;
-    auto f = std::make_shared< class font >();
+    auto f = std::make_shared< class Font >();
 
     snprintf(filename, sizeof(filename), "%s_pointsize%u.tga",
              name.c_str(), pointsize);
@@ -445,7 +445,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
            glyph_per_row,
            max_char_width, max_char_height);
 
-    texp tex;
+    Texp tex;
     tex = tex_from_surface(dst, filename, filename, GL_LINEAR);
     if (!tex) {
         ERR("could not convert %s to tex", filename);

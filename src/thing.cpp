@@ -4,7 +4,7 @@
  * See the LICENSE file for license.
  */
 
-#include "my_thing_tile.h"
+#include "my_tile_info.h"
 #include "my_game.h"
 
 static uint32_t thing_id;
@@ -34,6 +34,18 @@ Thingp thing_new (std::string tp_name)
     t->has_ever_moved               = false;
     t->is_open                      = false;
     
+    auto tiles = tp_get_left_tiles(t->tp);
+    auto Tileinfo = tile_info_random(tiles);
+    if (Tileinfo) {
+        t->left_tile = Tileinfo->tile;
+    }
+
+    tiles = tp_get_right_tiles(t->tp);
+    Tileinfo = tile_info_random(tiles);
+    if (Tileinfo) {
+        t->right_tile = Tileinfo->tile;
+    }
+
 //    log(t, "created");
 
     return (t);
@@ -45,23 +57,6 @@ void Thing::destroyed (std::string reason)
 
     game.state.map.all_things.erase(t->id);
 }
-
-#if 0
-PyObject *Thing::push (fpoint p)
-{_
-    auto t = this;
-
-    if (unlikely(t->is_on_map)) {
-        t->pop();
-        Py_RETURN_NONE;
-    }
-
-    t->move_to(p);
-//    log(t, "push");
-
-    Py_RETURN_NONE;
-}
-#endif
 
 void Thing::pop (void)
 {_

@@ -9,9 +9,9 @@
 
 static int32_t font_inited;
 
-fontp fixed_font;
+Fontp fixed_font;
 
-static std::map<std::string, std::shared_ptr< class font > > fonts;
+static std::map<std::string, std::shared_ptr< class Font > > fonts;
 
 void font_fini (void)
 {_
@@ -28,7 +28,7 @@ void font_fini (void)
     }
 }
 
-static fontp font_load (std::string name, std::string file, int size, int style)
+static Fontp font_load (std::string name, std::string file, int size, int style)
 {_
     auto f = font_find(name);
 
@@ -56,7 +56,7 @@ static fontp font_load (std::string name, std::string file, int size, int style)
     return (f);
 }
 
-fontp font_find (std::string file)
+Fontp font_find (std::string file)
 {_
     if (file == "") {
         DIE("no filename given for font find %s", __FUNCTION__);

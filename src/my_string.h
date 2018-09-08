@@ -52,9 +52,9 @@ void itoa05(char *string, unsigned int value);
 shared_vector_string split(const char *in, uint32_t max_line_len);
 shared_vector_string split(const std::string &, uint32_t max_line_len);
 shared_vector_wstring split(const std::wstring &, uint32_t max_line_len);
-tpp string2tp(const char **s);
-tpp string2tp(std::string &s, int *len);
-tpp string2tp(std::wstring &s, int *len);
+Tpp string2tp(const char **s);
+Tpp string2tp(std::string &s, int *len);
+Tpp string2tp(std::wstring &s, int *len);
 int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used,
                          const char *fmt, ...);
 

@@ -1133,7 +1133,7 @@ shared_vector_wstring split (const std::wstring &text, uint32_t max_line_len)
     return (result);
 }
 
-tpp string2tp (const char **s)
+Tpp string2tp (const char **s)
 {_
     static char tmp[MAXSTR];
     static const char *eo_tmp = tmp + MAXSTR;
@@ -1156,7 +1156,7 @@ tpp string2tp (const char **s)
     *t++ = '\0';
     *s += (t - tmp);
 
-    tpp tp = tp_find(tmp);
+    Tpp tp = tp_find(tmp);
     if (!tp) {
         DIE("tp name [%s] not found", tmp);
     }
@@ -1164,7 +1164,7 @@ tpp string2tp (const char **s)
     return (tp);
 }
 
-tpp string2tp (std::string &s, int *len)
+Tpp string2tp (std::string &s, int *len)
 {_
     auto iter = s.begin();
     std::string out;
@@ -1189,7 +1189,7 @@ tpp string2tp (std::string &s, int *len)
         return (0);
     }
 
-    tpp tp = tp_find(out);
+    Tpp tp = tp_find(out);
     if (!tp) {
         DIE("tp name [%s] not found", out.c_str());
     }
@@ -1197,7 +1197,7 @@ tpp string2tp (std::string &s, int *len)
     return (tp);
 }
 
-tpp string2tp (std::wstring &s, int *len)
+Tpp string2tp (std::wstring &s, int *len)
 {_
     auto v = wstring_to_string(s);
     return (string2tp(v, len));

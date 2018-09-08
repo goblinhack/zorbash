@@ -1695,7 +1695,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr38)
     TP_SET_DECL(is_rrr39)
     TP_SET_DECL(is_rrr40)
-    TP_SET_DECL(is_rrr41)
+    TP_SET_DECL(is_ladder)
     TP_SET_DECL(is_animated_walk_flip)
     TP_SET_DECL(z_depth)
     TP_SET_DECL(is_movable)

@@ -50,7 +50,7 @@ PyObject *tex_size_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    texp t = tex_find(tex);
+    Texp t = tex_find(tex);
 
     if (!tex) {
         ERR("tex_load, missing file attr");
@@ -72,7 +72,7 @@ PyObject *tex_pixel_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    texp t = tex_find(tex);
+    Texp t = tex_find(tex);
 
     if (!tex) {
         ERR("tex_load, missing file attr");

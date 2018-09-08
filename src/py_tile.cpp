@@ -76,7 +76,7 @@ PyObject *tile_load_arr_ (PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *tile_get_size_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *name = 0;
-    tilep tile = 0;
+    Tilep tile = 0;
 
     static char *kwlist[] = {
         (char*) "name",

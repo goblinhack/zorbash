@@ -9,11 +9,13 @@
 #ifndef _MY_THING_H
 #define _MY_THING_H
 
+#include <map>
+
 typedef std::shared_ptr< class Thing > Thingp;
 typedef std::map< uint32_t, Thingp > Things;
 
 #include "my_thing_template.h"
-#include "my_thing_tile.h"
+#include "my_tile_info.h"
 #include "my_time_util.h"
 
 enum {
@@ -68,7 +70,7 @@ public:
     /*
      * Pointer to common settings for this thing.
      */
-    tpp                tp;
+    Tpp                tp;
 
     /*
      * Used for animating the steps.
@@ -76,7 +78,19 @@ public:
     uint32_t           last_move_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
-    thing_tilep        current_tile;
+    Tileinfop          current_tile;
+
+    /*
+     * For thing decorations
+     */
+    Tilep              top_tile;
+    Tilep              bot_tile;
+    Tilep              left_tile;
+    Tilep              right_tile;
+    Tilep              tl_tile;
+    Tilep              tr_tile;
+    Tilep              bl_tile;
+    Tilep              br_tile;
 
     /*
      * Only used for display purposes.

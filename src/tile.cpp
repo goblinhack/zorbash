@@ -11,7 +11,7 @@
 #include "my_size.h"
 #include "my_string.h"
 
-std::map<std::string, std::shared_ptr< class tile > > tiles;
+std::map<std::string, std::shared_ptr< class Tile > > all_tiles;
 
 static uint8_t tile_init_done;
 
@@ -22,7 +22,7 @@ uint8_t tile_init (void)
     return (true);
 }
 
-static void tile_destroy (tilep t)
+static void tile_destroy (Tilep t)
 {_
 }
 
@@ -31,11 +31,11 @@ void tile_fini (void)
     if (tile_init_done) {
         tile_init_done = false;
 
-        auto iter = tiles.begin();
+        auto iter = all_tiles.begin();
 
-        while (iter != tiles.end()) {
+        while (iter != all_tiles.end()) {
             tile_destroy(iter->second);
-            iter = tiles.erase(iter);
+            iter = all_tiles.erase(iter);
         }
     }
 }
@@ -44,7 +44,7 @@ void tile_load_arr (std::string tex_name,
                     uint32_t width, uint32_t height,
                     uint32_t nargs, const char * arr[])
 {_
-    texp tex = tex_load("", tex_name, GL_LINEAR);
+    Texp tex = tex_load("", tex_name, GL_LINEAR);
 
     float fw = 1.0 / (((float)tex_get_width(tex)) / ((float)width));
     float fh = 1.0 / (((float)tex_get_height(tex)) / ((float)height));
@@ -72,9 +72,9 @@ void tile_load_arr (std::string tex_name,
                 ERR("tile name [%s] already used", name.c_str());
             }
 
-	    auto t = std::make_shared< class tile >();
+	    auto t = std::make_shared< class Tile >();
 
-	    auto result = tiles.insert(std::make_pair(name, t));
+	    auto result = all_tiles.insert(std::make_pair(name, t));
 
 	    if (result.second == false) {
 		DIE("tile insert name [%s] failed", name.c_str());
@@ -207,53 +207,53 @@ void tile_load_arr (std::string tex_name,
 /*
  * Find an existing tile.
  */
-tilep tile_find (std::string name)
+Tilep tile_find (std::string name)
 {_
     if (name == "") {
         ERR("no name for tile find");
 	return (0);
     }
 
-    auto result = tiles.find(name);
+    auto result = all_tiles.find(name);
 
-    if (result == tiles.end()) {
+    if (result == all_tiles.end()) {
         return (0);
     }
 
     return (result->second);
 }
 
-int32_t tile_get_gl_binding (tilep tile)
+int32_t tile_get_gl_binding (Tilep tile)
 {_
     return (tile->gl_surface_binding);
 }
 
-int32_t tile_get_width (tilep tile)
+int32_t tile_get_width (Tilep tile)
 {_
     return (tile->pix_width);
 }
 
-std::string tile_get_name (tilep tile)
+std::string tile_get_name (Tilep tile)
 {_
     return (tile->name);
 }
 
-int32_t tile_get_height (tilep tile)
+int32_t tile_get_height (Tilep tile)
 {_
     return (tile->pix_height);
 }
 
-texp tile_get_tex (tilep tile)
+Texp tile_get_tex (Tilep tile)
 {_
     return (tile->tex);
 }
 
-uint32_t tile_get_index (tilep tile)
+uint32_t tile_get_index (Tilep tile)
 {_
     return (tile->index);
 }
 
-void tile_get_coords (tilep tile, float *x1, float *y1, float *x2, float *y2)
+void tile_get_coords (Tilep tile, float *x1, float *y1, float *x2, float *y2)
 {_
     *x1 = tile->x1;
     *y1 = tile->x1;
@@ -261,7 +261,7 @@ void tile_get_coords (tilep tile, float *x1, float *y1, float *x2, float *y2)
     *x2 = tile->x2;
 }
 
-tilep string2tile (const char **s)
+Tilep string2tile (const char **s)
 {_
     static char tmp[MAXSTR];
     static const char * eo_tmp = tmp + MAXSTR;
@@ -283,9 +283,9 @@ tilep string2tile (const char **s)
     *t++ = '\0';
     *s += (t - tmp);
 
-    auto result = tiles.find(tmp);
+    auto result = all_tiles.find(tmp);
 
-    if (result == tiles.end()) {
+    if (result == all_tiles.end()) {
         DIE("unknown tile [%s]", tmp);
         return (0);
     }
@@ -293,7 +293,7 @@ tilep string2tile (const char **s)
     return (result->second);
 }
 
-tilep string2tile (std::string &s, int *len)
+Tilep string2tile (std::string &s, int *len)
 {_
     auto iter = s.begin();
     std::string out;
@@ -317,15 +317,15 @@ tilep string2tile (std::string &s, int *len)
         *len = iter - s.begin();
     }
 
-    auto result = tiles.find(out);
-    if (result == tiles.end()) {
+    auto result = all_tiles.find(out);
+    if (result == all_tiles.end()) {
         DIE("unknown tile [%s]", out.c_str());
     }
 
     return (result->second);
 }
 
-tilep string2tile (std::wstring &s, int *len)
+Tilep string2tile (std::wstring &s, int *len)
 {_
     auto v = wstring_to_string(s);
     return (string2tile(v, len));
@@ -334,7 +334,7 @@ tilep string2tile (std::wstring &s, int *len)
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit_fat (tpp tp, tilep tile, char *name, fpoint *tl, fpoint *br)
+void tile_blit_fat (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
 {
     double x1;
     double x2;
@@ -375,7 +375,7 @@ void tile_blit_fat (tpp tp, tilep tile, char *name, fpoint *tl, fpoint *br)
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit_fat_with_offset (tpp tp, tilep tile, 
+void tile_blit_fat_with_offset (Tpp tp, Tilep tile, 
                                 char *name, fpoint *tl,
                                 fpoint *br,
                                 double left_off,
@@ -415,7 +415,7 @@ void tile_blit_fat_with_offset (tpp tp, tilep tile,
 /*
  * Given tile bounds, stretch them to get the full size.
  */
-void tile_get_blit_size (tpp tp, tilep tile, char *name, fpoint *tl, fpoint *br)
+void tile_get_blit_size (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
 {
     if (tp) {
         double left_off  = (double)tp_get_blit_left_off(tp);
@@ -436,7 +436,7 @@ void tile_get_blit_size (tpp tp, tilep tile, char *name, fpoint *tl, fpoint *br)
 /*
  * Blits a whole tile.
  */
-void tile_blit_at (tilep tile, char *name, fpoint tl, fpoint br)
+void tile_blit_at (Tilep tile, char *name, fpoint tl, fpoint br)
 {
     blit(tile->gl_surface_binding,
          tile->x1, tile->y2, tile->x2, tile->y1, tl.x, tl.y, br.x, br.y);
@@ -445,7 +445,7 @@ void tile_blit_at (tilep tile, char *name, fpoint tl, fpoint br)
 /*
  * Blits a whole tile.
  */
-void tile_blit (tilep tile, char *name, point at)
+void tile_blit (Tilep tile, char *name, point at)
 {
     fpoint tl, br;
 
@@ -460,8 +460,8 @@ void tile_blit (tilep tile, char *name, point at)
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit_colored_fat (tpp tp,
-                            tilep tile,
+void tile_blit_colored_fat (Tpp tp,
+                            Tilep tile,
                             fpoint tl,
                             fpoint br,
                             color color_tl,

@@ -31,14 +31,6 @@ public:
         DEBUG           = '@',
     };
 
-    enum {
-        DEPTH_UNDER,
-        DEPTH_FLOOR,
-        DEPTH_WALLS,
-        DEPTH_ITEMS,
-        DEPTH_MAX,
-    };
-
     char                      c;
     bool                      is_wall              {false};
     bool                      is_ladder            {false};

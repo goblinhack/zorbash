@@ -12,20 +12,20 @@
 #include <SDL.h>
 #include <memory>
 
-typedef std::shared_ptr< class tex > texp;
+typedef std::shared_ptr< class Tex > Texp;
 
 uint8_t tex_init(void);
 void tex_fini(void);
-texp tex_load(std::string file, std::string name, int mode);
-texp tex_find(std::string name);
-texp tex_from_surface(SDL_Surface *surface,
+Texp tex_load(std::string file, std::string name, int mode);
+Texp tex_find(std::string name);
+Texp tex_from_surface(SDL_Surface *surface,
                       std::string optional_file,
                       std::string name, int mode);
-int32_t tex_get_gl_binding(texp);
-uint32_t tex_get_width(texp);
-uint32_t tex_get_height(texp);
-SDL_Surface *tex_get_surface(texp);
-texp string2tex(const char **s);
-texp string2tex(std::string &s, int *len);
-texp string2tex(std::wstring &s, int *len);
+int32_t tex_get_gl_binding(Texp);
+uint32_t tex_get_width(Texp);
+uint32_t tex_get_height(Texp);
+SDL_Surface *tex_get_surface(Texp);
+Texp string2tex(const char **s);
+Texp string2tex(std::string &s, int *len);
+Texp string2tex(std::wstring &s, int *len);
 #endif

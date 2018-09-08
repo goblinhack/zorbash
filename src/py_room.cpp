@@ -133,9 +133,9 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             for (auto x = 0; x < ROOM_WIDTH; x++) {
-                r->data[x][y][Charmap::DEPTH_FLOOR] = floor_string[x];
-                r->data[x][y][Charmap::DEPTH_WALLS] = walls_string[x];
-                r->data[x][y][Charmap::DEPTH_ITEMS] = items_string[x];
+                r->data[x][y][MAP_DEPTH_FLOOR] = floor_string[x];
+                r->data[x][y][MAP_DEPTH_WALLS] = walls_string[x];
+                r->data[x][y][MAP_DEPTH_ITEMS] = items_string[x];
             }
         }
 

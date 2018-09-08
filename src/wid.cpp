@@ -9,7 +9,7 @@
 #include "my_wid.h"
 #include "my_tex.h"
 #include "my_tile.h"
-#include "my_thing_tile.h"
+#include "my_tile_info.h"
 #include "my_command.h"
 #include "my_time_util.h"
 #include "my_wid_console.h"
@@ -1449,7 +1449,7 @@ void wid_set_text_pos (widp w, uint8_t val, int32_t x, int32_t y)
     w->text_pos_set = val;
 }
 
-texp wid_get_tex (widp w, fsize *size)
+Texp wid_get_tex (widp w, fsize *size)
 {_
     if (size) {
         *size = w->texuv;
@@ -1467,7 +1467,7 @@ void wid_set_tex (widp w, std::string tex, std::string name)
         return;
     }
 
-    texp t = tex_load(tex, name, GL_NEAREST);
+    Texp t = tex_load(tex, name, GL_NEAREST);
     if (!t) {
         ERR("failed to set wid tex %s", tex.c_str());
     }
@@ -1489,12 +1489,12 @@ void wid_set_tex_sz (widp w, fsize uv)
     w->texuv = uv;
 }
 
-tilep wid_get_tile (widp w)
+Tilep wid_get_tile (widp w)
 {_
     return (w->tile);
 }
 
-tpp wid_get_thing_template (widp w)
+Tpp wid_get_thing_template (widp w)
 {_
     verify(w.get());
 
@@ -1505,7 +1505,7 @@ void wid_set_tilename (widp w, std::string name)
 {_
     verify(w.get());
 
-    tilep tile = tile_find(name);
+    Tilep tile = tile_find(name);
     if (!tile) {
         ERR("failed to find wid tile %s", name.c_str());
     }
@@ -1520,7 +1520,7 @@ void wid_set_tilename (widp w, std::string name)
     }
 }
 
-void wid_set_thing_template (widp w, tpp t)
+void wid_set_thing_template (widp w, Tpp t)
 {_
     verify(w.get());
 
@@ -1532,12 +1532,12 @@ void wid_set_thing_template (widp w, tpp t)
     }
 
     auto tiles = tp_get_tiles(t);
-    auto tile = thing_tile_first(tiles);
+    auto tile = tile_info_first(tiles);
     if (!tile) {
         return;
     }
 
-    wid_set_tilename(w, thing_tile_name(tile));
+    wid_set_tilename(w, tile_info_name(tile));
 
     wid_set_name(w, tp_name(t));
 }
@@ -6040,7 +6040,7 @@ static void wid_display (widp w,
         }
     }
 
-    tilep tile = wid_get_tile(w);
+    Tilep tile = wid_get_tile(w);
 
     auto width = wid_get_width(w);
     auto height = wid_get_height(w);
@@ -6048,7 +6048,7 @@ static void wid_display (widp w,
     /*
      * Add the texture tile at a time
      */
-    texp tex;
+    Texp tex;
 
     if (!tile) {
         tex = wid_get_tex(w, 0);

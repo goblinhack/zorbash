@@ -11,11 +11,11 @@
 
 #include <memory>
 
-typedef std::shared_ptr< class thing_template > tpp;
-typedef std::map< std::string, tpp > thing_templates;
-typedef std::map< unsigned int, tpp > thing_templates_create_order;
+typedef std::shared_ptr< class Tp > Tpp;
+typedef std::map< std::string, Tpp > Tpmap;
+typedef std::map< unsigned int, Tpp > Tpmap_create_order;
 
-#include "my_thing_tile.h"
+#include "my_tile_info.h"
 
 enum {
     IS_JOIN_HORIZ,
@@ -37,17 +37,17 @@ enum {
     IS_JOIN_MAX,
 };
 
-class thing_template
+class Tp
 {
 private:
 
 public:
-    thing_template (void)
+    Tp (void)
     {
-        newptr(this, "thing_template");
+        newptr(this, "Tp");
     }
 
-    ~thing_template (void)
+    ~Tp (void)
     {
         oldptr(this);
     }
@@ -67,34 +67,34 @@ public:
     /*
      * Animation tiles.
      */
-    thing_tiles tiles;
+    Tileinfomap tiles;
 
     /*
      * Adjacent tiles.
      */
-    thing_tiles top_tiles;
-    thing_tiles bot_tiles;
-    thing_tiles left_tiles;
-    thing_tiles right_tiles;
-    thing_tiles tl_tiles;
-    thing_tiles tr_tiles;
-    thing_tiles bl_tiles;
-    thing_tiles br_tiles;
+    Tileinfomap top_tiles;
+    Tileinfomap bot_tiles;
+    Tileinfomap left_tiles;
+    Tileinfomap right_tiles;
+    Tileinfomap tl_tiles;
+    Tileinfomap tr_tiles;
+    Tileinfomap bl_tiles;
+    Tileinfomap br_tiles;
 
     /*
      * Join tiles
      */
-    thing_tiles horiz_tiles;
-    thing_tiles vert_tiles;
-    thing_tiles l90_tiles;
-    thing_tiles l180_tiles;
-    thing_tiles l_tiles;
-    thing_tiles l270_tiles;
-    thing_tiles t_tiles;
-    thing_tiles t90_tiles;
-    thing_tiles t180_tiles;
-    thing_tiles t270_tiles;
-    thing_tiles x_tiles;
+    Tileinfomap horiz_tiles;
+    Tileinfomap vert_tiles;
+    Tileinfomap l90_tiles;
+    Tileinfomap l180_tiles;
+    Tileinfomap l_tiles;
+    Tileinfomap l270_tiles;
+    Tileinfomap t_tiles;
+    Tileinfomap t90_tiles;
+    Tileinfomap t180_tiles;
+    Tileinfomap t270_tiles;
+    Tileinfomap x_tiles;
 
     int blit_top_off {};
     int blit_bot_off {};
@@ -154,7 +154,7 @@ public:
     bool is_rrr38 {};
     bool is_rrr39 {};
     bool is_rrr40 {};
-    bool is_rrr41 {};
+    bool is_ladder {};
     bool is_animated_walk_flip {};
     bool is_movable {};
     uint8_t z_depth {};
@@ -162,344 +162,344 @@ public:
 
 uint8_t tp_init(void);
 void tp_fini(void);
-tpp tp_load(int id, std::string file);
-void tp_update(tpp tp);
-tpp tp_find(std::string name);
-tpp tp_find_short_name(std::string name);
+Tpp tp_load(int id, std::string file);
+void tp_update(Tpp tp);
+Tpp tp_find(std::string name);
+Tpp tp_find_short_name(std::string name);
 uint8_t thing_test(int argc, char *argv[]);
 
-std::string tp_name(tpp);
-std::string tp_short_name(tpp);
-std::string tp_raw_name(tpp);
+std::string tp_name(Tpp);
+std::string tp_short_name(Tpp);
+std::string tp_raw_name(Tpp);
 
-static inline int32_t tp_get_blit_top_off (tpp t)
+static inline int32_t tp_get_blit_top_off (Tpp t)
 {
     return (t->blit_top_off);
 }
 
-static inline int32_t tp_get_blit_bot_off (tpp t)
+static inline int32_t tp_get_blit_bot_off (Tpp t)
 {
     return (t->blit_bot_off);
 }
 
-static inline int32_t tp_get_blit_left_off (tpp t)
+static inline int32_t tp_get_blit_left_off (Tpp t)
 {
     return (t->blit_left_off);
 }
 
-static inline int32_t tp_get_blit_right_off (tpp t)
+static inline int32_t tp_get_blit_right_off (Tpp t)
 {
     return (t->blit_right_off);
 }
 
-extern thing_tiles tp_get_tiles(tpp);
-extern thing_tiles tp_get_left_tiles(tpp);
-extern thing_tiles tp_get_right_tiles(tpp);
-extern thing_tiles tp_get_top_tiles(tpp);
-extern thing_tiles tp_get_bot_tiles(tpp);
-extern thing_tiles tp_get_tl_tiles(tpp);
-extern thing_tiles tp_get_tr_tiles(tpp);
-extern thing_tiles tp_get_bl_tiles(tpp);
-extern thing_tiles tp_get_br_tiles(tpp);
-extern thing_tiles tp_get_horiz_tiles(tpp);
-extern thing_tiles tp_get_vert_tiles(tpp);
-extern thing_tiles tp_get_l90_tiles(tpp);
-extern thing_tiles tp_get_l180_tiles(tpp);
-extern thing_tiles tp_get_l_tiles(tpp);
-extern thing_tiles tp_get_l270_tiles(tpp);
-extern thing_tiles tp_get_t_tiles(tpp);
-extern thing_tiles tp_get_t90_tiles(tpp);
-extern thing_tiles tp_get_t180_tiles(tpp);
-extern thing_tiles tp_get_t270_tiles(tpp);
-extern thing_tiles tp_get_x_tiles(tpp);
-extern thing_templates thing_templates_map;
-extern thing_templates_create_order thing_templates_create_order_map;
+extern Tileinfomap tp_get_tiles(Tpp);
+extern Tileinfomap tp_get_left_tiles(Tpp);
+extern Tileinfomap tp_get_right_tiles(Tpp);
+extern Tileinfomap tp_get_top_tiles(Tpp);
+extern Tileinfomap tp_get_bot_tiles(Tpp);
+extern Tileinfomap tp_get_tl_tiles(Tpp);
+extern Tileinfomap tp_get_tr_tiles(Tpp);
+extern Tileinfomap tp_get_bl_tiles(Tpp);
+extern Tileinfomap tp_get_br_tiles(Tpp);
+extern Tileinfomap tp_get_horiz_tiles(Tpp);
+extern Tileinfomap tp_get_vert_tiles(Tpp);
+extern Tileinfomap tp_get_l90_tiles(Tpp);
+extern Tileinfomap tp_get_l180_tiles(Tpp);
+extern Tileinfomap tp_get_l_tiles(Tpp);
+extern Tileinfomap tp_get_l270_tiles(Tpp);
+extern Tileinfomap tp_get_t_tiles(Tpp);
+extern Tileinfomap tp_get_t90_tiles(Tpp);
+extern Tileinfomap tp_get_t180_tiles(Tpp);
+extern Tileinfomap tp_get_t270_tiles(Tpp);
+extern Tileinfomap tp_get_x_tiles(Tpp);
+extern Tpmap tp_map;
+extern Tpmap_create_order tp_create_order_map;
 
-static inline int tp_to_id (tpp t)
+static inline int tp_to_id (Tpp t)
 {
     return (t->tp_id);
 }
 
-static inline uint8_t tp_is_floor (tpp t)
+static inline uint8_t tp_is_floor (Tpp t)
 {
     return (t->is_floor);
 }
 
-static inline uint8_t tp_is_wall (tpp t)
+static inline uint8_t tp_is_wall (Tpp t)
 {
     return (t->is_wall);
 }
 
-static inline uint8_t tp_is_door (tpp t)
+static inline uint8_t tp_is_door (Tpp t)
 {
     return (t->is_door);
 }
 
-static inline uint8_t tp_is_lava (tpp t)
+static inline uint8_t tp_is_lava (Tpp t)
 {
     return (t->is_lava);
 }
 
-static inline uint8_t tp_is_water (tpp t)
+static inline uint8_t tp_is_water (Tpp t)
 {
     return (t->is_water);
 }
 
-static inline uint8_t tp_is_monst (tpp t)
+static inline uint8_t tp_is_monst (Tpp t)
 {
     return (t->is_monst);
 }
 
-static inline uint8_t tp_is_player (tpp t)
+static inline uint8_t tp_is_player (Tpp t)
 {
     return (t->is_player);
 }
 
-static inline uint8_t tp_is_animation (tpp t)
+static inline uint8_t tp_is_animation (Tpp t)
 {
     return (t->is_animation);
 }
 
-static inline uint8_t tp_is_animated (tpp t)
+static inline uint8_t tp_is_animated (Tpp t)
 {
     return (t->is_animated);
 }
 
-static inline uint8_t tp_is_animated_no_dir (tpp t)
+static inline uint8_t tp_is_animated_no_dir (Tpp t)
 {
     return (t->is_animated_no_dir);
 }
 
-static inline uint8_t tp_is_rrr1 (tpp t)
+static inline uint8_t tp_is_rrr1 (Tpp t)
 {
     return (t->is_rrr1);
 }
 
-static inline uint8_t tp_is_rrr2 (tpp t)
+static inline uint8_t tp_is_rrr2 (Tpp t)
 {
     return (t->is_rrr2);
 }
 
-static inline uint8_t tp_is_rrr3 (tpp t)
+static inline uint8_t tp_is_rrr3 (Tpp t)
 {
     return (t->is_rrr3);
 }
 
-static inline uint8_t tp_is_rrr4 (tpp t)
+static inline uint8_t tp_is_rrr4 (Tpp t)
 {
     return (t->is_rrr4);
 }
 
-static inline uint8_t tp_is_rrr5 (tpp t)
+static inline uint8_t tp_is_rrr5 (Tpp t)
 {
     return (t->is_rrr5);
 }
 
-static inline uint8_t tp_is_rrr6 (tpp t)
+static inline uint8_t tp_is_rrr6 (Tpp t)
 {
     return (t->is_rrr6);
 }
 
-static inline uint8_t tp_is_rrr7 (tpp t)
+static inline uint8_t tp_is_rrr7 (Tpp t)
 {
     return (t->is_rrr7);
 }
 
-static inline uint8_t tp_is_rrr8 (tpp t)
+static inline uint8_t tp_is_rrr8 (Tpp t)
 {
     return (t->is_rrr8);
 }
 
-static inline uint8_t tp_is_rrr9 (tpp t)
+static inline uint8_t tp_is_rrr9 (Tpp t)
 {
     return (t->is_rrr9);
 }
 
-static inline uint8_t tp_is_rrr10 (tpp t)
+static inline uint8_t tp_is_rrr10 (Tpp t)
 {
     return (t->is_rrr10);
 }
 
-static inline uint8_t tp_is_rrr11 (tpp t)
+static inline uint8_t tp_is_rrr11 (Tpp t)
 {
     return (t->is_rrr11);
 }
 
-static inline uint8_t tp_is_rrr12 (tpp t)
+static inline uint8_t tp_is_rrr12 (Tpp t)
 {
     return (t->is_rrr12);
 }
 
-static inline uint8_t tp_is_rrr13 (tpp t)
+static inline uint8_t tp_is_rrr13 (Tpp t)
 {
     return (t->is_rrr13);
 }
 
-static inline uint8_t tp_is_rrr14 (tpp t)
+static inline uint8_t tp_is_rrr14 (Tpp t)
 {
     return (t->is_rrr14);
 }
 
-static inline uint8_t tp_is_rrr15 (tpp t)
+static inline uint8_t tp_is_rrr15 (Tpp t)
 {
     return (t->is_rrr15);
 }
 
-static inline uint8_t tp_is_rrr16 (tpp t)
+static inline uint8_t tp_is_rrr16 (Tpp t)
 {
     return (t->is_rrr16);
 }
 
-static inline uint8_t tp_is_rrr17 (tpp t)
+static inline uint8_t tp_is_rrr17 (Tpp t)
 {
     return (t->is_rrr17);
 }
 
-static inline uint8_t tp_is_rrr18 (tpp t)
+static inline uint8_t tp_is_rrr18 (Tpp t)
 {
     return (t->is_rrr18);
 }
 
-static inline uint8_t tp_is_rrr19 (tpp t)
+static inline uint8_t tp_is_rrr19 (Tpp t)
 {
     return (t->is_rrr19);
 }
 
-static inline uint8_t tp_is_rrr20 (tpp t)
+static inline uint8_t tp_is_rrr20 (Tpp t)
 {
     return (t->is_rrr20);
 }
 
-static inline uint8_t tp_is_rrr21 (tpp t)
+static inline uint8_t tp_is_rrr21 (Tpp t)
 {
     return (t->is_rrr21);
 }
 
-static inline uint8_t tp_is_rrr22 (tpp t)
+static inline uint8_t tp_is_rrr22 (Tpp t)
 {
     return (t->is_rrr22);
 }
 
-static inline uint8_t tp_is_rrr23 (tpp t)
+static inline uint8_t tp_is_rrr23 (Tpp t)
 {
     return (t->is_rrr23);
 }
 
-static inline uint8_t tp_is_rrr24 (tpp t)
+static inline uint8_t tp_is_rrr24 (Tpp t)
 {
     return (t->is_rrr24);
 }
 
-static inline uint8_t tp_is_rrr25 (tpp t)
+static inline uint8_t tp_is_rrr25 (Tpp t)
 {
     return (t->is_rrr25);
 }
 
-static inline uint8_t tp_is_rrr26 (tpp t)
+static inline uint8_t tp_is_rrr26 (Tpp t)
 {
     return (t->is_rrr26);
 }
 
-static inline uint8_t tp_is_rrr27 (tpp t)
+static inline uint8_t tp_is_rrr27 (Tpp t)
 {
     return (t->is_rrr27);
 }
 
-static inline uint8_t tp_is_rrr28 (tpp t)
+static inline uint8_t tp_is_rrr28 (Tpp t)
 {
     return (t->is_rrr28);
 }
 
-static inline uint8_t tp_is_rrr29 (tpp t)
+static inline uint8_t tp_is_rrr29 (Tpp t)
 {
     return (t->is_rrr29);
 }
 
-static inline uint8_t tp_is_rrr30 (tpp t)
+static inline uint8_t tp_is_rrr30 (Tpp t)
 {
     return (t->is_rrr30);
 }
 
-static inline uint8_t tp_is_rrr31 (tpp t)
+static inline uint8_t tp_is_rrr31 (Tpp t)
 {
     return (t->is_rrr31);
 }
 
-static inline uint8_t tp_is_rrr32 (tpp t)
+static inline uint8_t tp_is_rrr32 (Tpp t)
 {
     return (t->is_rrr32);
 }
 
-static inline uint8_t tp_is_rrr33 (tpp t)
+static inline uint8_t tp_is_rrr33 (Tpp t)
 {
     return (t->is_rrr33);
 }
 
-static inline uint8_t tp_is_rrr34 (tpp t)
+static inline uint8_t tp_is_rrr34 (Tpp t)
 {
     return (t->is_rrr34);
 }
 
-static inline uint8_t tp_is_rrr35 (tpp t)
+static inline uint8_t tp_is_rrr35 (Tpp t)
 {
     return (t->is_rrr35);
 }
 
-static inline uint8_t tp_is_rrr36 (tpp t)
+static inline uint8_t tp_is_rrr36 (Tpp t)
 {
     return (t->is_rrr36);
 }
 
-static inline uint8_t tp_is_rrr37 (tpp t)
+static inline uint8_t tp_is_rrr37 (Tpp t)
 {
     return (t->is_rrr37);
 }
 
-static inline uint8_t tp_is_rrr38 (tpp t)
+static inline uint8_t tp_is_rrr38 (Tpp t)
 {
     return (t->is_rrr38);
 }
 
-static inline uint8_t tp_is_rrr39 (tpp t)
+static inline uint8_t tp_is_rrr39 (Tpp t)
 {
     return (t->is_rrr39);
 }
 
-static inline uint8_t tp_is_rrr40 (tpp t)
+static inline uint8_t tp_is_rrr40 (Tpp t)
 {
     return (t->is_rrr40);
 }
 
-static inline uint8_t tp_is_rrr41 (tpp t)
+static inline uint8_t tp_is_ladder (Tpp t)
 {
-    return (t->is_rrr41);
+    return (t->is_ladder);
 }
 
-static inline uint8_t tp_is_animated_walk_flip (tpp t)
+static inline uint8_t tp_is_animated_walk_flip (Tpp t)
 {
     return (t->is_animated_walk_flip);
 }
 
-static inline uint8_t tp_z_depth (tpp t)
+static inline uint8_t tp_z_depth (Tpp t)
 {
     return (t->z_depth);
 }
 
-static inline uint8_t tp_is_movable (tpp t)
+static inline uint8_t tp_is_movable (Tpp t)
 {
     return (t->is_movable);
 }
 
-static inline uint8_t tp_is_movement_blocking (tpp t)
+static inline uint8_t tp_is_movement_blocking (Tpp t)
 {
     return (t->is_movement_blocking);
 }
 
-static inline uint8_t tp_is_key (tpp t)
+static inline uint8_t tp_is_key (Tpp t)
 {
     return (t->is_key);
 }
 
-tilep tp_first_tile(tpp tp);
+Tilep tp_first_tile(Tpp tp);
 
 #endif /* THING_TEMPLATE_H */

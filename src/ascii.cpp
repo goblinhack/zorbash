@@ -13,10 +13,10 @@
 struct ascii_ ascii;
 
 typedef struct {
-    tilep fg_tile;
-    tilep bg_tile;
+    Tilep fg_tile;
+    Tilep bg_tile;
 
-    texp tex;
+    Texp tex;
     double tx;
     double ty;
     double dx;
@@ -159,7 +159,7 @@ void *ascii_get_context (int x, int y)
     return (cell->context);
 }
 
-void ascii_set_bg (int x, int y, const texp tex, double tx, double ty,
+void ascii_set_bg (int x, int y, const Texp tex, double tx, double ty,
                    double dx, double dy)
 {
     if (!ascii_ok_for_scissors(x, y)) {
@@ -175,7 +175,7 @@ void ascii_set_bg (int x, int y, const texp tex, double tx, double ty,
     cell->dy = dy;
 }
 
-void ascii_set_bg (int x, int y, const tilep tile)
+void ascii_set_bg (int x, int y, const Tilep tile)
 {
     if (!ascii_ok_for_scissors(x, y)) {
         return;
@@ -196,7 +196,7 @@ void ascii_set_bg (int x, int y, const wchar_t c)
     ascii_set_bg(x, y, fixed_font->unicode_to_tile(c));
 }
 
-void ascii_set_fg (int x, int y, const tilep tile)
+void ascii_set_fg (int x, int y, const Tilep tile)
 {
     if (!ascii_ok_for_scissors(x, y)) {
         return;
@@ -209,7 +209,7 @@ void ascii_set_fg (int x, int y, const tilep tile)
 
 void ascii_set_fg (int x, int y, const char *tilename)
 {
-    tilep tile;
+    Tilep tile;
 
     if (tilename) {
         tile = tile_find(tilename);
@@ -230,7 +230,7 @@ void ascii_set_fg (int x, int y, const wchar_t c)
 
 void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
 {_
-    tilep tile;
+    Tilep tile;
     int bg_set = false;
     auto text_iter = text.begin();
 
@@ -641,7 +641,7 @@ static void ascii_display_mouse (fpoint mouse_tile_tl,
 }
 
 void ascii_put_bg_square (int tlx, int tly, int brx, int bry, 
-                          tilep tile, color c)
+                          Tilep tile, color c)
 {_
     int x;
     int y;
@@ -668,7 +668,7 @@ void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
 }
 
 void ascii_put_shaded_line (int x1, int x2, int y,
-                            tilep tile,
+                            Tilep tile,
                             color col_tl, color col_mid, color col_br,
                             void *context)
 {_
@@ -724,7 +724,7 @@ void ascii_put_shaded_line (int x1, int x2, int y, wchar_t c,
                           col_tl, col_mid, col_br, context);
 }
 
-void ascii_put_solid_line (int x1, int x2, int y, tilep tile, color col,
+void ascii_put_solid_line (int x1, int x2, int y, Tilep tile, color col,
                            void *context)
 {_
     for (auto x = x1; x <= x2; x++) {
@@ -746,14 +746,14 @@ void ascii_put_solid_line (int x1, int x2, int y, wchar_t c, color col,
                          context);
 }
 
-static void ascii_map_thing_replace (int x, int y, tilep tile, color c)
+static void ascii_map_thing_replace (int x, int y, Tilep tile, color c)
 {_
     ascii_set_bg(x, y, tile);
     ascii_set_bg(x, y, c);
 }
 
 static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in, 
-                           int flag, tilep tile, color c)
+                           int flag, Tilep tile, color c)
 {_
     double temp;
     double dx;
@@ -822,7 +822,7 @@ static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in,
     }
 }
 
-void ascii_draw_line (int x0, int y0, int x1, int y1, tilep tile, color c)
+void ascii_draw_line (int x0, int y0, int x1, int y1, Tilep tile, color c)
 {_
     double slope = 100.0;
 
@@ -914,7 +914,7 @@ static void ascii_blit (int no_color)
              * Background
              */
             if (cell->tex) {
-		texp tex = cell->tex;
+		Texp tex = cell->tex;
 
 		blit(tex_get_gl_binding(tex), 
                      cell->tx, 
@@ -954,7 +954,7 @@ static void ascii_blit (int no_color)
              */
             {
                 tile_br.x = tile_x + tw * 2.4;
-                tilep tile = cell->fg_tile;
+                Tilep tile = cell->fg_tile;
 
                 if (tile) {
                     color fg_color_tl = cell->fg_color_tl;
