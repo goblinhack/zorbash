@@ -541,8 +541,8 @@ def init_tiles():
             name="platform-bg")
 
     tiles = [
-            "player.1",
-            "player.2",
+            "player1.1",
+            "player1.2",
             "",
             "",
             "",

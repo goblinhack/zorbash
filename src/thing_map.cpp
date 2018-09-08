@@ -18,10 +18,14 @@ static void thing_map_scroll_do (int tw, int th)
     const double step = 20.0;
 
     auto dx = game.state.map_at.x - game.state.map_wanted_at.x;
-    game.state.map_at.x -= dx / step;
+    if (dx) {
+        game.state.map_at.x -= dx / step;
+    }
 
     auto dy = game.state.map_at.y - game.state.map_wanted_at.y;
-    game.state.map_at.y -= dy / step;
+    if (dy) {
+        game.state.map_at.y -= dy / step;
+    }
 
     game.state.map_at.x *= tw;
     game.state.map_at.x = (int) game.state.map_at.x;
@@ -42,6 +46,7 @@ static void thing_map_scroll_do (int tw, int th)
 static void thing_map_scroll_follow_player (void)
 {_
     if (!game.state.player) {
+        CON("no player");
         return;
     }
 
@@ -62,6 +67,14 @@ static void thing_map_scroll_follow_player (void)
     if (dy < 2) {
         game.state.map_wanted_at.y--;
     }
+
+#if 0
+    CON("player at %f %f map wanted at %f %f",
+        game.state.player->at.x,
+        game.state.player->at.y,
+        game.state.map_wanted_at.x,
+        game.state.map_wanted_at.y);
+#endif
 }
 
 static void thing_map_blit_foreground (int tw, int th)
@@ -91,20 +104,24 @@ static void thing_map_blit_background (int tw, int th)
     static Texp tex;
     
     if (!tex) {
-        tex = tex_find("background");
+        tex = tex_find("platform-bg");
         if (!tex) {
             return;
         }
     }
 
-    double tx = game.state.map_at.x * tw * 0.9;
-    double ty = game.state.map_at.y * th * 0.9;
+    double tdx = 1.0 / (double)MAP_WIDTH;
+    double tdy = 1.0 / (double)MAP_HEIGHT;
+
+    double tlx = tdx * game.state.map_at.x;
+    double tly = tdy * game.state.map_at.y;
+
+    double brx = tdx * (game.state.map_at.x + TILES_ACROSS);
+    double bry = tdy * (game.state.map_at.y + TILES_DOWN);
 
     glcolor(WHITE);
     blit_init();
-    blit(tex_get_gl_binding(tex), 0.0, 0.0, 1.0, 1.0, 
-         -tx, -ty, 
-         tw * MAP_WIDTH - tx, th * MAP_HEIGHT - ty);
+    blit(tex_get_gl_binding(tex), tlx, tly, brx, bry, 0, 0, 1, 1);
     blit_flush();
 }
 
@@ -247,6 +264,11 @@ static void thing_blit_things (int tw, int th,
                     }
 
                     tile_blit_fat(tp, t->current_tile->tile, 0, &tl, &br);
+                    tl.x = 0;
+                    tl.y = 0;
+                    br.x = 4;
+                    br.y = 4;
+                    tile_blit_fat(tp, t->current_tile->tile, 0, &tl, &br);
 
                     //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
@@ -357,8 +379,8 @@ void thing_render_all (void)
     /*
      * Get the bounds
      */
-    int tw = game.config.video_gl_width / TILES_ACROSS;
-    int th = game.config.video_gl_height / TILES_DOWN;
+    int tw = game.config.drawable_gl_width / TILES_ACROSS;
+    int th = game.config.drawable_gl_height / TILES_DOWN;
 
     int minz = 0;
     int maxz = MAP_DEPTH;

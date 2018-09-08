@@ -144,6 +144,7 @@ public:
 
 extern Thingp thing_new(std::string tp_name);
 extern Thingp thing_find(uint32_t name);
-extern void thing_animate_all();
+extern void thing_animate_all(void);
+extern void thing_render_all(void);
 
 #endif /* THING_H */

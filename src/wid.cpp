@@ -20,6 +20,7 @@
 #include "my_string.h"
 #include "my_ascii.h"
 #include "my_glapi.h"
+#include "my_game.h"
 #include <stdlib.h>
 
 #define WID_FULL_LOGNAME
@@ -147,7 +148,7 @@ uint32_t history_walk;
  * A tile over the mouse pointer
  */
 widp wid_mouse_template;
-static widp wid_screen[ASCII_WIDTH][ASCII_HEIGHT];
+static widp wid_on_screen_at[ASCII_WIDTH][ASCII_HEIGHT];
 
 static uint8_t wid_init_done;
 static uint8_t wid_exiting;
@@ -4082,7 +4083,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 
 static widp wid_find_at (widp w, int32_t x, int32_t y)
 {_
-    w = wid_screen[x][y];
+    w = wid_on_screen_at[x][y];
     if (!w) {
         return (0);
     }
@@ -4885,7 +4886,7 @@ printf("\nmouse at %d, %d  (%d, %d) count %d", x, y, mouse_x, mouse_y, count);
     }
 #endif
 
-    w = wid_screen[x][y];
+    w = wid_on_screen_at[x][y];
     if (w) {
         return (w);
     }
@@ -6165,7 +6166,7 @@ static void wid_display (widp w,
                 if (!ascii_ok(x, y)) {
                     continue;
                 }
-                wid_screen[x][y] = w;
+                wid_on_screen_at[x][y] = w;
             }
         }
     }
@@ -6404,12 +6405,14 @@ void wid_display_all (void)
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
+    game_display();
+
     glBindTexture(GL_TEXTURE_2D, 0);
 
     {
         for (auto x = 0; x < ASCII_WIDTH; x++) {
             for (auto y = 0; y < ASCII_HEIGHT; y++) {
-                wid_screen[x][y] = nullptr;
+                wid_on_screen_at[x][y] = nullptr;
             }
         }
     }
