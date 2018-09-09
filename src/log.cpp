@@ -562,6 +562,37 @@ void Thing::log (const char *fmt, ...)
     va_end(args);
 }
 
+void Thing::die_ (const char *fmt, va_list args)
+{_
+    auto t = this;
+
+    char buf[MAXSTR];
+    uint32_t len;
+
+    buf[0] = '\0';
+    timestamp(buf, sizeof(buf));
+    len = (uint32_t)strlen(buf);
+    snprintf(buf + len, sizeof(buf) - len, "c-thing %s: ",
+             t->logname().c_str());
+
+    len = (uint32_t)strlen(buf);
+    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
+}
+
+void Thing::die (const char *fmt, ...)
+{_
+    auto t = this;
+
+    va_list args;
+
+    va_start(args, fmt);
+    t->die_(fmt, args);
+    va_end(args);
+}
+
 void Thing::con_ (const char *fmt, va_list args)
 {_
     auto t = this;

@@ -135,6 +135,8 @@ public:
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void die_(const char *fmt, va_list args); // compile error without
+    void die(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args); // compile error without
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void err_(const char *fmt, va_list args); // compile error without

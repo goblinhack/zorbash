@@ -341,6 +341,11 @@ void tile_blit_fat (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
     double y1;
     double y2;
 
+    if (!tile) {
+    DIE("no tile");
+    }
+CON("blit %s", tile->name.c_str());
+
     x1 = tile->x1;
     x2 = tile->x2;
     y1 = tile->y1;
