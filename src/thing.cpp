@@ -33,20 +33,110 @@ Thingp thing_new (std::string tp_name)
     t->is_moving                    = false;
     t->has_ever_moved               = false;
     t->is_open                      = false;
+
+    auto tp = t->tp;
+
+    auto tiles = tp_get_left_tiles(tp);
+    auto tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->left_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_right_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->right_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_top_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->top_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_bot_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->bot_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_tl_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->tl_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_tr_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->tr_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_br_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->br_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_bl_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->bl_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_tiles(tp);
+    if (tp->is_animated) {
+        tinfo = tile_info_first(tiles);
+    } else {
+        tinfo = tile_info_random(tiles);
+    }
+    if (tinfo) {
+        t->current_tile = tinfo;
+    }
+
+    tiles = tp_get_block_1x2_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->block_1x2_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_block_2x1_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->block_2x1_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_block_2x2_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->block_2x2_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_block_3x3_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->block_3x3_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_block_6x3_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->block_6x3_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_block_6x3_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->block_6x3_tile = tinfo->tile;
+    }
+
+    tiles = tp_get_block_6x6_tiles(tp);
+    tinfo = tile_info_random(tiles);
+    if (tinfo) {
+        t->block_6x6_tile = tinfo->tile;
+    }
     
-    auto tiles = tp_get_left_tiles(t->tp);
-    auto Tileinfo = tile_info_random(tiles);
-    if (Tileinfo) {
-        t->left_tile = Tileinfo->tile;
-    }
-
-    tiles = tp_get_right_tiles(t->tp);
-    Tileinfo = tile_info_random(tiles);
-    if (Tileinfo) {
-        t->right_tile = Tileinfo->tile;
-    }
-
-//    log(t, "created");
+    // t->log("created");
 
     return (t);
 }

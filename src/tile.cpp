@@ -97,6 +97,7 @@ void tile_load_arr (std::string tex_name,
             t->ox2 = t->x2;
             t->oy2 = t->y2;
 
+#if 0
             /*
              * Why? Texture atlas and GL_LINEAR will cause problems blending
              * with tiles adjacent in the atlas, so we trim 0.5 of a pixel
@@ -106,6 +107,7 @@ void tile_load_arr (std::string tex_name,
             t->x2 -= pw;
             t->y1 += ph;
             t->y2 -= ph;
+#endif
 
             t->pct_width = fw;
             t->pct_height = fh;
@@ -340,11 +342,6 @@ void tile_blit_fat (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
     double x2;
     double y1;
     double y2;
-
-    if (!tile) {
-    DIE("no tile");
-    }
-CON("blit %s", tile->name.c_str());
 
     x1 = tile->x1;
     x2 = tile->x2;
