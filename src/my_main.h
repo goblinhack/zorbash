@@ -55,7 +55,7 @@
 #define CONSOLE_CURSOR_COLOR        GRAY
 #define CONSOLE_CURSOR_OTHER_COLOR  WHITE
 #define CONSOLE_TEXT_COLOR          GRAY
-#define CONSOLE_WIDTH               200
+#define CONSOLE_WIDTH               120
 #define CONSOLE_HEIGHT              200
 
 /*

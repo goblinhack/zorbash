@@ -32,6 +32,13 @@ TP_SET_PROTO(bl_tile)
 TP_SET_PROTO(br_tile)
 TP_SET_PROTO(tl_tile)
 TP_SET_PROTO(tr_tile)
+TP_SET_PROTO(block_1x2_tile);
+TP_SET_PROTO(block_2x1_tile);
+TP_SET_PROTO(block_2x2_tile);
+TP_SET_PROTO(block_3x3_tile);
+TP_SET_PROTO(block_6x3_tile);
+TP_SET_PROTO(block_3x6_tile);
+TP_SET_PROTO(block_6x6_tile);
 TP_SET_PROTO(blit_top_off)
 TP_SET_PROTO(blit_bot_off)
 TP_SET_PROTO(blit_left_off)

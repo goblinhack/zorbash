@@ -25,16 +25,12 @@ class Tp:
         zx.tp_load(self)
 
         self.is_treasure = is_treasure
-        if is_treasure:
-            all_treasure_tps.append(name)
-
         self.is_wall = is_wall
         if is_wall:
             self.set_is_wall(is_wall)
 
         self.is_treasure = is_treasure
         if is_treasure:
-            all_treasure_tps.append(name)
             self.set_is_treasure(is_treasure)
 
         self.is_player = is_player
@@ -102,53 +98,56 @@ class Tp:
         self.is_movable = False
         self.is_animated_walk_flip = False
         self.is_movement_blocking = False
-        self.tiles = []
-        self.left_tiles = []
-        self.top_tiles = []
-        self.bot_tiles = []
-        self.right_tiles = []
-        self.tl_tiles = []
-        self.tr_tiles = []
-        self.bl_tiles = []
-        self.br_tiles = []
 
         zx.tp_update(self)
 
     def set_tile(self, tile=None, **kw):
-        self.tiles.append(tile)
         zx.tp_set_tile(self, tile, **kw)
 
     def set_left_tile(self, left_tile=None, **kw):
-        self.left_tiles.append(left_tile)
         zx.tp_set_left_tile(self, left_tile, **kw)
 
     def set_right_tile(self, right_tile=None, **kw):
-        self.right_tiles.append(right_tile)
         zx.tp_set_right_tile(self, right_tile, **kw)
 
     def set_bot_tile(self, bot_tile=None, **kw):
-        self.bot_tiles.append(bot_tile)
         zx.tp_set_bot_tile(self, bot_tile, **kw)
 
     def set_top_tile(self, top_tile=None, **kw):
-        self.top_tiles.append(top_tile)
         zx.tp_set_top_tile(self, top_tile, **kw)
 
     def set_tl_tile(self, tl_tile=None, **kw):
-        self.tl_tiles.append(tl_tile)
         zx.tp_set_tl_tile(self, tl_tile, **kw)
 
     def set_tr_tile(self, tr_tile=None, **kw):
-        self.tr_tiles.append(tr_tile)
         zx.tp_set_tr_tile(self, tr_tile, **kw)
 
     def set_br_tile(self, br_tile=None, **kw):
-        self.br_tiles.append(br_tile)
         zx.tp_set_br_tile(self, br_tile, **kw)
 
     def set_bl_tile(self, bl_tile=None, **kw):
-        self.bl_tiles.append(bl_tile)
         zx.tp_set_bl_tile(self, bl_tile, **kw)
+
+    def set_block_1x2_tile(self, tiles=None, **kw):
+        zx.tp_set_block_1x2_tile(self, tiles, **kw)
+
+    def set_block_2x1_tile(self, tiles=None, **kw):
+        zx.tp_set_block_2x1_tile(self, tiles, **kw)
+
+    def set_block_2x2_tile(self, tiles=None, **kw):
+        zx.tp_set_block_2x2_tile(self, tiles, **kw)
+
+    def set_block_3x3_tile(self, tiles=None, **kw):
+        zx.tp_set_block_3x3_tile(self, tiles, **kw)
+
+    def set_block_6x3_tile(self, tiles=None, **kw):
+        zx.tp_set_block_6x3_tile(self, tiles, **kw)
+
+    def set_block_3x6_tile(self, tiles=None, **kw):
+        zx.tp_set_block_3x6_tile(self, tiles, **kw)
+
+    def set_block_6x6_tile(self, tiles=None, **kw):
+        zx.tp_set_block_6x6_tile(self, tiles, **kw)
 
     def set_long_name(self, value):
         self.long_name = value
