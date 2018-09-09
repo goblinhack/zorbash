@@ -177,7 +177,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
     }	                                                                        \
 	                                                                        \
     tp->__field__ = (__str2val__)(value);                                       \
-    if (tp->__field__ == (__typeof__(tp->__field__))-1) {                           \
+    if (tp->__field__ == (__typeof__(tp->__field__))-1) {                       \
         ERR("%s, cannot find enum %s", __FUNCTION__, value);	                \
         goto done;	                                                        \
     }	                                                                        \
@@ -286,8 +286,7 @@ done:	                                                                        \
 static PyObject *tp_set_tile_dir (PyObject *obj, 
                                   PyObject *args, 
                                   PyObject *keywds,
-                                  int dir,
-                                  int block_type)
+                                  int dir)
 {	
     PyObject *py_class = 0;	
     char *tp_name = 0;	
@@ -476,33 +475,7 @@ _
     Tileinfomap *tiles;
     switch (dir) {
     case THING_DIR_NONE:
-        switch (block_type) {
-        case THING_BLOCK_1x1:
-            tiles = &tp->tiles;
-            break;
-        case THING_BLOCK_1x2:
-            tiles = &tp->block_2x1_tiles;
-            break;
-        case THING_BLOCK_2x1:
-            tiles = &tp->block_2x1_tiles;
-            break;
-        case THING_BLOCK_2x2:
-            tiles = &tp->block_2x2_tiles;
-            break;
-        case THING_BLOCK_3x3:
-            tiles = &tp->block_3x3_tiles;
-            break;
-        case THING_BLOCK_6x3:
-            tiles = &tp->block_6x3_tiles;
-            break;
-        case THING_BLOCK_3x6:
-            tiles = &tp->block_3x6_tiles;
-            break;
-        case THING_BLOCK_6x6:
-            tiles = &tp->block_6x6_tiles;
-            break;
-        }
-
+        tiles = &tp->tiles;
         break;
     case THING_DIR_DOWN:
         tiles = &tp->bot_tiles;
@@ -675,83 +648,39 @@ _
 
 PyObject *tp_set_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE,
-                            THING_BLOCK_1x1));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE));
 }
 PyObject *tp_set_top_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP,
-                            THING_BLOCK_1x1));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP));
 }
 PyObject *tp_set_bot_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN,
-                            THING_BLOCK_1x1));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN));
 }
 PyObject *tp_set_left_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT,
-                            THING_BLOCK_1x1));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT));
 }
 PyObject *tp_set_right_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT,
-                            THING_BLOCK_1x1));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT));
 }
 PyObject *tp_set_tl_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL,
-                            THING_BLOCK_1x1));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL));
 }
 PyObject *tp_set_tr_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR,
-                            THING_BLOCK_1x1));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR));
 }
 PyObject *tp_set_bl_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL,
-                            THING_BLOCK_1x1));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL));
 }
 PyObject *tp_set_br_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR,
-                            THING_BLOCK_1x1));
-}
-PyObject *tp_set_block_1x2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE,
-                            THING_BLOCK_1x2));
-}
-PyObject *tp_set_block_2x1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE,
-                            THING_BLOCK_2x1));
-}
-PyObject *tp_set_block_2x2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE,
-                            THING_BLOCK_2x2));
-}
-PyObject *tp_set_block_3x3_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE,
-                            THING_BLOCK_3x3));
-}
-PyObject *tp_set_block_6x3_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE,
-                            THING_BLOCK_6x3));
-}
-PyObject *tp_set_block_3x6_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE,
-                            THING_BLOCK_3x6));
-}
-PyObject *tp_set_block_6x6_tile (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE,
-                            THING_BLOCK_6x6));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR));
 }
 
 TP_BODY_SET_INT(blit_top_off)

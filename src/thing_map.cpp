@@ -254,7 +254,14 @@ static void thing_blit_things (int minx, int miny, int minz,
                         t->die("no current tile");
                     }
 
-                    tile_blit_fat(tp, t->current_tile->tile, 0, &tl, &br);
+                    Tilep tile;
+                    if (t->current_tileinfo) {
+                        tile = t->current_tileinfo->tile;
+                    } else {
+                        tile = t->current_tile;
+                    }
+
+                    tile_blit_fat(tp, tile, 0, &tl, &br);
                     continue;
 
                     //if (!tp) { // t->top_tile) {
@@ -369,12 +376,12 @@ void thing_render_all (void)
 
     int minx = std::max(0, 
                         (int) game.state.map_at.x - TILES_ACROSS / 2);
-    int maxx = std::min(MAP_WIDTH - 1, 
+    int maxx = std::min(MAP_WIDTH, 
                         (int)game.state.map_at.x + TILES_ACROSS + TILES_ACROSS / 2);
 
     int miny = std::max(0, 
                         (int) game.state.map_at.y - TILES_DOWN / 2);
-    int maxy = std::min(MAP_HEIGHT - 1, 
+    int maxy = std::min(MAP_HEIGHT, 
                         (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
 
     thing_map_reset();

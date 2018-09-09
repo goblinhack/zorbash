@@ -82,17 +82,6 @@ public:
     Tileinfomap br_tiles;
 
     /*
-     * For large blocks
-     */
-    Tileinfomap block_1x2_tiles;
-    Tileinfomap block_2x1_tiles;
-    Tileinfomap block_2x2_tiles;
-    Tileinfomap block_3x3_tiles;
-    Tileinfomap block_6x3_tiles;
-    Tileinfomap block_3x6_tiles;
-    Tileinfomap block_6x6_tiles;
-
-    /*
      * Join tiles
      */
     Tileinfomap horiz_tiles;
@@ -204,13 +193,6 @@ static inline int32_t tp_get_blit_right_off (Tpp t)
 }
 
 extern Tileinfomap tp_get_tiles(Tpp);
-extern Tileinfomap tp_get_block_1x2_tiles(Tpp);
-extern Tileinfomap tp_get_block_2x1_tiles(Tpp);
-extern Tileinfomap tp_get_block_2x2_tiles(Tpp);
-extern Tileinfomap tp_get_block_3x3_tiles(Tpp);
-extern Tileinfomap tp_get_block_6x3_tiles(Tpp);
-extern Tileinfomap tp_get_block_3x6_tiles(Tpp);
-extern Tileinfomap tp_get_block_6x6_tiles(Tpp);
 extern Tileinfomap tp_get_left_tiles(Tpp);
 extern Tileinfomap tp_get_right_tiles(Tpp);
 extern Tileinfomap tp_get_top_tiles(Tpp);
@@ -219,13 +201,6 @@ extern Tileinfomap tp_get_tl_tiles(Tpp);
 extern Tileinfomap tp_get_tr_tiles(Tpp);
 extern Tileinfomap tp_get_bl_tiles(Tpp);
 extern Tileinfomap tp_get_br_tiles(Tpp);
-extern Tileinfomap tp_get_block_1x2_tiles(Tpp);
-extern Tileinfomap tp_get_block_2x1_tiles(Tpp);
-extern Tileinfomap tp_get_block_2x2_tiles(Tpp);
-extern Tileinfomap tp_get_block_3x3_tiles(Tpp);
-extern Tileinfomap tp_get_block_6x3_tiles(Tpp);
-extern Tileinfomap tp_get_block_3x6_tiles(Tpp);
-extern Tileinfomap tp_get_block_6x6_tiles(Tpp);
 extern Tileinfomap tp_get_horiz_tiles(Tpp);
 extern Tileinfomap tp_get_vert_tiles(Tpp);
 extern Tileinfomap tp_get_l90_tiles(Tpp);

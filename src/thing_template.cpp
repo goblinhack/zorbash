@@ -162,41 +162,6 @@ Tileinfomap tp_get_br_tiles (Tpp t)
     return (t->br_tiles);
 }
 
-Tileinfomap tp_get_block_1x2_tiles (Tpp t)
-{_
-    return (t->block_1x2_tiles);
-}
-
-Tileinfomap tp_get_block_2x1_tiles (Tpp t)
-{_
-    return (t->block_2x1_tiles);
-}
-
-Tileinfomap tp_get_block_2x2_tiles (Tpp t)
-{_
-    return (t->block_2x2_tiles);
-}
-
-Tileinfomap tp_get_block_3x3_tiles (Tpp t)
-{_
-    return (t->block_3x3_tiles);
-}
-
-Tileinfomap tp_get_block_6x3_tiles (Tpp t)
-{_
-    return (t->block_6x3_tiles);
-}
-
-Tileinfomap tp_get_block_3x6_tiles (Tpp t)
-{_
-    return (t->block_3x6_tiles);
-}
-
-Tileinfomap tp_get_block_6x6_tiles (Tpp t)
-{_
-    return (t->block_6x6_tiles);
-}
-
 Tileinfomap tp_get_horiz_tiles (Tpp t)
 {_
     return (t->horiz_tiles);

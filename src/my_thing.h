@@ -31,17 +31,6 @@ enum {
     THING_DIR_BR,
 };
 
-enum {
-    THING_BLOCK_1x1,
-    THING_BLOCK_1x2,
-    THING_BLOCK_2x1,
-    THING_BLOCK_2x2,
-    THING_BLOCK_3x3,
-    THING_BLOCK_6x3,
-    THING_BLOCK_3x6,
-    THING_BLOCK_6x6,
-};
-
 class Thing
 {
 private:
@@ -90,7 +79,13 @@ public:
     uint32_t           last_move_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
-    Tileinfop          current_tile {};
+
+    /*
+     * Tileinfo may be null if this thing does not need animation.
+     * Ih such a case, current_tile will be set.
+     */
+    Tileinfop          current_tileinfo {};
+    Tilep              current_tile {};
 
     /*
      * For thing decorations
@@ -103,14 +98,6 @@ public:
     Tilep              tr_tile {};
     Tilep              bl_tile {};
     Tilep              br_tile {};
-
-    Tilep              block_1x2_tile {};
-    Tilep              block_2x1_tile {};
-    Tilep              block_2x2_tile {};
-    Tilep              block_3x3_tile {};
-    Tilep              block_6x3_tile {};
-    Tilep              block_3x6_tile {};
-    Tilep              block_6x6_tile {};
 
     /*
      * Only used for display purposes.

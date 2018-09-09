@@ -9,6 +9,87 @@
 
 class Game game;
 
+static void game_place_blocks (class Dungeon *d,
+                               std::string what,
+                               int variant,
+                               int block_width,
+                               int block_height,
+                               int tries)
+{_
+    while (tries--) {
+        auto x = random_range(0, MAP_WIDTH);
+        auto y = random_range(0, MAP_HEIGHT);
+
+        auto can_place = true;
+        for (auto dx = 0; dx < block_width; dx++) {
+            auto X = x + dx;
+            for (auto dy = 0; dy < block_height; dy++) {
+                auto Y = y + dy;
+
+                if (!d->is_wall_at(X, Y)) {
+                    can_place = false;
+                    break;
+                }
+                if (game.state.map.is_wall[X][Y]) {
+                    can_place = false;
+                    break;
+                }
+            }
+            if (!can_place) {
+                break;
+            }
+        }
+
+        if (!can_place) {
+            continue;
+        }
+
+        auto cnt = 1;
+        for (auto dy = 0; dy < block_height; dy++) {
+            auto Y = y + dy;
+            for (auto dx = 0; dx < block_width; dx++) {
+                auto X = x + dx;
+                game.state.map.is_wall[X][Y] = 1;
+
+                auto s = what;
+                s += ".";
+                s += std::to_string(variant);
+                s += ".";
+                s += std::to_string(block_width);
+                s += "x";
+                s += std::to_string(block_height);
+                s += ".";
+                s += std::to_string(cnt);
+                cnt++;
+
+                auto t = thing_new(what);
+                t->move_to(fpoint(X, Y));
+
+                auto tile = tile_find(s);
+                t->current_tileinfo = nullptr;
+                t->current_tile = tile;
+            }
+        }
+    }
+}
+
+static void game_ramaining_place_blocks (class Dungeon *d,
+                                         std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_wall[x][y]) {
+                continue;
+            }
+
+            if (d->is_wall_at(x, y)) {
+                auto t = thing_new(what);
+                t->move_to(fpoint(x, y));
+            }
+        }
+    }
+}
+
 void game_display (void)
 {_
     static int first = true;
@@ -22,6 +103,36 @@ void game_display (void)
                                    GRID_WIDTH, 
                                    GRID_HEIGHT, seed);
 
+        auto tries = 1000;
+        game_place_blocks(dungeon, "wall1", 1, 6, 6, tries);
+        game_place_blocks(dungeon, "wall1", 2, 6, 6, tries);
+
+        game_place_blocks(dungeon, "wall1", 1, 6, 3, tries);
+        game_place_blocks(dungeon, "wall1", 2, 6, 3, tries);
+
+        game_place_blocks(dungeon, "wall1", 1, 3, 6, tries);
+        game_place_blocks(dungeon, "wall1", 2, 3, 6, tries);
+
+        game_place_blocks(dungeon, "wall1", 1, 3, 3, tries);
+        game_place_blocks(dungeon, "wall1", 2, 3, 3, tries);
+        game_place_blocks(dungeon, "wall1", 3, 3, 3, tries);
+        game_place_blocks(dungeon, "wall1", 4, 3, 3, tries);
+
+        game_place_blocks(dungeon, "wall1", 1, 2, 2, tries);
+        game_place_blocks(dungeon, "wall1", 2, 2, 2, tries);
+
+        game_place_blocks(dungeon, "wall1", 1, 2, 1, tries);
+        game_place_blocks(dungeon, "wall1", 2, 2, 1, tries);
+        game_place_blocks(dungeon, "wall1", 3, 2, 1, tries);
+        game_place_blocks(dungeon, "wall1", 4, 2, 1, tries);
+
+        game_place_blocks(dungeon, "wall1", 1, 1, 2, tries);
+        game_place_blocks(dungeon, "wall1", 2, 1, 2, tries);
+        game_place_blocks(dungeon, "wall1", 3, 2, 1, tries);
+        game_place_blocks(dungeon, "wall1", 4, 2, 1, tries);
+
+        game_ramaining_place_blocks(dungeon, "wall1");
+
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
                 if (dungeon->is_monst_at(x, y)) {
@@ -29,10 +140,12 @@ void game_display (void)
                     t->move_to(fpoint(x, y));
                 }
 
+#if 0
                 if (dungeon->is_wall_at(x, y)) {
                     auto t = thing_new("wall1");
                     t->move_to(fpoint(x, y));
                 }
+#endif
 
                 if (dungeon->is_entrance_at(x, y)) {
                     auto t = thing_new("player1");
