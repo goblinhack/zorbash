@@ -164,8 +164,8 @@ std::string Thing::logname (void)
         loop = 0;
     }
 
-    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u at (%g,%g)",
-             t->id, t->at.x, t->at.y);
+    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u(%s) at (%g,%g)",
+             t->id, t->tp->short_name.c_str(), t->at.x, t->at.y);
 
     return (tmp[loop++]);
 }

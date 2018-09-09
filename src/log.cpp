@@ -578,8 +578,7 @@ void Thing::die_ (const char *fmt, va_list args)
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
-    putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
+    DIE("%s",buf);
 }
 
 void Thing::die (const char *fmt, ...)

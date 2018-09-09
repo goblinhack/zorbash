@@ -250,6 +250,10 @@ static void thing_blit_things (int minx, int miny, int minz,
                         }
                     }
 
+                    if (!t->current_tile) {
+                        t->die("no current tile");
+                    }
+
                     tile_blit_fat(tp, t->current_tile->tile, 0, &tl, &br);
                     continue;
 
