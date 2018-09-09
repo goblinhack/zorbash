@@ -24,8 +24,13 @@ void game_display (void)
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
-                if (dungeon->is_wall_at(x, y)) {
+                if (dungeon->is_monst_at(x, y)) {
                     auto t = thing_new("monst1");
+                    t->move_to(fpoint(x, y));
+                }
+
+                if (dungeon->is_wall_at(x, y)) {
+                    auto t = thing_new("wall1");
                     t->move_to(fpoint(x, y));
                 }
 

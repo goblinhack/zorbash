@@ -253,6 +253,19 @@ public:
         return (v.is_wall);
     }
 
+    bool is_monst_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto v = Charmap::all_charmaps[c];
+
+            if (v.is_monst) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool is_door_at (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {

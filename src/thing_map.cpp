@@ -251,6 +251,7 @@ static void thing_blit_things (int minx, int miny, int minz,
                     }
 
                     tile_blit_fat(tp, t->current_tile->tile, 0, &tl, &br);
+                    continue;
 
                     //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
