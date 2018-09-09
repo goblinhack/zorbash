@@ -141,7 +141,7 @@ redo:
 
         auto placed = snake_walk(depth, 10, pass);
 
-        CON("node-grid: level depth %d placed %d nodes", depth, placed);
+        LOG("node-grid: level depth %d placed %d nodes", depth, placed);
         if (!placed) {
             break;
         }
@@ -156,13 +156,13 @@ redo:
             //
             if (placed < 3) {
                 debug("failed initial level, did not place enough nodes");
-                CON("node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
+                LOG("node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
                 goto redo;
             }
         } else {
             if (placed < 2) {
                 debug("failed level, did not place enough nodes at depth");
-                CON("node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
+                LOG("node-grid: failed level depth %d placed only %d nodes, redo", depth, placed);
                 goto redo;
             }
         }
@@ -207,7 +207,7 @@ redo:
     while (secret_depth < 10) {
         auto placed = snake_walk(secret_depth, 10, pass);
 
-        CON("node-grid: level depth %d placed %d secret nodes", secret_depth, placed);
+        LOG("node-grid: level depth %d placed %d secret nodes", secret_depth, placed);
         if (!placed) {
             break;
         }
@@ -416,7 +416,9 @@ void Nodes::dump (void)
         for (auto x = 0; x < grid_width * step; x++) {
             s += out[y][x];
         }
-        CON("node-grid: %s", s.c_str());
+        if (s != "") {
+            LOG("node-grid: [%s]", s.c_str());
+        }
     }
 
     for (auto y = 0; y < grid_height; y++) {
@@ -607,7 +609,7 @@ void Nodes::debug (std::string msg)
     }
 
     dump();
-    CON("node-grid: ^^^^^ %s ^^^^^", msg.c_str());
+    LOG("node-grid: ^^^^^ %s ^^^^^", msg.c_str());
 }
 
 int Nodes::offset (const int x, const int y)
@@ -1355,7 +1357,7 @@ bool Nodes::place_lock (int depth, int pass)
 
     if (!s.size()) {
         debug("no lock placed for depth");
-        CON("no lock placed for depth %d", depth);
+        LOG("no lock placed for depth %d", depth);
         return (false);
     }
 
@@ -1451,7 +1453,7 @@ bool Nodes::place_key (int depth, int pass)
 
     if (!s.size()) {
         debug("no key placed");
-        CON("no key placed for depth %d", depth);
+        LOG("no key placed for depth %d", depth);
         return (false);
     }
 

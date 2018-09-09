@@ -541,6 +541,15 @@ zx.map_load_room(depth=1, room_data=[
 "xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
 "xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
 "xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx"])
+zx.map_load_room(depth=1, room_data=[
+"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
+"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
+"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
+"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
+"xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
+"xxxxxxxxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx","xxx...xxxx",
+"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
+"xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx"])
 zx.map_load_room(depth=1, left=True, room_data=[
 "xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx","xxxxxxxxxx",
 "x........x","x........x","x........x","x........x","x........x","x........x",

@@ -5,6 +5,7 @@
  */
 
 #include "my_game.h"
+#include "my_dungeon.h"
 
 class Game game;
 
@@ -12,14 +13,32 @@ void game_display (void)
 {_
     static int first = true;
     if (first) {
-        auto t = thing_new("player1");
-        t->move_to(fpoint(5, 4));
 
-        for (auto x = 0; x < 20; x++) {
-            t = thing_new("monst1");
-            t->move_to(fpoint(x, x));
+        int seed = 663;
+        //seed = myrand();
+        mysrand(seed);
+        auto dungeon = new Dungeon(MAP_WIDTH, 
+                                   MAP_HEIGHT, 
+                                   GRID_WIDTH, 
+                                   GRID_HEIGHT, seed);
+
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                if (dungeon->is_wall_at(x, y)) {
+                    auto t = thing_new("monst1");
+                    t->move_to(fpoint(x, y));
+                }
+
+                if (dungeon->is_entrance_at(x, y)) {
+                    auto t = thing_new("player1");
+                    t->move_to(fpoint(x, y));
+		    game.state.player = t;
+                }
+            }
         }
+        thing_map_scroll_to_player();
     }
+
     first = false;
 
     /*

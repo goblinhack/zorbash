@@ -68,6 +68,8 @@ public:
     double             video_gl_height              = {};
     int32_t            drawable_gl_width            = {};
     int32_t            drawable_gl_height           = {};
+    double             tile_pixel_width             = {};
+    double             tile_pixel_height            = {};
     uint32_t           sdl_delay                    = 5;
     bool               editor_mode                  = false;
 
@@ -85,6 +87,8 @@ public:
                 cereal::make_nvp("video_gl_height",    video_gl_height),
                 cereal::make_nvp("drawable_gl_width",  drawable_gl_width),
                 cereal::make_nvp("drawable_gl_height", drawable_gl_height),
+                cereal::make_nvp("tile_pixel_width",   tile_pixel_width),
+                cereal::make_nvp("tile_pixel_height",  tile_pixel_height),
                 cereal::make_nvp("sdl_delay",          sdl_delay),
                 cereal::make_nvp("editor_mode",        editor_mode));
     }
