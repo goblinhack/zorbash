@@ -91,51 +91,10 @@ Thingp thing_new (std::string tp_name)
         tinfo = tile_info_random(tiles);
     }
     if (tinfo) {
-        t->current_tile = tinfo;
+        t->current_tileinfo = tinfo;
+        t->current_tile = tinfo->tile;
     }
 
-    tiles = tp_get_block_1x2_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->block_1x2_tile = tinfo->tile;
-    }
-
-    tiles = tp_get_block_2x1_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->block_2x1_tile = tinfo->tile;
-    }
-
-    tiles = tp_get_block_2x2_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->block_2x2_tile = tinfo->tile;
-    }
-
-    tiles = tp_get_block_3x3_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->block_3x3_tile = tinfo->tile;
-    }
-
-    tiles = tp_get_block_6x3_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->block_6x3_tile = tinfo->tile;
-    }
-
-    tiles = tp_get_block_6x3_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->block_6x3_tile = tinfo->tile;
-    }
-
-    tiles = tp_get_block_6x6_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->block_6x6_tile = tinfo->tile;
-    }
-    
     // t->log("created");
 
     return (t);

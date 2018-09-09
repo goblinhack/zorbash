@@ -76,7 +76,9 @@ public:
         reset_possible_rooms();
 
         solve(&grid);
-        debug("created dungeon");
+        add_border();
+
+        dump();
     }
 
     void debug (std::string s)
@@ -596,7 +598,6 @@ public:
                 }
             }
         }
-        dump();
     }
 
     bool room_is_a_candidate (const Node *n, Roomp r)
@@ -876,5 +877,21 @@ public:
         rooms_print_all(g);
 
         return (true);
+    }
+
+    void add_border (void)
+    {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_BORDER; x++) {
+                putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(MAP_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::WALL);
+            }
+        }
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            for (auto y = 0; y < MAP_BORDER; y++) {
+                putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(x, MAP_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
+            }
+        }
     }
 };

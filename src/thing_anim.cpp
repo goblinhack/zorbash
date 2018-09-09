@@ -20,7 +20,7 @@ void Thing::animate (void)
         return;
     }
 
-    otile = tile = t->current_tile;
+    otile = tile = t->current_tileinfo;
 
     if (tile) {
         /*
@@ -236,7 +236,7 @@ void Thing::animate (void)
 //CON("set %s", tile_info_name(tile).c_str());
 
 //    t->set_tilename(tile_info_name(tile));
-    t->current_tile = tile;
+    t->current_tileinfo = tile;
 
     /*
      * When does this tile expire ?

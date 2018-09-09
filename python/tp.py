@@ -128,27 +128,6 @@ class Tp:
     def set_bl_tile(self, bl_tile=None, **kw):
         zx.tp_set_bl_tile(self, bl_tile, **kw)
 
-    def set_block_1x2_tile(self, tiles=None, **kw):
-        zx.tp_set_block_1x2_tile(self, tiles, **kw)
-
-    def set_block_2x1_tile(self, tiles=None, **kw):
-        zx.tp_set_block_2x1_tile(self, tiles, **kw)
-
-    def set_block_2x2_tile(self, tiles=None, **kw):
-        zx.tp_set_block_2x2_tile(self, tiles, **kw)
-
-    def set_block_3x3_tile(self, tiles=None, **kw):
-        zx.tp_set_block_3x3_tile(self, tiles, **kw)
-
-    def set_block_6x3_tile(self, tiles=None, **kw):
-        zx.tp_set_block_6x3_tile(self, tiles, **kw)
-
-    def set_block_3x6_tile(self, tiles=None, **kw):
-        zx.tp_set_block_3x6_tile(self, tiles, **kw)
-
-    def set_block_6x6_tile(self, tiles=None, **kw):
-        zx.tp_set_block_6x6_tile(self, tiles, **kw)
-
     def set_long_name(self, value):
         self.long_name = value
 
