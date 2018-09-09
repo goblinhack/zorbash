@@ -10,6 +10,7 @@
 #define _MY_THING_H
 
 #include <map>
+#include <memory>
 
 typedef std::shared_ptr< class Thing > Thingp;
 typedef std::map< uint32_t, Thingp > Things;
@@ -70,7 +71,7 @@ public:
     /*
      * Pointer to common settings for this thing.
      */
-    Tpp                tp;
+    Tpp                tp {};
 
     /*
      * Used for animating the steps.
@@ -78,19 +79,19 @@ public:
     uint32_t           last_move_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
-    Tileinfop          current_tile;
+    Tileinfop          current_tile {};
 
     /*
      * For thing decorations
      */
-    Tilep              top_tile;
-    Tilep              bot_tile;
-    Tilep              left_tile;
-    Tilep              right_tile;
-    Tilep              tl_tile;
-    Tilep              tr_tile;
-    Tilep              bl_tile;
-    Tilep              br_tile;
+    Tilep              top_tile {};
+    Tilep              bot_tile {};
+    Tilep              left_tile {};
+    Tilep              right_tile {};
+    Tilep              tl_tile {};
+    Tilep              tr_tile {};
+    Tilep              bl_tile {};
+    Tilep              br_tile {};
 
     /*
      * Only used for display purposes.
