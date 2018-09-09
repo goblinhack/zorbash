@@ -13,7 +13,7 @@
 #include "my_glapi.h"
 #include <algorithm>
 
-static void thing_map_scroll_do (int tw, int th)
+static void thing_map_scroll_do (void)
 {
     const double step = 20.0;
 
@@ -27,13 +27,13 @@ static void thing_map_scroll_do (int tw, int th)
         game.state.map_at.y -= dy / step;
     }
 
-    game.state.map_at.x *= tw;
+    game.state.map_at.x *= game.config.tile_pixel_width;
     game.state.map_at.x = (int) game.state.map_at.x;
-    game.state.map_at.x /= tw;
+    game.state.map_at.x /= game.config.tile_pixel_width;
 
-    game.state.map_at.y *= th;
+    game.state.map_at.y *= game.config.tile_pixel_height;
     game.state.map_at.y = (int) game.state.map_at.y;
-    game.state.map_at.y /= th;
+    game.state.map_at.y /= game.config.tile_pixel_height;
 
     game.state.map_at.x = std::max(game.state.map_at.x, 0.0);
     game.state.map_at.y = std::max(game.state.map_at.y, 0.0);
@@ -77,7 +77,15 @@ static void thing_map_scroll_follow_player (void)
 #endif
 }
 
-static void thing_map_blit_background (int tw, int th)
+void thing_map_scroll_to_player (void)
+{
+    for (auto x = 0; x < 1000; x++) {
+        thing_map_scroll_follow_player();
+        thing_map_scroll_do();
+    }
+}
+
+static void thing_map_blit_background (void)
 {
     static Texp tex;
     
@@ -104,13 +112,12 @@ static void thing_map_blit_background (int tw, int th)
 }
 
 static void thing_blit_wall (Thingp t,
-                             int tw, int th, 
                              int x, int y,
                              fpoint tl, fpoint br)
 {  
     auto tp = t->tp;
-    int dw = tw * 2 / 3;
-    int dh = th * 2 / 3;
+    int dw = game.config.tile_pixel_width * 2 / 3;
+    int dh = game.config.tile_pixel_height * 2 / 3;
 
     if (!game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
@@ -194,12 +201,11 @@ static void thing_blit_wall (Thingp t,
 }
 
 static void thing_blit_ladder (Thingp t,
-                               int tw, int th, 
                                int x, int y,
                                fpoint tl, fpoint br)
 {  
     auto tp = t->tp;
-    int dh = th;
+    int dh = game.config.tile_pixel_height;
 
     if (!game.state.map.is_ladder[x][y - 1]) {
         fpoint tl2 = tl;
@@ -210,8 +216,7 @@ static void thing_blit_ladder (Thingp t,
     }
 }
 
-static void thing_blit_things (int tw, int th, 
-                               int minx, int miny, int minz,
+static void thing_blit_things (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
     glcolor(WHITE);
@@ -250,9 +255,9 @@ static void thing_blit_things (int tw, int th,
                     //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
                         if (tp_is_wall(tp)) {
-                            thing_blit_wall(t, tw, th, x, y, tl, br);
+                            thing_blit_wall(t, x, y, tl, br);
                         } else if (tp_is_ladder(tp)) {
-                            thing_blit_ladder(t, tw, th, x, y, tl, br);
+                            thing_blit_ladder(t, x, y, tl, br);
                         }
                     }
                 }
@@ -262,8 +267,7 @@ static void thing_blit_things (int tw, int th,
     blit_flush();
 }
 
-static void thing_blit_editor (int tw, int th, 
-                               int minx, int miny, int minz,
+static void thing_blit_editor (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
     blit_init();
@@ -284,10 +288,10 @@ static void thing_blit_editor (int tw, int th,
 
             double tx = x - game.state.map_at.x;
             double ty = y - game.state.map_at.y;
-            tl.x = tx * tw;
-            tl.y = ty * th;
-            br.x = tl.x + tw;
-            br.y = tl.y + th;
+            tl.x = tx * game.config.tile_pixel_width;
+            tl.y = ty * game.config.tile_pixel_height;
+            br.x = tl.x + game.config.tile_pixel_width;
+            br.y = tl.y + game.config.tile_pixel_height;
 
             gl_blitsquare(tl.x, tl.y, br.x, br.y);
 
@@ -316,8 +320,7 @@ static void thing_map_reset (void)
     }
 }
 
-static void thing_find_all (int tw, int th, 
-                            int minx, int miny, int minz,
+static void thing_find_all (int minx, int miny, int minz,
                             int maxx, int maxy, int maxz)
 {
     game.state.player = nullptr;
@@ -356,9 +359,6 @@ void thing_render_all (void)
     /*
      * Get the bounds
      */
-    int tw = game.config.drawable_gl_width / TILES_ACROSS;
-    int th = game.config.drawable_gl_height / TILES_DOWN;
-
     int minz = 0;
     int maxz = MAP_DEPTH;
 
@@ -373,18 +373,18 @@ void thing_render_all (void)
                         (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
 
     thing_map_reset();
-    thing_find_all(tw, th, minx, miny, minz, maxx, maxy, maxz);
+    thing_find_all(minx, miny, minz, maxx, maxy, maxz);
 
     if (!game.config.editor_mode) {
         thing_map_scroll_follow_player();
     }
 
-    thing_map_scroll_do(tw, th);
-    thing_map_blit_background(tw, th);
+    thing_map_scroll_do();
+    thing_map_blit_background();
 
     if (game.config.editor_mode) {
-        thing_blit_editor(tw, th, minx, miny, minz, maxx, maxy, maxz);
+        thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
     }
 
-    thing_blit_things(tw, th, minx, miny, minz, maxx, maxy, maxz);
+    thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
 }

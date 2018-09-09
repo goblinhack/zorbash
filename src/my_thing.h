@@ -146,5 +146,6 @@ extern Thingp thing_new(std::string tp_name);
 extern Thingp thing_find(uint32_t name);
 extern void thing_animate_all(void);
 extern void thing_render_all(void);
+extern void thing_map_scroll_to_player(void);
 
 #endif /* THING_H */

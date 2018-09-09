@@ -305,6 +305,9 @@ uint8_t sdl_init (void)
         game.config.drawable_gl_width,
         game.config.drawable_gl_height);
 
+    game.config.tile_pixel_width = game.config.drawable_gl_width / TILES_ACROSS;
+    game.config.tile_pixel_height = game.config.drawable_gl_height / TILES_DOWN;
+
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
         SDL_ClearError();

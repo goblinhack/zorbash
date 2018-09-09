@@ -64,11 +64,11 @@ void Room::find_exits (void)
 {
     uint32_t wall_bitmap = 0;
     int x, y = 0;
-    int z = MAP_DEPTH_WALLS;
+    int z = MAP_DEPTH_FLOOR;
 
     for (wall_bitmap = 0, x = 0, y = 0; x < width; x++) {
         wall_bitmap = wall_bitmap << 1;
-        if (data[x][y][z] != Charmap::SPACE) {
+        if (data[x][y][z] != Charmap::FLOOR) {
             wall_bitmap |= 1;
         } else {
             has_exit_up = true;
@@ -78,7 +78,7 @@ void Room::find_exits (void)
 
     for (wall_bitmap = 0, x = 0, y = height - 1; x < width; x++) {
         wall_bitmap = wall_bitmap << 1;
-        if (data[x][y][z] != Charmap::SPACE) {
+        if (data[x][y][z] != Charmap::FLOOR) {
             wall_bitmap |= 1;
         } else {
             has_exit_down = true;
@@ -88,7 +88,7 @@ void Room::find_exits (void)
 
     for (wall_bitmap = 0, x = 0, y = 0; y < height; y++) {
         wall_bitmap = wall_bitmap << 1;
-        if (data[x][y][z] != Charmap::SPACE) {
+        if (data[x][y][z] != Charmap::FLOOR) {
             wall_bitmap |= 1;
         } else {
             has_exit_left = true;
@@ -98,7 +98,7 @@ void Room::find_exits (void)
 
     for (wall_bitmap = 0, x = width - 1, y = 0; y < height; y++) {
         wall_bitmap = wall_bitmap << 1;
-        if (data[x][y][z] != Charmap::SPACE) {
+        if (data[x][y][z] != Charmap::FLOOR) {
             wall_bitmap |= 1;
         } else {
             has_exit_right = true;
