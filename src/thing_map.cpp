@@ -116,8 +116,8 @@ static void thing_blit_wall (Thingp t,
                              fpoint tl, fpoint br)
 {  
     auto tp = t->tp;
-    int dw = game.config.tile_pixel_width * 2 / 3;
-    int dh = game.config.tile_pixel_height * 2 / 3;
+    int dw = 0;//game.config.tile_pixel_width * 2 / 3;
+    int dh = 0;//game.config.tile_pixel_height * 2 / 3;
 
     if (!game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
@@ -198,6 +198,53 @@ static void thing_blit_wall (Thingp t,
         br2.y += dh;
         tile_blit_fat(tp, t->br_tile, 0, &tl2, &br2);
     }
+
+    if (!game.state.map.is_wall[x + 1][y + 1] &&
+        game.state.map.is_wall[x + 1][y] &&
+        game.state.map.is_wall[x][y + 1]) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit_fat(tp, t->br_tile, 0, &tl2, &br2);
+    }
+    if (!game.state.map.is_wall[x - 1][y + 1] &&
+        game.state.map.is_wall[x - 1][y] &&
+        game.state.map.is_wall[x][y + 1]) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit_fat(tp, t->bl_tile, 0, &tl2, &br2);
+    }
+
+    if (!game.state.map.is_wall[x + 1][y - 1] &&
+        game.state.map.is_wall[x + 1][y] &&
+        game.state.map.is_wall[x][y - 1]) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit_fat(tp, t->tr_tile, 0, &tl2, &br2);
+    }
+
+    if (!game.state.map.is_wall[x - 1][y - 1] &&
+        game.state.map.is_wall[x - 1][y] &&
+        game.state.map.is_wall[x][y - 1]) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit_fat(tp, t->tl_tile, 0, &tl2, &br2);
+    }
 }
 
 static void thing_blit_ladder (Thingp t,
@@ -262,7 +309,6 @@ static void thing_blit_things (int minx, int miny, int minz,
                     }
 
                     tile_blit_fat(tp, tile, 0, &tl, &br);
-                    continue;
 
                     //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
