@@ -1445,8 +1445,6 @@ def init_tiles():
             "",
             "",
             "",
-            "",
-            "",
             "ladder1.bot.1",
             "rope1.bot.2",
             "deco1.bl.1",
