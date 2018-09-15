@@ -131,7 +131,7 @@ static void thing_blit_wall (Thingp t,
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y += dh;
-        br2.y += dh;
+        br2.y += 0.025;
         tile_blit_fat(tp, t->bot_tile, 0, &tl2, &br2);
     }
 
