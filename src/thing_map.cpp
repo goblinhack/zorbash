@@ -116,8 +116,8 @@ static void thing_blit_wall (Thingp t,
                              fpoint tl, fpoint br)
 {  
     auto tp = t->tp;
-    int dw = 0;//game.config.tile_pixel_width * 2 / 3;
-    int dh = 0;//game.config.tile_pixel_height * 2 / 3;
+    double dw = 0.01;
+    double dh = 0.01;
 
     if (!game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
@@ -131,26 +131,28 @@ static void thing_blit_wall (Thingp t,
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y += dh;
-        br2.y += 0.025;
+        br2.y += dh * 2;
         tile_blit_fat(tp, t->bot_tile, 0, &tl2, &br2);
     }
 
     if (!game.state.map.is_wall[x - 1][y]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
+        //tl2.x -= dw;
+        //br2.x -= dw;
         tile_blit_fat(tp, t->left_tile, 0, &tl2, &br2);
     }
 
     if (!game.state.map.is_wall[x + 1][y]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        tl2.x += dw;
-        br2.x +=  dw;
+        //tl2.x += dw;
+        //br2.x += dw;
         tile_blit_fat(tp, t->right_tile, 0, &tl2, &br2);
     }
 
+    dw = 0.00;
+    dh = 0.00;
     if (!game.state.map.is_wall[x - 1][y - 1] &&
         !game.state.map.is_wall[x - 1][y] &&
         !game.state.map.is_wall[x][y - 1]) {
