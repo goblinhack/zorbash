@@ -1,3 +1,4 @@
+import zx
 import tp
 
 
@@ -18,6 +19,7 @@ def wall_init(name, short_name,
     x.set_is_movement_blocking(True)
     x.set_is_wall(True)
     x.set_is_shadow_caster(True)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     if tiles is not None:
         for t in tiles:

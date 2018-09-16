@@ -1,3 +1,4 @@
+import zx
 import tp
 
 
@@ -9,6 +10,7 @@ def player_init(name, short_name):
     x.set_is_animated(True)
     x.set_is_movable(True)
     x.set_is_animated_walk_flip(True)
+    x.set_z_depth(zx.MAP_DEPTH_PLAYER)
 
     delay = 5
     x.set_tile(tile=name + ".1",
