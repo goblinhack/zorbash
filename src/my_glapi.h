@@ -238,14 +238,6 @@ extern float glapi_last_bottom;
 
 extern void gl_ext_init(void);
 
-extern GLuint render_buf_id1;
-extern GLuint fbo_id1;
-extern GLuint fbo_tex_id1;
-
-extern GLuint render_buf_id_wid;
-extern GLuint fbo_id_wid;
-extern GLuint fbo_tex_id_wid;
-
 #ifdef _WIN32
 extern PFNGLCREATEPROGRAMPROC glCreateProgram_EXT;
 extern PFNGLDELETEPROGRAMPROC glDeleteProgram_EXT;
@@ -368,3 +360,24 @@ void blit_colored(int tex,
                   color color_tr);
 
 void glcolor(color s);
+
+/*
+ * Frame buffer objects
+ */
+#define MAX_FBO                             8
+#define FBO_MAIN                            0
+#define FBO_WID                             1
+#define FBO_VISITED_MAP                     2
+#define FBO_VISITED_MAP_PERSISTANT_SHADOW   3
+#define FBO_VISITED_MAP_MERGED              4
+#define FBO_CURRENT_VISIBLE_MAP             5
+#define FBO_CURRENT_VISIBLE_MAP_SHADOW      6
+#define FBO_CURRENT_VISIBLE_MAP_MERGED      7
+
+extern GLuint render_buf_id[MAX_FBO];
+extern GLuint fbo_id[MAX_FBO];
+extern GLuint fbo_tex_id[MAX_FBO];
+
+void blit_fbo(int fbo);
+void blit_fbo_bind(int fbo);
+void blit_fbo_unbind(void);

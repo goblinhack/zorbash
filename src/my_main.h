@@ -32,6 +32,12 @@
 #define MAP_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 
 /*
+ * Light sources
+ */
+#define MAX_LIGHT_RAYS              (360)
+#define MAX_LIGHTS                  (MAP_WIDTH * MAP_HEIGHT)
+
+/*
  * Per screen
  */
 #define TILES_ACROSS                20

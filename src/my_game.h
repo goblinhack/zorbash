@@ -24,6 +24,8 @@ public:
     std::vector<Thingp> things[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
     uint8_t             is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t             is_ladder[MAP_WIDTH][MAP_HEIGHT] = {};
+    bool                lit_now_by_player[MAP_WIDTH][MAP_HEIGHT] = {};
+    bool                lit_earlier_by_player[MAP_WIDTH][MAP_HEIGHT] = {};
   
     template <class Archive>
     void serialize (Archive & archive)
