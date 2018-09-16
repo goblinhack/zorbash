@@ -13,8 +13,9 @@
 
 enum {
     MAP_DEPTH_FLOOR,
-    MAP_DEPTH_WALLS,
     MAP_DEPTH_ITEMS,
+    MAP_DEPTH_PLAYER,
+    MAP_DEPTH_WALLS,
     MAP_DEPTH,
 };
 
@@ -59,7 +60,7 @@ public:
 
 class Config {
 public:
-    bool               fps_counter                  = {};
+    bool               fps_counter                  = true;
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
     bool               display_sync                 = true;

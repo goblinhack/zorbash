@@ -11,6 +11,7 @@
 #include "frameobject.h"
 #include "my_string.h"
 #include "my_ascii.h"
+#include "my_game.h"
 
 static PyObject *zx_mod;
 PyMODINIT_FUNC python_m_y_module_create(void);
@@ -1963,6 +1964,11 @@ static void python_add_consts (void)
 
     PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
+
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS", MAP_DEPTH_WALLS);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_ITEMS", MAP_DEPTH_ITEMS);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_PLAYER", MAP_DEPTH_PLAYER);
 
     PyModule_AddIntConstant(zx_mod, "KMOD_LSHIFT", KMOD_LSHIFT);
     PyModule_AddIntConstant(zx_mod, "KMOD_RSHIFT", KMOD_RSHIFT);

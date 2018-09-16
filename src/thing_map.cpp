@@ -274,7 +274,6 @@ static void thing_blit_things (int minx, int miny, int minz,
     for (int z = minz; z < maxz; z++) {
         for (int x = minx ; x < maxx; x++) {
             for (int y = miny ; y < maxy; y++) {
-
                 for (auto t : game.state.map.things[x][y][z]) {
 
                     fpoint tl;
@@ -282,7 +281,6 @@ static void thing_blit_things (int minx, int miny, int minz,
 
                     double tx = t->at.x - game.state.map_at.x;
                     double ty = t->at.y - game.state.map_at.y;
-
                     static const double tdx = 1.0 / (double)TILES_ACROSS;
                     static const double tdy = 1.0 / (double)TILES_DOWN;
 
@@ -423,14 +421,14 @@ void thing_render_all (void)
     int maxz = MAP_DEPTH;
 
     int minx = std::max(0, 
-                        (int) game.state.map_at.x - TILES_ACROSS / 2);
+        (int) game.state.map_at.x - TILES_ACROSS / 2);
     int maxx = std::min(MAP_WIDTH, 
-                        (int)game.state.map_at.x + TILES_ACROSS + TILES_ACROSS / 2);
+        (int)game.state.map_at.x + TILES_ACROSS + TILES_ACROSS / 2);
 
     int miny = std::max(0, 
-                        (int) game.state.map_at.y - TILES_DOWN / 2);
+        (int) game.state.map_at.y - TILES_DOWN / 2);
     int maxy = std::min(MAP_HEIGHT, 
-                        (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
+        (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
 
     thing_map_reset();
     thing_find_all(minx, miny, minz, maxx, maxy, maxz);
@@ -444,6 +442,20 @@ void thing_render_all (void)
 
     if (game.config.editor_mode) {
         thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
+    } else {
+        if (game.state.player) {
+            map_light_init();
+
+            fpoint at = game.state.player->at;
+            at.x += 0.5;
+            at.y += 0.5;
+
+            map_light_add(game.state.player->tp, at, 20.0, RED);
+            map_light_calculate_visible(0);
+            //map_light_display(0, FBO_VISITED_MAP, false);
+            glcolor(RED);
+            map_light_ray_effect(0, 0);
+        }
     }
 
     thing_blit_things(minx, miny, minz, maxx, maxy, maxz);

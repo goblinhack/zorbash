@@ -18,8 +18,7 @@ static const double MAX_LIGHT_STRENGTH = 1000.0;
 static double ray_depth[MAX_LIGHT_RAYS][LIGHT_LEVELS];
 static double ray_rad[MAX_LIGHT_RAYS][LIGHT_LEVELS];
 static fpoint ray_lit[MAX_LIGHT_RAYS][LIGHT_LEVELS];
-
-static int map_light_count;
+static uint16_t map_light_count;
 
 typedef struct map_light_ {
     Tpp tp;
@@ -173,12 +172,12 @@ void map_light_add (Tpp tp, fpoint at, double strength, color c)
 }
 
 static void map_light_add_ray_depth (fpoint p,
-                                     const map_light *light,
-                                     fpoint light_pos,
-                                     fpoint light_end,
-                                     double rad,
-                                     int deg,
-                                     int soft_shadow)
+                                       const map_light *light,
+                                       fpoint light_pos,
+                                       fpoint light_end,
+                                       double rad,
+                                       int deg,
+                                       int soft_shadow)
 {
     auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
 
@@ -228,9 +227,9 @@ static void map_light_add_ray_depth (fpoint p,
  * building a z buffer of sorts.
  */
 static void map_light_calculate_for_single_obstacle (Tpp tp,
-                                                     int x,
-                                                     int y,
-                                                     int light_index)
+                                                       int x,
+                                                       int y,
+                                                       int light_index)
 {
     const map_light *light = &map_lights[light_index];
     int owidth;
@@ -438,10 +437,10 @@ static void map_lighting_calculate (const int light_index)
     auto visible_width = light_radius + 1;
     auto visible_height = light_radius + 1;
 
-    auto maxx = light->at.x + visible_width;
-    auto minx = light->at.x - visible_width;
-    auto maxy = light->at.y + visible_height;
-    auto miny = light->at.y - visible_height;
+    int16_t maxx = light->at.x + visible_width;
+    int16_t minx = light->at.x - visible_width;
+    int16_t maxy = light->at.y + visible_height;
+    int16_t miny = light->at.y - visible_height;
 
     if (unlikely(minx < 0)) {
         minx = 0;
@@ -459,8 +458,8 @@ static void map_lighting_calculate (const int light_index)
         maxy = MAP_HEIGHT;
     }
 
-    for (uint8_t z = MAP_DEPTH_WALLS; z < MAP_DEPTH_ITEMS; z++) {
-        for (uint16_t x = maxx; x >= minx; x--) {
+    uint8_t z = MAP_DEPTH_WALLS; {
+        for (uint16_t x = maxx - 1; x >= minx; x--) {
             for (uint16_t y = miny; y < maxy; y++) {
                 for (auto t : game.state.map.things[x][y][z]) {
                     Tpp tp = t->tp;
@@ -703,8 +702,12 @@ static void map_lighting_render (const int light_index,
             double p1x = light_pos.x + cosr * p1_len * tile_pix_w;
             double p1y = light_pos.y + sinr * p1_len * tile_pix_h;
 
+LOG("%f %f %f %f",p1x, p1y, light_pos.x, light_pos.y);
+gl_blitline(p1x, p1y, light_pos.x, light_pos.y);
+continue;
             push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
         }
+return;
 
         /*
          * Complete the circle with the first point again.
@@ -878,8 +881,7 @@ static void map_lighting_render (const int light_index,
     }
 }
 
-static void map_light_ray_effect (const int light_index,
-                                  const int light_level)
+void map_light_ray_effect (const int light_index, const int light_level)
 {
     auto *light = &map_lights[light_index];
     auto light_radius = light->strength;
@@ -889,9 +891,15 @@ static void map_light_ray_effect (const int light_index,
         return;
     }
 
+    double tx = light->at.x - game.state.map_at.x;
+    double ty = light->at.y - game.state.map_at.y;
+
+    static const double tdx = 1.0 / (double)TILES_ACROSS;
+    static const double tdy = 1.0 / (double)TILES_DOWN;
+    light_pos.x = tx * tdx;
+    light_pos.y = ty * tdy;
+
     auto max_light_rays = light->max_light_rays;
-    const auto tile_pix_w = game.config.tile_pixel_width;
-    const auto tile_pix_h = game.config.tile_pixel_height;
 
     {
         int i;
@@ -906,17 +914,17 @@ static void map_light_ray_effect (const int light_index,
 
             if (p1_len == 0) {
                 p1_len = light_radius;
-                continue;
+//                continue;
             }
 
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            auto p2x = light_pos.x + cosr * p1_len * tile_pix_w;
-            auto p2y = light_pos.y + sinr * p1_len * tile_pix_h;
-            auto p1x = light_pos.x + cosr * 0.5 * tile_pix_w;
-            auto p1y = light_pos.y + sinr * 0.5 * tile_pix_h;
+            auto p2x = light_pos.x + cosr * p1_len * tdx;
+            auto p2y = light_pos.y + sinr * p1_len * tdy;
+            auto p1x = light_pos.x + cosr * 0.5 * tdx;
+            auto p1y = light_pos.y + sinr * 0.5 * tdy;
 
             gl_blitline(p1x, p1y, p2x, p2y);
         }
@@ -957,16 +965,9 @@ void map_light_calculate_visible (int level)
     }
 }
 
-void map_light_display (int level, 
-                        int fbo_lighting,
-                        int fbo, 
-                        int clear)
+void map_light_display (int level, int fbo, int clear)
 {
-    if (!fbo_lighting) {
-        return;
-    }
-
-    blit_fbo_bind(fbo);
+//    blit_fbo_bind(fbo);
 
     if (clear) {
         glClearColor(0,0,0,0);
@@ -977,7 +978,7 @@ void map_light_display (int level,
     /*
      * We want to merge successive light sources together.
      */
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
     blit_init();
 
@@ -1010,16 +1011,11 @@ void map_light_display (int level,
         map_lighting_render(i, 1);
     }
 
-    blit_fbo_unbind();
+//    blit_fbo_unbind();
 }
 
-void map_light_glow_display (int level, 
-                             int fbo_lighting)
+void map_light_glow_display (int level)
 {
-    if (!fbo_lighting) {
-        return;
-    }
-
     int i;
 
     /*
