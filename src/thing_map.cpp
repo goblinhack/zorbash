@@ -391,9 +391,9 @@ static void thing_find_all (int minx, int miny, int minz,
     for (auto ti : game.state.map.all_things) {
         auto t = ti.second;
         auto tp = t->tp;
-        point3d at((int)t->at.x, (int)t->at.y, tp_z_depth(tp));
+        point at((int)t->at.x, (int)t->at.y);
 
-        game.state.map.things[at.x][at.y][at.z].push_back(t);
+        game.state.map.things[at.x][at.y][tp_z_depth(tp)].push_back(t);
 
         if (tp_is_wall(tp)) {
             game.state.map.is_wall[at.x][at.y] = true;

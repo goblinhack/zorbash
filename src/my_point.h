@@ -196,11 +196,45 @@ public:
             return (RAD_180 - theta);
         }
     }
+
+    /*
+     * Two lines we already know intersect.
+     */
+    friend uint8_t get_line_known_intersection (my_apoint p0,
+                                                my_apoint p1,
+                                                my_apoint p2,
+                                                my_apoint p3,
+                                                my_apoint *intersect)
+    {
+        T denominator = 
+            ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
+
+        if (denominator == 0) {
+            return (false);
+        }
+
+        T a = p0.y - p2.y;
+        T b = p0.x - p2.x;
+
+        T numerator1 = ((p3.x - p2.x) * a) - ((p3.y - p2.y) * b);
+        T numerator2 = ((p1.x - p0.x) * a) - ((p1.y - p0.y) * b);
+
+        a = numerator1 / denominator;
+        b = numerator2 / denominator;
+
+        // if we cast these lines infinitely in both directions, they intersect 
+        // here:
+        intersect->x = p0.x + (a * (p1.x - p0.x));
+        intersect->y = p0.y + (a * (p1.y - p0.y));
+
+        return (true);
+    }
 };
 
 typedef my_apoint<int> point;
 typedef my_apoint<double> fpoint;
 
+#ifdef NEED_3D_MATH
 template<class T> class my_apoint3d
 {
 public:
@@ -368,5 +402,6 @@ public:
 
 typedef my_apoint3d<int> point3d;
 typedef my_apoint3d<double> fpoint3d;
+#endif
 
 #endif /* _MY_POINT_H_ */

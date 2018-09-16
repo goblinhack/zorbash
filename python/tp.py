@@ -89,9 +89,9 @@ class Tp:
         self.is_rrr35 = False
         self.is_rrr36 = False
         self.is_rrr37 = False
-        self.is_rrr38 = False
-        self.is_rrr39 = False
-        self.is_rrr40 = False
+        self.is_candle_light = False
+        self.is_shadow_caster_soft = False
+        self.is_shadow_caster = False
         self.is_rrr41 = False
         self.is_animated_walk_flip = False
         self.z_depth = False
@@ -323,17 +323,17 @@ class Tp:
         self.is_rrr37 = value
         zx.tp_set_is_rrr37(self, value)
 
-    def set_is_rrr38(self, value):
-        self.is_rrr38 = value
-        zx.tp_set_is_rrr38(self, value)
+    def set_is_candle_light(self, value):
+        self.is_candle_light = value
+        zx.tp_set_is_candle_light(self, value)
 
-    def set_is_rrr39(self, value):
-        self.is_rrr39 = value
-        zx.tp_set_is_rrr39(self, value)
+    def set_is_shadow_caster_soft(self, value):
+        self.is_shadow_caster_soft = value
+        zx.tp_set_is_shadow_caster_soft(self, value)
 
-    def set_is_rrr40(self, value):
-        self.is_rrr40 = value
-        zx.tp_set_is_rrr40(self, value)
+    def set_is_shadow_caster(self, value):
+        self.is_shadow_caster = value
+        zx.tp_set_is_shadow_caster(self, value)
 
     def set_is_rrr41(self, value):
         self.is_rrr41 = value

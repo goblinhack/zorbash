@@ -17,6 +17,7 @@ def wall_init(name, short_name,
     x.set_short_name(short_name)
     x.set_is_movement_blocking(True)
     x.set_is_wall(True)
+    x.set_is_shadow_caster(True)
 
     if tiles is not None:
         for t in tiles:

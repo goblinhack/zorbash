@@ -6399,7 +6399,7 @@ void wid_display_all (void)
     wid_tick_all();
     wid_move_all();
 
-    glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id_wid);
+    blit_fbo_bind(FBO_WID);
 
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -6467,15 +6467,11 @@ void wid_display_all (void)
         glEnable(GL_COLOR_LOGIC_OP);
     }
 
-    glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
+    blit_fbo_unbind();
 
     glBlendFunc(GL_BLEND_SRC_ALPHA, GL_ZERO);
-
-    blit_init();
     glcolor(WHITE);
-    blit(fbo_tex_id_wid, 0.0, 1.0, 1.0, 0.0, 0, 0, 
-         game.config.video_gl_width, game.config.video_gl_height);
-    blit_flush();
+    blit_fbo(FBO_WID);
 
     if (inverted_gfx) {
         glLogicOp(GL_COPY);
