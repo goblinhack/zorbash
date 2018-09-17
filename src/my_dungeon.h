@@ -523,7 +523,8 @@ public:
                     auto c = cr.c;
 
                     if (!c) {
-                        DIE("unknown map char %c at %d,%d,%d", m, x, y, d);
+                        LOG("unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
+                        continue;
                     }
 
                     if (!(x % 2) && !(y % 2)) {
