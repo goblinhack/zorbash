@@ -151,34 +151,86 @@ static void thing_blit_wall (Thingp t,
         tile_blit_fat(tp, t->right_tile, 0, &tl2, &br2);
     }
 
-    dw = 0.00;
-    dh = 0.00;
+    /*
+     * X---
+     * |...
+     * |...
+     */
     if (!game.state.map.is_wall[x - 1][y - 1] &&
         !game.state.map.is_wall[x - 1][y] &&
         !game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
+        //tl2.x -= dw;
+        //br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit_fat(tp, t->tl_tile, 0, &tl2, &br2);
     }
 
+    /*
+     * ---X
+     * ...|
+     * ...|
+     */
     if (!game.state.map.is_wall[x + 1][y - 1] &&
         !game.state.map.is_wall[x + 1][y] &&
         !game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
+        //tl2.x += dw;
+        //br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit_fat(tp, t->tr_tile, 0, &tl2, &br2);
     }
 
-    if (!game.state.map.is_wall[x + 1][y + 1] &&
-        !game.state.map.is_wall[x + 1][y] &&
+    /*
+     *  .|
+     *  .|
+     *  .X--
+     *  ....
+     */
+    if (!game.state.map.is_wall[x + 1][y - 1] &&
+        game.state.map.is_wall[x + 1][y] &&
+        game.state.map.is_wall[x][y - 1]) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        //tl2.x += dw;
+        //br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit_fat(tp, t->tr_tile, 0, &tl2, &br2);
+    }
+
+    /*
+     *    |.
+     *    |.
+     *  --X.
+     *  ....
+     */
+    if (!game.state.map.is_wall[x - 1][y - 1] &&
+        game.state.map.is_wall[x - 1][y] &&
+        game.state.map.is_wall[x][y - 1]) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        //tl2.x += dw;
+        //br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit_fat(tp, t->tl_tile, 0, &tl2, &br2);
+    }
+
+    dw = 0.00;
+    dh = 0.00;
+
+    /*
+     * |...
+     * |...
+     * X---
+     */
+    if (!game.state.map.is_wall[x - 1][y + 1] &&
+        !game.state.map.is_wall[x - 1][y] &&
         !game.state.map.is_wall[x][y + 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
@@ -189,6 +241,11 @@ static void thing_blit_wall (Thingp t,
         tile_blit_fat(tp, t->bl_tile, 0, &tl2, &br2);
     }
 
+    /*
+     * ...|
+     * ...|
+     * ---X
+     */
     if (!game.state.map.is_wall[x + 1][y + 1] &&
         !game.state.map.is_wall[x + 1][y] &&
         !game.state.map.is_wall[x][y + 1]) {
@@ -201,6 +258,12 @@ static void thing_blit_wall (Thingp t,
         tile_blit_fat(tp, t->br_tile, 0, &tl2, &br2);
     }
 
+    /*
+     * .....
+     * .X---
+     * .|
+     * .|
+     */
     if (!game.state.map.is_wall[x + 1][y + 1] &&
         game.state.map.is_wall[x + 1][y] &&
         game.state.map.is_wall[x][y + 1]) {
@@ -212,6 +275,13 @@ static void thing_blit_wall (Thingp t,
         br2.y += dh;
         tile_blit_fat(tp, t->br_tile, 0, &tl2, &br2);
     }
+
+    /*
+     * ....
+     * --X.
+     *   |.
+     *   |.
+     */
     if (!game.state.map.is_wall[x - 1][y + 1] &&
         game.state.map.is_wall[x - 1][y] &&
         game.state.map.is_wall[x][y + 1]) {
@@ -222,30 +292,6 @@ static void thing_blit_wall (Thingp t,
         tl2.y += dh;
         br2.y += dh;
         tile_blit_fat(tp, t->bl_tile, 0, &tl2, &br2);
-    }
-
-    if (!game.state.map.is_wall[x + 1][y - 1] &&
-        game.state.map.is_wall[x + 1][y] &&
-        game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
-        tile_blit_fat(tp, t->tr_tile, 0, &tl2, &br2);
-    }
-
-    if (!game.state.map.is_wall[x - 1][y - 1] &&
-        game.state.map.is_wall[x - 1][y] &&
-        game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
-        tile_blit_fat(tp, t->tl_tile, 0, &tl2, &br2);
     }
 }
 

@@ -35,7 +35,7 @@ public:
     uint8_t                 width  {ROOM_WIDTH};
     uint8_t                 height {ROOM_HEIGHT};
 
-    char                    data[ROOM_WIDTH][ROOM_HEIGHT][MAP_DEPTH] = {{{'\0'}}};
+    char                    data[ROOM_WIDTH][ROOM_HEIGHT][MAP_DEPTH] = {{{' '}}};
     
     /*
      * A bitmap of possible exits.

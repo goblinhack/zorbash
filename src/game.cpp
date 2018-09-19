@@ -96,7 +96,7 @@ void game_display (void)
     if (first) {
 
         int seed = 663;
-        seed = myrand();
+        //seed = myrand();
         mysrand(seed);
         auto dungeon = new Dungeon(MAP_WIDTH, 
                                    MAP_HEIGHT, 
