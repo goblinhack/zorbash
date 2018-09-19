@@ -539,6 +539,9 @@ def init_tiles():
     zx.tex_load(
             file="data/gfx/platform-bg.tga",
             name="platform-bg")
+    zx.tex_load(
+            file="data/gfx/light.tga",
+            name="light")
 
     tiles = [
             "player1.1",
