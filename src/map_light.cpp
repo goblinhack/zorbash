@@ -459,8 +459,8 @@ static void map_lighting_calculate (const int light_index)
     }
 
     uint8_t z = MAP_DEPTH_WALLS; {
-        for (uint16_t x = maxx - 1; x >= minx; x--) {
-            for (uint16_t y = miny; y < maxy; y++) {
+        for (int16_t x = maxx - 1; x >= minx; x--) {
+            for (int16_t y = miny; y < maxy; y++) {
                 for (auto t : game.state.map.things[x][y][z]) {
                     Tpp tp = t->tp;
 
