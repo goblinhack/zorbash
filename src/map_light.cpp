@@ -638,15 +638,18 @@ static void map_lighting_render (const int light_index,
 {
     auto *light = &map_lights[light_index];
     auto light_radius = light->strength;
-    auto light_pos = light->at;
     auto light_tp = light->tp;
     if (!light_tp) {
         return;
     }
 
+    double tx = light->at.x - game.state.map_at.x;
+    double ty = light->at.y - game.state.map_at.y;
+    static const double tdx = 1.0 / (double)TILES_ACROSS;
+    static const double tdy = 1.0 / (double)TILES_DOWN;
+    fpoint light_pos(tx * tdx, ty * tdy);
     auto max_light_rays = light->max_light_rays;
     auto c = light->col;
-
     auto red   = ((double)c.r) / 255.0;
     auto green = ((double)c.g) / 255.0;
     auto blue  = ((double)c.b) / 255.0;
@@ -670,14 +673,60 @@ static void map_lighting_render (const int light_index,
         pct_tile_len_flicker = 0.0;
     }
 
-    const auto tile_pix_w = game.config.tile_pixel_width;
-    const auto tile_pix_h = game.config.tile_pixel_height;
-
     /*
      * Now blit to the FBO, drawing the central core of the light rays
      */
     blit_init();
 
+    {
+        int i;
+
+        /*
+         * Walk the light rays in a circle.
+         */
+        push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
+
+        for (i = 0; i < max_light_rays; i++) {
+            double p1_len = ray_depth[i][light_level];
+            double rad = ray_rad[i][light_level];
+            if (p1_len == 0) {
+                p1_len = light_radius;
+            }
+
+            double cosr;
+            double sinr;
+            sincos(rad, &sinr, &cosr);
+
+            double p1x = light_pos.x + cosr * p1_len * tdx;
+            double p1y = light_pos.y + sinr * p1_len * tdy;
+
+            push_point(p1x, p1y, red, green, blue, alpha);
+        }
+
+        /*
+         * Complete the circle with the first point again.
+         */
+        i = 0; {
+            double p1_len = ray_depth[i][light_level];
+            double rad = ray_rad[i][light_level];
+            if (p1_len == 0) {
+                p1_len = light_radius;
+            }
+
+            double cosr;
+            double sinr;
+            sincos(rad, &sinr, &cosr);
+
+            double p1x = light_pos.x + cosr * p1_len * tdx;
+            double p1y = light_pos.y + sinr * p1_len * tdy;
+
+            push_point(p1x, p1y, red, green, blue, alpha);
+        }
+    }
+
+    blit_flush_triangle_fan();
+
+    return;
     {
         int i;
 
@@ -699,15 +748,11 @@ static void map_lighting_render (const int light_index,
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * p1_len * tile_pix_w;
-            double p1y = light_pos.y + sinr * p1_len * tile_pix_h;
+            double p1x = light_pos.x + cosr * p1_len * tdx;
+            double p1y = light_pos.y + sinr * p1_len * tdy;
 
-LOG("%f %f %f %f",p1x, p1y, light_pos.x, light_pos.y);
-gl_blitline(p1x, p1y, light_pos.x, light_pos.y);
-continue;
             push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
         }
-return;
 
         /*
          * Complete the circle with the first point again.
@@ -725,8 +770,8 @@ return;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * p1_len * tile_pix_w;
-            double p1y = light_pos.y + sinr * p1_len * tile_pix_h;
+            double p1x = light_pos.x + cosr * p1_len * tdx;
+            double p1y = light_pos.y + sinr * p1_len * tdy;
 
             push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
         }
@@ -760,11 +805,11 @@ return;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * p1_len * tile_pix_w;
-            double p1y = light_pos.y + sinr * p1_len * tile_pix_h;
+            double p1x = light_pos.x + cosr * p1_len * tdx;
+            double p1y = light_pos.y + sinr * p1_len * tdy;
 
-            double p3x = light_pos.x + cosr * p3_len * tile_pix_w;
-            double p3y = light_pos.y + sinr * p3_len * tile_pix_h;
+            double p3x = light_pos.x + cosr * p3_len * tdx;
+            double p3y = light_pos.y + sinr * p3_len * tdy;
 
             push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
             push_point(p3x, p3y, red, green, blue, pct_light_radius_dimmer * alpha * 0.35);
@@ -788,11 +833,11 @@ return;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * p1_len * tile_pix_w;
-            double p1y = light_pos.y + sinr * p1_len * tile_pix_h;
+            double p1x = light_pos.x + cosr * p1_len * tdx;
+            double p1y = light_pos.y + sinr * p1_len * tdy;
 
-            double p3x = light_pos.x + cosr * p3_len * tile_pix_w;
-            double p3y = light_pos.y + sinr * p3_len * tile_pix_h;
+            double p3x = light_pos.x + cosr * p3_len * tdx;
+            double p3y = light_pos.y + sinr * p3_len * tdy;
 
             push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
             push_point(p3x, p3y, red, green, blue, pct_light_radius_dimmer * alpha * 0.35);
@@ -830,14 +875,14 @@ return;
                 double sinr;
                 sincos(rad, &sinr, &cosr);
 
-                double p1x = light_pos.x + cosr * p1_len * tile_pix_w;
-                double p1y = light_pos.y + sinr * p1_len * tile_pix_h;
+                double p1x = light_pos.x + cosr * p1_len * tdx;
+                double p1y = light_pos.y + sinr * p1_len * tdy;
 
-                double p3x = light_pos.x + cosr * p3_len * tile_pix_w;
-                double p3y = light_pos.y + sinr * p3_len * tile_pix_h;
+                double p3x = light_pos.x + cosr * p3_len * tdx;
+                double p3y = light_pos.y + sinr * p3_len * tdy;
 
-                p3x += cosr * tile_pix_w * pct_tile_len_flicker;
-                p3y += sinr * tile_pix_h * pct_tile_len_flicker;
+                p3x += cosr * tdx * pct_tile_len_flicker;
+                p3y += sinr * tdy * pct_tile_len_flicker;
 
                 push_point(p1x, p1y, red, green, blue, alpha * 0.35);
                 push_point(p3x, p3y, red, green, blue, alpha * 0.05);
@@ -860,14 +905,14 @@ return;
                 double sinr;
                 sincos(rad, &sinr, &cosr);
 
-                double p1x = light_pos.x + cosr * p1_len * tile_pix_w;
-                double p1y = light_pos.y + sinr * p1_len * tile_pix_h;
+                double p1x = light_pos.x + cosr * p1_len * tdx;
+                double p1y = light_pos.y + sinr * p1_len * tdy;
 
-                double p3x = light_pos.x + cosr * p3_len * tile_pix_w;
-                double p3y = light_pos.y + sinr * p3_len * tile_pix_h;
+                double p3x = light_pos.x + cosr * p3_len * tdx;
+                double p3y = light_pos.y + sinr * p3_len * tdy;
 
-                p3x += cosr * tile_pix_w * pct_tile_len_flicker;
-                p3y += sinr * tile_pix_h * pct_tile_len_flicker;
+                p3x += cosr * tdx * pct_tile_len_flicker;
+                p3y += sinr * tdy * pct_tile_len_flicker;
 
                 push_point(p1x, p1y, red, green, blue, alpha * 0.35);
                 push_point(p3x, p3y, red, green, blue, alpha * 0.05);
@@ -893,7 +938,6 @@ void map_light_ray_effect (const int light_index, const int light_level)
 
     double tx = light->at.x - game.state.map_at.x;
     double ty = light->at.y - game.state.map_at.y;
-
     static const double tdx = 1.0 / (double)TILES_ACROSS;
     static const double tdy = 1.0 / (double)TILES_DOWN;
     light_pos.x = tx * tdx;
@@ -914,7 +958,7 @@ void map_light_ray_effect (const int light_index, const int light_level)
 
             if (p1_len == 0) {
                 p1_len = light_radius;
-//                continue;
+                continue;
             }
 
             double cosr;
@@ -1008,10 +1052,26 @@ void map_light_display (int level, int fbo, int clear)
         /*
          * This for soft shadows.
          */
-        map_lighting_render(i, 1);
+//        map_lighting_render(i, 1);
     }
 
 //    blit_fbo_unbind();
+//
+    glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
+
+    {
+        static Texp tex;
+        static int buf;
+        
+        if (!tex) {
+            tex = tex_load("", "light", GL_LINEAR);
+            buf = tex_get_gl_binding(tex);
+        }
+        blit_init();
+        glcolor(WHITE);
+        blit(buf, 0.0, 1.0, 1.0, 0.0, 0, 0, 1, 1);
+        blit_flush();
+    }
 }
 
 void map_light_glow_display (int level)

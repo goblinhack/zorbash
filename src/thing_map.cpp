@@ -101,7 +101,6 @@ static void thing_map_blit_background (void)
 
     double tlx = tdx * game.state.map_at.x;
     double tly = tdy * game.state.map_at.y;
-
     double brx = tdx * (game.state.map_at.x + (double)TILES_ACROSS);
     double bry = tdy * (game.state.map_at.y + (double)TILES_DOWN);
 
@@ -498,9 +497,10 @@ void thing_render_all (void)
 
             map_light_add(game.state.player->tp, at, 20.0, RED);
             map_light_calculate_visible(0);
-            //map_light_display(0, FBO_VISITED_MAP, false);
             glcolor(RED);
             map_light_ray_effect(0, 0);
+            glcolor(GREEN);
+            map_light_display(0, FBO_VISITED_MAP, false);
         }
     }
 
