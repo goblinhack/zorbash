@@ -744,6 +744,7 @@ static void map_lighting_render (const int light_index,
         double p2x = light_pos.x + lw;
         double p2y = light_pos.y + lh;
 
+        glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
         blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         blit_flush();
     }
@@ -1079,7 +1080,6 @@ void map_light_display (int level, int fbo, int clear)
 
 //    blit_fbo_unbind();
 //
-    glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
 }
 
 void map_light_glow_display (int level)
