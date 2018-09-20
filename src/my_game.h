@@ -69,8 +69,13 @@ public:
     int32_t            video_pix_height             = {};
     double             video_gl_width               = {};
     double             video_gl_height              = {};
+    double             video_w_h_ratio              = {};
     int32_t            drawable_gl_width            = {};
     int32_t            drawable_gl_height           = {};
+    double             tile_gl_width                = {};
+    double             tile_gl_height               = {};
+    double             ascii_gl_width               = {};
+    double             ascii_gl_height              = {};
     double             tile_pixel_width             = {};
     double             tile_pixel_height            = {};
     uint32_t           sdl_delay                    = 5;
@@ -85,9 +90,14 @@ public:
                 cereal::make_nvp("display_sync",       display_sync),
                 cereal::make_nvp("full_screen",        full_screen),
                 cereal::make_nvp("video_pix_width",    video_pix_width),
+                cereal::make_nvp("video_w_h_ratio",    video_w_h_ratio),
                 cereal::make_nvp("video_pix_height",   video_pix_height),
                 cereal::make_nvp("video_gl_width",     video_gl_width),
                 cereal::make_nvp("video_gl_height",    video_gl_height),
+                cereal::make_nvp("tile_gl_width",      tile_gl_width),
+                cereal::make_nvp("tile_gl_height",     tile_gl_height),
+                cereal::make_nvp("ascii_gl_width",     ascii_gl_width),
+                cereal::make_nvp("ascii_gl_height",    ascii_gl_height),
                 cereal::make_nvp("drawable_gl_width",  drawable_gl_width),
                 cereal::make_nvp("drawable_gl_height", drawable_gl_height),
                 cereal::make_nvp("tile_pixel_width",   tile_pixel_width),

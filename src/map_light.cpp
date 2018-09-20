@@ -726,6 +726,28 @@ static void map_lighting_render (const int light_index,
 
     blit_flush_triangle_fan();
 
+    {
+        static Texp tex;
+        static int buf;
+        
+        if (!tex) {
+            tex = tex_load("", "light", GL_LINEAR);
+            buf = tex_get_gl_binding(tex);
+        }
+        blit_init();
+        glcolor(WHITE);
+
+        double lw = 0.5 * light_radius * tdx;
+        double lh = 0.5 * light_radius * tdy;
+        double p1x = light_pos.x - lw;
+        double p1y = light_pos.y - lh;
+        double p2x = light_pos.x + lw;
+        double p2y = light_pos.y + lh;
+
+        blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+        blit_flush();
+    }
+
     return;
     {
         int i;
@@ -1058,20 +1080,6 @@ void map_light_display (int level, int fbo, int clear)
 //    blit_fbo_unbind();
 //
     glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
-
-    {
-        static Texp tex;
-        static int buf;
-        
-        if (!tex) {
-            tex = tex_load("", "light", GL_LINEAR);
-            buf = tex_get_gl_binding(tex);
-        }
-        blit_init();
-        glcolor(WHITE);
-        blit(buf, 0.0, 1.0, 1.0, 0.0, 0, 0, 1, 1);
-        blit_flush();
-    }
 }
 
 void map_light_glow_display (int level)
