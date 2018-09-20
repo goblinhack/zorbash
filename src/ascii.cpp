@@ -860,11 +860,7 @@ static void ascii_blit (int no_color)
     /*
      * Get the mouse position to use. We use this to find the mouse tile that 
      * we are over.
-     */
-    double tw = game.config.video_gl_width  / (double)ASCII_WIDTH;
-    double th = game.config.video_gl_height / (double)ASCII_HEIGHT;
-
-    /*
+     *
      * Screen walkers
      */
     int x;
@@ -888,8 +884,8 @@ static void ascii_blit (int no_color)
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;
-            tile_br.x = tile_x + tw;
-            tile_br.y = tile_y + th;
+            tile_br.x = tile_x + game.config.ascii_gl_width;
+            tile_br.y = tile_y + game.config.ascii_gl_height;
 
             int mx1 = tile_tl.x * game.config.video_pix_width;
             int my1 = tile_tl.y * game.config.video_pix_height;
@@ -926,7 +922,7 @@ static void ascii_blit (int no_color)
                      tile_br.x,
                      tile_br.y);
             } else if (cell->bg_tile) {
-                tile_br.x = tile_x + tw * 2.4;
+                tile_br.x = tile_x + game.config.ascii_gl_width * 2.4;
                 color bg_color_tl = cell->bg_color_tl;
                 color bg_color_tr = cell->bg_color_tr;
                 color bg_color_bl = cell->bg_color_bl;
@@ -953,7 +949,7 @@ static void ascii_blit (int no_color)
              * Foreground
              */
             {
-                tile_br.x = tile_x + tw * 2.4;
+                tile_br.x = tile_x + game.config.ascii_gl_width * 2.4;
                 Tilep tile = cell->fg_tile;
 
                 if (tile) {
@@ -980,10 +976,10 @@ static void ascii_blit (int no_color)
                 }
             }
 
-            tile_x += tw;
+            tile_x += game.config.ascii_gl_width;
         }
 
-        tile_y += th;
+        tile_y += game.config.ascii_gl_height;
     }
 }
 

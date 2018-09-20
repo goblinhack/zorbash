@@ -96,9 +96,8 @@ static void thing_map_blit_background (void)
         }
     }
 
-    static const double tdx = 1.0 / (double)MAP_WIDTH;
-    static const double tdy = 1.0 / (double)MAP_HEIGHT;
-
+    const double tdx = game.config.tile_gl_width;
+    const double tdy = game.config.tile_gl_height;
     double tlx = tdx * game.state.map_at.x;
     double tly = tdy * game.state.map_at.y;
     double brx = tdx * (game.state.map_at.x + (double)TILES_ACROSS);
@@ -316,6 +315,9 @@ static void thing_blit_things (int minx, int miny, int minz,
     glcolor(WHITE);
     blit_init();
 
+    const double tdx = game.config.tile_gl_width;
+    const double tdy = game.config.tile_gl_height;
+
     for (int z = minz; z < maxz; z++) {
         for (int x = minx ; x < maxx; x++) {
             for (int y = miny ; y < maxy; y++) {
@@ -326,8 +328,6 @@ static void thing_blit_things (int minx, int miny, int minz,
 
                     double tx = t->at.x - game.state.map_at.x;
                     double ty = t->at.y - game.state.map_at.y;
-                    static const double tdx = 1.0 / (double)TILES_ACROSS;
-                    static const double tdy = 1.0 / (double)TILES_DOWN;
 
                     tl.x = tx * tdx;
                     tl.y = ty * tdy;

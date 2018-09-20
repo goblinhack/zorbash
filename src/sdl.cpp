@@ -7,6 +7,7 @@
 #include "my_glapi.h"
 #include "my_game.h"
 #include "my_wid.h"
+#include "my_ascii.h"
 
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
@@ -226,6 +227,18 @@ uint8_t sdl_init (void)
 
     game.config.video_gl_width = 1.0;
     game.config.video_gl_height = 1.0;
+    game.config.tile_gl_width = 
+                    game.config.video_gl_width  / (double)TILES_ACROSS;
+    game.config.tile_gl_height = 
+                    game.config.video_gl_height / (double)TILES_DOWN;
+    game.config.ascii_gl_width = 
+                    game.config.video_gl_width  / (double)ASCII_WIDTH;
+    game.config.ascii_gl_height = 
+                    game.config.video_gl_height / (double)ASCII_HEIGHT;
+    game.config.video_w_h_ratio = 
+        (double)game.config.video_pix_width /
+        (double)game.config.video_pix_height;
+                    
 
     LOG("- SDL video   : %dx%d (chosen or from saved file)",
         game.config.video_pix_width, game.config.video_pix_height);
