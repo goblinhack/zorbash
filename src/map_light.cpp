@@ -686,6 +686,7 @@ static void map_lighting_render (const int light_index,
          */
         push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
+double x = 0.1;
         for (i = 0; i < max_light_rays; i++) {
             double radius = ray_depth[i][light_level];
             double rad = ray_rad[i][light_level];
@@ -695,6 +696,7 @@ static void map_lighting_render (const int light_index,
 
             radius *= pct_light_radius_bright;
 
+radius += sqrt(x / radius);
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
@@ -716,6 +718,7 @@ static void map_lighting_render (const int light_index,
             }
 
             radius *= pct_light_radius_bright;
+radius += sqrt(x / radius);
 
             double cosr;
             double sinr;
@@ -744,8 +747,8 @@ static void map_lighting_render (const int light_index,
         auto radius = light_radius;
         radius *= pct_light_radius_bright;
 
-        double lw = light_radius * tdx;
-        double lh = light_radius * tdy;
+        double lw = radius * tdx;
+        double lh = radius * tdy;
         double p1x = light_pos.x - lw;
         double p1y = light_pos.y - lh;
         double p2x = light_pos.x + lw;

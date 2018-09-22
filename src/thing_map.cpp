@@ -493,15 +493,17 @@ void thing_render_all (void)
             fpoint at = game.state.player->at;
             at.x += 0.5;
             at.y += 0.5;
+
+            color c = WHITE;
             map_light_add(game.state.player->tp, at, 10.0, WHITE);
 
-            at.x -= 5;
-            at.y += 1;
-            map_light_add(game.state.player->tp, at, 3.0, RED);
+//            at.x -= 5;
+//            at.y += 1;
+//            map_light_add(game.state.player->tp, at, 3.0, RED);
 
-            at.x += 3;
-            at.y -= 3;
-            map_light_add(game.state.player->tp, at, 3.0, GREEN);
+//            at.x += 3;
+//            at.y -= 3;
+//            map_light_add(game.state.player->tp, at, 3.0, GREEN);
 
             map_light_calculate_visible(0);
             map_light_display(0, FBO_VISITED_MAP_MERGED, true);
