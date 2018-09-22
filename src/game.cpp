@@ -204,5 +204,7 @@ uint8_t
 game_key_down (const struct SDL_KEYSYM *key)
 {_
 CON("TBD %s", __FUNCTION__);
+extern void thing_map_test();
+thing_map_test();
     return (false);
 }

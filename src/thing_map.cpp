@@ -96,8 +96,8 @@ static void thing_map_blit_background (void)
         }
     }
 
-    const double tdx = game.config.tile_gl_width;
-    const double tdy = game.config.tile_gl_height;
+    static const double tdx = 1.0 / (double)MAP_WIDTH;
+    static const double tdy = 1.0 / (double)MAP_HEIGHT;
     double tlx = tdx * game.state.map_at.x;
     double tly = tdy * game.state.map_at.y;
     double brx = tdx * (game.state.map_at.x + (double)TILES_ACROSS);
@@ -483,7 +483,6 @@ void thing_render_all (void)
     }
 
     thing_map_scroll_do();
-    thing_map_blit_background();
 
     if (game.config.editor_mode) {
         thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
@@ -494,15 +493,39 @@ void thing_render_all (void)
             fpoint at = game.state.player->at;
             at.x += 0.5;
             at.y += 0.5;
+            map_light_add(game.state.player->tp, at, 10.0, RED);
 
-            map_light_add(game.state.player->tp, at, 20.0, RED);
+//            at.x -= 5;
+//            at.y += 1;
+//            map_light_add(game.state.player->tp, at, 3.0, RED);
+
+//            at.x += 3;
+//            at.y -= 3;
+//            map_light_add(game.state.player->tp, at, 3.0, GREEN);
+
+blit_fbo_bind(FBO_WID);
             map_light_calculate_visible(0);
-            glcolor(RED);
-            map_light_ray_effect(0, 0);
-            glcolor(GREEN);
-            map_light_display(0, FBO_VISITED_MAP, false);
+//            map_light_display(0, FBO_VISITED_MAP, true);
         }
     }
-
+    
+#if 0
+    blit_fbo_bind(FBO_WID);
+#endif
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    thing_map_blit_background();
     thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
+
+#if 0
+    glBindTexture(GL_TEXTURE_2D, 0);
+    blit_fbo_bind(FBO_WID);
+    glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+    blit_fbo(FBO_VISITED_MAP_MERGED);
+#endif
+glcolor(RED);
+map_light_ray_effect(0, 0);
+}
+
+void thing_map_test(void)
+{
 }

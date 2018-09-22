@@ -663,7 +663,7 @@ static void map_lighting_render (const int light_index,
      * 3. Strip of flickering even dimmer light
      */
 
-    auto pct_light_radius_bright = 0.7;
+    auto pct_light_radius_bright = 1.5;
     auto pct_light_radius_dimmer = 1.0;
     double pct_tile_len_flicker;
 
@@ -687,18 +687,20 @@ static void map_lighting_render (const int light_index,
         push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
         for (i = 0; i < max_light_rays; i++) {
-            double p1_len = ray_depth[i][light_level];
+            double radius = ray_depth[i][light_level];
             double rad = ray_rad[i][light_level];
-            if (p1_len == 0) {
-                p1_len = light_radius;
+            if (radius == 0) {
+                radius = light_radius;
             }
+
+            radius *= pct_light_radius_bright;
 
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * p1_len * tdx;
-            double p1y = light_pos.y + sinr * p1_len * tdy;
+            double p1x = light_pos.x + cosr * radius * tdx;
+            double p1y = light_pos.y + sinr * radius * tdy;
 
             push_point(p1x, p1y, red, green, blue, alpha);
         }
@@ -707,18 +709,20 @@ static void map_lighting_render (const int light_index,
          * Complete the circle with the first point again.
          */
         i = 0; {
-            double p1_len = ray_depth[i][light_level];
+            double radius = ray_depth[i][light_level];
             double rad = ray_rad[i][light_level];
-            if (p1_len == 0) {
-                p1_len = light_radius;
+            if (radius == 0) {
+                radius = light_radius;
             }
+
+            radius *= pct_light_radius_bright;
 
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * p1_len * tdx;
-            double p1y = light_pos.y + sinr * p1_len * tdy;
+            double p1x = light_pos.x + cosr * radius * tdx;
+            double p1y = light_pos.y + sinr * radius * tdy;
 
             push_point(p1x, p1y, red, green, blue, alpha);
         }
@@ -737,8 +741,11 @@ static void map_lighting_render (const int light_index,
         blit_init();
         glcolor(WHITE);
 
-        double lw = 0.5 * light_radius * tdx;
-        double lh = 0.5 * light_radius * tdy;
+        auto radius = light_radius;
+        radius *= pct_light_radius_bright;
+
+        double lw = light_radius * tdx;
+        double lh = light_radius * tdy;
         double p1x = light_pos.x - lw;
         double p1y = light_pos.y - lh;
         double p2x = light_pos.x + lw;
@@ -984,14 +991,16 @@ void map_light_ray_effect (const int light_index, const int light_level)
                 continue;
             }
 
+            p1_len *= 1.1;
+
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
             auto p2x = light_pos.x + cosr * p1_len * tdx;
             auto p2y = light_pos.y + sinr * p1_len * tdy;
-            auto p1x = light_pos.x + cosr * 0.5 * tdx;
-            auto p1y = light_pos.y + sinr * 0.5 * tdy;
+            auto p1x = light_pos.x + cosr * 0.1 * tdx;
+            auto p1y = light_pos.y + sinr * 0.1 * tdy;
 
             gl_blitline(p1x, p1y, p2x, p2y);
         }
@@ -1036,18 +1045,18 @@ void map_light_display (int level, int fbo, int clear)
 {
 //    blit_fbo_bind(fbo);
 
-    if (clear) {
-        glClearColor(0,0,0,0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glcolor(WHITE);
-    }
+    blit_fbo_bind(FBO_VISITED_MAP_MERGED);
+    glClearColor(0,0,0,0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glcolor(WHITE);
+    blit_fbo_unbind();
 
     /*
      * We want to merge successive light sources together.
      */
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-    blit_init();
+    //blit_init();
 
     int i;
 
@@ -1070,7 +1079,18 @@ void map_light_display (int level, int fbo, int clear)
         /*
          * Draw the light sources. First pass is for solid obstacles.
          */
+        blit_fbo_bind(FBO_CURRENT_VISIBLE_MAP_SHADOW);
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glcolor(WHITE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         map_lighting_render(i, 0);
+        blit_fbo_unbind();
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        blit_fbo_bind(FBO_VISITED_MAP_MERGED);
+        blit_fbo(FBO_CURRENT_VISIBLE_MAP_SHADOW);
+        blit_fbo_unbind();
 
         /*
          * This for soft shadows.
