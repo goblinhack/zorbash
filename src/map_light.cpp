@@ -663,7 +663,7 @@ static void map_lighting_render (const int light_index,
      * 3. Strip of flickering even dimmer light
      */
 
-    auto pct_light_radius_bright = 1.5;
+    auto pct_light_radius_bright = 1.0;
     auto pct_light_radius_dimmer = 1.0;
     double pct_tile_len_flicker;
 
@@ -1043,13 +1043,10 @@ void map_light_calculate_visible (int level)
 
 void map_light_display (int level, int fbo, int clear)
 {
-//    blit_fbo_bind(fbo);
-
-    blit_fbo_bind(FBO_VISITED_MAP_MERGED);
+    blit_fbo_bind(fbo);
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glcolor(WHITE);
-    blit_fbo_unbind();
 
     /*
      * We want to merge successive light sources together.
@@ -1098,8 +1095,7 @@ void map_light_display (int level, int fbo, int clear)
 //        map_lighting_render(i, 1);
     }
 
-//    blit_fbo_unbind();
-//
+    blit_fbo_unbind();
 }
 
 void map_light_glow_display (int level)
