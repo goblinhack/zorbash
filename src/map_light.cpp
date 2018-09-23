@@ -13,11 +13,10 @@
 #include "my_glapi.h"
 #include <algorithm>
 
-#define LIGHT_LEVELS 2
 static const double MAX_LIGHT_STRENGTH = 1000.0;
-static double ray_depth[MAX_LIGHT_RAYS][LIGHT_LEVELS];
-static double ray_rad[MAX_LIGHT_RAYS][LIGHT_LEVELS];
-static fpoint ray_lit[MAX_LIGHT_RAYS][LIGHT_LEVELS];
+static double ray_depth[MAX_LIGHT_RAYS];
+static double ray_rad[MAX_LIGHT_RAYS];
+static fpoint ray_lit[MAX_LIGHT_RAYS];
 static uint16_t map_light_count;
 
 typedef struct map_light_ {
@@ -176,8 +175,7 @@ static void map_light_add_ray_depth (fpoint p,
                                      fpoint light_pos,
                                      fpoint light_end,
                                      double rad,
-                                     int deg,
-                                     int soft_shadow)
+                                     int deg)
 {
     auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
 
@@ -185,38 +183,22 @@ static void map_light_add_ray_depth (fpoint p,
         len = light->strength;
     }
 
-    if (soft_shadow) {
-        if (!ray_depth[deg][0]) {
-            ray_depth[deg][1] = len;
-            ray_rad[deg][1] = rad;
-            ray_lit[deg][1] = p;
-        } else if (!ray_depth[deg][1]) {
-            ray_depth[deg][1] = len;
-            ray_rad[deg][1] = rad;
-            ray_lit[deg][1] = p;
-        } else if (len < ray_depth[deg][1]) {
-            ray_depth[deg][1] = len;
-            ray_rad[deg][1] = rad;
-            ray_lit[deg][1] = p;
-        }
-    } else {
-        if (!ray_depth[deg][0]) {
-            ray_depth[deg][0] = len;
-            ray_rad[deg][0] = rad;
-            ray_lit[deg][0] = p;
+    if (!ray_depth[deg]) {
+        ray_depth[deg] = len;
+        ray_rad[deg] = rad;
+        ray_lit[deg] = p;
 
-            ray_depth[deg][1] = len;
-            ray_rad[deg][1] = rad;
-            ray_lit[deg][1] = p;
-        } else if (len < ray_depth[deg][0]) {
-            ray_depth[deg][0] = len;
-            ray_rad[deg][0] = rad;
-            ray_lit[deg][0] = p;
+        ray_depth[deg] = len;
+        ray_rad[deg] = rad;
+        ray_lit[deg] = p;
+    } else if (len < ray_depth[deg]) {
+        ray_depth[deg] = len;
+        ray_rad[deg] = rad;
+        ray_lit[deg] = p;
 
-            ray_depth[deg][1] = len;
-            ray_rad[deg][1] = rad;
-            ray_lit[deg][1] = p;
-        }
+        ray_depth[deg] = len;
+        ray_rad[deg] = rad;
+        ray_lit[deg] = p;
     }
 }
 
@@ -244,8 +226,6 @@ static void map_light_calculate_for_single_obstacle (Thingp t,
     if (tp == light->tp) {
         return;
     }
-
-    uint8_t soft_shadow = 0;
 
     double etlx;
     double etly;
@@ -372,14 +352,14 @@ static void map_light_calculate_for_single_obstacle (Thingp t,
                                             &intersect)) {
 
                 map_light_add_ray_depth(P[0], light, light_pos, intersect, 
-                                        rad, deg, soft_shadow);
+                                        rad, deg);
             }
 
             map_light_add_ray_depth(P[0], light, light_pos, P[k], 
-                                    p1_rad, p1_deg, soft_shadow);
+                                    p1_rad, p1_deg);
 
             map_light_add_ray_depth(P[0], light, light_pos, P[l], 
-                                    p2_rad, p2_deg, soft_shadow);
+                                    p2_rad, p2_deg);
 
             rad += dr;
             if (rad >= RAD_360) {
@@ -407,9 +387,7 @@ static void map_lighting_calculate (const int light_index)
     auto rad = 0.0;
 
     for (auto i = 0; i < light->max_light_rays; i++) {
-        for (auto j = 0; j < LIGHT_LEVELS; j++) {
-            ray_rad[i][j] = rad;
-        }
+        ray_rad[i] = rad;
         rad += dr;
     }
 
@@ -521,7 +499,7 @@ static void map_lighting_set_visible (const int level,
                  * light ends at the intersection point with the object we 
                  * need to let the light leak in a bit so we can see it.
                  */
-                double depth = ray_depth[d][light_level];
+                double depth = ray_depth[d];
                 if (dist <= depth + 0.1) {
                     map_set_lit_now_by_player((int)x, (int)y);
                     goto done;
@@ -539,7 +517,7 @@ static void map_lighting_set_visible (const int level,
 
                 ray_index_lower = d;
                 for (;;) {
-                    double r = ray_rad[ray_index_lower][light_level];
+                    double r = ray_rad[ray_index_lower];
                     if (r <= pa) {
                         break;
                     } else if (r - pa > RAD_180) {
@@ -554,7 +532,7 @@ static void map_lighting_set_visible (const int level,
 
                 ray_index_higher = d;
                 for (;;) {
-                    double r = ray_rad[ray_index_higher][light_level];
+                    double r = ray_rad[ray_index_higher];
                     if (r >= pa) {
                         break;
                     } else if (pa - r > RAD_180) {
@@ -584,8 +562,8 @@ static void map_lighting_set_visible (const int level,
                     continue;
                 }
 
-                double depth1 = ray_depth[ray_index_lower][light_level];
-                double depth2 = ray_depth[ray_index_higher][light_level];
+                double depth1 = ray_depth[ray_index_lower];
+                double depth2 = ray_depth[ray_index_higher];
 
                 if ((dist <= depth1) || (dist <= depth2)) {
                     map_set_lit_now_by_player((int)x, (int)y);
@@ -603,9 +581,9 @@ done:
     int i;
 
     for (i = 0; i < MAX_LIGHT_RAYS; i++) {
-        double depth = ray_depth[i][light_level];
+        double depth = ray_depth[i];
         if ((depth > 0.0) && (light_radius > depth + 0.1)) {
-            fpoint p = ray_lit[i][light_level];
+            fpoint p = ray_lit[i];
 
             map_set_lit_now_by_player(p.x, p.y);
 
@@ -614,10 +592,7 @@ done:
 }
 
 static void map_lighting_render (const int light_index,
-                                 const int light_level,
-                                 double tx,
-                                 double ty,
-                                 int last)
+                                 int overlay_light_tex)
 {
     auto *light = &map_lights[light_index];
     auto light_radius = light->strength;
@@ -626,6 +601,8 @@ static void map_lighting_render (const int light_index,
         return;
     }
 
+    double tx = light->at.x - game.state.map_at.x;
+    double ty = light->at.y - game.state.map_at.y;
     static const double tdx = 1.0 / (double)TILES_ACROSS;
     static const double tdy = 1.0 / (double)TILES_DOWN;
     fpoint light_pos(tx * tdx, ty * tdy);
@@ -645,7 +622,6 @@ static void map_lighting_render (const int light_index,
      */
 
     auto pct_light_radius_bright = 1.0;
-    auto pct_light_radius_dimmer = 1.3;
     double pct_tile_len_flicker;
 
     if (tp_is_candle_light(light_tp)) {
@@ -659,7 +635,8 @@ static void map_lighting_render (const int light_index,
      */
     blit_init();
 
-double x = 0.9;
+    double light_penetrate = 0.5;
+
     {
         int i;
 
@@ -669,14 +646,14 @@ double x = 0.9;
         push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
         for (i = 0; i < max_light_rays - 10; i++) {
-            double radius = ray_depth[i][light_level];
-            double rad = ray_rad[i][light_level];
+            double radius = ray_depth[i];
+            double rad = ray_rad[i];
             if (radius == 0) {
                 radius = light_radius;
             }
 
             radius *= pct_light_radius_bright;
-radius += sqrt(x / radius);
+radius += sqrt(light_penetrate / radius);
 
             double cosr;
             double sinr;
@@ -693,14 +670,14 @@ radius += sqrt(x / radius);
          * Complete the circle with the first point again.
          */
         i = 0; {
-            double radius = ray_depth[i][light_level];
-            double rad = ray_rad[i][light_level];
+            double radius = ray_depth[i];
+            double rad = ray_rad[i];
             if (radius == 0) {
                 radius = light_radius;
             }
 
             radius *= pct_light_radius_bright;
-radius += sqrt(x / radius);
+            radius += sqrt(light_penetrate / radius);
 
             double cosr;
             double sinr;
@@ -716,192 +693,31 @@ radius += sqrt(x / radius);
 
     blit_flush_triangle_fan();
 
-int dimmer = 0;
-if (dimmer) {
-    /*
-     * Draw dimmer light
-     */
-double x2 = 1.1;
-    blit_init();
-
-    {
-        int i;
-
-        /*
-         * Walk the light rays in a circle.
-         */
-        for (i = 0; i < max_light_rays; i++) {
-            double radius = ray_depth[i][light_level];
-            double rad = ray_rad[i][light_level];
-            double p3_len;
-            if (radius == 0) {
-                radius = light_radius;
-            }
-
-            p3_len = radius * pct_light_radius_dimmer;
-            radius *= pct_light_radius_bright;
-radius += sqrt(x / radius);
-p3_len += sqrt(x2 / p3_len);
-
-            double cosr;
-            double sinr;
-            sincos(rad, &sinr, &cosr);
-
-            double p1x = light_pos.x + cosr * radius * tdx;
-            double p1y = light_pos.y + sinr * radius * tdy;
-
-            double p3x = light_pos.x + cosr * p3_len * tdx;
-            double p3y = light_pos.y + sinr * p3_len * tdy;
-
-            push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
-            push_point(p3x, p3y, red, green, blue, pct_light_radius_dimmer * alpha * 0.50);
+    if (overlay_light_tex) {
+        static Texp tex;
+        static int buf;
+        
+        if (!tex) {
+            tex = tex_load("", "light", GL_LINEAR);
+            buf = tex_get_gl_binding(tex);
         }
-
-        /*
-         * Complete the strip with 1.5 triangles.
-         */
-        i = 0; {
-            double radius = ray_depth[i][light_level];
-            double rad = ray_rad[i][light_level];
-            double p3_len;
-            if (radius == 0) {
-                radius = light_radius;
-            }
-
-            p3_len = radius * pct_light_radius_dimmer;
-            radius *= pct_light_radius_bright;
-radius += sqrt(x / radius);
-p3_len += sqrt(x2 / p3_len);
-
-            double cosr;
-            double sinr;
-            sincos(rad, &sinr, &cosr);
-
-            double p1x = light_pos.x + cosr * radius * tdx;
-            double p1y = light_pos.y + sinr * radius * tdy;
-
-            double p3x = light_pos.x + cosr * p3_len * tdx;
-            double p3y = light_pos.y + sinr * p3_len * tdy;
-
-            push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
-            push_point(p3x, p3y, red, green, blue, pct_light_radius_dimmer * alpha * 0.50);
-        }
-    }
-
-    /*
-     * Flush non shaded triangles.
-     */
-    blit_flush_triangle_strip();
-}
-
-#if 0
-    if (pct_tile_len_flicker > 0.0) {
-        /*
-         * Now draw the fuzzy edge of the light as a trigangle strip.
-         */
         blit_init();
-
-        {
-            int i;
-
-            /*
-             * Walk the light rays in a circle.
-             */
-            for (i = 0; i < max_light_rays; i++) {
-                double radius = ray_depth[i][light_level];
-                double rad = ray_rad[i][light_level];
-
-                if (radius == 0) {
-                    radius = light_radius;
-                }
-
-                double p3_len = radius;
-
-                double cosr;
-                double sinr;
-                sincos(rad, &sinr, &cosr);
-
-                double p1x = light_pos.x + cosr * radius * tdx;
-                double p1y = light_pos.y + sinr * radius * tdy;
-
-                double p3x = light_pos.x + cosr * p3_len * tdx;
-                double p3y = light_pos.y + sinr * p3_len * tdy;
-
-                p3x += cosr * tdx * pct_tile_len_flicker;
-                p3y += sinr * tdy * pct_tile_len_flicker;
-
-                push_point(p1x, p1y, red, green, blue, alpha * 0.35);
-                push_point(p3x, p3y, red, green, blue, alpha * 0.05);
-            }
-
-            /*
-             * Complete the strip with 1.5 triangles.
-             */
-            i = 0; {
-                double radius = ray_depth[i][light_level];
-                double rad = ray_rad[i][light_level];
-
-                if (radius == 0) {
-                    radius = light_radius;
-                }
-
-                double p3_len = radius;
-
-                double cosr;
-                double sinr;
-                sincos(rad, &sinr, &cosr);
-
-                double p1x = light_pos.x + cosr * radius * tdx;
-                double p1y = light_pos.y + sinr * radius * tdy;
-
-                double p3x = light_pos.x + cosr * p3_len * tdx;
-                double p3y = light_pos.y + sinr * p3_len * tdy;
-
-                p3x += cosr * tdx * pct_tile_len_flicker;
-                p3y += sinr * tdy * pct_tile_len_flicker;
-
-                push_point(p1x, p1y, red, green, blue, alpha * 0.35);
-                push_point(p3x, p3y, red, green, blue, alpha * 0.05);
-            }
-        }
-
-        /*
-         * Flush non shaded triangles.
-         */
-        blit_flush_triangle_strip();
-    }
-
-   blit_flush_triangle_fan();
-#endif
-
-#if 1
-   if (last)
-   {
-       static Texp tex;
-       static int buf;
-       
-       if (!tex) {
-           tex = tex_load("", "light", GL_LINEAR);
-           buf = tex_get_gl_binding(tex);
-       }
-       blit_init();
-       glcolor(WHITE);
-
-       auto radius = light_radius;
-       radius *= pct_light_radius_bright * 1.1;
-
-       double lw = radius * tdx;
-       double lh = radius * tdy;
-       double p1x = light_pos.x - lw;
-       double p1y = light_pos.y - lh;
-       double p2x = light_pos.x + lw;
-       double p2y = light_pos.y + lh;
-
-       glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
-       blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
-       blit_flush();
+        glcolor(WHITE);
+ 
+        auto radius = light_radius;
+        radius *= pct_light_radius_bright * 1.2;
+ 
+        double lw = radius * tdx;
+        double lh = radius * tdy;
+        double p1x = light_pos.x - lw;
+        double p1y = light_pos.y - lh;
+        double p2x = light_pos.x + lw;
+        double p2y = light_pos.y + lh;
+ 
+        glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
+        blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+        blit_flush();
    }
-#endif
 }
 
 void map_light_ray_effect (const int light_index, const int light_level)
@@ -932,7 +748,7 @@ void map_light_ray_effect (const int light_index, const int light_level)
         auto dr = RAD_360 / (double) max_light_rays;
         auto rad = 0.0;
         for (i = 0; i < max_light_rays; i++, rad += dr) {
-            auto radius = ray_depth[i][light_level];
+            auto radius = ray_depth[i];
 
             if (radius == 0) {
                 radius = light_radius;
@@ -988,87 +804,9 @@ void map_light_calculate_visible (int level)
         map_lighting_set_visible(level, i, 0);
     }
 }
-#define DEBUG_GL_BLEND
-#ifdef DEBUG_GL_BLEND
-#endif
-
-#ifdef DEBUG_GL_BLEND
-static int vals[] = {
-
-/* GL_ZERO                           */ 0,
-/* GL_ONE                            */ 1,
-/* GL_SRC_COLOR                      */ 0x0300,
-/* GL_ONE_MINUS_SRC_COLOR            */ 0x0301,
-/* GL_SRC_ALPHA                      */ 0x0302,
-/* GL_ONE_MINUS_SRC_ALPHA            */ 0x0303,
-/* GL_DST_ALPHA                      */ 0x0304,
-/* GL_ONE_MINUS_DST_ALPHA            */ 0x0305,
-/* GL_DST_COLOR                      */ 0x0306,
-/* GL_ONE_MINUS_DST_COLOR            */ 0x0307,
-/* GL_SRC_ALPHA_SATURATE             */ 0x0308,
-/* GL_FUNC_ADD                       */ 0x8006,
-/* GL_BLEND_EQUATION                 */ 0x8009,
-/* GL_BLEND_EQUATION_RGB             */ 0x8009    /* same as BLEND_EQUATION */,
-/* GL_BLEND_EQUATION_ALPHA           */ 0x883D,
-/* GL_FUNC_SUBTRACT                  */ 0x800A,
-/* GL_FUNC_REVERSE_SUBTRACT          */ 0x800B,
-/* GL_BLEND_DST_RGB                  */ 0x80C8,
-/* GL_BLEND_SRC_RGB                  */ 0x80C9,
-/* GL_BLEND_DST_ALPHA                */ 0x80CA,
-/* GL_BLEND_SRC_ALPHA                */ 0x80CB,
-/* GL_CONSTANT_COLOR                 */ 0x8001,
-/* GL_ONE_MINUS_CONSTANT_COLOR       */ 0x8002,
-/* GL_CONSTANT_ALPHA                 */ 0x8003,
-/* GL_ONE_MINUS_CONSTANT_ALPHA       */ 0x8004,
-/* GL_BLEND_COLOR */ 0x8005,
-};
-static std::string  vals_str[] = {
-
-"GL_ZERO                           ",
-"GL_ONE                            ",
-"GL_SRC_COLOR                      ",
-"GL_ONE_MINUS_SRC_COLOR            ",
-"GL_SRC_ALPHA                      ",
-"GL_ONE_MINUS_SRC_ALPHA            ",
-"GL_DST_ALPHA                      ",
-"GL_ONE_MINUS_DST_ALPHA            ",
-"GL_DST_COLOR                      ",
-"GL_ONE_MINUS_DST_COLOR            ",
-"GL_SRC_ALPHA_SATURATE             ",
-"GL_FUNC_ADD                       ",
-"GL_BLEND_EQUATION                 ",
-"GL_BLEND_EQUATION_RGB             ",
-"GL_BLEND_EQUATION_ALPHA           ",
-"GL_FUNC_SUBTRACT                  ",
-"GL_FUNC_REVERSE_SUBTRACT          ",
-"GL_BLEND_DST_RGB                  ",
-"GL_BLEND_SRC_RGB                  ",
-"GL_BLEND_DST_ALPHA                ",
-"GL_BLEND_SRC_ALPHA                ",
-"GL_CONSTANT_COLOR                 ",
-"GL_ONE_MINUS_CONSTANT_COLOR       ",
-"GL_CONSTANT_ALPHA                 ",
-"GL_ONE_MINUS_CONSTANT_ALPHA       ",
-"GL_BLEND_COLOR ",
-};
-
-
-int i1;
-int i2;
-#endif
 
 void thing_map_test(void)
 {
-    usleep(100000);
-    i1 ++;
-    if (i1 >= (int)ARRAY_SIZE(vals)) {
-	i1 = 0;
-	i2 ++;
-	if (i2 >= (int)ARRAY_SIZE(vals)) {
-	    i2 = 0;
-	}
-    }
-CON("%d %d %s %s", i1, i2, vals_str[i1].c_str(), vals_str[i2].c_str());
 }
 
 void map_light_display (int level, int fbo, int clear)
@@ -1081,7 +819,6 @@ void map_light_display (int level, int fbo, int clear)
     /*
      * We want to merge successive light sources together.
      */
-glBlendFunc(vals[i1], vals[i2]);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
 
@@ -1106,16 +843,7 @@ glBlendFunc(vals[i1], vals[i2]);
         /*
          * Draw the light sources. First pass is for solid obstacles.
          */
-        auto *light = &map_lights[i];
-        double tx = light->at.x - game.state.map_at.x;
-        double ty = light->at.y - game.state.map_at.y;
-
-        map_lighting_render(i, 0, tx, ty, true);
-
-        /*
-         * This for soft shadows.
-         */
-        //map_lighting_render(i, 1);
+        map_lighting_render(i, true);
     }
 
     blit_fbo_unbind();
