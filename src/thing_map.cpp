@@ -67,14 +67,6 @@ static void thing_map_scroll_follow_player (void)
     if (dy < 2) {
         game.state.map_wanted_at.y--;
     }
-
-#if 0
-    CON("player at %f %f map wanted at %f %f",
-        game.state.player->at.x,
-        game.state.player->at.y,
-        game.state.map_wanted_at.x,
-        game.state.map_wanted_at.y);
-#endif
 }
 
 void thing_map_scroll_to_player (void)
@@ -490,22 +482,42 @@ void thing_render_all (void)
         if (game.state.player) {
             map_light_init();
 
-            fpoint at = game.state.player->at;
+            fpoint at;
+            color c;
+            
+            at = game.state.player->at;
+
+#if 0
+            at.x -= 7;
+            at.y += 1;
+            c = RED;
+            c.a = 50;
+            map_light_add(game.state.player->tp, at, 2.0, c);
+
+            at.x += 10;
+            at.y -= 1;
+            c = GREEN;
+            c.a = 50;
+            map_light_add(game.state.player->tp, at, 1.0, c);
+
+            at.x -= 5;
+            at.y -= 3;
+            c = BLUE;
+            c.a = 50;
+            map_light_add(game.state.player->tp, at, 1.0, c);
+
+#endif
+            at = game.state.player->at;
             at.x += 0.5;
             at.y += 0.5;
+            c = WHITE;
+            c.a = 50;
+            map_light_add(game.state.player->tp, at, 8.0, c);
+//            map_light_add(game.state.player->tp, at, 5.0, c);
+//            map_light_add(game.state.player->tp, at, 3.0, c);
+//            map_light_add(game.state.player->tp, at, 2.0, c);
+//            map_light_add(game.state.player->tp, at, 1.0, c);
 
-            color c = WHITE;
-            map_light_add(game.state.player->tp, at, 10.0, WHITE);
-
-//            at.x -= 5;
-//            at.y += 1;
-//            map_light_add(game.state.player->tp, at, 3.0, RED);
-
-//            at.x += 3;
-//            at.y -= 3;
-//            map_light_add(game.state.player->tp, at, 3.0, GREEN);
-
-            map_light_calculate_visible(0);
             map_light_display(0, FBO_VISITED_MAP_MERGED, true);
         }
     }
@@ -519,8 +531,4 @@ void thing_render_all (void)
     blit_fbo_bind(FBO_WID);
     glBlendFunc(GL_ZERO, GL_SRC_COLOR);
     blit_fbo(FBO_VISITED_MAP_MERGED);
-}
-
-void thing_map_test(void)
-{
 }

@@ -34,7 +34,7 @@
 /*
  * Light sources
  */
-#define MAX_LIGHT_RAYS              (360)
+#define MAX_LIGHT_RAYS              (1024)
 #define MAX_LIGHTS                  (MAP_WIDTH * MAP_HEIGHT)
 
 /*

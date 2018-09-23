@@ -172,12 +172,12 @@ void map_light_add (Tpp tp, fpoint at, double strength, color c)
 }
 
 static void map_light_add_ray_depth (fpoint p,
-                                       const map_light *light,
-                                       fpoint light_pos,
-                                       fpoint light_end,
-                                       double rad,
-                                       int deg,
-                                       int soft_shadow)
+                                     const map_light *light,
+                                     fpoint light_pos,
+                                     fpoint light_end,
+                                     double rad,
+                                     int deg,
+                                     int soft_shadow)
 {
     auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
 
@@ -226,14 +226,13 @@ static void map_light_add_ray_depth (fpoint p,
  * closest ray and if so, update the z depth of this ray. We are
  * building a z buffer of sorts.
  */
-static void map_light_calculate_for_single_obstacle (Tpp tp,
-                                                       int x,
-                                                       int y,
-                                                       int light_index)
+static void map_light_calculate_for_single_obstacle (Thingp t,
+                                                     Tpp tp,
+                                                     int x,
+                                                     int y,
+                                                     int light_index)
 {
     const map_light *light = &map_lights[light_index];
-    int owidth;
-    int oheight;
     int otlx = x;
     int otly = y;
     int obrx = x + 1;
@@ -248,39 +247,16 @@ static void map_light_calculate_for_single_obstacle (Tpp tp,
 
     uint8_t soft_shadow = 0;
 
-    /*
-    if (tp_is_shadow_caster_soft(tp)) {
-        soft_shadow = 1;
-    }
-     */
-
-    /*
-     * Record the original pre clip sizes for text centering.
-     */
-    owidth = obrx - otlx;
-    oheight = obry - otly;
-
     double etlx;
     double etly;
     double ebrx;
     double ebry;
+    double fudge = 0.00;
 
-    if (soft_shadow) {
-        /*
-         * Make soft shadow things block less light.
-         */
-        double fudge = 0.2;
-
-        etlx = (double)otlx + fudge;
-        etly = (double)otly + fudge;
-        ebrx = (double)obrx - fudge;
-        ebry = (double)obry - fudge;
-    } else {
-        etlx = (double)otlx;
-        etly = (double)otly;
-        ebrx = (double)obrx;
-        ebry = (double)obry;
-    }
+    etlx = (double)otlx + fudge;
+    etly = (double)otly + fudge;
+    ebrx = (double)obrx - fudge;
+    ebry = (double)obry - fudge;
 
     fpoint P[4];
     P[0].x = etlx;
@@ -376,11 +352,15 @@ static void map_light_calculate_for_single_obstacle (Tpp tp,
          *
          * In essence, this is a depth buffer.
          */
-        while (tot_deg-- >= 0) {
+        while (--tot_deg >= 0) {
+
+            double cosr;
+            double sinr;
+            sincos(rad, &sinr, &cosr);
 
             fpoint light_end;
-            light_end.x = light_pos.x + cos(rad) * MAX_LIGHT_STRENGTH;
-            light_end.y = light_pos.y + sin(rad) * MAX_LIGHT_STRENGTH;
+            light_end.x = light_pos.x + cosr * MAX_LIGHT_STRENGTH;
+            light_end.y = light_pos.y + sinr * MAX_LIGHT_STRENGTH;
 
             /*
              * Check the light ray really does hit this obstacle and where
@@ -466,7 +446,7 @@ static void map_lighting_calculate (const int light_index)
 
                     if (tp_is_shadow_caster(tp) ||
                         unlikely(tp_is_shadow_caster_soft(tp))) {
-                        map_light_calculate_for_single_obstacle(tp, x, y,
+                        map_light_calculate_for_single_obstacle(t, tp, x, y,
                                                                 light_index);
                     }
                 }
@@ -634,7 +614,10 @@ done:
 }
 
 static void map_lighting_render (const int light_index,
-                                 const int light_level)
+                                 const int light_level,
+                                 double tx,
+                                 double ty,
+                                 int last)
 {
     auto *light = &map_lights[light_index];
     auto light_radius = light->strength;
@@ -643,8 +626,6 @@ static void map_lighting_render (const int light_index,
         return;
     }
 
-    double tx = light->at.x - game.state.map_at.x;
-    double ty = light->at.y - game.state.map_at.y;
     static const double tdx = 1.0 / (double)TILES_ACROSS;
     static const double tdy = 1.0 / (double)TILES_DOWN;
     fpoint light_pos(tx * tdx, ty * tdy);
@@ -664,7 +645,7 @@ static void map_lighting_render (const int light_index,
      */
 
     auto pct_light_radius_bright = 1.0;
-    auto pct_light_radius_dimmer = 1.0;
+    auto pct_light_radius_dimmer = 1.3;
     double pct_tile_len_flicker;
 
     if (tp_is_candle_light(light_tp)) {
@@ -678,6 +659,7 @@ static void map_lighting_render (const int light_index,
      */
     blit_init();
 
+double x = 0.9;
     {
         int i;
 
@@ -686,8 +668,7 @@ static void map_lighting_render (const int light_index,
          */
         push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
-double x = 0.1;
-        for (i = 0; i < max_light_rays; i++) {
+        for (i = 0; i < max_light_rays - 10; i++) {
             double radius = ray_depth[i][light_level];
             double rad = ray_rad[i][light_level];
             if (radius == 0) {
@@ -695,8 +676,8 @@ double x = 0.1;
             }
 
             radius *= pct_light_radius_bright;
-
 radius += sqrt(x / radius);
+
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
@@ -704,7 +685,8 @@ radius += sqrt(x / radius);
             double p1x = light_pos.x + cosr * radius * tdx;
             double p1y = light_pos.y + sinr * radius * tdy;
 
-            push_point(p1x, p1y, red, green, blue, alpha);
+            push_point(p1x, p1y, red, green, blue, 
+                       pct_light_radius_bright * 0);
         }
 
         /*
@@ -727,94 +709,19 @@ radius += sqrt(x / radius);
             double p1x = light_pos.x + cosr * radius * tdx;
             double p1y = light_pos.y + sinr * radius * tdy;
 
-            push_point(p1x, p1y, red, green, blue, alpha);
+            push_point(p1x, p1y, red, green, blue, 
+                       pct_light_radius_bright * 0);
         }
     }
 
     blit_flush_triangle_fan();
 
-    {
-        static Texp tex;
-        static int buf;
-        
-        if (!tex) {
-            tex = tex_load("", "light", GL_LINEAR);
-            buf = tex_get_gl_binding(tex);
-        }
-        blit_init();
-        glcolor(WHITE);
-
-        auto radius = light_radius;
-        radius *= pct_light_radius_bright;
-
-        double lw = radius * tdx;
-        double lh = radius * tdy;
-        double p1x = light_pos.x - lw;
-        double p1y = light_pos.y - lh;
-        double p2x = light_pos.x + lw;
-        double p2y = light_pos.y + lh;
-
-        glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
-        blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
-        blit_flush();
-    }
-
-    return;
-    {
-        int i;
-
-        /*
-         * Walk the light rays in a circle.
-         */
-        push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
-
-        for (i = 0; i < max_light_rays; i++) {
-            double p1_len = ray_depth[i][light_level];
-            double rad = ray_rad[i][light_level];
-            if (p1_len == 0) {
-                p1_len = light_radius;
-            }
-
-            p1_len *= pct_light_radius_bright;
-
-            double cosr;
-            double sinr;
-            sincos(rad, &sinr, &cosr);
-
-            double p1x = light_pos.x + cosr * p1_len * tdx;
-            double p1y = light_pos.y + sinr * p1_len * tdy;
-
-            push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
-        }
-
-        /*
-         * Complete the circle with the first point again.
-         */
-        i = 0; {
-            double p1_len = ray_depth[i][light_level];
-            double rad = ray_rad[i][light_level];
-            if (p1_len == 0) {
-                p1_len = light_radius;
-            }
-
-            p1_len *= pct_light_radius_bright;
-
-            double cosr;
-            double sinr;
-            sincos(rad, &sinr, &cosr);
-
-            double p1x = light_pos.x + cosr * p1_len * tdx;
-            double p1y = light_pos.y + sinr * p1_len * tdy;
-
-            push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
-        }
-    }
-
-    blit_flush_triangle_fan();
-
+int dimmer = 0;
+if (dimmer) {
     /*
      * Draw dimmer light
      */
+double x2 = 1.1;
     blit_init();
 
     {
@@ -824,56 +731,60 @@ radius += sqrt(x / radius);
          * Walk the light rays in a circle.
          */
         for (i = 0; i < max_light_rays; i++) {
-            double p1_len = ray_depth[i][light_level];
+            double radius = ray_depth[i][light_level];
             double rad = ray_rad[i][light_level];
             double p3_len;
-            if (p1_len == 0) {
-                p1_len = light_radius;
+            if (radius == 0) {
+                radius = light_radius;
             }
 
-            p3_len = p1_len * pct_light_radius_dimmer;
-            p1_len *= pct_light_radius_bright;
+            p3_len = radius * pct_light_radius_dimmer;
+            radius *= pct_light_radius_bright;
+radius += sqrt(x / radius);
+p3_len += sqrt(x2 / p3_len);
 
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * p1_len * tdx;
-            double p1y = light_pos.y + sinr * p1_len * tdy;
+            double p1x = light_pos.x + cosr * radius * tdx;
+            double p1y = light_pos.y + sinr * radius * tdy;
 
             double p3x = light_pos.x + cosr * p3_len * tdx;
             double p3y = light_pos.y + sinr * p3_len * tdy;
 
             push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
-            push_point(p3x, p3y, red, green, blue, pct_light_radius_dimmer * alpha * 0.35);
+            push_point(p3x, p3y, red, green, blue, pct_light_radius_dimmer * alpha * 0.50);
         }
 
         /*
          * Complete the strip with 1.5 triangles.
          */
         i = 0; {
-            double p1_len = ray_depth[i][light_level];
+            double radius = ray_depth[i][light_level];
             double rad = ray_rad[i][light_level];
             double p3_len;
-            if (p1_len == 0) {
-                p1_len = light_radius;
+            if (radius == 0) {
+                radius = light_radius;
             }
 
-            p3_len = p1_len * pct_light_radius_dimmer;
-            p1_len *= pct_light_radius_bright;
+            p3_len = radius * pct_light_radius_dimmer;
+            radius *= pct_light_radius_bright;
+radius += sqrt(x / radius);
+p3_len += sqrt(x2 / p3_len);
 
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * p1_len * tdx;
-            double p1y = light_pos.y + sinr * p1_len * tdy;
+            double p1x = light_pos.x + cosr * radius * tdx;
+            double p1y = light_pos.y + sinr * radius * tdy;
 
             double p3x = light_pos.x + cosr * p3_len * tdx;
             double p3y = light_pos.y + sinr * p3_len * tdy;
 
             push_point(p1x, p1y, red, green, blue, pct_light_radius_bright * alpha);
-            push_point(p3x, p3y, red, green, blue, pct_light_radius_dimmer * alpha * 0.35);
+            push_point(p3x, p3y, red, green, blue, pct_light_radius_dimmer * alpha * 0.50);
         }
     }
 
@@ -881,7 +792,9 @@ radius += sqrt(x / radius);
      * Flush non shaded triangles.
      */
     blit_flush_triangle_strip();
+}
 
+#if 0
     if (pct_tile_len_flicker > 0.0) {
         /*
          * Now draw the fuzzy edge of the light as a trigangle strip.
@@ -895,21 +808,21 @@ radius += sqrt(x / radius);
              * Walk the light rays in a circle.
              */
             for (i = 0; i < max_light_rays; i++) {
-                double p1_len = ray_depth[i][light_level];
+                double radius = ray_depth[i][light_level];
                 double rad = ray_rad[i][light_level];
 
-                if (p1_len == 0) {
-                    p1_len = light_radius;
+                if (radius == 0) {
+                    radius = light_radius;
                 }
 
-                double p3_len = p1_len;
+                double p3_len = radius;
 
                 double cosr;
                 double sinr;
                 sincos(rad, &sinr, &cosr);
 
-                double p1x = light_pos.x + cosr * p1_len * tdx;
-                double p1y = light_pos.y + sinr * p1_len * tdy;
+                double p1x = light_pos.x + cosr * radius * tdx;
+                double p1y = light_pos.y + sinr * radius * tdy;
 
                 double p3x = light_pos.x + cosr * p3_len * tdx;
                 double p3y = light_pos.y + sinr * p3_len * tdy;
@@ -925,21 +838,21 @@ radius += sqrt(x / radius);
              * Complete the strip with 1.5 triangles.
              */
             i = 0; {
-                double p1_len = ray_depth[i][light_level];
+                double radius = ray_depth[i][light_level];
                 double rad = ray_rad[i][light_level];
 
-                if (p1_len == 0) {
-                    p1_len = light_radius;
+                if (radius == 0) {
+                    radius = light_radius;
                 }
 
-                double p3_len = p1_len;
+                double p3_len = radius;
 
                 double cosr;
                 double sinr;
                 sincos(rad, &sinr, &cosr);
 
-                double p1x = light_pos.x + cosr * p1_len * tdx;
-                double p1y = light_pos.y + sinr * p1_len * tdy;
+                double p1x = light_pos.x + cosr * radius * tdx;
+                double p1y = light_pos.y + sinr * radius * tdy;
 
                 double p3x = light_pos.x + cosr * p3_len * tdx;
                 double p3y = light_pos.y + sinr * p3_len * tdy;
@@ -957,6 +870,38 @@ radius += sqrt(x / radius);
          */
         blit_flush_triangle_strip();
     }
+
+   blit_flush_triangle_fan();
+#endif
+
+#if 1
+   if (last)
+   {
+       static Texp tex;
+       static int buf;
+       
+       if (!tex) {
+           tex = tex_load("", "light", GL_LINEAR);
+           buf = tex_get_gl_binding(tex);
+       }
+       blit_init();
+       glcolor(WHITE);
+
+       auto radius = light_radius;
+       radius *= pct_light_radius_bright * 1.1;
+
+       double lw = radius * tdx;
+       double lh = radius * tdy;
+       double p1x = light_pos.x - lw;
+       double p1y = light_pos.y - lh;
+       double p2x = light_pos.x + lw;
+       double p2y = light_pos.y + lh;
+
+       glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
+       blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+       blit_flush();
+   }
+#endif
 }
 
 void map_light_ray_effect (const int light_index, const int light_level)
@@ -987,21 +932,21 @@ void map_light_ray_effect (const int light_index, const int light_level)
         auto dr = RAD_360 / (double) max_light_rays;
         auto rad = 0.0;
         for (i = 0; i < max_light_rays; i++, rad += dr) {
-            auto p1_len = ray_depth[i][light_level];
+            auto radius = ray_depth[i][light_level];
 
-            if (p1_len == 0) {
-                p1_len = light_radius;
+            if (radius == 0) {
+                radius = light_radius;
                 continue;
             }
 
-            p1_len *= 1.1;
+            radius *= 1.1;
 
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            auto p2x = light_pos.x + cosr * p1_len * tdx;
-            auto p2y = light_pos.y + sinr * p1_len * tdy;
+            auto p2x = light_pos.x + cosr * radius * tdx;
+            auto p2y = light_pos.y + sinr * radius * tdy;
             auto p1x = light_pos.x + cosr * 0.1 * tdx;
             auto p1y = light_pos.y + sinr * 0.1 * tdy;
 
@@ -1043,6 +988,88 @@ void map_light_calculate_visible (int level)
         map_lighting_set_visible(level, i, 0);
     }
 }
+#define DEBUG_GL_BLEND
+#ifdef DEBUG_GL_BLEND
+#endif
+
+#ifdef DEBUG_GL_BLEND
+static int vals[] = {
+
+/* GL_ZERO                           */ 0,
+/* GL_ONE                            */ 1,
+/* GL_SRC_COLOR                      */ 0x0300,
+/* GL_ONE_MINUS_SRC_COLOR            */ 0x0301,
+/* GL_SRC_ALPHA                      */ 0x0302,
+/* GL_ONE_MINUS_SRC_ALPHA            */ 0x0303,
+/* GL_DST_ALPHA                      */ 0x0304,
+/* GL_ONE_MINUS_DST_ALPHA            */ 0x0305,
+/* GL_DST_COLOR                      */ 0x0306,
+/* GL_ONE_MINUS_DST_COLOR            */ 0x0307,
+/* GL_SRC_ALPHA_SATURATE             */ 0x0308,
+/* GL_FUNC_ADD                       */ 0x8006,
+/* GL_BLEND_EQUATION                 */ 0x8009,
+/* GL_BLEND_EQUATION_RGB             */ 0x8009    /* same as BLEND_EQUATION */,
+/* GL_BLEND_EQUATION_ALPHA           */ 0x883D,
+/* GL_FUNC_SUBTRACT                  */ 0x800A,
+/* GL_FUNC_REVERSE_SUBTRACT          */ 0x800B,
+/* GL_BLEND_DST_RGB                  */ 0x80C8,
+/* GL_BLEND_SRC_RGB                  */ 0x80C9,
+/* GL_BLEND_DST_ALPHA                */ 0x80CA,
+/* GL_BLEND_SRC_ALPHA                */ 0x80CB,
+/* GL_CONSTANT_COLOR                 */ 0x8001,
+/* GL_ONE_MINUS_CONSTANT_COLOR       */ 0x8002,
+/* GL_CONSTANT_ALPHA                 */ 0x8003,
+/* GL_ONE_MINUS_CONSTANT_ALPHA       */ 0x8004,
+/* GL_BLEND_COLOR */ 0x8005,
+};
+static std::string  vals_str[] = {
+
+"GL_ZERO                           ",
+"GL_ONE                            ",
+"GL_SRC_COLOR                      ",
+"GL_ONE_MINUS_SRC_COLOR            ",
+"GL_SRC_ALPHA                      ",
+"GL_ONE_MINUS_SRC_ALPHA            ",
+"GL_DST_ALPHA                      ",
+"GL_ONE_MINUS_DST_ALPHA            ",
+"GL_DST_COLOR                      ",
+"GL_ONE_MINUS_DST_COLOR            ",
+"GL_SRC_ALPHA_SATURATE             ",
+"GL_FUNC_ADD                       ",
+"GL_BLEND_EQUATION                 ",
+"GL_BLEND_EQUATION_RGB             ",
+"GL_BLEND_EQUATION_ALPHA           ",
+"GL_FUNC_SUBTRACT                  ",
+"GL_FUNC_REVERSE_SUBTRACT          ",
+"GL_BLEND_DST_RGB                  ",
+"GL_BLEND_SRC_RGB                  ",
+"GL_BLEND_DST_ALPHA                ",
+"GL_BLEND_SRC_ALPHA                ",
+"GL_CONSTANT_COLOR                 ",
+"GL_ONE_MINUS_CONSTANT_COLOR       ",
+"GL_CONSTANT_ALPHA                 ",
+"GL_ONE_MINUS_CONSTANT_ALPHA       ",
+"GL_BLEND_COLOR ",
+};
+
+
+int i1;
+int i2;
+#endif
+
+void thing_map_test(void)
+{
+    usleep(100000);
+    i1 ++;
+    if (i1 >= (int)ARRAY_SIZE(vals)) {
+	i1 = 0;
+	i2 ++;
+	if (i2 >= (int)ARRAY_SIZE(vals)) {
+	    i2 = 0;
+	}
+    }
+CON("%d %d %s %s", i1, i2, vals_str[i1].c_str(), vals_str[i2].c_str());
+}
 
 void map_light_display (int level, int fbo, int clear)
 {
@@ -1054,9 +1081,9 @@ void map_light_display (int level, int fbo, int clear)
     /*
      * We want to merge successive light sources together.
      */
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-
-    //blit_init();
+glBlendFunc(vals[i1], vals[i2]);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
 
     int i;
 
@@ -1079,23 +1106,16 @@ void map_light_display (int level, int fbo, int clear)
         /*
          * Draw the light sources. First pass is for solid obstacles.
          */
-        blit_fbo_bind(FBO_CURRENT_VISIBLE_MAP_SHADOW);
-        glClearColor(0,0,0,0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glcolor(WHITE);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        map_lighting_render(i, 0);
-        blit_fbo_unbind();
+        auto *light = &map_lights[i];
+        double tx = light->at.x - game.state.map_at.x;
+        double ty = light->at.y - game.state.map_at.y;
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-        blit_fbo_bind(FBO_VISITED_MAP_MERGED);
-        blit_fbo(FBO_CURRENT_VISIBLE_MAP_SHADOW);
-        blit_fbo_unbind();
+        map_lighting_render(i, 0, tx, ty, true);
 
         /*
          * This for soft shadows.
          */
-//        map_lighting_render(i, 1);
+        //map_lighting_render(i, 1);
     }
 
     blit_fbo_unbind();
