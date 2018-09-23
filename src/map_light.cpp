@@ -64,25 +64,21 @@ void map_light_add (Tpp tp, fpoint at, double strength, color c, bool hiqual)
 }
 
 static void map_light_add_ray_depth (const map_light *light,
-                                     fpoint light_pos,
-                                     fpoint light_end,
+                                     fpoint &light_pos,
+                                     fpoint &light_end,
                                      double rad,
                                      int deg)
 {
     auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
 
-    if (len > light->strength) {
+    if (unlikely(len > light->strength)) {
         len = light->strength;
     }
 
     if (!ray_depth[deg]) {
         ray_depth[deg] = len;
         ray_rad[deg] = rad;
-        ray_depth[deg] = len;
-        ray_rad[deg] = rad;
     } else if (len < ray_depth[deg]) {
-        ray_depth[deg] = len;
-        ray_rad[deg] = rad;
         ray_depth[deg] = len;
         ray_rad[deg] = rad;
     }
@@ -515,7 +511,7 @@ void map_light_display (int fbo)
         map_lighting_calculate(i);
 
         if (light->hiqual) {
-            blit_fbo_bind(FBO_VISITED_MAP);
+            blit_fbo_bind(FBO_LIGHT_MASK);
             glClearColor(0,0,0,0);
             glClear(GL_COLOR_BUFFER_BIT);
             glcolor(WHITE);
@@ -533,7 +529,7 @@ void map_light_display (int fbo)
 
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             blit_fbo_bind(fbo);
-            blit_fbo(FBO_VISITED_MAP);
+            blit_fbo(FBO_LIGHT_MASK);
             blit_fbo_unbind();
         } else {
             blit_fbo_bind(fbo);

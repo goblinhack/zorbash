@@ -15,7 +15,7 @@
 
 static void thing_map_scroll_do (void)
 {
-    const double step = 20.0;
+    const double step = 10.0;
 
     auto dx = game.state.map_at.x - game.state.map_wanted_at.x;
     if (dx) {
@@ -467,6 +467,9 @@ void thing_render_all (void)
     int maxy = std::min(MAP_HEIGHT, 
         (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
 
+    /*
+     * Improve this to only update when things move one tile
+     */
     thing_map_reset();
     thing_find_all(minx, miny, minz, maxx, maxy, maxz);
 
@@ -476,7 +479,7 @@ void thing_render_all (void)
 
     thing_map_scroll_do();
 
-    blit_fbo_bind(FBO_VISITED_MAP_MERGED);
+    blit_fbo_bind(FBO_LIGHT_MERGED);
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
@@ -520,17 +523,17 @@ void thing_render_all (void)
             c.a = 50;
             map_light_add(game.state.player->tp, at, 8.0, c, true);
 
-            map_light_display(FBO_VISITED_MAP_MERGED);
+            map_light_display(FBO_LIGHT_MERGED);
         }
     }
     
-    blit_fbo_bind(FBO_WID);
+    blit_fbo_bind(FBO_MAIN);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     thing_map_blit_background();
     thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
 
     glBindTexture(GL_TEXTURE_2D, 0);
-    blit_fbo_bind(FBO_WID);
+    blit_fbo_bind(FBO_MAIN);
     glBlendFunc(GL_ZERO, GL_SRC_COLOR);
-    blit_fbo(FBO_VISITED_MAP_MERGED);
+    blit_fbo(FBO_LIGHT_MERGED);
 }

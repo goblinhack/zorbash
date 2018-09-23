@@ -957,7 +957,7 @@ void sdl_loop (void)
          */
         int32_t timestamp_now = time_update_time_milli();
 
-        if ((timestamp_now - timestamp_then > 20)) {
+        if ((timestamp_now - timestamp_then > 10)) {
 
             /*
              * Give up some CPU to allow events to arrive and time for the GPU
@@ -975,11 +975,8 @@ void sdl_loop (void)
              */
             SDL_PumpEvents();
 
-            found = SDL_PeepEvents(events,
-                                    ARRAY_SIZE(events),
-                                    SDL_GETEVENT,
-                                    SDL_QUIT,
-                                    SDL_LASTEVENT);
+            found = SDL_PeepEvents(events, ARRAY_SIZE(events), SDL_GETEVENT,
+                                   SDL_QUIT, SDL_LASTEVENT);
 
             for (i = 0; i < found; ++i) {
                 sdl_event(&events[i]);
