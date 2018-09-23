@@ -65,7 +65,7 @@ uint8_t wid_console_init (void)
     wid_console_inited = true;
 
     command_add(fps_enable, "set fps [01]", "frames per sec counter");
-
+    command_add(vsync_enable, "set vsync [01]", "vertical sync enable");
     command_add(sdl_user_exit, "quit", "exit game");
 
     wid_console_wid_create();

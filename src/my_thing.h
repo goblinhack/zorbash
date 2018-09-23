@@ -157,9 +157,9 @@ extern void thing_animate_all(void);
 extern void thing_render_all(void);
 extern void thing_map_scroll_to_player(void);
 void map_light_init(void);
-void map_light_add(Tpp tp, fpoint at, double strength, color c);
+void map_light_add(Tpp tp, fpoint at, double strength, color c, bool hiqual);
 void map_light_calculate_visible(int level);
-void map_light_display(int level, int fbo, int clear);
+void map_light_display(int fbo);
 void map_light_ray_effect(const int light_index, const int light_level);
 
 #endif /* THING_H */

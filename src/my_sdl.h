@@ -89,4 +89,5 @@ extern int32_t sdl_joy2_up;
 extern uint8_t sdl_joy_buttons[SDL_MAX_BUTTONS];
 extern void sdl_screenshot(void);
 extern uint8_t fps_enable(tokensp, void *context);
+extern uint8_t vsync_enable(tokensp, void *context);
 #endif
