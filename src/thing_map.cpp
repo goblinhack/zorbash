@@ -476,6 +476,11 @@ void thing_render_all (void)
 
     thing_map_scroll_do();
 
+    blit_fbo_bind(FBO_VISITED_MAP_MERGED);
+    glClearColor(0,0,0,0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glcolor(WHITE);
+
     if (game.config.editor_mode) {
         thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
     } else {
@@ -487,36 +492,30 @@ void thing_render_all (void)
             
             at = game.state.player->at;
 
-#if 0
-            at.x -= 7;
-            at.y += 1;
+            at.x = 70;
+            at.y = 8;
             c = RED;
             c.a = 50;
-            map_light_add(game.state.player->tp, at, 2.0, c);
+            map_light_add(game.state.player->tp, at, 5.0, c);
 
-            at.x += 10;
-            at.y -= 1;
+            at.x = 82;
+            at.y = 7;
             c = GREEN;
             c.a = 50;
-            map_light_add(game.state.player->tp, at, 1.0, c);
+            map_light_add(game.state.player->tp, at, 3.0, c);
 
-            at.x -= 5;
-            at.y -= 3;
+            at.x = 70;
+            at.y = 12;
             c = BLUE;
             c.a = 50;
-            map_light_add(game.state.player->tp, at, 1.0, c);
+            map_light_add(game.state.player->tp, at, 3.0, c);
 
-#endif
             at = game.state.player->at;
             at.x += 0.5;
             at.y += 0.5;
             c = WHITE;
             c.a = 50;
             map_light_add(game.state.player->tp, at, 8.0, c);
-//            map_light_add(game.state.player->tp, at, 5.0, c);
-//            map_light_add(game.state.player->tp, at, 3.0, c);
-//            map_light_add(game.state.player->tp, at, 2.0, c);
-//            map_light_add(game.state.player->tp, at, 1.0, c);
 
             map_light_display(0, FBO_VISITED_MAP_MERGED, true);
         }
