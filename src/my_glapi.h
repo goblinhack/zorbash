@@ -365,15 +365,10 @@ void glcolor(color s);
 /*
  * Frame buffer objects
  */
-#define MAX_FBO                             8
-#define FBO_MAIN                            0
-#define FBO_WID                             1
-#define FBO_VISITED_MAP                     2
-#define FBO_VISITED_MAP_PERSISTANT_SHADOW   3
-#define FBO_VISITED_MAP_MERGED              4
-#define FBO_CURRENT_VISIBLE_MAP             5
-#define FBO_CURRENT_VISIBLE_MAP_SHADOW      6
-#define FBO_CURRENT_VISIBLE_MAP_MERGED      7
+#define MAX_FBO          3
+#define FBO_MAIN         0
+#define FBO_LIGHT_MASK   1
+#define FBO_LIGHT_MERGED 2
 
 extern GLuint render_buf_id[MAX_FBO];
 extern GLuint fbo_id[MAX_FBO];

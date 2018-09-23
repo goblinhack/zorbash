@@ -528,7 +528,7 @@ void blit_flush_triangle_fan (void)
 }
 
 void blit_flush_triangle_fan_smoothed (void)
-{_
+{
     if (gl_array_buf == bufp) {
         return;
     }

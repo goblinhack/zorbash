@@ -906,6 +906,11 @@ static void ascii_blit (int no_color)
                 }
             }
 
+#if 0
+            /*
+             * Small speedup as don't need this 
+             */
+
             /*
              * Background
              */
@@ -944,6 +949,7 @@ static void ascii_blit (int no_color)
                                       bg_color_bl,
                                       bg_color_br);
             }
+#endif
 
             /*
              * Foreground

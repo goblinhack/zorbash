@@ -226,37 +226,37 @@ Tilep tile_find (std::string name)
 }
 
 int32_t tile_get_gl_binding (Tilep tile)
-{_
+{
     return (tile->gl_surface_binding);
 }
 
 int32_t tile_get_width (Tilep tile)
-{_
+{
     return (tile->pix_width);
 }
 
 std::string tile_get_name (Tilep tile)
-{_
+{
     return (tile->name);
 }
 
 int32_t tile_get_height (Tilep tile)
-{_
+{
     return (tile->pix_height);
 }
 
 Texp tile_get_tex (Tilep tile)
-{_
+{
     return (tile->tex);
 }
 
 uint32_t tile_get_index (Tilep tile)
-{_
+{
     return (tile->index);
 }
 
 void tile_get_coords (Tilep tile, float *x1, float *y1, float *x2, float *y2)
-{_
+{
     *x1 = tile->x1;
     *y1 = tile->x1;
     *x2 = tile->x2;

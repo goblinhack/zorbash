@@ -6399,7 +6399,7 @@ void wid_display_all (void)
     wid_tick_all();
     wid_move_all();
 
-    blit_fbo_bind(FBO_WID);
+    blit_fbo_bind(FBO_MAIN);
 
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -6471,7 +6471,7 @@ void wid_display_all (void)
 
     glBlendFunc(GL_BLEND_SRC_ALPHA, GL_ZERO);
     glcolor(WHITE);
-    blit_fbo(FBO_WID);
+    blit_fbo(FBO_MAIN);
 
     if (inverted_gfx) {
         glLogicOp(GL_COPY);
