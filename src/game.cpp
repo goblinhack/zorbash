@@ -203,6 +203,22 @@ CON("TBD %s", __FUNCTION__);
 uint8_t
 game_key_down (const struct SDL_KEYSYM *key)
 {_
+    if (game.state.player) {
+        switch (key->sym) {
+            case SDLK_LEFT:
+              game.state.player->at.x -= 0.1;
+              return (true);
+            case SDLK_RIGHT:
+              game.state.player->at.x += 0.1;
+              return (true);
+            case SDLK_UP:
+              game.state.player->at.y -= 0.1;
+              return (true);
+            case SDLK_DOWN:
+              game.state.player->at.y += 0.1;
+              return (true);
+        }
+    }
 CON("TBD %s", __FUNCTION__);
 extern void thing_map_test();
 thing_map_test();

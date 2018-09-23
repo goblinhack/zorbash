@@ -521,6 +521,45 @@ void blit_flush_triangle_fan (void)
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
 
+    double d = 0.01;
+    int blur = 6;
+    while (blur--) {
+
+        glTranslatef(-d, 0, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(d, 0, 0);
+
+        glTranslatef(d, 0, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(-d, 0, 0);
+
+        glTranslatef(0,-d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(0,d, 0);
+
+        glTranslatef(0,d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(0,-d, 0);
+
+        glTranslatef(-d, -d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(d, d, 0);
+
+        glTranslatef(d, d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(-d, -d, 0);
+
+        glTranslatef(-d, +d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(d, -d, 0);
+
+        glTranslatef(d, -d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(-d, d, 0);
+
+        d *= 0.9;
+    }
+
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
 
