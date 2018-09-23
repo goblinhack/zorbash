@@ -591,21 +591,26 @@ done:
     }
 }
 
+/*
+ * Draw the light as a central core of alpha blended light as a fan.
+ * Blit the flan multiple times.
+ * Combine this with a bitmap of a smoothed light source.
+ */
 static void map_lighting_render (const int light_index,
                                  int overlay_light_tex)
 {
     auto *light = &map_lights[light_index];
-    auto light_radius = light->strength;
     auto light_tp = light->tp;
     if (!light_tp) {
         return;
     }
 
-    double tx = light->at.x - game.state.map_at.x;
-    double ty = light->at.y - game.state.map_at.y;
-    static const double tdx = 1.0 / (double)TILES_ACROSS;
-    static const double tdy = 1.0 / (double)TILES_DOWN;
-    fpoint light_pos(tx * tdx, ty * tdy);
+    auto light_radius = light->strength;
+    auto tx = light->at.x - game.state.map_at.x;
+    auto ty = light->at.y - game.state.map_at.y;
+    static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
+    static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+    fpoint light_pos(tx * tile_gl_width_pct, ty * tile_gl_height_pct);
     auto max_light_rays = light->max_light_rays;
     auto c = light->col;
     auto red   = ((double)c.r) / 255.0;
@@ -613,17 +618,7 @@ static void map_lighting_render (const int light_index,
     auto blue  = ((double)c.b) / 255.0;
     auto alpha = ((double)c.a) / 255.0;
 
-    /*
-     * Draw the light in three stages. 
-     *
-     * 1. Central core of light as a fan
-     * 2. Strip of dimmer light at the edges
-     * 3. Strip of flickering even dimmer light
-     */
-
-    auto pct_light_radius_bright = 1.0;
     double pct_tile_len_flicker;
-
     if (tp_is_candle_light(light_tp)) {
         pct_tile_len_flicker = 0.0 + (0.005 * (myrand() % 100));
     } else {
@@ -631,12 +626,12 @@ static void map_lighting_render (const int light_index,
     }
 
     /*
-     * Now blit to the FBO, drawing the central core of the light rays
+     * How much the light pushes into a block. Too much and you can see
+     * below the block which we don't want.
      */
-    blit_init();
-
     double light_penetrate = 0.5;
 
+    blit_init();
     {
         int i;
 
@@ -645,25 +640,27 @@ static void map_lighting_render (const int light_index,
          */
         push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
-        for (i = 0; i < max_light_rays - 10; i++) {
+        for (i = 0; i < max_light_rays; i++) {
             double radius = ray_depth[i];
             double rad = ray_rad[i];
             if (radius == 0) {
                 radius = light_radius;
             }
 
-            radius *= pct_light_radius_bright;
-radius += sqrt(light_penetrate / radius);
+            /*
+             * This makes the light ray bulge which makes it easier to see
+             * tiles close to the player.
+             */
+            radius += sqrt(light_penetrate / radius);
 
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * radius * tdx;
-            double p1y = light_pos.y + sinr * radius * tdy;
+            double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
+            double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
 
-            push_point(p1x, p1y, red, green, blue, 
-                       pct_light_radius_bright * 0);
+            push_point(p1x, p1y, red, green, blue, 0);
         }
 
         /*
@@ -676,22 +673,19 @@ radius += sqrt(light_penetrate / radius);
                 radius = light_radius;
             }
 
-            radius *= pct_light_radius_bright;
             radius += sqrt(light_penetrate / radius);
 
             double cosr;
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            double p1x = light_pos.x + cosr * radius * tdx;
-            double p1y = light_pos.y + sinr * radius * tdy;
+            double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
+            double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
 
-            push_point(p1x, p1y, red, green, blue, 
-                       pct_light_radius_bright * 0);
+            push_point(p1x, p1y, red, green, blue, 0);
         }
     }
-
-    blit_flush_triangle_fan();
+    blit_flush_triangle_fan_smoothed();
 
     if (overlay_light_tex) {
         static Texp tex;
@@ -705,10 +699,14 @@ radius += sqrt(light_penetrate / radius);
         glcolor(WHITE);
  
         auto radius = light_radius;
-        radius *= pct_light_radius_bright * 1.2;
+
+        /*
+         * To account for the smoothing in blit_flush_triangle_fan_smoothed.
+         */
+        radius *= 1.2;
  
-        double lw = radius * tdx;
-        double lh = radius * tdy;
+        double lw = radius * tile_gl_width_pct;
+        double lh = radius * tile_gl_height_pct;
         double p1x = light_pos.x - lw;
         double p1y = light_pos.y - lh;
         double p2x = light_pos.x + lw;
@@ -732,10 +730,10 @@ void map_light_ray_effect (const int light_index, const int light_level)
 
     double tx = light->at.x - game.state.map_at.x;
     double ty = light->at.y - game.state.map_at.y;
-    static const double tdx = 1.0 / (double)TILES_ACROSS;
-    static const double tdy = 1.0 / (double)TILES_DOWN;
-    light_pos.x = tx * tdx;
-    light_pos.y = ty * tdy;
+    static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
+    static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+    light_pos.x = tx * tile_gl_width_pct;
+    light_pos.y = ty * tile_gl_height_pct;
 
     auto max_light_rays = light->max_light_rays;
 
@@ -761,10 +759,10 @@ void map_light_ray_effect (const int light_index, const int light_level)
             double sinr;
             sincos(rad, &sinr, &cosr);
 
-            auto p2x = light_pos.x + cosr * radius * tdx;
-            auto p2y = light_pos.y + sinr * radius * tdy;
-            auto p1x = light_pos.x + cosr * 0.1 * tdx;
-            auto p1y = light_pos.y + sinr * 0.1 * tdy;
+            auto p2x = light_pos.x + cosr * radius * tile_gl_width_pct;
+            auto p2y = light_pos.y + sinr * radius * tile_gl_height_pct;
+            auto p1x = light_pos.x + cosr * 0.1 * tile_gl_width_pct;
+            auto p1y = light_pos.y + sinr * 0.1 * tile_gl_height_pct;
 
             gl_blitline(p1x, p1y, p2x, p2y);
         }
@@ -825,16 +823,6 @@ void map_light_display (int level, int fbo, int clear)
     int i;
 
     for (i = 0; i < map_light_count; i++) {
-#if 0
-        map_light *light = &map_lights[i];
-
-        if (fbo == FBO_CURRENT_VISIBLE_MAP_SHADOW) {
-            if (light->is_historical) {
-                continue;
-            }
-        }
-#endif
-
         /*
          * Calculate ray lengths for all passes.
          */
