@@ -63,7 +63,7 @@ public:
     bool               fps_counter                  = true;
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
-    bool               display_sync                 = true;
+    bool               vsync_enable                 = true;
     bool               full_screen                  = false;
     int32_t            video_pix_width              = {};
     int32_t            video_pix_height             = {};
@@ -87,7 +87,7 @@ public:
         archive(cereal::make_nvp("fps_counter",        fps_counter),
                 cereal::make_nvp("sound_volume",       sound_volume),
                 cereal::make_nvp("music_volume",       music_volume),
-                cereal::make_nvp("display_sync",       display_sync),
+                cereal::make_nvp("vsync_enable",       vsync_enable),
                 cereal::make_nvp("full_screen",        full_screen),
                 cereal::make_nvp("video_pix_width",    video_pix_width),
                 cereal::make_nvp("video_w_h_ratio",    video_w_h_ratio),

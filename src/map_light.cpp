@@ -16,7 +16,6 @@
 static const double MAX_LIGHT_STRENGTH = 1000.0;
 static double ray_depth[MAX_LIGHT_RAYS];
 static double ray_rad[MAX_LIGHT_RAYS];
-static fpoint ray_lit[MAX_LIGHT_RAYS];
 static uint16_t map_light_count;
 
 typedef struct map_light_ {
@@ -25,138 +24,37 @@ typedef struct map_light_ {
     double strength;
     uint16_t max_light_rays;
     color col;
+    uint8_t hiqual;
 } map_light;
         
 static map_light map_lights[MAX_LIGHTS];
-
-static bool map_ok (uint16_t x, uint16_t y)
-{
-    if (unlikely(x < 0)) {
-        return (false);
-    }
-
-    if (unlikely(y < 0)) {
-        return (false);
-    }
-
-    if (unlikely(x >= MAP_WIDTH)) {
-        return (false);
-    }
-
-    if (unlikely(y >= MAP_HEIGHT)) {
-        return (false);
-    }
-
-    return (true);
-}
-
-int map_get_lit_now_by_player (int x, int y)
-{
-    if (!map_ok(x, y)) {
-        return (false);
-    }
-
-    return (game.state.map.lit_now_by_player[x][y]);
-}
-
-void map_set_lit_now_by_player (int x, int y)
-{
-    if (!map_ok(x, y)) {
-        return;
-    }
-
-    game.state.map.lit_now_by_player[x][y] = true;
-}
-
-void map_unset_lit_now_by_player (int x, int y)
-{
-    if (!map_ok(x, y)) {
-        return;
-    }
-
-    game.state.map.lit_now_by_player[x][y] = false;
-}
-
-int map_get_lit_earlier_by_player (int x, int y)
-{
-    if (!map_ok(x, y)) {
-        return (false);
-    }
-
-    return(game.state.map.lit_earlier_by_player[x][y]);
-}
-
-void map_set_lit_earlier_by_player (int x, int y)
-{
-    if (!map_ok(x, y)) {
-        return;
-    }
-
-    game.state.map.lit_earlier_by_player[x][y] = true;
-}
-
-void map_unset_lit_earlier_by_player (int x, int y)
-{
-    if (!map_ok(x, y)) {
-        return;
-    }
-
-    game.state.map.lit_earlier_by_player[x][y] = false;
-}
 
 void map_light_init (void)
 {
     map_light_count = 0;
 }
 
-static void map_light_add_one (Tpp tp, fpoint at, double strength, color c)
+void map_light_add (Tpp tp, fpoint at, double strength, color c, bool hiqual)
 {
     /*
      * Do a quick dmap check so that lights that are enclosed in a room do not 
      * shine
      */
-#if 0
-    if (tp_is_ethereal(tp)) {
-        /*
-         * Death is always lit...
-         */
-    } else if (player && !tp_is_player_or_owned_by_player(tp)) {
-        int sx, sy;
-
-        thing_real_to_map(t, &sx, &sy);
-
-        int distance = dmap_distance_to_player(sx, sy);
-        if (distance == -1) {
-            return;
-        }
-
-        /*
-         * Cheap effect, make the light fade away with distance.
-         */
-        double scale = (256.0 - (((double)distance) * 8.0)) / 256.0;
-        if (scale <= 0.1) {
-            return;
-        }
-
-        c.r = (uint8_t) (((double)c.r) * scale);
-        c.g = (uint8_t) (((double)c.g) * scale);
-        c.b = (uint8_t) (((double)c.b) * scale);
-        c.a = (uint8_t) (((double)c.a) * scale);
+    if (hiqual) {
     }
-#endif
 
-    if (map_light_count >= MAX_LIGHTS) {
+    if (unlikely(map_light_count >= MAX_LIGHTS)) {
+        CON("light overflow");
         return;
     }
-
-    memset(&map_lights[map_light_count].at, 0, sizeof(map_light));
 
     map_lights[map_light_count].at = at;
     map_lights[map_light_count].strength = strength;
     map_lights[map_light_count].col = c;
     map_lights[map_light_count].tp = tp;
+    map_lights[map_light_count].hiqual = hiqual;
 
-    if (tp_is_player(tp)) {
+    if (hiqual) {
         map_lights[map_light_count].max_light_rays = MAX_LIGHT_RAYS;
     } else {
         map_lights[map_light_count].max_light_rays = MAX_LIGHT_RAYS / 8;
@@ -165,13 +63,7 @@ static void map_light_add_one (Tpp tp, fpoint at, double strength, color c)
     map_light_count++;
 }
 
-void map_light_add (Tpp tp, fpoint at, double strength, color c)
-{
-    map_light_add_one(tp, at, strength, c);
-}
-
-static void map_light_add_ray_depth (fpoint p,
-                                     const map_light *light,
+static void map_light_add_ray_depth (const map_light *light,
                                      fpoint light_pos,
                                      fpoint light_end,
                                      double rad,
@@ -186,19 +78,13 @@ static void map_light_add_ray_depth (fpoint p,
     if (!ray_depth[deg]) {
         ray_depth[deg] = len;
         ray_rad[deg] = rad;
-        ray_lit[deg] = p;
-
         ray_depth[deg] = len;
         ray_rad[deg] = rad;
-        ray_lit[deg] = p;
     } else if (len < ray_depth[deg]) {
         ray_depth[deg] = len;
         ray_rad[deg] = rad;
-        ray_lit[deg] = p;
-
         ray_depth[deg] = len;
         ray_rad[deg] = rad;
-        ray_lit[deg] = p;
     }
 }
 
@@ -351,15 +237,13 @@ static void map_light_calculate_for_single_obstacle (Thingp t,
                                             light_pos, light_end,
                                             &intersect)) {
 
-                map_light_add_ray_depth(P[0], light, light_pos, intersect, 
+                map_light_add_ray_depth(light, light_pos, intersect, 
                                         rad, deg);
             }
 
-            map_light_add_ray_depth(P[0], light, light_pos, P[k], 
-                                    p1_rad, p1_deg);
+            map_light_add_ray_depth(light, light_pos, P[k], p1_rad, p1_deg);
 
-            map_light_add_ray_depth(P[0], light, light_pos, P[l], 
-                                    p2_rad, p2_deg);
+            map_light_add_ray_depth(light, light_pos, P[l], p2_rad, p2_deg);
 
             rad += dr;
             if (rad >= RAD_360) {
@@ -380,7 +264,6 @@ static void map_lighting_calculate (const int light_index)
      * First generate the right ray lengths.
      */
     memset(ray_depth, 0, sizeof(ray_depth));
-    memset(ray_lit, 0, sizeof(ray_lit));
 
     auto *light = &map_lights[light_index];
     auto dr = RAD_360 / (double) light->max_light_rays;
@@ -434,170 +317,11 @@ static void map_lighting_calculate (const int light_index)
 }
 
 /*
- * Given a previously calculated light depth map, see which squares are lit
- */
-static void map_lighting_set_visible (const int level,
-                                      const int light_index,
-                                      const int light_level)
-{
-    map_light *light = &map_lights[light_index];
-    double light_radius = light->strength;
-    double lx = light->at.x;
-    double ly = light->at.y;
-    double x1 = lx - light_radius;
-    double x2 = lx + light_radius;
-    double y1 = ly - light_radius;
-    double y2 = ly + light_radius;
-    double x, y;
-    int max_light_rays = light->max_light_rays;
-
-    for (x = x1; x <= x2; x++) {
-        for (y = y1; y <= y2; y++) {
-
-            if (!map_ok(x, y)) {
-                continue;
-            }
-
-            /*
-             * For each corner of this tile, see if it is lit
-             */
-            int dx, dy;
-            for (dx = 0; dx <= 1; dx++) for (dy = 0; dy <= 1; dy++)  {
-
-                /*
-                 * Get the integer co-ordinates of each corner of this square 
-                 * tile.
-                 */
-                double X = floor(x) + dx;
-                double Y = floor(y) + dy;
-
-                /*
-                 * How far is this corner from the light. Too far?
-                 */
-                double dist = DISTANCE(X, Y, lx, ly);
-                if (dist > light_radius) {
-                    continue;
-                }
-
-                /*
-                 * How much is this corner point rotated around the light 
-                 * source.
-                 */
-                fpoint p;
-                p.x = X - lx;
-                p.y = Y - ly;
-                auto pa = p.anglerot();
-
-                /*
-                 * Convert to a light array index
-                 */
-                int d = pa * (double) max_light_rays / RAD_360;
-                d = d % max_light_rays;
-
-                /*
-                 * Is this tile within the light, plus a small delta. As the 
-                 * light ends at the intersection point with the object we 
-                 * need to let the light leak in a bit so we can see it.
-                 */
-                double depth = ray_depth[d];
-                if (dist <= depth + 0.1) {
-                    map_set_lit_now_by_player((int)x, (int)y);
-                    goto done;
-                }
-
-                /*
-                 * Ok, onto the corner cases. As we cannot cast an infinite 
-                 * number of light rays, we look at the two rays surrounding
-                 * our idealised ray. If we are within the distance of both
-                 * of those then we say we are visible too.
-                 *
-                 * So first find the two rays.
-                 */
-                int ray_index_lower, ray_index_higher;
-
-                ray_index_lower = d;
-                for (;;) {
-                    double r = ray_rad[ray_index_lower];
-                    if (r <= pa) {
-                        break;
-                    } else if (r - pa > RAD_180) {
-                        break;
-                    }
-
-                    ray_index_lower--;
-                    if (ray_index_lower < 0) {
-                        ray_index_lower += max_light_rays;
-                    }
-                }
-
-                ray_index_higher = d;
-                for (;;) {
-                    double r = ray_rad[ray_index_higher];
-                    if (r >= pa) {
-                        break;
-                    } else if (pa - r > RAD_180) {
-                        break;
-                    }
-
-                    ray_index_higher++;
-                    if (ray_index_higher >= max_light_rays) {
-                        ray_index_higher -= max_light_rays;
-                    }
-                }
-
-                /*
-                 * Check that the gap between rays is at most one light ray.
-                 * Else we would ignore blocked light rays and think we are
-                 * visible.
-                 */
-                int delta;
-
-                if (ray_index_higher - ray_index_lower < 0) {
-                    delta = (max_light_rays - ray_index_lower) + ray_index_higher;
-                } else {
-                    delta = ray_index_higher - ray_index_lower;
-                }
-
-                if (delta > 1) {
-                    continue;
-                }
-
-                double depth1 = ray_depth[ray_index_lower];
-                double depth2 = ray_depth[ray_index_higher];
-
-                if ((dist <= depth1) || (dist <= depth2)) {
-                    map_set_lit_now_by_player((int)x, (int)y);
-                    goto done;
-                }
-            }
-done:
-            continue;
-        }
-    }
-
-    /*
-     * Finally ensure that all rays that hit something, that something is lit
-     */
-    int i;
-
-    for (i = 0; i < MAX_LIGHT_RAYS; i++) {
-        double depth = ray_depth[i];
-        if ((depth > 0.0) && (light_radius > depth + 0.1)) {
-            fpoint p = ray_lit[i];
-
-            map_set_lit_now_by_player(p.x, p.y);
-
-        }
-    }
-}
-
-/*
  * Draw the light as a central core of alpha blended light as a fan.
  * Blit the flan multiple times.
  * Combine this with a bitmap of a smoothed light source.
  */
-static void map_lighting_render (const int light_index,
-                                 int overlay_light_tex)
+static void map_lighting_render (const int light_index)
 {
     auto *light = &map_lights[light_index];
     auto light_tp = light->tp;
@@ -643,7 +367,7 @@ static void map_lighting_render (const int light_index,
         for (i = 0; i < max_light_rays; i++) {
             double radius = ray_depth[i];
             double rad = ray_rad[i];
-            if (radius == 0) {
+            if (radius < 0.01) {
                 radius = light_radius;
             }
 
@@ -669,7 +393,7 @@ static void map_lighting_render (const int light_index,
         i = 0; {
             double radius = ray_depth[i];
             double rad = ray_rad[i];
-            if (radius == 0) {
+            if (radius < 0.01) {
                 radius = light_radius;
             }
 
@@ -686,13 +410,13 @@ static void map_lighting_render (const int light_index,
         }
     }
 
-    if (tp_is_player(light_tp)) {
+    if (light->hiqual) {
         blit_flush_triangle_fan_smoothed();
     } else {
         blit_flush_triangle_fan();
     }
 
-    if (overlay_light_tex) {
+    if (light->hiqual) {
         static Texp tex;
         static int buf;
         
@@ -774,115 +498,52 @@ void map_light_ray_effect (const int light_index, const int light_level)
     }
 }
 
-/*
- * Whatever is visible by the current players light source, set it as
- * historical.
- */
-static void map_light_change_visible_now_to_earlier (void)
-{
-    int x, y;
-
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
-            if (map_get_lit_now_by_player(x, y)) {
-                map_set_lit_earlier_by_player(x, y);
-                map_unset_lit_now_by_player(x, y);
-            }
-        }
-    }
-}
-
-void map_light_calculate_visible (int level)
-{
-    map_light_change_visible_now_to_earlier();
-
-    int i;
-
-    for (i = 0; i < map_light_count; i++) {
-        /*
-         * Calculate ray lengths for all passes.
-         */
-        map_lighting_calculate(i);
-
-        map_lighting_set_visible(level, i, 0);
-    }
-}
-
 void thing_map_test(void)
 {
 }
 
-void map_light_display (int level, int fbo, int clear)
+void map_light_display (int fbo)
 {
     int i;
 
     for (i = 0; i < map_light_count; i++) {
-        blit_fbo_bind(FBO_VISITED_MAP);
-        glClearColor(0,0,0,0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glcolor(WHITE);
-
-        /*
-         * We want to merge successive light sources together.
-         */
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+        auto *light = &map_lights[i];
 
         /*
          * Calculate ray lengths for all passes.
          */
         map_lighting_calculate(i);
 
-        /*
-         * Draw the light sources. First pass is for solid obstacles.
-         */
-        map_lighting_render(i, true);
+        if (light->hiqual) {
+            blit_fbo_bind(FBO_VISITED_MAP);
+            glClearColor(0,0,0,0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glcolor(WHITE);
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        blit_fbo_bind(fbo);
-        blit_fbo(FBO_VISITED_MAP);
-        blit_fbo_unbind();
-    }
-}
+            /*
+             * We want to merge successive light sources together.
+             */
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+            glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
 
-void map_light_glow_display (int level)
-{
-    int i;
+            /*
+             * Draw the light sources. First pass is for solid obstacles.
+             */
+            map_lighting_render(i);
 
-    /*
-     * Redraw light sources on top of the light they cast.
-     */
-    for (i = 0; i < map_light_count; i++) {
-        map_light *light = &map_lights[i];
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            blit_fbo_bind(fbo);
+            blit_fbo(FBO_VISITED_MAP);
+            blit_fbo_unbind();
+        } else {
+            blit_fbo_bind(fbo);
 
-        if (!tp_is_player(light->tp)) {
-            continue;
+            glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+
+            /*
+             * Draw the light sources. First pass is for solid obstacles.
+             */
+            map_lighting_render(i);
         }
-
-#if 0
-        if (light->is_historical) {
-            continue;
-        }
-#endif
-
-        /*
-         * Calculate ray lengths for all passes.
-         */
-        map_lighting_calculate(i);
-
-        /*
-         * Draw the light sources. First pass is for solid obstacles.
-         */
-        color c = WHITE;
-        c.a = 10;
-        glcolor(c);
-
-#ifdef ENABLE_DEBUG_LIGHT
-        c = RED;
-        c.a = 200;
-        glcolor(c);
-#endif
-
-        map_light_ray_effect(i, 0);
     }
 }

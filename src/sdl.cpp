@@ -854,11 +854,35 @@ uint8_t fps_enable (tokens_t *tokens, void *context)
 
     if (!s || (*s == '\0')) {
         game.config.fps_counter = true;
+        CON("FSP counter enabled");
     } else {
+        CON("FSP counter disabled");
         game.config.fps_counter = strtol(s, 0, 10) ? 1 : 0;
     }
 
-    DBG("FPS mode set to %u", game.config.fps_counter);
+    return (true);
+}
+
+/*
+ * User has entered a command, run it
+ */
+uint8_t vsync_enable (tokens_t *tokens, void *context)
+{_
+    char *s = tokens->args[2];
+
+    if (!s || (*s == '\0')) {
+        game.config.vsync_enable = true;
+    } else {
+        game.config.vsync_enable = strtol(s, 0, 10) ? 1 : 0;
+    }
+
+    if (game.config.vsync_enable) {
+        CON("Vsync enabled");
+        SDL_GL_SetSwapInterval(1);
+    } else {
+        CON("Vsync disabled");
+        SDL_GL_SetSwapInterval(0);
+    }
 
     return (true);
 }
@@ -898,11 +922,6 @@ void sdl_loop (void)
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    /*
-     * Turn on syncing for the intro screen.
-     */
-    SDL_GL_SetSwapInterval(1);
-
     gl_enter_2d_mode();
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -913,7 +932,7 @@ void sdl_loop (void)
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
      */
 
-    if (game.config.display_sync) {
+    if (game.config.vsync_enable) {
         SDL_GL_SetSwapInterval(1);
     } else {
         SDL_GL_SetSwapInterval(0);
