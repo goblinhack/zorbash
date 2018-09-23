@@ -565,8 +565,8 @@ void blit_flush_triangle_fan_smoothed (void)
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
 
-    double d = 0.01;
-    int blur = 6;
+    double d = 0.03;
+    int blur = 4;
     while (blur--) {
 
         glTranslatef(-d, 0, 0);
@@ -601,7 +601,7 @@ void blit_flush_triangle_fan_smoothed (void)
         glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
         glTranslatef(-d, d, 0);
 
-        d *= 0.9;
+        d *= 0.7;
     }
 
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -611,7 +611,7 @@ void blit_flush_triangle_fan_smoothed (void)
 }
 
 void blit_flush_tex_triangle_fan (void)
-{_
+{
     if (gl_array_buf == bufp) {
         return;
     }
@@ -666,7 +666,7 @@ void blit_flush_tex_triangle_fan (void)
 }
 
 void blit_flush_triangle_strip (void)
-{_
+{
     if (gl_array_buf == bufp) {
         return;
     }
@@ -710,7 +710,7 @@ void blit_flush_triangle_strip (void)
 }
 
 void blit_flush_triangles (void)
-{_
+{
     if (gl_array_buf == bufp) {
         return;
     }
@@ -742,7 +742,7 @@ void blit_flush_triangles (void)
 }
 
 void gl_blitquad (float left, float top, float right, float bottom)
-{_
+{
     GLfloat xy[4*2];
     GLfloat *xyp = xy;
 
@@ -760,7 +760,7 @@ void gl_blitquad (float left, float top, float right, float bottom)
 }
 
 void gl_blitsquare (float left, float top, float right, float bottom)
-{_
+{
     GLfloat xy[4*2];
     GLfloat *xyp = xy;
 
@@ -778,7 +778,7 @@ void gl_blitsquare (float left, float top, float right, float bottom)
 }
 
 void gl_blitline (float left, float top, float right, float bottom)
-{_
+{
     GLfloat xy[2*2];
     GLfloat *xyp = xy;
 
