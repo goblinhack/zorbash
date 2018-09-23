@@ -685,7 +685,12 @@ static void map_lighting_render (const int light_index,
             push_point(p1x, p1y, red, green, blue, 0);
         }
     }
-    blit_flush_triangle_fan_smoothed();
+
+    if (tp_is_player(light_tp)) {
+        blit_flush_triangle_fan_smoothed();
+    } else {
+        blit_flush_triangle_fan();
+    }
 
     if (overlay_light_tex) {
         static Texp tex;
@@ -695,8 +700,6 @@ static void map_lighting_render (const int light_index,
             tex = tex_load("", "light", GL_LINEAR);
             buf = tex_get_gl_binding(tex);
         }
-        blit_init();
-        glcolor(WHITE);
  
         auto radius = light_radius;
 
@@ -712,6 +715,8 @@ static void map_lighting_render (const int light_index,
         double p2x = light_pos.x + lw;
         double p2y = light_pos.y + lh;
  
+        blit_init();
+        glcolor(WHITE);
         glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
         blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         blit_flush();
@@ -809,20 +814,20 @@ void thing_map_test(void)
 
 void map_light_display (int level, int fbo, int clear)
 {
-    blit_fbo_bind(fbo);
-    glClearColor(0,0,0,0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glcolor(WHITE);
-
-    /*
-     * We want to merge successive light sources together.
-     */
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
-
     int i;
 
     for (i = 0; i < map_light_count; i++) {
+        blit_fbo_bind(FBO_VISITED_MAP);
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glcolor(WHITE);
+
+        /*
+         * We want to merge successive light sources together.
+         */
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+
         /*
          * Calculate ray lengths for all passes.
          */
@@ -832,9 +837,12 @@ void map_light_display (int level, int fbo, int clear)
          * Draw the light sources. First pass is for solid obstacles.
          */
         map_lighting_render(i, true);
-    }
 
-    blit_fbo_unbind();
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        blit_fbo_bind(fbo);
+        blit_fbo(FBO_VISITED_MAP);
+        blit_fbo_unbind();
+    }
 }
 
 void map_light_glow_display (int level)
