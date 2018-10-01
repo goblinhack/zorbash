@@ -10,6 +10,7 @@
 #include "my_sdl.h"
 #include "my_dmap.h"
 #include "my_thing.h"
+#include "my_light.h"
 
 enum {
     MAP_DEPTH_FLOOR,
@@ -21,6 +22,8 @@ enum {
 
 class Map {
 public:
+    Lights              all_lights;
+    std::vector<Lightp> lights[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
     Things              all_things;
     std::vector<Thingp> things[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
     uint8_t             is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -32,6 +35,7 @@ public:
     void serialize (Archive & archive)
     {
         archive(cereal::make_nvp("all_things",      all_things));
+        archive(cereal::make_nvp("all_lights",      all_lights));
     }
 };
 
