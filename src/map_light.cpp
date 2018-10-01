@@ -5,7 +5,7 @@
  */
 
 #include "my_main.h"
-#include "my_thing.h"
+#include "my_light.h"
 #include "my_tile.h"
 #include "my_tile_info.h"
 #include "my_tex.h"
@@ -14,7 +14,7 @@
 #include <algorithm>
 
 static const double MAX_LIGHT_STRENGTH = 1000.0;
-static double ray_depth[MAX_LIGHT_RAYS];
+static double ray_depth_buffer[MAX_LIGHT_RAYS];
 static double ray_rad[MAX_LIGHT_RAYS];
 static uint16_t map_light_count;
 
@@ -75,11 +75,11 @@ static void map_light_add_ray_depth (const map_light *light,
         len = light->strength;
     }
 
-    if (!ray_depth[deg]) {
-        ray_depth[deg] = len;
+    if (!ray_depth_buffer[deg]) {
+        ray_depth_buffer[deg] = len;
         ray_rad[deg] = rad;
-    } else if (len < ray_depth[deg]) {
-        ray_depth[deg] = len;
+    } else if (len < ray_depth_buffer[deg]) {
+        ray_depth_buffer[deg] = len;
         ray_rad[deg] = rad;
     }
 }
@@ -259,7 +259,7 @@ static void map_lighting_calculate (const int light_index)
     /*
      * First generate the right ray lengths.
      */
-    memset(ray_depth, 0, sizeof(ray_depth));
+    memset(ray_depth_buffer, 0, sizeof(ray_depth_buffer));
 
     auto *light = &map_lights[light_index];
     auto dr = RAD_360 / (double) light->max_light_rays;
@@ -361,7 +361,7 @@ static void map_lighting_render (const int light_index)
         push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
         for (i = 0; i < max_light_rays; i++) {
-            double radius = ray_depth[i];
+            double radius = ray_depth_buffer[i];
             double rad = ray_rad[i];
             if (radius < 0.01) {
                 radius = light_radius;
@@ -387,7 +387,7 @@ static void map_lighting_render (const int light_index)
          * Complete the circle with the first point again.
          */
         i = 0; {
-            double radius = ray_depth[i];
+            double radius = ray_depth_buffer[i];
             double rad = ray_rad[i];
             if (radius < 0.01) {
                 radius = light_radius;
@@ -424,7 +424,7 @@ static void map_lighting_render (const int light_index)
         auto radius = light_radius;
 
         /*
-         * To account for the smoothing in blit_flush_triangle_fan_smoothed.
+         * To account for the smoolight in blit_flush_triangle_fan_smoothed.
          */
         radius *= 1.2;
  
@@ -471,7 +471,7 @@ void map_light_ray_effect (const int light_index, const int light_level)
         auto dr = RAD_360 / (double) max_light_rays;
         auto rad = 0.0;
         for (i = 0; i < max_light_rays; i++, rad += dr) {
-            auto radius = ray_depth[i];
+            auto radius = ray_depth_buffer[i];
 
             if (radius == 0) {
                 radius = light_radius;

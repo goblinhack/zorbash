@@ -541,7 +541,7 @@ void Thing::log_ (const char *fmt, va_list args)
     buf[0] = '\0';
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "c-thing %s: ",
+    snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
              t->logname().c_str());
 
     len = (uint32_t)strlen(buf);
@@ -572,7 +572,7 @@ void Thing::die_ (const char *fmt, va_list args)
     buf[0] = '\0';
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "c-thing %s: ",
+    snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
              t->logname().c_str());
 
     len = (uint32_t)strlen(buf);
@@ -602,7 +602,7 @@ void Thing::con_ (const char *fmt, va_list args)
     buf[0] = '\0';
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "c-thing %s: ",
+    snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
              t->logname().c_str());
 
     len = (uint32_t)strlen(buf);
@@ -668,6 +668,153 @@ void Thing::err (const char *fmt, ...)
 }
 
 void Thing::dbg (const char *fmt, ...)
+{_
+    auto t = this;
+
+    va_list args;
+
+    va_start(args, fmt);
+    t->log_(fmt, args);
+    va_end(args);
+}
+
+void Light::log_ (const char *fmt, va_list args)
+{_
+    auto t = this;
+
+    char buf[MAXSTR];
+    uint32_t len;
+
+    buf[0] = '\0';
+    timestamp(buf, sizeof(buf));
+    len = (uint32_t)strlen(buf);
+    snprintf(buf + len, sizeof(buf) - len, "light %s: ",
+             t->logname().c_str());
+
+    len = (uint32_t)strlen(buf);
+    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
+}
+
+void Light::log (const char *fmt, ...)
+{_
+    auto t = this;
+
+    va_list args;
+
+    va_start(args, fmt);
+    t->log_(fmt, args);
+    va_end(args);
+}
+
+void Light::die_ (const char *fmt, va_list args)
+{_
+    auto t = this;
+
+    char buf[MAXSTR];
+    uint32_t len;
+
+    buf[0] = '\0';
+    timestamp(buf, sizeof(buf));
+    len = (uint32_t)strlen(buf);
+    snprintf(buf + len, sizeof(buf) - len, "light %s: ",
+             t->logname().c_str());
+
+    len = (uint32_t)strlen(buf);
+    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+
+    DIE("%s",buf);
+}
+
+void Light::die (const char *fmt, ...)
+{_
+    auto t = this;
+
+    va_list args;
+
+    va_start(args, fmt);
+    t->die_(fmt, args);
+    va_end(args);
+}
+
+void Light::con_ (const char *fmt, va_list args)
+{_
+    auto t = this;
+
+    char buf[MAXSTR];
+    uint32_t len;
+
+    buf[0] = '\0';
+    timestamp(buf, sizeof(buf));
+    len = (uint32_t)strlen(buf);
+    snprintf(buf + len, sizeof(buf) - len, "light %s: ",
+             t->logname().c_str());
+
+    len = (uint32_t)strlen(buf);
+    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
+
+    wid_console_log(buf);
+}
+
+void Light::con (const char *fmt, ...)
+{_
+    auto t = this;
+
+    va_list args;
+
+    va_start(args, fmt);
+    t->con_(fmt, args);
+    va_end(args);
+}
+
+void Light::err_ (const char *fmt, va_list args)
+{_
+    auto t = this;
+
+    char buf[MAXSTR];
+    uint32_t len;
+
+    buf[0] = '\0';
+    timestamp(buf, sizeof(buf));
+    len = (uint32_t)strlen(buf);
+    snprintf(buf + len, sizeof(buf) - len, "ERROR: Light %s: ",
+             t->logname().c_str());
+
+    len = (uint32_t)strlen(buf);
+    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
+
+    putf(MY_STDERR, buf);
+    fflush(MY_STDERR);
+
+    fprintf(stderr, "%s\n", buf);
+    fflush(stderr);
+
+    backtrace_print();
+    fflush(MY_STDOUT);
+
+    wid_console_log(buf);
+}
+
+void Light::err (const char *fmt, ...)
+{_
+    auto t = this;
+
+    va_list args;
+
+    va_start(args, fmt);
+    t->err_(fmt, args);
+    va_end(args);
+}
+
+void Light::dbg (const char *fmt, ...)
 {_
     auto t = this;
 
