@@ -34,8 +34,8 @@ public:
     template <class Archive>
     void serialize (Archive & archive)
     {
-        archive(cereal::make_nvp("all_things",      all_things));
-        archive(cereal::make_nvp("all_lights",      all_lights));
+        archive(cereal::make_nvp("all_things",      all_things),
+                cereal::make_nvp("all_lights",      all_lights));
     }
 };
 
