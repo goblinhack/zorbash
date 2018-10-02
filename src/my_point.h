@@ -25,6 +25,7 @@
 #define _MY_POINT_H_
 
 #include <cereal/types/memory.hpp>
+#include <cereal/types/vector.hpp>
 #include "my_math_util.h"
 
 template<class T> class my_apoint

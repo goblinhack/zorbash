@@ -11,7 +11,6 @@
 
 #include <map>
 #include <memory>
-#include <array>
 #include "my_point.h"
 #include "my_ptrcheck.h"
 
@@ -30,7 +29,19 @@ public:
 
     ~Light (void)
     {
+        destroyed();
         oldptr(this);
+    }
+
+    template <class Archive>
+    void serialize (Archive & archive )
+    {
+        archive(cereal::make_nvp("id",               id),
+                cereal::make_nvp("at",               at),
+                cereal::make_nvp("max_light_rays",   max_light_rays),
+                cereal::make_nvp("ray_depth_buffer", ray_depth_buffer),
+                cereal::make_nvp("ray_rad",          ray_rad),
+                cereal::make_nvp("is_on_map",        is_on_map));
     }
 
     /*
@@ -43,16 +54,18 @@ public:
      * if the light moves.
      */
     fpoint             at;
+    bool               is_on_map;
 
     /*
      * Precalculated light rays.
      */
     uint16_t           max_light_rays;
-    std::array<float>  ray_depth_buffer;
-    std::array<float>  ray_rad;
+    std::vector<float> ray_depth_buffer;
+    std::vector<float> ray_rad;
 
     std::string logname(void);
     void destroyed(void);
+    void reset(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
     void pop(void);

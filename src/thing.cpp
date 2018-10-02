@@ -100,7 +100,7 @@ Thingp thing_new (std::string tp_name)
     return (t);
 }
 
-void Thing::destroyed (std::string reason)
+void Thing::destroyed (void)
 {_
     auto t = this;
 

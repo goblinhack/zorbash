@@ -9,7 +9,7 @@
 
 static uint32_t light_id;
 
-Lightp light_new (uint16_t max_light_arrays)
+Lightp light_new (uint16_t max_light_rays)
 {_
     auto id = ++light_id;
 
@@ -21,16 +21,16 @@ Lightp light_new (uint16_t max_light_arrays)
     }
 
     t->id = id;
-    t->is_on_map                    = false;
-    t->max_light_arrays             = max_light_arrays;
+    t->is_on_map      = false;
+    t->max_light_rays = max_light_rays;
 
     // t->log("created");
-    t->reset("created");
+    t->reset();
 
     return (t);
 }
 
-void Light::destroyed (std::string reason)
+void Light::destroyed (void)
 {_
     auto t = this;
 
@@ -55,13 +55,9 @@ void Light::pop (void)
 
 void Light::reset (void)
 {_
-    max_light_rays;
-    std::fill(ray_depth_buffer, ray_depth_buffer + max_light_rays, 0.0);
-    // TODO
-    std::fill(ray_rad, ray_rad + max_light_rays, 0.0);
-    std::vector<float> ray_depth_buffer;
-    std::vector<float> ray_rad;
-
+    std::fill(ray_depth_buffer.begin(), 
+              ray_depth_buffer.begin() + max_light_rays, 0.0);
+    std::fill(ray_rad.begin(), ray_rad.begin() + max_light_rays, 0.0);
 }
 
 void Light::move_to (fpoint to)
@@ -107,8 +103,8 @@ std::string Light::logname (void)
         loop = 0;
     }
 
-    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u(%s) at (%g,%g)",
-             t->id, t->tp->short_name.c_str(), t->at.x, t->at.y);
+    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "light %u at (%g,%g)",
+             t->id, t->at.x, t->at.y);
 
     return (tmp[loop++]);
 }

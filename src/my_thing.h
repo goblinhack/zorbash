@@ -43,13 +43,17 @@ public:
 
     ~Thing (void)
     {
+        destroyed();
         oldptr(this);
     }
 
     template <class Archive>
     void serialize (Archive & archive )
     {
-        archive(cereal::make_nvp("id",              id));
+        archive(cereal::make_nvp("id",               id),
+                cereal::make_nvp("at",               at),
+                cereal::make_nvp("last_at",          last_at));
+        // etc todo and remember to repair Tp on loading
     }
 
     /*
@@ -125,7 +129,7 @@ public:
     uint8_t is_dir_up(void);
     void animate();
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
-    void destroyed(std::string reason);
+    void destroyed(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
     void pop(void);
