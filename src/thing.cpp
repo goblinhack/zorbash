@@ -116,7 +116,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
         game.state.map.is_wall[new_at.x][new_at.y] = true;
     }
 
-    // t->log("created");
+    t->log("created");
     return (t);
 }
 

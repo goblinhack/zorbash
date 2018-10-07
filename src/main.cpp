@@ -12,6 +12,7 @@
 #ifndef _MSC_VER
 #include <libgen.h>
 #endif
+#include <signal.h>
 
 #include "my_main.h"
 #include "my_python.h"
@@ -545,10 +546,12 @@ int32_t main (int32_t argc, char *argv[])
     LOG_STDERR = fopen(err, "w+");
     myfree(err);
 
+#if 0
     char *save_file = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "saved.json");
     extern int cereal_test(const std::string);
     cereal_test(std::string(save_file));
     myfree(save_file);
+#endif
 
     ARGV = argv;
 
