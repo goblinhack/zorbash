@@ -339,13 +339,6 @@ static void map_lighting_render (const int light_index)
     auto blue  = ((double)c.b) / 255.0;
     auto alpha = ((double)c.a) / 255.0;
 
-    double pct_tile_len_flicker;
-    if (tp_is_candle_light(light_tp)) {
-        pct_tile_len_flicker = 0.0 + (0.005 * (myrand() % 100));
-    } else {
-        pct_tile_len_flicker = 0.0;
-    }
-
     /*
      * How much the light pushes into a block. Too much and you can see
      * below the block which we don't want.
