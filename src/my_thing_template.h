@@ -153,7 +153,6 @@ public:
     bool is_rrr36 {};
     bool is_rrr37 {};
     bool is_candle_light {};
-    bool is_shadow_caster_soft {};
     bool is_shadow_caster {};
     bool is_ladder {};
     bool is_animated_walk_flip {};
@@ -459,11 +458,6 @@ static inline uint8_t tp_is_rrr37 (Tpp t)
 static inline uint8_t tp_is_candle_light (Tpp t)
 {
     return (t->is_candle_light);
-}
-
-static inline uint8_t tp_is_shadow_caster_soft (Tpp t)
-{
-    return (t->is_shadow_caster_soft);
 }
 
 static inline uint8_t tp_is_shadow_caster (Tpp t)

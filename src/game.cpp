@@ -116,7 +116,19 @@ static void game_place_lights (class Dungeon *d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                auto t = light_new(MAX_LIGHT_RAYS, fpoint(X, Y));
+
+                color col;
+
+                auto r = random_range(0, 100);
+                if (r < 25) {
+                    col = RED;
+                } else if (r < 75) {
+                    col = GREEN;
+                } else {
+                    col = BLUE;
+                }
+                auto t = light_new(MAX_LIGHT_RAYS, 3, fpoint(X, Y),
+                                   LIGHT_QUALITY_LOW, col);
             }
         }
     }
@@ -149,7 +161,7 @@ void game_display (void)
 
         auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 
                                    GRID_WIDTH, GRID_HEIGHT, seed);
-
+_
         LOG("dungeon: create blocks");
         auto tries = 1000;
         game_place_blocks(dungeon, "wall1", 1, 6, 6, tries);
@@ -178,11 +190,11 @@ void game_display (void)
         game_place_blocks(dungeon, "wall1", 2, 1, 2, tries);
         game_place_blocks(dungeon, "wall1", 3, 2, 1, tries);
         game_place_blocks(dungeon, "wall1", 4, 2, 1, tries);
-
+_
         game_place_lights(dungeon, "wall1", 4, 2, 1, tries);
-
+_
         game_ramaining_place_blocks(dungeon, "wall1");
-
+_
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
                 if (dungeon->is_monst_at(x, y)) {
@@ -194,11 +206,13 @@ void game_display (void)
                 }
             }
         }
-
+_
+        lights_calculate();
+_
         LOG("dungeon: placed all blocks");
         thing_map_scroll_to_player();
     }
-
+_
     first = false;
 
     /*
@@ -206,7 +220,7 @@ void game_display (void)
      * all the things into the map for collisions.
      */
     thing_render_all();
-
+_
 #if 0
     if (!game.editor_mode) {
         thing_move_all();

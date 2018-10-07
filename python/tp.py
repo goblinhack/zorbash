@@ -90,7 +90,6 @@ class Tp:
         self.is_rrr36 = False
         self.is_rrr37 = False
         self.is_candle_light = False
-        self.is_shadow_caster_soft = False
         self.is_shadow_caster = False
         self.is_rrr41 = False
         self.is_animated_walk_flip = False
@@ -326,10 +325,6 @@ class Tp:
     def set_is_candle_light(self, value):
         self.is_candle_light = value
         zx.tp_set_is_candle_light(self, value)
-
-    def set_is_shadow_caster_soft(self, value):
-        self.is_shadow_caster_soft = value
-        zx.tp_set_is_shadow_caster_soft(self, value)
 
     def set_is_shadow_caster(self, value):
         self.is_shadow_caster = value

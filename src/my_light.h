@@ -15,6 +15,11 @@
 #include "my_point.h"
 #include "my_ptrcheck.h"
 
+typedef enum {
+    LIGHT_QUALITY_LOW,
+    LIGHT_QUALITY_HIGH,
+} LightQuality;
+
 class Light
 {
 private:
@@ -36,6 +41,7 @@ public:
     {
         archive(cereal::make_nvp("id",               id),
                 cereal::make_nvp("at",               at),
+                cereal::make_nvp("strength",         strength),
                 cereal::make_nvp("max_light_rays",   max_light_rays),
                 cereal::make_nvp("ray_depth_buffer", ray_depth_buffer),
                 cereal::make_nvp("ray_rad",          ray_rad));
@@ -53,11 +59,19 @@ public:
     fpoint             at;
 
     /*
+     * The owner of the light, so we don't block our own light.
+     */
+    Thingp             owner;
+
+    /*
      * Precalculated light rays.
      */
+    double             strength;
     uint16_t           max_light_rays;
     std::vector<float> ray_depth_buffer;
     std::vector<float> ray_rad;
+    LightQuality       quality;
+    color              col;
 
     void pop();
     std::string logname(void);
@@ -65,6 +79,13 @@ public:
     void reset(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
+
+    void add_z_depth(fpoint &light_pos, fpoint &light_end, double rad, int deg);
+    void calculate_for_obstacle(Thingp t, int x, int y);
+    void calculate(void);
+
+    void render_rays(void);
+    void render(int fbo);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -77,6 +98,18 @@ public:
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 };
 
-extern Lightp light_new(uint16_t max_light_arrays, fpoint at);
+extern Lightp light_new(uint16_t max_light_arrays, 
+                        double strength, 
+                        fpoint at,
+                        LightQuality quality,
+                        color col);
+extern Lightp light_new(Thingp owner, 
+                        uint16_t max_light_arrays, 
+                        double strength,
+                        fpoint at,
+                        LightQuality quality,
+                        color col);
+extern void lights_calculate(void);
+extern void lights_render(int fbo);
 
 #endif /* LIGHT_H */
