@@ -72,7 +72,7 @@ unsigned char *file_read (const char *filename, int32_t *out_len)
         *out_len = len;
     }
 
-    LOG("Loading %s, %d bytes", filename, len);
+    LOG("- read %s, %dMb, %d bytes", filename, len / (1024 * 1024), len);
 
     fclose(file);
 

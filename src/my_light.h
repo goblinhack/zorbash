@@ -27,7 +27,7 @@ public:
 
     ~Light (void)
     {
-        destroyed();
+        // log("destroyed");
         oldptr(this);
     }
 
@@ -59,6 +59,7 @@ public:
     std::vector<float> ray_depth_buffer;
     std::vector<float> ray_rad;
 
+    void pop();
     std::string logname(void);
     void destroyed(void);
     void reset(void);

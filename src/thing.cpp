@@ -29,18 +29,19 @@ Thingp thing_new (std::string tp_name, fpoint at)
 
     point new_at((int)at.x, (int)at.y);
     auto depth = tp_z_depth(tp);
-    auto n = game.state.map.things[new_at.x][new_at.y][depth];
-    result = n.insert(p);
+    auto n = &game.state.map.things[new_at.x][new_at.y][depth];
+    result = n->insert(p);
     if (result.second == false) {
         DIE("thing insert into map [%d] failed", id);
     }
 
-    t->dir                          = THING_DIR_NONE;
-    t->is_dead                      = false;
-    t->is_sleeping                  = false;
-    t->is_moving                    = false;
-    t->has_ever_moved               = false;
-    t->is_open                      = false;
+    t->at             = at;
+    t->dir            = THING_DIR_NONE;
+    t->is_dead        = false;
+    t->is_sleeping    = false;
+    t->is_moving      = false;
+    t->has_ever_moved = false;
+    t->is_open        = false;
 
     auto tiles = tp_get_left_tiles(tp);
     auto tinfo = tile_info_random(tiles);
@@ -116,11 +117,11 @@ Thingp thing_new (std::string tp_name, fpoint at)
         game.state.map.is_wall[new_at.x][new_at.y] = true;
     }
 
-    t->log("created");
+    // t->log("created");
     return (t);
 }
 
-void Thing::destroyed (void)
+void Thing::pop (void)
 {_
     auto t = this;
 
@@ -128,12 +129,12 @@ void Thing::destroyed (void)
      * Pop from all things
      */
     {
-        auto a = game.state.map.all_things;
-        auto iter = a.find(t->id);
-        if (iter == a.end()) {
+        auto a = &game.state.map.all_things;
+        auto iter = a->find(t->id);
+        if (iter == a->end()) {
             t->die("thing not found to destroy from all things");
         }
-        a.erase(t->id);
+        a->erase(t->id);
     }
 _
     /*
@@ -141,14 +142,14 @@ _
      */
     point old_at((int)at.x, (int)at.y);
     {
-        auto o = game.state.map.things[old_at.x][old_at.y][t->depth];
-        auto iter = o.find(t->id);
-        if (iter == o.end()) {
+        auto o = &game.state.map.things[old_at.x][old_at.y][t->depth];
+        auto iter = o->find(t->id);
+        if (iter == o->end()) {
             t->die("thing not found to destroy");
         }
 _    
-        auto value = o[t->id];
-        o.erase(iter);
+        auto value = (*o)[t->id];
+        o->erase(iter);
 _
         if (tp_is_wall(tp)) {
             game.state.map.is_wall[old_at.x][old_at.y] = false;
@@ -186,16 +187,16 @@ void Thing::move_to (fpoint to)
         /*
          * Pop
          */
-        auto o = game.state.map.things[old_at.x][old_at.y][t->depth];
-        auto iter = o.find(t->id);
-        auto value = o[t->id];
-        o.erase(iter);
+        auto o = &game.state.map.things[old_at.x][old_at.y][t->depth];
+        auto iter = o->find(t->id);
+        auto value = (*o)[t->id];
+        o->erase(iter);
 
         /*
          * Add back
          */
-        auto n = game.state.map.things[new_at.x][new_at.y][t->depth];
-        n.insert(std::make_pair(t->id, value));
+        auto n = &game.state.map.things[new_at.x][new_at.y][t->depth];
+        n->insert(std::make_pair(t->id, value));
 
         if (tp_is_wall(tp)) {
             game.state.map.is_wall[old_at.x][old_at.y] = false;

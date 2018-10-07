@@ -85,15 +85,19 @@ static unsigned char *load_raw_image (std::string filename,
     }
 
     if (filename.find(".tga")) {
+        LOG("- stbi_tga_load_from_memory");
         image_data = stbi_tga_load_from_memory(ramdisk_data,
                                                len, x, y, comp, 0);
     } else if (filename.find(".jpg")) {
+        LOG("- stbi_jpeg_load_from_memory");
         image_data = stbi_jpeg_load_from_memory(ramdisk_data,
                                                 len, x, y, comp, 0);
     } else if (filename.find(".bmp")) {
+        LOG("- stbi_bmp_load_from_memory");
         image_data = stbi_bmp_load_from_memory(ramdisk_data,
                                                len, x, y, comp, 0);
     } else if (filename.find(".png")) {
+        LOG("- stbi_png_load_from_memory");
         image_data = stbi_png_load_from_memory(ramdisk_data,
                                                len, x, y, comp, 0);
     } else {
@@ -104,7 +108,7 @@ static unsigned char *load_raw_image (std::string filename,
         DIE("could not read memory for file, '%s'", filename.c_str());
     }
 
-    DBG("Load '%s', %ux%u", filename.c_str(), *x, *y);
+    DBG("loaded '%s', %ux%u", filename.c_str(), *x, *y);
 
     myfree(ramdisk_data);
 
@@ -140,6 +144,7 @@ static SDL_Surface *load_image (std::string filename)
     amask = 0xff000000;
 #endif
 
+    LOG("- SDL_CreateRGBSurface");
     if (comp == 4) {
         surf = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
         newptr(surf, "SDL_CreateRGBSurface");
@@ -159,6 +164,7 @@ static SDL_Surface *load_image (std::string filename)
 
     if (comp == 2) {
         SDL_Surface *old_surf = surf;
+        LOG("- SDL_ConvertSurfaceFormat");
         surf = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
         newptr(surf, "SDL_CreateRGBSurface");
         oldptr(old_surf);
@@ -183,6 +189,7 @@ Texp tex_load (std::string file, std::string name, int mode)
         return (t);
     }
 
+    LOG("loading texture '%s', '%s'", file.c_str(), name.c_str());
     if (file == "") {
         if (name == "") {
             DIE("no file for tex");
@@ -200,7 +207,10 @@ Texp tex_load (std::string file, std::string name, int mode)
         DIE("could not make surface from file '%s'", file.c_str());
     }
 
+    LOG("- create texture '%s', '%s'", file.c_str(), name.c_str());
     t = tex_from_surface(surface, file, name, mode);
+
+    LOG("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
 
     return (t);
 }

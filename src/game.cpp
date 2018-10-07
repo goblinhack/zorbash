@@ -108,6 +108,10 @@ static void game_place_lights (class Dungeon *d,
             continue;
         }
 
+        if (random_range(0, 100)) {
+            continue;
+        }
+
         for (auto dy = 0; dy < block_height; dy++) {
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
@@ -141,9 +145,12 @@ void game_display (void)
         int seed = 663;
         //seed = myrand();
         mysrand(seed);
+        LOG("dungeon: create dungeon %u", seed);
+
         auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 
                                    GRID_WIDTH, GRID_HEIGHT, seed);
 
+        LOG("dungeon: create blocks");
         auto tries = 1000;
         game_place_blocks(dungeon, "wall1", 1, 6, 6, tries);
         game_place_blocks(dungeon, "wall1", 2, 6, 6, tries);
@@ -188,6 +195,7 @@ void game_display (void)
             }
         }
 
+        LOG("dungeon: placed all blocks");
         thing_map_scroll_to_player();
     }
 

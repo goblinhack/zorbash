@@ -22,17 +22,18 @@ Lightp light_new (uint16_t max_light_rays, fpoint at)
     }
 
     point new_at((int)at.x, (int)at.y);
-    auto n = game.state.map.lights[new_at.x][new_at.y];
-    result = n.insert(p);
+    auto n = &game.state.map.lights[new_at.x][new_at.y];
+    result = n->insert(p);
     if (result.second == false) {
         DIE("light insert into map [%d] failed", id);
     }
 
+    t->at = at;
     // t->log("created");
     return (t);
 }
 
-void Light::destroyed (void)
+void Light::pop (void)
 {_
     auto t = this;
 
@@ -42,14 +43,14 @@ _
      * Pop from the map
      */
     point old_at((int)at.x, (int)at.y);
-    auto o = game.state.map.lights[old_at.x][old_at.y];
-    auto iter = o.find(t->id);
-    if (iter == o.end()) {
+    auto o = &game.state.map.lights[old_at.x][old_at.y];
+    auto iter = o->find(t->id);
+    if (iter == o->end()) {
         t->die("thing not found to destroy");
     }
 _
-    auto value = o[t->id];
-    o.erase(iter);
+    auto value = (*o)[t->id];
+    o->erase(iter);
 }
 
 void Light::move_to (fpoint to)
