@@ -9,8 +9,15 @@
 
 #include "my_sdl.h"
 #include "my_dmap.h"
-#include "my_thing.h"
-#include "my_light.h"
+
+class Thing;
+class Light;
+
+typedef std::shared_ptr< class Thing > Thingp;
+typedef std::unordered_map< uint32_t, Thingp > Things;
+
+typedef std::shared_ptr< class Light > Lightp;
+typedef std::unordered_map< uint32_t, Lightp > Lights;
 
 enum {
     MAP_DEPTH_FLOOR,
@@ -20,22 +27,26 @@ enum {
     MAP_DEPTH,
 };
 
+#include <list>
+
 class Map {
 public:
-    Lights              all_lights;
-    std::vector<Lightp> lights[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
-    Things              all_things;
-    std::vector<Thingp> things[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
-    uint8_t             is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t             is_ladder[MAP_WIDTH][MAP_HEIGHT] = {};
-    bool                lit_now_by_player[MAP_WIDTH][MAP_HEIGHT] = {};
-    bool                lit_earlier_by_player[MAP_WIDTH][MAP_HEIGHT] = {};
+    Lights                     all_lights;
+    std::unordered_map<uint32_t, Lightp> 
+                               lights[MAP_WIDTH][MAP_HEIGHT];
+    Things                     all_things;
+    std::unordered_map<uint32_t, Thingp> 
+                               things[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
+    uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_ladder[MAP_WIDTH][MAP_HEIGHT] = {};
   
     template <class Archive>
     void serialize (Archive & archive)
     {
         archive(cereal::make_nvp("all_things",      all_things),
-                cereal::make_nvp("all_lights",      all_lights));
+                cereal::make_nvp("things",          things),
+                cereal::make_nvp("all_lights",      all_lights),
+                cereal::make_nvp("lights",          lights));
     }
 };
 

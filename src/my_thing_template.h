@@ -9,11 +9,12 @@
 #ifndef _MY_THING_TEMPLATE_H
 #define _MY_THING_TEMPLATE_H
 
+#include <unordered_map>
 #include <memory>
 
 typedef std::shared_ptr< class Tp > Tpp;
-typedef std::map< std::string, Tpp > Tpmap;
-typedef std::map< unsigned int, Tpp > Tpmap_create_order;
+typedef std::unordered_map< std::string, Tpp > Tpmap;
+typedef std::unordered_map< unsigned int, Tpp > Tpmap_create_order;
 
 #include "my_tile_info.h"
 

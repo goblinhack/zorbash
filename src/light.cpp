@@ -4,29 +4,31 @@
  * See the LICENSE file for license.
  */
 
-#include "my_light.h"
 #include "my_game.h"
+#include "my_light.h"
 
 static uint32_t light_id;
 
-Lightp light_new (uint16_t max_light_rays)
+Lightp light_new (uint16_t max_light_rays, fpoint at)
 {_
     auto id = ++light_id;
 
     auto t = std::make_shared< class Light >();
-    auto result = game.state.map.all_lights.insert(std::make_pair(id, t));
-
+    t->id = id;
+    auto p = std::make_pair(t->id, t);
+    auto result = game.state.map.all_lights.insert(p);
     if (result.second == false) {
         DIE("light insert [%d] failed", id);
     }
 
-    t->id = id;
-    t->is_on_map      = false;
-    t->max_light_rays = max_light_rays;
+    point new_at((int)at.x, (int)at.y);
+    auto n = game.state.map.lights[new_at.x][new_at.y];
+    result = n.insert(p);
+    if (result.second == false) {
+        DIE("light insert into map [%d] failed", id);
+    }
 
     // t->log("created");
-    t->reset();
-
     return (t);
 }
 
@@ -35,45 +37,48 @@ void Light::destroyed (void)
     auto t = this;
 
     game.state.map.all_lights.erase(t->id);
-}
-
-void Light::pop (void)
-{_
-    auto t = this;
-
-    if (unlikely(!t->is_on_map)) {
-        return;
+_
+    /*
+     * Pop from the map
+     */
+    point old_at((int)at.x, (int)at.y);
+    auto o = game.state.map.lights[old_at.x][old_at.y];
+    auto iter = o.find(t->id);
+    if (iter == o.end()) {
+        t->die("thing not found to destroy");
     }
-
-    t->is_on_map = false;
-
-    fpoint oob = { -1, -1 };
-    t->at = oob;
-
-    t->log("pop");
-}
-
-void Light::reset (void)
-{_
-    std::fill(ray_depth_buffer.begin(), 
-              ray_depth_buffer.begin() + max_light_rays, 0.0);
-    std::fill(ray_rad.begin(), ray_rad.begin() + max_light_rays, 0.0);
+_
+    auto value = o[t->id];
+    o.erase(iter);
 }
 
 void Light::move_to (fpoint to)
 {_
     auto t = this;
 
-    t->is_on_map = true;
+    point old_at((int)t->at.x, (int)t->at.y);
+    point new_at((int)to.x, (int)to.y);
+
+    /*
+     * Keep track of where this light is on the grid
+     */
+    if (old_at != new_at) {
+        /*
+         * Pop
+         */
+        auto o = game.state.map.lights[old_at.x][old_at.y];
+        auto iter = o.find(t->id);
+        auto value = o[t->id];
+        o.erase(iter);
+
+        /*
+         * Add back
+         */
+        auto n = game.state.map.lights[new_at.x][new_at.y];
+        n.insert(std::make_pair(t->id, value));
+    }
 
     t->at = to;
-}
-
-void Light::move_delta (fpoint delta)
-{_
-    auto t = this;
-
-    t->move_to(t->at + delta);
 }
 
 /*
@@ -103,8 +108,8 @@ std::string Light::logname (void)
         loop = 0;
     }
 
-    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "light %u at (%g,%g)",
-             t->id, t->at.x, t->at.y);
+    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u at (%g,%g)",
+             t->id,  t->at.x, t->at.y);
 
     return (tmp[loop++]);
 }
