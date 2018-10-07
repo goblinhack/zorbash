@@ -9,13 +9,11 @@
 #ifndef _MY_LIGHT_H
 #define _MY_LIGHT_H
 
-#include <map>
+#include <unordered_map>
 #include <memory>
+#include "my_game.h"
 #include "my_point.h"
 #include "my_ptrcheck.h"
-
-typedef std::shared_ptr< class Light > Lightp;
-typedef std::map< uint32_t, Lightp > Lights;
 
 class Light
 {
@@ -40,8 +38,7 @@ public:
                 cereal::make_nvp("at",               at),
                 cereal::make_nvp("max_light_rays",   max_light_rays),
                 cereal::make_nvp("ray_depth_buffer", ray_depth_buffer),
-                cereal::make_nvp("ray_rad",          ray_rad),
-                cereal::make_nvp("is_on_map",        is_on_map));
+                cereal::make_nvp("ray_rad",          ray_rad));
     }
 
     /*
@@ -54,7 +51,6 @@ public:
      * if the light moves.
      */
     fpoint             at;
-    bool               is_on_map;
 
     /*
      * Precalculated light rays.
@@ -68,7 +64,6 @@ public:
     void reset(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
-    void pop(void);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -81,6 +76,6 @@ public:
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 };
 
-extern Lightp light_new(uint16_t max_light_arrays);
+extern Lightp light_new(uint16_t max_light_arrays, fpoint at);
 
 #endif /* LIGHT_H */

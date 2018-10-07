@@ -9,8 +9,8 @@
 #include "my_tile.h"
 #include "my_tile_info.h"
 #include "my_tex.h"
-#include "my_game.h"
 #include "my_glapi.h"
+#include "my_thing.h"
 #include <algorithm>
 
 static const double MAX_LIGHT_STRENGTH = 1000.0;
@@ -298,7 +298,8 @@ static void map_lighting_calculate (const int light_index)
     uint8_t z = MAP_DEPTH_WALLS; {
         for (int16_t x = maxx - 1; x >= minx; x--) {
             for (int16_t y = miny; y < maxy; y++) {
-                for (auto t : game.state.map.things[x][y][z]) {
+                for (auto p : game.state.map.things[x][y][z]) {
+                    auto t = p.second;
                     Tpp tp = t->tp;
 
                     if (tp_is_shadow_caster(tp) ||

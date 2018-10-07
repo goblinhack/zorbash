@@ -4,37 +4,43 @@
  * See the LICENSE file for license.
  */
 
-#include "my_tile_info.h"
 #include "my_game.h"
+#include "my_thing.h"
+#include "my_tile_info.h"
 
 static uint32_t thing_id;
 
-Thingp thing_new (std::string tp_name)
+Thingp thing_new (std::string tp_name, fpoint at)
 {_
     auto id = ++thing_id;
 
     auto t = std::make_shared< class Thing >();
-    auto result = game.state.map.all_things.insert(std::make_pair(id, t));
-
-    if (result.second == false) {
-        DIE("thing insert [%d] failed", id);
-    }
-
-    t->id = id;
-    t->tp = tp_find(tp_name);
+    auto tp = t->tp = tp_find(tp_name);
     if (!t->tp) {
         DIE("thing [%s] not found", tp_name.c_str());
     }
 
+    t->id = id;
+    auto p = std::make_pair(t->id, t);
+    auto result = game.state.map.all_things.insert(p);
+    if (result.second == false) {
+        DIE("thing insert [%d] failed", id);
+    }
+
+    point new_at((int)at.x, (int)at.y);
+    auto depth = tp_z_depth(tp);
+    auto n = game.state.map.things[new_at.x][new_at.y][depth];
+    result = n.insert(p);
+    if (result.second == false) {
+        DIE("thing insert into map [%d] failed", id);
+    }
+
     t->dir                          = THING_DIR_NONE;
-    t->is_on_map                    = false;
     t->is_dead                      = false;
     t->is_sleeping                  = false;
     t->is_moving                    = false;
     t->has_ever_moved               = false;
     t->is_open                      = false;
-
-    auto tp = t->tp;
 
     auto tiles = tp_get_left_tiles(tp);
     auto tinfo = tile_info_random(tiles);
@@ -95,8 +101,22 @@ Thingp thing_new (std::string tp_name)
         t->current_tile = tinfo->tile;
     }
 
-    // t->log("created");
+    if (tp_is_player(tp)) {
+        if (game.state.player && (game.state.player != t)) {
+            DIE("player exists in multiple places on map, %f, %f and %f, %f",
+                game.state.player->at.x,
+                game.state.player->at.y,
+                t->at.x,
+                t->at.y);
+        }
+        game.state.player = t;
+    }
 
+    if (tp_is_wall(tp)) {
+        game.state.map.is_wall[new_at.x][new_at.y] = true;
+    }
+
+    // t->log("created");
     return (t);
 }
 
@@ -104,37 +124,83 @@ void Thing::destroyed (void)
 {_
     auto t = this;
 
-    game.state.map.all_things.erase(t->id);
-}
-
-void Thing::pop (void)
-{_
-    auto t = this;
-
-    if (unlikely(!t->is_on_map)) {
-        return;
+    /*
+     * Pop from all things
+     */
+    {
+        auto a = game.state.map.all_things;
+        auto iter = a.find(t->id);
+        if (iter == a.end()) {
+            t->die("thing not found to destroy from all things");
+        }
+        a.erase(t->id);
     }
-
-    t->is_on_map = false;
-
-    fpoint oob = { -1, -1 };
-    t->at = oob;
-
-    t->log("pop");
+_
+    /*
+     * Pop from the map
+     */
+    point old_at((int)at.x, (int)at.y);
+    {
+        auto o = game.state.map.things[old_at.x][old_at.y][t->depth];
+        auto iter = o.find(t->id);
+        if (iter == o.end()) {
+            t->die("thing not found to destroy");
+        }
+_    
+        auto value = o[t->id];
+        o.erase(iter);
+_
+        if (tp_is_wall(tp)) {
+            game.state.map.is_wall[old_at.x][old_at.y] = false;
+        }
+_
+        if (tp_is_player(tp)) {
+            if (game.state.player != value) {
+                game.state.player = nullptr;
+            }
+        }
+    }
 }
 
 void Thing::move_to (fpoint to)
 {_
     auto t = this;
+    auto tp = t->tp;
 
     t->animate();
     t->has_ever_moved = true;
-    t->is_on_map = true;
 
     if (!t->has_ever_moved) {
         t->last_at = to;
     } else {
         t->last_at = t->at;
+    }
+
+    point old_at((int)t->at.x, (int)t->at.y);
+    point new_at((int)to.x, (int)to.y);
+
+    /*
+     * Keep track of where this thing is on the grid
+     */
+    if (old_at != new_at) {
+        /*
+         * Pop
+         */
+        auto o = game.state.map.things[old_at.x][old_at.y][t->depth];
+        auto iter = o.find(t->id);
+        auto value = o[t->id];
+        o.erase(iter);
+
+        /*
+         * Add back
+         */
+        auto n = game.state.map.things[new_at.x][new_at.y][t->depth];
+        n.insert(std::make_pair(t->id, value));
+
+        if (tp_is_wall(tp)) {
+            game.state.map.is_wall[old_at.x][old_at.y] = false;
+            game.state.map.is_wall[new_at.x][new_at.y] = true;
+        }
     }
 
     /*

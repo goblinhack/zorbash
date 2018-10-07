@@ -9,12 +9,13 @@
 #ifndef _MY_THING_H
 #define _MY_THING_H
 
-#include <map>
+#include <unordered_map>
 #include <memory>
 
 typedef std::shared_ptr< class Thing > Thingp;
-typedef std::map< uint32_t, Thingp > Things;
+typedef std::unordered_map< uint32_t, Thingp > Things;
 
+#include "my_game.h"
 #include "my_thing_template.h"
 #include "my_tile_info.h"
 #include "my_time_util.h"
@@ -60,6 +61,11 @@ public:
      * Unique per thing.
      */
     uint32_t           id {};
+
+    /*
+     * Display order
+     */
+    uint8_t            depth;
 
     /*
      * Grid coordinates.
@@ -110,7 +116,6 @@ public:
     uint16_t           hp {};
 
     unsigned int       dir:4;
-    unsigned int       is_on_map:1;
     unsigned int       is_dead:1;
     unsigned int       is_sleeping:1;
     unsigned int       is_moving:1;
@@ -127,12 +132,12 @@ public:
     uint8_t is_dir_tl(void);
     uint8_t is_dir_tr(void);
     uint8_t is_dir_up(void);
+
     void animate();
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
     void destroyed(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
-    void pop(void);
     void set_dir_bl(void);
     void set_dir_br(void);
     void set_dir_down(void);
@@ -155,7 +160,7 @@ public:
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 };
 
-extern Thingp thing_new(std::string tp_name);
+extern Thingp thing_new(std::string tp_name, fpoint at);
 extern Thingp thing_find(uint32_t name);
 extern void thing_animate_all(void);
 extern void thing_render_all(void);
