@@ -310,9 +310,9 @@ static void thing_blit_things (int minx, int miny, int minz,
     const double tdx = game.config.tile_gl_width;
     const double tdy = game.config.tile_gl_height;
 
-    for (int z = minz; z < maxz; z++) {
-        for (int x = minx ; x < maxx; x++) {
-            for (int y = miny ; y < maxy; y++) {
+    for (uint8_t z = minz; z < maxz; z++) {
+        for (uint16_t x = minx ; x < maxx; x++) {
+            for (uint16_t y = miny ; y < maxy; y++) {
                 for (auto p : game.state.map.things[x][y][z]) {
                     auto t = p.second;
 

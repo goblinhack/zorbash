@@ -44,7 +44,7 @@ public:
 
     ~Thing (void)
     {
-        destroyed();
+        // log("destroyed");
         oldptr(this);
     }
 
@@ -133,6 +133,7 @@ public:
     uint8_t is_dir_tr(void);
     uint8_t is_dir_up(void);
 
+    void pop();
     void animate();
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
     void destroyed(void);
