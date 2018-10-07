@@ -111,13 +111,16 @@ Thingp thing_new (std::string tp_name, fpoint at)
                 t->at.y);
         }
         game.state.player = t;
+
+        t->light = light_new(MAX_LIGHT_RAYS, 10, at, LIGHT_QUALITY_HIGH,
+                             WHITE);
     }
 
     if (tp_is_wall(tp)) {
         game.state.map.is_wall[new_at.x][new_at.y] = true;
     }
 
-    // t->log("created");
+    //log("created");
     return (t);
 }
 

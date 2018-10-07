@@ -302,8 +302,7 @@ static void map_lighting_calculate (const int light_index)
                     auto t = p.second;
                     Tpp tp = t->tp;
 
-                    if (tp_is_shadow_caster(tp) ||
-                        unlikely(tp_is_shadow_caster_soft(tp))) {
+                    if (tp_is_shadow_caster(tp)) {
                         map_light_calculate_for_single_obstacle(t, tp, x, y,
                                                                 light_index);
                     }

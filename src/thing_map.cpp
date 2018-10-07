@@ -11,6 +11,7 @@
 #include "my_tex.h"
 #include "my_game.h"
 #include "my_glapi.h"
+#include "my_light.h"
 #include <algorithm>
 
 static void thing_map_scroll_do (void)
@@ -437,6 +438,7 @@ void thing_render_all (void)
     if (game.config.editor_mode) {
         thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
     } else {
+#if 0
         if (game.state.player) {
             map_light_init();
 
@@ -475,6 +477,8 @@ void thing_render_all (void)
 
             map_light_display(FBO_LIGHT_MERGED);
         }
+#endif
+        lights_render(FBO_LIGHT_MERGED);
     }
     
     blit_fbo_bind(FBO_MAIN);

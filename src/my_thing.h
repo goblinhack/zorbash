@@ -19,6 +19,7 @@ typedef std::unordered_map< uint32_t, Thingp > Things;
 #include "my_thing_template.h"
 #include "my_tile_info.h"
 #include "my_time_util.h"
+#include "my_light.h"
 
 enum {
     THING_DIR_NONE,
@@ -82,6 +83,11 @@ public:
      * Pointer to common settings for this thing.
      */
     Tpp                tp {};
+
+    /*
+     * Does this thing have a light source?
+     */
+    Lightp             light;
 
     /*
      * Used for animating the steps.
