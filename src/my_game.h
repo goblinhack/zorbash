@@ -13,10 +13,10 @@
 class Thing;
 class Light;
 
-typedef std::shared_ptr< class Thing > Thingp;
+typedef class Thing* Thingp;
 typedef std::unordered_map< uint32_t, Thingp > Things;
 
-typedef std::shared_ptr< class Light > Lightp;
+typedef class Light* Lightp;
 typedef std::unordered_map< uint32_t, Lightp > Lights;
 
 enum {

@@ -12,7 +12,7 @@
 #include <unordered_map>
 #include <memory>
 
-typedef std::shared_ptr< class Thing > Thingp;
+typedef class Thing* Thingp;
 typedef std::unordered_map< uint32_t, Thingp > Things;
 
 #include "my_game.h"

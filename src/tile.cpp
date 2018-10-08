@@ -11,7 +11,7 @@
 #include "my_size.h"
 #include "my_string.h"
 
-std::map<std::string, std::shared_ptr< class Tile > > all_tiles;
+std::map<std::string, class Tile* > all_tiles;
 
 static uint8_t tile_init_done;
 
@@ -72,7 +72,7 @@ void tile_load_arr (std::string tex_name,
                 ERR("tile name [%s] already used", name.c_str());
             }
 
-	    auto t = std::make_shared< class Tile >();
+	    auto t = new Tile(); // std::make_shared< class Tile >();
 
 	    auto result = all_tiles.insert(std::make_pair(name, t));
 
@@ -336,7 +336,7 @@ Tilep string2tile (std::wstring &s, int *len)
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit_fat (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
+void tile_blit_fat_with_offset (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
 {
     double x1;
     double x2;
@@ -369,46 +369,6 @@ void tile_blit_fat (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
         y1 -= top_off   * pct_h;
         y2 += bot_off   * pct_h;
     }
-
-    blit(tile->gl_surface_binding,
-         x1, y2, x2, y1, tl->x, br->y, br->x, tl->y);
-}
-
-/*
- * Blits a whole tile. Y co-ords are inverted.
- */
-void tile_blit_fat_with_offset (Tpp tp, Tilep tile, 
-                                char *name, fpoint *tl,
-                                fpoint *br,
-                                double left_off,
-                                double right_off,
-                                double top_off,
-                                double bot_off)
-{
-    double x1;
-    double x2;
-    double y1;
-    double y2;
-
-    x1 = tile->x1;
-    x2 = tile->x2;
-    y1 = tile->y1;
-    y2 = tile->y2;
-
-    double pct_w     = tile->pct_width;
-    double pct_h     = tile->pct_height;
-    double pix_w     = br->x - tl->x;
-    double pix_h     = br->y - tl->y;
-
-    tl->x -= left_off  * pix_w;
-    br->x += right_off * pix_w;
-    tl->y -= top_off   * pix_h;
-    br->y += bot_off   * pix_h;
-
-    x1 -= left_off  * pct_w;
-    x2 += right_off * pct_w;
-    y1 -= top_off   * pct_h;
-    y2 += bot_off   * pct_h;
 
     blit(tile->gl_surface_binding,
          x1, y2, x2, y1, tl->x, br->y, br->x, tl->y);

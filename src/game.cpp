@@ -116,8 +116,8 @@ static void game_place_lights (class Dungeon *d,
         }
         col.a = 50;
 
-        auto t = light_new(MAX_LIGHT_RAYS / 4, 1, fpoint(x, y),
-                           LIGHT_QUALITY_LOW, col);
+        (void) light_new(MAX_LIGHT_RAYS / 4, 1, fpoint(x, y),
+                         LIGHT_QUALITY_LOW, col);
     }
 }
 
@@ -131,7 +131,7 @@ static void game_ramaining_place_blocks (class Dungeon *d,
             }
 
             if (d->is_wall_at(x, y)) {
-                auto t = thing_new(what, fpoint(x, y));
+                (void) thing_new(what, fpoint(x, y));
             }
         }
     }
@@ -185,11 +185,11 @@ _
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
                 if (dungeon->is_monst_at(x, y)) {
-                    auto t = thing_new("monst1", fpoint(x, y));
+                    (void) thing_new("monst1", fpoint(x, y));
                 }
 
                 if (dungeon->is_entrance_at(x, y)) {
-                    auto t = thing_new("player1", fpoint(x, y));
+                    (void) thing_new("player1", fpoint(x, y));
                 }
             }
         }
@@ -263,8 +263,5 @@ game_key_down (const struct SDL_KEYSYM *key)
               return (true);
         }
     }
-CON("TBD %s", __FUNCTION__);
-extern void thing_map_test();
-thing_map_test();
     return (false);
 }
