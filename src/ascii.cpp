@@ -412,7 +412,7 @@ int ascii_strlen (std::wstring &text)
                 auto tmp = std::string(text_iter, text.end());
 
                 int len = 0;
-                auto tp = string2tp(tmp, &len);
+                (void) string2tp(tmp, &len);
                 text_iter += len + 1;
 
                 continue;

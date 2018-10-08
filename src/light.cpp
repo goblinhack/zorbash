@@ -20,7 +20,7 @@ Lightp light_new (Thingp owner,
 {_
     auto id = ++light_id;
 
-    auto l = std::make_shared< class Light >();
+    auto l = new Light(); // std::make_shared< class Light >();
     l->id = id;
     auto p = std::make_pair(l->id, l);
     auto result = game.state.map.all_lights.insert(p);
@@ -74,7 +74,6 @@ void Light::pop (void)
         die("thing not found to destroy");
     }
 
-    auto value = (*o)[id];
     o->erase(iter);
 }
 

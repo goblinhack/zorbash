@@ -102,7 +102,7 @@ static void thing_map_blit_background (void)
     blit_flush();
 }
 
-static void thing_blit_wall (Thingp t,
+static void thing_blit_wall (Thingp &t,
                              int x, int y,
                              fpoint tl, fpoint br)
 {  
@@ -115,7 +115,7 @@ static void thing_blit_wall (Thingp t,
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->top_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->top_tile, &tl2, &br2);
     }
 
     if (!game.state.map.is_wall[x][y + 1]) {
@@ -123,7 +123,7 @@ static void thing_blit_wall (Thingp t,
         fpoint br2 = br;
         tl2.y += dh;
         br2.y += dh * 2;
-        tile_blit_fat(tp, t->bot_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->bot_tile, &tl2, &br2);
     }
 
     if (!game.state.map.is_wall[x - 1][y]) {
@@ -131,7 +131,7 @@ static void thing_blit_wall (Thingp t,
         fpoint br2 = br;
         //tl2.x -= dw;
         //br2.x -= dw;
-        tile_blit_fat(tp, t->left_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->left_tile, &tl2, &br2);
     }
 
     if (!game.state.map.is_wall[x + 1][y]) {
@@ -139,7 +139,7 @@ static void thing_blit_wall (Thingp t,
         fpoint br2 = br;
         //tl2.x += dw;
         //br2.x += dw;
-        tile_blit_fat(tp, t->right_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->right_tile, &tl2, &br2);
     }
 
     /*
@@ -156,7 +156,7 @@ static void thing_blit_wall (Thingp t,
         //br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->tl_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->tl_tile, &tl2, &br2);
     }
 
     /*
@@ -173,7 +173,7 @@ static void thing_blit_wall (Thingp t,
         //br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->tr_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->tr_tile, &tl2, &br2);
     }
 
     /*
@@ -191,7 +191,7 @@ static void thing_blit_wall (Thingp t,
         //br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->tr_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->tr_tile, &tl2, &br2);
     }
 
     /*
@@ -209,7 +209,7 @@ static void thing_blit_wall (Thingp t,
         //br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->tl_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->tl_tile, &tl2, &br2);
     }
 
     dw = 0.00;
@@ -229,7 +229,7 @@ static void thing_blit_wall (Thingp t,
         br2.x -= dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit_fat(tp, t->bl_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->bl_tile, &tl2, &br2);
     }
 
     /*
@@ -246,7 +246,7 @@ static void thing_blit_wall (Thingp t,
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit_fat(tp, t->br_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->br_tile, &tl2, &br2);
     }
 
     /*
@@ -264,7 +264,7 @@ static void thing_blit_wall (Thingp t,
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit_fat(tp, t->br_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->br_tile, &tl2, &br2);
     }
 
     /*
@@ -282,11 +282,11 @@ static void thing_blit_wall (Thingp t,
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit_fat(tp, t->bl_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->bl_tile, &tl2, &br2);
     }
 }
 
-static void thing_blit_ladder (Thingp t,
+static void thing_blit_ladder (Thingp &t,
                                int x, int y,
                                fpoint tl, fpoint br)
 {  
@@ -298,7 +298,7 @@ static void thing_blit_ladder (Thingp t,
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->top_tile, 0, &tl2, &br2);
+        tile_blit_fat(tp, t->top_tile, &tl2, &br2);
     }
 }
 
@@ -347,7 +347,7 @@ static void thing_blit_things (int minx, int miny, int minz,
                         tile = t->current_tile;
                     }
 
-                    tile_blit_fat(tp, tile, 0, &tl, &br);
+                    tile_blit_fat(tp, tile, &tl, &br);
 
                     //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
@@ -438,46 +438,6 @@ void thing_render_all (void)
     if (game.config.editor_mode) {
         thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
     } else {
-#if 0
-        if (game.state.player) {
-            map_light_init();
-
-            fpoint at;
-            color c;
-            
-            at = game.state.player->at;
-
-            at.x = 72;
-            at.y = 9;
-            c = RED;
-            c.a = 255;
-            map_light_add(game.state.player->tp, at, 5.0, c, false);
-            map_light_add(game.state.player->tp, at, 5.0, c, false);
-            map_light_add(game.state.player->tp, at, 5.0, c, false);
-            map_light_add(game.state.player->tp, at, 5.0, c, false);
-
-            at.x = 82;
-            at.y = 7;
-            c = GREEN;
-            c.a = 255;
-            map_light_add(game.state.player->tp, at, 3.0, c, false);
-
-            at.x = 70;
-            at.y = 12;
-            c = BLUE;
-            c.a = 255;
-            map_light_add(game.state.player->tp, at, 3.0, c, false);
-
-            at = game.state.player->at;
-            at.x += 0.5;
-            at.y += 0.5;
-            c = WHITE;
-            c.a = 50;
-            map_light_add(game.state.player->tp, at, 8.0, c, true);
-
-            map_light_display(FBO_LIGHT_MERGED);
-        }
-#endif
         lights_render(FBO_LIGHT_MERGED);
     }
     

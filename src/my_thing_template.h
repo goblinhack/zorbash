@@ -12,7 +12,7 @@
 #include <unordered_map>
 #include <memory>
 
-typedef std::shared_ptr< class Tp > Tpp;
+typedef class Tp* Tpp;
 typedef std::unordered_map< std::string, Tpp > Tpmap;
 typedef std::unordered_map< unsigned int, Tpp > Tpmap_create_order;
 
@@ -97,6 +97,7 @@ public:
     Tileinfomap t270_tiles;
     Tileinfomap x_tiles;
 
+    int blit_off {};
     int blit_top_off {};
     int blit_bot_off {};
     int blit_left_off {};
@@ -172,22 +173,22 @@ std::string tp_name(Tpp);
 std::string tp_short_name(Tpp);
 std::string tp_raw_name(Tpp);
 
-static inline int32_t tp_get_blit_top_off (Tpp t)
+static inline int32_t tp_get_blit_top_off (Tpp &t)
 {
     return (t->blit_top_off);
 }
 
-static inline int32_t tp_get_blit_bot_off (Tpp t)
+static inline int32_t tp_get_blit_bot_off (Tpp &t)
 {
     return (t->blit_bot_off);
 }
 
-static inline int32_t tp_get_blit_left_off (Tpp t)
+static inline int32_t tp_get_blit_left_off (Tpp &t)
 {
     return (t->blit_left_off);
 }
 
-static inline int32_t tp_get_blit_right_off (Tpp t)
+static inline int32_t tp_get_blit_right_off (Tpp &t)
 {
     return (t->blit_right_off);
 }

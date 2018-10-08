@@ -37,7 +37,7 @@ Tpp tp_load (int id, std::string name)
         ERR("too many thing templates");
     }
 
-    auto t = std::make_shared< class Tp >();
+    auto t = new Tp();
 
     {
         auto result = tp_map.insert(std::make_pair(name, t));

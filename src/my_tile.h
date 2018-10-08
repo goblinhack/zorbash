@@ -10,7 +10,7 @@
 #define _MY_TILE_H_
 
 #include <memory>
-typedef std::shared_ptr< class Tile > Tilep;
+typedef class Tile*  Tilep;
 
 #include <map>
 #include "my_main.h"
@@ -18,6 +18,7 @@ typedef std::shared_ptr< class Tile > Tilep;
 #include "my_color.h"
 #include "my_tex.h"
 #include "my_thing_template.h"
+#include "my_glapi.h"
 
 class Tile {
 
@@ -72,8 +73,8 @@ public:
     uint8_t pix[MAX_TILE_WIDTH][MAX_TILE_HEIGHT] = {};
 };
 
-extern std::map<std::string, std::shared_ptr< class Tile > > all_tiles;
-typedef std::shared_ptr< class Tile > Tilep;
+extern std::map<std::string, class Tile* > all_tiles;
+typedef class Tile* Tilep;
 
 uint8_t tile_init(void);
 void tile_fini(void);
@@ -104,14 +105,28 @@ void tile_blit_colored_fat(Tpp tp,
                            color color_tr,
                            color color_bl,
                            color color_br);
-void tile_blit_fat(Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br);
-void tile_blit_fat_with_offset(Tpp tp, Tilep tile, 
-                               char *name, fpoint *tl,
-                               fpoint *br,
-                               double left_off,
-                               double right_off,
-                               double top_off,
-                               double bot_off);
+
+/*
+ * Blits a whole tile. Y co-ords are inverted.
+ */
+static inline void tile_blit_fat (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
+{
+    double x1;
+    double x2;
+    double y1;
+    double y2;
+
+    x1 = tile->x1;
+    x2 = tile->x2;
+    y1 = tile->y1;
+    y2 = tile->y2;
+
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl->x, br->y, br->x, tl->y);
+}
+
+void tile_blit_fat_with_offset(Tpp &tp, Tilep &tile, 
+                               fpoint *tl, fpoint *br);
+
 void tile_get_blit_size(Tpp tp, Tilep tile, char *name, 
                         fpoint *tl, fpoint *br);
 void tile_blit_at(Tilep tile, char *name, fpoint tl, fpoint br);

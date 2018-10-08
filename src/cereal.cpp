@@ -7,6 +7,7 @@
     
 int cereal_test (const std::string save_file)
 {
+#if 0
     {
         Map the_map;
 
@@ -38,6 +39,7 @@ int cereal_test (const std::string save_file)
         archive_out(in_game);
     }
 
+#endif
 //    exit(0);
     return 0;
 }

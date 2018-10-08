@@ -14,7 +14,6 @@
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #undef  ENABLE_GENERATE_TTF        // Edit .RUNME, look for ENABLE_GENERATE_TTF
 #define ENABLE_INVERTED_GFX        // For vision impaired
-#define ENABLE_THING_SANITY        // Checks on thing insert
 
 /*
  * Dungeon size; composed of a grid of rooms
@@ -34,8 +33,7 @@
 /*
  * Light sources
  */
-#define MAX_LIGHT_RAYS              (1024)
-#define MAX_LIGHTS                  (MAP_WIDTH * MAP_HEIGHT)
+#define MAX_LIGHT_RAYS              (512)
 
 /*
  * Per screen

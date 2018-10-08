@@ -14,7 +14,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
 {_
     auto id = ++thing_id;
 
-    auto t = std::make_shared< class Thing >();
+    auto t = new Thing(); // std::make_shared< class Thing >();
     auto tp = t->tp = tp_find(tp_name);
     if (!t->tp) {
         DIE("thing [%s] not found", tp_name.c_str());
