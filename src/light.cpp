@@ -63,7 +63,7 @@ Lightp light_new (uint16_t max_light_rays,
 void Light::pop (void)
 {_
     game.state.map.all_lights.erase(id);
-_
+
     /*
      * Pop from the map
      */
@@ -73,7 +73,7 @@ _
     if (iter == o->end()) {
         die("thing not found to destroy");
     }
-_
+
     auto value = (*o)[id];
     o->erase(iter);
 }
@@ -170,7 +170,7 @@ void Light::calculate_for_obstacle (Thingp t, int x, int y)
     int otly = y;
     int obrx = x + 1;
     int obry = y + 1;
-_
+
     /*
      * No blocking our own light.
      */
@@ -219,7 +219,7 @@ _
      * For each clockwise side of the tile.
      */
     fpoint light_pos = at;
-_
+
     /*
      * For each clockwise quadrant.
      */
@@ -274,7 +274,7 @@ _
         auto dr = tot_rad / tot_deg;
         auto rad = p2_rad;
         int deg = p2_deg;
-_
+
         /*
          * For each blocking radian, look at the distance to the light.
          * If closer than what is blocking that radian curretly, then use 
@@ -327,18 +327,18 @@ void Light::calculate (void)
      * Reset the per light z buffer
      */
     std::fill(ray_depth_buffer.begin(), ray_depth_buffer.end(), 0);
-_
+
     /*
      * First generate the right ray lengths.
      */
     auto dr = RAD_360 / (double) max_light_rays;
     auto rad = 0.0;
-_
+
     for (auto i = 0; i < max_light_rays; i++) {
         ray_rad[i] = rad;
         rad += dr;
     }
-_
+
     auto light_radius = strength;
     auto visible_width = light_radius + 1;
     auto visible_height = light_radius + 1;
@@ -363,7 +363,7 @@ _
     if (unlikely(maxy > MAP_HEIGHT)) {
         maxy = MAP_HEIGHT;
     }
-_
+
     uint8_t z = MAP_DEPTH_WALLS;
     for (int16_t x = maxx - 1; x >= minx; x--) {
         for (int16_t y = miny; y < maxy; y++) {
@@ -379,7 +379,6 @@ _
 
 void lights_calculate (void)
 {
-_
     for (uint16_t x = 0 ; x < MAP_WIDTH; x++) {
         for (uint16_t y = 0 ; y < MAP_HEIGHT; y++) {
             for (auto p : game.state.map.lights[x][y]) {
@@ -550,7 +549,6 @@ void Light::render (int fbo)
 
 void lights_render (int fbo)
 {
-_
     for (uint16_t x = 0 ; x < MAP_WIDTH; x++) {
         for (uint16_t y = 0 ; y < MAP_HEIGHT; y++) {
             for (auto p : game.state.map.lights[x][y]) {
