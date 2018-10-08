@@ -35,7 +35,7 @@ Lightp light_new (Thingp owner,
         DIE("light insert into map [%d] failed", id);
     }
 
-    l->at             = at;
+    l->at             = at + fpoint(0.5, 0.5);
     l->strength       = strength;
     l->owner          = owner;
     l->quality        = quality;
@@ -80,6 +80,8 @@ _
 
 void Light::move_to (fpoint to)
 {_
+    to += fpoint(0.5, 0.5);
+
     point old_at((int)at.x, (int)at.y);
     point new_at((int)to.x, (int)to.y);
 
@@ -90,16 +92,19 @@ void Light::move_to (fpoint to)
         /*
          * Pop
          */
-        auto o = game.state.map.lights[old_at.x][old_at.y];
-        auto iter = o.find(id);
-        auto value = o[id];
-        o.erase(iter);
+        auto o = &game.state.map.lights[old_at.x][old_at.y];
+        auto iter = o->find(id);
+        if (iter == o->end()) {
+            die("not found on map");
+        }
+        auto value = (*o)[id];
+        o->erase(iter);
 
         /*
          * Add back
          */
-        auto n = game.state.map.lights[new_at.x][new_at.y];
-        n.insert(std::make_pair(id, value));
+        auto n = &game.state.map.lights[new_at.x][new_at.y];
+        n->insert(std::make_pair(id, value));
     }
 
     at = to;
@@ -385,7 +390,7 @@ _
     }
 }
 
-void Light::render_rays (void)
+void Light::render_triangle_fans (void)
 {
     auto light_radius = strength;
     auto tx = at.x - game.state.map_at.x;
@@ -525,10 +530,7 @@ void Light::render (int fbo)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
 
-        /*
-         * Draw the light sources. First pass is for solid obstacles.
-         */
-//        map_lighting_render(i);
+        render_triangle_fans();
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         blit_fbo_bind(fbo);
@@ -542,7 +544,7 @@ void Light::render (int fbo)
 
         glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
 
-//        map_lighting_render(i);
+        render_triangle_fans();
     }
 }
 

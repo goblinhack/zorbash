@@ -28,7 +28,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
     }
 
     point new_at((int)at.x, (int)at.y);
-    auto depth = tp_z_depth(tp);
+    auto depth = t->depth = tp_z_depth(tp);
     auto n = &game.state.map.things[new_at.x][new_at.y][depth];
     result = n->insert(p);
     if (result.second == false) {
@@ -112,8 +112,11 @@ Thingp thing_new (std::string tp_name, fpoint at)
         }
         game.state.player = t;
 
-        t->light = light_new(MAX_LIGHT_RAYS, 10, at, LIGHT_QUALITY_HIGH,
-                             WHITE);
+        color col = WHITE;
+        col.a = 50;
+        t->light = light_new(MAX_LIGHT_RAYS, 8, at, LIGHT_QUALITY_HIGH, col);
+
+        t->log("player created");
     }
 
     if (tp_is_wall(tp)) {
@@ -179,7 +182,7 @@ void Thing::move_to (fpoint to)
     } else {
         t->last_at = t->at;
     }
-
+_
     point old_at((int)t->at.x, (int)t->at.y);
     point new_at((int)to.x, (int)to.y);
 
@@ -192,6 +195,10 @@ void Thing::move_to (fpoint to)
          */
         auto o = &game.state.map.things[old_at.x][old_at.y][t->depth];
         auto iter = o->find(t->id);
+        if (iter == o->end()) {
+            die("not found on map move");
+        }
+
         auto value = (*o)[t->id];
         o->erase(iter);
 
@@ -206,7 +213,7 @@ void Thing::move_to (fpoint to)
             game.state.map.is_wall[new_at.x][new_at.y] = true;
         }
     }
-
+_
     /*
      * Moves are immediate, but we render the move in steps, hence keep
      * track of when we moved.
@@ -214,6 +221,15 @@ void Thing::move_to (fpoint to)
     t->at = to;
     t->last_move_ms = time_get_time_ms_cached();
     t->end_move_ms = t->last_move_ms + ONESEC / 10;
+_
+    /*
+     * Light source follows the thing.
+     */
+    if (t->light) {
+_
+        t->light->move_to(at);
+        t->light->calculate();
+    }
 }
 
 void Thing::move_delta (fpoint delta)
