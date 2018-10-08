@@ -84,7 +84,7 @@ public:
     void calculate_for_obstacle(Thingp t, int x, int y);
     void calculate(void);
 
-    void render_rays(void);
+    void render_triangle_fans(void);
     void render(int fbo);
 
     void log_(const char *fmt, va_list args); // compile error without

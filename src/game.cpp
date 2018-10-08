@@ -32,10 +32,6 @@ static void game_place_blocks (class Dungeon *d,
                     can_place_wall_here = false;
                     break;
                 }
-                if (game.state.map.is_wall[X][Y]) {
-                    can_place_wall_here = false;
-                    break;
-                }
             }
             if (!can_place_wall_here) {
                 break;
@@ -94,10 +90,6 @@ static void game_place_lights (class Dungeon *d,
                     can_place_light_here = false;
                     break;
                 }
-                if (game.state.map.is_wall[X][Y]) {
-                    can_place_light_here = false;
-                    break;
-                }
             }
             if (!can_place_light_here) {
                 break;
@@ -108,29 +100,24 @@ static void game_place_lights (class Dungeon *d,
             continue;
         }
 
-        if (random_range(0, 100)) {
+        if (random_range(0, 100) > 20) {
             continue;
         }
 
-        for (auto dy = 0; dy < block_height; dy++) {
-            auto Y = y + dy;
-            for (auto dx = 0; dx < block_width; dx++) {
-                auto X = x + dx;
+        color col;
 
-                color col;
-
-                auto r = random_range(0, 100);
-                if (r < 25) {
-                    col = RED;
-                } else if (r < 75) {
-                    col = GREEN;
-                } else {
-                    col = BLUE;
-                }
-                auto t = light_new(MAX_LIGHT_RAYS, 3, fpoint(X, Y),
-                                   LIGHT_QUALITY_LOW, col);
-            }
+        auto r = random_range(0, 100);
+        if (r < 25) {
+            col = RED;
+        } else if (r < 75) {
+            col = GREEN;
+        } else {
+            col = BLUE;
         }
+        col.a = 50;
+
+        auto t = light_new(MAX_LIGHT_RAYS / 4, 1, fpoint(x, y),
+                           LIGHT_QUALITY_LOW, col);
     }
 }
 
@@ -263,16 +250,16 @@ game_key_down (const struct SDL_KEYSYM *key)
         double d = 0.2;
         switch (key->sym) {
             case SDLK_LEFT:
-              game.state.player->at.x -= d;
+              game.state.player->move_delta(fpoint(-d, 0));
               return (true);
             case SDLK_RIGHT:
-              game.state.player->at.x += d;
+              game.state.player->move_delta(fpoint(d, 0));
               return (true);
             case SDLK_UP:
-              game.state.player->at.y -= d;
+              game.state.player->move_delta(fpoint(0, -d));
               return (true);
             case SDLK_DOWN:
-              game.state.player->at.y += d;
+              game.state.player->move_delta(fpoint(0, d));
               return (true);
         }
     }
