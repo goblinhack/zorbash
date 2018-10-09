@@ -70,6 +70,7 @@ public:
     uint16_t           max_light_rays;
     std::vector<float> ray_depth_buffer;
     std::vector<float> ray_rad;
+    std::vector<float> glbuf;
     LightQuality       quality;
     color              col;
 

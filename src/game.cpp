@@ -19,8 +19,8 @@ static void game_place_blocks (class Dungeon *d,
                                int tries)
 {_
     while (tries--) {
-        auto x = random_range(0, MAP_WIDTH);
-        auto y = random_range(0, MAP_HEIGHT);
+        auto x = random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
 
         auto can_place_wall_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -28,11 +28,25 @@ static void game_place_blocks (class Dungeon *d,
             for (auto dy = 0; dy < block_height; dy++) {
                 auto Y = y + dy;
 
+                if (d->is_oob(X, Y)) {
+                    continue;
+                }
+
                 if (!d->is_wall_at(X, Y)) {
                     can_place_wall_here = false;
                     break;
                 }
+
+                /*
+                 * We place large blocks and avoid splatting them with
+                 * smaller ones here.
+                 */
+                if (game.state.map.is_wall[X][Y]) {
+                    can_place_wall_here = false;
+                    continue;
+                }
             }
+
             if (!can_place_wall_here) {
                 break;
             }
@@ -100,19 +114,19 @@ static void game_place_lights (class Dungeon *d,
             continue;
         }
 
-        if (random_range(0, 100) > 20) {
+        if (random_range(0, 100) > 50) {
             continue;
         }
 
         color col;
 
         auto r = random_range(0, 100);
-        if (r < 25) {
-            col = RED;
-        } else if (r < 75) {
+        if (r < 75) {
             col = GREEN;
-        } else {
+        } else if (r < 95) {
             col = BLUE;
+        } else {
+            col = RED;
         }
         col.a = 50;
 

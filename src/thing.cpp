@@ -28,6 +28,9 @@ Thingp thing_new (std::string tp_name, fpoint at)
     }
 
     point new_at((int)at.x, (int)at.y);
+    if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
+        DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
+    }
     auto depth = t->depth = tp_z_depth(tp);
     auto n = &game.state.map.things[new_at.x][new_at.y][depth];
     result = n->insert(p);
