@@ -276,8 +276,8 @@ const uint32_t NUMBER_FLOATS_PER_VERTICE_3D = NUMBER_BYTES_PER_VERTICE_3D / size
 /*
  * Two arrays, xy and uv.
  */
-static float *gl_array_buf;
-static float *gl_array_buf_end;
+float *gl_array_buf;
+float *gl_array_buf_end;
 
 /*
  * Where we are currently up to in writing to these buffers.
@@ -566,7 +566,7 @@ void blit_flush_triangle_fan_smoothed (void)
     glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
 
     double d = 0.03;
-    int blur = 4;
+    int blur = 3;
     while (blur--) {
 
         glTranslatef(-d, 0, 0);

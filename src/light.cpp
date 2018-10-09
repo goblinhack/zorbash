@@ -463,6 +463,11 @@ void Light::render_triangle_fans (void)
         }
     }
 
+CON("XXX");
+    auto sz = (bufp - gl_array_buf) * sizeof(float);
+    glbuf.resize(sz);
+    std::copy(gl_array_buf, bufp, glbuf.begin());
+
     if (quality == LIGHT_QUALITY_HIGH) {
         /*
          * This does multiple renders of the fan with blurring.

@@ -430,24 +430,33 @@ void thing_render_all (void)
 
     thing_map_scroll_do();
 
-    blit_fbo_bind(FBO_LIGHT_MERGED);
-    glClearColor(0,0,0,0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glcolor(WHITE);
+    auto lighting = false;
+    if (lighting) {
+        blit_fbo_bind(FBO_LIGHT_MERGED);
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glcolor(WHITE);
 
-    if (game.config.editor_mode) {
-        thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
-    } else {
         lights_render(FBO_LIGHT_MERGED);
-    }
-    
-    blit_fbo_bind(FBO_MAIN);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    thing_map_blit_background();
-    thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
+        
+        blit_fbo_bind(FBO_MAIN);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        thing_map_blit_background();
+        thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
 
-    glBindTexture(GL_TEXTURE_2D, 0);
-    blit_fbo_bind(FBO_MAIN);
-    glBlendFunc(GL_ZERO, GL_SRC_COLOR);
-    blit_fbo(FBO_LIGHT_MERGED);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        blit_fbo_bind(FBO_MAIN);
+        glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+        blit_fbo(FBO_LIGHT_MERGED);
+    } else {
+        blit_fbo_bind(FBO_MAIN);
+
+        if (game.config.editor_mode) {
+            thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
+        }
+        
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        thing_map_blit_background();
+        thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
+    }
 }

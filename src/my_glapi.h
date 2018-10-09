@@ -377,3 +377,6 @@ extern GLuint fbo_tex_id[MAX_FBO];
 void blit_fbo(int fbo);
 void blit_fbo_bind(int fbo);
 void blit_fbo_unbind(void);
+
+extern float *gl_array_buf;
+extern float *gl_array_buf_end;
