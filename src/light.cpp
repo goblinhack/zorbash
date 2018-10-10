@@ -11,6 +11,12 @@
 
 static uint32_t light_id;
 
+static Texp light_overlay_tex;
+static int light_overlay_texid;
+
+static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
+static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+    
 Lightp light_new (Thingp owner, 
                   uint16_t max_light_rays, 
                   double strength,
@@ -384,7 +390,19 @@ void lights_calculate (void)
         for (uint16_t y = 0 ; y < MAP_HEIGHT; y++) {
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
-                l->calculate();
+
+                switch (l->quality) {
+                case LIGHT_QUALITY_HIGH:
+                case LIGHT_QUALITY_LOW:
+                    l->calculate();
+                    break;
+
+                case LIGHT_QUALITY_POINT:
+                    break;
+
+                default:
+                    DIE("unknownd light quality");
+                }
             }
         }
     }
@@ -510,14 +528,6 @@ void Light::render_triangle_fans (void)
      * fade off of the light.
      */
     if (quality == LIGHT_QUALITY_HIGH) {
-        static Texp tex;
-        static int buf;
-        
-        if (!tex) {
-            tex = tex_load("", "light", GL_LINEAR);
-            buf = tex_get_gl_binding(tex);
-        }
- 
         auto radius = strength;
 
         /*
@@ -542,15 +552,49 @@ void Light::render_triangle_fans (void)
         blit_init();
         glcolor(WHITE);
         glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
-        blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+        blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         blit_flush();
    }
    glTranslatef(ox, oy, 0);
 }
 
+void Light::render_point_light (void)
+{
+    auto tx = at.x;
+    auto ty = at.y;
+    fpoint light_pos(tx * tile_gl_width_pct, ty * tile_gl_height_pct);
+
+    fpoint off(game.state.map_at.x * tile_gl_width_pct, 
+               game.state.map_at.y * tile_gl_height_pct);
+    auto ox = off.x;
+    auto oy = off.y;
+
+    glTranslatef(-ox, -oy, 0);
+
+    double lw = strength * tile_gl_width_pct;
+    double lh = strength * tile_gl_height_pct;
+    double p1x = light_pos.x - lw;
+    double p1y = light_pos.y - lh;
+    double p2x = light_pos.x + lw;
+    double p2y = light_pos.y + lh;
+
+    blit_init();
+    glcolor(col);
+    blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+    blit_flush();
+
+    glTranslatef(ox, oy, 0);
+}
+
 void Light::render (int fbo)
 {
-    if (quality == LIGHT_QUALITY_HIGH) {
+    if (!light_overlay_tex) {
+        light_overlay_tex = tex_load("", "light", GL_LINEAR);
+        light_overlay_texid = tex_get_gl_binding(light_overlay_tex);
+    }
+
+    switch (quality) {
+    case LIGHT_QUALITY_HIGH:
         /*
          * For high quality we render the light to its own FBO. This gives
          * better light color blending but is slower.
@@ -563,7 +607,6 @@ void Light::render (int fbo)
         /*
          * We want to merge successive light sources together.
          */
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
 
         render_triangle_fans();
@@ -572,15 +615,25 @@ void Light::render (int fbo)
         blit_fbo_bind(fbo);
         blit_fbo(FBO_LIGHT_MASK);
         blit_fbo_unbind();
-    } else {
+        break;
+
+    case LIGHT_QUALITY_LOW:
         /*
          * Draw direct to the FBO.
          */
         blit_fbo_bind(fbo);
-
         glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
-
         render_triangle_fans();
+        break;
+
+    case LIGHT_QUALITY_POINT:
+        blit_fbo_bind(fbo);
+        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+        render_point_light();
+        break;
+
+    default:
+        DIE("unknownd light quality");
     }
 }
 
