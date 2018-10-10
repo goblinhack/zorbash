@@ -527,6 +527,46 @@ void blit_flush_triangle_fan (void)
     blit_init();
 }
 
+void blit_flush_triangle_fan (float *b, float *e)
+{_
+    /*
+     * Display all the tiles selected above in one blast.
+     */
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+
+    static long nvertices;
+
+    static const GLsizei stride =
+                        sizeof(GLfloat) *
+                        NUMBER_DIMENSIONS_PER_COORD_2D +
+                        sizeof(GLfloat) *
+                        NUMBER_COMPONENTS_PER_COLOR;
+
+    nvertices = ((char*)e - (char*)b) / stride;
+
+    glVertexPointer(
+        NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
+        GL_FLOAT,
+        stride,
+        b);
+
+    glColorPointer(
+        NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
+        GL_FLOAT,
+        stride,
+        ((char*)b) +
+            sizeof(GLfloat) *        // skip (x,y)
+            NUMBER_DIMENSIONS_PER_COORD_2D);
+
+    glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
+
+    blit_init();
+}
+
 void blit_flush_triangle_fan_smoothed (void)
 {
     if (gl_array_buf == bufp) {
@@ -565,8 +605,87 @@ void blit_flush_triangle_fan_smoothed (void)
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
 
-    double d = 0.03;
-    int blur = 3;
+    double d = 0.02;
+    int blur = 4;
+    while (blur--) {
+
+        glTranslatef(-d, 0, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(d, 0, 0);
+
+        glTranslatef(d, 0, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(-d, 0, 0);
+
+        glTranslatef(0,-d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(0,d, 0);
+
+        glTranslatef(0,d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(0,-d, 0);
+
+        glTranslatef(-d, -d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(d, d, 0);
+
+        glTranslatef(d, d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(-d, -d, 0);
+
+        glTranslatef(-d, +d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(d, -d, 0);
+
+        glTranslatef(d, -d, 0);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+        glTranslatef(-d, d, 0);
+
+        d *= 0.7;
+    }
+
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_COLOR_ARRAY);
+
+    blit_init();
+}
+
+void blit_flush_triangle_fan_smoothed (float *b, float *e)
+{
+    /*
+     * Display all the tiles selected above in one blast.
+     */
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+
+    static long nvertices;
+
+    static const GLsizei stride =
+                        sizeof(GLfloat) *
+                        NUMBER_DIMENSIONS_PER_COORD_2D +
+                        sizeof(GLfloat) *
+                        NUMBER_COMPONENTS_PER_COLOR;
+
+    nvertices = ((char*)e - (char*)b) / stride;
+
+    glVertexPointer(
+        NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
+        GL_FLOAT,
+        stride,
+        b);
+
+    glColorPointer(
+        NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
+        GL_FLOAT,
+        stride,
+        ((char*)b) +
+            sizeof(GLfloat) *        // skip (x,y)
+            NUMBER_DIMENSIONS_PER_COORD_2D);
+
+    glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
+
+    double d = 0.02;
+    int blur = 4;
     while (blur--) {
 
         glTranslatef(-d, 0, 0);

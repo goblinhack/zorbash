@@ -229,7 +229,6 @@ _
      * Light source follows the thing.
      */
     if (t->light) {
-_
         t->light->move_to(at);
         t->light->calculate();
     }

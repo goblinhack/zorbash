@@ -63,6 +63,9 @@ public:
      */
     Thingp             owner;
 
+    double             flicker_radius;
+    uint8_t            flicker {0};
+
     /*
      * Precalculated light rays.
      */
