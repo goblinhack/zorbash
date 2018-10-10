@@ -327,6 +327,8 @@ void Light::calculate (void)
      */
     std::fill(ray_depth_buffer.begin(), ray_depth_buffer.end(), 0);
 
+    glbuf.clear();
+
     /*
      * First generate the right ray lengths.
      */
@@ -390,94 +392,117 @@ void lights_calculate (void)
 
 void Light::render_triangle_fans (void)
 {
-    auto light_radius = strength;
-    auto tx = at.x - game.state.map_at.x;
-    auto ty = at.y - game.state.map_at.y;
     static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
     static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+
+    auto tx = at.x;
+    auto ty = at.y;
     fpoint light_pos(tx * tile_gl_width_pct, ty * tile_gl_height_pct);
-    auto c = col;
-    auto red   = ((double)c.r) / 255.0;
-    auto green = ((double)c.g) / 255.0;
-    auto blue  = ((double)c.b) / 255.0;
-    auto alpha = ((double)c.a) / 255.0;
 
-    /*
-     * How much the light pushes into a block. Too much and you can see
-     * below the block which we don't want.
-     */
-    double light_penetrate = 0.5;
+    fpoint off(game.state.map_at.x * tile_gl_width_pct, 
+               game.state.map_at.y * tile_gl_height_pct);
+    auto ox = off.x;
+    auto oy = off.y;
 
-    blit_init();
-    {
-        int i;
+    glTranslatef(-ox, -oy, 0);
+
+    if (!glbuf.size()) {
+        auto c = col;
+        auto red   = ((double)c.r) / 255.0;
+        auto green = ((double)c.g) / 255.0;
+        auto blue  = ((double)c.b) / 255.0;
+        auto alpha = ((double)c.a) / 255.0;
 
         /*
-         * Walk the light rays in a circle.
+         * How much the light pushes into a block. Too much and you can see
+         * below the block which we don't want.
          */
-        push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
+        double light_penetrate = 0.5;
 
-        for (i = 0; i < max_light_rays; i++) {
-            double radius = ray_depth_buffer[i];
-            double rad = ray_rad[i];
-            if (radius < 0.01) {
-                radius = light_radius;
+        blit_init();
+        {
+            int i;
+
+            /*
+             * Walk the light rays in a circle.
+             */
+            push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
+
+            for (i = 0; i < max_light_rays; i++) {
+                double radius = ray_depth_buffer[i];
+                double rad = ray_rad[i];
+                if (radius < 0.01) {
+                    radius = strength;
+                }
+
+                /*
+                 * This makes the light ray bulge which makes it easier to see
+                 * tiles close to the player.
+                 */
+                radius += sqrt(light_penetrate / radius);
+
+                double cosr;
+                double sinr;
+                sincos(rad, &sinr, &cosr);
+
+                double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
+                double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
+
+                push_point(p1x, p1y, red, green * 0.8, blue *0.8, 0);
             }
 
             /*
-             * This makes the light ray bulge which makes it easier to see
-             * tiles close to the player.
+             * Complete the circle with the first point again.
              */
-            radius += sqrt(light_penetrate / radius);
+            i = 0; {
+                double radius = ray_depth_buffer[i];
+                double rad = ray_rad[i];
+                if (radius < 0.01) {
+                    radius = strength;
+                }
 
-            double cosr;
-            double sinr;
-            sincos(rad, &sinr, &cosr);
+                radius += sqrt(light_penetrate / radius);
 
-            double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
-            double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
+                double cosr;
+                double sinr;
+                sincos(rad, &sinr, &cosr);
 
-            push_point(p1x, p1y, red, green, blue, 0);
-        }
+                double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
+                double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
 
-        /*
-         * Complete the circle with the first point again.
-         */
-        i = 0; {
-            double radius = ray_depth_buffer[i];
-            double rad = ray_rad[i];
-            if (radius < 0.01) {
-                radius = light_radius;
+                push_point(p1x, p1y, red, green * 0.8, blue *0.8, 0);
             }
-
-            radius += sqrt(light_penetrate / radius);
-
-            double cosr;
-            double sinr;
-            sincos(rad, &sinr, &cosr);
-
-            double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
-            double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
-
-            push_point(p1x, p1y, red, green, blue, 0);
         }
-    }
 
-CON("XXX");
-    auto sz = (bufp - gl_array_buf) * sizeof(float);
-    glbuf.resize(sz);
-    std::copy(gl_array_buf, bufp, glbuf.begin());
+        auto sz = bufp - gl_array_buf;
+        glbuf.resize(sz);
+        std::copy(gl_array_buf, bufp, glbuf.begin());
 
-    if (quality == LIGHT_QUALITY_HIGH) {
-        /*
-         * This does multiple renders of the fan with blurring.
-         */
-        blit_flush_triangle_fan_smoothed();
+        if (quality == LIGHT_QUALITY_HIGH) {
+            /*
+             * This does multiple renders of the fan with blurring.
+             */
+            blit_flush_triangle_fan_smoothed();
+        } else {
+            /*
+             * Just splat the raw fan, with alpha blended edges.
+             */
+            blit_flush_triangle_fan();
+        }
     } else {
-        /*
-         * Just splat the raw fan, with alpha blended edges.
-         */
-        blit_flush_triangle_fan();
+        float *b = &(*glbuf.begin());
+        float *e = &(*glbuf.end());
+        if (quality == LIGHT_QUALITY_HIGH) {
+            /*
+             * This does multiple renders of the fan with blurring.
+             */
+            blit_flush_triangle_fan_smoothed(b, e);
+        } else {
+            /*
+             * Just splat the raw fan, with alpha blended edges.
+             */
+            blit_flush_triangle_fan(b, e);
+        }
     }
 
     /*
@@ -493,15 +518,22 @@ CON("XXX");
             buf = tex_get_gl_binding(tex);
         }
  
-        auto radius = light_radius;
+        auto radius = strength;
 
         /*
          * To account for the blurring in blit_flush_triangle_fan_smoothed.
          */
-        radius *= 1.2;
+        if (flicker > random_range(10, 20)) {
+            flicker = 0;
+        }
+
+        if (!flicker) {
+            flicker_radius = (radius * 1.2) + (random_range(0, 100) / 100.0);
+        }
+        flicker++;
  
-        double lw = radius * tile_gl_width_pct;
-        double lh = radius * tile_gl_height_pct;
+        double lw = flicker_radius * tile_gl_width_pct;
+        double lh = flicker_radius * tile_gl_height_pct;
         double p1x = light_pos.x - lw;
         double p1y = light_pos.y - lh;
         double p2x = light_pos.x + lw;
@@ -513,6 +545,7 @@ CON("XXX");
         blit(buf, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         blit_flush();
    }
+   glTranslatef(ox, oy, 0);
 }
 
 void Light::render (int fbo)

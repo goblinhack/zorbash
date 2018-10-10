@@ -430,7 +430,7 @@ void thing_render_all (void)
 
     thing_map_scroll_do();
 
-    auto lighting = false;
+    auto lighting = true;
     if (lighting) {
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
