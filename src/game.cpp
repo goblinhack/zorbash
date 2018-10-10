@@ -130,8 +130,7 @@ static void game_place_lights (class Dungeon *d,
         }
         col.a = 50;
 
-        (void) light_new(MAX_LIGHT_RAYS / 4, 1, fpoint(x, y),
-                         LIGHT_QUALITY_LOW, col);
+        (void) light_new(100, 2, fpoint(x, y), LIGHT_QUALITY_LOW, col);
     }
 }
 

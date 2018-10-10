@@ -16,6 +16,7 @@
 #include "my_ptrcheck.h"
 
 typedef enum {
+    LIGHT_QUALITY_POINT,
     LIGHT_QUALITY_LOW,
     LIGHT_QUALITY_HIGH,
 } LightQuality;
@@ -89,6 +90,7 @@ public:
     void calculate(void);
 
     void render_triangle_fans(void);
+    void render_point_light(void);
     void render(int fbo);
 
     void log_(const char *fmt, va_list args); // compile error without
