@@ -16,12 +16,7 @@ void Thing::animate (void)
     Tileinfomap tiles;
     Tpp tp = t->tp;
 
-    if (!tp_is_animated(tp)) {
-        return;
-    }
-
     otile = tile = t->current_tileinfo;
-
     if (tile) {
         /*
          * If within the animate time of this frame, keep with it.
@@ -34,7 +29,6 @@ void Thing::animate (void)
          * Stop the animation here?
          */
         if (tile_info_is_end_of_anim(tile)) {
-
             if (tile_info_is_dead_on_end_of_anim(tile)) {
                 t->dead(0, "end of anim");
             }
