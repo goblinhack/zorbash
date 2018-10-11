@@ -177,7 +177,8 @@ void Thing::move_to (fpoint to)
     auto t = this;
     auto tp = t->tp;
 
-    t->animate();
+    t->last_move_ms = time_get_time_ms_cached();
+    t->end_move_ms = t->last_move_ms + ONESEC / 10;
     t->has_ever_moved = true;
 
     if (!t->has_ever_moved) {
@@ -270,7 +271,6 @@ void Thing::move_delta (fpoint delta)
         t->has_ever_moved = true;
     }
 
-    t->animate();
     t->move_to(t->at + delta);
 }
 
