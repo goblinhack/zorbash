@@ -80,6 +80,25 @@ public:
     fpoint             last_at;
 
     /*
+     * Very poor mans i.e. mine, physics.
+     */
+    fpoint             normal_velocity;
+    fpoint             tangent_velocity;
+
+    /*
+     * For freefalling.
+    float              fall_speed {0};
+    float              jump_speed {0};
+    float              momentum {0};
+    float              rot {0};
+     */
+
+    /*
+     * How close for collision detection.
+     */
+    float              collision_radius {0};
+
+    /*
      * Pointer to common settings for this thing.
      */
     Tpp                tp {};

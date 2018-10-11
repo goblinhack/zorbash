@@ -102,190 +102,6 @@ static void thing_map_blit_background (void)
     blit_flush();
 }
 
-static void thing_blit_wall (Thingp &t,
-                             int x, int y,
-                             fpoint tl, fpoint br)
-{  
-    auto tp = t->tp;
-    double dw = 0.004;
-    double dh = 0.004;
-
-    if (!game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->top_tile, &tl2, &br2);
-    }
-
-    if (!game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.y += dh;
-        br2.y += dh * 2;
-        tile_blit_fat(tp, t->bot_tile, &tl2, &br2);
-    }
-
-    if (!game.state.map.is_wall[x - 1][y]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        //tl2.x -= dw;
-        //br2.x -= dw;
-        tile_blit_fat(tp, t->left_tile, &tl2, &br2);
-    }
-
-    if (!game.state.map.is_wall[x + 1][y]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        //tl2.x += dw;
-        //br2.x += dw;
-        tile_blit_fat(tp, t->right_tile, &tl2, &br2);
-    }
-
-    /*
-     * X---
-     * |...
-     * |...
-     */
-    if (!game.state.map.is_wall[x - 1][y - 1] &&
-        !game.state.map.is_wall[x - 1][y] &&
-        !game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        //tl2.x -= dw;
-        //br2.x -= dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->tl_tile, &tl2, &br2);
-    }
-
-    /*
-     * ---X
-     * ...|
-     * ...|
-     */
-    if (!game.state.map.is_wall[x + 1][y - 1] &&
-        !game.state.map.is_wall[x + 1][y] &&
-        !game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        //tl2.x += dw;
-        //br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->tr_tile, &tl2, &br2);
-    }
-
-    /*
-     *  .|
-     *  .|
-     *  .X--
-     *  ....
-     */
-    if (!game.state.map.is_wall[x + 1][y - 1] &&
-        game.state.map.is_wall[x + 1][y] &&
-        game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        //tl2.x += dw;
-        //br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->tr_tile, &tl2, &br2);
-    }
-
-    /*
-     *    |.
-     *    |.
-     *  --X.
-     *  ....
-     */
-    if (!game.state.map.is_wall[x - 1][y - 1] &&
-        game.state.map.is_wall[x - 1][y] &&
-        game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        //tl2.x += dw;
-        //br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->tl_tile, &tl2, &br2);
-    }
-
-    dw = 0.00;
-    dh = 0.00;
-
-    /*
-     * |...
-     * |...
-     * X---
-     */
-    if (!game.state.map.is_wall[x - 1][y + 1] &&
-        !game.state.map.is_wall[x - 1][y] &&
-        !game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
-        tl2.y += dh;
-        br2.y += dh;
-        tile_blit_fat(tp, t->bl_tile, &tl2, &br2);
-    }
-
-    /*
-     * ...|
-     * ...|
-     * ---X
-     */
-    if (!game.state.map.is_wall[x + 1][y + 1] &&
-        !game.state.map.is_wall[x + 1][y] &&
-        !game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
-        tile_blit_fat(tp, t->br_tile, &tl2, &br2);
-    }
-
-    /*
-     * .....
-     * .X---
-     * .|
-     * .|
-     */
-    if (!game.state.map.is_wall[x + 1][y + 1] &&
-        game.state.map.is_wall[x + 1][y] &&
-        game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
-        tile_blit_fat(tp, t->br_tile, &tl2, &br2);
-    }
-
-    /*
-     * ....
-     * --X.
-     *   |.
-     *   |.
-     */
-    if (!game.state.map.is_wall[x - 1][y + 1] &&
-        game.state.map.is_wall[x - 1][y] &&
-        game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
-        tile_blit_fat(tp, t->bl_tile, &tl2, &br2);
-    }
-}
-
 static void thing_blit_wall_cladding (Thingp &t,
                                       int x, int y,
                                       fpoint tl, fpoint br)
@@ -540,7 +356,7 @@ static void thing_blit_things (int minx, int miny, int minz,
                     //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
                         if (tp_is_wall(tp)) {
-                            thing_blit_wall(t, x, y, tl, br);
+                            thing_blit_wall_cladding(t, x, y, tl, br);
                         } else if (tp_is_ladder(tp)) {
                             thing_blit_ladder(t, x, y, tl, br);
                         }
@@ -564,11 +380,17 @@ static void thing_blit_things_pass2 (int minx, int miny, int minz,
     const double tdx = game.config.tile_gl_width;
     const double tdy = game.config.tile_gl_height;
 
-    for (uint8_t z = minz; z < maxz; z++) {
+    auto z = MAP_DEPTH_WALLS;
+    {
         for (uint16_t x = minx ; x < maxx; x++) {
             for (uint16_t y = miny ; y < maxy; y++) {
                 for (auto p : game.state.map.things[x][y][z]) {
                     auto t = p.second;
+
+                    Tpp tp = t->tp;
+                    if (!tp_is_wall(tp)) {
+                        continue;
+                    }
 
                     fpoint tl;
                     fpoint br;
@@ -581,24 +403,8 @@ static void thing_blit_things_pass2 (int minx, int miny, int minz,
                     br.x = (tx+1) * tdx;
                     br.y = (ty+1) * tdy;
     
-                    Tpp tp = t->tp;
-
-                    if (!t->current_tile) {
-                        t->die("no current tile");
-                    }
-
-                    Tilep tile;
-                    if (t->current_tileinfo) {
-                        tile = t->current_tileinfo->tile;
-                    } else {
-                        tile = t->current_tile;
-                    }
-
-                    //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
-                        if (tp_is_wall(tp)) {
-                            thing_blit_wall_cladding(t, x, y, tl, br);
-                        }
+                        thing_blit_wall_cladding(t, x, y, tl, br);
                     }
                 }
             }
