@@ -335,8 +335,33 @@ static void thing_blit_things (int minx, int miny, int minz,
                     }
 
                     if (tp_is_animated_walk_flip(tp)) {
-                        if (t->is_dir_left()) {
-                            std::swap(tl.x, br.x);
+                        if (t->flip_start_ms) {
+                            auto diff = time_get_time_ms_cached() - 
+                                        t->flip_start_ms;
+                            uint32_t flip_time = 100;
+                            uint32_t flip_steps = 100;
+
+                            if (diff > flip_time) {
+                                t->flip_start_ms = 0;
+                                if (t->is_dir_left()) {
+                                    std::swap(tl.x, br.x);
+                                }
+                            } else {
+                                if (t->is_dir_right()) {
+                                    std::swap(tl.x, br.x);
+                                }
+                                double w = br.x - tl.x;
+                                double dw = w / flip_steps;
+                                double tlx = tl.x;
+                                double brx = br.x;
+
+                                tl.x = tlx + dw * diff;
+                                br.x = brx - dw * diff;
+                            }
+                        } else {
+                            if (t->is_dir_left()) {
+                                std::swap(tl.x, br.x);
+                            }
                         }
                     }
 

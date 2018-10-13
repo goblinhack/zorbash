@@ -43,10 +43,6 @@ static uint32_t time_update_time_milli(void);
 
 static inline uint32_t time_get_time_ms (void)
 {
-    /*
-     * Do we really need to cache this? As it messes up timestamps when things
-     * are blocking, like maze generation.
-     */
     time_update_time_milli();
 
     return (time_now);
@@ -54,10 +50,6 @@ static inline uint32_t time_get_time_ms (void)
 
 static inline uint32_t time_get_time_ms_cached (void)
 {
-    /*
-     * Do we really need to cache this? As it messes up timestamps when things
-     * are blocking, like maze generation.
-     */
     return (time_now);
 }
 

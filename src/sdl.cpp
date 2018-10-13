@@ -1061,8 +1061,8 @@ void sdl_screenshot (void)
 static void sdl_screenshot_ (void)
 {_
     FILE *fp;
-    int w = game.config.video_pix_width;
-    int h = game.config.video_pix_height;
+    int w = game.config.drawable_gl_width;
+    int h = game.config.drawable_gl_height;
 
     static int count;
     char *filename = dynprintf("screenshot.%d.ppm", ++count);

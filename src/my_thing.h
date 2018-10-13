@@ -111,6 +111,7 @@ public:
     /*
      * Used for animating the steps.
      */
+    uint32_t           flip_start_ms {};
     uint32_t           last_move_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};

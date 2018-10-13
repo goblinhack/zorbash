@@ -39,7 +39,13 @@ Thingp thing_new (std::string tp_name, fpoint at)
     }
 
     t->at             = at;
-    t->dir            = THING_DIR_NONE;
+
+    if (tp_is_animated_walk_flip(tp)) {
+        t->dir            = THING_DIR_RIGHT;
+    } else {
+        t->dir            = THING_DIR_NONE;
+    }
+
     t->is_dead        = false;
     t->is_sleeping    = false;
     t->is_moving      = false;
@@ -381,6 +387,11 @@ void Thing::set_dir_left (void)
     }
 
     if (t->dir != THING_DIR_LEFT) {
+        if (t->dir == THING_DIR_RIGHT) {
+            if (tp_is_animated_walk_flip(tp)) {
+                t->flip_start_ms = time_get_time_ms_cached();
+            }
+        }
         t->dir = THING_DIR_LEFT;
     }
 }
@@ -401,6 +412,11 @@ void Thing::set_dir_right (void)
     }
 
     if (t->dir != THING_DIR_RIGHT) {
+        if (t->dir == THING_DIR_LEFT) {
+            if (tp_is_animated_walk_flip(tp)) {
+                t->flip_start_ms = time_get_time_ms_cached();
+            }
+        }
         t->dir = THING_DIR_RIGHT;
     }
 }
