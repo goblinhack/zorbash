@@ -152,7 +152,7 @@ public:
     bool is_rrr34 {};
     bool is_rrr35 {};
     bool is_rrr36 {};
-    bool is_rrr37 {};
+    bool is_outlined {};
     bool is_candle_light {};
     bool is_shadow_caster {};
     bool is_ladder {};
@@ -451,9 +451,9 @@ static inline uint8_t tp_is_rrr36 (Tpp t)
     return (t->is_rrr36);
 }
 
-static inline uint8_t tp_is_rrr37 (Tpp t)
+static inline uint8_t tp_is_outlined (Tpp t)
 {
-    return (t->is_rrr37);
+    return (t->is_outlined);
 }
 
 static inline uint8_t tp_is_candle_light (Tpp t)

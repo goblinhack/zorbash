@@ -1533,3 +1533,43 @@ void glcolor (color s)
 
     glColor4ub(s.r, s.g, s.b, s.a);
 }
+
+/*
+ * Blits a whole tile. Y co-ords are inverted.
+ */
+void tile_blit_fat_outline (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
+{
+    double x1;
+    double x2;
+    double y1;
+    double y2;
+
+    x1 = tile->x1;
+    x2 = tile->x2;
+    y1 = tile->y1;
+    y2 = tile->y2;
+
+    glcolor(BLACK);
+    double delta = 0.0015;
+
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl->x - delta, br->y - delta, br->x - delta, tl->y - delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl->x + delta, br->y + delta, br->x + delta, tl->y + delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl->x - delta, br->y + delta, br->x - delta, tl->y + delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl->x + delta, br->y - delta, br->x + delta, tl->y - delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl->x + delta, br->y, br->x + delta, tl->y);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl->x - delta, br->y, br->x - delta, tl->y);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl->x, br->y + delta, br->x, tl->y + delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl->x, br->y - delta, br->x, tl->y - delta);
+
+    glcolor(WHITE);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl->x, br->y, br->x, tl->y);
+}
+

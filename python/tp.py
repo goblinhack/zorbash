@@ -88,7 +88,7 @@ class Tp:
         self.is_rrr34 = False
         self.is_rrr35 = False
         self.is_rrr36 = False
-        self.is_rrr37 = False
+        self.is_outlined = False
         self.is_candle_light = False
         self.is_shadow_caster = False
         self.is_rrr41 = False
@@ -318,9 +318,9 @@ class Tp:
         self.is_rrr36 = value
         zx.tp_set_is_rrr36(self, value)
 
-    def set_is_rrr37(self, value):
-        self.is_rrr37 = value
-        zx.tp_set_is_rrr37(self, value)
+    def set_is_outlined(self, value):
+        self.is_outlined = value
+        zx.tp_set_is_outlined(self, value)
 
     def set_is_candle_light(self, value):
         self.is_candle_light = value

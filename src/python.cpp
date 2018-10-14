@@ -1692,7 +1692,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr34)
     TP_SET_DECL(is_rrr35)
     TP_SET_DECL(is_rrr36)
-    TP_SET_DECL(is_rrr37)
+    TP_SET_DECL(is_outlined)
     TP_SET_DECL(is_candle_light)
     TP_SET_DECL(is_shadow_caster)
     TP_SET_DECL(is_ladder)

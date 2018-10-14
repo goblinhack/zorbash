@@ -376,7 +376,11 @@ static void thing_blit_things (int minx, int miny, int minz,
                         tile = t->current_tile;
                     }
 
-                    tile_blit_fat(tp, tile, &tl, &br);
+                    if (tp_is_outlined(tp)) {
+                        tile_blit_fat_outline(tp, tile, &tl, &br);
+                    } else {
+                        tile_blit_fat(tp, tile, &tl, &br);
+                    }
 
                     //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
