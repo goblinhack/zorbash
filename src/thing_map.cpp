@@ -316,6 +316,9 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (uint16_t y = miny ; y < maxy; y++) {
                 for (auto p : game.state.map.things[x][y][z]) {
                     auto t = p.second;
+                    if (unlikely(t->is_hidden)) {
+                        continue;
+                    }
 
                     fpoint tl;
                     fpoint br;
@@ -415,6 +418,9 @@ static void thing_blit_things_pass2 (int minx, int miny, int minz,
             for (uint16_t y = miny ; y < maxy; y++) {
                 for (auto p : game.state.map.things[x][y][z]) {
                     auto t = p.second;
+                    if (unlikely(t->is_hidden)) {
+                        continue;
+                    }
 
                     Tpp tp = t->tp;
                     if (!tp_is_wall(tp)) {
