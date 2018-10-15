@@ -101,12 +101,12 @@ public:
     /*
      * Pointer to common settings for this thing.
      */
-    Tpp                tp {};
+    Tpp                tp {nullptr};
 
     /*
      * Does this thing have a light source?
      */
-    Lightp             light;
+    Lightp             light {nullptr};
 
     /*
      * Used for animating the steps.
@@ -138,11 +138,34 @@ public:
     /*
      * Only used for display purposes.
      */
-    uint16_t           gold {};
-    uint16_t           hp {};
+    uint16_t           gold {0};
+    uint16_t           hp {0};
+
+    uint32_t           weapon_carry_anim_thing_id {0};
+    uint32_t           weapon_swing_anim_thing_id {0};
+
+    /*
+     * Weapon thing template.
+     */
+    uint16_t           weapon_tp_id {0};
+
+    /*
+     * Who created this thing? e.g. who cast a spell?
+     */
+    uint32_t           owner_thing_id {0};
+
+    /*
+     * How many things this thing owns.
+     */
+    uint16_t           owned_count {0};
 
     unsigned int       dir:4;
+
+    /*
+     * Update thing_new when adding new bitfields.
+     */
     unsigned int       is_dead:1;
+    unsigned int       is_hidden:1;
     unsigned int       is_sleeping:1;
     unsigned int       is_moving:1;
     unsigned int       has_ever_moved:1;
@@ -175,6 +198,31 @@ public:
     void set_dir_tr(void);
     void set_dir_up(void);
     void set_is_dead(uint8_t val);
+    void remove_hooks();
+    Thingp get_owner();
+    void set_owner(Thingp owner);
+    uint8_t is_visible();
+    void visible();
+    void hide();
+
+    /*
+     * thing_weapon.c
+     */
+    Tpp get_weapon();
+    void wield_next_weapon();
+    void unwield(const char *why);
+    void sheath(void);
+    void swing(void);
+    void wield(Tpp tp);
+    void weapon_sheath(void);
+    void get_weapon_swing_offset(double *dx, double *dy);
+    Thingp get_weapon_carry_anim(void);
+    Thingp get_weapon_swing_anim(void);
+    void set_weapon_placement(void);
+    void set_weapon_carry_anim_id(uint32_t weapon_carry_anim_id);
+    void set_weapon_carry_anim(Thingp weapon_carry_anim);
+    void set_weapon_swing_anim_id(uint32_t weapon_swing_anim_id);
+    void set_weapon_swing_anim(Thingp weapon_swing_anim);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

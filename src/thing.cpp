@@ -47,6 +47,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
     }
 
     t->is_dead        = false;
+    t->is_hidden        = false;
     t->is_sleeping    = false;
     t->is_moving      = false;
     t->has_ever_moved = false;
@@ -134,6 +135,200 @@ Thingp thing_new (std::string tp_name, fpoint at)
 
     //log("created");
     return (t);
+}
+
+void Thing::hide (void)
+{_
+    verify(t);
+
+    is_hidden = true;
+
+    /*
+     * Hide the weapon too or it just floats in the air.
+     */
+    auto weapon_carry_anim = get_weapon_carry_anim();
+    if (weapon_carry_anim) {
+        weapon_carry_anim->hide();
+    }
+}
+
+void Thing::visible (void)
+{_
+    verify(t);
+
+    is_hidden = false;
+
+    /*
+     * If this thing has an owner, should the thing stay hidden?
+     */
+    auto owner = get_owner();
+    if (owner) {
+        if (this == owner->get_weapon_carry_anim()) {
+            if (owner->get_weapon_swing_anim()) {
+                /*
+                 * Stay hidden until the weapon swing is done.
+                 */
+                return;
+            }
+        }
+    }
+
+    /*
+     * Reveal the weapon again too.
+     */
+    auto weapon_carry_anim = get_weapon_carry_anim();
+    if (weapon_carry_anim) {
+        weapon_carry_anim->visible();
+    }
+}
+
+uint8_t Thing::is_visible (void)
+{
+    verify(t);
+
+    return (!is_hidden);
+}
+
+/*
+ * Get rid of all the hooks to other things that this thing has. e.g. the
+ * weapons it carries etc.
+ */
+void Thing::remove_hooks ()
+{_
+    verify(t);
+
+    /*
+     * We are owned by something. i.e. we are a sword.
+     */
+    Thingp owner = 0;
+
+#ifdef THING_DEBUG
+    log("remove hooks");
+#endif
+
+    if (owner_thing_id) {
+        owner = get_owner();
+    }
+
+    if (owner_thing_id && owner) {
+#ifdef THING_DEBUG
+        log("detach from owner %s", owner->logname().c_str());
+#endif
+
+        if (thing_id == owner->weapon_carry_anim_thing_id) {
+            unwield("remove hooks");
+
+#ifdef THING_DEBUG
+            log("detach from carry anim owner %s", owner->logname().c_str());
+#endif
+
+            set_weapon_carry_anim(nullptr);
+        }
+
+        if (thing_id == owner->weapon_swing_anim_thing_id) {
+#ifdef THING_DEBUG
+            log("detach from swing anim owner %s", owner->logname().c_str());
+#endif
+
+            set_weapon_swing_anim(nullptr);
+
+            /*
+             * End of the swing animation, make the sword visible again.
+             */
+            auto carrying = owner->get_weapon_carry_anim();
+            if (carrying) {
+                /*
+                 * But only if the owner is visible. They may have reached the
+                 * level.
+                 */
+                if (owner->is_visible()) {
+                    carrying->visible();
+                }
+            }
+        }
+
+        set_owner(nullptr);
+    }
+
+    /*
+     * We own things like a sword. i.e. we are a player.
+     */
+    if (weapon_carry_anim_thing_id) {
+        auto item = get_weapon_carry_anim();
+        set_weapon_carry_anim(nullptr);
+        verify(item);
+        item->set_owner(nullptr);
+        item->dead(nullptr, "weapon carry anim owner killed");
+    }
+
+    if (weapon_swing_anim_thing_id) {
+        auto item = get_weapon_swing_anim();
+        set_weapon_swing_anim(nullptr);
+        verify(item);
+        item->set_owner(nullptr);
+        item->dead(nullptr, "weapon swing anim owner killed");
+    }
+
+    /*
+     * Some things have lots of things they own
+     */
+    if (owned_count) {
+        log("Remove remaining %u owned things", owned_count);
+
+        for (auto i : game.state.map.all_things) {
+            Thingp t = i.second;
+            auto o = t->get_owner();
+            if (o && (o == t)) {
+                t->set_owner(nullptr);
+            }
+        }
+    }
+}
+
+Thingp Thing::get_owner (void)
+{
+    if (owner_thing_id) {
+        return (thing_find(owner_thing_id));
+    } else {
+        return (nullptr);
+    }
+}
+
+void Thing::set_owner (Thingp owner)
+{
+    if (owner) {
+        verify(owner);
+    }
+
+    auto old_owner = get_owner();
+    if (old_owner) {
+        if (old_owner == owner) {
+            return;
+        }
+
+        if (owner) {
+            log("set-owner change %s->%s", old_owner->logname().c_str(), 
+                owner->logname().c_str());
+        } else {
+            log("set-owner remove owner %s", old_owner->logname().c_str());
+        }
+    } else {
+        if (owner) {
+            log("set-owner %s", owner->logname().c_str());
+        }
+    }
+
+    if (owner) {
+        owner_thing_id = owner->id;
+
+        owner->owned_count++;
+    } else {
+        owner_thing_id = 0;
+
+        if (old_owner) {
+            old_owner->owned_count--;
+        }
+    }
 }
 
 void Thing::pop (void)

@@ -1572,4 +1572,3 @@ void tile_blit_fat_outline (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
     glcolor(WHITE);
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl->x, br->y, br->x, tl->y);
 }
-

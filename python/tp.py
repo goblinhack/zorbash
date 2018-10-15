@@ -52,6 +52,26 @@ class Tp:
         self.is_animated_no_dir = False
         self.is_animation = False
         self.is_monst = False
+        self.str_zzz1 = ""
+        self.str_zzz2 = ""
+        self.str_zzz3 = ""
+        self.str_zzz4 = ""
+        self.str_zzz5 = ""
+        self.str_zzz6 = ""
+        self.str_zzz7 = ""
+        self.str_zzz8 = ""
+        self.str_zzz9 = ""
+        self.str_zzz10 = ""
+        self.str_zzz11 = ""
+        self.str_zzz12 = ""
+        self.str_zzz13 = ""
+        self.str_zzz14 = ""
+        self.str_zzz15 = ""
+        self.str_zzz16 = ""
+        self.str_zzz17 = ""
+        self.str_zzz18 = ""
+        self.weapon_carry_anim = ""
+        self.weapon_swing_anim = ""
         self.is_rrr1 = False
         self.is_rrr2 = False
         self.is_rrr3 = False
@@ -84,12 +104,11 @@ class Tp:
         self.is_rrr30 = False
         self.is_rrr31 = False
         self.is_rrr32 = False
-        self.is_rrr33 = False
-        self.is_rrr34 = False
-        self.is_rrr35 = False
-        self.is_rrr36 = False
+        self.weapon_swing_distance = 0
+        self.is_weapon_carry_anim = False
+        self.is_weapon_swing_effect = False
+        self.is_weapon = False
         self.is_outlined = False
-        self.is_candle_light = False
         self.is_shadow_caster = False
         self.is_rrr41 = False
         self.is_animated_walk_flip = False
@@ -173,6 +192,86 @@ class Tp:
     def set_is_player(self, value):
         self.is_player = value
         zx.tp_set_is_player(self, value)
+
+    def set_str_zzz1(self, value):
+        self.str_zzz1 = value
+        zx.tp_set_str_zzz1(self, value)
+
+    def set_str_zzz2(self, value):
+        self.str_zzz2 = value
+        zx.tp_set_str_zzz2(self, value)
+
+    def set_str_zzz3(self, value):
+        self.str_zzz3 = value
+        zx.tp_set_str_zzz3(self, value)
+
+    def set_str_zzz4(self, value):
+        self.str_zzz4 = value
+        zx.tp_set_str_zzz4(self, value)
+
+    def set_str_zzz5(self, value):
+        self.str_zzz5 = value
+        zx.tp_set_str_zzz5(self, value)
+
+    def set_str_zzz6(self, value):
+        self.str_zzz6 = value
+        zx.tp_set_str_zzz6(self, value)
+
+    def set_str_zzz7(self, value):
+        self.str_zzz7 = value
+        zx.tp_set_str_zzz7(self, value)
+
+    def set_str_zzz8(self, value):
+        self.str_zzz8 = value
+        zx.tp_set_str_zzz8(self, value)
+
+    def set_str_zzz9(self, value):
+        self.str_zzz9 = value
+        zx.tp_set_str_zzz9(self, value)
+
+    def set_str_zzz10(self, value):
+        self.str_zzz10 = value
+        zx.tp_set_str_zzz10(self, value)
+
+    def set_str_zzz11(self, value):
+        self.str_zzz11 = value
+        zx.tp_set_str_zzz11(self, value)
+
+    def set_str_zzz12(self, value):
+        self.str_zzz12 = value
+        zx.tp_set_str_zzz12(self, value)
+
+    def set_str_zzz13(self, value):
+        self.str_zzz13 = value
+        zx.tp_set_str_zzz13(self, value)
+
+    def set_str_zzz14(self, value):
+        self.str_zzz14 = value
+        zx.tp_set_str_zzz14(self, value)
+
+    def set_str_zzz15(self, value):
+        self.str_zzz15 = value
+        zx.tp_set_str_zzz15(self, value)
+
+    def set_str_zzz16(self, value):
+        self.str_zzz16 = value
+        zx.tp_set_str_zzz16(self, value)
+
+    def set_str_zzz17(self, value):
+        self.str_zzz17 = value
+        zx.tp_set_str_zzz17(self, value)
+
+    def set_str_zzz18(self, value):
+        self.str_zzz18 = value
+        zx.tp_set_str_zzz18(self, value)
+
+    def set_weapon_carry_anim(self, value):
+        self.weapon_carry_anim = value
+        zx.tp_set_weapon_carry_anim(self, value)
+
+    def set_weapon_swing_anim(self, value):
+        self.weapon_swing_anim = value
+        zx.tp_set_weapon_swing_anim(self, value)
 
     def set_is_rrr1(self, value):
         self.is_rrr1 = value
@@ -302,29 +401,25 @@ class Tp:
         self.is_rrr32 = value
         zx.tp_set_is_rrr32(self, value)
 
-    def set_is_rrr33(self, value):
-        self.is_rrr33 = value
-        zx.tp_set_is_rrr33(self, value)
+    def set_weapon_swing_distance(self, value):
+        self.weapon_swing_distance = value
+        zx.tp_set_weapon_swing_distance(self, value)
 
-    def set_is_rrr34(self, value):
-        self.is_rrr34 = value
-        zx.tp_set_is_rrr34(self, value)
+    def set_is_weapon_carry_anim(self, value):
+        self.is_weapon_carry_anim = value
+        zx.tp_set_is_weapon_carry_anim(self, value)
 
-    def set_is_rrr35(self, value):
-        self.is_rrr35 = value
-        zx.tp_set_is_rrr35(self, value)
+    def set_is_weapon_swing_effect(self, value):
+        self.is_weapon_swing_effect = value
+        zx.tp_set_is_weapon_swing_effect(self, value)
 
-    def set_is_rrr36(self, value):
-        self.is_rrr36 = value
-        zx.tp_set_is_rrr36(self, value)
+    def set_is_weapon(self, value):
+        self.is_weapon = value
+        zx.tp_set_is_weapon(self, value)
 
     def set_is_outlined(self, value):
         self.is_outlined = value
         zx.tp_set_is_outlined(self, value)
-
-    def set_is_candle_light(self, value):
-        self.is_candle_light = value
-        zx.tp_set_is_candle_light(self, value)
 
     def set_is_shadow_caster(self, value):
         self.is_shadow_caster = value

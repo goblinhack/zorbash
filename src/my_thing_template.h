@@ -65,6 +65,27 @@ public:
      */
     std::string raw_name;
 
+    std::string str_zzz1;
+    std::string str_zzz2;
+    std::string str_zzz3;
+    std::string str_zzz4;
+    std::string str_zzz5;
+    std::string str_zzz6;
+    std::string str_zzz7;
+    std::string str_zzz8;
+    std::string str_zzz9;
+    std::string str_zzz10;
+    std::string str_zzz11;
+    std::string str_zzz12;
+    std::string str_zzz13;
+    std::string str_zzz14;
+    std::string str_zzz15;
+    std::string str_zzz16;
+    std::string str_zzz17;
+    std::string str_zzz18;
+    std::string weapon_carry_anim;
+    std::string weapon_swing_anim;
+
     /*
      * Animation tiles.
      */
@@ -148,12 +169,11 @@ public:
     bool is_rrr30 {};
     bool is_rrr31 {};
     bool is_rrr32 {};
-    bool is_rrr33 {};
-    bool is_rrr34 {};
-    bool is_rrr35 {};
-    bool is_rrr36 {};
+    bool weapon_swing_distance {};
+    bool is_weapon_carry_anim {};
+    bool is_weapon_swing_effect {};
+    bool is_weapon {};
     bool is_outlined {};
-    bool is_candle_light {};
     bool is_shadow_caster {};
     bool is_ladder {};
     bool is_animated_walk_flip {};
@@ -166,12 +186,9 @@ void tp_fini(void);
 Tpp tp_load(int id, std::string file);
 void tp_update(Tpp tp);
 Tpp tp_find(std::string name);
+Tpp tp_find(uint32_t id);
 Tpp tp_find_short_name(std::string name);
 uint8_t thing_test(int argc, char *argv[]);
-
-std::string tp_name(Tpp);
-std::string tp_short_name(Tpp);
-std::string tp_raw_name(Tpp);
 
 static inline int32_t tp_get_blit_top_off (Tpp &t)
 {
@@ -193,26 +210,6 @@ static inline int32_t tp_get_blit_right_off (Tpp &t)
     return (t->blit_right_off);
 }
 
-extern Tileinfomap tp_get_tiles(Tpp);
-extern Tileinfomap tp_get_left_tiles(Tpp);
-extern Tileinfomap tp_get_right_tiles(Tpp);
-extern Tileinfomap tp_get_top_tiles(Tpp);
-extern Tileinfomap tp_get_bot_tiles(Tpp);
-extern Tileinfomap tp_get_tl_tiles(Tpp);
-extern Tileinfomap tp_get_tr_tiles(Tpp);
-extern Tileinfomap tp_get_bl_tiles(Tpp);
-extern Tileinfomap tp_get_br_tiles(Tpp);
-extern Tileinfomap tp_get_horiz_tiles(Tpp);
-extern Tileinfomap tp_get_vert_tiles(Tpp);
-extern Tileinfomap tp_get_l90_tiles(Tpp);
-extern Tileinfomap tp_get_l180_tiles(Tpp);
-extern Tileinfomap tp_get_l_tiles(Tpp);
-extern Tileinfomap tp_get_l270_tiles(Tpp);
-extern Tileinfomap tp_get_t_tiles(Tpp);
-extern Tileinfomap tp_get_t90_tiles(Tpp);
-extern Tileinfomap tp_get_t180_tiles(Tpp);
-extern Tileinfomap tp_get_t270_tiles(Tpp);
-extern Tileinfomap tp_get_x_tiles(Tpp);
 extern Tpmap tp_map;
 extern Tpmap_create_order tp_create_order_map;
 
@@ -431,34 +428,29 @@ static inline uint8_t tp_is_rrr32 (Tpp t)
     return (t->is_rrr32);
 }
 
-static inline uint8_t tp_is_rrr33 (Tpp t)
+static inline uint8_t tp_weapon_swing_distance (Tpp t)
 {
-    return (t->is_rrr33);
+    return (t->weapon_swing_distance);
 }
 
-static inline uint8_t tp_is_rrr34 (Tpp t)
+static inline uint8_t tp_is_weapon_carry_anim (Tpp t)
 {
-    return (t->is_rrr34);
+    return (t->is_weapon_carry_anim);
 }
 
-static inline uint8_t tp_is_rrr35 (Tpp t)
+static inline uint8_t tp_is_weapon_swing_effect (Tpp t)
 {
-    return (t->is_rrr35);
+    return (t->is_weapon_swing_effect);
 }
 
-static inline uint8_t tp_is_rrr36 (Tpp t)
+static inline uint8_t tp_is_weapon (Tpp t)
 {
-    return (t->is_rrr36);
+    return (t->is_weapon);
 }
 
 static inline uint8_t tp_is_outlined (Tpp t)
 {
     return (t->is_outlined);
-}
-
-static inline uint8_t tp_is_candle_light (Tpp t)
-{
-    return (t->is_candle_light);
 }
 
 static inline uint8_t tp_is_shadow_caster (Tpp t)
@@ -494,6 +486,221 @@ static inline uint8_t tp_is_movement_blocking (Tpp t)
 static inline uint8_t tp_is_key (Tpp t)
 {
     return (t->is_key);
+}
+
+static inline std::string tp_name (Tpp t)
+{
+    return (t->short_name);
+}
+
+static inline std::string tp_short_name (Tpp t)
+{
+    return (t->short_name);
+}
+
+static inline std::string tp_str_zzz1 (Tpp t)
+{
+    return (t->str_zzz1);
+}
+
+static inline std::string tp_str_zzz2 (Tpp t)
+{
+    return (t->str_zzz2);
+}
+
+static inline std::string tp_str_zzz3 (Tpp t)
+{
+    return (t->str_zzz3);
+}
+
+static inline std::string tp_str_zzz4 (Tpp t)
+{
+    return (t->str_zzz4);
+}
+
+static inline std::string tp_str_zzz5 (Tpp t)
+{
+    return (t->str_zzz5);
+}
+
+static inline std::string tp_str_zzz6 (Tpp t)
+{
+    return (t->str_zzz6);
+}
+
+static inline std::string tp_str_zzz7 (Tpp t)
+{
+    return (t->str_zzz7);
+}
+
+static inline std::string tp_str_zzz8 (Tpp t)
+{
+    return (t->str_zzz8);
+}
+
+static inline std::string tp_str_zzz9 (Tpp t)
+{
+    return (t->str_zzz9);
+}
+
+static inline std::string tp_str_zzz10 (Tpp t)
+{
+    return (t->str_zzz10);
+}
+
+static inline std::string tp_str_zzz11 (Tpp t)
+{
+    return (t->str_zzz11);
+}
+
+static inline std::string tp_str_zzz12 (Tpp t)
+{
+    return (t->str_zzz12);
+}
+
+static inline std::string tp_str_zzz13 (Tpp t)
+{
+    return (t->str_zzz13);
+}
+
+static inline std::string tp_str_zzz14 (Tpp t)
+{
+    return (t->str_zzz14);
+}
+
+static inline std::string tp_str_zzz15 (Tpp t)
+{
+    return (t->str_zzz15);
+}
+
+static inline std::string tp_str_zzz16 (Tpp t)
+{
+    return (t->str_zzz16);
+}
+
+static inline std::string tp_str_zzz17 (Tpp t)
+{
+    return (t->str_zzz17);
+}
+
+static inline std::string tp_str_zzz18 (Tpp t)
+{
+    return (t->str_zzz18);
+}
+
+static inline std::string tp_weapon_carry_anim (Tpp t)
+{
+    return (t->weapon_carry_anim);
+}
+
+static inline std::string tp_weapon_swing_anim (Tpp t)
+{
+    return (t->weapon_swing_anim);
+}
+
+static inline std::string tp_raw_name (Tpp t)
+{
+    return (t->raw_name);
+}
+
+static inline Tileinfomap tp_get_tiles (Tpp t)
+{
+    return (t->tiles);
+}
+
+static inline Tileinfomap tp_get_left_tiles (Tpp t)
+{
+    return (t->left_tiles);
+}
+
+static inline Tileinfomap tp_get_right_tiles (Tpp t)
+{
+    return (t->right_tiles);
+}
+
+static inline Tileinfomap tp_get_top_tiles (Tpp t)
+{
+    return (t->top_tiles);
+}
+
+static inline Tileinfomap tp_get_bot_tiles (Tpp t)
+{
+    return (t->bot_tiles);
+}
+
+static inline Tileinfomap tp_get_tl_tiles (Tpp t)
+{
+    return (t->tl_tiles);
+}
+
+static inline Tileinfomap tp_get_tr_tiles (Tpp t)
+{
+    return (t->tr_tiles);
+}
+
+static inline Tileinfomap tp_get_bl_tiles (Tpp t)
+{
+    return (t->bl_tiles);
+}
+
+static inline Tileinfomap tp_get_br_tiles (Tpp t)
+{
+    return (t->br_tiles);
+}
+
+static inline Tileinfomap tp_get_horiz_tiles (Tpp t)
+{
+    return (t->horiz_tiles);
+}
+
+static inline Tileinfomap tp_get_vert_tiles (Tpp t)
+{
+    return (t->vert_tiles);
+}
+
+static inline Tileinfomap tp_get_l90_tiles (Tpp t)
+{
+    return (t->l90_tiles);
+}
+
+static inline Tileinfomap tp_get_l180_tiles (Tpp t)
+{
+    return (t->l180_tiles);
+}
+
+static inline Tileinfomap tp_get_l_tiles (Tpp t)
+{
+    return (t->l_tiles);
+}
+
+static inline Tileinfomap tp_get_l270_tiles (Tpp t)
+{
+    return (t->l270_tiles);
+}
+
+static inline Tileinfomap tp_get_t_tiles (Tpp t)
+{
+    return (t->t_tiles);
+}
+
+static inline Tileinfomap tp_get_t90_tiles (Tpp t)
+{
+    return (t->t90_tiles);
+}
+
+static inline Tileinfomap tp_get_t180_tiles (Tpp t)
+{
+    return (t->t180_tiles);
+}
+
+static inline Tileinfomap tp_get_t270_tiles (Tpp t)
+{
+    return (t->t270_tiles);
+}
+
+static inline Tileinfomap tp_get_x_tiles (Tpp t)
+{
+    return (t->x_tiles);
 }
 
 Tilep tp_first_tile(Tpp tp);

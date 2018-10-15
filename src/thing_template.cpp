@@ -87,6 +87,19 @@ Tpp tp_find (std::string name)
     return (result->second);
 }
 
+/*
+ * Find an existing thing.
+ */
+Tpp tp_find (uint32_t id)
+{_
+    auto result = tp_create_order_map[id];
+    if (!result) {
+        DIE("thing template id %u not found", id);
+    }
+
+    return (result);
+}
+
 Tpp tp_find_short_name (std::string name)
 {_
     for (auto ti : tp_map) {
@@ -100,121 +113,6 @@ Tpp tp_find_short_name (std::string name)
     ERR("did not find short template name \"%s\"", name.c_str());
 
     return (0);
-}
-
-std::string tp_name (Tpp t)
-{_
-    return (t->short_name);
-}
-
-std::string tp_short_name (Tpp t)
-{_
-    return (t->short_name);
-}
-
-std::string tp_raw_name (Tpp t)
-{_
-    return (t->raw_name);
-}
-
-Tileinfomap tp_get_tiles (Tpp t)
-{_
-    return (t->tiles);
-}
-
-Tileinfomap tp_get_left_tiles (Tpp t)
-{_
-    return (t->left_tiles);
-}
-
-Tileinfomap tp_get_right_tiles (Tpp t)
-{_
-    return (t->right_tiles);
-}
-
-Tileinfomap tp_get_top_tiles (Tpp t)
-{_
-    return (t->top_tiles);
-}
-
-Tileinfomap tp_get_bot_tiles (Tpp t)
-{_
-    return (t->bot_tiles);
-}
-
-Tileinfomap tp_get_tl_tiles (Tpp t)
-{_
-    return (t->tl_tiles);
-}
-
-Tileinfomap tp_get_tr_tiles (Tpp t)
-{_
-    return (t->tr_tiles);
-}
-
-Tileinfomap tp_get_bl_tiles (Tpp t)
-{_
-    return (t->bl_tiles);
-}
-
-Tileinfomap tp_get_br_tiles (Tpp t)
-{_
-    return (t->br_tiles);
-}
-
-Tileinfomap tp_get_horiz_tiles (Tpp t)
-{_
-    return (t->horiz_tiles);
-}
-
-Tileinfomap tp_get_vert_tiles (Tpp t)
-{_
-    return (t->vert_tiles);
-}
-
-Tileinfomap tp_get_l90_tiles (Tpp t)
-{_
-    return (t->l90_tiles);
-}
-
-Tileinfomap tp_get_l180_tiles (Tpp t)
-{_
-    return (t->l180_tiles);
-}
-
-Tileinfomap tp_get_l_tiles (Tpp t)
-{_
-    return (t->l_tiles);
-}
-
-Tileinfomap tp_get_l270_tiles (Tpp t)
-{_
-    return (t->l270_tiles);
-}
-
-Tileinfomap tp_get_t_tiles (Tpp t)
-{_
-    return (t->t_tiles);
-}
-
-Tileinfomap tp_get_t90_tiles (Tpp t)
-{_
-    return (t->t90_tiles);
-}
-
-Tileinfomap tp_get_t180_tiles (Tpp t)
-{_
-    return (t->t180_tiles);
-}
-
-Tileinfomap tp_get_t270_tiles (Tpp t)
-{_
-    return (t->t270_tiles);
-}
-
-Tileinfomap tp_get_x_tiles (Tpp t)
-{_
-    return (t->x_tiles);
 }
 
 Tilep tp_first_tile (Tpp tp)
