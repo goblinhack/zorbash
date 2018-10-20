@@ -546,8 +546,8 @@ def init_tiles():
     tiles = [
             "player1.1",
             "player1.2",
-            "sword1.1",
-            "sword1.2",
+            "",
+            "",
             "monst1.1",
             "monst1.2",
             "",
@@ -1538,5 +1538,25 @@ def init_tiles():
 
     zx.tile_load_arr(tex_name="platform", width=32, height=32, arr=tiles)
 
+def init_weapons_tiles():
+
+    zx.tex_load(
+            file="data/gfx/weapons.tga",
+            name="weapons")
+
+    tiles = [
+            "sword1.1",
+            "sword1_carry_anim.1",
+            "sword1_swing_anim.1",
+            "sword1_swing_anim.2",
+            "sword1_swing_anim.3",
+            "sword1_swing_anim.4",
+            "sword1_swing_anim.5",
+            "sword1_swing_anim.6",
+    ]
+
+    zx.tile_load_arr(tex_name="weapons", width=96, height=96, arr=tiles)
+
 init_text()
 init_tiles()
+init_weapons_tiles()
