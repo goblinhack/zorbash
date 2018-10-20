@@ -1547,6 +1547,7 @@ def init_weapons_tiles():
     tiles = [
             "sword1.1",
             "sword1_carry_anim.1",
+            "sword1_carry_anim.2",
             "sword1_swing_anim.1",
             "sword1_swing_anim.2",
             "sword1_swing_anim.3",

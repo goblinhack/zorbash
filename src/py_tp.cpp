@@ -446,7 +446,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      )) {	
         return (0);	
     }	
-	
 _
     if (!py_class) {	
         ERR("%s, missing class", __FUNCTION__);	
@@ -454,7 +453,6 @@ _
     }	
 	
     Tpp tp;
-
 _
     tp_name = py_obj_attr_str(py_class, "name");	
     if (!tp_name) {	
@@ -462,16 +460,15 @@ _
     }	
 	
     DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, tile);	
-	
+_	
     tp = tp_find(tp_name);	
-_
     if (!tp) {	
         DIE("%s, cannot find tp %s", __FUNCTION__, tp_name);	
     }	
 	
     static unsigned int index;
     index++;
-
+_
     Tileinfomap *tiles;
     switch (dir) {
     case THING_DIR_NONE:
@@ -551,14 +548,14 @@ _
     if (is_join_x) {
         tiles = &tp->x_tiles;
     }
-
+_
     auto t = std::make_shared< class Tileinfo >();
     auto result = tiles->insert(std::make_pair(index, t));
 
     if (result.second == false) {
         DIE("tile insert name [%s] failed", tile);
     }
-
+_
     t->tile = tile_find(tile);
     if (!t->tile) {
         DIE("%s, cannot find tile %s for tp %s", __FUNCTION__, tile, tp_name);
