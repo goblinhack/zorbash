@@ -393,7 +393,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     };
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds,
-                                     "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+                                     "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
                                      kwlist, &py_class,
                                      &tile,
                                      &fg,
