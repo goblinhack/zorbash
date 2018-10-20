@@ -51,7 +51,7 @@ void Thing::animate (void)
         /*
          * If walking and now we've stopped, choose the idle no dir tile.
          */
-        if (tp_is_player(tp) && !t->is_dead && !t->is_moving &&
+        if (!t->is_dead && !t->is_moving &&
             (time_get_time_ms() >= t->last_move_ms + 5000)) {
 
             Tileinfop new_tile;
@@ -103,13 +103,6 @@ void Thing::animate (void)
 
             if (!t->is_dead) {
                 if (tile_info_is_dead(tile)) {
-                    tile = tile_info_next(tiles, tile);
-                    continue;
-                }
-            }
-
-            if (t->is_moving) {
-                if (!tile_info_is_moving(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
@@ -229,7 +222,6 @@ void Thing::animate (void)
 #endif
 //CON("set %s", tile_info_name(tile).c_str());
 
-//    t->set_tilename(tile_info_name(tile));
     t->current_tileinfo = tile;
 
     /*

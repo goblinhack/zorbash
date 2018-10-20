@@ -12,7 +12,9 @@ def my_init(name, short_name):
     x.set_is_outlined(True)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
-    x.set_tile(tile=name + ".1")
+    delay = 550
+    x.set_tile(tile=name + ".1", delay_ms=delay)
+    x.set_tile(tile=name + ".2", delay_ms=delay)
 
 def init():
     my_init(name="sword1_carry_anim", short_name="sword1_carry_anim")

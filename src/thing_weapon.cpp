@@ -258,37 +258,28 @@ void Thing::wield (Tpp weapon)
         return;
     }
 
-    log("want to wield: %s", tp_short_name(weapon).c_str());
+    log("is wielding: %s", tp_short_name(weapon).c_str());
 
     unwield("wield new weapon");
 
     auto carry_as = tp_weapon_carry_anim(weapon);
     if (carry_as == "") {
-        err("Could not wield weapon %s", tp_short_name(weapon).c_str());
+        err("could not wield weapon %s", tp_short_name(weapon).c_str());
         return;
     }
 
-    auto what = tp_find(carry_as);
-    if (!what) {
-        err("Could not find %s to wield", carry_as.c_str());
-        return;
-    }
+    auto carry_anim = thing_new(carry_as, at);
+    carry_anim->dir = dir;
 
-    weapon_tp_id = tp_to_id(weapon);
-
-#if 0
     /*
      * Save the thing id so the client wid can keep track of the weapon.
      */
-    //Thingp child = wid_get_thing(weapon_carry_anim_wid);
-    //set_weapon_carry_anim(level, t, child);
-    //child->dir = t->dir;
+    set_weapon_carry_anim(carry_anim);
 
     /*
      * Attach to the thing.
      */
-    //set_owner(level, child, t);
-#endif
+    carry_anim->set_owner(this);
 }
 
 void Thing::swing (void)

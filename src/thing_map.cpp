@@ -330,6 +330,28 @@ static void thing_blit_things (int minx, int miny, int minz,
                     tl.y = ty * tdy;
                     br.x = (tx+1) * tdx;
                     br.y = (ty+1) * tdy;
+
+                    Tilep tile;
+                    if (t->current_tileinfo) {
+                        tile = t->current_tileinfo->tile;
+                    } else {
+                        tile = t->current_tile;
+                    }
+
+                    /*
+                     * Scale up tiles that are larger to the same pix scale.
+                     */
+                    if (tile->pix_width != TILE_WIDTH) {
+                        auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
+                        auto mx = (br.x + tl.x) / 2.0;
+                        tl.x = mx - (xtiles * tdx);
+                        br.x = mx + (xtiles * tdx);
+
+                        auto ytiles = (tile->pix_height / TILE_HEIGHT) / 2.0;
+                        auto my = (br.y + tl.y) / 2.0;
+                        tl.y = my - (ytiles * tdy);
+                        br.y = my + (ytiles * tdy);
+                    }
     
                     Tpp tp = t->tp;
 
@@ -370,13 +392,6 @@ static void thing_blit_things (int minx, int miny, int minz,
 
                     if (!t->current_tile) {
                         t->die("no current tile");
-                    }
-
-                    Tilep tile;
-                    if (t->current_tileinfo) {
-                        tile = t->current_tileinfo->tile;
-                    } else {
-                        tile = t->current_tile;
                     }
 
                     if (tp_is_outlined(tp)) {

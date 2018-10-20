@@ -13,7 +13,7 @@ def my_init(name, short_name):
     x.set_is_weapon_swing_effect(True)
     x.set_z_depth(zx.MAP_DEPTH_PLAYER)
 
-    delay = 250
+    delay = 450
     x.set_tile(tile=name + ".1", is_dir_left=True, is_moving=True,
                delay_ms=delay)
     x.set_tile(tile=name + ".2", is_dir_left=True, is_moving=True,

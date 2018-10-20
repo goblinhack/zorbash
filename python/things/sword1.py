@@ -12,8 +12,8 @@ def my_init(name, short_name):
     x.set_is_animated_walk_flip(True)
     x.set_is_outlined(True)
     x.set_weapon_swing_distance(5)
-    x.set_weapon_carry_anim("sword1_carry")
-    x.set_weapon_swing_anim("sword1_swing")
+    x.set_weapon_carry_anim("sword1_carry_anim")
+    x.set_weapon_swing_anim("sword1_swing_anim")
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
     x.set_tile(tile=name + ".1")
 
