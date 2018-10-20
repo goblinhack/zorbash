@@ -333,18 +333,16 @@ void Thing::set_owner (Thingp owner)
 
 void Thing::pop (void)
 {_
-    auto t = this;
-
     /*
      * Pop from all things
      */
     {
         auto a = &game.state.map.all_things;
-        auto iter = a->find(t->id);
+        auto iter = a->find(id);
         if (iter == a->end()) {
-            t->die("thing not found to destroy from all things");
+            die("thing not found to destroy from all things");
         }
-        a->erase(t->id);
+        a->erase(id);
     }
 _
     /*
@@ -352,13 +350,13 @@ _
      */
     point old_at((int)at.x, (int)at.y);
     {
-        auto o = &game.state.map.things[old_at.x][old_at.y][t->depth];
-        auto iter = o->find(t->id);
+        auto o = &game.state.map.things[old_at.x][old_at.y][depth];
+        auto iter = o->find(id);
         if (iter == o->end()) {
-            t->die("thing not found to destroy");
+            die("thing not found to destroy");
         }
 _    
-        auto value = (*o)[t->id];
+        auto value = (*o)[id];
         o->erase(iter);
 _
         if (tp_is_wall(tp)) {
@@ -373,22 +371,45 @@ _
     }
 }
 
-void Thing::move_to (fpoint to)
+void Thing::update (void)
 {_
-    auto t = this;
-    auto tp = t->tp;
-
-    t->last_move_ms = time_get_time_ms_cached();
-    t->end_move_ms = t->last_move_ms + ONESEC / 10;
-    t->has_ever_moved = true;
-
-    if (!t->has_ever_moved) {
-        t->last_at = to;
-    } else {
-        t->last_at = t->at;
+    /*
+     * Light source follows the thing.
+     */
+    if (light) {
+        light->move_to(at);
+        light->calculate();
     }
 _
-    point old_at((int)t->at.x, (int)t->at.y);
+    /*
+     * Weapons follow also.
+     */
+    if (weapon_carry_anim_thing_id) {
+        auto w = thing_find(weapon_carry_anim_thing_id);
+        w->move_to(at);
+        w->dir = dir;
+    }
+_
+    if (weapon_swing_anim_thing_id) {
+        auto w = thing_find(weapon_swing_anim_thing_id);
+        w->move_to(at);
+        w->dir = dir;
+    }
+}
+
+void Thing::move_to (fpoint to)
+{_
+    last_move_ms = time_get_time_ms_cached();
+    end_move_ms = last_move_ms + ONESEC / 10;
+    has_ever_moved = true;
+
+    if (!has_ever_moved) {
+        last_at = to;
+    } else {
+        last_at = at;
+    }
+_
+    point old_at((int)at.x, (int)at.y);
     point new_at((int)to.x, (int)to.y);
 
     /*
@@ -398,20 +419,20 @@ _
         /*
          * Pop
          */
-        auto o = &game.state.map.things[old_at.x][old_at.y][t->depth];
-        auto iter = o->find(t->id);
+        auto o = &game.state.map.things[old_at.x][old_at.y][depth];
+        auto iter = o->find(id);
         if (iter == o->end()) {
             die("not found on map move");
         }
 
-        auto value = (*o)[t->id];
+        auto value = (*o)[id];
         o->erase(iter);
 
         /*
          * Add back
          */
-        auto n = &game.state.map.things[new_at.x][new_at.y][t->depth];
-        n->insert(std::make_pair(t->id, value));
+        auto n = &game.state.map.things[new_at.x][new_at.y][depth];
+        n->insert(std::make_pair(id, value));
 
         if (tp_is_wall(tp)) {
             game.state.map.is_wall[old_at.x][old_at.y] = false;
@@ -423,56 +444,48 @@ _
      * Moves are immediate, but we render the move in steps, hence keep
      * track of when we moved.
      */
-    t->at = to;
-    t->last_move_ms = time_get_time_ms_cached();
-    t->end_move_ms = t->last_move_ms + ONESEC / 10;
-_
-    /*
-     * Light source follows the thing.
-     */
-    if (t->light) {
-        t->light->move_to(at);
-        t->light->calculate();
-    }
+    at = to;
+    last_move_ms = time_get_time_ms_cached();
+    end_move_ms = last_move_ms + ONESEC / 10;
+
+    update();
 }
 
 void Thing::move_delta (fpoint delta)
 {_
-    auto t = this;
-
     /*
      * If not moving and this is the first move then break out of the
      * idle animation.
      */
-    if (t->is_dir_none()) {
-        t->next_frame_ms = time_get_time_ms_cached();
+    if (is_dir_none()) {
+        next_frame_ms = time_get_time_ms_cached();
     }
 
     if (delta.x > 0) {
-        t->set_dir_left();
-        t->is_moving = true;
-        t->has_ever_moved = true;
+        set_dir_left();
+        is_moving = true;
+        has_ever_moved = true;
     }
 
     if (delta.x < 0) {
-        t->set_dir_right();
-        t->is_moving = true;
-        t->has_ever_moved = true;
+        set_dir_right();
+        is_moving = true;
+        has_ever_moved = true;
     }
 
     if (delta.y > 0) {
-        t->set_dir_up();
-        t->is_moving = true;
-        t->has_ever_moved = true;
+        set_dir_up();
+        is_moving = true;
+        has_ever_moved = true;
     }
 
     if (delta.y < 0) {
-        t->set_dir_down();
-        t->is_moving = true;
-        t->has_ever_moved = true;
+        set_dir_down();
+        is_moving = true;
+        has_ever_moved = true;
     }
 
-    t->move_to(t->at + delta);
+    move_to(at + delta);
 }
 
 /*
@@ -490,8 +503,6 @@ Thingp thing_find (uint32_t id)
 
 std::string Thing::logname (void)
 {_
-    auto t = this;
-
     /*
      * Return constant strings from a small pool.
      */
@@ -503,7 +514,7 @@ std::string Thing::logname (void)
     }
 
     snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u(%s) at (%g,%g)",
-             t->id, t->tp->short_name.c_str(), t->at.x, t->at.y);
+             id, tp->short_name.c_str(), at.x, at.y);
 
     return (tmp[loop++]);
 }
@@ -515,190 +526,163 @@ void Thing::dead (Thingp killer, const char * , ...)
 
 void Thing::set_dir_none (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_NONE) {
-        t->dir = THING_DIR_NONE;
+    if (dir != THING_DIR_NONE) {
+        dir = THING_DIR_NONE;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_none (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_NONE);
+    return (dir == THING_DIR_NONE);
 }
 
 void Thing::set_dir_down (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_DOWN) {
-        t->dir = THING_DIR_DOWN;
+    if (dir != THING_DIR_DOWN) {
+        dir = THING_DIR_DOWN;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_down (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_DOWN);
+    return (dir == THING_DIR_DOWN);
 }
 
 void Thing::set_dir_up (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_UP) {
-        t->dir = THING_DIR_UP;
+    if (dir != THING_DIR_UP) {
+        dir = THING_DIR_UP;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_up (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_UP);
+    return (dir == THING_DIR_UP);
 }
 
 void Thing::set_dir_left (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_LEFT) {
-        if (t->dir == THING_DIR_RIGHT) {
+    if (dir != THING_DIR_LEFT) {
+        if (dir == THING_DIR_RIGHT) {
             if (tp_is_animated_walk_flip(tp)) {
-                t->flip_start_ms = time_get_time_ms_cached();
+                flip_start_ms = time_get_time_ms_cached();
             }
         }
-        t->dir = THING_DIR_LEFT;
+        dir = THING_DIR_LEFT;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_left (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_LEFT);
+    return (dir == THING_DIR_LEFT);
 }
 
 void Thing::set_dir_right (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_RIGHT) {
-        if (t->dir == THING_DIR_LEFT) {
+    if (dir != THING_DIR_RIGHT) {
+        if (dir == THING_DIR_LEFT) {
             if (tp_is_animated_walk_flip(tp)) {
-                t->flip_start_ms = time_get_time_ms_cached();
+                flip_start_ms = time_get_time_ms_cached();
             }
         }
-        t->dir = THING_DIR_RIGHT;
+        dir = THING_DIR_RIGHT;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_right (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_RIGHT);
+    return (dir == THING_DIR_RIGHT);
 }
 
 void Thing::set_dir_tl (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_TL) {
-        t->dir = THING_DIR_TL;
+    if (dir != THING_DIR_TL) {
+        dir = THING_DIR_TL;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_tl (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_TL);
+    return (dir == THING_DIR_TL);
 }
 
 void Thing::set_dir_bl (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_BL) {
-        t->dir = THING_DIR_BL;
+    if (dir != THING_DIR_BL) {
+        dir = THING_DIR_BL;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_bl (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_BL);
+    return (dir == THING_DIR_BL);
 }
 
 void Thing::set_dir_tr (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_TR) {
-        t->dir = THING_DIR_TR;
+    if (dir != THING_DIR_TR) {
+        dir = THING_DIR_TR;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_tr (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_TR);
+    return (dir == THING_DIR_TR);
 }
 
 void Thing::set_dir_br (void)
 {_
-    auto t = this;
-
-    if (tp_is_animated_no_dir(t->tp)) {
+    if (tp_is_animated_no_dir(tp)) {
         return;
     }
 
-    if (t->dir != THING_DIR_BR) {
-        t->dir = THING_DIR_BR;
+    if (dir != THING_DIR_BR) {
+        dir = THING_DIR_BR;
+        update();
     }
 }
 
 uint8_t Thing::is_dir_br (void)
 {_
-    auto t = this;
-
-    return (t->dir == THING_DIR_BR);
+    return (dir == THING_DIR_BR);
 }
