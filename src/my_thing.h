@@ -188,6 +188,7 @@ public:
     void destroyed(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
+    void update(void);
     void set_dir_bl(void);
     void set_dir_br(void);
     void set_dir_down(void);
