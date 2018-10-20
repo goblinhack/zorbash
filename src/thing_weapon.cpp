@@ -269,7 +269,11 @@ void Thing::wield (Tpp weapon)
     }
 
     auto carry_anim = thing_new(carry_as, at);
-    carry_anim->dir = dir;
+
+    /*
+     * Set the weapon so we can swing it later
+     */
+    weapon_tp_id = weapon->id;
 
     /*
      * Save the thing id so the client wid can keep track of the weapon.
@@ -280,6 +284,8 @@ void Thing::wield (Tpp weapon)
      * Attach to the thing.
      */
     carry_anim->set_owner(this);
+
+    update();
 }
 
 void Thing::swing (void)
@@ -299,52 +305,36 @@ void Thing::swing (void)
 
     auto swung_as = tp_weapon_swing_anim(weapon);
     if (swung_as == "") {
-        err("could not swing %s", tp_short_name(weapon).c_str());
+        err("could not swing %s, has no swing anim", 
+            tp_short_name(weapon).c_str());
         return;
     }
 
-#if 0
-    tpp what = tp_find(swung_as);
+    auto what = tp_find(swung_as);
     if (!what) {
         err("could not find %s to wield", swung_as.c_str());
         return;
     }
 
     /*
-     * Put the swing anim on the map
-     */
-    widp weapon_swing_anim_wid;
-
-    weapon_swing_anim_wid = wid_game_map_replace_tile(
-                                    level,
-                                    t->x,
-                                    t->y,
-                                    0, /* thing */
-                                    what,
-                                    0 /* tpp data */);
-
-    /*
      * Save the thing id so the client wid can keep track of the weapon.
      */
-    Thingp child = wid_get_thing(weapon_swing_anim_wid);
+    auto swing_anim = thing_new(swung_as, at);
 
     /*
      * Attach to the parent thing.
      */
-    set_owner(level, child, t);
+    swing_anim->set_owner(this);
 
-    child->dir = t->dir;
-
-    set_weapon_swing_anim(level, t, child);
-
-    thing_destroy_in(level, child, 500);
+    set_weapon_swing_anim(swing_anim);
 
     /*
-     * Hide the weapon too or it just floats in the air.
+     * Hide the carry anim while swinging.
      */
-    Thingp weapon_carry_anim = thing_weapon_carry_anim(level, t);
-    if (weapon_carry_anim) {
-        thing_hide(level, weapon_carry_anim);
+    auto c = get_weapon_carry_anim();
+    if (c) {
+        c->hide();
     }
-#endif
+
+    update();
 }

@@ -53,7 +53,7 @@ public:
         oldptr(this);
     }
 
-    int tp_id {};
+    int id {};
 
     /*
      * Internal description of the thing.
@@ -215,7 +215,7 @@ extern Tpmap_create_order tp_create_order_map;
 
 static inline int tp_to_id (Tpp t)
 {
-    return (t->tp_id);
+    return (t->id);
 }
 
 static inline uint8_t tp_is_floor (Tpp t)

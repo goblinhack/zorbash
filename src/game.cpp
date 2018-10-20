@@ -222,6 +222,7 @@ _
      * all the things into the map for collisions.
      */
     thing_render_all();
+    thing_gc();
 _
 #if 0
     if (!game.editor_mode) {
@@ -275,6 +276,9 @@ game_key_down (const struct SDL_KEYSYM *key)
               return (true);
             case SDLK_DOWN:
               game.state.player->move_delta(fpoint(0, d));
+              return (true);
+            case ' ':
+              game.state.player->swing();
               return (true);
         }
     }
