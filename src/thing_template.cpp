@@ -57,7 +57,7 @@ Tpp tp_load (int id, std::string name)
         }
     }
 
-    t->tp_id = id;
+    t->id = id;
 
     return (t);
 }

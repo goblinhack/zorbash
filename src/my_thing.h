@@ -46,6 +46,7 @@ public:
     ~Thing (void)
     {
         // log("destroyed");
+        destroy();
         oldptr(this);
     }
 
@@ -182,7 +183,7 @@ public:
     uint8_t is_dir_tr(void);
     uint8_t is_dir_up(void);
 
-    void pop();
+    void destroy();
     void animate();
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
     void destroyed(void);
@@ -238,6 +239,7 @@ public:
 
 extern Thingp thing_new(std::string tp_name, fpoint at);
 extern Thingp thing_find(uint32_t name);
+extern void thing_gc(void);
 extern void thing_render_all(void);
 extern void thing_map_scroll_to_player(void);
 void map_light_init(void);

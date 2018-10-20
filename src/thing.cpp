@@ -10,6 +10,27 @@
 
 static uint32_t thing_id;
 
+static std::list<uint32_t> things_to_delete;
+
+void thing_gc (void)
+{
+    for (auto id : things_to_delete) {
+        auto t = thing_find(id);
+        if (!t) {
+            ERR("thing %u not found to garbage collect", id);
+            continue;
+        }
+
+        t->log("garbage collect");
+        delete t;
+    }
+
+    /*
+     * No need to call remove as we did the safe destroy above.
+     */
+    things_to_delete.clear();
+}
+
 Thingp thing_new (std::string tp_name, fpoint at)
 {_
     auto id = ++thing_id;
@@ -139,8 +160,6 @@ Thingp thing_new (std::string tp_name, fpoint at)
 
 void Thing::hide (void)
 {_
-    verify(t);
-
     is_hidden = true;
 
     /*
@@ -154,8 +173,6 @@ void Thing::hide (void)
 
 void Thing::visible (void)
 {_
-    verify(t);
-
     is_hidden = false;
 
     /*
@@ -184,8 +201,6 @@ void Thing::visible (void)
 
 uint8_t Thing::is_visible (void)
 {
-    verify(t);
-
     return (!is_hidden);
 }
 
@@ -195,26 +210,19 @@ uint8_t Thing::is_visible (void)
  */
 void Thing::remove_hooks ()
 {_
-    verify(t);
-
     /*
      * We are owned by something. i.e. we are a sword.
      */
     Thingp owner = 0;
 
-#ifdef THING_DEBUG
-    log("remove hooks");
-#endif
-
     if (owner_thing_id) {
         owner = get_owner();
     }
-
+_
     if (owner_thing_id && owner) {
 #ifdef THING_DEBUG
         log("detach from owner %s", owner->logname().c_str());
 #endif
-
         if (thing_id == owner->weapon_carry_anim_thing_id) {
             unwield("remove hooks");
 
@@ -222,15 +230,15 @@ void Thing::remove_hooks ()
             log("detach from carry anim owner %s", owner->logname().c_str());
 #endif
 
-            set_weapon_carry_anim(nullptr);
+            owner->set_weapon_carry_anim(nullptr);
         }
-
+_
         if (thing_id == owner->weapon_swing_anim_thing_id) {
 #ifdef THING_DEBUG
             log("detach from swing anim owner %s", owner->logname().c_str());
 #endif
 
-            set_weapon_swing_anim(nullptr);
+            owner->set_weapon_swing_anim(nullptr);
 
             /*
              * End of the swing animation, make the sword visible again.
@@ -249,7 +257,7 @@ void Thing::remove_hooks ()
 
         set_owner(nullptr);
     }
-
+_
     /*
      * We own things like a sword. i.e. we are a player.
      */
@@ -331,11 +339,8 @@ void Thing::set_owner (Thingp owner)
     }
 }
 
-void Thing::pop (void)
+void Thing::destroy (void)
 {_
-    /*
-     * Pop from all things
-     */
     {
         auto a = &game.state.map.all_things;
         auto iter = a->find(id);
@@ -521,7 +526,13 @@ std::string Thing::logname (void)
 
 void Thing::dead (Thingp killer, const char * , ...)
 {_
-    ERR("thing dead TBD");
+    if (is_dead) {
+        return;
+    }
+    is_dead = true;
+
+    remove_hooks();
+    things_to_delete.push_back(id);
 }
 
 void Thing::set_dir_none (void)
