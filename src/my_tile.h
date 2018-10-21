@@ -109,7 +109,8 @@ void tile_blit_colored_fat(Tpp tp,
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-static inline void tile_blit_fat (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
+static inline void tile_blit_fat (const Tpp &tp, const Tilep &tile, 
+                                  const fpoint &tl, const fpoint &br)
 {
     double x1;
     double x2;
@@ -121,16 +122,16 @@ static inline void tile_blit_fat (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
     y1 = tile->y1;
     y2 = tile->y2;
 
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl->x, br->y, br->x, tl->y);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
-void tile_blit_fat_outline (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br);
-
-void tile_blit_fat_with_offset(Tpp &tp, Tilep &tile, 
-                               fpoint *tl, fpoint *br);
-
-void tile_get_blit_size(Tpp tp, Tilep tile, char *name, 
+void tile_blit_fat_outline(const Tpp &tp, const Tilep &tile, 
+                           const fpoint &tl, const fpoint &br);
+void tile_blit_fat_with_offset(const Tpp &tp, Tilep &tile, 
+                               const fpoint &tl, const fpoint &br);
+void tile_get_blit_size(const Tpp &tp, const Tilep tile, char *name, 
                         fpoint *tl, fpoint *br);
-void tile_blit_at(Tilep tile, char *name, fpoint tl, fpoint br);
-void tile_blit(Tilep tile, char *name, point at);
+void tile_blit_at(const Tilep &tile, const char *name, 
+                  const fpoint tl, const fpoint br);
+void tile_blit(const Tilep &tile, const char *name, const point at);
 #endif

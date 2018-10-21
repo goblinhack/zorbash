@@ -75,6 +75,12 @@ public:
     fpoint             at;
 
     /*
+     * On screen coordinates, taking account for size of the current frame.
+     */
+    fpoint             tl;
+    fpoint             br;
+
+    /*
      * Previous hop where we were. We use this to interpolate the real
      * position when moving.
      */

@@ -104,7 +104,7 @@ static void thing_map_blit_background (void)
 
 static void thing_blit_wall_cladding (Thingp &t,
                                       int x, int y,
-                                      fpoint tl, fpoint br)
+                                      fpoint &tl, fpoint &br)
 {  
     auto tp = t->tp;
     double dw = 0.004;
@@ -115,7 +115,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->top_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->top_tile, tl2, br2);
     }
 
     if (!game.state.map.is_wall[x][y + 1]) {
@@ -123,7 +123,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         fpoint br2 = br;
         tl2.y += dh;
         br2.y += dh * 2;
-        tile_blit_fat(tp, t->bot_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->bot_tile, tl2, br2);
     }
 
     if (!game.state.map.is_wall[x - 1][y]) {
@@ -131,7 +131,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         fpoint br2 = br;
         //tl2.x -= dw;
         //br2.x -= dw;
-        tile_blit_fat(tp, t->left_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->left_tile, tl2, br2);
     }
 
     if (!game.state.map.is_wall[x + 1][y]) {
@@ -139,7 +139,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         fpoint br2 = br;
         //tl2.x += dw;
         //br2.x += dw;
-        tile_blit_fat(tp, t->right_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->right_tile, tl2, br2);
     }
 
     /*
@@ -156,7 +156,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         //br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->tl_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->tl_tile, tl2, br2);
     }
 
     /*
@@ -173,7 +173,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         //br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->tr_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->tr_tile, tl2, br2);
     }
 
     /*
@@ -191,7 +191,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         //br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->tr_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->tr_tile, tl2, br2);
     }
 
     /*
@@ -209,7 +209,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         //br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->tl_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->tl_tile, tl2, br2);
     }
 
     dw = 0.00;
@@ -229,7 +229,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         br2.x -= dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit_fat(tp, t->bl_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->bl_tile, tl2, br2);
     }
 
     /*
@@ -246,7 +246,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit_fat(tp, t->br_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->br_tile, tl2, br2);
     }
 
     /*
@@ -264,7 +264,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit_fat(tp, t->br_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->br_tile, tl2, br2);
     }
 
     /*
@@ -282,7 +282,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit_fat(tp, t->bl_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->bl_tile, tl2, br2);
     }
 }
 
@@ -298,7 +298,78 @@ static void thing_blit_ladder (Thingp &t,
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, t->top_tile, &tl2, &br2);
+        tile_blit_fat(tp, t->top_tile, tl2, br2);
+    }
+}
+
+static void thing_get_all_coordinates (void)
+{
+    const double tdx = game.config.tile_gl_width;
+    const double tdy = game.config.tile_gl_height;
+
+    for (auto p : game.state.map.all_things) {
+        auto t = p.second;
+        double tx = t->at.x - game.state.map_at.x;
+        double ty = t->at.y - game.state.map_at.y;
+
+        t->tl.x = tx * tdx;
+        t->tl.y = ty * tdy;
+        t->br.x = (tx+1) * tdx;
+        t->br.y = (ty+1) * tdy;
+
+        Tilep tile;
+        if (t->current_tileinfo) {
+            tile = t->current_tileinfo->tile;
+        } else {
+            tile = t->current_tile;
+        }
+
+        /*
+         * Scale up tiles that are larger to the same pix scale.
+         */
+        if (tile->pix_width != TILE_WIDTH) {
+            auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
+            auto mx = (t->br.x + t->tl.x) / 2.0;
+            t->tl.x = mx - (xtiles * tdx);
+            t->br.x = mx + (xtiles * tdx);
+
+            auto ytiles = (tile->pix_height / TILE_HEIGHT) / 2.0;
+            auto my = (t->br.y + t->tl.y) / 2.0;
+            t->tl.y = my - (ytiles * tdy);
+            t->br.y = my + (ytiles * tdy);
+        }
+
+        auto tp = t->tp;
+
+        if (tp_is_animated_walk_flip(tp)) {
+            if (t->flip_start_ms) {
+                auto diff = time_get_time_ms_cached() - t->flip_start_ms;
+                uint32_t flip_time = 100;
+                uint32_t flip_steps = 100;
+
+                if (diff > flip_time) {
+                    t->flip_start_ms = 0;
+                    if (t->is_dir_left()) {
+                        std::swap(t->tl.x, t->br.x);
+                    }
+                } else {
+                    if (t->is_dir_right()) {
+                        std::swap(t->tl.x, t->br.x);
+                    }
+                    double w = t->br.x - t->tl.x;
+                    double dw = w / flip_steps;
+                    double tlx = t->tl.x;
+                    double brx = t->br.x;
+
+                    t->tl.x = tlx + dw * diff;
+                    t->br.x = brx - dw * diff;
+                }
+            } else {
+                if (t->is_dir_left()) {
+                    std::swap(t->tl.x, t->br.x);
+                }
+            }
+        }
     }
 }
 
@@ -307,9 +378,6 @@ static void thing_blit_things (int minx, int miny, int minz,
 {
     glcolor(WHITE);
     blit_init();
-
-    const double tdx = game.config.tile_gl_width;
-    const double tdy = game.config.tile_gl_height;
 
     for (uint8_t z = minz; z < maxz; z++) {
         for (uint16_t x = minx ; x < maxx; x++) {
@@ -320,16 +388,10 @@ static void thing_blit_things (int minx, int miny, int minz,
                         continue;
                     }
 
-                    fpoint tl;
-                    fpoint br;
-
-                    double tx = t->at.x - game.state.map_at.x;
-                    double ty = t->at.y - game.state.map_at.y;
-
-                    tl.x = tx * tdx;
-                    tl.y = ty * tdy;
-                    br.x = (tx+1) * tdx;
-                    br.y = (ty+1) * tdy;
+                    auto tp = t->tp;
+                    if (tp_is_animated(tp)) {
+                        t->animate();
+                    }
 
                     Tilep tile;
                     if (t->current_tileinfo) {
@@ -338,74 +400,18 @@ static void thing_blit_things (int minx, int miny, int minz,
                         tile = t->current_tile;
                     }
 
-                    /*
-                     * Scale up tiles that are larger to the same pix scale.
-                     */
-                    if (tile->pix_width != TILE_WIDTH) {
-                        auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
-                        auto mx = (br.x + tl.x) / 2.0;
-                        tl.x = mx - (xtiles * tdx);
-                        br.x = mx + (xtiles * tdx);
-
-                        auto ytiles = (tile->pix_height / TILE_HEIGHT) / 2.0;
-                        auto my = (br.y + tl.y) / 2.0;
-                        tl.y = my - (ytiles * tdy);
-                        br.y = my + (ytiles * tdy);
-                    }
-    
-                    Tpp tp = t->tp;
-
-                    if (tp_is_animated(tp)) {
-                        t->animate();
-                    }
-
-                    if (tp_is_animated_walk_flip(tp)) {
-                        if (t->flip_start_ms) {
-                            auto diff = time_get_time_ms_cached() - 
-                                        t->flip_start_ms;
-                            uint32_t flip_time = 100;
-                            uint32_t flip_steps = 100;
-
-                            if (diff > flip_time) {
-                                t->flip_start_ms = 0;
-                                if (t->is_dir_left()) {
-                                    std::swap(tl.x, br.x);
-                                }
-                            } else {
-                                if (t->is_dir_right()) {
-                                    std::swap(tl.x, br.x);
-                                }
-                                double w = br.x - tl.x;
-                                double dw = w / flip_steps;
-                                double tlx = tl.x;
-                                double brx = br.x;
-
-                                tl.x = tlx + dw * diff;
-                                br.x = brx - dw * diff;
-                            }
-                        } else {
-                            if (t->is_dir_left()) {
-                                std::swap(tl.x, br.x);
-                            }
-                        }
-                    }
-
-                    if (!t->current_tile) {
-                        t->die("no current tile");
-                    }
-
                     if (tp_is_outlined(tp)) {
-                        tile_blit_fat_outline(tp, tile, &tl, &br);
+                        tile_blit_fat_outline(tp, tile, t->tl, t->br);
                     } else {
-                        tile_blit_fat(tp, tile, &tl, &br);
+                        tile_blit_fat(tp, tile, t->tl, t->br);
                     }
 
                     //if (!tp) { // t->top_tile) {
                     if (t->top_tile) {
                         if (tp_is_wall(tp)) {
-                            thing_blit_wall_cladding(t, x, y, tl, br);
+                            thing_blit_wall_cladding(t, x, y, t->tl, t->br);
                         } else if (tp_is_ladder(tp)) {
-                            thing_blit_ladder(t, x, y, tl, br);
+                            thing_blit_ladder(t, x, y, t->tl, t->br);
                         }
                     }
                 }
@@ -528,6 +534,7 @@ void thing_render_all (void)
     }
 
     thing_map_scroll_do();
+    thing_get_all_coordinates();
 
     auto lighting = true;
     if (lighting) {
