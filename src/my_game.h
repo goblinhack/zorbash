@@ -41,6 +41,11 @@ public:
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_ladder[MAP_WIDTH][MAP_HEIGHT] = {};
   
+    bool is_wall_at(const point &p);
+    bool is_wall_at(const int x, const int y);
+    bool is_oob(const int x, const int y, const int z);
+    bool is_oob(const int x, const int y);
+
     template <class Archive>
     void serialize (Archive & archive)
     {
