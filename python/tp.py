@@ -103,7 +103,7 @@ class Tp:
         self.is_rrr29 = False
         self.is_rrr30 = False
         self.is_rrr31 = False
-        self.is_rrr32 = False
+        self.weapon_hit_priority = False
         self.weapon_swing_distance = 0
         self.is_weapon_carry_anim = False
         self.is_weapon_swing_effect = False
@@ -397,9 +397,9 @@ class Tp:
         self.is_rrr31 = value
         zx.tp_set_is_rrr31(self, value)
 
-    def set_is_rrr32(self, value):
-        self.is_rrr32 = value
-        zx.tp_set_is_rrr32(self, value)
+    def set_weapon_hit_priority(self, value):
+        self.weapon_hit_priority = value
+        zx.tp_set_weapon_hit_priority(self, value)
 
     def set_weapon_swing_distance(self, value):
         self.weapon_swing_distance = value

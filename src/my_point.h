@@ -198,6 +198,41 @@ public:
         }
     }
 
+    friend uint8_t get_line_intersection (my_apoint p0,
+                                          my_apoint p1,
+                                          my_apoint p2,
+                                          my_apoint p3,
+                                          my_apoint *intersect)
+    {
+        double denominator = 
+            ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
+
+        if (denominator == 0) {
+            return (false);
+        }
+
+        double a = p0.y - p2.y;
+        double b = p0.x - p2.x;
+
+        double numerator1 = ((p3.x - p2.x) * a) - ((p3.y - p2.y) * b);
+        double numerator2 = ((p1.x - p0.x) * a) - ((p1.y - p0.y) * b);
+
+        a = numerator1 / denominator;
+        b = numerator2 / denominator;
+
+        // if we cast these lines infinitely in both directions, they intersect 
+        // here:
+        intersect->x = p0.x + (a * (p1.x - p0.x));
+        intersect->y = p0.y + (a * (p1.y - p0.y));
+
+        // if line1 is a segment and line2 is infinite, they intersect if:
+        if ((a >= 0) && (a <= 1.0) && (b >= 0) && (b <= 1.0)) {
+            return (true);
+        }
+
+        return (false);
+    }
+
     /*
      * Two lines we already know intersect.
      */
@@ -207,18 +242,18 @@ public:
                                                 my_apoint p3,
                                                 my_apoint *intersect)
     {
-        T denominator = 
+        double denominator = 
             ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
         if (denominator == 0) {
             return (false);
         }
 
-        T a = p0.y - p2.y;
-        T b = p0.x - p2.x;
+        double a = p0.y - p2.y;
+        double b = p0.x - p2.x;
 
-        T numerator1 = ((p3.x - p2.x) * a) - ((p3.y - p2.y) * b);
-        T numerator2 = ((p1.x - p0.x) * a) - ((p1.y - p0.y) * b);
+        double numerator1 = ((p3.x - p2.x) * a) - ((p3.y - p2.y) * b);
+        double numerator2 = ((p1.x - p0.x) * a) - ((p1.y - p0.y) * b);
 
         a = numerator1 / denominator;
         b = numerator2 / denominator;
@@ -229,6 +264,48 @@ public:
         intersect->y = p0.y + (a * (p1.y - p0.y));
 
         return (true);
+    }
+
+    friend int 
+    distance_to_line (my_apoint P0, my_apoint L0, my_apoint L1, T *dist,
+                      my_apoint *intersect_out)
+    {
+        my_apoint intersect;
+        double mag;
+        double U;
+    
+        /*
+         * Can get the squared distance to avoid this.
+         */
+        mag = distance(L1, L0);
+    
+        /*
+         * Project point P onto the line and then calc the dot product.
+         */
+        U = (((P0.x - L0.x) * (L1.x - L0.x)) +
+             ((P0.y - L0.y) * (L1.y - L0.y))) /
+             (mag * mag);
+    
+        if (U < 0.0f) {
+            intersect = L0;
+        } else if (U > 1.0f) {
+            intersect = L1;
+        } else {
+            intersect.x = L0.x + U * (L1.x - L0.x);
+            intersect.y = L0.y + U * (L1.y - L0.y);
+        }
+    
+        *dist = distance(P0, intersect);
+
+        if (intersect_out) {
+            *intersect_out = intersect;
+        }
+    
+        if ((U < 0.0f) || (U > 1.0f)) {
+            return (0); // closest P0 does not fall within the line segment
+        }
+    
+        return (1);
     }
 };
 

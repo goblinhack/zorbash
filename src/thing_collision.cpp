@@ -9,9 +9,202 @@
 #include "my_tile.h"
 #include "my_math_util.h"
 
+int circle_box_collision (Thingp C, 
+                          fpoint C_at,
+                          Thingp B,
+                          fpoint B_at,
+                          fpoint *normal,
+                          fpoint *intersect,
+                          int check_only)
+{
+    fpoint C0, C1, C2, C3;
+    C->to_coords(&C0, &C1, &C2, &C3);
+    auto C_offset = C_at - C->at;
+    C0 += C_offset;
+    C1 += C_offset;
+    C2 += C_offset;
+    C3 += C_offset;
+
+    fpoint B0, B1, B2, B3;
+    B->to_coords(&B0, &B1, &B2, &B3);
+    auto B_offset = B_at - B->at;
+    B0 += B_offset;
+    B1 += B_offset;
+    B2 += B_offset;
+    B3 += B_offset;
+
+    double radius = fmin((C1.x - C0.x) / 2.0, (C2.y - C0.y) / 2.0);
+
+    /*
+     * Corner collisions, normal is at 45 degrees. Unless there is a wall.
+     */
+    if (distance(C_at, B0) < radius) {
+        if (!game.state.map.is_wall_at(B->at.x - 1, B->at.y)) {
+            normal->x = C_at.x - B0.x;
+            normal->y = C_at.y - B0.y;
+            return (true);
+        }
+    }
+
+    if (distance(C_at, B1) < radius) {
+        if (!game.state.map.is_wall_at(B->at.x + 1, B->at.y)) {
+            normal->x = C_at.x - B1.x;
+            normal->y = C_at.y - B1.y;
+            return (true);
+        }
+    }
+
+    if (distance(C_at, B2) < radius) {
+        if (!game.state.map.is_wall_at(B->at.x + 1, B->at.y)) {
+            normal->x = C_at.x - B2.x;
+            normal->y = C_at.y - B2.y;
+            return (true);
+        }
+    }
+
+    if (distance(C_at, B3) < radius) {
+        if (!game.state.map.is_wall_at(B->at.x - 1, B->at.y)) {
+            normal->x = C_at.x - B3.x;
+            normal->y = C_at.y - B3.y;
+            return (true);
+        }
+    }
+
+    double dist;
+    if (distance_to_line(C_at, B0, B1, &dist, 0)) {
+        if (dist < radius) {
+            goto collided;
+        }
+    }
+
+    if (distance_to_line(C_at, B1, B2, &dist, 0)) {
+        if (dist < radius) {
+            goto collided;
+        }
+    }
+
+    if (distance_to_line(C_at, B2, B3, &dist, 0)) {
+        if (dist < radius) {
+            goto collided;
+        }
+    }
+
+    if (distance_to_line(C_at, B3, B0, &dist, 0)) {
+        if (dist < radius) {
+            goto collided;
+        }
+    }
+
+    return (false);
+
+collided:
+
+    if (check_only) {
+        return (true);
+    }
+
+    fpoint delta;
+
+    if (get_line_intersection(C_at, B_at, B0, B1, intersect)) {
+        delta.x = B0.x - B1.x;
+        delta.y = B0.y - B1.y;
+        normal->x = -delta.y;
+        normal->y = delta.x;
+        return (true);
+    }
+
+    if (get_line_intersection(C_at, B_at, B1, B2, intersect)) {
+        delta.x = B1.x - B2.x;
+        delta.y = B1.y - B2.y;
+        normal->x = -delta.y;
+        normal->y = delta.x;
+        return (true);
+    }
+
+    if (get_line_intersection(C_at, B_at, B2, B3, intersect)) {
+        delta.x = B2.x - B3.x;
+        delta.y = B2.y - B3.y;
+        normal->x = -delta.y;
+        normal->y = delta.x;
+        return (true);
+    }
+
+    if (get_line_intersection(C_at, B_at, B3, B0, intersect)) {
+        delta.x = B3.x - B0.x;
+        delta.y = B3.y - B0.y;
+        normal->x = -delta.y;
+        normal->y = delta.x;
+        return (true);
+    }
+
+    /*
+     * Sphere may be inside box.
+     */
+    return (false);
+}
+
+#if 0
+/*
+ * If two circles collide, the resultant direction is along the normal between
+ * the two center of masses of the circles.
+ */
+int circle_circle_collision (Thingp A, 
+                             Thingp B,
+                             double nx,
+                             double ny,
+                             fpoint *intersect)
+{
+    widp Aw = A->wid;
+    double Ax = wid_get_cx(Aw);
+    double Ay = wid_get_cy(Aw);
+    double Awid = wid_get_width(Aw);
+    double Aheight = wid_get_height(Aw);
+    Ax += (nx - A->x) * Awid;
+    Ay += (ny - A->y) * Aheight;
+
+    fpoint A_at = { Ax, Ay };
+    fpoint A0, A1, A2, A3;
+    to_coords(A, &A0, &A1, &A2, &A3);
+    double A_radius = min((A1.x - A0.x) / 2.0,
+                          (A2.y - A0.y) / 2.0);
+
+    widp Bw = B->wid;
+    double Bx = wid_get_cx(Bw);
+    double By = wid_get_cy(Bw);
+
+    fpoint B_at = { Bx, By };
+    fpoint B0, B1, B2, B3;
+    to_coords(B, &B0, &B1, &B2, &B3);
+    double B_radius = min((B1.x - B0.x) / 2.0,
+                          (B2.y - B0.y) / 2.0);
+
+    fpoint n = fsub(B_at, A_at);
+    double touching_dist = A_radius + B_radius;
+    double dist_squared = n.x*n.x + n.y*n.y;
+
+    double diff = dist_squared - touching_dist * touching_dist;
+    if (diff > 0.0) {
+        /*
+         * Circles are not touching
+         */
+        return (false);
+    }
+
+    diff = sqrt(fabs(diff));
+    diff /= 2.0;
+
+    n = funit(n);
+    n = fmul(A_radius - diff, n);
+    n = fadd(A_at, n);
+    *intersect = n;
+
+    return (true);
+}
+#endif
+
 #if 0
 typedef struct {
-    thingp target;
+    Thingp target;
     const char *reason;
     uint16_t priority;
     uint8_t hitter_killed_on_hitting:1;
@@ -29,7 +222,7 @@ static int collision_radius = def_collision_radius;
  * Add a thing to the list of things that could be hit on this attack.
  */
 static void 
-thing_possible_hit_add_hitter_killed_on_hitting_ (thingp target,
+thing_possible_hit_add_hitter_killed_on_hitting_ (Thingp target,
                                                   const char *reason,
                                                   int hitter_killed_on_hitting,
                                                   int hitter_killed_on_hit_or_miss)
@@ -41,13 +234,13 @@ thing_possible_hit_add_hitter_killed_on_hitting_ (thingp target,
     thing_possible_hit *h = &thing_possible_hits[thing_possible_hit_size++];
     memset(h, 0, sizeof(*h));
     h->target = target;
-    h->priority = tp_get_hit_priority(thing_tp(target));
+    h->priority = tp_get_weapon_hit_priority(thing_tp(target));
     h->hitter_killed_on_hitting = hitter_killed_on_hitting;
     h->hitter_killed_on_hit_or_miss = hitter_killed_on_hit_or_miss;
 }
 
 static void 
-thing_possible_hit_add (thingp target, const char *reason)
+thing_possible_hit_add (Thingp target, const char *reason)
 {
     thing_possible_hit_add_hitter_killed_on_hitting_(target,
                                                      reason,
@@ -56,7 +249,7 @@ thing_possible_hit_add (thingp target, const char *reason)
 }
 
 static void 
-thing_possible_hit_add_hitter_killed_on_hitting (thingp target,
+thing_possible_hit_add_hitter_killed_on_hitting (Thingp target,
                                                  const char *reason)
 {
     thing_possible_hit_add_hitter_killed_on_hitting_(target,
@@ -66,7 +259,7 @@ thing_possible_hit_add_hitter_killed_on_hitting (thingp target,
 }
 
 static void 
-thing_possible_hit_add_hitter_killed_on_hit_or_miss (thingp target,
+thing_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
                                                  const char *reason)
 {
     thing_possible_hit_add_hitter_killed_on_hitting_(target,
@@ -86,7 +279,7 @@ static void thing_possible_init (void)
 /*
  * Find the thing with the highest priority to hit.
  */
-static void thing_possible_hit_do (levelp level, thingp hitter)
+static void thing_possible_hit_do (levelp level, Thingp hitter)
 {
     thing_possible_hit *best = 0;
     uint32_t i;
@@ -180,7 +373,7 @@ CON("hitter %s best %s and hitter_killed_on_hitting %d",thing_logname(hitter),th
  * will see so collisions look more accurate.
  */
 void 
-thingp_get_interpolated_position (const thingp t, double *x, double *y)
+thingp_get_interpolated_position (const Thingp t, double *x, double *y)
 {
     widp w = thing_wid(t);
 
@@ -200,272 +393,11 @@ thingp_get_interpolated_position (const thingp t, double *x, double *y)
     *y = t->last_y + (dy * wdy);
 }
 
-void
-thing_to_coords (thingp t, fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)
-{
-    widp w = t->wid;
-
-    double tl_x;
-    double tl_y;
-    double br_x;
-    double br_y;
-
-    wid_get_tl_x_tl_y_br_x_br_y(t->wid, &tl_x, &tl_y, &br_x, &br_y);
-
-    tpp tp = thing_tp(t);
-
-    double left_off  = (double)tp_get_blit_left_off(tp);
-    double right_off = (double)tp_get_blit_right_off(tp);
-    double top_off   = (double)tp_get_blit_top_off(tp);
-    double bot_off   = (double)tp_get_blit_bot_off(tp);
-
-    double pix_w     = br_x - tl_x;
-    double pix_h     = br_y - tl_y;
-
-    tl_x -= left_off  * pix_w;
-    br_x += right_off * pix_w;
-    tl_y -= top_off   * pix_h;
-    br_y += bot_off   * pix_h;
-
-    pix_w = br_x - tl_x;
-    pix_h = br_y - tl_y;
-
-    double otl_x = tl_x;
-    double otl_y = tl_y;
-    tilep tile = wid_get_tile(w);
-    tl_x = otl_x + tile->px1 * pix_w;
-    br_x = otl_x + tile->px2 * pix_w;
-    tl_y = otl_y + tile->py1 * pix_h;
-    br_y = otl_y + tile->py2 * pix_h;
-
-    P0->x = tl_x;
-    P0->y = tl_y;
-    P1->x = br_x;
-    P1->y = tl_y;
-    P2->x = br_x;
-    P2->y = br_y;
-    P3->x = tl_x;
-    P3->y = br_y;
-}
-
-int circle_box_collision (levelp level,
-                          thingp C, 
-                          double cx,
-                          double cy,
-                          thingp B,
-                          double bx,
-                          double by,
-                          fpoint *normal,
-                          fpoint *intersect,
-                          int check_only)
-{
-    double dx, dy;
-
-    fpoint C0, C1, C2, C3;
-    thing_to_coords(C, &C0, &C1, &C2, &C3);
-    dx = (cx - C->x) * (C1.x - C0.x);
-    dy = (cy - C->y) * (C2.y - C0.y);
-    C0.x += dx;
-    C0.y += dy;
-    C1.x += dx;
-    C1.y += dy;
-    C2.x += dx;
-    C2.y += dy;
-    C3.x += dx;
-    C3.y += dy;
-    double Cx = (C0.x + C1.x) / 2.0;
-    double Cy = (C0.y + C2.y) / 2.0;
-    fpoint C_at = { Cx, Cy };
-
-    fpoint B0, B1, B2, B3;
-    thing_to_coords(B, &B0, &B1, &B2, &B3);
-    dx = (bx - B->x) * (B1.x - B0.x);
-    dy = (by - B->y) * (B2.y - B0.y);
-    B0.x += dx;
-    B0.y += dy;
-    B1.x += dx;
-    B1.y += dy;
-    B2.x += dx;
-    B2.y += dy;
-    B3.x += dx;
-    B3.y += dy;
-    double Bx = (B0.x + B1.x) / 2.0;
-    double By = (B0.y + B2.y) / 2.0;
-    fpoint B_at = { Bx, By };
-
-    double radius = min((C1.x - C0.x) / 2.0,
-                        (C2.y - C0.y) / 2.0);
-
-    /*
-     * Corner collisions, normal is at 45 degrees.
-     */
-    if (fdist(C_at, B0) < radius) {
-        if (!map_find_wall_at(level, B->x - 1, B->y, 0)) {
-            normal->x = C_at.x - B0.x;
-            normal->y = C_at.y - B0.y;
-            return (true);
-        }
-    }
-
-    if (fdist(C_at, B1) < radius) {
-        if (!map_find_wall_at(level, B->x + 1, B->y, 0)) {
-            normal->x = C_at.x - B1.x;
-            normal->y = C_at.y - B1.y;
-            return (true);
-        }
-    }
-
-    if (fdist(C_at, B2) < radius) {
-        if (!map_find_wall_at(level, B->x + 1, B->y, 0)) {
-            normal->x = C_at.x - B2.x;
-            normal->y = C_at.y - B2.y;
-            return (true);
-        }
-    }
-
-    if (fdist(C_at, B3) < radius) {
-        if (!map_find_wall_at(level, B->x - 1, B->y, 0)) {
-            normal->x = C_at.x - B3.x;
-            normal->y = C_at.y - B3.y;
-            return (true);
-        }
-    }
-
-    double dist;
-    if (fpoint_dist_line2(C_at, B0, B1, &dist, 0)) {
-        if (dist < radius) {
-            goto collided;
-        }
-    }
-
-    if (fpoint_dist_line2(C_at, B1, B2, &dist, 0)) {
-        if (dist < radius) {
-            goto collided;
-        }
-    }
-
-    if (fpoint_dist_line2(C_at, B2, B3, &dist, 0)) {
-        if (dist < radius) {
-            goto collided;
-        }
-    }
-
-    if (fpoint_dist_line2(C_at, B3, B0, &dist, 0)) {
-        if (dist < radius) {
-            goto collided;
-        }
-    }
-
-    return (false);
-
-collided:
-
-    if (check_only) {
-        return (true);
-    }
-
-    fpoint delta;
-
-    if (get_line_intersection(C_at, B_at, B0, B1, intersect)) {
-        delta.x = B0.x - B1.x;
-        delta.y = B0.y - B1.y;
-        normal->x = -delta.y;
-        normal->y = delta.x;
-        return (true);
-    }
-
-    if (get_line_intersection(C_at, B_at, B1, B2, intersect)) {
-        delta.x = B1.x - B2.x;
-        delta.y = B1.y - B2.y;
-        normal->x = -delta.y;
-        normal->y = delta.x;
-        return (true);
-    }
-
-    if (get_line_intersection(C_at, B_at, B2, B3, intersect)) {
-        delta.x = B2.x - B3.x;
-        delta.y = B2.y - B3.y;
-        normal->x = -delta.y;
-        normal->y = delta.x;
-        return (true);
-    }
-
-    if (get_line_intersection(C_at, B_at, B3, B0, intersect)) {
-        delta.x = B3.x - B0.x;
-        delta.y = B3.y - B0.y;
-        normal->x = -delta.y;
-        normal->y = delta.x;
-        return (true);
-    }
-
-    /*
-     * Sphere may be inside box.
-     */
-    return (false);
-}
-
-/*
- * If two circles collide, the resultant direction is along the normal between
- * the two center of masses of the circles.
- */
-int circle_circle_collision (thingp A, 
-                             thingp B,
-                             double nx,
-                             double ny,
-                             fpoint *intersect)
-{
-    widp Aw = A->wid;
-    double Ax = wid_get_cx(Aw);
-    double Ay = wid_get_cy(Aw);
-    double Awid = wid_get_width(Aw);
-    double Aheight = wid_get_height(Aw);
-    Ax += (nx - A->x) * Awid;
-    Ay += (ny - A->y) * Aheight;
-
-    fpoint A_at = { Ax, Ay };
-    fpoint A0, A1, A2, A3;
-    thing_to_coords(A, &A0, &A1, &A2, &A3);
-    double A_radius = min((A1.x - A0.x) / 2.0,
-                          (A2.y - A0.y) / 2.0);
-
-    widp Bw = B->wid;
-    double Bx = wid_get_cx(Bw);
-    double By = wid_get_cy(Bw);
-
-    fpoint B_at = { Bx, By };
-    fpoint B0, B1, B2, B3;
-    thing_to_coords(B, &B0, &B1, &B2, &B3);
-    double B_radius = min((B1.x - B0.x) / 2.0,
-                          (B2.y - B0.y) / 2.0);
-
-    fpoint n = fsub(B_at, A_at);
-    double touching_dist = A_radius + B_radius;
-    double dist_squared = n.x*n.x + n.y*n.y;
-
-    double diff = dist_squared - touching_dist * touching_dist;
-    if (diff > 0.0) {
-        /*
-         * Circles are not touching
-         */
-        return (false);
-    }
-
-    diff = sqrt(fabs(diff));
-    diff /= 2.0;
-
-    n = funit(n);
-    n = fmul(A_radius - diff, n);
-    n = fadd(A_at, n);
-    *intersect = n;
-
-    return (true);
-}
-
 static uint8_t things_overlap (levelp level,
-                               const thingp A, 
+                               const Thingp A, 
                                double nx,
                                double ny,
-                               const thingp B)
+                               const Thingp B)
 {
     static tilep wall;
     static double collision_map_large_x1;
@@ -862,7 +794,7 @@ CON("      %f %f %f %f",Bpx1,Bpy1,Bpx2,Bpy2);
  * handle a single collision between two things
  */
 static int thing_handle_collision (levelp level,
-                                   thingp me, thingp it, 
+                                   Thingp me, Thingp it, 
                                    int32_t x, int32_t y,
                                    int32_t dx, int32_t dy)
 {
@@ -904,8 +836,8 @@ static int thing_handle_collision (levelp level,
     /*
      * Weapon swing of monster should not hit other monsters.
      */
-    thingp owner_it = thing_owner(level, it);
-    thingp owner_me = thing_owner(level, me);
+    Thingp owner_it = thing_owner(level, it);
+    Thingp owner_me = thing_owner(level, me);
 
     if (owner_me) {
         if (thing_is_monst(owner_me) && thing_is_monst(it)) {
@@ -1277,7 +1209,7 @@ LOG("add poss me %s hitter %s",thing_logname(me), thing_logname(it));
         /*
          * Don't let shopkeepers shoot their own wares when defending a shop
          */
-        thingp owner_proj = thing_owner(level, me);
+        Thingp owner_proj = thing_owner(level, me);
         if (owner_it && (owner_it == owner_proj)) {
             return (true);
         }
@@ -1412,7 +1344,7 @@ LOG("add poss me %s hitter %s",thing_logname(me), thing_logname(it));
 /*
  * Have we hit anything?
  */
-int thing_handle_collisions (levelp level, thingp me)
+int thing_handle_collisions (levelp level, Thingp me)
 {
     int32_t dx, dy;
 
@@ -1446,7 +1378,7 @@ LOG("shield coll");
 
         uint32_t i;
         for (i = 0; i < cell->count; i++) {
-            thingp it;
+            Thingp it;
             
             it = id_to_thing(cell->id[i]);
 #if 0
@@ -1475,12 +1407,12 @@ LOG("%d %d [%d] %s",x,y,i, thing_logname(it));
  *
  * No opening of doors in here or other actions. This is just a check.
  */
-thingp thing_hit_solid_obstacle (levelp level,
-                                 thingp t, 
+Thingp thing_hit_solid_obstacle (levelp level,
+                                 Thingp t, 
                                  double nx, 
                                  double ny)
 {
-    thingp me;
+    Thingp me;
     widp wid_me;
 
     verify(t);
@@ -1516,7 +1448,7 @@ thingp thing_hit_solid_obstacle (levelp level,
 
         uint32_t i;
         for (i = 0; i < cell->count; i++) {
-            thingp it;
+            Thingp it;
             
             it = id_to_thing(cell->id[i]);
             if (it == t) {
@@ -1813,13 +1745,13 @@ thingp thing_hit_solid_obstacle (levelp level,
  *
  * No opening of doors in here or other actions. This is just a check.
  */
-thingp thing_hit_fall_obstacle (levelp level,
-                                thingp t, 
+Thingp thing_hit_fall_obstacle (levelp level,
+                                Thingp t, 
                                 double nx, 
                                 double ny)
 {
-    thingp candidate = 0;
-    thingp me;
+    Thingp candidate = 0;
+    Thingp me;
     widp wid_me;
 
     verify(t);
@@ -1848,7 +1780,7 @@ thingp thing_hit_fall_obstacle (levelp level,
 
         uint32_t i;
         for (i = 0; i < cell->count; i++) {
-            thingp it;
+            Thingp it;
             
             it = id_to_thing(cell->id[i]);
             if (it == t) {
@@ -1998,12 +1930,12 @@ thingp thing_hit_fall_obstacle (levelp level,
  *
  * Is there anything other than floor here
  */
-thingp thing_hit_any_obstacle (levelp level, 
-                               thingp t, 
+Thingp thing_hit_any_obstacle (levelp level, 
+                               Thingp t, 
                                double nx, 
                                double ny)
 {
-    thingp me;
+    Thingp me;
     widp wid_me;
 
     verify(t);
@@ -2034,7 +1966,7 @@ thingp thing_hit_any_obstacle (levelp level,
 
         uint32_t i;
         for (i = 0; i < cell->count; i++) {
-            thingp it;
+            Thingp it;
             
             it = id_to_thing(cell->id[i]);
             if (me == it) {
@@ -2088,13 +2020,13 @@ thingp thing_hit_any_obstacle (levelp level,
  *
  * Is there anything other than floor here
  */
-thingp thing_overlaps (levelp level, 
-                       thingp t, 
+Thingp thing_overlaps (levelp level, 
+                       Thingp t, 
                        double nx, 
                        double ny,
                        thing_is_fn fn)
 {
-    thingp me;
+    Thingp me;
     widp wid_me;
 
     verify(t);
@@ -2125,7 +2057,7 @@ thingp thing_overlaps (levelp level,
 
         uint32_t i;
         for (i = 0; i < cell->count; i++) {
-            thingp it;
+            Thingp it;
             
             it = id_to_thing(cell->id[i]);
             if (me == it) {

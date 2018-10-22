@@ -1707,7 +1707,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr29)
     TP_SET_DECL(is_rrr30)
     TP_SET_DECL(is_rrr31)
-    TP_SET_DECL(is_rrr32)
+    TP_SET_DECL(weapon_hit_priority)
     TP_SET_DECL(weapon_swing_distance)
     TP_SET_DECL(is_weapon_carry_anim)
     TP_SET_DECL(is_weapon_swing_effect)

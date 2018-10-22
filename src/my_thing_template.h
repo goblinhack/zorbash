@@ -168,7 +168,7 @@ public:
     bool is_rrr29 {};
     bool is_rrr30 {};
     bool is_rrr31 {};
-    bool is_rrr32 {};
+    bool weapon_hit_priority {};
     bool weapon_swing_distance {};
     bool is_weapon_carry_anim {};
     bool is_weapon_swing_effect {};
@@ -423,9 +423,9 @@ static inline uint8_t tp_is_rrr31 (Tpp t)
     return (t->is_rrr31);
 }
 
-static inline uint8_t tp_is_rrr32 (Tpp t)
+static inline uint8_t tp_weapon_hit_priority (Tpp t)
 {
-    return (t->is_rrr32);
+    return (t->weapon_hit_priority);
 }
 
 static inline uint8_t tp_weapon_swing_distance (Tpp t)

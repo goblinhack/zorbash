@@ -231,6 +231,7 @@ public:
     void set_weapon_carry_anim(Thingp weapon_carry_anim);
     void set_weapon_swing_anim_id(uint32_t weapon_swing_anim_id);
     void set_weapon_swing_anim(Thingp weapon_swing_anim);
+    void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
