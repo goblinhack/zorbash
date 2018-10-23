@@ -143,7 +143,6 @@ collided:
     return (false);
 }
 
-#if 0
 /*
  * If two circles collide, the resultant direction is along the normal between
  * the two center of masses of the circles.
@@ -154,31 +153,25 @@ int circle_circle_collision (Thingp A,
                              double ny,
                              fpoint *intersect)
 {
-    widp Aw = A->wid;
-    double Ax = wid_get_cx(Aw);
-    double Ay = wid_get_cy(Aw);
-    double Awid = wid_get_width(Aw);
-    double Aheight = wid_get_height(Aw);
-    Ax += (nx - A->x) * Awid;
-    Ay += (ny - A->y) * Aheight;
+    double Ax = A->at.x;
+    double Ay = A->at.y;
+    Ax += (nx - A->at.x);
+    Ay += (ny - A->at.y);
 
     fpoint A_at = { Ax, Ay };
     fpoint A0, A1, A2, A3;
-    to_coords(A, &A0, &A1, &A2, &A3);
-    double A_radius = min((A1.x - A0.x) / 2.0,
-                          (A2.y - A0.y) / 2.0);
+    A->to_coords(&A0, &A1, &A2, &A3);
+    double A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
 
-    widp Bw = B->wid;
-    double Bx = wid_get_cx(Bw);
-    double By = wid_get_cy(Bw);
+    double Bx = B->at.x;
+    double By = B->at.y;
 
     fpoint B_at = { Bx, By };
     fpoint B0, B1, B2, B3;
-    to_coords(B, &B0, &B1, &B2, &B3);
-    double B_radius = min((B1.x - B0.x) / 2.0,
-                          (B2.y - B0.y) / 2.0);
+    B->to_coords(&B0, &B1, &B2, &B3);
+    double B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
-    fpoint n = fsub(B_at, A_at);
+    fpoint n = B_at - A_at;
     double touching_dist = A_radius + B_radius;
     double dist_squared = n.x*n.x + n.y*n.y;
 
@@ -193,14 +186,13 @@ int circle_circle_collision (Thingp A,
     diff = sqrt(fabs(diff));
     diff /= 2.0;
 
-    n = funit(n);
-    n = fmul(A_radius - diff, n);
-    n = fadd(A_at, n);
+    n = unit(n);
+    n *= (A_radius - diff);
+    n += A_at;
     *intersect = n;
 
     return (true);
 }
-#endif
 
 #if 0
 typedef struct {
