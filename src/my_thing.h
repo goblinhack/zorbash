@@ -147,7 +147,7 @@ public:
     uint16_t           hp {0};
 
     uint32_t           weapon_carry_anim_thing_id {0};
-    uint32_t           weapon_swing_anim_thing_id {0};
+    uint32_t           weapon_use_anim_thing_id {0};
 
     /*
      * Weapon thing template.
@@ -240,17 +240,17 @@ public:
     void wield_next_weapon();
     void unwield(const char *why);
     void sheath(void);
-    void swing(void);
+    void use(void);
     void wield(Tpp tp);
     void weapon_sheath(void);
-    void get_weapon_swing_offset(double *dx, double *dy);
+    void get_weapon_use_offset(double *dx, double *dy);
     Thingp get_weapon_carry_anim(void);
-    Thingp get_weapon_swing_anim(void);
+    Thingp get_weapon_use_anim(void);
     void set_weapon_placement(void);
     void set_weapon_carry_anim_id(uint32_t weapon_carry_anim_id);
     void set_weapon_carry_anim(Thingp weapon_carry_anim);
-    void set_weapon_swing_anim_id(uint32_t weapon_swing_anim_id);
-    void set_weapon_swing_anim(Thingp weapon_swing_anim);
+    void set_weapon_use_anim_id(uint32_t weapon_use_anim_id);
+    void set_weapon_use_anim(Thingp weapon_use_anim);
     void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
 
     void log_(const char *fmt, va_list args); // compile error without

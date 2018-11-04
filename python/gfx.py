@@ -1548,12 +1548,12 @@ def init_weapons_tiles():
             "sword1.1",
             "sword1_carry_anim.1",
             "sword1_carry_anim.2",
-            "sword1_swing_anim.1",
-            "sword1_swing_anim.2",
-            "sword1_swing_anim.3",
-            "sword1_swing_anim.4",
-            "sword1_swing_anim.5",
-            "sword1_swing_anim.6",
+            "sword1_use_anim.1",
+            "sword1_use_anim.2",
+            "sword1_use_anim.3",
+            "sword1_use_anim.4",
+            "sword1_use_anim.5",
+            "sword1_use_anim.6",
     ]
 
     zx.tile_load_arr(tex_name="weapons", width=96, height=96, arr=tiles)

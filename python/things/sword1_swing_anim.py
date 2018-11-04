@@ -22,6 +22,6 @@ def my_init(name, short_name):
             is_end_of_anim = True, is_dead_on_end_of_anim=True)
 
 def init():
-    my_init(name="sword1_swing_anim", short_name="sword1_swing_anim")
+    my_init(name="sword1_use_anim", short_name="sword1_use_anim")
 
 init()

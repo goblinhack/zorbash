@@ -84,7 +84,7 @@ public:
     std::string str_zzz17;
     std::string str_zzz18;
     std::string weapon_carry_anim;
-    std::string weapon_swing_anim;
+    std::string weapon_use_anim;
 
     /*
      * Animation tiles.
@@ -160,7 +160,7 @@ public:
     int is_rrr21 {};
     int is_rrr22 {};
     int move_delay_hundredths {};
-    int weapon_fire_delay_hundredths {};
+    int weapon_use_delay_hundredths {};
     int for_collision_use_box {};
     int for_collision_use_circle {};
     int weapon_damage {};
@@ -169,9 +169,9 @@ public:
     int is_combustable {};
     int is_spikes {};
     int collision_priority {};
-    int weapon_swing_distance {};
+    int weapon_use_distance {};
     int is_weapon_carry_anim {};
-    int is_weapon_swing_effect {};
+    int is_weapon_use_effect {};
     int is_weapon {};
     int is_outlined {};
     int is_shadow_caster {};
@@ -382,9 +382,9 @@ static inline int tp_move_delay_hundredths (Tpp t)
     return (t->move_delay_hundredths);
 }
 
-static inline int tp_get_weapon_fire_delay_hundredths (Tpp t)
+static inline int tp_get_weapon_use_delay_hundredths (Tpp t)
 {
-    return (t->weapon_fire_delay_hundredths);
+    return (t->weapon_use_delay_hundredths);
 }
 
 static inline int tp_for_collision_use_box (Tpp t)
@@ -427,9 +427,9 @@ static inline int tp_collision_priority (Tpp t)
     return (t->collision_priority);
 }
 
-static inline int tp_weapon_swing_distance (Tpp t)
+static inline int tp_weapon_use_distance (Tpp t)
 {
-    return (t->weapon_swing_distance);
+    return (t->weapon_use_distance);
 }
 
 static inline int tp_is_weapon_carry_anim (Tpp t)
@@ -437,9 +437,9 @@ static inline int tp_is_weapon_carry_anim (Tpp t)
     return (t->is_weapon_carry_anim);
 }
 
-static inline int tp_is_weapon_swing_effect (Tpp t)
+static inline int tp_is_weapon_use_effect (Tpp t)
 {
-    return (t->is_weapon_swing_effect);
+    return (t->is_weapon_use_effect);
 }
 
 static inline int tp_is_weapon (Tpp t)
@@ -592,9 +592,9 @@ static inline std::string tp_weapon_carry_anim (Tpp t)
     return (t->weapon_carry_anim);
 }
 
-static inline std::string tp_weapon_swing_anim (Tpp t)
+static inline std::string tp_weapon_use_anim (Tpp t)
 {
-    return (t->weapon_swing_anim);
+    return (t->weapon_use_anim);
 }
 
 static inline std::string tp_raw_name (Tpp t)

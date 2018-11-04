@@ -574,9 +574,9 @@ static int things_handle_collision (Thingp me,
     }
 
     /*
-     * Sword swing hits?
+     * Sword use hits?
      */
-    if (tp_is_weapon_swing_effect(me_tp)) {
+    if (tp_is_weapon_use_effect(me_tp)) {
         if (tp_is_monst(it_tp)) {
             /*
              * Weapon hits monster or generator.

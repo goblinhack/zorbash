@@ -142,7 +142,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
 
             if (!tp_is_explosion(hitter->tp)     &&
                 !tp_is_projectile(hitter->tp)    &&
-                !tp_is_weapon_swing_effect(hitter->tp)) {
+                !tp_is_weapon_use_effect(hitter->tp)) {
                 /*
                  * Not something that typically damages walls.
                  */
@@ -150,9 +150,9 @@ int Thing::hit_possible (Thingp hitter, int damage)
             }
         }
 
-        if (tp_is_weapon_swing_effect(hitter->tp)) {
+        if (tp_is_weapon_use_effect(hitter->tp)) {
             /*
-             * Get the player swinging the weapon as the hitter.
+             * Get the player using the weapon as the hitter.
              */
             hitter = hitter->get_owner();
             if (!hitter) {
@@ -162,7 +162,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
             verify(hitter);
 
             /*
-             * Get the damage from the weapon being used to swing.
+             * Get the damage from the weapon being used to use.
              */
             weapon = hitter->get_weapon();
             if (!weapon) {
@@ -185,7 +185,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
             verify(hitter);
 
             /*
-             * Get the damage from the weapon being used to swing.
+             * Get the damage from the weapon being used to use.
              */
             weapon = hitter->get_weapon();
             if (!weapon) {
