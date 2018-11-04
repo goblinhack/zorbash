@@ -98,19 +98,19 @@ class Tp:
         self.is_rrr24 = False
         self.is_rrr25 = False
         self.is_rrr26 = False
-        self.is_rrr27 = False
-        self.is_rrr28 = False
-        self.is_rrr29 = False
-        self.is_rrr30 = False
-        self.is_rrr31 = False
-        self.weapon_hit_priority = False
+        self.weapon_damage = False
+        self.is_projectile = False
+        self.is_explosion = False
+        self.is_combustable = False
+        self.is_spikes = False
+        self.collision_priority = False
         self.weapon_swing_distance = 0
         self.is_weapon_carry_anim = False
         self.is_weapon_swing_effect = False
         self.is_weapon = False
         self.is_outlined = False
         self.is_shadow_caster = False
-        self.is_rrr41 = False
+        self.is_ladder = False
         self.is_animated_walk_flip = False
         self.z_depth = False
         self.is_movable = False
@@ -377,29 +377,29 @@ class Tp:
         self.is_rrr26 = value
         zx.tp_set_is_rrr26(self, value)
 
-    def set_is_rrr27(self, value):
-        self.is_rrr27 = value
-        zx.tp_set_is_rrr27(self, value)
+    def set_weapon_damage(self, value):
+        self.weapon_damage = value
+        zx.tp_set_weapon_damage(self, value)
 
-    def set_is_rrr28(self, value):
-        self.is_rrr28 = value
-        zx.tp_set_is_rrr28(self, value)
+    def set_is_projectile(self, value):
+        self.is_projectile = value
+        zx.tp_set_is_projectile(self, value)
 
-    def set_is_rrr29(self, value):
-        self.is_rrr29 = value
-        zx.tp_set_is_rrr29(self, value)
+    def set_is_explosion(self, value):
+        self.is_explosion = value
+        zx.tp_set_is_explosion(self, value)
 
-    def set_is_rrr30(self, value):
-        self.is_rrr30 = value
-        zx.tp_set_is_rrr30(self, value)
+    def set_is_combustable(self, value):
+        self.is_combustable = value
+        zx.tp_set_is_combustable(self, value)
 
-    def set_is_rrr31(self, value):
-        self.is_rrr31 = value
-        zx.tp_set_is_rrr31(self, value)
+    def set_is_spikes(self, value):
+        self.is_spikes = value
+        zx.tp_set_is_spikes(self, value)
 
-    def set_weapon_hit_priority(self, value):
-        self.weapon_hit_priority = value
-        zx.tp_set_weapon_hit_priority(self, value)
+    def set_collision_priority(self, value):
+        self.collision_priority = value
+        zx.tp_set_collision_priority(self, value)
 
     def set_weapon_swing_distance(self, value):
         self.weapon_swing_distance = value
@@ -425,9 +425,9 @@ class Tp:
         self.is_shadow_caster = value
         zx.tp_set_is_shadow_caster(self, value)
 
-    def set_is_rrr41(self, value):
-        self.is_rrr41 = value
-        zx.tp_set_is_rrr41(self, value)
+    def set_is_ladder(self, value):
+        self.is_ladder = value
+        zx.tp_set_is_ladder(self, value)
 
     def set_is_animated_walk_flip(self, value):
         self.is_animated_walk_flip = value

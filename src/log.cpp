@@ -564,6 +564,73 @@ void Thing::log (const char *fmt, ...)
     va_end(args);
 }
 
+void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
+{_
+    auto t = this;
+
+    char buf[MAXSTR];
+    uint32_t len;
+
+    buf[0] = '\0';
+    timestamp(buf, sizeof(buf));
+    len = (uint32_t)strlen(buf);
+    snprintf(buf + len, sizeof(buf) - len, "thing %s: dead, killer %s: ",
+             t->logname().c_str(),
+             killer->logname().c_str());
+
+    len = (uint32_t)strlen(buf);
+    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
+
+    kill();
+}
+
+void Thing::dead (Thingp killer, const char *fmt, ...)
+{_
+    auto t = this;
+
+    va_list args;
+
+    va_start(args, fmt);
+    t->dead_(killer, fmt, args);
+    va_end(args);
+}
+
+void Thing::dead_ (const char *fmt, va_list args)
+{_
+    auto t = this;
+
+    char buf[MAXSTR];
+    uint32_t len;
+
+    buf[0] = '\0';
+    timestamp(buf, sizeof(buf));
+    len = (uint32_t)strlen(buf);
+    snprintf(buf + len, sizeof(buf) - len, "thing %s: dead: ",
+             t->logname().c_str());
+
+    len = (uint32_t)strlen(buf);
+    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
+
+    kill();
+}
+
+void Thing::dead (const char *fmt, ...)
+{_
+    auto t = this;
+
+    va_list args;
+
+    va_start(args, fmt);
+    t->dead_(fmt, args);
+    va_end(args);
+}
+
 void Thing::die_ (const char *fmt, va_list args)
 {_
     auto t = this;

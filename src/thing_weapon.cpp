@@ -240,13 +240,13 @@ void Thing::sheath (void)
      */
     auto weapon_carry_anim = get_weapon_carry_anim();
     if (weapon_carry_anim) {
-        weapon_carry_anim->dead(nullptr, "owner weapon");
+        weapon_carry_anim->dead("owner weapon");
         set_weapon_carry_anim(nullptr);
     }
 
     auto weapon_swing_anim = get_weapon_swing_anim();
     if (weapon_swing_anim) {
-        weapon_swing_anim->dead(nullptr, "owner weapon");
+        weapon_swing_anim->dead("owner weapon");
         set_weapon_swing_anim(nullptr);
     }
 }

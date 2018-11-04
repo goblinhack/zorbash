@@ -91,19 +91,11 @@ public:
      */
     fpoint             normal_velocity;
     fpoint             tangent_velocity;
-
-    /*
-     * For freefalling.
-    float              fall_speed {0};
-    float              jump_speed {0};
-    float              momentum {0};
-    float              rot {0};
-     */
-
-    /*
-     * How close for collision detection.
-     */
-    float              collision_radius {0};
+    double             fall_speed {0};
+    double             jump_speed {0};
+    double             momentum {0};
+    double             rot {0};
+    double             collision_radius {0};
 
     /*
      * Pointer to common settings for this thing.
@@ -122,6 +114,13 @@ public:
     uint32_t           last_move_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
+
+    /*
+     * Timestamps
+     */
+    uint32_t           timestamp_born {};
+    uint32_t           timestamp_last_i_was_hit {};
+    uint32_t           timestamp_last_attacked {};
 
     /*
      * Tileinfo may be null if this thing does not need animation.
@@ -172,6 +171,8 @@ public:
      * Update thing_new when adding new bitfields.
      */
     unsigned int       is_dead:1;
+    unsigned int       is_bloodied:1;
+    unsigned int       is_player:1;
     unsigned int       is_hidden:1;
     unsigned int       is_sleeping:1;
     unsigned int       is_moving:1;
@@ -191,7 +192,7 @@ public:
 
     void destroy();
     void animate();
-    void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
+    void kill(void);
     void destroyed(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
@@ -205,13 +206,22 @@ public:
     void set_dir_tl(void);
     void set_dir_tr(void);
     void set_dir_up(void);
-    void set_is_dead(uint8_t val);
     void remove_hooks();
     Thingp get_owner();
     void set_owner(Thingp owner);
     uint8_t is_visible();
     void visible();
     void hide();
+
+    /*
+     * thing_hit.c
+     */
+    int thing_hit_actual(Thingp orig_hitter, 
+                         Thingp real_hitter, 
+                         Thingp hitter, 
+                         int damage);
+
+    int thing_hit_possible(Thingp hitter, int damage);
 
     /*
      * thing_weapon.c
@@ -235,6 +245,10 @@ public:
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void dead_(Thingp killer, const char *fmt, va_list args); // compile error without
+    void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
+    void dead_(const char *fmt, va_list args); // compile error without
+    void dead(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void die_(const char *fmt, va_list args); // compile error without
     void die(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args); // compile error without
