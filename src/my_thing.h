@@ -272,7 +272,14 @@ extern void thing_map_scroll_to_player(void);
 /*
  * thing_move.cpp
  */
-bool thing_overlaps_vorder(Thingp t);
+bool thing_overlaps_border(Thingp t);
+bool things_tile_overlap(Thingp t, Thingp o);
+bool things_tile_overlap(Thingp t, fpoint t_at, Thingp o);
+
+/*
+ * thing_collision.cpp
+ */
 bool things_overlap(Thingp t, Thingp o);
+bool things_overlap(Thingp t, fpoint t_at, Thingp o);
 
 #endif /* THING_H */

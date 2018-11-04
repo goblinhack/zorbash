@@ -161,8 +161,8 @@ public:
     int is_rrr22 {};
     int is_rrr23 {};
     int is_rrr24 {};
-    int is_rrr25 {};
-    int is_rrr26 {};
+    int for_collision_use_box {};
+    int for_collision_use_circle {};
     int weapon_damage {};
     int is_projectile {};
     int is_explosion {};
@@ -387,14 +387,14 @@ static inline int tp_is_rrr24 (Tpp t)
     return (t->is_rrr24);
 }
 
-static inline int tp_is_rrr25 (Tpp t)
+static inline int tp_for_collision_use_box (Tpp t)
 {
-    return (t->is_rrr25);
+    return (t->for_collision_use_box);
 }
 
-static inline int tp_is_rrr26 (Tpp t)
+static inline int tp_for_collision_use_circle (Tpp t)
 {
-    return (t->is_rrr26);
+    return (t->for_collision_use_circle);
 }
 
 static inline int tp_weapon_damage (Tpp t)

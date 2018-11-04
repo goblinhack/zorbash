@@ -96,8 +96,8 @@ class Tp:
         self.is_rrr22 = False
         self.is_rrr23 = False
         self.is_rrr24 = False
-        self.is_rrr25 = False
-        self.is_rrr26 = False
+        self.for_collision_use_box = False
+        self.for_collision_use_circle = False
         self.weapon_damage = False
         self.is_projectile = False
         self.is_explosion = False
@@ -369,13 +369,13 @@ class Tp:
         self.is_rrr24 = value
         zx.tp_set_is_rrr24(self, value)
 
-    def set_is_rrr25(self, value):
-        self.is_rrr25 = value
-        zx.tp_set_is_rrr25(self, value)
+    def set_for_collision_use_box(self, value):
+        self.for_collision_use_box = value
+        zx.tp_set_for_collision_use_box(self, value)
 
-    def set_is_rrr26(self, value):
-        self.is_rrr26 = value
-        zx.tp_set_is_rrr26(self, value)
+    def set_for_collision_use_circle(self, value):
+        self.for_collision_use_circle = value
+        zx.tp_set_for_collision_use_circle(self, value)
 
     def set_weapon_damage(self, value):
         self.weapon_damage = value
