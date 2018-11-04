@@ -121,7 +121,7 @@ void player_tick (void)
         if (fire) {
             static uint32_t last_fired = 0;
 
-            uint32_t delay = tp_get_weapon_fire_delay_hundredths(weapon);
+            uint32_t delay = tp_get_weapon_use_delay_hundredths(weapon);
             
             if (!time_have_x_hundredths_passed_since(delay, last_fired)) {
                 fire = 0;
@@ -137,7 +137,7 @@ void player_tick (void)
         }
 
         if (fire) {
-            player->swing();
+            player->use();
         }
     }
 

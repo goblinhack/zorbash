@@ -190,9 +190,9 @@ void Thing::visible (void)
     auto owner = get_owner();
     if (owner) {
         if (this == owner->get_weapon_carry_anim()) {
-            if (owner->get_weapon_swing_anim()) {
+            if (owner->get_weapon_use_anim()) {
                 /*
-                 * Stay hidden until the weapon swing is done.
+                 * Stay hidden until the weapon use is done.
                  */
                 return;
             }
@@ -242,15 +242,15 @@ _
             owner->set_weapon_carry_anim(nullptr);
         }
 _
-        if (thing_id == owner->weapon_swing_anim_thing_id) {
+        if (thing_id == owner->weapon_use_anim_thing_id) {
 #ifdef THING_DEBUG
-            log("detach from swing anim owner %s", owner->logname().c_str());
+            log("detach from use anim owner %s", owner->logname().c_str());
 #endif
 
-            owner->set_weapon_swing_anim(nullptr);
+            owner->set_weapon_use_anim(nullptr);
 
             /*
-             * End of the swing animation, make the sword visible again.
+             * End of the use animation, make the sword visible again.
              */
             auto carrying = owner->get_weapon_carry_anim();
             if (carrying) {
@@ -278,12 +278,12 @@ _
         item->dead("weapon carry anim owner killed");
     }
 
-    if (weapon_swing_anim_thing_id) {
-        auto item = get_weapon_swing_anim();
-        set_weapon_swing_anim(nullptr);
+    if (weapon_use_anim_thing_id) {
+        auto item = get_weapon_use_anim();
+        set_weapon_use_anim(nullptr);
         verify(item);
         item->set_owner(nullptr);
-        item->dead("weapon swing anim owner killed");
+        item->dead("weapon use anim owner killed");
     }
 
     /*
@@ -404,8 +404,8 @@ _
         w->dir = dir;
     }
 _
-    if (weapon_swing_anim_thing_id) {
-        auto w = thing_find(weapon_swing_anim_thing_id);
+    if (weapon_use_anim_thing_id) {
+        auto w = thing_find(weapon_use_anim_thing_id);
         w->move_to(at);
         w->dir = dir;
     }

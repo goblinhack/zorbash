@@ -71,7 +71,7 @@ class Tp:
         self.str_zzz17 = ""
         self.str_zzz18 = ""
         self.weapon_carry_anim = ""
-        self.weapon_swing_anim = ""
+        self.weapon_use_anim = ""
         self.is_rrr1 = False
         self.is_rrr2 = False
         self.is_rrr3 = False
@@ -95,7 +95,7 @@ class Tp:
         self.is_rrr21 = False
         self.is_rrr22 = False
         self.move_delay_hundredths = False
-        self.weapon_fire_delay_hundredths = False
+        self.weapon_use_delay_hundredths = False
         self.for_collision_use_box = False
         self.for_collision_use_circle = False
         self.weapon_damage = False
@@ -104,9 +104,9 @@ class Tp:
         self.is_combustable = False
         self.is_spikes = False
         self.collision_priority = False
-        self.weapon_swing_distance = 0
+        self.weapon_use_distance = 0
         self.is_weapon_carry_anim = False
-        self.is_weapon_swing_effect = False
+        self.is_weapon_use_effect = False
         self.is_weapon = False
         self.is_outlined = False
         self.is_shadow_caster = False
@@ -269,9 +269,9 @@ class Tp:
         self.weapon_carry_anim = value
         zx.tp_set_weapon_carry_anim(self, value)
 
-    def set_weapon_swing_anim(self, value):
-        self.weapon_swing_anim = value
-        zx.tp_set_weapon_swing_anim(self, value)
+    def set_weapon_use_anim(self, value):
+        self.weapon_use_anim = value
+        zx.tp_set_weapon_use_anim(self, value)
 
     def set_is_rrr1(self, value):
         self.is_rrr1 = value
@@ -365,9 +365,9 @@ class Tp:
         self.move_delay_hundredths = value
         zx.tp_set_move_delay_hundredths(self, value)
 
-    def set_weapon_fire_delay_hundredths(self, value):
-        self.weapon_fire_delay_hundredths = value
-        zx.tp_set_weapon_fire_delay_hundredths(self, value)
+    def set_weapon_use_delay_hundredths(self, value):
+        self.weapon_use_delay_hundredths = value
+        zx.tp_set_weapon_use_delay_hundredths(self, value)
 
     def set_for_collision_use_box(self, value):
         self.for_collision_use_box = value
@@ -401,17 +401,17 @@ class Tp:
         self.collision_priority = value
         zx.tp_set_collision_priority(self, value)
 
-    def set_weapon_swing_distance(self, value):
-        self.weapon_swing_distance = value
-        zx.tp_set_weapon_swing_distance(self, value)
+    def set_weapon_use_distance(self, value):
+        self.weapon_use_distance = value
+        zx.tp_set_weapon_use_distance(self, value)
 
     def set_is_weapon_carry_anim(self, value):
         self.is_weapon_carry_anim = value
         zx.tp_set_is_weapon_carry_anim(self, value)
 
-    def set_is_weapon_swing_effect(self, value):
-        self.is_weapon_swing_effect = value
-        zx.tp_set_is_weapon_swing_effect(self, value)
+    def set_is_weapon_use_effect(self, value):
+        self.is_weapon_use_effect = value
+        zx.tp_set_is_weapon_use_effect(self, value)
 
     def set_is_weapon(self, value):
         self.is_weapon = value

@@ -65,55 +65,55 @@ void Thing::set_weapon_carry_anim (Thingp new_weapon_carry_anim)
     }
 }
 
-void Thing::set_weapon_swing_anim_id (uint32_t weapon_swing_anim_id)
+void Thing::set_weapon_use_anim_id (uint32_t weapon_use_anim_id)
 {
-    Thingp weapon_swing_anim;
+    Thingp weapon_use_anim;
 
-    if (!weapon_swing_anim_id) {
-        set_weapon_swing_anim(nullptr);
+    if (!weapon_use_anim_id) {
+        set_weapon_use_anim(nullptr);
         return;
     }
 
-    weapon_swing_anim = thing_find(weapon_swing_anim_id);
+    weapon_use_anim = thing_find(weapon_use_anim_id);
 
-    set_weapon_swing_anim(weapon_swing_anim);
+    set_weapon_use_anim(weapon_use_anim);
 }
 
-void Thing::set_weapon_swing_anim (Thingp weapon_swing_anim)
+void Thing::set_weapon_use_anim (Thingp weapon_use_anim)
 {
-    if (weapon_swing_anim) {
-        verify(weapon_swing_anim);
+    if (weapon_use_anim) {
+        verify(weapon_use_anim);
     }
 
-    auto old_weapon_swing_anim = get_weapon_swing_anim();
+    auto old_weapon_use_anim = get_weapon_use_anim();
 
-    if (old_weapon_swing_anim) {
-        if (old_weapon_swing_anim == weapon_swing_anim) {
+    if (old_weapon_use_anim) {
+        if (old_weapon_use_anim == weapon_use_anim) {
             return;
         }
 
-        if (weapon_swing_anim) {
-            log("set-weapon-swing change %s->%s",
-                old_weapon_swing_anim->logname().c_str(),
-                weapon_swing_anim->logname().c_str());
+        if (weapon_use_anim) {
+            log("set-weapon-use change %s->%s",
+                old_weapon_use_anim->logname().c_str(),
+                weapon_use_anim->logname().c_str());
         } else {
-            log("set-weapon-swing remove %s", 
-                old_weapon_swing_anim->logname().c_str());
+            log("set-weapon-use remove %s", 
+                old_weapon_use_anim->logname().c_str());
         }
     } else {
-        if (weapon_swing_anim) {
-            log("set-weapon-swing %s", weapon_swing_anim->logname().c_str());
+        if (weapon_use_anim) {
+            log("set-weapon-use %s", weapon_use_anim->logname().c_str());
         }
     }
 
-    if (weapon_swing_anim) {
-        weapon_swing_anim_thing_id = weapon_swing_anim->id;
+    if (weapon_use_anim) {
+        weapon_use_anim_thing_id = weapon_use_anim->id;
     } else {
-        weapon_swing_anim_thing_id = 0;
+        weapon_use_anim_thing_id = 0;
     }
 }
 
-void Thing::get_weapon_swing_offset (double *dx, double *dy)
+void Thing::get_weapon_use_offset (double *dx, double *dy)
 {
     auto weapon = get_weapon();
     if (!weapon) {
@@ -124,7 +124,7 @@ void Thing::get_weapon_swing_offset (double *dx, double *dy)
     *dy = 0;
 
     double dist_from_wielder = 
-        ((double)tp_weapon_swing_distance(weapon)) / 10.0;
+        ((double)tp_weapon_use_distance(weapon)) / 10.0;
 
     /*
      * Try current direction.
@@ -191,19 +191,19 @@ Thingp Thing::get_weapon_carry_anim (void)
     return (weapon_carry_anim);
 }
 
-Thingp Thing::get_weapon_swing_anim (void)
+Thingp Thing::get_weapon_use_anim (void)
 {
     /*
-     * If this weapon_swing_anim has its own thing id for animations then 
+     * If this weapon_use_anim has its own thing id for animations then 
      * destroy that.
      */
-    Thingp weapon_swing_anim = 0;
+    Thingp weapon_use_anim = 0;
 
-    if (weapon_swing_anim_thing_id) {
-        weapon_swing_anim = thing_find(weapon_swing_anim_thing_id);
+    if (weapon_use_anim_thing_id) {
+        weapon_use_anim = thing_find(weapon_use_anim_thing_id);
     }
 
-    return (weapon_swing_anim);
+    return (weapon_use_anim);
 }
 
 void Thing::wield_next_weapon (void)
@@ -244,10 +244,10 @@ void Thing::sheath (void)
         set_weapon_carry_anim(nullptr);
     }
 
-    auto weapon_swing_anim = get_weapon_swing_anim();
-    if (weapon_swing_anim) {
-        weapon_swing_anim->dead("owner weapon");
-        set_weapon_swing_anim(nullptr);
+    auto weapon_use_anim = get_weapon_use_anim();
+    if (weapon_use_anim) {
+        weapon_use_anim->dead("owner weapon");
+        set_weapon_use_anim(nullptr);
     }
 }
 
@@ -271,7 +271,7 @@ void Thing::wield (Tpp weapon)
     auto carry_anim = thing_new(carry_as, at);
 
     /*
-     * Set the weapon so we can swing it later
+     * Set the weapon so we can use it later
      */
     weapon_tp_id = weapon->id;
 
@@ -288,24 +288,24 @@ void Thing::wield (Tpp weapon)
     update();
 }
 
-void Thing::swing (void)
+void Thing::use (void)
 {
-    if (weapon_swing_anim_thing_id) {
+    if (weapon_use_anim_thing_id) {
         /*
-         * Still swinging.
+         * Still using.
          */
         return;
     }
 
     auto weapon = get_weapon();
     if (!weapon) {
-        err("no weapon to swing");
+        err("no weapon to use");
         return;
     }
 
-    auto swung_as = tp_weapon_swing_anim(weapon);
+    auto swung_as = tp_weapon_use_anim(weapon);
     if (swung_as == "") {
-        err("could not swing %s, has no swing anim", 
+        err("could not use %s, has no use anim", 
             tp_short_name(weapon).c_str());
         return;
     }
@@ -319,17 +319,17 @@ void Thing::swing (void)
     /*
      * Save the thing id so the client wid can keep track of the weapon.
      */
-    auto swing_anim = thing_new(swung_as, at);
+    auto use_anim = thing_new(swung_as, at);
 
     /*
      * Attach to the parent thing.
      */
-    swing_anim->set_owner(this);
+    use_anim->set_owner(this);
 
-    set_weapon_swing_anim(swing_anim);
+    set_weapon_use_anim(use_anim);
 
     /*
-     * Hide the carry anim while swinging.
+     * Hide the carry anim while using.
      */
     auto c = get_weapon_carry_anim();
     if (c) {
