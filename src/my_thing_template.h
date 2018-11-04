@@ -159,8 +159,8 @@ public:
     int is_rrr20 {};
     int is_rrr21 {};
     int is_rrr22 {};
-    int is_rrr23 {};
-    int is_rrr24 {};
+    int move_delay_hundredths {};
+    int weapon_fire_delay_hundredths {};
     int for_collision_use_box {};
     int for_collision_use_circle {};
     int weapon_damage {};
@@ -377,14 +377,14 @@ static inline int tp_is_rrr22 (Tpp t)
     return (t->is_rrr22);
 }
 
-static inline int tp_is_rrr23 (Tpp t)
+static inline int tp_move_delay_hundredths (Tpp t)
 {
-    return (t->is_rrr23);
+    return (t->move_delay_hundredths);
 }
 
-static inline int tp_is_rrr24 (Tpp t)
+static inline int tp_get_weapon_fire_delay_hundredths (Tpp t)
 {
-    return (t->is_rrr24);
+    return (t->weapon_fire_delay_hundredths);
 }
 
 static inline int tp_for_collision_use_box (Tpp t)

@@ -262,25 +262,5 @@ CON("TBD %s", __FUNCTION__);
 uint8_t
 game_key_down (const struct SDL_KEYSYM *key)
 {_
-    if (game.state.player) {
-        double d = 0.2;
-        switch (key->sym) {
-            case SDLK_LEFT:
-              game.state.player->move_delta(fpoint(-d, 0));
-              return (true);
-            case SDLK_RIGHT:
-              game.state.player->move_delta(fpoint(d, 0));
-              return (true);
-            case SDLK_UP:
-              game.state.player->move_delta(fpoint(0, -d));
-              return (true);
-            case SDLK_DOWN:
-              game.state.player->move_delta(fpoint(0, d));
-              return (true);
-            case ' ':
-              game.state.player->swing();
-              return (true);
-        }
-    }
     return (false);
 }

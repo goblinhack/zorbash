@@ -602,6 +602,7 @@ void ascii_putf (int x, int y, color fg, color bg, std::wstring fmt, ...)
     va_end(args);
 }
 
+#ifdef ENABLE_ASCII_MOUSE
 static void ascii_display_mouse (fpoint mouse_tile_tl, 
                                  fpoint mouse_tile_br,
                                  point mouse_at)
@@ -639,6 +640,7 @@ static void ascii_display_mouse (fpoint mouse_tile_tl,
      */
     ascii.mouse_at = mouse_at;
 }
+#endif
 
 void ascii_put_bg_square (int tlx, int tly, int brx, int bry, 
                           Tilep tile, color c)
@@ -1000,9 +1002,11 @@ void ascii_display (void)
     ascii_blit(false /* no color */);
     blit_flush();
 
+#ifdef ENABLE_ASCII_MOUSE
     if (mouse_found) {
         ascii_display_mouse(mouse_tile_tl, mouse_tile_br, ascii.mouse_at);
     }
+#endif
 
     memset(cells, 0, sizeof(cells));
 }
