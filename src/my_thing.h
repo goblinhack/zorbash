@@ -95,7 +95,6 @@ public:
     double             jump_speed {0};
     double             momentum {0};
     double             rot {0};
-    double             collision_radius {0};
 
     /*
      * Pointer to common settings for this thing.
@@ -227,6 +226,12 @@ public:
     fpoint get_velocity(void);
     void set_velocity(fpoint v);
     void set_velocity(double x, double y);
+
+    /*
+     * thing_collision.cpp
+     */
+    bool check_if_will_hit_solid_obstacle(fpoint future_pos);
+    bool handle_collisions(void);
 
     /*
      * thing_weapon.cpp
