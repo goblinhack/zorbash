@@ -265,122 +265,87 @@ void thing_possible_init (void)
     thing_colls.resize(0);
 }
 
-#if 0
 /*
  * Find the thing with the highest priority to hit.
  */
-static void thing_possible_hit_do (levelp level, Thingp hitter)
+void thing_possible_hit_do (Thingp hitter)
 {
-    ThingColl *best = 0;
-    uint32_t i;
+    ThingColl *best = nullptr;
 
     for (auto cand : thing_colls) {
         /*
          * Don't be silly and hit yourself.
          */
-        if (cand->target == hitter) {
+        if (cand.target == hitter) {
             continue;
         }
 
         /*
          * Skip things that aren't really hitable.
          */
-        if (tp_is_animation(cand->target)            ||
-            tp_is_cloud_effect(cand->target)         ||
-            tp_is_weapon_carry_anim(cand->target)) {
+        if (tp_is_weapon_carry_anim(cand.target->tp)) {
             continue;
         }
 
         /*
          * If you fall and land behind something, it's safe.
          */
-        if (cand->target->fall_speed) {
-            if (hitter->dx > 0) {
-                if (cand->target->x < hitter->x) {
+        if (cand.target->fall_speed) {
+            auto v = hitter->get_velocity();
+            if (v.x > 0) {
+                if (cand.target->at.x < hitter->at.x) {
                     continue;
                 }
             }
 
-            if (hitter->dx < 0) {
-                if (cand->target->x > hitter->x) {
+            if (v.x < 0) {
+                if (cand.target->at.x > hitter->at.x) {
                     continue;
                 }
             }
         }
 
         if (!best) {
-            best = cand;
+            best = &cand;
             continue;
         }
 
-        if (cand->priority > best->priority) {
+        if (cand.priority > best->priority) {
             /*
              * If this target is higher prio, prefer it.
              */
-            best = cand;
-        } else if (cand->priority == best->priority) {
+            best = &cand;
+        } else if (cand.priority == best->priority) {
             /*
              * If this target is closer, prefer it.
              */
-            double dist_best = DISTANCE(hitter->x, hitter->y,
-                                        best->target->x, best->target->y);
-            double dist_cand = DISTANCE(hitter->x, hitter->y,
-                                        cand->target->x, cand->target->y);
+            double dist_best = DISTANCE(hitter->at.x, hitter->at.y,
+                                        best->target->at.x, 
+                                        best->target->at.y);
+            double dist_cand = DISTANCE(hitter->at.x, hitter->at.y,
+                                        cand.target->at.x, 
+                                        cand.target->at.y);
 
             if (dist_cand < dist_best) {
-                best = cand;
+                best = &cand;
             }
         }
-if (0) {
-CON("hitter %s dx %f x %f target %s x %f",
-    thing_logname(hitter),
-    hitter->dx, hitter->x,
-    thing_logname(cand->target),
-    cand->target->x);
-}
     }
 
     if (best) {
-if (0) {
-CON("hitter %s best %s and hitter_killed_on_hitting %d",thing_logname(hitter),thing_logname(best->target), best->hitter_killed_on_hitting);
-}
-        if (thing_hit(level, best->target, hitter, 0)) {
+        if (best->target->hit_possible(hitter, 0)) {
             if (best->hitter_killed_on_hitting) {
-                thing_dead(level, hitter, 0, "hitter killed on hitting");
+                hitter->dead("hitter killed on hitting");
             }
         } else if (best->hitter_killed_on_hit_or_miss) {
-            thing_dead(level, hitter, 0, "hitter killed on hitting");
+            hitter->dead("hitter killed on hitting");
         }
     }
 
     thing_possible_init();
 }
 
-/*
- * Things move in jumps. Find the real position the client
- * will see so collisions look more accurate.
- */
-void 
-Thingp_get_interpolated_position (const Thingp t, double *x, double *y)
-{
-    widp w = thing_wid(t);
-
-    if (!wid_is_moving(w)) {
-        *x = t->x;
-        *y = t->y;
-        return;
-    }
-
-    double wdx, wdy;
-    double dx = t->x - t->last_x;
-    double dy = t->y - t->last_y;
-
-    wid_get_move_interpolated_progress(thing_wid(t), &wdx, &wdy);
-
-    *x = t->last_x + (dx * wdx);
-    *y = t->last_y + (dy * wdy);
-}
-
+#if 0
 static uint8_t things_overlap (levelp level,
                                const Thingp A, 
                                double nx,

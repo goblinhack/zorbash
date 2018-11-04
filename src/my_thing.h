@@ -214,17 +214,22 @@ public:
     void hide();
 
     /*
-     * thing_hit.c
+     * thing_hit.cpp
      */
-    int thing_hit_actual(Thingp orig_hitter, 
-                         Thingp real_hitter, 
-                         Thingp hitter, 
-                         int damage);
-
-    int thing_hit_possible(Thingp hitter, int damage);
+    int hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, 
+                   int damage);
+    int hit_possible(Thingp hitter, int damage);
+    int hit_possible(Thingp hitter);
 
     /*
-     * thing_weapon.c
+     * thing_move.cpp
+     */
+    fpoint get_velocity(void);
+    void set_velocity(fpoint v);
+    void set_velocity(double x, double y);
+
+    /*
+     * thing_weapon.cpp
      */
     Tpp get_weapon();
     void wield_next_weapon();
