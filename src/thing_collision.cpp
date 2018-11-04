@@ -9,6 +9,132 @@
 #include "my_tile.h"
 #include "my_math_util.h"
 
+class ThingColl {
+public:
+    ThingColl(void) {}
+    ThingColl(Thingp      target,
+              std::string reason,
+              uint16_t    priority,
+              uint8_t     hitter_killed_on_hitting,
+              uint8_t     hitter_killed_on_hit_or_miss) :
+        target(target),
+        reason(reason),
+        priority(priority),
+        hitter_killed_on_hitting(hitter_killed_on_hitting),
+        hitter_killed_on_hit_or_miss(hitter_killed_on_hit_or_miss)
+    { }
+
+    Thingp      target {nullptr};
+    std::string reason;
+    uint16_t    priority {0};
+    uint8_t     hitter_killed_on_hitting { false };
+    uint8_t     hitter_killed_on_hit_or_miss { false };
+};
+
+static std::vector<class ThingColl> thing_colls;
+static const int def_collision_radius = 1;
+static int collision_radius = def_collision_radius;
+
+bool 
+thing_overlaps_border (Thingp t)
+{_
+    auto tile = t->current_tile;
+    if (!tile) {
+        return (false);
+    }
+
+    for (int y = 0; y < (int)tile->pix_height; y++) {
+        for (int x = 0; x < (int)tile->pix_width; x++) {
+            if (!tile->pix[x][y]) {
+                continue;
+            }
+            
+            int px = t->at.x * TILE_WIDTH + x;
+            int py = t->at.y * TILE_HEIGHT + y;
+
+            if (px < MAP_BORDER * TILE_WIDTH) {
+                return (true);
+            }
+
+            if (py < MAP_BORDER * TILE_HEIGHT) {
+                return (true);
+            }
+
+            if (px >= (MAP_WIDTH - MAP_BORDER) * TILE_WIDTH) {
+                return (true);
+            }
+
+            if (py >= (MAP_HEIGHT - MAP_BORDER) * TILE_HEIGHT) {
+                return (true);
+            }
+        }
+    }
+    return (false);
+}
+
+bool 
+things_tile_overlap (Thingp t, fpoint t_at, Thingp o)
+{_
+    auto tile1 = t->current_tile;
+    if (!tile1) {
+        return (false);
+    }
+    auto tile2 = o->current_tile;
+    if (!tile2) {
+        return (false);
+    }
+
+    for (int y = 0; y < (int)tile1->pix_height; y++) {
+        for (int x = 0; x < (int)tile1->pix_width; x++) {
+            if (!tile1->pix[x][y]) {
+                continue;
+            }
+            
+            int px = t_at.x * TILE_WIDTH + x;
+            int py = t_at.y * TILE_HEIGHT + y;
+
+            int ox = o->at.x * TILE_WIDTH;
+            int oy = o->at.y * TILE_HEIGHT;
+
+            int dx = px - ox;
+            int dy = py - oy;
+
+            if ((dx < 0) || (dx >= (int)tile2->pix_width)) {
+#if 0
+if (first) {
+first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  <>x", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
+}
+#endif
+                continue;
+            }
+
+            if ((dy < 0) || (dy >= (int)tile2->pix_height)) {
+#if 0
+if (first) {
+first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  <>y", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
+}
+#endif
+                continue;
+            }
+
+            if (tile2->pix[dx][dy]) {
+#if 0
+first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  overlap", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
+#endif
+                return (true);
+            }
+        }
+    }
+    return (false);
+}
+
+bool 
+things_tile_overlap (Thingp t, Thingp o)
+{_
+    return (things_tile_overlap(t, t->at, o));
+}
+
+
 int circle_box_collision (Thingp C, 
                           fpoint C_at,
                           Thingp B,
@@ -193,32 +319,6 @@ int circle_circle_collision (Thingp A,
     return (true);
 }
 
-class ThingColl {
-public:
-    ThingColl(void) {}
-    ThingColl(Thingp      target,
-              std::string reason,
-              uint16_t    priority,
-              uint8_t     hitter_killed_on_hitting,
-              uint8_t     hitter_killed_on_hit_or_miss) :
-        target(target),
-        reason(reason),
-        priority(priority),
-        hitter_killed_on_hitting(hitter_killed_on_hitting),
-        hitter_killed_on_hit_or_miss(hitter_killed_on_hit_or_miss)
-    { }
-
-    Thingp      target {nullptr};
-    std::string reason;
-    uint16_t    priority {0};
-    uint8_t     hitter_killed_on_hitting { false };
-    uint8_t     hitter_killed_on_hit_or_miss { false };
-};
-
-static std::vector<class ThingColl> thing_colls;
-//static const int def_collision_radius = 4;
-//static int collision_radius = def_collision_radius;
-
 /*
  * Add a thing to the list of things that could be hit on this attack.
  */
@@ -374,7 +474,7 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
-            return (true);
+            return (things_tile_overlap(A, future_pos, B));
         }
         return (false);
     }
@@ -388,7 +488,7 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
-            return (true);
+            return (things_tile_overlap(A, future_pos, B));
         }
         return (false);
     }
@@ -399,12 +499,12 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
                                     B, /* box */
                                     A_at,
                                     &intersect)) {
-            return (things_overlap(A, future_pos, B));
+            return (things_tile_overlap(A, future_pos, B));
         }
         return (false);
     }
 
-    return (things_overlap(A, future_pos, B));
+    return (things_tile_overlap(A, future_pos, B));
 }
 
 bool things_overlap (const Thingp A, const Thingp B)
@@ -412,552 +512,77 @@ bool things_overlap (const Thingp A, const Thingp B)
     return (things_overlap (A, fpoint(-1, -1), B));
 }
 
-#if 0
-
 /*
  * handle a single collision between two things
  */
-static int thing_handle_collision (levelp level,
-                                   Thingp me, Thingp it, 
-                                   int32_t x, int32_t y,
-                                   int32_t dx, int32_t dy)
+static int things_handle_collision (Thingp me, 
+                                    Thingp it, 
+                                    int x, int y,
+                                    int dx, int dy)
 {
-    if (tp_is_hidden(it) ||
-        tp_is_wall_deco(it) ||
-        tp_is_ladder_deco(it)) {
-        return (true);
-    }
+    auto it_tp = it->tp;
+    auto me_tp = me->tp;
 
     /*
      * Filter out boring things.
      */
-    if (tp_is_dungeon_floor(it)          ||
-        tp_is_ladder(it)                 ||
-        tp_is_weapon_carry_anim(it)      ||
-        tp_is_animation(it)) {
+    if (tp_is_ladder(it_tp)                 ||
+        tp_is_weapon_carry_anim(it_tp)) {
 
+#if 0
         if ((dx == 0) && (dy == 0)) {
             if (tp_is_player(me)) {
-                if (tp_is_shop_floor(it)) {
+                if (tp_is_shop_floor(it_tp)) {
                     /*
                      * Going into a shop.
                      */
-                    shop_enter(level, me, it);
+                    shop_enter(level, me, it_tp);
                 } else if (me->in_shop_owned_by_thing_id) {
                     /*
                      * Still inside the shop?
                      */
                     if (!shop_inside(level, me)) {
-                        shop_leave(level, me, it);
+                        shop_leave(level, me, it_tp);
                     }
                 }
             }
         }
-
-        return (true);
-    }
-
-    /*
-     * Weapon swing of monster should not hit other monsters.
-     */
-    Thingp owner_it = thing_owner(level, it);
-    Thingp owner_me = thing_owner(level, me);
-
-    if (owner_me) {
-        if (tp_is_monst(owner_me) && tp_is_monst(it)) {
-            if (!tp_is_shop_floor(owner_me)) {
-                /*
-                 * Allow shopkeepers to shoot monsters.
-                 */
-                return (true);
-            }
-        }
-    }
-
-    if (tp_is_dead(it)) {
-#if 0
-if (debug) {
-LOG("  dead");
-}
 #endif
+
         return (true);
     }
+
+    if (it->is_dead) {
+        return (true);
+    }
+
+    Thingp owner_it = it->get_owner();
+    Thingp owner_me = me->get_owner();
 
     /*
      * Need this or shields attack the player.
      */
     if ((owner_it == me) || (owner_me == it)) {
-#if 0
-if (debug) {
-LOG("  owner");
-}
-#endif
         return (true);
     }
 
     /*
      * Do we overlap with something?
      */
-    if (!things_overlap(level, me, -1.0, -1.0, it)) {
-#if 0
-CON("  no overlap %s vs %s",thing_logname(me), thing_logname(it));
-#endif
+    if (!things_overlap(me, it)) {
         return (true);
-    }
-
-#if 0
-CON("  overlap %s vs %s",thing_logname(me), thing_logname(it));
-#endif
-
-    if (!tp_is_teleport(me)        &&
-        !tp_is_ladder(me)          &&
-        !tp_is_dungeon_floor(me)) {
-
-        if (tp_is_teleport(it)) {
-            thing_reached_teleport(level, me, it);
-            return (true);
-        }
-    }
-
-    /*
-     * Lava does not attack lava
-     */
-    if (tp_is_lava(me) || tp_is_acid(me)) {
-        if (tp_is_lava(it) || tp_is_acid(it)) {
-            return (true);
-        }
-
-        /*
-         * Allow weapon blasts to sail over lava
-         */
-        if (tp_is_projectile(it)) {
-            return (true);
-        }
-
-        if (tp_is_levitating(it)) {
-            return (true);
-        }
-
-        if (tp_is_fragile(it)         ||
-            tp_is_combustable(it)) {
-//CON("  %d",__LINE__);
-            thing_possible_hit_add(it, "monst hit thing");
-            return (true);
-        }
-//CON("%s vs %s",thing_logname(me), thing_logname(it));
-
-        if (tp_is_player(it) ||
-            tp_is_monst(it)) {
-            thing_possible_hit_add(it, "burn attack");
-            return (true);
-        }
-
-        return (true);
-    }
-
-    /*
-     * Monster friendly fire?
-     */
-    if (tp_is_monst(me) && tp_is_monst(it)) {
-        if (!tp_is_shop_floor(me)) {
-            /*
-             * Allow shopkeepers to shoot monsters.
-             */
-            return (true);
-        }
-    }
-
-    if (tp_is_player(me)) {
-        /*
-         * Player collects keys and other items
-         */
-        if (tp_is_treasure(it)               ||
-            tp_is_weapon(it)                 ||
-            tp_is_carryable(it)              ||
-            tp_is_food(it)) {
-
-            if (tp_is_bomb(it) && tp_is_awake(it)) {
-                /*
-                 * Don't collect ticking bombs.
-                 */
-            } else {
-                thing_set_is_collected(it, true);
-
-                if (tp_is_bomb(it)) {
-                    thing_collect_bomb(level, me, it);
-                    return (true);
-                }
-
-                if (tp_is_ropepile(it)) {
-                    thing_collect_rope(level, me, it);
-                    return (true);
-                }
-
-                if (tp_is_key(it)) {
-                    thing_collect_key(level, me, it);
-                    return (true);
-                }
-
-                if (tp_is_torch(it)) {
-                    thing_collect_torch(level, me, it);
-                    return (true);
-                }
-
-                thing_collect(level, me, it);
-                return (true);
-            }
-        }
-
-        /*
-         * Open doors if you have a key.
-         */
-        if (tp_is_door(it)) {
-            thing_use_key(level, it, x, y);
-            return (true);
-        }
-
-        /*
-         * Player bumped into something.
-         */
-        if (tp_is_explosion(it) ||
-            tp_is_cloud_effect(it)) {
-            /*
-             * I'm hit!
-             */
-#if 0
-if (debug) {
-LOG("add poss me %s hitter %s",thing_logname(me), thing_logname(it));
-}
-#endif
-//CON("  %d",__LINE__);
-            thing_possible_hit_add(it, "player hit thing");
-            return (true);
-        }
-
-        if (tp_is_exit(it)) {
-            level->reached_exit = true;
-            return (false);
-        }
-
-        /*
-         * An action trigger is only ever used to start an object off as the 
-         * initiator of a collision.
-         */
-        if (tp_is_action_trigger_on_hero(it)) {
-            /*
-             * Giant sawblades should only activate on the center tile of 
-             * collisions.
-             */
-            level_trigger_activate(level, it->data.col);
-        }
-    }
-
-    if (tp_is_monst(me)) {
-        /*
-         * Monster bumped into something.
-         */
-        if (tp_is_player(it)                ||
-            tp_is_cloud_effect(it)) {
-            /*
-             * I'm hit!
-             */
-#if 0
-if (debug) {
-LOG("add poss me %s hitter %s",thing_logname(me), thing_logname(it));
-}
-#endif
-//CON("%d %s %s",__LINE__,thing_logname(me), thing_logname(it));
-//CON("  %d",__LINE__);
-            thing_possible_hit_add(it, "monst hit thing");
-            return (true);
-        }
-
-        if (tp_is_action_trigger_on_monst(it)) {
-            /*
-             * Giant sawblades should only activate on the center tile of 
-             * collisions.
-             */
-            if ((dx == 0) && (dy == 0)) {
-                level_trigger_activate(level, it->data.col);
-            }
-        }
-    }
-
-    if (tp_is_boulder(me) &&
-        ((fabs(me->momentum) > THING_FALL_SPEED_BOULDER_HURTS) || 
-         (me->fall_speed > THING_FALL_SPEED_BOULDER_HURTS))) {
-
-        /*
-         * Rock bumped into something.
-         */
-        if (tp_is_player(it)                ||
-            tp_is_monst(it)                 ||
-            tp_is_bomb(it)                  ||
-            tp_is_cloud_effect(it)) {
-            /*
-             * I'm hit!
-             */
-#if 0
-if (debug) {
-LOG("add poss me %s hitter %s",thing_logname(me), thing_logname(it));
-}
-#endif
-//CON("%d %s %s",__LINE__,thing_logname(me), thing_logname(it));
-//CON("  %d",__LINE__);
-            thing_possible_hit_add(it, "rock hit thing");
-            return (true);
-        }
-    }
-
-    if (tp_is_smallrock(me) && 
-        ((fabs(me->momentum) > THING_PUSH_SPEED_OBJ) || 
-         (me->fall_speed >  THING_PUSH_SPEED_OBJ))) {
-
-        /*
-         * Rock bumped into something.
-         */
-        if (tp_is_player(it)                ||
-            tp_is_monst(it)                 ||
-            tp_is_bomb(it)                  ||
-            tp_is_cloud_effect(it)) {
-            /*
-             * I'm hit!
-             */
-#if 0
-if (debug) {
-LOG("add poss me %s hitter %s",thing_logname(me), thing_logname(it));
-}
-#endif
-//CON("%d %s %s",__LINE__,thing_logname(me), thing_logname(it));
-//CON("  %d",__LINE__);
-            thing_possible_hit_add(it, "rock hit thing");
-            return (true);
-        }
-    }
-
-    /*
-     * If spinning blades or moving wall hit something?
-     */
-#if 0
-    if ((tp_is_wall(me) || tp_is_sawblade(me))) {
-#else
-    if (tp_is_wall(me)) {
-#endif
-
-#if 0
-        if (tp_is_sawblade(me)) {
-            /*
-             * Sawblades are tricky. We want them to be covered in blood and 
-             * to do that they need to polymorph and essentially die on the 
-             * first hit.
-             */
-            if (tp_is_warm_blooded(it)) {
-                uint32_t id = me->tp_id;
-                switch (id) {
-                case THING_SAWBLADE1:
-                case THING_SAWBLADE2:
-                case THING_SAWBLADE3:
-                case THING_SAWBLADE4:
-                    thing_possible_hit_add_hitter_killed_on_hitting(
-                                                    it, "projection hit thing");
-                    return (true);
-
-                default:
-                    break;
-                }
-            }
-        }
-#endif
-
-        /*
-         * Allow things to walk unharmed through walls.
-         */
-        if (tp_is_ethereal(it)) {
-            return (true);
-        }
-
-        /*
-         * Wall is crushing something
-         */
-        if (tp_is_player(it)                 ||
-            tp_is_treasure(it)               ||
-            tp_is_food(it)                   ||
-            tp_is_door(it)                   ||
-            tp_is_cobweb(it)                 ||
-            tp_is_mob_spawner(it)            ||
-            tp_is_monst(it)) {
-            /*
-             * I'm hit!
-             */
-#if 0
-if (debug) {
-LOG("add poss me %s hitter %s",thing_logname(me), thing_logname(it));
-}
-#endif
-//CON("%d %s %s",__LINE__,thing_logname(me), thing_logname(it));
-//CON("  %d",__LINE__);
-            thing_possible_hit_add(it, "object hit thing");
-            return (true);
-        }
-
-        if (tp_is_action_trigger_on_wall(it)) {
-            /*
-             * Giant sawblades should only activate on the center tile of 
-             * collisions.
-             */
-            level_trigger_activate(level, it->data.col);
-        }
-
-        /*
-         * Initially we have a wall sitting on a trigger. The wall is inactive
-         * and doesn't do collision tests. The trigger might no be active 
-         * either and so we n
-         */
-        if (tp_is_action_left(it)                ||
-            tp_is_action_right(it)               ||
-            tp_is_action_up(it)                  ||
-            tp_is_action_down(it)) {
-
-            if (level_trigger_is_activated(level, it->data.col)) {
-                level_trigger_move_thing(level, thing_tp(it), me);
-            }
-        }
-    }
-
-    /*
-     * Explosion hit something?
-     */
-    if (tp_is_projectile(me)                 || 
-        tp_is_explosion(me)) {
-
-        /*
-         * Don't let shopkeepers shoot their own wares when defending a shop
-         */
-        Thingp owner_proj = thing_owner(level, me);
-        if (owner_it && (owner_it == owner_proj)) {
-            return (true);
-        }
-
-        if (owner_proj) {
-            /*
-             * Don't let monsters shoot their own mob spawners.
-             */
-            if (tp_is_mob_spawner(it) ||
-                tp_is_cobweb(it)) {
-                if (tp_is_monst(me)) {
-                    return (true);
-                }
-            }
-        }
-
-        if (tp_is_lava(it) || 
-            tp_is_water(it) ||
-            tp_is_acid(it)) {
-            /*
-             * No hitting this.
-             */
-            return (true);
-        } else if (tp_is_monst(it)           || 
-                   tp_is_fragile(it)         ||
-                   tp_is_trap(it)            ||
-                   tp_is_combustable(it)     ||
-                   tp_is_cobweb(it)          ||
-                   tp_is_mob_spawner(it)) {
-            /*
-             * Can projectiles hit these?
-             */
-//CON("%d %s %s",__LINE__,thing_logname(me), thing_logname(it));
-            if (owner_me == it) {
-                /*
-                 * Don't hit your owner.
-                 */
-            } else {
-                /*
-                 * Weapon hits monster or generator
-                 */
-                if (it->hp < thing_stats_get_total_damage(me)) {
-                    me->hp -= it->hp;
-
-//CON("  %d",__LINE__);
-                    thing_possible_hit_add(it, "projectile hit");
-                } else {
-//CON("  %d",__LINE__);
-                    thing_possible_hit_add_hitter_killed_on_hit_or_miss(
-                                                    it, "projectile hit");
-                }
-                return (true);
-            }
-        }
-
-        if (tp_is_door(it)                   ||
-            tp_is_rock(it)                   ||
-            tp_is_wall(it)) {
-            thing_possible_hit_add(it, "explosion hit wall");
-            return (true);
-        }
-
-        if (tp_is_door(it)                   ||
-            tp_is_player(it)                 ||
-            tp_is_sawblade(it)) {
-            if (owner_me == it) {
-                /*
-                 * Don't hit your owner.
-                 */
-                return (true);
-            } else {
-                /*
-                 * Weapon hits monster or generator
-                 */
-//CON("  %d",__LINE__);
-                thing_possible_hit_add_hitter_killed_on_hit_or_miss(
-                                                it, "projectile hit");
-                return (true);
-            }
-        }
-    }
-
-    /*
-     * Poison cloud hit something?
-     */
-    if (tp_is_non_explosive_gas_cloud(me)) {
-
-        if (tp_is_monst(it)                  || 
-            tp_is_player(it)                 ||
-            tp_is_mob_spawner(it)) {
-            /*
-             * Weapon hits monster or generator
-             */
-//CON("%d %s %s",__LINE__,thing_logname(me), thing_logname(it));
-//CON("  %d",__LINE__);
-            thing_possible_hit_add_hitter_killed_on_hit_or_miss(
-                                            it, "projection hit thing");
-            return (true);
-        }
     }
 
     /*
      * Sword swing hits?
      */
-    if (tp_is_weapon_swing_effect(me)) {
-
-        if (tp_is_monst(it)                  || 
-            tp_is_door(it)                   ||
-            tp_is_bomb(it)                   ||
-            tp_is_player(it)                 ||
-            tp_is_rock(it)                   ||
-            tp_is_wall(it)                   ||
-            /*
-             * Don't hit walls. It's daft.
-             */
-            tp_is_cobweb(it)                 ||
-            tp_is_mob_spawner(it)) {
+    if (tp_is_weapon_swing_effect(me_tp)) {
+        if (tp_is_monst(it_tp)) {
             /*
              * Weapon hits monster or generator.
              */
-//CON("%d %s %s",__LINE__,thing_logname(me), thing_logname(it));
-//CON("  %d",__LINE__);
             thing_possible_hit_add_hitter_killed_on_hitting(
-                                            it, "sword hit thing");
+                    it, "sword hit thing");
             return (true);
         }
     }
@@ -968,843 +593,98 @@ LOG("add poss me %s hitter %s",thing_logname(me), thing_logname(it));
 /*
  * Have we hit anything?
  */
-int thing_handle_collisions (levelp level, Thingp me)
+bool Thing::handle_collisions (void)
 {
-    int32_t dx, dy;
-
-#if 0
-if (tp_is_powerup(me)) {
-debug = 1;
-LOG("  ");
-LOG("  ");
-LOG("--");
-LOG("  ");
-LOG("shield coll");
-}
-#endif
-    thing_map_t *map = level_map(level);
-
-    collision_radius = thing_collision_radius(me);
-    if (!collision_radius) {
-        collision_radius = def_collision_radius;
+    auto minx = at.x - collision_radius;
+    while (minx < 0) {
+        minx++;
     }
 
-    for (dx = -collision_radius; dx <= collision_radius; dx++) 
-    for (dy = -collision_radius; dy <= collision_radius; dy++) {
-        int32_t x = (int32_t)me->x + dx;
-        int32_t y = (int32_t)me->y + dy;
+    auto miny = at.y - collision_radius;
+    while (miny < 0) {
+        miny++;
+    }
 
-        if ((x < 0) || (y < 0) || (x >= MAP_WIDTH) || (y >= MAP_HEIGHT)) {
-            continue;
-        }
+    auto maxx = at.x - collision_radius;
+    while (maxx >= MAP_WIDTH) {
+        maxx++;
+    }
 
-        thing_map_cell *cell = &map->cells[x][y];
+    auto maxy = at.y - collision_radius;
+    while (maxy >= MAP_HEIGHT) {
+        maxy++;
+    }
 
-        uint32_t i;
-        for (i = 0; i < cell->count; i++) {
-            Thingp it;
-            
-            it = id_to_thing(cell->id[i]);
-#if 0
-if (debug) {
-LOG("%d %d [%d] %s",x,y,i, thing_logname(it));
-}
-#endif
+    for (uint8_t z = MAP_DEPTH_ITEMS; z < MAP_DEPTH; z++) {
+        for (int16_t x = minx; x <= maxx; x--) {
+            auto dx = x - at.x;
+            for (int16_t y = miny; y <= maxy; y++) {
+                auto dy = y - at.y;
+                for (auto p : game.state.map.things[x][y][z]) {
+                    auto it = p.second;
+                    if (this == it) {
+                        continue;
+                    }
 
-            if (me == it) {
-                continue;
-            }
-
-            if (!thing_handle_collision(level, me, it, x, y, dx, dy)) {
-                return (false);
+                    if (!things_handle_collision(this, it, x, y, dx, dy)) {
+                        return (false);
+                    }
+                }
             }
         }
     }
 
-    thing_possible_hit_do(level, me);
+    thing_possible_hit_do(this);
 
     return (true);
 }
 
 /*
- * Have we hit anything?
- *
- * No opening of doors in here or other actions. This is just a check.
+ * Will we hit anything?
  */
-Thingp thing_hit_solid_obstacle (levelp level,
-                                 Thingp t, 
-                                 fpoint future_pos)
+bool Thing::check_if_will_hit_solid_obstacle (fpoint future_pos)
 {
-    Thingp me;
-    widp wid_me;
-
-    verify(t);
-    wid_me = thing_wid(t);
-    verify(wid_me);
-
-    int32_t dx, dy;
-    me = wid_get_thing(wid_me);
-    thing_map_t *map = level_map(level);
-
-    /*
-     * Allow things to walk unharmed through walls.
-     */
-    if (tp_is_ethereal(t)) {
-        return (0);
+    auto minx = at.x - collision_radius;
+    while (minx < 0) {
+        minx++;
     }
 
-    collision_radius = thing_collision_radius(me);
-    if (!collision_radius) {
-        collision_radius = def_collision_radius;
+    auto miny = at.y - collision_radius;
+    while (miny < 0) {
+        miny++;
     }
 
-    for (dx = -collision_radius; dx <= collision_radius; dx++) 
-    for (dy = -collision_radius; dy <= collision_radius; dy++) {
-        int32_t x = (int32_t)nx + dx;
-        int32_t y = (int32_t)ny + dy;
+    auto maxx = at.x - collision_radius;
+    while (maxx >= MAP_WIDTH) {
+        maxx++;
+    }
 
-        if ((x < 0) || (y < 0) || (x >= MAP_WIDTH) || (y >= MAP_HEIGHT)) {
-            continue;
-        }
+    auto maxy = at.y - collision_radius;
+    while (maxy >= MAP_HEIGHT) {
+        maxy++;
+    }
 
-        thing_map_cell *cell = &map->cells[x][y];
-
-        uint32_t i;
-        for (i = 0; i < cell->count; i++) {
-            Thingp it;
-            
-            it = id_to_thing(cell->id[i]);
-            if (it == t) {
-                continue;
-            }
-
-            verify(it);
-
-            /*
-             * Light embers and other junky effects to ignore.
-             */
-            if (tp_is_hidden(it) ||
-                tp_is_wall_deco(it) ||
-                tp_is_ladder_deco(it)) {
-                continue;
-            }
-
-            /*
-             * No collisions with the floor!
-             */
-            if (tp_is_dungeon_floor(it)  ||
-                tp_is_action(it)         ||
-                tp_is_ladder(it)         ||
-                tp_is_animation(it)) {
-                continue;
-            }
-
-            /*
-             * Allowed to pass through small rocks.
-             */
-            if (!tp_is_smallrock(me)) {
-                if (tp_is_smallrock(it)) {
-                    continue;
-                }
-            }
-
-            if (tp_is_spikes(it)) {
-                continue;
-            }
-
-            /*
-             * Bombs
-             */
-            if (tp_is_carryable(it)) {
-                continue;
-            }
-
-            /*
-             * Allow things to walk unharmed through walls.
-             */
-            if (tp_is_ethereal(it)) {
-                continue;
-            }
-
-            /*
-             * Allow dead ghosts to walk over each other!
-             */
-            if (tp_is_monst(it)) {
-                if (tp_is_dead(it)) {
-                    continue;
-                }
-            }
-
-            if (tp_is_monst(me)) {
-                if (tp_is_monst(it)) {
-                    /*
-                     * Allow them to walk apart.
-                     */
-                    if ((me->x < it->x) && (me->dx < 0) && (it->dx > 0)) {
+    for (uint8_t z = MAP_DEPTH_ITEMS; z < MAP_DEPTH; z++) {
+        for (int16_t x = minx; x <= maxx; x--) {
+            for (int16_t y = miny; y <= maxy; y++) {
+                for (auto p : game.state.map.things[x][y][z]) {
+                    auto it = p.second;
+                    if (this == it) {
                         continue;
                     }
 
-                    if ((me->x < it->x) && (me->dx < 0) && (it->dx < 0)) {
+                    if (!things_overlap(this, future_pos, it)) {
                         continue;
                     }
 
-                    if ((me->x > it->x) && (me->dx > 0) && (it->dx < 0)) {
-                        continue;
-                    }
-
-                    if ((me->x > it->x) && (me->dx > 0) && (it->dx > 0)) {
-                        continue;
-                    }
-                }
-
-                if (tp_is_player(it) &&
-                    thing_get_weapon_carry_anim_wid(level, me)) {
-                    /*
-                     * If the monst has a weapon do not walk into the player 
-                     * like a bite attack.
-                     */
-                    double dist = DISTANCE(me->x, me->y, it->x, it->y);
-                    if (dist > 0.5) {
-                        /*
-                         * Get close, enough to hit but not too close.
-                         */
-                        continue;
-                    }
-
-                } else if (tp_is_player(it)                 ||
-                           thing_can_walk_through(it)          ||
-                           tp_is_carryable(it)              ||
-                           tp_is_weapon_swing_effect(it)    ||
-                           tp_is_explosion(it)              ||
-                           tp_is_non_explosive_gas_cloud(it)||
-                           tp_is_projectile(it)             ||
-                           tp_is_treasure(it)               ||
-                           tp_is_weapon(it)                 ||
-                           tp_is_sawblade(it)               ||
-                           tp_is_teleport(it)               ||
-                           tp_is_rope(it)                   ||
-                           tp_is_corpse(it)                 ||
-                           tp_is_food(it)) {
-                    /*
-                     * Allow monsters to walk into these things:
-                     */
-                    continue;
-                }
-
-                if (tp_is_levitating(me)) {
-                    if (tp_is_acid(it)    ||
-                        tp_is_cobweb(it)  ||
-                        tp_is_lava(it)    ||
-                        tp_is_water(it)   ||
-                        tp_is_acid(it)) {
-                        /*
-                         * Allow monsters to glide over these things:
-                         */
-                        continue;
+                    auto it_tp = it->tp;
+                    if (tp_is_wall(it_tp)) {
+                        return (true);
                     }
                 }
             }
-
-            if (tp_is_projectile(me)                 ||
-                tp_is_cloud_effect(me)               ||
-                tp_is_weapon_swing_effect(me)) {
-                /*
-                 * Allow these to pass through anything.
-                 */
-                continue;
-            }
-
-            if (tp_is_player(me)) {
-                /*
-                 * Allow to walk through doors so we can open them later.
-                 */
-                if (tp_is_door(it)) {
-                    if (me->keys) {
-                        continue;
-                    } else {
-                        if (!me->message_open_door_need_key) {
-                            me->message_open_door_need_key = 1;
-                            MSG_SHOUT_AT(INFO, me,
-                                         0, 0,
-                                         "Collect keys to open doors");
-                        }
-                    }
-                }
-
-                /*
-                 * Allow player to collect keys and other junk.
-                 */
-                if (tp_is_carryable(it)              ||
-                    thing_can_walk_through(it)          ||
-                    tp_is_food(it)                   ||
-                    tp_is_treasure(it)               ||
-                    tp_is_weapon(it)                 ||
-                    tp_is_exit(it)                   ||
-                    tp_is_rope(it)                   ||
-                    tp_is_teleport(it)               ||
-                    tp_is_lava(it)                   ||
-                    tp_is_water(it)                  ||
-                    tp_is_acid(it)                   ||
-                    tp_is_trap(it)                   ||
-                    tp_is_monst(it)                  ||
-                    /*
-                     * Walk through friendly fire.
-                     */
-                    tp_is_projectile(it)             ||
-                    tp_is_weapon_swing_effect(it)    ||
-                    tp_is_weapon_carry_anim(it)      ||
-                    tp_is_explosion(it)              ||
-                    tp_is_sawblade(it)               ||
-                    tp_is_cloud_effect(it)) {
-                    continue;
-                }
-
-                /*
-                 * Allow player to walk through other player. Else thay
-                 * can spawn on top of each other and get stuck.
-                 */
-                if (tp_is_player(it)) {
-                    continue;
-                }
-            }
-
-            if (tp_is_wall(me)     || 
-                tp_is_rope(me)     ||
-                tp_is_sawblade(me)) {
-                /*
-                 * Allow moving walls to crush most things except walls and 
-                 * doors.
-                 */
-                if (!tp_is_wall(it) && 
-                    !tp_is_rock(it) && 
-                    !tp_is_door(it)) {
-                    continue;
-                }
-            }
-
-            if (!things_overlap(level, me, nx, ny, it)) {
-                continue;
-            }
-
-            /*
-             * Push obstacles?
-             */
-            if (tp_is_obstacle(it)) {
-                double dist_now = DISTANCE(t->x, t->y, it->x, it->y);
-                double dist_then = DISTANCE(nx, ny, it->x, it->y);
-
-                /*
-                 * If inside the obstacle, no pushing!
-                 */
-                if (dist_then > dist_now) {
-                    continue;
-                } else {
-                    /*
-                     * If moving towards it; crimes against physics.
-                     */
-                    it->momentum += t->momentum / 2;
-                    t->momentum = 0;
-                }
-            }
-
-            /*
-             * You can walk away from a boulder, but not closer...
-             */
-            if (tp_is_boulder(it)) {
-                double dist_now = DISTANCE(t->x, t->y, it->x, it->y);
-                double dist_then = DISTANCE(nx, ny, it->x, it->y);
-
-                /*
-                 * Else be sticky
-                 */
-                if (dist_then > dist_now) {
-                    continue;
-                } else {
-                    return (it);
-                }
-            }
-
-            /*
-             * You can walk closer to a cobweb, but not back out...
-             */
-            if (tp_is_cobweb(it)) {
-                double dist_now = DISTANCE(t->x, t->y, it->x, it->y);
-                double dist_then = DISTANCE(nx, ny, it->x, it->y);
-
-                /*
-                 * No spiders stuck in their own web
-                 */
-                if ((tp_to_id(thing_tp(t)) == THING_SPIDER1) ||
-                    (tp_to_id(thing_tp(t)) == THING_SPIDER2)) {
-                    continue;
-                }
-
-                /*
-                 * Allow floating things to glide over
-                 */
-                if (tp_is_levitating(t)) {
-                    continue;
-                }
-
-                /*
-                 * Else be sticky
-                 */
-                if (dist_then < dist_now) {
-                    continue;
-                } else {
-                    return (it);
-                }
-            }
-
-            return (it);
         }
     }
 
-    return (0);
-}
-
-/*
- * Have we hit anything?
- *
- * No opening of doors in here or other actions. This is just a check.
- */
-Thingp thing_hit_fall_obstacle (levelp level,
-                                Thingp t, 
-                                double nx, 
-                                double ny)
-{
-    Thingp candidate = 0;
-    Thingp me;
-    widp wid_me;
-
-    verify(t);
-    wid_me = thing_wid(t);
-    verify(wid_me);
-
-    int32_t dx, dy;
-    me = wid_get_thing(wid_me);
-    thing_map_t *map = level_map(level);
-
-    collision_radius = thing_collision_radius(me);
-    if (!collision_radius) {
-        collision_radius = def_collision_radius;
-    }
-
-    for (dx = -collision_radius; dx <= collision_radius; dx++) 
-    for (dy = -collision_radius; dy <= collision_radius; dy++) {
-        int32_t x = (int32_t)nx + dx;
-        int32_t y = (int32_t)ny + dy;
-
-        if ((x < 0) || (y < 0) || (x >= MAP_WIDTH) || (y >= MAP_HEIGHT)) {
-            continue;
-        }
-
-        thing_map_cell *cell = &map->cells[x][y];
-
-        uint32_t i;
-        for (i = 0; i < cell->count; i++) {
-            Thingp it;
-            
-            it = id_to_thing(cell->id[i]);
-            if (it == t) {
-                continue;
-            }
-
-            verify(it);
-
-            /*
-             * Light embers and other junky effects to ignore.
-             */
-            if (tp_is_hidden(it) ||
-                tp_is_wall_deco(it) ||
-                tp_is_ladder_deco(it)) {
-                continue;
-            }
-
-            if (tp_is_spikes(it)) {
-                continue;
-            }
-
-            if (tp_is_dungeon_floor(it)) {
-                continue;
-            }
-
-            if (tp_is_player(me)) {
-                /*
-                 * Allow players to land on small rocks and monsters.
-                 */
-                if (!tp_is_wall(it) && 
-                    !tp_is_rock(it) && 
-                    !tp_is_monst(it) && 
-                    !tp_is_smallrock(it) && 
-                    !tp_is_rope(it) && 
-                    !tp_is_ladder(it) && 
-                    !tp_is_obstacle(it) && 
-                    !tp_is_cobweb(it) && 
-                    !tp_is_door(it)) {
-                    continue;
-                }
-
-                if (t->fall_speed < THING_FALL_SPEED_HIT_MONST) {
-                    if (tp_is_monst(it)) {
-                        continue;
-                    }
-                }
-            } else if (tp_is_monst(me) ||
-                       tp_is_rope(me)) {
-
-                /*
-                 * Allow monsters to land on small rocks.
-                 */
-                if (!tp_is_wall(it) && 
-                    !tp_is_rock(it) && 
-                    !tp_is_smallrock(it) && 
-                    !tp_is_obstacle(it) && 
-                    !tp_is_rope(it) && 
-                    !tp_is_ladder(it) && 
-                    !tp_is_cobweb(it) && 
-                    !tp_is_spikes(it) && 
-                    !tp_is_door(it)) {
-                    continue;
-                }
-            } else if (tp_is_obstacle(me)) {
-                if (!tp_is_wall(it) && 
-                    !tp_is_rock(it) && 
-                    !tp_is_obstacle(it) && 
-                    !tp_is_door(it)) {
-                    continue;
-                }
-            } else if (tp_is_smallrock(me)) {
-                if (tp_is_smallrock(it)) {
-                    if (me->y > it->y) {
-                        continue;
-                    }
-                    if (me->y == it->y) {
-                        if ((int)(uintptr_t) me < (int)(uintptr_t) it) {
-                            continue;
-                        }
-                    }
-                }
-
-                if (!tp_is_wall(it) && 
-                    !tp_is_rock(it) && 
-                    !tp_is_smallrock(it) && 
-                    !tp_is_door(it)) {
-                    continue;
-                }
-            } else {
-                /*
-                 * Larger obstacles are only stopped by large obstacles.
-                 */
-                if (!tp_is_wall(it) && 
-                    !tp_is_rock(it) && 
-                    !tp_is_boulder(it) && 
-                    !tp_is_door(it)) {
-                    continue;
-                }
-            }
-
-            if (!things_overlap(level, me, nx, ny, it)) {
-                continue;
-            }
-
-            /*
-             * You can walk closer to a cobweb, but not back out...
-             */
-            if (tp_is_cobweb(it)) {
-                double dist_now = DISTANCE(t->x, t->y, it->x, it->y);
-                double dist_then = DISTANCE(nx, ny, it->x, it->y);
-
-                /*
-                 * No spiders stuck in their own web
-                 */
-                if ((tp_to_id(thing_tp(t)) == THING_SPIDER1) ||
-                    (tp_to_id(thing_tp(t)) == THING_SPIDER2)) {
-                    continue;
-                }
-
-                /*
-                 * Else be sticky
-                 */
-                if (dist_then < dist_now) {
-                    continue;
-                } else {
-                    return (it);
-                }
-            }
-
-            /*
-             * To allow you to land on dead monsters, but prefer live ones.
-             */
-            if (tp_is_dead(it)) {
-                candidate = it;
-                continue;
-            }
-
-            return (it);
-        }
-    }
-
-    return (candidate);
-}
-
-/*
- * Have we hit anything?
- *
- * Is there anything other than floor here
- */
-Thingp thing_hit_any_obstacle (levelp level, 
-                               Thingp t, 
-                               double nx, 
-                               double ny)
-{
-    Thingp me;
-    widp wid_me;
-
-    verify(t);
-    wid_me = thing_wid(t);
-    verify(wid_me);
-
-    int32_t dx, dy;
-
-    me = wid_get_thing(wid_me);
-
-    thing_map_t *map = level_map(level);
-
-    collision_radius = thing_collision_radius(me);
-    if (!collision_radius) {
-        collision_radius = def_collision_radius;
-    }
-
-    for (dx = -collision_radius; dx <= collision_radius; dx++) 
-    for (dy = -collision_radius; dy <= collision_radius; dy++) {
-        int32_t x = (int32_t)me->x + dx;
-        int32_t y = (int32_t)me->y + dy;
-
-        if ((x < 0) || (y < 0) || (x >= MAP_WIDTH) || (y >= MAP_HEIGHT)) {
-            continue;
-        }
-
-        thing_map_cell *cell = &map->cells[x][y];
-
-        uint32_t i;
-        for (i = 0; i < cell->count; i++) {
-            Thingp it;
-            
-            it = id_to_thing(cell->id[i]);
-            if (me == it) {
-                continue;
-            }
-
-            /*
-             * Light embers and other junky effects to ignore.
-             */
-            if (tp_is_hidden(it) ||
-                tp_is_wall_deco(it) ||
-                tp_is_ladder_deco(it)) {
-                continue;
-            }
-
-            /*
-             * No collisions with the floor!
-             */
-            if (tp_is_dungeon_floor(it) ||
-                tp_is_ladder(it)) {
-                continue;
-            }
-
-            /*
-             * Allow dead ghosts to walk over each other!
-             */
-            if (tp_is_dead(it)) {
-                continue;
-            }
-
-            if (!things_overlap(level, me, nx, ny, it)) {
-                continue;
-            }
-
-            /*
-             * You can walk closer to a cobweb, but not back out...
-             */
-            if (tp_is_cobweb(it)) {
-                continue;
-            }
-
-            return (it);
-        }
-    }
-
-    return (0);
-}
-
-/*
- * Have we hit anything?
- *
- * Is there anything other than floor here
- */
-Thingp thing_overlaps (levelp level, 
-                       Thingp t, 
-                       double nx, 
-                       double ny,
-                       tp_is_fn fn)
-{
-    Thingp me;
-    widp wid_me;
-
-    verify(t);
-    wid_me = thing_wid(t);
-    verify(wid_me);
-
-    int32_t dx, dy;
-
-    me = wid_get_thing(wid_me);
-
-    thing_map_t *map = level_map(level);
-
-    collision_radius = thing_collision_radius(me);
-    if (!collision_radius) {
-        collision_radius = def_collision_radius;
-    }
-
-    for (dx = -collision_radius; dx <= collision_radius; dx++) 
-    for (dy = -collision_radius; dy <= collision_radius; dy++) {
-        int32_t x = (int32_t)me->x + dx;
-        int32_t y = (int32_t)me->y + dy;
-
-        if ((x < 0) || (y < 0) || (x >= MAP_WIDTH) || (y >= MAP_HEIGHT)) {
-            continue;
-        }
-
-        thing_map_cell *cell = &map->cells[x][y];
-
-        uint32_t i;
-        for (i = 0; i < cell->count; i++) {
-            Thingp it;
-            
-            it = id_to_thing(cell->id[i]);
-            if (me == it) {
-                continue;
-            }
-
-            if (tp_is_hidden(it) ||
-                tp_is_wall_deco(it) ||
-                tp_is_ladder_deco(it)) {
-                continue;
-            }
-
-            if (!things_overlap(level, me, nx, ny, it)) {
-                continue;
-            }
-
-            if (fn(it)) {
-                return (it);
-            }
-
-            continue;
-        }
-    }
-
-    return (0);
-}
-#endif
-
-bool 
-thing_overlaps_border (Thingp t)
-{_
-    auto tile = t->current_tile;
-    if (!tile) {
-        return (false);
-    }
-
-    for (int y = 0; y < (int)tile->pix_height; y++) {
-        for (int x = 0; x < (int)tile->pix_width; x++) {
-            if (!tile->pix[x][y]) {
-                continue;
-            }
-            
-            int px = t->at.x * TILE_WIDTH + x;
-            int py = t->at.y * TILE_HEIGHT + y;
-
-            if (px < MAP_BORDER * TILE_WIDTH) {
-                return (true);
-            }
-
-            if (py < MAP_BORDER * TILE_HEIGHT) {
-                return (true);
-            }
-
-            if (px >= (MAP_WIDTH - MAP_BORDER) * TILE_WIDTH) {
-                return (true);
-            }
-
-            if (py >= (MAP_HEIGHT - MAP_BORDER) * TILE_HEIGHT) {
-                return (true);
-            }
-        }
-    }
     return (false);
 }
-
-bool 
-things_tile_overlap (Thingp t, fpoint t_at, Thingp o)
-{_
-    auto tile1 = t->current_tile;
-    if (!tile1) {
-        return (false);
-    }
-    auto tile2 = o->current_tile;
-    if (!tile2) {
-        return (false);
-    }
-
-    for (int y = 0; y < (int)tile1->pix_height; y++) {
-        for (int x = 0; x < (int)tile1->pix_width; x++) {
-            if (!tile1->pix[x][y]) {
-                continue;
-            }
-            
-            int px = t_at.x * TILE_WIDTH + x;
-            int py = t_at.y * TILE_HEIGHT + y;
-
-            int ox = o->at.x * TILE_WIDTH;
-            int oy = o->at.y * TILE_HEIGHT;
-
-            int dx = px - ox;
-            int dy = py - oy;
-
-            if ((dx < 0) || (dx >= (int)tile2->pix_width)) {
-#if 0
-if (first) {
-first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  <>x", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
-}
-#endif
-                continue;
-            }
-
-            if ((dy < 0) || (dy >= (int)tile2->pix_height)) {
-#if 0
-if (first) {
-first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  <>y", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
-}
-#endif
-                continue;
-            }
-
-            if (tile2->pix[dx][dy]) {
-#if 0
-first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  overlap", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
-#endif
-                return (true);
-            }
-        }
-    }
-    return (false);
-}
-
-bool 
-things_tile_overlap (Thingp t, Thingp o)
-{_
-    return (things_tile_overlap(t, t->at, o));
-}
-
