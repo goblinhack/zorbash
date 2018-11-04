@@ -132,6 +132,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
     } else {
         tinfo = tile_info_random(tiles);
     }
+
     if (tinfo) {
         t->current_tileinfo = tinfo;
         t->current_tile = tinfo->tile;
