@@ -116,70 +116,71 @@ void tile_load_arr (std::string tex_name,
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
-#ifdef NEED_TILE_BOUNDS
-            SDL_Surface *s = tex_get_surface(tex);
+            if ((pixel_size.w <= MAX_TILE_WIDTH) && 
+                (pixel_size.h <= MAX_TILE_HEIGHT)) {
+                SDL_Surface *s = tex_get_surface(tex);
 
-	    point AT = {
-                pixel_size.w * x,
-                pixel_size.h * y
-            };
+                point AT = {
+                    pixel_size.w * x,
+                    pixel_size.h * y
+                };
 
-	    point MAX = {
-                pixel_size.w * x,
-		pixel_size.h * y
-            };
+                point MAX = {
+                    pixel_size.w * x,
+                    pixel_size.h * y
+                };
 
-	    point MIN = {
-               (pixel_size.w * x) + pixel_size.w - 1,
-	       (pixel_size.h * y) + pixel_size.h - 1
-            };
+                point MIN = {
+                (pixel_size.w * x) + pixel_size.w - 1,
+                (pixel_size.h * y) + pixel_size.h - 1
+                };
 
-            int x1, y1;
+                int x1, y1;
 
-	    for (y1=pixel_size.h - 1; y1>=0; y1--) {
-		for (x1=0; x1<pixel_size.w; x1++) {
+                for (y1=pixel_size.h - 1; y1>=0; y1--) {
+                    for (x1=0; x1<pixel_size.w; x1++) {
 
-		    point at = {
-                        (pixel_size.w * x) + x1,
-			(pixel_size.h * y) + y1
-                    };
+                        point at = {
+                            (pixel_size.w * x) + x1,
+                            (pixel_size.h * y) + y1
+                        };
 
-		    color p = getPixel(s, at.x, at.y);
+                        color p = getPixel(s, at.x, at.y);
 
-                    /*
-                     * If solid...
-                     */
-		    if (p.a >= 0xef) {
-			MIN.x = std::min(at.x, MIN.x);
-			MIN.y = std::min(at.y, MIN.y);
-			MAX.x = std::max(at.x, MAX.x);
-			MAX.y = std::max(at.y, MAX.y);
+                        /*
+                        * If solid...
+                        */
+                        if (p.a >= 0xef) {
+                            MIN.x = std::min(at.x, MIN.x);
+                            MIN.y = std::min(at.y, MIN.y);
+                            MAX.x = std::max(at.x, MAX.x);
+                            MAX.y = std::max(at.y, MAX.y);
 #ifdef DEBUG_TILE
-                        printf("X");
+                            printf("X");
 #endif
-                        if ((x1 < MAX_TILE_WIDTH) && (y1 < MAX_TILE_HEIGHT)) {
-                            t->pix[x1][y1] = 1;
+                            if ((x1 < MAX_TILE_WIDTH) && (y1 < MAX_TILE_HEIGHT)) {
+                                t->pix[x1][y1] = 1;
+                            }
+                        } else if (p.a > 0) {
+#ifdef DEBUG_TILE
+                            printf(".");
+#endif
+                        } else {
+#ifdef DEBUG_TILE
+                            printf(" ");
+#endif
                         }
-                    } else if (p.a > 0) {
-#ifdef DEBUG_TILE
-                        printf(".");
-#endif
-		    } else {
-#ifdef DEBUG_TILE
-                        printf(" ");
-#endif
                     }
-		}
 #ifdef DEBUG_TILE
-                printf("\n");
+                    printf("\n");
 #endif
-	    }
+                }
 
-            t->px1 = ((double) (MIN.x - AT.x)) / (double) pixel_size.w;
-            t->px2 = ((double) (MAX.x - AT.x + 1)) / (double) pixel_size.w;
-            t->py1 = ((double) (MIN.y - AT.y)) / (double) pixel_size.h;
-            t->py2 = ((double) (MAX.y - AT.y + 1)) / (double) pixel_size.h;
-#endif
+                t->px1 = ((double) (MIN.x - AT.x)) / (double) pixel_size.w;
+                t->px2 = ((double) (MAX.x - AT.x + 1)) / (double) pixel_size.w;
+                t->py1 = ((double) (MIN.y - AT.y)) / (double) pixel_size.h;
+                t->py2 = ((double) (MAX.y - AT.y + 1)) / (double) pixel_size.h;
+            }
 
 #ifdef DEBUG_TILE
             printf("^^^  %s %f %f %f %f min x %d %d min y %d %d\n",name.c_str(),t->px1,t->py1,t->px2,t->py2, MIN.x,MAX.x,MIN.y,MAX.y);

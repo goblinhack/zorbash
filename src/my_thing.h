@@ -268,10 +268,11 @@ extern Thingp thing_find(uint32_t name);
 extern void thing_gc(void);
 extern void thing_render_all(void);
 extern void thing_map_scroll_to_player(void);
-void map_light_init(void);
-void map_light_add(Tpp tp, fpoint at, double strength, color c, bool hiqual);
-void map_light_calculate_visible(int level);
-void map_light_display(int fbo);
-void map_light_ray_effect(const int light_index, const int light_level);
+
+/*
+ * thing_move.cpp
+ */
+bool thing_overlaps_vorder(Thingp t);
+bool things_overlap(Thingp t, Thingp o);
 
 #endif /* THING_H */

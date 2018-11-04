@@ -61,12 +61,10 @@ public:
      * Percentage points that indicate the start of the pixels within the tile
      * texture for use in collisions.
      */
-#ifdef NEED_TILE_BOUNDS
     double px1 {};
     double py1 {};
     double px2 {};
     double py2 {};
-#endif
 
     int32_t gl_surface_binding {};
     Texp tex;
