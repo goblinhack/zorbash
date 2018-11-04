@@ -14,6 +14,7 @@
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #undef  ENABLE_GENERATE_TTF        // Edit .RUNME, look for ENABLE_GENERATE_TTF
 #define ENABLE_INVERTED_GFX        // For vision impaired
+#undef  ENABLE_ASCII_MOUSE
 #define THING_DEBUG
 
 /*

@@ -9,6 +9,7 @@
 #include "my_wid.h"
 #include "my_ascii.h"
 #include "my_time_util.h"
+#include "my_player.h"
 
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
@@ -303,7 +304,7 @@ uint8_t sdl_init (void)
                           &game.config.drawable_gl_height);
     }
 
-    LOG("Calling SDL_GL_CreateContext (drawable size %dx%d)...", 
+    LOG("Palling SDL_GL_CreateContext (drawable size %dx%d)...", 
         game.config.drawable_gl_width,
         game.config.drawable_gl_height);
 
@@ -959,7 +960,6 @@ void sdl_loop (void)
         int32_t timestamp_now = time_update_time_milli();
 
         if (unlikely(timestamp_now - timestamp_then > 10)) {
-
             /*
              * Give up some CPU to allow events to arrive and time for the GPU
              * to process the above.
@@ -983,26 +983,14 @@ void sdl_loop (void)
                 sdl_event(&events[i]);
             }
 
-            /*
-             * SDL doesn't seem to like an immediate center. beachball hang if
-             * we do this.
-             */
-#ifdef ENABlE_GRAPHIC_MOUSE
-            static int first = 1;
-            if (first) {
-                first = 0;
-                sdl_mouse_center();
-                SDL_ShowCursor(0);
-                wid_mouse_motion(mouse_x, mouse_y, 0, 0, 0, 0);
-            }
-#endif
-
             if (!sdl_main_loop_running) {
                 break;
             }
         }
 
         glcolor(WHITE);
+
+        player_tick();
 
         /*
          * Display UI.

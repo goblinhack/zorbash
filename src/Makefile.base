@@ -26,8 +26,10 @@ GAME_OBJECTS=				\
     $(OBJDIR)/light.o 			\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/main.o 			\
+    $(OBJDIR)/map.o 		        \
     $(OBJDIR)/pcg_basic.o 		\
     $(OBJDIR)/pixel.o 			\
+    $(OBJDIR)/player.o 			\
     $(OBJDIR)/point.o 			\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_room.o 		\
@@ -47,11 +49,10 @@ GAME_OBJECTS=				\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_anim.o 		\
-    $(OBJDIR)/thing_move.o 		\
-    $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_collision.o 	\
+    $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_map.o 		\
-    $(OBJDIR)/map.o 		        \
+    $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_template.o 		\
     $(OBJDIR)/thing_weapon.o 		\
     $(OBJDIR)/tile.o 			\

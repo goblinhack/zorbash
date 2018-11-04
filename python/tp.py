@@ -94,8 +94,8 @@ class Tp:
         self.is_rrr20 = False
         self.is_rrr21 = False
         self.is_rrr22 = False
-        self.is_rrr23 = False
-        self.is_rrr24 = False
+        self.move_delay_hundredths = False
+        self.weapon_fire_delay_hundredths = False
         self.for_collision_use_box = False
         self.for_collision_use_circle = False
         self.weapon_damage = False
@@ -361,13 +361,13 @@ class Tp:
         self.is_rrr22 = value
         zx.tp_set_is_rrr22(self, value)
 
-    def set_is_rrr23(self, value):
-        self.is_rrr23 = value
-        zx.tp_set_is_rrr23(self, value)
+    def set_move_delay_hundredths(self, value):
+        self.move_delay_hundredths = value
+        zx.tp_set_move_delay_hundredths(self, value)
 
-    def set_is_rrr24(self, value):
-        self.is_rrr24 = value
-        zx.tp_set_is_rrr24(self, value)
+    def set_weapon_fire_delay_hundredths(self, value):
+        self.weapon_fire_delay_hundredths = value
+        zx.tp_set_weapon_fire_delay_hundredths(self, value)
 
     def set_for_collision_use_box(self, value):
         self.for_collision_use_box = value
