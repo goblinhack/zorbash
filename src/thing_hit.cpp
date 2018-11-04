@@ -8,10 +8,10 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
-int Thing::thing_hit_actual (Thingp orig_hitter, 
-                             Thingp real_hitter, 
-                             Thingp hitter, 
-                             int damage)
+int Thing::hit_actual (Thingp orig_hitter, 
+                       Thingp real_hitter, 
+                       Thingp hitter, 
+                       int damage)
 {
     /*
      * Cruel to let things keep on hitting you when you're dead
@@ -83,7 +83,7 @@ int Thing::thing_hit_actual (Thingp orig_hitter,
 /*
  * Returns true on the target being dead.
  */
-int Thing::thing_hit_possible (Thingp hitter, int damage)
+int Thing::hit_possible (Thingp hitter, int damage)
 {
     Thingp orig_hitter = hitter;
 
@@ -207,7 +207,12 @@ int Thing::thing_hit_possible (Thingp hitter, int damage)
 
     int hit_and_killed;
 
-    hit_and_killed = thing_hit_actual(orig_hitter, real_hitter, hitter, damage);
+    hit_and_killed = hit_actual(orig_hitter, real_hitter, hitter, damage);
 
     return (hit_and_killed);
+}
+
+int Thing::hit_possible (Thingp hitter)
+{
+    return (hit_possible(hitter, 0));
 }
