@@ -68,11 +68,15 @@ Thingp thing_new (std::string tp_name, fpoint at)
     }
 
     t->is_dead        = false;
-    t->is_hidden        = false;
+    t->is_bloodied    = false;
+    t->is_player      = false;
+    t->is_hidden      = false;
     t->is_sleeping    = false;
     t->is_moving      = false;
     t->has_ever_moved = false;
     t->is_open        = false;
+
+    t->timestamp_born = time_get_time_ms();
 
     auto tiles = tp_get_left_tiles(tp);
     auto tinfo = tile_info_random(tiles);
@@ -152,6 +156,10 @@ Thingp thing_new (std::string tp_name, fpoint at)
 
     if (tp_is_wall(tp)) {
         game.state.map.is_wall[new_at.x][new_at.y] = true;
+    }
+
+    if (tp_is_player(tp)) {
+        t->is_player = true;
     }
 
     //log("created");
@@ -266,7 +274,7 @@ _
         set_weapon_carry_anim(nullptr);
         verify(item);
         item->set_owner(nullptr);
-        item->dead(nullptr, "weapon carry anim owner killed");
+        item->dead("weapon carry anim owner killed");
     }
 
     if (weapon_swing_anim_thing_id) {
@@ -274,7 +282,7 @@ _
         set_weapon_swing_anim(nullptr);
         verify(item);
         item->set_owner(nullptr);
-        item->dead(nullptr, "weapon swing anim owner killed");
+        item->dead("weapon swing anim owner killed");
     }
 
     /*
@@ -524,7 +532,7 @@ std::string Thing::logname (void)
     return (tmp[loop++]);
 }
 
-void Thing::dead (Thingp killer, const char * , ...)
+void Thing::kill (void)
 {_
     if (is_dead) {
         return;

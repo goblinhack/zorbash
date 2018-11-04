@@ -30,7 +30,7 @@ void Thing::animate (void)
          */
         if (tile_info_is_end_of_anim(tile)) {
             if (tile_info_is_dead_on_end_of_anim(tile)) {
-                t->dead(0, "end of anim");
+                t->dead("end of anim");
             }
 
             return;
@@ -126,22 +126,22 @@ void Thing::animate (void)
                     continue;
                 }
 #if 0
-            } else if (tp->has_dir_anim && thing_is_dir_tl(t)) {
+            } else if (tp->has_dir_anim && tp_is_dir_tl(t)) {
                 if (!tile_info_is_dir_tl(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && thing_is_dir_bl(t)) {
+            } else if (tp->has_dir_anim && tp_is_dir_bl(t)) {
                 if (!tile_info_is_dir_bl(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && thing_is_dir_br(t)) {
+            } else if (tp->has_dir_anim && tp_is_dir_br(t)) {
                 if (!tile_info_is_dir_br(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && thing_is_dir_tr(t)) {
+            } else if (tp->has_dir_anim && tp_is_dir_tr(t)) {
                 if (!tile_info_is_dir_tr(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
@@ -215,7 +215,7 @@ void Thing::animate (void)
 
 #if 0
     if (tile && otile) {
-        if(thing_is_joinable(t)) {
+        if(tp_is_joinable(t)) {
             CON("%s-> %s", tile_info_name(otile), tile_info_name(tile));
         }
     }

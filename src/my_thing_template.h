@@ -124,60 +124,60 @@ public:
     int blit_left_off {};
     int blit_right_off {};
 
-    bool has_dir_anim {};
-    bool is_animated {};
-    bool is_animated_no_dir {};
-    bool is_animation {};
-    bool is_door {};
-    bool is_floor {};
-    bool is_key {};
-    bool is_lava {};
-    bool is_monst {};
-    bool is_movement_blocking {};
-    bool is_player {};
-    bool is_wall {};
-    bool is_water {};
-    bool is_rrr1 {};
-    bool is_rrr2 {};
-    bool is_rrr3 {};
-    bool is_rrr4 {};
-    bool is_rrr5 {};
-    bool is_rrr6 {};
-    bool is_rrr7 {};
-    bool is_rrr8 {};
-    bool is_rrr9 {};
-    bool is_rrr10 {};
-    bool is_rrr11 {};
-    bool is_rrr12 {};
-    bool is_rrr13 {};
-    bool is_rrr14 {};
-    bool is_rrr15 {};
-    bool is_rrr16 {};
-    bool is_rrr17 {};
-    bool is_rrr18 {};
-    bool is_rrr19 {};
-    bool is_rrr20 {};
-    bool is_rrr21 {};
-    bool is_rrr22 {};
-    bool is_rrr23 {};
-    bool is_rrr24 {};
-    bool is_rrr25 {};
-    bool is_rrr26 {};
-    bool is_rrr27 {};
-    bool is_rrr28 {};
-    bool is_rrr29 {};
-    bool is_rrr30 {};
-    bool is_rrr31 {};
-    bool weapon_hit_priority {};
-    bool weapon_swing_distance {};
-    bool is_weapon_carry_anim {};
-    bool is_weapon_swing_effect {};
-    bool is_weapon {};
-    bool is_outlined {};
-    bool is_shadow_caster {};
-    bool is_ladder {};
-    bool is_animated_walk_flip {};
-    bool is_movable {};
+    int has_dir_anim {};
+    int is_animated {};
+    int is_animated_no_dir {};
+    int is_animation {};
+    int is_door {};
+    int is_floor {};
+    int is_key {};
+    int is_lava {};
+    int is_monst {};
+    int is_movement_blocking {};
+    int is_player {};
+    int is_wall {};
+    int is_water {};
+    int is_rrr1 {};
+    int is_rrr2 {};
+    int is_rrr3 {};
+    int is_rrr4 {};
+    int is_rrr5 {};
+    int is_rrr6 {};
+    int is_rrr7 {};
+    int is_rrr8 {};
+    int is_rrr9 {};
+    int is_rrr10 {};
+    int is_rrr11 {};
+    int is_rrr12 {};
+    int is_rrr13 {};
+    int is_rrr14 {};
+    int is_rrr15 {};
+    int is_rrr16 {};
+    int is_rrr17 {};
+    int is_rrr18 {};
+    int is_rrr19 {};
+    int is_rrr20 {};
+    int is_rrr21 {};
+    int is_rrr22 {};
+    int is_rrr23 {};
+    int is_rrr24 {};
+    int is_rrr25 {};
+    int is_rrr26 {};
+    int weapon_damage {};
+    int is_projectile {};
+    int is_explosion {};
+    int is_combustable {};
+    int is_spikes {};
+    int collision_priority {};
+    int weapon_swing_distance {};
+    int is_weapon_carry_anim {};
+    int is_weapon_swing_effect {};
+    int is_weapon {};
+    int is_outlined {};
+    int is_shadow_caster {};
+    int is_ladder {};
+    int is_animated_walk_flip {};
+    int is_movable {};
     uint8_t z_depth {};
 };
 
@@ -188,7 +188,6 @@ void tp_update(Tpp tp);
 Tpp tp_find(std::string name);
 Tpp tp_find(uint32_t id);
 Tpp tp_find_short_name(std::string name);
-uint8_t thing_test(int argc, char *argv[]);
 
 static inline int32_t tp_get_blit_top_off (Tpp &t)
 {
@@ -218,272 +217,272 @@ static inline int tp_to_id (Tpp t)
     return (t->id);
 }
 
-static inline uint8_t tp_is_floor (Tpp t)
+static inline int tp_is_floor (Tpp t)
 {
     return (t->is_floor);
 }
 
-static inline uint8_t tp_is_wall (Tpp t)
+static inline int tp_is_wall (Tpp t)
 {
     return (t->is_wall);
 }
 
-static inline uint8_t tp_is_door (Tpp t)
+static inline int tp_is_door (Tpp t)
 {
     return (t->is_door);
 }
 
-static inline uint8_t tp_is_lava (Tpp t)
+static inline int tp_is_lava (Tpp t)
 {
     return (t->is_lava);
 }
 
-static inline uint8_t tp_is_water (Tpp t)
+static inline int tp_is_water (Tpp t)
 {
     return (t->is_water);
 }
 
-static inline uint8_t tp_is_monst (Tpp t)
+static inline int tp_is_monst (Tpp t)
 {
     return (t->is_monst);
 }
 
-static inline uint8_t tp_is_player (Tpp t)
+static inline int tp_is_player (Tpp t)
 {
     return (t->is_player);
 }
 
-static inline uint8_t tp_is_animation (Tpp t)
+static inline int tp_is_animation (Tpp t)
 {
     return (t->is_animation);
 }
 
-static inline uint8_t tp_is_animated (Tpp t)
+static inline int tp_is_animated (Tpp t)
 {
     return (t->is_animated);
 }
 
-static inline uint8_t tp_is_animated_no_dir (Tpp t)
+static inline int tp_is_animated_no_dir (Tpp t)
 {
     return (t->is_animated_no_dir);
 }
 
-static inline uint8_t tp_is_rrr1 (Tpp t)
+static inline int tp_is_rrr1 (Tpp t)
 {
     return (t->is_rrr1);
 }
 
-static inline uint8_t tp_is_rrr2 (Tpp t)
+static inline int tp_is_rrr2 (Tpp t)
 {
     return (t->is_rrr2);
 }
 
-static inline uint8_t tp_is_rrr3 (Tpp t)
+static inline int tp_is_rrr3 (Tpp t)
 {
     return (t->is_rrr3);
 }
 
-static inline uint8_t tp_is_rrr4 (Tpp t)
+static inline int tp_is_rrr4 (Tpp t)
 {
     return (t->is_rrr4);
 }
 
-static inline uint8_t tp_is_rrr5 (Tpp t)
+static inline int tp_is_rrr5 (Tpp t)
 {
     return (t->is_rrr5);
 }
 
-static inline uint8_t tp_is_rrr6 (Tpp t)
+static inline int tp_is_rrr6 (Tpp t)
 {
     return (t->is_rrr6);
 }
 
-static inline uint8_t tp_is_rrr7 (Tpp t)
+static inline int tp_is_rrr7 (Tpp t)
 {
     return (t->is_rrr7);
 }
 
-static inline uint8_t tp_is_rrr8 (Tpp t)
+static inline int tp_is_rrr8 (Tpp t)
 {
     return (t->is_rrr8);
 }
 
-static inline uint8_t tp_is_rrr9 (Tpp t)
+static inline int tp_is_rrr9 (Tpp t)
 {
     return (t->is_rrr9);
 }
 
-static inline uint8_t tp_is_rrr10 (Tpp t)
+static inline int tp_is_rrr10 (Tpp t)
 {
     return (t->is_rrr10);
 }
 
-static inline uint8_t tp_is_rrr11 (Tpp t)
+static inline int tp_is_rrr11 (Tpp t)
 {
     return (t->is_rrr11);
 }
 
-static inline uint8_t tp_is_rrr12 (Tpp t)
+static inline int tp_is_rrr12 (Tpp t)
 {
     return (t->is_rrr12);
 }
 
-static inline uint8_t tp_is_rrr13 (Tpp t)
+static inline int tp_is_rrr13 (Tpp t)
 {
     return (t->is_rrr13);
 }
 
-static inline uint8_t tp_is_rrr14 (Tpp t)
+static inline int tp_is_rrr14 (Tpp t)
 {
     return (t->is_rrr14);
 }
 
-static inline uint8_t tp_is_rrr15 (Tpp t)
+static inline int tp_is_rrr15 (Tpp t)
 {
     return (t->is_rrr15);
 }
 
-static inline uint8_t tp_is_rrr16 (Tpp t)
+static inline int tp_is_rrr16 (Tpp t)
 {
     return (t->is_rrr16);
 }
 
-static inline uint8_t tp_is_rrr17 (Tpp t)
+static inline int tp_is_rrr17 (Tpp t)
 {
     return (t->is_rrr17);
 }
 
-static inline uint8_t tp_is_rrr18 (Tpp t)
+static inline int tp_is_rrr18 (Tpp t)
 {
     return (t->is_rrr18);
 }
 
-static inline uint8_t tp_is_rrr19 (Tpp t)
+static inline int tp_is_rrr19 (Tpp t)
 {
     return (t->is_rrr19);
 }
 
-static inline uint8_t tp_is_rrr20 (Tpp t)
+static inline int tp_is_rrr20 (Tpp t)
 {
     return (t->is_rrr20);
 }
 
-static inline uint8_t tp_is_rrr21 (Tpp t)
+static inline int tp_is_rrr21 (Tpp t)
 {
     return (t->is_rrr21);
 }
 
-static inline uint8_t tp_is_rrr22 (Tpp t)
+static inline int tp_is_rrr22 (Tpp t)
 {
     return (t->is_rrr22);
 }
 
-static inline uint8_t tp_is_rrr23 (Tpp t)
+static inline int tp_is_rrr23 (Tpp t)
 {
     return (t->is_rrr23);
 }
 
-static inline uint8_t tp_is_rrr24 (Tpp t)
+static inline int tp_is_rrr24 (Tpp t)
 {
     return (t->is_rrr24);
 }
 
-static inline uint8_t tp_is_rrr25 (Tpp t)
+static inline int tp_is_rrr25 (Tpp t)
 {
     return (t->is_rrr25);
 }
 
-static inline uint8_t tp_is_rrr26 (Tpp t)
+static inline int tp_is_rrr26 (Tpp t)
 {
     return (t->is_rrr26);
 }
 
-static inline uint8_t tp_is_rrr27 (Tpp t)
+static inline int tp_weapon_damage (Tpp t)
 {
-    return (t->is_rrr27);
+    return (t->weapon_damage);
 }
 
-static inline uint8_t tp_is_rrr28 (Tpp t)
+static inline int tp_is_projectile (Tpp t)
 {
-    return (t->is_rrr28);
+    return (t->is_projectile);
 }
 
-static inline uint8_t tp_is_rrr29 (Tpp t)
+static inline int tp_is_explosion (Tpp t)
 {
-    return (t->is_rrr29);
+    return (t->is_explosion);
 }
 
-static inline uint8_t tp_is_rrr30 (Tpp t)
+static inline int tp_is_combustable (Tpp t)
 {
-    return (t->is_rrr30);
+    return (t->is_combustable);
 }
 
-static inline uint8_t tp_is_rrr31 (Tpp t)
+static inline int tp_is_spikes (Tpp t)
 {
-    return (t->is_rrr31);
+    return (t->is_spikes);
 }
 
-static inline uint8_t tp_weapon_hit_priority (Tpp t)
+static inline int tp_collision_priority (Tpp t)
 {
-    return (t->weapon_hit_priority);
+    return (t->collision_priority);
 }
 
-static inline uint8_t tp_weapon_swing_distance (Tpp t)
+static inline int tp_weapon_swing_distance (Tpp t)
 {
     return (t->weapon_swing_distance);
 }
 
-static inline uint8_t tp_is_weapon_carry_anim (Tpp t)
+static inline int tp_is_weapon_carry_anim (Tpp t)
 {
     return (t->is_weapon_carry_anim);
 }
 
-static inline uint8_t tp_is_weapon_swing_effect (Tpp t)
+static inline int tp_is_weapon_swing_effect (Tpp t)
 {
     return (t->is_weapon_swing_effect);
 }
 
-static inline uint8_t tp_is_weapon (Tpp t)
+static inline int tp_is_weapon (Tpp t)
 {
     return (t->is_weapon);
 }
 
-static inline uint8_t tp_is_outlined (Tpp t)
+static inline int tp_is_outlined (Tpp t)
 {
     return (t->is_outlined);
 }
 
-static inline uint8_t tp_is_shadow_caster (Tpp t)
+static inline int tp_is_shadow_caster (Tpp t)
 {
     return (t->is_shadow_caster);
 }
 
-static inline uint8_t tp_is_ladder (Tpp t)
+static inline int tp_is_ladder (Tpp t)
 {
     return (t->is_ladder);
 }
 
-static inline uint8_t tp_is_animated_walk_flip (Tpp t)
+static inline int tp_is_animated_walk_flip (Tpp t)
 {
     return (t->is_animated_walk_flip);
 }
 
-static inline uint8_t tp_z_depth (Tpp t)
+static inline int tp_z_depth (Tpp t)
 {
     return (t->z_depth);
 }
 
-static inline uint8_t tp_is_movable (Tpp t)
+static inline int tp_is_movable (Tpp t)
 {
     return (t->is_movable);
 }
 
-static inline uint8_t tp_is_movement_blocking (Tpp t)
+static inline int tp_is_movement_blocking (Tpp t)
 {
     return (t->is_movement_blocking);
 }
 
-static inline uint8_t tp_is_key (Tpp t)
+static inline int tp_is_key (Tpp t)
 {
     return (t->is_key);
 }

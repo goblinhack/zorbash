@@ -6,9 +6,6 @@
 
 #define __MAIN__
 
-#ifdef ENABLE_CRASH_HANDLER
-#endif
-
 #ifndef _MSC_VER
 #include <libgen.h>
 #endif
