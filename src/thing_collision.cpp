@@ -149,14 +149,13 @@ collided:
  */
 int circle_circle_collision (Thingp A, 
                              Thingp B,
-                             double nx,
-                             double ny,
+                             fpoint at,
                              fpoint *intersect)
 {
     double Ax = A->at.x;
     double Ay = A->at.y;
-    Ax += (nx - A->at.x);
-    Ay += (ny - A->at.y);
+    Ax += (at.x - A->at.x);
+    Ay += (at.y - A->at.y);
 
     fpoint A_at = { Ax, Ay };
     fpoint A0, A1, A2, A3;
@@ -345,296 +344,33 @@ void thing_possible_hit_do (Thingp hitter)
     thing_possible_init();
 }
 
-#if 0
-static uint8_t things_overlap (levelp level,
-                               const Thingp A, 
-                               double nx,
-                               double ny,
-                               const Thingp B)
+bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
 {
-    static tilep wall;
-    static double collision_map_large_x1;
-    static double collision_map_large_x2;
-    static double collision_map_large_y1;
-    static double collision_map_large_y2;
-    static double collision_map_medium_x1;
-    static double collision_map_medium_x2;
-    static double collision_map_medium_y1;
-    static double collision_map_medium_y2;
-    static double collision_map_small_x1;
-    static double collision_map_small_x2;
-    static double collision_map_small_y1;
-    static double collision_map_small_y2;
-    static double collision_map_tiny_x1;
-    static double collision_map_tiny_x2;
-    static double collision_map_tiny_y1;
-    static double collision_map_tiny_y2;
-
-    double Ax, Ay;
-    double Bx, By;
+    fpoint A_at, B_at;
 
     /*
      * If -1, -1 then we are looking at the current position.
      *
-     * If not then we are just checking out a future position.
+     * If not then we are just checking out a future_pos position.
      */
-    if ((nx == -1.0) && (ny == -1.0)) {
-        Thingp_get_interpolated_position(A, &Ax, &Ay);
-        Thingp_get_interpolated_position(B, &Bx, &By);
+    if (future_pos == fpoint(-1, -1)) {
+        A_at = A->at;
+        B_at = B->at;
     } else {
-        Ax = nx;
-        Ay = ny;
-        Bx = B->x;
-        By = B->y;
-    }
-
-    /*
-     * The tiles are considered to be 1 unit wide. However the actual pixels
-     * of each tile include shadows. px1/px2 are the bounds and exclude the
-     * shadows. So we need to scale up the px1/px2 bounds to 1 as if the 
-     * shadow pixels were not there.
-     */
-    if (!wall) {
-        wall = tile_find("wall1_0_0");
-        if (!wall) {
-            ERR("no wall for collisions");
-        }
-
-        tilep tile = tile_find("large-collision-map");
-        if (!tile) {
-            ERR("no tile for collisions");
-        }
-
-        collision_map_large_x1 = tile->px1;
-        collision_map_large_x2 = tile->px2;
-        collision_map_large_y1 = tile->py1;
-        collision_map_large_y2 = tile->py2;
-
-        tile = tile_find("medium-collision-map");
-        if (!tile) {
-            ERR("no tile for collisions");
-        }
-
-        collision_map_medium_x1 = tile->px1;
-        collision_map_medium_x2 = tile->px2;
-        collision_map_medium_y1 = tile->py1;
-        collision_map_medium_y2 = tile->py2;
-
-        tile = tile_find("small-collision-map");
-        if (!tile) {
-            ERR("no tile for collisions");
-        }
-
-        collision_map_small_x1 = tile->px1;
-        collision_map_small_x2 = tile->px2;
-        collision_map_small_y1 = tile->py1;
-        collision_map_small_y2 = tile->py2;
-
-        tile = tile_find("small-collision-map");
-        if (!tile) {
-            ERR("no tile for collisions");
-        }
-
-        collision_map_small_x1 = tile->px1;
-        collision_map_small_x2 = tile->px2;
-        collision_map_small_y1 = tile->py1;
-        collision_map_small_y2 = tile->py2;
-    }
-
-    double Apx1;
-    double Apx2;
-    double Apy1;
-    double Apy2;
-
-    double Bpx1;
-    double Bpx2;
-    double Bpy1;
-    double Bpy2;
-
-    widp Aw = thing_wid(A);
-    widp Bw = thing_wid(B);
-
-    if (0 &&
-        ((tp_is_player(A) && tp_is_monst(B)) ||
-         (tp_is_player(B) && tp_is_monst(A)))) {
-
-        tilep tileA = wid_get_tile(Aw);
-        if (!tileA) {
-            DIE("no tile for thing A %s", thing_logname(A));
-            return (false);
-        }
-
-        Apx1 = tileA->px1;
-        Apx2 = tileA->px2;
-        Apy1 = tileA->py1;
-        Apy2 = tileA->py2;
-
-        tilep tileB = wid_get_tile(Bw);
-        if (!tileB) {
-            DIE("no tile for thing B %s", thing_logname(B));
-            return (false);
-        }
-
-        Bpx1 = tileB->px1;
-        Bpx2 = tileB->px2;
-        Bpy1 = tileB->py1;
-        Bpy2 = tileB->py2;
-
-    } else {
-        if (tp_is_wall(A) || tp_is_door(A)) {
-            tilep tileA = wid_get_tile(Aw);
-            if (!tileA) {
-                DIE("no tile for thing A %s", thing_logname(A));
-                return (false);
-            }
-
-            Apx1 = tileA->px1;
-            Apx2 = tileA->px2;
-            Apy1 = tileA->py1;
-            Apy2 = tileA->py2;
-
-#if 0
-            double tile_width = (Apx2 - Apx1);
-            double tile_height = (Apy2 - Apy1);
-
-            Apy1 -= tile_height / 3.0;
-            Apx2 += tile_width / 3.0;
-#endif
-
-        } else if (tp_is_collision_map_large(A)) {
-            Apx1 = collision_map_large_x1;
-            Apx2 = collision_map_large_x2;
-            Apy1 = collision_map_large_y1;
-            Apy2 = collision_map_large_y2;
-        } else if (tp_is_collision_map_medium(A)) {
-            Apx1 = collision_map_medium_x1;
-            Apx2 = collision_map_medium_x2;
-            Apy1 = collision_map_medium_y1;
-            Apy2 = collision_map_medium_y2;
-        } else if (tp_is_collision_map_small(A)) {
-            Apx1 = collision_map_small_x1;
-            Apx2 = collision_map_small_x2;
-            Apy1 = collision_map_small_y1;
-            Apy2 = collision_map_small_y2;
-        } else if (tp_is_collision_map_tiny(A)) {
-            Apx1 = collision_map_tiny_x1;
-            Apx2 = collision_map_tiny_x2;
-            Apy1 = collision_map_tiny_y1;
-            Apy2 = collision_map_tiny_y2;
-        } else {
-            /*
-            * Just use pixel and alpha values.
-            */
-            tilep tileA = wid_get_tile(Aw);
-            if (!tileA) {
-                DIE("no tile for thing A %s", thing_logname(A));
-                return (false);
-            }
-
-            Apx1 = tileA->px1;
-            Apx2 = tileA->px2;
-            Apy1 = tileA->py1;
-            Apy2 = tileA->py2;
-        }
-
-        if (tp_is_wall(B) || tp_is_door(B)) {
-            tilep tileB = wid_get_tile(Bw);
-            if (!tileB) {
-                DIE("no tile for thing B %s", thing_logname(B));
-                return (false);
-            }
-
-            Bpx1 = tileB->px1;
-            Bpx2 = tileB->px2;
-            Bpy1 = tileB->py1;
-            Bpy2 = tileB->py2;
-
-#if 0
-            double tile_width = (Bpx2 - Bpx1);
-            double tile_height = (Bpy2 - Bpy1);
-
-            Bpy1 -= tile_height / 3.0;
-            Bpx2 += tile_width / 3.0;
-#endif
-
-        } else if (tp_is_collision_map_large(B)) {
-            Bpx1 = collision_map_large_x1;
-            Bpx2 = collision_map_large_x2;
-            Bpy1 = collision_map_large_y1;
-            Bpy2 = collision_map_large_y2;
-        } else if (tp_is_collision_map_medium(B)) {
-            Bpx1 = collision_map_medium_x1;
-            Bpx2 = collision_map_medium_x2;
-            Bpy1 = collision_map_medium_y1;
-            Bpy2 = collision_map_medium_y2;
-        } else if (tp_is_collision_map_small(B)) {
-            Bpx1 = collision_map_small_x1;
-            Bpx2 = collision_map_small_x2;
-            Bpy1 = collision_map_small_y1;
-            Bpy2 = collision_map_small_y2;
-        } else if (tp_is_collision_map_medium(B)) {
-            Bpx1 = collision_map_medium_x1;
-            Bpx2 = collision_map_medium_x2;
-            Bpy1 = collision_map_medium_y1;
-            Bpy2 = collision_map_medium_y2;
-        } else {
-            /*
-            * Just use pixel and alpha values.
-            */
-            tilep tileB = wid_get_tile(Bw);
-            if (!tileB) {
-                DIE("no tile for thing B %s", thing_logname(B));
-                return (false);
-            }
-
-            Bpx1 = tileB->px1;
-            Bpx2 = tileB->px2;
-            Bpy1 = tileB->py1;
-            Bpy2 = tileB->py2;
-        }
-    }
-
-    /*
-     * Bit of a hack. We need bonepiles to be passable by ghosts, but easy to 
-     * hit by missiles.
-     */
-    if (tp_is_projectile(A) &&
-        (tp_is_monst(B)          ||
-         tp_is_trap(B)           ||
-         tp_is_mob_spawner(B))) {
-
-        Bpx1 = collision_map_large_x1;
-        Bpx2 = collision_map_large_x2;
-        Bpy1 = collision_map_large_y1;
-        Bpy2 = collision_map_large_y2;
-    }
-
-    /*
-     * Similar thing for sword things, we want them to hit targets easily.
-     */
-    if (tp_is_weapon_swing_effect(A) &&
-        (tp_is_monst(B)          ||
-         tp_is_player(B)         ||
-         tp_is_mob_spawner(B))) {
-
-        Bpx1 = collision_map_large_x1;
-        Bpx2 = collision_map_large_x2;
-        Bpy1 = collision_map_large_y1;
-        Bpy2 = collision_map_large_y2;
+        A_at = future_pos;
+        B_at = B->at;
     }
 
     int check_only = true;
     fpoint intersect = {0,0};
     fpoint normal_A = {0,0};
 
-    if (thing_can_roll(A) && !thing_can_roll(B)) {
-        if (circle_box_collision(level,
-                                 A, /* circle */
-                                 Ax,
-                                 Ay,
+    if (tp_for_collision_use_circle(A->tp) && 
+        !tp_for_collision_use_circle(B->tp)) {
+        if (circle_box_collision(A, /* circle */
+                                 A_at,
                                  B, /* box */
-                                 Bx,
-                                 By,
+                                 B_at,
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
@@ -643,14 +379,12 @@ static uint8_t things_overlap (levelp level,
         return (false);
     }
 
-    if (!thing_can_roll(A) && thing_can_roll(B)) {
-        if (circle_box_collision(level,
-                                 B, /* circle */
-                                 Bx,
-                                 By,
+    if (!tp_for_collision_use_circle(A->tp) && 
+         tp_for_collision_use_circle(B->tp)) {
+        if (circle_box_collision(B, /* circle */
+                                 B_at,
                                  A, /* box */
-                                 Ax,
-                                 Ay,
+                                 A_at,
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
@@ -659,89 +393,26 @@ static uint8_t things_overlap (levelp level,
         return (false);
     }
 
-    if (thing_can_roll(A) && thing_can_roll(B)) {
+    if (tp_for_collision_use_circle(A->tp) &&
+        tp_for_collision_use_circle(B->tp)) {
         if (circle_circle_collision(A, /* circle */
                                     B, /* box */
-                                    Ax,
-                                    Ay,
+                                    A_at,
                                     &intersect)) {
-            return (true);
+            return (things_overlap(A, future_pos, B));
         }
         return (false);
     }
 
-    /*
-     * We really only care about collision radius for large objects like 
-     * sawblades. If we use walls here then because of the granularity of
-     * movement of one block at a time, the blade detects a collision too
-     * far from the wall. The solution would be to use smaller next hop
-     * walks but that might cause problems in the client with speed 
-     * calculations. Easier just to save radial collisions for monsters and 
-     * the like.
-     */
-    if ((thing_collision_radius(A) > 0.0) || (thing_collision_radius(B) > 0.0)) {
+    return (things_overlap(A, future_pos, B));
+}
 
-        if (!tp_is_action(A) && !tp_is_action_trigger(A) &&
-            !tp_is_action(B) && !tp_is_action_trigger(B)) { 
-
-            if (Aw->first_tile) {
-                Ax += ((Aw->first_tile->px1 + Aw->first_tile->px2) / 2.0);
-                Ay += ((Aw->first_tile->py1 + Aw->first_tile->py2) / 2.0);
-            }
-
-            if (Bw->first_tile) {
-                Bx += ((Bw->first_tile->px1 + Bw->first_tile->px2) / 2.0);
-                By += ((Bw->first_tile->py1 + Bw->first_tile->py2) / 2.0);
-            }
-
-            double dist = DISTANCE(Ax, Ay, Bx, By);
-            if (dist < max(thing_collision_radius(A), thing_collision_radius(B))) {
-                return (true);
-            } else {
-                return (false);
-            }
-        }
-    }
-
-    /*
-     * Find the start of pixels in the tile.
-     */
-    double Atlx = Ax + Apx1;
-    double Abrx = Ax + Apx2;
-    double Atly = Ay + Apy1;
-    double Abry = Ay + Apy2;
-
-    double Btlx = Bx + Bpx1;
-    double Bbrx = Bx + Bpx2;
-    double Btly = By + Bpy1;
-    double Bbry = By + Bpy2;
-
-    /*
-     * The rectangles don't overlap if one rectangle's minimum in some 
-     * dimension is greater than the other's maximum in that dimension.
-     */
-    if ((Atlx < Bbrx) && 
-        (Abrx > Btlx) &&
-        (Atly < Bbry) && 
-        (Abry > Btly)) {
+bool things_overlap (const Thingp A, const Thingp B)
+{
+    return (things_overlap (A, fpoint(-1, -1), B));
+}
 
 #if 0
-    if ((tp_is_rope(A) &&
-         tp_is_rope(B))) {
-CON("    A %s %f %f %f %f",thing_logname(A),Atlx,Atly,Abrx,Abry);
-CON("      %f %f",Ax,Ay);
-CON("      %f %f %f %f",Apx1,Apy1,Apx2,Apy2);
-CON("    B %s %f %f %f %f",thing_logname(B),Btlx,Btly,Bbrx,Bbry);
-CON("      %f %f",Bx,By);
-CON("      %f %f %f %f",Bpx1,Bpy1,Bpx2,Bpy2);
-    }
-#endif
-
-        return (true);
-    }
-
-    return (false);
-}
 
 /*
  * handle a single collision between two things
@@ -1362,8 +1033,7 @@ LOG("%d %d [%d] %s",x,y,i, thing_logname(it));
  */
 Thingp thing_hit_solid_obstacle (levelp level,
                                  Thingp t, 
-                                 double nx, 
-                                 double ny)
+                                 fpoint future_pos)
 {
     Thingp me;
     widp wid_me;
@@ -2038,3 +1708,103 @@ Thingp thing_overlaps (levelp level,
     return (0);
 }
 #endif
+
+bool 
+thing_overlaps_border (Thingp t)
+{_
+    auto tile = t->current_tile;
+    if (!tile) {
+        return (false);
+    }
+
+    for (int y = 0; y < (int)tile->pix_height; y++) {
+        for (int x = 0; x < (int)tile->pix_width; x++) {
+            if (!tile->pix[x][y]) {
+                continue;
+            }
+            
+            int px = t->at.x * TILE_WIDTH + x;
+            int py = t->at.y * TILE_HEIGHT + y;
+
+            if (px < MAP_BORDER * TILE_WIDTH) {
+                return (true);
+            }
+
+            if (py < MAP_BORDER * TILE_HEIGHT) {
+                return (true);
+            }
+
+            if (px >= (MAP_WIDTH - MAP_BORDER) * TILE_WIDTH) {
+                return (true);
+            }
+
+            if (py >= (MAP_HEIGHT - MAP_BORDER) * TILE_HEIGHT) {
+                return (true);
+            }
+        }
+    }
+    return (false);
+}
+
+bool 
+things_tile_overlap (Thingp t, fpoint t_at, Thingp o)
+{_
+    auto tile1 = t->current_tile;
+    if (!tile1) {
+        return (false);
+    }
+    auto tile2 = o->current_tile;
+    if (!tile2) {
+        return (false);
+    }
+
+    for (int y = 0; y < (int)tile1->pix_height; y++) {
+        for (int x = 0; x < (int)tile1->pix_width; x++) {
+            if (!tile1->pix[x][y]) {
+                continue;
+            }
+            
+            int px = t_at.x * TILE_WIDTH + x;
+            int py = t_at.y * TILE_HEIGHT + y;
+
+            int ox = o->at.x * TILE_WIDTH;
+            int oy = o->at.y * TILE_HEIGHT;
+
+            int dx = px - ox;
+            int dy = py - oy;
+
+            if ((dx < 0) || (dx >= (int)tile2->pix_width)) {
+#if 0
+if (first) {
+first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  <>x", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
+}
+#endif
+                continue;
+            }
+
+            if ((dy < 0) || (dy >= (int)tile2->pix_height)) {
+#if 0
+if (first) {
+first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  <>y", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
+}
+#endif
+                continue;
+            }
+
+            if (tile2->pix[dx][dy]) {
+#if 0
+first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  overlap", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
+#endif
+                return (true);
+            }
+        }
+    }
+    return (false);
+}
+
+bool 
+things_tile_overlap (Thingp t, Thingp o)
+{_
+    return (things_tile_overlap(t, t->at, o));
+}
+
