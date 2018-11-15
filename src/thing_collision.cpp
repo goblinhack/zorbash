@@ -327,7 +327,7 @@ thing_add_possible_hit (Thingp target,
                         std::string reason,
                         int hitter_killed_on_hitting,
                         int hitter_killed_on_hit_or_miss)
-{
+{_
     thing_colls.push_back(
       ThingColl::ThingColl(target,
                 reason,
@@ -368,7 +368,7 @@ void thing_possible_init (void)
  * Find the thing with the highest priority to hit.
  */
 void thing_possible_hit_do (Thingp hitter)
-{
+{_
     ThingColl *best = nullptr;
 
     for (auto cand : thing_colls) {
@@ -445,7 +445,7 @@ void thing_possible_hit_do (Thingp hitter)
 }
 
 bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
-{
+{_
     fpoint A_at, B_at;
 
     /*
@@ -508,7 +508,7 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
 }
 
 bool things_overlap (const Thingp A, const Thingp B)
-{
+{_
     return (things_overlap (A, fpoint(-1, -1), B));
 }
 
@@ -519,7 +519,7 @@ static int things_handle_collision (Thingp me,
                                     Thingp it, 
                                     int x, int y,
                                     int dx, int dy)
-{
+{_
     auto it_tp = it->tp;
     auto me_tp = me->tp;
 
@@ -594,29 +594,29 @@ static int things_handle_collision (Thingp me,
  * Have we hit anything?
  */
 bool Thing::handle_collisions (void)
-{
-    auto minx = at.x - collision_radius;
+{_
+    int minx = at.x - collision_radius;
     while (minx < 0) {
         minx++;
     }
 
-    auto miny = at.y - collision_radius;
+    int miny = at.y - collision_radius;
     while (miny < 0) {
         miny++;
     }
 
-    auto maxx = at.x - collision_radius;
+    int maxx = at.x - collision_radius;
     while (maxx >= MAP_WIDTH) {
         maxx++;
     }
 
-    auto maxy = at.y - collision_radius;
+    int maxy = at.y - collision_radius;
     while (maxy >= MAP_HEIGHT) {
         maxy++;
     }
 
     for (uint8_t z = MAP_DEPTH_ITEMS; z < MAP_DEPTH; z++) {
-        for (int16_t x = minx; x <= maxx; x--) {
+        for (int16_t x = minx; x <= maxx; x++) {
             auto dx = x - at.x;
             for (int16_t y = miny; y <= maxy; y++) {
                 auto dy = y - at.y;
@@ -643,32 +643,36 @@ bool Thing::handle_collisions (void)
  * Will we hit anything?
  */
 bool Thing::check_if_will_hit_solid_obstacle (fpoint future_pos)
-{
-    auto minx = at.x - collision_radius;
+{_
+    verify(this);
+
+    int minx = at.x - collision_radius;
     while (minx < 0) {
         minx++;
     }
 
-    auto miny = at.y - collision_radius;
+    int miny = at.y - collision_radius;
     while (miny < 0) {
         miny++;
     }
 
-    auto maxx = at.x - collision_radius;
+    int maxx = at.x - collision_radius;
     while (maxx >= MAP_WIDTH) {
-        maxx++;
+        maxx--;
     }
 
-    auto maxy = at.y - collision_radius;
+    int maxy = at.y - collision_radius;
     while (maxy >= MAP_HEIGHT) {
-        maxy++;
+        maxy--;
     }
 
     for (uint8_t z = MAP_DEPTH_ITEMS; z < MAP_DEPTH; z++) {
-        for (int16_t x = minx; x <= maxx; x--) {
+        for (int16_t x = minx; x <= maxx; x++) {
             for (int16_t y = miny; y <= maxy; y++) {
                 for (auto p : game.state.map.things[x][y][z]) {
                     auto it = p.second;
+                    verify(it);
+
                     if (this == it) {
                         continue;
                     }

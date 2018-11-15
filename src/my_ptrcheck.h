@@ -14,7 +14,7 @@
  * __FUNCTION__ is not a preprocessor directive so we can't convert it into a
  * string
  */
-#define PTRCHECK_AT             __FILE__, __PRETTY_FUNCTION__, __LINE__
+#define PTRCHECK_AT __FILE__, __PRETTY_FUNCTION__, __LINE__
 
 /*
  * util.c

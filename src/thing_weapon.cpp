@@ -48,12 +48,12 @@ void Thing::set_weapon_carry_anim (Thingp new_weapon_carry_anim)
                 old_weapon_carry_anim->logname().c_str(),
                 new_weapon_carry_anim->logname().c_str());
         } else {
-            log("set-weapon-carry remove , %s",
+            log("set-weapon-carry remove, %s",
                 old_weapon_carry_anim->logname().c_str());
         }
     } else {
         if (new_weapon_carry_anim) {
-            log("set-weapon-carry , %s",
+            log("set-weapon-carry, %s",
                 new_weapon_carry_anim->logname().c_str());
         }
     }
