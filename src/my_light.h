@@ -13,7 +13,6 @@
 #include <memory>
 #include "my_game.h"
 #include "my_point.h"
-#include "my_ptrcheck.h"
 
 typedef enum {
     LIGHT_QUALITY_POINT,

@@ -13,7 +13,6 @@
 typedef std::shared_ptr< class Tileinfo > Tileinfop;
 typedef std::map< unsigned int, std::shared_ptr< class Tileinfo > > Tileinfomap;
 
-#include "my_ptrcheck.h"
 #include "my_tile.h"
 
 class Tileinfo {

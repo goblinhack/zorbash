@@ -9,7 +9,7 @@
 #include "my_thing.h"
 
 void player_tick (void)
-{
+{_
     auto player = game.state.player;
     if (!player || player->is_dead || player->is_hidden) {
         return;
@@ -166,7 +166,7 @@ void player_tick (void)
 #endif
 
     if (!time_have_x_hundredths_passed_since(
-          tp_move_delay_hundredths(player->tp), player->last_move_ms)) {
+          tp_move_delay_hundredths(player->tp), player->last_move_request_ms)) {
 #if 0
         double x = player->x;
         double y = player->y;
@@ -175,16 +175,16 @@ void player_tick (void)
 #endif
         return;
     }
-#if 0
-    level->last_moved = time_get_time_ms();
 
-    double x = player->x;
-    double y = player->y;
+    player->last_move_request_ms = time_get_time_ms();
+
+    auto x = player->at.x;
+    auto y = player->at.y;
 
     double max_momentum = 0.5;
-    double move_momentum = 0.012;
+    double move_momentum = 0.05;
     double jump_speed = 0.15;
-    double wall_friction = 0.95;
+//    double wall_friction = 0.95;
 
     /*
      * run?
@@ -201,6 +201,7 @@ void player_tick (void)
     if (left) {
         player->momentum -= move_momentum;
         if (player->momentum <= -max_momentum) {
+player->con("mom %f hit neg max",player->momentum);
             player->momentum = -max_momentum;
         }
     }
@@ -208,10 +209,12 @@ void player_tick (void)
     if (right) {
         player->momentum += move_momentum;
         if (player->momentum >= max_momentum) {
+player->con("mom %f neg max",player->momentum);
             player->momentum = max_momentum;
         }
     }
 
+#if 0
     /*
      * Don't allow too frequent jumps
      */
@@ -309,6 +312,7 @@ void player_tick (void)
 
         player->momentum = 0;
     }
+#endif
 
     double lr_delta = player->momentum;
     double ud_delta = 0.1;
@@ -316,14 +320,15 @@ void player_tick (void)
     x += lr_delta;
     y -= (double)up * ud_delta;
     y += (double)down * ud_delta;
+player->con("mom %f now",player->momentum);
 
-    thing_move(level, player, x, y, up, down, left, right, fire);
+#if 0
+    fpoint future_pos(x, y);
+    player->move(future_pos, up, down, left, right, fire);
 
     if (jump) {
         level->last_jumped = time_get_time_ms();
     }
-
-#endif
 
     double d = 0.1;
     if (left) {
@@ -332,4 +337,5 @@ void player_tick (void)
     if (right) {
         player->move_delta(fpoint(d, 0));
     }
+#endif
 }

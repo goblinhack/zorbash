@@ -111,6 +111,7 @@ public:
      */
     uint32_t           flip_start_ms {};
     uint32_t           last_move_ms {};
+    uint32_t           last_move_request_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
 
@@ -193,8 +194,10 @@ public:
     void animate();
     void kill(void);
     void destroyed(void);
+    void update_pos(fpoint);
     void move_delta(fpoint);
     void move_to(fpoint to);
+    bool slide(void);
     void update(void);
     void set_dir_bl(void);
     void set_dir_br(void);
@@ -211,6 +214,7 @@ public:
     uint8_t is_visible();
     void visible();
     void hide();
+    void tick();
 
     /*
      * thing_hit.cpp
@@ -226,6 +230,12 @@ public:
     fpoint get_velocity(void);
     void set_velocity(fpoint v);
     void set_velocity(double x, double y);
+    bool move(fpoint future_pos,
+              const uint8_t up,
+              const uint8_t down,
+              const uint8_t left,
+              const uint8_t right,
+              const uint8_t fire);
 
     /*
      * thing_collision.cpp
@@ -286,5 +296,10 @@ bool things_tile_overlap(Thingp t, fpoint t_at, Thingp o);
  */
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
+
+/*
+ * thing_tick.cpp
+ */
+void thing_tick_all(void);
 
 #endif /* THING_H */

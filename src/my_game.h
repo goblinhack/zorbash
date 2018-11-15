@@ -45,6 +45,8 @@ public:
     bool is_wall_at(const int x, const int y);
     bool is_oob(const int x, const int y, const int z);
     bool is_oob(const int x, const int y);
+    bool is_oob(const fpoint);
+    bool is_oob(const point);
 
     template <class Archive>
     void serialize (Archive & archive)

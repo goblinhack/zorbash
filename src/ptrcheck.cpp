@@ -15,6 +15,8 @@
  */
 #define MAX_PER_PTR_HISTORY 3
 
+#undef DEBUG_PTRCHECK
+
 /*
  * A single event in the life of a pointer.
  */
@@ -459,6 +461,16 @@ void *ptrcheck_alloc (const void *ptr,
 {_
     ptrcheck *context;
 
+#ifdef DEBUG_PTRCHECK
+    fprintf(MY_STDERR, "Alloc %p \"%s\" (%u bytes) at %s:%s():%u\n",
+            ptr,
+            what,
+            size,
+            file,
+            func,
+            line);
+#endif
+
     if (!ptr) {
         global_callstack.dump();
 
@@ -538,6 +550,14 @@ uint8_t ptrcheck_free (void *ptr,
                        const uint32_t line)
 {_
     ptrcheck *context;
+
+#ifdef DEBUG_PTRCHECK
+    fprintf(MY_STDERR, "Free %p at %s:%s():%u\n",
+            ptr,
+            file,
+            func,
+            line);
+#endif
 
     if (!ptr) {
         global_callstack.dump();

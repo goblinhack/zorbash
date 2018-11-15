@@ -163,7 +163,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
         t->is_player = true;
     }
 
-    //log("created");
+    t->dbg("created");
     return (t);
 }
 
@@ -411,8 +411,15 @@ _
     }
 }
 
-void Thing::move_to (fpoint to)
+void Thing::update_pos (fpoint to)
 {_
+    point new_at((int)to.x, (int)to.y);
+    if (game.state.map.is_oob(new_at)) {
+        return;
+    }
+
+    point old_at((int)at.x, (int)at.y);
+
     last_move_ms = time_get_time_ms_cached();
     end_move_ms = last_move_ms + ONESEC / 10;
     has_ever_moved = true;
@@ -423,9 +430,6 @@ void Thing::move_to (fpoint to)
         last_at = at;
     }
 _
-    point old_at((int)at.x, (int)at.y);
-    point new_at((int)to.x, (int)to.y);
-
     /*
      * Keep track of where this thing is on the grid
      */
@@ -499,7 +503,12 @@ void Thing::move_delta (fpoint delta)
         has_ever_moved = true;
     }
 
-    move_to(at + delta);
+    update_pos(at + delta);
+}
+
+void Thing::move_to (fpoint to)
+{_
+    move_delta(fpoint(to.x - at.x, to.y - at.y));
 }
 
 /*
