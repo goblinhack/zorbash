@@ -10,10 +10,6 @@ class Tp:
 
     def __init__(self,
                  name,
-                 is_treasure=False,
-                 is_wall=False,
-                 is_player=False,
-                 is_monst=False,
                  d1000_appearing_roll=0):
 
         self.name = name
@@ -23,22 +19,7 @@ class Tp:
         # Load it into the game engine
         #
         zx.tp_load(self)
-
-        self.is_treasure = is_treasure
-        self.is_wall = is_wall
-        if is_wall:
-            self.set_is_wall(is_wall)
-
-        self.is_treasure = is_treasure
-        if is_treasure:
-            self.set_is_treasure(is_treasure)
-
-        self.is_player = is_player
-        if is_player:
-            self.set_is_player(is_player)
-
         self.set_raw_name(name)
-
         all_tps[name] = self
         self.long_name = None
         self.short_name = None
@@ -456,6 +437,10 @@ class Tp:
     def set_is_wall(self, value):
         self.is_wall = value
         zx.tp_set_is_wall(self, value)
+
+    def set_is_floor(self, value):
+        self.is_floor = value
+        zx.tp_set_is_floor(self, value)
 
 def get_random_treasure(toughness=0):
     while True:

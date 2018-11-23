@@ -1714,7 +1714,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_weapon)
     TP_SET_DECL(is_outlined)
     TP_SET_DECL(is_shadow_caster)
-    TP_SET_DECL(is_ladder)
     TP_SET_DECL(is_animated_walk_flip)
     TP_SET_DECL(z_depth)
     TP_SET_DECL(is_movable)

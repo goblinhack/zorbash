@@ -3,9 +3,10 @@ import tp
 
 
 def my_init(name, short_name):
-    x = tp.Tp(name, is_player = True)
+    x = tp.Tp(name)
 
     x.set_short_name(short_name)
+    x.set_is_player(True)
     x.set_is_animated(True)
     x.set_is_movable(True)
     x.set_is_animated_walk_flip(True)

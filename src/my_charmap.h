@@ -16,7 +16,6 @@ public:
         SECRET_DOOR     = 'd',
         DOOR            = 'D',
         WALL            = 'x',
-        LADDER          = 'H',
         FLOOR           = '.',
         SECRET_CORRIDOR = '?',
         ENTRANCE        = 'S',
@@ -33,7 +32,6 @@ public:
 
     char                      c;
     bool                      is_wall              {false};
-    bool                      is_ladder            {false};
     bool                      is_floor             {false};
     bool                      is_dusty             {false};
     bool                      is_door              {false};

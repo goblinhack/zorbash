@@ -526,9 +526,7 @@ static int things_handle_collision (Thingp me,
     /*
      * Filter out boring things.
      */
-    if (tp_is_ladder(it_tp)                 ||
-        tp_is_weapon_carry_anim(it_tp)) {
-
+    if (tp_is_weapon_carry_anim(it_tp)) {
 #if 0
         if ((dx == 0) && (dy == 0)) {
             if (tp_is_player(me)) {

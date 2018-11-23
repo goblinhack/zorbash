@@ -175,7 +175,6 @@ public:
     int is_weapon {};
     int is_outlined {};
     int is_shadow_caster {};
-    int is_ladder {};
     int is_animated_walk_flip {};
     int is_movable {};
     uint8_t z_depth {};
@@ -455,11 +454,6 @@ static inline int tp_is_outlined (Tpp t)
 static inline int tp_is_shadow_caster (Tpp t)
 {
     return (t->is_shadow_caster);
-}
-
-static inline int tp_is_ladder (Tpp t)
-{
-    return (t->is_ladder);
 }
 
 static inline int tp_is_animated_walk_flip (Tpp t)

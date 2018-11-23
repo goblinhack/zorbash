@@ -5,7 +5,6 @@ from os.path import dirname, basename
 import imp
 import sys
 import console
-import map_data
 
 
 def find_plugins(directory, pattern):

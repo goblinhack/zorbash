@@ -39,10 +39,12 @@ public:
     std::unordered_map<uint32_t, Thingp> 
                                things[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_ladder[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
   
     bool is_wall_at(const point &p);
     bool is_wall_at(const int x, const int y);
+    bool is_floor_at(const point &p);
+    bool is_floor_at(const int x, const int y);
     bool is_oob(const int x, const int y, const int z);
     bool is_oob(const int x, const int y);
     bool is_oob(const fpoint);
@@ -103,6 +105,11 @@ public:
     double             tile_pixel_height            = {};
     uint32_t           sdl_delay                    = 5;
     bool               editor_mode                  = false;
+    double             movement_min_speed           = {};
+    double             movement_max_speed           = {};
+    double             movement_accel_step          = {};
+    double             movement_accel_run           = {};
+    double             movement_friction            = {};
 
     template <class Archive>
     void serialize (Archive & archive)
@@ -157,5 +164,7 @@ game_mouse_over(int32_t x, int32_t yu,
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
 extern uint8_t game_key_down(const struct SDL_KEYSYM *key);
 extern void game_display(void);
+extern void game_init(void);
+extern void game_fini(void);
 
 #endif

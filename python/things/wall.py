@@ -13,7 +13,7 @@ def wall_init(name, short_name,
               bl_tiles=[],
               br_tiles=[]):
     
-    x = tp.Tp(name, is_wall = True)
+    x = tp.Tp(name)
 
     x.set_short_name(short_name)
     x.set_is_movement_blocking(True)

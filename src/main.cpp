@@ -19,6 +19,7 @@
 #include "my_dir.h"
 #include "my_file.h"
 #include "my_charmap.h"
+#include "my_game.h"
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;
@@ -99,6 +100,11 @@ void quit (void)
     signal(SIGABRT, 0);   // uninstall our handler
     signal(SIGINT, 0);    // uninstall our handler
 #endif
+
+{_
+    LOG("Finishing: things");
+    game_fini();
+}
 
 {_
     python_fini();
@@ -543,6 +549,7 @@ int32_t main (int32_t argc, char *argv[])
     LOG_STDERR = fopen(err, "w+");
     myfree(err);
 
+    game_init();
 #if 0
     char *save_file = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "saved.json");
     extern int cereal_test(const std::string);

@@ -649,17 +649,32 @@ public:
 
     bool room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
     {
-        if (n->has_exit_up != r->has_exit_up) { 
-            return (false); 
-        }
-        if (n->has_exit_down != r->has_exit_down) { 
-            return (false); 
-        }
-        if (n->has_exit_left != r->has_exit_left) { 
-            return (false); 
-        }
-        if (n->has_exit_right != r->has_exit_right) { 
-            return (false); 
+        if (!n->is_secret) {
+            if (n->has_exit_up != r->has_exit_up) { 
+                return (false); 
+            }
+            if (n->has_exit_down != r->has_exit_down) { 
+                return (false); 
+            }
+            if (n->has_exit_left != r->has_exit_left) { 
+                return (false); 
+            }
+            if (n->has_exit_right != r->has_exit_right) { 
+                return (false); 
+            }
+        } else {
+            if (n->has_secret_exit_up != r->has_exit_up) { 
+                return (false); 
+            }
+            if (n->has_secret_exit_down != r->has_exit_down) { 
+                return (false); 
+            }
+            if (n->has_secret_exit_left != r->has_exit_left) { 
+                return (false); 
+            }
+            if (n->has_secret_exit_right != r->has_exit_right) { 
+                return (false); 
+            }
         }
         if (r->dir_left) {
             return (false);
@@ -691,39 +706,51 @@ public:
     bool room_is_a_candidate_less_restrictive2 (const Node *n, Roomp r)
     {
         if (n->has_exit_up != r->has_exit_up) { 
+CON("%u does not match %d %d v %d",r->roomno, __LINE__, n->has_exit_up, r->has_exit_up);
             return (false); 
         }
         if (n->has_exit_down != r->has_exit_down) { 
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false); 
         }
         if (n->has_exit_left != r->has_exit_left) { 
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false); 
         }
         if (n->has_exit_right != r->has_exit_right) { 
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false); 
         }
         if (r->dir_left) {
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false);
         }
         if (r->dir_right) {
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false);
         }
         if (r->dir_up) {
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false);
         }
         if (r->dir_down) {
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false);
         }
         if (n->is_exit != r->is_exit) {
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false);
         }
         if (n->is_entrance != r->is_entrance) {
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false);
         }
         if (n->is_lock != r->is_lock) {
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false);
         }
         if (n->is_key != r->is_key) {
+CON("%u does not match %d",r->roomno, __LINE__);
             return (false);
         }
         return (true);
@@ -804,6 +831,7 @@ public:
                     }
 
                     if (!room_fits_existing_rooms(g, n, r, x, y)) {
+CON("%u does not fit",r->roomno);
                         continue;
                     }
                     candidates.push_back(r);
