@@ -213,7 +213,6 @@ void tile_load_arr (std::string tex_name,
 Tilep tile_find (std::string name)
 {_
     if (name == "") {
-        ERR("no name for tile find");
 	return (0);
     }
 

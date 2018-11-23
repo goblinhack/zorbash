@@ -531,14 +531,16 @@ def init_text():
                      width=122, height=97,
                      arr=tiles)
 
-def init_tiles():
 
-    zx.tex_load(
-            file="data/gfx/platform.tga",
-            name="platform")
+def init_light():
     zx.tex_load(
             file="data/gfx/light.tga",
             name="light")
+
+def init_16x16():
+    zx.tex_load(
+            file="data/gfx/16x16.tga",
+            name="16x16")
 
     tiles = [
             "player1.1",
@@ -1533,7 +1535,19 @@ def init_tiles():
             ########################################################
     ]
 
-    zx.tile_load_arr(tex_name="platform", width=16, height=16, arr=tiles)
+    zx.tile_load_arr(tex_name="16x16", width=16, height=16, arr=tiles)
+
+def init_32x32():
+    zx.tex_load(
+            file="data/gfx/32x32.tga",
+            name="32x32")
+
+    tiles = [
+            "exit1",
+            "entrance1",
+    ]
+
+    zx.tile_load_arr(tex_name="32x32", width=32, height=32, arr=tiles)
 
 def init_weapons_tiles():
 
@@ -1556,5 +1570,7 @@ def init_weapons_tiles():
     zx.tile_load_arr(tex_name="weapons", width=48, height=48, arr=tiles)
 
 init_text()
-init_tiles()
+init_light()
+init_16x16()
+init_32x32()
 init_weapons_tiles()

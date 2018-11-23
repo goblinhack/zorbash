@@ -83,8 +83,8 @@ static void thing_blit_wall_cladding (Thingp &t,
                                       fpoint &tl, fpoint &br)
 {  
     auto tp = t->tp;
-    double dw = 0.004;
-    double dh = 0.004;
+    double dw = game.config.tile_gl_width / (double)TILE_WIDTH;
+    double dh = game.config.tile_gl_height / (double)TILE_HEIGHT;
 
     if (!game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
@@ -97,24 +97,24 @@ static void thing_blit_wall_cladding (Thingp &t,
     if (!game.state.map.is_wall[x][y + 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        tl2.y += dh;
-        br2.y += dh * 2;
+        //tl2.y += dh;
+        //br2.y += dh;
         tile_blit_fat(tp, t->bot_tile, tl2, br2);
     }
 
     if (!game.state.map.is_wall[x - 1][y]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        //tl2.x -= dw;
-        //br2.x -= dw;
+        tl2.x -= dw;
+        br2.x -= dw;
         tile_blit_fat(tp, t->left_tile, tl2, br2);
     }
 
     if (!game.state.map.is_wall[x + 1][y]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        //tl2.x += dw;
-        //br2.x += dw;
+        tl2.x += dw;
+        br2.x += dw;
         tile_blit_fat(tp, t->right_tile, tl2, br2);
     }
 
@@ -128,8 +128,8 @@ static void thing_blit_wall_cladding (Thingp &t,
         !game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        //tl2.x -= dw;
-        //br2.x -= dw;
+        tl2.x -= dw;
+        br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit_fat(tp, t->tl_tile, tl2, br2);
@@ -145,8 +145,8 @@ static void thing_blit_wall_cladding (Thingp &t,
         !game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        //tl2.x += dw;
-        //br2.x += dw;
+        tl2.x += dw;
+        br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit_fat(tp, t->tr_tile, tl2, br2);
@@ -163,8 +163,8 @@ static void thing_blit_wall_cladding (Thingp &t,
         game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        //tl2.x += dw;
-        //br2.x += dw;
+        tl2.x += dw;
+        br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit_fat(tp, t->tr_tile, tl2, br2);
@@ -181,8 +181,8 @@ static void thing_blit_wall_cladding (Thingp &t,
         game.state.map.is_wall[x][y - 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        //tl2.x += dw;
-        //br2.x += dw;
+        tl2.x += dw;
+        br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit_fat(tp, t->tl_tile, tl2, br2);
@@ -203,8 +203,8 @@ static void thing_blit_wall_cladding (Thingp &t,
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tl2.y += dh;
-        br2.y += dh;
+        //tl2.y += dh;
+        //br2.y += dh;
         tile_blit_fat(tp, t->bl_tile, tl2, br2);
     }
 
@@ -220,8 +220,8 @@ static void thing_blit_wall_cladding (Thingp &t,
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
+        //tl2.y += dh;
+        //br2.y += dh;
         tile_blit_fat(tp, t->br_tile, tl2, br2);
     }
 
@@ -238,8 +238,8 @@ static void thing_blit_wall_cladding (Thingp &t,
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
+        //tl2.y += dh;
+        //br2.y += dh;
         tile_blit_fat(tp, t->br_tile, tl2, br2);
     }
 
@@ -256,8 +256,8 @@ static void thing_blit_wall_cladding (Thingp &t,
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
+        //tl2.y += dh;
+        //br2.y += dh;
         tile_blit_fat(tp, t->bl_tile, tl2, br2);
     }
 }

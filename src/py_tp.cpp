@@ -556,9 +556,13 @@ _
         DIE("tile insert name [%s] failed", tile);
     }
 _
-    t->tile = tile_find(tile);
-    if (!t->tile) {
-        DIE("%s, cannot find tile %s for tp %s", __FUNCTION__, tile, tp_name);
+    if (tile && *tile) {
+        t->tile = tile_find(tile);
+        if (!t->tile) {
+            DIE("%s, cannot find tile %s for tp %s", __FUNCTION__, tile, tp_name);
+        }
+    } else {
+        t->tile = nullptr;
     }
 
     t->tilename = std::string(tile ? tile : "");
