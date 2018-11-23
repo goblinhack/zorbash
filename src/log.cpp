@@ -16,6 +16,8 @@
 
 uint8_t croaked;
 
+static bool debug = false;
+
 /*
  * putfg
  */
@@ -432,6 +434,9 @@ static void croak_ (const char *fmt, va_list args)
         return;
     }
 
+    /*
+     * Seems to hang on crashes. Is it useful?
+     */
     py_trace();
 
     croaked = true;
@@ -486,7 +491,9 @@ void DYING (const char *fmt, ...)
 
 void DBG (const char *fmt, ...)
 {_
-    return;
+    if (!debug) {
+        return;
+    }
     va_list args;
 
     va_start(args, fmt);
@@ -725,6 +732,9 @@ void Thing::err (const char *fmt, ...)
 
 void Thing::dbg (const char *fmt, ...)
 {_
+    if (!debug) {
+        return;
+    }
     auto t = this;
 
     va_list args;
@@ -872,6 +882,9 @@ void Light::err (const char *fmt, ...)
 
 void Light::dbg (const char *fmt, ...)
 {_
+    if (!debug) {
+        return;
+    }
     auto t = this;
 
     va_list args;
@@ -910,6 +923,9 @@ void WID_LOG (widp t, const char *fmt, ...)
 
 void WID_DBG (widp t, const char *fmt, ...)
 {_
+    if (!debug) {
+        return;
+    }
     va_list args;
 
     verify(t.get());

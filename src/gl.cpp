@@ -1545,13 +1545,17 @@ void tile_blit_fat_outline (const Tpp &tp, const Tilep &tile,
     double y1;
     double y2;
 
+    if (!tile) {
+        return;
+    }
+
     x1 = tile->x1;
     x2 = tile->x2;
     y1 = tile->y1;
     y2 = tile->y2;
 
     glcolor(BLACK);
-    const double delta = 0.0025;
+    const double delta = 0.0030;
 
     blit(tile->gl_surface_binding, x1, y2, x2, y1, 
          tl.x - delta, br.y - delta, br.x - delta, tl.y - delta);

@@ -16,7 +16,7 @@ def my_init(name, short_name):
     x.set_move_delay_hundredths(1)
     x.set_z_depth(zx.MAP_DEPTH_PLAYER)
 
-    delay = 450
+    delay = 550
     x.set_tile(tile=name + ".1", is_dir_left=True, is_moving=True,
                delay_ms=delay)
     x.set_tile(tile=name + ".2", is_dir_left=True, is_moving=True,

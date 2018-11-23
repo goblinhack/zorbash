@@ -115,6 +115,14 @@ static inline void tile_blit_fat (const Tpp &tp, const Tilep &tile,
     double y1;
     double y2;
 
+    /*
+     * Only some walls have deco tiles, so the pointer is left null for
+     * those that do not.
+     */
+    if (!tile) {
+        return;
+    }
+
     x1 = tile->x1;
     x2 = tile->x2;
     y1 = tile->y1;
