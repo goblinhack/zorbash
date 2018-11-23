@@ -178,20 +178,15 @@ void player_tick (void)
 
     player->last_move_request_ms = time_get_time_ms();
 
-    auto x = player->at.x;
-    auto y = player->at.y;
-
-    double max_momentum = 0.5;
-    double move_momentum = 0.05;
     double jump_speed = 0.15;
 //    double wall_friction = 0.95;
 
     /*
      * run?
      */
+    double move_momentum = game.config.movement_accel_step;
     if (sdl_shift_held) {
-        max_momentum = 1.0;
-        move_momentum = 0.020;
+        move_momentum = game.config.movement_accel_run;
         jump_speed = 0.20;
     }
 
@@ -200,18 +195,10 @@ void player_tick (void)
      */
     if (left) {
         player->momentum -= move_momentum;
-        if (player->momentum <= -max_momentum) {
-player->con("mom %f hit neg max",player->momentum);
-            player->momentum = -max_momentum;
-        }
     }
 
     if (right) {
         player->momentum += move_momentum;
-        if (player->momentum >= max_momentum) {
-player->con("mom %f neg max",player->momentum);
-            player->momentum = max_momentum;
-        }
     }
 
 #if 0
@@ -314,15 +301,14 @@ player->con("mom %f neg max",player->momentum);
     }
 #endif
 
+#if 0
     double lr_delta = player->momentum;
     double ud_delta = 0.1;
 
     x += lr_delta;
     y -= (double)up * ud_delta;
     y += (double)down * ud_delta;
-player->con("mom %f now",player->momentum);
 
-#if 0
     fpoint future_pos(x, y);
     player->move(future_pos, up, down, left, right, fire);
 

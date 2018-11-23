@@ -159,6 +159,10 @@ Thingp thing_new (std::string tp_name, fpoint at)
         game.state.map.is_wall[new_at.x][new_at.y] = true;
     }
 
+    if (tp_is_floor(tp)) {
+        game.state.map.is_floor[new_at.x][new_at.y] = true;
+    }
+
     if (tp_is_player(tp)) {
         t->is_player = true;
     }
@@ -350,6 +354,8 @@ void Thing::set_owner (Thingp owner)
 
 void Thing::destroy (void)
 {_
+    log("destroy");
+
     {
         auto a = &game.state.map.all_things;
         auto iter = a->find(id);

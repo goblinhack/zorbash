@@ -11,10 +11,6 @@
 #include "my_tile.h"
 #include "my_color.h"
 
-#define ASCII_MAP_WIDTH             MAP_WIDTH
-#define ASCII_MAP_HEIGHT            MAP_HEIGHT
-#define ASCII_WIDTH                 (ASCII_MAP_WIDTH + 31)
-#define ASCII_HEIGHT                (ASCII_MAP_HEIGHT + 6)
 #define ASCII_MAP_TL_X              (ASCII_WIDTH - ASCII_WIDTH)
 #define ASCII_MAP_BR_X              (ASCII_WIDTH-1)
 #define ASCII_MAP_VISIBLE_WIDTH     (ASCII_MAP_BR_X - ASCII_MAP_TL_X + 1)

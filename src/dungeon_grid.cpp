@@ -1469,7 +1469,7 @@ bool Nodes::place_entrance (void)
     std::vector<point> s;
 
     for (auto x = 0; x < grid_width; x++) {
-        for (auto y = 0; y < 1; y++) {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->pass != 1) {
                 continue;
@@ -1512,8 +1512,7 @@ bool Nodes::place_exit (void)
     std::vector<point> s;
 
     for (auto x = 0; x < grid_width; x++) {
-        auto y = grid_height - 1;
-        {
+        for (auto y = 0; y < grid_height; y++) {
             auto o = getn(x, y);
             if (o->pass != 1) {
                 continue;
@@ -1529,9 +1528,6 @@ bool Nodes::place_exit (void)
                 continue;
             }
             if (o->is_exit) {
-                continue;
-            }
-            if (y < GRID_HEIGHT / 2) {
                 continue;
             }
             if (o->depth == max_depth) {

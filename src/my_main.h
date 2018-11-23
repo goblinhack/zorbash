@@ -11,6 +11,7 @@
 
 #define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_PTRCHECK            // Check validity of pointers too
+#undef  ENABLE_LEAKCHECK          
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #undef  ENABLE_GENERATE_TTF        // Edit .RUNME, look for ENABLE_GENERATE_TTF
 #define ENABLE_INVERTED_GFX        // For vision impaired
@@ -20,10 +21,10 @@
 /*
  * Dungeon size; composed of a grid of rooms
  */
-#define GRID_WIDTH                  8
-#define GRID_HEIGHT                 4
-#define ROOM_WIDTH                  10
-#define ROOM_HEIGHT                 8
+#define GRID_WIDTH                  5
+#define GRID_HEIGHT                 5
+#define ROOM_WIDTH                  9
+#define ROOM_HEIGHT                 9
 
 /*
  * Dungeon has a pad of tiles around the edges
@@ -46,8 +47,14 @@
 /*
  * Tile size of the player
  */
-#define TILE_WIDTH                  32
-#define TILE_HEIGHT                 32
+#define TILE_WIDTH                  16
+#define TILE_HEIGHT                 16
+
+/*
+ * Dimentions of the fixed text on screen
+ */
+#define ASCII_WIDTH                 120
+#define ASCII_HEIGHT                40
 
 /*
  * Largest tile for collisions

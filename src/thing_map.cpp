@@ -78,30 +78,6 @@ void thing_map_scroll_to_player (void)
     }
 }
 
-static void thing_map_blit_background (void)
-{
-    static Texp tex;
-    
-    if (!tex) {
-        tex = tex_find("platform-bg");
-        if (!tex) {
-            return;
-        }
-    }
-
-    static const double tdx = 1.0 / (double)MAP_WIDTH;
-    static const double tdy = 1.0 / (double)MAP_HEIGHT;
-    double tlx = tdx * game.state.map_at.x;
-    double tly = tdy * game.state.map_at.y;
-    double brx = tdx * (game.state.map_at.x + (double)TILES_ACROSS);
-    double bry = tdy * (game.state.map_at.y + (double)TILES_DOWN);
-
-    glcolor(WHITE);
-    blit_init();
-    blit(tex_get_gl_binding(tex), tlx, tly, brx, bry, 0, 0, 1, 1);
-    blit_flush();
-}
-
 static void thing_blit_wall_cladding (Thingp &t,
                                       int x, int y,
                                       fpoint &tl, fpoint &br)
@@ -286,22 +262,6 @@ static void thing_blit_wall_cladding (Thingp &t,
     }
 }
 
-static void thing_blit_ladder (Thingp &t,
-                               int x, int y,
-                               fpoint tl, fpoint br)
-{  
-    auto tp = t->tp;
-    int dh = game.config.tile_pixel_height;
-
-    if (!game.state.map.is_ladder[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->top_tile, tl2, br2);
-    }
-}
-
 static void thing_get_all_coordinates (void)
 {
     const double tdx = game.config.tile_gl_width;
@@ -410,8 +370,6 @@ static void thing_blit_things (int minx, int miny, int minz,
                     if (t->top_tile) {
                         if (tp_is_wall(tp)) {
                             thing_blit_wall_cladding(t, x, y, t->tl, t->br);
-                        } else if (tp_is_ladder(tp)) {
-                            thing_blit_ladder(t, x, y, t->tl, t->br);
                         }
                     }
                 }
@@ -547,7 +505,6 @@ void thing_render_all (void)
         
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        thing_map_blit_background();
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
 
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -565,7 +522,6 @@ void thing_render_all (void)
         }
         
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        thing_map_blit_background();
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
     }
 }

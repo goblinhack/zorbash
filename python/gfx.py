@@ -537,9 +537,6 @@ def init_tiles():
             file="data/gfx/platform.tga",
             name="platform")
     zx.tex_load(
-            file="data/gfx/platform-bg.tga",
-            name="platform-bg")
-    zx.tex_load(
             file="data/gfx/light.tga",
             name="light")
 
@@ -907,19 +904,19 @@ def init_tiles():
             "",
             "",
             ########################################################
-            "glpyh.major.1",
-            "glpyh.major.2",
-            "glpyh.letter.1",
-            "glpyh.letter.2",
-            "glpyh.letter.3",
-            "glpyh.letter.4",
-            "glpyh.letter.5",
-            "glpyh.letter.6",
-            "glpyh.letter.7",
-            "glpyh.letter.8",
-            "glpyh.letter.9",
-            "glpyh.symbol.1",
-            "glpyh.symbol.2",
+            "floor1.1",
+            "floor1.2",
+            "floor1.3",
+            "floor1.4",
+            "floor1.5",
+            "floor1.6",
+            "floor1.7",
+            "floor1.8",
+            "",
+            "",
+            "",
+            "",
+            "",
             "wall1.1.2x1.1",
             "wall1.1.2x1.2",
             "wall1.1.6x6.1",
@@ -940,19 +937,19 @@ def init_tiles():
             "wall1.1.2x2.1",
             "wall1.1.2x2.2",
             ########################################################
-            "glpyh.major.3",
-            "glpyh.major.4",
-            "glpyh.letter.10",
-            "glpyh.letter.11",
-            "glpyh.letter.12",
-            "glpyh.letter.13",
-            "glpyh.letter.14",
-            "glpyh.letter.15",
-            "glpyh.letter.16",
-            "glpyh.letter.17",
-            "glpyh.letter.18",
-            "glpyh.symbol.3",
-            "glpyh.symbol.4",
+            "floor1.9",
+            "floor1.10",
+            "floor1.11",
+            "floor1.12",
+            "floor1.13",
+            "floor1.14",
+            "floor1.15",
+            "floor1.16",
+            "",
+            "",
+            "",
+            "",
+            "",
             "wall1.1.1x2.1",
             "wall1.2.1x2.1",
             "wall1.1.6x6.7",
@@ -973,19 +970,19 @@ def init_tiles():
             "wall1.1.2x2.3",
             "wall1.1.2x2.4",
             ########################################################
-            "glpyh.major.5",
-            "glpyh.major.6",
-            "glpyh.letter.19",
-            "glpyh.letter.20",
-            "glpyh.letter.21",
-            "glpyh.letter.22",
-            "glpyh.letter.23",
-            "glpyh.letter.24",
-            "glpyh.letter.26",
+            "floor1.17",
+            "floor1.18",
+            "floor1.19",
+            "floor1.20",
+            "floor1.21",
+            "floor1.22",
+            "floor1.23",
+            "floor1.24",
             "",
             "",
-            "glpyh.symbol.5",
-            "crate",
+            "",
+            "",
+            "",
             "wall1.1.1x2.2",
             "wall1.2.1x2.2",
             "wall1.1.6x6.13",
@@ -1006,19 +1003,19 @@ def init_tiles():
             "wall1.1",
             "wall1.2",
             ########################################################
+            "floor1.25",
+            "floor1.26",
+            "floor1.27",
+            "floor1.28",
+            "floor1.29",
+            "floor1.30",
+            "floor1.31",
+            "floor1.32",
             "",
             "",
             "",
-            "wall.crumble.1",
-            "wall.crumble.2",
-            "wall.crumble.3",
-            "wall.crumble.4",
-            "wall.crumble.5",
-            "wall.crumble.6",
-            "wall.crumble.7",
-            "wall.crumble.8",
-            "wall.crumble.9",
-            "wall.crumble.10",
+            "",
+            "",
             "wall1.2.2x1.1",
             "wall1.2.2x1.2",
             "wall1.1.6x6.19",
@@ -1536,7 +1533,7 @@ def init_tiles():
             ########################################################
     ]
 
-    zx.tile_load_arr(tex_name="platform", width=32, height=32, arr=tiles)
+    zx.tile_load_arr(tex_name="platform", width=16, height=16, arr=tiles)
 
 def init_weapons_tiles():
 
@@ -1556,7 +1553,7 @@ def init_weapons_tiles():
             "sword1_use_anim.6",
     ]
 
-    zx.tile_load_arr(tex_name="weapons", width=96, height=96, arr=tiles)
+    zx.tile_load_arr(tex_name="weapons", width=48, height=48, arr=tiles)
 
 init_text()
 init_tiles()

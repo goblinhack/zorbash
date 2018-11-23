@@ -21,7 +21,7 @@ Roomp Room::room_new (void)
     return (r);
 }
 
-void Room::create_h_flip (void)
+Roomp Room::create_h_flip (void)
 {_
     std::vector<std::string> rot[MAP_DEPTH];
 
@@ -55,6 +55,46 @@ void Room::create_h_flip (void)
     r->depth          = depth;
 
     r->finalize();
+
+    return (r);
+}
+
+Roomp Room::rotate_clockwise (void)
+{_
+    std::vector<std::string> rot[MAP_DEPTH];
+
+    auto r = Room::room_new();
+
+    for (auto z = 0; z < MAP_DEPTH; z++) {
+        for (auto y = 0; y < height; y++) {
+            std::string s;
+            for (auto x = 0; x < width; x++) {
+                r->data[width - y - 1][x][z] = data[x][y][z];
+            }
+        }
+    }
+
+    r->has_exit_up    = has_exit_left;
+    r->has_exit_down  = has_exit_right;
+    r->has_exit_left  = has_exit_down;
+    r->has_exit_right = has_exit_up;
+
+    r->dir_up         = dir_left;
+    r->dir_down       = dir_right;
+    r->dir_left       = dir_down;
+    r->dir_right      = dir_up;
+
+    r->is_entrance    = is_entrance;
+    r->is_exit        = is_exit;
+    r->is_lock        = is_lock;
+    r->is_key         = is_key;
+    r->is_secret      = is_secret;
+
+    r->depth          = depth;
+
+    r->finalize();
+
+    return (r);
 }
 
 //
@@ -131,25 +171,25 @@ void Room::dump (void)
         }
     }
 
-    CON("ROOM(%d): width %d height %d", roomno, width, height);
+    LOG("ROOM(%d): width %d height %d", roomno, width, height);
     auto b = std::bitset<32>(left_exits);
-    CON("ROOM(%d):   left  exits: %s", roomno, b.to_string().c_str());
+    LOG("ROOM(%d):   left  exits: %s", roomno, b.to_string().c_str());
     b = std::bitset<32>(right_exits);
-    CON("ROOM(%d):   right exits: %s", roomno, b.to_string().c_str());
+    LOG("ROOM(%d):   right exits: %s", roomno, b.to_string().c_str());
     b = std::bitset<32>(up_exits);
-    CON("ROOM(%d):   up    exits: %s", roomno, b.to_string().c_str());
+    LOG("ROOM(%d):   up    exits: %s", roomno, b.to_string().c_str());
     b = std::bitset<32>(down_exits);
-    CON("ROOM(%d):   down  exits: %s", roomno, b.to_string().c_str());
-    CON("ROOM(%d): direction: up %d down %d left %d right %d",
+    LOG("ROOM(%d):   down  exits: %s", roomno, b.to_string().c_str());
+    LOG("ROOM(%d): direction: up %d down %d left %d right %d",
         roomno, dir_up, dir_down, dir_left, dir_right);
-    CON("ROOM(%d): exits:     up %d down %d left %d right %d",
+    LOG("ROOM(%d): exits:     up %d down %d left %d right %d",
         roomno, has_exit_up, has_exit_down, has_exit_left, has_exit_right);
     for (auto y = 0; y < height; y++) {
         std::string s;
         for (auto x = 0; x < width; x++) {
             s += tmp[x][y];
         }
-        CON("ROOM(%d): %s", roomno, s.c_str());
+        LOG("ROOM(%d): %s", roomno, s.c_str());
     }
-    CON(" ");
+    LOG(" ");
 }

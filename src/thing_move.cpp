@@ -94,8 +94,17 @@ bool Thing::slide (void)
     double x;
     double y = at.y;
 
-    if (fabs(momentum) < 0.008) {
-CON("damp");
+    auto m = fabs(momentum);
+
+    if (m > game.config.movement_max_speed) {
+        if (momentum > game.config.movement_max_speed) {
+            momentum = game.config.movement_max_speed;
+        } else {
+            momentum = -game.config.movement_max_speed;
+        }
+    }
+
+    if (m < game.config.movement_min_speed) {
         momentum = 0;
         return (false);
     }
@@ -127,7 +136,7 @@ CON("damp");
         }
     }
 
-    momentum *= 0.75;
+    momentum *= game.config.movement_friction;
 
     move_to(future_pos);
 

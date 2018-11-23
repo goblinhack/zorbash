@@ -154,7 +154,14 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         // remember to update create_h_flip
 
         r->finalize();
-        r->create_h_flip();
+
+        r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
+        r = r->create_h_flip();
+        r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
     }
 
     Py_RETURN_NONE;

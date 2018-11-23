@@ -11,12 +11,30 @@
 
 class Game game;
 
-static void game_place_blocks (class Dungeon *d,
-                               std::string what,
-                               int variant,
-                               int block_width,
-                               int block_height,
-                               int tries)
+void game_init (void)
+{
+    game.config.movement_min_speed  = 0.008;
+    game.config.movement_max_speed  = 1.000;
+    game.config.movement_accel_step = 0.060;
+    game.config.movement_accel_run  = 0.100;
+    game.config.movement_friction   = 0.700;
+}
+
+void game_fini (void)
+{
+    while (game.state.map.all_things.size()) {
+        auto iter = game.state.map.all_things.begin();
+        delete iter->second;
+	game.state.map.all_things.erase(iter);
+    }
+}
+
+static void game_place_walls (class Dungeon *d,
+                              std::string what,
+                              int variant,
+                              int block_width,
+                              int block_height,
+                              int tries)
 {_
     while (tries--) {
         auto x = random_range(0, MAP_WIDTH - block_width + 1);
@@ -83,6 +101,20 @@ static void game_place_blocks (class Dungeon *d,
     }
 }
 
+static void game_place_floor (class Dungeon *d,
+                              std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (!d->is_floor_at(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
 static void game_place_lights (class Dungeon *d,
                                std::string what,
                                int variant,
@@ -114,7 +146,7 @@ static void game_place_lights (class Dungeon *d,
             continue;
         }
 
-        if (random_range(0, 100) > 50) {
+        if (random_range(0, 100) > 90) {
             continue;
         }
 
@@ -163,33 +195,35 @@ void game_display (void)
                                    GRID_WIDTH, GRID_HEIGHT, seed);
 _
         LOG("dungeon: create blocks");
+        game_place_floor(dungeon, "floor1");
+
         auto tries = 1000;
-        game_place_blocks(dungeon, "wall1", 1, 6, 6, tries);
-        game_place_blocks(dungeon, "wall1", 2, 6, 6, tries);
+        game_place_walls(dungeon, "wall1", 1, 6, 6, tries);
+        game_place_walls(dungeon, "wall1", 2, 6, 6, tries);
 
-        game_place_blocks(dungeon, "wall1", 1, 6, 3, tries);
-        game_place_blocks(dungeon, "wall1", 2, 6, 3, tries);
+        game_place_walls(dungeon, "wall1", 1, 6, 3, tries);
+        game_place_walls(dungeon, "wall1", 2, 6, 3, tries);
 
-        game_place_blocks(dungeon, "wall1", 1, 3, 6, tries);
-        game_place_blocks(dungeon, "wall1", 2, 3, 6, tries);
+        game_place_walls(dungeon, "wall1", 1, 3, 6, tries);
+        game_place_walls(dungeon, "wall1", 2, 3, 6, tries);
 
-        game_place_blocks(dungeon, "wall1", 1, 3, 3, tries);
-        game_place_blocks(dungeon, "wall1", 2, 3, 3, tries);
-        game_place_blocks(dungeon, "wall1", 3, 3, 3, tries);
-        game_place_blocks(dungeon, "wall1", 4, 3, 3, tries);
+        game_place_walls(dungeon, "wall1", 1, 3, 3, tries);
+        game_place_walls(dungeon, "wall1", 2, 3, 3, tries);
+        game_place_walls(dungeon, "wall1", 3, 3, 3, tries);
+        game_place_walls(dungeon, "wall1", 4, 3, 3, tries);
 
-        game_place_blocks(dungeon, "wall1", 1, 2, 2, tries);
-        game_place_blocks(dungeon, "wall1", 2, 2, 2, tries);
+        game_place_walls(dungeon, "wall1", 1, 2, 2, tries);
+        game_place_walls(dungeon, "wall1", 2, 2, 2, tries);
 
-        game_place_blocks(dungeon, "wall1", 1, 2, 1, tries);
-        game_place_blocks(dungeon, "wall1", 2, 2, 1, tries);
-        game_place_blocks(dungeon, "wall1", 3, 2, 1, tries);
-        game_place_blocks(dungeon, "wall1", 4, 2, 1, tries);
+        game_place_walls(dungeon, "wall1", 1, 2, 1, tries);
+        game_place_walls(dungeon, "wall1", 2, 2, 1, tries);
+        game_place_walls(dungeon, "wall1", 3, 2, 1, tries);
+        game_place_walls(dungeon, "wall1", 4, 2, 1, tries);
 
-        game_place_blocks(dungeon, "wall1", 1, 1, 2, tries);
-        game_place_blocks(dungeon, "wall1", 2, 1, 2, tries);
-        game_place_blocks(dungeon, "wall1", 3, 2, 1, tries);
-        game_place_blocks(dungeon, "wall1", 4, 2, 1, tries);
+        game_place_walls(dungeon, "wall1", 1, 1, 2, tries);
+        game_place_walls(dungeon, "wall1", 2, 1, 2, tries);
+        game_place_walls(dungeon, "wall1", 3, 2, 1, tries);
+        game_place_walls(dungeon, "wall1", 4, 2, 1, tries);
 _
         game_place_lights(dungeon, "wall1", 4, 2, 1, tries);
 _
