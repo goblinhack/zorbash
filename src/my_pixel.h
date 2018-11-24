@@ -28,7 +28,7 @@
 
 /*
  * Quick row-color bit-shift lookups for certain common color screen size widths:
- *
+ 
  * <<1  2
  * <<2  4
  * <<3  8
@@ -103,7 +103,7 @@
 static inline void lock (SDL_Surface *surface)
 {
 #if 0
-    /*
+ /*
      * Is this needed? unlocking seems slow
      */
     if (SDL_MUSTLOCK(surface)) {
@@ -118,7 +118,7 @@ static inline void lock (SDL_Surface *surface)
 static inline void unlock (SDL_Surface *surface)
 {
 #if 0
-    /*
+ /*
      * Is this needed? unlocking seems slow
      */
     if (SDL_MUSTLOCK(surface)) {

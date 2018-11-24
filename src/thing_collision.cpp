@@ -613,7 +613,7 @@ bool Thing::handle_collisions (void)
         maxy++;
     }
 
-    for (uint8_t z = MAP_DEPTH_ITEMS; z < MAP_DEPTH; z++) {
+    for (uint8_t z = MAP_DEPTH_ITEM; z < MAP_DEPTH; z++) {
         for (int16_t x = minx; x <= maxx; x++) {
             auto dx = x - at.x;
             for (int16_t y = miny; y <= maxy; y++) {
@@ -664,7 +664,7 @@ bool Thing::check_if_will_hit_solid_obstacle (fpoint future_pos)
         maxy--;
     }
 
-    for (uint8_t z = MAP_DEPTH_ITEMS; z < MAP_DEPTH; z++) {
+    for (uint8_t z = MAP_DEPTH_ITEM; z < MAP_DEPTH; z++) {
         for (int16_t x = minx; x <= maxx; x++) {
             for (int16_t y = miny; y <= maxy; y++) {
                 for (auto p : game.state.map.things[x][y][z]) {

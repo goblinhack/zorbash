@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file.
  */
 
@@ -47,18 +47,18 @@ public:
                 cereal::make_nvp("ray_rad",          ray_rad));
     }
 
-    /*
+ /*
      * Unique per light.
      */
     uint32_t           id {};
 
-    /*
+ /*
      * Where the light is. Rays are calculated at this point and invalidated
      * if the light moves.
      */
     fpoint             at;
 
-    /*
+ /*
      * The owner of the light, so we don't block our own light.
      */
     Thingp             owner;
@@ -66,7 +66,7 @@ public:
     double             flicker_radius;
     uint8_t            flicker {0};
 
-    /*
+ /*
      * Precalculated light rays.
      */
     double             strength;

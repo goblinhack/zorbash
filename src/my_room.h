@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -28,7 +28,7 @@ public:
         oldptr(this);
     }
 
-    /*
+ /*
      * Unique per room.
      */
     uint32_t                roomno {0};
@@ -37,7 +37,7 @@ public:
 
     char                    data[ROOM_WIDTH][ROOM_HEIGHT][MAP_DEPTH] = {{{' '}}};
     
-    /*
+ /*
      * A bitmap of possible exits.
      */
     uint16_t                left_exits;
@@ -50,7 +50,7 @@ public:
     bool                    has_exit_left  {false};
     bool                    has_exit_right {false};
     
-    /*
+ /*
      * Direction is the flow of the level, like can a player only go one
      * way and not return
      */
@@ -67,7 +67,7 @@ public:
 
     uint8_t                 depth {0};
 
-    /*
+ /*
      * Final placement of this room in the dungeon. 
      */
     bool                    placed {false};

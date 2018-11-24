@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2011-2017 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -13,7 +13,7 @@ int Thing::hit_actual (Thingp orig_hitter,
                        Thingp hitter, 
                        int damage)
 {
-    /*
+ /*
      * Cruel to let things keep on hitting you when you're dead
      */
     if (is_dead) {
@@ -21,13 +21,13 @@ int Thing::hit_actual (Thingp orig_hitter,
     }
 
     if (!damage) {
-        /*
+ /*
          * Could be a spider silkball
          */
         return (false);
     }
 
-    /*
+ /*
      * Protect player from multiple impact - landing hard on a spike.
      */
     if (is_player) {
@@ -39,7 +39,7 @@ int Thing::hit_actual (Thingp orig_hitter,
 
     if (hitter) {
         if (tp_is_spikes(hitter->tp)) {
-            /*
+ /*
              * Spikes only hurt if you land on them!
              */
             if (fall_speed < 0.05) {
@@ -53,7 +53,7 @@ int Thing::hit_actual (Thingp orig_hitter,
         }
     }
 
-    /*
+ /*
      * Keep hitting until all damage is used up or the thing is dead.
      */
     log("Is hit! hp %d, damage %d", hp, damage);
@@ -67,7 +67,7 @@ int Thing::hit_actual (Thingp orig_hitter,
     if (hp <= 0) {
         hp = 0;
 
-        /*
+ /*
          * Record who dun it.
          */
         log("Is hit terminally, hp %d, damage %d, now dead", hp, damage);
@@ -87,7 +87,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
 {
     Thingp orig_hitter = hitter;
 
-    /*
+ /*
      * If an arrow, who really fired it?
      */
     Thingp real_hitter = nullptr;
@@ -105,7 +105,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
         verify(hitter);
     }
 
-    /*
+ /*
      * Cruel to let things keep on hitting you when you're dead
      */
     if (is_dead) {
@@ -113,7 +113,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
     }
 
     if (hitter && hitter->is_dead) {
-        /*
+ /*
          * This case is hit if a ghost runs into a player. The ghost takes
          * damage. We don't want the player to keep absorbing hits when
          * already dead though.
@@ -121,7 +121,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
         return (false);
     }
 
-    /*
+ /*
      * Explosions are only dangerous in the intitial blast.
      */
     if (hitter && tp_is_explosion(hitter->tp)) {
@@ -130,11 +130,11 @@ int Thing::hit_possible (Thingp hitter, int damage)
         }
     }
 
-    /*
+ /*
      * Check to see if this is a thing that can be damaged by the hitter.
      */
     if (hitter) {
-        /*
+ /*
          * Walls and doors and other solid object are not damaged by poison
          * or similar effects. Limit it to explosions and the like.
          */
@@ -143,7 +143,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
             if (!tp_is_explosion(hitter->tp)     &&
                 !tp_is_projectile(hitter->tp)    &&
                 !tp_is_weapon_use_effect(hitter->tp)) {
-                /*
+ /*
                  * Not something that typically damages walls.
                  */
                 return (false);
@@ -151,7 +151,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
         }
 
         if (tp_is_weapon_use_effect(hitter->tp)) {
-            /*
+ /*
              * Get the player using the weapon as the hitter.
              */
             hitter = hitter->get_owner();
@@ -161,7 +161,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
 
             verify(hitter);
 
-            /*
+ /*
              * Get the damage from the weapon being used to use.
              */
             weapon = hitter->get_weapon();
@@ -174,7 +174,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
             }
 
         } else if (hitter->get_owner()) {
-            /*
+ /*
              * Get the player firing the weapon as the hitter.
              */
             hitter = hitter->get_owner();
@@ -184,7 +184,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
 
             verify(hitter);
 
-            /*
+ /*
              * Get the damage from the weapon being used to use.
              */
             weapon = hitter->get_weapon();
@@ -197,7 +197,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
             }
         }
 
-        /*
+ /*
          * Don't let our own potion hit ourselves!
          */
         if (hitter == this) {

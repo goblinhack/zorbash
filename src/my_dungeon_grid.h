@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -11,18 +11,18 @@
 
 class Node {
 public:
-    /*
+ /*
      * Nodes have a depth number, optional key, start and exit and corridors
      * to adjoining depths. Depth increases as we get closer to the exit.
      */
     int depth                                 {0};
-    /*
+ /*
      * pass 1 is the main dungeon
      * pass 2 are secret levels
      */
     int pass                                  {0};
     int x, y;
-    /*
+ /*
      * Not necessarily an actual key or lock, but something allowing access
      * to the other node. Only one key per node depth.
      */
@@ -45,7 +45,7 @@ public:
     bool dir_left                             {false};
     bool dir_right                            {false};
 
-    /*
+ /*
      * Update init_nodes on changes
      */
     bool has_path (void)
@@ -103,7 +103,7 @@ public:
     int max_depth                             {0};
     int max_vdepth                            {0};
 
-    /*
+ /*
      * Water, rocks etc...
      */
     int depth_obstacle                        {-1};

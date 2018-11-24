@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
  * See the README file for license info for license.
  */
 
@@ -22,10 +21,12 @@ void game_init (void)
 
 void game_fini (void)
 {
+    LOG("finishing: destroy all things");
+
     while (game.state.map.all_things.size()) {
         auto iter = game.state.map.all_things.begin();
-        delete iter->second;
 	game.state.map.all_things.erase(iter);
+        delete iter->second;
     }
 }
 
@@ -102,11 +103,43 @@ static void game_place_walls (class Dungeon *d,
 }
 
 static void game_place_floor (class Dungeon *d,
-                              std::string what)
+                              std::string what,
+                              int depth)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (!d->is_floor_at(x, y)) {
+                continue;
+            }
+            if (d->get_grid_depth_at(x, y) != depth) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_entrance (class Dungeon *d,
+                              std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (!d->is_entrance_at(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_exit (class Dungeon *d,
+                              std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (!d->is_exit_at(x, y)) {
                 continue;
             }
 
@@ -193,9 +226,13 @@ void game_display (void)
 
         auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 
                                    GRID_WIDTH, GRID_HEIGHT, seed);
-_
+
         LOG("dungeon: create blocks");
-        game_place_floor(dungeon, "floor1");
+        game_place_floor(dungeon, "floor1", 1);
+        game_place_floor(dungeon, "floor2", 2);
+        game_place_floor(dungeon, "floor3", 3);
+        game_place_entrance(dungeon, "entrance1");
+        game_place_exit(dungeon, "exit1");
 
         auto tries = 1000;
         game_place_walls(dungeon, "wall1", 1, 6, 6, tries);
@@ -224,11 +261,12 @@ _
         game_place_walls(dungeon, "wall1", 2, 1, 2, tries);
         game_place_walls(dungeon, "wall1", 3, 2, 1, tries);
         game_place_walls(dungeon, "wall1", 4, 2, 1, tries);
-_
+
         game_place_lights(dungeon, "wall1", 4, 2, 1, tries);
-_
+        game_place_lights(dungeon, "entrance1", 4, 2, 1, tries);
+
         game_ramaining_place_blocks(dungeon, "wall1");
-_
+
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
                 if (dungeon->is_monst_at(x, y)) {
@@ -242,13 +280,13 @@ _
                 }
             }
         }
-_
+
         lights_calculate();
-_
+
         LOG("dungeon: placed all blocks");
         thing_map_scroll_to_player();
     }
-_
+
     first = false;
 
     /*

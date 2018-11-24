@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
  * See the LICENSE file for license.
  */
 
@@ -24,31 +23,31 @@
 
 /*
  * Start with a grid of nodes and a start point.
- *
+ * 
  *    x x x x x
- *
+ * 
  *    x x S x x
- *
+ * 
  *    x x x x x
- *
+ * 
  *    x x x x x
- *
+ * 
  *    x x x x x
- *
+ * 
  * Recursize snake walk from a random start. Stop once you have a loop.
- *
+ * 
  *    1-1-1-1 x
  *          |
  *    x 1-1-1 x
  *      |   |
  *    x 1-1-1-1
- *
+ * 
  *    x x x x x
- *
+ * 
  *    x x x x x
- *
+ * 
  * The above is depth 1 of our loop. Choose an adjacent node for depth 2
- *
+ * 
  *    1-1-1-1 x
  *          |
  *    x 1-1-1 x
@@ -58,11 +57,11 @@
  *    x D-2-D x
  *      |   |
  *    x 2-2-2 x
- *
+ * 
  * Again stop when a loop. Choose random 1 - 2 connections and make those doors.
- *
+ * 
  * Repeat for depth 3
- *
+ * 
  *    1-1-1-1 x
  *          |
  *    x 1-1-1 x
@@ -74,7 +73,7 @@
  *    x 2-2-2 3
  *    
  * Remove disconnected nodes. 
- *
+ * 
  *    - 1-1-1 -
  *          |
  *    - 1-1-1 -
@@ -86,7 +85,7 @@
  *    - 2-2-2 3
  *    
  * Do a djkstra flood from a random end point in 3
- *
+ * 
  *    - 1-2-3 -
  *          |
  *    - 2-4-4 -
@@ -98,7 +97,7 @@
  *    - 4-5-6 9
  *    
  * Choose the furthest point as the start.
- *
+ * 
  *      S-1-1  
  *          |
  *      1-1-1  
@@ -108,10 +107,10 @@
  *      2-2-2=3
  *      |   | |
  *      2-2-2 E
- *
+ * 
  * Place a key room one per depth. A key need not be a real key, but
  * something that unlocks an node between 1 and 2
- *
+ * 
  *      S-1-1  
  *          |
  *      1-1-*  

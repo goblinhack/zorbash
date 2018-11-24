@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -74,7 +74,7 @@ uint8_t time_have_x_hundredths_passed_since (uint32_t val, uint32_t since)
 {_
     time_get_time_ms();
 
-    /*
+ /*
      * Cater for negative future times.
      */
     int32_t delay = time_now - since;
@@ -86,7 +86,7 @@ uint8_t time_have_x_thousandths_passed_since (uint32_t val, uint32_t since)
 {_
     time_get_time_ms();
 
-    /*
+ /*
      * Cater for negative future times.
      */
     int32_t delay = time_now - since;
@@ -98,7 +98,7 @@ uint8_t time_have_x_tenths_passed_since (uint32_t val, uint32_t since)
 {_
     time_get_time_ms();
 
-    /*
+ /*
      * Cater for negative future times.
      */
     int32_t delay = time_now - since;
@@ -110,7 +110,7 @@ uint8_t time_have_x_secs_passed_since (uint32_t val, uint32_t since)
 {_
     time_get_time_ms();
 
-    /*
+ /*
      * Cater for negative future times.
      */
     int32_t delay = time_now - since;

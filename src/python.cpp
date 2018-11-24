@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -1547,7 +1547,7 @@ static PyObject *die_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 static PyMethodDef python_c_METHODS[] = {
-    /*
+ /*
      * The cast of the function is necessary since PyCFunction values
      * only take two PyObject *parameters, and some take three.
      */
@@ -1694,10 +1694,10 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr16)
     TP_SET_DECL(is_rrr17)
     TP_SET_DECL(is_rrr18)
-    TP_SET_DECL(is_rrr19)
-    TP_SET_DECL(is_rrr20)
-    TP_SET_DECL(is_rrr21)
-    TP_SET_DECL(is_rrr22)
+    TP_SET_DECL(is_blit_off_center)
+    TP_SET_DECL(is_boring)
+    TP_SET_DECL(is_exit)
+    TP_SET_DECL(is_entrance)
     TP_SET_DECL(move_delay_hundredths)
     TP_SET_DECL(weapon_use_delay_hundredths)
     TP_SET_DECL(for_collision_use_box)
@@ -1880,7 +1880,7 @@ static void py_add_to_path (const char *path)
 
     LOG("- %s", path);
 
-    /*
+ /*
     LOG("Current system python path:");
      */
 
@@ -1984,7 +1984,9 @@ static void python_add_consts (void)
 
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS", MAP_DEPTH_WALLS);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_ITEMS", MAP_DEPTH_ITEMS);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MONST", MAP_DEPTH_MONST);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_ITEM", MAP_DEPTH_ITEM);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXIT", MAP_DEPTH_EXIT);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_PLAYER", MAP_DEPTH_PLAYER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WEAPON", MAP_DEPTH_WEAPON);
 

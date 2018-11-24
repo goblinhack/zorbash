@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info.
  */
 
@@ -33,20 +33,20 @@ public:
 
     std::string name;
 
-    /*
+ /*
      * Index within the overall texture, left to right, top to bottom.
      */
     uint32_t index {};
     uint32_t pix_width {};
     uint32_t pix_height {};
-    /*
+ /*
      * Texture co-ordinates within the image.
      */
     double x1 {};
     double y1 {};
     double x2 {};
     double y2 {};
-    /*
+ /*
      * As above but not clipped 0.5 pixels.
      */
     double ox1 {};
@@ -57,7 +57,7 @@ public:
     double pct_width {};
     double pct_height {};
 
-    /*
+ /*
      * Percentage points that indicate the start of the pixels within the tile
      * texture for use in collisions.
      */
@@ -115,7 +115,7 @@ static inline void tile_blit_fat (const Tpp &tp, const Tilep &tile,
     double y1;
     double y2;
 
-    /*
+ /*
      * Only some walls have deco tiles, so the pointer is left null for
      * those that do not.
      */

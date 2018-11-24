@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -18,14 +18,14 @@ void Thing::animate (void)
 
     otile = tile = t->current_tileinfo;
     if (tile) {
-        /*
+ /*
          * If within the animate time of this frame, keep with it.
          */
         if (t->next_frame_ms > time_get_time_ms_cached()) {
             return;
         }
 
-        /*
+ /*
          * Stop the animation here?
          */
         if (tile_info_is_end_of_anim(tile)) {
@@ -44,11 +44,11 @@ void Thing::animate (void)
 
     int chose_tile = false;
 
-    /*
+ /*
      * Get the next tile.
      */
     if (tile) {
-        /*
+ /*
          * If walking and now we've stopped, choose the idle no dir tile.
          */
         if (!t->is_dead && !t->is_moving &&
@@ -83,7 +83,7 @@ void Thing::animate (void)
         }
     }
 
-    /*
+ /*
      * Find a tile that matches the things current mode.
      */
     uint32_t size = tiles.size();
@@ -93,7 +93,7 @@ void Thing::animate (void)
         while (tries < size) {
             tries++;
 
-            /*
+ /*
              * Cater for wraps.
              */
             if (!tile) {
@@ -202,7 +202,7 @@ void Thing::animate (void)
         return;
     }
 
-    /*
+ /*
      * Use this tile!
      */
     if (!tile->tile) {
@@ -224,7 +224,7 @@ void Thing::animate (void)
 
     t->current_tileinfo = tile;
 
-    /*
+ /*
      * When does this tile expire ?
      */
     uint32_t delay = tile_info_delay_ms(tile);

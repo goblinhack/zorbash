@@ -1,6 +1,6 @@
 /*
  * Copyright(C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -30,7 +30,7 @@ unsigned char *ramdisk_load (const char *filename, int32_t *outlen)
 
     alt_filename = 0;
 
-    /*
+ /*
      * If the file is on disk and is newer than the program, use that in
      * preference.
      */
@@ -111,7 +111,7 @@ unsigned char *ramdisk_load (const char *filename, int32_t *outlen)
         }
     }
 
-    /*
+ /*
      * Fallback to the disk.
      */
     out = file_read_if_exists(filename, outlen);
@@ -154,9 +154,9 @@ unsigned char *ramdisk_load (const char *filename, int32_t *outlen)
         }
     }
 
-    /*
+ /*
      * Fail. Caller should whinge.
-     *
+     
     char *popup_str = dynprintf("Filename was not found on ramdisk or "
                                 "on the local disk, %s", filename);
 

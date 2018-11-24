@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file.
  */
 
@@ -55,12 +55,12 @@ public:
 
     int id {};
 
-    /*
+ /*
      * Internal description of the thing.
      */
     std::string short_name;
 
-    /*
+ /*
      * Base filename
      */
     std::string raw_name;
@@ -86,12 +86,12 @@ public:
     std::string weapon_carry_anim;
     std::string weapon_use_anim;
 
-    /*
+ /*
      * Animation tiles.
      */
     Tileinfomap tiles;
 
-    /*
+ /*
      * Adjacent tiles.
      */
     Tileinfomap top_tiles;
@@ -103,7 +103,7 @@ public:
     Tileinfomap bl_tiles;
     Tileinfomap br_tiles;
 
-    /*
+ /*
      * Join tiles
      */
     Tileinfomap horiz_tiles;
@@ -155,10 +155,10 @@ public:
     int is_rrr16 {};
     int is_rrr17 {};
     int is_rrr18 {};
-    int is_rrr19 {};
-    int is_rrr20 {};
-    int is_rrr21 {};
-    int is_rrr22 {};
+    int is_blit_off_center {};
+    int is_boring {};
+    int is_exit {};
+    int is_entrance {};
     int move_delay_hundredths {};
     int weapon_use_delay_hundredths {};
     int for_collision_use_box {};
@@ -356,24 +356,24 @@ static inline int tp_is_rrr18 (Tpp t)
     return (t->is_rrr18);
 }
 
-static inline int tp_is_rrr19 (Tpp t)
+static inline int tp_is_blit_off_center (Tpp t)
 {
-    return (t->is_rrr19);
+    return (t->is_blit_off_center);
 }
 
-static inline int tp_is_rrr20 (Tpp t)
+static inline int tp_is_boring (Tpp t)
 {
-    return (t->is_rrr20);
+    return (t->is_boring);
 }
 
-static inline int tp_is_rrr21 (Tpp t)
+static inline int tp_is_exit (Tpp t)
 {
-    return (t->is_rrr21);
+    return (t->is_exit);
 }
 
-static inline int tp_is_rrr22 (Tpp t)
+static inline int tp_is_entrance (Tpp t)
 {
-    return (t->is_rrr22);
+    return (t->is_entrance);
 }
 
 static inline int tp_move_delay_hundredths (Tpp t)

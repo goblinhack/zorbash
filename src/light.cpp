@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -70,7 +70,7 @@ void Light::pop (void)
 {_
     game.state.map.all_lights.erase(id);
 
-    /*
+ /*
      * Pop from the map
      */
     point old_at((int)at.x, (int)at.y);
@@ -230,7 +230,6 @@ void Light::calculate_for_obstacle (Thingp t, int x, int y)
      */
     uint8_t k;
     for (k = 0; k<4; k++) {
-
         /*
          * Check if facing the light source.
          */
@@ -284,7 +283,6 @@ void Light::calculate_for_obstacle (Thingp t, int x, int y)
          * For each blocking radian, look at the distance to the light.
          * If closer than what is blocking that radian curretly, then use 
          * this value.
-         *
          * In essence, this is a depth buffer.
          */
         while (--tot_deg >= 0) {

@@ -71,10 +71,10 @@ class Tp:
         self.is_rrr16 = False
         self.is_rrr17 = False
         self.is_rrr18 = False
-        self.is_rrr19 = False
-        self.is_rrr20 = False
-        self.is_rrr21 = False
-        self.is_rrr22 = False
+        self.is_blit_off_center = False
+        self.is_boring = False
+        self.is_exit = False
+        self.is_entrance = False
         self.move_delay_hundredths = False
         self.weapon_use_delay_hundredths = False
         self.for_collision_use_box = False
@@ -326,21 +326,21 @@ class Tp:
         self.is_rrr18 = value
         zx.tp_set_is_rrr18(self, value)
 
-    def set_is_rrr19(self, value):
-        self.is_rrr19 = value
-        zx.tp_set_is_rrr19(self, value)
+    def set_is_blit_off_center(self, value):
+        self.is_blit_off_center = value
+        zx.tp_set_is_blit_off_center(self, value)
 
-    def set_is_rrr20(self, value):
-        self.is_rrr20 = value
-        zx.tp_set_is_rrr20(self, value)
+    def set_is_boring(self, value):
+        self.is_boring = value
+        zx.tp_set_is_boring(self, value)
 
-    def set_is_rrr21(self, value):
-        self.is_rrr21 = value
-        zx.tp_set_is_rrr21(self, value)
+    def set_is_exit(self, value):
+        self.is_exit = value
+        zx.tp_set_is_exit(self, value)
 
-    def set_is_rrr22(self, value):
-        self.is_rrr22 = value
-        zx.tp_set_is_rrr22(self, value)
+    def set_is_entrance(self, value):
+        self.is_entrance = value
+        zx.tp_set_is_entrance(self, value)
 
     def set_move_delay_hundredths(self, value):
         self.move_delay_hundredths = value

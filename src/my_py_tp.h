@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info.
  */
 
@@ -85,10 +85,10 @@ TP_SET_PROTO(is_rrr15)
 TP_SET_PROTO(is_rrr16)
 TP_SET_PROTO(is_rrr17)
 TP_SET_PROTO(is_rrr18)
-TP_SET_PROTO(is_rrr19)
-TP_SET_PROTO(is_rrr20)
-TP_SET_PROTO(is_rrr21)
-TP_SET_PROTO(is_rrr22)
+TP_SET_PROTO(is_blit_off_center)
+TP_SET_PROTO(is_boring)
+TP_SET_PROTO(is_exit)
+TP_SET_PROTO(is_entrance)
 TP_SET_PROTO(move_delay_hundredths)
 TP_SET_PROTO(weapon_use_delay_hundredths)
 TP_SET_PROTO(for_collision_use_box)

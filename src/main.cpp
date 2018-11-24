@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
  * See the LICENSE file for license.
  */
 
@@ -102,7 +101,7 @@ void quit (void)
 #endif
 
 {_
-    LOG("Finishing: things");
+    LOG("finishing:: things");
     game_fini();
 }
 
@@ -112,57 +111,57 @@ void quit (void)
 
 
 {_
-    LOG("Finishing: sdl_exit");
+    LOG("finishing:: sdl_exit");
     sdl_exit();
 }
 
 {_
-    LOG("Finishing: tp_fini");
+    LOG("finishing:: tp_fini");
     tp_fini();
 }
 
 {_
-    LOG("Finishing: wid_console_fini");
+    LOG("finishing:: wid_console_fini");
     wid_console_fini();
 }
 
 {_
-    LOG("Finishing: command_fini");
+    LOG("finishing:: command_fini");
     command_fini();
 }
 
 {_
-    LOG("Finishing: wid_fini");
+    LOG("finishing:: wid_fini");
     wid_fini();
 }
 
 {_
-    LOG("Finishing: font_fini");
+    LOG("finishing:: font_fini");
     font_fini();
 }
 
 {_
-    LOG("Finishing: tex_fini");
+    LOG("finishing:: tex_fini");
     tex_fini();
 }
 
 {_
-    LOG("Finishing: wid_tiles_fini");
+    LOG("finishing:: wid_tiles_fini");
     wid_tiles_fini();
 }
 
 {_
-    LOG("Finishing: tile_fini");
+    LOG("finishing:: tile_fini");
     tile_fini();
 }
 
 {_
-    LOG("Finishing: sdl_fini");
+    LOG("finishing:: sdl_fini");
     sdl_fini();
 }
 
 {_
-    LOG("Finishing: blit_fini");
+    LOG("finishing:: blit_fini");
     blit_fini();
 }
 

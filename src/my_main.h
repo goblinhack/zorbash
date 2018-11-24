@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info.
  */
 
@@ -11,9 +11,8 @@
 
 #define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_PTRCHECK            // Check validity of pointers too
-#undef  ENABLE_LEAKCHECK          
+#undef  ENABLE_LEAKCHECK
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
-#undef  ENABLE_GENERATE_TTF        // Edit .RUNME, look for ENABLE_GENERATE_TTF
 #define ENABLE_INVERTED_GFX        // For vision impaired
 #undef  ENABLE_ASCII_MOUSE
 #define THING_DEBUG
@@ -74,7 +73,10 @@
 /*
  * Fonts
  */
-#define FIXED_FONT                  "data/ttf/dejavu-nerd.ttf"
+//#define ENABLE_GENERATE_TTF
+//#define FIXED_FONT                "data/ttf/dejavu-nerd.ttf"
+//#define FIXED_FONT                "data/ttf/unscii-16.ttf"
+#define FIXED_FONT                  "data/ttf/PressStart2P.ttf"
 #define FONT_SIZE                   80
 
 #define TTF_GLYPH_MIN               ' '

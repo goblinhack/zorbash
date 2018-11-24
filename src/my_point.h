@@ -233,7 +233,7 @@ public:
         return (false);
     }
 
-    /*
+ /*
      * Two lines we already know intersect.
      */
     friend uint8_t get_line_known_intersection (my_apoint p0,
@@ -274,12 +274,12 @@ public:
         double mag;
         double U;
     
-        /*
+ /*
          * Can get the squared distance to avoid this.
          */
         mag = distance(L1, L0);
     
-        /*
+ /*
          * Project point P onto the line and then calc the dot product.
          */
         U = (((P0.x - L0.x) * (L1.x - L0.x)) +

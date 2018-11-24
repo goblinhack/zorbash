@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2015 goblinhack@gmail.com
- *
  * See the README file for license info.
  */
 
@@ -862,8 +861,6 @@ static void ascii_blit (int no_color)
     /*
      * Get the mouse position to use. We use this to find the mouse tile that 
      * we are over.
-     *
-     * Screen walkers
      */
     int x;
     int y;
@@ -957,7 +954,7 @@ static void ascii_blit (int no_color)
              * Foreground
              */
             {
-                tile_br.x = tile_x + game.config.ascii_gl_width * 2.4;
+                tile_br.x = tile_x + game.config.ascii_gl_width;
                 Tilep tile = cell->fg_tile;
 
                 if (tile) {

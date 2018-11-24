@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info.
  */
 
@@ -40,7 +40,7 @@ enum {
     SDL_JOY_BUTTON_DOWN,                    // 12
     SDL_JOY_BUTTON_LEFT,                    // 13
     SDL_JOY_BUTTON_RIGHT,                   // 14
-    /*
+ /*
      * Not real buttons, faking the left and right fire to be buttons.
      */
     SDL_JOY_BUTTON_LEFT_FIRE                = 30,

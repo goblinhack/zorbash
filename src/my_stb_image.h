@@ -16,7 +16,7 @@
       supports installable dequantizing-IDCT, YCbCr-to-RGB conversion (define STBI_SIMD)
 
    TODO:
-      stbi_info_*
+      stbi_info_
 
    history:
       1.18   fix a threading bug (local mutable static)

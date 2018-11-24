@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -167,7 +167,9 @@ Thingp thing_new (std::string tp_name, fpoint at)
         t->is_player = true;
     }
 
-    t->dbg("created");
+    if (!tp_is_boring(tp)) {
+        t->log("created");
+    }
     return (t);
 }
 
@@ -188,14 +190,14 @@ void Thing::visible (void)
 {_
     is_hidden = false;
 
-    /*
+ /*
      * If this thing has an owner, should the thing stay hidden?
      */
     auto owner = get_owner();
     if (owner) {
         if (this == owner->get_weapon_carry_anim()) {
             if (owner->get_weapon_use_anim()) {
-                /*
+ /*
                  * Stay hidden until the weapon use is done.
                  */
                 return;
@@ -203,7 +205,7 @@ void Thing::visible (void)
         }
     }
 
-    /*
+ /*
      * Reveal the weapon again too.
      */
     auto weapon_carry_anim = get_weapon_carry_anim();
@@ -223,7 +225,7 @@ uint8_t Thing::is_visible (void)
  */
 void Thing::remove_hooks ()
 {_
-    /*
+ /*
      * We are owned by something. i.e. we are a sword.
      */
     Thingp owner = 0;
@@ -253,12 +255,12 @@ _
 
             owner->set_weapon_use_anim(nullptr);
 
-            /*
+ /*
              * End of the use animation, make the sword visible again.
              */
             auto carrying = owner->get_weapon_carry_anim();
             if (carrying) {
-                /*
+ /*
                  * But only if the owner is visible. They may have reached the
                  * level.
                  */
@@ -271,7 +273,7 @@ _
         set_owner(nullptr);
     }
 _
-    /*
+ /*
      * We own things like a sword. i.e. we are a player.
      */
     if (weapon_carry_anim_thing_id) {
@@ -290,7 +292,7 @@ _
         item->dead("weapon use anim owner killed");
     }
 
-    /*
+ /*
      * Some things have lots of things they own
      */
     if (owned_count) {
@@ -354,18 +356,23 @@ void Thing::set_owner (Thingp owner)
 
 void Thing::destroy (void)
 {_
-    log("destroy");
+    if (!tp_is_boring(tp)) {
+        log("destroy");
+    }
 
     {
         auto a = &game.state.map.all_things;
         auto iter = a->find(id);
-        if (iter == a->end()) {
-            die("thing not found to destroy from all things");
+        if (iter != a->end()) {
+            a->erase(id);
+        } else {
+ /*
+             * May have been removed already in cleanup. Ignore.
+             */
         }
-        a->erase(id);
     }
 _
-    /*
+ /*
      * Pop from the map
      */
     point old_at((int)at.x, (int)at.y);
@@ -393,7 +400,7 @@ _
 
 void Thing::update (void)
 {_
-    /*
+ /*
      * Light source follows the thing.
      */
     if (light) {
@@ -401,7 +408,7 @@ void Thing::update (void)
         light->calculate();
     }
 _
-    /*
+ /*
      * Weapons follow also.
      */
     if (weapon_carry_anim_thing_id) {
@@ -436,11 +443,11 @@ void Thing::update_pos (fpoint to)
         last_at = at;
     }
 _
-    /*
+ /*
      * Keep track of where this thing is on the grid
      */
     if (old_at != new_at) {
-        /*
+ /*
          * Pop
          */
         auto o = &game.state.map.things[old_at.x][old_at.y][depth];
@@ -452,7 +459,7 @@ _
         auto value = (*o)[id];
         o->erase(iter);
 
-        /*
+ /*
          * Add back
          */
         auto n = &game.state.map.things[new_at.x][new_at.y][depth];
@@ -464,7 +471,7 @@ _
         }
     }
 _
-    /*
+ /*
      * Moves are immediate, but we render the move in steps, hence keep
      * track of when we moved.
      */
@@ -477,7 +484,7 @@ _
 
 void Thing::move_delta (fpoint delta)
 {_
-    /*
+ /*
      * If not moving and this is the first move then break out of the
      * idle animation.
      */
@@ -532,7 +539,7 @@ Thingp thing_find (uint32_t id)
 
 std::string Thing::logname (void)
 {_
-    /*
+ /*
      * Return constant strings from a small pool.
      */
     static char tmp[10][MAXSTR];
