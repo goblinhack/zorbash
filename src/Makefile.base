@@ -28,7 +28,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/main.o 			\
     $(OBJDIR)/map.o 		        \
     $(OBJDIR)/pcg_basic.o 		\
-    $(OBJDIR)/pixel.o 			\
     $(OBJDIR)/player.o 			\
     $(OBJDIR)/point.o 			\
     $(OBJDIR)/ptrcheck.o 		\

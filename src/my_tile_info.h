@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file.
  */
 
@@ -33,7 +33,7 @@ public:
     std::string tilename;
     Tilep tile;
 
-    /*
+ /*
      * Delay in ms between frames.
      */
     uint32_t delay_ms {};

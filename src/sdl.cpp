@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -208,14 +208,14 @@ uint8_t sdl_init (void)
 
     sdl_list_video_size();
 
-    /*
+ /*
      * If we have a saved setting, use that.
      */
     if (game.config.video_pix_width && game.config.video_pix_height) {
         video_width = game.config.video_pix_width;
         video_height = game.config.video_pix_height;
     } else {
-        /*
+ /*
          * Else guess.
          */
         SDL_DisplayMode mode;
@@ -248,9 +248,9 @@ uint8_t sdl_init (void)
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    /*
+ /*
      * Don't use this. It seemed to mess up graphics on FireGL.
-     *
+     
      */
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
@@ -410,7 +410,7 @@ static void sdl_event (SDL_Event * event)
                 static struct SDL_KEYSYM last;
                 static uint32_t last_time_for_key;
 
-                /*
+ /*
                  * SDL2 has no auto repeat.
                  */
                 if (!memcmp(&last, key, sizeof(*key))) {
@@ -474,7 +474,7 @@ static void sdl_event (SDL_Event * event)
         wheel_x *= accel;
         wheel_y *= accel;
 
-        /*
+ /*
          * Negative wheel x so side scrolls seem natural. Could just be
          * a dumb macos thing to ifdef?
          */
@@ -723,7 +723,7 @@ static void sdl_tick (void)
 
     sdl_get_mouse();
 
-    /*
+ /*
      * Right stick
      */
     if (sdl_joy_axes[3] > sdl_joy_deadzone) {
@@ -762,7 +762,7 @@ static void sdl_tick (void)
         sdl_joy_buttons[SDL_JOY_BUTTON_UP]--;
     }
 
-    /*
+ /*
      * Left stick
      */
     int mx = 0;
@@ -839,7 +839,7 @@ void sdl_exit (void)
         return;
     }
 
-    LOG("SDL main loop is exiting...");
+    LOG("finishing: SDL main loop is exiting...");
 
 #ifdef ENABlE_GRAPHIC_MOUSE
     SDL_ShowCursor(1);
@@ -914,7 +914,7 @@ void sdl_loop (void)
 
     glEnable(GL_TEXTURE_2D);
 
-    /*
+ /*
      * Wait for events
      */
     int32_t timestamp_then = time_get_time_ms();
@@ -929,9 +929,9 @@ void sdl_loop (void)
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    /*
+ /*
      * Don't use this. It seemed to mess up graphics on FireGL.
-     *
+     
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
      */
 
@@ -942,37 +942,37 @@ void sdl_loop (void)
     }
 
     for (;/*ever*/;) {
-        /*
+ /*
          * Clear the screen
          */
         glClear(GL_COLOR_BUFFER_BIT);
 
         frames++;
 
-        /*
+ /*
          * Reset joystick handling before we poll and update.
          */
         sdl_tick();
 
-        /*
+ /*
          * Do processing of some things, like reading the keyboard or doing
          * stuff with widgets only occasionally if we do not need to.
          */
         int32_t timestamp_now = time_update_time_milli();
 
         if (unlikely(timestamp_now - timestamp_then > 10)) {
-            /*
+ /*
              * Give up some CPU to allow events to arrive and time for the GPU
              * to process the above.
              */
             timestamp_then = timestamp_now;
 
-            /*
+ /*
              * Clean up dead widgets.
              */
             wid_gc_all();
 
-            /*
+ /*
              * Read events
              */
             SDL_PumpEvents();
@@ -995,16 +995,16 @@ void sdl_loop (void)
 
         thing_tick_all();
 
-        /*
+ /*
          * Display UI.
          */
         wid_display_all();
 
-        /*
+ /*
          * FPS counter.
          */
         {
-            /*
+ /*
              * Very occasional.
              */
             if (timestamp_now - timestamp_then2 >= 1000) {
@@ -1012,7 +1012,7 @@ void sdl_loop (void)
                 timestamp_then2 = timestamp_now;
 
                 if (game.config.fps_counter) {
-                    /*
+ /*
                      * Update FPS counter.
                      */
                     game.state.fps_count = frames;
@@ -1026,7 +1026,7 @@ void sdl_loop (void)
 
         time_get_time_ms();
 
-        /*
+ /*
          * Flip
          */
         SDL_GL_SwapWindow(window);

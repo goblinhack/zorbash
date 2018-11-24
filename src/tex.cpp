@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -246,34 +246,34 @@ Texp tex_from_surface (SDL_Surface *surface,
         DIE("could not make surface from file, '%s'", file.c_str());
     }
 
-    /*
+ /*
      * Check that the sdl_surface's width is a power of 2
      */
     if ((surface->w & (surface->w - 1)) != 0) {
-        /*
+ /*
         LOG("%s has a width %u that is not a power of 2", file, surface->w);
          */
     }
 
-    /*
+ /*
      * Also check if the height is a power of 2
      */
     if ((surface->h & (surface->h - 1)) != 0) {
-        /*
+ /*
         LOG("%s has a height %u that is not a power of 2", file, surface->h);
         */
     }
 
     DBG("Texture: '%s', %dx%d", file.c_str(), surface->w, surface->h);
 
-    /*
+ /*
      * Get the number of channels in the SDL surface
      */
     int32_t channels = surface->format->BytesPerPixel;
     int32_t textureFormat = 0;
 
     if (channels == 4) {
-        /*
+ /*
          * Contains alpha channel
          */
         if (surface->format->Rmask == 0x000000ff) {
@@ -282,7 +282,7 @@ Texp tex_from_surface (SDL_Surface *surface,
             textureFormat = GL_BGRA;
         }
     } else if (channels == 3) {
-        /*
+ /*
          * Contains no alpha channel
          */
         if (surface->format->Rmask == 0x000000ff) {
@@ -299,7 +299,7 @@ Texp tex_from_surface (SDL_Surface *surface,
             channels);
     }
 
-    /*
+ /*
      * Create the tex
      */
     GLuint gl_surface_binding = 0;
@@ -308,12 +308,12 @@ Texp tex_from_surface (SDL_Surface *surface,
 
     glGenTextures(1, &gl_surface_binding);
 
-    /*
+ /*
      * Typical tex generation using data from the bitmap
      */
     glBindTexture(GL_TEXTURE_2D, gl_surface_binding);
 
-    /*
+ /*
      * Generate the tex
      */
     glTexImage2D(
@@ -328,7 +328,7 @@ Texp tex_from_surface (SDL_Surface *surface,
         surface->pixels
     );
 
-    /*
+ /*
      * linear filtering. Nearest is meant to be quicker but I didn't see
      * that in reality.
      */
@@ -342,7 +342,7 @@ Texp tex_from_surface (SDL_Surface *surface,
 
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    /*
+ /*
      * For clouds
      */
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

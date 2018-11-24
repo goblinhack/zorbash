@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
  * See the README file for license info for license.
  */
 
@@ -52,7 +51,6 @@ char *dir_dot (void)
 
 /*
  * Remove \ and change to /
- *
  * Given a directory, find out what ../ is.
  */
 char *dir_dotdot (char *s)

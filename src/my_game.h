@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -21,7 +21,9 @@ typedef std::unordered_map< uint32_t, Lightp > Lights;
 
 enum {
     MAP_DEPTH_FLOOR,
-    MAP_DEPTH_ITEMS,
+    MAP_DEPTH_EXIT,
+    MAP_DEPTH_ITEM,
+    MAP_DEPTH_MONST,
     MAP_DEPTH_PLAYER,
     MAP_DEPTH_WEAPON,
     MAP_DEPTH_WALLS,
@@ -65,7 +67,7 @@ public:
     uint32_t           fps_count                    = {};
     Map                map;
 
-    /*
+ /*
      * Where we're looking in the map
      */
     fpoint             map_at;

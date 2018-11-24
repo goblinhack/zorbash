@@ -16,7 +16,7 @@
       supports installable dequantizing-IDCT, YCbCr-to-RGB conversion (define STBI_SIMD)
 
    TODO:
-      stbi_info_*
+      stbi_info_
 
    history:
       1.18   fix a threading bug (local mutable static)
@@ -3398,7 +3398,7 @@ stbi_uc *stbi_tga_load_from_memory (stbi_uc const *buffer, int len, int *x, int 
 }
 
 
-// *************************************************************************************************
+// ************************************************************************************************
 // Photoshop PSD loader -- PD by Thatcher Ulrich, integration by Nicholas Schulz, tweaked by STB
 
 static int psd_test(stbi *s)
@@ -3615,7 +3615,7 @@ stbi_uc *stbi_psd_load_from_memory (stbi_uc const *buffer, int len, int *x, int 
 }
 
 
-// *************************************************************************************************
+// ************************************************************************************************
 // Radiance RGBE HDR loader
 // originally by Nicolas Schulz
 #ifndef STBI_NO_HDR

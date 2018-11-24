@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -152,7 +152,7 @@ public:
         return (&cells[offset(x, y, z)]);
     }
 
-    /*
+ /*
      * Puts a tile on the map
      */
     void putc (const int x, const int y, const int z, const char c)
@@ -166,7 +166,7 @@ public:
         }
     }
     
-    /*
+ /*
      * Puts a tile on the map
      */
     void putc_fast (const int x, const int y, const int z, const char c)
@@ -177,7 +177,7 @@ public:
         }
     }
 
-    /*
+ /*
      * Gets a tile of the map or None
      */
     char getc (const int x, const int y, const int z)
@@ -189,7 +189,7 @@ public:
         return (Charmap::NONE);
     }
 
-    /*
+ /*
      * Gets a tile of the map or None
      */
     char getc_fast (const int x, const int y, const int z)
@@ -219,6 +219,17 @@ public:
             return true;
         }
         return false;
+    }
+
+    int get_grid_depth_at (const int x, const int y)
+    {
+        auto X = (x - MAP_BORDER) / ROOM_WIDTH;
+        auto Y = (y - MAP_BORDER) / ROOM_HEIGHT;
+        auto n = nodes->getn(X, Y);
+        if (n) {
+            return (n->depth);
+        }
+        return (0);
     }
 
     bool is_floor_at (const int x, const int y)

@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -98,7 +98,7 @@ void tile_load_arr (std::string tex_name,
             t->oy2 = t->y2;
 
 #if 0
-            /*
+ /*
              * Why? Texture atlas and GL_LINEAR will cause problems blending
              * with tiles adjacent in the atlas, so we trim 0.5 of a pixel
              * all around.
@@ -147,7 +147,7 @@ void tile_load_arr (std::string tex_name,
 
                         color p = getPixel(s, at.x, at.y);
 
-                        /*
+ /*
                         * If solid...
                         */
                         if (p.a >= 0xef) {
@@ -189,7 +189,7 @@ void tile_load_arr (std::string tex_name,
 
         x++;
 
-        /*
+ /*
          * Check the whole tile can be read
          */
         if ((x * width) + (width - 1) >= tex_get_width(tex)) {

@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2011-2017 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -109,7 +109,7 @@ void player_tick (void)
         return;
     }
 
-    /*
+ /*
      * Check if we are allowed to fire our gun again so soon.
      */
     if (fire) {
@@ -181,7 +181,7 @@ void player_tick (void)
     double jump_speed = 0.15;
 //    double wall_friction = 0.95;
 
-    /*
+ /*
      * run?
      */
     double move_momentum = game.config.movement_accel_step;
@@ -190,7 +190,7 @@ void player_tick (void)
         jump_speed = 0.20;
     }
 
-    /*
+ /*
      * Don't move too fast either way as we build up speed
      */
     if (left) {
@@ -202,7 +202,7 @@ void player_tick (void)
     }
 
 #if 0
-    /*
+ /*
      * Don't allow too frequent jumps
      */
     if (jump) {
@@ -225,7 +225,7 @@ void player_tick (void)
         if (level->last_hit_obstacle &&
             !time_have_x_hundredths_passed_since(15, level->last_hit_obstacle)) {
 
-            /*
+ /*
              * Allow the player to cling onto and jump when they hit a ledge 
              * as long as not falling too fast
              */
@@ -236,7 +236,7 @@ void player_tick (void)
             }
         }
 
-        /*
+ /*
          * Else if not falling, allow the jump
          */
         if (!player->fall_speed) {
@@ -287,7 +287,7 @@ void player_tick (void)
         }
     }
 
-    /*
+ /*
      * If we hit a side wall when falling, slow the fall.
      */
     if (thing_hit_solid_obstacle(level, player, x + player->momentum, y)) {

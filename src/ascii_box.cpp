@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2015 goblinhack@gmail.com
- *
  * See the README file for license info.
  */
 

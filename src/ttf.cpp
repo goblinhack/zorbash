@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -94,7 +94,7 @@ ttf_set_color_key (SDL_Surface *glyph_surface,
     SDL_Surface *tmp;
     uint32_t colorkey;
 
-    /*
+ /*
      * Use the surface width and height expanded to powers of 2
      */
     *width = glyph_surface->w;
@@ -131,7 +131,7 @@ ttf_set_color_key (SDL_Surface *glyph_surface,
 
     newptr(tmp, "SDL_CreateRGBSurface");
 
-    /*
+ /*
      * Set up so that colorkey pixels become transparent
      */
     colorkey = SDL_MapRGBA(tmp->format, 0, 0, 0, 0);
@@ -159,7 +159,7 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
     static uint16_t text[2];
     int e;
 
-    /*
+ /*
      * Load the glyph info
      */
     int minx;
@@ -256,7 +256,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     snprintf(filename, sizeof(filename), "%s_pointsize%u.tga",
              name.c_str(), pointsize);
 
-    /*
+ /*
      * x glyphs horizontally and y vertically.
      */
     glyph_per_row = TTF_GLYPH_PER_ROW;
@@ -268,7 +268,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
 
     memset(max_line_height, 0, sizeof(max_line_height));
 
-    /*
+ /*
      * Find the largest font glyph pointsize.
      */
     x = 0;
@@ -293,7 +293,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     }
     printf("%d total glyphs\n", tot);
 
-    /*
+ /*
      * Use the unicode block char as a guide for largest char.
      */
 //    int u_block = f->u_to_c[0x2588];
@@ -303,7 +303,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     width = glyph_per_row * max_char_width;
     height = ((tot / glyph_per_row) + 1) * max_char_height;
 
-    /*
+ /*
      * Make a large surface for all glyphs.
      */
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
@@ -326,7 +326,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
 
     newptr(dst, "SDL_CreateRGBSurface");
 
-    /*
+ /*
      * Blit each glyph to the large surface.
      */
     x = 0;
@@ -353,7 +353,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
         }
     }
 
-    /*
+ /*
      * Convert the black border smoothing that ttf adds into alpha.
      */
     {
@@ -371,18 +371,18 @@ ttf_write_tga (std::string name, int pointsize, int style)
                     (c.r == 255) &&
                     (c.g == 255) &&
                     (c.b == 255)) {
-                    /*
+ /*
                      * Do nothing.
                      */
                 } else if ((c.a == 0) &&
                     (c.r == 0) &&
                     (c.g == 0) &&
                     (c.b == 0)) {
-                    /*
+ /*
                      * Do nothing.
                      */
                 } else {
-                    /*
+ /*
                      * Convery gray to white with alpha.
                      */
                     c.a = (c.r + c.g + c.b) / 3;
@@ -451,7 +451,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
         ERR("could not convert %s to tex", filename);
     }
 
-    /*
+ /*
      * Work our the tex co-ords for each glyph in the large tex.
      */
     x = 0;

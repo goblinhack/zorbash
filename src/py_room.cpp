@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -86,6 +86,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
             std::string floor_string;
             std::string walls_string;
+            std::string monsts_string;
+            std::string exits_string;
             std::string items_string;
 
             for (auto c : py_obj_to_string(o)) {
@@ -102,12 +104,23 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
                 if (m.is_wall ||
                     m.is_door ||
-                    m.is_entrance ||
-                    m.is_exit ||
                     m.is_rock) {
                     walls_string += c;
                 } else {
                     walls_string += Charmap::SPACE;
+                }
+
+                if (m.is_monst) {
+                    monsts_string += c;
+                } else {
+                    monsts_string += Charmap::SPACE;
+                }
+
+                if (m.is_entrance ||
+                    m.is_exit) {
+                    exits_string += c;
+                } else {
+                    exits_string += Charmap::SPACE;
                 }
 
                 if (m.is_trap ||
@@ -127,6 +140,10 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 DIE("room walls width mismatch, %zu, expected %d",
                     walls_string.size(), ROOM_WIDTH);
             }
+            if (exits_string.size() != ROOM_WIDTH){
+                DIE("room exits width mismatch, %zu, expected %d",
+                    exits_string.size(), ROOM_WIDTH);
+            }
             if (items_string.size() != ROOM_WIDTH){
                 DIE("room items width mismatch, %zu, expected %d",
                     items_string.size(), ROOM_WIDTH);
@@ -135,7 +152,9 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             for (auto x = 0; x < ROOM_WIDTH; x++) {
                 r->data[x][y][MAP_DEPTH_FLOOR] = floor_string[x];
                 r->data[x][y][MAP_DEPTH_WALLS] = walls_string[x];
-                r->data[x][y][MAP_DEPTH_ITEMS] = items_string[x];
+                r->data[x][y][MAP_DEPTH_EXIT] = exits_string[x];
+                r->data[x][y][MAP_DEPTH_MONST] = monsts_string[x];
+                r->data[x][y][MAP_DEPTH_ITEM] = items_string[x];
                 r->data[x][y][MAP_DEPTH_PLAYER] = ' ';
             }
         }

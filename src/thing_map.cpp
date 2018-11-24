@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -118,7 +118,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->right_tile, tl2, br2);
     }
 
-    /*
+ /*
      * X---
      * |...
      * |...
@@ -135,7 +135,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->tl_tile, tl2, br2);
     }
 
-    /*
+ /*
      * ---X
      * ...|
      * ...|
@@ -152,7 +152,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->tr_tile, tl2, br2);
     }
 
-    /*
+ /*
      *  .|
      *  .|
      *  .X--
@@ -170,7 +170,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->tr_tile, tl2, br2);
     }
 
-    /*
+ /*
      *    |.
      *    |.
      *  --X.
@@ -191,7 +191,7 @@ static void thing_blit_wall_cladding (Thingp &t,
     dw = 0.00;
     dh = 0.00;
 
-    /*
+ /*
      * |...
      * |...
      * X---
@@ -208,7 +208,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->bl_tile, tl2, br2);
     }
 
-    /*
+ /*
      * ...|
      * ...|
      * ---X
@@ -225,7 +225,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->br_tile, tl2, br2);
     }
 
-    /*
+ /*
      * .....
      * .X---
      * .|
@@ -243,7 +243,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->br_tile, tl2, br2);
     }
 
-    /*
+ /*
      * ....
      * --X.
      *   |.
@@ -264,18 +264,19 @@ static void thing_blit_wall_cladding (Thingp &t,
 
 static void thing_get_all_coordinates (void)
 {
-    const double tdx = game.config.tile_gl_width;
-    const double tdy = game.config.tile_gl_height;
+    const double tile_gl_width = game.config.tile_gl_width;
+    const double tile_gl_height = game.config.tile_gl_height;
 
     for (auto p : game.state.map.all_things) {
         auto t = p.second;
+        auto tp = t->tp;
         double tx = t->at.x - game.state.map_at.x;
         double ty = t->at.y - game.state.map_at.y;
 
-        t->tl.x = tx * tdx;
-        t->tl.y = ty * tdy;
-        t->br.x = (tx+1) * tdx;
-        t->br.y = (ty+1) * tdy;
+        t->tl.x = tx * tile_gl_width;
+        t->tl.y = ty * tile_gl_height;
+        t->br.x = (tx+1) * tile_gl_width;
+        t->br.y = (ty+1) * tile_gl_height;
 
         Tilep tile;
         if (t->current_tileinfo) {
@@ -284,22 +285,31 @@ static void thing_get_all_coordinates (void)
             tile = t->current_tile;
         }
 
-        /*
+ /*
          * Scale up tiles that are larger to the same pix scale.
          */
         if (tile->pix_width != TILE_WIDTH) {
             auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
             auto mx = (t->br.x + t->tl.x) / 2.0;
-            t->tl.x = mx - (xtiles * tdx);
-            t->br.x = mx + (xtiles * tdx);
+            t->tl.x = mx - (xtiles * tile_gl_width);
+            t->br.x = mx + (xtiles * tile_gl_width);
 
             auto ytiles = (tile->pix_height / TILE_HEIGHT) / 2.0;
             auto my = (t->br.y + t->tl.y) / 2.0;
-            t->tl.y = my - (ytiles * tdy);
-            t->br.y = my + (ytiles * tdy);
+            t->tl.y = my - (ytiles * tile_gl_height);
+            t->br.y = my + (ytiles * tile_gl_height);
         }
 
-        auto tp = t->tp;
+ /*
+         * Put larger tiles on the same y base as small ones.
+         */
+        if (tp_is_blit_off_center(tp)) {
+            double y_offset = 
+                (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) * 
+                 tile_gl_height) / 2.0;
+            t->tl.y -= y_offset;
+            t->br.y -= y_offset;
+        }
 
         if (tp_is_animated_walk_flip(tp)) {
             if (t->flip_start_ms) {
@@ -468,7 +478,7 @@ static void thing_blit_editor (int minx, int miny, int minz,
 
 void thing_render_all (void)
 {
-    /*
+ /*
      * Get the bounds
      */
     int minz = 0;
@@ -484,7 +494,7 @@ void thing_render_all (void)
     int maxy = std::min(MAP_HEIGHT, 
         (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
 
-    /*
+ /*
      * Improve this to only update when things move one tile
      */
     if (!game.config.editor_mode) {

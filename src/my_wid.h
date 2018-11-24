@@ -1,6 +1,6 @@
 /*
  * Copyright(C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -268,7 +268,7 @@ extern uint32_t history_at;
 extern uint32_t history_walk;
 
 typedef struct {
-    /*
+ /*
      * Colors
      */
     color colors[WID_COLOR_MAX];
@@ -292,13 +292,13 @@ public:
 
     int priority {};
 
-    /*
+ /*
      * The real position on the screen initially.
      */
     point tl {};
     point br {};
 
-    /*
+ /*
      * Unique wid ID.
      */
     uint64_t key {};
@@ -374,7 +374,7 @@ public:
 
     wid_key_type tree_global_key {};
 
-    /*
+ /*
      * Sorted for display order.
      */
     tree_wid_key key                                    {};
@@ -390,32 +390,32 @@ public:
     wid_key_map_int *in_tree5_ticking_wids              {};
     wid_key_map_int *in_tree_global_unsorted_root       {};
 
-    /*
+ /*
      * Sorted for display onto the screen.
      */
     wid_key_map_location children_display_sorted {};
 
-    /*
+ /*
      * No particular sort order.
      */
     wid_key_map_int tree2_children_unsorted {};
 
-    /*
+ /*
      * A tree for moving things
      */
     wid_key_map_int tree3_moving_wids {};
 
-    /*
+ /*
      * A tree for things being destroyed.
      */
     wid_key_map_int tree4_wids_being_destroyed {};
 
-    /*
+ /*
      * A tree for ticking things
      */
     wid_key_map_int tree5_ticking_wids {};
 
-    /*
+ /*
      * Tiles widget
      */
     wid_tilesp wid_tiles {};
@@ -456,7 +456,7 @@ public:
     uint8_t square                      {};
     uint8_t box                         {};
 
-    /*
+ /*
      * Optionally set to the previous wid in a list
      */
     widp prev {};
@@ -467,7 +467,7 @@ public:
 
     Tpp tp {};
 
-    /*
+ /*
      * The real position after scrollbar adjustments.
      */
     point abs_tl {};
@@ -483,27 +483,27 @@ public:
     fsize tex_tl {};
     fsize tex_br {};
 
-    /*
+ /*
      * WID_MODE_NORMAL ...
      */
     wid_mode mode {};
 
-    /*
+ /*
      * Offset of child widgets in the parent window.
      */
     point offset {};
 
-    /*
+ /*
      * Config layers:
      */
     wid_cfg cfg[WID_MODE_LAST] {};
 
-    /*
+ /*
      * Client context
      */
     void *context {};
 
-    /*
+ /*
      * Text placement.
      */
     point text_pos {};
@@ -514,7 +514,7 @@ public:
 
     widp *destroy_ptr {};
 
-    /*
+ /*
      * Queue of wid move requests.
      */
 #define WID_MAX_MOVE_QUEUE 4
@@ -525,48 +525,48 @@ public:
     uint32_t timestamp_moving_end {};
     uint8_t moving {};
 
-    /*
+ /*
      * Text input
      */
     uint16_t cursor {};
 
-    /*
+ /*
      * Order of this wid amongst other focusable widgets.
      */
     uint8_t focus_order {};
 
-    /*
+ /*
      * Who had it last ? Used when raising this wid again.
      */
     uint8_t focus_last {};
 
-    /*
+ /*
      * The wids children
      */
     widp parent {};
 
-    /*
+ /*
      * Widget internal name.
      */
     std::string name {};
 
-    /*
+ /*
      * For debugging.
      */
     std::string logname {};
 
-    /*
+ /*
      * Text that appears on the wid.
      */
     std::wstring text {};
 
-    /*
+ /*
      * Text that appears as a tooltip.
      */
     std::wstring tooltip {};
     std::wstring tooltip2 {};
 
-    /*
+ /*
      * Action handlers
      */
     on_key_down_t on_key_down         {};

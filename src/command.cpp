@@ -1,6 +1,5 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
  * See the README file for license info for license.
  */
 
@@ -11,69 +10,69 @@
 /*
  * Simple console expanding code, takes a comand input and expands it as
  * much as possible to installed commands.
- *
+ *  
  * Ambigious command : []
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       :
- *
+ * 
  * Ambigious command : [s]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set
- *
+ * 
  * Ambigious command : [se]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set
- *
+ * 
  * Ambigious command : [set]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set
- *
+ * 
  * Ambigious command : [set d]
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set debug
- *
+ * 
  * Ambigious command : [set g]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *   Expand to       : set god-mode
- *
+ * 
  * Ambigious command : [s g ]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *   Expand to       : set god-mode
- *
+ * 
  * Ambigious command : [s g o]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *   Expand to       : set god-mode o
- *
+ * 
  * Single match      : [s g of]
  *  Completes to     : set god-mode off
- *
+ * 
  * Ambigious command : [s d]
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set debug
- *
+ * 
  * Single match      : [s d on]
  *  Completes to     : set debug on
- *
+ * 
  * Single match      : [s d of]
  *  Completes to     : set debug off
- *
+ * 
  * Single match      : [set debug on]
  *  Completes to     : set debug on
  */
@@ -133,7 +132,7 @@ void command_add (command_fn_t callback,
 
     command->callback = callback;
 
-    /*
+ /*
      * Convert the command into tokens for matching.
      */
     tokens_tostring(input.c_str(), &command->tokens);

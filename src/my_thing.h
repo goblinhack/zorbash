@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file.
  */
 
@@ -59,34 +59,34 @@ public:
         // etc todo and remember to repair Tp on loading
     }
 
-    /*
+ /*
      * Unique per thing.
      */
     uint32_t           id {};
 
-    /*
+ /*
      * Display order
      */
     uint8_t            depth;
 
-    /*
+ /*
      * Grid coordinates.
      */
     fpoint             at;
 
-    /*
+ /*
      * On screen coordinates, taking account for size of the current frame.
      */
     fpoint             tl;
     fpoint             br;
 
-    /*
+ /*
      * Previous hop where we were. We use this to interpolate the real
      * position when moving.
      */
     fpoint             last_at;
 
-    /*
+ /*
      * Very poor mans i.e. mine, physics.
      */
     fpoint             normal_velocity;
@@ -96,17 +96,17 @@ public:
     double             momentum {0};
     double             rot {0};
 
-    /*
+ /*
      * Pointer to common settings for this thing.
      */
     Tpp                tp {nullptr};
 
-    /*
+ /*
      * Does this thing have a light source?
      */
     Lightp             light {nullptr};
 
-    /*
+ /*
      * Used for animating the steps.
      */
     uint32_t           flip_start_ms {};
@@ -115,21 +115,21 @@ public:
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
 
-    /*
+ /*
      * Timestamps
      */
     uint32_t           timestamp_born {};
     uint32_t           timestamp_last_i_was_hit {};
     uint32_t           timestamp_last_attacked {};
 
-    /*
+ /*
      * Tileinfo may be null if this thing does not need animation.
      * Ih such a case, current_tile will be set.
      */
     Tileinfop          current_tileinfo {};
     Tilep              current_tile {};
 
-    /*
+ /*
      * For thing decorations
      */
     Tilep              top_tile {};
@@ -141,7 +141,7 @@ public:
     Tilep              bl_tile {};
     Tilep              br_tile {};
 
-    /*
+ /*
      * Only used for display purposes.
      */
     uint16_t           gold {0};
@@ -150,24 +150,24 @@ public:
     uint32_t           weapon_carry_anim_thing_id {0};
     uint32_t           weapon_use_anim_thing_id {0};
 
-    /*
+ /*
      * Weapon thing template.
      */
     uint16_t           weapon_tp_id {0};
 
-    /*
+ /*
      * Who created this thing? e.g. who cast a spell?
      */
     uint32_t           owner_thing_id {0};
 
-    /*
+ /*
      * How many things this thing owns.
      */
     uint16_t           owned_count {0};
 
     unsigned int       dir:4;
 
-    /*
+ /*
      * Update thing_new when adding new bitfields.
      */
     unsigned int       is_dead:1;
@@ -216,7 +216,7 @@ public:
     void hide();
     void tick();
 
-    /*
+ /*
      * thing_hit.cpp
      */
     int hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, 
@@ -224,7 +224,7 @@ public:
     int hit_possible(Thingp hitter, int damage);
     int hit_possible(Thingp hitter);
 
-    /*
+ /*
      * thing_move.cpp
      */
     fpoint get_velocity(void);
@@ -237,13 +237,13 @@ public:
               const uint8_t right,
               const uint8_t fire);
 
-    /*
+ /*
      * thing_collision.cpp
      */
     bool check_if_will_hit_solid_obstacle(fpoint future_pos);
     bool handle_collisions(void);
 
-    /*
+ /*
      * thing_weapon.cpp
      */
     Tpp get_weapon();

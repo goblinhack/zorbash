@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the README file for license info for license.
  */
 
@@ -32,35 +32,35 @@ typedef struct ptrcheck_history_ {
  * The life of a single pointer.
  */
 typedef struct ptrcheck_ {
-    /*
+ /*
      * For sanity, the pointer itself.
      */
     void *ptr;
 
-    /*
+ /*
      * The type of memory.
      */
     const char *what;
 
-    /*
+ /*
      * How much memory it is using.
      */
     uint32_t size;
 
-    /*
+ /*
      * Where did the pointer get allocated/freed/last_seen from?
      */
     ptrcheck_history allocated_by;
     ptrcheck_history freed_by;
     ptrcheck_history last_seen[MAX_PER_PTR_HISTORY];
 
-    /*
+ /*
      * Where in the history buffer we are.
      */
     uint16_t last_seen_at;
     uint16_t last_seen_size;
 
-    /*
+ /*
      * Ignore when looking for leaks.
      */
     uint8_t leak_ignore:1;
@@ -111,7 +111,7 @@ uint8_t ptrcheck_init (void)
 
 void ptrcheck_fini (void)
 {_
-    /*
+ /*
      * Print memory leaks.
      */
     ptrcheck_leak_print();
@@ -121,7 +121,7 @@ void ptrcheck_fini (void)
 
 /*
  * local_zalloc
- *
+ 
  * Wrapper for calloc.
  */
 static void *local_zalloc (uint32_t size)
@@ -138,7 +138,7 @@ static void *local_zalloc (uint32_t size)
 
 /*
  * local_free
- *
+ 
  * Wrapper for free.
  */
 static void local_free (void *ptr)
@@ -148,14 +148,14 @@ static void local_free (void *ptr)
 
 /*
  * ptr2hash
- *
+ 
  * Map a pointer to a hash slot.
  */
 static hash_elem_t ** ptr2hash (hash_t *hash_table, void *ptr)
 {_
     uint32_t slot;
 
-    /*
+ /*
      * Knock lower 2 bits off of pointer - these are always 0.
      */
     slot = (uint32_t)((((uintptr_t)(ptr)) >> 2) % hash_table->hash_size);
@@ -165,7 +165,7 @@ static hash_elem_t ** ptr2hash (hash_t *hash_table, void *ptr)
 
 /*
  * hash_init
- *
+ 
  * Create a hash table for all pointers.
  */
 static hash_t *hash_init (uint32_t hash_size)
@@ -187,7 +187,7 @@ static hash_t *hash_init (uint32_t hash_size)
 
 /*
  * hash_add
- *
+ 
  * Store a pointer in our hash.
  */
 static void hash_add (hash_t *hash_table, ptrcheck *context)
@@ -223,7 +223,7 @@ static void hash_add (hash_t *hash_table, ptrcheck *context)
 
 /*
  * hash_find
- *
+ 
  * Find a pointer in our hash.
  */
 static hash_elem_t *hash_find (hash_t *hash_table, void *ptr)
@@ -250,7 +250,7 @@ static hash_elem_t *hash_find (hash_t *hash_table, void *ptr)
 
 /*
  * hash_free
- *
+ 
  * Free a pointer from our hash.
  */
 static void hash_free (hash_t *hash_table, void *ptr)
@@ -292,7 +292,7 @@ static void hash_free (hash_t *hash_table, void *ptr)
 
 /*
  * ptrcheck_verify_pointer
- *
+ 
  * Check a pointer for validity.
  */
 static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
@@ -317,7 +317,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         DIE("%s%p NULL pointer %s:%s():%u", null_pointer_warning, ptr, file, func, line);
     }
 
-    /*
+ /*
      * Check the robust handle is valid.
      */
     e = hash_find(hash, (void*) ptr);
@@ -328,7 +328,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
             return (context);
         }
 
-        /*
+ /*
          * Add some free information that we know the pointer is safe at this
          * point in time.
          */
@@ -357,13 +357,13 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         return (context);
     }
 
-    /*
+ /*
      * We may be about to crash. Complain!
      */
     global_callstack.dump();
     ERR("%s%p %s:%s():%u", bad_pointer_warning, ptr, file, func, line);
 
-    /*
+ /*
      * Check the ring buffer to see if we've seen this pointer before.
      */
     context = ringbuf_next;
@@ -375,11 +375,11 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
 
     ring_ptr_size = ringbuf_current_size;
 
-    /*
+ /*
      * Walk back through the ring buffer.
      */
     while (ring_ptr_size) {
-        /*
+ /*
          * Found a match?
          */
         if (context->ptr == ptr) {
@@ -402,7 +402,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
 
             traceback_stderr(context->freed_by.tb);
 
-            /*
+ /*
              * Dump the pointer history.
              */
             ptrcheck_history *history;
@@ -424,7 +424,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                 traceback_stderr(history->tb);
             }
 
-            /*
+ /*
              * Memory reuse can cause a lot of false hits, so stop after
              * the first match.
              */
@@ -434,7 +434,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         ring_ptr_size--;
         context--;
 
-        /*
+ /*
          * Handle wraps.
          */
         if (context < ringbuf_base) {
@@ -449,7 +449,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
 
 /*
  * ptrcheck_alloc
- *
+ 
  * Record this pointer.
  */
 void *ptrcheck_alloc (const void *ptr,
@@ -477,11 +477,11 @@ void *ptrcheck_alloc (const void *ptr,
         ERR("null pointer");
     }
 
-    /*
+ /*
      * Create a hash table to store pointers.
      */
     if (!hash) {
-        /*
+ /*
          * Create enough space for lots of pointers.
          */
         hash = hash_init(1046527 /* prime */);
@@ -491,7 +491,7 @@ void *ptrcheck_alloc (const void *ptr,
         }
     }
 
-    /*
+ /*
      * Missing an earlier free?
      */
     if (hash_find(hash, (void*) ptr)) {
@@ -499,7 +499,7 @@ void *ptrcheck_alloc (const void *ptr,
         return ((void*) ptr);
     }
 
-    /*
+ /*
      * And a ring buffer to store old pointer into.
      */
     if (!ringbuf_next) {
@@ -511,14 +511,14 @@ void *ptrcheck_alloc (const void *ptr,
         ringbuf_current_size = 0;
     }
 
-    /*
+ /*
      * Allocate a block of data to describe the pointer and owner.
      */
     context =
         (__typeof__(context))
             local_zalloc(sizeof(ptrcheck));
 
-    /*
+ /*
      * Populate the data block.
      */
     context->ptr = (void*) ptr;
@@ -530,7 +530,7 @@ void *ptrcheck_alloc (const void *ptr,
     context->allocated_by.ms = time_get_time_ms();
     context->allocated_by.tb = traceback_alloc();
 
-    /*
+ /*
      * Add it to the hash. Not the ring buffer (only when freed).
      */
     hash_add(hash, context);
@@ -540,7 +540,7 @@ void *ptrcheck_alloc (const void *ptr,
 
 /*
  * ptrcheck_free
- *
+ 
  * Check a pointer is valid and if so add it to the ring buffer. If not,
  * return false and avert the myfree(), just in case.
  */
@@ -573,7 +573,7 @@ uint8_t ptrcheck_free (void *ptr,
         return (false);
     }
 
-    /*
+ /*
      * Add some free information that we know the pointer is safe at this
      * point in time.
      */
@@ -583,12 +583,12 @@ uint8_t ptrcheck_free (void *ptr,
     context->freed_by.tb = traceback_alloc();
     context->freed_by.ms = time_get_time_ms();
 
-    /*
+ /*
      * Add the free info to the ring buffer.
      */
     memcpy(ringbuf_next, context, sizeof(ptrcheck));
 
-    /*
+ /*
      * Take care of wraps.
      */
     ringbuf_next++;
@@ -596,7 +596,7 @@ uint8_t ptrcheck_free (void *ptr,
         ringbuf_next = ringbuf_base;
     }
 
-    /*
+ /*
      * Increment the ring buffer used size up to the limit.
      */
     if (ringbuf_current_size < ringbuf_max_size) {
@@ -610,7 +610,7 @@ uint8_t ptrcheck_free (void *ptr,
 
 /*
  * ptrcheck_verify
- *
+ 
  * Check a pointer for validity with no recording of history.
  */
 uint8_t ptrcheck_verify (const void *ptr,
@@ -624,7 +624,7 @@ uint8_t ptrcheck_verify (const void *ptr,
 
 /*
  * ptrcheck_leak_print
- *
+ 
  * Free a pointer from our hash.
  */
 void ptrcheck_leak_print (void)
@@ -667,7 +667,7 @@ void ptrcheck_leak_print (void)
 
             traceback_stderr(context->allocated_by.tb);
 
-            /*
+ /*
              * Dump the pointer history.
              */
             ptrcheck_history *history;
@@ -700,7 +700,7 @@ void ptrcheck_leak_print (void)
 
 /*
  * ptrcheck_leak_snapshot
- *
+ 
  * Set so we only see leaks since now.
  */
 void ptrcheck_leak_snapshot (void)
@@ -730,7 +730,7 @@ void ptrcheck_leak_snapshot (void)
 
 /*
  * ptrcheck_usage_cleanup
- *
+ 
  * Print top memory allocators
  */
 static void ptrcheck_usage_cleanup (void)

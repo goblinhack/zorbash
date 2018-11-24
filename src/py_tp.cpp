@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -737,10 +737,10 @@ TP_BODY_SET_INT(is_rrr15)
 TP_BODY_SET_INT(is_rrr16)
 TP_BODY_SET_INT(is_rrr17)
 TP_BODY_SET_INT(is_rrr18)
-TP_BODY_SET_INT(is_rrr19)
-TP_BODY_SET_INT(is_rrr20)
-TP_BODY_SET_INT(is_rrr21)
-TP_BODY_SET_INT(is_rrr22)
+TP_BODY_SET_INT(is_blit_off_center)
+TP_BODY_SET_INT(is_boring)
+TP_BODY_SET_INT(is_exit)
+TP_BODY_SET_INT(is_entrance)
 TP_BODY_SET_INT(move_delay_hundredths)
 TP_BODY_SET_INT(weapon_use_delay_hundredths)
 TP_BODY_SET_INT(for_collision_use_box)

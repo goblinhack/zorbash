@@ -1,11 +1,10 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
  * See the README file for license info for license.
  */
 
-
 #include "my_ttf.h"
+#include "my_string.h"
 
 static int32_t font_inited;
 

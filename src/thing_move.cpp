@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2018 goblinhack@gmail.com
- *
+ 
  * See the LICENSE file for license.
  */
 
@@ -55,7 +55,7 @@ bool Thing::move (fpoint future_pos,
             return (false);
         }
     } else if ((x != 0) && (y != 0)) {
-        /*
+ /*
          * Avoid diagonal shortcuts through obstacles.
          */
         if (check_if_will_hit_solid_obstacle(fpoint(x, at.y))) {
