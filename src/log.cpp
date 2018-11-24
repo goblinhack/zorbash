@@ -137,6 +137,7 @@ static void log_ (const char *fmt, va_list args)
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
     putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
 
     // wid_console_log(buf + len);
 }
@@ -158,6 +159,7 @@ static void logs_ (const char *fmt, va_list args)
     vsnprintf(buf, sizeof(buf), fmt, args);
 
     fwrite(buf, strlen(buf), 1, MY_STDOUT);
+    fflush(MY_STDOUT);
 }
 
 void LOGS (const char *fmt, ...)
@@ -180,6 +182,7 @@ static void warn_ (const char *fmt, va_list args)
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
     putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
 
     wid_console_log(buf);
 }
@@ -204,6 +207,7 @@ static void con_ (const char *fmt, va_list args)
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
     putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
 
     term_log(buf);
     putchar('\n');
@@ -219,6 +223,7 @@ static void con_ (const wchar_t *fmt, va_list args)
         buf[0] = '\0';
         timestamp(buf, sizeof(buf));
         fprintf(MY_STDOUT, "%s", buf);
+        fflush(MY_STDOUT);
         term_log(buf);
     }
 
@@ -236,6 +241,7 @@ static void con_ (const wchar_t *fmt, va_list args)
         }
 
         fwprintf(MY_STDOUT, L"%S\n", buf);
+        fflush(MY_STDOUT);
         term_log(buf);
         wid_console_log(buf);
     }
@@ -250,11 +256,13 @@ void con (const wchar_t *fmt)
         buf[0] = '\0';
         timestamp(buf, sizeof(buf));
         fprintf(MY_STDOUT, "%s", buf);
+        fflush(MY_STDOUT);
         term_log(buf);
     }
 
     {
         fwprintf(MY_STDOUT, L"%S\n", fmt);
+        fflush(MY_STDOUT);
         term_log(fmt);
         wid_console_log(fmt);
     }
@@ -545,6 +553,7 @@ void Thing::log_ (const char *fmt, va_list args)
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
     putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
 }
 
 void Thing::log (const char *fmt, ...)
@@ -576,6 +585,7 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
     putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
 
     kill();
 }
@@ -608,6 +618,7 @@ void Thing::dead_ (const char *fmt, va_list args)
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
     putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
 
     kill();
 }
@@ -670,6 +681,7 @@ void Thing::con_ (const char *fmt, va_list args)
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
     putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
 
     term_log(buf);
     putchar('\n');
@@ -760,6 +772,7 @@ void Light::log_ (const char *fmt, va_list args)
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
 
     putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
 }
 
 void Light::log (const char *fmt, ...)

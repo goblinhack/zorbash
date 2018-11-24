@@ -50,6 +50,8 @@ struct tracer_t {
               const unsigned int line) :
               file(file), func(func), line(line)
     {
+        // useful for code tracing in real time
+        // fprintf(stderr, "%s %s() line %d\n", file, func, line);
         callframe c = { file, func, line };
         global_callstack.my_stack.push_back(c);
     }

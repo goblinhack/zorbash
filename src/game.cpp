@@ -25,7 +25,6 @@ void game_fini (void)
 
     while (game.state.map.all_things.size()) {
         auto iter = game.state.map.all_things.begin();
-	game.state.map.all_things.erase(iter);
         delete iter->second;
     }
 }
