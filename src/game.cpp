@@ -111,8 +111,30 @@ static void game_place_floor (class Dungeon *d,
             if (!d->is_floor_at(x, y)) {
                 continue;
             }
-            if (d->get_grid_depth_at(x, y) != depth) {
-                continue;
+
+            /*
+             * Not all walls fill the entire space so put a floor beneath
+             * them or they look odd.
+             */
+            if (d->is_wall_at(x, y + 1)) {
+                if (!game.state.map.is_floor[x][y + 1]) {
+                    thing_new(what, fpoint(x, y + 1));
+                }
+            }
+            if (d->is_wall_at(x, y - 1)) {
+                if (!game.state.map.is_floor[x][y - 1]) {
+                    thing_new(what, fpoint(x, y - 1));
+                }
+            }
+            if (d->is_wall_at(x + 1, y)) {
+                if (!game.state.map.is_floor[x + 1][y]) {
+                    thing_new(what, fpoint(x + 1, y));
+                }
+            }
+            if (d->is_wall_at(x - 1, y)) {
+                if (!game.state.map.is_floor[x - 1][y]) {
+                    thing_new(what, fpoint(x - 1, y));
+                }
             }
 
             (void) thing_new(what, fpoint(x, y));
@@ -228,9 +250,7 @@ void game_display (void)
                                    GRID_WIDTH, GRID_HEIGHT, seed);
 
         LOG("dungeon: create blocks");
-        game_place_floor(dungeon, "floor1", 1);
-        game_place_floor(dungeon, "floor2", 2);
-        game_place_floor(dungeon, "floor3", 3);
+
         game_place_entrance(dungeon, "entrance1");
         game_place_exit(dungeon, "exit1");
 
@@ -266,6 +286,14 @@ void game_display (void)
         game_place_lights(dungeon, "entrance1", 4, 2, 1, tries);
 
         game_ramaining_place_blocks(dungeon, "wall1");
+
+        game_place_floor(dungeon, "floor1", 1);
+        game_place_floor(dungeon, "floor2", 2);
+        game_place_floor(dungeon, "floor3", 3);
+        game_place_floor(dungeon, "floor4", 4);
+        game_place_floor(dungeon, "floor5", 5);
+        game_place_floor(dungeon, "floor6", 6);
+        game_place_floor(dungeon, "floor6", 0);
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
