@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
+ * Copyright goblinhack@gmail.com
  * See the README file for license info.
  */
 
@@ -22,8 +21,8 @@
  */
 #define GRID_WIDTH                  7
 #define GRID_HEIGHT                 7
-#define ROOM_WIDTH                  9
-#define ROOM_HEIGHT                 9
+#define ROOM_WIDTH                  13
+#define ROOM_HEIGHT                 13
 
 /*
  * Dungeon has a pad of tiles around the edges

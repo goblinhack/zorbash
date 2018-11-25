@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_main.h"
@@ -10,7 +9,7 @@
 #include "my_range.h"
 #include <bitset>
 
-static int debug_enabled = false;
+static int debug_enabled = true;
 
 std::vector<Roomp> Room::all_rooms;
 
@@ -27,6 +26,9 @@ Roomp Room::create_h_flip (void)
 
     auto r = Room::room_new();
 
+    /*
+     * Flip the room chars
+     */
     for (auto z = 0; z < MAP_DEPTH; z++) {
         for (auto y = 0; y < height; y++) {
             std::string s;
@@ -36,10 +38,24 @@ Roomp Room::create_h_flip (void)
         }
     }
 
-    r->has_exit_up    = has_exit_up;
-    r->has_exit_down  = has_exit_down;
-    r->has_exit_left  = has_exit_right;
-    r->has_exit_right = has_exit_left;
+    /*
+     * Flip the doors too
+     */
+    auto z = MAP_DEPTH_WALLS; {
+        for (auto y = 0; y < height; y++) {
+            std::string s;
+            for (auto x = 0; x < width; x++) {
+                auto c = r->data[x][y][z];
+                switch (c) {
+                    case Charmap::DOOR_UP:    c = Charmap::DOOR_UP; break;
+                    case Charmap::DOOR_DOWN:  c = Charmap::DOOR_DOWN; break;
+                    case Charmap::DOOR_LEFT:  c = Charmap::DOOR_RIGHT; break;
+                    case Charmap::DOOR_RIGHT: c = Charmap::DOOR_LEFT; break;
+                }
+                r->data[x][y][z] = c;
+            }
+        }
+    }
 
     r->dir_up         = dir_up;
     r->dir_down       = dir_down;
@@ -47,10 +63,10 @@ Roomp Room::create_h_flip (void)
     r->dir_right      = dir_left;
 
     r->is_entrance    = is_entrance;
-    r->is_exit        = is_exit;
     r->is_lock        = is_lock;
     r->is_key         = is_key;
     r->is_secret      = is_secret;
+    r->is_exit        = is_exit;
 
     r->depth          = depth;
 
@@ -65,6 +81,9 @@ Roomp Room::rotate_clockwise (void)
 
     auto r = Room::room_new();
 
+    /*
+     * Rotate the room chars
+     */
     for (auto z = 0; z < MAP_DEPTH; z++) {
         for (auto y = 0; y < height; y++) {
             std::string s;
@@ -74,10 +93,25 @@ Roomp Room::rotate_clockwise (void)
         }
     }
 
-    r->has_exit_up    = has_exit_left;
-    r->has_exit_down  = has_exit_right;
-    r->has_exit_left  = has_exit_down;
-    r->has_exit_right = has_exit_up;
+    /*
+     * Rotate the doors too
+     */
+    auto z = MAP_DEPTH_WALLS; {
+        for (auto y = 0; y < height; y++) {
+            std::string s;
+            for (auto x = 0; x < width; x++) {
+                auto c = r->data[x][y][z];
+                switch (c) {
+                    case Charmap::DOOR_UP:    c = Charmap::DOOR_RIGHT; break;
+                    case Charmap::DOOR_DOWN:  c = Charmap::DOOR_LEFT; break;
+                    case Charmap::DOOR_LEFT:  c = Charmap::DOOR_UP; break;
+                    case Charmap::DOOR_RIGHT: c = Charmap::DOOR_DOWN; break;
+                }
+
+                r->data[x][y][z] = c;
+            }
+        }
+    }
 
     r->dir_up         = dir_left;
     r->dir_down       = dir_right;
@@ -85,10 +119,10 @@ Roomp Room::rotate_clockwise (void)
     r->dir_right      = dir_up;
 
     r->is_entrance    = is_entrance;
-    r->is_exit        = is_exit;
     r->is_lock        = is_lock;
     r->is_key         = is_key;
     r->is_secret      = is_secret;
+    r->is_exit        = is_exit;
 
     r->depth          = depth;
 
@@ -98,58 +132,37 @@ Roomp Room::rotate_clockwise (void)
 }
 
 //
-// Find all door exits from a room
+// Find all doors from a room
 //
-void Room::find_exits (void)
+void Room::find_doors (void)
 {
-    uint32_t wall_bitmap = 0;
-    int x, y = 0;
-    int z = MAP_DEPTH_FLOOR;
+    int z = MAP_DEPTH_WALLS;
 
-    for (wall_bitmap = 0, x = 0, y = 0; x < width; x++) {
-        wall_bitmap = wall_bitmap << 1;
-        if (data[x][y][z] != Charmap::FLOOR) {
-            wall_bitmap |= 1;
-        } else {
-            has_exit_up = true;
+    for (auto x : range<int>(0, width)) {
+        for (auto y : range<int>(0, height)) {
+            if (data[x][y][z] == Charmap::DOOR_UP) {
+                has_door_up = true;
+                door_up_at.push_back(point(x, y));
+            }
+            if (data[x][y][z] == Charmap::DOOR_DOWN) {
+                has_door_down = true;
+                door_down_at.push_back(point(x, y));
+            }
+            if (data[x][y][z] == Charmap::DOOR_LEFT) {
+                has_door_left = true;
+                door_left_at.push_back(point(x, y));
+            }
+            if (data[x][y][z] == Charmap::DOOR_RIGHT) {
+                has_door_right = true;
+                door_right_at.push_back(point(x, y));
+            }
         }
     }
-    up_exits = ~wall_bitmap;
-
-    for (wall_bitmap = 0, x = 0, y = height - 1; x < width; x++) {
-        wall_bitmap = wall_bitmap << 1;
-        if (data[x][y][z] != Charmap::FLOOR) {
-            wall_bitmap |= 1;
-        } else {
-            has_exit_down = true;
-        }
-    }
-    down_exits = ~wall_bitmap;
-
-    for (wall_bitmap = 0, x = 0, y = 0; y < height; y++) {
-        wall_bitmap = wall_bitmap << 1;
-        if (data[x][y][z] != Charmap::FLOOR) {
-            wall_bitmap |= 1;
-        } else {
-            has_exit_left = true;
-        }
-    }
-    left_exits = ~wall_bitmap;
-
-    for (wall_bitmap = 0, x = width - 1, y = 0; y < height; y++) {
-        wall_bitmap = wall_bitmap << 1;
-        if (data[x][y][z] != Charmap::FLOOR) {
-            wall_bitmap |= 1;
-        } else {
-            has_exit_right = true;
-        }
-    }
-    right_exits = ~wall_bitmap;
 }
 
 void Room::finalize (void)
 {
-    find_exits();
+    find_doors();
 
     if (debug_enabled) {
         dump();
@@ -171,19 +184,10 @@ void Room::dump (void)
         }
     }
 
-    LOG("ROOM(%d): width %d height %d", roomno, width, height);
-    auto b = std::bitset<32>(left_exits);
-    LOG("ROOM(%d):   left  exits: %s", roomno, b.to_string().c_str());
-    b = std::bitset<32>(right_exits);
-    LOG("ROOM(%d):   right exits: %s", roomno, b.to_string().c_str());
-    b = std::bitset<32>(up_exits);
-    LOG("ROOM(%d):   up    exits: %s", roomno, b.to_string().c_str());
-    b = std::bitset<32>(down_exits);
-    LOG("ROOM(%d):   down  exits: %s", roomno, b.to_string().c_str());
     LOG("ROOM(%d): direction: up %d down %d left %d right %d",
         roomno, dir_up, dir_down, dir_left, dir_right);
-    LOG("ROOM(%d): exits:     up %d down %d left %d right %d",
-        roomno, has_exit_up, has_exit_down, has_exit_left, has_exit_right);
+    LOG("ROOM(%d): doors:     up %d down %d left %d right %d",
+        roomno, has_door_up, has_door_down, has_door_left, has_door_right);
     for (auto y = 0; y < height; y++) {
         std::string s;
         for (auto x = 0; x < width; x++) {

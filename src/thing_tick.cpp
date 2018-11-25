@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2011-2017 goblinhack@gmail.com
- 
- * See the README file for license info for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_main.h"
@@ -10,9 +9,6 @@
 
 void Thing::tick (void)
 {
-    if ((momentum != 0) || (fall_speed != 0)) {
-        /* auto collided = */ slide();
-    }
 }
 
 void thing_tick_all (void)

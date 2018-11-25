@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #ifndef _MY_THING_TILE_H

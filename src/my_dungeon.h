@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_main.h"
@@ -519,7 +518,7 @@ public:
             return;
         }
 
-        LOG("dungeon: seed %u", seed);
+        LOG("dungeon: seed %u (with room depth)", seed);
         for (auto y = 0; y < map_height; y++) {
             std::string s;
             for (auto x = 0; x < map_width; x++) {
@@ -534,7 +533,8 @@ public:
                     auto c = cr.c;
 
                     if (!c) {
-                        DIE("unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
+                        DIE("unknown map char %c at x %d, y %d, depth %d", 
+                            m, x, y, d);
                     }
 
                     if (!(x % 2) && !(y % 2)) {
@@ -555,6 +555,41 @@ public:
                         }
                     }
                     
+                    s += c;
+                    got_one = true;
+                    break;
+                }
+                if (!got_one) {
+                    s += " ";
+                }
+            }
+            if (s != "") {
+                LOG("[%s]", s.c_str());
+            }
+        }
+
+        /*
+         * Pass 2 without room depths
+         */
+        LOG("dungeon: seed %u (more readable version)", seed);
+        for (auto y = 0; y < map_height; y++) {
+            std::string s;
+            for (auto x = 0; x < map_width; x++) {
+                bool got_one = false;
+                for (auto d = map_depth - 1; d >= 0; d--) {
+                    if (!is_anything_at(x, y, d)) {
+                        continue;
+                    }
+
+                    auto m = getc(x, y, d);
+                    auto cr = Charmap::all_charmaps[m];
+                    auto c = cr.c;
+
+                    if (!c) {
+                        DIE("unknown map char %c at x %d, y %d, depth %d", 
+                            m, x, y, d);
+                    }
+
                     s += c;
                     got_one = true;
                     break;
@@ -613,16 +648,16 @@ public:
 
     bool room_is_a_candidate (const Node *n, Roomp r)
     {
-        if (n->has_exit_up != r->has_exit_up) { 
+        if (n->has_door_up != r->has_door_up) { 
             return (false); 
         }
-        if (n->has_exit_down != r->has_exit_down) { 
+        if (n->has_door_down != r->has_door_down) { 
             return (false); 
         }
-        if (n->has_exit_left != r->has_exit_left) { 
+        if (n->has_door_left != r->has_door_left) { 
             return (false); 
         }
-        if (n->has_exit_right != r->has_exit_right) { 
+        if (n->has_door_right != r->has_door_right) { 
             return (false); 
         }
         if (n->dir_left != r->dir_left) {
@@ -661,29 +696,29 @@ public:
     bool room_is_a_candidate_less_restrictive (const Node *n, Roomp r)
     {
         if (!n->is_secret) {
-            if (n->has_exit_up != r->has_exit_up) { 
+            if (n->has_door_up != r->has_door_up) { 
                 return (false); 
             }
-            if (n->has_exit_down != r->has_exit_down) { 
+            if (n->has_door_down != r->has_door_down) { 
                 return (false); 
             }
-            if (n->has_exit_left != r->has_exit_left) { 
+            if (n->has_door_left != r->has_door_left) { 
                 return (false); 
             }
-            if (n->has_exit_right != r->has_exit_right) { 
+            if (n->has_door_right != r->has_door_right) { 
                 return (false); 
             }
         } else {
-            if (n->has_secret_exit_up != r->has_exit_up) { 
+            if (n->has_secret_exit_up != r->has_door_up) { 
                 return (false); 
             }
-            if (n->has_secret_exit_down != r->has_exit_down) { 
+            if (n->has_secret_exit_down != r->has_door_down) { 
                 return (false); 
             }
-            if (n->has_secret_exit_left != r->has_exit_left) { 
+            if (n->has_secret_exit_left != r->has_door_left) { 
                 return (false); 
             }
-            if (n->has_secret_exit_right != r->has_exit_right) { 
+            if (n->has_secret_exit_right != r->has_door_right) { 
                 return (false); 
             }
         }
@@ -716,16 +751,16 @@ public:
 
     bool room_is_a_candidate_less_restrictive2 (const Node *n, Roomp r)
     {
-        if (n->has_exit_up != r->has_exit_up) { 
+        if (n->has_door_up != r->has_door_up) { 
             return (false); 
         }
-        if (n->has_exit_down != r->has_exit_down) { 
+        if (n->has_door_down != r->has_door_down) { 
             return (false); 
         }
-        if (n->has_exit_left != r->has_exit_left) { 
+        if (n->has_door_left != r->has_door_left) { 
             return (false); 
         }
-        if (n->has_exit_right != r->has_exit_right) { 
+        if (n->has_door_right != r->has_door_right) { 
             return (false); 
         }
         if (r->dir_left) {
@@ -755,35 +790,6 @@ public:
         return (true);
     }
 
-    bool room_fits_existing_rooms (Grid *g, Node *n, Roomp r, int x, int y)
-    {
-        if (n->has_exit_down) {
-            auto o = g->node_rooms[x][y+1];
-            if (o && !(r->down_exits & o->up_exits)) {
-                return (false);
-            }
-        }
-        if (n->has_exit_up) {
-            auto o = g->node_rooms[x][y-1];
-            if (o && !(r->up_exits & o->down_exits)) {
-                return (false);
-            }
-        }
-        if (n->has_exit_right) {
-            auto o = g->node_rooms[x+1][y];
-            if (o && !(r->right_exits & o->left_exits)) {
-                return (false);
-            }
-        }
-        if (n->has_exit_left) {
-            auto o = g->node_rooms[x-1][y];
-            if (o && !(r->left_exits & o->right_exits)) {
-                return (false);
-            }
-        }
-        return (true);
-    }
-
     bool solve (int x, int y, Grid *g)
     {
         auto n = nodes->getn(x, y);
@@ -803,9 +809,6 @@ public:
                 continue;
             }
 
-            if (!room_fits_existing_rooms(g, n, r, x, y)) {
-                continue;
-            }
             candidates.push_back(r);
         }
 
@@ -816,9 +819,6 @@ public:
                     continue;
                 }
 
-                if (!room_fits_existing_rooms(g, n, r, x, y)) {
-                    continue;
-                }
                 candidates.push_back(r);
             }
 
@@ -829,16 +829,14 @@ public:
                         continue;
                     }
 
-                    if (!room_fits_existing_rooms(g, n, r, x, y)) {
-                        continue;
-                    }
                     candidates.push_back(r);
                 }
 
                 ncandidates = candidates.size();
                 if (!ncandidates) {
                     rooms_print_all(g);
-                    DIE("no grid room candidates at %d %d",x, y);
+                    dump();
+                    DIE("no grid room candidates at %d %d", x, y);
                     return (false);
                 }
             }
@@ -847,25 +845,25 @@ public:
         auto r = candidates[random_range(0, ncandidates)];
         g->node_rooms[x][y] = r;
         
-        if (n->has_exit_down) {
+        if (n->has_door_down) {
             Grid old = *g;
             if (!solve(x, y+1, g)) {
                 *g = old;
             }
         }
-        if (n->has_exit_up) {
+        if (n->has_door_up) {
             Grid old = *g;
             if (!solve(x, y-1, g)) {
                 *g = old;
             }
         }
-        if (n->has_exit_right) {
+        if (n->has_door_right) {
             Grid old = *g;
             if (!solve(x+1, y, g)) {
                 *g = old;
             }
         }
-        if (n->has_exit_left) {
+        if (n->has_door_left) {
             Grid old = *g;
             if (!solve(x-1, y, g)) {
                 *g = old;

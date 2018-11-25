@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_main.h"
@@ -65,7 +64,7 @@ static void thing_map_scroll_follow_player (void)
     if (dy > 4) {
         game.state.map_wanted_at.y++;
     }
-    if (dy < 2) {
+    if (dy < 4) {
         game.state.map_wanted_at.y--;
     }
 }
@@ -389,6 +388,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     blit_flush();
 }
 
+#if 0
 static void thing_blit_things_pass2 (int minx, int miny, int minz,
                                      int maxx, int maxy, int maxz)
 {
@@ -436,6 +436,7 @@ static void thing_blit_things_pass2 (int minx, int miny, int minz,
     }
     blit_flush();
 }
+#endif
 
 static void thing_blit_editor (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
@@ -523,7 +524,7 @@ void thing_render_all (void)
         blit_fbo(FBO_LIGHT_MERGED);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        thing_blit_things_pass2(minx, miny, minz, maxx, maxy, maxz);
+//        thing_blit_things_pass2(minx, miny, minz, maxx, maxy, maxz);
     } else {
         blit_fbo_bind(FBO_MAIN);
 

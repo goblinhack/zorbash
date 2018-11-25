@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2011-2017 goblinhack@gmail.com
- *
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_main.h"
@@ -384,24 +383,6 @@ void thing_possible_hit_do (Thingp hitter)
          */
         if (tp_is_weapon_carry_anim(cand.target->tp)) {
             continue;
-        }
-
-        /*
-         * If you fall and land behind something, it's safe.
-         */
-        if (cand.target->fall_speed) {
-            auto v = hitter->get_velocity();
-            if (v.x > 0) {
-                if (cand.target->at.x < hitter->at.x) {
-                    continue;
-                }
-            }
-
-            if (v.x < 0) {
-                if (cand.target->at.x > hitter->at.x) {
-                    continue;
-                }
-            }
         }
 
         if (!best) {
