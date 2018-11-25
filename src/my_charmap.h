@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #pragma once
@@ -14,7 +13,10 @@ public:
         SPACE           = ' ',
         CORRIDOR        = '#',
         SECRET_DOOR     = 'd',
-        DOOR            = 'D',
+        DOOR_UP         = '^',
+        DOOR_DOWN       = 'v',
+        DOOR_LEFT       = '<',
+        DOOR_RIGHT      = '>',
         WALL            = 'x',
         FLOOR           = '.',
         SECRET_CORRIDOR = '?',

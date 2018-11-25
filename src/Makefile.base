@@ -29,7 +29,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/map.o 		        \
     $(OBJDIR)/pcg_basic.o 		\
     $(OBJDIR)/player.o 			\
-    $(OBJDIR)/point.o 			\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_room.o 		\
     $(OBJDIR)/py_sdl.o 			\

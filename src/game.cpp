@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- * See the README file for license info for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_game.h"
@@ -111,6 +111,12 @@ static void game_place_floor (class Dungeon *d,
                 continue;
             }
 
+            if (depth) {
+                if (depth != d->get_grid_depth_at(x, y)) {
+                    continue;
+                }
+            }
+
             /*
              * Not all walls fill the entire space so put a floor beneath
              * them or they look odd.
@@ -200,7 +206,7 @@ static void game_place_lights (class Dungeon *d,
             continue;
         }
 
-        if (random_range(0, 100) > 90) {
+        if (random_range(0, 100) > 30) {
             continue;
         }
 

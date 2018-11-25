@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 //
@@ -11,18 +10,18 @@
 
 class Node {
 public:
- /*
+    /*
      * Nodes have a depth number, optional key, start and exit and corridors
      * to adjoining depths. Depth increases as we get closer to the exit.
      */
     int depth                                 {0};
- /*
+    /*
      * pass 1 is the main dungeon
      * pass 2 are secret levels
      */
     int pass                                  {0};
     int x, y;
- /*
+    /*
      * Not necessarily an actual key or lock, but something allowing access
      * to the other node. Only one key per node depth.
      */
@@ -32,10 +31,10 @@ public:
     bool is_entrance                          {false};
     bool is_exit                              {false};
     bool on_critical_path                     {false};
-    bool has_exit_up                          {false};
-    bool has_exit_down                        {false};
-    bool has_exit_left                        {false};
-    bool has_exit_right                       {false};
+    bool has_door_up                          {false};
+    bool has_door_down                        {false};
+    bool has_door_left                        {false};
+    bool has_door_right                       {false};
     bool has_secret_exit_up                   {false};
     bool has_secret_exit_down                 {false};
     bool has_secret_exit_left                 {false};
@@ -45,7 +44,7 @@ public:
     bool dir_left                             {false};
     bool dir_right                            {false};
 
- /*
+    /*
      * Update init_nodes on changes
      */
     bool has_path (void)
@@ -53,45 +52,45 @@ public:
         return (dir_down || dir_up || dir_left || dir_right);
     }
     
-    void set_has_exit_up (bool v)
+    void set_has_door_up (bool v)
     {
-        has_exit_up = v;
+        has_door_up = v;
         has_secret_exit_up = false;
     }
-    void set_has_exit_down (bool v)
+    void set_has_door_down (bool v)
     {
-        has_exit_down = v;
+        has_door_down = v;
         has_secret_exit_down = false;
     }
-    void set_has_exit_right (bool v)
+    void set_has_door_right (bool v)
     {
-        has_exit_right = v;
+        has_door_right = v;
         has_secret_exit_right = false;
     }
-    void set_has_exit_left (bool v)
+    void set_has_door_left (bool v)
     {
-        has_exit_left = v;
+        has_door_left = v;
         has_secret_exit_left = false;
     }
     void set_has_secret_exit_up (bool v)
     {
         has_secret_exit_up = v;
-        has_exit_up = false;
+        has_door_up = false;
     }
     void set_has_secret_exit_down (bool v)
     {
         has_secret_exit_down = v;
-        has_exit_down = false;
+        has_door_down = false;
     }
     void set_has_secret_exit_right (bool v)
     {
         has_secret_exit_right = v;
-        has_exit_right = false;
+        has_door_right = false;
     }
     void set_has_secret_exit_left (bool v)
     {
         has_secret_exit_left = v;
-        has_exit_left = false;
+        has_door_left = false;
     }
 };
 
@@ -103,7 +102,7 @@ public:
     int max_depth                             {0};
     int max_vdepth                            {0};
 
- /*
+    /*
      * Water, rocks etc...
      */
     int depth_obstacle                        {-1};

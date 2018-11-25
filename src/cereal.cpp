@@ -1,3 +1,8 @@
+/*
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
+ */
+
 #include <cereal/types/map.hpp>
 #include <cereal/archives/json.hpp>
 #include <fstream>

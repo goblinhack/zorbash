@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_main.h"
@@ -67,12 +66,13 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         DIE("map_load_room, missing floor data");
     }
 
-    int room_data_lines = PyList_Size(py_room_data);
-    if (room_data_lines % ROOM_HEIGHT) {
-        DIE("room height needs to be %d", ROOM_HEIGHT);
+    int room_data_elems = PyList_Size(py_room_data);
+    if (room_data_elems % ROOM_HEIGHT) {
+        DIE("room elems needs to be evenly dividable by room height %d, got %d elems",
+            (int) ROOM_HEIGHT, (int) PyList_Size(py_room_data));
     }
 
-    int rooms_across = room_data_lines / ROOM_HEIGHT;
+    int rooms_across = room_data_elems / ROOM_HEIGHT;
 
     for (auto n=0; n < rooms_across; n++) {
         auto r = Room::room_new();

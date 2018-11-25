@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_main.h"
@@ -36,7 +36,22 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_dusty             = true;
 
-    char_index              = Charmap::DOOR;
+    char_index              = Charmap::DOOR_UP;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_door              = true;
+
+    char_index              = Charmap::DOOR_DOWN;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_door              = true;
+
+    char_index              = Charmap::DOOR_LEFT;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_door              = true;
+
+    char_index              = Charmap::DOOR_RIGHT;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_door              = true;

@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #include "my_charmap.h"
@@ -28,7 +27,7 @@ public:
         oldptr(this);
     }
 
- /*
+    /*
      * Unique per room.
      */
     uint32_t                roomno {0};
@@ -37,20 +36,16 @@ public:
 
     char                    data[ROOM_WIDTH][ROOM_HEIGHT][MAP_DEPTH] = {{{' '}}};
     
- /*
-     * A bitmap of possible exits.
-     */
-    uint16_t                left_exits;
-    uint16_t                right_exits;
-    uint16_t                up_exits;
-    uint16_t                down_exits;
-
-    bool                    has_exit_up    {false};
-    bool                    has_exit_down  {false};
-    bool                    has_exit_left  {false};
-    bool                    has_exit_right {false};
+    bool                    has_door_up    {false};
+    bool                    has_door_down  {false};
+    bool                    has_door_left  {false};
+    bool                    has_door_right {false};
+    std::list<point>        door_up_at;
+    std::list<point>        door_down_at;
+    std::list<point>        door_right_at;
+    std::list<point>        door_left_at;
     
- /*
+    /*
      * Direction is the flow of the level, like can a player only go one
      * way and not return
      */
@@ -67,7 +62,7 @@ public:
 
     uint8_t                 depth {0};
 
- /*
+    /*
      * Final placement of this room in the dungeon. 
      */
     bool                    placed {false};
@@ -76,7 +71,7 @@ public:
 
     Roomp create_h_flip(void);
     Roomp rotate_clockwise(void);
-    void find_exits(void);
+    void find_doors(void);
     void finalize(void);
     void dump(void);
 };

@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- 
- * See the LICENSE file.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 #pragma once
@@ -87,16 +86,6 @@ public:
     fpoint             last_at;
 
     /*
-     * Very poor mans i.e. mine, physics.
-     */
-    fpoint             normal_velocity;
-    fpoint             tangent_velocity;
-    double             fall_speed {0};
-    double             jump_speed {0};
-    double             momentum {0};
-    double             rot {0};
-
-    /*
      * Pointer to common settings for this thing.
      */
     Tpp                tp {nullptr};
@@ -111,7 +100,6 @@ public:
      */
     uint32_t           flip_start_ms {};
     uint32_t           last_move_ms {};
-    uint32_t           last_move_request_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
 
@@ -121,6 +109,8 @@ public:
     uint32_t           timestamp_born {};
     uint32_t           timestamp_last_i_was_hit {};
     uint32_t           timestamp_last_attacked {};
+    uint32_t           timestamp_move_start {};
+    uint32_t           timestamp_move_end {};
 
     /*
      * Tileinfo may be null if this thing does not need animation.

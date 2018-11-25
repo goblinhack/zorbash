@@ -1,6 +1,6 @@
 /*
- * Copyright (C) 2018 goblinhack@gmail.com
- * See the LICENSE file for license.
+ * Copyright goblinhack@gmail.com
+ * See the README file for license info.
  */
 
 //
@@ -326,19 +326,19 @@ void Nodes::dump (void)
             auto ox = (x * step) + center;
             auto oy = (y * step) + center;
             auto node = getn(x, y);
-            if (node->has_exit_down) {
+            if (node->has_door_down) {
                 out[oy+1][ox] = '|';
                 out[oy+2][ox] = '|';
             }
-            if (node->has_exit_up) {
+            if (node->has_door_up) {
                 out[oy-1][ox] = '|';
                 out[oy-2][ox] = '|';
             }
-            if (node->has_exit_left) {
+            if (node->has_door_left) {
                 out[oy][ox-1] = '-';
                 out[oy][ox-2] = '-';
             }
-            if (node->has_exit_right) {
+            if (node->has_door_right) {
                 out[oy][ox+1] = '-';
                 out[oy][ox+2] = '-';
             }
@@ -423,22 +423,22 @@ void Nodes::dump (void)
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
-            if (node->has_exit_down) {
+            if (node->has_door_down) {
                 if (y == grid_height - 1) {
                     DIE("node %d,%d has exit down off end of map", x, y);
                 }
             }
-            if (node->has_exit_right) {
+            if (node->has_door_right) {
                 if (x == grid_width - 1) {
                     DIE("node %d,%d has exit right off end of map", x, y);
                 }
             }
-            if (node->has_exit_left) {
+            if (node->has_door_left) {
                 if (x == 0) {
                     DIE("node %d,%d has exit left off end of map", x, y);
                 }
             }
-            if (node->has_exit_up) {
+            if (node->has_door_up) {
                 if (y == 0) {
                     DIE("node %d,%d has exit up off end of map", x, y);
                 }
@@ -469,25 +469,25 @@ void Nodes::dump (void)
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
-            if (node->has_exit_down) {
+            if (node->has_door_down) {
                 auto o = getn(x, y + 1);
                 if (!o || !o->depth) {
                     DIE("node %d,%d has exit down but no node exists", x, y);
                 }
             }
-            if (node->has_exit_right) {
+            if (node->has_door_right) {
                 auto o = getn(x + 1, y);
                 if (!o || !o->depth) {
                     DIE("node %d,%d has exit right but no node exists", x, y);
                 }
             }
-            if (node->has_exit_left) {
+            if (node->has_door_left) {
                 auto o = getn(x - 1, y);
                 if (!o || !o->depth) {
                     DIE("node %d,%d has exit left but no node exists", x, y);
                 }
             }
-            if (node->has_exit_up) {
+            if (node->has_door_up) {
                 auto o = getn(x, y - 1);
                 if (!o || !o->depth) {
                     DIE("node %d,%d has exit up but no node exists", x, y);
@@ -523,25 +523,25 @@ void Nodes::dump (void)
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
-            if (node->has_exit_down) {
+            if (node->has_door_down) {
                 auto o = getn(x, y + 1);
                 if (o->depth == depth_obstacle) {
                     DIE("node %d,%d has exit down but that node is an obstacle", x, y);
                 }
             }
-            if (node->has_exit_right) {
+            if (node->has_door_right) {
                 auto o = getn(x + 1, y);
                 if (o->depth == depth_obstacle) {
                     DIE("node %d,%d has exit right but that node is an obstacle", x, y);
                 }
             }
-            if (node->has_exit_left) {
+            if (node->has_door_left) {
                 auto o = getn(x - 1, y);
                 if (o->depth == depth_obstacle) {
                     DIE("node %d,%d has exit left but that node is an obstacle", x, y);
                 }
             }
-            if (node->has_exit_up) {
+            if (node->has_door_up) {
                 auto o = getn(x, y - 1);
                 if (o->depth == depth_obstacle) {
                     DIE("node %d,%d has exit up but that node is an obstacle", x, y);
@@ -577,22 +577,22 @@ void Nodes::dump (void)
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
-            if (node->has_exit_down) {
+            if (node->has_door_down) {
                 if (node->has_secret_exit_down) {
                     DIE("node %d,%d has both normal and secret exits down", x, y);
                 }
             }
-            if (node->has_exit_right) {
+            if (node->has_door_right) {
                 if (node->has_secret_exit_right) {
                     DIE("node %d,%d has both normal and secret exits right", x, y);
                 }
             }
-            if (node->has_exit_left) {
+            if (node->has_door_left) {
                 if (node->has_secret_exit_left) {
                     DIE("node %d,%d has both normal and secret exits left", x, y);
                 }
             }
-            if (node->has_exit_up) {
+            if (node->has_door_up) {
                 if (node->has_secret_exit_up) {
                     DIE("node %d,%d has both normal and secret exits up", x, y);
                 }
@@ -696,10 +696,10 @@ void Nodes::init_nodes (void)
             n->dir_down                              = false;
             n->dir_left                              = false;
             n->dir_right                             = false;
-            n->set_has_exit_up(false);
-            n->set_has_exit_down(false);
-            n->set_has_exit_left(false);
-            n->set_has_exit_right(false);
+            n->set_has_door_up(false);
+            n->set_has_door_down(false);
+            n->set_has_door_left(false);
+            n->set_has_door_right(false);
             n->set_has_secret_exit_up(false);
             n->set_has_secret_exit_down(false);
             n->set_has_secret_exit_left(false);
@@ -837,23 +837,23 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                     s.push_back(point(x, y));
 
                     if (dx == 1) {
-                        o->set_has_exit_right(true);
-                        n->set_has_exit_left(true);
+                        o->set_has_door_right(true);
+                        n->set_has_door_left(true);
                     }
 
                     if (dx == -1) {
-                        o->set_has_exit_left(true);
-                        n->set_has_exit_right(true);
+                        o->set_has_door_left(true);
+                        n->set_has_door_right(true);
                     }
 
                     if (dy == 1) {
-                        o->set_has_exit_down(true);
-                        n->set_has_exit_up(true);
+                        o->set_has_door_down(true);
+                        n->set_has_door_up(true);
                     }
 
                     if (dy == -1) {
-                        o->set_has_exit_up(true);
-                        n->set_has_exit_down(true);
+                        o->set_has_door_up(true);
+                        n->set_has_door_down(true);
                     }
                     break;
                 }
@@ -960,14 +960,14 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                         auto f = getn(x + 1, y);
                         if (node_is_free(f)) {
                             s.push_back(point(x + 1, y    )); 
-                            n->set_has_exit_right(true);
+                            n->set_has_door_right(true);
                         }
                     }
                     if (x > 0){
                         auto f = getn(x - 1, y);
                         if (node_is_free(f)) {
                             s.push_back(point(x - 1, y    ));
-                            n->set_has_exit_left(true);
+                            n->set_has_door_left(true);
                         }
                     }
 
@@ -976,7 +976,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                     auto f = getn(x, y + 1);
                     if (node_is_free(f)) {
                         s.push_back(point(x, y + 1));
-                        n->set_has_exit_down(true);
+                        n->set_has_door_down(true);
                     }
                 }
             }
@@ -987,7 +987,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                         auto f = getn(x, y - 1);
                         if (node_is_free(f)) {
                             s.push_back(point(x, y - 1));
-                            n->set_has_exit_up(true);
+                            n->set_has_door_up(true);
                         }
                     }
                 }
@@ -1019,16 +1019,16 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             s.push_back(point(x + dx, y + dy));
 
             if (dx == 1) {
-                old->set_has_exit_right(true);
+                old->set_has_door_right(true);
             }
             if (dx == -1) {
-                old->set_has_exit_left(true);
+                old->set_has_door_left(true);
             }
             if (dy == 1) {
-                old->set_has_exit_down(true);
+                old->set_has_door_down(true);
             }
             if (dy == -1) {
-                old->set_has_exit_up(true);
+                old->set_has_door_up(true);
             }
         }
 
@@ -1053,39 +1053,39 @@ void Nodes::join_nodes_of_same_depth (int depth, int pass)
                 continue;
             }
 
-            if (o->has_exit_right) {
+            if (o->has_door_right) {
                 auto n = getn(x + 1, y);
                 if (n && (n->pass == pass) && (n->depth == depth)) {
-                    n->set_has_exit_left(true);
+                    n->set_has_door_left(true);
                 } else {
-                    o->set_has_exit_right(false);
+                    o->set_has_door_right(false);
                 }
             }
 
-            if (o->has_exit_left) {
+            if (o->has_door_left) {
                 auto n = getn(x - 1, y);
                 if (n && (n->pass == pass) && (n->depth == depth)) {
-                    n->set_has_exit_right(true);
+                    n->set_has_door_right(true);
                 } else {
-                    o->set_has_exit_left(false);
+                    o->set_has_door_left(false);
                 }
             }
 
-            if (o->has_exit_down) {
+            if (o->has_door_down) {
                 auto n = getn(x, y + 1);
                 if (n && (n->pass == pass) && (n->depth == depth)) {
-                    n->set_has_exit_up(true);
+                    n->set_has_door_up(true);
                 } else {
-                    o->set_has_exit_down(false);
+                    o->set_has_door_down(false);
                 }
             }
 
-            if (o->has_exit_up) {
+            if (o->has_door_up) {
                 auto n = getn(x, y - 1);
                 if (n && (n->pass == pass) && (n->depth == depth)) {
-                    n->set_has_exit_down(true);
+                    n->set_has_door_down(true);
                 } else {
-                    o->set_has_exit_up(false);
+                    o->set_has_door_up(false);
                 }
             }
         }
@@ -1168,23 +1168,23 @@ void Nodes::join_depth_to_next_depth (int depth, int pass)
         }
 
         if (dx == 1) {
-            o->set_has_exit_right(true);
-            n->set_has_exit_left(true);
+            o->set_has_door_right(true);
+            n->set_has_door_left(true);
         }
 
         if (dx == -1) {
-            o->set_has_exit_left(true);
-            n->set_has_exit_right(true);
+            o->set_has_door_left(true);
+            n->set_has_door_right(true);
         }
 
         if (dy == 1) {
-            o->set_has_exit_down(true);
-            n->set_has_exit_up(true);
+            o->set_has_door_down(true);
+            n->set_has_door_up(true);
         }
 
         if (dy == -1) {
-            o->set_has_exit_up(true);
-            n->set_has_exit_down(true);
+            o->set_has_door_up(true);
+            n->set_has_door_down(true);
         }
     }
 }
@@ -1333,22 +1333,22 @@ bool Nodes::place_lock (int depth, int pass)
 
             auto n = getn(x + 1, y);
             if (n && (n->on_critical_path) && (n->pass == pass) && (n->depth == depth - 1) &&
-                o->has_exit_right) {
+                o->has_door_right) {
                 s.push_back(point(x, y));
             }
             n = getn(x - 1, y);
             if (n && (n->on_critical_path) && (n->pass == pass) && (n->depth == depth - 1) &&
-                o->has_exit_left) {
+                o->has_door_left) {
                 s.push_back(point(x, y));
             }
             n = getn(x, y - 1);
             if (n && (n->on_critical_path) && (n->pass == pass) && (n->depth == depth - 1) &&
-                o->has_exit_up) {
+                o->has_door_up) {
                 s.push_back(point(x, y));
             }
             n = getn(x, y + 1);
             if (n && (n->on_critical_path) && (n->pass == pass) && (n->depth == depth - 1) &&
-                o->has_exit_down) {
+                o->has_door_down) {
                 s.push_back(point(x, y));
             }
         }
@@ -1386,34 +1386,34 @@ void Nodes::hide_other_locks (int depth, int pass)
 
             auto n = getn(x + 1, y);
             if (n && (n->pass == pass) && (n->depth == depth - 1) &&
-                o->has_exit_right) {
-                o->set_has_exit_right(false);
+                o->has_door_right) {
+                o->set_has_door_right(false);
                 o->set_has_secret_exit_right(true);
-                n->set_has_exit_left(false);
+                n->set_has_door_left(false);
                 n->set_has_secret_exit_left(true);
             }
             n = getn(x - 1, y);
             if (n && (n->pass == pass) && (n->depth == depth - 1) &&
-                o->has_exit_left) {
-                o->set_has_exit_left(false);
+                o->has_door_left) {
+                o->set_has_door_left(false);
                 o->set_has_secret_exit_left(true);
-                n->set_has_exit_right(false);
+                n->set_has_door_right(false);
                 n->set_has_secret_exit_right(true);
             }
             n = getn(x, y - 1);
             if (n && (n->pass == pass) && (n->depth == depth - 1) &&
-                o->has_exit_up) {
-                o->set_has_exit_up(false);
+                o->has_door_up) {
+                o->set_has_door_up(false);
                 o->set_has_secret_exit_up(true);
-                n->set_has_exit_down(false);
+                n->set_has_door_down(false);
                 n->set_has_secret_exit_down(true);
             }
             n = getn(x, y + 1);
             if (n && (n->pass == pass) && (n->depth == depth - 1) &&
-                o->has_exit_down) {
-                o->set_has_exit_down(false);
+                o->has_door_down) {
+                o->set_has_door_down(false);
                 o->set_has_secret_exit_down(true);
-                n->set_has_exit_up(false);
+                n->set_has_door_up(false);
                 n->set_has_secret_exit_up(true);
             }
         }
@@ -1556,28 +1556,28 @@ void Nodes::remove_stubs (void)
         for (auto x = 0; x < grid_width; x++) {
             auto node = getn(x, y);
 
-            if (node->has_exit_down) {
+            if (node->has_door_down) {
                 auto o = getn(x, y + 1);
-                if (!o->has_exit_up) {
-                    node->set_has_exit_down(false);
+                if (!o->has_door_up) {
+                    node->set_has_door_down(false);
                 }
             }
-            if (node->has_exit_up) {
+            if (node->has_door_up) {
                 auto o = getn(x, y - 1);
-                if (!o->has_exit_down) {
-                    node->set_has_exit_up(false);
+                if (!o->has_door_down) {
+                    node->set_has_door_up(false);
                 }
             }
-            if (node->has_exit_right) {
+            if (node->has_door_right) {
                 auto o = getn(x + 1, y);
-                if (!o->has_exit_left) {
-                    node->set_has_exit_right(false);
+                if (!o->has_door_left) {
+                    node->set_has_door_right(false);
                 }
             }
-            if (node->has_exit_left) {
+            if (node->has_door_left) {
                 auto o = getn(x - 1, y);
-                if (!o->has_exit_right) {
-                    node->set_has_exit_left(false);
+                if (!o->has_door_right) {
+                    node->set_has_door_left(false);
                 }
             }
             if (node->has_secret_exit_down) {
@@ -1683,16 +1683,16 @@ bool Nodes::create_path_to_exit (int pass)
                 auto X = (x * 2) + 1;
                 auto Y = (y * 2) + 1;
                 if (n && node_is_a_room(n)) {
-                    if (n->has_exit_up || n->has_secret_exit_up) {
+                    if (n->has_door_up || n->has_secret_exit_up) {
                         d.val[X][Y-1] = DMAP_IS_PASSABLE;
                     }
-                    if (n->has_exit_down || n->has_secret_exit_down) {
+                    if (n->has_door_down || n->has_secret_exit_down) {
                         d.val[X][Y+1] = DMAP_IS_PASSABLE;
                     }
-                    if (n->has_exit_right || n->has_secret_exit_right) {
+                    if (n->has_door_right || n->has_secret_exit_right) {
                         d.val[X+1][Y] = DMAP_IS_PASSABLE;
                     }
-                    if (n->has_exit_left || n->has_secret_exit_left) {
+                    if (n->has_door_left || n->has_secret_exit_left) {
                         d.val[X-1][Y] = DMAP_IS_PASSABLE;
                     }
                     d.val[X][Y] = DMAP_IS_PASSABLE;
@@ -1708,16 +1708,16 @@ bool Nodes::create_path_to_exit (int pass)
                 auto X = (x * 2) + 1;
                 auto Y = (y * 2) + 1;
                 if (n && node_is_a_room(n)) {
-                    if (n->has_exit_up) {
+                    if (n->has_door_up) {
                         d.val[X][Y-1] = DMAP_IS_PASSABLE;
                     }
-                    if (n->has_exit_down) {
+                    if (n->has_door_down) {
                         d.val[X][Y+1] = DMAP_IS_PASSABLE;
                     }
-                    if (n->has_exit_right) {
+                    if (n->has_door_right) {
                         d.val[X+1][Y] = DMAP_IS_PASSABLE;
                     }
-                    if (n->has_exit_left) {
+                    if (n->has_door_left) {
                         d.val[X-1][Y] = DMAP_IS_PASSABLE;
                     }
                     d.val[X][Y] = DMAP_IS_PASSABLE;
@@ -1858,16 +1858,16 @@ void Nodes::create_path_lock_to_key (int depth)
             auto Y = (y * 2) + 1;
             if (n && (n->pass == 1) && 
                 (n->depth == depth) && node_is_a_room(n)) {
-                if (n->has_exit_up) {
+                if (n->has_door_up) {
                     d.val[X][Y-1] = DMAP_IS_PASSABLE;
                 }
-                if (n->has_exit_down) {
+                if (n->has_door_down) {
                     d.val[X][Y+1] = DMAP_IS_PASSABLE;
                 }
-                if (n->has_exit_right) {
+                if (n->has_door_right) {
                     d.val[X+1][Y] = DMAP_IS_PASSABLE;
                 }
-                if (n->has_exit_left) {
+                if (n->has_door_left) {
                     d.val[X-1][Y] = DMAP_IS_PASSABLE;
                 }
                 d.val[X][Y] = DMAP_IS_PASSABLE;
@@ -1977,16 +1977,16 @@ void Nodes::make_paths_off_critical_path_reachable (void)
             auto Y = (y * 2) + 1;
 
             if (node_is_a_room(n)) {
-                if (n->has_exit_up) {
+                if (n->has_door_up) {
                     d.val[X][Y-1] = DMAP_IS_PASSABLE;
                 }
-                if (n->has_exit_down) {
+                if (n->has_door_down) {
                     d.val[X][Y+1] = DMAP_IS_PASSABLE;
                 }
-                if (n->has_exit_right) {
+                if (n->has_door_right) {
                     d.val[X+1][Y] = DMAP_IS_PASSABLE;
                 }
-                if (n->has_exit_left) {
+                if (n->has_door_left) {
                     d.val[X-1][Y] = DMAP_IS_PASSABLE;
                 }
                 d.val[X][Y] = DMAP_IS_PASSABLE;
@@ -2047,28 +2047,28 @@ void Nodes::make_paths_off_critical_path_reachable (void)
                 continue;
             }
 
-            if (n->has_exit_up) {
+            if (n->has_door_up) {
                 auto o = getn(x, y-1);
                 if (o && (o->pass == n->pass)) {
                     n->dir_up = true;
                     o->dir_down = true;
                 }
             }
-            if (n->has_exit_down) {
+            if (n->has_door_down) {
                 auto o = getn(x, y+1);
                 if (o && (o->pass == n->pass)) {
                     n->dir_down = true;
                     o->dir_up = true;
                 }
             }
-            if (n->has_exit_right) {
+            if (n->has_door_right) {
                 auto o = getn(x+1, y);
                 if (o && (o->pass == n->pass)) {
                     n->dir_right = true;
                     o->dir_left = true;
                 }
             }
-            if (n->has_exit_left) {
+            if (n->has_door_left) {
                 auto o = getn(x-1, y);
                 if (o && (o->pass == n->pass)) {
                     n->dir_left = true;
@@ -2119,19 +2119,19 @@ void Nodes::remove_redundant_directions (void)
             auto e = 0;
             auto d = 0;
 
-            if (node->has_exit_down) {
+            if (node->has_door_down) {
                 e <<= 1;
                 e |= 1;
             }
-            if (node->has_exit_up) {
+            if (node->has_door_up) {
                 e <<= 1;
                 e |= 1;
             }
-            if (node->has_exit_left) {
+            if (node->has_door_left) {
                 e <<= 1;
                 e |= 1;
             }
-            if (node->has_exit_right) {
+            if (node->has_door_right) {
                 e <<= 1;
                 e |= 1;
             }
