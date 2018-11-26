@@ -9,7 +9,7 @@
 #include "my_range.h"
 #include <bitset>
 
-static int debug_enabled = true;
+static int debug_enabled = false;
 
 std::vector<Roomp> Room::all_rooms;
 
@@ -142,21 +142,29 @@ void Room::find_doors (void)
         for (auto y : range<int>(0, height)) {
             if (data[x][y][z] == Charmap::DOOR_UP) {
                 has_door_up = true;
-                door_up_at.push_back(point(x, y));
+                doors_up.push_back(point(x, y));
             }
             if (data[x][y][z] == Charmap::DOOR_DOWN) {
                 has_door_down = true;
-                door_down_at.push_back(point(x, y));
+                doors_down.push_back(point(x, y));
             }
             if (data[x][y][z] == Charmap::DOOR_LEFT) {
                 has_door_left = true;
-                door_left_at.push_back(point(x, y));
+                doors_left.push_back(point(x, y));
             }
             if (data[x][y][z] == Charmap::DOOR_RIGHT) {
                 has_door_right = true;
-                door_right_at.push_back(point(x, y));
+                doors_right.push_back(point(x, y));
             }
         }
+    }
+
+    if (!doors_up.size() &&
+        !doors_down.size() &&
+        !doors_left.size() &&
+        !doors_right.size()) {
+        dump();
+        DIE("room has no doors");
     }
 }
 

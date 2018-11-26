@@ -19,8 +19,8 @@
 /*
  * Dungeon size; composed of a grid of rooms
  */
-#define GRID_WIDTH                  7
-#define GRID_HEIGHT                 7
+#define GRID_WIDTH                  4
+#define GRID_HEIGHT                 4
 #define ROOM_WIDTH                  13
 #define ROOM_HEIGHT                 13
 

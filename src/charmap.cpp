@@ -36,6 +36,16 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_dusty             = true;
 
+    char_index              = Charmap::CORRIDOR;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_corridor          = true;
+
+    char_index              = Charmap::DOOR;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_door              = true;
+
     char_index              = Charmap::DOOR_UP;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

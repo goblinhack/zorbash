@@ -13,6 +13,7 @@ public:
         SPACE           = ' ',
         CORRIDOR        = '#',
         SECRET_DOOR     = 'd',
+        DOOR            = 'D',
         DOOR_UP         = '^',
         DOOR_DOWN       = 'v',
         DOOR_LEFT       = '<',
@@ -35,6 +36,7 @@ public:
     char                      c;
     bool                      is_wall              {false};
     bool                      is_floor             {false};
+    bool                      is_corridor          {false};
     bool                      is_dusty             {false};
     bool                      is_door              {false};
     bool                      is_secret_door       {false};

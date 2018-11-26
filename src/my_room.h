@@ -40,11 +40,52 @@ public:
     bool                    has_door_down  {false};
     bool                    has_door_left  {false};
     bool                    has_door_right {false};
-    std::list<point>        door_up_at;
-    std::list<point>        door_down_at;
-    std::list<point>        door_right_at;
-    std::list<point>        door_left_at;
+
+    /*
+     * All doors in this room. We will choose one for connectivity.
+     */
+    std::vector<point>      doors_up;
+    std::vector<point>      doors_down;
+    std::vector<point>      doors_right;
+    std::vector<point>      doors_left;
+
+    /*
+     * And this is which door we chose from the above lists.
+     */
+    uint8_t                 which_secret_door_up {0};
+    uint8_t                 which_secret_door_down {0};
+    uint8_t                 which_secret_door_left {0};
+    uint8_t                 which_secret_door_right {0};
+    uint8_t                 which_door_up {0};
+    uint8_t                 which_door_down {0};
+    uint8_t                 which_door_left {0};
+    uint8_t                 which_door_right {0};
+
+    Roomp                   left_room {};
+    Roomp                   right_room {};
+    Roomp                   up_room {};
+    Roomp                   down_room {};
     
+    Roomp                   secret_left_room {};
+    Roomp                   secret_right_room {};
+    Roomp                   secret_up_room {};
+    Roomp                   secret_down_room {};
+
+    point                   left_door_at;
+    point                   right_door_at;
+    point                   up_door_at;
+    point                   down_door_at;
+    
+    point                   left_secret_door_at;
+    point                   right_secret_door_at;
+    point                   up_secret_door_at;
+    point                   down_secret_door_at;
+    
+    //
+    // Temp used for skipping rooms in dungeon placement
+    // 
+    bool                     skip {};
+
     /*
      * Direction is the flow of the level, like can a player only go one
      * way and not return
@@ -66,6 +107,13 @@ public:
      * Final placement of this room in the dungeon. 
      */
     bool                    placed {false};
+
+    /***********************************************************************
+     * This is all room status that changes when rooms are placed.
+     * The above is const.
+     ***********************************************************************/
+    point                   at {};
+    point                   rollback_at {};
 
     static Roomp room_new(void);
 
