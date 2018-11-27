@@ -160,6 +160,9 @@ Thingp thing_new (std::string tp_name, fpoint at)
     if (tp_is_floor(tp)) {
         game.state.map.is_floor[new_at.x][new_at.y] = true;
     }
+    if (tp_is_corridor(tp)) {
+        game.state.map.is_corridor[new_at.x][new_at.y] = true;
+    }
 
     if (tp_is_player(tp)) {
         t->is_player = true;
@@ -231,7 +234,7 @@ void Thing::remove_hooks ()
     if (owner_thing_id) {
         owner = get_owner();
     }
-_
+
     if (owner_thing_id && owner) {
 #ifdef THING_DEBUG
         log("detach from owner %s", owner->logname().c_str());
@@ -245,7 +248,7 @@ _
 
             owner->set_weapon_carry_anim(nullptr);
         }
-_
+
         if (thing_id == owner->weapon_use_anim_thing_id) {
 #ifdef THING_DEBUG
             log("detach from use anim owner %s", owner->logname().c_str());
@@ -270,7 +273,7 @@ _
 
         set_owner(nullptr);
     }
-_
+
     /*
      * We own things like a sword. i.e. we are a player.
      */
@@ -372,7 +375,7 @@ void Thing::destroy (void)
              */
         }
     }
-_
+
     /*
      * Pop from the map
      */
@@ -383,17 +386,20 @@ _
         if (iter == o->end()) {
             die("thing not found to destroy");
         }
-_    
+    
         auto value = (*o)[id];
         o->erase(iter);
-_
+
         if (tp_is_wall(tp)) {
             game.state.map.is_wall[old_at.x][old_at.y] = false;
         }
         if (tp_is_floor(tp)) {
             game.state.map.is_floor[old_at.x][old_at.y] = false;
         }
-_
+        if (tp_is_corridor(tp)) {
+            game.state.map.is_corridor[old_at.x][old_at.y] = false;
+        }
+
         if (tp_is_player(tp)) {
             if (game.state.player != value) {
                 game.state.player = nullptr;
@@ -411,7 +417,7 @@ void Thing::update (void)
         light->move_to(at);
         light->calculate();
     }
-_
+
     /*
      * Weapons follow also.
      */
@@ -420,7 +426,7 @@ _
         w->move_to(at);
         w->dir = dir;
     }
-_
+
     if (weapon_use_anim_thing_id) {
         auto w = thing_find(weapon_use_anim_thing_id);
         w->move_to(at);
@@ -446,7 +452,7 @@ void Thing::update_pos (fpoint to)
     } else {
         last_at = at;
     }
-_
+
     /*
      * Keep track of where this thing is on the grid
      */
@@ -478,7 +484,7 @@ _
             game.state.map.is_floor[new_at.x][new_at.y] = true;
         }
     }
-_
+
     /*
      * Moves are immediate, but we render the move in steps, hence keep
      * track of when we moved.

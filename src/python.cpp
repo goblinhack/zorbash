@@ -1692,7 +1692,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr15)
     TP_SET_DECL(is_rrr16)
     TP_SET_DECL(is_rrr17)
-    TP_SET_DECL(is_rrr18)
+    TP_SET_DECL(is_corridor)
     TP_SET_DECL(is_blit_off_center)
     TP_SET_DECL(is_boring)
     TP_SET_DECL(is_exit)

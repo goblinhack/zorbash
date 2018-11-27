@@ -70,7 +70,7 @@ class Tp:
         self.is_rrr15 = False
         self.is_rrr16 = False
         self.is_rrr17 = False
-        self.is_rrr18 = False
+        self.is_corridor = False
         self.is_blit_off_center = False
         self.is_boring = False
         self.is_exit = False
@@ -322,9 +322,9 @@ class Tp:
         self.is_rrr17 = value
         zx.tp_set_is_rrr17(self, value)
 
-    def set_is_rrr18(self, value):
-        self.is_rrr18 = value
-        zx.tp_set_is_rrr18(self, value)
+    def set_is_corridor(self, value):
+        self.is_corridor = value
+        zx.tp_set_is_corridor(self, value)
 
     def set_is_blit_off_center(self, value):
         self.is_blit_off_center = value

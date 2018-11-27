@@ -147,6 +147,52 @@ static void game_place_floor (class Dungeon *d,
     }
 }
 
+static void game_place_corridor (class Dungeon *d,
+                              std::string what,
+                              int depth)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (!d->is_corridor_at(x, y)) {
+                continue;
+            }
+
+            if (depth) {
+                if (depth != d->get_grid_depth_at(x, y)) {
+                    continue;
+                }
+            }
+
+            /*
+             * Not all walls fill the entire space so put a corridor beneath
+             * them or they look odd.
+             */
+            if (d->is_wall_at(x, y + 1)) {
+                if (!game.state.map.is_corridor[x][y + 1]) {
+                    thing_new(what, fpoint(x, y + 1));
+                }
+            }
+            if (d->is_wall_at(x, y - 1)) {
+                if (!game.state.map.is_corridor[x][y - 1]) {
+                    thing_new(what, fpoint(x, y - 1));
+                }
+            }
+            if (d->is_wall_at(x + 1, y)) {
+                if (!game.state.map.is_corridor[x + 1][y]) {
+                    thing_new(what, fpoint(x + 1, y));
+                }
+            }
+            if (d->is_wall_at(x - 1, y)) {
+                if (!game.state.map.is_corridor[x - 1][y]) {
+                    thing_new(what, fpoint(x - 1, y));
+                }
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
 static void game_place_entrance (class Dungeon *d,
                               std::string what)
 {_
@@ -172,57 +218,6 @@ static void game_place_exit (class Dungeon *d,
 
             (void) thing_new(what, fpoint(x, y));
         }
-    }
-}
-
-static void game_place_lights (class Dungeon *d,
-                               std::string what,
-                               int variant,
-                               int block_width,
-                               int block_height,
-                               int tries)
-{_
-    while (tries--) {
-        auto x = random_range(0, MAP_WIDTH);
-        auto y = random_range(0, MAP_HEIGHT);
-
-        auto can_place_light_here = true;
-        for (auto dx = 0; dx < block_width; dx++) {
-            auto X = x + dx;
-            for (auto dy = 0; dy < block_height; dy++) {
-                auto Y = y + dy;
-
-                if (d->is_wall_at(X, Y)) {
-                    can_place_light_here = false;
-                    break;
-                }
-            }
-            if (!can_place_light_here) {
-                break;
-            }
-        }
-
-        if (!can_place_light_here) {
-            continue;
-        }
-
-        if (random_range(0, 100) > 30) {
-            continue;
-        }
-
-        color col;
-
-        auto r = random_range(0, 100);
-        if (r < 75) {
-            col = GREEN;
-        } else if (r < 95) {
-            col = BLUE;
-        } else {
-            col = RED;
-        }
-        col.a = 50;
-
-        (void) light_new(100, 2, fpoint(x, y), LIGHT_QUALITY_LOW, col);
     }
 }
 
@@ -287,8 +282,7 @@ void game_display (void)
         game_place_walls(dungeon, "wall1", 3, 2, 1, tries);
         game_place_walls(dungeon, "wall1", 4, 2, 1, tries);
 
-        game_place_lights(dungeon, "wall1", 4, 2, 1, tries);
-        game_place_lights(dungeon, "entrance1", 4, 2, 1, tries);
+        // (void) light_new(100, 2, fpoint(x, y), LIGHT_QUALITY_LOW, col);
 
         game_ramaining_place_blocks(dungeon, "wall1");
 
@@ -299,6 +293,7 @@ void game_display (void)
         game_place_floor(dungeon, "floor5", 5);
         game_place_floor(dungeon, "floor6", 6);
         game_place_floor(dungeon, "floor6", 0);
+        game_place_corridor(dungeon, "corridor1", 0);
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -328,7 +323,7 @@ void game_display (void)
      */
     thing_render_all();
     thing_gc();
-_
+
 #if 0
     if (!game.editor_mode) {
         thing_move_all();

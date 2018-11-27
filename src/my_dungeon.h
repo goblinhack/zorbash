@@ -246,6 +246,7 @@ public:
         //
         // Add a perimeter to the level. Helps avoid off by one bugs.
         //
+        add_corridor_walls();
         add_border();
 
         debug("success, created dungeon");
@@ -1138,6 +1139,42 @@ public:
             for (auto y = 0; y < MAP_BORDER; y++) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
                 putc(x, MAP_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
+            }
+        }
+    }
+
+    void add_corridor_walls (void)
+    {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                if (is_corridor_at_fast(x, y)) {
+                    if (!is_anything_at_fast(x - 1, y - 1)) {
+                        putc(x - 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x, y - 1)) {
+                        putc(x, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x + 1, y - 1)) {
+                        putc(x + 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+
+                    if (!is_anything_at_fast(x - 1, y)) {
+                        putc(x - 1, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x + 1, y)) {
+                        putc(x + 1, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+
+                    if (!is_anything_at_fast(x - 1, y + 1)) {
+                        putc(x - 1, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x, y + 1)) {
+                        putc(x, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x + 1, y + 1)) {
+                        putc(x + 1, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                }
             }
         }
     }

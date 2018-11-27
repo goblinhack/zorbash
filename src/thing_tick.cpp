@@ -13,7 +13,7 @@ void Thing::tick (void)
 
 void thing_tick_all (void)
 {
-_
+
     for (auto p : game.state.map.all_things) {
         auto t = p.second;
         verify(t);

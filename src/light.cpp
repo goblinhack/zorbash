@@ -186,12 +186,11 @@ void Light::calculate_for_obstacle (Thingp t, int x, int y)
     double etly;
     double ebrx;
     double ebry;
-    double fudge = 0.00;
 
-    etlx = (double)otlx + fudge;
-    etly = (double)otly + fudge;
-    ebrx = (double)obrx - fudge;
-    ebry = (double)obry - fudge;
+    etlx = (double)otlx;
+    etly = (double)otly;
+    ebrx = (double)obrx;
+    ebry = (double)obry;
 
     fpoint P[4];
     P[0].x = etlx;
@@ -432,7 +431,7 @@ void Light::render_triangle_fans (void)
          * How much the light pushes into a block. Too much and you can see
          * below the block which we don't want.
          */
-        double light_penetrate = 0.5;
+        double light_penetrate = 0.8;
 
         blit_init();
         {
@@ -463,6 +462,7 @@ void Light::render_triangle_fans (void)
                 double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
                 double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
 
+                // off white looks better
                 push_point(p1x, p1y, red, green * 0.8, blue *0.8, 0);
             }
 
@@ -485,6 +485,7 @@ void Light::render_triangle_fans (void)
                 double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
                 double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
 
+                // off white looks better
                 push_point(p1x, p1y, red, green * 0.8, blue *0.8, 0);
             }
         }
