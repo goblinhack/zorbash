@@ -153,7 +153,7 @@ public:
     int is_rrr15 {};
     int is_rrr16 {};
     int is_rrr17 {};
-    int is_rrr18 {};
+    int is_corridor {};
     int is_blit_off_center {};
     int is_boring {};
     int is_exit {};
@@ -350,9 +350,9 @@ static inline int tp_is_rrr17 (Tpp t)
     return (t->is_rrr17);
 }
 
-static inline int tp_is_rrr18 (Tpp t)
+static inline int tp_is_corridor (Tpp t)
 {
-    return (t->is_rrr18);
+    return (t->is_corridor);
 }
 
 static inline int tp_is_blit_off_center (Tpp t)

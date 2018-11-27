@@ -2718,19 +2718,19 @@ widp wid_new_horiz_scroll_bar (widp parent, std::string name,
 static void wid_raise_internal (widp w)
 {_
     verify(w.get());
-_
+
     if (w->do_not_raise) {
         return;
     }
-_
+
     if (wid_moving != w) {
         wid_mouse_motion_end();
     }
-_
+
     if (wid_get_top_parent(wid_moving) != w) {
         wid_mouse_motion_end();
     }
-_
+
     wid_tree_detach(w);
     w->key.priority = ++wid_highest_priority;
     wid_tree_attach(w);
@@ -2768,11 +2768,11 @@ void wid_raise (widp w_in)
     if (!w_in.get()) {
         return;
     }
-_
+
     verify(w_in.get());
-_
+
     wid_raise_internal(w_in);
-_
+
     /*
      * If some widget wants to be on top, let it.
      */
@@ -2787,9 +2787,9 @@ _
     }
 
     verify(w_in.get());
-_
+
     wid_find_top_focus();
-_
+
     /*
      * If we were hovering over a window and it was replaced, we need to fake
      * a mouse movement so we know we are still over it.
@@ -5020,7 +5020,7 @@ void wid_mouse_motion (int32_t x, int32_t y,
         /*
          * Over a new wid.
          */
-_
+
         while (w &&
                !wid_m_over_b(w, x, y, relx, rely, wheelx, wheely)) {
             w = w->parent;
@@ -5042,7 +5042,7 @@ _
 
         w = wid_mouse_motion_handler(x, y, relx, rely, wheelx, wheely);
         if (w) {
-_
+
             if (wid_m_over_b(w, x, y, relx, rely, wheelx, wheely)) {
                 over = true;
             }

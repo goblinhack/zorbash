@@ -117,7 +117,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->right_tile, tl2, br2);
     }
 
- /*
+    /*
      * X---
      * |...
      * |...
@@ -134,7 +134,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->tl_tile, tl2, br2);
     }
 
- /*
+    /*
      * ---X
      * ...|
      * ...|
@@ -151,7 +151,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->tr_tile, tl2, br2);
     }
 
- /*
+    /*
      *  .|
      *  .|
      *  .X--
@@ -169,7 +169,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->tr_tile, tl2, br2);
     }
 
- /*
+    /*
      *    |.
      *    |.
      *  --X.
@@ -190,7 +190,7 @@ static void thing_blit_wall_cladding (Thingp &t,
     dw = 0.00;
     dh = 0.00;
 
- /*
+    /*
      * |...
      * |...
      * X---
@@ -207,7 +207,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->bl_tile, tl2, br2);
     }
 
- /*
+    /*
      * ...|
      * ...|
      * ---X
@@ -224,7 +224,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->br_tile, tl2, br2);
     }
 
- /*
+    /*
      * .....
      * .X---
      * .|
@@ -242,7 +242,7 @@ static void thing_blit_wall_cladding (Thingp &t,
         tile_blit_fat(tp, t->br_tile, tl2, br2);
     }
 
- /*
+    /*
      * ....
      * --X.
      *   |.
@@ -284,7 +284,7 @@ static void thing_get_all_coordinates (void)
             tile = t->current_tile;
         }
 
- /*
+        /*
          * Scale up tiles that are larger to the same pix scale.
          */
         if (tile->pix_width != TILE_WIDTH) {
@@ -299,7 +299,7 @@ static void thing_get_all_coordinates (void)
             t->br.y = my + (ytiles * tile_gl_height);
         }
 
- /*
+        /*
          * Put larger tiles on the same y base as small ones.
          */
         if (tp_is_blit_off_center(tp)) {
@@ -388,56 +388,6 @@ static void thing_blit_things (int minx, int miny, int minz,
     blit_flush();
 }
 
-#if 0
-static void thing_blit_things_pass2 (int minx, int miny, int minz,
-                                     int maxx, int maxy, int maxz)
-{
-    color c = WHITE;
-    c.a = 50;
-    glcolor(c);
-
-    blit_init();
-
-    const double tdx = game.config.tile_gl_width;
-    const double tdy = game.config.tile_gl_height;
-
-    auto z = MAP_DEPTH_WALLS;
-    {
-        for (uint16_t x = minx ; x < maxx; x++) {
-            for (uint16_t y = miny ; y < maxy; y++) {
-                for (auto p : game.state.map.things[x][y][z]) {
-                    auto t = p.second;
-                    if (unlikely(t->is_hidden)) {
-                        continue;
-                    }
-
-                    Tpp tp = t->tp;
-                    if (!tp_is_wall(tp)) {
-                        continue;
-                    }
-
-                    fpoint tl;
-                    fpoint br;
-
-                    double tx = t->at.x - game.state.map_at.x;
-                    double ty = t->at.y - game.state.map_at.y;
-
-                    tl.x = tx * tdx;
-                    tl.y = ty * tdy;
-                    br.x = (tx+1) * tdx;
-                    br.y = (ty+1) * tdy;
-    
-                    if (t->top_tile) {
-                        thing_blit_wall_cladding(t, x, y, tl, br);
-                    }
-                }
-            }
-        }
-    }
-    blit_flush();
-}
-#endif
-
 static void thing_blit_editor (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
@@ -479,7 +429,7 @@ static void thing_blit_editor (int minx, int miny, int minz,
 
 void thing_render_all (void)
 {
- /*
+    /*
      * Get the bounds
      */
     int minz = 0;
@@ -495,7 +445,7 @@ void thing_render_all (void)
     int maxy = std::min(MAP_HEIGHT, 
         (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
 
- /*
+    /*
      * Improve this to only update when things move one tile
      */
     if (!game.config.editor_mode) {
@@ -524,7 +474,6 @@ void thing_render_all (void)
         blit_fbo(FBO_LIGHT_MERGED);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//        thing_blit_things_pass2(minx, miny, minz, maxx, maxy, maxz);
     } else {
         blit_fbo_bind(FBO_MAIN);
 
