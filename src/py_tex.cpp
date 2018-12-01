@@ -5,7 +5,7 @@
 
 #include <SDL.h>
 #include "my_main.h"
-#include "my_glapi.h"
+#include "my_gl.h"
 #include "my_python.h"
 #include "my_sdl.h"
 #include "my_tex.h"

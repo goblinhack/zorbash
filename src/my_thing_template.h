@@ -54,12 +54,12 @@ public:
 
     int id {};
 
- /*
+    /*
      * Internal description of the thing.
      */
     std::string short_name;
 
- /*
+    /*
      * Base filename
      */
     std::string raw_name;
@@ -85,12 +85,12 @@ public:
     std::string weapon_carry_anim;
     std::string weapon_use_anim;
 
- /*
+    /*
      * Animation tiles.
      */
     Tileinfomap tiles;
 
- /*
+    /*
      * Adjacent tiles.
      */
     Tileinfomap top_tiles;
@@ -102,7 +102,7 @@ public:
     Tileinfomap bl_tiles;
     Tileinfomap br_tiles;
 
- /*
+    /*
      * Join tiles
      */
     Tileinfomap horiz_tiles;
@@ -151,8 +151,8 @@ public:
     int is_rrr13 {};
     int is_rrr14 {};
     int is_rrr15 {};
-    int is_rrr16 {};
-    int is_rrr17 {};
+    int is_blit_y_offset {};
+    int is_small_shadow_caster {};
     int is_corridor {};
     int is_blit_off_center {};
     int is_boring {};
@@ -340,14 +340,14 @@ static inline int tp_is_rrr15 (Tpp t)
     return (t->is_rrr15);
 }
 
-static inline int tp_is_rrr16 (Tpp t)
+static inline int tp_is_blit_y_offset (Tpp t)
 {
-    return (t->is_rrr16);
+    return (t->is_blit_y_offset);
 }
 
-static inline int tp_is_rrr17 (Tpp t)
+static inline int tp_is_small_shadow_caster (Tpp t)
 {
-    return (t->is_rrr17);
+    return (t->is_small_shadow_caster);
 }
 
 static inline int tp_is_corridor (Tpp t)

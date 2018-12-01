@@ -6,7 +6,7 @@
 #include "my_stb_image.h"
 
 #include <SDL.h>
-#include "my_glapi.h"
+#include "my_gl.h"
 #include "my_tex.h"
 #include "my_ramdisk.h"
 #include "my_pixel.h"

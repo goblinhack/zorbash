@@ -69,7 +69,7 @@ public:
     uint32_t           fps_count                    = {};
     Map                map;
 
- /*
+    /*
      * Where we're looking in the map
      */
     fpoint             map_at;

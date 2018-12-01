@@ -9,8 +9,9 @@
 #include "my_tile_info.h"
 #include "my_tex.h"
 #include "my_game.h"
-#include "my_glapi.h"
+#include "my_gl.h"
 #include "my_light.h"
+#include "my_gl.h"
 #include <algorithm>
 
 static void thing_map_scroll_do (void)
@@ -261,6 +262,59 @@ static void thing_blit_wall_cladding (Thingp &t,
     }
 }
 
+/*
+ * Blits a whole tile. Y co-ords are inverted.
+ */
+static void thing_blit_shadow (Thingp t,
+                               const Tpp &tp, const Tilep &tile, 
+                               const fpoint &tl, const fpoint &br)
+{
+    double x1;
+    double x2;
+    double y1;
+    double y2;
+
+    if (!tile) {
+        return;
+    }
+
+    color c = BLACK;
+    c.a = 100;
+    glcolor(c);
+
+    x1 = tile->x1;
+    x2 = tile->x2;
+    y1 = tile->y1;
+    y2 = tile->y2;
+
+    fpoint shadow_tl = tl;
+    fpoint shadow_tr(br.x, tl.y);
+    fpoint shadow_bl(tl.x, br.y); 
+    fpoint shadow_br = br;
+
+    if ((t != game.state.player) && game.state.player) {
+        fpoint d = t->at - game.state.player->at;
+
+        const double D = 5.0;
+        auto dx = d.x / D;
+        auto dy = d.y / D;
+
+        shadow_tl.x += 0.05 * dx;
+        shadow_tr.x += 0.05 * dx;
+        shadow_tl.y += 0.01 * dy;
+        shadow_tr.y += 0.01 * dy;
+    } else {
+        shadow_tl.x += 0.05;
+        shadow_tr.x += 0.05;
+        shadow_tl.y += 0.01;
+        shadow_tr.y += 0.01;
+    }
+
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         shadow_bl, shadow_br, shadow_tl, shadow_tr);
+    glcolor(WHITE);
+}
+
 static void thing_blit_things (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
@@ -270,6 +324,31 @@ static void thing_blit_things (int minx, int miny, int minz,
     for (uint8_t z = minz; z < maxz; z++) {
         for (uint16_t x = minx ; x < maxx; x++) {
             for (uint16_t y = miny ; y < maxy; y++) {
+                /*
+                 * Draw shadows
+                 */
+                for (auto p : game.state.map.things[x][y][z]) {
+                    auto t = p.second;
+                    if (unlikely(t->is_hidden)) {
+                        continue;
+                    }
+
+                    auto tp = t->tp;
+                    if (unlikely(tp_is_small_shadow_caster(tp))) {
+                        Tilep tile;
+                        if (t->current_tileinfo) {
+                            tile = t->current_tileinfo->tile;
+                        } else {
+                            tile = t->current_tile;
+                        }
+
+                        thing_blit_shadow(t, tp, tile, t->tl, t->br);
+                    }
+                }
+
+                /*
+                 * Draw everything else
+                 */
                 for (auto p : game.state.map.things[x][y][z]) {
                     auto t = p.second;
                     if (unlikely(t->is_hidden)) {

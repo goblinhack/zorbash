@@ -4,7 +4,7 @@
  */
 
 #include "my_game.h"
-#include "my_glapi.h"
+#include "my_gl.h"
 
 static void gl_init_fbo(void);
 
@@ -1417,6 +1417,71 @@ gl_push (float **P,
     *P = p;
 }
 
+/*
+ * gl_push
+ */
+void
+gl_push (float **P,
+         float *p_end,
+         uint8_t first,
+         float tex_left,
+         float tex_top,
+         float tex_right,
+         float tex_bottom,
+         fpoint tl,
+         fpoint tr,
+         fpoint bl,
+         fpoint br,
+         float r1, float g1, float b1, float a1,
+         float r2, float g2, float b2, float a2,
+         float r3, float g3, float b3, float a3,
+         float r4, float g4, float b4, float a4)
+{
+    float *p = *P;
+
+    if (unlikely(p >= p_end)) {
+        DIE("overflow on gl bug %s", __FUNCTION__);
+    }
+
+    if (likely(!first)) {
+        /*
+         * If there is a break in the triangle strip then make a degenerate
+         * triangle.
+         */
+        if ((glapi_last_right != bl.x) || (glapi_last_bottom != bl.y)) {
+            gl_push_texcoord(p, glapi_last_tex_right, glapi_last_tex_bottom);
+            gl_push_vertex(p, glapi_last_right, glapi_last_bottom);
+            gl_push_rgba(p, r4, g4, b4, a4);
+
+            gl_push_texcoord(p, tex_left,  tex_top);
+            gl_push_vertex(p, tl.x,  tl.y);
+            gl_push_rgba(p, r1, g1, b1, a1);
+        }
+    }
+
+    gl_push_texcoord(p, tex_left,  tex_top);
+    gl_push_vertex(p, tl.x,  tl.y);
+    gl_push_rgba(p, r1, g1, b1, a1);
+
+    gl_push_texcoord(p, tex_left,  tex_bottom);
+    gl_push_vertex(p, bl.x,  bl.y);
+    gl_push_rgba(p, r2, g2, b2, a2);
+
+    gl_push_texcoord(p, tex_right, tex_top);
+    gl_push_vertex(p, tr.x, tr.y);
+    gl_push_rgba(p, r3, g3, b3, a3);
+
+    gl_push_texcoord(p, tex_right, tex_bottom);
+    gl_push_vertex(p, br.x, br.y);
+    gl_push_rgba(p, r4, g4, b4, a4);
+
+    glapi_last_tex_right = tex_right;
+    glapi_last_tex_bottom = tex_bottom;
+    glapi_last_right = br.x;
+    glapi_last_bottom = br.y;
+    *P = p;
+}
+
 void blit (int tex,
            float texMinX,
            float texMinY,
@@ -1459,6 +1524,54 @@ void blit (int tex,
             top,
             right,
             bottom,
+            r, g, b, a,
+            r, g, b, a,
+            r, g, b, a,
+            r, g, b, a);
+}
+
+void blit (int tex,
+           float texMinX,
+           float texMinY,
+           float texMaxX,
+           float texMaxY,
+           fpoint tl,
+           fpoint tr,
+           fpoint bl,
+           fpoint br)
+{
+    uint8_t first;
+
+    if (unlikely(!buf_tex)) {
+        blit_init();
+        first = true;
+    } else if (unlikely(buf_tex != tex)) {
+        blit_flush();
+        first = true;
+    } else {
+        first = false;
+    }
+
+    buf_tex = tex;
+
+    color c = gl_color_current();
+
+    float r = ((float)c.r) / 255.0;
+    float g = ((float)c.g) / 255.0;
+    float b = ((float)c.b) / 255.0;
+    float a = ((float)c.a) / 255.0;
+
+    gl_push(&bufp,
+            bufp_end,
+            first,
+            texMinX,
+            texMinY,
+            texMaxX,
+            texMaxY,
+            tl,
+            tr,
+            bl,
+            br,
             r, g, b, a,
             r, g, b, a,
             r, g, b, a,

@@ -3,7 +3,7 @@
  * See the README file for license info.
  */
 
-#include "my_glapi.h"
+#include "my_gl.h"
 #include "my_game.h"
 #include "my_wid.h"
 #include "my_ascii.h"

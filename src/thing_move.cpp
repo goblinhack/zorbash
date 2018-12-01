@@ -115,6 +115,14 @@ void Thing::update_coordinates (void)
         br.y -= height;
     }
 
+    /*
+     * So the player floats a bit over the ground
+     */
+    if (tp_is_blit_y_offset(tp)) {
+        tl.y -= 0.01;
+        br.y -= 0.01;
+    }
+
     if (unlikely(tp_is_animated_walk_flip(tp))) {
         if (flip_start_ms) {
             auto diff = time_get_time_ms_cached() - flip_start_ms;
@@ -178,7 +186,6 @@ double Thing::get_bounce (void)
     auto t = time_get_time_ms();
 
     if (t >= timestamp_bounce_end) {
-
         is_bouncing = false;
 
         if (bounce_count) {
