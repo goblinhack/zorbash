@@ -12,6 +12,7 @@
 #include <memory>
 #include "my_game.h"
 #include "my_point.h"
+#include "my_thing.h"
 
 typedef enum {
     LIGHT_QUALITY_POINT,
@@ -68,13 +69,14 @@ public:
  /*
      * Precalculated light rays.
      */
-    double             strength;
-    uint16_t           max_light_rays;
-    std::vector<float> ray_depth_buffer;
-    std::vector<float> ray_rad;
-    std::vector<float> glbuf;
-    LightQuality       quality;
-    color              col;
+    double              strength;
+    uint16_t            max_light_rays;
+    std::vector<float>  ray_depth_buffer;
+    std::vector<float>  ray_rad;
+//    std::vector<Thingp> ray_thing;
+    std::vector<float>  glbuf;
+    LightQuality        quality;
+    color               col;
 
     void pop();
     std::string logname(void);
@@ -83,8 +85,9 @@ public:
     void move_delta(fpoint);
     void move_to(fpoint to);
 
-    void add_z_depth(fpoint &light_pos, fpoint &light_end, double rad, int deg);
-    void calculate_for_obstacle(Thingp t, int x, int y);
+    void add_z_depth(Thingp, fpoint &light_pos, 
+                     fpoint &light_end, double rad, int deg);
+    bool calculate_for_obstacle(Thingp t, int x, int y);
     void calculate(void);
 
     void render_triangle_fans(void);

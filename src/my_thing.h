@@ -180,6 +180,7 @@ public:
     unsigned int       is_open:1;          /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_bouncing:1;      /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_attached:1;      /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_lit:1;           /* until -std=c++2a remember to update thing.cpp */
     
     std::string logname(void);
     uint8_t is_dir_bl(void);

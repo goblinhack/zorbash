@@ -48,6 +48,7 @@ Lightp light_new (Thingp owner,
     l->max_light_rays = max_light_rays;
 
     l->ray_rad.resize(max_light_rays);
+//    l->ray_thing.resize(max_light_rays);
     l->ray_depth_buffer.resize(max_light_rays);
 
     std::fill(l->ray_depth_buffer.begin(), l->ray_depth_buffer.end(), 0.0);
@@ -144,7 +145,8 @@ std::string Light::logname (void)
     return (tmp[loop++]);
 }
 
-void Light::add_z_depth (fpoint &light_pos, fpoint &light_end, double rad,
+void Light::add_z_depth (Thingp t, 
+                         fpoint &light_pos, fpoint &light_end, double rad,
                          int deg)
 {
     auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
@@ -156,9 +158,11 @@ void Light::add_z_depth (fpoint &light_pos, fpoint &light_end, double rad,
     if (!ray_depth_buffer[deg]) {
         ray_depth_buffer[deg] = len;
         ray_rad[deg] = rad;
+//        ray_thing[deg] = t;
     } else if (len < ray_depth_buffer[deg]) {
         ray_depth_buffer[deg] = len;
         ray_rad[deg] = rad;
+//        ray_thing[deg] = t;
     }
 }
 
@@ -167,8 +171,10 @@ void Light::add_z_depth (fpoint &light_pos, fpoint &light_end, double rad,
  * it blocks i.e. how many rays. For each ray, see if this is the
  * closest ray and if so, update the z depth of this ray. We are
  * building a z buffer of sorts.
+ * 
+ * False if we are inside an object.
  */
-void Light::calculate_for_obstacle (Thingp t, int x, int y)
+bool Light::calculate_for_obstacle (Thingp t, int x, int y)
 {
     int otlx = x;
     int otly = y;
@@ -179,7 +185,7 @@ void Light::calculate_for_obstacle (Thingp t, int x, int y)
      * No blocking our own light.
      */
     if (t == owner) {
-        return;
+        return (true);
     }
 
     double etlx;
@@ -222,6 +228,17 @@ void Light::calculate_for_obstacle (Thingp t, int x, int y)
      * For each clockwise side of the tile.
      */
     fpoint light_pos = at;
+
+    /*
+     * Inside the obstacle? No light!
+     */
+    if (((int)light_pos.x == (int)t->at.x) &&
+        ((int)light_pos.y == (int)t->at.y)) {
+        std::fill(ray_depth_buffer.begin(), ray_depth_buffer.end(), 0.0);
+        std::fill(ray_rad.begin(), ray_rad.end(), 0.0);
+//        std::fill(ray_thing.begin(), ray_thing.end(), nullptr);
+        return (false);
+    }
 
     /*
      * For each clockwise quadrant.
@@ -300,14 +317,24 @@ void Light::calculate_for_obstacle (Thingp t, int x, int y)
             if (get_line_known_intersection(P[k], P[l], 
                                             light_pos, light_end,
                                             &intersect)) {
-                add_z_depth(light_pos, intersect, rad, deg);
+                /*
+                 * Ok we intersect with the closest wall, but we actually
+                 * want the light to penetrate all the way through the
+                 * obstacle or we cannot see it. So use the opposite sides
+                 * of the object for the light length.
+                 */
+                get_line_known_intersection(P[(k + 2) % 4], P[(l + 2) % 4], 
+                                            light_pos, light_end,
+                                            &intersect);
+
+                add_z_depth(t, light_pos, intersect, rad, deg);
             }
 
             /*
              * And make sure we intersect with the edges of the obstacle too.
              */
-            add_z_depth(light_pos, P[k], p1_rad, p1_deg);
-            add_z_depth(light_pos, P[l], p2_rad, p2_deg);
+            add_z_depth(t, light_pos, P[(k + 2) % 4], p1_rad, p1_deg);
+            add_z_depth(t, light_pos, P[(l + 2) % 4], p2_rad, p2_deg);
 
             rad += dr;
             if (rad >= RAD_360) {
@@ -320,6 +347,8 @@ void Light::calculate_for_obstacle (Thingp t, int x, int y)
             }
         }
     }
+
+    return (true);
 }
 
 void Light::calculate (void)
@@ -373,7 +402,9 @@ void Light::calculate (void)
             for (auto p : thing_display_order[x][y][z]) {
                 auto t = p.second;
                 if (tp_is_shadow_caster(t->tp)) {
-                    calculate_for_obstacle(t, x, y);
+                    if (!calculate_for_obstacle(t, x, y)) {
+                        return;
+                    }
                 }
             }
         }
@@ -427,11 +458,13 @@ void Light::render_triangle_fans (void)
         auto blue  = ((double)c.b) / 255.0;
         auto alpha = ((double)c.a) / 255.0;
 
+#if 0
         /*
          * How much the light pushes into a block. Too much and you can see
          * below the block which we don't want.
          */
-        double light_penetrate = 0.8;
+        double light_penetrate = 0.0;
+#endif
 
         blit_init();
         {
@@ -445,15 +478,17 @@ void Light::render_triangle_fans (void)
             for (i = 0; i < max_light_rays; i++) {
                 double radius = ray_depth_buffer[i];
                 double rad = ray_rad[i];
-                if (radius < 0.01) {
+                if (radius < 0.001) {
                     radius = strength;
                 }
 
+#if 0
                 /*
                  * This makes the light ray bulge which makes it easier to see
                  * tiles close to the player.
                  */
                 radius += sqrt(light_penetrate / radius);
+#endif
 
                 double cosr;
                 double sinr;
@@ -472,11 +507,13 @@ void Light::render_triangle_fans (void)
             i = 0; {
                 double radius = ray_depth_buffer[i];
                 double rad = ray_rad[i];
-                if (radius < 0.01) {
+                if (radius < 0.001) {
                     radius = strength;
                 }
 
+#if 0
                 radius += sqrt(light_penetrate / radius);
+#endif
 
                 double cosr;
                 double sinr;
@@ -536,7 +573,8 @@ void Light::render_triangle_fans (void)
         }
 
         if (!flicker) {
-            flicker_radius = (radius * 1.2) + (random_range(0, 100) / 100.0);
+            flicker_radius = radius * 
+                            (1.0 + ((double)(random_range(0, 100) / 200.0)));
         }
         flicker++;
  
@@ -598,7 +636,7 @@ void Light::render (int fbo)
          * better light color blending but is slower.
          */
         blit_fbo_bind(FBO_LIGHT_MASK);
-        glClearColor(0,0,0,0);
+        glClearColor(0,0, 0,0);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
 
