@@ -4,7 +4,7 @@
  */
 
 #include "my_main.h"
-#include "my_glapi.h"
+#include "my_gl.h"
 #include "my_wid_tiles.h"
 #include "my_tile.h"
 #include "my_tex.h"

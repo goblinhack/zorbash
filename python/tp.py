@@ -68,8 +68,8 @@ class Tp:
         self.is_rrr13 = False
         self.is_rrr14 = False
         self.is_rrr15 = False
-        self.is_rrr16 = False
-        self.is_rrr17 = False
+        self.is_blit_y_offset = False
+        self.is_small_shadow_caster = False
         self.is_corridor = False
         self.is_blit_off_center = False
         self.is_boring = False
@@ -314,13 +314,13 @@ class Tp:
         self.is_rrr15 = value
         zx.tp_set_is_rrr15(self, value)
 
-    def set_is_rrr16(self, value):
-        self.is_rrr16 = value
-        zx.tp_set_is_rrr16(self, value)
+    def set_is_blit_y_offset(self, value):
+        self.is_blit_y_offset = value
+        zx.tp_set_is_blit_y_offset(self, value)
 
-    def set_is_rrr17(self, value):
-        self.is_rrr17 = value
-        zx.tp_set_is_rrr17(self, value)
+    def set_is_small_shadow_caster(self, value):
+        self.is_small_shadow_caster = value
+        zx.tp_set_is_small_shadow_caster(self, value)
 
     def set_is_corridor(self, value):
         self.is_corridor = value

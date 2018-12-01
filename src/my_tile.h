@@ -17,7 +17,7 @@ typedef class Tile*  Tilep;
 #include "my_color.h"
 #include "my_tex.h"
 #include "my_thing_template.h"
-#include "my_glapi.h"
+#include "my_gl.h"
 
 class Tile {
 
@@ -118,7 +118,7 @@ static inline void tile_blit_fat (const Tpp &tp, const Tilep &tile,
     double y1;
     double y2;
 
- /*
+    /*
      * Only some walls have deco tiles, so the pointer is left null for
      * those that do not.
      */
@@ -136,6 +136,8 @@ static inline void tile_blit_fat (const Tpp &tp, const Tilep &tile,
 
 void tile_blit_fat_outline(const Tpp &tp, const Tilep &tile, 
                            const fpoint &tl, const fpoint &br);
+void tile_blit_shadow(const Tpp &tp, const Tilep &tile, 
+                      const fpoint &tl, const fpoint &br);
 void tile_blit_fat_with_offset(const Tpp &tp, Tilep &tile, 
                                const fpoint &tl, const fpoint &br);
 void tile_get_blit_size(const Tpp &tp, const Tilep tile, char *name, 

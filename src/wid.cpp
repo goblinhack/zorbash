@@ -18,7 +18,7 @@
 #include "my_game.h"
 #include "my_string.h"
 #include "my_ascii.h"
-#include "my_glapi.h"
+#include "my_gl.h"
 #include "my_game.h"
 #include <stdlib.h>
 

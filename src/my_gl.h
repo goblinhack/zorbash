@@ -47,6 +47,7 @@
 #endif
 
 #include "my_color.h"
+#include "my_point.h"
 
 /*
  * gl.c
@@ -346,6 +347,16 @@ void blit(int tex,
           float top,
           float right,
           float bottom);
+
+void blit(int tex,
+          float texMinX,
+          float texMinY,
+          float texMaxX,
+          float texMaxY,
+          fpoint tl,
+          fpoint tr,
+          fpoint bl,
+          fpoint br);
 
 void blit_colored(int tex,
                   float texMinX,

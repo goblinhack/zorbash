@@ -6,7 +6,7 @@
 #include "my_game.h"
 #include "my_light.h"
 #include "my_thing.h"
-#include "my_glapi.h"
+#include "my_gl.h"
 
 static uint32_t light_id;
 

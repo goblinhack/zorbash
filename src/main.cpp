@@ -12,7 +12,7 @@
 
 #include "my_main.h"
 #include "my_python.h"
-#include "my_glapi.h"
+#include "my_gl.h"
 #include "my_wid_console.h"
 #include "my_font.h"
 #include "my_dir.h"
