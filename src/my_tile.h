@@ -32,20 +32,26 @@ public:
 
     std::string name;
 
- /*
+    /*
      * Index within the overall texture, left to right, top to bottom.
      */
     uint32_t index {};
     uint32_t pix_width {};
     uint32_t pix_height {};
- /*
+    
+    double pct_width {};
+    double pct_height {};
+
+    /*
      * Texture co-ordinates within the image.
      */
     double x1 {};
     double y1 {};
     double x2 {};
     double y2 {};
- /*
+
+#ifdef CREATE_TILE_COLLISION_BOUNDARIES
+    /*
      * As above but not clipped 0.5 pixels.
      */
     double ox1 {};
@@ -53,10 +59,7 @@ public:
     double ox2 {};
     double oy2 {};
 
-    double pct_width {};
-    double pct_height {};
-
- /*
+    /*
      * Percentage points that indicate the start of the pixels within the tile
      * texture for use in collisions.
      */
@@ -64,6 +67,7 @@ public:
     double py1 {};
     double px2 {};
     double py2 {};
+#endif
 
     int32_t gl_surface_binding {};
     Texp tex;

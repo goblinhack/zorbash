@@ -23,27 +23,6 @@ bool Thing::move (fpoint future_pos,
     auto x = future_pos.x;
     auto y = future_pos.y;
 
-    if (check_if_will_hit_solid_obstacle(future_pos)) {
-        if (!check_if_will_hit_solid_obstacle(fpoint(x, at.y))) {
-            y = at.y;
-        } else if (!check_if_will_hit_solid_obstacle(fpoint(at.x, y))) {
-            x = at.x;
-        } else {
-            return (false);
-        }
-    } else if ((x != 0) && (y != 0)) {
-        /*
-         * Avoid diagonal shortcuts through obstacles.
-         */
-        if (check_if_will_hit_solid_obstacle(fpoint(x, at.y))) {
-            x = at.x;
-        } 
-
-        if (check_if_will_hit_solid_obstacle(fpoint(at.x, y))) {
-            y = at.y;
-        }
-    }
-
     if ((x == at.x) && (y == at.y)) {
         return (false);
     }
@@ -58,7 +37,160 @@ bool Thing::move (fpoint future_pos,
     }
 #endif
 
-    handle_collisions();
+    bounce(0.1, 0.1, 100, 3);
 
     return (true);
+}
+
+void Thing::update_coordinates (void)
+{
+    const double tile_gl_width = game.config.tile_gl_width;
+    const double tile_gl_height = game.config.tile_gl_height;
+
+#if 0
+    auto x = (double) (at.x = last_at.x)
+    uint32_t           last_move_ms {};
+    uint32_t           end_move_ms {};
+#endif
+
+    double tx = at.x - game.state.map_at.x;
+    double ty = at.y - game.state.map_at.y;
+
+
+    tl.x = tx * tile_gl_width;
+    tl.y = ty * tile_gl_height;
+    br.x = (tx+1) * tile_gl_width;
+    br.y = (ty+1) * tile_gl_height;
+
+    Tilep tile;
+    if (current_tileinfo) {
+        tile = current_tileinfo->tile;
+    } else {
+        tile = current_tile;
+    }
+
+    /*
+     * Scale up tiles that are larger to the same pix scale.
+     */
+    if (unlikely(tile->pix_width != TILE_WIDTH)) {
+        auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
+        auto mx = (br.x + tl.x) / 2.0;
+        tl.x = mx - (xtiles * tile_gl_width);
+        br.x = mx + (xtiles * tile_gl_width);
+
+        auto ytiles = (tile->pix_height / TILE_HEIGHT) / 2.0;
+        auto my = (br.y + tl.y) / 2.0;
+        tl.y = my - (ytiles * tile_gl_height);
+        br.y = my + (ytiles * tile_gl_height);
+    }
+
+    /*
+     * Put larger tiles on the same y base as small ones.
+     */
+    if (unlikely(tp_is_blit_off_center(tp))) {
+        double y_offset = 
+            (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) * 
+                tile_gl_height) / 2.0;
+        tl.y -= y_offset;
+        br.y -= y_offset;
+    }
+
+    /*
+     * Boing.
+     */
+    if (unlikely(is_bouncing)) {
+        double height = get_bounce();
+
+        tl.y -= height;
+        br.y -= height;
+    }
+
+    if (unlikely(tp_is_animated_walk_flip(tp))) {
+        if (flip_start_ms) {
+            auto diff = time_get_time_ms_cached() - flip_start_ms;
+            uint32_t flip_time = 100;
+            uint32_t flip_steps = 100;
+
+            if (diff > flip_time) {
+                flip_start_ms = 0;
+                if (is_dir_left()) {
+                    std::swap(tl.x, br.x);
+                }
+            } else {
+                if (is_dir_right()) {
+                    std::swap(tl.x, br.x);
+                }
+                double w = br.x - tl.x;
+                double dw = w / flip_steps;
+                double tlx = tl.x;
+                double brx = br.x;
+
+                tl.x = tlx + dw * diff;
+                br.x = brx - dw * diff;
+            }
+        } else {
+            if (is_dir_left()) {
+                std::swap(tl.x, br.x);
+            }
+        }
+    }
+}
+
+void thing_update_all_coordinates (void)
+{
+    for (auto p : game.state.map.all_things) {
+        auto t = p.second;
+
+        t->update_coordinates();
+    }
+}
+
+void Thing::bounce (double bounce_height,
+                    double bounce_fade,
+                    uint32_t ms,
+                    uint32_t bounce_count)
+{
+    timestamp_bounce_begin = time_get_time_ms();
+    timestamp_bounce_end = timestamp_bounce_begin + ms;
+
+    this->bounce_height = bounce_height;
+    this->bounce_fade = bounce_fade;
+    this->bounce_count = bounce_count;
+    is_bouncing = true;
+}
+
+double Thing::get_bounce (void)
+{
+    if (!is_bouncing) {
+        return (0.0);
+    }
+
+    auto t = time_get_time_ms();
+
+    if (t >= timestamp_bounce_end) {
+
+        is_bouncing = false;
+
+        if (bounce_count) {
+            bounce(
+                bounce_height * bounce_fade,
+                bounce_fade,
+                (double)(timestamp_bounce_end - 
+                         timestamp_bounce_begin) * bounce_fade,
+                bounce_count - 1);
+        }
+
+        return (0);
+    }
+
+    double time_step =
+        (double)(t - timestamp_bounce_begin) /
+        (double)(timestamp_bounce_end - timestamp_bounce_begin);
+
+    double height = br.y - tl.y;
+
+    height *= sin(time_step * RAD_180);
+    height *= bounce_height;
+
+    return (height);
 }

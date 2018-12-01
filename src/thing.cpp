@@ -443,8 +443,6 @@ void Thing::update_pos (fpoint to)
 
     point old_at((int)at.x, (int)at.y);
 
-    last_move_ms = time_get_time_ms_cached();
-    end_move_ms = last_move_ms + ONESEC / 10;
     has_ever_moved = true;
 
     if (!has_ever_moved) {
@@ -741,16 +739,4 @@ void Thing::set_dir_br (void)
 uint8_t Thing::is_dir_br (void)
 {_
     return (dir == THING_DIR_BR);
-}
-
-void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)
-{
-    P0->x = tl.x;
-    P0->y = tl.y;
-    P1->x = br.x;
-    P1->y = tl.y;
-    P2->x = br.x;
-    P2->y = br.y;
-    P3->x = tl.x;
-    P3->y = br.y;
 }
