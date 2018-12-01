@@ -14,7 +14,7 @@ void player_tick (void)
         return;
     }
 
-    if ((time_get_time_ms() - player->last_move_ms) < 100) {
+    if ((time_get_time_ms() - player->begin_move_ms) < 100) {
         return;
     }
 

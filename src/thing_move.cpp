@@ -47,15 +47,25 @@ void Thing::update_coordinates (void)
     const double tile_gl_width = game.config.tile_gl_width;
     const double tile_gl_height = game.config.tile_gl_height;
 
-#if 0
-    auto x = (double) (at.x = last_at.x)
-    uint32_t           last_move_ms {};
-    uint32_t           end_move_ms {};
-#endif
+    double x;
+    double y;
 
-    double tx = at.x - game.state.map_at.x;
-    double ty = at.y - game.state.map_at.y;
+    if (time_get_time_ms() >= end_move_ms) {
+        x = at.x;
+        y = at.y;
+    } else {
+        double t = end_move_ms - begin_move_ms;
+        double dt = time_get_time_ms() - begin_move_ms;
+        double step = dt / t;
+        double dx = at.x - last_at.x;
+        double dy = at.y - last_at.y;
 
+        x = last_at.x + dx * step;
+        y = last_at.y + dy * step;
+    }
+
+    double tx = x - game.state.map_at.x;
+    double ty = y - game.state.map_at.y;
 
     tl.x = tx * tile_gl_width;
     tl.y = ty * tile_gl_height;

@@ -59,6 +59,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
     }
 
     t->at             = at;
+    t->last_at        = at;
 
     if (tp_is_animated_walk_flip(tp)) {
         t->dir            = THING_DIR_RIGHT;
@@ -488,8 +489,8 @@ void Thing::update_pos (fpoint to)
      * track of when we moved.
      */
     at = to;
-    last_move_ms = time_get_time_ms_cached();
-    end_move_ms = last_move_ms + ONESEC / 10;
+    begin_move_ms = time_get_time_ms_cached();
+    end_move_ms = begin_move_ms + ONESEC / 10;
 
     update();
 }
