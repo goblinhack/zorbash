@@ -72,6 +72,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
     t->is_open        = false;
     t->is_bouncing    = false;
     t->is_attached    = false;
+    t->is_lit         = false;
 
     t->timestamp_born = time_get_time_ms();
 
