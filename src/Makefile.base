@@ -51,6 +51,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_move.o 		\
+    $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_template.o 		\
     $(OBJDIR)/thing_weapon.o 		\
     $(OBJDIR)/tile.o 			\

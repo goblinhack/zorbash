@@ -218,7 +218,7 @@ extern double tile_pix_h;
 #define ASCII_UI_BOX_INACTIVE_MID_COLOR      VDARKSLATEBLUE
 #define ASCII_UI_BOX_INACTIVE_RIGHT_COLOR    VVDARKSLATEBLUE
 
-#define ASCII_CURSOR_UCHAR                   L'\u007f'
+#define ASCII_CURSOR_UCHAR                   L'_'
 
 #define UNICODE_0xa0 /* 160 */ ' '
 #define UNICODE_0xa1 /* 161 */ '¡'

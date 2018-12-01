@@ -51,15 +51,10 @@ Thingp thing_new (std::string tp_name, fpoint at)
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
         DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
     }
-    auto depth = t->depth = tp_z_depth(tp);
-    auto n = &game.state.map.things[new_at.x][new_at.y][depth];
-    result = n->insert(p);
-    if (result.second == false) {
-        DIE("thing insert into map [%d] failed", id);
-    }
 
     t->at             = at;
     t->last_at        = at;
+    t->depth          = tp_z_depth(tp);
 
     if (tp_is_animated_walk_flip(tp)) {
         t->dir            = THING_DIR_RIGHT;
@@ -75,6 +70,8 @@ Thingp thing_new (std::string tp_name, fpoint at)
     t->is_moving      = false;
     t->has_ever_moved = false;
     t->is_open        = false;
+    t->is_bouncing    = false;
+    t->is_attached    = false;
 
     t->timestamp_born = time_get_time_ms();
 
@@ -172,6 +169,9 @@ Thingp thing_new (std::string tp_name, fpoint at)
     if (!tp_is_boring(tp)) {
         t->log("created");
     }
+
+    t->attach();
+
     return (t);
 }
 
@@ -362,6 +362,8 @@ void Thing::destroy (void)
         log("destroy");
     }
 
+    detach();
+
     {
         auto a = &game.state.map.all_things;
         auto iter = a->find(id);
@@ -381,31 +383,18 @@ void Thing::destroy (void)
      * Pop from the map
      */
     point old_at((int)at.x, (int)at.y);
-    {
-        auto o = &game.state.map.things[old_at.x][old_at.y][depth];
-        auto iter = o->find(id);
-        if (iter == o->end()) {
-            die("thing not found to destroy");
-        }
-    
-        auto value = (*o)[id];
-        o->erase(iter);
 
-        if (tp_is_wall(tp)) {
-            game.state.map.is_wall[old_at.x][old_at.y] = false;
-        }
-        if (tp_is_floor(tp)) {
-            game.state.map.is_floor[old_at.x][old_at.y] = false;
-        }
-        if (tp_is_corridor(tp)) {
-            game.state.map.is_corridor[old_at.x][old_at.y] = false;
-        }
-
-        if (tp_is_player(tp)) {
-            if (game.state.player != value) {
-                game.state.player = nullptr;
-            }
-        }
+    if (tp_is_wall(tp)) {
+        game.state.map.is_wall[old_at.x][old_at.y] = false;
+    }
+    if (tp_is_floor(tp)) {
+        game.state.map.is_floor[old_at.x][old_at.y] = false;
+    }
+    if (tp_is_corridor(tp)) {
+        game.state.map.is_corridor[old_at.x][old_at.y] = false;
+    }
+    if (tp_is_player(tp)) {
+        game.state.player = nullptr;
     }
 }
 
@@ -433,108 +422,6 @@ void Thing::update (void)
         w->move_to(at);
         w->dir = dir;
     }
-}
-
-void Thing::update_pos (fpoint to)
-{_
-    point new_at((int)to.x, (int)to.y);
-    if (game.state.map.is_oob(new_at)) {
-        return;
-    }
-
-    point old_at((int)at.x, (int)at.y);
-
-    has_ever_moved = true;
-
-    if (!has_ever_moved) {
-        last_at = to;
-    } else {
-        last_at = at;
-    }
-
-    /*
-     * Keep track of where this thing is on the grid
-     */
-    if (old_at != new_at) {
-        /*
-         * Pop
-         */
-        auto o = &game.state.map.things[old_at.x][old_at.y][depth];
-        auto iter = o->find(id);
-        if (iter == o->end()) {
-            die("not found on map move");
-        }
-
-        auto value = (*o)[id];
-        o->erase(iter);
-
-        /*
-         * Add back
-         */
-        auto n = &game.state.map.things[new_at.x][new_at.y][depth];
-        n->insert(std::make_pair(id, value));
-
-        if (tp_is_wall(tp)) {
-            game.state.map.is_wall[old_at.x][old_at.y] = false;
-            game.state.map.is_wall[new_at.x][new_at.y] = true;
-        }
-        if (tp_is_floor(tp)) {
-            game.state.map.is_floor[old_at.x][old_at.y] = false;
-            game.state.map.is_floor[new_at.x][new_at.y] = true;
-        }
-    }
-
-    /*
-     * Moves are immediate, but we render the move in steps, hence keep
-     * track of when we moved.
-     */
-    at = to;
-    begin_move_ms = time_get_time_ms_cached();
-    end_move_ms = begin_move_ms + ONESEC / 10;
-
-    update();
-}
-
-void Thing::move_delta (fpoint delta)
-{_
-    /*
-     * If not moving and this is the first move then break out of the
-     * idle animation.
-     */
-    if (is_dir_none()) {
-        next_frame_ms = time_get_time_ms_cached();
-    }
-
-    if (delta.x > 0) {
-        set_dir_left();
-        is_moving = true;
-        has_ever_moved = true;
-    }
-
-    if (delta.x < 0) {
-        set_dir_right();
-        is_moving = true;
-        has_ever_moved = true;
-    }
-
-    if (delta.y > 0) {
-        set_dir_up();
-        is_moving = true;
-        has_ever_moved = true;
-    }
-
-    if (delta.y < 0) {
-        set_dir_down();
-        is_moving = true;
-        has_ever_moved = true;
-    }
-
-    update_pos(at + delta);
-}
-
-void Thing::move_to (fpoint to)
-{_
-    move_delta(fpoint(to.x - at.x, to.y - at.y));
 }
 
 /*
