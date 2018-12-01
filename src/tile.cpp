@@ -91,13 +91,15 @@ void tile_load_arr (std::string tex_name,
             t->x2 = t->x1 + fw;
             t->y2 = t->y1 + fh;
 
+#ifdef CREATE_TILE_COLLISION_BOUNDARIES
             t->ox1 = t->x1;
             t->oy1 = t->y1;
             t->ox2 = t->x2;
             t->oy2 = t->y2;
+#endif
 
 #if 0
- /*
+            /*
              * Why? Texture atlas and GL_LINEAR will cause problems blending
              * with tiles adjacent in the atlas, so we trim 0.5 of a pixel
              * all around.
@@ -115,6 +117,7 @@ void tile_load_arr (std::string tex_name,
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
+#ifdef CREATE_TILE_COLLISION_BOUNDARIES
             if ((pixel_size.w <= MAX_TILE_WIDTH) && 
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);
@@ -130,8 +133,8 @@ void tile_load_arr (std::string tex_name,
                 };
 
                 point MIN = {
-                (pixel_size.w * x) + pixel_size.w - 1,
-                (pixel_size.h * y) + pixel_size.h - 1
+                    (pixel_size.w * x) + pixel_size.w - 1,
+                    (pixel_size.h * y) + pixel_size.h - 1
                 };
 
                 int x1, y1;
@@ -146,9 +149,9 @@ void tile_load_arr (std::string tex_name,
 
                         color p = getPixel(s, at.x, at.y);
 
- /*
-                        * If solid...
-                        */
+                        /*
+                         * If solid...
+                         */
                         if (p.a >= 0xef) {
                             MIN.x = std::min(at.x, MIN.x);
                             MIN.y = std::min(at.y, MIN.y);
@@ -180,6 +183,7 @@ void tile_load_arr (std::string tex_name,
                 t->py1 = ((double) (MIN.y - AT.y)) / (double) pixel_size.h;
                 t->py2 = ((double) (MAX.y - AT.y + 1)) / (double) pixel_size.h;
             }
+#endif
 
 #ifdef DEBUG_TILE
             printf("^^^  %s %f %f %f %f min x %d %d min y %d %d\n",name.c_str(),t->px1,t->py1,t->px2,t->py2, MIN.x,MAX.x,MIN.y,MAX.y);
@@ -188,7 +192,7 @@ void tile_load_arr (std::string tex_name,
 
         x++;
 
- /*
+        /*
          * Check the whole tile can be read
          */
         if ((x * width) + (width - 1) >= tex_get_width(tex)) {

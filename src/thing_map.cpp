@@ -261,87 +261,6 @@ static void thing_blit_wall_cladding (Thingp &t,
     }
 }
 
-static void thing_get_all_coordinates (void)
-{
-    const double tile_gl_width = game.config.tile_gl_width;
-    const double tile_gl_height = game.config.tile_gl_height;
-
-    for (auto p : game.state.map.all_things) {
-        auto t = p.second;
-        auto tp = t->tp;
-        double tx = t->at.x - game.state.map_at.x;
-        double ty = t->at.y - game.state.map_at.y;
-
-        t->tl.x = tx * tile_gl_width;
-        t->tl.y = ty * tile_gl_height;
-        t->br.x = (tx+1) * tile_gl_width;
-        t->br.y = (ty+1) * tile_gl_height;
-
-        Tilep tile;
-        if (t->current_tileinfo) {
-            tile = t->current_tileinfo->tile;
-        } else {
-            tile = t->current_tile;
-        }
-
-        /*
-         * Scale up tiles that are larger to the same pix scale.
-         */
-        if (tile->pix_width != TILE_WIDTH) {
-            auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
-            auto mx = (t->br.x + t->tl.x) / 2.0;
-            t->tl.x = mx - (xtiles * tile_gl_width);
-            t->br.x = mx + (xtiles * tile_gl_width);
-
-            auto ytiles = (tile->pix_height / TILE_HEIGHT) / 2.0;
-            auto my = (t->br.y + t->tl.y) / 2.0;
-            t->tl.y = my - (ytiles * tile_gl_height);
-            t->br.y = my + (ytiles * tile_gl_height);
-        }
-
-        /*
-         * Put larger tiles on the same y base as small ones.
-         */
-        if (tp_is_blit_off_center(tp)) {
-            double y_offset = 
-                (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) * 
-                 tile_gl_height) / 2.0;
-            t->tl.y -= y_offset;
-            t->br.y -= y_offset;
-        }
-
-        if (tp_is_animated_walk_flip(tp)) {
-            if (t->flip_start_ms) {
-                auto diff = time_get_time_ms_cached() - t->flip_start_ms;
-                uint32_t flip_time = 100;
-                uint32_t flip_steps = 100;
-
-                if (diff > flip_time) {
-                    t->flip_start_ms = 0;
-                    if (t->is_dir_left()) {
-                        std::swap(t->tl.x, t->br.x);
-                    }
-                } else {
-                    if (t->is_dir_right()) {
-                        std::swap(t->tl.x, t->br.x);
-                    }
-                    double w = t->br.x - t->tl.x;
-                    double dw = w / flip_steps;
-                    double tlx = t->tl.x;
-                    double brx = t->br.x;
-
-                    t->tl.x = tlx + dw * diff;
-                    t->br.x = brx - dw * diff;
-                }
-            } else {
-                if (t->is_dir_left()) {
-                    std::swap(t->tl.x, t->br.x);
-                }
-            }
-        }
-    }
-}
-
 static void thing_blit_things (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
@@ -453,7 +372,7 @@ void thing_render_all (void)
     }
 
     thing_map_scroll_do();
-    thing_get_all_coordinates();
+    thing_update_all_coordinates();
 
     auto lighting = true;
     if (lighting) {

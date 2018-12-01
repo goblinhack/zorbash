@@ -113,6 +113,15 @@ public:
     uint32_t           timestamp_move_end {};
 
     /*
+     * Bouncing
+     */
+    uint32_t           timestamp_bounce_begin {};
+    uint32_t           timestamp_bounce_end {};
+    double             bounce_height {}; // Percentage of tile height.
+    double             bounce_fade {};   // 0.1; rapid decrease, 0.9 slow
+    uint16_t           bounce_count {};
+
+    /*
      * Tileinfo may be null if this thing does not need animation.
      * Ih such a case, current_tile will be set.
      */
@@ -168,6 +177,7 @@ public:
     unsigned int       is_moving:1;
     unsigned int       has_ever_moved:1;
     unsigned int       is_open:1;
+    unsigned int       is_bouncing:1;
     
     std::string logname(void);
     uint8_t is_dir_bl(void);
@@ -217,21 +227,18 @@ public:
     /*
      * thing_move.cpp
      */
-    fpoint get_velocity(void);
-    void set_velocity(fpoint v);
-    void set_velocity(double x, double y);
+    void update_coordinates(void);
     bool move(fpoint future_pos,
               const uint8_t up,
               const uint8_t down,
               const uint8_t left,
               const uint8_t right,
               const uint8_t fire);
-
-    /*
-     * thing_collision.cpp
-     */
-    bool check_if_will_hit_solid_obstacle(fpoint future_pos);
-    bool handle_collisions(void);
+    void bounce(double bounce_height,
+                double bounce_fade,
+                uint32_t ms,
+                uint32_t bounce_count);
+    double get_bounce(void);
 
     /*
      * thing_weapon.cpp
@@ -277,9 +284,7 @@ extern void thing_map_scroll_to_player(void);
 /*
  * thing_move.cpp
  */
-bool thing_overlaps_border(Thingp t);
-bool things_tile_overlap(Thingp t, Thingp o);
-bool things_tile_overlap(Thingp t, fpoint t_at, Thingp o);
+void thing_update_all_coordinates(void);
 
 /*
  * thing_collision.cpp
