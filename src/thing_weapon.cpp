@@ -125,7 +125,7 @@ void Thing::get_weapon_use_offset (double *dx, double *dy)
     double dist_from_wielder = 
         ((double)tp_weapon_use_distance(weapon)) / 10.0;
 
- /*
+    /*
      * Try current direction.
      */
     if (is_dir_tl()) {
@@ -134,7 +134,7 @@ void Thing::get_weapon_use_offset (double *dx, double *dy)
         return;
     }
 
- /*
+    /*
      * Careful here - change dy too much and you hit through walls
      */
 
@@ -192,7 +192,7 @@ Thingp Thing::get_weapon_carry_anim (void)
 
 Thingp Thing::get_weapon_use_anim (void)
 {
- /*
+    /*
      * If this weapon_use_anim has its own thing id for animations then 
      * destroy that.
      */
@@ -234,7 +234,7 @@ void Thing::sheath (void)
 
     log("sheathing %s", tp_short_name(weapon).c_str());
 
- /*
+    /*
      * If this weapon has its own thing id for animations then destroy that.
      */
     auto weapon_carry_anim = get_weapon_carry_anim();
@@ -269,17 +269,17 @@ void Thing::wield (Tpp weapon)
 
     auto carry_anim = thing_new(carry_as, at);
 
- /*
+    /*
      * Set the weapon so we can use it later
      */
     weapon_tp_id = weapon->id;
 
- /*
+    /*
      * Save the thing id so the client wid can keep track of the weapon.
      */
     set_weapon_carry_anim(carry_anim);
 
- /*
+    /*
      * Attach to the thing.
      */
     carry_anim->set_owner(this);
@@ -290,7 +290,7 @@ void Thing::wield (Tpp weapon)
 void Thing::use (void)
 {
     if (weapon_use_anim_thing_id) {
- /*
+        /*
          * Still using.
          */
         return;
@@ -315,19 +315,19 @@ void Thing::use (void)
         return;
     }
 
- /*
+    /*
      * Save the thing id so the client wid can keep track of the weapon.
      */
     auto use_anim = thing_new(swung_as, at);
 
- /*
+    /*
      * Attach to the parent thing.
      */
     use_anim->set_owner(this);
 
     set_weapon_use_anim(use_anim);
 
- /*
+    /*
      * Hide the carry anim while using.
      */
     auto c = get_weapon_carry_anim();

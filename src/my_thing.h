@@ -169,15 +169,16 @@ public:
     /*
      * Update thing_new when adding new bitfields.
      */
-    unsigned int       is_dead:1;
-    unsigned int       is_bloodied:1;
-    unsigned int       is_player:1;
-    unsigned int       is_hidden:1;
-    unsigned int       is_sleeping:1;
-    unsigned int       is_moving:1;
-    unsigned int       has_ever_moved:1;
-    unsigned int       is_open:1;
-    unsigned int       is_bouncing:1;
+    unsigned int       is_dead:1;          /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_bloodied:1;      /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_player:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_hidden:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_sleeping:1;      /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_moving:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       has_ever_moved:1;   /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_open:1;          /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_bouncing:1;      /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_attached:1;      /* until -std=c++2a remember to update thing.cpp */
     
     std::string logname(void);
     uint8_t is_dir_bl(void);
@@ -215,6 +216,17 @@ public:
     void visible();
     void hide();
     void tick();
+
+    /*
+     * thing_display.cpp
+     */
+    fpoint last_attached;
+    void attach(void);
+    void detach(void);
+    void blit_wall_cladding(fpoint &tl, fpoint &br);
+    void blit_shadow(const Tpp &tp, const Tilep &tile, 
+                     const fpoint &tl, const fpoint &br);
+    void blit(double offset_x, double offset_y, int x, int y, int z);
 
     /*
      * thing_hit.cpp
@@ -275,11 +287,64 @@ public:
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 };
 
+class ThingDisplaySortKey {
+public:
+    ThingDisplaySortKey (void)
+    {
+    }
+
+    ThingDisplaySortKey (uint8_t depth, double y, Thingp t) :
+                        depth(depth), y(y), t(t)
+    {
+    }
+
+    ~ThingDisplaySortKey (void)
+    {
+    }
+
+    int depth {};
+    double y {};
+    Thingp t {};
+};
+
+struct thing_display_sort_cmp : public std::binary_function<class ThingDisplaySortKey, class ThingDisplaySortKey, bool>
+{
+    bool operator()(const ThingDisplaySortKey& lhs, 
+                    const ThingDisplaySortKey& rhs) const
+    {
+        if (lhs.y < rhs.y) {
+            return (true);
+        } else if (lhs.y > rhs.y) {
+            return (false);
+        }
+
+        if (lhs.depth < rhs.depth) {
+            return (true);
+        } else if (lhs.depth > rhs.depth) {
+            return (false);
+        }
+
+        if (lhs.t->id < rhs.t->id) {
+            return (true);
+        } else if (lhs.t->id > rhs.t->id) {
+            return (false);
+        }
+
+        return (false);
+    }
+};
+
 extern Thingp thing_new(std::string tp_name, fpoint at);
 extern Thingp thing_find(uint32_t name);
 extern void thing_gc(void);
 extern void thing_render_all(void);
 extern void thing_map_scroll_to_player(void);
+
+/*
+ * thing_display.cpp
+ */
+typedef std::map< ThingDisplaySortKey, Thingp, thing_display_sort_cmp > ThingDisplayOrder;
+extern ThingDisplayOrder thing_display_order[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
 
 /*
  * thing_move.cpp

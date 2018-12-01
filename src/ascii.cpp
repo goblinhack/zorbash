@@ -308,7 +308,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
         if (tile == nullptr) {
             tile = fixed_font->unicode_to_tile(L'▋');
             if (tile == nullptr) {
-                tile = fixed_font->unicode_to_tile(L'?');
+                tile = fixed_font->unicode_to_tile(L'_');
                 if (tile == nullptr) {
                     x++;
                     continue;
@@ -336,7 +336,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
                 fg = CONSOLE_CURSOR_OTHER_COLOR;
             }
 
-            tile = fixed_font->unicode_to_tile(L'▋');
+            tile = fixed_font->unicode_to_tile(L'_');
         }
 
         ascii_cell *cell = &cells[x++][y];

@@ -370,7 +370,7 @@ void Light::calculate (void)
     uint8_t z = MAP_DEPTH_WALLS;
     for (int16_t x = maxx - 1; x >= minx; x--) {
         for (int16_t y = miny; y < maxy; y++) {
-            for (auto p : game.state.map.things[x][y][z]) {
+            for (auto p : thing_display_order[x][y][z]) {
                 auto t = p.second;
                 if (tp_is_shadow_caster(t->tp)) {
                     calculate_for_obstacle(t, x, y);
@@ -649,7 +649,7 @@ void lights_render (int fbo)
                     auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
 
                     if (len > TILES_ACROSS + l->strength) {
-                        continue;
+//                        continue;
                     }
                 }
 

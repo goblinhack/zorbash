@@ -101,12 +101,88 @@ static void game_place_walls (class Dungeon *d,
     }
 }
 
+static void game_fill_void (class Dungeon *d,
+                            std::string what,
+                            int variant,
+                            int block_width,
+                            int block_height,
+                            int tries)
+{_
+    while (tries--) {
+        auto x = random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+
+        auto can_place_wall_here = true;
+        for (auto dx = 0; dx < block_width; dx++) {
+            auto X = x + dx;
+            for (auto dy = 0; dy < block_height; dy++) {
+                auto Y = y + dy;
+
+                if (d->is_oob(X, Y)) {
+                    continue;
+                }
+
+                if (d->is_anything_at(X, Y)) {
+                    can_place_wall_here = false;
+                    break;
+                }
+
+                /*
+                 * We place large blocks and avoid splatting them with
+                 * smaller ones here.
+                 */
+                if (game.state.map.is_wall[X][Y]) {
+                    can_place_wall_here = false;
+                    continue;
+                }
+            }
+
+            if (!can_place_wall_here) {
+                break;
+            }
+        }
+
+        if (!can_place_wall_here) {
+            continue;
+        }
+
+        auto cnt = 1;
+        for (auto dy = 0; dy < block_height; dy++) {
+            auto Y = y + dy;
+            for (auto dx = 0; dx < block_width; dx++) {
+                auto X = x + dx;
+                game.state.map.is_wall[X][Y] = 1;
+
+                auto s = what;
+                s += ".";
+                s += std::to_string(variant);
+                s += ".";
+                s += std::to_string(block_width);
+                s += "x";
+                s += std::to_string(block_height);
+                s += ".";
+                s += std::to_string(cnt);
+                cnt++;
+
+                auto t = thing_new(what, fpoint(X, Y));
+                auto tile = tile_find(s);
+                t->current_tileinfo = nullptr;
+                t->current_tile = tile;
+            }
+        }
+    }
+}
+
 static void game_place_floor (class Dungeon *d,
                               std::string what,
                               int depth)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_floor[x][y]) {
+                continue;
+            }
+
             if (!d->is_floor_at(x, y)) {
                 continue;
             }
@@ -115,6 +191,21 @@ static void game_place_floor (class Dungeon *d,
                 if (depth != d->get_grid_depth_at(x, y)) {
                     continue;
                 }
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_floor_under_walls (class Dungeon *d,
+                                          std::string what)
+{_
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            if (!game.state.map.is_floor[x][y] &&
+                !game.state.map.is_corridor[x][y]) {
+                continue;
             }
 
             /*
@@ -141,8 +232,6 @@ static void game_place_floor (class Dungeon *d,
                     thing_new(what, fpoint(x - 1, y));
                 }
             }
-
-            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
@@ -151,8 +240,8 @@ static void game_place_corridor (class Dungeon *d,
                               std::string what,
                               int depth)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!d->is_corridor_at(x, y)) {
                 continue;
             }
@@ -163,38 +252,12 @@ static void game_place_corridor (class Dungeon *d,
                 }
             }
 
-            /*
-             * Not all walls fill the entire space so put a corridor beneath
-             * them or they look odd.
-             */
-            if (d->is_wall_at(x, y + 1)) {
-                if (!game.state.map.is_corridor[x][y + 1]) {
-                    thing_new(what, fpoint(x, y + 1));
-                }
-            }
-            if (d->is_wall_at(x, y - 1)) {
-                if (!game.state.map.is_corridor[x][y - 1]) {
-                    thing_new(what, fpoint(x, y - 1));
-                }
-            }
-            if (d->is_wall_at(x + 1, y)) {
-                if (!game.state.map.is_corridor[x + 1][y]) {
-                    thing_new(what, fpoint(x + 1, y));
-                }
-            }
-            if (d->is_wall_at(x - 1, y)) {
-                if (!game.state.map.is_corridor[x - 1][y]) {
-                    thing_new(what, fpoint(x - 1, y));
-                }
-            }
-
             (void) thing_new(what, fpoint(x, y));
         }
     }
 }
 
-static void game_place_entrance (class Dungeon *d,
-                              std::string what)
+static void game_place_entrance (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -207,8 +270,7 @@ static void game_place_entrance (class Dungeon *d,
     }
 }
 
-static void game_place_exit (class Dungeon *d,
-                              std::string what)
+static void game_place_exit (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -221,8 +283,7 @@ static void game_place_exit (class Dungeon *d,
     }
 }
 
-static void game_ramaining_place_blocks (class Dungeon *d,
-                                         std::string what)
+static void game_ramaining_place_blocks (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -286,6 +347,33 @@ void game_display (void)
 
         game_ramaining_place_blocks(dungeon, "wall1");
 
+        game_fill_void(dungeon, "wall1", 1, 6, 6, tries);
+        game_fill_void(dungeon, "wall1", 2, 6, 6, tries);
+
+        game_fill_void(dungeon, "wall1", 1, 6, 3, tries);
+        game_fill_void(dungeon, "wall1", 2, 6, 3, tries);
+
+        game_fill_void(dungeon, "wall1", 1, 3, 6, tries);
+        game_fill_void(dungeon, "wall1", 2, 3, 6, tries);
+
+        game_fill_void(dungeon, "wall1", 1, 3, 3, tries);
+        game_fill_void(dungeon, "wall1", 2, 3, 3, tries);
+        game_fill_void(dungeon, "wall1", 3, 3, 3, tries);
+        game_fill_void(dungeon, "wall1", 4, 3, 3, tries);
+
+        game_fill_void(dungeon, "wall1", 1, 2, 2, tries);
+        game_fill_void(dungeon, "wall1", 2, 2, 2, tries);
+
+        game_fill_void(dungeon, "wall1", 1, 2, 1, tries);
+        game_fill_void(dungeon, "wall1", 2, 2, 1, tries);
+        game_fill_void(dungeon, "wall1", 3, 2, 1, tries);
+        game_fill_void(dungeon, "wall1", 4, 2, 1, tries);
+
+        game_fill_void(dungeon, "wall1", 1, 1, 2, tries);
+        game_fill_void(dungeon, "wall1", 2, 1, 2, tries);
+        game_fill_void(dungeon, "wall1", 3, 2, 1, tries);
+        game_fill_void(dungeon, "wall1", 4, 2, 1, tries);
+
         game_place_floor(dungeon, "floor1", 1);
         game_place_floor(dungeon, "floor2", 2);
         game_place_floor(dungeon, "floor3", 3);
@@ -294,6 +382,7 @@ void game_display (void)
         game_place_floor(dungeon, "floor6", 6);
         game_place_floor(dungeon, "floor6", 0);
         game_place_corridor(dungeon, "corridor1", 0);
+        game_place_floor_under_walls(dungeon, "floor6");
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {

@@ -44,6 +44,8 @@ bool Thing::move (fpoint future_pos,
 
 void Thing::update_coordinates (void)
 {
+    auto old_br = br;
+
     const double tile_gl_width = game.config.tile_gl_width;
     const double tile_gl_height = game.config.tile_gl_height;
 
@@ -64,8 +66,8 @@ void Thing::update_coordinates (void)
         y = last_at.y + dy * step;
     }
 
-    double tx = x - game.state.map_at.x;
-    double ty = y - game.state.map_at.y;
+    double tx = x;
+    double ty = y;
 
     tl.x = tx * tile_gl_width;
     tl.y = ty * tile_gl_height;
@@ -152,6 +154,16 @@ void Thing::update_coordinates (void)
             }
         }
     }
+
+    /*
+     * If we've moved, need to update the display sort order.
+     */
+    if (br != old_br) {
+        std::swap(br, old_br);
+        detach();
+        std::swap(br, old_br);
+        attach();
+    }
 }
 
 void thing_update_all_coordinates (void)
@@ -210,4 +222,88 @@ double Thing::get_bounce (void)
     height *= bounce_height;
 
     return (height);
+}
+
+void Thing::update_pos (fpoint to)
+{_
+    point new_at((int)to.x, (int)to.y);
+    if (game.state.map.is_oob(new_at)) {
+        return;
+    }
+
+    point old_at((int)at.x, (int)at.y);
+
+    has_ever_moved = true;
+
+    if (!has_ever_moved) {
+        last_at = to;
+    } else {
+        last_at = at;
+    }
+
+    /*
+     * Keep track of where this thing is on the grid
+     */
+    if (old_at != new_at) {
+        if (tp_is_wall(tp)) {
+            game.state.map.is_wall[old_at.x][old_at.y] = false;
+            game.state.map.is_wall[new_at.x][new_at.y] = true;
+        }
+        if (tp_is_floor(tp)) {
+            game.state.map.is_floor[old_at.x][old_at.y] = false;
+            game.state.map.is_floor[new_at.x][new_at.y] = true;
+        }
+    }
+
+    /*
+     * Moves are immediate, but we render the move in steps, hence keep
+     * track of when we moved.
+     */
+    at = to;
+    begin_move_ms = time_get_time_ms_cached();
+    end_move_ms = begin_move_ms + ONESEC / 10;
+
+    update();
+}
+
+void Thing::move_delta (fpoint delta)
+{_
+    /*
+     * If not moving and this is the first move then break out of the
+     * idle animation.
+     */
+    if (is_dir_none()) {
+        next_frame_ms = time_get_time_ms_cached();
+    }
+
+    if (delta.x > 0) {
+        set_dir_left();
+        is_moving = true;
+        has_ever_moved = true;
+    }
+
+    if (delta.x < 0) {
+        set_dir_right();
+        is_moving = true;
+        has_ever_moved = true;
+    }
+
+    if (delta.y > 0) {
+        set_dir_up();
+        is_moving = true;
+        has_ever_moved = true;
+    }
+
+    if (delta.y < 0) {
+        set_dir_down();
+        is_moving = true;
+        has_ever_moved = true;
+    }
+
+    update_pos(at + delta);
+}
+
+void Thing::move_to (fpoint to)
+{_
+    move_delta(fpoint(to.x - at.x, to.y - at.y));
 }

@@ -20,12 +20,12 @@ typedef std::unordered_map< uint32_t, Lightp > Lights;
 
 enum {
     MAP_DEPTH_FLOOR,
+    MAP_DEPTH_WALLS,
     MAP_DEPTH_EXIT,
     MAP_DEPTH_ITEM,
     MAP_DEPTH_MONST,
     MAP_DEPTH_PLAYER,
     MAP_DEPTH_WEAPON,
-    MAP_DEPTH_WALLS,
     MAP_DEPTH,
 };
 
@@ -37,8 +37,6 @@ public:
     std::unordered_map<uint32_t, Lightp> 
                                lights[MAP_WIDTH][MAP_HEIGHT];
     Things                     all_things;
-    std::unordered_map<uint32_t, Thingp> 
-                               things[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -58,7 +56,6 @@ public:
     void serialize (Archive & archive)
     {
         archive(cereal::make_nvp("all_things",      all_things),
-                cereal::make_nvp("things",          things),
                 cereal::make_nvp("all_lights",      all_lights),
                 cereal::make_nvp("lights",          lights));
     }

@@ -78,311 +78,36 @@ void thing_map_scroll_to_player (void)
     }
 }
 
-static void thing_blit_wall_cladding (Thingp &t,
-                                      int x, int y,
-                                      fpoint &tl, fpoint &br)
-{  
-    auto tp = t->tp;
-    double dw = game.config.tile_gl_width / (double)TILE_WIDTH;
-    double dh = game.config.tile_gl_height / (double)TILE_HEIGHT;
-
-    if (!game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->top_tile, tl2, br2);
-    }
-
-    if (!game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_fat(tp, t->bot_tile, tl2, br2);
-    }
-
-    if (!game.state.map.is_wall[x - 1][y]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
-        tile_blit_fat(tp, t->left_tile, tl2, br2);
-    }
-
-    if (!game.state.map.is_wall[x + 1][y]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tile_blit_fat(tp, t->right_tile, tl2, br2);
-    }
-
-    /*
-     * X---
-     * |...
-     * |...
-     */
-    if (!game.state.map.is_wall[x - 1][y - 1] &&
-        !game.state.map.is_wall[x - 1][y] &&
-        !game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->tl_tile, tl2, br2);
-    }
-
-    /*
-     * ---X
-     * ...|
-     * ...|
-     */
-    if (!game.state.map.is_wall[x + 1][y - 1] &&
-        !game.state.map.is_wall[x + 1][y] &&
-        !game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->tr_tile, tl2, br2);
-    }
-
-    /*
-     *  .|
-     *  .|
-     *  .X--
-     *  ....
-     */
-    if (!game.state.map.is_wall[x + 1][y - 1] &&
-        game.state.map.is_wall[x + 1][y] &&
-        game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->tr_tile, tl2, br2);
-    }
-
-    /*
-     *    |.
-     *    |.
-     *  --X.
-     *  ....
-     */
-    if (!game.state.map.is_wall[x - 1][y - 1] &&
-        game.state.map.is_wall[x - 1][y] &&
-        game.state.map.is_wall[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_fat(tp, t->tl_tile, tl2, br2);
-    }
-
-    dw = 0.00;
-    dh = 0.00;
-
-    /*
-     * |...
-     * |...
-     * X---
-     */
-    if (!game.state.map.is_wall[x - 1][y + 1] &&
-        !game.state.map.is_wall[x - 1][y] &&
-        !game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_fat(tp, t->bl_tile, tl2, br2);
-    }
-
-    /*
-     * ...|
-     * ...|
-     * ---X
-     */
-    if (!game.state.map.is_wall[x + 1][y + 1] &&
-        !game.state.map.is_wall[x + 1][y] &&
-        !game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_fat(tp, t->br_tile, tl2, br2);
-    }
-
-    /*
-     * .....
-     * .X---
-     * .|
-     * .|
-     */
-    if (!game.state.map.is_wall[x + 1][y + 1] &&
-        game.state.map.is_wall[x + 1][y] &&
-        game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_fat(tp, t->br_tile, tl2, br2);
-    }
-
-    /*
-     * ....
-     * --X.
-     *   |.
-     *   |.
-     */
-    if (!game.state.map.is_wall[x - 1][y + 1] &&
-        game.state.map.is_wall[x - 1][y] &&
-        game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_fat(tp, t->bl_tile, tl2, br2);
-    }
-}
-
-/*
- * Blits a whole tile. Y co-ords are inverted.
- */
-static void thing_blit_shadow (Thingp t,
-                               const Tpp &tp, const Tilep &tile, 
-                               const fpoint &tl, const fpoint &br)
-{
-    double x1;
-    double x2;
-    double y1;
-    double y2;
-
-    if (!tile) {
-        return;
-    }
-
-    color c = BLACK;
-    c.a = 100;
-    glcolor(c);
-
-    x1 = tile->x1;
-    x2 = tile->x2;
-    y1 = tile->y1;
-    y2 = tile->y2;
-
-    fpoint shadow_tl = tl;
-    fpoint shadow_tr(br.x, tl.y);
-    fpoint shadow_bl(tl.x, br.y); 
-    fpoint shadow_br = br;
-
-    if ((t != game.state.player) && game.state.player) {
-        fpoint d = t->at - game.state.player->at;
-
-        const double D = 5.0;
-        auto dx = d.x / D;
-        auto dy = d.y / D;
-
-        shadow_tl.x += 0.05 * dx;
-        shadow_tr.x += 0.05 * dx;
-        shadow_tl.y += 0.01 * dy;
-        shadow_tr.y += 0.01 * dy;
-    } else {
-        shadow_tl.x += 0.05;
-        shadow_tr.x += 0.05;
-        shadow_tl.y += 0.01;
-        shadow_tr.y += 0.01;
-    }
-
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
-         shadow_bl, shadow_br, shadow_tl, shadow_tr);
-    glcolor(WHITE);
-}
-
 static void thing_blit_things (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
     glcolor(WHITE);
     blit_init();
 
-    for (uint8_t z = minz; z < maxz; z++) {
-        for (uint16_t x = minx ; x < maxx; x++) {
-            for (uint16_t y = miny ; y < maxy; y++) {
-                /*
-                 * Draw shadows
-                 */
-                for (auto p : game.state.map.things[x][y][z]) {
+    double offset_x = game.state.map_at.x * game.config.tile_gl_width;
+    double offset_y = game.state.map_at.y * game.config.tile_gl_height;
+
+    auto z = MAP_DEPTH_FLOOR;
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = maxx - 1; x >= minx; x--) {
+            for (auto p : thing_display_order[x][y][z]) {
+                auto t = p.second;
+                t->blit(offset_x, offset_y, x, y, x);
+            }
+        }
+    }
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto z = MAP_DEPTH_FLOOR + 1; z < MAP_DEPTH; z++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
-                    if (unlikely(t->is_hidden)) {
-                        continue;
-                    }
-
-                    auto tp = t->tp;
-                    if (unlikely(tp_is_small_shadow_caster(tp))) {
-                        Tilep tile;
-                        if (t->current_tileinfo) {
-                            tile = t->current_tileinfo->tile;
-                        } else {
-                            tile = t->current_tile;
-                        }
-
-                        thing_blit_shadow(t, tp, tile, t->tl, t->br);
-                    }
-                }
-
-                /*
-                 * Draw everything else
-                 */
-                for (auto p : game.state.map.things[x][y][z]) {
-                    auto t = p.second;
-                    if (unlikely(t->is_hidden)) {
-                        continue;
-                    }
-
-                    auto tp = t->tp;
-                    if (tp_is_animated(tp)) {
-                        t->animate();
-                    }
-
-                    Tilep tile;
-                    if (t->current_tileinfo) {
-                        tile = t->current_tileinfo->tile;
-                    } else {
-                        tile = t->current_tile;
-                    }
-
-                    if (tp_is_outlined(tp)) {
-                        tile_blit_fat_outline(tp, tile, t->tl, t->br);
-                    } else {
-                        tile_blit_fat(tp, tile, t->tl, t->br);
-                    }
-
-                    //if (!tp) { // t->top_tile) {
-                    if (t->top_tile) {
-                        if (tp_is_wall(tp)) {
-                            thing_blit_wall_cladding(t, x, y, t->tl, t->br);
-                        }
-                    }
+                    t->blit(offset_x, offset_y, x, y, x);
                 }
             }
         }
     }
+
     blit_flush();
 }
 
