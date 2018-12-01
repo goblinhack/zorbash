@@ -260,23 +260,25 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
     fpoint shadow_bl(tl.x, br.y); 
     fpoint shadow_br = br;
 
-    if ((this != game.state.player) && game.state.player) {
-        fpoint d = this->at - game.state.player->at;
-
-        const double D = 5.0;
-        auto dx = d.x / D;
-        auto dy = d.y / D;
-
-        shadow_tl.x += 0.05 * dx;
-        shadow_tr.x += 0.05 * dx;
-        shadow_tl.y += 0.01 * dy;
-        shadow_tr.y += 0.01 * dy;
+    double dx = 1.0;
+    double dy = 1.0;
+    if (game.state.player) {
+        if (owner_thing_id == game.state.player->id) {
+            // use default shadow for carried items
+        } else if (this != game.state.player) {
+            fpoint d = this->at - game.state.player->at;
+            const double D = 5.0;
+            dx = d.x / D;
+            dy = d.y / D;
+        }
     } else {
-        shadow_tl.x += 0.05;
-        shadow_tr.x += 0.05;
-        shadow_tl.y += 0.01;
-        shadow_tr.y += 0.01;
+        // use default shadow
     }
+
+    shadow_tl.x += 0.05 * dx;
+    shadow_tr.x += 0.05 * dx;
+    shadow_tl.y += 0.01 * dy;
+    shadow_tr.y += 0.01 * dy;
 
     ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
            shadow_bl, shadow_br, shadow_tl, shadow_tr);

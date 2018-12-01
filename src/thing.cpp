@@ -398,15 +398,23 @@ void Thing::destroy (void)
     }
 }
 
-void Thing::update (void)
+void Thing::update_light (void)
 {_
     /*
      * Light source follows the thing.
      */
     if (light) {
-        light->move_to(at);
+        light->move_to(interpolated_at);
         light->calculate();
     }
+}
+
+void Thing::move_carried_items (void)
+{_
+    /*
+     * Light source follows the thing.
+     */
+    update_light();
 
     /*
      * Weapons follow also.
@@ -474,7 +482,7 @@ void Thing::set_dir_none (void)
 
     if (dir != THING_DIR_NONE) {
         dir = THING_DIR_NONE;
-        update();
+        move_carried_items();
     }
 }
 
@@ -491,7 +499,7 @@ void Thing::set_dir_down (void)
 
     if (dir != THING_DIR_DOWN) {
         dir = THING_DIR_DOWN;
-        update();
+        move_carried_items();
     }
 }
 
@@ -508,7 +516,7 @@ void Thing::set_dir_up (void)
 
     if (dir != THING_DIR_UP) {
         dir = THING_DIR_UP;
-        update();
+        move_carried_items();
     }
 }
 
@@ -530,7 +538,7 @@ void Thing::set_dir_left (void)
             }
         }
         dir = THING_DIR_LEFT;
-        update();
+        move_carried_items();
     }
 }
 
@@ -552,7 +560,7 @@ void Thing::set_dir_right (void)
             }
         }
         dir = THING_DIR_RIGHT;
-        update();
+        move_carried_items();
     }
 }
 
@@ -569,7 +577,7 @@ void Thing::set_dir_tl (void)
 
     if (dir != THING_DIR_TL) {
         dir = THING_DIR_TL;
-        update();
+        move_carried_items();
     }
 }
 
@@ -586,7 +594,7 @@ void Thing::set_dir_bl (void)
 
     if (dir != THING_DIR_BL) {
         dir = THING_DIR_BL;
-        update();
+        move_carried_items();
     }
 }
 
@@ -603,7 +611,7 @@ void Thing::set_dir_tr (void)
 
     if (dir != THING_DIR_TR) {
         dir = THING_DIR_TR;
-        update();
+        move_carried_items();
     }
 }
 
@@ -620,7 +628,7 @@ void Thing::set_dir_br (void)
 
     if (dir != THING_DIR_BR) {
         dir = THING_DIR_BR;
-        update();
+        move_carried_items();
     }
 }
 

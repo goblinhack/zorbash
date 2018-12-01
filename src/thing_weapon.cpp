@@ -284,7 +284,7 @@ void Thing::wield (Tpp weapon)
      */
     carry_anim->set_owner(this);
 
-    update();
+    move_carried_items();
 }
 
 void Thing::use (void)
@@ -335,5 +335,5 @@ void Thing::use (void)
         c->hide();
     }
 
-    update();
+    move_carried_items();
 }
