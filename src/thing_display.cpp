@@ -246,10 +246,6 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
         return;
     }
 
-    color c = BLACK;
-    c.a = 100;
-    glcolor(c);
-
     x1 = tile->x1;
     x2 = tile->x2;
     y1 = tile->y1;
@@ -275,6 +271,10 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
         // use default shadow
     }
 
+    color c = BLACK;
+    c.a = 100;
+    glcolor(c);
+
     shadow_tl.x += 0.05 * dx;
     shadow_tr.x += 0.05 * dx;
     shadow_tl.y += 0.01 * dy;
@@ -282,6 +282,7 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
 
     ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
+
     glcolor(WHITE);
 }
 
