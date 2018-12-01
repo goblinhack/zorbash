@@ -23,6 +23,10 @@ bool Thing::move (fpoint future_pos,
     auto x = future_pos.x;
     auto y = future_pos.y;
 
+    if (fire) {
+        use();
+    }
+
     if ((x == at.x) && (y == at.y)) {
         return (false);
     }
@@ -30,12 +34,6 @@ bool Thing::move (fpoint future_pos,
     if (up || down || left || right) {
         move_delta(fpoint(x, y) - at);
     }
-
-#if 0
-    if (fire) {
-        thing_fire(level, t, up, down, left, right);
-    }
-#endif
 
     bounce(0.1, 0.1, 100, 3);
 

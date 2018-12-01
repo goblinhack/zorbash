@@ -111,13 +111,19 @@ void player_tick (void)
         dy = d;
     }
 
+    fpoint future_pos = player->at + fpoint(dx, dy);
+
+    /*
+     * Place a light to mark the way back
+     */
     if ((dx != 0) || (dy != 0)) {
-        fpoint future_pos = player->at + fpoint(dx, dy);
-
-        (void) light_new(100, 2, 
-                         fpoint(player->at.x, player->at.y), 
-                         LIGHT_QUALITY_POINT, GRAY30);
-
-        player->move(future_pos, up, down, left, right, fire);
+        if (!game.state.map.is_light_at((int)player->at.x, 
+                                        (int)player->at.y)) {
+            (void) light_new(100, 2, 
+                            fpoint(player->at.x, player->at.y), 
+                            LIGHT_QUALITY_POINT, GRAY30);
+        }
     }
+
+    player->move(future_pos, up, down, left, right, fire);
 }
