@@ -21,6 +21,22 @@ bool Map::is_wall_at (const int x, const int y)
     return (is_wall[x][y]);
 }
 
+bool Map::is_light_at (const point &p)
+{
+    if (is_oob(p.x, p.y)) {
+        return (true);
+    }
+    return (is_light[p.x][p.y]);
+}
+
+bool Map::is_light_at (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        return (true);
+    }
+    return (is_light[x][y]);
+}
+
 bool Map::is_oob (const int x, const int y, const int z)
 {
     return ((x < 0) || (x >= MAP_WIDTH) ||

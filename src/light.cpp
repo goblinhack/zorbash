@@ -333,8 +333,8 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
             /*
              * And make sure we intersect with the edges of the obstacle too.
              */
-            add_z_depth(t, light_pos, P[(k + 2) % 4], p1_rad, p1_deg);
-            add_z_depth(t, light_pos, P[(l + 2) % 4], p2_rad, p2_deg);
+            add_z_depth(t, light_pos, P[k], p1_rad, p1_deg);
+            add_z_depth(t, light_pos, P[l], p2_rad, p2_deg);
 
             rad += dr;
             if (rad >= RAD_360) {

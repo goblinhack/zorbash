@@ -312,6 +312,11 @@ void game_display (void)
 
         LOG("dungeon: create blocks");
 
+        memset(game.state.map.is_wall, sizeof(game.state.map.is_wall), 0);
+        memset(game.state.map.is_floor, sizeof(game.state.map.is_floor), 0);
+        memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
+        memset(game.state.map.is_light, sizeof(game.state.map.is_light), 0);
+
         game_place_entrance(dungeon, "entrance1");
         game_place_exit(dungeon, "exit1");
 
