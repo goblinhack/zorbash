@@ -72,6 +72,7 @@ public:
      * Grid coordinates.
      */
     fpoint             at;
+    fpoint             interpolated_at;
 
     /*
      * On screen coordinates, taking account for size of the current frame.
@@ -199,7 +200,8 @@ public:
     void move_delta(fpoint);
     void move_to(fpoint to);
     bool slide(void);
-    void update(void);
+    void move_carried_items(void);
+    void update_light(void);
     void set_dir_bl(void);
     void set_dir_br(void);
     void set_dir_down(void);

@@ -55,6 +55,8 @@ void Thing::update_coordinates (void)
     if (time_get_time_ms() >= end_move_ms) {
         x = at.x;
         y = at.y;
+
+        interpolated_at = at;
     } else {
         double t = end_move_ms - begin_move_ms;
         double dt = time_get_time_ms() - begin_move_ms;
@@ -64,6 +66,8 @@ void Thing::update_coordinates (void)
 
         x = last_at.x + dx * step;
         y = last_at.y + dy * step;
+
+        interpolated_at = fpoint(x, y);
     }
 
     double tx = x;
@@ -163,6 +167,8 @@ void Thing::update_coordinates (void)
         detach();
         std::swap(br, old_br);
         attach();
+
+        update_light();
     }
 }
 
@@ -262,8 +268,7 @@ void Thing::update_pos (fpoint to)
     at = to;
     begin_move_ms = time_get_time_ms_cached();
     end_move_ms = begin_move_ms + ONESEC / 10;
-
-    update();
+    move_carried_items();
 }
 
 void Thing::move_delta (fpoint delta)

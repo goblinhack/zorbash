@@ -649,7 +649,7 @@ void lights_render (int fbo)
                     auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
 
                     if (len > TILES_ACROSS + l->strength) {
-//                        continue;
+                        continue;
                     }
                 }
 
