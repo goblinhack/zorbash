@@ -81,34 +81,65 @@ void thing_map_scroll_to_player (void)
 static void thing_blit_things (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
+    std::list<Thingp> moved;
+
     glcolor(WHITE);
     blit_init();
 
     double offset_x = game.state.map_at.x * game.config.tile_gl_width;
     double offset_y = game.state.map_at.y * game.config.tile_gl_height;
 
-    auto z = MAP_DEPTH_FLOOR;
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : thing_display_order[x][y][z]) {
-                auto t = p.second;
-                t->blit(offset_x, offset_y, x, y, x);
-            }
-        }
-    }
-
-    for (auto y = miny; y < maxy; y++) {
-        for (auto z = MAP_DEPTH_FLOOR + 1; z < MAP_DEPTH; z++) {
+    /*
+     * Floors
+     */
+    for (int z = MAP_DEPTH_FLOOR; z <= MAP_DEPTH_LAVA; z++) {
+        for (auto y = miny; y < maxy; y++) {
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
-                    t->blit(offset_x, offset_y, x, y, x);
+                    verify(t);
+                    t->blit(offset_x, offset_y, x, y, z);
                 }
             }
         }
     }
 
     blit_flush();
+
+    /*
+     * Walls
+     */
+    blit_init();
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto z = MAP_DEPTH_LAVA + 1; z < MAP_DEPTH; z++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                for (auto p : thing_display_order[x][y][z]) {
+                    auto t = p.second;
+                    verify(t);
+
+                    if (!tp_is_boring(t->tp)) {
+                        if (t->update_coordinates()) {
+                            moved.push_back(t);
+                        }
+                    }
+
+                    t->blit(offset_x, offset_y, x, y, z);
+                }
+            }
+        }
+    }
+
+    blit_flush();
+
+    for (auto t : moved) {
+        std::swap(t->br, t->old_br);
+        t->detach();
+        std::swap(t->br, t->old_br);
+        t->attach();
+
+        t->update_light();
+    }
 }
 
 static void thing_blit_editor (int minx, int miny, int minz,
@@ -159,14 +190,14 @@ void thing_render_all (void)
     int maxz = MAP_DEPTH;
 
     int minx = std::max(0, 
-        (int) game.state.map_at.x - TILES_ACROSS / 2);
+        (int) game.state.map_at.x - TILES_ACROSS / 4);
     int maxx = std::min(MAP_WIDTH, 
-        (int)game.state.map_at.x + TILES_ACROSS + TILES_ACROSS / 2);
+        (int)game.state.map_at.x + TILES_ACROSS + TILES_ACROSS / 4);
 
     int miny = std::max(0, 
-        (int) game.state.map_at.y - TILES_DOWN / 2);
+        (int) game.state.map_at.y - TILES_DOWN / 4);
     int maxy = std::min(MAP_HEIGHT, 
-        (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 2);
+        (int)game.state.map_at.y + TILES_DOWN + TILES_DOWN / 4);
 
     /*
      * Improve this to only update when things move one tile
@@ -176,8 +207,6 @@ void thing_render_all (void)
     }
 
     thing_map_scroll_do();
-    thing_update_all_coordinates();
-
     auto lighting = true;
     if (lighting) {
         blit_fbo_bind(FBO_LIGHT_MERGED);
@@ -185,7 +214,7 @@ void thing_render_all (void)
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
 
-        lights_render(FBO_LIGHT_MERGED);
+        lights_render(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
         
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

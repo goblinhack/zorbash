@@ -472,7 +472,7 @@ static void sdl_event (SDL_Event * event)
         wheel_x *= accel;
         wheel_y *= accel;
 
- /*
+        /*
          * Negative wheel x so side scrolls seem natural. Could just be
          * a dumb macos thing to ifdef?
          */
@@ -990,8 +990,6 @@ void sdl_loop (void)
 
         glcolor(WHITE);
 
-        thing_tick_all();
-
         /*
          * Display UI.
          */
@@ -1023,7 +1021,7 @@ void sdl_loop (void)
 
         time_get_time_ms();
 
- /*
+        /*
          * Flip
          */
         SDL_GL_SwapWindow(window);

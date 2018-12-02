@@ -17,7 +17,12 @@
 #define CAT2(A, B) CAT(A, B)
 
 #undef _
+
+#ifdef ENABLE_TRACING
 #define _ tracer_t CAT2(__my_trace__, __LINE__) (__FILE__, __PRETTY_FUNCTION__, __LINE__);
+#else
+#define _ 
+#endif
 
 struct callframe {
     const char *const file;

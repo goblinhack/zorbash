@@ -19,7 +19,7 @@ void player_tick (void)
         return;
     }
 
-    if ((time_get_time_ms() - player->begin_move_ms) < 100) {
+    if ((time_get_time_ms_cached() - player->begin_move_ms) < 100) {
         return;
     }
 
@@ -116,14 +116,19 @@ void player_tick (void)
     /*
      * Place a light to mark the way back
      */
+#if 0
     if ((dx != 0) || (dy != 0)) {
         if (!game.state.map.is_light_at((int)player->at.x, 
                                         (int)player->at.y)) {
-            (void) light_new(100, 2, 
-                            fpoint(player->at.x, player->at.y), 
-                            LIGHT_QUALITY_POINT, GRAY30);
+            
+            game.state.map.is_light[(int)player->at.x]
+                                   [(int)player->at.y] = true;
+            (void) light_new(0, 1, 
+                             fpoint(player->at.x, player->at.y), 
+                             LIGHT_QUALITY_POINT, GRAY30);
         }
     }
+#endif
 
     player->move(future_pos, up, down, left, right, fire);
 }

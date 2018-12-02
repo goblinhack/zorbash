@@ -79,6 +79,7 @@ public:
      */
     fpoint             tl;
     fpoint             br;
+    fpoint             old_br;
 
     /*
      * Previous hop where we were. We use this to interpolate the real
@@ -242,7 +243,7 @@ public:
     /*
      * thing_move.cpp
      */
-    void update_coordinates(void);
+    bool update_coordinates(void);
     bool move(fpoint future_pos,
               const uint8_t up,
               const uint8_t down,
@@ -352,17 +353,11 @@ extern ThingDisplayOrder thing_display_order[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
 /*
  * thing_move.cpp
  */
-void thing_update_all_coordinates(void);
 
 /*
  * thing_collision.cpp
  */
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
-
-/*
- * thing_tick.cpp
- */
-void thing_tick_all(void);
 
 #endif /* THING_H */

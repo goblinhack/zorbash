@@ -40,9 +40,9 @@ bool Thing::move (fpoint future_pos,
     return (true);
 }
 
-void Thing::update_coordinates (void)
+bool Thing::update_coordinates (void)
 {
-    auto old_br = br;
+    old_br = br;
 
     const double tile_gl_width = game.config.tile_gl_width;
     const double tile_gl_height = game.config.tile_gl_height;
@@ -50,14 +50,14 @@ void Thing::update_coordinates (void)
     double x;
     double y;
 
-    if (time_get_time_ms() >= end_move_ms) {
+    if (time_get_time_ms_cached() >= end_move_ms) {
         x = at.x;
         y = at.y;
 
         interpolated_at = at;
     } else {
         double t = end_move_ms - begin_move_ms;
-        double dt = time_get_time_ms() - begin_move_ms;
+        double dt = time_get_time_ms_cached() - begin_move_ms;
         double step = dt / t;
         double dx = at.x - last_at.x;
         double dy = at.y - last_at.y;
@@ -161,22 +161,10 @@ void Thing::update_coordinates (void)
      * If we've moved, need to update the display sort order.
      */
     if (br != old_br) {
-        std::swap(br, old_br);
-        detach();
-        std::swap(br, old_br);
-        attach();
-
-        update_light();
+        return (true);
     }
-}
 
-void thing_update_all_coordinates (void)
-{
-    for (auto p : game.state.map.all_things) {
-        auto t = p.second;
-
-        t->update_coordinates();
-    }
+    return (false);
 }
 
 void Thing::bounce (double bounce_height,
@@ -184,7 +172,7 @@ void Thing::bounce (double bounce_height,
                     uint32_t ms,
                     uint32_t bounce_count)
 {
-    timestamp_bounce_begin = time_get_time_ms();
+    timestamp_bounce_begin = time_get_time_ms_cached();
     timestamp_bounce_end = timestamp_bounce_begin + ms;
 
     this->bounce_height = bounce_height;
@@ -199,7 +187,7 @@ double Thing::get_bounce (void)
         return (0.0);
     }
 
-    auto t = time_get_time_ms();
+    auto t = time_get_time_ms_cached();
 
     if (t >= timestamp_bounce_end) {
         is_bouncing = false;
@@ -266,6 +254,7 @@ void Thing::update_pos (fpoint to)
     at = to;
     begin_move_ms = time_get_time_ms_cached();
     end_move_ms = begin_move_ms + ONESEC / 10;
+
     move_carried_items();
 }
 

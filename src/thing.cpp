@@ -74,7 +74,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
     t->is_attached    = false;
     t->is_lit         = false;
 
-    t->timestamp_born = time_get_time_ms();
+    t->timestamp_born = time_get_time_ms_cached();
 
     auto tiles = tp_get_left_tiles(tp);
     auto tinfo = tile_info_random(tiles);
@@ -171,6 +171,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
         t->log("created");
     }
 
+    t->update_coordinates();
     t->attach();
 
     return (t);
@@ -238,13 +239,13 @@ void Thing::remove_hooks ()
     }
 
     if (owner_thing_id && owner) {
-#ifdef THING_DEBUG
+#ifdef ENABLE_THING_DEBUG
         log("detach from owner %s", owner->logname().c_str());
 #endif
         if (thing_id == owner->weapon_carry_anim_thing_id) {
             unwield("remove hooks");
 
-#ifdef THING_DEBUG
+#ifdef ENABLE_THING_DEBUG
             log("detach from carry anim owner %s", owner->logname().c_str());
 #endif
 
@@ -252,7 +253,7 @@ void Thing::remove_hooks ()
         }
 
         if (thing_id == owner->weapon_use_anim_thing_id) {
-#ifdef THING_DEBUG
+#ifdef ENABLE_THING_DEBUG
             log("detach from use anim owner %s", owner->logname().c_str());
 #endif
 

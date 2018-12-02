@@ -21,6 +21,8 @@ void Thing::attach (void)
 
     is_attached = true;
     last_attached = at;
+//log("attached at %d %d %d", (int)last_attached.x, (int)last_attached.y, 
+//depth);
 }
 
 void Thing::detach (void)
@@ -29,7 +31,8 @@ void Thing::detach (void)
         return;
     }
     is_attached = false;
-
+//log("detach from %d %d %d", (int)last_attached.x, (int)last_attached.y, 
+//depth);
     auto root = &thing_display_order[(int)last_attached.x]
                                     [(int)last_attached.y][depth];
     auto key = ThingDisplaySortKey(depth, br.y, this);
