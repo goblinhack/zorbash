@@ -20,6 +20,7 @@ typedef std::unordered_map< uint32_t, Lightp > Lights;
 
 enum {
     MAP_DEPTH_FLOOR,
+    MAP_DEPTH_LAVA,
     MAP_DEPTH_WALLS,
     MAP_DEPTH_EXIT,
     MAP_DEPTH_ITEM,
@@ -107,7 +108,7 @@ public:
     double             ascii_gl_height              = {};
     double             tile_pixel_width             = {};
     double             tile_pixel_height            = {};
-    uint32_t           sdl_delay                    = 5;
+    uint32_t           sdl_delay                    = 1;
     bool               editor_mode                  = false;
     double             movement_min_speed           = {};
     double             movement_max_speed           = {};

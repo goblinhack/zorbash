@@ -33,7 +33,7 @@ int Thing::hit_actual (Thingp orig_hitter,
         if (!time_have_x_tenths_passed_since(10, timestamp_last_i_was_hit)) {
             return (false);
         }
-        timestamp_last_i_was_hit = time_get_time_ms();
+        timestamp_last_i_was_hit = time_get_time_ms_cached();
     }
 
     /*

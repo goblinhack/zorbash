@@ -70,7 +70,7 @@ void Light::pop (void)
 {_
     game.state.map.all_lights.erase(id);
 
- /*
+    /*
      * Pop from the map
      */
     point old_at((int)at.x, (int)at.y);
@@ -673,10 +673,12 @@ void Light::render (int fbo)
     }
 }
 
-void lights_render (int fbo)
+void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 {
-    for (uint16_t x = 0 ; x < MAP_WIDTH; x++) {
-        for (uint16_t y = 0 ; y < MAP_HEIGHT; y++) {
+    int tot = 0;
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = maxx - 1; x >= minx; x--) {
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
                 /*
@@ -691,8 +693,10 @@ void lights_render (int fbo)
                     }
                 }
 
+                tot++;
                 l->render(fbo);
             }
         }
     }
+    LOG("%d lights", tot);
 }

@@ -8,13 +8,19 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
+#undef DEBUG_CRASH
+
+#ifdef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors
+#define ENABLE_TRACING             // Function tracing
 #define ENABLE_PTRCHECK            // Check validity of pointers too
-#undef  ENABLE_LEAKCHECK
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
+#define ENABLE_THING_DEBUG
+#endif
+
+#undef  ENABLE_LEAKCHECK
 #define ENABLE_INVERTED_GFX        // For vision impaired
 #undef  ENABLE_ASCII_MOUSE
-#define THING_DEBUG
 
 /*
  * Dungeon size; composed of a grid of rooms

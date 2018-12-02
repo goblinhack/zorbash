@@ -117,6 +117,6 @@ extern Lightp light_new(Thingp owner,
                         LightQuality quality,
                         color col);
 extern void lights_calculate(void);
-extern void lights_render(int fbo);
+extern void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
 
 #endif /* LIGHT_H */
