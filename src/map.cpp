@@ -5,6 +5,22 @@
 
 #include "my_game.h"
 
+bool Map::is_lava_at (const point &p)
+{
+    if (is_oob(p.x, p.y)) {
+        return (true);
+    }
+    return (is_lava[p.x][p.y]);
+}
+
+bool Map::is_lava_at (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        return (true);
+    }
+    return (is_lava[x][y]);
+}
+
 bool Map::is_wall_at (const point &p)
 {
     if (is_oob(p.x, p.y)) {

@@ -442,6 +442,10 @@ class Tp:
         self.is_floor = value
         zx.tp_set_is_floor(self, value)
 
+    def set_is_lava(self, value):
+        self.is_lava = value
+        zx.tp_set_is_lava(self, value)
+
 def get_random_treasure(toughness=0):
     while True:
         tp = all_tps[random.choice(all_treasure_tps)]

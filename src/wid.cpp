@@ -5493,13 +5493,12 @@ static widp wid_key_up_handler (int32_t x, int32_t y)
     return (0);
 }
 
+#define DEBUG_GL_BLEND
 #ifdef DEBUG_GL_BLEND
-TIP2("%d %d %s %s", i1, i2, vals_str[i1], vals_str[i2]);
-glBlendFunc(vals[i1], vals[i2]);
 #endif
 
 #ifdef DEBUG_GL_BLEND
-static int vals[] = {
+int vals[] = {
 
 /* GL_ZERO                           */ 0,
 /* GL_ONE                            */ 1,
@@ -5528,7 +5527,7 @@ static int vals[] = {
 /* GL_ONE_MINUS_CONSTANT_ALPHA       */ 0x8004,
 /* GL_BLEND_COLOR */ 0x8005,
 };
-static std::string  vals_str[] = {
+std::string  vals_str[] = {
 
 "GL_ZERO                           ",
 "GL_ONE                            ",
@@ -5559,8 +5558,8 @@ static std::string  vals_str[] = {
 };
 
 
-static int i1;
-static int i2;
+int i1;
+int i2;
 #endif
 
 void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
