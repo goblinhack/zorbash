@@ -675,8 +675,6 @@ void Light::render (int fbo)
 
 void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 {
-    int tot = 0;
-
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {
             for (auto p : game.state.map.lights[x][y]) {
@@ -693,10 +691,8 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
                     }
                 }
 
-                tot++;
                 l->render(fbo);
             }
         }
     }
-    LOG("%d lights", tot);
 }

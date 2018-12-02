@@ -401,7 +401,7 @@ void tile_get_blit_size (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
 /*
  * Blits a whole tile.
  */
-void tile_blit_at (Tilep tile, char *name, fpoint tl, fpoint br)
+void tile_blit_at (const Tilep &tile, fpoint tl, fpoint br)
 {
     blit(tile->gl_surface_binding,
          tile->x1, tile->y2, tile->x2, tile->y1, tl.x, tl.y, br.x, br.y);
@@ -410,7 +410,7 @@ void tile_blit_at (Tilep tile, char *name, fpoint tl, fpoint br)
 /*
  * Blits a whole tile.
  */
-void tile_blit (Tilep tile, char *name, point at)
+void tile_blit (const Tilep tile, point at)
 {
     fpoint tl, br;
 
@@ -419,7 +419,7 @@ void tile_blit (Tilep tile, char *name, point at)
     br.x = at.x + tile->pix_width/2;
     tl.y = at.y + tile->pix_height/2;
 
-    tile_blit_at(tile, name, tl, br);
+    tile_blit_at(tile, tl, br);
 }
 
 /*

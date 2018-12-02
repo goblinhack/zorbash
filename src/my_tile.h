@@ -142,7 +142,6 @@ void tile_blit_fat_with_offset(const Tpp &tp, Tilep &tile,
                                const fpoint &tl, const fpoint &br);
 void tile_get_blit_size(const Tpp &tp, const Tilep tile, char *name, 
                         fpoint *tl, fpoint *br);
-void tile_blit_at(const Tilep &tile, const char *name, 
-                  const fpoint tl, const fpoint br);
-void tile_blit(const Tilep &tile, const char *name, const point at);
+void tile_blit_at(const Tilep &tile, const fpoint tl, const fpoint br);
+void tile_blit(const Tilep &tile, const point at);
 #endif

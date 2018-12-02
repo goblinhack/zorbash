@@ -41,6 +41,7 @@ public:
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_light[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
   
     bool is_wall_at(const point &p);
@@ -49,6 +50,8 @@ public:
     bool is_light_at(const int x, const int y);
     bool is_floor_at(const point &p);
     bool is_floor_at(const int x, const int y);
+    bool is_lava_at(const point &p);
+    bool is_lava_at(const int x, const int y);
     bool is_corridor_at(const point &p);
     bool is_corridor_at(const int x, const int y);
     bool is_oob(const int x, const int y, const int z);
