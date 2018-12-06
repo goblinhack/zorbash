@@ -240,7 +240,11 @@ uint8_t sdl_init (void)
     game.config.video_w_h_ratio = 
         (double)game.config.video_pix_width /
         (double)game.config.video_pix_height;
-                    
+
+    game.config.one_pixel_gl_width = 
+                    game.config.tile_gl_width / (double)TILE_WIDTH;
+    game.config.one_pixel_gl_height = 
+                    game.config.tile_gl_height / (double)TILE_HEIGHT;
 
     LOG("- SDL video   : %dx%d (chosen or from saved file)",
         game.config.video_pix_width, game.config.video_pix_height);

@@ -14,7 +14,7 @@ def lava_init(name, short_name,
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
     
-    delay = 350
+    delay = 1250
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 
@@ -25,5 +25,9 @@ def init():
                 "lava1.2", 
                 "lava1.3", 
                 "lava1.4", 
+                "lava1.5", 
+                "lava1.6", 
+                "lava1.7", 
+                "lava1.8", 
                 ])
 init()

@@ -46,8 +46,9 @@ void Thing::detach (void)
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
 {  
-    double dw = game.config.tile_gl_width / (double)TILE_WIDTH;
-    double dh = game.config.tile_gl_height / (double)TILE_HEIGHT;
+    double dw = game.config.one_pixel_gl_width;
+    double dh = game.config.one_pixel_gl_height;
+
     int x = (int) at.x;
     int y = (int) at.y;
 

@@ -109,63 +109,81 @@ static void thing_blit_things (int minx, int miny, int minz,
     /*
      * Lava
      */
+static double step1;
+static double step2;
+if (step1++ > 16) {
+    step1 = 0;
+    if (step2++ >= 32) {
+        step2 = 0;
+    }
+}
     { 
         auto z = MAP_DEPTH_LAVA;
 
-        blit_fbo_bind(FBO_LIGHT_MERGED);
-        glClearColor(0,0,0,0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(WHITE);
-        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
-
+        auto tile = tile_find("lava1");
+        glcolor(BLACK);
         blit_init();
         for (auto y = miny; y < maxy; y++) {
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
-                    verify(t);
+                    t->blit(offset_x + game.config.one_pixel_gl_width,
+                            offset_y + game.config.one_pixel_gl_height, 
+                            x, y, z);
+                    t->blit(offset_x - game.config.one_pixel_gl_width,
+                            offset_y + game.config.one_pixel_gl_height, 
+                            x, y, z);
+                    t->blit(offset_x + game.config.one_pixel_gl_width,
+                            offset_y - game.config.one_pixel_gl_height, 
+                            x, y, z);
+                    t->blit(offset_x - game.config.one_pixel_gl_width,
+                            offset_y - game.config.one_pixel_gl_height, 
+                            x, y, z);
+                }
+            }
+        }
+        blit_flush();
 
-                    mysrand(t->id);
-                    auto n = random_range(1,10);
-                    while (n--) {
-                        double ox = ((double)random_range(1,100) - 50) / 5000.0;
-                        double oy = ((double)random_range(1,100) - 50) / 5000.0;
+        blit_fbo_bind(FBO_LIGHT_MERGED);
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT);
 
-                        t->blit(offset_x + ox, offset_y + oy, x, y, z);
-                    }
+        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+        glcolor(WHITE);
+        blit_init();
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                for (auto p : thing_display_order[x][y][z]) {
+                    auto t = p.second;
                     t->blit(offset_x, offset_y, x, y, z);
                 }
             }
         }
         blit_flush();
 
-extern int i1;
-extern int i2;
-extern int vals[];
-extern std::string vals_str[];
-TIP2("%d %d %s %s", i1, i2, vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-
+        glBlendFunc(GL_DST_ALPHA, GL_ZERO);
+        glcolor(WHITE);
         blit_init();
-        auto tile = tile_find("lava1");
         for (auto y = miny; y < maxy; y++) {
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
-                    verify(t);
 
-                    for (auto dx = -1; dx <= 1; dx++) {
-                        for (auto dy = -1; dy <= 1; dy++) {
-                            fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
-                            fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
+                    fpoint tl(t->tl.x - offset_x, t->tl.y - offset_y);
+                    fpoint br(t->br.x - offset_x, t->br.y - offset_y);
 
-                            blit_tl.x += game.config.tile_gl_width * dx;
-                            blit_br.x += game.config.tile_gl_width * dx;
-                            blit_tl.y += game.config.tile_gl_height * dy;
-                            blit_br.y += game.config.tile_gl_height * dy;
-                            tile_blit_fat(t->tp, tile, blit_tl, blit_br);
-                        }
-                    }
+                    auto x1 = tile->x1;
+                    auto x2 = tile->x2;
+                    auto y1 = tile->y1;
+                    auto y2 = tile->y2;
+
+                    double one_pix = (1.0 / tex_get_width(tile->tex));
+                    y1 += one_pix * step2;
+                    y2 += one_pix * step2;
+
+                    //blit_br.y += game.config.one_pixel_gl_height * step2;
+
+                    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
                 }
             }
         }

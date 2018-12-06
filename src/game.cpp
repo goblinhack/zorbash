@@ -198,21 +198,29 @@ static void game_place_floor (class Dungeon *d,
             if (d->is_lava_at(x, y + 1)) {
                 if (!game.state.map.is_floor[x][y + 1]) {
                     thing_new(what, fpoint(x, y + 1));
+                    (void) light_new(100, 2, fpoint(x, y + 1), 
+                                     LIGHT_QUALITY_LOW, ORANGE);
                 }
             }
             if (d->is_lava_at(x, y - 1)) {
                 if (!game.state.map.is_floor[x][y - 1]) {
                     thing_new(what, fpoint(x, y - 1));
+                    (void) light_new(100, 2, fpoint(x, y - 1), 
+                                     LIGHT_QUALITY_LOW, ORANGE);
                 }
             }
             if (d->is_lava_at(x + 1, y)) {
                 if (!game.state.map.is_floor[x + 1][y]) {
                     thing_new(what, fpoint(x + 1, y));
+                    (void) light_new(100, 2, fpoint(x + 1, y), 
+                                     LIGHT_QUALITY_LOW, ORANGE);
                 }
             }
             if (d->is_lava_at(x - 1, y)) {
                 if (!game.state.map.is_floor[x - 1][y]) {
                     thing_new(what, fpoint(x - 1, y));
+                    (void) light_new(100, 2, fpoint(x - 1, y), 
+                                     LIGHT_QUALITY_LOW, ORANGE);
                 }
             }
         }
