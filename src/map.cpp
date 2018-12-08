@@ -21,6 +21,22 @@ bool Map::is_lava_at (const int x, const int y)
     return (is_lava[x][y]);
 }
 
+bool Map::is_water_at (const point &p)
+{
+    if (is_oob(p.x, p.y)) {
+        return (true);
+    }
+    return (is_water[p.x][p.y]);
+}
+
+bool Map::is_water_at (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        return (true);
+    }
+    return (is_water[x][y]);
+}
+
 bool Map::is_wall_at (const point &p)
 {
     if (is_oob(p.x, p.y)) {

@@ -446,6 +446,10 @@ class Tp:
         self.is_lava = value
         zx.tp_set_is_lava(self, value)
 
+    def set_is_water(self, value):
+        self.is_water = value
+        zx.tp_set_is_water(self, value)
+
 def get_random_treasure(toughness=0):
     while True:
         tp = all_tps[random.choice(all_treasure_tps)]
