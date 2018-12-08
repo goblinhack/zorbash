@@ -107,20 +107,34 @@ static void thing_blit_things (int minx, int miny, int minz,
     blit_flush();
 
     /*
-     * Lava
+     * Lava is drawn to its own buffer and then blitted to the display.
      */
-static double step1;
-static double step2;
-if (step1++ > 16) {
-    step1 = 0;
-    if (step2++ >= 32) {
-        step2 = 0;
-    }
-}
     { 
         auto z = MAP_DEPTH_LAVA;
 
-        auto tile = tile_find("lava1");
+        static Tilep lava[4] = {};
+        if (!lava[0]) {
+            lava[0] = tile_find("lava1");
+            lava[1] = tile_find("lava2");
+            lava[2] = tile_find("lava3");
+            lava[3] = tile_find("lava4");
+        }
+
+        /*
+         * Slow timer to scroll the lava.
+         */
+        static double step1;
+        static double step2;
+        if (step1++ > 4) {
+            step1 = 0;
+            if (step2++ >= 31) {
+                step2 = 0;
+            }
+        }
+
+        /*
+         * Draw a black outline to the main display.
+         */
         glcolor(BLACK);
         blit_init();
         for (auto y = miny; y < maxy; y++) {
@@ -139,15 +153,20 @@ if (step1++ > 16) {
                     t->blit(offset_x - game.config.one_pixel_gl_width,
                             offset_y - game.config.one_pixel_gl_height, 
                             x, y, z);
+                    t->blit(offset_x,
+                            offset_y + game.config.one_pixel_gl_height * 2, 
+                            x, y, z);
                 }
             }
         }
         blit_flush();
 
+        /*
+         * Draw the white bitmap that will be the mask for the texture.
+         */
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
-
         glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
         glcolor(WHITE);
         blit_init();
@@ -161,17 +180,61 @@ if (step1++ > 16) {
         }
         blit_flush();
 
+        /*
+         * The lava tiles are twice the size of normal tiles, so work out
+         * where to draw them to avoid overlaps
+         */
+        uint8_t lava_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
+
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                if (game.state.map.is_lava[x][y]) {
+                    auto X = x / 2;
+                    auto Y = y / 2;
+                    X++;
+                    Y++;
+                    lava_map[X][Y] = true;
+                    lava_map[X+1][Y] = true;
+                    lava_map[X-1][Y] = true;
+                    lava_map[X][Y+1] = true;
+                    lava_map[X][Y-1] = true;
+                }
+            }
+        }
+
+        /*
+         * Finally blit the lava and then the buffer to the display.
+         */
         glBlendFunc(GL_DST_ALPHA, GL_ZERO);
         glcolor(WHITE);
         blit_init();
         for (auto y = miny; y < maxy; y++) {
             for (auto x = maxx - 1; x >= minx; x--) {
-                for (auto p : thing_display_order[x][y][z]) {
-                    auto t = p.second;
+				auto X = x / 2;
+				auto Y = y / 2;
+				X++;
+				Y++;
 
-                    fpoint tl(t->tl.x - offset_x, t->tl.y - offset_y);
-                    fpoint br(t->br.x - offset_x, t->br.y - offset_y);
+                if (lava_map[X][Y]) {
+					lava_map[X][Y] = false;
+                    auto tx = (double)(x &~1);
+                    auto ty = (double)(y &~1);
+                    double tlx = tx * game.config.tile_gl_width;
+                    double tly = ty * game.config.tile_gl_height;
+                    double brx = (tx+2.0) * game.config.tile_gl_width;
+                    double bry = (ty+2.0) * game.config.tile_gl_height;
 
+                    tlx -= game.config.tile_gl_width / 2.0;
+                    tly -= game.config.tile_gl_height / 2.0;
+                    brx -= game.config.tile_gl_width / 2.0;
+                    bry -= game.config.tile_gl_height / 2.0;
+
+                    tlx -= offset_x;
+                    tly -= offset_y;
+                    brx -= offset_x;
+                    bry -= offset_y;
+
+                    auto tile = lava[X % ARRAY_SIZE(lava)];
                     auto x1 = tile->x1;
                     auto x2 = tile->x2;
                     auto y1 = tile->y1;
@@ -181,9 +244,7 @@ if (step1++ > 16) {
                     y1 += one_pix * step2;
                     y2 += one_pix * step2;
 
-                    //blit_br.y += game.config.one_pixel_gl_height * step2;
-
-                    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+                    blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
                 }
             }
         }
