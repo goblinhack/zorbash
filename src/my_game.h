@@ -20,6 +20,7 @@ typedef std::unordered_map< uint32_t, Lightp > Lights;
 
 enum {
     MAP_DEPTH_FLOOR,
+    MAP_DEPTH_WATER,
     MAP_DEPTH_LAVA,
     MAP_DEPTH_WALLS,
     MAP_DEPTH_EXIT,
@@ -42,6 +43,7 @@ public:
     uint8_t                    is_light[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_water[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
   
     bool is_wall_at(const point &p);
@@ -52,6 +54,8 @@ public:
     bool is_floor_at(const int x, const int y);
     bool is_lava_at(const point &p);
     bool is_lava_at(const int x, const int y);
+    bool is_water_at(const point &p);
+    bool is_water_at(const int x, const int y);
     bool is_corridor_at(const point &p);
     bool is_corridor_at(const int x, const int y);
     bool is_oob(const int x, const int y, const int z);
