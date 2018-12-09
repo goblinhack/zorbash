@@ -43,7 +43,7 @@ void tile_load_arr (std::string tex_name,
                     uint32_t width, uint32_t height,
                     uint32_t nargs, const char * arr[])
 {_
-    Texp tex = tex_load("", tex_name, GL_LINEAR);
+    Texp tex = tex_load("", tex_name, GL_NEAREST);
 
     float fw = 1.0 / (((float)tex_get_width(tex)) / ((float)width));
     float fh = 1.0 / (((float)tex_get_height(tex)) / ((float)height));

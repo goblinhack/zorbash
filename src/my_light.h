@@ -66,7 +66,7 @@ public:
     double             flicker_radius;
     uint8_t            flicker {0};
 
- /*
+    /*
      * Precalculated light rays.
      */
     double              strength;
@@ -91,6 +91,7 @@ public:
     void calculate(void);
 
     void render_triangle_fans(void);
+    void render_smooth(void);
     void render_point_light(void);
     void render(int fbo);
 

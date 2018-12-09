@@ -147,7 +147,8 @@ Thingp thing_new (std::string tp_name, fpoint at)
         game.state.player = t;
 
         color col = WHITE;
-        col.a = 50;
+        // any more than this and light creeps over the walls
+        col.a = 100;
         t->light = light_new(MAX_LIGHT_RAYS, 8, at, LIGHT_QUALITY_HIGH, col);
 
         t->log("player created");
