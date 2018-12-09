@@ -212,7 +212,7 @@ static void thing_blit_things (int minx, int miny, int minz,
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
-        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         glcolor(WHITE);
         blit_init();
         for (auto y = miny; y < maxy; y++) {
@@ -409,7 +409,7 @@ static void thing_blit_things (int minx, int miny, int minz,
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
-        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         glcolor(WHITE);
         blit_init();
         for (auto y = miny; y < maxy; y++) {

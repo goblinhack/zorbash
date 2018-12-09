@@ -333,8 +333,9 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
             /*
              * And make sure we intersect with the edges of the obstacle too.
              */
-            add_z_depth(t, light_pos, P[k], p1_rad, p1_deg);
-            add_z_depth(t, light_pos, P[l], p2_rad, p2_deg);
+            // Looks worse
+            // add_z_depth(t, light_pos, P[k], p1_rad, p1_deg);
+            // add_z_depth(t, light_pos, P[l], p2_rad, p2_deg);
 
             rad += dr;
             if (rad >= RAD_360) {
@@ -435,6 +436,22 @@ void lights_calculate (void)
     }
 }
 
+void Light::render_smooth (void)
+{
+    std::vector<float>  ray_depth_buffer_tmp;
+    ray_depth_buffer_tmp.resize(max_light_rays);
+
+    int i = 0;
+    for (auto r : ray_depth_buffer) {
+        double a = ray_depth_buffer[(i - 1) % max_light_rays];
+        double c = ray_depth_buffer[(i + 1) % max_light_rays];
+
+        ray_depth_buffer_tmp[i++] = (a + r + c) / 3.0;
+    }
+
+    ray_depth_buffer = ray_depth_buffer_tmp;
+}
+
 void Light::render_triangle_fans (void)
 {
     static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
@@ -489,6 +506,7 @@ void Light::render_triangle_fans (void)
                  */
                 radius += sqrt(light_penetrate / radius);
 #endif
+                radius *= 0.9; // stop light skipping over wall edges
 
                 double cosr;
                 double sinr;
@@ -514,6 +532,7 @@ void Light::render_triangle_fans (void)
 #if 0
                 radius += sqrt(light_penetrate / radius);
 #endif
+                radius *= 0.9; // stop light skipping over wall edges
 
                 double cosr;
                 double sinr;
@@ -605,8 +624,6 @@ void Light::render_point_light (void)
     auto ox = off.x;
     auto oy = off.y;
 
-    glTranslatef(-ox, -oy, 0);
-
     double lw = strength * tile_gl_width_pct;
     double lh = strength * tile_gl_height_pct;
     double p1x = light_pos.x - lw;
@@ -614,18 +631,14 @@ void Light::render_point_light (void)
     double p2x = light_pos.x + lw;
     double p2y = light_pos.y + lh;
 
-    blit_init();
     glcolor(col);
-    blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
-    blit_flush();
-
-    glTranslatef(ox, oy, 0);
+    blit(light_overlay_texid, 0, 0, 1, 1, p1x - ox, p1y - oy, p2x - ox, p2y - oy);
 }
 
 void Light::render (int fbo)
 {
     if (!light_overlay_tex) {
-        light_overlay_tex = tex_load("", "light", GL_LINEAR);
+        light_overlay_tex = tex_load("", "light", GL_NEAREST);
         light_overlay_texid = tex_get_gl_binding(light_overlay_tex);
     }
 
@@ -663,8 +676,6 @@ void Light::render (int fbo)
         break;
 
     case LIGHT_QUALITY_POINT:
-        blit_fbo_bind(fbo);
-        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
         render_point_light();
         break;
 
@@ -675,10 +686,18 @@ void Light::render (int fbo)
 
 void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 {
+    bool have_low_quality = false;
+
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
+
+                if (l->quality == LIGHT_QUALITY_POINT) {
+                    have_low_quality = true;
+                    continue;
+                }
+
                 /*
                  * Too far away from the player? Skip rendering.
                  */
@@ -695,4 +714,39 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
             }
         }
     }
+
+    if (!have_low_quality) {
+        return;
+    }
+
+    blit_fbo_bind(fbo);
+    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+    glcolor(WHITE);
+    blit_init();
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = maxx - 1; x >= minx; x--) {
+            for (auto p : game.state.map.lights[x][y]) {
+                auto l = p.second;
+                if (l->quality != LIGHT_QUALITY_POINT) {
+                    continue;
+                }
+
+                /*
+                 * Too far away from the player? Skip rendering.
+                 */
+                if (game.state.player) {
+                    auto p = game.state.player;
+                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
+
+                    if (len > TILES_ACROSS + l->strength) {
+                        continue;
+                    }
+                }
+
+                l->render(fbo);
+            }
+        }
+    }
+    blit_flush();
+    glcolor(WHITE);
 }
