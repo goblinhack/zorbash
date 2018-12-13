@@ -627,4 +627,8 @@ void thing_render_all (void)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
     }
+
+    // XXX
+    //lights_calculate();
+    lights_render_debug(minx, miny, maxx, maxy);
 }

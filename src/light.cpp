@@ -15,6 +15,8 @@ static int light_overlay_texid;
 
 static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
 static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+
+Thingp debug_thing;
     
 Lightp light_new (Thingp owner, 
                   uint16_t max_light_rays, 
@@ -48,10 +50,12 @@ Lightp light_new (Thingp owner,
     l->max_light_rays = max_light_rays;
 
     l->ray_rad.resize(max_light_rays);
-//    l->ray_thing.resize(max_light_rays);
+    l->ray_thing.resize(max_light_rays);
     l->ray_depth_buffer.resize(max_light_rays);
+    l->ray_depth_buffer2.resize(max_light_rays);
 
     std::fill(l->ray_depth_buffer.begin(), l->ray_depth_buffer.end(), 0.0);
+    std::fill(l->ray_depth_buffer2.begin(), l->ray_depth_buffer2.end(), 0.0);
 
     //log("created");
     return (l);
@@ -145,9 +149,11 @@ std::string Light::logname (void)
     return (tmp[loop++]);
 }
 
-void Light::add_z_depth (Thingp t, 
-                         fpoint &light_pos, fpoint &light_end, double rad,
-                         int deg)
+void Light::set_z_buffer_if_closer (Thingp t, 
+                                    fpoint &light_pos, 
+                                    fpoint &light_end, 
+                                    double rad,
+                                    int deg)
 {
     auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
 
@@ -158,11 +164,28 @@ void Light::add_z_depth (Thingp t,
     if (!ray_depth_buffer[deg]) {
         ray_depth_buffer[deg] = len;
         ray_rad[deg] = rad;
-//        ray_thing[deg] = t;
+        ray_thing[deg] = t;
     } else if (len < ray_depth_buffer[deg]) {
         ray_depth_buffer[deg] = len;
         ray_rad[deg] = rad;
-//        ray_thing[deg] = t;
+        ray_thing[deg] = t;
+    }
+}
+
+void Light::set_z_buffer_if_further (Thingp t,
+                                     fpoint &light_pos, 
+                                     fpoint &light_end, 
+                                     double rad,
+                                     int deg)
+{
+    auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
+
+    if (unlikely(len > strength)) {
+        len = strength;
+    }
+
+    if (len > ray_depth_buffer2[deg]) {
+        ray_depth_buffer2[deg] = len;
     }
 }
 
@@ -236,7 +259,7 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
         ((int)light_pos.y == (int)t->at.y)) {
         std::fill(ray_depth_buffer.begin(), ray_depth_buffer.end(), 0.0);
         std::fill(ray_rad.begin(), ray_rad.end(), 0.0);
-//        std::fill(ray_thing.begin(), ray_thing.end(), nullptr);
+        std::fill(ray_thing.begin(), ray_thing.end(), nullptr);
         return (false);
     }
 
@@ -246,7 +269,9 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
     uint8_t k;
     for (k = 0; k<4; k++) {
         /*
-         * Check if facing the light source.
+         * Check if facing the light source. In the 2nd pass we will look
+         * at other faces. For now we just want to find out which closest
+         * obstacles the light hits.
          */
         fpoint light_dir = light_pos - P[k];
         auto dot = normal[k].x * light_dir.x + normal[k].y * light_dir.y;   
@@ -294,10 +319,14 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
         auto rad = p2_rad;
         int deg = p2_deg;
 
+		set_z_buffer_if_closer(t, light_pos, P[k], p1_rad, p1_deg);
+		set_z_buffer_if_closer(t, light_pos, P[l], p2_rad, p2_deg);
+
         /*
          * For each blocking radian, look at the distance to the light.
          * If closer than what is blocking that radian curretly, then use 
          * this value.
+         *
          * In essence, this is a depth buffer.
          */
         while (--tot_deg >= 0) {
@@ -314,28 +343,10 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
              * so we can work out distance.
              */
             fpoint intersect;
-            if (get_line_known_intersection(P[k], P[l], 
-                                            light_pos, light_end,
+            if (get_line_known_intersection(P[k], P[l], light_pos, light_end,
                                             &intersect)) {
-                /*
-                 * Ok we intersect with the closest wall, but we actually
-                 * want the light to penetrate all the way through the
-                 * obstacle or we cannot see it. So use the opposite sides
-                 * of the object for the light length.
-                 */
-                get_line_known_intersection(P[(k + 2) % 4], P[(l + 2) % 4], 
-                                            light_pos, light_end,
-                                            &intersect);
-
-                add_z_depth(t, light_pos, intersect, rad, deg);
+                set_z_buffer_if_closer(t, light_pos, intersect, rad, deg);
             }
-
-            /*
-             * And make sure we intersect with the edges of the obstacle too.
-             */
-            // Looks worse
-            // add_z_depth(t, light_pos, P[k], p1_rad, p1_deg);
-            // add_z_depth(t, light_pos, P[l], p2_rad, p2_deg);
 
             rad += dr;
             if (rad >= RAD_360) {
@@ -352,13 +363,185 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
     return (true);
 }
 
+/*
+ * 2nd pass we look for the *furthest* away intersection. This way we light
+ * the entirety of the thing and allow light rays to pass through blocks, but 
+ * only those that were touched by the light. i.e. the light will not leak 
+ * behind the first row of walls to things we should not be allowed to see.
+ */
+void Light::calculate_for_obstacle_2nd_pass (Thingp t, int x, int y)
+{
+    int otlx = x;
+    int otly = y;
+    int obrx = x + 1;
+    int obry = y + 1;
+
+if (debug_thing && (t != debug_thing)) {
+    return;
+}
+
+    double etlx;
+    double etly;
+    double ebrx;
+    double ebry;
+
+    etlx = (double)otlx;
+    etly = (double)otly;
+    ebrx = (double)obrx;
+    ebry = (double)obry;
+
+    fpoint P[4];
+    P[0].x = etlx;
+    P[0].y = etly;
+    P[1].x = ebrx;
+    P[1].y = etly;
+    P[2].x = ebrx;
+    P[2].y = ebry;
+    P[3].x = etlx;
+    P[3].y = ebry;
+
+    fpoint edge[4];
+    edge[0] = P[1] - P[0];
+    edge[1] = P[2] - P[1];
+    edge[2] = P[3] - P[2];
+    edge[3] = P[0] - P[3];
+
+    /*
+     * For each clockwise side of the tile.
+     */
+    fpoint light_pos = at;
+
+    /*
+     * For each clockwise quadrant.
+     */
+    uint8_t k;
+    for (k = 0; k<4; k++) {
+        int l = (k + 1) % 4;
+
+        fpoint A = P[k];
+        fpoint C = P[l];
+        fpoint B = (A + C) / 2;
+
+        fpoint p1 = A - light_pos;
+        fpoint p2 = B - light_pos;
+        fpoint p3 = C - light_pos;
+
+        /*
+         * Start and end points of the face blocking the light.
+         */
+        auto p1_rad = p1.anglerot();
+        auto p2_rad = p2.anglerot();
+        auto p3_rad = p3.anglerot();
+
+        /*
+         * How many degrees and radians does this face block?
+         */
+        int p1_deg = p1_rad * (double)max_light_rays / RAD_360;
+        int p3_deg = p3_rad * (double)max_light_rays / RAD_360;
+
+        set_z_buffer_if_further(t, light_pos, A, p1_rad, p1_deg);
+        set_z_buffer_if_further(t, light_pos, C, p3_rad, p3_deg);
+
+        /*
+         * A)  p1  p2  p3 -->
+         * B)  p3  p1  p2 -->
+         * C)  p2  p3  p1 -->
+         *
+         * D)  p3  p2  p1 <--
+         * E)  p2  p1  p3 <--
+         * F)  p1  p3  p2 <--
+         */
+        double tot_rad = p1_rad - p2_rad;
+        int dir;
+
+        if ((p1_rad < p2_rad) && (p2_rad < p3_rad)) {
+            tot_rad = p3_rad - p1_rad;
+            dir = 1;
+        } else if ((p3_rad < p1_rad) && (p1_rad < p2_rad)) {
+            tot_rad = p3_rad + RAD_360 - p1_rad;
+            dir = 1;
+        } else if ((p2_rad < p3_rad) && (p3_rad < p1_rad)) {
+            tot_rad = p3_rad + RAD_360 - p1_rad;
+            dir = 1;
+        } else if ((p3_rad < p2_rad) && (p2_rad < p1_rad)) {
+            tot_rad = p1_rad - p3_rad;
+            dir = -1;
+        } else if ((p2_rad < p1_rad) && (p1_rad < p3_rad)) {
+            tot_rad = p1_rad + RAD_360 - p3_rad;
+            dir = -1;
+        } else if ((p1_rad < p3_rad) && (p3_rad < p2_rad)) {
+            tot_rad = p1_rad + RAD_360 - p3_rad;
+            dir = -1;
+        } else {
+            /*
+             * All points in line might be parallel to the light and in which 
+             * case we just looked at the edges above for Z depth.
+             */
+            return;
+        }
+
+        /*
+         * How many radians does this obstacle block?
+         */
+        double tot_degf = ceil((tot_rad * (double)max_light_rays) / RAD_360);
+        int tot_deg = (int)tot_degf;
+        double dr = (tot_rad / tot_degf) * (double)dir;
+
+//CON("light from %f,%f bloks p1 %d p2 %d p3 %d deg total rad %f deg %f %f,%f to %f,%f", light_pos.x, light_pos.y, p1_deg,p2_deg,p3_deg, tot_rad, tot_degf, A.x, A.y, C.x, C.y);
+
+        auto rad = p1_rad;
+        int deg = p1_deg;
+
+        /*
+         * For each blocking radian, look at the distance to the light.
+         * If further than what is blocking that radian curretly, then use 
+         * this value.
+         *
+         * In essence, this is an inverse depth buffer.
+         */
+        while (--tot_deg >= 0) {
+            double cosr;
+            double sinr;
+            sincos(rad, &sinr, &cosr);
+
+            fpoint light_end;
+            light_end.x = light_pos.x + cosr * MAP_WIDTH;
+            light_end.y = light_pos.y + sinr * MAP_WIDTH;
+
+            /*
+             * Check the light ray really does hit this obstacle and where
+             * so we can work out distance.
+             */
+            fpoint intersect;
+            if (get_line_known_intersection(A, C, light_pos, light_end,
+                                            &intersect)) {
+//CON("  - intersect deg %d %f %f", deg, intersect.x, intersect.y);
+                set_z_buffer_if_further(t, light_pos, intersect, rad, deg);
+            } else {
+//CON("  - miss      deg %d", deg);
+            }
+
+            rad += dr;
+            if (rad >= RAD_360) {
+                rad -= RAD_360;
+            }
+            if (rad < 0) {
+                rad += RAD_360;
+            }
+
+            deg += dir;
+            if (deg >= max_light_rays) {
+                deg = 0;
+            }
+            if (deg < 0) {
+                deg += max_light_rays;
+            }
+        }
+    }
+}
+
 void Light::calculate (void)
 {
-    /*
-     * Reset the per light z buffer
-     */
-    std::fill(ray_depth_buffer.begin(), ray_depth_buffer.end(), 0);
-
     glbuf.clear();
 
     /*
@@ -397,6 +580,12 @@ void Light::calculate (void)
         maxy = MAP_HEIGHT;
     }
 
+    /*
+     * Reset the per light z buffer
+     */
+    std::fill(ray_depth_buffer.begin(), ray_depth_buffer.end(), 0);
+    std::fill(ray_depth_buffer2.begin(), ray_depth_buffer2.end(), 0.0);
+
     uint8_t z = MAP_DEPTH_WALLS;
     for (int16_t x = maxx - 1; x >= minx; x--) {
         for (int16_t y = miny; y < maxy; y++) {
@@ -406,6 +595,40 @@ void Light::calculate (void)
                     if (!calculate_for_obstacle(t, x, y)) {
                         return;
                     }
+                }
+            }
+        }
+    }
+
+    /*
+     * Each iteration we increase this number. This way we can match things
+     * that were hit by this light source and do not need to waste time
+     * resetting the lit flag when done.
+     */
+//    static uint32_t light_iterator = 1;
+//    light_iterator++;
+//            t->light_iterator = light_iterator;
+
+    memset(is_nearest_wall, 0, sizeof(is_nearest_wall));
+    for (auto i = 0; i < max_light_rays; i++) {
+        auto t = ray_thing[i];
+        if (t) {
+            is_nearest_wall[(int)t->at.x][(int)t->at.y] = true;
+        }
+    }
+
+//    flood(point(at.x, at.y));
+
+    /*
+     * Reset the per light z buffer. We will repopulate it now with the
+     * furthest away things.
+     */
+    for (int16_t x = maxx - 1; x >= minx; x--) {
+        for (int16_t y = miny; y < maxy; y++) {
+            for (auto p : thing_display_order[x][y][z]) {
+                auto t = p.second;
+                if (is_nearest_wall[x][y]) {
+                    calculate_for_obstacle_2nd_pass(t, x, y);
                 }
             }
         }
@@ -475,14 +698,6 @@ void Light::render_triangle_fans (void)
         auto blue  = ((double)c.b) / 255.0;
         auto alpha = ((double)c.a) / 255.0;
 
-#if 0
-        /*
-         * How much the light pushes into a block. Too much and you can see
-         * below the block which we don't want.
-         */
-        double light_penetrate = 0.0;
-#endif
-
         blit_init();
         {
             int i;
@@ -493,20 +708,11 @@ void Light::render_triangle_fans (void)
             push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
             for (i = 0; i < max_light_rays; i++) {
-                double radius = ray_depth_buffer[i];
+                double radius = ray_depth_buffer2[i];
                 double rad = ray_rad[i];
                 if (radius < 0.001) {
                     radius = strength;
                 }
-
-#if 0
-                /*
-                 * This makes the light ray bulge which makes it easier to see
-                 * tiles close to the player.
-                 */
-                radius += sqrt(light_penetrate / radius);
-#endif
-                radius *= 0.9; // stop light skipping over wall edges
 
                 double cosr;
                 double sinr;
@@ -523,16 +729,11 @@ void Light::render_triangle_fans (void)
              * Complete the circle with the first point again.
              */
             i = 0; {
-                double radius = ray_depth_buffer[i];
+                double radius = ray_depth_buffer2[i];
                 double rad = ray_rad[i];
                 if (radius < 0.001) {
                     radius = strength;
                 }
-
-#if 0
-                radius += sqrt(light_penetrate / radius);
-#endif
-                radius *= 0.9; // stop light skipping over wall edges
 
                 double cosr;
                 double sinr;
@@ -613,6 +814,73 @@ void Light::render_triangle_fans (void)
    glTranslatef(ox, oy, 0);
 }
 
+void Light::render_debug_lines (void)
+{
+    static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
+    static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+
+    auto tx = at.x;
+    auto ty = at.y;
+    fpoint light_pos(tx * tile_gl_width_pct, ty * tile_gl_height_pct);
+
+    fpoint off(game.state.map_at.x * tile_gl_width_pct, 
+               game.state.map_at.y * tile_gl_height_pct);
+    auto ox = off.x;
+    auto oy = off.y;
+
+    glTranslatef(-ox, -oy, 0);
+
+    int i;
+
+    glcolor(RED);
+
+    /*
+     * Walk the light rays in a circle.
+     */
+    for (i = 0; i < max_light_rays; i++) {
+        double radius = ray_depth_buffer2[i];
+        double rad = ray_rad[i];
+        if (radius < 0.001) {
+            radius = strength;
+            radius = 0;
+        }
+
+        double cosr;
+        double sinr;
+        sincos(rad, &sinr, &cosr);
+
+        double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
+        double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
+
+        gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
+    }
+
+    glcolor(GREEN);
+
+    /*
+     * Walk the light rays in a circle.
+     */
+    for (i = 0; i < max_light_rays; i++) {
+        double radius = ray_depth_buffer[i];
+        double rad = ray_rad[i];
+        if (radius < 0.001) {
+            radius = strength;
+            radius = 0;
+        }
+
+        double cosr;
+        double sinr;
+        sincos(rad, &sinr, &cosr);
+
+        double p1x = light_pos.x + cosr * radius * tile_gl_width_pct;
+        double p1y = light_pos.y + sinr * radius * tile_gl_height_pct;
+
+        gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
+    }
+
+    glTranslatef(ox, oy, 0);
+}
+
 void Light::render_point_light (void)
 {
     auto tx = at.x;
@@ -677,6 +945,24 @@ void Light::render (int fbo)
 
     case LIGHT_QUALITY_POINT:
         render_point_light();
+        break;
+
+    default:
+        DIE("unknownd light quality");
+    }
+}
+
+void Light::render_debug (void)
+{
+    switch (quality) {
+    case LIGHT_QUALITY_HIGH:
+        render_debug_lines();
+        break;
+
+    case LIGHT_QUALITY_LOW:
+        break;
+
+    case LIGHT_QUALITY_POINT:
         break;
 
     default:
@@ -749,4 +1035,83 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
     }
     blit_flush();
     glcolor(WHITE);
+}
+
+void lights_render_debug (int minx, int miny, int maxx, int maxy)
+{
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = maxx - 1; x >= minx; x--) {
+            for (auto p : game.state.map.lights[x][y]) {
+                auto l = p.second;
+
+                if (l->quality == LIGHT_QUALITY_POINT) {
+                    continue;
+                }
+
+                /*
+                 * Too far away from the player? Skip rendering.
+                 */
+                if (game.state.player) {
+                    auto p = game.state.player;
+                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
+
+                    if (len > TILES_ACROSS + l->strength) {
+                        continue;
+                    }
+                }
+
+                l->render_debug();
+            }
+        }
+    }
+}
+
+/*
+ * Flood all connecting tiles with the same fluid pool number.
+ */
+void Light::flood (point start)
+{
+    uint8_t walked[MAP_WIDTH][MAP_HEIGHT];
+    std::stack<point> s;
+
+    memset(is_nearest_wall, 0, sizeof(is_nearest_wall));
+    memset(walked, 0, sizeof(walked));
+
+    s.push(start);
+    while (s.size()){
+        point p = s.top();
+        s.pop();
+
+        walked[p.x][p.y] = true;
+
+        if (game.state.map.is_wall[p.x][p.y]) {
+            is_nearest_wall[p.x][p.y] = true;
+            continue;
+        }
+
+        if ((p.x > 0) && !walked[p.x - 1][p.y]) {
+            if ((p.y > 0) && !walked[p.x - 1][p.y - 1]) {
+                s.push(point(p.x - 1, p.y - 1));
+            }
+            if ((p.y < MAP_HEIGHT - 1) && !walked[p.x - 1][p.y + 1]) {
+                s.push(point(p.x - 1, p.y + 1));
+            }
+            s.push(point(p.x - 1, p.y));
+        }
+        if ((p.x < MAP_WIDTH - 1) && !walked[p.x + 1][p.y]) {
+            if ((p.y > 0) && !walked[p.x + 1][p.y - 1]) {
+                s.push(point(p.x + 1, p.y - 1));
+            }
+            if ((p.y < MAP_HEIGHT - 1) && !walked[p.x + 1][p.y + 1]) {
+                s.push(point(p.x + 1, p.y + 1));
+            }
+            s.push(point(p.x + 1, p.y));
+        }
+        if ((p.y > 0) && !walked[p.x][p.y - 1]) {
+            s.push(point(p.x, p.y - 1));
+        }
+        if ((p.y < MAP_HEIGHT - 1) && !walked[p.x][p.y + 1]) {
+            s.push(point(p.x, p.y + 1));
+        }
+    }
 }

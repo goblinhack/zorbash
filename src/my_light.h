@@ -72,11 +72,19 @@ public:
     double              strength;
     uint16_t            max_light_rays;
     std::vector<float>  ray_depth_buffer;
+    std::vector<float>  ray_depth_buffer2;
     std::vector<float>  ray_rad;
-//    std::vector<Thingp> ray_thing;
+    std::vector<Thingp> ray_thing;
     std::vector<float>  glbuf;
     LightQuality        quality;
     color               col;
+
+    /*
+     * We precalculate the walls a light hits partly for efficency but also
+     * to avoid lighting walls behind those immediately visible to us. To
+     * do this we do a flood fill of the level and pick the nearest walls.
+     */
+    uint8_t             is_nearest_wall[MAP_WIDTH][MAP_HEIGHT] = {};
 
     void pop();
     std::string logname(void);
@@ -84,16 +92,20 @@ public:
     void reset(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
-
-    void add_z_depth(Thingp, fpoint &light_pos, 
-                     fpoint &light_end, double rad, int deg);
+    void set_z_buffer_if_closer(Thingp, fpoint &light_pos, fpoint &light_end, 
+                                double rad, int deg);
+    void set_z_buffer_if_further(Thingp, fpoint &light_pos, fpoint &light_end, 
+                                 double rad, int deg);
     bool calculate_for_obstacle(Thingp t, int x, int y);
+    void calculate_for_obstacle_2nd_pass(Thingp t, int x, int y);
     void calculate(void);
-
     void render_triangle_fans(void);
     void render_smooth(void);
     void render_point_light(void);
     void render(int fbo);
+    void render_debug(void);
+    void render_debug_lines(void);
+    void flood(point start);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -119,5 +131,6 @@ extern Lightp light_new(Thingp owner,
                         color col);
 extern void lights_calculate(void);
 extern void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
+extern void lights_render_debug(int minx, int miny, int maxx, int maxy);
 
 #endif /* LIGHT_H */

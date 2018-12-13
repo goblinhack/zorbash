@@ -98,6 +98,11 @@ public:
     Lightp             light {nullptr};
 
     /*
+     * Use to detect things hit by a light source
+     */
+    uint32_t           light_iterator {};
+
+    /*
      * Used for animating the steps.
      */
     uint32_t           flip_start_ms {};

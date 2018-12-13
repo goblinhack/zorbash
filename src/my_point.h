@@ -215,7 +215,7 @@ public:
         return (false);
     }
 
- /*
+    /*
      * Two lines we already know intersect.
      */
     friend uint8_t get_line_known_intersection (my_apoint p0,
