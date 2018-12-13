@@ -310,6 +310,15 @@ void Thing::blit (double offset_x, double offset_y, int x, int y, int z)
     fpoint blit_tl(tl.x - offset_x, tl.y - offset_y);
     fpoint blit_br(br.x - offset_x, br.y - offset_y);
 
+    if ((mouse_x > blit_tl.x * game.config.video_pix_width) && (mouse_x < blit_br.x * game.config.video_pix_width) &&
+        (mouse_y > blit_tl.y * game.config.video_pix_height) && (mouse_y < blit_br.y * game.config.video_pix_height)) {
+        if (tp_is_wall(tp)) {
+//            con("over");
+//            extern Thingp debug_thing;
+//            debug_thing = this;
+        }
+    }
+
     if (unlikely(tp_is_small_shadow_caster(tp))) {
         blit_shadow(tp, tile, blit_tl, blit_br);
     }
