@@ -20,6 +20,12 @@ typedef enum {
     LIGHT_QUALITY_HIGH,
 } LightQuality;
 
+typedef struct {
+    float depth_closest;
+    float depth_furthest;
+    Thingp things[10];
+} Ray;
+
 class Light
 {
 private:
@@ -42,9 +48,7 @@ public:
         archive(cereal::make_nvp("id",               id),
                 cereal::make_nvp("at",               at),
                 cereal::make_nvp("strength",         strength),
-                cereal::make_nvp("max_light_rays",   max_light_rays),
-                cereal::make_nvp("ray_depth_buffer", ray_depth_buffer),
-                cereal::make_nvp("ray_rad",          ray_rad));
+                cereal::make_nvp("max_light_rays",   max_light_rays));
     }
 
     /*
@@ -71,10 +75,8 @@ public:
      */
     double              strength;
     uint16_t            max_light_rays;
-    std::vector<float>  ray_depth_buffer;
-    std::vector<float>  ray_depth_buffer2;
+    std::vector<Ray>    ray;
     std::vector<float>  ray_rad;
-    std::vector<Thingp> ray_thing;
     std::vector<float>  glbuf;
     LightQuality        quality;
     color               col;
@@ -93,14 +95,13 @@ public:
     void move_delta(fpoint);
     void move_to(fpoint to);
     void set_z_buffer_if_closer(Thingp, fpoint &light_pos, fpoint &light_end, 
-                                double rad, int deg);
+                                int deg, bool corner);
     void set_z_buffer_if_further(Thingp, fpoint &light_pos, fpoint &light_end, 
-                                 double rad, int deg);
+                                 int deg);
     bool calculate_for_obstacle(Thingp t, int x, int y);
     void calculate_for_obstacle_2nd_pass(Thingp t, int x, int y);
     void calculate(void);
     void render_triangle_fans(void);
-    void render_smooth(void);
     void render_point_light(void);
     void render(int fbo);
     void render_debug(void);

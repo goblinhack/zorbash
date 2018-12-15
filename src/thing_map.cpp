@@ -628,7 +628,5 @@ void thing_render_all (void)
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
     }
 
-    // XXX
-    //lights_calculate();
     lights_render_debug(minx, miny, maxx, maxy);
 }
