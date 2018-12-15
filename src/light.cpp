@@ -49,13 +49,17 @@ Lightp light_new (Thingp owner,
     l->col            = col;
     l->max_light_rays = max_light_rays;
 
-    l->ray_rad.resize(max_light_rays);
-    l->ray_thing.resize(max_light_rays);
-    l->ray_depth_buffer.resize(max_light_rays);
-    l->ray_depth_buffer2.resize(max_light_rays);
+    l->ray.resize(max_light_rays);
+    std::fill(l->ray.begin(), l->ray.end(), Ray{0});
 
-    std::fill(l->ray_depth_buffer.begin(), l->ray_depth_buffer.end(), 0.0);
-    std::fill(l->ray_depth_buffer2.begin(), l->ray_depth_buffer2.end(), 0.0);
+    /*
+     * First generate the right ray lengths.
+     */
+    l->ray_rad.resize(max_light_rays);
+    double dr = RAD_360 / (double) max_light_rays;
+    for (auto i = 0; i < max_light_rays; i++) {
+        l->ray_rad[i] = dr * (double)i;
+    }
 
     //log("created");
     return (l);
@@ -152,30 +156,54 @@ std::string Light::logname (void)
 void Light::set_z_buffer_if_closer (Thingp t, 
                                     fpoint &light_pos, 
                                     fpoint &light_end, 
-                                    double rad,
-                                    int deg)
+                                    int deg,
+                                    bool corner)
 {
     auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
+    auto r = &ray[deg];
 
-    if (unlikely(len > strength)) {
-        len = strength;
-    }
+    if (!r->depth_closest) {
+        r->depth_closest = len;
+        r->things[0] = t;
 
-    if (!ray_depth_buffer[deg]) {
-        ray_depth_buffer[deg] = len;
-        ray_rad[deg] = rad;
-        ray_thing[deg] = t;
-    } else if (len < ray_depth_buffer[deg]) {
-        ray_depth_buffer[deg] = len;
-        ray_rad[deg] = rad;
-        ray_thing[deg] = t;
+    } else if (fabs(len - r->depth_closest) < 0.00001) {
+        /*
+         * If close to the current depth then add this thing to the list
+         */
+        bool added = false;
+        uint8_t i;
+        Thingp *o;
+        for (i = 0, o = r->things; i < ARRAY_SIZE(r->things); o++, i++) {
+            if (*o == t) {
+                added = true;
+                break;
+            }
+            if (!*o) {
+                *o = t;
+//t->log("add at ray %d point %f,%f len %f closest %f", deg, light_end.x, 
+//light_end.y, len, r->depth_closest);
+                added = true;
+                break;
+            }
+        }
+        if (!added) {
+            for (i = 0, o = r->things; i < ARRAY_SIZE(r->things); o++, i++) {
+                if (*o) {
+                    (*o)->con("hit by ray %d", deg);
+                }
+            }
+            DIE("out of light space with collidiing things");
+        }
+    } else if (len < r->depth_closest) {
+	memset(r->things, 0, sizeof(r->things));
+        r->things[0] = t;
+        r->depth_closest = len;
     }
 }
 
 void Light::set_z_buffer_if_further (Thingp t,
                                      fpoint &light_pos, 
                                      fpoint &light_end, 
-                                     double rad,
                                      int deg)
 {
     auto len = DISTANCE(light_pos.x, light_pos.y, light_end.x, light_end.y);
@@ -184,8 +212,9 @@ void Light::set_z_buffer_if_further (Thingp t,
         len = strength;
     }
 
-    if (len > ray_depth_buffer2[deg]) {
-        ray_depth_buffer2[deg] = len;
+    auto r = &ray[deg];
+    if (len > r->depth_furthest) {
+        r->depth_furthest = len;
     }
 }
 
@@ -257,9 +286,7 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
      */
     if (((int)light_pos.x == (int)t->at.x) &&
         ((int)light_pos.y == (int)t->at.y)) {
-        std::fill(ray_depth_buffer.begin(), ray_depth_buffer.end(), 0.0);
-        std::fill(ray_rad.begin(), ray_rad.end(), 0.0);
-        std::fill(ray_thing.begin(), ray_thing.end(), nullptr);
+        std::fill(ray.begin(), ray.end(), Ray{0});
         return (false);
     }
 
@@ -319,8 +346,8 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
         auto rad = p2_rad;
         int deg = p2_deg;
 
-		set_z_buffer_if_closer(t, light_pos, P[k], p1_rad, p1_deg);
-		set_z_buffer_if_closer(t, light_pos, P[l], p2_rad, p2_deg);
+        set_z_buffer_if_closer(t, light_pos, P[k], p1_deg, true);
+        //set_z_buffer_if_closer(t, light_pos, P[l], p2_deg, true);
 
         /*
          * For each blocking radian, look at the distance to the light.
@@ -345,7 +372,7 @@ bool Light::calculate_for_obstacle (Thingp t, int x, int y)
             fpoint intersect;
             if (get_line_known_intersection(P[k], P[l], light_pos, light_end,
                                             &intersect)) {
-                set_z_buffer_if_closer(t, light_pos, intersect, rad, deg);
+                set_z_buffer_if_closer(t, light_pos, intersect, deg, false);
             }
 
             rad += dr;
@@ -437,10 +464,10 @@ if (debug_thing && (t != debug_thing)) {
          * How many degrees and radians does this face block?
          */
         int p1_deg = p1_rad * (double)max_light_rays / RAD_360;
-        int p3_deg = p3_rad * (double)max_light_rays / RAD_360;
+        //int p3_deg = p3_rad * (double)max_light_rays / RAD_360;
 
-        set_z_buffer_if_further(t, light_pos, A, p1_rad, p1_deg);
-        set_z_buffer_if_further(t, light_pos, C, p3_rad, p3_deg);
+        set_z_buffer_if_further(t, light_pos, A, p1_deg);
+        //set_z_buffer_if_further(t, light_pos, C, p3_rad, p3_deg);
 
         /*
          * A)  p1  p2  p3 -->
@@ -516,7 +543,7 @@ if (debug_thing && (t != debug_thing)) {
             if (get_line_known_intersection(A, C, light_pos, light_end,
                                             &intersect)) {
 //CON("  - intersect deg %d %f %f", deg, intersect.x, intersect.y);
-                set_z_buffer_if_further(t, light_pos, intersect, rad, deg);
+                set_z_buffer_if_further(t, light_pos, intersect, deg);
             } else {
 //CON("  - miss      deg %d", deg);
             }
@@ -543,17 +570,6 @@ if (debug_thing && (t != debug_thing)) {
 void Light::calculate (void)
 {
     glbuf.clear();
-
-    /*
-     * First generate the right ray lengths.
-     */
-    auto dr = RAD_360 / (double) max_light_rays;
-    auto rad = 0.0;
-
-    for (auto i = 0; i < max_light_rays; i++) {
-        ray_rad[i] = rad;
-        rad += dr;
-    }
 
     auto light_radius = strength;
     auto visible_width = light_radius + 1;
@@ -583,8 +599,7 @@ void Light::calculate (void)
     /*
      * Reset the per light z buffer
      */
-    std::fill(ray_depth_buffer.begin(), ray_depth_buffer.end(), 0);
-    std::fill(ray_depth_buffer2.begin(), ray_depth_buffer2.end(), 0.0);
+    std::fill(ray.begin(), ray.end(), Ray{0});
 
     uint8_t z = MAP_DEPTH_WALLS;
     for (int16_t x = maxx - 1; x >= minx; x--) {
@@ -610,9 +625,15 @@ void Light::calculate (void)
 //            t->light_iterator = light_iterator;
 
     memset(is_nearest_wall, 0, sizeof(is_nearest_wall));
-    for (auto i = 0; i < max_light_rays; i++) {
-        auto t = ray_thing[i];
-        if (t) {
+    for (auto n = 0; n < max_light_rays; n++) {
+        uint8_t i;
+        Thingp *o;
+        auto r = &ray[n];
+        for (i = 0, o = r->things; i < ARRAY_SIZE(r->things); o++, i++) {
+            auto t = *o;
+            if (!t) {
+                break;
+            }
             is_nearest_wall[(int)t->at.x][(int)t->at.y] = true;
         }
     }
@@ -659,22 +680,6 @@ void lights_calculate (void)
     }
 }
 
-void Light::render_smooth (void)
-{
-    std::vector<float>  ray_depth_buffer_tmp;
-    ray_depth_buffer_tmp.resize(max_light_rays);
-
-    int i = 0;
-    for (auto r : ray_depth_buffer) {
-        double a = ray_depth_buffer[(i - 1) % max_light_rays];
-        double c = ray_depth_buffer[(i + 1) % max_light_rays];
-
-        ray_depth_buffer_tmp[i++] = (a + r + c) / 3.0;
-    }
-
-    ray_depth_buffer = ray_depth_buffer_tmp;
-}
-
 void Light::render_triangle_fans (void)
 {
     static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
@@ -708,7 +713,8 @@ void Light::render_triangle_fans (void)
             push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
             for (i = 0; i < max_light_rays; i++) {
-                double radius = ray_depth_buffer2[i];
+                auto r = &ray[i];
+                double radius = r->depth_furthest;
                 double rad = ray_rad[i];
                 if (radius < 0.001) {
                     radius = strength;
@@ -729,7 +735,8 @@ void Light::render_triangle_fans (void)
              * Complete the circle with the first point again.
              */
             i = 0; {
-                double radius = ray_depth_buffer2[i];
+                auto r = &ray[i];
+                double radius = r->depth_furthest;
                 double rad = ray_rad[i];
                 if (radius < 0.001) {
                     radius = strength;
@@ -838,8 +845,10 @@ void Light::render_debug_lines (void)
      * Walk the light rays in a circle.
      */
     for (i = 0; i < max_light_rays; i++) {
-        double radius = ray_depth_buffer2[i];
+        auto r = &ray[i];
+        double radius = r->depth_furthest;
         double rad = ray_rad[i];
+
         if (radius < 0.001) {
             radius = strength;
             radius = 0;
@@ -861,8 +870,10 @@ void Light::render_debug_lines (void)
      * Walk the light rays in a circle.
      */
     for (i = 0; i < max_light_rays; i++) {
-        double radius = ray_depth_buffer[i];
+        auto r = &ray[i];
+        double radius = r->depth_furthest;
         double rad = ray_rad[i];
+
         if (radius < 0.001) {
             radius = strength;
             radius = 0;
