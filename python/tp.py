@@ -74,6 +74,9 @@ class Tp:
     def set_is_monst(self, value):
         zx.tp_set_is_monst(self, value)
 
+    def set_is_key(self, value):
+        zx.tp_set_is_key(self, value)
+
     def set_is_player(self, value):
         zx.tp_set_is_player(self, value)
 

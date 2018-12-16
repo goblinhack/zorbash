@@ -257,22 +257,26 @@ static void game_place_floor (class Dungeon *d,
                 }
             }
 
-            if (d->is_monst_at(x, y + 1)) {
+            if (d->is_monst_at(x, y + 1) ||
+                d->is_key_at(x, y + 1)) {
                 if (!game.state.map.is_floor[x][y + 1]) {
                     thing_new(what, fpoint(x, y + 1));
                 }
             }
-            if (d->is_monst_at(x, y - 1)) {
+            if (d->is_monst_at(x, y - 1) ||
+                d->is_key_at(x, y - 1)) {
                 if (!game.state.map.is_floor[x][y - 1]) {
                     thing_new(what, fpoint(x, y - 1));
                 }
             }
-            if (d->is_monst_at(x + 1, y)) {
+            if (d->is_monst_at(x + 1, y) ||
+                d->is_key_at(x + 1, y)) {
                 if (!game.state.map.is_floor[x + 1][y]) {
                     thing_new(what, fpoint(x + 1, y));
                 }
             }
-            if (d->is_monst_at(x - 1, y)) {
+            if (d->is_monst_at(x - 1, y) ||
+                d->is_key_at(x - 1, y)) {
                 if (!game.state.map.is_floor[x - 1][y]) {
                     thing_new(what, fpoint(x - 1, y));
                 }
@@ -329,6 +333,25 @@ static void game_place_monsts (class Dungeon *d)
 
             auto tp = tp_get_random_monst();
             (void) thing_new(tp_name(tp), fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_keys (class Dungeon *d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_key[x][y]) {
+                continue;
+            }
+
+            if (!d->is_key_at(x, y)) {
+                continue;
+            }
+
+            auto tp = tp_get_random_key();
+            auto t = thing_new(tp_name(tp), fpoint(x, y));
+            t->bounce(0.1, 1.0, 500, 99999);
         }
     }
 }
@@ -527,6 +550,7 @@ void game_display (void)
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
         game_place_monsts(dungeon);
+        game_place_keys(dungeon);
 
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_under_walls(dungeon, "floor6");

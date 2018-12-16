@@ -69,3 +69,51 @@ bool Map::is_light_at (const int x, const int y)
     return (is_light[x][y]);
 }
 
+bool Map::is_corridor_at (const point &p)
+{
+    if (is_oob(p.x, p.y)) {
+        return (true);
+    }
+    return (is_corridor[p.x][p.y]);
+}
+
+bool Map::is_corridor_at (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        return (true);
+    }
+    return (is_corridor[x][y]);
+}
+
+bool Map::is_monst_at (const point &p)
+{
+    if (is_oob(p.x, p.y)) {
+        return (true);
+    }
+    return (is_monst[p.x][p.y]);
+}
+
+bool Map::is_monst_at (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        return (true);
+    }
+    return (is_monst[x][y]);
+}
+
+bool Map::is_key_at (const point &p)
+{
+    if (is_oob(p.x, p.y)) {
+        return (true);
+    }
+    return (is_key[p.x][p.y]);
+}
+
+bool Map::is_key_at (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        return (true);
+    }
+    return (is_key[x][y]);
+}
+
