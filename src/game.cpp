@@ -351,7 +351,7 @@ static void game_place_keys (class Dungeon *d)
 
             auto tp = tp_get_random_key();
             auto t = thing_new(tp_name(tp), fpoint(x, y));
-            t->bounce(0.1, 1.0, 500, 99999);
+            t->bounce(0.2, 1.0, 500, 99999);
         }
     }
 }
@@ -441,7 +441,7 @@ static void game_place_exit (class Dungeon *d, std::string what)
     }
 }
 
-static void game_ramaining_place_blocks (class Dungeon *d, std::string what)
+static void game_place_remaining_walls (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -449,9 +449,11 @@ static void game_ramaining_place_blocks (class Dungeon *d, std::string what)
                 continue;
             }
 
-            if (d->is_wall_at(x, y)) {
-                (void) thing_new(what, fpoint(x, y));
+            if (!d->is_wall_at(x, y)) {
+                continue;
             }
+
+            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
@@ -473,9 +475,13 @@ void game_display (void)
         LOG("dungeon: create blocks");
 
         memset(game.state.map.is_wall, sizeof(game.state.map.is_wall), 0);
-        memset(game.state.map.is_floor, sizeof(game.state.map.is_floor), 0);
-        memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
         memset(game.state.map.is_light, sizeof(game.state.map.is_light), 0);
+        memset(game.state.map.is_floor, sizeof(game.state.map.is_floor), 0);
+        memset(game.state.map.is_lava, sizeof(game.state.map.is_lava), 0);
+        memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
+        memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
+        memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
+        memset(game.state.map.is_key, sizeof(game.state.map.is_key), 0);
 
         game_place_entrance(dungeon, "entrance1");
         game_place_exit(dungeon, "exit1");
@@ -510,7 +516,7 @@ void game_display (void)
 
         // (void) light_new(100, 2, fpoint(x, y), LIGHT_QUALITY_LOW, col);
 
-        game_ramaining_place_blocks(dungeon, "wall1");
+        game_place_remaining_walls(dungeon, "wall1");
 
         game_fill_void(dungeon, "wall1", 1, 6, 6, tries);
         game_fill_void(dungeon, "wall1", 2, 6, 6, tries);
@@ -549,8 +555,6 @@ void game_display (void)
 
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
-        game_place_monsts(dungeon);
-        game_place_keys(dungeon);
 
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_under_walls(dungeon, "floor6");
@@ -564,6 +568,9 @@ void game_display (void)
                 }
             }
         }
+
+        game_place_monsts(dungeon);
+        game_place_keys(dungeon);
 
         lights_calculate();
 

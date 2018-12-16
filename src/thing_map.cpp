@@ -523,7 +523,6 @@ static void thing_blit_things (int minx, int miny, int minz,
                     verify(t);
 
                     if (!tp_is_boring(t->tp)) {
-                        t->get_bounce();
                         if (t->update_coordinates()) {
                             moved.push_back(t);
                         }
