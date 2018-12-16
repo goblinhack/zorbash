@@ -9,6 +9,7 @@
 
 Tpmap tp_map;
 Tpmap_create_order tp_create_order_map;
+Tpmap_create_order tp_monst;
 
 static uint8_t tp_init_done;
 
@@ -128,4 +129,35 @@ Tilep tp_first_tile (Tpp tp)
     auto Tileinfo = tile_info_first(tiles);
 
     return (Tileinfo->tile);
+}
+
+void tp_init_after_loading (void)
+{_
+    for (auto t : tp_map) {
+        auto tp = t.second;
+        if (!tp_is_monst(tp)) {
+            continue;
+        }
+
+        static unsigned int id;
+        id++;
+
+        auto result = tp_monst.insert(std::make_pair(id, tp));
+        if (result.second == false) {
+            ERR("thing template insert monst [%s] failed", tp_name(tp).c_str());
+        }
+    }
+}
+
+Tpp tp_get_random_monst (void)
+{_
+    auto n = tp_monst.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_monst.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
 }

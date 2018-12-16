@@ -45,6 +45,7 @@ public:
     uint8_t                    is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_water[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
   
     bool is_wall_at(const point &p);
     bool is_wall_at(const int x, const int y);
@@ -58,6 +59,8 @@ public:
     bool is_water_at(const int x, const int y);
     bool is_corridor_at(const point &p);
     bool is_corridor_at(const int x, const int y);
+    bool is_monst_at(const point &p);
+    bool is_monst_at(const int x, const int y);
 
     template <class Archive>
     void serialize (Archive & archive)

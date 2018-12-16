@@ -235,11 +235,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     }
 }
 
-/*
- * Blits a whole tile. Y co-ords are inverted.
- */
-void Thing::blit_shadow (const Tpp &tp, const Tilep &tile, 
-                         const fpoint &tl, const fpoint &br)
+void Thing::blit_player_owned_shadow (const Tpp &tp, const Tilep &tile, 
+                                      const fpoint &tl, const fpoint &br)
 {
     double x1;
     double x2;
@@ -288,6 +285,86 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
 
     glcolor(WHITE);
+}
+
+/*
+ * Blits a whole tile. Y co-ords are inverted.
+ */
+void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile, 
+                                          const fpoint &tl, const fpoint &br)
+{
+    double x1;
+    double x2;
+    double y1;
+    double y2;
+
+    if (!tile) {
+        return;
+    }
+
+    x1 = tile->x1;
+    x2 = tile->x2;
+    y1 = tile->y1;
+    y2 = tile->y2;
+
+    fpoint shadow_bl(tl.x, br.y); 
+    fpoint shadow_br = br;
+    fpoint shadow_tl = shadow_bl;
+    fpoint shadow_tr = shadow_br;
+
+    double dx = 1.0;
+    double dy = 1.0;
+    if (game.state.player) {
+        if (owner_thing_id == game.state.player->id) {
+            // use default shadow for carried items
+        } else if (this != game.state.player) {
+            fpoint d = this->at - game.state.player->at;
+            const double D = 5.0;
+            dx = d.x / D;
+            dy = d.y / D;
+        }
+    } else {
+        // use default shadow
+    }
+
+    color c = BLACK;
+    c.a = 100;
+    glcolor(c);
+
+    shadow_tl.x += 0.25 * dx;
+    shadow_tr.x += 0.25 * dx;
+    shadow_tl.y += 0.25 * dy;
+    shadow_tr.y += 0.25 * dy;
+
+    if (shadow_tl.x > shadow_tr.x) {
+        std::swap(shadow_tl, shadow_tr);
+    }
+
+    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+           shadow_bl, shadow_br, shadow_tl, shadow_tr);
+
+    c.a = 50;
+    glcolor(c);
+
+    shadow_tl.x += 0.02 * dx;
+    shadow_tr.x += 0.02 * dx;
+    shadow_tl.y += 0.02 * dy;
+    shadow_tr.y += 0.02 * dy;
+
+    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+           shadow_bl, shadow_br, shadow_tl, shadow_tr);
+
+    glcolor(WHITE);
+}
+
+void Thing::blit_shadow (const Tpp &tp, const Tilep &tile, 
+                         const fpoint &tl, const fpoint &br)
+{
+    if (tp_is_player(tp) || (owner_thing_id == game.state.player->id)) {
+        blit_player_owned_shadow(tp, tile, tl, br);
+    } else {
+        blit_non_player_owned_shadow(tp, tile, tl, br);
+    }
 }
 
 void Thing::blit (double offset_x, double offset_y, int x, int y, int z)

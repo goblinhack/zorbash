@@ -17,6 +17,7 @@ def my_init(name, short_name):
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(5)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
+    x.set_is_small_shadow_caster(True)
 
     x.set_tile(tile=name + ".1")
 
