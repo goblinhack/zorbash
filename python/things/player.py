@@ -7,7 +7,7 @@ def my_init(name, short_name):
 
     x.set_for_collision_use_circle(True)
     x.set_is_animated(True)
-    x.set_is_animated_walk_flip(True)
+    x.set_is_animated_can_hflip(True)
     x.set_is_blit_y_offset(True)
     x.set_is_movable(True)
     x.set_is_outlined(True)

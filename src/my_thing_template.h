@@ -150,7 +150,7 @@ public:
     int is_rrr12 {};
     int is_rrr13 {};
     int is_rrr14 {};
-    int is_rrr15 {};
+    int is_animated_can_vflip {};
     int is_blit_y_offset {};
     int is_small_shadow_caster {};
     int is_corridor {};
@@ -174,7 +174,7 @@ public:
     int is_weapon {};
     int is_outlined {};
     int is_shadow_caster {};
-    int is_animated_walk_flip {};
+    int is_animated_can_hflip {};
     int is_movable {};
     uint8_t z_depth {};
 };
@@ -335,9 +335,9 @@ static inline int tp_is_rrr14 (Tpp t)
     return (t->is_rrr14);
 }
 
-static inline int tp_is_rrr15 (Tpp t)
+static inline int tp_is_animated_can_vflip (Tpp t)
 {
-    return (t->is_rrr15);
+    return (t->is_animated_can_vflip);
 }
 
 static inline int tp_is_blit_y_offset (Tpp t)
@@ -455,9 +455,9 @@ static inline int tp_is_shadow_caster (Tpp t)
     return (t->is_shadow_caster);
 }
 
-static inline int tp_is_animated_walk_flip (Tpp t)
+static inline int tp_is_animated_can_hflip (Tpp t)
 {
-    return (t->is_animated_walk_flip);
+    return (t->is_animated_can_hflip);
 }
 
 static inline int tp_z_depth (Tpp t)

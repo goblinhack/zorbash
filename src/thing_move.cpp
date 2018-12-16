@@ -127,7 +127,7 @@ bool Thing::update_coordinates (void)
         br.y -= 0.01;
     }
 
-    if (unlikely(tp_is_animated_walk_flip(tp))) {
+    if (unlikely(tp_is_animated_can_hflip(tp))) {
         if (flip_start_ms) {
             auto diff = time_get_time_ms_cached() - flip_start_ms;
             uint32_t flip_time = 100;
@@ -154,6 +154,12 @@ bool Thing::update_coordinates (void)
             if (is_dir_left()) {
                 std::swap(tl.x, br.x);
             }
+        }
+    }
+
+    if (unlikely(tp_is_animated_can_vflip(tp))) {
+        if (is_dir_up()) {
+            std::swap(tl.y, br.y);
         }
     }
 
