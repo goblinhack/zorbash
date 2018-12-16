@@ -256,6 +256,27 @@ static void game_place_floor (class Dungeon *d,
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
+
+            if (d->is_monst_at(x, y + 1)) {
+                if (!game.state.map.is_floor[x][y + 1]) {
+                    thing_new(what, fpoint(x, y + 1));
+                }
+            }
+            if (d->is_monst_at(x, y - 1)) {
+                if (!game.state.map.is_floor[x][y - 1]) {
+                    thing_new(what, fpoint(x, y - 1));
+                }
+            }
+            if (d->is_monst_at(x + 1, y)) {
+                if (!game.state.map.is_floor[x + 1][y]) {
+                    thing_new(what, fpoint(x + 1, y));
+                }
+            }
+            if (d->is_monst_at(x - 1, y)) {
+                if (!game.state.map.is_floor[x - 1][y]) {
+                    thing_new(what, fpoint(x - 1, y));
+                }
+            }
         }
     }
 }
@@ -290,6 +311,25 @@ static void game_place_water (class Dungeon *d, std::string what)
             }
 
             (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_monsts (class Dungeon *d)
+{_
+    auto tp = tp_get_random_monst();
+
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_monst[x][y]) {
+                continue;
+            }
+
+            if (!d->is_monst_at(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
 }
@@ -398,6 +438,8 @@ void game_display (void)
 {_
     static int first = true;
     if (first) {
+        tp_init_after_loading();
+
         int seed = 663;
         //seed = myrand();
         mysrand(seed);
@@ -485,16 +527,13 @@ void game_display (void)
 
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
+        game_place_monsts(dungeon);
 
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_under_walls(dungeon, "floor6");
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
-                if (dungeon->is_monst_at(x, y)) {
-                    (void) thing_new("monst1", fpoint(x, y));
-                }
-
                 if (dungeon->is_entrance_at(x, y)) {
                     auto t = thing_new("player1", fpoint(x, y));
                     auto w = tp_find("sword1");

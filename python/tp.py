@@ -185,9 +185,6 @@ class Tp:
     def set_is_blit_y_offset(self, value):
         zx.tp_set_is_blit_y_offset(self, value)
 
-    def set_is_small_shadow_caster(self, value):
-        zx.tp_set_is_small_shadow_caster(self, value)
-
     def set_is_corridor(self, value):
         zx.tp_set_is_corridor(self, value)
 
@@ -280,3 +277,6 @@ class Tp:
 
     def set_is_water(self, value):
         zx.tp_set_is_water(self, value)
+
+    def set_is_small_shadow_caster(self, value):
+        zx.tp_set_is_small_shadow_caster(self, value)

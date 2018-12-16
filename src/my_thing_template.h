@@ -186,6 +186,8 @@ void tp_update(Tpp tp);
 Tpp tp_find(std::string name);
 Tpp tp_find(uint32_t id);
 Tpp tp_find_short_name(std::string name);
+void tp_init_after_loading(void);
+Tpp tp_get_random_monst(void);
 
 static inline int32_t tp_get_blit_top_off (Tpp &t)
 {

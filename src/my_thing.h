@@ -235,6 +235,10 @@ public:
     void blit_wall_cladding(fpoint &tl, fpoint &br);
     void blit_shadow(const Tpp &tp, const Tilep &tile, 
                      const fpoint &tl, const fpoint &br);
+    void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, 
+                                  const fpoint &tl, const fpoint &br);
+    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, 
+                                      const fpoint &tl, const fpoint &br);
     void blit(double offset_x, double offset_y, int x, int y, int z);
 
     /*
