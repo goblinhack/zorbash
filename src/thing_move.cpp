@@ -44,6 +44,8 @@ bool Thing::update_coordinates (void)
 {
     old_br = br;
 
+    get_bounce();
+
     const double tile_gl_width = game.config.tile_gl_width;
     const double tile_gl_height = game.config.tile_gl_height;
 

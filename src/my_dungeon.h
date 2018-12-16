@@ -1675,6 +1675,10 @@ public:
                         putc_fast(x + dx - 1, y + dy - 1, 
                                   MAP_DEPTH_WALLS, Charmap::WALL);
                     }
+                    if (!is_anything_at(x + dx, y + dy - 1)) {
+                        putc_fast(x + dx, y + dy - 1, 
+                                  MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
                     if (!is_anything_at(x + dx + 1, y + dy - 1)) {
                         putc_fast(x + dx + 1, y + dy - 1, 
                                   MAP_DEPTH_WALLS, Charmap::WALL);
@@ -1689,6 +1693,10 @@ public:
                     }
                     if (!is_anything_at(x + dx - 1, y + dy + 1)) {
                         putc_fast(x + dx - 1, y + dy + 1, 
+                                  MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at(x + dx, y + dy + 1)) {
+                        putc_fast(x + dx, y + dy + 1, 
                                   MAP_DEPTH_WALLS, Charmap::WALL);
                     }
                     if (!is_anything_at(x + dx + 1, y + dy + 1)) {

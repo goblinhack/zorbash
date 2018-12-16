@@ -259,18 +259,6 @@ void Thing::blit_player_owned_shadow (const Tpp &tp, const Tilep &tile,
 
     double dx = 1.0;
     double dy = 1.0;
-    if (game.state.player) {
-        if (owner_thing_id == game.state.player->id) {
-            // use default shadow for carried items
-        } else if (this != game.state.player) {
-            fpoint d = this->at - game.state.player->at;
-            const double D = 5.0;
-            dx = d.x / D;
-            dy = d.y / D;
-        }
-    } else {
-        // use default shadow
-    }
 
     color c = BLACK;
     c.a = 100;
@@ -318,7 +306,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
         if (owner_thing_id == game.state.player->id) {
             // use default shadow for carried items
         } else if (this != game.state.player) {
-            fpoint d = this->at - game.state.player->at;
+            fpoint d = this->interpolated_at - game.state.player->interpolated_at;
             const double D = 5.0;
             dx = d.x / D;
             dy = d.y / D;
@@ -327,7 +315,14 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
         // use default shadow
     }
 
-    double m = 0.3;
+    double n = 0.1;
+    if (dy < 0) {
+        dy = std::min(-n, dy);
+    } else {
+        dy = std::max(n, dy);
+    }
+
+    double m = 0.5;
     if (dx < 0) {
         dx = std::max(-m, dx);
     } else {
@@ -343,28 +338,47 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
     c.a = 100;
     glcolor(c);
 
-    shadow_tl.x += 0.35 * dx;
-    shadow_tr.x += 0.35 * dx;
-    shadow_tl.y += 0.35 * dy;
-    shadow_tr.y += 0.35 * dy;
-
-    if (shadow_tl.x > shadow_tr.x) {
-        std::swap(shadow_tl, shadow_tr);
-    }
-
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
-           shadow_bl, shadow_br, shadow_tl, shadow_tr);
-
-    c.a = 75;
-    glcolor(c);
-
     shadow_tl.x += 0.40 * dx;
     shadow_tr.x += 0.40 * dx;
     shadow_tl.y += 0.40 * dy;
     shadow_tr.y += 0.40 * dy;
 
+    if (shadow_tl.x > shadow_tr.x) {
+        std::swap(shadow_tl, shadow_tr);
+    }
+
+    double height = get_bounce() / 2.0;
+    shadow_tl.x -= height;
+    shadow_tr.x -= height;
+    shadow_bl.x -= height;
+    shadow_br.x -= height;
+    shadow_tl.y -= height;
+    shadow_tr.y -= height;
+    shadow_bl.y -= height;
+    shadow_br.y -= height;
+
     ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
+
+    c.a = 50;
+    glcolor(c);
+
+    fpoint faded_shadow_tl;
+    fpoint faded_shadow_tr;
+
+    faded_shadow_tl.x = shadow_tl.x + 0.07 * dx;
+    faded_shadow_tr.x = shadow_tr.x + 0.07 * dx;
+    faded_shadow_tl.y = shadow_tl.y + 0.02 * dy;
+    faded_shadow_tr.y = shadow_tr.y + 0.02 * dy;
+    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+           shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
+
+    faded_shadow_tl.x = shadow_tl.x + 0.03 * dx;
+    faded_shadow_tr.x = shadow_tr.x + 0.03 * dx;
+    faded_shadow_tl.y = shadow_tl.y + 0.01 * dy;
+    faded_shadow_tr.y = shadow_tr.y + 0.01 * dy;
+    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+           shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
 
     glcolor(WHITE);
 }
