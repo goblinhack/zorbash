@@ -51,7 +51,7 @@ void Thing::animate (void)
          * If walking and now we've stopped, choose the idle no dir tile.
          */
         if (!t->is_dead && !t->is_moving &&
-            (time_get_time_ms() >= t->begin_move_ms + 5000)) {
+            (time_get_time_ms() >= t->begin_move_ms + 500)) {
 
             Tileinfop new_tile;
 

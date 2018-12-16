@@ -317,8 +317,6 @@ static void game_place_water (class Dungeon *d, std::string what)
 
 static void game_place_monsts (class Dungeon *d)
 {_
-    auto tp = tp_get_random_monst();
-
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (game.state.map.is_monst[x][y]) {
@@ -329,6 +327,7 @@ static void game_place_monsts (class Dungeon *d)
                 continue;
             }
 
+            auto tp = tp_get_random_monst();
             (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
