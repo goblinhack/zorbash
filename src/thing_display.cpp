@@ -327,6 +327,18 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
         // use default shadow
     }
 
+    double m = 0.3;
+    if (dx < 0) {
+        dx = std::max(-m, dx);
+    } else {
+        dx = std::min(m, dx);
+    }
+    if (dy < 0) {
+        dy = std::max(-m, dy);
+    } else {
+        dy = std::min(m, dy);
+    }
+
     color c = BLACK;
     c.a = 100;
     glcolor(c);
