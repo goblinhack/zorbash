@@ -138,7 +138,7 @@ public:
     double             ascii_gl_height              = {};
     double             tile_pixel_width             = {};
     double             tile_pixel_height            = {};
-    uint32_t           sdl_delay                    = 1;
+    uint32_t           sdl_delay                    = 5;
     bool               editor_mode                  = false;
     double             movement_min_speed           = {};
     double             movement_max_speed           = {};

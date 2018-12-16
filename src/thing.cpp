@@ -56,7 +56,7 @@ Thingp thing_new (std::string tp_name, fpoint at)
     t->last_at        = at;
     t->depth          = tp_z_depth(tp);
 
-    if (tp_is_animated_walk_flip(tp)) {
+    if (tp_is_animated_can_hflip(tp)) {
         t->dir            = THING_DIR_RIGHT;
     } else {
         t->dir            = THING_DIR_NONE;
@@ -552,7 +552,7 @@ void Thing::set_dir_left (void)
 
     if (dir != THING_DIR_LEFT) {
         if (dir == THING_DIR_RIGHT) {
-            if (tp_is_animated_walk_flip(tp)) {
+            if (tp_is_animated_can_hflip(tp)) {
                 flip_start_ms = time_get_time_ms_cached();
             }
         }
@@ -574,7 +574,7 @@ void Thing::set_dir_right (void)
 
     if (dir != THING_DIR_RIGHT) {
         if (dir == THING_DIR_LEFT) {
-            if (tp_is_animated_walk_flip(tp)) {
+            if (tp_is_animated_can_hflip(tp)) {
                 flip_start_ms = time_get_time_ms_cached();
             }
         }
