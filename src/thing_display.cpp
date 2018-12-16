@@ -331,10 +331,10 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
     c.a = 100;
     glcolor(c);
 
-    shadow_tl.x += 0.25 * dx;
-    shadow_tr.x += 0.25 * dx;
-    shadow_tl.y += 0.25 * dy;
-    shadow_tr.y += 0.25 * dy;
+    shadow_tl.x += 0.35 * dx;
+    shadow_tr.x += 0.35 * dx;
+    shadow_tl.y += 0.35 * dy;
+    shadow_tr.y += 0.35 * dy;
 
     if (shadow_tl.x > shadow_tr.x) {
         std::swap(shadow_tl, shadow_tr);
@@ -343,13 +343,13 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
     ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
 
-    c.a = 50;
+    c.a = 75;
     glcolor(c);
 
-    shadow_tl.x += 0.02 * dx;
-    shadow_tr.x += 0.02 * dx;
-    shadow_tl.y += 0.02 * dy;
-    shadow_tr.y += 0.02 * dy;
+    shadow_tl.x += 0.40 * dx;
+    shadow_tr.x += 0.40 * dx;
+    shadow_tl.y += 0.40 * dy;
+    shadow_tr.y += 0.40 * dy;
 
     ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
