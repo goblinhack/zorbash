@@ -357,13 +357,25 @@ static void thing_blit_things (int minx, int miny, int minz,
                             offset_y + game.config.one_pixel_gl_height * 2, 
                             x, y, z);
                     t->blit(offset_x + game.config.one_pixel_gl_width * 2,
+                            offset_y + game.config.one_pixel_gl_height, 
+                            x, y, z);
+                    t->blit(offset_x - game.config.one_pixel_gl_width * 2,
+                            offset_y + game.config.one_pixel_gl_height, 
+                            x, y, z);
+                    t->blit(offset_x + game.config.one_pixel_gl_width * 2,
                             offset_y - game.config.one_pixel_gl_height * 2, 
                             x, y, z);
                     t->blit(offset_x - game.config.one_pixel_gl_width * 2,
                             offset_y - game.config.one_pixel_gl_height * 2, 
                             x, y, z);
                     t->blit(offset_x,
-                            offset_y + game.config.one_pixel_gl_height * 3, 
+                            offset_y + game.config.one_pixel_gl_height * 5, 
+                            x, y, z);
+                    t->blit(offset_x,
+                            offset_y + game.config.one_pixel_gl_height * 2, 
+                            x, y, z);
+                    t->blit(offset_x,
+                            offset_y - game.config.one_pixel_gl_height * 2, 
                             x, y, z);
                 }
             }
