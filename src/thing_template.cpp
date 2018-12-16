@@ -7,9 +7,10 @@
 #include "my_tile_info.h"
 #include "my_tile.h"
 
-Tpmap tp_map;
-Tpmap_create_order tp_create_order_map;
-Tpmap_create_order tp_monst;
+static Tpmap tp_map;
+static Tpmap_create_order tp_create_order_map;
+static Tpmap_create_order tp_monsts;
+static Tpmap_create_order tp_keys;
 
 static uint8_t tp_init_done;
 
@@ -135,26 +136,44 @@ void tp_init_after_loading (void)
 {_
     for (auto t : tp_map) {
         auto tp = t.second;
-        if (!tp_is_monst(tp)) {
-            continue;
+        if (tp_is_monst(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_monsts.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert monst [%s] failed", tp_name(tp).c_str());
+            }
         }
-
-        static unsigned int id;
-        id++;
-
-        auto result = tp_monst.insert(std::make_pair(id, tp));
-        if (result.second == false) {
-            ERR("thing template insert monst [%s] failed", tp_name(tp).c_str());
+        if (tp_is_key(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_keys.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert key [%s] failed", tp_name(tp).c_str());
+            }
         }
     }
 }
 
 Tpp tp_get_random_monst (void)
 {_
-    auto n = tp_monst.size();
+    auto n = tp_monsts.size();
     auto m = myrand() % n;
 
-    auto iter = tp_monst.begin();
+    auto iter = tp_monsts.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
+}
+
+Tpp tp_get_random_key (void)
+{_
+    auto n = tp_keys.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_keys.begin();
     while (m--) {
         iter++;
     }

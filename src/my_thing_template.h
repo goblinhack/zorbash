@@ -188,6 +188,7 @@ Tpp tp_find(uint32_t id);
 Tpp tp_find_short_name(std::string name);
 void tp_init_after_loading(void);
 Tpp tp_get_random_monst(void);
+Tpp tp_get_random_key(void);
 
 static inline int32_t tp_get_blit_top_off (Tpp &t)
 {
@@ -208,9 +209,6 @@ static inline int32_t tp_get_blit_right_off (Tpp &t)
 {
     return (t->blit_right_off);
 }
-
-extern Tpmap tp_map;
-extern Tpmap_create_order tp_create_order_map;
 
 static inline int tp_to_id (Tpp t)
 {
