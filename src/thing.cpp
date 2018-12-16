@@ -147,9 +147,13 @@ Thingp thing_new (std::string tp_name, fpoint at)
         game.state.player = t;
 
         color col = WHITE;
-        // any more than this and light creeps over the walls
+        //
+        // keep the light strength half the tiles drawn or we get artifacts
+        // at the edges of the fbo
+        // 
         col.a = 100;
-        t->light = light_new(MAX_LIGHT_RAYS, 8, at, LIGHT_QUALITY_HIGH, col);
+        t->light = light_new(MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at, 
+                             LIGHT_QUALITY_HIGH, col);
 
         t->log("player created");
     }

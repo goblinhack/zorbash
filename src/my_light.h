@@ -21,9 +21,10 @@ typedef enum {
 } LightQuality;
 
 typedef struct {
-    float depth_closest;
-    float depth_furthest;
-    Thingp things[10];
+    double depth_closest;
+    double depth_furthest;
+    double sinr;
+    double cosr;
 } Ray;
 
 class Light
@@ -76,7 +77,6 @@ public:
     double              strength;
     uint16_t            max_light_rays;
     std::vector<Ray>    ray;
-    std::vector<float>  ray_rad;
     std::vector<float>  glbuf;
     LightQuality        quality;
     color               col;
@@ -94,19 +94,12 @@ public:
     void reset(void);
     void move_delta(fpoint);
     void move_to(fpoint to);
-    void set_z_buffer_if_closer(Thingp, fpoint &light_pos, fpoint &light_end, 
-                                int deg, bool corner);
-    void set_z_buffer_if_further(Thingp, fpoint &light_pos, fpoint &light_end, 
-                                 int deg);
-    bool calculate_for_obstacle(Thingp t, int x, int y);
-    void calculate_for_obstacle_2nd_pass(Thingp t, int x, int y);
     void calculate(void);
     void render_triangle_fans(void);
     void render_point_light(void);
     void render(int fbo);
-    void render_debug(void);
-    void render_debug_lines(void);
-    void flood(point start);
+    void render_debug(int minx, int miny, int maxx, int maxy);
+    void render_debug_lines(int minx, int miny, int maxx, int maxy);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

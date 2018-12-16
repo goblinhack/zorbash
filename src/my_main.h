@@ -40,7 +40,7 @@
 /*
  * Light sources
  */
-#define MAX_LIGHT_RAYS              (100)
+#define MAX_LIGHT_RAYS              (501)
 
 /*
  * Per screen

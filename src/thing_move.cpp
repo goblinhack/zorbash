@@ -253,7 +253,7 @@ void Thing::update_pos (fpoint to)
      */
     at = to;
     begin_move_ms = time_get_time_ms_cached();
-    end_move_ms = begin_move_ms + ONESEC / 1;
+    end_move_ms = begin_move_ms + ONESEC / 10;
 
     move_carried_items();
 }
