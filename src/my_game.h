@@ -58,10 +58,6 @@ public:
     bool is_water_at(const int x, const int y);
     bool is_corridor_at(const point &p);
     bool is_corridor_at(const int x, const int y);
-    bool is_oob(const int x, const int y, const int z);
-    bool is_oob(const int x, const int y);
-    bool is_oob(const fpoint);
-    bool is_oob(const point);
 
     template <class Archive>
     void serialize (Archive & archive)
@@ -69,6 +65,31 @@ public:
         archive(cereal::make_nvp("all_things",      all_things),
                 cereal::make_nvp("all_lights",      all_lights),
                 cereal::make_nvp("lights",          lights));
+    }
+
+    bool is_oob (const int x, const int y, const int z)
+    {
+        return ((x < 0) || (x >= MAP_WIDTH) ||
+                (y < 0) || (y >= MAP_HEIGHT) ||
+                (z < 0) || (z >= MAP_DEPTH));
+    }
+
+    bool is_oob (const int x, const int y)
+    {
+        return ((x < 0) || (x >= MAP_WIDTH) ||
+                (y < 0) || (y >= MAP_HEIGHT));
+    }
+
+    bool is_oob (const fpoint p)
+    {
+        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
+                (p.y < 0) || (p.y >= MAP_HEIGHT));
+    }
+
+    bool is_oob (const point p)
+    {
+        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
+                (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 };
 
