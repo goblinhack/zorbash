@@ -179,8 +179,8 @@ class Tp:
     def set_is_rrr13(self, value):
         zx.tp_set_is_rrr13(self, value)
 
-    def set_is_rrr14(self, value):
-        zx.tp_set_is_rrr14(self, value)
+    def set_is_blood(self, value):
+        zx.tp_set_is_blood(self, value)
 
     def set_is_animated_can_vflip(self, value):
         zx.tp_set_is_animated_can_vflip(self, value)

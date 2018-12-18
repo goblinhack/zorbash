@@ -149,7 +149,7 @@ public:
     int is_rrr11 {};
     int is_rrr12 {};
     int is_rrr13 {};
-    int is_rrr14 {};
+    int is_blood {};
     int is_animated_can_vflip {};
     int is_blit_y_offset {};
     int is_small_shadow_caster {};
@@ -330,9 +330,9 @@ static inline int tp_is_rrr13 (Tpp t)
     return (t->is_rrr13);
 }
 
-static inline int tp_is_rrr14 (Tpp t)
+static inline int tp_is_blood (Tpp t)
 {
-    return (t->is_rrr14);
+    return (t->is_blood);
 }
 
 static inline int tp_is_animated_can_vflip (Tpp t)

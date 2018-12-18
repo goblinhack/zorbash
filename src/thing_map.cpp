@@ -98,7 +98,7 @@ static void thing_blit_things (int minx, int miny, int minz,
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
                     verify(t);
-                    t->blit(offset_x, offset_y, x, y, z);
+                    t->blit(offset_x, offset_y, x, y);
                 }
             }
         }
@@ -157,19 +157,19 @@ static void thing_blit_things (int minx, int miny, int minz,
                     auto t = p.second;
                     t->blit(offset_x + game.config.one_pixel_gl_width * 2,
                             offset_y + game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width * 2,
                             offset_y + game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x + game.config.one_pixel_gl_width * 2,
                             offset_y - game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width * 2,
                             offset_y - game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x,
                             offset_y + game.config.one_pixel_gl_height * 3, 
-                            x, y, z);
+                            x, y);
                 }
             }
         }
@@ -187,19 +187,19 @@ static void thing_blit_things (int minx, int miny, int minz,
                     auto t = p.second;
                     t->blit(offset_x + game.config.one_pixel_gl_width,
                             offset_y + game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width,
                             offset_y + game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x + game.config.one_pixel_gl_width,
                             offset_y - game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width,
                             offset_y - game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x,
                             offset_y + game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                 }
             }
         }
@@ -219,7 +219,7 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
-                    t->blit(offset_x, offset_y, x, y, z);
+                    t->blit(offset_x, offset_y, x, y);
                 }
             }
         }
@@ -243,6 +243,11 @@ static void thing_blit_things (int minx, int miny, int minz,
                     water_map[X-1][Y] = true;
                     water_map[X][Y+1] = true;
                     water_map[X][Y-1] = true;
+
+                    water_map[X+1][Y+1] = true;
+                    water_map[X-1][Y+1] = true;
+                    water_map[X+1][Y-1] = true;
+                    water_map[X-1][Y-1] = true;
                 }
             }
         }
@@ -352,38 +357,38 @@ static void thing_blit_things (int minx, int miny, int minz,
                     auto t = p.second;
                     t->blit(offset_x + game.config.one_pixel_gl_width * 2,
                             offset_y + game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width * 2,
                             offset_y + game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x + game.config.one_pixel_gl_width * 2,
                             offset_y + game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width * 2,
                             offset_y + game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x + game.config.one_pixel_gl_width * 2,
                             offset_y - game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width * 2,
                             offset_y - game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x,
                             offset_y + game.config.one_pixel_gl_height * 5, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x,
                             offset_y + game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x,
                             offset_y - game.config.one_pixel_gl_height * 2, 
-                            x, y, z);
+                            x, y);
                 }
             }
         }
         blit_flush();
 
         /*
-         * Draw a black outline to the main display.
+         * Draw a orange outline to the main display.
          */
         color edge = ORANGE2;
         edge.a = 200;
@@ -396,19 +401,19 @@ static void thing_blit_things (int minx, int miny, int minz,
                     auto t = p.second;
                     t->blit(offset_x + game.config.one_pixel_gl_width,
                             offset_y + game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width,
                             offset_y + game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x + game.config.one_pixel_gl_width,
                             offset_y - game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x - game.config.one_pixel_gl_width,
                             offset_y - game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                     t->blit(offset_x,
                             offset_y + game.config.one_pixel_gl_height, 
-                            x, y, z);
+                            x, y);
                 }
             }
         }
@@ -428,7 +433,7 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
-                    t->blit(offset_x, offset_y, x, y, z);
+                    t->blit(offset_x, offset_y, x, y);
                 }
             }
         }
@@ -452,6 +457,11 @@ static void thing_blit_things (int minx, int miny, int minz,
                     lava_map[X-1][Y] = true;
                     lava_map[X][Y+1] = true;
                     lava_map[X][Y-1] = true;
+
+                    lava_map[X+1][Y+1] = true;
+                    lava_map[X-1][Y+1] = true;
+                    lava_map[X+1][Y-1] = true;
+                    lava_map[X-1][Y-1] = true;
                 }
             }
         }
@@ -511,12 +521,159 @@ static void thing_blit_things (int minx, int miny, int minz,
     }
 
     /*
+     * Blood...
+     */
+    {
+        auto z = MAP_DEPTH_BLOOD;
+#define BLOOD_ACROSS 1
+#define BLOOD_DOWN   1
+
+        static Tilep blood[BLOOD_ACROSS][BLOOD_DOWN] = {};
+        if (!blood[0][0]) {
+            blood[0][0] = tile_find("blood1a");
+        }
+
+        /*
+         * Draw a black outline to the main display.
+         */
+        glcolor(BLACK);
+        blit_init();
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                for (auto p : thing_display_order[x][y][z]) {
+                    auto t = p.second;
+                    t->blit(offset_x + game.config.one_pixel_gl_width,
+                            offset_y + game.config.one_pixel_gl_height, 
+                            x, y);
+                    t->blit(offset_x - game.config.one_pixel_gl_width,
+                            offset_y + game.config.one_pixel_gl_height, 
+                            x, y);
+                    t->blit(offset_x + game.config.one_pixel_gl_width,
+                            offset_y - game.config.one_pixel_gl_height,
+                            x, y);
+                    t->blit(offset_x - game.config.one_pixel_gl_width,
+                            offset_y - game.config.one_pixel_gl_height, 
+                            x, y);
+                    t->blit(offset_x - game.config.one_pixel_gl_width,
+                            offset_y,
+                            x, y);
+                    t->blit(offset_x + game.config.one_pixel_gl_width,
+                            offset_y,
+                            x, y);
+                    t->blit(offset_x,
+                            offset_y + game.config.one_pixel_gl_height, 
+                            x, y);
+                    t->blit(offset_x,
+                            offset_y - game.config.one_pixel_gl_height, 
+                            x, y);
+                }
+            }
+        }
+        blit_flush();
+
+        /*
+         * Draw the white bitmap that will be the mask for the texture.
+         */
+        blit_fbo_bind(FBO_LIGHT_MERGED);
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        glcolor(WHITE);
+        blit_init();
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                for (auto p : thing_display_order[x][y][z]) {
+                    auto t = p.second;
+                    t->blit(offset_x, offset_y, x, y);
+                }
+            }
+        }
+        blit_flush();
+
+        /*
+         * The blood tiles are twice the size of normal tiles, so work out
+         * where to draw them to avoid overlaps
+         */
+        uint8_t blood_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
+
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                if (game.state.map.is_blood[x][y]) {
+                    auto X = x / 2;
+                    auto Y = y / 2;
+                    X++;
+                    Y++;
+                    blood_map[X][Y] = true;
+                    blood_map[X+1][Y] = true;
+                    blood_map[X-1][Y] = true;
+                    blood_map[X][Y+1] = true;
+                    blood_map[X][Y-1] = true;
+
+                    blood_map[X+1][Y+1] = true;
+                    blood_map[X-1][Y+1] = true;
+                    blood_map[X+1][Y-1] = true;
+                    blood_map[X-1][Y-1] = true;
+                }
+            }
+        }
+
+        /*
+         * Finally blit the blood and then the buffer to the display.
+         */
+        glBlendFunc(GL_DST_ALPHA, GL_ZERO);
+        glcolor(WHITE);
+        blit_init();
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                auto X = x / 2;
+                auto Y = y / 2;
+                X++;
+                Y++;
+
+                if (blood_map[X][Y]) {
+                    blood_map[X][Y] = false;
+                    auto tx = (double)(x &~1);
+                    auto ty = (double)(y &~1);
+                    double tlx = tx * game.config.tile_gl_width;
+                    double tly = ty * game.config.tile_gl_height;
+                    double brx = (tx+2.0) * game.config.tile_gl_width;
+                    double bry = (ty+2.0) * game.config.tile_gl_height;
+
+                    tlx += game.config.tile_gl_width / 2.0;
+                    tly += game.config.tile_gl_height / 2.0;
+                    brx += game.config.tile_gl_width / 2.0;
+                    bry += game.config.tile_gl_height / 2.0;
+
+                    tlx -= offset_x;
+                    tly -= offset_y;
+                    brx -= offset_x;
+                    bry -= offset_y;
+
+                    auto tile = blood[X % BLOOD_ACROSS][Y % BLOOD_DOWN];
+                    auto x1 = tile->x1;
+                    auto x2 = tile->x2;
+                    auto y1 = tile->y1;
+                    auto y2 = tile->y2;
+
+                    blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
+                }
+            }
+        }
+        blit_flush();
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        blit_fbo_bind(FBO_MAIN);
+        blit_fbo(FBO_LIGHT_MERGED);
+    }
+
+    /*
      * Everything else
      */
     blit_init();
 
     for (auto y = miny; y < maxy; y++) {
-        for (auto z = MAP_DEPTH_LAVA + 1; z < MAP_DEPTH; z++) {
+        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
@@ -528,7 +685,7 @@ static void thing_blit_things (int minx, int miny, int minz,
                         }
                     }
 
-                    t->blit(offset_x, offset_y, x, y, z);
+                    t->blit(offset_x, offset_y, x, y);
                 }
             }
         }

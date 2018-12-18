@@ -257,6 +257,10 @@ void Thing::update_pos (fpoint to)
             game.state.map.is_lava[old_at.x][old_at.y] = false;
             game.state.map.is_lava[new_at.x][new_at.y] = true;
         }
+        if (tp_is_blood(tp)) {
+            game.state.map.is_blood[old_at.x][old_at.y] = false;
+            game.state.map.is_blood[new_at.x][new_at.y] = true;
+        }
         if (tp_is_water(tp)) {
             game.state.map.is_water[old_at.x][old_at.y] = false;
             game.state.map.is_water[new_at.x][new_at.y] = true;

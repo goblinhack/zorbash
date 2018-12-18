@@ -1688,7 +1688,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr11)
     TP_SET_DECL(is_rrr12)
     TP_SET_DECL(is_rrr13)
-    TP_SET_DECL(is_rrr14)
+    TP_SET_DECL(is_blood)
     TP_SET_DECL(is_animated_can_vflip)
     TP_SET_DECL(is_blit_y_offset)
     TP_SET_DECL(is_small_shadow_caster)
@@ -1983,6 +1983,7 @@ static void python_add_consts (void)
 
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_LAVA", MAP_DEPTH_LAVA);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_BLOOD", MAP_DEPTH_BLOOD);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS", MAP_DEPTH_WALLS);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MONST", MAP_DEPTH_MONST);

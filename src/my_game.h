@@ -22,6 +22,7 @@ enum {
     MAP_DEPTH_FLOOR,
     MAP_DEPTH_WATER,
     MAP_DEPTH_LAVA,
+    MAP_DEPTH_BLOOD,
     MAP_DEPTH_WALLS,
     MAP_DEPTH_EXIT,
     MAP_DEPTH_ITEM,
@@ -30,6 +31,7 @@ enum {
     MAP_DEPTH_WEAPON,
     MAP_DEPTH,
 };
+#define MAP_DEPTH_LAST_FLOOR_TYPE MAP_DEPTH_BLOOD
 
 #include <list>
 
@@ -43,6 +45,7 @@ public:
     uint8_t                    is_light[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_blood[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_water[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -56,6 +59,8 @@ public:
     bool is_floor_at(const int x, const int y);
     bool is_lava_at(const point &p);
     bool is_lava_at(const int x, const int y);
+    bool is_blood_at(const point &p);
+    bool is_blood_at(const int x, const int y);
     bool is_water_at(const point &p);
     bool is_water_at(const int x, const int y);
     bool is_corridor_at(const point &p);
