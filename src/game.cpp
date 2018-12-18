@@ -302,6 +302,33 @@ static void game_place_lava (class Dungeon *d, std::string what)
     }
 }
 
+static void game_place_blood (class Dungeon *d, std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_blood[x][y]) {
+                continue;
+            }
+
+            if (!d->is_floor_at(x, y)) {
+                continue;
+            }
+
+            if (game.state.map.is_water[x][y]) {
+                continue;
+            }
+
+            if (game.state.map.is_lava[x][y]) {
+                continue;
+            }
+
+            if (random_range(0, 1000) < 10) {
+                (void) thing_new(what, fpoint(x, y));
+            }
+        }
+    }
+}
+
 static void game_place_water (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -478,6 +505,7 @@ void game_display (void)
         memset(game.state.map.is_light, sizeof(game.state.map.is_light), 0);
         memset(game.state.map.is_floor, sizeof(game.state.map.is_floor), 0);
         memset(game.state.map.is_lava, sizeof(game.state.map.is_lava), 0);
+        memset(game.state.map.is_blood, sizeof(game.state.map.is_blood), 0);
         memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
         memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
         memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
@@ -555,6 +583,7 @@ void game_display (void)
 
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
+        game_place_blood(dungeon, "blood1");
 
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_under_walls(dungeon, "floor6");

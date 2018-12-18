@@ -393,7 +393,7 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
     }
 }
 
-void Thing::blit (double offset_x, double offset_y, int x, int y, int z)
+void Thing::blit (double offset_x, double offset_y, int x, int y)
 {
     if (unlikely(is_hidden)) {
         return;
