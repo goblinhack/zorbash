@@ -176,7 +176,7 @@ static void thing_blit_things (int minx, int miny, int minz,
         blit_flush();
 
         /*
-         * Draw a black outline to the main display.
+         * Draw a white outline to the main display.
          */
         glcolor(WHITE);
         glDisable(GL_TEXTURE_2D);
@@ -536,7 +536,7 @@ static void thing_blit_things (int minx, int miny, int minz,
         /*
          * Draw a black outline to the main display.
          */
-        glcolor(BLACK);
+        glcolor(RED4);
         blit_init();
         for (auto y = miny; y < maxy; y++) {
             for (auto x = maxx - 1; x >= minx; x--) {
