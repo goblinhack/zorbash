@@ -468,6 +468,19 @@ static void game_place_exit (class Dungeon *d, std::string what)
     }
 }
 
+static void game_place_door (class Dungeon *d, std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (!d->is_door_at(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
 static void game_place_remaining_walls (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -513,6 +526,7 @@ void game_display (void)
 
         game_place_entrance(dungeon, "entrance1");
         game_place_exit(dungeon, "exit1");
+        game_place_door(dungeon, "door1");
 
         auto tries = 1000;
         game_place_walls(dungeon, "wall1", 1, 6, 6, tries);

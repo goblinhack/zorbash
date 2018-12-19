@@ -1696,6 +1696,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_blit_off_center)
     TP_SET_DECL(is_boring)
     TP_SET_DECL(is_exit)
+    TP_SET_DECL(is_door)
     TP_SET_DECL(is_entrance)
     TP_SET_DECL(move_delay_hundredths)
     TP_SET_DECL(weapon_use_delay_hundredths)

@@ -97,7 +97,11 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_dusty ||
                     m.is_lava ||
                     m.is_water) {
-                    floor_string += c;
+                    if (m.is_door) {
+                        floor_string += Charmap::FLOOR;
+                    } else {
+                        floor_string += c;
+                    }
                 } else {
                     floor_string += Charmap::SPACE;
                 }

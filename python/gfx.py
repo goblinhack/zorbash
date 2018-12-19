@@ -1102,8 +1102,8 @@ def init_32x32():
     tiles = [
             "exit1",
             "entrance1",
-            "beholder1.1",
-            "beholder1.2",
+            "door1.1-closed",
+            "door1.1-open",
             "spider1.1",
             "spider1.2",
             "spider2.1",

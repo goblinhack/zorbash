@@ -200,6 +200,9 @@ class Tp:
     def set_is_exit(self, value):
         zx.tp_set_is_exit(self, value)
 
+    def set_is_door(self, value):
+        zx.tp_set_is_door(self, value)
+
     def set_is_entrance(self, value):
         zx.tp_set_is_entrance(self, value)
 
