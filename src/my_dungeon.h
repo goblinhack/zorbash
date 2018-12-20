@@ -241,7 +241,17 @@ public:
         // depth changes
         //
         remove_all_doors();
-        place_doors_between_depth_changes();
+
+        //
+        // Place the rooms back on the map, so if there were any intentional
+        // doors removed above then they will reappear.
+        //
+        room_print_only_doors(&grid);
+
+        // 
+        // Not sure we want this as rooms
+        // 
+        //place_doors_between_depth_changes();
 
         //
         // Add a perimeter to the level. Helps avoid off by one bugs.
@@ -254,8 +264,7 @@ public:
 
     void debug (std::string s)
     {_
-        return;
-        //LOG("dungeon (%u): %s", seed, s.c_str());
+        //return;
         LOG("dungeon (%u) %s", seed, s.c_str());
         dump();
     }
@@ -885,6 +894,37 @@ public:
                     if (c && (c != Charmap::SPACE)) {
                         putc(x + dx, y + dy, z, c);
                     }
+                }
+            }
+        }
+    }
+
+    void room_print_only_doors_at (Roomp r, int x, int y)
+    {_
+        for (auto z = 0; z < MAP_DEPTH; z++) {
+            for (auto dy = 0; dy < r->height; dy++) {
+                for (auto dx = 0; dx < r->width; dx++) {
+                    auto c = r->data[dx][dy][z];
+                    if (c == Charmap::DOOR) {
+                        putc(x + dx, y + dy, z, c);
+                    }
+                }
+            }
+        }
+    }
+
+    void room_print_only_doors (Grid *g)
+    {_
+        for (auto x = 0; x < grid_width; x++) {
+            for (auto y = 0; y < grid_height; y++) {
+                auto n = nodes->getn(x, y);
+                if (n->depth <= 0 ) {
+                    continue;
+                }
+
+                Roomp r = g->node_rooms[x][y];
+                if (r) {
+                    room_print_only_doors_at(r, r->at.x, r->at.y);
                 }
             }
         }
