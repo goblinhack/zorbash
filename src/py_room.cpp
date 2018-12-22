@@ -96,8 +96,9 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 if (m.is_floor ||
                     m.is_dusty ||
                     m.is_lava ||
+                    m.is_deco ||
                     m.is_water) {
-                    if (m.is_door) {
+                    if (m.is_door || m.is_deco) {
                         floor_string += Charmap::FLOOR;
                     } else {
                         floor_string += c;
@@ -108,6 +109,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
                 if (m.is_wall ||
                     m.is_door ||
+                    m.is_deco ||
                     m.is_rock) {
                     walls_string += c;
                 } else {

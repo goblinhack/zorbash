@@ -11,6 +11,7 @@ static Tpmap tp_map;
 static Tpmap_create_order tp_create_order_map;
 static Tpmap_create_order tp_monsts;
 static Tpmap_create_order tp_keys;
+static Tpmap_create_order tp_deco;
 
 static uint8_t tp_init_done;
 
@@ -152,6 +153,14 @@ void tp_init_after_loading (void)
                 ERR("thing template insert key [%s] failed", tp_name(tp).c_str());
             }
         }
+        if (tp_is_deco(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_deco.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert deco [%s] failed", tp_name(tp).c_str());
+            }
+        }
     }
 }
 
@@ -174,6 +183,19 @@ Tpp tp_get_random_key (void)
     auto m = myrand() % n;
 
     auto iter = tp_keys.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
+}
+
+Tpp tp_get_random_deco (void)
+{_
+    auto n = tp_deco.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_deco.begin();
     while (m--) {
         iter++;
     }
