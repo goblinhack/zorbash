@@ -560,8 +560,9 @@ void blit_flush_triangle_fan_smoothed (float *b, float *e)
             NUMBER_DIMENSIONS_PER_COORD_2D);
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
-    double d = 0.02;
-    int blur = 4;
+    double d = 0.01;
+    int blur = 3;
+
     while (blur--) {
 
         glTranslatef(-d, 0, 0);

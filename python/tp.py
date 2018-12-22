@@ -77,8 +77,11 @@ class Tp:
     def set_is_key(self, value):
         zx.tp_set_is_key(self, value)
 
-    def set_is_deco(self, value):
-        zx.tp_set_is_deco(self, value)
+    def set_is_floor_deco(self, value):
+        zx.tp_set_is_floor_deco(self, value)
+
+    def set_is_wall_deco(self, value):
+        zx.tp_set_is_wall_deco(self, value)
 
     def set_is_player(self, value):
         zx.tp_set_is_player(self, value)
@@ -194,8 +197,8 @@ class Tp:
     def set_is_corridor(self, value):
         zx.tp_set_is_corridor(self, value)
 
-    def set_is_blit_off_center(self, value):
-        zx.tp_set_is_blit_off_center(self, value)
+    def set_is_blitted_as_sitting_on_the_ground(self, value):
+        zx.tp_set_is_blitted_as_sitting_on_the_ground(self, value)
 
     def set_is_boring(self, value):
         zx.tp_set_is_boring(self, value)
