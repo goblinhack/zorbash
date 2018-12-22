@@ -24,7 +24,13 @@ def pillar_init(name, short_name,
 def init():
     pillar_init(name="pillar1", short_name="pillar1", 
             tiles=[ 
-                "pillar1", 
-                "pillar2", 
+                "pillar1.1", 
+                "pillar1.2", 
+                "pillar1.3", 
+                "pillar1.4", 
+                "pillar1.5", 
+                "pillar1.6", 
+                "pillar1.7", 
+                "pillar1.8", 
                 ])
 init()
