@@ -780,7 +780,9 @@ extern int i1;
 extern int i2;
 //CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
 
-#if 1
+        /*
+         * Render light sources first to their own merged buffer
+         */
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -795,11 +797,11 @@ extern int i2;
         // glBlendFunc(GL_SRC_COLOR, GL_ONE);           // orange glow
         glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
         blit_fbo(FBO_LIGHT_MERGED);
-#endif
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        /*
+         * Now overlay the player light source.
+         */
         blit_fbo_bind(FBO_LIGHT_MERGED);
-        glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
         lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);

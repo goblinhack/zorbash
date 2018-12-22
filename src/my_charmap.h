@@ -20,6 +20,7 @@ public:
         DOOR_RIGHT      = '>',
         WALL            = 'x',
         DECO            = '|',
+        WALL_DECO       = 'X',
         FLOOR           = '.',
         SECRET_CORRIDOR = '?',
         ENTRANCE        = 'S',
@@ -42,7 +43,8 @@ public:
     bool                      is_door              {false};
     bool                      is_secret_door       {false};
     bool                      is_entrance          {false};
-    bool                      is_deco              {false};
+    bool                      is_floor_deco              {false};
+    bool                      is_wall_deco         {false};
     bool                      is_exit              {false};
     bool                      is_key               {false};
     bool                      is_lava              {false};

@@ -85,6 +85,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             std::string floor_string;
+            std::string deco_string;
+            std::string wall_deco_string;
             std::string walls_string;
             std::string monsts_string;
             std::string exits_string;
@@ -96,24 +98,35 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 if (m.is_floor ||
                     m.is_dusty ||
                     m.is_lava ||
-                    m.is_deco ||
                     m.is_water) {
-                    if (m.is_door || m.is_deco) {
-                        floor_string += Charmap::FLOOR;
-                    } else {
-                        floor_string += c;
-                    }
+                    floor_string += c;
+                } else if (m.is_door ||
+                           m.is_floor_deco) {
+                    floor_string += Charmap::FLOOR;
                 } else {
                     floor_string += Charmap::SPACE;
                 }
 
                 if (m.is_wall ||
                     m.is_door ||
-                    m.is_deco ||
                     m.is_rock) {
                     walls_string += c;
+                } else if (m.is_wall_deco) {
+                    walls_string += Charmap::WALL;
                 } else {
                     walls_string += Charmap::SPACE;
+                }
+
+                if (m.is_floor_deco) {
+                    deco_string += c;
+                } else {
+                    deco_string += Charmap::SPACE;
+                }
+
+                if (m.is_wall_deco) {
+                    wall_deco_string += c;
+                } else {
+                    wall_deco_string += Charmap::SPACE;
                 }
 
                 if (m.is_monst) {
@@ -142,6 +155,14 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 DIE("room floor width mismatch, %zu, expected %d",
                     floor_string.size(), ROOM_WIDTH);
             }
+            if (deco_string.size() != ROOM_WIDTH){
+                DIE("room deco width mismatch, %zu, expected %d",
+                    deco_string.size(), ROOM_WIDTH);
+            }
+            if (deco_string.size() != ROOM_WIDTH){
+                DIE("room deco width mismatch, %zu, expected %d",
+                    deco_string.size(), ROOM_WIDTH);
+            }
             if (walls_string.size() != ROOM_WIDTH){
                 DIE("room walls width mismatch, %zu, expected %d",
                     walls_string.size(), ROOM_WIDTH);
@@ -156,12 +177,14 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             for (auto x = 0; x < ROOM_WIDTH; x++) {
-                r->data[x][y][MAP_DEPTH_FLOOR] = floor_string[x];
-                r->data[x][y][MAP_DEPTH_WALLS] = walls_string[x];
-                r->data[x][y][MAP_DEPTH_EXIT] = exits_string[x];
-                r->data[x][y][MAP_DEPTH_MONST] = monsts_string[x];
-                r->data[x][y][MAP_DEPTH_ITEM] = items_string[x];
-                r->data[x][y][MAP_DEPTH_PLAYER] = ' ';
+                r->data[x][y][MAP_DEPTH_FLOOR]      = floor_string[x];
+                r->data[x][y][MAP_DEPTH_FLOOR_DECO] = deco_string[x];
+                r->data[x][y][MAP_DEPTH_WALLS]      = walls_string[x];
+                r->data[x][y][MAP_DEPTH_WALLS_DECO] = wall_deco_string[x];
+                r->data[x][y][MAP_DEPTH_EXIT]       = exits_string[x];
+                r->data[x][y][MAP_DEPTH_MONST]      = monsts_string[x];
+                r->data[x][y][MAP_DEPTH_ITEM]       = items_string[x];
+                r->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
             }
         }
 

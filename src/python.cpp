@@ -1693,12 +1693,13 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_blit_y_offset)
     TP_SET_DECL(is_small_shadow_caster)
     TP_SET_DECL(is_corridor)
-    TP_SET_DECL(is_blit_off_center)
+    TP_SET_DECL(is_blitted_as_sitting_on_the_ground)
     TP_SET_DECL(is_boring)
     TP_SET_DECL(is_exit)
     TP_SET_DECL(is_door)
     TP_SET_DECL(is_entrance)
-    TP_SET_DECL(is_deco)
+    TP_SET_DECL(is_floor_deco)
+    TP_SET_DECL(is_wall_deco)
     TP_SET_DECL(move_delay_hundredths)
     TP_SET_DECL(weapon_use_delay_hundredths)
     TP_SET_DECL(for_collision_use_box)
@@ -1991,6 +1992,8 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MONST", MAP_DEPTH_MONST);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_ITEM", MAP_DEPTH_ITEM);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXIT", MAP_DEPTH_EXIT);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR_DECO", MAP_DEPTH_FLOOR_DECO);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS_DECO", MAP_DEPTH_WALLS_DECO);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_PLAYER", MAP_DEPTH_PLAYER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WEAPON", MAP_DEPTH_WEAPON);
 

@@ -154,11 +154,12 @@ public:
     int is_blit_y_offset {};
     int is_small_shadow_caster {};
     int is_corridor {};
-    int is_blit_off_center {};
+    int is_blitted_as_sitting_on_the_ground {};
     int is_boring {};
     int is_exit {};
     int is_entrance {};
-    int is_deco {};
+    int is_floor_deco {};
+    int is_wall_deco {};
     int move_delay_hundredths {};
     int weapon_use_delay_hundredths {};
     int for_collision_use_box {};
@@ -191,6 +192,7 @@ void tp_init_after_loading(void);
 Tpp tp_get_random_monst(void);
 Tpp tp_get_random_key(void);
 Tpp tp_get_random_deco(void);
+Tpp tp_get_random_wall_deco(void);
 
 static inline int32_t tp_get_blit_top_off (Tpp &t)
 {
@@ -357,9 +359,9 @@ static inline int tp_is_corridor (Tpp t)
     return (t->is_corridor);
 }
 
-static inline int tp_is_blit_off_center (Tpp t)
+static inline int tp_is_blitted_as_sitting_on_the_ground (Tpp t)
 {
-    return (t->is_blit_off_center);
+    return (t->is_blitted_as_sitting_on_the_ground);
 }
 
 static inline int tp_is_boring (Tpp t)
@@ -377,9 +379,14 @@ static inline int tp_is_entrance (Tpp t)
     return (t->is_entrance);
 }
 
-static inline int tp_is_deco (Tpp t)
+static inline int tp_is_floor_deco (Tpp t)
 {
-    return (t->is_deco);
+    return (t->is_floor_deco);
+}
+
+static inline int tp_is_wall_deco (Tpp t)
+{
+    return (t->is_wall_deco);
 }
 
 static inline int tp_move_delay_hundredths (Tpp t)

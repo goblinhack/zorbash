@@ -103,7 +103,7 @@ bool Thing::update_coordinates (void)
     /*
      * Put larger tiles on the same y base as small ones.
      */
-    if (unlikely(tp_is_blit_off_center(tp))) {
+    if (unlikely(tp_is_blitted_as_sitting_on_the_ground(tp))) {
         double y_offset = 
             (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) * 
                 tile_gl_height) / 2.0;

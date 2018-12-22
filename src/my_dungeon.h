@@ -257,6 +257,7 @@ public:
         // Add a perimeter to the level. Helps avoid off by one bugs.
         //
         add_corridor_walls();
+        add_room_walls();
         add_border();
 
         debug("success, created dungeon");
@@ -549,13 +550,26 @@ public:
         return false;
     }
 
-    bool is_deco_at (const int x, const int y)
+    bool is_floor_deco_at (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
 
-            if (v.is_deco) {
+            if (v.is_floor_deco) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_wall_deco_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto v = Charmap::all_charmaps[c];
+
+            if (v.is_wall_deco) {
                 return true;
             }
         }
@@ -684,19 +698,6 @@ public:
             auto v = Charmap::all_charmaps[c];
 
             if (v.is_entrance) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    bool is_deco_at_fast (const int x, const int y)
-    {
-        for (auto d = 0; d < map_depth; d++) {
-            auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
-
-            if (v.is_deco) {
                 return true;
             }
         }
@@ -1213,7 +1214,49 @@ public:
     {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
+                if (is_wall_at_fast(x, y)) {
+                    continue;
+                }
                 if (is_corridor_at_fast(x, y)) {
+                    if (!is_anything_at_fast(x - 1, y - 1)) {
+                        putc(x - 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x, y - 1)) {
+                        putc(x, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x + 1, y - 1)) {
+                        putc(x + 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+
+                    if (!is_anything_at_fast(x - 1, y)) {
+                        putc(x - 1, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x + 1, y)) {
+                        putc(x + 1, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+
+                    if (!is_anything_at_fast(x - 1, y + 1)) {
+                        putc(x - 1, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x, y + 1)) {
+                        putc(x, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                    if (!is_anything_at_fast(x + 1, y + 1)) {
+                        putc(x + 1, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                }
+            }
+        }
+    }
+
+    void add_room_walls (void)
+    {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                if (is_wall_at_fast(x, y)) {
+                    continue;
+                }
+                if (is_floor_at_fast(x, y)) {
                     if (!is_anything_at_fast(x - 1, y - 1)) {
                         putc(x - 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                     }
