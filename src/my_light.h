@@ -117,6 +117,10 @@ extern Lightp light_new(uint16_t max_light_arrays,
                         fpoint at,
                         LightQuality quality,
                         color col);
+extern Lightp light_new(double strength, 
+                        fpoint at,
+                        LightQuality quality,
+                        color col);
 extern Lightp light_new(Thingp owner, 
                         uint16_t max_light_arrays, 
                         double strength,
@@ -125,6 +129,7 @@ extern Lightp light_new(Thingp owner,
                         color col);
 extern void lights_calculate(void);
 extern void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
+extern void lights_render_player(int minx, int miny, int maxx, int maxy, int fbo);
 extern void lights_render_debug(int minx, int miny, int maxx, int maxy);
 
 #endif /* LIGHT_H */

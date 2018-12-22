@@ -75,6 +75,14 @@ Lightp light_new (uint16_t max_light_rays,
     return (light_new(nullptr, max_light_rays, strength, at, quality, col));
 }
 
+Lightp light_new (double strength, 
+                  fpoint at,
+                  LightQuality quality,
+                  color col)
+{_
+    return (light_new(nullptr, 10, strength, at, quality, col));
+}
+
 void Light::pop (void)
 {_
     game.state.map.all_lights.erase(id);
@@ -389,21 +397,9 @@ void Light::render_triangle_fans (void)
      * fade off of the light.
      */
     if (quality == LIGHT_QUALITY_HIGH) {
-        auto radius = strength;
-
         /*
          * To account for the blurring in blit_flush_triangle_fan_smoothed.
          */
-        if (flicker > random_range(10, 20)) {
-            flicker = 0;
-        }
-
-        if (!flicker) {
-            flicker_radius = radius * 
-                            (1.0 + ((double)(random_range(0, 100) / 500.0)));
-        }
-        flicker++;
- 
         double lw = flicker_radius * tile_gl_width_pct;
         double lh = flicker_radius * tile_gl_height_pct;
         double p1x = light_pos.x - lw;
@@ -505,8 +501,8 @@ void Light::render_point_light (void)
     auto ox = off.x;
     auto oy = off.y;
 
-    double lw = strength * tile_gl_width_pct;
-    double lh = strength * tile_gl_height_pct;
+    double lw = flicker_radius * tile_gl_width_pct;
+    double lh = flicker_radius * tile_gl_height_pct;
     double p1x = light_pos.x - lw;
     double p1y = light_pos.y - lh;
     double p2x = light_pos.x + lw;
@@ -518,6 +514,16 @@ void Light::render_point_light (void)
 
 void Light::render (int fbo)
 {
+    if (flicker > random_range(10, 20)) {
+        flicker = 0;
+    }
+
+    if (!flicker) {
+        flicker_radius = strength * 
+                        (1.0 + ((double)(random_range(0, 100) / 1000.0)));
+    }
+    flicker++;
+
     if (!light_overlay_tex) {
         light_overlay_tex = tex_load("", "light", GL_NEAREST);
         light_overlay_texid = tex_get_gl_binding(light_overlay_tex);
@@ -591,9 +597,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
         for (auto x = maxx - 1; x >= minx; x--) {
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
-
-                if (l->quality == LIGHT_QUALITY_POINT) {
-                    have_low_quality = true;
+                if (l->quality != LIGHT_QUALITY_POINT) {
                     continue;
                 }
 
@@ -609,7 +613,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
                     }
                 }
 
-                l->render(fbo);
+                have_low_quality = true;
             }
         }
     }
@@ -630,6 +634,22 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
                     continue;
                 }
 
+#if 0
+                switch (random_range(0, 4)) {
+                    case 0:
+                        glBlendFunc(GL_DST_COLOR, GL_ONE);           // normal light redder lava
+                        break;
+                    case 1:
+                        glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
+                        break;
+                    case 2:
+                        glBlendFunc(GL_ONE, GL_ONE);                 // yellow glow
+                        break;
+                    case 3:
+                        glBlendFunc(GL_SRC_COLOR, GL_ONE);           // orange glow
+                        break;
+                }
+#endif
                 /*
                  * Too far away from the player? Skip rendering.
                  */
@@ -648,6 +668,27 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
     }
     blit_flush();
     glcolor(WHITE);
+}
+
+void lights_render_player (int minx, int miny, int maxx, int maxy, int fbo)
+{
+    if (!game.state.player) {
+        return;
+    }
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = maxx - 1; x >= minx; x--) {
+            for (auto p : game.state.map.lights[x][y]) {
+                auto l = p.second;
+
+                if (l->quality != LIGHT_QUALITY_HIGH) {
+                    continue;
+                }
+
+                l->render(fbo);
+            }
+        }
+    }
 }
 
 void lights_render_debug (int minx, int miny, int maxx, int maxy)

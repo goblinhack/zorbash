@@ -774,12 +774,35 @@ void thing_render_all (void)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
 
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+//CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+
+#if 1
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
         lights_render(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
-        
+        glBindTexture(GL_TEXTURE_2D, 0);
+        blit_fbo_bind(FBO_MAIN);
+
+        // glBlendFunc(GL_DST_COLOR, GL_ONE);           // normal light redder 
+        // lava
+        // glBlendFunc(GL_ONE, GL_ONE);                 // yellow glow
+        // glBlendFunc(GL_SRC_COLOR, GL_ONE);           // orange glow
+        glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
+        blit_fbo(FBO_LIGHT_MERGED);
+#endif
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        blit_fbo_bind(FBO_LIGHT_MERGED);
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glcolor(WHITE);
+        lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
