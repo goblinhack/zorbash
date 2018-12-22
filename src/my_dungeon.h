@@ -549,6 +549,19 @@ public:
         return false;
     }
 
+    bool is_deco_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto v = Charmap::all_charmaps[c];
+
+            if (v.is_deco) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool is_exit_at (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
@@ -671,6 +684,19 @@ public:
             auto v = Charmap::all_charmaps[c];
 
             if (v.is_entrance) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_deco_at_fast (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc_fast(x, y, d);
+            auto v = Charmap::all_charmaps[c];
+
+            if (v.is_deco) {
                 return true;
             }
         }

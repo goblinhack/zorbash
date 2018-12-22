@@ -158,6 +158,7 @@ public:
     int is_boring {};
     int is_exit {};
     int is_entrance {};
+    int is_deco {};
     int move_delay_hundredths {};
     int weapon_use_delay_hundredths {};
     int for_collision_use_box {};
@@ -189,6 +190,7 @@ Tpp tp_find_short_name(std::string name);
 void tp_init_after_loading(void);
 Tpp tp_get_random_monst(void);
 Tpp tp_get_random_key(void);
+Tpp tp_get_random_deco(void);
 
 static inline int32_t tp_get_blit_top_off (Tpp &t)
 {
@@ -373,6 +375,11 @@ static inline int tp_is_exit (Tpp t)
 static inline int tp_is_entrance (Tpp t)
 {
     return (t->is_entrance);
+}
+
+static inline int tp_is_deco (Tpp t)
+{
+    return (t->is_deco);
 }
 
 static inline int tp_move_delay_hundredths (Tpp t)

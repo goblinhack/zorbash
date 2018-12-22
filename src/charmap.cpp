@@ -74,12 +74,17 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::ENTRANCE;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_entrance    = true;
+    c->is_entrance          = true;
+
+    char_index              = Charmap::DECO;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_deco              = true;
 
     char_index              = Charmap::EXIT;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_exit  = true;
+    c->is_exit              = true;
 
     char_index              = Charmap::KEY;
     c = &all_charmaps[char_index];

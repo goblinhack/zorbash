@@ -1698,6 +1698,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_exit)
     TP_SET_DECL(is_door)
     TP_SET_DECL(is_entrance)
+    TP_SET_DECL(is_deco)
     TP_SET_DECL(move_delay_hundredths)
     TP_SET_DECL(weapon_use_delay_hundredths)
     TP_SET_DECL(for_collision_use_box)

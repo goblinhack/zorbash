@@ -383,6 +383,20 @@ static void game_place_keys (class Dungeon *d)
     }
 }
 
+static void game_place_deco (class Dungeon *d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (!d->is_deco_at(x, y)) {
+                continue;
+            }
+
+            auto tp = tp_get_random_deco();
+            thing_new(tp_name(tp), fpoint(x, y));
+        }
+    }
+}
+
 static void game_place_floor_under_walls (class Dungeon *d,
                                           std::string what)
 {_
@@ -601,6 +615,7 @@ void game_display (void)
 
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_under_walls(dungeon, "floor6");
+        game_place_deco(dungeon);
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
