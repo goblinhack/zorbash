@@ -64,7 +64,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, top_tile, tl2, br2);
+        tile_blit_fat_outline(tp, top_tile, tl2, br2);
     }
 
     if (!game.state.map.is_wall[x][y + 1]) {
@@ -72,7 +72,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, bot_tile, tl2, br2);
+        tile_blit_fat_outline(tp, bot_tile, tl2, br2);
     }
 
     if (!game.state.map.is_wall[x - 1][y]) {
@@ -80,7 +80,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit_fat(tp, left_tile, tl2, br2);
+        tile_blit_fat_outline(tp, left_tile, tl2, br2);
     }
 
     if (!game.state.map.is_wall[x + 1][y]) {
@@ -88,7 +88,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit_fat(tp, right_tile, tl2, br2);
+        tile_blit_fat_outline(tp, right_tile, tl2, br2);
     }
 
     /*
@@ -105,7 +105,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, tl_tile, tl2, br2);
+        tile_blit_fat_outline(tp, tl_tile, tl2, br2);
     }
 
     /*
@@ -122,7 +122,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, tr_tile, tl2, br2);
+        tile_blit_fat_outline(tp, tr_tile, tl2, br2);
     }
 
     /*
@@ -140,7 +140,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, tr_tile, tl2, br2);
+        tile_blit_fat_outline(tp, tr_tile, tl2, br2);
     }
 
     /*
@@ -158,7 +158,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, tl_tile, tl2, br2);
+        tile_blit_fat_outline(tp, tl_tile, tl2, br2);
     }
 
     dw = 0.00;
@@ -178,7 +178,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, bl_tile, tl2, br2);
+        tile_blit_fat_outline(tp, bl_tile, tl2, br2);
     }
 
     /*
@@ -195,7 +195,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, br_tile, tl2, br2);
+        tile_blit_fat_outline(tp, br_tile, tl2, br2);
     }
 
     /*
@@ -213,7 +213,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, br_tile, tl2, br2);
+        tile_blit_fat_outline(tp, br_tile, tl2, br2);
     }
 
     /*
@@ -231,7 +231,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, bl_tile, tl2, br2);
+        tile_blit_fat_outline(tp, bl_tile, tl2, br2);
     }
 }
 
@@ -255,7 +255,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, top_tile, tl2, br2);
+        tile_blit_fat_outline(tp, top_tile, tl2, br2);
     }
 
     if (!game.state.map.is_rock[x][y + 1]) {
@@ -263,7 +263,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, bot_tile, tl2, br2);
+        tile_blit_fat_outline(tp, bot_tile, tl2, br2);
     }
 
     if (!game.state.map.is_rock[x - 1][y]) {
@@ -271,7 +271,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit_fat(tp, left_tile, tl2, br2);
+        tile_blit_fat_outline(tp, left_tile, tl2, br2);
     }
 
     if (!game.state.map.is_rock[x + 1][y]) {
@@ -279,7 +279,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit_fat(tp, right_tile, tl2, br2);
+        tile_blit_fat_outline(tp, right_tile, tl2, br2);
     }
 
     /*
@@ -296,7 +296,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, tl_tile, tl2, br2);
+        tile_blit_fat_outline(tp, tl_tile, tl2, br2);
     }
 
     /*
@@ -313,7 +313,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, tr_tile, tl2, br2);
+        tile_blit_fat_outline(tp, tr_tile, tl2, br2);
     }
 
     /*
@@ -331,7 +331,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, tr_tile, tl2, br2);
+        tile_blit_fat_outline(tp, tr_tile, tl2, br2);
     }
 
     /*
@@ -349,7 +349,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_fat(tp, tl_tile, tl2, br2);
+        tile_blit_fat_outline(tp, tl_tile, tl2, br2);
     }
 
     dw = 0.00;
@@ -369,7 +369,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, bl_tile, tl2, br2);
+        tile_blit_fat_outline(tp, bl_tile, tl2, br2);
     }
 
     /*
@@ -386,7 +386,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, br_tile, tl2, br2);
+        tile_blit_fat_outline(tp, br_tile, tl2, br2);
     }
 
     /*
@@ -404,7 +404,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, br_tile, tl2, br2);
+        tile_blit_fat_outline(tp, br_tile, tl2, br2);
     }
 
     /*
@@ -422,7 +422,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_fat(tp, bl_tile, tl2, br2);
+        tile_blit_fat_outline(tp, bl_tile, tl2, br2);
     }
 }
 

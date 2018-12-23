@@ -287,6 +287,9 @@ class Tp:
     def set_is_floor(self, value):
         zx.tp_set_is_floor(self, value)
 
+    def set_is_dirt(self, value):
+        zx.tp_set_is_dirt(self, value)
+
     def set_is_lava(self, value):
         zx.tp_set_is_lava(self, value)
 
