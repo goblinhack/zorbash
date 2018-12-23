@@ -281,6 +281,9 @@ class Tp:
     def set_is_wall(self, value):
         zx.tp_set_is_wall(self, value)
 
+    def set_is_rock(self, value):
+        zx.tp_set_is_rock(self, value)
+
     def set_is_floor(self, value):
         zx.tp_set_is_floor(self, value)
 

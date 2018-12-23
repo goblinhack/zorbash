@@ -38,6 +38,7 @@ public:
 
     char                      c;
     bool                      is_wall              {false};
+    bool                      is_rock              {false};
     bool                      is_floor             {false};
     bool                      is_corridor          {false};
     bool                      is_dusty             {false};
@@ -51,7 +52,6 @@ public:
     bool                      is_lava              {false};
     bool                      is_water             {false};
     bool                      is_deep_water        {false};
-    bool                      is_rock              {false};
     bool                      is_treasure          {false};
     bool                      is_monst             {false};
     bool                      is_trap              {false};
