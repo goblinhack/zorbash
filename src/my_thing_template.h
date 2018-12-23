@@ -136,6 +136,7 @@ public:
     int is_player {};
     int is_wall {};
     int is_water {};
+    int is_deep_water {};
     int is_rrr1 {};
     int is_rrr2 {};
     int is_rrr3 {};
@@ -242,6 +243,11 @@ static inline int tp_is_lava (Tpp t)
 static inline int tp_is_water (Tpp t)
 {
     return (t->is_water);
+}
+
+static inline int tp_is_deep_water (Tpp t)
+{
+    return (t->is_deep_water);
 }
 
 static inline int tp_is_monst (Tpp t)

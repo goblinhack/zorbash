@@ -631,6 +631,19 @@ public:
         return false;
     }
 
+    bool is_deep_water_at (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto v = Charmap::all_charmaps[c];
+
+            if (v.is_deep_water) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool is_treasure_at (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
@@ -753,6 +766,19 @@ public:
             auto v = Charmap::all_charmaps[c];
 
             if (v.is_water) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_deep_water_at_fast (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc_fast(x, y, d);
+            auto v = Charmap::all_charmaps[c];
+
+            if (v.is_deep_water) {
                 return true;
             }
         }
@@ -2553,14 +2579,14 @@ public:
 
         dmap_set_walls(&d);
 
-        int amount = myrand() % 3;
+        int amount = random_range(1, 20);
 
         while (amount--) {
-            int x = myrand() % MAP_WIDTH;
-            int y = myrand() % MAP_HEIGHT;
+            int x = random_range(1, MAP_WIDTH - 1);
+            int y = random_range(1, MAP_HEIGHT - 1);
 
-            int cluster = 30;
-            int cluster_size = 20;
+            int cluster = 5;
+            int cluster_size = 5;
             while (cluster--) {
                 int dx = (myrand() % cluster_size) - (cluster_size / 2);
                 int dy = (myrand() % cluster_size) - (cluster_size / 2);
@@ -2578,8 +2604,11 @@ public:
 
         for (x = 0; x < MAP_WIDTH; x++) {
             for (y = 0; y < MAP_HEIGHT; y++) {
-                if (d.val[x][y] < 5) {
+                if (d.val[x][y] < 10) {
                     putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
+                }
+                if (d.val[x][y] < 5) {
+                    putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
                 }
             }
         }
@@ -2594,14 +2623,14 @@ public:
 
         dmap_set_walls(&d);
 
-        int amount = myrand() % 3;
+        int amount = random_range(1, 5);
 
         while (amount--) {
-            int x = myrand() % MAP_WIDTH;
-            int y = myrand() % MAP_HEIGHT;
+            int x = random_range(1, MAP_WIDTH - 1);
+            int y = random_range(1, MAP_HEIGHT - 1);
 
-            int cluster = 30;
-            int cluster_size = 20;
+            int cluster = 10;
+            int cluster_size = 5;
             while (cluster--) {
                 int dx = (myrand() % cluster_size) - (cluster_size / 2);
                 int dy = (myrand() % cluster_size) - (cluster_size / 2);

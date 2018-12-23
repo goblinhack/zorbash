@@ -290,5 +290,8 @@ class Tp:
     def set_is_water(self, value):
         zx.tp_set_is_water(self, value)
 
+    def set_is_deep_water(self, value):
+        zx.tp_set_is_deep_water(self, value)
+
     def set_is_small_shadow_caster(self, value):
         zx.tp_set_is_small_shadow_caster(self, value)

@@ -50,6 +50,7 @@ public:
     uint8_t                    is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_blood[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_water[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_deep_water[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_key[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -66,6 +67,8 @@ public:
     bool is_blood_at(const int x, const int y);
     bool is_water_at(const point &p);
     bool is_water_at(const int x, const int y);
+    bool is_deep_water_at(const point &p);
+    bool is_deep_water_at(const int x, const int y);
     bool is_corridor_at(const point &p);
     bool is_corridor_at(const int x, const int y);
     bool is_monst_at(const point &p);

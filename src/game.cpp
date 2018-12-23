@@ -280,6 +280,63 @@ static void game_place_floor (class Dungeon *d,
                     thing_new(what, fpoint(x - 1, y));
                 }
             }
+
+            c = DARKBLUE;
+            c.a = 200;
+            light_strength = 2.0;
+            if (d->is_deep_water_at(x, y + 1)) {
+                if (!game.state.map.is_floor[x][y + 1]) {
+                    thing_new(what, fpoint(x, y + 1));
+                    (void) light_new(light_strength, fpoint(x, y + 0.5), 
+                                     LIGHT_QUALITY_POINT, c);
+                }
+            }
+            if (d->is_deep_water_at(x, y - 1)) {
+                if (!game.state.map.is_floor[x][y - 1]) {
+                    thing_new(what, fpoint(x, y - 1));
+                    (void) light_new(light_strength, fpoint(x, y - 0.5), 
+                                     LIGHT_QUALITY_POINT, c);
+                }
+            }
+            if (d->is_deep_water_at(x + 1, y)) {
+                if (!game.state.map.is_floor[x + 1][y]) {
+                    thing_new(what, fpoint(x + 1, y));
+                    (void) light_new(light_strength, fpoint(x + 0.5, y), 
+                                     LIGHT_QUALITY_POINT, c);
+                }
+            }
+            if (d->is_deep_water_at(x - 1, y)) {
+                if (!game.state.map.is_floor[x - 1][y]) {
+                    thing_new(what, fpoint(x - 1, y));
+                    (void) light_new(light_strength, fpoint(x - 0.5, y), 
+                                     LIGHT_QUALITY_POINT, c);
+                }
+            }
+
+            if (d->is_monst_at(x, y + 1) ||
+                d->is_key_at(x, y + 1)) {
+                if (!game.state.map.is_floor[x][y + 1]) {
+                    thing_new(what, fpoint(x, y + 1));
+                }
+            }
+            if (d->is_monst_at(x, y - 1) ||
+                d->is_key_at(x, y - 1)) {
+                if (!game.state.map.is_floor[x][y - 1]) {
+                    thing_new(what, fpoint(x, y - 1));
+                }
+            }
+            if (d->is_monst_at(x + 1, y) ||
+                d->is_key_at(x + 1, y)) {
+                if (!game.state.map.is_floor[x + 1][y]) {
+                    thing_new(what, fpoint(x + 1, y));
+                }
+            }
+            if (d->is_monst_at(x - 1, y) ||
+                d->is_key_at(x - 1, y)) {
+                if (!game.state.map.is_floor[x - 1][y]) {
+                    thing_new(what, fpoint(x - 1, y));
+                }
+            }
         }
     }
 }
@@ -318,6 +375,10 @@ static void game_place_blood (class Dungeon *d, std::string what)
                     continue;
                 }
 
+                if (game.state.map.is_deep_water[x][y]) {
+                    continue;
+                }
+
                 if (game.state.map.is_lava[x][y]) {
                     continue;
                 }
@@ -339,6 +400,23 @@ static void game_place_water (class Dungeon *d, std::string what)
             }
 
             if (!d->is_water_at(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_deep_water (class Dungeon *d, std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_deep_water[x][y]) {
+                continue;
+            }
+
+            if (!d->is_deep_water_at(x, y)) {
                 continue;
             }
 
@@ -555,6 +633,7 @@ void game_display (void)
         memset(game.state.map.is_lava, sizeof(game.state.map.is_lava), 0);
         memset(game.state.map.is_blood, sizeof(game.state.map.is_blood), 0);
         memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
+        memset(game.state.map.is_deep_water, sizeof(game.state.map.is_deep_water), 0);
         memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
         memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
         memset(game.state.map.is_key, sizeof(game.state.map.is_key), 0);
@@ -633,6 +712,7 @@ void game_display (void)
 
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
+        game_place_deep_water(dungeon, "deep_water1");
 
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_under_walls(dungeon, "floor6");

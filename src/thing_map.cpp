@@ -155,6 +155,9 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
+                    if (!tp_is_water(t->tp)) {
+                        continue;
+                    }
                     t->blit(offset_x + game.config.one_pixel_gl_width * 2,
                             offset_y + game.config.one_pixel_gl_height * 2, 
                             x, y);
@@ -185,6 +188,9 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
+                    if (!tp_is_water(t->tp)) {
+                        continue;
+                    }
                     t->blit(offset_x + game.config.one_pixel_gl_width,
                             offset_y + game.config.one_pixel_gl_height, 
                             x, y);
@@ -219,6 +225,9 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (auto x = maxx - 1; x >= minx; x--) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
+                    if (!tp_is_water(t->tp)) {
+                        continue;
+                    }
                     t->blit(offset_x, offset_y, x, y);
                 }
             }
@@ -285,6 +294,146 @@ static void thing_blit_things (int minx, int miny, int minz,
                     bry -= offset_y;
 
                     auto tile = water[X % WATER_ACROSS][(Y + (int)step2/4) % WATER_DOWN];
+                    auto x1 = tile->x1;
+                    auto x2 = tile->x2;
+                    auto y1 = tile->y1;
+                    auto y2 = tile->y2;
+
+                    double one_pix = (1.0 / tex_get_width(tile->tex));
+                    y1 += one_pix * step2;
+                    y2 += one_pix * step2;
+
+                    blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
+                }
+            }
+        }
+        blit_flush();
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        blit_fbo_bind(FBO_MAIN);
+        blit_fbo(FBO_LIGHT_MERGED);
+    }
+
+    {
+        auto z = MAP_DEPTH_WATER;
+#define DEEP_WATER_ACROSS 4
+#define DEEP_WATER_DOWN   4
+
+        static Tilep deep_water[DEEP_WATER_ACROSS][DEEP_WATER_DOWN] = {};
+        if (!deep_water[0][0]) {
+            deep_water[0][0] = tile_find("deep_water1a");
+            deep_water[1][0] = tile_find("deep_water2a");
+            deep_water[2][0] = tile_find("deep_water3a");
+            deep_water[3][0] = tile_find("deep_water4a");
+            deep_water[0][1] = tile_find("deep_water1b");
+            deep_water[1][1] = tile_find("deep_water2b");
+            deep_water[2][1] = tile_find("deep_water3b");
+            deep_water[3][1] = tile_find("deep_water4b");
+            deep_water[0][2] = tile_find("deep_water1c");
+            deep_water[1][2] = tile_find("deep_water2c");
+            deep_water[2][2] = tile_find("deep_water3c");
+            deep_water[3][2] = tile_find("deep_water4c");
+            deep_water[0][3] = tile_find("deep_water1d");
+            deep_water[1][3] = tile_find("deep_water2d");
+            deep_water[2][3] = tile_find("deep_water3d");
+            deep_water[3][3] = tile_find("deep_water4d");
+        }
+
+        /*
+         * Slow timer to scroll the deep_water.
+         */
+        static int step1;
+        static double step2;
+        if (step1++ >= 20) {
+            step1 = 0;
+            if (step2++ >= 28) {
+                step2 = 0;
+            }
+        }
+
+        /*
+         * Draw the white bitmap that will be the mask for the texture.
+         */
+        blit_fbo_bind(FBO_LIGHT_MERGED);
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        glcolor(WHITE);
+        blit_init();
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                for (auto p : thing_display_order[x][y][z]) {
+                    auto t = p.second;
+                    if (!tp_is_deep_water(t->tp)) {
+                        continue;
+                    }
+                    t->blit(offset_x, offset_y, x, y);
+                }
+            }
+        }
+        blit_flush();
+
+        /*
+         * The deep_water tiles are twice the size of normal tiles, so work out
+         * where to draw them to avoid overlaps
+         */
+        uint8_t deep_water_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
+
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                if (game.state.map.is_deep_water[x][y]) {
+                    auto X = x / 2;
+                    auto Y = y / 2;
+                    X++;
+                    Y++;
+                    deep_water_map[X][Y] = true;
+                    deep_water_map[X+1][Y] = true;
+                    deep_water_map[X-1][Y] = true;
+                    deep_water_map[X][Y+1] = true;
+                    deep_water_map[X][Y-1] = true;
+
+                    deep_water_map[X+1][Y+1] = true;
+                    deep_water_map[X-1][Y+1] = true;
+                    deep_water_map[X+1][Y-1] = true;
+                    deep_water_map[X-1][Y-1] = true;
+                }
+            }
+        }
+
+        /*
+         * Finally blit the deep_water and then the buffer to the display.
+         */
+        glBlendFunc(GL_DST_ALPHA, GL_ZERO);
+        glcolor(WHITE);
+        blit_init();
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                auto X = x / 2;
+                auto Y = y / 2;
+                X++;
+                Y++;
+
+                if (deep_water_map[X][Y]) {
+                    deep_water_map[X][Y] = false;
+                    auto tx = (double)(x &~1);
+                    auto ty = (double)(y &~1);
+                    double tlx = tx * game.config.tile_gl_width;
+                    double tly = ty * game.config.tile_gl_height;
+                    double brx = (tx+2.0) * game.config.tile_gl_width;
+                    double bry = (ty+2.0) * game.config.tile_gl_height;
+
+                    tlx += game.config.tile_gl_width / 2.0;
+                    tly += game.config.tile_gl_height / 2.0;
+                    brx += game.config.tile_gl_width / 2.0;
+                    bry += game.config.tile_gl_height / 2.0;
+
+                    tlx -= offset_x;
+                    tly -= offset_y;
+                    brx -= offset_x;
+                    bry -= offset_y;
+
+                    auto tile = deep_water[X % DEEP_WATER_ACROSS][(Y + (int)step2/4) % DEEP_WATER_DOWN];
                     auto x1 = tile->x1;
                     auto x2 = tile->x2;
                     auto y1 = tile->y1;
