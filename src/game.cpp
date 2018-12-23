@@ -496,7 +496,7 @@ static void game_place_exit (class Dungeon *d, std::string what)
             }
 
             (void) thing_new(what, fpoint(x, y));
-            (void) light_new(3.0, fpoint(x, y), LIGHT_QUALITY_POINT, GREEN);
+            (void) light_new(1.0, fpoint(x, y), LIGHT_QUALITY_POINT, YELLOW);
         }
     }
 }

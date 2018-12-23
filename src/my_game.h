@@ -44,6 +44,7 @@ public:
                                lights[MAP_WIDTH][MAP_HEIGHT];
     Things                     all_things;
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_light[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -71,6 +72,8 @@ public:
     bool is_monst_at(const int x, const int y);
     bool is_key_at(const point &p);
     bool is_key_at(const int x, const int y);
+    bool is_shadow_caster_at(const point &p);
+    bool is_shadow_caster_at(const int x, const int y);
 
     template <class Archive>
     void serialize (Archive & archive)
