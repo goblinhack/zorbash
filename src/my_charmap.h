@@ -22,6 +22,7 @@ public:
         DECO            = '|',
         WALL_DECO       = 'X',
         FLOOR           = '.',
+        DIRT            = ',',
         SECRET_CORRIDOR = '?',
         ENTRANCE        = 'S',
         EXIT            = 'E',
@@ -41,6 +42,7 @@ public:
     bool                      is_rock              {false};
     bool                      is_floor             {false};
     bool                      is_corridor          {false};
+    bool                      is_dirt              {false};
     bool                      is_dusty             {false};
     bool                      is_door              {false};
     bool                      is_secret_door       {false};

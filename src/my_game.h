@@ -53,6 +53,7 @@ public:
     uint8_t                    is_water[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_deep_water[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_key[MAP_WIDTH][MAP_HEIGHT] = {};
   
@@ -74,6 +75,8 @@ public:
     bool is_deep_water_at(const int x, const int y);
     bool is_corridor_at(const point &p);
     bool is_corridor_at(const int x, const int y);
+    bool is_dirt_at(const point &p);
+    bool is_dirt_at(const int x, const int y);
     bool is_monst_at(const point &p);
     bool is_monst_at(const int x, const int y);
     bool is_key_at(const point &p);
@@ -160,7 +163,7 @@ public:
     double             ascii_gl_height              = {};
     double             tile_pixel_width             = {};
     double             tile_pixel_height            = {};
-    uint32_t           sdl_delay                    = 5;
+    uint32_t           sdl_delay                    = 1;
     bool               editor_mode                  = false;
     double             movement_min_speed           = {};
     double             movement_max_speed           = {};

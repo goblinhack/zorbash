@@ -133,6 +133,22 @@ bool Map::is_corridor_at (const int x, const int y)
     return (is_corridor[x][y]);
 }
 
+bool Map::is_dirt_at (const point &p)
+{
+    if (is_oob(p.x, p.y)) {
+        return (true);
+    }
+    return (is_dirt[p.x][p.y]);
+}
+
+bool Map::is_dirt_at (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        return (true);
+    }
+    return (is_dirt[x][y]);
+}
+
 bool Map::is_monst_at (const point &p)
 {
     if (is_oob(p.x, p.y)) {

@@ -173,6 +173,7 @@ static void game_place_rocks (class Dungeon *d,
     }
 }
 
+#if 0
 static void game_fill_void (class Dungeon *d,
                             std::string what,
                             int variant,
@@ -244,6 +245,7 @@ static void game_fill_void (class Dungeon *d,
         }
     }
 }
+#endif
 
 static void game_place_floor (class Dungeon *d,
                               std::string what,
@@ -572,6 +574,7 @@ static void game_place_floor_under_walls (class Dungeon *d,
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!game.state.map.is_floor[x][y] &&
+                !game.state.map.is_dirt[x][y] &&
                 !game.state.map.is_corridor[x][y]) {
                 continue;
             }
@@ -605,8 +608,8 @@ static void game_place_floor_under_walls (class Dungeon *d,
 }
 
 static void game_place_corridor (class Dungeon *d,
-                              std::string what,
-                              int depth)
+                                 std::string what,
+                                 int depth)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -621,6 +624,18 @@ static void game_place_corridor (class Dungeon *d,
             }
 
             (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_dirt (class Dungeon *d,
+                             std::string what)
+{_
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            if (!d->is_anything_at(x, y) || d->is_dirt_at(x, y)) {
+                (void) thing_new(what, fpoint(x, y));
+            }
         }
     }
 }
@@ -716,18 +731,19 @@ void game_display (void)
 
         LOG("dungeon: create blocks");
 
-        memset(game.state.map.is_wall, sizeof(game.state.map.is_wall), 0);
-        memset(game.state.map.is_rock, sizeof(game.state.map.is_rock), 0);
-        memset(game.state.map.is_light, sizeof(game.state.map.is_light), 0);
-        memset(game.state.map.is_floor, sizeof(game.state.map.is_floor), 0);
-        memset(game.state.map.is_lava, sizeof(game.state.map.is_lava), 0);
         memset(game.state.map.is_blood, sizeof(game.state.map.is_blood), 0);
-        memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
-        memset(game.state.map.is_deep_water, sizeof(game.state.map.is_deep_water), 0);
         memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
-        memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
+        memset(game.state.map.is_deep_water, sizeof(game.state.map.is_deep_water), 0);
+        memset(game.state.map.is_dirt, sizeof(game.state.map.is_dirt), 0);
+        memset(game.state.map.is_floor, sizeof(game.state.map.is_floor), 0);
         memset(game.state.map.is_key, sizeof(game.state.map.is_key), 0);
+        memset(game.state.map.is_lava, sizeof(game.state.map.is_lava), 0);
+        memset(game.state.map.is_light, sizeof(game.state.map.is_light), 0);
+        memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
+        memset(game.state.map.is_rock, sizeof(game.state.map.is_rock), 0);
         memset(game.state.map.is_shadow_caster, sizeof(game.state.map.is_shadow_caster), 0);
+        memset(game.state.map.is_wall, sizeof(game.state.map.is_wall), 0);
+        memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
 
         game_place_entrance(dungeon, "entrance1");
         game_place_exit(dungeon, "exit1");
@@ -810,6 +826,7 @@ void game_display (void)
 
         game_place_remaining_rocks(dungeon, "rock1");
 
+#if 0
         game_fill_void(dungeon, "rock1", 1, 6, 6, tries);
         game_fill_void(dungeon, "rock1", 2, 6, 6, tries);
 
@@ -836,6 +853,8 @@ void game_display (void)
         game_fill_void(dungeon, "rock1", 2, 1, 2, tries);
         game_fill_void(dungeon, "rock1", 3, 2, 1, tries);
         game_fill_void(dungeon, "rock1", 4, 2, 1, tries);
+#endif
+        game_place_dirt(dungeon, "dirt1");
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
