@@ -1405,6 +1405,87 @@ def init_32x32_water():
 
     zx.tile_load_arr(tex_name="32x32_water", width=32, height=32, arr=tiles)
 
+def init_32x32_deep_water():
+    zx.tex_load(
+            file="data/gfx/32x32_deep_water.tga",
+            name="32x32_deep_water")
+
+    tiles = [
+            "deep_water1.1",
+            "deep_water1.2",
+            "deep_water1.3",
+            "deep_water1.4",
+            "deep_water1.5",
+            "deep_water1.6",
+            "deep_water1.7",
+            "deep_water1.8",
+            ########################################################
+            "deep_water1a",
+            "deep_water2a",
+            "deep_water3a",
+            "deep_water4a",
+            "",
+            "",
+            "",
+            "",
+            ########################################################
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ########################################################
+            "deep_water1b",
+            "deep_water2b",
+            "deep_water3b",
+            "deep_water4b",
+            "",
+            "",
+            "",
+            "",
+            ########################################################
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ########################################################
+            "deep_water1c",
+            "deep_water2c",
+            "deep_water3c",
+            "deep_water4c",
+            "",
+            "",
+            "",
+            "",
+            ########################################################
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ########################################################
+            "deep_water1d",
+            "deep_water2d",
+            "deep_water3d",
+            "deep_water4d",
+            "",
+            "",
+            "",
+            "",
+    ]
+
+    zx.tile_load_arr(tex_name="32x32_deep_water", width=32, height=32, arr=tiles)
+
 def init_32x32_lava():
     zx.tex_load(
             file="data/gfx/32x32_lava.tga",
@@ -1521,5 +1602,6 @@ init_light()
 init_16x16()
 init_32x32()
 init_32x32_water()
+init_32x32_deep_water()
 init_32x32_lava()
 init_weapons_tiles()

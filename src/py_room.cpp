@@ -98,6 +98,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 if (m.is_floor ||
                     m.is_dusty ||
                     m.is_lava ||
+                    m.is_deep_water ||
                     m.is_water) {
                     floor_string += c;
                 } else if (m.is_door ||

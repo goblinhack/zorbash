@@ -173,6 +173,9 @@ Thingp thing_new (std::string tp_name, fpoint at)
     if (tp_is_water(tp)) {
         game.state.map.is_water[new_at.x][new_at.y] = true;
     }
+    if (tp_is_deep_water(tp)) {
+        game.state.map.is_deep_water[new_at.x][new_at.y] = true;
+    }
     if (tp_is_corridor(tp)) {
         game.state.map.is_corridor[new_at.x][new_at.y] = true;
     }
@@ -423,6 +426,9 @@ void Thing::destroy (void)
     }
     if (tp_is_water(tp)) {
         game.state.map.is_water[old_at.x][old_at.y] = false;
+    }
+    if (tp_is_deep_water(tp)) {
+        game.state.map.is_deep_water[old_at.x][old_at.y] = false;
     }
     if (tp_is_corridor(tp)) {
         game.state.map.is_corridor[old_at.x][old_at.y] = false;

@@ -27,7 +27,8 @@ public:
         EXIT            = 'E',
         KEY             = 'k',
         LAVA            = 'L',
-        WATER           = '_',
+        WATER           = 'w',
+        DEEP_WATER      = 'W',
         ROCK            = 'r',
         TREASURE        = '$',
         TRAP            = 'i',
@@ -43,12 +44,13 @@ public:
     bool                      is_door              {false};
     bool                      is_secret_door       {false};
     bool                      is_entrance          {false};
-    bool                      is_floor_deco              {false};
+    bool                      is_floor_deco        {false};
     bool                      is_wall_deco         {false};
     bool                      is_exit              {false};
     bool                      is_key               {false};
     bool                      is_lava              {false};
     bool                      is_water             {false};
+    bool                      is_deep_water        {false};
     bool                      is_rock              {false};
     bool                      is_treasure          {false};
     bool                      is_monst             {false};
