@@ -135,6 +135,7 @@ public:
     int is_movement_blocking {};
     int is_player {};
     int is_wall {};
+    int is_rock {};
     int is_water {};
     int is_deep_water {};
     int is_rrr1 {};
@@ -228,6 +229,11 @@ static inline int tp_is_floor (Tpp t)
 static inline int tp_is_wall (Tpp t)
 {
     return (t->is_wall);
+}
+
+static inline int tp_is_rock (Tpp t)
+{
+    return (t->is_rock);
 }
 
 static inline int tp_is_door (Tpp t)

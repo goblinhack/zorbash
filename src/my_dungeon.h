@@ -274,6 +274,7 @@ public:
         // Flood fill with water
         //
         dmap_create_water();
+        water_fixup_shallows();
         dmap_create_lava();
 
         debug("success, created dungeon");
@@ -527,6 +528,14 @@ public:
         return (v.is_wall);
     }
 
+    bool is_rock_at (const int x, const int y)
+    {
+        auto d = MAP_DEPTH_WALLS;
+        auto c = getc(x, y, d);
+        auto v = Charmap::all_charmaps[c];
+        return (v.is_rock);
+    }
+
     bool is_monst_at (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
@@ -705,6 +714,14 @@ public:
         auto c = getc_fast(x, y, d);
         auto v = Charmap::all_charmaps[c];
         return (v.is_wall);
+    }
+
+    bool is_rock_at_fast (const int x, const int y)
+    {
+        auto d = MAP_DEPTH_WALLS;
+        auto c = getc_fast(x, y, d);
+        auto v = Charmap::all_charmaps[c];
+        return (v.is_rock);
     }
 
     bool is_door_at_fast (const int x, const int y)
@@ -1254,8 +1271,8 @@ public:
 
     void add_corridor_walls (void)
     {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
                 if (is_wall_at_fast(x, y)) {
                     continue;
                 }
@@ -3153,6 +3170,41 @@ public:
     }
 
     //
+    // Any water next to cave walls make it shallow
+    // 
+    void water_fixup_shallows (void)
+    {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+                if (!is_deep_water_at_fast(x, y)) {
+                    continue;
+                }
+
+                if (is_wall_at(x - 1, y - 1) ||
+                    is_wall_at(x    , y - 1) ||
+                    is_wall_at(x + 1, y - 1) ||
+                    is_wall_at(x - 1, y    ) ||
+                    is_wall_at(x    , y    ) ||
+                    is_wall_at(x + 1, y    ) ||
+                    is_wall_at(x - 1, y + 1) ||
+                    is_wall_at(x    , y + 1) ||
+                    is_wall_at(x + 1, y + 1) ||
+                    is_rock_at(x - 1, y - 1) ||
+                    is_rock_at(x    , y - 1) ||
+                    is_rock_at(x + 1, y - 1) ||
+                    is_rock_at(x - 1, y    ) ||
+                    is_rock_at(x    , y    ) ||
+                    is_rock_at(x + 1, y    ) ||
+                    is_rock_at(x - 1, y + 1) ||
+                    is_rock_at(x    , y + 1) ||
+                    is_rock_at(x + 1, y + 1)) {
+                    putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
+                }
+            }
+        }
+    }
+
+    //
     // Generate a cave!
     //
     void cave_gen (uint8_t map_fill_prob,
@@ -3202,7 +3254,7 @@ public:
             for (y=2; y < maze_h-2; y++) {
                 if (map_curr[x][y]) {
                     if (!is_anything_at(x, y)) {
-                        putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                        putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
                     }
                 }
             }

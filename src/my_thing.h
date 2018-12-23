@@ -233,6 +233,7 @@ public:
     void attach(void);
     void detach(void);
     void blit_wall_cladding(fpoint &tl, fpoint &br);
+    void blit_rock_cladding(fpoint &tl, fpoint &br);
     void blit_shadow(const Tpp &tp, const Tilep &tile, 
                      const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, 

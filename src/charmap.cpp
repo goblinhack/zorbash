@@ -25,6 +25,11 @@ void Charmap::init_charmaps (void)
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_wall              = true;
+
+    char_index              = Charmap::ROCK;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_rock              = true;
     
     char_index              = Charmap::FLOOR;
     c = &all_charmaps[char_index];
