@@ -556,6 +556,7 @@ void game_display (void)
         memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
         memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
         memset(game.state.map.is_key, sizeof(game.state.map.is_key), 0);
+        memset(game.state.map.is_shadow_caster, sizeof(game.state.map.is_shadow_caster), 0);
 
         game_place_entrance(dungeon, "entrance1");
         game_place_exit(dungeon, "exit1");
