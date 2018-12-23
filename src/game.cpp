@@ -177,8 +177,8 @@ static void game_place_floor (class Dungeon *d,
                               std::string what,
                               int depth)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (game.state.map.is_floor[x][y]) {
                 continue;
             }
@@ -303,26 +303,28 @@ static void game_place_lava (class Dungeon *d, std::string what)
 
 static void game_place_blood (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (game.state.map.is_blood[x][y]) {
                 continue;
             }
 
-            if (!d->is_floor_at(x, y)) {
-                continue;
-            }
+            if (d->is_floor_at(x, y) &&
+                d->is_floor_at(x - 1, y) &&
+                d->is_floor_at(x + 1, y) &&
+                d->is_floor_at(x - 1, y - 1) &&
+                d->is_floor_at(x + 1, y + 1)) {
+                if (game.state.map.is_water[x][y]) {
+                    continue;
+                }
 
-            if (game.state.map.is_water[x][y]) {
-                continue;
-            }
+                if (game.state.map.is_lava[x][y]) {
+                    continue;
+                }
 
-            if (game.state.map.is_lava[x][y]) {
-                continue;
-            }
-
-            if (random_range(0, 1000) < 10) {
-                (void) thing_new(what, fpoint(x, y));
+                if (random_range(0, 1000) < 10) {
+                    (void) thing_new(what, fpoint(x, y));
+                }
             }
         }
     }
@@ -631,12 +633,12 @@ void game_display (void)
 
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
-        game_place_blood(dungeon, "blood1");
 
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_under_walls(dungeon, "floor6");
         game_place_deco(dungeon);
         game_place_wall_deco(dungeon);
+        game_place_blood(dungeon, "blood1");
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
