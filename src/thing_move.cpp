@@ -277,6 +277,10 @@ void Thing::update_pos (fpoint to)
             game.state.map.is_key[old_at.x][old_at.y] = false;
             game.state.map.is_key[new_at.x][new_at.y] = true;
         }
+        if (tp_is_shadow_caster(tp)) {
+            game.state.map.is_shadow_caster[old_at.x][old_at.y] = false;
+            game.state.map.is_shadow_caster[new_at.x][new_at.y] = true;
+        }
     }
 
     /*

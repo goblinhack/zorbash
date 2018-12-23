@@ -211,7 +211,7 @@ void Light::calculate (void)
                 break;
             }
 
-            if (game.state.map.is_wall[x][y]) {
+            if (game.state.map.is_shadow_caster[x][y]) {
                 break;
             }
         }
@@ -231,7 +231,7 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (!game.state.map.is_wall[x][y]) {
+            if (!game.state.map.is_shadow_caster[x][y]) {
                 break;
             }
 
