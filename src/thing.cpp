@@ -30,7 +30,7 @@ void thing_gc (void)
     things_to_delete.clear();
 }
 
-Thingp thing_new (std::string tp_name, fpoint at)
+Thingp thing_new (std::string tp_name, fpoint at, bool jitter)
 {_
     auto id = ++thing_id;
 

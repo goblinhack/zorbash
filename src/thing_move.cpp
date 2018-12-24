@@ -88,7 +88,8 @@ bool Thing::update_coordinates (void)
     /*
      * Scale up tiles that are larger to the same pix scale.
      */
-    if (unlikely(tile->pix_width != TILE_WIDTH)) {
+    if (unlikely((tile->pix_width != TILE_WIDTH) ||
+                 (tile->pix_height != TILE_HEIGHT))) {
         auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
         auto mx = (br.x + tl.x) / 2.0;
         tl.x = mx - (xtiles * tile_gl_width);

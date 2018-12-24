@@ -499,6 +499,49 @@ def init_16x16():
 
     zx.tile_load_arr(tex_name="16x16", width=16, height=16, arr=tiles)
 
+def init_16x32():
+    zx.tex_load(
+            file="data/gfx/16x32.tga",
+            name="16x32")
+
+    tiles = [
+            ########################################################
+            "smoke1.1",
+            "smoke1.2",
+            "smoke1.3",
+            "smoke1.4",
+            "smoke1.5",
+            "smoke1.6",
+            "smoke1.7",
+            "smoke1.8",
+            "smoke1.9",
+            "smoke1.10",
+            "smoke1.11",
+            "smoke1.12",
+            "smoke1.13",
+            "smoke1.14",
+            "smoke1.15",
+            "smoke1.16",
+            "smoke1.17",
+            "smoke1.18",
+            "smoke1.19",
+            "smoke1.20",
+            "smoke1.21",
+            "smoke1.22",
+            "smoke1.23",
+            "smoke1.24",
+            "smoke1.25",
+            "smoke1.26",
+            "smoke1.27",
+            "smoke1.28",
+            "smoke1.29",
+            "smoke1.30",
+            "smoke1.31",
+            "smoke1.32",
+    ]
+
+    zx.tile_load_arr(tex_name="16x32", width=16, height=32, arr=tiles)
+
 def init_16x16_walls():
     zx.tex_load(
             file="data/gfx/16x16_walls.tga",
@@ -1636,6 +1679,7 @@ def init_weapons_tiles():
 init_text()
 init_light()
 init_16x16()
+init_16x32()
 init_16x16_walls()
 init_32x32()
 init_32x32_water()
