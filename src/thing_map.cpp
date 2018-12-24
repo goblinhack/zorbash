@@ -107,9 +107,40 @@ static void thing_blit_things (int minx, int miny, int minz,
     blit_flush();
 
     /*
+     * Work out what we will need to display ahead of time so we
+     * can avoid needless fbo blits
+     */
+    bool have_deep_water = false;
+    bool have_water = false;
+    bool have_lava = false;
+    bool have_blood = false;
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = maxx - 1; x >= minx; x--) {
+            for (auto z = 0; z < MAP_DEPTH; z++) {
+                for (auto p : thing_display_order[x][y][z]) {
+                    auto t = p.second;
+                    if (tp_is_lava(t->tp)) {
+                        have_lava = true;
+                    }
+                    if (tp_is_deep_water(t->tp)) {
+                        have_deep_water = true;
+                    }
+                    if (tp_is_water(t->tp)) {
+                        have_water = true;
+                    }
+                    if (tp_is_blood(t->tp)) {
+                        have_blood = true;
+                    }
+                }
+            }
+        }
+    }
+
+    /*
      * Water is drawn to its own buffer and then blitted to the display.
      */
-    {
+    if (have_water) {
         auto z = MAP_DEPTH_WATER;
 #define WATER_ACROSS 4
 #define WATER_DOWN   4
@@ -315,7 +346,7 @@ static void thing_blit_things (int minx, int miny, int minz,
         blit_fbo(FBO_LIGHT_MERGED);
     }
 
-    {
+    if (have_deep_water) {
         auto z = MAP_DEPTH_WATER;
 #define DEEP_WATER_ACROSS 4
 #define DEEP_WATER_DOWN   4
@@ -458,7 +489,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     /*
      * Lava is drawn to its own buffer and then blitted to the display.
      */
-    {
+    if (have_lava) {
         auto z = MAP_DEPTH_LAVA;
 #define LAVA_ACROSS 4
 #define LAVA_DOWN   4
@@ -672,7 +703,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     /*
      * Blood...
      */
-    {
+    if (have_blood) {
         auto z = MAP_DEPTH_BLOOD;
 #define BLOOD_ACROSS 1
 #define BLOOD_DOWN   1
