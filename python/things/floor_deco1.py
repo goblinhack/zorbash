@@ -2,9 +2,7 @@ import zx
 import tp
 
 
-def pillar_init(name, short_name, 
-              tiles=[],
-              left_tiles=[]):
+def deco_init(name, short_name, tiles=[]):
     
     x = tp.Tp(name)
 
@@ -21,7 +19,7 @@ def pillar_init(name, short_name,
         x.set_tile(tile=t)
 
 def init():
-    pillar_init(name="pillar1", short_name="pillar1", 
+    deco_init(name="pillar1", short_name="pillar1", 
             tiles=[ 
                 "pillar1.1", 
                 "pillar1.2", 
