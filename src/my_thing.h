@@ -348,7 +348,7 @@ struct thing_display_sort_cmp : public std::binary_function<class ThingDisplaySo
     }
 };
 
-extern Thingp thing_new(std::string tp_name, fpoint at, bool jitter = false);
+extern Thingp thing_new(std::string tp_name, fpoint at, fpoint jitter = fpoint(0, 0));
 extern Thingp thing_find(uint32_t name);
 extern void thing_gc(void);
 extern void thing_render_all(void);
