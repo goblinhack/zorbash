@@ -265,7 +265,7 @@ public:
         //
         // Add a cave as the under-dungeon
         // 
-        cave_gen(10, /* fill prob */
+        cave_gen(50, /* fill prob */
                  5,  /* R1 */
                  2,  /* R2 */
                  10   /* generations */);
@@ -275,17 +275,20 @@ public:
                  2,  /* R2 */
                  10   /* generations */);
 
-        //dmap_create_dirt();
-        dmap_create_water();
-        //water_fixup_add_small_islands_of_safety();
-        dmap_create_lava();
+        water_gen(50, /* fill prob */
+                 5,  /* R1 */
+                 2,  /* R2 */
+                 10   /* generations */);
 
-        debug("success, created dungeon");
+        water_fixup();
+
+        LOG("final dungeon:");
+        dump();
     }
 
     void debug (std::string s)
     {_
-        //return;
+        return;
         LOG("dungeon (%u) %s", seed, s.c_str());
         dump();
     }
@@ -2616,87 +2619,6 @@ public:
         }
     }
 
-    void dmap_create_water (void)
-    {
-        int x, y;
-        dmap d;
-
-        dmap_set_walls(&d);
-
-        int amount = random_range(3, 30);
-
-        while (amount--) {
-            int x = random_range(1, MAP_WIDTH - 1);
-            int y = random_range(1, MAP_HEIGHT - 1);
-
-            int cluster = 5;
-            int cluster_size = 5;
-            while (cluster--) {
-                int dx = (myrand() % cluster_size) - (cluster_size / 2);
-                int dy = (myrand() % cluster_size) - (cluster_size / 2);
-
-                int wx = x + dx;
-                int wy = y + dy;
-
-                if (!is_anything_at(wx, wy)) {
-                    d.val[wx][wy] = 0;
-                }
-            }
-        }
-
-        dmap_process(&d);
-
-        for (x = 0; x < MAP_WIDTH; x++) {
-            for (y = 0; y < MAP_HEIGHT; y++) {
-                if (d.val[x][y] < 10) {
-                    putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
-                }
-                if (d.val[x][y] < 5) {
-                    putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
-                }
-            }
-        }
-    }
-
-    void dmap_create_lava (void)
-    {
-        int x, y;
-        dmap d;
-
-        dmap_set_walls(&d);
-
-        int amount = random_range(0, 1);
-
-        while (amount--) {
-            int x = random_range(1, MAP_WIDTH - 1);
-            int y = random_range(1, MAP_HEIGHT - 1);
-
-            int cluster = 10;
-            int cluster_size = 5;
-            while (cluster--) {
-                int dx = (myrand() % cluster_size) - (cluster_size / 2);
-                int dy = (myrand() % cluster_size) - (cluster_size / 2);
-
-                int wx = x + dx;
-                int wy = y + dy;
-
-                if (!is_anything_at(wx, wy)) {
-                    d.val[wx][wy] = 0;
-                }
-            }
-        }
-
-        dmap_process(&d);
-
-        for (x = 0; x < MAP_WIDTH; x++) {
-            for (y = 0; y < MAP_HEIGHT; y++) {
-                if (d.val[x][y] < 5) {
-                    putc(x, y, MAP_DEPTH_LAVA, Charmap::LAVA);
-                }
-            }
-        }
-    }
-
     /*
     Cellular Automata Method for Generating Random Cave-Like Levels
 
@@ -3230,10 +3152,13 @@ public:
     }
 
     //
-    // Any water next to cave walls make it shallow
+    // Add deepwater and islands of safety.
     // 
-    void water_fixup_add_small_islands_of_safety (void)
+    void water_fixup (void)
     {
+        uint8_t cand[MAP_WIDTH][MAP_HEIGHT];
+        memset(cand, 0, sizeof(cand));
+
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             for (auto x = 1; x < MAP_WIDTH - 1; x++) {
                 if (is_water_at(x - 1, y - 1) &&
@@ -3245,9 +3170,19 @@ public:
                     is_water_at(x - 1, y + 1) &&
                     is_water_at(x    , y + 1) &&
                     is_water_at(x + 1, y + 1)) {
-
-                    putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
-                    putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
+                    cand[x][y] = true;
+                }
+            }
+        }
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+                if (cand[x][y]) {
+                    if (random_range(0, 100) < 80) {
+                        putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
+                    } else {
+                        putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
+                        putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
+                    }
                 }
             }
         }
@@ -3358,6 +3293,60 @@ public:
                 if (map_curr[x][y]) {
                     if (!is_anything_at(x, y)) {
                         putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
+                    }
+                }
+            }
+        }
+    }
+
+    void water_gen (uint8_t map_fill_prob,
+                    uint8_t map_r1,
+                    uint8_t map_r2,
+                    uint8_t map_generations)
+
+    {
+        const int16_t maze_w = MAP_WIDTH - 2;
+        const int16_t maze_h = MAP_HEIGHT - 2;
+
+        if (map_fill_prob) {
+            MAP_FILL_PROB             = map_fill_prob;
+        }
+
+        if (map_r1) {
+            MAP_R1                    = map_r1;
+        }
+
+        if (map_r2) {
+            MAP_R2                    = map_r2;
+        }
+
+        if (map_generations) {
+            MAP_GENERATIONS           = map_generations;
+        }
+
+        int16_t x, y, i;
+
+        memset(map_curr, 0, sizeof(map_curr));
+
+        for (x=2; x < maze_w-2; x++) {
+            for (y=2; y < maze_h-2; y++) {
+                if ((myrand() % 1000) < MAP_FILL_PROB) {
+                    map_curr[x][y] = 1;
+                }
+            }
+        }
+
+        for (i=0; i < MAP_GENERATIONS; i++) {
+            cave_generation();
+            memcpy(map_curr, map_save, sizeof(map_curr));
+            memset(map_save, 0, sizeof(map_save));
+        }
+
+        for (x=2; x < maze_w-2; x++) {
+            for (y=2; y < maze_h-2; y++) {
+                if (map_curr[x][y]) {
+                    if (!is_anything_at(x, y)) {
+                        putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
                     }
                 }
             }
