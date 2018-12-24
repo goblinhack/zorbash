@@ -30,7 +30,7 @@ void thing_gc (void)
     things_to_delete.clear();
 }
 
-Thingp thing_new (std::string tp_name, fpoint at, bool jitter)
+Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
 {_
     auto id = ++thing_id;
 
@@ -205,6 +205,22 @@ Thingp thing_new (std::string tp_name, fpoint at, bool jitter)
 
     t->update_coordinates();
     t->attach();
+
+    if (jitter != fpoint(0.0, 0.0)) {
+        double dx = random_range(0, 10);
+        double dy = random_range(0, 10);
+
+        dx -= 5.0;
+        dy -= 5.0;
+
+        dx /= 20.0;
+        dy /= 20.0;
+
+        dx *= jitter.x;
+        dy *= jitter.y;
+
+        t->move_to(fpoint(t->at.x + dx, t->at.y + dy));
+    }
 
     return (t);
 }
