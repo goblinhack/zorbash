@@ -428,6 +428,10 @@ static void game_place_lava (class Dungeon *d, std::string what)
             }
 
             (void) thing_new(what, fpoint(x, y));
+
+            if (random_range(0, 100) < 50) {
+                thing_new("smoke1", fpoint(x, y));
+            }
         }
     }
 }
