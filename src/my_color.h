@@ -95,6 +95,7 @@ void glcolor_restore(void);
 color string2color(const char **s);
 color string2color(const wchar_t **s);
 color string2color(std::string &s, int *len);
+color string2color(std::string &s);
 color string2color(std::wstring &s, int *len);
 const char *string2colorname(const char **s);
 std::string string2colorname(std::string &s);
