@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def wall_init(name, short_name, 
+def tp_init(name, short_name, 
               tiles=[],
               left_tiles=[],
               right_tiles=[],
@@ -77,7 +77,7 @@ def wall_init(name, short_name,
         x.set_br_tile(br_tile=name)
 
 def init():
-    wall_init(name="wall1", short_name="A boring wall", 
+    tp_init(name="wall1", short_name="A boring wall", 
             tiles=[
                         "wall1.1",
                         "wall1.2",

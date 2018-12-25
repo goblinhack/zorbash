@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def deco_init(name, short_name, tiles=[]):
+def tp_init(name, short_name, tiles=[]):
     
     x = tp.Tp(name)
 
@@ -23,7 +23,7 @@ def deco_init(name, short_name, tiles=[]):
         x.set_tile(tile=t, delay_ms=delay)
 
 def init():
-    deco_init(name="brazier1", short_name="brazier1", 
+    tp_init(name="brazier1", short_name="brazier1", 
             tiles=[ 
                 "brazier1.1", 
                 "brazier1.2", 

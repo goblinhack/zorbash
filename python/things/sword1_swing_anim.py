@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def my_init(name, short_name):
+def tp_init(name, short_name):
     x = tp.Tp(name)
 
     x.set_is_animated(True)
@@ -46,6 +46,6 @@ def my_init(name, short_name):
                is_end_of_anim = True, is_dead_on_end_of_anim=True)
    
 def init():
-    my_init(name="sword1_use_anim", short_name="sword1_use_anim")
+    tp_init(name="sword1_use_anim", short_name="sword1_use_anim")
 
 init()

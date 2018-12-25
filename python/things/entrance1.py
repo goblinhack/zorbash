@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def my_init(name, short_name):
+def tp_init(name, short_name):
     x = tp.Tp(name)
 
     x.set_is_animated(True)
@@ -27,6 +27,6 @@ def my_init(name, short_name):
     x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=delay)
 
 def init():
-    my_init(name="entrance1", short_name="entrance1")
+    tp_init(name="entrance1", short_name="entrance1")
 
 init()

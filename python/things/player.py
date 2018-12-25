@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def my_init(name, short_name):
+def tp_init(name, short_name):
     x = tp.Tp(name)
 
     x.set_for_collision_use_circle(True)
@@ -49,6 +49,6 @@ def my_init(name, short_name):
     x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=delay)
 
 def init():
-    my_init(name="player1", short_name="player1")
+    tp_init(name="player1", short_name="player1")
 
 init()

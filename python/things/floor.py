@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def floor_init(name, short_name, 
+def tp_init(name, short_name, 
               tiles=[],
               left_tiles=[]):
     
@@ -17,7 +17,7 @@ def floor_init(name, short_name,
         x.set_tile(t)
 
 def init():
-    floor_init(name="floor1", short_name="The floor", 
+    tp_init(name="floor1", short_name="The floor", 
             tiles=[
                         "floor1.1",
                         "floor1.2",
@@ -52,7 +52,7 @@ def init():
                         "floor1.31",
                         "floor1.32",
                 ])
-    floor_init(name="floor2", short_name="The floor", 
+    tp_init(name="floor2", short_name="The floor", 
             tiles=[
                         "floor2.1",
                         "floor2.2",
@@ -87,7 +87,7 @@ def init():
                         "floor2.31",
                         "floor2.32",
                 ])
-    floor_init(name="floor3", short_name="The floor", 
+    tp_init(name="floor3", short_name="The floor", 
             tiles=[
                         "floor3.1",
                         "floor3.2",
@@ -122,7 +122,7 @@ def init():
                         "floor3.31",
                         "floor3.32",
                 ])
-    floor_init(name="floor4", short_name="The floor", 
+    tp_init(name="floor4", short_name="The floor", 
             tiles=[
                         "floor4.1",
                         "floor4.2",
@@ -157,7 +157,7 @@ def init():
                         "floor4.31",
                         "floor4.32",
                 ])
-    floor_init(name="floor5", short_name="The floor", 
+    tp_init(name="floor5", short_name="The floor", 
             tiles=[
                         "floor5.1",
                         "floor5.2",
@@ -192,7 +192,7 @@ def init():
                         "floor5.31",
                         "floor5.32",
                 ])
-    floor_init(name="floor6", short_name="The floor", 
+    tp_init(name="floor6", short_name="The floor", 
             tiles=[
                         "floor6.1",
                         "floor6.2",
@@ -227,7 +227,7 @@ def init():
                         "floor6.31",
                         "floor6.32",
                 ])
-    floor_init(name="floor7", short_name="The floor", 
+    tp_init(name="floor7", short_name="The floor", 
             tiles=[
                         "floor7.1",
                         "floor7.2",
@@ -262,7 +262,7 @@ def init():
                         "floor7.31",
                         "floor7.32",
                 ])
-    floor_init(name="floor8", short_name="The floor", 
+    tp_init(name="floor8", short_name="The floor", 
             tiles=[
                         "floor8.1",
                         "floor8.2",

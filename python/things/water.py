@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def water_init(name, short_name, 
+def tp_init(name, short_name, 
               tiles=[],
               left_tiles=[]):
     
@@ -19,7 +19,7 @@ def water_init(name, short_name,
         x.set_tile(tile=t, delay_ms=delay)
 
 def init():
-    water_init(name="water1", short_name="water", 
+    tp_init(name="water1", short_name="water", 
             tiles=[ 
                 "water1.1", 
                 "water1.2", 

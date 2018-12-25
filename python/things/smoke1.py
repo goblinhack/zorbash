@@ -1,7 +1,7 @@
 import zx
 import tp
 
-def monst_init(name, short_name):
+def tp_init(name, short_name):
     x = tp.Tp(name)
 
     x.set_is_animated(True)
@@ -45,6 +45,6 @@ def monst_init(name, short_name):
     x.set_tile(tile=name + ".32", delay_ms=delay)
 
 def init():
-    monst_init(name="smoke1", short_name="smoke1")
+    tp_init(name="smoke1", short_name="smoke1")
 
 init()

@@ -1,7 +1,7 @@
 import zx
 import tp
 
-def monst_init(name, short_name):
+def tp_init(name, short_name):
     x = tp.Tp(name)
 
     x.set_is_animated(True)
@@ -27,6 +27,6 @@ def monst_init(name, short_name):
     x.set_tile(tile=name + ".8", is_dir_none=True, delay_ms=delay)
 
 def init():
-    monst_init(name="slime2", short_name="slime2")
+    tp_init(name="slime2", short_name="slime2")
 
 init()
