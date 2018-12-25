@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def my_init(name, short_name):
+def tp_init(name, short_name):
     x = tp.Tp(name)
 
     x.set_is_animated(True)
@@ -19,6 +19,6 @@ def my_init(name, short_name):
     x.set_tile(tile=name + ".2", delay_ms=delay)
 
 def init():
-    my_init(name="sword1_carry_anim", short_name="sword1_carry_anim")
+    tp_init(name="sword1_carry_anim", short_name="sword1_carry_anim")
 
 init()

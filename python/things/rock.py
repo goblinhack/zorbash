@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def rock_init(name, short_name, 
+def tp_init(name, short_name, 
               tiles=[],
               left_tiles=[],
               right_tiles=[],
@@ -77,7 +77,7 @@ def rock_init(name, short_name,
         x.set_br_tile(br_tile=name)
 
 def init():
-    rock_init(name="rock1", short_name="A boring rock", 
+    tp_init(name="rock1", short_name="A boring rock", 
             tiles=[
                         "rock1.1",
                         "rock1.2",

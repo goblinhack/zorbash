@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def my_init(name, short_name):
+def tp_init(name, short_name):
     x = tp.Tp(name)
 
     x.set_is_blitted_as_sitting_on_the_ground(True)
@@ -16,6 +16,6 @@ def my_init(name, short_name):
     x.set_tile(tile=name + ".1-closed")
 
 def init():
-    my_init(name="door1", short_name="door1")
+    tp_init(name="door1", short_name="door1")
 
 init()

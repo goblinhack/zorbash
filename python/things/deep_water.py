@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def deep_water_init(name, short_name, 
+def deep_tp_init(name, short_name, 
               tiles=[],
               left_tiles=[]):
     
@@ -19,7 +19,7 @@ def deep_water_init(name, short_name,
         x.set_tile(tile=t, delay_ms=delay)
 
 def init():
-    deep_water_init(name="deep_water1", short_name="deep_water", 
+    deep_tp_init(name="deep_water1", short_name="deep_water", 
             tiles=[ 
                 "deep_water1.1", 
                 "deep_water1.2", 
