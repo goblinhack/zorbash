@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_tile_info.h"
+#include "my_color.h"
 
 static uint32_t thing_id;
 
@@ -220,6 +221,13 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         dy *= jitter.y;
 
         t->move_to(fpoint(t->at.x + dx, t->at.y + dy));
+    }
+
+    if (tp_is_light_strength(tp)) {
+        std::string l = tp_str_light_color(tp);
+        color c = string2color(l);
+        t->light = light_new((double) tp_is_light_strength(tp), 
+                          t->at, LIGHT_QUALITY_POINT, c);
     }
 
     return (t);

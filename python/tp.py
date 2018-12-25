@@ -137,8 +137,8 @@ class Tp:
     def set_str_zzz17(self, value):
         zx.tp_set_str_zzz17(self, value)
 
-    def set_str_zzz18(self, value):
-        zx.tp_set_str_zzz18(self, value)
+    def set_str_light_color(self, value):
+        zx.tp_set_str_light_color(self, value)
 
     def set_weapon_carry_anim(self, value):
         zx.tp_set_weapon_carry_anim(self, value)
@@ -179,8 +179,8 @@ class Tp:
     def set_is_rrr11(self, value):
         zx.tp_set_is_rrr11(self, value)
 
-    def set_is_rrr12(self, value):
-        zx.tp_set_is_rrr12(self, value)
+    def set_is_light_strength(self, value):
+        zx.tp_set_is_light_strength(self, value)
 
     def set_is_rrr13(self, value):
         zx.tp_set_is_rrr13(self, value)

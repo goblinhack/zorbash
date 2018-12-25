@@ -1603,12 +1603,37 @@ color string2color (std::string &s, int *len)
         iter++;
     }
 
-    if (iter == s.end()) {
+    if (len) {
+        *len = iter - s.begin();
+    }
+
+    if (out == "reset") {
+        return (WHITE);
+    }
+
+    auto result = color_map.find(out);
+
+    if (result == color_map.end()) {
         DIE("unknown color [%s]", out.c_str());
     }
 
-    if (len) {
-        *len = iter - s.begin();
+    return (result->second);
+}
+
+color string2color (std::string &s)
+{
+    auto iter = s.begin();
+    std::string out;
+
+    while (iter != s.end()) {
+        auto c = *iter;
+
+        if ((c == '\0') || (c == '$')) {
+            break;
+        }
+
+        out += c;
+        iter++;
     }
 
     if (out == "reset") {
@@ -1683,10 +1708,6 @@ std::string string2colorname (std::string &s)
 
         out += c;
         iter++;
-    }
-
-    if (iter == s.end()) {
-        DIE("unknown color [%s]", out.c_str());
     }
 
     if (out == "reset") {

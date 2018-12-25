@@ -81,7 +81,7 @@ public:
     std::string str_zzz15;
     std::string str_zzz16;
     std::string str_zzz17;
-    std::string str_zzz18;
+    std::string str_light_color;
     std::string weapon_carry_anim;
     std::string weapon_use_anim;
 
@@ -149,7 +149,7 @@ public:
     int is_rrr9 {};
     int is_rrr10 {};
     int is_rrr11 {};
-    int is_rrr12 {};
+    int is_light_strength {};
     int is_dirt {};
     int is_blood {};
     int is_animated_can_vflip {};
@@ -336,9 +336,9 @@ static inline int tp_is_rrr11 (Tpp t)
     return (t->is_rrr11);
 }
 
-static inline int tp_is_rrr12 (Tpp t)
+static inline int tp_is_light_strength (Tpp t)
 {
-    return (t->is_rrr12);
+    return (t->is_light_strength);
 }
 
 static inline int tp_is_dirt (Tpp t)
@@ -601,9 +601,9 @@ static inline std::string tp_str_zzz17 (Tpp t)
     return (t->str_zzz17);
 }
 
-static inline std::string tp_str_zzz18 (Tpp t)
+static inline std::string tp_str_light_color (Tpp t)
 {
-    return (t->str_zzz18);
+    return (t->str_light_color);
 }
 
 static inline std::string tp_weapon_carry_anim (Tpp t)
