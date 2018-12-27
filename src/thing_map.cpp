@@ -140,250 +140,6 @@ static void thing_blit_things (int minx, int miny, int minz,
         }
     }
 
-    /*
-     * Water is drawn to its own buffer and then blitted to the display.
-     */
-    if (have_water) {
-#define WATER_ACROSS 4
-#define WATER_DOWN   4
-
-        static Tilep water[WATER_ACROSS][WATER_DOWN] = {};
-        if (!water[0][0]) {
-            water[0][0] = tile_find("water1a");
-            water[1][0] = tile_find("water2a");
-            water[2][0] = tile_find("water3a");
-            water[3][0] = tile_find("water4a");
-            water[0][1] = tile_find("water1b");
-            water[1][1] = tile_find("water2b");
-            water[2][1] = tile_find("water3b");
-            water[3][1] = tile_find("water4b");
-            water[0][2] = tile_find("water1c");
-            water[1][2] = tile_find("water2c");
-            water[2][2] = tile_find("water3c");
-            water[3][2] = tile_find("water4c");
-            water[0][3] = tile_find("water1d");
-            water[1][3] = tile_find("water2d");
-            water[2][3] = tile_find("water3d");
-            water[3][3] = tile_find("water4d");
-        }
-        static Tilep solid = tile_find("water1.1");
-
-        /*
-         * Slow timer to scroll the water.
-         */
-        static int step1;
-        static double step2;
-        if (step1++ >= 20) {
-            step1 = 0;
-            if (step2++ >= 28) {
-                step2 = 0;
-            }
-        }
-
-        const double fluid_width = game.config.tile_gl_width / (double)FLUID_RESOLUTION;
-        const double fluid_height = game.config.tile_gl_height / (double)FLUID_RESOLUTION;
-
-        /*
-         * Move the wave animation on.
-         */
-        static double wave;
-
-        {
-            static double wave_delta = 0.5;
-            static int wave_dir;
-            static uint32_t ts;
-
-            if (time_have_x_hundredths_passed_since(5, ts)) {
-                ts = time_get_time_ms();
-                if (wave_dir) {
-                    wave += wave_delta;
-                } else {
-                    wave -= wave_delta;
-                }
-
-                /*
-                * Change wave direction sometimes.
-                */
-                if ((myrand() % 1000) < 2) {
-                    wave_dir = !wave_dir;
-                }
-            }
-        }
-
-        /*
-         * Draw a white outline to the main display.
-         */
-        //int froth_height = 4;
-
-        {
-            glcolor(WHITE);
-            glDisable(GL_TEXTURE_2D);
-            blit_init();
-            for (int y = miny; y < maxy; y++) {
-                for (int dy = 0; dy < FLUID_RESOLUTION; dy++) {
-                    for (int x = maxx - 1; x >= minx; x--) {
-                        for (int dx = 0; dx < FLUID_RESOLUTION; dx++) {
-                            int fx = (x*FLUID_RESOLUTION) + dx;
-                            int fy = (y*FLUID_RESOLUTION) + dy;
-                            fluid_t *f = &game.state.map.fluid[fx][fy];
-                            if (!f->mass) {
-                                continue;
-                            }
-                            
-                            fpoint tl(fx * (double)fluid_width - offset_x, 
-                                      fy * (double)fluid_height - offset_y);
-                            fpoint br = tl + fpoint(fluid_width, fluid_height);
-
-                            static double d = RAD_360 / ((double) FLUID_WIDTH / 10.0);
-
-                            if (f->is_surface) {
-                                double water_mass = 
-                                    ((double)f->mass / (double) FLUID_MAX_MASS) * 
-                                    (game.config.tile_gl_height / FLUID_RESOLUTION);
-				double wave_height = sin(d * (double) (fx + wave)) / 2.0;
-
-                                tl.y = br.y - water_mass - 
-                                                game.config.one_pixel_gl_height * wave_height;
-                                tl.y -= game.config.one_pixel_gl_height;
-                            }
-                            tile_blit_at(solid, tl, br);
-                        }
-                    }
-                }
-            }
-            blit_flush();
-            glEnable(GL_TEXTURE_2D);
-        }
-
-        /*
-         * Draw the white bitmap that will be the mask for the texture.
-         */
-        {
-            blit_fbo_bind(FBO_LIGHT_MERGED);
-            glClearColor(0,0,0,0);
-            glClear(GL_COLOR_BUFFER_BIT);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-            glcolor(WHITE);
-
-            glcolor(WHITE);
-            glDisable(GL_TEXTURE_2D);
-            blit_init();
-            for (int y = miny; y < maxy; y++) {
-                for (int dy = 0; dy < FLUID_RESOLUTION; dy++) {
-                    for (int x = maxx - 1; x >= minx; x--) {
-                        for (int dx = 0; dx < FLUID_RESOLUTION; dx++) {
-                            int fx = (x*FLUID_RESOLUTION) + dx;
-                            int fy = (y*FLUID_RESOLUTION) + dy;
-                            fluid_t *f = &game.state.map.fluid[fx][fy];
-                            if (!f->mass) {
-                                continue;
-                            }
-                            
-                            fpoint tl(fx * (double)fluid_width - offset_x, 
-                                      fy * (double)fluid_height - offset_y);
-                            fpoint br = tl + fpoint(fluid_width, fluid_height);
-
-                            static double d = RAD_360 / ((double) FLUID_WIDTH / 10.0);
-
-                            if (f->is_surface) {
-                                double water_mass = 
-                                    ((double)f->mass / (double) FLUID_MAX_MASS) * 
-                                    (game.config.tile_gl_height / FLUID_RESOLUTION);
-				double wave_height = sin(d * (double) (fx + wave)) / 2.0;
-
-                                tl.y = br.y - water_mass - 
-                                                game.config.one_pixel_gl_height * wave_height;
-                            }
-                            tile_blit_at(solid, tl, br);
-                        }
-                    }
-                }
-            }
-            blit_flush();
-            glEnable(GL_TEXTURE_2D);
-        }
-
-        /*
-         * The water tiles are twice the size of normal tiles, so work out
-         * where to draw them to avoid overlaps
-         */
-        uint8_t water_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
-
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = maxx - 1; x >= minx; x--) {
-                if (game.state.map.is_water[x][y]) {
-                    auto X = x / 2;
-                    auto Y = y / 2;
-                    X++;
-                    Y++;
-                    water_map[X][Y] = true;
-                    water_map[X+1][Y] = true;
-                    water_map[X-1][Y] = true;
-                    water_map[X][Y+1] = true;
-                    water_map[X][Y-1] = true;
-
-                    water_map[X+1][Y+1] = true;
-                    water_map[X-1][Y+1] = true;
-                    water_map[X+1][Y-1] = true;
-                    water_map[X-1][Y-1] = true;
-                }
-            }
-        }
-
-        /*
-         * Finally blit the water and then the buffer to the display.
-         */
-        glBlendFunc(GL_DST_ALPHA, GL_ZERO);
-        glcolor(WHITE);
-        blit_init();
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = maxx - 1; x >= minx; x--) {
-                auto X = x / 2;
-                auto Y = y / 2;
-                X++;
-                Y++;
-
-                if (water_map[X][Y]) {
-                    water_map[X][Y] = false;
-                    auto tx = (double)(x &~1);
-                    auto ty = (double)(y &~1);
-                    double tlx = tx * game.config.tile_gl_width;
-                    double tly = ty * game.config.tile_gl_height;
-                    double brx = (tx+2.0) * game.config.tile_gl_width;
-                    double bry = (ty+2.0) * game.config.tile_gl_height;
-
-                    tlx += game.config.tile_gl_width / 2.0;
-                    tly += game.config.tile_gl_height / 2.0;
-                    brx += game.config.tile_gl_width / 2.0;
-                    bry += game.config.tile_gl_height / 2.0;
-
-                    tlx -= offset_x;
-                    tly -= offset_y;
-                    brx -= offset_x;
-                    bry -= offset_y;
-
-                    auto tile = water[X % WATER_ACROSS][(Y + (int)step2/4) % WATER_DOWN];
-                    auto x1 = tile->x1;
-                    auto x2 = tile->x2;
-                    auto y1 = tile->y1;
-                    auto y2 = tile->y2;
-
-                    double one_pix = (1.0 / tex_get_width(tile->tex));
-                    y1 += one_pix * step2;
-                    y2 += one_pix * step2;
-
-                    blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
-                }
-            }
-        }
-        blit_flush();
-
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        blit_fbo_bind(FBO_MAIN);
-        blit_fbo(FBO_LIGHT_MERGED);
-    }
-
 #if 0
     if (have_deep_water) {
         auto z = MAP_DEPTH_WATER;
@@ -912,6 +668,250 @@ static void thing_blit_things (int minx, int miny, int minz,
     }
 
     blit_flush();
+
+    /*
+     * Water is drawn to its own buffer and then blitted to the display.
+     */
+    if (have_water) {
+#define WATER_ACROSS 4
+#define WATER_DOWN   4
+
+        static Tilep water[WATER_ACROSS][WATER_DOWN] = {};
+        if (!water[0][0]) {
+            water[0][0] = tile_find("water1a");
+            water[1][0] = tile_find("water2a");
+            water[2][0] = tile_find("water3a");
+            water[3][0] = tile_find("water4a");
+            water[0][1] = tile_find("water1b");
+            water[1][1] = tile_find("water2b");
+            water[2][1] = tile_find("water3b");
+            water[3][1] = tile_find("water4b");
+            water[0][2] = tile_find("water1c");
+            water[1][2] = tile_find("water2c");
+            water[2][2] = tile_find("water3c");
+            water[3][2] = tile_find("water4c");
+            water[0][3] = tile_find("water1d");
+            water[1][3] = tile_find("water2d");
+            water[2][3] = tile_find("water3d");
+            water[3][3] = tile_find("water4d");
+        }
+        static Tilep solid = tile_find("water1.1");
+
+        /*
+         * Slow timer to scroll the water.
+         */
+        static int step1;
+        static double step2;
+        if (step1++ >= 20) {
+            step1 = 0;
+            if (step2++ >= 28) {
+                step2 = 0;
+            }
+        }
+
+        const double fluid_width = game.config.tile_gl_width / (double)FLUID_RESOLUTION;
+        const double fluid_height = game.config.tile_gl_height / (double)FLUID_RESOLUTION;
+
+        /*
+         * Move the wave animation on.
+         */
+        static double wave;
+
+        {
+            static double wave_delta = 0.5;
+            static int wave_dir;
+            static uint32_t ts;
+
+            if (time_have_x_hundredths_passed_since(5, ts)) {
+                ts = time_get_time_ms();
+                if (wave_dir) {
+                    wave += wave_delta;
+                } else {
+                    wave -= wave_delta;
+                }
+
+                /*
+                * Change wave direction sometimes.
+                */
+                if ((myrand() % 1000) < 2) {
+                    wave_dir = !wave_dir;
+                }
+            }
+        }
+
+        /*
+         * Draw the white bitmap that will be the mask for the texture.
+         */
+        {
+            blit_fbo_bind(FBO_LIGHT_MERGED);
+            glClearColor(0,0,0,0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+            color c = WHITE;
+            c.a = 200;
+            glcolor(c);
+            glDisable(GL_TEXTURE_2D);
+            blit_init();
+            for (int y = miny; y < maxy; y++) {
+                for (int dy = 0; dy < FLUID_RESOLUTION; dy++) {
+                    for (int x = maxx - 1; x >= minx; x--) {
+                        for (int dx = 0; dx < FLUID_RESOLUTION; dx++) {
+                            int fx = (x*FLUID_RESOLUTION) + dx;
+                            int fy = (y*FLUID_RESOLUTION) + dy;
+                            fluid_t *f = &game.state.map.fluid[fx][fy];
+                            if (!f->mass) {
+                                continue;
+                            }
+                            
+                            fpoint tl(fx * (double)fluid_width - offset_x, 
+                                      fy * (double)fluid_height - offset_y);
+                            fpoint br = tl + fpoint(fluid_width, fluid_height);
+
+                            static double d = RAD_360 / ((double) FLUID_WIDTH / 10.0);
+
+                            if (f->is_surface) {
+                                double water_mass = 
+                                    ((double)f->mass / (double) FLUID_MAX_MASS) * 
+                                    (game.config.tile_gl_height / FLUID_RESOLUTION);
+				double wave_height = sin(d * (double) (fx + wave)) / 2.0;
+
+                                tl.y = br.y - water_mass - 
+                                                game.config.one_pixel_gl_height * wave_height;
+                            }
+                            tile_blit_at(solid, tl, br);
+                        }
+                    }
+                }
+            }
+            blit_flush();
+            glEnable(GL_TEXTURE_2D);
+        }
+
+        /*
+         * The water tiles are twice the size of normal tiles, so work out
+         * where to draw them to avoid overlaps
+         */
+        uint8_t water_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
+
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                if (game.state.map.is_water[x][y]) {
+                    auto X = x / 2;
+                    auto Y = y / 2;
+                    X++;
+                    Y++;
+                    water_map[X][Y] = true;
+                    water_map[X+1][Y] = true;
+                    water_map[X-1][Y] = true;
+                    water_map[X][Y+1] = true;
+                    water_map[X][Y-1] = true;
+
+                    water_map[X+1][Y+1] = true;
+                    water_map[X-1][Y+1] = true;
+                    water_map[X+1][Y-1] = true;
+                    water_map[X-1][Y-1] = true;
+                }
+            }
+        }
+
+        /*
+         * Finally blit the water and then the buffer to the display.
+         */
+        glBlendFunc(GL_DST_ALPHA, GL_ZERO);
+        glcolor(WHITE);
+        blit_init();
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = maxx - 1; x >= minx; x--) {
+                auto X = x / 2;
+                auto Y = y / 2;
+                X++;
+                Y++;
+
+                if (water_map[X][Y]) {
+                    water_map[X][Y] = false;
+                    auto tx = (double)(x &~1);
+                    auto ty = (double)(y &~1);
+                    double tlx = tx * game.config.tile_gl_width;
+                    double tly = ty * game.config.tile_gl_height;
+                    double brx = (tx+2.0) * game.config.tile_gl_width;
+                    double bry = (ty+2.0) * game.config.tile_gl_height;
+
+                    tlx += game.config.tile_gl_width / 2.0;
+                    tly += game.config.tile_gl_height / 2.0;
+                    brx += game.config.tile_gl_width / 2.0;
+                    bry += game.config.tile_gl_height / 2.0;
+
+                    tlx -= offset_x;
+                    tly -= offset_y;
+                    brx -= offset_x;
+                    bry -= offset_y;
+
+                    auto tile = water[X % WATER_ACROSS][(Y + (int)step2/4) % WATER_DOWN];
+                    auto x1 = tile->x1;
+                    auto x2 = tile->x2;
+                    auto y1 = tile->y1;
+                    auto y2 = tile->y2;
+
+                    double one_pix = (1.0 / tex_get_width(tile->tex));
+                    y1 += one_pix * step2;
+                    y2 += one_pix * step2;
+
+                    blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
+                }
+            }
+        }
+        blit_flush();
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        blit_fbo_bind(FBO_MAIN);
+        blit_fbo(FBO_LIGHT_MERGED);
+
+        /*
+         * Draw the wave crest
+         */
+        {
+            color c = WHITE;
+            c.a = 150;
+            glcolor(c);
+            glDisable(GL_TEXTURE_2D);
+            blit_init();
+            for (int y = miny; y < maxy; y++) {
+                for (int dy = 0; dy < FLUID_RESOLUTION; dy++) {
+                    for (int x = maxx - 1; x >= minx; x--) {
+                        for (int dx = 0; dx < FLUID_RESOLUTION; dx++) {
+                            int fx = (x*FLUID_RESOLUTION) + dx;
+                            int fy = (y*FLUID_RESOLUTION) + dy;
+                            fluid_t *f = &game.state.map.fluid[fx][fy];
+                            if (!f->mass) {
+                                continue;
+                            }
+                            
+                            fpoint tl(fx * (double)fluid_width - offset_x, 
+                                      fy * (double)fluid_height - offset_y);
+                            fpoint br = tl + fpoint(fluid_width, fluid_height);
+
+                            static double d = RAD_360 / ((double) FLUID_WIDTH / 10.0);
+
+                            if (f->is_surface) {
+                                double water_mass = 
+                                    ((double)f->mass / (double) FLUID_MAX_MASS) * 
+                                    (game.config.tile_gl_height / FLUID_RESOLUTION);
+				double wave_height = sin(d * (double) (fx + wave)) / 2.0;
+
+                                tl.y = br.y - water_mass - 
+                                                game.config.one_pixel_gl_height * wave_height;
+                                tl.y -= game.config.one_pixel_gl_height;
+                                br.y = tl.y + game.config.one_pixel_gl_height;
+                                tile_blit_at(solid, tl, br);
+                            }
+                        }
+                    }
+                }
+            }
+            blit_flush();
+            glEnable(GL_TEXTURE_2D);
+        }
+    }
 
     for (auto t : moved) {
         std::swap(t->br, t->old_br);
