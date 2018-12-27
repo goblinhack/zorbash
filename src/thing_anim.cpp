@@ -228,7 +228,7 @@ void Thing::animate (void)
      */
     uint32_t delay = tile_info_delay_ms(tile);
     if (delay) {
-        delay = delay + (myrand() % delay) / 10;
+        delay = delay + (myrand() % delay) / 5;
     }
 
     t->next_frame_ms = time_get_time_ms_cached() + delay;

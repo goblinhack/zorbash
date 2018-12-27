@@ -122,6 +122,7 @@ bool Thing::update_coordinates (void)
         br.y -= height;
     }
 
+#if 0
     /*
      * So the player floats a bit over the ground
      */
@@ -129,6 +130,7 @@ bool Thing::update_coordinates (void)
         tl.y -= 0.01;
         br.y -= 0.01;
     }
+#endif
 
     if (unlikely(tp_is_animated_can_hflip(tp))) {
         if (flip_start_ms) {
@@ -253,6 +255,10 @@ void Thing::update_pos (fpoint to)
         if (tp_is_rock(tp)) {
             game.state.map.is_rock[old_at.x][old_at.y] = false;
             game.state.map.is_rock[new_at.x][new_at.y] = true;
+        }
+        if (tp_is_wall(tp) || tp_is_rock(tp)) {
+            game.state.map.is_solid[old_at.x][old_at.y] = false;
+            game.state.map.is_solid[new_at.x][new_at.y] = true;
         }
         if (tp_is_floor(tp)) {
             game.state.map.is_floor[old_at.x][old_at.y] = false;

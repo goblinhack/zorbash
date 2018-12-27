@@ -37,10 +37,15 @@
 #define MAP_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define MAP_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 
+#define FLUID_RESOLUTION            8
+#define FLUID_WIDTH                 (MAP_WIDTH * FLUID_RESOLUTION)
+#define FLUID_HEIGHT                (MAP_HEIGHT * FLUID_RESOLUTION)
+#define FLUID_MAX_MASS              64
+
 /*
  * Light sources
  */
-#define MAX_LIGHT_RAYS              (501)
+#define MAX_LIGHT_RAYS              (360)
 
 /*
  * Per screen

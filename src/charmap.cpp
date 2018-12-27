@@ -39,7 +39,7 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::SECRET_CORRIDOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_dusty             = true;
+    c->is_secret_corridor   = true;
 
     char_index              = Charmap::CORRIDOR;
     c = &all_charmaps[char_index];
