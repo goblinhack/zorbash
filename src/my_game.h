@@ -37,6 +37,28 @@ enum {
 
 #include <list>
 
+enum {
+    FLUID_IS_AIR,
+    FLUID_IS_SOLID,
+    FLUID_IS_LAVA,
+    FLUID_IS_ACID,
+    FLUID_IS_WATER,
+};
+
+enum {
+    FLUID_DIR_NONE,
+    FLUID_DIR_LEFT,
+    FLUID_DIR_RIGHT,
+};
+
+typedef uint8_t fluid_mass_t;
+
+typedef struct {
+    fluid_mass_t mass;
+    uint8_t type:3;
+    uint8_t is_surface:3;
+} fluid_t;
+
 class Map {
 public:
     Lights                     all_lights;
@@ -45,6 +67,7 @@ public:
     Things                     all_things;
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_solid[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_light[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -56,11 +79,18 @@ public:
     uint8_t                    is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_key[MAP_WIDTH][MAP_HEIGHT] = {};
+
+    /*
+     * Cellular automatom for fluid flow.
+     */
+    fluid_t fluid[FLUID_WIDTH][FLUID_HEIGHT];
   
     bool is_wall_at(const point &p);
     bool is_wall_at(const int x, const int y);
     bool is_rock_at(const point &p);
     bool is_rock_at(const int x, const int y);
+    bool is_solid_at(const point &p);
+    bool is_solid_at(const int x, const int y);
     bool is_light_at(const point &p);
     bool is_light_at(const int x, const int y);
     bool is_floor_at(const point &p);

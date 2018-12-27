@@ -10,6 +10,7 @@
 #include "my_time_util.h"
 #include "my_player.h"
 #include "my_thing.h"
+#include "my_fluid.h"
 
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
@@ -991,6 +992,8 @@ void sdl_loop (void)
             }
             player_tick();
         }
+
+        fluid_tick();
 
         glcolor(WHITE);
 

@@ -539,13 +539,13 @@ public:
         return false;
     }
 
-    bool is_dusty_at (const int x, const int y)
+    bool is_secret_corridor_at (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
 
-            if (v.is_dusty) {
+            if (v.is_secret_corridor) {
                 return true;
             }
         }

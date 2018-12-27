@@ -43,7 +43,7 @@ public:
     bool                      is_floor             {false};
     bool                      is_corridor          {false};
     bool                      is_dirt              {false};
-    bool                      is_dusty             {false};
+    bool                      is_secret_corridor   {false};
     bool                      is_door              {false};
     bool                      is_secret_door       {false};
     bool                      is_entrance          {false};

@@ -7,6 +7,7 @@
 #include "my_dungeon.h"
 #include "my_thing.h"
 #include "my_light.h"
+#include "my_fluid.h"
 
 class Game game;
 
@@ -472,7 +473,7 @@ static void game_place_blood (class Dungeon *d, std::string what)
 static void game_place_water (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto y = 1; y < MAP_HEIGHT; y++) {
             if (game.state.map.is_water[x][y]) {
                 continue;
             }
@@ -481,7 +482,19 @@ static void game_place_water (class Dungeon *d, std::string what)
                 continue;
             }
 
-            (void) thing_new(what, fpoint(x, y));
+            if (!game.state.map.is_water[x][y-1] &&
+                !game.state.map.is_rock[x][y-1] &&
+                !game.state.map.is_wall[x][y-1]) {
+                /*
+                 * Surface
+                 */
+                (void) thing_new(what, fpoint(x, y));
+            } else {
+                /*
+                 * Sub-surface
+                 */
+                (void) thing_new("water2", fpoint(x, y));
+            }
         }
     }
 }
@@ -743,6 +756,7 @@ void game_display (void)
         memset(game.state.map.is_light, sizeof(game.state.map.is_light), 0);
         memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
         memset(game.state.map.is_rock, sizeof(game.state.map.is_rock), 0);
+        memset(game.state.map.is_solid, sizeof(game.state.map.is_solid), 0);
         memset(game.state.map.is_shadow_caster, sizeof(game.state.map.is_shadow_caster), 0);
         memset(game.state.map.is_wall, sizeof(game.state.map.is_wall), 0);
         memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
@@ -788,10 +802,6 @@ void game_display (void)
         game_place_floor(dungeon, "floor5", 5);
         game_place_floor(dungeon, "floor6", 6);
         game_place_floor(dungeon, "floor6", 0);
-
-        game_place_lava(dungeon, "lava1");
-        game_place_water(dungeon, "water1");
-        game_place_deep_water(dungeon, "deep_water1");
 
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_under_walls(dungeon, "floor6");
@@ -857,6 +867,11 @@ void game_display (void)
         game_fill_void(dungeon, "rock1", 4, 2, 1, tries);
 #endif
         game_place_dirt(dungeon, "dirt1");
+
+        game_place_lava(dungeon, "lava1");
+        game_place_water(dungeon, "water1");
+        game_place_deep_water(dungeon, "deep_water1");
+        fluid_init();
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
