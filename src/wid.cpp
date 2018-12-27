@@ -5562,6 +5562,17 @@ int i1;
 int i2;
 #endif
 
+#if 0
+glBlendEquation(GL_FUNC_ADD);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+#endif
+
 void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 {_
     widp w;

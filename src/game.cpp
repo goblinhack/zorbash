@@ -585,40 +585,13 @@ static void game_place_wall_deco (class Dungeon *d)
     }
 }
 
-static void game_place_floor_under_walls (class Dungeon *d,
-                                          std::string what)
+static void game_place_remaining_floor (class Dungeon *d,
+                                        std::string what)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (!game.state.map.is_floor[x][y] &&
-                !game.state.map.is_dirt[x][y] &&
-                !game.state.map.is_corridor[x][y]) {
-                continue;
-            }
-
-            /*
-             * Not all walls fill the entire space so put a floor beneath
-             * them or they look odd.
-             */
-            if (d->is_wall_at(x, y + 1)) {
-                if (!game.state.map.is_floor[x][y + 1]) {
-                    thing_new(what, fpoint(x, y + 1));
-                }
-            }
-            if (d->is_wall_at(x, y - 1)) {
-                if (!game.state.map.is_floor[x][y - 1]) {
-                    thing_new(what, fpoint(x, y - 1));
-                }
-            }
-            if (d->is_wall_at(x + 1, y)) {
-                if (!game.state.map.is_floor[x + 1][y]) {
-                    thing_new(what, fpoint(x + 1, y));
-                }
-            }
-            if (d->is_wall_at(x - 1, y)) {
-                if (!game.state.map.is_floor[x - 1][y]) {
-                    thing_new(what, fpoint(x - 1, y));
-                }
+            if (!game.state.map.is_floor[x + 1][y]) {
+                thing_new(what, fpoint(x, y));
             }
         }
     }
@@ -804,7 +777,7 @@ void game_display (void)
         game_place_floor(dungeon, "floor6", 0);
 
         game_place_corridor(dungeon, "corridor1", 0);
-        game_place_floor_under_walls(dungeon, "floor6");
+        game_place_remaining_floor(dungeon, "floor6");
         game_place_deco(dungeon);
         game_place_wall_deco(dungeon);
         game_place_blood(dungeon, "blood1");
