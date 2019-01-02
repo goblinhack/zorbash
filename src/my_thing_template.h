@@ -193,6 +193,7 @@ Tpp tp_find_short_name(std::string name);
 void tp_init_after_loading(void);
 Tpp tp_get_random_monst(void);
 Tpp tp_get_random_key(void);
+Tpp tp_get_random_floor(void);
 Tpp tp_get_random_deco(void);
 Tpp tp_get_random_wall_deco(void);
 

@@ -11,6 +11,7 @@ static Tpmap tp_map;
 static Tpmap_create_order tp_create_order_map;
 static Tpmap_create_order tp_monsts;
 static Tpmap_create_order tp_keys;
+static Tpmap_create_order tp_floors;
 static Tpmap_create_order tp_deco;
 static Tpmap_create_order tp_wall_deco;
 
@@ -41,6 +42,8 @@ Tpp tp_load (int id, std::string name)
     }
 
     auto t = new Tp();
+
+    t->raw_name = name;
 
     {
         auto result = tp_map.insert(std::make_pair(name, t));
@@ -154,6 +157,14 @@ void tp_init_after_loading (void)
                 ERR("thing template insert key [%s] failed", tp_name(tp).c_str());
             }
         }
+        if (tp_is_floor(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_floors.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert floor [%s] failed", tp_name(tp).c_str());
+            }
+        }
         if (tp_is_floor_deco(tp)) {
             static unsigned int id;
             id++;
@@ -192,6 +203,19 @@ Tpp tp_get_random_key (void)
     auto m = myrand() % n;
 
     auto iter = tp_keys.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
+}
+
+Tpp tp_get_random_floor (void)
+{_
+    auto n = tp_floors.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_floors.begin();
     while (m--) {
         iter++;
     }
