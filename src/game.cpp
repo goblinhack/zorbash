@@ -516,7 +516,6 @@ static void game_place_lava (class Dungeon *d, std::string what)
     }
 }
 
-#if 0
 static void game_place_blood (class Dungeon *d, std::string what)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
@@ -549,7 +548,6 @@ static void game_place_blood (class Dungeon *d, std::string what)
         }
     }
 }
-#endif
 
 static void game_place_water (class Dungeon *d, std::string what)
 {_
@@ -678,7 +676,6 @@ static void game_place_remaining_floor (class Dungeon *d,
     }
 }
 
-#if 0
 static void game_place_corridor (class Dungeon *d,
                                  std::string what,
                                  int depth)
@@ -699,7 +696,6 @@ static void game_place_corridor (class Dungeon *d,
         }
     }
 }
-#endif
 
 #if 0
 static void game_place_dirt (class Dungeon *d,
@@ -918,10 +914,8 @@ void game_display (void)
         game_place_remaining_walls(dungeon, "wall1");
         game_place_remaining_floor(dungeon, "floor1");
 
-#if 0
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_blood(dungeon, "blood1");
-#endif
         game_place_deco(dungeon);
         game_place_wall_deco(dungeon);
 
