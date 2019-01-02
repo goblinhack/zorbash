@@ -177,7 +177,6 @@ static void game_place_floors (class Dungeon *d,
     }
 }
 
-#if 0
 static void game_place_rocks (class Dungeon *d,
                               std::string what,
                               int variant,
@@ -230,28 +229,30 @@ static void game_place_rocks (class Dungeon *d,
                 auto X = x + dx;
                 game.state.map.is_rock[X][Y] = 1;
 
-                auto s = what;
-                s += ".";
-                s += std::to_string(variant);
-                s += ".";
-                s += std::to_string(block_width);
-                s += "x";
-                s += std::to_string(block_height);
-                s += ".";
-                s += std::to_string(cnt);
-                cnt++;
+                auto tilename = what + ".";
+                tilename += std::to_string(variant);
+                if (!((block_width == 1) && (block_height == 1))) {
+                    tilename += ".";
+                    tilename += std::to_string(block_width);
+                    tilename += "x";
+                    tilename += std::to_string(block_height);
+                    tilename += ".";
+                    tilename += std::to_string(cnt);
+                    cnt++;
+                }
 
                 auto t = thing_new(what, fpoint(X, Y));
-                auto tile = tile_find(s);
+                auto tile = tile_find(tilename);
+                if (!tile) {
+                    DIE("rock tile %s not found", tilename.c_str());
+                }
                 t->current_tileinfo = nullptr;
                 t->current_tile = tile;
             }
         }
     }
 }
-#endif
 
-#if 0
 static void game_fill_void (class Dungeon *d,
                             std::string what,
                             int variant,
@@ -304,26 +305,29 @@ static void game_fill_void (class Dungeon *d,
                 auto X = x + dx;
                 game.state.map.is_rock[X][Y] = 1;
 
-                auto s = what;
-                s += ".";
-                s += std::to_string(variant);
-                s += ".";
-                s += std::to_string(block_width);
-                s += "x";
-                s += std::to_string(block_height);
-                s += ".";
-                s += std::to_string(cnt);
-                cnt++;
+                auto tilename = what + ".";
+                tilename += std::to_string(variant);
+                if (!((block_width == 1) && (block_height == 1))) {
+                    tilename += ".";
+                    tilename += std::to_string(block_width);
+                    tilename += "x";
+                    tilename += std::to_string(block_height);
+                    tilename += ".";
+                    tilename += std::to_string(cnt);
+                    cnt++;
+                }
 
                 auto t = thing_new(what, fpoint(X, Y));
-                auto tile = tile_find(s);
+                auto tile = tile_find(tilename);
+                if (!tile) {
+                    DIE("void rock tile %s not found", tilename.c_str());
+                }
                 t->current_tileinfo = nullptr;
                 t->current_tile = tile;
             }
         }
     }
 }
-#endif
 
 #if 0
 static void game_place_floor (class Dungeon *d,
@@ -552,7 +556,7 @@ static void game_place_blood (class Dungeon *d, std::string what)
 static void game_place_water (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 1; y < MAP_HEIGHT; y++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (game.state.map.is_water[x][y]) {
                 continue;
             }
@@ -561,19 +565,7 @@ static void game_place_water (class Dungeon *d, std::string what)
                 continue;
             }
 
-            if (!game.state.map.is_water[x][y-1] &&
-                !game.state.map.is_rock[x][y-1] &&
-                !game.state.map.is_wall[x][y-1]) {
-                /*
-                 * Surface
-                 */
-                (void) thing_new(what, fpoint(x, y));
-            } else {
-                /*
-                 * Sub-surface
-                 */
-                (void) thing_new("water2", fpoint(x, y));
-            }
+            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
@@ -697,7 +689,6 @@ static void game_place_corridor (class Dungeon *d,
     }
 }
 
-#if 0
 static void game_place_dirt (class Dungeon *d,
                              std::string what)
 {_
@@ -709,7 +700,6 @@ static void game_place_dirt (class Dungeon *d,
         }
     }
 }
-#endif
 
 static void game_place_entrance (class Dungeon *d, std::string what)
 {_
@@ -767,7 +757,6 @@ static void game_place_remaining_walls (class Dungeon *d, std::string what)
     }
 }
 
-#if 0
 static void game_place_remaining_rocks (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -784,7 +773,6 @@ static void game_place_remaining_rocks (class Dungeon *d, std::string what)
         }
     }
 }
-#endif
 
 void game_display (void)
 {_
@@ -919,7 +907,6 @@ void game_display (void)
         game_place_deco(dungeon);
         game_place_wall_deco(dungeon);
 
-#if 0
         game_place_rocks(dungeon, "rock1", 1, 6, 6, tries);
         game_place_rocks(dungeon, "rock1", 2, 6, 6, tries);
 
@@ -946,9 +933,7 @@ void game_display (void)
         game_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
 
         game_place_remaining_rocks(dungeon, "rock1");
-#endif
 
-#if 0
         game_fill_void(dungeon, "rock1", 1, 6, 6, tries);
         game_fill_void(dungeon, "rock1", 2, 6, 6, tries);
 
@@ -975,12 +960,11 @@ void game_display (void)
         game_fill_void(dungeon, "rock1", 3, 2, 1, tries);
         game_fill_void(dungeon, "rock1", 4, 2, 1, tries);
         game_place_dirt(dungeon, "dirt1");
-#endif
 
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
         game_place_deep_water(dungeon, "deep_water1");
-        fluid_init();
+        //fluid_init();
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
