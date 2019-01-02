@@ -993,7 +993,7 @@ void sdl_loop (void)
             player_tick();
         }
 
-        fluid_tick();
+        //fluid_tick();
 
         glcolor(WHITE);
 
