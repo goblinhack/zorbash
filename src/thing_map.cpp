@@ -771,6 +771,8 @@ static void thing_blit_things (int minx, int miny, int minz,
         }
         blit_flush();
 
+#if 0
+#endif
         /*
          * The water tiles are twice the size of normal tiles, so work out
          * where to draw them to avoid overlaps
@@ -995,10 +997,10 @@ glBlendFunc(vals[i1], vals[i2]);
         }
         blit_flush();
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+        glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
         blit_fbo_bind(FBO_MAIN);
         blit_fbo(FBO_LIGHT_MERGED);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     }
 
     /*

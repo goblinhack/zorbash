@@ -127,6 +127,11 @@ static void game_place_floors (class Dungeon *d,
                     continue;
                 }
 
+                if (game.state.map.is_floor[x][y]) {
+                    can_place_floor_here = false;
+                    continue;
+                }
+
                 /*
                  * We place large blocks and avoid splatting them with
                  * smaller ones here.
@@ -836,25 +841,6 @@ void game_display (void)
         game_place_walls(dungeon, "wall1", 4, 2, 1, tries);
 
         int nloops = 100;
-        while (nloops--) {
-            auto tp = tp_get_random_floor();
-            auto s = tp->raw_name;
-
-            int tries = 10;
-            switch (random_range(0, 10)) {
-                case 0: game_place_floors(dungeon, s, 1, 6, 6, tries); break;
-                case 1: game_place_floors(dungeon, s, 1, 6, 3, tries); break;
-                case 2: game_place_floors(dungeon, s, 1, 6, 3, tries); break;
-                case 3: game_place_floors(dungeon, s, 1, 3, 6, tries); break;
-                case 4: game_place_floors(dungeon, s, 1, 3, 6, tries); break;
-                case 5: game_place_floors(dungeon, s, 1, 3, 3, tries); break;
-                case 6: game_place_floors(dungeon, s, 2, 3, 3, tries); break;
-                case 7: game_place_floors(dungeon, s, 1, 2, 2, tries); break;
-                case 8: game_place_floors(dungeon, s, 2, 2, 2, tries); break;
-                case 9: game_place_floors(dungeon, s, 3, 2, 2, tries); break;
-            }
-        }
-        nloops = 100;
         while (nloops--) {
             auto tp = tp_get_random_floor();
             auto s = tp->raw_name;
