@@ -681,11 +681,14 @@ static void thing_blit_things (int minx, int miny, int minz,
             }
         }
 
-#if 0
+        blit_fbo_bind(FBO_LIGHT_MASK);
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         /*
-         * Draw a black outline to the main display.
+         * Draw an outline for the waters edge to its own buffer
          */
-        glcolor(BLACK);
+        glcolor(GRAY70);
         blit_init();
         for (auto y = miny; y < maxy; y++) {
             for (auto x = maxx - 1; x >= minx; x--) {
@@ -715,7 +718,7 @@ static void thing_blit_things (int minx, int miny, int minz,
         blit_flush();
 
         /*
-         * Draw a white outline to the main display.
+         * Draw an inner outline to the same buffer
          */
         glcolor(WHITE);
         glDisable(GL_TEXTURE_2D);
@@ -747,10 +750,10 @@ static void thing_blit_things (int minx, int miny, int minz,
         }
         glEnable(GL_TEXTURE_2D);
         blit_flush();
-#endif
 
         /*
-         * Draw the white bitmap that will be the mask for the texture.
+         * Draw the white bitmap that will be the mask for the texture
+         * again to its own buffer.
          */
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
@@ -771,8 +774,6 @@ static void thing_blit_things (int minx, int miny, int minz,
         }
         blit_flush();
 
-#if 0
-#endif
         /*
          * The water tiles are twice the size of normal tiles, so work out
          * where to draw them to avoid overlaps
@@ -801,7 +802,8 @@ static void thing_blit_things (int minx, int miny, int minz,
         }
 
         /*
-         * Finally blit the water and then the buffer to the display.
+         * Finally blit the transparent water tiles, still to its
+         * own buffer.
          */
         glBlendFunc(GL_DST_ALPHA, GL_ZERO);
         glcolor(WHITE);
@@ -848,6 +850,9 @@ static void thing_blit_things (int minx, int miny, int minz,
         }
         blit_flush();
 
+        /*
+         * Now merge the transparent water and the edge tiles.
+         */
 #if 0
 extern int vals[];
 extern std::string vals_str[];
@@ -856,6 +861,11 @@ extern int i2;
 CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
 glBlendFunc(vals[i1], vals[i2]);
 #endif
+        blit_init();
+        glcolor(WHITE);
+        glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE);
+        blit_fbo(FBO_LIGHT_MASK);
+        blit_flush();
 
         glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
         blit_fbo_bind(FBO_MAIN);
