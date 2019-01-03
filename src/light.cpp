@@ -536,7 +536,7 @@ void Light::render (int fbo)
          * better light color blending but is slower.
          */
         blit_fbo_bind(FBO_LIGHT_MASK);
-        glClearColor(0,0, 0,0);
+        glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
 
