@@ -62,8 +62,8 @@
 /*
  * Dimentions of the fixed text on screen
  */
-#define ASCII_WIDTH                 120
-#define ASCII_HEIGHT                40
+#define ASCII_WIDTH                 100
+#define ASCII_HEIGHT                30
 
 /*
  * Largest tile for collisions
@@ -87,7 +87,7 @@
 //#define FIXED_FONT                "data/ttf/dejavu-nerd.ttf"
 //#define FIXED_FONT                "data/ttf/unscii-16.ttf"
 #define FIXED_FONT                  "data/ttf/PressStart2P.ttf"
-#define FONT_SIZE                   80
+#define FONT_SIZE                   8
 
 #define TTF_GLYPH_MIN               ' '
 #define TTF_GLYPH_MAX               0xffff // SDL can only do 2b fonts
