@@ -5,7 +5,7 @@ def init_text():
 
     #file="data/ttf/dejavu-nerd.ttf_pointsize80.tga",
     zx.tex_load(
-            file="data/ttf/PressStart2P.ttf_pointsize80.tga",
+            file="data/ttf/PressStart2P.ttf_pointsize8.tga",
             name="text")
 
     tiles = [
@@ -1734,19 +1734,29 @@ def init_32x32_water():
             name="32x32_water")
 
     tiles = [
-            "water1.1",
-            "water1.2",
-            "water1.3",
-            "water1.4",
-            "water1.5",
-            "water1.6",
-            "water1.7",
-            "water1.8",
             ########################################################
             "water1a",
             "water2a",
             "water3a",
             "water4a",
+            "water1.1",
+            "water1.2",
+            "water1.3",
+            "water1.4",
+            ########################################################
+            "",
+            "",
+            "",
+            "",
+            "water1.5",
+            "water1.6",
+            "water1.7",
+            "water1.8",
+            ########################################################
+            "water1b",
+            "water2b",
+            "water3b",
+            "water4b",
             "ripple1.1",
             "ripple1.2",
             "ripple1.3",
@@ -1760,24 +1770,6 @@ def init_32x32_water():
             "ripple2.2",
             "ripple2.3",
             "ripple2.4",
-            ########################################################
-            "water1b",
-            "water2b",
-            "water3b",
-            "water4b",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             ########################################################
             "water1c",
             "water2c",
@@ -1809,38 +1801,31 @@ def init_32x32_water():
 
     zx.tile_load_arr(tex_name="32x32_water", width=32, height=32, arr=tiles)
 
+
 def init_32x32_deep_water():
     zx.tex_load(
             file="data/gfx/32x32_deep_water.tga",
             name="32x32_deep_water")
 
     tiles = [
-            "deep_water1.1",
-            "deep_water1.2",
-            "deep_water1.3",
-            "deep_water1.4",
-            "deep_water1.5",
-            "deep_water1.6",
-            "deep_water1.7",
-            "deep_water1.8",
             ########################################################
             "deep_water1a",
             "deep_water2a",
             "deep_water3a",
             "deep_water4a",
-            "",
-            "",
-            "",
-            "",
+            "deep_water1.1",
+            "deep_water1.2",
+            "deep_water1.3",
+            "deep_water1.4",
             ########################################################
             "",
             "",
             "",
             "",
-            "",
-            "",
-            "",
-            "",
+            "deep_water1.5",
+            "deep_water1.6",
+            "deep_water1.7",
+            "deep_water1.8",
             ########################################################
             "deep_water1b",
             "deep_water2b",
@@ -1890,38 +1875,31 @@ def init_32x32_deep_water():
 
     zx.tile_load_arr(tex_name="32x32_deep_water", width=32, height=32, arr=tiles)
 
+
 def init_32x32_lava():
     zx.tex_load(
             file="data/gfx/32x32_lava.tga",
             name="32x32_lava")
 
     tiles = [
-            "lava1.1",
-            "lava1.2",
-            "lava1.3",
-            "lava1.4",
-            "lava1.5",
-            "lava1.6",
-            "lava1.7",
-            "lava1.8",
             ########################################################
             "lava1a",
             "lava2a",
             "lava3a",
             "lava4a",
-            "",
-            "",
-            "",
-            "",
+            "lava1.1",
+            "lava1.2",
+            "lava1.3",
+            "lava1.4",
             ########################################################
             "",
             "",
             "",
             "",
-            "",
-            "",
-            "",
-            "",
+            "lava1.5",
+            "lava1.6",
+            "lava1.7",
+            "lava1.8",
             ########################################################
             "lava1b",
             "lava2b",

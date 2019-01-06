@@ -247,6 +247,13 @@ uint8_t sdl_init (void)
     game.config.one_pixel_gl_height = 
                     game.config.tile_gl_height / (double)TILE_HEIGHT;
 
+    LOG("- video     gl width  %f", game.config.video_gl_width);
+    LOG("- video     gl height %f", game.config.video_gl_height);
+    LOG("- tile      gl width  %f", game.config.tile_gl_width);
+    LOG("- tile      gl height %f", game.config.tile_gl_height);
+    LOG("- one pixel gl width  %f", game.config.one_pixel_gl_width);
+    LOG("- one pixel gl height %f", game.config.one_pixel_gl_height);
+
     LOG("- SDL video   : %dx%d (chosen or from saved file)",
         game.config.video_pix_width, game.config.video_pix_height);
 
@@ -271,12 +278,18 @@ uint8_t sdl_init (void)
         video_flags |= SDL_WINDOW_FULLSCREEN;
     }
 
-    float dpi;
+#if 0
+    /*
+     * For a lo pixel game this makes no sense as the frame
+     * buffers are really large and slows things down.
+     */
     LOG("Calling SDL_GetDisplayDPI");
+    float dpi;
     if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
         LOG("- enable high DPI");
         video_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
     }
+#endif
 
     LOG("Calling SDL_CreateWindow");
     window = SDL_CreateWindow("zorbash",
@@ -1018,6 +1031,7 @@ void sdl_loop (void)
                      * Update FPS counter.
                      */
                     game.state.fps_count = frames;
+                    //CON("%d FPS", game.state.fps_count);
 
                     frames = 0;
                 }

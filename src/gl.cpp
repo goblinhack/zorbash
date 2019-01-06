@@ -146,7 +146,7 @@ static void gl_init_fbo_ (
     GLuint tex_width = game.config.drawable_gl_width;
     GLuint tex_height = game.config.drawable_gl_height;
 
-    LOG("Making FBO, size %d %d",tex_width,tex_height);
+    LOG("Making FBO, size %dx%d", tex_width, tex_height);
 
     glGenTextures(1, fbo_tex_id);
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
@@ -1261,12 +1261,15 @@ gl_push (float **P,
         DIE("overflow on gl bug %s", __FUNCTION__);
     }
 
+//printf("- (%f,%f %f,%f)", glapi_last_right, left, glapi_last_bottom, 
+//bottom);
     if (likely(!first)) {
         /*
          * If there is a break in the triangle strip then make a degenerate
          * triangle.
          */
         if ((glapi_last_right != left) || (glapi_last_bottom != bottom)) {
+//printf("B\n");
             gl_push_texcoord(p, glapi_last_tex_right, glapi_last_tex_bottom);
             gl_push_vertex(p, glapi_last_right, glapi_last_bottom);
             gl_push_rgba(p, r4, g4, b4, a4);
