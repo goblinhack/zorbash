@@ -85,6 +85,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             std::string floor_string;
+            std::string water_string;
             std::string deco_string;
             std::string wall_deco_string;
             std::string walls_string;
@@ -98,15 +99,20 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 if (m.is_floor ||
                     m.is_secret_corridor ||
                     m.is_dirt ||
-                    m.is_lava ||
-                    m.is_deep_water ||
-                    m.is_water) {
+                    m.is_lava) {
                     floor_string += c;
+                    water_string += Charmap::SPACE;
+                } else if (m.is_water ||
+                           m.is_deep_water) {
+                    floor_string += Charmap::FLOOR;
+                    water_string += c;
                 } else if (m.is_door ||
                            m.is_floor_deco) {
                     floor_string += Charmap::FLOOR;
+                    water_string += Charmap::SPACE;
                 } else {
                     floor_string += Charmap::SPACE;
+                    water_string += Charmap::SPACE;
                 }
 
                 if (m.is_wall ||
@@ -158,6 +164,10 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 DIE("room floor width mismatch, %zu, expected %d",
                     floor_string.size(), ROOM_WIDTH);
             }
+            if (water_string.size() != ROOM_WIDTH){
+                DIE("room water width mismatch, %zu, expected %d",
+                    water_string.size(), ROOM_WIDTH);
+            }
             if (deco_string.size() != ROOM_WIDTH){
                 DIE("room deco width mismatch, %zu, expected %d",
                     deco_string.size(), ROOM_WIDTH);
@@ -181,6 +191,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
             for (auto x = 0; x < ROOM_WIDTH; x++) {
                 r->data[x][y][MAP_DEPTH_FLOOR]      = floor_string[x];
+                r->data[x][y][MAP_DEPTH_WATER]      = water_string[x];
                 r->data[x][y][MAP_DEPTH_FLOOR_DECO] = deco_string[x];
                 r->data[x][y][MAP_DEPTH_WALLS]      = walls_string[x];
                 r->data[x][y][MAP_DEPTH_WALLS_DECO] = wall_deco_string[x];

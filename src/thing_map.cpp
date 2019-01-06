@@ -174,7 +174,7 @@ static void thing_blit_water (int minx, int miny, int minz,
         for (auto x = minx; x < maxx; x++) {
             for (auto p : thing_display_order[x][y][z]) {
                 auto t = p.second;
-                if (!tp_is_water(t->tp)) {
+                if (!tp_is_water(t->tp) && !tp_is_deep_water(t->tp)) {
                     continue;
                 }
 
@@ -202,7 +202,7 @@ static void thing_blit_water (int minx, int miny, int minz,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (game.state.map.is_water[x][y]) {
+            if (game.state.map.is_water[x][y] || game.state.map.is_deep_water[x][y]) {
                 auto X = x / 2;
                 auto Y = y / 2;
                 X++;

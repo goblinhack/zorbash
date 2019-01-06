@@ -265,20 +265,20 @@ public:
         //
         // Add a cave as the under-dungeon
         // 
-        cave_gen(50, /* fill prob */
-                 5,  /* R1 */
-                 2,  /* R2 */
-                 10   /* generations */);
+        water_gen(20, /* fill prob */
+                  10,  /* R1 */
+                  5,  /* R2 */
+                  4   /* generations */);
+
+        cave_gen(20, /* fill prob */
+                 10,  /* R1 */
+                 5,  /* R2 */
+                 3   /* generations */);
 
         dirt_gen(20, /* fill prob */
-                 5,  /* R1 */
-                 2,  /* R2 */
-                 10   /* generations */);
-
-        water_gen(50, /* fill prob */
-                 5,  /* R1 */
-                 2,  /* R2 */
-                 10   /* generations */);
+                 10,  /* R1 */
+                 5,  /* R2 */
+                 4   /* generations */);
 
         water_fixup();
 
@@ -3177,7 +3177,7 @@ public:
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             for (auto x = 1; x < MAP_WIDTH - 1; x++) {
                 if (cand[x][y]) {
-                    if (random_range(0, 100) < 80) {
+                    if (random_range(0, 100) < 95) {
                         putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
                     } else {
                         putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
@@ -3222,7 +3222,7 @@ public:
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
-                if ((myrand() % 1000) < MAP_FILL_PROB) {
+                if ((myrand() % 100) < MAP_FILL_PROB) {
                     map_curr[x][y] = 1;
                 }
             }
@@ -3276,7 +3276,7 @@ public:
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
-                if ((myrand() % 1000) < MAP_FILL_PROB) {
+                if ((myrand() % 100) < MAP_FILL_PROB) {
                     map_curr[x][y] = 1;
                 }
             }
@@ -3330,13 +3330,28 @@ public:
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
-                if ((myrand() % 1000) < MAP_FILL_PROB) {
+                if ((myrand() % 100) < MAP_FILL_PROB) {
                     map_curr[x][y] = 1;
                 }
             }
         }
 
         for (i=0; i < MAP_GENERATIONS; i++) {
+
+#if 0
+            for (y=2; y < maze_h-2; y++) {
+                for (x=2; x < maze_w-2; x++) {
+                    if (map_curr[x][y]) {
+                        printf("W");
+                    } else {
+                        printf(" ");
+                    }
+                }
+                printf("\n");
+            }
+printf("----------------------------------\n");
+#endif
+
             cave_generation();
             memcpy(map_curr, map_save, sizeof(map_curr));
             memset(map_save, 0, sizeof(map_save));
