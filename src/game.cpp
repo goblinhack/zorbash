@@ -108,6 +108,7 @@ static void game_place_walls (class Dungeon *d,
 
 static void game_place_floors (class Dungeon *d,
                                std::string what,
+                               int depth,
                                int variant,
                                int block_width,
                                int block_height,
@@ -125,6 +126,13 @@ static void game_place_floors (class Dungeon *d,
 
                 if (d->is_oob(X, Y)) {
                     continue;
+                }
+
+                if (depth) {
+                    if (depth != d->get_grid_depth_at(X, Y)) {
+                        can_place_here = false;
+                        continue;
+                    }
                 }
 
                 if (!d->is_floor_at(X, Y)) {
@@ -163,7 +171,9 @@ static void game_place_floors (class Dungeon *d,
                 auto X = x + dx;
                 game.state.map.is_floor[X][Y] = 1;
 
-                auto tilename = what + ".";
+                auto new_thing = what + std::to_string(depth);
+                auto tilename = new_thing + ".";
+
                 tilename += std::to_string(variant);
                 if (!((block_width == 1) && (block_height == 1))) {
                     tilename += ".";
@@ -175,7 +185,7 @@ static void game_place_floors (class Dungeon *d,
                     cnt++;
                 }
 
-                auto t = thing_new(what, fpoint(X, Y));
+                auto t = thing_new(new_thing, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
                     DIE("floor tile %s not found", tilename.c_str());
@@ -778,57 +788,31 @@ void game_display (void)
         game_place_walls(dungeon, "wall1", 3, 2, 1, tries);
         game_place_walls(dungeon, "wall1", 4, 2, 1, tries);
 
-        game_place_floor_under_objects(dungeon, "floor1", 1);
-        game_place_floor_under_objects(dungeon, "floor2", 2);
-        game_place_floor_under_objects(dungeon, "floor2", 3);
-        game_place_floor_under_objects(dungeon, "floor2", 4);
-        game_place_floor_under_objects(dungeon, "floor2", 5);
-        game_place_floor_under_objects(dungeon, "floor2", 6);
+        for (auto d = 1; d < 3; d++) {
+            int nloops = 10;
+            while (nloops--) {
+                auto s = "floor";
 
-        int nloops = 100;
-        while (nloops--) {
-            auto tp = tp_get_random_floor();
-            auto s = tp->raw_name;
-
-            int tries = 10;
-            switch (random_range(0, 35)) {
-                case 0: game_place_floors(dungeon, s, 1, 6, 6, tries); break;
-                case 1: game_place_floors(dungeon, s, 1, 6, 3, tries); break;
-                case 2: game_place_floors(dungeon, s, 1, 6, 3, tries); break;
-                case 3: game_place_floors(dungeon, s, 1, 3, 6, tries); break;
-                case 4: game_place_floors(dungeon, s, 1, 3, 6, tries); break;
-                case 5: game_place_floors(dungeon, s, 1, 3, 3, tries); break;
-                case 6: game_place_floors(dungeon, s, 2, 3, 3, tries); break;
-                case 7: game_place_floors(dungeon, s, 1, 2, 2, tries); break;
-                case 8: game_place_floors(dungeon, s, 2, 2, 2, tries); break;
-                case 9: game_place_floors(dungeon, s, 3, 2, 2, tries); break;
-                case 10: game_place_floors(dungeon, s, 1, 2, 1, tries); break;
-                case 11: game_place_floors(dungeon, s, 2, 2, 1, tries); break;
-                case 12: game_place_floors(dungeon, s, 3, 2, 1, tries); break;
-                case 13: game_place_floors(dungeon, s, 4, 2, 1, tries); break;
-                case 14: game_place_floors(dungeon, s, 1, 1, 2, tries); break;
-                case 15: game_place_floors(dungeon, s, 2, 1, 2, tries); break;
-                case 16: game_place_floors(dungeon, s, 1, 1, 1, tries); break;
-                case 17: game_place_floors(dungeon, s, 2, 1, 1, tries); break;
-                case 18: game_place_floors(dungeon, s, 3, 1, 1, tries); break;
-                case 19: game_place_floors(dungeon, s, 4, 1, 1, tries); break;
-                case 20: game_place_floors(dungeon, s, 5, 1, 1, tries); break;
-                case 21: game_place_floors(dungeon, s, 6, 1, 1, tries); break;
-                case 22: game_place_floors(dungeon, s, 7, 1, 1, tries); break;
-                case 23: game_place_floors(dungeon, s, 8, 1, 1, tries); break;
-                case 24: game_place_floors(dungeon, s, 9, 1, 1, tries); break;
-                case 25: game_place_floors(dungeon, s, 10, 1, 1, tries); break;
-                case 26: game_place_floors(dungeon, s, 11, 1, 1, tries); break;
-                case 27: game_place_floors(dungeon, s, 12, 1, 1, tries); break;
-                case 28: game_place_floors(dungeon, s, 13, 1, 1, tries); break;
-                case 29: game_place_floors(dungeon, s, 14, 1, 1, tries); break;
-                case 30: game_place_floors(dungeon, s, 15, 1, 1, tries); break;
-                case 31: game_place_floors(dungeon, s, 16, 1, 1, tries); break;
-                case 32: game_place_floors(dungeon, s, 17, 1, 1, tries); break;
-                case 33: game_place_floors(dungeon, s, 18, 1, 1, tries); break;
-                case 34: game_place_floors(dungeon, s, 19, 1, 1, tries); break;
+                int tries = 100;
+                switch (random_range(0, 5)) {
+                    case 0: game_place_floors(dungeon, s, d, 1, 3, 3, tries); break;
+                    case 1: game_place_floors(dungeon, s, d, 2, 3, 3, tries); break;
+                    case 2: game_place_floors(dungeon, s, d, 1, 2, 2, tries); break;
+                    case 3: game_place_floors(dungeon, s, d, 2, 2, 2, tries); break;
+                    case 4: game_place_floors(dungeon, s, d, 3, 2, 2, tries); break;
+                }
             }
         }
+
+        game_place_floor_under_objects(dungeon, "floor1", 1);
+        game_place_floor_under_objects(dungeon, "floor2", 2);
+        game_place_floor_under_objects(dungeon, "floor3", 3);
+        game_place_floor_under_objects(dungeon, "floor4", 4);
+        game_place_floor_under_objects(dungeon, "floor5", 5);
+        game_place_floor_under_objects(dungeon, "floor6", 6);
+        game_place_floor_under_objects(dungeon, "floor7", 7);
+        game_place_floor_under_objects(dungeon, "floor8", 8);
+        game_place_floor_under_objects(dungeon, "floor9", 9);
 
         game_place_remaining_walls(dungeon, "wall1");
         game_place_remaining_floor(dungeon, "floor1");
