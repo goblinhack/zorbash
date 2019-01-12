@@ -114,7 +114,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     static double step2;
     if (step1++ >= 20) {
         step1 = 0;
-        if (step2++ >= 28) {
+        if (step2++ >= (TILE_HEIGHT * 2) - 1) {
             step2 = 0;
         }
     }
@@ -329,7 +329,7 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     static double step2;
     if (step1++ >= 20) {
         step1 = 0;
-        if (step2++ >= 28) {
+        if (step2++ >= (TILE_HEIGHT * 2) - 1) {
             step2 = 0;
         }
     }
@@ -486,7 +486,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     static double step2;
     if (step1++ >= 5) {
         step1 = 0;
-        if (step2++ >= 28) {
+        if (step2++ >= (TILE_HEIGHT * 2) - 1) {
             step2 = 0;
         }
     }
