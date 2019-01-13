@@ -170,6 +170,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glcolor(WHITE);
     blit_init();
+
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             for (auto p : thing_display_order[x][y][z]) {
@@ -225,6 +226,7 @@ static void thing_blit_water (int minx, int miny, int minz,
      * Finally blit the transparent water tiles, still to its
      * own buffer.
      */
+    blit_fbo_bind(FBO_LIGHT_MERGED);
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
     blit_init();
@@ -270,25 +272,30 @@ static void thing_blit_water (int minx, int miny, int minz,
     }
     blit_flush();
 
-// 00:03:16.085: GL_DST_ALPHA                       GL_ONE_MINUS_SRC_ALPHA
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-#endif
-    glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+    /*
+     * Now merge the transparent water and the edge tiles.
+     */
+    blit_init();
+    glcolor(WHITE);
+    glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE);
+    blit_fbo(FBO_LIGHT_MASK);
+    blit_flush();
+
+    glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+    blit_fbo_bind(FBO_MAIN);
+    blit_fbo(FBO_LIGHT_MERGED);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     /*
      * Add reflections
      */
-    color c = GRAY50;
-    c.a = 50;
-    glcolor(c);
-
     blit_init();
-    blit_fbo(FBO_LIGHT_MERGED);
+    blit_fbo_bind(FBO_REFLECTION);
+    glClearColor(0,0,0,0);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    blit_flush();
     for (auto y = maxy - 1; y >= miny; y--) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
@@ -303,21 +310,34 @@ glBlendFunc(vals[i1], vals[i2]);
     }
     blit_flush();
 
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+#endif
     /*
-     * Now merge the transparent water and the edge tiles.
+     * Blend the mask of the water with the above inverted tiles
      */
-    blit_init();
-    glcolor(WHITE);
-    glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE);
-    blit_fbo(FBO_LIGHT_MASK);
-    blit_flush();
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
-    blit_fbo_bind(FBO_MAIN);
+    glBlendFunc(GL_DST_COLOR, GL_ZERO);
     blit_fbo(FBO_LIGHT_MERGED);
+    glEnable(GL_COLOR_LOGIC_OP);
+    glLogicOp(GL_AND_INVERTED);
+    glDisable(GL_COLOR_LOGIC_OP);
+
+    /*
+     * Finally blend the reflection onto the main buffer.
+     */
+    blit_fbo_bind(FBO_MAIN);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    color c = GRAY20;
+    c.a = 120;
+    glcolor(c);
+    blit_fbo(FBO_REFLECTION);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 }
 
 static void thing_blit_deep_water (int minx, int miny, int minz,
@@ -886,6 +906,16 @@ static void thing_blit_things (int minx, int miny, int minz,
                     have_deep_water |= tp_is_deep_water(t->tp);
                     have_water      |= tp_is_water(t->tp);
                     have_blood      |= tp_is_blood(t->tp);
+
+                    if (unlikely(tp_is_animated(t->tp))) {
+                        t->animate();
+                    }
+
+                    if (!tp_is_boring(t->tp)) {
+                        if (t->update_coordinates()) {
+                            moved.push_back(t);
+                        }
+                    }
                 }
             }
         }
@@ -926,12 +956,6 @@ static void thing_blit_things (int minx, int miny, int minz,
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
                     verify(t);
-
-                    if (!tp_is_boring(t->tp)) {
-                        if (t->update_coordinates()) {
-                            moved.push_back(t);
-                        }
-                    }
 
                     t->blit(offset_x, offset_y, x, y);
                 }

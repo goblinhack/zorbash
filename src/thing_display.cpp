@@ -590,10 +590,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         return;
     }
 
-    if (unlikely(tp_is_animated(tp))) {
-        animate();
-    }
-
     Tilep tile;
     if (current_tileinfo) {
         tile = current_tileinfo->tile;
@@ -668,6 +664,18 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         blit_tl.y += diff;
     }
 
+    if (tp_is_outlined(tp)) {
+        tile_blit_fat_outline(tp, tile, blit_tl, blit_br);
+    } else {
+        tile_blit_fat(tp, tile, blit_tl, blit_br);
+    }
 
-    tile_blit_fat(tp, tile, blit_tl, blit_br);
+    if (top_tile) {
+        if (tp_is_wall(tp)) {
+            blit_wall_cladding(blit_tl, blit_br);
+        }
+        if (tp_is_rock(tp)) {
+            blit_rock_cladding(blit_tl, blit_br);
+        }
+    }
 }
