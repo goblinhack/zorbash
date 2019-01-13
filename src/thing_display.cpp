@@ -635,3 +635,39 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         }
     }
 }
+
+void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
+{
+    if (unlikely(is_hidden)) {
+        return;
+    }
+
+    Tilep tile;
+    if (current_tileinfo) {
+        tile = current_tileinfo->tile;
+    } else {
+        tile = current_tile;
+    }
+
+    fpoint blit_tl(tl.x - offset_x, tl.y - offset_y);
+    fpoint blit_br(br.x - offset_x, br.y - offset_y);
+    auto diff = blit_br.y - blit_tl.y;
+
+    std::swap(blit_tl.y, blit_br.y);
+
+    if (tile_get_height(tile) != TILE_HEIGHT) {
+        if (tp_is_blitted_as_sitting_on_the_ground(tp)) {
+            blit_br.y += diff;
+            blit_tl.y += diff;
+        } else {
+            blit_br.y += game.config.tile_gl_height;
+            blit_tl.y += game.config.tile_gl_height;
+        }
+    } else {
+        blit_br.y += diff;
+        blit_tl.y += diff;
+    }
+
+
+    tile_blit_fat(tp, tile, blit_tl, blit_br);
+}

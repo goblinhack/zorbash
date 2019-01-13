@@ -270,9 +270,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * Now merge the transparent water and the edge tiles.
-     */
+// 00:03:16.085: GL_DST_ALPHA                       GL_ONE_MINUS_SRC_ALPHA
 #if 0
 extern int vals[];
 extern std::string vals_str[];
@@ -281,11 +279,40 @@ extern int i2;
 CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
 glBlendFunc(vals[i1], vals[i2]);
 #endif
+    glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+    /*
+     * Add reflections
+     */
+    color c = GRAY50;
+    c.a = 50;
+    glcolor(c);
+
+    blit_init();
+    blit_fbo(FBO_LIGHT_MERGED);
+    for (auto y = maxy - 1; y >= miny; y--) {
+        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
+            for (auto x = minx; x < maxx; x++) {
+                for (auto p : thing_display_order[x][y][z]) {
+                    auto t = p.second;
+                    verify(t);
+
+                    t->blit_upside_down(offset_x, offset_y, x, y);
+                }
+            }
+        }
+    }
+    blit_flush();
+
+    /*
+     * Now merge the transparent water and the edge tiles.
+     */
     blit_init();
     glcolor(WHITE);
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE);
     blit_fbo(FBO_LIGHT_MASK);
     blit_flush();
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
     blit_fbo_bind(FBO_MAIN);
