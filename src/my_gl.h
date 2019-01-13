@@ -377,16 +377,18 @@ void glcolor(color s);
 /*
  * Frame buffer objects
  */
-#define MAX_FBO          3
+#define MAX_FBO          4
 #define FBO_MAIN         0
 #define FBO_LIGHT_MASK   1
 #define FBO_LIGHT_MERGED 2
+#define FBO_REFLECTION   3
 
 extern GLuint render_buf_id[MAX_FBO];
 extern GLuint fbo_id[MAX_FBO];
 extern GLuint fbo_tex_id[MAX_FBO];
 
 void blit_fbo(int fbo);
+void blit_fbo_upside_down(int fbo);
 void blit_fbo_bind(int fbo);
 void blit_fbo_unbind(void);
 

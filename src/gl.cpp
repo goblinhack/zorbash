@@ -232,6 +232,13 @@ void blit_fbo (int fbo)
     blit_flush();
 }
 
+void blit_fbo_upside_down (int fbo)
+{
+    blit_init();
+    blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 1.0, 1.0, 0.0);
+    blit_flush();
+}
+
 void blit_fbo_bind (int fbo)
 {
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, fbo_id[fbo]);

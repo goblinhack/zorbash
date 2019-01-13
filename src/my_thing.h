@@ -241,6 +241,7 @@ public:
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, 
                                       const fpoint &tl, const fpoint &br);
     void blit(double offset_x, double offset_y, int x, int y);
+    void blit_upside_down(double offset_x, double offset_y, int x, int y);
 
     /*
      * thing_hit.cpp
