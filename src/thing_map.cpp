@@ -42,6 +42,19 @@ static void thing_map_scroll_do (void)
                              (double)MAP_WIDTH - TILES_ACROSS);
     game.state.map_at.y = std::min(game.state.map_at.y, 
                              (double)MAP_HEIGHT - TILES_DOWN);
+
+#if 0
+    /*
+     * Round to pixels - didn't seem to help.
+     */
+    game.state.map_at.x *= 1.0 / game.config.one_pixel_gl_width;
+    game.state.map_at.x = (int)game.state.map_at.x;
+    game.state.map_at.x /= 1.0 / game.config.one_pixel_gl_width;
+
+    game.state.map_at.y *= 1.0 / game.config.one_pixel_gl_height;
+    game.state.map_at.y = (int)game.state.map_at.y;
+    game.state.map_at.y /= 1.0 / game.config.one_pixel_gl_height;
+#endif
 }
 
 static void thing_map_scroll_follow_player (void)
@@ -281,10 +294,12 @@ static void thing_blit_water (int minx, int miny, int minz,
     blit_fbo(FBO_LIGHT_MASK);
     blit_flush();
 
+    /*
+     * Blit the combined water to the main buffer.
+     */
     glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
     blit_fbo_bind(FBO_MAIN);
     blit_fbo(FBO_LIGHT_MERGED);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     /*
      * Add reflections
@@ -293,9 +308,8 @@ static void thing_blit_water (int minx, int miny, int minz,
     blit_fbo_bind(FBO_REFLECTION);
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
-
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    blit_flush();
+
     for (auto y = maxy - 1; y >= miny; y--) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
@@ -310,14 +324,6 @@ static void thing_blit_water (int minx, int miny, int minz,
     }
     blit_flush();
 
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-#endif
     /*
      * Blend the mask of the water with the above inverted tiles
      */
@@ -332,12 +338,19 @@ glBlendFunc(vals[i1], vals[i2]);
      */
     blit_fbo_bind(FBO_MAIN);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    color c = GRAY20;
+    color c = CYAN;
     c.a = 120;
     glcolor(c);
     blit_fbo(FBO_REFLECTION);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+#endif
 }
 
 static void thing_blit_deep_water (int minx, int miny, int minz,

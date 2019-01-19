@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_gl.h"
+#include "my_time_util.h"
 
 static void gl_init_fbo(void);
 
@@ -229,6 +230,65 @@ void blit_fbo (int fbo)
 {
     blit_init();
     blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, 1.0, 1.0);
+    blit_flush();
+}
+
+void blit_fbo_ripple (int fbo)
+{
+    double ripple_pixels = 4;
+    double ripple_height = game.config.one_pixel_gl_height * ripple_pixels;
+    int pixels = 1.0 / ripple_height;
+    double y1 = 0.0;
+    double y2 = ripple_height;
+
+    static double ripple[TILE_HEIGHT * MAP_HEIGHT];
+    static uint8_t first = true;
+    static uint32_t last;
+
+    if (first) {
+        first = false;
+        last = time_get_time_ms_cached();
+    }
+
+    int si = game.state.map_at.y * TILE_HEIGHT;
+    int ei = (game.state.map_at.y + TILES_DOWN) * TILE_HEIGHT;
+    if (ei > (int)ARRAY_SIZE(ripple)) {
+        ei = (int)ARRAY_SIZE(ripple);
+    }
+
+    if (time_have_x_tenths_passed_since(1, last)) {
+        for (int i = 0; i < (int)ARRAY_SIZE(ripple); i++) {
+            auto r = myrand() % 100;
+            if (r < 5) {
+                ripple[i] = -game.config.one_pixel_gl_width;
+            } else if (r < 10) {
+                ripple[i] = game.config.one_pixel_gl_width;
+            } else if (r < 20) {
+                ripple[i] = 0;
+            }
+
+//            i += myrand() % 10;
+            i += 16;
+        }
+        last = time_get_time_ms_cached() * 2;
+    }
+
+    blit_init();
+    double x1 = 0;
+    int z = 0;
+    for (int i = 0; i < pixels/ 2; i++) {
+        if (si < (int)ARRAY_SIZE(ripple)) {
+            x1 = ripple[si];
+            si += ripple_pixels;
+        }
+
+        if (z) {
+        blit(fbo_tex_id[fbo], 0.0, 1.0 - y2, 1.0, 1.0 - y1, x1, y2, 1.0 + x1, y1);
+        }
+        z = !z;
+        y1 += ripple_height;
+        y2 += ripple_height;
+    }
     blit_flush();
 }
 
