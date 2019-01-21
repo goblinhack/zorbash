@@ -388,7 +388,6 @@ extern GLuint fbo_id[MAX_FBO];
 extern GLuint fbo_tex_id[MAX_FBO];
 
 void blit_fbo(int fbo);
-void blit_fbo_ripple(int fbo);
 void blit_fbo_upside_down(int fbo);
 void blit_fbo_bind(int fbo);
 void blit_fbo_unbind(void);

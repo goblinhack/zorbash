@@ -1685,7 +1685,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr8)
     TP_SET_DECL(is_rrr9)
     TP_SET_DECL(is_rrr10)
-    TP_SET_DECL(is_rrr11)
+    TP_SET_DECL(is_ripple)
     TP_SET_DECL(is_light_strength)
     TP_SET_DECL(is_dirt)
     TP_SET_DECL(is_blood)
