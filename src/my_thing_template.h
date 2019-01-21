@@ -148,7 +148,7 @@ public:
     int is_rrr8 {};
     int is_rrr9 {};
     int is_rrr10 {};
-    int is_rrr11 {};
+    int is_ripple {};
     int is_light_strength {};
     int is_dirt {};
     int is_blood {};
@@ -192,6 +192,7 @@ Tpp tp_find(uint32_t id);
 Tpp tp_find_short_name(std::string name);
 void tp_init_after_loading(void);
 Tpp tp_get_random_monst(void);
+Tpp tp_get_random_ripple(void);
 Tpp tp_get_random_key(void);
 Tpp tp_get_random_floor(void);
 Tpp tp_get_random_deco(void);
@@ -332,9 +333,9 @@ static inline int tp_is_rrr10 (Tpp t)
     return (t->is_rrr10);
 }
 
-static inline int tp_is_rrr11 (Tpp t)
+static inline int tp_is_ripple (Tpp t)
 {
-    return (t->is_rrr11);
+    return (t->is_ripple);
 }
 
 static inline int tp_is_light_strength (Tpp t)

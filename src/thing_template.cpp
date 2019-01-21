@@ -10,6 +10,7 @@
 static Tpmap tp_map;
 static Tpmap_create_order tp_create_order_map;
 static Tpmap_create_order tp_monsts;
+static Tpmap_create_order tp_ripples;
 static Tpmap_create_order tp_keys;
 static Tpmap_create_order tp_floors;
 static Tpmap_create_order tp_deco;
@@ -149,6 +150,14 @@ void tp_init_after_loading (void)
                 ERR("thing template insert monst [%s] failed", tp_name(tp).c_str());
             }
         }
+        if (tp_is_ripple(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_ripples.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert ripple [%s] failed", tp_name(tp).c_str());
+            }
+        }
         if (tp_is_key(tp)) {
             static unsigned int id;
             id++;
@@ -190,6 +199,19 @@ Tpp tp_get_random_monst (void)
     auto m = myrand() % n;
 
     auto iter = tp_monsts.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
+}
+
+Tpp tp_get_random_ripple (void)
+{_
+    auto n = tp_ripples.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_ripples.begin();
     while (m--) {
         iter++;
     }

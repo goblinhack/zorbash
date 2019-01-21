@@ -182,6 +182,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     }
     if (tp_is_deep_water(tp)) {
         game.state.map.is_deep_water[new_at.x][new_at.y] = true;
+        game.state.map.is_water[new_at.x][new_at.y] = true;
     }
     if (tp_is_corridor(tp)) {
         game.state.map.is_corridor[new_at.x][new_at.y] = true;
@@ -520,6 +521,15 @@ void Thing::move_carried_items (void)
         auto w = thing_find(weapon_use_anim_thing_id);
         w->move_to(at);
         w->dir = dir;
+    }
+
+    /*
+     * Not really an item...
+     */
+    if (tp_is_monst(tp) || tp_is_player(tp)) {
+        if (game.state.map.is_water[(int)at.x][(int)at.y]) {
+            thing_new(tp_name(tp_get_random_ripple()), at);
+        }
     }
 }
 

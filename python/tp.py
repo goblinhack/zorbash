@@ -176,8 +176,8 @@ class Tp:
     def set_is_rrr10(self, value):
         zx.tp_set_is_rrr10(self, value)
 
-    def set_is_rrr11(self, value):
-        zx.tp_set_is_rrr11(self, value)
+    def set_is_ripple(self, value):
+        zx.tp_set_is_ripple(self, value)
 
     def set_is_light_strength(self, value):
         zx.tp_set_is_light_strength(self, value)
