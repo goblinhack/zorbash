@@ -110,30 +110,11 @@ void tile_blit_colored_fat(Tpp tp,
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-static inline void tile_blit_fat (const Tpp &tp, const Tilep &tile, 
-                                  const fpoint &tl, const fpoint &br)
-{
-    double x1;
-    double x2;
-    double y1;
-    double y2;
-
-    /*
-     * Only some walls have deco tiles, so the pointer is left null for
-     * those that do not.
-     */
-    if (!tile) {
-        return;
-    }
-
-    x1 = tile->x1;
-    x2 = tile->x2;
-    y1 = tile->y1;
-    y2 = tile->y2;
-
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
-}
-
+void tile_blit_fat(const Tpp &tp, const Tilep &tile, 
+                   const fpoint &tl, const fpoint &br);
+void tile_blit_section(const Tpp &tp, const Tilep &tile, 
+                       const fpoint &tile_tl, const fpoint &tile_br,
+                       const fpoint &tl, const fpoint &br);
 void tile_blit_fat_outline(const Tpp &tp, const Tilep &tile, 
                            const fpoint &tl, const fpoint &br);
 void tile_blit_shadow(const Tpp &tp, const Tilep &tile, 

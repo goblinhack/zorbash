@@ -600,6 +600,23 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     fpoint blit_tl(tl.x - offset_x, tl.y - offset_y);
     fpoint blit_br(br.x - offset_x, br.y - offset_y);
 
+    fpoint tile_tl(0, 0);
+    fpoint tile_br(1, 1);
+
+    if (tp_is_monst(tp) || tp_is_player(tp)) {
+        if (game.state.map.is_deep_water[(int)at.x][(int)at.y]) {
+            const auto water_depth = 0.5;
+            tile_tl = fpoint(0, 0);
+            tile_br = fpoint(1, 1.0 - water_depth);
+            blit_tl.y += (blit_br.y - blit_tl.y) * water_depth;
+        } else if (game.state.map.is_water[(int)at.x][(int)at.y]) {
+            const auto water_depth = 0.1;
+            tile_tl = fpoint(0, 0);
+            tile_br = fpoint(1, 1.0 - water_depth);
+            blit_tl.y += (blit_br.y - blit_tl.y) * water_depth;
+        }
+    }
+
 #if 0
     if ((mouse_x > blit_tl.x * game.config.video_pix_width) && (mouse_x < blit_br.x * game.config.video_pix_width) &&
         (mouse_y > blit_tl.y * game.config.video_pix_height) && (mouse_y < blit_br.y * game.config.video_pix_height)) {
@@ -616,9 +633,17 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     }
 
     if (tp_is_outlined(tp)) {
-        tile_blit_fat_outline(tp, tile, blit_tl, blit_br);
+        if (game.state.map.is_water[(int)at.x][(int)at.y]) {
+            tile_blit_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+        } else {
+            tile_blit_fat_outline(tp, tile, blit_tl, blit_br);
+        }
     } else {
-        tile_blit_fat(tp, tile, blit_tl, blit_br);
+        if (game.state.map.is_water[(int)at.x][(int)at.y]) {
+            tile_blit_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+        } else {
+            tile_blit_fat(tp, tile, blit_tl, blit_br);
+        }
     }
 
     //if (!tp) { // top_tile) {
