@@ -668,11 +668,15 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     fpoint blit_tl(tl.x - offset_x, tl.y - offset_y);
     fpoint blit_br(br.x - offset_x, br.y - offset_y);
+    fpoint orig_blit_tl = blit_tl;
+    fpoint orig_blit_br = blit_br;
+    double h = blit_br.y - blit_tl.y;
 
     fpoint tile_tl(0, 0);
     fpoint tile_br(1, 1);
 
     bool submerged = false;
+    bool lava = false;
 
     if (tp_is_monst(tp) || 
         tp_is_player(tp) ||
@@ -686,11 +690,12 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
             submerged = true;
         } else if (game.state.map.is_lava[(int)at.x][(int)at.y]) {
-            const auto pct_visible_above_surgace = 0.1;
+            const auto pct_visible_above_surgace = 0.3;
             tile_tl = fpoint(0, 0);
             tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
             blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
             submerged = true;
+            lava = true;
         } else if (game.state.map.is_water[(int)at.x][(int)at.y]) {
             const auto pct_visible_above_surgace = 0.1;
             tile_tl = fpoint(0, 0);
@@ -714,6 +719,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     if (unlikely(tp_is_small_shadow_caster(tp))) {
         if (submerged) {
             blit_shadow_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+            blit_shadow(tp, tile, blit_tl, blit_br);
         } else {
             blit_shadow(tp, tile, blit_tl, blit_br);
         }
@@ -722,6 +728,19 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     if (tp_is_outlined(tp)) {
         if (submerged) {
             tile_blit_outline_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+
+            /*
+             * Show the bottom part of the body transparent
+             */
+            if (!lava) {
+                color c = WHITE;
+                c.a = 150;
+                glcolor(c);
+                blit_br.y = blit_tl.y + h;
+                tile_blit(tp, tile, blit_tl, blit_br);
+            }
+
+            glcolor(WHITE);
         } else {
             tile_blit_outline(tp, tile, blit_tl, blit_br);
         }
@@ -747,6 +766,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 {
     if (unlikely(is_hidden)) {
+        return;
+    }
+
+    if (!game.state.map.is_deep_water[(int)at.x][(int)at.y+1] &&
+        !game.state.map.is_water[(int)at.x][(int)at.y+1]){
         return;
     }
 
@@ -776,10 +800,43 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         blit_tl.y += diff;
     }
 
+    fpoint tile_tl(0, 0);
+    fpoint tile_br(1, 1);
+
+    bool submerged = false;
+
+    if (tp_is_monst(tp) || 
+        tp_is_player(tp) ||
+        tp_is_weapon_use_effect(tp) ||
+        tp_is_weapon_carry_anim(tp)) {
+
+        if (game.state.map.is_deep_water[(int)at.x][(int)at.y]) {
+            const auto pct_visible_above_surgace = 0.5;
+            tile_tl = fpoint(0, 0);
+            tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
+            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
+            submerged = true;
+        } else if (game.state.map.is_water[(int)at.x][(int)at.y]) {
+            const auto pct_visible_above_surgace = 0.1;
+            tile_tl = fpoint(0, 0);
+            tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
+            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
+            submerged = true;
+        }
+    }
+
     if (tp_is_outlined(tp)) {
-        tile_blit_outline(tp, tile, blit_tl, blit_br);
+        if (submerged) {
+            tile_blit_outline_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+        } else {
+            tile_blit_outline(tp, tile, blit_tl, blit_br);
+        }
     } else {
-        tile_blit(tp, tile, blit_tl, blit_br);
+        if (submerged) {
+            tile_blit_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+        } else {
+            tile_blit(tp, tile, blit_tl, blit_br);
+        }
     }
 
     if (top_tile) {
