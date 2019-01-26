@@ -734,7 +734,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
              */
             if (!lava) {
                 color c = WHITE;
-                c.a = 150;
+                c.a = 100;
                 glcolor(c);
                 blit_br.y = blit_tl.y + h;
                 tile_blit(tp, tile, blit_tl, blit_br);
@@ -766,11 +766,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 {
     if (unlikely(is_hidden)) {
-        return;
-    }
-
-    if (!game.state.map.is_deep_water[(int)at.x][(int)at.y+1] &&
-        !game.state.map.is_water[(int)at.x][(int)at.y+1]){
         return;
     }
 
