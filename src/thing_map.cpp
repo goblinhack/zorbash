@@ -310,7 +310,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    for (auto y = maxy - 1; y >= miny; y--) {
+    for (auto y = maxy - 2; y >= miny; y--) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
                 for (auto p : thing_display_order[x][y][z]) {
