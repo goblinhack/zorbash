@@ -8,7 +8,9 @@
 #include "my_tile_info.h"
 #include "my_color.h"
 
-static uint32_t thing_id;
+static uint32_t next_thing_id;
+
+#undef ENABLE_THING_DEBUG
 
 static std::list<uint32_t> things_to_delete;
 
@@ -33,7 +35,7 @@ void thing_gc (void)
 
 Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
 {_
-    auto id = ++thing_id;
+    auto id = ++next_thing_id;
 
     auto t = new Thing(); // std::make_shared< class Thing >();
     auto tp = t->tp = tp_find(tp_name);
@@ -300,9 +302,9 @@ void Thing::remove_hooks ()
 
     if (owner_thing_id && owner) {
 #ifdef ENABLE_THING_DEBUG
-        log("detach from owner %s", owner->logname().c_str());
+        log("detach %d from owner %s", id, owner->logname().c_str());
 #endif
-        if (thing_id == owner->weapon_carry_anim_thing_id) {
+        if (id == owner->weapon_carry_anim_thing_id) {
             unwield("remove hooks");
 
 #ifdef ENABLE_THING_DEBUG
@@ -312,11 +314,10 @@ void Thing::remove_hooks ()
             owner->set_weapon_carry_anim(nullptr);
         }
 
-        if (thing_id == owner->weapon_use_anim_thing_id) {
+        if (id == owner->weapon_use_anim_thing_id) {
 #ifdef ENABLE_THING_DEBUG
             log("detach from use anim owner %s", owner->logname().c_str());
 #endif
-
             owner->set_weapon_use_anim(nullptr);
 
             /*
@@ -420,9 +421,13 @@ void Thing::set_owner (Thingp owner)
 
 void Thing::destroy (void)
 {_
+#ifdef ENABLE_THING_DEBUG
+    log("destroy");
+#else
     if (!tp_is_boring(tp)) {
         log("destroy");
     }
+#endif
 
     detach();
 
@@ -525,7 +530,7 @@ void Thing::move_carried_items (void)
         auto w = thing_find(weapon_use_anim_thing_id);
         if (!w) {
             die("weapon_use_anim_thing_id set to %d but not found",
-                weapon_carry_anim_thing_id);
+                weapon_use_anim_thing_id);
         }
         w->move_to(at);
         w->dir = dir;
