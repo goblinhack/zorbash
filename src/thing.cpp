@@ -513,12 +513,20 @@ void Thing::move_carried_items (void)
      */
     if (weapon_carry_anim_thing_id) {
         auto w = thing_find(weapon_carry_anim_thing_id);
+        if (!w) {
+            die("weapon_carry_anim_thing_id set to %d but not found",
+                weapon_carry_anim_thing_id);
+        }
         w->move_to(at);
         w->dir = dir;
     }
 
     if (weapon_use_anim_thing_id) {
         auto w = thing_find(weapon_use_anim_thing_id);
+        if (!w) {
+            die("weapon_use_anim_thing_id set to %d but not found",
+                weapon_carry_anim_thing_id);
+        }
         w->move_to(at);
         w->dir = dir;
     }

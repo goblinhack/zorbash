@@ -1543,13 +1543,10 @@ void glcolor (color s)
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit_fat_outline (const Tpp &tp, const Tilep &tile, 
+void tile_blit_outline (const Tpp &tp, const Tilep &tile, 
                             const fpoint &tl, const fpoint &br)
 {
-    double x1;
-    double x2;
-    double y1;
-    double y2;
+    double x1, x2, y1, y2;
 
     if (!tile) {
         return;
@@ -1584,13 +1581,55 @@ void tile_blit_fat_outline (const Tpp &tp, const Tilep &tile,
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
-void tile_blit_fat (const Tpp &tp, const Tilep &tile, 
+/*
+ * Blits a whole tile. Y co-ords are inverted.
+ */
+void tile_blit_outline_section (const Tpp &tp, const Tilep &tile, 
+                                const fpoint &tile_tl, const fpoint &tile_br,
+                                const fpoint &tl, const fpoint &br)
+{
+    double x1, x2, y1, y2;
+
+    if (!tile) {
+        return;
+    }
+
+    double tw = tile->x2 - tile->x1;
+    double th = tile->y2 - tile->y1;
+
+    x1 = tile->x1 + tile_tl.x * tw;
+    x2 = tile->x1 + tile_br.x * tw;
+    y1 = tile->y1 + tile_tl.y * th;
+    y2 = tile->y1 + tile_br.y * th;
+
+    glcolor(BLACK);
+    const double delta = 0.0030;
+
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl.x - delta, br.y - delta, br.x - delta, tl.y - delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl.x + delta, br.y + delta, br.x + delta, tl.y + delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl.x - delta, br.y + delta, br.x - delta, tl.y + delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl.x + delta, br.y - delta, br.x + delta, tl.y - delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl.x + delta, br.y, br.x + delta, tl.y);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl.x - delta, br.y, br.x - delta, tl.y);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl.x, br.y + delta, br.x, tl.y + delta);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+         tl.x, br.y - delta, br.x, tl.y - delta);
+
+    glcolor(WHITE);
+    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+}
+
+void tile_blit (const Tpp &tp, const Tilep &tile, 
                     const fpoint &tl, const fpoint &br)
 {
-    double x1;
-    double x2;
-    double y1;
-    double y2;
+    double x1, x2, y1, y2;
 
     /*
      * Only some walls have deco tiles, so the pointer is left null for
@@ -1612,10 +1651,7 @@ void tile_blit_section (const Tpp &tp, const Tilep &tile,
                         const fpoint &tile_tl, const fpoint &tile_br,
                         const fpoint &tl, const fpoint &br)
 {
-    double x1;
-    double x2;
-    double y1;
-    double y2;
+    double x1, x2, y1, y2;
 
     /*
      * Only some walls have deco tiles, so the pointer is left null for

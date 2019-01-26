@@ -339,7 +339,7 @@ Tilep string2tile (std::wstring &s, int *len)
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit_fat_with_offset (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
+void tile_blit_with_offset (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
 {
     double x1;
     double x2;
