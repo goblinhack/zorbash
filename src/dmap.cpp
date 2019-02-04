@@ -15,7 +15,7 @@ void dmap_print_walls (dmap *d)
         for (x = 0; x < MAP_WIDTH; x++) {
             uint8_t e = d->val[x][y];
             if (e == DMAP_IS_WALL) {
-                printf("O");
+                printf("#");
                 continue;
             }
             if (e == DMAP_IS_PASSABLE) {
@@ -43,7 +43,7 @@ void dmap_print (dmap *d)
         for (x = 0; x < MAP_WIDTH; x++) {
             uint8_t e = d->val[x][y];
             if (e == DMAP_IS_WALL) {
-                printf("O  ");
+                printf("## ");
                 continue;
             }
             if (e == DMAP_IS_PASSABLE) {
@@ -230,7 +230,7 @@ void dmap_process (dmap *D)
 #endif
 }
 
-void dmap_process (dmap *D, point start, point end)
+void dmap_process (dmap *D, point tl, point br)
 {
     uint8_t x;
     uint8_t y;
@@ -249,19 +249,19 @@ void dmap_process (dmap *D, point start, point end)
     static uint8_t orig_valid[MAP_WIDTH][MAP_HEIGHT];
 
     int minx, miny, maxx, maxy;
-    if (start.x < end.x) {
-        minx = start.x;
-        maxx = end.x;
+    if (tl.x < br.x) {
+        minx = tl.x;
+        maxx = br.x;
     } else {
-        minx = end.x;
-        maxx = start.x;
+        minx = br.x;
+        maxx = tl.x;
     }
-    if (start.y < end.y) {
-        miny = start.y;
-        maxy = end.y;
+    if (tl.y < br.y) {
+        miny = tl.y;
+        maxy = br.y;
     } else {
-        miny = end.y;
-        maxy = start.y;
+        miny = br.y;
+        maxy = tl.y;
     }
 
     if (minx < 0) {
@@ -502,9 +502,7 @@ void dmap_l_shaped_path_to_diag (const dmap *D, std::vector<point> &path)
     }
 }
 
-std::vector<point> dmap_solve (const dmap *D, 
-                               const point start,
-                               const point end)
+std::vector<point> dmap_solve (const dmap *D, const point start)
 {
     static const std::vector<point> all_deltas = {
         point(0, -1),

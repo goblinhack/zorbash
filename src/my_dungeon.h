@@ -1616,7 +1616,7 @@ public:
         //dmap_print_walls(&d);
 
         //LOG("dmap hash: %llx level hash %llx", dmap_hash(&d), level_hash());
-        auto p = dmap_solve(&d, start, end);
+        auto p = dmap_solve(&d, start);
 
         //
         // Too long a corridor?

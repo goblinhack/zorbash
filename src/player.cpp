@@ -28,7 +28,7 @@ void player_tick (void)
     uint8_t up    = 0;
     uint8_t down  = 0;
     uint8_t fire  = 0;
-    uint8_t run = sdl_shift_held;
+    uint8_t tick  = 0;
 
     const uint8_t *state = SDL_GetKeyboardState(0);
 
@@ -37,6 +37,17 @@ void player_tick (void)
     up     = state[SDL_SCANCODE_UP] ? 1 : 0;
     down   = state[SDL_SCANCODE_DOWN] ? 1 : 0;
     fire   = state[SDL_SCANCODE_SPACE] ? 1 : 0;
+
+    bool key_pressed = false;
+    static uint32_t last_key_pressed_when;
+    if (!last_key_pressed_when) {
+        last_key_pressed_when = time_get_time_ms_cached() - 100;
+    }
+
+    if ((time_get_time_ms_cached() - last_key_pressed_when) > 75) {
+        tick = state[SDL_SCANCODE_PERIOD] ? 1 : 0;
+        key_pressed = true;
+    }
 
     if (sdl_joy_buttons[SDL_JOY_BUTTON_UP]) {
         up = true;
@@ -56,8 +67,6 @@ void player_tick (void)
 
     if (sdl_joy_buttons[SDL_JOY_BUTTON_LEFT_FIRE]) {
         fire = true;
-    } else if (sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT_FIRE]) {
-        run = true;
     }
 
     if (sdl_joy_axes) {
@@ -130,5 +139,17 @@ void player_tick (void)
     }
 #endif
 
-    player->move(future_pos, up, down, left, right, fire);
+    auto moved = player->move(future_pos, up, down, left, right, fire);
+
+    if (moved || tick) {
+        things_tick();
+    }
+
+    if (up || down || left || right || fire) {
+        key_pressed = true;
+    }
+
+    if (key_pressed) {
+        last_key_pressed_when = time_get_time_ms_cached();
+    }
 }

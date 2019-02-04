@@ -1751,8 +1751,7 @@ bool Nodes::create_path_to_exit (int pass)
     //
     if (pass == 2) {
         auto s = point(start.x*2+1, start.y*2+1);
-        auto e = point(end.x*2+1, end.y*2+1);
-        auto p = dmap_solve(&d, s, e);
+        auto p = dmap_solve(&d, s);
         if (p.size() < (unsigned)(grid_width * 2)) {
             return (false);
         }
@@ -2020,7 +2019,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     bool on_critical_path[grid_width][grid_height];
     memset(on_critical_path, 0, sizeof(on_critical_path));
 
-    auto p = dmap_solve(&d, start, end);
+    auto p = dmap_solve(&d, start);
     for (auto c : p) {
         auto X = (c.x - 1) / 2;
         auto Y = (c.y - 1) / 2;

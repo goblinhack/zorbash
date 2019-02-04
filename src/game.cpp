@@ -755,6 +755,7 @@ void game_display (void)
         memset(game.state.map.is_rock, sizeof(game.state.map.is_rock), 0);
         memset(game.state.map.is_solid, sizeof(game.state.map.is_solid), 0);
         memset(game.state.map.is_shadow_caster, sizeof(game.state.map.is_shadow_caster), 0);
+        memset(game.state.map.is_door, sizeof(game.state.map.is_door), 0);
         memset(game.state.map.is_wall, sizeof(game.state.map.is_wall), 0);
         memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
 

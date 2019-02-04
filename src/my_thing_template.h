@@ -147,7 +147,7 @@ public:
     int is_rrr7 {};
     int is_rrr8 {};
     int is_rrr9 {};
-    int is_rrr10 {};
+    int scent_distance {};
     int is_ripple {};
     int is_light_strength {};
     int is_dirt {};
@@ -328,9 +328,9 @@ static inline int tp_is_rrr9 (Tpp t)
     return (t->is_rrr9);
 }
 
-static inline int tp_is_rrr10 (Tpp t)
+static inline int tp_scent_distance (Tpp t)
 {
-    return (t->is_rrr10);
+    return (t->scent_distance);
 }
 
 static inline int tp_is_ripple (Tpp t)

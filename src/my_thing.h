@@ -19,6 +19,7 @@ typedef std::unordered_map< uint32_t, Thingp > Things;
 #include "my_tile_info.h"
 #include "my_time_util.h"
 #include "my_light.h"
+#include "my_dmap.h"
 
 enum {
     THING_DIR_NONE,
@@ -30,6 +31,23 @@ enum {
     THING_DIR_BL,
     THING_DIR_TR,
     THING_DIR_BR,
+};
+
+class Goal
+{
+public:
+    double score = {0};
+    point  at;
+    Thingp thing {};
+
+    Goal () {}
+    Goal (double score) : score(score) { }
+    Goal (Thingp target) : thing(target) { }
+    Goal (point target) : at(target) { }
+
+    friend bool operator<(const class Goal & lhs, const class Goal & rhs) { 
+        return lhs.score < rhs.score;
+    }
 };
 
 class Thing
@@ -174,6 +192,14 @@ public:
     unsigned int       dir:4;
 
     /*
+     * AI
+     */
+    dmap               *dmap_scent;
+    dmap               *dmap_goals;
+    dmap               *dmap_memory;
+    uint8_t            memory {0};
+
+    /*
      * Update thing_new when adding new bitfields.
      */
     unsigned int       is_dead:1;          /* until -std=c++2a remember to update thing.cpp */
@@ -272,6 +298,7 @@ public:
      * thing_move.cpp
      */
     bool update_coordinates(void);
+    bool move(fpoint future_pos);
     bool move(fpoint future_pos,
               const uint8_t up,
               const uint8_t down,
@@ -317,6 +344,14 @@ public:
     void err_(const char *fmt, va_list args); // compile error without
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+
+    /*
+     * thing_ai.cpp
+     */
+    bool is_obstacle_for_me(point p);
+    bool is_goal_for_me(point p);
+    point get_next_hop(void);
+    point choose_best_nh(void);
 };
 
 class ThingDisplaySortKey {
@@ -387,5 +422,10 @@ extern ThingDisplayOrder thing_display_order[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
  */
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
+
+/*
+ * thing_tick.cpp
+ */
+extern void things_tick(void);
 
 #endif /* THING_H */

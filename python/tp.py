@@ -173,8 +173,8 @@ class Tp:
     def set_is_rrr9(self, value):
         zx.tp_set_is_rrr9(self, value)
 
-    def set_is_rrr10(self, value):
-        zx.tp_set_is_rrr10(self, value)
+    def set_scent_distance(self, value):
+        zx.tp_set_scent_distance(self, value)
 
     def set_is_ripple(self, value):
         zx.tp_set_is_ripple(self, value)
