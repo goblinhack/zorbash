@@ -9,13 +9,25 @@
 /*
  * This is movement on the client of the player initiated by the player.
  */
+bool Thing::move (fpoint future_pos)
+{
+    bool up     = future_pos.y < at.y;
+    bool down   = future_pos.y > at.y;
+    bool left   = future_pos.x < at.x;
+    bool right  = future_pos.x > at.x;
+    bool attack = false;
+
+    return (move(future_pos, up, down, left, right, attack));
+}
+
 bool Thing::move (fpoint future_pos,
                   const uint8_t up,
                   const uint8_t down,
                   const uint8_t left,
                   const uint8_t right,
-                  const uint8_t fire)
+                  const uint8_t attack)
 {
+con("move %d %d %d %d", up,down,left,right);
     if (is_dead) {
         return (false);
     }
@@ -23,7 +35,7 @@ bool Thing::move (fpoint future_pos,
     auto x = future_pos.x;
     auto y = future_pos.y;
 
-    if (fire) {
+    if (attack) {
         use();
     }
 
@@ -299,6 +311,10 @@ void Thing::update_pos (fpoint to)
         if (tp_is_shadow_caster(tp)) {
             game.state.map.is_shadow_caster[old_at.x][old_at.y] = false;
             game.state.map.is_shadow_caster[new_at.x][new_at.y] = true;
+        }
+        if (tp_is_door(tp)) {
+            game.state.map.is_door[old_at.x][old_at.y] = false;
+            game.state.map.is_door[new_at.x][new_at.y] = true;
         }
     }
 

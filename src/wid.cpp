@@ -4071,7 +4071,9 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 break;
 
             default: {
-                wid_console_receive_input(wid_console_input_line, key);
+                if (wid_console_window && wid_console_window->visible) {
+                    wid_console_receive_input(wid_console_input_line, key);
+                }
                 break;
             }
         }

@@ -7,6 +7,7 @@
 #include "my_thing.h"
 #include "my_tile_info.h"
 #include "my_color.h"
+#include "my_dmap.h"
 
 static uint32_t next_thing_id;
 
@@ -48,6 +49,13 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     auto result = game.state.map.all_things.insert(p);
     if (result.second == false) {
         DIE("thing insert [%d] failed", id);
+    }
+
+    if (tp_is_monst(tp)) {
+        auto result = game.state.map.all_active_things.insert(p);
+        if (result.second == false) {
+            DIE("thing insert active [%d] failed", id);
+        }
     }
 
     point new_at((int)at.x, (int)at.y);
@@ -201,6 +209,9 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     if (tp_is_shadow_caster(tp)) {
         game.state.map.is_shadow_caster[new_at.x][new_at.y] = true;
     }
+    if (tp_is_door(tp)) {
+        game.state.map.is_door[new_at.x][new_at.y] = true;
+    }
 
     if (tp_is_player(tp)) {
         t->is_player = true;
@@ -234,6 +245,28 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         color c = string2color(l);
         t->light = light_new((double) tp_is_light_strength(tp), 
                           t->at, LIGHT_QUALITY_POINT, c);
+    }
+
+    if (tp_is_monst(tp)) {
+        t->dmap_scent = (__typeof__(t->dmap_scent)) 
+                          mymalloc(sizeof(*t->dmap_scent), "dmap scent");
+    } else {
+        t->dmap_scent = nullptr;
+    }
+
+    if (tp_is_monst(tp)) {
+        t->dmap_goals = (__typeof__(t->dmap_goals)) 
+                          mymalloc(sizeof(*t->dmap_goals), "dmap goals");
+    } else {
+        t->dmap_goals = nullptr;
+    }
+
+    if (tp_is_monst(tp)) {
+        t->dmap_memory = (__typeof__(t->dmap_memory)) 
+                          mymalloc(sizeof(*t->dmap_memory), "dmap memory");
+        memset(t->dmap_memory, 0, sizeof(*t->dmap_memory));
+    } else {
+        t->dmap_memory = nullptr;
     }
 
     return (t);
@@ -446,6 +479,21 @@ void Thing::destroy (void)
         }
     }
 
+    {
+        auto a = &game.state.map.all_active_things;
+        auto iter = a->find(id);
+        if (iter != a->end()) {
+            if (!tp_is_boring(tp)) {
+                log("erasing from active things");
+            }
+            game.state.map.all_active_things.erase(iter);
+        } else {
+            /*
+             * May have been removed already in cleanup. Ignore.
+             */
+        }
+    }
+
     /*
      * Pop from the map
      */
@@ -490,8 +538,26 @@ void Thing::destroy (void)
     if (tp_is_shadow_caster(tp)) {
         game.state.map.is_shadow_caster[old_at.x][old_at.y] = false;
     }
+    if (tp_is_door(tp)) {
+        game.state.map.is_door[old_at.x][old_at.y] = false;
+    }
     if (tp_is_player(tp)) {
         game.state.player = nullptr;
+    }
+
+    if (dmap_scent) {
+        myfree(dmap_scent);
+        dmap_scent = nullptr;
+    }
+
+    if (dmap_goals) {
+        myfree(dmap_goals);
+        dmap_goals = nullptr;
+    }
+
+    if (dmap_memory) {
+        myfree(dmap_memory);
+        dmap_memory = nullptr;
     }
 }
 
