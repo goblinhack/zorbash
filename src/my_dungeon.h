@@ -1524,7 +1524,7 @@ public:
 
     int draw_corridor (point start, point end, char w)
     {
-        dmap d;
+        Dmap d;
 
         memset(&d, 0, sizeof(d));
 
@@ -2603,7 +2603,7 @@ public:
         }
     }
 
-    void dmap_set_walls (dmap *d)
+    void dmap_set_walls (Dmap *d)
     {
         int x, y;
 

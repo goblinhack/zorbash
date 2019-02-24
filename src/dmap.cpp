@@ -6,7 +6,7 @@
 #include "my_main.h"
 #include "my_dmap.h"
 
-void dmap_print_walls (dmap *d)
+void dmap_print_walls (Dmap *d)
 {
     uint8_t x;
     uint8_t y;
@@ -34,7 +34,7 @@ void dmap_print_walls (dmap *d)
     printf("\n");
 }
 
-void dmap_print (dmap *d)
+void dmap_print (Dmap *d)
 {
     uint8_t x;
     uint8_t y;
@@ -62,7 +62,7 @@ void dmap_print (dmap *d)
     printf("\n");
 }
 
-uint64_t dmap_hash (dmap *d)
+uint64_t dmap_hash (Dmap *d)
 {
     uint64_t hash = 0;
 
@@ -79,7 +79,7 @@ uint64_t dmap_hash (dmap *d)
 /*
  * An optimized djkstra map that only looks at map areas that change.
  */
-void dmap_process (dmap *D)
+void dmap_process (Dmap *D)
 {
     uint8_t x;
     uint8_t y;
@@ -230,7 +230,7 @@ void dmap_process (dmap *D)
 #endif
 }
 
-void dmap_process (dmap *D, point tl, point br)
+void dmap_process (Dmap *D, point tl, point br)
 {
     uint8_t x;
     uint8_t y;
@@ -398,7 +398,7 @@ void dmap_process (dmap *D, point tl, point br)
     } while (changed);
 }
 
-static bool is_movement_blocking_at (const dmap *D, int x, int y)
+static bool is_movement_blocking_at (const Dmap *D, int x, int y)
 {
     if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
         return (true);
@@ -414,7 +414,7 @@ static bool is_movement_blocking_at (const dmap *D, int x, int y)
 /*
  * Make L shaped moves into diagonal ones
  */
-void dmap_l_shaped_path_to_diag (const dmap *D, std::vector<point> &path)
+void dmap_l_shaped_path_to_diag (const Dmap *D, std::vector<point> &path)
 {
     for (;/*ever*/;) {
         auto modified = false;
@@ -502,7 +502,7 @@ void dmap_l_shaped_path_to_diag (const dmap *D, std::vector<point> &path)
     }
 }
 
-std::vector<point> dmap_solve (const dmap *D, const point start)
+std::vector<point> dmap_solve (const Dmap *D, const point start)
 {
     static const std::vector<point> all_deltas = {
         point(0, -1),

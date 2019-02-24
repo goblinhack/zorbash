@@ -73,6 +73,8 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         t->dir            = THING_DIR_NONE;
     }
 
+    t->is_hungry      = false;
+    t->is_starving    = false;
     t->is_dead        = false;
     t->is_bloodied    = false;
     t->is_player      = false;
@@ -84,6 +86,9 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->is_bouncing    = false;
     t->is_attached    = false;
     t->is_lit         = false;
+
+    t->health         = tp_has_initial_health(tp);
+    t->max_health     = t->health;
 
     t->timestamp_born = time_get_time_ms_cached();
 
@@ -262,11 +267,10 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     }
 
     if (tp_is_monst(tp)) {
-        t->dmap_memory = (__typeof__(t->dmap_memory)) 
-                          mymalloc(sizeof(*t->dmap_memory), "dmap memory");
-        memset(t->dmap_memory, 0, sizeof(*t->dmap_memory));
+        t->age_map = (__typeof__(t->age_map)) mymalloc(sizeof(*t->age_map), "cell age_map");
+        memset(t->age_map, 0, sizeof(*t->age_map));
     } else {
-        t->dmap_memory = nullptr;
+        t->age_map = nullptr;
     }
 
     return (t);
@@ -555,9 +559,9 @@ void Thing::destroy (void)
         dmap_goals = nullptr;
     }
 
-    if (dmap_memory) {
-        myfree(dmap_memory);
-        dmap_memory = nullptr;
+    if (age_map) {
+        myfree(age_map);
+        age_map = nullptr;
     }
 }
 

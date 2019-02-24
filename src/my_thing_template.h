@@ -143,10 +143,10 @@ public:
     int is_rrr3 {};
     int is_rrr4 {};
     int is_rrr5 {};
-    int is_rrr6 {};
-    int is_rrr7 {};
-    int is_rrr8 {};
-    int is_rrr9 {};
+    int has_initial_health {};
+    int is_starving_at_health_pct {};
+    int is_hungry_at_health_pct {};
+    int has_hunger_tick_every_rounds {};
     int scent_distance {};
     int is_ripple {};
     int is_light_strength {};
@@ -308,24 +308,24 @@ static inline int tp_is_rrr5 (Tpp t)
     return (t->is_rrr5);
 }
 
-static inline int tp_is_rrr6 (Tpp t)
+static inline int tp_is_starving_at_health_pct (Tpp t)
 {
-    return (t->is_rrr6);
+    return (t->is_starving_at_health_pct);
 }
 
-static inline int tp_is_rrr7 (Tpp t)
+static inline int tp_has_initial_health (Tpp t)
 {
-    return (t->is_rrr7);
+    return (t->has_initial_health);
 }
 
-static inline int tp_is_rrr8 (Tpp t)
+static inline int tp_is_hungry_at_health_pct (Tpp t)
 {
-    return (t->is_rrr8);
+    return (t->is_hungry_at_health_pct);
 }
 
-static inline int tp_is_rrr9 (Tpp t)
+static inline int tp_has_hunger_tick_every_rounds (Tpp t)
 {
-    return (t->is_rrr9);
+    return (t->has_hunger_tick_every_rounds);
 }
 
 static inline int tp_scent_distance (Tpp t)

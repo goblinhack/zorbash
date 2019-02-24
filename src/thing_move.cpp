@@ -27,7 +27,6 @@ bool Thing::move (fpoint future_pos,
                   const uint8_t right,
                   const uint8_t attack)
 {
-con("move %d %d %d %d", up,down,left,right);
     if (is_dead) {
         return (false);
     }

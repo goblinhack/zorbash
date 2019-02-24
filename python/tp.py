@@ -161,17 +161,17 @@ class Tp:
     def set_is_rrr5(self, value):
         zx.tp_set_is_rrr5(self, value)
 
-    def set_is_rrr6(self, value):
-        zx.tp_set_is_rrr6(self, value)
+    def set_is_starving_at_health_pct(self, value):
+        zx.tp_set_is_starving_at_health_pct(self, value)
 
-    def set_is_rrr7(self, value):
-        zx.tp_set_is_rrr7(self, value)
+    def set_has_initial_health(self, value):
+        zx.tp_set_has_initial_health(self, value)
 
-    def set_is_rrr8(self, value):
-        zx.tp_set_is_rrr8(self, value)
+    def set_is_hungry_at_health_pct(self, value):
+        zx.tp_set_is_hungry_at_health_pct(self, value)
 
-    def set_is_rrr9(self, value):
-        zx.tp_set_is_rrr9(self, value)
+    def set_has_hunger_tick_every_rounds(self, value):
+        zx.tp_set_has_hunger_tick_every_rounds(self, value)
 
     def set_scent_distance(self, value):
         zx.tp_set_scent_distance(self, value)
