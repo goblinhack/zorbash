@@ -25,10 +25,28 @@ bool Thing::is_obstacle_for_me (point p)
     return (false);
 }
 
-bool Thing::is_goal_for_me (point p)
+bool Thing::is_goal_for_me (point p, int priority)
 {
-    if (game.state.map.is_water_at(p)) {
-        return (true);
+    switch (priority) {
+    case 0:
+        if (is_starving) {
+            if (game.state.map.is_blood_at(p)) {
+                return (true);
+            }
+        }
+        break;
+    case 1:
+        if (is_hungry) {
+            if (game.state.map.is_blood_at(p)) {
+                return (true);
+            }
+        }
+        break;
+    case 2:
+        if (game.state.map.is_water_at(p)) {
+            return (true);
+        }
+        break;
     }
     return (false);
 }
@@ -39,6 +57,7 @@ point Thing::choose_best_nh (void)
     auto miny = 0;
     auto maxx = MAP_WIDTH;
     auto maxy = MAP_HEIGHT;
+    point start((int)at.x, (int)at.y);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -67,6 +86,7 @@ point Thing::choose_best_nh (void)
      * Find all the possible goals we can smell.
      */
     std::multiset<Goal> goals;
+    int oldest = 0;
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -76,54 +96,87 @@ point Thing::choose_best_nh (void)
                 continue;
             }
 
-            if (!is_goal_for_me(p)) {
-                continue;
-            }
-
             /*
-             * We prefer the min score, so closest and not visited recently.
+             * Look at the cell for each priority level. This means we can
+             * have multiple goals per cell. We combine them all together.
              */
-            double score = dmap_scent->val[p.x][p.y];
+            for (auto priority = 0; priority < 3; priority++) {
+                if (!is_goal_for_me(p, priority)) {
+                    continue;
+                }
 
-            double age = memory - dmap_memory->val[p.x][p.y];
-            if (age) {
-                score /= age;
+                double score = dmap_scent->val[p.x][p.y];
+                score += 100 * (priority + 1);
+
+                Goal goal(score);
+                goal.at = p;
+                goals.insert(goal);
+
+                /*
+                 * Also take note of the oldest cell age; we will use this 
+                 * later.
+                 */
+                int age = age_map->val[p.x][p.y];
+                oldest = std::min(oldest, age);
             }
-
-            Goal goal(score);
-            goal.at = p;
-            goals.insert(goal);
         }
     }
 
-    double max_score = 0;
-    for (auto g : goals) {
-        max_score = std::max(g.score, max_score);
+    /*
+     * Combine the scores of multiple goals on each cell.
+     */
+    double cell_totals[MAP_WIDTH][MAP_HEIGHT];
+    memset(&cell_totals, 0, sizeof(cell_totals));
+    double highest_least_preferred = 0;
+    const double wanderlust = 10;
+
+    {
+        uint8_t walked[MAP_WIDTH][MAP_HEIGHT];
+        memset(&walked, 0, sizeof(walked));
+        for (auto g : goals) {
+            auto p = g.at;
+            if (!walked[p.x][p.y]) {
+                int age = age_map->val[p.x][p.y];
+                cell_totals[p.x][p.y] = wanderlust * (age - oldest);
+            }
+
+            walked[p.x][p.y] = true;
+            cell_totals[p.x][p.y] += g.score;
+            auto score = cell_totals[p.x][p.y];
+
+            /*
+             * Find the highest/least preferred score so we can scale all
+             * the goals later.
+             */
+            highest_least_preferred = std::max(highest_least_preferred, score);
+        }
     }
 
+    /*
+     * Scale the goals so they will fit in the dmap.
+     */
     for (auto g : goals) {
-        g.score /= max_score;
-        g.score *= DMAP_IS_PASSABLE / 2;
-        dmap_goals->val[g.at.x][g.at.y] = (int) g.score;
+        auto p = g.at;
+        auto score = cell_totals[p.x][p.y];
+        score /= (double) highest_least_preferred;
+        score *= DMAP_IS_PASSABLE / 2;
+        dmap_goals->val[p.x][p.y] = score;
     }
 
-    point start((int)at.x, (int)at.y);
+    /*
+     * Record we've neen here.
+     */
+    age_map->val[start.x][start.y]++;
 
-    memory++;
-    dmap_memory->val[start.x][start.y]++;
+    /*
+     * Find the best next-hop to the best goal.
+     */
     dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
-
-con("goals:");
     dmap_print(dmap_goals);
     dmap_process(dmap_goals, tl, br);
 
     auto hops = dmap_solve(dmap_goals, start);
     for (auto nh : hops) {
-con("hops %d %d", nh.x, nh.y);
-    }
-
-    for (auto nh : hops) {
-con("best to %d %d", nh.x, nh.y);
         if (nh == start) {
             continue;
         }

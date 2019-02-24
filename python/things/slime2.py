@@ -4,6 +4,10 @@ import tp
 def tp_init(name, short_name):
     x = tp.Tp(name)
 
+    x.set_has_initial_health(20)
+    x.set_has_hunger_tick_every_rounds(10)
+    x.set_is_hungry_at_health_pct(70)
+    x.set_is_starving_at_health_pct(10)
     x.set_is_animated(True)
     x.set_is_blit_y_offset(True)
     x.set_is_blitted_as_sitting_on_the_ground(True)

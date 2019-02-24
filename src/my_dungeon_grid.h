@@ -146,6 +146,6 @@ public:
     bool create_path_to_exit(int pass);
     void create_path_lock_to_key(int depth);
     void make_paths_off_critical_path_reachable(void);
-    void dmap_print_walls(dmap *d);
+    void dmap_print_walls(Dmap *d);
     void remove_redundant_directions(void);
 };

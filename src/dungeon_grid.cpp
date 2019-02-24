@@ -1617,7 +1617,7 @@ void Nodes::remove_stubs (void)
     }
 }
 
-void Nodes::dmap_print_walls (dmap *d)
+void Nodes::dmap_print_walls (Dmap *d)
 {
     for (auto y = 0; y < grid_height * 2 + 1; y++) {
         for (auto x = 0; x < grid_width * 2 + 1; x++) {
@@ -1665,7 +1665,7 @@ bool Nodes::create_path_to_exit (int pass)
         }
     }
     
-    dmap d;
+    Dmap d;
 
     memset(&d, 0, sizeof(d));
 
@@ -1839,7 +1839,7 @@ void Nodes::create_path_lock_to_key (int depth)
         }
     }
     
-    dmap d;
+    Dmap d;
 
     memset(&d, 0, sizeof(d));
 
@@ -1966,7 +1966,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     maxx = grid_width * 2 + 1;
     maxy = grid_height * 2 + 1;
     
-    dmap d;
+    Dmap d;
     memset(&d, 0, sizeof(d));
 
     //

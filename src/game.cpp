@@ -487,7 +487,7 @@ static void game_place_blood (class Dungeon *d, std::string what)
                     continue;
                 }
 
-                if (random_range(0, 1000) < 10) {
+                if (random_range(0, 1000) < 50) {
                     (void) thing_new(what, fpoint(x, y));
                 }
             }

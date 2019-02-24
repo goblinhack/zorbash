@@ -39,25 +39,26 @@ int Thing::hit_actual (Thingp orig_hitter,
     /*
      * Keep hitting until all damage is used up or the thing is dead.
      */
-    log("is hit! hp %d, damage %d", hp, damage);
+    log("is hit! health %d, damage %d", health, damage);
 
     if (this == orig_hitter) {
         die("hitting thyself");
         return (false);
     }
 
-    hp -= damage;
-    if (hp <= 0) {
-        hp = 0;
+    health -= damage;
+    if (health <= 0) {
+        health = 0;
 
         /*
          * Record who dun it.
          */
-        log("is hit terminally, hp %d, damage %d, now dead", hp, damage);
+        log("is hit terminally, health %d, damage %d, now dead", 
+            health, damage);
         dead(orig_hitter, "%s", real_hitter->logname().c_str());
     } else {
-        log("is hit by (%s) for %u, hp now %d",
-            orig_hitter->logname().c_str(), damage, hp);
+        log("is hit by (%s) for %u, health now %d",
+            orig_hitter->logname().c_str(), damage, health);
     }
 
     return (true);

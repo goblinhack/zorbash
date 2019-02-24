@@ -50,6 +50,10 @@ public:
     }
 };
 
+typedef struct AgeMap {
+    int val[MAP_WIDTH][MAP_HEIGHT];
+} AgeMap;
+
 class Thing
 {
 private:
@@ -168,8 +172,9 @@ public:
     /*
      * Only used for display purposes.
      */
-    uint16_t           gold {0};
-    uint16_t           hp {0};
+    int                gold {0};
+    int                health {0};
+    int                max_health {0};
 
     uint32_t           weapon_carry_anim_thing_id {0};
     uint32_t           weapon_use_anim_thing_id {0};
@@ -194,14 +199,26 @@ public:
     /*
      * AI
      */
-    dmap               *dmap_scent;
-    dmap               *dmap_goals;
-    dmap               *dmap_memory;
-    uint8_t            memory {0};
+    Dmap               *dmap_scent;
+    Dmap               *dmap_goals;
+
+    /*
+     * This is an array of how old a cell is since we last visited it with
+     * "memory" below.
+     */
+    AgeMap             *age_map;
+
+    /*
+     * Ticks every time the thing does something. Used from memory aging
+     * to the hunger clock.
+     */
+    int                tick_count {0};
 
     /*
      * Update thing_new when adding new bitfields.
      */
+    unsigned int       is_hungry:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_starving:1;      /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_dead:1;          /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_bloodied:1;      /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_player:1;        /* until -std=c++2a remember to update thing.cpp */
@@ -349,7 +366,7 @@ public:
      * thing_ai.cpp
      */
     bool is_obstacle_for_me(point p);
-    bool is_goal_for_me(point p);
+    bool is_goal_for_me(point p, int priority);
     point get_next_hop(void);
     point choose_best_nh(void);
 };
