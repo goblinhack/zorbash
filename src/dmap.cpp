@@ -34,7 +34,7 @@ void dmap_print_walls (Dmap *d)
     printf("\n");
 }
 
-void dmap_print (Dmap *d)
+void dmap_print (Dmap *d, point start)
 {
     uint8_t x;
     uint8_t y;
@@ -42,6 +42,11 @@ void dmap_print (Dmap *d)
     for (y = 0; y < MAP_HEIGHT; y++) {
         for (x = 0; x < MAP_WIDTH; x++) {
             uint8_t e = d->val[x][y];
+            if (point(x, y) == start) {
+                printf(" @ ");
+                continue;
+            }
+
             if (e == DMAP_IS_WALL) {
                 printf("## ");
                 continue;

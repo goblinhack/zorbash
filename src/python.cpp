@@ -1679,7 +1679,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr2)
     TP_SET_DECL(is_rrr3)
     TP_SET_DECL(is_rrr4)
-    TP_SET_DECL(is_rrr5)
+    TP_SET_DECL(is_active)
     TP_SET_DECL(is_starving_at_health_pct)
     TP_SET_DECL(has_initial_health)
     TP_SET_DECL(is_hungry_at_health_pct)

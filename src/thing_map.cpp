@@ -354,9 +354,9 @@ glBlendFunc(vals[i1], vals[i2]);
 }
 
 static void thing_blit_deep_water (int minx, int miny, int minz,
-                              int maxx, int maxy, int maxz,
-                              double offset_x,
-                              double offset_y)
+                                   int maxx, int maxy, int maxz,
+                                   double offset_x,
+                                   double offset_y)
 {
     auto z = MAP_DEPTH_WATER;
 #define DEEP_WATER_ACROSS 4
@@ -923,14 +923,15 @@ static void thing_blit_things (int minx, int miny, int minz,
                     if (unlikely(tp_is_animated(t->tp))) {
                         t->animate();
                     }
-
-                    if (!tp_is_boring(t->tp)) {
-                        if (t->update_coordinates()) {
-                            moved.push_back(t);
-                        }
-                    }
                 }
             }
+        }
+    }
+
+    for (auto i : game.state.map.all_active_things) {
+        auto t = i.second;
+        if (t->update_coordinates()) {
+            moved.push_back(t);
         }
     }
 
@@ -968,8 +969,6 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (auto x = minx; x < maxx; x++) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
-                    verify(t);
-
                     t->blit(offset_x, offset_y, x, y);
                 }
             }

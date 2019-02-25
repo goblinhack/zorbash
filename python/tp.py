@@ -158,8 +158,8 @@ class Tp:
     def set_is_rrr4(self, value):
         zx.tp_set_is_rrr4(self, value)
 
-    def set_is_rrr5(self, value):
-        zx.tp_set_is_rrr5(self, value)
+    def set_is_active(self, value):
+        zx.tp_set_is_active(self, value)
 
     def set_is_starving_at_health_pct(self, value):
         zx.tp_set_is_starving_at_health_pct(self, value)
@@ -181,9 +181,6 @@ class Tp:
 
     def set_is_light_strength(self, value):
         zx.tp_set_is_light_strength(self, value)
-
-    def set_is_rrr13(self, value):
-        zx.tp_set_is_rrr13(self, value)
 
     def set_is_blood(self, value):
         zx.tp_set_is_blood(self, value)
