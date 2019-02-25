@@ -256,12 +256,12 @@ public:
         double mag;
         double U;
     
- /*
+        /*
          * Can get the squared distance to avoid this.
          */
         mag = distance(L1, L0);
     
- /*
+        /*
          * Project point P onto the line and then calc the dot product.
          */
         U = (((P0.x - L0.x) * (L1.x - L0.x)) +

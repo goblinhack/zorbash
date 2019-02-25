@@ -27,12 +27,16 @@ bool Thing::is_obstacle_for_me (point p)
 
 bool Thing::is_goal_for_me (point p, int priority, double *score)
 {
+    double distance_scale = distance(at, fpoint(p.x, p.y));
+    if (!distance_scale) {
+        distance_scale = 1.0;
+    }
+
     switch (priority) {
     case 0:
         if (is_starving) {
             if (game.state.map.is_blood_at(p)) {
-                // make closer goals preferred
-                *score -= 1000;
+                *score -= 1000 / distance_scale;
                 return (true);
             }
         }
@@ -40,7 +44,7 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
     case 1:
         if (is_hungry) {
             if (game.state.map.is_blood_at(p)) {
-                *score -= 500;
+                *score -= 500 / distance_scale;
                 return (true);
             }
         }
