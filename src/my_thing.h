@@ -267,7 +267,13 @@ public:
     uint8_t is_visible();
     void visible();
     void hide();
+
+    /*
+     * thing_tick.cpp
+     */
     void tick();
+    void achieve_goals_in_life();
+    void hunger_clock();
 
     /*
      * thing_display.cpp
@@ -366,7 +372,7 @@ public:
      * thing_ai.cpp
      */
     bool is_obstacle_for_me(point p);
-    bool is_goal_for_me(point p, int priority);
+    bool is_goal_for_me(point p, int priority, double *score);
     point get_next_hop(void);
     point choose_best_nh(void);
 };

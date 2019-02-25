@@ -142,7 +142,7 @@ public:
     int is_rrr2 {};
     int is_rrr3 {};
     int is_rrr4 {};
-    int is_rrr5 {};
+    int is_active {};
     int has_initial_health {};
     int is_starving_at_health_pct {};
     int is_hungry_at_health_pct {};
@@ -303,9 +303,9 @@ static inline int tp_is_rrr4 (Tpp t)
     return (t->is_rrr4);
 }
 
-static inline int tp_is_rrr5 (Tpp t)
+static inline int tp_is_active (Tpp t)
 {
-    return (t->is_rrr5);
+    return (t->is_active);
 }
 
 static inline int tp_is_starving_at_health_pct (Tpp t)

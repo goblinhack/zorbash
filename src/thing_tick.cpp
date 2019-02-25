@@ -7,10 +7,13 @@
 #include "my_thing.h"
 #include <algorithm>
 
-void Thing::tick (void)
+void Thing::hunger_clock (void)
 {
     tick_count++;
 
+    /*
+     * Update the hunger clock.
+     */
     auto hunger_tick = tp_has_hunger_tick_every_rounds(tp);
     if (hunger_tick) {
         if (!(tick_count % hunger_tick)) {
@@ -34,27 +37,35 @@ void Thing::tick (void)
              ((double) tp_is_starving_at_health_pct(tp) / 100.0));
 
     is_starving = health < starving_at;
-con("h %d hungry %d staving %d hungry_at %d starving_at %d",
-    health,is_hungry,starving_at, hungry_at, starving_at);
+}
+
+void Thing::achieve_goals_in_life (void)
+{
+    /*
+     * If this thing has goals, it can try and reach them.
+     */
+    if (dmap_goals) {
+        auto nh = get_next_hop();
+        fpoint to(nh.x, nh.y);
+        if (at != to) {
+            move(to);
+        }
+    }
+}
+
+void Thing::tick (void)
+{
+    tick_count++;
+
+    hunger_clock();
+    achieve_goals_in_life();
 }
 
 void things_tick (void)
-{
+{_
     for (auto i : game.state.map.all_active_things) {
         Thingp t = i.second;
-        auto tp = t->tp;
-
+        verify(t);
         t->tick();
-
-        if (tp_is_player(tp)) {
-            continue;
-        }
-
-        auto nh = t->get_next_hop();
-        fpoint to(nh.x, nh.y);
-
-        if (t->at != to) {
-            t->move(to);
-        }
     }
 }

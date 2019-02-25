@@ -51,7 +51,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         DIE("thing insert [%d] failed", id);
     }
 
-    if (tp_is_monst(tp)) {
+    if (tp_is_active(tp)) {
         auto result = game.state.map.all_active_things.insert(p);
         if (result.second == false) {
             DIE("thing insert active [%d] failed", id);

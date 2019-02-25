@@ -647,9 +647,11 @@ void Thing::blit_shadow_section (const Tpp &tp, const Tilep &tile,
                                  const fpoint &tl, const fpoint &br)
 {
     if (tp_is_player(tp) || (owner_thing_id == game.state.player->id)) {
-        blit_player_owned_shadow_section(tp, tile, tile_tl, tile_br, tl, br);
+        blit_player_owned_shadow_section(
+            tp, tile, tile_tl, tile_br, tl, br);
     } else {
-        blit_non_player_owned_shadow_section(tp, tile, tile_tl, tile_br, tl, br);
+        blit_non_player_owned_shadow_section(
+            tp, tile, tile_tl, tile_br, tl, br);
     }
 }
 
@@ -727,7 +729,8 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     if (tp_is_outlined(tp)) {
         if (submerged) {
-            tile_blit_outline_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+            tile_blit_outline_section(
+                tp, tile, tile_tl, tile_br, blit_tl, blit_br);
 
             /*
              * Show the bottom part of the body transparent

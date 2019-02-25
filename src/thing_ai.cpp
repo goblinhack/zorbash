@@ -25,12 +25,14 @@ bool Thing::is_obstacle_for_me (point p)
     return (false);
 }
 
-bool Thing::is_goal_for_me (point p, int priority)
+bool Thing::is_goal_for_me (point p, int priority, double *score)
 {
     switch (priority) {
     case 0:
         if (is_starving) {
             if (game.state.map.is_blood_at(p)) {
+                // make closer goals preferred
+                *score -= 1000;
                 return (true);
             }
         }
@@ -38,6 +40,7 @@ bool Thing::is_goal_for_me (point p, int priority)
     case 1:
         if (is_hungry) {
             if (game.state.map.is_blood_at(p)) {
+                *score -= 500;
                 return (true);
             }
         }
@@ -101,11 +104,12 @@ point Thing::choose_best_nh (void)
              * have multiple goals per cell. We combine them all together.
              */
             for (auto priority = 0; priority < 3; priority++) {
-                if (!is_goal_for_me(p, priority)) {
+                double score = 0;
+                if (!is_goal_for_me(p, priority, &score)) {
                     continue;
                 }
 
-                double score = dmap_scent->val[p.x][p.y];
+                score += dmap_scent->val[p.x][p.y];
                 score += 100 * (priority + 1);
 
                 Goal goal(score);
@@ -128,6 +132,7 @@ point Thing::choose_best_nh (void)
     double cell_totals[MAP_WIDTH][MAP_HEIGHT];
     memset(&cell_totals, 0, sizeof(cell_totals));
     double highest_least_preferred = 0;
+    double lowest_most_preferred = 0;
     const double wanderlust = 10;
 
     {
@@ -149,6 +154,7 @@ point Thing::choose_best_nh (void)
              * the goals later.
              */
             highest_least_preferred = std::max(highest_least_preferred, score);
+            lowest_most_preferred = std::min(lowest_most_preferred, score);
         }
     }
 
@@ -158,7 +164,8 @@ point Thing::choose_best_nh (void)
     for (auto g : goals) {
         auto p = g.at;
         auto score = cell_totals[p.x][p.y];
-        score /= (double) highest_least_preferred;
+        score = score - lowest_most_preferred;
+        score /= (highest_least_preferred - lowest_most_preferred);
         score *= DMAP_IS_PASSABLE / 2;
         dmap_goals->val[p.x][p.y] = score;
     }
@@ -172,7 +179,7 @@ point Thing::choose_best_nh (void)
      * Find the best next-hop to the best goal.
      */
     dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
-    dmap_print(dmap_goals);
+    dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
 
     auto hops = dmap_solve(dmap_goals, start);
