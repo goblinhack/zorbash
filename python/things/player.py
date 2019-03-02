@@ -10,6 +10,7 @@ def tp_init(name, short_name):
     x.set_is_animated(True)
     x.set_is_animated_can_hflip(True)
     x.set_is_blit_y_offset(True)
+    x.set_is_made_of_meat(True)
     x.set_is_movable(True)
     x.set_is_outlined(True)
     x.set_is_player(True)
