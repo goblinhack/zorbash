@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_main.h"
 #include "my_tile_info.h"
@@ -71,14 +71,14 @@ Tpp tp_load (int id, std::string name)
 
 void tp_update (Tpp t)
 {_
-    /*
-     * Hook point to modify tps post python config.
-     */
+    //
+    // Hook point to modify tps post python config.
+    //
 }
 
-/*
- * Find an existing thing.
- */
+//
+// Find an existing thing.
+//
 Tpp tp_find (std::string name)
 {_
     if (name == "") {
@@ -94,9 +94,9 @@ Tpp tp_find (std::string name)
     return (result->second);
 }
 
-/*
- * Find an existing thing.
- */
+//
+// Find an existing thing.
+//
 Tpp tp_find (uint32_t id)
 {_
     auto result = tp_create_order_map[id];
@@ -130,9 +130,9 @@ Tilep tp_first_tile (Tpp tp)
         DIE("tp %s has no tiles", tp_name(tp).c_str());
     }
 
-    /*
-     * Get the first anim tile.
-     */
+    //
+    // Get the first anim tile.
+    //
     auto Tileinfo = tile_info_first(tiles);
 
     return (Tileinfo->tile);

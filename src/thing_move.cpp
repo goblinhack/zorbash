@@ -1,14 +1,14 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_game.h"
 #include "my_thing.h"
 
-/*
- * This is movement on the client of the player initiated by the player.
- */
+//
+// This is movement on the client of the player initiated by the player.
+//
 bool Thing::move (fpoint future_pos)
 {
     bool up     = future_pos.y < at.y;
@@ -96,9 +96,9 @@ bool Thing::update_coordinates (void)
         tile = current_tile;
     }
 
-    /*
-     * Scale up tiles that are larger to the same pix scale.
-     */
+    //
+    // Scale up tiles that are larger to the same pix scale.
+    //
     if (unlikely((tile->pix_width != TILE_WIDTH) ||
                  (tile->pix_height != TILE_HEIGHT))) {
         auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
@@ -112,9 +112,9 @@ bool Thing::update_coordinates (void)
         br.y = my + (ytiles * tile_gl_height);
     }
 
-    /*
-     * Put larger tiles on the same y base as small ones.
-     */
+    //
+    // Put larger tiles on the same y base as small ones.
+    //
     if (unlikely(tp_is_blitted_as_sitting_on_the_ground(tp))) {
         double y_offset = 
             (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) * 
@@ -123,9 +123,9 @@ bool Thing::update_coordinates (void)
         br.y -= y_offset;
     }
 
-    /*
-     * Boing.
-     */
+    //
+    // Boing.
+    //
     if (unlikely(is_bouncing)) {
         double height = get_bounce();
 
@@ -134,9 +134,9 @@ bool Thing::update_coordinates (void)
     }
 
 #if 0
-    /*
-     * So the player floats a bit over the ground
-     */
+    //
+    // So the player floats a bit over the ground
+    //
     if (tp_is_blit_y_offset(tp)) {
         tl.y -= 0.01;
         br.y -= 0.01;
@@ -179,9 +179,9 @@ bool Thing::update_coordinates (void)
         }
     }
 
-    /*
-     * If we've moved, need to update the display sort order.
-     */
+    //
+    // If we've moved, need to update the display sort order.
+    //
     if (br != old_br) {
         return (true);
     }
@@ -255,9 +255,9 @@ void Thing::update_pos (fpoint to)
         last_at = at;
     }
 
-    /*
-     * Keep track of where this thing is on the grid
-     */
+    //
+    // Keep track of where this thing is on the grid
+    //
     if (old_at != new_at) {
         if (tp_is_wall(tp)) {
             game.state.map.is_wall[old_at.x][old_at.y] = false;
@@ -317,10 +317,10 @@ void Thing::update_pos (fpoint to)
         }
     }
 
-    /*
-     * Moves are immediate, but we render the move in steps, hence keep
-     * track of when we moved.
-     */
+    //
+    // Moves are immediate, but we render the move in steps, hence keep
+    // track of when we moved.
+    //
     at = to;
     begin_move_ms = time_get_time_ms_cached();
     end_move_ms = begin_move_ms + ONESEC / 10;
@@ -330,10 +330,10 @@ void Thing::update_pos (fpoint to)
 
 void Thing::move_delta (fpoint delta)
 {_
-    /*
-     * If not moving and this is the first move then break out of the
-     * idle animation.
-     */
+    //
+    // If not moving and this is the first move then break out of the
+    // idle animation.
+    //
     if (is_dir_none()) {
         next_frame_ms = time_get_time_ms_cached();
     }

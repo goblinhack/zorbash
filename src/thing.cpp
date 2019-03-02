@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_game.h"
 #include "my_thing.h"
@@ -28,9 +28,9 @@ void thing_gc (void)
         delete t;
     }
 
-    /*
-     * No need to call remove as we did the safe destroy above.
-     */
+    //
+    // No need to call remove as we did the safe destroy above.
+    //
     things_to_delete.clear();
 }
 
@@ -280,9 +280,9 @@ void Thing::hide (void)
 {_
     is_hidden = true;
 
-    /*
-     * Hide the weapon too or it just floats in the air.
-     */
+    //
+    // Hide the weapon too or it just floats in the air.
+    //
     auto weapon_carry_anim = get_weapon_carry_anim();
     if (weapon_carry_anim) {
         weapon_carry_anim->hide();
@@ -293,24 +293,24 @@ void Thing::visible (void)
 {_
     is_hidden = false;
 
-    /*
-     * If this thing has an owner, should the thing stay hidden?
-     */
+    //
+    // If this thing has an owner, should the thing stay hidden?
+    //
     auto owner = get_owner();
     if (owner) {
         if (this == owner->get_weapon_carry_anim()) {
             if (owner->get_weapon_use_anim()) {
-                /*
-                 * Stay hidden until the weapon use is done.
-                 */
+                //
+                // Stay hidden until the weapon use is done.
+                //
                 return;
             }
         }
     }
 
-    /*
-     * Reveal the weapon again too.
-     */
+    //
+    // Reveal the weapon again too.
+    //
     auto weapon_carry_anim = get_weapon_carry_anim();
     if (weapon_carry_anim) {
         weapon_carry_anim->visible();
@@ -322,15 +322,15 @@ uint8_t Thing::is_visible (void)
     return (!is_hidden);
 }
 
-/*
- * Get rid of all the hooks to other things that this thing has. e.g. the
- * weapons it carries etc.
- */
+//
+// Get rid of all the hooks to other things that this thing has. e.g. the
+// weapons it carries etc.
+//
 void Thing::remove_hooks ()
 {_
-    /*
-     * We are owned by something. i.e. we are a sword.
-     */
+    //
+    // We are owned by something. i.e. we are a sword.
+    //
     Thingp owner = 0;
 
     if (owner_thing_id) {
@@ -357,15 +357,15 @@ void Thing::remove_hooks ()
 #endif
             owner->set_weapon_use_anim(nullptr);
 
-            /*
-             * End of the use animation, make the sword visible again.
-             */
+            //
+            // End of the use animation, make the sword visible again.
+            //
             auto carrying = owner->get_weapon_carry_anim();
             if (carrying) {
-                /*
-                 * But only if the owner is visible. They may have reached the
-                 * level.
-                 */
+                //
+                // But only if the owner is visible. They may have reached the
+                // level.
+                //
                 if (owner->is_visible()) {
                     carrying->visible();
                 }
@@ -375,9 +375,9 @@ void Thing::remove_hooks ()
         set_owner(nullptr);
     }
 
-    /*
-     * We own things like a sword. i.e. we are a player.
-     */
+    //
+    // We own things like a sword. i.e. we are a player.
+    //
     if (weapon_carry_anim_thing_id) {
         auto item = get_weapon_carry_anim();
         set_weapon_carry_anim(nullptr);
@@ -394,9 +394,9 @@ void Thing::remove_hooks ()
         item->dead("weapon use anim owner killed");
     }
 
-    /*
-     * Some things have lots of things they own
-     */
+    //
+    // Some things have lots of things they own
+    //
     if (owned_count) {
         log("Remove remaining %u owned things", owned_count);
 
@@ -477,9 +477,9 @@ void Thing::destroy (void)
             }
             game.state.map.all_things.erase(iter);
         } else {
-            /*
-             * May have been removed already in cleanup. Ignore.
-             */
+            //
+            // May have been removed already in cleanup. Ignore.
+            //
         }
     }
 
@@ -492,15 +492,15 @@ void Thing::destroy (void)
             }
             game.state.map.all_active_things.erase(iter);
         } else {
-            /*
-             * May have been removed already in cleanup. Ignore.
-             */
+            //
+            // May have been removed already in cleanup. Ignore.
+            //
         }
     }
 
-    /*
-     * Pop from the map
-     */
+    //
+    // Pop from the map
+    //
     point old_at((int)at.x, (int)at.y);
 
     if (tp_is_wall(tp)) {
@@ -567,9 +567,9 @@ void Thing::destroy (void)
 
 void Thing::update_light (void)
 {_
-    /*
-     * Light source follows the thing.
-     */
+    //
+    // Light source follows the thing.
+    //
     if (light) {
         light->move_to(interpolated_at);
         light->calculate();
@@ -578,14 +578,14 @@ void Thing::update_light (void)
 
 void Thing::move_carried_items (void)
 {_
-    /*
-     * Light source follows the thing.
-     */
+    //
+    // Light source follows the thing.
+    //
     update_light();
 
-    /*
-     * Weapons follow also.
-     */
+    //
+    // Weapons follow also.
+    //
     if (weapon_carry_anim_thing_id) {
         auto w = thing_find(weapon_carry_anim_thing_id);
         if (!w) {
@@ -606,9 +606,9 @@ void Thing::move_carried_items (void)
         w->dir = dir;
     }
 
-    /*
-     * Not really an item...
-     */
+    //
+    // Not really an item...
+    //
     if (tp_is_monst(tp) || tp_is_player(tp)) {
         if (game.state.map.is_water[(int)at.x][(int)at.y]) {
             thing_new(tp_name(tp_get_random_ripple()), at);
@@ -616,9 +616,9 @@ void Thing::move_carried_items (void)
     }
 }
 
-/*
- * Find an existing thing.
- */
+//
+// Find an existing thing.
+//
 Thingp thing_find (uint32_t id)
 {_
     auto result = game.state.map.all_things.find(id);
@@ -631,9 +631,9 @@ Thingp thing_find (uint32_t id)
 
 std::string Thing::logname (void)
 {_
-    /*
-     * Return constant strings from a small pool.
-     */
+    //
+    // Return constant strings from a small pool.
+    //
     static char tmp[10][MAXSTR];
     static int loop;
 

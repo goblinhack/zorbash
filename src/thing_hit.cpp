@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_main.h"
 #include "my_tile.h"
@@ -12,23 +12,23 @@ int Thing::hit_actual (Thingp orig_hitter,
                        Thingp hitter, 
                        int damage)
 {
-    /*
-     * Cruel to let things keep on hitting you when you're dead
-     */
+    //
+    // Cruel to let things keep on hitting you when you're dead
+    //
     if (is_dead) {
         return (false);
     }
 
     if (!damage) {
-        /*
-         * Could be a spider silkball
-         */
+        //
+        // Could be a spider silkball
+        //
         return (false);
     }
 
-    /*
-     * Protect player from multiple impact - landing hard on a spike.
-     */
+    //
+    // Protect player from multiple impact - landing hard on a spike.
+    //
     if (is_player) {
         if (!time_have_x_tenths_passed_since(10, timestamp_last_i_was_hit)) {
             return (false);
@@ -36,9 +36,9 @@ int Thing::hit_actual (Thingp orig_hitter,
         timestamp_last_i_was_hit = time_get_time_ms_cached();
     }
 
-    /*
-     * Keep hitting until all damage is used up or the thing is dead.
-     */
+    //
+    // Keep hitting until all damage is used up or the thing is dead.
+    //
     log("is hit! health %d, damage %d", health, damage);
 
     if (this == orig_hitter) {
@@ -50,9 +50,9 @@ int Thing::hit_actual (Thingp orig_hitter,
     if (health <= 0) {
         health = 0;
 
-        /*
-         * Record who dun it.
-         */
+        //
+        // Record who dun it.
+        //
         log("is hit terminally, health %d, damage %d, now dead", 
             health, damage);
         dead(orig_hitter, "%s", real_hitter->logname().c_str());
@@ -64,16 +64,16 @@ int Thing::hit_actual (Thingp orig_hitter,
     return (true);
 }
 
-/*
- * Returns true on the target being dead.
- */
+//
+// Returns true on the target being dead.
+//
 int Thing::hit_possible (Thingp hitter, int damage)
 {
     Thingp orig_hitter = hitter;
 
-    /*
-     * If an arrow, who really fired it?
-     */
+    //
+    // If an arrow, who really fired it?
+    //
     Thingp real_hitter = nullptr;
 
     if (hitter) {
@@ -89,55 +89,55 @@ int Thing::hit_possible (Thingp hitter, int damage)
         verify(hitter);
     }
 
-    /*
-     * Cruel to let things keep on hitting you when you're dead
-     */
+    //
+    // Cruel to let things keep on hitting you when you're dead
+    //
     if (is_dead) {
         return (false);
     }
 
     if (hitter && hitter->is_dead) {
-        /*
-         * This case is hit if a ghost runs into a player. The ghost takes
-         * damage. We don't want the player to keep absorbing hits when
-         * already dead though.
-         */
+        //
+        // This case is hit if a ghost runs into a player. The ghost takes
+        // damage. We don't want the player to keep absorbing hits when
+        // already dead though.
+        //
         return (false);
     }
 
-    /*
-     * Explosions are only dangerous in the intitial blast.
-     */
+    //
+    // Explosions are only dangerous in the intitial blast.
+    //
     if (hitter && tp_is_explosion(hitter->tp)) {
         if (time_have_x_tenths_passed_since(10, hitter->timestamp_born)) {
             return (false);
         }
     }
 
-    /*
-     * Check to see if this is a thing that can be damaged by the hitter.
-     */
+    //
+    // Check to see if this is a thing that can be damaged by the hitter.
+    //
     if (hitter) {
-        /*
-         * Walls and doors and other solid object are not damaged by poison
-         * or similar effects. Limit it to explosions and the like.
-         */
+        //
+        // Walls and doors and other solid object are not damaged by poison
+        // or similar effects. Limit it to explosions and the like.
+        //
         if (tp_is_door(tp) || tp_is_wall(tp)) {
 
             if (!tp_is_explosion(hitter->tp)     &&
                 !tp_is_projectile(hitter->tp)    &&
                 !tp_is_weapon_use_effect(hitter->tp)) {
-                /*
-                 * Not something that typically damages walls.
-                 */
+                //
+                // Not something that typically damages walls.
+                //
                 return (false);
             }
         }
 
         if (tp_is_weapon_use_effect(hitter->tp)) {
-            /*
-             * Get the player using the weapon as the hitter.
-             */
+            //
+            // Get the player using the weapon as the hitter.
+            //
             hitter = hitter->get_owner();
             if (!hitter) {
                 return (false);
@@ -145,9 +145,9 @@ int Thing::hit_possible (Thingp hitter, int damage)
 
             verify(hitter);
 
-            /*
-             * Get the damage from the weapon being used to use.
-             */
+            //
+            // Get the damage from the weapon being used to use.
+            //
             weapon = hitter->get_weapon();
             if (!weapon) {
                 return (false);
@@ -158,9 +158,9 @@ int Thing::hit_possible (Thingp hitter, int damage)
             }
 
         } else if (hitter->get_owner()) {
-            /*
-             * Get the player firing the weapon as the hitter.
-             */
+            //
+            // Get the player firing the weapon as the hitter.
+            //
             hitter = hitter->get_owner();
             if (!hitter) {
                 return (false);
@@ -168,9 +168,9 @@ int Thing::hit_possible (Thingp hitter, int damage)
 
             verify(hitter);
 
-            /*
-             * Get the damage from the weapon being used to use.
-             */
+            //
+            // Get the damage from the weapon being used to use.
+            //
             weapon = hitter->get_weapon();
             if (!weapon) {
                 return (false);
@@ -181,9 +181,9 @@ int Thing::hit_possible (Thingp hitter, int damage)
             }
         }
 
-        /*
-         * Don't let our own potion hit ourselves!
-         */
+        //
+        // Don't let our own potion hit ourselves!
+        //
         if (hitter == this) {
             return (false);
         }

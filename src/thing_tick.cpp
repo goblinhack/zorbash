@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_main.h"
 #include "my_thing.h"
@@ -11,9 +11,9 @@ void Thing::hunger_clock (void)
 {
     tick_count++;
 
-    /*
-     * Update the hunger clock.
-     */
+    //
+    // Update the hunger clock.
+    //
     auto hunger_tick = tp_has_hunger_tick_every_rounds(tp);
     if (hunger_tick) {
         if (!(tick_count % hunger_tick)) {
@@ -41,9 +41,9 @@ void Thing::hunger_clock (void)
 
 void Thing::achieve_goals_in_life (void)
 {
-    /*
-     * If this thing has goals, it can try and reach them.
-     */
+    //
+    // If this thing has goals, it can try and reach them.
+    //
     if (dmap_goals) {
         auto nh = get_next_hop();
         fpoint to(nh.x, nh.y);
