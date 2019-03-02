@@ -166,8 +166,8 @@ public:
     int is_rrr26 {};
     int is_rrr27 {};
     int is_rrr28 {};
-    int is_rrr29 {};
-    int is_rrr30 {};
+    int is_meat_eater {};
+    int is_made_of_meat {};
     int is_active {};
     int has_initial_health {};
     int is_starving_at_health_pct {};
@@ -449,14 +449,14 @@ static inline int tp_is_rrr28 (Tpp t)
     return (t->is_rrr28);
 }
 
-static inline int tp_is_rrr29 (Tpp t)
+static inline int tp_is_meat_eater (Tpp t)
 {
-    return (t->is_rrr29);
+    return (t->is_meat_eater);
 }
 
-static inline int tp_is_rrr30 (Tpp t)
+static inline int tp_is_made_of_meat (Tpp t)
 {
-    return (t->is_rrr30);
+    return (t->is_made_of_meat);
 }
 
 static inline int tp_is_active (Tpp t)

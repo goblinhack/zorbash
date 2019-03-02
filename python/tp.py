@@ -230,11 +230,11 @@ class Tp:
     def set_is_rrr28(self, value):
         zx.tp_set_is_rrr28(self, value)
 
-    def set_is_rrr29(self, value):
-        zx.tp_set_is_rrr29(self, value)
+    def set_is_meat_eater(self, value):
+        zx.tp_set_is_meat_eater(self, value)
 
-    def set_is_rrr30(self, value):
-        zx.tp_set_is_rrr30(self, value)
+    def set_is_made_of_meat(self, value):
+        zx.tp_set_is_made_of_meat(self, value)
 
     def set_is_active(self, value):
         zx.tp_set_is_active(self, value)

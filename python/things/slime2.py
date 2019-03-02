@@ -11,6 +11,7 @@ def tp_init(name, short_name):
     x.set_is_blit_y_offset(True)
     x.set_is_blitted_as_sitting_on_the_ground(True)
     x.set_is_hungry_at_health_pct(70)
+    x.set_is_meat_eater(True)
     x.set_is_monst(True)
     x.set_is_movable(True)
     x.set_is_movement_blocking(True)
