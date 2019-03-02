@@ -66,6 +66,13 @@ public:
                                lights[MAP_WIDTH][MAP_HEIGHT];
     Things                     all_things;
     Things                     all_active_things;
+
+    //
+    // Probably want map vs unordered_map so walk order is the same
+    // Think of unordered_map as a hash table.
+    //
+    std::map<uint32_t, Thingp> 
+                               all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_solid[MAP_WIDTH][MAP_HEIGHT] = {};

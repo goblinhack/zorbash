@@ -12,11 +12,22 @@ void Thing::attach (void)
 {_
     detach();
 
-    auto root = &thing_display_order[(int)at.x][(int)at.y][depth];
-    auto key = ThingDisplaySortKey(depth, br.y, this);
-    auto result = root->insert(std::make_pair(key, this));
-    if (result.second == false) {
-        die("thing attach failed");
+    {
+        auto root = &thing_display_order[(int)at.x][(int)at.y][depth];
+        auto key = ThingDisplaySortKey(depth, br.y, this);
+        auto result = root->insert(std::make_pair(key, this));
+        if (result.second == false) {
+            die("failed to insert to thing_display_order");
+        }
+    }
+
+    {
+        auto root = &game.state.map.all_active_things_at[(int)at.x][(int)at.y];
+        auto p = std::make_pair(id, this);
+        auto result = root->insert(p);
+        if (result.second == false) {
+            die("failed to insert to game.state.map.all_active_things_at");
+        }
     }
 
     is_attached = true;
@@ -33,15 +44,28 @@ void Thing::detach (void)
     is_attached = false;
 //log("detach from %d %d %d", (int)last_attached.x, (int)last_attached.y, 
 //depth);
-    auto root = &thing_display_order[(int)last_attached.x]
-                                    [(int)last_attached.y][depth];
-    auto key = ThingDisplaySortKey(depth, br.y, this);
-    auto result = root->find(key);
-    if (result == root->end()) {
-        die("cannot detach");
+//
+    {
+        auto root = &thing_display_order[(int)last_attached.x]
+                                        [(int)last_attached.y][depth];
+        auto key = ThingDisplaySortKey(depth, br.y, this);
+        auto result = root->find(key);
+        if (result == root->end()) {
+            die("failed to remove from thing_display_order");
+        }
+
+        root->erase(key);
     }
 
-    root->erase(key);
+    {
+        auto root = &game.state.map.all_active_things_at[(int)last_attached.x]
+                                                        [(int)last_attached.y];
+        auto result = root->find(id);
+        if (result == root->end()) {
+            die("failed to remove from game.state.map.all_active_things_at");
+        }
+        root->erase(id);
+    }
 }
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)

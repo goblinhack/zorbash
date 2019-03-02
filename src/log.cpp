@@ -21,7 +21,7 @@ static bool debug = false;
  * putfg
  */
 static void putfg (uint8_t fg, FILE *fp)
-{_
+{
     static const char *data[] = {
             "\033[1;30m", "\033[1;31m", "\033[1;32m", "\033[1;33m",
             "\033[1;34m", "\033[1;35m", "\033[1;36m", "\033[1;37m",
@@ -35,7 +35,7 @@ static void putfg (uint8_t fg, FILE *fp)
  * putbg
  */
 static void putbg (uint8_t bg, FILE *fp)
-{_
+{
     static const char *data[] = {
             "\033[1;40m", "\033[1;41m", "\033[1;42m", "\033[1;43m",
             "\033[1;44m", "\033[1;45m", "\033[1;46m", "\033[1;47m",
@@ -46,7 +46,7 @@ static void putbg (uint8_t bg, FILE *fp)
 }
 
 static int color_to_index (const char **s)
-{_
+{
     if (!strncmp(*s, "black$", sizeof("black$")-1)) {
 	*s += sizeof("black$")-1;
 	return (TERM_COLOR_BLACK);
@@ -88,7 +88,7 @@ static int color_to_index (const char **s)
 }
 
 static void putf (FILE *fp, const char *s)
-{_
+{
     char c;
     uint8_t looking_for_start = false;
 
@@ -127,7 +127,7 @@ static void putf (FILE *fp, const char *s)
 }
 
 static void log_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
     uint32_t len;
 
@@ -143,7 +143,7 @@ static void log_ (const char *fmt, va_list args)
 }
 
 void LOG (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -152,7 +152,7 @@ void LOG (const char *fmt, ...)
 }
 
 static void logs_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
 
     buf[0] = '\0';
@@ -163,7 +163,7 @@ static void logs_ (const char *fmt, va_list args)
 }
 
 void LOGS (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -172,7 +172,7 @@ void LOGS (const char *fmt, ...)
 }
 
 static void warn_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
     uint32_t len;
 
@@ -188,7 +188,7 @@ static void warn_ (const char *fmt, va_list args)
 }
 
 void WARN (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -197,7 +197,7 @@ void WARN (const char *fmt, ...)
 }
 
 static void con_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
     uint32_t len;
 
@@ -216,7 +216,7 @@ static void con_ (const char *fmt, va_list args)
 }
 
 static void con_ (const wchar_t *fmt, va_list args)
-{_
+{
     {
         char buf[MAXSTR];
 
@@ -249,7 +249,7 @@ static void con_ (const wchar_t *fmt, va_list args)
 }
 
 void con (const wchar_t *fmt)
-{_
+{
     {
         char buf[MAXSTR];
 
@@ -270,7 +270,7 @@ void con (const wchar_t *fmt)
 }
 
 static void tip_ (const wchar_t *fmt, va_list args)
-{_
+{
     wchar_t buf[MAXSTR];
 
     buf[0] = '\0';
@@ -289,12 +289,12 @@ static void tip_ (const wchar_t *fmt, va_list args)
 }
 
 void tip (const wchar_t *fmt)
-{_
+{
     wid_tooltip_set(fmt);
 }
 
 static void tip2_ (const wchar_t *fmt, va_list args)
-{_
+{
     wchar_t buf[MAXSTR];
 
     buf[0] = '\0';
@@ -313,12 +313,12 @@ static void tip2_ (const wchar_t *fmt, va_list args)
 }
 
 void tip2 (const wchar_t *fmt)
-{_
+{
     wid_tooltip2_set(fmt);
 }
 
 static void tip_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
 
     buf[0] = '\0';
@@ -328,7 +328,7 @@ static void tip_ (const char *fmt, va_list args)
 }
 
 static void tip2_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
 
     buf[0] = '\0';
@@ -338,7 +338,7 @@ static void tip2_ (const char *fmt, va_list args)
 }
 
 void CON (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -347,7 +347,7 @@ void CON (const char *fmt, ...)
 }
 
 void CON (const wchar_t *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -356,7 +356,7 @@ void CON (const wchar_t *fmt, ...)
 }
 
 static void dying_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
     uint32_t len;
 
@@ -379,7 +379,7 @@ static void dying_ (const char *fmt, va_list args)
 }
 
 static void err_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
     uint32_t len;
 
@@ -411,7 +411,7 @@ static void err_ (const char *fmt, va_list args)
 }
 
 static void croak_ (const char *fmt, va_list args)
-{_
+{
     static int croaked;
     if (croaked) {
         fprintf(stderr,"\nNESTED FATAL ERROR %s %s %d ",__FILE__,__FUNCTION__,__LINE__);
@@ -452,7 +452,7 @@ static void croak_ (const char *fmt, va_list args)
 }
 
 void TIP (const wchar_t *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -461,7 +461,7 @@ void TIP (const wchar_t *fmt, ...)
 }
 
 void TIP2 (const wchar_t *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -470,7 +470,7 @@ void TIP2 (const wchar_t *fmt, ...)
 }
 
 void TIP (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -479,7 +479,7 @@ void TIP (const char *fmt, ...)
 }
 
 void TIP2 (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -488,7 +488,7 @@ void TIP2 (const char *fmt, ...)
 }
 
 void DYING (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -497,7 +497,7 @@ void DYING (const char *fmt, ...)
 }
 
 void DBG (const char *fmt, ...)
-{_
+{
     if (!debug) {
         return;
     }
@@ -509,7 +509,7 @@ void DBG (const char *fmt, ...)
 }
 
 void ERR (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -526,7 +526,7 @@ void ERR (const char *fmt, ...)
 }
 
 void CROAK (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -537,7 +537,7 @@ void CROAK (const char *fmt, ...)
 }
 
 void Thing::log_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -557,7 +557,7 @@ void Thing::log_ (const char *fmt, va_list args)
 }
 
 void Thing::log (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -568,7 +568,7 @@ void Thing::log (const char *fmt, ...)
 }
 
 void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -591,7 +591,7 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 }
 
 void Thing::dead (Thingp killer, const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -602,7 +602,7 @@ void Thing::dead (Thingp killer, const char *fmt, ...)
 }
 
 void Thing::dead_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -624,7 +624,7 @@ void Thing::dead_ (const char *fmt, va_list args)
 }
 
 void Thing::dead (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -635,7 +635,7 @@ void Thing::dead (const char *fmt, ...)
 }
 
 void Thing::die_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -654,7 +654,7 @@ void Thing::die_ (const char *fmt, va_list args)
 }
 
 void Thing::die (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -665,7 +665,7 @@ void Thing::die (const char *fmt, ...)
 }
 
 void Thing::con_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -689,7 +689,7 @@ void Thing::con_ (const char *fmt, va_list args)
 }
 
 void Thing::con (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -700,7 +700,7 @@ void Thing::con (const char *fmt, ...)
 }
 
 void Thing::err_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -731,7 +731,7 @@ void Thing::err_ (const char *fmt, va_list args)
 }
 
 void Thing::err (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -742,7 +742,7 @@ void Thing::err (const char *fmt, ...)
 }
 
 void Thing::dbg (const char *fmt, ...)
-{_
+{
     if (!debug) {
         return;
     }
@@ -756,7 +756,7 @@ void Thing::dbg (const char *fmt, ...)
 }
 
 void Light::log_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -776,7 +776,7 @@ void Light::log_ (const char *fmt, va_list args)
 }
 
 void Light::log (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -787,7 +787,7 @@ void Light::log (const char *fmt, ...)
 }
 
 void Light::die_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -806,7 +806,7 @@ void Light::die_ (const char *fmt, va_list args)
 }
 
 void Light::die (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -817,7 +817,7 @@ void Light::die (const char *fmt, ...)
 }
 
 void Light::con_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -840,7 +840,7 @@ void Light::con_ (const char *fmt, va_list args)
 }
 
 void Light::con (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -851,7 +851,7 @@ void Light::con (const char *fmt, ...)
 }
 
 void Light::err_ (const char *fmt, va_list args)
-{_
+{
     auto t = this;
 
     char buf[MAXSTR];
@@ -882,7 +882,7 @@ void Light::err_ (const char *fmt, va_list args)
 }
 
 void Light::err (const char *fmt, ...)
-{_
+{
     auto t = this;
 
     va_list args;
@@ -893,7 +893,7 @@ void Light::err (const char *fmt, ...)
 }
 
 void Light::dbg (const char *fmt, ...)
-{_
+{
     if (!debug) {
         return;
     }
@@ -908,7 +908,7 @@ void Light::dbg (const char *fmt, ...)
 
 #ifdef ENABLE_WID_DEBUG
 static void wid_log_ (widp t, const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
     uint32_t len;
 
@@ -923,7 +923,7 @@ static void wid_log_ (widp t, const char *fmt, va_list args)
 }
 
 void WID_LOG (widp t, const char *fmt, ...)
-{_
+{
     va_list args;
 
     verify(t.get());
@@ -934,7 +934,7 @@ void WID_LOG (widp t, const char *fmt, ...)
 }
 
 void WID_DBG (widp t, const char *fmt, ...)
-{_
+{
     if (!debug) {
         return;
     }
@@ -949,7 +949,7 @@ void WID_DBG (widp t, const char *fmt, ...)
 #endif
 
 static void msgerr_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
     uint32_t len;
 
@@ -982,7 +982,7 @@ static void msgerr_ (const char *fmt, va_list args)
 }
 
 void MSG_BOX (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);
@@ -991,7 +991,7 @@ void MSG_BOX (const char *fmt, ...)
 }
 
 static void sdl_msgerr_ (const char *fmt, va_list args)
-{_
+{
     char buf[MAXSTR];
 #if SDL_MAJOR_VERSION >= 2
     uint32_t ts_len;
@@ -1032,7 +1032,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
 }
 
 void SDL_MSG_BOX (const char *fmt, ...)
-{_
+{
     va_list args;
 
     va_start(args, fmt);

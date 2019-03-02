@@ -13,7 +13,12 @@
 
 typedef class Tp* Tpp;
 typedef std::unordered_map< std::string, Tpp > Tpmap;
-typedef std::unordered_map< unsigned int, Tpp > Tpmap_create_order;
+
+//
+// Use map as walk order is maintained, instead of unordered map where it is 
+// not. Think of unordered_map as a hash table.
+//
+typedef std::map< unsigned int, Tpp > Tpmap_create_order;
 
 #include "my_tile_info.h"
 
