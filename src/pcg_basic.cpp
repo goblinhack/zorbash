@@ -119,4 +119,3 @@ uint32_t pcg32_boundedrand(uint32_t bound)
 {
     return pcg32_boundedrand_r(&pcg32_global, bound);
 }
-

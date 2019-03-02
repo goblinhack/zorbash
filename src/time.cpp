@@ -12,7 +12,7 @@ uint32_t time_now;
 uint32_t base_time_in_mill;
 
 const char *time2str (uint32_t ms, char *buf, int32_t len)
-{_
+{
     static char buf_[MAXSTR];
 
     int32_t log_msec = ms;
@@ -41,7 +41,7 @@ const char *time2str (uint32_t ms, char *buf, int32_t len)
 }
 
 const char *timestamp (char *buf, int32_t len)
-{_
+{
     static char buf_[200];
 
     int32_t log_msec = time_get_time_ms();
@@ -70,7 +70,7 @@ const char *timestamp (char *buf, int32_t len)
 }
 
 uint8_t time_have_x_hundredths_passed_since (uint32_t val, uint32_t since)
-{_
+{
     time_get_time_ms();
 
     /*
@@ -82,7 +82,7 @@ uint8_t time_have_x_hundredths_passed_since (uint32_t val, uint32_t since)
 }
 
 uint8_t time_have_x_thousandths_passed_since (uint32_t val, uint32_t since)
-{_
+{
     time_get_time_ms();
 
     /*
@@ -94,7 +94,7 @@ uint8_t time_have_x_thousandths_passed_since (uint32_t val, uint32_t since)
 }
 
 uint8_t time_have_x_tenths_passed_since (uint32_t val, uint32_t since)
-{_
+{
     time_get_time_ms();
 
     /*
@@ -106,7 +106,7 @@ uint8_t time_have_x_tenths_passed_since (uint32_t val, uint32_t since)
 }
 
 uint8_t time_have_x_secs_passed_since (uint32_t val, uint32_t since)
-{_
+{
     time_get_time_ms();
 
     /*

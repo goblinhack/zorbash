@@ -125,7 +125,7 @@ static bool debug_enabled = false;
  */
 
 void Nodes::finish_constructor (void)
-{_
+{
 redo:
     init_nodes();
 
@@ -324,7 +324,7 @@ redo:
 }
 
 void Nodes::dump (void)
-{_
+{
     auto step = 5;
     auto center = 3;
 
@@ -613,7 +613,7 @@ void Nodes::dump (void)
 }
 
 void Nodes::debug (std::string msg)
-{_
+{
     if (!debug_enabled) {
         return;
     }
@@ -623,7 +623,7 @@ void Nodes::debug (std::string msg)
 }
 
 int Nodes::offset (const int x, const int y)
-{_
+{
     auto offset = grid_width * y;
     offset += x;
 
@@ -631,13 +631,13 @@ int Nodes::offset (const int x, const int y)
 }
 
 bool Nodes::is_oob (const int x, const int y)
-{_
+{
     return ((x < 0) || (x >= grid_width) ||
             (y < 0) || (y >= grid_height));
 }
 
 Node *Nodes::node_addr (const int x, const int y)
-{_
+{
     if (is_oob(x, y)) {
         return (nullptr);
     }
@@ -646,7 +646,7 @@ Node *Nodes::node_addr (const int x, const int y)
 }
 
 void Nodes::putn (const int x, const int y, const Node n)
-{_
+{
     auto p = node_addr(x, y);
     if (p != nullptr) {
         *p = n;
@@ -654,7 +654,7 @@ void Nodes::putn (const int x, const int y, const Node n)
 }
 
 Node *Nodes::getn (const int x, const int y)
-{_
+{
     auto p = node_addr(x, y);
     return (p);
 }

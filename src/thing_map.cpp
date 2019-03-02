@@ -540,8 +540,8 @@ static void thing_blit_lava (int minx, int miny, int minz,
     }
 
     //
-       // Slow timer to scroll the lava.
-       //
+    // Slow timer to scroll the lava.
+    //
     static int step1;
     static double step2;
     if (step1++ >= 5) {

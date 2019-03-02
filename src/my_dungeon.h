@@ -262,6 +262,9 @@ public:
         add_room_walls();
         add_border();
 
+        LOG("created basic layout:");
+        dump();
+
         //
         // Add a cave as the under-dungeon
         // 
@@ -364,6 +367,9 @@ public:
         if (!c) {
             DIE("putting nul char at %d,%d,%d", x, y, z);
         }
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
         auto p = cell_addr(x, y, z);
         if (p != nullptr) {
             *p = c;
@@ -386,6 +392,9 @@ public:
      */
     char getc (const int x, const int y, const int z)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
         auto p = cell_addr(x, y, z);
         if (p != nullptr) {
             return (*p);
@@ -447,6 +456,10 @@ public:
     
     bool is_anything_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
@@ -458,6 +471,10 @@ public:
 
     bool is_anything_at (const int x, const int y, const int z)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         auto c = getc(x, y, z);
         if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
             return true;
@@ -476,6 +493,10 @@ public:
 
     bool is_floor_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -489,6 +510,10 @@ public:
 
     bool is_corridor_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -502,6 +527,10 @@ public:
 
     bool is_corridor_at_fast (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -515,6 +544,10 @@ public:
 
     bool is_dirt_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -528,6 +561,10 @@ public:
 
     bool is_dirt_at_fast (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -541,6 +578,10 @@ public:
 
     bool is_secret_corridor_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -554,6 +595,10 @@ public:
 
     bool is_wall_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         auto d = MAP_DEPTH_WALLS;
         auto c = getc(x, y, d);
         auto v = Charmap::all_charmaps[c];
@@ -562,6 +607,10 @@ public:
 
     bool is_rock_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         auto d = MAP_DEPTH_WALLS;
         auto c = getc(x, y, d);
         auto v = Charmap::all_charmaps[c];
@@ -570,6 +619,10 @@ public:
 
     bool is_monst_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -583,6 +636,10 @@ public:
 
     bool is_door_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -596,6 +653,10 @@ public:
 
     bool is_entrance_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -609,6 +670,10 @@ public:
 
     bool is_floor_deco_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -622,6 +687,10 @@ public:
 
     bool is_wall_deco_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -635,6 +704,10 @@ public:
 
     bool is_exit_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -648,6 +721,10 @@ public:
 
     bool is_lava_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -661,6 +738,10 @@ public:
 
     bool is_water_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -674,6 +755,10 @@ public:
 
     bool is_deep_water_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -687,6 +772,10 @@ public:
 
     bool is_treasure_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -700,6 +789,10 @@ public:
 
     bool is_key_at (const int x, const int y)
     {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
@@ -882,6 +975,7 @@ public:
         }
 
         LOG("dungeon: seed %u (with room depth)", seed);
+        //printf("dungeon: seed %u (with room depth)\n", seed);
         for (auto y = 0; y < map_height; y++) {
             std::string s;
             for (auto x = 0; x < map_width; x++) {
@@ -928,6 +1022,7 @@ public:
             }
             if (s != "") {
                 LOG("[%s]", s.c_str());
+                //printf("[%s]\n", s.c_str());
             }
         }
 
@@ -935,6 +1030,7 @@ public:
          * Pass 2 without room depths
          */
         LOG("dungeon: seed %u (more readable version)", seed);
+        //printf("dungeon: seed %u (more readable version)\n", seed);
         for (auto y = 0; y < map_height; y++) {
             std::string s;
             for (auto x = 0; x < map_width; x++) {
@@ -963,6 +1059,7 @@ public:
             }
             if (s != "") {
                 LOG("[%s]", s.c_str());
+                //printf("[%s]\n", s.c_str());
             }
         }
     }
@@ -3197,6 +3294,9 @@ public:
                    uint8_t map_generations)
 
     {
+        memset(map_save, 0, sizeof(map_save));
+        memset(map_curr, 0, sizeof(map_curr));
+
         const int16_t maze_w = MAP_WIDTH - 2;
         const int16_t maze_h = MAP_HEIGHT - 2;
 
@@ -3251,6 +3351,9 @@ public:
                    uint8_t map_generations)
 
     {
+        memset(map_save, 0, sizeof(map_save));
+        memset(map_curr, 0, sizeof(map_curr));
+
         const int16_t maze_w = MAP_WIDTH - 2;
         const int16_t maze_h = MAP_HEIGHT - 2;
 
@@ -3305,6 +3408,9 @@ public:
                     uint8_t map_generations)
 
     {
+        memset(map_save, 0, sizeof(map_save));
+        memset(map_curr, 0, sizeof(map_curr));
+
         const int16_t maze_w = MAP_WIDTH - 2;
         const int16_t maze_h = MAP_HEIGHT - 2;
 
