@@ -142,6 +142,32 @@ public:
     int is_rrr2 {};
     int is_rrr3 {};
     int is_rrr4 {};
+    int is_rrr5 {};
+    int is_rrr6 {};
+    int is_rrr7 {};
+    int is_rrr8 {};
+    int is_rrr9 {};
+    int is_rrr10 {};
+    int is_rrr11 {};
+    int is_rrr12 {};
+    int is_rrr13 {};
+    int is_rrr14 {};
+    int is_rrr15 {};
+    int is_rrr16 {};
+    int is_rrr17 {};
+    int is_rrr18 {};
+    int is_rrr19 {};
+    int is_rrr20 {};
+    int is_rrr21 {};
+    int is_rrr22 {};
+    int is_rrr23 {};
+    int is_rrr24 {};
+    int is_rrr25 {};
+    int is_rrr26 {};
+    int is_rrr27 {};
+    int is_rrr28 {};
+    int is_rrr29 {};
+    int is_rrr30 {};
     int is_active {};
     int has_initial_health {};
     int is_starving_at_health_pct {};
@@ -301,6 +327,136 @@ static inline int tp_is_rrr3 (Tpp t)
 static inline int tp_is_rrr4 (Tpp t)
 {
     return (t->is_rrr4);
+}
+
+static inline int tp_is_rrr5 (Tpp t)
+{
+    return (t->is_rrr5);
+}
+
+static inline int tp_is_rrr6 (Tpp t)
+{
+    return (t->is_rrr6);
+}
+
+static inline int tp_is_rrr7 (Tpp t)
+{
+    return (t->is_rrr7);
+}
+
+static inline int tp_is_rrr8 (Tpp t)
+{
+    return (t->is_rrr8);
+}
+
+static inline int tp_is_rrr9 (Tpp t)
+{
+    return (t->is_rrr9);
+}
+
+static inline int tp_is_rrr10 (Tpp t)
+{
+    return (t->is_rrr10);
+}
+
+static inline int tp_is_rrr11 (Tpp t)
+{
+    return (t->is_rrr11);
+}
+
+static inline int tp_is_rrr12 (Tpp t)
+{
+    return (t->is_rrr12);
+}
+
+static inline int tp_is_rrr13 (Tpp t)
+{
+    return (t->is_rrr13);
+}
+
+static inline int tp_is_rrr14 (Tpp t)
+{
+    return (t->is_rrr14);
+}
+
+static inline int tp_is_rrr15 (Tpp t)
+{
+    return (t->is_rrr15);
+}
+
+static inline int tp_is_rrr16 (Tpp t)
+{
+    return (t->is_rrr16);
+}
+
+static inline int tp_is_rrr17 (Tpp t)
+{
+    return (t->is_rrr17);
+}
+
+static inline int tp_is_rrr18 (Tpp t)
+{
+    return (t->is_rrr18);
+}
+
+static inline int tp_is_rrr19 (Tpp t)
+{
+    return (t->is_rrr19);
+}
+
+static inline int tp_is_rrr20 (Tpp t)
+{
+    return (t->is_rrr20);
+}
+
+static inline int tp_is_rrr21 (Tpp t)
+{
+    return (t->is_rrr21);
+}
+
+static inline int tp_is_rrr22 (Tpp t)
+{
+    return (t->is_rrr22);
+}
+
+static inline int tp_is_rrr23 (Tpp t)
+{
+    return (t->is_rrr23);
+}
+
+static inline int tp_is_rrr24 (Tpp t)
+{
+    return (t->is_rrr24);
+}
+
+static inline int tp_is_rrr25 (Tpp t)
+{
+    return (t->is_rrr25);
+}
+
+static inline int tp_is_rrr26 (Tpp t)
+{
+    return (t->is_rrr26);
+}
+
+static inline int tp_is_rrr27 (Tpp t)
+{
+    return (t->is_rrr27);
+}
+
+static inline int tp_is_rrr28 (Tpp t)
+{
+    return (t->is_rrr28);
+}
+
+static inline int tp_is_rrr29 (Tpp t)
+{
+    return (t->is_rrr29);
+}
+
+static inline int tp_is_rrr30 (Tpp t)
+{
+    return (t->is_rrr30);
 }
 
 static inline int tp_is_active (Tpp t)
