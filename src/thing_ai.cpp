@@ -182,7 +182,12 @@ point Thing::choose_best_nh (void)
     /*
      * Find the best next-hop to the best goal.
      */
-    dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
+
+    //
+    // By commenting this out we will also consider staying put and not
+    // moving as an option
+    //
+    //dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
     dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
 
