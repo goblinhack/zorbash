@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_main.h"
 #include "my_thing.h"
@@ -44,9 +44,9 @@ static void thing_map_scroll_do (void)
                              (double)MAP_HEIGHT - TILES_DOWN);
 
 #if 0
-    /*
-     * Round to pixels - didn't seem to help.
-     */
+    //
+    // Round to pixels - didn't seem to help.
+    //
     game.state.map_at.x *= 1.0 / game.config.one_pixel_gl_width;
     game.state.map_at.x = (int)game.state.map_at.x;
     game.state.map_at.x /= 1.0 / game.config.one_pixel_gl_width;
@@ -120,9 +120,9 @@ static void thing_blit_water (int minx, int miny, int minz,
         water[3][3] = tile_find("water4d");
     }
 
-    /*
-     * Slow timer to scroll the water.
-     */
+    //
+    // Slow timer to scroll the water.
+    //
     static int step1;
     static double step2;
     if (step1++ >= 20) {
@@ -136,9 +136,9 @@ static void thing_blit_water (int minx, int miny, int minz,
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    /*
-     * Draw an outline to the same buffer
-     */
+    //
+    // Draw an outline to the same buffer
+    //
     glcolor(WHITE);
     glDisable(GL_TEXTURE_2D);
     blit_init();
@@ -173,10 +173,10 @@ static void thing_blit_water (int minx, int miny, int minz,
     glEnable(GL_TEXTURE_2D);
     blit_flush();
 
-    /*
-     * Draw the white bitmap that will be the mask for the texture
-     * again to its own buffer.
-     */
+    //
+    // Draw the white bitmap that will be the mask for the texture
+    // again to its own buffer.
+    //
     blit_fbo_bind(FBO_LIGHT_MERGED);
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -208,10 +208,10 @@ static void thing_blit_water (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * The water tiles are twice the size of normal tiles, so work out
-     * where to draw them to avoid overlaps
-     */
+    //
+    // The water tiles are twice the size of normal tiles, so work out
+    // where to draw them to avoid overlaps
+    //
     uint8_t water_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
 
     for (auto y = miny; y < maxy; y++) {
@@ -235,10 +235,10 @@ static void thing_blit_water (int minx, int miny, int minz,
         }
     }
 
-    /*
-     * Finally blit the transparent water tiles, still to its
-     * own buffer.
-     */
+    //
+    // Finally blit the transparent water tiles, still to its
+    // own buffer.
+    //
     blit_fbo_bind(FBO_LIGHT_MERGED);
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
@@ -285,25 +285,25 @@ static void thing_blit_water (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * Now merge the transparent water and the edge tiles.
-     */
+    //
+    // Now merge the transparent water and the edge tiles.
+    //
     blit_init();
     glcolor(WHITE);
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE);
     blit_fbo(FBO_LIGHT_MASK);
     blit_flush();
 
-    /*
-     * Blit the combined water to the main buffer.
-     */
+    //
+    // Blit the combined water to the main buffer.
+    //
     glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
     blit_fbo_bind(FBO_MAIN);
     blit_fbo(FBO_LIGHT_MERGED);
 
-    /*
-     * Add reflections
-     */
+    //
+    // Add reflections
+    //
     blit_init();
     blit_fbo_bind(FBO_REFLECTION);
     glClearColor(0,0,0,0);
@@ -324,18 +324,18 @@ static void thing_blit_water (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * Blend the mask of the water with the above inverted tiles
-     */
+    //
+    // Blend the mask of the water with the above inverted tiles
+    //
     glBlendFunc(GL_DST_COLOR, GL_ZERO);
     blit_fbo(FBO_LIGHT_MERGED);
     glEnable(GL_COLOR_LOGIC_OP);
     glLogicOp(GL_AND_INVERTED);
     glDisable(GL_COLOR_LOGIC_OP);
 
-    /*
-     * Finally blend the reflection onto the main buffer.
-     */
+    //
+    // Finally blend the reflection onto the main buffer.
+    //
     blit_fbo_bind(FBO_MAIN);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     color c = CYAN;
@@ -382,9 +382,9 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
         deep_water[3][3] = tile_find("deep_water4d");
     }
 
-    /*
-     * Slow timer to scroll the deep_water.
-     */
+    //
+    // Slow timer to scroll the deep_water.
+    //
     static int step1;
     static double step2;
     if (step1++ >= 20) {
@@ -394,10 +394,10 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
         }
     }
 
-    /*
-     * Draw the white bitmap that will be the mask for the texture
-     * again to its own buffer.
-     */
+    //
+    // Draw the white bitmap that will be the mask for the texture
+    // again to its own buffer.
+    //
     blit_fbo_bind(FBO_LIGHT_MERGED);
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -428,10 +428,10 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * The deep_water tiles are twice the size of normal tiles, so work out
-     * where to draw them to avoid overlaps
-     */
+    //
+    // The deep_water tiles are twice the size of normal tiles, so work out
+    // where to draw them to avoid overlaps
+    //
     uint8_t deep_water_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
 
     for (auto y = miny; y < maxy; y++) {
@@ -455,10 +455,10 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
         }
     }
 
-    /*
-     * Finally blit the transparent deep_water tiles, still to its
-     * own buffer.
-     */
+    //
+    // Finally blit the transparent deep_water tiles, still to its
+    // own buffer.
+    //
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
     blit_init();
@@ -539,9 +539,9 @@ static void thing_blit_lava (int minx, int miny, int minz,
         lava[3][3] = tile_find("lava4d");
     }
 
-    /*
-        * Slow timer to scroll the lava.
-        */
+    //
+       // Slow timer to scroll the lava.
+       //
     static int step1;
     static double step2;
     if (step1++ >= 5) {
@@ -551,9 +551,9 @@ static void thing_blit_lava (int minx, int miny, int minz,
         }
     }
 
-    /*
-     * Draw a black outline to the main display.
-     */
+    //
+    // Draw a black outline to the main display.
+    //
     glcolor(BLACK);
     blit_init();
     for (auto y = miny; y < maxy; y++) {
@@ -592,9 +592,9 @@ static void thing_blit_lava (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * Draw a orange outline to the main display.
-     */
+    //
+    // Draw a orange outline to the main display.
+    //
     color edge = ORANGE2;
     edge.a = 200;
     glcolor(edge);
@@ -625,9 +625,9 @@ static void thing_blit_lava (int minx, int miny, int minz,
     glEnable(GL_TEXTURE_2D);
     blit_flush();
 
-    /*
-     * Draw the white bitmap that will be the mask for the texture.
-     */
+    //
+    // Draw the white bitmap that will be the mask for the texture.
+    //
     blit_fbo_bind(FBO_LIGHT_MERGED);
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -644,10 +644,10 @@ static void thing_blit_lava (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * The lava tiles are twice the size of normal tiles, so work out
-     * where to draw them to avoid overlaps
-     */
+    //
+    // The lava tiles are twice the size of normal tiles, so work out
+    // where to draw them to avoid overlaps
+    //
     uint8_t lava_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
 
     for (auto y = miny; y < maxy; y++) {
@@ -671,9 +671,9 @@ static void thing_blit_lava (int minx, int miny, int minz,
         }
     }
 
-    /*
-     * Finally blit the lava and then the buffer to the display.
-     */
+    //
+    // Finally blit the lava and then the buffer to the display.
+    //
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
     blit_init();
@@ -739,9 +739,9 @@ static void thing_blit_blood (int minx, int miny, int minz,
         blood[0][0] = tile_find("blood1a");
     }
 
-    /*
-     * Draw a black outline to the main display.
-     */
+    //
+    // Draw a black outline to the main display.
+    //
     glcolor(RED4);
     blit_init();
     for (auto y = miny; y < maxy; y++) {
@@ -777,9 +777,9 @@ static void thing_blit_blood (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * Draw the white bitmap that will be the mask for the texture.
-     */
+    //
+    // Draw the white bitmap that will be the mask for the texture.
+    //
     blit_fbo_bind(FBO_LIGHT_MERGED);
     glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -796,10 +796,10 @@ static void thing_blit_blood (int minx, int miny, int minz,
     }
     blit_flush();
 
-    /*
-     * The blood tiles are twice the size of normal tiles, so work out
-     * where to draw them to avoid overlaps
-     */
+    //
+    // The blood tiles are twice the size of normal tiles, so work out
+    // where to draw them to avoid overlaps
+    //
     uint8_t blood_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
 
     for (auto y = miny; y < maxy; y++) {
@@ -823,9 +823,9 @@ static void thing_blit_blood (int minx, int miny, int minz,
         }
     }
 
-    /*
-     * Finally blit the blood and then the buffer to the display.
-     */
+    //
+    // Finally blit the blood and then the buffer to the display.
+    //
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
     blit_init();
@@ -884,9 +884,9 @@ static void thing_blit_things (int minx, int miny, int minz,
     double offset_x = game.state.map_at.x * game.config.tile_gl_width;
     double offset_y = game.state.map_at.y * game.config.tile_gl_height;
 
-    /*
-     * Floors
-     */
+    //
+    // Floors
+    //
     { auto z = MAP_DEPTH_FLOOR;
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
@@ -901,10 +901,10 @@ static void thing_blit_things (int minx, int miny, int minz,
 
     blit_flush();
 
-    /*
-     * Work out what we will need to display ahead of time so we
-     * can avoid needless fbo blits
-     */
+    //
+    // Work out what we will need to display ahead of time so we
+    // can avoid needless fbo blits
+    //
     bool have_deep_water = false;
     bool have_water = false;
     bool have_lava = false;
@@ -935,10 +935,10 @@ static void thing_blit_things (int minx, int miny, int minz,
         }
     }
 
-    /*
-     * Lava and most other layers are drawn to its own buffer and then blitted 
-     * to the display.
-     */
+    //
+    // Lava and most other layers are drawn to its own buffer and then blitted 
+    // to the display.
+    //
     if (have_lava) {
         thing_blit_lava(minx, miny, minz, maxx, maxy, maxz,
                         offset_x, offset_y);
@@ -959,9 +959,9 @@ static void thing_blit_things (int minx, int miny, int minz,
                               offset_x, offset_y);
     }
 
-    /*
-     * Everything else
-     */
+    //
+    // Everything else
+    //
     blit_init();
 
     for (auto y = miny; y < maxy; y++) {
@@ -1028,9 +1028,9 @@ static void thing_blit_editor (int minx, int miny, int minz,
 
 void thing_render_all (void)
 {
-    /*
-     * Get the bounds
-     */
+    //
+    // Get the bounds
+    //
     int minz = 0;
     int maxz = MAP_DEPTH;
 
@@ -1044,9 +1044,9 @@ void thing_render_all (void)
     int maxy = std::min(MAP_HEIGHT, 
         (int)game.state.map_at.y + TILES_DOWN + 2);
 
-    /*
-     * Improve this to only update when things move one tile
-     */
+    //
+    // Improve this to only update when things move one tile
+    //
     if (!game.config.editor_mode) {
         thing_map_scroll_follow_player();
     }
@@ -1058,9 +1058,9 @@ void thing_render_all (void)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
 
-        /*
-         * Render light sources first to their own merged buffer
-         */
+        //
+        // Render light sources first to their own merged buffer
+        //
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -1076,9 +1076,9 @@ void thing_render_all (void)
         glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
         blit_fbo(FBO_LIGHT_MERGED);
 
-        /*
-         * Now overlay the player light source.
-         */
+        //
+        // Now overlay the player light source.
+        //
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);

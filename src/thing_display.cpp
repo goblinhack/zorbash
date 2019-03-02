@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_game.h"
 #include "my_thing.h"
@@ -91,11 +91,11 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, right_tile, tl2, br2);
     }
 
-    /*
-     * X---
-     * |...
-     * |...
-     */
+    //
+    // X---
+    // |...
+    // |...
+    //
     if (!game.state.map.is_wall[x - 1][y - 1] &&
         !game.state.map.is_wall[x - 1][y] &&
         !game.state.map.is_wall[x][y - 1]) {
@@ -108,11 +108,11 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, tl_tile, tl2, br2);
     }
 
-    /*
-     * ---X
-     * ...|
-     * ...|
-     */
+    //
+    // ---X
+    // ...|
+    // ...|
+    //
     if (!game.state.map.is_wall[x + 1][y - 1] &&
         !game.state.map.is_wall[x + 1][y] &&
         !game.state.map.is_wall[x][y - 1]) {
@@ -125,12 +125,12 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, tr_tile, tl2, br2);
     }
 
-    /*
-     *  .|
-     *  .|
-     *  .X--
-     *  ....
-     */
+    //
+    //  .|
+    //  .|
+    //  .X--
+    //  ....
+    //
     if (!game.state.map.is_wall[x + 1][y - 1] &&
         game.state.map.is_wall[x + 1][y] &&
         game.state.map.is_wall[x][y - 1]) {
@@ -143,12 +143,12 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, tr_tile, tl2, br2);
     }
 
-    /*
-     *    |.
-     *    |.
-     *  --X.
-     *  ....
-     */
+    //
+    //    |.
+    //    |.
+    //  --X.
+    //  ....
+    //
     if (!game.state.map.is_wall[x - 1][y - 1] &&
         game.state.map.is_wall[x - 1][y] &&
         game.state.map.is_wall[x][y - 1]) {
@@ -164,11 +164,11 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     dw = 0.00;
     dh = 0.00;
 
-    /*
-     * |...
-     * |...
-     * X---
-     */
+    //
+    // |...
+    // |...
+    // X---
+    //
     if (!game.state.map.is_wall[x - 1][y + 1] &&
         !game.state.map.is_wall[x - 1][y] &&
         !game.state.map.is_wall[x][y + 1]) {
@@ -181,11 +181,11 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, bl_tile, tl2, br2);
     }
 
-    /*
-     * ...|
-     * ...|
-     * ---X
-     */
+    //
+    // ...|
+    // ...|
+    // ---X
+    //
     if (!game.state.map.is_wall[x + 1][y + 1] &&
         !game.state.map.is_wall[x + 1][y] &&
         !game.state.map.is_wall[x][y + 1]) {
@@ -198,12 +198,12 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, br_tile, tl2, br2);
     }
 
-    /*
-     * .....
-     * .X---
-     * .|
-     * .|
-     */
+    //
+    // .....
+    // .X---
+    // .|
+    // .|
+    //
     if (!game.state.map.is_wall[x + 1][y + 1] &&
         game.state.map.is_wall[x + 1][y] &&
         game.state.map.is_wall[x][y + 1]) {
@@ -216,12 +216,12 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, br_tile, tl2, br2);
     }
 
-    /*
-     * ....
-     * --X.
-     *   |.
-     *   |.
-     */
+    //
+    // ....
+    // --X.
+    //   |.
+    //   |.
+    //
     if (!game.state.map.is_wall[x - 1][y + 1] &&
         game.state.map.is_wall[x - 1][y] &&
         game.state.map.is_wall[x][y + 1]) {
@@ -282,11 +282,11 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, right_tile, tl2, br2);
     }
 
-    /*
-     * X---
-     * |...
-     * |...
-     */
+    //
+    // X---
+    // |...
+    // |...
+    //
     if (!game.state.map.is_rock[x - 1][y - 1] &&
         !game.state.map.is_rock[x - 1][y] &&
         !game.state.map.is_rock[x][y - 1]) {
@@ -299,11 +299,11 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, tl_tile, tl2, br2);
     }
 
-    /*
-     * ---X
-     * ...|
-     * ...|
-     */
+    //
+    // ---X
+    // ...|
+    // ...|
+    //
     if (!game.state.map.is_rock[x + 1][y - 1] &&
         !game.state.map.is_rock[x + 1][y] &&
         !game.state.map.is_rock[x][y - 1]) {
@@ -316,12 +316,12 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, tr_tile, tl2, br2);
     }
 
-    /*
-     *  .|
-     *  .|
-     *  .X--
-     *  ....
-     */
+    //
+    //  .|
+    //  .|
+    //  .X--
+    //  ....
+    //
     if (!game.state.map.is_rock[x + 1][y - 1] &&
         game.state.map.is_rock[x + 1][y] &&
         game.state.map.is_rock[x][y - 1]) {
@@ -334,12 +334,12 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, tr_tile, tl2, br2);
     }
 
-    /*
-     *    |.
-     *    |.
-     *  --X.
-     *  ....
-     */
+    //
+    //    |.
+    //    |.
+    //  --X.
+    //  ....
+    //
     if (!game.state.map.is_rock[x - 1][y - 1] &&
         game.state.map.is_rock[x - 1][y] &&
         game.state.map.is_rock[x][y - 1]) {
@@ -355,11 +355,11 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     dw = 0.00;
     dh = 0.00;
 
-    /*
-     * |...
-     * |...
-     * X---
-     */
+    //
+    // |...
+    // |...
+    // X---
+    //
     if (!game.state.map.is_rock[x - 1][y + 1] &&
         !game.state.map.is_rock[x - 1][y] &&
         !game.state.map.is_rock[x][y + 1]) {
@@ -372,11 +372,11 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, bl_tile, tl2, br2);
     }
 
-    /*
-     * ...|
-     * ...|
-     * ---X
-     */
+    //
+    // ...|
+    // ...|
+    // ---X
+    //
     if (!game.state.map.is_rock[x + 1][y + 1] &&
         !game.state.map.is_rock[x + 1][y] &&
         !game.state.map.is_rock[x][y + 1]) {
@@ -389,12 +389,12 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, br_tile, tl2, br2);
     }
 
-    /*
-     * .....
-     * .X---
-     * .|
-     * .|
-     */
+    //
+    // .....
+    // .X---
+    // .|
+    // .|
+    //
     if (!game.state.map.is_rock[x + 1][y + 1] &&
         game.state.map.is_rock[x + 1][y] &&
         game.state.map.is_rock[x][y + 1]) {
@@ -407,12 +407,12 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, br_tile, tl2, br2);
     }
 
-    /*
-     * ....
-     * --X.
-     *   |.
-     *   |.
-     */
+    //
+    // ....
+    // --X.
+    //   |.
+    //   |.
+    //
     if (!game.state.map.is_rock[x - 1][y + 1] &&
         game.state.map.is_rock[x - 1][y] &&
         game.state.map.is_rock[x][y + 1]) {
@@ -495,9 +495,9 @@ void Thing::blit_player_owned_shadow_section (const Tpp &tp, const Tilep &tile,
     blit_player_owned_shadow_section(tp, tile, x1, y1, x2, y2, tl, br);
 }
 
-/*
- * Blits a whole tile. Y co-ords are inverted.
- */
+//
+// Blits a whole tile. Y co-ords are inverted.
+//
 void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile, 
                                           double x1, double y1,
                                           double x2, double y2,
@@ -732,9 +732,9 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             tile_blit_outline_section(
                 tp, tile, tile_tl, tile_br, blit_tl, blit_br);
 
-            /*
-             * Show the bottom part of the body transparent
-             */
+            //
+            // Show the bottom part of the body transparent
+            //
             if (!lava) {
                 color c = WHITE;
                 c.a = 100;

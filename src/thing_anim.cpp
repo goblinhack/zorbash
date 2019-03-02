@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_tile_info.h"
 #include "my_thing.h"
@@ -17,16 +17,16 @@ void Thing::animate (void)
 
     otile = tile = t->current_tileinfo;
     if (tile) {
-        /*
-         * If within the animate time of this frame, keep with it.
-         */
+        //
+        // If within the animate time of this frame, keep with it.
+        //
         if (t->next_frame_ms > time_get_time_ms_cached()) {
             return;
         }
 
-        /*
-         * Stop the animation here?
-         */
+        //
+        // Stop the animation here?
+        //
         if (tile_info_is_end_of_anim(tile)) {
             if (tile_info_is_dead_on_end_of_anim(tile)) {
                 t->dead("end of anim");
@@ -43,13 +43,13 @@ void Thing::animate (void)
 
     int chose_tile = false;
 
-    /*
-     * Get the next tile.
-     */
+    //
+    // Get the next tile.
+    //
     if (tile) {
-        /*
-         * If walking and now we've stopped, choose the idle no dir tile.
-         */
+        //
+        // If walking and now we've stopped, choose the idle no dir tile.
+        //
         if (!t->is_dead && !t->is_moving &&
             (time_get_time_ms() >= t->begin_move_ms + 500)) {
 
@@ -82,9 +82,9 @@ void Thing::animate (void)
         }
     }
 
-    /*
-     * Find a tile that matches the things current mode.
-     */
+    //
+    // Find a tile that matches the things current mode.
+    //
     uint32_t size = tiles.size();
     uint32_t tries = 0;
 
@@ -92,9 +92,9 @@ void Thing::animate (void)
         while (tries < size) {
             tries++;
 
-            /*
-             * Cater for wraps.
-             */
+            //
+            // Cater for wraps.
+            //
             if (!tile) {
                 tile = tile_info_first(tiles);
             }
@@ -201,9 +201,9 @@ void Thing::animate (void)
         return;
     }
 
- /*
-     * Use this tile!
-     */
+ //
+    // Use this tile!
+    //
     if (!tile->tile) {
         tile->tile = tile_find(tile_info_name(tile));
         if (!tile->tile) {
@@ -223,9 +223,9 @@ void Thing::animate (void)
 
     t->current_tileinfo = tile;
 
-    /*
-     * When does this tile expire ?
-     */
+    //
+    // When does this tile expire ?
+    //
     uint32_t delay = tile_info_delay_ms(tile);
     if (delay) {
         delay = delay + (myrand() % delay) / 5;

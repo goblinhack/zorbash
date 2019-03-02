@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_main.h"
 #include "my_thing.h"
@@ -79,9 +79,9 @@ point Thing::choose_best_nh (void)
         }
     }
 
-    /*
-     * We want to find how far everything is from us.
-     */
+    //
+    // We want to find how far everything is from us.
+    //
     dmap_scent->val[(int)at.x][(int)at.y] = DMAP_IS_GOAL;
 
     point tl(minx, miny);
@@ -89,9 +89,9 @@ point Thing::choose_best_nh (void)
     dmap_process(dmap_scent, tl, br);
     // dmap_print(dmap_scent);
 
-    /*
-     * Find all the possible goals we can smell.
-     */
+    //
+    // Find all the possible goals we can smell.
+    //
     std::multiset<Goal> goals;
     int oldest = 0;
 
@@ -103,10 +103,10 @@ point Thing::choose_best_nh (void)
                 continue;
             }
 
-            /*
-             * Look at the cell for each priority level. This means we can
-             * have multiple goals per cell. We combine them all together.
-             */
+            //
+            // Look at the cell for each priority level. This means we can
+            // have multiple goals per cell. We combine them all together.
+            //
             for (auto priority = 0; priority < 3; priority++) {
                 double score = 0;
                 if (!is_goal_for_me(p, priority, &score)) {
@@ -120,19 +120,19 @@ point Thing::choose_best_nh (void)
                 goal.at = p;
                 goals.insert(goal);
 
-                /*
-                 * Also take note of the oldest cell age; we will use this 
-                 * later.
-                 */
+                //
+                // Also take note of the oldest cell age; we will use this 
+                // later.
+                //
                 int age = age_map->val[p.x][p.y];
                 oldest = std::min(oldest, age);
             }
         }
     }
 
-    /*
-     * Combine the scores of multiple goals on each cell.
-     */
+    //
+    // Combine the scores of multiple goals on each cell.
+    //
     double cell_totals[MAP_WIDTH][MAP_HEIGHT];
     memset(&cell_totals, 0, sizeof(cell_totals));
     double highest_least_preferred = 0;
@@ -153,18 +153,18 @@ point Thing::choose_best_nh (void)
             cell_totals[p.x][p.y] += g.score;
             auto score = cell_totals[p.x][p.y];
 
-            /*
-             * Find the highest/least preferred score so we can scale all
-             * the goals later.
-             */
+            //
+            // Find the highest/least preferred score so we can scale all
+            // the goals later.
+            //
             highest_least_preferred = std::max(highest_least_preferred, score);
             lowest_most_preferred = std::min(lowest_most_preferred, score);
         }
     }
 
-    /*
-     * Scale the goals so they will fit in the dmap.
-     */
+    //
+    // Scale the goals so they will fit in the dmap.
+    //
     for (auto g : goals) {
         auto p = g.at;
         auto score = cell_totals[p.x][p.y];
@@ -174,14 +174,14 @@ point Thing::choose_best_nh (void)
         dmap_goals->val[p.x][p.y] = score;
     }
 
-    /*
-     * Record we've neen here.
-     */
+    //
+    // Record we've neen here.
+    //
     age_map->val[start.x][start.y]++;
 
-    /*
-     * Find the best next-hop to the best goal.
-     */
+    //
+    // Find the best next-hop to the best goal.
+    //
 
     //
     // By commenting this out we will also consider staying put and not

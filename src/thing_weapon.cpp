@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_game.h"
 #include "my_thing.h"
@@ -125,18 +125,18 @@ void Thing::get_weapon_use_offset (double *dx, double *dy)
     double dist_from_wielder = 
         ((double)tp_weapon_use_distance(weapon)) / 10.0;
 
-    /*
-     * Try current direction.
-     */
+    //
+    // Try current direction.
+    //
     if (is_dir_tl()) {
         *dx = -dist_from_wielder;
         *dy = -dist_from_wielder;
         return;
     }
 
-    /*
-     * Careful here - change dy too much and you hit through walls
-     */
+    //
+    // Careful here - change dy too much and you hit through walls
+    //
 
     if (is_dir_tr()) {
         *dx = dist_from_wielder;
@@ -192,10 +192,10 @@ Thingp Thing::get_weapon_carry_anim (void)
 
 Thingp Thing::get_weapon_use_anim (void)
 {
-    /*
-     * If this weapon_use_anim has its own thing id for animations then 
-     * destroy that.
-     */
+    //
+    // If this weapon_use_anim has its own thing id for animations then 
+    // destroy that.
+    //
     Thingp weapon_use_anim = 0;
 
     if (weapon_use_anim_thing_id) {
@@ -234,9 +234,9 @@ void Thing::sheath (void)
 
     log("sheathing %s", tp_short_name(weapon).c_str());
 
-    /*
-     * If this weapon has its own thing id for animations then destroy that.
-     */
+    //
+    // If this weapon has its own thing id for animations then destroy that.
+    //
     auto weapon_carry_anim = get_weapon_carry_anim();
     if (weapon_carry_anim) {
         weapon_carry_anim->dead("owner weapon");
@@ -269,19 +269,19 @@ void Thing::wield (Tpp weapon)
 
     auto carry_anim = thing_new(carry_as, at);
 
-    /*
-     * Set the weapon so we can use it later
-     */
+    //
+    // Set the weapon so we can use it later
+    //
     weapon_tp_id = weapon->id;
 
-    /*
-     * Save the thing id so the client wid can keep track of the weapon.
-     */
+    //
+    // Save the thing id so the client wid can keep track of the weapon.
+    //
     set_weapon_carry_anim(carry_anim);
 
-    /*
-     * Attach to the thing.
-     */
+    //
+    // Attach to the thing.
+    //
     carry_anim->set_owner(this);
 
     move_carried_items();
@@ -290,9 +290,9 @@ void Thing::wield (Tpp weapon)
 void Thing::use (void)
 {
     if (weapon_use_anim_thing_id) {
-        /*
-         * Still using.
-         */
+        //
+        // Still using.
+        //
         return;
     }
 
@@ -315,21 +315,21 @@ void Thing::use (void)
         return;
     }
 
-    /*
-     * Save the thing id so the client wid can keep track of the weapon.
-     */
+    //
+    // Save the thing id so the client wid can keep track of the weapon.
+    //
     auto use_anim = thing_new(swung_as, at);
 
-    /*
-     * Attach to the parent thing.
-     */
+    //
+    // Attach to the parent thing.
+    //
     use_anim->set_owner(this);
 
     set_weapon_use_anim(use_anim);
 
-    /*
-     * Hide the carry anim while using.
-     */
+    //
+    // Hide the carry anim while using.
+    //
     auto c = get_weapon_carry_anim();
     if (c) {
         c->hide();
