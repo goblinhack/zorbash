@@ -1702,7 +1702,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr25)
     TP_SET_DECL(is_rrr26)
     TP_SET_DECL(is_rrr27)
-    TP_SET_DECL(is_rrr28)
+    TP_SET_DECL(is_bleeder)
     TP_SET_DECL(is_meat_eater)
     TP_SET_DECL(is_made_of_meat)
     TP_SET_DECL(is_active)

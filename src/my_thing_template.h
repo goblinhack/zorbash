@@ -129,6 +129,7 @@ public:
     int blit_right_off {};
 
     int has_dir_anim {};
+    int has_hp_anim {};
     int is_animated {};
     int is_animated_no_dir {};
     int is_animation {};
@@ -170,7 +171,7 @@ public:
     int is_rrr25 {};
     int is_rrr26 {};
     int is_rrr27 {};
-    int is_rrr28 {};
+    int is_bleeder {};
     int is_meat_eater {};
     int is_made_of_meat {};
     int is_active {};
@@ -449,9 +450,9 @@ static inline int tp_is_rrr27 (Tpp t)
     return (t->is_rrr27);
 }
 
-static inline int tp_is_rrr28 (Tpp t)
+static inline int tp_is_bleeder (Tpp t)
 {
-    return (t->is_rrr28);
+    return (t->is_bleeder);
 }
 
 static inline int tp_is_meat_eater (Tpp t)

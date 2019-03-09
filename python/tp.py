@@ -227,8 +227,8 @@ class Tp:
     def set_is_rrr27(self, value):
         zx.tp_set_is_rrr27(self, value)
 
-    def set_is_rrr28(self, value):
-        zx.tp_set_is_rrr28(self, value)
+    def set_is_bleeder(self, value):
+        zx.tp_set_is_bleeder(self, value)
 
     def set_is_meat_eater(self, value):
         zx.tp_set_is_meat_eater(self, value)

@@ -21,10 +21,25 @@ def tp_init(name, short_name):
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 100
-    x.set_tile(tile=name + ".1", delay_ms=delay)
-    x.set_tile(tile=name + ".2", delay_ms=delay)
-    x.set_tile(tile=name + ".3", delay_ms=delay)
-    x.set_tile(tile=name + ".4", delay_ms=delay)
+    x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
+
+    x.set_tile(tile=name + ".1.75", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.75", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.75", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.75", is_hp_75_percent=True, delay_ms=delay)
+
+    x.set_tile(tile=name + ".1.50", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.50", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.50", is_hp_50_percent=True, delay_ms=delay)
+
+    x.set_tile(tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.25", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.25", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.25", is_hp_25_percent=True, delay_ms=delay)
 
 def init():
     tp_init(name="slime1", short_name="slime1")
