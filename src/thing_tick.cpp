@@ -14,7 +14,7 @@ void Thing::hunger_clock (void)
     //
     // Update the hunger clock.
     //
-    auto hunger_tick = tp_has_hunger_tick_every_rounds(tp);
+    auto hunger_tick = tp_is_hungry_every_rounds(tp);
     if (hunger_tick) {
         if (!(tick_count % hunger_tick)) {
             if (health > 0) {
@@ -56,6 +56,10 @@ void Thing::achieve_goals_in_life (void)
 void Thing::tick (void)
 {
     tick_count++;
+
+    if (is_dead) {
+        return;
+    }
 
     hunger_clock();
     achieve_goals_in_life();

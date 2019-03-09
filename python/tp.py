@@ -230,6 +230,9 @@ class Tp:
     def set_is_bleeder(self, value):
         zx.tp_set_is_bleeder(self, value)
 
+    def set_is_corpse_on_death(self, value):
+        zx.tp_set_is_corpse_on_death(self, value)
+
     def set_is_meat_eater(self, value):
         zx.tp_set_is_meat_eater(self, value)
 
@@ -242,17 +245,17 @@ class Tp:
     def set_is_starving_at_health_pct(self, value):
         zx.tp_set_is_starving_at_health_pct(self, value)
 
-    def set_has_initial_health(self, value):
-        zx.tp_set_has_initial_health(self, value)
+    def set_is_initial_health_at(self, value):
+        zx.tp_set_is_initial_health_at(self, value)
 
     def set_is_hungry_at_health_pct(self, value):
         zx.tp_set_is_hungry_at_health_pct(self, value)
 
-    def set_has_hunger_tick_every_rounds(self, value):
-        zx.tp_set_has_hunger_tick_every_rounds(self, value)
+    def set_is_hungry_every_rounds(self, value):
+        zx.tp_set_is_hungry_every_rounds(self, value)
 
-    def set_scent_distance(self, value):
-        zx.tp_set_scent_distance(self, value)
+    def set_is_scent_aware_at_distance(self, value):
+        zx.tp_set_is_scent_aware_at_distance(self, value)
 
     def set_is_ripple(self, value):
         zx.tp_set_is_ripple(self, value)
@@ -293,11 +296,11 @@ class Tp:
     def set_weapon_use_delay_hundredths(self, value):
         zx.tp_set_weapon_use_delay_hundredths(self, value)
 
-    def set_for_collision_use_box(self, value):
-        zx.tp_set_for_collision_use_box(self, value)
+    def set_is_collision_use_box(self, value):
+        zx.tp_set_is_collision_use_box(self, value)
 
-    def set_for_collision_use_circle(self, value):
-        zx.tp_set_for_collision_use_circle(self, value)
+    def set_is_collision_detect_use_circle(self, value):
+        zx.tp_set_is_collision_detect_use_circle(self, value)
 
     def set_weapon_damage(self, value):
         zx.tp_set_weapon_damage(self, value)

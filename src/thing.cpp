@@ -87,7 +87,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->is_attached    = false;
     t->is_lit         = false;
 
-    t->health         = tp_has_initial_health(tp);
+    t->health         = tp_is_initial_health_at(tp);
     t->max_health     = t->health;
 
     t->timestamp_born = time_get_time_ms_cached();
@@ -653,6 +653,10 @@ void Thing::kill (void)
         return;
     }
     is_dead = true;
+
+    if (tp_is_corpse_on_death(tp)) {
+        return;
+    }
 
     remove_hooks();
     things_to_delete.push_back(id);

@@ -4,8 +4,8 @@ import tp
 def tp_init(name, short_name):
     x = tp.Tp(name)
 
-    x.set_has_hunger_tick_every_rounds(10)
-    x.set_has_initial_health(20)
+    x.set_is_hungry_every_rounds(10)
+    x.set_is_initial_health_at(20)
     x.set_is_active(True)
     x.set_is_animated(True)
     x.set_is_blit_y_offset(True)
@@ -18,7 +18,7 @@ def tp_init(name, short_name):
     x.set_is_outlined(True)
     x.set_is_small_shadow_caster(True)
     x.set_is_starving_at_health_pct(10)
-    x.set_scent_distance(30)
+    x.set_is_scent_aware_at_distance(30)
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 

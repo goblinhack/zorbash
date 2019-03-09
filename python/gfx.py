@@ -90,7 +90,7 @@ def init_16x16():
             "slime1.2.25",
             "slime1.3.25",
             "slime1.4.25",
-            "",
+            "slime1.dead",
             "",
             "",
             "",
