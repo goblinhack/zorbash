@@ -170,16 +170,16 @@ public:
     int is_rrr24 {};
     int is_rrr25 {};
     int is_rrr26 {};
-    int is_rrr27 {};
+    int is_corpse_on_death {};
     int is_bleeder {};
     int is_meat_eater {};
     int is_made_of_meat {};
     int is_active {};
-    int has_initial_health {};
+    int is_initial_health_at {};
     int is_starving_at_health_pct {};
     int is_hungry_at_health_pct {};
-    int has_hunger_tick_every_rounds {};
-    int scent_distance {};
+    int is_hungry_every_rounds {};
+    int is_scent_aware_at_distance {};
     int is_ripple {};
     int is_light_strength {};
     int is_dirt {};
@@ -196,8 +196,8 @@ public:
     int is_wall_deco {};
     int move_delay_hundredths {};
     int weapon_use_delay_hundredths {};
-    int for_collision_use_box {};
-    int for_collision_use_circle {};
+    int is_collision_use_box {};
+    int is_collision_detect_use_circle {};
     int weapon_damage {};
     int is_projectile {};
     int is_explosion {};
@@ -445,9 +445,9 @@ static inline int tp_is_rrr26 (Tpp t)
     return (t->is_rrr26);
 }
 
-static inline int tp_is_rrr27 (Tpp t)
+static inline int tp_is_corpse_on_death (Tpp t)
 {
-    return (t->is_rrr27);
+    return (t->is_corpse_on_death);
 }
 
 static inline int tp_is_bleeder (Tpp t)
@@ -475,9 +475,9 @@ static inline int tp_is_starving_at_health_pct (Tpp t)
     return (t->is_starving_at_health_pct);
 }
 
-static inline int tp_has_initial_health (Tpp t)
+static inline int tp_is_initial_health_at (Tpp t)
 {
-    return (t->has_initial_health);
+    return (t->is_initial_health_at);
 }
 
 static inline int tp_is_hungry_at_health_pct (Tpp t)
@@ -485,14 +485,14 @@ static inline int tp_is_hungry_at_health_pct (Tpp t)
     return (t->is_hungry_at_health_pct);
 }
 
-static inline int tp_has_hunger_tick_every_rounds (Tpp t)
+static inline int tp_is_hungry_every_rounds (Tpp t)
 {
-    return (t->has_hunger_tick_every_rounds);
+    return (t->is_hungry_every_rounds);
 }
 
-static inline int tp_scent_distance (Tpp t)
+static inline int tp_is_scent_aware_at_distance (Tpp t)
 {
-    return (t->scent_distance);
+    return (t->is_scent_aware_at_distance);
 }
 
 static inline int tp_is_ripple (Tpp t)
@@ -575,14 +575,14 @@ static inline int tp_get_weapon_use_delay_hundredths (Tpp t)
     return (t->weapon_use_delay_hundredths);
 }
 
-static inline int tp_for_collision_use_box (Tpp t)
+static inline int tp_is_collision_use_box (Tpp t)
 {
-    return (t->for_collision_use_box);
+    return (t->is_collision_use_box);
 }
 
-static inline int tp_for_collision_use_circle (Tpp t)
+static inline int tp_is_collision_detect_use_circle (Tpp t)
 {
-    return (t->for_collision_use_circle);
+    return (t->is_collision_detect_use_circle);
 }
 
 static inline int tp_weapon_damage (Tpp t)

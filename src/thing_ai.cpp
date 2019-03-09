@@ -99,7 +99,7 @@ point Thing::choose_best_nh (void)
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
             fpoint fp(x, y);
-            if (dmap_scent->val[x][y] > tp->scent_distance) {
+            if (dmap_scent->val[x][y] > tp->is_scent_aware_at_distance) {
                 continue;
             }
 

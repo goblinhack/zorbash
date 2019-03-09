@@ -5,8 +5,7 @@ import tp
 def tp_init(name, short_name):
     x = tp.Tp(name)
 
-    x.set_for_collision_use_circle(True)
-    x.set_has_initial_health(10)
+    x.set_is_initial_health_at(10)
     x.set_is_active(True)
     x.set_is_animated(True)
     x.set_is_animated_can_hflip(True)
@@ -18,7 +17,6 @@ def tp_init(name, short_name):
     x.set_is_player(True)
     x.set_is_small_shadow_caster(True)
     x.set_is_weapon_use_effect(True)
-    x.set_move_delay_hundredths(1)
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_PLAYER)
 
