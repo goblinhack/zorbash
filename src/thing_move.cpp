@@ -46,7 +46,9 @@ bool Thing::move (fpoint future_pos,
         move_delta(fpoint(x, y) - at);
     }
 
-    bounce(0.1, 0.1, 100, 3);
+    if (tp_is_bouncy(tp)) {
+        bounce(0.1, 0.1, 100, 3);
+    }
 
     return (true);
 }
@@ -68,6 +70,8 @@ bool Thing::update_coordinates (void)
         y = at.y;
 
         interpolated_at = at;
+
+        is_ready_to_tick = true;
     } else {
         double t = end_move_ms - begin_move_ms;
         double dt = time_get_time_ms_cached() - begin_move_ms;

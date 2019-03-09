@@ -169,7 +169,7 @@ public:
     int is_rrr23 {};
     int is_rrr24 {};
     int is_rrr25 {};
-    int is_rrr26 {};
+    int is_bouncy {};
     int is_corpse_on_death {};
     int is_bleeder {};
     int is_meat_eater {};
@@ -441,9 +441,9 @@ static inline int tp_is_rrr25 (Tpp t)
     return (t->is_rrr25);
 }
 
-static inline int tp_is_rrr26 (Tpp t)
+static inline int tp_is_bouncy (Tpp t)
 {
-    return (t->is_rrr26);
+    return (t->is_bouncy);
 }
 
 static inline int tp_is_corpse_on_death (Tpp t)

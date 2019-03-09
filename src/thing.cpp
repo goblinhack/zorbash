@@ -73,19 +73,20 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         t->dir            = THING_DIR_NONE;
     }
 
-    t->is_hungry      = false;
-    t->is_starving    = false;
-    t->is_dead        = false;
-    t->is_bloodied    = false;
-    t->is_player      = false;
-    t->is_hidden      = false;
-    t->is_sleeping    = false;
-    t->is_moving      = false;
-    t->has_ever_moved = false;
-    t->is_open        = false;
-    t->is_bouncing    = false;
-    t->is_attached    = false;
-    t->is_lit         = false;
+    t->is_hungry        = false;
+    t->is_starving      = false;
+    t->is_dead          = false;
+    t->is_bloodied      = false;
+    t->is_player        = false;
+    t->is_hidden        = false;
+    t->is_sleeping      = false;
+    t->is_moving        = false;
+    t->has_ever_moved   = false;
+    t->is_open          = false;
+    t->is_bouncing      = false;
+    t->is_attached      = false;
+    t->is_lit           = false;
+    t->is_ready_to_tick = false;
 
     t->health         = tp_is_initial_health_at(tp);
     t->max_health     = t->health;
