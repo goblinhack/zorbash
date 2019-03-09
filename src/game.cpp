@@ -462,7 +462,7 @@ static void game_place_lava (class Dungeon *d, std::string what)
     }
 }
 
-static void game_place_blood (class Dungeon *d, std::string what)
+static void game_place_blood (class Dungeon *d)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -487,8 +487,9 @@ static void game_place_blood (class Dungeon *d, std::string what)
                     continue;
                 }
 
-                if (random_range(0, 1000) < 50) {
-                    (void) thing_new(what, fpoint(x, y));
+                if (random_range(0, 1000) < 20) {
+                    auto tp = tp_get_random_blood();
+                    (void) thing_new(tp_name(tp), fpoint(x, y));
                 }
             }
         }
@@ -857,8 +858,6 @@ _
 _
         game_place_corridor(dungeon, "corridor1", 0);
 _
-        game_place_blood(dungeon, "blood1");
-_
         game_place_deco(dungeon);
 _
         game_place_wall_deco(dungeon);
@@ -914,6 +913,7 @@ _
         game_place_deep_water(dungeon, "deep_water1");
         //fluid_init();
 
+        game_place_blood(dungeon);
 _
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {

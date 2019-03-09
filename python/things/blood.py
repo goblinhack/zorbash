@@ -17,5 +17,9 @@ def tp_init(name, short_name):
     x.set_tile(tile=name + ".25", is_hp_25_percent=True)
 
 def init():
-    tp_init(name="blood1", short_name="blood")
+    tp_init(name="blood1", short_name="blood1")
+    tp_init(name="blood2", short_name="blood2")
+    tp_init(name="blood3", short_name="blood3")
+    tp_init(name="blood4", short_name="blood4")
+
 init()
