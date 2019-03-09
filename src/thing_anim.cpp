@@ -50,7 +50,7 @@ void Thing::animate (void)
         //
         // If walking and now we've stopped, choose the idle no dir tile.
         //
-        if (!t->is_dead && !t->is_moving &&
+        if (t->is_player && !t->is_dead && !t->is_moving &&
             (time_get_time_ms() >= t->begin_move_ms + 500)) {
 
             Tileinfop new_tile;
@@ -104,6 +104,30 @@ void Thing::animate (void)
                 if (tile_info_is_dead(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
+                }
+            }
+
+            if (tp->has_hp_anim) {
+                if (t->health < t->max_health / 4) {
+                    if (!tile_info_is_hp_25_percent(tile)) {
+                        tile = tile_info_next(tiles, tile);
+                        continue;
+                    }
+                } else if (t->health < t->max_health / 2) {
+                    if (!tile_info_is_hp_50_percent(tile)) {
+                        tile = tile_info_next(tiles, tile);
+                        continue;
+                    }
+                } else if (t->health < (t->max_health / 4) * 3) {
+                    if (!tile_info_is_hp_75_percent(tile)) {
+                        tile = tile_info_next(tiles, tile);
+                        continue;
+                    }
+                } else {
+                    if (!tile_info_is_hp_100_percent(tile)) {
+                        tile = tile_info_next(tiles, tile);
+                        continue;
+                    }
                 }
             }
 
@@ -201,7 +225,7 @@ void Thing::animate (void)
         return;
     }
 
- //
+    //
     // Use this tile!
     //
     if (!tile->tile) {
@@ -214,12 +238,16 @@ void Thing::animate (void)
 
 #if 0
     if (tile && otile) {
-        if(tp_is_joinable(t)) {
+        if (tp_is_joinable(t)) {
             CON("%s-> %s", tile_info_name(otile), tile_info_name(tile));
         }
     }
 #endif
-//CON("set %s", tile_info_name(tile).c_str());
+#if 0
+    if (tp_is_monst(tp)) {
+        CON("set %s", tile_info_name(tile).c_str());
+    }
+#endif
 
     t->current_tileinfo = tile;
 

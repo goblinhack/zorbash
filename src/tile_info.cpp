@@ -99,24 +99,24 @@ uint8_t tile_info_is_yyy10 (Tileinfop t)
     return (t->is_yyy10);
 }
 
-uint8_t tile_info_is_yyy11 (Tileinfop t)
+uint8_t tile_info_is_hp_25_percent (Tileinfop t)
 {_
-    return (t->is_yyy11);
+    return (t->is_hp_25_percent);
 }
 
-uint8_t tile_info_is_yyy12 (Tileinfop t)
+uint8_t tile_info_is_hp_50_percent (Tileinfop t)
 {_
-    return (t->is_yyy12);
+    return (t->is_hp_50_percent);
 }
 
-uint8_t tile_info_is_yyy13 (Tileinfop t)
+uint8_t tile_info_is_hp_75_percent (Tileinfop t)
 {_
-    return (t->is_yyy13);
+    return (t->is_hp_75_percent);
 }
 
-uint8_t tile_info_is_yyy14 (Tileinfop t)
+uint8_t tile_info_is_hp_100_percent (Tileinfop t)
 {_
-    return (t->is_yyy14);
+    return (t->is_hp_100_percent);
 }
 
 uint8_t tile_info_is_sleeping (Tileinfop t)

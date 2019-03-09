@@ -326,10 +326,10 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_yyy8 = 0;
     int is_yyy9 = 0;
     int is_yyy10 = 0;
-    int is_yyy11 = 0;
-    int is_yyy12 = 0;
-    int is_yyy13 = 0;
-    int is_yyy14 = 0;
+    int is_hp_25_percent = 0;
+    int is_hp_50_percent = 0;
+    int is_hp_75_percent = 0;
+    int is_hp_100_percent = 0;
     int is_submerged = 0;
     int is_sleeping = 0;
     int is_open = 0;
@@ -377,10 +377,10 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_yyy8",
         (char*) "is_yyy9",
         (char*) "is_yyy10",
-        (char*) "is_yyy11",
-        (char*) "is_yyy12",
-        (char*) "is_yyy13",
-        (char*) "is_yyy14",
+        (char*) "is_hp_25_percent",
+        (char*) "is_hp_50_percent",
+        (char*) "is_hp_75_percent",
+        (char*) "is_hp_100_percent",
         (char*) "is_submerged",
         (char*) "is_sleeping",
         (char*) "is_open",
@@ -431,10 +431,10 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_yyy8,
                                      &is_yyy9,
                                      &is_yyy10,
-                                     &is_yyy11,
-                                     &is_yyy12,
-                                     &is_yyy13,
-                                     &is_yyy14,
+                                     &is_hp_25_percent,
+                                     &is_hp_50_percent,
+                                     &is_hp_75_percent,
+                                     &is_hp_100_percent,
                                      &is_submerged,
                                      &is_sleeping,
                                      &is_open,
@@ -592,15 +592,22 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     t->is_yyy8 = is_yyy8;
     t->is_yyy9 = is_yyy9;
     t->is_yyy10 = is_yyy10;
-    t->is_yyy11 = is_yyy11;
-    t->is_yyy12 = is_yyy12;
-    t->is_yyy13 = is_yyy13;
-    t->is_yyy14 = is_yyy14;
+    t->is_hp_25_percent = is_hp_25_percent;
+    t->is_hp_50_percent = is_hp_50_percent;
+    t->is_hp_75_percent = is_hp_75_percent;
+    t->is_hp_100_percent = is_hp_100_percent;
     t->is_sleeping = is_sleeping;
     t->is_open = is_open;
     t->is_dead = is_dead;
     t->is_end_of_anim = is_end_of_anim;
     t->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
+
+    if (t->is_hp_25_percent ||
+        t->is_hp_50_percent ||
+        t->is_hp_75_percent ||
+        t->is_hp_100_percent ) {
+        tp->has_hp_anim = true;
+    }
 
     if (up) {
         if (left) {
@@ -746,7 +753,7 @@ TP_BODY_SET_INT(is_rrr24)
 TP_BODY_SET_INT(is_rrr25)
 TP_BODY_SET_INT(is_rrr26)
 TP_BODY_SET_INT(is_rrr27)
-TP_BODY_SET_INT(is_rrr28)
+TP_BODY_SET_INT(is_bleeder)
 TP_BODY_SET_INT(is_meat_eater)
 TP_BODY_SET_INT(is_made_of_meat)
 TP_BODY_SET_INT(is_active)
