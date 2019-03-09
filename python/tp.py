@@ -221,8 +221,8 @@ class Tp:
     def set_is_rrr25(self, value):
         zx.tp_set_is_rrr25(self, value)
 
-    def set_is_rrr26(self, value):
-        zx.tp_set_is_rrr26(self, value)
+    def set_is_bouncy(self, value):
+        zx.tp_set_is_bouncy(self, value)
 
     def set_is_rrr27(self, value):
         zx.tp_set_is_rrr27(self, value)

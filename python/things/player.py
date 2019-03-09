@@ -15,6 +15,7 @@ def tp_init(name, short_name):
     x.set_is_movable(True)
     x.set_is_outlined(True)
     x.set_is_player(True)
+    x.set_is_bouncy(True)
     x.set_is_small_shadow_caster(True)
     x.set_is_weapon_use_effect(True)
     x.set_short_name(short_name)

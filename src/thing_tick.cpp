@@ -57,6 +57,11 @@ void Thing::tick (void)
 {
     tick_count++;
 
+    if (!is_ready_to_tick) {
+        return;
+    }
+    is_ready_to_tick = false;
+
     if (is_dead) {
         return;
     }

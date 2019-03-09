@@ -41,10 +41,10 @@ void player_tick (void)
     bool key_pressed = false;
     static uint32_t last_key_pressed_when;
     if (!last_key_pressed_when) {
-        last_key_pressed_when = time_get_time_ms_cached() - 100;
+        last_key_pressed_when = time_get_time_ms_cached() - 1000;
     }
 
-    if ((time_get_time_ms_cached() - last_key_pressed_when) > 75) {
+    if ((time_get_time_ms_cached() - last_key_pressed_when) > 125) {
         tick = state[SDL_SCANCODE_PERIOD] ? 1 : 0;
         key_pressed = true;
     }
@@ -142,8 +142,9 @@ void player_tick (void)
     auto moved = player->move(future_pos, up, down, left, right, fire);
 
     if (moved || tick) {
-        things_tick();
+//        things_tick();
     }
+        things_tick();
 
     if (up || down || left || right || fire) {
         key_pressed = true;

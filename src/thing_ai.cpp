@@ -22,6 +22,24 @@ bool Thing::is_obstacle_for_me (point p)
     if (game.state.map.is_deep_water_at(p)) {
         return (true);
     }
+
+    //
+    // Avoid threats and treat them as obstacles
+    //
+    for (auto i : game.state.map.all_active_things_at[p.x][p.y]) {
+        auto o = i.second;
+        if (o == this) {
+            continue;
+        }
+
+        auto otp = o->tp;
+        if (tp_is_monst(otp)) {
+            if (o->health >= health) {
+                return (true);
+            }
+        }
+    }
+
     return (false);
 }
 
@@ -187,7 +205,7 @@ point Thing::choose_best_nh (void)
     // By commenting this out we will also consider staying put and not
     // moving as an option
     //
-    //dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
+    dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
     //dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
 
