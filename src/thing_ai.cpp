@@ -188,7 +188,7 @@ point Thing::choose_best_nh (void)
     // moving as an option
     //
     //dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
-    dmap_print(dmap_goals, start);
+    //dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
 
     auto hops = dmap_solve(dmap_goals, start);
