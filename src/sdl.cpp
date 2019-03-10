@@ -1004,6 +1004,7 @@ void sdl_loop (void)
                 break;
             }
             player_tick();
+            things_tick();
         }
 
         //fluid_tick();

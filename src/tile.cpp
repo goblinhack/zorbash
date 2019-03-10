@@ -352,10 +352,10 @@ void tile_blit_with_offset (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
     y2 = tile->y2;
 
     if (unlikely(tp != 0)) {
-        double left_off  = (double)tp_get_blit_left_off(tp);
-        double right_off = (double)tp_get_blit_right_off(tp);
-        double top_off   = (double)tp_get_blit_top_off(tp);
-        double bot_off   = (double)tp_get_blit_bot_off(tp);
+        double left_off  = (double)tp_blit_left_off(tp);
+        double right_off = (double)tp_blit_right_off(tp);
+        double top_off   = (double)tp_blit_top_off(tp);
+        double bot_off   = (double)tp_blit_bot_off(tp);
 
         double pct_w     = tile->pct_width;
         double pct_h     = tile->pct_height;
@@ -383,10 +383,10 @@ void tile_blit_with_offset (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
 void tile_get_blit_size (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
 {
     if (tp) {
-        double left_off  = (double)tp_get_blit_left_off(tp);
-        double right_off = (double)tp_get_blit_right_off(tp);
-        double top_off   = (double)tp_get_blit_top_off(tp);
-        double bot_off   = (double)tp_get_blit_bot_off(tp);
+        double left_off  = (double)tp_blit_left_off(tp);
+        double right_off = (double)tp_blit_right_off(tp);
+        double top_off   = (double)tp_blit_top_off(tp);
+        double bot_off   = (double)tp_blit_bot_off(tp);
 
         double pix_w     = br->x - tl->x;
         double pix_h     = br->y - tl->y;
@@ -440,10 +440,10 @@ void tile_blit_colored_fat (Tpp tp,
     double y2 = tile->y2;
 
     if (unlikely(tp != 0)) {
-        double left_off  = (double)tp_get_blit_left_off(tp);
-        double right_off = (double)tp_get_blit_right_off(tp);
-        double top_off   = (double)tp_get_blit_top_off(tp);
-        double bot_off   = (double)tp_get_blit_bot_off(tp);
+        double left_off  = (double)tp_blit_left_off(tp);
+        double right_off = (double)tp_blit_right_off(tp);
+        double top_off   = (double)tp_blit_top_off(tp);
+        double bot_off   = (double)tp_blit_bot_off(tp);
 
         double pct_w     = tile->pct_width;
         double pct_h     = tile->pct_height;

@@ -1531,7 +1531,7 @@ void wid_set_thing_template (widp w, Tpp t)
         return;
     }
 
-    auto tiles = tp_get_tiles(t);
+    auto tiles = tp_tiles(t);
     auto tile = tile_info_first(tiles);
     if (!tile) {
         return;

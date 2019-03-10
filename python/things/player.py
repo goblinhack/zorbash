@@ -5,19 +5,20 @@ import tp
 def tp_init(name, short_name):
     x = tp.Tp(name)
 
-    x.set_is_initial_health_at(10)
     x.set_is_active(True)
     x.set_is_animated(True)
     x.set_is_animated_can_hflip(True)
     x.set_is_bleeder(True)
     x.set_is_blit_y_offset(True)
+    x.set_is_bouncy(True)
+    x.set_is_initial_health_at(10)
     x.set_is_made_of_meat(True)
     x.set_is_movable(True)
     x.set_is_outlined(True)
     x.set_is_player(True)
-    x.set_is_bouncy(True)
     x.set_is_small_shadow_caster(True)
     x.set_is_weapon_use_effect(True)
+    x.set_move_speed_ms(100)
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_PLAYER)
 

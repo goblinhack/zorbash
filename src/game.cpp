@@ -488,7 +488,7 @@ static void game_place_blood (class Dungeon *d)
                 }
 
                 if (random_range(0, 1000) < 20) {
-                    auto tp = tp_get_random_blood();
+                    auto tp = tp_random_blood();
                     (void) thing_new(tp_name(tp), fpoint(x, y));
                 }
             }
@@ -550,7 +550,7 @@ static void game_place_monsts (class Dungeon *d)
                 continue;
             }
 
-            auto tp = tp_get_random_monst();
+            auto tp = tp_random_monst();
             (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
@@ -568,7 +568,7 @@ static void game_place_keys (class Dungeon *d)
                 continue;
             }
 
-            auto tp = tp_get_random_key();
+            auto tp = tp_random_key();
             auto t = thing_new(tp_name(tp), fpoint(x, y));
             t->bounce(0.2, 1.0, 500, 99999);
         }
@@ -583,7 +583,7 @@ static void game_place_deco (class Dungeon *d)
                 continue;
             }
 
-            auto tp = tp_get_random_deco();
+            auto tp = tp_random_deco();
             thing_new(tp_name(tp), fpoint(x, y));
         }
     }
@@ -601,7 +601,7 @@ static void game_place_wall_deco (class Dungeon *d)
                 continue;
             }
 
-            auto tp = tp_get_random_wall_deco();
+            auto tp = tp_random_wall_deco();
             thing_new(tp_name(tp), fpoint(x, y));
         }
     }

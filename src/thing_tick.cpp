@@ -9,14 +9,14 @@
 
 void Thing::hunger_clock (void)
 {
-    tick_count++;
+    hunger_count++;
 
     //
     // Update the hunger clock.
     //
     auto hunger_tick = tp_is_hungry_every_rounds(tp);
     if (hunger_tick) {
-        if (!(tick_count % hunger_tick)) {
+        if (!(hunger_count % hunger_tick)) {
             if (health > 0) {
                 health--;
             } else {
@@ -55,23 +55,30 @@ void Thing::achieve_goals_in_life (void)
 
 void Thing::tick (void)
 {
-    tick_count++;
-
-    if (!is_ready_to_tick) {
-        return;
-    }
-    is_ready_to_tick = false;
-
     if (is_dead) {
         return;
     }
 
-    hunger_clock();
-    achieve_goals_in_life();
+    if (is_waiting_to_tick) {
+        is_waiting_to_tick = false;
+        hunger_count++;
+        hunger_clock();
+    }
+
+    if (is_waiting_for_ai) {
+        is_waiting_for_ai = false;
+        auto now = time_get_time_ms_cached();
+        if (now > next_ai_ms) {
+            achieve_goals_in_life();
+        }
+    }
 }
 
 void things_tick (void)
 {_
+    //
+    // Active things are generally things that move or have a life span
+    //
     for (auto i : game.state.map.all_active_things) {
         Thingp t = i.second;
         verify(t);

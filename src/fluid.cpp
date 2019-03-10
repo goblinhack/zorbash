@@ -837,7 +837,7 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
     if (!done) {
         done = 1;
 
-        tree_rootp tiles = tp_get_tiles(tp_find("water1"));
+        tree_rootp tiles = tp_tiles(tp_find("water1"));
         if (!tiles) {
             return;
         }

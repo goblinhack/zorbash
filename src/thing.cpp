@@ -73,75 +73,76 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         t->dir            = THING_DIR_NONE;
     }
 
-    t->is_hungry        = false;
-    t->is_starving      = false;
-    t->is_dead          = false;
-    t->is_bloodied      = false;
-    t->is_player        = false;
-    t->is_hidden        = false;
-    t->is_sleeping      = false;
-    t->is_moving        = false;
-    t->has_ever_moved   = false;
-    t->is_open          = false;
-    t->is_bouncing      = false;
-    t->is_attached      = false;
-    t->is_lit           = false;
-    t->is_ready_to_tick = false;
+    t->is_hungry          = false;
+    t->is_starving        = false;
+    t->is_dead            = false;
+    t->is_bloodied        = false;
+    t->is_player          = false;
+    t->is_hidden          = false;
+    t->is_sleeping        = false;
+    t->is_moving          = false;
+    t->has_ever_moved     = false;
+    t->is_open            = false;
+    t->is_bouncing        = false;
+    t->is_attached        = false;
+    t->is_lit             = false;
+    t->is_waiting_to_tick = tp_is_active(tp);
+    t->is_waiting_for_ai  = tp_is_active(tp);
 
     t->health         = tp_is_initial_health_at(tp);
     t->max_health     = t->health;
 
     t->timestamp_born = time_get_time_ms_cached();
 
-    auto tiles = tp_get_left_tiles(tp);
+    auto tiles = tp_left_tiles(tp);
     auto tinfo = tile_info_random(tiles);
     if (tinfo) {
         t->left_tile = tinfo->tile;
     }
 
-    tiles = tp_get_right_tiles(tp);
+    tiles = tp_right_tiles(tp);
     tinfo = tile_info_random(tiles);
     if (tinfo) {
         t->right_tile = tinfo->tile;
     }
 
-    tiles = tp_get_top_tiles(tp);
+    tiles = tp_top_tiles(tp);
     tinfo = tile_info_random(tiles);
     if (tinfo) {
         t->top_tile = tinfo->tile;
     }
 
-    tiles = tp_get_bot_tiles(tp);
+    tiles = tp_bot_tiles(tp);
     tinfo = tile_info_random(tiles);
     if (tinfo) {
         t->bot_tile = tinfo->tile;
     }
 
-    tiles = tp_get_tl_tiles(tp);
+    tiles = tp_tl_tiles(tp);
     tinfo = tile_info_random(tiles);
     if (tinfo) {
         t->tl_tile = tinfo->tile;
     }
 
-    tiles = tp_get_tr_tiles(tp);
+    tiles = tp_tr_tiles(tp);
     tinfo = tile_info_random(tiles);
     if (tinfo) {
         t->tr_tile = tinfo->tile;
     }
 
-    tiles = tp_get_br_tiles(tp);
+    tiles = tp_br_tiles(tp);
     tinfo = tile_info_random(tiles);
     if (tinfo) {
         t->br_tile = tinfo->tile;
     }
 
-    tiles = tp_get_bl_tiles(tp);
+    tiles = tp_bl_tiles(tp);
     tinfo = tile_info_random(tiles);
     if (tinfo) {
         t->bl_tile = tinfo->tile;
     }
 
-    tiles = tp_get_tiles(tp);
+    tiles = tp_tiles(tp);
     if (tp->is_animated) {
         tinfo = tile_info_first(tiles);
     } else {
@@ -612,7 +613,7 @@ void Thing::move_carried_items (void)
     //
     if (tp_is_monst(tp) || tp_is_player(tp)) {
         if (game.state.map.is_water[(int)at.x][(int)at.y]) {
-            thing_new(tp_name(tp_get_random_ripple()), at);
+            thing_new(tp_name(tp_random_ripple()), at);
         }
     }
 }

@@ -131,6 +131,7 @@ public:
     uint32_t           begin_move_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
+    uint32_t           next_ai_ms {};
 
     /*
      * Timestamps
@@ -212,25 +213,26 @@ public:
      * Ticks every time the thing does something. Used from memory aging
      * to the hunger clock.
      */
-    int                tick_count {0};
+    int                hunger_count {0};
 
     /*
      * Update thing_new when adding new bitfields.
      */
-    unsigned int       is_hungry:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_starving:1;      /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_dead:1;          /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_bloodied:1;      /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_player:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_hidden:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_sleeping:1;      /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_moving:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       has_ever_moved:1;   /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_open:1;          /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_bouncing:1;      /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_attached:1;      /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_lit:1;           /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_ready_to_tick:1; /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_hungry:1;          /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_starving:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_dead:1;            /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_bloodied:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_player:1;          /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_hidden:1;          /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_sleeping:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_moving:1;          /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       has_ever_moved:1;     /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_open:1;            /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_bouncing:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_attached:1;        /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_lit:1;             /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_waiting_to_tick:1; /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_waiting_for_ai:1;  /* until -std=c++2a remember to update thing.cpp */
     
     std::string logname(void);
     uint8_t is_dir_bl(void);

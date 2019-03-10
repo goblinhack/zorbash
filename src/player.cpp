@@ -139,13 +139,7 @@ void player_tick (void)
     }
 #endif
 
-    auto moved = player->move(future_pos, up, down, left, right, fire);
-
-    if (moved || tick) {
-//        things_tick();
-    }
-        things_tick();
-
+    player->move(future_pos, up, down, left, right, fire);
     if (up || down || left || right || fire) {
         key_pressed = true;
     }
