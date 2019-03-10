@@ -197,20 +197,20 @@ bool Map::is_key_at (const int x, const int y)
     return (is_key[x][y]);
 }
 
-bool Map::is_shadow_caster_at (const point &p)
+bool Map::gfx_large_shadow_caster_at (const point &p)
 {
     if (is_oob(p.x, p.y)) {
         return (true);
     }
-    return (is_shadow_caster[p.x][p.y]);
+    return (gfx_large_shadow_caster[p.x][p.y]);
 }
 
-bool Map::is_shadow_caster_at (const int x, const int y)
+bool Map::gfx_large_shadow_caster_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
         return (true);
     }
-    return (is_shadow_caster[x][y]);
+    return (gfx_large_shadow_caster[x][y]);
 }
 
 bool Map::is_door_at (const point &p)

@@ -130,8 +130,8 @@ public:
 
     int has_dir_anim {};
     int has_hp_anim {};
-    int is_animated {};
-    int is_animated_no_dir {};
+    int gfx_animated {};
+    int gfx_animated_no_dir {};
     int is_animation {};
     int is_door {};
     int is_floor {};
@@ -167,28 +167,27 @@ public:
     int is_rrr21 {};
     int is_rrr22 {};
     int is_rrr23 {};
-    int is_rrr24 {};
-    int delay_ai_ms {};
-    int is_bouncy {};
+    int collision_radius {};
+    int ai_delay_after_moving_ms {};
+    int gfx_bounce_on_move {};
     int is_corpse_on_death {};
     int is_bleeder {};
     int is_meat_eater {};
     int is_made_of_meat {};
     int is_active {};
-    int is_initial_health_at {};
-    int is_starving_at_health_pct {};
-    int is_hungry_at_health_pct {};
-    int is_hungry_every_rounds {};
-    int is_scent_aware_at_distance {};
+    int hunger_initial_health_at {};
+    int hunger_starving_at_health_pct {};
+    int hunger_at_health_pct {};
+    int hunger_every_rounds {};
+    int ai_scent_distance {};
     int is_ripple {};
     int is_light_strength {};
     int is_dirt {};
     int is_blood {};
-    int is_animated_can_vflip {};
-    int is_blit_y_offset {};
-    int is_small_shadow_caster {};
+    int gfx_animated_can_vflip {};
+    int gfx_small_shadow_caster {};
     int is_corridor {};
-    int is_blitted_as_sitting_on_the_ground {};
+    int gfx_oversized_but_sitting_on_the_ground {};
     int is_boring {};
     int is_exit {};
     int is_entrance {};
@@ -196,21 +195,20 @@ public:
     int is_wall_deco {};
     int move_speed_ms {};
     int weapon_use_delay_hundredths {};
-    int is_collision_use_box {};
-    int is_collision_detect_use_circle {};
+    int collision_box {};
+    int collision_circle {};
     int weapon_damage {};
     int is_projectile {};
     int is_explosion {};
     int is_combustable {};
     int is_spikes {};
-    int collision_priority {};
     int weapon_use_distance {};
     int is_weapon_carry_anim {};
-    int is_weapon_use_effect {};
+    int gfx_is_weapon_use_anim {};
     int is_weapon {};
-    int is_outlined {};
-    int is_shadow_caster {};
-    int is_animated_can_hflip {};
+    int gfx_outlined {};
+    int gfx_large_shadow_caster {};
+    int gfx_can_hflip {};
     int is_movable {};
     uint8_t z_depth {};
 };
@@ -306,14 +304,14 @@ static inline int tp_is_animation (Tpp t)
     return (t->is_animation);
 }
 
-static inline int tp_is_animated (Tpp t)
+static inline int tp_gfx_animated (Tpp t)
 {
-    return (t->is_animated);
+    return (t->gfx_animated);
 }
 
-static inline int tp_is_animated_no_dir (Tpp t)
+static inline int tp_gfx_animated_no_dir (Tpp t)
 {
-    return (t->is_animated_no_dir);
+    return (t->gfx_animated_no_dir);
 }
 
 static inline int tp_is_rrr1 (Tpp t)
@@ -431,19 +429,19 @@ static inline int tp_is_rrr23 (Tpp t)
     return (t->is_rrr23);
 }
 
-static inline int tp_is_rrr24 (Tpp t)
+static inline int tp_collision_radius (Tpp t)
 {
-    return (t->is_rrr24);
+    return (t->collision_radius);
 }
 
-static inline int tp_delay_ai_ms (Tpp t)
+static inline int tp_ai_delay_after_moving_ms (Tpp t)
 {
-    return (t->delay_ai_ms);
+    return (t->ai_delay_after_moving_ms);
 }
 
-static inline int tp_is_bouncy (Tpp t)
+static inline int tp_gfx_bounce_on_move (Tpp t)
 {
-    return (t->is_bouncy);
+    return (t->gfx_bounce_on_move);
 }
 
 static inline int tp_is_corpse_on_death (Tpp t)
@@ -471,29 +469,29 @@ static inline int tp_is_active (Tpp t)
     return (t->is_active);
 }
 
-static inline int tp_is_starving_at_health_pct (Tpp t)
+static inline int tp_hunger_starving_at_health_pct (Tpp t)
 {
-    return (t->is_starving_at_health_pct);
+    return (t->hunger_starving_at_health_pct);
 }
 
-static inline int tp_is_initial_health_at (Tpp t)
+static inline int tp_hunger_initial_health_at (Tpp t)
 {
-    return (t->is_initial_health_at);
+    return (t->hunger_initial_health_at);
 }
 
-static inline int tp_is_hungry_at_health_pct (Tpp t)
+static inline int tp_hunger_at_health_pct (Tpp t)
 {
-    return (t->is_hungry_at_health_pct);
+    return (t->hunger_at_health_pct);
 }
 
-static inline int tp_is_hungry_every_rounds (Tpp t)
+static inline int tp_hunger_every_rounds (Tpp t)
 {
-    return (t->is_hungry_every_rounds);
+    return (t->hunger_every_rounds);
 }
 
-static inline int tp_is_scent_aware_at_distance (Tpp t)
+static inline int tp_ai_scent_distance (Tpp t)
 {
-    return (t->is_scent_aware_at_distance);
+    return (t->ai_scent_distance);
 }
 
 static inline int tp_is_ripple (Tpp t)
@@ -516,19 +514,14 @@ static inline int tp_is_blood (Tpp t)
     return (t->is_blood);
 }
 
-static inline int tp_is_animated_can_vflip (Tpp t)
+static inline int tp_gfx_animated_can_vflip (Tpp t)
 {
-    return (t->is_animated_can_vflip);
+    return (t->gfx_animated_can_vflip);
 }
 
-static inline int tp_is_blit_y_offset (Tpp t)
+static inline int tp_gfx_small_shadow_caster (Tpp t)
 {
-    return (t->is_blit_y_offset);
-}
-
-static inline int tp_is_small_shadow_caster (Tpp t)
-{
-    return (t->is_small_shadow_caster);
+    return (t->gfx_small_shadow_caster);
 }
 
 static inline int tp_is_corridor (Tpp t)
@@ -536,9 +529,9 @@ static inline int tp_is_corridor (Tpp t)
     return (t->is_corridor);
 }
 
-static inline int tp_is_blitted_as_sitting_on_the_ground (Tpp t)
+static inline int tp_gfx_oversized_but_sitting_on_the_ground (Tpp t)
 {
-    return (t->is_blitted_as_sitting_on_the_ground);
+    return (t->gfx_oversized_but_sitting_on_the_ground);
 }
 
 static inline int tp_is_boring (Tpp t)
@@ -576,14 +569,14 @@ static inline int tp_weapon_use_delay_hundredths (Tpp t)
     return (t->weapon_use_delay_hundredths);
 }
 
-static inline int tp_is_collision_use_box (Tpp t)
+static inline int tp_collision_box (Tpp t)
 {
-    return (t->is_collision_use_box);
+    return (t->collision_box);
 }
 
-static inline int tp_is_collision_detect_use_circle (Tpp t)
+static inline int tp_collision_circle (Tpp t)
 {
-    return (t->is_collision_detect_use_circle);
+    return (t->collision_circle);
 }
 
 static inline int tp_weapon_damage (Tpp t)
@@ -611,11 +604,6 @@ static inline int tp_is_spikes (Tpp t)
     return (t->is_spikes);
 }
 
-static inline int tp_collision_priority (Tpp t)
-{
-    return (t->collision_priority);
-}
-
 static inline int tp_weapon_use_distance (Tpp t)
 {
     return (t->weapon_use_distance);
@@ -626,9 +614,9 @@ static inline int tp_is_weapon_carry_anim (Tpp t)
     return (t->is_weapon_carry_anim);
 }
 
-static inline int tp_is_weapon_use_effect (Tpp t)
+static inline int tp_gfx_is_weapon_use_anim (Tpp t)
 {
-    return (t->is_weapon_use_effect);
+    return (t->gfx_is_weapon_use_anim);
 }
 
 static inline int tp_is_weapon (Tpp t)
@@ -636,19 +624,19 @@ static inline int tp_is_weapon (Tpp t)
     return (t->is_weapon);
 }
 
-static inline int tp_is_outlined (Tpp t)
+static inline int tp_gfx_outlined (Tpp t)
 {
-    return (t->is_outlined);
+    return (t->gfx_outlined);
 }
 
-static inline int tp_is_shadow_caster (Tpp t)
+static inline int tp_gfx_large_shadow_caster (Tpp t)
 {
-    return (t->is_shadow_caster);
+    return (t->gfx_large_shadow_caster);
 }
 
-static inline int tp_is_animated_can_hflip (Tpp t)
+static inline int tp_gfx_can_hflip (Tpp t)
 {
-    return (t->is_animated_can_hflip);
+    return (t->gfx_can_hflip);
 }
 
 static inline int tp_z_depth (Tpp t)

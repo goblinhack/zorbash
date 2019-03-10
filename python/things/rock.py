@@ -17,7 +17,7 @@ def tp_init(name, short_name,
 
     x.set_is_boring(True)
     x.set_is_movement_blocking(True)
-    x.set_is_shadow_caster(True)
+    x.set_gfx_large_shadow_caster(True)
     x.set_is_rock(True)
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_WALLS)

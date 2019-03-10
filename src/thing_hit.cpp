@@ -126,7 +126,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
 
             if (!tp_is_explosion(hitter->tp)     &&
                 !tp_is_projectile(hitter->tp)    &&
-                !tp_is_weapon_use_effect(hitter->tp)) {
+                !tp_gfx_is_weapon_use_anim(hitter->tp)) {
                 //
                 // Not something that typically damages walls.
                 //
@@ -134,7 +134,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
             }
         }
 
-        if (tp_is_weapon_use_effect(hitter->tp)) {
+        if (tp_gfx_is_weapon_use_anim(hitter->tp)) {
             //
             // Get the player using the weapon as the hitter.
             //

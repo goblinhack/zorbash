@@ -62,11 +62,11 @@ class Tp:
     def set_blit_right_off(self, value):
         zx.tp_set_blit_right_off(self, value)
 
-    def set_is_animated(self, value):
-        zx.tp_set_is_animated(self, value)
+    def set_gfx_animated(self, value):
+        zx.tp_set_gfx_animated(self, value)
 
-    def set_is_animated_no_dir(self, value):
-        zx.tp_set_is_animated_no_dir(self, value)
+    def set_gfx_animated_no_dir(self, value):
+        zx.tp_set_gfx_animated_no_dir(self, value)
 
     def set_is_animation(self, value):
         zx.tp_set_is_animation(self, value)
@@ -215,14 +215,14 @@ class Tp:
     def set_is_rrr23(self, value):
         zx.tp_set_is_rrr23(self, value)
 
-    def set_is_rrr24(self, value):
-        zx.tp_set_is_rrr24(self, value)
+    def set_collision_radius(self, value):
+        zx.tp_set_collision_radius(self, value)
 
-    def set_delay_ai_ms(self, value):
-        zx.tp_set_delay_ai_ms(self, value)
+    def set_ai_delay_after_moving_ms(self, value):
+        zx.tp_set_ai_delay_after_moving_ms(self, value)
 
-    def set_is_bouncy(self, value):
-        zx.tp_set_is_bouncy(self, value)
+    def set_gfx_bounce_on_move(self, value):
+        zx.tp_set_gfx_bounce_on_move(self, value)
 
     def set_is_rrr27(self, value):
         zx.tp_set_is_rrr27(self, value)
@@ -242,20 +242,20 @@ class Tp:
     def set_is_active(self, value):
         zx.tp_set_is_active(self, value)
 
-    def set_is_starving_at_health_pct(self, value):
-        zx.tp_set_is_starving_at_health_pct(self, value)
+    def set_hunger_starving_at_health_pct(self, value):
+        zx.tp_set_hunger_starving_at_health_pct(self, value)
 
-    def set_is_initial_health_at(self, value):
-        zx.tp_set_is_initial_health_at(self, value)
+    def set_hunger_initial_health_at(self, value):
+        zx.tp_set_hunger_initial_health_at(self, value)
 
-    def set_is_hungry_at_health_pct(self, value):
-        zx.tp_set_is_hungry_at_health_pct(self, value)
+    def set_hunger_at_health_pct(self, value):
+        zx.tp_set_hunger_at_health_pct(self, value)
 
-    def set_is_hungry_every_rounds(self, value):
-        zx.tp_set_is_hungry_every_rounds(self, value)
+    def set_hunger_every_rounds(self, value):
+        zx.tp_set_hunger_every_rounds(self, value)
 
-    def set_is_scent_aware_at_distance(self, value):
-        zx.tp_set_is_scent_aware_at_distance(self, value)
+    def set_ai_scent_distance(self, value):
+        zx.tp_set_ai_scent_distance(self, value)
 
     def set_is_ripple(self, value):
         zx.tp_set_is_ripple(self, value)
@@ -266,17 +266,14 @@ class Tp:
     def set_is_blood(self, value):
         zx.tp_set_is_blood(self, value)
 
-    def set_is_animated_can_vflip(self, value):
-        zx.tp_set_is_animated_can_vflip(self, value)
-
-    def set_is_blit_y_offset(self, value):
-        zx.tp_set_is_blit_y_offset(self, value)
+    def set_gfx_animated_can_vflip(self, value):
+        zx.tp_set_gfx_animated_can_vflip(self, value)
 
     def set_is_corridor(self, value):
         zx.tp_set_is_corridor(self, value)
 
-    def set_is_blitted_as_sitting_on_the_ground(self, value):
-        zx.tp_set_is_blitted_as_sitting_on_the_ground(self, value)
+    def set_gfx_oversized_but_sitting_on_the_ground(self, value):
+        zx.tp_set_gfx_oversized_but_sitting_on_the_ground(self, value)
 
     def set_is_boring(self, value):
         zx.tp_set_is_boring(self, value)
@@ -296,11 +293,11 @@ class Tp:
     def set_weapon_use_delay_hundredths(self, value):
         zx.tp_set_weapon_use_delay_hundredths(self, value)
 
-    def set_is_collision_use_box(self, value):
-        zx.tp_set_is_collision_use_box(self, value)
+    def set_collision_box(self, value):
+        zx.tp_set_collision_box(self, value)
 
-    def set_is_collision_detect_use_circle(self, value):
-        zx.tp_set_is_collision_detect_use_circle(self, value)
+    def set_collision_circle(self, value):
+        zx.tp_set_collision_circle(self, value)
 
     def set_weapon_damage(self, value):
         zx.tp_set_weapon_damage(self, value)
@@ -314,29 +311,23 @@ class Tp:
     def set_is_combustable(self, value):
         zx.tp_set_is_combustable(self, value)
 
-    def set_is_spikes(self, value):
-        zx.tp_set_is_spikes(self, value)
-
-    def set_collision_priority(self, value):
-        zx.tp_set_collision_priority(self, value)
-
     def set_weapon_use_distance(self, value):
         zx.tp_set_weapon_use_distance(self, value)
 
     def set_is_weapon_carry_anim(self, value):
         zx.tp_set_is_weapon_carry_anim(self, value)
 
-    def set_is_weapon_use_effect(self, value):
-        zx.tp_set_is_weapon_use_effect(self, value)
+    def set_gfx_is_weapon_use_anim(self, value):
+        zx.tp_set_gfx_is_weapon_use_anim(self, value)
 
     def set_is_weapon(self, value):
         zx.tp_set_is_weapon(self, value)
 
-    def set_is_outlined(self, value):
-        zx.tp_set_is_outlined(self, value)
+    def set_gfx_outlined(self, value):
+        zx.tp_set_gfx_outlined(self, value)
 
-    def set_is_shadow_caster(self, value):
-        zx.tp_set_is_shadow_caster(self, value)
+    def set_gfx_large_shadow_caster(self, value):
+        zx.tp_set_gfx_large_shadow_caster(self, value)
 
     def set_z_depth(self, value):
         zx.tp_set_z_depth(self, value)
@@ -344,11 +335,11 @@ class Tp:
     def set_is_movable(self, value):
         zx.tp_set_is_movable(self, value)
 
-    def set_is_animated_can_hflip(self, value):
-        zx.tp_set_is_animated_can_hflip(self, value)
+    def set_gfx_can_hflip(self, value):
+        zx.tp_set_gfx_can_hflip(self, value)
 
-    def set_is_animated_can_vflip(self, value):
-        zx.tp_set_is_animated_can_vflip(self, value)
+    def set_gfx_animated_can_vflip(self, value):
+        zx.tp_set_gfx_animated_can_vflip(self, value)
 
     def set_is_movement_blocking(self, value):
         zx.tp_set_is_movement_blocking(self, value)
@@ -377,5 +368,5 @@ class Tp:
     def set_is_deep_water(self, value):
         zx.tp_set_is_deep_water(self, value)
 
-    def set_is_small_shadow_caster(self, value):
-        zx.tp_set_is_small_shadow_caster(self, value)
+    def set_gfx_small_shadow_caster(self, value):
+        zx.tp_set_gfx_small_shadow_caster(self, value)

@@ -487,7 +487,7 @@ static void game_place_blood (class Dungeon *d)
                     continue;
                 }
 
-                if (random_range(0, 1000) < 20) {
+                if (random_range(0, 1000) < 900) {
                     auto tp = tp_random_blood();
                     (void) thing_new(tp_name(tp), fpoint(x, y));
                 }
@@ -758,7 +758,7 @@ _
         memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
         memset(game.state.map.is_rock, sizeof(game.state.map.is_rock), 0);
         memset(game.state.map.is_solid, sizeof(game.state.map.is_solid), 0);
-        memset(game.state.map.is_shadow_caster, sizeof(game.state.map.is_shadow_caster), 0);
+        memset(game.state.map.gfx_large_shadow_caster, sizeof(game.state.map.gfx_large_shadow_caster), 0);
         memset(game.state.map.is_door, sizeof(game.state.map.is_door), 0);
         memset(game.state.map.is_wall, sizeof(game.state.map.is_wall), 0);
         memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
