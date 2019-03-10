@@ -46,7 +46,7 @@ bool Thing::move (fpoint future_pos,
         move_delta(fpoint(x, y) - at);
     }
 
-    if (tp_is_bouncy(tp)) {
+    if (tp_gfx_bounce_on_move(tp)) {
         bounce(0.1, 0.1, 100, 3);
     }
 
@@ -74,7 +74,7 @@ bool Thing::update_coordinates (void)
         if (!is_waiting_for_ai) {
             is_waiting_for_ai = true;
             auto now = time_get_time_ms_cached();
-            auto delay = tp_delay_ai_ms(tp);
+            auto delay = tp_ai_delay_after_moving_ms(tp);
             auto jitter = random_range(0, delay / 10);
             next_ai_ms = now + delay + jitter;
         }
@@ -125,7 +125,7 @@ bool Thing::update_coordinates (void)
     //
     // Put larger tiles on the same y base as small ones.
     //
-    if (unlikely(tp_is_blitted_as_sitting_on_the_ground(tp))) {
+    if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tp))) {
         double y_offset = 
             (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) * 
                 tile_gl_height) / 2.0;
@@ -143,17 +143,7 @@ bool Thing::update_coordinates (void)
         br.y -= height;
     }
 
-#if 0
-    //
-    // So the player floats a bit over the ground
-    //
-    if (tp_is_blit_y_offset(tp)) {
-        tl.y -= 0.01;
-        br.y -= 0.01;
-    }
-#endif
-
-    if (unlikely(tp_is_animated_can_hflip(tp))) {
+    if (unlikely(tp_gfx_can_hflip(tp))) {
         if (flip_start_ms) {
             auto diff = time_get_time_ms_cached() - flip_start_ms;
             uint32_t flip_time = 100;
@@ -183,7 +173,7 @@ bool Thing::update_coordinates (void)
         }
     }
 
-    if (unlikely(tp_is_animated_can_vflip(tp))) {
+    if (unlikely(tp_gfx_animated_can_vflip(tp))) {
         if (is_dir_up()) {
             std::swap(tl.y, br.y);
         }
@@ -317,9 +307,9 @@ void Thing::update_pos (fpoint to)
             game.state.map.is_key[old_at.x][old_at.y] = false;
             game.state.map.is_key[new_at.x][new_at.y] = true;
         }
-        if (tp_is_shadow_caster(tp)) {
-            game.state.map.is_shadow_caster[old_at.x][old_at.y] = false;
-            game.state.map.is_shadow_caster[new_at.x][new_at.y] = true;
+        if (tp_gfx_large_shadow_caster(tp)) {
+            game.state.map.gfx_large_shadow_caster[old_at.x][old_at.y] = false;
+            game.state.map.gfx_large_shadow_caster[new_at.x][new_at.y] = true;
         }
         if (tp_is_door(tp)) {
             game.state.map.is_door[old_at.x][old_at.y] = false;

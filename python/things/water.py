@@ -10,7 +10,7 @@ def tp_init(name, short_name,
 
     x.set_is_boring(True)
     x.set_is_water(True)
-    x.set_is_animated(True)
+    x.set_gfx_animated(True)
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_WATER)
     

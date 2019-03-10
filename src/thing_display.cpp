@@ -706,7 +706,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     if (tp_is_monst(tp) || 
         tp_is_player(tp) ||
-        tp_is_weapon_use_effect(tp) ||
+        tp_gfx_is_weapon_use_anim(tp) ||
         tp_is_weapon_carry_anim(tp)) {
 
         if (game.state.map.is_deep_water[(int)at.x][(int)at.y]) {
@@ -742,7 +742,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     }
 #endif
 
-    if (unlikely(tp_is_small_shadow_caster(tp))) {
+    if (unlikely(tp_gfx_small_shadow_caster(tp))) {
         if (submerged) {
             blit_shadow_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
             blit_shadow(tp, tile, blit_tl, blit_br);
@@ -751,7 +751,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    if (tp_is_outlined(tp)) {
+    if (tp_gfx_outlined(tp)) {
         if (submerged) {
             tile_blit_outline_section(
                 tp, tile, tile_tl, tile_br, blit_tl, blit_br);
@@ -810,7 +810,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     std::swap(blit_tl.y, blit_br.y);
 
     if (tile_get_height(tile) != TILE_HEIGHT) {
-        if (tp_is_blitted_as_sitting_on_the_ground(tp)) {
+        if (tp_gfx_oversized_but_sitting_on_the_ground(tp)) {
             blit_br.y += diff;
             blit_tl.y += diff;
         } else {
@@ -829,7 +829,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 
     if (tp_is_monst(tp) || 
         tp_is_player(tp) ||
-        tp_is_weapon_use_effect(tp) ||
+        tp_gfx_is_weapon_use_anim(tp) ||
         tp_is_weapon_carry_anim(tp)) {
 
         if (game.state.map.is_deep_water[(int)at.x][(int)at.y]) {
@@ -847,7 +847,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    if (tp_is_outlined(tp)) {
+    if (tp_gfx_outlined(tp)) {
         if (submerged) {
             tile_blit_outline_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
         } else {

@@ -920,7 +920,7 @@ static void thing_blit_things (int minx, int miny, int minz,
                     have_water      |= tp_is_water(t->tp);
                     have_blood      |= tp_is_blood(t->tp);
 
-                    if (unlikely(tp_is_animated(t->tp))) {
+                    if (unlikely(tp_gfx_animated(t->tp))) {
                         t->animate();
                     }
                 }

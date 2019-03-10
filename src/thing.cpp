@@ -67,7 +67,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->last_at        = at;
     t->depth          = tp_z_depth(tp);
 
-    if (tp_is_animated_can_hflip(tp)) {
+    if (tp_gfx_can_hflip(tp)) {
         t->dir            = THING_DIR_RIGHT;
     } else {
         t->dir            = THING_DIR_NONE;
@@ -89,7 +89,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->is_waiting_to_tick = tp_is_active(tp);
     t->is_waiting_for_ai  = tp_is_active(tp);
 
-    t->health         = tp_is_initial_health_at(tp);
+    t->health         = tp_hunger_initial_health_at(tp);
     t->max_health     = t->health;
 
     t->timestamp_born = time_get_time_ms_cached();
@@ -143,7 +143,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     }
 
     tiles = tp_tiles(tp);
-    if (tp->is_animated) {
+    if (tp->gfx_animated) {
         tinfo = tile_info_first(tiles);
     } else {
         tinfo = tile_info_random(tiles);
@@ -213,8 +213,8 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     if (tp_is_key(tp)) {
         game.state.map.is_key[new_at.x][new_at.y] = true;
     }
-    if (tp_is_shadow_caster(tp)) {
-        game.state.map.is_shadow_caster[new_at.x][new_at.y] = true;
+    if (tp_gfx_large_shadow_caster(tp)) {
+        game.state.map.gfx_large_shadow_caster[new_at.x][new_at.y] = true;
     }
     if (tp_is_door(tp)) {
         game.state.map.is_door[new_at.x][new_at.y] = true;
@@ -541,8 +541,8 @@ void Thing::destroy (void)
     if (tp_is_key(tp)) {
         game.state.map.is_key[old_at.x][old_at.y] = false;
     }
-    if (tp_is_shadow_caster(tp)) {
-        game.state.map.is_shadow_caster[old_at.x][old_at.y] = false;
+    if (tp_gfx_large_shadow_caster(tp)) {
+        game.state.map.gfx_large_shadow_caster[old_at.x][old_at.y] = false;
     }
     if (tp_is_door(tp)) {
         game.state.map.is_door[old_at.x][old_at.y] = false;
@@ -666,7 +666,7 @@ void Thing::kill (void)
 
 void Thing::set_dir_none (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 
@@ -683,7 +683,7 @@ uint8_t Thing::is_dir_none (void)
 
 void Thing::set_dir_down (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 
@@ -700,7 +700,7 @@ uint8_t Thing::is_dir_down (void)
 
 void Thing::set_dir_up (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 
@@ -717,13 +717,13 @@ uint8_t Thing::is_dir_up (void)
 
 void Thing::set_dir_left (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 
     if (dir != THING_DIR_LEFT) {
         if (dir == THING_DIR_RIGHT) {
-            if (tp_is_animated_can_hflip(tp)) {
+            if (tp_gfx_can_hflip(tp)) {
                 flip_start_ms = time_get_time_ms_cached();
             }
         }
@@ -739,13 +739,13 @@ uint8_t Thing::is_dir_left (void)
 
 void Thing::set_dir_right (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 
     if (dir != THING_DIR_RIGHT) {
         if (dir == THING_DIR_LEFT) {
-            if (tp_is_animated_can_hflip(tp)) {
+            if (tp_gfx_can_hflip(tp)) {
                 flip_start_ms = time_get_time_ms_cached();
             }
         }
@@ -761,7 +761,7 @@ uint8_t Thing::is_dir_right (void)
 
 void Thing::set_dir_tl (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 
@@ -778,7 +778,7 @@ uint8_t Thing::is_dir_tl (void)
 
 void Thing::set_dir_bl (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 
@@ -795,7 +795,7 @@ uint8_t Thing::is_dir_bl (void)
 
 void Thing::set_dir_tr (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 
@@ -812,7 +812,7 @@ uint8_t Thing::is_dir_tr (void)
 
 void Thing::set_dir_br (void)
 {_
-    if (tp_is_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp)) {
         return;
     }
 

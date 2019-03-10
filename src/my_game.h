@@ -76,7 +76,7 @@ public:
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_solid[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    gfx_large_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_door[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_light[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -120,8 +120,8 @@ public:
     bool is_monst_at(const int x, const int y);
     bool is_key_at(const point &p);
     bool is_key_at(const int x, const int y);
-    bool is_shadow_caster_at(const point &p);
-    bool is_shadow_caster_at(const int x, const int y);
+    bool gfx_large_shadow_caster_at(const point &p);
+    bool gfx_large_shadow_caster_at(const int x, const int y);
     bool is_door_at(const point &p);
     bool is_door_at(const int x, const int y);
 

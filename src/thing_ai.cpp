@@ -128,7 +128,7 @@ point Thing::choose_best_nh (void)
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
             fpoint fp(x, y);
-            if (dmap_scent->val[x][y] > tp->is_scent_aware_at_distance) {
+            if (dmap_scent->val[x][y] > tp->ai_scent_distance) {
                 continue;
             }
 
@@ -220,6 +220,9 @@ point Thing::choose_best_nh (void)
     //dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
 
+    //
+    // Move diagonally if not blocked by walls
+    //
     auto hops = dmap_solve(dmap_goals, start);
     if (hops.size() >= 2) {
         if (dmap_can_i_move_diagonally(dmap_goals, start, hops[0], hops[1])) {

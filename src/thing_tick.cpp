@@ -14,7 +14,7 @@ void Thing::hunger_clock (void)
     //
     // Update the hunger clock.
     //
-    auto hunger_tick = tp_is_hungry_every_rounds(tp);
+    auto hunger_tick = tp_hunger_every_rounds(tp);
     if (hunger_tick) {
         if (!(hunger_count % hunger_tick)) {
             if (health > 0) {
@@ -28,13 +28,13 @@ void Thing::hunger_clock (void)
 
     int hungry_at = 
       (int) ((double) max_health * 
-             ((double) tp_is_hungry_at_health_pct(tp) / 100.0));
+             ((double) tp_hunger_at_health_pct(tp) / 100.0));
 
     is_hungry = health < hungry_at;
 
     int starving_at = 
       (int) ((double) max_health * 
-             ((double) tp_is_starving_at_health_pct(tp) / 100.0));
+             ((double) tp_hunger_starving_at_health_pct(tp) / 100.0));
 
     is_starving = health < starving_at;
 }
