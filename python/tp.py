@@ -212,8 +212,8 @@ class Tp:
     def set_is_rrr22(self, value):
         zx.tp_set_is_rrr22(self, value)
 
-    def set_is_rrr23(self, value):
-        zx.tp_set_is_rrr23(self, value)
+    def set_collision_hit_priority(self, value):
+        zx.tp_set_collision_hit_priority(self, value)
 
     def set_collision_radius(self, value):
         zx.tp_set_collision_radius(self, value)

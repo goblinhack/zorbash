@@ -1697,7 +1697,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr20)
     TP_SET_DECL(is_rrr21)
     TP_SET_DECL(is_rrr22)
-    TP_SET_DECL(is_rrr23)
+    TP_SET_DECL(collision_hit_priority)
     TP_SET_DECL(collision_radius)
     TP_SET_DECL(ai_delay_after_moving_ms)
     TP_SET_DECL(gfx_bounce_on_move)
