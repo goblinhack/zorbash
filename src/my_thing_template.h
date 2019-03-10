@@ -166,7 +166,7 @@ public:
     int is_rrr20 {};
     int is_rrr21 {};
     int is_rrr22 {};
-    int is_rrr23 {};
+    int collision_hit_priority {};
     int collision_radius {};
     int ai_delay_after_moving_ms {};
     int gfx_bounce_on_move {};
@@ -424,9 +424,9 @@ static inline int tp_is_rrr22 (Tpp t)
     return (t->is_rrr22);
 }
 
-static inline int tp_is_rrr23 (Tpp t)
+static inline int tp_collision_hit_priority (Tpp t)
 {
-    return (t->is_rrr23);
+    return (t->collision_hit_priority);
 }
 
 static inline int tp_collision_radius (Tpp t)

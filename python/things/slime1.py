@@ -7,6 +7,7 @@ def tp_init(name, short_name):
     x.set_ai_delay_after_moving_ms(10)
     x.set_ai_scent_distance(20)
     x.set_collision_circle(True)
+    x.set_collision_hit_priority(10)
     x.set_collision_radius(0.5)
     x.set_gfx_animated(True)
     x.set_gfx_outlined(True)
