@@ -24,8 +24,17 @@ bool Thing::is_obstacle_for_me (point p)
     }
 
     //
+    // This is more of a look at the future position that some monst is
+    // already walking toward
+    //
+    if (game.state.map.is_monst_at(p)) {
+        return (true);
+    }
+
+    //
     // Avoid threats and treat them as obstacles
     //
+#if 0
     for (auto i : game.state.map.all_active_things_at[p.x][p.y]) {
         auto o = i.second;
         if (o == this) {
@@ -34,11 +43,13 @@ bool Thing::is_obstacle_for_me (point p)
 
         auto otp = o->tp;
         if (tp_is_monst(otp)) {
-            if (o->health >= health) {
-                return (true);
-            }
+            return (true);
+//            if (o->health >= health) {
+//                return (true);
+//            }
         }
     }
+#endif
 
     return (false);
 }
@@ -210,15 +221,17 @@ point Thing::choose_best_nh (void)
     dmap_process(dmap_goals, tl, br);
 
     auto hops = dmap_solve(dmap_goals, start);
-    for (auto nh : hops) {
-        if (nh == start) {
-            continue;
+    if (hops.size() >= 2) {
+        if (dmap_can_i_move_diagonally(dmap_goals, start, hops[0], hops[1])) {
+            return (hops[1]);
+        } else {
+            return (hops[0]);
         }
-
-        return (point(nh.x, nh.y));
+    } else if (hops.size() >= 1) {
+        return (hops[0]);
+    } else {
+        return (start);
     }
-
-    return (start);
 }
 
 point Thing::get_next_hop (void)

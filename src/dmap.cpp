@@ -507,6 +507,62 @@ void dmap_l_shaped_path_to_diag (const Dmap *D, std::vector<point> &path)
     }
 }
 
+//
+// Given 3 points, can we do a shortcut diagonal move?
+//
+bool dmap_can_i_move_diagonally (const Dmap *D, point a, point b, point c)
+{
+    auto px = a.x;
+    auto py = a.y;
+
+    auto nx = b.x;
+    auto ny = b.y;
+
+    auto mx = c.x;
+    auto my = c.y;
+
+    if (px - 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
+        ! is_movement_blocking_at(D, px - 1, py)) {
+        return (true);
+    }
+
+    if (px - 1 == mx && py + 1 == my && px - 1 == nx && py == ny &&
+        ! is_movement_blocking_at(D, px, py + 1)) {
+        return (true);
+    }
+
+    if (px + 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
+        ! is_movement_blocking_at(D, px + 1, py)) {
+        return (true);
+    }
+
+    if (px + 1 == mx && py + 1 == my && px + 1 == nx && py == ny &&
+        ! is_movement_blocking_at(D, px, py + 1)) {
+        return (true);
+    }
+
+    if (px - 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
+        ! is_movement_blocking_at(D, px - 1, py)) {
+        return (true);
+    }
+
+    if (px - 1 == mx && py - 1 == my && px - 1 == nx && py == ny &&
+        ! is_movement_blocking_at(D, px, py - 1)) {
+        return (true);
+    }
+
+    if (px + 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
+        ! is_movement_blocking_at(D, px + 1, py)) {
+        return (true);
+    }
+
+    if (px + 1 == mx && py - 1 == my && px + 1 == nx && py == ny && \
+        ! is_movement_blocking_at(D, px, py - 1)) {
+        return (true);
+    }
+    return (false);
+}
+
 std::vector<point> dmap_solve (const Dmap *D, const point start)
 {
     static const std::vector<point> all_deltas = {
@@ -520,7 +576,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
     memset(walked, 0, sizeof(walked));
 
     auto at = start;
-    std::vector<point> out = { at };
+    std::vector<point> out = { };
 
     for (;/*ever*/;) {
         auto x = at.x;
