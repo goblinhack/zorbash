@@ -15,11 +15,13 @@ def tp_init(name, short_name):
     x.set_is_movable(True)
     x.set_is_movement_blocking(True)
     x.set_is_outlined(True)
-    x.set_is_scent_aware_at_distance(30)
+    x.set_is_scent_aware_at_distance(20)
     x.set_is_small_shadow_caster(True)
     x.set_is_starving_at_health_pct(10)
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
+    x.set_move_speed_ms(1000)
+    x.set_delay_ai_ms(10)
 
     delay = 100
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

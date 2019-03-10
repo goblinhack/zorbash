@@ -125,7 +125,7 @@ Tpp tp_find_short_name (std::string name)
 
 Tilep tp_first_tile (Tpp tp)
 {_
-    auto tiles = tp_get_tiles(tp);
+    auto tiles = tp_tiles(tp);
 
     if (tiles.empty()) {
         DIE("tp %s has no tiles", tp_name(tp).c_str());
@@ -202,7 +202,7 @@ void tp_init_after_loading (void)
     }
 }
 
-Tpp tp_get_random_monst (void)
+Tpp tp_random_monst (void)
 {_
     auto n = tp_monsts.size();
     auto m = myrand() % n;
@@ -215,7 +215,7 @@ Tpp tp_get_random_monst (void)
     return (iter->second);
 }
 
-Tpp tp_get_random_ripple (void)
+Tpp tp_random_ripple (void)
 {_
     auto n = tp_ripples.size();
     auto m = myrand() % n;
@@ -228,7 +228,7 @@ Tpp tp_get_random_ripple (void)
     return (iter->second);
 }
 
-Tpp tp_get_random_key (void)
+Tpp tp_random_key (void)
 {_
     auto n = tp_keys.size();
     auto m = myrand() % n;
@@ -241,7 +241,7 @@ Tpp tp_get_random_key (void)
     return (iter->second);
 }
 
-Tpp tp_get_random_blood (void)
+Tpp tp_random_blood (void)
 {_
     auto n = tp_blood.size();
     auto m = myrand() % n;
@@ -254,7 +254,7 @@ Tpp tp_get_random_blood (void)
     return (iter->second);
 }
 
-Tpp tp_get_random_floor (void)
+Tpp tp_random_floor (void)
 {_
     auto n = tp_floors.size();
     auto m = myrand() % n;
@@ -267,7 +267,7 @@ Tpp tp_get_random_floor (void)
     return (iter->second);
 }
 
-Tpp tp_get_random_deco (void)
+Tpp tp_random_deco (void)
 {_
     auto n = tp_deco.size();
     auto m = myrand() % n;
@@ -280,7 +280,7 @@ Tpp tp_get_random_deco (void)
     return (iter->second);
 }
 
-Tpp tp_get_random_wall_deco (void)
+Tpp tp_random_wall_deco (void)
 {_
     auto n = tp_wall_deco.size();
     auto m = myrand() % n;

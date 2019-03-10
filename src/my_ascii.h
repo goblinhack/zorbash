@@ -76,9 +76,9 @@ void ascii_putf__(int x, int y, color fg, color bg, std::wstring &text);
 
 void ascii_display(void);
 
-int ascii_tp_get_tile_tl(int x, int y, fpoint *);
-int ascii_tp_get_tile_br(int x, int y, fpoint *);
-int ascii_tp_get_tile_mid(int x, int y, fpoint *);
+int ascii_tp_tile_tl(int x, int y, fpoint *);
+int ascii_tp_tile_br(int x, int y, fpoint *);
+int ascii_tp_tile_mid(int x, int y, fpoint *);
 
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry, 
                          const char *tilename, color c);

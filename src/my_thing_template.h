@@ -168,7 +168,7 @@ public:
     int is_rrr22 {};
     int is_rrr23 {};
     int is_rrr24 {};
-    int is_rrr25 {};
+    int delay_ai_ms {};
     int is_bouncy {};
     int is_corpse_on_death {};
     int is_bleeder {};
@@ -194,7 +194,7 @@ public:
     int is_entrance {};
     int is_floor_deco {};
     int is_wall_deco {};
-    int move_delay_hundredths {};
+    int move_speed_ms {};
     int weapon_use_delay_hundredths {};
     int is_collision_use_box {};
     int is_collision_detect_use_circle {};
@@ -223,30 +223,30 @@ Tpp tp_find(std::string name);
 Tpp tp_find(uint32_t id);
 Tpp tp_find_short_name(std::string name);
 void tp_init_after_loading(void);
-Tpp tp_get_random_monst(void);
-Tpp tp_get_random_ripple(void);
-Tpp tp_get_random_key(void);
-Tpp tp_get_random_blood(void);
-Tpp tp_get_random_floor(void);
-Tpp tp_get_random_deco(void);
-Tpp tp_get_random_wall_deco(void);
+Tpp tp_random_monst(void);
+Tpp tp_random_ripple(void);
+Tpp tp_random_key(void);
+Tpp tp_random_blood(void);
+Tpp tp_random_floor(void);
+Tpp tp_random_deco(void);
+Tpp tp_random_wall_deco(void);
 
-static inline int32_t tp_get_blit_top_off (Tpp &t)
+static inline int32_t tp_blit_top_off (Tpp &t)
 {
     return (t->blit_top_off);
 }
 
-static inline int32_t tp_get_blit_bot_off (Tpp &t)
+static inline int32_t tp_blit_bot_off (Tpp &t)
 {
     return (t->blit_bot_off);
 }
 
-static inline int32_t tp_get_blit_left_off (Tpp &t)
+static inline int32_t tp_blit_left_off (Tpp &t)
 {
     return (t->blit_left_off);
 }
 
-static inline int32_t tp_get_blit_right_off (Tpp &t)
+static inline int32_t tp_blit_right_off (Tpp &t)
 {
     return (t->blit_right_off);
 }
@@ -436,9 +436,9 @@ static inline int tp_is_rrr24 (Tpp t)
     return (t->is_rrr24);
 }
 
-static inline int tp_is_rrr25 (Tpp t)
+static inline int tp_delay_ai_ms (Tpp t)
 {
-    return (t->is_rrr25);
+    return (t->delay_ai_ms);
 }
 
 static inline int tp_is_bouncy (Tpp t)
@@ -566,12 +566,12 @@ static inline int tp_is_wall_deco (Tpp t)
     return (t->is_wall_deco);
 }
 
-static inline int tp_move_delay_hundredths (Tpp t)
+static inline int tp_move_speed_ms (Tpp t)
 {
-    return (t->move_delay_hundredths);
+    return (t->move_speed_ms);
 }
 
-static inline int tp_get_weapon_use_delay_hundredths (Tpp t)
+static inline int tp_weapon_use_delay_hundredths (Tpp t)
 {
     return (t->weapon_use_delay_hundredths);
 }
@@ -786,102 +786,102 @@ static inline std::string tp_raw_name (Tpp t)
     return (t->raw_name);
 }
 
-static inline Tileinfomap tp_get_tiles (Tpp t)
+static inline Tileinfomap tp_tiles (Tpp t)
 {
     return (t->tiles);
 }
 
-static inline Tileinfomap tp_get_left_tiles (Tpp t)
+static inline Tileinfomap tp_left_tiles (Tpp t)
 {
     return (t->left_tiles);
 }
 
-static inline Tileinfomap tp_get_right_tiles (Tpp t)
+static inline Tileinfomap tp_right_tiles (Tpp t)
 {
     return (t->right_tiles);
 }
 
-static inline Tileinfomap tp_get_top_tiles (Tpp t)
+static inline Tileinfomap tp_top_tiles (Tpp t)
 {
     return (t->top_tiles);
 }
 
-static inline Tileinfomap tp_get_bot_tiles (Tpp t)
+static inline Tileinfomap tp_bot_tiles (Tpp t)
 {
     return (t->bot_tiles);
 }
 
-static inline Tileinfomap tp_get_tl_tiles (Tpp t)
+static inline Tileinfomap tp_tl_tiles (Tpp t)
 {
     return (t->tl_tiles);
 }
 
-static inline Tileinfomap tp_get_tr_tiles (Tpp t)
+static inline Tileinfomap tp_tr_tiles (Tpp t)
 {
     return (t->tr_tiles);
 }
 
-static inline Tileinfomap tp_get_bl_tiles (Tpp t)
+static inline Tileinfomap tp_bl_tiles (Tpp t)
 {
     return (t->bl_tiles);
 }
 
-static inline Tileinfomap tp_get_br_tiles (Tpp t)
+static inline Tileinfomap tp_br_tiles (Tpp t)
 {
     return (t->br_tiles);
 }
 
-static inline Tileinfomap tp_get_horiz_tiles (Tpp t)
+static inline Tileinfomap tp_horiz_tiles (Tpp t)
 {
     return (t->horiz_tiles);
 }
 
-static inline Tileinfomap tp_get_vert_tiles (Tpp t)
+static inline Tileinfomap tp_vert_tiles (Tpp t)
 {
     return (t->vert_tiles);
 }
 
-static inline Tileinfomap tp_get_l90_tiles (Tpp t)
+static inline Tileinfomap tp_l90_tiles (Tpp t)
 {
     return (t->l90_tiles);
 }
 
-static inline Tileinfomap tp_get_l180_tiles (Tpp t)
+static inline Tileinfomap tp_l180_tiles (Tpp t)
 {
     return (t->l180_tiles);
 }
 
-static inline Tileinfomap tp_get_l_tiles (Tpp t)
+static inline Tileinfomap tp_l_tiles (Tpp t)
 {
     return (t->l_tiles);
 }
 
-static inline Tileinfomap tp_get_l270_tiles (Tpp t)
+static inline Tileinfomap tp_l270_tiles (Tpp t)
 {
     return (t->l270_tiles);
 }
 
-static inline Tileinfomap tp_get_t_tiles (Tpp t)
+static inline Tileinfomap tp_t_tiles (Tpp t)
 {
     return (t->t_tiles);
 }
 
-static inline Tileinfomap tp_get_t90_tiles (Tpp t)
+static inline Tileinfomap tp_t90_tiles (Tpp t)
 {
     return (t->t90_tiles);
 }
 
-static inline Tileinfomap tp_get_t180_tiles (Tpp t)
+static inline Tileinfomap tp_t180_tiles (Tpp t)
 {
     return (t->t180_tiles);
 }
 
-static inline Tileinfomap tp_get_t270_tiles (Tpp t)
+static inline Tileinfomap tp_t270_tiles (Tpp t)
 {
     return (t->t270_tiles);
 }
 
-static inline Tileinfomap tp_get_x_tiles (Tpp t)
+static inline Tileinfomap tp_x_tiles (Tpp t)
 {
     return (t->x_tiles);
 }

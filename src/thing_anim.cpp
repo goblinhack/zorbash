@@ -36,7 +36,7 @@ void Thing::animate (void)
         }
     }
 
-    tiles = tp_get_tiles(tp);
+    tiles = tp_tiles(tp);
     if (tiles.empty()) {
         return;
     }

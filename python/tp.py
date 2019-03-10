@@ -218,8 +218,8 @@ class Tp:
     def set_is_rrr24(self, value):
         zx.tp_set_is_rrr24(self, value)
 
-    def set_is_rrr25(self, value):
-        zx.tp_set_is_rrr25(self, value)
+    def set_delay_ai_ms(self, value):
+        zx.tp_set_delay_ai_ms(self, value)
 
     def set_is_bouncy(self, value):
         zx.tp_set_is_bouncy(self, value)
@@ -290,8 +290,8 @@ class Tp:
     def set_is_entrance(self, value):
         zx.tp_set_is_entrance(self, value)
 
-    def set_move_delay_hundredths(self, value):
-        zx.tp_set_move_delay_hundredths(self, value)
+    def set_move_speed_ms(self, value):
+        zx.tp_set_move_speed_ms(self, value)
 
     def set_weapon_use_delay_hundredths(self, value):
         zx.tp_set_weapon_use_delay_hundredths(self, value)

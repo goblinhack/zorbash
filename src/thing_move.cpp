@@ -71,7 +71,13 @@ bool Thing::update_coordinates (void)
 
         interpolated_at = at;
 
-        is_ready_to_tick = true;
+        if (!is_waiting_for_ai) {
+            is_waiting_for_ai = true;
+            auto now = time_get_time_ms_cached();
+            auto delay = tp_delay_ai_ms(tp);
+            auto jitter = random_range(0, delay / 10);
+            next_ai_ms = now + delay + jitter;
+        }
     } else {
         double t = end_move_ms - begin_move_ms;
         double dt = time_get_time_ms_cached() - begin_move_ms;
@@ -321,13 +327,21 @@ void Thing::update_pos (fpoint to)
         }
     }
 
+    int speed;
+    auto owner = get_owner();
+    if (owner) {
+        speed = tp_move_speed_ms(owner->tp);
+    } else{
+        speed = tp_move_speed_ms(tp);
+    }
+
     //
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
     at = to;
     begin_move_ms = time_get_time_ms_cached();
-    end_move_ms = begin_move_ms + ONESEC / 10;
+    end_move_ms = begin_move_ms + speed;
 
     move_carried_items();
 }
