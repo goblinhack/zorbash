@@ -668,7 +668,7 @@ public:
         return false;
     }
 
-    bool is_floor_deco_at (const int x, const int y)
+    bool gfx_is_floor_deco_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -678,14 +678,14 @@ public:
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
 
-            if (v.is_floor_deco) {
+            if (v.gfx_is_floor_deco) {
                 return true;
             }
         }
         return false;
     }
 
-    bool is_wall_deco_at (const int x, const int y)
+    bool gfx_is_wall_deco_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -695,7 +695,7 @@ public:
             auto c = getc(x, y, d);
             auto v = Charmap::all_charmaps[c];
 
-            if (v.is_wall_deco) {
+            if (v.gfx_is_wall_deco) {
                 return true;
             }
         }

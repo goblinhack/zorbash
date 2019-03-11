@@ -107,7 +107,7 @@ void Thing::animate (void)
                 }
             }
 
-            if (tp->has_hp_anim) {
+            if (tp->internal_has_hp_anim) {
                 if (t->health < t->max_health / 4) {
                     if (!tile_info_is_hp_25_percent(tile)) {
                         tile = tile_info_next(tiles, tile);
@@ -149,48 +149,48 @@ void Thing::animate (void)
                     continue;
                 }
 #if 0
-            } else if (tp->has_dir_anim && tp_is_dir_tl(t)) {
+            } else if (tp->internal_has_dir_anim && tp_is_dir_tl(t)) {
                 if (!tile_info_is_dir_tl(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && tp_is_dir_bl(t)) {
+            } else if (tp->internal_has_dir_anim && tp_is_dir_bl(t)) {
                 if (!tile_info_is_dir_bl(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && tp_is_dir_br(t)) {
+            } else if (tp->internal_has_dir_anim && tp_is_dir_br(t)) {
                 if (!tile_info_is_dir_br(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && tp_is_dir_tr(t)) {
+            } else if (tp->internal_has_dir_anim && tp_is_dir_tr(t)) {
                 if (!tile_info_is_dir_tr(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
 #endif
-            } else if (tp->has_dir_anim && t->is_dir_up()) {
+            } else if (tp->internal_has_dir_anim && t->is_dir_up()) {
                 if (!tile_info_is_dir_up(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && t->is_dir_down()) {
+            } else if (tp->internal_has_dir_anim && t->is_dir_down()) {
                 if (!tile_info_is_dir_down(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && t->is_dir_left()) {
+            } else if (tp->internal_has_dir_anim && t->is_dir_left()) {
                 if (!tile_info_is_dir_left(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && t->is_dir_right()) {
+            } else if (tp->internal_has_dir_anim && t->is_dir_right()) {
                 if (!tile_info_is_dir_right(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->has_dir_anim && t->is_dir_none()) {
+            } else if (tp->internal_has_dir_anim && t->is_dir_none()) {
                 if (!tile_info_is_dir_none(tile)) {
                     tile = tile_info_next(tiles, tile);
                     continue;

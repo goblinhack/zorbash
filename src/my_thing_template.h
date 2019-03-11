@@ -128,31 +128,59 @@ public:
     int blit_left_off {};
     int blit_right_off {};
 
-    int has_dir_anim {};
-    int has_hp_anim {};
+    int ai_delay_after_moving_ms {};
+    int ai_scent_distance {};
+    int collision_box {};
+    int collision_circle {};
+    int collision_hit_priority {};
+    int collision_radius {};
     int gfx_animated {};
+    int gfx_animated_can_vflip {};
     int gfx_animated_no_dir {};
-    int is_animation {};
+    int gfx_bounce_on_move {};
+    int gfx_can_hflip {};
+    int gfx_is_an_animation_only {};
+    int gfx_is_floor_deco {};
+    int gfx_is_wall_deco {};
+    int gfx_is_weapon_carry_anim_only {};
+    int gfx_is_weapon_use_anim {};
+    int gfx_large_shadow_caster {};
+    int gfx_outlined {};
+    int gfx_oversized_but_sitting_on_the_ground {};
+    int gfx_small_shadow_caster {};
+    int hunger_at_health_pct {};
+    int hunger_every_rounds {};
+    int hunger_initial_health_at {};
+    int hunger_starving_at_health_pct {};
+    int internal_has_dir_anim {};
+    int internal_has_hp_anim {};
+    int is_active {};
+    int is_bleeder {};
+    int is_blood {};
+    int is_boring {};
+    int is_combustable {};
+    int is_corpse_on_death {};
+    int is_corridor {};
+    int is_deep_water {};
+    int is_dirt {};
     int is_door {};
+    int is_entrance {};
+    int is_exit {};
+    int is_explosion {};
     int is_floor {};
     int is_key {};
     int is_lava {};
+    int is_light_strength {};
+    int is_made_of_meat {};
+    int is_meat_eater {};
     int is_monst {};
+    int is_movable {};
     int is_movement_blocking {};
     int is_player {};
-    int is_wall {};
+    int is_projectile {};
+    int is_ripple {};
     int is_rock {};
-    int is_water {};
-    int is_deep_water {};
     int is_rrr1 {};
-    int is_rrr2 {};
-    int is_rrr3 {};
-    int is_rrr4 {};
-    int is_rrr5 {};
-    int is_rrr6 {};
-    int is_rrr7 {};
-    int is_rrr8 {};
-    int is_rrr9 {};
     int is_rrr10 {};
     int is_rrr11 {};
     int is_rrr12 {};
@@ -163,53 +191,25 @@ public:
     int is_rrr17 {};
     int is_rrr18 {};
     int is_rrr19 {};
+    int is_rrr2 {};
     int is_rrr20 {};
     int is_rrr21 {};
     int is_rrr22 {};
-    int collision_hit_priority {};
-    int collision_radius {};
-    int ai_delay_after_moving_ms {};
-    int gfx_bounce_on_move {};
-    int is_corpse_on_death {};
-    int is_bleeder {};
-    int is_meat_eater {};
-    int is_made_of_meat {};
-    int is_active {};
-    int hunger_initial_health_at {};
-    int hunger_starving_at_health_pct {};
-    int hunger_at_health_pct {};
-    int hunger_every_rounds {};
-    int ai_scent_distance {};
-    int is_ripple {};
-    int is_light_strength {};
-    int is_dirt {};
-    int is_blood {};
-    int gfx_animated_can_vflip {};
-    int gfx_small_shadow_caster {};
-    int is_corridor {};
-    int gfx_oversized_but_sitting_on_the_ground {};
-    int is_boring {};
-    int is_exit {};
-    int is_entrance {};
-    int is_floor_deco {};
-    int is_wall_deco {};
-    int move_speed_ms {};
-    int weapon_use_delay_hundredths {};
-    int collision_box {};
-    int collision_circle {};
-    int weapon_damage {};
-    int is_projectile {};
-    int is_explosion {};
-    int is_combustable {};
-    int is_spikes {};
-    int weapon_use_distance {};
-    int is_weapon_carry_anim {};
-    int gfx_is_weapon_use_anim {};
+    int is_rrr3 {};
+    int is_rrr4 {};
+    int is_rrr5 {};
+    int is_rrr6 {};
+    int is_rrr7 {};
+    int is_rrr8 {};
+    int is_rrr9 {};
+    int is_wall {};
+    int is_water {};
     int is_weapon {};
-    int gfx_outlined {};
-    int gfx_large_shadow_caster {};
-    int gfx_can_hflip {};
-    int is_movable {};
+    int move_speed_ms {};
+    int weapon_damage {};
+    int weapon_use_delay_hundredths {};
+    int weapon_use_distance {};
+
     uint8_t z_depth {};
 };
 
@@ -299,9 +299,9 @@ static inline int tp_is_player (Tpp t)
     return (t->is_player);
 }
 
-static inline int tp_is_animation (Tpp t)
+static inline int tp_gfx_is_an_animation_only (Tpp t)
 {
-    return (t->is_animation);
+    return (t->gfx_is_an_animation_only);
 }
 
 static inline int tp_gfx_animated (Tpp t)
@@ -549,14 +549,14 @@ static inline int tp_is_entrance (Tpp t)
     return (t->is_entrance);
 }
 
-static inline int tp_is_floor_deco (Tpp t)
+static inline int tp_gfx_is_floor_deco (Tpp t)
 {
-    return (t->is_floor_deco);
+    return (t->gfx_is_floor_deco);
 }
 
-static inline int tp_is_wall_deco (Tpp t)
+static inline int tp_gfx_is_wall_deco (Tpp t)
 {
-    return (t->is_wall_deco);
+    return (t->gfx_is_wall_deco);
 }
 
 static inline int tp_move_speed_ms (Tpp t)
@@ -599,19 +599,14 @@ static inline int tp_is_combustable (Tpp t)
     return (t->is_combustable);
 }
 
-static inline int tp_is_spikes (Tpp t)
-{
-    return (t->is_spikes);
-}
-
 static inline int tp_weapon_use_distance (Tpp t)
 {
     return (t->weapon_use_distance);
 }
 
-static inline int tp_is_weapon_carry_anim (Tpp t)
+static inline int tp_gfx_is_weapon_carry_anim_only (Tpp t)
 {
-    return (t->is_weapon_carry_anim);
+    return (t->gfx_is_weapon_carry_anim_only);
 }
 
 static inline int tp_gfx_is_weapon_use_anim (Tpp t)

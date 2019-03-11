@@ -325,17 +325,18 @@ public:
      */
     bool update_coordinates(void);
     bool move(fpoint future_pos);
-    bool move(fpoint future_pos,
-              const uint8_t up,
-              const uint8_t down,
-              const uint8_t left,
-              const uint8_t right,
-              const uint8_t fire);
-    void bounce(double bounce_height,
-                double bounce_fade,
-                uint32_t ms,
+    bool move(fpoint future_pos, const uint8_t up, const uint8_t down,
+              const uint8_t left, const uint8_t right, const uint8_t fire);
+    void bounce(double bounce_height, double bounce_fade, uint32_t ms,
                 uint32_t bounce_count);
     double get_bounce(void);
+    void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
+
+    /*
+     * thing_collision.cpp
+     */
+    bool handle_collisions(void);
+    bool check_if_will_hit_solid_obstacle(fpoint future_pos);
 
     /*
      * thing_weapon.cpp
@@ -355,7 +356,6 @@ public:
     void set_weapon_carry_anim(Thingp weapon_carry_anim);
     void set_weapon_use_anim_id(uint32_t weapon_use_anim_id);
     void set_weapon_use_anim(Thingp weapon_use_anim);
-    void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

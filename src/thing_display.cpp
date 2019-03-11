@@ -21,12 +21,21 @@ void Thing::attach (void)
         }
     }
 
-    {
+    if (tp_is_active(tp)) {
         auto root = &game.state.map.all_active_things_at[(int)at.x][(int)at.y];
         auto p = std::make_pair(id, this);
         auto result = root->insert(p);
         if (result.second == false) {
             die("failed to insert to game.state.map.all_active_things_at");
+        }
+    }
+
+    if (!tp_is_boring(tp)) {
+        auto root = &game.state.map.all_non_boring_things_at[(int)at.x][(int)at.y];
+        auto p = std::make_pair(id, this);
+        auto result = root->insert(p);
+        if (result.second == false) {
+            die("failed to insert to game.state.map.all_non_boring_things_at");
         }
     }
 
@@ -57,12 +66,22 @@ void Thing::detach (void)
         root->erase(key);
     }
 
-    {
+    if (tp_is_active(tp)) {
         auto root = &game.state.map.all_active_things_at[(int)last_attached.x]
                                                         [(int)last_attached.y];
         auto result = root->find(id);
         if (result == root->end()) {
             die("failed to remove from game.state.map.all_active_things_at");
+        }
+        root->erase(id);
+    }
+
+    if (!tp_is_boring(tp)) {
+        auto root = &game.state.map.all_non_boring_things_at[(int)last_attached.x]
+                                                            [(int)last_attached.y];
+        auto result = root->find(id);
+        if (result == root->end()) {
+            die("failed to remove from game.state.map.all_non_boring_things_at");
         }
         root->erase(id);
     }
@@ -707,7 +726,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     if (tp_is_monst(tp) || 
         tp_is_player(tp) ||
         tp_gfx_is_weapon_use_anim(tp) ||
-        tp_is_weapon_carry_anim(tp)) {
+        tp_gfx_is_weapon_carry_anim_only(tp)) {
 
         if (game.state.map.is_deep_water[(int)at.x][(int)at.y]) {
             const auto pct_visible_above_surgace = 0.5;
@@ -830,7 +849,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     if (tp_is_monst(tp) || 
         tp_is_player(tp) ||
         tp_gfx_is_weapon_use_anim(tp) ||
-        tp_is_weapon_carry_anim(tp)) {
+        tp_gfx_is_weapon_carry_anim_only(tp)) {
 
         if (game.state.map.is_deep_water[(int)at.x][(int)at.y]) {
             const auto pct_visible_above_surgace = 0.5;

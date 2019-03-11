@@ -68,8 +68,8 @@ class Tp:
     def set_gfx_animated_no_dir(self, value):
         zx.tp_set_gfx_animated_no_dir(self, value)
 
-    def set_is_animation(self, value):
-        zx.tp_set_is_animation(self, value)
+    def set_gfx_is_an_animation_only(self, value):
+        zx.tp_set_gfx_is_an_animation_only(self, value)
 
     def set_is_monst(self, value):
         zx.tp_set_is_monst(self, value)
@@ -77,11 +77,11 @@ class Tp:
     def set_is_key(self, value):
         zx.tp_set_is_key(self, value)
 
-    def set_is_floor_deco(self, value):
-        zx.tp_set_is_floor_deco(self, value)
+    def set_gfx_is_floor_deco(self, value):
+        zx.tp_set_gfx_is_floor_deco(self, value)
 
-    def set_is_wall_deco(self, value):
-        zx.tp_set_is_wall_deco(self, value)
+    def set_gfx_is_wall_deco(self, value):
+        zx.tp_set_gfx_is_wall_deco(self, value)
 
     def set_is_player(self, value):
         zx.tp_set_is_player(self, value)
@@ -314,8 +314,8 @@ class Tp:
     def set_weapon_use_distance(self, value):
         zx.tp_set_weapon_use_distance(self, value)
 
-    def set_is_weapon_carry_anim(self, value):
-        zx.tp_set_is_weapon_carry_anim(self, value)
+    def set_gfx_is_weapon_carry_anim_only(self, value):
+        zx.tp_set_gfx_is_weapon_carry_anim_only(self, value)
 
     def set_gfx_is_weapon_use_anim(self, value):
         zx.tp_set_gfx_is_weapon_use_anim(self, value)

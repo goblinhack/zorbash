@@ -47,8 +47,8 @@ public:
     bool                      is_door              {false};
     bool                      is_secret_door       {false};
     bool                      is_entrance          {false};
-    bool                      is_floor_deco        {false};
-    bool                      is_wall_deco         {false};
+    bool                      gfx_is_floor_deco        {false};
+    bool                      gfx_is_wall_deco         {false};
     bool                      is_exit              {false};
     bool                      is_key               {false};
     bool                      is_lava              {false};

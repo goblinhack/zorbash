@@ -606,44 +606,44 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         t->is_hp_50_percent ||
         t->is_hp_75_percent ||
         t->is_hp_100_percent ) {
-        tp->has_hp_anim = true;
+        tp->internal_has_hp_anim = true;
     }
 
     if (up) {
         if (left) {
             t->dir = THING_DIR_TL;
-            t->has_dir_anim = true;
+            t->internal_has_dir_anim = true;
         } else if (right) {
             t->dir = THING_DIR_TR;
-            t->has_dir_anim = true;
+            t->internal_has_dir_anim = true;
         } else {
             t->dir = THING_DIR_UP;
-            t->has_dir_anim = true;
+            t->internal_has_dir_anim = true;
         }
     } else if (down) {
         if (left) {
             t->dir = THING_DIR_BL;
-            t->has_dir_anim = true;
+            t->internal_has_dir_anim = true;
         } else if (right) {
             t->dir = THING_DIR_BR;
-            t->has_dir_anim = true;
+            t->internal_has_dir_anim = true;
         } else {
             t->dir = THING_DIR_DOWN;
-            t->has_dir_anim = true;
+            t->internal_has_dir_anim = true;
         }
     } else if (left) {
         t->dir = THING_DIR_LEFT;
-        t->has_dir_anim = true;
+        t->internal_has_dir_anim = true;
     } else if (right) {
         t->dir = THING_DIR_RIGHT;
-        t->has_dir_anim = true;
+        t->internal_has_dir_anim = true;
     } else if (none) {
         t->dir = THING_DIR_NONE;
-        t->has_dir_anim = true;
+        t->internal_has_dir_anim = true;
     }
 
-    if (t->has_dir_anim) {
-        tp->has_dir_anim = true;
+    if (t->internal_has_dir_anim) {
+        tp->internal_has_dir_anim = true;
     }
 	
     if (tp_name) {	
@@ -719,7 +719,7 @@ TP_BODY_SET_STRING(weapon_carry_anim)
 TP_BODY_SET_STRING(weapon_use_anim)
 TP_BODY_SET_INT(gfx_animated)
 TP_BODY_SET_INT(gfx_animated_no_dir)
-TP_BODY_SET_INT(is_animation)
+TP_BODY_SET_INT(gfx_is_an_animation_only)
 TP_BODY_SET_INT(is_door)
 TP_BODY_SET_INT(is_lava)
 TP_BODY_SET_INT(is_water)
@@ -773,8 +773,8 @@ TP_BODY_SET_INT(gfx_oversized_but_sitting_on_the_ground)
 TP_BODY_SET_INT(is_boring)
 TP_BODY_SET_INT(is_exit)
 TP_BODY_SET_INT(is_entrance)
-TP_BODY_SET_INT(is_floor_deco)
-TP_BODY_SET_INT(is_wall_deco)
+TP_BODY_SET_INT(gfx_is_floor_deco)
+TP_BODY_SET_INT(gfx_is_wall_deco)
 TP_BODY_SET_INT(move_speed_ms)
 TP_BODY_SET_INT(weapon_use_delay_hundredths)
 TP_BODY_SET_INT(collision_box)
@@ -784,7 +784,7 @@ TP_BODY_SET_INT(is_projectile)
 TP_BODY_SET_INT(is_explosion)
 TP_BODY_SET_INT(is_combustable)
 TP_BODY_SET_INT(weapon_use_distance)
-TP_BODY_SET_INT(is_weapon_carry_anim)
+TP_BODY_SET_INT(gfx_is_weapon_carry_anim_only)
 TP_BODY_SET_INT(gfx_is_weapon_use_anim)
 TP_BODY_SET_INT(is_weapon)
 TP_BODY_SET_INT(gfx_outlined)

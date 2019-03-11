@@ -377,3 +377,15 @@ void Thing::move_to (fpoint to)
 {_
     move_delta(fpoint(to.x - at.x, to.y - at.y));
 }
+
+void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)
+{
+    P0->x = tl.x;
+    P0->y = tl.y;
+    P1->x = br.x;
+    P1->y = tl.y;
+    P2->x = br.x;
+    P2->y = br.y;
+    P3->x = tl.x;
+    P3->y = br.y;
+}
