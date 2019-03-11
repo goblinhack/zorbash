@@ -71,7 +71,7 @@ public:
     bool is_dead {};
     bool is_end_of_anim {};
     bool is_dead_on_end_of_anim {};
-    bool has_dir_anim {};
+    bool internal_has_dir_anim {};
 };
 
 void tile_info_free(Tileinfop);

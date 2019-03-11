@@ -13,7 +13,7 @@ def tp_init(name, short_name,
     x.set_is_boring(True)
     x.set_is_movement_blocking(True)
     x.set_gfx_outlined(True)
-    x.set_is_wall_deco(True)
+    x.set_gfx_is_wall_deco(True)
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_WALLS_DECO)
     

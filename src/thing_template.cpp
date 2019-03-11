@@ -183,7 +183,7 @@ void tp_init_after_loading (void)
                 ERR("thing template insert floor [%s] failed", tp_name(tp).c_str());
             }
         }
-        if (tp_is_floor_deco(tp)) {
+        if (tp_gfx_is_floor_deco(tp)) {
             static unsigned int id;
             id++;
             auto result = tp_deco.insert(std::make_pair(id, tp));
@@ -191,7 +191,7 @@ void tp_init_after_loading (void)
                 ERR("thing template insert deco [%s] failed", tp_name(tp).c_str());
             }
         }
-        if (tp_is_wall_deco(tp)) {
+        if (tp_gfx_is_wall_deco(tp)) {
             static unsigned int id;
             id++;
             auto result = tp_wall_deco.insert(std::make_pair(id, tp));

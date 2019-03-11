@@ -579,7 +579,7 @@ static void game_place_deco (class Dungeon *d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (!d->is_floor_deco_at(x, y)) {
+            if (!d->gfx_is_floor_deco_at(x, y)) {
                 continue;
             }
 
@@ -593,7 +593,7 @@ static void game_place_wall_deco (class Dungeon *d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (!d->is_wall_deco_at(x, y)) {
+            if (!d->gfx_is_wall_deco_at(x, y)) {
                 continue;
             }
 
