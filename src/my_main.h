@@ -98,7 +98,8 @@
  * Maximum number of thing types. This cannot be exceeded without changing
  * the message format in tx updates.
  */
-#define TP_MAX                      10000
+#define TP_MAX                                  10000
+#define THING_COLLISION_TEST_DELAY_TENTHS       1
 
 /*
  * How much the wheel mouse moves.

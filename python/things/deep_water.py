@@ -8,7 +8,6 @@ def deep_tp_init(name, short_name,
     
     x = tp.Tp(name)
 
-    x.set_is_boring(True)
     x.set_is_deep_water(True)
     x.set_gfx_animated(True)
     x.set_short_name(short_name)

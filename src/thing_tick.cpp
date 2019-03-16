@@ -53,8 +53,29 @@ void Thing::achieve_goals_in_life (void)
     }
 }
 
+void Thing::collision_check (void)
+{
+    bool need_collision_test = false;
+
+    if (time_have_x_tenths_passed_since(THING_COLLISION_TEST_DELAY_TENTHS,
+                                        timestamp_collision)) {
+        need_collision_test = true;
+    }
+
+    if (need_collision_test) {
+        handle_collisions();
+        timestamp_collision = 
+          time_get_time_ms() + random_range(0, THING_COLLISION_TEST_DELAY_TENTHS);
+    }
+}
+
 void Thing::tick (void)
 {
+    if (is_dead) {
+        return;
+    }
+
+    collision_check();
     if (is_dead) {
         return;
     }
@@ -64,6 +85,9 @@ void Thing::tick (void)
         hunger_count++;
         hunger_clock();
     }
+    if (is_dead) {
+        return;
+    }
 
     if (is_waiting_for_ai) {
         is_waiting_for_ai = false;
@@ -72,6 +96,11 @@ void Thing::tick (void)
             achieve_goals_in_life();
         }
     }
+    if (is_dead) {
+        return;
+    }
+
+    // continue
 }
 
 void things_tick (void)
