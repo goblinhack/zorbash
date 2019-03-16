@@ -15,7 +15,6 @@ def tp_init(name, short_name,
     
     x = tp.Tp(name)
 
-    x.set_is_boring(True)
     x.set_is_movement_blocking(True)
     x.set_gfx_large_shadow_caster(True)
     x.set_is_rock(True)
@@ -77,7 +76,7 @@ def tp_init(name, short_name,
         x.set_br_tile(br_tile=name)
 
 def init():
-    tp_init(name="rock1", short_name="A boring rock", 
+    tp_init(name="rock1", short_name="A rock", 
             tiles=[
                         "rock1.1",
                         "rock1.2",

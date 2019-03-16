@@ -365,15 +365,16 @@ void thing_possible_init (void)
 /*
  * Find the thing with the highest priority to hit.
  */
-void thing_possible_hit_do (Thingp hitter)
+void Thing::possible_hits_find_best (void)
 {_
+    auto me = this;
     ThingColl *best = nullptr;
 
     for (auto cand : thing_colls) {
         /*
          * Don't be silly and hit yourself.
          */
-        if (cand.target == hitter) {
+        if (cand.target == me) {
             continue;
         }
 
@@ -398,10 +399,10 @@ void thing_possible_hit_do (Thingp hitter)
             /*
              * If this target is closer, prefer it.
              */
-            double dist_best = DISTANCE(hitter->at.x, hitter->at.y,
+            double dist_best = DISTANCE(me->at.x, me->at.y,
                                         best->target->at.x, 
                                         best->target->at.y);
-            double dist_cand = DISTANCE(hitter->at.x, hitter->at.y,
+            double dist_cand = DISTANCE(me->at.x, me->at.y,
                                         cand.target->at.x, 
                                         cand.target->at.y);
 
@@ -412,12 +413,13 @@ void thing_possible_hit_do (Thingp hitter)
     }
 
     if (best) {
-        if (best->target->hit_possible(hitter, 0)) {
+con("hit %s", best->target->logname().c_str());
+        if (best->target->hit_possible(me, 0)) {
             if (best->hitter_killed_on_hitting) {
-                hitter->dead("hitter killed on hitting");
+                me->dead("self killed on hitting");
             }
         } else if (best->hitter_killed_on_hit_or_miss) {
-            hitter->dead("hitter killed on hitting");
+            me->dead("self killed on hitting");
         }
     }
 
@@ -475,12 +477,14 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
 
     if (tp_collision_circle(A->tp) &&
         tp_collision_circle(B->tp)) {
+CON("no circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
         if (circle_circle_collision(A, /* circle */
                                     B, /* box */
                                     A_at,
                                     &intersect)) {
             return (things_tile_overlap(A, future_pos, B));
         }
+DIE("circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
         return (false);
     }
 
@@ -492,14 +496,14 @@ bool things_overlap (const Thingp A, const Thingp B)
     return (things_overlap (A, fpoint(-1, -1), B));
 }
 
-/*
- * handle a single collision between two things
- */
-static int things_handle_collision (Thingp me, 
-                                    Thingp it, 
-                                    int x, int y,
-                                    int dx, int dy)
+//
+// handle a single collision between two things
+//
+// false aborts the walk
+//
+bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
 {_
+    auto me = this;
     auto it_tp = it->tp;
     auto me_tp = me->tp;
 
@@ -593,26 +597,24 @@ bool Thing::handle_collisions (void)
         maxy++;
     }
 
-    for (uint8_t z = MAP_DEPTH_ITEM; z < MAP_DEPTH; z++) {
-        for (int16_t x = minx; x <= maxx; x++) {
-            auto dx = x - at.x;
-            for (int16_t y = miny; y <= maxy; y++) {
-                auto dy = y - at.y;
-                for (auto p : game.state.map.all_non_boring_things_at[x][y]) {
-                    auto it = p.second;
-                    if (this == it) {
-                        continue;
-                    }
+    for (int16_t x = minx; x <= maxx; x++) {
+        auto dx = x - at.x;
+        for (int16_t y = miny; y <= maxy; y++) {
+            auto dy = y - at.y;
+            for (auto p : game.state.map.all_non_boring_things_at[x][y]) {
+                auto it = p.second;
+                if (this == it) {
+                    continue;
+                }
 
-                    if (!things_handle_collision(this, it, x, y, dx, dy)) {
-                        return (false);
-                    }
+                if (!possible_hit(it, x, y, dx, dy)) {
+                    return (false);
                 }
             }
         }
     }
 
-    thing_possible_hit_do(this);
+    possible_hits_find_best();
 
     return (true);
 }
@@ -647,6 +649,10 @@ bool Thing::check_if_will_hit_solid_obstacle (fpoint future_pos)
     for (uint8_t z = MAP_DEPTH_ITEM; z < MAP_DEPTH; z++) {
         for (int16_t x = minx; x <= maxx; x++) {
             for (int16_t y = miny; y <= maxy; y++) {
+                //
+                // Walk things like monsters and walls, but skip stuff like
+                // floor tiles and decorations
+                //
                 for (auto p : game.state.map.all_non_boring_things_at[x][y]) {
                     auto it = p.second;
                     verify(it);

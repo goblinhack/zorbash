@@ -141,6 +141,7 @@ public:
     uint32_t           timestamp_last_attacked {};
     uint32_t           timestamp_move_start {};
     uint32_t           timestamp_move_end {};
+    uint32_t           timestamp_collision {};
 
     /*
      * Bouncing
@@ -275,6 +276,7 @@ public:
      * thing_tick.cpp
      */
     void tick();
+    void collision_check();
     void achieve_goals_in_life();
     void hunger_clock();
 
@@ -337,6 +339,8 @@ public:
      */
     bool handle_collisions(void);
     bool check_if_will_hit_solid_obstacle(fpoint future_pos);
+    void possible_hits_find_best(void);
+    bool possible_hit(Thingp it, int x, int y, int dx, int dy);
 
     /*
      * thing_weapon.cpp
