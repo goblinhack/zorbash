@@ -71,6 +71,10 @@ bool Thing::update_coordinates (void)
 
         interpolated_at = at;
 
+        if (!is_waiting_to_tick) {
+            is_waiting_to_tick = true;
+        }
+
         if (!is_waiting_for_ai) {
             is_waiting_for_ai = true;
             auto now = time_get_time_ms_cached();
