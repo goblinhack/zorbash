@@ -797,33 +797,6 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_flush();
 
     //
-    // The blood tiles are twice the size of normal tiles, so work out
-    // where to draw them to avoid overlaps
-    //
-    uint8_t blood_map[(MAP_WIDTH / 2) + 3][(MAP_HEIGHT / 2) + 3] = {{0}};
-
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            if (game.state.map.is_blood[x][y]) {
-                auto X = x / 2;
-                auto Y = y / 2;
-                X++;
-                Y++;
-                blood_map[X][Y] = true;
-                blood_map[X+1][Y] = true;
-                blood_map[X-1][Y] = true;
-                blood_map[X][Y+1] = true;
-                blood_map[X][Y-1] = true;
-
-                blood_map[X+1][Y+1] = true;
-                blood_map[X-1][Y+1] = true;
-                blood_map[X+1][Y-1] = true;
-                blood_map[X-1][Y-1] = true;
-            }
-        }
-    }
-
-    //
     // Finally blit the blood and then the buffer to the display.
     //
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
@@ -831,37 +804,21 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            auto X = x / 2;
-            auto Y = y / 2;
-            X++;
-            Y++;
+            for (auto p : thing_display_order[x][y][z]) {
+                auto t = p.second;
 
-            if (blood_map[X][Y]) {
-                blood_map[X][Y] = false;
-                auto tx = (double)(x &~1);
-                auto ty = (double)(y &~1);
-                double tlx = tx * game.config.tile_gl_width;
-                double tly = ty * game.config.tile_gl_height;
-                double brx = (tx+2.0) * game.config.tile_gl_width;
-                double bry = (ty+2.0) * game.config.tile_gl_height;
-
-                tlx += game.config.tile_gl_width / 2.0;
-                tly += game.config.tile_gl_height / 2.0;
-                brx += game.config.tile_gl_width / 2.0;
-                bry += game.config.tile_gl_height / 2.0;
-
-                tlx -= offset_x;
-                tly -= offset_y;
-                brx -= offset_x;
-                bry -= offset_y;
-
-                auto tile = blood[X % BLOOD_ACROSS][Y % BLOOD_DOWN];
+                auto tile = blood[0][0];
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;
                 auto y2 = tile->y2;
 
+                auto tlx = t->last_blit_tl.x;
+                auto tly = t->last_blit_tl.y;
+                auto brx = t->last_blit_br.x;
+                auto bry = t->last_blit_br.y;
                 blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
+                // t->blit(offset_x, offset_y, x, y);
             }
         }
     }

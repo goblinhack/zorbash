@@ -133,7 +133,7 @@ public:
     int collision_box {};
     int collision_circle {};
     int collision_hit_priority {};
-    int collision_radius {};
+    double collision_radius {};
     int gfx_animated {};
     int gfx_animated_can_vflip {};
     int gfx_animated_no_dir {};
@@ -429,7 +429,7 @@ static inline int tp_collision_hit_priority (Tpp t)
     return (t->collision_hit_priority);
 }
 
-static inline int tp_collision_radius (Tpp t)
+static inline double tp_collision_radius (Tpp t)
 {
     return (t->collision_radius);
 }

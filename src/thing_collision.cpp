@@ -31,7 +31,7 @@ public:
 
 static std::vector<class ThingColl> thing_colls;
 static const int def_collision_radius = 1;
-static int collision_radius = def_collision_radius;
+static double collision_radius = def_collision_radius;
 
 bool 
 thing_overlaps_border (Thingp t)
@@ -47,8 +47,8 @@ thing_overlaps_border (Thingp t)
                 continue;
             }
             
-            int px = t->at.x * TILE_WIDTH + x;
-            int py = t->at.y * TILE_HEIGHT + y;
+            int px = t->interpolated_at.x * TILE_WIDTH + x;
+            int py = t->interpolated_at.y * TILE_HEIGHT + y;
 
             if (px < MAP_BORDER * TILE_WIDTH) {
                 return (true);
@@ -91,8 +91,8 @@ things_tile_overlap (Thingp t, fpoint t_at, Thingp o)
             int px = t_at.x * TILE_WIDTH + x;
             int py = t_at.y * TILE_HEIGHT + y;
 
-            int ox = o->at.x * TILE_WIDTH;
-            int oy = o->at.y * TILE_HEIGHT;
+            int ox = o->interpolated_at.x * TILE_WIDTH;
+            int oy = o->interpolated_at.y * TILE_HEIGHT;
 
             int dx = px - ox;
             int dy = py - oy;
@@ -129,7 +129,7 @@ first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  overlap", px, py, thi
 bool 
 things_tile_overlap (Thingp t, Thingp o)
 {_
-    return (things_tile_overlap(t, t->at, o));
+    return (things_tile_overlap(t, t->interpolated_at, o));
 }
 
 
@@ -143,7 +143,7 @@ int circle_box_collision (Thingp C,
 {
     fpoint C0, C1, C2, C3;
     C->to_coords(&C0, &C1, &C2, &C3);
-    auto C_offset = C_at - C->at;
+    auto C_offset = C_at - C->interpolated_at;
     C0 += C_offset;
     C1 += C_offset;
     C2 += C_offset;
@@ -151,7 +151,7 @@ int circle_box_collision (Thingp C,
 
     fpoint B0, B1, B2, B3;
     B->to_coords(&B0, &B1, &B2, &B3);
-    auto B_offset = B_at - B->at;
+    auto B_offset = B_at - B->interpolated_at;
     B0 += B_offset;
     B1 += B_offset;
     B2 += B_offset;
@@ -163,7 +163,7 @@ int circle_box_collision (Thingp C,
      * Corner collisions, normal is at 45 degrees. Unless there is a wall.
      */
     if (distance(C_at, B0) < radius) {
-        if (!game.state.map.is_wall_at(B->at.x - 1, B->at.y)) {
+        if (!game.state.map.is_wall_at(B->interpolated_at.x - 1, B->interpolated_at.y)) {
             normal->x = C_at.x - B0.x;
             normal->y = C_at.y - B0.y;
             return (true);
@@ -171,7 +171,7 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B1) < radius) {
-        if (!game.state.map.is_wall_at(B->at.x + 1, B->at.y)) {
+        if (!game.state.map.is_wall_at(B->interpolated_at.x + 1, B->interpolated_at.y)) {
             normal->x = C_at.x - B1.x;
             normal->y = C_at.y - B1.y;
             return (true);
@@ -179,7 +179,7 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B2) < radius) {
-        if (!game.state.map.is_wall_at(B->at.x + 1, B->at.y)) {
+        if (!game.state.map.is_wall_at(B->interpolated_at.x + 1, B->interpolated_at.y)) {
             normal->x = C_at.x - B2.x;
             normal->y = C_at.y - B2.y;
             return (true);
@@ -187,7 +187,7 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B3) < radius) {
-        if (!game.state.map.is_wall_at(B->at.x - 1, B->at.y)) {
+        if (!game.state.map.is_wall_at(B->interpolated_at.x - 1, B->interpolated_at.y)) {
             normal->x = C_at.x - B3.x;
             normal->y = C_at.y - B3.y;
             return (true);
@@ -276,23 +276,25 @@ int circle_circle_collision (Thingp A,
                              fpoint at,
                              fpoint *intersect)
 {
-    double Ax = A->at.x;
-    double Ay = A->at.y;
-    Ax += (at.x - A->at.x);
-    Ay += (at.y - A->at.y);
+    double Ax = A->interpolated_at.x;
+    double Ay = A->interpolated_at.y;
+    Ax += (at.x - A->interpolated_at.x);
+    Ay += (at.y - A->interpolated_at.y);
 
     fpoint A_at = { Ax, Ay };
-    fpoint A0, A1, A2, A3;
-    A->to_coords(&A0, &A1, &A2, &A3);
-    double A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
+    //fpoint A0, A1, A2, A3;
+    //A->to_coords(&A0, &A1, &A2, &A3);
+    //double A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
+    double A_radius = tp_collision_radius(A->tp);
 
-    double Bx = B->at.x;
-    double By = B->at.y;
+    double Bx = B->interpolated_at.x;
+    double By = B->interpolated_at.y;
 
     fpoint B_at = { Bx, By };
-    fpoint B0, B1, B2, B3;
-    B->to_coords(&B0, &B1, &B2, &B3);
-    double B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
+    //fpoint B0, B1, B2, B3;
+    //B->to_coords(&B0, &B1, &B2, &B3);
+    //double B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
+    double B_radius = tp_collision_radius(B->tp);
 
     fpoint n = B_at - A_at;
     double touching_dist = A_radius + B_radius;
@@ -300,6 +302,7 @@ int circle_circle_collision (Thingp A,
 
     double diff = dist_squared - touching_dist * touching_dist;
     if (diff > 0.0) {
+CON("  A %f B %f dist %f", A_radius, B_radius, sqrt(fabs(dist_squared)));
         /*
          * Circles are not touching
          */
@@ -399,12 +402,12 @@ void Thing::possible_hits_find_best (void)
             /*
              * If this target is closer, prefer it.
              */
-            double dist_best = DISTANCE(me->at.x, me->at.y,
-                                        best->target->at.x, 
-                                        best->target->at.y);
-            double dist_cand = DISTANCE(me->at.x, me->at.y,
-                                        cand.target->at.x, 
-                                        cand.target->at.y);
+            double dist_best = DISTANCE(me->interpolated_at.x, me->interpolated_at.y,
+                                        best->target->interpolated_at.x, 
+                                        best->target->interpolated_at.y);
+            double dist_cand = DISTANCE(me->interpolated_at.x, me->interpolated_at.y,
+                                        cand.target->interpolated_at.x, 
+                                        cand.target->interpolated_at.y);
 
             if (dist_cand < dist_best) {
                 best = &cand;
@@ -436,11 +439,13 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
      * If not then we are just checking out a future_pos position.
      */
     if (future_pos == fpoint(-1, -1)) {
-        A_at = A->at;
-        B_at = B->at;
+CON("look at current pos");
+        A_at = A->interpolated_at;
+        B_at = B->interpolated_at;
     } else {
+CON("look at future pos");
         A_at = future_pos;
-        B_at = B->at;
+        B_at = B->interpolated_at;
     }
 
     int check_only = true;
@@ -482,9 +487,9 @@ CON("no circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
                                     B, /* box */
                                     A_at,
                                     &intersect)) {
+DIE("circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
             return (things_tile_overlap(A, future_pos, B));
         }
-DIE("circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
         return (false);
     }
 

@@ -104,6 +104,12 @@ public:
     fpoint             old_br;
 
     /*
+     * GL co-orids
+     */
+    fpoint             last_blit_tl;
+    fpoint             last_blit_br;
+
+    /*
      * Previous hop where we were. We use this to interpolate the real
      * position when moving.
      */
