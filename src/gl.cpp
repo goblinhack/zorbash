@@ -1627,7 +1627,7 @@ void tile_blit_outline_section (const Tpp &tp, const Tilep &tile,
 }
 
 void tile_blit (const Tpp &tp, const Tilep &tile, 
-                    const fpoint &tl, const fpoint &br)
+                const fpoint &tl, const fpoint &br)
 {
     double x1, x2, y1, y2;
 

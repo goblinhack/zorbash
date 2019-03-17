@@ -711,8 +711,10 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         tile = current_tile;
     }
 
-    fpoint blit_tl(tl.x - offset_x, tl.y - offset_y);
-    fpoint blit_br(br.x - offset_x, br.y - offset_y);
+    last_blit_tl = fpoint(tl.x - offset_x, tl.y - offset_y);
+    last_blit_br = fpoint(br.x - offset_x, br.y - offset_y);
+    auto blit_tl = last_blit_tl;
+    auto blit_br = last_blit_br;
     fpoint orig_blit_tl = blit_tl;
     fpoint orig_blit_br = blit_br;
     double h = blit_br.y - blit_tl.y;
@@ -807,6 +809,9 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             blit_rock_cladding(blit_tl, blit_br);
         }
     }
+
+    last_blit_tl = blit_tl;
+    last_blit_br = blit_br;
 }
 
 void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
