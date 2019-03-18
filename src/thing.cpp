@@ -228,24 +228,26 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         t->log("created");
     }
 
-    t->update_coordinates();
-    t->attach();
-
     if (jitter != fpoint(0.0, 0.0)) {
-        double dx = random_range(0, 10);
-        double dy = random_range(0, 10);
+        double dx = random_range(0, TILE_WIDTH);
+        double dy = random_range(0, TILE_WIDTH);
+CON("XXX jit to %f %f", dx, dy);
 
-        dx -= 5.0;
-        dy -= 5.0;
+        dx -= TILE_WIDTH / 2;
+        dy -= TILE_WIDTH / 2;
 
-        dx /= 20.0;
-        dy /= 20.0;
+        dx /= TILE_WIDTH;
+        dy /= TILE_WIDTH;
 
         dx *= jitter.x;
         dy *= jitter.y;
 
         t->move_to(fpoint(t->at.x + dx, t->at.y + dy));
+CON("XXX   final jit to %f %f", dx, dy);
     }
+
+    t->update_coordinates();
+    t->attach();
 
     if (tp_is_light_strength(tp)) {
         std::string l = tp_str_light_color(tp);

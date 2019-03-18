@@ -30,8 +30,7 @@ public:
 };
 
 static std::vector<class ThingColl> thing_colls;
-static const int def_collision_radius = 1;
-static double collision_radius = def_collision_radius;
+static const double thing_collision_tiles = 1;
 
 bool 
 thing_overlaps_border (Thingp t)
@@ -439,11 +438,9 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
      * If not then we are just checking out a future_pos position.
      */
     if (future_pos == fpoint(-1, -1)) {
-CON("look at current pos");
         A_at = A->interpolated_at;
         B_at = B->interpolated_at;
     } else {
-CON("look at future pos");
         A_at = future_pos;
         B_at = B->interpolated_at;
     }
@@ -487,7 +484,7 @@ CON("no circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
                                     B, /* box */
                                     A_at,
                                     &intersect)) {
-DIE("circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
+CON("circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
             return (things_tile_overlap(A, future_pos, B));
         }
         return (false);
@@ -582,22 +579,22 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
  */
 bool Thing::handle_collisions (void)
 {_
-    int minx = at.x - collision_radius;
+    int minx = at.x - thing_collision_tiles;
     while (minx < 0) {
         minx++;
     }
 
-    int miny = at.y - collision_radius;
+    int miny = at.y - thing_collision_tiles;
     while (miny < 0) {
         miny++;
     }
 
-    int maxx = at.x - collision_radius;
+    int maxx = at.x + thing_collision_tiles;
     while (maxx >= MAP_WIDTH) {
         maxx++;
     }
 
-    int maxy = at.y - collision_radius;
+    int maxy = at.y + thing_collision_tiles;
     while (maxy >= MAP_HEIGHT) {
         maxy++;
     }
@@ -631,49 +628,47 @@ bool Thing::check_if_will_hit_solid_obstacle (fpoint future_pos)
 {_
     verify(this);
 
-    int minx = at.x - collision_radius;
+    int minx = at.x - thing_collision_tiles;
     while (minx < 0) {
         minx++;
     }
 
-    int miny = at.y - collision_radius;
+    int miny = at.y - thing_collision_tiles;
     while (miny < 0) {
         miny++;
     }
 
-    int maxx = at.x - collision_radius;
+    int maxx = at.x + thing_collision_tiles;
     while (maxx >= MAP_WIDTH) {
         maxx--;
     }
 
-    int maxy = at.y - collision_radius;
+    int maxy = at.y + thing_collision_tiles;
     while (maxy >= MAP_HEIGHT) {
         maxy--;
     }
 
-    for (uint8_t z = MAP_DEPTH_ITEM; z < MAP_DEPTH; z++) {
-        for (int16_t x = minx; x <= maxx; x++) {
-            for (int16_t y = miny; y <= maxy; y++) {
-                //
-                // Walk things like monsters and walls, but skip stuff like
-                // floor tiles and decorations
-                //
-                for (auto p : game.state.map.all_non_boring_things_at[x][y]) {
-                    auto it = p.second;
-                    verify(it);
+    for (int16_t x = minx; x <= maxx; x++) {
+        for (int16_t y = miny; y <= maxy; y++) {
+            //
+            // Walk things like monsters and walls, but skip stuff like
+            // floor tiles and decorations
+            //
+            for (auto p : game.state.map.all_non_boring_things_at[x][y]) {
+                auto it = p.second;
+                verify(it);
 
-                    if (this == it) {
-                        continue;
-                    }
+                if (this == it) {
+                    continue;
+                }
 
-                    if (!things_overlap(this, future_pos, it)) {
-                        continue;
-                    }
+                if (!things_overlap(this, future_pos, it)) {
+                    continue;
+                }
 
-                    auto it_tp = it->tp;
-                    if (tp_is_wall(it_tp)) {
-                        return (true);
-                    }
+                auto it_tp = it->tp;
+                if (tp_is_wall(it_tp)) {
+                    return (true);
                 }
             }
         }

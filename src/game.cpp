@@ -487,9 +487,16 @@ static void game_place_blood (class Dungeon *d)
                     continue;
                 }
 
-                if (random_range(0, 1000) < 900) {
+                if (random_range(0, 1000) > 900) {
+                    continue;
+                }
+
+                int splatters = random_range(2, 5);
+                for (int splatter = 0; splatter < splatters; splatter++) {
                     auto tp = tp_random_blood();
-                    (void) thing_new(tp_name(tp), fpoint(x, y));
+                    (void) thing_new(tp_name(tp), 
+                                     fpoint(x, y),
+                                     fpoint(1, 1));
                 }
             }
         }
