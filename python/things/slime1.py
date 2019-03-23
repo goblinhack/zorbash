@@ -13,7 +13,7 @@ def tp_init(name, short_name):
     x.set_gfx_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_hunger_at_health_pct(95)
-    x.set_hunger_every_rounds(10)
+    x.set_hunger_every_ms(1000)
     x.set_hunger_initial_health_at(10)
     x.set_hunger_starving_at_health_pct(10)
     x.set_is_active(True)

@@ -487,11 +487,11 @@ static void game_place_blood (class Dungeon *d)
                     continue;
                 }
 
-                if (random_range(0, 1000) > 900) {
+                if (random_range(0, 1000) > 90) {
                     continue;
                 }
 
-                int splatters = random_range(2, 5);
+                int splatters = random_range(2, 10);
                 for (int splatter = 0; splatter < splatters; splatter++) {
                     auto tp = tp_random_blood();
                     (void) thing_new(tp_name(tp), 

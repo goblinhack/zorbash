@@ -149,7 +149,7 @@ public:
     int gfx_oversized_but_sitting_on_the_ground {};
     int gfx_small_shadow_caster {};
     int hunger_at_health_pct {};
-    int hunger_every_rounds {};
+    int hunger_every_ms {};
     int hunger_initial_health_at {};
     int hunger_starving_at_health_pct {};
     int internal_has_dir_anim {};
@@ -484,9 +484,9 @@ static inline int tp_hunger_at_health_pct (Tpp t)
     return (t->hunger_at_health_pct);
 }
 
-static inline int tp_hunger_every_rounds (Tpp t)
+static inline int tp_hunger_every_ms (Tpp t)
 {
-    return (t->hunger_every_rounds);
+    return (t->hunger_every_ms);
 }
 
 static inline int tp_ai_scent_distance (Tpp t)

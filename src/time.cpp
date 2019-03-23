@@ -81,7 +81,7 @@ uint8_t time_have_x_hundredths_passed_since (uint32_t val, uint32_t since)
     return ((int32_t)(delay / 10) > (int32_t)val);
 }
 
-uint8_t time_have_x_thousandths_passed_since (uint32_t val, uint32_t since)
+uint8_t time_have_x_ms_passed_since (uint32_t val, uint32_t since)
 {
     time_get_time_ms();
 

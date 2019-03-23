@@ -16,26 +16,29 @@ static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
 static int sdl_do_screenshot;
 
+int TILES_ACROSS  = 20;
+int TILES_DOWN    = 11;
+
 uint8_t sdl_main_loop_running;
 uint8_t sdl_shift_held;
 uint8_t sdl_init_video;
 uint32_t mouse_down;
 uint32_t mouse_down_when;
-int32_t mouse_x;
-int32_t mouse_y;
+int mouse_x;
+int mouse_y;
 
-int32_t sdl_left_fire;
-int32_t sdl_right_fire;
+int sdl_left_fire;
+int sdl_right_fire;
 
-int32_t sdl_joy1_right;
-int32_t sdl_joy1_left;
-int32_t sdl_joy1_down;
-int32_t sdl_joy1_up;
+int sdl_joy1_right;
+int sdl_joy1_left;
+int sdl_joy1_down;
+int sdl_joy1_up;
 
-int32_t sdl_joy2_right;
-int32_t sdl_joy2_left;
-int32_t sdl_joy2_down;
-int32_t sdl_joy2_up;
+int sdl_joy2_right;
+int sdl_joy2_left;
+int sdl_joy2_down;
+int sdl_joy2_up;
 
 uint8_t sdl_joy_buttons[SDL_MAX_BUTTONS];
 
@@ -72,7 +75,7 @@ void sdl_fini (void)
 
 static inline void sdl_list_video_size (void)
 {_
-    int32_t i;
+    int i;
 
     for (i = 0; i < SDL_GetNumDisplayModes(0); ++i) {
 
@@ -180,9 +183,9 @@ uint8_t sdl_init (void)
 {_
     gl_ext_init();
 
-    int32_t video_width;
-    int32_t video_height;
-    int32_t value;
+    int video_width;
+    int video_height;
+    int value;
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         SDL_MSG_BOX("SDL_Init failed %s", SDL_GetError());
@@ -230,6 +233,12 @@ uint8_t sdl_init (void)
 
     game.config.video_gl_width = 1.0;
     game.config.video_gl_height = 1.0;
+
+    TILES_ACROSS = game.config.video_pix_width / TILE_WIDTH;
+    TILES_DOWN = game.config.video_pix_height / TILE_HEIGHT;
+    TILES_ACROSS /= 4;
+    TILES_DOWN /= 4;
+    
     game.config.tile_gl_width = 
                     game.config.video_gl_width  / (double)TILES_ACROSS;
     game.config.tile_gl_height = 
@@ -379,7 +388,7 @@ uint8_t sdl_init (void)
     return (true);
 }
 
-static int32_t sdl_filter_events (void *userdata, SDL_Event *event)
+static int sdl_filter_events (void *userdata, SDL_Event *event)
 {_
     switch (event->type) {
         /* This is important!  Queue it if we want to quit. */
@@ -697,9 +706,9 @@ void sdl_mouse_center (void)
     sdl_mouse_warp(x, y);
 }
 
-void sdl_mouse_warp (int32_t x, int32_t y)
+void sdl_mouse_warp (int x, int y)
 {_
-    int32_t border = 10;
+    int border = 10;
 
     if (x <= 0) {
         x = border;
@@ -922,8 +931,8 @@ uint8_t sdl_user_exit (tokens_t *tokens, void *context)
 void sdl_loop (void)
 {_
     SDL_Event events[10];
-    int32_t found;
-    int32_t i;
+    int found;
+    int i;
     uint16_t frames = 0;
 
     SDL_SetEventFilter(sdl_filter_events, 0);
@@ -933,8 +942,8 @@ void sdl_loop (void)
     /*
      * Wait for events
      */
-    int32_t timestamp_then = time_get_time_ms();
-    int32_t timestamp_then2 = timestamp_then;
+    int timestamp_then = time_get_time_ms();
+    int timestamp_then2 = timestamp_then;
 
     sdl_main_loop_running = true;
 
@@ -974,7 +983,7 @@ void sdl_loop (void)
          * Do processing of some things, like reading the keyboard or doing
          * stuff with widgets only occasionally if we do not need to.
          */
-        int32_t timestamp_now = time_update_time_milli();
+        int timestamp_now = time_update_time_milli();
 
         if (unlikely(timestamp_now - timestamp_then > 20)) {
             /*
