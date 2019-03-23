@@ -20,9 +20,6 @@ int Thing::hit_actual (Thingp orig_hitter,
     }
 
     if (!damage) {
-        //
-        // Could be a spider silkball
-        //
         return (false);
     }
 

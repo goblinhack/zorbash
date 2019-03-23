@@ -97,27 +97,14 @@ things_tile_overlap (Thingp t, fpoint t_at, Thingp o)
             int dy = py - oy;
 
             if ((dx < 0) || (dx >= (int)tile2->pix_width)) {
-#if 0
-if (first) {
-first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  <>x", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
-}
-#endif
                 continue;
             }
 
             if ((dy < 0) || (dy >= (int)tile2->pix_height)) {
-#if 0
-if (first) {
-first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  <>y", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
-}
-#endif
                 continue;
             }
 
             if (tile2->pix[dx][dy]) {
-#if 0
-first = 0; CON("         pix %3d,%3d %s:%3d,%3d  dx %d,%d  overlap", px, py, thing_logname(o).c_str(), ox, oy, dx, dy);
-#endif
                 return (true);
             }
         }
@@ -301,7 +288,6 @@ int circle_circle_collision (Thingp A,
 
     double diff = dist_squared - touching_dist * touching_dist;
     if (diff > 0.0) {
-CON("  A %f B %f dist %f", A_radius, B_radius, sqrt(fabs(dist_squared)));
         /*
          * Circles are not touching
          */
@@ -458,7 +444,7 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
-            return (things_tile_overlap(A, future_pos, B));
+            return (things_tile_overlap(A, A_at, B));
         }
         return (false);
     }
@@ -472,30 +458,28 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
-            return (things_tile_overlap(A, future_pos, B));
+            return (things_tile_overlap(A, A_at, B));
         }
         return (false);
     }
 
     if (tp_collision_circle(A->tp) &&
         tp_collision_circle(B->tp)) {
-CON("no circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
         if (circle_circle_collision(A, /* circle */
                                     B, /* box */
                                     A_at,
                                     &intersect)) {
-CON("circl overlap %s %s", A->logname().c_str(), B->logname().c_str());
-            return (things_tile_overlap(A, future_pos, B));
+            return (things_tile_overlap(A, A_at, B));
         }
         return (false);
     }
 
-    return (things_tile_overlap(A, future_pos, B));
+    return (things_tile_overlap(A, A_at, B));
 }
 
 bool things_overlap (const Thingp A, const Thingp B)
 {_
-    return (things_overlap (A, fpoint(-1, -1), B));
+    return (things_overlap(A, fpoint(-1, -1), B));
 }
 
 //
@@ -569,6 +553,12 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
                     it, "sword hit thing");
             return (true);
         }
+    } else if (will_attack(it)) {
+        if (tp_attack_on_collision(me_tp)) {
+            thing_possible_hit_add(it, "battle");
+        }
+    } else if (will_eat(it)) {
+        thing_possible_hit_add(it, "eat");
     }
 
     return (true);
@@ -665,6 +655,7 @@ bool Thing::check_if_will_hit_solid_obstacle (fpoint future_pos)
                 if (!things_overlap(this, future_pos, it)) {
                     continue;
                 }
+con("overlap2 %s", it->logname().c_str());
 
                 auto it_tp = it->tp;
                 if (tp_is_wall(it_tp)) {

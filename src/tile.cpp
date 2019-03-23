@@ -91,7 +91,7 @@ void tile_load_arr (std::string tex_name,
             t->x2 = t->x1 + fw;
             t->y2 = t->y1 + fh;
 
-#ifdef CREATE_TILE_COLLISION_BOUNDARIES
+#ifdef ENABLE_TILE_COLLISION_CHECKING
             t->ox1 = t->x1;
             t->oy1 = t->y1;
             t->ox2 = t->x2;
@@ -117,7 +117,7 @@ void tile_load_arr (std::string tex_name,
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
-#ifdef CREATE_TILE_COLLISION_BOUNDARIES
+#ifdef ENABLE_TILE_COLLISION_CHECKING
             if ((pixel_size.w <= MAX_TILE_WIDTH) && 
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);
