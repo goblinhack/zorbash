@@ -193,8 +193,8 @@ public:
     int is_rrr19 {};
     int is_rrr2 {};
     int is_rrr20 {};
-    int is_rrr21 {};
-    int is_rrr22 {};
+    int attack_on_collision {};
+    int is_water_dweller {};
     int is_rrr3 {};
     int is_rrr4 {};
     int is_rrr5 {};
@@ -414,14 +414,14 @@ static inline int tp_is_rrr20 (Tpp t)
     return (t->is_rrr20);
 }
 
-static inline int tp_is_rrr21 (Tpp t)
+static inline int tp_attack_on_collision (Tpp t)
 {
-    return (t->is_rrr21);
+    return (t->attack_on_collision);
 }
 
-static inline int tp_is_rrr22 (Tpp t)
+static inline int tp_is_water_dweller (Tpp t)
 {
-    return (t->is_rrr22);
+    return (t->is_water_dweller);
 }
 
 static inline int tp_collision_hit_priority (Tpp t)

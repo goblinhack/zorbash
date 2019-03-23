@@ -8,6 +8,58 @@
 #include "my_dmap.h"
 #include <algorithm>
 
+bool Thing::will_attack (const Thingp itp)
+{
+    auto me = tp;
+    auto it = itp->tp;
+
+    if (tp_is_meat_eater(me)) {
+        if (tp_is_made_of_meat(it)) {
+            return (true);
+        }
+    }
+    return (false);
+}
+
+bool Thing::will_avoid (const Thingp itp)
+{
+    auto me = tp;
+    auto it = itp->tp;
+
+    if (tp_is_made_of_meat(me)) {
+        if (tp_is_meat_eater(it)) {
+            return (true);
+        }
+    }
+    return (false);
+}
+
+bool Thing::will_eat (const Thingp itp)
+{
+    auto me = tp;
+    auto it = itp->tp;
+
+    if (tp_is_made_of_meat(me)) {
+        if (tp_is_meat_eater(it) || tp_is_blood(it)) {
+            return (true);
+        }
+    }
+    return (false);
+}
+
+bool Thing::will_prefer (const Thingp itp)
+{
+    auto me = tp;
+    auto it = itp->tp;
+
+    if (tp_is_water_dweller(me)) {
+        if (tp_is_water(it)) {
+            return (true);
+        }
+    }
+    return (false);
+}
+
 bool Thing::is_obstacle_for_me (point p)
 {
     if (game.state.map.is_wall_at(p)) {
@@ -34,26 +86,23 @@ bool Thing::is_obstacle_for_me (point p)
     //
     // Avoid threats and treat them as obstacles
     //
-#if 0
-    for (auto i : game.state.map.all_active_things_at[p.x][p.y]) {
-        auto o = i.second;
-        if (o == this) {
+    for (auto i : game.state.map.all_non_boring_things_at[p.x][p.y]) {
+        auto it = i.second;
+        if (it == this) {
             continue;
         }
 
-        auto otp = o->tp;
-        if (tp_is_monst(otp)) {
+        if (will_avoid(it)) {
             return (true);
-//            if (o->health >= health) {
-//                return (true);
-//            }
         }
     }
-#endif
 
     return (false);
 }
 
+//
+// Lower scores are more preferred
+// k
 bool Thing::is_goal_for_me (point p, int priority, double *score)
 {
     double distance_scale = distance(at, fpoint(p.x, p.y));
@@ -61,28 +110,57 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
         distance_scale = 1.0;
     }
 
+    //
+    // Check from highest (0) to lowest priority for things to do
+    //
     switch (priority) {
     case 0:
         if (is_starving) {
-            if (game.state.map.is_blood_at(p)) {
-                *score -= 1000 / distance_scale;
-                return (true);
+            for (auto i : game.state.map.all_non_boring_things_at[p.x][p.y]) {
+                auto it = i.second;
+                if (it == this) {
+                    continue;
+                }
+
+                if (will_eat(it)) {
+                    *score -= 1000 / distance_scale;
+                    return (true);
+                }
             }
         }
         break;
     case 1:
         if (is_hungry) {
-            if (game.state.map.is_blood_at(p)) {
-                *score -= 500 / distance_scale;
-                return (true);
+            for (auto i : game.state.map.all_non_boring_things_at[p.x][p.y]) {
+                auto it = i.second;
+                if (it == this) {
+                    continue;
+                }
+
+                if (will_eat(it)) {
+                    *score -= 500;
+                    return (true);
+                }
+
+                if (will_attack(it)) {
+                    *score -= 1000 / distance_scale;
+                    return (true);
+                }
             }
         }
         break;
     case 2:
-        if (game.state.map.is_water_at(p)) {
-            return (true);
+        for (auto i : game.state.map.all_non_boring_things_at[p.x][p.y]) {
+            auto it = i.second;
+            if (it == this) {
+                continue;
+            }
+
+            if (will_prefer(it)) {
+                return (true);
+            }
+            break;
         }
-        break;
     }
     return (false);
 }

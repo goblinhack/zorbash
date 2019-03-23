@@ -21,6 +21,7 @@
 #undef  ENABLE_LEAKCHECK
 #define ENABLE_INVERTED_GFX        // For vision impaired
 #undef  ENABLE_ASCII_MOUSE
+#define ENABLE_TILE_COLLISION_CHECKING
 
 /*
  * Dungeon size; composed of a grid of rooms

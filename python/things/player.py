@@ -11,7 +11,6 @@ def tp_init(name, short_name):
     x.set_gfx_animated(True)
     x.set_gfx_bounce_on_move(True)
     x.set_gfx_can_hflip(True)
-    x.set_gfx_is_weapon_use_anim(True)
     x.set_gfx_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_hunger_initial_health_at(10)

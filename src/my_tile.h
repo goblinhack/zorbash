@@ -50,7 +50,7 @@ public:
     double x2 {};
     double y2 {};
 
-#ifdef CREATE_TILE_COLLISION_BOUNDARIES
+#ifdef ENABLE_TILE_COLLISION_CHECKING
     /*
      * As above but not clipped 0.5 pixels.
      */

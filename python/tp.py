@@ -206,11 +206,11 @@ class Tp:
     def set_is_rrr20(self, value):
         zx.tp_set_is_rrr20(self, value)
 
-    def set_is_rrr21(self, value):
-        zx.tp_set_is_rrr21(self, value)
+    def set_attack_on_collision(self, value):
+        zx.tp_set_attack_on_collision(self, value)
 
-    def set_is_rrr22(self, value):
-        zx.tp_set_is_rrr22(self, value)
+    def set_is_water_dweller(self, value):
+        zx.tp_set_is_water_dweller(self, value)
 
     def set_collision_hit_priority(self, value):
         zx.tp_set_collision_hit_priority(self, value)
