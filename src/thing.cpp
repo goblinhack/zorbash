@@ -86,7 +86,6 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->is_bouncing        = false;
     t->is_attached        = false;
     t->is_lit             = false;
-    t->is_waiting_to_tick = tp_is_active(tp);
     t->is_waiting_for_ai  = tp_is_active(tp);
 
     t->health         = tp_hunger_initial_health_at(tp);
@@ -231,7 +230,6 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     if (jitter != fpoint(0.0, 0.0)) {
         double dx = random_range(0, TILE_WIDTH);
         double dy = random_range(0, TILE_WIDTH);
-CON("XXX jit to %f %f", dx, dy);
 
         dx -= TILE_WIDTH / 2;
         dy -= TILE_WIDTH / 2;
@@ -243,7 +241,6 @@ CON("XXX jit to %f %f", dx, dy);
         dy *= jitter.y;
 
         t->move_to(fpoint(t->at.x + dx, t->at.y + dy));
-CON("XXX   final jit to %f %f", dx, dy);
     }
 
     t->update_coordinates();

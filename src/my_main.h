@@ -50,8 +50,8 @@
 /*
  * Per screen
  */
-#define TILES_ACROSS                20
-#define TILES_DOWN                  12
+extern int TILES_ACROSS;
+extern int TILES_DOWN;
 
 /*
  * Tile size of the player

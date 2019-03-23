@@ -1709,7 +1709,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(hunger_starving_at_health_pct)
     TP_SET_DECL(hunger_initial_health_at)
     TP_SET_DECL(hunger_at_health_pct)
-    TP_SET_DECL(hunger_every_rounds)
+    TP_SET_DECL(hunger_every_ms)
     TP_SET_DECL(ai_scent_distance)
     TP_SET_DECL(is_ripple)
     TP_SET_DECL(is_light_strength)

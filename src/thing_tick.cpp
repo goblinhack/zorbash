@@ -9,34 +9,36 @@
 
 void Thing::hunger_clock (void)
 {
-    hunger_count++;
+    if (!tp_hunger_every_ms(tp)) {
+        return;
+    }
 
     //
     // Update the hunger clock.
     //
-    auto hunger_tick = tp_hunger_every_rounds(tp);
-    if (hunger_tick) {
-        if (!(hunger_count % hunger_tick)) {
-            if (health > 0) {
-                health--;
-            } else {
-                dead("starved to death");
-                return;
-            }
+    if (time_have_x_ms_passed_since(tp_hunger_every_ms(tp),
+                                    hunger_tick_last_ms)) {
+        hunger_tick_last_ms = time_get_time_ms_cached();
+
+        if (health > 0) {
+            health--;
+        } else {
+            dead("starved to death");
+            return;
         }
+
+        int hungry_at = 
+          (int) ((double) max_health * 
+                 ((double) tp_hunger_at_health_pct(tp) / 100.0));
+
+        is_hungry = health < hungry_at;
+
+        int starving_at = 
+          (int) ((double) max_health * 
+                 ((double) tp_hunger_starving_at_health_pct(tp) / 100.0));
+
+        is_starving = health < starving_at;
     }
-
-    int hungry_at = 
-      (int) ((double) max_health * 
-             ((double) tp_hunger_at_health_pct(tp) / 100.0));
-
-    is_hungry = health < hungry_at;
-
-    int starving_at = 
-      (int) ((double) max_health * 
-             ((double) tp_hunger_starving_at_health_pct(tp) / 100.0));
-
-    is_starving = health < starving_at;
 }
 
 void Thing::achieve_goals_in_life (void)
@@ -80,19 +82,15 @@ void Thing::tick (void)
         return;
     }
 
-    if (is_waiting_to_tick) {
-        is_waiting_to_tick = false;
-        hunger_count++;
-        hunger_clock();
-    }
+    hunger_clock();
     if (is_dead) {
         return;
     }
 
     if (is_waiting_for_ai) {
-        is_waiting_for_ai = false;
         auto now = time_get_time_ms_cached();
         if (now > next_ai_ms) {
+            is_waiting_for_ai = false;
             achieve_goals_in_life();
         }
     }

@@ -25,7 +25,7 @@
 #undef ONESEC
 #define ONESEC                          1000
 
-uint8_t time_have_x_thousandths_passed_since(uint32_t tenths, uint32_t since);
+uint8_t time_have_x_ms_passed_since(uint32_t tenths, uint32_t since);
 uint8_t time_have_x_hundredths_passed_since(uint32_t tenths, uint32_t since);
 uint8_t time_have_x_tenths_passed_since(uint32_t tenths, uint32_t since);
 uint8_t time_have_x_secs_passed_since(uint32_t tenths, uint32_t since);

@@ -140,6 +140,12 @@ public:
     uint32_t           next_ai_ms {};
 
     /*
+     * Ticks every time the thing does something. Used from memory aging
+     * to the hunger clock.
+     */
+    uint32_t           hunger_tick_last_ms {0};
+
+    /*
      * Timestamps
      */
     uint32_t           timestamp_born {};
@@ -217,12 +223,6 @@ public:
     AgeMap             *age_map;
 
     /*
-     * Ticks every time the thing does something. Used from memory aging
-     * to the hunger clock.
-     */
-    int                hunger_count {0};
-
-    /*
      * Update thing_new when adding new bitfields.
      */
     unsigned int       is_hungry:1;          /* until -std=c++2a remember to update thing.cpp */
@@ -238,7 +238,6 @@ public:
     unsigned int       is_bouncing:1;        /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_attached:1;        /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_lit:1;             /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_waiting_to_tick:1; /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_waiting_for_ai:1;  /* until -std=c++2a remember to update thing.cpp */
     
     std::string logname(void);

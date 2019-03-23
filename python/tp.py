@@ -251,8 +251,8 @@ class Tp:
     def set_hunger_at_health_pct(self, value):
         zx.tp_set_hunger_at_health_pct(self, value)
 
-    def set_hunger_every_rounds(self, value):
-        zx.tp_set_hunger_every_rounds(self, value)
+    def set_hunger_every_ms(self, value):
+        zx.tp_set_hunger_every_ms(self, value)
 
     def set_ai_scent_distance(self, value):
         zx.tp_set_ai_scent_distance(self, value)
