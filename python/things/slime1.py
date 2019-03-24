@@ -10,6 +10,7 @@ def tp_init(name, short_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.5)
+    x.set_collision_check(True)
     x.set_gfx_animated(True)
     x.set_gfx_outlined(True)
     x.set_gfx_small_shadow_caster(True)

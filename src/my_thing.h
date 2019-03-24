@@ -343,7 +343,6 @@ public:
      * thing_collision.cpp
      */
     bool handle_collisions(void);
-    bool check_if_will_hit_solid_obstacle(fpoint future_pos);
     void possible_hits_find_best(void);
     bool possible_hit(Thingp it, int x, int y, int dx, int dy);
 

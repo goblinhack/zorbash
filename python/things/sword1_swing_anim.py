@@ -5,6 +5,11 @@ import tp
 def tp_init(name, short_name):
     x = tp.Tp(name)
 
+    x.set_attack_on_collision(True)
+    x.set_collision_check(True)
+    x.set_collision_circle(True)
+    x.set_collision_hit_priority(10)
+    x.set_collision_radius(0.5)
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_vflip(True)
     x.set_gfx_can_hflip(True)

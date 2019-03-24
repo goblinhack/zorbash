@@ -203,8 +203,8 @@ class Tp:
     def set_is_rrr19(self, value):
         zx.tp_set_is_rrr19(self, value)
 
-    def set_is_rrr20(self, value):
-        zx.tp_set_is_rrr20(self, value)
+    def set_collision_check(self, value):
+        zx.tp_set_collision_check(self, value)
 
     def set_attack_on_collision(self, value):
         zx.tp_set_attack_on_collision(self, value)

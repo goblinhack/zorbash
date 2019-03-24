@@ -20,11 +20,13 @@ void Thing::hunger_clock (void)
                                     hunger_tick_last_ms)) {
         hunger_tick_last_ms = time_get_time_ms_cached();
 
-        if (health > 0) {
+        if (health > 1) {
             health--;
         } else {
-            dead("starved to death");
-            return;
+            //
+            // starvation is just annoying for players
+            //
+            // dead("starved to death");
         }
 
         int hungry_at = 
@@ -57,6 +59,10 @@ void Thing::achieve_goals_in_life (void)
 
 void Thing::collision_check (void)
 {
+    if (!tp_collision_check(tp)) {
+        return;
+    }
+
     bool need_collision_test = false;
 
     if (time_have_x_tenths_passed_since(THING_COLLISION_TEST_DELAY_TENTHS,
@@ -65,9 +71,11 @@ void Thing::collision_check (void)
     }
 
     if (need_collision_test) {
+con("do coll test");
         handle_collisions();
         timestamp_collision = 
-          time_get_time_ms() + random_range(0, THING_COLLISION_TEST_DELAY_TENTHS);
+          time_get_time_ms() + 
+          random_range(0, THING_COLLISION_TEST_DELAY_TENTHS);
     }
 }
 
