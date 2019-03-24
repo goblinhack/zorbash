@@ -7,6 +7,8 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
+#define DEBUG_COLLISION
+
 class ThingColl {
 public:
     ThingColl(void) {}
@@ -70,54 +72,103 @@ thing_overlaps_border (Thingp t)
 }
 
 bool 
-things_tile_overlap (Thingp t, fpoint t_at, Thingp o)
+things_tile_overlap (Thingp A, Thingp B)
 {_
-    auto tile1 = t->current_tile;
-    if (!tile1) {
+    auto A_tile = A->current_tile;
+    if (!A_tile) {
         return (false);
     }
-    auto tile2 = o->current_tile;
-    if (!tile2) {
+    auto B_tile = B->current_tile;
+    if (!B_tile) {
         return (false);
     }
 
-    for (int y = 0; y < (int)tile1->pix_height; y++) {
-        for (int x = 0; x < (int)tile1->pix_width; x++) {
-            if (!tile1->pix[x][y]) {
+    double A_width  = (A->last_blit_br.x - A->last_blit_tl.x);
+    double A_height = (A->last_blit_br.y - A->last_blit_tl.y);
+    double B_width  = (B->last_blit_br.x - B->last_blit_tl.x);
+    double B_height = (B->last_blit_br.y - B->last_blit_tl.y);
+
+    double A_dw = A_width  / (double)A_tile->pix_width;
+    double A_dh = A_height / (double)A_tile->pix_height;
+    double B_dw = B_width  / (double)B_tile->pix_width;
+    double B_dh = B_height / (double)B_tile->pix_height;
+
+    for (int y = 0; y < (int)A_tile->pix_height; y++) {
+        for (int x = 0; x < (int)A_tile->pix_width; x++) {
+            if (!A_tile->pix[x][y]) {
+#ifdef DEBUG_COLLISION
+                printf(" ");
+#endif
                 continue;
             }
+#ifdef DEBUG_COLLISION
+            printf("A");
+#endif
+            double Ax = A->last_blit_tl.x + (((double)x) * A_dw);
+            double Ay = A->last_blit_tl.y + (((double)y) * A_dh);
+            Ax -= B->last_blit_tl.x;
+            Ay -= B->last_blit_tl.y;
+            Ax /= B_dw;
+            Ay /= B_dh;
             
-            int px = t_at.x * TILE_WIDTH + x;
-            int py = t_at.y * TILE_HEIGHT + y;
+            int dx = (int)Ax;
+            int dy = (int)Ay;
 
-            int ox = o->interpolated_at.x * TILE_WIDTH;
-            int oy = o->interpolated_at.y * TILE_HEIGHT;
-
-            int dx = px - ox;
-            int dy = py - oy;
-
-            if ((dx < 0) || (dx >= (int)tile2->pix_width)) {
+            if ((dx < 0) || (dx >= (int)B_tile->pix_width)) {
                 continue;
             }
 
-            if ((dy < 0) || (dy >= (int)tile2->pix_height)) {
+            if ((dy < 0) || (dy >= (int)B_tile->pix_height)) {
                 continue;
             }
 
-            if (tile2->pix[dx][dy]) {
+            if (B_tile->pix[dx][dy]) {
                 return (true);
             }
         }
+#ifdef DEBUG_COLLISION
+        printf("\n");
+#endif
     }
+#ifdef DEBUG_COLLISION
+    printf("\n");
+#endif
+
+#ifdef DEBUG_COLLISION
+    for (int y = 0; y < (int)A_tile->pix_height; y++) {
+        for (int x = 0; x < (int)A_tile->pix_width; x++) {
+            double Ax = A->last_blit_tl.x + (((double)x) * A_dw);
+            double Ay = A->last_blit_tl.y + (((double)y) * A_dh);
+            Ax -= B->last_blit_tl.x;
+            Ay -= B->last_blit_tl.y;
+            Ax /= B_dw;
+            Ay /= B_dh;
+            
+            int dx = (int)Ax;
+            int dy = (int)Ay;
+
+            if ((dx < 0) || (dx >= (int)B_tile->pix_width)) {
+                printf("-");
+                continue;
+            }
+
+            if ((dy < 0) || (dy >= (int)B_tile->pix_height)) {
+                printf("-");
+                continue;
+            }
+
+            if (B_tile->pix[dx][dy]) {
+                printf("B");
+            } else {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+#endif
     return (false);
 }
-
-bool 
-things_tile_overlap (Thingp t, Thingp o)
-{_
-    return (things_tile_overlap(t, t->interpolated_at, o));
-}
-
 
 int circle_box_collision (Thingp C, 
                           fpoint C_at,
@@ -414,23 +465,14 @@ con("hit %s", best->target->logname().c_str());
     thing_possible_init();
 }
 
-bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
+bool things_overlap (const Thingp A, const Thingp B)
 {_
     fpoint A_at, B_at;
 
-    /*
-     * If -1, -1 then we are looking at the current position.
-     *
-     * If not then we are just checking out a future_pos position.
-     */
-    if (future_pos == fpoint(-1, -1)) {
-        A_at = A->interpolated_at;
-        B_at = B->interpolated_at;
-    } else {
-        A_at = future_pos;
-        B_at = B->interpolated_at;
-    }
+    A_at = A->interpolated_at;
+    B_at = B->interpolated_at;
 
+#if 0
     int check_only = true;
     fpoint intersect = {0,0};
     fpoint normal_A = {0,0};
@@ -444,7 +486,7 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
-            return (things_tile_overlap(A, A_at, B));
+            return (things_tile_overlap(A, B));
         }
         return (false);
     }
@@ -458,7 +500,7 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
-            return (things_tile_overlap(A, A_at, B));
+            return (things_tile_overlap(A, B));
         }
         return (false);
     }
@@ -469,17 +511,13 @@ bool things_overlap (const Thingp A, fpoint future_pos, const Thingp B)
                                     B, /* box */
                                     A_at,
                                     &intersect)) {
-            return (things_tile_overlap(A, A_at, B));
+            return (things_tile_overlap(A, B));
         }
         return (false);
     }
+#endif
 
-    return (things_tile_overlap(A, A_at, B));
-}
-
-bool things_overlap (const Thingp A, const Thingp B)
-{_
-    return (things_overlap(A, fpoint(-1, -1), B));
+    return (things_tile_overlap(A, B));
 }
 
 //
@@ -492,33 +530,6 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
     auto me = this;
     auto it_tp = it->tp;
     auto me_tp = me->tp;
-
-    /*
-     * Filter out boring things.
-     */
-    if (tp_gfx_is_weapon_carry_anim_only(it_tp)) {
-#if 0
-        if ((dx == 0) && (dy == 0)) {
-            if (tp_is_player(me)) {
-                if (tp_is_shop_floor(it_tp)) {
-                    /*
-                     * Going into a shop.
-                     */
-                    shop_enter(level, me, it_tp);
-                } else if (me->in_shop_owned_by_thing_id) {
-                    /*
-                     * Still inside the shop?
-                     */
-                    if (!shop_inside(level, me)) {
-                        shop_leave(level, me, it_tp);
-                    }
-                }
-            }
-        }
-#endif
-
-        return (true);
-    }
 
     if (it->is_dead) {
         return (true);
@@ -535,13 +546,6 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
     }
 
     /*
-     * Do we overlap with something?
-     */
-    if (!things_overlap(me, it)) {
-        return (true);
-    }
-
-    /*
      * Sword use hits?
      */
     if (tp_gfx_is_weapon_use_anim(me_tp)) {
@@ -549,16 +553,21 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
             /*
              * Weapon hits monster or generator.
              */
-            thing_possible_hit_add_hitter_killed_on_hitting(
-                    it, "sword hit thing");
-            return (true);
+            if (things_overlap(me, it)) {
+                thing_possible_hit_add_hitter_killed_on_hitting(
+                        it, "sword hit thing");
+            }
         }
     } else if (will_attack(it)) {
         if (tp_attack_on_collision(me_tp)) {
-            thing_possible_hit_add(it, "battle");
+            if (things_overlap(me, it)) {
+                thing_possible_hit_add(it, "battle");
+            }
         }
     } else if (will_eat(it)) {
-        thing_possible_hit_add(it, "eat");
+        if (things_overlap(me, it)) {
+            thing_possible_hit_add(it, "eat");
+        }
     }
 
     return (true);
@@ -609,61 +618,4 @@ bool Thing::handle_collisions (void)
     possible_hits_find_best();
 
     return (true);
-}
-
-/*
- * Will we hit anything?
- */
-bool Thing::check_if_will_hit_solid_obstacle (fpoint future_pos)
-{_
-    verify(this);
-
-    int minx = at.x - thing_collision_tiles;
-    while (minx < 0) {
-        minx++;
-    }
-
-    int miny = at.y - thing_collision_tiles;
-    while (miny < 0) {
-        miny++;
-    }
-
-    int maxx = at.x + thing_collision_tiles;
-    while (maxx >= MAP_WIDTH) {
-        maxx--;
-    }
-
-    int maxy = at.y + thing_collision_tiles;
-    while (maxy >= MAP_HEIGHT) {
-        maxy--;
-    }
-
-    for (int16_t x = minx; x <= maxx; x++) {
-        for (int16_t y = miny; y <= maxy; y++) {
-            //
-            // Walk things like monsters and walls, but skip stuff like
-            // floor tiles and decorations
-            //
-            for (auto p : game.state.map.all_non_boring_things_at[x][y]) {
-                auto it = p.second;
-                verify(it);
-
-                if (this == it) {
-                    continue;
-                }
-
-                if (!things_overlap(this, future_pos, it)) {
-                    continue;
-                }
-con("overlap2 %s", it->logname().c_str());
-
-                auto it_tp = it->tp;
-                if (tp_is_wall(it_tp)) {
-                    return (true);
-                }
-            }
-        }
-    }
-
-    return (false);
 }

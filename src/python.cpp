@@ -1694,7 +1694,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr17)
     TP_SET_DECL(is_rrr18)
     TP_SET_DECL(is_rrr19)
-    TP_SET_DECL(is_rrr20)
+    TP_SET_DECL(collision_check)
     TP_SET_DECL(attack_on_collision)
     TP_SET_DECL(is_water_dweller)
     TP_SET_DECL(collision_hit_priority)
