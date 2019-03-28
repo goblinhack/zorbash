@@ -223,9 +223,11 @@ uint8_t sdl_init (void)
          */
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
-
         game.config.video_pix_width = mode.w;
         game.config.video_pix_height = mode.h;
+
+        game.config.video_pix_width = 1366;
+        game.config.video_pix_height = 768;
 
         video_width = game.config.video_pix_width;
         video_height = game.config.video_pix_height;

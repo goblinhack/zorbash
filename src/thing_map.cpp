@@ -43,9 +43,8 @@ static void thing_map_scroll_do (void)
     game.state.map_at.y = std::min(game.state.map_at.y, 
                              (double)MAP_HEIGHT - TILES_DOWN);
 
-#if 0
     //
-    // Round to pixels - didn't seem to help.
+    // Round to pixels
     //
     game.state.map_at.x *= 1.0 / game.config.one_pixel_gl_width;
     game.state.map_at.x = (int)game.state.map_at.x;
@@ -54,7 +53,6 @@ static void thing_map_scroll_do (void)
     game.state.map_at.y *= 1.0 / game.config.one_pixel_gl_height;
     game.state.map_at.y = (int)game.state.map_at.y;
     game.state.map_at.y /= 1.0 / game.config.one_pixel_gl_height;
-#endif
 }
 
 static void thing_map_scroll_follow_player (void)
