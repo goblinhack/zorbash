@@ -19,5 +19,7 @@ def tp_init(name, short_name):
 def init():
     tp_init(name="ripple1", short_name="ripple1")
     tp_init(name="ripple2", short_name="ripple2")
+    tp_init(name="ripple3", short_name="ripple3")
+    tp_init(name="ripple4", short_name="ripple4")
 
 init()

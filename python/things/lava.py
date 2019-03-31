@@ -28,5 +28,13 @@ def init():
                 "lava1.6", 
                 "lava1.7", 
                 "lava1.8", 
+                "lava1.9", 
+                "lava1.10", 
+                "lava1.11", 
+                "lava1.12", 
+                "lava1.13", 
+                "lava1.14", 
+                "lava1.15", 
+                "lava1.16", 
                 ])
 init()

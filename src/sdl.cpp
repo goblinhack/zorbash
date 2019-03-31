@@ -223,11 +223,9 @@ uint8_t sdl_init (void)
          */
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
+
         game.config.video_pix_width = mode.w;
         game.config.video_pix_height = mode.h;
-
-        game.config.video_pix_width = 1366;
-        game.config.video_pix_height = 768;
 
         video_width = game.config.video_pix_width;
         video_height = game.config.video_pix_height;
@@ -264,6 +262,8 @@ uint8_t sdl_init (void)
     LOG("- tile      gl height %f", game.config.tile_gl_height);
     LOG("- one pixel gl width  %f", game.config.one_pixel_gl_width);
     LOG("- one pixel gl height %f", game.config.one_pixel_gl_height);
+LOG("pix w %lf", game.config.one_pixel_gl_width * TILE_WIDTH * TILES_ACROSS);
+LOG("pix w %lf", game.config.tile_gl_width * TILES_ACROSS);
 
     LOG("- SDL video   : %dx%d (chosen or from saved file)",
         game.config.video_pix_width, game.config.video_pix_height);

@@ -28,5 +28,13 @@ def init():
                 "deep_water1.6", 
                 "deep_water1.7", 
                 "deep_water1.8", 
+                "deep_water1.9", 
+                "deep_water1.10", 
+                "deep_water1.11", 
+                "deep_water1.12", 
+                "deep_water1.13", 
+                "deep_water1.14", 
+                "deep_water1.15", 
+                "deep_water1.16", 
                 ])
 init()
