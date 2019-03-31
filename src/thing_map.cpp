@@ -95,8 +95,8 @@ static void thing_blit_water (int minx, int miny, int minz,
                               double offset_y)
 {
     auto z = MAP_DEPTH_WATER;
-#define WATER_ACROSS 4
-#define WATER_DOWN   4
+#define WATER_ACROSS 8
+#define WATER_DOWN   8
 
     static Tilep water[WATER_ACROSS][WATER_DOWN] = {};
     if (!water[0][0]) {
@@ -104,18 +104,66 @@ static void thing_blit_water (int minx, int miny, int minz,
         water[1][0] = tile_find("water2a");
         water[2][0] = tile_find("water3a");
         water[3][0] = tile_find("water4a");
+        water[4][0] = tile_find("water5a");
+        water[5][0] = tile_find("water6a");
+        water[6][0] = tile_find("water7a");
+        water[7][0] = tile_find("water8a");
         water[0][1] = tile_find("water1b");
         water[1][1] = tile_find("water2b");
         water[2][1] = tile_find("water3b");
         water[3][1] = tile_find("water4b");
+        water[4][1] = tile_find("water5b");
+        water[5][1] = tile_find("water6b");
+        water[6][1] = tile_find("water7b");
+        water[7][1] = tile_find("water8b");
         water[0][2] = tile_find("water1c");
         water[1][2] = tile_find("water2c");
         water[2][2] = tile_find("water3c");
         water[3][2] = tile_find("water4c");
+        water[4][2] = tile_find("water5c");
+        water[5][2] = tile_find("water6c");
+        water[6][2] = tile_find("water7c");
+        water[7][2] = tile_find("water8c");
         water[0][3] = tile_find("water1d");
         water[1][3] = tile_find("water2d");
         water[2][3] = tile_find("water3d");
         water[3][3] = tile_find("water4d");
+        water[4][3] = tile_find("water5d");
+        water[5][3] = tile_find("water6d");
+        water[6][3] = tile_find("water7d");
+        water[7][3] = tile_find("water8d");
+        water[0][4] = tile_find("water1e");
+        water[1][4] = tile_find("water2e");
+        water[2][4] = tile_find("water3e");
+        water[3][4] = tile_find("water4e");
+        water[4][4] = tile_find("water5e");
+        water[5][4] = tile_find("water6e");
+        water[6][4] = tile_find("water7e");
+        water[7][4] = tile_find("water8e");
+        water[0][5] = tile_find("water1f");
+        water[1][5] = tile_find("water2f");
+        water[2][5] = tile_find("water3f");
+        water[3][5] = tile_find("water4f");
+        water[4][5] = tile_find("water5f");
+        water[5][5] = tile_find("water6f");
+        water[6][5] = tile_find("water7f");
+        water[7][5] = tile_find("water8f");
+        water[0][6] = tile_find("water1g");
+        water[1][6] = tile_find("water2g");
+        water[2][6] = tile_find("water3g");
+        water[3][6] = tile_find("water4g");
+        water[4][6] = tile_find("water5g");
+        water[5][6] = tile_find("water6g");
+        water[6][6] = tile_find("water7g");
+        water[7][6] = tile_find("water8g");
+        water[0][7] = tile_find("water1h");
+        water[1][7] = tile_find("water2h");
+        water[2][7] = tile_find("water3h");
+        water[3][7] = tile_find("water4h");
+        water[4][7] = tile_find("water5h");
+        water[5][7] = tile_find("water6h");
+        water[6][7] = tile_find("water7h");
+        water[7][7] = tile_find("water8h");
     }
 
     //
@@ -254,13 +302,13 @@ static void thing_blit_water (int minx, int miny, int minz,
                 auto ty = (double)(y &~1);
                 double tlx = tx * game.config.tile_gl_width;
                 double tly = ty * game.config.tile_gl_height;
-                double brx = (tx+2.0) * game.config.tile_gl_width;
-                double bry = (ty+2.0) * game.config.tile_gl_height;
+                double brx = tlx + (2.0 * game.config.tile_gl_width);
+                double bry = tly + (2.0 * game.config.tile_gl_height);
 
-                tlx += game.config.tile_gl_width / 2.0;
-                tly += game.config.tile_gl_height / 2.0;
-                brx += game.config.tile_gl_width / 2.0;
-                bry += game.config.tile_gl_height / 2.0;
+                tlx -= game.config.tile_gl_width;
+                tly -= game.config.tile_gl_height;
+                brx -= game.config.tile_gl_width;
+                bry -= game.config.tile_gl_height;
 
                 tlx -= offset_x;
                 tly -= offset_y;
@@ -357,8 +405,8 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
                                    double offset_y)
 {
     auto z = MAP_DEPTH_WATER;
-#define DEEP_WATER_ACROSS 4
-#define DEEP_WATER_DOWN   4
+#define DEEP_WATER_ACROSS 8
+#define DEEP_WATER_DOWN   8
 
     static Tilep deep_water[DEEP_WATER_ACROSS][DEEP_WATER_DOWN] = {};
     if (!deep_water[0][0]) {
@@ -366,18 +414,66 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
         deep_water[1][0] = tile_find("deep_water2a");
         deep_water[2][0] = tile_find("deep_water3a");
         deep_water[3][0] = tile_find("deep_water4a");
+        deep_water[4][0] = tile_find("deep_water5a");
+        deep_water[5][0] = tile_find("deep_water6a");
+        deep_water[6][0] = tile_find("deep_water7a");
+        deep_water[7][0] = tile_find("deep_water8a");
         deep_water[0][1] = tile_find("deep_water1b");
         deep_water[1][1] = tile_find("deep_water2b");
         deep_water[2][1] = tile_find("deep_water3b");
         deep_water[3][1] = tile_find("deep_water4b");
+        deep_water[4][1] = tile_find("deep_water5b");
+        deep_water[5][1] = tile_find("deep_water6b");
+        deep_water[6][1] = tile_find("deep_water7b");
+        deep_water[7][1] = tile_find("deep_water8b");
         deep_water[0][2] = tile_find("deep_water1c");
         deep_water[1][2] = tile_find("deep_water2c");
         deep_water[2][2] = tile_find("deep_water3c");
         deep_water[3][2] = tile_find("deep_water4c");
+        deep_water[4][2] = tile_find("deep_water5c");
+        deep_water[5][2] = tile_find("deep_water6c");
+        deep_water[6][2] = tile_find("deep_water7c");
+        deep_water[7][2] = tile_find("deep_water8c");
         deep_water[0][3] = tile_find("deep_water1d");
         deep_water[1][3] = tile_find("deep_water2d");
         deep_water[2][3] = tile_find("deep_water3d");
         deep_water[3][3] = tile_find("deep_water4d");
+        deep_water[4][3] = tile_find("deep_water5d");
+        deep_water[5][3] = tile_find("deep_water6d");
+        deep_water[6][3] = tile_find("deep_water7d");
+        deep_water[7][3] = tile_find("deep_water8d");
+        deep_water[0][4] = tile_find("deep_water1e");
+        deep_water[1][4] = tile_find("deep_water2e");
+        deep_water[2][4] = tile_find("deep_water3e");
+        deep_water[3][4] = tile_find("deep_water4e");
+        deep_water[4][4] = tile_find("deep_water5e");
+        deep_water[5][4] = tile_find("deep_water6e");
+        deep_water[6][4] = tile_find("deep_water7e");
+        deep_water[7][4] = tile_find("deep_water8e");
+        deep_water[0][5] = tile_find("deep_water1f");
+        deep_water[1][5] = tile_find("deep_water2f");
+        deep_water[2][5] = tile_find("deep_water3f");
+        deep_water[3][5] = tile_find("deep_water4f");
+        deep_water[4][5] = tile_find("deep_water5f");
+        deep_water[5][5] = tile_find("deep_water6f");
+        deep_water[6][5] = tile_find("deep_water7f");
+        deep_water[7][5] = tile_find("deep_water8f");
+        deep_water[0][6] = tile_find("deep_water1g");
+        deep_water[1][6] = tile_find("deep_water2g");
+        deep_water[2][6] = tile_find("deep_water3g");
+        deep_water[3][6] = tile_find("deep_water4g");
+        deep_water[4][6] = tile_find("deep_water5g");
+        deep_water[5][6] = tile_find("deep_water6g");
+        deep_water[6][6] = tile_find("deep_water7g");
+        deep_water[7][6] = tile_find("deep_water8g");
+        deep_water[0][7] = tile_find("deep_water1h");
+        deep_water[1][7] = tile_find("deep_water2h");
+        deep_water[2][7] = tile_find("deep_water3h");
+        deep_water[3][7] = tile_find("deep_water4h");
+        deep_water[4][7] = tile_find("deep_water5h");
+        deep_water[5][7] = tile_find("deep_water6h");
+        deep_water[6][7] = tile_find("deep_water7h");
+        deep_water[7][7] = tile_find("deep_water8h");
     }
 
     //
@@ -473,13 +569,13 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
                 auto ty = (double)(y &~1);
                 double tlx = tx * game.config.tile_gl_width;
                 double tly = ty * game.config.tile_gl_height;
-                double brx = (tx+2.0) * game.config.tile_gl_width;
-                double bry = (ty+2.0) * game.config.tile_gl_height;
+                double brx = tlx + (2.0 * game.config.tile_gl_width);
+                double bry = tly + (2.0 * game.config.tile_gl_height);
 
-                tlx += game.config.tile_gl_width / 2.0;
-                tly += game.config.tile_gl_height / 2.0;
-                brx += game.config.tile_gl_width / 2.0;
-                bry += game.config.tile_gl_height / 2.0;
+                tlx -= game.config.tile_gl_width;
+                tly -= game.config.tile_gl_height;
+                brx -= game.config.tile_gl_width;
+                bry -= game.config.tile_gl_height;
 
                 tlx -= offset_x;
                 tly -= offset_y;
@@ -514,8 +610,8 @@ static void thing_blit_lava (int minx, int miny, int minz,
                              double offset_y)
 {
     auto z = MAP_DEPTH_LAVA;
-#define LAVA_ACROSS 4
-#define LAVA_DOWN   4
+#define LAVA_ACROSS 8
+#define LAVA_DOWN   8
 
     static Tilep lava[LAVA_ACROSS][LAVA_DOWN] = {};
     if (!lava[0][0]) {
@@ -523,18 +619,66 @@ static void thing_blit_lava (int minx, int miny, int minz,
         lava[1][0] = tile_find("lava2a");
         lava[2][0] = tile_find("lava3a");
         lava[3][0] = tile_find("lava4a");
+        lava[4][0] = tile_find("lava5a");
+        lava[5][0] = tile_find("lava6a");
+        lava[6][0] = tile_find("lava7a");
+        lava[7][0] = tile_find("lava8a");
         lava[0][1] = tile_find("lava1b");
         lava[1][1] = tile_find("lava2b");
         lava[2][1] = tile_find("lava3b");
         lava[3][1] = tile_find("lava4b");
+        lava[4][1] = tile_find("lava5b");
+        lava[5][1] = tile_find("lava6b");
+        lava[6][1] = tile_find("lava7b");
+        lava[7][1] = tile_find("lava8b");
         lava[0][2] = tile_find("lava1c");
         lava[1][2] = tile_find("lava2c");
         lava[2][2] = tile_find("lava3c");
         lava[3][2] = tile_find("lava4c");
+        lava[4][2] = tile_find("lava5c");
+        lava[5][2] = tile_find("lava6c");
+        lava[6][2] = tile_find("lava7c");
+        lava[7][2] = tile_find("lava8c");
         lava[0][3] = tile_find("lava1d");
         lava[1][3] = tile_find("lava2d");
         lava[2][3] = tile_find("lava3d");
         lava[3][3] = tile_find("lava4d");
+        lava[4][3] = tile_find("lava5d");
+        lava[5][3] = tile_find("lava6d");
+        lava[6][3] = tile_find("lava7d");
+        lava[7][3] = tile_find("lava8d");
+        lava[0][4] = tile_find("lava1e");
+        lava[1][4] = tile_find("lava2e");
+        lava[2][4] = tile_find("lava3e");
+        lava[3][4] = tile_find("lava4e");
+        lava[4][4] = tile_find("lava5e");
+        lava[5][4] = tile_find("lava6e");
+        lava[6][4] = tile_find("lava7e");
+        lava[7][4] = tile_find("lava8e");
+        lava[0][5] = tile_find("lava1f");
+        lava[1][5] = tile_find("lava2f");
+        lava[2][5] = tile_find("lava3f");
+        lava[3][5] = tile_find("lava4f");
+        lava[4][5] = tile_find("lava5f");
+        lava[5][5] = tile_find("lava6f");
+        lava[6][5] = tile_find("lava7f");
+        lava[7][5] = tile_find("lava8f");
+        lava[0][6] = tile_find("lava1g");
+        lava[1][6] = tile_find("lava2g");
+        lava[2][6] = tile_find("lava3g");
+        lava[3][6] = tile_find("lava4g");
+        lava[4][6] = tile_find("lava5g");
+        lava[5][6] = tile_find("lava6g");
+        lava[6][6] = tile_find("lava7g");
+        lava[7][6] = tile_find("lava8g");
+        lava[0][7] = tile_find("lava1h");
+        lava[1][7] = tile_find("lava2h");
+        lava[2][7] = tile_find("lava3h");
+        lava[3][7] = tile_find("lava4h");
+        lava[4][7] = tile_find("lava5h");
+        lava[5][7] = tile_find("lava6h");
+        lava[6][7] = tile_find("lava7h");
+        lava[7][7] = tile_find("lava8h");
     }
 
     //
@@ -542,7 +686,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     //
     static int step1;
     static double step2;
-    if (step1++ >= 5) {
+    if (step1++ >= 20) {
         step1 = 0;
         if (step2++ >= (TILE_HEIGHT * 2) - 1) {
             step2 = 0;
@@ -688,20 +832,23 @@ static void thing_blit_lava (int minx, int miny, int minz,
                 auto ty = (double)(y &~1);
                 double tlx = tx * game.config.tile_gl_width;
                 double tly = ty * game.config.tile_gl_height;
-                double brx = (tx+2.0) * game.config.tile_gl_width;
-                double bry = (ty+2.0) * game.config.tile_gl_height;
+                double brx = tlx + (2.0 * game.config.tile_gl_width);
+                double bry = tly + (2.0 * game.config.tile_gl_height);
 
-                tlx += game.config.tile_gl_width / 2.0;
-                tly += game.config.tile_gl_height / 2.0;
-                brx += game.config.tile_gl_width / 2.0;
-                bry += game.config.tile_gl_height / 2.0;
+                tlx -= game.config.tile_gl_width;
+                tly -= game.config.tile_gl_height;
+                brx -= game.config.tile_gl_width;
+                bry -= game.config.tile_gl_height;
 
                 tlx -= offset_x;
                 tly -= offset_y;
                 brx -= offset_x;
                 bry -= offset_y;
 
-                auto tile = lava[X % LAVA_ACROSS][(Y + (int)step2/4) % LAVA_DOWN];
+                int lx = X % LAVA_ACROSS;
+                int ly = (Y + (int)step2/4) % (LAVA_DOWN-1);
+                auto tile = lava[lx][ly];
+
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;

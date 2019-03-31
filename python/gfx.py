@@ -1891,79 +1891,43 @@ def init_32x32():
 
     zx.tile_load_arr(tex_name="32x32", width=32, height=32, arr=tiles)
 
+def init_32x32_surface_effects():
+    zx.tex_load(
+            file="data/gfx/32x32_surface_effects.tga",
+            name="32x32_surface_effects")
+
+    tiles = [
+            "water1.1", "water1.2", "water1.3", "water1.4", "water1.5", "water1.6", "water1.7", "water1.8",
+            "water1.9", "water1.10", "water1.11", "water1.12", "water1.13", "water1.14", "water1.15", "water1.16",
+            "ripple1.1", "ripple1.2", "ripple1.3", "ripple1.4",
+            "ripple2.1", "ripple2.2", "ripple2.3", "ripple2.4",
+            "ripple3.1", "ripple3.2", "ripple3.3", "ripple3.4",
+            "ripple4.1", "ripple4.2", "ripple4.3", "ripple4.4",
+            "deep_water1.1", "deep_water1.2", "deep_water1.3", "deep_water1.4", "deep_water1.5", "deep_water1.6", "deep_water1.7", "deep_water1.8",
+            "deep_water1.9", "deep_water1.10", "deep_water1.11", "deep_water1.12", "deep_water1.13", "deep_water1.14", "deep_water1.15", "deep_water1.16",
+            "lava1.1", "lava1.2", "lava1.3", "lava1.4", "lava1.5", "lava1.6", "lava1.7", "lava1.8",
+            "lava1.9", "lava1.10", "lava1.11", "lava1.12", "lava1.13", "lava1.14", "lava1.15", "lava1.16",
+    ]
+
+    zx.tile_load_arr(tex_name="32x32_surface_effects", width=32, height=32, arr=tiles)
+
 def init_32x32_water():
     zx.tex_load(
             file="data/gfx/32x32_water.tga",
             name="32x32_water")
 
     tiles = [
-            ########################################################
-            "water1a",
-            "water2a",
-            "water3a",
-            "water4a",
-            "water1.1",
-            "water1.2",
-            "water1.3",
-            "water1.4",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "water1.5",
-            "water1.6",
-            "water1.7",
-            "water1.8",
-            ########################################################
-            "water1b",
-            "water2b",
-            "water3b",
-            "water4b",
-            "ripple1.1",
-            "ripple1.2",
-            "ripple1.3",
-            "ripple1.4",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "ripple2.1",
-            "ripple2.2",
-            "ripple2.3",
-            "ripple2.4",
-            ########################################################
-            "water1c",
-            "water2c",
-            "water3c",
-            "water4c",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "water1d",
-            "water2d",
-            "water3d",
-            "water4d",
-            "",
-            "",
-            "",
-            "",
+        "water1a", "water2a", "water3a", "water4a", "water5a", "water6a", "water7a", "water8a",
+        "water1b", "water2b", "water3b", "water4b", "water5b", "water6b", "water7b", "water8b",
+        "water1c", "water2c", "water3c", "water4c", "water5c", "water6c", "water7c", "water8c",
+        "water1d", "water2d", "water3d", "water4d", "water5d", "water6d", "water7d", "water8d",
+        "water1e", "water2e", "water3e", "water4e", "water5e", "water6e", "water7e", "water8e",
+        "water1f", "water2f", "water3f", "water4f", "water5f", "water6f", "water7f", "water8f",
+        "water1g", "water2g", "water3g", "water4g", "water5g", "water6g", "water7g", "water8g",
+        "water1h", "water2h", "water3h", "water4h", "water5h", "water6h", "water7h", "water8h",
     ]
 
     zx.tile_load_arr(tex_name="32x32_water", width=32, height=32, arr=tiles)
-
 
 def init_32x32_deep_water():
     zx.tex_load(
@@ -1971,69 +1935,14 @@ def init_32x32_deep_water():
             name="32x32_deep_water")
 
     tiles = [
-            ########################################################
-            "deep_water1a",
-            "deep_water2a",
-            "deep_water3a",
-            "deep_water4a",
-            "deep_water1.1",
-            "deep_water1.2",
-            "deep_water1.3",
-            "deep_water1.4",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "deep_water1.5",
-            "deep_water1.6",
-            "deep_water1.7",
-            "deep_water1.8",
-            ########################################################
-            "deep_water1b",
-            "deep_water2b",
-            "deep_water3b",
-            "deep_water4b",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "deep_water1c",
-            "deep_water2c",
-            "deep_water3c",
-            "deep_water4c",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "deep_water1d",
-            "deep_water2d",
-            "deep_water3d",
-            "deep_water4d",
-            "",
-            "",
-            "",
-            "",
+        "deep_water1a", "deep_water2a", "deep_water3a", "deep_water4a", "deep_water5a", "deep_water6a", "deep_water7a", "deep_water8a",
+        "deep_water1b", "deep_water2b", "deep_water3b", "deep_water4b", "deep_water5b", "deep_water6b", "deep_water7b", "deep_water8b",
+        "deep_water1c", "deep_water2c", "deep_water3c", "deep_water4c", "deep_water5c", "deep_water6c", "deep_water7c", "deep_water8c",
+        "deep_water1d", "deep_water2d", "deep_water3d", "deep_water4d", "deep_water5d", "deep_water6d", "deep_water7d", "deep_water8d",
+        "deep_water1e", "deep_water2e", "deep_water3e", "deep_water4e", "deep_water5e", "deep_water6e", "deep_water7e", "deep_water8e",
+        "deep_water1f", "deep_water2f", "deep_water3f", "deep_water4f", "deep_water5f", "deep_water6f", "deep_water7f", "deep_water8f",
+        "deep_water1g", "deep_water2g", "deep_water3g", "deep_water4g", "deep_water5g", "deep_water6g", "deep_water7g", "deep_water8g",
+        "deep_water1h", "deep_water2h", "deep_water3h", "deep_water4h", "deep_water5h", "deep_water6h", "deep_water7h", "deep_water8h",
     ]
 
     zx.tile_load_arr(tex_name="32x32_deep_water", width=32, height=32, arr=tiles)
@@ -2045,69 +1954,14 @@ def init_32x32_lava():
             name="32x32_lava")
 
     tiles = [
-            ########################################################
-            "lava1a",
-            "lava2a",
-            "lava3a",
-            "lava4a",
-            "lava1.1",
-            "lava1.2",
-            "lava1.3",
-            "lava1.4",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "lava1.5",
-            "lava1.6",
-            "lava1.7",
-            "lava1.8",
-            ########################################################
-            "lava1b",
-            "lava2b",
-            "lava3b",
-            "lava4b",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "lava1c",
-            "lava2c",
-            "lava3c",
-            "lava4c",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ########################################################
-            "lava1d",
-            "lava2d",
-            "lava3d",
-            "lava4d",
-            "",
-            "",
-            "",
-            "",
+        "lava1a", "lava2a", "lava3a", "lava4a", "lava5a", "lava6a", "lava7a", "lava8a",
+        "lava1b", "lava2b", "lava3b", "lava4b", "lava5b", "lava6b", "lava7b", "lava8b",
+        "lava1c", "lava2c", "lava3c", "lava4c", "lava5c", "lava6c", "lava7c", "lava8c",
+        "lava1d", "lava2d", "lava3d", "lava4d", "lava5d", "lava6d", "lava7d", "lava8d",
+        "lava1e", "lava2e", "lava3e", "lava4e", "lava5e", "lava6e", "lava7e", "lava8e",
+        "lava1f", "lava2f", "lava3f", "lava4f", "lava5f", "lava6f", "lava7f", "lava8f",
+        "lava1g", "lava2g", "lava3g", "lava4g", "lava5g", "lava6g", "lava7g", "lava8g",
+        "lava1h", "lava2h", "lava3h", "lava4h", "lava5h", "lava6h", "lava7h", "lava8h",
     ]
 
     zx.tile_load_arr(tex_name="32x32_lava", width=32, height=32, arr=tiles)
@@ -2151,5 +2005,6 @@ init_16x16_floor()
 init_32x32()
 init_32x32_water()
 init_32x32_deep_water()
+init_32x32_surface_effects()
 init_32x32_lava()
 init_weapons_tiles()
