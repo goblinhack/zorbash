@@ -64,7 +64,7 @@ int Thing::hit_actual (Thingp orig_hitter,
 //
 // Returns true on the target being dead.
 //
-int Thing::hit_possible (Thingp hitter, int damage)
+int Thing::hit_if_possible (Thingp hitter, int damage)
 {
     Thingp orig_hitter = hitter;
 
@@ -193,7 +193,7 @@ int Thing::hit_possible (Thingp hitter, int damage)
     return (hit_and_killed);
 }
 
-int Thing::hit_possible (Thingp hitter)
+int Thing::hit_if_possible (Thingp hitter)
 {
-    return (hit_possible(hitter, 0));
+    return (hit_if_possible(hitter, 0));
 }

@@ -71,7 +71,6 @@ void Thing::collision_check (void)
     }
 
     if (need_collision_test) {
-con("do coll test");
         handle_collisions();
         timestamp_collision = 
           time_get_time_ms() + 

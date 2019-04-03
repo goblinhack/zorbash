@@ -197,11 +197,11 @@ class Tp:
     def set_is_rrr17(self, value):
         zx.tp_set_is_rrr17(self, value)
 
-    def set_is_rrr18(self, value):
-        zx.tp_set_is_rrr18(self, value)
+    def set_nutrition_value(self, value):
+        zx.tp_set_nutrition_value(self, value)
 
-    def set_is_rrr19(self, value):
-        zx.tp_set_is_rrr19(self, value)
+    def set_bite_damage(self, value):
+        zx.tp_set_bite_damage(self, value)
 
     def set_collision_check(self, value):
         zx.tp_set_collision_check(self, value)
