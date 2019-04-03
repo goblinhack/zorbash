@@ -4,7 +4,8 @@
  */
 
 #include <libgen.h>
-
+#include <string>
+#include <sstream>
 #include "my_main.h"
 #include "my_sdl.h"
 
@@ -1308,4 +1309,16 @@ std::string string_sprintf (const char *format, ...)
     va_end(args);
 
     return (ret);
+}
+
+std::vector<std::string> split_tokens(const std::string &s, 
+                                      const char delimiter)
+{
+   std::string token;
+   std::istringstream s_stream(s);
+   std::vector<std::string> tokens;
+   while (std::getline(s_stream, token, delimiter)) {
+       tokens.push_back(token);
+   }
+   return tokens;
 }

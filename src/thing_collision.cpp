@@ -7,7 +7,7 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
-#define DEBUG_COLLISION
+#undef DEBUG_COLLISION
 
 class ThingColl {
 public:
@@ -452,8 +452,8 @@ void Thing::possible_hits_find_best (void)
     }
 
     if (best) {
-con("hit %s", best->target->logname().c_str());
-        if (best->target->hit_possible(me, 0)) {
+        if (best->target->hit_if_possible(me)) {
+con("can hit %s", best->target->logname().c_str());
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");
             }

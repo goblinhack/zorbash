@@ -324,8 +324,8 @@ public:
      */
     int hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, 
                    int damage);
-    int hit_possible(Thingp hitter, int damage);
-    int hit_possible(Thingp hitter);
+    int hit_if_possible(Thingp hitter, int damage);
+    int hit_if_possible(Thingp hitter);
 
     /*
      * thing_move.cpp

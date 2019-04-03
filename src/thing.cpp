@@ -223,7 +223,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         t->is_player = true;
     }
 
-    if (!tp_is_boring(tp)) {
+    if (!tp_is_active(tp)) {
         t->log("created");
     }
 
@@ -462,7 +462,7 @@ void Thing::destroy (void)
 #ifdef ENABLE_THING_DEBUG
     log("destroy");
 #else
-    if (!tp_is_boring(tp)) {
+    if (!tp_is_active(tp)) {
         log("destroy");
     }
 #endif
@@ -473,7 +473,7 @@ void Thing::destroy (void)
         auto a = &game.state.map.all_things;
         auto iter = a->find(id);
         if (iter != a->end()) {
-            if (!tp_is_boring(tp)) {
+            if (!tp_is_active(tp)) {
                 log("erasing from all things");
             }
             game.state.map.all_things.erase(iter);
@@ -488,7 +488,7 @@ void Thing::destroy (void)
         auto a = &game.state.map.all_active_things;
         auto iter = a->find(id);
         if (iter != a->end()) {
-            if (!tp_is_boring(tp)) {
+            if (!tp_is_active(tp)) {
                 log("erasing from active things");
             }
             game.state.map.all_active_things.erase(iter);

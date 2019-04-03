@@ -189,8 +189,8 @@ public:
     int is_rrr15 {};
     int is_rrr16 {};
     int is_rrr17 {};
-    int is_rrr18 {};
-    int is_rrr19 {};
+    std::string nutrition_value {};
+    std::string bite_damage {};
     int is_rrr2 {};
     int collision_check {};
     int attack_on_collision {};
@@ -399,14 +399,14 @@ static inline int tp_is_rrr17 (Tpp t)
     return (t->is_rrr17);
 }
 
-static inline int tp_is_rrr18 (Tpp t)
+static inline std::string tp_nutrition_value (Tpp t)
 {
-    return (t->is_rrr18);
+    return (t->nutrition_value);
 }
 
-static inline int tp_is_rrr19 (Tpp t)
+static inline std::string tp_bite_damage (Tpp t)
 {
-    return (t->is_rrr19);
+    return (t->bite_damage);
 }
 
 static inline int tp_collision_check (Tpp t)

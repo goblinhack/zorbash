@@ -14,7 +14,7 @@ bool Thing::will_attack (const Thingp itp)
     auto it = itp->tp;
 
     if (tp_is_meat_eater(me)) {
-        if (tp_is_made_of_meat(it)) {
+        if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
             return (true);
         }
     }
@@ -39,8 +39,8 @@ bool Thing::will_eat (const Thingp itp)
     auto me = tp;
     auto it = itp->tp;
 
-    if (tp_is_made_of_meat(me)) {
-        if (tp_is_meat_eater(it) || tp_is_blood(it)) {
+    if (tp_is_meat_eater(me)) {
+        if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
             return (true);
         }
     }

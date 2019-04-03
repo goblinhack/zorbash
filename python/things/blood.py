@@ -8,6 +8,7 @@ def tp_init(name, short_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.5)
+    x.set_nutrition_value("1d4")
     x.set_gfx_animated(True)
     x.set_hunger_initial_health_at(4)
     x.set_is_blood(True)

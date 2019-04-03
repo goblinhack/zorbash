@@ -272,6 +272,11 @@ void restart(void);
 void die(void);
 int cereal_test(const std::string save_file);
 
+//
+// dice.cpp
+//
+int dice_roll(const std::string &s);
+
 #include "my_ptrcheck.h"
 
 #endif
