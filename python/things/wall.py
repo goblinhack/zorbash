@@ -75,6 +75,8 @@ def tp_init(name, short_name,
     else:
         x.set_br_tile(br_tile=name)
 
+    x.update()
+    
 def init():
     tp_init(name="wall1", short_name="A wall", 
             tiles=[

@@ -15,6 +15,8 @@ def tp_init(name, short_name):
 
     x.set_tile(tile=name + ".1-closed")
 
+    x.update()
+    
 def init():
     tp_init(name="door1", short_name="door1")
 

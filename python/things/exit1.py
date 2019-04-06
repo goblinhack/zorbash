@@ -24,6 +24,8 @@ def tp_init(name, short_name):
     x.set_tile(tile=name + ".7", is_dir_none=True, delay_ms=delay)
     x.set_tile(tile=name + ".8", is_dir_none=True, delay_ms=delay)
 
+    x.update()
+    
 def init():
     tp_init(name="exit1", short_name="exit1")
 

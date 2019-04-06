@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_tile_info.h"
 #include "my_tile.h"
+#include "my_dice.h"
 
 static Tpmap tp_map;
 static Tpmap_create_order tp_create_order_map;
@@ -72,9 +73,8 @@ Tpp tp_load (int id, std::string name)
 
 void tp_update (Tpp t)
 {_
-    //
-    // Hook point to modify tps post python config.
-    //
+    t->nutrition = Dice(t->nutrition_hd);
+    t->bite_damage = Dice(t->bite_damage_hd);
 }
 
 //

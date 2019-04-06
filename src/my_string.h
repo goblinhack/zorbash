@@ -11,7 +11,6 @@
 #include <stdarg.h>
 #include <wchar.h>
 #include <map>
-#include "my_thing_template.h"
 
 typedef std::shared_ptr< std::vector< std::string > > shared_vector_string;
 typedef std::shared_ptr< std::vector< std::wstring > > shared_vector_wstring;
@@ -53,9 +52,6 @@ shared_vector_string split(const std::string &, uint32_t max_line_len);
 shared_vector_wstring split(const std::wstring &, uint32_t max_line_len);
 extern std::vector<std::string> split_tokens(const std::string &s,
                                              const char delimiter);
-Tpp string2tp(const char **s);
-Tpp string2tp(std::string &s, int *len);
-Tpp string2tp(std::wstring &s, int *len);
 int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used,
                          const char *fmt, ...);
 

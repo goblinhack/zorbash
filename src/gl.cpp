@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_gl.h"
 #include "my_time_util.h"
+#include "my_thing_template.h"
 
 static void gl_init_fbo(void);
 

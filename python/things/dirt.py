@@ -16,6 +16,8 @@ def dirt_init(name, short_name,
     for t in tiles:
         x.set_tile(t)
 
+    x.update()
+    
 def init():
     dirt_init(name="dirt1", short_name="The dirt", 
             tiles=[

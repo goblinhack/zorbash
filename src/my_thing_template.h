@@ -21,6 +21,7 @@ typedef std::unordered_map< std::string, Tpp > Tpmap;
 typedef std::map< unsigned int, Tpp > Tpmap_create_order;
 
 #include "my_tile_info.h"
+#include "my_dice.h"
 
 enum {
     IS_JOIN_HORIZ,
@@ -189,8 +190,10 @@ public:
     int is_rrr15 {};
     int is_rrr16 {};
     int is_rrr17 {};
-    std::string nutrition_value {};
-    std::string bite_damage {};
+    std::string nutrition_hd {};
+    Dice nutrition;
+    std::string bite_damage_hd {};
+    Dice bite_damage;
     int is_rrr2 {};
     int collision_check {};
     int attack_on_collision {};
@@ -399,14 +402,14 @@ static inline int tp_is_rrr17 (Tpp t)
     return (t->is_rrr17);
 }
 
-static inline std::string tp_nutrition_value (Tpp t)
+static inline std::string tp_nutrition_hd (Tpp t)
 {
-    return (t->nutrition_value);
+    return (t->nutrition_hd);
 }
 
-static inline std::string tp_bite_damage (Tpp t)
+static inline std::string tp_bite_damage_hd (Tpp t)
 {
-    return (t->bite_damage);
+    return (t->bite_damage_hd);
 }
 
 static inline int tp_collision_check (Tpp t)
@@ -870,5 +873,9 @@ static inline Tileinfomap tp_x_tiles (Tpp t)
 }
 
 Tilep tp_first_tile(Tpp tp);
+
+Tpp string2tp(const char **s);
+Tpp string2tp(std::string &s, int *len);
+Tpp string2tp(std::wstring &s, int *len);
 
 #endif /* THING_TEMPLATE_H */

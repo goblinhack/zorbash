@@ -145,7 +145,7 @@ Lightp light_find (uint32_t id)
     return (result->second);
 }
 
-std::string Light::logname (void)
+std::string Light::to_string (void)
 {_
     /*
      * Return constant strings from a small pool.
