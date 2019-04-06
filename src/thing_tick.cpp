@@ -12,6 +12,10 @@ void Thing::hunger_clock (void)
     if (!tp_hunger_every_ms(tp)) {
         return;
     }
+    //
+    // Hook point to modify tps post python config.
+    //
+    // con("XXX %d", bite_damage());
 
     //
     // Update the hunger clock.

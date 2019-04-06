@@ -51,6 +51,8 @@ def tp_init(name, short_name):
     x.set_tile(tile=name + "_up.6", delay_ms=delay, is_dir_down=True,
                is_end_of_anim = True, is_dead_on_end_of_anim=True)
    
+    x.update()
+    
 def init():
     tp_init(name="sword1_use_anim", short_name="sword1_use_anim")
 

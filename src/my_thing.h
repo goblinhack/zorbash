@@ -240,7 +240,7 @@ public:
     unsigned int       is_lit:1;             /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_waiting_for_ai:1;  /* until -std=c++2a remember to update thing.cpp */
     
-    std::string logname(void);
+    std::string to_string(void);
     uint8_t is_dir_bl(void);
     uint8_t is_dir_br(void);
     uint8_t is_dir_down(void);
@@ -390,6 +390,16 @@ public:
     bool is_goal_for_me(point p, int priority, double *score);
     point get_next_hop(void);
     point choose_best_nh(void);
+
+    int nutrition (void) const
+    {
+        return (tp->nutrition());
+    }
+
+    int bite_damage (void) const
+    {
+        return (tp->bite_damage());
+    }
 };
 
 class ThingDisplaySortKey {

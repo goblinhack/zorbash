@@ -340,13 +340,13 @@ void Thing::remove_hooks ()
 
     if (owner_thing_id && owner) {
 #ifdef ENABLE_THING_DEBUG
-        log("detach %d from owner %s", id, owner->logname().c_str());
+        log("detach %d from owner %s", id, owner->to_string().c_str());
 #endif
         if (id == owner->weapon_carry_anim_thing_id) {
             unwield("remove hooks");
 
 #ifdef ENABLE_THING_DEBUG
-            log("detach from carry anim owner %s", owner->logname().c_str());
+            log("detach from carry anim owner %s", owner->to_string().c_str());
 #endif
 
             owner->set_weapon_carry_anim(nullptr);
@@ -354,7 +354,7 @@ void Thing::remove_hooks ()
 
         if (id == owner->weapon_use_anim_thing_id) {
 #ifdef ENABLE_THING_DEBUG
-            log("detach from use anim owner %s", owner->logname().c_str());
+            log("detach from use anim owner %s", owner->to_string().c_str());
 #endif
             owner->set_weapon_use_anim(nullptr);
 
@@ -433,14 +433,14 @@ void Thing::set_owner (Thingp owner)
         }
 
         if (owner) {
-            log("set-owner change %s->%s", old_owner->logname().c_str(), 
-                owner->logname().c_str());
+            log("set-owner change %s->%s", old_owner->to_string().c_str(), 
+                owner->to_string().c_str());
         } else {
-            log("set-owner remove owner %s", old_owner->logname().c_str());
+            log("set-owner remove owner %s", old_owner->to_string().c_str());
         }
     } else {
         if (owner) {
-            log("set-owner %s", owner->logname().c_str());
+            log("set-owner %s", owner->to_string().c_str());
         }
     }
 
@@ -630,7 +630,7 @@ Thingp thing_find (uint32_t id)
     return (result->second);
 }
 
-std::string Thing::logname (void)
+std::string Thing::to_string (void)
 {_
     //
     // Return constant strings from a small pool.

@@ -3,6 +3,8 @@
  * See the README file for license info.
  */
 
+#include "my_string.h"
+#include "my_main.h"
 #include "my_dice.h"
 
 int dice_roll (const std::string &s)

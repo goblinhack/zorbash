@@ -22,6 +22,8 @@ def tp_init(name, short_name, tiles=[]):
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 
+    x.update()
+    
 def init():
     tp_init(name="brazier1", short_name="brazier1", 
             tiles=[ 

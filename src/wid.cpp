@@ -1082,11 +1082,11 @@ wid_mode wid_get_mode (widp w)
     return (w->mode);
 }
 
-std::string wid_logname (widp w)
+std::string to_string (widp w)
 {_
     verify(w.get());
 
-    return (w->logname);
+    return (w->to_string);
 }
 
 std::string wid_name (widp w)
@@ -2386,7 +2386,7 @@ widp wid_new_window (std::string name)
 {_
     widp w = wid_new(0);
 
-    w->logname = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
 
     WID_DBG(w, "%s", __FUNCTION__);
 
@@ -2413,11 +2413,11 @@ widp wid_new_container (widp parent, std::string name)
     widp w = wid_new(parent);
 
 #ifdef WID_FULL_LOGNAME
-    w->logname = string_sprintf("%s[%p] (parent %s[%p])", 
+    w->to_string = string_sprintf("%s[%p] (parent %s[%p])", 
                                 name.c_str(), w.get(), 
-                                parent->logname.c_str(), parent.get());
+                                parent->to_string.c_str(), parent.get());
 #else
-    w->logname = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
 #endif
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -2448,11 +2448,11 @@ widp wid_new_plain (widp parent, std::string name)
     widp w = wid_new(parent);
 
 #ifdef WID_FULL_LOGNAME
-    w->logname = string_sprintf("%s[%p] (parent %s[%p])", 
+    w->to_string = string_sprintf("%s[%p] (parent %s[%p])", 
                                 name.c_str(), w.get(), 
-                                parent->logname.c_str(), parent.get());
+                                parent->to_string.c_str(), parent.get());
 #else
-    w->logname = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
 #endif
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -2470,7 +2470,7 @@ widp wid_new_square_window (std::string name)
 {_
     widp w = wid_new(0);
 
-    w->logname = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
 
     WID_DBG(w, "%s", __FUNCTION__);
 
@@ -2507,11 +2507,11 @@ widp wid_new_square_button (widp parent, std::string name)
     widp w = wid_new(parent);
 
 #ifdef WID_FULL_LOGNAME
-    w->logname = string_sprintf("%s[%p] (parent %s[%p])", 
+    w->to_string = string_sprintf("%s[%p] (parent %s[%p])", 
                                 name.c_str(), w.get(), 
-                                parent->logname.c_str(), parent.get());
+                                parent->to_string.c_str(), parent.get());
 #else
-    w->logname = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
 #endif
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -2533,7 +2533,7 @@ static widp wid_new_scroll_trough (widp parent)
 
     widp w = wid_new(parent);
 
-    w->logname = string_sprintf("%s[%p]", "scroll trough", w.get());
+    w->to_string = string_sprintf("%s[%p]", "scroll trough", w.get());
 
     WID_DBG(w, "%s", __FUNCTION__);
 
@@ -2567,9 +2567,9 @@ static widp wid_new_scroll_bar (widp parent,
     widp w = wid_new(parent);
 
     if (vertical) {
-        w->logname = string_sprintf("%s, %s[%p]", name.c_str(), "vert scroll bar", w.get());
+        w->to_string = string_sprintf("%s, %s[%p]", name.c_str(), "vert scroll bar", w.get());
     } else {
-        w->logname = string_sprintf("%s, %s[%p]", name.c_str(), "horiz scroll bar", w.get());
+        w->to_string = string_sprintf("%s, %s[%p]", name.c_str(), "horiz scroll bar", w.get());
     }
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -5363,27 +5363,27 @@ static widp wid_key_down_handler (int32_t x, int32_t y)
 //CON("key down");
     w = wid_key_down_handler_at(wid_focus, x, y, true /* strict */);
     if (w) {
-//CON("%s %d",wid_logname(w),__LINE__);
+//CON("%s %d",to_string(w),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(
                 wid_get_top_parent(wid_focus), x, y, false /* strict */);
     if (w) {
-//CON("%s %d",wid_logname(w),__LINE__);
+//CON("%s %d",to_string(w),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(wid_over, x, y, true /* strict */);
     if (w) {
-//CON("%s %d",wid_logname(w),__LINE__);
+//CON("%s %d",to_string(w),__LINE__);
         return (w);
     }
 
     w = wid_key_down_handler_at(
                 wid_get_top_parent(wid_over), x, y, false /* strict */);
     if (w) {
-//CON("%s %d",wid_logname(w),__LINE__);
+//CON("%s %d",to_string(w),__LINE__);
         return (w);
     }
 
@@ -5402,7 +5402,7 @@ static widp wid_key_down_handler (int32_t x, int32_t y)
         if (!w) {
             continue;
         }
-//CON("     got top level strict handler%s",wid_logname(w));
+//CON("     got top level strict handler%s",to_string(w));
 
         return (w);
     }
@@ -5423,7 +5423,7 @@ static widp wid_key_down_handler (int32_t x, int32_t y)
             continue;
         }
 
-//CON("     got top level loose handler%s",wid_logname(w));
+//CON("     got top level loose handler%s",to_string(w));
         return (w);
     }
 
@@ -6441,10 +6441,10 @@ void wid_display_all (void)
 
 #ifdef DEBUG_WID_FOCUS
     if (wid_focus) {
-        ascii_putf(0, ASCII_HEIGHT-4, WHITE, GRAY, L"focus %s", wid_logname(wid_focus).c_str());
+        ascii_putf(0, ASCII_HEIGHT-4, WHITE, GRAY, L"focus %s", to_string(wid_focus).c_str());
     }
     if (wid_over) {
-        ascii_putf(0, ASCII_HEIGHT-3, WHITE, GRAY, L"over  %s", wid_logname(wid_over).c_str());
+        ascii_putf(0, ASCII_HEIGHT-3, WHITE, GRAY, L"over  %s", to_string(wid_over).c_str());
     }
 #endif
     {
@@ -6624,7 +6624,7 @@ static void wid_move_enqueue (widp w,
             Thingp t = wid_get_thing(w);
 
             ERR("too many moves queued up for widget %s",
-                wid_logname(w));
+                to_string(w));
 
             if (t) {
                 log(t, "Too many moves queued up");

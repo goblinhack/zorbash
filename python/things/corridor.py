@@ -15,6 +15,8 @@ def corridor_init(name, short_name,
     for t in tiles:
         x.set_tile(t)
 
+    x.update()
+    
 def init():
     corridor_init(name="corridor1", short_name="The corridor", 
             tiles=[

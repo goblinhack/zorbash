@@ -17,6 +17,8 @@ def lava_init(name, short_name,
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 
+    x.update()
+    
 def init():
     lava_init(name="lava1", short_name="Lava", 
             tiles=[ 

@@ -26,6 +26,8 @@ def tp_init(name, short_name):
     x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=delay)
     x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=delay)
 
+    x.update()
+    
 def init():
     tp_init(name="entrance1", short_name="entrance1")
 

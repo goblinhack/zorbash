@@ -6,6 +6,7 @@
 #pragma once
 
 #include "my_point.h"
+#include "my_main.h"
 
 typedef struct dmap_ {
     uint8_t val[MAP_WIDTH][MAP_HEIGHT];

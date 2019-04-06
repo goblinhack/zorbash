@@ -17,6 +17,8 @@ def deep_tp_init(name, short_name,
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 
+    x.update()
+    
 def init():
     deep_tp_init(name="deep_water1", short_name="deep_water", 
             tiles=[ 

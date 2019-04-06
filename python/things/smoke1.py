@@ -45,6 +45,8 @@ def tp_init(name, short_name):
     x.set_tile(tile=name + ".31", delay_ms=delay)
     x.set_tile(tile=name + ".32", delay_ms=delay)
 
+    x.update()
+    
 def init():
     tp_init(name="smoke1", short_name="smoke1")
 

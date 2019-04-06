@@ -22,6 +22,8 @@ def key_init(name, short_name):
     x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=100)
     x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=100)
 
+    x.update()
+    
 def init():
     key_init(name="key1", short_name="key1")
 

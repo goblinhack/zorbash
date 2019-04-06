@@ -453,7 +453,7 @@ void Thing::possible_hits_find_best (void)
 
     if (best) {
         if (best->target->hit_if_possible(me)) {
-con("can hit %s", best->target->logname().c_str());
+con("can hit %s", best->target->to_string().c_str());
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");
             }

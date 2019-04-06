@@ -89,7 +89,7 @@ public:
     uint8_t             is_nearest_wall[MAP_WIDTH][MAP_HEIGHT] = {};
 
     void pop();
-    std::string logname(void);
+    std::string to_string(void);
     void destroyed(void);
     void reset(void);
     void move_delta(fpoint);

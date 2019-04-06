@@ -44,16 +44,16 @@ void Thing::set_weapon_carry_anim (Thingp new_weapon_carry_anim)
 
         if (new_weapon_carry_anim) {
             log("set-weapon-carry change, %s->%s",
-                old_weapon_carry_anim->logname().c_str(),
-                new_weapon_carry_anim->logname().c_str());
+                old_weapon_carry_anim->to_string().c_str(),
+                new_weapon_carry_anim->to_string().c_str());
         } else {
             log("set-weapon-carry remove, %s",
-                old_weapon_carry_anim->logname().c_str());
+                old_weapon_carry_anim->to_string().c_str());
         }
     } else {
         if (new_weapon_carry_anim) {
             log("set-weapon-carry, %s",
-                new_weapon_carry_anim->logname().c_str());
+                new_weapon_carry_anim->to_string().c_str());
         }
     }
 
@@ -93,15 +93,15 @@ void Thing::set_weapon_use_anim (Thingp weapon_use_anim)
 
         if (weapon_use_anim) {
             log("set-weapon-use change %s->%s",
-                old_weapon_use_anim->logname().c_str(),
-                weapon_use_anim->logname().c_str());
+                old_weapon_use_anim->to_string().c_str(),
+                weapon_use_anim->to_string().c_str());
         } else {
             log("set-weapon-use remove %s", 
-                old_weapon_use_anim->logname().c_str());
+                old_weapon_use_anim->to_string().c_str());
         }
     } else {
         if (weapon_use_anim) {
-            log("set-weapon-use %s", weapon_use_anim->logname().c_str());
+            log("set-weapon-use %s", weapon_use_anim->to_string().c_str());
         }
     }
 

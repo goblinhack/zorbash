@@ -20,6 +20,8 @@ def tp_init(name, short_name):
 
     x.set_tile(tile=name + ".1")
 
+    x.update()
+    
 def init():
     tp_init(name="sword1", short_name="sword1")
 

@@ -6,8 +6,10 @@
 #include <libgen.h>
 #include <string>
 #include <sstream>
+
 #include "my_main.h"
 #include "my_sdl.h"
+#include "my_thing_template.h"
 
 std::wstring string_to_wstring(const std::string& s);
 std::string wstring_to_string(const std::wstring& s);

@@ -21,6 +21,8 @@ def tp_init(name, short_name,
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 
+    x.update()
+    
 def init():
     tp_init(name="grate1", short_name="grate1", tiles=[ "grate1.1", "grate1.2", ])
     tp_init(name="grate2", short_name="grate2", tiles=[ "grate2.1", "grate2.2", ])

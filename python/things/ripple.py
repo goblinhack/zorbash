@@ -16,6 +16,8 @@ def tp_init(name, short_name):
     x.set_tile(tile=name + ".3", delay_ms=delay)
     x.set_tile(tile=name + ".4", delay_ms=delay, is_end_of_anim=True, is_dead_on_end_of_anim=True)
 
+    x.update()
+    
 def init():
     tp_init(name="ripple1", short_name="ripple1")
     tp_init(name="ripple2", short_name="ripple2")

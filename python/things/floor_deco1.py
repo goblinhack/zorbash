@@ -18,6 +18,8 @@ def tp_init(name, short_name, tiles=[]):
     for t in tiles:
         x.set_tile(tile=t)
 
+    x.update()
+    
 def init():
     tp_init(name="pillar1", short_name="pillar1", 
             tiles=[ 

@@ -62,7 +62,7 @@ std::string wid_get_name(widp);
 std::wstring wid_get_text(widp);
 std::wstring wid_get_text_with_cursor(widp);
 std::wstring wid_get_tooltip(widp);
-std::string wid_logname(widp);
+std::string to_string(widp);
 std::string wid_name(widp);
 Texp wid_get_tex(widp, fsize *size);
 Tilep wid_get_tile(widp);
@@ -552,7 +552,7 @@ public:
     /*
      * For debugging.
      */
-    std::string logname {};
+    std::string to_string {};
 
     /*
      * Text that appears on the wid.
