@@ -438,10 +438,12 @@ void Thing::possible_hits_find_best (void)
             /*
              * If this target is closer, prefer it.
              */
-            double dist_best = DISTANCE(me->interpolated_at.x, me->interpolated_at.y,
+            double dist_best = DISTANCE(me->interpolated_at.x, 
+                                        me->interpolated_at.y,
                                         best->target->interpolated_at.x, 
                                         best->target->interpolated_at.y);
-            double dist_cand = DISTANCE(me->interpolated_at.x, me->interpolated_at.y,
+            double dist_cand = DISTANCE(me->interpolated_at.x, 
+                                        me->interpolated_at.y,
                                         cand.target->interpolated_at.x, 
                                         cand.target->interpolated_at.y);
 
@@ -452,8 +454,15 @@ void Thing::possible_hits_find_best (void)
     }
 
     if (best) {
-        if (best->target->hit_if_possible(me)) {
-con("can hit %s", best->target->to_string().c_str());
+        int damage = 0;
+
+        auto it = best->target;
+        if (will_eat(it)) {
+            damage = bite_damage();
+            health_boost(it->nutrition());
+        }
+
+        if (it->hit_if_possible(me, damage)) {
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");
             }

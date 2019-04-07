@@ -283,7 +283,6 @@ public:
     void tick();
     void collision_check();
     void achieve_goals_in_life();
-    void hunger_clock();
 
     /*
      * thing_display.cpp
@@ -345,6 +344,16 @@ public:
     bool handle_collisions(void);
     void possible_hits_find_best(void);
     bool possible_hit(Thingp it, int x, int y, int dx, int dy);
+
+    /*
+     * thing_health.cpp
+     */
+    void health_boost(int v);
+
+    /*
+     * thing_hunger.cpp
+     */
+    void hunger_clock();
 
     /*
      * thing_weapon.cpp

@@ -7,46 +7,6 @@
 #include "my_thing.h"
 #include <algorithm>
 
-void Thing::hunger_clock (void)
-{
-    if (!tp_hunger_every_ms(tp)) {
-        return;
-    }
-    //
-    // Hook point to modify tps post python config.
-    //
-    // con("XXX %d", bite_damage());
-
-    //
-    // Update the hunger clock.
-    //
-    if (time_have_x_ms_passed_since(tp_hunger_every_ms(tp),
-                                    hunger_tick_last_ms)) {
-        hunger_tick_last_ms = time_get_time_ms_cached();
-
-        if (health > 1) {
-            health--;
-        } else {
-            //
-            // starvation is just annoying for players
-            //
-            // dead("starved to death");
-        }
-
-        int hungry_at = 
-          (int) ((double) max_health * 
-                 ((double) tp_hunger_at_health_pct(tp) / 100.0));
-
-        is_hungry = health < hungry_at;
-
-        int starving_at = 
-          (int) ((double) max_health * 
-                 ((double) tp_hunger_starving_at_health_pct(tp) / 100.0));
-
-        is_starving = health < starving_at;
-    }
-}
-
 void Thing::achieve_goals_in_life (void)
 {
     //
