@@ -8,6 +8,7 @@
 #include "my_point.h"
 #include "my_tile.h"
 #include "my_room.h"
+#include "my_level.h"
 #include "my_charmap.h"
 #include "my_dmap.h"
 #include "my_range.h"
@@ -178,7 +179,7 @@ public:
     //
     int grid_width                           {0};
     int grid_height                          {0};
-    Nodes                                    *nodes;
+    Nodes                                    *nodes {};
 
     //
     // Root seed for the dungeon
@@ -296,11 +297,11 @@ public:
         dump();
     }
 
-    Dungeon (int map_width,
-             int map_height,
-             int grid_width,
-             int grid_height,
-             int seed) :
+    //
+    // Make a dungeon from rooms
+    // 
+    Dungeon (int map_width, int map_height,
+             int grid_width, int grid_height, int seed) :
         map_width                  (map_width),
         map_height                 (map_height),
         grid_width                 (grid_width),
@@ -310,9 +311,21 @@ public:
         make_dungeon();
     }
 
-    Dungeon ()
+    //
+    // Make a dungeon from a single level
+    // 
+    Dungeon (int level)
     {_
-        make_dungeon();
+        if (level >= (int)Level::all_levels.size()) {
+            DIE("out of range level %d", level);
+        }
+        auto l = Level::all_levels[level];
+
+        cells.resize(l->width * l->height * MAP_DEPTH, Charmap::SPACE);
+        std::fill(cells.begin(), cells.end(), Charmap::SPACE);
+
+        place_level(l);
+        dump();
     }
 
     int offset (const int x, const int y, const int z)
@@ -484,6 +497,10 @@ public:
 
     int get_grid_depth_at (const int x, const int y)
     {
+        if (!nodes) {
+            return (0);
+        }
+
         auto r = getr(x, y);
         if (r) {
             return (r->depth);
@@ -994,13 +1011,15 @@ public:
                             m, x, y, d);
                     }
 
-                    if (!(x % 2) && !(y % 2)) {
-                        if (!is_wall_at(x, y) && is_floor_at(x, y)) {
-                            auto X = (x - MAP_BORDER) / ROOM_WIDTH;
-                            auto Y = (y - MAP_BORDER) / ROOM_HEIGHT;
-                            auto n = nodes->getn(X, Y);
-                            if (n) {
-                                c = '0' + n->depth;
+                    if (nodes) {
+                        if (!(x % 2) && !(y % 2)) {
+                            if (!is_wall_at(x, y) && is_floor_at(x, y)) {
+                                auto X = (x - MAP_BORDER) / ROOM_WIDTH;
+                                auto Y = (y - MAP_BORDER) / ROOM_HEIGHT;
+                                auto n = nodes->getn(X, Y);
+                                if (n) {
+                                    c = '0' + n->depth;
+                                }
                             }
                         }
                     }
@@ -1999,6 +2018,24 @@ public:
                     if (!is_anything_at(x + dx + 1, y + dy + 1)) {
                         putc_fast(x + dx + 1, y + dy + 1, 
                                   MAP_DEPTH_WALLS, Charmap::WALL);
+                    }
+                }
+            }
+        }
+    }
+
+    void place_level (Levelp l)
+    {
+        if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
+            DIE("level has bad size %d,%d", l->width, l->height);
+        }
+
+        for (auto z = 0 ; z < MAP_DEPTH; z++) {
+            for (auto y = 0; y < l->height; y++) {
+                for (auto x = 0; x < l->width; x++) {
+                    auto c = l->data[x][y][z];
+                    if (c && (c != Charmap::SPACE)) {
+                        putc(x, y, z, c);
                     }
                 }
             }

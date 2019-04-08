@@ -747,12 +747,11 @@ void game_display (void)
         LOG("dungeon: create dungeon %u", seed);
 
 _
-        auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, 
-                                   GRID_WIDTH, GRID_HEIGHT, seed);
-
+//        auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, 
+//        GRID_HEIGHT, seed);
+        auto dungeon = new Dungeon(0);
 _
         LOG("dungeon: create blocks");
-
 _
         memset(game.state.map.is_blood, sizeof(game.state.map.is_blood), 0);
         memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
