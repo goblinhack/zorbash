@@ -117,7 +117,7 @@ public:
 
     static Roomp room_new(void);
 
-    Roomp create_h_flip(void);
+    Roomp create_w_flip(void);
     Roomp rotate_clockwise(void);
     void find_doors(void);
     void finalize(void);

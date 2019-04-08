@@ -33,6 +33,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/player.o 			\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_room.o 		\
+    $(OBJDIR)/py_level.o 		\
     $(OBJDIR)/py_sdl.o 			\
     $(OBJDIR)/py_tex.o 			\
     $(OBJDIR)/py_tile.o 		\
@@ -41,6 +42,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/ramdisk_read.o 		\
     $(OBJDIR)/room.o 			\
+    $(OBJDIR)/level.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/stb_image.o 		\

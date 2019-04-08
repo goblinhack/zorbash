@@ -20,7 +20,7 @@ Roomp Room::room_new (void)
     return (r);
 }
 
-Roomp Room::create_h_flip (void)
+Roomp Room::create_w_flip (void)
 {_
     std::vector<std::string> rot[MAP_DEPTH];
 
