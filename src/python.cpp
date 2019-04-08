@@ -1635,6 +1635,11 @@ static PyMethodDef python_c_METHODS[] = {
         METH_VARARGS | METH_KEYWORDS,
         "load a room"},
 
+    {"map_load_level",
+        (PyCFunction)map_load_level_,
+        METH_VARARGS | METH_KEYWORDS,
+        "load a level"},
+
     TP_SET_DECL(tile)
     TP_SET_DECL(left_tile)
     TP_SET_DECL(right_tile)
