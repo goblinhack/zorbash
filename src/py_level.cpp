@@ -36,9 +36,8 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             (int) MAP_HEIGHT, (int) PyList_Size(py_level_data));
     }
 
+    auto l = Level::level_new();
     for (auto n=0; n < MAP_WIDTH; n++) {
-        auto r = Level::level_new();
-
         for (auto y=0; y<MAP_HEIGHT; y++) {
             auto o = PyList_GetItem(py_level_data, y); /* Can't fail */
             if (!o) {
@@ -151,20 +150,19 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             for (auto x = 0; x < MAP_WIDTH; x++) {
-                r->data[x][y][MAP_DEPTH_FLOOR]      = floor_string[x];
-                r->data[x][y][MAP_DEPTH_WATER]      = water_string[x];
-                r->data[x][y][MAP_DEPTH_FLOOR_DECO] = deco_string[x];
-                r->data[x][y][MAP_DEPTH_WALLS]      = walls_string[x];
-                r->data[x][y][MAP_DEPTH_WALLS_DECO] = wall_deco_string[x];
-                r->data[x][y][MAP_DEPTH_EXIT]       = exits_string[x];
-                r->data[x][y][MAP_DEPTH_MONST]      = monsts_string[x];
-                r->data[x][y][MAP_DEPTH_ITEM]       = items_string[x];
-                r->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
+                l->data[x][y][MAP_DEPTH_FLOOR]      = floor_string[x];
+                l->data[x][y][MAP_DEPTH_WATER]      = water_string[x];
+                l->data[x][y][MAP_DEPTH_FLOOR_DECO] = deco_string[x];
+                l->data[x][y][MAP_DEPTH_WALLS]      = walls_string[x];
+                l->data[x][y][MAP_DEPTH_WALLS_DECO] = wall_deco_string[x];
+                l->data[x][y][MAP_DEPTH_EXIT]       = exits_string[x];
+                l->data[x][y][MAP_DEPTH_MONST]      = monsts_string[x];
+                l->data[x][y][MAP_DEPTH_ITEM]       = items_string[x];
+                l->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
             }
         }
-
-        r->finalize();
     }
+    l->finalize();
 
     Py_RETURN_NONE;
 }
