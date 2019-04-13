@@ -1,6 +1,9 @@
 import zx
 
 
+def init_tex():
+    zx.tex_load(file="data/gfx/background.tga", name="background")
+
 def init_text():
 
     #file="data/ttf/dejavu-nerd.ttf_pointsize80.tga",
@@ -1996,6 +1999,7 @@ def init_weapons_tiles():
 
     zx.tile_load_arr(tex_name="weapons", width=48, height=48, arr=tiles)
 
+init_tex()
 init_text()
 init_light()
 init_16x16()

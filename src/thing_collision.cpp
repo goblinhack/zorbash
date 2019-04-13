@@ -599,12 +599,12 @@ bool Thing::handle_collisions (void)
 
     int maxx = at.x + thing_collision_tiles;
     while (maxx >= MAP_WIDTH) {
-        maxx++;
+        maxx--;
     }
 
     int maxy = at.y + thing_collision_tiles;
     while (maxy >= MAP_HEIGHT) {
-        maxy++;
+        maxy--;
     }
 
     for (int16_t x = minx; x <= maxx; x++) {

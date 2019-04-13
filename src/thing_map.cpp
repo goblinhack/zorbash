@@ -89,6 +89,32 @@ void thing_map_scroll_to_player (void)
     }
 }
 
+static void thing_map_blit_background (double offset_x, double offset_y)
+{
+    static Texp tex;
+    
+    if (!tex) {
+        tex = tex_find("background");
+        if (!tex) {
+            return;
+        }
+    }
+
+    offset_x *= 0.9; // parralax
+    offset_y *= 0.9;
+
+    double w = (MAP_WIDTH  * game.config.tile_pixel_width)/ 
+                    game.config.video_pix_width;
+    double h = (MAP_HEIGHT * game.config.tile_pixel_height)/ 
+                    game.config.video_pix_height;
+
+    glcolor(WHITE);
+    blit_init();
+    blit(tex_get_gl_binding(tex), 0.0, 0.0, 1.0, 1.0, 
+         -offset_x, -offset_y, -offset_x + w, -offset_y + h);
+    blit_flush();
+}
+
 static void thing_blit_water (int minx, int miny, int minz,
                               int maxx, int maxy, int maxz,
                               double offset_x,
@@ -978,17 +1004,16 @@ static void thing_blit_blood (int minx, int miny, int minz,
 static void thing_blit_things (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
-    std::list<Thingp> moved;
-
-    glcolor(WHITE);
-    blit_init();
-
     double offset_x = game.state.map_at.x * game.config.tile_gl_width;
     double offset_y = game.state.map_at.y * game.config.tile_gl_height;
+
+    thing_map_blit_background(offset_x, offset_y);
 
     //
     // Floors
     //
+#if 0
+    blit_init();
     { auto z = MAP_DEPTH_FLOOR;
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
@@ -1002,6 +1027,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     }
 
     blit_flush();
+#endif
 
     //
     // Work out what we will need to display ahead of time so we
@@ -1030,6 +1056,7 @@ static void thing_blit_things (int minx, int miny, int minz,
         }
     }
 
+    std::list<Thingp> moved;
     for (auto i : game.state.map.all_active_things) {
         auto t = i.second;
         if (t->update_coordinates()) {
