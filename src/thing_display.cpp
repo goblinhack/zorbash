@@ -678,6 +678,11 @@ void Thing::blit_non_player_owned_shadow_section (const Tpp &tp, const Tilep &ti
 void Thing::blit_shadow (const Tpp &tp, const Tilep &tile, 
                          const fpoint &tl, const fpoint &br)
 {
+    if (!game.state.player) {
+        blit_non_player_owned_shadow(tp, tile, tl, br);
+        return;
+    }
+
     if (tp_is_player(tp) || (owner_thing_id == game.state.player->id)) {
         blit_player_owned_shadow(tp, tile, tl, br);
     } else {
@@ -689,6 +694,12 @@ void Thing::blit_shadow_section (const Tpp &tp, const Tilep &tile,
                                  const fpoint &tile_tl, const fpoint &tile_br,
                                  const fpoint &tl, const fpoint &br)
 {
+    if (!game.state.player) {
+        blit_non_player_owned_shadow_section(
+            tp, tile, tile_tl, tile_br, tl, br);
+        return;
+    }
+
     if (tp_is_player(tp) || (owner_thing_id == game.state.player->id)) {
         blit_player_owned_shadow_section(
             tp, tile, tile_tl, tile_br, tl, br);
