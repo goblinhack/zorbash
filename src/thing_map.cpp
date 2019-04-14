@@ -115,6 +115,32 @@ static void thing_map_blit_background (double offset_x, double offset_y)
     blit_flush();
 }
 
+void thing_map_blit_background_lit (double offset_x, double offset_y)
+{
+    static Texp tex;
+    
+    if (!tex) {
+        tex = tex_find("background_lit");
+        if (!tex) {
+            return;
+        }
+    }
+
+    offset_x *= 0.9; // parralax
+    offset_y *= 0.9;
+
+    double w = (MAP_WIDTH  * game.config.tile_pixel_width)/ 
+                    game.config.video_pix_width;
+    double h = (MAP_HEIGHT * game.config.tile_pixel_height)/ 
+                    game.config.video_pix_height;
+
+    glcolor(WHITE);
+    blit_init();
+    blit(tex_get_gl_binding(tex), 0.0, 0.0, 1.0, 1.0, 
+         -offset_x, -offset_y, -offset_x + w, -offset_y + h);
+    blit_flush();
+}
+
 static void thing_blit_water (int minx, int miny, int minz,
                               int maxx, int maxy, int maxz,
                               double offset_x,
@@ -1194,7 +1220,7 @@ void thing_render_all (void)
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        lights_render(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
+        lights_render(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
 
@@ -1211,7 +1237,8 @@ void thing_render_all (void)
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
+        lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 0);
+        lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);

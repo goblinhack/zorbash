@@ -10,7 +10,10 @@
 
 static uint32_t light_id;
 
-static Texp light_overlay_tex;
+static Texp light_overlay_tex1;
+static Texp light_overlay_tex2;
+static int light_overlay_texid1;
+static int light_overlay_texid2;
 static int light_overlay_texid;
 
 static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
@@ -512,7 +515,7 @@ void Light::render_point_light (void)
     blit(light_overlay_texid, 0, 0, 1, 1, p1x - ox, p1y - oy, p2x - ox, p2y - oy);
 }
 
-void Light::render (int fbo)
+void Light::render (int fbo, int pass)
 {
     if (flicker > random_range(10, 20)) {
         flicker = 0;
@@ -524,9 +527,19 @@ void Light::render (int fbo)
     }
     flicker++;
 
-    if (!light_overlay_tex) {
-        light_overlay_tex = tex_load("", "light", GL_NEAREST);
-        light_overlay_texid = tex_get_gl_binding(light_overlay_tex);
+    if (!light_overlay_tex1) {
+        light_overlay_tex1 = tex_load("", "light", GL_NEAREST);
+        light_overlay_texid1 = tex_get_gl_binding(light_overlay_tex1);
+    }
+    if (!light_overlay_tex2) {
+        light_overlay_tex2 = tex_load("", "light_small", GL_NEAREST);
+        light_overlay_texid2 = tex_get_gl_binding(light_overlay_tex2);
+    }
+
+    if (pass == 0) {
+        light_overlay_texid = light_overlay_texid2;
+    } else {
+        light_overlay_texid = light_overlay_texid1;
     }
 
     switch (quality) {
@@ -589,7 +602,7 @@ void Light::render_debug (int minx, int miny, int maxx, int maxy)
     }
 }
 
-void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
+void lights_render (int minx, int miny, int maxx, int maxy, int fbo, int pass)
 {
     bool have_low_quality = false;
 
@@ -662,7 +675,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
                     }
                 }
 
-                l->render(fbo);
+                l->render(fbo, pass);
             }
         }
     }
@@ -670,7 +683,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
     glcolor(WHITE);
 }
 
-void lights_render_player (int minx, int miny, int maxx, int maxy, int fbo)
+void lights_render_player (int minx, int miny, int maxx, int maxy, int fbo, int pass)
 {
     if (!game.state.player) {
         return;
@@ -685,7 +698,7 @@ void lights_render_player (int minx, int miny, int maxx, int maxy, int fbo)
                     continue;
                 }
 
-                l->render(fbo);
+                l->render(fbo, pass);
             }
         }
     }

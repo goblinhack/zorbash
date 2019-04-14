@@ -5575,7 +5575,7 @@ void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 
 #ifdef DEBUG_GL_BLEND
 if (wid_event_to_char(key) == '+') {
-    usleep(100000);
+    usleep(50);
     i1 ++;
     if (i1 >= (int)ARRAY_SIZE(vals)) {
 	i1 = 0;
@@ -5588,7 +5588,7 @@ if (wid_event_to_char(key) == '+') {
 }
 
 if (wid_event_to_char(key) == '-') {
-    usleep(100000);
+    usleep(50);
     i1 --;
     if (i1 < 0) {
 	i1 = (int)ARRAY_SIZE(vals);
