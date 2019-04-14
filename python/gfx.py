@@ -3,6 +3,7 @@ import zx
 
 def init_tex():
     zx.tex_load(file="data/gfx/background.tga", name="background")
+    zx.tex_load(file="data/gfx/background_lit.tga", name="background_lit")
 
 def init_text():
 
@@ -60,9 +61,8 @@ def init_text():
 
 
 def init_light():
-    zx.tex_load(
-            file="data/gfx/light.tga",
-            name="light")
+    zx.tex_load(file="data/gfx/light.tga", name="light")
+    zx.tex_load(file="data/gfx/light_small.tga", name="light_small")
 
 def init_16x16():
     zx.tex_load(
