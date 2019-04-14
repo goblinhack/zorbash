@@ -108,7 +108,10 @@ static void thing_map_blit_background (double offset_x, double offset_y)
     double h = (MAP_HEIGHT * game.config.tile_pixel_height)/ 
                     game.config.video_pix_height;
 
-    glcolor(WHITE);
+    color c = WHITE;
+    c.a = 200;
+
+    glcolor(c);
     blit_init();
     blit(tex_get_gl_binding(tex), 0.0, 0.0, 1.0, 1.0, 
          -offset_x, -offset_y, -offset_x + w, -offset_y + h);
@@ -126,19 +129,56 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
         }
     }
 
+    double w = (MAP_WIDTH  * game.config.tile_pixel_width)/ 
+    game.config.video_pix_width;
+    double h = (MAP_HEIGHT * game.config.tile_pixel_height)/ 
+    game.config.video_pix_height;
+
+    auto t = game.state.player;
+    auto blit_tl = fpoint(t->tl.x - offset_x, t->tl.y - offset_y);
+    auto blit_br = fpoint(t->br.x - offset_x, t->br.y - offset_y);
+
+    blit_tl.x -= 0.7;
+    blit_br.x += 0.7;
+    blit_tl.y -= 1.0;
+    blit_br.y += 1.0;
+
+    static Texp light_overlay_tex2;
+    static int light_overlay_texid2;
+    if (!light_overlay_tex2) {
+        light_overlay_tex2 = tex_load("", "light_small", GL_NEAREST);
+        light_overlay_texid2 = tex_get_gl_binding(light_overlay_tex2);
+    }
+
+
     offset_x *= 0.9; // parralax
     offset_y *= 0.9;
 
-    double w = (MAP_WIDTH  * game.config.tile_pixel_width)/ 
-                    game.config.video_pix_width;
-    double h = (MAP_HEIGHT * game.config.tile_pixel_height)/ 
-                    game.config.video_pix_height;
+    blit_init();
+    glcolor(WHITE);
+    blit(light_overlay_texid2, 0, 0, 1, 1, 
+         blit_tl.x, blit_tl.y, blit_br.x, blit_br.y);
+    blit_flush();
+
+
+{
+glBlendEquation(GL_FUNC_ADD);
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+}
 
     glcolor(WHITE);
     blit_init();
-    blit(tex_get_gl_binding(tex), 0.0, 0.0, 1.0, 1.0, 
+    blit(tex_get_gl_binding(tex), 
+         0,0,1,1,
          -offset_x, -offset_y, -offset_x + w, -offset_y + h);
     blit_flush();
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 static void thing_blit_water (int minx, int miny, int minz,
@@ -1033,7 +1073,9 @@ static void thing_blit_things (int minx, int miny, int minz,
     double offset_x = game.state.map_at.x * game.config.tile_gl_width;
     double offset_y = game.state.map_at.y * game.config.tile_gl_height;
 
+    thing_map_blit_background_lit(offset_x, offset_y);
     thing_map_blit_background(offset_x, offset_y);
+    glcolor(WHITE);
 
     //
     // Floors

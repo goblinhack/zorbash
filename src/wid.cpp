@@ -5502,8 +5502,6 @@ static widp wid_key_up_handler (int32_t x, int32_t y)
 #ifdef DEBUG_GL_BLEND
 int vals[] = {
 
-/* GL_ZERO                           */ 0,
-/* GL_ONE                            */ 1,
 /* GL_SRC_COLOR                      */ 0x0300,
 /* GL_ONE_MINUS_SRC_COLOR            */ 0x0301,
 /* GL_SRC_ALPHA                      */ 0x0302,
@@ -5513,9 +5511,6 @@ int vals[] = {
 /* GL_DST_COLOR                      */ 0x0306,
 /* GL_ONE_MINUS_DST_COLOR            */ 0x0307,
 /* GL_SRC_ALPHA_SATURATE             */ 0x0308,
-/* GL_BLEND_EQUATION                 */ 0x8009,
-/* GL_BLEND_EQUATION_RGB             */ 0x8009    /* same as BLEND_EQUATION */,
-/* GL_BLEND_EQUATION_ALPHA           */ 0x883D,
 /* GL_BLEND_DST_RGB                  */ 0x80C8,
 /* GL_BLEND_SRC_RGB                  */ 0x80C9,
 /* GL_BLEND_DST_ALPHA                */ 0x80CA,
@@ -5524,12 +5519,9 @@ int vals[] = {
 /* GL_ONE_MINUS_CONSTANT_COLOR       */ 0x8002,
 /* GL_CONSTANT_ALPHA                 */ 0x8003,
 /* GL_ONE_MINUS_CONSTANT_ALPHA       */ 0x8004,
-/* GL_BLEND_COLOR */ 0x8005,
 };
 std::string  vals_str[] = {
 
-"GL_ZERO                           ",
-"GL_ONE                            ",
 "GL_SRC_COLOR                      ",
 "GL_ONE_MINUS_SRC_COLOR            ",
 "GL_SRC_ALPHA                      ",
@@ -5539,9 +5531,6 @@ std::string  vals_str[] = {
 "GL_DST_COLOR                      ",
 "GL_ONE_MINUS_DST_COLOR            ",
 "GL_SRC_ALPHA_SATURATE             ",
-"GL_BLEND_EQUATION                 ",
-"GL_BLEND_EQUATION_RGB             ",
-"GL_BLEND_EQUATION_ALPHA           ",
 "GL_BLEND_DST_RGB                  ",
 "GL_BLEND_SRC_RGB                  ",
 "GL_BLEND_DST_ALPHA                ",
@@ -5550,7 +5539,6 @@ std::string  vals_str[] = {
 "GL_ONE_MINUS_CONSTANT_COLOR       ",
 "GL_CONSTANT_ALPHA                 ",
 "GL_ONE_MINUS_CONSTANT_ALPHA       ",
-"GL_BLEND_COLOR ",
 };
 
 
@@ -5582,6 +5570,7 @@ if (wid_event_to_char(key) == '+') {
 	i2 ++;
 	if (i2 >= (int)ARRAY_SIZE(vals)) {
 	    i2 = 0;
+            DIE("wrapped");
 	}
     }
     return;
