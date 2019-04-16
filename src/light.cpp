@@ -504,8 +504,8 @@ void Light::render_point_light (void)
     auto ox = off.x;
     auto oy = off.y;
 
-    double lw = flicker_radius * tile_gl_width_pct;
-    double lh = flicker_radius * tile_gl_height_pct;
+    double lw = 0;
+    double lh = 0;
     double p1x = light_pos.x - lw;
     double p1y = light_pos.y - lh;
     double p2x = light_pos.x + lw;
