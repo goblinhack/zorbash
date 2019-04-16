@@ -14,20 +14,22 @@
 #include "my_gl.h"
 #include <algorithm>
 
+#define SCALEX 1
+
 static void thing_map_scroll_do (void)
 {
-    const double step = 32.0;
+    const double step = 16.0;
 
     auto dx = game.state.map_smooth_at.x - game.state.map_wanted_at.x;
     if (dx) {
-        if (fabs(dx / step) > 0.02) {
+        if (fabs(dx / step) > 0.015) {
             game.state.map_smooth_at.x -= dx / step;
         }
     }
 
     auto dy = game.state.map_smooth_at.y - game.state.map_wanted_at.y;
     if (dy) {
-        if (fabs(dy / step) > 0.02) {
+        if (fabs(dy / step) > 0.015) {
             game.state.map_smooth_at.y -= dy / step;
         }
     }
@@ -118,7 +120,7 @@ static void thing_map_blit_background (double offset_x, double offset_y)
 
     glcolor(c);
     blit_init();
-    blit(tex_get_gl_binding(tex), 0.0, 0.0, 1.0, 1.0, 
+    blit(tex_get_gl_binding(tex), 0.0, 0.0, SCALEX, SCALEX,
          -offset_x, -offset_y, -offset_x + w, -offset_y + h);
     blit_flush();
 
@@ -167,7 +169,7 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
 
     blit_init();
     glcolor(WHITE);
-    blit(light_overlay_texid2, 0, 0, 1, 1, 
+    blit(light_overlay_texid2, 0, 0, SCALEX, SCALEX, 
          blit_tl.x, blit_tl.y, blit_br.x, blit_br.y);
     blit_flush();
 
@@ -175,7 +177,7 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
 
     glcolor(WHITE);
     blit_init();
-    blit(tex_get_gl_binding(tex), 0, 0, 1, 1,
+    blit(tex_get_gl_binding(tex), 0, 0, SCALEX, SCALEX,
          -offset_x, -offset_y, -offset_x + w, -offset_y + h);
     blit_flush();
 
