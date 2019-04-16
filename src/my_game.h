@@ -167,6 +167,7 @@ public:
     /*
      * Where we're looking in the map
      */
+    fpoint             map_smooth_at;
     fpoint             map_at;
     fpoint             map_wanted_at;
     point              map_tile_over;

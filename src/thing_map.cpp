@@ -16,25 +16,23 @@
 
 static void thing_map_scroll_do (void)
 {
-    const double step = 10.0;
+    const double step = 32.0;
 
-    auto dx = game.state.map_at.x - game.state.map_wanted_at.x;
+    auto dx = game.state.map_smooth_at.x - game.state.map_wanted_at.x;
     if (dx) {
-        game.state.map_at.x -= dx / step;
+        if (fabs(dx / step) > 0.02) {
+            game.state.map_smooth_at.x -= dx / step;
+        }
     }
 
-    auto dy = game.state.map_at.y - game.state.map_wanted_at.y;
+    auto dy = game.state.map_smooth_at.y - game.state.map_wanted_at.y;
     if (dy) {
-        game.state.map_at.y -= dy / step;
+        if (fabs(dy / step) > 0.02) {
+            game.state.map_smooth_at.y -= dy / step;
+        }
     }
 
-    game.state.map_at.x *= game.config.tile_pixel_width;
-    game.state.map_at.x = (int) game.state.map_at.x;
-    game.state.map_at.x /= game.config.tile_pixel_width;
-
-    game.state.map_at.y *= game.config.tile_pixel_height;
-    game.state.map_at.y = (int) game.state.map_at.y;
-    game.state.map_at.y /= game.config.tile_pixel_height;
+    game.state.map_at = game.state.map_smooth_at;
 
     game.state.map_at.x = std::max(game.state.map_at.x, 0.0);
     game.state.map_at.y = std::max(game.state.map_at.y, 0.0);
@@ -46,13 +44,15 @@ static void thing_map_scroll_do (void)
     //
     // Round to pixels
     //
-    game.state.map_at.x *= 1.0 / game.config.one_pixel_gl_width;
+#if 0
+    game.state.map_at.x *= 128;
     game.state.map_at.x = (int)game.state.map_at.x;
-    game.state.map_at.x /= 1.0 / game.config.one_pixel_gl_width;
+    game.state.map_at.x /= 128;
 
     game.state.map_at.y *= 1.0 / game.config.one_pixel_gl_height;
     game.state.map_at.y = (int)game.state.map_at.y;
     game.state.map_at.y /= 1.0 / game.config.one_pixel_gl_height;
+#endif
 }
 
 static void thing_map_scroll_follow_player (void)
@@ -100,8 +100,13 @@ static void thing_map_blit_background (double offset_x, double offset_y)
         }
     }
 
-    offset_x *= 0.9; // parralax
+    offset_x *= 0.9; // parallax
     offset_y *= 0.9;
+#if 0
+    offset_x *= 128;
+    offset_x = (int)offset_x;
+    offset_x /= 128;
+#endif
 
     double w = (MAP_WIDTH  * game.config.tile_pixel_width)/ 
                     game.config.video_pix_width;
@@ -109,13 +114,15 @@ static void thing_map_blit_background (double offset_x, double offset_y)
                     game.config.video_pix_height;
 
     color c = WHITE;
-    c.a = 200;
+    c.a = 100;
 
     glcolor(c);
     blit_init();
     blit(tex_get_gl_binding(tex), 0.0, 0.0, 1.0, 1.0, 
          -offset_x, -offset_y, -offset_x + w, -offset_y + h);
     blit_flush();
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void thing_map_blit_background_lit (double offset_x, double offset_y)
@@ -150,9 +157,13 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
         light_overlay_texid2 = tex_get_gl_binding(light_overlay_tex2);
     }
 
-
-    offset_x *= 0.9; // parralax
+    offset_x *= 0.9; // parallax
     offset_y *= 0.9;
+#if 0
+    offset_x *= 128;
+    offset_x = (int)offset_x;
+    offset_x /= 128;
+#endif
 
     blit_init();
     glcolor(WHITE);
@@ -160,25 +171,15 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
          blit_tl.x, blit_tl.y, blit_br.x, blit_br.y);
     blit_flush();
 
-
-{
-glBlendEquation(GL_FUNC_ADD);
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-}
+    glBlendFunc(GL_DST_ALPHA, GL_SRC_COLOR);
 
     glcolor(WHITE);
     blit_init();
-    blit(tex_get_gl_binding(tex), 
-         0,0,1,1,
+    blit(tex_get_gl_binding(tex), 0, 0, 1, 1,
          -offset_x, -offset_y, -offset_x + w, -offset_y + h);
     blit_flush();
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 static void thing_blit_water (int minx, int miny, int minz,
@@ -1075,6 +1076,8 @@ static void thing_blit_things (int minx, int miny, int minz,
 
     thing_map_blit_background_lit(offset_x, offset_y);
     thing_map_blit_background(offset_x, offset_y);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 
     //
