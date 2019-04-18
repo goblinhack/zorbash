@@ -173,7 +173,17 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
          blit_tl.x, blit_tl.y, blit_br.x, blit_br.y);
     blit_flush();
 
-    glBlendFunc(GL_DST_ALPHA, GL_SRC_COLOR);
+    glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_SRC_COLOR); // bright
+    glBlendFunc(GL_DST_COLOR, GL_SRC_COLOR); // brigher spotlight more fading
+    glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR); // brigher spotlig no fading
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+#endif
 
     glcolor(WHITE);
     blit_init();
@@ -1076,8 +1086,8 @@ static void thing_blit_things (int minx, int miny, int minz,
     double offset_x = game.state.map_at.x * game.config.tile_gl_width;
     double offset_y = game.state.map_at.y * game.config.tile_gl_height;
 
-    thing_map_blit_background_lit(offset_x, offset_y);
     thing_map_blit_background(offset_x, offset_y);
+    thing_map_blit_background_lit(offset_x, offset_y);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
@@ -1284,8 +1294,8 @@ void thing_render_all (void)
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 0);
         lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
+        lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 0);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
