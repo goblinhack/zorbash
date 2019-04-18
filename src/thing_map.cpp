@@ -175,15 +175,7 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
 
     glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_SRC_COLOR); // bright
     glBlendFunc(GL_DST_COLOR, GL_SRC_COLOR); // brigher spotlight more fading
-    glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR); // brigher spotlig no fading
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-#endif
+    glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR); // brigher spotlight no fading
 
     glcolor(WHITE);
     blit_init();
