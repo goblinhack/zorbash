@@ -18,7 +18,7 @@
 
 static void thing_map_scroll_do (void)
 {
-    const double step = 16.0;
+    const double step = 32.0;
 
     auto dx = game.state.map_smooth_at.x - game.state.map_wanted_at.x;
     if (dx) {
@@ -42,25 +42,11 @@ static void thing_map_scroll_do (void)
                              (double)MAP_WIDTH - TILES_ACROSS);
     game.state.map_at.y = std::min(game.state.map_at.y, 
                              (double)MAP_HEIGHT - TILES_DOWN);
-
-    //
-    // Round to pixels
-    //
-#if 0
-    game.state.map_at.x *= 128;
-    game.state.map_at.x = (int)game.state.map_at.x;
-    game.state.map_at.x /= 128;
-
-    game.state.map_at.y *= 1.0 / game.config.one_pixel_gl_height;
-    game.state.map_at.y = (int)game.state.map_at.y;
-    game.state.map_at.y /= 1.0 / game.config.one_pixel_gl_height;
-#endif
 }
 
 static void thing_map_scroll_follow_player (void)
 {
     if (!game.state.player) {
-        CON("no player");
         return;
     }
 
@@ -104,11 +90,6 @@ static void thing_map_blit_background (double offset_x, double offset_y)
 
     offset_x *= 0.9; // parallax
     offset_y *= 0.9;
-#if 0
-    offset_x *= 128;
-    offset_x = (int)offset_x;
-    offset_x /= 128;
-#endif
 
     double w = (MAP_WIDTH  * game.config.tile_pixel_width)/ 
                     game.config.video_pix_width;
@@ -139,13 +120,24 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
     }
 
     double w = (MAP_WIDTH  * game.config.tile_pixel_width)/ 
-    game.config.video_pix_width;
+                game.config.video_pix_width;
     double h = (MAP_HEIGHT * game.config.tile_pixel_height)/ 
-    game.config.video_pix_height;
+                game.config.video_pix_height;
+
+    //
+    // The background light is centered on the player
+    //
+    static fpoint blit_tl_last;
+    static fpoint blit_br_last;
 
     auto t = game.state.player;
-    auto blit_tl = fpoint(t->tl.x - offset_x, t->tl.y - offset_y);
-    auto blit_br = fpoint(t->br.x - offset_x, t->br.y - offset_y);
+    if (game.state.player) {
+        blit_tl_last = fpoint(t->tl.x - offset_x, t->tl.y - offset_y);
+        blit_br_last = fpoint(t->br.x - offset_x, t->br.y - offset_y);
+    }
+
+    auto blit_tl = blit_tl_last;
+    auto blit_br = blit_br_last;
 
     blit_tl.x -= 0.7;
     blit_br.x += 0.7;
@@ -161,11 +153,6 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
 
     offset_x *= 0.9; // parallax
     offset_y *= 0.9;
-#if 0
-    offset_x *= 128;
-    offset_x = (int)offset_x;
-    offset_x /= 128;
-#endif
 
     blit_init();
     glcolor(WHITE);
@@ -486,14 +473,6 @@ static void thing_blit_water (int minx, int miny, int minz,
     glcolor(c);
     blit_fbo(FBO_REFLECTION);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-#endif
 }
 
 static void thing_blit_deep_water (int minx, int miny, int minz,
