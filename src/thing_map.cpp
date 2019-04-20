@@ -279,23 +279,7 @@ static void thing_blit_water (int minx, int miny, int minz,
                 if (!tp_is_water(t->tp)) {
                     continue;
                 }
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height, x, y);
                 t->blit(offset_x,
-                        offset_y - game.config.one_pixel_gl_height, x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height, x, y);
-
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y, x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y, x, y);
-
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height, x, y);
-                t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height, x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
                         offset_y + game.config.one_pixel_gl_height, x, y);
             }
         }
@@ -472,7 +456,9 @@ static void thing_blit_water (int minx, int miny, int minz,
     c.a = 120;
     glcolor(c);
     blit_fbo(FBO_REFLECTION);
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
 }
 
 static void thing_blit_deep_water (int minx, int miny, int minz,
@@ -677,7 +663,9 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
     blit_fbo_bind(FBO_MAIN);
     blit_fbo(FBO_LIGHT_MERGED);
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
 }
 
 static void thing_blit_lava (int minx, int miny, int minz,
@@ -941,6 +929,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_flush();
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
 
     blit_fbo_bind(FBO_MAIN);
     blit_fbo(FBO_LIGHT_MERGED);
@@ -1046,6 +1035,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_flush();
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(WHITE);
 
     blit_fbo_bind(FBO_MAIN);
     blit_fbo(FBO_LIGHT_MERGED);
@@ -1132,16 +1122,6 @@ static void thing_blit_things (int minx, int miny, int minz,
                          offset_x, offset_y);
     }
 
-    if (have_water) {
-        thing_blit_water(minx, miny, minz, maxx, maxy, maxz,
-                         offset_x, offset_y);
-    }
-
-    if (have_deep_water) {
-        thing_blit_deep_water(minx, miny, minz, maxx, maxy, maxz,
-                              offset_x, offset_y);
-    }
-
     //
     // Everything else
     //
@@ -1159,6 +1139,16 @@ static void thing_blit_things (int minx, int miny, int minz,
     }
 
     blit_flush();
+
+    if (have_water) {
+        thing_blit_water(minx, miny, minz, maxx, maxy, maxz,
+                         offset_x, offset_y);
+    }
+
+    if (have_deep_water) {
+        thing_blit_deep_water(minx, miny, minz, maxx, maxy, maxz,
+                              offset_x, offset_y);
+    }
 
     for (auto t : moved) {
         std::swap(t->br, t->old_br);
