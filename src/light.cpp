@@ -412,7 +412,8 @@ void Light::render_triangle_fans (void)
  
         blit_init();
         glcolor(WHITE);
-        glBlendFunc(GL_ZERO, GL_SRC_ALPHA);
+        glBlendFunc(GL_ZERO, GL_SRC_ALPHA); // hard black light
+        glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR); // soft shadows
         blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         blit_flush();
    }

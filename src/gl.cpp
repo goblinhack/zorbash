@@ -570,7 +570,7 @@ void blit_flush_triangle_fan_smoothed (float *b, float *e)
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
     double d = 0.01;
-    int blur = 5;
+    int blur = 2;
 
     while (blur--) {
 
