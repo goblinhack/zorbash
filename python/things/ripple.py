@@ -10,18 +10,20 @@ def tp_init(name, short_name):
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
-    delay = 50
+    delay = 100
     x.set_tile(tile=name + ".1", delay_ms=delay)
     x.set_tile(tile=name + ".2", delay_ms=delay)
     x.set_tile(tile=name + ".3", delay_ms=delay)
-    x.set_tile(tile=name + ".4", delay_ms=delay, is_end_of_anim=True, is_dead_on_end_of_anim=True)
+    x.set_tile(tile=name + ".4", delay_ms=delay)
+    x.set_tile(tile=name + ".5", delay_ms=delay)
+    x.set_tile(tile=name + ".6", delay_ms=delay)
+    x.set_tile(tile=name + ".7", delay_ms=delay)
+    x.set_tile(tile=name + ".8", delay_ms=delay, is_end_of_anim=True, is_dead_on_end_of_anim=True)
 
     x.update()
     
 def init():
     tp_init(name="ripple1", short_name="ripple1")
     tp_init(name="ripple2", short_name="ripple2")
-    tp_init(name="ripple3", short_name="ripple3")
-    tp_init(name="ripple4", short_name="ripple4")
 
 init()
