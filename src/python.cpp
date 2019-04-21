@@ -1750,7 +1750,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_movement_blocking)
     TP_SET_DECL(is_key)
     TP_SET_DECL(is_wall)
-    TP_SET_DECL(is_rock)
     TP_SET_DECL(is_floor)
     TP_SET_DECL(is_water)
     TP_SET_DECL(is_deep_water)

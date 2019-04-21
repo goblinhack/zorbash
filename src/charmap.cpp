@@ -26,11 +26,6 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_wall              = true;
 
-    char_index              = Charmap::ROCK;
-    c = &all_charmaps[char_index];
-    c->c                    = char_index;
-    c->is_rock              = true;
-    
     char_index              = Charmap::FLOOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
@@ -120,11 +115,6 @@ void Charmap::init_charmaps (void)
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_deep_water        = true;
-
-    char_index              = Charmap::ROCK;
-    c = &all_charmaps[char_index];
-    c->c                    = char_index;
-    c->is_rock              = true;
 
     char_index              = Charmap::TREASURE;
     c = &all_charmaps[char_index];

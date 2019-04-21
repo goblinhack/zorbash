@@ -263,11 +263,7 @@ void Thing::update_pos (fpoint to)
             game.state.map.is_wall[old_at.x][old_at.y] = false;
             game.state.map.is_wall[new_at.x][new_at.y] = true;
         }
-        if (tp_is_rock(tp)) {
-            game.state.map.is_rock[old_at.x][old_at.y] = false;
-            game.state.map.is_rock[new_at.x][new_at.y] = true;
-        }
-        if (tp_is_wall(tp) || tp_is_rock(tp)) {
+        if (tp_is_wall(tp)) {
             game.state.map.is_solid[old_at.x][old_at.y] = false;
             game.state.map.is_solid[new_at.x][new_at.y] = true;
         }

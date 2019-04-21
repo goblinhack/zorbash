@@ -178,10 +178,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     if (tp_is_wall(tp)) {
         game.state.map.is_wall[new_at.x][new_at.y] = true;
     }
-    if (tp_is_rock(tp)) {
-        game.state.map.is_rock[new_at.x][new_at.y] = true;
-    }
-    if (tp_is_wall(tp) || tp_is_rock(tp)) {
+    if (tp_is_wall(tp)) {
         game.state.map.is_solid[new_at.x][new_at.y] = true;
     }
     if (tp_is_floor(tp)) {
@@ -508,10 +505,7 @@ void Thing::destroy (void)
     if (tp_is_wall(tp)) {
         game.state.map.is_wall[old_at.x][old_at.y] = false;
     }
-    if (tp_is_rock(tp)) {
-        game.state.map.is_rock[old_at.x][old_at.y] = false;
-    }
-    if (tp_is_wall(tp) || tp_is_rock(tp)) {
+    if (tp_is_wall(tp)) {
         game.state.map.is_solid[old_at.x][old_at.y] = false;
     }
     if (tp_is_floor(tp)) {

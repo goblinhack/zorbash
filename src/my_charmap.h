@@ -30,7 +30,6 @@ public:
         LAVA            = 'L',
         WATER           = 'w',
         DEEP_WATER      = 'W',
-        ROCK            = 'r',
         TREASURE        = '$',
         TRAP            = 'i',
         MONST           = 'm',
@@ -39,7 +38,6 @@ public:
 
     char                      c;
     bool                      is_wall              {false};
-    bool                      is_rock              {false};
     bool                      is_floor             {false};
     bool                      is_corridor          {false};
     bool                      is_dirt              {false};
@@ -47,8 +45,8 @@ public:
     bool                      is_door              {false};
     bool                      is_secret_door       {false};
     bool                      is_entrance          {false};
-    bool                      gfx_is_floor_deco        {false};
-    bool                      gfx_is_wall_deco         {false};
+    bool                      gfx_is_floor_deco    {false};
+    bool                      gfx_is_wall_deco     {false};
     bool                      is_exit              {false};
     bool                      is_key               {false};
     bool                      is_lava              {false};

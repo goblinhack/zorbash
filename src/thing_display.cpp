@@ -113,8 +113,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     if (!game.state.map.is_wall[x][y + 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        //tl2.y += dh;
-        //br2.y += dh;
+        tl2.y += dh * 4;
+        br2.y += dh * 4;
         tile_blit_outline(tp, bot_tile, tl2, br2);
     }
 
@@ -268,197 +268,6 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     if (!game.state.map.is_wall[x - 1][y + 1] &&
         game.state.map.is_wall[x - 1][y] &&
         game.state.map.is_wall[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_outline(tp, bl_tile, tl2, br2);
-    }
-}
-
-void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
-{  
-    double dw = game.config.one_pixel_gl_width;
-    double dh = game.config.one_pixel_gl_height;
-
-    int x = (int) at.x;
-    int y = (int) at.y;
-
-    if (unlikely(x <= 0) || 
-        unlikely(y <= 0) || 
-        unlikely(x >= MAP_WIDTH - 1) || 
-        unlikely(y >= MAP_HEIGHT - 1)) {
-        return;
-    }
-
-    if (!game.state.map.is_rock[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_outline(tp, top_tile, tl2, br2);
-    }
-
-    if (!game.state.map.is_rock[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_outline(tp, bot_tile, tl2, br2);
-    }
-
-    if (!game.state.map.is_rock[x - 1][y]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
-        tile_blit_outline(tp, left_tile, tl2, br2);
-    }
-
-    if (!game.state.map.is_rock[x + 1][y]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tile_blit_outline(tp, right_tile, tl2, br2);
-    }
-
-    //
-    // X---
-    // |...
-    // |...
-    //
-    if (!game.state.map.is_rock[x - 1][y - 1] &&
-        !game.state.map.is_rock[x - 1][y] &&
-        !game.state.map.is_rock[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_outline(tp, tl_tile, tl2, br2);
-    }
-
-    //
-    // ---X
-    // ...|
-    // ...|
-    //
-    if (!game.state.map.is_rock[x + 1][y - 1] &&
-        !game.state.map.is_rock[x + 1][y] &&
-        !game.state.map.is_rock[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_outline(tp, tr_tile, tl2, br2);
-    }
-
-    //
-    //  .|
-    //  .|
-    //  .X--
-    //  ....
-    //
-    if (!game.state.map.is_rock[x + 1][y - 1] &&
-        game.state.map.is_rock[x + 1][y] &&
-        game.state.map.is_rock[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_outline(tp, tr_tile, tl2, br2);
-    }
-
-    //
-    //    |.
-    //    |.
-    //  --X.
-    //  ....
-    //
-    if (!game.state.map.is_rock[x - 1][y - 1] &&
-        game.state.map.is_rock[x - 1][y] &&
-        game.state.map.is_rock[x][y - 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y -= dh;
-        br2.y -= dh;
-        tile_blit_outline(tp, tl_tile, tl2, br2);
-    }
-
-    dw = 0.00;
-    dh = 0.00;
-
-    //
-    // |...
-    // |...
-    // X---
-    //
-    if (!game.state.map.is_rock[x - 1][y + 1] &&
-        !game.state.map.is_rock[x - 1][y] &&
-        !game.state.map.is_rock[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x -= dw;
-        br2.x -= dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_outline(tp, bl_tile, tl2, br2);
-    }
-
-    //
-    // ...|
-    // ...|
-    // ---X
-    //
-    if (!game.state.map.is_rock[x + 1][y + 1] &&
-        !game.state.map.is_rock[x + 1][y] &&
-        !game.state.map.is_rock[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_outline(tp, br_tile, tl2, br2);
-    }
-
-    //
-    // .....
-    // .X---
-    // .|
-    // .|
-    //
-    if (!game.state.map.is_rock[x + 1][y + 1] &&
-        game.state.map.is_rock[x + 1][y] &&
-        game.state.map.is_rock[x][y + 1]) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        tl2.x += dw;
-        br2.x += dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit_outline(tp, br_tile, tl2, br2);
-    }
-
-    //
-    // ....
-    // --X.
-    //   |.
-    //   |.
-    //
-    if (!game.state.map.is_rock[x - 1][y + 1] &&
-        game.state.map.is_rock[x - 1][y] &&
-        game.state.map.is_rock[x][y + 1]) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -816,9 +625,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         if (tp_is_wall(tp)) {
             blit_wall_cladding(blit_tl, blit_br);
         }
-        if (tp_is_rock(tp)) {
-            blit_rock_cladding(blit_tl, blit_br);
-        }
     }
 
     last_blit_tl = blit_tl;
@@ -899,9 +705,6 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     if (top_tile) {
         if (tp_is_wall(tp)) {
             blit_wall_cladding(blit_tl, blit_br);
-        }
-        if (tp_is_rock(tp)) {
-            blit_rock_cladding(blit_tl, blit_br);
         }
     }
 }
