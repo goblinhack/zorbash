@@ -14,6 +14,8 @@ def tp_init(name, short_name, tiles=[]):
     x.set_gfx_small_shadow_caster(True)
     x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR_DECO)
+    x.set_str_light_color("orange")
+    x.set_is_light_strength(3)
     
     for t in tiles:
         x.set_tile(tile=t)

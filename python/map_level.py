@@ -9,7 +9,7 @@ zx.map_load_level(level_data=[
 "rrrrr   r               r                               rrrr",
 "rrrr                                                    rrrr",
 "rrrr           rr           E                           rrrr",
-"rrrr  S               m    rrr                          rrrr",
+"rrrr  S    |          m    rrr                          rrrr",
 "rrrrrrrrrrrrr      rrrrrr  rrr                          rrrr",
 "rrrrrrrrrrrrrwwwwwwrrrrrr  r                            rrrr",
 "rrrr rrrrrrrrwwwwwrwrrrrr  r                            rrrr",

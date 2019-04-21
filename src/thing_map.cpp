@@ -1234,20 +1234,21 @@ void thing_render_all (void)
         //
         // Render light sources first to their own merged buffer
         //
+#if 0
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        lights_render(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
+        lights_render_points(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
-
         // glBlendFunc(GL_DST_COLOR, GL_ONE);           // normal light redder 
         // lava
         // glBlendFunc(GL_ONE, GL_ONE);                 // yellow glow
         // glBlendFunc(GL_SRC_COLOR, GL_ONE);           // orange glow
         glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
         blit_fbo(FBO_LIGHT_MERGED);
+#endif
 
         //
         // Now overlay the player light source.
@@ -1255,8 +1256,7 @@ void thing_render_all (void)
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
-        lights_render_player(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 0);
+        lights_render_high_quality(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
@@ -1274,5 +1274,5 @@ void thing_render_all (void)
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
     }
 
-    //lights_render_debug(minx, miny, maxx, maxy);
+    //lights_render_points_debug(minx, miny, maxx, maxy);
 }
