@@ -168,8 +168,8 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         // keep the light strength half the tiles drawn or we get artifacts
         // at the edges of the fbo
         // 
-        col.a = 100;
-        t->light = light_new(MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at, 
+        col.a = 250;
+        t->light = light_new(t, MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at, 
                              LIGHT_QUALITY_HIGH, col);
 
         t->log("player created");
@@ -249,8 +249,9 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     if (tp_is_light_strength(tp)) {
         std::string l = tp_str_light_color(tp);
         color c = string2color(l);
-        t->light = light_new((double) tp_is_light_strength(tp), 
-                          t->at, LIGHT_QUALITY_POINT, c);
+        t->light = light_new(t, MAX_LIGHT_RAYS / 4,
+                             (double) tp_is_light_strength(tp), 
+                             t->at, LIGHT_QUALITY_LOW, c);
     }
 
     if (tp_is_monst(tp)) {

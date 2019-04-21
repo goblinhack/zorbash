@@ -10,14 +10,15 @@
 
 static uint32_t light_id;
 
-static Texp light_overlay_tex1;
-static Texp light_overlay_tex2;
-static int light_overlay_texid1;
-static int light_overlay_texid2;
+static Texp light_overlay_tex_diffuse;
+static Texp light_overlay_tex_focused;
+static int light_overlay_texid_diffuse;
+static int light_overlay_texid_focused;
 static int light_overlay_texid;
+static const int LIGHT_VISIBLE_DIST = TILES_ACROSS + TILES_ACROSS / 2;
 
-static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
-static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+#define LIGHT_FOCUSED 0
+#define LIGHT_DIFFUSE 1
 
 Thingp debug_thing;
     
@@ -315,12 +316,11 @@ void Light::render_triangle_fans (void)
 
     auto tx = at.x;
     auto ty = at.y;
-    fpoint light_pos(tx * tile_gl_width_pct, ty * tile_gl_height_pct);
+    fpoint light_pos(tx * game.config.tile_gl_width, 
+                     ty * game.config.tile_gl_height);
 
-    fpoint off(game.state.map_at.x * tile_gl_width_pct, 
-               game.state.map_at.y * tile_gl_height_pct);
-    auto ox = off.x;
-    auto oy = off.y;
+    auto ox = game.state.map_at.x * game.config.tile_gl_width;
+    auto oy = game.state.map_at.y * game.config.tile_gl_height;
 
     glTranslatef(-ox, -oy, 0);
 
@@ -377,7 +377,7 @@ void Light::render_triangle_fans (void)
             /*
              * Just splat the raw fan, with alpha blended edges.
              */
-            blit_flush_triangle_fan();
+            blit_flush_triangle_fan_smoothed();
         }
     } else {
         float *b = &(*glbuf.begin());
@@ -427,12 +427,11 @@ void Light::render_debug_lines (int minx, int miny, int maxx, int maxy)
 
     auto tx = at.x;
     auto ty = at.y;
-    fpoint light_pos(tx * tile_gl_width_pct, ty * tile_gl_height_pct);
+    fpoint light_pos(tx * game.config.tile_gl_width, 
+                     ty * game.config.tile_gl_height);
 
-    fpoint off(game.state.map_at.x * tile_gl_width_pct, 
-               game.state.map_at.y * tile_gl_height_pct);
-    auto ox = off.x;
-    auto oy = off.y;
+    auto ox = game.state.map_at.x * game.config.tile_gl_width;
+    auto oy = game.state.map_at.y * game.config.tile_gl_height;
 
     glTranslatef(-ox, -oy, 0);
 
@@ -498,15 +497,14 @@ void Light::render_point_light (void)
 {
     auto tx = at.x;
     auto ty = at.y;
-    fpoint light_pos(tx * tile_gl_width_pct, ty * tile_gl_height_pct);
+    fpoint light_pos(tx * game.config.tile_gl_width, 
+                     ty * game.config.tile_gl_height);
 
-    fpoint off(game.state.map_at.x * tile_gl_width_pct, 
-               game.state.map_at.y * tile_gl_height_pct);
-    auto ox = off.x;
-    auto oy = off.y;
+    auto ox = game.state.map_at.x * game.config.tile_gl_width;
+    auto oy = game.state.map_at.y * game.config.tile_gl_height;
 
-    double lw = 0;
-    double lh = 0;
+    double lw = strength * game.config.tile_gl_width;
+    double lh = strength * game.config.tile_gl_height;
     double p1x = light_pos.x - lw;
     double p1y = light_pos.y - lh;
     double p2x = light_pos.x + lw;
@@ -528,22 +526,23 @@ void Light::render (int fbo, int pass)
     }
     flicker++;
 
-    if (!light_overlay_tex1) {
-        light_overlay_tex1 = tex_load("", "light", GL_NEAREST);
-        light_overlay_texid1 = tex_get_gl_binding(light_overlay_tex1);
+    if (!light_overlay_tex_diffuse) {
+        light_overlay_tex_diffuse = tex_load("", "light", GL_LINEAR);
+        light_overlay_texid_diffuse = tex_get_gl_binding(light_overlay_tex_diffuse);
     }
-    if (!light_overlay_tex2) {
-        light_overlay_tex2 = tex_load("", "light_small", GL_NEAREST);
-        light_overlay_texid2 = tex_get_gl_binding(light_overlay_tex2);
+    if (!light_overlay_tex_focused) {
+        light_overlay_tex_focused = tex_load("", "light_small", GL_LINEAR);
+        light_overlay_texid_focused = tex_get_gl_binding(light_overlay_tex_focused);
     }
 
-    if (pass == 0) {
-        light_overlay_texid = light_overlay_texid2;
+    if (pass == LIGHT_FOCUSED) {
+        light_overlay_texid = light_overlay_texid_focused;
     } else {
-        light_overlay_texid = light_overlay_texid1;
+        light_overlay_texid = light_overlay_texid_diffuse;
     }
 
     switch (quality) {
+    case LIGHT_QUALITY_LOW:
     case LIGHT_QUALITY_HIGH:
         /*
          * For high quality we render the light to its own FBO. This gives
@@ -557,7 +556,11 @@ void Light::render (int fbo, int pass)
         /*
          * We want to merge successive light sources together.
          */
-        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+        if (quality == LIGHT_QUALITY_LOW) {
+            glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_SRC_COLOR);
+        } else {
+            glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+        }
 
         render_triangle_fans();
 
@@ -565,15 +568,6 @@ void Light::render (int fbo, int pass)
         blit_fbo_bind(fbo);
         blit_fbo(FBO_LIGHT_MASK);
         blit_fbo_unbind();
-        break;
-
-    case LIGHT_QUALITY_LOW:
-        /*
-         * Draw direct to the FBO.
-         */
-        blit_fbo_bind(fbo);
-        glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
-        render_triangle_fans();
         break;
 
     case LIGHT_QUALITY_POINT:
@@ -603,7 +597,7 @@ void Light::render_debug (int minx, int miny, int maxx, int maxy)
     }
 }
 
-void lights_render (int minx, int miny, int maxx, int maxy, int fbo, int pass)
+void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo, int pass)
 {
     bool have_low_quality = false;
 
@@ -611,7 +605,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo, int pass)
         for (auto x = maxx - 1; x >= minx; x--) {
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
-                if (l->quality != LIGHT_QUALITY_POINT) {
+                if (l->quality == LIGHT_QUALITY_POINT) {
                     continue;
                 }
 
@@ -622,7 +616,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo, int pass)
                     auto p = game.state.player;
                     auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
 
-                    if (len > TILES_ACROSS + l->strength) {
+                    if (len > LIGHT_VISIBLE_DIST + l->strength) {
                         continue;
                     }
                 }
@@ -644,7 +638,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo, int pass)
         for (auto x = maxx - 1; x >= minx; x--) {
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
-                if (l->quality != LIGHT_QUALITY_POINT) {
+                if (l->quality != LIGHT_QUALITY_LOW) {
                     continue;
                 }
 
@@ -671,7 +665,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo, int pass)
                     auto p = game.state.player;
                     auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
 
-                    if (len > TILES_ACROSS + l->strength) {
+                    if (len > LIGHT_VISIBLE_DIST + l->strength) {
                         continue;
                     }
                 }
@@ -684,28 +678,45 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo, int pass)
     glcolor(WHITE);
 }
 
-void lights_render_player (int minx, int miny, int maxx, int maxy, int fbo, int pass)
+void lights_render_high_quality (int minx, int miny, int maxx, int maxy, int fbo)
 {
-    if (!game.state.player) {
-        return;
-    }
+    Lightp deferred = nullptr;
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
 
-                if (l->quality != LIGHT_QUALITY_HIGH) {
+                if (game.state.player && (l->owner == game.state.player)) {
+                    deferred = l;
                     continue;
                 }
 
-                l->render(fbo, pass);
+                /*
+                 * Too far away from the player? Skip rendering.
+                 */
+                if (game.state.player) {
+                    auto p = game.state.player;
+                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
+
+                    if (len > LIGHT_VISIBLE_DIST + l->strength) {
+                        continue;
+                    }
+                }
+
+                l->render(fbo, LIGHT_DIFFUSE);
+                l->render(fbo, LIGHT_FOCUSED);
             }
         }
     }
+
+    if (deferred) {
+        deferred->render(fbo, LIGHT_DIFFUSE);
+        deferred->render(fbo, LIGHT_FOCUSED);
+    }
 }
 
-void lights_render_debug (int minx, int miny, int maxx, int maxy)
+void lights_render_points_debug (int minx, int miny, int maxx, int maxy)
 {
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {
@@ -723,7 +734,7 @@ void lights_render_debug (int minx, int miny, int maxx, int maxy)
                     auto p = game.state.player;
                     auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
 
-                    if (len > TILES_ACROSS + l->strength) {
+                    if (len > LIGHT_VISIBLE_DIST + l->strength) {
                         continue;
                     }
                 }
