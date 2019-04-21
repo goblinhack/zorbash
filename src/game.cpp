@@ -678,7 +678,27 @@ _
         game_place_exit(dungeon, "exit1");
         game_place_door(dungeon, "door1");
 
-        auto tries = 1000;
+        auto tries = 200;
+
+        game_place_walls(dungeon, "wall2", 1, 6, 6, tries);
+        game_place_walls(dungeon, "wall2", 2, 6, 6, tries);
+        game_place_walls(dungeon, "wall2", 1, 6, 3, tries);
+        game_place_walls(dungeon, "wall2", 1, 3, 6, tries);
+        game_place_walls(dungeon, "wall2", 1, 3, 3, tries);
+        game_place_walls(dungeon, "wall2", 2, 3, 3, tries);
+        game_place_walls(dungeon, "wall2", 3, 3, 3, tries);
+        game_place_walls(dungeon, "wall2", 4, 3, 3, tries);
+        game_place_walls(dungeon, "wall2", 1, 2, 2, tries);
+        game_place_walls(dungeon, "wall2", 2, 2, 2, tries);
+        game_place_walls(dungeon, "wall2", 1, 2, 1, tries);
+        game_place_walls(dungeon, "wall2", 2, 2, 1, tries);
+        game_place_walls(dungeon, "wall2", 3, 2, 1, tries);
+        game_place_walls(dungeon, "wall2", 4, 2, 1, tries);
+        game_place_walls(dungeon, "wall2", 1, 1, 2, tries);
+        game_place_walls(dungeon, "wall2", 2, 1, 2, tries);
+        game_place_walls(dungeon, "wall2", 3, 2, 1, tries);
+        game_place_walls(dungeon, "wall2", 4, 2, 1, tries);
+
         game_place_walls(dungeon, "wall1", 1, 6, 6, tries);
         game_place_walls(dungeon, "wall1", 2, 6, 6, tries);
         game_place_walls(dungeon, "wall1", 1, 6, 3, tries);
