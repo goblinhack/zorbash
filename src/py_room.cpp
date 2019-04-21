@@ -116,9 +116,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
 
                 if (m.is_wall ||
-                    m.is_rock ||
-                    m.is_door ||
-                    m.is_rock) {
+                    m.is_door) {
                     walls_string += c;
                 } else if (m.gfx_is_wall_deco) {
                     walls_string += Charmap::WALL;

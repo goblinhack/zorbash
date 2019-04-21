@@ -622,18 +622,6 @@ public:
         return (v.is_wall);
     }
 
-    bool is_rock_at (const int x, const int y)
-    {
-        if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
-        }
-
-        auto d = MAP_DEPTH_WALLS;
-        auto c = getc(x, y, d);
-        auto v = Charmap::all_charmaps[c];
-        return (v.is_rock);
-    }
-
     bool is_monst_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
@@ -856,14 +844,6 @@ public:
         auto c = getc_fast(x, y, d);
         auto v = Charmap::all_charmaps[c];
         return (v.is_wall);
-    }
-
-    bool is_rock_at_fast (const int x, const int y)
-    {
-        auto d = MAP_DEPTH_WALLS;
-        auto c = getc_fast(x, y, d);
-        auto v = Charmap::all_charmaps[c];
-        return (v.is_rock);
     }
 
     bool is_door_at_fast (const int x, const int y)
@@ -3269,16 +3249,7 @@ public:
                     is_wall_at(x + 1, y    ) ||
                     is_wall_at(x - 1, y + 1) ||
                     is_wall_at(x    , y + 1) ||
-                    is_wall_at(x + 1, y + 1) ||
-                    is_rock_at(x - 1, y - 1) ||
-                    is_rock_at(x    , y - 1) ||
-                    is_rock_at(x + 1, y - 1) ||
-                    is_rock_at(x - 1, y    ) ||
-                    is_rock_at(x    , y    ) ||
-                    is_rock_at(x + 1, y    ) ||
-                    is_rock_at(x - 1, y + 1) ||
-                    is_rock_at(x    , y + 1) ||
-                    is_rock_at(x + 1, y + 1)) {
+                    is_wall_at(x + 1, y + 1)) {
                     putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
                 }
             }
@@ -3375,7 +3346,7 @@ public:
             for (y=2; y < maze_h-2; y++) {
                 if (map_curr[x][y]) {
                     if (!is_anything_at(x, y)) {
-                        putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
+                        putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
                     }
                 }
             }

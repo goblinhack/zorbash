@@ -74,7 +74,6 @@ public:
     std::map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
     std::map<uint32_t, Thingp> all_non_boring_things_at[MAP_WIDTH][MAP_HEIGHT];
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_solid[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    gfx_large_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_door[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -96,8 +95,6 @@ public:
   
     bool is_wall_at(const point &p);
     bool is_wall_at(const int x, const int y);
-    bool is_rock_at(const point &p);
-    bool is_rock_at(const int x, const int y);
     bool is_solid_at(const point &p);
     bool is_solid_at(const int x, const int y);
     bool is_light_at(const point &p);

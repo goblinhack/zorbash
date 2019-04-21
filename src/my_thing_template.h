@@ -180,7 +180,6 @@ public:
     int is_player {};
     int is_projectile {};
     int is_ripple {};
-    int is_rock {};
     int is_rrr1 {};
     int is_rrr10 {};
     int is_rrr11 {};
@@ -265,11 +264,6 @@ static inline int tp_is_floor (Tpp t)
 static inline int tp_is_wall (Tpp t)
 {
     return (t->is_wall);
-}
-
-static inline int tp_is_rock (Tpp t)
-{
-    return (t->is_rock);
 }
 
 static inline int tp_is_door (Tpp t)

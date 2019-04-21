@@ -794,7 +794,6 @@ TP_BODY_SET_INT(z_depth)
 TP_BODY_SET_INT(is_movable)
 TP_BODY_SET_INT(is_key)
 TP_BODY_SET_INT(is_wall)
-TP_BODY_SET_INT(is_rock)
 TP_BODY_SET_INT(is_floor)
 
 PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
