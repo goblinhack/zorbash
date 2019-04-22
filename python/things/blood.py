@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, short_name):
+def tp_init(name):
     x = tp.Tp(name)
 
     x.set_collision_circle(True)
@@ -12,7 +12,6 @@ def tp_init(name, short_name):
     x.set_gfx_animated(True)
     x.set_hunger_initial_health_at(4)
     x.set_is_blood(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_BLOOD)
     
     x.set_tile(tile=name + ".100", is_hp_100_percent=True)
@@ -23,9 +22,9 @@ def tp_init(name, short_name):
     x.update()
     
 def init():
-    tp_init(name="blood1", short_name="blood1")
-    tp_init(name="blood2", short_name="blood2")
-    tp_init(name="blood3", short_name="blood3")
-    tp_init(name="blood4", short_name="blood4")
+    tp_init(name="blood1")
+    tp_init(name="blood2")
+    tp_init(name="blood3")
+    tp_init(name="blood4")
 
 init()

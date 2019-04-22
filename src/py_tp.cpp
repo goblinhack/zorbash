@@ -68,7 +68,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;	                                                        \
     }	                                                                        \
 	                                                                        \
-    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, value);	        \
+    CON("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, value);	        \
 	                                                                        \
     tp = tp_find(tp_name);	                                                \
     if (!tp) {	                                                                \
@@ -695,8 +695,7 @@ TP_BODY_SET_INT(blit_bot_off)
 TP_BODY_SET_INT(blit_left_off)
 TP_BODY_SET_INT(blit_right_off)
 TP_BODY_SET_INT(is_movement_blocking)
-TP_BODY_SET_STRING(short_name)
-TP_BODY_SET_STRING(raw_name)
+TP_BODY_SET_STRING(name)
 TP_BODY_SET_STRING(str_zzz1)
 TP_BODY_SET_STRING(str_zzz2)
 TP_BODY_SET_STRING(str_zzz3)

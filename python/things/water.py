@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, short_name, 
+def tp_init(name, 
               tiles=[],
               left_tiles=[]):
     
@@ -10,7 +10,6 @@ def tp_init(name, short_name,
 
     x.set_is_water(True)
     x.set_gfx_animated(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_WATER)
     
     delay = 1250
@@ -20,7 +19,7 @@ def tp_init(name, short_name,
     x.update()
     
 def init():
-    tp_init(name="water1", short_name="water", 
+    tp_init(name="water1", 
             tiles=[ 
                 "water1.1", 
                 "water1.2", 

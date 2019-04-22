@@ -1,9 +1,6 @@
 import zx
 import random
 
-all_tps = {}
-all_treasure_tps = []
-
 
 class Tp:
     """thing template"""
@@ -47,8 +44,8 @@ class Tp:
         zx.tp_set_bl_tile(self, bl_tile, **kw)
 
 
-    def set_raw_name(self, value):
-        zx.tp_set_raw_name(self, value)
+    def set_name(self, value):
+        zx.tp_set_name(self, value)
 
     def set_short_name(self, value):
         zx.tp_set_short_name(self, value)

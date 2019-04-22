@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, short_name, tiles=[]):
+def tp_init(name, tiles=[]):
     
     x = tp.Tp(name)
 
@@ -13,7 +13,6 @@ def tp_init(name, short_name, tiles=[]):
     x.set_is_movement_blocking(True)
     x.set_gfx_outlined(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR_DECO)
     x.set_str_light_color("orange")
     x.set_is_light_strength(2)
@@ -25,7 +24,7 @@ def tp_init(name, short_name, tiles=[]):
     x.update()
     
 def init():
-    tp_init(name="brazier1", short_name="brazier1", 
+    tp_init(name="brazier1",
             tiles=[ 
                 "brazier1.1", 
                 "brazier1.2", 

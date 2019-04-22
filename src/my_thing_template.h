@@ -60,16 +60,7 @@ public:
 
     int id {};
 
-    /*
-     * Internal description of the thing.
-     */
-    std::string short_name;
-
-    /*
-     * Base filename
-     */
-    std::string raw_name;
-
+    std::string name;
     std::string str_zzz1;
     std::string str_zzz2;
     std::string str_zzz3;
@@ -221,12 +212,13 @@ Tpp tp_load(int id, std::string file);
 void tp_update(Tpp tp);
 Tpp tp_find(std::string name);
 Tpp tp_find(uint32_t id);
-Tpp tp_find_short_name(std::string name);
+Tpp tp_find_name(std::string name);
 void tp_init_after_loading(void);
 Tpp tp_random_monst(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_key(void);
 Tpp tp_random_blood(void);
+Tpp tp_random_wall(void);
 Tpp tp_random_floor(void);
 Tpp tp_random_deco(void);
 Tpp tp_random_wall_deco(void);
@@ -653,12 +645,7 @@ static inline int tp_is_key (Tpp t)
 
 static inline std::string tp_name (Tpp t)
 {
-    return (t->short_name);
-}
-
-static inline std::string tp_short_name (Tpp t)
-{
-    return (t->short_name);
+    return (t->name);
 }
 
 static inline std::string tp_str_zzz1 (Tpp t)
@@ -759,11 +746,6 @@ static inline std::string tp_weapon_carry_anim (Tpp t)
 static inline std::string tp_weapon_use_anim (Tpp t)
 {
     return (t->weapon_use_anim);
-}
-
-static inline std::string tp_raw_name (Tpp t)
-{
-    return (t->raw_name);
 }
 
 static inline Tileinfomap tp_tiles (Tpp t)

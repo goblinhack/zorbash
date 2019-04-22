@@ -2,15 +2,12 @@ import zx
 import tp
 
 
-def dirt_init(name, short_name, 
-              tiles=[],
-              left_tiles=[]):
+def dirt_init(name, tiles=[], left_tiles=[]):
     
     x = tp.Tp(name)
 
     x.set_is_boring(True)
     x.set_is_dirt(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
     
     for t in tiles:
@@ -19,7 +16,7 @@ def dirt_init(name, short_name,
     x.update()
     
 def init():
-    dirt_init(name="dirt1", short_name="The dirt", 
+    dirt_init(name="dirt1",
             tiles=[
                         "dirt1.1",
                         "dirt1.2",
@@ -54,7 +51,7 @@ def init():
                         "dirt1.31",
                         "dirt1.32",
                 ])
-    dirt_init(name="dirt2", short_name="The dirt", 
+    dirt_init(name="dirt2",
             tiles=[
                         "dirt2.1",
                         "dirt2.2",
@@ -89,7 +86,7 @@ def init():
                         "dirt2.31",
                         "dirt2.32",
                 ])
-    dirt_init(name="dirt3", short_name="The dirt", 
+    dirt_init(name="dirt3",
             tiles=[
                         "dirt3.1",
                         "dirt3.2",

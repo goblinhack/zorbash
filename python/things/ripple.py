@@ -1,13 +1,12 @@
 import zx
 import tp
 
-def tp_init(name, short_name):
+def tp_init(name):
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
     x.set_is_boring(True)
     x.set_is_ripple(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 100
@@ -23,7 +22,7 @@ def tp_init(name, short_name):
     x.update()
     
 def init():
-    tp_init(name="ripple1", short_name="ripple1")
-    tp_init(name="ripple2", short_name="ripple2")
+    tp_init(name="ripple1")
+    tp_init(name="ripple2")
 
 init()

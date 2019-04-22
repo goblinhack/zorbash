@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, short_name, 
+def tp_init(name, 
               tiles=[],
               left_tiles=[]):
     
@@ -14,7 +14,6 @@ def tp_init(name, short_name,
     x.set_is_movement_blocking(True)
     x.set_gfx_outlined(True)
     x.set_gfx_is_wall_deco(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_WALLS_DECO)
     
     delay = 2500
@@ -24,12 +23,12 @@ def tp_init(name, short_name,
     x.update()
     
 def init():
-    tp_init(name="grate1", short_name="grate1", tiles=[ "grate1.1", "grate1.2", ])
-    tp_init(name="grate2", short_name="grate2", tiles=[ "grate2.1", "grate2.2", ])
-    tp_init(name="grate3", short_name="grate3", tiles=[ "grate3.1", "grate3.2", ])
-    tp_init(name="grate4", short_name="grate4", tiles=[ "grate4.1", "grate4.2", ])
-    tp_init(name="grate5", short_name="grate5", tiles=[ "grate5.1", "grate5.2", ])
-    tp_init(name="grate6", short_name="grate6", tiles=[ "grate6.1", "grate6.2", ])
-    tp_init(name="grate7", short_name="grate7", tiles=[ "grate7.1", "grate7.2", ])
-    tp_init(name="grate8", short_name="grate8", tiles=[ "grate8.1", "grate8.2", ])
+    tp_init(name="grate1", tiles=[ "grate1.1", "grate1.2", ])
+    tp_init(name="grate2", tiles=[ "grate2.1", "grate2.2", ])
+    tp_init(name="grate3", tiles=[ "grate3.1", "grate3.2", ])
+    tp_init(name="grate4", tiles=[ "grate4.1", "grate4.2", ])
+    tp_init(name="grate5", tiles=[ "grate5.1", "grate5.2", ])
+    tp_init(name="grate6", tiles=[ "grate6.1", "grate6.2", ])
+    tp_init(name="grate7", tiles=[ "grate7.1", "grate7.2", ])
+    tp_init(name="grate8", tiles=[ "grate8.1", "grate8.2", ])
 init()

@@ -1,7 +1,7 @@
 import zx
 import tp
 
-def tp_init(name, short_name):
+def tp_init(name):
     x = tp.Tp(name)
 
     x.set_ai_delay_after_moving_ms(10)
@@ -27,7 +27,6 @@ def tp_init(name, short_name):
     x.set_is_movement_blocking(True)
     x.set_is_water_dweller(True)
     x.set_move_speed_ms(1000)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 100
@@ -56,6 +55,6 @@ def tp_init(name, short_name):
     x.update()
     
 def init():
-    tp_init(name="slime1", short_name="slime1")
+    tp_init(name="slime1")
 
 init()

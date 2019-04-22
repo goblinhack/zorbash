@@ -638,7 +638,7 @@ std::string Thing::to_string (void)
     }
 
     snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u(%s) at (%g,%g)",
-             id, tp->short_name.c_str(), at.x, at.y);
+             id, tp->name.c_str(), at.x, at.y);
 
     return (tmp[loop++]);
 }
