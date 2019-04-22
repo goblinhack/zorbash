@@ -14,13 +14,13 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
     PyObject *py_level_data = 0;
 
     static char *kwlist[] = {
-        (char*) "level_data", 
-        (char*) "level_name", 
+        (char*) "level_data",
+        (char*) "level_name",
         0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, 
-                                     "|Os", 
-                                     kwlist, 
+    if (!PyArg_ParseTupleAndKeywords(args, keywds,
+                                     "|Os",
+                                     kwlist,
                                      &py_level_data,
                                      &level_name)) {
         Py_RETURN_NONE;

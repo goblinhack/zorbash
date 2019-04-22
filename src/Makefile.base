@@ -71,7 +71,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid.o 			\
     $(OBJDIR)/wid_console.o 		\
     $(OBJDIR)/wid_tiles.o 		\
-    
+
 #
 # compile
 #

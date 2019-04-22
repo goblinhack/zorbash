@@ -1124,7 +1124,7 @@ std::wstring wid_get_text_with_cursor (widp w)
     }
 
     std::wstring t = w->text;
-    std::wstring o = t.substr(0, w->cursor) + ASCII_CURSOR_UCHAR + 
+    std::wstring o = t.substr(0, w->cursor) + ASCII_CURSOR_UCHAR +
                     t.substr(w->cursor);
 
     return (o);
@@ -2413,8 +2413,8 @@ widp wid_new_container (widp parent, std::string name)
     widp w = wid_new(parent);
 
 #ifdef WID_FULL_LOGNAME
-    w->to_string = string_sprintf("%s[%p] (parent %s[%p])", 
-                                name.c_str(), w.get(), 
+    w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
+                                name.c_str(), w.get(),
                                 parent->to_string.c_str(), parent.get());
 #else
     w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
@@ -2448,8 +2448,8 @@ widp wid_new_plain (widp parent, std::string name)
     widp w = wid_new(parent);
 
 #ifdef WID_FULL_LOGNAME
-    w->to_string = string_sprintf("%s[%p] (parent %s[%p])", 
-                                name.c_str(), w.get(), 
+    w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
+                                name.c_str(), w.get(),
                                 parent->to_string.c_str(), parent.get());
 #else
     w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
@@ -2507,8 +2507,8 @@ widp wid_new_square_button (widp parent, std::string name)
     widp w = wid_new(parent);
 
 #ifdef WID_FULL_LOGNAME
-    w->to_string = string_sprintf("%s[%p] (parent %s[%p])", 
-                                name.c_str(), w.get(), 
+    w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
+                                name.c_str(), w.get(),
                                 parent->to_string.c_str(), parent.get());
 #else
     w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
@@ -3467,7 +3467,7 @@ static void wid_adjust_scrollbar (widp scrollbar, widp owner)
             if (trough_height - scrollbar_height == 0.0f) {
                 pct = 0.0f;
             } else {
-                pct = (wid_get_tl_y(scrollbar) - 
+                pct = (wid_get_tl_y(scrollbar) -
                        wid_get_tl_y(scrollbar->parent)) /
                         (trough_height - scrollbar_height);
             }
@@ -3859,7 +3859,7 @@ uint8_t wid_receive_input (widp w, const SDL_KEYSYM *key)
                     wid_scroll_text(w);
                     wid_set_text(w->next, entered2);
 
-                    if (!command_handle(entered, 
+                    if (!command_handle(entered,
                                         &updatedtext,
                                         true /* show ambiguous */,
                                         false /* show complete */,
@@ -6449,8 +6449,8 @@ void wid_display_all (void)
      * FPS counter.
      */
     if (game.config.fps_counter) {
-        ascii_putf(0, 1, 
-                   GREEN, ASCII_UI_BOX_INACTIVE_MID_COLOR, 
+        ascii_putf(0, 1,
+                   GREEN, ASCII_UI_BOX_INACTIVE_MID_COLOR,
                    L"%u FPS", game.state.fps_count);
     }
 

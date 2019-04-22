@@ -126,8 +126,8 @@ bool Thing::update_coordinates (void)
     // Put larger tiles on the same y base as small ones.
     //
     if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tp))) {
-        double y_offset = 
-            (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) * 
+        double y_offset =
+            (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) *
                 tile_gl_height) / 2.0;
         tl.y -= y_offset;
         br.y -= y_offset;
@@ -218,7 +218,7 @@ double Thing::get_bounce (void)
             bounce(
                 bounce_height * bounce_fade,
                 bounce_fade,
-                (double)(timestamp_bounce_end - 
+                (double)(timestamp_bounce_end -
                          timestamp_bounce_begin) * bounce_fade,
                 bounce_count - 1);
         }

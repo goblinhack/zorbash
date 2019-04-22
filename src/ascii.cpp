@@ -20,7 +20,7 @@ typedef struct {
     double ty;
     double dx;
     double dy;
-    
+
     color fg_color_tl;
     color fg_color_bl;
     color fg_color_tr;
@@ -30,7 +30,7 @@ typedef struct {
     color bg_color_tr;
     color bg_color_br;
     /*
-     * Is reset each frame, and so although a pointer potentially should be 
+     * Is reset each frame, and so although a pointer potentially should be
      * zeroed out on game load once it is used.
      */
     void *context;
@@ -505,7 +505,7 @@ int ascii_strlen (std::wstring &text, std::wstring *col)
     return (x);
 }
 
-static void ascii_putf_ (int x, int y, 
+static void ascii_putf_ (int x, int y,
                          color fg,
                          color bg,
                          std::wstring fmt, va_list args)
@@ -526,7 +526,7 @@ static void ascii_putf_ (int x, int y,
     ascii_putf__(x, y, fg, bg, b);
 }
 
-static void ascii_putf_ (int x, int y, 
+static void ascii_putf_ (int x, int y,
                          color fg,
                          color bg,
                          const wchar_t *fmt, va_list args)
@@ -602,7 +602,7 @@ void ascii_putf (int x, int y, color fg, color bg, std::wstring fmt, ...)
 }
 
 #ifdef ENABLE_ASCII_MOUSE
-static void ascii_display_mouse (fpoint mouse_tile_tl, 
+static void ascii_display_mouse (fpoint mouse_tile_tl,
                                  fpoint mouse_tile_br,
                                  point mouse_at)
 {_
@@ -641,7 +641,7 @@ static void ascii_display_mouse (fpoint mouse_tile_tl,
 }
 #endif
 
-void ascii_put_bg_square (int tlx, int tly, int brx, int bry, 
+void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
                           Tilep tile, color c)
 {_
     int x;
@@ -655,16 +655,16 @@ void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
     }
 }
 
-void ascii_put_bg_square (int tlx, int tly, int brx, int bry, 
+void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
                           const char *tilename, color c)
 {_
     ascii_put_bg_square (tlx, tly, brx, bry, tile_find(tilename), c);
 }
 
-void ascii_put_bg_square (int tlx, int tly, int brx, int bry, 
+void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
                           wchar_t what, color c)
 {_
-    ascii_put_bg_square (tlx, tly, brx, bry, 
+    ascii_put_bg_square (tlx, tly, brx, bry,
                          fixed_font->unicode_to_tile(what), c);
 }
 
@@ -717,7 +717,7 @@ void ascii_put_shaded_line (int x1, int x2, int y, const char *tilename,
                           context);
 }
 
-void ascii_put_shaded_line (int x1, int x2, int y, wchar_t c, 
+void ascii_put_shaded_line (int x1, int x2, int y, wchar_t c,
                             color col_tl, color col_mid, color col_br,
                             void *context)
 {_
@@ -740,10 +740,10 @@ void ascii_put_solid_line (int x1, int x2, int y, const char *tilename,
     ascii_put_solid_line(x1, x2, y, tile_find(tilename), col, context);
 }
 
-void ascii_put_solid_line (int x1, int x2, int y, wchar_t c, color col, 
+void ascii_put_solid_line (int x1, int x2, int y, wchar_t c, color col,
                            void *context)
 {_
-    ascii_put_solid_line(x1, x2, y, fixed_font->unicode_to_tile(c), col, 
+    ascii_put_solid_line(x1, x2, y, fixed_font->unicode_to_tile(c), col,
                          context);
 }
 
@@ -753,7 +753,7 @@ static void ascii_map_thing_replace (int x, int y, Tilep tile, color c)
     ascii_set_bg(x, y, c);
 }
 
-static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in, 
+static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in,
                            int flag, Tilep tile, color c)
 {_
     double temp;
@@ -847,7 +847,7 @@ void ascii_draw_line (int x0, int y0, int x1, int y1, wchar_t what, color c)
     ascii_draw_line (x0, y0, x1, y1, fixed_font->unicode_to_tile(what), c);
 }
 
-void ascii_draw_line (int x0, int y0, int x1, int y1, 
+void ascii_draw_line (int x0, int y0, int x1, int y1,
                       const char *tilename, color c)
 {_
     ascii_draw_line (x0, y0, x1, y1, tile_find(tilename), c);
@@ -859,7 +859,7 @@ void ascii_draw_line (int x0, int y0, int x1, int y1,
 static void ascii_blit (int no_color)
 {_
     /*
-     * Get the mouse position to use. We use this to find the mouse tile that 
+     * Get the mouse position to use. We use this to find the mouse tile that
      * we are over.
      */
     int x;
@@ -892,7 +892,7 @@ static void ascii_blit (int no_color)
             int my2 = tile_br.y * game.config.video_pix_height;
 
             if (!mouse_found) {
-                if ((mx1 < mouse_x) && 
+                if ((mx1 < mouse_x) &&
                     (my1 < mouse_y) &&
                     (mx2 >= mouse_x) &&
                     (my2 >= mouse_y)) {
@@ -907,7 +907,7 @@ static void ascii_blit (int no_color)
 
 #if 0
             /*
-             * Small speedup as don't need this 
+             * Small speedup as don't need this
              */
 
             /*
@@ -916,13 +916,13 @@ static void ascii_blit (int no_color)
             if (cell->tex) {
 		Texp tex = cell->tex;
 
-		blit(tex_get_gl_binding(tex), 
-                     cell->tx, 
-                     cell->ty, 
-                     cell->tx + cell->dx, 
+		blit(tex_get_gl_binding(tex),
+                     cell->tx,
+                     cell->ty,
+                     cell->tx + cell->dx,
                      cell->ty + cell->dy,
-                     tile_tl.x, 
-                     tile_tl.y, 
+                     tile_tl.x,
+                     tile_tl.y,
                      tile_br.x,
                      tile_br.y);
             } else if (cell->bg_tile) {
@@ -939,9 +939,9 @@ static void ascii_blit (int no_color)
                     bg_color_br = color_to_mono(bg_color_br);
                 }
 
-                tile_blit_colored_fat(0, 
-                                      cell->bg_tile, 
-                                      tile_tl, 
+                tile_blit_colored_fat(0,
+                                      cell->bg_tile,
+                                      tile_tl,
                                       tile_br,
                                       bg_color_tl,
                                       bg_color_tr,
@@ -972,7 +972,7 @@ static void ascii_blit (int no_color)
 
                     tile_blit_colored_fat(0,
                                           tile,
-                                          tile_tl, 
+                                          tile_tl,
                                           tile_br,
                                           fg_color_tl,
                                           fg_color_tr,

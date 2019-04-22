@@ -186,7 +186,7 @@ public:
                                           my_apoint p3,
                                           my_apoint *intersect)
     {
-        double denominator = 
+        double denominator =
             ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
         if (denominator == 0) {
@@ -202,7 +202,7 @@ public:
         a = numerator1 / denominator;
         b = numerator2 / denominator;
 
-        // if we cast these lines infinitely in both directions, they intersect 
+        // if we cast these lines infinitely in both directions, they intersect
         // here:
         intersect->x = p0.x + (a * (p1.x - p0.x));
         intersect->y = p0.y + (a * (p1.y - p0.y));
@@ -224,7 +224,7 @@ public:
                                                 my_apoint p3,
                                                 my_apoint *intersect)
     {
-        double denominator = 
+        double denominator =
             ((p3.y - p2.y) * (p1.x - p0.x)) - ((p3.x - p2.x) * (p1.y - p0.y));
 
         if (denominator == 0) {
@@ -240,7 +240,7 @@ public:
         a = numerator1 / denominator;
         b = numerator2 / denominator;
 
-        // if we cast these lines infinitely in both directions, they intersect 
+        // if we cast these lines infinitely in both directions, they intersect
         // here:
         intersect->x = p0.x + (a * (p1.x - p0.x));
         intersect->y = p0.y + (a * (p1.y - p0.y));
@@ -248,26 +248,26 @@ public:
         return (true);
     }
 
-    friend int 
+    friend int
     distance_to_line (my_apoint P0, my_apoint L0, my_apoint L1, T *dist,
                       my_apoint *intersect_out)
     {
         my_apoint intersect;
         double mag;
         double U;
-    
+
         /*
          * Can get the squared distance to avoid this.
          */
         mag = distance(L1, L0);
-    
+
         /*
          * Project point P onto the line and then calc the dot product.
          */
         U = (((P0.x - L0.x) * (L1.x - L0.x)) +
              ((P0.y - L0.y) * (L1.y - L0.y))) /
              (mag * mag);
-    
+
         if (U < 0.0f) {
             intersect = L0;
         } else if (U > 1.0f) {
@@ -276,17 +276,17 @@ public:
             intersect.x = L0.x + U * (L1.x - L0.x);
             intersect.y = L0.y + U * (L1.y - L0.y);
         }
-    
+
         *dist = distance(P0, intersect);
 
         if (intersect_out) {
             *intersect_out = intersect;
         }
-    
+
         if ((U < 0.0f) || (U > 1.0f)) {
             return (0); // closest P0 does not fall within the line segment
         }
-    
+
         return (1);
     }
 };

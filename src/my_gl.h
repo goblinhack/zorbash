@@ -75,7 +75,7 @@ void gl_blitline(float tlx, float tly, float brx, float bry);
 
 /*
  * gl_push_texcoord
- 
+
  * Push elements onto the array buffer.
  */
 #define gl_push_texcoord(p, x, y) \
@@ -86,7 +86,7 @@ void gl_blitline(float tlx, float tly, float brx, float bry);
 
 /*
  * gl_push_vertex
- 
+
  * Push elements onto the array buffer.
  */
 #define gl_push_vertex(p, x, y) \
@@ -97,9 +97,9 @@ void gl_blitline(float tlx, float tly, float brx, float bry);
 
 /*
  * gl_push_vertex
- 
+
  * Push elements onto the array buffer.
- 
+
  * Ok, why, z then y ? for isometric views, it's easier to think of z as up
  */
 #define gl_push_vertex_3d(p, x, z, y) \
@@ -111,7 +111,7 @@ void gl_blitline(float tlx, float tly, float brx, float bry);
 
 /*
  * gl_push_rgba
- 
+
  * Push elements onto the array buffer.
  */
 #define gl_push_rgba(p, r, g, b, a) \

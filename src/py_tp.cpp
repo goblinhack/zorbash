@@ -68,7 +68,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;	                                                        \
     }	                                                                        \
 	                                                                        \
-    CON("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, value);	        \
+    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, value);	        \
 	                                                                        \
     tp = tp_find(tp_name);	                                                \
     if (!tp) {	                                                                \
@@ -282,8 +282,8 @@ done:	                                                                        \
     Py_RETURN_NONE;	                                                        \
 }	                                                                        \
 
-static PyObject *tp_set_tile_dir (PyObject *obj, 
-                                  PyObject *args, 
+static PyObject *tp_set_tile_dir (PyObject *obj,
+                                  PyObject *args,
                                   PyObject *keywds,
                                   int dir)
 {	
@@ -796,44 +796,44 @@ TP_BODY_SET_INT(is_wall)
 TP_BODY_SET_INT(is_floor)
 
 PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{	                                                                        
-    PyObject *py_class = 0;	                                                
-    char *tp_name = 0;	                                                        
-    int value = 0;	                                                        
-    Tpp tp;                                                                     
-	                                                                        
-    static char *kwlist[] = {(char*) "class", (char*) "value", 0};	        
-	                                                                        
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class,    
-                                     &value)) {	                                
-        return (0);	                                                        
-    }	                                                                        
-	                                                                        
-    if (!py_class) {	                                                        
-        ERR("%s, missing class", __FUNCTION__);	                                
-        return (0);	                                                        
-    }	                                                                        
-	                                                                        
-    tp_name = py_obj_attr_str(py_class, "name");	                        
-    if (!tp_name) {	                                                        
-        ERR("%s, missing tp name", __FUNCTION__);	                        
-        goto done;	                                                        
-    }	                                                                        
-	                                                                        
-    DBG("python-to-c: %s(%s -> %d)", __FUNCTION__, tp_name, value);	        
-	                                                                        
-    tp = tp_find(tp_name);	                                                
-    if (!tp) {	                                                                
-        ERR("%s, cannot find tp %s", __FUNCTION__, tp_name);	                
-        goto done;	                                                        
-    }	                                                                        
-	                                                                        
+{	
+    PyObject *py_class = 0;	
+    char *tp_name = 0;	
+    int value = 0;	
+    Tpp tp;
+	
+    static char *kwlist[] = {(char*) "class", (char*) "value", 0};	
+	
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class,
+                                     &value)) {	
+        return (0);	
+    }	
+	
+    if (!py_class) {	
+        ERR("%s, missing class", __FUNCTION__);	
+        return (0);	
+    }	
+	
+    tp_name = py_obj_attr_str(py_class, "name");	
+    if (!tp_name) {	
+        ERR("%s, missing tp name", __FUNCTION__);	
+        goto done;	
+    }	
+	
+    DBG("python-to-c: %s(%s -> %d)", __FUNCTION__, tp_name, value);	
+	
+    tp = tp_find(tp_name);	
+    if (!tp) {	
+        ERR("%s, cannot find tp %s", __FUNCTION__, tp_name);	
+        goto done;	
+    }	
+	
     tp_update(tp);
-	                                                                        
-done:	                                                                        
-    if (tp_name) {	                                                        
-        myfree(tp_name);	                                                
-    }	                                                                        
-	                                                                        
-    Py_RETURN_NONE;	                                                        
-}	                                                                        
+	
+done:	
+    if (tp_name) {	
+        myfree(tp_name);	
+    }	
+	
+    Py_RETURN_NONE;	
+}	

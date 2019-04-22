@@ -20,7 +20,7 @@
 #include "my_stb_image.h"
 
 static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name,
-                                     Font *f, 
+                                     Font *f,
                                      uint16_t c,
                                      uint16_t d);
 
@@ -151,7 +151,7 @@ ttf_set_color_key (SDL_Surface *glyph_surface,
 // Given a single character, make it into an opengl tex
 //
 static void
-ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f, 
+ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
                           uint16_t c,
                           uint16_t d)
 {_
@@ -191,7 +191,7 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
     SDL_Surface *g1 =
             TTF_RenderUNICODE_Blended(ttf, text, f->foreground);
     if (!g1) {
-        DBG("Error TTF_RenderUNICODE_Blended failed for font glyph %u in %s, err: %s", 
+        DBG("Error TTF_RenderUNICODE_Blended failed for font glyph %u in %s, err: %s",
             c, name, TTF_GetError());
         return;
     }
@@ -298,7 +298,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     //    int u_block = f->u_to_c[0x2588];
     //    max_char_width = f->glyphs[u_block].maxx - f->glyphs[u_block].minx;
     //    max_char_height = f->glyphs[u_block].maxy - f->glyphs[u_block].miny;
- 
+
     width = glyph_per_row * max_char_width;
     height = ((tot / glyph_per_row) + 1) * max_char_height;
 
@@ -338,7 +338,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
         }
 
         if (f->tex[c].image) {
-            SDL_Rect dstrect = { 
+            SDL_Rect dstrect = {
                 (int)(max_char_width * x), (int)h, (int)max_char_width, (int)max_char_height
             };
 
@@ -427,7 +427,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     }
 
     printf("writing %s (unicode char %d to %d) image is %dx%d pixels, glyph_per_row %d char size %dx%d pixels\n",
-           filename, 
+           filename,
            TTF_GLYPH_MIN, TTF_GLYPH_MAX,
            dst->w, dst->h,
            glyph_per_row,
@@ -438,7 +438,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     SDL_UnlockSurface(dst);
 
     printf("wrote %s (unicode char %d to %d) image is %dx%d pixels, glyph_per_row %d char size %dx%d pixels\n",
-           filename, 
+           filename,
            TTF_GLYPH_MIN, TTF_GLYPH_MAX,
            dst->w, dst->h,
            glyph_per_row,

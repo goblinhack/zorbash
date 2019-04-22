@@ -9,7 +9,7 @@
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_light.h"
-    
+
 int cereal_test (const std::string save_file)
 {
 #if 0

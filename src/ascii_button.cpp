@@ -6,14 +6,14 @@
 #include "my_time_util.h"
 #include "my_ascii.h"
 
-static void ascii_put_button_ (int x, 
-                               int y, 
-                               int width, 
+static void ascii_put_button_ (int x,
+                               int y,
+                               int width,
                                color col_tl,
                                color col_mid,
                                color col_br,
                                void *context,
-                               const wchar_t *fmt, 
+                               const wchar_t *fmt,
                                va_list args)
 {_
     wchar_t buf[MAXSTR];
@@ -46,7 +46,7 @@ void ascii_put_button (button_args b, const wchar_t *fmt, ...)
 {_
     va_list args;
 
-    if ((b.col_tl == COLOR_NONE) && 
+    if ((b.col_tl == COLOR_NONE) &&
         (b.col_mid == COLOR_NONE) &&
         (b.col_br == COLOR_NONE)) {
 
@@ -76,14 +76,14 @@ void ascii_put_button (button_args b, const wchar_t *fmt, ...)
      */
     va_start(args, fmt);
 
-    ascii_put_button_(b.x, 
-                      b.y, 
-                      b.width, 
+    ascii_put_button_(b.x,
+                      b.y,
+                      b.width,
                       b.col_tl,
                       b.col_mid,
                       b.col_br,
                       b.context,
-                      fmt, 
+                      fmt,
                       args);
 
     va_end(args);

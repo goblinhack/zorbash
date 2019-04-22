@@ -35,7 +35,7 @@ public:
     uint8_t                 height {ROOM_HEIGHT};
 
     char                    data[ROOM_WIDTH][ROOM_HEIGHT][MAP_DEPTH] = {{{' '}}};
-    
+
     bool                    has_door_up    {false};
     bool                    has_door_down  {false};
     bool                    has_door_left  {false};
@@ -65,7 +65,7 @@ public:
     Roomp                   right_room {};
     Roomp                   up_room {};
     Roomp                   down_room {};
-    
+
     Roomp                   secret_left_room {};
     Roomp                   secret_right_room {};
     Roomp                   secret_up_room {};
@@ -75,15 +75,15 @@ public:
     point                   right_door_at;
     point                   up_door_at;
     point                   down_door_at;
-    
+
     point                   left_secret_door_at;
     point                   right_secret_door_at;
     point                   up_secret_door_at;
     point                   down_secret_door_at;
-    
+
     //
     // Temp used for skipping rooms in dungeon placement
-    // 
+    //
     bool                     skip {};
 
     /*
@@ -104,7 +104,7 @@ public:
     uint8_t                 depth {0};
 
     /*
-     * Final placement of this room in the dungeon. 
+     * Final placement of this room in the dungeon.
      */
     bool                    placed {false};
 

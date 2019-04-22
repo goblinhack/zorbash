@@ -14,11 +14,11 @@ static void fluid_place_water (int x, int y)
     uint16_t fx;
     uint16_t fy;
 
-    for (fx = x * FLUID_RESOLUTION; 
-            fx < (x * FLUID_RESOLUTION) + FLUID_RESOLUTION; 
+    for (fx = x * FLUID_RESOLUTION;
+            fx < (x * FLUID_RESOLUTION) + FLUID_RESOLUTION;
             fx++) {
-        for (fy = y * FLUID_RESOLUTION; 
-                fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION; 
+        for (fy = y * FLUID_RESOLUTION;
+                fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                 fy++) {
 
             game.state.map.fluid[fx][fy].mass = FLUID_MAX_MASS;
@@ -59,11 +59,11 @@ void fluid_init (void)
                 uint16_t fx;
                 uint16_t fy;
 
-                for (fx = x * FLUID_RESOLUTION; 
-                     fx < (x * FLUID_RESOLUTION) + FLUID_RESOLUTION; 
+                for (fx = x * FLUID_RESOLUTION;
+                     fx < (x * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                      fx++) {
-                    for (fy = y * FLUID_RESOLUTION; 
-                         fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION; 
+                    for (fy = y * FLUID_RESOLUTION;
+                         fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                          fy++) {
 
                         game.state.map.fluid[fx][fy].mass = 0;
@@ -105,11 +105,11 @@ void fluid_update (void)
                 uint16_t fx;
                 uint16_t fy;
 
-                for (fx = x * FLUID_RESOLUTION; 
-                     fx < (x * FLUID_RESOLUTION) + FLUID_RESOLUTION; 
+                for (fx = x * FLUID_RESOLUTION;
+                     fx < (x * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                      fx++) {
-                    for (fy = y * FLUID_RESOLUTION; 
-                         fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION; 
+                    for (fy = y * FLUID_RESOLUTION;
+                         fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                          fy++) {
 
                         game.state.map.fluid[fx][fy].mass = 0;
@@ -120,11 +120,11 @@ void fluid_update (void)
                 uint16_t fx;
                 uint16_t fy;
 
-                for (fx = x * FLUID_RESOLUTION; 
-                     fx < (x * FLUID_RESOLUTION) + FLUID_RESOLUTION; 
+                for (fx = x * FLUID_RESOLUTION;
+                     fx < (x * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                      fx++) {
-                    for (fy = y * FLUID_RESOLUTION; 
-                         fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION; 
+                    for (fy = y * FLUID_RESOLUTION;
+                         fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                          fy++) {
 
                         if (game.state.map.fluid[fx][fy].type == FLUID_IS_SOLID) {
@@ -239,7 +239,7 @@ void fluid_pool_debug (void)
 /*
  * Flood all connecting tiles with the same fluid pool number.
  */
-static void fluid_flood_fill (uint16_t x, 
+static void fluid_flood_fill (uint16_t x,
                               uint16_t y, uint8_t pool_num)
 {
 #define STACK_PUSH(dx, dy)                                  \
@@ -347,7 +347,7 @@ static void fluid_find_pools (void)
 }
 
 /*
- * If there is a surface tile above others, then try and push the mass to the 
+ * If there is a surface tile above others, then try and push the mass to the
  * lower surface tiles.
  */
 static void fluid_push_down (void)
@@ -504,7 +504,7 @@ static void fluid_set_depth (void)
             }
 
             /*
-             * If this is the surface, take note of it as we will need this to 
+             * If this is the surface, take note of it as we will need this to
              * even out surface fluids later.
              */
             if (depth == 0) {
@@ -699,7 +699,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
 {
     widgridnode *node;
     tree_root **tree;
-    
+
     {
         int x = 0;
         int y = 0;
@@ -780,9 +780,9 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
 void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
 {
     if (player) {
-        const uint32_t visible_width = 
+        const uint32_t visible_width =
                 TILES_SCREEN_WIDTH / 2 + TILES_SCREEN_FLUID_WIDTH_PAD;
-        const uint32_t visible_height = 
+        const uint32_t visible_height =
                 TILES_SCREEN_HEIGHT / 2 + TILES_SCREEN_FLUID_HEIGHT_PAD;
 
         maxx = player->x + visible_width;
@@ -982,13 +982,13 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
             double ty2 = y1 + ((y + 1) * dy);
 
             blit_colored(t->gl_surface_binding,
-                         tx1, 
-                         ty2, 
-                         tx2, 
-                         ty1, 
-                         tile_tl.x, 
-                         tile_br.y, 
-                         tile_br.x, 
+                         tx1,
+                         ty2,
+                         tx2,
+                         ty1,
+                         tile_tl.x,
+                         tile_br.y,
+                         tile_br.x,
                          tile_tl.y,
                          bg_color_tl,
                          bg_color_tr,
@@ -1085,7 +1085,7 @@ int thing_is_partially_or_fully_submerged (Thingp t)
     if (t->at.y < 0) {
         return (false);
     }
-    
+
     for (dy = 0; dy < FLUID_RESOLUTION; dy++) {
         for (dx = 0; dx < FLUID_RESOLUTION; dx++) {
             if (game.state.map.fluid[x + dx][y + dy].mass > 0) {

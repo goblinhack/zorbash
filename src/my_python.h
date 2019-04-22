@@ -16,7 +16,7 @@ void python_fini(void);
 void py_exec(const char *str);
 
 void py_call_void_module_with_list_of_points(const char *module,
-                                             const char *name, 
+                                             const char *name,
                                              std::vector<point> points);
 void py_call_void_int(const char *name, int val1);
 int py_call_ii(const char *name, int val1);

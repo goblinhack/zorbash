@@ -96,7 +96,7 @@ void Thing::set_weapon_use_anim (Thingp weapon_use_anim)
                 old_weapon_use_anim->to_string().c_str(),
                 weapon_use_anim->to_string().c_str());
         } else {
-            log("set-weapon-use remove %s", 
+            log("set-weapon-use remove %s",
                 old_weapon_use_anim->to_string().c_str());
         }
     } else {
@@ -122,7 +122,7 @@ void Thing::get_weapon_use_offset (double *dx, double *dy)
     *dx = 0;
     *dy = 0;
 
-    double dist_from_wielder = 
+    double dist_from_wielder =
         ((double)tp_weapon_use_distance(weapon)) / 10.0;
 
     //
@@ -193,7 +193,7 @@ Thingp Thing::get_weapon_carry_anim (void)
 Thingp Thing::get_weapon_use_anim (void)
 {
     //
-    // If this weapon_use_anim has its own thing id for animations then 
+    // If this weapon_use_anim has its own thing id for animations then
     // destroy that.
     //
     Thingp weapon_use_anim = 0;
@@ -219,7 +219,7 @@ void Thing::unwield (const char *why)
         return;
     }
 
-    log("unwielding current weapon %s, why: %s", 
+    log("unwielding current weapon %s, why: %s",
         tp_name(weapon).c_str(), why);
 
     sheath();
@@ -304,7 +304,7 @@ void Thing::use (void)
 
     auto swung_as = tp_weapon_use_anim(weapon);
     if (swung_as == "") {
-        err("could not use %s, has no use anim", 
+        err("could not use %s, has no use anim",
             tp_name(weapon).c_str());
         return;
     }

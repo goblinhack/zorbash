@@ -224,28 +224,28 @@ static void game_place_floor_under_objects (class Dungeon *d,
             if (d->is_lava_at(x, y + 1)) {
                 if (!game.state.map.is_floor[x][y + 1]) {
                     thing_new(what, fpoint(x, y + 1));
-                    (void) light_new(2, fpoint(x, y + 1.0), 
+                    (void) light_new(2, fpoint(x, y + 1.0),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
             if (d->is_lava_at(x, y - 1)) {
                 if (!game.state.map.is_floor[x][y - 1]) {
                     thing_new(what, fpoint(x, y - 1));
-                    (void) light_new(2, fpoint(x, y - 1.0), 
+                    (void) light_new(2, fpoint(x, y - 1.0),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
             if (d->is_lava_at(x + 1, y)) {
                 if (!game.state.map.is_floor[x + 1][y]) {
                     thing_new(what, fpoint(x + 1, y));
-                    (void) light_new(2, fpoint(x + 1.0, y), 
+                    (void) light_new(2, fpoint(x + 1.0, y),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
             if (d->is_lava_at(x - 1, y)) {
                 if (!game.state.map.is_floor[x - 1][y]) {
                     thing_new(what, fpoint(x - 1, y));
-                    (void) light_new(2, fpoint(x - 1.0, y), 
+                    (void) light_new(2, fpoint(x - 1.0, y),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
@@ -256,28 +256,28 @@ static void game_place_floor_under_objects (class Dungeon *d,
             if (d->is_water_at(x, y + 1)) {
                 if (!game.state.map.is_floor[x][y + 1]) {
                     thing_new(what, fpoint(x, y + 1));
-                    (void) light_new(light_strength, fpoint(x, y + 0.5), 
+                    (void) light_new(light_strength, fpoint(x, y + 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_water_at(x, y - 1)) {
                 if (!game.state.map.is_floor[x][y - 1]) {
                     thing_new(what, fpoint(x, y - 1));
-                    (void) light_new(light_strength, fpoint(x, y - 0.5), 
+                    (void) light_new(light_strength, fpoint(x, y - 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_water_at(x + 1, y)) {
                 if (!game.state.map.is_floor[x + 1][y]) {
                     thing_new(what, fpoint(x + 1, y));
-                    (void) light_new(light_strength, fpoint(x + 0.5, y), 
+                    (void) light_new(light_strength, fpoint(x + 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_water_at(x - 1, y)) {
                 if (!game.state.map.is_floor[x - 1][y]) {
                     thing_new(what, fpoint(x - 1, y));
-                    (void) light_new(light_strength, fpoint(x - 0.5, y), 
+                    (void) light_new(light_strength, fpoint(x - 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
@@ -313,28 +313,28 @@ static void game_place_floor_under_objects (class Dungeon *d,
             if (d->is_deep_water_at(x, y + 1)) {
                 if (!game.state.map.is_floor[x][y + 1]) {
                     thing_new(what, fpoint(x, y + 1));
-                    (void) light_new(light_strength, fpoint(x, y + 0.5), 
+                    (void) light_new(light_strength, fpoint(x, y + 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_deep_water_at(x, y - 1)) {
                 if (!game.state.map.is_floor[x][y - 1]) {
                     thing_new(what, fpoint(x, y - 1));
-                    (void) light_new(light_strength, fpoint(x, y - 0.5), 
+                    (void) light_new(light_strength, fpoint(x, y - 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_deep_water_at(x + 1, y)) {
                 if (!game.state.map.is_floor[x + 1][y]) {
                     thing_new(what, fpoint(x + 1, y));
-                    (void) light_new(light_strength, fpoint(x + 0.5, y), 
+                    (void) light_new(light_strength, fpoint(x + 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_deep_water_at(x - 1, y)) {
                 if (!game.state.map.is_floor[x - 1][y]) {
                     thing_new(what, fpoint(x - 1, y));
-                    (void) light_new(light_strength, fpoint(x - 0.5, y), 
+                    (void) light_new(light_strength, fpoint(x - 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
@@ -420,7 +420,7 @@ static void game_place_blood (class Dungeon *d)
                 int splatters = random_range(2, 10);
                 for (int splatter = 0; splatter < splatters; splatter++) {
                     auto tp = tp_random_blood();
-                    (void) thing_new(tp_name(tp), 
+                    (void) thing_new(tp_name(tp),
                                      fpoint(x, y),
                                      fpoint(1, 1));
                 }
@@ -655,7 +655,7 @@ void game_display (void)
         mysrand(seed);
         LOG("dungeon: create dungeon %u", seed);
 _
-//        auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, 
+//        auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
 //        GRID_HEIGHT, seed);
         auto dungeon = new Dungeon(0);
 

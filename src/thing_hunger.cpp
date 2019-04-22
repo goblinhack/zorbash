@@ -35,15 +35,15 @@ void Thing::hunger_clock (void)
         // dead("starved to death");
     }
 
-    int hungry_at = 
-      (int) ((double) max_health * 
+    int hungry_at =
+      (int) ((double) max_health *
              ((double) tp_hunger_at_health_pct(tp) / 100.0));
 
     auto old_is_hungry = is_hungry;
     is_hungry = health < hungry_at;
 
-    int starving_at = 
-      (int) ((double) max_health * 
+    int starving_at =
+      (int) ((double) max_health *
              ((double) tp_hunger_starving_at_health_pct(tp) / 100.0));
 
     auto old_is_starving = is_starving;

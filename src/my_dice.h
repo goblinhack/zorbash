@@ -27,7 +27,7 @@ public:
         return (hd);
     }
 
-    Dice (std::string s) 
+    Dice (std::string s)
     {
         hd = s;
 

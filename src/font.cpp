@@ -83,8 +83,8 @@ uint8_t font_init (void)
     DIE("generated fonts");
 #endif
 
-    fixed_font = font_load("fixed", (char*)FIXED_FONT, 
-                           FONT_SIZE, 
+    fixed_font = font_load("fixed", (char*)FIXED_FONT,
+                           FONT_SIZE,
                            TTF_STYLE_NORMAL);
 
     return (true);
