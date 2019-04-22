@@ -15,7 +15,7 @@ typedef class Tp* Tpp;
 typedef std::unordered_map< std::string, Tpp > Tpmap;
 
 //
-// Use map as walk order is maintained, instead of unordered map where it is 
+// Use map as walk order is maintained, instead of unordered map where it is
 // not. Think of unordered_map as a hash table.
 //
 typedef std::map< unsigned int, Tpp > Tpmap_create_order;

@@ -41,7 +41,7 @@ void Thing::attach (void)
 
     is_attached = true;
     last_attached = at;
-//log("attached at %d %d %d", (int)last_attached.x, (int)last_attached.y, 
+//log("attached at %d %d %d", (int)last_attached.x, (int)last_attached.y,
 //depth);
 }
 
@@ -51,7 +51,7 @@ void Thing::detach (void)
         return;
     }
     is_attached = false;
-//log("detach from %d %d %d", (int)last_attached.x, (int)last_attached.y, 
+//log("detach from %d %d %d", (int)last_attached.x, (int)last_attached.y,
 //depth);
 //
     {
@@ -88,16 +88,16 @@ void Thing::detach (void)
 }
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
-{  
+{
     double dw = game.config.one_pixel_gl_width;
     double dh = game.config.one_pixel_gl_height;
 
     int x = (int) at.x;
     int y = (int) at.y;
 
-    if (unlikely(x <= 0) || 
-        unlikely(y <= 0) || 
-        unlikely(x >= MAP_WIDTH - 1) || 
+    if (unlikely(x <= 0) ||
+        unlikely(y <= 0) ||
+        unlikely(x >= MAP_WIDTH - 1) ||
         unlikely(y >= MAP_HEIGHT - 1)) {
         return;
     }
@@ -278,14 +278,14 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     }
 }
 
-void Thing::blit_player_owned_shadow_section (const Tpp &tp, const Tilep &tile, 
+void Thing::blit_player_owned_shadow_section (const Tpp &tp, const Tilep &tile,
                                               double x1, double y1,
                                               double x2, double y2,
                                               const fpoint &tl, const fpoint &br)
 {
     fpoint shadow_tl = tl;
     fpoint shadow_tr(br.x, tl.y);
-    fpoint shadow_bl(tl.x, br.y); 
+    fpoint shadow_bl(tl.x, br.y);
     fpoint shadow_br = br;
 
     double dx = 1.0;
@@ -300,13 +300,13 @@ void Thing::blit_player_owned_shadow_section (const Tpp &tp, const Tilep &tile,
     shadow_tl.y += 0.01 * dy;
     shadow_tr.y += 0.01 * dy;
 
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    ::blit(tile->gl_surface_binding, x1, y2, x2, y1,
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
 
     glcolor(WHITE);
 }
 
-void Thing::blit_player_owned_shadow (const Tpp &tp, const Tilep &tile, 
+void Thing::blit_player_owned_shadow (const Tpp &tp, const Tilep &tile,
                                       const fpoint &tl, const fpoint &br)
 {
     double x1;
@@ -326,7 +326,7 @@ void Thing::blit_player_owned_shadow (const Tpp &tp, const Tilep &tile,
     blit_player_owned_shadow_section(tp, tile, x1, y1, x2, y2, tl, br);
 }
 
-void Thing::blit_player_owned_shadow_section (const Tpp &tp, const Tilep &tile, 
+void Thing::blit_player_owned_shadow_section (const Tpp &tp, const Tilep &tile,
                                               const fpoint &tile_tl, const fpoint &tile_br,
                                               const fpoint &tl, const fpoint &br)
 {
@@ -350,12 +350,12 @@ void Thing::blit_player_owned_shadow_section (const Tpp &tp, const Tilep &tile,
 //
 // Blits a whole tile. Y co-ords are inverted.
 //
-void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile, 
+void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
                                           double x1, double y1,
                                           double x2, double y2,
                                           const fpoint &tl, const fpoint &br)
 {
-    fpoint shadow_bl(tl.x, br.y); 
+    fpoint shadow_bl(tl.x, br.y);
     fpoint shadow_br = br;
     fpoint shadow_tl = shadow_bl;
     fpoint shadow_tr = shadow_br;
@@ -417,7 +417,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
     shadow_bl.y -= height;
     shadow_br.y -= height;
 
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    ::blit(tile->gl_surface_binding, x1, y2, x2, y1,
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
 
     c.a = 50;
@@ -430,20 +430,20 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
     faded_shadow_tr.x = shadow_tr.x + 0.07 * dx;
     faded_shadow_tl.y = shadow_tl.y + 0.02 * dy;
     faded_shadow_tr.y = shadow_tr.y + 0.02 * dy;
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    ::blit(tile->gl_surface_binding, x1, y2, x2, y1,
            shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
 
     faded_shadow_tl.x = shadow_tl.x + 0.03 * dx;
     faded_shadow_tr.x = shadow_tr.x + 0.03 * dx;
     faded_shadow_tl.y = shadow_tl.y + 0.01 * dy;
     faded_shadow_tr.y = shadow_tr.y + 0.01 * dy;
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    ::blit(tile->gl_surface_binding, x1, y2, x2, y1,
            shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
 
     glcolor(WHITE);
 }
 
-void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile, 
+void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
                                           const fpoint &tl, const fpoint &br)
 {
     double x1;
@@ -463,7 +463,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
     blit_non_player_owned_shadow(tp, tile, x1, y1, x2, y2, tl, br);
 }
 
-void Thing::blit_non_player_owned_shadow_section (const Tpp &tp, const Tilep &tile, 
+void Thing::blit_non_player_owned_shadow_section (const Tpp &tp, const Tilep &tile,
                                                   const fpoint &tile_tl, const fpoint &tile_br,
                                                   const fpoint &tl, const fpoint &br)
 {
@@ -484,7 +484,7 @@ void Thing::blit_non_player_owned_shadow_section (const Tpp &tp, const Tilep &ti
     blit_non_player_owned_shadow(tp, tile, x1, y1, x2, y2, tl, br);
 }
 
-void Thing::blit_shadow (const Tpp &tp, const Tilep &tile, 
+void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
                          const fpoint &tl, const fpoint &br)
 {
     if (!game.state.player) {
@@ -499,7 +499,7 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
     }
 }
 
-void Thing::blit_shadow_section (const Tpp &tp, const Tilep &tile, 
+void Thing::blit_shadow_section (const Tpp &tp, const Tilep &tile,
                                  const fpoint &tile_tl, const fpoint &tile_br,
                                  const fpoint &tl, const fpoint &br)
 {
@@ -545,7 +545,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     bool submerged = false;
     bool lava = false;
 
-    if (tp_is_monst(tp) || 
+    if (tp_is_monst(tp) ||
         tp_is_player(tp) ||
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim_only(tp)) {
@@ -668,7 +668,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 
     bool submerged = false;
 
-    if (tp_is_monst(tp) || 
+    if (tp_is_monst(tp) ||
         tp_is_player(tp) ||
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim_only(tp)) {

@@ -32,7 +32,7 @@ void gl_init_2d_mode (void)
     /*
      * Setup our viewport
      */
-    glViewport(0, 0, game.config.drawable_gl_width, 
+    glViewport(0, 0, game.config.drawable_gl_width,
                game.config.drawable_gl_height);
 
     /*
@@ -1270,7 +1270,7 @@ gl_push (float **P,
         DIE("overflow on gl bug %s", __FUNCTION__);
     }
 
-//printf("- (%f,%f %f,%f)", glapi_last_right, left, glapi_last_bottom, 
+//printf("- (%f,%f %f,%f)", glapi_last_right, left, glapi_last_bottom,
 //bottom);
     if (likely(!first)) {
         /*
@@ -1544,7 +1544,7 @@ void glcolor (color s)
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit_outline (const Tpp &tp, const Tilep &tile, 
+void tile_blit_outline (const Tpp &tp, const Tilep &tile,
                         const fpoint &tl, const fpoint &br)
 {
     double x1, x2, y1, y2;
@@ -1563,21 +1563,21 @@ void tile_blit_outline (const Tpp &tp, const Tilep &tile,
     const double dx = game.config.one_pixel_gl_width * 0.75;
     const double dy = game.config.one_pixel_gl_height * 0.75;
 
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x + dx, br.y, br.x + dx, tl.y);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x - dx, br.y, br.x - dx, tl.y);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x, br.y + dy, br.x, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x, br.y - dy, br.x, tl.y - dy);
 
     glcolor(WHITE);
@@ -1587,7 +1587,7 @@ void tile_blit_outline (const Tpp &tp, const Tilep &tile,
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit_outline_section (const Tpp &tp, const Tilep &tile, 
+void tile_blit_outline_section (const Tpp &tp, const Tilep &tile,
                                 const fpoint &tile_tl, const fpoint &tile_br,
                                 const fpoint &tl, const fpoint &br)
 {
@@ -1610,28 +1610,28 @@ void tile_blit_outline_section (const Tpp &tp, const Tilep &tile,
     const double dx = game.config.one_pixel_gl_width * 0.75;
     const double dy = game.config.one_pixel_gl_height * 0.75;
 
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x + dx, br.y, br.x + dx, tl.y);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x - dx, br.y, br.x - dx, tl.y);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x, br.y + dy, br.x, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x, br.y - dy, br.x, tl.y - dy);
 
     glcolor(WHITE);
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
-void tile_blit (const Tpp &tp, const Tilep &tile, 
+void tile_blit (const Tpp &tp, const Tilep &tile,
                 const fpoint &tl, const fpoint &br)
 {
     double x1, x2, y1, y2;
@@ -1652,7 +1652,7 @@ void tile_blit (const Tpp &tp, const Tilep &tile,
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
-void tile_blit_section (const Tpp &tp, const Tilep &tile, 
+void tile_blit_section (const Tpp &tp, const Tilep &tile,
                         const fpoint &tile_tl, const fpoint &tile_br,
                         const fpoint &tl, const fpoint &br)
 {

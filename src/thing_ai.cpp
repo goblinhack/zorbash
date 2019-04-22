@@ -228,7 +228,7 @@ point Thing::choose_best_nh (void)
                 goals.insert(goal);
 
                 //
-                // Also take note of the oldest cell age; we will use this 
+                // Also take note of the oldest cell age; we will use this
                 // later.
                 //
                 int age = age_map->val[p.x][p.y];

@@ -167,9 +167,9 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         //
         // keep the light strength half the tiles drawn or we get artifacts
         // at the edges of the fbo
-        // 
+        //
         col.a = 250;
-        t->light = light_new(t, MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at, 
+        t->light = light_new(t, MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at,
                              LIGHT_QUALITY_HIGH, col);
 
         t->log("player created");
@@ -247,19 +247,19 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         std::string l = tp_str_light_color(tp);
         color c = string2color(l);
         t->light = light_new(t, MAX_LIGHT_RAYS / 4,
-                             (double) tp_is_light_strength(tp), 
+                             (double) tp_is_light_strength(tp),
                              t->at, LIGHT_QUALITY_LOW, c);
     }
 
     if (tp_is_monst(tp)) {
-        t->dmap_scent = (__typeof__(t->dmap_scent)) 
+        t->dmap_scent = (__typeof__(t->dmap_scent))
                           mymalloc(sizeof(*t->dmap_scent), "dmap scent");
     } else {
         t->dmap_scent = nullptr;
     }
 
     if (tp_is_monst(tp)) {
-        t->dmap_goals = (__typeof__(t->dmap_goals)) 
+        t->dmap_goals = (__typeof__(t->dmap_goals))
                           mymalloc(sizeof(*t->dmap_goals), "dmap goals");
     } else {
         t->dmap_goals = nullptr;
@@ -431,7 +431,7 @@ void Thing::set_owner (Thingp owner)
         }
 
         if (owner) {
-            log("set-owner change %s->%s", old_owner->to_string().c_str(), 
+            log("set-owner change %s->%s", old_owner->to_string().c_str(),
                 owner->to_string().c_str());
         } else {
             log("set-owner remove owner %s", old_owner->to_string().c_str());

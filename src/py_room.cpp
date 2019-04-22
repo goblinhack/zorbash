@@ -26,28 +26,28 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     int is_depth = 0;
 
     static char *kwlist[] = {
-        (char*) "room_data", 
-        (char*) "xxx", 
-        (char*) "yyy", 
-        (char*) "room_name", 
-        (char*) "up", 
-        (char*) "down", 
-        (char*) "left", 
-        (char*) "right", 
-        (char*) "entrance", 
-        (char*) "exit", 
-        (char*) "lock", 
-        (char*) "key", 
-        (char*) "secret", 
-        (char*) "depth", 
+        (char*) "room_data",
+        (char*) "xxx",
+        (char*) "yyy",
+        (char*) "room_name",
+        (char*) "up",
+        (char*) "down",
+        (char*) "left",
+        (char*) "right",
+        (char*) "entrance",
+        (char*) "exit",
+        (char*) "lock",
+        (char*) "key",
+        (char*) "secret",
+        (char*) "depth",
         0};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, 
-                                     "|Oiisiiiiiiiiii", 
-                                     kwlist, 
+    if (!PyArg_ParseTupleAndKeywords(args, keywds,
+                                     "|Oiisiiiiiiiiii",
+                                     kwlist,
                                      &py_room_data,
-                                     &xxx, 
-                                     &yyy, 
+                                     &xxx,
+                                     &yyy,
                                      &room_name,
                                      &up,
                                      &down,
@@ -78,7 +78,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
         auto r = Room::room_new();
 
         for (auto y=0; y<ROOM_HEIGHT; y++) {
-            auto o = PyList_GetItem(py_room_data, 
+            auto o = PyList_GetItem(py_room_data,
                                     rooms_across * y + n); /* Can't fail */
             if (!o) {
                 continue;

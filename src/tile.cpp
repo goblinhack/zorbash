@@ -118,7 +118,7 @@ void tile_load_arr (std::string tex_name,
 #endif
 
 #ifdef ENABLE_TILE_COLLISION_CHECKING
-            if ((pixel_size.w <= MAX_TILE_WIDTH) && 
+            if ((pixel_size.w <= MAX_TILE_WIDTH) &&
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);
 

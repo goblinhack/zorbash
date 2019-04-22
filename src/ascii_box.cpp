@@ -96,15 +96,15 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
     ascii_set_fg(x1, y2, col_border_text);
 }
 
-static void ascii_put_box_ (int x, 
-                            int y, 
-                            int width, 
-                            int height, 
+static void ascii_put_box_ (int x,
+                            int y,
+                            int width,
+                            int height,
                             color col_border_text,
                             color col_tl,
                             color col_mid,
                             color col_br,
-                            const wchar_t *fmt, 
+                            const wchar_t *fmt,
                             va_list args)
 {_
     wchar_t buf[MAXSTR];
@@ -121,8 +121,8 @@ static void ascii_put_box_ (int x,
     auto b = std::wstring(buf);
     int len = ascii_strlen(b);
 
-    ascii_put_shaded_box(x, y, 
-                         x + width - 1, y + height - 1, 
+    ascii_put_shaded_box(x, y,
+                         x + width - 1, y + height - 1,
                          col_border_text, col_tl, col_mid, col_br,
                          0 /* context */);
 
@@ -140,7 +140,7 @@ void ascii_put_box (box_args b, const wchar_t *fmt, ...)
         b.height = ASCII_MAP_VISIBLE_HEIGHT;
     }
 
-    if ((b.col_tl == COLOR_NONE) && 
+    if ((b.col_tl == COLOR_NONE) &&
         (b.col_mid == COLOR_NONE) &&
         (b.col_br == COLOR_NONE)) {
 
@@ -160,15 +160,15 @@ void ascii_put_box (box_args b, const wchar_t *fmt, ...)
      */
     va_start(args, fmt);
 
-    ascii_put_box_(b.x, 
-                   b.y, 
-                   b.width, 
-                   b.height, 
+    ascii_put_box_(b.x,
+                   b.y,
+                   b.width,
+                   b.height,
                    b.col_border_text,
                    b.col_tl,
                    b.col_mid,
                    b.col_br,
-                   fmt, 
+                   fmt,
                    args);
 
     va_end(args);

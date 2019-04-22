@@ -34,7 +34,7 @@ public:
 static std::vector<class ThingColl> thing_colls;
 static const double thing_collision_tiles = 1;
 
-bool 
+bool
 thing_overlaps_border (Thingp t)
 {_
     auto tile = t->current_tile;
@@ -47,7 +47,7 @@ thing_overlaps_border (Thingp t)
             if (!tile->pix[x][y]) {
                 continue;
             }
-            
+
             int px = t->interpolated_at.x * TILE_WIDTH + x;
             int py = t->interpolated_at.y * TILE_HEIGHT + y;
 
@@ -71,7 +71,7 @@ thing_overlaps_border (Thingp t)
     return (false);
 }
 
-bool 
+bool
 things_tile_overlap (Thingp A, Thingp B)
 {_
     auto A_tile = A->current_tile;
@@ -110,7 +110,7 @@ things_tile_overlap (Thingp A, Thingp B)
             Ay -= B->last_blit_tl.y;
             Ax /= B_dw;
             Ay /= B_dh;
-            
+
             int dx = (int)Ax;
             int dy = (int)Ay;
 
@@ -143,7 +143,7 @@ things_tile_overlap (Thingp A, Thingp B)
             Ay -= B->last_blit_tl.y;
             Ax /= B_dw;
             Ay /= B_dh;
-            
+
             int dx = (int)Ax;
             int dy = (int)Ay;
 
@@ -170,7 +170,7 @@ things_tile_overlap (Thingp A, Thingp B)
     return (false);
 }
 
-int circle_box_collision (Thingp C, 
+int circle_box_collision (Thingp C,
                           fpoint C_at,
                           Thingp B,
                           fpoint B_at,
@@ -308,7 +308,7 @@ collided:
  * If two circles collide, the resultant direction is along the normal between
  * the two center of masses of the circles.
  */
-int circle_circle_collision (Thingp A, 
+int circle_circle_collision (Thingp A,
                              Thingp B,
                              fpoint at,
                              fpoint *intersect)
@@ -359,7 +359,7 @@ int circle_circle_collision (Thingp A,
 /*
  * Add a thing to the list of things that could be hit on this attack.
  */
-static void 
+static void
 thing_add_possible_hit (Thingp target,
                         std::string reason,
                         int hitter_killed_on_hitting,
@@ -373,20 +373,20 @@ thing_add_possible_hit (Thingp target,
                 hitter_killed_on_hit_or_miss));
 }
 
-void 
+void
 thing_possible_hit_add (Thingp target, std::string reason)
 {
     thing_add_possible_hit(target, reason, false, false);
 }
 
-void 
+void
 thing_possible_hit_add_hitter_killed_on_hitting (Thingp target,
                                                  std::string reason)
 {
     thing_add_possible_hit(target, reason, true, false);
 }
 
-void 
+void
 thing_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
                                                      std::string reason)
 {
@@ -438,13 +438,13 @@ void Thing::possible_hits_find_best (void)
             /*
              * If this target is closer, prefer it.
              */
-            double dist_best = DISTANCE(me->interpolated_at.x, 
+            double dist_best = DISTANCE(me->interpolated_at.x,
                                         me->interpolated_at.y,
-                                        best->target->interpolated_at.x, 
+                                        best->target->interpolated_at.x,
                                         best->target->interpolated_at.y);
-            double dist_cand = DISTANCE(me->interpolated_at.x, 
+            double dist_cand = DISTANCE(me->interpolated_at.x,
                                         me->interpolated_at.y,
-                                        cand.target->interpolated_at.x, 
+                                        cand.target->interpolated_at.x,
                                         cand.target->interpolated_at.y);
 
             if (dist_cand < dist_best) {
@@ -486,7 +486,7 @@ bool things_overlap (const Thingp A, const Thingp B)
     fpoint intersect = {0,0};
     fpoint normal_A = {0,0};
 
-    if (tp_collision_circle(A->tp) && 
+    if (tp_collision_circle(A->tp) &&
         !tp_collision_circle(B->tp)) {
         if (circle_box_collision(A, /* circle */
                                  A_at,
@@ -500,7 +500,7 @@ bool things_overlap (const Thingp A, const Thingp B)
         return (false);
     }
 
-    if (!tp_collision_circle(A->tp) && 
+    if (!tp_collision_circle(A->tp) &&
          tp_collision_circle(B->tp)) {
         if (circle_box_collision(B, /* circle */
                                  B_at,

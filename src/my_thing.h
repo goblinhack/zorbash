@@ -45,7 +45,7 @@ public:
     Goal (Thingp target) : thing(target) { }
     Goal (point target) : at(target) { }
 
-    friend bool operator<(const class Goal & lhs, const class Goal & rhs) { 
+    friend bool operator<(const class Goal & lhs, const class Goal & rhs) {
         return lhs.score < rhs.score;
     }
 };
@@ -239,7 +239,7 @@ public:
     unsigned int       is_attached:1;        /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_lit:1;             /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_waiting_for_ai:1;  /* until -std=c++2a remember to update thing.cpp */
-    
+
     std::string to_string(void);
     uint8_t is_dir_bl(void);
     uint8_t is_dir_br(void);
@@ -291,27 +291,27 @@ public:
     void attach(void);
     void detach(void);
     void blit_wall_cladding(fpoint &tl, fpoint &br);
-    void blit_shadow(const Tpp &tp, const Tilep &tile, 
+    void blit_shadow(const Tpp &tp, const Tilep &tile,
                      const fpoint &tl, const fpoint &br);
-    void blit_shadow_section(const Tpp &tp, const Tilep &tile, 
+    void blit_shadow_section(const Tpp &tp, const Tilep &tile,
                              const fpoint &tile_tl, const fpoint &tile_br,
                              const fpoint &tl, const fpoint &br);
-    void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, 
+    void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile,
                                   const fpoint &tl, const fpoint &br);
-    void blit_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, 
+    void blit_player_owned_shadow_section(const Tpp &tp, const Tilep &tile,
                                           double x1, double y1,
                                           double x2, double y2,
                                           const fpoint &tl, const fpoint &br);
-    void blit_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, 
+    void blit_player_owned_shadow_section(const Tpp &tp, const Tilep &tile,
                                           const fpoint &tile_tl, const fpoint &tile_br,
                                           const fpoint &tl, const fpoint &br);
-    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, 
+    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile,
                                       double x1, double y1,
                                       double x2, double y2,
                                       const fpoint &tl, const fpoint &br);
-    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, 
+    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile,
                                       const fpoint &tl, const fpoint &br);
-    void blit_non_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, 
+    void blit_non_player_owned_shadow_section(const Tpp &tp, const Tilep &tile,
                                               const fpoint &tile_tl, const fpoint &tile_br,
                                               const fpoint &tl, const fpoint &br);
     void blit(double offset_x, double offset_y, int x, int y);
@@ -320,7 +320,7 @@ public:
     /*
      * thing_hit.cpp
      */
-    int hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, 
+    int hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter,
                    int damage);
     int hit_if_possible(Thingp hitter, int damage);
     int hit_if_possible(Thingp hitter);
@@ -432,7 +432,7 @@ public:
 
 struct thing_display_sort_cmp : public std::binary_function<class ThingDisplaySortKey, class ThingDisplaySortKey, bool>
 {
-    bool operator()(const ThingDisplaySortKey& lhs, 
+    bool operator()(const ThingDisplaySortKey& lhs,
                     const ThingDisplaySortKey& rhs) const
     {
         if (lhs.y < rhs.y) {

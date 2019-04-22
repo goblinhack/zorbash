@@ -83,7 +83,7 @@ static inline void sdl_list_video_size (void)
 
         SDL_GetDisplayMode(0, i, &mode);
 
-        LOG("- SDL video   : %dx%d available, ratio %f", 
+        LOG("- SDL video   : %dx%d available, ratio %f",
             mode.w, mode.h,
             (float)mode.w / (float)mode.h);
     }
@@ -238,22 +238,22 @@ uint8_t sdl_init (void)
     TILES_DOWN = game.config.video_pix_height / TILE_HEIGHT;
     TILES_ACROSS /= 4;
     TILES_DOWN /= 4;
-    
-    game.config.tile_gl_width = 
+
+    game.config.tile_gl_width =
                     game.config.video_gl_width  / (double)TILES_ACROSS;
-    game.config.tile_gl_height = 
+    game.config.tile_gl_height =
                     game.config.video_gl_height / (double)TILES_DOWN;
-    game.config.ascii_gl_width = 
+    game.config.ascii_gl_width =
                     game.config.video_gl_width  / (double)ASCII_WIDTH;
-    game.config.ascii_gl_height = 
+    game.config.ascii_gl_height =
                     game.config.video_gl_height / (double)ASCII_HEIGHT;
-    game.config.video_w_h_ratio = 
+    game.config.video_w_h_ratio =
         (double)game.config.video_pix_width /
         (double)game.config.video_pix_height;
 
-    game.config.one_pixel_gl_width = 
+    game.config.one_pixel_gl_width =
                     game.config.tile_gl_width / (double)TILE_WIDTH;
-    game.config.one_pixel_gl_height = 
+    game.config.one_pixel_gl_height =
                     game.config.tile_gl_height / (double)TILE_HEIGHT;
 
     LOG("- video     gl width  %f", game.config.video_gl_width);
@@ -304,7 +304,7 @@ uint8_t sdl_init (void)
     window = SDL_CreateWindow("zorbash",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
-                              video_width, 
+                              video_width,
                               video_height,
                               video_flags);
     if (!window) {
@@ -330,7 +330,7 @@ uint8_t sdl_init (void)
                           &game.config.drawable_gl_height);
     }
 
-    LOG("Palling SDL_GL_CreateContext (drawable size %dx%d)...", 
+    LOG("Palling SDL_GL_CreateContext (drawable size %dx%d)...",
         game.config.drawable_gl_width,
         game.config.drawable_gl_height);
 
@@ -342,7 +342,7 @@ uint8_t sdl_init (void)
         DIE("SDL_GL_CreateContext failed %s", SDL_GetError());
     }
 
-    LOG("Calling SDL_GL_CreateContext (drawable size %dx%d) done", 
+    LOG("Calling SDL_GL_CreateContext (drawable size %dx%d) done",
         game.config.drawable_gl_width,
         game.config.drawable_gl_height);
 
@@ -956,7 +956,7 @@ void sdl_loop (void)
 
     /*
      * Don't use this. It seemed to mess up graphics on FireGL.
-     
+
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
      */
 

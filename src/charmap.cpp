@@ -70,7 +70,7 @@ void Charmap::init_charmaps (void)
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_door              = true;
-    
+
     char_index              = Charmap::SECRET_DOOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
@@ -125,12 +125,12 @@ void Charmap::init_charmaps (void)
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_monst             = true;
-    
+
     char_index              = Charmap::TRAP;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_trap              = true;
-    
+
     char_index              = Charmap::DEBUG;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

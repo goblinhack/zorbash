@@ -51,7 +51,7 @@ public:
     {
         return (dir_down || dir_up || dir_left || dir_right);
     }
-    
+
     void set_has_door_up (bool v)
     {
         has_door_up = v;

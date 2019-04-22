@@ -20,7 +20,7 @@ uint8_t command_init(void);
 void command_add(command_fn_t callback,
                  std::string input,
                  std::string readable_input);
-uint8_t command_handle(const char *input, 
+uint8_t command_handle(const char *input,
                        char *expandedtext,
                        uint8_t show_ambiguous,
                        uint8_t show_complete,

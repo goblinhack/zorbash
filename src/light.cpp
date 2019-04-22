@@ -21,9 +21,9 @@ static const int LIGHT_VISIBLE_DIST = TILES_ACROSS + TILES_ACROSS / 2;
 #define LIGHT_DIFFUSE 1
 
 Thingp debug_thing;
-    
-Lightp light_new (Thingp owner, 
-                  uint16_t max_light_rays, 
+
+Lightp light_new (Thingp owner,
+                  uint16_t max_light_rays,
                   double strength,
                   fpoint at,
                   LightQuality quality,
@@ -70,8 +70,8 @@ Lightp light_new (Thingp owner,
     return (l);
 }
 
-Lightp light_new (uint16_t max_light_rays, 
-                  double strength, 
+Lightp light_new (uint16_t max_light_rays,
+                  double strength,
                   fpoint at,
                   LightQuality quality,
                   color col)
@@ -79,7 +79,7 @@ Lightp light_new (uint16_t max_light_rays,
     return (light_new(nullptr, max_light_rays, strength, at, quality, col));
 }
 
-Lightp light_new (double strength, 
+Lightp light_new (double strength,
                   fpoint at,
                   LightQuality quality,
                   color col)
@@ -244,8 +244,8 @@ void Light::calculate (void)
     }
 
     /*
-     * Now for light penetrating into rock. We stop a bit short due to * the 
-     * fuzzing of the light we do when rendering, to avoid light leaking into 
+     * Now for light penetrating into rock. We stop a bit short due to * the
+     * fuzzing of the light we do when rendering, to avoid light leaking into
      * tiles we should not see.
      *
      * Cannot merge these two loops as we depend on is_nearest_wall being set
@@ -316,7 +316,7 @@ void Light::render_triangle_fans (void)
 
     auto tx = at.x;
     auto ty = at.y;
-    fpoint light_pos(tx * game.config.tile_gl_width, 
+    fpoint light_pos(tx * game.config.tile_gl_width,
                      ty * game.config.tile_gl_height);
 
     auto ox = game.state.map_at.x * game.config.tile_gl_width;
@@ -409,7 +409,7 @@ void Light::render_triangle_fans (void)
         double p1y = light_pos.y - lh;
         double p2x = light_pos.x + lw;
         double p2y = light_pos.y + lh;
- 
+
         blit_init();
         glcolor(WHITE);
         glBlendFunc(GL_ZERO, GL_SRC_ALPHA); // hard black light
@@ -427,7 +427,7 @@ void Light::render_debug_lines (int minx, int miny, int maxx, int maxy)
 
     auto tx = at.x;
     auto ty = at.y;
-    fpoint light_pos(tx * game.config.tile_gl_width, 
+    fpoint light_pos(tx * game.config.tile_gl_width,
                      ty * game.config.tile_gl_height);
 
     auto ox = game.state.map_at.x * game.config.tile_gl_width;
@@ -497,7 +497,7 @@ void Light::render_point_light (void)
 {
     auto tx = at.x;
     auto ty = at.y;
-    fpoint light_pos(tx * game.config.tile_gl_width, 
+    fpoint light_pos(tx * game.config.tile_gl_width,
                      ty * game.config.tile_gl_height);
 
     auto ox = game.state.map_at.x * game.config.tile_gl_width;
@@ -521,7 +521,7 @@ void Light::render (int fbo, int pass)
     }
 
     if (!flicker) {
-        flicker_radius = strength * 
+        flicker_radius = strength *
                         (1.0 + ((double)(random_range(0, 100) / 1000.0)));
     }
     flicker++;

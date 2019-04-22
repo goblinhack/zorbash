@@ -18,14 +18,14 @@ std::wstring string_to_wstring (const std::string& s)
 {
     std::wstring temp(s.length(), L' ');
     std::copy(s.begin(), s.end(), temp.begin());
-    return temp; 
+    return temp;
 }
 
 std::string wstring_to_string (const std::wstring& s)
 {
     std::string temp(s.length(), ' ');
     std::copy(s.begin(), s.end(), temp.begin());
-    return temp; 
+    return temp;
 }
 
 // #define HEX_DUMP_WIDTH (MAXSTR / 2)
@@ -1313,7 +1313,7 @@ std::string string_sprintf (const char *format, ...)
     return (ret);
 }
 
-std::vector<std::string> split_tokens(const std::string &s, 
+std::vector<std::string> split_tokens(const std::string &s,
                                       const char delimiter)
 {
    std::string token;

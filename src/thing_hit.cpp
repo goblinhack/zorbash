@@ -7,9 +7,9 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
-int Thing::hit_actual (Thingp orig_hitter, 
-                       Thingp real_hitter, 
-                       Thingp hitter, 
+int Thing::hit_actual (Thingp orig_hitter,
+                       Thingp real_hitter,
+                       Thingp hitter,
                        int damage)
 {
     //
@@ -50,7 +50,7 @@ int Thing::hit_actual (Thingp orig_hitter,
         //
         // Record who dun it.
         //
-        log("is hit terminally, health %d, damage %d, now dead", 
+        log("is hit terminally, health %d, damage %d, now dead",
             health, damage);
         dead(orig_hitter, "%s", real_hitter->to_string().c_str());
     } else {

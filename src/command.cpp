@@ -10,69 +10,69 @@
 /*
  * Simple console expanding code, takes a comand input and expands it as
  * much as possible to installed commands.
- *  
+ *
  * Ambigious command : []
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       :
- * 
+ *
  * Ambigious command : [s]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set
- * 
+ *
  * Ambigious command : [se]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set
- * 
+ *
  * Ambigious command : [set]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set
- * 
+ *
  * Ambigious command : [set d]
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set debug
- * 
+ *
  * Ambigious command : [set g]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *   Expand to       : set god-mode
- * 
+ *
  * Ambigious command : [s g ]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *   Expand to       : set god-mode
- * 
+ *
  * Ambigious command : [s g o]
  *  Possible match   : set god-mode off
  *  Possible match   : set god-mode on
  *   Expand to       : set god-mode o
- * 
+ *
  * Single match      : [s g of]
  *  Completes to     : set god-mode off
- * 
+ *
  * Ambigious command : [s d]
  *  Possible match   : set debug off
  *  Possible match   : set debug on
  *   Expand to       : set debug
- * 
+ *
  * Single match      : [s d on]
  *  Completes to     : set debug on
- * 
+ *
  * Single match      : [s d of]
  *  Completes to     : set debug off
- * 
+ *
  * Single match      : [set debug on]
  *  Completes to     : set debug on
  */
@@ -426,11 +426,11 @@ uint8_t command_handle (std::string input,
 
     buf[0]= '\0';
 
-    uint8_t r = command_handle(input.c_str(), 
-                               &buf[0], 
-                               show_ambiguous, 
-                               show_complete, 
-                               execute_command, 
+    uint8_t r = command_handle(input.c_str(),
+                               &buf[0],
+                               show_ambiguous,
+                               show_complete,
+                               execute_command,
                                context);
 
     if (expanded_text) {
@@ -451,11 +451,11 @@ uint8_t command_handle (std::wstring input,
 
     buf[0] = '\0';
 
-    uint8_t r = command_handle(wstring_to_string(input).c_str(), 
-                               buf, 
-                               show_ambiguous, 
-                               show_complete, 
-                               execute_command, 
+    uint8_t r = command_handle(wstring_to_string(input).c_str(),
+                               buf,
+                               show_ambiguous,
+                               show_complete,
+                               execute_command,
                                context);
 
     if (expanded_text && buf[0]) {

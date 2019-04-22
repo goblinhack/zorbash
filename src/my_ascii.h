@@ -80,14 +80,14 @@ int ascii_tp_tile_tl(int x, int y, fpoint *);
 int ascii_tp_tile_br(int x, int y, fpoint *);
 int ascii_tp_tile_mid(int x, int y, fpoint *);
 
-void ascii_put_bg_square(int tlx, int tly, int brx, int bry, 
+void ascii_put_bg_square(int tlx, int tly, int brx, int bry,
                          const char *tilename, color c);
-void ascii_put_bg_square(int tlx, int tly, int brx, int bry, 
+void ascii_put_bg_square(int tlx, int tly, int brx, int bry,
                          wchar_t what, color c);
-void ascii_put_bg_square(int tlx, int tly, int brx, int bry, 
+void ascii_put_bg_square(int tlx, int tly, int brx, int bry,
                          Tilep what, color c);
 
-void ascii_put_shaded_line(int x1, int x2, int y, const char *tilename, 
+void ascii_put_shaded_line(int x1, int x2, int y, const char *tilename,
                            color c1, color c2, color c3,
                            void *context);
 void ascii_put_shaded_line(int x1, int x2, int y, wchar_t what,
@@ -97,14 +97,14 @@ void ascii_put_shaded_line(int x1, int x2, int y, Tilep what,
                            color c1, color c2, color c3,
                            void *context);
 
-void ascii_put_solid_line(int x1, int x2, int y, const char *tilename, 
+void ascii_put_solid_line(int x1, int x2, int y, const char *tilename,
                           color col, void *context);
 void ascii_put_solid_line(int x1, int x2, int y, wchar_t what,
                           color col, void *context);
 void ascii_put_solid_line(int x1, int x2, int y, Tilep what,
                           color col, void *context);
 
-void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename, 
+void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename,
                      color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep what, color c);
@@ -112,7 +112,7 @@ void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep what, color c);
 void ascii_put_shaded_box(int x1, int y1, int x2, int y2,
                           color col_border_text, color col_tl, color col_mid, color col_br,
                           void *context);
-void ascii_put_shaded_box(int x1, int x2, int y1, int y2, const char *tilename, 
+void ascii_put_shaded_box(int x1, int x2, int y1, int y2, const char *tilename,
                           color c1, color c2, color c3, int alpha,
                           void *context);
 void ascii_put_shaded_box(int x1, int x2, int y1, int y2, wchar_t what,
@@ -129,9 +129,9 @@ void ascii_clear_scissors(void);
 void ascii_set_scissors(point tl, point br);
 
 typedef struct {
-    int x; 
-    int y; 
-    int width; 
+    int x;
+    int y;
+    int width;
     int over;
 
     int sdl_mod;
@@ -153,10 +153,10 @@ typedef struct {
 void ascii_put_button(button_args b, const wchar_t *fmt, ...);
 
 typedef struct {
-    int x; 
-    int y; 
-    int width; 
-    int height; 
+    int x;
+    int y;
+    int width;
+    int height;
     int over;
 
     int sdl_mod;

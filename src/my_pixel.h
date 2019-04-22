@@ -10,7 +10,7 @@
 
 /*
  * Quick row-color bit-shift lookups for certain common color screen size widths:
- 
+
  * <<1  2
  * <<2  4
  * <<3  8

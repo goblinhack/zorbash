@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2004-2005 Sergey Lyubka <valenok@gmail.com>
  * All rights reserved
- 
+
  * "THE BEER-WARE README" (Revision 42):
  * Sergey Lyubka wrote this file.  As long as you retain this notice you
  * can do whatever you want with this stuff. If we meet some day, and you think
@@ -11,21 +11,21 @@
 /*
  * This is a regular expression library that implements a subset of Perl RE.
  * Please refer to http://slre.sourceforge.net for detailed description.
- 
+
  * Usage example (parsing HTTP request):
- 
+
  * struct slre	slre;
  * struct cap	captures[4 + 1];  // Number of braket pairs + 1
  * ...
- 
+
  * slre_compile(&slre,"^(GET|POST) (\S+) HTTP/(\S+?)\r\n");
- 
+
  * if (slre_match(&slre, buf, len, captures)) {
  *	printf("Request line length: %d\n", captures[0].len);
  *	printf("Method: %.*s\n", captures[1].len, captures[1].ptr);
  *	printf("URI: %.*s\n", captures[2].len, captures[2].ptr);
  * }
- 
+
  * Supported syntax:
  *	^		Match beginning of a buffer
  *	$		Match end of a buffer

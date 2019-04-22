@@ -1078,8 +1078,8 @@ int py_call_ii (const char *name, int val1)
     return (ret);
 }
 
-void py_call_void_module_with_list_of_points (const char *module, 
-                                              const char *name, 
+void py_call_void_module_with_list_of_points (const char *module,
+                                              const char *name,
                                               std::vector<point> points)
 {_
     if (!zx_mod) {

@@ -36,8 +36,8 @@ void Thing::collision_check (void)
 
     if (need_collision_test) {
         handle_collisions();
-        timestamp_collision = 
-          time_get_time_ms() + 
+        timestamp_collision =
+          time_get_time_ms() +
           random_range(0, THING_COLLISION_TEST_DELAY_TENTHS);
     }
 }

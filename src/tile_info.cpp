@@ -170,7 +170,7 @@ Tileinfop tile_info_random (Tileinfomap tiles)
 
     auto iter = tiles.begin();
     while (m--) {
-        auto t = iter->second; 
+        auto t = iter->second;
         iter++;
     }
 

@@ -112,17 +112,17 @@ public:
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 };
 
-extern Lightp light_new(uint16_t max_light_arrays, 
-                        double strength, 
+extern Lightp light_new(uint16_t max_light_arrays,
+                        double strength,
                         fpoint at,
                         LightQuality quality,
                         color col);
-extern Lightp light_new(double strength, 
+extern Lightp light_new(double strength,
                         fpoint at,
                         LightQuality quality,
                         color col);
-extern Lightp light_new(Thingp owner, 
-                        uint16_t max_light_arrays, 
+extern Lightp light_new(Thingp owner,
+                        uint16_t max_light_arrays,
                         double strength,
                         fpoint at,
                         LightQuality quality,

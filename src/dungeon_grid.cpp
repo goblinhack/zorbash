@@ -25,31 +25,31 @@ static bool debug_enabled = false;
 
 /*
  * Start with a grid of nodes and a start point.
- * 
+ *
  *    x x x x x
- * 
+ *
  *    x x S x x
- * 
+ *
  *    x x x x x
- * 
+ *
  *    x x x x x
- * 
+ *
  *    x x x x x
- * 
+ *
  * Recursize snake walk from a random start. Stop once you have a loop.
- * 
+ *
  *    1-1-1-1 x
  *          |
  *    x 1-1-1 x
  *      |   |
  *    x 1-1-1-1
- * 
+ *
  *    x x x x x
- * 
+ *
  *    x x x x x
- * 
+ *
  * The above is depth 1 of our loop. Choose an adjacent node for depth 2
- * 
+ *
  *    1-1-1-1 x
  *          |
  *    x 1-1-1 x
@@ -59,11 +59,11 @@ static bool debug_enabled = false;
  *    x D-2-D x
  *      |   |
  *    x 2-2-2 x
- * 
+ *
  * Again stop when a loop. Choose random 1 - 2 connections and make those doors.
- * 
+ *
  * Repeat for depth 3
- * 
+ *
  *    1-1-1-1 x
  *          |
  *    x 1-1-1 x
@@ -73,9 +73,9 @@ static bool debug_enabled = false;
  *    x D-2-D.D
  *      |   | |
  *    x 2-2-2 3
- *    
- * Remove disconnected nodes. 
- * 
+ *
+ * Remove disconnected nodes.
+ *
  *    - 1-1-1 -
  *          |
  *    - 1-1-1 -
@@ -85,9 +85,9 @@ static bool debug_enabled = false;
  *    - D-2-D.D
  *      |   | |
  *    - 2-2-2 3
- *    
+ *
  * Do a djkstra flood from a random end point in 3
- * 
+ *
  *    - 1-2-3 -
  *          |
  *    - 2-4-4 -
@@ -97,25 +97,25 @@ static bool debug_enabled = false;
  *    - 4-5-7=8
  *      |   | |
  *    - 4-5-6 9
- *    
+ *
  * Choose the furthest point as the start.
- * 
- *      S-1-1  
+ *
+ *      S-1-1
  *          |
- *      1-1-1  
+ *      1-1-1
  *      |   |
  *      1-1-1-1
  *      .   .
  *      2-2-2=3
  *      |   | |
  *      2-2-2 E
- * 
+ *
  * Place a key room one per depth. A key need not be a real key, but
  * something that unlocks an node between 1 and 2
- * 
- *      S-1-1  
+ *
+ *      S-1-1
  *          |
- *      1-1-*  
+ *      1-1-*
  *      |   |
  *      1-1-1-1
  *      .   .
@@ -255,7 +255,7 @@ redo:
         debug("redo, failed to place exit");
         goto redo;
     }
-    
+
     //
     // First time we consider secret exits
     //
@@ -838,7 +838,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                 auto o = getn(x, y);
                 auto n = getn(x + dx, y + dy);
 
-                if (node_is_free(o) && node_is_a_room(n) && 
+                if (node_is_free(o) && node_is_a_room(n) &&
                     (n->pass == pass) && (n->depth == depth - 1)) {
                     s.push_back(point(x, y));
 
@@ -881,7 +881,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
                 auto o = getn(x, y);
                 auto n = getn(x + dx, y + dy);
 
-                if (node_is_free(o) && node_is_a_room(n) && 
+                if (node_is_free(o) && node_is_a_room(n) &&
                     (n->pass == pass) && (n->depth == depth - 1)) {
                     s.push_back(point(x, y));
 
@@ -965,7 +965,7 @@ int Nodes::snake_walk (int depth, int max_placed, int pass)
             if (x < grid_width - 1) {
                 auto f = getn(x + 1, y);
                 if (node_is_free(f)) {
-                    s.push_back(point(x + 1, y    )); 
+                    s.push_back(point(x + 1, y    ));
                     n->set_has_door_right(true);
                 }
             }
@@ -1649,7 +1649,7 @@ bool Nodes::create_path_to_exit (int pass)
     //
     point start;
     point end;
-    
+
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
@@ -1664,18 +1664,18 @@ bool Nodes::create_path_to_exit (int pass)
             }
         }
     }
-    
+
     Dmap d;
 
     memset(&d, 0, sizeof(d));
 
     int minx, miny, maxx, maxy;
-    
+
     minx = 0;
     miny = 0;
     maxx = grid_width * 2 + 1;
     maxy = grid_height * 2 + 1;
-    
+
     //
     // Set up obstacles for the exit search
     //
@@ -1737,7 +1737,7 @@ bool Nodes::create_path_to_exit (int pass)
         }
 
     }
-        
+
     d.val[end.x*2+1][end.y*2+1] = DMAP_IS_GOAL;
     d.val[start.x*2+1][start.y*2+1] = DMAP_IS_PASSABLE;
 
@@ -1745,7 +1745,7 @@ bool Nodes::create_path_to_exit (int pass)
     point dmap_end(maxx, maxy);
     dmap_process(&d, dmap_start, dmap_end);
     //dmap_print_walls(&d);
-    
+
     //
     // Ensure the exit is not too close
     //
@@ -1762,7 +1762,7 @@ bool Nodes::create_path_to_exit (int pass)
             auto n = getn(x, y);
             auto X = x*2 + 1;
             auto Y = y*2 + 1;
-            
+
             if (n && node_is_a_room(n)) {
                 if (d.val[X+1][Y] < d.val[X][Y]) {
                     auto o = getn(x+1, y);
@@ -1818,7 +1818,7 @@ void Nodes::create_path_lock_to_key (int depth)
     //
     point start;
     point end;
-    
+
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
@@ -1838,18 +1838,18 @@ void Nodes::create_path_lock_to_key (int depth)
             }
         }
     }
-    
+
     Dmap d;
 
     memset(&d, 0, sizeof(d));
 
     int minx, miny, maxx, maxy;
-    
+
     minx = 0;
     miny = 0;
     maxx = grid_width * 2 + 1;
     maxy = grid_height * 2 + 1;
-    
+
     //
     // Set up obstacles for the exit search
     //
@@ -1864,7 +1864,7 @@ void Nodes::create_path_lock_to_key (int depth)
             auto n = getn(x, y);
             auto X = (x * 2) + 1;
             auto Y = (y * 2) + 1;
-            if (n && (n->pass == 1) && 
+            if (n && (n->pass == 1) &&
                 (n->depth == depth) && node_is_a_room(n)) {
                 if (n->has_door_up) {
                     d.val[X][Y-1] = DMAP_IS_PASSABLE;
@@ -1884,7 +1884,7 @@ void Nodes::create_path_lock_to_key (int depth)
             }
         }
     }
-        
+
     d.val[end.x*2+1][end.y*2+1] = DMAP_IS_GOAL;
     d.val[start.x*2+1][start.y*2+1] = DMAP_IS_PASSABLE;
 
@@ -1898,7 +1898,7 @@ void Nodes::create_path_lock_to_key (int depth)
             auto n = getn(x, y);
             auto X = x*2 + 1;
             auto Y = y*2 + 1;
-            
+
             if (d.val[X][Y] == DMAP_IS_WALL) {
                 continue;
             }
@@ -1943,7 +1943,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     //
     point start;
     point end;
-    
+
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {
             auto n = getn(x, y);
@@ -1958,14 +1958,14 @@ void Nodes::make_paths_off_critical_path_reachable (void)
             }
         }
     }
-    
+
     int minx, miny, maxx, maxy;
-    
+
     minx = 0;
     miny = 0;
     maxx = grid_width * 2 + 1;
     maxy = grid_height * 2 + 1;
-    
+
     Dmap d;
     memset(&d, 0, sizeof(d));
 
@@ -2101,7 +2101,7 @@ void Nodes::set_max_depth (void)
                 continue;
             }
             o->is_secret = false;
- 
+
             if (o->depth > max_depth_) {
                 max_depth_ = o->depth;
             }

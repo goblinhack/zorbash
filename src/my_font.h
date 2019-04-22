@@ -81,7 +81,7 @@ public:
             }
             return (unicode_to_tile(L'?'));
         }
-        
+
         auto tile = this->cache[index];
         if (tile) {
             return (tile);

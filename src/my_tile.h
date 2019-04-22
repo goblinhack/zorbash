@@ -38,7 +38,7 @@ public:
     uint32_t index {};
     uint32_t pix_width {};
     uint32_t pix_height {};
-    
+
     double pct_width {};
     double pct_height {};
 
@@ -110,24 +110,24 @@ void tile_blit_colored_fat(Tpp tp,
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
-void tile_blit(const Tpp &tp, const Tilep &tile, 
+void tile_blit(const Tpp &tp, const Tilep &tile,
                    const fpoint &tl, const fpoint &br);
-void tile_blit_section(const Tpp &tp, const Tilep &tile, 
+void tile_blit_section(const Tpp &tp, const Tilep &tile,
                        const fpoint &tile_tl, const fpoint &tile_br,
                        const fpoint &tl, const fpoint &br);
-void tile_blit_outline(const Tpp &tp, const Tilep &tile, 
+void tile_blit_outline(const Tpp &tp, const Tilep &tile,
                        const fpoint &tl, const fpoint &br);
-void tile_blit_outline_section(const Tpp &tp, const Tilep &tile, 
+void tile_blit_outline_section(const Tpp &tp, const Tilep &tile,
                                const fpoint &tile_tl, const fpoint &tile_br,
                                const fpoint &tl, const fpoint &br);
-void tile_blit_shadow(const Tpp &tp, const Tilep &tile, 
+void tile_blit_shadow(const Tpp &tp, const Tilep &tile,
                       const fpoint &tl, const fpoint &br);
-void tile_blit_shadow_section(const Tpp &tp, const Tilep &tile, 
+void tile_blit_shadow_section(const Tpp &tp, const Tilep &tile,
                               const fpoint &tile_tl, const fpoint &tile_br,
                               const fpoint &tl, const fpoint &br);
-void tile_blit_with_offset(const Tpp &tp, Tilep &tile, 
+void tile_blit_with_offset(const Tpp &tp, Tilep &tile,
                            const fpoint &tl, const fpoint &br);
-void tile_get_blit_size(const Tpp &tp, const Tilep tile, char *name, 
+void tile_get_blit_size(const Tpp &tp, const Tilep tile, char *name,
                         fpoint *tl, fpoint *br);
 void tile_blit_at(const Tilep &tile, const fpoint tl, const fpoint br);
 void tile_blit(const Tilep &tile, const point at);

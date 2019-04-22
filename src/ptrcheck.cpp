@@ -119,7 +119,7 @@ void ptrcheck_fini (void)
 
 /*
  * local_zalloc
- * 
+ *
  * Wrapper for calloc.
  */
 static void *local_zalloc (uint32_t size)
@@ -136,7 +136,7 @@ static void *local_zalloc (uint32_t size)
 
 /*
  * local_free
- * 
+ *
  * Wrapper for free.
  */
 static void local_free (void *ptr)
@@ -146,7 +146,7 @@ static void local_free (void *ptr)
 
 /*
  * ptr2hash
- * 
+ *
  * Map a pointer to a hash slot.
  */
 static hash_elem_t ** ptr2hash (hash_t *hash_table, void *ptr)
@@ -163,7 +163,7 @@ static hash_elem_t ** ptr2hash (hash_t *hash_table, void *ptr)
 
 /*
  * hash_init
- * 
+ *
  * Create a hash table for all pointers.
  */
 static hash_t *hash_init (uint32_t hash_size)
@@ -185,7 +185,7 @@ static hash_t *hash_init (uint32_t hash_size)
 
 /*
  * hash_add
- * 
+ *
  * Store a pointer in our hash.
  */
 static void hash_add (hash_t *hash_table, ptrcheck *context)
@@ -221,7 +221,7 @@ static void hash_add (hash_t *hash_table, ptrcheck *context)
 
 /*
  * hash_find
- * 
+ *
  * Find a pointer in our hash.
  */
 static hash_elem_t *hash_find (hash_t *hash_table, void *ptr)
@@ -248,7 +248,7 @@ static hash_elem_t *hash_find (hash_t *hash_table, void *ptr)
 
 /*
  * hash_free
- * 
+ *
  * Free a pointer from our hash.
  */
 static void hash_free (hash_t *hash_table, void *ptr)
@@ -290,7 +290,7 @@ static void hash_free (hash_t *hash_table, void *ptr)
 
 /*
  * ptrcheck_verify_pointer
- * 
+ *
  * Check a pointer for validity.
  */
 static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
@@ -447,7 +447,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
 
 /*
  * ptrcheck_alloc
- * 
+ *
  * Record this pointer.
  */
 void *ptrcheck_alloc (const void *ptr,
@@ -538,7 +538,7 @@ void *ptrcheck_alloc (const void *ptr,
 
 /*
  * ptrcheck_free
- * 
+ *
  * Check a pointer is valid and if so add it to the ring buffer. If not,
  * return false and avert the myfree(), just in case.
  */
@@ -608,7 +608,7 @@ uint8_t ptrcheck_free (void *ptr,
 
 /*
  * ptrcheck_verify
- * 
+ *
  * Check a pointer for validity with no recording of history.
  */
 uint8_t ptrcheck_verify (const void *ptr,
@@ -622,7 +622,7 @@ uint8_t ptrcheck_verify (const void *ptr,
 
 /*
  * ptrcheck_leak_print
- * 
+ *
  * Free a pointer from our hash.
  */
 void ptrcheck_leak_print (void)
@@ -698,7 +698,7 @@ void ptrcheck_leak_print (void)
 
 /*
  * ptrcheck_leak_snapshot
- * 
+ *
  * Set so we only see leaks since now.
  */
 void ptrcheck_leak_snapshot (void)
@@ -728,7 +728,7 @@ void ptrcheck_leak_snapshot (void)
 
 /*
  * ptrcheck_usage_cleanup
- * 
+ *
  * Print top memory allocators
  */
 static void ptrcheck_usage_cleanup (void)

@@ -62,7 +62,7 @@ typedef struct {
 class Map {
 public:
     Lights                     all_lights;
-    std::unordered_map<uint32_t, Lightp> 
+    std::unordered_map<uint32_t, Lightp>
                                lights[MAP_WIDTH][MAP_HEIGHT];
     Things                     all_things;
     Things                     all_active_things;
@@ -92,7 +92,7 @@ public:
      * Cellular automatom for fluid flow.
      */
     fluid_t fluid[FLUID_WIDTH][FLUID_HEIGHT];
-  
+
     bool is_wall_at(const point &p);
     bool is_wall_at(const int x, const int y);
     bool is_solid_at(const point &p);
@@ -229,7 +229,7 @@ class Game {
 public:
     Config             config;
     State              state;
-  
+
     template <class Archive>
     void serialize (Archive & archive)
     {

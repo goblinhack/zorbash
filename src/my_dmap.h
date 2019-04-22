@@ -17,11 +17,11 @@ extern void dmap_process(Dmap *D, point tl, point br);
 extern void dmap_print(Dmap *d, point start);
 extern void dmap_print_walls(Dmap *d);
 extern std::vector<point> dmap_solve(const Dmap *d, const point start);
-extern void dmap_l_shaped_path_to_diag(const Dmap *D, 
+extern void dmap_l_shaped_path_to_diag(const Dmap *D,
                                        std::vector<point> &path);
-extern bool dmap_can_i_move_diagonally(const Dmap *D, 
-                                       const point p, 
-                                       const point n, 
+extern bool dmap_can_i_move_diagonally(const Dmap *D,
+                                       const point p,
+                                       const point n,
                                        const point m);
 extern uint64_t dmap_hash(Dmap *d);
 

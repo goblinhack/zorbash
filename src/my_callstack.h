@@ -21,7 +21,7 @@
 #ifdef ENABLE_TRACING
 #define _ tracer_t CAT2(__my_trace__, __LINE__) (__FILE__, __PRETTY_FUNCTION__, __LINE__);
 #else
-#define _ 
+#define _
 #endif
 
 struct callframe {
@@ -49,8 +49,8 @@ extern class callstack global_callstack;
 #endif
 
 struct tracer_t {
-    tracer_t (const char *const file, 
-              const char *const func, 
+    tracer_t (const char *const file,
+              const char *const func,
               const unsigned int line) :
               file(file), func(func), line(line)
     {
