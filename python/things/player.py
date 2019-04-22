@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, short_name):
+def tp_init(name):
     x = tp.Tp(name)
 
     x.set_collision_circle(True)
@@ -21,7 +21,6 @@ def tp_init(name, short_name):
     x.set_is_movable(True)
     x.set_is_player(True)
     x.set_move_speed_ms(100)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_PLAYER)
 
     delay = 550
@@ -57,6 +56,6 @@ def tp_init(name, short_name):
     x.update()
     
 def init():
-    tp_init(name="player1", short_name="player1")
+    tp_init(name="player1")
 
 init()

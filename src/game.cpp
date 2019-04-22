@@ -31,12 +31,14 @@ void game_fini (void)
 }
 
 static void game_place_walls (class Dungeon *d,
-                              std::string what,
                               int variant,
                               int block_width,
                               int block_height,
                               int tries)
 {_
+    auto tp = tp_random_wall();
+    auto what = tp_name(tp);
+
     while (tries--) {
         auto x = random_range(0, MAP_WIDTH - block_width + 1);
         auto y = random_range(0, MAP_HEIGHT - block_height + 1);
@@ -680,43 +682,24 @@ _
 
         auto tries = 200;
 
-        game_place_walls(dungeon, "wall2", 1, 6, 6, tries);
-        game_place_walls(dungeon, "wall2", 2, 6, 6, tries);
-        game_place_walls(dungeon, "wall2", 1, 6, 3, tries);
-        game_place_walls(dungeon, "wall2", 1, 3, 6, tries);
-        game_place_walls(dungeon, "wall2", 1, 3, 3, tries);
-        game_place_walls(dungeon, "wall2", 2, 3, 3, tries);
-        game_place_walls(dungeon, "wall2", 3, 3, 3, tries);
-        game_place_walls(dungeon, "wall2", 4, 3, 3, tries);
-        game_place_walls(dungeon, "wall2", 1, 2, 2, tries);
-        game_place_walls(dungeon, "wall2", 2, 2, 2, tries);
-        game_place_walls(dungeon, "wall2", 1, 2, 1, tries);
-        game_place_walls(dungeon, "wall2", 2, 2, 1, tries);
-        game_place_walls(dungeon, "wall2", 3, 2, 1, tries);
-        game_place_walls(dungeon, "wall2", 4, 2, 1, tries);
-        game_place_walls(dungeon, "wall2", 1, 1, 2, tries);
-        game_place_walls(dungeon, "wall2", 2, 1, 2, tries);
-        game_place_walls(dungeon, "wall2", 3, 2, 1, tries);
-        game_place_walls(dungeon, "wall2", 4, 2, 1, tries);
-
-        game_place_walls(dungeon, "wall1", 1, 6, 6, tries);
-        game_place_walls(dungeon, "wall1", 2, 6, 6, tries);
-        game_place_walls(dungeon, "wall1", 1, 6, 3, tries);
-        game_place_walls(dungeon, "wall1", 1, 3, 6, tries);
-        game_place_walls(dungeon, "wall1", 1, 3, 3, tries);
-        game_place_walls(dungeon, "wall1", 2, 3, 3, tries);
-        game_place_walls(dungeon, "wall1", 3, 3, 3, tries);
-        game_place_walls(dungeon, "wall1", 4, 3, 3, tries);
-        game_place_walls(dungeon, "wall1", 1, 2, 2, tries);
-        game_place_walls(dungeon, "wall1", 2, 2, 2, tries);
-        game_place_walls(dungeon, "wall1", 1, 2, 1, tries);
-        game_place_walls(dungeon, "wall1", 2, 2, 1, tries);
-        game_place_walls(dungeon, "wall1", 3, 2, 1, tries);
-        game_place_walls(dungeon, "wall1", 4, 2, 1, tries);
-        game_place_walls(dungeon, "wall1", 1, 1, 2, tries);
-        game_place_walls(dungeon, "wall1", 2, 1, 2, tries);
-        game_place_walls(dungeon, "wall1", 3, 2, 1, tries);
-        game_place_walls(dungeon, "wall1", 4, 2, 1, tries);
+        game_place_walls(dungeon, 1, 6, 6, tries);
+        game_place_walls(dungeon, 2, 6, 6, tries);
+        game_place_walls(dungeon, 1, 6, 3, tries);
+        game_place_walls(dungeon, 1, 3, 6, tries);
+        game_place_walls(dungeon, 1, 3, 3, tries);
+        game_place_walls(dungeon, 2, 3, 3, tries);
+        game_place_walls(dungeon, 3, 3, 3, tries);
+        game_place_walls(dungeon, 4, 3, 3, tries);
+        game_place_walls(dungeon, 1, 2, 2, tries);
+        game_place_walls(dungeon, 2, 2, 2, tries);
+        game_place_walls(dungeon, 1, 2, 1, tries);
+        game_place_walls(dungeon, 2, 2, 1, tries);
+        game_place_walls(dungeon, 3, 2, 1, tries);
+        game_place_walls(dungeon, 4, 2, 1, tries);
+        game_place_walls(dungeon, 1, 1, 2, tries);
+        game_place_walls(dungeon, 2, 1, 2, tries);
+        game_place_walls(dungeon, 3, 2, 1, tries);
+        game_place_walls(dungeon, 4, 2, 1, tries);
 
         for (auto d = 1; d < 3; d++) {
             int nloops = 10;

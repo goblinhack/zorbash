@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, short_name):
+def tp_init(name):
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
@@ -10,7 +10,6 @@ def tp_init(name, short_name):
     x.set_is_movable(True)
     x.set_gfx_outlined(True)
     x.set_is_weapon(True)
-    x.set_short_name(short_name)
     x.set_weapon_carry_anim("sword1_carry_anim")
     x.set_weapon_use_anim("sword1_use_anim")
     x.set_weapon_use_delay_hundredths(5)
@@ -23,6 +22,6 @@ def tp_init(name, short_name):
     x.update()
     
 def init():
-    tp_init(name="sword1", short_name="sword1")
+    tp_init(name="sword1")
 
 init()

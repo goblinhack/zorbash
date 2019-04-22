@@ -14,6 +14,7 @@ static Tpmap_create_order tp_monsts;
 static Tpmap_create_order tp_ripples;
 static Tpmap_create_order tp_keys;
 static Tpmap_create_order tp_blood;
+static Tpmap_create_order tp_wall;
 static Tpmap_create_order tp_floors;
 static Tpmap_create_order tp_deco;
 static Tpmap_create_order tp_wall_deco;
@@ -46,7 +47,7 @@ Tpp tp_load (int id, std::string name)
 
     auto t = new Tp();
 
-    t->raw_name = name;
+    t->name = name;
 
     {
         auto result = tp_map.insert(std::make_pair(name, t));
@@ -108,12 +109,12 @@ Tpp tp_find (uint32_t id)
     return (result);
 }
 
-Tpp tp_find_short_name (std::string name)
+Tpp tp_find_name (std::string name)
 {_
     for (auto ti : tp_map) {
         auto Tpp = ti.second;
 
-        if (!strcasecmp(name.c_str(), Tpp->short_name.c_str())) {
+        if (!strcasecmp(name.c_str(), Tpp->name.c_str())) {
             return (Tpp);
         }
     }
@@ -173,6 +174,14 @@ void tp_init_after_loading (void)
             auto result = tp_blood.insert(std::make_pair(id, tp));
             if (result.second == false) {
                 ERR("thing template insert blood [%s] failed", tp_name(tp).c_str());
+            }
+        }
+        if (tp_is_wall(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_wall.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert wall [%s] failed", tp_name(tp).c_str());
             }
         }
         if (tp_is_floor(tp)) {
@@ -247,6 +256,19 @@ Tpp tp_random_blood (void)
     auto m = myrand() % n;
 
     auto iter = tp_blood.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
+}
+
+Tpp tp_random_wall (void)
+{_
+    auto n = tp_wall.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_wall.begin();
     while (m--) {
         iter++;
     }

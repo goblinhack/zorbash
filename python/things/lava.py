@@ -2,15 +2,12 @@ import zx
 import tp
 
 
-def lava_init(name, short_name, 
-              tiles=[],
-              left_tiles=[]):
+def lava_init(name, tiles=[], left_tiles=[]):
     
     x = tp.Tp(name)
 
     x.set_is_lava(True)
     x.set_gfx_animated(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
     
     delay = 1250
@@ -20,7 +17,7 @@ def lava_init(name, short_name,
     x.update()
     
 def init():
-    lava_init(name="lava1", short_name="Lava", 
+    lava_init(name="lava1",
             tiles=[ 
                 "lava1.1", 
                 "lava1.2", 

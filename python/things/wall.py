@@ -2,23 +2,22 @@ import zx
 import tp
 
 
-def tp_init(name, short_name, 
-              tiles=[],
-              left_tiles=[],
-              right_tiles=[],
-              top_tiles=[],
-              bot_tiles=[],
-              tl_tiles=[],
-              tr_tiles=[],
-              bl_tiles=[],
-              br_tiles=[]):
+def tp_init(name, 
+            tiles=[],
+            left_tiles=[],
+            right_tiles=[],
+            top_tiles=[],
+            bot_tiles=[],
+            tl_tiles=[],
+            tr_tiles=[],
+            bl_tiles=[],
+            br_tiles=[]):
     
     x = tp.Tp(name)
 
     x.set_is_movement_blocking(True)
     x.set_gfx_large_shadow_caster(True)
     x.set_is_wall(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     if tiles is not None:
@@ -78,7 +77,7 @@ def tp_init(name, short_name,
     x.update()
     
 def init():
-    tp_init(name="wall1", short_name="A wall", 
+    tp_init(name="wall1",
             tiles=[
                         "wall1.1",
                         "wall1.2",
@@ -200,7 +199,7 @@ def init():
                         "",
                 ])
 
-    tp_init(name="wall2", short_name="A wall", 
+    tp_init(name="wall2",
             tiles=[
                         "wall2.1",
                         "wall2.2",

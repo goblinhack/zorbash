@@ -2,14 +2,11 @@ import zx
 import tp
 
 
-def corridor_init(name, short_name, 
-              tiles=[],
-              left_tiles=[]):
+def corridor_init(name, tiles=[], left_tiles=[]):
     
     x = tp.Tp(name)
     x.set_is_boring(True)
     x.set_is_corridor(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
 
     for t in tiles:
@@ -18,7 +15,7 @@ def corridor_init(name, short_name,
     x.update()
     
 def init():
-    corridor_init(name="corridor1", short_name="The corridor", 
+    corridor_init(name="corridor1",
             tiles=[
                         "corridor1.1",
                         "corridor1.2",

@@ -2,14 +2,13 @@ import zx
 import tp
 
 
-def tp_init(name, short_name):
+def tp_init(name):
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_is_exit(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_EXIT)
     x.set_str_light_color("white")
     x.set_is_light_strength(5)
@@ -27,6 +26,6 @@ def tp_init(name, short_name):
     x.update()
     
 def init():
-    tp_init(name="exit1", short_name="exit1")
+    tp_init(name="exit1")
 
 init()

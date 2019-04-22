@@ -220,7 +220,7 @@ void Thing::unwield (const char *why)
     }
 
     log("unwielding current weapon %s, why: %s", 
-        tp_short_name(weapon).c_str(), why);
+        tp_name(weapon).c_str(), why);
 
     sheath();
 }
@@ -232,7 +232,7 @@ void Thing::sheath (void)
         return;
     }
 
-    log("sheathing %s", tp_short_name(weapon).c_str());
+    log("sheathing %s", tp_name(weapon).c_str());
 
     //
     // If this weapon has its own thing id for animations then destroy that.
@@ -253,17 +253,17 @@ void Thing::sheath (void)
 void Thing::wield (Tpp weapon)
 {
     if (get_weapon() == weapon) {
-        log("already wiedling: %s", tp_short_name(weapon).c_str());
+        log("already wiedling: %s", tp_name(weapon).c_str());
         return;
     }
 
-    log("is wielding: %s", tp_short_name(weapon).c_str());
+    log("is wielding: %s", tp_name(weapon).c_str());
 
     unwield("wield new weapon");
 
     auto carry_as = tp_weapon_carry_anim(weapon);
     if (carry_as == "") {
-        err("could not wield weapon %s", tp_short_name(weapon).c_str());
+        err("could not wield weapon %s", tp_name(weapon).c_str());
         return;
     }
 
@@ -305,7 +305,7 @@ void Thing::use (void)
     auto swung_as = tp_weapon_use_anim(weapon);
     if (swung_as == "") {
         err("could not use %s, has no use anim", 
-            tp_short_name(weapon).c_str());
+            tp_name(weapon).c_str());
         return;
     }
 

@@ -1,7 +1,7 @@
 import zx
 import tp
 
-def key_init(name, short_name):
+def key_init(name):
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
@@ -9,7 +9,6 @@ def key_init(name, short_name):
     x.set_is_movable(True)
     x.set_gfx_outlined(True)
     x.set_is_movement_blocking(True)
-    x.set_short_name(short_name)
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
     x.set_gfx_small_shadow_caster(True)
 
@@ -25,6 +24,6 @@ def key_init(name, short_name):
     x.update()
     
 def init():
-    key_init(name="key1", short_name="key1")
+    key_init(name="key1")
 
 init()
