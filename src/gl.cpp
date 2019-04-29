@@ -15,6 +15,7 @@ float glapi_last_tex_right;
 float glapi_last_tex_bottom;
 float glapi_last_right;
 float glapi_last_bottom;
+float gl_rotate;
 
 void gl_init_2d_mode (void)
 {_
@@ -1255,74 +1256,6 @@ gl_push (float **P,
          float tex_top,
          float tex_right,
          float tex_bottom,
-         float left,
-         float top,
-         float right,
-         float bottom,
-         float r1, float g1, float b1, float a1,
-         float r2, float g2, float b2, float a2,
-         float r3, float g3, float b3, float a3,
-         float r4, float g4, float b4, float a4)
-{
-    float *p = *P;
-
-    if (unlikely(p >= p_end)) {
-        DIE("overflow on gl bug %s", __FUNCTION__);
-    }
-
-//printf("- (%f,%f %f,%f)", glapi_last_right, left, glapi_last_bottom,
-//bottom);
-    if (likely(!first)) {
-        /*
-         * If there is a break in the triangle strip then make a degenerate
-         * triangle.
-         */
-        if ((glapi_last_right != left) || (glapi_last_bottom != bottom)) {
-//printf("B\n");
-            gl_push_texcoord(p, glapi_last_tex_right, glapi_last_tex_bottom);
-            gl_push_vertex(p, glapi_last_right, glapi_last_bottom);
-            gl_push_rgba(p, r4, g4, b4, a4);
-
-            gl_push_texcoord(p, tex_left,  tex_top);
-            gl_push_vertex(p, left,  top);
-            gl_push_rgba(p, r1, g1, b1, a1);
-        }
-    }
-
-    gl_push_texcoord(p, tex_left,  tex_top);
-    gl_push_vertex(p, left,  top);
-    gl_push_rgba(p, r1, g1, b1, a1);
-
-    gl_push_texcoord(p, tex_left,  tex_bottom);
-    gl_push_vertex(p, left,  bottom);
-    gl_push_rgba(p, r2, g2, b2, a2);
-
-    gl_push_texcoord(p, tex_right, tex_top);
-    gl_push_vertex(p, right, top);
-    gl_push_rgba(p, r3, g3, b3, a3);
-
-    gl_push_texcoord(p, tex_right, tex_bottom);
-    gl_push_vertex(p, right, bottom);
-    gl_push_rgba(p, r4, g4, b4, a4);
-
-    glapi_last_tex_right = tex_right;
-    glapi_last_tex_bottom = tex_bottom;
-    glapi_last_right = right;
-    glapi_last_bottom = bottom;
-    *P = p;
-}
-
-/*
- * gl_push
- */
-void
-gl_push (float **P,
-         float *p_end,
-         uint8_t first,
-         float tex_left,
-         float tex_top,
-         float tex_right,
-         float tex_bottom,
          fpoint tl,
          fpoint tr,
          fpoint bl,
@@ -1336,6 +1269,38 @@ gl_push (float **P,
 
     if (unlikely(p >= p_end)) {
         DIE("overflow on gl bug %s", __FUNCTION__);
+    }
+
+    if (gl_rotate) {
+        float mx = (tl.x + br.x) / 2;
+        float my = (tl.y + br.y) / 2;
+        float sz = DISTANCE(tl.x, tl.y, br.x, br.y) / 2;
+        float sinr;
+        float cosr;
+
+        sincosf(gl_rotate - RAD_45, &sinr, &cosr);
+        sinr *= sz;
+        cosr *= sz;
+        tl.x = mx + sinr;
+        tl.y = my + cosr;
+
+        sincosf(gl_rotate + RAD_45, &sinr, &cosr);
+        sinr *= sz;
+        cosr *= sz;
+        tr.x = mx + sinr;
+        tr.y = my + cosr;
+
+        sincosf(gl_rotate + RAD_45 + RAD_90, &sinr, &cosr);
+        sinr *= sz;
+        cosr *= sz;
+        br.x = mx + sinr;
+        br.y = my + cosr;
+
+        sincosf(gl_rotate + RAD_45 + RAD_90 + RAD_90, &sinr, &cosr);
+        sinr *= sz;
+        cosr *= sz;
+        bl.x = mx + sinr;
+        bl.y = my + cosr;
     }
 
     if (likely(!first)) {
@@ -1375,6 +1340,43 @@ gl_push (float **P,
     glapi_last_right = br.x;
     glapi_last_bottom = br.y;
     *P = p;
+}
+
+/*
+ * gl_push
+ */
+void
+gl_push (float **P,
+         float *p_end,
+         uint8_t first,
+         float tex_left,
+         float tex_top,
+         float tex_right,
+         float tex_bottom,
+         float left,
+         float top,
+         float right,
+         float bottom,
+         float r1, float g1, float b1, float a1,
+         float r2, float g2, float b2, float a2,
+         float r3, float g3, float b3, float a3,
+         float r4, float g4, float b4, float a4)
+{
+    fpoint tl(left, top);
+    fpoint tr(right, top);
+    fpoint bl(left, bottom);
+    fpoint br(right, bottom);
+
+    gl_push(P, p_end, first,
+            tex_left,
+            tex_top,
+            tex_right,
+            tex_bottom,
+            tl, tr, bl, br,
+            r1, g1, b1, a1,
+            r2, g2, b2, a2,
+            r3, g3, b3, a3,
+            r4, g4, b4, a4);
 }
 
 void blit (int tex,

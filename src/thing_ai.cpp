@@ -53,7 +53,7 @@ bool Thing::will_prefer (const Thingp itp)
     auto it = itp->tp;
 
     if (tp_is_water_dweller(me)) {
-        if (tp_is_water(it)) {
+        if (tp_is_water(it) || tp_is_deep_water(it)) {
             return (true);
         }
     }
@@ -69,9 +69,6 @@ bool Thing::is_obstacle_for_me (point p)
         return (true);
     }
     if (game.state.map.is_lava_at(p)) {
-        return (true);
-    }
-    if (game.state.map.is_deep_water_at(p)) {
         return (true);
     }
 
@@ -165,13 +162,14 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
     return (false);
 }
 
-point Thing::choose_best_nh (void)
+fpoint Thing::get_next_hop (void)
 {
     auto minx = 0;
     auto miny = 0;
     auto maxx = MAP_WIDTH;
     auto maxy = MAP_HEIGHT;
     point start((int)at.x, (int)at.y);
+    fpoint fstart = at;
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -295,29 +293,49 @@ point Thing::choose_best_nh (void)
     // moving as an option
     //
     dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
-    //dmap_print(dmap_goals, start);
+
+    //
+    // Wall clingers create a dmap that is essentially a border around
+    // the existing walls
+    //
+    const int wall_clinger_scale = 3;
+    if (tp_is_wall_clinger(tp)) {
+        // dmap_print(dmap_goals, start);
+        dmap_scale_and_recenter(dmap_goals, fstart, wall_clinger_scale);
+        start.x = MAP_WIDTH / 2;
+        start.y = MAP_HEIGHT / 2;
+        dmap_convert_to_Wall_clinging(dmap_goals);
+    }
+
+    dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
 
     //
     // Move diagonally if not blocked by walls
     //
     auto hops = dmap_solve(dmap_goals, start);
+    point best;
     if (hops.size() >= 2) {
         if (dmap_can_i_move_diagonally(dmap_goals, start, hops[0], hops[1])) {
-            return (hops[1]);
+            best = hops[1];
         } else {
-            return (hops[0]);
+            best = hops[0];
         }
     } else if (hops.size() >= 1) {
-        return (hops[0]);
+        best = hops[0];
     } else {
-        return (start);
+        best = start;
     }
-}
 
-point Thing::get_next_hop (void)
-{
-    auto nh = choose_best_nh();
+    fpoint fbest;
+    if (tp_is_wall_clinger(tp)) {
+        fbest.x = at.x + ((1.0 / wall_clinger_scale) * (best.x - start.x));
+        fbest.y = at.y + ((1.0 / wall_clinger_scale) * (best.y - start.y));
+CON("%f %f -> %f %f", at.x, at.y, fbest.x, fbest.y);
+    } else {
+        fbest.x = best.x;
+        fbest.y = best.y;
+    }
 
-    return (nh);
+    return (fbest);
 }
