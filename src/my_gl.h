@@ -394,3 +394,4 @@ void blit_fbo_unbind(void);
 
 extern float *gl_array_buf;
 extern float *gl_array_buf_end;
+extern float gl_rotate;

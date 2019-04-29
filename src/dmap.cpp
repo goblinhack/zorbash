@@ -67,6 +67,62 @@ void dmap_print (Dmap *d, point start)
     printf("\n");
 }
 
+void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
+{
+    uint8_t x;
+    uint8_t y;
+    const float offx = start.x - ((MAP_WIDTH / scale) / 2);
+    const float offy = start.y - ((MAP_HEIGHT / scale) / 2);
+    uint8_t new_val[MAP_WIDTH][MAP_HEIGHT];
+    const float fscale = scale;
+
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
+            float X = ((float)x / fscale) + offx;
+            float Y = ((float)y / fscale) + offy;
+
+            if ((X < 0) || (X >= MAP_WIDTH) ||
+                (Y < 0) || (Y >= MAP_HEIGHT)) {
+                new_val[x][y] = DMAP_IS_WALL;
+                continue;
+            }
+            new_val[x][y] = d->val[(int)X][(int)Y];
+        }
+    }
+    memcpy(d->val, new_val, sizeof(d->val));
+}
+
+void dmap_convert_to_Wall_clinging (Dmap *d)
+{
+    uint8_t new_val[MAP_WIDTH][MAP_HEIGHT];
+    uint8_t x;
+    uint8_t y;
+
+    memset(new_val, DMAP_IS_WALL, sizeof(new_val));
+
+    for (y = 1; y < MAP_HEIGHT - 1; y++) {
+        for (x = 1; x < MAP_WIDTH - 1; x++) {
+            if (d->val[x][y] == DMAP_IS_WALL) {
+                continue;
+            }
+
+            if ((d->val[x-1][y-1] != DMAP_IS_WALL) &&
+                (d->val[x  ][y-1] != DMAP_IS_WALL) &&
+                (d->val[x+1][y-1] != DMAP_IS_WALL) &&
+                (d->val[x-1][y  ] != DMAP_IS_WALL) &&
+                (d->val[x+1][y  ] != DMAP_IS_WALL) &&
+                (d->val[x-1][y+1] != DMAP_IS_WALL) &&
+                (d->val[x  ][y+1] != DMAP_IS_WALL) &&
+                (d->val[x+1][y+1] != DMAP_IS_WALL)) {
+                continue;
+            }
+
+            new_val[x][y] = d->val[x][y];
+        }
+    }
+    memcpy(d->val, new_val, sizeof(d->val));
+}
+
 uint64_t dmap_hash (Dmap *d)
 {
     uint64_t hash = 0;

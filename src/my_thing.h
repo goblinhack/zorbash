@@ -396,8 +396,7 @@ public:
     bool will_prefer(const Thingp it);
     bool is_obstacle_for_me(point p);
     bool is_goal_for_me(point p, int priority, double *score);
-    point get_next_hop(void);
-    point choose_best_nh(void);
+    fpoint get_next_hop(void);
 
     int nutrition (void) const
     {

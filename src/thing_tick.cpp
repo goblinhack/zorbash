@@ -13,8 +13,7 @@ void Thing::achieve_goals_in_life (void)
     // If this thing has goals, it can try and reach them.
     //
     if (dmap_goals) {
-        auto nh = get_next_hop();
-        fpoint to(nh.x, nh.y);
+        auto to = get_next_hop();
         if (at != to) {
             move(to);
         }

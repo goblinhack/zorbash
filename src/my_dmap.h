@@ -23,6 +23,10 @@ extern bool dmap_can_i_move_diagonally(const Dmap *D,
                                        const point p,
                                        const point n,
                                        const point m);
+extern void dmap_scale_and_recenter(Dmap *D,
+                                    const fpoint p,
+                                    const int scale);
+extern void dmap_convert_to_Wall_clinging(Dmap *D);
 extern uint64_t dmap_hash(Dmap *d);
 
 #define DMAP_IS_WALL     255

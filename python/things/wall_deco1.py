@@ -9,7 +9,6 @@ def tp_init(name,
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
-    x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_is_boring(True)
     x.set_is_movement_blocking(True)
     x.set_gfx_outlined(True)

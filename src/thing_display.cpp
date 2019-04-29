@@ -583,6 +583,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     }
 #endif
 
+    if (tp_is_monst(tp) ||
+        tp_is_player(tp)) {
+        gl_rotate = -RAD_90;
+    }
+
     if (unlikely(tp_gfx_small_shadow_caster(tp))) {
         if (submerged) {
             blit_shadow_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
@@ -626,6 +631,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             blit_wall_cladding(blit_tl, blit_br);
         }
     }
+    gl_rotate = 0;
 
     last_blit_tl = blit_tl;
     last_blit_br = blit_br;
