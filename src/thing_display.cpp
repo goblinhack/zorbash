@@ -535,8 +535,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     last_blit_br = fpoint(br.x - offset_x, br.y - offset_y);
     auto blit_tl = last_blit_tl;
     auto blit_br = last_blit_br;
-    fpoint orig_blit_tl = blit_tl;
-    fpoint orig_blit_br = blit_br;
     double h = blit_br.y - blit_tl.y;
 
     fpoint tile_tl(0, 0);

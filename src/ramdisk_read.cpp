@@ -3,6 +3,8 @@
  * See the README file for license info.
  */
 
+#include <string.h>
+
 #include "my_main.h"
 #include "my_ramdisk.h"
 #include "my_string.h"
@@ -29,7 +31,7 @@ unsigned char *ramdisk_load (const char *filename, int32_t *outlen)
 
     alt_filename = 0;
 
- /*
+    /*
      * If the file is on disk and is newer than the program, use that in
      * preference.
      */

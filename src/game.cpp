@@ -669,20 +669,20 @@ _
 
         LOG("dungeon: create blocks");
 
-        memset(game.state.map.is_blood, sizeof(game.state.map.is_blood), 0);
-        memset(game.state.map.is_corridor, sizeof(game.state.map.is_corridor), 0);
-        memset(game.state.map.is_deep_water, sizeof(game.state.map.is_deep_water), 0);
-        memset(game.state.map.is_dirt, sizeof(game.state.map.is_dirt), 0);
-        memset(game.state.map.is_floor, sizeof(game.state.map.is_floor), 0);
-        memset(game.state.map.is_key, sizeof(game.state.map.is_key), 0);
-        memset(game.state.map.is_lava, sizeof(game.state.map.is_lava), 0);
-        memset(game.state.map.is_light, sizeof(game.state.map.is_light), 0);
-        memset(game.state.map.is_monst, sizeof(game.state.map.is_monst), 0);
-        memset(game.state.map.is_solid, sizeof(game.state.map.is_solid), 0);
-        memset(game.state.map.gfx_large_shadow_caster, sizeof(game.state.map.gfx_large_shadow_caster), 0);
-        memset(game.state.map.is_door, sizeof(game.state.map.is_door), 0);
-        memset(game.state.map.is_wall, sizeof(game.state.map.is_wall), 0);
-        memset(game.state.map.is_water, sizeof(game.state.map.is_water), 0);
+        memset(game.state.map.is_blood, 0, sizeof(game.state.map.is_blood));
+        memset(game.state.map.is_corridor, 0, sizeof(game.state.map.is_corridor));
+        memset(game.state.map.is_deep_water, 0, sizeof(game.state.map.is_deep_water));
+        memset(game.state.map.is_dirt, 0, sizeof(game.state.map.is_dirt));
+        memset(game.state.map.is_floor, 0, sizeof(game.state.map.is_floor));
+        memset(game.state.map.is_key, 0, sizeof(game.state.map.is_key));
+        memset(game.state.map.is_lava, 0, sizeof(game.state.map.is_lava));
+        memset(game.state.map.is_light, 0, sizeof(game.state.map.is_light));
+        memset(game.state.map.is_monst, 0, sizeof(game.state.map.is_monst));
+        memset(game.state.map.is_solid, 0, sizeof(game.state.map.is_solid));
+        memset(game.state.map.gfx_large_shadow_caster, 0, sizeof(game.state.map.gfx_large_shadow_caster));
+        memset(game.state.map.is_door, 0, sizeof(game.state.map.is_door));
+        memset(game.state.map.is_wall, 0, sizeof(game.state.map.is_wall));
+        memset(game.state.map.is_water, 0, sizeof(game.state.map.is_water));
 
         game_place_entrance(dungeon, "entrance1");
         game_place_exit(dungeon, "exit1");

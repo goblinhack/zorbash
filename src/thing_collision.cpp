@@ -366,7 +366,7 @@ thing_add_possible_hit (Thingp target,
                         int hitter_killed_on_hit_or_miss)
 {_
     thing_colls.push_back(
-      ThingColl::ThingColl(target,
+      ThingColl(target,
                 reason,
                 tp_collision_hit_priority(target->tp),
                 hitter_killed_on_hitting,
