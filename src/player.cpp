@@ -28,7 +28,6 @@ void player_tick (void)
     uint8_t up    = 0;
     uint8_t down  = 0;
     uint8_t fire  = 0;
-    uint8_t tick  = 0;
 
     const uint8_t *state = SDL_GetKeyboardState(0);
 
@@ -45,7 +44,6 @@ void player_tick (void)
     }
 
     if ((time_get_time_ms_cached() - last_key_pressed_when) > 125) {
-        tick = state[SDL_SCANCODE_PERIOD] ? 1 : 0;
         key_pressed = true;
     }
 

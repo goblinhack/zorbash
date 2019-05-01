@@ -8,6 +8,9 @@
 #ifndef _MY_STRING_UTILL_H_
 #define _MY_STRING_UTILL_H_
 
+//#include <iostream>
+#include <memory>
+#include <vector>
 #include <stdarg.h>
 #include <wchar.h>
 #include <map>

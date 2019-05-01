@@ -502,6 +502,9 @@ case `uname` in
 	LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
 	LDLIBS="$LDLIBS -lopengl32"
 	LDLIBS="$LDLIBS -funwind-tables"
+        #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
+        #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
+        #LDLIBS+=" -static-libasan"
         ;;
     *Darwin*)
 	EXE=""
@@ -511,6 +514,9 @@ case `uname` in
 	DSYM="dsymutil ../zorbash"
         WERROR="-Werror"
         COMPILER_WARN="-Wmissing-prototypes"
+        #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer -static-libstdc++ -static-libgcc "
+        #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
+        #LDLIBS+=" -L/opt/local/lib/gcc6 -lasan"
 	;;
     *MING*)
 	EXE=""
@@ -536,6 +542,9 @@ esac
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
 C_FLAGS="$C_FLAGS -I../cereal/include"
 
+
+
+
 #
 # Better to leave off for production
 #
@@ -556,6 +565,8 @@ then
     echo "COMPILER_WARNINGS=\$(GXX_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
     echo "# CC=clang++ # AUTOGEN" >> .Makefile
     echo "CC=g++ # AUTOGEN" >> .Makefile
+    # -mp- is the mac ports version
+    #echo "CC=/opt/local/bin/g++-mp-6 # AUTOGEN" >> .Makefile
 else
     `clang++ --version >/dev/null 2>/dev/null`
     if [ $? -eq 0 ]

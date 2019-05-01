@@ -3,6 +3,8 @@
  * See the README file for license info.
  */
 
+#include <string.h>
+
 #include "my_main.h"
 #include "my_slre.h"
 #include "my_token.h"

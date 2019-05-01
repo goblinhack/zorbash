@@ -468,7 +468,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     static unsigned int index;
     index++;
 
-    Tileinfomap *tiles;
+    Tileinfomap *tiles = nullptr;
     switch (dir) {
     case THING_DIR_NONE:
         tiles = &tp->tiles;
@@ -546,6 +546,9 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     }
     if (is_join_x) {
         tiles = &tp->x_tiles;
+    }
+    if (!tiles) {
+        DIE("no tiles for [%s]", tile);
     }
 
     auto t = std::make_shared< class Tileinfo >();
