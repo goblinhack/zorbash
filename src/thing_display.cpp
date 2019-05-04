@@ -581,9 +581,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     }
 #endif
 
-    if (tp_is_monst(tp) ||
-        tp_is_player(tp)) {
-        gl_rotate = -RAD_90;
+    static double gg;
+    if (tp_is_monst(tp) || tp_is_player(tp)) {
+        //gl_rotate = -RAD_90;
+        gg += -(RAD_90 / 90);
+        gl_rotate = gg;
     }
 
     if (unlikely(tp_gfx_small_shadow_caster(tp))) {
