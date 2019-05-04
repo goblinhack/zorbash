@@ -116,6 +116,16 @@ public:
     fpoint             last_at;
 
     /*
+     * Physics
+     */
+    float              fall_speed {};
+    float              jump_speed {};
+    float              momentum {};
+    float              rot {};
+    fpoint normal_velocity {};
+    fpoint tangent_velocity {};
+
+    /*
      * Pointer to common settings for this thing.
      */
     Tpp                tp {nullptr};
