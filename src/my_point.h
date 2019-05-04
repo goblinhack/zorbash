@@ -180,6 +180,24 @@ public:
         }
     }
 
+    my_apoint rotate (T angle, const my_apoint O) const
+    {
+        T s;
+        T c;
+        sincosd(angle, &s, &c);
+
+        // translate point back to origin:
+        T X = x - O.x;
+        T Y = y - O.y;
+
+        // rotate point
+        T xnew = X * c - Y * s;
+        T ynew = X * s + Y * c;
+
+        // translate point back:
+        return (my_apoint(xnew + O.x, ynew + O.y));
+    }
+
     friend uint8_t get_line_intersection (my_apoint p0,
                                           my_apoint p1,
                                           my_apoint p2,

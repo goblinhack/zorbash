@@ -15,7 +15,7 @@ float glapi_last_tex_right;
 float glapi_last_tex_bottom;
 float glapi_last_right;
 float glapi_last_bottom;
-float gl_rotate;
+double gl_rotate;
 
 void gl_init_2d_mode (void)
 {_
@@ -1272,35 +1272,23 @@ gl_push (float **P,
     }
 
     if (gl_rotate) {
-        float mx = (tl.x + br.x) / 2;
-        float my = (tl.y + br.y) / 2;
-        float sz = DISTANCE(tl.x, tl.y, br.x, br.y) / 2;
-        float sinr;
-        float cosr;
+        double scale = 1.0/(game.config.video_w_h_ratio / 2);
+        tl.x *= scale;
+        tr.x *= scale;
+        bl.x *= scale;
+        br.x *= scale;
 
-        sincosf(gl_rotate - RAD_45, &sinr, &cosr);
-        sinr *= sz;
-        cosr *= sz;
-        tl.x = mx + sinr;
-        tl.y = my + cosr;
+        fpoint m((tl.x + br.x) / 2, (tl.y + br.y) / 2);
+        
+        tl = tl.rotate(gl_rotate, m);
+        tr = tr.rotate(gl_rotate, m);
+        br = br.rotate(gl_rotate, m);
+        bl = bl.rotate(gl_rotate, m);
 
-        sincosf(gl_rotate + RAD_45, &sinr, &cosr);
-        sinr *= sz;
-        cosr *= sz;
-        tr.x = mx + sinr;
-        tr.y = my + cosr;
-
-        sincosf(gl_rotate + RAD_45 + RAD_90, &sinr, &cosr);
-        sinr *= sz;
-        cosr *= sz;
-        br.x = mx + sinr;
-        br.y = my + cosr;
-
-        sincosf(gl_rotate + RAD_45 + RAD_90 + RAD_90, &sinr, &cosr);
-        sinr *= sz;
-        cosr *= sz;
-        bl.x = mx + sinr;
-        bl.y = my + cosr;
+        tl.x /= scale;
+        tr.x /= scale;
+        bl.x /= scale;
+        br.x /= scale;
     }
 
     if (likely(!first)) {
