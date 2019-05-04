@@ -1272,6 +1272,10 @@ gl_push (float **P,
     }
 
     if (gl_rotate) {
+        //
+        // The tile on the screen is stretched for the display.
+        // We need to undo this before rotating and then restore it later.
+        //
         double scale = 1.0/(game.config.video_w_h_ratio / 2);
         tl.x *= scale;
         tr.x *= scale;

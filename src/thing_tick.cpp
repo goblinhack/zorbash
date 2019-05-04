@@ -68,6 +68,11 @@ void Thing::tick (void)
         return;
     }
 
+    if (tp_is_monst(tp) || tp_is_player(tp)) {
+        //gl_rotate = -RAD_90;
+        rot += -(RAD_90 / 90);
+    }
+
     // continue
 }
 
