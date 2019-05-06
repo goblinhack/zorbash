@@ -50,7 +50,7 @@ static void thing_map_scroll_follow_player (void)
         return;
     }
 
-    int dx = game.state.player->at.x - game.state.map_wanted_at.x;
+    int dx = game.state.player->mid_at.x - game.state.map_wanted_at.x;
 
     if (dx > 10) {
         game.state.map_wanted_at.x++;
@@ -59,7 +59,7 @@ static void thing_map_scroll_follow_player (void)
         game.state.map_wanted_at.x--;
     }
 
-    int dy = game.state.player->at.y - game.state.map_wanted_at.y;
+    int dy = game.state.player->mid_at.y - game.state.map_wanted_at.y;
 
     if (dy > 4) {
         game.state.map_wanted_at.y++;

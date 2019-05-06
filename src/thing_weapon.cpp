@@ -267,7 +267,7 @@ void Thing::wield (Tpp weapon)
         return;
     }
 
-    auto carry_anim = thing_new(carry_as, at);
+    auto carry_anim = thing_new(carry_as, mid_at);
 
     //
     // Set the weapon so we can use it later
@@ -318,7 +318,7 @@ void Thing::use (void)
     //
     // Save the thing id so the client wid can keep track of the weapon.
     //
-    auto use_anim = thing_new(swung_as, at);
+    auto use_anim = thing_new(swung_as, mid_at);
 
     //
     // Attach to the parent thing.

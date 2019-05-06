@@ -13,7 +13,7 @@ void Thing::attach (void)
     detach();
 
     {
-        auto root = &thing_display_order[(int)at.x][(int)at.y][depth];
+        auto root = &thing_display_order[(int)mid_at.x][(int)mid_at.y][depth];
         auto key = ThingDisplaySortKey(depth, br.y, this);
         auto result = root->insert(std::make_pair(key, this));
         if (result.second == false) {
@@ -22,7 +22,7 @@ void Thing::attach (void)
     }
 
     if (tp_is_active(tp)) {
-        auto root = &game.state.map.all_active_things_at[(int)at.x][(int)at.y];
+        auto root = &game.state.map.all_active_things_at[(int)mid_at.x][(int)mid_at.y];
         auto p = std::make_pair(id, this);
         auto result = root->insert(p);
         if (result.second == false) {
@@ -31,7 +31,7 @@ void Thing::attach (void)
     }
 
     if (!tp_is_boring(tp)) {
-        auto root = &game.state.map.all_non_boring_things_at[(int)at.x][(int)at.y];
+        auto root = &game.state.map.all_non_boring_things_at[(int)mid_at.x][(int)mid_at.y];
         auto p = std::make_pair(id, this);
         auto result = root->insert(p);
         if (result.second == false) {
@@ -40,7 +40,7 @@ void Thing::attach (void)
     }
 
     is_attached = true;
-    last_attached = at;
+    last_attached = mid_at;
 //log("attached at %d %d %d", (int)last_attached.x, (int)last_attached.y,
 //depth);
 }
@@ -92,8 +92,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     double dw = game.config.one_pixel_gl_width;
     double dh = game.config.one_pixel_gl_height;
 
-    int x = (int) at.x;
-    int y = (int) at.y;
+    int x = (int) mid_at.x;
+    int y = (int) mid_at.y;
 
     if (unlikely(x <= 0) ||
         unlikely(y <= 0) ||
@@ -366,7 +366,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
         if (owner_thing_id == game.state.player->id) {
             // use default shadow for carried items
         } else if (this != game.state.player) {
-            fpoint d = this->interpolated_at - game.state.player->interpolated_at;
+            fpoint d = this->interpolated_mid_at - game.state.player->interpolated_mid_at;
             const double D = 5.0;
             dx = d.x / D;
             dy = d.y / D;
@@ -548,20 +548,20 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim_only(tp)) {
 
-        if (game.state.map.is_deep_water[(int)at.x][(int)at.y]) {
+        if (game.state.map.is_deep_water[(int)mid_at.x][(int)mid_at.y]) {
             const auto pct_visible_above_surgace = 0.5;
             tile_tl = fpoint(0, 0);
             tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
             blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
             submerged = true;
-        } else if (game.state.map.is_lava[(int)at.x][(int)at.y]) {
+        } else if (game.state.map.is_lava[(int)mid_at.x][(int)mid_at.y]) {
             const auto pct_visible_above_surgace = 0.3;
             tile_tl = fpoint(0, 0);
             tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
             blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
             submerged = true;
             lava = true;
-        } else if (game.state.map.is_water[(int)at.x][(int)at.y]) {
+        } else if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {
             const auto pct_visible_above_surgace = 0.1;
             tile_tl = fpoint(0, 0);
             tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
@@ -679,13 +679,13 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim_only(tp)) {
 
-        if (game.state.map.is_deep_water[(int)at.x][(int)at.y]) {
+        if (game.state.map.is_deep_water[(int)mid_at.x][(int)mid_at.y]) {
             const auto pct_visible_above_surgace = 0.5;
             tile_tl = fpoint(0, 0);
             tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
             blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
             submerged = true;
-        } else if (game.state.map.is_water[(int)at.x][(int)at.y]) {
+        } else if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {
             const auto pct_visible_above_surgace = 0.1;
             tile_tl = fpoint(0, 0);
             tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);

@@ -7,7 +7,7 @@
 #include "my_font.h"
 #include "my_game.h"
 #include "my_gl.h"
-#include "my_time_util.h"
+#include "my_time.h"
 
 struct ascii_ ascii;
 

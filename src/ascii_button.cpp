@@ -3,7 +3,7 @@
  * See the README file for license info.
  */
 
-#include "my_time_util.h"
+#include "my_time.h"
 #include "my_ascii.h"
 
 static void ascii_put_button_ (int x,

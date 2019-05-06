@@ -58,13 +58,17 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         }
     }
 
+    auto sz = fsize(1.0, 1.0);
+    at += fpoint(sz.w / 2, sz.h / 2);
+
     point new_at((int)at.x, (int)at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
         DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
     }
 
-    t->at             = at;
-    t->last_at        = at;
+    t->mid_at         = at;
+    t->last_mid_at    = t->mid_at;
+
     t->depth          = tp_z_depth(tp);
 
     if (tp_gfx_can_hflip(tp)) {
@@ -156,10 +160,10 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     if (tp_is_player(tp)) {
         if (game.state.player && (game.state.player != t)) {
             DIE("player exists in multiple places on map, %f, %f and %f, %f",
-                game.state.player->at.x,
-                game.state.player->at.y,
-                t->at.x,
-                t->at.y);
+                game.state.player->mid_at.x,
+                game.state.player->mid_at.y,
+                t->mid_at.x,
+                t->mid_at.y);
         }
         game.state.player = t;
 
@@ -237,7 +241,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         dx *= jitter.x;
         dy *= jitter.y;
 
-        t->move_to(fpoint(t->at.x + dx, t->at.y + dy));
+        t->move_to(fpoint(t->mid_at.x + dx, t->mid_at.y + dy));
     }
 
     t->update_coordinates();
@@ -248,7 +252,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         color c = string2color(l);
         t->light = light_new(t, MAX_LIGHT_RAYS / 4,
                              (double) tp_is_light_strength(tp),
-                             t->at, LIGHT_QUALITY_LOW, c);
+                             t->mid_at, LIGHT_QUALITY_LOW, c);
     }
 
     if (tp_is_monst(tp)) {
@@ -500,7 +504,7 @@ void Thing::destroy (void)
     //
     // Pop from the map
     //
-    point old_at((int)at.x, (int)at.y);
+    point old_at((int)mid_at.x, (int)mid_at.y);
 
     if (tp_is_wall(tp)) {
         game.state.map.is_wall[old_at.x][old_at.y] = false;
@@ -567,7 +571,7 @@ void Thing::update_light (void)
     // Light source follows the thing.
     //
     if (light) {
-        light->move_to(interpolated_at);
+        light->move_to(interpolated_mid_at);
         light->calculate();
     }
 }
@@ -588,7 +592,7 @@ void Thing::move_carried_items (void)
             die("weapon_carry_anim_thing_id set to %d but not found",
                 weapon_carry_anim_thing_id);
         }
-        w->move_to(at);
+        w->move_to(mid_at);
         w->dir = dir;
     }
 
@@ -598,7 +602,7 @@ void Thing::move_carried_items (void)
             die("weapon_use_anim_thing_id set to %d but not found",
                 weapon_use_anim_thing_id);
         }
-        w->move_to(at);
+        w->move_to(mid_at);
         w->dir = dir;
     }
 
@@ -606,8 +610,8 @@ void Thing::move_carried_items (void)
     // Not really an item...
     //
     if (tp_is_monst(tp) || tp_is_player(tp)) {
-        if (game.state.map.is_water[(int)at.x][(int)at.y]) {
-            thing_new(tp_name(tp_random_ripple()), at);
+        if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {
+            thing_new(tp_name(tp_random_ripple()), mid_at);
         }
     }
 }
@@ -638,7 +642,7 @@ std::string Thing::to_string (void)
     }
 
     snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u(%s) at (%g,%g)",
-             id, tp->name.c_str(), at.x, at.y);
+             id, tp->name.c_str(), mid_at.x, mid_at.y);
 
     return (tmp[loop++]);
 }

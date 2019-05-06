@@ -118,7 +118,7 @@ void player_tick (void)
         dy = d;
     }
 
-    fpoint future_pos = player->at + fpoint(dx, dy);
+    fpoint future_pos = player->mid_at + fpoint(dx, dy);
 
     /*
      * Place a light to mark the way back
