@@ -14,7 +14,7 @@ void Thing::achieve_goals_in_life (void)
     //
     if (dmap_goals) {
         auto to = get_next_hop();
-        if (at != to) {
+        if (mid_at != to) {
             move(to);
         }
     }
@@ -67,13 +67,6 @@ void Thing::tick (void)
     if (is_dead) {
         return;
     }
-
-    if (tp_is_monst(tp) || tp_is_player(tp)) {
-        //gl_rotate = -RAD_90;
-        rot += -(RAD_90 / 90);
-    }
-
-    // continue
 }
 
 void things_tick (void)

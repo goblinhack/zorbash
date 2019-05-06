@@ -11,10 +11,10 @@
 //
 bool Thing::move (fpoint future_pos)
 {
-    bool up     = future_pos.y < at.y;
-    bool down   = future_pos.y > at.y;
-    bool left   = future_pos.x < at.x;
-    bool right  = future_pos.x > at.x;
+    bool up     = future_pos.y < mid_at.y;
+    bool down   = future_pos.y > mid_at.y;
+    bool left   = future_pos.x < mid_at.x;
+    bool right  = future_pos.x > mid_at.x;
     bool attack = false;
 
     return (move(future_pos, up, down, left, right, attack));
@@ -38,12 +38,12 @@ bool Thing::move (fpoint future_pos,
         use();
     }
 
-    if ((x == at.x) && (y == at.y)) {
+    if ((x == mid_at.x) && (y == mid_at.y)) {
         return (false);
     }
 
     if (up || down || left || right) {
-        move_delta(fpoint(x, y) - at);
+        move_delta(fpoint(x, y) - mid_at);
     }
 
     if (tp_gfx_bounce_on_move(tp)) {
@@ -66,10 +66,10 @@ bool Thing::update_coordinates (void)
     double y;
 
     if (time_get_time_ms_cached() >= end_move_ms) {
-        x = at.x;
-        y = at.y;
+        x = mid_at.x;
+        y = mid_at.y;
 
-        interpolated_at = at;
+        interpolated_mid_at = mid_at;
 
         if (!is_waiting_for_ai) {
             is_waiting_for_ai = true;
@@ -82,17 +82,20 @@ bool Thing::update_coordinates (void)
         double t = end_move_ms - begin_move_ms;
         double dt = time_get_time_ms_cached() - begin_move_ms;
         double step = dt / t;
-        double dx = at.x - last_at.x;
-        double dy = at.y - last_at.y;
+        double dx = mid_at.x - last_mid_at.x;
+        double dy = mid_at.y - last_mid_at.y;
 
-        x = last_at.x + dx * step;
-        y = last_at.y + dy * step;
+        x = last_mid_at.x + dx * step;
+        y = last_mid_at.y + dy * step;
 
-        interpolated_at = fpoint(x, y);
+        interpolated_mid_at = fpoint(x, y);
     }
 
     double tx = x;
     double ty = y;
+
+    tx -= sz.w / 2;
+    ty -= sz.h / 2;
 
     tl.x = tx * tile_gl_width;
     tl.y = ty * tile_gl_height;
@@ -245,14 +248,14 @@ void Thing::update_pos (fpoint to)
         return;
     }
 
-    point old_at((int)at.x, (int)at.y);
+    point old_at((int)mid_at.x, (int)mid_at.y);
 
     has_ever_moved = true;
 
     if (!has_ever_moved) {
-        last_at = to;
+        last_mid_at = to;
     } else {
-        last_at = at;
+        last_mid_at = mid_at;
     }
 
     //
@@ -325,7 +328,7 @@ void Thing::update_pos (fpoint to)
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
-    at = to;
+    mid_at = to;
     begin_move_ms = time_get_time_ms_cached();
     end_move_ms = begin_move_ms + speed;
 
@@ -366,12 +369,12 @@ void Thing::move_delta (fpoint delta)
         has_ever_moved = true;
     }
 
-    update_pos(at + delta);
+    update_pos(mid_at + delta);
 }
 
 void Thing::move_to (fpoint to)
 {_
-    move_delta(fpoint(to.x - at.x, to.y - at.y));
+    move_delta(fpoint(to.x - mid_at.x, to.y - mid_at.y));
 }
 
 void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)

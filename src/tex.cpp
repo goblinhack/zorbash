@@ -10,7 +10,7 @@
 #include "my_tex.h"
 #include "my_ramdisk.h"
 #include "my_pixel.h"
-#include "my_math_util.h"
+#include "my_math.h"
 #include "my_string.h"
 
 class Tex {

@@ -92,7 +92,7 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
     memcpy(d->val, new_val, sizeof(d->val));
 }
 
-void dmap_convert_to_Wall_clinging (Dmap *d)
+void dmap_convert_to_wall_clinging (Dmap *d)
 {
     uint8_t new_val[MAP_WIDTH][MAP_HEIGHT];
     uint8_t x;

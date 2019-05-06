@@ -3,10 +3,11 @@
 // See the README file for license info.
 //
 
+#include <algorithm>
 #include "my_main.h"
 #include "my_thing.h"
 #include "my_dmap.h"
-#include <algorithm>
+#include "my_math.h"
 
 bool Thing::will_attack (const Thingp itp)
 {
@@ -102,7 +103,7 @@ bool Thing::is_obstacle_for_me (point p)
 // k
 bool Thing::is_goal_for_me (point p, int priority, double *score)
 {
-    double distance_scale = distance(at, fpoint(p.x, p.y));
+    double distance_scale = distance(mid_at, fpoint(p.x, p.y));
     if (!distance_scale) {
         distance_scale = 1.0;
     }
@@ -168,8 +169,8 @@ fpoint Thing::get_next_hop (void)
     auto miny = 0;
     auto maxx = MAP_WIDTH;
     auto maxy = MAP_HEIGHT;
-    point start((int)at.x, (int)at.y);
-    fpoint fstart = at;
+    fpoint fstart(mid_at.x, mid_at.y);
+    point start((int)fstart.x, (int)fstart.y);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -187,7 +188,7 @@ fpoint Thing::get_next_hop (void)
     //
     // We want to find how far everything is from us.
     //
-    dmap_scent->val[(int)at.x][(int)at.y] = DMAP_IS_GOAL;
+    dmap_scent->val[start.x][start.y] = DMAP_IS_GOAL;
 
     point tl(minx, miny);
     point br(maxx, maxy);
@@ -298,13 +299,41 @@ fpoint Thing::get_next_hop (void)
     // Wall clingers create a dmap that is essentially a border around
     // the existing walls
     //
-    const int wall_clinger_scale = 3;
+    const double wall_clinger_scale = 3;
     if (tp_is_wall_clinger(tp)) {
-        // dmap_print(dmap_goals, start);
-        dmap_scale_and_recenter(dmap_goals, fstart, wall_clinger_scale);
+        double s, c;
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("                 ");
+CON("@ %lf %lf (%d %d)", fstart.x, fstart.y, (int)start.x, (int)start.y);
+        dmap_print(dmap_goals, start);
+        sincos(rot + RAD_270, &s, &c);
+        fstart.x += 1 / wall_clinger_scale * c;
+        fstart.y += 1 / wall_clinger_scale * -s;
+        dmap_scale_and_recenter(dmap_goals, fstart, (int)wall_clinger_scale);
+        //
+        // This "zoomed in" dmap is centered on the creature with each
+        // neighboring tile now taking up wall_clinger_scale^2 cells.
+        // This allows us to choose a path around the edge of a single tile.
+        // 
         start.x = MAP_WIDTH / 2;
         start.y = MAP_HEIGHT / 2;
-        dmap_convert_to_Wall_clinging(dmap_goals);
+        dmap_convert_to_wall_clinging(dmap_goals);
     }
 
     dmap_print(dmap_goals, start);
@@ -329,9 +358,55 @@ fpoint Thing::get_next_hop (void)
 
     fpoint fbest;
     if (tp_is_wall_clinger(tp)) {
-        fbest.x = at.x + ((1.0 / wall_clinger_scale) * (best.x - start.x));
-        fbest.y = at.y + ((1.0 / wall_clinger_scale) * (best.y - start.y));
-CON("%f %f -> %f %f", at.x, at.y, fbest.x, fbest.y);
+        fbest.x = mid_at.x + ((1.0 / wall_clinger_scale) * (best.x - start.x));
+        fbest.y = mid_at.y + ((1.0 / wall_clinger_scale) * (best.y - start.y));
+
+        //
+        // Find which wall is the closest to cling onto post move.
+        //
+        fpoint closest(-1, -1);
+        auto closest_dist = 999;
+
+        auto x = (int)fbest.x;
+        auto y = (int)fbest.y;
+        for (auto dx = -1; dx <= 1; dx++) {
+            for (auto dy = -1; dy <= 1; dy++) {
+                fpoint n(x + dx + 0.5, y + dy + 0.5);
+                if (!game.state.map.is_oob(n)) {
+                    if (game.state.map.is_wall[(int)n.x][(int)n.y]) {
+                        auto d = DISTANCE(n.x, n.y, fbest.x, fbest.y);
+                        if (d < closest_dist) {
+                            closest_dist = d;
+                            closest = n;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (closest != fpoint(-1, -1)) {
+            CON("XXX at      %f %f", mid_at.x, mid_at.y);
+            CON("XXX fbest   %f %f", fbest.x, fbest.y);
+            CON("XXX closest %f %f", closest.x, closest.y);
+
+            fpoint tl(closest.x - 0.5, closest.y - 0.5);
+            fpoint tr(closest.x + 0.5, closest.y - 0.5);
+            fpoint bl(closest.x - 0.5, closest.y + 0.5);
+            fpoint br(closest.x + 0.5, closest.y + 0.5);
+
+            if (get_line_intersection(fbest, closest, tl, tr)) {
+                rot = 0;
+            }
+            if (get_line_intersection(fbest, closest, bl, br)) {
+                rot = RAD_180;
+            }
+            if (get_line_intersection(fbest, closest, tl, bl)) {
+                rot = RAD_270;
+            }
+            if (get_line_intersection(fbest, closest, tr, br)) {
+                rot = RAD_90;
+            }
+        }
     } else {
         fbest.x = best.x;
         fbest.y = best.y;

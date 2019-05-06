@@ -17,9 +17,10 @@ typedef std::unordered_map< uint32_t, Thingp > Things;
 #include "my_game.h"
 #include "my_thing_template.h"
 #include "my_tile_info.h"
-#include "my_time_util.h"
+#include "my_time.h"
 #include "my_light.h"
 #include "my_dmap.h"
+#include "my_size.h"
 
 enum {
     THING_DIR_NONE,
@@ -74,9 +75,7 @@ public:
     template <class Archive>
     void serialize (Archive & archive )
     {
-        archive(cereal::make_nvp("id",               id),
-                cereal::make_nvp("at",               at),
-                cereal::make_nvp("last_at",          last_at));
+        archive(cereal::make_nvp("id",               id));
         // etc todo and remember to repair Tp on loading
     }
 
@@ -93,8 +92,14 @@ public:
     /*
      * Grid coordinates.
      */
-    fpoint             at;
-    fpoint             interpolated_at;
+    fpoint             mid_at;
+    fpoint             interpolated_mid_at;
+
+    /*
+     * Previous hop where we were. We use this to interpolate the real
+     * position when moving.
+     */
+    fpoint             last_mid_at;
 
     /*
      * On screen coordinates, taking account for size of the current frame.
@@ -102,6 +107,7 @@ public:
     fpoint             tl;
     fpoint             br;
     fpoint             old_br;
+    fsize              sz;
 
     /*
      * GL co-orids
@@ -109,11 +115,6 @@ public:
     fpoint             last_blit_tl;
     fpoint             last_blit_br;
 
-    /*
-     * Previous hop where we were. We use this to interpolate the real
-     * position when moving.
-     */
-    fpoint             last_at;
 
     /*
      * Physics

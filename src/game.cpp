@@ -485,11 +485,7 @@ static void game_place_monsts (class Dungeon *d)
 
             auto tp = tp_random_monst();
 
-            if (tp_is_wall_clinger(tp)) {
-                (void) thing_new(tp_name(tp), fpoint(x, y + 0.8));
-            } else {
-                (void) thing_new(tp_name(tp), fpoint(x, y));
-            }
+            (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
 }

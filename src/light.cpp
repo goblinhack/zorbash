@@ -46,7 +46,7 @@ Lightp light_new (Thingp owner,
         DIE("light insert into map [%d] failed", id);
     }
 
-    l->at             = at + fpoint(0.5, 0.5);
+    l->at             = at;
     l->strength       = strength;
     l->owner          = owner;
     l->quality        = quality;
@@ -106,8 +106,6 @@ void Light::pop (void)
 
 void Light::move_to (fpoint to)
 {_
-    to += fpoint(0.5, 0.5);
-
     point old_at((int)at.x, (int)at.y);
     point new_at((int)to.x, (int)to.y);
 
@@ -614,7 +612,8 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo, int 
                  */
                 if (game.state.player) {
                     auto p = game.state.player;
-                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
+                    auto len = DISTANCE(l->at.x, l->at.y,
+                                        p->mid_at.x, p->mid_at.y);
 
                     if (len > LIGHT_VISIBLE_DIST + l->strength) {
                         continue;
@@ -663,7 +662,8 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo, int 
                  */
                 if (game.state.player) {
                     auto p = game.state.player;
-                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
+                    auto len = DISTANCE(l->at.x, l->at.y,
+                                        p->mid_at.x, p->mid_at.y);
 
                     if (len > LIGHT_VISIBLE_DIST + l->strength) {
                         continue;
@@ -697,7 +697,8 @@ void lights_render_high_quality (int minx, int miny, int maxx, int maxy, int fbo
                  */
                 if (game.state.player) {
                     auto p = game.state.player;
-                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
+                    auto len = DISTANCE(l->at.x, l->at.y,
+                                        p->mid_at.x, p->mid_at.y);
 
                     if (len > LIGHT_VISIBLE_DIST + l->strength) {
                         continue;
@@ -732,7 +733,8 @@ void lights_render_points_debug (int minx, int miny, int maxx, int maxy)
                  */
                 if (game.state.player) {
                     auto p = game.state.player;
-                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
+                    auto len = DISTANCE(l->at.x, l->at.y,
+                                        p->mid_at.x, p->mid_at.y);
 
                     if (len > LIGHT_VISIBLE_DIST + l->strength) {
                         continue;

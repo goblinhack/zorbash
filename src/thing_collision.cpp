@@ -48,8 +48,8 @@ thing_overlaps_border (Thingp t)
                 continue;
             }
 
-            int px = t->interpolated_at.x * TILE_WIDTH + x;
-            int py = t->interpolated_at.y * TILE_HEIGHT + y;
+            int px = t->interpolated_mid_at.x * TILE_WIDTH + x;
+            int py = t->interpolated_mid_at.y * TILE_HEIGHT + y;
 
             if (px < MAP_BORDER * TILE_WIDTH) {
                 return (true);
@@ -180,7 +180,7 @@ int circle_box_collision (Thingp C,
 {
     fpoint C0, C1, C2, C3;
     C->to_coords(&C0, &C1, &C2, &C3);
-    auto C_offset = C_at - C->interpolated_at;
+    auto C_offset = C_at - C->interpolated_mid_at;
     C0 += C_offset;
     C1 += C_offset;
     C2 += C_offset;
@@ -188,7 +188,7 @@ int circle_box_collision (Thingp C,
 
     fpoint B0, B1, B2, B3;
     B->to_coords(&B0, &B1, &B2, &B3);
-    auto B_offset = B_at - B->interpolated_at;
+    auto B_offset = B_at - B->interpolated_mid_at;
     B0 += B_offset;
     B1 += B_offset;
     B2 += B_offset;
@@ -200,7 +200,8 @@ int circle_box_collision (Thingp C,
      * Corner collisions, normal is at 45 degrees. Unless there is a wall.
      */
     if (distance(C_at, B0) < radius) {
-        if (!game.state.map.is_wall_at(B->interpolated_at.x - 1, B->interpolated_at.y)) {
+        if (!game.state.map.is_wall_at(B->interpolated_mid_at.x - 1,
+                                       B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B0.x;
             normal->y = C_at.y - B0.y;
             return (true);
@@ -208,7 +209,8 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B1) < radius) {
-        if (!game.state.map.is_wall_at(B->interpolated_at.x + 1, B->interpolated_at.y)) {
+        if (!game.state.map.is_wall_at(B->interpolated_mid_at.x + 1,
+                                       B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B1.x;
             normal->y = C_at.y - B1.y;
             return (true);
@@ -216,7 +218,8 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B2) < radius) {
-        if (!game.state.map.is_wall_at(B->interpolated_at.x + 1, B->interpolated_at.y)) {
+        if (!game.state.map.is_wall_at(B->interpolated_mid_at.x + 1,
+                                       B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B2.x;
             normal->y = C_at.y - B2.y;
             return (true);
@@ -224,7 +227,8 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B3) < radius) {
-        if (!game.state.map.is_wall_at(B->interpolated_at.x - 1, B->interpolated_at.y)) {
+        if (!game.state.map.is_wall_at(B->interpolated_mid_at.x - 1,
+                                       B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B3.x;
             normal->y = C_at.y - B3.y;
             return (true);
@@ -313,10 +317,10 @@ int circle_circle_collision (Thingp A,
                              fpoint at,
                              fpoint *intersect)
 {
-    double Ax = A->interpolated_at.x;
-    double Ay = A->interpolated_at.y;
-    Ax += (at.x - A->interpolated_at.x);
-    Ay += (at.y - A->interpolated_at.y);
+    double Ax = A->interpolated_mid_at.x;
+    double Ay = A->interpolated_mid_at.y;
+    Ax += (at.x - A->interpolated_mid_at.x);
+    Ay += (at.y - A->interpolated_mid_at.y);
 
     fpoint A_at = { Ax, Ay };
     //fpoint A0, A1, A2, A3;
@@ -324,8 +328,8 @@ int circle_circle_collision (Thingp A,
     //double A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
     double A_radius = tp_collision_radius(A->tp);
 
-    double Bx = B->interpolated_at.x;
-    double By = B->interpolated_at.y;
+    double Bx = B->interpolated_mid_at.x;
+    double By = B->interpolated_mid_at.y;
 
     fpoint B_at = { Bx, By };
     //fpoint B0, B1, B2, B3;
@@ -438,14 +442,14 @@ void Thing::possible_hits_find_best (void)
             /*
              * If this target is closer, prefer it.
              */
-            double dist_best = DISTANCE(me->interpolated_at.x,
-                                        me->interpolated_at.y,
-                                        best->target->interpolated_at.x,
-                                        best->target->interpolated_at.y);
-            double dist_cand = DISTANCE(me->interpolated_at.x,
-                                        me->interpolated_at.y,
-                                        cand.target->interpolated_at.x,
-                                        cand.target->interpolated_at.y);
+            double dist_best = DISTANCE(me->interpolated_mid_at.x,
+                                        me->interpolated_mid_at.y,
+                                        best->target->interpolated_mid_at.x,
+                                        best->target->interpolated_mid_at.y);
+            double dist_cand = DISTANCE(me->interpolated_mid_at.x,
+                                        me->interpolated_mid_at.y,
+                                        cand.target->interpolated_mid_at.x,
+                                        cand.target->interpolated_mid_at.y);
 
             if (dist_cand < dist_best) {
                 best = &cand;
@@ -478,8 +482,8 @@ bool things_overlap (const Thingp A, const Thingp B)
 {_
     fpoint A_at, B_at;
 
-    A_at = A->interpolated_at;
-    B_at = B->interpolated_at;
+    A_at = A->interpolated_mid_at;
+    B_at = B->interpolated_mid_at;
 
 #if 0
     int check_only = true;
@@ -587,30 +591,30 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
  */
 bool Thing::handle_collisions (void)
 {_
-    int minx = at.x - thing_collision_tiles;
+    int minx = mid_at.x - thing_collision_tiles;
     while (minx < 0) {
         minx++;
     }
 
-    int miny = at.y - thing_collision_tiles;
+    int miny = mid_at.y - thing_collision_tiles;
     while (miny < 0) {
         miny++;
     }
 
-    int maxx = at.x + thing_collision_tiles;
+    int maxx = mid_at.x + thing_collision_tiles;
     while (maxx >= MAP_WIDTH) {
         maxx--;
     }
 
-    int maxy = at.y + thing_collision_tiles;
+    int maxy = mid_at.y + thing_collision_tiles;
     while (maxy >= MAP_HEIGHT) {
         maxy--;
     }
 
     for (int16_t x = minx; x <= maxx; x++) {
-        auto dx = x - at.x;
+        auto dx = x - mid_at.x;
         for (int16_t y = miny; y <= maxy; y++) {
-            auto dy = y - at.y;
+            auto dy = y - mid_at.y;
             for (auto p : game.state.map.all_non_boring_things_at[x][y]) {
                 auto it = p.second;
                 if (this == it) {

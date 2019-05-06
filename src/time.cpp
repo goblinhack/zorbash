@@ -6,7 +6,7 @@
 #include "my_main.h"
 #include "my_string.h"
 #include "my_game.h"
-#include "my_time_util.h"
+#include "my_time.h"
 
 uint32_t time_now;
 uint32_t base_time_in_mill;

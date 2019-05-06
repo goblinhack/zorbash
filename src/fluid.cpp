@@ -1001,22 +1001,22 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
 
 int thing_submerged_depth (Thingp t)
 {
-    int x = t->at.x * FLUID_RESOLUTION;
-    int y = t->at.y * FLUID_RESOLUTION;
+    int x = t->mid_at.x * FLUID_RESOLUTION;
+    int y = t->mid_at.y * FLUID_RESOLUTION;
     int dx = FLUID_RESOLUTION / 2;
     int dy = FLUID_RESOLUTION / 2;
     int water = 0;
 
-    if (t->at.x >= MAP_WIDTH) {
+    if (t->mid_at.x >= MAP_WIDTH) {
         return (false);
     }
-    if (t->at.y >= MAP_HEIGHT) {
+    if (t->mid_at.y >= MAP_HEIGHT) {
         return (false);
     }
-    if (t->at.x < 0) {
+    if (t->mid_at.x < 0) {
         return (false);
     }
-    if (t->at.y < 0) {
+    if (t->mid_at.y < 0) {
         return (false);
     }
 
@@ -1034,20 +1034,20 @@ int thing_submerged_depth (Thingp t)
 int thing_is_submerged (Thingp t)
 {
     int dx, dy;
-    int x = t->at.x * FLUID_RESOLUTION;
-    int y = t->at.y * FLUID_RESOLUTION;
+    int x = t->mid_at.x * FLUID_RESOLUTION;
+    int y = t->mid_at.y * FLUID_RESOLUTION;
     int water = 0;
 
-    if (t->at.x >= MAP_WIDTH) {
+    if (t->mid_at.x >= MAP_WIDTH) {
         return (false);
     }
-    if (t->at.y >= MAP_HEIGHT) {
+    if (t->mid_at.y >= MAP_HEIGHT) {
         return (false);
     }
-    if (t->at.x < 0) {
+    if (t->mid_at.x < 0) {
         return (false);
     }
-    if (t->at.y < 0) {
+    if (t->mid_at.y < 0) {
         return (false);
     }
 
@@ -1069,20 +1069,20 @@ int thing_is_submerged (Thingp t)
 int thing_is_partially_or_fully_submerged (Thingp t)
 {
     int dx, dy;
-    int x = t->at.x * FLUID_RESOLUTION;
-    int y = t->at.y * FLUID_RESOLUTION;
+    int x = t->mid_at.x * FLUID_RESOLUTION;
+    int y = t->mid_at.y * FLUID_RESOLUTION;
     int water = 0;
 
-    if (t->at.x >= MAP_WIDTH) {
+    if (t->mid_at.x >= MAP_WIDTH) {
         return (false);
     }
-    if (t->at.y >= MAP_HEIGHT) {
+    if (t->mid_at.y >= MAP_HEIGHT) {
         return (false);
     }
-    if (t->at.x < 0) {
+    if (t->mid_at.x < 0) {
         return (false);
     }
-    if (t->at.y < 0) {
+    if (t->mid_at.y < 0) {
         return (false);
     }
 
