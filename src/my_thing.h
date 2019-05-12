@@ -93,6 +93,7 @@ public:
      * Grid coordinates.
      */
     fpoint             mid_at;
+    fpoint             ground_at;
     fpoint             interpolated_mid_at;
 
     /*
@@ -240,7 +241,6 @@ public:
     unsigned int       is_starving:1;        /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_dead:1;            /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_bloodied:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_player:1;          /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_hidden:1;          /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_sleeping:1;        /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_moving:1;          /* until -std=c++2a remember to update thing.cpp */
@@ -292,7 +292,7 @@ public:
      * thing_tick.cpp
      */
     void tick();
-    void collision_check();
+    void do_collision_check();
     void achieve_goals_in_life();
 
     /*
@@ -418,6 +418,401 @@ public:
     {
         return (tp->bite_damage());
     }
+
+    int is_floor (void)
+    {
+        return (tp_is_floor(tp));
+    }
+
+    int is_wall (void)
+    {
+        return (tp_is_wall(tp));
+    }
+
+    int is_door (void)
+    {
+        return (tp_is_door(tp));
+    }
+
+    int is_lava (void)
+    {
+        return (tp_is_lava(tp));
+    }
+
+    int is_water (void)
+    {
+        return (tp_is_water(tp));
+    }
+
+    int is_deep_water (void)
+    {
+        return (tp_is_deep_water(tp));
+    }
+
+    int is_monst (void)
+    {
+        return (tp_is_monst(tp));
+    }
+
+    int is_player (void)
+    {
+        return (tp_is_player(tp));
+    }
+
+    int gfx_is_an_animation_only (void)
+    {
+        return (tp_gfx_is_an_animation_only(tp));
+    }
+
+    int gfx_animated (void)
+    {
+        return (tp_gfx_animated(tp));
+    }
+
+    int gfx_animated_no_dir (void)
+    {
+        return (tp_gfx_animated_no_dir(tp));
+    }
+
+    int is_rrr1 (void)
+    {
+        return (tp_is_rrr1(tp));
+    }
+
+    int is_rrr2 (void)
+    {
+        return (tp_is_rrr2(tp));
+    }
+
+    int is_rrr3 (void)
+    {
+        return (tp_is_rrr3(tp));
+    }
+
+    int is_rrr4 (void)
+    {
+        return (tp_is_rrr4(tp));
+    }
+
+    int is_rrr5 (void)
+    {
+        return (tp_is_rrr5(tp));
+    }
+
+    int is_rrr6 (void)
+    {
+        return (tp_is_rrr6(tp));
+    }
+
+    int is_rrr7 (void)
+    {
+        return (tp_is_rrr7(tp));
+    }
+
+    int is_rrr8 (void)
+    {
+        return (tp_is_rrr8(tp));
+    }
+
+    int is_rrr9 (void)
+    {
+        return (tp_is_rrr9(tp));
+    }
+
+    int is_rrr10 (void)
+    {
+        return (tp_is_rrr10(tp));
+    }
+
+    int is_rrr11 (void)
+    {
+        return (tp_is_rrr11(tp));
+    }
+
+    int is_rrr12 (void)
+    {
+        return (tp_is_rrr12(tp));
+    }
+
+    int is_rrr13 (void)
+    {
+        return (tp_is_rrr13(tp));
+    }
+
+    int is_rrr14 (void)
+    {
+        return (tp_is_rrr14(tp));
+    }
+
+    int is_rrr15 (void)
+    {
+        return (tp_is_rrr15(tp));
+    }
+
+    int is_rrr16 (void)
+    {
+        return (tp_is_rrr16(tp));
+    }
+
+    int is_wall_clinger (void)
+    {
+        return (tp_is_wall_clinger(tp));
+    }
+
+    std::string nutrition_hd (void)
+    {
+        return (tp_nutrition_hd(tp));
+    }
+
+    std::string bite_damage_hd (void)
+    {
+        return (tp_bite_damage_hd(tp));
+    }
+
+    int collision_check (void)
+    {
+        return (tp_collision_check(tp));
+    }
+
+    int attack_on_collision (void)
+    {
+        return (tp_attack_on_collision(tp));
+    }
+
+    int is_water_dweller (void)
+    {
+        return (tp_is_water_dweller(tp));
+    }
+
+    int collision_hit_priority (void)
+    {
+        return (tp_collision_hit_priority(tp));
+    }
+
+    double collision_radius (void)
+    {
+        return (tp_collision_radius(tp));
+    }
+
+    int ai_delay_after_moving_ms (void)
+    {
+        return (tp_ai_delay_after_moving_ms(tp));
+    }
+
+    int gfx_bounce_on_move (void)
+    {
+        return (tp_gfx_bounce_on_move(tp));
+    }
+
+    int is_corpse_on_death (void)
+    {
+        return (tp_is_corpse_on_death(tp));
+    }
+
+    int is_bleeder (void)
+    {
+        return (tp_is_bleeder(tp));
+    }
+
+    int is_meat_eater (void)
+    {
+        return (tp_is_meat_eater(tp));
+    }
+
+    int is_made_of_meat (void)
+    {
+        return (tp_is_made_of_meat(tp));
+    }
+
+    int is_active (void)
+    {
+        return (tp_is_active(tp));
+    }
+
+    int hunger_starving_at_health_pct (void)
+    {
+        return (tp_hunger_starving_at_health_pct(tp));
+    }
+
+    int hunger_initial_health_at (void)
+    {
+        return (tp_hunger_initial_health_at(tp));
+    }
+
+    int hunger_at_health_pct (void)
+    {
+        return (tp_hunger_at_health_pct(tp));
+    }
+
+    int hunger_clock_freq_ms (void)
+    {
+        return (tp_hunger_clock_freq_ms(tp));
+    }
+
+    int ai_scent_distance (void)
+    {
+        return (tp_ai_scent_distance(tp));
+    }
+
+    int is_ripple (void)
+    {
+        return (tp_is_ripple(tp));
+    }
+
+    int is_light_strength (void)
+    {
+        return (tp_is_light_strength(tp));
+    }
+
+    int is_dirt (void)
+    {
+        return (tp_is_dirt(tp));
+    }
+
+    int is_blood (void)
+    {
+        return (tp_is_blood(tp));
+    }
+
+    int gfx_animated_can_vflip (void)
+    {
+        return (tp_gfx_animated_can_vflip(tp));
+    }
+
+    int gfx_small_shadow_caster (void)
+    {
+        return (tp_gfx_small_shadow_caster(tp));
+    }
+
+    int is_corridor (void)
+    {
+        return (tp_is_corridor(tp));
+    }
+
+    int gfx_oversized_but_sitting_on_the_ground (void)
+    {
+        return (tp_gfx_oversized_but_sitting_on_the_ground(tp));
+    }
+
+    int is_boring (void)
+    {
+        return (tp_is_boring(tp));
+    }
+
+    int is_exit (void)
+    {
+        return (tp_is_exit(tp));
+    }
+
+    int is_entrance (void)
+    {
+        return (tp_is_entrance(tp));
+    }
+
+    int gfx_is_floor_deco (void)
+    {
+        return (tp_gfx_is_floor_deco(tp));
+    }
+
+    int gfx_is_wall_deco (void)
+    {
+        return (tp_gfx_is_wall_deco(tp));
+    }
+
+    int move_speed_ms (void)
+    {
+        return (tp_move_speed_ms(tp));
+    }
+
+    int weapon_use_delay_hundredths (void)
+    {
+        return (tp_weapon_use_delay_hundredths(tp));
+    }
+
+    int collision_box (void)
+    {
+        return (tp_collision_box(tp));
+    }
+
+    int collision_circle (void)
+    {
+        return (tp_collision_circle(tp));
+    }
+
+    int weapon_damage (void)
+    {
+        return (tp_weapon_damage(tp));
+    }
+
+    int is_projectile (void)
+    {
+        return (tp_is_projectile(tp));
+    }
+
+    int is_explosion (void)
+    {
+        return (tp_is_explosion(tp));
+    }
+
+    int is_combustable (void)
+    {
+        return (tp_is_combustable(tp));
+    }
+
+    int weapon_use_distance (void)
+    {
+        return (tp_weapon_use_distance(tp));
+    }
+
+    int gfx_is_weapon_carry_anim_only (void)
+    {
+        return (tp_gfx_is_weapon_carry_anim_only(tp));
+    }
+
+    int gfx_is_weapon_use_anim (void)
+    {
+        return (tp_gfx_is_weapon_use_anim(tp));
+    }
+
+    int is_weapon (void)
+    {
+        return (tp_is_weapon(tp));
+    }
+
+    int gfx_outlined (void)
+    {
+        return (tp_gfx_outlined(tp));
+    }
+
+    int gfx_large_shadow_caster (void)
+    {
+        return (tp_gfx_large_shadow_caster(tp));
+    }
+
+    int gfx_can_hflip (void)
+    {
+        return (tp_gfx_can_hflip(tp));
+    }
+
+    int z_depth (void)
+    {
+        return (tp_z_depth(tp));
+    }
+
+    int is_movable (void)
+    {
+        return (tp_is_movable(tp));
+    }
+
+    int is_movement_blocking (void)
+    {
+        return (tp_is_movement_blocking(tp));
+    }
+
+    int is_key (void)
+    {
+        return (tp_is_key(tp));
+    }
 };
 
 class ThingDisplaySortKey {
@@ -493,5 +888,7 @@ bool things_overlap(Thingp t, fpoint t_at, Thingp o);
  * thing_tick.cpp
  */
 extern void things_tick(void);
+
+extern const double wall_clinger_scale;
 
 #endif /* THING_H */

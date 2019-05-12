@@ -262,47 +262,47 @@ void Thing::update_pos (fpoint to)
     // Keep track of where this thing is on the grid
     //
     if (old_at != new_at) {
-        if (tp_is_wall(tp)) {
+        if (is_wall()) {
             game.state.map.is_wall[old_at.x][old_at.y] = false;
             game.state.map.is_wall[new_at.x][new_at.y] = true;
         }
-        if (tp_is_wall(tp)) {
+        if (is_wall()) {
             game.state.map.is_solid[old_at.x][old_at.y] = false;
             game.state.map.is_solid[new_at.x][new_at.y] = true;
         }
-        if (tp_is_floor(tp)) {
+        if (is_floor()) {
             game.state.map.is_floor[old_at.x][old_at.y] = false;
             game.state.map.is_floor[new_at.x][new_at.y] = true;
         }
-        if (tp_is_lava(tp)) {
+        if (is_lava()) {
             game.state.map.is_lava[old_at.x][old_at.y] = false;
             game.state.map.is_lava[new_at.x][new_at.y] = true;
         }
-        if (tp_is_blood(tp)) {
+        if (is_blood()) {
             game.state.map.is_blood[old_at.x][old_at.y] = false;
             game.state.map.is_blood[new_at.x][new_at.y] = true;
         }
-        if (tp_is_water(tp)) {
+        if (is_water()) {
             game.state.map.is_water[old_at.x][old_at.y] = false;
             game.state.map.is_water[new_at.x][new_at.y] = true;
         }
-        if (tp_is_deep_water(tp)) {
+        if (is_deep_water()) {
             game.state.map.is_deep_water[old_at.x][old_at.y] = false;
             game.state.map.is_deep_water[new_at.x][new_at.y] = true;
         }
-        if (tp_is_corridor(tp)) {
+        if (is_corridor()) {
             game.state.map.is_corridor[old_at.x][old_at.y] = false;
             game.state.map.is_corridor[new_at.x][new_at.y] = true;
         }
-        if (tp_is_dirt(tp)) {
+        if (is_dirt()) {
             game.state.map.is_dirt[old_at.x][old_at.y] = false;
             game.state.map.is_dirt[new_at.x][new_at.y] = true;
         }
-        if (tp_is_monst(tp)) {
+        if (is_monst()) {
             game.state.map.is_monst[old_at.x][old_at.y] = false;
             game.state.map.is_monst[new_at.x][new_at.y] = true;
         }
-        if (tp_is_key(tp)) {
+        if (is_key()) {
             game.state.map.is_key[old_at.x][old_at.y] = false;
             game.state.map.is_key[new_at.x][new_at.y] = true;
         }
@@ -310,7 +310,7 @@ void Thing::update_pos (fpoint to)
             game.state.map.gfx_large_shadow_caster[old_at.x][old_at.y] = false;
             game.state.map.gfx_large_shadow_caster[new_at.x][new_at.y] = true;
         }
-        if (tp_is_door(tp)) {
+        if (is_door()) {
             game.state.map.is_door[old_at.x][old_at.y] = false;
             game.state.map.is_door[new_at.x][new_at.y] = true;
         }

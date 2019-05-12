@@ -20,7 +20,7 @@ void Thing::achieve_goals_in_life (void)
     }
 }
 
-void Thing::collision_check (void)
+void Thing::do_collision_check (void)
 {
     if (!tp_collision_check(tp)) {
         return;
@@ -47,7 +47,7 @@ void Thing::tick (void)
         return;
     }
 
-    collision_check();
+    do_collision_check();
     if (is_dead) {
         return;
     }
