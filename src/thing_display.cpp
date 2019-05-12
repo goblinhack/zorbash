@@ -21,7 +21,7 @@ void Thing::attach (void)
         }
     }
 
-    if (tp_is_active(tp)) {
+    if (is_active()) {
         auto root = &game.state.map.all_active_things_at[(int)mid_at.x][(int)mid_at.y];
         auto p = std::make_pair(id, this);
         auto result = root->insert(p);
@@ -30,7 +30,7 @@ void Thing::attach (void)
         }
     }
 
-    if (!tp_is_boring(tp)) {
+    if (!is_boring()) {
         auto root = &game.state.map.all_non_boring_things_at[(int)mid_at.x][(int)mid_at.y];
         auto p = std::make_pair(id, this);
         auto result = root->insert(p);
@@ -66,7 +66,7 @@ void Thing::detach (void)
         root->erase(key);
     }
 
-    if (tp_is_active(tp)) {
+    if (is_active()) {
         auto root = &game.state.map.all_active_things_at[(int)last_attached.x]
                                                         [(int)last_attached.y];
         auto result = root->find(id);
@@ -76,7 +76,7 @@ void Thing::detach (void)
         root->erase(id);
     }
 
-    if (!tp_is_boring(tp)) {
+    if (!is_boring()) {
         auto root = &game.state.map.all_non_boring_things_at[(int)last_attached.x]
                                                             [(int)last_attached.y];
         auto result = root->find(id);
@@ -492,7 +492,7 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
         return;
     }
 
-    if (tp_is_player(tp) || (owner_thing_id == game.state.player->id)) {
+    if (is_player() || (owner_thing_id == game.state.player->id)) {
         blit_player_owned_shadow(tp, tile, tl, br);
     } else {
         blit_non_player_owned_shadow(tp, tile, tl, br);
@@ -509,7 +509,7 @@ void Thing::blit_shadow_section (const Tpp &tp, const Tilep &tile,
         return;
     }
 
-    if (tp_is_player(tp) || (owner_thing_id == game.state.player->id)) {
+    if (is_player() || (owner_thing_id == game.state.player->id)) {
         blit_player_owned_shadow_section(
             tp, tile, tile_tl, tile_br, tl, br);
     } else {
@@ -543,8 +543,8 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     bool submerged = false;
     bool lava = false;
 
-    if (tp_is_monst(tp) ||
-        tp_is_player(tp) ||
+    if (is_monst() ||
+        is_player() ||
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim_only(tp)) {
 
@@ -573,7 +573,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 #if 0
     if ((mouse_x > blit_tl.x * game.config.video_pix_width) && (mouse_x < blit_br.x * game.config.video_pix_width) &&
         (mouse_y > blit_tl.y * game.config.video_pix_height) && (mouse_y < blit_br.y * game.config.video_pix_height)) {
-        if (tp_is_wall(tp)) {
+        if (is_wall()) {
 //            con("over");
 //            extern Thingp debug_thing;
 //            debug_thing = this;
@@ -627,7 +627,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     //if (!tp) { // top_tile) {
     if (top_tile) {
-        if (tp_is_wall(tp)) {
+        if (is_wall()) {
             blit_wall_cladding(blit_tl, blit_br);
         }
     }
@@ -674,8 +674,8 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 
     bool submerged = false;
 
-    if (tp_is_monst(tp) ||
-        tp_is_player(tp) ||
+    if (is_monst() ||
+        is_player() ||
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim_only(tp)) {
 
@@ -709,7 +709,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     }
 
     if (top_tile) {
-        if (tp_is_wall(tp)) {
+        if (is_wall()) {
             blit_wall_cladding(blit_tl, blit_br);
         }
     }

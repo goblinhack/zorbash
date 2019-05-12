@@ -50,7 +50,7 @@ void Thing::animate (void)
         //
         // If walking and now we've stopped, choose the idle no dir tile.
         //
-        if (t->is_player && !t->is_dead && !t->is_moving &&
+        if (t->is_player() && !t->is_dead && !t->is_moving &&
             (time_get_time_ms() >= t->begin_move_ms + 500)) {
 
             Tileinfop new_tile;
@@ -244,7 +244,7 @@ void Thing::animate (void)
     }
 #endif
 #if 0
-    if (tp_is_monst(tp)) {
+    if (is_monst()) {
         CON("set %s", tile_info_name(tile).c_str());
     }
 #endif

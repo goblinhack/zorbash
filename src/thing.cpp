@@ -15,6 +15,12 @@ static uint32_t next_thing_id;
 
 static std::list<uint32_t> things_to_delete;
 
+//
+// Each cell is broken into a 3 x 3 grid to allow things to navigate the
+// edges of walls
+// 
+const double wall_clinger_scale = 3.0;
+
 void thing_gc (void)
 {
     for (auto id : things_to_delete) {
@@ -66,6 +72,44 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
     }
 
+    //
+    // Find which wall is the closest to cling onto if this is a wall clinger
+    //
+    t->ground_at = at;
+    if (tp_is_wall_clinger(tp)) {
+        fpoint closest(-1, -1);
+        double closest_dist = 999;
+        bool found_ground = false;
+
+        for (auto dx = -1; dx <= 1; dx++) {
+            for (auto dy = -1; dy <= 1; dy++) {
+                fpoint n = at + fpoint(dx, dy);
+                if (!game.state.map.is_oob(n)) {
+                    if (game.state.map.is_wall[(int)n.x][(int)n.y]) {
+                        auto d = DISTANCE(n.x, n.y, at.x, at.y);
+CON("%f %f %f %f dist %f closest %f", at.x, at.y, n.x, n.y, d, closest_dist);
+                        if (d < closest_dist) {
+CON("%f %f %f %f dist %f closest", at.x, at.y, n.x, n.y, d);
+                            closest_dist = d;
+                            closest = n;
+                            found_ground = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (found_ground) {
+            t->ground_at = at +
+                fpoint(
+                    (closest.x - at.x) * 1.0 / wall_clinger_scale,
+                    (closest.y - at.y) * 1.0 / wall_clinger_scale);
+if (1) {
+DIE("%f %f %f %f", at.x, at.y, closest.x, closest.y);
+}
+        }
+    }
+
     t->mid_at         = at;
     t->last_mid_at    = t->mid_at;
 
@@ -81,7 +125,6 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->is_starving        = false;
     t->is_dead            = false;
     t->is_bloodied        = false;
-    t->is_player          = false;
     t->is_hidden          = false;
     t->is_sleeping        = false;
     t->is_moving          = false;
@@ -218,10 +261,6 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     }
     if (tp_is_door(tp)) {
         game.state.map.is_door[new_at.x][new_at.y] = true;
-    }
-
-    if (tp_is_player(tp)) {
-        t->is_player = true;
     }
 
     if (!tp_is_active(tp)) {
@@ -464,7 +503,7 @@ void Thing::destroy (void)
 #ifdef ENABLE_THING_DEBUG
     log("destroy");
 #else
-    if (!tp_is_active(tp)) {
+    if (!is_active()) {
         log("destroy");
     }
 #endif
@@ -475,7 +514,7 @@ void Thing::destroy (void)
         auto a = &game.state.map.all_things;
         auto iter = a->find(id);
         if (iter != a->end()) {
-            if (!tp_is_active(tp)) {
+            if (!is_active()) {
                 log("erasing from all things");
             }
             game.state.map.all_things.erase(iter);
@@ -490,7 +529,7 @@ void Thing::destroy (void)
         auto a = &game.state.map.all_active_things;
         auto iter = a->find(id);
         if (iter != a->end()) {
-            if (!tp_is_active(tp)) {
+            if (!is_active()) {
                 log("erasing from active things");
             }
             game.state.map.all_active_things.erase(iter);
@@ -506,46 +545,46 @@ void Thing::destroy (void)
     //
     point old_at((int)mid_at.x, (int)mid_at.y);
 
-    if (tp_is_wall(tp)) {
+    if (is_wall()) {
         game.state.map.is_wall[old_at.x][old_at.y] = false;
     }
-    if (tp_is_wall(tp)) {
+    if (is_wall()) {
         game.state.map.is_solid[old_at.x][old_at.y] = false;
     }
-    if (tp_is_floor(tp)) {
+    if (is_floor()) {
         game.state.map.is_floor[old_at.x][old_at.y] = false;
     }
-    if (tp_is_lava(tp)) {
+    if (is_lava()) {
         game.state.map.is_lava[old_at.x][old_at.y] = false;
     }
-    if (tp_is_blood(tp)) {
+    if (is_blood()) {
         game.state.map.is_blood[old_at.x][old_at.y] = false;
     }
-    if (tp_is_water(tp)) {
+    if (is_water()) {
         game.state.map.is_water[old_at.x][old_at.y] = false;
     }
-    if (tp_is_deep_water(tp)) {
+    if (is_deep_water()) {
         game.state.map.is_deep_water[old_at.x][old_at.y] = false;
     }
-    if (tp_is_corridor(tp)) {
+    if (is_corridor()) {
         game.state.map.is_corridor[old_at.x][old_at.y] = false;
     }
-    if (tp_is_dirt(tp)) {
+    if (is_dirt()) {
         game.state.map.is_dirt[old_at.x][old_at.y] = false;
     }
-    if (tp_is_monst(tp)) {
+    if (is_monst()) {
         game.state.map.is_monst[old_at.x][old_at.y] = false;
     }
-    if (tp_is_key(tp)) {
+    if (is_key()) {
         game.state.map.is_key[old_at.x][old_at.y] = false;
     }
     if (tp_gfx_large_shadow_caster(tp)) {
         game.state.map.gfx_large_shadow_caster[old_at.x][old_at.y] = false;
     }
-    if (tp_is_door(tp)) {
+    if (is_door()) {
         game.state.map.is_door[old_at.x][old_at.y] = false;
     }
-    if (tp_is_player(tp)) {
+    if (is_player()) {
         game.state.player = nullptr;
     }
 
@@ -609,7 +648,7 @@ void Thing::move_carried_items (void)
     //
     // Not really an item...
     //
-    if (tp_is_monst(tp) || tp_is_player(tp)) {
+    if (is_monst() || is_player()) {
         if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {
             thing_new(tp_name(tp_random_ripple()), mid_at);
         }
@@ -654,7 +693,7 @@ void Thing::kill (void)
     }
     is_dead = true;
 
-    if (tp_is_corpse_on_death(tp)) {
+    if (is_corpse_on_death()) {
         return;
     }
 

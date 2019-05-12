@@ -26,7 +26,7 @@ int Thing::hit_actual (Thingp orig_hitter,
     //
     // Protect player from multiple impact - landing hard on a spike.
     //
-    if (is_player) {
+    if (is_player()) {
         if (!time_have_x_tenths_passed_since(10, timestamp_last_i_was_hit)) {
             return (false);
         }
@@ -119,7 +119,7 @@ int Thing::hit_if_possible (Thingp hitter, int damage)
         // Walls and doors and other solid object are not damaged by poison
         // or similar effects. Limit it to explosions and the like.
         //
-        if (tp_is_door(tp) || tp_is_wall(tp)) {
+        if (is_door() || is_wall()) {
 
             if (!tp_is_explosion(hitter->tp)     &&
                 !tp_is_projectile(hitter->tp)    &&
