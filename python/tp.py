@@ -194,9 +194,6 @@ class Tp:
     def set_is_rrr16(self, value):
         zx.tp_set_is_rrr16(self, value)
 
-    def set_is_wall_clinger(self, value):
-        zx.tp_set_is_wall_clinger(self, value)
-
     def set_nutrition_hd(self, value):
         zx.tp_set_nutrition_hd(self, value)
 

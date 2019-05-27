@@ -25,7 +25,6 @@ def tp_init(name):
     x.set_is_monst(True)
     x.set_is_movable(True)
     x.set_is_movement_blocking(True)
-    x.set_is_wall_clinger(True)
     x.set_is_water_dweller(True)
     x.set_move_speed_ms(100)
     x.set_z_depth(zx.MAP_DEPTH_MONST)

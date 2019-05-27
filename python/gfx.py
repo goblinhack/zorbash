@@ -58,7 +58,6 @@ def init_text():
 
 def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
-    zx.tex_load(file="data/gfx/light_small.tga", name="light_small")
 
 def init_16x16():
     zx.tex_load(

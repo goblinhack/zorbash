@@ -179,7 +179,6 @@ public:
     int is_rrr14 {};
     int is_rrr15 {};
     int is_rock {};
-    int is_wall_clinger {};
     std::string nutrition_hd {};
     Dice nutrition;
     std::string bite_damage_hd {};
@@ -381,11 +380,6 @@ static inline int tp_is_rrr15 (Tpp t)
 static inline int tp_is_rock (Tpp t)
 {
     return (t->is_rock);
-}
-
-static inline int tp_is_wall_clinger (Tpp t)
-{
-    return (t->is_wall_clinger);
 }
 
 static inline std::string tp_nutrition_hd (Tpp t)
