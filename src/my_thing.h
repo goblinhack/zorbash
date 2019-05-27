@@ -555,11 +555,6 @@ public:
         return (tp_is_rock(tp));
     }
 
-    int is_wall_clinger (void)
-    {
-        return (tp_is_wall_clinger(tp));
-    }
-
     std::string nutrition_hd (void)
     {
         return (tp_nutrition_hd(tp));
@@ -889,7 +884,5 @@ bool things_overlap(Thingp t, fpoint t_at, Thingp o);
  * thing_tick.cpp
  */
 extern void things_tick(void);
-
-extern const double wall_clinger_scale;
 
 #endif /* THING_H */

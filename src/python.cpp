@@ -1695,7 +1695,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr14)
     TP_SET_DECL(is_rrr15)
     TP_SET_DECL(is_rock)
-    TP_SET_DECL(is_wall_clinger)
     TP_SET_DECL(nutrition_hd)
     TP_SET_DECL(bite_damage_hd)
     TP_SET_DECL(collision_check)

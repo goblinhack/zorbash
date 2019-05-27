@@ -15,12 +15,6 @@ static uint32_t next_thing_id;
 
 static std::list<uint32_t> things_to_delete;
 
-//
-// Each cell is broken into a 3 x 3 grid to allow things to navigate the
-// edges of walls
-// 
-const double wall_clinger_scale = 3.0;
-
 void thing_gc (void)
 {
     for (auto id : things_to_delete) {
@@ -75,40 +69,10 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     //
     // Find which wall is the closest to cling onto if this is a wall clinger
     //
-    t->ground_at = at;
-    if (tp_is_wall_clinger(tp)) {
-        fpoint closest(-1, -1);
-        double closest_dist = 999;
-        bool found_ground = false;
-
-        for (auto dx = -1; dx <= 1; dx++) {
-            for (auto dy = -1; dy <= 1; dy++) {
-                fpoint n = at + fpoint(dx, dy);
-                if (!game.state.map.is_oob(n)) {
-                    if (game.state.map.is_wall[(int)n.x][(int)n.y]) {
-                        auto d = DISTANCE(n.x, n.y, at.x, at.y);
-                        if (d < closest_dist) {
-                            closest_dist = d;
-                            closest = n;
-                            found_ground = true;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (found_ground) {
-            t->ground_at = at +
-                fpoint(
-                    (closest.x - at.x) * 1.0 / wall_clinger_scale,
-                    (closest.y - at.y) * 1.0 / wall_clinger_scale);
-        }
-    }
-
-    t->mid_at         = at;
-    t->last_mid_at    = t->mid_at;
-
-    t->depth          = tp_z_depth(tp);
+    t->ground_at          = at;
+    t->mid_at             = at;
+    t->last_mid_at        = t->mid_at;
+    t->depth              = tp_z_depth(tp);
 
     if (tp_gfx_can_hflip(tp)) {
         t->dir            = THING_DIR_RIGHT;

@@ -773,7 +773,7 @@ _
         game_place_exit(dungeon, "exit1");
         game_place_door(dungeon, "door1");
 
-        auto tries = 200;
+        auto tries = 1000;
 
         game_place_walls(dungeon, 1, 6, 6, tries);
         game_place_walls(dungeon, 2, 6, 6, tries);

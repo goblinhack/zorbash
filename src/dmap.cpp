@@ -92,37 +92,6 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
     memcpy(d->val, new_val, sizeof(d->val));
 }
 
-void dmap_convert_to_wall_clinging (Dmap *d)
-{
-    uint8_t new_val[MAP_WIDTH][MAP_HEIGHT];
-    uint8_t x;
-    uint8_t y;
-
-    memset(new_val, DMAP_IS_WALL, sizeof(new_val));
-
-    for (y = 1; y < MAP_HEIGHT - 1; y++) {
-        for (x = 1; x < MAP_WIDTH - 1; x++) {
-            if (d->val[x][y] == DMAP_IS_WALL) {
-                continue;
-            }
-
-            if ((d->val[x-1][y-1] != DMAP_IS_WALL) &&
-                (d->val[x  ][y-1] != DMAP_IS_WALL) &&
-                (d->val[x+1][y-1] != DMAP_IS_WALL) &&
-                (d->val[x-1][y  ] != DMAP_IS_WALL) &&
-                (d->val[x+1][y  ] != DMAP_IS_WALL) &&
-                (d->val[x-1][y+1] != DMAP_IS_WALL) &&
-                (d->val[x  ][y+1] != DMAP_IS_WALL) &&
-                (d->val[x+1][y+1] != DMAP_IS_WALL)) {
-                continue;
-            }
-
-            new_val[x][y] = d->val[x][y];
-        }
-    }
-    memcpy(d->val, new_val, sizeof(d->val));
-}
-
 uint64_t dmap_hash (Dmap *d)
 {
     uint64_t hash = 0;

@@ -174,12 +174,7 @@ fpoint Thing::get_next_hop (void)
     auto maxy = MAP_HEIGHT;
     fpoint fstart;
 
-    if (is_wall_clinger()) {
-        fstart = ground_at;
-    } else {
-        fstart = mid_at;
-    }
-
+    fstart = mid_at;
     point start((int)fstart.x, (int)fstart.y);
 
     for (auto y = miny; y < maxy; y++) {
@@ -309,44 +304,6 @@ fpoint Thing::get_next_hop (void)
     // Wall clingers create a dmap that is essentially a border around
     // the existing walls
     //
-    const double wall_clinger_scale = 3;
-    if (is_wall_clinger()) {
-        double s, c;
-#if 0
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-CON("                 ");
-#endif
-        sincos(rot + RAD_270, &s, &c);
-#if 0
-        dmap_print(dmap_goals, start);
-#endif
-        dmap_scale_and_recenter(dmap_goals, fstart, (int)wall_clinger_scale);
-        //
-        // This "zoomed in" dmap is centered on the creature with each
-        // neighboring tile now taking up wall_clinger_scale^2 cells.
-        // This allows us to choose a path around the edge of a single tile.
-        // 
-        start.x = MAP_WIDTH / 2;
-        start.y = MAP_HEIGHT / 2;
-        dmap_convert_to_wall_clinging(dmap_goals);
-    }
-
 #if 0
     dmap_print(dmap_goals, start);
 #endif
@@ -370,56 +327,8 @@ CON("                 ");
     }
 
     fpoint fbest;
-    if (is_wall_clinger()) {
-        fbest.x = mid_at.x + ((1.0 / wall_clinger_scale) * (best.x - start.x));
-        fbest.y = mid_at.y + ((1.0 / wall_clinger_scale) * (best.y - start.y));
-
-        //
-        // Find which wall is the closest to cling onto post move.
-        //
-        fpoint closest(-1, -1);
-        double closest_dist = 999;
-
-        auto x = (int)fbest.x;
-        auto y = (int)fbest.y;
-        for (auto dx = -1; dx <= 1; dx++) {
-            for (auto dy = -1; dy <= 1; dy++) {
-                fpoint n(x + dx, y + dy);
-//CON("XXX try     %f %f", n.x, n.y);
-                if (!game.state.map.is_oob(n)) {
-                    if (game.state.map.is_wall[(int)n.x][(int)n.y]) {
-                        auto d = DISTANCE(n.x, n.y, fbest.x, fbest.y);
-//CON("XXX try     %f %f dx %d dy %d dist %f ", n.x, n.y, dx, dy, d);
-                        if (d < closest_dist) {
-                            closest_dist = d;
-                            closest = n;
-                        }
-                    }
-                }
-            }
-        }
-
-        if (closest.x > 0) {
-            if (closest.y > 0) {
-//CON("XXX 1");
-            } else if (closest.y < 0) {
-//CON("XXX 2");
-            } else {
-//CON("XXX 3");
-            }
-        } else if (closest.x > 0) {
-            if (closest.y > 0) {
-//CON("XXX 4");
-            } else if (closest.y < 0) {
-//CON("XXX 5");
-            } else {
-//CON("XXX 6");
-            }
-        }
-    } else {
-        fbest.x = best.x;
-        fbest.y = best.y;
-    }
+    fbest.x = best.x;
+    fbest.y = best.y;
 
     return (fbest);
 }
