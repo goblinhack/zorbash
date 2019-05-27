@@ -312,8 +312,8 @@ void Light::render_triangle_fans (void)
     static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
     static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
 
-    auto tx = at.x;
-    auto ty = at.y;
+    auto tx = at.x + 0.5;
+    auto ty = at.y + 0.5;
     fpoint light_pos(tx * game.config.tile_gl_width,
                      ty * game.config.tile_gl_height);
 
@@ -411,7 +411,7 @@ void Light::render_triangle_fans (void)
         blit_init();
         glcolor(WHITE);
         glBlendFunc(GL_ZERO, GL_SRC_ALPHA); // hard black light
-        glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR); // soft shadows
+        // glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR); // soft shadows
         blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         blit_flush();
    }
@@ -529,7 +529,7 @@ void Light::render (int fbo, int pass)
         light_overlay_texid_diffuse = tex_get_gl_binding(light_overlay_tex_diffuse);
     }
     if (!light_overlay_tex_focused) {
-        light_overlay_tex_focused = tex_load("", "light_small", GL_LINEAR);
+        light_overlay_tex_focused = tex_load("", "light", GL_LINEAR);
         light_overlay_texid_focused = tex_get_gl_binding(light_overlay_tex_focused);
     }
 
@@ -687,6 +687,10 @@ void lights_render_high_quality (int minx, int miny, int maxx, int maxy, int fbo
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
 
+                if (l->quality != LIGHT_QUALITY_HIGH) {
+                    continue;
+                }
+
                 if (game.state.player && (l->owner == game.state.player)) {
                     deferred = l;
                     continue;
@@ -705,14 +709,14 @@ void lights_render_high_quality (int minx, int miny, int maxx, int maxy, int fbo
                     }
                 }
 
-                l->render(fbo, LIGHT_DIFFUSE);
+//                l->render(fbo, LIGHT_DIFFUSE);
                 l->render(fbo, LIGHT_FOCUSED);
             }
         }
     }
 
     if (deferred) {
-        deferred->render(fbo, LIGHT_DIFFUSE);
+//        deferred->render(fbo, LIGHT_DIFFUSE);
         deferred->render(fbo, LIGHT_FOCUSED);
     }
 }

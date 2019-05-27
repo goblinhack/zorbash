@@ -215,13 +215,13 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
         r->finalize();
 
-        //r = r->rotate_clockwise();
-        //r = r->rotate_clockwise();
-        //r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
         r = r->create_w_flip();
-        //r = r->rotate_clockwise();
-        //r = r->rotate_clockwise();
-        //r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
+        r = r->rotate_clockwise();
     }
 
     Py_RETURN_NONE;

@@ -18,30 +18,43 @@
 
 static void thing_map_scroll_do (void)
 {
-    const double step = 32.0;
+    const double step = 10.0;
 
-    auto dx = game.state.map_smooth_at.x - game.state.map_wanted_at.x;
+    auto dx = game.state.map_at.x - game.state.map_wanted_at.x;
     if (dx) {
-        if (fabs(dx / step) > 0.015) {
-            game.state.map_smooth_at.x -= dx / step;
-        }
+        game.state.map_at.x -= dx / step;
     }
 
-    auto dy = game.state.map_smooth_at.y - game.state.map_wanted_at.y;
+    auto dy = game.state.map_at.y - game.state.map_wanted_at.y;
     if (dy) {
-        if (fabs(dy / step) > 0.015) {
-            game.state.map_smooth_at.y -= dy / step;
-        }
+        game.state.map_at.y -= dy / step;
     }
 
-    game.state.map_at = game.state.map_smooth_at;
+    game.state.map_at.x *= game.config.tile_pixel_width;
+    game.state.map_at.x = (int) game.state.map_at.x;
+    game.state.map_at.x /= game.config.tile_pixel_width;
+
+    game.state.map_at.y *= game.config.tile_pixel_height;
+    game.state.map_at.y = (int) game.state.map_at.y;
+    game.state.map_at.y /= game.config.tile_pixel_height;
 
     game.state.map_at.x = std::max(game.state.map_at.x, 0.0);
     game.state.map_at.y = std::max(game.state.map_at.y, 0.0);
-    game.state.map_at.x = std::min(game.state.map_at.x,
+    game.state.map_at.x = std::min(game.state.map_at.x, 
                              (double)MAP_WIDTH - TILES_ACROSS);
-    game.state.map_at.y = std::min(game.state.map_at.y,
+    game.state.map_at.y = std::min(game.state.map_at.y, 
                              (double)MAP_HEIGHT - TILES_DOWN);
+
+    //
+    // Round to pixels
+    //
+    game.state.map_at.x *= 1.0 / game.config.one_pixel_gl_width;
+    game.state.map_at.x = (int)game.state.map_at.x;
+    game.state.map_at.x /= 1.0 / game.config.one_pixel_gl_width;
+
+    game.state.map_at.y *= 1.0 / game.config.one_pixel_gl_height;
+    game.state.map_at.y = (int)game.state.map_at.y;
+    game.state.map_at.y /= 1.0 / game.config.one_pixel_gl_height;
 }
 
 static void thing_map_scroll_follow_player (void)
@@ -77,6 +90,7 @@ void thing_map_scroll_to_player (void)
     }
 }
 
+#if 0
 static void thing_map_blit_background (double offset_x, double offset_y)
 {
     static Texp tex;
@@ -172,6 +186,7 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
+#endif
 
 static void thing_blit_water (int minx, int miny, int minz,
                               int maxx, int maxy, int maxz,
@@ -279,7 +294,23 @@ static void thing_blit_water (int minx, int miny, int minz,
                 if (!tp_is_water(t->tp)) {
                     continue;
                 }
+                t->blit(offset_x - game.config.one_pixel_gl_width,
+                        offset_y - game.config.one_pixel_gl_height, x, y);
                 t->blit(offset_x,
+                        offset_y - game.config.one_pixel_gl_height, x, y);
+                t->blit(offset_x + game.config.one_pixel_gl_width,
+                        offset_y - game.config.one_pixel_gl_height, x, y);
+
+                t->blit(offset_x - game.config.one_pixel_gl_width,
+                        offset_y, x, y);
+                t->blit(offset_x + game.config.one_pixel_gl_width,
+                        offset_y, x, y);
+
+                t->blit(offset_x - game.config.one_pixel_gl_width,
+                        offset_y + game.config.one_pixel_gl_height, x, y);
+                t->blit(offset_x,
+                        offset_y + game.config.one_pixel_gl_height, x, y);
+                t->blit(offset_x + game.config.one_pixel_gl_width,
                         offset_y + game.config.one_pixel_gl_height, x, y);
             }
         }
@@ -456,8 +487,15 @@ static void thing_blit_water (int minx, int miny, int minz,
     c.a = 120;
     glcolor(c);
     blit_fbo(FBO_REFLECTION);
-
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+#endif
     glcolor(WHITE);
 }
 
@@ -663,7 +701,6 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
     blit_fbo_bind(FBO_MAIN);
     blit_fbo(FBO_LIGHT_MERGED);
-
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 }
@@ -750,7 +787,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     //
     static int step1;
     static double step2;
-    if (step1++ >= 20) {
+    if (step1++ >= 5) {
         step1 = 0;
         if (step2++ >= (TILE_HEIGHT * 2) - 1) {
             step2 = 0;
@@ -767,31 +804,31 @@ static void thing_blit_lava (int minx, int miny, int minz,
             for (auto p : thing_display_order[x][y][z]) {
                 auto t = p.second;
                 t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height * 2,
+                        offset_y + game.config.one_pixel_gl_height * 2, 
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height * 2,
+                        offset_y + game.config.one_pixel_gl_height * 2, 
                         x, y);
                 t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height,
+                        offset_y + game.config.one_pixel_gl_height, 
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height,
+                        offset_y + game.config.one_pixel_gl_height, 
                         x, y);
                 t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y - game.config.one_pixel_gl_height * 2,
+                        offset_y - game.config.one_pixel_gl_height * 2, 
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y - game.config.one_pixel_gl_height * 2,
+                        offset_y - game.config.one_pixel_gl_height * 2, 
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height * 3,
+                        offset_y + game.config.one_pixel_gl_height * 3, 
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height * 2,
+                        offset_y + game.config.one_pixel_gl_height * 2, 
                         x, y);
                 t->blit(offset_x,
-                        offset_y - game.config.one_pixel_gl_height * 2,
+                        offset_y - game.config.one_pixel_gl_height * 2, 
                         x, y);
             }
         }
@@ -811,19 +848,19 @@ static void thing_blit_lava (int minx, int miny, int minz,
             for (auto p : thing_display_order[x][y][z]) {
                 auto t = p.second;
                 t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height,
+                        offset_y + game.config.one_pixel_gl_height, 
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height,
+                        offset_y + game.config.one_pixel_gl_height, 
                         x, y);
                 t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height,
+                        offset_y - game.config.one_pixel_gl_height, 
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height,
+                        offset_y - game.config.one_pixel_gl_height, 
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height,
+                        offset_y + game.config.one_pixel_gl_height, 
                         x, y);
             }
         }
@@ -929,7 +966,6 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_flush();
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(WHITE);
 
     blit_fbo_bind(FBO_MAIN);
     blit_fbo(FBO_LIGHT_MERGED);
@@ -1047,16 +1083,15 @@ static void thing_blit_things (int minx, int miny, int minz,
     double offset_x = game.state.map_at.x * game.config.tile_gl_width;
     double offset_y = game.state.map_at.y * game.config.tile_gl_height;
 
-    thing_map_blit_background(offset_x, offset_y);
-    thing_map_blit_background_lit(offset_x, offset_y);
-
+    //thing_map_blit_background(offset_x, offset_y);
+    //thing_map_blit_background_lit(offset_x, offset_y);
+    
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 
     //
     // Floors
     //
-#if 0
     blit_init();
     { auto z = MAP_DEPTH_FLOOR;
         for (auto y = miny; y < maxy; y++) {
@@ -1071,7 +1106,6 @@ static void thing_blit_things (int minx, int miny, int minz,
     }
 
     blit_flush();
-#endif
 
     //
     // Work out what we will need to display ahead of time so we
@@ -1122,6 +1156,16 @@ static void thing_blit_things (int minx, int miny, int minz,
                          offset_x, offset_y);
     }
 
+    if (have_water) {
+        thing_blit_water(minx, miny, minz, maxx, maxy, maxz,
+                         offset_x, offset_y);
+    }
+
+    if (have_deep_water) {
+        thing_blit_deep_water(minx, miny, minz, maxx, maxy, maxz,
+                              offset_x, offset_y);
+    }
+
     //
     // Everything else
     //
@@ -1140,16 +1184,6 @@ static void thing_blit_things (int minx, int miny, int minz,
 
     blit_flush();
 
-    if (have_water) {
-        thing_blit_water(minx, miny, minz, maxx, maxy, maxz,
-                         offset_x, offset_y);
-    }
-
-    if (have_deep_water) {
-        thing_blit_deep_water(minx, miny, minz, maxx, maxy, maxz,
-                              offset_x, offset_y);
-    }
-
     for (auto t : moved) {
         std::swap(t->br, t->old_br);
         t->detach();
@@ -1158,45 +1192,6 @@ static void thing_blit_things (int minx, int miny, int minz,
 
         t->update_light();
     }
-}
-
-static void thing_blit_editor (int minx, int miny, int minz,
-                               int maxx, int maxy, int maxz)
-{
-    blit_init();
-    color c = RED;
-    c.a = 50;
-    glcolor(c);
-    for (int x = minx ; x < maxx; x++) {
-        if ((x < 0) || (x >= MAP_WIDTH)) {
-            continue;
-        }
-        for (int y = miny ; y < maxy; y++) {
-            if ((y < 0) || (y >= MAP_HEIGHT)) {
-                continue;
-            }
-
-            fpoint tl;
-            fpoint br;
-
-            double tx = x - game.state.map_at.x;
-            double ty = y - game.state.map_at.y;
-            tl.x = tx * game.config.tile_pixel_width;
-            tl.y = ty * game.config.tile_pixel_height;
-            br.x = tl.x + game.config.tile_pixel_width;
-            br.y = tl.y + game.config.tile_pixel_height;
-
-            gl_blitsquare(tl.x, tl.y, br.x, br.y);
-
-            if ((mouse_x >= tl.x) && (mouse_x < br.x) &&
-                (mouse_y >= tl.y) && (mouse_y < br.y)) {
-                game.state.map_tile_over.x = x;
-                game.state.map_tile_over.y = y;
-                // game_mouse_over(x, y, mouse_x, mouse_y, 0, 0);
-            }
-        }
-    }
-    blit_flush();
 }
 
 void thing_render_all (void)
@@ -1217,13 +1212,7 @@ void thing_render_all (void)
     int maxy = std::min(MAP_HEIGHT,
         (int)game.state.map_at.y + TILES_DOWN + 2);
 
-    //
-    // Improve this to only update when things move one tile
-    //
-    if (!game.config.editor_mode) {
-        thing_map_scroll_follow_player();
-    }
-
+    thing_map_scroll_follow_player();
     thing_map_scroll_do();
     auto lighting = true;
     if (lighting) {
@@ -1234,7 +1223,7 @@ void thing_render_all (void)
         //
         // Render light sources first to their own merged buffer
         //
-#if 0
+#if 1
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -1265,10 +1254,6 @@ void thing_render_all (void)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     } else {
         blit_fbo_bind(FBO_MAIN);
-
-        if (game.config.editor_mode) {
-            thing_blit_editor(minx, miny, minz, maxx, maxy, maxz);
-        }
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);

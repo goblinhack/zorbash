@@ -13,11 +13,6 @@ class Game game;
 
 void game_init (void)
 {
-    game.config.movement_min_speed  = 0.008;
-    game.config.movement_max_speed  = 1.000;
-    game.config.movement_accel_step = 0.060;
-    game.config.movement_accel_run  = 0.100;
-    game.config.movement_friction   = 0.700;
 }
 
 void game_fini (void)
@@ -191,6 +186,82 @@ static void game_place_floors (class Dungeon *d,
                 auto tile = tile_find(tilename);
                 if (!tile) {
                     DIE("floor tile %s not found", tilename.c_str());
+                }
+                t->current_tileinfo = nullptr;
+                t->current_tile = tile;
+            }
+        }
+    }
+}
+
+static void game_place_rocks (class Dungeon *d,
+                              std::string what,
+                              int variant,
+                              int block_width,
+                              int block_height,
+                              int tries)
+{_
+    while (tries--) {
+        auto x = random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+
+        auto can_place_here = true;
+        for (auto dx = 0; dx < block_width; dx++) {
+            auto X = x + dx;
+            for (auto dy = 0; dy < block_height; dy++) {
+                auto Y = y + dy;
+
+                if (d->is_oob(X, Y)) {
+                    continue;
+                }
+
+                if (!d->is_rock_at(X, Y)) {
+                    can_place_here = false;
+                    break;
+                }
+
+                /*
+                 * We place large blocks and avoid splatting them with
+                 * smaller ones here.
+                 */
+                if (game.state.map.is_rock[X][Y]) {
+                    can_place_here = false;
+                    continue;
+                }
+            }
+
+            if (!can_place_here) {
+                break;
+            }
+        }
+
+        if (!can_place_here) {
+            continue;
+        }
+
+        auto cnt = 1;
+        for (auto dy = 0; dy < block_height; dy++) {
+            auto Y = y + dy;
+            for (auto dx = 0; dx < block_width; dx++) {
+                auto X = x + dx;
+                game.state.map.is_rock[X][Y] = 1;
+
+                auto tilename = what + ".";
+                tilename += std::to_string(variant);
+                if (!((block_width == 1) && (block_height == 1))) {
+                    tilename += ".";
+                    tilename += std::to_string(block_width);
+                    tilename += "x";
+                    tilename += std::to_string(block_height);
+                    tilename += ".";
+                    tilename += std::to_string(cnt);
+                    cnt++;
+                }
+
+                auto t = thing_new(what, fpoint(X, Y));
+                auto tile = tile_find(tilename);
+                if (!tile) {
+                    DIE("rock tile %s not found", tilename.c_str());
                 }
                 t->current_tileinfo = nullptr;
                 t->current_tile = tile;
@@ -382,7 +453,7 @@ static void game_place_lava (class Dungeon *d, std::string what)
             (void) thing_new(what, fpoint(x, y));
 
             if (random_range(0, 100) < 80) {
-                thing_new("smoke1", fpoint(x, y), fpoint(2, 2));
+                thing_new("smoke1", fpoint(x, y), fpoint(0.5, 0.5));
             }
         }
     }
@@ -413,7 +484,7 @@ static void game_place_blood (class Dungeon *d)
                     continue;
                 }
 
-                if (random_range(0, 1000) > 5000) {
+                if (random_range(0, 1000) > 50) {
                     continue;
                 }
 
@@ -648,6 +719,23 @@ static void game_place_remaining_walls (class Dungeon *d, std::string what)
     }
 }
 
+static void game_place_remaining_rocks (class Dungeon *d, std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_rock[x][y]) {
+                continue;
+            }
+
+            if (!d->is_rock_at(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+        }
+    }
+}
+
 void game_display (void)
 {_
     static int first = true;
@@ -659,9 +747,9 @@ void game_display (void)
         mysrand(seed);
         LOG("dungeon: create dungeon %u", seed);
 _
-//        auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
-//        GRID_HEIGHT, seed);
-        auto dungeon = new Dungeon(0);
+        auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
+                                   GRID_HEIGHT, seed);
+        // auto dungeon = new Dungeon(0);
 
         LOG("dungeon: create blocks");
 
@@ -674,6 +762,7 @@ _
         memset(game.state.map.is_lava, 0, sizeof(game.state.map.is_lava));
         memset(game.state.map.is_light, 0, sizeof(game.state.map.is_light));
         memset(game.state.map.is_monst, 0, sizeof(game.state.map.is_monst));
+        memset(game.state.map.is_rock, 0, sizeof(game.state.map.is_rock));
         memset(game.state.map.is_solid, 0, sizeof(game.state.map.is_solid));
         memset(game.state.map.gfx_large_shadow_caster, 0, sizeof(game.state.map.gfx_large_shadow_caster));
         memset(game.state.map.is_door, 0, sizeof(game.state.map.is_door));
@@ -735,6 +824,25 @@ _
         game_place_corridor(dungeon, "corridor1", 0);
         game_place_floor_deco(dungeon);
         game_place_wall_deco(dungeon);
+        game_place_rocks(dungeon, "rock1", 1, 6, 6, tries);
+        game_place_rocks(dungeon, "rock1", 2, 6, 6, tries);
+        game_place_rocks(dungeon, "rock1", 1, 6, 3, tries);
+        game_place_rocks(dungeon, "rock1", 1, 3, 6, tries);
+        game_place_rocks(dungeon, "rock1", 1, 3, 3, tries);
+        game_place_rocks(dungeon, "rock1", 2, 3, 3, tries);
+        game_place_rocks(dungeon, "rock1", 3, 3, 3, tries);
+        game_place_rocks(dungeon, "rock1", 4, 3, 3, tries);
+        game_place_rocks(dungeon, "rock1", 1, 2, 2, tries);
+        game_place_rocks(dungeon, "rock1", 2, 2, 2, tries);
+        game_place_rocks(dungeon, "rock1", 1, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 2, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 3, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 1, 1, 2, tries);
+        game_place_rocks(dungeon, "rock1", 2, 1, 2, tries);
+        game_place_rocks(dungeon, "rock1", 3, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
+        game_place_remaining_rocks(dungeon, "rock1");
         game_place_dirt(dungeon, "dirt1");
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
@@ -769,12 +877,6 @@ _
 _
     thing_render_all();
     thing_gc();
-
-#if 0
-    if (!game.editor_mode) {
-        thing_move_all();
-    }
-#endif
 }
 
 uint8_t

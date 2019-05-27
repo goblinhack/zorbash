@@ -66,6 +66,9 @@ bool Thing::is_obstacle_for_me (point p)
     if (game.state.map.is_wall_at(p)) {
         return (true);
     }
+    if (game.state.map.is_rock_at(p)) {
+        return (true);
+    }
     if (game.state.map.is_door_at(p)) {
         return (true);
     }
@@ -309,6 +312,7 @@ fpoint Thing::get_next_hop (void)
     const double wall_clinger_scale = 3;
     if (is_wall_clinger()) {
         double s, c;
+#if 0
 CON("                 ");
 CON("                 ");
 CON("                 ");
@@ -327,8 +331,11 @@ CON("                 ");
 CON("                 ");
 CON("                 ");
 CON("                 ");
+#endif
         sincos(rot + RAD_270, &s, &c);
+#if 0
         dmap_print(dmap_goals, start);
+#endif
         dmap_scale_and_recenter(dmap_goals, fstart, (int)wall_clinger_scale);
         //
         // This "zoomed in" dmap is centered on the creature with each
@@ -340,7 +347,9 @@ CON("                 ");
         dmap_convert_to_wall_clinging(dmap_goals);
     }
 
+#if 0
     dmap_print(dmap_goals, start);
+#endif
     dmap_process(dmap_goals, tl, br);
 
     //
@@ -376,11 +385,11 @@ CON("                 ");
         for (auto dx = -1; dx <= 1; dx++) {
             for (auto dy = -1; dy <= 1; dy++) {
                 fpoint n(x + dx, y + dy);
-CON("XXX try     %f %f", n.x, n.y);
+//CON("XXX try     %f %f", n.x, n.y);
                 if (!game.state.map.is_oob(n)) {
                     if (game.state.map.is_wall[(int)n.x][(int)n.y]) {
                         auto d = DISTANCE(n.x, n.y, fbest.x, fbest.y);
-CON("XXX try     %f %f dx %d dy %d dist %f ", n.x, n.y, dx, dy, d);
+//CON("XXX try     %f %f dx %d dy %d dist %f ", n.x, n.y, dx, dy, d);
                         if (d < closest_dist) {
                             closest_dist = d;
                             closest = n;
@@ -392,19 +401,19 @@ CON("XXX try     %f %f dx %d dy %d dist %f ", n.x, n.y, dx, dy, d);
 
         if (closest.x > 0) {
             if (closest.y > 0) {
-CON("XXX 1");
+//CON("XXX 1");
             } else if (closest.y < 0) {
-CON("XXX 2");
+//CON("XXX 2");
             } else {
-CON("XXX 3");
+//CON("XXX 3");
             }
         } else if (closest.x > 0) {
             if (closest.y > 0) {
-CON("XXX 4");
+//CON("XXX 4");
             } else if (closest.y < 0) {
-CON("XXX 5");
+//CON("XXX 5");
             } else {
-CON("XXX 6");
+//CON("XXX 6");
             }
         }
     } else {

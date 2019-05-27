@@ -30,6 +30,7 @@ public:
         LAVA            = 'L',
         WATER           = 'w',
         DEEP_WATER      = 'W',
+        ROCK            = 'r',
         TREASURE        = '$',
         TRAP            = 'i',
         MONST           = 'm',
@@ -38,6 +39,7 @@ public:
 
     char                      c;
     bool                      is_wall              {false};
+    bool                      is_rock              {false};
     bool                      is_floor             {false};
     bool                      is_corridor          {false};
     bool                      is_dirt              {false};
