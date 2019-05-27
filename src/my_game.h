@@ -86,6 +86,7 @@ public:
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_key[MAP_WIDTH][MAP_HEIGHT] = {};
 
     /*
@@ -115,6 +116,8 @@ public:
     bool is_dirt_at(const int x, const int y);
     bool is_monst_at(const point &p);
     bool is_monst_at(const int x, const int y);
+    bool is_rock_at(const point &p);
+    bool is_rock_at(const int x, const int y);
     bool is_key_at(const point &p);
     bool is_key_at(const int x, const int y);
     bool gfx_large_shadow_caster_at(const point &p);
@@ -164,7 +167,6 @@ public:
     /*
      * Where we're looking in the map
      */
-    fpoint             map_smooth_at;
     fpoint             map_at;
     fpoint             map_wanted_at;
     point              map_tile_over;
@@ -203,12 +205,6 @@ public:
     double             tile_pixel_width             = {};
     double             tile_pixel_height            = {};
     uint32_t           sdl_delay                    = 1;
-    bool               editor_mode                  = false;
-    double             movement_min_speed           = {};
-    double             movement_max_speed           = {};
-    double             movement_accel_step          = {};
-    double             movement_accel_run           = {};
-    double             movement_friction            = {};
 
     template <class Archive>
     void serialize (Archive & archive)
@@ -220,8 +216,7 @@ public:
                 cereal::make_nvp("full_screen",        full_screen),
                 cereal::make_nvp("video_gl_width",     video_gl_width),
                 cereal::make_nvp("video_gl_height",    video_gl_height),
-                cereal::make_nvp("sdl_delay",          sdl_delay),
-                cereal::make_nvp("editor_mode",        editor_mode));
+                cereal::make_nvp("sdl_delay",          sdl_delay));
     }
 };
 

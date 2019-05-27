@@ -87,9 +87,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
                 if (!game.state.map.is_oob(n)) {
                     if (game.state.map.is_wall[(int)n.x][(int)n.y]) {
                         auto d = DISTANCE(n.x, n.y, at.x, at.y);
-CON("%f %f %f %f dist %f closest %f", at.x, at.y, n.x, n.y, d, closest_dist);
                         if (d < closest_dist) {
-CON("%f %f %f %f dist %f closest", at.x, at.y, n.x, n.y, d);
                             closest_dist = d;
                             closest = n;
                             found_ground = true;
@@ -104,9 +102,6 @@ CON("%f %f %f %f dist %f closest", at.x, at.y, n.x, n.y, d);
                 fpoint(
                     (closest.x - at.x) * 1.0 / wall_clinger_scale,
                     (closest.y - at.y) * 1.0 / wall_clinger_scale);
-if (1) {
-DIE("%f %f %f %f", at.x, at.y, closest.x, closest.y);
-}
         }
     }
 
@@ -253,6 +248,9 @@ DIE("%f %f %f %f", at.x, at.y, closest.x, closest.y);
     if (tp_is_monst(tp)) {
         game.state.map.is_monst[new_at.x][new_at.y] = true;
     }
+    if (tp_is_rock(tp)) {
+        game.state.map.is_rock[new_at.x][new_at.y] = true;
+    }
     if (tp_is_key(tp)) {
         game.state.map.is_key[new_at.x][new_at.y] = true;
     }
@@ -289,7 +287,8 @@ DIE("%f %f %f %f", at.x, at.y, closest.x, closest.y);
     if (tp_is_light_strength(tp)) {
         std::string l = tp_str_light_color(tp);
         color c = string2color(l);
-        t->light = light_new(t, MAX_LIGHT_RAYS / 4,
+        c.a = 100;
+        t->light = light_new(t, MAX_LIGHT_RAYS / 8,
                              (double) tp_is_light_strength(tp),
                              t->mid_at, LIGHT_QUALITY_LOW, c);
     }
@@ -548,7 +547,7 @@ void Thing::destroy (void)
     if (is_wall()) {
         game.state.map.is_wall[old_at.x][old_at.y] = false;
     }
-    if (is_wall()) {
+    if (is_wall() || is_rock()) {
         game.state.map.is_solid[old_at.x][old_at.y] = false;
     }
     if (is_floor()) {
@@ -574,6 +573,9 @@ void Thing::destroy (void)
     }
     if (is_monst()) {
         game.state.map.is_monst[old_at.x][old_at.y] = false;
+    }
+    if (is_rock()) {
+        game.state.map.is_rock[old_at.x][old_at.y] = false;
     }
     if (is_key()) {
         game.state.map.is_key[old_at.x][old_at.y] = false;
@@ -650,7 +652,10 @@ void Thing::move_carried_items (void)
     //
     if (is_monst() || is_player()) {
         if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {
-            thing_new(tp_name(tp_random_ripple()), mid_at);
+            fpoint at(mid_at.x - 0.5, mid_at.y - 0.5);
+            if (random_range(0, 1000) > 500) {
+                thing_new(tp_name(tp_random_ripple()), at);
+            }
         }
     }
 }

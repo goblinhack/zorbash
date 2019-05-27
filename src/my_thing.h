@@ -302,6 +302,7 @@ public:
     void attach(void);
     void detach(void);
     void blit_wall_cladding(fpoint &tl, fpoint &br);
+    void blit_rock_cladding(fpoint &tl, fpoint &br);
     void blit_shadow(const Tpp &tp, const Tilep &tile,
                      const fpoint &tl, const fpoint &br);
     void blit_shadow_section(const Tpp &tp, const Tilep &tile,
@@ -549,9 +550,9 @@ public:
         return (tp_is_rrr15(tp));
     }
 
-    int is_rrr16 (void)
+    int is_rock (void)
     {
-        return (tp_is_rrr16(tp));
+        return (tp_is_rock(tp));
     }
 
     int is_wall_clinger (void)

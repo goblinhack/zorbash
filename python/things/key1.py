@@ -9,6 +9,7 @@ def key_init(name):
     x.set_is_movable(True)
     x.set_gfx_outlined(True)
     x.set_is_movement_blocking(True)
+    x.set_gfx_bounce_on_move(True)
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
     x.set_gfx_small_shadow_caster(True)
 
