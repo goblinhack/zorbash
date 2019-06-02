@@ -547,7 +547,7 @@ void Thing::log_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -578,8 +578,8 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: dead, killer %s: ",
-             t->to_string().c_str(),
-             killer->to_string().c_str());
+             t->to_cstring(),
+             killer->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -612,7 +612,7 @@ void Thing::dead_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: dead: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -645,7 +645,7 @@ void Thing::die_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -675,7 +675,7 @@ void Thing::con_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -710,7 +710,7 @@ void Thing::err_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "ERROR: Thing %s: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -766,7 +766,7 @@ void Light::log_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "light %s: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -797,7 +797,7 @@ void Light::die_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "light %s: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -827,7 +827,7 @@ void Light::con_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "light %s: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -861,7 +861,7 @@ void Light::err_ (const char *fmt, va_list args)
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "ERROR: Light %s: ",
-             t->to_string().c_str());
+             t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);

@@ -134,7 +134,7 @@ public:
     int gfx_is_an_animation_only {};
     int gfx_is_floor_deco {};
     int gfx_is_wall_deco {};
-    int gfx_is_weapon_carry_anim_only {};
+    int gfx_is_weapon_carry_anim {};
     int gfx_is_weapon_use_anim {};
     int gfx_large_shadow_caster {};
     int gfx_outlined {};
@@ -587,9 +587,9 @@ static inline int tp_weapon_use_distance (Tpp t)
     return (t->weapon_use_distance);
 }
 
-static inline int tp_gfx_is_weapon_carry_anim_only (Tpp t)
+static inline int tp_gfx_is_weapon_carry_anim (Tpp t)
 {
-    return (t->gfx_is_weapon_carry_anim_only);
+    return (t->gfx_is_weapon_carry_anim);
 }
 
 static inline int tp_gfx_is_weapon_use_anim (Tpp t)

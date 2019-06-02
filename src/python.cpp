@@ -1737,7 +1737,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_explosion)
     TP_SET_DECL(is_combustable)
     TP_SET_DECL(weapon_use_distance)
-    TP_SET_DECL(gfx_is_weapon_carry_anim_only)
+    TP_SET_DECL(gfx_is_weapon_carry_anim)
     TP_SET_DECL(gfx_is_weapon_use_anim)
     TP_SET_DECL(is_weapon)
     TP_SET_DECL(gfx_outlined)

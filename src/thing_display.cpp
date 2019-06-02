@@ -731,33 +731,60 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     fpoint tile_tl(0, 0);
     fpoint tile_br(1, 1);
 
-    bool submerged = false;
+    is_submerged = false;
     bool lava = false;
+
+    //
+    // If the owner is submerged, so is the weapon
+    //
+    auto owner = get_owner();
+    if (owner && owner->is_submerged) {
+        is_submerged = true;
+    }
+
+    //
+    // Render the weapon and player on the same tile rules
+    //
+    auto map_loc = mid_at;
+    if (owner) {
+        map_loc = owner->mid_at;
+    }
+
+    //
+    // We render these offset form their owner, so if dead, then it is
+    // likely they also have no owner as the swing has ended.
+    //
+    if (tp_gfx_is_weapon_use_anim(tp) ||
+        tp_gfx_is_weapon_carry_anim(tp)) {
+        if (is_dead) {
+            return;
+        }
+    }
 
     if (is_monst() ||
         is_player() ||
         tp_gfx_is_weapon_use_anim(tp) ||
-        tp_gfx_is_weapon_carry_anim_only(tp)) {
+        tp_gfx_is_weapon_carry_anim(tp)) {
 
-        if (game.state.map.is_deep_water[(int)mid_at.x][(int)mid_at.y]) {
-            const auto pct_visible_above_surgace = 0.5;
+        if (game.state.map.is_deep_water[(int)map_loc.x][(int)map_loc.y]) {
+            const auto pct_visible_above_surface = 0.5;
             tile_tl = fpoint(0, 0);
-            tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
-            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
-            submerged = true;
-        } else if (game.state.map.is_lava[(int)mid_at.x][(int)mid_at.y]) {
-            const auto pct_visible_above_surgace = 0.3;
+            tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            is_submerged = true;
+        } else if (game.state.map.is_lava[(int)map_loc.x][(int)map_loc.y]) {
+            const auto pct_visible_above_surface = 0.3;
             tile_tl = fpoint(0, 0);
-            tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
-            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
-            submerged = true;
+            tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            is_submerged = true;
             lava = true;
-        } else if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {
-            const auto pct_visible_above_surgace = 0.1;
+        } else if (game.state.map.is_water[(int)map_loc.x][(int)map_loc.y]) {
+            const auto pct_visible_above_surface = 0.1;
             tile_tl = fpoint(0, 0);
-            tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
-            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
-            submerged = true;
+            tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            is_submerged = true;
         }
     }
 
@@ -772,7 +799,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     }
 #endif
 
-    auto owner = get_owner();
     if (owner) {
         gl_rotate = owner->rot;
     } else {
@@ -780,7 +806,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     }
 
     if (unlikely(tp_gfx_small_shadow_caster(tp))) {
-        if (submerged) {
+        if (is_submerged) {
             blit_shadow_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
             blit_shadow(tp, tile, blit_tl, blit_br);
         } else {
@@ -792,7 +818,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     blit_br.y -= height;
 
     if (tp_gfx_outlined(tp)) {
-        if (submerged) {
+        if (is_submerged) {
             tile_blit_outline_section(
                 tp, tile, tile_tl, tile_br, blit_tl, blit_br);
 
@@ -812,7 +838,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             tile_blit_outline(tp, tile, blit_tl, blit_br);
         }
     } else {
-        if (submerged) {
+        if (is_submerged) {
             tile_blit_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
         } else {
             tile_blit(tp, tile, blit_tl, blit_br);
@@ -869,36 +895,63 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     fpoint tile_tl(0, 0);
     fpoint tile_br(1, 1);
 
-    bool submerged = false;
+    is_submerged = false;
+
+    //
+    // If the owner is submerged, so is the weapon
+    //
+    auto owner = get_owner();
+    if (owner && owner->is_submerged) {
+        is_submerged = true;
+    }
+
+    //
+    // Render the weapon and player on the same tile rules
+    //
+    auto map_loc = mid_at;
+    if (owner) {
+        map_loc = owner->mid_at;
+    }
+
+    //
+    // We render these offset form their owner, so if dead, then it is
+    // likely they also have no owner as the swing has ended.
+    //
+    if (tp_gfx_is_weapon_use_anim(tp) ||
+        tp_gfx_is_weapon_carry_anim(tp)) {
+        if (is_dead) {
+            return;
+        }
+    }
 
     if (is_monst() ||
         is_player() ||
         tp_gfx_is_weapon_use_anim(tp) ||
-        tp_gfx_is_weapon_carry_anim_only(tp)) {
+        tp_gfx_is_weapon_carry_anim(tp)) {
 
-        if (game.state.map.is_deep_water[(int)mid_at.x][(int)mid_at.y]) {
-            const auto pct_visible_above_surgace = 0.5;
+        if (game.state.map.is_deep_water[(int)map_loc.x][(int)map_loc.y]) {
+            const auto pct_visible_above_surface = 0.5;
             tile_tl = fpoint(0, 0);
-            tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
-            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
-            submerged = true;
-        } else if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {
-            const auto pct_visible_above_surgace = 0.1;
+            tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            is_submerged = true;
+        } else if (game.state.map.is_water[(int)map_loc.x][(int)map_loc.y]) {
+            const auto pct_visible_above_surface = 0.1;
             tile_tl = fpoint(0, 0);
-            tile_br = fpoint(1, 1.0 - pct_visible_above_surgace);
-            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surgace;
-            submerged = true;
+            tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+            blit_tl.y += (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            is_submerged = true;
         }
     }
 
     if (tp_gfx_outlined(tp)) {
-        if (submerged) {
+        if (is_submerged) {
             tile_blit_outline_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
         } else {
             tile_blit_outline(tp, tile, blit_tl, blit_br);
         }
     } else {
-        if (submerged) {
+        if (is_submerged) {
             tile_blit_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
         } else {
             tile_blit(tp, tile, blit_tl, blit_br);

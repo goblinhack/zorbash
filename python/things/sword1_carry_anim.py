@@ -7,6 +7,7 @@ def tp_init(name):
 
     x.set_gfx_animated(True)
     x.set_gfx_can_hflip(True)
+    x.set_gfx_is_weapon_carry_anim(True)
     x.set_gfx_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_active(True)

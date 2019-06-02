@@ -52,10 +52,10 @@ int Thing::hit_actual (Thingp orig_hitter,
         //
         log("is hit terminally, health %d, damage %d, now dead",
             health, damage);
-        dead(orig_hitter, "%s", real_hitter->to_string().c_str());
+        dead(orig_hitter, "%s", real_hitter->to_cstring());
     } else {
         log("is hit by (%s) for %u, health now %d",
-            orig_hitter->to_string().c_str(), damage, health);
+            orig_hitter->to_cstring(), damage, health);
     }
 
     return (true);
