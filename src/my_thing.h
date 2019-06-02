@@ -250,8 +250,10 @@ public:
     unsigned int       is_attached:1;        /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_lit:1;             /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_waiting_for_ai:1;  /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_submerged:1;       /* until -std=c++2a remember to update thing.cpp */
 
     std::string to_string(void);
+    const char *to_cstring(void);
     uint8_t is_dir_bl(void);
     uint8_t is_dir_br(void);
     uint8_t is_dir_down(void);
@@ -760,9 +762,9 @@ public:
         return (tp_weapon_use_distance(tp));
     }
 
-    int gfx_is_weapon_carry_anim_only (void)
+    int gfx_is_weapon_carry_anim (void)
     {
-        return (tp_gfx_is_weapon_carry_anim_only(tp));
+        return (tp_gfx_is_weapon_carry_anim(tp));
     }
 
     int gfx_is_weapon_use_anim (void)

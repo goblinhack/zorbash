@@ -90,6 +90,7 @@ public:
 
     void pop();
     std::string to_string(void);
+    const char *to_cstring(void);
     void destroyed(void);
     void reset(void);
     void move_delta(fpoint);

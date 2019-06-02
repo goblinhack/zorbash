@@ -164,6 +164,11 @@ std::string Light::to_string (void)
     return (tmp[loop++]);
 }
 
+const char * Light::to_cstring (void)
+{
+    return (to_string().c_str());
+}
+
 void Light::calculate (void)
 {
     glbuf.clear();

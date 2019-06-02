@@ -424,7 +424,7 @@ void Thing::possible_hits_find_best (void)
         /*
          * Skip things that aren't really hitable.
          */
-        if (tp_gfx_is_weapon_carry_anim_only(cand.target->tp)) {
+        if (tp_gfx_is_weapon_carry_anim(cand.target->tp)) {
             continue;
         }
 

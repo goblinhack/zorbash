@@ -27,6 +27,11 @@ public:
         return (hd);
     }
 
+    const char * to_cstring (void)
+    {
+        return (to_string().c_str());
+    }
+
     Dice (std::string s)
     {
         hd = s;

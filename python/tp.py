@@ -311,8 +311,8 @@ class Tp:
     def set_weapon_use_distance(self, value):
         zx.tp_set_weapon_use_distance(self, value)
 
-    def set_gfx_is_weapon_carry_anim_only(self, value):
-        zx.tp_set_gfx_is_weapon_carry_anim_only(self, value)
+    def set_gfx_is_weapon_carry_anim(self, value):
+        zx.tp_set_gfx_is_weapon_carry_anim(self, value)
 
     def set_gfx_is_weapon_use_anim(self, value):
         zx.tp_set_gfx_is_weapon_use_anim(self, value)

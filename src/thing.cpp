@@ -93,6 +93,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->is_attached        = false;
     t->is_lit             = false;
     t->is_waiting_for_ai  = tp_is_active(tp);
+    t->is_submerged       = tp_is_active(tp);
 
     t->health         = tp_hunger_initial_health_at(tp);
     t->max_health     = t->health;
@@ -344,13 +345,13 @@ void Thing::remove_hooks ()
 
     if (owner_thing_id && owner) {
 #ifdef ENABLE_THING_DEBUG
-        log("detach %d from owner %s", id, owner->to_string().c_str());
+        log("detach %d from owner %s", id, owner->to_cstring());
 #endif
         if (id == owner->weapon_carry_anim_thing_id) {
             unwield("remove hooks");
 
 #ifdef ENABLE_THING_DEBUG
-            log("detach from carry anim owner %s", owner->to_string().c_str());
+            log("detach from carry anim owner %s", owner->to_cstring());
 #endif
 
             owner->set_weapon_carry_anim(nullptr);
@@ -358,7 +359,7 @@ void Thing::remove_hooks ()
 
         if (id == owner->weapon_use_anim_thing_id) {
 #ifdef ENABLE_THING_DEBUG
-            log("detach from use anim owner %s", owner->to_string().c_str());
+            log("detach from use anim owner %s", owner->to_cstring());
 #endif
             owner->set_weapon_use_anim(nullptr);
 
@@ -437,14 +438,14 @@ void Thing::set_owner (Thingp owner)
         }
 
         if (owner) {
-            log("set-owner change %s->%s", old_owner->to_string().c_str(),
-                owner->to_string().c_str());
+            log("set-owner change %s->%s", old_owner->to_cstring(),
+                owner->to_cstring());
         } else {
-            log("set-owner remove owner %s", old_owner->to_string().c_str());
+            log("set-owner remove owner %s", old_owner->to_cstring());
         }
     } else {
         if (owner) {
-            log("set-owner %s", owner->to_string().c_str());
+            log("set-owner %s", owner->to_cstring());
         }
     }
 
@@ -649,10 +650,17 @@ std::string Thing::to_string (void)
         loop = 0;
     }
 
-    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u(%s) at (%g,%g)",
-             id, tp->name.c_str(), mid_at.x, mid_at.y);
+    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u(%s%s) at (%g,%g)",
+             id, tp->name.c_str(), 
+             is_dead ? "/dead" : "",
+             mid_at.x, mid_at.y);
 
     return (tmp[loop++]);
+}
+
+const char * Thing::to_cstring (void)
+{
+    return (to_string().c_str());
 }
 
 void Thing::kill (void)
