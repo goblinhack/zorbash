@@ -455,7 +455,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    for (auto y = maxy - 2; y >= miny; y--) {
+    for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
                 for (auto p : thing_display_order[x][y][z]) {
@@ -1121,12 +1121,14 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (auto z = 0; z < MAP_DEPTH; z++) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
-                    have_lava       |= tp_is_lava(t->tp);
-                    have_deep_water |= tp_is_deep_water(t->tp);
-                    have_water      |= tp_is_water(t->tp);
-                    have_blood      |= tp_is_blood(t->tp);
+                    auto tp = t->tp;
 
-                    if (unlikely(tp_gfx_animated(t->tp))) {
+                    have_lava       |= tp_is_lava(tp);
+                    have_deep_water |= tp_is_deep_water(tp);
+                    have_water      |= tp_is_water(tp);
+                    have_blood      |= tp_is_blood(tp);
+
+                    if (unlikely(tp_gfx_animated(tp))) {
                         t->animate();
                     }
                 }
@@ -1223,7 +1225,6 @@ void thing_render_all (void)
         //
         // Render light sources first to their own merged buffer
         //
-#if 1
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -1237,7 +1238,6 @@ void thing_render_all (void)
         // glBlendFunc(GL_SRC_COLOR, GL_ONE);           // orange glow
         glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
         blit_fbo(FBO_LIGHT_MERGED);
-#endif
 
         //
         // Now overlay the player light source.
