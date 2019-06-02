@@ -34,6 +34,11 @@ void thing_gc (void)
     things_to_delete.clear();
 }
 
+Thingp thing_new (std::string tp_name, Thingp owner)
+{_
+    return thing_new(tp_name, owner->mid_at - fpoint(0.5, 0.5));
+}
+
 Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
 {_
     auto id = ++next_thing_id;
