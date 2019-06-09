@@ -8,7 +8,7 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#undef DEBUG_CRASH
+#define DEBUG_CRASH
 
 #ifdef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors

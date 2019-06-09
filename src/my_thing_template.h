@@ -175,9 +175,9 @@ public:
     int is_rrr10 {};
     int is_rrr11 {};
     int is_rrr12 {};
-    int is_rrr13 {};
-    int is_rrr14 {};
-    int is_rrr15 {};
+    int hates_water {};
+    int hunger_constant {};
+    int is_undead {};
     int is_rock {};
     std::string nutrition_hd {};
     Dice nutrition;
@@ -362,19 +362,19 @@ static inline int tp_is_rrr12 (Tpp t)
     return (t->is_rrr12);
 }
 
-static inline int tp_is_rrr13 (Tpp t)
+static inline int tp_hates_water (Tpp t)
 {
-    return (t->is_rrr13);
+    return (t->hates_water);
 }
 
-static inline int tp_is_rrr14 (Tpp t)
+static inline int tp_hunger_constant (Tpp t)
 {
-    return (t->is_rrr14);
+    return (t->hunger_constant);
 }
 
-static inline int tp_is_rrr15 (Tpp t)
+static inline int tp_is_undead (Tpp t)
 {
-    return (t->is_rrr15);
+    return (t->is_undead);
 }
 
 static inline int tp_is_rock (Tpp t)

@@ -484,7 +484,7 @@ static void game_place_blood (class Dungeon *d)
                     continue;
                 }
 
-                if (random_range(0, 1000) > 50) {
+                if (random_range(0, 1000) > 20) {
                     continue;
                 }
 
