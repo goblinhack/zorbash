@@ -6,9 +6,6 @@
 #include "my_game.h"
 #include "my_thing.h"
 
-//
-// This is movement on the client of the player initiated by the player.
-//
 bool Thing::move (fpoint future_pos)
 {
     bool up     = future_pos.y < mid_at.y;
@@ -17,6 +14,18 @@ bool Thing::move (fpoint future_pos)
     bool right  = future_pos.x > mid_at.x;
     bool attack = false;
 
+    verify(this);
+    if (tp_gfx_can_hflip(tp)) {
+        if (future_pos.x > mid_at.x) {
+            if (is_facing_left && !flip_start_ms) {
+                flip_start_ms = time_get_time_ms_cached();
+            }
+        } else if (future_pos.x < mid_at.x) {
+            if (!is_facing_left && !flip_start_ms) {
+                flip_start_ms = time_get_time_ms_cached();
+            }
+        }
+    }
     return (move(future_pos, up, down, left, right, attack));
 }
 
@@ -154,11 +163,16 @@ bool Thing::update_coordinates (void)
 
             if (diff > flip_time) {
                 flip_start_ms = 0;
-                if (is_dir_left()) {
+                is_facing_left = !is_facing_left;
+                if (is_dir_left() ||
+                    is_dir_tl()   ||
+                    is_dir_bl()) {
                     std::swap(tl.x, br.x);
                 }
             } else {
-                if (is_dir_right()) {
+                if (is_dir_right() ||
+                    is_dir_tr()   ||
+                    is_dir_br()) {
                     std::swap(tl.x, br.x);
                 }
                 double w = br.x - tl.x;
@@ -170,7 +184,7 @@ bool Thing::update_coordinates (void)
                 br.x = brx - dw * diff;
             }
         } else {
-            if (is_dir_left()) {
+            if (!is_facing_left) {
                 std::swap(tl.x, br.x);
             }
         }

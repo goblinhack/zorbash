@@ -80,12 +80,14 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->depth              = tp_z_depth(tp);
 
     if (tp_gfx_can_hflip(tp)) {
-        t->dir            = THING_DIR_RIGHT;
+        t->dir            = THING_DIR_LEFT;
+        t->is_facing_left = true;
     } else {
         t->dir            = THING_DIR_NONE;
+        t->is_facing_left = false;
     }
 
-    t->is_hungry          = false;
+    t->is_hungry          = tp_hunger_constant(tp);
     t->is_starving        = false;
     t->is_dead            = false;
     t->is_bloodied        = false;
@@ -681,167 +683,4 @@ void Thing::kill (void)
 
     remove_hooks();
     things_to_delete.push_back(id);
-}
-
-void Thing::set_dir_none (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_NONE) {
-        dir = THING_DIR_NONE;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_none (void)
-{_
-    return (dir == THING_DIR_NONE);
-}
-
-void Thing::set_dir_down (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_DOWN) {
-        dir = THING_DIR_DOWN;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_down (void)
-{_
-    return (dir == THING_DIR_DOWN);
-}
-
-void Thing::set_dir_up (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_UP) {
-        dir = THING_DIR_UP;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_up (void)
-{_
-    return (dir == THING_DIR_UP);
-}
-
-void Thing::set_dir_left (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_LEFT) {
-        if (dir == THING_DIR_RIGHT) {
-            if (tp_gfx_can_hflip(tp)) {
-                flip_start_ms = time_get_time_ms_cached();
-            }
-        }
-        dir = THING_DIR_LEFT;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_left (void)
-{_
-    return (dir == THING_DIR_LEFT);
-}
-
-void Thing::set_dir_right (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_RIGHT) {
-        if (dir == THING_DIR_LEFT) {
-            if (tp_gfx_can_hflip(tp)) {
-                flip_start_ms = time_get_time_ms_cached();
-            }
-        }
-        dir = THING_DIR_RIGHT;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_right (void)
-{_
-    return (dir == THING_DIR_RIGHT);
-}
-
-void Thing::set_dir_tl (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_TL) {
-        dir = THING_DIR_TL;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_tl (void)
-{_
-    return (dir == THING_DIR_TL);
-}
-
-void Thing::set_dir_bl (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_BL) {
-        dir = THING_DIR_BL;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_bl (void)
-{_
-    return (dir == THING_DIR_BL);
-}
-
-void Thing::set_dir_tr (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_TR) {
-        dir = THING_DIR_TR;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_tr (void)
-{_
-    return (dir == THING_DIR_TR);
-}
-
-void Thing::set_dir_br (void)
-{_
-    if (tp_gfx_animated_no_dir(tp)) {
-        return;
-    }
-
-    if (dir != THING_DIR_BR) {
-        dir = THING_DIR_BR;
-        move_carried_items();
-    }
-}
-
-uint8_t Thing::is_dir_br (void)
-{_
-    return (dir == THING_DIR_BR);
 }

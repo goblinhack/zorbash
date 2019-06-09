@@ -182,14 +182,14 @@ class Tp:
     def set_is_rrr12(self, value):
         zx.tp_set_is_rrr12(self, value)
 
-    def set_is_rrr13(self, value):
-        zx.tp_set_is_rrr13(self, value)
+    def set_hates_water(self, value):
+        zx.tp_set_hates_water(self, value)
 
-    def set_is_rrr14(self, value):
-        zx.tp_set_is_rrr14(self, value)
+    def set_hunger_constant(self, value):
+        zx.tp_set_hunger_constant(self, value)
 
-    def set_is_rrr15(self, value):
-        zx.tp_set_is_rrr15(self, value)
+    def set_is_undead(self, value):
+        zx.tp_set_is_undead(self, value)
 
     def set_is_rrr16(self, value):
         zx.tp_set_is_rrr16(self, value)

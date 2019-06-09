@@ -252,6 +252,7 @@ public:
     unsigned int       is_lit:1;             /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_waiting_for_ai:1;  /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_submerged:1;       /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_facing_left:1;     /* until -std=c++2a remember to update thing.cpp */
 
     std::string to_string(void);
     const char *to_cstring(void);
@@ -538,19 +539,19 @@ public:
         return (tp_is_rrr12(tp));
     }
 
-    int is_rrr13 (void)
+    int hates_water (void)
     {
-        return (tp_is_rrr13(tp));
+        return (tp_hates_water(tp));
     }
 
-    int is_rrr14 (void)
+    int hunger_constant (void)
     {
-        return (tp_is_rrr14(tp));
+        return (tp_hunger_constant(tp));
     }
 
-    int is_rrr15 (void)
+    int is_undead (void)
     {
-        return (tp_is_rrr15(tp));
+        return (tp_is_undead(tp));
     }
 
     int is_rock (void)
