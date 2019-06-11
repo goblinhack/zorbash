@@ -127,7 +127,9 @@ void dmap_process (Dmap *D)
     static uint8_t valid[MAP_WIDTH][MAP_HEIGHT];
     static uint8_t new_valid[MAP_WIDTH][MAP_HEIGHT];
     static uint8_t orig_valid[MAP_WIDTH][MAP_HEIGHT];
+    static uint8_t orig[MAP_WIDTH][MAP_HEIGHT];
 
+    memcpy(orig, D->val, sizeof(D->val));
     memset(valid, 1, sizeof(valid));
     memset(orig_valid, 1, sizeof(valid));
 
@@ -258,6 +260,15 @@ void dmap_process (Dmap *D)
 #if 0
     dmap_print(D);
 #endif
+
+    for (y = 1; y < MAP_HEIGHT - 2; y++) {
+        for (x = 1; x < MAP_WIDTH - 2; x++) {
+            if (orig[x][y] < DMAP_IS_PASSABLE) {
+CON("%d -> %d", D->val[x][y], D->val[x][y] + orig[x][y]);
+                D->val[x][y] += orig[x][y];
+            }
+        }
+    }
 }
 
 void dmap_process (Dmap *D, point tl, point br)

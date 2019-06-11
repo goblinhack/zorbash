@@ -101,6 +101,16 @@ bool Thing::is_obstacle_for_me (point p)
     return (false);
 }
 
+int Thing::is_less_preferred_terrain (point p)
+{
+    if (game.state.map.is_water_at(p)) {
+        if (hates_water()) {
+            return (10);
+        }
+    }
+    return (0);
+}
+
 //
 // Lower scores are more preferred
 // k
@@ -180,9 +190,13 @@ fpoint Thing::get_next_hop (void)
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
+            int value;
             if (is_obstacle_for_me(p)) {
                 dmap_scent->val[x][y] = DMAP_IS_WALL;
                 dmap_goals->val[x][y] = DMAP_IS_WALL;
+            } else if ((value = is_less_preferred_terrain(p))) {
+                dmap_scent->val[x][y] = value;
+                dmap_goals->val[x][y] = value;
             } else {
                 dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
                 dmap_goals->val[x][y] = DMAP_IS_PASSABLE;
@@ -197,8 +211,9 @@ fpoint Thing::get_next_hop (void)
 
     point tl(minx, miny);
     point br(maxx, maxy);
+    dmap_print(dmap_scent, start);
     dmap_process(dmap_scent, tl, br);
-    // dmap_print(dmap_scent);
+    dmap_print(dmap_scent, start);
 
     //
     // Find all the possible goals we can smell.
@@ -210,6 +225,9 @@ fpoint Thing::get_next_hop (void)
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
             fpoint fp(x, y);
+            //
+            // Too far away to sense?
+            //
             if (dmap_scent->val[x][y] > tp->ai_scent_distance) {
                 continue;
             }
@@ -226,6 +244,17 @@ fpoint Thing::get_next_hop (void)
 
                 score += dmap_scent->val[p.x][p.y];
                 score += 100 * (priority + 1);
+
+                //
+                // Say the target (the player) is standing in a pool and
+                // the monst hates water. We still want to try and get
+                // to them, but make it less preferred
+                // 
+//                if (is_obstacle_for_me(p)) {
+//                    dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
+//                    dmap_goals->val[x][y] = DMAP_IS_PASSABLE;
+//                    score *= 10;
+//                }
 
                 Goal goal(score);
                 goal.at = p;
@@ -327,8 +356,8 @@ fpoint Thing::get_next_hop (void)
     }
 
     fpoint fbest;
-    fbest.x = best.x;
-    fbest.y = best.y;
+    fbest.x = best.x + 0.5;
+    fbest.y = best.y + 0.5;
 
     return (fbest);
 }

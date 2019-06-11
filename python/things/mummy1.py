@@ -19,6 +19,7 @@ def tp_init(name):
     x.set_hunger_at_health_pct(95)
     x.set_hunger_constant(True)
     x.set_hunger_initial_health_at(10)
+    x.set_hates_water(10)
     x.set_is_active(True)
     x.set_is_corpse_on_death(True)
     x.set_is_meat_eater(True)
