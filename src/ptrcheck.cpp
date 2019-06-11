@@ -13,7 +13,7 @@
  */
 #define MAX_PER_PTR_HISTORY 3
 
-#undef DEBUG_PTRCHECK
+#define DEBUG_PTRCHECK
 
 /*
  * A single event in the life of a pointer.
@@ -109,6 +109,9 @@ uint8_t ptrcheck_init (void)
 
 void ptrcheck_fini (void)
 {_
+#ifdef DEBUG_PTRCHECK
+    fprintf(MY_STDERR, "ptrcheck fini");
+#endif
     /*
      * Print memory leaks.
      */
