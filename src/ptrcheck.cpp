@@ -392,6 +392,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                     context->allocated_by.func,
                     context->allocated_by.line,
                     time2str(context->allocated_by.ms, 0, 0));
+            fflush(MY_STDERR);
 
             traceback_stderr(context->allocated_by.tb);
 
@@ -400,6 +401,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                     context->freed_by.func,
                     context->freed_by.line,
                     time2str(context->freed_by.ms, 0, 0));
+            fflush(MY_STDERR);
 
             traceback_stderr(context->freed_by.tb);
 
@@ -421,6 +423,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                         history->func,
                         history->line,
                         time2str(history->ms, 0, 0));
+                fflush(MY_STDERR);
 
                 traceback_stderr(history->tb);
             }
@@ -470,6 +473,7 @@ void *ptrcheck_alloc (const void *ptr,
             file,
             func,
             line);
+    fflush(MY_STDERR);
 #endif
 
     if (!ptr) {
@@ -558,6 +562,7 @@ uint8_t ptrcheck_free (void *ptr,
             file,
             func,
             line);
+    fflush(MY_STDERR);
 #endif
 
     if (!ptr) {

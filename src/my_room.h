@@ -18,7 +18,6 @@ public:
     Room (void)
     {
         this->roomno = all_rooms.size();
-
         newptr(this, "room");
     }
 

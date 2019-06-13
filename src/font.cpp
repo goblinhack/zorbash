@@ -18,12 +18,7 @@ void font_fini (void)
         font_inited = false;
 
         fixed_font = 0;
-    }
-
-    auto iter = fonts.begin();
-
-    while (iter != fonts.end()) {
-        iter = fonts.erase(iter);
+        fonts.erase(fonts.begin(), fonts.end());
     }
 }
 
