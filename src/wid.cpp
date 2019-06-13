@@ -169,14 +169,14 @@ void wid_fini (void)
 
         wid_gc_all();
 
-        {
-            auto iter = wid_top_level.begin();
-
-            while (iter != wid_top_level.end()) {
-                auto child = iter->second;
-                wid_destroy_immediate(child);
-                iter = wid_top_level.begin();
+        for (;;) {
+            if (!wid_top_level.size()) {
+                break;
             }
+
+            auto iter = wid_top_level.begin();
+            auto child = iter->second;
+            wid_destroy_immediate(child);
         }
     }
 }

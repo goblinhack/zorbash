@@ -197,12 +197,30 @@ fpoint Thing::get_next_hop (void)
             } else if ((value = is_less_preferred_terrain(p))) {
                 dmap_scent->val[x][y] = value;
                 dmap_goals->val[x][y] = value;
+                dmap_scent->val[x][y] += age_map->val[x][y];
             } else {
                 dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
                 dmap_goals->val[x][y] = DMAP_IS_PASSABLE;
+                dmap_scent->val[x][y] += age_map->val[x][y];
             }
         }
     }
+    CON("orig:");
+    dmap_print(dmap_scent, start);
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            point p(x, y);
+            int value;
+            if (is_obstacle_for_me(p)) {
+            } else if ((value = is_less_preferred_terrain(p))) {
+                dmap_scent->val[x][y] += age_map->val[x][y];
+            } else {
+                dmap_scent->val[x][y] += age_map->val[x][y];
+            }
+        }
+    }
+    CON("aged:");
+    dmap_print(dmap_scent, start);
 
     //
     // We want to find how far everything is from us.
@@ -211,8 +229,8 @@ fpoint Thing::get_next_hop (void)
 
     point tl(minx, miny);
     point br(maxx, maxy);
-    dmap_print(dmap_scent, start);
     dmap_process(dmap_scent, tl, br);
+    CON("post:");
     dmap_print(dmap_scent, start);
 
     //

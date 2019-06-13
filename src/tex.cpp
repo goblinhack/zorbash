@@ -18,18 +18,24 @@ class Tex {
 public:
     Tex (void)
     {
+        newptr(this, "Tex");
     }
 
     ~Tex (void)
     {
-        SDL_FreeSurface(this->surface);
+        oldptr(this);
+
+        if (surface) {
+            verify(surface);
+            SDL_FreeSurface(surface);
+            oldptr(surface);
+            surface = 0;
+        }
 
         GLuint gl_surface_binding;
         gl_surface_binding = this->gl_surface_binding;
 
         glDeleteTextures(1, &gl_surface_binding);
-
-        oldptr(this->surface);
     }
 
     uint32_t width = {};
@@ -60,11 +66,13 @@ void tex_fini (void)
     if (tex_init_done) {
         tex_init_done = false;
 
-        auto iter = textures.begin();
-
-        while (iter != textures.end()) {
+        for (;;) {
+            if (!textures.size()) {
+                break;
+            }
+            auto iter = textures.begin();
             tex_destroy(iter->second);
-            iter = textures.erase(iter);
+            textures.erase(iter);
         }
     }
 }
