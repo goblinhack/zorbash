@@ -113,3 +113,21 @@ uint8_t time_have_x_secs_passed_since (uint32_t val, uint32_t since)
 
     return ((int32_t)(delay / ONESEC) >= (int32_t)val);
 }
+
+uint32_t time_get_elapsed_secs (uint32_t val, uint32_t since)
+{
+    time_get_time_ms();
+
+    int32_t delay = val - since;
+
+    return ((int32_t)(delay / ONESEC));
+}
+
+uint32_t time_get_elapsed_tenths (uint32_t val, uint32_t since)
+{
+    time_get_time_ms();
+
+    int32_t delay = val - since;
+
+    return ((int32_t)(delay / (ONESEC / 10)));
+}

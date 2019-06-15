@@ -29,6 +29,8 @@ uint8_t time_have_x_ms_passed_since(uint32_t tenths, uint32_t since);
 uint8_t time_have_x_hundredths_passed_since(uint32_t tenths, uint32_t since);
 uint8_t time_have_x_tenths_passed_since(uint32_t tenths, uint32_t since);
 uint8_t time_have_x_secs_passed_since(uint32_t tenths, uint32_t since);
+uint32_t time_get_elapsed_secs(uint32_t val, uint32_t since);
+uint32_t time_get_elapsed_tenths(uint32_t val, uint32_t since);
 const char *time2str(uint32_t ms, char *buf, int32_t len);
 const char *timestamp(char *buf, int32_t len);
 

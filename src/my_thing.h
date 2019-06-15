@@ -52,7 +52,7 @@ public:
 };
 
 typedef struct AgeMap {
-    int val[MAP_WIDTH][MAP_HEIGHT];
+    uint32_t val[MAP_WIDTH][MAP_HEIGHT];
 } AgeMap;
 
 class Thing
