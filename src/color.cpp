@@ -1554,7 +1554,7 @@ color string2color (const char **s)
 color string2color (const wchar_t **s)
 {_
     static wchar_t tmp[MAXSHORTSTR];
-    static const wchar_t *eo_tmp = tmp + sizeof(tmp);
+    static const wchar_t *eo_tmp = tmp + MAXSHORTSTR - 1;
     const wchar_t *c = *s;
     wchar_t *t = tmp;
 
@@ -1658,7 +1658,7 @@ color string2color (std::wstring &s, int *len)
 const char *string2colorname (const char **s)
 {_
     static char tmp[MAXSHORTSTR];
-    static const char *eo_tmp = tmp + sizeof(tmp);
+    static const char *eo_tmp = tmp + MAXSHORTSTR - 1;
     const char *c = *s;
     char *t = tmp;
 

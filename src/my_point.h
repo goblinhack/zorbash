@@ -184,7 +184,7 @@ public:
     {
         T s;
         T c;
-        sincosd(angle, &s, &c);
+        sincos(angle, &s, &c);
 
         // translate point back to origin:
         T X = x - O.x;

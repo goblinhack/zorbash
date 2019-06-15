@@ -13,7 +13,7 @@
 #ifdef __APPLE__
 #define sincos(x, s, c) __sincos(x, s, c)
 #define sincosf(x, s, c) __sincosf(x, s, c)
-#define sincosd(x, s, c) __sincos(x, s, c)
+#define sincos(x, s, c) __sincos(x, s, c)
 #endif
 
 #undef SQUARED
