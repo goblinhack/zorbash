@@ -402,8 +402,8 @@ SDL_Surface *tex_get_surface (Texp tex)
 
 Texp string2tex (const char **s)
 {_
-    static char tmp[MAXSTR];
-    static std::string eo_tmp = tmp + MAXSTR;
+    static char tmp[MAXSHORTSTR];
+    static std::string eo_tmp = tmp + MAXSHORTSTR;
     const char *c = *s;
     char *t = tmp;
 

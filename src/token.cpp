@@ -17,7 +17,7 @@ static tokens_t *tokens_parse (const char *input, tokens_t *tokens)
 
     memset(tokens, 0, sizeof(*tokens));
 
-    if (strlen(input) >= MAXSTR) {
+    if (strlen(input) >= MAXSHORTSTR) {
         return (tokens);
     }
 

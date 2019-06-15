@@ -1518,8 +1518,8 @@ void glcolor_restore (void)
 
 color string2color (const char **s)
 {_
-    static char tmp[MAXSTR];
-    static const char *eo_tmp = tmp + MAXSTR;
+    static char tmp[MAXSHORTSTR];
+    static const char *eo_tmp = tmp + sizeof(tmp);
     const char *c = *s;
     char *t = tmp;
 
@@ -1553,8 +1553,8 @@ color string2color (const char **s)
 
 color string2color (const wchar_t **s)
 {_
-    static wchar_t tmp[MAXSTR];
-    static const wchar_t *eo_tmp = tmp + MAXSTR;
+    static wchar_t tmp[MAXSHORTSTR];
+    static const wchar_t *eo_tmp = tmp + sizeof(tmp);
     const wchar_t *c = *s;
     wchar_t *t = tmp;
 
@@ -1657,8 +1657,8 @@ color string2color (std::wstring &s, int *len)
 
 const char *string2colorname (const char **s)
 {_
-    static char tmp[MAXSTR];
-    static const char *eo_tmp = tmp + MAXSTR;
+    static char tmp[MAXSHORTSTR];
+    static const char *eo_tmp = tmp + sizeof(tmp);
     const char *c = *s;
     char *t = tmp;
 

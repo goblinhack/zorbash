@@ -268,8 +268,8 @@ void tile_get_coords (Tilep tile, float *x1, float *y1, float *x2, float *y2)
 
 Tilep string2tile (const char **s)
 {_
-    static char tmp[MAXSTR];
-    static const char * eo_tmp = tmp + MAXSTR;
+    static char tmp[MAXSHORTSTR];
+    static const char * eo_tmp = tmp + MAXSHORTSTR;
     const char * c = *s;
     char *t = tmp;
 

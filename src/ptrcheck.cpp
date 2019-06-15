@@ -13,7 +13,7 @@
  */
 #define MAX_PER_PTR_HISTORY 3
 
-#define DEBUG_PTRCHECK
+#undef DEBUG_PTRCHECK
 
 /*
  * A single event in the life of a pointer.

@@ -128,7 +128,7 @@ static void putf (FILE *fp, const char *s)
 
 static void log_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -153,7 +153,7 @@ void LOG (const char *fmt, ...)
 
 static void logs_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
     vsnprintf(buf, sizeof(buf), fmt, args);
@@ -173,7 +173,7 @@ void LOGS (const char *fmt, ...)
 
 static void warn_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -198,7 +198,7 @@ void WARN (const char *fmt, ...)
 
 static void con_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -218,7 +218,7 @@ static void con_ (const char *fmt, va_list args)
 static void con_ (const wchar_t *fmt, va_list args)
 {
     {
-        char buf[MAXSTR];
+        char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
         timestamp(buf, sizeof(buf));
@@ -228,13 +228,13 @@ static void con_ (const wchar_t *fmt, va_list args)
     }
 
     {
-        wchar_t buf[MAXSTR];
+        wchar_t buf[MAXSHORTSTR];
         auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
 
         /*
          * Only a single nul is written, but as we read 2 at a time...
          */
-        if (wrote && (wrote < MAXSTR - 1)) {
+        if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
             fprintf(stderr, "Failed to console log: [%S]\n", fmt);
@@ -251,7 +251,7 @@ static void con_ (const wchar_t *fmt, va_list args)
 void con (const wchar_t *fmt)
 {
     {
-        char buf[MAXSTR];
+        char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
         timestamp(buf, sizeof(buf));
@@ -271,7 +271,7 @@ void con (const wchar_t *fmt)
 
 static void tip_ (const wchar_t *fmt, va_list args)
 {
-    wchar_t buf[MAXSTR];
+    wchar_t buf[MAXSHORTSTR];
 
     buf[0] = '\0';
     auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
@@ -279,7 +279,7 @@ static void tip_ (const wchar_t *fmt, va_list args)
     /*
      * Only a single nul is written, but as we read 2 at a time...
      */
-    if (wrote && (wrote < MAXSTR - 1)) {
+    if (wrote && (wrote < MAXSHORTSTR - 1)) {
         buf[wrote+1] = '\0';
     } else {
         fprintf(stderr, "Failed to console log: [%S]\n", fmt);
@@ -295,7 +295,7 @@ void tip (const wchar_t *fmt)
 
 static void tip2_ (const wchar_t *fmt, va_list args)
 {
-    wchar_t buf[MAXSTR];
+    wchar_t buf[MAXSHORTSTR];
 
     buf[0] = '\0';
     auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
@@ -303,7 +303,7 @@ static void tip2_ (const wchar_t *fmt, va_list args)
     /*
      * Only a single nul is written, but as we read 2 at a time...
      */
-    if (wrote && (wrote < MAXSTR - 1)) {
+    if (wrote && (wrote < MAXSHORTSTR - 1)) {
         buf[wrote+1] = '\0';
     } else {
         fprintf(stderr, "Failed to log: [%S]\n", fmt);
@@ -319,7 +319,7 @@ void tip2 (const wchar_t *fmt)
 
 static void tip_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
     vsnprintf(buf, sizeof(buf), fmt, args);
@@ -329,7 +329,7 @@ static void tip_ (const char *fmt, va_list args)
 
 static void tip2_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
     vsnprintf(buf, sizeof(buf), fmt, args);
@@ -357,7 +357,7 @@ void CON (const wchar_t *fmt, ...)
 
 static void dying_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     global_callstack.dump();
@@ -380,7 +380,7 @@ static void dying_ (const char *fmt, va_list args)
 
 static void err_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -419,7 +419,7 @@ static void croak_ (const char *fmt, va_list args)
     }
     croaked = 1;
 
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
     uint32_t tslen;
 
@@ -538,16 +538,16 @@ void CROAK (const char *fmt, ...)
 
 void Thing::log_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
-             t->to_cstring());
+             t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -558,8 +558,8 @@ void Thing::log_ (const char *fmt, va_list args)
 
 void Thing::log (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -569,17 +569,17 @@ void Thing::log (const char *fmt, ...)
 
 void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: dead, killer %s: ",
-             t->to_cstring(),
-             killer->to_cstring());
+             t->to_string().c_str(),
+             killer->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -592,8 +592,8 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 
 void Thing::dead (Thingp killer, const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -603,16 +603,16 @@ void Thing::dead (Thingp killer, const char *fmt, ...)
 
 void Thing::dead_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: dead: ",
-             t->to_cstring());
+             t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -625,8 +625,8 @@ void Thing::dead_ (const char *fmt, va_list args)
 
 void Thing::dead (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -636,16 +636,16 @@ void Thing::dead (const char *fmt, ...)
 
 void Thing::die_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
-             t->to_cstring());
+             t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -655,8 +655,8 @@ void Thing::die_ (const char *fmt, va_list args)
 
 void Thing::die (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -666,16 +666,16 @@ void Thing::die (const char *fmt, ...)
 
 void Thing::con_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, sizeof(buf));
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
-             t->to_cstring());
+             t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
@@ -690,8 +690,8 @@ void Thing::con_ (const char *fmt, va_list args)
 
 void Thing::con (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -701,9 +701,9 @@ void Thing::con (const char *fmt, ...)
 
 void Thing::err_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -732,8 +732,8 @@ void Thing::err_ (const char *fmt, va_list args)
 
 void Thing::err (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -743,6 +743,7 @@ void Thing::err (const char *fmt, ...)
 
 void Thing::dbg (const char *fmt, ...)
 {
+    verify(this);
     if (!debug) {
         return;
     }
@@ -757,9 +758,9 @@ void Thing::dbg (const char *fmt, ...)
 
 void Light::log_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -777,8 +778,8 @@ void Light::log_ (const char *fmt, va_list args)
 
 void Light::log (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -788,9 +789,9 @@ void Light::log (const char *fmt, ...)
 
 void Light::die_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -807,8 +808,8 @@ void Light::die_ (const char *fmt, va_list args)
 
 void Light::die (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -818,9 +819,9 @@ void Light::die (const char *fmt, ...)
 
 void Light::con_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -841,8 +842,8 @@ void Light::con_ (const char *fmt, va_list args)
 
 void Light::con (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -852,9 +853,9 @@ void Light::con (const char *fmt, ...)
 
 void Light::err_ (const char *fmt, va_list args)
 {
+    verify(this);
     auto t = this;
-
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -883,8 +884,8 @@ void Light::err_ (const char *fmt, va_list args)
 
 void Light::err (const char *fmt, ...)
 {
+    verify(this);
     auto t = this;
-
     va_list args;
 
     va_start(args, fmt);
@@ -894,6 +895,7 @@ void Light::err (const char *fmt, ...)
 
 void Light::dbg (const char *fmt, ...)
 {
+    verify(this);
     if (!debug) {
         return;
     }
@@ -909,7 +911,7 @@ void Light::dbg (const char *fmt, ...)
 #ifdef ENABLE_WID_DEBUG
 static void wid_log_ (widp t, const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -950,7 +952,7 @@ void WID_DBG (widp t, const char *fmt, ...)
 
 static void msgerr_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
@@ -992,7 +994,7 @@ void MSG_BOX (const char *fmt, ...)
 
 static void sdl_msgerr_ (const char *fmt, va_list args)
 {
-    char buf[MAXSTR];
+    char buf[MAXSHORTSTR];
 #if SDL_MAJOR_VERSION >= 2
     uint32_t ts_len;
 #endif
