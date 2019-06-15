@@ -197,6 +197,6 @@ void term_log (const char *s)
             continue;
         }
 
-        putwchar(c);
+        putchar(c);
     }
 }
