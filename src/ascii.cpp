@@ -512,7 +512,7 @@ static void ascii_putf_ (int x, int y,
 {_
     wchar_t buf[MAXSHORTSTR];
 
-    auto wrote = vswprintf(buf, sizeof(buf), fmt.c_str(), args);
+    auto wrote = vswprintf(buf, MAXSHORTSTR, fmt.c_str(), args);
 
     /*
      * Only a single nul is written, but as we read 2 at a time...
@@ -533,7 +533,7 @@ static void ascii_putf_ (int x, int y,
 {_
     wchar_t buf[MAXSHORTSTR];
 
-    auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
+    auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
     /*
      * Only a single nul is written, but as we read 2 at a time...

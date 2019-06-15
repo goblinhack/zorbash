@@ -351,7 +351,7 @@ static const char *dynvprintf_ (const char *fmt, va_list args)
     static char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
-    vsnprintf(buf, sizeof(buf), fmt, args);
+    vsnprintf(buf, MAXSHORTSTR, fmt, args);
 
     return (buf);
 }
@@ -377,7 +377,7 @@ char *dynvprintf (const char *fmt, va_list args)
     static char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
-    vsnprintf(buf, sizeof(buf), fmt, args);
+    vsnprintf(buf, MAXSHORTSTR, fmt, args);
 
     return (dupstr(buf, __FUNCTION__));
 }

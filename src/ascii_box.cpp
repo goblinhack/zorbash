@@ -109,7 +109,7 @@ static void ascii_put_box_ (int x,
 {_
     wchar_t buf[MAXSHORTSTR];
 
-    auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
+    auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
     /*
      * Only a single nul is written, but as we read 2 at a time...
