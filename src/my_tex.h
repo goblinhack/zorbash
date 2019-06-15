@@ -11,7 +11,7 @@
 #include <SDL.h>
 #include <memory>
 
-typedef std::shared_ptr< class Tex > Texp;
+typedef class Tex * Texp;
 
 uint8_t tex_init(void);
 void tex_fini(void);

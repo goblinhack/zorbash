@@ -177,7 +177,7 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
 }
 
 fpoint Thing::get_next_hop (void)
-{
+{_
     auto minx = 0;
     auto miny = 0;
     auto maxx = MAP_WIDTH;

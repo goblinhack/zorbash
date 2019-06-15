@@ -38,28 +38,29 @@ FILE *LOG_STDERR;
 
 uint8_t quitting;
 
-void callstack::dump (void)
+void callstack_dump (void)
 {_
-    int i = 1;
-
     fprintf(MY_STDERR, "code trace:\n");
     fprintf(MY_STDERR, "========================================================\n");
-    for (auto iter = my_stack.rbegin(); iter != my_stack.rend(); iter++) {
-        fprintf(MY_STDERR, "(stack) %d %s %s, line %u\n", i++, iter->file, iter->func, iter->line);
+    for (auto depth = 0; depth < callframes_depth; depth++) {
+        auto iter = &callframes[depth];
+        fprintf(MY_STDERR, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
     }
     fprintf(MY_STDERR, "========================================================\n");
 
     fprintf(MY_STDOUT, "code trace:\n");
     fprintf(MY_STDOUT, "========================================================\n");
-    for (auto iter = my_stack.rbegin(); iter != my_stack.rend(); iter++) {
-        fprintf(MY_STDOUT, "(stack) %d %s %s, line %u\n", i++, iter->file, iter->func, iter->line);
+    for (auto depth = 0; depth < callframes_depth; depth++) {
+        auto iter = &callframes[depth];
+        fprintf(MY_STDOUT, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
     }
     fprintf(MY_STDOUT, "========================================================\n");
 
     printf("code trace:\n");
     printf("========================================================\n");
-    for (auto iter = my_stack.rbegin(); iter != my_stack.rend(); iter++) {
-        printf("(stack) %d %s %s, line %u\n", i++, iter->file, iter->func, iter->line);
+    for (auto depth = 0; depth < callframes_depth; depth++) {
+        auto iter = &callframes[depth];
+        printf("(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
     }
     printf("========================================================\n");
 }

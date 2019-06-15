@@ -18,6 +18,8 @@ class Tex {
 public:
     Tex (void)
     {
+        surface = 0;
+        gl_surface_binding = 0;
         newptr(this, "Tex");
     }
 
@@ -32,10 +34,12 @@ public:
             surface = 0;
         }
 
-        GLuint gl_surface_binding;
-        gl_surface_binding = this->gl_surface_binding;
-
-        glDeleteTextures(1, &gl_surface_binding);
+        if (gl_surface_binding) {
+            GLuint tmp;
+            tmp = gl_surface_binding;
+            glDeleteTextures(1, &tmp);
+            gl_surface_binding = 0;
+        }
     }
 
     uint32_t width = {};
@@ -46,35 +50,15 @@ public:
     SDL_Surface *surface = {};
 };
 
-std::map<std::string, std::shared_ptr< class Tex > > textures;
-
-static uint8_t tex_init_done;
+static std::map<std::string, Texp> textures;
 
 uint8_t tex_init (void)
 {_
-    tex_init_done = true;
-
     return (true);
-}
-
-static void tex_destroy (Texp t)
-{_
 }
 
 void tex_fini (void)
 {_
-    if (tex_init_done) {
-        tex_init_done = false;
-
-        for (;;) {
-            if (!textures.size()) {
-                break;
-            }
-            auto iter = textures.begin();
-            tex_destroy(iter->second);
-            textures.erase(iter);
-        }
-    }
 }
 
 static unsigned char *load_raw_image (std::string filename,
@@ -177,7 +161,6 @@ static SDL_Surface *load_image (std::string filename)
         oldptr(old_surf);
         SDL_FreeSurface(old_surf);
         SDL_SaveBMP(surf, filename.c_str());
-        DIE("x");
     }
 
     free_raw_image(image_data);
@@ -247,8 +230,6 @@ Texp tex_from_surface (SDL_Surface *surface,
                        std::string name,
                        int mode)
 {_
-    Texp t;
-
     if (!surface) {
         DIE("could not make surface from file, '%s'", file.c_str());
     }
@@ -356,7 +337,7 @@ Texp tex_from_surface (SDL_Surface *surface,
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    t = std::make_shared< class Tex >();
+    Texp t = new Tex();
 
     auto result = textures.insert(std::make_pair(name, t));
 

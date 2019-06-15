@@ -185,8 +185,6 @@ uint8_t wid_console_receive_input (widp w, const SDL_KEYSYM *key)
  */
 static void wid_console_wid_create (void)
 {_
-    Fontp font = fixed_font;
-
     {
         point tl = {0, 0};
         point br = {ASCII_WIDTH - 1, ASCII_HEIGHT - 3};

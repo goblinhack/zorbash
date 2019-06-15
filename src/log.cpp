@@ -360,7 +360,7 @@ static void dying_ (const char *fmt, va_list args)
     char buf[MAXSHORTSTR];
     uint32_t len;
 
-    global_callstack.dump();
+    callstack_dump();
 
     buf[0] = '\0';
     timestamp(buf, MAXSHORTSTR);

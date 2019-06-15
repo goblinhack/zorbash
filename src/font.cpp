@@ -6,20 +6,12 @@
 #include "my_ttf.h"
 #include "my_string.h"
 
-static int32_t font_inited;
-
 Fontp fixed_font;
 
-static std::map<std::string, std::shared_ptr< class Font > > fonts;
+static std::map<std::string, Fontp > fonts;
 
 void font_fini (void)
 {_
-    if (font_inited) {
-        font_inited = false;
-
-        fixed_font = 0;
-        fonts.erase(fonts.begin(), fonts.end());
-    }
 }
 
 static Fontp font_load (std::string name, std::string file, int size, int style)
@@ -66,8 +58,6 @@ Fontp font_find (std::string file)
 
 uint8_t font_init (void)
 {_
-    font_inited = true;
-
 #ifdef ENABLE_GENERATE_TTF
     /*
      * Generate bitmaps from TTF.
