@@ -187,23 +187,42 @@ fpoint Thing::get_next_hop (void)
     fstart = mid_at;
     point start((int)fstart.x, (int)fstart.y);
 
+printf("\n\nage map\n");
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
             int value;
+
+            //
+            // Make newer cells less preferred by factoring in the age
+            // 
+            uint32_t age;
+            if (age_map->val[x][y]) {
+                age = time_get_elapsed_tenths(age_map->val[x][y],
+                                              timestamp_born);
+            } else {
+                age = 0;
+            }
+
+if (age) {
+printf("%03u ", age);
+} else {
+printf("    ");
+}
             if (is_obstacle_for_me(p)) {
                 dmap_scent->val[x][y] = DMAP_IS_WALL;
                 dmap_goals->val[x][y] = DMAP_IS_WALL;
             } else if ((value = is_less_preferred_terrain(p))) {
                 dmap_scent->val[x][y] = value;
                 dmap_goals->val[x][y] = value;
-                dmap_scent->val[x][y] += age_map->val[x][y];
+                dmap_scent->val[x][y] += age;
             } else {
                 dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
                 dmap_goals->val[x][y] = DMAP_IS_PASSABLE;
-                dmap_scent->val[x][y] += age_map->val[x][y];
+                dmap_scent->val[x][y] += age;
             }
         }
+printf("\n");
     }
     CON("orig:");
     dmap_print(dmap_scent, start);
@@ -333,9 +352,10 @@ fpoint Thing::get_next_hop (void)
     }
 
     //
-    // Record we've neen here.
+    // Record we've been here.
     //
-    age_map->val[start.x][start.y]++;
+CON("start %d %d to %u",start.x, start.y, time_get_time_ms());
+    age_map->val[start.x][start.y] = time_get_time_ms();
 
     //
     // Find the best next-hop to the best goal.
