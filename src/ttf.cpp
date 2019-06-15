@@ -31,7 +31,7 @@ Fontp ttf_new (std::string name, int pointSize, int style)
 {_
     TTF_Font *ttf;
 
-    auto f = std::make_shared< class Font >();
+    auto f = new Font();
 
     DBG("Load TTF: %s", name.c_str());
 
@@ -66,7 +66,7 @@ Fontp ttf_new (std::string name, int pointSize, int style)
 
         f->u_to_c[c] = d;
         f->valid[d] = true;
-        ttf_create_tex_from_char(ttf, name.c_str(), f.get(), c, d);
+        ttf_create_tex_from_char(ttf, name.c_str(), f, c, d);
         c++;
         d++;
     }
@@ -250,7 +250,6 @@ ttf_write_tga (std::string name, int pointsize, int style)
     int x;
     int y;
     double h;
-    auto f = std::make_shared< class Font >();
 
     snprintf(filename, sizeof(filename), "%s_pointsize%u.tga",
              name.c_str(), pointsize);
@@ -260,7 +259,7 @@ ttf_write_tga (std::string name, int pointsize, int style)
     //
     glyph_per_row = TTF_GLYPH_PER_ROW;
 
-    f = ttf_new(name, pointsize, style);
+    Fontp f = ttf_new(name, pointsize, style);
     if (!f) {
         ERR("could not create font %s", name.c_str());
     }

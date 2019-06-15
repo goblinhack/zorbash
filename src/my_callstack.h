@@ -25,44 +25,47 @@
 #endif
 
 struct callframe {
-    const char *const file;
-    const char *const func;
+    const char *file;
+    const char *func;
     unsigned int line;
 };
 
-class callstack {
-public:
-    callstack(void) {
-    }
-    void dump(void);
-
-    std::vector<struct callframe> my_stack;
-};
-
-/*
- * Using thread_local here was ok, but caused crashes in destructors
- */
+//
+// I used to use a c++ vector here, but global destructor order meant
+// this was unreliable for tracing classes as they are destroyed after
+// the callstack vector
+//
+#define MAXCALLFRAME 1024
 #ifdef __MAIN__
-class callstack global_callstack;
+struct callframe callframes[MAXCALLFRAME];
+int callframes_depth;
 #else
-extern class callstack global_callstack;
+extern struct callframe callframes[MAXCALLFRAME];
+extern int callframes_depth;
 #endif
+extern void callstack_dump (void);
 
 struct tracer_t {
-    tracer_t (const char *const file,
-              const char *const func,
+    tracer_t (const char *file,
+              const char *func,
               const unsigned int line) :
               file(file), func(func), line(line)
     {
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
-        callframe c = { file, func, line };
-        global_callstack.my_stack.push_back(c);
+        if (callframes_depth < MAXCALLFRAME) {
+            callframe *c = &callframes[callframes_depth++];
+            c->file = file;
+            c->func = func;
+            c->line = line;
+        }
     }
 
     ~tracer_t()
     {
-        global_callstack.my_stack.pop_back();
+        if (callframes_depth > 0) {
+            callframes_depth--;
+        }
     }
 
     std::string file;

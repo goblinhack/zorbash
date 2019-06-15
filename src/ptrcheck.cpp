@@ -314,7 +314,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
     }
 
     if (!ptr) {
-        global_callstack.dump();
+        callstack_dump();
         DIE("%s%p NULL pointer %s:%s():%u", null_pointer_warning, ptr, file, func, line);
     }
 
@@ -361,7 +361,7 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
     /*
      * We may be about to crash. Complain!
      */
-    global_callstack.dump();
+    callstack_dump();
     ERR("%s%p %s:%s():%u", bad_pointer_warning, ptr, file, func, line);
 
     /*
@@ -477,7 +477,7 @@ void *ptrcheck_alloc (const void *ptr,
 #endif
 
     if (!ptr) {
-        global_callstack.dump();
+        callstack_dump();
 
         ERR("null pointer");
     }
@@ -566,7 +566,7 @@ uint8_t ptrcheck_free (void *ptr,
 #endif
 
     if (!ptr) {
-        global_callstack.dump();
+        callstack_dump();
 
         ERR("null pointer");
 

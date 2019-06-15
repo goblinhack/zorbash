@@ -10,7 +10,7 @@
 
 #include <memory>
 
-typedef std::shared_ptr< class Font > Fontp;
+typedef class Font * Fontp;
 extern Fontp fixed_font;
 
 #include "SDL_ttf.h"
