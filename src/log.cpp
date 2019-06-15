@@ -132,9 +132,9 @@ static void log_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -156,7 +156,7 @@ static void logs_ (const char *fmt, va_list args)
     char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
-    vsnprintf(buf, sizeof(buf), fmt, args);
+    vsnprintf(buf, MAXSHORTSTR, fmt, args);
 
     fwrite(buf, strlen(buf), 1, MY_STDOUT);
     fflush(MY_STDOUT);
@@ -177,9 +177,9 @@ static void warn_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -202,9 +202,9 @@ static void con_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -221,7 +221,7 @@ static void con_ (const wchar_t *fmt, va_list args)
         char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
-        timestamp(buf, sizeof(buf));
+        timestamp(buf, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%s", buf);
         fflush(MY_STDOUT);
         term_log(buf);
@@ -229,7 +229,7 @@ static void con_ (const wchar_t *fmt, va_list args)
 
     {
         wchar_t buf[MAXSHORTSTR];
-        auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
+        auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
         /*
          * Only a single nul is written, but as we read 2 at a time...
@@ -254,7 +254,7 @@ void con (const wchar_t *fmt)
         char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
-        timestamp(buf, sizeof(buf));
+        timestamp(buf, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%s", buf);
         fflush(MY_STDOUT);
         term_log(buf);
@@ -274,7 +274,7 @@ static void tip_ (const wchar_t *fmt, va_list args)
     wchar_t buf[MAXSHORTSTR];
 
     buf[0] = '\0';
-    auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
+    auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
     /*
      * Only a single nul is written, but as we read 2 at a time...
@@ -298,7 +298,7 @@ static void tip2_ (const wchar_t *fmt, va_list args)
     wchar_t buf[MAXSHORTSTR];
 
     buf[0] = '\0';
-    auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
+    auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
     /*
      * Only a single nul is written, but as we read 2 at a time...
@@ -322,7 +322,7 @@ static void tip_ (const char *fmt, va_list args)
     char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
-    vsnprintf(buf, sizeof(buf), fmt, args);
+    vsnprintf(buf, MAXSHORTSTR, fmt, args);
 
     wid_tooltip_set(string_to_wstring(buf));
 }
@@ -332,7 +332,7 @@ static void tip2_ (const char *fmt, va_list args)
     char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
-    vsnprintf(buf, sizeof(buf), fmt, args);
+    vsnprintf(buf, MAXSHORTSTR, fmt, args);
 
     wid_tooltip2_set(string_to_wstring(buf));
 }
@@ -363,13 +363,13 @@ static void dying_ (const char *fmt, va_list args)
     global_callstack.dump();
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
 
-    snprintf(buf + len, sizeof(buf) - len, "DYING: ");
+    snprintf(buf + len, MAXSHORTSTR - len, "DYING: ");
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     fprintf(stderr, "%s\n", buf);
     fflush(stderr);
@@ -384,16 +384,16 @@ static void err_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
 
-    snprintf(buf + len, sizeof(buf) - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
     fflush(MY_STDERR);
@@ -424,13 +424,13 @@ static void croak_ (const char *fmt, va_list args)
     uint32_t tslen;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     tslen = len = (uint32_t)strlen(buf);
 
-    snprintf(buf + len, sizeof(buf) - len, "FATAL ERROR: ");
+    snprintf(buf + len, MAXSHORTSTR - len, "FATAL ERROR: ");
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     fprintf(stderr, "%s\n", buf);
     fflush(stderr);
@@ -544,13 +544,13 @@ void Thing::log_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
              t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -575,14 +575,14 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "thing %s: dead, killer %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: dead, killer %s: ",
              t->to_string().c_str(),
              killer->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -609,13 +609,13 @@ void Thing::dead_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "thing %s: dead: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: dead: ",
              t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -642,13 +642,13 @@ void Thing::die_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
              t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     DIE("%s",buf);
 }
@@ -672,13 +672,13 @@ void Thing::con_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "thing %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
              t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -707,13 +707,13 @@ void Thing::err_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "ERROR: Thing %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: Thing %s: ",
              t->to_cstring());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -764,13 +764,13 @@ void Light::log_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "light %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "light %s: ",
              t->to_cstring());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -795,13 +795,13 @@ void Light::die_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "light %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "light %s: ",
              t->to_cstring());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     DIE("%s",buf);
 }
@@ -825,13 +825,13 @@ void Light::con_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "light %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "light %s: ",
              t->to_cstring());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -859,13 +859,13 @@ void Light::err_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "ERROR: Light %s: ",
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: Light %s: ",
              t->to_cstring());
 
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     fflush(MY_STDOUT);
@@ -915,11 +915,11 @@ static void wid_log_ (widp t, const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "wid   %s: ", to_string(t).c_str());
+    snprintf(buf + len, MAXSHORTSTR - len, "wid   %s: ", to_string(t).c_str());
     len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 }
@@ -956,17 +956,17 @@ static void msgerr_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
 
-    snprintf(buf + len, sizeof(buf) - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
 
     len = (uint32_t)strlen(buf);
 
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
     fflush(MY_STDERR);
@@ -1001,17 +1001,17 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
     uint32_t len;
 
     buf[0] = '\0';
-    timestamp(buf, sizeof(buf));
+    timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
 
-    snprintf(buf + len, sizeof(buf) - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
 
     len = (uint32_t)strlen(buf);
 #if SDL_MAJOR_VERSION >= 2
     ts_len = len;
 #endif
 
-    vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
 #if SDL_MAJOR_VERSION >= 2
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
@@ -1019,7 +1019,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
 #endif
 
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, sizeof(buf) - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
     fflush(MY_STDERR);
