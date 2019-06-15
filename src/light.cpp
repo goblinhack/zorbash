@@ -149,19 +149,7 @@ Lightp light_find (uint32_t id)
 
 std::string Light::to_string (void)
 {_
-    /*
-     * Return constant strings from a small pool.
-     */
-    static char tmp[10][MAXSTR];
-    static int loop;
-
-    if (loop >= 10) {
-        loop = 0;
-    }
-
-    snprintf(tmp[loop], sizeof(tmp[loop]) - 1, "%u at (%g,%g)", id, at.x, at.y);
-
-    return (tmp[loop++]);
+    return (string_sprintf("%u at (%g,%g)", id, at.x, at.y));
 }
 
 const char * Light::to_cstring (void)

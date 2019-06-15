@@ -510,14 +510,14 @@ static void ascii_putf_ (int x, int y,
                          color bg,
                          std::wstring fmt, va_list args)
 {_
-    wchar_t buf[MAXSTR];
+    wchar_t buf[MAXSHORTSTR];
 
     auto wrote = vswprintf(buf, sizeof(buf), fmt.c_str(), args);
 
     /*
      * Only a single nul is written, but as we read 2 at a time...
      */
-    if (wrote && (wrote < MAXSTR - 1)) {
+    if (wrote && (wrote < MAXSHORTSTR - 1)) {
         buf[wrote+1] = '\0';
     }
 
@@ -531,14 +531,14 @@ static void ascii_putf_ (int x, int y,
                          color bg,
                          const wchar_t *fmt, va_list args)
 {_
-    wchar_t buf[MAXSTR];
+    wchar_t buf[MAXSHORTSTR];
 
     auto wrote = vswprintf(buf, sizeof(buf), fmt, args);
 
     /*
      * Only a single nul is written, but as we read 2 at a time...
      */
-    if (wrote && (wrote < MAXSTR - 1)) {
+    if (wrote && (wrote < MAXSHORTSTR - 1)) {
         buf[wrote+1] = '\0';
     }
 

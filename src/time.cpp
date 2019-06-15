@@ -10,11 +10,10 @@
 
 uint32_t time_now;
 uint32_t base_time_in_mill;
+static char buf_[MAXSHORTSTR];
 
 const char *time2str (uint32_t ms, char *buf, int32_t len)
 {
-    static char buf_[MAXSTR];
-
     int32_t log_msec = ms;
     int32_t log_secs = log_msec / ONESEC;
     int32_t log_mins = log_secs / 60;
@@ -42,8 +41,6 @@ const char *time2str (uint32_t ms, char *buf, int32_t len)
 
 const char *timestamp (char *buf, int32_t len)
 {
-    static char buf_[200];
-
     int32_t log_msec = time_get_time_ms();
     int32_t log_secs = log_msec / ONESEC;
     int32_t log_mins = log_secs / 60;

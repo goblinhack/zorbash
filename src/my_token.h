@@ -12,9 +12,9 @@
 #include "my_slre.h"
 
 typedef struct tokens_t_ {
-    struct slre regexp[MAXSTR];
-    char *args[MAXSTR];
-    char data[MAXSTR];
+    struct slre regexp[MAXSHORTSTR];
+    char *args[MAXSHORTSTR];
+    char data[MAXSHORTSTR];
     uint32_t cnt;
 } tokens_t;
 

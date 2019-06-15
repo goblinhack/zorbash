@@ -27,7 +27,8 @@ strlcat_(char * dst, const char * src, size_t size);
 /*
  * Max long string size
  */
-#define MAXSTR                          4096
+#define MAXSTR                          1024
+#define MAXSHORTSTR                     256
 
 std::wstring string_to_wstring(const std::string& s);
 std::string wstring_to_string(const std::wstring& s);

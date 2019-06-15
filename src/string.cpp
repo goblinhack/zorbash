@@ -348,7 +348,7 @@ void strnoescape (char *uncompressed)
 
 static const char *dynvprintf_ (const char *fmt, va_list args)
 {_
-    static char buf[MAXSTR];
+    static char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
     vsnprintf(buf, sizeof(buf), fmt, args);
@@ -374,7 +374,7 @@ char *dynprintf (const char *fmt, ...)
 
 char *dynvprintf (const char *fmt, va_list args)
 {_
-    static char buf[MAXSTR];
+    static char buf[MAXSHORTSTR];
 
     buf[0] = '\0';
     vsnprintf(buf, sizeof(buf), fmt, args);
@@ -1137,8 +1137,8 @@ shared_vector_wstring split (const std::wstring &text, uint32_t max_line_len)
 
 Tpp string2tp (const char **s)
 {_
-    static char tmp[MAXSTR];
-    static const char *eo_tmp = tmp + MAXSTR;
+    static char tmp[MAXSHORTSTR];
+    static const char *eo_tmp = tmp + MAXSHORTSTR;
     const char *c = *s;
     char *t = tmp;
 
@@ -1258,11 +1258,11 @@ int32_t snprintf_realloc (char **str,
         usedspace = *used;
     }
 
-    char add[MAXSTR];
+    char add[MAXSHORTSTR];
     va_start(ap, fmt);
     vsnprintf(add, sizeof(add) - 1, fmt, ap);
     va_end(ap);
-    add[MAXSTR-1] = '\0';
+    add[MAXSHORTSTR-1] = '\0';
 
     needspace = strlen(add);
 

@@ -67,8 +67,14 @@ public:
 
     ~Thing (void)
     {
-        // log("destroyed");
+        verify(this);
+        log("destroying");
+        if (is_being_destroyed) {
+            die("death recursion");
+        }
+        is_being_destroyed = true;
         destroy();
+        log("destroyed");
         oldptr(this);
     }
 
@@ -253,6 +259,7 @@ public:
     unsigned int       is_waiting_for_ai:1;  /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_submerged:1;       /* until -std=c++2a remember to update thing.cpp */
     unsigned int       is_facing_left:1;     /* until -std=c++2a remember to update thing.cpp */
+    unsigned int       is_being_destroyed:1; /* until -std=c++2a remember to update thing.cpp */
 
     std::string to_string(void);
     const char *to_cstring(void);
