@@ -56,6 +56,11 @@ void dmap_print (Dmap *d, point start)
                 continue;
             }
 
+            if ((e > DMAP_IS_PASSABLE) && (e < DMAP_IS_PASSABLE + 100)) {
+                printf(">%-2d", e - DMAP_IS_PASSABLE);
+                continue;
+            }
+
             if (e > 0) {
                 printf("%-3d", e);
             } else {
@@ -282,9 +287,14 @@ void dmap_process (Dmap *D, point tl, point br)
     for (y = miny + 1; y < maxy - 1; y++) {
         for (x = minx + 1; x < maxx - 1; x++) {
             int o = orig[x][y];
-            int n = D->val[x][y];
-            if (o + n < DMAP_IS_PASSABLE) {
-                D->val[x][y] += o;
+            if (o != DMAP_IS_WALL) {
+                if (o > DMAP_IS_PASSABLE) {
+                    o = o - DMAP_IS_PASSABLE;
+                    int n = D->val[x][y];
+                    if (o + n < DMAP_IS_PASSABLE) {
+                        D->val[x][y] += o;
+                    }
+                }
             }
         }
     }
@@ -459,7 +469,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
         point(0, 1),
     };
 
-    static uint16_t walked[MAP_WIDTH][MAP_HEIGHT];
+    static uint8_t walked[MAP_WIDTH][MAP_HEIGHT];
     memset(walked, 0, sizeof(walked));
 
     auto at = start;
@@ -473,7 +483,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
             return out;
         }
 
-        auto lowest = D->val[x][y];
+        int lowest = D->val[x][y];
         bool got = false;
         point best;
 
@@ -501,8 +511,8 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
             if (D->val[tx][ty] == DMAP_IS_PASSABLE) {
                 continue;
             }
-
-            auto c = D->val[tx][ty];
+            int c = D->val[tx][ty];
+printf("  - c %d dx %d dy %d lowest %d", c, d.x, d.y, lowest);
             if (c <= lowest) {
                 got = true;
                 best = t;

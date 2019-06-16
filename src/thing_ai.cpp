@@ -198,8 +198,8 @@ printf("\n\nage map\n");
             // 
             uint32_t age;
             if (age_map->val[x][y]) {
-                age = time_get_elapsed_tenths(age_map->val[x][y],
-                                              timestamp_born);
+                age = time_get_elapsed_secs(age_map->val[x][y],
+                                            timestamp_born);
             } else {
                 age = 0;
             }
@@ -211,32 +211,17 @@ printf("    ");
 }
             if (is_obstacle_for_me(p)) {
                 dmap_scent->val[x][y] = DMAP_IS_WALL;
-                dmap_goals->val[x][y] = DMAP_IS_WALL;
             } else if ((value = is_less_preferred_terrain(p))) {
-                dmap_scent->val[x][y] = value;
-                dmap_goals->val[x][y] = value;
+                dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
                 dmap_scent->val[x][y] += age;
+                dmap_scent->val[x][y] += value;
             } else {
                 dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
-                dmap_goals->val[x][y] = DMAP_IS_PASSABLE;
                 dmap_scent->val[x][y] += age;
             }
+            dmap_goals->val[x][y] = dmap_scent->val[x][y];
         }
 printf("\n");
-    }
-    CON("orig:");
-    dmap_print(dmap_scent, start);
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            point p(x, y);
-            int value;
-            if (is_obstacle_for_me(p)) {
-            } else if ((value = is_less_preferred_terrain(p))) {
-                dmap_scent->val[x][y] += age_map->val[x][y];
-            } else {
-                dmap_scent->val[x][y] += age_map->val[x][y];
-            }
-        }
     }
     CON("aged:");
     dmap_print(dmap_scent, start);
@@ -314,17 +299,17 @@ printf("\n");
     memset(&cell_totals, 0, sizeof(cell_totals));
     double highest_least_preferred = 0;
     double lowest_most_preferred = 0;
-    const double wanderlust = 10;
+//    const double wanderlust = 10;
 
     {
         uint8_t walked[MAP_WIDTH][MAP_HEIGHT];
         memset(&walked, 0, sizeof(walked));
         for (auto g : goals) {
             auto p = g.at;
-            if (!walked[p.x][p.y]) {
-                int age = age_map->val[p.x][p.y];
-                cell_totals[p.x][p.y] = wanderlust * (age - oldest);
-            }
+//            if (!walked[p.x][p.y]) {
+//                int age = age_map->val[p.x][p.y];
+//                cell_totals[p.x][p.y] = wanderlust * (age - oldest);
+//            }
 
             walked[p.x][p.y] = true;
             cell_totals[p.x][p.y] += g.score;
@@ -354,18 +339,11 @@ printf("\n");
     //
     // Record we've been here.
     //
-CON("start %d %d to %u",start.x, start.y, time_get_time_ms());
     age_map->val[start.x][start.y] = time_get_time_ms();
 
     //
     // Find the best next-hop to the best goal.
     //
-
-    //
-    // By commenting this out we will also consider staying put and not
-    // moving as an option
-    //
-    dmap_goals->val[start.x][start.y] = DMAP_IS_PASSABLE;
 
     //
     // Wall clingers create a dmap that is essentially a border around
@@ -374,7 +352,17 @@ CON("start %d %d to %u",start.x, start.y, time_get_time_ms());
 #if 0
     dmap_print(dmap_goals, start);
 #endif
+    CON("goals before:");
+    dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
+    CON("goals after:");
+    dmap_print(dmap_goals, start);
+
+    //
+    // Make sure we do not ewant to stay put/
+    // moving as an option
+    //
+    dmap_goals->val[start.x][start.y] = DMAP_IS_WALL - 1;
 
     //
     // Move diagonally if not blocked by walls
@@ -384,12 +372,17 @@ CON("start %d %d to %u",start.x, start.y, time_get_time_ms());
     if (hops.size() >= 2) {
         if (dmap_can_i_move_diagonally(dmap_goals, start, hops[0], hops[1])) {
             best = hops[1];
+printf(">>>>>>>>(1) at %d %d best %d %d hops %d\n", start.x, start.y, best.x, best.y, (int)hops.size());
         } else {
             best = hops[0];
+printf(">>>>>>>>(2) at %d %d best %d %d hops %d\n", start.x, start.y, best.x, best.y, (int)hops.size());
         }
     } else if (hops.size() >= 1) {
+printf(">>>>>>>>(3) at %d %d best %d %d hops %d\n", start.x, start.y, best.x, best.y, (int)hops.size());
         best = hops[0];
     } else {
+printf(">>>>>>>>(4) at %d %d best %d %d hops %d\n", start.x, start.y, best.x, best.y, (int)hops.size());
+        best = hops[0];
         best = start;
     }
 
