@@ -467,7 +467,7 @@ static void game_place_lava (class Dungeon *d, std::string what)
     }
 }
 
-static void game_place_blood (class Dungeon *d)
+static void game_place_random_blood (class Dungeon *d)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -582,6 +582,25 @@ static void game_place_food (class Dungeon *d)
             }
 
             auto tp = tp_random_food();
+
+            (void) thing_new(tp_name(tp), fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_blood (class Dungeon *d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_blood[x][y]) {
+                continue;
+            }
+
+            if (!d->is_blood_at(x, y)) {
+                continue;
+            }
+
+            auto tp = tp_random_blood();
 
             (void) thing_new(tp_name(tp), fpoint(x, y));
         }
@@ -876,7 +895,7 @@ _
         game_place_water(dungeon, "water1");
         game_place_deep_water(dungeon, "deep_water1");
         //fluid_init();
-        game_place_blood(dungeon);
+        game_place_random_blood(dungeon);
 
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -890,6 +909,7 @@ _
 
         game_place_monst(dungeon);
         game_place_food(dungeon);
+        game_place_blood(dungeon);
         game_place_keys(dungeon);
         lights_calculate();
 
