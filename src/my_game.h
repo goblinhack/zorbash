@@ -28,6 +28,7 @@ enum {
     MAP_DEPTH_WALLS_DECO,
     MAP_DEPTH_EXIT,
     MAP_DEPTH_ITEM,
+#define MAP_DEPTH_FOOD MAP_DEPTH_ITEM
     MAP_DEPTH_MONST,
     MAP_DEPTH_PLAYER,
     MAP_DEPTH_WEAPON,
@@ -86,6 +87,7 @@ public:
     uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    is_food[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_key[MAP_WIDTH][MAP_HEIGHT] = {};
 
@@ -116,6 +118,8 @@ public:
     bool is_dirt_at(const int x, const int y);
     bool is_monst_at(const point &p);
     bool is_monst_at(const int x, const int y);
+    bool is_food_at(const point &p);
+    bool is_food_at(const int x, const int y);
     bool is_rock_at(const point &p);
     bool is_rock_at(const int x, const int y);
     bool is_key_at(const point &p);

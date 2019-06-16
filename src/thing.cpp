@@ -221,6 +221,9 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     if (tp_is_monst(tp)) {
         game.state.map.is_monst[new_at.x][new_at.y] = true;
     }
+    if (tp_is_food(tp)) {
+        game.state.map.is_food[new_at.x][new_at.y] = true;
+    }
     if (tp_is_rock(tp)) {
         game.state.map.is_rock[new_at.x][new_at.y] = true;
     }
@@ -548,6 +551,9 @@ void Thing::destroy (void)
     if (is_monst()) {
         game.state.map.is_monst[old_at.x][old_at.y] = false;
     }
+    if (is_food()) {
+        game.state.map.is_food[old_at.x][old_at.y] = false;
+    }
     if (is_rock()) {
         game.state.map.is_rock[old_at.x][old_at.y] = false;
     }
@@ -622,7 +628,7 @@ void Thing::move_carried_items (void)
     }
 
     //
-    // Not really an item...
+    // If something moves on the water, make a ripple
     //
     if (is_monst() || is_player()) {
         if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {

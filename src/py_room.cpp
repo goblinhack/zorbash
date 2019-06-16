@@ -89,7 +89,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             std::string deco_string;
             std::string wall_deco_string;
             std::string walls_string;
-            std::string monsts_string;
+            std::string monst_string;
+            std::string food_string;
             std::string exits_string;
             std::string items_string;
 
@@ -137,9 +138,15 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
 
                 if (m.is_monst) {
-                    monsts_string += c;
+                    monst_string += c;
                 } else {
-                    monsts_string += Charmap::SPACE;
+                    monst_string += Charmap::SPACE;
+                }
+
+                if (m.is_food) {
+                    food_string += c;
+                } else {
+                    food_string += Charmap::SPACE;
                 }
 
                 if (m.is_entrance ||
@@ -194,7 +201,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 r->data[x][y][MAP_DEPTH_WALLS]      = walls_string[x];
                 r->data[x][y][MAP_DEPTH_WALLS_DECO] = wall_deco_string[x];
                 r->data[x][y][MAP_DEPTH_EXIT]       = exits_string[x];
-                r->data[x][y][MAP_DEPTH_MONST]      = monsts_string[x];
+                r->data[x][y][MAP_DEPTH_MONST]      = monst_string[x];
+                r->data[x][y][MAP_DEPTH_FOOD]       = food_string[x];
                 r->data[x][y][MAP_DEPTH_ITEM]       = items_string[x];
                 r->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
             }

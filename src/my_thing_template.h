@@ -174,7 +174,7 @@ public:
     int is_rrr1 {};
     int is_rrr10 {};
     int is_rrr11 {};
-    int is_rrr12 {};
+    int is_food {};
     int hates_water {};
     int hunger_constant {};
     int is_undead {};
@@ -214,6 +214,7 @@ Tpp tp_find(uint32_t id);
 Tpp tp_find_name(std::string name);
 void tp_init_after_loading(void);
 Tpp tp_random_monst(void);
+Tpp tp_random_food(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_key(void);
 Tpp tp_random_blood(void);
@@ -280,6 +281,11 @@ static inline int tp_is_deep_water (Tpp t)
 static inline int tp_is_monst (Tpp t)
 {
     return (t->is_monst);
+}
+
+static inline int tp_is_food (Tpp t)
+{
+    return (t->is_food);
 }
 
 static inline int tp_is_player (Tpp t)
@@ -355,11 +361,6 @@ static inline int tp_is_rrr10 (Tpp t)
 static inline int tp_is_rrr11 (Tpp t)
 {
     return (t->is_rrr11);
-}
-
-static inline int tp_is_rrr12 (Tpp t)
-{
-    return (t->is_rrr12);
 }
 
 static inline int tp_hates_water (Tpp t)

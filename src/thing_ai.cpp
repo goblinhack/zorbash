@@ -187,7 +187,7 @@ fpoint Thing::get_next_hop (void)
     fstart = mid_at;
     point start((int)fstart.x, (int)fstart.y);
 
-printf("\n\nage map\n");
+//printf("\n\nage map\n");
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
@@ -204,11 +204,11 @@ printf("\n\nage map\n");
                 age = 0;
             }
 
-if (age) {
-printf("%03u ", age);
-} else {
-printf("    ");
-}
+//if (age) {
+//printf("%03u ", age);
+//} else {
+//printf("    ");
+//}
             if (is_obstacle_for_me(p)) {
                 dmap_scent->val[x][y] = DMAP_IS_WALL;
             } else if ((value = is_less_preferred_terrain(p))) {
@@ -221,10 +221,10 @@ printf("    ");
             }
             dmap_goals->val[x][y] = dmap_scent->val[x][y];
         }
-printf("\n");
+//printf("\n");
     }
-    CON("aged:");
-    dmap_print(dmap_scent, start);
+//    CON("aged:");
+//    dmap_print(dmap_scent, start);
 
     //
     // We want to find how far everything is from us.
@@ -234,8 +234,8 @@ printf("\n");
     point tl(minx, miny);
     point br(maxx, maxy);
     dmap_process(dmap_scent, tl, br);
-    CON("post:");
-    dmap_print(dmap_scent, start);
+//    CON("post:");
+//    dmap_print(dmap_scent, start);
 
     //
     // Find all the possible goals we can smell.
@@ -266,17 +266,6 @@ printf("\n");
 
                 score += dmap_scent->val[p.x][p.y];
                 score += 100 * (priority + 1);
-
-                //
-                // Say the target (the player) is standing in a pool and
-                // the monst hates water. We still want to try and get
-                // to them, but make it less preferred
-                // 
-//                if (is_obstacle_for_me(p)) {
-//                    dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
-//                    dmap_goals->val[x][y] = DMAP_IS_PASSABLE;
-//                    score *= 10;
-//                }
 
                 Goal goal(score);
                 goal.at = p;
@@ -352,8 +341,8 @@ printf("\n");
 #if 0
     dmap_print(dmap_goals, start);
 #endif
-    CON("goals before:");
-    dmap_print(dmap_goals, start);
+//    CON("goals before:");
+//    dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
     CON("goals after:");
     dmap_print(dmap_goals, start);
@@ -362,7 +351,9 @@ printf("\n");
     // Make sure we do not ewant to stay put/
     // moving as an option
     //
-    dmap_goals->val[start.x][start.y] = DMAP_IS_WALL - 1;
+    if (dmap_goals->val[start.x][start.y] > 0) {
+        dmap_goals->val[start.x][start.y] = DMAP_IS_WALL - 1;
+    }
 
     //
     // Move diagonally if not blocked by walls
@@ -372,16 +363,12 @@ printf("\n");
     if (hops.size() >= 2) {
         if (dmap_can_i_move_diagonally(dmap_goals, start, hops[0], hops[1])) {
             best = hops[1];
-printf(">>>>>>>>(1) at %d %d best %d %d hops %d\n", start.x, start.y, best.x, best.y, (int)hops.size());
         } else {
             best = hops[0];
-printf(">>>>>>>>(2) at %d %d best %d %d hops %d\n", start.x, start.y, best.x, best.y, (int)hops.size());
         }
     } else if (hops.size() >= 1) {
-printf(">>>>>>>>(3) at %d %d best %d %d hops %d\n", start.x, start.y, best.x, best.y, (int)hops.size());
         best = hops[0];
     } else {
-printf(">>>>>>>>(4) at %d %d best %d %d hops %d\n", start.x, start.y, best.x, best.y, (int)hops.size());
         best = hops[0];
         best = start;
     }

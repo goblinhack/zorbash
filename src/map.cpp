@@ -157,12 +157,12 @@ bool Map::is_monst_at (const point &p)
     return (is_monst[p.x][p.y]);
 }
 
-bool Map::is_monst_at (const int x, const int y)
+bool Map::is_food_at (const int x, const int y)
 {
     if (is_oob(x, y)) {
         return (true);
     }
-    return (is_monst[x][y]);
+    return (is_food[x][y]);
 }
 
 bool Map::is_rock_at (const point &p)

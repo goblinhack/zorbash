@@ -316,6 +316,10 @@ void Thing::update_pos (fpoint to)
             game.state.map.is_monst[old_at.x][old_at.y] = false;
             game.state.map.is_monst[new_at.x][new_at.y] = true;
         }
+        if (is_food()) {
+            game.state.map.is_food[old_at.x][old_at.y] = false;
+            game.state.map.is_food[new_at.x][new_at.y] = true;
+        }
         if (is_key()) {
             game.state.map.is_key[old_at.x][old_at.y] = false;
             game.state.map.is_key[new_at.x][new_at.y] = true;

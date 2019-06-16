@@ -354,24 +354,28 @@ static void game_place_floor_under_objects (class Dungeon *d,
             }
 
             if (d->is_monst_at(x, y + 1) ||
+                d->is_food_at(x, y + 1) ||
                 d->is_key_at(x, y + 1)) {
                 if (!game.state.map.is_floor[x][y + 1]) {
                     thing_new(what, fpoint(x, y + 1));
                 }
             }
             if (d->is_monst_at(x, y - 1) ||
+                d->is_food_at(x, y - 1) ||
                 d->is_key_at(x, y - 1)) {
                 if (!game.state.map.is_floor[x][y - 1]) {
                     thing_new(what, fpoint(x, y - 1));
                 }
             }
             if (d->is_monst_at(x + 1, y) ||
+                d->is_food_at(x + 1, y) ||
                 d->is_key_at(x + 1, y)) {
                 if (!game.state.map.is_floor[x + 1][y]) {
                     thing_new(what, fpoint(x + 1, y));
                 }
             }
             if (d->is_monst_at(x - 1, y) ||
+                d->is_food_at(x - 1, y) ||
                 d->is_key_at(x - 1, y)) {
                 if (!game.state.map.is_floor[x - 1][y]) {
                     thing_new(what, fpoint(x - 1, y));
@@ -411,24 +415,28 @@ static void game_place_floor_under_objects (class Dungeon *d,
             }
 
             if (d->is_monst_at(x, y + 1) ||
+                d->is_food_at(x, y + 1) ||
                 d->is_key_at(x, y + 1)) {
                 if (!game.state.map.is_floor[x][y + 1]) {
                     thing_new(what, fpoint(x, y + 1));
                 }
             }
             if (d->is_monst_at(x, y - 1) ||
+                d->is_food_at(x, y - 1) ||
                 d->is_key_at(x, y - 1)) {
                 if (!game.state.map.is_floor[x][y - 1]) {
                     thing_new(what, fpoint(x, y - 1));
                 }
             }
             if (d->is_monst_at(x + 1, y) ||
+                d->is_food_at(x + 1, y) ||
                 d->is_key_at(x + 1, y)) {
                 if (!game.state.map.is_floor[x + 1][y]) {
                     thing_new(what, fpoint(x + 1, y));
                 }
             }
             if (d->is_monst_at(x - 1, y) ||
+                d->is_food_at(x - 1, y) ||
                 d->is_key_at(x - 1, y)) {
                 if (!game.state.map.is_floor[x - 1][y]) {
                     thing_new(what, fpoint(x - 1, y));
@@ -542,7 +550,7 @@ static void game_place_deep_water (class Dungeon *d, std::string what)
     }
 }
 
-static void game_place_monsts (class Dungeon *d)
+static void game_place_monst (class Dungeon *d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -555,6 +563,25 @@ static void game_place_monsts (class Dungeon *d)
             }
 
             auto tp = tp_random_monst();
+
+            (void) thing_new(tp_name(tp), fpoint(x, y));
+        }
+    }
+}
+
+static void game_place_food (class Dungeon *d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (game.state.map.is_food[x][y]) {
+                continue;
+            }
+
+            if (!d->is_food_at(x, y)) {
+                continue;
+            }
+
+            auto tp = tp_random_food();
 
             (void) thing_new(tp_name(tp), fpoint(x, y));
         }
@@ -762,6 +789,7 @@ _
         memset(game.state.map.is_lava, 0, sizeof(game.state.map.is_lava));
         memset(game.state.map.is_light, 0, sizeof(game.state.map.is_light));
         memset(game.state.map.is_monst, 0, sizeof(game.state.map.is_monst));
+        memset(game.state.map.is_food, 0, sizeof(game.state.map.is_food));
         memset(game.state.map.is_rock, 0, sizeof(game.state.map.is_rock));
         memset(game.state.map.is_solid, 0, sizeof(game.state.map.is_solid));
         memset(game.state.map.gfx_large_shadow_caster, 0, sizeof(game.state.map.gfx_large_shadow_caster));
@@ -860,7 +888,8 @@ _
             }
         }
 
-        game_place_monsts(dungeon);
+        game_place_monst(dungeon);
+        game_place_food(dungeon);
         game_place_keys(dungeon);
         lights_calculate();
 

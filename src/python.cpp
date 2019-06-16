@@ -1678,6 +1678,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(gfx_animated_no_dir)
     TP_SET_DECL(gfx_is_an_animation_only)
     TP_SET_DECL(is_monst)
+    TP_SET_DECL(is_food)
     TP_SET_DECL(is_player)
     TP_SET_DECL(is_rrr1)
     TP_SET_DECL(is_rrr2)
@@ -1690,7 +1691,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr9)
     TP_SET_DECL(is_rrr10)
     TP_SET_DECL(is_rrr11)
-    TP_SET_DECL(is_rrr12)
+    TP_SET_DECL(is_food)
     TP_SET_DECL(hates_water)
     TP_SET_DECL(hunger_constant)
     TP_SET_DECL(is_undead)
@@ -2017,6 +2018,7 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS", MAP_DEPTH_WALLS);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MONST", MAP_DEPTH_MONST);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FOOD", MAP_DEPTH_FOOD);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_ITEM", MAP_DEPTH_ITEM);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXIT", MAP_DEPTH_EXIT);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR_DECO", MAP_DEPTH_FLOOR_DECO);

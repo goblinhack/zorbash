@@ -542,9 +542,9 @@ public:
         return (tp_is_rrr11(tp));
     }
 
-    int is_rrr12 (void)
+    int is_food (void)
     {
-        return (tp_is_rrr12(tp));
+        return (tp_is_food(tp));
     }
 
     int hates_water (void)

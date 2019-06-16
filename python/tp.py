@@ -179,8 +179,8 @@ class Tp:
     def set_is_rrr11(self, value):
         zx.tp_set_is_rrr11(self, value)
 
-    def set_is_rrr12(self, value):
-        zx.tp_set_is_rrr12(self, value)
+    def set_is_food(self, value):
+        zx.tp_set_is_food(self, value)
 
     def set_hates_water(self, value):
         zx.tp_set_hates_water(self, value)

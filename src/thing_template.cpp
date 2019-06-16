@@ -10,7 +10,8 @@
 
 static Tpmap tp_map;
 static Tpmap_create_order tp_create_order_map;
-static Tpmap_create_order tp_monsts;
+static Tpmap_create_order tp_monst;
+static Tpmap_create_order tp_food;
 static Tpmap_create_order tp_ripples;
 static Tpmap_create_order tp_keys;
 static Tpmap_create_order tp_blood;
@@ -147,9 +148,17 @@ void tp_init_after_loading (void)
         if (tp_is_monst(tp)) {
             static unsigned int id;
             id++;
-            auto result = tp_monsts.insert(std::make_pair(id, tp));
+            auto result = tp_monst.insert(std::make_pair(id, tp));
             if (result.second == false) {
                 ERR("thing template insert monst [%s] failed", tp_name(tp).c_str());
+            }
+        }
+        if (tp_is_food(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_food.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert food [%s] failed", tp_name(tp).c_str());
             }
         }
         if (tp_is_ripple(tp)) {
@@ -213,10 +222,23 @@ void tp_init_after_loading (void)
 
 Tpp tp_random_monst (void)
 {_
-    auto n = tp_monsts.size();
+    auto n = tp_monst.size();
     auto m = myrand() % n;
 
-    auto iter = tp_monsts.begin();
+    auto iter = tp_monst.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
+}
+
+Tpp tp_random_food (void)
+{_
+    auto n = tp_food.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_food.begin();
     while (m--) {
         iter++;
     }
