@@ -34,6 +34,8 @@ public:
         TREASURE        = '$',
         TRAP            = 'i',
         MONST           = 'm',
+        FOOD            = 'f',
+        BLOOD           = 'b',
         DEBUG           = '@',
     };
 
@@ -56,6 +58,7 @@ public:
     bool                      is_deep_water        {false};
     bool                      is_treasure          {false};
     bool                      is_monst             {false};
+    bool                      is_food             {false};
     bool                      is_trap              {false};
 
     static std::vector<Charmap> all_charmaps;

@@ -512,7 +512,6 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
                 continue;
             }
             int c = D->val[tx][ty];
-printf("  - c %d dx %d dy %d lowest %d", c, d.x, d.y, lowest);
             if (c <= lowest) {
                 got = true;
                 best = t;

@@ -131,6 +131,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_monst             = true;
 
+    char_index              = Charmap::FOOD;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_food              = true;
+
     char_index              = Charmap::TRAP;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
