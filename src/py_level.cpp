@@ -51,6 +51,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             std::string walls_string;
             std::string monst_string;
             std::string food_string;
+            std::string blood_string;
             std::string exits_string;
             std::string items_string;
 
@@ -62,17 +63,18 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_dirt ||
                     m.is_lava) {
                     floor_string += c;
-                    water_string += Charmap::SPACE;
-                } else if (m.is_water ||
-                           m.is_deep_water) {
-                    floor_string += Charmap::FLOOR;
-                    water_string += c;
                 } else if (m.is_door ||
+                           m.is_blood ||
                            m.gfx_is_floor_deco) {
                     floor_string += Charmap::FLOOR;
-                    water_string += Charmap::SPACE;
                 } else {
                     floor_string += Charmap::SPACE;
+                }
+
+                if (m.is_water ||
+                    m.is_deep_water) {
+                    water_string += c;
+                } else {
                     water_string += Charmap::SPACE;
                 }
 
@@ -109,6 +111,12 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     food_string += c;
                 } else {
                     food_string += Charmap::SPACE;
+                }
+
+                if (m.is_blood) {
+                    blood_string += c;
+                } else {
+                    blood_string += Charmap::SPACE;
                 }
 
                 if (m.is_entrance ||
@@ -165,6 +173,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 l->data[x][y][MAP_DEPTH_EXIT]       = exits_string[x];
                 l->data[x][y][MAP_DEPTH_MONST]      = monst_string[x];
                 l->data[x][y][MAP_DEPTH_FOOD]       = food_string[x];
+                l->data[x][y][MAP_DEPTH_BLOOD]      = blood_string[x];
                 l->data[x][y][MAP_DEPTH_ITEM]       = items_string[x];
                 l->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
             }
@@ -207,6 +216,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 l->data[x][y][MAP_DEPTH_EXIT]       = exits_string[x];
                 l->data[x][y][MAP_DEPTH_MONST]      = monst_string[x];
                 l->data[x][y][MAP_DEPTH_FOOD]       = food_string[x];
+                l->data[x][y][MAP_DEPTH_BLOOD]      = blood_string[x];
                 l->data[x][y][MAP_DEPTH_ITEM]       = items_string[x];
                 l->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
             }
