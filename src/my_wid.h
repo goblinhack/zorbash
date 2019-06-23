@@ -267,7 +267,7 @@ extern uint32_t history_at;
 extern uint32_t history_walk;
 
 typedef struct {
- /*
+    /*
      * Colors
      */
     color colors[WID_COLOR_MAX];
