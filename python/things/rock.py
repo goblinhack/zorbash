@@ -19,6 +19,8 @@ def tp_init(name,
     x.set_gfx_large_shadow_caster(True)
     x.set_is_rock(True)
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_does_nothing(True)
+    x.set_is_obstacle(True)
 
     if tiles is not None:
         for t in tiles:

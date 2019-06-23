@@ -8,9 +8,10 @@
 #include "my_thing.h"
 #include "my_dmap.h"
 #include "my_math.h"
-#include <list>
+#include <vector>
 
-extern std::list<point> astar_solve(point s, point g, Dmap *d);
+extern std::vector<point> astar_solve(point s, 
+                                    std::multiset<Goal> &goals, Dmap *d);
 
 bool Thing::will_attack (const Thingp itp)
 {
@@ -90,7 +91,7 @@ bool Thing::is_obstacle_for_me (point p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto i : game.state.map.all_non_boring_things_at[p.x][p.y]) {
+    for (auto i : game.state.map.all_interesting_things_at[p.x][p.y]) {
         auto it = i.second;
         if (it == this) {
             continue;
@@ -108,7 +109,7 @@ int Thing::is_less_preferred_terrain (point p)
 {
     if (game.state.map.is_water_at(p)) {
         if (hates_water()) {
-            return (50);
+            return (100);
         }
     }
     return (0);
@@ -130,7 +131,7 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
     switch (priority) {
     case 0:
         if (is_starving) {
-            for (auto i : game.state.map.all_non_boring_things_at[p.x][p.y]) {
+            for (auto i : game.state.map.all_interesting_things_at[p.x][p.y]) {
                 auto it = i.second;
                 if (it == this) {
                     continue;
@@ -145,18 +146,21 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
         break;
     case 1:
         if (is_hungry) {
-            for (auto i : game.state.map.all_non_boring_things_at[p.x][p.y]) {
+            for (auto i : game.state.map.all_interesting_things_at[p.x][p.y]) {
                 auto it = i.second;
                 if (it == this) {
                     continue;
                 }
+CON("  consider %s", it->to_string().c_str());
 
                 if (will_eat(it)) {
+CON("  consider %s will eat", it->to_string().c_str());
                     *score -= 500;
                     return (true);
                 }
 
                 if (will_attack(it)) {
+CON("  consider %s will attack", it->to_string().c_str());
                     *score -= 1000 / distance_scale;
                     return (true);
                 }
@@ -164,7 +168,7 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
         }
         break;
     case 2:
-        for (auto i : game.state.map.all_non_boring_things_at[p.x][p.y]) {
+        for (auto i : game.state.map.all_interesting_things_at[p.x][p.y]) {
             auto it = i.second;
             if (it == this) {
                 continue;
@@ -254,9 +258,9 @@ printf("start %d %d\n",start.x,start.y);
             //
             // Too far away to sense?
             //
-            if (dmap_scent->val[x][y] > tp->ai_scent_distance) {
-                continue;
-            }
+//            if (dmap_scent->val[x][y] > tp->ai_scent_distance) {
+//                continue;
+//            }
 
             //
             // Look at the cell for each priority level. This means we can
@@ -363,23 +367,22 @@ printf("goal add %d %d\n",p.x,p.y);
     //
     // Move diagonally if not blocked by walls
     //
-    auto hops = dmap_solve(dmap_goals, start);
-
-    for (auto g : goals) {
-        astar_solve(start, g.at, dmap_goals);
-    }
-
+    //auto hops = dmap_solve(dmap_goals, start);
+    auto hops = astar_solve(start, goals, dmap_goals);
+    auto hopssize = hops.size();
     point best;
-    if (hops.size() >= 2) {
-        if (dmap_can_i_move_diagonally(dmap_goals, start, hops[0], hops[1])) {
-            best = hops[1];
+    if (hopssize >= 2) {
+        auto hop0 = hops[hopssize - 1];
+        auto hop1 = hops[hopssize - 2];
+        if (dmap_can_i_move_diagonally(dmap_goals, start, hop0, hop1)) {
+            best = hop1;
         } else {
-            best = hops[0];
+            best = hop0;
         }
     } else if (hops.size() >= 1) {
-        best = hops[0];
+        auto hop0 = hops[hopssize - 1];
+        best = hop0;
     } else {
-        best = hops[0];
         best = start;
     }
 

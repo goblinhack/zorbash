@@ -149,7 +149,7 @@ public:
     int is_active {};
     int is_bleeder {};
     int is_blood {};
-    int is_boring {};
+    int does_nothing {};
     int is_combustable {};
     int is_corpse_on_death {};
     int is_corridor {};
@@ -193,7 +193,7 @@ public:
     int is_rrr6 {};
     int is_rrr7 {};
     int is_rrr8 {};
-    int is_rrr9 {};
+    int is_obstacle {};
     int is_wall {};
     int is_water {};
     int is_weapon {};
@@ -348,9 +348,9 @@ static inline int tp_is_rrr8 (Tpp t)
     return (t->is_rrr8);
 }
 
-static inline int tp_is_rrr9 (Tpp t)
+static inline int tp_is_obstacle (Tpp t)
 {
-    return (t->is_rrr9);
+    return (t->is_obstacle);
 }
 
 static inline int tp_is_rrr10 (Tpp t)
@@ -518,9 +518,9 @@ static inline int tp_gfx_oversized_but_sitting_on_the_ground (Tpp t)
     return (t->gfx_oversized_but_sitting_on_the_ground);
 }
 
-static inline int tp_is_boring (Tpp t)
+static inline int tp_does_nothing (Tpp t)
 {
-    return (t->is_boring);
+    return (t->does_nothing);
 }
 
 static inline int tp_is_exit (Tpp t)

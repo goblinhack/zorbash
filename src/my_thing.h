@@ -51,6 +51,15 @@ public:
     }
 };
 
+class Path {
+public:
+    Path () {}
+    Path (std::vector<point> &p, int c) : path(p), cost(c) { }
+
+    std::vector<point> path;
+    int                cost {};
+};
+
 typedef struct AgeMap {
     uint32_t val[MAP_WIDTH][MAP_HEIGHT];
 } AgeMap;
@@ -527,9 +536,9 @@ public:
         return (tp_is_rrr8(tp));
     }
 
-    int is_rrr9 (void)
+    int is_obstacle (void)
     {
-        return (tp_is_rrr9(tp));
+        return (tp_is_obstacle(tp));
     }
 
     int is_rrr10 (void)
@@ -702,9 +711,9 @@ public:
         return (tp_gfx_oversized_but_sitting_on_the_ground(tp));
     }
 
-    int is_boring (void)
+    int does_nothing (void)
     {
-        return (tp_is_boring(tp));
+        return (tp_does_nothing(tp));
     }
 
     int is_exit (void)

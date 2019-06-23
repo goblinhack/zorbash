@@ -73,7 +73,8 @@ public:
     // Think of unordered_map as a hash table.
     //
     std::map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
-    std::map<uint32_t, Thingp> all_non_boring_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::map<uint32_t, Thingp> all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
     uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    is_solid[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    gfx_large_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};

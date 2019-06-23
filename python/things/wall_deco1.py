@@ -9,7 +9,7 @@ def tp_init(name,
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
-    x.set_is_boring(True)
+    x.set_does_nothing(True)
     x.set_is_movement_blocking(True)
     x.set_gfx_outlined(True)
     x.set_gfx_is_wall_deco(True)

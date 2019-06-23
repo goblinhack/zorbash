@@ -5,7 +5,7 @@ def tp_init(name):
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
-    x.set_is_boring(True)
+    x.set_does_nothing(True)
     x.set_is_ripple(True)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 

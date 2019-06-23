@@ -5,7 +5,7 @@ import tp
 def corridor_init(name, tiles=[], left_tiles=[]):
     
     x = tp.Tp(name)
-    x.set_is_boring(True)
+    x.set_does_nothing(True)
     x.set_is_corridor(True)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
 

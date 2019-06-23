@@ -8,7 +8,9 @@
 #include "my_thing.h"
 #include "my_dmap.h"
 #include "my_math.h"
-#include <list>
+#include <vector>
+
+static char debug[MAP_WIDTH][MAP_HEIGHT];
 
 class Nodecost {
 public:
@@ -161,91 +163,56 @@ public:
         }
     }
 
-    std::tuple<std::list<point>, int > create_path (const Node *came_from)
+    std::tuple<std::vector<point>, int > create_path (Dmap *dmap,
+                                                    const Node *came_from)
     {
-        std::list<point> l;
-        int cost = 0;
+        std::vector<point> l;
+        int cost = came_from->cost.cost;
 
         while (came_from) {
-            l.push_back(came_from->at);
-printf("    %d %d cost %d\n", came_from->at.x, came_from->at.y, came_from->cost.cost);
-            cost += came_from->cost.cost;
+            if (came_from->came_from) {
+                l.push_back(came_from->at);
+            }
+printf(" %d(%d) ", came_from->cost.cost, dmap->val[came_from->at.x][came_from->at.y]);
             came_from = came_from->came_from;
         }
+
         return {l, cost};
     }
 
-    void dump (const Node *came_from)
-    {
-        auto [l, cost] = create_path(came_from);
-        int x;
-        int y;
-
-        printf("astar:\n");
-        for (y = 0; y < MAP_HEIGHT; y++) {
-            for (x = 0; x < MAP_WIDTH; x++) {
-                uint16_t e = dmap->val[x][y];
-
-                bool best = false;
-                for (auto n : l) {
-                    if (n == point(x, y)) {
-                        best = true;
-                        break;
-                    }
-                }
-
-                char buf[10] = {};
-                if (e == DMAP_IS_WALL) {
-                    sprintf(buf, "## ");
-                } else if (e == DMAP_IS_PASSABLE) {
-                    sprintf(buf, "_  ");
-                } else if ((e > DMAP_IS_PASSABLE) && 
-                           (e < DMAP_IS_PASSABLE + 100)) {
-                    sprintf(buf, ">%-2d", e - DMAP_IS_PASSABLE);
-                } else if (e > 0) {
-                    sprintf(buf, "%-3d", e);
-                } else {
-                    sprintf(buf, ".  ");
-                }
-
-                if (point(x, y) == start) {
-                    sprintf(buf, " @ ");
-                }
-
-                if (best) {
-                    buf[2] = '%';
-                }
-
-                printf("%s", buf);
-            }
-            printf("\n");
-        }
-        printf("\n");
-    }
-
-    std::list<point> solve (void)
+    Path solve (char *gi)
     {
         auto distance_to_nexthop = 0;
         auto ncost = Nodecost(distance_to_nexthop + heuristic(start));
         auto neighbor = new Node(start, ncost);
         add_to_open(neighbor);
-        std::list<point> l;
-        int best = 0;
+        Path best;
+        best.cost = std::numeric_limits<int>::max();
 
-printf("search\n");
+printf("solve %c\n", 'A' + *gi);
         while (!open_nodes.empty()) {
             auto c = open_nodes.begin();
             Node *current = c->second;
 
             if (current->at == goal) {
-                auto [n, cost] = create_path(current);
+printf("  path %c ",'A' + *gi);
+                auto [path, cost] = create_path(dmap, current);
+printf("\n");
 
-                if ((cost < best) || l.empty()) {
-                    best = cost;
-                    l = n;
-printf("   goal found best cost %d\n", cost);
+                if (cost < best.cost) {
+                    best.path = path;
+                    best.cost = cost;
+printf("    best %d\n", cost);
+                    for (auto p : path) {
+                        debug[p.x][p.y] = 'A' + *gi;
+                    }
+                    (*gi)++;
                 } else {
-printf("   goal found cost %d\n", cost);
+                    for (auto p : path) {
+                        debug[p.x][p.y] = 'a' + *gi;
+                    }
+                    (*gi)++;
+printf("    !best %d\n", cost);
                 }
 //                dump(current);
                 remove_from_open(current);
@@ -263,12 +230,69 @@ printf("   goal found cost %d\n", cost);
 
         cleanup();
 
-        return (l);
+        return (best);
     }
 };
 
-std::list<point> astar_solve (point s, point g, Dmap *d)
+static void dump (Dmap *dmap, point start)
 {
-    auto a = Astar(s, g, d);
-    return (a.solve());
+    int x;
+    int y;
+
+    printf("astar:\n");
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
+            uint16_t e = dmap->val[x][y];
+
+            char buf[10] = {};
+            if (e == DMAP_IS_WALL) {
+                sprintf(buf, "##  ");
+            } else if (e == DMAP_IS_PASSABLE) {
+                sprintf(buf, "_   ");
+            } else if ((e > DMAP_IS_PASSABLE) && 
+                        (e < DMAP_IS_PASSABLE + 100)) {
+                sprintf(buf, ">%-3d", e - DMAP_IS_PASSABLE);
+            } else if (e > 0) {
+                sprintf(buf, "%-4d", e);
+            } else {
+                sprintf(buf, ".   ");
+            }
+
+            if (point(x, y) == start) {
+                sprintf(buf, " @  ");
+            }
+
+            if (debug[x][y]) {
+                buf[2] = debug[x][y];
+            }
+
+            printf("%s", buf);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+Path astar_solve (point start, std::multiset<Goal> &goals, Dmap *dmap)
+{
+    auto best = Path();
+    best.cost = std::numeric_limits<int>::max();
+    char gi = '\0';
+
+    memset(debug, 0, sizeof(debug));
+    for (auto g : goals) {
+        auto a = Astar(start, g.at, dmap);
+
+        auto path = a.solve(&gi);
+        if (path.cost < best.cost)  {
+            best = path;
+        }
+    }
+
+    for (auto p : best.path) {
+        debug[p.x][p.y] = '%';
+    }
+
+    dump(dmap, start);
+    return (best);
 }

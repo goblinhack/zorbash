@@ -7,7 +7,7 @@ def tp_init(name):
     x.set_gfx_animated(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
-    x.set_is_boring(True)
+    x.set_does_nothing(True)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 50

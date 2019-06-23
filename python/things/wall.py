@@ -18,6 +18,8 @@ def tp_init(name,
     x.set_is_movement_blocking(True)
     x.set_gfx_large_shadow_caster(True)
     x.set_is_wall(True)
+    x.set_does_nothing(True)
+    x.set_is_obstacle(True)
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     if tiles is not None:
