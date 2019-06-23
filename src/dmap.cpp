@@ -43,28 +43,28 @@ void dmap_print (Dmap *d, point start)
         for (x = 0; x < MAP_WIDTH; x++) {
             uint16_t e = d->val[x][y];
             if (point(x, y) == start) {
-                printf(" @ ");
+                printf(" @  ");
                 continue;
             }
 
             if (e == DMAP_IS_WALL) {
-                printf("## ");
+                printf("##  ");
                 continue;
             }
             if (e == DMAP_IS_PASSABLE) {
-                printf("_  ");
+                printf("_   ");
                 continue;
             }
 
             if ((e > DMAP_IS_PASSABLE) && (e < DMAP_IS_PASSABLE + 100)) {
-                printf(">%-2d", e - DMAP_IS_PASSABLE);
+                printf(">%-3d", e - DMAP_IS_PASSABLE);
                 continue;
             }
 
             if (e > 0) {
-                printf("%-3d", e);
+                printf("%-4d", e);
             } else {
-                printf(".  ");
+                printf(".   ");
             }
         }
         printf("\n");

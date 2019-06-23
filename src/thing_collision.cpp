@@ -615,7 +615,7 @@ bool Thing::handle_collisions (void)
         auto dx = x - mid_at.x;
         for (int16_t y = miny; y <= maxy; y++) {
             auto dy = y - mid_at.y;
-            for (auto p : game.state.map.all_non_boring_things_at[x][y]) {
+            for (auto p : game.state.map.all_obstacle_things_at[x][y]) {
                 auto it = p.second;
                 if (this == it) {
                     continue;

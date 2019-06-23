@@ -10,6 +10,8 @@ def tp_init(name,
 
     x.set_is_water(True)
     x.set_gfx_animated(True)
+    x.set_is_obstacle(True)
+    x.set_does_nothing(True)
     x.set_z_depth(zx.MAP_DEPTH_WATER)
     
     delay = 1250

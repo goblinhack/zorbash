@@ -30,12 +30,21 @@ void Thing::attach (void)
         }
     }
 
-    if (!is_boring()) {
-        auto root = &game.state.map.all_non_boring_things_at[(int)mid_at.x][(int)mid_at.y];
+    if (!does_nothing()) {
+        auto root = &game.state.map.all_interesting_things_at[(int)mid_at.x][(int)mid_at.y];
         auto p = std::make_pair(id, this);
         auto result = root->insert(p);
         if (result.second == false) {
-            die("failed to insert to game.state.map.all_non_boring_things_at");
+            die("failed to insert to game.state.map.all_interesting_things_at");
+        }
+    }
+
+    if (is_obstacle()) {
+        auto root = &game.state.map.all_obstacle_things_at[(int)mid_at.x][(int)mid_at.y];
+        auto p = std::make_pair(id, this);
+        auto result = root->insert(p);
+        if (result.second == false) {
+            die("failed to insert to game.state.map.all_obstacle_things_at");
         }
     }
 
@@ -76,12 +85,22 @@ void Thing::detach (void)
         root->erase(id);
     }
 
-    if (!is_boring()) {
-        auto root = &game.state.map.all_non_boring_things_at[(int)last_attached.x]
+    if (!does_nothing()) {
+        auto root = &game.state.map.all_interesting_things_at[(int)last_attached.x]
                                                             [(int)last_attached.y];
         auto result = root->find(id);
         if (result == root->end()) {
-            die("failed to remove from game.state.map.all_non_boring_things_at");
+            die("failed to remove from game.state.map.all_interesting_things_at");
+        }
+        root->erase(id);
+    }
+
+    if (is_obstacle()) {
+        auto root = &game.state.map.all_obstacle_things_at[(int)last_attached.x]
+                                                            [(int)last_attached.y];
+        auto result = root->find(id);
+        if (result == root->end()) {
+            die("failed to remove from game.state.map.all_obstacle_things_at");
         }
         root->erase(id);
     }

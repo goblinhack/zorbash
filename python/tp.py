@@ -170,8 +170,8 @@ class Tp:
     def set_is_rrr8(self, value):
         zx.tp_set_is_rrr8(self, value)
 
-    def set_is_rrr9(self, value):
-        zx.tp_set_is_rrr9(self, value)
+    def set_is_obstacle(self, value):
+        zx.tp_set_is_obstacle(self, value)
 
     def set_is_rrr10(self, value):
         zx.tp_set_is_rrr10(self, value)
@@ -272,8 +272,8 @@ class Tp:
     def set_gfx_oversized_but_sitting_on_the_ground(self, value):
         zx.tp_set_gfx_oversized_but_sitting_on_the_ground(self, value)
 
-    def set_is_boring(self, value):
-        zx.tp_set_is_boring(self, value)
+    def set_does_nothing(self, value):
+        zx.tp_set_does_nothing(self, value)
 
     def set_is_exit(self, value):
         zx.tp_set_is_exit(self, value)

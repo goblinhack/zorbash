@@ -9,6 +9,8 @@ def deep_tp_init(name, tiles=[], left_tiles=[]):
     x.set_is_deep_water(True)
     x.set_gfx_animated(True)
     x.set_z_depth(zx.MAP_DEPTH_WATER)
+    x.set_does_nothing(True)
+    x.set_is_obstacle(True)
     
     delay = 1250
     for t in tiles:
