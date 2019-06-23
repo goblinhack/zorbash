@@ -8,6 +8,9 @@
 #include "my_thing.h"
 #include "my_dmap.h"
 #include "my_math.h"
+#include <list>
+
+extern std::list<point> astar_solve(point s, point g, Dmap *d);
 
 bool Thing::will_attack (const Thingp itp)
 {
@@ -105,7 +108,7 @@ int Thing::is_less_preferred_terrain (point p)
 {
     if (game.state.map.is_water_at(p)) {
         if (hates_water()) {
-            return (10);
+            return (50);
         }
     }
     return (0);
@@ -243,6 +246,7 @@ fpoint Thing::get_next_hop (void)
     std::multiset<Goal> goals;
     int oldest = 0;
 
+printf("start %d %d\n",start.x,start.y);
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
@@ -268,6 +272,7 @@ fpoint Thing::get_next_hop (void)
                 score += 100 * (priority + 1);
 
                 Goal goal(score);
+printf("goal add %d %d\n",p.x,p.y);
                 goal.at = p;
                 goals.insert(goal);
 
@@ -359,6 +364,11 @@ fpoint Thing::get_next_hop (void)
     // Move diagonally if not blocked by walls
     //
     auto hops = dmap_solve(dmap_goals, start);
+
+    for (auto g : goals) {
+        astar_solve(start, g.at, dmap_goals);
+    }
+
     point best;
     if (hops.size() >= 2) {
         if (dmap_can_i_move_diagonally(dmap_goals, start, hops[0], hops[1])) {
