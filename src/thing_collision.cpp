@@ -572,14 +572,22 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
             }
         }
     } else if (will_attack(it)) {
+me->con("will attack %s", it->to_string().c_str());
         if (tp_attack_on_collision(me_tp)) {
+me->con("overlap %s", it->to_string().c_str());
             if (things_overlap(me, it)) {
                 thing_possible_hit_add(it, "battle");
+            } else {
+me->con("no overlap %s", it->to_string().c_str());
             }
         }
     } else if (will_eat(it)) {
+me->con("will eat %s", it->to_string().c_str());
         if (things_overlap(me, it)) {
+me->con("eat");
             thing_possible_hit_add(it, "eat");
+        } else{
+me->con("no overlap");
         }
     }
 
@@ -615,12 +623,14 @@ bool Thing::handle_collisions (void)
         auto dx = x - mid_at.x;
         for (int16_t y = miny; y <= maxy; y++) {
             auto dy = y - mid_at.y;
-            for (auto p : game.state.map.all_obstacle_things_at[x][y]) {
+            for (auto p : game.state.map.all_interesting_things_at[x][y]) {
                 auto it = p.second;
+                
                 if (this == it) {
                     continue;
                 }
 
+con("collide with %s", it->to_string().c_str());
                 if (!possible_hit(it, x, y, dx, dy)) {
                     return (false);
                 }

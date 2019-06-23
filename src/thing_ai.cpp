@@ -194,7 +194,6 @@ fpoint Thing::get_next_hop (void)
     fstart = mid_at;
     point start((int)fstart.x, (int)fstart.y);
 
-//printf("\n\nage map\n");
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
@@ -211,27 +210,21 @@ fpoint Thing::get_next_hop (void)
                 age = 0;
             }
 
-//if (age) {
-//printf("%03u ", age);
-//} else {
-//printf("    ");
-//}
             if (is_obstacle_for_me(p)) {
                 dmap_scent->val[x][y] = DMAP_IS_WALL;
+                dmap_goals->val[x][y] = DMAP_IS_WALL;
             } else if ((value = is_less_preferred_terrain(p))) {
                 dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
-                dmap_scent->val[x][y] += age;
-                dmap_scent->val[x][y] += value;
+                dmap_goals->val[x][y] = DMAP_IS_PASSABLE;
+                dmap_goals->val[x][y] += age;
+                dmap_goals->val[x][y] += value;
             } else {
                 dmap_scent->val[x][y] = DMAP_IS_PASSABLE;
-                dmap_scent->val[x][y] += age;
+                dmap_goals->val[x][y] = DMAP_IS_PASSABLE;
+                dmap_goals->val[x][y] += age;
             }
-            dmap_goals->val[x][y] = dmap_scent->val[x][y];
         }
-//printf("\n");
     }
-//    CON("aged:");
-//    dmap_print(dmap_scent, start);
 
     //
     // We want to find how far everything is from us.
@@ -240,9 +233,15 @@ fpoint Thing::get_next_hop (void)
 
     point tl(minx, miny);
     point br(maxx, maxy);
+#if 0
+CON("scent before:");
+dmap_print(dmap_scent, start);
+#endif
     dmap_process(dmap_scent, tl, br);
-//    CON("post:");
-//    dmap_print(dmap_scent, start);
+#if 0
+CON("scent after:");
+dmap_print(dmap_scent, start);
+#endif
 
     //
     // Find all the possible goals we can smell.
@@ -250,7 +249,7 @@ fpoint Thing::get_next_hop (void)
     std::multiset<Goal> goals;
     int oldest = 0;
 
-printf("start %d %d\n",start.x,start.y);
+CON("goals:");
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
@@ -258,9 +257,9 @@ printf("start %d %d\n",start.x,start.y);
             //
             // Too far away to sense?
             //
-//            if (dmap_scent->val[x][y] > tp->ai_scent_distance) {
-//                continue;
-//            }
+            if (dmap_scent->val[x][y] > tp->ai_scent_distance) {
+                continue;
+            }
 
             //
             // Look at the cell for each priority level. This means we can
@@ -276,9 +275,9 @@ printf("start %d %d\n",start.x,start.y);
                 score += 100 * (priority + 1);
 
                 Goal goal(score);
-printf("goal add %d %d\n",p.x,p.y);
                 goal.at = p;
                 goals.insert(goal);
+CON("  goal add at: %d, %d", p.x, p.y);
 
                 //
                 // Also take note of the oldest cell age; we will use this
@@ -350,10 +349,8 @@ printf("goal add %d %d\n",p.x,p.y);
 #if 0
     dmap_print(dmap_goals, start);
 #endif
-//    CON("goals before:");
-//    dmap_print(dmap_goals, start);
     dmap_process(dmap_goals, tl, br);
-    CON("goals after:");
+CON("goals after:");
     dmap_print(dmap_goals, start);
 
     //
