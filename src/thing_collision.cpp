@@ -572,22 +572,14 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
             }
         }
     } else if (will_attack(it)) {
-me->con("will attack %s", it->to_string().c_str());
         if (tp_attack_on_collision(me_tp)) {
-me->con("overlap %s", it->to_string().c_str());
             if (things_overlap(me, it)) {
                 thing_possible_hit_add(it, "battle");
-            } else {
-me->con("no overlap %s", it->to_string().c_str());
             }
         }
     } else if (will_eat(it)) {
-me->con("will eat %s", it->to_string().c_str());
         if (things_overlap(me, it)) {
-me->con("eat");
             thing_possible_hit_add(it, "eat");
-        } else{
-me->con("no overlap");
         }
     }
 
@@ -630,7 +622,6 @@ bool Thing::handle_collisions (void)
                     continue;
                 }
 
-con("collide with %s", it->to_string().c_str());
                 if (!possible_hit(it, x, y, dx, dy)) {
                     return (false);
                 }

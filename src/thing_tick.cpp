@@ -14,6 +14,12 @@ void Thing::achieve_goals_in_life (void)
     //
     if (dmap_goals) {
         auto to = get_next_hop();
+
+        point toi(to.x, to.y);
+        if (is_less_preferred_terrain(toi)) {
+            return;
+        }
+
         if (mid_at != to) {
             move(to);
         }

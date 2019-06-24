@@ -10,7 +10,9 @@
 #include "my_math.h"
 #include <vector>
 
+#ifdef ASTAR_DEBUG
 static char debug[MAP_WIDTH][MAP_HEIGHT];
+#endif
 
 class Nodecost {
 public:
@@ -104,7 +106,8 @@ public:
     // Manhattan distance.
     int heuristic (const point at)
     {
-        return (abs(goal.x - at.x) + abs(goal.y - at.y));
+        return (0);
+//        return (abs(goal.x - at.x) + abs(goal.y - at.y));
     }
 
     // Evaluate a neighbor for adding to the open set
@@ -173,7 +176,9 @@ public:
             if (came_from->came_from) {
                 l.push_back(came_from->at);
             }
+#if 0
 printf(" %d(%d) ", came_from->cost.cost, dmap->val[came_from->at.x][came_from->at.y]);
+#endif
             came_from = came_from->came_from;
         }
 
@@ -189,32 +194,35 @@ printf(" %d(%d) ", came_from->cost.cost, dmap->val[came_from->at.x][came_from->a
         Path best;
         best.cost = std::numeric_limits<int>::max();
 
-printf("solve %c\n", 'A' + *gi);
+//printf("solve %c\n", 'A' + *gi);
         while (!open_nodes.empty()) {
             auto c = open_nodes.begin();
             Node *current = c->second;
 
             if (current->at == goal) {
-printf("  path %c ",'A' + *gi);
+//printf("  path %c ",'A' + *gi);
                 auto [path, cost] = create_path(dmap, current);
-printf("\n");
+//printf("\n");
 
                 if (cost < best.cost) {
                     best.path = path;
                     best.cost = cost;
-printf("    best %d\n", cost);
+//printf("    best %d\n", cost);
+#ifdef ASTAR_DEBUG
                     for (auto p : path) {
                         debug[p.x][p.y] = 'A' + *gi;
                     }
                     (*gi)++;
+#endif
                 } else {
+#ifdef ASTAR_DEBUG
                     for (auto p : path) {
                         debug[p.x][p.y] = 'a' + *gi;
                     }
                     (*gi)++;
-printf("    !best %d\n", cost);
+#endif
+//printf("    !best %d\n", cost);
                 }
-//                dump(current);
                 remove_from_open(current);
                 continue;
             }
@@ -234,6 +242,7 @@ printf("    !best %d\n", cost);
     }
 };
 
+#ifdef ASTAR_DEBUG
 static void dump (Dmap *dmap, point start)
 {
     int x;
@@ -272,6 +281,7 @@ static void dump (Dmap *dmap, point start)
     }
     printf("\n");
 }
+#endif
 
 Path astar_solve (point start, std::multiset<Goal> &goals, Dmap *dmap)
 {
@@ -279,7 +289,9 @@ Path astar_solve (point start, std::multiset<Goal> &goals, Dmap *dmap)
     best.cost = std::numeric_limits<int>::max();
     char gi = '\0';
 
+#ifdef ASTAR_DEBUG
     memset(debug, 0, sizeof(debug));
+#endif
     for (auto g : goals) {
         auto a = Astar(start, g.at, dmap);
 
@@ -289,10 +301,12 @@ Path astar_solve (point start, std::multiset<Goal> &goals, Dmap *dmap)
         }
     }
 
+#ifdef ASTAR_DEBUG
     for (auto p : best.path) {
         debug[p.x][p.y] = '%';
     }
 
     dump(dmap, start);
+#endif
     return (best);
 }

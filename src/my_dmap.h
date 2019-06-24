@@ -28,5 +28,5 @@ extern void dmap_scale_and_recenter(Dmap *D,
 extern uint64_t dmap_hash(Dmap *d);
 
 #define DMAP_IS_WALL     65535
-#define DMAP_IS_PASSABLE 200
+#define DMAP_IS_PASSABLE 1000
 #define DMAP_IS_GOAL     0

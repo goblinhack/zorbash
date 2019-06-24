@@ -18,6 +18,10 @@ bool Thing::will_attack (const Thingp itp)
     auto me = tp;
     auto it = itp->tp;
 
+    if (!tp_is_attackable(it)) {
+        return (false);
+    }
+
     if (tp_is_meat_eater(me)) {
         if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
             return (true);
@@ -151,16 +155,13 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
                 if (it == this) {
                     continue;
                 }
-CON("  consider %s", it->to_string().c_str());
 
                 if (will_eat(it)) {
-CON("  consider %s will eat", it->to_string().c_str());
                     *score -= 500;
                     return (true);
                 }
 
                 if (will_attack(it)) {
-CON("  consider %s will attack", it->to_string().c_str());
                     *score -= 1000 / distance_scale;
                     return (true);
                 }
@@ -249,7 +250,9 @@ dmap_print(dmap_scent, start);
     std::multiset<Goal> goals;
     int oldest = 0;
 
+#if 0
 CON("goals:");
+#endif
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
@@ -277,7 +280,9 @@ CON("goals:");
                 Goal goal(score);
                 goal.at = p;
                 goals.insert(goal);
+#if 0
 CON("  goal add at: %d, %d", p.x, p.y);
+#endif
 
                 //
                 // Also take note of the oldest cell age; we will use this
@@ -350,8 +355,10 @@ CON("  goal add at: %d, %d", p.x, p.y);
     dmap_print(dmap_goals, start);
 #endif
     dmap_process(dmap_goals, tl, br);
-CON("goals after:");
+#if 0
+    CON("goals after:");
     dmap_print(dmap_goals, start);
+#endif
 
     //
     // Make sure we do not ewant to stay put/

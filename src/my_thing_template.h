@@ -173,7 +173,7 @@ public:
     int is_ripple {};
     int is_rrr1 {};
     int is_rrr10 {};
-    int is_rrr11 {};
+    int is_attackable {};
     int is_food {};
     int hates_water {};
     int hunger_constant {};
@@ -358,9 +358,9 @@ static inline int tp_is_rrr10 (Tpp t)
     return (t->is_rrr10);
 }
 
-static inline int tp_is_rrr11 (Tpp t)
+static inline int tp_is_attackable (Tpp t)
 {
-    return (t->is_rrr11);
+    return (t->is_attackable);
 }
 
 static inline int tp_hates_water (Tpp t)

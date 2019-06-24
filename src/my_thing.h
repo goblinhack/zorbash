@@ -77,13 +77,17 @@ public:
     ~Thing (void)
     {
         verify(this);
+#if 0
         log("destroying");
+#endif
         if (is_being_destroyed) {
             die("death recursion");
         }
         is_being_destroyed = true;
         destroy();
+#if 0
         log("destroyed");
+#endif
         oldptr(this);
     }
 
@@ -546,9 +550,9 @@ public:
         return (tp_is_rrr10(tp));
     }
 
-    int is_rrr11 (void)
+    int is_attackable (void)
     {
-        return (tp_is_rrr11(tp));
+        return (tp_is_attackable(tp));
     }
 
     int is_food (void)

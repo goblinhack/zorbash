@@ -501,7 +501,7 @@ static void game_place_random_blood (class Dungeon *d)
                     auto tp = tp_random_blood();
                     (void) thing_new(tp_name(tp),
                                      fpoint(x, y),
-                                     fpoint(1, 1));
+                                     fpoint(0.25, 0.25));
                 }
             }
         }
