@@ -237,7 +237,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         game.state.map.is_door[new_at.x][new_at.y] = true;
     }
 
-    if (!tp_is_active(tp)) {
+    if (!tp_does_nothing(tp)) {
         t->log("created");
     }
 
@@ -415,7 +415,7 @@ void Thing::remove_hooks ()
     // Some things have lots of things they own
     //
     if (owned_count) {
-        log("Remove remaining %u owned things", owned_count);
+        log("remove remaining %u owned things", owned_count);
 
         for (auto i : game.state.map.all_things) {
             Thingp t = i.second;
@@ -479,7 +479,7 @@ void Thing::destroy (void)
 #ifdef ENABLE_THING_DEBUG
     log("destroy");
 #else
-    if (!is_active()) {
+    if (!does_nothing()) {
         log("destroy");
     }
 #endif

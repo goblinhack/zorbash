@@ -20,6 +20,7 @@ def tp_init(name):
     x.set_is_made_of_meat(True)
     x.set_is_movable(True)
     x.set_is_player(True)
+    x.set_is_attackable(True)
     x.set_move_speed_ms(100)
     x.set_z_depth(zx.MAP_DEPTH_PLAYER)
 

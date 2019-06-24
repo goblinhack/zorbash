@@ -1690,7 +1690,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr8)
     TP_SET_DECL(is_obstacle)
     TP_SET_DECL(is_rrr10)
-    TP_SET_DECL(is_rrr11)
+    TP_SET_DECL(is_attackable)
     TP_SET_DECL(hates_water)
     TP_SET_DECL(hunger_constant)
     TP_SET_DECL(is_undead)

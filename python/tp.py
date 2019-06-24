@@ -176,8 +176,8 @@ class Tp:
     def set_is_rrr10(self, value):
         zx.tp_set_is_rrr10(self, value)
 
-    def set_is_rrr11(self, value):
-        zx.tp_set_is_rrr11(self, value)
+    def set_is_attackable(self, value):
+        zx.tp_set_is_attackable(self, value)
 
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)
