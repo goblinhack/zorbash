@@ -20,7 +20,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/dungeon.o 		\
     $(OBJDIR)/dungeon_grid.o 		\
     $(OBJDIR)/file.o 			\
-    $(OBJDIR)/fluid.o 			\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
     $(OBJDIR)/gl.o 			\

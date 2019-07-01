@@ -59,11 +59,11 @@ thing_overlaps_border (Thingp t)
                 return (true);
             }
 
-            if (px >= (MAP_WIDTH - MAP_BORDER) * TILE_WIDTH) {
+            if (px >= (DUN_WIDTH - MAP_BORDER) * TILE_WIDTH) {
                 return (true);
             }
 
-            if (py >= (MAP_HEIGHT - MAP_BORDER) * TILE_HEIGHT) {
+            if (py >= (DUN_HEIGHT - MAP_BORDER) * TILE_HEIGHT) {
                 return (true);
             }
         }
@@ -200,7 +200,7 @@ int circle_box_collision (Thingp C,
      * Corner collisions, normal is at 45 degrees. Unless there is a wall.
      */
     if (distance(C_at, B0) < radius) {
-        if (!game.state.map.is_wall_at(B->interpolated_mid_at.x - 1,
+        if (!game.state.map.is_wall(B->interpolated_mid_at.x - 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B0.x;
             normal->y = C_at.y - B0.y;
@@ -209,7 +209,7 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B1) < radius) {
-        if (!game.state.map.is_wall_at(B->interpolated_mid_at.x + 1,
+        if (!game.state.map.is_wall(B->interpolated_mid_at.x + 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B1.x;
             normal->y = C_at.y - B1.y;
@@ -218,7 +218,7 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B2) < radius) {
-        if (!game.state.map.is_wall_at(B->interpolated_mid_at.x + 1,
+        if (!game.state.map.is_wall(B->interpolated_mid_at.x + 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B2.x;
             normal->y = C_at.y - B2.y;
@@ -227,7 +227,7 @@ int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B3) < radius) {
-        if (!game.state.map.is_wall_at(B->interpolated_mid_at.x - 1,
+        if (!game.state.map.is_wall(B->interpolated_mid_at.x - 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B3.x;
             normal->y = C_at.y - B3.y;
@@ -602,12 +602,12 @@ bool Thing::handle_collisions (void)
     }
 
     int maxx = mid_at.x + thing_collision_tiles;
-    while (maxx >= MAP_WIDTH) {
+    while (maxx >= DUN_WIDTH) {
         maxx--;
     }
 
     int maxy = mid_at.y + thing_collision_tiles;
-    while (maxy >= MAP_HEIGHT) {
+    while (maxy >= DUN_HEIGHT) {
         maxy--;
     }
 

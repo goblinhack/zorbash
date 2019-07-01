@@ -8,7 +8,7 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define DEBUG_CRASH
+#undef DEBUG_CRASH
 
 #ifdef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors
@@ -35,13 +35,10 @@
  * Dungeon has a pad of tiles around the edges
  */
 #define MAP_BORDER                  4
-#define MAP_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
-#define MAP_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
-
-#define FLUID_RESOLUTION            8
-#define FLUID_WIDTH                 (MAP_WIDTH * FLUID_RESOLUTION)
-#define FLUID_HEIGHT                (MAP_HEIGHT * FLUID_RESOLUTION)
-#define FLUID_MAX_MASS              64
+#define DUN_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
+#define DUN_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
+#define MAP_WIDTH                   (DUN_WIDTH * 16)
+#define MAP_HEIGHT                  (DUN_HEIGHT * 16)
 
 /*
  * Light sources

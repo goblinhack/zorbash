@@ -86,7 +86,7 @@ public:
      * to avoid lighting walls behind those immediately visible to us. To
      * do this we do a flood fill of the level and pick the nearest walls.
      */
-    uint8_t             is_nearest_wall[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t             is_nearest_wall[DUN_WIDTH][DUN_HEIGHT] = {};
 
     void pop();
     std::string to_string(void);

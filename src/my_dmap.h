@@ -9,7 +9,7 @@
 #include "my_main.h"
 
 typedef struct dmap_ {
-    uint16_t val[MAP_WIDTH][MAP_HEIGHT];
+    uint16_t val[DUN_WIDTH][DUN_HEIGHT];
 } Dmap;
 
 extern void dmap_process(Dmap *D, point tl, point br);

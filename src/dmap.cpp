@@ -11,8 +11,8 @@ void dmap_print_walls (Dmap *d)
     uint16_t x;
     uint16_t y;
 
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
+    for (y = 0; y < DUN_HEIGHT; y++) {
+        for (x = 0; x < DUN_WIDTH; x++) {
             uint16_t e = d->val[x][y];
             if (e == DMAP_IS_WALL) {
                 printf("#");
@@ -39,8 +39,8 @@ void dmap_print (Dmap *d, point start)
     uint16_t x;
     uint16_t y;
 
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
+    for (y = 0; y < DUN_HEIGHT; y++) {
+        for (x = 0; x < DUN_WIDTH; x++) {
             uint16_t e = d->val[x][y];
             if (point(x, y) == start) {
                 printf(" @  ");
@@ -76,18 +76,18 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
 {
     uint16_t x;
     uint16_t y;
-    const float offx = start.x - ((MAP_WIDTH / scale) / 2);
-    const float offy = start.y - ((MAP_HEIGHT / scale) / 2);
-    uint16_t new_val[MAP_WIDTH][MAP_HEIGHT];
+    const float offx = start.x - ((DUN_WIDTH / scale) / 2);
+    const float offy = start.y - ((DUN_HEIGHT / scale) / 2);
+    uint16_t new_val[DUN_WIDTH][DUN_HEIGHT];
     const float fscale = scale;
 
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
+    for (y = 0; y < DUN_HEIGHT; y++) {
+        for (x = 0; x < DUN_WIDTH; x++) {
             float X = ((float)x / fscale) + offx;
             float Y = ((float)y / fscale) + offy;
 
-            if ((X < 0) || (X >= MAP_WIDTH) ||
-                (Y < 0) || (Y >= MAP_HEIGHT)) {
+            if ((X < 0) || (X >= DUN_WIDTH) ||
+                (Y < 0) || (Y >= DUN_HEIGHT)) {
                 new_val[x][y] = DMAP_IS_WALL;
                 continue;
             }
@@ -101,8 +101,8 @@ uint64_t dmap_hash (Dmap *d)
 {
     uint64_t hash = 0;
 
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_WIDTH; x++) {
+    for (auto y = 0; y < DUN_HEIGHT; y++) {
+        for (auto x = 0; x < DUN_WIDTH; x++) {
             uint16_t e = d->val[x][y];
             hash += e * x * y;
             hash --;
@@ -126,9 +126,9 @@ void dmap_process (Dmap *D, point tl, point br)
     uint16_t i;
     uint16_t lowest;
     uint16_t changed;
-    static uint16_t valid[MAP_WIDTH][MAP_HEIGHT];
-    static uint16_t orig_valid[MAP_WIDTH][MAP_HEIGHT];
-    static uint16_t orig[MAP_WIDTH][MAP_HEIGHT];
+    static uint16_t valid[DUN_WIDTH][DUN_HEIGHT];
+    static uint16_t orig_valid[DUN_WIDTH][DUN_HEIGHT];
+    static uint16_t orig[DUN_WIDTH][DUN_HEIGHT];
 
     memcpy(orig, D->val, sizeof(D->val));
 
@@ -154,22 +154,22 @@ void dmap_process (Dmap *D, point tl, point br)
     if (miny < 0) {
         miny = 0;
     }
-    if (maxx >= MAP_WIDTH) {
-        maxx = MAP_WIDTH - 1;
+    if (maxx >= DUN_WIDTH) {
+        maxx = DUN_WIDTH - 1;
     }
-    if (maxy >= MAP_HEIGHT) {
-        maxy = MAP_HEIGHT - 1;
+    if (maxy >= DUN_HEIGHT) {
+        maxy = DUN_HEIGHT - 1;
     }
 
     //
     // Need a wall around the dmap or the search will sort of
     // trickle off the map
     //
-    for (y = miny; y < MAP_HEIGHT; y++) {
+    for (y = miny; y < DUN_HEIGHT; y++) {
         D->val[minx][y] = DMAP_IS_WALL;
         D->val[maxx][y] = DMAP_IS_WALL;
     }
-    for (x = 0; x < MAP_WIDTH; x++) {
+    for (x = 0; x < DUN_WIDTH; x++) {
         D->val[x][miny] = DMAP_IS_WALL;
         D->val[x][maxy] = DMAP_IS_WALL;
     }
@@ -302,7 +302,7 @@ void dmap_process (Dmap *D, point tl, point br)
 
 static bool is_movement_blocking_at (const Dmap *D, int x, int y)
 {
-    if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
+    if ((x >= DUN_WIDTH) || (y >= DUN_HEIGHT) || (x < 0) || (y < 0)) {
         return (true);
     }
 
@@ -469,7 +469,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
         point(0, 1),
     };
 
-    static uint8_t walked[MAP_WIDTH][MAP_HEIGHT];
+    static uint8_t walked[DUN_WIDTH][DUN_HEIGHT];
     memset(walked, 0, sizeof(walked));
 
     auto at = start;
@@ -479,7 +479,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
         auto x = at.x;
         auto y = at.y;
 
-        if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
+        if ((x >= DUN_WIDTH) || (y >= DUN_HEIGHT) || (x < 0) || (y < 0)) {
             return out;
         }
 
@@ -496,7 +496,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
             auto tx = t.x;
             auto ty = t.y;
 
-            if ((tx >= MAP_WIDTH) || (ty >= MAP_HEIGHT) || (tx < 0) || (ty < 0)) {
+            if ((tx >= DUN_WIDTH) || (ty >= DUN_HEIGHT) || (tx < 0) || (ty < 0)) {
                 continue;
             }
 

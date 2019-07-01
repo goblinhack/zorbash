@@ -35,8 +35,8 @@ static void game_place_walls (class Dungeon *d,
     auto what = tp_name(tp);
 
     while (tries--) {
-        auto x = random_range(0, MAP_WIDTH - block_width + 1);
-        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+        auto x = random_range(0, DUN_WIDTH - block_width + 1);
+        auto y = random_range(0, DUN_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -48,7 +48,7 @@ static void game_place_walls (class Dungeon *d,
                     continue;
                 }
 
-                if (!d->is_wall_at(X, Y)) {
+                if (!d->is_wall(X, Y)) {
                     can_place_here = false;
                     break;
                 }
@@ -57,7 +57,7 @@ static void game_place_walls (class Dungeon *d,
                  * We place large blocks and avoid splatting them with
                  * smaller ones here.
                  */
-                if (game.state.map.is_wall[X][Y]) {
+                if (game.state.map.is_wall(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -77,7 +77,7 @@ static void game_place_walls (class Dungeon *d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                game.state.map.is_wall[X][Y] = 1;
+                game.state.map.set_wall(X, Y);
 
                 auto tilename = what + ".";
                 tilename += std::to_string(variant);
@@ -112,8 +112,8 @@ static void game_place_floors (class Dungeon *d,
                                int tries)
 {_
     while (tries--) {
-        auto x = random_range(0, MAP_WIDTH - block_width + 1);
-        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+        auto x = random_range(0, DUN_WIDTH - block_width + 1);
+        auto y = random_range(0, DUN_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -132,12 +132,12 @@ static void game_place_floors (class Dungeon *d,
                     }
                 }
 
-                if (!d->is_floor_at(X, Y)) {
+                if (!d->is_floor(X, Y)) {
                     can_place_here = false;
                     break;
                 }
 
-                if (game.state.map.is_floor[x][y]) {
+                if (game.state.map.is_floor(x, y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -146,7 +146,7 @@ static void game_place_floors (class Dungeon *d,
                  * We place large blocks and avoid splatting them with
                  * smaller ones here.
                  */
-                if (game.state.map.is_floor[X][Y]) {
+                if (game.state.map.is_floor(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -166,7 +166,7 @@ static void game_place_floors (class Dungeon *d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                game.state.map.is_floor[X][Y] = 1;
+                game.state.map.set_floor(X, Y);
 
                 auto new_thing = what + std::to_string(depth);
                 auto tilename = new_thing + ".";
@@ -202,8 +202,8 @@ static void game_place_rocks (class Dungeon *d,
                               int tries)
 {_
     while (tries--) {
-        auto x = random_range(0, MAP_WIDTH - block_width + 1);
-        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
+        auto x = random_range(0, DUN_WIDTH - block_width + 1);
+        auto y = random_range(0, DUN_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -215,7 +215,7 @@ static void game_place_rocks (class Dungeon *d,
                     continue;
                 }
 
-                if (!d->is_rock_at(X, Y)) {
+                if (!d->is_rock(X, Y)) {
                     can_place_here = false;
                     break;
                 }
@@ -224,7 +224,7 @@ static void game_place_rocks (class Dungeon *d,
                  * We place large blocks and avoid splatting them with
                  * smaller ones here.
                  */
-                if (game.state.map.is_rock[X][Y]) {
+                if (game.state.map.is_rock(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -244,7 +244,7 @@ static void game_place_rocks (class Dungeon *d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                game.state.map.is_rock[X][Y] = 1;
+                game.state.map.set_rock(X, Y);
 
                 auto tilename = what + ".";
                 tilename += std::to_string(variant);
@@ -274,13 +274,13 @@ static void game_place_floor_under_objects (class Dungeon *d,
                                             std::string what,
                                             int depth)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (game.state.map.is_floor[x][y]) {
+    for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            if (game.state.map.is_floor(x, y)) {
                 continue;
             }
 
-            if (!d->is_floor_at(x, y)) {
+            if (!d->is_floor(x, y)) {
                 continue;
             }
 
@@ -292,29 +292,29 @@ static void game_place_floor_under_objects (class Dungeon *d,
 
             (void) thing_new(what, fpoint(x, y));
 
-            if (d->is_lava_at(x, y + 1)) {
-                if (!game.state.map.is_floor[x][y + 1]) {
+            if (d->is_lava(x, y + 1)) {
+                if (!game.state.map.is_floor(x, y + 1)) {
                     thing_new(what, fpoint(x, y + 1));
                     (void) light_new(2, fpoint(x, y + 1.0),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
-            if (d->is_lava_at(x, y - 1)) {
-                if (!game.state.map.is_floor[x][y - 1]) {
+            if (d->is_lava(x, y - 1)) {
+                if (!game.state.map.is_floor(x, y - 1)) {
                     thing_new(what, fpoint(x, y - 1));
                     (void) light_new(2, fpoint(x, y - 1.0),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
-            if (d->is_lava_at(x + 1, y)) {
-                if (!game.state.map.is_floor[x + 1][y]) {
+            if (d->is_lava(x + 1, y)) {
+                if (!game.state.map.is_floor(x + 1, y)) {
                     thing_new(what, fpoint(x + 1, y));
                     (void) light_new(2, fpoint(x + 1.0, y),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
-            if (d->is_lava_at(x - 1, y)) {
-                if (!game.state.map.is_floor[x - 1][y]) {
+            if (d->is_lava(x - 1, y)) {
+                if (!game.state.map.is_floor(x - 1, y)) {
                     thing_new(what, fpoint(x - 1, y));
                     (void) light_new(2, fpoint(x - 1.0, y),
                                      LIGHT_QUALITY_POINT, ORANGE);
@@ -324,60 +324,60 @@ static void game_place_floor_under_objects (class Dungeon *d,
             color c = CYAN;
             c.a = 50;
             double light_strength = 1.0;
-            if (d->is_water_at(x, y + 1)) {
-                if (!game.state.map.is_floor[x][y + 1]) {
+            if (d->is_water(x, y + 1)) {
+                if (!game.state.map.is_floor(x, y + 1)) {
                     thing_new(what, fpoint(x, y + 1));
                     (void) light_new(light_strength, fpoint(x, y + 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
-            if (d->is_water_at(x, y - 1)) {
-                if (!game.state.map.is_floor[x][y - 1]) {
+            if (d->is_water(x, y - 1)) {
+                if (!game.state.map.is_floor(x, y - 1)) {
                     thing_new(what, fpoint(x, y - 1));
                     (void) light_new(light_strength, fpoint(x, y - 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
-            if (d->is_water_at(x + 1, y)) {
-                if (!game.state.map.is_floor[x + 1][y]) {
+            if (d->is_water(x + 1, y)) {
+                if (!game.state.map.is_floor(x + 1, y)) {
                     thing_new(what, fpoint(x + 1, y));
                     (void) light_new(light_strength, fpoint(x + 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
-            if (d->is_water_at(x - 1, y)) {
-                if (!game.state.map.is_floor[x - 1][y]) {
+            if (d->is_water(x - 1, y)) {
+                if (!game.state.map.is_floor(x - 1, y)) {
                     thing_new(what, fpoint(x - 1, y));
                     (void) light_new(light_strength, fpoint(x - 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
 
-            if (d->is_monst_at(x, y + 1) ||
-                d->is_food_at(x, y + 1) ||
-                d->is_key_at(x, y + 1)) {
-                if (!game.state.map.is_floor[x][y + 1]) {
+            if (d->is_monst(x, y + 1) ||
+                d->is_food(x, y + 1) ||
+                d->is_key(x, y + 1)) {
+                if (!game.state.map.is_floor(x, y + 1)) {
                     thing_new(what, fpoint(x, y + 1));
                 }
             }
-            if (d->is_monst_at(x, y - 1) ||
-                d->is_food_at(x, y - 1) ||
-                d->is_key_at(x, y - 1)) {
-                if (!game.state.map.is_floor[x][y - 1]) {
+            if (d->is_monst(x, y - 1) ||
+                d->is_food(x, y - 1) ||
+                d->is_key(x, y - 1)) {
+                if (!game.state.map.is_floor(x, y - 1)) {
                     thing_new(what, fpoint(x, y - 1));
                 }
             }
-            if (d->is_monst_at(x + 1, y) ||
-                d->is_food_at(x + 1, y) ||
-                d->is_key_at(x + 1, y)) {
-                if (!game.state.map.is_floor[x + 1][y]) {
+            if (d->is_monst(x + 1, y) ||
+                d->is_food(x + 1, y) ||
+                d->is_key(x + 1, y)) {
+                if (!game.state.map.is_floor(x + 1, y)) {
                     thing_new(what, fpoint(x + 1, y));
                 }
             }
-            if (d->is_monst_at(x - 1, y) ||
-                d->is_food_at(x - 1, y) ||
-                d->is_key_at(x - 1, y)) {
-                if (!game.state.map.is_floor[x - 1][y]) {
+            if (d->is_monst(x - 1, y) ||
+                d->is_food(x - 1, y) ||
+                d->is_key(x - 1, y)) {
+                if (!game.state.map.is_floor(x - 1, y)) {
                     thing_new(what, fpoint(x - 1, y));
                 }
             }
@@ -385,60 +385,60 @@ static void game_place_floor_under_objects (class Dungeon *d,
             c = DARKBLUE;
             c.a = 200;
             light_strength = 2.0;
-            if (d->is_deep_water_at(x, y + 1)) {
-                if (!game.state.map.is_floor[x][y + 1]) {
+            if (d->is_deep_water(x, y + 1)) {
+                if (!game.state.map.is_floor(x, y + 1)) {
                     thing_new(what, fpoint(x, y + 1));
                     (void) light_new(light_strength, fpoint(x, y + 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
-            if (d->is_deep_water_at(x, y - 1)) {
-                if (!game.state.map.is_floor[x][y - 1]) {
+            if (d->is_deep_water(x, y - 1)) {
+                if (!game.state.map.is_floor(x, y - 1)) {
                     thing_new(what, fpoint(x, y - 1));
                     (void) light_new(light_strength, fpoint(x, y - 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
-            if (d->is_deep_water_at(x + 1, y)) {
-                if (!game.state.map.is_floor[x + 1][y]) {
+            if (d->is_deep_water(x + 1, y)) {
+                if (!game.state.map.is_floor(x + 1, y)) {
                     thing_new(what, fpoint(x + 1, y));
                     (void) light_new(light_strength, fpoint(x + 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
-            if (d->is_deep_water_at(x - 1, y)) {
-                if (!game.state.map.is_floor[x - 1][y]) {
+            if (d->is_deep_water(x - 1, y)) {
+                if (!game.state.map.is_floor(x - 1, y)) {
                     thing_new(what, fpoint(x - 1, y));
                     (void) light_new(light_strength, fpoint(x - 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
 
-            if (d->is_monst_at(x, y + 1) ||
-                d->is_food_at(x, y + 1) ||
-                d->is_key_at(x, y + 1)) {
-                if (!game.state.map.is_floor[x][y + 1]) {
+            if (d->is_monst(x, y + 1) ||
+                d->is_food(x, y + 1) ||
+                d->is_key(x, y + 1)) {
+                if (!game.state.map.is_floor(x, y + 1)) {
                     thing_new(what, fpoint(x, y + 1));
                 }
             }
-            if (d->is_monst_at(x, y - 1) ||
-                d->is_food_at(x, y - 1) ||
-                d->is_key_at(x, y - 1)) {
-                if (!game.state.map.is_floor[x][y - 1]) {
+            if (d->is_monst(x, y - 1) ||
+                d->is_food(x, y - 1) ||
+                d->is_key(x, y - 1)) {
+                if (!game.state.map.is_floor(x, y - 1)) {
                     thing_new(what, fpoint(x, y - 1));
                 }
             }
-            if (d->is_monst_at(x + 1, y) ||
-                d->is_food_at(x + 1, y) ||
-                d->is_key_at(x + 1, y)) {
-                if (!game.state.map.is_floor[x + 1][y]) {
+            if (d->is_monst(x + 1, y) ||
+                d->is_food(x + 1, y) ||
+                d->is_key(x + 1, y)) {
+                if (!game.state.map.is_floor(x + 1, y)) {
                     thing_new(what, fpoint(x + 1, y));
                 }
             }
-            if (d->is_monst_at(x - 1, y) ||
-                d->is_food_at(x - 1, y) ||
-                d->is_key_at(x - 1, y)) {
-                if (!game.state.map.is_floor[x - 1][y]) {
+            if (d->is_monst(x - 1, y) ||
+                d->is_food(x - 1, y) ||
+                d->is_key(x - 1, y)) {
+                if (!game.state.map.is_floor(x - 1, y)) {
                     thing_new(what, fpoint(x - 1, y));
                 }
             }
@@ -448,13 +448,13 @@ static void game_place_floor_under_objects (class Dungeon *d,
 
 static void game_place_lava (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_lava[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_lava(x, y)) {
                 continue;
             }
 
-            if (!d->is_lava_at(x, y)) {
+            if (!d->is_lava(x, y)) {
                 continue;
             }
 
@@ -469,26 +469,26 @@ static void game_place_lava (class Dungeon *d, std::string what)
 
 static void game_place_random_blood (class Dungeon *d)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (game.state.map.is_blood[x][y]) {
+    for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            if (game.state.map.is_blood(x, y)) {
                 continue;
             }
 
-            if (d->is_floor_at(x, y) &&
-                d->is_floor_at(x - 1, y) &&
-                d->is_floor_at(x + 1, y) &&
-                d->is_floor_at(x - 1, y - 1) &&
-                d->is_floor_at(x + 1, y + 1)) {
-                if (game.state.map.is_water[x][y]) {
+            if (d->is_floor(x, y) &&
+                d->is_floor(x - 1, y) &&
+                d->is_floor(x + 1, y) &&
+                d->is_floor(x - 1, y - 1) &&
+                d->is_floor(x + 1, y + 1)) {
+                if (game.state.map.is_water(x, y)) {
                     continue;
                 }
 
-                if (game.state.map.is_deep_water[x][y]) {
+                if (game.state.map.is_deep_water(x, y)) {
                     continue;
                 }
 
-                if (game.state.map.is_lava[x][y]) {
+                if (game.state.map.is_lava(x, y)) {
                     continue;
                 }
 
@@ -510,19 +510,19 @@ static void game_place_random_blood (class Dungeon *d)
 
 static void game_place_water (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_water[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_water(x, y)) {
                 continue;
             }
 
-            if (!d->is_water_at(x, y)) {
+            if (!d->is_water(x, y)) {
                 continue;
             }
 
             (void) thing_new(what, fpoint(x, y));
 
-            if (!d->is_floor_at(x, y)) {
+            if (!d->is_floor(x, y)) {
                 (void) thing_new("dirt2", fpoint(x, y));
             }
         }
@@ -531,19 +531,19 @@ static void game_place_water (class Dungeon *d, std::string what)
 
 static void game_place_deep_water (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_deep_water[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_deep_water(x, y)) {
                 continue;
             }
 
-            if (!d->is_deep_water_at(x, y)) {
+            if (!d->is_deep_water(x, y)) {
                 continue;
             }
 
             (void) thing_new(what, fpoint(x, y));
 
-            if (!d->is_floor_at(x, y)) {
+            if (!d->is_floor(x, y)) {
                 (void) thing_new("dirt3", fpoint(x, y));
             }
         }
@@ -552,13 +552,13 @@ static void game_place_deep_water (class Dungeon *d, std::string what)
 
 static void game_place_monst (class Dungeon *d)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_monst[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_monst(x, y)) {
                 continue;
             }
 
-            if (!d->is_monst_at(x, y)) {
+            if (!d->is_monst(x, y)) {
                 continue;
             }
 
@@ -571,13 +571,13 @@ static void game_place_monst (class Dungeon *d)
 
 static void game_place_food (class Dungeon *d)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_food[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_food(x, y)) {
                 continue;
             }
 
-            if (!d->is_food_at(x, y)) {
+            if (!d->is_food(x, y)) {
                 continue;
             }
 
@@ -590,13 +590,13 @@ static void game_place_food (class Dungeon *d)
 
 static void game_place_blood (class Dungeon *d)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_blood[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_blood(x, y)) {
                 continue;
             }
 
-            if (!d->is_blood_at(x, y)) {
+            if (!d->is_blood(x, y)) {
                 continue;
             }
 
@@ -609,13 +609,13 @@ static void game_place_blood (class Dungeon *d)
 
 static void game_place_keys (class Dungeon *d)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_key[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_key(x, y)) {
                 continue;
             }
 
-            if (!d->is_key_at(x, y)) {
+            if (!d->is_key(x, y)) {
                 continue;
             }
 
@@ -628,8 +628,8 @@ static void game_place_keys (class Dungeon *d)
 
 static void game_place_floor_deco (class Dungeon *d)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
             if (!d->gfx_is_floor_deco_at(x, y)) {
                 continue;
             }
@@ -642,13 +642,13 @@ static void game_place_floor_deco (class Dungeon *d)
 
 static void game_place_wall_deco (class Dungeon *d)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
             if (!d->gfx_is_wall_deco_at(x, y)) {
                 continue;
             }
 
-            if (!d->is_wall_at(x, y + 1)) {
+            if (!d->is_wall(x, y + 1)) {
                 continue;
             }
 
@@ -664,12 +664,12 @@ static void game_place_wall_deco (class Dungeon *d)
 static void game_place_remaining_floor (class Dungeon *d,
                                         std::string what)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (!d->is_floor_at(x, y)) {
+    for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            if (!d->is_floor(x, y)) {
                 continue;
             }
-            if (!game.state.map.is_floor[x][y]) {
+            if (!game.state.map.is_floor(x, y)) {
                 thing_new(what, fpoint(x, y));
             }
         }
@@ -680,9 +680,9 @@ static void game_place_corridor (class Dungeon *d,
                                  std::string what,
                                  int depth)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (!d->is_corridor_at(x, y)) {
+    for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            if (!d->is_corridor(x, y)) {
                 continue;
             }
 
@@ -700,9 +700,9 @@ static void game_place_corridor (class Dungeon *d,
 static void game_place_dirt (class Dungeon *d,
                              std::string what)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (!d->is_anything_at(x, y) || d->is_dirt_at(x, y)) {
+    for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            if (!d->is_anything_at(x, y) || d->is_dirt(x, y)) {
                 (void) thing_new(what, fpoint(x, y));
             }
         }
@@ -711,8 +711,8 @@ static void game_place_dirt (class Dungeon *d,
 
 static void game_place_entrance (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
             if (!d->is_entrance_at(x, y)) {
                 continue;
             }
@@ -724,8 +724,8 @@ static void game_place_entrance (class Dungeon *d, std::string what)
 
 static void game_place_exit (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
             if (!d->is_exit_at(x, y)) {
                 continue;
             }
@@ -737,9 +737,9 @@ static void game_place_exit (class Dungeon *d, std::string what)
 
 static void game_place_door (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (!d->is_door_at(x, y)) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (!d->is_door(x, y)) {
                 continue;
             }
 
@@ -750,13 +750,13 @@ static void game_place_door (class Dungeon *d, std::string what)
 
 static void game_place_remaining_walls (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_wall[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_wall(x, y)) {
                 continue;
             }
 
-            if (!d->is_wall_at(x, y)) {
+            if (!d->is_wall(x, y)) {
                 continue;
             }
 
@@ -767,13 +767,13 @@ static void game_place_remaining_walls (class Dungeon *d, std::string what)
 
 static void game_place_remaining_rocks (class Dungeon *d, std::string what)
 {_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (game.state.map.is_rock[x][y]) {
+    for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            if (game.state.map.is_rock(x, y)) {
                 continue;
             }
 
-            if (!d->is_rock_at(x, y)) {
+            if (!d->is_rock(x, y)) {
                 continue;
             }
 
@@ -793,29 +793,12 @@ void game_display (void)
         mysrand(seed);
         LOG("dungeon: create dungeon %u", seed);
 _
-        auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
+        auto dungeon = new Dungeon(DUN_WIDTH, DUN_HEIGHT, GRID_WIDTH,
                                    GRID_HEIGHT, seed);
         // auto dungeon = new Dungeon(0);
 
         LOG("dungeon: create blocks");
-
-        memset(game.state.map.is_blood, 0, sizeof(game.state.map.is_blood));
-        memset(game.state.map.is_corridor, 0, sizeof(game.state.map.is_corridor));
-        memset(game.state.map.is_deep_water, 0, sizeof(game.state.map.is_deep_water));
-        memset(game.state.map.is_dirt, 0, sizeof(game.state.map.is_dirt));
-        memset(game.state.map.is_floor, 0, sizeof(game.state.map.is_floor));
-        memset(game.state.map.is_key, 0, sizeof(game.state.map.is_key));
-        memset(game.state.map.is_lava, 0, sizeof(game.state.map.is_lava));
-        memset(game.state.map.is_light, 0, sizeof(game.state.map.is_light));
-        memset(game.state.map.is_monst, 0, sizeof(game.state.map.is_monst));
-        memset(game.state.map.is_food, 0, sizeof(game.state.map.is_food));
-        memset(game.state.map.is_rock, 0, sizeof(game.state.map.is_rock));
-        memset(game.state.map.is_solid, 0, sizeof(game.state.map.is_solid));
-        memset(game.state.map.gfx_large_shadow_caster, 0, sizeof(game.state.map.gfx_large_shadow_caster));
-        memset(game.state.map.is_door, 0, sizeof(game.state.map.is_door));
-        memset(game.state.map.is_wall, 0, sizeof(game.state.map.is_wall));
-        memset(game.state.map.is_water, 0, sizeof(game.state.map.is_water));
-
+        game.state.map.clear();
         game_place_entrance(dungeon, "entrance1");
         game_place_exit(dungeon, "exit1");
         game_place_door(dungeon, "door1");
@@ -897,8 +880,8 @@ _
         //fluid_init();
         game_place_random_blood(dungeon);
 
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-            for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < DUN_WIDTH; x++) {
+            for (auto y = 0; y < DUN_HEIGHT; y++) {
                 if (dungeon->is_entrance_at(x, y)) {
                     auto t = thing_new("player1", fpoint(x, y));
                     auto w = tp_find("sword1");
