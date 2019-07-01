@@ -174,16 +174,16 @@ void Light::calculate (void)
         minx = 0;
     }
 
-    if (unlikely(maxx > MAP_WIDTH)) {
-        maxx = MAP_WIDTH;
+    if (unlikely(maxx > DUN_WIDTH)) {
+        maxx = DUN_WIDTH;
     }
 
     if (unlikely(miny < 0)) {
         miny = 0;
     }
 
-    if (unlikely(maxy > MAP_HEIGHT)) {
-        maxy = MAP_HEIGHT;
+    if (unlikely(maxy > DUN_HEIGHT)) {
+        maxy = DUN_HEIGHT;
     }
 
     /*
@@ -206,7 +206,7 @@ void Light::calculate (void)
                 break;
             }
 
-            if (game.state.map.gfx_large_shadow_caster[x][y]) {
+            if (game.state.map.is_gfx_large_shadow_caster(x, y)) {
                 break;
             }
         }
@@ -226,7 +226,7 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (!game.state.map.gfx_large_shadow_caster[x][y]) {
+            if (!game.state.map.is_gfx_large_shadow_caster(x, y)) {
                 break;
             }
 
@@ -278,8 +278,8 @@ void Light::calculate (void)
 
 void lights_calculate (void)
 {
-    for (uint16_t x = 0 ; x < MAP_WIDTH; x++) {
-        for (uint16_t y = 0 ; y < MAP_HEIGHT; y++) {
+    for (uint16_t x = 0 ; x < DUN_WIDTH; x++) {
+        for (uint16_t y = 0 ; y < DUN_HEIGHT; y++) {
             for (auto p : game.state.map.lights[x][y]) {
                 auto l = p.second;
 

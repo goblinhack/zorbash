@@ -67,7 +67,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     at += fpoint(sz.w / 2, sz.h / 2);
 
     point new_at((int)at.x, (int)at.y);
-    if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
+    if ((new_at.x >= DUN_WIDTH) || (new_at.y >= DUN_HEIGHT)) {
         DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
     }
 
@@ -191,50 +191,50 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     }
 
     if (tp_is_wall(tp)) {
-        game.state.map.is_wall[new_at.x][new_at.y] = true;
+        game.state.map.set_wall(new_at.x, new_at.y);
     }
     if (tp_is_wall(tp)) {
-        game.state.map.is_solid[new_at.x][new_at.y] = true;
+        game.state.map.set_solid(new_at.x, new_at.y);
     }
     if (tp_is_floor(tp)) {
-        game.state.map.is_floor[new_at.x][new_at.y] = true;
+        game.state.map.set_floor(new_at.x, new_at.y);
     }
     if (tp_is_lava(tp)) {
-        game.state.map.is_lava[new_at.x][new_at.y] = true;
+        game.state.map.set_lava(new_at.x, new_at.y);
     }
     if (tp_is_blood(tp)) {
-        game.state.map.is_blood[new_at.x][new_at.y] = true;
+        game.state.map.set_blood(new_at.x, new_at.y);
     }
     if (tp_is_water(tp)) {
-        game.state.map.is_water[new_at.x][new_at.y] = true;
+        game.state.map.set_water(new_at.x, new_at.y);
     }
     if (tp_is_deep_water(tp)) {
-        game.state.map.is_deep_water[new_at.x][new_at.y] = true;
-        game.state.map.is_water[new_at.x][new_at.y] = true;
+        game.state.map.set_deep_water(new_at.x, new_at.y);
+        game.state.map.set_water(new_at.x, new_at.y);
     }
     if (tp_is_corridor(tp)) {
-        game.state.map.is_corridor[new_at.x][new_at.y] = true;
+        game.state.map.set_corridor(new_at.x, new_at.y);
     }
     if (tp_is_dirt(tp)) {
-        game.state.map.is_dirt[new_at.x][new_at.y] = true;
+        game.state.map.set_dirt(new_at.x, new_at.y);
     }
     if (tp_is_monst(tp)) {
-        game.state.map.is_monst[new_at.x][new_at.y] = true;
+        game.state.map.set_monst(new_at.x, new_at.y);
     }
     if (tp_is_food(tp)) {
-        game.state.map.is_food[new_at.x][new_at.y] = true;
+        game.state.map.set_food(new_at.x, new_at.y);
     }
     if (tp_is_rock(tp)) {
-        game.state.map.is_rock[new_at.x][new_at.y] = true;
+        game.state.map.set_rock(new_at.x, new_at.y);
     }
     if (tp_is_key(tp)) {
-        game.state.map.is_key[new_at.x][new_at.y] = true;
+        game.state.map.set_key(new_at.x, new_at.y);
     }
     if (tp_gfx_large_shadow_caster(tp)) {
-        game.state.map.gfx_large_shadow_caster[new_at.x][new_at.y] = true;
+        game.state.map.set_gfx_large_shadow_caster(new_at.x, new_at.y);
     }
     if (tp_is_door(tp)) {
-        game.state.map.is_door[new_at.x][new_at.y] = true;
+        game.state.map.set_door(new_at.x, new_at.y);
     }
 
     if (!tp_does_nothing(tp)) {
@@ -522,49 +522,49 @@ void Thing::destroy (void)
     point old_at((int)mid_at.x, (int)mid_at.y);
 
     if (is_wall()) {
-        game.state.map.is_wall[old_at.x][old_at.y] = false;
+        game.state.map.unset_wall(old_at.x, old_at.y);
     }
     if (is_wall() || is_rock()) {
-        game.state.map.is_solid[old_at.x][old_at.y] = false;
+        game.state.map.unset_solid(old_at.x, old_at.y);
     }
     if (is_floor()) {
-        game.state.map.is_floor[old_at.x][old_at.y] = false;
+        game.state.map.unset_floor(old_at.x, old_at.y);
     }
     if (is_lava()) {
-        game.state.map.is_lava[old_at.x][old_at.y] = false;
+        game.state.map.unset_lava(old_at.x, old_at.y);
     }
     if (is_blood()) {
-        game.state.map.is_blood[old_at.x][old_at.y] = false;
+        game.state.map.unset_blood(old_at.x, old_at.y);
     }
     if (is_water()) {
-        game.state.map.is_water[old_at.x][old_at.y] = false;
+        game.state.map.unset_water(old_at.x, old_at.y);
     }
     if (is_deep_water()) {
-        game.state.map.is_deep_water[old_at.x][old_at.y] = false;
+        game.state.map.unset_deep_water(old_at.x, old_at.y);
     }
     if (is_corridor()) {
-        game.state.map.is_corridor[old_at.x][old_at.y] = false;
+        game.state.map.unset_corridor(old_at.x, old_at.y);
     }
     if (is_dirt()) {
-        game.state.map.is_dirt[old_at.x][old_at.y] = false;
+        game.state.map.unset_dirt(old_at.x, old_at.y);
     }
     if (is_monst()) {
-        game.state.map.is_monst[old_at.x][old_at.y] = false;
+        game.state.map.unset_monst(old_at.x, old_at.y);
     }
     if (is_food()) {
-        game.state.map.is_food[old_at.x][old_at.y] = false;
+        game.state.map.unset_food(old_at.x, old_at.y);
     }
     if (is_rock()) {
-        game.state.map.is_rock[old_at.x][old_at.y] = false;
+        game.state.map.unset_rock(old_at.x, old_at.y);
     }
     if (is_key()) {
-        game.state.map.is_key[old_at.x][old_at.y] = false;
+        game.state.map.unset_key(old_at.x, old_at.y);
     }
     if (tp_gfx_large_shadow_caster(tp)) {
-        game.state.map.gfx_large_shadow_caster[old_at.x][old_at.y] = false;
+        game.state.map.unset_gfx_large_shadow_caster(old_at.x, old_at.y);
     }
     if (is_door()) {
-        game.state.map.is_door[old_at.x][old_at.y] = false;
+        game.state.map.unset_door(old_at.x, old_at.y);
     }
     if (is_player()) {
         game.state.player = nullptr;
@@ -631,7 +631,7 @@ void Thing::move_carried_items (void)
     // If something moves on the water, make a ripple
     //
     if (is_monst() || is_player()) {
-        if (game.state.map.is_water[(int)mid_at.x][(int)mid_at.y]) {
+        if (game.state.map.is_water((int)mid_at.x, (int)mid_at.y)) {
             fpoint at(mid_at.x - 0.5, mid_at.y - 0.5);
             if (random_range(0, 1000) > 500) {
                 thing_new(tp_name(tp_random_ripple()), at);

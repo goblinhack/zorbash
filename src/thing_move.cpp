@@ -277,60 +277,60 @@ void Thing::update_pos (fpoint to)
     //
     if (old_at != new_at) {
         if (is_wall()) {
-            game.state.map.is_wall[old_at.x][old_at.y] = false;
-            game.state.map.is_wall[new_at.x][new_at.y] = true;
+            game.state.map.unset_wall(old_at.x, old_at.y);
+            game.state.map.set_wall(new_at.x, new_at.y);
         }
         if (is_wall() || is_rock()) {
-            game.state.map.is_solid[old_at.x][old_at.y] = false;
-            game.state.map.is_solid[new_at.x][new_at.y] = true;
+            game.state.map.unset_solid(old_at.x, old_at.y);
+            game.state.map.set_solid(new_at.x, new_at.y);
         }
         if (is_floor()) {
-            game.state.map.is_floor[old_at.x][old_at.y] = false;
-            game.state.map.is_floor[new_at.x][new_at.y] = true;
+            game.state.map.unset_floor(old_at.x, old_at.y);
+            game.state.map.set_floor(new_at.x, new_at.y);
         }
         if (is_lava()) {
-            game.state.map.is_lava[old_at.x][old_at.y] = false;
-            game.state.map.is_lava[new_at.x][new_at.y] = true;
+            game.state.map.unset_lava(old_at.x, old_at.y);
+            game.state.map.set_lava(new_at.x, new_at.y);
         }
         if (is_blood()) {
-            game.state.map.is_blood[old_at.x][old_at.y] = false;
-            game.state.map.is_blood[new_at.x][new_at.y] = true;
+            game.state.map.unset_blood(old_at.x, old_at.y);
+            game.state.map.set_blood(new_at.x, new_at.y);
         }
         if (is_water()) {
-            game.state.map.is_water[old_at.x][old_at.y] = false;
-            game.state.map.is_water[new_at.x][new_at.y] = true;
+            game.state.map.unset_water(old_at.x, old_at.y);
+            game.state.map.set_water(new_at.x, new_at.y);
         }
         if (is_deep_water()) {
-            game.state.map.is_deep_water[old_at.x][old_at.y] = false;
-            game.state.map.is_deep_water[new_at.x][new_at.y] = true;
+            game.state.map.unset_deep_water(old_at.x, old_at.y);
+            game.state.map.set_deep_water(new_at.x, new_at.y);
         }
         if (is_corridor()) {
-            game.state.map.is_corridor[old_at.x][old_at.y] = false;
-            game.state.map.is_corridor[new_at.x][new_at.y] = true;
+            game.state.map.unset_corridor(old_at.x, old_at.y);
+            game.state.map.set_corridor(new_at.x, new_at.y);
         }
         if (is_dirt()) {
-            game.state.map.is_dirt[old_at.x][old_at.y] = false;
-            game.state.map.is_dirt[new_at.x][new_at.y] = true;
+            game.state.map.unset_dirt(old_at.x, old_at.y);
+            game.state.map.set_dirt(new_at.x, new_at.y);
         }
         if (is_monst()) {
-            game.state.map.is_monst[old_at.x][old_at.y] = false;
-            game.state.map.is_monst[new_at.x][new_at.y] = true;
+            game.state.map.unset_monst(old_at.x, old_at.y);
+            game.state.map.set_monst(new_at.x, new_at.y);
         }
         if (is_food()) {
-            game.state.map.is_food[old_at.x][old_at.y] = false;
-            game.state.map.is_food[new_at.x][new_at.y] = true;
+            game.state.map.unset_food(old_at.x, old_at.y);
+            game.state.map.set_food(new_at.x, new_at.y);
         }
         if (is_key()) {
-            game.state.map.is_key[old_at.x][old_at.y] = false;
-            game.state.map.is_key[new_at.x][new_at.y] = true;
+            game.state.map.unset_key(old_at.x, old_at.y);
+            game.state.map.set_key(new_at.x, new_at.y);
         }
         if (tp_gfx_large_shadow_caster(tp)) {
-            game.state.map.gfx_large_shadow_caster[old_at.x][old_at.y] = false;
-            game.state.map.gfx_large_shadow_caster[new_at.x][new_at.y] = true;
+            game.state.map.unset_gfx_large_shadow_caster(old_at.x, old_at.y);
+            game.state.map.set_gfx_large_shadow_caster(new_at.x, new_at.y);
         }
         if (is_door()) {
-            game.state.map.is_door[old_at.x][old_at.y] = false;
-            game.state.map.is_door[new_at.x][new_at.y] = true;
+            game.state.map.unset_door(old_at.x, old_at.y);
+            game.state.map.set_door(new_at.x, new_at.y);
         }
     }
 

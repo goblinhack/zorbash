@@ -36,8 +36,8 @@ void fluid_init (void)
 
     z = MAP_DEPTH_WATER;
     {
-        for (y = 0; y < MAP_HEIGHT; y++) {
-            for (x = 0; x < MAP_WIDTH; x++) {
+        for (y = 0; y < DUN_HEIGHT; y++) {
+            for (x = 0; x < DUN_WIDTH; x++) {
                 for (auto p : thing_display_order[x][y][z]) {
                     auto t = p.second;
                     if (tp_is_water(t->tp) || tp_is_deep_water(t->tp)) {
@@ -51,10 +51,10 @@ void fluid_init (void)
         }
     }
 
-    for (x = 0; x < MAP_WIDTH; x++) {
-        for (y = 0; y < MAP_HEIGHT; y++) {
+    for (x = 0; x < DUN_WIDTH; x++) {
+        for (y = 0; y < DUN_HEIGHT; y++) {
 
-            if (game.state.map.is_solid_at(x, y)) {
+            if (game.state.map.is_solid(x, y)) {
                 fluid_place_water(x, y);
                 uint16_t fx;
                 uint16_t fy;
@@ -98,10 +98,10 @@ void fluid_update (void)
 {
     uint16_t x, y;
 
-    for (x = 0; x < MAP_WIDTH; x++) {
-        for (y = 0; y < MAP_HEIGHT; y++) {
+    for (x = 0; x < DUN_WIDTH; x++) {
+        for (y = 0; y < DUN_HEIGHT; y++) {
 
-            if (game.state.map.is_solid_at(x, y)) {
+            if (game.state.map.is_solid(x, y)) {
                 uint16_t fx;
                 uint16_t fy;
 
@@ -493,7 +493,7 @@ static void fluid_set_depth (void)
                 continue;
             }
 
-            game.state.map.is_water[fx / FLUID_RESOLUTION][fy / FLUID_RESOLUTION] = true;
+            game.state.map.is_water(fx / FLUID_RESOLUTION, fy / FLUID_RESOLUTION) = true;
 
             fluid_pool_row[fy] = 1;
 
@@ -528,14 +528,14 @@ static void fluid_set_depth (void)
 
 void fluid_add_droplets (void)
 {
-    uint16_t x = (myrand() % (MAP_WIDTH - 4)) + 1;
-    uint16_t y = (myrand() % (MAP_HEIGHT - 4)) + 1;
+    uint16_t x = (myrand() % (DUN_WIDTH - 4)) + 1;
+    uint16_t y = (myrand() % (DUN_HEIGHT - 4)) + 1;
 
-    if (x >= MAP_WIDTH) {
+    if (x >= DUN_WIDTH) {
         DIE("overflow on x when adding droplets");
     }
 
-    if (y >= MAP_HEIGHT) {
+    if (y >= DUN_HEIGHT) {
         DIE("overflow on y");
     }
 
@@ -543,8 +543,8 @@ void fluid_add_droplets (void)
         DIE("underflow on y");
     }
 
-    if (!game.state.map.is_solid_at(x, y) &&
-         game.state.map.is_solid_at(x, y - 1)) {
+    if (!game.state.map.is_solid(x, y) &&
+         game.state.map.is_solid(x, y - 1)) {
 
         uint16_t r;
 
@@ -577,8 +577,8 @@ void fluid_remove_water_radius (int x, int y, int radius)
     int iy = y * FLUID_RESOLUTION;
     radius *= FLUID_RESOLUTION;
 
-    for (x = 0; x < FLUID_RESOLUTION * MAP_WIDTH; x++) {
-        for (y = 0; y < FLUID_RESOLUTION * MAP_WIDTH; y++) {
+    for (x = 0; x < FLUID_RESOLUTION * DUN_WIDTH; x++) {
+        for (y = 0; y < FLUID_RESOLUTION * DUN_WIDTH; y++) {
             if (DISTANCE(ix, iy, x, y) < radius) {
                 game.state.map.fluid[x][y].mass = 0;
                 game.state.map.fluid[x][y].type = 0;
@@ -737,8 +737,8 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
     }
 
     {
-        int x = MAP_WIDTH - 1;
-        int y = MAP_HEIGHT - 1;
+        int x = DUN_WIDTH - 1;
+        int y = DUN_HEIGHT - 1;
         int z = MAP_DEPTH_WALL;
         int got = false;
 
@@ -790,11 +790,11 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
         maxy = player->y + visible_height;
         miny = player->y - visible_height;
 
-        while (maxx > MAP_WIDTH) {
+        while (maxx > DUN_WIDTH) {
             maxx--;
             minx--;
         }
-        while (maxy > MAP_HEIGHT) {
+        while (maxy > DUN_HEIGHT) {
             maxy--;
             miny--;
         }
@@ -808,9 +808,9 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
         }
     } else {
         minx = 0;
-        maxx = MAP_WIDTH;
+        maxx = DUN_WIDTH;
         miny = 0;
-        maxy = MAP_HEIGHT;
+        maxy = DUN_HEIGHT;
     }
 
     double tl_x;
@@ -1007,10 +1007,10 @@ int thing_submerged_depth (Thingp t)
     int dy = FLUID_RESOLUTION / 2;
     int water = 0;
 
-    if (t->mid_at.x >= MAP_WIDTH) {
+    if (t->mid_at.x >= DUN_WIDTH) {
         return (false);
     }
-    if (t->mid_at.y >= MAP_HEIGHT) {
+    if (t->mid_at.y >= DUN_HEIGHT) {
         return (false);
     }
     if (t->mid_at.x < 0) {
@@ -1038,10 +1038,10 @@ int thing_is_submerged (Thingp t)
     int y = t->mid_at.y * FLUID_RESOLUTION;
     int water = 0;
 
-    if (t->mid_at.x >= MAP_WIDTH) {
+    if (t->mid_at.x >= DUN_WIDTH) {
         return (false);
     }
-    if (t->mid_at.y >= MAP_HEIGHT) {
+    if (t->mid_at.y >= DUN_HEIGHT) {
         return (false);
     }
     if (t->mid_at.x < 0) {
@@ -1073,10 +1073,10 @@ int thing_is_partially_or_fully_submerged (Thingp t)
     int y = t->mid_at.y * FLUID_RESOLUTION;
     int water = 0;
 
-    if (t->mid_at.x >= MAP_WIDTH) {
+    if (t->mid_at.x >= DUN_WIDTH) {
         return (false);
     }
-    if (t->mid_at.y >= MAP_HEIGHT) {
+    if (t->mid_at.y >= DUN_HEIGHT) {
         return (false);
     }
     if (t->mid_at.x < 0) {

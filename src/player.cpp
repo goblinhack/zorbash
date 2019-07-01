@@ -125,7 +125,7 @@ void player_tick (void)
      */
 #if 0
     if ((dx != 0) || (dy != 0)) {
-        if (!game.state.map.is_light_at((int)player->at.x,
+        if (!game.state.map.is_light((int)player->at.x,
                                         (int)player->at.y)) {
 
             game.state.map.is_light[(int)player->at.x]

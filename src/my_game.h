@@ -38,33 +38,28 @@ enum {
 
 #include <list>
 
-enum {
-    FLUID_IS_AIR,
-    FLUID_IS_SOLID,
-    FLUID_IS_LAVA,
-    FLUID_IS_ACID,
-    FLUID_IS_WATER,
-};
-
-enum {
-    FLUID_DIR_NONE,
-    FLUID_DIR_LEFT,
-    FLUID_DIR_RIGHT,
-};
-
-typedef uint8_t fluid_mass_t;
-
-typedef struct {
-    fluid_mass_t mass;
-    uint8_t type:3;
-    uint8_t is_surface:3;
-} fluid_t;
-
 class Map {
+private:
+    uint8_t                    _is_wall[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_solid[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_gfx_large_shadow_caster[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_door[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_light[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_floor[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_lava[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_blood[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_water[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_deep_water[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_corridor[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_dirt[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_monst[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_food[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_rock[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_key[DUN_WIDTH][DUN_HEIGHT] = {};
 public:
     Lights                     all_lights;
     std::unordered_map<uint32_t, Lightp>
-                               lights[MAP_WIDTH][MAP_HEIGHT];
+                               lights[DUN_WIDTH][DUN_HEIGHT];
     Things                     all_things;
     Things                     all_active_things;
 
@@ -72,63 +67,533 @@ public:
     // Probably want map vs unordered_map so walk order is the same
     // Think of unordered_map as a hash table.
     //
-    std::map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
-    std::map<uint32_t, Thingp> all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
-    std::map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
-    uint8_t                    is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_solid[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    gfx_large_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_door[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_light[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_blood[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_water[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_deep_water[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_food[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    is_key[MAP_WIDTH][MAP_HEIGHT] = {};
+    std::map<uint32_t, Thingp> all_active_things_at[DUN_WIDTH][DUN_HEIGHT];
+    std::map<uint32_t, Thingp> all_interesting_things_at[DUN_WIDTH][DUN_HEIGHT];
+    std::map<uint32_t, Thingp> all_obstacle_things_at[DUN_WIDTH][DUN_HEIGHT];
 
-    /*
-     * Cellular automatom for fluid flow.
-     */
-    fluid_t fluid[FLUID_WIDTH][FLUID_HEIGHT];
+    bool is_lava (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_lava[p.x][p.y]);
+    }
 
-    bool is_wall_at(const point &p);
-    bool is_wall_at(const int x, const int y);
-    bool is_solid_at(const point &p);
-    bool is_solid_at(const int x, const int y);
-    bool is_light_at(const point &p);
-    bool is_light_at(const int x, const int y);
-    bool is_floor_at(const point &p);
-    bool is_floor_at(const int x, const int y);
-    bool is_lava_at(const point &p);
-    bool is_lava_at(const int x, const int y);
-    bool is_blood_at(const point &p);
-    bool is_blood_at(const int x, const int y);
-    bool is_water_at(const point &p);
-    bool is_water_at(const int x, const int y);
-    bool is_deep_water_at(const point &p);
-    bool is_deep_water_at(const int x, const int y);
-    bool is_corridor_at(const point &p);
-    bool is_corridor_at(const int x, const int y);
-    bool is_dirt_at(const point &p);
-    bool is_dirt_at(const int x, const int y);
-    bool is_monst_at(const point &p);
-    bool is_monst_at(const int x, const int y);
-    bool is_food_at(const point &p);
-    bool is_food_at(const int x, const int y);
-    bool is_rock_at(const point &p);
-    bool is_rock_at(const int x, const int y);
-    bool is_key_at(const point &p);
-    bool is_key_at(const int x, const int y);
-    bool gfx_large_shadow_caster_at(const point &p);
-    bool gfx_large_shadow_caster_at(const int x, const int y);
-    bool is_door_at(const point &p);
-    bool is_door_at(const int x, const int y);
+    bool is_lava (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_lava[x][y]);
+    }
+
+    void set_lava (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_lava[x][y] = true;
+    }
+
+    void unset_lava (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_lava[x][y] = false;
+    }
+
+    bool is_blood (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_blood[p.x][p.y]);
+    }
+
+    bool is_blood (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_blood[x][y]);
+    }
+
+    void set_blood (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_blood[x][y] = true;
+    }
+
+    void unset_blood (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_blood[x][y] = false;
+    }
+
+    bool is_water (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_water[p.x][p.y]);
+    }
+
+    bool is_water (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_water[x][y]);
+    }
+
+    void set_water (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_water[x][y] = true;
+    }
+
+    void unset_water (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_water[x][y] = false;
+    }
+
+    bool is_deep_water (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_deep_water[p.x][p.y]);
+    }
+
+    bool is_deep_water (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_deep_water[x][y]);
+    }
+
+    void set_deep_water (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_deep_water[x][y] = true;
+    }
+
+    void unset_deep_water (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_deep_water[x][y] = false;
+    }
+
+    bool is_wall (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_wall[p.x][p.y]);
+    }
+
+    bool is_wall (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_wall[x][y]);
+    }
+
+    void set_wall (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_wall[x][y] = true;
+    }
+
+    void unset_wall (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_wall[x][y] = false;
+    }
+
+    bool is_solid (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_solid[p.x][p.y]);
+    }
+
+    bool is_solid (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_solid[x][y]);
+    }
+
+    void set_solid (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_solid[x][y] = true;
+    }
+
+    void unset_solid (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_solid[x][y] = false;
+    }
+
+    bool is_light (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_light[p.x][p.y]);
+    }
+
+    bool is_light (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_light[x][y]);
+    }
+
+    void set_light (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_light[x][y] = true;
+    }
+
+    void unset_light (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_light[x][y] = false;
+    }
+
+    bool is_corridor (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_corridor[p.x][p.y]);
+    }
+
+    bool is_corridor (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_corridor[x][y]);
+    }
+
+    void set_corridor (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_corridor[x][y] = true;
+    }
+
+    void unset_corridor (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_corridor[x][y] = false;
+    }
+
+    bool is_dirt (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_dirt[p.x][p.y]);
+    }
+
+    bool is_dirt (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_dirt[x][y]);
+    }
+
+    void set_dirt (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_dirt[x][y] = true;
+    }
+
+    void unset_dirt (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_dirt[x][y] = false;
+    }
+
+    bool is_floor (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_floor[p.x][p.y]);
+    }
+
+    bool is_floor (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_floor[x][y]);
+    }
+
+    void set_floor (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_floor[x][y] = true;
+    }
+
+    void unset_floor (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_floor[x][y] = false;
+    }
+
+    bool is_monst (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_monst[p.x][p.y]);
+    }
+
+    bool is_monst (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_monst[x][y]);
+    }
+
+    void set_monst (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_monst[x][y] = true;
+    }
+
+    void unset_monst (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_monst[x][y] = false;
+    }
+
+    bool is_food (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_food[x][y]);
+    }
+
+    void set_food (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_food[x][y] = true;
+    }
+
+    void unset_food (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_food[x][y] = false;
+    }
+
+    bool is_rock (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_rock[p.x][p.y]);
+    }
+
+    bool is_rock (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_rock[x][y]);
+    }
+
+    void set_rock (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_rock[x][y] = true;
+    }
+
+    void unset_rock (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_rock[x][y] = false;
+    }
+
+    bool is_key (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_key[p.x][p.y]);
+    }
+
+    bool is_key (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_key[x][y]);
+    }
+
+    void set_key (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_key[x][y] = true;
+    }
+
+    void unset_key (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_key[x][y] = false;
+    }
+
+    bool is_gfx_large_shadow_caster (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_gfx_large_shadow_caster[p.x][p.y]);
+    }
+
+    bool is_gfx_large_shadow_caster (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_gfx_large_shadow_caster[x][y]);
+    }
+
+    void set_gfx_large_shadow_caster (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_gfx_large_shadow_caster[x][y] = true;
+    }
+
+    void unset_gfx_large_shadow_caster (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_gfx_large_shadow_caster[x][y] = false;
+    }
+
+    bool is_door (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (true);
+        }
+        return (_is_door[p.x][p.y]);
+    }
+
+    bool is_door (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (true);
+        }
+        return (_is_door[x][y]);
+    }
+
+    void set_door (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_door[x][y] = true;
+    }
+
+    void unset_door (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_door[x][y] = false;
+    }
+
+    void clear (void)
+    {
+        memset(_is_blood, 0, sizeof(_is_blood));
+        memset(_is_corridor, 0, sizeof(_is_corridor));
+        memset(_is_deep_water, 0, sizeof(_is_deep_water));
+        memset(_is_dirt, 0, sizeof(_is_dirt));
+        memset(_is_floor, 0, sizeof(_is_floor));
+        memset(_is_key, 0, sizeof(_is_key));
+        memset(_is_lava, 0, sizeof(_is_lava));
+        memset(_is_light, 0, sizeof(_is_light));
+        memset(_is_monst, 0, sizeof(_is_monst));
+        memset(_is_food, 0, sizeof(_is_food));
+        memset(_is_rock, 0, sizeof(_is_rock));
+        memset(_is_solid, 0, sizeof(_is_solid));
+        memset(_is_gfx_large_shadow_caster, 0, sizeof(_is_gfx_large_shadow_caster));
+        memset(_is_door, 0, sizeof(_is_door));
+        memset(_is_wall, 0, sizeof(_is_wall));
+        memset(_is_water, 0, sizeof(_is_water));
+    }
 
     template <class Archive>
     void serialize (Archive & archive)

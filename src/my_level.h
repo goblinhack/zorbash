@@ -31,11 +31,11 @@ public:
      * Unique per level.
      */
     uint32_t                levelno {0};
-    uint8_t                 width  {MAP_WIDTH};
-    uint8_t                 height {MAP_HEIGHT};
+    uint8_t                 width  {DUN_WIDTH};
+    uint8_t                 height {DUN_HEIGHT};
     uint8_t                 depth  {0};
 
-    char                    data[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH] = {{{' '}}};
+    char                    data[DUN_WIDTH][DUN_HEIGHT][MAP_DEPTH] = {{{' '}}};
 
     static Levelp level_new(void);
     void finalize(void);

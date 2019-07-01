@@ -71,16 +71,16 @@ bool Thing::will_prefer (const Thingp itp)
 
 bool Thing::is_obstacle_for_me (point p)
 {
-    if (game.state.map.is_wall_at(p)) {
+    if (game.state.map.is_wall(p)) {
         return (true);
     }
-    if (game.state.map.is_rock_at(p)) {
+    if (game.state.map.is_rock(p)) {
         return (true);
     }
-    if (game.state.map.is_door_at(p)) {
+    if (game.state.map.is_door(p)) {
         return (true);
     }
-    if (game.state.map.is_lava_at(p)) {
+    if (game.state.map.is_lava(p)) {
         return (true);
     }
 
@@ -88,7 +88,7 @@ bool Thing::is_obstacle_for_me (point p)
     // This is more of a look at the future position that some monst is
     // already walking toward
     //
-    if (game.state.map.is_monst_at(p)) {
+    if (game.state.map.is_monst(p)) {
         return (true);
     }
 
@@ -111,7 +111,7 @@ bool Thing::is_obstacle_for_me (point p)
 
 int Thing::is_less_preferred_terrain (point p)
 {
-    if (game.state.map.is_water_at(p)) {
+    if (game.state.map.is_water(p)) {
         if (hates_water()) {
             return (100);
         }
@@ -188,8 +188,8 @@ fpoint Thing::get_next_hop (void)
 {_
     auto minx = 0;
     auto miny = 0;
-    auto maxx = MAP_WIDTH;
-    auto maxy = MAP_HEIGHT;
+    auto maxx = DUN_WIDTH;
+    auto maxy = DUN_HEIGHT;
     fpoint fstart;
 
     fstart = mid_at;
@@ -297,14 +297,14 @@ CON("  goal add at: %d, %d", p.x, p.y);
     //
     // Combine the scores of multiple goals on each cell.
     //
-    double cell_totals[MAP_WIDTH][MAP_HEIGHT];
+    double cell_totals[DUN_WIDTH][DUN_HEIGHT];
     memset(&cell_totals, 0, sizeof(cell_totals));
     double highest_least_preferred = 0;
     double lowest_most_preferred = 0;
 //    const double wanderlust = 10;
 
     {
-        uint8_t walked[MAP_WIDTH][MAP_HEIGHT];
+        uint8_t walked[DUN_WIDTH][DUN_HEIGHT];
         memset(&walked, 0, sizeof(walked));
         for (auto g : goals) {
             auto p = g.at;

@@ -168,11 +168,11 @@ public:
     //
     std::vector<Roomp>                        cells_room;
 
-    int map_width                             {MAP_WIDTH};
-    int map_height                            {MAP_HEIGHT};
+    int map_width                             {DUN_WIDTH};
+    int map_height                            {DUN_HEIGHT};
     int map_depth                             {MAP_DEPTH};
 
-    int map_jigsaw_buffer_water_depth[MAP_WIDTH][MAP_HEIGHT] = {};
+    int map_jigsaw_buffer_water_depth[DUN_WIDTH][DUN_HEIGHT] = {};
 
     //
     // High level view of the map.
@@ -508,7 +508,7 @@ public:
         return (0);
     }
 
-    bool is_floor_at (const int x, const int y)
+    bool is_floor (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -525,7 +525,7 @@ public:
         return false;
     }
 
-    bool is_corridor_at (const int x, const int y)
+    bool is_corridor (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -542,7 +542,7 @@ public:
         return false;
     }
 
-    bool is_corridor_at_fast (const int x, const int y)
+    bool is_corridor_fast (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -559,7 +559,7 @@ public:
         return false;
     }
 
-    bool is_dirt_at (const int x, const int y)
+    bool is_dirt (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -576,7 +576,7 @@ public:
         return false;
     }
 
-    bool is_dirt_at_fast (const int x, const int y)
+    bool is_dirt_fast (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -610,7 +610,7 @@ public:
         return false;
     }
 
-    bool is_wall_at (const int x, const int y)
+    bool is_wall (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -622,7 +622,7 @@ public:
         return (v.is_wall);
     }
 
-    bool is_monst_at (const int x, const int y)
+    bool is_monst (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -639,7 +639,7 @@ public:
         return false;
     }
 
-    bool is_food_at (const int x, const int y)
+    bool is_food (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -656,7 +656,7 @@ public:
         return false;
     }
 
-    bool is_blood_at (const int x, const int y)
+    bool is_blood (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -673,7 +673,7 @@ public:
         return false;
     }
 
-    bool is_rock_at (const int x, const int y)
+    bool is_rock (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -690,7 +690,7 @@ public:
         return false;
     }
 
-    bool is_door_at (const int x, const int y)
+    bool is_door (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -775,7 +775,7 @@ public:
         return false;
     }
 
-    bool is_lava_at (const int x, const int y)
+    bool is_lava (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -792,7 +792,7 @@ public:
         return false;
     }
 
-    bool is_water_at (const int x, const int y)
+    bool is_water (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -809,7 +809,7 @@ public:
         return false;
     }
 
-    bool is_deep_water_at (const int x, const int y)
+    bool is_deep_water (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -843,7 +843,7 @@ public:
         return false;
     }
 
-    bool is_key_at (const int x, const int y)
+    bool is_key (const int x, const int y)
     {
         if (is_oob(x, y)) {
             DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
@@ -880,7 +880,7 @@ public:
         return false;
     }
 
-    bool is_floor_at_fast (const int x, const int y)
+    bool is_floor_fast (const int x, const int y)
     {
         const auto d = MAP_DEPTH_FLOOR;
         auto c = getc_fast(x, y, d);
@@ -889,7 +889,7 @@ public:
         return (v.is_floor);
     }
 
-    bool is_wall_at_fast (const int x, const int y)
+    bool is_wall_fast (const int x, const int y)
     {
         auto d = MAP_DEPTH_WALLS;
         auto c = getc_fast(x, y, d);
@@ -897,7 +897,7 @@ public:
         return (v.is_wall);
     }
 
-    bool is_door_at_fast (const int x, const int y)
+    bool is_door_fast (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
@@ -936,7 +936,7 @@ public:
         return false;
     }
 
-    bool is_lava_at_fast (const int x, const int y)
+    bool is_lava_fast (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
@@ -949,7 +949,7 @@ public:
         return false;
     }
 
-    bool is_water_at_fast (const int x, const int y)
+    bool is_water_fast (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
@@ -962,7 +962,7 @@ public:
         return false;
     }
 
-    bool is_deep_water_at_fast (const int x, const int y)
+    bool is_deep_water_fast (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
@@ -988,7 +988,7 @@ public:
         return false;
     }
 
-    bool is_key_at_fast (const int x, const int y)
+    bool is_key_fast (const int x, const int y)
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
@@ -1044,7 +1044,7 @@ public:
 
                     if (nodes) {
                         if (!(x % 2) && !(y % 2)) {
-                            if (!is_wall_at(x, y) && is_floor_at(x, y)) {
+                            if (!is_wall(x, y) && is_floor(x, y)) {
                                 auto X = (x - MAP_BORDER) / ROOM_WIDTH;
                                 auto Y = (y - MAP_BORDER) / ROOM_HEIGHT;
                                 auto n = nodes->getn(X, Y);
@@ -1057,7 +1057,7 @@ public:
 
                     if (!((x-MAP_BORDER) % ROOM_WIDTH) ||
                         !((y-MAP_BORDER) % ROOM_HEIGHT)) {
-                        if (is_wall_at(x, y)) {
+                        if (is_wall(x, y)) {
                             c = 'X';
                         }
                     }
@@ -1434,28 +1434,28 @@ public:
 
     void add_border (void)
     {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
             for (auto x = 0; x < MAP_BORDER; x++) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
-                putc(MAP_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(DUN_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::WALL);
             }
         }
-        for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto x = 0; x < DUN_WIDTH; x++) {
             for (auto y = 0; y < MAP_BORDER; y++) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
-                putc(x, MAP_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(x, DUN_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
             }
         }
     }
 
     void add_corridor_walls (void)
     {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-                if (is_wall_at_fast(x, y)) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+                if (is_wall_fast(x, y)) {
                     continue;
                 }
-                if (is_corridor_at_fast(x, y)) {
+                if (is_corridor_fast(x, y)) {
                     if (!is_anything_at_fast(x - 1, y - 1)) {
                         putc(x - 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                     }
@@ -1489,12 +1489,12 @@ public:
 
     void add_room_walls (void)
     {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            for (auto x = 0; x < MAP_WIDTH; x++) {
-                if (is_wall_at_fast(x, y)) {
+        for (auto y = 0; y < DUN_HEIGHT; y++) {
+            for (auto x = 0; x < DUN_WIDTH; x++) {
+                if (is_wall_fast(x, y)) {
                     continue;
                 }
-                if (is_floor_at_fast(x, y)) {
+                if (is_floor_fast(x, y)) {
                     if (!is_anything_at_fast(x - 1, y - 1)) {
                         putc(x - 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                     }
@@ -1743,7 +1743,7 @@ public:
         //
         for (auto y = miny + 1; y < maxy - 1; y++) {
             for (auto x = minx + 1; x < maxx - 1; x++) {
-                if (is_corridor_at_fast(x, y)) {
+                if (is_corridor_fast(x, y)) {
                     d.val[x-1][y] = DMAP_IS_WALL;
                     d.val[x][y-1] = DMAP_IS_WALL;
                     d.val[x][y] = DMAP_IS_WALL;
@@ -2057,7 +2057,7 @@ public:
 
     void place_level (Levelp l)
     {
-        if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
+        if ((l->width > DUN_WIDTH) || (l->height > DUN_HEIGHT)) {
             DIE("level has bad size %d,%d", l->width, l->height);
         }
 
@@ -2123,10 +2123,10 @@ public:
                             return false;
                         }
 
-                        if (is_wall_at(x + dx - 1, y + dy) ||
-                            is_wall_at(x + dx + 1, y + dy) ||
-                            is_wall_at(x + dx, y + dy - 1) ||
-                            is_wall_at(x + dx, y + dy + 1)) {
+                        if (is_wall(x + dx - 1, y + dy) ||
+                            is_wall(x + dx + 1, y + dy) ||
+                            is_wall(x + dx, y + dy - 1) ||
+                            is_wall(x + dx, y + dy + 1)) {
                             return false;
                         }
                     }
@@ -2772,8 +2772,8 @@ public:
     {
         int x, y;
 
-        for (x = 0; x < MAP_WIDTH; x++) {
-            for (y = 0; y < MAP_HEIGHT; y++) {
+        for (x = 0; x < DUN_WIDTH; x++) {
+            for (y = 0; y < DUN_HEIGHT; y++) {
 
                 if (is_anything_at(x, y)) {
                     d->val[x][y] = DMAP_IS_WALL;
@@ -3214,16 +3214,16 @@ public:
     /*
      * Used temporarily during level generation.
      */
-    uint8_t map_save[MAP_WIDTH][MAP_HEIGHT];
-    uint8_t map_curr[MAP_WIDTH][MAP_HEIGHT];
+    uint8_t map_save[DUN_WIDTH][DUN_HEIGHT];
+    uint8_t map_curr[DUN_WIDTH][DUN_HEIGHT];
 
     //
     // Grow our cells
     //
     void cave_generation (void)
     {
-        const int16_t maze_w = MAP_WIDTH - 2;
-        const int16_t maze_h = MAP_HEIGHT - 2;
+        const int16_t maze_w = DUN_WIDTH - 2;
+        const int16_t maze_h = DUN_HEIGHT - 2;
         int16_t x, y;
 
         for (x=2; x < maze_w; x++) {
@@ -3286,30 +3286,30 @@ public:
     //
     void water_fixup_shallows (void)
     {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-                if (!is_deep_water_at_fast(x, y)) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+                if (!is_deep_water_fast(x, y)) {
                     continue;
                 }
 
-                if (is_wall_at(x - 1, y - 1) ||
-                    is_wall_at(x    , y - 1) ||
-                    is_wall_at(x + 1, y - 1) ||
-                    is_wall_at(x - 1, y    ) ||
-                    is_wall_at(x    , y    ) ||
-                    is_wall_at(x + 1, y    ) ||
-                    is_wall_at(x - 1, y + 1) ||
-                    is_wall_at(x    , y + 1) ||
-                    is_wall_at(x + 1, y + 1) ||
-                    is_rock_at(x - 1, y - 1) ||
-                    is_rock_at(x    , y - 1) ||
-                    is_rock_at(x + 1, y - 1) ||
-                    is_rock_at(x - 1, y    ) ||
-                    is_rock_at(x    , y    ) ||
-                    is_rock_at(x + 1, y    ) ||
-                    is_rock_at(x - 1, y + 1) ||
-                    is_rock_at(x    , y + 1) ||
-                    is_rock_at(x + 1, y + 1)) {
+                if (is_wall(x - 1, y - 1) ||
+                    is_wall(x    , y - 1) ||
+                    is_wall(x + 1, y - 1) ||
+                    is_wall(x - 1, y    ) ||
+                    is_wall(x    , y    ) ||
+                    is_wall(x + 1, y    ) ||
+                    is_wall(x - 1, y + 1) ||
+                    is_wall(x    , y + 1) ||
+                    is_wall(x + 1, y + 1) ||
+                    is_rock(x - 1, y - 1) ||
+                    is_rock(x    , y - 1) ||
+                    is_rock(x + 1, y - 1) ||
+                    is_rock(x - 1, y    ) ||
+                    is_rock(x    , y    ) ||
+                    is_rock(x + 1, y    ) ||
+                    is_rock(x - 1, y + 1) ||
+                    is_rock(x    , y + 1) ||
+                    is_rock(x + 1, y + 1)) {
                     putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
                 }
             }
@@ -3321,26 +3321,26 @@ public:
     //
     void water_fixup (void)
     {
-        uint8_t cand[MAP_WIDTH][MAP_HEIGHT];
+        uint8_t cand[DUN_WIDTH][DUN_HEIGHT];
         memset(cand, 0, sizeof(cand));
 
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-                if (is_water_at(x - 1, y - 1) &&
-                    is_water_at(x    , y - 1) &&
-                    is_water_at(x + 1, y - 1) &&
-                    is_water_at(x - 1, y    ) &&
-                    is_water_at(x    , y    ) &&
-                    is_water_at(x + 1, y    ) &&
-                    is_water_at(x - 1, y + 1) &&
-                    is_water_at(x    , y + 1) &&
-                    is_water_at(x + 1, y + 1)) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+                if (is_water(x - 1, y - 1) &&
+                    is_water(x    , y - 1) &&
+                    is_water(x + 1, y - 1) &&
+                    is_water(x - 1, y    ) &&
+                    is_water(x    , y    ) &&
+                    is_water(x + 1, y    ) &&
+                    is_water(x - 1, y + 1) &&
+                    is_water(x    , y + 1) &&
+                    is_water(x + 1, y + 1)) {
                     cand[x][y] = true;
                 }
             }
         }
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
+            for (auto x = 1; x < DUN_WIDTH - 1; x++) {
                 if (cand[x][y]) {
                     if (random_range(0, 100) < 95) {
                         putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
@@ -3365,8 +3365,8 @@ public:
         memset(map_save, 0, sizeof(map_save));
         memset(map_curr, 0, sizeof(map_curr));
 
-        const int16_t maze_w = MAP_WIDTH - 2;
-        const int16_t maze_h = MAP_HEIGHT - 2;
+        const int16_t maze_w = DUN_WIDTH - 2;
+        const int16_t maze_h = DUN_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;
@@ -3422,8 +3422,8 @@ public:
         memset(map_save, 0, sizeof(map_save));
         memset(map_curr, 0, sizeof(map_curr));
 
-        const int16_t maze_w = MAP_WIDTH - 2;
-        const int16_t maze_h = MAP_HEIGHT - 2;
+        const int16_t maze_w = DUN_WIDTH - 2;
+        const int16_t maze_h = DUN_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;
@@ -3479,8 +3479,8 @@ public:
         memset(map_save, 0, sizeof(map_save));
         memset(map_curr, 0, sizeof(map_curr));
 
-        const int16_t maze_w = MAP_WIDTH - 2;
-        const int16_t maze_h = MAP_HEIGHT - 2;
+        const int16_t maze_w = DUN_WIDTH - 2;
+        const int16_t maze_h = DUN_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;

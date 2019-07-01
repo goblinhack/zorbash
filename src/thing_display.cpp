@@ -116,12 +116,12 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
 
     if (unlikely(x <= 0) ||
         unlikely(y <= 0) ||
-        unlikely(x >= MAP_WIDTH - 1) ||
-        unlikely(y >= MAP_HEIGHT - 1)) {
+        unlikely(x >= DUN_WIDTH - 1) ||
+        unlikely(y >= DUN_HEIGHT - 1)) {
         return;
     }
 
-    if (!game.state.map.is_wall[x][y - 1]) {
+    if (!game.state.map.is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -129,7 +129,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, top_tile, tl2, br2);
     }
 
-    if (!game.state.map.is_wall[x][y + 1]) {
+    if (!game.state.map.is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         //tl2.y += dh;
@@ -137,7 +137,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, bot_tile, tl2, br2);
     }
 
-    if (!game.state.map.is_wall[x - 1][y]) {
+    if (!game.state.map.is_wall(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -145,7 +145,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, left_tile, tl2, br2);
     }
 
-    if (!game.state.map.is_wall[x + 1][y]) {
+    if (!game.state.map.is_wall(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -158,9 +158,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     // |...
     // |...
     //
-    if (!game.state.map.is_wall[x - 1][y - 1] &&
-        !game.state.map.is_wall[x - 1][y] &&
-        !game.state.map.is_wall[x][y - 1]) {
+    if (!game.state.map.is_wall(x - 1, y - 1) &&
+        !game.state.map.is_wall(x - 1, y) &&
+        !game.state.map.is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -175,9 +175,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     // ...|
     // ...|
     //
-    if (!game.state.map.is_wall[x + 1][y - 1] &&
-        !game.state.map.is_wall[x + 1][y] &&
-        !game.state.map.is_wall[x][y - 1]) {
+    if (!game.state.map.is_wall(x + 1, y - 1) &&
+        !game.state.map.is_wall(x + 1, y) &&
+        !game.state.map.is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -193,9 +193,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     //  .X--
     //  ....
     //
-    if (!game.state.map.is_wall[x + 1][y - 1] &&
-        game.state.map.is_wall[x + 1][y] &&
-        game.state.map.is_wall[x][y - 1]) {
+    if (!game.state.map.is_wall(x + 1, y - 1) &&
+        game.state.map.is_wall(x + 1, y) &&
+        game.state.map.is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -211,9 +211,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     //  --X.
     //  ....
     //
-    if (!game.state.map.is_wall[x - 1][y - 1] &&
-        game.state.map.is_wall[x - 1][y] &&
-        game.state.map.is_wall[x][y - 1]) {
+    if (!game.state.map.is_wall(x - 1, y - 1) &&
+        game.state.map.is_wall(x - 1, y) &&
+        game.state.map.is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -231,9 +231,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     // |...
     // X---
     //
-    if (!game.state.map.is_wall[x - 1][y + 1] &&
-        !game.state.map.is_wall[x - 1][y] &&
-        !game.state.map.is_wall[x][y + 1]) {
+    if (!game.state.map.is_wall(x - 1, y + 1) &&
+        !game.state.map.is_wall(x - 1, y) &&
+        !game.state.map.is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -248,9 +248,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     // ...|
     // ---X
     //
-    if (!game.state.map.is_wall[x + 1][y + 1] &&
-        !game.state.map.is_wall[x + 1][y] &&
-        !game.state.map.is_wall[x][y + 1]) {
+    if (!game.state.map.is_wall(x + 1, y + 1) &&
+        !game.state.map.is_wall(x + 1, y) &&
+        !game.state.map.is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -266,9 +266,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     // .|
     // .|
     //
-    if (!game.state.map.is_wall[x + 1][y + 1] &&
-        game.state.map.is_wall[x + 1][y] &&
-        game.state.map.is_wall[x][y + 1]) {
+    if (!game.state.map.is_wall(x + 1, y + 1) &&
+        game.state.map.is_wall(x + 1, y) &&
+        game.state.map.is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -284,9 +284,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
     //   |.
     //   |.
     //
-    if (!game.state.map.is_wall[x - 1][y + 1] &&
-        game.state.map.is_wall[x - 1][y] &&
-        game.state.map.is_wall[x][y + 1]) {
+    if (!game.state.map.is_wall(x - 1, y + 1) &&
+        game.state.map.is_wall(x - 1, y) &&
+        game.state.map.is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -307,12 +307,12 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
 
     if (unlikely(x <= 0) || 
         unlikely(y <= 0) || 
-        unlikely(x >= MAP_WIDTH - 1) || 
-        unlikely(y >= MAP_HEIGHT - 1)) {
+        unlikely(x >= DUN_WIDTH - 1) || 
+        unlikely(y >= DUN_HEIGHT - 1)) {
         return;
     }
 
-    if (!game.state.map.is_rock[x][y - 1]) {
+    if (!game.state.map.is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -320,7 +320,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, top_tile, tl2, br2);
     }
 
-    if (!game.state.map.is_rock[x][y + 1]) {
+    if (!game.state.map.is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         //tl2.y += dh;
@@ -328,7 +328,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, bot_tile, tl2, br2);
     }
 
-    if (!game.state.map.is_rock[x - 1][y]) {
+    if (!game.state.map.is_rock(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -336,7 +336,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         tile_blit_outline(tp, left_tile, tl2, br2);
     }
 
-    if (!game.state.map.is_rock[x + 1][y]) {
+    if (!game.state.map.is_rock(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -349,9 +349,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     // |...
     // |...
     //
-    if (!game.state.map.is_rock[x - 1][y - 1] &&
-        !game.state.map.is_rock[x - 1][y] &&
-        !game.state.map.is_rock[x][y - 1]) {
+    if (!game.state.map.is_rock(x - 1, y - 1) &&
+        !game.state.map.is_rock(x - 1, y) &&
+        !game.state.map.is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -366,9 +366,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     // ...|
     // ...|
     //
-    if (!game.state.map.is_rock[x + 1][y - 1] &&
-        !game.state.map.is_rock[x + 1][y] &&
-        !game.state.map.is_rock[x][y - 1]) {
+    if (!game.state.map.is_rock(x + 1, y - 1) &&
+        !game.state.map.is_rock(x + 1, y) &&
+        !game.state.map.is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -384,9 +384,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     //  .X--
     //  ....
     //
-    if (!game.state.map.is_rock[x + 1][y - 1] &&
-        game.state.map.is_rock[x + 1][y] &&
-        game.state.map.is_rock[x][y - 1]) {
+    if (!game.state.map.is_rock(x + 1, y - 1) &&
+        game.state.map.is_rock(x + 1, y) &&
+        game.state.map.is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -402,9 +402,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     //  --X.
     //  ....
     //
-    if (!game.state.map.is_rock[x - 1][y - 1] &&
-        game.state.map.is_rock[x - 1][y] &&
-        game.state.map.is_rock[x][y - 1]) {
+    if (!game.state.map.is_rock(x - 1, y - 1) &&
+        game.state.map.is_rock(x - 1, y) &&
+        game.state.map.is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -422,9 +422,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     // |...
     // X---
     //
-    if (!game.state.map.is_rock[x - 1][y + 1] &&
-        !game.state.map.is_rock[x - 1][y] &&
-        !game.state.map.is_rock[x][y + 1]) {
+    if (!game.state.map.is_rock(x - 1, y + 1) &&
+        !game.state.map.is_rock(x - 1, y) &&
+        !game.state.map.is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -439,9 +439,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     // ...|
     // ---X
     //
-    if (!game.state.map.is_rock[x + 1][y + 1] &&
-        !game.state.map.is_rock[x + 1][y] &&
-        !game.state.map.is_rock[x][y + 1]) {
+    if (!game.state.map.is_rock(x + 1, y + 1) &&
+        !game.state.map.is_rock(x + 1, y) &&
+        !game.state.map.is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -457,9 +457,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     // .|
     // .|
     //
-    if (!game.state.map.is_rock[x + 1][y + 1] &&
-        game.state.map.is_rock[x + 1][y] &&
-        game.state.map.is_rock[x][y + 1]) {
+    if (!game.state.map.is_rock(x + 1, y + 1) &&
+        game.state.map.is_rock(x + 1, y) &&
+        game.state.map.is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -475,9 +475,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
     //   |.
     //   |.
     //
-    if (!game.state.map.is_rock[x - 1][y + 1] &&
-        game.state.map.is_rock[x - 1][y] &&
-        game.state.map.is_rock[x][y + 1]) {
+    if (!game.state.map.is_rock(x - 1, y + 1) &&
+        game.state.map.is_rock(x - 1, y) &&
+        game.state.map.is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -786,7 +786,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim(tp)) {
 
-        if (game.state.map.is_deep_water[(int)map_loc.x][(int)map_loc.y]) {
+        if (game.state.map.is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
             tile_tl = fpoint(0, 0);
             if (owner) {
@@ -802,7 +802,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 blit_tl.y += submerged_offset;
             }
             is_submerged = true;
-        } else if (game.state.map.is_lava[(int)map_loc.x][(int)map_loc.y]) {
+        } else if (game.state.map.is_lava((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
             tile_tl = fpoint(0, 0);
             if (owner) {
@@ -819,7 +819,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             }
             is_submerged = true;
             lava = true;
-        } else if (game.state.map.is_water[(int)map_loc.x][(int)map_loc.y]) {
+        } else if (game.state.map.is_water((int)map_loc.x, (int)map_loc.y)) {
             tile_tl = fpoint(0, 0);
             if (owner) {
                 blit_br.y += owner->submerged_offset;
@@ -976,7 +976,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim(tp)) {
 
-        if (game.state.map.is_deep_water[(int)map_loc.x][(int)map_loc.y]) {
+        if (game.state.map.is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
             tile_tl = fpoint(0, 0);
             if (owner) {
@@ -992,7 +992,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
                 blit_tl.y += submerged_offset;
             }
             is_submerged = true;
-        } else if (game.state.map.is_water[(int)map_loc.x][(int)map_loc.y]) {
+        } else if (game.state.map.is_water((int)map_loc.x, (int)map_loc.y)) {
             tile_tl = fpoint(0, 0);
             if (owner) {
                 blit_br.y += owner->submerged_offset;
