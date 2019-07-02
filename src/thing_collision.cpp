@@ -34,7 +34,7 @@ public:
 static std::vector<class ThingColl> thing_colls;
 static const double thing_collision_tiles = 1;
 
-bool
+static bool
 things_tile_overlap (Thingp A, Thingp B)
 {_
     auto A_tile = A->current_tile;
@@ -133,13 +133,14 @@ things_tile_overlap (Thingp A, Thingp B)
     return (false);
 }
 
-int circle_box_collision (Thingp C,
-                          fpoint C_at,
-                          Thingp B,
-                          fpoint B_at,
-                          fpoint *normal,
-                          fpoint *intersect,
-                          int check_only)
+#if 0
+static int circle_box_collision (Thingp C,
+                                 fpoint C_at,
+                                 Thingp B,
+                                 fpoint B_at,
+                                 fpoint *normal,
+                                 fpoint *intersect,
+                                 int check_only)
 {
     fpoint C0, C1, C2, C3;
     C->to_coords(&C0, &C1, &C2, &C3);
@@ -275,10 +276,10 @@ collided:
  * If two circles collide, the resultant direction is along the normal between
  * the two center of masses of the circles.
  */
-int circle_circle_collision (Thingp A,
-                             Thingp B,
-                             fpoint at,
-                             fpoint *intersect)
+static int circle_circle_collision (Thingp A,
+                                    Thingp B,
+                                    fpoint at,
+                                    fpoint *intersect)
 {
     double Ax = A->interpolated_mid_at.x;
     double Ay = A->interpolated_mid_at.y;
@@ -322,6 +323,7 @@ int circle_circle_collision (Thingp A,
 
     return (true);
 }
+#endif
 
 /*
  * Add a thing to the list of things that could be hit on this attack.
@@ -340,30 +342,32 @@ thing_add_possible_hit (Thingp target,
                 hitter_killed_on_hit_or_miss));
 }
 
-void
+static void
 thing_possible_hit_add (Thingp target, std::string reason)
 {
     thing_add_possible_hit(target, reason, false, false);
 }
 
-void
+static void
 thing_possible_hit_add_hitter_killed_on_hitting (Thingp target,
                                                  std::string reason)
 {
     thing_add_possible_hit(target, reason, true, false);
 }
 
-void
+#if 0
+static void
 thing_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
                                                      std::string reason)
 {
     thing_add_possible_hit(target, reason, false, true);
 }
+#endif
 
 /*
  * Reset the list of things we can possibly hit.
  */
-void thing_possible_init (void)
+static void thing_possible_init (void)
 {
     thing_colls.resize(0);
 }
@@ -565,12 +569,12 @@ bool Thing::handle_collisions (void)
     }
 
     int maxx = mid_at.x + thing_collision_tiles;
-    while (maxx >= DUN_WIDTH) {
+    while (maxx >= MAP_WIDTH) {
         maxx--;
     }
 
     int maxy = mid_at.y + thing_collision_tiles;
-    while (maxy >= DUN_HEIGHT) {
+    while (maxy >= MAP_HEIGHT) {
         maxy--;
     }
 

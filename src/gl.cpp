@@ -1248,7 +1248,7 @@ void gl_ext_init (void)
 /*
  * gl_push
  */
-void
+static void
 gl_push (float **P,
          float *p_end,
          uint8_t first,

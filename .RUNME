@@ -558,13 +558,15 @@ echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g -ggdb3 -O2 # AUTOGEN" > .Makefile
 echo "    " >> .Makefile
 echo "CLANG_COMPILER_WARNINGS=-Wall -fmessage-length=0 -fdiagnostics-print-source-range-info -fdiagnostics-show-category=id -fdiagnostics-parseable-fixits -Wno-trigraphs $COMPILER_WARN -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-sign-conversion -std=c++1z -stdlib=libc++ # AUTOGEN" >> .Makefile
 # There will be a new option in gcc 4.9 named “-fstack-protector-strong“, which offers an improved version of “-fstack-protector” without going all the way to “-fstack-protector-all“. 
-echo "GXX_COMPILER_WARNINGS=-x c++ -Wall -fmessage-length=0 -Wno-trigraphs -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -std=c++1z -ffast-math -fstack-check -fstack-protector-all -D_FORTIFY_SOURCE=2 # AUTOGEN" >> .Makefile
+GCC_STACK_CHECK="-fstack-check -fstack-protector-all -D_FORTIFY_SOURCE=2"
+GCC_STACK_CHECK=
+echo "GCC_COMPILER_WARNINGS=-x c++ -Wall -fmessage-length=0 -Wno-trigraphs -Wreturn-type -Wparentheses -Wswitch -Wno-unused-parameter -Wunused-variable -Wunused-value -std=c++1z -ffast-math $GCC_STACK_CHECK # AUTOGEN" >> .Makefile
 # std++17 is not yet supported on my mac, henze c++1z
 `g++ --version >/dev/null 2>/dev/null`
 if [ $? -eq 0 ]
 then
     echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
-    echo "COMPILER_WARNINGS=\$(GXX_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+    echo "COMPILER_WARNINGS=\$(GCC_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
     echo "# CC=clang++ # AUTOGEN" >> .Makefile
     echo "CC=g++ # AUTOGEN" >> .Makefile
     # -mp- is the mac ports version
@@ -573,7 +575,7 @@ else
     `clang++ --version >/dev/null 2>/dev/null`
     if [ $? -eq 0 ]
     then
-        echo "COMPILER_WARNINGS=\$(GXX_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
+        echo "COMPILER_WARNINGS=\$(GCC_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
         echo "COMPILER_WARNINGS=\$(CLANG_COMPILER_WARNINGS) # AUTOGEN" >> .Makefile
         echo "CC=clang++ # AUTOGEN" >> .Makefile
         echo "# CC=g++ # AUTOGEN" >> .Makefile

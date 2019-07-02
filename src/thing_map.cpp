@@ -658,8 +658,8 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            auto X = x / 2;
-            auto Y = y / 2;
+            auto X = (x - minx) / 2;
+            auto Y = (y - miny) / 2;
             X++;
             Y++;
 
@@ -922,8 +922,8 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            auto X = x / 2;
-            auto Y = y / 2;
+            auto X = (x - minx) / 2;
+            auto Y = (y - miny) / 2;
             X++;
             Y++;
 

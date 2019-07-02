@@ -60,6 +60,8 @@ public:
     int                cost {};
 };
 
+extern Path astar_solve(point start, std::multiset<Goal> &goals, Dmap *dmap);
+
 typedef struct AgeMap {
     uint32_t val[DUN_WIDTH][DUN_HEIGHT];
 } AgeMap;
