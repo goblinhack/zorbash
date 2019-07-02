@@ -35,43 +35,6 @@ static std::vector<class ThingColl> thing_colls;
 static const double thing_collision_tiles = 1;
 
 bool
-thing_overlaps_border (Thingp t)
-{_
-    auto tile = t->current_tile;
-    if (!tile) {
-        return (false);
-    }
-
-    for (int y = 0; y < (int)tile->pix_height; y++) {
-        for (int x = 0; x < (int)tile->pix_width; x++) {
-            if (!tile->pix[x][y]) {
-                continue;
-            }
-
-            int px = t->interpolated_mid_at.x * TILE_WIDTH + x;
-            int py = t->interpolated_mid_at.y * TILE_HEIGHT + y;
-
-            if (px < MAP_BORDER * TILE_WIDTH) {
-                return (true);
-            }
-
-            if (py < MAP_BORDER * TILE_HEIGHT) {
-                return (true);
-            }
-
-            if (px >= (DUN_WIDTH - MAP_BORDER) * TILE_WIDTH) {
-                return (true);
-            }
-
-            if (py >= (DUN_HEIGHT - MAP_BORDER) * TILE_HEIGHT) {
-                return (true);
-            }
-        }
-    }
-    return (false);
-}
-
-bool
 things_tile_overlap (Thingp A, Thingp B)
 {_
     auto A_tile = A->current_tile;

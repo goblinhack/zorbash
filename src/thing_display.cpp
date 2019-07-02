@@ -116,8 +116,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
 
     if (unlikely(x <= 0) ||
         unlikely(y <= 0) ||
-        unlikely(x >= DUN_WIDTH - 1) ||
-        unlikely(y >= DUN_HEIGHT - 1)) {
+        unlikely(x >= MAP_WIDTH - 1) ||
+        unlikely(y >= MAP_HEIGHT - 1)) {
         return;
     }
 
@@ -307,8 +307,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
 
     if (unlikely(x <= 0) || 
         unlikely(y <= 0) || 
-        unlikely(x >= DUN_WIDTH - 1) || 
-        unlikely(y >= DUN_HEIGHT - 1)) {
+        unlikely(x >= MAP_WIDTH - 1) || 
+        unlikely(y >= MAP_HEIGHT - 1)) {
         return;
     }
 
