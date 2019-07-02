@@ -40,26 +40,26 @@ enum {
 
 class Map {
 private:
-    uint8_t                    _is_wall[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_solid[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_gfx_large_shadow_caster[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_door[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_light[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_floor[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_lava[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_blood[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_water[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_deep_water[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_corridor[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_dirt[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_monst[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_food[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_rock[DUN_WIDTH][DUN_HEIGHT] = {};
-    uint8_t                    _is_key[DUN_WIDTH][DUN_HEIGHT] = {};
+    uint8_t                    _is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_solid[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_gfx_large_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_door[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_light[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_blood[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_water[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_deep_water[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_food[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_key[MAP_WIDTH][MAP_HEIGHT] = {};
 public:
     Lights                     all_lights;
     std::unordered_map<uint32_t, Lightp>
-                               lights[DUN_WIDTH][DUN_HEIGHT];
+                               lights[MAP_WIDTH][MAP_HEIGHT];
     Things                     all_things;
     Things                     all_active_things;
 
@@ -67,9 +67,9 @@ public:
     // Probably want map vs unordered_map so walk order is the same
     // Think of unordered_map as a hash table.
     //
-    std::map<uint32_t, Thingp> all_active_things_at[DUN_WIDTH][DUN_HEIGHT];
-    std::map<uint32_t, Thingp> all_interesting_things_at[DUN_WIDTH][DUN_HEIGHT];
-    std::map<uint32_t, Thingp> all_obstacle_things_at[DUN_WIDTH][DUN_HEIGHT];
+    std::unordered_map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::unordered_map<uint32_t, Thingp> all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::unordered_map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     bool is_lava (const point &p)
     {
