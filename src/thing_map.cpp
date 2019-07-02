@@ -41,9 +41,9 @@ static void thing_map_scroll_do (void)
     game.state.map_at.x = std::max(game.state.map_at.x, 0.0);
     game.state.map_at.y = std::max(game.state.map_at.y, 0.0);
     game.state.map_at.x = std::min(game.state.map_at.x, 
-                             (double)DUN_WIDTH - TILES_ACROSS);
+                             (double)MAP_WIDTH - TILES_ACROSS);
     game.state.map_at.y = std::min(game.state.map_at.y, 
-                             (double)DUN_HEIGHT - TILES_DOWN);
+                             (double)MAP_HEIGHT - TILES_DOWN);
 
     //
     // Round to pixels
@@ -105,9 +105,9 @@ static void thing_map_blit_background (double offset_x, double offset_y)
     offset_x *= 0.9; // parallax
     offset_y *= 0.9;
 
-    double w = (DUN_WIDTH  * game.config.tile_pixel_width)/
+    double w = (MAP_WIDTH  * game.config.tile_pixel_width)/
                     game.config.video_pix_width;
-    double h = (DUN_HEIGHT * game.config.tile_pixel_height)/
+    double h = (MAP_HEIGHT * game.config.tile_pixel_height)/
                     game.config.video_pix_height;
 
     color c = WHITE;
@@ -133,9 +133,9 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
         }
     }
 
-    double w = (DUN_WIDTH  * game.config.tile_pixel_width)/
+    double w = (MAP_WIDTH  * game.config.tile_pixel_width)/
                 game.config.video_pix_width;
-    double h = (DUN_HEIGHT * game.config.tile_pixel_height)/
+    double h = (MAP_HEIGHT * game.config.tile_pixel_height)/
                 game.config.video_pix_height;
 
     //
@@ -362,8 +362,8 @@ static void thing_blit_water (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             if (game.state.map.is_water(x, y) || game.state.map.is_deep_water(x, y)) {
-                auto X = x / 2;
-                auto Y = y / 2;
+                auto X = (x - minx) / 2;
+                auto Y = (y - miny) / 2;
                 X++;
                 Y++;
                 water_map[X][Y] = true;
@@ -390,8 +390,8 @@ static void thing_blit_water (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            auto X = x / 2;
-            auto Y = y / 2;
+            auto X = (x - minx) / 2;
+            auto Y = (y - miny) / 2;
             X++;
             Y++;
 
@@ -631,8 +631,8 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             if (game.state.map.is_deep_water(x, y)) {
-                auto X = x / 2;
-                auto Y = y / 2;
+                auto X = (x - minx) / 2;
+                auto Y = (y - miny) / 2;
                 X++;
                 Y++;
                 deep_water_map[X][Y] = true;
@@ -896,8 +896,8 @@ static void thing_blit_lava (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             if (game.state.map.is_lava(x, y)) {
-                auto X = x / 2;
-                auto Y = y / 2;
+                auto X = (x - minx) / 2;
+                auto Y = (y - miny) / 2;
                 X++;
                 Y++;
                 lava_map[X][Y] = true;
@@ -1204,15 +1204,11 @@ void thing_render_all (void)
     int minz = 0;
     int maxz = MAP_DEPTH;
 
-    int minx = std::max(0,
-        (int) game.state.map_at.x - 2);
-    int maxx = std::min(DUN_WIDTH,
-        (int)game.state.map_at.x + TILES_ACROSS + 2);
+    int minx = std::max(0, (int) game.state.map_at.x - 2);
+    int maxx = std::min(MAP_WIDTH, (int)game.state.map_at.x + TILES_ACROSS + 2);
 
-    int miny = std::max(0,
-        (int) game.state.map_at.y - 2);
-    int maxy = std::min(DUN_HEIGHT,
-        (int)game.state.map_at.y + TILES_DOWN + 2);
+    int miny = std::max(0, (int) game.state.map_at.y - 2);
+    int maxy = std::min(MAP_HEIGHT, (int)game.state.map_at.y + TILES_DOWN + 2);
 
     thing_map_scroll_follow_player();
     thing_map_scroll_do();
