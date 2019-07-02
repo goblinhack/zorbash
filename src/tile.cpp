@@ -339,6 +339,7 @@ Tilep string2tile (std::wstring &s, int *len)
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
+#if 0
 void tile_blit_with_offset (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
 {
     double x1;
@@ -376,10 +377,12 @@ void tile_blit_with_offset (Tpp &tp, Tilep &tile, fpoint *tl, fpoint *br)
     blit(tile->gl_surface_binding,
          x1, y2, x2, y1, tl->x, br->y, br->x, tl->y);
 }
+#endif
 
 /*
  * Given tile bounds, stretch them to get the full size.
  */
+#if 0
 void tile_get_blit_size (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
 {
     if (tp) {
@@ -397,6 +400,7 @@ void tile_get_blit_size (Tpp tp, Tilep tile, char *name, fpoint *tl, fpoint *br)
         br->y += bot_off   * pix_h;
     }
 }
+#endif
 
 /*
  * Blits a whole tile.
@@ -410,6 +414,7 @@ void tile_blit_at (const Tilep &tile, fpoint tl, fpoint br)
 /*
  * Blits a whole tile.
  */
+#if 0
 void tile_blit (const Tilep tile, point at)
 {
     fpoint tl, br;
@@ -421,6 +426,7 @@ void tile_blit (const Tilep tile, point at)
 
     tile_blit_at(tile, tl, br);
 }
+#endif
 
 /*
  * Blits a whole tile. Y co-ords are inverted.

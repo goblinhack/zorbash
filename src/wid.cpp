@@ -1089,10 +1089,12 @@ std::string to_string (widp w)
     return (w->to_string);
 }
 
+#if 0
 const char * to_cstring (widp w)
 {
     return (to_string(w).c_str());
 }
+#endif
 
 std::string wid_name (widp w)
 {_

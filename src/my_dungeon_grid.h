@@ -149,3 +149,4 @@ public:
     void dmap_print_walls(Dmap *d);
     void remove_redundant_directions(void);
 };
+extern class Nodes *grid_test(void);

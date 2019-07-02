@@ -132,5 +132,6 @@ extern void lights_calculate(void);
 extern void lights_render_points(int minx, int miny, int maxx, int maxy, int fbo, int pass);
 extern void lights_render_high_quality(int minx, int miny, int maxx, int maxy, int fbo);
 extern void lights_render_points_debug(int minx, int miny, int maxx, int maxy);
+extern Lightp light_find(uint32_t id);
 
 #endif /* LIGHT_H */

@@ -10,9 +10,6 @@
 #include "my_math.h"
 #include <vector>
 
-extern std::vector<point> astar_solve(point s, 
-                                    std::multiset<Goal> &goals, Dmap *d);
-
 bool Thing::will_attack (const Thingp itp)
 {
     auto me = tp;
@@ -373,18 +370,18 @@ CON("  goal add at: %d, %d", p.x, p.y);
     //
     //auto hops = dmap_solve(dmap_goals, start);
     auto hops = astar_solve(start, goals, dmap_goals);
-    auto hopssize = hops.size();
+    auto hopssize = hops.path.size();
     point best;
     if (hopssize >= 2) {
-        auto hop0 = hops[hopssize - 1];
-        auto hop1 = hops[hopssize - 2];
+        auto hop0 = hops.path[hopssize - 1];
+        auto hop1 = hops.path[hopssize - 2];
         if (dmap_can_i_move_diagonally(dmap_goals, start, hop0, hop1)) {
             best = hop1;
         } else {
             best = hop0;
         }
-    } else if (hops.size() >= 1) {
-        auto hop0 = hops[hopssize - 1];
+    } else if (hops.path.size() >= 1) {
+        auto hop0 = hops.path[hopssize - 1];
         best = hop0;
     } else {
         best = start;

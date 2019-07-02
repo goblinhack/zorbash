@@ -67,7 +67,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     at += fpoint(sz.w / 2, sz.h / 2);
 
     point new_at((int)at.x, (int)at.y);
-    if ((new_at.x >= DUN_WIDTH) || (new_at.y >= DUN_HEIGHT)) {
+    if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
         DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
     }
 

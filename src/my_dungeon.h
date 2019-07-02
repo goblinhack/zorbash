@@ -3542,3 +3542,5 @@ printf("----------------------------------\n");
         }
     }
 };
+
+extern class Dungeon *dungeon_test(void);
