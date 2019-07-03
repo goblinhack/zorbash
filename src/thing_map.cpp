@@ -357,7 +357,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     // The water tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
-    uint8_t water_map[DUN_WIDTH + 8][DUN_HEIGHT + 8] = {{0}};
+    uint8_t tile_map[DUN_WIDTH + 8][DUN_HEIGHT + 8] = {{0}};
 
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
@@ -366,7 +366,7 @@ static void thing_blit_water (int minx, int miny, int minz,
                 const auto X = x - minx + 2;
                 for (auto dx = -2; dx <= 3; dx++) {
                     for (auto dy = -2; dy <= 3; dy++) {
-                        water_map[X+dx][Y+dy] = true;
+                        tile_map[X+dx][Y+dy] = true;
                     }
                 }
             }
@@ -386,8 +386,8 @@ static void thing_blit_water (int minx, int miny, int minz,
         for (auto x = minx; x < maxx; x+=2) {
             const auto X = x - minx + 2;
 
-            if (water_map[X][Y]) {
-                water_map[X][Y] = false;
+            if (tile_map[X][Y]) {
+                tile_map[X][Y] = false;
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game.config.tile_gl_width;
@@ -617,25 +617,18 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     // The deep_water tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
-    uint8_t deep_water_map[(DUN_WIDTH / 2) + 3][(DUN_HEIGHT / 2) + 3] = {{0}};
+    uint8_t tile_map[DUN_WIDTH + 8][DUN_HEIGHT + 8] = {{0}};
 
     for (auto y = miny; y < maxy; y++) {
+        const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
             if (game.state.map.is_deep_water(x, y)) {
-                auto X = (x - minx) / 2;
-                auto Y = (y - miny) / 2;
-                X++;
-                Y++;
-                deep_water_map[X][Y] = true;
-                deep_water_map[X+1][Y] = true;
-                deep_water_map[X-1][Y] = true;
-                deep_water_map[X][Y+1] = true;
-                deep_water_map[X][Y-1] = true;
-
-                deep_water_map[X+1][Y+1] = true;
-                deep_water_map[X-1][Y+1] = true;
-                deep_water_map[X+1][Y-1] = true;
-                deep_water_map[X-1][Y-1] = true;
+                const auto X = x - minx + 2;
+                for (auto dx = -2; dx <= 3; dx++) {
+                    for (auto dy = -2; dy <= 3; dy++) {
+                        tile_map[X+dx][Y+dy] = true;
+                    }
+                }
             }
         }
     }
@@ -648,14 +641,12 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     glcolor(WHITE);
     blit_init();
     for (auto y = miny; y < maxy; y++) {
+        const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
-            auto X = (x - minx) / 2;
-            auto Y = (y - miny) / 2;
-            X++;
-            Y++;
+            const auto X = x - minx + 2;
 
-            if (deep_water_map[X][Y]) {
-                deep_water_map[X][Y] = false;
+            if (tile_map[X][Y]) {
+                tile_map[X][Y] = false;
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game.config.tile_gl_width;
@@ -882,25 +873,18 @@ static void thing_blit_lava (int minx, int miny, int minz,
     // The lava tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
-    uint8_t lava_map[(DUN_WIDTH / 2) + 3][(DUN_HEIGHT / 2) + 3] = {{0}};
+    uint8_t tile_map[DUN_WIDTH + 8][DUN_HEIGHT + 8] = {{0}};
 
     for (auto y = miny; y < maxy; y++) {
+        const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
             if (game.state.map.is_lava(x, y)) {
-                auto X = (x - minx) / 2;
-                auto Y = (y - miny) / 2;
-                X++;
-                Y++;
-                lava_map[X][Y] = true;
-                lava_map[X+1][Y] = true;
-                lava_map[X-1][Y] = true;
-                lava_map[X][Y+1] = true;
-                lava_map[X][Y-1] = true;
-
-                lava_map[X+1][Y+1] = true;
-                lava_map[X-1][Y+1] = true;
-                lava_map[X+1][Y-1] = true;
-                lava_map[X-1][Y-1] = true;
+                const auto X = x - minx + 2;
+                for (auto dx = -2; dx <= 3; dx++) {
+                    for (auto dy = -2; dy <= 3; dy++) {
+                        tile_map[X+dx][Y+dy] = true;
+                    }
+                }
             }
         }
     }
@@ -912,14 +896,11 @@ static void thing_blit_lava (int minx, int miny, int minz,
     glcolor(WHITE);
     blit_init();
     for (auto y = miny; y < maxy; y++) {
+        const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
-            auto X = (x - minx) / 2;
-            auto Y = (y - miny) / 2;
-            X++;
-            Y++;
-
-            if (lava_map[X][Y]) {
-                lava_map[X][Y] = false;
+            const auto X = x - minx + 2;
+            if (tile_map[X][Y]) {
+                tile_map[X][Y] = false;
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game.config.tile_gl_width;
