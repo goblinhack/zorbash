@@ -357,25 +357,18 @@ static void thing_blit_water (int minx, int miny, int minz,
     // The water tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
-    uint8_t water_map[(DUN_WIDTH / 2) + 3][(DUN_HEIGHT / 2) + 3] = {{0}};
+    uint8_t water_map[DUN_WIDTH + 8][DUN_HEIGHT + 8] = {{0}};
 
     for (auto y = miny; y < maxy; y++) {
+        const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
             if (game.state.map.is_water(x, y) || game.state.map.is_deep_water(x, y)) {
-                auto X = (x - minx) / 2;
-                auto Y = (y - miny) / 2;
-                X++;
-                Y++;
-                water_map[X][Y] = true;
-                water_map[X+1][Y] = true;
-                water_map[X-1][Y] = true;
-                water_map[X][Y+1] = true;
-                water_map[X][Y-1] = true;
-
-                water_map[X+1][Y+1] = true;
-                water_map[X-1][Y+1] = true;
-                water_map[X+1][Y-1] = true;
-                water_map[X-1][Y-1] = true;
+                const auto X = x - minx + 2;
+                for (auto dx = -2; dx <= 3; dx++) {
+                    for (auto dy = -2; dy <= 3; dy++) {
+                        water_map[X+dx][Y+dy] = true;
+                    }
+                }
             }
         }
     }
@@ -388,12 +381,10 @@ static void thing_blit_water (int minx, int miny, int minz,
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
     blit_init();
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            auto X = (x - minx) / 2;
-            auto Y = (y - miny) / 2;
-            X++;
-            Y++;
+    for (auto y = miny; y < maxy; y+=2) {
+        const auto Y = y - miny + 2;
+        for (auto x = minx; x < maxx; x+=2) {
+            const auto X = x - minx + 2;
 
             if (water_map[X][Y]) {
                 water_map[X][Y] = false;
