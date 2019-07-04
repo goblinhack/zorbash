@@ -10,8 +10,6 @@
 #include "my_python.h"
 #include "my_term.h"
 #include "my_game.h"
-#include "my_thing.h"
-#include "my_light.h"
 
 uint8_t croaked;
 

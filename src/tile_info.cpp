@@ -4,8 +4,8 @@
  */
 
 #include "my_main.h"
+#include "my_game.h"
 #include "my_tile.h"
-#include "my_thing.h"
 #include "my_tile_info.h"
 #include "my_python.h"
 
@@ -144,50 +144,51 @@ uint8_t tile_info_is_dead_on_end_of_anim (Tileinfop t)
     return (t->is_dead_on_end_of_anim);
 }
 
-Tileinfop tile_info_first (Tileinfomap tiles)
+Tileinfop tile_info_first (Tileinfomap *tiles)
 {_
     Tileinfop Tileinfo;
 
-    if (tiles.empty()) {
+    if (!tiles || tiles->empty()) {
         return (0);
     }
 
-    Tileinfo = tiles.begin()->second;
+    Tileinfo = tiles->begin()->second;
 
     return (Tileinfo);
 }
 
-Tileinfop tile_info_random (Tileinfomap tiles)
+Tileinfop tile_info_random (Tileinfomap *tiles)
 {_
-    Tileinfop Tileinfo;
-
-    if (tiles.empty()) {
+    if (!tiles || tiles->empty()) {
         return (0);
     }
 
-    auto n = tiles.size();
+    auto n = tiles->size();
     auto m = myrand() % n;
 
-    auto iter = tiles.begin();
+    auto iter = tiles->begin();
     while (m--) {
-        auto t = iter->second;
         iter++;
     }
 
     return (iter->second);
 }
 
-Tileinfop tile_info_next (Tileinfomap tiles, Tileinfop in)
+Tileinfop tile_info_next (Tileinfomap *tiles, Tileinfop in)
 {_
-    auto cursor = tiles.find(in->index);
+    if (!tiles || tiles->empty()) {
+        return (0);
+    }
 
-    if (cursor == tiles.end()) {
+    auto cursor = tiles->find(in->index);
+
+    if (cursor == tiles->end()) {
         return (0);
     }
 
     cursor = std::next(cursor);
 
-    if (cursor == tiles.end()) {
+    if (cursor == tiles->end()) {
         return (0);
     }
 

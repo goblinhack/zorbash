@@ -9,8 +9,8 @@
 #include <map>
 #include <memory>
 
-typedef std::shared_ptr< class Tileinfo > Tileinfop;
-typedef std::map< unsigned int, std::shared_ptr< class Tileinfo > > Tileinfomap;
+typedef class Tileinfo* Tileinfop;
+typedef std::map< unsigned int, class Tileinfo* > Tileinfomap;
 
 #include "my_tile.h"
 
@@ -32,7 +32,7 @@ public:
     std::string tilename;
     Tilep tile;
 
- /*
+    /*
      * Delay in ms between frames.
      */
     uint32_t delay_ms {};
@@ -105,8 +105,8 @@ uint8_t tile_info_is_dead(Tileinfop);
 uint8_t tile_info_is_end_of_anim(Tileinfop);
 uint8_t tile_info_is_dead_on_end_of_anim(Tileinfop);
 
-Tileinfop tile_info_first(Tileinfomap root);
-Tileinfop tile_info_random(Tileinfomap root);
-Tileinfop tile_info_next(Tileinfomap root, Tileinfop in);
+Tileinfop tile_info_first(Tileinfomap *root);
+Tileinfop tile_info_random(Tileinfomap *root);
+Tileinfop tile_info_next(Tileinfomap *root, Tileinfop in);
 
 #endif /* THING_TILE_H */

@@ -8,7 +8,6 @@
 #ifndef _MY_LIGHT_H
 #define _MY_LIGHT_H
 
-#include <unordered_map>
 #include <memory>
 #include "my_game.h"
 #include "my_point.h"

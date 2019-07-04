@@ -1283,7 +1283,7 @@ gl_push (float **P,
         br.x *= scale;
 
         fpoint m((tl.x + br.x) / 2, (tl.y + br.y) / 2);
-        
+
         tl = tl.rotate(gl_rotate, m);
         tr = tr.rotate(gl_rotate, m);
         br = br.rotate(gl_rotate, m);

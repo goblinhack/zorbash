@@ -4,107 +4,6 @@
 //
 
 #include "my_game.h"
-#include "my_thing.h"
-
-ThingDisplayOrder thing_display_order[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
-
-void Thing::attach (void)
-{_
-    detach();
-
-    {
-        auto root = &thing_display_order[(int)mid_at.x][(int)mid_at.y][depth];
-        auto key = ThingDisplaySortKey(depth, br.y, this);
-        auto result = root->insert(std::make_pair(key, this));
-        if (result.second == false) {
-            die("failed to insert to thing_display_order");
-        }
-    }
-
-    if (is_active()) {
-        auto root = &game.state.map.all_active_things_at[(int)mid_at.x][(int)mid_at.y];
-        auto p = std::make_pair(id, this);
-        auto result = root->insert(p);
-        if (result.second == false) {
-            die("failed to insert to game.state.map.all_active_things_at");
-        }
-    }
-
-    if (!does_nothing()) {
-        auto root = &game.state.map.all_interesting_things_at[(int)mid_at.x][(int)mid_at.y];
-        auto p = std::make_pair(id, this);
-        auto result = root->insert(p);
-        if (result.second == false) {
-            die("failed to insert to game.state.map.all_interesting_things_at");
-        }
-    }
-
-    if (is_obstacle()) {
-        auto root = &game.state.map.all_obstacle_things_at[(int)mid_at.x][(int)mid_at.y];
-        auto p = std::make_pair(id, this);
-        auto result = root->insert(p);
-        if (result.second == false) {
-            die("failed to insert to game.state.map.all_obstacle_things_at");
-        }
-    }
-
-    is_attached = true;
-    last_attached = mid_at;
-//log("attached at %d %d %d", (int)last_attached.x, (int)last_attached.y,
-//depth);
-}
-
-void Thing::detach (void)
-{_
-    if (!is_attached) {
-        return;
-    }
-    is_attached = false;
-//log("detach from %d %d %d", (int)last_attached.x, (int)last_attached.y,
-//depth);
-//
-    {
-        auto root = &thing_display_order[(int)last_attached.x]
-                                        [(int)last_attached.y][depth];
-        auto key = ThingDisplaySortKey(depth, br.y, this);
-        auto result = root->find(key);
-        if (result == root->end()) {
-            die("failed to remove from thing_display_order");
-        }
-
-        root->erase(key);
-    }
-
-    if (is_active()) {
-        auto root = &game.state.map.all_active_things_at[(int)last_attached.x]
-                                                        [(int)last_attached.y];
-        auto result = root->find(id);
-        if (result == root->end()) {
-            die("failed to remove from game.state.map.all_active_things_at");
-        }
-        root->erase(id);
-    }
-
-    if (!does_nothing()) {
-        auto root = &game.state.map.all_interesting_things_at[(int)last_attached.x]
-                                                            [(int)last_attached.y];
-        auto result = root->find(id);
-        if (result == root->end()) {
-            die("failed to remove from game.state.map.all_interesting_things_at");
-        }
-        root->erase(id);
-    }
-
-    if (is_obstacle()) {
-        auto root = &game.state.map.all_obstacle_things_at[(int)last_attached.x]
-                                                            [(int)last_attached.y];
-        auto result = root->find(id);
-        if (result == root->end()) {
-            die("failed to remove from game.state.map.all_obstacle_things_at");
-        }
-        root->erase(id);
-    }
-}
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
 {
@@ -298,16 +197,16 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
 }
 
 void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
-{  
+{
     double dw = game.config.one_pixel_gl_width;
     double dh = game.config.one_pixel_gl_height;
 
     int x = (int) mid_at.x;
     int y = (int) mid_at.y;
 
-    if (unlikely(x <= 0) || 
-        unlikely(y <= 0) || 
-        unlikely(x >= MAP_WIDTH - 1) || 
+    if (unlikely(x <= 0) ||
+        unlikely(y <= 0) ||
+        unlikely(x >= MAP_WIDTH - 1) ||
         unlikely(y >= MAP_HEIGHT - 1)) {
         return;
     }
@@ -793,11 +692,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 blit_br.y += owner->submerged_offset;
                 blit_tl.y += owner->submerged_offset;
                 tile_br = fpoint(1, pct_visible_above_surface);
-                blit_br.y -= 
+                blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset = 
+                submerged_offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 blit_tl.y += submerged_offset;
             }
@@ -809,11 +708,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 blit_br.y += owner->submerged_offset;
                 blit_tl.y += owner->submerged_offset;
                 tile_br = fpoint(1, pct_visible_above_surface);
-                blit_br.y -= 
+                blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset = 
+                submerged_offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 blit_tl.y += submerged_offset;
             }
@@ -827,7 +726,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             } else {
                 const auto pct_visible_above_surface = 0.1;
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset = 
+                submerged_offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 blit_tl.y += submerged_offset;
             }
@@ -983,11 +882,11 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
                 blit_br.y += owner->submerged_offset;
                 blit_tl.y += owner->submerged_offset;
                 tile_br = fpoint(1, pct_visible_above_surface);
-                blit_br.y -= 
+                blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset = 
+                submerged_offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 blit_tl.y += submerged_offset;
             }
@@ -1000,7 +899,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
             } else {
                 const auto pct_visible_above_surface = 0.1;
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset = 
+                submerged_offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 blit_tl.y += submerged_offset;
             }

@@ -4,8 +4,6 @@
  */
 
 #include "my_game.h"
-#include "my_light.h"
-#include "my_thing.h"
 #include "my_gl.h"
 
 static uint32_t light_id;
@@ -41,8 +39,8 @@ Lightp light_new (Thingp owner,
 
     point new_at((int)at.x, (int)at.y);
     auto n = &game.state.map.lights[new_at.x][new_at.y];
-    result = n->insert(p);
-    if (result.second == false) {
+    auto result2 = n->insert(p);
+    if (result2.second == false) {
         DIE("light insert into map [%d] failed", id);
     }
 
@@ -438,7 +436,7 @@ void Light::render_debug_lines (int minx, int miny, int maxx, int maxy)
     uint8_t z = MAP_DEPTH_WALLS;
     for (int16_t x = maxx - 1; x >= minx; x--) {
         for (int16_t y = miny; y < maxy; y++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 if (is_nearest_wall[x][y]) {
                     double X = x;
                     double Y = y;

@@ -4,7 +4,6 @@
 //
 
 #include "my_game.h"
-#include "my_thing.h"
 #include "my_tile_info.h"
 #include "my_color.h"
 #include "my_dmap.h"

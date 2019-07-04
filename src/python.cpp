@@ -1717,6 +1717,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_ripple)
     TP_SET_DECL(is_light_strength)
     TP_SET_DECL(is_dirt)
+    TP_SET_DECL(is_grass)
     TP_SET_DECL(is_blood)
     TP_SET_DECL(gfx_animated_can_vflip)
     TP_SET_DECL(gfx_small_shadow_caster)

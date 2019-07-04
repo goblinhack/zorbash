@@ -13,6 +13,7 @@ static Tpmap_create_order tp_create_order_map;
 static Tpmap_create_order tp_monst;
 static Tpmap_create_order tp_food;
 static Tpmap_create_order tp_dirt;
+static Tpmap_create_order tp_grass;
 static Tpmap_create_order tp_ripples;
 static Tpmap_create_order tp_keys;
 static Tpmap_create_order tp_blood;
@@ -130,7 +131,7 @@ Tilep tp_first_tile (Tpp tp)
 {_
     auto tiles = tp_tiles(tp);
 
-    if (tiles.empty()) {
+    if (!tiles || tiles->empty()) {
         DIE("tp %s has no tiles", tp_name(tp).c_str());
     }
 
@@ -168,6 +169,14 @@ void tp_init_after_loading (void)
             auto result = tp_dirt.insert(std::make_pair(id, tp));
             if (result.second == false) {
                 ERR("thing template insert dirt [%s] failed", tp_name(tp).c_str());
+            }
+        }
+        if (tp_is_grass(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_grass.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert grass [%s] failed", tp_name(tp).c_str());
             }
         }
         if (tp_is_ripple(tp)) {
@@ -261,6 +270,19 @@ Tpp tp_random_dirt (void)
     auto m = myrand() % n;
 
     auto iter = tp_dirt.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
+}
+
+Tpp tp_random_grass (void)
+{_
+    auto n = tp_grass.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_grass.begin();
     while (m--) {
         iter++;
     }

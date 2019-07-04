@@ -61,6 +61,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 if (m.is_floor ||
                     m.is_secret_corridor ||
                     m.is_dirt ||
+                    m.is_grass ||
                     m.is_lava) {
                     floor_string += c;
                 } else if (m.is_door ||

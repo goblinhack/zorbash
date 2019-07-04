@@ -4,7 +4,6 @@
 //
 
 #include "my_game.h"
-#include "my_thing.h"
 
 bool Thing::move (fpoint future_pos)
 {
@@ -311,6 +310,10 @@ void Thing::update_pos (fpoint to)
         if (is_dirt()) {
             game.state.map.unset_dirt(old_at.x, old_at.y);
             game.state.map.set_dirt(new_at.x, new_at.y);
+        }
+        if (is_grass()) {
+            game.state.map.unset_grass(old_at.x, old_at.y);
+            game.state.map.set_grass(new_at.x, new_at.y);
         }
         if (is_monst()) {
             game.state.map.unset_monst(old_at.x, old_at.y);
