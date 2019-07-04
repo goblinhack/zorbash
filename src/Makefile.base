@@ -9,6 +9,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ascii.o 		        \
     $(OBJDIR)/ascii_box.o 		\
     $(OBJDIR)/ascii_button.o 		\
+    $(OBJDIR)/astar.o 		        \
     $(OBJDIR)/backtrace.o 		\
     $(OBJDIR)/cereal.o			\
     $(OBJDIR)/charmap.o 		\
@@ -24,6 +25,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game.o 			\
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\
+    $(OBJDIR)/level.o 			\
     $(OBJDIR)/light.o 			\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/main.o 			\
@@ -31,8 +33,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/pcg_basic.o 		\
     $(OBJDIR)/player.o 			\
     $(OBJDIR)/ptrcheck.o 		\
-    $(OBJDIR)/py_room.o 		\
     $(OBJDIR)/py_level.o 		\
+    $(OBJDIR)/py_room.o 		\
     $(OBJDIR)/py_sdl.o 			\
     $(OBJDIR)/py_tex.o 			\
     $(OBJDIR)/py_tile.o 		\
@@ -41,7 +43,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/ramdisk_read.o 		\
     $(OBJDIR)/room.o 			\
-    $(OBJDIR)/level.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/stb_image.o 		\
@@ -49,19 +50,19 @@ GAME_OBJECTS=				\
     $(OBJDIR)/term.o 		        \
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
-    $(OBJDIR)/thing_dir.o 		\
-    $(OBJDIR)/thing_anim.o 		\
-    $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_ai.o 		\
-    $(OBJDIR)/astar.o 		        \
-    $(OBJDIR)/thing_tick.o 		\
+    $(OBJDIR)/thing_anim.o 		\
+    $(OBJDIR)/thing_attach.o 		\
+    $(OBJDIR)/thing_collision.o 	\
+    $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
+    $(OBJDIR)/thing_health.o 		\
     $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_hunger.o 		\
-    $(OBJDIR)/thing_health.o 		\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_template.o 		\
+    $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_weapon.o 		\
     $(OBJDIR)/tile.o 			\
     $(OBJDIR)/tile_info.o 		\

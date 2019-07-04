@@ -5,7 +5,7 @@
 
 #include <algorithm>
 #include "my_main.h"
-#include "my_thing.h"
+#include "my_game.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include <vector>
@@ -199,7 +199,7 @@ fpoint Thing::get_next_hop (void)
 
             //
             // Make newer cells less preferred by factoring in the age
-            // 
+            //
             uint32_t age;
             if (age_map->val[x][y]) {
                 age = time_get_elapsed_secs(age_map->val[x][y],

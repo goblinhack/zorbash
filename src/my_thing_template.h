@@ -155,6 +155,7 @@ public:
     int is_corridor {};
     int is_deep_water {};
     int is_dirt {};
+    int is_grass {};
     int is_door {};
     int is_entrance {};
     int is_exit {};
@@ -216,6 +217,7 @@ void tp_init_after_loading(void);
 Tpp tp_random_monst(void);
 Tpp tp_random_food(void);
 Tpp tp_random_dirt(void);
+Tpp tp_random_grass(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_key(void);
 Tpp tp_random_blood(void);
@@ -494,6 +496,11 @@ static inline int tp_is_dirt (Tpp t)
     return (t->is_dirt);
 }
 
+static inline int tp_is_grass (Tpp t)
+{
+    return (t->is_grass);
+}
+
 static inline int tp_is_blood (Tpp t)
 {
     return (t->is_blood);
@@ -744,104 +751,104 @@ static inline std::string tp_weapon_use_anim (Tpp t)
     return (t->weapon_use_anim);
 }
 
-static inline Tileinfomap tp_tiles (Tpp t)
+static inline Tileinfomap *tp_tiles (Tpp t)
 {
-    return (t->tiles);
+    return (&t->tiles);
 }
 
-static inline Tileinfomap tp_left_tiles (Tpp t)
+static inline Tileinfomap *tp_left_tiles (Tpp t)
 {
-    return (t->left_tiles);
+    return (&t->left_tiles);
 }
 
-static inline Tileinfomap tp_right_tiles (Tpp t)
+static inline Tileinfomap *tp_right_tiles (Tpp t)
 {
-    return (t->right_tiles);
+    return (&t->right_tiles);
 }
 
-static inline Tileinfomap tp_top_tiles (Tpp t)
+static inline Tileinfomap *tp_top_tiles (Tpp t)
 {
-    return (t->top_tiles);
+    return (&t->top_tiles);
 }
 
-static inline Tileinfomap tp_bot_tiles (Tpp t)
+static inline Tileinfomap *tp_bot_tiles (Tpp t)
 {
-    return (t->bot_tiles);
+    return (&t->bot_tiles);
 }
 
-static inline Tileinfomap tp_tl_tiles (Tpp t)
+static inline Tileinfomap *tp_tl_tiles (Tpp t)
 {
-    return (t->tl_tiles);
+    return (&t->tl_tiles);
 }
 
-static inline Tileinfomap tp_tr_tiles (Tpp t)
+static inline Tileinfomap *tp_tr_tiles (Tpp t)
 {
-    return (t->tr_tiles);
+    return (&t->tr_tiles);
 }
 
-static inline Tileinfomap tp_bl_tiles (Tpp t)
+static inline Tileinfomap *tp_bl_tiles (Tpp t)
 {
-    return (t->bl_tiles);
+    return (&t->bl_tiles);
 }
 
-static inline Tileinfomap tp_br_tiles (Tpp t)
+static inline Tileinfomap *tp_br_tiles (Tpp t)
 {
-    return (t->br_tiles);
+    return (&t->br_tiles);
 }
 
-static inline Tileinfomap tp_horiz_tiles (Tpp t)
+static inline Tileinfomap *tp_horiz_tiles (Tpp t)
 {
-    return (t->horiz_tiles);
+    return (&t->horiz_tiles);
 }
 
-static inline Tileinfomap tp_vert_tiles (Tpp t)
+static inline Tileinfomap *tp_vert_tiles (Tpp t)
 {
-    return (t->vert_tiles);
+    return (&t->vert_tiles);
 }
 
-static inline Tileinfomap tp_l90_tiles (Tpp t)
+static inline Tileinfomap *tp_l90_tiles (Tpp t)
 {
-    return (t->l90_tiles);
+    return (&t->l90_tiles);
 }
 
-static inline Tileinfomap tp_l180_tiles (Tpp t)
+static inline Tileinfomap *tp_l180_tiles (Tpp t)
 {
-    return (t->l180_tiles);
+    return (&t->l180_tiles);
 }
 
-static inline Tileinfomap tp_l_tiles (Tpp t)
+static inline Tileinfomap *tp_l_tiles (Tpp t)
 {
-    return (t->l_tiles);
+    return (&t->l_tiles);
 }
 
-static inline Tileinfomap tp_l270_tiles (Tpp t)
+static inline Tileinfomap *tp_l270_tiles (Tpp t)
 {
-    return (t->l270_tiles);
+    return (&t->l270_tiles);
 }
 
-static inline Tileinfomap tp_t_tiles (Tpp t)
+static inline Tileinfomap *tp_t_tiles (Tpp t)
 {
-    return (t->t_tiles);
+    return (&t->t_tiles);
 }
 
-static inline Tileinfomap tp_t90_tiles (Tpp t)
+static inline Tileinfomap *tp_t90_tiles (Tpp t)
 {
-    return (t->t90_tiles);
+    return (&t->t90_tiles);
 }
 
-static inline Tileinfomap tp_t180_tiles (Tpp t)
+static inline Tileinfomap *tp_t180_tiles (Tpp t)
 {
-    return (t->t180_tiles);
+    return (&t->t180_tiles);
 }
 
-static inline Tileinfomap tp_t270_tiles (Tpp t)
+static inline Tileinfomap *tp_t270_tiles (Tpp t)
 {
-    return (t->t270_tiles);
+    return (&t->t270_tiles);
 }
 
-static inline Tileinfomap tp_x_tiles (Tpp t)
+static inline Tileinfomap *tp_x_tiles (Tpp t)
 {
-    return (t->x_tiles);
+    return (&t->x_tiles);
 }
 
 Tilep tp_first_tile(Tpp tp);

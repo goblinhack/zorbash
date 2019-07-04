@@ -5,7 +5,7 @@
 
 #include <algorithm>
 #include "my_main.h"
-#include "my_thing.h"
+#include "my_game.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include <vector>
@@ -133,7 +133,7 @@ public:
         }
 
         auto distance_to_nexthop = dmap->val[nexthop.x][nexthop.y];
-        auto cost = current->cost.cost + 
+        auto cost = current->cost.cost +
                     distance_to_nexthop + heuristic(nexthop);
         auto neighbor = open[nexthop.x][nexthop.y];
         if (!neighbor) {
@@ -258,7 +258,7 @@ static void dump (Dmap *dmap, point start)
                 sprintf(buf, "##  ");
             } else if (e == DMAP_IS_PASSABLE) {
                 sprintf(buf, "_   ");
-            } else if ((e > DMAP_IS_PASSABLE) && 
+            } else if ((e > DMAP_IS_PASSABLE) &&
                         (e < DMAP_IS_PASSABLE + 100)) {
                 sprintf(buf, ">%-3d", e - DMAP_IS_PASSABLE);
             } else if (e > 0) {

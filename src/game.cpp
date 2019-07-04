@@ -5,9 +5,6 @@
 
 #include "my_game.h"
 #include "my_dungeon.h"
-#include "my_thing.h"
-#include "my_light.h"
-#include "my_fluid.h"
 
 class Game game;
 
@@ -19,10 +16,13 @@ void game_fini (void)
 {
     LOG("finishing: destroy all things");
 
-    while (game.state.map.all_things.size()) {
-        auto iter = game.state.map.all_things.begin();
-        delete iter->second;
-    }
+    //
+    // Do we need this?
+    // 
+    //while (game.state.map.all_things.size()) {
+    //    auto iter = game.state.map.all_things.begin();
+    //    delete iter->second;
+    //}
 }
 
 static void game_place_walls (class Dungeon *d,
@@ -708,6 +708,18 @@ static void game_place_dirt (class Dungeon *d)
     }
 }
 
+static void game_place_grass (class Dungeon *d)
+{_
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            if (!game.state.map.is_anything_at(x, y)) {
+                auto tp = tp_random_grass();
+                (void) thing_new(tp_name(tp), fpoint(x, y));
+            }
+        }
+    }
+}
+
 static void game_place_entrance (class Dungeon *d, std::string what)
 {_
     for (auto x = 0; x < DUN_WIDTH; x++) {
@@ -878,6 +890,7 @@ _
         game_place_deep_water(dungeon, "deep_water1");
         //fluid_init();
         game_place_random_blood(dungeon);
+        game_place_grass(dungeon);
 
         for (auto x = 0; x < DUN_WIDTH; x++) {
             for (auto y = 0; y < DUN_HEIGHT; y++) {

@@ -593,6 +593,40 @@ public:
         return false;
     }
 
+    bool is_grass (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto v = Charmap::all_charmaps[c];
+
+            if (v.is_grass) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_grass_fast (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc_fast(x, y, d);
+            auto v = Charmap::all_charmaps[c];
+
+            if (v.is_grass) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool is_secret_corridor_at (const int x, const int y)
     {
         if (is_oob(x, y)) {

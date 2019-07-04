@@ -18,6 +18,8 @@ typedef std::unordered_map< uint32_t, Thingp > Things;
 typedef class Light* Lightp;
 typedef std::unordered_map< uint32_t, Lightp > Lights;
 
+#include "my_thing.h"
+
 enum {
     MAP_DEPTH_FLOOR,
     MAP_DEPTH_WATER,
@@ -52,29 +54,79 @@ private:
     uint8_t                    _is_deep_water[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_grass[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_food[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_key[MAP_WIDTH][MAP_HEIGHT] = {};
 public:
-    Lights                     all_lights;
-    std::unordered_map<uint32_t, Lightp>
-                               lights[MAP_WIDTH][MAP_HEIGHT];
+    //
+    // Global all things
+    //
     Things                     all_things;
+
+    //
+    // Global all things that move
+    //
     Things                     all_active_things;
 
     //
-    // Probably want map vs unordered_map so walk order is the same
-    // Think of unordered_map as a hash table.
+    // Display order sorted things
     //
-    std::unordered_map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
-    std::unordered_map<uint32_t, Thingp> all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
-    std::unordered_map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
+    ThingDisplayOrder all_display_things_at[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
+
+    //
+    // All things
+    //
+    std::map<uint32_t, Thingp>
+                    all_things_at[MAP_WIDTH][MAP_HEIGHT];
+    //
+    // Things that move around
+    //
+    std::map<uint32_t, Thingp>
+                    all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
+    //
+    // Things that move around and things that do not, but are interesting,
+    // like food
+    //
+    std::map<uint32_t, Thingp>
+                    all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
+    //
+    // Things that block progress
+    //
+    std::map<uint32_t, Thingp>
+                    all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
+
+    //
+    // Global lights
+    //
+    Lights                     all_lights;
+
+    //
+    // All lights at a map cell
+    //
+    std::unordered_map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
+
+    bool is_anything_at (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (false);
+        }
+        return (all_things_at[p.x][p.y].size());
+    }
+
+    bool is_anything_at (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (false);
+        }
+        return (all_things_at[x][y].size());
+    }
 
     bool is_lava (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_lava[p.x][p.y]);
     }
@@ -82,7 +134,7 @@ public:
     bool is_lava (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_lava[x][y]);
     }
@@ -106,7 +158,7 @@ public:
     bool is_blood (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_blood[p.x][p.y]);
     }
@@ -114,7 +166,7 @@ public:
     bool is_blood (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_blood[x][y]);
     }
@@ -138,7 +190,7 @@ public:
     bool is_water (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_water[p.x][p.y]);
     }
@@ -146,7 +198,7 @@ public:
     bool is_water (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_water[x][y]);
     }
@@ -170,7 +222,7 @@ public:
     bool is_deep_water (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_deep_water[p.x][p.y]);
     }
@@ -178,7 +230,7 @@ public:
     bool is_deep_water (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_deep_water[x][y]);
     }
@@ -202,7 +254,7 @@ public:
     bool is_wall (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_wall[p.x][p.y]);
     }
@@ -210,7 +262,7 @@ public:
     bool is_wall (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_wall[x][y]);
     }
@@ -234,7 +286,7 @@ public:
     bool is_solid (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_solid[p.x][p.y]);
     }
@@ -242,7 +294,7 @@ public:
     bool is_solid (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_solid[x][y]);
     }
@@ -266,7 +318,7 @@ public:
     bool is_light (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_light[p.x][p.y]);
     }
@@ -274,7 +326,7 @@ public:
     bool is_light (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_light[x][y]);
     }
@@ -298,7 +350,7 @@ public:
     bool is_corridor (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_corridor[p.x][p.y]);
     }
@@ -306,7 +358,7 @@ public:
     bool is_corridor (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_corridor[x][y]);
     }
@@ -330,7 +382,7 @@ public:
     bool is_dirt (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_dirt[p.x][p.y]);
     }
@@ -338,7 +390,7 @@ public:
     bool is_dirt (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_dirt[x][y]);
     }
@@ -359,10 +411,42 @@ public:
         _is_dirt[x][y] = false;
     }
 
+    bool is_grass (const point &p)
+    {
+        if (is_oob(p.x, p.y)) {
+            return (false);
+        }
+        return (_is_grass[p.x][p.y]);
+    }
+
+    bool is_grass (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return (false);
+        }
+        return (_is_grass[x][y]);
+    }
+
+    void set_grass (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_grass[x][y] = true;
+    }
+
+    void unset_grass (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            return;
+        }
+        _is_grass[x][y] = false;
+    }
+
     bool is_floor (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_floor[p.x][p.y]);
     }
@@ -370,7 +454,7 @@ public:
     bool is_floor (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_floor[x][y]);
     }
@@ -394,7 +478,7 @@ public:
     bool is_monst (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_monst[p.x][p.y]);
     }
@@ -402,7 +486,7 @@ public:
     bool is_monst (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_monst[x][y]);
     }
@@ -426,7 +510,7 @@ public:
     bool is_food (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_food[x][y]);
     }
@@ -450,7 +534,7 @@ public:
     bool is_rock (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_rock[p.x][p.y]);
     }
@@ -458,7 +542,7 @@ public:
     bool is_rock (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_rock[x][y]);
     }
@@ -482,7 +566,7 @@ public:
     bool is_key (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_key[p.x][p.y]);
     }
@@ -490,7 +574,7 @@ public:
     bool is_key (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_key[x][y]);
     }
@@ -514,7 +598,7 @@ public:
     bool is_gfx_large_shadow_caster (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_gfx_large_shadow_caster[p.x][p.y]);
     }
@@ -522,7 +606,7 @@ public:
     bool is_gfx_large_shadow_caster (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_gfx_large_shadow_caster[x][y]);
     }
@@ -546,7 +630,7 @@ public:
     bool is_door (const point &p)
     {
         if (is_oob(p.x, p.y)) {
-            return (true);
+            return (false);
         }
         return (_is_door[p.x][p.y]);
     }
@@ -554,7 +638,7 @@ public:
     bool is_door (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            return (true);
+            return (false);
         }
         return (_is_door[x][y]);
     }
@@ -581,6 +665,7 @@ public:
         memset(_is_corridor, 0, sizeof(_is_corridor));
         memset(_is_deep_water, 0, sizeof(_is_deep_water));
         memset(_is_dirt, 0, sizeof(_is_dirt));
+        memset(_is_grass, 0, sizeof(_is_grass));
         memset(_is_floor, 0, sizeof(_is_floor));
         memset(_is_key, 0, sizeof(_is_key));
         memset(_is_lava, 0, sizeof(_is_lava));

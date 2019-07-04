@@ -356,6 +356,9 @@ class Tp:
     def set_is_dirt(self, value):
         zx.tp_set_is_dirt(self, value)
 
+    def set_is_grass(self, value):
+        zx.tp_set_is_grass(self, value)
+
     def set_is_lava(self, value):
         zx.tp_set_is_lava(self, value)
 

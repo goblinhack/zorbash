@@ -5,7 +5,7 @@
 
 #include "my_main.h"
 #include "my_tile.h"
-#include "my_thing.h"
+#include "my_game.h"
 
 #undef DEBUG_COLLISION
 
@@ -584,7 +584,7 @@ bool Thing::handle_collisions (void)
             auto dy = y - mid_at.y;
             for (auto p : game.state.map.all_interesting_things_at[x][y]) {
                 auto it = p.second;
-                
+
                 if (this == it) {
                     continue;
                 }

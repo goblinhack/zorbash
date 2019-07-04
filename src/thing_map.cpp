@@ -4,13 +4,10 @@
 //
 
 #include "my_main.h"
-#include "my_thing.h"
 #include "my_tile.h"
 #include "my_tile_info.h"
 #include "my_tex.h"
 #include "my_game.h"
-#include "my_gl.h"
-#include "my_light.h"
 #include "my_gl.h"
 #include <algorithm>
 
@@ -40,9 +37,9 @@ static void thing_map_scroll_do (void)
 
     game.state.map_at.x = std::max(game.state.map_at.x, 0.0);
     game.state.map_at.y = std::max(game.state.map_at.y, 0.0);
-    game.state.map_at.x = std::min(game.state.map_at.x, 
+    game.state.map_at.x = std::min(game.state.map_at.x,
                              (double)MAP_WIDTH - TILES_ACROSS);
-    game.state.map_at.y = std::min(game.state.map_at.y, 
+    game.state.map_at.y = std::min(game.state.map_at.y,
                              (double)MAP_HEIGHT - TILES_DOWN);
 
     //
@@ -289,7 +286,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
                 if (!tp_is_water(t->tp)) {
                     continue;
@@ -331,7 +328,7 @@ static void thing_blit_water (int minx, int miny, int minz,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
                 if (!tp_is_water(t->tp) && !tp_is_deep_water(t->tp)) {
                     continue;
@@ -449,7 +446,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
-                for (auto p : thing_display_order[x][y][z]) {
+                for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                     auto t = p.second;
                     verify(t);
 
@@ -591,7 +588,7 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
                 if (!tp_is_deep_water(t->tp)) {
                     continue;
@@ -783,34 +780,34 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
                 t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height * 2, 
+                        offset_y + game.config.one_pixel_gl_height * 2,
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height * 2, 
+                        offset_y + game.config.one_pixel_gl_height * 2,
                         x, y);
                 t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height, 
+                        offset_y + game.config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height, 
+                        offset_y + game.config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y - game.config.one_pixel_gl_height * 2, 
+                        offset_y - game.config.one_pixel_gl_height * 2,
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y - game.config.one_pixel_gl_height * 2, 
+                        offset_y - game.config.one_pixel_gl_height * 2,
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height * 3, 
+                        offset_y + game.config.one_pixel_gl_height * 3,
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height * 2, 
+                        offset_y + game.config.one_pixel_gl_height * 2,
                         x, y);
                 t->blit(offset_x,
-                        offset_y - game.config.one_pixel_gl_height * 2, 
+                        offset_y - game.config.one_pixel_gl_height * 2,
                         x, y);
             }
         }
@@ -827,22 +824,22 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
                 t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height, 
+                        offset_y + game.config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height, 
+                        offset_y + game.config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height, 
+                        offset_y - game.config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height, 
+                        offset_y - game.config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height, 
+                        offset_y + game.config.one_pixel_gl_height,
                         x, y);
             }
         }
@@ -861,7 +858,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
                 t->blit(offset_x, offset_y, x, y);
             }
@@ -964,7 +961,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
                 t->blit(offset_x + game.config.one_pixel_gl_width,
                         offset_y + game.config.one_pixel_gl_height,
@@ -1006,7 +1003,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
                 t->blit(offset_x, offset_y, x, y);
             }
@@ -1022,7 +1019,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : thing_display_order[x][y][z]) {
+            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                 auto t = p.second;
 
                 auto tile = blood[0][0];
@@ -1057,7 +1054,7 @@ static void thing_blit_things (int minx, int miny, int minz,
 
     //thing_map_blit_background(offset_x, offset_y);
     //thing_map_blit_background_lit(offset_x, offset_y);
-    
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 
@@ -1068,7 +1065,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     { auto z = MAP_DEPTH_FLOOR;
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                for (auto p : thing_display_order[x][y][z]) {
+                for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                     auto t = p.second;
                     verify(t);
                     t->blit(offset_x, offset_y, x, y);
@@ -1091,7 +1088,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             for (auto z = 0; z < MAP_DEPTH; z++) {
-                for (auto p : thing_display_order[x][y][z]) {
+                for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                     auto t = p.second;
                     auto tp = t->tp;
 
@@ -1148,7 +1145,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
-                for (auto p : thing_display_order[x][y][z]) {
+                for (auto p : game.state.map.all_display_things_at[x][y][z]) {
                     auto t = p.second;
                     t->blit(offset_x, offset_y, x, y);
                 }

@@ -692,6 +692,11 @@ public:
         return (tp_is_dirt(tp));
     }
 
+    int is_grass (void)
+    {
+        return (tp_is_grass(tp));
+    }
+
     int is_blood (void)
     {
         return (tp_is_blood(tp));
@@ -838,30 +843,15 @@ public:
     }
 };
 
-class ThingDisplaySortKey {
-public:
-    ThingDisplaySortKey (void)
-    {
-    }
-
-    ThingDisplaySortKey (uint8_t depth, double y, Thingp t) :
-                        depth(depth), y(y), t(t)
-    {
-    }
-
-    ~ThingDisplaySortKey (void)
-    {
-    }
-
-    int depth {};
-    double y {};
-    Thingp t {};
+struct ThingDisplaySortKey {
+    int16_t y;
+    uint32_t id;
 };
 
-struct thing_display_sort_cmp : public std::binary_function<class ThingDisplaySortKey, class ThingDisplaySortKey, bool>
+struct thing_display_sort_cmp : public std::binary_function<struct ThingDisplaySortKey, struct ThingDisplaySortKey, bool>
 {
-    bool operator()(const ThingDisplaySortKey& lhs,
-                    const ThingDisplaySortKey& rhs) const
+    bool operator()(const struct ThingDisplaySortKey& lhs,
+                    const struct ThingDisplaySortKey& rhs) const
     {
         if (lhs.y < rhs.y) {
             return (true);
@@ -869,19 +859,11 @@ struct thing_display_sort_cmp : public std::binary_function<class ThingDisplaySo
             return (false);
         }
 
-        if (lhs.depth < rhs.depth) {
+        if (lhs.id < rhs.id) {
             return (true);
-        } else if (lhs.depth > rhs.depth) {
+        } else {
             return (false);
         }
-
-        if (lhs.t->id < rhs.t->id) {
-            return (true);
-        } else if (lhs.t->id > rhs.t->id) {
-            return (false);
-        }
-
-        return (false);
     }
 };
 
@@ -895,9 +877,8 @@ extern void thing_map_scroll_to_player(void);
 /*
  * thing_display.cpp
  */
-typedef std::map< ThingDisplaySortKey, Thingp, thing_display_sort_cmp > ThingDisplayOrder;
-extern ThingDisplayOrder thing_display_order[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
-
+typedef std::map< struct ThingDisplaySortKey, Thingp, 
+                  thing_display_sort_cmp > ThingDisplayOrder;
 /*
  * thing_move.cpp
  */

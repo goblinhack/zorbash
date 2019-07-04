@@ -5,7 +5,7 @@
 
 #include "my_python.h"
 #include "my_py_tp.h"
-#include "my_thing.h"
+#include "my_game.h"
 
 PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
@@ -551,7 +551,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         DIE("no tiles for [%s]", tile);
     }
 
-    auto t = std::make_shared< class Tileinfo >();
+    auto t = new Tileinfo();
     auto result = tiles->insert(std::make_pair(index, t));
 
     if (result.second == false) {
@@ -766,6 +766,7 @@ TP_BODY_SET_INT(ai_scent_distance)
 TP_BODY_SET_INT(is_ripple)
 TP_BODY_SET_INT(is_light_strength)
 TP_BODY_SET_INT(is_dirt)
+TP_BODY_SET_INT(is_grass)
 TP_BODY_SET_INT(is_blood)
 TP_BODY_SET_INT(gfx_animated_can_vflip)
 TP_BODY_SET_INT(gfx_small_shadow_caster)

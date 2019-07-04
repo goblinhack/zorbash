@@ -9,8 +9,6 @@
 #include "my_ascii.h"
 #include "my_time.h"
 #include "my_player.h"
-#include "my_thing.h"
-#include "my_fluid.h"
 
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);

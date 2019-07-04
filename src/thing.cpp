@@ -4,7 +4,6 @@
 //
 
 #include "my_game.h"
-#include "my_thing.h"
 #include "my_tile_info.h"
 #include "my_color.h"
 #include "my_dmap.h"
@@ -50,6 +49,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     }
 
     t->id = id;
+
     auto p = std::make_pair(t->id, t);
     auto result = game.state.map.all_things.insert(p);
     if (result.second == false) {
@@ -217,6 +217,9 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     }
     if (tp_is_dirt(tp)) {
         game.state.map.set_dirt(new_at.x, new_at.y);
+    }
+    if (tp_is_grass(tp)) {
+        game.state.map.set_grass(new_at.x, new_at.y);
     }
     if (tp_is_monst(tp)) {
         game.state.map.set_monst(new_at.x, new_at.y);
@@ -417,7 +420,7 @@ void Thing::remove_hooks ()
     if (owned_count) {
         log("remove remaining %u owned things", owned_count);
 
-        for (auto i : game.state.map.all_things) {
+        for (auto i : game.state.map.all_active_things) {
             Thingp t = i.second;
             auto o = t->get_owner();
             if (o && (o == t)) {
@@ -490,7 +493,7 @@ void Thing::destroy (void)
         auto a = &game.state.map.all_things;
         auto iter = a->find(id);
         if (iter != a->end()) {
-            if (!is_active()) {
+            if (is_active()) {
                 log("erasing from all things");
             }
             game.state.map.all_things.erase(iter);
@@ -505,7 +508,7 @@ void Thing::destroy (void)
         auto a = &game.state.map.all_active_things;
         auto iter = a->find(id);
         if (iter != a->end()) {
-            if (!is_active()) {
+            if (is_active()) {
                 log("erasing from active things");
             }
             game.state.map.all_active_things.erase(iter);
@@ -547,6 +550,9 @@ void Thing::destroy (void)
     }
     if (is_dirt()) {
         game.state.map.unset_dirt(old_at.x, old_at.y);
+    }
+    if (is_grass()) {
+        game.state.map.unset_grass(old_at.x, old_at.y);
     }
     if (is_monst()) {
         game.state.map.unset_monst(old_at.x, old_at.y);
@@ -658,7 +664,7 @@ std::string Thing::to_string (void)
     verify(this);
     verify(tp);
     return (string_sprintf("%u(%s%s) at (%g,%g)",
-                           id, tp->name.c_str(), 
+                           id, tp->name.c_str(),
                            is_dead ? "/dead" : "",
                            mid_at.x, mid_at.y));
 }

@@ -4,7 +4,7 @@
 //
 
 #include "my_tile_info.h"
-#include "my_thing.h"
+#include "my_game.h"
 
 void Thing::animate (void)
 {_
@@ -12,7 +12,6 @@ void Thing::animate (void)
 
     Tileinfop tile;
     Tileinfop otile;
-    Tileinfomap tiles;
     Tpp tp = t->tp;
 
     otile = tile = t->current_tileinfo;
@@ -36,8 +35,8 @@ void Thing::animate (void)
         }
     }
 
-    tiles = tp_tiles(tp);
-    if (tiles.empty()) {
+    auto tiles = tp_tiles(tp);
+    if (!tiles || tiles->empty()) {
         return;
     }
 
@@ -85,7 +84,7 @@ void Thing::animate (void)
     //
     // Find a tile that matches the things current mode.
     //
-    uint32_t size = tiles.size();
+    uint32_t size = tiles->size();
     uint32_t tries = 0;
 
     if (!chose_tile) {

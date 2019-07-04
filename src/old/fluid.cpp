@@ -38,7 +38,7 @@ void fluid_init (void)
     {
         for (y = 0; y < DUN_HEIGHT; y++) {
             for (x = 0; x < DUN_WIDTH; x++) {
-                for (auto p : thing_display_order[x][y][z]) {
+                for (auto p : game.state.map.all_things_at[x][y][z]) {
                     auto t = p.second;
                     if (tp_is_water(t->tp) || tp_is_deep_water(t->tp)) {
                         t->dead("place water");
