@@ -12,6 +12,7 @@ static Tpmap tp_map;
 static Tpmap_create_order tp_create_order_map;
 static Tpmap_create_order tp_monst;
 static Tpmap_create_order tp_food;
+static Tpmap_create_order tp_dirt;
 static Tpmap_create_order tp_ripples;
 static Tpmap_create_order tp_keys;
 static Tpmap_create_order tp_blood;
@@ -161,6 +162,14 @@ void tp_init_after_loading (void)
                 ERR("thing template insert food [%s] failed", tp_name(tp).c_str());
             }
         }
+        if (tp_is_dirt(tp)) {
+            static unsigned int id;
+            id++;
+            auto result = tp_dirt.insert(std::make_pair(id, tp));
+            if (result.second == false) {
+                ERR("thing template insert dirt [%s] failed", tp_name(tp).c_str());
+            }
+        }
         if (tp_is_ripple(tp)) {
             static unsigned int id;
             id++;
@@ -239,6 +248,19 @@ Tpp tp_random_food (void)
     auto m = myrand() % n;
 
     auto iter = tp_food.begin();
+    while (m--) {
+        iter++;
+    }
+
+    return (iter->second);
+}
+
+Tpp tp_random_dirt (void)
+{_
+    auto n = tp_dirt.size();
+    auto m = myrand() % n;
+
+    auto iter = tp_dirt.begin();
     while (m--) {
         iter++;
     }

@@ -215,6 +215,7 @@ Tpp tp_find_name(std::string name);
 void tp_init_after_loading(void);
 Tpp tp_random_monst(void);
 Tpp tp_random_food(void);
+Tpp tp_random_dirt(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_key(void);
 Tpp tp_random_blood(void);
