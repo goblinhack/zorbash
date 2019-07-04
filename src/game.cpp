@@ -582,7 +582,6 @@ static void game_place_food (class Dungeon *d)
             }
 
             auto tp = tp_random_food();
-
             (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
@@ -697,13 +696,13 @@ static void game_place_corridor (class Dungeon *d,
     }
 }
 
-static void game_place_dirt (class Dungeon *d,
-                             std::string what)
+static void game_place_dirt (class Dungeon *d)
 {_
     for (auto x = 1; x < DUN_WIDTH - 1; x++) {
         for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
             if (!d->is_anything_at(x, y) || d->is_dirt(x, y)) {
-                (void) thing_new(what, fpoint(x, y));
+                auto tp = tp_random_dirt();
+                (void) thing_new(tp_name(tp), fpoint(x, y));
             }
         }
     }
@@ -873,7 +872,7 @@ _
         game_place_rocks(dungeon, "rock1", 3, 2, 1, tries);
         game_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
         game_place_remaining_rocks(dungeon, "rock1");
-        game_place_dirt(dungeon, "dirt1");
+        game_place_dirt(dungeon);
         game_place_lava(dungeon, "lava1");
         game_place_water(dungeon, "water1");
         game_place_deep_water(dungeon, "deep_water1");
