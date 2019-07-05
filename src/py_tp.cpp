@@ -465,9 +465,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         DIE("%s, cannot find tp %s", __FUNCTION__, tp_name);	
     }	
 	
-    static unsigned int index;
-    index++;
-
     Tileinfomap *tiles = nullptr;
     switch (dir) {
     case THING_DIR_NONE:
@@ -552,11 +549,8 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     }
 
     auto t = new Tileinfo();
-    auto result = tiles->insert(std::make_pair(index, t));
-
-    if (result.second == false) {
-        DIE("tile insert name [%s] failed", tile);
-    }
+    t->index = tiles->size();
+    tiles->push_back(t);
 
     if (tile && *tile) {
         t->tile = tile_find(tile);
@@ -568,7 +562,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     }
 
     t->tilename = std::string(tile ? tile : "");
-    t->index = index;
     t->delay_ms = delay_ms;
     t->is_moving = is_moving;
 

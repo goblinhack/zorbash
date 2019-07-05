@@ -8,7 +8,7 @@
 #include "my_tile.h"
 #include "my_dice.h"
 
-static Tpmap tp_map;
+Tpmap tp_map;
 static Tpmap_create_order tp_create_order_map;
 static Tpmap_create_order tp_monst;
 static Tpmap_create_order tp_food;
@@ -18,7 +18,7 @@ static Tpmap_create_order tp_ripples;
 static Tpmap_create_order tp_keys;
 static Tpmap_create_order tp_blood;
 static Tpmap_create_order tp_wall;
-static Tpmap_create_order tp_floors;
+static Tpmap_create_order tp_floor;
 static Tpmap_create_order tp_deco;
 static Tpmap_create_order tp_wall_deco;
 
@@ -60,16 +60,7 @@ Tpp tp_load (int id, std::string name)
         }
     }
 
-    {
-        static unsigned int id;
-        id++;
-
-        auto result = tp_create_order_map.insert(std::make_pair(id, t));
-        if (result.second == false) {
-            ERR("thing template insert create order [%s] failed", name.c_str());
-        }
-    }
-
+    tp_create_order_map.push_back(t);
     t->id = id;
 
     return (t);
@@ -79,24 +70,6 @@ void tp_update (Tpp t)
 {_
     t->nutrition = Dice(t->nutrition_hd);
     t->bite_damage = Dice(t->bite_damage_hd);
-}
-
-//
-// Find an existing thing.
-//
-Tpp tp_find (std::string name)
-{_
-    if (name == "") {
-        ERR("no name for tp find");
-    }
-
-    auto result = tp_map.find(name);
-
-    if (result == tp_map.end()) {
-        return (0);
-    }
-
-    return (result->second);
 }
 
 //
@@ -148,235 +121,92 @@ void tp_init_after_loading (void)
     for (auto t : tp_map) {
         auto tp = t.second;
         if (tp_is_monst(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_monst.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert monst [%s] failed", tp_name(tp).c_str());
-            }
+            tp_monst.push_back(tp);
         }
         if (tp_is_food(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_food.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert food [%s] failed", tp_name(tp).c_str());
-            }
+            tp_food.push_back(tp);
         }
         if (tp_is_dirt(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_dirt.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert dirt [%s] failed", tp_name(tp).c_str());
-            }
+            tp_dirt.push_back(tp);
         }
         if (tp_is_grass(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_grass.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert grass [%s] failed", tp_name(tp).c_str());
-            }
+            tp_grass.push_back(tp);
         }
         if (tp_is_ripple(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_ripples.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert ripple [%s] failed", tp_name(tp).c_str());
-            }
+            tp_ripples.push_back(tp);
         }
         if (tp_is_key(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_keys.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert key [%s] failed", tp_name(tp).c_str());
-            }
+            tp_keys.push_back(tp);
         }
         if (tp_is_blood(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_blood.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert blood [%s] failed", tp_name(tp).c_str());
-            }
+            tp_blood.push_back(tp);
         }
         if (tp_is_wall(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_wall.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert wall [%s] failed", tp_name(tp).c_str());
-            }
+            tp_wall.push_back(tp);
         }
         if (tp_is_floor(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_floors.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert floor [%s] failed", tp_name(tp).c_str());
-            }
+            tp_floor.push_back(tp);
         }
         if (tp_gfx_is_floor_deco(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_deco.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert deco [%s] failed", tp_name(tp).c_str());
-            }
+            tp_deco.push_back(tp);
         }
         if (tp_gfx_is_wall_deco(tp)) {
-            static unsigned int id;
-            id++;
-            auto result = tp_wall_deco.insert(std::make_pair(id, tp));
-            if (result.second == false) {
-                ERR("thing template insert wall_deco [%s] failed", tp_name(tp).c_str());
-            }
+            tp_wall_deco.push_back(tp);
         }
     }
 }
 
 Tpp tp_random_monst (void)
 {_
-    auto n = tp_monst.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_monst.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_monst[myrand() % tp_monst.size()];
 }
 
 Tpp tp_random_food (void)
 {_
-    auto n = tp_food.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_food.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_food[myrand() % tp_food.size()];
 }
 
 Tpp tp_random_dirt (void)
 {_
-    auto n = tp_dirt.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_dirt.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_dirt[myrand() % tp_dirt.size()];
 }
 
 Tpp tp_random_grass (void)
 {_
-    auto n = tp_grass.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_grass.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_grass[myrand() % tp_grass.size()];
 }
 
 Tpp tp_random_ripple (void)
 {_
-    auto n = tp_ripples.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_ripples.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_ripples[myrand() % tp_ripples.size()];
 }
 
 Tpp tp_random_key (void)
 {_
-    auto n = tp_keys.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_keys.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_keys[myrand() % tp_keys.size()];
 }
 
 Tpp tp_random_blood (void)
 {_
-    auto n = tp_blood.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_blood.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_blood[myrand() % tp_blood.size()];
 }
 
 Tpp tp_random_wall (void)
 {_
-    auto n = tp_wall.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_wall.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_wall[myrand() % tp_wall.size()];
 }
 
 Tpp tp_random_floor (void)
 {_
-    auto n = tp_floors.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_floors.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_floor[myrand() % tp_floor.size()];
 }
 
 Tpp tp_random_deco (void)
 {_
-    auto n = tp_deco.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_deco.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_deco[myrand() % tp_deco.size()];
 }
 
 Tpp tp_random_wall_deco (void)
 {_
-    auto n = tp_wall_deco.size();
-    auto m = myrand() % n;
-
-    auto iter = tp_wall_deco.begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return tp_wall_deco[myrand() % tp_wall_deco.size()];
 }

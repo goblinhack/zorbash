@@ -106,11 +106,6 @@ public:
     uint32_t           id {};
 
     /*
-     * Display order
-     */
-    uint8_t            depth;
-
-    /*
      * Grid coordinates.
      */
     fpoint             mid_at;
@@ -137,17 +132,7 @@ public:
     fpoint             last_blit_tl;
     fpoint             last_blit_br;
     float              submerged_offset {};
-
-
-    /*
-     * Physics
-     */
-    float              fall_speed {};
-    float              jump_speed {};
-    float              momentum {};
     float              rot {};
-    fpoint normal_velocity {};
-    fpoint tangent_velocity {};
 
     /*
      * Pointer to common settings for this thing.
@@ -233,16 +218,14 @@ public:
     uint16_t           weapon_tp_id {0};
 
     /*
-     * Who created this thing? e.g. who cast a spell?
-     */
-    uint32_t           owner_thing_id {0};
-
-    /*
      * How many things this thing owns.
      */
     uint16_t           owned_count {0};
 
-    unsigned int       dir:4;
+    /*
+     * Who created this thing? e.g. who cast a spell?
+     */
+    uint32_t           owner_thing_id {0};
 
     /*
      * AI
@@ -255,6 +238,16 @@ public:
      * "memory" below.
      */
     AgeMap             *age_map;
+
+    /*
+     * Display order
+     */
+    uint8_t            depth;
+
+    /*
+     * Direction
+     */
+    unsigned int       dir:4;
 
     /*
      * Update thing_new when adding new bitfields.

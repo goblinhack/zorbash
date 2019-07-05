@@ -146,15 +146,11 @@ uint8_t tile_info_is_dead_on_end_of_anim (Tileinfop t)
 
 Tileinfop tile_info_first (Tileinfomap *tiles)
 {_
-    Tileinfop Tileinfo;
-
     if (!tiles || tiles->empty()) {
         return (0);
     }
 
-    Tileinfo = tiles->begin()->second;
-
-    return (Tileinfo);
+    return ((*tiles)[0]);
 }
 
 Tileinfop tile_info_random (Tileinfomap *tiles)
@@ -163,15 +159,7 @@ Tileinfop tile_info_random (Tileinfomap *tiles)
         return (0);
     }
 
-    auto n = tiles->size();
-    auto m = myrand() % n;
-
-    auto iter = tiles->begin();
-    while (m--) {
-        iter++;
-    }
-
-    return (iter->second);
+    return ((*tiles)[myrand() % tiles->size()]);
 }
 
 Tileinfop tile_info_next (Tileinfomap *tiles, Tileinfop in)
@@ -180,19 +168,10 @@ Tileinfop tile_info_next (Tileinfomap *tiles, Tileinfop in)
         return (0);
     }
 
-    auto cursor = tiles->find(in->index);
-
-    if (cursor == tiles->end()) {
-        return (0);
+    auto cursor = in->index;
+    cursor++;
+    if (cursor >= tiles->size()) {
+        cursor = 0;
     }
-
-    cursor = std::next(cursor);
-
-    if (cursor == tiles->end()) {
-        return (0);
-    }
-
-    auto Tileinfo = cursor->second;
-
-    return (Tileinfo);
+    return ((*tiles)[cursor]);
 }
