@@ -73,29 +73,28 @@ public:
     //
     // Display order sorted things
     //
-    ThingDisplayOrder all_display_things_at[MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
-
+    ThingDisplayOrder          all_display_things_at
+                                 [MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
     //
     // All things
     //
-    std::map<uint32_t, Thingp>
-                    all_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::map<uint32_t, Thingp> all_things_at[MAP_WIDTH][MAP_HEIGHT];
+
     //
     // Things that move around
     //
-    std::map<uint32_t, Thingp>
-                    all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
+
     //
     // Things that move around and things that do not, but are interesting,
     // like food
     //
-    std::map<uint32_t, Thingp>
-                    all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::map<uint32_t, Thingp> all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
+
     //
     // Things that block progress
     //
-    std::map<uint32_t, Thingp>
-                    all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     //
     // Global lights
@@ -109,15 +108,15 @@ public:
 
     bool is_anything_at (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (all_things_at[p.x][p.y].size());
+        return (!all_things_at[p.x][p.y].empty());
     }
 
     bool is_anything_at (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (all_things_at[x][y].size());
@@ -125,7 +124,7 @@ public:
 
     bool is_lava (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_lava[p.x][p.y]);
@@ -133,7 +132,7 @@ public:
 
     bool is_lava (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_lava[x][y]);
@@ -141,7 +140,7 @@ public:
 
     void set_lava (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_lava[x][y] = true;
@@ -149,7 +148,7 @@ public:
 
     void unset_lava (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_lava[x][y] = false;
@@ -157,7 +156,7 @@ public:
 
     bool is_blood (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_blood[p.x][p.y]);
@@ -165,7 +164,7 @@ public:
 
     bool is_blood (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_blood[x][y]);
@@ -173,7 +172,7 @@ public:
 
     void set_blood (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_blood[x][y] = true;
@@ -181,7 +180,7 @@ public:
 
     void unset_blood (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_blood[x][y] = false;
@@ -189,7 +188,7 @@ public:
 
     bool is_water (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_water[p.x][p.y]);
@@ -197,7 +196,7 @@ public:
 
     bool is_water (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_water[x][y]);
@@ -205,7 +204,7 @@ public:
 
     void set_water (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_water[x][y] = true;
@@ -213,7 +212,7 @@ public:
 
     void unset_water (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_water[x][y] = false;
@@ -221,7 +220,7 @@ public:
 
     bool is_deep_water (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_deep_water[p.x][p.y]);
@@ -229,7 +228,7 @@ public:
 
     bool is_deep_water (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_deep_water[x][y]);
@@ -237,7 +236,7 @@ public:
 
     void set_deep_water (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_deep_water[x][y] = true;
@@ -245,7 +244,7 @@ public:
 
     void unset_deep_water (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_deep_water[x][y] = false;
@@ -253,7 +252,7 @@ public:
 
     bool is_wall (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_wall[p.x][p.y]);
@@ -261,7 +260,7 @@ public:
 
     bool is_wall (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_wall[x][y]);
@@ -269,7 +268,7 @@ public:
 
     void set_wall (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_wall[x][y] = true;
@@ -277,7 +276,7 @@ public:
 
     void unset_wall (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_wall[x][y] = false;
@@ -285,7 +284,7 @@ public:
 
     bool is_solid (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_solid[p.x][p.y]);
@@ -293,7 +292,7 @@ public:
 
     bool is_solid (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_solid[x][y]);
@@ -301,7 +300,7 @@ public:
 
     void set_solid (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_solid[x][y] = true;
@@ -309,7 +308,7 @@ public:
 
     void unset_solid (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_solid[x][y] = false;
@@ -317,7 +316,7 @@ public:
 
     bool is_light (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_light[p.x][p.y]);
@@ -325,7 +324,7 @@ public:
 
     bool is_light (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_light[x][y]);
@@ -333,7 +332,7 @@ public:
 
     void set_light (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_light[x][y] = true;
@@ -341,7 +340,7 @@ public:
 
     void unset_light (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_light[x][y] = false;
@@ -349,7 +348,7 @@ public:
 
     bool is_corridor (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_corridor[p.x][p.y]);
@@ -357,7 +356,7 @@ public:
 
     bool is_corridor (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_corridor[x][y]);
@@ -365,7 +364,7 @@ public:
 
     void set_corridor (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_corridor[x][y] = true;
@@ -373,7 +372,7 @@ public:
 
     void unset_corridor (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_corridor[x][y] = false;
@@ -381,7 +380,7 @@ public:
 
     bool is_dirt (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_dirt[p.x][p.y]);
@@ -389,7 +388,7 @@ public:
 
     bool is_dirt (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_dirt[x][y]);
@@ -397,7 +396,7 @@ public:
 
     void set_dirt (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_dirt[x][y] = true;
@@ -405,7 +404,7 @@ public:
 
     void unset_dirt (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_dirt[x][y] = false;
@@ -413,7 +412,7 @@ public:
 
     bool is_grass (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_grass[p.x][p.y]);
@@ -421,7 +420,7 @@ public:
 
     bool is_grass (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_grass[x][y]);
@@ -429,7 +428,7 @@ public:
 
     void set_grass (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_grass[x][y] = true;
@@ -437,7 +436,7 @@ public:
 
     void unset_grass (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_grass[x][y] = false;
@@ -445,7 +444,7 @@ public:
 
     bool is_floor (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_floor[p.x][p.y]);
@@ -453,7 +452,7 @@ public:
 
     bool is_floor (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_floor[x][y]);
@@ -461,7 +460,7 @@ public:
 
     void set_floor (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_floor[x][y] = true;
@@ -469,7 +468,7 @@ public:
 
     void unset_floor (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_floor[x][y] = false;
@@ -477,7 +476,7 @@ public:
 
     bool is_monst (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_monst[p.x][p.y]);
@@ -485,7 +484,7 @@ public:
 
     bool is_monst (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_monst[x][y]);
@@ -493,7 +492,7 @@ public:
 
     void set_monst (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_monst[x][y] = true;
@@ -501,7 +500,7 @@ public:
 
     void unset_monst (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_monst[x][y] = false;
@@ -509,7 +508,7 @@ public:
 
     bool is_food (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_food[x][y]);
@@ -517,7 +516,7 @@ public:
 
     void set_food (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_food[x][y] = true;
@@ -525,7 +524,7 @@ public:
 
     void unset_food (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_food[x][y] = false;
@@ -533,7 +532,7 @@ public:
 
     bool is_rock (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_rock[p.x][p.y]);
@@ -541,7 +540,7 @@ public:
 
     bool is_rock (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_rock[x][y]);
@@ -549,7 +548,7 @@ public:
 
     void set_rock (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_rock[x][y] = true;
@@ -557,7 +556,7 @@ public:
 
     void unset_rock (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_rock[x][y] = false;
@@ -565,7 +564,7 @@ public:
 
     bool is_key (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_key[p.x][p.y]);
@@ -573,7 +572,7 @@ public:
 
     bool is_key (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_key[x][y]);
@@ -581,7 +580,7 @@ public:
 
     void set_key (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_key[x][y] = true;
@@ -589,7 +588,7 @@ public:
 
     void unset_key (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_key[x][y] = false;
@@ -597,7 +596,7 @@ public:
 
     bool is_gfx_large_shadow_caster (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_gfx_large_shadow_caster[p.x][p.y]);
@@ -605,7 +604,7 @@ public:
 
     bool is_gfx_large_shadow_caster (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_gfx_large_shadow_caster[x][y]);
@@ -613,7 +612,7 @@ public:
 
     void set_gfx_large_shadow_caster (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_gfx_large_shadow_caster[x][y] = true;
@@ -621,7 +620,7 @@ public:
 
     void unset_gfx_large_shadow_caster (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_gfx_large_shadow_caster[x][y] = false;
@@ -629,7 +628,7 @@ public:
 
     bool is_door (const point &p)
     {
-        if (is_oob(p.x, p.y)) {
+        if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
         return (_is_door[p.x][p.y]);
@@ -637,7 +636,7 @@ public:
 
     bool is_door (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (_is_door[x][y]);
@@ -645,7 +644,7 @@ public:
 
     void set_door (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_door[x][y] = true;
@@ -653,7 +652,7 @@ public:
 
     void unset_door (const int x, const int y)
     {
-        if (is_oob(x, y)) {
+        if (unlikely(is_oob(x, y))) {
             return;
         }
         _is_door[x][y] = false;

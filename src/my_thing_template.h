@@ -18,7 +18,7 @@ typedef std::unordered_map< std::string, Tpp > Tpmap;
 // Use map as walk order is maintained, instead of unordered map where it is
 // not. Think of unordered_map as a hash table.
 //
-typedef std::map< unsigned int, Tpp > Tpmap_create_order;
+typedef std::vector< Tpp > Tpmap_create_order;
 
 #include "my_tile_info.h"
 #include "my_dice.h"
@@ -210,7 +210,6 @@ uint8_t tp_init(void);
 void tp_fini(void);
 Tpp tp_load(int id, std::string file);
 void tp_update(Tpp tp);
-Tpp tp_find(std::string name);
 Tpp tp_find(uint32_t id);
 Tpp tp_find_name(std::string name);
 void tp_init_after_loading(void);
@@ -856,5 +855,21 @@ Tilep tp_first_tile(Tpp tp);
 Tpp string2tp(const char **s);
 Tpp string2tp(std::string &s, int *len);
 Tpp string2tp(std::wstring &s, int *len);
+
+extern Tpmap tp_map;
+
+//
+// Find an existing thing.
+//
+static inline Tpp tp_find (std::string name)
+{_
+    auto result = tp_map.find(name);
+
+    if (result == tp_map.end()) {
+        return (0);
+    }
+
+    return (result->second);
+}
 
 #endif /* THING_TEMPLATE_H */

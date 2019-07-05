@@ -10,7 +10,7 @@
 #include <memory>
 
 typedef class Tileinfo* Tileinfop;
-typedef std::map< unsigned int, class Tileinfo* > Tileinfomap;
+typedef std::vector< class Tileinfo* > Tileinfomap;
 
 #include "my_tile.h"
 
