@@ -17,7 +17,7 @@ def tp_init(name,
 
     x.set_does_nothing(True)
     x.set_is_grass(True)
-    x.set_z_depth(zx.MAP_DEPTH_FOOD)
+    x.set_z_depth(zx.MAP_DEPTH_GRASS)
 
     if tiles is not None:
         for t in tiles:

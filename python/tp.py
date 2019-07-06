@@ -170,11 +170,143 @@ class Tp:
     def set_is_rrr8(self, value):
         zx.tp_set_is_rrr8(self, value)
 
-    def set_is_obstacle(self, value):
-        zx.tp_set_is_obstacle(self, value)
+    def set_is_rrr9(self, value):
+        zx.tp_set_is_rrr9(self, value)
 
     def set_is_rrr10(self, value):
         zx.tp_set_is_rrr10(self, value)
+
+    def set_is_rrr11(self, value):
+        zx.tp_set_is_rrr11(self, value)
+
+    def set_is_rrr12(self, value):
+        zx.tp_set_is_rrr12(self, value)
+
+    def set_is_rrr13(self, value):
+        zx.tp_set_is_rrr13(self, value)
+
+    def set_is_rrr14(self, value):
+        zx.tp_set_is_rrr14(self, value)
+
+    def set_is_rrr15(self, value):
+        zx.tp_set_is_rrr15(self, value)
+
+    def set_is_rrr16(self, value):
+        zx.tp_set_is_rrr16(self, value)
+
+    def set_is_rrr17(self, value):
+        zx.tp_set_is_rrr17(self, value)
+
+    def set_is_rrr18(self, value):
+        zx.tp_set_is_rrr18(self, value)
+
+    def set_is_rrr19(self, value):
+        zx.tp_set_is_rrr19(self, value)
+
+    def set_is_rrr20(self, value):
+        zx.tp_set_is_rrr20(self, value)
+
+    def set_is_rrr21(self, value):
+        zx.tp_set_is_rrr21(self, value)
+
+    def set_is_rrr22(self, value):
+        zx.tp_set_is_rrr22(self, value)
+
+    def set_is_rrr23(self, value):
+        zx.tp_set_is_rrr23(self, value)
+
+    def set_is_rrr24(self, value):
+        zx.tp_set_is_rrr24(self, value)
+
+    def set_is_rrr25(self, value):
+        zx.tp_set_is_rrr25(self, value)
+
+    def set_is_rrr26(self, value):
+        zx.tp_set_is_rrr26(self, value)
+
+    def set_is_rrr27(self, value):
+        zx.tp_set_is_rrr27(self, value)
+
+    def set_is_rrr28(self, value):
+        zx.tp_set_is_rrr28(self, value)
+
+    def set_is_rrr29(self, value):
+        zx.tp_set_is_rrr29(self, value)
+
+    def set_is_rrr30(self, value):
+        zx.tp_set_is_rrr30(self, value)
+
+    def set_is_rrr31(self, value):
+        zx.tp_set_is_rrr31(self, value)
+
+    def set_is_rrr32(self, value):
+        zx.tp_set_is_rrr32(self, value)
+
+    def set_is_rrr33(self, value):
+        zx.tp_set_is_rrr33(self, value)
+
+    def set_is_rrr34(self, value):
+        zx.tp_set_is_rrr34(self, value)
+
+    def set_is_rrr35(self, value):
+        zx.tp_set_is_rrr35(self, value)
+
+    def set_is_rrr36(self, value):
+        zx.tp_set_is_rrr36(self, value)
+
+    def set_is_rrr37(self, value):
+        zx.tp_set_is_rrr37(self, value)
+
+    def set_is_rrr38(self, value):
+        zx.tp_set_is_rrr38(self, value)
+
+    def set_is_rrr39(self, value):
+        zx.tp_set_is_rrr39(self, value)
+
+    def set_is_rrr40(self, value):
+        zx.tp_set_is_rrr40(self, value)
+
+    def set_is_rrr41(self, value):
+        zx.tp_set_is_rrr41(self, value)
+
+    def set_is_rrr42(self, value):
+        zx.tp_set_is_rrr42(self, value)
+
+    def set_is_rrr43(self, value):
+        zx.tp_set_is_rrr43(self, value)
+
+    def set_is_rrr44(self, value):
+        zx.tp_set_is_rrr44(self, value)
+
+    def set_is_rrr45(self, value):
+        zx.tp_set_is_rrr45(self, value)
+
+    def set_is_rrr46(self, value):
+        zx.tp_set_is_rrr46(self, value)
+
+    def set_is_rrr47(self, value):
+        zx.tp_set_is_rrr47(self, value)
+
+    def set_is_rrr48(self, value):
+        zx.tp_set_is_rrr48(self, value)
+
+    def set_is_rrr49(self, value):
+        zx.tp_set_is_rrr49(self, value)
+
+    def set_is_rrr50(self, value):
+        zx.tp_set_is_rrr50(self, value)
+
+    def set_is_snow(self, value):
+        zx.tp_set_is_snow(self, value)
+
+    def set_is_gravel(self, value):
+        zx.tp_set_is_gravel(self, value)
+
+    def set_is_obstacle(self, value):
+        zx.tp_set_is_obstacle(self, value)
+
+    def set_is_soil(self, value):
+        zx.tp_set_is_soil(self, value)
 
     def set_is_attackable(self, value):
         zx.tp_set_is_attackable(self, value)

@@ -315,6 +315,18 @@ void Thing::update_pos (fpoint to)
             game.state.map.unset_grass(old_at.x, old_at.y);
             game.state.map.set_grass(new_at.x, new_at.y);
         }
+        if (is_soil()) {
+            game.state.map.unset_soil(old_at.x, old_at.y);
+            game.state.map.set_soil(new_at.x, new_at.y);
+        }
+        if (is_gravel()) {
+            game.state.map.unset_gravel(old_at.x, old_at.y);
+            game.state.map.set_gravel(new_at.x, new_at.y);
+        }
+        if (is_snow()) {
+            game.state.map.unset_snow(old_at.x, old_at.y);
+            game.state.map.set_snow(new_at.x, new_at.y);
+        }
         if (is_monst()) {
             game.state.map.unset_monst(old_at.x, old_at.y);
             game.state.map.set_monst(new_at.x, new_at.y);

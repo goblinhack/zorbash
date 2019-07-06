@@ -25,6 +25,11 @@ enum {
     MAP_DEPTH_WATER,
     MAP_DEPTH_LAVA,
     MAP_DEPTH_BLOOD,
+#define MAP_DEPTH_LAST_FLOOR_TYPE MAP_DEPTH_BLOOD
+    MAP_DEPTH_SOIL,
+    MAP_DEPTH_GRASS,
+    MAP_DEPTH_GRAVEL,
+    MAP_DEPTH_SNOW,
     MAP_DEPTH_FLOOR_DECO,
     MAP_DEPTH_WALLS,
     MAP_DEPTH_WALLS_DECO,
@@ -36,7 +41,6 @@ enum {
     MAP_DEPTH_WEAPON,
     MAP_DEPTH,
 };
-#define MAP_DEPTH_LAST_FLOOR_TYPE MAP_DEPTH_BLOOD
 
 #include <list>
 
@@ -55,6 +59,9 @@ private:
     uint8_t                    _is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_grass[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_soil[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_gravel[MAP_WIDTH][MAP_HEIGHT] = {};
+    uint8_t                    _is_snow[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_monst[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_food[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -104,7 +111,7 @@ public:
     //
     // All lights at a map cell
     //
-    std::unordered_map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
+    std::map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
 
     bool is_anything_at (const point &p)
     {
@@ -440,6 +447,102 @@ public:
             return;
         }
         _is_grass[x][y] = false;
+    }
+
+    bool is_soil (const point &p)
+    {
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (_is_soil[p.x][p.y]);
+    }
+
+    bool is_soil (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (_is_soil[x][y]);
+    }
+
+    void set_soil (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        _is_soil[x][y] = true;
+    }
+
+    void unset_soil (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        _is_soil[x][y] = false;
+    }
+
+    bool is_gravel (const point &p)
+    {
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (_is_gravel[p.x][p.y]);
+    }
+
+    bool is_gravel (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (_is_gravel[x][y]);
+    }
+
+    void set_gravel (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        _is_gravel[x][y] = true;
+    }
+
+    void unset_gravel (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        _is_gravel[x][y] = false;
+    }
+
+    bool is_snow (const point &p)
+    {
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (_is_snow[p.x][p.y]);
+    }
+
+    bool is_snow (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (_is_snow[x][y]);
+    }
+
+    void set_snow (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        _is_snow[x][y] = true;
+    }
+
+    void unset_snow (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        _is_snow[x][y] = false;
     }
 
     bool is_floor (const point &p)

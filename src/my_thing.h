@@ -323,6 +323,9 @@ public:
     void blit_wall_cladding(fpoint &tl, fpoint &br);
     void blit_rock_cladding(fpoint &tl, fpoint &br);
     void blit_grass_cladding(fpoint &tl, fpoint &br);
+    void blit_soil_cladding(fpoint &tl, fpoint &br);
+    void blit_gravel_cladding(fpoint &tl, fpoint &br);
+    void blit_snow_cladding(fpoint &tl, fpoint &br);
     void blit_shadow(const Tpp &tp, const Tilep &tile,
                      const fpoint &tl, const fpoint &br);
     void blit_shadow_section(const Tpp &tp, const Tilep &tile,
@@ -536,14 +539,234 @@ public:
         return (tp_is_rrr8(tp));
     }
 
-    int is_obstacle (void)
+    int is_rrr9 (void)
     {
-        return (tp_is_obstacle(tp));
+        return (tp_is_rrr9(tp));
     }
 
     int is_rrr10 (void)
     {
         return (tp_is_rrr10(tp));
+    }
+
+    int is_rrr11 (void)
+    {
+        return (tp_is_rrr11(tp));
+    }
+
+    int is_rrr12 (void)
+    {
+        return (tp_is_rrr12(tp));
+    }
+
+    int is_rrr13 (void)
+    {
+        return (tp_is_rrr13(tp));
+    }
+
+    int is_rrr14 (void)
+    {
+        return (tp_is_rrr14(tp));
+    }
+
+    int is_rrr15 (void)
+    {
+        return (tp_is_rrr15(tp));
+    }
+
+    int is_rrr16 (void)
+    {
+        return (tp_is_rrr16(tp));
+    }
+
+    int is_rrr17 (void)
+    {
+        return (tp_is_rrr17(tp));
+    }
+
+    int is_rrr18 (void)
+    {
+        return (tp_is_rrr18(tp));
+    }
+
+    int is_rrr19 (void)
+    {
+        return (tp_is_rrr19(tp));
+    }
+
+    int is_rrr20 (void)
+    {
+        return (tp_is_rrr20(tp));
+    }
+
+    int is_rrr21 (void)
+    {
+        return (tp_is_rrr21(tp));
+    }
+
+    int is_rrr22 (void)
+    {
+        return (tp_is_rrr22(tp));
+    }
+
+    int is_rrr23 (void)
+    {
+        return (tp_is_rrr23(tp));
+    }
+
+    int is_rrr24 (void)
+    {
+        return (tp_is_rrr24(tp));
+    }
+
+    int is_rrr25 (void)
+    {
+        return (tp_is_rrr25(tp));
+    }
+
+    int is_rrr26 (void)
+    {
+        return (tp_is_rrr26(tp));
+    }
+
+    int is_rrr27 (void)
+    {
+        return (tp_is_rrr27(tp));
+    }
+
+    int is_rrr28 (void)
+    {
+        return (tp_is_rrr28(tp));
+    }
+
+    int is_rrr29 (void)
+    {
+        return (tp_is_rrr29(tp));
+    }
+
+    int is_rrr30 (void)
+    {
+        return (tp_is_rrr30(tp));
+    }
+
+    int is_rrr31 (void)
+    {
+        return (tp_is_rrr31(tp));
+    }
+
+    int is_rrr32 (void)
+    {
+        return (tp_is_rrr32(tp));
+    }
+
+    int is_rrr33 (void)
+    {
+        return (tp_is_rrr33(tp));
+    }
+
+    int is_rrr34 (void)
+    {
+        return (tp_is_rrr34(tp));
+    }
+
+    int is_rrr35 (void)
+    {
+        return (tp_is_rrr35(tp));
+    }
+
+    int is_rrr36 (void)
+    {
+        return (tp_is_rrr36(tp));
+    }
+
+    int is_rrr37 (void)
+    {
+        return (tp_is_rrr37(tp));
+    }
+
+    int is_rrr38 (void)
+    {
+        return (tp_is_rrr38(tp));
+    }
+
+    int is_rrr39 (void)
+    {
+        return (tp_is_rrr39(tp));
+    }
+
+    int is_rrr40 (void)
+    {
+        return (tp_is_rrr40(tp));
+    }
+
+    int is_rrr41 (void)
+    {
+        return (tp_is_rrr41(tp));
+    }
+
+    int is_rrr42 (void)
+    {
+        return (tp_is_rrr42(tp));
+    }
+
+    int is_rrr43 (void)
+    {
+        return (tp_is_rrr43(tp));
+    }
+
+    int is_rrr44 (void)
+    {
+        return (tp_is_rrr44(tp));
+    }
+
+    int is_rrr45 (void)
+    {
+        return (tp_is_rrr45(tp));
+    }
+
+    int is_rrr46 (void)
+    {
+        return (tp_is_rrr46(tp));
+    }
+
+    int is_rrr47 (void)
+    {
+        return (tp_is_rrr47(tp));
+    }
+
+    int is_rrr48 (void)
+    {
+        return (tp_is_rrr48(tp));
+    }
+
+    int is_rrr49 (void)
+    {
+        return (tp_is_rrr49(tp));
+    }
+
+    int is_rrr50 (void)
+    {
+        return (tp_is_rrr50(tp));
+    }
+
+    int is_snow (void)
+    {
+        return (tp_is_snow(tp));
+    }
+
+    int is_gravel (void)
+    {
+        return (tp_is_gravel(tp));
+    }
+
+    int is_obstacle (void)
+    {
+        return (tp_is_obstacle(tp));
+    }
+
+    int is_soil (void)
+    {
+        return (tp_is_soil(tp));
     }
 
     int is_attackable (void)
