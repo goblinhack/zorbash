@@ -713,8 +713,12 @@ static void game_place_grass (class Dungeon *d)
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!game.state.map.is_anything_at(x, y)) {
-                auto tp = tp_random_grass();
-                (void) thing_new(tp_name(tp), fpoint(x, y));
+                if (random_range(0, 100) < 50) {
+                    auto tp = tp_random_grass();
+                    (void) thing_new(tp_name(tp), fpoint(x, y));
+                } else {
+                    (void) thing_new("water1", fpoint(x, y));
+                }
             }
         }
     }
