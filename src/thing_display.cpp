@@ -384,6 +384,570 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
     }
 }
 
+void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
+{
+    double dw = game.config.tile_gl_width;
+    double dh = game.config.tile_gl_height;
+
+    int x = (int) mid_at.x;
+    int y = (int) mid_at.y;
+
+    if (unlikely(x <= 0) ||
+        unlikely(y <= 0) ||
+        unlikely(x >= MAP_WIDTH - 1) ||
+        unlikely(y >= MAP_HEIGHT - 1)) {
+        return;
+    }
+
+    if (!game.state.map.is_soil(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, top_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_soil(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bot_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_soil(x - 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tile_blit(tp, left_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_soil(x + 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tile_blit(tp, right_tile, tl2, br2);
+    }
+
+    //
+    // X---
+    // |...
+    // |...
+    //
+    if (!game.state.map.is_soil(x - 1, y - 1) &&
+        !game.state.map.is_soil(x - 1, y) &&
+        !game.state.map.is_soil(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tl_tile, tl2, br2);
+    }
+
+    //
+    // ---X
+    // ...|
+    // ...|
+    //
+    if (!game.state.map.is_soil(x + 1, y - 1) &&
+        !game.state.map.is_soil(x + 1, y) &&
+        !game.state.map.is_soil(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tr_tile, tl2, br2);
+    }
+
+    //
+    //  .|
+    //  .|
+    //  .X--
+    //  ....
+    //
+    if (!game.state.map.is_soil(x + 1, y - 1) &&
+        game.state.map.is_soil(x + 1, y) &&
+        game.state.map.is_soil(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tr_tile, tl2, br2);
+    }
+
+    //
+    //    |.
+    //    |.
+    //  --X.
+    //  ....
+    //
+    if (!game.state.map.is_soil(x - 1, y - 1) &&
+        game.state.map.is_soil(x - 1, y) &&
+        game.state.map.is_soil(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tl_tile, tl2, br2);
+    }
+
+    //
+    // |...
+    // |...
+    // X---
+    //
+    if (!game.state.map.is_soil(x - 1, y + 1) &&
+        !game.state.map.is_soil(x - 1, y) &&
+        !game.state.map.is_soil(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bl_tile, tl2, br2);
+    }
+
+    //
+    // ...|
+    // ...|
+    // ---X
+    //
+    if (!game.state.map.is_soil(x + 1, y + 1) &&
+        !game.state.map.is_soil(x + 1, y) &&
+        !game.state.map.is_soil(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, br_tile, tl2, br2);
+    }
+
+    //
+    // .....
+    // .X---
+    // .|
+    // .|
+    //
+    if (!game.state.map.is_soil(x + 1, y + 1) &&
+        game.state.map.is_soil(x + 1, y) &&
+        game.state.map.is_soil(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, br_tile, tl2, br2);
+    }
+
+    //
+    // ....
+    // --X.
+    //   |.
+    //   |.
+    //
+    if (!game.state.map.is_soil(x - 1, y + 1) &&
+        game.state.map.is_soil(x - 1, y) &&
+        game.state.map.is_soil(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bl_tile, tl2, br2);
+    }
+}
+
+void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
+{
+    double dw = game.config.tile_gl_width;
+    double dh = game.config.tile_gl_height;
+
+    int x = (int) mid_at.x;
+    int y = (int) mid_at.y;
+
+    if (unlikely(x <= 0) ||
+        unlikely(y <= 0) ||
+        unlikely(x >= MAP_WIDTH - 1) ||
+        unlikely(y >= MAP_HEIGHT - 1)) {
+        return;
+    }
+
+    if (!game.state.map.is_gravel(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, top_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_gravel(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bot_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_gravel(x - 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tile_blit(tp, left_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_gravel(x + 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tile_blit(tp, right_tile, tl2, br2);
+    }
+
+    //
+    // X---
+    // |...
+    // |...
+    //
+    if (!game.state.map.is_gravel(x - 1, y - 1) &&
+        !game.state.map.is_gravel(x - 1, y) &&
+        !game.state.map.is_gravel(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tl_tile, tl2, br2);
+    }
+
+    //
+    // ---X
+    // ...|
+    // ...|
+    //
+    if (!game.state.map.is_gravel(x + 1, y - 1) &&
+        !game.state.map.is_gravel(x + 1, y) &&
+        !game.state.map.is_gravel(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tr_tile, tl2, br2);
+    }
+
+    //
+    //  .|
+    //  .|
+    //  .X--
+    //  ....
+    //
+    if (!game.state.map.is_gravel(x + 1, y - 1) &&
+        game.state.map.is_gravel(x + 1, y) &&
+        game.state.map.is_gravel(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tr_tile, tl2, br2);
+    }
+
+    //
+    //    |.
+    //    |.
+    //  --X.
+    //  ....
+    //
+    if (!game.state.map.is_gravel(x - 1, y - 1) &&
+        game.state.map.is_gravel(x - 1, y) &&
+        game.state.map.is_gravel(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tl_tile, tl2, br2);
+    }
+
+    //
+    // |...
+    // |...
+    // X---
+    //
+    if (!game.state.map.is_gravel(x - 1, y + 1) &&
+        !game.state.map.is_gravel(x - 1, y) &&
+        !game.state.map.is_gravel(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bl_tile, tl2, br2);
+    }
+
+    //
+    // ...|
+    // ...|
+    // ---X
+    //
+    if (!game.state.map.is_gravel(x + 1, y + 1) &&
+        !game.state.map.is_gravel(x + 1, y) &&
+        !game.state.map.is_gravel(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, br_tile, tl2, br2);
+    }
+
+    //
+    // .....
+    // .X---
+    // .|
+    // .|
+    //
+    if (!game.state.map.is_gravel(x + 1, y + 1) &&
+        game.state.map.is_gravel(x + 1, y) &&
+        game.state.map.is_gravel(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, br_tile, tl2, br2);
+    }
+
+    //
+    // ....
+    // --X.
+    //   |.
+    //   |.
+    //
+    if (!game.state.map.is_gravel(x - 1, y + 1) &&
+        game.state.map.is_gravel(x - 1, y) &&
+        game.state.map.is_gravel(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bl_tile, tl2, br2);
+    }
+}
+
+void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
+{
+    double dw = game.config.tile_gl_width;
+    double dh = game.config.tile_gl_height;
+
+    int x = (int) mid_at.x;
+    int y = (int) mid_at.y;
+
+    if (unlikely(x <= 0) ||
+        unlikely(y <= 0) ||
+        unlikely(x >= MAP_WIDTH - 1) ||
+        unlikely(y >= MAP_HEIGHT - 1)) {
+        return;
+    }
+
+    if (!game.state.map.is_snow(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, top_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_snow(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bot_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_snow(x - 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tile_blit(tp, left_tile, tl2, br2);
+    }
+
+    if (!game.state.map.is_snow(x + 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tile_blit(tp, right_tile, tl2, br2);
+    }
+
+    //
+    // X---
+    // |...
+    // |...
+    //
+    if (!game.state.map.is_snow(x - 1, y - 1) &&
+        !game.state.map.is_snow(x - 1, y) &&
+        !game.state.map.is_snow(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tl_tile, tl2, br2);
+    }
+
+    //
+    // ---X
+    // ...|
+    // ...|
+    //
+    if (!game.state.map.is_snow(x + 1, y - 1) &&
+        !game.state.map.is_snow(x + 1, y) &&
+        !game.state.map.is_snow(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tr_tile, tl2, br2);
+    }
+
+    //
+    //  .|
+    //  .|
+    //  .X--
+    //  ....
+    //
+    if (!game.state.map.is_snow(x + 1, y - 1) &&
+        game.state.map.is_snow(x + 1, y) &&
+        game.state.map.is_snow(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tr_tile, tl2, br2);
+    }
+
+    //
+    //    |.
+    //    |.
+    //  --X.
+    //  ....
+    //
+    if (!game.state.map.is_snow(x - 1, y - 1) &&
+        game.state.map.is_snow(x - 1, y) &&
+        game.state.map.is_snow(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tp, tl_tile, tl2, br2);
+    }
+
+    //
+    // |...
+    // |...
+    // X---
+    //
+    if (!game.state.map.is_snow(x - 1, y + 1) &&
+        !game.state.map.is_snow(x - 1, y) &&
+        !game.state.map.is_snow(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bl_tile, tl2, br2);
+    }
+
+    //
+    // ...|
+    // ...|
+    // ---X
+    //
+    if (!game.state.map.is_snow(x + 1, y + 1) &&
+        !game.state.map.is_snow(x + 1, y) &&
+        !game.state.map.is_snow(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, br_tile, tl2, br2);
+    }
+
+    //
+    // .....
+    // .X---
+    // .|
+    // .|
+    //
+    if (!game.state.map.is_snow(x + 1, y + 1) &&
+        game.state.map.is_snow(x + 1, y) &&
+        game.state.map.is_snow(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, br_tile, tl2, br2);
+    }
+
+    //
+    // ....
+    // --X.
+    //   |.
+    //   |.
+    //
+    if (!game.state.map.is_snow(x - 1, y + 1) &&
+        game.state.map.is_snow(x - 1, y) &&
+        game.state.map.is_snow(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tp, bl_tile, tl2, br2);
+    }
+}
+
 void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
 {
     double dw = game.config.one_pixel_gl_width;
@@ -990,6 +1554,15 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         if (tp_is_grass(tp)) {
             blit_grass_cladding(blit_tl, blit_br);
         }
+        if (tp_is_soil(tp)) {
+            blit_soil_cladding(blit_tl, blit_br);
+        }
+        if (tp_is_gravel(tp)) {
+            blit_gravel_cladding(blit_tl, blit_br);
+        }
+        if (tp_is_snow(tp)) {
+            blit_snow_cladding(blit_tl, blit_br);
+        }
     }
     gl_rotate = 0;
 
@@ -1061,6 +1634,15 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         }
     }
     if (tp_is_grass(tp)) {
+        return;
+    }
+    if (tp_is_soil(tp)) {
+        return;
+    }
+    if (tp_is_gravel(tp)) {
+        return;
+    }
+    if (tp_is_snow(tp)) {
         return;
     }
 

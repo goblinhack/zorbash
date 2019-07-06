@@ -14,6 +14,9 @@ static Tpmap_create_order tp_monst;
 static Tpmap_create_order tp_food;
 static Tpmap_create_order tp_dirt;
 static Tpmap_create_order tp_grass;
+static Tpmap_create_order tp_soil;
+static Tpmap_create_order tp_gravel;
+static Tpmap_create_order tp_snow;
 static Tpmap_create_order tp_ripples;
 static Tpmap_create_order tp_keys;
 static Tpmap_create_order tp_blood;
@@ -132,6 +135,15 @@ void tp_init_after_loading (void)
         if (tp_is_grass(tp)) {
             tp_grass.push_back(tp);
         }
+        if (tp_is_soil(tp)) {
+            tp_soil.push_back(tp);
+        }
+        if (tp_is_gravel(tp)) {
+            tp_gravel.push_back(tp);
+        }
+        if (tp_is_snow(tp)) {
+            tp_snow.push_back(tp);
+        }
         if (tp_is_ripple(tp)) {
             tp_ripples.push_back(tp);
         }
@@ -174,6 +186,21 @@ Tpp tp_random_dirt (void)
 Tpp tp_random_grass (void)
 {_
     return tp_grass[myrand() % tp_grass.size()];
+}
+
+Tpp tp_random_soil (void)
+{_
+    return tp_soil[myrand() % tp_soil.size()];
+}
+
+Tpp tp_random_gravel (void)
+{_
+    return tp_gravel[myrand() % tp_gravel.size()];
+}
+
+Tpp tp_random_snow (void)
+{_
+    return tp_snow[myrand() % tp_snow.size()];
 }
 
 Tpp tp_random_ripple (void)

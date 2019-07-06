@@ -277,9 +277,13 @@ void Light::calculate (void)
 void lights_calculate (void)
 {
     for (auto x = 0 ; x < DUN_WIDTH; x++) {
+        auto X = ((int)game.state.map_at.x) - (DUN_WIDTH / 2);
         for (auto y = 0 ; y < DUN_HEIGHT; y++) {
-            auto X = ((int)game.state.map_at.x) - (DUN_WIDTH / 2);
             auto Y = ((int)game.state.map_at.y) - (DUN_HEIGHT / 2);
+            if (game.state.map.is_oob(X, Y)) {
+                continue;
+            }
+
             for (auto p : game.state.map.lights[X][Y]) {
                 auto l = p.second;
 

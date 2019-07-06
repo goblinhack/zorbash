@@ -221,6 +221,15 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     if (tp_is_grass(tp)) {
         game.state.map.set_grass(new_at.x, new_at.y);
     }
+    if (tp_is_soil(tp)) {
+        game.state.map.set_soil(new_at.x, new_at.y);
+    }
+    if (tp_is_gravel(tp)) {
+        game.state.map.set_gravel(new_at.x, new_at.y);
+    }
+    if (tp_is_snow(tp)) {
+        game.state.map.set_snow(new_at.x, new_at.y);
+    }
     if (tp_is_monst(tp)) {
         game.state.map.set_monst(new_at.x, new_at.y);
     }
@@ -553,6 +562,15 @@ void Thing::destroy (void)
     }
     if (is_grass()) {
         game.state.map.unset_grass(old_at.x, old_at.y);
+    }
+    if (is_soil()) {
+        game.state.map.unset_soil(old_at.x, old_at.y);
+    }
+    if (is_gravel()) {
+        game.state.map.unset_gravel(old_at.x, old_at.y);
+    }
+    if (is_snow()) {
+        game.state.map.unset_snow(old_at.x, old_at.y);
     }
     if (is_monst()) {
         game.state.map.unset_monst(old_at.x, old_at.y);

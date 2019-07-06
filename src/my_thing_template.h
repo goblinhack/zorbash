@@ -120,12 +120,17 @@ public:
     int blit_left_off {};
     int blit_right_off {};
 
+    Dice bite_damage;
+    Dice nutrition;
+    double collision_radius {};
     int ai_delay_after_moving_ms {};
     int ai_scent_distance {};
+    int attack_on_collision {};
     int collision_box {};
+    int collision_check {};
     int collision_circle {};
     int collision_hit_priority {};
-    double collision_radius {};
+    int does_nothing {};
     int gfx_animated {};
     int gfx_animated_can_vflip {};
     int gfx_animated_no_dir {};
@@ -140,27 +145,31 @@ public:
     int gfx_outlined {};
     int gfx_oversized_but_sitting_on_the_ground {};
     int gfx_small_shadow_caster {};
+    int hates_water {};
     int hunger_at_health_pct {};
     int hunger_clock_freq_ms {};
+    int hunger_constant {};
     int hunger_initial_health_at {};
     int hunger_starving_at_health_pct {};
     int internal_has_dir_anim {};
     int internal_has_hp_anim {};
     int is_active {};
+    int is_attackable {};
     int is_bleeder {};
     int is_blood {};
-    int does_nothing {};
     int is_combustable {};
     int is_corpse_on_death {};
     int is_corridor {};
     int is_deep_water {};
     int is_dirt {};
-    int is_grass {};
     int is_door {};
     int is_entrance {};
     int is_exit {};
     int is_explosion {};
     int is_floor {};
+    int is_food {};
+    int is_grass {};
+    int is_gravel {};
     int is_key {};
     int is_lava {};
     int is_light_strength {};
@@ -169,39 +178,74 @@ public:
     int is_monst {};
     int is_movable {};
     int is_movement_blocking {};
+    int is_obstacle {};
     int is_player {};
     int is_projectile {};
     int is_ripple {};
+    int is_rock {};
     int is_rrr1 {};
     int is_rrr10 {};
-    int is_attackable {};
-    int is_food {};
-    int hates_water {};
-    int hunger_constant {};
-    int is_undead {};
-    int is_rock {};
-    std::string nutrition_hd {};
-    Dice nutrition;
-    std::string bite_damage_hd {};
-    Dice bite_damage;
+    int is_rrr11 {};
+    int is_rrr12 {};
+    int is_rrr13 {};
+    int is_rrr14 {};
+    int is_rrr15 {};
+    int is_rrr16 {};
+    int is_rrr17 {};
+    int is_rrr18 {};
+    int is_rrr19 {};
     int is_rrr2 {};
-    int collision_check {};
-    int attack_on_collision {};
-    int is_water_dweller {};
+    int is_rrr20 {};
+    int is_rrr21 {};
+    int is_rrr22 {};
+    int is_rrr23 {};
+    int is_rrr24 {};
+    int is_rrr25 {};
+    int is_rrr26 {};
+    int is_rrr27 {};
+    int is_rrr28 {};
+    int is_rrr29 {};
     int is_rrr3 {};
+    int is_rrr30 {};
+    int is_rrr31 {};
+    int is_rrr32 {};
+    int is_rrr33 {};
+    int is_rrr34 {};
+    int is_rrr35 {};
+    int is_rrr36 {};
+    int is_rrr37 {};
+    int is_rrr38 {};
+    int is_rrr39 {};
     int is_rrr4 {};
+    int is_rrr40 {};
+    int is_rrr41 {};
+    int is_rrr42 {};
+    int is_rrr43 {};
+    int is_rrr44 {};
+    int is_rrr45 {};
+    int is_rrr46 {};
+    int is_rrr47 {};
+    int is_rrr48 {};
+    int is_rrr49 {};
     int is_rrr5 {};
+    int is_rrr50 {};
     int is_rrr6 {};
     int is_rrr7 {};
     int is_rrr8 {};
-    int is_obstacle {};
+    int is_rrr9 {};
+    int is_snow {};
+    int is_soil {};
+    int is_undead {};
     int is_wall {};
     int is_water {};
+    int is_water_dweller {};
     int is_weapon {};
     int move_speed_ms {};
     int weapon_damage {};
     int weapon_use_delay_hundredths {};
     int weapon_use_distance {};
+    std::string bite_damage_hd {};
+    std::string nutrition_hd {};
 
     uint8_t z_depth {};
 };
@@ -217,6 +261,9 @@ Tpp tp_random_monst(void);
 Tpp tp_random_food(void);
 Tpp tp_random_dirt(void);
 Tpp tp_random_grass(void);
+Tpp tp_random_soil(void);
+Tpp tp_random_gravel(void);
+Tpp tp_random_snow(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_key(void);
 Tpp tp_random_blood(void);
@@ -350,14 +397,234 @@ static inline int tp_is_rrr8 (Tpp t)
     return (t->is_rrr8);
 }
 
-static inline int tp_is_obstacle (Tpp t)
+static inline int tp_is_rrr9 (Tpp t)
 {
-    return (t->is_obstacle);
+    return (t->is_rrr9);
 }
 
 static inline int tp_is_rrr10 (Tpp t)
 {
     return (t->is_rrr10);
+}
+
+static inline int tp_is_rrr11 (Tpp t)
+{
+    return (t->is_rrr11);
+}
+
+static inline int tp_is_rrr12 (Tpp t)
+{
+    return (t->is_rrr12);
+}
+
+static inline int tp_is_rrr13 (Tpp t)
+{
+    return (t->is_rrr13);
+}
+
+static inline int tp_is_rrr14 (Tpp t)
+{
+    return (t->is_rrr14);
+}
+
+static inline int tp_is_rrr15 (Tpp t)
+{
+    return (t->is_rrr15);
+}
+
+static inline int tp_is_rrr16 (Tpp t)
+{
+    return (t->is_rrr16);
+}
+
+static inline int tp_is_rrr17 (Tpp t)
+{
+    return (t->is_rrr17);
+}
+
+static inline int tp_is_rrr18 (Tpp t)
+{
+    return (t->is_rrr18);
+}
+
+static inline int tp_is_rrr19 (Tpp t)
+{
+    return (t->is_rrr19);
+}
+
+static inline int tp_is_rrr20 (Tpp t)
+{
+    return (t->is_rrr20);
+}
+
+static inline int tp_is_rrr21 (Tpp t)
+{
+    return (t->is_rrr21);
+}
+
+static inline int tp_is_rrr22 (Tpp t)
+{
+    return (t->is_rrr22);
+}
+
+static inline int tp_is_rrr23 (Tpp t)
+{
+    return (t->is_rrr23);
+}
+
+static inline int tp_is_rrr24 (Tpp t)
+{
+    return (t->is_rrr24);
+}
+
+static inline int tp_is_rrr25 (Tpp t)
+{
+    return (t->is_rrr25);
+}
+
+static inline int tp_is_rrr26 (Tpp t)
+{
+    return (t->is_rrr26);
+}
+
+static inline int tp_is_rrr27 (Tpp t)
+{
+    return (t->is_rrr27);
+}
+
+static inline int tp_is_rrr28 (Tpp t)
+{
+    return (t->is_rrr28);
+}
+
+static inline int tp_is_rrr29 (Tpp t)
+{
+    return (t->is_rrr29);
+}
+
+static inline int tp_is_rrr30 (Tpp t)
+{
+    return (t->is_rrr30);
+}
+
+static inline int tp_is_rrr31 (Tpp t)
+{
+    return (t->is_rrr31);
+}
+
+static inline int tp_is_rrr32 (Tpp t)
+{
+    return (t->is_rrr32);
+}
+
+static inline int tp_is_rrr33 (Tpp t)
+{
+    return (t->is_rrr33);
+}
+
+static inline int tp_is_rrr34 (Tpp t)
+{
+    return (t->is_rrr34);
+}
+
+static inline int tp_is_rrr35 (Tpp t)
+{
+    return (t->is_rrr35);
+}
+
+static inline int tp_is_rrr36 (Tpp t)
+{
+    return (t->is_rrr36);
+}
+
+static inline int tp_is_rrr37 (Tpp t)
+{
+    return (t->is_rrr37);
+}
+
+static inline int tp_is_rrr38 (Tpp t)
+{
+    return (t->is_rrr38);
+}
+
+static inline int tp_is_rrr39 (Tpp t)
+{
+    return (t->is_rrr39);
+}
+
+static inline int tp_is_rrr40 (Tpp t)
+{
+    return (t->is_rrr40);
+}
+
+static inline int tp_is_rrr41 (Tpp t)
+{
+    return (t->is_rrr41);
+}
+
+static inline int tp_is_rrr42 (Tpp t)
+{
+    return (t->is_rrr42);
+}
+
+static inline int tp_is_rrr43 (Tpp t)
+{
+    return (t->is_rrr43);
+}
+
+static inline int tp_is_rrr44 (Tpp t)
+{
+    return (t->is_rrr44);
+}
+
+static inline int tp_is_rrr45 (Tpp t)
+{
+    return (t->is_rrr45);
+}
+
+static inline int tp_is_rrr46 (Tpp t)
+{
+    return (t->is_rrr46);
+}
+
+static inline int tp_is_rrr47 (Tpp t)
+{
+    return (t->is_rrr47);
+}
+
+static inline int tp_is_rrr48 (Tpp t)
+{
+    return (t->is_rrr48);
+}
+
+static inline int tp_is_rrr49 (Tpp t)
+{
+    return (t->is_rrr49);
+}
+
+static inline int tp_is_rrr50 (Tpp t)
+{
+    return (t->is_rrr50);
+}
+
+static inline int tp_is_snow (Tpp t)
+{
+    return (t->is_snow);
+}
+
+static inline int tp_is_gravel (Tpp t)
+{
+    return (t->is_gravel);
+}
+
+static inline int tp_is_obstacle (Tpp t)
+{
+    return (t->is_obstacle);
+}
+
+static inline int tp_is_soil (Tpp t)
+{
+    return (t->is_soil);
 }
 
 static inline int tp_is_attackable (Tpp t)

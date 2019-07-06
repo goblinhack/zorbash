@@ -71,10 +71,10 @@ static void thing_map_scroll_follow_player (void)
 
     int dy = game.state.player->mid_at.y - game.state.map_wanted_at.y;
 
-    if (dy > 4) {
+    if (dy > 5) {
         game.state.map_wanted_at.y++;
     }
-    if (dy < 4) {
+    if (dy < 5) {
         game.state.map_wanted_at.y--;
     }
 }
@@ -1173,11 +1173,11 @@ void thing_render_all (void)
     int minz = 0;
     int maxz = MAP_DEPTH;
 
-    int minx = std::max(0, (int) game.state.map_at.x - 2);
-    int maxx = std::min(MAP_WIDTH, (int)game.state.map_at.x + TILES_ACROSS + 2);
+    int minx = std::max(0, (int) game.state.map_at.x - 4);
+    int maxx = std::min(MAP_WIDTH, (int)game.state.map_at.x + TILES_ACROSS + 4);
 
-    int miny = std::max(0, (int) game.state.map_at.y - 2);
-    int maxy = std::min(MAP_HEIGHT, (int)game.state.map_at.y + TILES_DOWN + 2);
+    int miny = std::max(0, (int) game.state.map_at.y - 4);
+    int maxy = std::min(MAP_HEIGHT, (int)game.state.map_at.y + TILES_DOWN + 4);
 
     thing_map_scroll_follow_player();
     thing_map_scroll_do();
