@@ -564,6 +564,9 @@ int32_t main (int32_t argc, char *argv[])
     parse_args(argc, argv);
 
     color_init();
+extern int terrain(void);
+terrain();
+exit(1);
 
     find_file_locations();
 

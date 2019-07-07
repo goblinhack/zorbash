@@ -1094,7 +1094,6 @@ static void sdl_screenshot_ (void)
     fprintf(fp, "P6\n%d %d\n255\n",w,h);
 
     int i, j;
-
     for (j=h-1;j>=0;j--) {
         for (i=0;i<w;i++) {
             fputc(pixels[3*j*w+3*i+0], fp);
