@@ -6,18 +6,14 @@
 #include <iostream>
 #include <stdio.h>
 
+static signed char new_map[MAP_WIDTH*2][MAP_HEIGHT*2];
+static signed char old_map[MAP_WIDTH*2][MAP_HEIGHT*2];
+
 signed char scrand(signed char r = 127) { return (-r + 2 * (myrand() % r)); }
 
-signed char** midpoint_disp_algo (signed char**old_map, 
-                                  unsigned map_width, 
-                                  signed char displacement) 
+void midpoint_disp_algo (signed char displacement) 
 {
-    size_t n = (2 * map_width) - 1;
-
-    signed char** new_map = new signed char*[n];
-    for (unsigned i = 0; i < n; ++i) {
-        new_map[i] = new signed char[n];
-    }
+    size_t n = (2 * MAP_WIDTH) - 1;
 
     // Resize
     // 1 0 1
@@ -84,7 +80,7 @@ signed char** midpoint_disp_algo (signed char**old_map,
                 map_ij += rv;
         }
     }
-    return new_map;
+    std::swap(new_map, old_map);
 }
 
 signed char** createnoise(unsigned n) 
@@ -97,10 +93,10 @@ signed char** createnoise(unsigned n)
     return noise;
 }
 
-static void dump (int map_width, signed char**the_map)
+static void dump (void)
 {
-    int w = map_width;
-    int h = map_width;
+    int w = MAP_WIDTH;
+    int h = MAP_WIDTH;
     static int count;
     auto filename = dynprintf("map.%d.ppm", ++count);
     auto fp = fopen(filename, "w");
@@ -113,50 +109,50 @@ static void dump (int map_width, signed char**the_map)
             color c;
             c = WHITE;
 
-            if (the_map[i][j] < 120) {
+            if (new_map[i][j] < 120) {
                 c = GRAY;
             }
-            if (the_map[i][j] < 110) {
+            if (new_map[i][j] < 110) {
                 c = GRAY;
             }
-            if (the_map[i][j] < 100) {
+            if (new_map[i][j] < 100) {
                 c = GREEN1;
             }
-            if (the_map[i][j] < 90) {
+            if (new_map[i][j] < 90) {
                 c = GREEN2;
             }
-            if (the_map[i][j] < 80) {
+            if (new_map[i][j] < 80) {
                 c = GREEN3;
             }
-            if (the_map[i][j] < 70) {
+            if (new_map[i][j] < 70) {
                 c = GREEN4;
             }
-            if (the_map[i][j] < 60) {
+            if (new_map[i][j] < 60) {
                 c = GREEN;
             }
-            if (the_map[i][j] < 50) {
+            if (new_map[i][j] < 50) {
                 c = GREEN;
             }
-            if (the_map[i][j] < 40) {
+            if (new_map[i][j] < 40) {
                 c = YELLOWGREEN;
             }
-            if (the_map[i][j] < 35) {
+            if (new_map[i][j] < 35) {
                 c = YELLOW;
             }
-            if (the_map[i][j] < 30) {
+            if (new_map[i][j] < 30) {
                 c = CYAN;
             }
-            if (the_map[i][j] < 20) {
+            if (new_map[i][j] < 20) {
                 c = LIGHTBLUE;
-                c.b += the_map[i][j];
+                c.b += new_map[i][j];
             }
-            if (the_map[i][j] < 10) {
+            if (new_map[i][j] < 10) {
                 c = BLUE2;
-                c.b += the_map[i][j];
+                c.b += new_map[i][j];
             }
-            if (the_map[i][j] < 5) {
+            if (new_map[i][j] < 5) {
                 c = BLUE;
-                c.b += the_map[i][j];
+                c.b += new_map[i][j];
             }
 
             fputc(c.r, fp);
@@ -168,38 +164,255 @@ static void dump (int map_width, signed char**the_map)
     fclose(fp);
     myfree(filename);
 }
+#if 0
+Fontp
+ttf_write_tga (std::string name, int pointsize, int style)
+{_
+    uint32_t rmask, gmask, bmask, amask;
+    int glyph_per_row;
+    char filename[200];
+    SDL_Surface *dst;
+    uint32_t height;
+    uint32_t width;
+    double max_line_height[TTF_GLYPH_MAX];
+    uint32_t c;
+    int x;
+    int y;
+    double h;
+
+    snprintf(filename, sizeof(filename), "%s_pointsize%u.tga",
+             name.c_str(), pointsize);
+
+    //
+    // x glyphs horizontally and y vertically.
+    //
+    glyph_per_row = TTF_GLYPH_PER_ROW;
+
+    Fontp f = ttf_new(name, pointsize, style);
+    if (!f) {
+        ERR("could not create font %s", name.c_str());
+    }
+
+    memset(max_line_height, 0, sizeof(max_line_height));
+
+    //
+    // Find the largest font glyph pointsize.
+    //
+    x = 0;
+    y = 0;
+    height = 0;
+    int max_char_height = 0;
+    int max_char_width = 0;
+
+    int tot = 0;
+    for (c = 0; c < TTF_GLYPH_MAX; c++) {
+        if (!f->valid[c]) {
+            continue;
+        }
+        tot++;
+
+        double w = f->glyphs[c].maxx - f->glyphs[c].minx;
+        double h = f->glyphs[c].maxy - f->glyphs[c].miny;
+
+        max_line_height[y] = fmax(max_line_height[y], h);
+        max_char_height = fmax(max_char_height, max_line_height[y]);
+        max_char_width = fmax(max_char_width, w);
+    }
+    printf("%d total glyphs\n", tot);
+
+    //
+    // Use the unicode block char as a guide for largest char.
+    //
+    //    int u_block = f->u_to_c[0x2588];
+    //    max_char_width = f->glyphs[u_block].maxx - f->glyphs[u_block].minx;
+    //    max_char_height = f->glyphs[u_block].maxy - f->glyphs[u_block].miny;
+
+    width = glyph_per_row * max_char_width;
+    height = ((tot / glyph_per_row) + 1) * max_char_height;
+
+    //
+    // Make a large surface for all glyphs.
+    //
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+    rmask = 0xff000000;
+    gmask = 0x00ff0000;
+    bmask = 0x0000ff00;
+    amask = 0x000000ff;
+#else
+    rmask = 0x000000ff;
+    gmask = 0x0000ff00;
+    bmask = 0x00ff0000;
+    amask = 0xff000000;
+#endif
+
+    dst = SDL_CreateRGBSurface(0, width, height, 32,
+                               rmask, gmask, bmask, amask);
+    if (!dst) {
+        ERR("no surface created for size %dx%d font %s", width, height, name.c_str());
+    }
+
+    newptr(dst, "SDL_CreateRGBSurface");
+
+    //
+    // Blit each glyph to the large surface.
+    //
+    x = 0;
+    y = 0;
+    h = 0;
+
+    for (c = 0; c < TTF_GLYPH_MAX; c++) {
+        if (!f->valid[c]) {
+            continue;
+        }
+
+        if (f->tex[c].image) {
+            SDL_Rect dstrect = {
+                (int)(max_char_width * x), (int)h, (int)max_char_width, (int)max_char_height
+            };
+
+            SDL_BlitSurface(f->tex[c].image, 0, dst, &dstrect);
+        }
+
+        if (++x >= glyph_per_row) {
+            x = 0;
+            h += max_char_height;
+            y++;
+        }
+    }
+
+    //
+    // Convert the black border smoothing that ttf adds into alpha.
+    //
+    {
+        double x;
+        double y;
+
+        for (x = 0; x < dst->w; x++) {
+            for (y = 0; y < dst->h; y++) {
+
+                color c;
+
+                c = getPixel(dst, x, y);
+
+                if ((c.a == 255) &&
+                    (c.r == 255) &&
+                    (c.g == 255) &&
+                    (c.b == 255)) {
+                    //
+                    // Do nothing.
+                    //
+                } else if ((c.a == 0) &&
+                    (c.r == 0) &&
+                    (c.g == 0) &&
+                    (c.b == 0)) {
+                    //
+                    // Do nothing.
+                    //
+                } else {
+                    //
+                    // Convery gray to white with alpha.
+                    //
+                    c.a = (c.r + c.g + c.b) / 3;
+                    c.r = 255;
+                    c.g = 255;
+                    c.b = 255;
+                }
+
+                putPixel(dst, x, y, c);
+            }
+        }
+    }
+
+#define MAX_TEXTURE_HEIGHT (4096*32)
+
+    if (dst->h > MAX_TEXTURE_HEIGHT) {
+        printf("ttf is too large %dx%d @ pointsize %d\n", dst->w, dst->h, pointsize);
+        exit(1);
+    }
+
+    x = 0;
+    y = 0;
+    h = 0;
+
+    for (c = 0; c < TTF_GLYPH_MAX; c++) {
+
+        if (!f->valid[c]) {
+            continue;
+        }
+
+        int x1 = x * max_char_width;
+        f->glyphs[c].texMinX = (double)(x1) / (double)dst->w;
+        f->glyphs[c].texMaxX = (double)(x1 + max_char_width) / (double)dst->w;
+
+        int y1 = y * max_char_height;
+        f->glyphs[c].texMinY = (double)(y1) / (double)dst->h;
+        f->glyphs[c].texMaxY = (double)(y1 + max_char_height) / (double)dst->h;
+
+        if (++x >= glyph_per_row) {
+            x = 0;
+            y++;
+        }
+    }
+
+    printf("writing %s (unicode char %d to %d) image is %dx%d pixels, glyph_per_row %d char size %dx%d pixels\n",
+           filename,
+           TTF_GLYPH_MIN, TTF_GLYPH_MAX,
+           dst->w, dst->h,
+           glyph_per_row,
+           max_char_width, max_char_height);
+
+    SDL_LockSurface(dst);
+    stbi_write_tga(filename, dst->w, dst->h, STBI_rgb_alpha, dst->pixels);
+    SDL_UnlockSurface(dst);
+
+    printf("wrote %s (unicode char %d to %d) image is %dx%d pixels, glyph_per_row %d char size %dx%d pixels\n",
+           filename,
+           TTF_GLYPH_MIN, TTF_GLYPH_MAX,
+           dst->w, dst->h,
+           glyph_per_row,
+           max_char_width, max_char_height);
+
+    Texp tex;
+    tex = tex_from_surface(dst, filename, filename, GL_LINEAR);
+    if (!tex) {
+        ERR("could not convert %s to tex", filename);
+    }
+
+    //
+    // Work our the tex co-ords for each glyph in the large tex.
+    //
+    x = 0;
+    y = 0;
+    h = 0;
+
+    for (c = 0; c < TTF_GLYPH_MAX; c++) {
+        if (!f->valid[c]) {
+            continue;
+        }
+
+        f->tex[c].image = dst;
+        f->tex[c].tex = tex_get_gl_binding(tex);
+    }
+
+    return (f);
+}
+#endif
 
 int terrain (void) 
 {
-    const unsigned map_width = 1024;
-    mysrand(4);
+    mysrand(3);
 
-    signed char** final_map = new signed char*[map_width];
-    for (unsigned i = 0; i < map_width; ++i) {
-        final_map[i] = new signed char[map_width];
-        for (unsigned j = 0; j < map_width; ++j) {
-            final_map[i][j] = scrand();
+    for (unsigned i = 0; i < MAP_WIDTH; ++i) {
+        for (unsigned j = 0; j < MAP_WIDTH; ++j) {
+            old_map[i][j] = scrand();
         }
     }
 
-    for (unsigned i = 1; i < 8; ++i)  {
-        final_map = midpoint_disp_algo(final_map, map_width, 64 / i);
+    for (unsigned i = 1; i < 9; ++i)  {
+        midpoint_disp_algo(64 / i);
     }
 
-    dump(map_width, final_map);
-
-#if 0
-    for (unsigned i = 0; i < map_width; ++i) {
-        for (unsigned j = 0; j < map_width; ++j) {
-            float d = DISTANCE(map_width / 2, map_width / 2, i, j);
-            float max_d = DISTANCE(map_width / 2, map_width / 2, 0, 0);
-            float scale = 1.0 - (d / max_d);
-            scale = pow(scale, 1.1);
-                final_map[i][j] = (int)((float)(final_map[i][j]) * scale);
-        }
-    }
-    dump(map_width, final_map);
-#endif
+    dump();
 
     return 0;
 }

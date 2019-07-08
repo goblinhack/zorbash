@@ -564,9 +564,6 @@ int32_t main (int32_t argc, char *argv[])
     parse_args(argc, argv);
 
     color_init();
-extern int terrain(void);
-terrain();
-exit(1);
 
     find_file_locations();
 
@@ -640,6 +637,9 @@ exit(1);
     py_call_void("init2");
 
     tp_init();
+
+extern int terrain(void);
+terrain();
 
     sdl_loop();
     gl_leave_2d_mode();
