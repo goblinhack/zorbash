@@ -15,10 +15,11 @@ typedef class Tex * Texp;
 
 uint8_t tex_init(void);
 void tex_fini(void);
+void tex_free(Texp tex);
 Texp tex_load(std::string file, std::string name, int mode);
 Texp tex_find(std::string name);
 Texp tex_from_surface(SDL_Surface *surface,
-                      std::string optional_file,
+                      std::string file,
                       std::string name, int mode);
 int32_t tex_get_gl_binding(Texp);
 uint32_t tex_get_width(Texp);

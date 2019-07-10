@@ -19,6 +19,7 @@
 #include "my_file.h"
 #include "my_charmap.h"
 #include "my_game.h"
+#include "my_terrain.h"
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;
@@ -637,9 +638,7 @@ int32_t main (int32_t argc, char *argv[])
     py_call_void("init2");
 
     tp_init();
-
-extern int terrain(void);
-terrain();
+    terrain_init();
 
     sdl_loop();
     gl_leave_2d_mode();
