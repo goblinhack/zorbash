@@ -808,6 +808,7 @@ void game_display (void)
 
         int seed = 663;
         //seed = myrand();
+        game.state.map.terrain = terrain_init(seed);
         mysrand(seed);
         LOG("dungeon: create dungeon %u", seed);
 _

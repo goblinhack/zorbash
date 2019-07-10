@@ -4,7 +4,7 @@
  */
 
 #include "my_main.h"
-#include "my_term.h"
+#include "my_console.h"
 #include "my_string.h"
 #include "my_thing_template.h"
 

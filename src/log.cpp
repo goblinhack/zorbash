@@ -8,7 +8,7 @@
 #include "my_wid.h"
 #include "my_wid_console.h"
 #include "my_python.h"
-#include "my_term.h"
+#include "my_console.h"
 #include "my_game.h"
 
 uint8_t croaked;

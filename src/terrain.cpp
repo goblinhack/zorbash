@@ -1,12 +1,14 @@
-//https://gamedev.stackexchange.com/questions/12449/midpoint-displacement-algorithm
-
 #include "my_game.h"
 #include "my_color.h"
 #include "my_tex.h"
 #include "my_pixel.h"
+#include "my_gl.h"
 #include <cstdlib>
 #include <iostream>
 #include <stdio.h>
+
+// based on
+// https://gamedev.stackexchange.com/questions/12449/midpoint-displacement-algorithm
 
 signed char scrand(signed char r = 127) { return (-r + 2 * (myrand() % r)); }
 
@@ -43,6 +45,10 @@ public:
 
     signed char new_map[MAP_WIDTH*2][MAP_HEIGHT*2];
     signed char old_map[MAP_WIDTH*2][MAP_HEIGHT*2];
+
+    signed char groundwater[MAP_WIDTH][MAP_HEIGHT];
+    signed char humidity[MAP_WIDTH][MAP_HEIGHT];
+
     uint32_t    tex;
     Texp        tex_p = {};
     int         width;
@@ -286,9 +292,31 @@ public:
     }
 };
 
-Terrain *terrain_init (void)
+Terrain *terrain_init (int seed)
 {
-    auto t = new Terrain(MAP_WIDTH, MAP_HEIGHT, 3);
+    auto t = new Terrain(MAP_WIDTH, MAP_HEIGHT, seed);
+
+    t->to_tex();
 
     return (t);
+}
+
+void terrain_blit (Terrainp t)
+{
+    verify(t);
+
+    uint32_t tw = game.config.video_pix_width / 2;
+    uint32_t th = game.config.video_pix_height / 2;
+    double window_w = tw;
+    double window_h = th;
+    double square = window_w / window_h;
+    window_w = 1;
+    window_h = square;
+
+    color c = WHITE;
+    c.a = 100;
+    glcolor(c);
+    blit_init();
+    blit(t->tex, 0.0, 1.0, 1.0, 0.0, 0, 0, window_w / 2, window_h / 2);
+    blit_flush();
 }

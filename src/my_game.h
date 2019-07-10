@@ -8,6 +8,7 @@
 
 #include "my_sdl.h"
 #include "my_dmap.h"
+#include "my_terrain.h"
 
 class Thing;
 class Light;
@@ -67,6 +68,11 @@ private:
     uint8_t                    _is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_key[MAP_WIDTH][MAP_HEIGHT] = {};
 public:
+    //
+    // World map
+    //
+    Terrainp                   terrain;
+
     //
     // Global all things
     //
