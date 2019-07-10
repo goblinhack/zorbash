@@ -14,7 +14,6 @@
 #include "my_string.h"
 
 class Tex {
-
 public:
     Tex (void)
     {
@@ -59,6 +58,11 @@ uint8_t tex_init (void)
 
 void tex_fini (void)
 {_
+}
+
+void tex_free (Texp tex)
+{_
+    delete(tex);
 }
 
 static unsigned char *load_raw_image (std::string filename,
