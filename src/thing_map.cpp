@@ -1224,5 +1224,9 @@ void thing_render_all (void)
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
     }
 
+    if (game.state.map.terrain) {
+        terrain_blit(game.state.map.terrain);
+    }
+
     //lights_render_points_debug(minx, miny, maxx, maxy);
 }

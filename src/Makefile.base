@@ -15,6 +15,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/charmap.o 		\
     $(OBJDIR)/color.o			\
     $(OBJDIR)/command.o 		\
+    $(OBJDIR)/console.o 		\
     $(OBJDIR)/dice.o			\
     $(OBJDIR)/dir.o 			\
     $(OBJDIR)/dmap.o 			\
@@ -47,7 +48,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/stb_image.o 		\
     $(OBJDIR)/string.o 			\
-    $(OBJDIR)/term.o 		        \
+    $(OBJDIR)/terrain.o 		\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
@@ -65,7 +66,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_weapon.o 		\
     $(OBJDIR)/tile.o 			\
-    $(OBJDIR)/terrain.o 		\
     $(OBJDIR)/tile_info.o 		\
     $(OBJDIR)/time.o 			\
     $(OBJDIR)/token.o 			\

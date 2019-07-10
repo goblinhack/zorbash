@@ -638,7 +638,6 @@ int32_t main (int32_t argc, char *argv[])
     py_call_void("init2");
 
     tp_init();
-    terrain_init();
 
     sdl_loop();
     gl_leave_2d_mode();
