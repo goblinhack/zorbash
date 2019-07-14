@@ -15,7 +15,7 @@
 
 class Tex {
 public:
-    Tex (void)
+    Tex (std::string name) : name(name)
     {
         surface = 0;
         gl_surface_binding = 0;
@@ -41,11 +41,10 @@ public:
         }
     }
 
-    uint32_t width = {};
-    uint32_t height = {};
-
-    int32_t gl_surface_binding = {};
-
+    std::string name;
+    uint32_t    width = {};
+    uint32_t    height = {};
+    int32_t     gl_surface_binding = {};
     SDL_Surface *surface = {};
 };
 
@@ -62,6 +61,7 @@ void tex_fini (void)
 
 void tex_free (Texp tex)
 {_
+    textures.erase(tex->name);
     delete(tex);
 }
 
@@ -341,8 +341,7 @@ Texp tex_from_surface (SDL_Surface *surface,
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    Texp t = new Tex();
-
+    Texp t = new Tex(name);
     auto result = textures.insert(std::make_pair(name, t));
 
     if (result.second == false) {

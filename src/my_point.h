@@ -198,6 +198,22 @@ public:
         return (my_apoint(xnew + O.x, ynew + O.y));
     }
 
+    my_apoint rotate (T angle) const
+    {
+        T s;
+        T c;
+        sincos(angle, &s, &c);
+
+        T X = x;
+        T Y = y;
+
+        // rotate point
+        T xnew = X * c - Y * s;
+        T ynew = X * s + Y * c;
+
+        return (my_apoint(xnew, ynew));
+    }
+
     friend uint8_t get_line_intersection (my_apoint p0,
                                           my_apoint p1,
                                           my_apoint p2,
