@@ -24,6 +24,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/file.o 			\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
+    $(OBJDIR)/gauss.o 		        \
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\
     $(OBJDIR)/level.o 			\

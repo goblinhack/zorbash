@@ -806,7 +806,7 @@ void game_display (void)
     if (first) {
         tp_init_after_loading();
 
-        int seed = 663;
+        int seed = 669;
         //seed = myrand();
         game.state.map.terrain = terrain_init(seed);
         mysrand(seed);
