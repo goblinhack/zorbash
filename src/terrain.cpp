@@ -5,6 +5,7 @@
 #include "my_pixel.h"
 #include "my_gl.h"
 #include "my_math.h"
+#include "my_ascii.h"
 #include <cstdlib>
 #include <iostream>
 #include <stdio.h>
@@ -15,7 +16,7 @@
 
 signed char scrand(signed char r = 127) { return (-r + 2 * (myrand() % r)); }
 
-#define MAX_DROPLETS 50000
+#define MAX_DROPLETS 100000
 
 typedef struct {
     fpoint at;
@@ -24,9 +25,9 @@ typedef struct {
 } Droplet;
 
 // (a % b) in C is a remainder operator and NOT modulo operator.
-int mod (int a, int b)
+static inline int16_t mod (int16_t a, int16_t b)
 {
-    int r = a % b;
+    int16_t r = a % b;
     return r < 0 ? r + b : r;
 }
 
@@ -34,7 +35,7 @@ class Terrain
 {
 private:
 public:
-    Terrain (int width, int height, int seed) : width(width), height(height)
+    Terrain (int16_t width, int16_t height, int16_t seed) : width(width), height(height)
     {
         newptr(this, "terrain");
         mysrand(seed);
@@ -72,6 +73,7 @@ public:
 
     signed char                       new_map[MAP_WIDTH*2][MAP_HEIGHT*2];
     signed char                       old_map[MAP_WIDTH*2][MAP_HEIGHT*2];
+    signed char                       merged_map[MAP_WIDTH][MAP_HEIGHT] = {{0}};
     float                             groundwater[MAP_WIDTH][MAP_HEIGHT];
     float                             humidity[MAP_WIDTH][MAP_HEIGHT];
     fpoint                            wind_dir[MAP_WIDTH][MAP_HEIGHT];
@@ -84,9 +86,36 @@ public:
     uint32_t                          tex_ground;
     Texp                              tex_ground_p = {};
 
-    int                               width;
-    int                               height;
-    int                               wind_tick;
+    int16_t                           width;
+    int16_t                           height;
+    int16_t                           wind_tick;
+
+    void init_land (void)
+    {
+        for (unsigned loops = 0; loops < 4; loops++) {
+            for (unsigned x = 0; x < MAP_WIDTH; ++x) {
+                for (unsigned y = 0; y < MAP_WIDTH; ++y) {
+                    old_map[x][y] = scrand();
+                }
+            }
+
+            for (unsigned x = 1; x < 8 + loops; ++x)  {
+                midpoint_disp_algo(64 / x);
+            }
+
+            for (unsigned x = 0; x < MAP_WIDTH; ++x) {
+                for (unsigned y = 0; y < MAP_WIDTH; ++y) {
+                    merged_map[x][y] = std::max(merged_map[x][y], new_map[x][y]);
+                }
+            }
+        }
+
+        for (unsigned x = 0; x < MAP_WIDTH; ++x) {
+            for (unsigned y = 0; y < MAP_WIDTH; ++y) {
+                new_map[x][y] = merged_map[x][y];
+            }
+        }
+    }
 
     void midpoint_disp_algo (signed char displacement) 
     {
@@ -116,7 +145,7 @@ public:
                 signed char d = new_map[x + 1][y + 1];
                 map_ij = (a + b + c + d) / 4;
 
-                int rv = scrand(displacement);
+                int16_t rv = scrand(displacement);
                 if (map_ij + rv > 127 )
                     map_ij = 127;
                 else if(map_ij + rv < -128)
@@ -148,7 +177,7 @@ public:
                 else if (x + 1 == n) map_ij = (a + b + c) / 3;
                 else map_ij = (a + b + c + d) / 4;
 
-                int rv = scrand(displacement);
+                int16_t rv = scrand(displacement);
                 if (map_ij + rv > 127 )
                     map_ij = 127;
                 else if(map_ij + rv < -128)
@@ -159,76 +188,6 @@ public:
         }
         std::swap(new_map, old_map);
     }
-
-#if 0
-    void dump_to_ppm (void)
-    {
-        static int count;
-        auto filename = dynprintf("map.%d.ppm", ++count);
-        auto fp = fopen(filename, "w");
-        fprintf(fp, "P6\n%d %d\n255\n",width, height);
-
-        for (auto y=height - 1; y>=0; y--) {
-            for (auto x=0; x<width; x++) {
-                color c;
-                c = WHITE;
-
-                if (new_map[x][y] < 120) {
-                    c = GRAY90;
-                }
-                if (new_map[x][y] < 110) {
-                    c = GRAY80;
-                }
-                if (new_map[x][y] < 100) {
-                    c = GRAY70;
-                }
-                if (new_map[x][y] < 90) {
-                    c = GRAY60;
-                }
-                if (new_map[x][y] < 80) {
-                    c = GRAY50;
-                }
-                if (new_map[x][y] < 70) {
-                    c = GRAY40;
-                }
-                if (new_map[x][y] < 60) {
-                    c = GRAY30;
-                }
-                if (new_map[x][y] < 50) {
-                    c = GRAY20;
-                }
-                if (new_map[x][y] < 40) {
-                    c = YELLOWGREEN;
-                }
-                if (new_map[x][y] < 35) {
-                    c = YELLOW;
-                }
-                if (new_map[x][y] < 30) {
-                    c = CYAN;
-                }
-                if (new_map[x][y] < 20) {
-                    c = LIGHTBLUE;
-                    c.b += new_map[x][y];
-                }
-                if (new_map[x][y] < 10) {
-                    c = BLUE2;
-                    c.b += new_map[x][y];
-                }
-                if (new_map[x][y] < 5) {
-                    c = BLUE;
-                    c.b += new_map[x][y];
-                }
-
-                fputc(c.r, fp);
-                fputc(c.g, fp);
-                fputc(c.b, fp);
-            }
-        }
-
-        fclose(fp);
-        myfree(filename);
-    }
-#endif
 
     void to_tex_groundwater (void)
     {
@@ -270,8 +229,8 @@ public:
                 if (groundwater[x][y] > 0.0) {
                     c = YELLOW;
                 }
-                if (groundwater[x][y] > 0.5) {
-                    c = GREEN1;
+                if (groundwater[x][y] > 0.1) {
+                    c = FORESTGREEN;
                 }
                 if (groundwater[x][y] > 1.0) {
                     c = GREEN2;
@@ -280,15 +239,15 @@ public:
                     c = GREEN3;
                 }
                 if (groundwater[x][y] > 3.0) {
-                    c = DARKGREEN;
-                }
-                if (groundwater[x][y] > 4.0) {
                     c = DARKOLIVEGREEN1;
                 }
-                if (groundwater[x][y] > 5.0) {
-                    c = DARKOLIVEGREEN2;
+                if (groundwater[x][y] > 4.0) {
+                    c = DARKGREEN;
                 }
-                if (groundwater[x][y] > 6.0) {
+                if (groundwater[x][y] > 5.0) {
+                    c = DARKSEAGREEN;
+                }
+                if (groundwater[x][y] > 5.9) {
                     c = BLUE;
                 }
 
@@ -508,55 +467,48 @@ public:
 
     void deposit_water (point p, float density)
     {
-        if (wind_tick < 200) {
+        if (wind_tick < 100) {
             return;
         }
 
-        float delta = 0.05;
+        float delta = 0.1;
 
         while (density > 0.0) {
-            int current_depth = get_map(p.x, p.y);
-            if (current_depth < 15) {
+            int16_t current_depth = get_map(p.x, p.y);
+            if (current_depth < 1) {
                 break;
             }
 
-            std::vector<point> best;
+            static point best[9];
+            int8_t besti = 0;
 
-            for (int dx = -1; dx <= 1; dx++) {
-                for (int dy = -1; dy <= 1; dy++) {
+            for (int16_t dx = -1; dx <= 1; dx++) {
+                for (int16_t dy = -1; dy <= 1; dy++) {
                     point neb = point(dx, dy) + p;
-                    int neb_depth = get_map(neb.x, neb.y);
-                    int w = get_groundwater(neb.x, neb.y);
-                    if ((neb_depth <= current_depth) && (w < 5.0)) {
-                        best.push_back(neb);
+                    neb.x = mod(neb.x, MAP_WIDTH);
+                    neb.y = mod(neb.y, MAP_WIDTH);
+
+                    int16_t neb_depth = get_map(neb.x, neb.y);
+                    int16_t w = get_groundwater(neb.x, neb.y);
+                    if ((neb_depth <= current_depth) && (w < 10.0)) {
+                        best[besti++] = neb;
                     }
                 }
             }
 
-            if (!best.size()) {
+            if (!besti) {
                 groundwater[p.x][p.y] += density;
                 break;
             }
 
-            auto b = best[random_range(0, best.size())];
-            int neb_depth = get_map(b.x, b.y);
+            auto b = best[random_range(0, besti)];
+            int16_t neb_depth = get_map(b.x, b.y);
 
-            if (abs(current_depth - neb_depth) < 5) {
+            if (abs(current_depth - neb_depth) < 10) {
                 density -= delta;
                 groundwater[p.x][p.y] += delta;
-            } else if (abs(current_depth - neb_depth) > 15) {
-#if 0
-                for (int dx = -1; dx <= 1; dx++) {
-                    for (int dy = -1; dy <= 1; dy++) {
-                        if (random_range(0, 100) < 10) {
-                            new_map[mod(b.x + dx, MAP_WIDTH)][mod(b.y + dy, MAP_WIDTH)]--;
-                        }
-                    }
-                }
-#endif
-                if (new_map[b.x][b.y] > 15) {
-                    new_map[b.x][b.y]--;
-                }
+            } else if (new_map[b.x][b.y] > 50) {
+                new_map[b.x][b.y]--;
             }
 
             p = b;
@@ -567,52 +519,86 @@ public:
     {
         memset(humidity, 0, sizeof(humidity));
 
+        const float s1 = 0.9;
+        const float s2 = 0.7;
+
         for (auto d : droplets) {
-            int x = (int)d.at.x;
-            int y = (int)d.at.y;
+            int16_t x = (int16_t)d.at.x;
+            int16_t y = (int16_t)d.at.y;
 
-            if (x >= MAP_WIDTH) {
-                continue;
+            if ((x < MAP_WIDTH - 1) && (y < MAP_WIDTH - 1) && (x > 1) && (y > 1)) {
+                humidity[x][y] += d.density;
+                wind_dir[x][y] += d.wind_dir;
+
+                {
+                    float d1 = d.density * s1;
+                    float d2 = d.density * 0.50;
+
+                    humidity[x + 1][y] += d1;
+                    humidity[x - 1][y] += d1;
+                    humidity[x][y + 1] += d1;
+                    humidity[x][y - 1] += d1;
+
+                    humidity[x + 1][y + 1] += d2;
+                    humidity[x - 1][y - 1] += d2;
+                    humidity[x - 1][y + 1] += d2;
+                    humidity[x + 1][y - 1] += d2;
+                }
+
+                {
+                    fpoint d1 = d.wind_dir * s1;
+                    fpoint d2 = d.wind_dir * s2;
+
+                    wind_dir[x + 1][y] += d1;
+                    wind_dir[x - 1][y] += d1;
+                    wind_dir[x][y + 1] += d1;
+                    wind_dir[x][y - 1] += d1;
+
+                    wind_dir[x + 1][y + 1] += d2;
+                    wind_dir[x - 1][y - 1] += d2;
+                    wind_dir[x - 1][y + 1] += d2;
+                    wind_dir[x + 1][y - 1] += d2;
+                }
+            } else {
+                if ((x >= MAP_WIDTH) || (y >= MAP_WIDTH) || (x < 0) || (y < 0)) {
+                    continue;
+                }
+
+                {
+                    float d1 = d.density * s1;
+                    float d2 = d.density * s2;
+
+                    humidity[mod(x + 1, MAP_WIDTH)][y] += d1;
+                    humidity[mod(x - 1, MAP_WIDTH)][y] += d1;
+                    humidity[x][mod(y + 1, MAP_WIDTH)] += d1;
+                    humidity[x][mod(y - 1, MAP_WIDTH)] += d1;
+
+                    humidity[mod(x + 1, MAP_WIDTH)][mod(y + 1, MAP_WIDTH)] += d2;
+                    humidity[mod(x - 1, MAP_WIDTH)][mod(y - 1, MAP_WIDTH)] += d2;
+                    humidity[mod(x - 1, MAP_WIDTH)][mod(y + 1, MAP_WIDTH)] += d2;
+                    humidity[mod(x + 1, MAP_WIDTH)][mod(y - 1, MAP_WIDTH)] += d2;
+                }
+
+                {
+                    fpoint d1 = d.wind_dir * s1;
+                    fpoint d2 = d.wind_dir * s2;
+
+                    wind_dir[mod(x + 1, MAP_WIDTH)][y] += d1;
+                    wind_dir[mod(x - 1, MAP_WIDTH)][y] += d1;
+                    wind_dir[x][mod(y + 1, MAP_WIDTH)] += d1;
+                    wind_dir[x][mod(y - 1, MAP_WIDTH)] += d1;
+
+                    wind_dir[mod(x + 1, MAP_WIDTH)][mod(y + 1, MAP_WIDTH)] += d2;
+                    wind_dir[mod(x - 1, MAP_WIDTH)][mod(y - 1, MAP_WIDTH)] += d2;
+                    wind_dir[mod(x - 1, MAP_WIDTH)][mod(y + 1, MAP_WIDTH)] += d2;
+                    wind_dir[mod(x + 1, MAP_WIDTH)][mod(y - 1, MAP_WIDTH)] += d2;
+                }
+
             }
-            if (y >= MAP_WIDTH) {
-                continue;
-            }
-            if (x < 0) {
-                continue;
-            }
-            if (y < 0) {
-                continue;
-            }
-
-            humidity[x][y] += d.density;
-            wind_dir[x][y] += d.wind_dir;
-
-            float scale = 0.5;
-
-            humidity[mod(x + 1, MAP_WIDTH)][y] += d.density * scale;
-            humidity[mod(x - 1, MAP_WIDTH)][y] += d.density * scale;
-            humidity[x][mod(y + 1, MAP_WIDTH)] += d.density * scale;
-            humidity[x][mod(y - 1, MAP_WIDTH)] += d.density * scale;
-
-            wind_dir[mod(x + 1, MAP_WIDTH)][y] += d.wind_dir * scale;
-            wind_dir[mod(x - 1, MAP_WIDTH)][y] += d.wind_dir * scale;
-            wind_dir[x][mod(y + 1, MAP_WIDTH)] += d.wind_dir * scale;
-            wind_dir[x][mod(y - 1, MAP_WIDTH)] += d.wind_dir * scale;
-
-            scale = 0.2;
-            humidity[mod(x - 1, MAP_WIDTH)][mod(y - 1, MAP_WIDTH)] += d.density * scale;
-            humidity[mod(x + 1, MAP_WIDTH)][mod(y + 1, MAP_WIDTH)] += d.density * scale;
-            humidity[mod(x + 1, MAP_WIDTH)][mod(y - 1, MAP_WIDTH)] += d.density * scale;
-            humidity[mod(x - 1, MAP_WIDTH)][mod(y + 1, MAP_WIDTH)] += d.density * scale;
-
-            wind_dir[mod(x - 1, MAP_WIDTH)][mod(y - 1, MAP_WIDTH)] += d.wind_dir * scale;
-            wind_dir[mod(x + 1, MAP_WIDTH)][mod(y + 1, MAP_WIDTH)] += d.wind_dir * scale;
-            wind_dir[mod(x + 1, MAP_WIDTH)][mod(y - 1, MAP_WIDTH)] += d.wind_dir * scale;
-            wind_dir[mod(x - 1, MAP_WIDTH)][mod(y + 1, MAP_WIDTH)] += d.wind_dir * scale;
         }
     }
 
-    fpoint get_wind_dir (int x, int y)
+    fpoint get_wind_dir (int16_t x, int16_t y)
     {
         x = mod(x, MAP_WIDTH);
         y = mod(y, MAP_WIDTH);
@@ -620,7 +606,7 @@ public:
         return (wind_dir[x][y]);
     }
 
-    float get_humidity (int x, int y)
+    float get_humidity (int16_t x, int16_t y)
     {
         x = mod(x, MAP_WIDTH);
         y = mod(y, MAP_WIDTH);
@@ -631,7 +617,7 @@ public:
         return (humidity[x][y] + height);
     }
 
-    int get_map (int x, int y)
+    int16_t get_map (int16_t x, int16_t y)
     {
         x = mod(x, MAP_WIDTH);
         y = mod(y, MAP_WIDTH);
@@ -639,7 +625,7 @@ public:
         return (new_map[x][y]);
     }
 
-    float get_groundwater (int x, int y)
+    float get_groundwater (int16_t x, int16_t y)
     {
         x = mod(x, MAP_WIDTH);
         y = mod(y, MAP_WIDTH);
@@ -647,7 +633,7 @@ public:
         return (groundwater[x][y]);
     }
 
-    void set_humidity (int x, int y, float h)
+    void set_humidity (int16_t x, int16_t y, float h)
     {
         x = mod(x, MAP_WIDTH);
         y = mod(y, MAP_WIDTH);
@@ -659,21 +645,17 @@ public:
     {
         wind_tick++;
 
+        ascii_putf(1, 2,
+                   ORANGE, ASCII_UI_BOX_INACTIVE_MID_COLOR,
+                   L"%u tick", wind_tick);
+
         float max_humidity = 5;
 
         for (auto di = 0; di < MAX_DROPLETS; di++) {
             auto d = &droplets[di];
 
-#if 0
-            if ((fabs(d->wind_dir.x) < 0.1) && (fabs(d->wind_dir.y) < 0.1)) {
-                float s, c;
-                float rad = (((float)random_range(0, 360)) / 360.0) * RAD_360;
-                sincosf(rad, &s, &c);
-                d->wind_dir = fpoint(s, c);
-            }
-#endif
-            int x = mod(d->at.x, MAP_WIDTH);
-            int y = mod(d->at.y, MAP_WIDTH);
+            int16_t x = mod(d->at.x, MAP_WIDTH);
+            int16_t y = mod(d->at.y, MAP_WIDTH);
 
             auto wind_speed = 1.0;
 
@@ -700,18 +682,18 @@ public:
                 new_at.y += MAP_WIDTH;
             }
 
-            int nx = mod(new_at.x, MAP_WIDTH);
-            int ny = mod(new_at.y, MAP_WIDTH);
+            int16_t nx = mod(new_at.x, MAP_WIDTH);
+            int16_t ny = mod(new_at.y, MAP_WIDTH);
             auto h = get_humidity(nx, ny) + d->density;
             if (h > max_humidity) {
                 fpoint dir = d->wind_dir;
 
                 if (random_range(0, 100) < 50) {
-                    int x = mod(d->at.x, MAP_WIDTH);
-                    int y = mod(d->at.y, MAP_WIDTH);
+                    int16_t x = mod(d->at.x, MAP_WIDTH);
+                    int16_t y = mod(d->at.y, MAP_WIDTH);
                     fpoint avg_wind_dir;
-                    for (int dx = -1; dx <= 1; dx++) {
-                        for (int dy = -1; dy <= 1; dy++) {
+                    for (int16_t dx = -1; dx <= 1; dx++) {
+                        for (int16_t dy = -1; dy <= 1; dy++) {
                             if (dx && dy) {
                                 avg_wind_dir += get_wind_dir(x + dx, y + dy);
                             }
@@ -722,111 +704,49 @@ public:
                 }
 
                 d->wind_dir = d->wind_dir.rotate(-0.05);
-                d->density *= 0.50;
+                d->density *= 0.20;
             }
             d->at = new_at;
 
-            if (new_map[nx][ny] < 10)  {
-                // over water
+            if (new_map[nx][ny] < 5)  {
+                // over deep water
                 if (d->density < 0.01) {
                     if (random_range(0, 100) < 5) {
                         d->density  = 1.00;
+#if 0
                         float s, c;
                         float rad = (((float)random_range(0, 360)) / 360.0) * RAD_360;
                         sincosf(rad, &s, &c);
                         d->wind_dir = fpoint(s, c);
+#endif
                     }
                 }
                 if (random_range(0, 100) < 50) {
                     d->density  *= 0.50;
                 }
-            } else if (new_map[nx][ny] > 90)  {
-                deposit_water(point(nx, ny), d->density / 2);
-                d->density /= 2;
-            } else if (new_map[nx][ny] > 80)  {
-                // over mountains
-                if (random_range(0, 100) < 50) {
-                    d->wind_dir = d->wind_dir.rotate(-0.01);
-                    deposit_water(point(nx, ny), d->density / 2);
-                    d->density /= 2;
-                }
-            } else {
-                // over grass
+            } else if (new_map[nx][ny] < 15)  {
+                // over water
                 d->density  *= 0.50;
+            } else if (new_map[nx][ny] < 90)  {
+                // over grass
                 if (random_range(0, 100) < 10) {
                     d->wind_dir = d->wind_dir.rotate(0.05);
                     deposit_water(point(nx, ny), d->density / 2);
                     d->density /= 2;
                 }
-            }
-
-#if 0
-            if ((fabs(d->wind_dir.x) < 0.1) && (fabs(d->wind_dir.y) < 0.1)) {
-                float s, c;
-                float rad = (((float)random_range(0, 360)) / 360.0) * RAD_360;
-                sincosf(rad, &s, &c);
-                d->wind_dir = fpoint(s, c);
-            }
-#endif
-
-            d->wind_dir = d->wind_dir.rotate(-0.015);
-            d->at.x += 0.2;
-
-#if 0
-            float my =  MAP_WIDTH / 2;
-            float new_density = (my - fabs(d->at.y - my)) / my;
-            new_density = gauss(new_density / 3.0, 0.1);
-            if (new_density > 0) {
-                d->density += new_density;
-            }
-            if ((d->density < 0.1) && (random_range(0, 100) < 10)) {
-                float s, c;
-                float rad = (((float)random_range(0, 360)) / 360.0) * RAD_360;
-                sincosf(rad, &s, &c);
-                d->dir = fpoint(s, c);
-
-                float my =  MAP_WIDTH / 2;
-                float new_density = (my - fabs(d->at.y - my)) / my;
-                new_density = gauss(new_density, 0.1);
-                if (new_density > 0) {
-                    d->density += new_density;
-printf("%f ", new_density);
-                }
-            }
-#endif
-
-#if 0
-            if (random_range(0, 100) < 20) {
-                float s, c;
-                float rad = (((float)random_range(0, 360)) / 360.0) * RAD_360;
-                sincosf(rad, &s, &c);
-                d->dir = fpoint(s, c);
-
-                float my =  MAP_WIDTH / 2;
-                d->density += (my - fabs(d->at.y - my)) / my;
-            }
-#endif
-        }
-
-#if 0
-        for (int x = 0; x < MAP_WIDTH; ++x) {
-            for (int y = 0; y < MAP_WIDTH; ++y) {
-                float angle;
-//                if (random_range(0, 100) < 50) {
-                //    angle = 0.01;
-//                } else {
-                    angle = -0.01;
-//                }
-
-
+                d->density *= 0.90;
+            } else {
+                // over nountains
                 if (random_range(0, 100) < 10) {
-                    fpoint p = new_wind_dir[x][y];
-                    new_wind_dir[x][y] = p.rotate(angle);
+                    d->wind_dir = d->wind_dir.rotate(-0.01);
+                    deposit_water(point(nx, ny), d->density / 2);
+                    d->density /= 2;
                 }
             }
-        }
 
-#endif
+            d->wind_dir = d->wind_dir.rotate(-0.005);
+            d->at.x += 0.1;
+        }
     }
 
     void tick (void)
@@ -839,15 +759,20 @@ printf("%f ", new_density);
     }
 };
 
-Terrain *terrain_init (int seed)
+Terrain *terrain_init (int16_t seed)
 {
     auto t = new Terrain(MAP_WIDTH, MAP_HEIGHT, seed);
 
+    t->init_land();
     t->init_droplets();
-    t->droplets_to_map();
-    t->to_tex_groundwater();
-    t->to_tex_clouds();
-    t->to_tex_ground();
+
+    #if 1
+    for (auto i = 0; i < 500; i++) {
+        t->droplets_to_map();
+        t->update_wind();
+    }
+        //DIE("X");
+    #endif
 
     return (t);
 }

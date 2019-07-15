@@ -37,8 +37,8 @@
 #define MAP_BORDER                  4
 #define DUN_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define DUN_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
-#define MAP_WIDTH                   (DUN_WIDTH * 4)
-#define MAP_HEIGHT                  (DUN_HEIGHT * 4)
+#define MAP_WIDTH                   (DUN_WIDTH * 8)
+#define MAP_HEIGHT                  (DUN_HEIGHT * 8)
 
 /*
  * Light sources
