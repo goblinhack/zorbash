@@ -35,12 +35,12 @@ static void thing_map_scroll_do (void)
     game.state.map_at.y = (int) game.state.map_at.y;
     game.state.map_at.y /= game.config.tile_pixel_height;
 
-    game.state.map_at.x = std::max(game.state.map_at.x, 0.0);
-    game.state.map_at.y = std::max(game.state.map_at.y, 0.0);
+    game.state.map_at.x = std::max(game.state.map_at.x, (float)0.0);
+    game.state.map_at.y = std::max(game.state.map_at.y, (float)0.0);
     game.state.map_at.x = std::min(game.state.map_at.x,
-                             (double)MAP_WIDTH - TILES_ACROSS);
+                             (float)MAP_WIDTH - TILES_ACROSS);
     game.state.map_at.y = std::min(game.state.map_at.y,
-                             (double)MAP_HEIGHT - TILES_DOWN);
+                             (float)MAP_HEIGHT - TILES_DOWN);
 
     //
     // Round to pixels

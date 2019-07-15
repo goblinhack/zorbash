@@ -184,7 +184,7 @@ public:
     {
         T s;
         T c;
-        sincos(angle, &s, &c);
+        sincosf(angle, &s, &c);
 
         // translate point back to origin:
         T X = x - O.x;
@@ -202,7 +202,7 @@ public:
     {
         T s;
         T c;
-        sincos(angle, &s, &c);
+        sincosf(angle, &s, &c);
 
         T X = x;
         T Y = y;
@@ -355,7 +355,7 @@ public:
 };
 
 typedef my_apoint<int> point;
-typedef my_apoint<double> fpoint;
+typedef my_apoint<float> fpoint;
 
 #ifdef NEED_3D_MATH
 template<class T> class my_apoint3d
@@ -524,7 +524,7 @@ public:
 };
 
 typedef my_apoint3d<int> point3d;
-typedef my_apoint3d<double> fpoint3d;
+typedef my_apoint3d<float> fpoint3d;
 #endif
 
 #endif /* _MY_POINT_H_ */

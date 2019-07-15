@@ -5,5 +5,5 @@
 
 typedef class Terrain * Terrainp;
 
-Terrainp terrain_init(int seed);
+Terrainp terrain_init(int16_t seed);
 void terrain_blit(Terrainp t);
