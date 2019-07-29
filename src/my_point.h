@@ -127,6 +127,12 @@ public:
         y /= length;
     }
 
+    friend my_apoint normal (const my_apoint p)
+    {
+        T length = sqrt((p.x * p.x) + (p.y * p.y));
+        return (my_apoint(p.x / length, p.y / length));
+    }
+
     friend my_apoint unit (const my_apoint p)
     {
         const T length = sqrt(p.x*p.x + p.y*p.y);
