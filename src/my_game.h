@@ -139,6 +139,53 @@ public:
     //
     std::map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
 
+    template <class Archive>
+    void serialize (Archive & archive)
+    {
+        archive(
+
+#if 0
+cereal::binary_data( data, sizeof(std::uint8_t) * 3 ) 
+cereal::binary_data(_is_wall, sizeof(_is_wall));
+cereal::binary_data(_is_solid, sizeof(_is_solid));
+cereal::binary_data(_is_gfx_large_shadow_caster, sizeof(_is_gfx_large_shadow_caster));
+cereal::binary_data(_is_door, sizeof(_is_door));
+cereal::binary_data(_is_light, sizeof(_is_light));
+cereal::binary_data(_is_floor, sizeof(_is_floor));
+cereal::binary_data(_is_lava, sizeof(_is_lava));
+cereal::binary_data(_is_blood, sizeof(_is_blood));
+cereal::binary_data(_is_water, sizeof(_is_water));
+cereal::binary_data(_is_deep_water, sizeof(_is_deep_water));
+cereal::binary_data(_is_corridor, sizeof(_is_corridor));
+cereal::binary_data(_is_dirt, sizeof(_is_dirt));
+cereal::binary_data(_is_grass, sizeof(_is_grass));
+cereal::binary_data(_is_soil, sizeof(_is_soil));
+cereal::binary_data(_is_gravel, sizeof(_is_gravel));
+cereal::binary_data(_is_snow, sizeof(_is_snow));
+cereal::binary_data(_is_monst, sizeof(_is_monst));
+cereal::binary_data(_is_food, sizeof(_is_food));
+cereal::binary_data(_is_rock, sizeof(_is_rock));
+cereal::binary_data(_is_key, sizeof(_is_key));
+terrain;
+cereal::make_nvp("all_things" all_things),
+all_active_things;
+all_display_things_at
+all_things_at
+all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
+all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
+all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
+chunk_inited[CHUNK_WIDTH][CHUNK_HEIGHT] = {};
+Thingp                     player = {};
+#endif
+                cereal::make_nvp("all_things",      all_things),
+                cereal::make_nvp("all_lights",      all_lights),
+                cereal::make_nvp("lights",          lights),
+                cereal::make_nvp("map_at",          map_at),
+                cereal::make_nvp("map_wanted_at",   map_wanted_at),
+                cereal::make_nvp("map_tile_over",   map_tile_over));
+    }
+
+
     bool is_anything_at (const point &p)
     {
         if (unlikely(is_oob(p.x, p.y))) {
@@ -808,14 +855,6 @@ public:
         memset(_is_water, 0, sizeof(_is_water));
     }
 
-    template <class Archive>
-    void serialize (Archive & archive)
-    {
-        archive(cereal::make_nvp("all_things",      all_things),
-                cereal::make_nvp("all_lights",      all_lights),
-                cereal::make_nvp("lights",          lights));
-    }
-
     bool is_oob (const int x, const int y, const int z)
     {
         return ((x < 0) || (x >= MAP_WIDTH) ||
@@ -874,8 +913,21 @@ public:
                 cereal::make_nvp("music_volume",       music_volume),
                 cereal::make_nvp("vsync_enable",       vsync_enable),
                 cereal::make_nvp("full_screen",        full_screen),
+                cereal::make_nvp("video_pix_width",    video_pix_width),
+                cereal::make_nvp("video_pix_height",   video_pix_height),
                 cereal::make_nvp("video_gl_width",     video_gl_width),
                 cereal::make_nvp("video_gl_height",    video_gl_height),
+                cereal::make_nvp("video_w_h_ratio",    video_w_h_ratio),
+                cereal::make_nvp("drawable_gl_width",  drawable_gl_width),
+                cereal::make_nvp("drawable_gl_height", drawable_gl_height),
+                cereal::make_nvp("tile_gl_width",      tile_gl_width),
+                cereal::make_nvp("tile_gl_height",     tile_gl_height),
+                cereal::make_nvp("one_pixel_gl_width", one_pixel_gl_width),
+                cereal::make_nvp("one_pixel_gl_height",one_pixel_gl_height),
+                cereal::make_nvp("ascii_gl_width",     ascii_gl_width),
+                cereal::make_nvp("ascii_gl_height",    ascii_gl_height),
+                cereal::make_nvp("tile_pixel_width",   tile_pixel_width),
+                cereal::make_nvp("tile_pixel_height",  tile_pixel_height),
                 cereal::make_nvp("sdl_delay",          sdl_delay));
     }
 };
@@ -889,22 +941,18 @@ public:
     template <class Archive>
     void serialize (Archive & archive)
     {
-        archive(cereal::make_nvp("config",          config),
-                cereal::make_nvp("world",           world));
+        archive(cereal::make_nvp("config",    config),
+                cereal::make_nvp("world",     world),
+                cereal::make_nvp("fps_count", fps_count));
     }
 };
 
-
 extern class Game game;
 
-extern uint8_t
-game_mouse_motion(int32_t x, int32_t y,
-                  int32_t wheelx, int32_t wheely);
-
-extern void
-game_mouse_over(int32_t x, int32_t yu,
-                int32_t wheelx, int32_t wheely);
-
+extern uint8_t game_mouse_motion(int32_t x, int32_t y, 
+                                 int32_t wheelx, int32_t wheely);
+extern void game_mouse_over(int32_t x, int32_t y,
+                            int32_t wheelx, int32_t wheely);
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
 extern uint8_t game_key_down(const struct SDL_KEYSYM *key);
 extern void game_display(Worldp);
