@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -17,6 +17,7 @@ typedef std::shared_ptr< class wid > widp;
 #include "my_enum.h"
 #include "my_size.h"
 #include "my_wid_tiles.h"
+#include "my_game.h"
 
 #ifdef ENABLE_WID_DEBUG
 void WID_LOG(widp, const char *fmt, ...) \
@@ -116,7 +117,7 @@ void wid_destroy(widp *);
 void wid_destroy_in(widp w, uint32_t ms);
 void wid_destroy_nodelay(widp *);
 void wid_destroy_ptr_in(widp *w, uint32_t ms);
-void wid_display_all(void);
+void wid_display_all(Worldp);
 void wid_fake_joy_button(int32_t x, int32_t y);
 void wid_fini(void);
 void wid_focus_lock(widp);
@@ -258,18 +259,18 @@ widp wid_new_vert_scroll_bar(widp parent, std::string name, widp scrollbar_owner
 widp wid_new_window(std::string name);
 void wid_dump(widp w, int depth);
 
-/*
- * History for all text widgets.
- */
+//
+// History for all text widgets.
+//
 #define HISTORY_MAX 16
 extern std::wstring history[HISTORY_MAX];
 extern uint32_t history_at;
 extern uint32_t history_walk;
 
 typedef struct {
-    /*
-     * Colors
-     */
+    //
+    // Colors
+    //
     color colors[WID_COLOR_MAX];
     uint8_t color_set [WID_COLOR_MAX];
 } wid_cfg;
@@ -291,15 +292,15 @@ public:
 
     int priority {};
 
-    /*
-     * The real position on the screen initially.
-     */
+    //
+    // The real position on the screen initially.
+    //
     point tl {};
     point br {};
 
-    /*
-     * Unique wid ID.
-     */
+    //
+    // Unique wid ID.
+    //
     uint64_t key {};
 };
 
@@ -373,9 +374,9 @@ public:
 
     wid_key_type tree_global_key {};
 
-    /*
-     * Sorted for display order.
-     */
+    //
+    // Sorted for display order.
+    //
     tree_wid_key key                                    {};
     wid_key_type tree2_key                              {};
     wid_key_type tree3_key                              {};
@@ -389,34 +390,34 @@ public:
     wid_key_map_int *in_tree5_ticking_wids              {};
     wid_key_map_int *in_tree_global_unsorted_root       {};
 
-    /*
-     * Sorted for display onto the screen.
-     */
+    //
+    // Sorted for display onto the screen.
+    //
     wid_key_map_location children_display_sorted {};
 
-    /*
-     * No particular sort order.
-     */
+    //
+    // No particular sort order.
+    //
     wid_key_map_int tree2_children_unsorted {};
 
-    /*
-     * A tree for moving things
-     */
+    //
+    // A tree for moving things
+    //
     wid_key_map_int tree3_moving_wids {};
 
-    /*
-     * A tree for things being destroyed.
-     */
+    //
+    // A tree for things being destroyed.
+    //
     wid_key_map_int tree4_wids_being_destroyed {};
 
-    /*
-     * A tree for ticking things
-     */
+    //
+    // A tree for ticking things
+    //
     wid_key_map_int tree5_ticking_wids {};
 
-    /*
-     * Tiles widget
-     */
+    //
+    // Tiles widget
+    //
     wid_tilesp wid_tiles {};
 
     uint8_t hidden                      {};
@@ -455,9 +456,9 @@ public:
     uint8_t square                      {};
     uint8_t box                         {};
 
-    /*
-     * Optionally set to the previous wid in a list
-     */
+    //
+    // Optionally set to the previous wid in a list
+    //
     widp prev {};
     widp next {};
     widp scrollbar_horiz {};
@@ -466,9 +467,9 @@ public:
 
     Tpp tp {};
 
-    /*
-     * The real position after scrollbar adjustments.
-     */
+    //
+    // The real position after scrollbar adjustments.
+    //
     point abs_tl {};
     point abs_br {};
 
@@ -482,29 +483,29 @@ public:
     fsize tex_tl {};
     fsize tex_br {};
 
-    /*
-     * WID_MODE_NORMAL ...
-     */
+    //
+    // WID_MODE_NORMAL ...
+    //
     wid_mode mode {};
 
-    /*
-     * Offset of child widgets in the parent window.
-     */
+    //
+    // Offset of child widgets in the parent window.
+    //
     point offset {};
 
-    /*
-     * Config layers:
-     */
+    //
+    // Config layers:
+    //
     wid_cfg cfg[WID_MODE_LAST] {};
 
-    /*
-     * Client context
-     */
+    //
+    // Client context
+    //
     void *context {};
 
-    /*
-     * Text placement.
-     */
+    //
+    // Text placement.
+    //
     point text_pos {};
 
     uint32_t destroy_when {};
@@ -513,9 +514,9 @@ public:
 
     widp *destroy_ptr {};
 
-    /*
-     * Queue of wid move requests.
-     */
+    //
+    // Queue of wid move requests.
+    //
 #define WID_MAX_MOVE_QUEUE 4
     wid_move_t move[WID_MAX_MOVE_QUEUE] {};
     point moving_start {};
@@ -524,50 +525,50 @@ public:
     uint32_t timestamp_moving_end {};
     uint8_t moving {};
 
-    /*
-     * Text input
-     */
+    //
+    // Text input
+    //
     uint16_t cursor {};
 
-    /*
-     * Order of this wid amongst other focusable widgets.
-     */
+    //
+    // Order of this wid amongst other focusable widgets.
+    //
     uint8_t focus_order {};
 
-    /*
-     * Who had it last ? Used when raising this wid again.
-     */
+    //
+    // Who had it last ? Used when raising this wid again.
+    //
     uint8_t focus_last {};
 
-    /*
-     * The wids children
-     */
+    //
+    // The wids children
+    //
     widp parent {};
 
-    /*
-     * Widget internal name.
-     */
+    //
+    // Widget internal name.
+    //
     std::string name {};
 
-    /*
-     * For debugging.
-     */
+    //
+    // For debugging.
+    //
     std::string to_string {};
 
-    /*
-     * Text that appears on the wid.
-     */
+    //
+    // Text that appears on the wid.
+    //
     std::wstring text {};
 
-    /*
-     * Text that appears as a tooltip.
-     */
+    //
+    // Text that appears as a tooltip.
+    //
     std::wstring tooltip {};
     std::wstring tooltip2 {};
 
-    /*
-     * Action handlers
-     */
+    //
+    // Action handlers
+    //
     on_key_down_t on_key_down         {};
     on_key_up_t on_key_up             {};
     on_joy_button_t on_joy_button     {};

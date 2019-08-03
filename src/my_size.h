@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #ifndef _MY_SIZE_H_
 #define _MY_SIZE_H_
@@ -194,4 +194,4 @@ public:
 typedef my_asize3d<int> size3d;
 typedef my_asize3d<double> fsize3d;
 
-#endif /* _MY_SIZE_H_ */
+#endif // _MY_SIZE_H_ 

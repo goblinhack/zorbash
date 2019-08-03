@@ -1,22 +1,22 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
 #ifndef _MY__PTRCHECK_H__
 #define _MY__PTRCHECK_H__
 
-/*
- * __FUNCTION__ is not a preprocessor directive so we can't convert it into a
- * string
- */
+//
+// __FUNCTION__ is not a preprocessor directive so we can't convert it into a
+// string
+//
 #define PTRCHECK_AT __FILE__, __PRETTY_FUNCTION__, __LINE__
 
-/*
- * util.c
- */
+//
+// util.c
+//
 void *myzalloc_(uint32_t size, const char *what, const char *func,
                 const char *file, const uint32_t line);
 
@@ -67,14 +67,14 @@ void ptrcheck_leak_print(void);
 void ptrcheck_leak_snapshot(void);
 void ptrcheck_usage_print(void);
 
-#ifdef ENABLE_PTRCHECK /* { */
+#ifdef ENABLE_PTRCHECK // { 
 #define newptr(__ptr__, __what__) (ptrcheck_alloc((__ptr__),( __what__), sizeof(*(__ptr__)), PTRCHECK_AT))
 #define oldptr(__ptr__) (ptrcheck_free((__ptr__), PTRCHECK_AT))
 #define verify(__ptr__) (ptrcheck_verify((__ptr__), PTRCHECK_AT))
-#else /* } { */
+#else // } { 
 #define newptr(__ptr__, __what__)
 #define oldptr(__ptr__)
 #define verify(__ptr__)
-#endif /* ENABLE_PTRCHECK } */
+#endif // ENABLE_PTRCHECK } 
 
-#endif /* __PTRCHECK_H__ */
+#endif // __PTRCHECK_H__ 

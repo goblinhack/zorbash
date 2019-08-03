@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_charmap.h"
 #include "my_game.h"
@@ -26,9 +26,9 @@ public:
         oldptr(this);
     }
 
-    /*
-     * Unique per room.
-     */
+    //
+    // Unique per room.
+    //
     uint32_t                roomno {0};
     uint8_t                 width  {ROOM_WIDTH};
     uint8_t                 height {ROOM_HEIGHT};
@@ -40,17 +40,17 @@ public:
     bool                    has_door_left  {false};
     bool                    has_door_right {false};
 
-    /*
-     * All doors in this room. We will choose one for connectivity.
-     */
+    //
+    // All doors in this room. We will choose one for connectivity.
+    //
     std::vector<point>      doors_up;
     std::vector<point>      doors_down;
     std::vector<point>      doors_right;
     std::vector<point>      doors_left;
 
-    /*
-     * And this is which door we chose from the above lists.
-     */
+    //
+    // And this is which door we chose from the above lists.
+    //
     uint8_t                 which_secret_door_up {0};
     uint8_t                 which_secret_door_down {0};
     uint8_t                 which_secret_door_left {0};
@@ -85,10 +85,10 @@ public:
     //
     bool                     skip {};
 
-    /*
-     * Direction is the flow of the level, like can a player only go one
-     * way and not return
-     */
+    //
+    // Direction is the flow of the level, like can a player only go one
+    // way and not return
+    //
     bool                    dir_up       {false};
     bool                    dir_down     {false};
     bool                    dir_left     {false};
@@ -102,15 +102,15 @@ public:
 
     uint8_t                 depth {0};
 
-    /*
-     * Final placement of this room in the dungeon.
-     */
+    //
+    // Final placement of this room in the dungeon.
+    //
     bool                    placed {false};
 
-    /***********************************************************************
-     * This is all room status that changes when rooms are placed.
-     * The above is const.
-     ***********************************************************************/
+    ////////////////////////////////////////////////////////////////////////
+    // This is all room status that changes when rooms are placed.
+    // The above is const.
+    /////////////////////////////////////////////////////////////////////////
     point                   at {};
     point                   rollback_at {};
 

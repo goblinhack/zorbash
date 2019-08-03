@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -13,9 +13,9 @@ void wid_console_hello(void);
 
 #include "my_wid.h"
 
-/*
- * Global widgets.
- */
+//
+// Global widgets.
+//
 extern widp wid_console_input_line;
 extern widp wid_console_window;
 extern widp wid_console_container;

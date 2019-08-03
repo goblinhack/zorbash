@@ -1,27 +1,27 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #ifndef _MY_GETPUT_PIXEL_MACROS_H_
 #define _MY_GETPUT_PIXEL_MACROS_H_
 
 #include "my_main.h"
 
-/*
- * Quick row-color bit-shift lookups for certain common color screen size widths:
+//
+// Quick row-color bit-shift lookups for certain common color screen size widths:
 
- * <<1  2
- * <<2  4
- * <<3  8
- * <<4  16
- * <<5  32
- * <<6  64
- * <<7  128
- * <<8  256
- * <<9  512
- * <<10 1024
- */
+// <<1  2
+// <<2  4
+// <<3  8
+// <<4  16
+// <<5  32
+// <<6  64
+// <<7  128
+// <<8  256
+// <<9  512
+// <<10 1024
+//
 
 #define pixel_16w(y)     ((y)<<4)
 #define pixel_24w(y)     ((y)<<4)+((y)<<3)
@@ -37,9 +37,9 @@
 #define pixel_1024w(y)   (((y)<<10))
 #define pixel_ANYw(s,y)  ((y)*(s->pitch/s->format->BytesPerPixel))
 
-/*
- * 32 bpp macros:
- */
+//
+// 32 bpp macros:
+//
 #define pixel_16x32bpp(s, x, y) ((uint32_t*)s->pixels+(x)+pixel_16w(y))
 #define pixel_24x32bpp(s, x, y) ((uint32_t*)s->pixels+(x)+pixel_24w(y))
 #define pixel_32x32bpp(s, x, y) ((uint32_t*)s->pixels+(x)+pixel_32w(y))
@@ -79,41 +79,41 @@
 #define getPixel_1024x32bpp(s, x, y, rgb)   *(rgb) = *pixel_1024x32bpp(s, x, y)
 #define getPixel_32bpp(s, x, y, rgb)        *(rgb) = *pixel_32bpp(s, x, y)
 
-/*
- * Lock a SDL_Surface for safe color access
- */
+//
+// Lock a SDL_Surface for safe color access
+//
 static inline void lock (SDL_Surface *surface)
 {
 #if 0
- /*
-     * Is this needed? unlocking seems slow
-     */
+ //
+    // Is this needed? unlocking seems slow
+    //
     if (SDL_MUSTLOCK(surface)) {
         SDL_LockSurface(surface);
     }
 #endif
 }
 
-/*
- * Unlock a SDL_Surface, after lock()
- */
+//
+// Unlock a SDL_Surface, after lock()
+//
 static inline void unlock (SDL_Surface *surface)
 {
 #if 0
- /*
-     * Is this needed? unlocking seems slow
-     */
+ //
+    // Is this needed? unlocking seems slow
+    //
     if (SDL_MUSTLOCK(surface)) {
         SDL_UnlockSurface(surface);
     }
 #endif
 }
 
-/*
- * This function sets the specified color on a SDL_Surface. Sanity checks are
- * performed on the co-ordinates and the SDL_Surface is locked for you.
- * Safe, but slow. For more speed, try the lower level access function.
- */
+//
+// This function sets the specified color on a SDL_Surface. Sanity checks are
+// performed on the co-ordinates and the SDL_Surface is locked for you.
+// Safe, but slow. For more speed, try the lower level access function.
+//
 static void inline putPixel (SDL_Surface * surface, uint32_t x, uint32_t y, color col)
 {
     uint8_t   bpp = surface->format->BytesPerPixel;
@@ -178,11 +178,11 @@ static void inline putPixel (SDL_Surface * surface, uint32_t x, uint32_t y, colo
     unlock(surface);
 }
 
-/*
- * This function sets the specified color on a SDL_Surface. Sanity checks are
- * performed on the co-ordinates and the SDL_Surface is locked for you.
- * Safe, but slow. For more speed, try the lower level access function.
- */
+//
+// This function sets the specified color on a SDL_Surface. Sanity checks are
+// performed on the co-ordinates and the SDL_Surface is locked for you.
+// Safe, but slow. For more speed, try the lower level access function.
+//
 static inline color getPixel (SDL_Surface * surface, uint32_t x, uint32_t y)
 {
     uint8_t   bpp = surface->format->BytesPerPixel;

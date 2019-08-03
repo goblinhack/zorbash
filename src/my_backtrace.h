@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -24,9 +24,9 @@ void traceback_stderr(tracebackp);
 #include <execinfo.h>
 #include <cxxabi.h>
 
-/*
- * Inspired from https://github.com/nico/demumble/issues
- */
+//
+// Inspired from https://github.com/nico/demumble/issues
+//
 static bool starts_with(const char* s, const char* prefix) {
     return strncmp(s, prefix, strlen(prefix)) == 0;
 }

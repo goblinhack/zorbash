@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -24,9 +24,9 @@ strlcpy_(char * dst, const char * src, size_t size);
 extern size_t
 strlcat_(char * dst, const char * src, size_t size);
 
-/*
- * Max long string size
- */
+//
+// Max long string size
+//
 #define MAXSTR                          1024
 #define MAXSHORTSTR                     256
 

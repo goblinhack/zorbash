@@ -24,7 +24,7 @@ void Thing::set_weapon_carry_anim_id (uint32_t weapon_carry_anim_id)
         return;
     }
 
-    weapon_carry_anim = thing_find(weapon_carry_anim_id);
+    weapon_carry_anim = thing_find(world, weapon_carry_anim_id);
 
     set_weapon_carry_anim(weapon_carry_anim);
 }
@@ -72,7 +72,7 @@ void Thing::set_weapon_use_anim_id (uint32_t weapon_use_anim_id)
         return;
     }
 
-    weapon_use_anim = thing_find(weapon_use_anim_id);
+    weapon_use_anim = thing_find(world, weapon_use_anim_id);
 
     set_weapon_use_anim(weapon_use_anim);
 }
@@ -183,7 +183,7 @@ Thingp Thing::get_weapon_carry_anim (void)
     Thingp weapon_carry_anim = 0;
 
     if (weapon_carry_anim_thing_id) {
-        weapon_carry_anim = thing_find(weapon_carry_anim_thing_id);
+        weapon_carry_anim = thing_find(world, weapon_carry_anim_thing_id);
     }
 
     return (weapon_carry_anim);
@@ -198,7 +198,7 @@ Thingp Thing::get_weapon_use_anim (void)
     Thingp weapon_use_anim = 0;
 
     if (weapon_use_anim_thing_id) {
-        weapon_use_anim = thing_find(weapon_use_anim_thing_id);
+        weapon_use_anim = thing_find(world, weapon_use_anim_thing_id);
     }
 
     return (weapon_use_anim);
@@ -266,7 +266,7 @@ void Thing::wield (Tpp weapon)
         return;
     }
 
-    auto carry_anim = thing_new(carry_as, this);
+    auto carry_anim = thing_new(world, carry_as, this);
 
     //
     // Set the weapon so we can use it later
@@ -317,7 +317,7 @@ void Thing::use (void)
     //
     // Save the thing id so the client wid can keep track of the weapon.
     //
-    auto use_anim = thing_new(swung_as, this);
+    auto use_anim = thing_new(world, swung_as, this);
 
     //
     // Attach to the parent thing.

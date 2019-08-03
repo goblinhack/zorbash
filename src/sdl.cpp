@@ -964,6 +964,8 @@ void sdl_loop (void)
         SDL_GL_SetSwapInterval(0);
     }
 
+    auto world = &game.world;
+
     for (;/*ever*/;) {
         /*
          * Clear the screen
@@ -1010,8 +1012,8 @@ void sdl_loop (void)
             if (!sdl_main_loop_running) {
                 break;
             }
-            player_tick();
-            things_tick();
+            player_tick(world);
+            things_tick(world);
         }
 
         //fluid_tick();
@@ -1021,7 +1023,7 @@ void sdl_loop (void)
         /*
          * Display UI.
          */
-        wid_display_all();
+        wid_display_all(world);
 
         /*
          * FPS counter.
@@ -1038,8 +1040,8 @@ void sdl_loop (void)
                     /*
                      * Update FPS counter.
                      */
-                    game.state.fps_count = frames;
-                    //CON("%d FPS", game.state.fps_count);
+                    game.fps_count = frames;
+                    //CON("%d FPS", game.fps_count);
 
                     frames = 0;
                 }

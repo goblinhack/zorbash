@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #ifndef _MY_POINT_H_
 #define _MY_POINT_H_
@@ -284,9 +284,9 @@ public:
         return (false);
     }
 
-    /*
-     * Two lines we already know intersect.
-     */
+    //
+    // Two lines we already know intersect.
+    //
     friend uint8_t get_line_known_intersection (my_apoint p0,
                                                 my_apoint p1,
                                                 my_apoint p2,
@@ -325,14 +325,14 @@ public:
         double mag;
         double U;
 
-        /*
-         * Can get the squared distance to avoid this.
-         */
+        //
+        // Can get the squared distance to avoid this.
+        //
         mag = distance(L1, L0);
 
-        /*
-         * Project point P onto the line and then calc the dot product.
-         */
+        //
+        // Project point P onto the line and then calc the dot product.
+        //
         U = (((P0.x - L0.x) * (L1.x - L0.x)) +
              ((P0.y - L0.y) * (L1.y - L0.y))) /
              (mag * mag);
@@ -533,4 +533,4 @@ typedef my_apoint3d<int> point3d;
 typedef my_apoint3d<float> fpoint3d;
 #endif
 
-#endif /* _MY_POINT_H_ */
+#endif // _MY_POINT_H_ 

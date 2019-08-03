@@ -257,7 +257,7 @@ double Thing::get_bounce (void)
 void Thing::update_pos (fpoint to)
 {_
     point new_at((int)to.x, (int)to.y);
-    if (game.state.map.is_oob(new_at)) {
+    if (world->is_oob(new_at)) {
         return;
     }
 
@@ -276,76 +276,76 @@ void Thing::update_pos (fpoint to)
     //
     if (old_at != new_at) {
         if (is_wall()) {
-            game.state.map.unset_wall(old_at.x, old_at.y);
-            game.state.map.set_wall(new_at.x, new_at.y);
+            world->unset_wall(old_at.x, old_at.y);
+            world->set_wall(new_at.x, new_at.y);
         }
         if (is_wall() || is_rock()) {
-            game.state.map.unset_solid(old_at.x, old_at.y);
-            game.state.map.set_solid(new_at.x, new_at.y);
+            world->unset_solid(old_at.x, old_at.y);
+            world->set_solid(new_at.x, new_at.y);
         }
         if (is_floor()) {
-            game.state.map.unset_floor(old_at.x, old_at.y);
-            game.state.map.set_floor(new_at.x, new_at.y);
+            world->unset_floor(old_at.x, old_at.y);
+            world->set_floor(new_at.x, new_at.y);
         }
         if (is_lava()) {
-            game.state.map.unset_lava(old_at.x, old_at.y);
-            game.state.map.set_lava(new_at.x, new_at.y);
+            world->unset_lava(old_at.x, old_at.y);
+            world->set_lava(new_at.x, new_at.y);
         }
         if (is_blood()) {
-            game.state.map.unset_blood(old_at.x, old_at.y);
-            game.state.map.set_blood(new_at.x, new_at.y);
+            world->unset_blood(old_at.x, old_at.y);
+            world->set_blood(new_at.x, new_at.y);
         }
         if (is_water()) {
-            game.state.map.unset_water(old_at.x, old_at.y);
-            game.state.map.set_water(new_at.x, new_at.y);
+            world->unset_water(old_at.x, old_at.y);
+            world->set_water(new_at.x, new_at.y);
         }
         if (is_deep_water()) {
-            game.state.map.unset_deep_water(old_at.x, old_at.y);
-            game.state.map.set_deep_water(new_at.x, new_at.y);
+            world->unset_deep_water(old_at.x, old_at.y);
+            world->set_deep_water(new_at.x, new_at.y);
         }
         if (is_corridor()) {
-            game.state.map.unset_corridor(old_at.x, old_at.y);
-            game.state.map.set_corridor(new_at.x, new_at.y);
+            world->unset_corridor(old_at.x, old_at.y);
+            world->set_corridor(new_at.x, new_at.y);
         }
         if (is_dirt()) {
-            game.state.map.unset_dirt(old_at.x, old_at.y);
-            game.state.map.set_dirt(new_at.x, new_at.y);
+            world->unset_dirt(old_at.x, old_at.y);
+            world->set_dirt(new_at.x, new_at.y);
         }
         if (is_grass()) {
-            game.state.map.unset_grass(old_at.x, old_at.y);
-            game.state.map.set_grass(new_at.x, new_at.y);
+            world->unset_grass(old_at.x, old_at.y);
+            world->set_grass(new_at.x, new_at.y);
         }
         if (is_soil()) {
-            game.state.map.unset_soil(old_at.x, old_at.y);
-            game.state.map.set_soil(new_at.x, new_at.y);
+            world->unset_soil(old_at.x, old_at.y);
+            world->set_soil(new_at.x, new_at.y);
         }
         if (is_gravel()) {
-            game.state.map.unset_gravel(old_at.x, old_at.y);
-            game.state.map.set_gravel(new_at.x, new_at.y);
+            world->unset_gravel(old_at.x, old_at.y);
+            world->set_gravel(new_at.x, new_at.y);
         }
         if (is_snow()) {
-            game.state.map.unset_snow(old_at.x, old_at.y);
-            game.state.map.set_snow(new_at.x, new_at.y);
+            world->unset_snow(old_at.x, old_at.y);
+            world->set_snow(new_at.x, new_at.y);
         }
         if (is_monst()) {
-            game.state.map.unset_monst(old_at.x, old_at.y);
-            game.state.map.set_monst(new_at.x, new_at.y);
+            world->unset_monst(old_at.x, old_at.y);
+            world->set_monst(new_at.x, new_at.y);
         }
         if (is_food()) {
-            game.state.map.unset_food(old_at.x, old_at.y);
-            game.state.map.set_food(new_at.x, new_at.y);
+            world->unset_food(old_at.x, old_at.y);
+            world->set_food(new_at.x, new_at.y);
         }
         if (is_key()) {
-            game.state.map.unset_key(old_at.x, old_at.y);
-            game.state.map.set_key(new_at.x, new_at.y);
+            world->unset_key(old_at.x, old_at.y);
+            world->set_key(new_at.x, new_at.y);
         }
         if (tp_gfx_large_shadow_caster(tp)) {
-            game.state.map.unset_gfx_large_shadow_caster(old_at.x, old_at.y);
-            game.state.map.set_gfx_large_shadow_caster(new_at.x, new_at.y);
+            world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
+            world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
         }
         if (is_door()) {
-            game.state.map.unset_door(old_at.x, old_at.y);
-            game.state.map.set_door(new_at.x, new_at.y);
+            world->unset_door(old_at.x, old_at.y);
+            world->set_door(new_at.x, new_at.y);
         }
     }
 

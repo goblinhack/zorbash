@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #ifndef _MY_MY_COLOR_H_
 #define _MY_MY_COLOR_H_
@@ -1583,4 +1583,4 @@ extern color COLOR_NONE;
 #define CONST_YELLOWGREEN { 154, 205, 50, 255 }
 #define CONST_YELLOW { 255, 255, 0, 255 }
 #define CONST_INK { 51, 54, 47, 47 }
-#endif /* _MY_COLOR_H_ */
+#endif // _MY_COLOR_H_ 

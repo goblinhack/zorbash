@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -27,7 +27,7 @@ public:
     {
     }
 
-    std::string name; /* key */
+    std::string name; // key 
 
     int8_t is_file {};
 };

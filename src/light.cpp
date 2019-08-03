@@ -20,7 +20,8 @@ static const int LIGHT_VISIBLE_DIST = TILES_ACROSS + TILES_ACROSS / 2;
 
 Thingp debug_thing;
 
-Lightp light_new (Thingp owner,
+Lightp light_new (Worldp world,
+                  Thingp owner,
                   uint16_t max_light_rays,
                   double strength,
                   fpoint at,
@@ -30,15 +31,16 @@ Lightp light_new (Thingp owner,
     auto id = ++light_id;
 
     auto l = new Light(); // std::make_shared< class Light >();
+    l->world = world;
     l->id = id;
     auto p = std::make_pair(l->id, l);
-    auto result = game.state.map.all_lights.insert(p);
+    auto result = world->all_lights.insert(p);
     if (result.second == false) {
         DIE("light insert [%d] failed", id);
     }
 
     point new_at((int)at.x, (int)at.y);
-    auto n = &game.state.map.lights[new_at.x][new_at.y];
+    auto n = &world->lights[new_at.x][new_at.y];
     auto result2 = n->insert(p);
     if (result2.second == false) {
         DIE("light insert into map [%d] failed", id);
@@ -68,32 +70,35 @@ Lightp light_new (Thingp owner,
     return (l);
 }
 
-Lightp light_new (uint16_t max_light_rays,
+Lightp light_new (Worldp world,
+                  uint16_t max_light_rays,
                   double strength,
                   fpoint at,
                   LightQuality quality,
                   color col)
 {_
-    return (light_new(nullptr, max_light_rays, strength, at, quality, col));
+    return (light_new(world, nullptr, 
+                      max_light_rays, strength, at, quality, col));
 }
 
-Lightp light_new (double strength,
+Lightp light_new (Worldp world,
+                  double strength,
                   fpoint at,
                   LightQuality quality,
                   color col)
 {_
-    return (light_new(nullptr, 10, strength, at, quality, col));
+    return (light_new(world, nullptr, 10, strength, at, quality, col));
 }
 
 void Light::pop (void)
 {_
-    game.state.map.all_lights.erase(id);
+    world->all_lights.erase(id);
 
     /*
      * Pop from the map
      */
     point old_at((int)at.x, (int)at.y);
-    auto o = &game.state.map.lights[old_at.x][old_at.y];
+    auto o = &world->lights[old_at.x][old_at.y];
     auto iter = o->find(id);
     if (iter == o->end()) {
         die("thing not found to destroy");
@@ -114,7 +119,7 @@ void Light::move_to (fpoint to)
         /*
          * Pop
          */
-        auto o = &game.state.map.lights[old_at.x][old_at.y];
+        auto o = &world->lights[old_at.x][old_at.y];
         auto iter = o->find(id);
         if (iter == o->end()) {
             die("not found on map");
@@ -125,24 +130,11 @@ void Light::move_to (fpoint to)
         /*
          * Add back
          */
-        auto n = &game.state.map.lights[new_at.x][new_at.y];
+        auto n = &world->lights[new_at.x][new_at.y];
         n->insert(std::make_pair(id, value));
     }
 
     at = to;
-}
-
-/*
- * Find an existing light.
- */
-Lightp light_find (uint32_t id)
-{_
-    auto result = game.state.map.all_lights.find(id);
-    if (result == game.state.map.all_lights.end()) {
-        return (0);
-    }
-
-    return (result->second);
 }
 
 std::string Light::to_string (void)
@@ -200,11 +192,11 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (game.state.map.is_oob(x, y)) {
+            if (world->is_oob(x, y)) {
                 break;
             }
 
-            if (game.state.map.is_gfx_large_shadow_caster(x, y)) {
+            if (world->is_gfx_large_shadow_caster(x, y)) {
                 break;
             }
         }
@@ -224,7 +216,7 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (!game.state.map.is_gfx_large_shadow_caster(x, y)) {
+            if (!world->is_gfx_large_shadow_caster(x, y)) {
                 break;
             }
 
@@ -258,7 +250,7 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (game.state.map.is_oob(x, y)) {
+            if (world->is_oob(x, y)) {
                 break;
             }
 
@@ -274,17 +266,17 @@ void Light::calculate (void)
     }
 }
 
-void lights_calculate (void)
+void lights_calculate (Worldp world)
 {
-    for (auto x = 0 ; x < DUN_WIDTH; x++) {
-        auto X = ((int)game.state.map_at.x) - (DUN_WIDTH / 2);
-        for (auto y = 0 ; y < DUN_HEIGHT; y++) {
-            auto Y = ((int)game.state.map_at.y) - (DUN_HEIGHT / 2);
-            if (game.state.map.is_oob(X, Y)) {
+    for (auto x = 0 ; x < CHUNK_WIDTH; x++) {
+        auto X = ((int)world->map_at.x) - (CHUNK_WIDTH / 2);
+        for (auto y = 0 ; y < CHUNK_HEIGHT; y++) {
+            auto Y = ((int)world->map_at.y) - (CHUNK_HEIGHT / 2);
+            if (world->is_oob(X, Y)) {
                 continue;
             }
 
-            for (auto p : game.state.map.lights[X][Y]) {
+            for (auto p : world->lights[X][Y]) {
                 auto l = p.second;
 
                 switch (l->quality) {
@@ -314,8 +306,8 @@ void Light::render_triangle_fans (void)
     fpoint light_pos(tx * game.config.tile_gl_width,
                      ty * game.config.tile_gl_height);
 
-    auto ox = game.state.map_at.x * game.config.tile_gl_width;
-    auto oy = game.state.map_at.y * game.config.tile_gl_height;
+    auto ox = world->map_at.x * game.config.tile_gl_width;
+    auto oy = world->map_at.y * game.config.tile_gl_height;
 
     glTranslatef(-ox, -oy, 0);
 
@@ -425,8 +417,8 @@ void Light::render_debug_lines (int minx, int miny, int maxx, int maxy)
     fpoint light_pos(tx * game.config.tile_gl_width,
                      ty * game.config.tile_gl_height);
 
-    auto ox = game.state.map_at.x * game.config.tile_gl_width;
-    auto oy = game.state.map_at.y * game.config.tile_gl_height;
+    auto ox = world->map_at.x * game.config.tile_gl_width;
+    auto oy = world->map_at.y * game.config.tile_gl_height;
 
     glTranslatef(-ox, -oy, 0);
 
@@ -440,7 +432,7 @@ void Light::render_debug_lines (int minx, int miny, int maxx, int maxy)
     uint8_t z = MAP_DEPTH_WALLS;
     for (int16_t x = maxx - 1; x >= minx; x--) {
         for (int16_t y = miny; y < maxy; y++) {
-            for (auto p : game.state.map.all_display_things_at[x][y][z]) {
+            for (auto p : world->all_display_things_at[x][y][z]) {
                 if (is_nearest_wall[x][y]) {
                     double X = x;
                     double Y = y;
@@ -495,8 +487,8 @@ void Light::render_point_light (void)
     fpoint light_pos(tx * game.config.tile_gl_width,
                      ty * game.config.tile_gl_height);
 
-    auto ox = game.state.map_at.x * game.config.tile_gl_width;
-    auto oy = game.state.map_at.y * game.config.tile_gl_height;
+    auto ox = world->map_at.x * game.config.tile_gl_width;
+    auto oy = world->map_at.y * game.config.tile_gl_height;
 
     double lw = strength * game.config.tile_gl_width;
     double lh = strength * game.config.tile_gl_height;
@@ -592,13 +584,15 @@ void Light::render_debug (int minx, int miny, int maxx, int maxy)
     }
 }
 
-void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo, int pass)
+void lights_render_points (Worldp world,
+                           int minx, int miny, int maxx, int maxy, 
+                           int fbo, int pass)
 {
     bool have_low_quality = false;
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : game.state.map.lights[x][y]) {
+            for (auto p : world->lights[x][y]) {
                 auto l = p.second;
                 if (l->quality == LIGHT_QUALITY_POINT) {
                     continue;
@@ -607,8 +601,8 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo, int 
                 /*
                  * Too far away from the player? Skip rendering.
                  */
-                if (game.state.player) {
-                    auto p = game.state.player;
+                if (world->player) {
+                    auto p = world->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
@@ -632,7 +626,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo, int 
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : game.state.map.lights[x][y]) {
+            for (auto p : world->lights[x][y]) {
                 auto l = p.second;
                 if (l->quality != LIGHT_QUALITY_LOW) {
                     continue;
@@ -657,8 +651,8 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo, int 
                 /*
                  * Too far away from the player? Skip rendering.
                  */
-                if (game.state.player) {
-                    auto p = game.state.player;
+                if (world->player) {
+                    auto p = world->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
@@ -675,20 +669,22 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo, int 
     glcolor(WHITE);
 }
 
-void lights_render_high_quality (int minx, int miny, int maxx, int maxy, int fbo)
+void lights_render_high_quality (Worldp world,
+                                 int minx, int miny, 
+                                 int maxx, int maxy, int fbo)
 {
     Lightp deferred = nullptr;
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : game.state.map.lights[x][y]) {
+            for (auto p : world->lights[x][y]) {
                 auto l = p.second;
 
                 if (l->quality != LIGHT_QUALITY_HIGH) {
                     continue;
                 }
 
-                if (game.state.player && (l->owner == game.state.player)) {
+                if (world->player && (l->owner == world->player)) {
                     deferred = l;
                     continue;
                 }
@@ -696,8 +692,8 @@ void lights_render_high_quality (int minx, int miny, int maxx, int maxy, int fbo
                 /*
                  * Too far away from the player? Skip rendering.
                  */
-                if (game.state.player) {
-                    auto p = game.state.player;
+                if (world->player) {
+                    auto p = world->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
@@ -718,11 +714,12 @@ void lights_render_high_quality (int minx, int miny, int maxx, int maxy, int fbo
     }
 }
 
-void lights_render_points_debug (int minx, int miny, int maxx, int maxy)
+void lights_render_points_debug (Worldp world,
+                                 int minx, int miny, int maxx, int maxy)
 {
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : game.state.map.lights[x][y]) {
+            for (auto p : world->lights[x][y]) {
                 auto l = p.second;
 
                 if (l->quality == LIGHT_QUALITY_POINT) {
@@ -732,8 +729,8 @@ void lights_render_points_debug (int minx, int miny, int maxx, int maxy)
                 /*
                  * Too far away from the player? Skip rendering.
                  */
-                if (game.state.player) {
-                    auto p = game.state.player;
+                if (world->player) {
+                    auto p = world->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 

@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -19,9 +19,9 @@
 #include "my_main.h"
 #include "my_sdl.h"
 
-/*
- * Misc
- */
+//
+// Misc
+//
 #undef ONESEC
 #define ONESEC                          1000
 

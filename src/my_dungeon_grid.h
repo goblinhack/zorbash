@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 //
 // Implements layered cycles that can be used to then create a dungeon
@@ -10,21 +10,21 @@
 
 class Node {
 public:
-    /*
-     * Nodes have a depth number, optional key, start and exit and corridors
-     * to adjoining depths. Depth increases as we get closer to the exit.
-     */
+    //
+    // Nodes have a depth number, optional key, start and exit and corridors
+    // to adjoining depths. Depth increases as we get closer to the exit.
+    //
     int depth                                 {0};
-    /*
-     * pass 1 is the main dungeon
-     * pass 2 are secret levels
-     */
+    //
+    // pass 1 is the main dungeon
+    // pass 2 are secret levels
+    //
     int pass                                  {0};
     int x, y;
-    /*
-     * Not necessarily an actual key or lock, but something allowing access
-     * to the other node. Only one key per node depth.
-     */
+    //
+    // Not necessarily an actual key or lock, but something allowing access
+    // to the other node. Only one key per node depth.
+    //
     bool is_secret                            {false};
     bool is_key                               {false};
     bool is_lock                              {false};
@@ -44,9 +44,9 @@ public:
     bool dir_left                             {false};
     bool dir_right                            {false};
 
-    /*
-     * Update init_nodes on changes
-     */
+    //
+    // Update init_nodes on changes
+    //
     bool has_path (void)
     {
         return (dir_down || dir_up || dir_left || dir_right);
@@ -102,9 +102,9 @@ public:
     int max_depth                             {0};
     int max_vdepth                            {0};
 
-    /*
-     * Water, rocks etc...
-     */
+    //
+    // Water, rocks etc...
+    //
     int depth_obstacle                        {-1};
 
     Nodes (int grid_width, int grid_height) :

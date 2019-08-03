@@ -1,16 +1,16 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
 #ifndef _MY_BITS_H_
 #define _MY_BITS_H_
 
-/*
- * Bit routines
- */
+//
+// Bit routines
+//
 #define ROUND64(x)                      (((x) + 0x3F) & ~0x3F)
 #define ROUND32(x)                      (((x) + 0x1F) & ~0x1F)
 #define ROUND16(x)                      (((x) + 0xF) & ~0xF)
@@ -77,9 +77,9 @@
 #define FIRST_FREEBIT_IN_64BIT(_bitarr_)                                    \
     FIRST_BIT_IN_64BIT(~(_bitarr_))                                         \
 
-/*
- * bitcount
- */
+//
+// bitcount
+//
 #define BITCOUNT(w)                                                         \
    w = (0x55555555LU & w) + (0x55555555LU & (w>> 1));                       \
    w = (0x33333333LU & w) + (0x33333333LU & (w>> 2));                       \

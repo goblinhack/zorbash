@@ -14,10 +14,10 @@ static uint32_t next_thing_id;
 
 static std::list<uint32_t> things_to_delete;
 
-void thing_gc (void)
+void thing_gc (Worldp world)
 {
     for (auto id : things_to_delete) {
-        auto t = thing_find(id);
+        auto t = thing_find(world, id);
         if (!t) {
             ERR("thing %u not found to garbage collect", id);
             continue;
@@ -33,16 +33,19 @@ void thing_gc (void)
     things_to_delete.clear();
 }
 
-Thingp thing_new (std::string tp_name, Thingp owner)
+Thingp thing_new (Worldp world, std::string tp_name, Thingp owner)
 {_
-    return thing_new(tp_name, owner->mid_at - fpoint(0.5, 0.5));
+    return thing_new(world, tp_name, owner->mid_at - fpoint(0.5, 0.5));
 }
 
-Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
+Thingp thing_new (Worldp world,
+                  std::string tp_name, fpoint at, fpoint jitter)
 {_
     auto id = ++next_thing_id;
 
     auto t = new Thing;
+    t->world = world;
+
     auto tp = t->tp = tp_find(tp_name);
     if (!t->tp) {
         DIE("thing [%s] not found", tp_name.c_str());
@@ -51,13 +54,13 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->id = id;
 
     auto p = std::make_pair(t->id, t);
-    auto result = game.state.map.all_things.insert(p);
+    auto result = world->all_things.insert(p);
     if (result.second == false) {
         DIE("thing insert [%d] failed", id);
     }
 
     if (tp_is_active(tp)) {
-        auto result = game.state.map.all_active_things.insert(p);
+        auto result = world->all_active_things.insert(p);
         if (result.second == false) {
             DIE("thing insert active [%d] failed", id);
         }
@@ -169,14 +172,14 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     }
 
     if (tp_is_player(tp)) {
-        if (game.state.player && (game.state.player != t)) {
+        if (world->player && (world->player != t)) {
             DIE("player exists in multiple places on map, %f, %f and %f, %f",
-                game.state.player->mid_at.x,
-                game.state.player->mid_at.y,
+                world->player->mid_at.x,
+                world->player->mid_at.y,
                 t->mid_at.x,
                 t->mid_at.y);
         }
-        game.state.player = t;
+        world->player = t;
 
         color col = WHITE;
         //
@@ -184,69 +187,70 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         // at the edges of the fbo
         //
         col.a = 250;
-        t->light = light_new(t, MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at,
+        t->light = light_new(world, t,
+                             MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at,
                              LIGHT_QUALITY_HIGH, col);
 
         t->log("player created");
     }
 
     if (tp_is_wall(tp)) {
-        game.state.map.set_wall(new_at.x, new_at.y);
+        world->set_wall(new_at.x, new_at.y);
     }
     if (tp_is_wall(tp)) {
-        game.state.map.set_solid(new_at.x, new_at.y);
+        world->set_solid(new_at.x, new_at.y);
     }
     if (tp_is_floor(tp)) {
-        game.state.map.set_floor(new_at.x, new_at.y);
+        world->set_floor(new_at.x, new_at.y);
     }
     if (tp_is_lava(tp)) {
-        game.state.map.set_lava(new_at.x, new_at.y);
+        world->set_lava(new_at.x, new_at.y);
     }
     if (tp_is_blood(tp)) {
-        game.state.map.set_blood(new_at.x, new_at.y);
+        world->set_blood(new_at.x, new_at.y);
     }
     if (tp_is_water(tp)) {
-        game.state.map.set_water(new_at.x, new_at.y);
+        world->set_water(new_at.x, new_at.y);
     }
     if (tp_is_deep_water(tp)) {
-        game.state.map.set_deep_water(new_at.x, new_at.y);
-        game.state.map.set_water(new_at.x, new_at.y);
+        world->set_deep_water(new_at.x, new_at.y);
+        world->set_water(new_at.x, new_at.y);
     }
     if (tp_is_corridor(tp)) {
-        game.state.map.set_corridor(new_at.x, new_at.y);
+        world->set_corridor(new_at.x, new_at.y);
     }
     if (tp_is_dirt(tp)) {
-        game.state.map.set_dirt(new_at.x, new_at.y);
+        world->set_dirt(new_at.x, new_at.y);
     }
     if (tp_is_grass(tp)) {
-        game.state.map.set_grass(new_at.x, new_at.y);
+        world->set_grass(new_at.x, new_at.y);
     }
     if (tp_is_soil(tp)) {
-        game.state.map.set_soil(new_at.x, new_at.y);
+        world->set_soil(new_at.x, new_at.y);
     }
     if (tp_is_gravel(tp)) {
-        game.state.map.set_gravel(new_at.x, new_at.y);
+        world->set_gravel(new_at.x, new_at.y);
     }
     if (tp_is_snow(tp)) {
-        game.state.map.set_snow(new_at.x, new_at.y);
+        world->set_snow(new_at.x, new_at.y);
     }
     if (tp_is_monst(tp)) {
-        game.state.map.set_monst(new_at.x, new_at.y);
+        world->set_monst(new_at.x, new_at.y);
     }
     if (tp_is_food(tp)) {
-        game.state.map.set_food(new_at.x, new_at.y);
+        world->set_food(new_at.x, new_at.y);
     }
     if (tp_is_rock(tp)) {
-        game.state.map.set_rock(new_at.x, new_at.y);
+        world->set_rock(new_at.x, new_at.y);
     }
     if (tp_is_key(tp)) {
-        game.state.map.set_key(new_at.x, new_at.y);
+        world->set_key(new_at.x, new_at.y);
     }
     if (tp_gfx_large_shadow_caster(tp)) {
-        game.state.map.set_gfx_large_shadow_caster(new_at.x, new_at.y);
+        world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
     }
     if (tp_is_door(tp)) {
-        game.state.map.set_door(new_at.x, new_at.y);
+        world->set_door(new_at.x, new_at.y);
     }
 
     if (!tp_does_nothing(tp)) {
@@ -276,7 +280,7 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
         std::string l = tp_str_light_color(tp);
         color c = string2color(l);
         c.a = 100;
-        t->light = light_new(t, MAX_LIGHT_RAYS / 8,
+        t->light = light_new(world, t, MAX_LIGHT_RAYS / 8,
                              (double) tp_is_light_strength(tp),
                              t->mid_at, LIGHT_QUALITY_LOW, c);
     }
@@ -429,7 +433,7 @@ void Thing::remove_hooks ()
     if (owned_count) {
         log("remove remaining %u owned things", owned_count);
 
-        for (auto i : game.state.map.all_active_things) {
+        for (auto i : world->all_active_things) {
             Thingp t = i.second;
             auto o = t->get_owner();
             if (o && (o == t)) {
@@ -442,7 +446,7 @@ void Thing::remove_hooks ()
 Thingp Thing::get_owner (void)
 {
     if (owner_thing_id) {
-        return (thing_find(owner_thing_id));
+        return (thing_find(world, owner_thing_id));
     } else {
         return (nullptr);
     }
@@ -499,13 +503,13 @@ void Thing::destroy (void)
     detach();
 
     {
-        auto a = &game.state.map.all_things;
+        auto a = &world->all_things;
         auto iter = a->find(id);
         if (iter != a->end()) {
             if (is_active()) {
                 log("erasing from all things");
             }
-            game.state.map.all_things.erase(iter);
+            world->all_things.erase(iter);
         } else {
             //
             // May have been removed already in cleanup. Ignore.
@@ -514,13 +518,13 @@ void Thing::destroy (void)
     }
 
     {
-        auto a = &game.state.map.all_active_things;
+        auto a = &world->all_active_things;
         auto iter = a->find(id);
         if (iter != a->end()) {
             if (is_active()) {
                 log("erasing from active things");
             }
-            game.state.map.all_active_things.erase(iter);
+            world->all_active_things.erase(iter);
         } else {
             //
             // May have been removed already in cleanup. Ignore.
@@ -534,64 +538,64 @@ void Thing::destroy (void)
     point old_at((int)mid_at.x, (int)mid_at.y);
 
     if (is_wall()) {
-        game.state.map.unset_wall(old_at.x, old_at.y);
+        world->unset_wall(old_at.x, old_at.y);
     }
     if (is_wall() || is_rock()) {
-        game.state.map.unset_solid(old_at.x, old_at.y);
+        world->unset_solid(old_at.x, old_at.y);
     }
     if (is_floor()) {
-        game.state.map.unset_floor(old_at.x, old_at.y);
+        world->unset_floor(old_at.x, old_at.y);
     }
     if (is_lava()) {
-        game.state.map.unset_lava(old_at.x, old_at.y);
+        world->unset_lava(old_at.x, old_at.y);
     }
     if (is_blood()) {
-        game.state.map.unset_blood(old_at.x, old_at.y);
+        world->unset_blood(old_at.x, old_at.y);
     }
     if (is_water()) {
-        game.state.map.unset_water(old_at.x, old_at.y);
+        world->unset_water(old_at.x, old_at.y);
     }
     if (is_deep_water()) {
-        game.state.map.unset_deep_water(old_at.x, old_at.y);
+        world->unset_deep_water(old_at.x, old_at.y);
     }
     if (is_corridor()) {
-        game.state.map.unset_corridor(old_at.x, old_at.y);
+        world->unset_corridor(old_at.x, old_at.y);
     }
     if (is_dirt()) {
-        game.state.map.unset_dirt(old_at.x, old_at.y);
+        world->unset_dirt(old_at.x, old_at.y);
     }
     if (is_grass()) {
-        game.state.map.unset_grass(old_at.x, old_at.y);
+        world->unset_grass(old_at.x, old_at.y);
     }
     if (is_soil()) {
-        game.state.map.unset_soil(old_at.x, old_at.y);
+        world->unset_soil(old_at.x, old_at.y);
     }
     if (is_gravel()) {
-        game.state.map.unset_gravel(old_at.x, old_at.y);
+        world->unset_gravel(old_at.x, old_at.y);
     }
     if (is_snow()) {
-        game.state.map.unset_snow(old_at.x, old_at.y);
+        world->unset_snow(old_at.x, old_at.y);
     }
     if (is_monst()) {
-        game.state.map.unset_monst(old_at.x, old_at.y);
+        world->unset_monst(old_at.x, old_at.y);
     }
     if (is_food()) {
-        game.state.map.unset_food(old_at.x, old_at.y);
+        world->unset_food(old_at.x, old_at.y);
     }
     if (is_rock()) {
-        game.state.map.unset_rock(old_at.x, old_at.y);
+        world->unset_rock(old_at.x, old_at.y);
     }
     if (is_key()) {
-        game.state.map.unset_key(old_at.x, old_at.y);
+        world->unset_key(old_at.x, old_at.y);
     }
     if (tp_gfx_large_shadow_caster(tp)) {
-        game.state.map.unset_gfx_large_shadow_caster(old_at.x, old_at.y);
+        world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
     }
     if (is_door()) {
-        game.state.map.unset_door(old_at.x, old_at.y);
+        world->unset_door(old_at.x, old_at.y);
     }
     if (is_player()) {
-        game.state.player = nullptr;
+        world->player = nullptr;
     }
 
     if (dmap_scent) {
@@ -632,7 +636,7 @@ void Thing::move_carried_items (void)
     // Weapons follow also.
     //
     if (weapon_carry_anim_thing_id) {
-        auto w = thing_find(weapon_carry_anim_thing_id);
+        auto w = thing_find(world, weapon_carry_anim_thing_id);
         if (!w) {
             die("weapon_carry_anim_thing_id set to %d but not found",
                 weapon_carry_anim_thing_id);
@@ -642,7 +646,7 @@ void Thing::move_carried_items (void)
     }
 
     if (weapon_use_anim_thing_id) {
-        auto w = thing_find(weapon_use_anim_thing_id);
+        auto w = thing_find(world, weapon_use_anim_thing_id);
         if (!w) {
             die("weapon_use_anim_thing_id set to %d but not found",
                 weapon_use_anim_thing_id);
@@ -655,10 +659,10 @@ void Thing::move_carried_items (void)
     // If something moves on the water, make a ripple
     //
     if (is_monst() || is_player()) {
-        if (game.state.map.is_water((int)mid_at.x, (int)mid_at.y)) {
+        if (world->is_water((int)mid_at.x, (int)mid_at.y)) {
             fpoint at(mid_at.x - 0.5, mid_at.y - 0.5);
             if (random_range(0, 1000) > 500) {
-                thing_new(tp_name(tp_random_ripple()), at);
+                thing_new(world, tp_name(tp_random_ripple()), at);
             }
         }
     }
@@ -667,10 +671,10 @@ void Thing::move_carried_items (void)
 //
 // Find an existing thing.
 //
-Thingp thing_find (uint32_t id)
+Thingp thing_find (Worldp world, uint32_t id)
 {_
-    auto result = game.state.map.all_things.find(id);
-    if (result == game.state.map.all_things.end()) {
+    auto result = world->all_things.find(id);
+    if (result == world->all_things.end()) {
         return (0);
     }
 

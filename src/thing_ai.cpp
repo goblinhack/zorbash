@@ -68,16 +68,16 @@ bool Thing::will_prefer (const Thingp itp)
 
 bool Thing::is_obstacle_for_me (point p)
 {
-    if (game.state.map.is_wall(p)) {
+    if (world->is_wall(p)) {
         return (true);
     }
-    if (game.state.map.is_rock(p)) {
+    if (world->is_rock(p)) {
         return (true);
     }
-    if (game.state.map.is_door(p)) {
+    if (world->is_door(p)) {
         return (true);
     }
-    if (game.state.map.is_lava(p)) {
+    if (world->is_lava(p)) {
         return (true);
     }
 
@@ -85,14 +85,14 @@ bool Thing::is_obstacle_for_me (point p)
     // This is more of a look at the future position that some monst is
     // already walking toward
     //
-    if (game.state.map.is_monst(p)) {
+    if (world->is_monst(p)) {
         return (true);
     }
 
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto i : game.state.map.all_interesting_things_at[p.x][p.y]) {
+    for (auto i : world->all_interesting_things_at[p.x][p.y]) {
         auto it = i.second;
         if (it == this) {
             continue;
@@ -108,7 +108,7 @@ bool Thing::is_obstacle_for_me (point p)
 
 int Thing::is_less_preferred_terrain (point p)
 {
-    if (game.state.map.is_water(p)) {
+    if (world->is_water(p)) {
         if (hates_water()) {
             return (100);
         }
@@ -132,7 +132,7 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
     switch (priority) {
     case 0:
         if (is_starving) {
-            for (auto i : game.state.map.all_interesting_things_at[p.x][p.y]) {
+            for (auto i : world->all_interesting_things_at[p.x][p.y]) {
                 auto it = i.second;
                 if (it == this) {
                     continue;
@@ -147,7 +147,7 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
         break;
     case 1:
         if (is_hungry) {
-            for (auto i : game.state.map.all_interesting_things_at[p.x][p.y]) {
+            for (auto i : world->all_interesting_things_at[p.x][p.y]) {
                 auto it = i.second;
                 if (it == this) {
                     continue;
@@ -166,7 +166,7 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
         }
         break;
     case 2:
-        for (auto i : game.state.map.all_interesting_things_at[p.x][p.y]) {
+        for (auto i : world->all_interesting_things_at[p.x][p.y]) {
             auto it = i.second;
             if (it == this) {
                 continue;
@@ -185,8 +185,8 @@ fpoint Thing::get_next_hop (void)
 {_
     auto minx = 0;
     auto miny = 0;
-    auto maxx = DUN_WIDTH;
-    auto maxy = DUN_HEIGHT;
+    auto maxx = CHUNK_WIDTH;
+    auto maxy = CHUNK_HEIGHT;
     fpoint fstart;
 
     fstart = mid_at;
@@ -294,14 +294,14 @@ CON("  goal add at: %d, %d", p.x, p.y);
     //
     // Combine the scores of multiple goals on each cell.
     //
-    double cell_totals[DUN_WIDTH][DUN_HEIGHT];
+    double cell_totals[CHUNK_WIDTH][CHUNK_HEIGHT];
     memset(&cell_totals, 0, sizeof(cell_totals));
     double highest_least_preferred = 0;
     double lowest_most_preferred = 0;
 //    const double wanderlust = 10;
 
     {
-        uint8_t walked[DUN_WIDTH][DUN_HEIGHT];
+        uint8_t walked[CHUNK_WIDTH][CHUNK_HEIGHT];
         memset(&walked, 0, sizeof(walked));
         for (auto g : goals) {
             auto p = g.at;

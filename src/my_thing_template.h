@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -82,14 +82,14 @@ public:
     std::string weapon_carry_anim;
     std::string weapon_use_anim;
 
-    /*
-     * Animation tiles.
-     */
+    //
+    // Animation tiles.
+    //
     Tileinfomap tiles;
 
-    /*
-     * Adjacent tiles.
-     */
+    //
+    // Adjacent tiles.
+    //
     Tileinfomap top_tiles;
     Tileinfomap bot_tiles;
     Tileinfomap left_tiles;
@@ -99,9 +99,9 @@ public:
     Tileinfomap bl_tiles;
     Tileinfomap br_tiles;
 
-    /*
-     * Join tiles
-     */
+    //
+    // Join tiles
+    //
     Tileinfomap horiz_tiles;
     Tileinfomap vert_tiles;
     Tileinfomap l90_tiles;
@@ -1139,4 +1139,4 @@ static inline Tpp tp_find (std::string name)
     return (result->second);
 }
 
-#endif /* THING_TEMPLATE_H */
+#endif // THING_TEMPLATE_H 

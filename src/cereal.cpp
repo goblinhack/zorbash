@@ -12,7 +12,7 @@ int cereal_test (const std::string save_file)
 {
 #if 0
     {
-        Map the_map;
+        World the_map;
 
         auto t1 = std::make_shared<class Thing>();
         the_map.all_things.insert(std::make_pair(t1->id, t1));

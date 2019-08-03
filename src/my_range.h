@@ -1,11 +1,11 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
-/*
- * Create a vector of numbers
- */
+//
+// Create a vector of numbers
+//
 template <class T> std::vector<T> make_range (const size_t how_many) {
     std::vector<T> v(how_many);
     std::generate(v.begin(), v.end(), [n = 0] () mutable { return n++; });
@@ -19,9 +19,9 @@ template <class T> std::vector<T> make_range (T start, T stop) {
     return (v);
 }
 
-/*
- * Create a vector of numbers and then shuffle them
- */
+//
+// Create a vector of numbers and then shuffle them
+//
 #include <random>
 #include <algorithm>
 extern std::default_random_engine rng;
@@ -32,9 +32,9 @@ template <class T> std::vector<T> make_shuffled_range (const size_t how_many) {
     return (v);
 }
 
-/*
- * This one is better as does not create a vector
- */
+//
+// This one is better as does not create a vector
+//
 template <class T> class range {
 private:
     class iter {
