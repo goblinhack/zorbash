@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -62,9 +62,9 @@ public:
 
 extern Path astar_solve(point start, std::multiset<Goal> &goals, Dmap *dmap);
 
-typedef struct AgeMap {
-    uint32_t val[DUN_WIDTH][DUN_HEIGHT];
-} AgeMap;
+typedef struct AgeWorld {
+    uint32_t val[CHUNK_WIDTH][CHUNK_HEIGHT];
+} AgeWorld;
 
 class Thing
 {
@@ -100,73 +100,79 @@ public:
         // etc todo and remember to repair Tp on loading
     }
 
-    /*
-     * Unique per thing.
-     */
+    //
+    // Which map this thing is on. Things start off in a temporary map
+    // before we move them to the real map.
+    //
+    Worldp             world;
+
+    //
+    // Unique per thing.
+    //
     uint32_t           id {};
 
-    /*
-     * Grid coordinates.
-     */
+    //
+    // Grid coordinates.
+    //
     fpoint             mid_at;
     fpoint             ground_at;
     fpoint             interpolated_mid_at;
 
-    /*
-     * Previous hop where we were. We use this to interpolate the real
-     * position when moving.
-     */
+    //
+    // Previous hop where we were. We use this to interpolate the real
+    // position when moving.
+    //
     fpoint             last_mid_at;
 
-    /*
-     * On screen coordinates, taking account for size of the current frame.
-     */
+    //
+    // On screen coordinates, taking account for size of the current frame.
+    //
     fpoint             tl;
     fpoint             br;
     fpoint             old_br;
     fsize              sz;
 
-    /*
-     * GL co-orids
-     */
+    //
+    // GL co-orids
+    //
     fpoint             last_blit_tl;
     fpoint             last_blit_br;
     float              submerged_offset {};
     float              rot {};
 
-    /*
-     * Pointer to common settings for this thing.
-     */
+    //
+    // Pointer to common settings for this thing.
+    //
     Tpp                tp {nullptr};
 
-    /*
-     * Does this thing have a light source?
-     */
+    //
+    // Does this thing have a light source?
+    //
     Lightp             light {nullptr};
 
-    /*
-     * Use to detect things hit by a light source
-     */
+    //
+    // Use to detect things hit by a light source
+    //
     uint32_t           light_iterator {};
 
-    /*
-     * Used for animating the steps.
-     */
+    //
+    // Used for animating the steps.
+    //
     uint32_t           flip_start_ms {};
     uint32_t           begin_move_ms {};
     uint32_t           end_move_ms {};
     uint32_t           next_frame_ms {};
     uint32_t           next_ai_ms {};
 
-    /*
-     * Ticks every time the thing does something. Used from memory aging
-     * to the hunger clock.
-     */
+    //
+    // Ticks every time the thing does something. Used from memory aging
+    // to the hunger clock.
+    //
     uint32_t           hunger_tick_last_ms {0};
 
-    /*
-     * Timestamps
-     */
+    //
+    // Timestamps
+    //
     uint32_t           timestamp_born {};
     uint32_t           timestamp_last_i_was_hit {};
     uint32_t           timestamp_last_attacked {};
@@ -174,25 +180,25 @@ public:
     uint32_t           timestamp_move_end {};
     uint32_t           timestamp_collision {};
 
-    /*
-     * Bouncing
-     */
+    //
+    // Bouncing
+    //
     uint32_t           timestamp_bounce_begin {};
     uint32_t           timestamp_bounce_end {};
     double             bounce_height {}; // Percentage of tile height.
     double             bounce_fade {};   // 0.1; rapid decrease, 0.9 slow
     uint16_t           bounce_count {};
 
-    /*
-     * Tileinfo may be null if this thing does not need animation.
-     * Ih such a case, current_tile will be set.
-     */
+    //
+    // Tileinfo may be null if this thing does not need animation.
+    // Ih such a case, current_tile will be set.
+    //
     Tileinfop          current_tileinfo {};
     Tilep              current_tile {};
 
-    /*
-     * For thing decorations
-     */
+    //
+    // For thing decorations
+    //
     Tilep              top_tile {};
     Tilep              bot_tile {};
     Tilep              left_tile {};
@@ -202,9 +208,9 @@ public:
     Tilep              bl_tile {};
     Tilep              br_tile {};
 
-    /*
-     * Only used for display purposes.
-     */
+    //
+    // Only used for display purposes.
+    //
     int                gold {0};
     int                health {0};
     int                max_health {0};
@@ -212,62 +218,62 @@ public:
     uint32_t           weapon_carry_anim_thing_id {0};
     uint32_t           weapon_use_anim_thing_id {0};
 
-    /*
-     * Weapon thing template.
-     */
+    //
+    // Weapon thing template.
+    //
     uint16_t           weapon_tp_id {0};
 
-    /*
-     * How many things this thing owns.
-     */
+    //
+    // How many things this thing owns.
+    //
     uint16_t           owned_count {0};
 
-    /*
-     * Who created this thing? e.g. who cast a spell?
-     */
+    //
+    // Who created this thing? e.g. who cast a spell?
+    //
     uint32_t           owner_thing_id {0};
 
-    /*
-     * AI
-     */
+    //
+    // AI
+    //
     Dmap               *dmap_scent;
     Dmap               *dmap_goals;
 
-    /*
-     * This is an array of how old a cell is since we last visited it with
-     * "memory" below.
-     */
-    AgeMap             *age_map;
+    //
+    // This is an array of how old a cell is since we last visited it with
+    // "memory" below.
+    //
+    AgeWorld             *age_map;
 
-    /*
-     * Display order
-     */
+    //
+    // Display order
+    //
     uint8_t            depth;
 
-    /*
-     * Direction
-     */
+    //
+    // Direction
+    //
     unsigned int       dir:4;
 
-    /*
-     * Update thing_new when adding new bitfields.
-     */
-    unsigned int       is_hungry:1;          /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_starving:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_dead:1;            /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_bloodied:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_hidden:1;          /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_sleeping:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_moving:1;          /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       has_ever_moved:1;     /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_open:1;            /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_bouncing:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_attached:1;        /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_lit:1;             /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_waiting_for_ai:1;  /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_submerged:1;       /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_facing_left:1;     /* until -std=c++2a remember to update thing.cpp */
-    unsigned int       is_being_destroyed:1; /* until -std=c++2a remember to update thing.cpp */
+    //
+    // Update thing_new when adding new bitfields.
+    //
+    unsigned int       is_hungry:1;          // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_starving:1;        // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_dead:1;            // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_bloodied:1;        // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_hidden:1;          // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_sleeping:1;        // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_moving:1;          // until -std=c++2a remember to update thing.cpp 
+    unsigned int       has_ever_moved:1;     // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_open:1;            // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_bouncing:1;        // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_attached:1;        // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_lit:1;             // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_waiting_for_ai:1;  // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_submerged:1;       // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_facing_left:1;     // until -std=c++2a remember to update thing.cpp 
+    unsigned int       is_being_destroyed:1; // until -std=c++2a remember to update thing.cpp 
 
     std::string to_string(void);
     const char *to_cstring(void);
@@ -307,16 +313,16 @@ public:
     void visible();
     void hide();
 
-    /*
-     * thing_tick.cpp
-     */
+    //
+    // thing_tick.cpp
+    //
     void tick();
     void do_collision_check();
     void achieve_goals_in_life();
 
-    /*
-     * thing_display.cpp
-     */
+    //
+    // thing_display.cpp
+    //
     fpoint last_attached;
     void attach(void);
     void detach(void);
@@ -352,17 +358,17 @@ public:
     void blit(double offset_x, double offset_y, int x, int y);
     void blit_upside_down(double offset_x, double offset_y, int x, int y);
 
-    /*
-     * thing_hit.cpp
-     */
+    //
+    // thing_hit.cpp
+    //
     int hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter,
                    int damage);
     int hit_if_possible(Thingp hitter, int damage);
     int hit_if_possible(Thingp hitter);
 
-    /*
-     * thing_move.cpp
-     */
+    //
+    // thing_move.cpp
+    //
     bool update_coordinates(void);
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, const uint8_t up, const uint8_t down,
@@ -372,26 +378,26 @@ public:
     double get_bounce(void);
     void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
 
-    /*
-     * thing_collision.cpp
-     */
+    //
+    // thing_collision.cpp
+    //
     bool handle_collisions(void);
     void possible_hits_find_best(void);
     bool possible_hit(Thingp it, int x, int y, int dx, int dy);
 
-    /*
-     * thing_health.cpp
-     */
+    //
+    // thing_health.cpp
+    //
     void health_boost(int v);
 
-    /*
-     * thing_hunger.cpp
-     */
+    //
+    // thing_hunger.cpp
+    //
     void hunger_clock();
 
-    /*
-     * thing_weapon.cpp
-     */
+    //
+    // thing_weapon.cpp
+    //
     Tpp get_weapon();
     void wield_next_weapon();
     void unwield(const char *why);
@@ -422,9 +428,9 @@ public:
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 
-    /*
-     * thing_ai.cpp
-     */
+    //
+    // thing_ai.cpp
+    //
     bool will_attack(const Thingp it);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
@@ -1084,31 +1090,34 @@ struct thing_display_sort_cmp : public std::binary_function<struct ThingDisplayS
     }
 };
 
-extern Thingp thing_new(std::string tp_name, fpoint at, fpoint jitter = fpoint(0, 0));
-extern Thingp thing_new(std::string tp_name, Thingp owner);
-extern Thingp thing_find(uint32_t name);
-extern void thing_gc(void);
-extern void thing_render_all(void);
-extern void thing_map_scroll_to_player(void);
+extern Thingp thing_new(Worldp,
+                        std::string tp_name, 
+                        fpoint at, fpoint jitter = fpoint(0, 0));
+extern Thingp thing_new(Worldp,
+                        std::string tp_name, Thingp owner);
+extern Thingp thing_find(Worldp, uint32_t name);
+extern void thing_gc(Worldp);
+extern void thing_render_all(Worldp);
+extern void thing_map_scroll_to_player(Worldp);
 
-/*
- * thing_display.cpp
- */
+//
+// thing_display.cpp
+//
 typedef std::map< struct ThingDisplaySortKey, Thingp, 
                   thing_display_sort_cmp > ThingDisplayOrder;
-/*
- * thing_move.cpp
- */
+//
+// thing_move.cpp
+//
 
-/*
- * thing_collision.cpp
- */
+//
+// thing_collision.cpp
+//
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
 
-/*
- * thing_tick.cpp
- */
-extern void things_tick(void);
+//
+// thing_tick.cpp
+//
+extern void things_tick(Worldp);
 
-#endif /* THING_H */
+#endif // THING_H 

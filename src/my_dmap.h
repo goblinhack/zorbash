@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -9,7 +9,7 @@
 #include "my_main.h"
 
 typedef struct dmap_ {
-    uint16_t val[DUN_WIDTH][DUN_HEIGHT];
+    uint16_t val[CHUNK_WIDTH][CHUNK_HEIGHT];
 } Dmap;
 
 extern void dmap_process(Dmap *D, point tl, point br);

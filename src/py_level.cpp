@@ -31,14 +31,14 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     int level_data_elems = PyList_Size(py_level_data);
-    if (level_data_elems % DUN_HEIGHT) {
+    if (level_data_elems % CHUNK_HEIGHT) {
         DIE("level elems needs to be evenly dividable by level height %d, got %d elems",
-            (int) DUN_HEIGHT, (int) PyList_Size(py_level_data));
+            (int) CHUNK_HEIGHT, (int) PyList_Size(py_level_data));
     }
 
     auto l = Level::level_new();
-    for (auto n=0; n < DUN_WIDTH; n++) {
-        for (auto y=0; y<DUN_HEIGHT; y++) {
+    for (auto n=0; n < CHUNK_WIDTH; n++) {
+        for (auto y=0; y<CHUNK_HEIGHT; y++) {
             auto o = PyList_GetItem(py_level_data, y); /* Can't fail */
             if (!o) {
                 continue;
@@ -136,36 +136,36 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
             }
 
-            if (floor_string.size() != DUN_WIDTH){
+            if (floor_string.size() != CHUNK_WIDTH){
                 DIE("level floor width mismatch, %zu, expected %d",
-                    floor_string.size(), DUN_WIDTH);
+                    floor_string.size(), CHUNK_WIDTH);
             }
-            if (water_string.size() != DUN_WIDTH){
+            if (water_string.size() != CHUNK_WIDTH){
                 DIE("level water width mismatch, %zu, expected %d",
-                    water_string.size(), DUN_WIDTH);
+                    water_string.size(), CHUNK_WIDTH);
             }
-            if (deco_string.size() != DUN_WIDTH){
+            if (deco_string.size() != CHUNK_WIDTH){
                 DIE("level deco width mismatch, %zu, expected %d",
-                    deco_string.size(), DUN_WIDTH);
+                    deco_string.size(), CHUNK_WIDTH);
             }
-            if (deco_string.size() != DUN_WIDTH){
+            if (deco_string.size() != CHUNK_WIDTH){
                 DIE("level deco width mismatch, %zu, expected %d",
-                    deco_string.size(), DUN_WIDTH);
+                    deco_string.size(), CHUNK_WIDTH);
             }
-            if (walls_string.size() != DUN_WIDTH){
+            if (walls_string.size() != CHUNK_WIDTH){
                 DIE("level walls width mismatch, %zu, expected %d",
-                    walls_string.size(), DUN_WIDTH);
+                    walls_string.size(), CHUNK_WIDTH);
             }
-            if (exits_string.size() != DUN_WIDTH){
+            if (exits_string.size() != CHUNK_WIDTH){
                 DIE("level exits width mismatch, %zu, expected %d",
-                    exits_string.size(), DUN_WIDTH);
+                    exits_string.size(), CHUNK_WIDTH);
             }
-            if (items_string.size() != DUN_WIDTH){
+            if (items_string.size() != CHUNK_WIDTH){
                 DIE("level items width mismatch, %zu, expected %d",
-                    items_string.size(), DUN_WIDTH);
+                    items_string.size(), CHUNK_WIDTH);
             }
 
-            for (auto x = 0; x < DUN_WIDTH; x++) {
+            for (auto x = 0; x < CHUNK_WIDTH; x++) {
                 l->data[x][y][MAP_DEPTH_FLOOR]      = floor_string[x];
                 l->data[x][y][MAP_DEPTH_WATER]      = water_string[x];
                 l->data[x][y][MAP_DEPTH_FLOOR_DECO] = deco_string[x];
@@ -179,36 +179,36 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 l->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
             }
 
-            if (floor_string.size() != DUN_WIDTH){
+            if (floor_string.size() != CHUNK_WIDTH){
                 DIE("level floor width mismatch, %zu, expected %d",
-                    floor_string.size(), DUN_WIDTH);
+                    floor_string.size(), CHUNK_WIDTH);
             }
-            if (water_string.size() != DUN_WIDTH){
+            if (water_string.size() != CHUNK_WIDTH){
                 DIE("level water width mismatch, %zu, expected %d",
-                    water_string.size(), DUN_WIDTH);
+                    water_string.size(), CHUNK_WIDTH);
             }
-            if (deco_string.size() != DUN_WIDTH){
+            if (deco_string.size() != CHUNK_WIDTH){
                 DIE("level deco width mismatch, %zu, expected %d",
-                    deco_string.size(), DUN_WIDTH);
+                    deco_string.size(), CHUNK_WIDTH);
             }
-            if (deco_string.size() != DUN_WIDTH){
+            if (deco_string.size() != CHUNK_WIDTH){
                 DIE("level deco width mismatch, %zu, expected %d",
-                    deco_string.size(), DUN_WIDTH);
+                    deco_string.size(), CHUNK_WIDTH);
             }
-            if (walls_string.size() != DUN_WIDTH){
+            if (walls_string.size() != CHUNK_WIDTH){
                 DIE("level walls width mismatch, %zu, expected %d",
-                    walls_string.size(), DUN_WIDTH);
+                    walls_string.size(), CHUNK_WIDTH);
             }
-            if (exits_string.size() != DUN_WIDTH){
+            if (exits_string.size() != CHUNK_WIDTH){
                 DIE("level exits width mismatch, %zu, expected %d",
-                    exits_string.size(), DUN_WIDTH);
+                    exits_string.size(), CHUNK_WIDTH);
             }
-            if (items_string.size() != DUN_WIDTH){
+            if (items_string.size() != CHUNK_WIDTH){
                 DIE("level items width mismatch, %zu, expected %d",
-                    items_string.size(), DUN_WIDTH);
+                    items_string.size(), CHUNK_WIDTH);
             }
 
-            for (auto x = 0; x < DUN_WIDTH; x++) {
+            for (auto x = 0; x < CHUNK_WIDTH; x++) {
                 l->data[x][y][MAP_DEPTH_FLOOR]      = floor_string[x];
                 l->data[x][y][MAP_DEPTH_WATER]      = water_string[x];
                 l->data[x][y][MAP_DEPTH_FLOOR_DECO] = deco_string[x];

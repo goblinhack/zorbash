@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #ifndef _MY_GAME_H_
 #define _MY_GAME_H_
@@ -18,6 +18,8 @@ typedef std::unordered_map< uint32_t, Thingp > Things;
 
 typedef class Light* Lightp;
 typedef std::unordered_map< uint32_t, Lightp > Lights;
+
+typedef class World* Worldp;
 
 #include "my_thing.h"
 
@@ -45,7 +47,7 @@ enum {
 
 #include <list>
 
-class Map {
+class World {
 private:
     uint8_t                    _is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_solid[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -110,9 +112,27 @@ public:
     std::map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     //
+    // The creation of the map is staggered such that we create chunks
+    // only as needed.
+    //
+    uint8_t                    chunk_inited[CHUNK_WIDTH][CHUNK_HEIGHT] = {};
+
+    //
+    // The player!
+    //
+    Thingp                     player = {};
+
+    //
     // Global lights
     //
     Lights                     all_lights;
+
+    //
+    // Where we're looking in the map
+    //
+    fpoint                     map_at;
+    fpoint                     map_wanted_at;
+    point                      map_tile_over;
 
     //
     // All lights at a map cell
@@ -822,29 +842,6 @@ public:
     }
 };
 
-class State {
-public:
-    uint32_t           fps_count                    = {};
-    Map                map;
-
-    /*
-     * Where we're looking in the map
-     */
-    fpoint             map_at;
-    fpoint             map_wanted_at;
-    point              map_tile_over;
-    Thingp             player;
-
-    template <class Archive>
-    void serialize (Archive & archive)
-    {
-        archive(cereal::make_nvp("map",             map),
-                cereal::make_nvp("map_at",          map_at),
-                cereal::make_nvp("map_wanted_at",   map_wanted_at),
-                cereal::make_nvp("map_tile_over",   map_tile_over));
-    }
-};
-
 class Config {
 public:
     bool               fps_counter                  = true;
@@ -886,13 +883,14 @@ public:
 class Game {
 public:
     Config             config;
-    State              state;
+    World              world;
+    uint32_t           fps_count = {};
 
     template <class Archive>
     void serialize (Archive & archive)
     {
         archive(cereal::make_nvp("config",          config),
-                cereal::make_nvp("state",           state));
+                cereal::make_nvp("world",           world));
     }
 };
 
@@ -909,7 +907,7 @@ game_mouse_over(int32_t x, int32_t yu,
 
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
 extern uint8_t game_key_down(const struct SDL_KEYSYM *key);
-extern void game_display(void);
+extern void game_display(Worldp);
 extern void game_init(void);
 extern void game_fini(void);
 

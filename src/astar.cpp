@@ -11,7 +11,7 @@
 #include <vector>
 
 #ifdef ASTAR_DEBUG
-static char debug[DUN_WIDTH][DUN_HEIGHT];
+static char debug[CHUNK_WIDTH][CHUNK_HEIGHT];
 #endif
 
 class Nodecost {
@@ -54,8 +54,8 @@ class Astar {
 public:
     Astar (point s, point g, Dmap *d) : start(s), goal(g), dmap(d) { }
 
-    static const int width = DUN_WIDTH;
-    static const int height = DUN_HEIGHT;
+    static const int width = CHUNK_WIDTH;
+    static const int height = CHUNK_HEIGHT;
     Node *open[width][height] = {{}};
     Node *closed[width][height] = {{}};
     Nodemap open_nodes;
@@ -249,8 +249,8 @@ static void dump (Dmap *dmap, point start)
     int y;
 
     printf("astar:\n");
-    for (y = 0; y < DUN_HEIGHT; y++) {
-        for (x = 0; x < DUN_WIDTH; x++) {
+    for (y = 0; y < CHUNK_HEIGHT; y++) {
+        for (x = 0; x < CHUNK_WIDTH; x++) {
             uint16_t e = dmap->val[x][y];
 
             char buf[10] = {};

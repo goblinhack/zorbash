@@ -8,13 +8,13 @@
 #include "my_game.h"
 #include "my_wid_console.h"
 
-void player_tick (void)
+void player_tick (Worldp world)
 {_
     if (wid_console_window && wid_console_window->visible) {
         return;
     }
 
-    auto player = game.state.player;
+    auto player = world->player;
     if (!player || player->is_dead || player->is_hidden) {
         return;
     }
@@ -125,10 +125,10 @@ void player_tick (void)
      */
 #if 0
     if ((dx != 0) || (dy != 0)) {
-        if (!game.state.map.is_light((int)player->at.x,
+        if (!world->is_light((int)player->at.x,
                                         (int)player->at.y)) {
 
-            game.state.map.is_light[(int)player->at.x]
+            world->is_light[(int)player->at.x]
                                    [(int)player->at.y] = true;
             (void) light_new(0, 1,
                              fpoint(player->at.x, player->at.y),

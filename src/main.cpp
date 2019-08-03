@@ -19,7 +19,6 @@
 #include "my_file.h"
 #include "my_charmap.h"
 #include "my_game.h"
-#include "my_terrain.h"
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;

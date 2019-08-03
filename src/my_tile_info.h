@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #ifndef _MY_THING_TILE_H
 #define _MY_THING_TILE_H
@@ -28,13 +28,13 @@ public:
         oldptr(this);
     }
 
-    uint32_t index {}; /* key */
+    uint32_t index {}; // key 
     std::string tilename;
     Tilep tile;
 
-    /*
-     * Delay in ms between frames.
-     */
+    //
+    // Delay in ms between frames.
+    //
     uint32_t delay_ms {};
     int dir {};
 
@@ -109,4 +109,4 @@ Tileinfop tile_info_first(Tileinfomap *root);
 Tileinfop tile_info_random(Tileinfomap *root);
 Tileinfop tile_info_next(Tileinfomap *root, Tileinfop in);
 
-#endif /* THING_TILE_H */
+#endif // THING_TILE_H 

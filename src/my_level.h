@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_charmap.h"
 #include "my_game.h"
@@ -27,15 +27,15 @@ public:
         oldptr(this);
     }
 
-    /*
-     * Unique per level.
-     */
+    //
+    // Unique per level.
+    //
     uint32_t                levelno {0};
-    uint8_t                 width  {DUN_WIDTH};
-    uint8_t                 height {DUN_HEIGHT};
+    uint8_t                 width  {CHUNK_WIDTH};
+    uint8_t                 height {CHUNK_HEIGHT};
     uint8_t                 depth  {0};
 
-    char                    data[DUN_WIDTH][DUN_HEIGHT][MAP_DEPTH] = {{{' '}}};
+    char                    data[CHUNK_WIDTH][CHUNK_HEIGHT][MAP_DEPTH] = {{{' '}}};
 
     static Levelp level_new(void);
     void finalize(void);

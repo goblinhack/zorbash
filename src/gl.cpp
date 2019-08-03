@@ -20,7 +20,7 @@ double gl_rotate;
 void gl_init_2d_mode (void)
 {_
     /*
-     * Enable Texture Mapping
+     * Enable Texture Worldping
      */
     glEnable(GL_TEXTURE_2D);
 

@@ -833,7 +833,7 @@ static uint8_t wid_m_over_b (widp w, uint32_t x, uint32_t y,
 }
 
 /*
- * Map an SDL key event to the char the user typed
+ * World an SDL key event to the char the user typed
  */
 static char wid_event_to_char (const struct SDL_KEYSYM *evt)
 {_
@@ -6394,7 +6394,7 @@ void wid_mouse_move (widp w)
 /*
  * Display all widgets
  */
-void wid_display_all (void)
+void wid_display_all (Worldp world)
 {_
     wid_tick_all();
     wid_move_all();
@@ -6405,7 +6405,7 @@ void wid_display_all (void)
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
-    game_display();
+    game_display(world);
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -6457,7 +6457,7 @@ void wid_display_all (void)
     if (game.config.fps_counter) {
         ascii_putf(0, 1,
                    GREEN, ASCII_UI_BOX_INACTIVE_MID_COLOR,
-                   L"%u FPS", game.state.fps_count);
+                   L"%u FPS", game.fps_count);
     }
 
     ascii_display();

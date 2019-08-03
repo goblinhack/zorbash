@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -39,19 +39,19 @@ enum {
     SDL_JOY_BUTTON_DOWN,                    // 12
     SDL_JOY_BUTTON_LEFT,                    // 13
     SDL_JOY_BUTTON_RIGHT,                   // 14
- /*
-     * Not real buttons, faking the left and right fire to be buttons.
-     */
+ //
+    // Not real buttons, faking the left and right fire to be buttons.
+    //
     SDL_JOY_BUTTON_LEFT_FIRE                = 30,
     SDL_JOY_BUTTON_RIGHT_FIRE               = 31,
 #define SDL_MAX_BUTTONS                     32
 };
 
-#if SDL_MAJOR_VERSION == 1 /* { */
+#if SDL_MAJOR_VERSION == 1 // { 
 #define SDL_KEYSYM SDL_keysym
 #else
 #define SDL_KEYSYM SDL_Keysym
-#endif /* } */
+#endif // } 
 
 struct tokens_t_;
 uint8_t sdl_user_exit(struct tokens_t_ *tokens, void *context);

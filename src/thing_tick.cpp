@@ -75,12 +75,12 @@ void Thing::tick (void)
     }
 }
 
-void things_tick (void)
+void things_tick (Worldp world)
 {_
     //
     // Active things are generally things that move or have a life span
     //
-    for (auto i : game.state.map.all_active_things) {
+    for (auto i : world->all_active_things) {
         Thingp t = i.second;
         verify(t);
         t->tick();

@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -32,9 +32,9 @@ public:
 
     std::string name;
 
-    /*
-     * Index within the overall texture, left to right, top to bottom.
-     */
+    //
+    // Index within the overall texture, left to right, top to bottom.
+    //
     uint32_t index {};
     uint32_t pix_width {};
     uint32_t pix_height {};
@@ -42,27 +42,27 @@ public:
     double pct_width {};
     double pct_height {};
 
-    /*
-     * Texture co-ordinates within the image.
-     */
+    //
+    // Texture co-ordinates within the image.
+    //
     double x1 {};
     double y1 {};
     double x2 {};
     double y2 {};
 
 #ifdef ENABLE_TILE_COLLISION_CHECKING
-    /*
-     * As above but not clipped 0.5 pixels.
-     */
+    //
+    // As above but not clipped 0.5 pixels.
+    //
     double ox1 {};
     double oy1 {};
     double ox2 {};
     double oy2 {};
 
-    /*
-     * Percentage points that indicate the start of the pixels within the tile
-     * texture for use in collisions.
-     */
+    //
+    // Percentage points that indicate the start of the pixels within the tile
+    // texture for use in collisions.
+    //
     double px1 {};
     double py1 {};
     double px2 {};
@@ -107,9 +107,9 @@ void tile_blit_colored_fat(Tpp tp,
                            color color_bl,
                            color color_br);
 
-/*
- * Blits a whole tile. Y co-ords are inverted.
- */
+//
+// Blits a whole tile. Y co-ords are inverted.
+//
 void tile_blit(const Tpp &tp, const Tilep &tile,
                    const fpoint &tl, const fpoint &br);
 void tile_blit_section(const Tpp &tp, const Tilep &tile,

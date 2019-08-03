@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -28,20 +28,20 @@ typedef int (*ascii_mouse_down_callback)(int x, int y, int button);
 typedef int (*ascii_mouse_over_callback)(int x, int y);
 
 struct ascii_ {
-    /*
-     * In ascii mode, where on the ASCII we are
-     */
+    //
+    // In ascii mode, where on the ASCII we are
+    //
     point mouse_at;
-    /*
-     * UI triggers for ASCII co-ords.
-     */
+    //
+    // UI triggers for ASCII co-ords.
+    //
     int32_t sdl_mod[ASCII_WIDTH][ASCII_HEIGHT];
     int32_t sdl_key[ASCII_WIDTH][ASCII_HEIGHT];
     int32_t mouse_button[ASCII_WIDTH][ASCII_HEIGHT];
 
-    /*
-     * Callbacks for ASCII co-ords.
-     */
+    //
+    // Callbacks for ASCII co-ords.
+    //
     ascii_key_down_callback key_down[ASCII_WIDTH][ASCII_HEIGHT];
     ascii_mouse_down_callback mouse_down[ASCII_WIDTH][ASCII_HEIGHT];
     ascii_mouse_over_callback mouse_over[ASCII_WIDTH][ASCII_HEIGHT];

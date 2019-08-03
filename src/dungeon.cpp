@@ -5,7 +5,7 @@
 
 #include "my_dungeon.h"
 
-class Dungeon *dungeon_test (void)
+Dungeonp dungeon_test (void)
 {
 #if 0
     auto x = 1000 ;
@@ -14,14 +14,14 @@ class Dungeon *dungeon_test (void)
         // smaller node numbers mean larger rooms
         //
         mysrand(x);
-        new Dungeon(DUN_WIDTH, DUN_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
+        new Dungeon(CHUNK_WIDTH, CHUNK_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
     }
 
     return (nullptr);
 #else
     int x = 663;
     mysrand(x);
-    auto d = new Dungeon(DUN_WIDTH, DUN_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
+    auto d = new Dungeon(CHUNK_WIDTH, CHUNK_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
 
     return (d);
 #endif

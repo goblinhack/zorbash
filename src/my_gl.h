@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -49,9 +49,9 @@
 #include "my_color.h"
 #include "my_point.h"
 
-/*
- * gl.c
- */
+//
+// gl.c
+//
 void gl_init_2d_mode(void);
 void gl_enter_2d_mode(void);
 void gl_leave_2d_mode(void);
@@ -73,35 +73,35 @@ void gl_blitquad(float tlx, float tly, float brx, float bry);
 void gl_blitsquare(float tlx, float tly, float brx, float bry);
 void gl_blitline(float tlx, float tly, float brx, float bry);
 
-/*
- * gl_push_texcoord
+//
+// gl_push_texcoord
 
- * Push elements onto the array buffer.
- */
+// Push elements onto the array buffer.
+//
 #define gl_push_texcoord(p, x, y) \
 { \
     *p++ = x; \
     *p++ = y; \
 }
 
-/*
- * gl_push_vertex
+//
+// gl_push_vertex
 
- * Push elements onto the array buffer.
- */
+// Push elements onto the array buffer.
+//
 #define gl_push_vertex(p, x, y) \
 { \
     *p++ = x; \
     *p++ = y; \
 }
 
-/*
- * gl_push_vertex
+//
+// gl_push_vertex
 
- * Push elements onto the array buffer.
+// Push elements onto the array buffer.
 
- * Ok, why, z then y ? for isometric views, it's easier to think of z as up
- */
+// Ok, why, z then y ? for isometric views, it's easier to think of z as up
+//
 #define gl_push_vertex_3d(p, x, z, y) \
 { \
     *p++ = x; \
@@ -109,11 +109,11 @@ void gl_blitline(float tlx, float tly, float brx, float bry);
     *p++ = z; \
 }
 
-/*
- * gl_push_rgba
+//
+// gl_push_rgba
 
- * Push elements onto the array buffer.
- */
+// Push elements onto the array buffer.
+//
 #define gl_push_rgba(p, r, g, b, a) \
 { \
     *p++ = r; \
@@ -142,9 +142,9 @@ extern float glapi_last_tex_bottom;
 extern float glapi_last_right;
 extern float glapi_last_bottom;
 
-/*
- * gl_push_triangle
- */
+//
+// gl_push_triangle
+//
 #define gl_push_triangle_colored(p, \
                                  p_end, \
                                  x1, y1, \
@@ -162,9 +162,9 @@ extern float glapi_last_bottom;
     gl_push_rgba(p, r2, g3, b3, a3); \
 } \
 
-/*
- * gl_push_point
- */
+//
+// gl_push_point
+//
 #define gl_push_point(p, p_end, \
                       x1, y1, \
                       r1, g1, b1, a1) \
@@ -173,9 +173,9 @@ extern float glapi_last_bottom;
     gl_push_rgba(p, r1, g1, b1, a1); \
 } \
 
-/*
- * gl_push_tex_point
- */
+//
+// gl_push_tex_point
+//
 #define gl_push_tex_point(p, p_end, \
                           tx, ty, \
                           x1, y1, \
@@ -220,9 +220,9 @@ extern float glapi_last_bottom;
                       r1, g1, b1, a1); \
 } \
 
-/*
- * gl_push_triangle
- */
+//
+// gl_push_triangle
+//
 #define gl_push_triangle(p, p_end, x1, y1, x2, y2, x3, y3) \
 { \
     gl_push_vertex(p, x1, y1); \
@@ -374,9 +374,9 @@ void blit_colored(int tex,
 
 void glcolor(color s);
 
-/*
- * Frame buffer objects
- */
+//
+// Frame buffer objects
+//
 #define MAX_FBO          4
 #define FBO_MAIN         0
 #define FBO_LIGHT_MASK   1

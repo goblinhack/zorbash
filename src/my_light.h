@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #pragma once
 
@@ -51,28 +51,33 @@ public:
                 cereal::make_nvp("max_light_rays",   max_light_rays));
     }
 
-    /*
-     * Unique per light.
-     */
+    //
+    // Unique per light.
+    //
     uint32_t           id {};
 
-    /*
-     * Where the light is. Rays are calculated at this point and invalidated
-     * if the light moves.
-     */
+    //
+    // The map this light resides on
+    //
+    Worldp             world;
+
+    //
+    // Where the light is. Rays are calculated at this point and invalidated
+    // if the light moves.
+    //
     fpoint             at;
 
-    /*
-     * The owner of the light, so we don't block our own light.
-     */
+    //
+    // The owner of the light, so we don't block our own light.
+    //
     Thingp             owner;
 
     double             flicker_radius;
     uint8_t            flicker {0};
 
-    /*
-     * Precalculated light rays.
-     */
+    //
+    // Precalculated light rays.
+    //
     double              strength;
     uint16_t            max_light_rays;
     std::vector<Ray>    ray;
@@ -80,12 +85,12 @@ public:
     LightQuality        quality;
     color               col;
 
-    /*
-     * We precalculate the walls a light hits partly for efficency but also
-     * to avoid lighting walls behind those immediately visible to us. To
-     * do this we do a flood fill of the level and pick the nearest walls.
-     */
-    uint8_t             is_nearest_wall[DUN_WIDTH][DUN_HEIGHT] = {};
+    //
+    // We precalculate the walls a light hits partly for efficency but also
+    // to avoid lighting walls behind those immediately visible to us. To
+    // do this we do a flood fill of the level and pick the nearest walls.
+    //
+    uint8_t             is_nearest_wall[CHUNK_WIDTH][CHUNK_HEIGHT] = {};
 
     void pop();
     std::string to_string(void);
@@ -112,25 +117,33 @@ public:
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 };
 
-extern Lightp light_new(uint16_t max_light_arrays,
-                        double strength,
-                        fpoint at,
-                        LightQuality quality,
-                        color col);
-extern Lightp light_new(double strength,
-                        fpoint at,
-                        LightQuality quality,
-                        color col);
-extern Lightp light_new(Thingp owner,
+extern Lightp light_new(Worldp,
                         uint16_t max_light_arrays,
                         double strength,
                         fpoint at,
                         LightQuality quality,
                         color col);
-extern void lights_calculate(void);
-extern void lights_render_points(int minx, int miny, int maxx, int maxy, int fbo, int pass);
-extern void lights_render_high_quality(int minx, int miny, int maxx, int maxy, int fbo);
-extern void lights_render_points_debug(int minx, int miny, int maxx, int maxy);
-extern Lightp light_find(uint32_t id);
+extern Lightp light_new(Worldp,
+                        double strength,
+                        fpoint at,
+                        LightQuality quality,
+                        color col);
+extern Lightp light_new(Worldp,
+                        Thingp owner,
+                        uint16_t max_light_arrays,
+                        double strength,
+                        fpoint at,
+                        LightQuality quality,
+                        color col);
+extern void lights_calculate(Worldp world);
+extern void lights_render_points(Worldp world,
+                                 int minx, int miny, 
+                                 int maxx, int maxy, int fbo, int pass);
+extern void lights_render_high_quality(Worldp world,
+                                       int minx, int miny, 
+                                       int maxx, int maxy, int fbo);
+extern void lights_render_points_debug(Worldp world,
+                                       int minx, int miny, 
+                                       int maxx, int maxy);
 
-#endif /* LIGHT_H */
+#endif // LIGHT_H 

@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_main.h"
 #include "my_game.h"
@@ -151,10 +151,12 @@ public:
     }
 };
 
+typedef class Dungeon *Dungeonp;
+
 class Dungeon {
 public:
     //
-    // The. Map.
+    // The. World.
     //
     std::vector<char>                         cells;
 
@@ -168,11 +170,11 @@ public:
     //
     std::vector<Roomp>                        cells_room;
 
-    int map_width                             {DUN_WIDTH};
-    int map_height                            {DUN_HEIGHT};
+    int map_width                             {CHUNK_WIDTH};
+    int map_height                            {CHUNK_HEIGHT};
     int map_depth                             {MAP_DEPTH};
 
-    int map_jigsaw_buffer_water_depth[DUN_WIDTH][DUN_HEIGHT] = {};
+    int map_jigsaw_buffer_water_depth[CHUNK_WIDTH][CHUNK_HEIGHT] = {};
 
     //
     // High level view of the map.
@@ -269,19 +271,19 @@ public:
         //
         // Add a cave as the under-dungeon
         //
-        water_gen(20, /* fill prob */
-                  10,  /* R1 */
-                  5,  /* R2 */
+        water_gen(20, // fill prob 
+                  10,  // R1 
+                  5,  // R2 
                   4   /* generations */);
 
-        cave_gen(20, /* fill prob */
-                 10,  /* R1 */
-                 5,  /* R2 */
+        cave_gen(20, // fill prob 
+                 10,  // R1 
+                 5,  // R2 
                  3   /* generations */);
 
-        dirt_gen(20, /* fill prob */
-                 10,  /* R1 */
-                 5,  /* R2 */
+        dirt_gen(20, // fill prob 
+                 10,  // R1 
+                 5,  // R2 
                  4   /* generations */);
 
         water_fixup();
@@ -372,9 +374,9 @@ public:
         return (&cells[offset(x, y, z)]);
     }
 
-    /*
-     * Puts a tile on the map
-     */
+    //
+    // Puts a tile on the map
+    //
     void putc (const int x, const int y, const int z, const char c)
     {
         if (!c) {
@@ -389,9 +391,9 @@ public:
         }
     }
 
-    /*
-     * Puts a tile on the map
-     */
+    //
+    // Puts a tile on the map
+    //
     void putc_fast (const int x, const int y, const int z, const char c)
     {
         auto p = cell_addr_fast(x, y, z);
@@ -400,9 +402,9 @@ public:
         }
     }
 
-    /*
-     * Gets a tile of the map or None
-     */
+    //
+    // Gets a tile of the map or None
+    //
     char getc (const int x, const int y, const int z)
     {
         if (is_oob(x, y)) {
@@ -415,9 +417,9 @@ public:
         return (Charmap::NONE);
     }
 
-    /*
-     * Gets a tile of the map or None
-     */
+    //
+    // Gets a tile of the map or None
+    //
     char getc_fast (const int x, const int y, const int z)
     {
         auto p = cell_addr_fast(x, y, z);
@@ -1110,9 +1112,9 @@ public:
             }
         }
 
-        /*
-         * Pass 2 without room depths
-         */
+        //
+        // Pass 2 without room depths
+        //
         LOG("dungeon: seed %u (more readable version)", seed);
         //printf("dungeon: seed %u (more readable version)\n", seed);
         for (auto y = 0; y < map_height; y++) {
@@ -1468,24 +1470,24 @@ public:
 
     void add_border (void)
     {
-        for (auto y = 0; y < DUN_HEIGHT; y++) {
+        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
             for (auto x = 0; x < MAP_BORDER; x++) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
-                putc(DUN_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(CHUNK_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::WALL);
             }
         }
-        for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto x = 0; x < CHUNK_WIDTH; x++) {
             for (auto y = 0; y < MAP_BORDER; y++) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
-                putc(x, DUN_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(x, CHUNK_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
             }
         }
     }
 
     void add_corridor_walls (void)
     {
-        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
-            for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+            for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
                 if (is_wall_fast(x, y)) {
                     continue;
                 }
@@ -1523,8 +1525,8 @@ public:
 
     void add_room_walls (void)
     {
-        for (auto y = 0; y < DUN_HEIGHT; y++) {
-            for (auto x = 0; x < DUN_WIDTH; x++) {
+        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+            for (auto x = 0; x < CHUNK_WIDTH; x++) {
                 if (is_wall_fast(x, y)) {
                     continue;
                 }
@@ -2091,7 +2093,7 @@ public:
 
     void place_level (Levelp l)
     {
-        if ((l->width > DUN_WIDTH) || (l->height > DUN_HEIGHT)) {
+        if ((l->width > CHUNK_WIDTH) || (l->height > CHUNK_HEIGHT)) {
             DIE("level has bad size %d,%d", l->width, l->height);
         }
 
@@ -2249,9 +2251,9 @@ public:
 
                 auto moved = false;
 
-                /*
-                 * Place all except one room
-                 */
+                //
+                // Place all except one room
+                //
                 auto ri = 0;
                 for (auto x = 0; x < nodes->grid_width; x++) {
                     for (auto y = 0; y < nodes->grid_height; y++) {
@@ -2270,9 +2272,9 @@ public:
                     }
                 }
 
-                /*
-                 * Place the room we want to move
-                 */
+                //
+                // Place the room we want to move
+                //
                 ri = 0;
                 for (auto x = 0; x < nodes->grid_width; x++) {
                     for (auto y = 0; y < nodes->grid_height; y++) {
@@ -2424,9 +2426,9 @@ public:
 
                 std::fill(cells.begin(), cells.end(), Charmap::SPACE);
 
-                /*
-                 * which rooms shall we move?
-                 */
+                //
+                // which rooms shall we move?
+                //
                 for (auto x = 0; x < nodes->grid_width; x++) {
                     for (auto y = 0; y < nodes->grid_height; y++) {
                         auto n = nodes->getn(x, y);
@@ -2441,9 +2443,9 @@ public:
                     }
                 }
 
-                /*
-                 * Place all rooms that are not going to move
-                 */
+                //
+                // Place all rooms that are not going to move
+                //
                 for (auto x = 0; x < nodes->grid_width; x++) {
                     for (auto y = 0; y < nodes->grid_height; y++) {
                         auto n = nodes->getn(x, y);
@@ -2461,9 +2463,9 @@ public:
                     }
                 }
 
-                /*
-                 * Place the rooms we want to move
-                 */
+                //
+                // Place the rooms we want to move
+                //
                 auto moved = false;
                 for (auto x = 0; x < nodes->grid_width; x++) {
                     for (auto y = 0; y < nodes->grid_height; y++) {
@@ -2806,8 +2808,8 @@ public:
     {
         int x, y;
 
-        for (x = 0; x < DUN_WIDTH; x++) {
-            for (y = 0; y < DUN_HEIGHT; y++) {
+        for (x = 0; x < CHUNK_WIDTH; x++) {
+            for (y = 0; y < CHUNK_HEIGHT; y++) {
 
                 if (is_anything_at(x, y)) {
                     d->val[x][y] = DMAP_IS_WALL;
@@ -2985,25 +2987,25 @@ public:
     The solution to both problems, as it turns out, is to revisit the
     original cellular automata rules. Recall that the original rule was
 
-        * There is a wall initially at P with 45% probability
-        * In the next generation, there is a wall at spot P if the number of
+       // There is a wall initially at P with 45% probability
+       // In the next generation, there is a wall at spot P if the number of
         tiles around P which are walls is at least 5
 
     Or, in more compact notation:
 
-        * Winit (p) = rand[0,100) <  45
-        * R (p) = the number of tiles within 1 step of p which are walls
-        * W? (p) = R (p) ? 5
+       // Winit (p) = rand[0,100) <  45
+       // R (p) = the number of tiles within 1 step of p which are walls
+       // W? (p) = R (p) ? 5
 
     Now, one of the problems was that we tend to get big, open areas. So why
     not try filling those areas in? Change the rule to
 
-        * W? (p) = R (p) ? 5 or p is in the middle of an open space
+       // W? (p) = R (p) ? 5 or p is in the middle of an open space
 
     Or more formally,
 
-        * Rn (p) = the number of tiles within n steps of p which are walls
-        * W? (p) = R1 (p)?5 || R2 (p)=0
+       // Rn (p) = the number of tiles within n steps of p which are walls
+       // W? (p) = R1 (p)?5 || R2 (p)=0
 
     So how does it look?
 
@@ -3238,26 +3240,26 @@ public:
     Before putting this into an actual game, handling of disconnected
     regions is needed.
 
-    */
+   */
 
     unsigned int MAP_FILL_PROB    = 10;
     unsigned int MAP_R1           = 5;
     unsigned int MAP_R2           = 2;
     int MAP_GENERATIONS           = 5;
 
-    /*
-     * Used temporarily during level generation.
-     */
-    uint8_t map_save[DUN_WIDTH][DUN_HEIGHT];
-    uint8_t map_curr[DUN_WIDTH][DUN_HEIGHT];
+    //
+    // Used temporarily during level generation.
+    //
+    uint8_t map_save[CHUNK_WIDTH][CHUNK_HEIGHT];
+    uint8_t map_curr[CHUNK_WIDTH][CHUNK_HEIGHT];
 
     //
     // Grow our cells
     //
     void cave_generation (void)
     {
-        const int16_t maze_w = DUN_WIDTH - 2;
-        const int16_t maze_h = DUN_HEIGHT - 2;
+        const int16_t maze_w = CHUNK_WIDTH - 2;
+        const int16_t maze_h = CHUNK_HEIGHT - 2;
         int16_t x, y;
 
         for (x=2; x < maze_w; x++) {
@@ -3305,9 +3307,9 @@ public:
                 // Adjust for the grow threshold for rock or flow.
                 //
                 if (adjcount <= MAP_R2) {
-                    /*
-                     * map_save set to 0 already.
-                     */
+                    //
+                    // map_save set to 0 already.
+                    //
                 } else {
                     map_save[x][y] = 1;
                 }
@@ -3320,8 +3322,8 @@ public:
     //
     void water_fixup_shallows (void)
     {
-        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
-            for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+            for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
                 if (!is_deep_water_fast(x, y)) {
                     continue;
                 }
@@ -3355,11 +3357,11 @@ public:
     //
     void water_fixup (void)
     {
-        uint8_t cand[DUN_WIDTH][DUN_HEIGHT];
+        uint8_t cand[CHUNK_WIDTH][CHUNK_HEIGHT];
         memset(cand, 0, sizeof(cand));
 
-        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
-            for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+            for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
                 if (is_water(x - 1, y - 1) &&
                     is_water(x    , y - 1) &&
                     is_water(x + 1, y - 1) &&
@@ -3373,8 +3375,8 @@ public:
                 }
             }
         }
-        for (auto y = 1; y < DUN_HEIGHT - 1; y++) {
-            for (auto x = 1; x < DUN_WIDTH - 1; x++) {
+        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+            for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
                 if (cand[x][y]) {
                     if (random_range(0, 100) < 95) {
                         putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
@@ -3399,8 +3401,8 @@ public:
         memset(map_save, 0, sizeof(map_save));
         memset(map_curr, 0, sizeof(map_curr));
 
-        const int16_t maze_w = DUN_WIDTH - 2;
-        const int16_t maze_h = DUN_HEIGHT - 2;
+        const int16_t maze_w = CHUNK_WIDTH - 2;
+        const int16_t maze_h = CHUNK_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;
@@ -3456,8 +3458,8 @@ public:
         memset(map_save, 0, sizeof(map_save));
         memset(map_curr, 0, sizeof(map_curr));
 
-        const int16_t maze_w = DUN_WIDTH - 2;
-        const int16_t maze_h = DUN_HEIGHT - 2;
+        const int16_t maze_w = CHUNK_WIDTH - 2;
+        const int16_t maze_h = CHUNK_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;
@@ -3513,8 +3515,8 @@ public:
         memset(map_save, 0, sizeof(map_save));
         memset(map_curr, 0, sizeof(map_curr));
 
-        const int16_t maze_w = DUN_WIDTH - 2;
-        const int16_t maze_h = DUN_HEIGHT - 2;
+        const int16_t maze_w = CHUNK_WIDTH - 2;
+        const int16_t maze_h = CHUNK_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;

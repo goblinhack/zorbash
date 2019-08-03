@@ -164,7 +164,7 @@ static int circle_box_collision (Thingp C,
      * Corner collisions, normal is at 45 degrees. Unless there is a wall.
      */
     if (distance(C_at, B0) < radius) {
-        if (!game.state.map.is_wall(B->interpolated_mid_at.x - 1,
+        if (!world->is_wall(B->interpolated_mid_at.x - 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B0.x;
             normal->y = C_at.y - B0.y;
@@ -173,7 +173,7 @@ static int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B1) < radius) {
-        if (!game.state.map.is_wall(B->interpolated_mid_at.x + 1,
+        if (!world->is_wall(B->interpolated_mid_at.x + 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B1.x;
             normal->y = C_at.y - B1.y;
@@ -182,7 +182,7 @@ static int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B2) < radius) {
-        if (!game.state.map.is_wall(B->interpolated_mid_at.x + 1,
+        if (!world->is_wall(B->interpolated_mid_at.x + 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B2.x;
             normal->y = C_at.y - B2.y;
@@ -191,7 +191,7 @@ static int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B3) < radius) {
-        if (!game.state.map.is_wall(B->interpolated_mid_at.x - 1,
+        if (!world->is_wall(B->interpolated_mid_at.x - 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B3.x;
             normal->y = C_at.y - B3.y;
@@ -582,7 +582,7 @@ bool Thing::handle_collisions (void)
         auto dx = x - mid_at.x;
         for (int16_t y = miny; y <= maxy; y++) {
             auto dy = y - mid_at.y;
-            for (auto p : game.state.map.all_interesting_things_at[x][y]) {
+            for (auto p : world->all_interesting_things_at[x][y]) {
                 auto it = p.second;
 
                 if (this == it) {

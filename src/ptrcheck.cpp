@@ -150,7 +150,7 @@ static void local_free (void *ptr)
 /*
  * ptr2hash
  *
- * Map a pointer to a hash slot.
+ * World a pointer to a hash slot.
  */
 static hash_elem_t ** ptr2hash (hash_t *hash_table, void *ptr)
 {_
