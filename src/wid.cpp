@@ -8,7 +8,6 @@
 #include "my_wid.h"
 #include "my_tex.h"
 #include "my_tile.h"
-#include "my_tile_info.h"
 #include "my_command.h"
 #include "my_time.h"
 #include "my_wid_console.h"
@@ -1538,12 +1537,12 @@ void wid_set_thing_template (widp w, Tpp t)
     }
 
     auto tiles = tp_tiles(t);
-    auto tile = tile_info_first(tiles);
+    auto tile = tile_first(tiles);
     if (!tile) {
         return;
     }
 
-    wid_set_tilename(w, tile_info_name(tile));
+    wid_set_tilename(w, tile_name(tile));
 
     wid_set_name(w, tp_name(t));
 }

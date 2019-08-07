@@ -6,6 +6,7 @@
 #include "my_python.h"
 #include "my_py_tp.h"
 #include "my_game.h"
+#include "my_tile.h"
 
 PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
@@ -289,7 +290,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
 {	
     PyObject *py_class = 0;	
     char *tp_name = 0;	
-    char *tile = 0;	
     char *fg = 0;	
     char *bg = 0;	
     char *fg_color = 0;	
@@ -337,6 +337,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_bloodied = 0;
     int is_end_of_anim = 0;
     int is_dead_on_end_of_anim = 0;
+    char *py_tile_name = nullptr;
 	
     static char *kwlist[] = {
         (char*) "class",
@@ -394,7 +395,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     if (!PyArg_ParseTupleAndKeywords(args, keywds,
                                      "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
                                      kwlist, &py_class,
-                                     &tile,
+                                     &py_tile_name,
                                      &fg,
                                      &bg,
                                      &fg_color,
@@ -458,14 +459,14 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         DIE("%s, missing tp name", __FUNCTION__);	
     }	
 	
-    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, tile);	
+    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);	
 	
     tp = tp_find(tp_name);	
     if (!tp) {	
         DIE("%s, cannot find tp %s", __FUNCTION__, tp_name);	
     }	
 	
-    Tileinfomap *tiles = nullptr;
+    Tilemap *tiles = nullptr;
     switch (dir) {
     case THING_DIR_NONE:
         tiles = &tp->tiles;
@@ -545,101 +546,106 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->x_tiles;
     }
     if (!tiles) {
-        DIE("no tiles for [%s]", tile);
+        DIE("no tiles for [%s]", py_tile_name);
     }
 
-    auto t = new Tileinfo();
-    t->index = tiles->size();
-    tiles->push_back(t);
-
-    if (tile && *tile) {
-        t->tile = tile_find(tile);
-        if (!t->tile) {
-            DIE("%s, cannot find tile %s for tp %s", __FUNCTION__, tile, tp_name);
+    if (py_tile_name && *py_tile_name) {
+        auto t = tile_find(std::string(py_tile_name));
+        if (!t) {
+            DIE("%s, cannot find tile '%s' for tp %s", 
+                __FUNCTION__, py_tile_name, tp_name);
         }
-    } else {
-        t->tile = nullptr;
-    }
 
-    t->tilename = std::string(tile ? tile : "");
-    t->delay_ms = delay_ms;
-    t->is_moving = is_moving;
+        //
+        // Copy thie tile and make a unique copy if someone has grabbed it.
+        //
+        if (t->in_use) {
+            t = new Tile(t);
+        }
 
-    t->is_join_horiz = is_join_horiz;
-    t->is_join_vert = is_join_vert;
-    t->is_join_node = is_join_node;
-    t->is_join_left = is_join_left;
-    t->is_join_right = is_join_right;
-    t->is_join_top = is_join_top;
-    t->is_join_bot = is_join_bot;
-    t->is_join_l90 = is_join_l90;
-    t->is_join_l180 = is_join_l180;
-    t->is_join_l = is_join_l;
-    t->is_join_l270 = is_join_l270;
-    t->is_join_t = is_join_t;
-    t->is_join_t90 = is_join_t90;
-    t->is_join_t180 = is_join_t180;
-    t->is_join_t270 = is_join_t270;
-    t->is_join_x = is_join_x;
+        t->index = tiles->size();
+        tiles->push_back(t);
+        t->in_use = true;
 
-    t->is_yyy5 = is_yyy5;
-    t->is_yyy6 = is_yyy6;
-    t->is_yyy7 = is_yyy7;
-    t->is_yyy8 = is_yyy8;
-    t->is_yyy9 = is_yyy9;
-    t->is_yyy10 = is_yyy10;
-    t->is_hp_25_percent = is_hp_25_percent;
-    t->is_hp_50_percent = is_hp_50_percent;
-    t->is_hp_75_percent = is_hp_75_percent;
-    t->is_hp_100_percent = is_hp_100_percent;
-    t->is_sleeping = is_sleeping;
-    t->is_open = is_open;
-    t->is_dead = is_dead;
-    t->is_end_of_anim = is_end_of_anim;
-    t->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
+        t->delay_ms = delay_ms;
+        t->is_moving = is_moving;
 
-    if (t->is_hp_25_percent ||
-        t->is_hp_50_percent ||
-        t->is_hp_75_percent ||
-        t->is_hp_100_percent ) {
-        tp->internal_has_hp_anim = true;
-    }
+        t->is_join_horiz = is_join_horiz;
+        t->is_join_vert = is_join_vert;
+        t->is_join_node = is_join_node;
+        t->is_join_left = is_join_left;
+        t->is_join_right = is_join_right;
+        t->is_join_top = is_join_top;
+        t->is_join_bot = is_join_bot;
+        t->is_join_l90 = is_join_l90;
+        t->is_join_l180 = is_join_l180;
+        t->is_join_l = is_join_l;
+        t->is_join_l270 = is_join_l270;
+        t->is_join_t = is_join_t;
+        t->is_join_t90 = is_join_t90;
+        t->is_join_t180 = is_join_t180;
+        t->is_join_t270 = is_join_t270;
+        t->is_join_x = is_join_x;
 
-    if (up) {
-        if (left) {
-            t->dir = THING_DIR_TL;
+        t->is_yyy5 = is_yyy5;
+        t->is_yyy6 = is_yyy6;
+        t->is_yyy7 = is_yyy7;
+        t->is_yyy8 = is_yyy8;
+        t->is_yyy9 = is_yyy9;
+        t->is_yyy10 = is_yyy10;
+        t->is_hp_25_percent = is_hp_25_percent;
+        t->is_hp_50_percent = is_hp_50_percent;
+        t->is_hp_75_percent = is_hp_75_percent;
+        t->is_hp_100_percent = is_hp_100_percent;
+        t->is_sleeping = is_sleeping;
+        t->is_open = is_open;
+        t->is_dead = is_dead;
+        t->is_end_of_anim = is_end_of_anim;
+        t->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
+
+        if (t->is_hp_25_percent ||
+            t->is_hp_50_percent ||
+            t->is_hp_75_percent ||
+            t->is_hp_100_percent ) {
+            tp->internal_has_hp_anim = true;
+        }
+
+        if (up) {
+            if (left) {
+                t->dir = THING_DIR_TL;
+                t->internal_has_dir_anim = true;
+            } else if (right) {
+                t->dir = THING_DIR_TR;
+                t->internal_has_dir_anim = true;
+            } else {
+                t->dir = THING_DIR_UP;
+                t->internal_has_dir_anim = true;
+            }
+        } else if (down) {
+            if (left) {
+                t->dir = THING_DIR_BL;
+                t->internal_has_dir_anim = true;
+            } else if (right) {
+                t->dir = THING_DIR_BR;
+                t->internal_has_dir_anim = true;
+            } else {
+                t->dir = THING_DIR_DOWN;
+                t->internal_has_dir_anim = true;
+            }
+        } else if (left) {
+            t->dir = THING_DIR_LEFT;
             t->internal_has_dir_anim = true;
         } else if (right) {
-            t->dir = THING_DIR_TR;
+            t->dir = THING_DIR_RIGHT;
             t->internal_has_dir_anim = true;
-        } else {
-            t->dir = THING_DIR_UP;
-            t->internal_has_dir_anim = true;
-        }
-    } else if (down) {
-        if (left) {
-            t->dir = THING_DIR_BL;
-            t->internal_has_dir_anim = true;
-        } else if (right) {
-            t->dir = THING_DIR_BR;
-            t->internal_has_dir_anim = true;
-        } else {
-            t->dir = THING_DIR_DOWN;
+        } else if (none) {
+            t->dir = THING_DIR_NONE;
             t->internal_has_dir_anim = true;
         }
-    } else if (left) {
-        t->dir = THING_DIR_LEFT;
-        t->internal_has_dir_anim = true;
-    } else if (right) {
-        t->dir = THING_DIR_RIGHT;
-        t->internal_has_dir_anim = true;
-    } else if (none) {
-        t->dir = THING_DIR_NONE;
-        t->internal_has_dir_anim = true;
-    }
 
-    if (t->internal_has_dir_anim) {
-        tp->internal_has_dir_anim = true;
+        if (t->internal_has_dir_anim) {
+            tp->internal_has_dir_anim = true;
+        }
     }
 	
     if (tp_name) {	

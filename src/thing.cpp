@@ -4,7 +4,6 @@
 //
 
 #include "my_game.h"
-#include "my_tile_info.h"
 #include "my_color.h"
 #include "my_dmap.h"
 
@@ -112,63 +111,62 @@ Thingp thing_new (Worldp world,
     t->timestamp_born = time_get_time_ms_cached();
 
     auto tiles = tp_left_tiles(tp);
-    auto tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->left_tile = tinfo->tile;
+    auto tile = tile_random(tiles);
+    if (tile) {
+        t->left_tile = tile->global_index;
     }
 
     tiles = tp_right_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->right_tile = tinfo->tile;
+    tile = tile_random(tiles);
+    if (tile) {
+        t->right_tile = tile->global_index;
     }
 
     tiles = tp_top_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->top_tile = tinfo->tile;
+    tile = tile_random(tiles);
+    if (tile) {
+        t->top_tile = tile->global_index;
     }
 
     tiles = tp_bot_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->bot_tile = tinfo->tile;
+    tile = tile_random(tiles);
+    if (tile) {
+        t->bot_tile = tile->global_index;
     }
 
     tiles = tp_tl_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->tl_tile = tinfo->tile;
+    tile = tile_random(tiles);
+    if (tile) {
+        t->tl_tile = tile->global_index;
     }
 
     tiles = tp_tr_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->tr_tile = tinfo->tile;
+    tile = tile_random(tiles);
+    if (tile) {
+        t->tr_tile = tile->global_index;
     }
 
     tiles = tp_br_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->br_tile = tinfo->tile;
+    tile = tile_random(tiles);
+    if (tile) {
+        t->br_tile = tile->global_index;
     }
 
     tiles = tp_bl_tiles(tp);
-    tinfo = tile_info_random(tiles);
-    if (tinfo) {
-        t->bl_tile = tinfo->tile;
+    tile = tile_random(tiles);
+    if (tile) {
+        t->bl_tile = tile->global_index;
     }
 
     tiles = tp_tiles(tp);
     if (tp->gfx_animated) {
-        tinfo = tile_info_first(tiles);
+        tile = tile_first(tiles);
     } else {
-        tinfo = tile_info_random(tiles);
+        tile = tile_random(tiles);
     }
 
-    if (tinfo) {
-        t->current_tileinfo = tinfo;
-        t->current_tile = tinfo->tile;
+    if (tile) {
+        t->current_tile = tile->global_index;
     }
 
     if (tp_is_player(tp)) {
@@ -286,22 +284,19 @@ Thingp thing_new (Worldp world,
     }
 
     if (tp_is_monst(tp)) {
-        t->dmap_scent = (__typeof__(t->dmap_scent))
-                          mymalloc(sizeof(*t->dmap_scent), "dmap scent");
+        t->dmap_scent = new Dmap();
     } else {
         t->dmap_scent = nullptr;
     }
 
     if (tp_is_monst(tp)) {
-        t->dmap_goals = (__typeof__(t->dmap_goals))
-                          mymalloc(sizeof(*t->dmap_goals), "dmap goals");
+        t->dmap_goals = new Dmap();
     } else {
         t->dmap_goals = nullptr;
     }
 
     if (tp_is_monst(tp)) {
-        t->age_map = (__typeof__(t->age_map)) mymalloc(sizeof(*t->age_map), "cell age_map");
-        memset(t->age_map, 0, sizeof(*t->age_map));
+        t->age_map = new AgeMap();
     } else {
         t->age_map = nullptr;
     }
@@ -599,17 +594,17 @@ void Thing::destroy (void)
     }
 
     if (dmap_scent) {
-        myfree(dmap_scent);
+        delete(dmap_scent);
         dmap_scent = nullptr;
     }
 
     if (dmap_goals) {
-        myfree(dmap_goals);
+        delete(dmap_goals);
         dmap_goals = nullptr;
     }
 
     if (age_map) {
-        myfree(age_map);
+        delete(age_map);
         age_map = nullptr;
     }
 }

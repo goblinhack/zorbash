@@ -101,4 +101,3 @@ PyObject *tile_get_size_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     return (Py_BuildValue("dd", w, h));
 }
-

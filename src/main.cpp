@@ -550,7 +550,7 @@ int32_t main (int32_t argc, char *argv[])
     myfree(err);
 
     game_init();
-#if 1
+#if 0
     char *save_file = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "saved.json");
     extern int cereal_test(const std::string);
     cereal_test(std::string(save_file));

@@ -14,9 +14,7 @@
 typedef class Thing* Thingp;
 typedef std::unordered_map< uint32_t, Thingp > Things;
 
-#include "my_game.h"
 #include "my_thing_template.h"
-#include "my_tile_info.h"
 #include "my_time.h"
 #include "my_light.h"
 #include "my_dmap.h"
@@ -62,9 +60,17 @@ public:
 
 extern Path astar_solve(point start, std::multiset<Goal> &goals, Dmap *dmap);
 
-typedef struct AgeWorld {
-    uint32_t val[CHUNK_WIDTH][CHUNK_HEIGHT];
-} AgeWorld;
+typedef class AgeMap {
+public:
+    uint32_t val[CHUNK_WIDTH][CHUNK_HEIGHT] = {{0}};
+    AgeMap(void) {}
+
+    template <class Archive>
+    void serialize (Archive & archive)
+    {
+        archive(cereal::make_nvp("val", val));
+    }
+} AgeMap;
 
 class Thing
 {
@@ -185,35 +191,26 @@ public:
     //
     uint32_t           timestamp_bounce_begin {};
     uint32_t           timestamp_bounce_end {};
-    double             bounce_height {}; // Percentage of tile height.
-    double             bounce_fade {};   // 0.1; rapid decrease, 0.9 slow
+    float              bounce_height {}; // Percentage of tile height.
+    float              bounce_fade {};   // 0.1; rapid decrease, 0.9 slow
     uint16_t           bounce_count {};
 
-    //
-    // Tileinfo may be null if this thing does not need animation.
-    // Ih such a case, current_tile will be set.
-    //
-    Tileinfop          current_tileinfo {};
-    Tilep              current_tile {};
-
-    //
-    // For thing decorations
-    //
-    Tilep              top_tile {};
-    Tilep              bot_tile {};
-    Tilep              left_tile {};
-    Tilep              right_tile {};
-    Tilep              tl_tile {};
-    Tilep              tr_tile {};
-    Tilep              bl_tile {};
-    Tilep              br_tile {};
+    uint16_t           current_tile {};
+    uint16_t           top_tile {};
+    uint16_t           bot_tile {};
+    uint16_t           left_tile {};
+    uint16_t           right_tile {};
+    uint16_t           tl_tile {};
+    uint16_t           tr_tile {};
+    uint16_t           bl_tile {};
+    uint16_t           br_tile {};
 
     //
     // Only used for display purposes.
     //
-    int                gold {0};
-    int                health {0};
-    int                max_health {0};
+    int16_t            gold {0};
+    int16_t            health {0};
+    int16_t            max_health {0};
 
     uint32_t           weapon_carry_anim_thing_id {0};
     uint32_t           weapon_use_anim_thing_id {0};
@@ -243,7 +240,7 @@ public:
     // This is an array of how old a cell is since we last visited it with
     // "memory" below.
     //
-    AgeWorld             *age_map;
+    AgeMap             *age_map;
 
     //
     // Display order
