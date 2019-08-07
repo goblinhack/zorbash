@@ -1578,6 +1578,12 @@ void tile_blit_outline (const Tpp &tp, const Tilep &tile,
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
+void tile_blit_outline (const Tpp &tp, uint16_t index,
+                        const fpoint &tl, const fpoint &br)
+{
+    tile_blit_outline(tp, tile_index_to_tile(index), tl, br);
+}
+
 /*
  * Blits a whole tile. Y co-ords are inverted.
  */
@@ -1625,6 +1631,14 @@ void tile_blit_outline_section (const Tpp &tp, const Tilep &tile,
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
+void tile_blit_outline_section (const Tpp &tp, uint16_t index,
+                                const fpoint &tile_tl, const fpoint &tile_br,
+                                const fpoint &tl, const fpoint &br)
+{
+    tile_blit_outline_section(tp, tile_index_to_tile(index), 
+                              tile_tl, tile_br, tl, br);
+}
+
 void tile_blit (const Tpp &tp, const Tilep &tile,
                 const fpoint &tl, const fpoint &br)
 {
@@ -1644,6 +1658,12 @@ void tile_blit (const Tpp &tp, const Tilep &tile,
     y2 = tile->y2;
 
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+}
+
+void tile_blit (const Tpp &tp, uint16_t index,
+                const fpoint &tl, const fpoint &br)
+{
+    tile_blit(tp, tile_index_to_tile(index), tl, br);
 }
 
 void tile_blit_section (const Tpp &tp, const Tilep &tile,
@@ -1669,4 +1689,11 @@ void tile_blit_section (const Tpp &tp, const Tilep &tile,
     y2 = tile->y1 + tile_br.y * th;
 
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+}
+
+void tile_blit_section (const Tpp &tp, uint16_t index,
+                        const fpoint &tile_tl, const fpoint &tile_br,
+                        const fpoint &tl, const fpoint &br)
+{
+    tile_blit_section(tp, tile_index_to_tile(index), tile_tl, tile_br, tl, br);
 }

@@ -4,7 +4,6 @@
 //
 
 #include "my_main.h"
-#include "my_tile_info.h"
 #include "my_tile.h"
 #include "my_dice.h"
 
@@ -114,9 +113,7 @@ Tilep tp_first_tile (Tpp tp)
     //
     // Get the first anim tile.
     //
-    auto Tileinfo = tile_info_first(tiles);
-
-    return (Tileinfo->tile);
+    return (tile_first(tiles));
 }
 
 void tp_init_after_loading (void)

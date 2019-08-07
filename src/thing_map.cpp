@@ -5,7 +5,6 @@
 
 #include "my_main.h"
 #include "my_tile.h"
-#include "my_tile_info.h"
 #include "my_tex.h"
 #include "my_game.h"
 #include "my_gl.h"
@@ -335,13 +334,7 @@ static void thing_blit_water (Worldp world,
                     continue;
                 }
 
-                Tilep tile;
-                if (t->current_tileinfo) {
-                    tile = t->current_tileinfo->tile;
-                } else {
-                    tile = t->current_tile;
-                }
-
+                uint16_t tile = t->current_tile;
                 fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
@@ -596,13 +589,7 @@ static void thing_blit_deep_water (Worldp world,
                     continue;
                 }
 
-                Tilep tile;
-                if (t->current_tileinfo) {
-                    tile = t->current_tileinfo->tile;
-                } else {
-                    tile = t->current_tile;
-                }
-
+                Tilep tile = tile_index_to_tile(t->current_tile);
                 fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 

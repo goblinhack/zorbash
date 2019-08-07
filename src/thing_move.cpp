@@ -110,11 +110,9 @@ bool Thing::update_coordinates (void)
     br.x = (tx+1) * tile_gl_width;
     br.y = (ty+1) * tile_gl_height;
 
-    Tilep tile;
-    if (current_tileinfo) {
-        tile = current_tileinfo->tile;
-    } else {
-        tile = current_tile;
+    auto tile = tile_index_to_tile(current_tile);
+    if (!tile) {
+        die("has no tile, index %d", current_tile);
     }
 
     //

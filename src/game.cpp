@@ -97,8 +97,8 @@ static void game_place_walls (Worldp world,
                 if (!tile) {
                     DIE("wall tile %s not found", tilename.c_str());
                 }
-                t->current_tileinfo = nullptr;
-                t->current_tile = tile;
+
+                t->current_tile = tile->global_index;
             }
         }
     }
@@ -189,8 +189,7 @@ static void game_place_floors (Worldp world,
                 if (!tile) {
                     DIE("floor tile %s not found", tilename.c_str());
                 }
-                t->current_tileinfo = nullptr;
-                t->current_tile = tile;
+                t->current_tile = tile->global_index;
             }
         }
     }
@@ -266,8 +265,7 @@ static void game_place_rocks (Worldp world,
                 if (!tile) {
                     DIE("rock tile %s not found", tilename.c_str());
                 }
-                t->current_tileinfo = nullptr;
-                t->current_tile = tile;
+                t->current_tile = tile->global_index;
             }
         }
     }

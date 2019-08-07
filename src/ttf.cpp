@@ -11,7 +11,6 @@
 #include "my_ramdisk.h"
 #include "my_time.h"
 #include "my_string.h"
-#include "my_tile_info.h"
 #include "my_font.h"
 
 #include "my_bits.h"

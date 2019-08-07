@@ -20,8 +20,8 @@ typedef std::unordered_map< std::string, Tpp > Tpmap;
 //
 typedef std::vector< Tpp > Tpmap_create_order;
 
-#include "my_tile_info.h"
 #include "my_dice.h"
+#include "my_tile.h"
 
 enum {
     IS_JOIN_HORIZ,
@@ -85,34 +85,34 @@ public:
     //
     // Animation tiles.
     //
-    Tileinfomap tiles;
+    Tilemap tiles;
 
     //
     // Adjacent tiles.
     //
-    Tileinfomap top_tiles;
-    Tileinfomap bot_tiles;
-    Tileinfomap left_tiles;
-    Tileinfomap right_tiles;
-    Tileinfomap tl_tiles;
-    Tileinfomap tr_tiles;
-    Tileinfomap bl_tiles;
-    Tileinfomap br_tiles;
+    Tilemap top_tiles;
+    Tilemap bot_tiles;
+    Tilemap left_tiles;
+    Tilemap right_tiles;
+    Tilemap tl_tiles;
+    Tilemap tr_tiles;
+    Tilemap bl_tiles;
+    Tilemap br_tiles;
 
     //
     // Join tiles
     //
-    Tileinfomap horiz_tiles;
-    Tileinfomap vert_tiles;
-    Tileinfomap l90_tiles;
-    Tileinfomap l180_tiles;
-    Tileinfomap l_tiles;
-    Tileinfomap l270_tiles;
-    Tileinfomap t_tiles;
-    Tileinfomap t90_tiles;
-    Tileinfomap t180_tiles;
-    Tileinfomap t270_tiles;
-    Tileinfomap x_tiles;
+    Tilemap horiz_tiles;
+    Tilemap vert_tiles;
+    Tilemap l90_tiles;
+    Tilemap l180_tiles;
+    Tilemap l_tiles;
+    Tilemap l270_tiles;
+    Tilemap t_tiles;
+    Tilemap t90_tiles;
+    Tilemap t180_tiles;
+    Tilemap t270_tiles;
+    Tilemap x_tiles;
 
     int blit_off {};
     int blit_top_off {};
@@ -1017,102 +1017,102 @@ static inline std::string tp_weapon_use_anim (Tpp t)
     return (t->weapon_use_anim);
 }
 
-static inline Tileinfomap *tp_tiles (Tpp t)
+static inline Tilemap *tp_tiles (Tpp t)
 {
     return (&t->tiles);
 }
 
-static inline Tileinfomap *tp_left_tiles (Tpp t)
+static inline Tilemap *tp_left_tiles (Tpp t)
 {
     return (&t->left_tiles);
 }
 
-static inline Tileinfomap *tp_right_tiles (Tpp t)
+static inline Tilemap *tp_right_tiles (Tpp t)
 {
     return (&t->right_tiles);
 }
 
-static inline Tileinfomap *tp_top_tiles (Tpp t)
+static inline Tilemap *tp_top_tiles (Tpp t)
 {
     return (&t->top_tiles);
 }
 
-static inline Tileinfomap *tp_bot_tiles (Tpp t)
+static inline Tilemap *tp_bot_tiles (Tpp t)
 {
     return (&t->bot_tiles);
 }
 
-static inline Tileinfomap *tp_tl_tiles (Tpp t)
+static inline Tilemap *tp_tl_tiles (Tpp t)
 {
     return (&t->tl_tiles);
 }
 
-static inline Tileinfomap *tp_tr_tiles (Tpp t)
+static inline Tilemap *tp_tr_tiles (Tpp t)
 {
     return (&t->tr_tiles);
 }
 
-static inline Tileinfomap *tp_bl_tiles (Tpp t)
+static inline Tilemap *tp_bl_tiles (Tpp t)
 {
     return (&t->bl_tiles);
 }
 
-static inline Tileinfomap *tp_br_tiles (Tpp t)
+static inline Tilemap *tp_br_tiles (Tpp t)
 {
     return (&t->br_tiles);
 }
 
-static inline Tileinfomap *tp_horiz_tiles (Tpp t)
+static inline Tilemap *tp_horiz_tiles (Tpp t)
 {
     return (&t->horiz_tiles);
 }
 
-static inline Tileinfomap *tp_vert_tiles (Tpp t)
+static inline Tilemap *tp_vert_tiles (Tpp t)
 {
     return (&t->vert_tiles);
 }
 
-static inline Tileinfomap *tp_l90_tiles (Tpp t)
+static inline Tilemap *tp_l90_tiles (Tpp t)
 {
     return (&t->l90_tiles);
 }
 
-static inline Tileinfomap *tp_l180_tiles (Tpp t)
+static inline Tilemap *tp_l180_tiles (Tpp t)
 {
     return (&t->l180_tiles);
 }
 
-static inline Tileinfomap *tp_l_tiles (Tpp t)
+static inline Tilemap *tp_l_tiles (Tpp t)
 {
     return (&t->l_tiles);
 }
 
-static inline Tileinfomap *tp_l270_tiles (Tpp t)
+static inline Tilemap *tp_l270_tiles (Tpp t)
 {
     return (&t->l270_tiles);
 }
 
-static inline Tileinfomap *tp_t_tiles (Tpp t)
+static inline Tilemap *tp_t_tiles (Tpp t)
 {
     return (&t->t_tiles);
 }
 
-static inline Tileinfomap *tp_t90_tiles (Tpp t)
+static inline Tilemap *tp_t90_tiles (Tpp t)
 {
     return (&t->t90_tiles);
 }
 
-static inline Tileinfomap *tp_t180_tiles (Tpp t)
+static inline Tilemap *tp_t180_tiles (Tpp t)
 {
     return (&t->t180_tiles);
 }
 
-static inline Tileinfomap *tp_t270_tiles (Tpp t)
+static inline Tilemap *tp_t270_tiles (Tpp t)
 {
     return (&t->t270_tiles);
 }
 
-static inline Tileinfomap *tp_x_tiles (Tpp t)
+static inline Tilemap *tp_x_tiles (Tpp t)
 {
     return (&t->x_tiles);
 }

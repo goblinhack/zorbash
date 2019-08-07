@@ -4,7 +4,6 @@
 //
 
 #include "my_game.h"
-#include "my_tile_info.h"
 
 Tpp Thing::get_weapon ()
 {

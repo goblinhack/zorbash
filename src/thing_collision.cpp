@@ -37,11 +37,11 @@ static const double thing_collision_tiles = 1;
 static bool
 things_tile_overlap (Thingp A, Thingp B)
 {_
-    auto A_tile = A->current_tile;
+    auto A_tile = tile_index_to_tile(A->current_tile);
     if (!A_tile) {
         return (false);
     }
-    auto B_tile = B->current_tile;
+    auto B_tile = tile_index_to_tile(B->current_tile);
     if (!B_tile) {
         return (false);
     }

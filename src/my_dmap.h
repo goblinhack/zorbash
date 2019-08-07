@@ -8,8 +8,16 @@
 #include "my_point.h"
 #include "my_main.h"
 
-typedef struct dmap_ {
-    uint16_t val[CHUNK_WIDTH][CHUNK_HEIGHT];
+typedef class Dmap {
+public:
+    uint16_t val[CHUNK_WIDTH][CHUNK_HEIGHT] = {{0}};
+    Dmap() { }
+
+    template <class Archive>
+    void serialize (Archive & archive)
+    {
+        archive(cereal::make_nvp("val", val));
+    }
 } Dmap;
 
 extern void dmap_process(Dmap *D, point tl, point br);

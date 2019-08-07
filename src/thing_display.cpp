@@ -1385,13 +1385,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         return;
     }
 
-    Tilep tile;
-    if (current_tileinfo) {
-        tile = current_tileinfo->tile;
-    } else {
-        tile = current_tile;
-    }
-
+    Tilep tile = tile_index_to_tile(current_tile);
     last_blit_tl = fpoint(tl.x - offset_x, tl.y - offset_y);
     last_blit_br = fpoint(br.x - offset_x, br.y - offset_y);
     auto blit_tl = last_blit_tl;
@@ -1576,13 +1570,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         return;
     }
 
-    Tilep tile;
-    if (current_tileinfo) {
-        tile = current_tileinfo->tile;
-    } else {
-        tile = current_tile;
-    }
-
+    Tilep tile = tile_index_to_tile(current_tile);
     fpoint blit_tl(tl.x - offset_x, tl.y - offset_y);
     fpoint blit_br(br.x - offset_x, br.y - offset_y);
     auto diff = blit_br.y - blit_tl.y;

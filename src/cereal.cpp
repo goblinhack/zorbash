@@ -12,6 +12,7 @@
 #include <array>
 #include <memory>
 #include "my_game.h"
+#include "my_dmap.h"
 
 class Test1
 {
@@ -35,8 +36,10 @@ public:
     std::array<class Test1, 2> c;
     class Test1 d[2];
     class Test1 e[2][2];
-    int f[2048][2048] = {{0}};
-    std::shared_ptr<class Test1> u1;
+    int f[2][2] = {{0}};
+    std::unique_ptr<class Test1> u1;
+    std::unique_ptr<class Dmap> dmap;
+    std::unique_ptr<class AgeMap> agemap;
 
     Test2 (void) { }
 
@@ -47,7 +50,9 @@ public:
                 cereal::make_nvp("d", d),
                 cereal::make_nvp("e", e),
                 cereal::make_nvp("f", f),
-                cereal::make_nvp("u1", u1));
+                cereal::make_nvp("u1", u1),
+                cereal::make_nvp("dmap", dmap),
+                cereal::make_nvp("agemap", agemap));
     }
 };
 
@@ -71,6 +76,12 @@ int cereal_test (const std::string save_file)
         auto p = std::make_unique<class Test1>(11, 12);
         test2.u1 = std::move(p);
 
+        auto dmap = std::make_unique<Dmap>();
+        test2.dmap = std::move(dmap);
+
+        auto agemap = std::make_unique<AgeMap>();
+        test2.agemap = std::move(agemap);
+
         printf("json saving\n");
         system("date");
         archive_out(test2);
@@ -93,6 +104,7 @@ int cereal_test (const std::string save_file)
         //archive_out(test2);
     }
 
+#if 0
     {
         std::ofstream os(save_file, std::ios::binary);
         cereal::BinaryOutputArchive archive_out(os);
@@ -130,6 +142,7 @@ int cereal_test (const std::string save_file)
         //cereal::BinaryOutputArchive archive_out(std::cout);
         //archive_out(test2);
     }
+#endif
 
     exit(0);
 //    return 0;

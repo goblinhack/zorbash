@@ -476,7 +476,7 @@ public:
     Texp tex {};
     Tilep tile {};
     Tilep first_tile {};
-    Tileinfop current_tile {};
+    Tilep current_tile {};
 
     fsize texuv {};
 
