@@ -72,6 +72,17 @@ public:
     }
 } AgeMap;
 
+class Monst
+{
+public:
+    AgeMap       *age_map;                   // How old a cell is
+    Dmap         *dmap_goals;
+    Dmap         *dmap_scent;
+    Lightp       light;                      // Have a light source?
+    Tpp          tp;                         // Common settings
+    Worldp       world;
+};
+
 class Thing
 {
 private:
@@ -93,6 +104,10 @@ public:
         }
         is_being_destroyed = true;
         destroy();
+        if (monst) {
+            oldptr(monst);
+            delete monst;
+        }
         oldptr(this);
     }
 
@@ -102,12 +117,40 @@ public:
         archive(cereal::make_nvp("id", id));
     }
 
-    AgeMap       *age_map;                   // How old a cell is
+    void new_monst (void)
+    {
+        if (unlikely(!monst)) { 
+            monst = new Monst(); 
+            newptr(monst, "Monst");
+        }
+    }
+
+    AgeMap *age_map (void)
+    {
+        new_monst();
+        return (monst->age_map);
+    }
+
+    void new_age_map (void)
+    {
+        new_monst();
+        monst->age_map = new AgeMap();
+        newptr(monst->age_map, "AgeMap");
+    }
+
+    void delete_age_map (void)
+    {
+        if (monst && monst->age_map) { 
+            oldptr(monst->age_map);
+            delete monst->age_map; monst->age_map = 0;
+        }
+    }
+
+    Monst        *monst;
     Dmap         *dmap_goals;
     Dmap         *dmap_scent;
     Lightp       light;                      // Have a light source?
     Tpp          tp;                         // Common settings
-    Worldp       world;
     float        bounce_fade;                // 0.1; rapid, 0.9 slow
     float        bounce_height;              // Percentage of tile height.
     float        rot;                        // GL co-orids
@@ -126,8 +169,8 @@ public:
     int16_t      gold;
     int16_t      health;
     int16_t      health_max;
-    uint16_t     bounce_count;
-    uint16_t     owned_count;                // How many things this thing owns.
+    uint8_t      bounce_count;
+    uint8_t      owned_count;                // How many things this thing owns.
     uint16_t     tile_bl;
     uint16_t     tile_bot;
     uint16_t     tile_br;
@@ -140,16 +183,15 @@ public:
     uint16_t     weapon_tp_id;               // Weapon thing template.
     uint32_t     hunger_tick_last_ms;        // Ticks every time does something. Used from memory aging
     uint32_t     id;                         // Unique per thing.
-    uint32_t     id_owner;             // Who created this thing?
+    uint32_t     id_owner;                   // Who created this thing?
     uint32_t     id_weapon_carry_anim;
     uint32_t     id_weapon_use_anim;
-    uint32_t     light_iterator;             // Use to detect things hit by a light source
     uint32_t     timestamp_ai_next;
     uint32_t     timestamp_born;
     uint32_t     timestamp_bounce_begin;
     uint32_t     timestamp_bounce_end;
     uint32_t     timestamp_collision;
-    uint32_t     timestamp_flip_start;              // Used for animating the steps.
+    uint32_t     timestamp_flip_start;       // Used for animating the steps.
     uint32_t     timestamp_last_attacked;
     uint32_t     timestamp_last_i_was_hit;
     uint32_t     timestamp_move_begin;
@@ -431,34 +473,17 @@ struct thing_display_sort_cmp : public std::binary_function<struct ThingDisplayS
     }
 };
 
-extern Thingp thing_new(Worldp,
-                        std::string tp_name,
-                        fpoint at, fpoint jitter = fpoint(0, 0));
-extern Thingp thing_new(Worldp,
-                        std::string tp_name, Thingp owner);
-extern Thingp thing_find(Worldp, uint32_t name);
-extern void thing_gc(Worldp);
-extern void thing_render_all(Worldp);
-extern void thing_map_scroll_to_player(Worldp);
-
-//
-// thing_display.cpp
-//
 typedef std::unordered_map< struct ThingDisplaySortKey, Thingp,
                   thing_display_sort_cmp > ThingDisplayOrder;
-//
-// thing_move.cpp
-//
 
-//
-// thing_collision.cpp
-//
+Thingp thing_find(uint32_t name);
+Thingp thing_new(std::string tp_name, Thingp owner);
+Thingp thing_new(std::string tp_name, fpoint at, fpoint jitter = fpoint(0, 0));
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
-
-//
-// thing_tick.cpp
-//
-extern void things_tick(Worldp);
+void thing_gc(void);
+void thing_map_scroll_to_player(void);
+void thing_render_all(void);
+void things_tick(void);
 
 #endif // THING_H

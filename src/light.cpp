@@ -20,8 +20,7 @@ static const int LIGHT_VISIBLE_DIST = TILES_ACROSS + TILES_ACROSS / 2;
 
 Thingp debug_thing;
 
-Lightp light_new (Worldp world,
-                  Thingp owner,
+Lightp light_new (Thingp owner,
                   uint16_t max_light_rays,
                   double strength,
                   fpoint at,
@@ -70,24 +69,15 @@ Lightp light_new (Worldp world,
     return (l);
 }
 
-Lightp light_new (Worldp world,
-                  uint16_t max_light_rays,
-                  double strength,
-                  fpoint at,
-                  LightQuality quality,
-                  color col)
+Lightp light_new (uint16_t max_light_rays, double strength, fpoint at,
+                  LightQuality quality, color col)
 {_
-    return (light_new(world, nullptr, 
-                      max_light_rays, strength, at, quality, col));
+    return (light_new(nullptr, max_light_rays, strength, at, quality, col));
 }
 
-Lightp light_new (Worldp world,
-                  double strength,
-                  fpoint at,
-                  LightQuality quality,
-                  color col)
+Lightp light_new (double strength, fpoint at, LightQuality quality, color col)
 {_
-    return (light_new(world, nullptr, 10, strength, at, quality, col));
+    return (light_new(nullptr, 10, strength, at, quality, col));
 }
 
 void Light::pop (void)
@@ -266,7 +256,7 @@ void Light::calculate (void)
     }
 }
 
-void lights_calculate (Worldp world)
+void lights_calculate (void)
 {
     for (auto x = 0 ; x < CHUNK_WIDTH; x++) {
         auto X = ((int)world->map_at.x) - (CHUNK_WIDTH / 2);
@@ -584,8 +574,7 @@ void Light::render_debug (int minx, int miny, int maxx, int maxy)
     }
 }
 
-void lights_render_points (Worldp world,
-                           int minx, int miny, int maxx, int maxy, 
+void lights_render_points (int minx, int miny, int maxx, int maxy, 
                            int fbo, int pass)
 {
     bool have_low_quality = false;
@@ -669,8 +658,7 @@ void lights_render_points (Worldp world,
     glcolor(WHITE);
 }
 
-void lights_render_high_quality (Worldp world,
-                                 int minx, int miny, 
+void lights_render_high_quality (int minx, int miny, 
                                  int maxx, int maxy, int fbo)
 {
     Lightp deferred = nullptr;
@@ -714,8 +702,7 @@ void lights_render_high_quality (Worldp world,
     }
 }
 
-void lights_render_points_debug (Worldp world,
-                                 int minx, int miny, int maxx, int maxy)
+void lights_render_points_debug (int minx, int miny, int maxx, int maxy)
 {
     for (auto y = miny; y < maxy; y++) {
         for (auto x = maxx - 1; x >= minx; x--) {

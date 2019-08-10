@@ -4,11 +4,10 @@
  */
 
 #include "my_main.h"
-#include "my_player.h"
 #include "my_game.h"
 #include "my_wid_console.h"
 
-void player_tick (Worldp world)
+void player_tick (void)
 {_
     if (wid_console_window && wid_console_window->visible) {
         return;

@@ -117,33 +117,27 @@ public:
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
 };
 
-extern Lightp light_new(Worldp,
+extern Lightp light_new(uint16_t max_light_arrays,
+                        double strength,
+                        fpoint at,
+                        LightQuality quality,
+                        color col);
+extern Lightp light_new(double strength,
+                        fpoint at,
+                        LightQuality quality,
+                        color col);
+extern Lightp light_new(Thingp owner,
                         uint16_t max_light_arrays,
                         double strength,
                         fpoint at,
                         LightQuality quality,
                         color col);
-extern Lightp light_new(Worldp,
-                        double strength,
-                        fpoint at,
-                        LightQuality quality,
-                        color col);
-extern Lightp light_new(Worldp,
-                        Thingp owner,
-                        uint16_t max_light_arrays,
-                        double strength,
-                        fpoint at,
-                        LightQuality quality,
-                        color col);
-extern void lights_calculate(Worldp world);
-extern void lights_render_points(Worldp world,
-                                 int minx, int miny, 
+extern void lights_calculate(void);
+extern void lights_render_points(int minx, int miny, 
                                  int maxx, int maxy, int fbo, int pass);
-extern void lights_render_high_quality(Worldp world,
-                                       int minx, int miny, 
+extern void lights_render_high_quality(int minx, int miny, 
                                        int maxx, int maxy, int fbo);
-extern void lights_render_points_debug(Worldp world,
-                                       int minx, int miny, 
+extern void lights_render_points_debug(int minx, int miny, 
                                        int maxx, int maxy);
 
 #endif // LIGHT_H 

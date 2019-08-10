@@ -12,7 +12,7 @@
 
 #define SCALEX 1
 
-static void thing_map_scroll_do (Worldp world)
+static void thing_map_scroll_do (void)
 {
     const double step = 10.0;
 
@@ -53,7 +53,7 @@ static void thing_map_scroll_do (Worldp world)
     world->map_at.y /= 1.0 / game->config.one_pixel_gl_height;
 }
 
-static void thing_map_scroll_follow_player (Worldp world)
+static void thing_map_scroll_follow_player (void)
 {
     if (!world->player) {
         return;
@@ -78,11 +78,11 @@ static void thing_map_scroll_follow_player (Worldp world)
     }
 }
 
-void thing_map_scroll_to_player (Worldp world)
+void thing_map_scroll_to_player (void)
 {
     for (auto x = 0; x < 1000; x++) {
-        thing_map_scroll_follow_player(world);
-        thing_map_scroll_do(world);
+        thing_map_scroll_follow_player();
+        thing_map_scroll_do();
     }
 }
 
@@ -184,8 +184,7 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
 }
 #endif
 
-static void thing_blit_water (Worldp world,
-                              int minx, int miny, int minz,
+static void thing_blit_water (int minx, int miny, int minz,
                               int maxx, int maxy, int maxz,
                               double offset_x,
                               double offset_y)
@@ -481,8 +480,7 @@ glBlendFunc(vals[i1], vals[i2]);
     glcolor(WHITE);
 }
 
-static void thing_blit_deep_water (Worldp world,
-                                   int minx, int miny, int minz,
+static void thing_blit_deep_water (int minx, int miny, int minz,
                                    int maxx, int maxy, int maxz,
                                    double offset_x,
                                    double offset_y)
@@ -673,8 +671,7 @@ static void thing_blit_deep_water (Worldp world,
     glcolor(WHITE);
 }
 
-static void thing_blit_lava (Worldp world,
-                             int minx, int miny, int minz,
+static void thing_blit_lava (int minx, int miny, int minz,
                              int maxx, int maxy, int maxz,
                              double offset_x,
                              double offset_y)
@@ -930,8 +927,7 @@ static void thing_blit_lava (Worldp world,
     blit_fbo(FBO_LIGHT_MERGED);
 }
 
-static void thing_blit_blood (Worldp world,
-                              int minx, int miny, int minz,
+static void thing_blit_blood (int minx, int miny, int minz,
                               int maxx, int maxy, int maxz,
                               double offset_x,
                               double offset_y)
@@ -1037,8 +1033,7 @@ static void thing_blit_blood (Worldp world,
     blit_fbo(FBO_LIGHT_MERGED);
 }
 
-static void thing_blit_things (Worldp world,
-                               int minx, int miny, int minz,
+static void thing_blit_things (int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
     double offset_x = world->map_at.x * game->config.tile_gl_width;
@@ -1110,22 +1105,22 @@ static void thing_blit_things (Worldp world,
     // to the display.
     //
     if (have_lava) {
-        thing_blit_lava(world, minx, miny, minz, maxx, maxy, maxz,
+        thing_blit_lava(minx, miny, minz, maxx, maxy, maxz,
                         offset_x, offset_y);
     }
 
     if (have_blood) {
-        thing_blit_blood(world, minx, miny, minz, maxx, maxy, maxz,
+        thing_blit_blood(minx, miny, minz, maxx, maxy, maxz,
                          offset_x, offset_y);
     }
 
     if (have_water) {
-        thing_blit_water(world, minx, miny, minz, maxx, maxy, maxz,
+        thing_blit_water(minx, miny, minz, maxx, maxy, maxz,
                          offset_x, offset_y);
     }
 
     if (have_deep_water) {
-        thing_blit_deep_water(world, minx, miny, minz, maxx, maxy, maxz,
+        thing_blit_deep_water(minx, miny, minz, maxx, maxy, maxz,
                               offset_x, offset_y);
     }
 
@@ -1157,7 +1152,7 @@ static void thing_blit_things (Worldp world,
     }
 }
 
-void thing_render_all (Worldp world)
+void thing_render_all (void)
 {
     //
     // Get the bounds
@@ -1171,13 +1166,13 @@ void thing_render_all (Worldp world)
     int miny = std::max(0, (int) world->map_at.y - 4);
     int maxy = std::min(MAP_HEIGHT, (int)world->map_at.y + TILES_DOWN + 4);
 
-    thing_map_scroll_follow_player(world);
-    thing_map_scroll_do(world);
+    thing_map_scroll_follow_player();
+    thing_map_scroll_do();
     auto lighting = true;
     if (lighting) {
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        thing_blit_things(world, minx, miny, minz, maxx, maxy, maxz);
+        thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
 
         //
         // Render light sources first to their own merged buffer
@@ -1186,8 +1181,7 @@ void thing_render_all (Worldp world)
         glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        lights_render_points(world,
-                             minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
+        lights_render_points(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         // glBlendFunc(GL_DST_COLOR, GL_ONE);           // normal light redder
@@ -1203,8 +1197,7 @@ void thing_render_all (Worldp world)
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        lights_render_high_quality(world,
-                                   minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
+        lights_render_high_quality(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
@@ -1215,8 +1208,7 @@ void thing_render_all (Worldp world)
         blit_fbo_bind(FBO_MAIN);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        thing_blit_things(world,
-                          minx, miny, minz, maxx, maxy, maxz);
+        thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
     }
 
     if (world->terrain) {

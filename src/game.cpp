@@ -7,6 +7,7 @@
 #include "my_dungeon.h"
 
 class Game *game;
+class World *world;
 
 void game_init (void)
 {
@@ -25,8 +26,7 @@ void game_fini (void)
     //}
 }
 
-static void game_place_walls (Worldp world,
-                              Dungeonp d,
+static void game_place_walls (Dungeonp d,
                               int variant,
                               int block_width,
                               int block_height,
@@ -92,7 +92,7 @@ static void game_place_walls (Worldp world,
                     cnt++;
                 }
 
-                auto t = thing_new(world, what, fpoint(X, Y));
+                auto t = thing_new(what, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
                     DIE("wall tile %s not found", tilename.c_str());
@@ -104,8 +104,7 @@ static void game_place_walls (Worldp world,
     }
 }
 
-static void game_place_floors (Worldp world,
-                               Dungeonp d,
+static void game_place_floors (Dungeonp d,
                                std::string what,
                                int depth,
                                int variant,
@@ -184,7 +183,7 @@ static void game_place_floors (Worldp world,
                     cnt++;
                 }
 
-                auto t = thing_new(world, new_thing, fpoint(X, Y));
+                auto t = thing_new(new_thing, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
                     DIE("floor tile %s not found", tilename.c_str());
@@ -195,8 +194,7 @@ static void game_place_floors (Worldp world,
     }
 }
 
-static void game_place_rocks (Worldp world,
-                              Dungeonp d,
+static void game_place_rocks (Dungeonp d,
                               std::string what,
                               int variant,
                               int block_width,
@@ -260,7 +258,7 @@ static void game_place_rocks (Worldp world,
                     cnt++;
                 }
 
-                auto t = thing_new(world, what, fpoint(X, Y));
+                auto t = thing_new(what, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
                     DIE("rock tile %s not found", tilename.c_str());
@@ -271,8 +269,7 @@ static void game_place_rocks (Worldp world,
     }
 }
 
-static void game_place_floor_under_objects (Worldp world,
-                                            Dungeonp d,
+static void game_place_floor_under_objects (Dungeonp d,
                                             std::string what,
                                             int depth)
 {_
@@ -292,33 +289,33 @@ static void game_place_floor_under_objects (Worldp world,
                 }
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
 
             if (d->is_lava(x, y + 1)) {
                 if (!world->is_floor(x, y + 1)) {
-                    thing_new(world, what, fpoint(x, y + 1));
-                    (void) light_new(world, 2, fpoint(x, y + 1.0),
+                    thing_new(what, fpoint(x, y + 1));
+                    (void) light_new(2, fpoint(x, y + 1.0),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
             if (d->is_lava(x, y - 1)) {
                 if (!world->is_floor(x, y - 1)) {
-                    thing_new(world, what, fpoint(x, y - 1));
-                    (void) light_new(world, 2, fpoint(x, y - 1.0),
+                    thing_new(what, fpoint(x, y - 1));
+                    (void) light_new(2, fpoint(x, y - 1.0),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
             if (d->is_lava(x + 1, y)) {
                 if (!world->is_floor(x + 1, y)) {
-                    thing_new(world, what, fpoint(x + 1, y));
-                    (void) light_new(world, 2, fpoint(x + 1.0, y),
+                    thing_new(what, fpoint(x + 1, y));
+                    (void) light_new(2, fpoint(x + 1.0, y),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
             if (d->is_lava(x - 1, y)) {
                 if (!world->is_floor(x - 1, y)) {
-                    thing_new(world, what, fpoint(x - 1, y));
-                    (void) light_new(world, 2, fpoint(x - 1.0, y),
+                    thing_new(what, fpoint(x - 1, y));
+                    (void) light_new(2, fpoint(x - 1.0, y),
                                      LIGHT_QUALITY_POINT, ORANGE);
                 }
             }
@@ -328,29 +325,29 @@ static void game_place_floor_under_objects (Worldp world,
             double light_strength = 1.0;
             if (d->is_water(x, y + 1)) {
                 if (!world->is_floor(x, y + 1)) {
-                    thing_new(world, what, fpoint(x, y + 1));
-                    (void) light_new(world, light_strength, fpoint(x, y + 0.5),
+                    thing_new(what, fpoint(x, y + 1));
+                    (void) light_new(light_strength, fpoint(x, y + 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_water(x, y - 1)) {
                 if (!world->is_floor(x, y - 1)) {
-                    thing_new(world, what, fpoint(x, y - 1));
-                    (void) light_new(world, light_strength, fpoint(x, y - 0.5),
+                    thing_new(what, fpoint(x, y - 1));
+                    (void) light_new(light_strength, fpoint(x, y - 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_water(x + 1, y)) {
                 if (!world->is_floor(x + 1, y)) {
-                    thing_new(world, what, fpoint(x + 1, y));
-                    (void) light_new(world, light_strength, fpoint(x + 0.5, y),
+                    thing_new(what, fpoint(x + 1, y));
+                    (void) light_new(light_strength, fpoint(x + 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_water(x - 1, y)) {
                 if (!world->is_floor(x - 1, y)) {
-                    thing_new(world, what, fpoint(x - 1, y));
-                    (void) light_new(world, light_strength, fpoint(x - 0.5, y),
+                    thing_new(what, fpoint(x - 1, y));
+                    (void) light_new(light_strength, fpoint(x - 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
@@ -359,28 +356,28 @@ static void game_place_floor_under_objects (Worldp world,
                 d->is_food(x, y + 1) ||
                 d->is_key(x, y + 1)) {
                 if (!world->is_floor(x, y + 1)) {
-                    thing_new(world, what, fpoint(x, y + 1));
+                    thing_new(what, fpoint(x, y + 1));
                 }
             }
             if (d->is_monst(x, y - 1) ||
                 d->is_food(x, y - 1) ||
                 d->is_key(x, y - 1)) {
                 if (!world->is_floor(x, y - 1)) {
-                    thing_new(world, what, fpoint(x, y - 1));
+                    thing_new(what, fpoint(x, y - 1));
                 }
             }
             if (d->is_monst(x + 1, y) ||
                 d->is_food(x + 1, y) ||
                 d->is_key(x + 1, y)) {
                 if (!world->is_floor(x + 1, y)) {
-                    thing_new(world, what, fpoint(x + 1, y));
+                    thing_new(what, fpoint(x + 1, y));
                 }
             }
             if (d->is_monst(x - 1, y) ||
                 d->is_food(x - 1, y) ||
                 d->is_key(x - 1, y)) {
                 if (!world->is_floor(x - 1, y)) {
-                    thing_new(world, what, fpoint(x - 1, y));
+                    thing_new(what, fpoint(x - 1, y));
                 }
             }
 
@@ -389,29 +386,29 @@ static void game_place_floor_under_objects (Worldp world,
             light_strength = 2.0;
             if (d->is_deep_water(x, y + 1)) {
                 if (!world->is_floor(x, y + 1)) {
-                    thing_new(world, what, fpoint(x, y + 1));
-                    (void) light_new(world, light_strength, fpoint(x, y + 0.5),
+                    thing_new(what, fpoint(x, y + 1));
+                    (void) light_new(light_strength, fpoint(x, y + 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_deep_water(x, y - 1)) {
                 if (!world->is_floor(x, y - 1)) {
-                    thing_new(world, what, fpoint(x, y - 1));
-                    (void) light_new(world, light_strength, fpoint(x, y - 0.5),
+                    thing_new(what, fpoint(x, y - 1));
+                    (void) light_new(light_strength, fpoint(x, y - 0.5),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_deep_water(x + 1, y)) {
                 if (!world->is_floor(x + 1, y)) {
-                    thing_new(world, what, fpoint(x + 1, y));
-                    (void) light_new(world, light_strength, fpoint(x + 0.5, y),
+                    thing_new(what, fpoint(x + 1, y));
+                    (void) light_new(light_strength, fpoint(x + 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
             if (d->is_deep_water(x - 1, y)) {
                 if (!world->is_floor(x - 1, y)) {
-                    thing_new(world, what, fpoint(x - 1, y));
-                    (void) light_new(world, light_strength, fpoint(x - 0.5, y),
+                    thing_new(what, fpoint(x - 1, y));
+                    (void) light_new(light_strength, fpoint(x - 0.5, y),
                                      LIGHT_QUALITY_POINT, c);
                 }
             }
@@ -420,36 +417,35 @@ static void game_place_floor_under_objects (Worldp world,
                 d->is_food(x, y + 1) ||
                 d->is_key(x, y + 1)) {
                 if (!world->is_floor(x, y + 1)) {
-                    thing_new(world, what, fpoint(x, y + 1));
+                    thing_new(what, fpoint(x, y + 1));
                 }
             }
             if (d->is_monst(x, y - 1) ||
                 d->is_food(x, y - 1) ||
                 d->is_key(x, y - 1)) {
                 if (!world->is_floor(x, y - 1)) {
-                    thing_new(world, what, fpoint(x, y - 1));
+                    thing_new(what, fpoint(x, y - 1));
                 }
             }
             if (d->is_monst(x + 1, y) ||
                 d->is_food(x + 1, y) ||
                 d->is_key(x + 1, y)) {
                 if (!world->is_floor(x + 1, y)) {
-                    thing_new(world, what, fpoint(x + 1, y));
+                    thing_new(what, fpoint(x + 1, y));
                 }
             }
             if (d->is_monst(x - 1, y) ||
                 d->is_food(x - 1, y) ||
                 d->is_key(x - 1, y)) {
                 if (!world->is_floor(x - 1, y)) {
-                    thing_new(world, what, fpoint(x - 1, y));
+                    thing_new(what, fpoint(x - 1, y));
                 }
             }
         }
     }
 }
 
-static void game_place_lava (Worldp world,
-                             Dungeonp d, 
+static void game_place_lava (Dungeonp d, 
                              std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
@@ -462,16 +458,16 @@ static void game_place_lava (Worldp world,
                 continue;
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
 
             if (random_range(0, 100) < 80) {
-                thing_new(world, "smoke1", fpoint(x, y), fpoint(0.5, 0.5));
+                thing_new("smoke1", fpoint(x, y), fpoint(0.5, 0.5));
             }
         }
     }
 }
 
-static void game_place_random_blood (Worldp world, Dungeonp d)
+static void game_place_random_blood (Dungeonp d)
 {_
     for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
         for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
@@ -503,7 +499,7 @@ static void game_place_random_blood (Worldp world, Dungeonp d)
                 int splatters = random_range(2, 10);
                 for (int splatter = 0; splatter < splatters; splatter++) {
                     auto tp = tp_random_blood();
-                    (void) thing_new(world, tp_name(tp),
+                    (void) thing_new(tp_name(tp),
                                      fpoint(x, y),
                                      fpoint(0.25, 0.25));
                 }
@@ -512,7 +508,7 @@ static void game_place_random_blood (Worldp world, Dungeonp d)
     }
 }
 
-static void game_place_water (Worldp world, Dungeonp d, std::string what)
+static void game_place_water (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -524,17 +520,16 @@ static void game_place_water (Worldp world, Dungeonp d, std::string what)
                 continue;
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
 
             if (!d->is_floor(x, y)) {
-                (void) thing_new(world, "dirt2", fpoint(x, y));
+                (void) thing_new("dirt2", fpoint(x, y));
             }
         }
     }
 }
 
-static void game_place_deep_water (Worldp world, Dungeonp d, 
-                                   std::string what)
+static void game_place_deep_water (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -546,16 +541,16 @@ static void game_place_deep_water (Worldp world, Dungeonp d,
                 continue;
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
 
             if (!d->is_floor(x, y)) {
-                (void) thing_new(world, "dirt3", fpoint(x, y));
+                (void) thing_new("dirt3", fpoint(x, y));
             }
         }
     }
 }
 
-static void game_place_monst (Worldp world, Dungeonp d)
+static void game_place_monst (Dungeonp d)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -569,12 +564,12 @@ static void game_place_monst (Worldp world, Dungeonp d)
 
             auto tp = tp_random_monst();
 
-            (void) thing_new(world, tp_name(tp), fpoint(x, y));
+            (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
 }
 
-static void game_place_food (Worldp world, Dungeonp d)
+static void game_place_food (Dungeonp d)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -587,12 +582,12 @@ static void game_place_food (Worldp world, Dungeonp d)
             }
 
             auto tp = tp_random_food();
-            (void) thing_new(world, tp_name(tp), fpoint(x, y));
+            (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
 }
 
-static void game_place_blood (Worldp world, Dungeonp d)
+static void game_place_blood (Dungeonp d)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -606,12 +601,12 @@ static void game_place_blood (Worldp world, Dungeonp d)
 
             auto tp = tp_random_blood();
 
-            (void) thing_new(world, tp_name(tp), fpoint(x, y));
+            (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
 }
 
-static void game_place_keys (Worldp world, Dungeonp d)
+static void game_place_keys (Dungeonp d)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -624,13 +619,13 @@ static void game_place_keys (Worldp world, Dungeonp d)
             }
 
             auto tp = tp_random_key();
-            auto t = thing_new(world, tp_name(tp), fpoint(x, y));
+            auto t = thing_new(tp_name(tp), fpoint(x, y));
             t->bounce(0.2, 1.0, 500, 99999);
         }
     }
 }
 
-static void game_place_floor_deco (Worldp world, Dungeonp d)
+static void game_place_floor_deco (Dungeonp d)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -639,12 +634,12 @@ static void game_place_floor_deco (Worldp world, Dungeonp d)
             }
 
             auto tp = tp_random_deco();
-            thing_new(world, tp_name(tp), fpoint(x, y));
+            thing_new(tp_name(tp), fpoint(x, y));
         }
     }
 }
 
-static void game_place_wall_deco (Worldp world, Dungeonp d)
+static void game_place_wall_deco (Dungeonp d)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -657,16 +652,15 @@ static void game_place_wall_deco (Worldp world, Dungeonp d)
             }
 
             auto tp = tp_random_wall_deco();
-            thing_new(world, tp_name(tp), fpoint(x, y));
+            thing_new(tp_name(tp), fpoint(x, y));
 
             tp = tp_random_wall();
-            thing_new(world, tp_name(tp), fpoint(x, y));
+            thing_new(tp_name(tp), fpoint(x, y));
         }
     }
 }
 
-static void game_place_remaining_floor (Worldp world, Dungeonp d,
-                                        std::string what)
+static void game_place_remaining_floor (Dungeonp d, std::string what)
 {_
     for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
         for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
@@ -674,14 +668,13 @@ static void game_place_remaining_floor (Worldp world, Dungeonp d,
                 continue;
             }
             if (!world->is_floor(x, y)) {
-                thing_new(world, what, fpoint(x, y));
+                thing_new(what, fpoint(x, y));
             }
         }
     }
 }
 
-static void game_place_corridor (Worldp world, Dungeonp d,
-                                 std::string what, int depth)
+static void game_place_corridor (Dungeonp d, std::string what, int depth)
 {_
     for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
         for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
@@ -695,43 +688,43 @@ static void game_place_corridor (Worldp world, Dungeonp d,
                 }
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
 
-static void game_place_dirt (Worldp world, Dungeonp d)
+static void game_place_dirt (Dungeonp d)
 {_
     for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
         for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
             if (!d->is_anything_at(x, y) || d->is_dirt(x, y)) {
                 auto tp = tp_random_dirt();
-                (void) thing_new(world, tp_name(tp), fpoint(x, y));
+                (void) thing_new(tp_name(tp), fpoint(x, y));
             }
         }
     }
 }
 
-static void game_place_grass (Worldp world, Dungeonp d)
+static void game_place_grass (Dungeonp d)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!world->is_anything_at(x, y)) {
                 if (random_range(0, 100) < 10) {
                     auto tp = tp_random_grass();
-                    (void) thing_new(world, tp_name(tp), fpoint(x, y));
+                    (void) thing_new(tp_name(tp), fpoint(x, y));
                 } else if (random_range(0, 100) < 10) {
                     auto tp = tp_random_soil();
-                    (void) thing_new(world, tp_name(tp), fpoint(x, y));
+                    (void) thing_new(tp_name(tp), fpoint(x, y));
                 } else {
-                    (void) thing_new(world, "water1", fpoint(x, y));
+                    (void) thing_new("water1", fpoint(x, y));
                 }
             }
         }
     }
 }
 
-static void game_place_entrance (Worldp world, Dungeonp d, std::string what)
+static void game_place_entrance (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -739,12 +732,12 @@ static void game_place_entrance (Worldp world, Dungeonp d, std::string what)
                 continue;
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
 
-static void game_place_exit (Worldp world, Dungeonp d, std::string what)
+static void game_place_exit (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -752,12 +745,12 @@ static void game_place_exit (Worldp world, Dungeonp d, std::string what)
                 continue;
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
 
-static void game_place_door (Worldp world, Dungeonp d, std::string what)
+static void game_place_door (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -765,13 +758,12 @@ static void game_place_door (Worldp world, Dungeonp d, std::string what)
                 continue;
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
 
-static void game_place_remaining_walls (Worldp world, Dungeonp d, 
-                                        std::string what)
+static void game_place_remaining_walls (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -783,13 +775,12 @@ static void game_place_remaining_walls (Worldp world, Dungeonp d,
                 continue;
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
 
-static void game_place_remaining_rocks (Worldp world, Dungeonp d, 
-                                        std::string what)
+static void game_place_remaining_rocks (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
@@ -801,23 +792,12 @@ static void game_place_remaining_rocks (Worldp world, Dungeonp d,
                 continue;
             }
 
-            (void) thing_new(world, what, fpoint(x, y));
+            (void) thing_new(what, fpoint(x, y));
         }
     }
 }
 
-void game_init_chunk (Worldp world, point c)
-{_
-// XXX
-    if (world->chunk_inited[c.x][c.y]) {
-        return;
-    }
-    world->chunk_inited[c.x][c.y] = true;
-#if 0
-#endif
-}
-
-void game_display (Worldp world)
+void game_display (void)
 {_
     static int first = true;
     if (first) {
@@ -835,30 +815,30 @@ _
 
         LOG("dungeon: create blocks");
         world->clear();
-        game_place_entrance(world, dungeon, "entrance1");
-        game_place_exit(world, dungeon, "exit1");
-        game_place_door(world, dungeon, "door1");
+        game_place_entrance(dungeon, "entrance1");
+        game_place_exit(dungeon, "exit1");
+        game_place_door(dungeon, "door1");
 
         auto tries = 1000;
 
-        game_place_walls(world, dungeon, 1, 6, 6, tries);
-        game_place_walls(world, dungeon, 2, 6, 6, tries);
-        game_place_walls(world, dungeon, 1, 6, 3, tries);
-        game_place_walls(world, dungeon, 1, 3, 6, tries);
-        game_place_walls(world, dungeon, 1, 3, 3, tries);
-        game_place_walls(world, dungeon, 2, 3, 3, tries);
-        game_place_walls(world, dungeon, 3, 3, 3, tries);
-        game_place_walls(world, dungeon, 4, 3, 3, tries);
-        game_place_walls(world, dungeon, 1, 2, 2, tries);
-        game_place_walls(world, dungeon, 2, 2, 2, tries);
-        game_place_walls(world, dungeon, 1, 2, 1, tries);
-        game_place_walls(world, dungeon, 2, 2, 1, tries);
-        game_place_walls(world, dungeon, 3, 2, 1, tries);
-        game_place_walls(world, dungeon, 4, 2, 1, tries);
-        game_place_walls(world, dungeon, 1, 1, 2, tries);
-        game_place_walls(world, dungeon, 2, 1, 2, tries);
-        game_place_walls(world, dungeon, 3, 2, 1, tries);
-        game_place_walls(world, dungeon, 4, 2, 1, tries);
+        game_place_walls(dungeon, 1, 6, 6, tries);
+        game_place_walls(dungeon, 2, 6, 6, tries);
+        game_place_walls(dungeon, 1, 6, 3, tries);
+        game_place_walls(dungeon, 1, 3, 6, tries);
+        game_place_walls(dungeon, 1, 3, 3, tries);
+        game_place_walls(dungeon, 2, 3, 3, tries);
+        game_place_walls(dungeon, 3, 3, 3, tries);
+        game_place_walls(dungeon, 4, 3, 3, tries);
+        game_place_walls(dungeon, 1, 2, 2, tries);
+        game_place_walls(dungeon, 2, 2, 2, tries);
+        game_place_walls(dungeon, 1, 2, 1, tries);
+        game_place_walls(dungeon, 2, 2, 1, tries);
+        game_place_walls(dungeon, 3, 2, 1, tries);
+        game_place_walls(dungeon, 4, 2, 1, tries);
+        game_place_walls(dungeon, 1, 1, 2, tries);
+        game_place_walls(dungeon, 2, 1, 2, tries);
+        game_place_walls(dungeon, 3, 2, 1, tries);
+        game_place_walls(dungeon, 4, 2, 1, tries);
 
         for (auto d = 1; d < 3; d++) {
             int nloops = 10;
@@ -867,74 +847,74 @@ _
 
                 int tries = 100;
                 switch (random_range(0, 5)) {
-                    case 0: game_place_floors(world, dungeon, s, d, 1, 3, 3, tries); break;
-                    case 1: game_place_floors(world, dungeon, s, d, 2, 3, 3, tries); break;
-                    case 2: game_place_floors(world, dungeon, s, d, 1, 2, 2, tries); break;
-                    case 3: game_place_floors(world, dungeon, s, d, 2, 2, 2, tries); break;
-                    case 4: game_place_floors(world, dungeon, s, d, 3, 2, 2, tries); break;
+                    case 0: game_place_floors(dungeon, s, d, 1, 3, 3, tries); break;
+                    case 1: game_place_floors(dungeon, s, d, 2, 3, 3, tries); break;
+                    case 2: game_place_floors(dungeon, s, d, 1, 2, 2, tries); break;
+                    case 3: game_place_floors(dungeon, s, d, 2, 2, 2, tries); break;
+                    case 4: game_place_floors(dungeon, s, d, 3, 2, 2, tries); break;
                 }
             }
         }
 
-        game_place_floor_under_objects(world, dungeon, "floor1", 1);
-        game_place_floor_under_objects(world, dungeon, "floor2", 2);
-        game_place_floor_under_objects(world, dungeon, "floor3", 3);
-        game_place_floor_under_objects(world, dungeon, "floor4", 4);
-        game_place_floor_under_objects(world, dungeon, "floor5", 5);
-        game_place_floor_under_objects(world, dungeon, "floor6", 6);
-        game_place_floor_under_objects(world, dungeon, "floor7", 7);
-        game_place_floor_under_objects(world, dungeon, "floor8", 8);
-        game_place_floor_under_objects(world, dungeon, "floor9", 9);
-        game_place_remaining_walls(world, dungeon, "wall1");
-        game_place_remaining_floor(world, dungeon, "floor1");
-        game_place_corridor(world, dungeon, "corridor1", 0);
-        game_place_floor_deco(world, dungeon);
-        game_place_wall_deco(world, dungeon);
-        game_place_rocks(world, dungeon, "rock1", 1, 6, 6, tries);
-        game_place_rocks(world, dungeon, "rock1", 2, 6, 6, tries);
-        game_place_rocks(world, dungeon, "rock1", 1, 6, 3, tries);
-        game_place_rocks(world, dungeon, "rock1", 1, 3, 6, tries);
-        game_place_rocks(world, dungeon, "rock1", 1, 3, 3, tries);
-        game_place_rocks(world, dungeon, "rock1", 2, 3, 3, tries);
-        game_place_rocks(world, dungeon, "rock1", 3, 3, 3, tries);
-        game_place_rocks(world, dungeon, "rock1", 4, 3, 3, tries);
-        game_place_rocks(world, dungeon, "rock1", 1, 2, 2, tries);
-        game_place_rocks(world, dungeon, "rock1", 2, 2, 2, tries);
-        game_place_rocks(world, dungeon, "rock1", 1, 2, 1, tries);
-        game_place_rocks(world, dungeon, "rock1", 2, 2, 1, tries);
-        game_place_rocks(world, dungeon, "rock1", 3, 2, 1, tries);
-        game_place_rocks(world, dungeon, "rock1", 4, 2, 1, tries);
-        game_place_rocks(world, dungeon, "rock1", 1, 1, 2, tries);
-        game_place_rocks(world, dungeon, "rock1", 2, 1, 2, tries);
-        game_place_rocks(world, dungeon, "rock1", 3, 2, 1, tries);
-        game_place_rocks(world, dungeon, "rock1", 4, 2, 1, tries);
-        game_place_remaining_rocks(world, dungeon, "rock1");
-        game_place_dirt(world, dungeon);
-        game_place_lava(world, dungeon, "lava1");
-        game_place_water(world, dungeon, "water1");
-        game_place_deep_water(world, dungeon, "deep_water1");
+        game_place_floor_under_objects(dungeon, "floor1", 1);
+        game_place_floor_under_objects(dungeon, "floor2", 2);
+        game_place_floor_under_objects(dungeon, "floor3", 3);
+        game_place_floor_under_objects(dungeon, "floor4", 4);
+        game_place_floor_under_objects(dungeon, "floor5", 5);
+        game_place_floor_under_objects(dungeon, "floor6", 6);
+        game_place_floor_under_objects(dungeon, "floor7", 7);
+        game_place_floor_under_objects(dungeon, "floor8", 8);
+        game_place_floor_under_objects(dungeon, "floor9", 9);
+        game_place_remaining_walls(dungeon, "wall1");
+        game_place_remaining_floor(dungeon, "floor1");
+        game_place_corridor(dungeon, "corridor1", 0);
+        game_place_floor_deco(dungeon);
+        game_place_wall_deco(dungeon);
+        game_place_rocks(dungeon, "rock1", 1, 6, 6, tries);
+        game_place_rocks(dungeon, "rock1", 2, 6, 6, tries);
+        game_place_rocks(dungeon, "rock1", 1, 6, 3, tries);
+        game_place_rocks(dungeon, "rock1", 1, 3, 6, tries);
+        game_place_rocks(dungeon, "rock1", 1, 3, 3, tries);
+        game_place_rocks(dungeon, "rock1", 2, 3, 3, tries);
+        game_place_rocks(dungeon, "rock1", 3, 3, 3, tries);
+        game_place_rocks(dungeon, "rock1", 4, 3, 3, tries);
+        game_place_rocks(dungeon, "rock1", 1, 2, 2, tries);
+        game_place_rocks(dungeon, "rock1", 2, 2, 2, tries);
+        game_place_rocks(dungeon, "rock1", 1, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 2, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 3, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 1, 1, 2, tries);
+        game_place_rocks(dungeon, "rock1", 2, 1, 2, tries);
+        game_place_rocks(dungeon, "rock1", 3, 2, 1, tries);
+        game_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
+        game_place_remaining_rocks(dungeon, "rock1");
+        game_place_dirt(dungeon);
+        game_place_lava(dungeon, "lava1");
+        game_place_water(dungeon, "water1");
+        game_place_deep_water(dungeon, "deep_water1");
         //fluid_init();
-        game_place_random_blood(world, dungeon);
-        game_place_grass(world, dungeon);
+        game_place_random_blood(dungeon);
+        game_place_grass(dungeon);
 
         for (auto x = 0; x < CHUNK_WIDTH; x++) {
             for (auto y = 0; y < CHUNK_HEIGHT; y++) {
                 if (dungeon->is_entrance_at(x, y)) {
-                    auto t = thing_new(world, "player1", fpoint(x, y));
+                    auto t = thing_new("player1", fpoint(x, y));
                     auto w = tp_find("sword1");
                     t->wield(w);
                 }
             }
         }
 
-        game_place_monst(world, dungeon);
-        game_place_food(world, dungeon);
-        game_place_blood(world, dungeon);
-        game_place_keys(world, dungeon);
-        lights_calculate(world);
+        game_place_monst(dungeon);
+        game_place_food(dungeon);
+        game_place_blood(dungeon);
+        game_place_keys(dungeon);
+        lights_calculate();
 
         LOG("dungeon: placed all blocks");
-        thing_map_scroll_to_player(world);
+        thing_map_scroll_to_player();
     }
 
     first = false;
@@ -943,8 +923,8 @@ _
      * thing_render_all must come before thing_move_all as it populates
      * all the things into the map for collisions.
      */
-    thing_render_all(world);
-    thing_gc(world);
+    thing_render_all();
+    thing_gc();
 }
 
 uint8_t

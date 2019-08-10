@@ -140,11 +140,11 @@ class Tp:
     def set_str_light_color(self, value):
         zx.tp_set_str_light_color(self, value)
 
-    def weapon_set_carry_anim(self, value):
-        zx.tp_weapon_set_carry_anim(self, value)
+    def set_weapon_carry_anim(self, value):
+        zx.tp_set_weapon_carry_anim(self, value)
 
-    def weapon_set_use_anim(self, value):
-        zx.tp_weapon_set_use_anim(self, value)
+    def set_weapon_use_anim(self, value):
+        zx.tp_set_weapon_use_anim(self, value)
 
     def set_is_rrr1(self, value):
         zx.tp_set_is_rrr1(self, value)
@@ -419,8 +419,8 @@ class Tp:
     def set_move_speed_ms(self, value):
         zx.tp_set_move_speed_ms(self, value)
 
-    def weapon_set_use_delay_hundredths(self, value):
-        zx.tp_weapon_set_use_delay_hundredths(self, value)
+    def set_weapon_use_delay_hundredths(self, value):
+        zx.tp_set_weapon_use_delay_hundredths(self, value)
 
     def set_collision_box(self, value):
         zx.tp_set_collision_box(self, value)
@@ -428,8 +428,8 @@ class Tp:
     def set_collision_circle(self, value):
         zx.tp_set_collision_circle(self, value)
 
-    def weapon_set_damage(self, value):
-        zx.tp_weapon_set_damage(self, value)
+    def set_weapon_damage(self, value):
+        zx.tp_set_weapon_damage(self, value)
 
     def set_is_projectile(self, value):
         zx.tp_set_is_projectile(self, value)
@@ -440,8 +440,8 @@ class Tp:
     def set_is_combustable(self, value):
         zx.tp_set_is_combustable(self, value)
 
-    def weapon_set_use_distance(self, value):
-        zx.tp_weapon_set_use_distance(self, value)
+    def set_weapon_use_distance(self, value):
+        zx.tp_set_weapon_use_distance(self, value)
 
     def set_gfx_is_weapon_carry_anim(self, value):
         zx.tp_set_gfx_is_weapon_carry_anim(self, value)

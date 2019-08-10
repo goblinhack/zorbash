@@ -8,7 +8,6 @@
 #include "my_wid.h"
 #include "my_ascii.h"
 #include "my_time.h"
-#include "my_player.h"
 
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
@@ -964,7 +963,7 @@ void sdl_loop (void)
         SDL_GL_SetSwapInterval(0);
     }
 
-    auto world = &game->world;
+    world = &game->world;
 
     for (;/*ever*/;) {
         /*
@@ -1012,8 +1011,8 @@ void sdl_loop (void)
             if (!sdl_main_loop_running) {
                 break;
             }
-            player_tick(world);
-            things_tick(world);
+            player_tick();
+            things_tick();
         }
 
         //fluid_tick();
@@ -1023,7 +1022,7 @@ void sdl_loop (void)
         /*
          * Display UI.
          */
-        wid_display_all(world);
+        wid_display_all();
 
         /*
          * FPS counter.

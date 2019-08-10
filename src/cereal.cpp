@@ -62,6 +62,9 @@ int cereal_test (const std::string save_file)
 {
     {
 printf("a\n");
+printf("thing size %d x %d %d\n", MAP_WIDTH, MAP_HEIGHT, MAP_WIDTH * MAP_HEIGHT);
+printf("thing size %ld\n", sizeof(class Thing));
+printf("thing size %ld * %d %ld\n", sizeof(class Thing), MAX_THINGS, sizeof(class Thing) * MAX_THINGS);
         auto w = new NewWorld();
 printf("a1\n");
         delete w;

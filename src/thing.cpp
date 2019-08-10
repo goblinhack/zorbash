@@ -13,10 +13,10 @@ static uint32_t next_thing_id;
 
 static std::list<uint32_t> things_to_delete;
 
-void thing_gc (Worldp world)
+void thing_gc (void)
 {
     for (auto id : things_to_delete) {
-        auto t = thing_find(world, id);
+        auto t = thing_find(id);
         if (!t) {
             ERR("thing %u not found to garbage collect", id);
             continue;
@@ -32,24 +32,20 @@ void thing_gc (Worldp world)
     things_to_delete.clear();
 }
 
-Thingp thing_new (Worldp world, std::string tp_name, Thingp owner)
+Thingp thing_new (std::string tp_name, Thingp owner)
 {_
-    return thing_new(world, tp_name, owner->mid_at - fpoint(0.5, 0.5));
+    return thing_new(tp_name, owner->mid_at - fpoint(0.5, 0.5));
 }
 
-Thingp thing_new (Worldp world,
-                  std::string tp_name, fpoint at, fpoint jitter)
+Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
 {_
     auto id = ++next_thing_id;
-
     auto t = new Thing;
 
-    t->age_map = 0;
     t->dmap_goals = 0;
     t->dmap_scent = 0;
     t->light = 0;
     t->tp = 0;
-    t->world = 0;
     t->bounce_fade = 0;
     t->bounce_height = 0;
     t->rot = 0;
@@ -70,11 +66,9 @@ Thingp thing_new (Worldp world,
     t->tile_tr = 0;
     t->weapon_tp_id = 0;
     t->hunger_tick_last_ms = 0;
-    t->id = 0;
     t->id_owner = 0;
     t->id_weapon_carry_anim = 0;
     t->id_weapon_use_anim = 0;
-    t->light_iterator = 0;
     t->timestamp_ai_next = 0;
     t->timestamp_born = 0;
     t->timestamp_bounce_begin = 0;
@@ -113,6 +107,7 @@ Thingp thing_new (Worldp world,
     }
 
 
+    t->id = id;
     auto p = std::make_pair(t->id, t);
     auto result = world->all_things.insert(p);
     if (result.second == false) {
@@ -247,7 +242,7 @@ Thingp thing_new (Worldp world,
         // at the edges of the fbo
         //
         col.a = 250;
-        t->light = light_new(world, t,
+        t->light = light_new(t,
                              MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at,
                              LIGHT_QUALITY_HIGH, col);
 
@@ -340,7 +335,7 @@ Thingp thing_new (Worldp world,
         std::string l = tp_str_light_color(tp);
         color c = string2color(l);
         c.a = 100;
-        t->light = light_new(world, t, MAX_LIGHT_RAYS / 8,
+        t->light = light_new(t, MAX_LIGHT_RAYS / 8,
                              (double) tp_is_light_strength(tp),
                              t->mid_at, LIGHT_QUALITY_LOW, c);
     }
@@ -358,9 +353,7 @@ Thingp thing_new (Worldp world,
     }
 
     if (tp_is_monst(tp)) {
-        t->age_map = new AgeMap();
-    } else {
-        t->age_map = nullptr;
+        t->new_age_map();
     }
 
     return (t);
@@ -503,7 +496,7 @@ void Thing::hooks_remove ()
 Thingp Thing::owner_get (void)
 {
     if (id_owner) {
-        return (thing_find(world, id_owner));
+        return (thing_find(id_owner));
     } else {
         return (nullptr);
     }
@@ -665,10 +658,7 @@ void Thing::destroy (void)
         dmap_goals = nullptr;
     }
 
-    if (age_map) {
-        delete(age_map);
-        age_map = nullptr;
-    }
+    delete_age_map();
 }
 
 void Thing::update_light (void)
@@ -693,7 +683,7 @@ void Thing::move_carried_items (void)
     // Weapons follow also.
     //
     if (id_weapon_carry_anim) {
-        auto w = thing_find(world, id_weapon_carry_anim);
+        auto w = thing_find(id_weapon_carry_anim);
         if (!w) {
             die("id_weapon_carry_anim set to %d but not found",
                 id_weapon_carry_anim);
@@ -703,7 +693,7 @@ void Thing::move_carried_items (void)
     }
 
     if (id_weapon_use_anim) {
-        auto w = thing_find(world, id_weapon_use_anim);
+        auto w = thing_find(id_weapon_use_anim);
         if (!w) {
             die("id_weapon_use_anim set to %d but not found",
                 id_weapon_use_anim);
@@ -719,7 +709,7 @@ void Thing::move_carried_items (void)
         if (world->is_water((int)mid_at.x, (int)mid_at.y)) {
             fpoint at(mid_at.x - 0.5, mid_at.y - 0.5);
             if (random_range(0, 1000) > 500) {
-                thing_new(world, tp_name(tp_random_ripple()), at);
+                thing_new(tp_name(tp_random_ripple()), at);
             }
         }
     }
@@ -728,7 +718,7 @@ void Thing::move_carried_items (void)
 //
 // Find an existing thing.
 //
-Thingp thing_find (Worldp world, uint32_t id)
+Thingp thing_find (uint32_t id)
 {_
     auto result = world->all_things.find(id);
     if (result == world->all_things.end()) {

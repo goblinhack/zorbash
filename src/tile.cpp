@@ -32,6 +32,8 @@ void tile_fini (void)
 
 Tile::Tile (const class Tile *tile)
 {
+    newptr(this, "Tile copy");
+
     pix_width = tile->pix_width;
     pix_height = tile->pix_height;
     pct_width = tile->pct_width;

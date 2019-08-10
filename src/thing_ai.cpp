@@ -201,8 +201,8 @@ fpoint Thing::ai_get_next_hop (void)
             // Make newer cells less preferred by factoring in the age
             //
             uint32_t age;
-            if (age_map->val[x][y]) {
-                age = time_get_elapsed_secs(age_map->val[x][y],
+            if (age_map()->val[x][y]) {
+                age = time_get_elapsed_secs(age_map()->val[x][y],
                                             timestamp_born);
             } else {
                 age = 0;
@@ -285,7 +285,7 @@ CON("  goal add at: %d, %d", p.x, p.y);
                 // Also take note of the oldest cell age; we will use this
                 // later.
                 //
-                int age = age_map->val[p.x][p.y];
+                int age = age_map()->val[p.x][p.y];
                 oldest = std::min(oldest, age);
             }
         }
@@ -338,7 +338,7 @@ CON("  goal add at: %d, %d", p.x, p.y);
     //
     // Record we've been here.
     //
-    age_map->val[start.x][start.y] = time_get_time_ms();
+    age_map()->val[start.x][start.y] = time_get_time_ms();
 
     //
     // Find the best next-hop to the best goal.
