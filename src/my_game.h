@@ -9,6 +9,8 @@
 #include "my_sdl.h"
 #include "my_dmap.h"
 #include "my_terrain.h"
+#include <list>
+#include <array>
 
 class Thing;
 class Light;
@@ -44,8 +46,6 @@ enum {
     MAP_DEPTH_WEAPON,
     MAP_DEPTH,
 };
-
-#include <list>
 
 class World {
 private:
@@ -88,28 +88,28 @@ public:
     //
     // Display order sorted things
     //
-    ThingDisplayOrder          all_display_things_at
+    std::unordered_map<uint32_t, Thingp>          all_display_things_at
                                  [MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
     //
     // All things
     //
-    std::map<uint32_t, Thingp> all_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::unordered_map<uint32_t, Thingp> all_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     //
     // Things that move around
     //
-    std::map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::unordered_map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     //
     // Things that move around and things that do not, but are interesting,
     // like food
     //
-    std::map<uint32_t, Thingp> all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::unordered_map<uint32_t, Thingp> all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     //
     // Things that block progress
     //
-    std::map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::unordered_map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     //
     // The creation of the map is staggered such that we create chunks
@@ -137,7 +137,7 @@ public:
     //
     // All lights at a map cell
     //
-    std::map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
+    std::unordered_map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
 
     template <class Archive>
     void serialize (Archive & archive)
@@ -177,12 +177,15 @@ all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
 chunk_inited[CHUNK_WIDTH][CHUNK_HEIGHT] = {};
 Thingp                     player = {};
 #endif
+                cereal::make_nvp("map_at",          map_at));
+#if 0
+                cereal::make_nvp("thing_ids",       thing_ids));
                 cereal::make_nvp("all_things",      all_things),
                 cereal::make_nvp("all_lights",      all_lights),
                 cereal::make_nvp("lights",          lights),
-                cereal::make_nvp("map_at",          map_at),
                 cereal::make_nvp("map_wanted_at",   map_wanted_at),
                 cereal::make_nvp("map_tile_over",   map_tile_over));
+#endif
     }
 
 
@@ -474,7 +477,7 @@ Thingp                     player = {};
         return (_is_dirt[x][y]);
     }
 
-    void set_dirt (const int x, const int y)
+    void dir_sett (const int x, const int y)
     {
         if (unlikely(is_oob(x, y))) {
             return;
@@ -482,7 +485,7 @@ Thingp                     player = {};
         _is_dirt[x][y] = true;
     }
 
-    void unset_dirt (const int x, const int y)
+    void undir_sett (const int x, const int y)
     {
         if (unlikely(is_oob(x, y))) {
             return;
@@ -880,6 +883,35 @@ Thingp                     player = {};
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 };
+class NewWorld {
+public:
+    //
+    // World map
+    //
+    Terrainp                   terrain;
+
+    std::array<class Thing, MAX_THINGS> things;
+
+    //
+    // A huge array for storing thing pointers. The thing ID is the index
+    // into this array
+    //
+    std::array<std::unique_ptr<Thing>, 
+               MAP_WIDTH * MAP_HEIGHT * MAP_DEPTH> thing_ids;
+    std::array<
+      std::array<
+        std::array<uint32_t, MAP_DEPTH>, MAP_HEIGHT>, MAP_WIDTH> 
+          all_display_things_at_arr;
+
+    fpoint                     map_at;
+
+    template <class Archive>
+    void serialize (Archive & archive)
+    {
+        archive(
+                cereal::make_nvp("map_at",          map_at));
+    }
+};
 
 class Config {
 public:
@@ -947,7 +979,7 @@ public:
     }
 };
 
-extern class Game game;
+extern class Game *game;
 
 extern uint8_t game_mouse_motion(int32_t x, int32_t y, 
                                  int32_t wheelx, int32_t wheely);

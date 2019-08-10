@@ -212,9 +212,9 @@ uint8_t sdl_init (void)
     /*
      * If we have a saved setting, use that.
      */
-    if (game.config.video_pix_width && game.config.video_pix_height) {
-        video_width = game.config.video_pix_width;
-        video_height = game.config.video_pix_height;
+    if (game->config.video_pix_width && game->config.video_pix_height) {
+        video_width = game->config.video_pix_width;
+        video_height = game->config.video_pix_height;
     } else {
         /*
          * Else guess.
@@ -222,47 +222,47 @@ uint8_t sdl_init (void)
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
 
-        game.config.video_pix_width = mode.w;
-        game.config.video_pix_height = mode.h;
+        game->config.video_pix_width = mode.w;
+        game->config.video_pix_height = mode.h;
 
-        video_width = game.config.video_pix_width;
-        video_height = game.config.video_pix_height;
+        video_width = game->config.video_pix_width;
+        video_height = game->config.video_pix_height;
     }
 
-    game.config.video_gl_width = 1.0;
-    game.config.video_gl_height = 1.0;
+    game->config.video_gl_width = 1.0;
+    game->config.video_gl_height = 1.0;
 
-    TILES_ACROSS = game.config.video_pix_width / TILE_WIDTH;
-    TILES_DOWN = game.config.video_pix_height / TILE_HEIGHT;
+    TILES_ACROSS = game->config.video_pix_width / TILE_WIDTH;
+    TILES_DOWN = game->config.video_pix_height / TILE_HEIGHT;
     TILES_ACROSS /= 4;
     TILES_DOWN /= 4;
 
-    game.config.tile_gl_width =
-                    game.config.video_gl_width  / (double)TILES_ACROSS;
-    game.config.tile_gl_height =
-                    game.config.video_gl_height / (double)TILES_DOWN;
-    game.config.ascii_gl_width =
-                    game.config.video_gl_width  / (double)ASCII_WIDTH;
-    game.config.ascii_gl_height =
-                    game.config.video_gl_height / (double)ASCII_HEIGHT;
-    game.config.video_w_h_ratio =
-        (double)game.config.video_pix_width /
-        (double)game.config.video_pix_height;
+    game->config.tile_gl_width =
+                    game->config.video_gl_width  / (double)TILES_ACROSS;
+    game->config.tile_gl_height =
+                    game->config.video_gl_height / (double)TILES_DOWN;
+    game->config.ascii_gl_width =
+                    game->config.video_gl_width  / (double)ASCII_WIDTH;
+    game->config.ascii_gl_height =
+                    game->config.video_gl_height / (double)ASCII_HEIGHT;
+    game->config.video_w_h_ratio =
+        (double)game->config.video_pix_width /
+        (double)game->config.video_pix_height;
 
-    game.config.one_pixel_gl_width =
-                    game.config.tile_gl_width / (double)TILE_WIDTH;
-    game.config.one_pixel_gl_height =
-                    game.config.tile_gl_height / (double)TILE_HEIGHT;
+    game->config.one_pixel_gl_width =
+                    game->config.tile_gl_width / (double)TILE_WIDTH;
+    game->config.one_pixel_gl_height =
+                    game->config.tile_gl_height / (double)TILE_HEIGHT;
 
-    LOG("- video     gl width  %f", game.config.video_gl_width);
-    LOG("- video     gl height %f", game.config.video_gl_height);
-    LOG("- tile      gl width  %f", game.config.tile_gl_width);
-    LOG("- tile      gl height %f", game.config.tile_gl_height);
-    LOG("- one pixel gl width  %f", game.config.one_pixel_gl_width);
-    LOG("- one pixel gl height %f", game.config.one_pixel_gl_height);
+    LOG("- video     gl width  %f", game->config.video_gl_width);
+    LOG("- video     gl height %f", game->config.video_gl_height);
+    LOG("- tile      gl width  %f", game->config.tile_gl_width);
+    LOG("- tile      gl height %f", game->config.tile_gl_height);
+    LOG("- one pixel gl width  %f", game->config.one_pixel_gl_width);
+    LOG("- one pixel gl height %f", game->config.one_pixel_gl_height);
 
     LOG("- SDL video   : %dx%d (chosen or from saved file)",
-        game.config.video_pix_width, game.config.video_pix_height);
+        game->config.video_pix_width, game->config.video_pix_height);
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
@@ -281,7 +281,7 @@ uint8_t sdl_init (void)
 
     video_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS;
 
-    if (game.config.full_screen) {
+    if (game->config.full_screen) {
         video_flags |= SDL_WINDOW_FULLSCREEN;
     }
 
@@ -306,8 +306,8 @@ uint8_t sdl_init (void)
                               video_height,
                               video_flags);
     if (!window) {
-        game.config.video_pix_width = 0;
-        game.config.video_pix_height = 0;
+        game->config.video_pix_width = 0;
+        game->config.video_pix_height = 0;
 
         SDL_MSG_BOX("Couldn't set windowed display %ux%u: %s",
                     video_width, video_height,
@@ -320,17 +320,17 @@ uint8_t sdl_init (void)
 
     if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
         SDL_GL_GetDrawableSize(window,
-                               &game.config.drawable_gl_width,
-                               &game.config.drawable_gl_height);
+                               &game->config.drawable_gl_width,
+                               &game->config.drawable_gl_height);
     } else {
         SDL_GetWindowSize(window,
-                          &game.config.drawable_gl_width,
-                          &game.config.drawable_gl_height);
+                          &game->config.drawable_gl_width,
+                          &game->config.drawable_gl_height);
     }
 
     LOG("Palling SDL_GL_CreateContext (drawable size %dx%d)...",
-        game.config.drawable_gl_width,
-        game.config.drawable_gl_height);
+        game->config.drawable_gl_width,
+        game->config.drawable_gl_height);
 
     context = SDL_GL_CreateContext(window);
 
@@ -341,11 +341,11 @@ uint8_t sdl_init (void)
     }
 
     LOG("Calling SDL_GL_CreateContext (drawable size %dx%d) done",
-        game.config.drawable_gl_width,
-        game.config.drawable_gl_height);
+        game->config.drawable_gl_width,
+        game->config.drawable_gl_height);
 
-    game.config.tile_pixel_width = game.config.drawable_gl_width / TILES_ACROSS;
-    game.config.tile_pixel_height = game.config.drawable_gl_height / TILES_DOWN;
+    game->config.tile_pixel_width = game->config.drawable_gl_width / TILES_ACROSS;
+    game->config.tile_pixel_height = game->config.drawable_gl_height / TILES_DOWN;
 
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
@@ -698,8 +698,8 @@ void sdl_mouse_center (void)
 {_
     int x, y;
 
-    x = game.config.video_pix_width / 2;
-    y = game.config.video_pix_height / 2;
+    x = game->config.video_pix_width / 2;
+    y = game->config.video_pix_height / 2;
 
     sdl_mouse_warp(x, y);
 }
@@ -710,13 +710,13 @@ void sdl_mouse_warp (int x, int y)
 
     if (x <= 0) {
         x = border;
-    } else if (x >= game.config.video_pix_width - border) {
-        x = game.config.video_pix_width - border;
+    } else if (x >= game->config.video_pix_width - border) {
+        x = game->config.video_pix_width - border;
     }
     if (y <= 0) {
         y = border;
-    } else if (y >= game.config.video_pix_height - border) {
-        y = game.config.video_pix_height - border;
+    } else if (y >= game->config.video_pix_height - border) {
+        y = game->config.video_pix_height - border;
     }
 
     SDL_WarpMouseInWindow(window, x, y);
@@ -842,12 +842,12 @@ static void sdl_tick (void)
             y = 0;
         }
 
-        if (x > game.config.video_pix_width - 1) {
-            x = game.config.video_pix_width - 1;
+        if (x > game->config.video_pix_width - 1) {
+            x = game->config.video_pix_width - 1;
         }
 
-        if (y > game.config.video_pix_height - 1) {
-            y = game.config.video_pix_height - 1;
+        if (y > game->config.video_pix_height - 1) {
+            y = game->config.video_pix_height - 1;
         }
 
         if (wid_mouse_visible) {
@@ -879,11 +879,11 @@ uint8_t fps_enable (tokens_t *tokens, void *context)
     char *s = tokens->args[2];
 
     if (!s || (*s == '\0')) {
-        game.config.fps_counter = true;
+        game->config.fps_counter = true;
         CON("FSP counter enabled");
     } else {
         CON("FSP counter disabled");
-        game.config.fps_counter = strtol(s, 0, 10) ? 1 : 0;
+        game->config.fps_counter = strtol(s, 0, 10) ? 1 : 0;
     }
 
     return (true);
@@ -897,12 +897,12 @@ uint8_t vsync_enable (tokens_t *tokens, void *context)
     char *s = tokens->args[2];
 
     if (!s || (*s == '\0')) {
-        game.config.vsync_enable = true;
+        game->config.vsync_enable = true;
     } else {
-        game.config.vsync_enable = strtol(s, 0, 10) ? 1 : 0;
+        game->config.vsync_enable = strtol(s, 0, 10) ? 1 : 0;
     }
 
-    if (game.config.vsync_enable) {
+    if (game->config.vsync_enable) {
         CON("Vsync enabled");
         SDL_GL_SetSwapInterval(1);
     } else {
@@ -958,13 +958,13 @@ void sdl_loop (void)
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
      */
 
-    if (game.config.vsync_enable) {
+    if (game->config.vsync_enable) {
         SDL_GL_SetSwapInterval(1);
     } else {
         SDL_GL_SetSwapInterval(0);
     }
 
-    auto world = &game.world;
+    auto world = &game->world;
 
     for (;/*ever*/;) {
         /*
@@ -1036,19 +1036,19 @@ void sdl_loop (void)
 
                 timestamp_then2 = timestamp_now;
 
-                if (game.config.fps_counter) {
+                if (game->config.fps_counter) {
                     /*
                      * Update FPS counter.
                      */
-                    game.fps_count = frames;
-                    //CON("%d FPS", game.fps_count);
+                    game->fps_count = frames;
+                    //CON("%d FPS", game->fps_count);
 
                     frames = 0;
                 }
             }
         }
 
-        SDL_Delay(game.config.sdl_delay);
+        SDL_Delay(game->config.sdl_delay);
 
         time_get_time_ms();
 
@@ -1078,8 +1078,8 @@ void sdl_screenshot (void)
 static void sdl_screenshot_ (void)
 {_
     FILE *fp;
-    int w = game.config.drawable_gl_width;
-    int h = game.config.drawable_gl_height;
+    int w = game->config.drawable_gl_width;
+    int h = game->config.drawable_gl_height;
 
     static int count;
     char *filename = dynprintf("screenshot.%d.ppm", ++count);

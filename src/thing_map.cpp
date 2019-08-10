@@ -26,13 +26,13 @@ static void thing_map_scroll_do (Worldp world)
         world->map_at.y -= dy / step;
     }
 
-    world->map_at.x *= game.config.tile_pixel_width;
+    world->map_at.x *= game->config.tile_pixel_width;
     world->map_at.x = (int) world->map_at.x;
-    world->map_at.x /= game.config.tile_pixel_width;
+    world->map_at.x /= game->config.tile_pixel_width;
 
-    world->map_at.y *= game.config.tile_pixel_height;
+    world->map_at.y *= game->config.tile_pixel_height;
     world->map_at.y = (int) world->map_at.y;
-    world->map_at.y /= game.config.tile_pixel_height;
+    world->map_at.y /= game->config.tile_pixel_height;
 
     world->map_at.x = std::max(world->map_at.x, (float)0.0);
     world->map_at.y = std::max(world->map_at.y, (float)0.0);
@@ -44,13 +44,13 @@ static void thing_map_scroll_do (Worldp world)
     //
     // Round to pixels
     //
-    world->map_at.x *= 1.0 / game.config.one_pixel_gl_width;
+    world->map_at.x *= 1.0 / game->config.one_pixel_gl_width;
     world->map_at.x = (int)world->map_at.x;
-    world->map_at.x /= 1.0 / game.config.one_pixel_gl_width;
+    world->map_at.x /= 1.0 / game->config.one_pixel_gl_width;
 
-    world->map_at.y *= 1.0 / game.config.one_pixel_gl_height;
+    world->map_at.y *= 1.0 / game->config.one_pixel_gl_height;
     world->map_at.y = (int)world->map_at.y;
-    world->map_at.y /= 1.0 / game.config.one_pixel_gl_height;
+    world->map_at.y /= 1.0 / game->config.one_pixel_gl_height;
 }
 
 static void thing_map_scroll_follow_player (Worldp world)
@@ -101,10 +101,10 @@ static void thing_map_blit_background (double offset_x, double offset_y)
     offset_x *= 0.9; // parallax
     offset_y *= 0.9;
 
-    double w = (MAP_WIDTH  * game.config.tile_pixel_width)/
-                    game.config.video_pix_width;
-    double h = (MAP_HEIGHT * game.config.tile_pixel_height)/
-                    game.config.video_pix_height;
+    double w = (MAP_WIDTH  * game->config.tile_pixel_width)/
+                    game->config.video_pix_width;
+    double h = (MAP_HEIGHT * game->config.tile_pixel_height)/
+                    game->config.video_pix_height;
 
     color c = WHITE;
     c.a = 100;
@@ -129,10 +129,10 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
         }
     }
 
-    double w = (MAP_WIDTH  * game.config.tile_pixel_width)/
-                game.config.video_pix_width;
-    double h = (MAP_HEIGHT * game.config.tile_pixel_height)/
-                game.config.video_pix_height;
+    double w = (MAP_WIDTH  * game->config.tile_pixel_width)/
+                game->config.video_pix_width;
+    double h = (MAP_HEIGHT * game->config.tile_pixel_height)/
+                game->config.video_pix_height;
 
     //
     // The background light is centered on the player
@@ -291,24 +291,24 @@ static void thing_blit_water (Worldp world,
                 if (!tp_is_water(t->tp)) {
                     continue;
                 }
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height, x, y);
+                t->blit(offset_x - game->config.one_pixel_gl_width,
+                        offset_y - game->config.one_pixel_gl_height, x, y);
                 t->blit(offset_x,
-                        offset_y - game.config.one_pixel_gl_height, x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height, x, y);
+                        offset_y - game->config.one_pixel_gl_height, x, y);
+                t->blit(offset_x + game->config.one_pixel_gl_width,
+                        offset_y - game->config.one_pixel_gl_height, x, y);
 
-                t->blit(offset_x - game.config.one_pixel_gl_width,
+                t->blit(offset_x - game->config.one_pixel_gl_width,
                         offset_y, x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
+                t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y, x, y);
 
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height, x, y);
+                t->blit(offset_x - game->config.one_pixel_gl_width,
+                        offset_y + game->config.one_pixel_gl_height, x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height, x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height, x, y);
+                        offset_y + game->config.one_pixel_gl_height, x, y);
+                t->blit(offset_x + game->config.one_pixel_gl_width,
+                        offset_y + game->config.one_pixel_gl_height, x, y);
             }
         }
     }
@@ -334,7 +334,7 @@ static void thing_blit_water (Worldp world,
                     continue;
                 }
 
-                uint16_t tile = t->current_tile;
+                uint16_t tile = t->tile_curr;
                 fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
@@ -381,15 +381,15 @@ static void thing_blit_water (Worldp world,
                 tile_map[X][Y] = false;
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
-                double tlx = tx * game.config.tile_gl_width;
-                double tly = ty * game.config.tile_gl_height;
-                double brx = tlx + (2.0 * game.config.tile_gl_width);
-                double bry = tly + (2.0 * game.config.tile_gl_height);
+                double tlx = tx * game->config.tile_gl_width;
+                double tly = ty * game->config.tile_gl_height;
+                double brx = tlx + (2.0 * game->config.tile_gl_width);
+                double bry = tly + (2.0 * game->config.tile_gl_height);
 
-                tlx -= game.config.tile_gl_width;
-                tly -= game.config.tile_gl_height;
-                brx -= game.config.tile_gl_width;
-                bry -= game.config.tile_gl_height;
+                tlx -= game->config.tile_gl_width;
+                tly -= game->config.tile_gl_height;
+                brx -= game->config.tile_gl_width;
+                bry -= game->config.tile_gl_height;
 
                 tlx -= offset_x;
                 tly -= offset_y;
@@ -589,7 +589,7 @@ static void thing_blit_deep_water (Worldp world,
                     continue;
                 }
 
-                Tilep tile = tile_index_to_tile(t->current_tile);
+                Tilep tile = tile_index_to_tile(t->tile_curr);
                 fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
@@ -635,15 +635,15 @@ static void thing_blit_deep_water (Worldp world,
                 tile_map[X][Y] = false;
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
-                double tlx = tx * game.config.tile_gl_width;
-                double tly = ty * game.config.tile_gl_height;
-                double brx = tlx + (2.0 * game.config.tile_gl_width);
-                double bry = tly + (2.0 * game.config.tile_gl_height);
+                double tlx = tx * game->config.tile_gl_width;
+                double tly = ty * game->config.tile_gl_height;
+                double brx = tlx + (2.0 * game->config.tile_gl_width);
+                double bry = tly + (2.0 * game->config.tile_gl_height);
 
-                tlx -= game.config.tile_gl_width;
-                tly -= game.config.tile_gl_height;
-                brx -= game.config.tile_gl_width;
-                bry -= game.config.tile_gl_height;
+                tlx -= game->config.tile_gl_width;
+                tly -= game->config.tile_gl_height;
+                brx -= game->config.tile_gl_width;
+                bry -= game->config.tile_gl_height;
 
                 tlx -= offset_x;
                 tly -= offset_y;
@@ -772,32 +772,32 @@ static void thing_blit_lava (Worldp world,
         for (auto x = minx; x < maxx; x++) {
             for (auto p : world->all_display_things_at[x][y][z]) {
                 auto t = p.second;
-                t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height * 2,
+                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
+                        offset_y + game->config.one_pixel_gl_height * 2,
                         x, y);
-                t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height * 2,
+                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
+                        offset_y + game->config.one_pixel_gl_height * 2,
                         x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height,
+                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
+                        offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y + game.config.one_pixel_gl_height,
+                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
+                        offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width * 2,
-                        offset_y - game.config.one_pixel_gl_height * 2,
+                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
+                        offset_y - game->config.one_pixel_gl_height * 2,
                         x, y);
-                t->blit(offset_x - game.config.one_pixel_gl_width * 2,
-                        offset_y - game.config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height * 3,
+                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
+                        offset_y - game->config.one_pixel_gl_height * 2,
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height * 2,
+                        offset_y + game->config.one_pixel_gl_height * 3,
                         x, y);
                 t->blit(offset_x,
-                        offset_y - game.config.one_pixel_gl_height * 2,
+                        offset_y + game->config.one_pixel_gl_height * 2,
+                        x, y);
+                t->blit(offset_x,
+                        offset_y - game->config.one_pixel_gl_height * 2,
                         x, y);
             }
         }
@@ -816,20 +816,20 @@ static void thing_blit_lava (Worldp world,
         for (auto x = minx; x < maxx; x++) {
             for (auto p : world->all_display_things_at[x][y][z]) {
                 auto t = p.second;
-                t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height,
+                t->blit(offset_x + game->config.one_pixel_gl_width,
+                        offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height,
+                t->blit(offset_x - game->config.one_pixel_gl_width,
+                        offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height,
+                t->blit(offset_x + game->config.one_pixel_gl_width,
+                        offset_y - game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height,
+                t->blit(offset_x - game->config.one_pixel_gl_width,
+                        offset_y - game->config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height,
+                        offset_y + game->config.one_pixel_gl_height,
                         x, y);
             }
         }
@@ -890,15 +890,15 @@ static void thing_blit_lava (Worldp world,
                 tile_map[X][Y] = false;
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
-                double tlx = tx * game.config.tile_gl_width;
-                double tly = ty * game.config.tile_gl_height;
-                double brx = tlx + (2.0 * game.config.tile_gl_width);
-                double bry = tly + (2.0 * game.config.tile_gl_height);
+                double tlx = tx * game->config.tile_gl_width;
+                double tly = ty * game->config.tile_gl_height;
+                double brx = tlx + (2.0 * game->config.tile_gl_width);
+                double bry = tly + (2.0 * game->config.tile_gl_height);
 
-                tlx -= game.config.tile_gl_width;
-                tly -= game.config.tile_gl_height;
-                brx -= game.config.tile_gl_width;
-                bry -= game.config.tile_gl_height;
+                tlx -= game->config.tile_gl_width;
+                tly -= game->config.tile_gl_height;
+                brx -= game->config.tile_gl_width;
+                bry -= game->config.tile_gl_height;
 
                 tlx -= offset_x;
                 tly -= offset_y;
@@ -954,29 +954,29 @@ static void thing_blit_blood (Worldp world,
         for (auto x = minx; x < maxx; x++) {
             for (auto p : world->all_display_things_at[x][y][z]) {
                 auto t = p.second;
-                t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height,
+                t->blit(offset_x + game->config.one_pixel_gl_width,
+                        offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y + game.config.one_pixel_gl_height,
+                t->blit(offset_x - game->config.one_pixel_gl_width,
+                        offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height,
+                t->blit(offset_x + game->config.one_pixel_gl_width,
+                        offset_y - game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x - game.config.one_pixel_gl_width,
-                        offset_y - game.config.one_pixel_gl_height,
+                t->blit(offset_x - game->config.one_pixel_gl_width,
+                        offset_y - game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x - game.config.one_pixel_gl_width,
+                t->blit(offset_x - game->config.one_pixel_gl_width,
                         offset_y,
                         x, y);
-                t->blit(offset_x + game.config.one_pixel_gl_width,
+                t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y,
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game.config.one_pixel_gl_height,
+                        offset_y + game->config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x,
-                        offset_y - game.config.one_pixel_gl_height,
+                        offset_y - game->config.one_pixel_gl_height,
                         x, y);
             }
         }
@@ -1041,8 +1041,8 @@ static void thing_blit_things (Worldp world,
                                int minx, int miny, int minz,
                                int maxx, int maxy, int maxz)
 {
-    double offset_x = world->map_at.x * game.config.tile_gl_width;
-    double offset_y = world->map_at.y * game.config.tile_gl_height;
+    double offset_x = world->map_at.x * game->config.tile_gl_width;
+    double offset_y = world->map_at.y * game->config.tile_gl_height;
 
     //thing_map_blit_background(offset_x, offset_y);
     //thing_map_blit_background_lit(offset_x, offset_y);

@@ -11,6 +11,6 @@ void Thing::health_boost (int v)
 {
     auto old_health = health;
     health += v;
-    health = std::min(health, max_health);
+    health = std::min(health, health_max);
     log("health boost %d, %d -> %d", v, old_health, health);
 }

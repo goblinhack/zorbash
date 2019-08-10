@@ -12,7 +12,7 @@ void *myzalloc_ (uint32_t size,
                  const char *what,
                  const char *file,
                  const char *func,
-                 const uint32_t line)
+                 uint32_t line)
 {_
     void *ptr = calloc(1, size);
 
@@ -31,7 +31,7 @@ void *mymalloc_ (uint32_t size,
                  const char *what,
                  const char *file,
                  const char *func,
-                 const uint32_t line)
+                 uint32_t line)
 {_
     void *ptr = malloc(size);
 
@@ -51,7 +51,7 @@ void *myrealloc_ (void *ptr,
                   const char *what,
                   const char *file,
                   const char *func,
-                  const uint32_t line)
+                  uint32_t line)
 {_
 #ifdef ENABLE_PTRCHECK
     ptrcheck_free(ptr, file, func, line);
@@ -72,7 +72,7 @@ void *myrealloc_ (void *ptr,
 void myfree_ (void *ptr,
               const char *file,
               const char *func,
-              const uint32_t line)
+              uint32_t line)
 {_
 #ifdef ENABLE_PTRCHECK
     ptrcheck_free(ptr, file, func, line);
@@ -85,7 +85,7 @@ char *dupstr_ (const char *in,
                const char *what,
                const char *file,
                const char *func,
-               const uint32_t line)
+               uint32_t line)
 {_
     if (!in) {
         ERR("no string to duplicate");

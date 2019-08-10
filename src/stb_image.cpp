@@ -1652,7 +1652,7 @@ static uint8_t *resample_row_generic(uint8_t *out, uint8_t *in_near, uint8_t *in
 
 // 0.38 seconds on 3*anemones.jpg   (0.25 with processor = Pro)
 // VC6 without processor=Pro is generating multiple LEAs per multiply!
-static void YCbCr_to_RGB_row(uint8_t *out, const uint8_t *y, const uint8_t *pcb, const uint8_t *pcr, int count, int step)
+static void YCbCr_to_RGB_row(uint8_t *out, uint8_t *y, uint8_t *pcb, uint8_t *pcr, int count, int step)
 {
    int i;
    for (i=0; i < count; ++i) {

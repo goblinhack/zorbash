@@ -13,7 +13,7 @@ void Thing::achieve_goals_in_life (void)
     // If this thing has goals, it can try and reach them.
     //
     if (dmap_goals) {
-        auto to = get_next_hop();
+        auto to = ai_get_next_hop();
 
         point toi(to.x, to.y);
         if (is_less_preferred_terrain(toi)) {
@@ -26,7 +26,7 @@ void Thing::achieve_goals_in_life (void)
     }
 }
 
-void Thing::do_collision_check (void)
+void Thing::collision_check_do (void)
 {
     if (!tp_collision_check(tp)) {
         return;
@@ -40,7 +40,7 @@ void Thing::do_collision_check (void)
     }
 
     if (need_collision_test) {
-        handle_collisions();
+        ai_collisions_handle();
         timestamp_collision =
           time_get_time_ms() +
           random_range(0, THING_COLLISION_TEST_DELAY_TENTHS);
@@ -53,7 +53,7 @@ void Thing::tick (void)
         return;
     }
 
-    do_collision_check();
+    collision_check_do();
     if (is_dead) {
         return;
     }
@@ -65,7 +65,7 @@ void Thing::tick (void)
 
     if (is_waiting_for_ai) {
         auto now = time_get_time_ms_cached();
-        if (now > next_ai_ms) {
+        if (now > timestamp_ai_next) {
             is_waiting_for_ai = false;
             achieve_goals_in_life();
         }

@@ -64,8 +64,8 @@ void ascii_set_scissors (point tl, point br)
 
 void pixel_to_ascii (int *x, int *y)
 {
-    *x = (int)(floor((double)(*x) / ((double)game.config.video_pix_width / ASCII_WIDTH)));
-    *y = (int)(floor((double)(*y) / ((double)game.config.video_pix_height / ASCII_HEIGHT)));
+    *x = (int)(floor((double)(*x) / ((double)game->config.video_pix_width / ASCII_WIDTH)));
+    *y = (int)(floor((double)(*y) / ((double)game->config.video_pix_height / ASCII_HEIGHT)));
 }
 
 int ascii_ok (int x, int y)
@@ -883,13 +883,13 @@ static void ascii_blit (int no_color)
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;
-            tile_br.x = tile_x + game.config.ascii_gl_width;
-            tile_br.y = tile_y + game.config.ascii_gl_height;
+            tile_br.x = tile_x + game->config.ascii_gl_width;
+            tile_br.y = tile_y + game->config.ascii_gl_height;
 
-            int mx1 = tile_tl.x * game.config.video_pix_width;
-            int my1 = tile_tl.y * game.config.video_pix_height;
-            int mx2 = tile_br.x * game.config.video_pix_width;
-            int my2 = tile_br.y * game.config.video_pix_height;
+            int mx1 = tile_tl.x * game->config.video_pix_width;
+            int my1 = tile_tl.y * game->config.video_pix_height;
+            int mx2 = tile_br.x * game->config.video_pix_width;
+            int my2 = tile_br.y * game->config.video_pix_height;
 
             if (!mouse_found) {
                 if ((mx1 < mouse_x) &&
@@ -926,7 +926,7 @@ static void ascii_blit (int no_color)
                      tile_br.x,
                      tile_br.y);
             } else if (cell->bg_tile) {
-                tile_br.x = tile_x + game.config.ascii_gl_width * 2.4;
+                tile_br.x = tile_x + game->config.ascii_gl_width * 2.4;
                 color bg_color_tl = cell->bg_color_tl;
                 color bg_color_tr = cell->bg_color_tr;
                 color bg_color_bl = cell->bg_color_bl;
@@ -954,7 +954,7 @@ static void ascii_blit (int no_color)
              * Foreground
              */
             {
-                tile_br.x = tile_x + game.config.ascii_gl_width;
+                tile_br.x = tile_x + game->config.ascii_gl_width;
                 Tilep tile = cell->fg_tile;
 
                 if (tile) {
@@ -981,10 +981,10 @@ static void ascii_blit (int no_color)
                 }
             }
 
-            tile_x += game.config.ascii_gl_width;
+            tile_x += game->config.ascii_gl_width;
         }
 
-        tile_y += game.config.ascii_gl_height;
+        tile_y += game->config.ascii_gl_height;
     }
 }
 

@@ -90,14 +90,14 @@ public:
     //
     // Adjacent tiles.
     //
-    Tilemap top_tiles;
-    Tilemap bot_tiles;
-    Tilemap left_tiles;
-    Tilemap right_tiles;
-    Tilemap tl_tiles;
-    Tilemap tr_tiles;
-    Tilemap bl_tiles;
-    Tilemap br_tiles;
+    Tilemap tile_tops;
+    Tilemap tile_bots;
+    Tilemap tile_lefts;
+    Tilemap tile_rights;
+    Tilemap tile_tls;
+    Tilemap tile_trs;
+    Tilemap tile_bls;
+    Tilemap tile_brs;
 
     //
     // Join tiles
@@ -121,11 +121,11 @@ public:
     int blit_right_off {};
 
     Dice bite_damage;
-    Dice nutrition;
+    Dice is_nutrition;
     double collision_radius {};
     int ai_delay_after_moving_ms {};
     int ai_scent_distance {};
-    int attack_on_collision {};
+    int collision_attack {};
     int collision_box {};
     int collision_check {};
     int collision_circle {};
@@ -145,7 +145,7 @@ public:
     int gfx_outlined {};
     int gfx_oversized_but_sitting_on_the_ground {};
     int gfx_small_shadow_caster {};
-    int hates_water {};
+    int is_water_hater {};
     int hunger_at_health_pct {};
     int hunger_clock_freq_ms {};
     int hunger_constant {};
@@ -245,7 +245,7 @@ public:
     int weapon_use_delay_hundredths {};
     int weapon_use_distance {};
     std::string bite_damage_hd {};
-    std::string nutrition_hd {};
+    std::string is_nutrition_hd {};
 
     uint8_t z_depth {};
 };
@@ -632,9 +632,9 @@ static inline int tp_is_attackable (Tpp t)
     return (t->is_attackable);
 }
 
-static inline int tp_hates_water (Tpp t)
+static inline int tp_is_water_hater (Tpp t)
 {
-    return (t->hates_water);
+    return (t->is_water_hater);
 }
 
 static inline int tp_hunger_constant (Tpp t)
@@ -652,9 +652,9 @@ static inline int tp_is_rock (Tpp t)
     return (t->is_rock);
 }
 
-static inline std::string tp_nutrition_hd (Tpp t)
+static inline std::string tp_is_nutrition_hd (Tpp t)
 {
-    return (t->nutrition_hd);
+    return (t->is_nutrition_hd);
 }
 
 static inline std::string tp_bite_damage_hd (Tpp t)
@@ -667,9 +667,9 @@ static inline int tp_collision_check (Tpp t)
     return (t->collision_check);
 }
 
-static inline int tp_attack_on_collision (Tpp t)
+static inline int tp_collision_attack (Tpp t)
 {
-    return (t->attack_on_collision);
+    return (t->collision_attack);
 }
 
 static inline int tp_is_water_dweller (Tpp t)
@@ -1022,44 +1022,44 @@ static inline Tilemap *tp_tiles (Tpp t)
     return (&t->tiles);
 }
 
-static inline Tilemap *tp_left_tiles (Tpp t)
+static inline Tilemap *tp_tile_lefts (Tpp t)
 {
-    return (&t->left_tiles);
+    return (&t->tile_lefts);
 }
 
-static inline Tilemap *tp_right_tiles (Tpp t)
+static inline Tilemap *tp_tile_rights (Tpp t)
 {
-    return (&t->right_tiles);
+    return (&t->tile_rights);
 }
 
-static inline Tilemap *tp_top_tiles (Tpp t)
+static inline Tilemap *tp_tile_tops (Tpp t)
 {
-    return (&t->top_tiles);
+    return (&t->tile_tops);
 }
 
-static inline Tilemap *tp_bot_tiles (Tpp t)
+static inline Tilemap *tp_tile_bots (Tpp t)
 {
-    return (&t->bot_tiles);
+    return (&t->tile_bots);
 }
 
-static inline Tilemap *tp_tl_tiles (Tpp t)
+static inline Tilemap *tp_tile_tls (Tpp t)
 {
-    return (&t->tl_tiles);
+    return (&t->tile_tls);
 }
 
-static inline Tilemap *tp_tr_tiles (Tpp t)
+static inline Tilemap *tp_tile_trs (Tpp t)
 {
-    return (&t->tr_tiles);
+    return (&t->tile_trs);
 }
 
-static inline Tilemap *tp_bl_tiles (Tpp t)
+static inline Tilemap *tp_tile_bls (Tpp t)
 {
-    return (&t->bl_tiles);
+    return (&t->tile_bls);
 }
 
-static inline Tilemap *tp_br_tiles (Tpp t)
+static inline Tilemap *tp_tile_brs (Tpp t)
 {
-    return (&t->br_tiles);
+    return (&t->tile_brs);
 }
 
 static inline Tilemap *tp_horiz_tiles (Tpp t)

@@ -5,7 +5,7 @@
 
 #include "my_game.h"
 
-Tpp Thing::get_weapon ()
+Tpp Thing::weapon_get ()
 {
     if (weapon_tp_id) {
         return (tp_find(weapon_tp_id));
@@ -14,27 +14,27 @@ Tpp Thing::get_weapon ()
     return (nullptr);
 }
 
-void Thing::set_weapon_carry_anim_id (uint32_t weapon_carry_anim_id)
+void Thing::weapon_set_carry_anim_id (uint32_t weapon_carry_anim_id)
 {
     Thingp weapon_carry_anim;
 
     if (!weapon_carry_anim_id) {
-        set_weapon_carry_anim(nullptr);
+        weapon_set_carry_anim(nullptr);
         return;
     }
 
     weapon_carry_anim = thing_find(world, weapon_carry_anim_id);
 
-    set_weapon_carry_anim(weapon_carry_anim);
+    weapon_set_carry_anim(weapon_carry_anim);
 }
 
-void Thing::set_weapon_carry_anim (Thingp new_weapon_carry_anim)
+void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
 {
     if (new_weapon_carry_anim) {
         verify(new_weapon_carry_anim);
     }
 
-    auto old_weapon_carry_anim = get_weapon_carry_anim();
+    auto old_weapon_carry_anim = weapon_get_carry_anim();
     if (old_weapon_carry_anim) {
         if (old_weapon_carry_anim == new_weapon_carry_anim) {
             return;
@@ -56,33 +56,33 @@ void Thing::set_weapon_carry_anim (Thingp new_weapon_carry_anim)
     }
 
     if (new_weapon_carry_anim) {
-        weapon_carry_anim_thing_id = new_weapon_carry_anim->id;
+        id_weapon_carry_anim = new_weapon_carry_anim->id;
     } else {
-        weapon_carry_anim_thing_id = 0;
+        id_weapon_carry_anim = 0;
     }
 }
 
-void Thing::set_weapon_use_anim_id (uint32_t weapon_use_anim_id)
+void Thing::weapon_set_use_anim_id (uint32_t weapon_use_anim_id)
 {
     Thingp weapon_use_anim;
 
     if (!weapon_use_anim_id) {
-        set_weapon_use_anim(nullptr);
+        weapon_set_use_anim(nullptr);
         return;
     }
 
     weapon_use_anim = thing_find(world, weapon_use_anim_id);
 
-    set_weapon_use_anim(weapon_use_anim);
+    weapon_set_use_anim(weapon_use_anim);
 }
 
-void Thing::set_weapon_use_anim (Thingp weapon_use_anim)
+void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
 {
     if (weapon_use_anim) {
         verify(weapon_use_anim);
     }
 
-    auto old_weapon_use_anim = get_weapon_use_anim();
+    auto old_weapon_use_anim = weapon_get_use_anim();
 
     if (old_weapon_use_anim) {
         if (old_weapon_use_anim == weapon_use_anim) {
@@ -104,15 +104,15 @@ void Thing::set_weapon_use_anim (Thingp weapon_use_anim)
     }
 
     if (weapon_use_anim) {
-        weapon_use_anim_thing_id = weapon_use_anim->id;
+        id_weapon_use_anim = weapon_use_anim->id;
     } else {
-        weapon_use_anim_thing_id = 0;
+        id_weapon_use_anim = 0;
     }
 }
 
-void Thing::get_weapon_use_offset (double *dx, double *dy)
+void Thing::weapon_get_use_offset (double *dx, double *dy)
 {
-    auto weapon = get_weapon();
+    auto weapon = weapon_get();
     if (!weapon) {
         return;
     }
@@ -177,18 +177,18 @@ void Thing::get_weapon_use_offset (double *dx, double *dy)
     *dy = dist_from_wielder + 0.3;
 }
 
-Thingp Thing::get_weapon_carry_anim (void)
+Thingp Thing::weapon_get_carry_anim (void)
 {
     Thingp weapon_carry_anim = 0;
 
-    if (weapon_carry_anim_thing_id) {
-        weapon_carry_anim = thing_find(world, weapon_carry_anim_thing_id);
+    if (id_weapon_carry_anim) {
+        weapon_carry_anim = thing_find(world, id_weapon_carry_anim);
     }
 
     return (weapon_carry_anim);
 }
 
-Thingp Thing::get_weapon_use_anim (void)
+Thingp Thing::weapon_get_use_anim (void)
 {
     //
     // If this weapon_use_anim has its own thing id for animations then
@@ -196,14 +196,14 @@ Thingp Thing::get_weapon_use_anim (void)
     //
     Thingp weapon_use_anim = 0;
 
-    if (weapon_use_anim_thing_id) {
-        weapon_use_anim = thing_find(world, weapon_use_anim_thing_id);
+    if (id_weapon_use_anim) {
+        weapon_use_anim = thing_find(world, id_weapon_use_anim);
     }
 
     return (weapon_use_anim);
 }
 
-void Thing::wield_next_weapon (void)
+void Thing::weapon_wield_next (void)
 {
     if (weapon_tp_id) {
         wield(tp_find(weapon_tp_id));
@@ -212,7 +212,7 @@ void Thing::wield_next_weapon (void)
 
 void Thing::unwield (const char *why)
 {
-    auto weapon = get_weapon();
+    auto weapon = weapon_get();
     if (!weapon) {
         return;
     }
@@ -225,7 +225,7 @@ void Thing::unwield (const char *why)
 
 void Thing::sheath (void)
 {
-    auto weapon = get_weapon();
+    auto weapon = weapon_get();
     if (!weapon) {
         return;
     }
@@ -235,22 +235,22 @@ void Thing::sheath (void)
     //
     // If this weapon has its own thing id for animations then destroy that.
     //
-    auto weapon_carry_anim = get_weapon_carry_anim();
+    auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
         weapon_carry_anim->dead("owner weapon");
-        set_weapon_carry_anim(nullptr);
+        weapon_set_carry_anim(nullptr);
     }
 
-    auto weapon_use_anim = get_weapon_use_anim();
+    auto weapon_use_anim = weapon_get_use_anim();
     if (weapon_use_anim) {
         weapon_use_anim->dead("owner weapon");
-        set_weapon_use_anim(nullptr);
+        weapon_set_use_anim(nullptr);
     }
 }
 
 void Thing::wield (Tpp weapon)
 {
-    if (get_weapon() == weapon) {
+    if (weapon_get() == weapon) {
         log("already wiedling: %s", tp_name(weapon).c_str());
         return;
     }
@@ -275,7 +275,7 @@ void Thing::wield (Tpp weapon)
     //
     // Save the thing id so the client wid can keep track of the weapon.
     //
-    set_weapon_carry_anim(carry_anim);
+    weapon_set_carry_anim(carry_anim);
 
     //
     // Attach to the thing.
@@ -287,14 +287,14 @@ void Thing::wield (Tpp weapon)
 
 void Thing::use (void)
 {
-    if (weapon_use_anim_thing_id) {
+    if (id_weapon_use_anim) {
         //
         // Still using.
         //
         return;
     }
 
-    auto weapon = get_weapon();
+    auto weapon = weapon_get();
     if (!weapon) {
         err("no weapon to use");
         return;
@@ -323,12 +323,12 @@ void Thing::use (void)
     //
     use_anim->set_owner(this);
 
-    set_weapon_use_anim(use_anim);
+    weapon_set_use_anim(use_anim);
 
     //
     // Hide the carry anim while using.
     //
-    auto c = get_weapon_carry_anim();
+    auto c = weapon_get_carry_anim();
     if (c) {
         c->hide();
     }

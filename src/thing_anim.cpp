@@ -13,12 +13,12 @@ void Thing::animate (void)
     Tilep otile;
     Tpp tp = t->tp;
 
-    otile = tile = tile_index_to_tile(t->current_tile);
+    otile = tile = tile_index_to_tile(t->tile_curr);
     if (tile) {
         //
         // If within the animate time of this frame, keep with it.
         //
-        if (t->next_frame_ms > time_get_time_ms_cached()) {
+        if (t->timestamp_next_frame > time_get_time_ms_cached()) {
             return;
         }
 
@@ -49,7 +49,7 @@ void Thing::animate (void)
         // If walking and now we've stopped, choose the idle no dir tile.
         //
         if (t->is_player() && !t->is_dead && !t->is_moving &&
-            (time_get_time_ms() >= t->begin_move_ms + 500)) {
+            (time_get_time_ms() >= t->timestamp_move_begin + 500)) {
 
             Tilep new_tile;
 
@@ -106,17 +106,17 @@ void Thing::animate (void)
             }
 
             if (tp->internal_has_hp_anim) {
-                if (t->health < t->max_health / 4) {
+                if (t->health < t->health_max / 4) {
                     if (!tile_is_hp_25_percent(tile)) {
                         tile = tile_next(tiles, tile);
                         continue;
                     }
-                } else if (t->health < t->max_health / 2) {
+                } else if (t->health < t->health_max / 2) {
                     if (!tile_is_hp_50_percent(tile)) {
                         tile = tile_next(tiles, tile);
                         continue;
                     }
-                } else if (t->health < (t->max_health / 4) * 3) {
+                } else if (t->health < (t->health_max / 4) * 3) {
                     if (!tile_is_hp_75_percent(tile)) {
                         tile = tile_next(tiles, tile);
                         continue;
@@ -236,7 +236,7 @@ void Thing::animate (void)
     }
 #endif
 
-    t->current_tile = tile->global_index;
+    t->tile_curr = tile->global_index;
 
     //
     // When does this tile expire ?
@@ -246,5 +246,5 @@ void Thing::animate (void)
         delay = delay + (myrand() % delay) / 5;
     }
 
-    t->next_frame_ms = time_get_time_ms_cached() + delay;
+    t->timestamp_next_frame = time_get_time_ms_cached() + delay;
 }

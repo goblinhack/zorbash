@@ -7,7 +7,7 @@
 #include "my_color.h"
 #include "my_dmap.h"
 
-void Thing::set_dir_none (void)
+void Thing::dir_set_none (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;
@@ -26,7 +26,7 @@ uint8_t Thing::is_dir_none (void)
     return (dir == THING_DIR_NONE);
 }
 
-void Thing::set_dir_down (void)
+void Thing::dir_set_down (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;
@@ -43,7 +43,7 @@ uint8_t Thing::is_dir_down (void)
     return (dir == THING_DIR_DOWN);
 }
 
-void Thing::set_dir_up (void)
+void Thing::dir_set_up (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;
@@ -60,7 +60,7 @@ uint8_t Thing::is_dir_up (void)
     return (dir == THING_DIR_UP);
 }
 
-void Thing::set_dir_left (void)
+void Thing::dir_set_left (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;
@@ -77,7 +77,7 @@ uint8_t Thing::is_dir_left (void)
     return (dir == THING_DIR_LEFT);
 }
 
-void Thing::set_dir_right (void)
+void Thing::dir_set_right (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;
@@ -94,7 +94,7 @@ uint8_t Thing::is_dir_right (void)
     return (dir == THING_DIR_RIGHT);
 }
 
-void Thing::set_dir_tl (void)
+void Thing::dir_set_tl (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;
@@ -111,7 +111,7 @@ uint8_t Thing::is_dir_tl (void)
     return (dir == THING_DIR_TL);
 }
 
-void Thing::set_dir_bl (void)
+void Thing::dir_set_bl (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;
@@ -128,7 +128,7 @@ uint8_t Thing::is_dir_bl (void)
     return (dir == THING_DIR_BL);
 }
 
-void Thing::set_dir_tr (void)
+void Thing::dir_set_tr (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;
@@ -145,7 +145,7 @@ uint8_t Thing::is_dir_tr (void)
     return (dir == THING_DIR_TR);
 }
 
-void Thing::set_dir_br (void)
+void Thing::dir_set_br (void)
 {
     if (tp_gfx_animated_no_dir(tp)) {
         return;

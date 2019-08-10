@@ -299,7 +299,7 @@ static void hash_free (hash_t *hash_table, void *ptr)
 static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                                           const char *func,
                                           const char *file,
-                                          const uint32_t line,
+                                          uint32_t line,
                                           uint8_t dont_store)
 {_
     static const char *bad_pointer_warning = "**BAD POINTER** ";
@@ -458,10 +458,10 @@ static ptrcheck *ptrcheck_verify_pointer (const void *ptr,
  */
 void *ptrcheck_alloc (const void *ptr,
                       const char *what,
-                      const uint32_t size,
+                      uint32_t size,
                       const char *func,
                       const char *file,
-                      const uint32_t line)
+                      uint32_t line)
 {_
     ptrcheck *context;
 
@@ -552,7 +552,7 @@ void *ptrcheck_alloc (const void *ptr,
 uint8_t ptrcheck_free (void *ptr,
                        const char *func,
                        const char *file,
-                       const uint32_t line)
+                       uint32_t line)
 {_
     ptrcheck *context;
 
@@ -622,7 +622,7 @@ uint8_t ptrcheck_free (void *ptr,
 uint8_t ptrcheck_verify (const void *ptr,
                               const char *func,
                               const char *file,
-                              const uint32_t line)
+                              uint32_t line)
 {_
     return (ptrcheck_verify_pointer(ptr, file, func, line,
                                     true /* don't store */) != 0);

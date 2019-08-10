@@ -37,11 +37,11 @@ static const double thing_collision_tiles = 1;
 static bool
 things_tile_overlap (Thingp A, Thingp B)
 {_
-    auto A_tile = tile_index_to_tile(A->current_tile);
+    auto A_tile = tile_index_to_tile(A->tile_curr);
     if (!A_tile) {
         return (false);
     }
-    auto B_tile = tile_index_to_tile(B->current_tile);
+    auto B_tile = tile_index_to_tile(B->tile_curr);
     if (!B_tile) {
         return (false);
     }
@@ -329,7 +329,7 @@ static int circle_circle_collision (Thingp A,
  * Add a thing to the list of things that could be hit on this attack.
  */
 static void
-thing_add_possible_hit (Thingp target,
+thing_add_ai_possible_hit (Thingp target,
                         std::string reason,
                         int hitter_killed_on_hitting,
                         int hitter_killed_on_hit_or_miss)
@@ -343,24 +343,24 @@ thing_add_possible_hit (Thingp target,
 }
 
 static void
-thing_possible_hit_add (Thingp target, std::string reason)
+thing_ai_possible_hit_add (Thingp target, std::string reason)
 {
-    thing_add_possible_hit(target, reason, false, false);
+    thing_add_ai_possible_hit(target, reason, false, false);
 }
 
 static void
-thing_possible_hit_add_hitter_killed_on_hitting (Thingp target,
+thing_ai_possible_hit_add_hitter_killed_on_hitting (Thingp target,
                                                  std::string reason)
 {
-    thing_add_possible_hit(target, reason, true, false);
+    thing_add_ai_possible_hit(target, reason, true, false);
 }
 
 #if 0
 static void
-thing_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
+thing_ai_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
                                                      std::string reason)
 {
-    thing_add_possible_hit(target, reason, false, true);
+    thing_add_ai_possible_hit(target, reason, false, true);
 }
 #endif
 
@@ -375,7 +375,7 @@ static void thing_possible_init (void)
 /*
  * Find the thing with the highest priority to hit.
  */
-void Thing::possible_hits_find_best (void)
+void Thing::ai_possible_hits_find_best (void)
 {_
     auto me = this;
     ThingColl *best = nullptr;
@@ -430,10 +430,10 @@ void Thing::possible_hits_find_best (void)
         auto it = best->target;
         if (will_eat(it)) {
             damage = bite_damage();
-            health_boost(it->nutrition());
+            health_boost(it->is_nutrition());
         }
 
-        if (it->hit_if_possible(me, damage)) {
+        if (it->ai_ai_hit_if_possible(me, damage)) {
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");
             }
@@ -505,7 +505,7 @@ bool things_overlap (const Thingp A, const Thingp B)
 //
 // false aborts the walk
 //
-bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
+bool Thing::ai_possible_hit (Thingp it, int x, int y, int dx, int dy)
 {_
     auto me = this;
     auto it_tp = it->tp;
@@ -515,8 +515,8 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
         return (true);
     }
 
-    Thingp owner_it = it->get_owner();
-    Thingp owner_me = me->get_owner();
+    Thingp owner_it = it->owner_get();
+    Thingp owner_me = me->owner_get();
 
     /*
      * Need this or shields attack the player.
@@ -534,19 +534,19 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
              * Weapon hits monster or generator.
              */
             if (things_overlap(me, it)) {
-                thing_possible_hit_add_hitter_killed_on_hitting(
+                thing_ai_possible_hit_add_hitter_killed_on_hitting(
                         it, "sword hit thing");
             }
         }
     } else if (will_attack(it)) {
-        if (tp_attack_on_collision(me_tp)) {
+        if (tp_collision_attack(me_tp)) {
             if (things_overlap(me, it)) {
-                thing_possible_hit_add(it, "battle");
+                thing_ai_possible_hit_add(it, "battle");
             }
         }
     } else if (will_eat(it)) {
         if (things_overlap(me, it)) {
-            thing_possible_hit_add(it, "eat");
+            thing_ai_possible_hit_add(it, "eat");
         }
     }
 
@@ -556,7 +556,7 @@ bool Thing::possible_hit (Thingp it, int x, int y, int dx, int dy)
 /*
  * Have we hit anything?
  */
-bool Thing::handle_collisions (void)
+bool Thing::ai_collisions_handle (void)
 {_
     int minx = mid_at.x - thing_collision_tiles;
     while (minx < 0) {
@@ -589,14 +589,14 @@ bool Thing::handle_collisions (void)
                     continue;
                 }
 
-                if (!possible_hit(it, x, y, dx, dy)) {
+                if (!ai_possible_hit(it, x, y, dx, dy)) {
                     return (false);
                 }
             }
         }
     }
 
-    possible_hits_find_best();
+    ai_possible_hits_find_best();
 
     return (true);
 }

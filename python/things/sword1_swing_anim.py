@@ -5,7 +5,7 @@ import tp
 def tp_init(name):
     x = tp.Tp(name)
 
-    x.set_attack_on_collision(True)
+    x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)

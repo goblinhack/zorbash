@@ -501,11 +501,17 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
+printf("%d\n",__LINE__);
+printf("%d\n",__LINE__);
     double mean = 1.0;
     double std = 0.5;
+printf("%d\n",__LINE__);
     std::normal_distribution<double> distribution;
+printf("%d\n",__LINE__);
     distribution.param(std::normal_distribution<double>(mean, std).param());
+printf("%d\n",__LINE__);
     rng.seed(std::random_device{}());
+printf("%d\n",__LINE__);
 
     /*
     mcheck(0);
@@ -516,16 +522,19 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGABRT, segv_handler);   // install our handler
     signal(SIGINT, ctrlc_handler);   // install our handler
 #endif
+printf("%d\n",__LINE__);
 
     const char *appdata;
 
     mysrand(time(0));
+printf("%d\n",__LINE__);
 
     appdata = getenv("APPDATA");
 
     if (!appdata || !appdata[0]) {
         appdata = "appdata";
     }
+printf("%d\n",__LINE__);
 
 #ifdef _WIN32
     mkdir(appdata);
@@ -533,6 +542,7 @@ int32_t main (int32_t argc, char *argv[])
     mkdir(appdata, 0700);
 #endif
 
+printf("%d\n",__LINE__);
     char *dir = dynprintf("%s%s%s", appdata, DSEP, "zorbash");
 #ifdef _WIN32
     mkdir(dir);
@@ -541,6 +551,7 @@ int32_t main (int32_t argc, char *argv[])
 #endif
     myfree(dir);
 
+printf("%d\n",__LINE__);
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
     LOG_STDOUT = fopen(out, "w+");
     myfree(out);
@@ -548,29 +559,39 @@ int32_t main (int32_t argc, char *argv[])
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
     LOG_STDERR = fopen(err, "w+");
     myfree(err);
+printf("%d\n",__LINE__);
 
-    game_init();
-#if 0
+printf("%d\n",__LINE__);
+#if 1
     char *save_file = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "saved.json");
     extern int cereal_test(const std::string);
     cereal_test(std::string(save_file));
     myfree(save_file);
 #endif
+    game = new Game();
+    game_init();
 
     ARGV = argv;
 
+printf("%d\n",__LINE__);
     dospath2unix(ARGV[0]);
 
+printf("%d\n",__LINE__);
     parse_args(argc, argv);
 
+printf("%d\n",__LINE__);
     color_init();
 
+printf("%d\n",__LINE__);
     find_file_locations();
 
+printf("%d\n",__LINE__);
     Charmap::init_charmaps();
 
+printf("%d\n",__LINE__);
     python_init(argv);
 
+printf("%d\n",__LINE__);
 #if 0
     extern int grid_test(void);
     grid_test();
@@ -594,50 +615,63 @@ int32_t main (int32_t argc, char *argv[])
 	ERR("SDL init");
     }
 
+printf("%d\n",__LINE__);
     gl_init_2d_mode();
 
+printf("%d\n",__LINE__);
     if (!tex_init()) {
 	ERR("tex init");
     }
+printf("%d\n",__LINE__);
 
     if (!wid_tiles_init()) {
 	ERR("wid tiles init");
     }
+printf("%d\n",__LINE__);
 
     if (!tile_init()) {
 	ERR("tile init");
     }
+printf("%d\n",__LINE__);
 
     if (!font_init()) {
 	ERR("Font init");
     }
+printf("%d\n",__LINE__);
 
     if (!wid_init()) {
 	ERR("wid init");
     }
+printf("%d\n",__LINE__);
 
 #ifdef ENABLE_LEAKCHECK
     ptrcheck_leak_snapshot();
 #endif
+printf("%d\n",__LINE__);
 
     if (!wid_console_init()) {
 	ERR("wid_console init");
     }
+printf("%d\n",__LINE__);
 
     if (!command_init()) {
 	ERR("command init");
     }
+printf("%d\n",__LINE__);
 
 #ifdef ENABLE_LEAKCHECK
     if (!ptrcheck_init()) {
 	ERR("ptrcheck init");
     }
 #endif
+printf("%d\n",__LINE__);
 
     py_call_void("init2");
 
+printf("%d\n",__LINE__);
     tp_init();
 
+printf("%d\n",__LINE__);
     sdl_loop();
     gl_leave_2d_mode();
 

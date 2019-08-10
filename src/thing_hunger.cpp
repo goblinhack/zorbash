@@ -36,14 +36,14 @@ void Thing::hunger_clock (void)
     }
 
     int hungry_at =
-      (int) ((double) max_health *
+      (int) ((double) health_max *
              ((double) tp_hunger_at_health_pct(tp) / 100.0));
 
     auto old_is_hungry = is_hungry;
     is_hungry = health < hungry_at;
 
     int starving_at =
-      (int) ((double) max_health *
+      (int) ((double) health_max *
              ((double) tp_hunger_starving_at_health_pct(tp) / 100.0));
 
     auto old_is_starving = is_starving;

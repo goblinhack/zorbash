@@ -19,7 +19,7 @@ void player_tick (Worldp world)
         return;
     }
 
-    if ((time_get_time_ms_cached() - player->begin_move_ms) < 100) {
+    if ((time_get_time_ms_cached() - player->timestamp_move_begin) < 100) {
         return;
     }
 

@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def dirt_init(name, tiles=[], left_tiles=[]):
+def dirt_init(name, tiles=[], tile_lefts=[]):
     
     x = tp.Tp(name)
 

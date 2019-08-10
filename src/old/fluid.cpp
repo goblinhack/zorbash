@@ -780,9 +780,9 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
 void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
 {
     if (player) {
-        const uint32_t visible_width =
+        uint32_t visible_width =
                 TILES_SCREEN_WIDTH / 2 + TILES_SCREEN_FLUID_WIDTH_PAD;
-        const uint32_t visible_height =
+        uint32_t visible_height =
                 TILES_SCREEN_HEIGHT / 2 + TILES_SCREEN_FLUID_HEIGHT_PAD;
 
         maxx = player->x + visible_width;

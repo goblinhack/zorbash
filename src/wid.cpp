@@ -6323,10 +6323,10 @@ void wid_gc_all (void)
 void wid_tick_all (void)
 {_
 //    wid_time = time_get_time_ms_cached();
-    if (!game.config.sdl_delay) {
+    if (!game->config.sdl_delay) {
         wid_time += 100/1;
     } else {
-        wid_time += 100/game.config.sdl_delay;
+        wid_time += 100/game->config.sdl_delay;
     }
 
     widp w;
@@ -6453,10 +6453,10 @@ void wid_display_all (Worldp world)
     /*
      * FPS counter.
      */
-    if (game.config.fps_counter) {
+    if (game->config.fps_counter) {
         ascii_putf(0, 1,
                    GREEN, ASCII_UI_BOX_INACTIVE_MID_COLOR,
-                   L"%u FPS", game.fps_count);
+                   L"%u FPS", game->fps_count);
     }
 
     ascii_display();

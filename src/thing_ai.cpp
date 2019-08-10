@@ -66,7 +66,7 @@ bool Thing::will_prefer (const Thingp itp)
     return (false);
 }
 
-bool Thing::is_obstacle_for_me (point p)
+bool Thing::ai_is_obstacle_for_me (point p)
 {
     if (world->is_wall(p)) {
         return (true);
@@ -109,7 +109,7 @@ bool Thing::is_obstacle_for_me (point p)
 int Thing::is_less_preferred_terrain (point p)
 {
     if (world->is_water(p)) {
-        if (hates_water()) {
+        if (is_water_hater()) {
             return (100);
         }
     }
@@ -119,7 +119,7 @@ int Thing::is_less_preferred_terrain (point p)
 //
 // Lower scores are more preferred
 // k
-bool Thing::is_goal_for_me (point p, int priority, double *score)
+bool Thing::ai_is_goal_for_me (point p, int priority, double *score)
 {
     double distance_scale = distance(mid_at, fpoint(p.x, p.y));
     if (!distance_scale) {
@@ -181,7 +181,7 @@ bool Thing::is_goal_for_me (point p, int priority, double *score)
     return (false);
 }
 
-fpoint Thing::get_next_hop (void)
+fpoint Thing::ai_get_next_hop (void)
 {_
     auto minx = 0;
     auto miny = 0;
@@ -208,7 +208,7 @@ fpoint Thing::get_next_hop (void)
                 age = 0;
             }
 
-            if (is_obstacle_for_me(p)) {
+            if (ai_is_obstacle_for_me(p)) {
                 dmap_scent->val[x][y] = DMAP_IS_WALL;
                 dmap_goals->val[x][y] = DMAP_IS_WALL;
             } else if ((value = is_less_preferred_terrain(p))) {
@@ -267,7 +267,7 @@ CON("goals:");
             //
             for (auto priority = 0; priority < 3; priority++) {
                 double score = 0;
-                if (!is_goal_for_me(p, priority, &score)) {
+                if (!ai_is_goal_for_me(p, priority, &score)) {
                     continue;
                 }
 

@@ -18,19 +18,19 @@
 // util.c
 //
 void *myzalloc_(uint32_t size, const char *what, const char *func,
-                const char *file, const uint32_t line);
+                const char *file, uint32_t line);
 
 void *mymalloc_(uint32_t size, const char *what, const char *func,
-                const char *file, const uint32_t line);
+                const char *file, uint32_t line);
 
 void *myrealloc_(void *ptr, uint32_t size, const char *what, const char *func,
-                 const char *file, const uint32_t line);
+                 const char *file, uint32_t line);
 
 void myfree_(void *ptr, const char *func, const char *file,
-             const uint32_t line);
+             uint32_t line);
 
 char *dupstr_(const char *in, const char *what, const char *func,
-              const char *file, const uint32_t line);
+              const char *file, uint32_t line);
 
 #define myzalloc(__size__, __what__) \
     myzalloc_((__size__), (__what__), PTRCHECK_AT)
@@ -50,18 +50,18 @@ char *dupstr_(const char *in, const char *what, const char *func,
 uint8_t ptrcheck_init(void);
 void ptrcheck_fini(void);
 
-void *ptrcheck_alloc(const void *ptr, const char *what, const uint32_t size,
-                     const char *file, const char *func, const uint32_t line);
+void *ptrcheck_alloc(const void *ptr, const char *what, uint32_t size,
+                     const char *file, const char *func, uint32_t line);
 
 uint8_t ptrcheck_verify(const void *ptr, const char *file, const char *func,
-                        const uint32_t line);
+                        uint32_t line);
 
 uint8_t ptrcheck_verify(const void *ptr,
                              const char *file, const char *func,
-                             const uint32_t line);
+                             uint32_t line);
 
 uint8_t ptrcheck_free(void *ptr, const char *file, const char *func,
-                      const uint32_t line);
+                      uint32_t line);
 
 void ptrcheck_leak_print(void);
 void ptrcheck_leak_snapshot(void);

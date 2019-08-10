@@ -313,10 +313,10 @@ extern PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB_EXT;
 #define glDeleteBuffersARB_EXT glDeleteBuffersARBEXT
 #endif
 
-extern const uint32_t NUMBER_BYTES_PER_VERTICE_2D;
-extern const uint32_t NUMBER_BYTES_PER_VERTICE_3D;
-extern const uint32_t NUMBER_FLOATS_PER_VERTICE_2D;
-extern const uint32_t NUMBER_FLOATS_PER_VERTICE_3D;
+extern uint32_t NUMBER_BYTES_PER_VERTICE_2D;
+extern uint32_t NUMBER_BYTES_PER_VERTICE_3D;
+extern uint32_t NUMBER_FLOATS_PER_VERTICE_2D;
+extern uint32_t NUMBER_FLOATS_PER_VERTICE_3D;
 #endif
 
 void gl_ortho_set(int32_t width, int32_t height);
