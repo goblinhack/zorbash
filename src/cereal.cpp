@@ -61,6 +61,39 @@ static Test2 test3;
 int cereal_test (const std::string save_file)
 {
     {
+printf("a\n");
+        auto w = new NewWorld();
+printf("a1\n");
+        delete w;
+printf("a2\n");
+//        std::ofstream os(save_file, std::ios::binary);
+//        cereal::JSONOutputArchive archive_out(os);
+//        printf("json saving\n");
+//        system("date");
+//        archive_out(*w);
+//        system("date");
+//        printf("json saved\n");
+    }
+
+    {
+        auto w = new NewWorld();
+        delete w;
+        printf("create archive\n");
+//        std::ifstream is(save_file);
+//        cereal::JSONInputArchive archive_in(is);
+//
+//        printf("json loading\n");
+//        system("date");
+//        archive_in(w);
+//        system("date");
+//        printf("json loaded\n");
+
+        //cereal::JSONOutputArchive archive_out(std::cout);
+        //archive_out(test2);
+    }
+    exit(1);
+
+    {
         std::ofstream os(save_file, std::ios::binary);
         cereal::JSONOutputArchive archive_out(os);
 

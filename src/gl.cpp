@@ -33,8 +33,8 @@ void gl_init_2d_mode (void)
     /*
      * Setup our viewport
      */
-    glViewport(0, 0, game.config.drawable_gl_width,
-               game.config.drawable_gl_height);
+    glViewport(0, 0, game->config.drawable_gl_width,
+               game->config.drawable_gl_height);
 
     /*
      * Make sure we're changing the model view and not the projection
@@ -70,7 +70,7 @@ void gl_enter_2d_mode (void)
      * 2D projection
      */
     glOrtho(0,
-             game.config.video_gl_width, game.config.video_gl_height,
+             game->config.video_gl_width, game->config.video_gl_height,
              0, -1200.0, 1200.0);
 
     /*
@@ -146,8 +146,8 @@ static void gl_init_fbo_ (
     GLuint *fbo_id,
     GLuint *fbo_tex_id)
 {_
-    GLuint tex_width = game.config.drawable_gl_width;
-    GLuint tex_height = game.config.drawable_gl_height;
+    GLuint tex_width = game->config.drawable_gl_width;
+    GLuint tex_height = game->config.drawable_gl_height;
 
     LOG("Making FBO, size %dx%d", tex_width, tex_height);
 
@@ -263,7 +263,7 @@ void blit_fbo_unbind (void)
  */
 #define NUMBER_COMPONENTS_PER_COLOR 4
 
-const uint32_t NUMBER_BYTES_PER_VERTICE_2D =
+uint32_t NUMBER_BYTES_PER_VERTICE_2D =
                                             sizeof(GLfloat) *
                                             NUMBER_DIMENSIONS_PER_COORD_2D +
                                             sizeof(GLfloat) *
@@ -271,7 +271,7 @@ const uint32_t NUMBER_BYTES_PER_VERTICE_2D =
                                             sizeof(GLfloat) *
                                             NUMBER_COMPONENTS_PER_COLOR;
 
-const uint32_t NUMBER_BYTES_PER_VERTICE_3D =
+uint32_t NUMBER_BYTES_PER_VERTICE_3D =
                                             sizeof(GLfloat) *
                                             NUMBER_DIMENSIONS_PER_COORD_2D +
                                             sizeof(GLfloat) *
@@ -279,8 +279,8 @@ const uint32_t NUMBER_BYTES_PER_VERTICE_3D =
                                             sizeof(GLfloat) *
                                             NUMBER_COMPONENTS_PER_COLOR;
 
-const uint32_t NUMBER_FLOATS_PER_VERTICE_2D = NUMBER_BYTES_PER_VERTICE_2D / sizeof(float);
-const uint32_t NUMBER_FLOATS_PER_VERTICE_3D = NUMBER_BYTES_PER_VERTICE_3D / sizeof(float);
+uint32_t NUMBER_FLOATS_PER_VERTICE_2D = NUMBER_BYTES_PER_VERTICE_2D / sizeof(float);
+uint32_t NUMBER_FLOATS_PER_VERTICE_3D = NUMBER_BYTES_PER_VERTICE_3D / sizeof(float);
 
 /*
  * Two arrays, xy and uv.
@@ -1276,7 +1276,7 @@ gl_push (float **P,
         // The tile on the screen is stretched for the display.
         // We need to undo this before rotating and then restore it later.
         //
-        double scale = 1.0/(game.config.video_w_h_ratio / 2);
+        double scale = 1.0/(game->config.video_w_h_ratio / 2);
         tl.x *= scale;
         tr.x *= scale;
         bl.x *= scale;
@@ -1554,8 +1554,8 @@ void tile_blit_outline (const Tpp &tp, const Tilep &tile,
 
     glcolor(BLACK);
 
-    const double dx = game.config.one_pixel_gl_width * 0.75;
-    const double dy = game.config.one_pixel_gl_height * 0.75;
+    const double dx = game->config.one_pixel_gl_width * 0.75;
+    const double dy = game->config.one_pixel_gl_height * 0.75;
 
     blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
@@ -1607,8 +1607,8 @@ void tile_blit_outline_section (const Tpp &tp, const Tilep &tile,
 
     glcolor(BLACK);
 
-    const double dx = game.config.one_pixel_gl_width * 0.75;
-    const double dy = game.config.one_pixel_gl_height * 0.75;
+    const double dx = game->config.one_pixel_gl_width * 0.75;
+    const double dy = game->config.one_pixel_gl_height * 0.75;
 
     blit(tile->gl_surface_binding, x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);

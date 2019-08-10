@@ -6,7 +6,7 @@
 #include "my_game.h"
 #include "my_dungeon.h"
 
-class Game game;
+class Game *game;
 
 void game_init (void)
 {
@@ -98,7 +98,7 @@ static void game_place_walls (Worldp world,
                     DIE("wall tile %s not found", tilename.c_str());
                 }
 
-                t->current_tile = tile->global_index;
+                t->tile_curr = tile->global_index;
             }
         }
     }
@@ -189,7 +189,7 @@ static void game_place_floors (Worldp world,
                 if (!tile) {
                     DIE("floor tile %s not found", tilename.c_str());
                 }
-                t->current_tile = tile->global_index;
+                t->tile_curr = tile->global_index;
             }
         }
     }
@@ -265,7 +265,7 @@ static void game_place_rocks (Worldp world,
                 if (!tile) {
                     DIE("rock tile %s not found", tilename.c_str());
                 }
-                t->current_tile = tile->global_index;
+                t->tile_curr = tile->global_index;
             }
         }
     }

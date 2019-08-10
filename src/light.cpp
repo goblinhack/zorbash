@@ -303,11 +303,11 @@ void Light::render_triangle_fans (void)
 
     auto tx = at.x + 0.5;
     auto ty = at.y + 0.5;
-    fpoint light_pos(tx * game.config.tile_gl_width,
-                     ty * game.config.tile_gl_height);
+    fpoint light_pos(tx * game->config.tile_gl_width,
+                     ty * game->config.tile_gl_height);
 
-    auto ox = world->map_at.x * game.config.tile_gl_width;
-    auto oy = world->map_at.y * game.config.tile_gl_height;
+    auto ox = world->map_at.x * game->config.tile_gl_width;
+    auto oy = world->map_at.y * game->config.tile_gl_height;
 
     glTranslatef(-ox, -oy, 0);
 
@@ -414,11 +414,11 @@ void Light::render_debug_lines (int minx, int miny, int maxx, int maxy)
 
     auto tx = at.x;
     auto ty = at.y;
-    fpoint light_pos(tx * game.config.tile_gl_width,
-                     ty * game.config.tile_gl_height);
+    fpoint light_pos(tx * game->config.tile_gl_width,
+                     ty * game->config.tile_gl_height);
 
-    auto ox = world->map_at.x * game.config.tile_gl_width;
-    auto oy = world->map_at.y * game.config.tile_gl_height;
+    auto ox = world->map_at.x * game->config.tile_gl_width;
+    auto oy = world->map_at.y * game->config.tile_gl_height;
 
     glTranslatef(-ox, -oy, 0);
 
@@ -484,14 +484,14 @@ void Light::render_point_light (void)
 {
     auto tx = at.x;
     auto ty = at.y;
-    fpoint light_pos(tx * game.config.tile_gl_width,
-                     ty * game.config.tile_gl_height);
+    fpoint light_pos(tx * game->config.tile_gl_width,
+                     ty * game->config.tile_gl_height);
 
-    auto ox = world->map_at.x * game.config.tile_gl_width;
-    auto oy = world->map_at.y * game.config.tile_gl_height;
+    auto ox = world->map_at.x * game->config.tile_gl_width;
+    auto oy = world->map_at.y * game->config.tile_gl_height;
 
-    double lw = strength * game.config.tile_gl_width;
-    double lh = strength * game.config.tile_gl_height;
+    double lw = strength * game->config.tile_gl_width;
+    double lh = strength * game->config.tile_gl_height;
     double p1x = light_pos.x - lw;
     double p1y = light_pos.y - lh;
     double p2x = light_pos.x + lw;

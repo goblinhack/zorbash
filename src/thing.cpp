@@ -43,14 +43,75 @@ Thingp thing_new (Worldp world,
     auto id = ++next_thing_id;
 
     auto t = new Thing;
-    t->world = world;
+
+    t->age_map = 0;
+    t->dmap_goals = 0;
+    t->dmap_scent = 0;
+    t->light = 0;
+    t->tp = 0;
+    t->world = 0;
+    t->bounce_fade = 0;
+    t->bounce_height = 0;
+    t->rot = 0;
+    t->submerged_offset = 0;
+    t->gold = 0;
+    t->health = 0;
+    t->health_max = 0;
+    t->bounce_count = 0;
+    t->owned_count = 0;
+    t->tile_bl = 0;
+    t->tile_bot = 0;
+    t->tile_br = 0;
+    t->tile_curr = 0;
+    t->tile_left = 0;
+    t->tile_right = 0;
+    t->tile_tl = 0;
+    t->tile_top = 0;
+    t->tile_tr = 0;
+    t->weapon_tp_id = 0;
+    t->hunger_tick_last_ms = 0;
+    t->id = 0;
+    t->id_owner = 0;
+    t->id_weapon_carry_anim = 0;
+    t->id_weapon_use_anim = 0;
+    t->light_iterator = 0;
+    t->timestamp_ai_next = 0;
+    t->timestamp_born = 0;
+    t->timestamp_bounce_begin = 0;
+    t->timestamp_bounce_end = 0;
+    t->timestamp_collision = 0;
+    t->timestamp_flip_start = 0;
+    t->timestamp_last_attacked = 0;
+    t->timestamp_last_i_was_hit = 0;
+    t->timestamp_move_begin = 0;
+    t->timestamp_move_end = 0;
+    t->timestamp_move_start = 0;
+    t->timestamp_next_frame = 0;
+    t->depth = 0;
+    t->dir = 0;
+    t->has_ever_moved = 0;
+    t->is_attached = 0;
+    t->is_being_destroyed = 0;
+    t->is_bloodied = 0;
+    t->is_bouncing = 0;
+    t->is_dead = 0;
+    t->is_facing_left = 0;
+    t->is_hidden = 0;
+    t->is_hungry = 0;
+    t->is_init = 0;
+    t->is_lit = 0;
+    t->is_moving = 0;
+    t->is_open = 0;
+    t->is_sleeping = 0;
+    t->is_starving = 0;
+    t->is_submerged = 0;
+    t->is_waiting_for_ai = 0;
 
     auto tp = t->tp = tp_find(tp_name);
     if (!t->tp) {
         DIE("thing [%s] not found", tp_name.c_str());
     }
 
-    t->id = id;
 
     auto p = std::make_pair(t->id, t);
     auto result = world->all_things.insert(p);
@@ -89,73 +150,74 @@ Thingp thing_new (Worldp world,
         t->is_facing_left = false;
     }
 
-    t->is_hungry          = tp_hunger_constant(tp);
-    t->is_starving        = false;
-    t->is_dead            = false;
-    t->is_bloodied        = false;
-    t->is_hidden          = false;
-    t->is_sleeping        = false;
-    t->is_moving          = false;
-    t->has_ever_moved     = false;
-    t->is_open            = false;
-    t->is_bouncing        = false;
-    t->is_attached        = false;
-    t->is_lit             = false;
-    t->is_being_destroyed = false;
-    t->is_waiting_for_ai  = tp_is_active(tp);
-    t->is_submerged       = tp_is_active(tp);
+    t->is_init               = true;
+    t->is_hungry             = tp_hunger_constant(tp);
+    t->is_starving           = false;
+    t->is_dead               = false;
+    t->is_bloodied           = false;
+    t->is_hidden             = false;
+    t->is_sleeping           = false;
+    t->is_moving             = false;
+    t->has_ever_moved        = false;
+    t->is_open               = false;
+    t->is_bouncing           = false;
+    t->is_attached           = false;
+    t->is_lit                = false;
+    t->is_being_destroyed    = false;
+    t->is_waiting_for_ai     = tp_is_active(tp);
+    t->is_submerged          = tp_is_active(tp);
 
     t->health         = tp_hunger_initial_health_at(tp);
-    t->max_health     = t->health;
+    t->health_max     = t->health;
 
     t->timestamp_born = time_get_time_ms_cached();
 
-    auto tiles = tp_left_tiles(tp);
+    auto tiles = tp_tile_lefts(tp);
     auto tile = tile_random(tiles);
     if (tile) {
-        t->left_tile = tile->global_index;
+        t->tile_left = tile->global_index;
     }
 
-    tiles = tp_right_tiles(tp);
+    tiles = tp_tile_rights(tp);
     tile = tile_random(tiles);
     if (tile) {
-        t->right_tile = tile->global_index;
+        t->tile_right = tile->global_index;
     }
 
-    tiles = tp_top_tiles(tp);
+    tiles = tp_tile_tops(tp);
     tile = tile_random(tiles);
     if (tile) {
-        t->top_tile = tile->global_index;
+        t->tile_top = tile->global_index;
     }
 
-    tiles = tp_bot_tiles(tp);
+    tiles = tp_tile_bots(tp);
     tile = tile_random(tiles);
     if (tile) {
-        t->bot_tile = tile->global_index;
+        t->tile_bot = tile->global_index;
     }
 
-    tiles = tp_tl_tiles(tp);
+    tiles = tp_tile_tls(tp);
     tile = tile_random(tiles);
     if (tile) {
-        t->tl_tile = tile->global_index;
+        t->tile_tl = tile->global_index;
     }
 
-    tiles = tp_tr_tiles(tp);
+    tiles = tp_tile_trs(tp);
     tile = tile_random(tiles);
     if (tile) {
-        t->tr_tile = tile->global_index;
+        t->tile_tr = tile->global_index;
     }
 
-    tiles = tp_br_tiles(tp);
+    tiles = tp_tile_brs(tp);
     tile = tile_random(tiles);
     if (tile) {
-        t->br_tile = tile->global_index;
+        t->tile_br = tile->global_index;
     }
 
-    tiles = tp_bl_tiles(tp);
+    tiles = tp_tile_bls(tp);
     tile = tile_random(tiles);
     if (tile) {
-        t->bl_tile = tile->global_index;
+        t->tile_bl = tile->global_index;
     }
 
     tiles = tp_tiles(tp);
@@ -166,7 +228,7 @@ Thingp thing_new (Worldp world,
     }
 
     if (tile) {
-        t->current_tile = tile->global_index;
+        t->tile_curr = tile->global_index;
     }
 
     if (tp_is_player(tp)) {
@@ -218,7 +280,7 @@ Thingp thing_new (Worldp world,
         world->set_corridor(new_at.x, new_at.y);
     }
     if (tp_is_dirt(tp)) {
-        world->set_dirt(new_at.x, new_at.y);
+        world->dir_sett(new_at.x, new_at.y);
     }
     if (tp_is_grass(tp)) {
         world->set_grass(new_at.x, new_at.y);
@@ -311,7 +373,7 @@ void Thing::hide (void)
     //
     // Hide the weapon too or it just floats in the air.
     //
-    auto weapon_carry_anim = get_weapon_carry_anim();
+    auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
         weapon_carry_anim->hide();
     }
@@ -324,10 +386,10 @@ void Thing::visible (void)
     //
     // If this thing has an owner, should the thing stay hidden?
     //
-    auto owner = get_owner();
+    auto owner = owner_get();
     if (owner) {
-        if (this == owner->get_weapon_carry_anim()) {
-            if (owner->get_weapon_use_anim()) {
+        if (this == owner->weapon_get_carry_anim()) {
+            if (owner->weapon_get_use_anim()) {
                 //
                 // Stay hidden until the weapon use is done.
                 //
@@ -339,7 +401,7 @@ void Thing::visible (void)
     //
     // Reveal the weapon again too.
     //
-    auto weapon_carry_anim = get_weapon_carry_anim();
+    auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
         weapon_carry_anim->visible();
     }
@@ -354,41 +416,41 @@ uint8_t Thing::is_visible (void)
 // Get rid of all the hooks to other things that this thing has. e.g. the
 // weapons it carries etc.
 //
-void Thing::remove_hooks ()
+void Thing::hooks_remove ()
 {_
     //
     // We are owned by something. i.e. we are a sword.
     //
     Thingp owner = 0;
 
-    if (owner_thing_id) {
-        owner = get_owner();
+    if (id_owner) {
+        owner = owner_get();
     }
 
-    if (owner_thing_id && owner) {
+    if (id_owner && owner) {
 #ifdef ENABLE_THING_DEBUG
         log("detach %d from owner %s", id, owner->to_string().c_str());
 #endif
-        if (id == owner->weapon_carry_anim_thing_id) {
+        if (id == owner->id_weapon_carry_anim) {
             unwield("remove hooks");
 
 #ifdef ENABLE_THING_DEBUG
             log("detach from carry anim owner %s", owner->to_string().c_str());
 #endif
 
-            owner->set_weapon_carry_anim(nullptr);
+            owner->weapon_set_carry_anim(nullptr);
         }
 
-        if (id == owner->weapon_use_anim_thing_id) {
+        if (id == owner->id_weapon_use_anim) {
 #ifdef ENABLE_THING_DEBUG
             log("detach from use anim owner %s", owner->to_string().c_str());
 #endif
-            owner->set_weapon_use_anim(nullptr);
+            owner->weapon_set_use_anim(nullptr);
 
             //
             // End of the use animation, make the sword visible again.
             //
-            auto carrying = owner->get_weapon_carry_anim();
+            auto carrying = owner->weapon_get_carry_anim();
             if (carrying) {
                 //
                 // But only if the owner is visible. They may have reached the
@@ -406,17 +468,17 @@ void Thing::remove_hooks ()
     //
     // We own things like a sword. i.e. we are a player.
     //
-    if (weapon_carry_anim_thing_id) {
-        auto item = get_weapon_carry_anim();
-        set_weapon_carry_anim(nullptr);
+    if (id_weapon_carry_anim) {
+        auto item = weapon_get_carry_anim();
+        weapon_set_carry_anim(nullptr);
         verify(item);
         item->set_owner(nullptr);
         item->dead("weapon carry anim owner killed");
     }
 
-    if (weapon_use_anim_thing_id) {
-        auto item = get_weapon_use_anim();
-        set_weapon_use_anim(nullptr);
+    if (id_weapon_use_anim) {
+        auto item = weapon_get_use_anim();
+        weapon_set_use_anim(nullptr);
         verify(item);
         item->set_owner(nullptr);
         item->dead("weapon use anim owner killed");
@@ -430,7 +492,7 @@ void Thing::remove_hooks ()
 
         for (auto i : world->all_active_things) {
             Thingp t = i.second;
-            auto o = t->get_owner();
+            auto o = t->owner_get();
             if (o && (o == t)) {
                 t->set_owner(nullptr);
             }
@@ -438,10 +500,10 @@ void Thing::remove_hooks ()
     }
 }
 
-Thingp Thing::get_owner (void)
+Thingp Thing::owner_get (void)
 {
-    if (owner_thing_id) {
-        return (thing_find(world, owner_thing_id));
+    if (id_owner) {
+        return (thing_find(world, id_owner));
     } else {
         return (nullptr);
     }
@@ -453,7 +515,7 @@ void Thing::set_owner (Thingp owner)
         verify(owner);
     }
 
-    auto old_owner = get_owner();
+    auto old_owner = owner_get();
     if (old_owner) {
         if (old_owner == owner) {
             return;
@@ -472,11 +534,11 @@ void Thing::set_owner (Thingp owner)
     }
 
     if (owner) {
-        owner_thing_id = owner->id;
+        id_owner = owner->id;
 
         owner->owned_count++;
     } else {
-        owner_thing_id = 0;
+        id_owner = 0;
 
         if (old_owner) {
             old_owner->owned_count--;
@@ -557,7 +619,7 @@ void Thing::destroy (void)
         world->unset_corridor(old_at.x, old_at.y);
     }
     if (is_dirt()) {
-        world->unset_dirt(old_at.x, old_at.y);
+        world->undir_sett(old_at.x, old_at.y);
     }
     if (is_grass()) {
         world->unset_grass(old_at.x, old_at.y);
@@ -630,21 +692,21 @@ void Thing::move_carried_items (void)
     //
     // Weapons follow also.
     //
-    if (weapon_carry_anim_thing_id) {
-        auto w = thing_find(world, weapon_carry_anim_thing_id);
+    if (id_weapon_carry_anim) {
+        auto w = thing_find(world, id_weapon_carry_anim);
         if (!w) {
-            die("weapon_carry_anim_thing_id set to %d but not found",
-                weapon_carry_anim_thing_id);
+            die("id_weapon_carry_anim set to %d but not found",
+                id_weapon_carry_anim);
         }
         w->move_to(mid_at);
         w->dir = dir;
     }
 
-    if (weapon_use_anim_thing_id) {
-        auto w = thing_find(world, weapon_use_anim_thing_id);
+    if (id_weapon_use_anim) {
+        auto w = thing_find(world, id_weapon_use_anim);
         if (!w) {
-            die("weapon_use_anim_thing_id set to %d but not found",
-                weapon_use_anim_thing_id);
+            die("id_weapon_use_anim set to %d but not found",
+                id_weapon_use_anim);
         }
         w->move_to(mid_at);
         w->dir = dir;
@@ -702,6 +764,6 @@ void Thing::kill (void)
         return;
     }
 
-    remove_hooks();
+    hooks_remove();
     things_to_delete.push_back(id);
 }

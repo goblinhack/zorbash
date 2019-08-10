@@ -13,8 +13,7 @@ void Thing::attach (void)
 
     {
         auto root = &world->all_display_things_at[(int)mid_at.x][(int)mid_at.y][depth];
-        struct ThingDisplaySortKey key = {(int16_t)(int)br.y, id};
-        auto result = root->insert(std::make_pair(key, this));
+        auto result = root->insert(p);
         if (result.second == false) {
             die("failed to insert to world->all_things_at");
         }
@@ -64,23 +63,23 @@ void Thing::detach (void)
         return;
     }
     is_attached = false;
+
 //log("detach from %d %d %d", (int)last_attached.x, (int)last_attached.y,
 //depth);
     {
         auto root = &world->all_display_things_at[(int)last_attached.x]
-                                                         [(int)last_attached.y][depth];
-        struct ThingDisplaySortKey key = {(int16_t)(int)br.y, id};
-        auto result = root->find(key);
+                                                 [(int)last_attached.y][depth];
+        auto result = root->find(id);
         if (result == root->end()) {
             die("failed to remove from world->all_things_at");
         }
 
-        root->erase(key);
+        root->erase(id);
     }
 
     {
         auto root = &world->all_things_at[(int)last_attached.x]
-                                                 [(int)last_attached.y];
+                                         [(int)last_attached.y];
         auto result = root->find(id);
         if (result == root->end()) {
             die("failed to remove from world->all_things_at");

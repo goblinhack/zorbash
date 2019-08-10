@@ -7,7 +7,7 @@
 #include "my_game.h"
 #include "my_tile.h"
 
-int Thing::hit_actual (Thingp orig_hitter,
+int Thing::ai_hit_actual (Thingp orig_hitter,
                        Thingp real_hitter,
                        Thingp hitter,
                        int damage)
@@ -64,7 +64,7 @@ int Thing::hit_actual (Thingp orig_hitter,
 //
 // Returns true on the target being dead.
 //
-int Thing::hit_if_possible (Thingp hitter, int damage)
+int Thing::ai_ai_hit_if_possible (Thingp hitter, int damage)
 {
     Thingp orig_hitter = hitter;
 
@@ -74,7 +74,7 @@ int Thing::hit_if_possible (Thingp hitter, int damage)
     Thingp real_hitter = nullptr;
 
     if (hitter) {
-        real_hitter = hitter->get_owner();
+        real_hitter = hitter->owner_get();
         if (!real_hitter) {
             real_hitter = hitter;
         }
@@ -135,7 +135,7 @@ int Thing::hit_if_possible (Thingp hitter, int damage)
             //
             // Get the player using the weapon as the hitter.
             //
-            hitter = hitter->get_owner();
+            hitter = hitter->owner_get();
             if (!hitter) {
                 return (false);
             }
@@ -145,7 +145,7 @@ int Thing::hit_if_possible (Thingp hitter, int damage)
             //
             // Get the damage from the weapon being used to use.
             //
-            weapon = hitter->get_weapon();
+            weapon = hitter->weapon_get();
             if (!weapon) {
                 return (false);
             }
@@ -154,11 +154,11 @@ int Thing::hit_if_possible (Thingp hitter, int damage)
                 damage = tp_weapon_damage(weapon);
             }
 
-        } else if (hitter->get_owner()) {
+        } else if (hitter->owner_get()) {
             //
             // Get the player firing the weapon as the hitter.
             //
-            hitter = hitter->get_owner();
+            hitter = hitter->owner_get();
             if (!hitter) {
                 return (false);
             }
@@ -168,7 +168,7 @@ int Thing::hit_if_possible (Thingp hitter, int damage)
             //
             // Get the damage from the weapon being used to use.
             //
-            weapon = hitter->get_weapon();
+            weapon = hitter->weapon_get();
             if (!weapon) {
                 return (false);
             }
@@ -188,12 +188,12 @@ int Thing::hit_if_possible (Thingp hitter, int damage)
 
     int hit_and_killed;
 
-    hit_and_killed = hit_actual(orig_hitter, real_hitter, hitter, damage);
+    hit_and_killed = ai_hit_actual(orig_hitter, real_hitter, hitter, damage);
 
     return (hit_and_killed);
 }
 
-int Thing::hit_if_possible (Thingp hitter)
+int Thing::ai_ai_hit_if_possible (Thingp hitter)
 {
-    return (hit_if_possible(hitter, 0));
+    return (ai_ai_hit_if_possible(hitter, 0));
 }

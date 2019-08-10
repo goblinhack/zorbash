@@ -19,29 +19,29 @@ class Tp:
     def set_tile(self, tile=None, **kw):
         zx.tp_set_tile(self, tile, **kw)
 
-    def set_left_tile(self, left_tile=None, **kw):
-        zx.tp_set_left_tile(self, left_tile, **kw)
+    def set_tile_left(self, tile_left=None, **kw):
+        zx.tp_set_tile_left(self, tile_left, **kw)
 
-    def set_right_tile(self, right_tile=None, **kw):
-        zx.tp_set_right_tile(self, right_tile, **kw)
+    def set_tile_right(self, tile_right=None, **kw):
+        zx.tp_set_tile_right(self, tile_right, **kw)
 
-    def set_bot_tile(self, bot_tile=None, **kw):
-        zx.tp_set_bot_tile(self, bot_tile, **kw)
+    def set_tile_bot(self, tile_bot=None, **kw):
+        zx.tp_set_tile_bot(self, tile_bot, **kw)
 
-    def set_top_tile(self, top_tile=None, **kw):
-        zx.tp_set_top_tile(self, top_tile, **kw)
+    def set_tile_top(self, tile_top=None, **kw):
+        zx.tp_set_tile_top(self, tile_top, **kw)
 
-    def set_tl_tile(self, tl_tile=None, **kw):
-        zx.tp_set_tl_tile(self, tl_tile, **kw)
+    def set_tile_tl(self, tile_tl=None, **kw):
+        zx.tp_set_tile_tl(self, tile_tl, **kw)
 
-    def set_tr_tile(self, tr_tile=None, **kw):
-        zx.tp_set_tr_tile(self, tr_tile, **kw)
+    def set_tile_tr(self, tile_tr=None, **kw):
+        zx.tp_set_tile_tr(self, tile_tr, **kw)
 
-    def set_br_tile(self, br_tile=None, **kw):
-        zx.tp_set_br_tile(self, br_tile, **kw)
+    def set_tile_br(self, tile_br=None, **kw):
+        zx.tp_set_tile_br(self, tile_br, **kw)
 
-    def set_bl_tile(self, bl_tile=None, **kw):
-        zx.tp_set_bl_tile(self, bl_tile, **kw)
+    def set_tile_bl(self, tile_bl=None, **kw):
+        zx.tp_set_tile_bl(self, tile_bl, **kw)
 
 
     def set_name(self, value):
@@ -140,11 +140,11 @@ class Tp:
     def set_str_light_color(self, value):
         zx.tp_set_str_light_color(self, value)
 
-    def set_weapon_carry_anim(self, value):
-        zx.tp_set_weapon_carry_anim(self, value)
+    def weapon_set_carry_anim(self, value):
+        zx.tp_weapon_set_carry_anim(self, value)
 
-    def set_weapon_use_anim(self, value):
-        zx.tp_set_weapon_use_anim(self, value)
+    def weapon_set_use_anim(self, value):
+        zx.tp_weapon_set_use_anim(self, value)
 
     def set_is_rrr1(self, value):
         zx.tp_set_is_rrr1(self, value)
@@ -314,8 +314,8 @@ class Tp:
     def set_is_food(self, value):
         zx.tp_set_is_food(self, value)
 
-    def set_hates_water(self, value):
-        zx.tp_set_hates_water(self, value)
+    def set_is_water_hater(self, value):
+        zx.tp_set_is_water_hater(self, value)
 
     def set_hunger_constant(self, value):
         zx.tp_set_hunger_constant(self, value)
@@ -326,8 +326,8 @@ class Tp:
     def set_is_rrr16(self, value):
         zx.tp_set_is_rrr16(self, value)
 
-    def set_nutrition_hd(self, value):
-        zx.tp_set_nutrition_hd(self, value)
+    def set_is_nutrition_hd(self, value):
+        zx.tp_set_is_nutrition_hd(self, value)
 
     def set_bite_damage_hd(self, value):
         zx.tp_set_bite_damage_hd(self, value)
@@ -335,8 +335,8 @@ class Tp:
     def set_collision_check(self, value):
         zx.tp_set_collision_check(self, value)
 
-    def set_attack_on_collision(self, value):
-        zx.tp_set_attack_on_collision(self, value)
+    def set_collision_attack(self, value):
+        zx.tp_set_collision_attack(self, value)
 
     def set_is_water_dweller(self, value):
         zx.tp_set_is_water_dweller(self, value)
@@ -419,8 +419,8 @@ class Tp:
     def set_move_speed_ms(self, value):
         zx.tp_set_move_speed_ms(self, value)
 
-    def set_weapon_use_delay_hundredths(self, value):
-        zx.tp_set_weapon_use_delay_hundredths(self, value)
+    def weapon_set_use_delay_hundredths(self, value):
+        zx.tp_weapon_set_use_delay_hundredths(self, value)
 
     def set_collision_box(self, value):
         zx.tp_set_collision_box(self, value)
@@ -428,8 +428,8 @@ class Tp:
     def set_collision_circle(self, value):
         zx.tp_set_collision_circle(self, value)
 
-    def set_weapon_damage(self, value):
-        zx.tp_set_weapon_damage(self, value)
+    def weapon_set_damage(self, value):
+        zx.tp_weapon_set_damage(self, value)
 
     def set_is_projectile(self, value):
         zx.tp_set_is_projectile(self, value)
@@ -440,8 +440,8 @@ class Tp:
     def set_is_combustable(self, value):
         zx.tp_set_is_combustable(self, value)
 
-    def set_weapon_use_distance(self, value):
-        zx.tp_set_weapon_use_distance(self, value)
+    def weapon_set_use_distance(self, value):
+        zx.tp_weapon_set_use_distance(self, value)
 
     def set_gfx_is_weapon_carry_anim(self, value):
         zx.tp_set_gfx_is_weapon_carry_anim(self, value)

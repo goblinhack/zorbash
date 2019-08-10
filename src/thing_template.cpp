@@ -70,7 +70,7 @@ Tpp tp_load (int id, std::string name)
 
 void tp_update (Tpp t)
 {_
-    t->nutrition = Dice(t->nutrition_hd);
+    t->is_nutrition = Dice(t->is_nutrition_hd);
     t->bite_damage = Dice(t->bite_damage_hd);
 }
 

@@ -4,14 +4,14 @@ import tp
 
 def tp_init(name, 
             tiles=[],
-            left_tiles=[],
-            right_tiles=[],
-            top_tiles=[],
-            bot_tiles=[],
-            tl_tiles=[],
-            tr_tiles=[],
-            bl_tiles=[],
-            br_tiles=[]):
+            tile_lefts=[],
+            tile_rights=[],
+            tile_tops=[],
+            tile_bots=[],
+            tile_tls=[],
+            tile_trs=[],
+            tile_bls=[],
+            tile_brs=[]):
     
     x = tp.Tp(name)
 
@@ -25,53 +25,53 @@ def tp_init(name,
     else:
         x.set_tile(tile=name)
 
-    if left_tiles is not None:
-        for t in left_tiles:
-            x.set_left_tile(t)
+    if tile_lefts is not None:
+        for t in tile_lefts:
+            x.set_tile_left(t)
     else:
-        x.set_left_tile(left_tile=name)
+        x.set_tile_left(tile_left=name)
 
-    if right_tiles is not None:
-        for t in right_tiles:
-            x.set_right_tile(t)
+    if tile_rights is not None:
+        for t in tile_rights:
+            x.set_tile_right(t)
     else:
-        x.set_right_tile(right_tile=name)
+        x.set_tile_right(tile_right=name)
 
-    if top_tiles is not None:
-        for t in top_tiles:
-            x.set_top_tile(t)
+    if tile_tops is not None:
+        for t in tile_tops:
+            x.set_tile_top(t)
     else:
-        x.set_top_tile(top_tile=name)
+        x.set_tile_top(tile_top=name)
 
-    if bot_tiles is not None:
-        for t in bot_tiles:
-            x.set_bot_tile(t)
+    if tile_bots is not None:
+        for t in tile_bots:
+            x.set_tile_bot(t)
     else:
-        x.set_bot_tile(bot_tile=name)
+        x.set_tile_bot(tile_bot=name)
 
-    if tl_tiles is not None:
-        for t in tl_tiles:
-            x.set_tl_tile(t)
+    if tile_tls is not None:
+        for t in tile_tls:
+            x.set_tile_tl(t)
     else:
-        x.set_tl_tile(tl_tile=name)
+        x.set_tile_tl(tile_tl=name)
 
-    if tr_tiles is not None:
-        for t in tr_tiles:
-            x.set_tr_tile(t)
+    if tile_trs is not None:
+        for t in tile_trs:
+            x.set_tile_tr(t)
     else:
-        x.set_tr_tile(tr_tile=name)
+        x.set_tile_tr(tile_tr=name)
 
-    if bl_tiles is not None:
-        for t in bl_tiles:
-            x.set_bl_tile(t)
+    if tile_bls is not None:
+        for t in tile_bls:
+            x.set_tile_bl(t)
     else:
-        x.set_bl_tile(bl_tile=name)
+        x.set_tile_bl(tile_bl=name)
 
-    if br_tiles is not None:
-        for t in br_tiles:
-            x.set_br_tile(t)
+    if tile_brs is not None:
+        for t in tile_brs:
+            x.set_tile_br(t)
     else:
-        x.set_br_tile(br_tile=name)
+        x.set_tile_br(tile_br=name)
 
     x.update()
     
@@ -100,49 +100,49 @@ def init():
                         "grass1.20",
                         "grass1.21",
                 ],
-            left_tiles=[
+            tile_lefts=[
                         "grass1.left.1",
                         "grass2.left.1",
                         "grass3.left.1",
                         "grass4.left.1",
                 ],
-            right_tiles=[
+            tile_rights=[
                         "grass1.right.1",
                         "grass2.right.1",
                         "grass3.right.1",
                         "grass4.right.1",
                 ],
-            top_tiles=[
+            tile_tops=[
                         "grass1.top.1",
                         "grass2.top.1",
                         "grass3.top.1",
                         "grass4.top.1",
                 ],
-            bot_tiles=[
+            tile_bots=[
                         "grass1.bot.1",
                         "grass2.bot.1",
                         "grass3.bot.1",
                         "grass4.bot.1",
                 ],
-            tl_tiles=[ 
+            tile_tls=[ 
                         "grass1.tl.1",
                         "grass2.tl.1",
                         "grass3.tl.1",
                         "grass4.tl.1",
                 ],
-            tr_tiles=[
+            tile_trs=[
                         "grass1.tr.1",
                         "grass2.tr.1",
                         "grass3.tr.1",
                         "grass4.tr.1",
                 ],
-            br_tiles=[
+            tile_brs=[
                         "grass1.br.1",
                         "grass2.br.1",
                         "grass3.br.1",
                         "grass4.br.1",
                 ],
-            bl_tiles=[
+            tile_bls=[
                         "grass1.bl.1",
                         "grass2.bl.1",
                         "grass3.bl.1",
@@ -173,49 +173,49 @@ def init():
                         "grass2.20",
                         "grass2.21",
                 ],
-            left_tiles=[
+            tile_lefts=[
                         "grass1.left.1",
                         "grass2.left.1",
                         "grass3.left.1",
                         "grass4.left.1",
                 ],
-            right_tiles=[
+            tile_rights=[
                         "grass1.right.1",
                         "grass2.right.1",
                         "grass3.right.1",
                         "grass4.right.1",
                 ],
-            top_tiles=[
+            tile_tops=[
                         "grass1.top.1",
                         "grass2.top.1",
                         "grass3.top.1",
                         "grass4.top.1",
                 ],
-            bot_tiles=[
+            tile_bots=[
                         "grass1.bot.1",
                         "grass2.bot.1",
                         "grass3.bot.1",
                         "grass4.bot.1",
                 ],
-            tl_tiles=[ 
+            tile_tls=[ 
                         "grass1.tl.1",
                         "grass2.tl.1",
                         "grass3.tl.1",
                         "grass4.tl.1",
                 ],
-            tr_tiles=[
+            tile_trs=[
                         "grass1.tr.1",
                         "grass2.tr.1",
                         "grass3.tr.1",
                         "grass4.tr.1",
                 ],
-            br_tiles=[
+            tile_brs=[
                         "grass1.br.1",
                         "grass2.br.1",
                         "grass3.br.1",
                         "grass4.br.1",
                 ],
-            bl_tiles=[
+            tile_bls=[
                         "grass1.bl.1",
                         "grass2.bl.1",
                         "grass3.bl.1",
@@ -247,49 +247,49 @@ def init():
                         "grass3.21",
                         "grass3.22",
                 ],
-            left_tiles=[
+            tile_lefts=[
                         "grass1.left.1",
                         "grass2.left.1",
                         "grass3.left.1",
                         "grass4.left.1",
                 ],
-            right_tiles=[
+            tile_rights=[
                         "grass1.right.1",
                         "grass2.right.1",
                         "grass3.right.1",
                         "grass4.right.1",
                 ],
-            top_tiles=[
+            tile_tops=[
                         "grass1.top.1",
                         "grass2.top.1",
                         "grass3.top.1",
                         "grass4.top.1",
                 ],
-            bot_tiles=[
+            tile_bots=[
                         "grass1.bot.1",
                         "grass2.bot.1",
                         "grass3.bot.1",
                         "grass4.bot.1",
                 ],
-            tl_tiles=[ 
+            tile_tls=[ 
                         "grass1.tl.1",
                         "grass2.tl.1",
                         "grass3.tl.1",
                         "grass4.tl.1",
                 ],
-            tr_tiles=[
+            tile_trs=[
                         "grass1.tr.1",
                         "grass2.tr.1",
                         "grass3.tr.1",
                         "grass4.tr.1",
                 ],
-            br_tiles=[
+            tile_brs=[
                         "grass1.br.1",
                         "grass2.br.1",
                         "grass3.br.1",
                         "grass4.br.1",
                 ],
-            bl_tiles=[
+            tile_bls=[
                         "grass1.bl.1",
                         "grass2.bl.1",
                         "grass3.bl.1",

@@ -472,28 +472,28 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->tiles;
         break;
     case THING_DIR_DOWN:
-        tiles = &tp->bot_tiles;
+        tiles = &tp->tile_bots;
         break;
     case THING_DIR_UP:
-        tiles = &tp->top_tiles;
+        tiles = &tp->tile_tops;
         break;
     case THING_DIR_LEFT:
-        tiles = &tp->left_tiles;
+        tiles = &tp->tile_lefts;
         break;
     case THING_DIR_RIGHT:
-        tiles = &tp->right_tiles;
+        tiles = &tp->tile_rights;
         break;
     case THING_DIR_TL:
-        tiles = &tp->tl_tiles;
+        tiles = &tp->tile_tls;
         break;
     case THING_DIR_BL:
-        tiles = &tp->bl_tiles;
+        tiles = &tp->tile_bls;
         break;
     case THING_DIR_TR:
-        tiles = &tp->tr_tiles;
+        tiles = &tp->tile_trs;
         break;
     case THING_DIR_BR:
-        tiles = &tp->br_tiles;
+        tiles = &tp->tile_brs;
         break;
     }
 
@@ -507,16 +507,16 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->tiles;
     }
     if (is_join_left) {
-        tiles = &tp->left_tiles;
+        tiles = &tp->tile_lefts;
     }
     if (is_join_right) {
-        tiles = &tp->right_tiles;
+        tiles = &tp->tile_rights;
     }
     if (is_join_top) {
-        tiles = &tp->top_tiles;
+        tiles = &tp->tile_tops;
     }
     if (is_join_bot) {
-        tiles = &tp->bot_tiles;
+        tiles = &tp->tile_bots;
     }
     if (is_join_l90) {
         tiles = &tp->l90_tiles;
@@ -659,35 +659,35 @@ PyObject *tp_set_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE));
 }
-PyObject *tp_set_top_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tile_top (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP));
 }
-PyObject *tp_set_bot_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tile_bot (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN));
 }
-PyObject *tp_set_left_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tile_left (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT));
 }
-PyObject *tp_set_right_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tile_right (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT));
 }
-PyObject *tp_set_tl_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tile_tl (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL));
 }
-PyObject *tp_set_tr_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tile_tr (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR));
 }
-PyObject *tp_set_bl_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tile_bl (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL));
 }
-PyObject *tp_set_br_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tile_br (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR));
 }
@@ -783,14 +783,14 @@ TP_BODY_SET_INT(is_gravel)
 TP_BODY_SET_INT(is_obstacle)
 TP_BODY_SET_INT(is_soil)
 TP_BODY_SET_INT(is_attackable)
-TP_BODY_SET_INT(hates_water)
+TP_BODY_SET_INT(is_water_hater)
 TP_BODY_SET_INT(hunger_constant)
 TP_BODY_SET_INT(is_undead)
 TP_BODY_SET_INT(is_rock)
-TP_BODY_SET_STRING(nutrition_hd)
+TP_BODY_SET_STRING(is_nutrition_hd)
 TP_BODY_SET_STRING(bite_damage_hd)
 TP_BODY_SET_INT(collision_check)
-TP_BODY_SET_INT(attack_on_collision)
+TP_BODY_SET_INT(collision_attack)
 TP_BODY_SET_INT(is_water_dweller)
 TP_BODY_SET_INT(collision_hit_priority)
 TP_BODY_SET_DOUBLE(collision_radius)

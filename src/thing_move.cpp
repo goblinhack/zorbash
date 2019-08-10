@@ -16,12 +16,12 @@ bool Thing::move (fpoint future_pos)
     verify(this);
     if (tp_gfx_can_hflip(tp)) {
         if (future_pos.x > mid_at.x) {
-            if (is_facing_left && !flip_start_ms) {
-                flip_start_ms = time_get_time_ms_cached();
+            if (is_facing_left && !timestamp_flip_start) {
+                timestamp_flip_start = time_get_time_ms_cached();
             }
         } else if (future_pos.x < mid_at.x) {
-            if (!is_facing_left && !flip_start_ms) {
-                flip_start_ms = time_get_time_ms_cached();
+            if (!is_facing_left && !timestamp_flip_start) {
+                timestamp_flip_start = time_get_time_ms_cached();
             }
         }
     }
@@ -29,11 +29,11 @@ bool Thing::move (fpoint future_pos)
 }
 
 bool Thing::move (fpoint future_pos,
-                  const uint8_t up,
-                  const uint8_t down,
-                  const uint8_t left,
-                  const uint8_t right,
-                  const uint8_t attack)
+                  uint8_t up,
+                  uint8_t down,
+                  uint8_t left,
+                  uint8_t right,
+                  uint8_t attack)
 {
     if (is_dead) {
         return (false);
@@ -67,13 +67,13 @@ bool Thing::update_coordinates (void)
 
     get_bounce();
 
-    const double tile_gl_width = game.config.tile_gl_width;
-    const double tile_gl_height = game.config.tile_gl_height;
+    const double tile_gl_width = game->config.tile_gl_width;
+    const double tile_gl_height = game->config.tile_gl_height;
 
     double x;
     double y;
 
-    if (time_get_time_ms_cached() >= end_move_ms) {
+    if (time_get_time_ms_cached() >= timestamp_move_end) {
         x = mid_at.x;
         y = mid_at.y;
 
@@ -84,11 +84,11 @@ bool Thing::update_coordinates (void)
             auto now = time_get_time_ms_cached();
             auto delay = tp_ai_delay_after_moving_ms(tp);
             auto jitter = random_range(0, delay / 10);
-            next_ai_ms = now + delay + jitter;
+            timestamp_ai_next = now + delay + jitter;
         }
     } else {
-        double t = end_move_ms - begin_move_ms;
-        double dt = time_get_time_ms_cached() - begin_move_ms;
+        double t = timestamp_move_end - timestamp_move_begin;
+        double dt = time_get_time_ms_cached() - timestamp_move_begin;
         double step = dt / t;
         double dx = mid_at.x - last_mid_at.x;
         double dy = mid_at.y - last_mid_at.y;
@@ -110,9 +110,9 @@ bool Thing::update_coordinates (void)
     br.x = (tx+1) * tile_gl_width;
     br.y = (ty+1) * tile_gl_height;
 
-    auto tile = tile_index_to_tile(current_tile);
+    auto tile = tile_index_to_tile(tile_curr);
     if (!tile) {
-        die("has no tile, index %d", current_tile);
+        die("has no tile, index %d", tile_curr);
     }
 
     //
@@ -153,13 +153,13 @@ bool Thing::update_coordinates (void)
     }
 
     if (unlikely(tp_gfx_can_hflip(tp))) {
-        if (flip_start_ms) {
-            auto diff = time_get_time_ms_cached() - flip_start_ms;
+        if (timestamp_flip_start) {
+            auto diff = time_get_time_ms_cached() - timestamp_flip_start;
             uint32_t flip_time = 100;
             uint32_t flip_steps = 100;
 
             if (diff > flip_time) {
-                flip_start_ms = 0;
+                timestamp_flip_start = 0;
                 is_facing_left = !is_facing_left;
                 if (is_dir_left() ||
                     is_dir_tl()   ||
@@ -306,8 +306,8 @@ void Thing::update_pos (fpoint to)
             world->set_corridor(new_at.x, new_at.y);
         }
         if (is_dirt()) {
-            world->unset_dirt(old_at.x, old_at.y);
-            world->set_dirt(new_at.x, new_at.y);
+            world->undir_sett(old_at.x, old_at.y);
+            world->dir_sett(new_at.x, new_at.y);
         }
         if (is_grass()) {
             world->unset_grass(old_at.x, old_at.y);
@@ -348,7 +348,7 @@ void Thing::update_pos (fpoint to)
     }
 
     int speed;
-    auto owner = get_owner();
+    auto owner = owner_get();
     if (owner) {
         speed = tp_move_speed_ms(owner->tp);
     } else{
@@ -360,8 +360,8 @@ void Thing::update_pos (fpoint to)
     // track of when we moved.
     //
     mid_at = to;
-    begin_move_ms = time_get_time_ms_cached();
-    end_move_ms = begin_move_ms + speed;
+    timestamp_move_begin = time_get_time_ms_cached();
+    timestamp_move_end = timestamp_move_begin + speed;
 
     move_carried_items();
 }
@@ -373,29 +373,29 @@ void Thing::move_delta (fpoint delta)
     // idle animation.
     //
     if (is_dir_none()) {
-        next_frame_ms = time_get_time_ms_cached();
+        timestamp_next_frame = time_get_time_ms_cached();
     }
 
     if (delta.x > 0) {
-        set_dir_left();
+        dir_set_left();
         is_moving = true;
         has_ever_moved = true;
     }
 
     if (delta.x < 0) {
-        set_dir_right();
+        dir_set_right();
         is_moving = true;
         has_ever_moved = true;
     }
 
     if (delta.y > 0) {
-        set_dir_up();
+        dir_set_up();
         is_moving = true;
         has_ever_moved = true;
     }
 
     if (delta.y < 0) {
-        set_dir_down();
+        dir_set_down();
         is_moving = true;
         has_ever_moved = true;
     }

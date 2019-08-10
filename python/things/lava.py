@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def lava_init(name, tiles=[], left_tiles=[]):
+def lava_init(name, tiles=[], tile_lefts=[]):
     
     x = tp.Tp(name)
 
