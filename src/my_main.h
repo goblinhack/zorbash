@@ -8,7 +8,7 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#undef DEBUG_CRASH
+#define DEBUG_CRASH
 
 #ifdef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors
@@ -39,7 +39,7 @@
 #define CHUNK_HEIGHT                ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 #define MAP_WIDTH                   (CHUNK_WIDTH * 32)
 #define MAP_HEIGHT                  (CHUNK_HEIGHT * 32)
-#define MAX_THINGS                  (MAP_WIDTH * MAP_HEIGHT * 4)
+#define MAX_THINGS                  (MAP_WIDTH * MAP_HEIGHT * 2)
 
 //
 // Light sources

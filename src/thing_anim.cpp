@@ -75,7 +75,7 @@ void Thing::animate (void)
                 }
             }
         } else {
-            verify(tile.get());
+            verify(tile);
             tile = tile_next(tiles, tile);
         }
     }
@@ -96,7 +96,7 @@ void Thing::animate (void)
             if (!tile) {
                 tile = tile_first(tiles);
             }
-            verify(tile.get());
+            verify(tile);
 
             if (!t->is_dead) {
                 if (tile_is_dead(tile)) {

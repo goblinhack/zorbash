@@ -96,7 +96,7 @@ public:
 };
 
 typedef my_asize<int> size;
-typedef my_asize<double> fsize;
+typedef my_asize<float> fsize;
 
 template<class T> class my_asize3d
 {

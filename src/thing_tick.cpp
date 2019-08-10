@@ -75,7 +75,7 @@ void Thing::tick (void)
     }
 }
 
-void things_tick (Worldp world)
+void things_tick (void)
 {_
     //
     // Active things are generally things that move or have a life span

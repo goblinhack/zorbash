@@ -46,8 +46,15 @@ typedef enum {
 
 #define WID_MODE_FIRST WID_MODE_NORMAL
 
+Texp wid_get_tex(widp, fsize *size);
+Tilep wid_get_tile(widp);
+Tilep wid_get_tile2(widp);
+Tpp wid_get_thing_template(widp);
 color wid_get_color(widp, wid_color which);
 color wid_get_mode_color(widp, wid_color which);
+extern int wid_mouse_visible;
+fsize wid_get_tex_br(widp);
+fsize wid_get_tex_tl(widp);
 int32_t wid_get_br_x(widp);
 int32_t wid_get_br_y(widp);
 int32_t wid_get_cx(widp);
@@ -56,19 +63,12 @@ int32_t wid_get_height(widp);
 int32_t wid_get_tl_x(widp);
 int32_t wid_get_tl_y(widp);
 int32_t wid_get_width(widp);
-extern int wid_mouse_visible;
-fsize wid_get_tex_br(widp);
-fsize wid_get_tex_tl(widp);
+std::string to_string(widp);
 std::string wid_get_name(widp);
+std::string wid_name(widp);
 std::wstring wid_get_text(widp);
 std::wstring wid_get_text_with_cursor(widp);
 std::wstring wid_get_tooltip(widp);
-std::string to_string(widp);
-std::string wid_name(widp);
-Texp wid_get_tex(widp, fsize *size);
-Tilep wid_get_tile(widp);
-Tilep wid_get_tile2(widp);
-Tpp wid_get_thing_template(widp);
 typedef uint8_t(*on_joy_button_t)(widp, int32_t x, int32_t y);
 typedef uint8_t(*on_key_down_t)(widp, const struct SDL_KEYSYM *);
 typedef uint8_t(*on_key_up_t)(widp, const struct SDL_KEYSYM *);
@@ -117,7 +117,8 @@ void wid_destroy(widp *);
 void wid_destroy_in(widp w, uint32_t ms);
 void wid_destroy_nodelay(widp *);
 void wid_destroy_ptr_in(widp *w, uint32_t ms);
-void wid_display_all(Worldp);
+void wid_display_all(void);
+void wid_dump(widp w, int depth);
 void wid_fake_joy_button(int32_t x, int32_t y);
 void wid_fini(void);
 void wid_focus_lock(widp);
@@ -179,9 +180,6 @@ void wid_set_cursor(widp, uint32_t val);
 void wid_set_debug(widp, uint8_t);
 void wid_set_do_not_lower(widp, uint8_t val);
 void wid_set_do_not_raise(widp, uint8_t val);
-void wid_set_shape_square(widp);
-void wid_set_shape_none(widp);
-void wid_set_shape_box(widp);
 void wid_set_focus(widp);
 void wid_set_focusable(widp, uint8_t val);
 void wid_set_ignore_events(widp, uint8_t);
@@ -211,6 +209,9 @@ void wid_set_pos_no_relative_offset(widp w, point tl, point br);
 void wid_set_pos_pct(widp, fpoint tl, fpoint br);
 void wid_set_prev(widp w, widp);
 void wid_set_received_input(widp, uint8_t val);
+void wid_set_shape_box(widp);
+void wid_set_shape_none(widp);
+void wid_set_shape_square(widp);
 void wid_set_show_cursor(widp, uint8_t val);
 void wid_set_tex(widp, std::string file, std::string name);
 void wid_set_tex_br(widp, fsize val);
@@ -257,7 +258,6 @@ widp wid_new_square_window(std::string name);
 widp wid_new_tooltip(std::string tooltip);
 widp wid_new_vert_scroll_bar(widp parent, std::string name, widp scrollbar_owner);
 widp wid_new_window(std::string name);
-void wid_dump(widp w, int depth);
 
 //
 // History for all text widgets.

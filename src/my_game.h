@@ -112,12 +112,6 @@ public:
     std::unordered_map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     //
-    // The creation of the map is staggered such that we create chunks
-    // only as needed.
-    //
-    uint8_t                    chunk_inited[CHUNK_WIDTH][CHUNK_HEIGHT] = {};
-
-    //
     // The player!
     //
     Thingp                     player = {};
@@ -896,8 +890,6 @@ public:
     // A huge array for storing thing pointers. The thing ID is the index
     // into this array
     //
-    std::array<std::unique_ptr<Thing>, 
-               MAP_WIDTH * MAP_HEIGHT * MAP_DEPTH> thing_ids;
     std::array<
       std::array<
         std::array<uint32_t, MAP_DEPTH>, MAP_HEIGHT>, MAP_WIDTH> 
@@ -980,15 +972,15 @@ public:
 };
 
 extern class Game *game;
+extern class World *world;
 
-extern uint8_t game_mouse_motion(int32_t x, int32_t y, 
-                                 int32_t wheelx, int32_t wheely);
-extern void game_mouse_over(int32_t x, int32_t y,
-                            int32_t wheelx, int32_t wheely);
-extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
-extern uint8_t game_key_down(const struct SDL_KEYSYM *key);
-extern void game_display(Worldp);
-extern void game_init(void);
-extern void game_fini(void);
+uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
+void game_mouse_over(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
+uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
+uint8_t game_key_down(const struct SDL_KEYSYM *key);
+void game_display(void);
+void game_init(void);
+void game_fini(void);
+void player_tick(void);
 
 #endif

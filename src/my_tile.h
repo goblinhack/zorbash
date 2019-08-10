@@ -25,8 +25,8 @@ extern std::vector<class Tile* > all_tiles_array;
 
 class Tile {
 public:
-    Tile (void) { }
-    ~Tile (void) { }
+    Tile (void) { newptr(this, "Tile"); }
+    ~Tile (void) { oldptr(this); }
     Tile (const class Tile *tile);
 
     std::string name;

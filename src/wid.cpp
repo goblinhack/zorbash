@@ -832,7 +832,7 @@ static uint8_t wid_m_over_b (widp w, uint32_t x, uint32_t y,
 }
 
 /*
- * World an SDL key event to the char the user typed
+ * Map an SDL key event to the char the user typed
  */
 static char wid_event_to_char (const struct SDL_KEYSYM *evt)
 {_
@@ -1480,8 +1480,8 @@ void wid_set_tex (widp w, std::string tex, std::string name)
     w->tex = t;
 
     fsize sz = {
-        (double) tex_get_width(t),
-        (double) tex_get_height(t)
+        (float) tex_get_width(t),
+        (float) tex_get_height(t)
     };
 
     wid_set_tex_sz(w, sz);
@@ -6393,7 +6393,7 @@ void wid_mouse_move (widp w)
 /*
  * Display all widgets
  */
-void wid_display_all (Worldp world)
+void wid_display_all (void)
 {_
     wid_tick_all();
     wid_move_all();
@@ -6404,7 +6404,7 @@ void wid_display_all (Worldp world)
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
-    game_display(world);
+    game_display();
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
