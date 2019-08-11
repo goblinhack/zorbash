@@ -79,10 +79,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     id = ++next_thing_id;
 
     tp = 0;
-    gold = 0;
-    health = 0;
-    health_max = 0;
-    owned_count = 0;
     tile_bl = 0;
     tile_bot = 0;
     tile_br = 0;
@@ -193,8 +189,11 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     is_waiting_for_ai     = tp_is_active(tp);
     is_submerged          = tp_is_active(tp);
 
-    health         = tp_hunger_initial_health_at(tp);
-    health_max     = health;
+    auto h = tp_hunger_initial_health_at(tp);
+    if (h) {
+        set_health(h);
+        set_health_max(h);
+    }
 
     timestamp_born = time_get_time_ms_cached();
 
@@ -592,8 +591,8 @@ void Thing::hooks_remove ()
     //
     // Some things have lots of things they own
     //
-    if (owned_count) {
-        log("remove remaining %u owned things", owned_count);
+    if (get_owned_count()) {
+        log("remove remaining %u owned things", get_owned_count());
 
         for (auto i : world->all_active_things) {
             Thingp t = i.second;
@@ -640,13 +639,12 @@ void Thing::set_owner (Thingp owner)
 
     if (owner) {
         id_owner = owner->id;
-
-        owner->owned_count++;
+        owner->incr_owned_count();
     } else {
         id_owner = 0;
 
         if (old_owner) {
-            old_owner->owned_count--;
+            old_owner->decr_owned_count();
         }
     }
 }
@@ -937,7 +935,7 @@ void Thing::set_bounce_count (int v)
     monst->bounce_count = v;
 }
 
-int Thing::get_rot (void)
+float Thing::get_rot (void)
 {
     if (monst) { 
         return (monst->rot);
@@ -946,13 +944,13 @@ int Thing::get_rot (void)
     }
 }
 
-void Thing::set_rot (int v)
+void Thing::set_rot (float v)
 {
     new_monst();
     monst->rot = v;
 }
 
-int Thing::get_submerged_offset (void)
+float Thing::get_submerged_offset (void)
 {
     if (monst) { 
         return (monst->submerged_offset);
@@ -961,8 +959,164 @@ int Thing::get_submerged_offset (void)
     }
 }
 
-void Thing::set_submerged_offset (int v)
+void Thing::set_submerged_offset (float v)
 {
     new_monst();
     monst->submerged_offset = v;
+}
+
+int Thing::get_gold (void)
+{
+    if (monst) { 
+        return (monst->gold);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_gold (int v)
+{
+    new_monst();
+    return (monst->gold = v);
+}
+
+int Thing::decr_gold (int v)
+{
+    new_monst();
+    return (monst->gold -= v);
+}
+
+int Thing::incr_gold (int v)
+{
+    new_monst();
+    return (monst->gold += v);
+}
+
+int Thing::decr_gold (void)
+{
+    new_monst();
+    return (monst->gold--);
+}
+
+int Thing::incr_gold (void)
+{
+    new_monst();
+    return (monst->gold++);
+}
+
+int Thing::get_health (void)
+{
+    if (monst) { 
+        return (monst->health);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_health (int v)
+{
+    new_monst();
+    return (monst->health = v);
+}
+
+int Thing::decr_health (int v)
+{
+    new_monst();
+    return (monst->health -= v);
+}
+
+int Thing::incr_health (int v)
+{
+    new_monst();
+    return (monst->health += v);
+}
+
+int Thing::decr_health (void)
+{
+    new_monst();
+    return (monst->health--);
+}
+
+int Thing::incr_health (void)
+{
+    new_monst();
+    return (monst->health++);
+}
+
+int Thing::get_health_max (void)
+{
+    if (monst) { 
+        return (monst->health_max);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_health_max (int v)
+{
+    new_monst();
+    return (monst->health_max = v);
+}
+
+int Thing::decr_health_max (int v)
+{
+    new_monst();
+    return (monst->health_max -= v);
+}
+
+int Thing::incr_health_max (int v)
+{
+    new_monst();
+    return (monst->health_max += v);
+}
+
+int Thing::decr_health_max (void)
+{
+    new_monst();
+    return (monst->health_max--);
+}
+
+int Thing::incr_health_max (void)
+{
+    new_monst();
+    return (monst->health_max++);
+}
+
+int Thing::get_owned_count (void)
+{
+    if (monst) { 
+        return (monst->owned_count);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_owned_count (int v)
+{
+    new_monst();
+    return (monst->owned_count = v);
+}
+
+int Thing::decr_owned_count (int v)
+{
+    new_monst();
+    return (monst->owned_count -= v);
+}
+
+int Thing::incr_owned_count (int v)
+{
+    new_monst();
+    return (monst->owned_count += v);
+}
+
+int Thing::decr_owned_count (void)
+{
+    new_monst();
+    return (monst->owned_count--);
+}
+
+int Thing::incr_owned_count (void)
+{
+    new_monst();
+    return (monst->owned_count++);
 }

@@ -36,26 +36,26 @@ int Thing::ai_hit_actual (Thingp orig_hitter,
     //
     // Keep hitting until all damage is used up or the thing is dead.
     //
-    log("is hit! health %d, damage %d", health, damage);
+    log("is hit! health %d, damage %d", get_health(), damage);
 
     if (this == orig_hitter) {
         die("hitting thyself");
         return (false);
     }
 
-    health -= damage;
-    if (health <= 0) {
-        health = 0;
+    auto h = decr_health(damage);
+    if (h <= 0) {
+        h = set_health(0);
 
         //
         // Record who dun it.
         //
         log("is hit terminally, health %d, damage %d, now dead",
-            health, damage);
+            h, damage);
         dead(orig_hitter, "%s", real_hitter->to_string().c_str());
     } else {
         log("is hit by (%s) for %u, health now %d",
-            orig_hitter->to_string().c_str(), damage, health);
+            orig_hitter->to_string().c_str(), damage, h);
     }
 
     return (true);

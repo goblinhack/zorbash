@@ -9,8 +9,9 @@
 
 void Thing::health_boost (int v)
 {
-    auto old_health = health;
-    health += v;
-    health = std::min(health, health_max);
-    log("health boost %d, %d -> %d", v, old_health, health);
+    auto old_health = get_health();
+    auto new_health = old_health + v;
+    new_health = std::min(new_health, get_health_max());
+    set_health(new_health);
+    log("health boost %d, %d -> %d", v, old_health, new_health);
 }

@@ -80,13 +80,15 @@ public:
     Lightp       light = {};                 // Have a light source?
     Tpp          tp = {};                    // Common settings
     Worldp       world = {};
-
     float        bounce_height = {};         // Percentage of tile height.
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
     int          bounce_count = {};
-
     float        rot = {};                   // GL co-orids
     float        submerged_offset = {};      // GL co-orids
+    int          gold = {}; 
+    int          health = {}; 
+    int          health_max = {}; 
+    int          owned_count = {};           // How many things this thing owns.
 };
 
 class Thing
@@ -106,10 +108,6 @@ public:
     fpoint       mid_at;                     // Grid coordinates.
     fpoint       old_br;
     fpoint       tl;                         // On screen coordinates
-    int16_t      gold;
-    int16_t      health;
-    int16_t      health_max;
-    uint8_t      owned_count;                // How many things this thing owns.
     uint16_t     tile_bl;
     uint16_t     tile_bot;
     uint16_t     tile_br;
@@ -185,11 +183,39 @@ public:
     void set_bounce_count(int);
     int get_bounce_count(void);
 
-    void set_rot(int);
-    int get_rot(void);
+    void set_rot(float);
+    float get_rot(void);
 
-    void set_submerged_offset(int);
-    int get_submerged_offset(void);
+    void set_submerged_offset(float);
+    float get_submerged_offset(void);
+
+    int set_gold(int);
+    int get_gold(void);
+    int decr_gold(int);
+    int incr_gold(int);
+    int decr_gold(void);
+    int incr_gold(void);
+
+    int set_health(int);
+    int get_health(void);
+    int decr_health(int);
+    int incr_health(int);
+    int decr_health(void);
+    int incr_health(void);
+
+    int set_health_max(int);
+    int get_health_max(void);
+    int decr_health_max(int);
+    int incr_health_max(int);
+    int decr_health_max(void);
+    int incr_health_max(void);
+
+    int set_owned_count(int);
+    int get_owned_count(void);
+    int decr_owned_count(int);
+    int incr_owned_count(int);
+    int decr_owned_count(void);
+    int incr_owned_count(void);
 
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);
