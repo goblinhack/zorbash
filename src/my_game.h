@@ -9,7 +9,6 @@
 #include "my_sdl.h"
 #include "my_dmap.h"
 #include "my_terrain.h"
-#include <list>
 #include <array>
 
 class Thing;
@@ -182,701 +181,94 @@ Thingp                     player = {};
 #endif
     }
 
-
-    bool is_anything_at (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (!all_things_at[p.x][p.y].empty());
-    }
-
-    bool is_anything_at (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (all_things_at[x][y].size());
-    }
-
-    bool is_lava (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_lava[p.x][p.y]);
-    }
-
-    bool is_lava (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_lava[x][y]);
-    }
-
-    void set_lava (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_lava[x][y] = true;
-    }
-
-    void unset_lava (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_lava[x][y] = false;
-    }
-
-    bool is_blood (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_blood[p.x][p.y]);
-    }
-
-    bool is_blood (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_blood[x][y]);
-    }
-
-    void set_blood (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_blood[x][y] = true;
-    }
-
-    void unset_blood (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_blood[x][y] = false;
-    }
-
-    bool is_water (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_water[p.x][p.y]);
-    }
-
-    bool is_water (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_water[x][y]);
-    }
-
-    void set_water (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_water[x][y] = true;
-    }
-
-    void unset_water (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_water[x][y] = false;
-    }
-
-    bool is_deep_water (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_deep_water[p.x][p.y]);
-    }
-
-    bool is_deep_water (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_deep_water[x][y]);
-    }
-
-    void set_deep_water (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_deep_water[x][y] = true;
-    }
-
-    void unset_deep_water (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_deep_water[x][y] = false;
-    }
-
-    bool is_wall (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_wall[p.x][p.y]);
-    }
-
-    bool is_wall (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_wall[x][y]);
-    }
-
-    void set_wall (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_wall[x][y] = true;
-    }
-
-    void unset_wall (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_wall[x][y] = false;
-    }
-
-    bool is_solid (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_solid[p.x][p.y]);
-    }
-
-    bool is_solid (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_solid[x][y]);
-    }
-
-    void set_solid (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_solid[x][y] = true;
-    }
-
-    void unset_solid (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_solid[x][y] = false;
-    }
-
-    bool is_light (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_light[p.x][p.y]);
-    }
-
-    bool is_light (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_light[x][y]);
-    }
-
-    void set_light (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_light[x][y] = true;
-    }
-
-    void unset_light (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_light[x][y] = false;
-    }
-
-    bool is_corridor (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_corridor[p.x][p.y]);
-    }
-
-    bool is_corridor (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_corridor[x][y]);
-    }
-
-    void set_corridor (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_corridor[x][y] = true;
-    }
-
-    void unset_corridor (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_corridor[x][y] = false;
-    }
-
-    bool is_dirt (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_dirt[p.x][p.y]);
-    }
-
-    bool is_dirt (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_dirt[x][y]);
-    }
-
-    void dir_sett (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_dirt[x][y] = true;
-    }
-
-    void undir_sett (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_dirt[x][y] = false;
-    }
-
-    bool is_grass (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_grass[p.x][p.y]);
-    }
-
-    bool is_grass (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_grass[x][y]);
-    }
-
-    void set_grass (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_grass[x][y] = true;
-    }
-
-    void unset_grass (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_grass[x][y] = false;
-    }
-
-    bool is_soil (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_soil[p.x][p.y]);
-    }
-
-    bool is_soil (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_soil[x][y]);
-    }
-
-    void set_soil (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_soil[x][y] = true;
-    }
-
-    void unset_soil (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_soil[x][y] = false;
-    }
-
-    bool is_gravel (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_gravel[p.x][p.y]);
-    }
-
-    bool is_gravel (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_gravel[x][y]);
-    }
-
-    void set_gravel (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_gravel[x][y] = true;
-    }
-
-    void unset_gravel (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_gravel[x][y] = false;
-    }
-
-    bool is_snow (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_snow[p.x][p.y]);
-    }
-
-    bool is_snow (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_snow[x][y]);
-    }
-
-    void set_snow (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_snow[x][y] = true;
-    }
-
-    void unset_snow (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_snow[x][y] = false;
-    }
-
-    bool is_floor (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_floor[p.x][p.y]);
-    }
-
-    bool is_floor (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_floor[x][y]);
-    }
-
-    void set_floor (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_floor[x][y] = true;
-    }
-
-    void unset_floor (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_floor[x][y] = false;
-    }
-
-    bool is_monst (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_monst[p.x][p.y]);
-    }
-
-    bool is_monst (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_monst[x][y]);
-    }
-
-    void set_monst (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_monst[x][y] = true;
-    }
-
-    void unset_monst (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_monst[x][y] = false;
-    }
-
-    bool is_food (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_food[x][y]);
-    }
-
-    void set_food (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_food[x][y] = true;
-    }
-
-    void unset_food (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_food[x][y] = false;
-    }
-
-    bool is_rock (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_rock[p.x][p.y]);
-    }
-
-    bool is_rock (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_rock[x][y]);
-    }
-
-    void set_rock (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_rock[x][y] = true;
-    }
-
-    void unset_rock (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_rock[x][y] = false;
-    }
-
-    bool is_key (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_key[p.x][p.y]);
-    }
-
-    bool is_key (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_key[x][y]);
-    }
-
-    void set_key (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_key[x][y] = true;
-    }
-
-    void unset_key (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_key[x][y] = false;
-    }
-
-    bool is_gfx_large_shadow_caster (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_gfx_large_shadow_caster[p.x][p.y]);
-    }
-
-    bool is_gfx_large_shadow_caster (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_gfx_large_shadow_caster[x][y]);
-    }
-
-    void set_gfx_large_shadow_caster (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_gfx_large_shadow_caster[x][y] = true;
-    }
-
-    void unset_gfx_large_shadow_caster (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_gfx_large_shadow_caster[x][y] = false;
-    }
-
-    bool is_door (const point &p)
-    {
-        if (unlikely(is_oob(p.x, p.y))) {
-            return (false);
-        }
-        return (_is_door[p.x][p.y]);
-    }
-
-    bool is_door (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return (false);
-        }
-        return (_is_door[x][y]);
-    }
-
-    void set_door (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_door[x][y] = true;
-    }
-
-    void unset_door (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        _is_door[x][y] = false;
-    }
-
-    void clear (void)
-    {
-        memset(_is_blood, 0, sizeof(_is_blood));
-        memset(_is_corridor, 0, sizeof(_is_corridor));
-        memset(_is_deep_water, 0, sizeof(_is_deep_water));
-        memset(_is_dirt, 0, sizeof(_is_dirt));
-        memset(_is_grass, 0, sizeof(_is_grass));
-        memset(_is_floor, 0, sizeof(_is_floor));
-        memset(_is_key, 0, sizeof(_is_key));
-        memset(_is_lava, 0, sizeof(_is_lava));
-        memset(_is_light, 0, sizeof(_is_light));
-        memset(_is_monst, 0, sizeof(_is_monst));
-        memset(_is_food, 0, sizeof(_is_food));
-        memset(_is_rock, 0, sizeof(_is_rock));
-        memset(_is_solid, 0, sizeof(_is_solid));
-        memset(_is_gfx_large_shadow_caster, 0, sizeof(_is_gfx_large_shadow_caster));
-        memset(_is_door, 0, sizeof(_is_door));
-        memset(_is_wall, 0, sizeof(_is_wall));
-        memset(_is_water, 0, sizeof(_is_water));
-    }
-
-    bool is_oob (const int x, const int y, const int z)
-    {
-        return ((x < 0) || (x >= MAP_WIDTH) ||
-                (y < 0) || (y >= MAP_HEIGHT) ||
-                (z < 0) || (z >= MAP_DEPTH));
-    }
-
-    bool is_oob (const int x, const int y)
-    {
-        return ((x < 0) || (x >= MAP_WIDTH) ||
-                (y < 0) || (y >= MAP_HEIGHT));
-    }
-
-    bool is_oob (const fpoint p)
-    {
-        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
-                (p.y < 0) || (p.y >= MAP_HEIGHT));
-    }
-
-    bool is_oob (const point p)
-    {
-        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
-                (p.y < 0) || (p.y >= MAP_HEIGHT));
-    }
+    bool is_anything_at(const point &p);
+    bool is_anything_at(const int x, const int y);
+    bool is_lava(const point &p);
+    bool is_lava(const int x, const int y);
+    void set_lava(const int x, const int y);
+    void unset_lava(const int x, const int y);
+    bool is_blood(const point &p);
+    bool is_blood(const int x, const int y);
+    void set_blood(const int x, const int y);
+    void unset_blood(const int x, const int y);
+    bool is_water(const point &p);
+    bool is_water(const int x, const int y);
+    void set_water(const int x, const int y);
+    void unset_water(const int x, const int y);
+    bool is_deep_water(const point &p);
+    bool is_deep_water(const int x, const int y);
+    void set_deep_water(const int x, const int y);
+    void unset_deep_water(const int x, const int y);
+    bool is_wall(const point &p);
+    bool is_wall(const int x, const int y);
+    void set_wall(const int x, const int y);
+    void unset_wall(const int x, const int y);
+    bool is_solid(const point &p);
+    bool is_solid(const int x, const int y);
+    void set_solid(const int x, const int y);
+    void unset_solid(const int x, const int y);
+    bool is_light(const point &p);
+    bool is_light(const int x, const int y);
+    void set_light(const int x, const int y);
+    void unset_light(const int x, const int y);
+    bool is_corridor(const point &p);
+    bool is_corridor(const int x, const int y);
+    void set_corridor(const int x, const int y);
+    void unset_corridor(const int x, const int y);
+    bool is_dirt(const point &p);
+    bool is_dirt(const int x, const int y);
+    void dir_sett(const int x, const int y);
+    void undir_sett(const int x, const int y);
+    bool is_grass(const point &p);
+    bool is_grass(const int x, const int y);
+    void set_grass(const int x, const int y);
+    void unset_grass(const int x, const int y);
+    bool is_soil(const point &p);
+    bool is_soil(const int x, const int y);
+    void set_soil(const int x, const int y);
+    void unset_soil(const int x, const int y);
+    bool is_gravel(const point &p);
+    bool is_gravel(const int x, const int y);
+    void set_gravel(const int x, const int y);
+    void unset_gravel(const int x, const int y);
+    bool is_snow(const point &p);
+    bool is_snow(const int x, const int y);
+    void set_snow(const int x, const int y);
+    void unset_snow(const int x, const int y);
+    bool is_floor(const point &p);
+    bool is_floor(const int x, const int y);
+    void set_floor(const int x, const int y);
+    void unset_floor(const int x, const int y);
+    bool is_monst(const point &p);
+    bool is_monst(const int x, const int y);
+    void set_monst(const int x, const int y);
+    void unset_monst(const int x, const int y);
+    bool is_food(const int x, const int y);
+    void set_food(const int x, const int y);
+    void unset_food(const int x, const int y);
+    bool is_rock(const point &p);
+    bool is_rock(const int x, const int y);
+    void set_rock(const int x, const int y);
+    void unset_rock(const int x, const int y);
+    bool is_key(const point &p);
+    bool is_key(const int x, const int y);
+    void set_key(const int x, const int y);
+    void unset_key(const int x, const int y);
+    bool is_gfx_large_shadow_caster(const point &p);
+    bool is_gfx_large_shadow_caster(const int x, const int y);
+    void set_gfx_large_shadow_caster(const int x, const int y);
+    void unset_gfx_large_shadow_caster(const int x, const int y);
+    bool is_door(const point &p);
+    bool is_door(const int x, const int y);
+    void set_door(const int x, const int y);
+    void unset_door(const int x, const int y);
+    void clear(void);
+    bool is_oob(const int x, const int y, const int z);
+    bool is_oob(const int x, const int y);
+    bool is_oob(const fpoint p);
+    bool is_oob(const point p);
 };
+
 class NewWorld {
 public:
     //
