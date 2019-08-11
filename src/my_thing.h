@@ -18,7 +18,6 @@ typedef std::unordered_map< uint32_t, Thingp > Things;
 #include "my_time.h"
 #include "my_light.h"
 #include "my_dmap.h"
-#include "my_size.h"
 
 enum {
     THING_DIR_NONE,
@@ -75,12 +74,16 @@ public:
 class Monst
 {
 public:
-    AgeMap       *age_map = {};                   // How old a cell is
+    AgeMap       *age_map = {};              // How old a cell is
     Dmap         *dmap_goals = {};
     Dmap         *dmap_scent = {};
-    Lightp       light = {};                      // Have a light source?
-    Tpp          tp = {};                         // Common settings
+    Lightp       light = {};                 // Have a light source?
+    Tpp          tp = {};                    // Common settings
     Worldp       world = {};
+
+    float        bounce_height = {};         // Percentage of tile height.
+    float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
+    int          bounce_count = {};
 };
 
 class Thing
@@ -89,15 +92,11 @@ private:
 public:
     Thing (void);
     ~Thing (void);
+    float        rot = {};                   // GL co-orids
+    float        submerged_offset = {};      // GL co-orids
     Monst        *monst = {};
-    Lightp       light;                      // Have a light source?
     Tpp          tp;                         // Common settings
-    float        bounce_fade;                // 0.1; rapid, 0.9 slow
-    float        bounce_height;              // Percentage of tile height.
-    float        rot;                        // GL co-orids
-    float        submerged_offset;           // GL co-orids
     fpoint       br;                         // On screen coordinates
-    fpoint       ground_at;
     fpoint       interpolated_mid_at;
     fpoint       last_attached;
     fpoint       last_blit_br;               // GL co-orids
@@ -106,11 +105,9 @@ public:
     fpoint       mid_at;                     // Grid coordinates.
     fpoint       old_br;
     fpoint       tl;                         // On screen coordinates
-    fsize        sz;
     int16_t      gold;
     int16_t      health;
     int16_t      health_max;
-    uint8_t      bounce_count;
     uint8_t      owned_count;                // How many things this thing owns.
     uint16_t     tile_bl;
     uint16_t     tile_bot;
@@ -165,14 +162,29 @@ public:
     AgeMap *age_map(void);
     void new_age_map(void);
     void delete_age_map(void);
+#define age_map_p    age_map()
 
     Dmap *dmap_goals(void);
     void new_dmap_goals(void);
     void delete_dmap_goals(void);
+#define dmap_scent_p dmap_scent()
 
     Dmap *dmap_scent(void);
     void new_dmap_scent(void);
     void delete_dmap_scent(void);
+#define dmap_goals_p dmap_goals()
+
+    Lightp light(void);
+    void new_light(fpoint at);
+    void delete_light(void);
+#define light_p light()
+
+    void set_bounce_height(float);
+    float get_bounce_height(void);
+    void set_bounce_fade(float);
+    float get_bounce_fade(void);
+    void set_bounce_count(int);
+    int get_bounce_count(void);
 
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);
@@ -442,9 +454,5 @@ void thing_gc(void);
 void thing_map_scroll_to_player(void);
 void thing_render_all(void);
 void things_tick(void);
-
-#define dmap_scent_p dmap_scent()
-#define dmap_goals_p dmap_goals()
-#define age_map_p    age_map()
 
 #endif // THING_H

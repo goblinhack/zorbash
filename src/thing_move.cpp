@@ -102,6 +102,7 @@ bool Thing::update_coordinates (void)
     double tx = x;
     double ty = y;
 
+    auto sz = tp->sz;
     tx -= sz.w / 2;
     ty -= sz.h / 2;
 
@@ -211,9 +212,9 @@ void Thing::bounce (double bounce_height,
     timestamp_bounce_begin = time_get_time_ms_cached();
     timestamp_bounce_end = timestamp_bounce_begin + ms;
 
-    this->bounce_height = bounce_height;
-    this->bounce_fade = bounce_fade;
-    this->bounce_count = bounce_count;
+    set_bounce_height(bounce_height);
+    set_bounce_fade(bounce_fade);
+    set_bounce_count(bounce_count);
     is_bouncing = true;
 }
 
@@ -228,13 +229,13 @@ double Thing::get_bounce (void)
     if (t >= timestamp_bounce_end) {
         is_bouncing = false;
 
-        if (bounce_count) {
+        if (get_bounce_count()) {
             bounce(
-                bounce_height * bounce_fade,
-                bounce_fade,
+                get_bounce_height() * get_bounce_fade(),
+                get_bounce_fade(),
                 (double)(timestamp_bounce_end -
-                         timestamp_bounce_begin) * bounce_fade,
-                bounce_count - 1);
+                         timestamp_bounce_begin) * get_bounce_fade(),
+                get_bounce_count() - 1);
         }
 
         return (0);
@@ -247,7 +248,7 @@ double Thing::get_bounce (void)
     double height = br.y - tl.y;
 
     height *= sin(time_step * RAD_180);
-    height *= bounce_height;
+    height *= get_bounce_height();
 
     return (height);
 }

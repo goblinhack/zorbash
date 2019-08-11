@@ -69,20 +69,21 @@ Thing::~Thing (void)
     oldptr(this);
 }
 
+template <class Archive> void Thing::serialize (Archive & archive )
+{
+    archive(cereal::make_nvp("id", id));
+}
+
 void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
     id = ++next_thing_id;
 
-    light = 0;
     tp = 0;
-    bounce_fade = 0;
-    bounce_height = 0;
     rot = 0;
     submerged_offset = 0;
     gold = 0;
     health = 0;
     health_max = 0;
-    bounce_count = 0;
     owned_count = 0;
     tile_bl = 0;
     tile_bot = 0;
@@ -165,7 +166,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     //
     // Find which wall is the closest to cling onto if this is a wall clinger
     //
-    ground_at          = at;
     mid_at             = at;
     last_mid_at        = mid_at;
     depth              = tp_z_depth(tp);
@@ -269,16 +269,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         }
         world->player = this;
 
-        color col = WHITE;
-        //
-        // keep the light strength half the tiles drawn or we get artifacts
-        // at the edges of the fbo
-        //
-        col.a = 250;
-        light = light_new(this,
-                           MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at,
-                           LIGHT_QUALITY_HIGH, col);
-
+        new_light(at);
         log("player created");
     }
 
@@ -365,12 +356,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     attach();
 
     if (tp_is_light_strength(tp)) {
-        std::string l = tp_str_light_color(tp);
-        color c = string2color(l);
-        c.a = 100;
-        light = light_new(this, MAX_LIGHT_RAYS / 8,
-                          (double) tp_is_light_strength(tp),
-                          mid_at, LIGHT_QUALITY_LOW, c);
+        new_light(at);
     }
 }
 
@@ -672,9 +658,9 @@ void Thing::update_light (void)
     //
     // Light source follows the thing.
     //
-    if (light) {
-        light->move_to(interpolated_mid_at);
-        light->calculate();
+    if (light_p) {
+        light_p->move_to(interpolated_mid_at);
+        light_p->calculate();
     }
 }
 
@@ -779,7 +765,7 @@ AgeMap *Thing::age_map (void)
 }
 
 void Thing::new_age_map (void)
-{
+{_
     new_monst();
     if (!monst->age_map) {
         monst->age_map = new AgeMap();
@@ -788,7 +774,7 @@ void Thing::new_age_map (void)
 }
 
 void Thing::delete_age_map (void)
-{
+{_
     if (monst) {
         verify(monst);
         if (monst->age_map) { 
@@ -805,7 +791,7 @@ Dmap *Thing::dmap_goals (void)
 }
 
 void Thing::new_dmap_goals (void)
-{
+{_
     new_monst();
     if (!monst->dmap_goals) {
         monst->dmap_goals = new Dmap();
@@ -814,7 +800,7 @@ void Thing::new_dmap_goals (void)
 }
 
 void Thing::delete_dmap_goals (void)
-{
+{_
     if (monst) {
         verify(monst);
         if (monst->dmap_goals) { 
@@ -831,7 +817,7 @@ Dmap *Thing::dmap_scent (void)
 }
 
 void Thing::new_dmap_scent (void)
-{
+{_
     new_monst();
     if (!monst->dmap_scent) {
         monst->dmap_scent = new Dmap();
@@ -840,7 +826,7 @@ void Thing::new_dmap_scent (void)
 }
 
 void Thing::delete_dmap_scent (void)
-{
+{_
     if (monst) {
         verify(monst);
         if (monst->dmap_scent) { 
@@ -850,7 +836,85 @@ void Thing::delete_dmap_scent (void)
     }
 }
 
-template <class Archive> void Thing::serialize (Archive & archive )
+
+Lightp Thing::light (void)
 {
-    archive(cereal::make_nvp("id", id));
+    new_monst();
+    return (monst->light);
 }
+
+void Thing::new_light (fpoint at)
+{_
+    new_monst();
+    if (!monst->light) {
+        if (tp_is_player(tp)) {
+            //
+            // keep the light strength half the tiles drawn or we get artifacts
+            // at the edges of the fbo
+            //
+            color col = WHITE;
+            col.a = 250;
+            monst->light = light_new(this,
+                                     MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at,
+                                     LIGHT_QUALITY_HIGH, col);
+
+        } else {
+            std::string l = tp_str_light_color(tp);
+            color c = string2color(l);
+            c.a = 100;
+            monst->light = light_new(this, MAX_LIGHT_RAYS / 8,
+                                     (double) tp_is_light_strength(tp),
+                                     mid_at, LIGHT_QUALITY_LOW, c);
+        }
+
+        newptr(monst->light, "AgeMap");
+    }
+}
+
+void Thing::delete_light (void)
+{_
+    if (monst) {
+        verify(monst);
+        if (monst->light) { 
+            oldptr(monst->light);
+            delete monst->light; monst->light = 0;
+        }
+    }
+}
+
+float Thing::get_bounce_height (void)
+{
+    new_monst();
+    return (monst->bounce_height);
+}
+
+void Thing::set_bounce_height (float v)
+{
+    new_monst();
+    monst->bounce_height = v;
+}
+
+float Thing::get_bounce_fade (void)
+{
+    new_monst();
+    return (monst->bounce_fade);
+}
+
+void Thing::set_bounce_fade (float v)
+{
+    new_monst();
+    monst->bounce_fade = v;
+}
+
+int Thing::get_bounce_count (void)
+{
+    new_monst();
+    return (monst->bounce_count);
+}
+
+void Thing::set_bounce_count (int v)
+{
+    new_monst();
+    monst->bounce_count = v;
+}
+
