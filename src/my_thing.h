@@ -84,6 +84,9 @@ public:
     float        bounce_height = {};         // Percentage of tile height.
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
     int          bounce_count = {};
+
+    float        rot = {};                   // GL co-orids
+    float        submerged_offset = {};      // GL co-orids
 };
 
 class Thing
@@ -92,8 +95,6 @@ private:
 public:
     Thing (void);
     ~Thing (void);
-    float        rot = {};                   // GL co-orids
-    float        submerged_offset = {};      // GL co-orids
     Monst        *monst = {};
     Tpp          tp;                         // Common settings
     fpoint       br;                         // On screen coordinates
@@ -159,32 +160,36 @@ public:
     template <class Archive> void serialize(Archive & archive );
     void new_monst(void);
 
-    AgeMap *age_map(void);
+    AgeMap *get_age_map(void);
     void new_age_map(void);
     void delete_age_map(void);
-#define age_map_p    age_map()
 
-    Dmap *dmap_goals(void);
+    Dmap *get_dmap_goals(void);
     void new_dmap_goals(void);
     void delete_dmap_goals(void);
-#define dmap_scent_p dmap_scent()
 
-    Dmap *dmap_scent(void);
+    Dmap *get_dmap_scent(void);
     void new_dmap_scent(void);
     void delete_dmap_scent(void);
-#define dmap_goals_p dmap_goals()
 
-    Lightp light(void);
+    Lightp get_light(void);
     void new_light(fpoint at);
     void delete_light(void);
-#define light_p light()
 
     void set_bounce_height(float);
     float get_bounce_height(void);
+
     void set_bounce_fade(float);
     float get_bounce_fade(void);
+
     void set_bounce_count(int);
     int get_bounce_count(void);
+
+    void set_rot(int);
+    int get_rot(void);
+
+    void set_submerged_offset(int);
+    int get_submerged_offset(void);
 
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);
