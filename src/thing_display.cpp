@@ -1402,7 +1402,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     // If the owner is submerged, so is the weapon
     //
     auto owner = owner_get();
-    submerged_offset = 0;
+    set_submerged_offset(0);
     if (owner && owner->is_submerged) {
         is_submerged = true;
     }
@@ -1435,46 +1435,52 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             const auto pct_visible_above_surface = 0.5;
             tile_tl = fpoint(0, 0);
             if (owner) {
-                blit_br.y += owner->submerged_offset;
-                blit_tl.y += owner->submerged_offset;
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
                 tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset =
+                auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                blit_tl.y += submerged_offset;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
             }
             is_submerged = true;
         } else if (world->is_lava((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
             tile_tl = fpoint(0, 0);
             if (owner) {
-                blit_br.y += owner->submerged_offset;
-                blit_tl.y += owner->submerged_offset;
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
                 tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset =
+                auto offset = 
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                blit_tl.y += submerged_offset;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
             }
             is_submerged = true;
             lava = true;
         } else if (world->is_water((int)map_loc.x, (int)map_loc.y)) {
             tile_tl = fpoint(0, 0);
             if (owner) {
-                blit_br.y += owner->submerged_offset;
-                blit_tl.y += owner->submerged_offset;
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
             } else {
                 const auto pct_visible_above_surface = 0.1;
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset =
+                auto offset = 
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                blit_tl.y += submerged_offset;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
             }
             is_submerged = true;
         }
@@ -1492,9 +1498,9 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 #endif
 
     if (owner) {
-        gl_rotate = owner->rot;
+        gl_rotate = owner->get_rot();
     } else {
-        gl_rotate = rot;
+        gl_rotate = get_rot();
     }
 
     if (unlikely(tp_gfx_small_shadow_caster(tp))) {
@@ -1643,29 +1649,33 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
             const auto pct_visible_above_surface = 0.5;
             tile_tl = fpoint(0, 0);
             if (owner) {
-                blit_br.y += owner->submerged_offset;
-                blit_tl.y += owner->submerged_offset;
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
                 tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset =
+                auto offset = 
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                blit_tl.y += submerged_offset;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
             }
             is_submerged = true;
         } else if (world->is_water((int)map_loc.x, (int)map_loc.y)) {
             tile_tl = fpoint(0, 0);
             if (owner) {
-                blit_br.y += owner->submerged_offset;
-                blit_tl.y += owner->submerged_offset;
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
             } else {
                 const auto pct_visible_above_surface = 0.1;
                 tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                submerged_offset =
+                auto offset = 
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                blit_tl.y += submerged_offset;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
             }
             is_submerged = true;
         }

@@ -79,8 +79,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     id = ++next_thing_id;
 
     tp = 0;
-    rot = 0;
-    submerged_offset = 0;
     gold = 0;
     health = 0;
     health_max = 0;
@@ -658,9 +656,10 @@ void Thing::update_light (void)
     //
     // Light source follows the thing.
     //
-    if (light_p) {
-        light_p->move_to(interpolated_mid_at);
-        light_p->calculate();
+    auto l = get_light();
+    if (l) {
+        l->move_to(interpolated_mid_at);
+        l->calculate();
     }
 }
 
@@ -758,10 +757,13 @@ void Thing::new_monst (void)
     }
 }
 
-AgeMap *Thing::age_map (void)
+AgeMap *Thing::get_age_map (void)
 {
-    new_monst();
-    return (monst->age_map);
+    if (monst) { 
+        return (monst->age_map);
+    } else {
+        return (0);
+    }
 }
 
 void Thing::new_age_map (void)
@@ -784,10 +786,13 @@ void Thing::delete_age_map (void)
     }
 }
 
-Dmap *Thing::dmap_goals (void)
+Dmap *Thing::get_dmap_goals (void)
 {
-    new_monst();
-    return (monst->dmap_goals);
+    if (monst) { 
+        return (monst->dmap_goals);
+    } else {
+        return (0);
+    }
 }
 
 void Thing::new_dmap_goals (void)
@@ -810,10 +815,13 @@ void Thing::delete_dmap_goals (void)
     }
 }
 
-Dmap *Thing::dmap_scent (void)
+Dmap *Thing::get_dmap_scent (void)
 {
-    new_monst();
-    return (monst->dmap_scent);
+    if (monst) { 
+        return (monst->dmap_scent);
+    } else {
+        return (0);
+    }
 }
 
 void Thing::new_dmap_scent (void)
@@ -836,11 +844,13 @@ void Thing::delete_dmap_scent (void)
     }
 }
 
-
-Lightp Thing::light (void)
+Lightp Thing::get_light (void)
 {
-    new_monst();
-    return (monst->light);
+    if (monst) { 
+        return (monst->light);
+    } else {
+        return (0);
+    }
 }
 
 void Thing::new_light (fpoint at)
@@ -884,8 +894,11 @@ void Thing::delete_light (void)
 
 float Thing::get_bounce_height (void)
 {
-    new_monst();
-    return (monst->bounce_height);
+    if (monst) { 
+        return (monst->bounce_height);
+    } else {
+        return (0);
+    }
 }
 
 void Thing::set_bounce_height (float v)
@@ -896,8 +909,11 @@ void Thing::set_bounce_height (float v)
 
 float Thing::get_bounce_fade (void)
 {
-    new_monst();
-    return (monst->bounce_fade);
+    if (monst) { 
+        return (monst->bounce_fade);
+    } else {
+        return (0);
+    }
 }
 
 void Thing::set_bounce_fade (float v)
@@ -908,8 +924,11 @@ void Thing::set_bounce_fade (float v)
 
 int Thing::get_bounce_count (void)
 {
-    new_monst();
-    return (monst->bounce_count);
+    if (monst) { 
+        return (monst->bounce_count);
+    } else {
+        return (0);
+    }
 }
 
 void Thing::set_bounce_count (int v)
@@ -918,3 +937,32 @@ void Thing::set_bounce_count (int v)
     monst->bounce_count = v;
 }
 
+int Thing::get_rot (void)
+{
+    if (monst) { 
+        return (monst->rot);
+    } else {
+        return (0);
+    }
+}
+
+void Thing::set_rot (int v)
+{
+    new_monst();
+    monst->rot = v;
+}
+
+int Thing::get_submerged_offset (void)
+{
+    if (monst) { 
+        return (monst->submerged_offset);
+    } else {
+        return (0);
+    }
+}
+
+void Thing::set_submerged_offset (int v)
+{
+    new_monst();
+    monst->submerged_offset = v;
+}
