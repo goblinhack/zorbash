@@ -1144,11 +1144,8 @@ static void thing_blit_things (int minx, int miny, int minz,
     blit_flush();
 
     for (auto t : moved) {
-        std::swap(t->br, t->old_br);
         t->detach();
-        std::swap(t->br, t->old_br);
         t->attach();
-
         t->update_light();
     }
 }
