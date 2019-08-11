@@ -75,80 +75,21 @@ public:
 class Monst
 {
 public:
-    AgeMap       *age_map;                   // How old a cell is
-    Dmap         *dmap_goals;
-    Dmap         *dmap_scent;
-    Lightp       light;                      // Have a light source?
-    Tpp          tp;                         // Common settings
-    Worldp       world;
+    AgeMap       *age_map = {};                   // How old a cell is
+    Dmap         *dmap_goals = {};
+    Dmap         *dmap_scent = {};
+    Lightp       light = {};                      // Have a light source?
+    Tpp          tp = {};                         // Common settings
+    Worldp       world = {};
 };
 
 class Thing
 {
 private:
 public:
-    Thing (void)
-    {
-        is_init = false;
-        newptr(this, "thing");
-    }
-
-    ~Thing (void)
-    {
-        verify(this);
-        if (!is_init) {
-            return;
-        }
-        if (is_being_destroyed) {
-            die("death recursion");
-        }
-        is_being_destroyed = true;
-        destroy();
-        if (monst) {
-            oldptr(monst);
-            delete monst;
-        }
-        oldptr(this);
-    }
-
-    template <class Archive>
-    void serialize (Archive & archive )
-    {
-        archive(cereal::make_nvp("id", id));
-    }
-
-    void new_monst (void)
-    {
-        if (unlikely(!monst)) { 
-            monst = new Monst(); 
-            newptr(monst, "Monst");
-        }
-    }
-
-    AgeMap *age_map (void)
-    {
-        new_monst();
-        return (monst->age_map);
-    }
-
-    void new_age_map (void)
-    {
-        new_monst();
-        monst->age_map = new AgeMap();
-        newptr(monst->age_map, "AgeMap");
-    }
-
-    void delete_age_map (void)
-    {
-        if (monst && monst->age_map) { 
-            oldptr(monst->age_map);
-            delete monst->age_map; monst->age_map = 0;
-        }
-    }
-
-    Monst        *monst;
-    Dmap         *dmap_goals;
-    Dmap         *dmap_scent;
+    Thing (void);
+    ~Thing (void);
+    Monst        *monst = {};
     Lightp       light;                      // Have a light source?
     Tpp          tp;                         // Common settings
     float        bounce_fade;                // 0.1; rapid, 0.9 slow
@@ -217,6 +158,21 @@ public:
     unsigned int is_starving:1;
     unsigned int is_submerged:1;
     unsigned int is_waiting_for_ai:1;
+
+    template <class Archive> void serialize(Archive & archive );
+    void new_monst(void);
+
+    AgeMap *age_map(void);
+    void new_age_map(void);
+    void delete_age_map(void);
+
+    Dmap *dmap_goals(void);
+    void new_dmap_goals(void);
+    void delete_dmap_goals(void);
+
+    Dmap *dmap_scent(void);
+    void new_dmap_scent(void);
+    void delete_dmap_scent(void);
 
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);
@@ -362,7 +318,7 @@ public:
     int weapon_use_distance(void)                          { return (tp_weapon_use_distance(tp)); }
     int z_depth(void)                                      { return (tp_z_depth(tp)); }
     std::string bite_damage_hd(void)                       { return (tp_bite_damage_hd(tp)); }
-    std::string is_nutrition_hd(void)                         { return (tp_is_nutrition_hd(tp)); }
+    std::string is_nutrition_hd(void)                      { return (tp_is_nutrition_hd(tp)); }
     std::string to_string(void);
     uint8_t is_dir_bl(void);
     uint8_t is_dir_br(void);
@@ -422,6 +378,7 @@ public:
     void hide();
     void hooks_remove();
     void hunger_clock();
+    void init(std::string name, fpoint at, fpoint jitter);
     void kill(void);
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args); // compile error without
@@ -485,5 +442,9 @@ void thing_gc(void);
 void thing_map_scroll_to_player(void);
 void thing_render_all(void);
 void things_tick(void);
+
+#define dmap_scent_p dmap_scent()
+#define dmap_goals_p dmap_goals()
+#define age_map_p    age_map()
 
 #endif // THING_H

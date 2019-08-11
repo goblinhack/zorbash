@@ -9,6 +9,7 @@
 #include "my_game.h"
 #include "my_gl.h"
 #include <algorithm>
+#include <list>
 
 #define SCALEX 1
 
