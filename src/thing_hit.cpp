@@ -27,10 +27,11 @@ int Thing::ai_hit_actual (Thingp orig_hitter,
     // Protect player from multiple impact - landing hard on a spike.
     //
     if (is_player()) {
-        if (!time_have_x_tenths_passed_since(10, timestamp_last_i_was_hit)) {
+        if (!time_have_x_tenths_passed_since(10,
+                                             get_timestamp_last_i_was_hit())) {
             return (false);
         }
-        timestamp_last_i_was_hit = time_get_time_ms_cached();
+        set_timestamp_last_i_was_hit(time_get_time_ms_cached());
     }
 
     //
@@ -100,15 +101,6 @@ int Thing::ai_ai_hit_if_possible (Thingp hitter, int damage)
         // already dead though.
         //
         return (false);
-    }
-
-    //
-    // Explosions are only dangerous in the intitial blast.
-    //
-    if (hitter && tp_is_explosion(hitter->tp)) {
-        if (time_have_x_tenths_passed_since(10, hitter->timestamp_born)) {
-            return (false);
-        }
     }
 
     //

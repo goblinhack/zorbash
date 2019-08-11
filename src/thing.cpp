@@ -94,13 +94,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     id_weapon_carry_anim = 0;
     id_weapon_use_anim = 0;
     timestamp_ai_next = 0;
-    timestamp_born = 0;
-    timestamp_bounce_begin = 0;
-    timestamp_bounce_end = 0;
     timestamp_collision = 0;
-    timestamp_flip_start = 0;
-    timestamp_last_attacked = 0;
-    timestamp_last_i_was_hit = 0;
     timestamp_move_begin = 0;
     timestamp_move_end = 0;
     timestamp_move_start = 0;
@@ -194,8 +188,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         set_health(h);
         set_health_max(h);
     }
-
-    timestamp_born = time_get_time_ms_cached();
 
     auto tiles = tp_tile_lefts(tp);
     auto tile = tile_random(tiles);
@@ -757,6 +749,9 @@ void Thing::new_monst (void)
     }
 }
 
+////////////////////////////////////////////////////////////////////////////
+// age_map
+////////////////////////////////////////////////////////////////////////////
 AgeMap *Thing::get_age_map (void)
 {
     if (monst) { 
@@ -786,6 +781,9 @@ void Thing::delete_age_map (void)
     }
 }
 
+////////////////////////////////////////////////////////////////////////////
+// dmap_goals
+////////////////////////////////////////////////////////////////////////////
 Dmap *Thing::get_dmap_goals (void)
 {
     if (monst) { 
@@ -815,6 +813,9 @@ void Thing::delete_dmap_goals (void)
     }
 }
 
+////////////////////////////////////////////////////////////////////////////
+// dmap_scent
+////////////////////////////////////////////////////////////////////////////
 Dmap *Thing::get_dmap_scent (void)
 {
     if (monst) { 
@@ -844,6 +845,9 @@ void Thing::delete_dmap_scent (void)
     }
 }
 
+////////////////////////////////////////////////////////////////////////////
+// light
+////////////////////////////////////////////////////////////////////////////
 Lightp Thing::get_light (void)
 {
     if (monst) { 
@@ -892,6 +896,9 @@ void Thing::delete_light (void)
     }
 }
 
+////////////////////////////////////////////////////////////////////////////
+// bounce_height
+////////////////////////////////////////////////////////////////////////////
 float Thing::get_bounce_height (void)
 {
     if (monst) { 
@@ -907,6 +914,9 @@ void Thing::set_bounce_height (float v)
     monst->bounce_height = v;
 }
 
+////////////////////////////////////////////////////////////////////////////
+// bounce_fade
+////////////////////////////////////////////////////////////////////////////
 float Thing::get_bounce_fade (void)
 {
     if (monst) { 
@@ -922,6 +932,9 @@ void Thing::set_bounce_fade (float v)
     monst->bounce_fade = v;
 }
 
+////////////////////////////////////////////////////////////////////////////
+// bounce_count
+////////////////////////////////////////////////////////////////////////////
 int Thing::get_bounce_count (void)
 {
     if (monst) { 
@@ -937,6 +950,9 @@ void Thing::set_bounce_count (int v)
     monst->bounce_count = v;
 }
 
+////////////////////////////////////////////////////////////////////////////
+// rot
+////////////////////////////////////////////////////////////////////////////
 float Thing::get_rot (void)
 {
     if (monst) { 
@@ -952,6 +968,9 @@ void Thing::set_rot (float v)
     monst->rot = v;
 }
 
+////////////////////////////////////////////////////////////////////////////
+// submerged_offset
+////////////////////////////////////////////////////////////////////////////
 float Thing::get_submerged_offset (void)
 {
     if (monst) { 
@@ -967,6 +986,9 @@ void Thing::set_submerged_offset (float v)
     monst->submerged_offset = v;
 }
 
+////////////////////////////////////////////////////////////////////////////
+// gold
+////////////////////////////////////////////////////////////////////////////
 int Thing::get_gold (void)
 {
     if (monst) { 
@@ -1006,6 +1028,9 @@ int Thing::incr_gold (void)
     return (monst->gold++);
 }
 
+////////////////////////////////////////////////////////////////////////////
+// health
+////////////////////////////////////////////////////////////////////////////
 int Thing::get_health (void)
 {
     if (monst) { 
@@ -1045,6 +1070,9 @@ int Thing::incr_health (void)
     return (monst->health++);
 }
 
+////////////////////////////////////////////////////////////////////////////
+// health_max
+////////////////////////////////////////////////////////////////////////////
 int Thing::get_health_max (void)
 {
     if (monst) { 
@@ -1084,6 +1112,9 @@ int Thing::incr_health_max (void)
     return (monst->health_max++);
 }
 
+////////////////////////////////////////////////////////////////////////////
+// owned_count
+////////////////////////////////////////////////////////////////////////////
 int Thing::get_owned_count (void)
 {
     if (monst) { 
@@ -1121,4 +1152,172 @@ int Thing::incr_owned_count (void)
 {
     new_monst();
     return (monst->owned_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_bounce_begin
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_timestamp_bounce_begin (void)
+{
+    if (monst) { 
+        return (monst->timestamp_bounce_begin);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_timestamp_bounce_begin (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_bounce_begin = v);
+}
+
+uint32_t Thing::decr_timestamp_bounce_begin (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_bounce_begin -= v);
+}
+
+uint32_t Thing::incr_timestamp_bounce_begin (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_bounce_begin += v);
+}
+
+uint32_t Thing::decr_timestamp_bounce_begin (void)
+{
+    new_monst();
+    return (monst->timestamp_bounce_begin--);
+}
+
+uint32_t Thing::incr_timestamp_bounce_begin (void)
+{
+    new_monst();
+    return (monst->timestamp_bounce_begin++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_bounce_end
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_timestamp_bounce_end (void)
+{
+    if (monst) { 
+        return (monst->timestamp_bounce_end);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_timestamp_bounce_end (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_bounce_end = v);
+}
+
+uint32_t Thing::decr_timestamp_bounce_end (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_bounce_end -= v);
+}
+
+uint32_t Thing::incr_timestamp_bounce_end (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_bounce_end += v);
+}
+
+uint32_t Thing::decr_timestamp_bounce_end (void)
+{
+    new_monst();
+    return (monst->timestamp_bounce_end--);
+}
+
+uint32_t Thing::incr_timestamp_bounce_end (void)
+{
+    new_monst();
+    return (monst->timestamp_bounce_end++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_last_i_was_hit
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_timestamp_last_i_was_hit (void)
+{
+    if (monst) { 
+        return (monst->timestamp_last_i_was_hit);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_timestamp_last_i_was_hit (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_last_i_was_hit = v);
+}
+
+uint32_t Thing::decr_timestamp_last_i_was_hit (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_last_i_was_hit -= v);
+}
+
+uint32_t Thing::incr_timestamp_last_i_was_hit (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_last_i_was_hit += v);
+}
+
+uint32_t Thing::decr_timestamp_last_i_was_hit (void)
+{
+    new_monst();
+    return (monst->timestamp_last_i_was_hit--);
+}
+
+uint32_t Thing::incr_timestamp_last_i_was_hit (void)
+{
+    new_monst();
+    return (monst->timestamp_last_i_was_hit++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_flip_start
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_timestamp_flip_start (void)
+{
+    if (monst) { 
+        return (monst->timestamp_flip_start);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_timestamp_flip_start (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_flip_start = v);
+}
+
+uint32_t Thing::decr_timestamp_flip_start (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_flip_start -= v);
+}
+
+uint32_t Thing::incr_timestamp_flip_start (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_flip_start += v);
+}
+
+uint32_t Thing::decr_timestamp_flip_start (void)
+{
+    new_monst();
+    return (monst->timestamp_flip_start--);
+}
+
+uint32_t Thing::incr_timestamp_flip_start (void)
+{
+    new_monst();
+    return (monst->timestamp_flip_start++);
 }

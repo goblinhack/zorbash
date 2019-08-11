@@ -89,6 +89,10 @@ public:
     int          health = {}; 
     int          health_max = {}; 
     int          owned_count = {};           // How many things this thing owns.
+    uint32_t     timestamp_bounce_begin {};
+    uint32_t     timestamp_bounce_end {};
+    uint32_t     timestamp_last_i_was_hit {};
+    uint32_t     timestamp_flip_start {};    // Used for animating the steps.
 };
 
 class Thing
@@ -106,7 +110,6 @@ public:
     fpoint       last_blit_tl;               // GL co-orids
     fpoint       last_mid_at;                // Previous hop where we were.
     fpoint       mid_at;                     // Grid coordinates.
-    fpoint       old_br;
     fpoint       tl;                         // On screen coordinates
     uint16_t     tile_bl;
     uint16_t     tile_bot;
@@ -125,17 +128,12 @@ public:
     uint32_t     id_weapon_use_anim;
     uint32_t     timestamp_ai_next;
     uint32_t     timestamp_born;
-    uint32_t     timestamp_bounce_begin;
-    uint32_t     timestamp_bounce_end;
     uint32_t     timestamp_collision;
-    uint32_t     timestamp_flip_start;       // Used for animating the steps.
-    uint32_t     timestamp_last_attacked;
-    uint32_t     timestamp_last_i_was_hit;
     uint32_t     timestamp_move_begin;
     uint32_t     timestamp_move_end;
     uint32_t     timestamp_move_start;
     uint32_t     timestamp_next_frame;
-    uint8_t      depth;                      // Display order
+    unsigned int depth:5;                    // Display order
     unsigned int dir:4;                      // Direction
     unsigned int has_ever_moved:1;
     unsigned int is_attached:1;
@@ -216,6 +214,34 @@ public:
     int incr_owned_count(int);
     int decr_owned_count(void);
     int incr_owned_count(void);
+
+    uint32_t set_timestamp_bounce_begin(uint32_t);
+    uint32_t get_timestamp_bounce_begin(void);
+    uint32_t decr_timestamp_bounce_begin(uint32_t);
+    uint32_t incr_timestamp_bounce_begin(uint32_t);
+    uint32_t decr_timestamp_bounce_begin(void);
+    uint32_t incr_timestamp_bounce_begin(void);
+
+    uint32_t set_timestamp_bounce_end(uint32_t);
+    uint32_t get_timestamp_bounce_end(void);
+    uint32_t decr_timestamp_bounce_end(uint32_t);
+    uint32_t incr_timestamp_bounce_end(uint32_t);
+    uint32_t decr_timestamp_bounce_end(void);
+    uint32_t incr_timestamp_bounce_end(void);
+
+    uint32_t set_timestamp_last_i_was_hit(uint32_t);
+    uint32_t get_timestamp_last_i_was_hit(void);
+    uint32_t decr_timestamp_last_i_was_hit(uint32_t);
+    uint32_t incr_timestamp_last_i_was_hit(uint32_t);
+    uint32_t decr_timestamp_last_i_was_hit(void);
+    uint32_t incr_timestamp_last_i_was_hit(void);
+
+    uint32_t set_timestamp_flip_start(uint32_t);
+    uint32_t get_timestamp_flip_start(void);
+    uint32_t decr_timestamp_flip_start(uint32_t);
+    uint32_t incr_timestamp_flip_start(uint32_t);
+    uint32_t decr_timestamp_flip_start(void);
+    uint32_t incr_timestamp_flip_start(void);
 
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);

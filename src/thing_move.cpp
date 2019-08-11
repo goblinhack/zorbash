@@ -16,12 +16,12 @@ bool Thing::move (fpoint future_pos)
     verify(this);
     if (tp_gfx_can_hflip(tp)) {
         if (future_pos.x > mid_at.x) {
-            if (is_facing_left && !timestamp_flip_start) {
-                timestamp_flip_start = time_get_time_ms_cached();
+            if (is_facing_left && !get_timestamp_flip_start()) {
+                set_timestamp_flip_start(time_get_time_ms_cached());
             }
         } else if (future_pos.x < mid_at.x) {
-            if (!is_facing_left && !timestamp_flip_start) {
-                timestamp_flip_start = time_get_time_ms_cached();
+            if (!is_facing_left && !get_timestamp_flip_start()) {
+                set_timestamp_flip_start(time_get_time_ms_cached());
             }
         }
     }
@@ -63,7 +63,7 @@ bool Thing::move (fpoint future_pos,
 
 bool Thing::update_coordinates (void)
 {
-    old_br = br;
+    auto old_br = br;
 
     get_bounce();
 
@@ -154,13 +154,13 @@ bool Thing::update_coordinates (void)
     }
 
     if (unlikely(tp_gfx_can_hflip(tp))) {
-        if (timestamp_flip_start) {
-            auto diff = time_get_time_ms_cached() - timestamp_flip_start;
+        if (get_timestamp_flip_start()) {
+            auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
             uint32_t flip_time = 100;
             uint32_t flip_steps = 100;
 
             if (diff > flip_time) {
-                timestamp_flip_start = 0;
+                set_timestamp_flip_start(0);
                 is_facing_left = !is_facing_left;
                 if (is_dir_left() ||
                     is_dir_tl()   ||
@@ -209,8 +209,8 @@ void Thing::bounce (double bounce_height,
                     uint32_t ms,
                     uint32_t bounce_count)
 {
-    timestamp_bounce_begin = time_get_time_ms_cached();
-    timestamp_bounce_end = timestamp_bounce_begin + ms;
+    auto t = set_timestamp_bounce_begin(time_get_time_ms_cached());
+    set_timestamp_bounce_end(t + ms);
 
     set_bounce_height(bounce_height);
     set_bounce_fade(bounce_fade);
@@ -226,15 +226,15 @@ double Thing::get_bounce (void)
 
     auto t = time_get_time_ms_cached();
 
-    if (t >= timestamp_bounce_end) {
+    if (t >= get_timestamp_bounce_end()) {
         is_bouncing = false;
 
         if (get_bounce_count()) {
             bounce(
                 get_bounce_height() * get_bounce_fade(),
                 get_bounce_fade(),
-                (double)(timestamp_bounce_end -
-                         timestamp_bounce_begin) * get_bounce_fade(),
+                (double)(get_timestamp_bounce_end() -
+                         get_timestamp_bounce_begin()) * get_bounce_fade(),
                 get_bounce_count() - 1);
         }
 
@@ -242,8 +242,8 @@ double Thing::get_bounce (void)
     }
 
     double time_step =
-        (double)(t - timestamp_bounce_begin) /
-        (double)(timestamp_bounce_end - timestamp_bounce_begin);
+        (double)(t - get_timestamp_bounce_begin()) /
+        (double)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
 
     double height = br.y - tl.y;
 
