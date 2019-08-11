@@ -751,6 +751,8 @@ void Thing::new_monst (void)
 {
     if (unlikely(!monst)) { 
         monst = new Monst(); 
+        // uncomment to see who allocates things
+        // err("new monst");
         newptr(monst, "Monst");
     }
 }
