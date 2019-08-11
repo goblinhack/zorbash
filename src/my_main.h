@@ -8,7 +8,7 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define DEBUG_CRASH
+#undef DEBUG_CRASH
 
 #ifdef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors
@@ -93,11 +93,6 @@ extern int TILES_DOWN;
 #define TTF_GLYPH_PER_ROW           60
 #define TTF_CURSOR_CHAR             127
 
-//
-// Maximum number of thing types. This cannot be exceeded without changing
-// the message format in tx updates.
-//
-#define TP_MAX                                  10000
 #define THING_COLLISION_TEST_DELAY_TENTHS       1
 
 //

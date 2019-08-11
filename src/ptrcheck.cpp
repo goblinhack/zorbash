@@ -489,7 +489,7 @@ void *ptrcheck_alloc (const void *ptr,
         /*
          * Create enough space for lots of pointers.
          */
-        hash = hash_init(1046527 /* prime */);
+        hash = hash_init(1046527 * 11/* prime */);
 
         if (!hash) {
             return ((void*) ptr);

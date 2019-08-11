@@ -12,13 +12,12 @@
 #include <memory>
 
 typedef class Tp* Tpp;
-typedef std::unordered_map< std::string, Tpp > Tpmap;
 
-//
-// Use map as walk order is maintained, instead of unordered map where it is
-// not. Think of unordered_map as a hash table.
-//
-typedef std::vector< Tpp > Tpmap_create_order;
+typedef std::vector< Tpp > Tpidmap;
+typedef std::unordered_map< std::string, Tpp > Tpnamemap;
+
+extern Tpidmap tp_id_map;
+extern Tpnamemap tp_name_map;
 
 #include "my_dice.h"
 #include "my_tile.h"
@@ -255,7 +254,6 @@ void tp_fini(void);
 Tpp tp_load(int id, std::string file);
 void tp_update(Tpp tp);
 Tpp tp_find(uint32_t id);
-Tpp tp_find_name(std::string name);
 void tp_init_after_loading(void);
 Tpp tp_random_monst(void);
 Tpp tp_random_food(void);
@@ -1123,16 +1121,14 @@ Tpp string2tp(const char **s);
 Tpp string2tp(std::string &s, int *len);
 Tpp string2tp(std::wstring &s, int *len);
 
-extern Tpmap tp_map;
-
 //
 // Find an existing thing.
 //
 static inline Tpp tp_find (std::string name)
 {_
-    auto result = tp_map.find(name);
+    auto result = tp_name_map.find(name);
 
-    if (result == tp_map.end()) {
+    if (result == tp_name_map.end()) {
         return (0);
     }
 

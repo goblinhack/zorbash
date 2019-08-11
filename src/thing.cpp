@@ -37,7 +37,7 @@ Thingp thing_new (std::string tp_name, Thingp owner)
     return thing_new(tp_name, owner->mid_at - fpoint(0.5, 0.5));
 }
 
-Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
+Thingp thing_new (std::string name, fpoint at, fpoint jitter)
 {_
     auto id = ++next_thing_id;
     auto t = new Thing;
@@ -101,11 +101,10 @@ Thingp thing_new (std::string tp_name, fpoint at, fpoint jitter)
     t->is_submerged = 0;
     t->is_waiting_for_ai = 0;
 
-    auto tp = t->tp = tp_find(tp_name);
+    auto tp = t->tp = tp_find(name);
     if (!t->tp) {
-        DIE("thing [%s] not found", tp_name.c_str());
+        DIE("thing [%s] not found", name.c_str());
     }
-
 
     t->id = id;
     auto p = std::make_pair(t->id, t);
