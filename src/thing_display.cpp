@@ -1402,7 +1402,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     // If the owner is submerged, so is the weapon
     //
     auto owner = owner_get();
-    set_submerged_offset(0);
     if (owner && owner->is_submerged) {
         is_submerged = true;
     }
@@ -1430,6 +1429,8 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         is_player() ||
         tp_gfx_is_weapon_use_anim(tp) ||
         tp_gfx_is_weapon_carry_anim(tp)) {
+
+        set_submerged_offset(0);
 
         if (world->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
