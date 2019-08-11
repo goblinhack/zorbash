@@ -302,8 +302,8 @@ void Thing::use (void)
 
     auto swung_as = tp_weapon_use_anim(weapon);
     if (swung_as == "") {
-        err("could not use %s, has no use anim",
-            tp_name(weapon).c_str());
+        die("could not use %s/%u, has no 'use' animiation frame",
+            tp_name(weapon).c_str(), weapon->id);
         return;
     }
 

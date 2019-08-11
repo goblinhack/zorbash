@@ -7,22 +7,23 @@
 #include "my_tile.h"
 #include "my_dice.h"
 
-Tpmap tp_map;
-static Tpmap_create_order tp_create_order_map;
-static Tpmap_create_order tp_monst;
-static Tpmap_create_order tp_food;
-static Tpmap_create_order tp_dirt;
-static Tpmap_create_order tp_grass;
-static Tpmap_create_order tp_soil;
-static Tpmap_create_order tp_gravel;
-static Tpmap_create_order tp_snow;
-static Tpmap_create_order tp_ripples;
-static Tpmap_create_order tp_keys;
-static Tpmap_create_order tp_blood;
-static Tpmap_create_order tp_wall;
-static Tpmap_create_order tp_floor;
-static Tpmap_create_order tp_deco;
-static Tpmap_create_order tp_wall_deco;
+Tpnamemap tp_name_map;
+Tpidmap tp_id_map;
+
+static Tpidmap tp_monst;
+static Tpidmap tp_food;
+static Tpidmap tp_dirt;
+static Tpidmap tp_grass;
+static Tpidmap tp_soil;
+static Tpidmap tp_gravel;
+static Tpidmap tp_snow;
+static Tpidmap tp_ripples;
+static Tpidmap tp_keys;
+static Tpidmap tp_blood;
+static Tpidmap tp_wall;
+static Tpidmap tp_floor;
+static Tpidmap tp_deco;
+static Tpidmap tp_wall_deco;
 
 static uint8_t tp_init_done;
 
@@ -46,24 +47,16 @@ Tpp tp_load (int id, std::string name)
         ERR("thing template name [%s] already used", name.c_str());
     }
 
-    if (id >= TP_MAX - 1) {
-        ERR("too many thing templates");
-    }
-
     auto t = new Tp();
-
     t->name = name;
 
-    {
-        auto result = tp_map.insert(std::make_pair(name, t));
-
-        if (result.second == false) {
-            DIE("thing insert name [%s] failed", name.c_str());
-        }
+    auto result = tp_name_map.insert(std::make_pair(name, t));
+    if (result.second == false) {
+        DIE("thing insert name [%s] failed", name.c_str());
     }
 
-    tp_create_order_map.push_back(t);
-    t->id = id;
+    tp_id_map.push_back(t);
+    t->id = tp_id_map.size();
 
     return (t);
 }
@@ -79,27 +72,12 @@ void tp_update (Tpp t)
 //
 Tpp tp_find (uint32_t id)
 {_
-    auto result = tp_create_order_map[id];
+    auto result = tp_id_map[id - 1];
     if (!result) {
         DIE("thing template id %u not found", id);
     }
 
     return (result);
-}
-
-Tpp tp_find_name (std::string name)
-{_
-    for (auto ti : tp_map) {
-        auto Tpp = ti.second;
-
-        if (!strcasecmp(name.c_str(), Tpp->name.c_str())) {
-            return (Tpp);
-        }
-    }
-
-    ERR("did not find short template name \"%s\"", name.c_str());
-
-    return (0);
 }
 
 Tilep tp_first_tile (Tpp tp)
@@ -118,8 +96,7 @@ Tilep tp_first_tile (Tpp tp)
 
 void tp_init_after_loading (void)
 {_
-    for (auto t : tp_map) {
-        auto tp = t.second;
+    for (auto tp : tp_id_map) {
         if (tp_is_monst(tp)) {
             tp_monst.push_back(tp);
         }
