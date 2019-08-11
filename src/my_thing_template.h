@@ -21,6 +21,7 @@ extern Tpnamemap tp_name_map;
 
 #include "my_dice.h"
 #include "my_tile.h"
+#include "my_size.h"
 
 enum {
     IS_JOIN_HORIZ,
@@ -58,6 +59,8 @@ public:
     }
 
     int id {};
+
+    fsize sz;
 
     std::string name;
     std::string str_zzz1;
