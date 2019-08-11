@@ -26,8 +26,8 @@ void Thing::hunger_clock (void)
 
     hunger_tick_last_ms = time_get_time_ms_cached();
 
-    if (health > 1) {
-        health--;
+    if (get_health() > 1) {
+        decr_health();
     } else {
         //
         // starvation is just annoying for players
@@ -36,18 +36,18 @@ void Thing::hunger_clock (void)
     }
 
     int hungry_at =
-      (int) ((double) health_max *
+      (int) ((double) get_health_max() *
              ((double) tp_hunger_at_health_pct(tp) / 100.0));
 
     auto old_is_hungry = is_hungry;
-    is_hungry = health < hungry_at;
+    is_hungry = get_health() < hungry_at;
 
     int starving_at =
-      (int) ((double) health_max *
+      (int) ((double) get_health_max() *
              ((double) tp_hunger_starving_at_health_pct(tp) / 100.0));
 
     auto old_is_starving = is_starving;
-    is_starving = health < starving_at;
+    is_starving = get_health() < starving_at;
 
     if (old_is_starving != is_starving) {
         if (is_starving) {

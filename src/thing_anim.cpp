@@ -105,18 +105,21 @@ void Thing::animate (void)
                 }
             }
 
+            auto health_max = t->get_health_max();
+            auto health = t->get_health();
+
             if (tp->internal_has_hp_anim) {
-                if (t->health < t->health_max / 4) {
+                if (health < health_max / 4) {
                     if (!tile_is_hp_25_percent(tile)) {
                         tile = tile_next(tiles, tile);
                         continue;
                     }
-                } else if (t->health < t->health_max / 2) {
+                } else if (health < health_max / 2) {
                     if (!tile_is_hp_50_percent(tile)) {
                         tile = tile_next(tiles, tile);
                         continue;
                     }
-                } else if (t->health < (t->health_max / 4) * 3) {
+                } else if (health < (health_max / 4) * 3) {
                     if (!tile_is_hp_75_percent(tile)) {
                         tile = tile_next(tiles, tile);
                         continue;
