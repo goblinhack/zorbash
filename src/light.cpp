@@ -397,79 +397,6 @@ void Light::render_triangle_fans (void)
    glTranslatef(ox, oy, 0);
 }
 
-void Light::render_debug_lines (int minx, int miny, int maxx, int maxy)
-{
-    static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
-    static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
-
-    auto tx = at.x;
-    auto ty = at.y;
-    fpoint light_pos(tx * game->config.tile_gl_width,
-                     ty * game->config.tile_gl_height);
-
-    auto ox = world->map_at.x * game->config.tile_gl_width;
-    auto oy = world->map_at.y * game->config.tile_gl_height;
-
-    glTranslatef(-ox, -oy, 0);
-
-    int i;
-
-    glcolor(GRAY50);
-
-    /*
-     * Walk the light rays in a circle.
-     */
-    uint8_t z = MAP_DEPTH_WALLS;
-    for (int16_t x = maxx - 1; x >= minx; x--) {
-        for (int16_t y = miny; y < maxy; y++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                if (is_nearest_wall[x][y]) {
-                    double X = x;
-                    double Y = y;
-                    double p1x = X * tile_gl_width_pct;
-                    double p1y = Y * tile_gl_height_pct;
-                    double p2x = (X+1) * tile_gl_width_pct;
-                    double p2y = (Y+1) * tile_gl_height_pct;
-                    gl_blitline(p1x, p1y, p1x, p2y);
-                    gl_blitline(p1x, p1y, p2x, p1y);
-                    gl_blitline(p2x, p2y, p2x, p1y);
-                    gl_blitline(p2x, p2y, p1x, p2y);
-                }
-            }
-        }
-    }
-
-    glcolor(GREEN);
-
-    /*
-     * Walk the light rays in a circle.
-     */
-    for (i = 0; i < max_light_rays; i++) {
-        auto r = &ray[i];
-        double radius = r->depth_furthest;
-        double p1x = light_pos.x + r->cosr * radius * tile_gl_width_pct;
-        double p1y = light_pos.y + r->sinr * radius * tile_gl_height_pct;
-
-        gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
-    }
-
-    glcolor(RED);
-
-    /*
-     * Walk the light rays in a circle.
-     */
-    for (i = 0; i < max_light_rays; i++) {
-        auto r = &ray[i];
-        double radius = r->depth_closest;
-        double p1x = light_pos.x + r->cosr * radius * tile_gl_width_pct;
-        double p1y = light_pos.y + r->sinr * radius * tile_gl_height_pct;
-
-        gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
-    }
-
-    glTranslatef(ox, oy, 0);
-}
-
 void Light::render_point_light (void)
 {
     auto tx = at.x;
@@ -549,24 +476,6 @@ void Light::render (int fbo, int pass)
 
     case LIGHT_QUALITY_POINT:
         render_point_light();
-        break;
-
-    default:
-        DIE("unknownd light quality");
-    }
-}
-
-void Light::render_debug (int minx, int miny, int maxx, int maxy)
-{
-    switch (quality) {
-    case LIGHT_QUALITY_HIGH:
-        render_debug_lines(minx, miny, maxx, maxy);
-        break;
-
-    case LIGHT_QUALITY_LOW:
-        break;
-
-    case LIGHT_QUALITY_POINT:
         break;
 
     default:
@@ -699,35 +608,5 @@ void lights_render_high_quality (int minx, int miny,
     if (deferred) {
 //        deferred->render(fbo, LIGHT_DIFFUSE);
         deferred->render(fbo, LIGHT_FOCUSED);
-    }
-}
-
-void lights_render_points_debug (int minx, int miny, int maxx, int maxy)
-{
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : world->lights[x][y]) {
-                auto l = p.second;
-
-                if (l->quality == LIGHT_QUALITY_POINT) {
-                    continue;
-                }
-
-                /*
-                 * Too far away from the player? Skip rendering.
-                 */
-                if (world->player) {
-                    auto p = world->player;
-                    auto len = DISTANCE(l->at.x, l->at.y,
-                                        p->mid_at.x, p->mid_at.y);
-
-                    if (len > LIGHT_VISIBLE_DIST + l->strength) {
-                        continue;
-                    }
-                }
-
-                l->render_debug(minx, miny, maxx, maxy);
-            }
-        }
     }
 }

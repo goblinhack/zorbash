@@ -1709,8 +1709,6 @@ public:
     {
         Dmap d;
 
-        memset(&d, 0, sizeof(d));
-
 #if 0
         if (w == Charmap::CORRIDOR) {
             LOG("create corridor, between %d,%d and %d,%d",

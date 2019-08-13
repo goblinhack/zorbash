@@ -43,7 +43,7 @@
 //	*?		Match zero or more times (non-greedy)
 //	?		Match zero or once
 //	\xDD		Match byte with hex value 0xDD
-//	\meta		Match one of the meta character: ^$().[*+?\
+//	\meta		Match one of the meta character: ^$().[*+?
 //
 
 #ifndef _MY_SLRE_HEADER_DEFINED

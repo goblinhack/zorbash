@@ -355,7 +355,8 @@ widp wid_unsorted_find(wid_key_type key);
 wid_key_type wid_unsorted_get_key(widp w);
 
 typedef struct wid_move_ {
-    point moving_end;
+    int moving_endx;
+    int moving_endy;
     uint32_t timestamp_moving_end;
 } wid_move_t;
 

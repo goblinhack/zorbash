@@ -16,7 +16,8 @@
 #include "my_bits.h"
 #include "my_math.h"
 #include "my_pixel.h"
-#include "my_stb_image.h"
+#include "stb_image.h"
+#include "stb_image_write.h"
 
 static void ttf_create_tex_from_char(TTF_Font *ttf, const char *name,
                                      Font *f,

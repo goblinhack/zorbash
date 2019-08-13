@@ -6680,8 +6680,8 @@ static void wid_move_dequeue (widp w)
 
     w->moving_start.x = w->moving_end.x;
     w->moving_start.y = w->moving_end.y;
-    w->moving_end.x = c->moving_end.x;
-    w->moving_end.y = c->moving_end.y;
+    w->moving_end.x = c->moving_endx;
+    w->moving_end.y = c->moving_endy;
     w->timestamp_moving_begin = wid_time;
     w->timestamp_moving_end = c->timestamp_moving_end;
 
