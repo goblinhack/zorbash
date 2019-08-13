@@ -3,8 +3,7 @@
  * See the README file for license info.
  */
 
-#include "my_stb_image.h"
-
+#include "stb_image.h"
 #include <SDL.h>
 #include "my_gl.h"
 #include "my_tex.h"
@@ -79,26 +78,7 @@ static unsigned char *load_raw_image (std::string filename,
         DIE("could not read file, '%s'", filename.c_str());
     }
 
-    if (filename.find(".tga")) {
-        LOG("- stbi_tga_load_from_memory");
-        image_data = stbi_tga_load_from_memory(ramdisk_data,
-                                               len, x, y, comp, 0);
-    } else if (filename.find(".jpg")) {
-        LOG("- stbi_jpeg_load_from_memory");
-        image_data = stbi_jpeg_load_from_memory(ramdisk_data,
-                                                len, x, y, comp, 0);
-    } else if (filename.find(".bmp")) {
-        LOG("- stbi_bmp_load_from_memory");
-        image_data = stbi_bmp_load_from_memory(ramdisk_data,
-                                               len, x, y, comp, 0);
-    } else if (filename.find(".png")) {
-        LOG("- stbi_png_load_from_memory");
-        image_data = stbi_png_load_from_memory(ramdisk_data,
-                                               len, x, y, comp, 0);
-    } else {
-        DIE("unknown suffix for image, '%s'", filename.c_str());
-    }
-
+    image_data = stbi_load_from_memory(ramdisk_data, len, x, y, comp, 0);
     if (!image_data) {
         DIE("could not read memory for file, '%s'", filename.c_str());
     }

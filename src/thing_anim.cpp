@@ -10,10 +10,9 @@ void Thing::animate (void)
     auto t = this;
 
     Tilep tile;
-    Tilep otile;
     Tpp tp = t->tp;
 
-    otile = tile = tile_index_to_tile(t->tile_curr);
+    tile = tile_index_to_tile(t->tile_curr);
     if (tile) {
         //
         // If within the animate time of this frame, keep with it.

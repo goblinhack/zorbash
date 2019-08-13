@@ -103,8 +103,6 @@ public:
     void render_triangle_fans(void);
     void render_point_light(void);
     void render(int fbo, int pass);
-    void render_debug(int minx, int miny, int maxx, int maxy);
-    void render_debug_lines(int minx, int miny, int maxx, int maxy);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -137,7 +135,5 @@ extern void lights_render_points(int minx, int miny,
                                  int maxx, int maxy, int fbo, int pass);
 extern void lights_render_high_quality(int minx, int miny, 
                                        int maxx, int maxy, int fbo);
-extern void lights_render_points_debug(int minx, int miny, 
-                                       int maxx, int maxy);
 
 #endif // LIGHT_H 
