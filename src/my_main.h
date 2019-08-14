@@ -3,6 +3,21 @@
 // See the README file for license info.
 //
 
+// `error' to treat this diagnostic as an error, 
+// `warning' to treat it like a warning (even if -Werror is in effect)
+// `ignored' if the diagnostic is to be ignored
+//
+// #pragma GCC diagnostic warning "-Wformat"
+// #pragma GCC diagnostic error "-Wformat"
+// #pragma GCC diagnostic ignored "-Wformat"
+//            
+// for cereal and gcc8
+#if __GNUC__
+#ifndef __clang__
+#pragma GCC diagnostic warning "-Wclass-memaccess"
+#endif
+#endif
+
 #pragma once
 
 #ifndef _MY_MAIN_H_
