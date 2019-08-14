@@ -3,6 +3,7 @@
  * See the README file for license info.
  */
 
+#include "my_main.h"
 #include <cereal/types/map.hpp>
 #include <cereal/types/array.hpp>
 #include <cereal/types/memory.hpp>
