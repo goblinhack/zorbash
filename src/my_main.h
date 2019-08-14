@@ -14,7 +14,7 @@
 // for cereal and gcc8
 #ifdef __GNUC__
 #ifndef __clang__
-#pragma GCC diagnostic warning "-Wclass-memaccess"
+#pragma GCC diagnostic ignored "-Wclass-memaccess"
 #endif
 #endif
 
