@@ -12,10 +12,23 @@
 // #pragma GCC diagnostic ignored "-Wformat"
 //            
 // for cereal and gcc8
-#if __GNUC__
+#ifdef __GNUC__
 #ifndef __clang__
 #pragma GCC diagnostic warning "-Wclass-memaccess"
 #endif
+#endif
+
+#ifdef __clang__
+/*code specific to clang compiler*/
+#elif __GNUC__
+/*code for GNU C compiler */
+#elif _MSC_VER
+/*usually has the version number in _MSC_VER*/
+/*code specific to MSVC compiler*/
+#elif __BORLANDC__
+/*code specific to borland compilers*/
+#elif __MINGW32__
+/*code specific to mingw compilers*/
 #endif
 
 #pragma once
