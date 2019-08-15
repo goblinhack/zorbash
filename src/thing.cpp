@@ -47,16 +47,12 @@ Thingp thing_new (std::string name, fpoint at, fpoint jitter)
 
 Thing::Thing (void)
 {_
-    is_init = false;
     newptr(this, "thing");
 }
 
 Thing::~Thing (void)
 {_
     verify(this);
-    if (!is_init) {
-        return;
-    }
     if (is_being_destroyed) {
         die("death recursion");
     }
@@ -93,14 +89,11 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     has_ever_moved = 0;
     is_attached = 0;
     is_being_destroyed = 0;
-    is_bloodied = 0;
     is_bouncing = 0;
     is_dead = 0;
     is_facing_left = 0;
     is_hidden = 0;
     is_hungry = 0;
-    is_init = 0;
-    is_lit = 0;
     is_moving = 0;
     is_open = 0;
     is_sleeping = 0;
@@ -155,11 +148,9 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         is_facing_left = false;
     }
 
-    is_init               = true;
     is_hungry             = tp_hunger_constant(tp);
     is_starving           = false;
     is_dead               = false;
-    is_bloodied           = false;
     is_hidden             = false;
     is_sleeping           = false;
     is_moving             = false;
@@ -167,7 +158,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     is_open               = false;
     is_bouncing           = false;
     is_attached           = false;
-    is_lit                = false;
     is_being_destroyed    = false;
     is_waiting_for_ai     = tp_is_active(tp);
     is_submerged          = tp_is_active(tp);
