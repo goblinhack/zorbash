@@ -73,7 +73,7 @@ bool Thing::update_coordinates (void)
     double x;
     double y;
 
-    if (time_get_time_ms_cached() >= timestamp_move_end) {
+    if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         x = mid_at.x;
         y = mid_at.y;
 
@@ -87,8 +87,8 @@ bool Thing::update_coordinates (void)
             timestamp_ai_next = now + delay + jitter;
         }
     } else {
-        double t = timestamp_move_end - timestamp_move_begin;
-        double dt = time_get_time_ms_cached() - timestamp_move_begin;
+        double t = get_timestamp_move_end() - get_timestamp_move_begin();
+        double dt = time_get_time_ms_cached() - get_timestamp_move_begin();
         double step = dt / t;
         double dx = mid_at.x - last_mid_at.x;
         double dy = mid_at.y - last_mid_at.y;
@@ -361,8 +361,8 @@ void Thing::update_pos (fpoint to)
     // track of when we moved.
     //
     mid_at = to;
-    timestamp_move_begin = time_get_time_ms_cached();
-    timestamp_move_end = timestamp_move_begin + speed;
+    set_timestamp_move_begin(time_get_time_ms_cached());
+    set_timestamp_move_end(get_timestamp_move_begin() + speed);
 
     move_carried_items();
 }

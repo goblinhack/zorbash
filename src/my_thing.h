@@ -93,6 +93,9 @@ public:
     uint32_t     timestamp_bounce_end {};
     uint32_t     timestamp_last_i_was_hit {};
     uint32_t     timestamp_flip_start {};    // Used for animating the steps.
+    uint32_t     timestamp_move_begin {};
+    uint32_t     timestamp_move_end {};
+    uint32_t     timestamp_born {};
 };
 
 class Thing
@@ -127,11 +130,7 @@ public:
     uint32_t     id_weapon_carry_anim;
     uint32_t     id_weapon_use_anim;
     uint32_t     timestamp_ai_next;
-    uint32_t     timestamp_born;
     uint32_t     timestamp_collision;
-    uint32_t     timestamp_move_begin;
-    uint32_t     timestamp_move_end;
-    uint32_t     timestamp_move_start;
     uint32_t     timestamp_next_frame;
     unsigned int depth:5;                    // Display order
     unsigned int dir:4;                      // Direction
@@ -242,6 +241,27 @@ public:
     uint32_t incr_timestamp_flip_start(uint32_t);
     uint32_t decr_timestamp_flip_start(void);
     uint32_t incr_timestamp_flip_start(void);
+
+    uint32_t set_timestamp_move_begin(uint32_t);
+    uint32_t get_timestamp_move_begin(void);
+    uint32_t decr_timestamp_move_begin(uint32_t);
+    uint32_t incr_timestamp_move_begin(uint32_t);
+    uint32_t decr_timestamp_move_begin(void);
+    uint32_t incr_timestamp_move_begin(void);
+
+    uint32_t set_timestamp_move_end(uint32_t);
+    uint32_t get_timestamp_move_end(void);
+    uint32_t decr_timestamp_move_end(uint32_t);
+    uint32_t incr_timestamp_move_end(uint32_t);
+    uint32_t decr_timestamp_move_end(void);
+    uint32_t incr_timestamp_move_end(void);
+
+    uint32_t set_timestamp_born(uint32_t);
+    uint32_t get_timestamp_born(void);
+    uint32_t decr_timestamp_born(uint32_t);
+    uint32_t incr_timestamp_born(uint32_t);
+    uint32_t decr_timestamp_born(void);
+    uint32_t incr_timestamp_born(void);
 
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);
