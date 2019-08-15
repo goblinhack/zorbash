@@ -96,6 +96,9 @@ public:
     uint32_t     timestamp_move_begin {};
     uint32_t     timestamp_move_end {};
     uint32_t     timestamp_born {};
+    uint32_t     timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
+    uint32_t     timestamp_ai_next {};
+    uint32_t     timestamp_collision {};
     uint32_t     id_owner {};                // Who created this thing?
     uint32_t     id_weapon_carry_anim {};
     uint32_t     id_weapon_use_anim {};
@@ -127,10 +130,7 @@ public:
     uint16_t     tile_top;
     uint16_t     tile_tr;
     uint16_t     weapon_tp_id;               // Weapon thing template.
-    uint32_t     hunger_tick_last_ms;        // Ticks every time does something. Used from memory aging
     uint32_t     id;                         // Unique per thing.
-    uint32_t     timestamp_ai_next;
-    uint32_t     timestamp_collision;
     uint32_t     timestamp_next_frame;
     unsigned int depth:5;                    // Display order
     unsigned int dir:4;                      // Direction
@@ -263,6 +263,27 @@ public:
     uint32_t decr_timestamp_born(void);
     uint32_t incr_timestamp_born(void);
 
+    uint32_t set_timestamp_hunger_tick(uint32_t);
+    uint32_t get_timestamp_hunger_tick(void);
+    uint32_t decr_timestamp_hunger_tick(uint32_t);
+    uint32_t incr_timestamp_hunger_tick(uint32_t);
+    uint32_t decr_timestamp_hunger_tick(void);
+    uint32_t incr_timestamp_hunger_tick(void);
+
+    uint32_t set_timestamp_ai_next(uint32_t);
+    uint32_t get_timestamp_ai_next(void);
+    uint32_t decr_timestamp_ai_next(uint32_t);
+    uint32_t incr_timestamp_ai_next(uint32_t);
+    uint32_t decr_timestamp_ai_next(void);
+    uint32_t incr_timestamp_ai_next(void);
+
+    uint32_t set_timestamp_collision(uint32_t);
+    uint32_t get_timestamp_collision(void);
+    uint32_t decr_timestamp_collision(uint32_t);
+    uint32_t incr_timestamp_collision(uint32_t);
+    uint32_t decr_timestamp_collision(void);
+    uint32_t incr_timestamp_collision(void);
+
     uint32_t set_id_owner(uint32_t);
     uint32_t get_id_owner(void);
 
@@ -288,135 +309,136 @@ public:
     bool will_eat(const Thingp it);
     bool will_prefer(const Thingp it);
     const char *to_cstring(void);
-    double collision_radius(void)                          { return (tp_collision_radius(tp)); }
+    double collision_radius(void);
     double get_bounce(void);
     fpoint ai_get_next_hop(void);
-    int ai_delay_after_moving_ms(void)                     { return (tp_ai_delay_after_moving_ms(tp)); }
-    int ai_scent_distance(void)                            { return (tp_ai_scent_distance(tp)); }
-    int bite_damage(void)                                  { return (tp->bite_damage()); }
-    int collision_attack(void)                             { return (tp_collision_attack(tp)); }
-    int collision_box(void)                                { return (tp_collision_box(tp)); }
-    int collision_check(void)                              { return (tp_collision_check(tp)); }
-    int collision_circle(void)                             { return (tp_collision_circle(tp)); }
-    int collision_hit_priority(void)                       { return (tp_collision_hit_priority(tp)); }
-    int does_nothing(void)                                 { return (tp_does_nothing(tp)); }
-    int gfx_animated(void)                                 { return (tp_gfx_animated(tp)); }
-    int gfx_animated_can_vflip(void)                       { return (tp_gfx_animated_can_vflip(tp)); }
-    int gfx_animated_no_dir(void)                          { return (tp_gfx_animated_no_dir(tp)); }
-    int gfx_bounce_on_move(void)                           { return (tp_gfx_bounce_on_move(tp)); }
-    int gfx_can_hflip(void)                                { return (tp_gfx_can_hflip(tp)); }
-    int gfx_is_an_animation_only(void)                     { return (tp_gfx_is_an_animation_only(tp)); }
-    int gfx_is_floor_deco(void)                            { return (tp_gfx_is_floor_deco(tp)); }
-    int gfx_is_wall_deco(void)                             { return (tp_gfx_is_wall_deco(tp)); }
-    int gfx_is_weapon_carry_anim(void)                     { return (tp_gfx_is_weapon_carry_anim(tp)); }
-    int gfx_is_weapon_use_anim(void)                       { return (tp_gfx_is_weapon_use_anim(tp)); }
-    int gfx_large_shadow_caster(void)                      { return (tp_gfx_large_shadow_caster(tp)); }
-    int gfx_outlined(void)                                 { return (tp_gfx_outlined(tp)); }
-    int gfx_oversized_but_sitting_on_the_ground(void)      { return (tp_gfx_oversized_but_sitting_on_the_ground(tp)); }
-    int gfx_small_shadow_caster(void)                      { return (tp_gfx_small_shadow_caster(tp)); }
-    int ai_hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, int damage);
     int ai_ai_hit_if_possible(Thingp hitter);
     int ai_ai_hit_if_possible(Thingp hitter, int damage);
-    int hunger_at_health_pct(void)                         { return (tp_hunger_at_health_pct(tp)); }
-    int hunger_clock_freq_ms(void)                         { return (tp_hunger_clock_freq_ms(tp)); }
-    int hunger_constant(void)                              { return (tp_hunger_constant(tp)); }
-    int hunger_initial_health_at(void)                     { return (tp_hunger_initial_health_at(tp)); }
-    int hunger_starving_at_health_pct(void)                { return (tp_hunger_starving_at_health_pct(tp)); }
-    int is_active(void)                                    { return (tp_is_active(tp)); }
-    int is_attackable(void)                                { return (tp_is_attackable(tp)); }
-    int is_bleeder(void)                                   { return (tp_is_bleeder(tp)); }
-    int is_blood(void)                                     { return (tp_is_blood(tp)); }
-    int is_combustable(void)                               { return (tp_is_combustable(tp)); }
-    int is_corpse_on_death(void)                           { return (tp_is_corpse_on_death(tp)); }
-    int is_corridor(void)                                  { return (tp_is_corridor(tp)); }
-    int is_deep_water(void)                                { return (tp_is_deep_water(tp)); }
-    int is_dirt(void)                                      { return (tp_is_dirt(tp)); }
-    int is_door(void)                                      { return (tp_is_door(tp)); }
-    int is_entrance(void)                                  { return (tp_is_entrance(tp)); }
-    int is_exit(void)                                      { return (tp_is_exit(tp)); }
-    int is_explosion(void)                                 { return (tp_is_explosion(tp)); }
-    int is_floor(void)                                     { return (tp_is_floor(tp)); }
-    int is_food(void)                                      { return (tp_is_food(tp)); }
-    int is_grass(void)                                     { return (tp_is_grass(tp)); }
-    int is_gravel(void)                                    { return (tp_is_gravel(tp)); }
-    int is_key(void)                                       { return (tp_is_key(tp)); }
-    int is_lava(void)                                      { return (tp_is_lava(tp)); }
+    int ai_delay_after_moving_ms(void);
+    int ai_hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, int damage);
+    int ai_scent_distance(void);
+    int bite_damage(void);
+    int collision_attack(void);
+    int collision_box(void);
+    int collision_check(void);
+    int collision_circle(void);
+    int collision_hit_priority(void);
+    int does_nothing(void);
+    int gfx_animated(void);
+    int gfx_animated_can_vflip(void);
+    int gfx_animated_no_dir(void);
+    int gfx_bounce_on_move(void);
+    int gfx_can_hflip(void);
+    int gfx_is_an_animation_only(void);
+    int gfx_is_floor_deco(void);
+    int gfx_is_wall_deco(void);
+    int gfx_is_weapon_carry_anim(void);
+    int gfx_is_weapon_use_anim(void);
+    int gfx_large_shadow_caster(void);
+    int gfx_outlined(void);
+    int gfx_oversized_but_sitting_on_the_ground(void);
+    int gfx_small_shadow_caster(void);
+    int hunger_at_health_pct(void);
+    int hunger_clock_freq_ms(void);
+    int hunger_constant(void);
+    int hunger_initial_health_at(void);
+    int hunger_starving_at_health_pct(void);
+    int is_active(void);
+    int is_attackable(void);
+    int is_bleeder(void);
+    int is_blood(void);
+    int is_combustable(void);
+    int is_corpse_on_death(void);
+    int is_corridor(void);
+    int is_deep_water(void);
+    int is_dirt(void);
+    int is_door(void);
+    int is_entrance(void);
+    int is_exit(void);
+    int is_explosion(void);
+    int is_floor(void);
+    int is_food(void);
+    int is_grass(void);
+    int is_gravel(void);
+    int is_key(void);
+    int is_lava(void);
     int is_less_preferred_terrain(point p);
-    int is_light_strength(void)                            { return (tp_is_light_strength(tp)); }
-    int is_made_of_meat(void)                              { return (tp_is_made_of_meat(tp)); }
-    int is_meat_eater(void)                                { return (tp_is_meat_eater(tp)); }
-    int is_monst(void)                                     { return (tp_is_monst(tp)); }
-    int is_movable(void)                                   { return (tp_is_movable(tp)); }
-    int is_movement_blocking(void)                         { return (tp_is_movement_blocking(tp)); }
-    int is_obstacle(void)                                  { return (tp_is_obstacle(tp)); }
-    int is_player(void)                                    { return (tp_is_player(tp)); }
-    int is_projectile(void)                                { return (tp_is_projectile(tp)); }
-    int is_ripple(void)                                    { return (tp_is_ripple(tp)); }
-    int is_rock(void)                                      { return (tp_is_rock(tp)); }
-    int is_rrr1(void)                                      { return (tp_is_rrr1(tp)); }
-    int is_rrr10(void)                                     { return (tp_is_rrr10(tp)); }
-    int is_rrr11(void)                                     { return (tp_is_rrr11(tp)); }
-    int is_rrr12(void)                                     { return (tp_is_rrr12(tp)); }
-    int is_rrr13(void)                                     { return (tp_is_rrr13(tp)); }
-    int is_rrr14(void)                                     { return (tp_is_rrr14(tp)); }
-    int is_rrr15(void)                                     { return (tp_is_rrr15(tp)); }
-    int is_rrr16(void)                                     { return (tp_is_rrr16(tp)); }
-    int is_rrr17(void)                                     { return (tp_is_rrr17(tp)); }
-    int is_rrr18(void)                                     { return (tp_is_rrr18(tp)); }
-    int is_rrr19(void)                                     { return (tp_is_rrr19(tp)); }
-    int is_rrr2(void)                                      { return (tp_is_rrr2(tp)); }
-    int is_rrr20(void)                                     { return (tp_is_rrr20(tp)); }
-    int is_rrr21(void)                                     { return (tp_is_rrr21(tp)); }
-    int is_rrr22(void)                                     { return (tp_is_rrr22(tp)); }
-    int is_rrr23(void)                                     { return (tp_is_rrr23(tp)); }
-    int is_rrr24(void)                                     { return (tp_is_rrr24(tp)); }
-    int is_rrr25(void)                                     { return (tp_is_rrr25(tp)); }
-    int is_rrr26(void)                                     { return (tp_is_rrr26(tp)); }
-    int is_rrr27(void)                                     { return (tp_is_rrr27(tp)); }
-    int is_rrr28(void)                                     { return (tp_is_rrr28(tp)); }
-    int is_rrr29(void)                                     { return (tp_is_rrr29(tp)); }
-    int is_rrr3(void)                                      { return (tp_is_rrr3(tp)); }
-    int is_rrr30(void)                                     { return (tp_is_rrr30(tp)); }
-    int is_rrr31(void)                                     { return (tp_is_rrr31(tp)); }
-    int is_rrr32(void)                                     { return (tp_is_rrr32(tp)); }
-    int is_rrr33(void)                                     { return (tp_is_rrr33(tp)); }
-    int is_rrr34(void)                                     { return (tp_is_rrr34(tp)); }
-    int is_rrr35(void)                                     { return (tp_is_rrr35(tp)); }
-    int is_rrr36(void)                                     { return (tp_is_rrr36(tp)); }
-    int is_rrr37(void)                                     { return (tp_is_rrr37(tp)); }
-    int is_rrr38(void)                                     { return (tp_is_rrr38(tp)); }
-    int is_rrr39(void)                                     { return (tp_is_rrr39(tp)); }
-    int is_rrr4(void)                                      { return (tp_is_rrr4(tp)); }
-    int is_rrr40(void)                                     { return (tp_is_rrr40(tp)); }
-    int is_rrr41(void)                                     { return (tp_is_rrr41(tp)); }
-    int is_rrr42(void)                                     { return (tp_is_rrr42(tp)); }
-    int is_rrr43(void)                                     { return (tp_is_rrr43(tp)); }
-    int is_rrr44(void)                                     { return (tp_is_rrr44(tp)); }
-    int is_rrr45(void)                                     { return (tp_is_rrr45(tp)); }
-    int is_rrr46(void)                                     { return (tp_is_rrr46(tp)); }
-    int is_rrr47(void)                                     { return (tp_is_rrr47(tp)); }
-    int is_rrr48(void)                                     { return (tp_is_rrr48(tp)); }
-    int is_rrr49(void)                                     { return (tp_is_rrr49(tp)); }
-    int is_rrr5(void)                                      { return (tp_is_rrr5(tp)); }
-    int is_rrr50(void)                                     { return (tp_is_rrr50(tp)); }
-    int is_rrr6(void)                                      { return (tp_is_rrr6(tp)); }
-    int is_rrr7(void)                                      { return (tp_is_rrr7(tp)); }
-    int is_rrr8(void)                                      { return (tp_is_rrr8(tp)); }
-    int is_rrr9(void)                                      { return (tp_is_rrr9(tp)); }
-    int is_snow(void)                                      { return (tp_is_snow(tp)); }
-    int is_soil(void)                                      { return (tp_is_soil(tp)); }
-    int is_undead(void)                                    { return (tp_is_undead(tp)); }
-    int is_wall(void)                                      { return (tp_is_wall(tp)); }
-    int is_water(void)                                     { return (tp_is_water(tp)); }
-    int is_water_dweller(void)                             { return (tp_is_water_dweller(tp)); }
-    int is_water_hater(void)                               { return (tp_is_water_hater(tp)); }
-    int is_weapon(void)                                    { return (tp_is_weapon(tp)); }
-    int weapon_damage(void)                                { return (tp_weapon_damage(tp)); }
-    int weapon_use_delay_hundredths(void)                  { return (tp_weapon_use_delay_hundredths(tp)); }
-    int weapon_use_distance(void)                          { return (tp_weapon_use_distance(tp)); }
-    int z_depth(void)                                      { return (tp_z_depth(tp)); }
-    std::string bite_damage_hd(void)                       { return (tp_bite_damage_hd(tp)); }
-    std::string is_nutrition_hd(void)                      { return (tp_is_nutrition_hd(tp)); }
+    int is_light_strength(void);
+    int is_made_of_meat(void);
+    int is_meat_eater(void);
+    int is_monst(void);
+    int is_movable(void);
+    int is_movement_blocking(void);
+    int is_nutrition(void);
+    int is_obstacle(void);
+    int is_player(void);
+    int is_projectile(void);
+    int is_ripple(void);
+    int is_rock(void);
+    int is_rrr1(void);
+    int is_rrr10(void);
+    int is_rrr11(void);
+    int is_rrr12(void);
+    int is_rrr13(void);
+    int is_rrr14(void);
+    int is_rrr15(void);
+    int is_rrr16(void);
+    int is_rrr17(void);
+    int is_rrr18(void);
+    int is_rrr19(void);
+    int is_rrr2(void);
+    int is_rrr20(void);
+    int is_rrr21(void);
+    int is_rrr22(void);
+    int is_rrr23(void);
+    int is_rrr24(void);
+    int is_rrr25(void);
+    int is_rrr26(void);
+    int is_rrr27(void);
+    int is_rrr28(void);
+    int is_rrr29(void);
+    int is_rrr3(void);
+    int is_rrr30(void);
+    int is_rrr31(void);
+    int is_rrr32(void);
+    int is_rrr33(void);
+    int is_rrr34(void);
+    int is_rrr35(void);
+    int is_rrr36(void);
+    int is_rrr37(void);
+    int is_rrr38(void);
+    int is_rrr39(void);
+    int is_rrr4(void);
+    int is_rrr40(void);
+    int is_rrr41(void);
+    int is_rrr42(void);
+    int is_rrr43(void);
+    int is_rrr44(void);
+    int is_rrr45(void);
+    int is_rrr46(void);
+    int is_rrr47(void);
+    int is_rrr48(void);
+    int is_rrr49(void);
+    int is_rrr5(void);
+    int is_rrr50(void);
+    int is_rrr6(void);
+    int is_rrr7(void);
+    int is_rrr8(void);
+    int is_rrr9(void);
+    int is_snow(void);
+    int is_soil(void);
+    int is_undead(void);
+    int is_wall(void);
+    int is_water(void);
+    int is_water_dweller(void);
+    int is_water_hater(void);
+    int is_weapon(void);
+    int weapon_damage(void);
+    int weapon_use_delay_hundredths(void);
+    int weapon_use_distance(void);
+    int z_depth(void);
+    std::string bite_damage_hd(void);
+    std::string is_nutrition_hd(void);
     std::string to_string(void);
     uint8_t is_dir_bl(void);
     uint8_t is_dir_br(void);
@@ -501,7 +523,6 @@ public:
     void weapon_sheath(void);
     void weapon_wield_next();
     void wield(Tpp tp);
-    int is_nutrition(void)                                    { return (tp->is_nutrition()); }
 };
 
 struct ThingDisplaySortKey {
