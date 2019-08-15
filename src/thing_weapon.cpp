@@ -7,8 +7,9 @@
 
 Tpp Thing::weapon_get ()
 {
-    if (weapon_tp_id) {
-        return (tp_find(weapon_tp_id));
+    auto id = get_weapon_tp_id();
+    if (id) {
+        return (tp_find(id));
     }
 
     return (nullptr);
@@ -56,9 +57,9 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
     }
 
     if (new_weapon_carry_anim) {
-        set_id_weapon_carry_anim(new_weapon_carry_anim->id);
+        set_weapon_id_carry_anim(new_weapon_carry_anim->id);
     } else {
-        set_id_weapon_carry_anim(0);
+        set_weapon_id_carry_anim(0);
     }
 }
 
@@ -104,9 +105,9 @@ void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
     }
 
     if (weapon_use_anim) {
-        set_id_weapon_use_anim(weapon_use_anim->id);
+        set_weapon_id_use_anim(weapon_use_anim->id);
     } else {
-        set_id_weapon_use_anim(0);
+        set_weapon_id_use_anim(0);
     }
 }
 
@@ -181,7 +182,7 @@ Thingp Thing::weapon_get_carry_anim (void)
 {
     Thingp weapon_carry_anim = 0;
 
-    auto id = get_id_weapon_carry_anim();
+    auto id = get_weapon_id_carry_anim();
     if (id) {
         weapon_carry_anim = thing_find(id);
     }
@@ -197,7 +198,7 @@ Thingp Thing::weapon_get_use_anim (void)
     //
     Thingp weapon_use_anim = 0;
 
-    auto id = get_id_weapon_use_anim();
+    auto id = get_weapon_id_use_anim();
     if (id) {
         weapon_use_anim = thing_find(id);
     }
@@ -207,8 +208,9 @@ Thingp Thing::weapon_get_use_anim (void)
 
 void Thing::weapon_wield_next (void)
 {
-    if (weapon_tp_id) {
-        wield(tp_find(weapon_tp_id));
+    auto id = get_weapon_id_use_anim();
+    if (id) {
+        wield(tp_find(id));
     }
 }
 
@@ -272,7 +274,7 @@ void Thing::wield (Tpp weapon)
     //
     // Set the weapon so we can use it later
     //
-    weapon_tp_id = weapon->id;
+    set_weapon_tp_id(weapon->id);
 
     //
     // Save the thing id so the client wid can keep track of the weapon.
@@ -289,7 +291,7 @@ void Thing::wield (Tpp weapon)
 
 void Thing::use (void)
 {
-    if (get_id_weapon_use_anim()) {
+    if (get_weapon_id_use_anim()) {
         //
         // Still using.
         //

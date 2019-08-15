@@ -1302,55 +1302,73 @@ uint32_t Thing::incr_timestamp_collision (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// id_owner
+// owner_id
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_id_owner (void)
+uint32_t Thing::get_owner_id (void)
 {
     if (monst) { 
-        return (monst->id_owner);
+        return (monst->owner_id);
     } else {
         return (0);
     }
 }
 
-uint32_t Thing::set_id_owner (uint32_t v)
+uint32_t Thing::set_owner_id (uint32_t v)
 {
     new_monst();
-    return (monst->id_owner = v);
+    return (monst->owner_id = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// id_weapon_carry_anim
+// weapon_id_carry_anim
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_id_weapon_carry_anim (void)
+uint32_t Thing::get_weapon_id_carry_anim (void)
 {
     if (monst) { 
-        return (monst->id_weapon_carry_anim);
+        return (monst->weapon_id_carry_anim);
     } else {
         return (0);
     }
 }
 
-uint32_t Thing::set_id_weapon_carry_anim (uint32_t v)
+uint32_t Thing::set_weapon_id_carry_anim (uint32_t v)
 {
     new_monst();
-    return (monst->id_weapon_carry_anim = v);
+    return (monst->weapon_id_carry_anim = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// id_weapon_use_anim
+// weapon_id_use_anim
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_id_weapon_use_anim (void)
+uint32_t Thing::get_weapon_id_use_anim (void)
 {
     if (monst) { 
-        return (monst->id_weapon_use_anim);
+        return (monst->weapon_id_use_anim);
     } else {
         return (0);
     }
 }
 
-uint32_t Thing::set_id_weapon_use_anim (uint32_t v)
+uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
 {
     new_monst();
-    return (monst->id_weapon_use_anim = v);
+    return (monst->weapon_id_use_anim = v);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// weapon_tp_id
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_weapon_tp_id (void)
+{
+    if (monst) { 
+        return (monst->weapon_tp_id);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_weapon_tp_id (uint32_t v)
+{
+    new_monst();
+    return (monst->weapon_tp_id = v);
 }

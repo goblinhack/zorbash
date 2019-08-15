@@ -11,6 +11,8 @@ void Thing::attach (void)
 
     auto p = std::make_pair(id, this);
 
+    auto depth = tp_z_depth(tp);
+
     {
         auto root = &world->all_display_things_at[(int)mid_at.x][(int)mid_at.y][depth];
         auto result = root->insert(p);
@@ -63,6 +65,8 @@ void Thing::detach (void)
         return;
     }
     is_attached = false;
+
+    auto depth = tp_z_depth(tp);
 
 //log("detach from %d %d %d", (int)last_attached.x, (int)last_attached.y,
 //depth);
