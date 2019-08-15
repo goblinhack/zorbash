@@ -142,8 +142,6 @@ public:
     unsigned int is_facing_left:1;
     unsigned int is_hidden:1;
     unsigned int is_hungry:1;
-    unsigned int is_init:1;
-    unsigned int is_lit:1;
     unsigned int is_moving:1;
     unsigned int is_open:1;
     unsigned int is_sleeping:1;

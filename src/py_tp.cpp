@@ -334,7 +334,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_sleeping = 0;
     int is_open = 0;
     int is_dead = 0;
-    int is_bloodied = 0;
     int is_end_of_anim = 0;
     int is_dead_on_end_of_anim = 0;
     char *py_tile_name = nullptr;
@@ -386,14 +385,13 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_sleeping",
         (char*) "is_open",
         (char*) "is_dead",
-        (char*) "is_bloodied",
         (char*) "is_end_of_anim",
         (char*) "is_dead_on_end_of_anim",
         0
     };
 	
     if (!PyArg_ParseTupleAndKeywords(args, keywds,
-                                     "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+                                     "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
                                      kwlist, &py_class,
                                      &py_tile_name,
                                      &fg,
@@ -440,7 +438,6 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_sleeping,
                                      &is_open,
                                      &is_dead,
-                                     &is_bloodied,
                                      &is_end_of_anim,
                                      &is_dead_on_end_of_anim
                                      )) {	
