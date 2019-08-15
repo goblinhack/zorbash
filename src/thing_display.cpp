@@ -1224,7 +1224,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tp, const Tilep &tile,
     double dx = 1.0;
     double dy = 1.0;
     if (world->player) {
-        if (id_owner == world->player->id) {
+        if (get_id_owner() == world->player->id) {
             // use default shadow for carried items
         } else if (this != world->player) {
             fpoint d = this->interpolated_mid_at - world->player->interpolated_mid_at;
@@ -1353,7 +1353,7 @@ void Thing::blit_shadow (const Tpp &tp, const Tilep &tile,
         return;
     }
 
-    if (is_player() || (id_owner == world->player->id)) {
+    if (is_player() || (get_id_owner() == world->player->id)) {
         blit_player_owned_shadow(tp, tile, tl, br);
     } else {
         blit_non_player_owned_shadow(tp, tile, tl, br);
@@ -1370,7 +1370,7 @@ void Thing::blit_shadow_section (const Tpp &tp, const Tilep &tile,
         return;
     }
 
-    if (is_player() || (id_owner == world->player->id)) {
+    if (is_player() || (get_id_owner() == world->player->id)) {
         blit_player_owned_shadow_section(
             tp, tile, tile_tl, tile_br, tl, br);
     } else {

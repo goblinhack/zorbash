@@ -90,9 +90,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     tile_tr = 0;
     weapon_tp_id = 0;
     hunger_tick_last_ms = 0;
-    id_owner = 0;
-    id_weapon_carry_anim = 0;
-    id_weapon_use_anim = 0;
     timestamp_ai_next = 0;
     timestamp_collision = 0;
     timestamp_next_frame = 0;
@@ -517,15 +514,15 @@ void Thing::hooks_remove ()
     //
     Thingp owner = 0;
 
-    if (id_owner) {
+    if (get_id_owner()) {
         owner = owner_get();
     }
 
-    if (id_owner && owner) {
+    if (owner) {
 #ifdef ENABLE_THING_DEBUG
         log("detach %d from owner %s", id, owner->to_string().c_str());
 #endif
-        if (id == owner->id_weapon_carry_anim) {
+        if (id == owner->get_id_weapon_carry_anim()) {
             unwield("remove hooks");
 
 #ifdef ENABLE_THING_DEBUG
@@ -535,7 +532,7 @@ void Thing::hooks_remove ()
             owner->weapon_set_carry_anim(nullptr);
         }
 
-        if (id == owner->id_weapon_use_anim) {
+        if (id == owner->get_id_weapon_use_anim()) {
 #ifdef ENABLE_THING_DEBUG
             log("detach from use anim owner %s", owner->to_string().c_str());
 #endif
@@ -562,20 +559,24 @@ void Thing::hooks_remove ()
     //
     // We own things like a sword. i.e. we are a player.
     //
-    if (id_weapon_carry_anim) {
-        auto item = weapon_get_carry_anim();
-        weapon_set_carry_anim(nullptr);
-        verify(item);
-        item->set_owner(nullptr);
-        item->dead("weapon carry anim owner killed");
+    {
     }
+        auto item = weapon_get_carry_anim();
+        if (item) {
+            weapon_set_carry_anim(nullptr);
+            verify(item);
+            item->set_owner(nullptr);
+            item->dead("weapon carry anim owner killed");
+        }
 
-    if (id_weapon_use_anim) {
+    {
         auto item = weapon_get_use_anim();
-        weapon_set_use_anim(nullptr);
-        verify(item);
-        item->set_owner(nullptr);
-        item->dead("weapon use anim owner killed");
+        if (item) {
+            weapon_set_use_anim(nullptr);
+            verify(item);
+            item->set_owner(nullptr);
+            item->dead("weapon use anim owner killed");
+        }
     }
 
     //
@@ -596,8 +597,9 @@ void Thing::hooks_remove ()
 
 Thingp Thing::owner_get (void)
 {
-    if (id_owner) {
-        return (thing_find(id_owner));
+    auto id = get_id_owner();
+    if (id) {
+        return (thing_find(id));
     } else {
         return (nullptr);
     }
@@ -628,11 +630,10 @@ void Thing::set_owner (Thingp owner)
     }
 
     if (owner) {
-        id_owner = owner->id;
+        set_id_owner(owner->id);
         owner->incr_owned_count();
     } else {
-        id_owner = 0;
-
+        set_id_owner(0);
         if (old_owner) {
             old_owner->decr_owned_count();
         }
@@ -661,21 +662,21 @@ void Thing::move_carried_items (void)
     //
     // Weapons follow also.
     //
-    if (id_weapon_carry_anim) {
-        auto w = thing_find(id_weapon_carry_anim);
+    if (get_id_weapon_carry_anim()) {
+        auto w = thing_find(get_id_weapon_carry_anim());
         if (!w) {
             die("id_weapon_carry_anim set to %d but not found",
-                id_weapon_carry_anim);
+                get_id_weapon_carry_anim());
         }
         w->move_to(mid_at);
         w->dir = dir;
     }
 
-    if (id_weapon_use_anim) {
-        auto w = thing_find(id_weapon_use_anim);
+    if (get_id_weapon_use_anim()) {
+        auto w = thing_find(get_id_weapon_use_anim());
         if (!w) {
             die("id_weapon_use_anim set to %d but not found",
-                id_weapon_use_anim);
+                get_id_weapon_use_anim());
         }
         w->move_to(mid_at);
         w->dir = dir;
@@ -1444,4 +1445,58 @@ uint32_t Thing::incr_timestamp_born (void)
 {
     new_monst();
     return (monst->timestamp_born++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// id_owner
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_id_owner (void)
+{
+    if (monst) { 
+        return (monst->id_owner);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_id_owner (uint32_t v)
+{
+    new_monst();
+    return (monst->id_owner = v);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// id_weapon_carry_anim
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_id_weapon_carry_anim (void)
+{
+    if (monst) { 
+        return (monst->id_weapon_carry_anim);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_id_weapon_carry_anim (uint32_t v)
+{
+    new_monst();
+    return (monst->id_weapon_carry_anim = v);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// id_weapon_use_anim
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_id_weapon_use_anim (void)
+{
+    if (monst) { 
+        return (monst->id_weapon_use_anim);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_id_weapon_use_anim (uint32_t v)
+{
+    new_monst();
+    return (monst->id_weapon_use_anim = v);
 }
