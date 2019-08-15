@@ -82,9 +82,9 @@ public:
     Worldp       world = {};
     float        bounce_height = {};         // Percentage of tile height.
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
-    int          bounce_count = {};
     float        rot = {};                   // GL co-orids
     float        submerged_offset = {};      // GL co-orids
+    int          bounce_count = {};
     int          gold = {}; 
     int          health = {}; 
     int          health_max = {}; 
@@ -99,9 +99,10 @@ public:
     uint32_t     timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
     uint32_t     timestamp_ai_next {};
     uint32_t     timestamp_collision {};
-    uint32_t     id_owner {};                // Who created this thing?
-    uint32_t     id_weapon_carry_anim {};
-    uint32_t     id_weapon_use_anim {};
+    uint32_t     owner_id {};                // Who created this thing?
+    uint32_t     weapon_id_carry_anim {};
+    uint32_t     weapon_id_use_anim {};
+    uint16_t     weapon_tp_id {};            // Weapon thing template.
 };
 
 class Thing
@@ -129,10 +130,8 @@ public:
     uint16_t     tile_tl;
     uint16_t     tile_top;
     uint16_t     tile_tr;
-    uint16_t     weapon_tp_id;               // Weapon thing template.
     uint32_t     id;                         // Unique per thing.
     uint32_t     timestamp_next_frame;
-    unsigned int depth:5;                    // Display order
     unsigned int dir:4;                      // Direction
     unsigned int has_ever_moved:1;
     unsigned int is_attached:1;
@@ -284,14 +283,17 @@ public:
     uint32_t decr_timestamp_collision(void);
     uint32_t incr_timestamp_collision(void);
 
-    uint32_t set_id_owner(uint32_t);
-    uint32_t get_id_owner(void);
+    uint32_t set_owner_id(uint32_t);
+    uint32_t get_owner_id(void);
 
-    uint32_t set_id_weapon_carry_anim(uint32_t);
-    uint32_t get_id_weapon_carry_anim(void);
+    uint32_t set_weapon_id_carry_anim(uint32_t);
+    uint32_t get_weapon_id_carry_anim(void);
 
-    uint32_t set_id_weapon_use_anim(uint32_t);
-    uint32_t get_id_weapon_use_anim(void);
+    uint32_t set_weapon_id_use_anim(uint32_t);
+    uint32_t get_weapon_id_use_anim(void);
+
+    uint32_t set_weapon_tp_id(uint32_t);
+    uint32_t get_weapon_tp_id(void);
 
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);

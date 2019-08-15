@@ -88,9 +88,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     tile_tl = 0;
     tile_top = 0;
     tile_tr = 0;
-    weapon_tp_id = 0;
     timestamp_next_frame = 0;
-    depth = 0;
     dir = 0;
     has_ever_moved = 0;
     is_attached = 0;
@@ -148,7 +146,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     //
     mid_at             = at;
     last_mid_at        = mid_at;
-    depth              = tp_z_depth(tp);
 
     if (tp_gfx_can_hflip(tp)) {
         dir            = THING_DIR_LEFT;
@@ -511,7 +508,7 @@ void Thing::hooks_remove ()
     //
     Thingp owner = 0;
 
-    if (get_id_owner()) {
+    if (get_owner_id()) {
         owner = owner_get();
     }
 
@@ -519,7 +516,7 @@ void Thing::hooks_remove ()
 #ifdef ENABLE_THING_DEBUG
         log("detach %d from owner %s", id, owner->to_string().c_str());
 #endif
-        if (id == owner->get_id_weapon_carry_anim()) {
+        if (id == owner->get_weapon_id_carry_anim()) {
             unwield("remove hooks");
 
 #ifdef ENABLE_THING_DEBUG
@@ -529,7 +526,7 @@ void Thing::hooks_remove ()
             owner->weapon_set_carry_anim(nullptr);
         }
 
-        if (id == owner->get_id_weapon_use_anim()) {
+        if (id == owner->get_weapon_id_use_anim()) {
 #ifdef ENABLE_THING_DEBUG
             log("detach from use anim owner %s", owner->to_string().c_str());
 #endif
@@ -594,7 +591,7 @@ void Thing::hooks_remove ()
 
 Thingp Thing::owner_get (void)
 {
-    auto id = get_id_owner();
+    auto id = get_owner_id();
     if (id) {
         return (thing_find(id));
     } else {
@@ -627,10 +624,10 @@ void Thing::set_owner (Thingp owner)
     }
 
     if (owner) {
-        set_id_owner(owner->id);
+        set_owner_id(owner->id);
         owner->incr_owned_count();
     } else {
-        set_id_owner(0);
+        set_owner_id(0);
         if (old_owner) {
             old_owner->decr_owned_count();
         }
@@ -659,21 +656,21 @@ void Thing::move_carried_items (void)
     //
     // Weapons follow also.
     //
-    if (get_id_weapon_carry_anim()) {
-        auto w = thing_find(get_id_weapon_carry_anim());
+    if (get_weapon_id_carry_anim()) {
+        auto w = thing_find(get_weapon_id_carry_anim());
         if (!w) {
-            die("id_weapon_carry_anim set to %d but not found",
-                get_id_weapon_carry_anim());
+            die("weapon_id_carry_anim set to %d but not found",
+                get_weapon_id_carry_anim());
         }
         w->move_to(mid_at);
         w->dir = dir;
     }
 
-    if (get_id_weapon_use_anim()) {
-        auto w = thing_find(get_id_weapon_use_anim());
+    if (get_weapon_id_use_anim()) {
+        auto w = thing_find(get_weapon_id_use_anim());
         if (!w) {
-            die("id_weapon_use_anim set to %d but not found",
-                get_id_weapon_use_anim());
+            die("weapon_id_use_anim set to %d but not found",
+                get_weapon_id_use_anim());
         }
         w->move_to(mid_at);
         w->dir = dir;
