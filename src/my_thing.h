@@ -96,6 +96,9 @@ public:
     uint32_t     timestamp_move_begin {};
     uint32_t     timestamp_move_end {};
     uint32_t     timestamp_born {};
+    uint32_t     id_owner {};                // Who created this thing?
+    uint32_t     id_weapon_carry_anim {};
+    uint32_t     id_weapon_use_anim {};
 };
 
 class Thing
@@ -126,9 +129,6 @@ public:
     uint16_t     weapon_tp_id;               // Weapon thing template.
     uint32_t     hunger_tick_last_ms;        // Ticks every time does something. Used from memory aging
     uint32_t     id;                         // Unique per thing.
-    uint32_t     id_owner;                   // Who created this thing?
-    uint32_t     id_weapon_carry_anim;
-    uint32_t     id_weapon_use_anim;
     uint32_t     timestamp_ai_next;
     uint32_t     timestamp_collision;
     uint32_t     timestamp_next_frame;
@@ -262,6 +262,15 @@ public:
     uint32_t incr_timestamp_born(uint32_t);
     uint32_t decr_timestamp_born(void);
     uint32_t incr_timestamp_born(void);
+
+    uint32_t set_id_owner(uint32_t);
+    uint32_t get_id_owner(void);
+
+    uint32_t set_id_weapon_carry_anim(uint32_t);
+    uint32_t get_id_weapon_carry_anim(void);
+
+    uint32_t set_id_weapon_use_anim(uint32_t);
+    uint32_t get_id_weapon_use_anim(void);
 
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);

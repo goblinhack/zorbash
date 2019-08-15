@@ -56,9 +56,9 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
     }
 
     if (new_weapon_carry_anim) {
-        id_weapon_carry_anim = new_weapon_carry_anim->id;
+        set_id_weapon_carry_anim(new_weapon_carry_anim->id);
     } else {
-        id_weapon_carry_anim = 0;
+        set_id_weapon_carry_anim(0);
     }
 }
 
@@ -104,9 +104,9 @@ void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
     }
 
     if (weapon_use_anim) {
-        id_weapon_use_anim = weapon_use_anim->id;
+        set_id_weapon_use_anim(weapon_use_anim->id);
     } else {
-        id_weapon_use_anim = 0;
+        set_id_weapon_use_anim(0);
     }
 }
 
@@ -181,8 +181,9 @@ Thingp Thing::weapon_get_carry_anim (void)
 {
     Thingp weapon_carry_anim = 0;
 
-    if (id_weapon_carry_anim) {
-        weapon_carry_anim = thing_find(id_weapon_carry_anim);
+    auto id = get_id_weapon_carry_anim();
+    if (id) {
+        weapon_carry_anim = thing_find(id);
     }
 
     return (weapon_carry_anim);
@@ -196,8 +197,9 @@ Thingp Thing::weapon_get_use_anim (void)
     //
     Thingp weapon_use_anim = 0;
 
-    if (id_weapon_use_anim) {
-        weapon_use_anim = thing_find(id_weapon_use_anim);
+    auto id = get_id_weapon_use_anim();
+    if (id) {
+        weapon_use_anim = thing_find(id);
     }
 
     return (weapon_use_anim);
@@ -287,7 +289,7 @@ void Thing::wield (Tpp weapon)
 
 void Thing::use (void)
 {
-    if (id_weapon_use_anim) {
+    if (get_id_weapon_use_anim()) {
         //
         // Still using.
         //
