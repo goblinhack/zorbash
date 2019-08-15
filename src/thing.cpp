@@ -95,9 +95,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     id_weapon_use_anim = 0;
     timestamp_ai_next = 0;
     timestamp_collision = 0;
-    timestamp_move_begin = 0;
-    timestamp_move_end = 0;
-    timestamp_move_start = 0;
     timestamp_next_frame = 0;
     depth = 0;
     dir = 0;
@@ -124,10 +121,11 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         DIE("thing [%s] not found", name.c_str());
     }
 
-    if (tp_is_monst(tp)) {
+    if (tp_is_monst(tp) || tp_is_player(tp)) {
         new_dmap_scent();
         new_dmap_goals();
         new_age_map();
+        set_timestamp_born(time_get_time_ms_cached());
     }
 
     auto p = std::make_pair(id, this);
@@ -1320,4 +1318,130 @@ uint32_t Thing::incr_timestamp_flip_start (void)
 {
     new_monst();
     return (monst->timestamp_flip_start++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_move_start
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_timestamp_move_begin (void)
+{
+    if (monst) { 
+        return (monst->timestamp_move_begin);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_timestamp_move_begin (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_move_begin = v);
+}
+
+uint32_t Thing::decr_timestamp_move_begin (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_move_begin -= v);
+}
+
+uint32_t Thing::incr_timestamp_move_begin (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_move_begin += v);
+}
+
+uint32_t Thing::decr_timestamp_move_begin (void)
+{
+    new_monst();
+    return (monst->timestamp_move_begin--);
+}
+
+uint32_t Thing::incr_timestamp_move_begin (void)
+{
+    new_monst();
+    return (monst->timestamp_move_begin++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_move_end
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_timestamp_move_end (void)
+{
+    if (monst) { 
+        return (monst->timestamp_move_end);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_timestamp_move_end (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_move_end = v);
+}
+
+uint32_t Thing::decr_timestamp_move_end (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_move_end -= v);
+}
+
+uint32_t Thing::incr_timestamp_move_end (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_move_end += v);
+}
+
+uint32_t Thing::decr_timestamp_move_end (void)
+{
+    new_monst();
+    return (monst->timestamp_move_end--);
+}
+
+uint32_t Thing::incr_timestamp_move_end (void)
+{
+    new_monst();
+    return (monst->timestamp_move_end++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_born
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_timestamp_born (void)
+{
+    if (monst) { 
+        return (monst->timestamp_born);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_timestamp_born (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_born = v);
+}
+
+uint32_t Thing::decr_timestamp_born (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_born -= v);
+}
+
+uint32_t Thing::incr_timestamp_born (uint32_t v)
+{
+    new_monst();
+    return (monst->timestamp_born += v);
+}
+
+uint32_t Thing::decr_timestamp_born (void)
+{
+    new_monst();
+    return (monst->timestamp_born--);
+}
+
+uint32_t Thing::incr_timestamp_born (void)
+{
+    new_monst();
+    return (monst->timestamp_born++);
 }

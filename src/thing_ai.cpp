@@ -207,7 +207,7 @@ fpoint Thing::ai_get_next_hop (void)
             uint32_t age;
             if (age_map->val[x][y]) {
                 age = time_get_elapsed_secs(age_map->val[x][y],
-                                            timestamp_born);
+                                            get_timestamp_born());
             } else {
                 age = 0;
             }
