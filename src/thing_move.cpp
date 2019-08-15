@@ -84,7 +84,7 @@ bool Thing::update_coordinates (void)
             auto now = time_get_time_ms_cached();
             auto delay = tp_ai_delay_after_moving_ms(tp);
             auto jitter = random_range(0, delay / 10);
-            timestamp_ai_next = now + delay + jitter;
+            set_timestamp_ai_next(now + delay + jitter);
         }
     } else {
         double t = get_timestamp_move_end() - get_timestamp_move_begin();

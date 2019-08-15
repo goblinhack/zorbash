@@ -35,15 +35,15 @@ void Thing::collision_check_do (void)
     bool need_collision_test = false;
 
     if (time_have_x_tenths_passed_since(THING_COLLISION_TEST_DELAY_TENTHS,
-                                        timestamp_collision)) {
+                                        get_timestamp_collision())) {
         need_collision_test = true;
     }
 
     if (need_collision_test) {
         ai_collisions_handle();
-        timestamp_collision =
+        set_timestamp_collision(
           time_get_time_ms() +
-          random_range(0, THING_COLLISION_TEST_DELAY_TENTHS);
+          random_range(0, THING_COLLISION_TEST_DELAY_TENTHS));
     }
 }
 
@@ -65,7 +65,7 @@ void Thing::tick (void)
 
     if (is_waiting_for_ai) {
         auto now = time_get_time_ms_cached();
-        if (now > timestamp_ai_next) {
+        if (now > get_timestamp_ai_next()) {
             is_waiting_for_ai = false;
             achieve_goals_in_life();
         }

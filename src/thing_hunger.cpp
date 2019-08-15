@@ -20,11 +20,11 @@ void Thing::hunger_clock (void)
     // Update the hunger clock.
     //
     if (!time_have_x_ms_passed_since(tp_hunger_clock_freq_ms(tp),
-                                    hunger_tick_last_ms)) {
+                                     get_timestamp_hunger_tick())) {
         return;
     }
 
-    hunger_tick_last_ms = time_get_time_ms_cached();
+    set_timestamp_hunger_tick(time_get_time_ms_cached());
 
     if (get_health() > 1) {
         decr_health();
