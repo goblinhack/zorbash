@@ -627,6 +627,15 @@ Tilep tile_random (Tilemap *tiles)
     return ((*tiles)[myrand() % tiles->size()]);
 }
 
+Tilep tile_n (Tilemap *tiles, int n)
+{_
+    if (!tiles || tiles->empty()) {
+        return (0);
+    }
+
+    return ((*tiles)[n % tiles->size()]);
+}
+
 Tilep tile_next (Tilemap *tiles, Tilep in)
 {_
     if (!tiles || tiles->empty()) {

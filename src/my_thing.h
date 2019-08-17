@@ -71,6 +71,17 @@ public:
     }
 } AgeMap;
 
+typedef struct ThingTiles {
+    uint16_t tile_bl;
+    uint16_t tile_bot;
+    uint16_t tile_br;
+    uint16_t tile_left;
+    uint16_t tile_right;
+    uint16_t tile_tl;
+    uint16_t tile_top;
+    uint16_t tile_tr;
+} ThingTiles;
+
 class Monst
 {
 public:
@@ -121,17 +132,9 @@ public:
     fpoint       last_mid_at;                // Previous hop where we were.
     fpoint       mid_at;                     // Grid coordinates.
     fpoint       tl;                         // On screen coordinates
-    uint16_t     tile_bl;
-    uint16_t     tile_bot;
-    uint16_t     tile_br;
-    uint16_t     tile_curr;
-    uint16_t     tile_left;
-    uint16_t     tile_right;
-    uint16_t     tile_tl;
-    uint16_t     tile_top;
-    uint16_t     tile_tr;
     uint32_t     id;                         // Unique per thing.
     uint32_t     timestamp_next_frame;
+    uint16_t     tile_curr;
     unsigned int dir:4;                      // Direction
     unsigned int has_ever_moved:1;
     unsigned int is_attached:1;
@@ -151,6 +154,7 @@ public:
 
     template <class Archive> void serialize(Archive & archive );
     void new_monst(void);
+    void get_tiles(ThingTiles *tiles);
 
     AgeMap *get_age_map(void);
     void new_age_map(void);
@@ -455,20 +459,20 @@ public:
     void animate();
     void attach(void);
     void blit(double offset_x, double offset_y, int x, int y);
-    void blit_grass_cladding(fpoint &tl, fpoint &br);
-    void blit_gravel_cladding(fpoint &tl, fpoint &br);
+    void blit_grass_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
+    void blit_gravel_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_non_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br); void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, double x1, double y1, double x2, double y2, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, double x1, double y1, double x2, double y2, const fpoint &tl, const fpoint &br);
-    void blit_rock_cladding(fpoint &tl, fpoint &br);
+    void blit_rock_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
-    void blit_snow_cladding(fpoint &tl, fpoint &br);
-    void blit_soil_cladding(fpoint &tl, fpoint &br);
+    void blit_snow_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
+    void blit_soil_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_upside_down(double offset_x, double offset_y, int x, int y);
-    void blit_wall_cladding(fpoint &tl, fpoint &br);
+    void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void bounce(double bounce_height, double bounce_fade, uint32_t ms, uint32_t bounce_count);
     void collision_check_do();
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -523,6 +527,32 @@ public:
     void weapon_sheath(void);
     void weapon_wield_next();
     void wield(Tpp tp);
+};
+
+// #pragma pack(1)
+struct ThingStruct
+{
+    Monst        *monst;
+    Tpp          tp;                         // Common settings
+    fpoint       br;                         // On screen coordinates
+    fpoint       interpolated_mid_at;
+    fpoint       last_attached;
+    fpoint       last_blit_br;               // GL co-orids
+    fpoint       last_blit_tl;               // GL co-orids
+    fpoint       last_mid_at;                // Previous hop where we were.
+    fpoint       mid_at;                     // Grid coordinates.
+    fpoint       tl;                         // On screen coordinates
+    uint32_t     id;                         // Unique per thing.
+    uint32_t     timestamp_next_frame;
+    uint16_t     tile_bl;
+    uint16_t     tile_bot;
+    uint16_t     tile_br;
+    uint16_t     tile_curr;
+    uint16_t     tile_left;
+    uint16_t     tile_right;
+    uint16_t     tile_tl;
+    uint16_t     tile_top;
+    uint16_t     tile_tr;
 };
 
 struct ThingDisplaySortKey {

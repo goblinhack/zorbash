@@ -232,5 +232,6 @@ uint8_t tile_is_dead_on_end_of_anim(Tilep);
 
 Tilep tile_first(Tilemap *root);
 Tilep tile_random(Tilemap *root);
+Tilep tile_n(Tilemap *root, int n);
 Tilep tile_next(Tilemap *root, Tilep in);
 #endif
