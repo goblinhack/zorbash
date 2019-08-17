@@ -330,14 +330,14 @@ static int circle_circle_collision (Thingp A,
  */
 static void
 thing_add_ai_possible_hit (Thingp target,
-                        std::string reason,
-                        int hitter_killed_on_hitting,
-                        int hitter_killed_on_hit_or_miss)
+                           std::string reason,
+                           int hitter_killed_on_hitting,
+                           int hitter_killed_on_hit_or_miss)
 {_
     thing_colls.push_back(
       ThingColl(target,
                 reason,
-                tp_collision_hit_priority(target->tp),
+                tp_collision_hit_priority(target->tp()),
                 hitter_killed_on_hitting,
                 hitter_killed_on_hit_or_miss));
 }
@@ -391,7 +391,7 @@ void Thing::ai_possible_hits_find_best (void)
         /*
          * Skip things that aren't really hitable.
          */
-        if (tp_gfx_is_weapon_carry_anim(cand.target->tp)) {
+        if (tp_gfx_is_weapon_carry_anim(cand.target->tp())) {
             continue;
         }
 
@@ -508,8 +508,8 @@ bool things_overlap (const Thingp A, const Thingp B)
 bool Thing::ai_possible_hit (Thingp it, int x, int y, int dx, int dy)
 {_
     auto me = this;
-    auto it_tp = it->tp;
-    auto me_tp = me->tp;
+    auto it_tp = it->tp();
+    auto me_tp = me->tp();
 
     if (it->is_dead) {
         return (true);

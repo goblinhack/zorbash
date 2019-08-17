@@ -9,7 +9,7 @@
 
 void Thing::dir_set_none (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 
@@ -28,7 +28,7 @@ uint8_t Thing::is_dir_none (void)
 
 void Thing::dir_set_down (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 
@@ -45,7 +45,7 @@ uint8_t Thing::is_dir_down (void)
 
 void Thing::dir_set_up (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 
@@ -62,7 +62,7 @@ uint8_t Thing::is_dir_up (void)
 
 void Thing::dir_set_left (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 
@@ -79,7 +79,7 @@ uint8_t Thing::is_dir_left (void)
 
 void Thing::dir_set_right (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 
@@ -96,7 +96,7 @@ uint8_t Thing::is_dir_right (void)
 
 void Thing::dir_set_tl (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 
@@ -113,7 +113,7 @@ uint8_t Thing::is_dir_tl (void)
 
 void Thing::dir_set_bl (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 
@@ -130,7 +130,7 @@ uint8_t Thing::is_dir_bl (void)
 
 void Thing::dir_set_tr (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 
@@ -147,7 +147,7 @@ uint8_t Thing::is_dir_tr (void)
 
 void Thing::dir_set_br (void)
 {
-    if (tp_gfx_animated_no_dir(tp)) {
+    if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
 

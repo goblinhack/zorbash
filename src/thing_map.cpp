@@ -288,7 +288,8 @@ static void thing_blit_water (int minx, int miny, int minz,
         for (auto x = minx; x < maxx; x++) {
             for (auto p : world->all_display_things_at[x][y][z]) {
                 auto t = p.second;
-                if (!tp_is_water(t->tp)) {
+                auto tpp = t->tp();
+                if (!tp_is_water(tpp)) {
                     continue;
                 }
                 t->blit(offset_x - game->config.one_pixel_gl_width,
@@ -330,7 +331,8 @@ static void thing_blit_water (int minx, int miny, int minz,
         for (auto x = minx; x < maxx; x++) {
             for (auto p : world->all_display_things_at[x][y][z]) {
                 auto t = p.second;
-                if (!tp_is_water(t->tp) && !tp_is_deep_water(t->tp)) {
+                auto tpp = t->tp();
+                if (!tp_is_water(tpp) && !tp_is_deep_water(tpp)) {
                     continue;
                 }
 
@@ -338,7 +340,7 @@ static void thing_blit_water (int minx, int miny, int minz,
                 fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
-                tile_blit(t->tp, tile, blit_tl, blit_br);
+                tile_blit(tpp, tile, blit_tl, blit_br);
             }
         }
     }
@@ -584,7 +586,9 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
         for (auto x = minx; x < maxx; x++) {
             for (auto p : world->all_display_things_at[x][y][z]) {
                 auto t = p.second;
-                if (!tp_is_deep_water(t->tp)) {
+                auto tpp = t->tp();
+
+                if (!tp_is_deep_water(tpp)) {
                     continue;
                 }
 
@@ -592,7 +596,7 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
                 fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
-                tile_blit(t->tp, tile, blit_tl, blit_br);
+                tile_blit(tpp, tile, blit_tl, blit_br);
             }
         }
     }
@@ -1078,14 +1082,14 @@ static void thing_blit_things (int minx, int miny, int minz,
             for (auto z = 0; z < MAP_DEPTH; z++) {
                 for (auto p : world->all_display_things_at[x][y][z]) {
                     auto t = p.second;
-                    auto tp = t->tp;
+                    auto tpp = t->tp();
 
-                    have_lava       |= tp_is_lava(tp);
-                    have_deep_water |= tp_is_deep_water(tp);
-                    have_water      |= tp_is_water(tp);
-                    have_blood      |= tp_is_blood(tp);
+                    have_lava       |= tp_is_lava(tpp);
+                    have_deep_water |= tp_is_deep_water(tpp);
+                    have_water      |= tp_is_water(tpp);
+                    have_blood      |= tp_is_blood(tpp);
 
-                    if (unlikely(tp_gfx_animated(tp))) {
+                    if (unlikely(tp_gfx_animated(tpp))) {
                         t->animate();
                     }
                 }
