@@ -10,7 +10,7 @@ void Thing::animate (void)
     auto t = this;
 
     Tilep tile;
-    Tpp tp = t->tp;
+    auto tpp = tp();
 
     tile = tile_index_to_tile(t->tile_curr);
     if (tile) {
@@ -33,7 +33,7 @@ void Thing::animate (void)
         }
     }
 
-    auto tiles = tp_tiles(tp);
+    auto tiles = tp_tiles(tpp);
     if (!tiles || tiles->empty()) {
         return;
     }
@@ -107,7 +107,7 @@ void Thing::animate (void)
             auto health_max = t->get_health_max();
             auto health = t->get_health();
 
-            if (tp->internal_has_hp_anim) {
+            if (tpp->internal_has_hp_anim) {
                 if (health < health_max / 4) {
                     if (!tile_is_hp_25_percent(tile)) {
                         tile = tile_next(tiles, tile);
@@ -149,48 +149,48 @@ void Thing::animate (void)
                     continue;
                 }
 #if 0
-            } else if (tp->internal_has_dir_anim && tp_is_dir_tl(t)) {
+            } else if (tpp->internal_has_dir_anim && tp_is_dir_tl(t)) {
                 if (!tile_is_dir_tl(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->internal_has_dir_anim && tp_is_dir_bl(t)) {
+            } else if (tpp->internal_has_dir_anim && tp_is_dir_bl(t)) {
                 if (!tile_is_dir_bl(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->internal_has_dir_anim && tp_is_dir_br(t)) {
+            } else if (tpp->internal_has_dir_anim && tp_is_dir_br(t)) {
                 if (!tile_is_dir_br(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->internal_has_dir_anim && tp_is_dir_tr(t)) {
+            } else if (tpp->internal_has_dir_anim && tp_is_dir_tr(t)) {
                 if (!tile_is_dir_tr(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
 #endif
-            } else if (tp->internal_has_dir_anim && t->is_dir_up()) {
+            } else if (tpp->internal_has_dir_anim && t->is_dir_up()) {
                 if (!tile_is_dir_up(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->internal_has_dir_anim && t->is_dir_down()) {
+            } else if (tpp->internal_has_dir_anim && t->is_dir_down()) {
                 if (!tile_is_dir_down(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->internal_has_dir_anim && t->is_dir_left()) {
+            } else if (tpp->internal_has_dir_anim && t->is_dir_left()) {
                 if (!tile_is_dir_left(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->internal_has_dir_anim && t->is_dir_right()) {
+            } else if (tpp->internal_has_dir_anim && t->is_dir_right()) {
                 if (!tile_is_dir_right(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tp->internal_has_dir_anim && t->is_dir_none()) {
+            } else if (tpp->internal_has_dir_anim && t->is_dir_none()) {
                 if (!tile_is_dir_none(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;

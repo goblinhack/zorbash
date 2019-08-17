@@ -9,17 +9,19 @@
 
 void Thing::hunger_clock (void)
 {
+    auto tpp = tp();
+
     //
     // Does this thing hunger?
     //
-    if (!tp_hunger_clock_freq_ms(tp)) {
+    if (!tp_hunger_clock_freq_ms(tpp)) {
         return;
     }
 
     //
     // Update the hunger clock.
     //
-    if (!time_have_x_ms_passed_since(tp_hunger_clock_freq_ms(tp),
+    if (!time_have_x_ms_passed_since(tp_hunger_clock_freq_ms(tpp),
                                      get_timestamp_hunger_tick())) {
         return;
     }
@@ -37,14 +39,14 @@ void Thing::hunger_clock (void)
 
     int hungry_at =
       (int) ((double) get_health_max() *
-             ((double) tp_hunger_at_health_pct(tp) / 100.0));
+             ((double) tp_hunger_at_health_pct(tpp) / 100.0));
 
     auto old_is_hungry = is_hungry;
     is_hungry = get_health() < hungry_at;
 
     int starving_at =
       (int) ((double) get_health_max() *
-             ((double) tp_hunger_starving_at_health_pct(tp) / 100.0));
+             ((double) tp_hunger_starving_at_health_pct(tpp) / 100.0));
 
     auto old_is_starving = is_starving;
     is_starving = get_health() < starving_at;

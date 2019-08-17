@@ -74,7 +74,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
     id = ++next_thing_id;
 
-    tp = 0;
     tile_curr = 0;
     timestamp_next_frame = 0;
     dir = 0;
@@ -93,10 +92,11 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     is_submerged = 0;
     is_waiting_for_ai = 0;
 
-    tp = tp_find(name);
+    auto tp = tp_find(name);
     if (!tp) {
         DIE("thing [%s] not found", name.c_str());
     }
+    tp_id = tp->id;
 
     if (tp_is_monst(tp) || tp_is_player(tp)) {
         new_dmap_scent();
@@ -287,6 +287,8 @@ void Thing::destroy (void)
 
     detach();
 
+    auto tpp = tp();
+
     {
         auto a = &world->all_things;
         auto iter = a->find(id);
@@ -373,7 +375,7 @@ void Thing::destroy (void)
     if (is_key()) {
         world->unset_key(old_at.x, old_at.y);
     }
-    if (tp_gfx_large_shadow_caster(tp)) {
+    if (tp_gfx_large_shadow_caster(tpp)) {
         world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
     }
     if (is_door()) {
@@ -640,10 +642,11 @@ Thingp thing_find (uint32_t id)
 
 std::string Thing::to_string (void)
 {_
+    auto tpp = tp();
     verify(this);
-    verify(tp);
+    verify(tpp);
     return (string_sprintf("%u(%s%s) at (%g,%g)",
-                           id, tp->name.c_str(),
+                           id, tpp->name.c_str(),
                            is_dead ? "/dead" : "",
                            mid_at.x, mid_at.y));
 }
@@ -788,9 +791,11 @@ Lightp Thing::get_light (void)
 
 void Thing::new_light (fpoint at)
 {_
+    auto tpp = tp();
+
     new_monst();
     if (!monst->light) {
-        if (tp_is_player(tp)) {
+        if (tp_is_player(tpp)) {
             //
             // keep the light strength half the tiles drawn or we get artifacts
             // at the edges of the fbo
@@ -802,11 +807,11 @@ void Thing::new_light (fpoint at)
                                      LIGHT_QUALITY_HIGH, col);
 
         } else {
-            std::string l = tp_str_light_color(tp);
+            std::string l = tp_str_light_color(tpp);
             color c = string2color(l);
             c.a = 100;
             monst->light = light_new(this, MAX_LIGHT_RAYS / 8,
-                                     (double) tp_is_light_strength(tp),
+                                     (double) tp_is_light_strength(tpp),
                                      mid_at, LIGHT_QUALITY_LOW, c);
         }
 

@@ -65,7 +65,6 @@ int cereal_test (const std::string save_file)
 printf("a\n");
 printf("thing size %d x %d %d\n", MAP_WIDTH, MAP_HEIGHT, MAP_WIDTH * MAP_HEIGHT);
 printf("thing size %ld\n", sizeof(class Thing));
-printf("thing struct size %ld\n", sizeof(struct ThingStruct));
 printf("fpoint size %ld\n", sizeof(fpoint));
 printf("tpp size %ld\n", sizeof(Tpp));
 printf("thing size %ld * %d %ld\n", sizeof(class Thing), MAX_THINGS, sizeof(class Thing) * MAX_THINGS);

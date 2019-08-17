@@ -58,7 +58,7 @@ public:
         oldptr(this);
     }
 
-    int id {};
+    uint16_t id {};
 
     fsize sz;
 

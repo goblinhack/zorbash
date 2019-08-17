@@ -12,8 +12,8 @@
 
 bool Thing::will_attack (const Thingp itp)
 {
-    auto me = tp;
-    auto it = itp->tp;
+    auto me = tp();
+    auto it = itp->tp();
 
     if (!tp_is_attackable(it)) {
         return (false);
@@ -29,8 +29,8 @@ bool Thing::will_attack (const Thingp itp)
 
 bool Thing::will_avoid (const Thingp itp)
 {
-    auto me = tp;
-    auto it = itp->tp;
+    auto me = tp();
+    auto it = itp->tp();
 
     if (tp_is_made_of_meat(me)) {
         if (tp_is_meat_eater(it)) {
@@ -42,8 +42,8 @@ bool Thing::will_avoid (const Thingp itp)
 
 bool Thing::will_eat (const Thingp itp)
 {
-    auto me = tp;
-    auto it = itp->tp;
+    auto me = tp();
+    auto it = itp->tp();
 
     if (tp_is_meat_eater(me)) {
         if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
@@ -55,8 +55,8 @@ bool Thing::will_eat (const Thingp itp)
 
 bool Thing::will_prefer (const Thingp itp)
 {
-    auto me = tp;
-    auto it = itp->tp;
+    auto me = tp();
+    auto it = itp->tp();
 
     if (tp_is_water_dweller(me)) {
         if (tp_is_water(it) || tp_is_deep_water(it)) {
@@ -189,6 +189,7 @@ fpoint Thing::ai_get_next_hop (void)
     auto maxy = CHUNK_HEIGHT;
     fpoint fstart;
 
+    auto tpp = tp();
     fstart = mid_at;
     point start((int)fstart.x, (int)fstart.y);
 
@@ -261,7 +262,7 @@ CON("goals:");
             //
             // Too far away to sense?
             //
-            if (scent->val[x][y] > tp->ai_scent_distance) {
+            if (scent->val[x][y] > tpp->ai_scent_distance) {
                 continue;
             }
 

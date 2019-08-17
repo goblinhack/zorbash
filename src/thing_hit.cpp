@@ -111,11 +111,11 @@ int Thing::ai_ai_hit_if_possible (Thingp hitter, int damage)
         // Walls and doors and other solid object are not damaged by poison
         // or similar effects. Limit it to explosions and the like.
         //
+        auto hitter_tp = hitter->tp();
         if (is_door() || is_wall()) {
-
-            if (!tp_is_explosion(hitter->tp)     &&
-                !tp_is_projectile(hitter->tp)    &&
-                !tp_gfx_is_weapon_use_anim(hitter->tp)) {
+            if (!tp_is_explosion(hitter_tp)     &&
+                !tp_is_projectile(hitter_tp)    &&
+                !tp_gfx_is_weapon_use_anim(hitter_tp)) {
                 //
                 // Not something that typically damages walls.
                 //
@@ -123,7 +123,7 @@ int Thing::ai_ai_hit_if_possible (Thingp hitter, int damage)
             }
         }
 
-        if (tp_gfx_is_weapon_use_anim(hitter->tp)) {
+        if (tp_gfx_is_weapon_use_anim(hitter_tp)) {
             //
             // Get the player using the weapon as the hitter.
             //

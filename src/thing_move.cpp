@@ -14,7 +14,7 @@ bool Thing::move (fpoint future_pos)
     bool attack = false;
 
     verify(this);
-    if (tp_gfx_can_hflip(tp)) {
+    if (tp_gfx_can_hflip(tp())) {
         if (future_pos.x > mid_at.x) {
             if (is_facing_left && !get_timestamp_flip_start()) {
                 set_timestamp_flip_start(time_get_time_ms_cached());
@@ -54,7 +54,7 @@ bool Thing::move (fpoint future_pos,
         move_delta(fpoint(x, y) - mid_at);
     }
 
-    if (tp_gfx_bounce_on_move(tp)) {
+    if (tp_gfx_bounce_on_move(tp())) {
         bounce(0.1, 0.1, 100, 3);
     }
 
@@ -64,6 +64,7 @@ bool Thing::move (fpoint future_pos,
 bool Thing::update_coordinates (void)
 {
     auto old_br = br;
+    auto tpp = tp();
 
     get_bounce();
 
@@ -82,7 +83,7 @@ bool Thing::update_coordinates (void)
         if (!is_waiting_for_ai) {
             is_waiting_for_ai = true;
             auto now = time_get_time_ms_cached();
-            auto delay = tp_ai_delay_after_moving_ms(tp);
+            auto delay = tp_ai_delay_after_moving_ms(tpp);
             auto jitter = random_range(0, delay / 10);
             set_timestamp_ai_next(now + delay + jitter);
         }
@@ -102,7 +103,7 @@ bool Thing::update_coordinates (void)
     double tx = x;
     double ty = y;
 
-    auto sz = tp->sz;
+    auto sz = tpp->sz;
     tx -= sz.w / 2;
     ty -= sz.h / 2;
 
@@ -135,7 +136,7 @@ bool Thing::update_coordinates (void)
     //
     // Put larger tiles on the same y base as small ones.
     //
-    if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tp))) {
+    if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tpp))) {
         double y_offset =
             (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) *
                 tile_gl_height) / 2.0;
@@ -153,7 +154,7 @@ bool Thing::update_coordinates (void)
         br.y -= height;
     }
 
-    if (unlikely(tp_gfx_can_hflip(tp))) {
+    if (unlikely(tp_gfx_can_hflip(tpp))) {
         if (get_timestamp_flip_start()) {
             auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
             uint32_t flip_time = 100;
@@ -188,7 +189,7 @@ bool Thing::update_coordinates (void)
         }
     }
 
-    if (unlikely(tp_gfx_animated_can_vflip(tp))) {
+    if (unlikely(tp_gfx_animated_can_vflip(tpp))) {
         if (is_dir_up()) {
             std::swap(tl.y, br.y);
         }
@@ -255,6 +256,8 @@ double Thing::get_bounce (void)
 
 void Thing::update_pos (fpoint to)
 {_
+    auto tpp = tp();
+
     point new_at((int)to.x, (int)to.y);
     if (world->is_oob(new_at)) {
         return;
@@ -338,7 +341,7 @@ void Thing::update_pos (fpoint to)
             world->unset_key(old_at.x, old_at.y);
             world->set_key(new_at.x, new_at.y);
         }
-        if (tp_gfx_large_shadow_caster(tp)) {
+        if (tp_gfx_large_shadow_caster(tpp)) {
             world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
             world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
         }
@@ -351,9 +354,9 @@ void Thing::update_pos (fpoint to)
     int speed;
     auto owner = owner_get();
     if (owner) {
-        speed = tp_move_speed_ms(owner->tp);
+        speed = tp_move_speed_ms(owner->tp());
     } else{
-        speed = tp_move_speed_ms(tp);
+        speed = tp_move_speed_ms(tpp);
     }
 
     //
