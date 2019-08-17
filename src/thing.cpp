@@ -75,15 +75,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     id = ++next_thing_id;
 
     tp = 0;
-    tile_bl = 0;
-    tile_bot = 0;
-    tile_br = 0;
     tile_curr = 0;
-    tile_left = 0;
-    tile_right = 0;
-    tile_tl = 0;
-    tile_top = 0;
-    tile_tr = 0;
     timestamp_next_frame = 0;
     dir = 0;
     has_ever_moved = 0;
@@ -168,63 +160,17 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         set_health_max(h);
     }
 
-    auto tiles = tp_tile_lefts(tp);
-    auto tile = tile_random(tiles);
-    if (tile) {
-        tile_left = tile->global_index;
-    }
-
-    tiles = tp_tile_rights(tp);
-    tile = tile_random(tiles);
-    if (tile) {
-        tile_right = tile->global_index;
-    }
-
-    tiles = tp_tile_tops(tp);
-    tile = tile_random(tiles);
-    if (tile) {
-        tile_top = tile->global_index;
-    }
-
-    tiles = tp_tile_bots(tp);
-    tile = tile_random(tiles);
-    if (tile) {
-        tile_bot = tile->global_index;
-    }
-
-    tiles = tp_tile_tls(tp);
-    tile = tile_random(tiles);
-    if (tile) {
-        tile_tl = tile->global_index;
-    }
-
-    tiles = tp_tile_trs(tp);
-    tile = tile_random(tiles);
-    if (tile) {
-        tile_tr = tile->global_index;
-    }
-
-    tiles = tp_tile_brs(tp);
-    tile = tile_random(tiles);
-    if (tile) {
-        tile_br = tile->global_index;
-    }
-
-    tiles = tp_tile_bls(tp);
-    tile = tile_random(tiles);
-    if (tile) {
-        tile_bl = tile->global_index;
-    }
-
-    tiles = tp_tiles(tp);
+    auto tiles = tp_tiles(tp);
     if (tp->gfx_animated) {
-        tile = tile_first(tiles);
+        auto tile = tile_first(tiles);
+        if (tile) {
+            tile_curr = tile->global_index;
+        }
     } else {
-        tile = tile_random(tiles);
-    }
-
-    if (tile) {
-        tile_curr = tile->global_index;
+        auto tile = tile_random(tiles);
+        if (tile) {
+            tile_curr = tile->global_index;
+        }
     }
 
     if (tp_is_player(tp)) {

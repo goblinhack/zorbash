@@ -5,7 +5,7 @@
 
 #include "my_game.h"
 
-void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
+void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {
     double dw = game->config.one_pixel_gl_width;
     double dh = game->config.one_pixel_gl_height;
@@ -25,7 +25,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_top, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_top, tl2, br2);
     }
 
     if (!world->is_wall(x, y + 1)) {
@@ -33,7 +33,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_bot, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_bot, tl2, br2);
     }
 
     if (!world->is_wall(x - 1, y)) {
@@ -41,7 +41,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit_outline(tp, tile_left, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_left, tl2, br2);
     }
 
     if (!world->is_wall(x + 1, y)) {
@@ -49,7 +49,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit_outline(tp, tile_right, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_right, tl2, br2);
     }
 
     //
@@ -66,7 +66,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_tl, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -83,7 +83,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_tr, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -101,7 +101,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_tr, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -119,7 +119,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_tl, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_tl, tl2, br2);
     }
 
     dw = 0.00;
@@ -139,7 +139,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_bl, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_bl, tl2, br2);
     }
 
     //
@@ -156,7 +156,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_br, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -174,7 +174,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_br, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -192,11 +192,11 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_bl, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_bl, tl2, br2);
     }
 }
 
-void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
+void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {
     double dw = game->config.tile_gl_width;
     double dh = game->config.tile_gl_height;
@@ -216,7 +216,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_top, tl2, br2);
+        tile_blit(tp, tiles->tile_top, tl2, br2);
     }
 
     if (!world->is_grass(x, y + 1)) {
@@ -224,7 +224,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bot, tl2, br2);
+        tile_blit(tp, tiles->tile_bot, tl2, br2);
     }
 
     if (!world->is_grass(x - 1, y)) {
@@ -232,7 +232,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit(tp, tile_left, tl2, br2);
+        tile_blit(tp, tiles->tile_left, tl2, br2);
     }
 
     if (!world->is_grass(x + 1, y)) {
@@ -240,7 +240,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit(tp, tile_right, tl2, br2);
+        tile_blit(tp, tiles->tile_right, tl2, br2);
     }
 
     //
@@ -257,7 +257,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tl, tl2, br2);
+        tile_blit(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -274,7 +274,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tr, tl2, br2);
+        tile_blit(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -292,7 +292,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tr, tl2, br2);
+        tile_blit(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -310,7 +310,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tl, tl2, br2);
+        tile_blit(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -327,7 +327,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bl, tl2, br2);
+        tile_blit(tp, tiles->tile_bl, tl2, br2);
     }
 
     //
@@ -344,7 +344,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_br, tl2, br2);
+        tile_blit(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -362,7 +362,7 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_br, tl2, br2);
+        tile_blit(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -380,11 +380,11 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bl, tl2, br2);
+        tile_blit(tp, tiles->tile_bl, tl2, br2);
     }
 }
 
-void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
+void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {
     double dw = game->config.tile_gl_width;
     double dh = game->config.tile_gl_height;
@@ -404,7 +404,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_top, tl2, br2);
+        tile_blit(tp, tiles->tile_top, tl2, br2);
     }
 
     if (!world->is_soil(x, y + 1)) {
@@ -412,7 +412,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bot, tl2, br2);
+        tile_blit(tp, tiles->tile_bot, tl2, br2);
     }
 
     if (!world->is_soil(x - 1, y)) {
@@ -420,7 +420,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit(tp, tile_left, tl2, br2);
+        tile_blit(tp, tiles->tile_left, tl2, br2);
     }
 
     if (!world->is_soil(x + 1, y)) {
@@ -428,7 +428,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit(tp, tile_right, tl2, br2);
+        tile_blit(tp, tiles->tile_right, tl2, br2);
     }
 
     //
@@ -445,7 +445,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tl, tl2, br2);
+        tile_blit(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -462,7 +462,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tr, tl2, br2);
+        tile_blit(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -480,7 +480,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tr, tl2, br2);
+        tile_blit(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -498,7 +498,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tl, tl2, br2);
+        tile_blit(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -515,7 +515,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bl, tl2, br2);
+        tile_blit(tp, tiles->tile_bl, tl2, br2);
     }
 
     //
@@ -532,7 +532,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_br, tl2, br2);
+        tile_blit(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -550,7 +550,7 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_br, tl2, br2);
+        tile_blit(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -568,11 +568,11 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bl, tl2, br2);
+        tile_blit(tp, tiles->tile_bl, tl2, br2);
     }
 }
 
-void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
+void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {
     double dw = game->config.tile_gl_width;
     double dh = game->config.tile_gl_height;
@@ -592,7 +592,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_top, tl2, br2);
+        tile_blit(tp, tiles->tile_top, tl2, br2);
     }
 
     if (!world->is_gravel(x, y + 1)) {
@@ -600,7 +600,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bot, tl2, br2);
+        tile_blit(tp, tiles->tile_bot, tl2, br2);
     }
 
     if (!world->is_gravel(x - 1, y)) {
@@ -608,7 +608,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit(tp, tile_left, tl2, br2);
+        tile_blit(tp, tiles->tile_left, tl2, br2);
     }
 
     if (!world->is_gravel(x + 1, y)) {
@@ -616,7 +616,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit(tp, tile_right, tl2, br2);
+        tile_blit(tp, tiles->tile_right, tl2, br2);
     }
 
     //
@@ -633,7 +633,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tl, tl2, br2);
+        tile_blit(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -650,7 +650,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tr, tl2, br2);
+        tile_blit(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -668,7 +668,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tr, tl2, br2);
+        tile_blit(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -686,7 +686,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tl, tl2, br2);
+        tile_blit(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -703,7 +703,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bl, tl2, br2);
+        tile_blit(tp, tiles->tile_bl, tl2, br2);
     }
 
     //
@@ -720,7 +720,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_br, tl2, br2);
+        tile_blit(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -738,7 +738,7 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_br, tl2, br2);
+        tile_blit(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -756,11 +756,11 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bl, tl2, br2);
+        tile_blit(tp, tiles->tile_bl, tl2, br2);
     }
 }
 
-void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
+void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {
     double dw = game->config.tile_gl_width;
     double dh = game->config.tile_gl_height;
@@ -780,7 +780,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_top, tl2, br2);
+        tile_blit(tp, tiles->tile_top, tl2, br2);
     }
 
     if (!world->is_snow(x, y + 1)) {
@@ -788,7 +788,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bot, tl2, br2);
+        tile_blit(tp, tiles->tile_bot, tl2, br2);
     }
 
     if (!world->is_snow(x - 1, y)) {
@@ -796,7 +796,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit(tp, tile_left, tl2, br2);
+        tile_blit(tp, tiles->tile_left, tl2, br2);
     }
 
     if (!world->is_snow(x + 1, y)) {
@@ -804,7 +804,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit(tp, tile_right, tl2, br2);
+        tile_blit(tp, tiles->tile_right, tl2, br2);
     }
 
     //
@@ -821,7 +821,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tl, tl2, br2);
+        tile_blit(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -838,7 +838,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tr, tl2, br2);
+        tile_blit(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -856,7 +856,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tr, tl2, br2);
+        tile_blit(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -874,7 +874,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tp, tile_tl, tl2, br2);
+        tile_blit(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -891,7 +891,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bl, tl2, br2);
+        tile_blit(tp, tiles->tile_bl, tl2, br2);
     }
 
     //
@@ -908,7 +908,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_br, tl2, br2);
+        tile_blit(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -926,7 +926,7 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_br, tl2, br2);
+        tile_blit(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -944,11 +944,11 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tp, tile_bl, tl2, br2);
+        tile_blit(tp, tiles->tile_bl, tl2, br2);
     }
 }
 
-void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
+void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {
     double dw = game->config.one_pixel_gl_width;
     double dh = game->config.one_pixel_gl_height;
@@ -968,7 +968,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_top, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_top, tl2, br2);
     }
 
     if (!world->is_rock(x, y + 1)) {
@@ -976,7 +976,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_bot, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_bot, tl2, br2);
     }
 
     if (!world->is_rock(x - 1, y)) {
@@ -984,7 +984,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit_outline(tp, tile_left, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_left, tl2, br2);
     }
 
     if (!world->is_rock(x + 1, y)) {
@@ -992,7 +992,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit_outline(tp, tile_right, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_right, tl2, br2);
     }
 
     //
@@ -1009,7 +1009,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_tl, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -1026,7 +1026,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_tr, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -1044,7 +1044,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_tr, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -1062,7 +1062,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tp, tile_tl, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_tl, tl2, br2);
     }
 
     dw = 0.00;
@@ -1082,7 +1082,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x -= dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_bl, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_bl, tl2, br2);
     }
 
     //
@@ -1099,7 +1099,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_br, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -1117,7 +1117,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_br, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_br, tl2, br2);
     }
 
     //
@@ -1135,7 +1135,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tp, tile_bl, tl2, br2);
+        tile_blit_outline(tp, tiles->tile_bl, tl2, br2);
     }
 }
 
@@ -1392,11 +1392,14 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     auto blit_br = last_blit_br;
     double h = blit_br.y - blit_tl.y;
 
-    fpoint tile_tl(0, 0);
-    fpoint tile_br(1, 1);
-
     is_submerged = false;
     bool lava = false;
+
+    ThingTiles tiles;
+    get_tiles(&tiles);
+
+    fpoint gl_tile_tl(0, 0);
+    fpoint gl_tile_br(1, 1);
 
     //
     // If the owner is submerged, so is the weapon
@@ -1434,16 +1437,15 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
         if (world->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
-            tile_tl = fpoint(0, 0);
             if (owner) {
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
                 blit_tl.y += offset;
-                tile_br = fpoint(1, pct_visible_above_surface);
+                gl_tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
-                tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -1452,16 +1454,15 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             is_submerged = true;
         } else if (world->is_lava((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
-            tile_tl = fpoint(0, 0);
             if (owner) {
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
                 blit_tl.y += offset;
-                tile_br = fpoint(1, pct_visible_above_surface);
+                gl_tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
-                tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset = 
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -1470,14 +1471,13 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             is_submerged = true;
             lava = true;
         } else if (world->is_water((int)map_loc.x, (int)map_loc.y)) {
-            tile_tl = fpoint(0, 0);
             if (owner) {
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
                 blit_tl.y += offset;
             } else {
                 const auto pct_visible_above_surface = 0.1;
-                tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset = 
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -1506,7 +1506,8 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     if (unlikely(tp_gfx_small_shadow_caster(tp))) {
         if (is_submerged) {
-            blit_shadow_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+            blit_shadow_section(
+                tp, tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
             blit_shadow(tp, tile, blit_tl, blit_br);
         } else {
             blit_shadow(tp, tile, blit_tl, blit_br);
@@ -1519,7 +1520,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     if (tp_gfx_outlined(tp)) {
         if (is_submerged) {
             tile_blit_outline_section(
-                tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+                tp, tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
 
             //
             // Show the bottom part of the body transparent
@@ -1538,31 +1539,32 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         }
     } else {
         if (is_submerged) {
-            tile_blit_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+            tile_blit_section(
+              tp, tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
         } else {
             tile_blit(tp, tile, blit_tl, blit_br);
         }
     }
 
     //if (!tp) { // tile_top) {
-    if (tile_top) {
+    if (tiles.tile_top) {
         if (is_wall()) {
-            blit_wall_cladding(blit_tl, blit_br);
+            blit_wall_cladding(blit_tl, blit_br, &tiles);
         }
         if (tp_is_rock(tp)) {
-            blit_rock_cladding(blit_tl, blit_br);
+            blit_rock_cladding(blit_tl, blit_br, &tiles);
         }
         if (tp_is_grass(tp)) {
-            blit_grass_cladding(blit_tl, blit_br);
+            blit_grass_cladding(blit_tl, blit_br, &tiles);
         }
         if (tp_is_soil(tp)) {
-            blit_soil_cladding(blit_tl, blit_br);
+            blit_soil_cladding(blit_tl, blit_br, &tiles);
         }
         if (tp_is_gravel(tp)) {
-            blit_gravel_cladding(blit_tl, blit_br);
+            blit_gravel_cladding(blit_tl, blit_br, &tiles);
         }
         if (tp_is_snow(tp)) {
-            blit_snow_cladding(blit_tl, blit_br);
+            blit_snow_cladding(blit_tl, blit_br, &tiles);
         }
     }
     gl_rotate = 0;
@@ -1576,6 +1578,9 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     if (unlikely(is_hidden)) {
         return;
     }
+
+    ThingTiles tiles;
+    get_tiles(&tiles);
 
     Tilep tile = tile_index_to_tile(tile_curr);
     fpoint blit_tl(tl.x - offset_x, tl.y - offset_y);
@@ -1597,8 +1602,8 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         blit_tl.y += diff;
     }
 
-    fpoint tile_tl(0, 0);
-    fpoint tile_br(1, 1);
+    fpoint gl_tile_tl(0, 0);
+    fpoint gl_tile_br(1, 1);
 
     is_submerged = false;
 
@@ -1648,16 +1653,15 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 
         if (world->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
-            tile_tl = fpoint(0, 0);
             if (owner) {
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
                 blit_tl.y += offset;
-                tile_br = fpoint(1, pct_visible_above_surface);
+                gl_tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
-                tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset = 
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -1665,14 +1669,13 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
             }
             is_submerged = true;
         } else if (world->is_water((int)map_loc.x, (int)map_loc.y)) {
-            tile_tl = fpoint(0, 0);
             if (owner) {
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
                 blit_tl.y += offset;
             } else {
                 const auto pct_visible_above_surface = 0.1;
-                tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset = 
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -1684,24 +1687,26 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 
     if (tp_gfx_outlined(tp)) {
         if (is_submerged) {
-            tile_blit_outline_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+            tile_blit_outline_section(
+              tp, tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
         } else {
             tile_blit_outline(tp, tile, blit_tl, blit_br);
         }
     } else {
         if (is_submerged) {
-            tile_blit_section(tp, tile, tile_tl, tile_br, blit_tl, blit_br);
+            tile_blit_section(
+              tp, tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
         } else {
             tile_blit(tp, tile, blit_tl, blit_br);
         }
     }
 
-    if (tile_top) {
+    if (tiles.tile_top) {
         if (is_wall()) {
-            blit_wall_cladding(blit_tl, blit_br);
+            blit_wall_cladding(blit_tl, blit_br, &tiles);
         }
         if (tp_is_rock(tp)) {
-            blit_rock_cladding(blit_tl, blit_br);
+            blit_rock_cladding(blit_tl, blit_br, &tiles);
         }
         /*
         if (tp_is_grass(tp)) {
