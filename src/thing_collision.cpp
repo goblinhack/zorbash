@@ -409,14 +409,17 @@ void Thing::ai_possible_hits_find_best (void)
             /*
              * If this target is closer, prefer it.
              */
-            double dist_best = DISTANCE(me->interpolated_mid_at.x,
-                                        me->interpolated_mid_at.y,
-                                        best->target->interpolated_mid_at.x,
-                                        best->target->interpolated_mid_at.y);
-            double dist_cand = DISTANCE(me->interpolated_mid_at.x,
-                                        me->interpolated_mid_at.y,
-                                        cand.target->interpolated_mid_at.x,
-                                        cand.target->interpolated_mid_at.y);
+            auto me_pos = get_interpolated_mid_at();
+            auto best_pos = best->target->get_interpolated_mid_at();
+
+            double dist_best = DISTANCE(me_pos.x,
+                                        me_pos.y,
+                                        best_pos.x,
+                                        best_pos.y);
+            double dist_cand = DISTANCE(me_pos.x,
+                                        me_pos.y,
+                                        best_pos.x,
+                                        best_pos.y);
 
             if (dist_cand < dist_best) {
                 best = &cand;
@@ -447,12 +450,12 @@ void Thing::ai_possible_hits_find_best (void)
 
 bool things_overlap (const Thingp A, const Thingp B)
 {_
+#if 0
     fpoint A_at, B_at;
 
     A_at = A->interpolated_mid_at;
     B_at = B->interpolated_mid_at;
 
-#if 0
     int check_only = true;
     fpoint intersect = {0,0};
     fpoint normal_A = {0,0};

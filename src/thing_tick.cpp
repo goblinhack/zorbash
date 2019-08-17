@@ -53,6 +53,7 @@ void Thing::tick (void)
         return;
     }
 
+    update_interpolated_position();
     collision_check_do();
     if (is_dead) {
         return;

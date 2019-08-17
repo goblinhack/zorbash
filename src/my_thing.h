@@ -91,6 +91,7 @@ public:
     Lightp       light = {};                 // Have a light source?
     Tpp          tp = {};                    // Common settings
     Worldp       world = {};
+    fpoint       interpolated_mid_at;
     float        bounce_height = {};         // Percentage of tile height.
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
     float        rot = {};                   // GL co-orids
@@ -122,19 +123,18 @@ private:
 public:
     Thing (void);
     ~Thing (void);
-    Monst        *monst = {};
-    fpoint       br;                         // On screen coordinates
-    fpoint       interpolated_mid_at;
-    fpoint       last_attached;
-    fpoint       last_blit_br;               // GL co-orids
-    fpoint       last_blit_tl;               // GL co-orids
-    fpoint       last_mid_at;                // Previous hop where we were.
-    fpoint       mid_at;                     // Grid coordinates.
-    fpoint       tl;                         // On screen coordinates
-    uint32_t     id;                         // Unique per thing.
-    uint32_t     timestamp_next_frame;
-    uint16_t     tp_id;                         // Common settings
-    uint16_t     tile_curr;
+    Monst    *monst = {};
+    fpoint   br;                         // On screen coordinates
+    fpoint   last_attached;
+    fpoint   last_blit_br;               // GL co-orids
+    fpoint   last_blit_tl;               // GL co-orids
+    fpoint   last_mid_at;                // Previous hop where we were.
+    fpoint   mid_at;                     // Grid coordinates.
+    fpoint   tl;                         // On screen coordinates
+    uint32_t id;                         // Unique per thing.
+    uint32_t timestamp_next_frame;
+    uint16_t tp_id;                      // Common settings
+    uint16_t tile_curr;
     uint32_t dir:4;                      // Direction
     uint32_t has_ever_moved:1;
     uint32_t is_attached:1;
@@ -302,6 +302,9 @@ public:
     uint32_t set_weapon_tp_id(uint32_t);
     uint32_t get_weapon_tp_id(void);
 
+    fpoint set_interpolated_mid_at(fpoint);
+    fpoint get_interpolated_mid_at(void);
+
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void);
@@ -313,6 +316,7 @@ public:
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire);
     bool update_coordinates(void);
+    void update_interpolated_position(void);
     bool will_attack(const Thingp it);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
@@ -512,15 +516,16 @@ public:
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args); // compile error without
     void move_carried_items(void);
-    void move_delta(fpoint);
+    void move_delta(fpoint, bool immediately);
     void move_to(fpoint to);
+    void move_to_immediately(fpoint to);
     void set_owner(Thingp owner);
     void sheath(void);
     void tick();
     void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
     void unwield(const char *why);
     void update_light(void);
-    void update_pos(fpoint);
+    void update_pos(fpoint, bool immediately);
     void use(void);
     void visible();
     void weapon_get_use_offset(double *dx, double *dy);

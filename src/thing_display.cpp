@@ -1233,7 +1233,8 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         if (get_owner_id() == world->player->id) {
             // use default shadow for carried items
         } else if (this != world->player) {
-            fpoint d = this->interpolated_mid_at - world->player->interpolated_mid_at;
+            fpoint d = get_interpolated_mid_at() - 
+                             world->player->get_interpolated_mid_at();
             const double D = 5.0;
             dx = d.x / D;
             dy = d.y / D;

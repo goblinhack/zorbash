@@ -30,6 +30,8 @@ void Thing::attach (void)
     }
 
     if (is_active()) {
+        update_interpolated_position();
+
         auto root = &world->all_active_things_at[(int)mid_at.x][(int)mid_at.y];
         auto result = root->insert(p);
         if (result.second == false) {
