@@ -151,8 +151,8 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     is_bouncing           = false;
     is_attached           = false;
     is_being_destroyed    = false;
-    is_waiting_for_ai     = tp_is_active(tp);
-    is_submerged          = tp_is_active(tp);
+    is_waiting_for_ai     = false;
+    is_submerged          = false;
 
     auto h = tp_hunger_initial_health_at(tp);
     if (h) {
@@ -263,7 +263,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         dx *= jitter.x;
         dy *= jitter.y;
 
-        move_to(fpoint(mid_at.x + dx, mid_at.y + dy));
+        move_to_immediately(fpoint(mid_at.x + dx, mid_at.y + dy));
     }
 
     update_coordinates();
@@ -579,7 +579,7 @@ void Thing::update_light (void)
     //
     auto l = get_light();
     if (l) {
-        l->move_to(interpolated_mid_at);
+        l->move_to(get_interpolated_mid_at());
         l->calculate();
     }
 }
@@ -669,163 +669,4 @@ void Thing::kill (void)
 
     hooks_remove();
     things_to_delete.push_back(id);
-}
-
-void Thing::new_monst (void)
-{
-    if (unlikely(!monst)) { 
-        monst = new Monst(); 
-        // uncomment to see who allocates things
-        // err("new monst");
-        newptr(monst, "Monst");
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////
-// age_map
-////////////////////////////////////////////////////////////////////////////
-AgeMap *Thing::get_age_map (void)
-{
-    if (monst) { 
-        return (monst->age_map);
-    } else {
-        return (0);
-    }
-}
-
-void Thing::new_age_map (void)
-{_
-    new_monst();
-    if (!monst->age_map) {
-        monst->age_map = new AgeMap();
-        newptr(monst->age_map, "Dmap age");
-    }
-}
-
-void Thing::delete_age_map (void)
-{_
-    if (monst) {
-        verify(monst);
-        if (monst->age_map) { 
-            oldptr(monst->age_map);
-            delete monst->age_map; monst->age_map = 0;
-        }
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////
-// dmap_goals
-////////////////////////////////////////////////////////////////////////////
-Dmap *Thing::get_dmap_goals (void)
-{
-    if (monst) { 
-        return (monst->dmap_goals);
-    } else {
-        return (0);
-    }
-}
-
-void Thing::new_dmap_goals (void)
-{_
-    new_monst();
-    if (!monst->dmap_goals) {
-        monst->dmap_goals = new Dmap();
-        newptr(monst->dmap_goals, "Dmap goals");
-    }
-}
-
-void Thing::delete_dmap_goals (void)
-{_
-    if (monst) {
-        verify(monst);
-        if (monst->dmap_goals) { 
-            oldptr(monst->dmap_goals);
-            delete monst->dmap_goals; monst->dmap_goals = 0;
-        }
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////
-// dmap_scent
-////////////////////////////////////////////////////////////////////////////
-Dmap *Thing::get_dmap_scent (void)
-{
-    if (monst) { 
-        return (monst->dmap_scent);
-    } else {
-        return (0);
-    }
-}
-
-void Thing::new_dmap_scent (void)
-{_
-    new_monst();
-    if (!monst->dmap_scent) {
-        monst->dmap_scent = new Dmap();
-        newptr(monst->dmap_scent, "AgeMap");
-    }
-}
-
-void Thing::delete_dmap_scent (void)
-{_
-    if (monst) {
-        verify(monst);
-        if (monst->dmap_scent) { 
-            oldptr(monst->dmap_scent);
-            delete monst->dmap_scent; monst->dmap_scent = 0;
-        }
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////
-// light
-////////////////////////////////////////////////////////////////////////////
-Lightp Thing::get_light (void)
-{
-    if (monst) { 
-        return (monst->light);
-    } else {
-        return (0);
-    }
-}
-
-void Thing::new_light (fpoint at)
-{_
-    auto tpp = tp();
-
-    new_monst();
-    if (!monst->light) {
-        if (tp_is_player(tpp)) {
-            //
-            // keep the light strength half the tiles drawn or we get artifacts
-            // at the edges of the fbo
-            //
-            color col = WHITE;
-            col.a = 250;
-            monst->light = light_new(this,
-                                     MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at,
-                                     LIGHT_QUALITY_HIGH, col);
-
-        } else {
-            std::string l = tp_str_light_color(tpp);
-            color c = string2color(l);
-            c.a = 100;
-            monst->light = light_new(this, MAX_LIGHT_RAYS / 8,
-                                     (double) tp_is_light_strength(tpp),
-                                     mid_at, LIGHT_QUALITY_LOW, c);
-        }
-
-        newptr(monst->light, "AgeMap");
-    }
-}
-
-void Thing::delete_light (void)
-{_
-    if (monst) {
-        verify(monst);
-        if (monst->light) { 
-            oldptr(monst->light);
-            delete monst->light; monst->light = 0;
-        }
-    }
 }

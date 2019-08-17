@@ -51,7 +51,7 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (up || down || left || right) {
-        move_delta(fpoint(x, y) - mid_at);
+        move_delta(fpoint(x, y) - mid_at, false);
     }
 
     if (tp_gfx_bounce_on_move(tp())) {
@@ -59,6 +59,24 @@ bool Thing::move (fpoint future_pos,
     }
 
     return (true);
+}
+
+void Thing::update_interpolated_position (void)
+{
+    get_bounce();
+    if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
+        set_interpolated_mid_at(mid_at);
+    } else {
+        double t = get_timestamp_move_end() - get_timestamp_move_begin();
+        double dt = time_get_time_ms_cached() - get_timestamp_move_begin();
+        double step = dt / t;
+        double dx = mid_at.x - last_mid_at.x;
+        double dy = mid_at.y - last_mid_at.y;
+
+        auto x = last_mid_at.x + dx * step;
+        auto y = last_mid_at.y + dy * step;
+        set_interpolated_mid_at(fpoint(x, y));
+    }
 }
 
 bool Thing::update_coordinates (void)
@@ -78,14 +96,14 @@ bool Thing::update_coordinates (void)
         x = mid_at.x;
         y = mid_at.y;
 
-        interpolated_mid_at = mid_at;
-
-        if (!is_waiting_for_ai) {
-            is_waiting_for_ai = true;
-            auto now = time_get_time_ms_cached();
-            auto delay = tp_ai_delay_after_moving_ms(tpp);
-            auto jitter = random_range(0, delay / 10);
-            set_timestamp_ai_next(now + delay + jitter);
+        if (is_active()) {
+            if (!is_waiting_for_ai) {
+                is_waiting_for_ai = true;
+                auto now = time_get_time_ms_cached();
+                auto delay = tp_ai_delay_after_moving_ms(tpp);
+                auto jitter = random_range(0, delay / 10);
+                set_timestamp_ai_next(now + delay + jitter);
+            }
         }
     } else {
         double t = get_timestamp_move_end() - get_timestamp_move_begin();
@@ -96,8 +114,6 @@ bool Thing::update_coordinates (void)
 
         x = last_mid_at.x + dx * step;
         y = last_mid_at.y + dy * step;
-
-        interpolated_mid_at = fpoint(x, y);
     }
 
     double tx = x;
@@ -254,7 +270,7 @@ double Thing::get_bounce (void)
     return (height);
 }
 
-void Thing::update_pos (fpoint to)
+void Thing::update_pos (fpoint to, bool immediately)
 {_
     auto tpp = tp();
 
@@ -364,13 +380,16 @@ void Thing::update_pos (fpoint to)
     // track of when we moved.
     //
     mid_at = to;
-    set_timestamp_move_begin(time_get_time_ms_cached());
-    set_timestamp_move_end(get_timestamp_move_begin() + speed);
+
+    if (!immediately) {
+        set_timestamp_move_begin(time_get_time_ms_cached());
+        set_timestamp_move_end(get_timestamp_move_begin() + speed);
+    }
 
     move_carried_items();
 }
 
-void Thing::move_delta (fpoint delta)
+void Thing::move_delta (fpoint delta, bool immediately)
 {_
     //
     // If not moving and this is the first move then break out of the
@@ -404,12 +423,17 @@ void Thing::move_delta (fpoint delta)
         has_ever_moved = true;
     }
 
-    update_pos(mid_at + delta);
+    update_pos(mid_at + delta, immediately);
 }
 
 void Thing::move_to (fpoint to)
 {_
-    move_delta(fpoint(to.x - mid_at.x, to.y - mid_at.y));
+    move_delta(fpoint(to.x - mid_at.x, to.y - mid_at.y), false);
+}
+
+void Thing::move_to_immediately (fpoint to)
+{_
+    move_delta(fpoint(to.x - mid_at.x, to.y - mid_at.y), true);
 }
 
 void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)
