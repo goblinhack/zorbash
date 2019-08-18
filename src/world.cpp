@@ -699,3 +699,35 @@ bool World::is_oob (const point p)
     return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
             (p.y < 0) || (p.y >= MAP_HEIGHT));
 }
+
+void World::put_thing (point p, uint32_t id)
+{
+    auto t = thing_find(id);
+    if (!t) {
+        ERR("oob at %d %d for put of id %u", p.x, p.y, id);
+    }
+
+    if (is_oob(p)) {
+        t->die("oob at %d %d for put of id %u", p.x, p.y, id);
+        return;
+    }
+
+    for (auto i = 0; i < MAP_THINGS_PER_CELL; i++) {
+        auto idp = &all_thing_ids_at[p.x][p.y][i];
+        if (!*idp) {
+            *idp = id;
+            return;
+        }
+    }
+    t->die("out of thing slots at %d %d for put of id %u", p.x, p.y, id);
+}
+
+Thingp World::get_first_thing (point p)
+{
+    for (auto id : all_thing_ids_at[p.x][p.y]) {
+        if (id) {
+            return (thing_find(id));
+        }
+    }
+    return (0);
+}
