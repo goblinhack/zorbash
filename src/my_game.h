@@ -92,6 +92,13 @@ public:
     //
     // All things
     //
+    std::array<
+      std::array<
+        std::array<uint32_t, MAP_THINGS_PER_CELL>, MAP_HEIGHT>, MAP_WIDTH> 
+          all_thing_ids_at;
+    Thingp get_first_thing(point p);
+    void put_thing(point p, uint32_t id);
+
     std::unordered_map<uint32_t, Thingp> all_things_at[MAP_WIDTH][MAP_HEIGHT];
 
     //
