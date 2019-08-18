@@ -21,6 +21,7 @@ void Thing::attach (void)
         }
     }
 
+    world->put_thing((int)mid_at.x, (int)mid_at.y, id);
     {
         auto root = &world->all_things_at[(int)mid_at.x][(int)mid_at.y];
         auto result = root->insert(p);
@@ -84,6 +85,7 @@ void Thing::detach (void)
         root->erase(id);
     }
 
+    world->remove_thing((int)last_attached.x, (int)last_attached.y, id);
     {
         auto root = &world->all_things_at[(int)last_attached.x]
                                          [(int)last_attached.y];
