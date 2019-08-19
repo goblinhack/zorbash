@@ -292,7 +292,6 @@ extern uint8_t quitting;
 void quit(void);
 void restart(void);
 void die(void);
-int cereal_test(const std::string save_file);
 
 //
 // dice.cpp

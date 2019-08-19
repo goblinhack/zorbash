@@ -6,8 +6,7 @@
 #ifndef _MY_POINT_H_
 #define _MY_POINT_H_
 
-#include <cereal/types/memory.hpp>
-#include <cereal/types/vector.hpp>
+#include "my_main.h"
 #include "my_math.h"
 
 template<class T> class my_apoint

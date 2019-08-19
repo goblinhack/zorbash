@@ -10,6 +10,7 @@
 
 #include <unordered_map>
 #include <memory>
+#include <set>
 
 typedef class Thing* Thingp;
 typedef std::unordered_map< uint32_t, Thingp > Things;
@@ -63,12 +64,6 @@ typedef class AgeMap {
 public:
     uint32_t val[CHUNK_WIDTH][CHUNK_HEIGHT] = {{0}};
     AgeMap(void) {}
-
-    template <class Archive>
-    void serialize (Archive & archive)
-    {
-        archive(cereal::make_nvp("val", val));
-    }
 } AgeMap;
 
 typedef struct ThingTiles {
