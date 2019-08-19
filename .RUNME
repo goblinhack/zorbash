@@ -540,7 +540,6 @@ case `uname` in
 esac
 
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
-C_FLAGS="$C_FLAGS -I../cereal/include"
 
 #
 # Better to leave off for production
