@@ -42,15 +42,6 @@ public:
         oldptr(this);
     }
 
-    template <class Archive>
-    void serialize (Archive & archive )
-    {
-        archive(cereal::make_nvp("id",               id),
-                cereal::make_nvp("at",               at),
-                cereal::make_nvp("strength",         strength),
-                cereal::make_nvp("max_light_rays",   max_light_rays));
-    }
-
     //
     // Unique per light.
     //

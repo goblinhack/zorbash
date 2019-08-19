@@ -65,11 +65,6 @@ Thing::~Thing (void)
     oldptr(this);
 }
 
-template <class Archive> void Thing::serialize (Archive & archive )
-{
-    archive(cereal::make_nvp("id", id));
-}
-
 void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
     id = ++next_thing_id;
