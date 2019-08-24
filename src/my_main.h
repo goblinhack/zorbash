@@ -133,6 +133,7 @@ extern int TILES_DOWN;
 #define ENABLE_JOY_SCROLL_SPEED_SCALE           1.0
 #define ENABLE_JOY_MAX_SCROLL_SPEED_SCALE       1.5
 
+#include <cstring>
 #include <string>
 
 //
