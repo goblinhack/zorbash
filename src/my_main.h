@@ -65,8 +65,8 @@
 #define MAP_BORDER                  4
 #define CHUNK_WIDTH                 ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define CHUNK_HEIGHT                ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
-#define MAP_WIDTH                   (CHUNK_WIDTH * 32)
-#define MAP_HEIGHT                  (CHUNK_HEIGHT * 32)
+#define MAP_WIDTH                   (CHUNK_WIDTH * 16)
+#define MAP_HEIGHT                  (CHUNK_HEIGHT * 16)
 #define MAP_THINGS_PER_CELL         8
 #define MAX_THINGS                  (MAP_WIDTH * MAP_HEIGHT * 2)
 
