@@ -156,8 +156,6 @@ void Thing::new_light (fpoint at)
                                      (double) tp_is_light_strength(tpp),
                                      mid_at, LIGHT_QUALITY_LOW, c);
         }
-
-        newptr(monst->light, "AgeMap");
     }
 }
 
@@ -166,7 +164,6 @@ void Thing::delete_light (void)
     if (monst) {
         verify(monst);
         if (monst->light) { 
-            oldptr(monst->light);
             delete monst->light; monst->light = 0;
         }
     }
