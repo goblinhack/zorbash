@@ -1131,7 +1131,7 @@ static inline Tpp tp_find (std::string name)
 {_
     auto result = tp_name_map.find(name);
 
-    if (result == tp_name_map.end()) {
+    if (unlikely(result == tp_name_map.end())) {
         return (0);
     }
 
