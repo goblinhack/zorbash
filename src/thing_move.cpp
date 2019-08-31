@@ -341,18 +341,6 @@ void Thing::update_pos (fpoint to, bool immediately)
             world->unset_snow(old_at.x, old_at.y);
             world->set_snow(new_at.x, new_at.y);
         }
-        if (is_monst()) {
-            world->unset_monst(old_at.x, old_at.y);
-            world->set_monst(new_at.x, new_at.y);
-        }
-        if (is_food()) {
-            world->unset_food(old_at.x, old_at.y);
-            world->set_food(new_at.x, new_at.y);
-        }
-        if (is_key()) {
-            world->unset_key(old_at.x, old_at.y);
-            world->set_key(new_at.x, new_at.y);
-        }
         if (tp_gfx_large_shadow_caster(tpp)) {
             world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
             world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
