@@ -286,9 +286,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp)) {
                     continue;
@@ -330,9 +328,7 @@ static void thing_blit_water (int minx, int miny, int minz,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp) && !tp_is_deep_water(tpp)) {
                     continue;
@@ -444,9 +440,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
-                static std::vector<Thingp> tmp;
-                world->get_all_things_at_depth(x, y, z, tmp);
-                for (auto t : tmp) {
+                FOR_ALL_THINGS(world, t, x, y, z) {
                     t->blit_upside_down(offset_x, offset_y, x, y);
                 }
             }
@@ -586,9 +580,7 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 auto tpp = t->tp();
 
                 if (!tp_is_deep_water(tpp)) {
@@ -775,9 +767,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 t->blit(offset_x + game->config.one_pixel_gl_width * 2,
                         offset_y + game->config.one_pixel_gl_height * 2,
                         x, y);
@@ -820,9 +810,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
@@ -855,9 +843,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
             }
         }
@@ -959,9 +945,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
@@ -1002,9 +986,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
             }
         }
@@ -1019,9 +1001,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            static std::vector<Thingp> tmp;
-            world->get_all_things_at_depth(x, y, z, tmp);
-            for (auto t : tmp) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
                 auto tile = blood[0][0];
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
@@ -1065,9 +1045,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     { auto z = MAP_DEPTH_FLOOR;
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                static std::vector<Thingp> tmp;
-                world->get_all_things_at_depth(x, y, z, tmp);
-                for (auto t : tmp) {
+                FOR_ALL_THINGS(world, t, x, y, z) {
                     t->blit(offset_x, offset_y, x, y);
                 }
             }
@@ -1085,12 +1063,11 @@ static void thing_blit_things (int minx, int miny, int minz,
     bool have_lava = false;
     bool have_blood = false;
 
+    std::list<Thingp> moved;
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             for (auto z = 0; z < MAP_DEPTH; z++) {
-                static std::vector<Thingp> tmp;
-                world->get_all_things_at_depth(x, y, z, tmp);
-                for (auto t : tmp) {
+                FOR_ALL_THINGS(world, t, x, y, z) {
                     auto tpp = t->tp();
 
                     have_lava       |= tp_is_lava(tpp);
@@ -1103,14 +1080,12 @@ static void thing_blit_things (int minx, int miny, int minz,
                     }
                 }
             }
-        }
-    }
 
-    std::list<Thingp> moved;
-    for (auto i : world->all_active_things) {
-        auto t = i.second;
-        if (t->update_coordinates()) {
-            moved.push_back(t);
+            FOR_ALL_ACTIVE_THINGS(world, t, x, y) {
+                if (t->update_coordinates()) {
+                    moved.push_back(t);
+                }
+            }
         }
     }
 
@@ -1146,9 +1121,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
-                static std::vector<Thingp> tmp;
-                world->get_all_things_at_depth(x, y, z, tmp);
-                for (auto t : tmp) {
+                FOR_ALL_THINGS(world, t, x, y, z) {
                     t->blit(offset_x, offset_y, x, y);
                 }
             }

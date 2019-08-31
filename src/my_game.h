@@ -16,9 +16,6 @@
 class Thing;
 class Light;
 
-typedef class Thing* Thingp;
-typedef std::unordered_map< uint32_t, Thingp > Things;
-
 typedef class Light* Lightp;
 typedef std::unordered_map< uint32_t, Lightp > Lights;
 
@@ -51,9 +48,7 @@ enum {
 class World {
 private:
     uint8_t                    _is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_solid[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_gfx_large_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_door[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_light[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
     uint8_t                    _is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
@@ -75,16 +70,6 @@ public:
     // World map
     //
     Terrainp                   terrain;
-
-    //
-    // Global all things
-    //
-    Things                     all_things;
-
-    //
-    // Global all things that move
-    //
-    Things                     all_active_things;
 
     //
     // All things. The location forms the ID.
@@ -138,29 +123,51 @@ public:
         std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
           all_thing_ids_at;
 
-    Thingp get_first_thing(point p);
-    Thingp get_first_thing(int x, int y);
     void remove_thing(int x, int y, uint32_t id);
-    void put_thing(int x, int y, uint32_t id);
     void remove_thing(point p, uint32_t id);
+
+    void put_thing(int x, int y, uint32_t id);
     void put_thing(point p, uint32_t id);
-    std::vector<Thingp> get_all_things_at_depth(int x, int y, int z);
-    void get_all_things_at_depth(int x, int y, int z, std::vector<Thingp> &l);
+
+    #define JOIN1(X,Y) X##Y
+    #define JOIN(X,Y) JOIN1(X,Y)
+
     //
-    // Things that move around
+    // Display depth filter
     //
-    std::unordered_map<uint32_t, Thingp> all_active_things_at[MAP_WIDTH][MAP_HEIGHT];
+    #define FOR_ALL_THINGS(world, t, x, y, z)                          \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);               \
+        world->get_all_things_at_depth(x, y, z, JOIN1(tmp, __LINE__)); \
+        for (auto t : JOIN1(tmp, __LINE__))
+    void get_all_things_at_depth(int x, int y, int z, std::vector<Thingp> &);
 
     //
     // Things that move around and things that do not, but are interesting,
     // like food
     //
-    std::unordered_map<uint32_t, Thingp> all_interesting_things_at[MAP_WIDTH][MAP_HEIGHT];
+    #define FOR_ALL_INTERESTING_THINGS(world, t, x, y)                    \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \
+        world->get_all_interesting_things_at(x, y, JOIN1(tmp, __LINE__)); \
+        for (auto t : JOIN1(tmp, __LINE__))
+    void get_all_interesting_things_at(int x, int y, std::vector<Thingp> &);
+
+    //
+    // Things that move around
+    //
+    #define FOR_ALL_ACTIVE_THINGS(world, t, x, y)                    \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);             \
+        world->get_all_active_things_at(x, y, JOIN1(tmp, __LINE__)); \
+        for (auto t : JOIN1(tmp, __LINE__))
+    void get_all_active_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // Things that block progress
     //
-    std::unordered_map<uint32_t, Thingp> all_obstacle_things_at[MAP_WIDTH][MAP_HEIGHT];
+    #define FOR_ALL_OBSTACLE_THINGS(world, t, x, y)                    \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);               \
+        world->get_all_obstacle_things_at(x, y, JOIN1(tmp, __LINE__)); \
+        for (auto t : JOIN1(tmp, __LINE__))
+    void get_all_obstacle_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // The player!
@@ -206,10 +213,6 @@ public:
     bool is_wall(const int x, const int y);
     void set_wall(const int x, const int y);
     void unset_wall(const int x, const int y);
-    bool is_solid(const point &p);
-    bool is_solid(const int x, const int y);
-    void set_solid(const int x, const int y);
-    void unset_solid(const int x, const int y);
     bool is_light(const point &p);
     bool is_light(const int x, const int y);
     void set_light(const int x, const int y);
@@ -263,8 +266,6 @@ public:
     void unset_gfx_large_shadow_caster(const int x, const int y);
     bool is_door(const point &p);
     bool is_door(const int x, const int y);
-    void set_door(const int x, const int y);
-    void unset_door(const int x, const int y);
     void clear(void);
     bool is_oob(const int x, const int y, const int z);
     bool is_oob(const int x, const int y);

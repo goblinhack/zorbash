@@ -98,19 +98,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         set_timestamp_born(time_get_time_ms_cached());
     }
 
-    auto p = std::make_pair(id, this);
-    auto result = world->all_things.insert(p);
-    if (result.second == false) {
-        DIE("thing insert [%d] failed", id);
-    }
-
-    if (tp_is_active(tp)) {
-        auto result = world->all_active_things.insert(p);
-        if (result.second == false) {
-            DIE("thing insert active [%d] failed", id);
-        }
-    }
-
     auto sz = fsize(1.0, 1.0);
     at += fpoint(sz.w / 2, sz.h / 2);
 
@@ -183,9 +170,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     if (tp_is_wall(tp)) {
         world->set_wall(new_at.x, new_at.y);
     }
-    if (tp_is_wall(tp)) {
-        world->set_solid(new_at.x, new_at.y);
-    }
     if (tp_is_floor(tp)) {
         world->set_floor(new_at.x, new_at.y);
     }
@@ -235,9 +219,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     if (tp_gfx_large_shadow_caster(tp)) {
         world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
     }
-    if (tp_is_door(tp)) {
-        world->set_door(new_at.x, new_at.y);
-    }
 
     if (!tp_does_nothing(tp)) {
         log("created");
@@ -282,36 +263,6 @@ void Thing::destroy (void)
 
     auto tpp = tp();
 
-    {
-        auto a = &world->all_things;
-        auto iter = a->find(id);
-        if (iter != a->end()) {
-            if (is_active()) {
-                log("erasing from all things");
-            }
-            world->all_things.erase(iter);
-        } else {
-            //
-            // May have been removed already in cleanup. Ignore.
-            //
-        }
-    }
-
-    {
-        auto a = &world->all_active_things;
-        auto iter = a->find(id);
-        if (iter != a->end()) {
-            if (is_active()) {
-                log("erasing from active things");
-            }
-            world->all_active_things.erase(iter);
-        } else {
-            //
-            // May have been removed already in cleanup. Ignore.
-            //
-        }
-    }
-
     //
     // Pop from the map
     //
@@ -319,9 +270,6 @@ void Thing::destroy (void)
 
     if (is_wall()) {
         world->unset_wall(old_at.x, old_at.y);
-    }
-    if (is_wall() || is_rock()) {
-        world->unset_solid(old_at.x, old_at.y);
     }
     if (is_floor()) {
         world->unset_floor(old_at.x, old_at.y);
@@ -370,9 +318,6 @@ void Thing::destroy (void)
     }
     if (tp_gfx_large_shadow_caster(tpp)) {
         world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
-    }
-    if (is_door()) {
-        world->unset_door(old_at.x, old_at.y);
     }
     if (is_player()) {
         world->player = nullptr;
@@ -487,7 +432,6 @@ void Thing::hooks_remove ()
     // We own things like a sword. i.e. we are a player.
     //
     {
-    }
         auto item = weapon_get_carry_anim();
         if (item) {
             weapon_set_carry_anim(nullptr);
@@ -495,6 +439,7 @@ void Thing::hooks_remove ()
             item->set_owner(nullptr);
             item->dead("weapon carry anim owner killed");
         }
+    }
 
     {
         auto item = weapon_get_use_anim();
@@ -512,11 +457,19 @@ void Thing::hooks_remove ()
     if (get_owned_count()) {
         log("remove remaining %u owned things", get_owned_count());
 
-        for (auto i : world->all_active_things) {
-            Thingp t = i.second;
-            auto o = t->owner_get();
-            if (o && (o == t)) {
-                t->set_owner(nullptr);
+        //
+        // Slow, but not used too often
+        //
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            for (auto y = 0; y < MAP_HEIGHT; y++) {
+                for (auto t : world->all_thing_ptrs_at[x][y]) {
+                    if (t) {
+                        auto o = t->owner_get();
+                        if (o && (o == this)) {
+                            t->set_owner(nullptr);
+                        }
+                    }
+                }
             }
         }
     }
