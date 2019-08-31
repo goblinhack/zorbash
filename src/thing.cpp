@@ -204,17 +204,8 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     if (tp_is_snow(tp)) {
         world->set_snow(new_at.x, new_at.y);
     }
-    if (tp_is_monst(tp)) {
-        world->set_monst(new_at.x, new_at.y);
-    }
-    if (tp_is_food(tp)) {
-        world->set_food(new_at.x, new_at.y);
-    }
     if (tp_is_rock(tp)) {
         world->set_rock(new_at.x, new_at.y);
-    }
-    if (tp_is_key(tp)) {
-        world->set_key(new_at.x, new_at.y);
     }
     if (tp_gfx_large_shadow_caster(tp)) {
         world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
@@ -304,17 +295,8 @@ void Thing::destroy (void)
     if (is_snow()) {
         world->unset_snow(old_at.x, old_at.y);
     }
-    if (is_monst()) {
-        world->unset_monst(old_at.x, old_at.y);
-    }
-    if (is_food()) {
-        world->unset_food(old_at.x, old_at.y);
-    }
     if (is_rock()) {
         world->unset_rock(old_at.x, old_at.y);
-    }
-    if (is_key()) {
-        world->unset_key(old_at.x, old_at.y);
     }
     if (tp_gfx_large_shadow_caster(tpp)) {
         world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);

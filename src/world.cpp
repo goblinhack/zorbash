@@ -443,10 +443,7 @@ void World::unset_floor (const int x, const int y)
 
 bool World::is_monst (const point &p)
 {
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (_is_monst[p.x][p.y]);
+    return (is_monst(p.x, p.y));
 }
 
 bool World::is_monst (const int x, const int y)
@@ -454,23 +451,23 @@ bool World::is_monst (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (_is_monst[x][y]);
+
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            auto tpp = t->tp();
+            if (tp_is_monst(tpp)) {
+                return (true);
+            }
+        }
+    }
+    return (false);
 }
 
-void World::set_monst (const int x, const int y)
+bool World::is_food (const point &p)
 {
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    _is_monst[x][y] = true;
-}
-
-void World::unset_monst (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    _is_monst[x][y] = false;
+    return (is_food(p.x, p.y));
 }
 
 bool World::is_food (const int x, const int y)
@@ -478,23 +475,18 @@ bool World::is_food (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (_is_food[x][y]);
-}
 
-void World::set_food (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            auto tpp = t->tp();
+            if (tp_is_food(tpp)) {
+                return (true);
+            }
+        }
     }
-    _is_food[x][y] = true;
-}
-
-void World::unset_food (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    _is_food[x][y] = false;
+    return (false);
 }
 
 bool World::is_rock (const point &p)
@@ -531,10 +523,7 @@ void World::unset_rock (const int x, const int y)
 
 bool World::is_key (const point &p)
 {
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (_is_key[p.x][p.y]);
+    return (is_key(p.x, p.y));
 }
 
 bool World::is_key (const int x, const int y)
@@ -542,23 +531,18 @@ bool World::is_key (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (_is_key[x][y]);
-}
 
-void World::set_key (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            auto tpp = t->tp();
+            if (tp_is_key(tpp)) {
+                return (true);
+            }
+        }
     }
-    _is_key[x][y] = true;
-}
-
-void World::unset_key (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    _is_key[x][y] = false;
+    return (false);
 }
 
 bool World::is_gfx_large_shadow_caster (const point &p)
@@ -625,11 +609,8 @@ void World::clear (void)
     memset(_is_dirt, 0, sizeof(_is_dirt));
     memset(_is_grass, 0, sizeof(_is_grass));
     memset(_is_floor, 0, sizeof(_is_floor));
-    memset(_is_key, 0, sizeof(_is_key));
     memset(_is_lava, 0, sizeof(_is_lava));
     memset(_is_light, 0, sizeof(_is_light));
-    memset(_is_monst, 0, sizeof(_is_monst));
-    memset(_is_food, 0, sizeof(_is_food));
     memset(_is_rock, 0, sizeof(_is_rock));
     memset(_is_gfx_large_shadow_caster, 0, sizeof(_is_gfx_large_shadow_caster));
     memset(_is_wall, 0, sizeof(_is_wall));
