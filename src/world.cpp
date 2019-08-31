@@ -715,7 +715,7 @@ void World::put_thing (int x, int y, uint32_t id)
         return;
     }
 
-    for (auto i = 0; i < MAP_THINGS_PER_CELL; i++) {
+    for (auto i = 0; i < MAP_SLOTS; i++) {
         auto idp = &all_thing_ids_at[x][y][i];
         if (!*idp) {
             *idp = id;
@@ -742,7 +742,7 @@ void World::remove_thing (int x, int y, uint32_t id)
         return;
     }
 
-    for (auto i = 0; i < MAP_THINGS_PER_CELL; i++) {
+    for (auto i = 0; i < MAP_SLOTS; i++) {
         auto idp = &all_thing_ids_at[x][y][i];
         if (*idp == id) {
             *idp = 0;
@@ -776,9 +776,11 @@ Thingp World::get_first_thing (point p)
     return (get_first_thing(p.x, p.y));
 }
 
+static std::vector<Thingp> l;
+
 std::vector<Thingp> World::get_all_things_at_depth (int x, int y, int z)
 {
-    std::vector<Thingp> l;
+    l.resize(0);
 
     if (unlikely(is_oob(x, y))) {
         return (l);
@@ -795,4 +797,25 @@ std::vector<Thingp> World::get_all_things_at_depth (int x, int y, int z)
         }
     }
     return (l);
+}
+
+void World::get_all_things_at_depth (int x, int y, int z,
+                                     std::vector<Thingp> &l)
+{
+    l.resize(0);
+
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            auto tpp = t->tp();
+            if (tpp->z_depth == z) {
+                l.push_back(t);
+            }
+        }
+    }
 }

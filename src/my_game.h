@@ -10,6 +10,7 @@
 #include "my_dmap.h"
 #include "my_terrain.h"
 #include <array>
+#include <list>
 #include <unordered_map>
 
 class Thing;
@@ -86,11 +87,55 @@ public:
     Things                     all_active_things;
 
     //
-    // All things
+    // All things. The location forms the ID.
     //
     std::array<
       std::array<
-        std::array<uint32_t, MAP_THINGS_PER_CELL>, MAP_HEIGHT>, MAP_WIDTH> 
+        std::array<Thingp, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
+          all_thing_ptrs_at;
+
+    void put_thing_ptr(uint16_t x, uint16_t y, Thingp t);
+    void remove_thing_ptr(Thingp t);
+
+    static const uint32_t x_bits = 11;
+    static const uint32_t x_mask = (1<<x_bits)-1;
+
+    static const uint32_t y_bits = 11;
+    static const uint32_t y_shift = x_bits;
+    static const uint32_t y_mask = ((1<<y_bits)-1) << y_shift;
+
+    static const uint32_t slots_bits = 3;
+    static const uint32_t slots_shift = x_bits + y_bits;
+    static const uint32_t slots_mask = ((1<<slots_bits)-1) << slots_shift;
+
+    static const uint32_t r_shift = x_bits + y_bits + slots_bits;
+
+    Thingp find_thing_ptr (uint32_t id)
+    {
+        uint32_t x = id & x_mask;
+        uint32_t y = (id & y_mask) >> y_shift;
+        uint32_t slot = (id & slots_mask) >> slots_shift;
+
+        auto p = &all_thing_ptrs_at[x][y][slot];
+        if (unlikely(!*p)) {
+            DIE("thing ptr not found at x %u y %u slot %u", x, y, slot);
+        }
+
+        auto t = *p;
+        if ((t->id != id)) {
+            t->die("thing mismatch at x %u y %u slot %u", x, y, slot);
+        }
+
+        verify(t);
+        return (t);
+    }
+
+    //
+    // All thing IDs
+    //
+    std::array<
+      std::array<
+        std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
           all_thing_ids_at;
 
     Thingp get_first_thing(point p);
@@ -100,7 +145,7 @@ public:
     void remove_thing(point p, uint32_t id);
     void put_thing(point p, uint32_t id);
     std::vector<Thingp> get_all_things_at_depth(int x, int y, int z);
-
+    void get_all_things_at_depth(int x, int y, int z, std::vector<Thingp> &l);
     //
     // Things that move around
     //
