@@ -127,25 +127,25 @@ public:
     fpoint   mid_at;                     // Grid coordinates.
     fpoint   tl;                         // On screen coordinates
     uint32_t id;                         // Unique per thing.
-    uint32_t timestamp_next_frame;
     uint16_t tp_id;                      // Common settings
     uint16_t tile_curr;
-    uint32_t dir:4;                      // Direction
-    uint32_t has_ever_moved:1;
-    uint32_t is_attached:1;
-    uint32_t is_being_destroyed:1;
-    uint32_t is_bloodied:1;
-    uint32_t is_bouncing:1;
-    uint32_t is_dead:1;
-    uint32_t is_facing_left:1;
-    uint32_t is_hidden:1;
-    uint32_t is_hungry:1;
-    uint32_t is_moving:1;
-    uint32_t is_open:1;
-    uint32_t is_sleeping:1;
-    uint32_t is_starving:1;
-    uint32_t is_submerged:1;
-    uint32_t is_waiting_for_ai:1;
+    uint32_t timestamp_next_frame {};
+    uint32_t dir:4                {}; // Direction
+    uint32_t has_ever_moved:1     {};
+    uint32_t is_attached:1        {};
+    uint32_t is_being_destroyed:1 {};
+    uint32_t is_bloodied:1        {};
+    uint32_t is_bouncing:1        {};
+    uint32_t is_dead:1            {};
+    uint32_t is_facing_left:1     {};
+    uint32_t is_hidden:1          {};
+    uint32_t is_hungry:1          {};
+    uint32_t is_moving:1          {};
+    uint32_t is_open:1            {};
+    uint32_t is_sleeping:1        {};
+    uint32_t is_starving:1        {};
+    uint32_t is_submerged:1       {};
+    uint32_t is_waiting_for_ai:1  {};
 
     Tpp tp(void)
     {

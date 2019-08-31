@@ -67,26 +67,10 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
     world->put_thing_ptr((int)at.x, (int)at.y, this);
 
-    tile_curr = 0;
     timestamp_next_frame = 0;
-    dir = 0;
-    has_ever_moved = 0;
-    is_attached = 0;
-    is_being_destroyed = 0;
-    is_bouncing = 0;
-    is_dead = 0;
-    is_facing_left = 0;
-    is_hidden = 0;
-    is_hungry = 0;
-    is_moving = 0;
-    is_open = 0;
-    is_sleeping = 0;
-    is_starving = 0;
-    is_submerged = 0;
-    is_waiting_for_ai = 0;
 
-    auto tp = tp_find(name);
-    if (!tp) {
+    const auto tp = tp_find(name);
+    if (unlikely(!tp)) {
         DIE("thing [%s] not found", name.c_str());
     }
     tp_id = tp->id;
@@ -98,13 +82,8 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         set_timestamp_born(time_get_time_ms_cached());
     }
 
-    auto sz = fsize(1.0, 1.0);
+    static const auto sz = fsize(1.0, 1.0);
     at += fpoint(sz.w / 2, sz.h / 2);
-
-    point new_at((int)at.x, (int)at.y);
-    if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
-        DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
-    }
 
     //
     // Find which wall is the closest to cling onto if this is a wall clinger
@@ -121,21 +100,9 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     }
 
     is_hungry             = tp_hunger_constant(tp);
-    is_starving           = false;
-    is_dead               = false;
-    is_hidden             = false;
-    is_sleeping           = false;
-    is_moving             = false;
-    has_ever_moved        = false;
-    is_open               = false;
-    is_bouncing           = false;
-    is_attached           = false;
-    is_being_destroyed    = false;
-    is_waiting_for_ai     = false;
-    is_submerged          = false;
 
     auto h = tp_hunger_initial_health_at(tp);
-    if (h) {
+    if (unlikely(h)) {
         set_health(h);
         set_health_max(h);
     }
@@ -145,15 +112,19 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         auto tile = tile_first(tiles);
         if (tile) {
             tile_curr = tile->global_index;
+        } else {
+            tile_curr = 0;
         }
     } else {
         auto tile = tile_random(tiles);
         if (tile) {
             tile_curr = tile->global_index;
+        } else {
+            tile_curr = 0;
         }
     }
 
-    if (tp_is_player(tp)) {
+    if (unlikely(tp_is_player(tp))) {
         if (world->player && (world->player != this)) {
             DIE("player exists in multiple places on map, %f, %f and %f, %f",
                 world->player->mid_at.x,
@@ -165,6 +136,11 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
 
         new_light(at);
         log("player created");
+    }
+
+    point new_at((int)at.x, (int)at.y);
+    if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
+        DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
     }
 
     if (tp_is_wall(tp)) {
@@ -215,7 +191,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         log("created");
     }
 
-    if (jitter != fpoint(0.0, 0.0)) {
+    if (unlikely(jitter != fpoint(0.0, 0.0))) {
         double dx = random_range(0, TILE_WIDTH);
         double dy = random_range(0, TILE_WIDTH);
 
@@ -234,7 +210,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     update_coordinates();
     attach();
 
-    if (tp_is_light_strength(tp)) {
+    if (unlikely(tp_is_light_strength(tp))) {
         new_light(at);
     }
 }
