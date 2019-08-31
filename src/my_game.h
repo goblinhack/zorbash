@@ -86,24 +86,20 @@ public:
     Things                     all_active_things;
 
     //
-    // Display order sorted things
-    //
-    std::unordered_map<uint32_t, Thingp>          all_display_things_at
-                                 [MAP_WIDTH][MAP_HEIGHT][MAP_DEPTH];
-    //
     // All things
     //
     std::array<
       std::array<
         std::array<uint32_t, MAP_THINGS_PER_CELL>, MAP_HEIGHT>, MAP_WIDTH> 
           all_thing_ids_at;
+
     Thingp get_first_thing(point p);
+    Thingp get_first_thing(int x, int y);
     void remove_thing(int x, int y, uint32_t id);
     void put_thing(int x, int y, uint32_t id);
     void remove_thing(point p, uint32_t id);
     void put_thing(point p, uint32_t id);
-
-    std::unordered_map<uint32_t, Thingp> all_things_at[MAP_WIDTH][MAP_HEIGHT];
+    std::vector<Thingp> get_all_things_at_depth(int x, int y, int z);
 
     //
     // Things that move around
