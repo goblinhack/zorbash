@@ -286,8 +286,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp)) {
                     continue;
@@ -329,8 +328,7 @@ static void thing_blit_water (int minx, int miny, int minz,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp) && !tp_is_deep_water(tpp)) {
                     continue;
@@ -442,10 +440,7 @@ static void thing_blit_water (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
-                for (auto p : world->all_display_things_at[x][y][z]) {
-                    auto t = p.second;
-                    verify(t);
-
+                for (auto t : world->get_all_things_at_depth(x, y, z)) {
                     t->blit_upside_down(offset_x, offset_y, x, y);
                 }
             }
@@ -584,8 +579,7 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 auto tpp = t->tp();
 
                 if (!tp_is_deep_water(tpp)) {
@@ -772,8 +766,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 t->blit(offset_x + game->config.one_pixel_gl_width * 2,
                         offset_y + game->config.one_pixel_gl_height * 2,
                         x, y);
@@ -816,8 +809,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
@@ -850,8 +842,7 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 t->blit(offset_x, offset_y, x, y);
             }
         }
@@ -953,8 +944,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
@@ -995,8 +985,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 t->blit(offset_x, offset_y, x, y);
             }
         }
@@ -1011,9 +1000,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            for (auto p : world->all_display_things_at[x][y][z]) {
-                auto t = p.second;
-
+            for (auto t : world->get_all_things_at_depth(x, y, z)) {
                 auto tile = blood[0][0];
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
@@ -1057,9 +1044,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     { auto z = MAP_DEPTH_FLOOR;
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                for (auto p : world->all_display_things_at[x][y][z]) {
-                    auto t = p.second;
-                    verify(t);
+                for (auto t : world->get_all_things_at_depth(x, y, z)) {
                     t->blit(offset_x, offset_y, x, y);
                 }
             }
@@ -1080,8 +1065,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             for (auto z = 0; z < MAP_DEPTH; z++) {
-                for (auto p : world->all_display_things_at[x][y][z]) {
-                    auto t = p.second;
+                for (auto t : world->get_all_things_at_depth(x, y, z)) {
                     auto tpp = t->tp();
 
                     have_lava       |= tp_is_lava(tpp);
@@ -1137,8 +1121,7 @@ static void thing_blit_things (int minx, int miny, int minz,
     for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
-                for (auto p : world->all_display_things_at[x][y][z]) {
-                    auto t = p.second;
+                for (auto t : world->get_all_things_at_depth(x, y, z)) {
                     t->blit(offset_x, offset_y, x, y);
                 }
             }

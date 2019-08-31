@@ -632,7 +632,9 @@ Thingp thing_find (uint32_t id)
         return (0);
     }
 
-    return (result->second);
+    auto t = result->second;
+    verify(t);
+    return (t);
 }
 
 std::string Thing::to_string (void)

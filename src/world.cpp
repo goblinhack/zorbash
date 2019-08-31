@@ -6,20 +6,23 @@
 #include "my_game.h"
 #include "my_dungeon.h"
 
-bool World::is_anything_at (const point &p)
-{
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (!all_things_at[p.x][p.y].empty());
-}
-
 bool World::is_anything_at (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (all_things_at[x][y].size());
+
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            return (true);
+        }
+    }
+    return (false);
+}
+
+bool World::is_anything_at (const point &p)
+{
+    return (is_anything_at(p.x, p.y));
 }
 
 bool World::is_lava (const point &p)
@@ -754,12 +757,42 @@ void World::remove_thing (point p, uint32_t id)
     remove_thing(p.x, p.y, id);
 }
 
-Thingp World::get_first_thing (point p)
+Thingp World::get_first_thing (int x, int y)
 {
-    for (auto id : all_thing_ids_at[p.x][p.y]) {
+    if (unlikely(is_oob(x, y))) {
+        return (nullptr);
+    }
+
+    for (auto id : all_thing_ids_at[x][y]) {
         if (id) {
             return (thing_find(id));
         }
     }
     return (0);
+}
+
+Thingp World::get_first_thing (point p)
+{
+    return (get_first_thing(p.x, p.y));
+}
+
+std::vector<Thingp> World::get_all_things_at_depth (int x, int y, int z)
+{
+    std::vector<Thingp> l;
+
+    if (unlikely(is_oob(x, y))) {
+        return (l);
+    }
+
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            auto tpp = t->tp();
+            if (tpp->z_depth == z) {
+                l.push_back(t);
+            }
+        }
+    }
+    return (l);
 }
