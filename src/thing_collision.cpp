@@ -585,9 +585,7 @@ bool Thing::ai_collisions_handle (void)
         auto dx = x - mid_at.x;
         for (int16_t y = miny; y <= maxy; y++) {
             auto dy = y - mid_at.y;
-            for (auto p : world->all_interesting_things_at[x][y]) {
-                auto it = p.second;
-
+            FOR_ALL_INTERESTING_THINGS(world, it, x, y) {
                 if (this == it) {
                     continue;
                 }

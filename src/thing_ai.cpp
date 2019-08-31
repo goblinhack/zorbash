@@ -92,13 +92,12 @@ bool Thing::ai_is_obstacle_for_me (point p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto i : world->all_interesting_things_at[p.x][p.y]) {
-        auto it = i.second;
-        if (it == this) {
+    FOR_ALL_INTERESTING_THINGS(world, t, p.x, p.y) {
+        if (t == this) {
             continue;
         }
 
-        if (will_avoid(it)) {
+        if (will_avoid(t)) {
             return (true);
         }
     }
@@ -132,8 +131,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, double *score)
     switch (priority) {
     case 0:
         if (is_starving) {
-            for (auto i : world->all_interesting_things_at[p.x][p.y]) {
-                auto it = i.second;
+            FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
                 if (it == this) {
                     continue;
                 }
@@ -147,8 +145,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, double *score)
         break;
     case 1:
         if (is_hungry) {
-            for (auto i : world->all_interesting_things_at[p.x][p.y]) {
-                auto it = i.second;
+            FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
                 if (it == this) {
                     continue;
                 }
@@ -166,8 +163,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, double *score)
         }
         break;
     case 2:
-        for (auto i : world->all_interesting_things_at[p.x][p.y]) {
-            auto it = i.second;
+        FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
             if (it == this) {
                 continue;
             }

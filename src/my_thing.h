@@ -119,8 +119,8 @@ public:
     Thing (void);
     ~Thing (void);
     Monst    *monst = {};
-    fpoint   br;                         // On screen coordinates
     fpoint   last_attached;
+    fpoint   br;                         // On screen coordinates
     fpoint   last_blit_br;               // GL co-orids
     fpoint   last_blit_tl;               // GL co-orids
     fpoint   last_mid_at;                // Previous hop where we were.

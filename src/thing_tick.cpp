@@ -81,9 +81,18 @@ void things_tick (void)
     //
     // Active things are generally things that move or have a life span
     //
-    for (auto i : world->all_active_things) {
-        Thingp t = i.second;
-        verify(t);
-        t->tick();
+    int minx = std::max(0, (int) world->map_at.x - CHUNK_WIDTH);
+    int maxx = std::min(MAP_WIDTH, (int)world->map_at.x + CHUNK_WIDTH);
+
+    int miny = std::max(0, (int) world->map_at.y - CHUNK_HEIGHT);
+    int maxy = std::min(MAP_HEIGHT, (int)world->map_at.y + CHUNK_HEIGHT);
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_ACTIVE_THINGS(world, t, x, y) {
+                verify(t);
+                t->tick();
+            }
+        }
     }
 }

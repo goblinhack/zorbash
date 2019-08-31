@@ -297,10 +297,6 @@ void Thing::update_pos (fpoint to, bool immediately)
             world->unset_wall(old_at.x, old_at.y);
             world->set_wall(new_at.x, new_at.y);
         }
-        if (is_wall() || is_rock()) {
-            world->unset_solid(old_at.x, old_at.y);
-            world->set_solid(new_at.x, new_at.y);
-        }
         if (is_floor()) {
             world->unset_floor(old_at.x, old_at.y);
             world->set_floor(new_at.x, new_at.y);
@@ -360,10 +356,6 @@ void Thing::update_pos (fpoint to, bool immediately)
         if (tp_gfx_large_shadow_caster(tpp)) {
             world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
             world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
-        }
-        if (is_door()) {
-            world->unset_door(old_at.x, old_at.y);
-            world->set_door(new_at.x, new_at.y);
         }
     }
 

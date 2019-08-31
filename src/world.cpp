@@ -185,38 +185,6 @@ void World::unset_wall (const int x, const int y)
     _is_wall[x][y] = false;
 }
 
-bool World::is_solid (const point &p)
-{
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (_is_solid[p.x][p.y]);
-}
-
-bool World::is_solid (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (_is_solid[x][y]);
-}
-
-void World::set_solid (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    _is_solid[x][y] = true;
-}
-
-void World::unset_solid (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    _is_solid[x][y] = false;
-}
-
 bool World::is_light (const point &p)
 {
     if (unlikely(is_oob(p.x, p.y))) {
@@ -627,10 +595,7 @@ void World::unset_gfx_large_shadow_caster (const int x, const int y)
 
 bool World::is_door (const point &p)
 {
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (_is_door[p.x][p.y]);
+    return (is_door(p.x, p.y));
 }
 
 bool World::is_door (const int x, const int y)
@@ -638,23 +603,18 @@ bool World::is_door (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (_is_door[x][y]);
-}
 
-void World::set_door (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            auto tpp = t->tp();
+            if (tp_is_door(tpp)) {
+                return (true);
+            }
+        }
     }
-    _is_door[x][y] = true;
-}
-
-void World::unset_door (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    _is_door[x][y] = false;
+    return (false);
 }
 
 void World::clear (void)
@@ -671,9 +631,7 @@ void World::clear (void)
     memset(_is_monst, 0, sizeof(_is_monst));
     memset(_is_food, 0, sizeof(_is_food));
     memset(_is_rock, 0, sizeof(_is_rock));
-    memset(_is_solid, 0, sizeof(_is_solid));
     memset(_is_gfx_large_shadow_caster, 0, sizeof(_is_gfx_large_shadow_caster));
-    memset(_is_door, 0, sizeof(_is_door));
     memset(_is_wall, 0, sizeof(_is_wall));
     memset(_is_water, 0, sizeof(_is_water));
 }
@@ -757,48 +715,6 @@ void World::remove_thing (point p, uint32_t id)
     remove_thing(p.x, p.y, id);
 }
 
-Thingp World::get_first_thing (int x, int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return (nullptr);
-    }
-
-    for (auto id : all_thing_ids_at[x][y]) {
-        if (id) {
-            return (thing_find(id));
-        }
-    }
-    return (0);
-}
-
-Thingp World::get_first_thing (point p)
-{
-    return (get_first_thing(p.x, p.y));
-}
-
-static std::vector<Thingp> l;
-
-std::vector<Thingp> World::get_all_things_at_depth (int x, int y, int z)
-{
-    l.resize(0);
-
-    if (unlikely(is_oob(x, y))) {
-        return (l);
-    }
-
-    for (auto id : all_thing_ids_at[x][y]) {
-        if (id) {
-            auto t = thing_find(id);
-            verify(t);
-            auto tpp = t->tp();
-            if (tpp->z_depth == z) {
-                l.push_back(t);
-            }
-        }
-    }
-    return (l);
-}
-
 void World::get_all_things_at_depth (int x, int y, int z,
                                      std::vector<Thingp> &l)
 {
@@ -814,6 +730,63 @@ void World::get_all_things_at_depth (int x, int y, int z,
             verify(t);
             auto tpp = t->tp();
             if (tpp->z_depth == z) {
+                l.push_back(t);
+            }
+        }
+    }
+}
+
+void World::get_all_interesting_things_at (int x, int y, std::vector<Thingp> &l)
+{
+    l.resize(0);
+
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            if (!t->does_nothing()) {
+                l.push_back(t);
+            }
+        }
+    }
+}
+
+void World::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
+{
+    l.resize(0);
+
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            if (t->is_active()) {
+                l.push_back(t);
+            }
+        }
+    }
+}
+
+void World::get_all_obstacle_things_at (int x, int y, std::vector<Thingp> &l)
+{
+    l.resize(0);
+
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+
+    for (auto id : all_thing_ids_at[x][y]) {
+        if (id) {
+            auto t = thing_find(id);
+            verify(t);
+            if (t->is_obstacle()) {
                 l.push_back(t);
             }
         }
