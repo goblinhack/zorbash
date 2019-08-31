@@ -8,8 +8,6 @@
 #include "my_dmap.h"
 #include <list>
 
-static uint32_t next_thing_id;
-
 #undef ENABLE_THING_DEBUG
 
 static std::list<uint32_t> things_to_delete;
@@ -67,7 +65,7 @@ Thing::~Thing (void)
 
 void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
-    id = ++next_thing_id;
+    world->put_thing_ptr((int)at.x, (int)at.y, this);
 
     tile_curr = 0;
     timestamp_next_frame = 0;
@@ -382,6 +380,8 @@ void Thing::destroy (void)
     delete_dmap_scent();
     delete_dmap_goals();
     delete_age_map();
+
+    world->remove_thing_ptr(this);
 }
 
 void Thing::hide (void)
@@ -627,14 +627,7 @@ void Thing::move_carried_items (void)
 //
 Thingp thing_find (uint32_t id)
 {_
-    auto result = world->all_things.find(id);
-    if (result == world->all_things.end()) {
-        return (0);
-    }
-
-    auto t = result->second;
-    verify(t);
-    return (t);
+    return (world->find_thing_ptr(id));
 }
 
 std::string Thing::to_string (void)
