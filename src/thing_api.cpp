@@ -1619,7 +1619,11 @@ uint32_t Thing::set_weapon_tp_id (uint32_t v)
 fpoint Thing::get_interpolated_mid_at (void)
 {
     if (monst) { 
-        return (monst->interpolated_mid_at);
+        if (monst->interpolated_mid_at == fpoint(0, 0)) {
+            return (mid_at);
+        } else {
+            return (monst->interpolated_mid_at);
+        }
     } else {
         return (mid_at);
     }

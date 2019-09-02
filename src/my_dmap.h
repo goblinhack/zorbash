@@ -8,10 +8,8 @@
 #include "my_point.h"
 #include "my_main.h"
 
-typedef class Dmap {
-public:
+typedef struct {
     uint16_t val[CHUNK_WIDTH][CHUNK_HEIGHT] = {{0}};
-    Dmap() { }
 } Dmap;
 
 extern void dmap_process(Dmap *D, point tl, point br);

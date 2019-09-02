@@ -11,13 +11,6 @@
 // #pragma GCC diagnostic error "-Wformat"
 // #pragma GCC diagnostic ignored "-Wformat"
 //            
-// for cereal and gcc8
-#ifdef __GNUC__
-#ifndef __clang__
-#pragma GCC diagnostic ignored "-Wclass-memaccess"
-#endif
-#endif
-
 #ifdef __clang__
 /*code specific to clang compiler*/
 #elif __GNUC__
