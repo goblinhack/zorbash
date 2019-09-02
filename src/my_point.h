@@ -12,7 +12,6 @@
 template<class T> class my_apoint
 {
 public:
-
     T x {};
     T y {};
 
@@ -21,12 +20,6 @@ public:
     my_apoint (T x, T y) : x(x), y(y) { }
 
     my_apoint (const my_apoint &a) : x(a.x), y(a.y) { }
-
-    template <class Archive>
-    void serialize (Archive & archive )
-    {
-        archive(x, y);
-    }
 
     void operator+= (my_apoint a)
     {
@@ -359,6 +352,7 @@ public:
     }
 };
 
+typedef my_apoint<int16_t> spoint;
 typedef my_apoint<int> point;
 typedef my_apoint<float> fpoint;
 
@@ -376,12 +370,6 @@ public:
     my_apoint3d (T x, T y, T z) : x(x), y(y), z(z) { }
 
     my_apoint3d (const my_apoint3d &a) : x(a.x), y(a.y), z(a.z) { }
-
-    template <class Archive>
-    void serialize (Archive & archive )
-    {
-        archive(x, y, z);
-    }
 
     void operator+= (my_apoint3d a)
     {

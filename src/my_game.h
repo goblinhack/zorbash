@@ -13,7 +13,7 @@
 #include <list>
 #include <unordered_map>
 
-class Thing;
+struct Thing_;
 class Light;
 
 typedef class Light* Lightp;

@@ -15,8 +15,10 @@ void Thing::attach (void)
         update_interpolated_position();
     }
 
+    auto mx = (int16_t)(int)mid_at.x;
+    auto my = (int16_t)(int)mid_at.y;
     is_attached = true;
-    last_attached = mid_at;
+    last_attached = spoint(mx, my);
 //log("attached at %d %d %d", (int)last_attached.x, (int)last_attached.y,
 //depth);
 }

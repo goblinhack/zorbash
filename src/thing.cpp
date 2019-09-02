@@ -43,12 +43,12 @@ Thingp thing_new (std::string name, fpoint at, fpoint jitter)
     return (t);
 }
 
-Thing::Thing (void)
+Thing::Thing_ (void)
 {_
     newptr(this, "thing");
 }
 
-Thing::~Thing (void)
+Thing::~Thing_ (void)
 {_
     verify(this);
     if (is_being_destroyed) {

@@ -12,7 +12,7 @@
 #include <memory>
 #include <set>
 
-typedef class Thing* Thingp;
+typedef struct Thing_* Thingp;
 typedef std::unordered_map< uint32_t, Thingp > Things;
 
 #include "my_thing_template.h"
@@ -60,13 +60,11 @@ public:
 
 extern Path astar_solve(point start, std::multiset<Goal> &goals, Dmap *dmap);
 
-typedef class AgeMap {
-public:
+typedef struct {
     uint32_t val[CHUNK_WIDTH][CHUNK_HEIGHT] = {{0}};
-    AgeMap(void) {}
 } AgeMap;
 
-typedef struct ThingTiles {
+typedef struct {
     uint16_t tile_bl;
     uint16_t tile_bot;
     uint16_t tile_br;
@@ -77,9 +75,7 @@ typedef struct ThingTiles {
     uint16_t tile_tr;
 } ThingTiles;
 
-class Monst
-{
-public:
+typedef struct Monst_ {
     AgeMap       *age_map = {};              // How old a cell is
     Dmap         *dmap_goals = {};
     Dmap         *dmap_scent = {};
@@ -110,16 +106,13 @@ public:
     uint32_t     weapon_id_carry_anim {};
     uint32_t     weapon_id_use_anim {};
     uint16_t     weapon_tp_id {};            // Weapon thing template.
-};
+} Monst;
 
-class Thing
-{
-private:
-public:
-    Thing (void);
-    ~Thing (void);
-    Monst    *monst = {};
-    fpoint   last_attached;
+typedef struct Thing_ {
+    Thing_ (void);
+    ~Thing_ (void);
+    Monst    *monst               {};
+    spoint   last_attached;
     fpoint   br;                         // On screen coordinates
     fpoint   last_blit_br;               // GL co-orids
     fpoint   last_blit_tl;               // GL co-orids
@@ -152,7 +145,6 @@ public:
         return (tp_id_map[tp_id - 1]);
     }
 
-    template <class Archive> void serialize(Archive & archive );
     void new_monst(void);
     void get_tiles(ThingTiles *tiles);
 
@@ -532,7 +524,7 @@ public:
     void weapon_sheath(void);
     void weapon_wield_next();
     void wield(Tpp tp);
-};
+} Thing;
 
 struct ThingDisplaySortKey {
     int16_t y;
