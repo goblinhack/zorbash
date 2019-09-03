@@ -661,6 +661,14 @@ void World::put_thing (int x, int y, uint32_t id)
             return;
         }
     }
+
+    for (auto i = 0; i < MAP_SLOTS; i++) {
+        auto idp = &all_thing_ids_at[x][y][i];
+        if (*idp) {
+            auto t = thing_find(*idp);
+            t->con("- slot %d ", i);
+        }
+    }
     t->die("out of thing slots at %d %d for put of id %u", x, y, id);
 }
 

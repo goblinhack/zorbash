@@ -60,7 +60,7 @@
 #define CHUNK_HEIGHT                ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 #define MAP_WIDTH                   (CHUNK_WIDTH * 32)
 #define MAP_HEIGHT                  (CHUNK_HEIGHT * 32)
-#define MAP_SLOTS         8
+#define MAP_SLOTS                   16
 #define MAX_THINGS                  (MAP_WIDTH * MAP_HEIGHT * 2)
 
 //

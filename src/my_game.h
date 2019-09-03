@@ -89,7 +89,7 @@ public:
     static const uint32_t y_shift = x_bits;
     static const uint32_t y_mask = ((1<<y_bits)-1) << y_shift;
 
-    static const uint32_t slots_bits = 3;
+    static const uint32_t slots_bits = 4;
     static const uint32_t slots_shift = x_bits + y_bits;
     static const uint32_t slots_mask = ((1<<slots_bits)-1) << slots_shift;
 
