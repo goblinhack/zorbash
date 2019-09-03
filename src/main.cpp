@@ -102,14 +102,8 @@ void quit (void)
 #endif
 
 {_
-    LOG("finishing:: things");
-    game_fini();
-}
-
-{_
     python_fini();
 }
-
 
 {_
     LOG("finishing:: sdl_exit");
@@ -549,9 +543,6 @@ int32_t main (int32_t argc, char *argv[])
     LOG_STDERR = fopen(err, "w+");
     myfree(err);
 
-    game = new Game();
-    game_init();
-
     ARGV = argv;
 
     dospath2unix(ARGV[0]);
@@ -584,6 +575,12 @@ int32_t main (int32_t argc, char *argv[])
     DIE("x");
     }
 #endif
+
+    //
+    // Create and load the last saved game
+    //
+    game = new Game(std::string(appdata));
+    game->load();
 
     if (!sdl_init()) {
 	ERR("SDL init");
@@ -632,6 +629,11 @@ int32_t main (int32_t argc, char *argv[])
     py_call_void("init2");
 
     tp_init();
+
+    //
+    // Create a fresh game if none was loaded
+    //
+    game->init();
 
     sdl_loop();
     gl_leave_2d_mode();

@@ -963,8 +963,6 @@ void sdl_loop (void)
         SDL_GL_SetSwapInterval(0);
     }
 
-    world = &game->world;
-
     for (;/*ever*/;) {
         /*
          * Clear the screen
