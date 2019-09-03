@@ -6404,7 +6404,7 @@ void wid_display_all (void)
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
-    game_display();
+    game->display();
 
     glBindTexture(GL_TEXTURE_2D, 0);
 

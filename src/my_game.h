@@ -268,7 +268,7 @@ public:
     void unset_water(const int x, const int y);
 };
 
-class Config {
+typedef struct {
 public:
     bool               fps_counter                  = true;
     uint32_t           sound_volume                 = {};
@@ -291,10 +291,20 @@ public:
     double             tile_pixel_width             = {};
     double             tile_pixel_height            = {};
     uint32_t           sdl_delay                    = 1;
-};
+} Config;
 
 class Game {
 public:
+    Game (std::string appdata);
+    void init(void);
+    void save(void);
+    void load(void);
+    void display(void);
+
+    std::string        appdata;
+    std::string        saved_dir;
+    std::string        saved_file;
+
     Config             config;
     World              world;
     uint32_t           fps_count = {};
@@ -307,9 +317,6 @@ uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
 void game_mouse_over(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
 uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
 uint8_t game_key_down(const struct SDL_KEYSYM *key);
-void game_display(void);
-void game_init(void);
-void game_fini(void);
 void player_tick(void);
 
 #endif
