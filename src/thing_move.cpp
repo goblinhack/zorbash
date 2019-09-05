@@ -14,17 +14,6 @@ bool Thing::move (fpoint future_pos)
     bool attack = false;
 
     verify(this);
-    if (tp_gfx_can_hflip(tp())) {
-        if (future_pos.x > mid_at.x) {
-            if (is_facing_left && !get_timestamp_flip_start()) {
-                set_timestamp_flip_start(time_get_time_ms_cached());
-            }
-        } else if (future_pos.x < mid_at.x) {
-            if (!is_facing_left && !get_timestamp_flip_start()) {
-                set_timestamp_flip_start(time_get_time_ms_cached());
-            }
-        }
-    }
     return (move(future_pos, up, down, left, right, attack));
 }
 
@@ -48,6 +37,18 @@ bool Thing::move (fpoint future_pos,
 
     if ((x == mid_at.x) && (y == mid_at.y)) {
         return (false);
+    }
+
+    if (tp_gfx_can_hflip(tp())) {
+        if (future_pos.x > mid_at.x) {
+            if (is_facing_left && !get_timestamp_flip_start()) {
+                set_timestamp_flip_start(time_get_time_ms_cached());
+            }
+        } else if (future_pos.x < mid_at.x) {
+            if (!is_facing_left && !get_timestamp_flip_start()) {
+                set_timestamp_flip_start(time_get_time_ms_cached());
+            }
+        }
     }
 
     if (up || down || left || right) {
@@ -172,9 +173,12 @@ bool Thing::update_coordinates (void)
 
     if (unlikely(tp_gfx_can_hflip(tpp))) {
         if (get_timestamp_flip_start()) {
+            //
+            // Slow flip
+            //
             auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
             uint32_t flip_time = 100;
-            uint32_t flip_steps = 100;
+            uint32_t flip_steps = flip_time;
 
             if (diff > flip_time) {
                 set_timestamp_flip_start(0);
@@ -197,9 +201,13 @@ bool Thing::update_coordinates (void)
 
                 tl.x = tlx + dw * diff;
                 br.x = brx - dw * diff;
+                std::swap(tl.x, br.x);
             }
         } else {
-            if (!is_facing_left) {
+            //
+            // Fast flip
+            //
+            if (is_dir_right()) {
                 std::swap(tl.x, br.x);
             }
         }
@@ -379,13 +387,13 @@ void Thing::move_delta (fpoint delta, bool immediately)
         timestamp_next_frame = time_get_time_ms_cached();
     }
 
-    if (delta.x > 0) {
+    if (delta.x < 0) {
         dir_set_left();
         is_moving = true;
         has_ever_moved = true;
     }
 
-    if (delta.x < 0) {
+    if (delta.x > 0) {
         dir_set_right();
         is_moving = true;
         has_ever_moved = true;
