@@ -581,6 +581,8 @@ int32_t main (int32_t argc, char *argv[])
     //
     game = new Game(std::string(appdata));
     game->load();
+    // XXX
+    game->save();
 
     if (!sdl_init()) {
 	ERR("SDL init");

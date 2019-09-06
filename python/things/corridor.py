@@ -3,10 +3,11 @@ import tp
 
 
 def corridor_init(name, tiles=[], tile_lefts=[]):
-    
     x = tp.Tp(name)
-    x.set_does_nothing(True)
+
     x.set_is_corridor(True)
+    x.set_is_interesting(False)
+    x.set_is_loggable(False)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
 
     for t in tiles:

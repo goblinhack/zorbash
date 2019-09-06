@@ -21,7 +21,9 @@ void thing_gc (void)
             continue;
         }
 
-        t->log("garbage collect");
+        if (tp_is_loggable(t->tp())) {
+            t->log("garbage collect");
+        }
         delete t;
     }
 
@@ -187,7 +189,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
     }
 
-    if (!tp_does_nothing(tp)) {
+    if (tp_is_loggable(tp)) {
         log("created");
     }
 
@@ -221,7 +223,7 @@ void Thing::destroy (void)
 #ifdef ENABLE_THING_DEBUG
     log("destroy");
 #else
-    if (!does_nothing()) {
+    if (is_loggable()) {
         log("destroy");
     }
 #endif

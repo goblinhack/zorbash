@@ -308,6 +308,8 @@ public:
     Config             config;
     World              world;
     uint32_t           fps_count = {};
+//    friend std::istream& operator>>(std::istream& s, Game &me);
+//    friend std::ostream& operator<<(std::ostream &s, const Game &me) 
 };
 
 extern class Game *game;

@@ -224,8 +224,8 @@ class Tp:
     def set_is_rrr26(self, value):
         zx.tp_set_is_rrr26(self, value)
 
-    def set_is_rrr27(self, value):
-        zx.tp_set_is_rrr27(self, value)
+    def set_is_loggable(self, value):
+        zx.tp_set_is_loggable(self, value)
 
     def set_is_rrr28(self, value):
         zx.tp_set_is_rrr28(self, value)
@@ -353,8 +353,8 @@ class Tp:
     def set_gfx_bounce_on_move(self, value):
         zx.tp_set_gfx_bounce_on_move(self, value)
 
-    def set_is_rrr27(self, value):
-        zx.tp_set_is_rrr27(self, value)
+    def set_is_loggable(self, value):
+        zx.tp_set_is_loggable(self, value)
 
     def set_is_bleeder(self, value):
         zx.tp_set_is_bleeder(self, value)
@@ -404,8 +404,8 @@ class Tp:
     def set_gfx_oversized_but_sitting_on_the_ground(self, value):
         zx.tp_set_gfx_oversized_but_sitting_on_the_ground(self, value)
 
-    def set_does_nothing(self, value):
-        zx.tp_set_does_nothing(self, value)
+    def set_is_interesting(self, value):
+        zx.tp_set_is_interesting(self, value)
 
     def set_is_exit(self, value):
         zx.tp_set_is_exit(self, value)

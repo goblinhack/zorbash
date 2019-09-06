@@ -6,13 +6,14 @@ def lava_init(name, tiles=[], tile_lefts=[]):
     
     x = tp.Tp(name)
 
-    x.set_is_lava(True)
     x.set_gfx_animated(True)
-    x.set_z_depth(zx.MAP_DEPTH_LAVA)
-    x.set_str_light_color("red")
-    x.set_is_obstacle(True)
-    x.set_does_nothing(True)
+    x.set_is_interesting(True)
+    x.set_is_lava(True)
     x.set_is_light_strength(1)
+    x.set_is_loggable(False)
+    x.set_is_obstacle(True)
+    x.set_str_light_color("red")
+    x.set_z_depth(zx.MAP_DEPTH_LAVA)
     
     delay = 1250
     for t in tiles:

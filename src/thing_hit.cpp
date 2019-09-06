@@ -7,10 +7,10 @@
 #include "my_game.h"
 #include "my_tile.h"
 
-int Thing::ai_hit_actual (Thingp orig_hitter,
-                       Thingp real_hitter,
-                       Thingp hitter,
-                       int damage)
+int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
+                          Thingp real_hitter, // if an arrow, who fired it
+                          Thingp hitter,
+                          int damage)
 {
     //
     // Cruel to let things keep on hitting you when you're dead
@@ -37,8 +37,6 @@ int Thing::ai_hit_actual (Thingp orig_hitter,
     //
     // Keep hitting until all damage is used up or the thing is dead.
     //
-    log("is hit! health %d, damage %d", get_health(), damage);
-
     if (this == orig_hitter) {
         die("hitting thyself");
         return (false);
@@ -51,9 +49,10 @@ int Thing::ai_hit_actual (Thingp orig_hitter,
         //
         // Record who dun it.
         //
-        log("is hit terminally, health %d, damage %d, now dead",
-            h, damage);
-        dead(orig_hitter, "%s", real_hitter->to_string().c_str());
+        // log("is hit terminally, health %d, damage %d, now dead",
+        //     h, damage);
+        dead(orig_hitter, "is hit terminally by %s",
+             real_hitter->to_string().c_str());
     } else {
         log("is hit by (%s) for %u, health now %d",
             orig_hitter->to_string().c_str(), damage, h);
