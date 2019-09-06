@@ -323,7 +323,7 @@ typedef struct Thing_ {
     int collision_check(void);
     int collision_circle(void);
     int collision_hit_priority(void);
-    int does_nothing(void);
+    int is_interesting(void);
     int gfx_animated(void);
     int gfx_animated_can_vflip(void);
     int gfx_animated_no_dir(void);
@@ -394,7 +394,7 @@ typedef struct Thing_ {
     int is_rrr24(void);
     int is_rrr25(void);
     int is_rrr26(void);
-    int is_rrr27(void);
+    int is_loggable(void);
     int is_rrr28(void);
     int is_rrr29(void);
     int is_rrr3(void);

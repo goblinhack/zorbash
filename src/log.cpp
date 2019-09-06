@@ -568,22 +568,25 @@ void Thing::log (const char *fmt, ...)
 void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 {
     verify(this);
-    auto t = this;
-    char buf[MAXSHORTSTR];
-    uint32_t len;
 
-    buf[0] = '\0';
-    timestamp(buf, MAXSHORTSTR);
-    len = (uint32_t)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: dead, killer %s: ",
-             t->to_string().c_str(),
-             killer->to_string().c_str());
+    if (tp_is_interesting(tp())) {
+        auto t = this;
+        char buf[MAXSHORTSTR];
+        uint32_t len;
 
-    len = (uint32_t)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+        buf[0] = '\0';
+        timestamp(buf, MAXSHORTSTR);
+        len = (uint32_t)strlen(buf);
+        snprintf(buf + len, MAXSHORTSTR - len, "thing %s: dead, killer %s: ",
+                 t->to_string().c_str(),
+                 killer->to_string().c_str());
 
-    putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
+        len = (uint32_t)strlen(buf);
+        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+
+        putf(MY_STDOUT, buf);
+        fflush(MY_STDOUT);
+    }
 
     kill();
 }

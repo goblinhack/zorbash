@@ -7,8 +7,10 @@ def tp_init(name):
 
     x.set_gfx_animated(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
-    x.set_is_entrance(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_entrance(True)
+    x.set_is_interesting(True)
+    x.set_is_loggable(True)
     x.set_z_depth(zx.MAP_DEPTH_EXIT)
 
     delay = 1000

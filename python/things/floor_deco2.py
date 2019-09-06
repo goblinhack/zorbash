@@ -6,16 +6,17 @@ def tp_init(name, tiles=[]):
     
     x = tp.Tp(name)
 
-    x.set_gfx_oversized_but_sitting_on_the_ground(True)
-    x.set_does_nothing(True)
     x.set_gfx_animated(True)
     x.set_gfx_is_floor_deco(True)
-    x.set_is_movement_blocking(True)
     x.set_gfx_outlined(True)
+    x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_z_depth(zx.MAP_DEPTH_FLOOR_DECO)
-    x.set_str_light_color("orange")
+    x.set_is_interesting(False)
     x.set_is_light_strength(2)
+    x.set_is_loggable(False)
+    x.set_is_movement_blocking(True)
+    x.set_str_light_color("orange")
+    x.set_z_depth(zx.MAP_DEPTH_FLOOR_DECO)
     
     delay=50
     for t in tiles:

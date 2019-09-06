@@ -12,6 +12,8 @@ def tp_init(name):
     x.set_gfx_small_shadow_caster(True)
     x.set_hunger_initial_health_at(4)
     x.set_is_food(True)
+    x.set_is_interesting(True)
+    x.set_is_loggable(True)
     x.set_is_nutrition_hd("1d4")
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
     

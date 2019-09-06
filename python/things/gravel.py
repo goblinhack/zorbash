@@ -15,7 +15,8 @@ def tp_init(name,
     
     x = tp.Tp(name)
 
-    x.set_does_nothing(True)
+    x.set_is_interesting(False)
+    x.set_is_loggable(False)
     x.set_is_soil(True)
     x.set_z_depth(zx.MAP_DEPTH_SOIL)
 

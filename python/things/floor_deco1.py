@@ -6,12 +6,13 @@ def tp_init(name, tiles=[]):
     
     x = tp.Tp(name)
 
-    x.set_gfx_oversized_but_sitting_on_the_ground(True)
-    x.set_does_nothing(True)
     x.set_gfx_is_floor_deco(True)
-    x.set_is_movement_blocking(True)
     x.set_gfx_outlined(True)
+    x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_interesting(False)
+    x.set_is_loggable(False)
+    x.set_is_movement_blocking(True)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR_DECO)
     
     for t in tiles:

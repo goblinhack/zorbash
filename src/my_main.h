@@ -140,9 +140,14 @@ extern int TILES_DOWN;
 #define random_range_inclusive(a, b) (pcg32_boundedrand(b - a + 1) + a)
 
 //
+// Serialization support
+//
+#include "my_serialize.h"
+
+//
 // Simple array routines
 //
-#define ARRAY_SIZE(_array_)             (sizeof(_array_)/sizeof(_array_[0]))
+#define ARRAY_SIZE(_array_) (sizeof(_array_)/sizeof(_array_[0]))
 
 #define FOR_ALL_IN_ARRAY(iterator, _array_)                                 \
     __typeof__(&_array_[0]) iterator;                                       \
@@ -150,26 +155,9 @@ extern int TILES_DOWN;
          (iterator) < ((_array_) + ARRAY_SIZE(_array_));                    \
          (iterator)++)
 
-#define FOR_NEXT_IN_ARRAY(iterator, _array_)                                \
-    for ((iterator)++;                                                      \
-         (iterator) < ((_array_) + ARRAY_SIZE(_array_));                    \
-         (iterator)++)
-
 //
-// GCC extension for offset
+// GCC extensions
 //
-#ifdef __GNUC__
-#if defined(__GNUC__) && __GNUC__ > 3
-#define STRUCT_OFFSET(STRUCT, MEMBER) __builtin_offsetof(STRUCT, MEMBER)
-#else
-#define STRUCT_OFFSET(STRUCT, MEMBER) \
-                     ((size_t) ( (char *)&((st *)0)->m - (char *)0 ))
-#endif
-#else
-#define STRUCT_OFFSET(STRUCT, MEMBER) \
-                     ((size_t) ( (char *)&((st *)0)->m - (char *)0 ))
-#endif
-
 #define likely(x)       __builtin_expect((x),1)
 #define unlikely(x)     __builtin_expect((x),0)
 

@@ -132,7 +132,6 @@ public:
     int collision_check {};
     int collision_circle {};
     int collision_hit_priority {};
-    int does_nothing {};
     int gfx_animated {};
     int gfx_animated_can_vflip {};
     int gfx_animated_no_dir {};
@@ -147,7 +146,6 @@ public:
     int gfx_outlined {};
     int gfx_oversized_but_sitting_on_the_ground {};
     int gfx_small_shadow_caster {};
-    int is_water_hater {};
     int hunger_at_health_pct {};
     int hunger_clock_freq_ms {};
     int hunger_constant {};
@@ -155,7 +153,7 @@ public:
     int hunger_starving_at_health_pct {};
     int internal_has_dir_anim {};
     int internal_has_hp_anim {};
-    int is_active {};
+    int is_active {}; // e.g. a monst or player or something movable
     int is_attackable {};
     int is_bleeder {};
     int is_blood {};
@@ -172,6 +170,7 @@ public:
     int is_food {};
     int is_grass {};
     int is_gravel {};
+    int is_interesting {}; // e.g. something edible or a monst or lava
     int is_key {};
     int is_lava {};
     int is_light_strength {};
@@ -204,7 +203,7 @@ public:
     int is_rrr24 {};
     int is_rrr25 {};
     int is_rrr26 {};
-    int is_rrr27 {};
+    int is_loggable {};
     int is_rrr28 {};
     int is_rrr29 {};
     int is_rrr3 {};
@@ -241,6 +240,7 @@ public:
     int is_wall {};
     int is_water {};
     int is_water_dweller {};
+    int is_water_hater {};
     int is_weapon {};
     int move_speed_ms {};
     int weapon_damage {};
@@ -488,9 +488,9 @@ static inline int tp_is_rrr26 (Tpp t)
     return (t->is_rrr26);
 }
 
-static inline int tp_is_rrr27 (Tpp t)
+static inline int tp_is_loggable (Tpp t)
 {
-    return (t->is_rrr27);
+    return (t->is_loggable);
 }
 
 static inline int tp_is_rrr28 (Tpp t)
@@ -793,9 +793,9 @@ static inline int tp_gfx_oversized_but_sitting_on_the_ground (Tpp t)
     return (t->gfx_oversized_but_sitting_on_the_ground);
 }
 
-static inline int tp_does_nothing (Tpp t)
+static inline int tp_is_interesting (Tpp t)
 {
-    return (t->does_nothing);
+    return (t->is_interesting);
 }
 
 static inline int tp_is_exit (Tpp t)

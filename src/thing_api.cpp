@@ -209,9 +209,9 @@ int Thing::collision_hit_priority(void)
     return (tp_collision_hit_priority(tp()));
 }
 
-int Thing::does_nothing(void)                                 
+int Thing::is_interesting(void)                                 
 { 
-    return (tp_does_nothing(tp()));
+    return (tp_is_interesting(tp()));
 }
 
 int Thing::gfx_animated(void)                                 
@@ -554,9 +554,9 @@ int Thing::is_rrr26(void)
     return (tp_is_rrr26(tp()));
 }
 
-int Thing::is_rrr27(void)                                     
+int Thing::is_loggable(void)                                     
 { 
-    return (tp_is_rrr27(tp()));
+    return (tp_is_loggable(tp()));
 }
 
 int Thing::is_rrr28(void)                                     

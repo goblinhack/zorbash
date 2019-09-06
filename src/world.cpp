@@ -737,7 +737,7 @@ void World::get_all_interesting_things_at (int x, int y, std::vector<Thingp> &l)
         if (id) {
             auto t = thing_find(id);
             verify(t);
-            if (!t->does_nothing()) {
+            if (t->is_interesting()) {
                 l.push_back(t);
             }
         }
