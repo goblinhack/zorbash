@@ -291,7 +291,11 @@ public:
     double             tile_pixel_width             = {};
     double             tile_pixel_height            = {};
     uint32_t           sdl_delay                    = 1;
+
+    void dump(std::string prefix, std::ostream &out);
 } Config;
+std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my);
+std::istream& operator>>(std::istream &in, Bits<Config &> my);
 
 class Game {
 public:
@@ -314,6 +318,7 @@ public:
                                     Bits<const class Game & > const my);
     friend std::istream& operator>>(std::istream &in, 
                                     Bits<class Game &> my);
+    void dump(std::string prefix, std::ostream &out);
 };
 
 extern class Game *game;

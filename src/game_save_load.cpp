@@ -8,21 +8,22 @@
 #include <strstream>
 #include "quicklz.h"
 
-std::ostream& operator<<(std::ostream &out, 
-                         Bits<const class Game & > const my)
-{
-    out << bits(my.t.appdata);
-    out << bits(my.t.saved_dir);
-    out << bits(my.t.saved_file);
-    return (out);
-}
+static std::vector<char> read_binary_file (const std::string filename)
+{_
+    // binary mode is only for switching off newline translation
+    std::ifstream file(filename, std::ios::binary);
+    file.unsetf(std::ios::skipws);
 
-std::istream& operator>>(std::istream &in, Bits<class Game &> my)
-{
-    in >> bits(my.t.appdata);
-    in >> bits(my.t.saved_dir);
-    in >> bits(my.t.saved_file);
-    return (in);
+    std::streampos file_size;
+    file.seekg(0, std::ios::end);
+    file_size = file.tellg();
+    file.seekg(0, std::ios::beg);
+
+    std::vector<char> vec(file_size);
+    vec.insert(vec.begin(),
+               std::istream_iterator<char>(file),
+               std::istream_iterator<char>());
+    return (vec);
 }
 
 void
@@ -73,14 +74,36 @@ Game::save (void)
     fclose(ofile);
     delete []dst;
     delete state_compress;
-    DIE("xx");
 }
 
 void
 Game::load (void)
 {_
-//    std::ifstream in(saved_file);
+    //
+    // Read to a vector and then copy to a C buffer for qlz to use
+    //
+    auto vec = read_binary_file(saved_file);
+    auto src = vec.data();
 
-//    auto g = new Game;
-//    in >> bits(g);
+    //
+    // Decompress
+    //
+    auto dstlen = qlz_size_decompressed(src);
+    auto dst = new char[dstlen];
+    qlz_state_decompress *state_decompress = 
+      (qlz_state_decompress *)new char[sizeof(qlz_state_decompress)];
+    auto newlen = qlz_decompress(src, dst, state_decompress);
+
+    std::cout << "decompressed as ";
+    hexdump(dst, newlen);
+
+    std::istrstream in(dst, newlen);
+
+    class Game &c = *this;
+    in >> bits(c);
+
+    delete state_decompress;
+    delete []dst;
+
+    this->dump("", std::cout);
 }

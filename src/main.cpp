@@ -106,57 +106,57 @@ void quit (void)
 }
 
 {_
-    LOG("finishing:: sdl_exit");
+    LOG("quit:sdl_exit");
     sdl_exit();
 }
 
 {_
-    LOG("finishing:: tp_fini");
+    LOG("quit:tp_fini");
     tp_fini();
 }
 
 {_
-    LOG("finishing:: wid_console_fini");
+    LOG("quit:wid_console_fini");
     wid_console_fini();
 }
 
 {_
-    LOG("finishing:: command_fini");
+    LOG("quit:command_fini");
     command_fini();
 }
 
 {_
-    LOG("finishing:: wid_fini");
+    LOG("quit:wid_fini");
     wid_fini();
 }
 
 {_
-    LOG("finishing:: font_fini");
+    LOG("quit:font_fini");
     font_fini();
 }
 
 {_
-    LOG("finishing:: tex_fini");
+    LOG("quit:tex_fini");
     tex_fini();
 }
 
 {_
-    LOG("finishing:: wid_tiles_fini");
+    LOG("quit:wid_tiles_fini");
     wid_tiles_fini();
 }
 
 {_
-    LOG("finishing:: tile_fini");
+    LOG("quit:tile_fini");
     tile_fini();
 }
 
 {_
-    LOG("finishing:: sdl_fini");
+    LOG("quit:sdl_fini");
     sdl_fini();
 }
 
 {_
-    LOG("finishing:: blit_fini");
+    LOG("quit:blit_fini");
     blit_fini();
 }
 
@@ -580,9 +580,9 @@ int32_t main (int32_t argc, char *argv[])
     // Create and load the last saved game
     //
     game = new Game(std::string(appdata));
-    game->load();
-    // XXX
     game->save();
+    game->load();
+    DIE("X");
 
     if (!sdl_init()) {
 	ERR("SDL init");
