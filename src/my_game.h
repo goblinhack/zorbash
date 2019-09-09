@@ -295,6 +295,7 @@ public:
 
 class Game {
 public:
+    Game (void) {}
     Game (std::string appdata);
     void init(void);
     void save(void);
@@ -308,8 +309,11 @@ public:
     Config             config;
     World              world;
     uint32_t           fps_count = {};
-//    friend std::istream& operator>>(std::istream& s, Game &me);
-//    friend std::ostream& operator<<(std::ostream &s, const Game &me) 
+
+    friend std::ostream& operator<<(std::ostream &out, 
+                                    Bits<const class Game & > const my);
+    friend std::istream& operator>>(std::istream &in, 
+                                    Bits<class Game &> my);
 };
 
 extern class Game *game;

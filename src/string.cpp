@@ -28,9 +28,6 @@ std::string wstring_to_string (const std::wstring& s)
     return temp;
 }
 
-// #define HEX_DUMP_WIDTH (MAXSTR / 2)
-#define HEX_DUMP_WIDTH (16)
-
 /*
  * Replace chars in replace_set with replace_with.
  */
@@ -396,170 +393,6 @@ std::string mybasename (const char *in, const char *who)
     return (tmp2);
 }
 
-/*
- * hex_dump
- *
- * Returns false if we finished with an empty block.
- */
-uint8_t hex_dump (void *addr, uint64_t offset, uint64_t len)
-{_
-    uint8_t skipping_blanks = false;
-    uint8_t empty[HEX_DUMP_WIDTH] = {0};
-    uint8_t buf[HEX_DUMP_WIDTH + 1];
-    uint8_t *pc = (__typeof__(pc)) addr;
-    uint64_t i;
-    uint32_t x;
-
-    if (!len) {
-        return (false);
-    }
-
-    for (i = 0, x = 0; i < len; i++, x++) {
-        if ((i % HEX_DUMP_WIDTH) == 0) {
-            if (!skipping_blanks) {
-                if (i != 0) {
-                    printf(" |%*s|\n", HEX_DUMP_WIDTH, buf);
-                }
-            }
-
-            /*
-             * Skip blank blocks.
-             */
-            if (!memcmp(pc + i, empty, sizeof(empty))) {
-                i += HEX_DUMP_WIDTH - 1;
-                skipping_blanks = true;
-                buf[0] = '\0';
-                continue;
-            }
-
-            printf("  %08X ", (uint32_t)(i + offset));
-
-            x = 0;
-        }
-
-        if (x && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
-            printf(" ");
-        }
-
-        skipping_blanks = false;
-
-        printf(" %02X", pc[i]);
-
-        if ((pc[i] < ' ') || (pc[i] > '~')) {
-            buf[i % HEX_DUMP_WIDTH] = '.';
-        } else {
-            buf[i % HEX_DUMP_WIDTH] = pc[i];
-        }
-
-        buf[(i % HEX_DUMP_WIDTH) + 1] = '\0';
-    }
-
-    if (!buf[0]) {
-        if (skipping_blanks) {
-            printf("  *\n");
-        }
-
-        return (false);
-    }
-
-    while ((i % HEX_DUMP_WIDTH) != 0) {
-        printf ("   ");
-
-        if (i && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
-            printf (" ");
-        }
-
-        i++;
-    }
-
-    printf(" |%*s|\n", -HEX_DUMP_WIDTH, buf);
-
-    return (true);
-}
-
-/*
- * hex_dump_log
- *
- * As above but logs to the buffer
- */
-uint8_t hex_dump_log (void *addr, uint64_t offset, uint64_t len)
-{_
-    uint8_t skipping_blanks = false;
-    uint8_t empty[HEX_DUMP_WIDTH] = {0};
-    uint8_t buf[HEX_DUMP_WIDTH + 1];
-    uint8_t *pc = (__typeof__(pc)) addr;
-    uint64_t i;
-    uint32_t x;
-
-    if (!len) {
-        return (false);
-    }
-
-    for (i = 0, x = 0; i < len; i++, x++) {
-        if ((i % HEX_DUMP_WIDTH) == 0) {
-            if (!skipping_blanks) {
-                if (i != 0) {
-                    LOGS(" |%*s|\n", HEX_DUMP_WIDTH, buf);
-                }
-            }
-
-            /*
-             * Skip blank blocks.
-             */
-            if (!memcmp(pc + i, empty, sizeof(empty))) {
-                i += HEX_DUMP_WIDTH - 1;
-                skipping_blanks = true;
-                buf[0] = '\0';
-                continue;
-            }
-
-            LOGS("  %08X ", (uint32_t)(i + offset));
-
-            x = 0;
-        }
-
-#if 0
-        if (x && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
-            LOGS(" ");
-        }
-#endif
-
-        skipping_blanks = false;
-
-        LOGS(" %02X", pc[i]);
-
-        if ((pc[i] < ' ') || (pc[i] > '~')) {
-            buf[i % HEX_DUMP_WIDTH] = '.';
-        } else {
-            buf[i % HEX_DUMP_WIDTH] = pc[i];
-        }
-
-        buf[(i % HEX_DUMP_WIDTH) + 1] = '\0';
-    }
-
-    if (!buf[0]) {
-        if (skipping_blanks) {
-            LOGS("  *\n");
-        }
-
-        return (false);
-    }
-
-    while ((i % HEX_DUMP_WIDTH) != 0) {
-        LOGS ("   ");
-
-        if (i && (((i % (HEX_DUMP_WIDTH/2))) == 0)) {
-            LOGS (" ");
-        }
-
-        i++;
-    }
-
-    LOGS(" |%*s|\n", -HEX_DUMP_WIDTH, buf);
-
-    return (true);
-}
-
 /*-
  * Copyright (c) 1990, 1993
  *      The Regents of the University of California.  All rights reserved.
@@ -617,21 +450,6 @@ strcasestr_ (const char *s, const char*find)
                 s--;
         }
         return ((char *)s);
-}
-
-/*
- * From AMD apparently
- *
- * http://stackoverflow.com/questions/271971/how-can-i-improve-replace-sprintf-which-ive-measured-to-be-a-performance-hotsp
- */
-void itoa05 (char *string, unsigned int value)
-{_
-   *string++ = '0' + ((value = value * 26844 + 12) >> 28);
-   *string++ = '0' + ((value = ((value & 0x0FFFFFFF)) * 10) >> 28);
-   *string++ = '0' + ((value = ((value & 0x0FFFFFFF)) * 10) >> 28);
-   *string++ = '0' + ((value = ((value & 0x0FFFFFFF)) * 10) >> 28);
-   *string++ = '0' + ((value = ((value & 0x0FFFFFFF)) * 10) >> 28);
-   *string++ = 0;
 }
 
 /*

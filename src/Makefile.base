@@ -2,9 +2,6 @@
 NAME=zorbash
 OBJDIR=.o
 
-#include Makefile.ramdisk.deps
-#    $(RAMDISK_OBJ)			
-
 GAME_OBJECTS=				\
     $(OBJDIR)/ascii.o 		        \
     $(OBJDIR)/ascii_box.o 		\
@@ -21,14 +18,16 @@ GAME_OBJECTS=				\
     $(OBJDIR)/dungeon.o 		\
     $(OBJDIR)/dungeon_grid.o 		\
     $(OBJDIR)/file.o 			\
+    $(OBJDIR)/file_read.o 		\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
-    $(OBJDIR)/game_save_load.o 		\
-    $(OBJDIR)/game_init.o 		\
     $(OBJDIR)/game_display.o 		\
+    $(OBJDIR)/game_init.o 		\
+    $(OBJDIR)/game_save_load.o 		\
     $(OBJDIR)/gauss.o 		        \
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\
+    $(OBJDIR)/hexdump.o 		\
     $(OBJDIR)/level.o 			\
     $(OBJDIR)/light.o 			\
     $(OBJDIR)/log.o 			\
@@ -45,7 +44,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/py_tp.o 			\
     $(OBJDIR)/py_ttf.o 			\
     $(OBJDIR)/python.o 			\
-    $(OBJDIR)/ramdisk_read.o 		\
+    $(OBJDIR)/quicklz.o 		\
     $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
@@ -54,8 +53,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/terrain.o 		\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
-    $(OBJDIR)/thing_tile.o 		\
-    $(OBJDIR)/thing_id.o 		\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 	        \
@@ -66,10 +63,12 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_health.o 		\
     $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_hunger.o 		\
+    $(OBJDIR)/thing_id.o 		\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_template.o 		\
     $(OBJDIR)/thing_tick.o 		\
+    $(OBJDIR)/thing_tile.o 		\
     $(OBJDIR)/thing_weapon.o 		\
     $(OBJDIR)/tile.o 			\
     $(OBJDIR)/time.o 			\
@@ -114,5 +113,3 @@ valgrind:
 
 all: $(TARGET_GAME)
 	$(DSYM)
-
-#include Makefile.ramdisk

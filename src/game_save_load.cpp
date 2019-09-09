@@ -5,111 +5,82 @@
 
 #include "my_game.h"
 #include "my_dungeon.h"
-#include <fstream>
-
-std::istream& operator>>(std::istream& in, Bits<std::string &> v)
-{
-    std::cout << "read string" << std::endl;
-    size_t sz = 0;
-    in >> bits(sz);
-    if (in && sz) {
-        std::vector<char> tmp(sz);
-        in.read(tmp.data(), sz);
-        v.t.assign(tmp.data(), sz);
-    }
-
-    return in;
-}
-
-std::ostream& operator<<(std::ostream &out, Bits<const std::string &> const v)
-{
-    std::cout << "write non const string" << std::endl;
-    size_t sz = v.t.size();
-    return out << bits(sz) << v.t;
-}
-
-std::ostream& operator<<(std::ostream &out, Bits<std::string &> const v)
-{
-    std::cout << "write string" << std::endl;
-    size_t sz = v.t.size();
-    return out << bits(sz) << v.t;
-}
+#include <strstream>
+#include "quicklz.h"
 
 std::ostream& operator<<(std::ostream &out, 
-                         Bits<std::vector<std::string> &> const v)
+                         Bits<const class Game & > const my)
 {
-    std::cout << "write vector string " << v.t.size() << " elems" << std::endl;
-    size_t sz = v.t.size();
-    out << bits(sz);
-    for (auto i : v.t) { out << bits(i); }
+    out << bits(my.t.appdata);
+    out << bits(my.t.saved_dir);
+    out << bits(my.t.saved_file);
     return (out);
 }
 
-std::ostream& operator<<(std::ostream &out, 
-                         Bits<const std::vector<std::string> &> const v)
+std::istream& operator>>(std::istream &in, Bits<class Game &> my)
 {
-    std::cout << "write vector const string " << v.t.size() << " elems" << std::endl;
-    size_t sz = v.t.size();
-    out << bits(sz);
-    for (auto i : v.t) { out << bits(i); }
-    return (out);
-}
-
-std::istream& operator>>(std::istream &in, 
-                         Bits<std::vector<std::string> &> v)
-{
-    size_t sz = 0;
-    in >> bits(sz);
-    std::cout << "read vector string " << sz << " elems" << std::endl;
-    if (in && sz) {
-        while (sz--) {
-            std::string s;
-            in >> bits(s);
-            v.t.push_back(s);
-        }
-    }
-
-    return in;
+    in >> bits(my.t.appdata);
+    in >> bits(my.t.saved_dir);
+    in >> bits(my.t.saved_file);
+    return (in);
 }
 
 void
 Game::save (void)
 {_
-    CON("save %s", saved_file.c_str());
-    {
-        std::ofstream f(saved_file, std::ios::binary );
-        int a = 5, b = -1, c = 123456;
+    std::stringstream out(std::ios::in | std::ios::out | std::ios::binary);
 
-        std::string d("hello");
-        std::initializer_list<std::string> data = {"there", "you"};
-        std::vector<std::string> e(data);
+    const class Game &c = *this;
+    out << bits(c);
 
-        f << bits(a) << bits(b) << bits(c) << bits(d) << bits(e);
-    }
+    //
+    // Get the pre compress buffer
+    //
+    auto src = out.str().c_str();
+    out.seekg(0, std::ios::end);
+    int srclen = out.tellg();
+    out.seekg(0, std::ios::beg);
 
-    {
-        std::ifstream f(saved_file);
-        int a, b, c;
-        std::string d;
-        std::vector<std::string> e;
+    std::cout << "before compression ";
+    (void) hexdump(src, srclen);
 
-        f >> bits(a) >> bits(b) >> bits(c) >> bits(d) >> bits(e);
+    //
+    // Compress
+    //
+    qlz_state_compress *state_compress = 
+      (qlz_state_compress *)new char[sizeof(qlz_state_compress)];
 
-        std::cout << "a " << a << std::endl;
-        std::cout << "b " << b << std::endl;
-        std::cout << "c " << c << std::endl;
-        std::cout << "d " << d << std::endl;
-        std::cout << "e " << e.size() << " elems: ";
-        for (auto i : e) {
-            std::cout << "[" << i << "] ";
-        }
-        std::cout << std::endl;
-    }
-    DIE("X");
+    //
+    // http://www.quicklz.com/manual.html
+    //
+    // The destination buffer must be at least size + 400 bytes large because 
+    // incompressible data may increase in size.
+    // 
+    auto dst = new char[srclen + 400 /* qlz header */];
+    auto dstlen = qlz_compress(src, dst, srclen, state_compress);
+
+    //
+    // Dump the post compress buffer
+    //
+    std::cout << "after compression ";
+    (void) hexdump(dst, dstlen);
+
+    //
+    // Save the post compress buffer
+    //
+    auto ofile = fopen(saved_file.c_str(), "wb");
+    fwrite(dst, dstlen, 1, ofile);
+    fclose(ofile);
+    delete []dst;
+    delete state_compress;
+    DIE("xx");
 }
 
 void
 Game::load (void)
 {_
-    CON("load %s", saved_file.c_str());
+//    std::ifstream in(saved_file);
+
+//    auto g = new Game;
+//    in >> bits(g);
 }
