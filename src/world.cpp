@@ -603,18 +603,18 @@ bool World::is_door (const int x, const int y)
 
 void World::clear (void)
 {
-    memset(_is_blood, 0, sizeof(_is_blood));
-    memset(_is_corridor, 0, sizeof(_is_corridor));
-    memset(_is_deep_water, 0, sizeof(_is_deep_water));
-    memset(_is_dirt, 0, sizeof(_is_dirt));
-    memset(_is_grass, 0, sizeof(_is_grass));
-    memset(_is_floor, 0, sizeof(_is_floor));
-    memset(_is_lava, 0, sizeof(_is_lava));
-    memset(_is_light, 0, sizeof(_is_light));
-    memset(_is_rock, 0, sizeof(_is_rock));
-    memset(_is_gfx_large_shadow_caster, 0, sizeof(_is_gfx_large_shadow_caster));
-    memset(_is_wall, 0, sizeof(_is_wall));
-    memset(_is_water, 0, sizeof(_is_water));
+    _is_blood = {};
+    _is_corridor = {};
+    _is_deep_water = {};
+    _is_dirt = {};
+    _is_grass = {};
+    _is_floor = {};
+    _is_lava = {};
+    _is_light = {};
+    _is_rock = {};
+    _is_gfx_large_shadow_caster = {};
+    _is_wall = {};
+    _is_water = {};
 }
 
 bool World::is_oob (const int x, const int y, const int z)

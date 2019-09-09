@@ -50,21 +50,21 @@ private:
     //
     // These are caches for fast lookup in display code
     //
-    uint8_t                    _is_wall[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_gfx_large_shadow_caster[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_light[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_floor[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_lava[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_blood[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_water[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_deep_water[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_corridor[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_dirt[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_grass[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_soil[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_gravel[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_snow[MAP_WIDTH][MAP_HEIGHT] = {};
-    uint8_t                    _is_rock[MAP_WIDTH][MAP_HEIGHT] = {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow_caster;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_blood;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_grass;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_soil;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gravel;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_snow;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock;
 public:
     //
     // World map
