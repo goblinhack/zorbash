@@ -5,4 +5,4 @@
 
 #pragma once
 
-unsigned char *ramdisk_load(const char *filename, int32_t *outlen);
+unsigned char *file_load(const char *filename, int32_t *outlen);

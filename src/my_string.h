@@ -46,10 +46,8 @@ void strnoescape(char *uncompressed);
 char *dynprintf(const char *fmt, ...);
 char *dynvprintf(const char *fmt, va_list args);
 std::string mybasename(const char *in, const char *who);
-uint8_t hex_dump(void *addr, uint64_t offset, uint64_t len);
-uint8_t hex_dump_log(void *addr, uint64_t offset, uint64_t len);
+void hexdump(const char *addr, size_t len);
 char *strcasestr_(const char *s, const char *find);
-void itoa05(char *string, unsigned int value);
 
 shared_vector_string split(const char *in, uint32_t max_line_len);
 shared_vector_string split(const std::string &, uint32_t max_line_len);

@@ -69,23 +69,23 @@ static unsigned char *load_raw_image (std::string filename,
                                       int32_t *y,
                                       int32_t *comp)
 {_
-    unsigned char *ramdisk_data;
+    unsigned char *file_data;
     unsigned char *image_data = 0;
     int32_t len;
 
-    ramdisk_data = ramdisk_load(filename.c_str(), &len);
-    if (!ramdisk_data) {
+    file_data = file_load(filename.c_str(), &len);
+    if (!file_data) {
         DIE("could not read file, '%s'", filename.c_str());
     }
 
-    image_data = stbi_load_from_memory(ramdisk_data, len, x, y, comp, 0);
+    image_data = stbi_load_from_memory(file_data, len, x, y, comp, 0);
     if (!image_data) {
         DIE("could not read memory for file, '%s'", filename.c_str());
     }
 
     DBG("loaded '%s', %ux%u", filename.c_str(), *x, *y);
 
-    myfree(ramdisk_data);
+    myfree(file_data);
 
     return (image_data);
 }
