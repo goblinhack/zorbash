@@ -6,37 +6,44 @@
 #include "my_game.h"
 #include "my_dungeon.h"
 #include <strstream>
-#include <stdlib.h>
 #include "minilzo.h"
 
 #define HEAP_ALLOC(var,size) \
     void *var; \
     posix_memalign(&var, sizeof(lzo_align_t), size + size / 16 + 64 + 3);
 
-static std::vector<char> read_lzo (const std::string filename,
-                                   lzo_uint *uncompressed_file_size)
+// binary mode is only for switching off newline translation
+// ios::ate, open at end
+std::vector<char> read_file (const std::string filename)
 {_
-    // binary mode is only for switching off newline translation
-    std::ifstream file(filename, std::ios::binary);
-    file.unsetf(std::ios::skipws);
+    std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
+    ifs.unsetf(std::ios::skipws);
 
-    std::streampos file_size;
-    file.seekg(0, std::ios::end);
-    file_size = file.tellg();
-    file.seekg(0, std::ios::beg);
+    std::ifstream::pos_type sz = ifs.tellg();
+    ifs.seekg(0, std::ios::beg);
 
-    lzo_uint sz;
-    file >> bits(sz);
-    *uncompressed_file_size = sz;
-    file_size -= sizeof(sz);
+    std::vector<char> bytes(sz);
+    ifs.read(bytes.data(), sz);
 
-    std::vector<char> vec;
-    vec.reserve(file_size);
-    vec.insert(vec.begin(),
-               std::istream_iterator<char>(file),
-               std::istream_iterator<char>());
+    return bytes;
+}
 
-    return (vec);
+static std::vector<char> read_lzo_file (const std::string filename,
+                                        lzo_uint *uncompressed_sz)
+{_
+    std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
+    // tellg is not ideal, look into <filesystem> post mojave
+    std::ifstream::pos_type sz = ifs.tellg();
+
+    ifs.seekg(0, std::ios::beg);
+    ifs.unsetf(std::ios::skipws);
+    ifs.read((char*) uncompressed_sz, sizeof(lzo_uint));
+
+    sz -= (int) sizeof(lzo_uint);
+    std::vector<char> bytes(sz);
+    ifs.read(bytes.data(), sz);
+
+    return (bytes);
 }
 
 void
@@ -106,7 +113,7 @@ Game::load (void)
     // Read to a vector and then copy to a C buffer for qlz to use
     //
     lzo_uint uncompressed_len;
-    auto vec = read_lzo(saved_file, &uncompressed_len);
+    auto vec = read_lzo_file(saved_file, &uncompressed_len);
     auto data = vec.data();
     lzo_uint compressed_len = vec.size();
 
