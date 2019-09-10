@@ -6,6 +6,67 @@
 #include "my_game.h"
 #include "my_dungeon.h"
 
+std::ostream& operator<<(std::ostream &out, 
+                         Bits<const class World & > const my)
+{_
+    out << bits(my.t._is_wall);
+    out << bits(my.t._is_gfx_large_shadow_caster);
+    out << bits(my.t._is_light);
+    out << bits(my.t._is_floor);
+    out << bits(my.t._is_lava);
+    out << bits(my.t._is_blood);
+    out << bits(my.t._is_water);
+    out << bits(my.t._is_deep_water);
+    out << bits(my.t._is_corridor);
+    out << bits(my.t._is_dirt);
+    out << bits(my.t._is_grass);
+    out << bits(my.t._is_soil);
+    out << bits(my.t._is_gravel);
+    out << bits(my.t._is_snow);
+    out << bits(my.t._is_rock);
+    out << bits(my.t.map_at);
+    out << bits(my.t.map_wanted_at);
+    out << bits(my.t.map_tile_over);
+    return (out);
+}
+
+std::istream& operator>>(std::istream &in, Bits<class World &> my)
+{_
+    in >> bits(my.t._is_wall);
+    in >> bits(my.t._is_gfx_large_shadow_caster);
+    in >> bits(my.t._is_light);
+    in >> bits(my.t._is_floor);
+    in >> bits(my.t._is_lava);
+    in >> bits(my.t._is_blood);
+    in >> bits(my.t._is_water);
+    in >> bits(my.t._is_deep_water);
+    in >> bits(my.t._is_corridor);
+    in >> bits(my.t._is_dirt);
+    in >> bits(my.t._is_grass);
+    in >> bits(my.t._is_soil);
+    in >> bits(my.t._is_gravel);
+    in >> bits(my.t._is_snow);
+    in >> bits(my.t._is_rock);
+    in >> bits(my.t.map_at);
+    in >> bits(my.t.map_wanted_at);
+    in >> bits(my.t.map_tile_over);
+    return (in);
+}
+
+void World::dump (std::string prefix, std::ostream &out)
+{
+    out << prefix << "World {" << std::endl;
+    auto old_prefix = prefix;
+    prefix += "  ";
+
+    out << prefix << "map_at:          " << map_at << std::endl;
+    out << prefix << "map_wanted_at:   " << map_wanted_at << std::endl;
+    out << prefix << "map_tile_over:   " << map_tile_over << std::endl;
+
+    prefix = old_prefix;
+    out << prefix << "}" << std::endl;
+}
+
 std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 {_
     out << bits(my.t.fps_counter);
@@ -98,6 +159,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.saved_file);
     out << bits(my.t.fps_count);
     out << bits(my.t.config);
+    out << bits(my.t.world);
     return (out);
 }
 
@@ -108,6 +170,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.saved_file);
     in >> bits(my.t.fps_count);
     in >> bits(my.t.config);
+    in >> bits(my.t.world);
     return (in);
 }
 
@@ -122,6 +185,7 @@ void Game::dump (std::string prefix, std::ostream &out)
     out << prefix << "sdaved_file: " << saved_file << std::endl;
     out << prefix << "fps_count:   " << fps_count << std::endl;
     config.dump(prefix, out);
+    world.dump(prefix, out);
 
     prefix = old_prefix;
     out << prefix << "}" << std::endl;

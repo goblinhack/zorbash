@@ -67,9 +67,29 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock;
 public:
     //
+    // The player!
+    //
+    Thingp                     player = {};
+
+    //
+    // Global lights
+    //
+    Lights                     all_lights;
+
+    //
+    // Where we're looking in the map
+    //
+    fpoint                     map_at;
+    fpoint                     map_wanted_at;
+    point                      map_tile_over;
+
+    //
+    // All lights at a map cell
+    //
+    //
     // World map
     //
-    Terrainp                   terrain;
+    Terrainp                   terrain {};
 
     //
     // All things. The location forms the ID.
@@ -78,6 +98,16 @@ public:
       std::array<
         std::array<Thingp, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
           all_thing_ptrs_at;
+
+    std::unordered_map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
+
+    //
+    // All thing IDs
+    //
+    std::array<
+      std::array<
+        std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
+          all_thing_ids_at;
 
     void put_thing_ptr(uint16_t x, uint16_t y, Thingp t);
     void remove_thing_ptr(Thingp t);
@@ -114,14 +144,6 @@ public:
         verify(t);
         return (t);
     }
-
-    //
-    // All thing IDs
-    //
-    std::array<
-      std::array<
-        std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
-          all_thing_ids_at;
 
     void remove_thing(int x, int y, uint32_t id);
     void remove_thing(point p, uint32_t id);
@@ -168,28 +190,6 @@ public:
         world->get_all_obstacle_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_obstacle_things_at(int x, int y, std::vector<Thingp> &);
-
-    //
-    // The player!
-    //
-    Thingp                     player = {};
-
-    //
-    // Global lights
-    //
-    Lights                     all_lights;
-
-    //
-    // Where we're looking in the map
-    //
-    fpoint                     map_at;
-    fpoint                     map_wanted_at;
-    point                      map_tile_over;
-
-    //
-    // All lights at a map cell
-    //
-    std::unordered_map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
 
     bool is_anything_at(const int x, const int y);
     bool is_anything_at(const point &p);
@@ -266,6 +266,10 @@ public:
     void unset_soil(const int x, const int y);
     void unset_wall(const int x, const int y);
     void unset_water(const int x, const int y);
+
+    void dump(std::string prefix, std::ostream &out);
+    friend std::ostream& operator<<(std::ostream &out, Bits<const World & > const my);
+    friend std::istream& operator>>(std::istream &in, Bits<World &> my);
 };
 
 typedef struct {

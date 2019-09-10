@@ -21,6 +21,25 @@ public:
 
     my_apoint (const my_apoint &a) : x(a.x), y(a.y) { }
 
+    friend std::ostream& operator<<(std::ostream &out, 
+                                    Bits<const my_apoint & > const my)
+    {
+        out << bits(my.t.x) << bits(my.t.y);
+        return (out);
+    }
+
+    friend std::istream& operator>>(std::istream &in, Bits<my_apoint &> my)
+    {
+        in >> bits(my.t.x) >> bits(my.t.y);
+        return (in);
+    }
+
+    friend std::ostream& operator << (std::ostream &out, const my_apoint &my)
+    {
+        out << "(" << my.x << ", " << my.y << ")";
+        return (out);
+    }
+
     void operator+= (my_apoint a)
     {
         x += a.x; y += a.y;

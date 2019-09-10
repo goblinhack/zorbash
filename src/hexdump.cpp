@@ -16,7 +16,7 @@
 // 00000060  00 00 00 00 00 00 00 00  00 00 00 00 00 00 30 31 |..............01|
 // 00000070  32 33 34 35 61 62 63 64  65 66 67 68 69 6A 6B 6C |2345abcdefghi
 // 
-void hexdump (const char *addr, size_t len)
+void hexdump (const unsigned char *addr, size_t len)
 {
     int skipping_blanks = false;
     unsigned char empty[HEX_DUMP_WIDTH] = {0};
@@ -91,7 +91,7 @@ void hexdump (const char *addr, size_t len)
     std::cout << " |" << std::setw(-HEX_DUMP_WIDTH) << buf << "|" << std::endl;
 }
 
-void hexdump (std::vector<char> &v)
+void hexdump (std::vector<unsigned char> &v)
 {
     hexdump(v.data(), v.size());
 }
