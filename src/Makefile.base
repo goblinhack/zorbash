@@ -45,7 +45,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/py_tp.o 			\
     $(OBJDIR)/py_ttf.o 			\
     $(OBJDIR)/python.o 			\
-    $(OBJDIR)/quicklz.o 		\
+    $(OBJDIR)/minilzo.o 		\
     $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
