@@ -13,7 +13,6 @@
     void *var; \
     posix_memalign(&var, sizeof(lzo_align_t), size + size / 16 + 64 + 3);
 
-
 static std::vector<char> read_lzo (const std::string filename,
                                    lzo_uint *uncompressed_file_size)
 {_
@@ -60,12 +59,11 @@ Game::save (void)
     HEAP_ALLOC(compressed, uncompressed_len);
     memcpy(uncompressed, data, uncompressed_len);
 
-    std::cout << "before compression ";
-    (void) hexdump((const unsigned char*)uncompressed, uncompressed_len);
+//    std::cout << "before compression ";
+//    (void) hexdump((const unsigned char*)uncompressed, uncompressed_len);
 
     if (lzo_init() != LZO_E_OK) {
-        ERR("internal error - lzo_init() failed !!!\n");
-        DIE("(this usually indicates a compiler bug - try recompiling\nwithout optimizations, and enable '-DLZO_DEBUG' for diagnostics)\n");
+        DIE("LZO init fail: enable '-DLZO_DEBUG' for diagnostics)");
     }
 
     HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);
@@ -74,17 +72,19 @@ Game::save (void)
     int r = lzo1x_1_compress((lzo_bytep)uncompressed, uncompressed_len,
                              (lzo_bytep)compressed, &compressed_len, wrkmem);
     if (r == LZO_E_OK) {
-        printf("compressed %lu bytes into %lu bytes\n",
-            (unsigned long) uncompressed_len, (unsigned long) compressed_len);
+        CON("%s: compressed %lu to %lu bytes",
+            saved_file.c_str(),
+            (unsigned long) uncompressed_len, 
+            (unsigned long) compressed_len);
     } else {
-        DIE("internal error - compression failed: %d", r);
+        DIE("LZO internal error - compression failed: %d", r);
     }
 
     //
     // Dump the post compress buffer
     //
-    std::cout << "after compression ";
-    (void) hexdump((const unsigned char *)compressed, compressed_len);
+//    std::cout << "after compression ";
+//    (void) hexdump((const unsigned char *)compressed, compressed_len);
 
     //
     // Save the post compress buffer
@@ -93,6 +93,10 @@ Game::save (void)
     fwrite((char*) &uncompressed_len, sizeof(uncompressed_len), 1, ofile);
     fwrite(compressed, compressed_len, 1, ofile);
     fclose(ofile);
+
+    free(uncompressed);
+    free(compressed);
+    free(wrkmem);
 }
 
 void
@@ -106,29 +110,30 @@ Game::load (void)
     auto data = vec.data();
     lzo_uint compressed_len = vec.size();
 
-    printf("read compressed %lu bytes back into %lu bytes\n",
-        (unsigned long) compressed_len, (unsigned long) uncompressed_len);
-
     HEAP_ALLOC(compressed, compressed_len);
     HEAP_ALLOC(uncompressed, uncompressed_len);
     memcpy(compressed, data, compressed_len);
 
-
     lzo_uint new_len = 0;
     int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
-        CON("decompressed %lu bytes back into %lu bytes",
-            (unsigned long) compressed_len, (unsigned long) uncompressed_len);
+        CON("%s: decompressed %lu to %lu bytes",
+            saved_file.c_str(),
+            (unsigned long) compressed_len, 
+            (unsigned long) uncompressed_len);
     } else {
         /* this should NEVER happen */
-        DIE("internal error - decompression failed: %d\n", r);
+        DIE("LZO internal error - decompression failed: %d", r);
     }
 
-    std::cout << "decompressed as ";
-    hexdump((const unsigned char *)uncompressed, uncompressed_len);
+//    std::cout << "decompressed as ";
+//    hexdump((const unsigned char *)uncompressed, uncompressed_len);
 
     std::istrstream in((const char *)uncompressed, uncompressed_len);
     class Game &c = *this;
     in >> bits(c);
     this->dump("", std::cout);
+
+    free(uncompressed);
+    free(compressed);
 }
