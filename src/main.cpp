@@ -580,9 +580,6 @@ int32_t main (int32_t argc, char *argv[])
     // Create and load the last saved game
     //
     game = new Game(std::string(appdata));
-    game->save();
-    game->load();
-    DIE("X");
 
     if (!sdl_init()) {
 	ERR("SDL init");
@@ -636,6 +633,11 @@ int32_t main (int32_t argc, char *argv[])
     // Create a fresh game if none was loaded
     //
     game->init();
+#if 0
+    game->save();
+    game->load();
+    DIE("x");
+#endif
 
     sdl_loop();
     gl_leave_2d_mode();

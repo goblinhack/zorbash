@@ -49,6 +49,8 @@ static std::vector<char> read_lzo_file (const std::string filename,
 void
 Game::save (void)
 {_
+    CON("%s: save", saved_file.c_str());
+
     std::stringstream s(std::ios::in | std::ios::out | std::ios::binary);
 
     const class Game &c = *this;
@@ -104,13 +106,17 @@ Game::save (void)
     free(uncompressed);
     free(compressed);
     free(wrkmem);
+
+    CON("%s: saved", saved_file.c_str());
 }
 
 void
 Game::load (void)
 {_
+    CON("%s: load", saved_file.c_str());
+
     //
-    // Read to a vector and then copy to a C buffer for qlz to use
+    // Read to a vector and then copy to a C buffer for LZO to use
     //
     lzo_uint uncompressed_len;
     auto vec = read_lzo_file(saved_file, &uncompressed_len);
@@ -139,8 +145,10 @@ Game::load (void)
     std::istrstream in((const char *)uncompressed, uncompressed_len);
     class Game &c = *this;
     in >> bits(c);
-    this->dump("", std::cout);
+//    this->dump("", std::cout);
 
     free(uncompressed);
     free(compressed);
+
+    CON("%s: loaded", saved_file.c_str());
 }
