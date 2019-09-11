@@ -20,6 +20,19 @@ std::istream& operator>>(std::istream &in, Bits<AgeMap &> my)
 }
 
 std::ostream& operator<<(std::ostream &out, 
+                         Bits<const Dmap & > const my)
+{
+    out << bits(my.t.val);
+    return (out);
+}
+
+std::istream& operator>>(std::istream &in, Bits<Dmap &> my)
+{
+    in >> bits(my.t.val);
+    return (in);
+}
+
+std::ostream& operator<<(std::ostream &out, 
                          Bits<const Monst & > const my)
 {
     bool age_map = (my.t.age_map != nullptr);
@@ -28,16 +41,42 @@ std::ostream& operator<<(std::ostream &out,
         out << bits(my.t.age_map);
     }
 
+    bool dmap_goals = (my.t.dmap_goals != nullptr);
+    out << bits(dmap_goals);
+    if (dmap_goals) {
+        out << bits(my.t.dmap_goals);
+    }
+
+    bool dmap_scent = (my.t.dmap_scent != nullptr);
+    out << bits(dmap_scent);
+    if (dmap_scent) {
+        out << bits(my.t.dmap_scent);
+    }
+
     return (out);
 }
 
 std::istream& operator>>(std::istream &in, Bits<Monst &> my)
 {
-    bool age_map = (my.t.age_map != nullptr);
+    bool age_map;
     in >> bits(age_map);
     if (age_map) {
         my.t.age_map = new AgeMap();
         in >> bits(my.t.age_map);
+    }
+
+    bool dmap_goals;
+    in >> bits(dmap_goals);
+    if (dmap_goals) {
+        my.t.dmap_goals = new Dmap();
+        in >> bits(my.t.dmap_goals);
+    }
+
+    bool dmap_scent;
+    in >> bits(dmap_scent);
+    if (dmap_scent) {
+        my.t.dmap_scent = new Dmap();
+        in >> bits(my.t.dmap_scent);
     }
 
     return (in);
@@ -48,6 +87,16 @@ void Monst::dump (std::string pfx, std::ostream &out)
     out << pfx << "Monst {" << std::endl;
     auto old_pfx = pfx;
     pfx += "  ";
+
+    if (age_map) {
+        out << pfx << "has age_map" << std::endl;
+    }
+    if (dmap_goals) {
+        out << pfx << "has dmap_goals" << std::endl;
+    }
+    if (dmap_scent) {
+        out << pfx << "has dmap_scent" << std::endl;
+    }
 
     pfx = old_pfx;
     out << pfx << "}" << std::endl;
@@ -76,22 +125,25 @@ std::ostream& operator<<(std::ostream &out,
     uint8_t dir = my.t.dir;
     out << bits(dir);
 
-    std::bitset<32> b(my.t.has_ever_moved     << 0  |
-                      my.t.is_attached        << 1  |
-                      my.t.is_being_destroyed << 2  |
-                      my.t.is_bloodied        << 3  |
-                      my.t.is_bouncing        << 4  |
-                      my.t.is_dead            << 5  |
-                      my.t.is_facing_left     << 6  |
-                      my.t.is_hidden          << 7  |
-                      my.t.is_hungry          << 8  |
-                      my.t.is_moving          << 9  |
-                      my.t.is_open            << 10 |
-                      my.t.is_sleeping        << 11 |
-                      my.t.is_starving        << 12 |
-                      my.t.is_submerged       << 13 |
-                      my.t.is_waiting_for_ai  << 14);
-    out << bits(b);
+    uint32_t bits32 = 0;
+    int shift = 0;
+    bits32 |= my.t.has_ever_moved     << shift; shift++;
+    bits32 |= my.t.has_light          << shift; shift++;
+    bits32 |= my.t.is_attached        << shift; shift++;
+    bits32 |= my.t.is_being_destroyed << shift; shift++;
+    bits32 |= my.t.is_bloodied        << shift; shift++;
+    bits32 |= my.t.is_bouncing        << shift; shift++;
+    bits32 |= my.t.is_dead            << shift; shift++;
+    bits32 |= my.t.is_facing_left     << shift; shift++;
+    bits32 |= my.t.is_hidden          << shift; shift++;
+    bits32 |= my.t.is_hungry          << shift; shift++;
+    bits32 |= my.t.is_moving          << shift; shift++;
+    bits32 |= my.t.is_open            << shift; shift++;
+    bits32 |= my.t.is_sleeping        << shift; shift++;
+    bits32 |= my.t.is_starving        << shift; shift++;
+    bits32 |= my.t.is_submerged       << shift; shift++;
+    bits32 |= my.t.is_waiting_for_ai  << shift; shift++;
+    out << bits(bits32);
 
     return (out);
 }
@@ -120,24 +172,29 @@ std::istream& operator>>(std::istream &in, Bits<Thing &> my)
     in >> dir;
     my.t.dir = dir;
 
-    std::bitset<32> s;
-    in >> bits(s);
-    uint32_t raw_bits = static_cast<uint32_t>(s.to_ulong());
-    my.t.has_ever_moved     = (raw_bits >> 0 ) & 1;
-    my.t.is_attached        = (raw_bits >> 1 ) & 1;
-    my.t.is_being_destroyed = (raw_bits >> 2 ) & 1;
-    my.t.is_bloodied        = (raw_bits >> 3 ) & 1;
-    my.t.is_bouncing        = (raw_bits >> 4 ) & 1;
-    my.t.is_dead            = (raw_bits >> 5 ) & 1;
-    my.t.is_facing_left     = (raw_bits >> 6 ) & 1;
-    my.t.is_hidden          = (raw_bits >> 7 ) & 1;
-    my.t.is_hungry          = (raw_bits >> 8 ) & 1;
-    my.t.is_moving          = (raw_bits >> 9 ) & 1;
-    my.t.is_open            = (raw_bits >> 10) & 1;
-    my.t.is_sleeping        = (raw_bits >> 11) & 1;
-    my.t.is_starving        = (raw_bits >> 12) & 1;
-    my.t.is_submerged       = (raw_bits >> 13) & 1;
-    my.t.is_waiting_for_ai  = (raw_bits >> 14) & 1;
+    uint32_t bits32;
+    in >> bits(bits32);
+    int shift = 0;
+    my.t.has_ever_moved     = (bits32 >> shift) & 1; shift++;
+    my.t.has_light          = (bits32 >> shift) & 1; shift++;
+    my.t.is_attached        = (bits32 >> shift) & 1; shift++;
+    my.t.is_being_destroyed = (bits32 >> shift) & 1; shift++;
+    my.t.is_bloodied        = (bits32 >> shift) & 1; shift++;
+    my.t.is_bouncing        = (bits32 >> shift) & 1; shift++;
+    my.t.is_dead            = (bits32 >> shift) & 1; shift++;
+    my.t.is_facing_left     = (bits32 >> shift) & 1; shift++;
+    my.t.is_hidden          = (bits32 >> shift) & 1; shift++;
+    my.t.is_hungry          = (bits32 >> shift) & 1; shift++;
+    my.t.is_moving          = (bits32 >> shift) & 1; shift++;
+    my.t.is_open            = (bits32 >> shift) & 1; shift++;
+    my.t.is_sleeping        = (bits32 >> shift) & 1; shift++;
+    my.t.is_starving        = (bits32 >> shift) & 1; shift++;
+    my.t.is_submerged       = (bits32 >> shift) & 1; shift++;
+    my.t.is_waiting_for_ai  = (bits32 >> shift) & 1; shift++;
+
+    if (my.t.has_light) {
+        my.t.new_light(my.t.mid_at);
+    }
 
     return (in);
 }
@@ -166,7 +223,9 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "tile_curr           " << tile_curr            << std::endl;
     out << pfx << "timestamp_next_frame" << timestamp_next_frame << std::endl;
     out << pfx << "dir                 " << dir                  << std::endl;
+    out << pfx << "is_player           " << is_player()          << std::endl;
     out << pfx << "has_ever_moved      " << has_ever_moved       << std::endl;
+    out << pfx << "has_light           " << has_light            << std::endl;
     out << pfx << "is_attached         " << is_attached          << std::endl;
     out << pfx << "is_being_destroyed  " << is_being_destroyed   << std::endl;
     out << pfx << "is_bloodied         " << is_bloodied          << std::endl;
