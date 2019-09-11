@@ -82,7 +82,6 @@ typedef struct Monst_ {
     Dmap         *dmap_goals = {};
     Dmap         *dmap_scent = {};
     Lightp       light = {};                 // Have a light source?
-    Worldp       world = {};
     fpoint       interpolated_mid_at;
     float        bounce_height = {};         // Percentage of tile height.
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
