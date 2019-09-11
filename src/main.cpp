@@ -633,11 +633,12 @@ int32_t main (int32_t argc, char *argv[])
     // Create a fresh game if none was loaded
     //
     game->init();
+    game->fini();
 #if 0
     game->save();
     game->load();
-    DIE("x");
 #endif
+    DIE("x");
 
     sdl_loop();
     gl_leave_2d_mode();

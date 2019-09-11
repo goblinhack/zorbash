@@ -84,9 +84,6 @@ public:
     point                      map_tile_over;
 
     //
-    // All lights at a map cell
-    //
-    //
     // World map
     //
     Terrainp                   terrain {};
@@ -98,7 +95,9 @@ public:
       std::array<
         std::array<Thingp, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
           all_thing_ptrs_at;
-
+    //
+    // All lights at a map cell
+    //
     std::unordered_map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
 
     //
@@ -112,10 +111,10 @@ public:
     void put_thing_ptr(uint16_t x, uint16_t y, Thingp t);
     void remove_thing_ptr(Thingp t);
 
-    static const uint32_t x_bits = 11;
+    static const uint32_t x_bits = 10;
     static const uint32_t x_mask = (1<<x_bits)-1;
 
-    static const uint32_t y_bits = 11;
+    static const uint32_t y_bits = 10;
     static const uint32_t y_shift = x_bits;
     static const uint32_t y_mask = ((1<<y_bits)-1) << y_shift;
 
@@ -267,6 +266,7 @@ public:
     void unset_wall(const int x, const int y);
     void unset_water(const int x, const int y);
 
+    void fini(void);
     void dump(std::string prefix, std::ostream &out);
     friend std::ostream& operator<<(std::ostream &out, Bits<const World & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<World &> my);
@@ -296,6 +296,7 @@ public:
     double             tile_pixel_height            = {};
     uint32_t           sdl_delay                    = 1;
 
+    void fini(void);
     void dump(std::string prefix, std::ostream &out);
 } Config;
 std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my);
@@ -306,6 +307,7 @@ public:
     Game (void) {}
     Game (std::string appdata);
     void init(void);
+    void fini(void);
     void save(void);
     void load(void);
     void display(void);

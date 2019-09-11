@@ -31,16 +31,8 @@ class Light
 private:
 
 public:
-    Light (void)
-    {
-        newptr(this, "light");
-    }
-
-    ~Light (void)
-    {
-        // log("destroyed");
-        oldptr(this);
-    }
+    Light (void);
+    ~Light (void);
 
     //
     // Unique per light.
@@ -82,8 +74,9 @@ public:
     // do this we do a flood fill of the level and pick the nearest walls.
     //
     uint8_t             is_nearest_wall[CHUNK_WIDTH][CHUNK_HEIGHT] = {};
+    uint8_t             is_being_destroyed:1 {};
 
-    void pop();
+    void destroy();
     std::string to_string(void);
     const char *to_cstring(void);
     void destroyed(void);
