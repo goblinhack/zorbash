@@ -53,6 +53,31 @@ std::ostream& operator<<(std::ostream &out,
         out << bits(my.t.dmap_scent);
     }
 
+    out << bits(my.t.interpolated_mid_at);
+    out << bits(my.t.bounce_height);
+    out << bits(my.t.bounce_fade);
+    out << bits(my.t.rot);
+    out << bits(my.t.submerged_offset);
+    out << bits(my.t.bounce_count);
+    out << bits(my.t.gold);
+    out << bits(my.t.health);
+    out << bits(my.t.health_max);
+    out << bits(my.t.owned_count);
+    out << bits(my.t.timestamp_bounce_begin);
+    out << bits(my.t.timestamp_bounce_end);
+    out << bits(my.t.timestamp_last_i_was_hit);
+    out << bits(my.t.timestamp_flip_start);
+    out << bits(my.t.timestamp_move_begin);
+    out << bits(my.t.timestamp_move_end);
+    out << bits(my.t.timestamp_born);
+    out << bits(my.t.timestamp_hunger_tick);
+    out << bits(my.t.timestamp_ai_next);
+    out << bits(my.t.timestamp_collision);
+    out << bits(my.t.owner_id);
+    out << bits(my.t.weapon_id_carry_anim);
+    out << bits(my.t.weapon_id_use_anim);
+    out << bits(my.t.weapon_tp_id);
+
     return (out);
 }
 
@@ -78,6 +103,31 @@ std::istream& operator>>(std::istream &in, Bits<Monst &> my)
         my.t.dmap_scent = new Dmap();
         in >> bits(my.t.dmap_scent);
     }
+
+    in >> bits(my.t.interpolated_mid_at);
+    in >> bits(my.t.bounce_height);
+    in >> bits(my.t.bounce_fade);
+    in >> bits(my.t.rot);
+    in >> bits(my.t.submerged_offset);
+    in >> bits(my.t.bounce_count);
+    in >> bits(my.t.gold);
+    in >> bits(my.t.health);
+    in >> bits(my.t.health_max);
+    in >> bits(my.t.owned_count);
+    in >> bits(my.t.timestamp_bounce_begin);
+    in >> bits(my.t.timestamp_bounce_end);
+    in >> bits(my.t.timestamp_last_i_was_hit);
+    in >> bits(my.t.timestamp_flip_start);
+    in >> bits(my.t.timestamp_move_begin);
+    in >> bits(my.t.timestamp_move_end);
+    in >> bits(my.t.timestamp_born);
+    in >> bits(my.t.timestamp_hunger_tick);
+    in >> bits(my.t.timestamp_ai_next);
+    in >> bits(my.t.timestamp_collision);
+    in >> bits(my.t.owner_id);
+    in >> bits(my.t.weapon_id_carry_anim);
+    in >> bits(my.t.weapon_id_use_anim);
+    in >> bits(my.t.weapon_tp_id);
 
     return (in);
 }
