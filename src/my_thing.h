@@ -61,8 +61,10 @@ public:
 extern Path astar_solve(point start, std::multiset<Goal> &goals, Dmap *dmap);
 
 typedef struct {
-    uint32_t val[CHUNK_WIDTH][CHUNK_HEIGHT] = {{0}};
+    std::array<std::array<uint32_t, CHUNK_HEIGHT>, CHUNK_WIDTH> val;
 } AgeMap;
+std::ostream& operator<<(std::ostream &out, Bits<const AgeMap & > const my);
+std::istream& operator>>(std::istream &in, Bits<AgeMap &> my);
 
 typedef struct {
     uint16_t tile_bl;
@@ -106,7 +108,10 @@ typedef struct Monst_ {
     uint32_t     weapon_id_carry_anim {};
     uint32_t     weapon_id_use_anim {};
     uint16_t     weapon_tp_id {};            // Weapon thing template.
+    void dump(std::string prefix, std::ostream &out);
 } Monst;
+std::ostream& operator<<(std::ostream &out, Bits<const Monst & > const my);
+std::istream& operator>>(std::istream &in, Bits<Monst &> my);
 
 typedef struct Thing_ {
     Thing_ (void);
@@ -524,7 +529,12 @@ typedef struct Thing_ {
     void weapon_sheath(void);
     void weapon_wield_next();
     void wield(Tpp tp);
+
+    void dump(std::string prefix, std::ostream &out);
 } Thing;
+
+std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
+std::istream& operator>>(std::istream &in, Bits<Thing &> my);
 
 struct ThingDisplaySortKey {
     int16_t y;

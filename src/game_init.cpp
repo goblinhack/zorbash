@@ -785,7 +785,7 @@ void Game::init (void)
     //seed = myrand();
 //        world->terrain = terrain_init(seed);
     mysrand(seed);
-    LOG("dungeon: create dungeon %u", seed);
+    CON("dungeon: create dungeon %u", seed);
 _
     auto dungeon = new Dungeon(CHUNK_WIDTH, CHUNK_HEIGHT, GRID_WIDTH,
                                GRID_HEIGHT, seed);
@@ -892,10 +892,9 @@ _
     game_place_keys(dungeon);
     lights_calculate();
 
-    LOG("dungeon: placed all blocks");
     thing_map_scroll_to_player();
 
-    save();
-
     display();
+
+    CON("dungeon: created dungeon %u", seed);
 }

@@ -7,10 +7,29 @@
 
 #include "my_point.h"
 #include "my_main.h"
+#include <array>
 
 typedef struct {
-    uint16_t val[CHUNK_WIDTH][CHUNK_HEIGHT] = {{0}};
+    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> val;
 } Dmap;
+
+#include <type_traits>
+
+template <typename T>
+size_t len(const T& a) 
+{
+    return sizeof(T) / sizeof(typename std::remove_all_extents<T>::type);
+}
+
+// https://stackoverflow.com/questions/26948099/stdcopy-for-multidimensional-arrays
+template <typename T>
+typename std::remove_all_extents<T>::type* mbegin(T& arr) {
+    return reinterpret_cast<typename std::remove_all_extents<T>::type*>(&arr);
+}
+template <typename T>
+typename std::remove_all_extents<T>::type* mend(T& arr) {
+    return reinterpret_cast<typename std::remove_all_extents<T>::type*>(&arr)+len(arr);
+}
 
 extern void dmap_process(Dmap *D, point tl, point br);
 extern void dmap_print(Dmap *d, point start);

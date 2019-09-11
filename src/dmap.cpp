@@ -78,7 +78,7 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
     uint16_t y;
     const float offx = start.x - ((CHUNK_WIDTH / scale) / 2);
     const float offy = start.y - ((CHUNK_HEIGHT / scale) / 2);
-    uint16_t new_val[CHUNK_WIDTH][CHUNK_HEIGHT];
+    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> new_val;
     const float fscale = scale;
 
     for (y = 0; y < CHUNK_HEIGHT; y++) {
@@ -94,7 +94,7 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
             new_val[x][y] = d->val[(int)X][(int)Y];
         }
     }
-    memcpy(d->val, new_val, sizeof(d->val));
+    std::copy(mbegin(new_val), mend(new_val), mbegin(d->val));
 }
 
 uint64_t dmap_hash (Dmap *d)
@@ -126,11 +126,11 @@ void dmap_process (Dmap *D, point tl, point br)
     uint16_t i;
     uint16_t lowest;
     uint16_t changed;
-    static uint16_t valid[CHUNK_WIDTH][CHUNK_HEIGHT];
-    static uint16_t orig_valid[CHUNK_WIDTH][CHUNK_HEIGHT];
-    static uint16_t orig[CHUNK_WIDTH][CHUNK_HEIGHT];
+    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> orig;
+    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> orig_valid;
+    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> valid;
 
-    memcpy(orig, D->val, sizeof(D->val));
+    std::copy(mbegin(D->val), mend(D->val), mbegin(orig));
 
     int minx, miny, maxx, maxy;
     if (tl.x < br.x) {
@@ -179,8 +179,12 @@ void dmap_process (Dmap *D, point tl, point br)
     dmap_print(D);
 #endif
 
-    memset(valid, 1, sizeof(valid));
-    memset(orig_valid, 1, sizeof(valid));
+    for (y = 0; y < CHUNK_HEIGHT; y++) {
+        for (x = 0; x < CHUNK_WIDTH; x++) {
+            valid[x][y] = 1;
+            orig_valid[x][y] = 1;
+        }
+    }
 
     for (y = miny + 1; y < maxy; y++) {
         for (x = minx + 1; x < maxx; x++) {
