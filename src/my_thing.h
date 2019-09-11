@@ -82,7 +82,6 @@ typedef struct Monst_ {
     Dmap         *dmap_goals = {};
     Dmap         *dmap_scent = {};
     Lightp       light = {};                 // Have a light source?
-    Tpp          tp = {};                    // Common settings
     Worldp       world = {};
     fpoint       interpolated_mid_at;
     float        bounce_height = {};         // Percentage of tile height.
