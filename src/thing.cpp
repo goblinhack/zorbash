@@ -137,6 +137,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         world->player = this;
 
         new_light(at);
+        has_light = true;
         log("player created");
     }
 
@@ -214,6 +215,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
 
     if (unlikely(tp_is_light_strength(tp))) {
         new_light(at);
+        has_light = true;
     }
 }
 

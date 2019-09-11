@@ -130,6 +130,7 @@ typedef struct Thing_ {
     uint32_t timestamp_next_frame {};
     uint32_t dir:4                {}; // Direction
     uint32_t has_ever_moved:1     {};
+    uint32_t has_light:1          {};
     uint32_t is_attached:1        {};
     uint32_t is_being_destroyed:1 {};
     uint32_t is_bloodied:1        {};
