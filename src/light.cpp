@@ -20,6 +20,22 @@ static const int LIGHT_VISIBLE_DIST = TILES_ACROSS + TILES_ACROSS / 2;
 
 Thingp debug_thing;
 
+Light::Light (void)
+{_
+    newptr(this, "Light");
+}
+
+Light::~Light (void)
+{_
+    verify(this);
+    if (is_being_destroyed) {
+        die("death recursion");
+    }
+    is_being_destroyed = true;
+    destroy();
+    oldptr(this);
+}
+
 Lightp light_new (Thingp owner,
                   uint16_t max_light_rays,
                   double strength,
@@ -80,7 +96,7 @@ Lightp light_new (double strength, fpoint at, LightQuality quality, color col)
     return (light_new(nullptr, 10, strength, at, quality, col));
 }
 
-void Light::pop (void)
+void Light::destroy (void)
 {_
     world->all_lights.erase(id);
 
