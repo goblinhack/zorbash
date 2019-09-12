@@ -82,6 +82,9 @@ typedef struct Monst_ {
     Dmap         *dmap_goals = {};
     Dmap         *dmap_scent = {};
     Lightp       light = {};                 // Have a light source?
+    int          light_strength {};
+    int          light_quality {};
+    color        light_col {};
     fpoint       interpolated_mid_at;
     float        bounce_height = {};         // Percentage of tile height.
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
@@ -165,7 +168,10 @@ typedef struct Thing_ {
     void delete_dmap_scent(void);
 
     Lightp get_light(void);
-    void new_light(fpoint at);
+    void new_light(fpoint at, 
+                   double strength,
+                   LightQuality quality = LIGHT_QUALITY_POINT, 
+                   color col = WHITE);
     void delete_light(void);
 
     void set_bounce_height(float);

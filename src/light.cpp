@@ -37,13 +37,19 @@ Light::~Light (void)
 }
 
 Lightp light_new (Thingp owner,
-                  uint16_t max_light_rays,
-                  double strength,
                   fpoint at,
+                  double strength,
                   LightQuality quality,
                   color col)
 {_
     auto id = ++light_id;
+
+    uint16_t max_light_rays;
+    if (owner->is_player()) {
+        max_light_rays = MAX_LIGHT_RAYS;
+    } else {
+        max_light_rays = MAX_LIGHT_RAYS / 8;
+    }
 
     auto l = new Light(); // std::make_shared< class Light >();
     l->world = world;
@@ -83,17 +89,6 @@ Lightp light_new (Thingp owner,
 
     //log("created");
     return (l);
-}
-
-Lightp light_new (uint16_t max_light_rays, double strength, fpoint at,
-                  LightQuality quality, color col)
-{_
-    return (light_new(nullptr, max_light_rays, strength, at, quality, col));
-}
-
-Lightp light_new (double strength, fpoint at, LightQuality quality, color col)
-{_
-    return (light_new(nullptr, 10, strength, at, quality, col));
 }
 
 void Light::destroy (void)

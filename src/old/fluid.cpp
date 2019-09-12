@@ -1,8 +1,8 @@
-/*
- * Copyright (C) 2017 goblinhack@gmail.com
- *
- * See the README file for license info.
- */
+//
+// Copyright (C) 2017 goblinhack@gmail.com
+//
+// See the README file for license info.
+//
 
 #include "my_main.h"
 #include "my_game.h"
@@ -138,9 +138,9 @@ void fluid_update (void)
     }
 }
 
-/*
- * Identify all the pools in a level and then just the surface tiles.
- */
+//
+// Identify all the pools in a level and then just the surface tiles.
+//
 #define MAX_POOLS           4000
 #define MAX_POOL_SURFACE    (FLUID_WIDTH * 10)
 
@@ -236,9 +236,9 @@ void fluid_pool_debug (void)
     CON("total mass %d", total_mass);
 }
 
-/*
- * Flood all connecting tiles with the same fluid pool number.
- */
+//
+// Flood all connecting tiles with the same fluid pool number.
+//
 static void fluid_flood_fill (uint16_t x,
                               uint16_t y, uint8_t pool_num)
 {
@@ -266,9 +266,9 @@ static void fluid_flood_fill (uint16_t x,
     STACK_PUSH(x, y)
 
     while (stack_size > 0) {
-        /*
-         * Pop the stack.
-         */
+        //
+        // Pop the stack.
+        //
         stack_size--;
         uint16_t x = stack[stack_size].x;
         uint16_t y = stack[stack_size].y;
@@ -301,9 +301,9 @@ static void fluid_flood_fill (uint16_t x,
     }
 }
 
-/*
- * Identify all adjoining pools
- */
+//
+// Identify all adjoining pools
+//
 static void fluid_find_pools (void)
 {
     memset(fluid_pool, 0, sizeof(fluid_pool));
@@ -346,10 +346,10 @@ static void fluid_find_pools (void)
     }
 }
 
-/*
- * If there is a surface tile above others, then try and push the mass to the
- * lower surface tiles.
- */
+//
+// If there is a surface tile above others, then try and push the mass to the
+// lower surface tiles.
+//
 static void fluid_push_down (void)
 {
     uint16_t pool_num;
@@ -370,9 +370,9 @@ static void fluid_push_down (void)
         uint16_t depth;
         uint16_t s;
 
-        /*
-         * Find the total mass at each line of depth for this pool.
-         */
+        //
+        // Find the total mass at each line of depth for this pool.
+        //
         for (s = 0; s < surface_size; s++) {
             uint16_t x = fluid_pool_surface[pool_num][s].x;
             uint16_t y = fluid_pool_surface[pool_num][s].y;
@@ -399,9 +399,9 @@ static void fluid_push_down (void)
                 }                                                   \
             }                                                       \
 
-        /*
-         * Now try and move mass from upper depths to lower ones.
-         */
+        //
+        // Now try and move mass from upper depths to lower ones.
+        //
         for (depth = 0; depth < FLUID_HEIGHT; depth++) {
             if (!mass_at_depth_cnt[depth]) {
                 continue;
@@ -468,9 +468,9 @@ static void fluid_push_down (void)
     }
 }
 
-/*
- * How deep is each tile so we can color is accordingly.
- */
+//
+// How deep is each tile so we can color is accordingly.
+//
 static void fluid_set_depth (void)
 {
     uint16_t fx, fy;
@@ -503,10 +503,10 @@ static void fluid_set_depth (void)
                 continue;
             }
 
-            /*
-             * If this is the surface, take note of it as we will need this to
-             * even out surface fluids later.
-             */
+            //
+            // If this is the surface, take note of it as we will need this to
+            // even out surface fluids later.
+            //
             if (depth == 0) {
                 uint16_t pool_num = fluid_pool[fx][fy];
                 uint16_t surface_size = fluid_pool_surface_size[pool_num];
@@ -650,9 +650,9 @@ static void fluid_mass_transfer (void)
 
             MASS_TRANSFER(f, d);
 
-            /*
-             * Side viscoscity.
-             */
+            //
+            // Side viscoscity.
+            //
             if (r < 25) {
                 continue;
             }
@@ -698,7 +698,7 @@ void fluid_tick (void)
 static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y)
 {
     widgridnode *node;
-    tree_root **tree;
+    tree_root //tree;
 
     {
         int x = 0;
@@ -828,9 +828,9 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
     fpoint tile_tl;
     fpoint tile_br;
 
-    /*
-     * Preload all the animation tiles for fluids.
-     */
+    //
+    // Preload all the animation tiles for fluids.
+    //
     static tilep water_tiles[MAX_FLUID_TILES];
     static int done = 0;
 
@@ -850,9 +850,9 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
         }
     }
 
-    /*
-     * Move the animation on slowly.
-     */
+    //
+    // Move the animation on slowly.
+    //
     static int anim_count = 0;
 
     {
@@ -867,9 +867,9 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
         }
     }
 
-    /*
-     * Move the wave animation on.
-     */
+    //
+    // Move the wave animation on.
+    //
     static double wave;
 
     {
@@ -885,9 +885,9 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
                 wave -= wave_delta;
             }
 
-            /*
-             * Change wave direction sometimes.
-             */
+            //
+            // Change wave direction sometimes.
+            //
             if ((myrand() % 1000) < 2) {
                 wave_dir = !wave_dir;
             }
@@ -903,9 +903,9 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
     maxx *= FLUID_RESOLUTION;
     maxy *= FLUID_RESOLUTION;
 
-    /*
-     * Make the fluid darker and more opaque with dept.
-     */
+    //
+    // Make the fluid darker and more opaque with dept.
+    //
     color c = WHITE;
     color bg_color_tl = c;
     color bg_color_tr = c;
@@ -939,9 +939,9 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
             tile_br.x = tile_tl.x + tile_pix_w;
             tile_br.y = tile_tl.y + tile_pix_h;
 
-            /*
-             * Tiles on the sureface have a sinusoidal wave effect.
-             */
+            //
+            // Tiles on the sureface have a sinusoidal wave effect.
+            //
             if (unlikely(f->is_surface)) {
                 static double dx = RAD_360 / ((double) FLUID_WIDTH / 40.0);
                 double mass = f->mass / 2.0;
@@ -962,9 +962,9 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
 
             tilep t = water_tiles[(anim_count + fx + fy) % MAX_FLUID_TILES];
 
-            /*
-             * Spread the animation graphic over a number of fluid cells
-             */
+            //
+            // Spread the animation graphic over a number of fluid cells
+            //
             static const int fluid_anim_scale = FLUID_RESOLUTION * FLUID_VISIBLE_SCALE;
             double x1 = t->x1;
             double x2 = t->x2;

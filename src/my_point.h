@@ -8,6 +8,7 @@
 
 #include "my_main.h"
 #include "my_math.h"
+#include "c_plus_plus_serializer.h"
 
 template<class T> class my_apoint
 {

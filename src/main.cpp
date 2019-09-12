@@ -634,11 +634,13 @@ int32_t main (int32_t argc, char *argv[])
     //
     game->init();
     game->fini();
+    game->init();
+    game->fini();
+    game->init();
 #if 0
     game->save();
     game->load();
 #endif
-    DIE("x");
 
     sdl_loop();
     gl_leave_2d_mode();

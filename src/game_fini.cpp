@@ -34,7 +34,7 @@ void World::fini (void)
                 auto id = all_thing_ids_at[x][y][z];
                 if (id) {
                     auto t = thing_find(id);
-                    t->err("world fini: did not detach thing id from all_thing_ids_at");
+                    t->die("world fini: did not detach thing id from all_thing_ids_at");
                 }
             }
         }
@@ -48,7 +48,7 @@ void World::fini (void)
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto t = all_thing_ptrs_at[x][y][z];
                 if (t) {
-                    t->err("world fini: did not detach thing from all_thing_ptrs_at");
+                    t->die("world fini: did not detach thing from all_thing_ptrs_at");
                 }
             }
         }
@@ -62,7 +62,7 @@ void World::fini (void)
             for (auto p : lights[x][y]) {
                 auto l = p.second;
                 verify(l);
-                l->err("world fini: did not detach light");
+                l->die("world fini: did not detach light %u", l->id);
             }
         }
     }
@@ -71,7 +71,7 @@ void World::fini (void)
     // And finally the player
     //
     if (player) {
-        ERR("world fini: did not detach player");
+        DIE("world fini: did not detach player");
     }
 }
 

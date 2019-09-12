@@ -78,8 +78,6 @@ void Thing::tick (void)
 
 void things_tick (void)
 {_
-    LOG("tick");
-
     //
     // Active things are generally things that move or have a life span
     //
