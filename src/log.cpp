@@ -760,15 +760,13 @@ void Thing::dbg (const char *fmt, ...)
 void Light::log_ (const char *fmt, va_list args)
 {
     verify(this);
-    auto t = this;
     char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "light %s: ",
-             t->to_cstring());
+    snprintf(buf + len, MAXSHORTSTR - len, "light: ");
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -791,15 +789,13 @@ void Light::log (const char *fmt, ...)
 void Light::die_ (const char *fmt, va_list args)
 {
     verify(this);
-    auto t = this;
     char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "light %s: ",
-             t->to_cstring());
+    snprintf(buf + len, MAXSHORTSTR - len, "light: ");
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -821,15 +817,13 @@ void Light::die (const char *fmt, ...)
 void Light::con_ (const char *fmt, va_list args)
 {
     verify(this);
-    auto t = this;
     char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "light %s: ",
-             t->to_cstring());
+    snprintf(buf + len, MAXSHORTSTR - len, "light: ");
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -855,15 +849,13 @@ void Light::con (const char *fmt, ...)
 void Light::err_ (const char *fmt, va_list args)
 {
     verify(this);
-    auto t = this;
     char buf[MAXSHORTSTR];
     uint32_t len;
 
     buf[0] = '\0';
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: Light %s: ",
-             t->to_cstring());
+    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: Light: ");
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);

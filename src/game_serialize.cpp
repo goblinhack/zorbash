@@ -53,6 +53,9 @@ std::ostream& operator<<(std::ostream &out,
         out << bits(my.t.dmap_scent);
     }
 
+    out << bits(my.t.light_strength);
+    out << bits(my.t.light_quality);
+    out << bits(my.t.light_col);
     out << bits(my.t.interpolated_mid_at);
     out << bits(my.t.bounce_height);
     out << bits(my.t.bounce_fade);
@@ -104,6 +107,9 @@ std::istream& operator>>(std::istream &in, Bits<Monst &> my)
         in >> bits(my.t.dmap_scent);
     }
 
+    in >> bits(my.t.light_strength);
+    in >> bits(my.t.light_quality);
+    in >> bits(my.t.light_col);
     in >> bits(my.t.interpolated_mid_at);
     in >> bits(my.t.bounce_height);
     in >> bits(my.t.bounce_fade);
@@ -242,8 +248,14 @@ std::istream& operator>>(std::istream &in, Bits<Thing &> my)
     my.t.is_submerged       = (bits32 >> shift) & 1; shift++;
     my.t.is_waiting_for_ai  = (bits32 >> shift) & 1; shift++;
 
+    world->put_thing_ptr((int)my.t.last_attached.x, 
+                         (int)my.t.last_attached.y, &my.t);
+
     if (my.t.has_light) {
-        my.t.new_light(my.t.mid_at);
+        my.t.new_light(my.t.mid_at,
+                       my.t.monst->light_strength,
+                       (LightQuality)my.t.monst->light_quality,
+                       my.t.monst->light_col);
     }
 
     return (in);

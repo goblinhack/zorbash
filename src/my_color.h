@@ -7,8 +7,9 @@
 #define _MY_MY_COLOR_H_
 
 #include <map>
+#include "c_plus_plus_serializer.h"
 
-template<class T> class my_acolor3d
+template<class T> class my_acolor
 {
 public:
 
@@ -17,49 +18,68 @@ public:
     T b {};
     T a {};
 
-    my_acolor3d (void) : r(0), g(0), b(0), a(0) { }
+    my_acolor (void) : r(0), g(0), b(0), a(0) { }
 
-    my_acolor3d (T r, T g, unsigned char b) : r(r), g(g), b(b), a(255) { }
+    my_acolor (T r, T g, unsigned char b) : r(r), g(g), b(b), a(255) { }
 
-    my_acolor3d (T r, T g, double b) : r(r), g(g), b(b), a(1.0) { }
+    my_acolor (T r, T g, double b) : r(r), g(g), b(b), a(1.0) { }
 
-    my_acolor3d (T r, T g, T b, T a) : r(r), g(g), b(b), a(a) { }
+    my_acolor (T r, T g, T b, T a) : r(r), g(g), b(b), a(a) { }
 
-    my_acolor3d (const my_acolor3d &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
+    my_acolor (const my_acolor &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
 
-    void operator+= (my_acolor3d c)
+    friend std::ostream& operator<<(std::ostream &out, 
+                                    Bits<const my_acolor & > const my)
+    {
+        out << bits(my.t.r) << bits(my.t.g) << bits(my.t.b) << bits(my.t.a);
+        return (out);
+    }
+
+    friend std::istream& operator>>(std::istream &in, Bits<my_acolor &> my)
+    {
+        in >> bits(my.t.r) >> bits(my.t.g) >> bits(my.t.b) >> bits(my.t.a);
+        return (in);
+    }
+
+    friend std::ostream& operator << (std::ostream &out, const my_acolor &my)
+    {
+        out << "(" << my.r << ", " << my.g << ", " << my.b << ", " << my.a << ")";
+        return (out);
+    }
+
+    void operator+= (my_acolor c)
     {
         r += c.r; g += c.g; b += c.b; a += c.a;
     }
 
-    void operator-= (my_acolor3d c)
+    void operator-= (my_acolor c)
     {
         c -= c.r; c -= c.g; c -= c.b; a -= c.a;
     }
 
-    friend my_acolor3d operator+ (my_acolor3d c, my_acolor3d b)
+    friend my_acolor operator+ (my_acolor c, my_acolor b)
     {
-        return (my_acolor3d(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a));
+        return (my_acolor(c.r + b.r, c.g + b.g, c.b + b.b, c.a + b.a));
     }
 
-    friend my_acolor3d operator- (my_acolor3d c, my_acolor3d b)
+    friend my_acolor operator- (my_acolor c, my_acolor b)
     {
-        return (my_acolor3d(c.r - b.r, c.g - b.g, c.b - b.b, c.a - b.a));
+        return (my_acolor(c.r - b.r, c.g - b.g, c.b - b.b, c.a - b.a));
     }
 
-    friend my_acolor3d operator/ (my_acolor3d c, my_acolor3d b)
+    friend my_acolor operator/ (my_acolor c, my_acolor b)
     {
-        return (my_acolor3d(c.r / b.r, c.g / b.g, c.b / b.b, c.a / b.a));
+        return (my_acolor(c.r / b.r, c.g / b.g, c.b / b.b, c.a / b.a));
     }
 
-    friend my_acolor3d operator* (my_acolor3d c, my_acolor3d b)
+    friend my_acolor operator* (my_acolor c, my_acolor b)
     {
-        return (my_acolor3d(c.r * b.r, c.g * b.g, c.b * b.b, c.a * b.a));
+        return (my_acolor(c.r * b.r, c.g * b.g, c.b * b.b, c.a * b.a));
     }
 
-    friend my_acolor3d operator/ (my_acolor3d c, T b)
+    friend my_acolor operator/ (my_acolor c, T b)
     {
-        return (my_acolor3d(c.r / b, c.g / b, c.b / b, c.a / b));
+        return (my_acolor(c.r / b, c.g / b, c.b / b, c.a / b));
     }
 
     void operator*= (T c)
@@ -72,19 +92,19 @@ public:
         r /= c; g /= c; b /= c; a /= c;
     }
 
-    friend bool operator== (my_acolor3d c, my_acolor3d b)
+    friend bool operator== (my_acolor c, my_acolor b)
     {
         return (c.r == b.r) && (c.g == b.g) && (c.b == b.b) && (c.a == b.a);
     }
 
-    friend bool operator!= (my_acolor3d c, my_acolor3d b)
+    friend bool operator!= (my_acolor c, my_acolor b)
     {
         return (!(c==b));
     }
 };
 
-typedef my_acolor3d<unsigned char> color;
-typedef my_acolor3d<double> colorf;
+typedef my_acolor<unsigned char> color;
+typedef my_acolor<double> colorf;
 
 typedef std::map< std::string, color > colors;
 extern colors color_map;

@@ -130,32 +130,18 @@ Lightp Thing::get_light (void)
     }
 }
 
-void Thing::new_light (fpoint at)
+void Thing::new_light (fpoint at,
+                       double strength,
+                       LightQuality quality,
+                       color col)
 {_
-    auto tpp = tp();
-
     new_monst();
     if (!monst->light) {
 //con("%s", __FUNCTION__);
-        if (tp_is_player(tpp)) {
-            //
-            // keep the light strength half the tiles drawn or we get artifacts
-            // at the edges of the fbo
-            //
-            color col = WHITE;
-            col.a = 250;
-            monst->light = light_new(this,
-                                     MAX_LIGHT_RAYS, (TILE_WIDTH / 2) + 4, at,
-                                     LIGHT_QUALITY_HIGH, col);
-
-        } else {
-            std::string l = tp_str_light_color(tpp);
-            color c = string2color(l);
-            c.a = 100;
-            monst->light = light_new(this, MAX_LIGHT_RAYS / 8,
-                                     (double) tp_is_light_strength(tpp),
-                                     mid_at, LIGHT_QUALITY_LOW, c);
-        }
+        monst->light = light_new(this, at, strength, quality, col);
+        monst->light_strength = strength;
+        monst->light_quality = quality;
+        monst->light_col = col;
     }
 }
 

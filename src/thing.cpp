@@ -136,7 +136,14 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         }
         world->player = this;
 
-        new_light(at);
+        //
+        // keep the light strength half the tiles drawn or we get artifacts
+        // at the edges of the fbo
+        //
+        color col = WHITE;
+        col.a = 250;
+        new_light(mid_at, (TILE_WIDTH / 2) + 4, LIGHT_QUALITY_HIGH, col);
+
         has_light = true;
         log("player created");
     }
@@ -214,7 +221,10 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     attach();
 
     if (unlikely(tp_is_light_strength(tp))) {
-        new_light(at);
+        std::string l = tp_str_light_color(tp);
+        color c = string2color(l);
+        c.a = 100;
+        new_light(mid_at, (double) tp_is_light_strength(tp), LIGHT_QUALITY_LOW, c);
         has_light = true;
     }
 }
@@ -287,6 +297,7 @@ void Thing::destroy (void)
     delete_dmap_scent();
     delete_dmap_goals();
     delete_age_map();
+    delete_light();
 
     world->remove_thing_ptr(this);
 }
