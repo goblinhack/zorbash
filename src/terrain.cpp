@@ -774,9 +774,7 @@ redo:
     {
         wind_tick++;
 
-        ascii_putf(1, 2,
-                   ORANGE, ASCII_UI_BOX_INACTIVE_MID_COLOR,
-                   L"%u tick", wind_tick);
+        ascii_putf(1, 2, ORANGE, WHITE, L"%u tick", wind_tick);
 
         for (auto di = 1; di < MAX_DROPLETS; di++) {
             auto d = &droplets[di];

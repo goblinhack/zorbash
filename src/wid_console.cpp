@@ -188,7 +188,6 @@ static void wid_console_wid_create (void)
     {
         point tl = {0, 0};
         point br = {ASCII_WIDTH - 1, ASCII_HEIGHT - 3};
-        color c;
 
         wid_console_window = wid_new_square_window("wid_console");
         wid_set_name(wid_console_window, "wid_console window");
@@ -203,7 +202,7 @@ static void wid_console_wid_create (void)
         wid_console_container = wid_new_container(wid_console_window,
                                                   "wid console container");
         wid_set_pos(wid_console_container, tl, br);
-        wid_set_shape_square(wid_console_container);
+        wid_set_shape_none(wid_console_container);
     }
 
     {

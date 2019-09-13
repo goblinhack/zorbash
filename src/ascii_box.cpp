@@ -85,10 +85,6 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
         return;
     }
 
-    if (col_border_text == COLOR_NONE) {
-        return;
-    }
-
     for (x = x1 + 1; x <= x2 - 1; x++) {
         ascii_set_bg(x, y1, tile_ui_top);
         ascii_set_bg(x, y2, tile_ui_bot);
@@ -160,10 +156,10 @@ void ascii_put_box (box_args b, const wchar_t *fmt, ...)
         (b.col_mid == COLOR_NONE) &&
         (b.col_br == COLOR_NONE)) {
 
-        b.col_border_text = ASCII_UI_BOX_BORDER_ACTIVE;
-        b.col_tl = ASCII_UI_BOX_ACTIVE_LEFT_COLOR;
-        b.col_mid = ASCII_UI_BOX_ACTIVE_MID_COLOR;
-        b.col_br = ASCII_UI_BOX_ACTIVE_RIGHT_COLOR;
+        b.col_border_text = WHITE;
+        b.col_tl = WHITE;
+        b.col_mid = WHITE;
+        b.col_br = WHITE;
     }
 
     int x = b.x;
