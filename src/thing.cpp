@@ -587,5 +587,6 @@ void Thing::kill (void)
     }
 
     hooks_remove();
+    is_pending_gc = true;
     things_to_delete.push_back(id);
 }
