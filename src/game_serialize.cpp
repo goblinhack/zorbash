@@ -500,6 +500,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.appdata);
     out << bits(my.t.saved_dir);
     out << bits(my.t.saved_file);
+    out << bits(my.t.seed);
     out << bits(my.t.fps_count);
     out << bits(my.t.config);
     out << bits(my.t.world);
@@ -511,6 +512,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.appdata);
     in >> bits(my.t.saved_dir);
     in >> bits(my.t.saved_file);
+    in >> bits(my.t.seed);
     in >> bits(my.t.fps_count);
     in >> bits(my.t.config);
     in >> bits(my.t.world);
@@ -525,7 +527,8 @@ void Game::dump (std::string pfx, std::ostream &out)
 
     out << pfx << "appdata    " << appdata << std::endl;
     out << pfx << "saved_dir  " << saved_dir << std::endl;
-    out << pfx << "sdaved_file" << saved_file << std::endl;
+    out << pfx << "saved_file " << saved_file << std::endl;
+    out << pfx << "seed       " << seed << std::endl;
     out << pfx << "fps_count  " << fps_count << std::endl;
     config.dump(pfx, out);
     world.dump(pfx, out);
