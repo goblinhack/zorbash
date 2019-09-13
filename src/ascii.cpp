@@ -908,7 +908,6 @@ static void ascii_blit (int no_color)
                 }
             }
 
-#if 0
             /*
              * Small speedup as don't need this
              */
@@ -929,7 +928,6 @@ static void ascii_blit (int no_color)
                      tile_br.x,
                      tile_br.y);
             } else if (cell->bg_tile) {
-                tile_br.x = tile_x + game->config.ascii_gl_width * 2.4;
                 color bg_color_tl = cell->bg_color_tl;
                 color bg_color_tr = cell->bg_color_tr;
                 color bg_color_bl = cell->bg_color_bl;
@@ -951,7 +949,6 @@ static void ascii_blit (int no_color)
                                       bg_color_bl,
                                       bg_color_br);
             }
-#endif
 
             /*
              * Foreground

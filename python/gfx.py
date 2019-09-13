@@ -70,7 +70,7 @@ def init_16x16_ui():
             "",
             "ui-tr",
             "ui-left",
-            "",
+            "ui-bg1",
             "",
             "ui-right",
             "",
