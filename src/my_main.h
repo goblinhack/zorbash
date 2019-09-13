@@ -40,7 +40,7 @@
 
 #undef  ENABLE_LEAKCHECK
 #define ENABLE_INVERTED_GFX        // For vision impaired
-#undef  ENABLE_ASCII_MOUSE
+#define ENABLE_ASCII_MOUSE
 #define ENABLE_TILE_COLLISION_CHECKING
 
 //
@@ -82,8 +82,8 @@ extern int TILES_DOWN;
 //
 // Dimentions of the fixed text on screen
 //
-#define ASCII_WIDTH                 100
-#define ASCII_HEIGHT                30
+#define ASCII_WIDTH_MAX             80
+#define ASCII_HEIGHT_MAX            80
 
 //
 // Largest tile for collisions

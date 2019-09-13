@@ -11,6 +11,9 @@
 
 struct ascii_ ascii;
 
+int ASCII_WIDTH;
+int ASCII_HEIGHT;
+
 typedef struct {
     Tilep fg_tile;
     Tilep bg_tile;
@@ -37,7 +40,7 @@ typedef struct {
 
 } ascii_cell;
 
-static ascii_cell cells[ASCII_WIDTH][ASCII_HEIGHT];
+static ascii_cell cells[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
 
 /*
  * For drawing the mouse cursor.

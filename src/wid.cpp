@@ -145,7 +145,7 @@ uint32_t history_walk;
  * A tile over the mouse pointer
  */
 widp wid_mouse_template;
-static widp wid_on_screen_at[ASCII_WIDTH][ASCII_HEIGHT];
+static widp wid_on_screen_at[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
 
 static uint8_t wid_init_done;
 static uint8_t wid_exiting;

@@ -70,25 +70,43 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
         return;
     }
 
-    // not sure if I like this
-    return;
+    static bool init;
+    static Tilep tile_ui_tl = nullptr;
+    static Tilep tile_ui_br = nullptr;
+    static Tilep tile_ui_tr = nullptr;
+    static Tilep tile_ui_bl = nullptr;
+    static Tilep tile_ui_left = nullptr;
+    static Tilep tile_ui_right = nullptr;
+    static Tilep tile_ui_top = nullptr;
+    static Tilep tile_ui_bot = nullptr;
+    if (!init) {
+        init = true;
+        tile_ui_tl    = tile_find("ui-tl");
+        tile_ui_br    = tile_find("ui-br");
+        tile_ui_tr    = tile_find("ui-tr");
+        tile_ui_bl    = tile_find("ui-bl");
+        tile_ui_left  = tile_find("ui-left");
+        tile_ui_right = tile_find("ui-right");
+        tile_ui_top   = tile_find("ui-top");
+        tile_ui_bot   = tile_find("ui-bot");
+    }
 
     for (x = x1 + 1; x <= x2 - 1; x++) {
-        ascii_set_fg(x, y1, L'═');
-        ascii_set_fg(x, y2, L'═');
+        ascii_set_fg(x, y1, tile_ui_top);
+        ascii_set_fg(x, y2, tile_ui_bot);
         ascii_set_fg(x, y1, col_border_text);
         ascii_set_fg(x, y2, col_border_text);
     }
     for (y = y1 + 1; y <= y2 - 1; y++) {
-        ascii_set_fg(x1, y, L'║');
-        ascii_set_fg(x2, y, L'║');
+        ascii_set_fg(x1, y, tile_ui_left);
+        ascii_set_fg(x2, y, tile_ui_right);
         ascii_set_fg(x1, y, col_border_text);
         ascii_set_fg(x2, y, col_border_text);
     }
-    ascii_set_fg(x1, y1, L'╔');
-    ascii_set_fg(x2, y2, L'╝');
-    ascii_set_fg(x2, y1, L'╗');
-    ascii_set_fg(x1, y2, L'╚');
+    ascii_set_fg(x1, y1, tile_ui_tl);
+    ascii_set_fg(x2, y2, tile_ui_br);
+    ascii_set_fg(x2, y1, tile_ui_tr);
+    ascii_set_fg(x1, y2, tile_ui_bl);
 
     ascii_set_fg(x1, y1, col_border_text);
     ascii_set_fg(x2, y2, col_border_text);

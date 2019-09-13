@@ -5,15 +5,14 @@
 
 #define __MAIN__
 
-#ifndef _MSC_VER
-#include <libgen.h>
-#endif
+#include <libgen.h> // dirname
 #include <signal.h>
 
 #include "my_main.h"
 #include "my_python.h"
 #include "my_gl.h"
 #include "my_wid_console.h"
+#include "my_wid_test.h"
 #include "my_font.h"
 #include "my_dir.h"
 #include "my_file.h"
@@ -121,6 +120,11 @@ void quit (void)
 {_
     LOG("quit:wid_console_fini");
     wid_console_fini();
+}
+
+{_
+    LOG("quit:wid_test_fini");
+    wid_test_fini();
 }
 
 {_
@@ -616,6 +620,10 @@ int32_t main (int32_t argc, char *argv[])
 
     if (!wid_console_init()) {
 	ERR("wid_console init");
+    }
+
+    if (!wid_test_init()) {
+	ERR("wid_test init");
     }
 
     if (!command_init()) {
