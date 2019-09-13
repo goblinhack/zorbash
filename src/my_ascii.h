@@ -35,19 +35,22 @@ struct ascii_ {
     //
     // UI triggers for ASCII co-ords.
     //
-    int32_t sdl_mod[ASCII_WIDTH][ASCII_HEIGHT];
-    int32_t sdl_key[ASCII_WIDTH][ASCII_HEIGHT];
-    int32_t mouse_button[ASCII_WIDTH][ASCII_HEIGHT];
+    int32_t sdl_mod[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
+    int32_t sdl_key[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
+    int32_t mouse_button[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
 
     //
     // Callbacks for ASCII co-ords.
     //
-    ascii_key_down_callback key_down[ASCII_WIDTH][ASCII_HEIGHT];
-    ascii_mouse_down_callback mouse_down[ASCII_WIDTH][ASCII_HEIGHT];
-    ascii_mouse_over_callback mouse_over[ASCII_WIDTH][ASCII_HEIGHT];
+    ascii_key_down_callback key_down[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
+    ascii_mouse_down_callback mouse_down[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
+    ascii_mouse_over_callback mouse_over[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
 };
 
 extern struct ascii_ ascii;
+
+extern int ASCII_WIDTH;
+extern int ASCII_HEIGHT;
 
 int ascii_ok(int x, int y);
 void pixel_to_ascii(int *x, int *y);

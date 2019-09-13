@@ -59,6 +59,32 @@ def init_text():
 def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
 
+def init_16x16_ui():
+    zx.tex_load(
+            file="data/gfx/16x16_ui.tga",
+            name="16x16_ui")
+
+    tiles = [
+            "ui-tl",
+            "ui-top",
+            "",
+            "ui-tr",
+            "ui-left",
+            "",
+            "",
+            "ui-right",
+            "",
+            "",
+            "",
+            "",
+            "ui-bl",
+            "ui-bot",
+            "",
+            "ui-br",
+    ]
+
+    zx.tile_load_arr(tex_name="16x16_ui", width=16, height=16, arr=tiles)
+
 def init_16x16():
     zx.tex_load(
             file="data/gfx/16x16.tga",
@@ -3029,6 +3055,7 @@ def init_weapons_tiles():
 
 init_text()
 init_light()
+init_16x16_ui()
 init_16x16()
 init_16x32()
 init_16x16_walls()

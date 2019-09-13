@@ -240,25 +240,41 @@ uint8_t sdl_init (void)
                     game->config.video_gl_width  / (double)TILES_ACROSS;
     game->config.tile_gl_height =
                     game->config.video_gl_height / (double)TILES_DOWN;
-    game->config.ascii_gl_width =
-                    game->config.video_gl_width  / (double)ASCII_WIDTH;
-    game->config.ascii_gl_height =
-                    game->config.video_gl_height / (double)ASCII_HEIGHT;
     game->config.video_w_h_ratio =
         (double)game->config.video_pix_width /
         (double)game->config.video_pix_height;
+
+    game->config.ascii_gl_width =
+                    game->config.video_gl_width  / (double)ASCII_WIDTH_MAX;
+    game->config.ascii_gl_height =
+                    game->config.ascii_gl_width * game->config.video_w_h_ratio;
+
+    ASCII_WIDTH = ASCII_WIDTH_MAX;
+    ASCII_HEIGHT = ((double)ASCII_WIDTH) / game->config.video_w_h_ratio;
+
+    if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
+        ASCII_WIDTH = ASCII_WIDTH_MAX;
+    }
+    if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
+        ASCII_HEIGHT = ASCII_HEIGHT_MAX;
+    }
 
     game->config.one_pixel_gl_width =
                     game->config.tile_gl_width / (double)TILE_WIDTH;
     game->config.one_pixel_gl_height =
                     game->config.tile_gl_height / (double)TILE_HEIGHT;
 
-    LOG("- video     gl width  %f", game->config.video_gl_width);
-    LOG("- video     gl height %f", game->config.video_gl_height);
-    LOG("- tile      gl width  %f", game->config.tile_gl_width);
-    LOG("- tile      gl height %f", game->config.tile_gl_height);
-    LOG("- one pixel gl width  %f", game->config.one_pixel_gl_width);
-    LOG("- one pixel gl height %f", game->config.one_pixel_gl_height);
+    LOG("- ascii     width      : %d", ASCII_WIDTH);
+    LOG("- ascii     height     : %d", ASCII_HEIGHT);
+    LOG("- ascii gl  width      : %d", ASCII_WIDTH);
+    LOG("- ascii gl  height     : %d", ASCII_HEIGHT);
+    LOG("- video     gl width   : %f", game->config.video_gl_width);
+    LOG("- video     gl height  : %f", game->config.video_gl_height);
+    LOG("- tile      gl width   : %f", game->config.tile_gl_width);
+    LOG("- tile      gl height  : %f", game->config.tile_gl_height);
+    LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
+    LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
+    LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
 
     LOG("- SDL video   : %dx%d (chosen or from saved file)",
         game->config.video_pix_width, game->config.video_pix_height);
