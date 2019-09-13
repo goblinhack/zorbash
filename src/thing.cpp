@@ -290,7 +290,7 @@ void Thing::destroy (void)
         world->player = nullptr;
     }
 
-    unwield("owner is dead");
+    unwield("owner is destroyed");
 
     delete_dmap_scent();
     delete_dmap_goals();
@@ -569,6 +569,11 @@ void Thing::kill (void)
         return;
     }
     is_dead = true;
+
+    //
+    // Unwield weapons
+    //
+    unwield("owner is dead");
 
     if (is_corpse_on_death()) {
         if (tp_is_loggable(tp())) {

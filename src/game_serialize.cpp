@@ -79,7 +79,8 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.owner_id);
     out << bits(my.t.weapon_id_carry_anim);
     out << bits(my.t.weapon_id_use_anim);
-    out << bits(my.t.weapon_tp_id);
+    out << bits(my.t.weapon_id);
+    out << bits(my.t.carrying);
 
     return (out);
 }
@@ -133,7 +134,8 @@ std::istream& operator>>(std::istream &in, Bits<Monst &> my)
     in >> bits(my.t.owner_id);
     in >> bits(my.t.weapon_id_carry_anim);
     in >> bits(my.t.weapon_id_use_anim);
-    in >> bits(my.t.weapon_tp_id);
+    in >> bits(my.t.weapon_id);
+    in >> bits(my.t.carrying);
 
     return (in);
 }

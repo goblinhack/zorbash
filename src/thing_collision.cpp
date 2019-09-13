@@ -590,6 +590,10 @@ bool Thing::ai_collisions_handle (void)
                     continue;
                 }
 
+                if (it->is_hidden) {
+                    continue;
+                }
+
                 if (!ai_possible_hit(it, x, y, dx, dy)) {
                     return (false);
                 }
