@@ -1583,20 +1583,20 @@ uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
 ////////////////////////////////////////////////////////////////////////////
 // weapon_tp_id
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_weapon_tp_id (void)
+uint32_t Thing::get_weapon_id (void)
 {
     if (monst) { 
-        return (monst->weapon_tp_id);
+        return (monst->weapon_id);
     } else {
         return (0);
     }
 }
 
-uint32_t Thing::set_weapon_tp_id (uint32_t v)
+uint32_t Thing::set_weapon_id (uint32_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->weapon_tp_id = v);
+    return (monst->weapon_id = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////

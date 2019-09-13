@@ -108,7 +108,8 @@ typedef struct Monst_ {
     uint32_t     owner_id {};                // Who created this thing?
     uint32_t     weapon_id_carry_anim {};
     uint32_t     weapon_id_use_anim {};
-    uint16_t     weapon_tp_id {};            // Weapon thing template.
+    uint32_t     weapon_id {};               // Current weapon
+    std::list<uint32_t> carrying;
     void dump(std::string prefix, std::ostream &out);
 } Monst;
 std::ostream& operator<<(std::ostream &out, Bits<const Monst & > const my);
@@ -296,8 +297,8 @@ typedef struct Thing_ {
     uint32_t set_weapon_id_use_anim(uint32_t);
     uint32_t get_weapon_id_use_anim(void);
 
-    uint32_t set_weapon_tp_id(uint32_t);
-    uint32_t get_weapon_tp_id(void);
+    uint32_t set_weapon_id(uint32_t);
+    uint32_t get_weapon_id(void);
 
     fpoint set_interpolated_mid_at(fpoint);
     fpoint get_interpolated_mid_at(void);
@@ -305,7 +306,7 @@ typedef struct Thing_ {
     Thingp owner_get();
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void);
-    Tpp weapon_get();
+    Thingp weapon_get();
     bool ai_collisions_handle(void);
     bool ai_is_goal_for_me(point p, int priority, double *score);
     bool ai_is_obstacle_for_me(point p);
@@ -532,8 +533,7 @@ typedef struct Thing_ {
     void weapon_set_use_anim(Thingp weapon_use_anim);
     void weapon_set_use_anim_id(uint32_t weapon_use_anim_id);
     void weapon_sheath(void);
-    void weapon_wield_next();
-    void wield(Tpp tp);
+    void wield(Thingp w);
 
     void dump(std::string prefix, std::ostream &out);
 } Thing;

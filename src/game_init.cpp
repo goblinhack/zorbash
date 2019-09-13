@@ -880,7 +880,9 @@ _
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {
             if (dungeon->is_entrance_at(x, y)) {
                 auto t = thing_new("player1", fpoint(x, y));
-                auto w = tp_find("sword1");
+                auto w = thing_new("sword1", fpoint(x, y));
+                w->hide();
+                //t->carry(w);
                 t->wield(w);
             }
         }

@@ -5,18 +5,18 @@
 
 #include "my_game.h"
 
-Tpp Thing::weapon_get ()
-{
-    auto id = get_weapon_tp_id();
+Thingp Thing::weapon_get ()
+{_
+    auto id = get_weapon_id();
     if (id) {
-        return (tp_find(id));
+        return (thing_find(id));
     }
 
     return (nullptr);
 }
 
 void Thing::weapon_set_carry_anim_id (uint32_t weapon_carry_anim_id)
-{
+{_
     Thingp weapon_carry_anim;
 
     if (!weapon_carry_anim_id) {
@@ -30,7 +30,7 @@ void Thing::weapon_set_carry_anim_id (uint32_t weapon_carry_anim_id)
 }
 
 void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
-{
+{_
     if (new_weapon_carry_anim) {
         verify(new_weapon_carry_anim);
     }
@@ -64,7 +64,7 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
 }
 
 void Thing::weapon_set_use_anim_id (uint32_t weapon_use_anim_id)
-{
+{_
     Thingp weapon_use_anim;
 
     if (!weapon_use_anim_id) {
@@ -78,7 +78,7 @@ void Thing::weapon_set_use_anim_id (uint32_t weapon_use_anim_id)
 }
 
 void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
-{
+{_
     if (weapon_use_anim) {
         verify(weapon_use_anim);
     }
@@ -112,7 +112,7 @@ void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
 }
 
 void Thing::weapon_get_use_offset (double *dx, double *dy)
-{
+{_
     auto weapon = weapon_get();
     if (!weapon) {
         return;
@@ -122,7 +122,7 @@ void Thing::weapon_get_use_offset (double *dx, double *dy)
     *dy = 0;
 
     double dist_from_wielder =
-        ((double)tp_weapon_use_distance(weapon)) / 10.0;
+        ((double)tp_weapon_use_distance(weapon->tp())) / 10.0;
 
     //
     // Try current direction.
@@ -179,7 +179,7 @@ void Thing::weapon_get_use_offset (double *dx, double *dy)
 }
 
 Thingp Thing::weapon_get_carry_anim (void)
-{
+{_
     Thingp weapon_carry_anim = 0;
 
     auto id = get_weapon_id_carry_anim();
@@ -191,7 +191,7 @@ Thingp Thing::weapon_get_carry_anim (void)
 }
 
 Thingp Thing::weapon_get_use_anim (void)
-{
+{_
     //
     // If this weapon_use_anim has its own thing id for animations then
     // destroy that.
@@ -206,35 +206,27 @@ Thingp Thing::weapon_get_use_anim (void)
     return (weapon_use_anim);
 }
 
-void Thing::weapon_wield_next (void)
-{
-    auto id = get_weapon_id_use_anim();
-    if (id) {
-        wield(tp_find(id));
-    }
-}
-
 void Thing::unwield (const char *why)
-{
+{_
     auto weapon = weapon_get();
     if (!weapon) {
         return;
     }
 
     log("unwielding current weapon %s, why: %s",
-        tp_name(weapon).c_str(), why);
+        tp_name(weapon->tp()).c_str(), why);
 
     sheath();
 }
 
 void Thing::sheath (void)
-{
+{_
     auto weapon = weapon_get();
     if (!weapon) {
         return;
     }
 
-    log("sheathing %s", tp_name(weapon).c_str());
+    log("sheathing %s", tp_name(weapon->tp()).c_str());
 
     //
     // If this weapon has its own thing id for animations then destroy that.
@@ -252,20 +244,22 @@ void Thing::sheath (void)
     }
 }
 
-void Thing::wield (Tpp weapon)
-{
+void Thing::wield (Thingp weapon)
+{_
+    auto weapon_tp = weapon->tp();
+
     if (weapon_get() == weapon) {
-        log("already wiedling: %s", tp_name(weapon).c_str());
+        log("already wiedling: %s", tp_name(weapon_tp).c_str());
         return;
     }
 
-    log("is wielding: %s", tp_name(weapon).c_str());
+    log("is wielding: %s", tp_name(weapon_tp).c_str());
 
     unwield("wield new weapon");
 
-    auto carry_as = tp_weapon_carry_anim(weapon);
+    auto carry_as = tp_weapon_carry_anim(weapon_tp);
     if (carry_as == "") {
-        err("could not wield weapon %s", tp_name(weapon).c_str());
+        err("could not wield weapon %s", tp_name(weapon_tp).c_str());
         return;
     }
 
@@ -274,7 +268,7 @@ void Thing::wield (Tpp weapon)
     //
     // Set the weapon so we can use it later
     //
-    set_weapon_tp_id(weapon->id);
+    set_weapon_id(weapon->id);
 
     //
     // Save the thing id so the client wid can keep track of the weapon.
@@ -290,7 +284,7 @@ void Thing::wield (Tpp weapon)
 }
 
 void Thing::use (void)
-{
+{_
     if (get_weapon_id_use_anim()) {
         //
         // Still using.
@@ -304,10 +298,12 @@ void Thing::use (void)
         return;
     }
 
-    auto swung_as = tp_weapon_use_anim(weapon);
+    auto weapon_tp = weapon->tp();
+
+    auto swung_as = tp_weapon_use_anim(weapon_tp);
     if (swung_as == "") {
         die("could not use %s/%u, has no 'use' animiation frame",
-            tp_name(weapon).c_str(), weapon->id);
+            tp_name(weapon_tp).c_str(), weapon->id);
         return;
     }
 

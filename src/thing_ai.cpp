@@ -97,6 +97,10 @@ bool Thing::ai_is_obstacle_for_me (point p)
             continue;
         }
 
+        if (t->is_hidden) {
+            continue;
+        }
+
         if (will_avoid(t)) {
             return (true);
         }
@@ -136,6 +140,10 @@ bool Thing::ai_is_goal_for_me (point p, int priority, double *score)
                     continue;
                 }
 
+                if (it->is_hidden) {
+                    continue;
+                }
+
                 if (will_eat(it)) {
                     *score -= 1000 / distance_scale;
                     return (true);
@@ -147,6 +155,10 @@ bool Thing::ai_is_goal_for_me (point p, int priority, double *score)
         if (is_hungry) {
             FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
                 if (it == this) {
+                    continue;
+                }
+
+                if (it->is_hidden) {
                     continue;
                 }
 
@@ -165,6 +177,10 @@ bool Thing::ai_is_goal_for_me (point p, int priority, double *score)
     case 2:
         FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
             if (it == this) {
+                continue;
+            }
+
+            if (it->is_hidden) {
                 continue;
             }
 

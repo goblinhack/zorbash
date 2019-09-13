@@ -80,7 +80,7 @@ int Thing::ai_ai_hit_if_possible (Thingp hitter, int damage)
         }
     }
 
-    Tpp weapon = nullptr;
+    Thingp weapon = nullptr;
 
     if (hitter) {
         verify(hitter);
@@ -142,7 +142,7 @@ int Thing::ai_ai_hit_if_possible (Thingp hitter, int damage)
             }
 
             if (!damage) {
-                damage = tp_weapon_damage(weapon);
+                damage = tp_weapon_damage(weapon->tp());
             }
 
         } else if (hitter->owner_get()) {
@@ -165,7 +165,7 @@ int Thing::ai_ai_hit_if_possible (Thingp hitter, int damage)
             }
 
             if (!damage) {
-                damage = tp_weapon_damage(weapon);
+                damage = tp_weapon_damage(weapon->tp());
             }
         }
 
