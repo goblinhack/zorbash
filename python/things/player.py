@@ -18,6 +18,7 @@ def tp_init(name):
     x.set_is_active(True)
     x.set_is_attackable(True)
     x.set_is_bleeder(True)
+    x.set_is_corpse_on_death(True)
     x.set_is_interesting(True)
     x.set_is_loggable(True)
     x.set_is_made_of_meat(True)
@@ -55,6 +56,8 @@ def tp_init(name):
 
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=delay)
     x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=delay)
+
+    x.set_tile(tile=name + ".dead", is_dead=True)
 
     x.update()
     

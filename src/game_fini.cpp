@@ -19,11 +19,19 @@ void World::fini (void)
                 if (id) {
                     auto t = thing_find(id);
                     verify(t);
-                    delete t;
+
+                    //
+                    // If already dead, then we will clean this up in thing_gc
+                    //
+                    if (!t->is_dead) {
+                        delete t;
+                    }
                 }
             }
         }
     }
+
+    thing_gc();
 
     //
     // Check all things were fully detached
@@ -81,7 +89,11 @@ void Config::fini (void)
 
 void Game::fini (void)
 {
+    CON("dungeon: destroying dungeon %u", seed);
+
     fps_count = 0;
     config.fini();
     world.fini();
+
+    CON("dungeon: destroyed dungeon %u", seed);
 }

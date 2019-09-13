@@ -8,8 +8,6 @@
 #include "my_dmap.h"
 #include <list>
 
-#undef ENABLE_THING_DEBUG
-
 static std::list<uint32_t> things_to_delete;
 
 void thing_gc (void)
@@ -232,13 +230,10 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
 void Thing::destroy (void)
 {_
     verify(this);
-#ifdef ENABLE_THING_DEBUG
-    log("destroy");
-#else
+
     if (is_loggable()) {
         log("destroy");
     }
-#endif
 
     detach();
 
@@ -294,6 +289,9 @@ void Thing::destroy (void)
     if (is_player()) {
         world->player = nullptr;
     }
+
+    unwield("owner is dead");
+
     delete_dmap_scent();
     delete_dmap_goals();
     delete_age_map();
@@ -364,23 +362,16 @@ void Thing::hooks_remove ()
     }
 
     if (owner) {
-#ifdef ENABLE_THING_DEBUG
-        log("detach %d from owner %s", id, owner->to_string().c_str());
-#endif
+        log("detach %u from owner %s", id, owner->to_string().c_str());
         if (id == owner->get_weapon_id_carry_anim()) {
             unwield("remove hooks");
 
-#ifdef ENABLE_THING_DEBUG
             log("detach from carry anim owner %s", owner->to_string().c_str());
-#endif
-
             owner->weapon_set_carry_anim(nullptr);
         }
 
         if (id == owner->get_weapon_id_use_anim()) {
-#ifdef ENABLE_THING_DEBUG
             log("detach from use anim owner %s", owner->to_string().c_str());
-#endif
             owner->weapon_set_use_anim(nullptr);
 
             //
@@ -518,7 +509,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_carry_anim()) {
         auto w = thing_find(get_weapon_id_carry_anim());
         if (!w) {
-            die("weapon_id_carry_anim set to %d but not found",
+            die("weapon_id_carry_anim set to %u but not found",
                 get_weapon_id_carry_anim());
         }
         w->move_to(mid_at);
@@ -528,7 +519,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_use_anim()) {
         auto w = thing_find(get_weapon_id_use_anim());
         if (!w) {
-            die("weapon_id_use_anim set to %d but not found",
+            die("weapon_id_use_anim set to %u but not found",
                 get_weapon_id_use_anim());
         }
         w->move_to(mid_at);
@@ -580,7 +571,14 @@ void Thing::kill (void)
     is_dead = true;
 
     if (is_corpse_on_death()) {
+        if (tp_is_loggable(tp())) {
+            log("killed, leaves corpse");
+        }
         return;
+    }
+
+    if (tp_is_loggable(tp())) {
+        log("killed");
     }
 
     hooks_remove();

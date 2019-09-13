@@ -569,7 +569,7 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 {
     verify(this);
 
-    if (tp_is_interesting(tp())) {
+    if (tp_is_loggable(tp())) {
         auto t = this;
         char buf[MAXSHORTSTR];
         uint32_t len;
@@ -577,7 +577,7 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
         buf[0] = '\0';
         timestamp(buf, MAXSHORTSTR);
         len = (uint32_t)strlen(buf);
-        snprintf(buf + len, MAXSHORTSTR - len, "thing %s: dead, killer %s: ",
+        snprintf(buf + len, MAXSHORTSTR - len, "thing %s: killed by %s: ",
                  t->to_string().c_str(),
                  killer->to_string().c_str());
 

@@ -781,7 +781,7 @@ void Game::init (void)
 {_
     tp_init_after_loading();
 
-    int seed = 667;
+    seed = 667;
     //seed = myrand();
 //        world->terrain = terrain_init(seed);
     mysrand(seed);

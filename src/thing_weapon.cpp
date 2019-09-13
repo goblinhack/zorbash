@@ -241,13 +241,13 @@ void Thing::sheath (void)
     //
     auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
-        weapon_carry_anim->dead("owner weapon");
+        weapon_carry_anim->dead("owner sheathed weapon, remove carry anim");
         weapon_set_carry_anim(nullptr);
     }
 
     auto weapon_use_anim = weapon_get_use_anim();
     if (weapon_use_anim) {
-        weapon_use_anim->dead("owner weapon");
+        weapon_use_anim->dead("owner sheathed weapon, remove use anim");
         weapon_set_use_anim(nullptr);
     }
 }

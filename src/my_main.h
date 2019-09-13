@@ -36,7 +36,6 @@
 #define ENABLE_TRACING             // Function tracing
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
-#define ENABLE_THING_DEBUG
 #endif
 
 #undef  ENABLE_LEAKCHECK
