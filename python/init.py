@@ -54,7 +54,8 @@ def init2():
 
     load_all_plugins()
 
-    zx.tip2("Welcome mortal, to Zorbash version " + zx.VERSION)
+    zx.tip("Welcome mortal, to Zorbash version " + zx.VERSION)
+    zx.tip2("TODO tip2")
     console.hello()
 
 init1()
