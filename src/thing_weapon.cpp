@@ -42,16 +42,16 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
         }
 
         if (new_weapon_carry_anim) {
-            log("set-weapon-carry change, %s->%s",
+            log("change weapon carry anim, %s->%s",
                 old_weapon_carry_anim->to_string().c_str(),
                 new_weapon_carry_anim->to_string().c_str());
         } else {
-            log("set-weapon-carry remove, %s",
+            log("remove weapon carry anim, %s",
                 old_weapon_carry_anim->to_string().c_str());
         }
     } else {
         if (new_weapon_carry_anim) {
-            log("set-weapon-carry, %s",
+            log("set weapon carry anim, %s",
                 new_weapon_carry_anim->to_string().c_str());
         }
     }
@@ -91,16 +91,17 @@ void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
         }
 
         if (weapon_use_anim) {
-            log("set-weapon-use change %s->%s",
+            log("change weapon use anim %s->%s",
                 old_weapon_use_anim->to_string().c_str(),
                 weapon_use_anim->to_string().c_str());
         } else {
-            log("set-weapon-use remove %s",
+            log("remove weapon use anim %s",
                 old_weapon_use_anim->to_string().c_str());
         }
     } else {
         if (weapon_use_anim) {
-            log("set-weapon-use %s", weapon_use_anim->to_string().c_str());
+            log("set weapon use anim %s", 
+                weapon_use_anim->to_string().c_str());
         }
     }
 
@@ -302,7 +303,7 @@ void Thing::use (void)
 
     auto swung_as = tp_weapon_use_anim(weapon_tp);
     if (swung_as == "") {
-        die("could not use %s/%u, has no 'use' animiation frame",
+        die("could not use %s/%08X has no 'use' animation frame",
             tp_name(weapon_tp).c_str(), weapon->id);
         return;
     }

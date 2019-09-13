@@ -15,7 +15,7 @@ void thing_gc (void)
     for (auto id : things_to_delete) {
         auto t = thing_find(id);
         if (!t) {
-            ERR("thing %u not found to garbage collect", id);
+            ERR("thing %08X not found to garbage collect", id);
             continue;
         }
 
@@ -362,7 +362,7 @@ void Thing::hooks_remove ()
     }
 
     if (owner) {
-        log("detach %u from owner %s", id, owner->to_string().c_str());
+        log("detach %08X from owner %s", id, owner->to_string().c_str());
         if (id == owner->get_weapon_id_carry_anim()) {
             unwield("remove hooks");
 
@@ -389,7 +389,7 @@ void Thing::hooks_remove ()
             }
         }
 
-        set_owner(nullptr);
+        remove_owner();
     }
 
     //
@@ -400,7 +400,7 @@ void Thing::hooks_remove ()
         if (item) {
             weapon_set_carry_anim(nullptr);
             verify(item);
-            item->set_owner(nullptr);
+            item->remove_owner();
             item->dead("weapon carry anim owner killed");
         }
     }
@@ -410,7 +410,7 @@ void Thing::hooks_remove ()
         if (item) {
             weapon_set_use_anim(nullptr);
             verify(item);
-            item->set_owner(nullptr);
+            item->remove_owner();
             item->dead("weapon use anim owner killed");
         }
     }
@@ -419,7 +419,7 @@ void Thing::hooks_remove ()
     // Some things have lots of things they own
     //
     if (get_owned_count()) {
-        log("remove remaining %u owned things", get_owned_count());
+        log("remove remaining %08X owned things", get_owned_count());
 
         //
         // Slow, but not used too often
@@ -430,7 +430,7 @@ void Thing::hooks_remove ()
                     if (t) {
                         auto o = t->owner_get();
                         if (o && (o == this)) {
-                            t->set_owner(nullptr);
+                            t->remove_owner();
                         }
                     }
                 }
@@ -462,14 +462,14 @@ void Thing::set_owner (Thingp owner)
         }
 
         if (owner) {
-            log("set-owner change %s->%s", old_owner->to_string().c_str(),
+            log("set owner change %s->%s", old_owner->to_string().c_str(),
                 owner->to_string().c_str());
         } else {
-            log("set-owner remove owner %s", old_owner->to_string().c_str());
+            log("set owner remove owner %s", old_owner->to_string().c_str());
         }
     } else {
         if (owner) {
-            log("set-owner %s", owner->to_string().c_str());
+            log("set owner %s", owner->to_string().c_str());
         }
     }
 
@@ -482,6 +482,19 @@ void Thing::set_owner (Thingp owner)
             old_owner->decr_owned_count();
         }
     }
+}
+
+void Thing::remove_owner (void)
+{
+    auto old_owner = owner_get();
+    if (!old_owner) {
+        return;
+    }
+
+    log("remove owner %s", old_owner->to_string().c_str());
+
+    set_owner_id(0);
+    old_owner->decr_owned_count();
 }
 
 void Thing::update_light (void)
@@ -509,7 +522,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_carry_anim()) {
         auto w = thing_find(get_weapon_id_carry_anim());
         if (!w) {
-            die("weapon_id_carry_anim set to %u but not found",
+            die("weapon_id_carry_anim set to %08X but not found",
                 get_weapon_id_carry_anim());
         }
         w->move_to(mid_at);
@@ -519,7 +532,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_use_anim()) {
         auto w = thing_find(get_weapon_id_use_anim());
         if (!w) {
-            die("weapon_id_use_anim set to %u but not found",
+            die("weapon_id_use_anim set to %08X but not found",
                 get_weapon_id_use_anim());
         }
         w->move_to(mid_at);
@@ -552,10 +565,16 @@ std::string Thing::to_string (void)
     auto tpp = tp();
     verify(this);
     verify(tpp);
-    return (string_sprintf("%u(%s%s) at (%g,%g)",
+#if 0
+    return (string_sprintf("%08X(%s%s) at (%g,%g)",
                            id, tpp->name.c_str(),
                            is_dead ? "/dead" : "",
                            mid_at.x, mid_at.y));
+#else
+    return (string_sprintf("%08X(%s%s)",
+                           id, tpp->name.c_str(),
+                           is_dead ? "/dead" : ""));
+#endif
 }
 
 const char * Thing::to_cstring (void)

@@ -882,9 +882,7 @@ _
             if (dungeon->is_entrance_at(x, y)) {
                 auto t = thing_new("player1", fpoint(x, y));
                 auto w = thing_new("sword1", fpoint(x, y));
-                w->hide();
-                //t->carry(w);
-                t->wield(w);
+                t->carry(w);
             }
         }
     }
