@@ -20,7 +20,7 @@
 #include "my_game.h"
 #include <stdlib.h>
 
-#define WID_FULL_LOGNAME
+#undef WID_FULL_LOGNAME
 #undef DEBUG_WID_MOTION
 #undef DEBUG_WID_FOCUS
 
@@ -775,7 +775,7 @@ static uint8_t wid_m_over_b (widp w, uint32_t x, uint32_t y,
 
     verify(w.get());
 
-    if (!(w.get()->on_m_over_b)) {
+    if (!(w.get()->on_m_over_b) && !(w.get()->on_m_down)) {
         if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG] ||
             w->cfg[WID_MODE_OVER].color_set[WID_COLOR_TEXT]) {
             /*
@@ -6090,16 +6090,6 @@ static void wid_display (widp w,
         .width          = (br.x - tl.x) + 1,
     };
 
-#if 0
-    color col = wid_get_color(w, WID_COLOR_BG);
-    w_box_args.col_tl = col;
-    w_box_args.c1_active = col;
-    w_box_args.col_mid = col;
-    w_box_args.c2_active = col;
-    w_box_args.col_br = col;
-    w_box_args.c3_active = col;
-#endif
-
     bool is_button = (bry == tly) && w->square;
 
     if (w == wid_over) {
@@ -6108,27 +6098,33 @@ static void wid_display (widp w,
 
         if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG]) {
             auto c = w->cfg[WID_MODE_OVER].colors[WID_COLOR_TEXT];
-            w_box_args.col_border_text = c;
-            w_button_args.col_border_text = c;
-
             c = w->cfg[WID_MODE_OVER].colors[WID_COLOR_BG];
+            w_box_args.col_border_text = c;
             w_button_args.col_tl = c;
             w_button_args.col_mid = c;
             w_button_args.col_br = c;
+        } else {
+            w_box_args.col_border_text = WHITE;
+            w_box_args.col_tl = WHITE;
+            w_box_args.col_mid = WHITE;
+            w_box_args.col_br = WHITE;
         }
     } else {
         if (w->cfg[WID_MODE_NORMAL].color_set[WID_COLOR_BG]) {
-            w_box_args.col_border_text = COLOR_NONE;
-            w_button_args.col_border_text = COLOR_NONE;
-
             auto c = w->cfg[WID_MODE_NORMAL].colors[WID_COLOR_BG];
+            w_box_args.col_border_text = c;
             w_box_args.col_tl = c;
-            w_box_args.col_mid = color(c.r * 0.8, c.g * 0.8, c.b * 0.8, 255);
-            w_box_args.col_br = color(c.r * 0.5, c.g * 0.5, c.b * 0.5, 255);
+            w_box_args.col_mid = c;
+            w_box_args.col_br = c;
 
             w_button_args.col_tl = c;
             w_button_args.col_mid = c;
             w_button_args.col_br = c;
+        } else {
+            w_box_args.col_border_text = GREY;
+            w_box_args.col_tl = GREY;
+            w_box_args.col_mid = GREY;
+            w_box_args.col_br = GREY;
         }
     }
 
@@ -6442,21 +6438,17 @@ void wid_display_all (void)
     }
 #endif
     {
-        color c = ASCII_UI_BOX_INACTIVE_RIGHT_COLOR;
-        ascii_putf(0, ASCII_HEIGHT-1, WHITE, c, wid_tooltip_string.c_str());
+        ascii_putf(0, ASCII_HEIGHT-1, WHITE, BLACK, wid_tooltip_string.c_str());
     }
     {
-        color c = ASCII_UI_BOX_INACTIVE_MID_COLOR;
-        ascii_putf(0, ASCII_HEIGHT-2, WHITE, c, wid_tooltip2_string.c_str());
+        ascii_putf(0, ASCII_HEIGHT-2, WHITE, BLACK, wid_tooltip2_string.c_str());
     }
 
     /*
      * FPS counter.
      */
     if (game->config.fps_counter) {
-        ascii_putf(0, 1,
-                   GREEN, ASCII_UI_BOX_INACTIVE_MID_COLOR,
-                   L"%u FPS", game->fps_count);
+        ascii_putf(0, 1, GREEN, BLACK, L"%u FPS", game->fps_count);
     }
 
     ascii_display();

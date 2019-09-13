@@ -50,9 +50,9 @@ void ascii_put_button (button_args b, const wchar_t *fmt, ...)
         (b.col_mid == COLOR_NONE) &&
         (b.col_br == COLOR_NONE)) {
 
-        b.col_tl = ASCII_UI_BUTTON_BG_ACTIVE_LEFT_COLOR;
-        b.col_mid = ASCII_UI_BUTTON_BG_ACTIVE_MID_COLOR;
-        b.col_br = ASCII_UI_BUTTON_BG_ACTIVE_RIGHT_COLOR;
+        b.col_tl = WHITE;
+        b.col_mid = WHITE;
+        b.col_br = WHITE;
     }
 
     int x = b.x;
