@@ -22,8 +22,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
     $(OBJDIR)/game_display.o 		\
-    $(OBJDIR)/game_init.o 		\
     $(OBJDIR)/game_fini.o 		\
+    $(OBJDIR)/game_init.o 		\
     $(OBJDIR)/game_save_load.o 		\
     $(OBJDIR)/game_serialize.o 		\
     $(OBJDIR)/gauss.o 		        \
@@ -35,6 +35,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/main.o 			\
     $(OBJDIR)/map.o 		        \
+    $(OBJDIR)/minilzo.o 		\
     $(OBJDIR)/pcg_basic.o 		\
     $(OBJDIR)/player.o 			\
     $(OBJDIR)/ptrcheck.o 		\
@@ -46,7 +47,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/py_tp.o 			\
     $(OBJDIR)/py_ttf.o 			\
     $(OBJDIR)/python.o 			\
-    $(OBJDIR)/minilzo.o 		\
     $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
@@ -59,6 +59,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 	        \
     $(OBJDIR)/thing_attach.o 		\
+    $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\

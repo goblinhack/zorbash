@@ -1,4 +1,4 @@
-
+//
 // Copyright goblinhack@gmail.com
 // See the README file for license info.
 //
@@ -519,10 +519,10 @@ typedef struct Thing_ {
     void move_to(fpoint to);
     void move_to_immediately(fpoint to);
     void set_owner(Thingp owner);
+    void remove_owner(void);
     void sheath(void);
     void tick();
     void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
-    void unwield(const char *why);
     void update_light(void);
     void update_pos(fpoint, bool immediately);
     void use(void);
@@ -534,7 +534,11 @@ typedef struct Thing_ {
     void weapon_set_use_anim(Thingp weapon_use_anim);
     void weapon_set_use_anim_id(uint32_t weapon_use_anim_id);
     void weapon_sheath(void);
+    void unwield(const char *why);
     void wield(Thingp w);
+    void carry(Thingp w);
+    void drop(Thingp w);
+    void drop_all(void);
 
     void dump(std::string prefix, std::ostream &out);
 } Thing;
