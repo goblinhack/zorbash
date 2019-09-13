@@ -201,6 +201,10 @@ std::ostream& operator<<(std::ostream &out,
     bits32 |= my.t.is_starving        << shift; shift++;
     bits32 |= my.t.is_submerged       << shift; shift++;
     bits32 |= my.t.is_waiting_for_ai  << shift; shift++;
+    bits32 |= my.t.is_pending_gc      << shift; shift++;
+    if (shift >= (int)(sizeof(bits32) * 8)) {
+        DIE("ran out of bits in serialization");
+    }
     out << bits(bits32);
 
     return (out);
@@ -249,6 +253,7 @@ std::istream& operator>>(std::istream &in, Bits<Thing &> my)
     my.t.is_starving        = (bits32 >> shift) & 1; shift++;
     my.t.is_submerged       = (bits32 >> shift) & 1; shift++;
     my.t.is_waiting_for_ai  = (bits32 >> shift) & 1; shift++;
+    my.t.is_pending_gc      = (bits32 >> shift) & 1; shift++;
 
     world->put_thing_ptr((int)my.t.last_attached.x, 
                          (int)my.t.last_attached.y, &my.t);
@@ -304,6 +309,7 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "is_starving         " << is_starving          << std::endl;
     out << pfx << "is_submerged        " << is_submerged         << std::endl;
     out << pfx << "is_waiting_for_ai   " << is_waiting_for_ai    << std::endl;
+    out << pfx << "is_pending_gc       " << is_pending_gc        << std::endl;
 
     pfx = old_pfx;
     out << pfx << "}" << std::endl;

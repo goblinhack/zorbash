@@ -23,7 +23,7 @@ void World::fini (void)
                     //
                     // If already dead, then we will clean this up in thing_gc
                     //
-                    if (!t->is_dead) {
+                    if (!t->is_pending_gc) {
                         delete t;
                     }
                 }
@@ -90,10 +90,12 @@ void Config::fini (void)
 void Game::fini (void)
 {
     CON("dungeon: destroying dungeon %u", seed);
+    LOG("===================================================================");
 
     fps_count = 0;
     config.fini();
     world.fini();
 
     CON("dungeon: destroyed dungeon %u", seed);
+    LOG("===================================================================");
 }

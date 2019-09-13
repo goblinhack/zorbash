@@ -101,6 +101,9 @@ void quit (void)
     signal(SIGINT, 0);    // uninstall our handler
 #endif
 
+    if (game) {
+        game->fini();
+    }
 {_
     python_fini();
 }

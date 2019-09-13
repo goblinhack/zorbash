@@ -147,6 +147,7 @@ typedef struct Thing_ {
     uint32_t is_starving:1        {};
     uint32_t is_submerged:1       {};
     uint32_t is_waiting_for_ai:1  {};
+    uint32_t is_pending_gc:1      {};
 
     Tpp tp(void)
     {
