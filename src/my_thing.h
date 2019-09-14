@@ -421,7 +421,6 @@ typedef struct Thing_ {
     int is_rrr38(void);
     int is_rrr39(void);
     int is_rrr4(void);
-    int is_rrr40(void);
     int is_rrr41(void);
     int is_rrr42(void);
     int is_rrr43(void);

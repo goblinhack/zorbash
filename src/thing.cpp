@@ -598,6 +598,16 @@ void Thing::kill (void)
         if (tp_is_loggable(tp())) {
             log("killed, leaves corpse");
         }
+
+        if (tp_is_bleeder(tp())) {
+            int splatters = random_range(2, 10);
+            for (int splatter = 0; splatter < splatters; splatter++) {
+                auto tp = tp_random_blood();
+                (void) thing_new(tp_name(tp),
+                                    fpoint(mid_at.x, mid_at.y),
+                                    fpoint(0.25, 0.25));
+            }
+        }
         return;
     }
 

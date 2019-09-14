@@ -263,9 +263,6 @@ class Tp:
     def set_is_rrr39(self, value):
         zx.tp_set_is_rrr39(self, value)
 
-    def set_is_rrr40(self, value):
-        zx.tp_set_is_rrr40(self, value)
-
     def set_is_rrr41(self, value):
         zx.tp_set_is_rrr41(self, value)
 

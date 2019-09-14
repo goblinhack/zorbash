@@ -218,7 +218,6 @@ public:
     int is_rrr38 {};
     int is_rrr39 {};
     int is_rrr4 {};
-    int is_rrr40 {};
     int is_rrr41 {};
     int is_rrr42 {};
     int is_rrr43 {};
@@ -553,9 +552,9 @@ static inline int tp_is_rrr39 (Tpp t)
     return (t->is_rrr39);
 }
 
-static inline int tp_is_rrr40 (Tpp t)
+static inline int tp_is_bleeder (Tpp t)
 {
-    return (t->is_rrr40);
+    return (t->is_bleeder);
 }
 
 static inline int tp_is_rrr41 (Tpp t)
@@ -701,11 +700,6 @@ static inline int tp_gfx_bounce_on_move (Tpp t)
 static inline int tp_is_corpse_on_death (Tpp t)
 {
     return (t->is_corpse_on_death);
-}
-
-static inline int tp_is_bleeder (Tpp t)
-{
-    return (t->is_bleeder);
 }
 
 static inline int tp_is_meat_eater (Tpp t)
