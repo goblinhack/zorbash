@@ -175,6 +175,16 @@ void tile_blit_section(const Tpp &tp, const Tilep &tile,
 void tile_blit_section(const Tpp &tp, uint16_t index,
                        const fpoint &tile_tl, const fpoint &tile_br,
                        const fpoint &tl, const fpoint &br);
+void tile_blit_section_colored(const Tpp &tp, const Tilep &tile,
+                               const fpoint &tile_tl, const fpoint &tile_br,
+                               const fpoint &tl, const fpoint &br,
+                               color color_bl, color color_br,
+                               color color_tl, color color_tr);
+void tile_blit_section_colored(const Tpp &tp, uint16_t index,
+                               const fpoint &tile_tl, const fpoint &tile_br,
+                               const fpoint &tl, const fpoint &br,
+                               color color_bl, color color_br,
+                               color color_tl, color color_tr);
 void tile_blit_outline(const Tpp &tp, const Tilep &tile,
                        const fpoint &tl, const fpoint &br);
 void tile_blit_outline(const Tpp &tp, uint16_t index,

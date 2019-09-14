@@ -190,18 +190,18 @@ static void gl_init_fbo_ (
      * Attach the texture to FBO color attachment point
      */
     glFramebufferTexture2D_EXT(GL_FRAMEBUFFER,        // 1. fbo target: GL_FRAMEBUFFER
-                           GL_COLOR_ATTACHMENT0,  // 2. attachment point
-                           GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
-                           *fbo_tex_id,           // 4. tex ID
-                           0);                    // 5. mipmap level: 0(base)
+                               GL_COLOR_ATTACHMENT0,  // 2. attachment point
+                               GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
+                               *fbo_tex_id,           // 4. tex ID
+                               0);                    // 5. mipmap level: 0(base)
 
     /*
      * Attach the renderbuffer to depth attachment point
      */
     glFramebufferRenderbuffer_EXT(GL_FRAMEBUFFER,      // 1. fbo target: GL_FRAMEBUFFER
-                              GL_DEPTH_ATTACHMENT, // 2. attachment point
-                              GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
-                              *render_buf_id);     // 4. rbo ID
+                                  GL_DEPTH_ATTACHMENT, // 2. attachment point
+                                  GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
+                                  *render_buf_id);     // 4. rbo ID
 
     /*
      * Check FBO status
@@ -263,21 +263,19 @@ void blit_fbo_unbind (void)
  */
 #define NUMBER_COMPONENTS_PER_COLOR 4
 
-uint32_t NUMBER_BYTES_PER_VERTICE_2D =
-                                            sizeof(GLfloat) *
-                                            NUMBER_DIMENSIONS_PER_COORD_2D +
-                                            sizeof(GLfloat) *
-                                            NUMBER_DIMENSIONS_PER_COORD_2D +
-                                            sizeof(GLfloat) *
-                                            NUMBER_COMPONENTS_PER_COLOR;
+uint32_t NUMBER_BYTES_PER_VERTICE_2D = sizeof(GLfloat) *
+                                       NUMBER_DIMENSIONS_PER_COORD_2D +
+                                       sizeof(GLfloat) *
+                                       NUMBER_DIMENSIONS_PER_COORD_2D +
+                                       sizeof(GLfloat) *
+                                       NUMBER_COMPONENTS_PER_COLOR;
 
-uint32_t NUMBER_BYTES_PER_VERTICE_3D =
-                                            sizeof(GLfloat) *
-                                            NUMBER_DIMENSIONS_PER_COORD_2D +
-                                            sizeof(GLfloat) *
-                                            NUMBER_DIMENSIONS_PER_COORD_3D +
-                                            sizeof(GLfloat) *
-                                            NUMBER_COMPONENTS_PER_COLOR;
+uint32_t NUMBER_BYTES_PER_VERTICE_3D = sizeof(GLfloat) *
+                                       NUMBER_DIMENSIONS_PER_COORD_2D +
+                                       sizeof(GLfloat) *
+                                       NUMBER_DIMENSIONS_PER_COORD_3D +
+                                       sizeof(GLfloat) *
+                                       NUMBER_COMPONENTS_PER_COLOR;
 
 uint32_t NUMBER_FLOATS_PER_VERTICE_2D = NUMBER_BYTES_PER_VERTICE_2D / sizeof(float);
 uint32_t NUMBER_FLOATS_PER_VERTICE_3D = NUMBER_BYTES_PER_VERTICE_3D / sizeof(float);
@@ -1691,9 +1689,53 @@ void tile_blit_section (const Tpp &tp, const Tilep &tile,
     blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
+void tile_blit_section_colored (const Tpp &tp, const Tilep &tile,
+                                const fpoint &tile_tl, const fpoint &tile_br,
+                                const fpoint &tl, const fpoint &br,
+                                color color_bl,
+                                color color_br,
+                                color color_tl,
+                                color color_tr)
+{
+    double x1, x2, y1, y2;
+
+    /*
+     * Only some walls have deco tiles, so the pointer is left null for
+     * those that do not.
+     */
+    if (!tile) {
+        return;
+    }
+
+    double tw = tile->x2 - tile->x1;
+    double th = tile->y2 - tile->y1;
+
+    x1 = tile->x1 + tile_tl.x * tw;
+    x2 = tile->x1 + tile_br.x * tw;
+    y1 = tile->y1 + tile_tl.y * th;
+    y2 = tile->y1 + tile_br.y * th;
+
+    blit_colored(tile->gl_surface_binding, x1, y2, x2, y1, 
+                 tl.x, br.y, br.x, tl.y,
+                 color_bl, color_br, color_tl, color_tr);
+}
+
 void tile_blit_section (const Tpp &tp, uint16_t index,
                         const fpoint &tile_tl, const fpoint &tile_br,
                         const fpoint &tl, const fpoint &br)
 {
     tile_blit_section(tp, tile_index_to_tile(index), tile_tl, tile_br, tl, br);
+}
+
+void tile_blit_section_colored (const Tpp &tp, uint16_t index,
+                                const fpoint &tile_tl, const fpoint &tile_br,
+                                const fpoint &tl, const fpoint &br,
+                                color color_bl,
+                                color color_br,
+                                color color_tl,
+                                color color_tr)
+{
+    tile_blit_section_colored(tp, tile_index_to_tile(index), 
+                              tile_tl, tile_br, tl, br,
+                              color_bl, color_br, color_tl, color_tr);
 }

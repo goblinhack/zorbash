@@ -8,10 +8,11 @@
 #include "my_ascii.h"
 #include <array>
 
-void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
-                           color col_border_text, 
-                           color col_tl, color col_mid, color col_br,
-                           void *context)
+static void ascii_put_shaded_box (int style, Tilep tile,
+                                  int x1, int y1, int x2, int y2,
+                                  color col_border_text, 
+                                  color col_tl, color col_mid, color col_br,
+                                  void *context)
 {_
     int x;
     int y;
@@ -40,7 +41,7 @@ void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
         }
     }
 
-    if (y1 == y2) {
+    if (unlikely(y1 == y2)) {
         y = y1;
         for (x = x1; x <= x2; x++) {
             ascii_set_bg(x, y, col_mid);
@@ -79,11 +80,25 @@ void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
         }
     }
 
-    if ((y2 - y1) < 2) {
+    if (unlikely(tile != nullptr)) {
+        float dx = 1.0 / ((float)x2 - (float)x1);
+        float dy = 1.0 / ((float)y2 - (float)y1);
+
+        for (x = x1; x <= x2; x++) {
+            for (y = y1; y <= y2; y++) {
+                float tx = (float)(x-x1) * dx;
+                float ty = (float)(y-y1) * dy;
+                ascii_set_bg2(x, y, tile, tx, ty, dx, dy);
+                ascii_set_bg2(x, y, col_mid);
+            }
+        }
+    }
+
+    if (unlikely(y2 - y1) < 2) {
         return;
     }
 
-    if (x1 == x2) {
+    if (unlikely(x1 == x2)) {
         return;
     }
 
@@ -113,6 +128,7 @@ void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
 }
 
 static void ascii_put_box_ (int style,
+                            Tilep tile,
                             int x,
                             int y,
                             int width,
@@ -124,29 +140,35 @@ static void ascii_put_box_ (int style,
                             const wchar_t *fmt,
                             va_list args)
 {_
-    wchar_t buf[MAXSHORTSTR];
+    if (!*fmt) {
+        ascii_put_shaded_box(style, tile, x, y,
+                             x + width - 1, y + height - 1,
+                             col_border_text, col_tl, col_mid, col_br,
+                             0 /* context */);
+    } else {
+        wchar_t buf[MAXSHORTSTR];
+        auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
-    auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
+        /*
+         * Only a single nul is written, but as we read 2 at a time...
+         */
+        if (wrote && (wrote < MAXSHORTSTR - 1)) {
+            buf[wrote+1] = '\0';
+        }
 
-    /*
-     * Only a single nul is written, but as we read 2 at a time...
-     */
-    if (wrote && (wrote < MAXSHORTSTR - 1)) {
-        buf[wrote+1] = '\0';
+        auto b = std::wstring(buf);
+        int len = ascii_strlen(b);
+
+        ascii_put_shaded_box(style, tile, x, y,
+                             x + width - 1, y + height - 1,
+                             col_border_text, col_tl, col_mid, col_br,
+                             0 /* context */);
+
+        ascii_putf__(x + ((width - len) / 2), y + 1, WHITE, COLOR_NONE, b);
     }
-
-    auto b = std::wstring(buf);
-    int len = ascii_strlen(b);
-
-    ascii_put_shaded_box(style, x, y,
-                         x + width - 1, y + height - 1,
-                         col_border_text, col_tl, col_mid, col_br,
-                         0 /* context */);
-
-    ascii_putf__(x + ((width - len) / 2), y + 1, WHITE, COLOR_NONE, b);
 }
 
-void ascii_put_box (box_args b, int style, const wchar_t *fmt, ...)
+void ascii_put_box (box_args b, int style, Tilep tile, const wchar_t *fmt, ...)
 {_
     va_list args;
 
@@ -178,6 +200,7 @@ void ascii_put_box (box_args b, int style, const wchar_t *fmt, ...)
     va_start(args, fmt);
 
     ascii_put_box_(style,
+                   tile,
                    b.x,
                    b.y,
                    b.width,

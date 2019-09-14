@@ -20,10 +20,22 @@ typedef struct {
     Tilep bg2_tile;
 
     Texp tex;
-    double tx;
-    double ty;
-    double dx;
-    double dy;
+
+    //
+    // For background tex
+    //
+    float tx;
+    float ty;
+    float dx;
+    float dy;
+
+    //
+    // For background tex
+    //
+    float bg2_tx;
+    float bg2_ty;
+    float bg2_dx;
+    float bg2_dy;
 
     color fg_color_tl;
     color fg_color_bl;
@@ -73,29 +85,8 @@ void ascii_set_scissors (point tl, point br)
 
 void pixel_to_ascii (int *x, int *y)
 {
-    *x = (int)(floor((double)(*x) / ((double)game->config.video_pix_width / ASCII_WIDTH)));
-    *y = (int)(floor((double)(*y) / ((double)game->config.video_pix_height / ASCII_HEIGHT)));
-}
-
-int ascii_ok (int x, int y)
-{
-    if (x < 0) {
-        return (false);
-    }
-
-    if (x >= ASCII_WIDTH) {
-        return (false);
-    }
-
-    if (y < 0) {
-        return (false);
-    }
-
-    if (y >= ASCII_HEIGHT) {
-        return (false);
-    }
-
-    return (true);
+    *x = (int)(floor((float)(*x) / ((float)game->config.video_pix_width / ASCII_WIDTH)));
+    *y = (int)(floor((float)(*y) / ((float)game->config.video_pix_height / ASCII_HEIGHT)));
 }
 
 static int ascii_ok_for_scissors (int x, int y)
@@ -141,6 +132,20 @@ void ascii_set_bg (int x, int y, color c)
     cell->bg_color_br = c;
 }
 
+void ascii_set_bg2 (int x, int y, color c)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->bg2_color_tl = c;
+    cell->bg2_color_tr = c;
+    cell->bg2_color_bl = c;
+    cell->bg2_color_br = c;
+}
+
 void ascii_set_context (int x, int y, void *context)
 {
     if (!context) {
@@ -167,8 +172,8 @@ void *ascii_get_context (int x, int y)
     return (cell->context);
 }
 
-void ascii_set_bg (int x, int y, const Texp tex, double tx, double ty,
-                   double dx, double dy)
+void ascii_set_bg (int x, int y, const Texp tex, 
+                   float tx, float ty, float dx, float dy)
 {
     if (!ascii_ok_for_scissors(x, y)) {
         return;
@@ -192,6 +197,10 @@ void ascii_set_bg (int x, int y, const Tilep tile)
     ascii_cell *cell = &cells[x][y];
 
     cell->bg_tile = tile;
+    cell->tx = 0;
+    cell->ty = 0;
+    cell->dx = 1;
+    cell->dy = 1;
 }
 
 void ascii_set_bg2 (int x, int y, const Tilep tile)
@@ -203,6 +212,26 @@ void ascii_set_bg2 (int x, int y, const Tilep tile)
     ascii_cell *cell = &cells[x][y];
 
     cell->bg2_tile = tile;
+    cell->bg2_tx = 0;
+    cell->bg2_ty = 0;
+    cell->bg2_dx = 1;
+    cell->bg2_dy = 1;
+}
+
+void ascii_set_bg2 (int x, int y, const Tilep tile,
+                    float tx, float ty, float dx, float dy)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->bg2_tile = tile;
+    cell->bg2_tx = tx;
+    cell->bg2_ty = ty;
+    cell->bg2_dx = dx;
+    cell->bg2_dy = dy;
 }
 
 void ascii_set_bg (int x, int y, const char *tilename)
@@ -713,12 +742,12 @@ void ascii_put_shaded_line (int x1, int x2, int y,
 
     color c;
     auto put_on_lhs = 0;
-    double d = 0.0;
-    double d_scale = 2;
-    double e_min = 0.25;
+    float d = 0.0;
+    float d_scale = 2;
+    float e_min = 0.25;
 
     for (x = x1, d = 1.0; x < x1 + w; d /= d_scale, x++) {
-        double e = 1.0 - d;
+        float e = 1.0 - d;
         e = fmax(e_min, e);
         c = col_tl;
         c.a = 255.0 * e;
@@ -727,7 +756,7 @@ void ascii_put_shaded_line (int x1, int x2, int y,
     }
 
     for (x = x2 - 1, d = 1.0; put_on_lhs > 0; d /= d_scale, x--, put_on_lhs--) {
-        double e = 1.0 - d;
+        float e = 1.0 - d;
         e = fmax(e_min, e);
         c = col_br;
         c.a = 255.0 * e;
@@ -786,20 +815,20 @@ static void ascii_map_thing_replace (int x, int y, Tilep tile, color c)
 static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in,
                            int flag, Tilep tile, color c)
 {_
-    double temp;
-    double dx;
-    double dy;
-    double tdy;
-    double dydx;
-    double p;
-    double x;
-    double y;
-    double i;
+    float temp;
+    float dx;
+    float dy;
+    float tdy;
+    float dydx;
+    float p;
+    float x;
+    float y;
+    float i;
 
-    double x0 = x0_in;
-    double y0 = y0_in;
-    double x1 = x1_in;
-    double y1 = y1_in;
+    float x0 = x0_in;
+    float y0 = y0_in;
+    float x1 = x1_in;
+    float y1 = y1_in;
 
     if (x0 > x1) {
         temp = x0;
@@ -855,7 +884,7 @@ static void do_ascii_line (int x0_in, int y0_in, int x1_in, int y1_in,
 
 void ascii_draw_line (int x0, int y0, int x1, int y1, Tilep tile, color c)
 {_
-    double slope = 100.0;
+    float slope = 100.0;
 
     if (x0 != x1) {
         slope = (y1 - y0) * (1.0 / (x1 - x0));
@@ -894,8 +923,8 @@ static void ascii_blit (int no_color)
      */
     int x;
     int y;
-    double tile_x;
-    double tile_y;
+    float tile_x;
+    float tile_y;
 
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -986,14 +1015,17 @@ static void ascii_blit (int no_color)
                     bg2_color_br = color_to_mono(bg2_color_br);
                 }
 
-                tile_blit_colored_fat(0,
-                                      cell->bg2_tile,
-                                      tile_tl,
-                                      tile_br,
-                                      bg2_color_tl,
-                                      bg2_color_tr,
-                                      bg2_color_bl,
-                                      bg2_color_br);
+                tile_blit_section_colored(nullptr, 
+                                          cell->bg2_tile,
+                                          fpoint(cell->bg2_tx,
+                                                 cell->bg2_ty),
+                                          fpoint(cell->bg2_tx + cell->bg2_dx,
+                                                 cell->bg2_ty + cell->bg2_dy),
+                                          tile_tl, tile_br,
+                                          bg2_color_tl,
+                                          bg2_color_tr,
+                                          bg2_color_bl,
+                                          bg2_color_br);
             }
 
             /*
