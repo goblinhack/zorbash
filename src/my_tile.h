@@ -139,6 +139,7 @@ void tile_load_arr(std::string tex,
                    uint32_t width, uint32_t height,
                    uint32_t nargs, const char * arr[]);
 Tilep tile_find(std::string name);
+Tilep tile_find_mand(std::string name);
 Tilep tile_from_surface(SDL_Surface *surface,
                         std::string optional_file,
                         std::string name);

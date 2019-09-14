@@ -6,8 +6,9 @@
 #include "my_sdl.h"
 #include "my_font.h"
 #include "my_ascii.h"
+#include <array>
 
-void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
+void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
                            color col_border_text, 
                            color col_tl, color col_mid, color col_br,
                            void *context)
@@ -16,55 +17,77 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
     int y;
 
     static bool init;
-    static Tilep tile_ui_tl = nullptr;
-    static Tilep tile_ui_br = nullptr;
-    static Tilep tile_ui_tr = nullptr;
-    static Tilep tile_ui_bl = nullptr;
-    static Tilep tile_ui_left = nullptr;
-    static Tilep tile_ui_right = nullptr;
-    static Tilep tile_ui_top = nullptr;
-    static Tilep tile_ui_bot = nullptr;
-    static Tilep tile_ui_bg1 = nullptr;
+    static const int MAX_STYLES = 5;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_tl;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_br;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_tr;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_bl;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_left;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_right;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_top;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_bot;
+    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_bg;
+
+    if (style >= MAX_STYLES) {
+        DIE("unimplemented style %d", style);
+    }
+
     if (!init) {
         init = true;
-        tile_ui_tl    = tile_find("ui-tl");
-        tile_ui_br    = tile_find("ui-br");
-        tile_ui_tr    = tile_find("ui-tr");
-        tile_ui_bl    = tile_find("ui-bl");
-        tile_ui_left  = tile_find("ui-left");
-        tile_ui_right = tile_find("ui-right");
-        tile_ui_top   = tile_find("ui-top");
-        tile_ui_bot   = tile_find("ui-bot");
-        tile_ui_bg1   = tile_find("ui-bg1");
+        for (auto styles = 0; styles < 5; styles++) {
+            std::string s = std::to_string(styles);
+            tile_ui_tl[styles].push_back(    tile_find_mand("ui" + s + "-tl"));
+            tile_ui_br[styles].push_back(    tile_find_mand("ui" + s + "-br"));
+            tile_ui_tr[styles].push_back(    tile_find_mand("ui" + s + "-tr"));
+            tile_ui_bl[styles].push_back(    tile_find_mand("ui" + s + "-bl"));
+            tile_ui_left[styles].push_back(  tile_find_mand("ui" + s + "-left1"));
+            tile_ui_left[styles].push_back(  tile_find_mand("ui" + s + "-left2"));
+            tile_ui_right[styles].push_back( tile_find_mand("ui" + s + "-right1"));
+            tile_ui_right[styles].push_back( tile_find_mand("ui" + s + "-right2"));
+            tile_ui_top[styles].push_back(   tile_find_mand("ui" + s + "-top1"));
+            tile_ui_top[styles].push_back(   tile_find_mand("ui" + s + "-top2"));
+            tile_ui_bot[styles].push_back(   tile_find_mand("ui" + s + "-bot1"));
+            tile_ui_bot[styles].push_back(   tile_find_mand("ui" + s + "-bot2"));
+            tile_ui_bg[styles].push_back(    tile_find_mand("ui" + s + "-bg1"));
+            tile_ui_bg[styles].push_back(    tile_find_mand("ui" + s + "-bg2"));
+            tile_ui_bg[styles].push_back(    tile_find_mand("ui" + s + "-bg3"));
+            tile_ui_bg[styles].push_back(    tile_find_mand("ui" + s + "-bg4"));
+        }
     }
+
+    int n = 0;
 
     if (y1 == y2) {
         y = y1;
         for (x = x1; x <= x2; x++) {
             ascii_set_bg(x, y, col_mid);
-            ascii_set_bg(x, y, tile_ui_bg1);
+            ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
+            n++;
         }
     } else {
         for (y = y1; y <= y2; y++) {
             for (x = x1; x <= x2; x++) {
                 ascii_set_bg(x, y, col_tl);
-                ascii_set_bg(x, y, tile_ui_bg1);
+                ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
+                n++;
             }
         }
 
         for (y = y1 + 1; y <= y2; y++) {
             for (x = x1 + 1; x <= x2; x++) {
                 ascii_set_bg(x, y, col_br);
-                ascii_set_bg(x, y, tile_ui_bg1);
+                ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
+                n++;
             }
-            ascii_set_bg(x1, y2, tile_ui_bg1);
+            ascii_set_bg(x1, y2, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
             ascii_set_bg(x1, y2, col_br);
         }
 
         for (y = y1 + 1; y <= y2 - 1; y++) {
             for (x = x1 + 1; x <= x2 - 1; x++) {
                 ascii_set_bg(x, y, col_mid);
-                ascii_set_bg(x, y, tile_ui_bg1);
+                ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
+                n++;
             }
         }
     }
@@ -72,8 +95,9 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
     for (x = x1; x <= x2; x++) {
         for (y = y1; y <= y2; y++) {
             ascii_set_context(x, y, context);
-            ascii_set_bg(x, y, tile_ui_bg1);
+            ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
             ascii_set_bg(x, y, col_mid);
+            n++;
         }
     }
 
@@ -86,21 +110,31 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
     }
 
     for (x = x1 + 1; x <= x2 - 1; x++) {
-        ascii_set_bg(x, y1, tile_ui_top);
-        ascii_set_bg(x, y2, tile_ui_bot);
+        ascii_set_bg(x, y1, tile_ui_top[style][n % tile_ui_top[style].size()]);
+        n++;
+        ascii_set_bg(x, y2, tile_ui_bot[style][n % tile_ui_bot[style].size()]);
+        n++;
         ascii_set_bg(x, y1, col_border_text);
         ascii_set_bg(x, y2, col_border_text);
     }
+
     for (y = y1 + 1; y <= y2 - 1; y++) {
-        ascii_set_bg(x1, y, tile_ui_left);
-        ascii_set_bg(x2, y, tile_ui_right);
+        ascii_set_bg(x1, y, tile_ui_left[style][n % tile_ui_left[style].size()]);
+        n++;
+        ascii_set_bg(x2, y, tile_ui_right[style][n % tile_ui_right[style].size()]);
+        n++;
         ascii_set_bg(x1, y, col_border_text);
         ascii_set_bg(x2, y, col_border_text);
     }
-    ascii_set_bg(x1, y1, tile_ui_tl);
-    ascii_set_bg(x2, y2, tile_ui_br);
-    ascii_set_bg(x2, y1, tile_ui_tr);
-    ascii_set_bg(x1, y2, tile_ui_bl);
+
+    ascii_set_bg(x1, y1, tile_ui_tl[style][n % tile_ui_tl[style].size()]);
+    n++;
+    ascii_set_bg(x2, y2, tile_ui_br[style][n % tile_ui_br[style].size()]);
+    n++;
+    ascii_set_bg(x2, y1, tile_ui_tr[style][n % tile_ui_tr[style].size()]);
+    n++;
+    ascii_set_bg(x1, y2, tile_ui_bl[style][n % tile_ui_bl[style].size()]);
+    n++;
 
     ascii_set_bg(x1, y1, col_border_text);
     ascii_set_bg(x2, y2, col_border_text);
@@ -108,7 +142,8 @@ void ascii_put_shaded_box (int x1, int y1, int x2, int y2,
     ascii_set_bg(x1, y2, col_border_text);
 }
 
-static void ascii_put_box_ (int x,
+static void ascii_put_box_ (int style,
+                            int x,
                             int y,
                             int width,
                             int height,
@@ -133,7 +168,7 @@ static void ascii_put_box_ (int x,
     auto b = std::wstring(buf);
     int len = ascii_strlen(b);
 
-    ascii_put_shaded_box(x, y,
+    ascii_put_shaded_box(style, x, y,
                          x + width - 1, y + height - 1,
                          col_border_text, col_tl, col_mid, col_br,
                          0 /* context */);
@@ -141,7 +176,7 @@ static void ascii_put_box_ (int x,
     ascii_putf__(x + ((width - len) / 2), y + 1, WHITE, COLOR_NONE, b);
 }
 
-void ascii_put_box (box_args b, const wchar_t *fmt, ...)
+void ascii_put_box (box_args b, int style, const wchar_t *fmt, ...)
 {_
     va_list args;
 
@@ -172,7 +207,8 @@ void ascii_put_box (box_args b, const wchar_t *fmt, ...)
      */
     va_start(args, fmt);
 
-    ascii_put_box_(b.x,
+    ascii_put_box_(style,
+                   b.x,
                    b.y,
                    b.width,
                    b.height,

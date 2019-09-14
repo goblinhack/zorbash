@@ -467,6 +467,7 @@ public:
     widp scrollbar_owner {};
 
     Tpp tp {};
+    int style {};
 
     //
     // The real position after scrollbar adjustments.
@@ -585,31 +586,13 @@ public:
     on_tick_t on_tick                 {};
 };
 
-static inline uint8_t wid_is_moving (widp w)
-{
-    verify(w.get());
-
-    if (w->moving) {
-        return (true);
-    }
-
-    return (false);
-}
+uint8_t wid_is_moving(widp w);
+void wid_set_style(widp w, int style);
+void wid_set_tile(widp w, Tilep tile);
 
 extern widp wid_mouse_template;
 
 extern const int32_t wid_destroy_delay_ms;
 extern std::wstring wid_tooltip_string;
 extern std::wstring wid_tooltip2_string;
-
-static inline
-void wid_set_tile (widp w, Tilep tile)
-{
-    verify(w.get());
-
-    w->tile = tile;
-    if (!w->first_tile) {
-        w->first_tile = tile;
-    }
-}
 #endif
