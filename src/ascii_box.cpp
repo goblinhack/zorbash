@@ -151,10 +151,10 @@ void ascii_put_box (box_args b, int style, const wchar_t *fmt, ...)
     va_list args;
 
     if (!b.width || !b.height) {
-        b.x = ASCII_MAP_TL_X;
-        b.y = ASCII_MAP_TL_Y;
-        b.width = ASCII_MAP_VISIBLE_WIDTH;
-        b.height = ASCII_MAP_VISIBLE_HEIGHT;
+        b.x = 0;
+        b.y = 0;
+        b.width = ASCII_WIDTH;
+        b.height = ASCII_HEIGHT;
     }
 
     if ((b.col_tl == COLOR_NONE) &&
