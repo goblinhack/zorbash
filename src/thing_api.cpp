@@ -615,11 +615,6 @@ int Thing::is_rrr4(void)
     return (tp_is_rrr4(tp()));
 }
 
-int Thing::is_rrr40(void)                                     
-{ 
-    return (tp_is_rrr40(tp()));
-}
-
 int Thing::is_rrr41(void)                                     
 { 
     return (tp_is_rrr41(tp()));

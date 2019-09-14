@@ -1719,7 +1719,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr37)
     TP_SET_DECL(is_rrr38)
     TP_SET_DECL(is_rrr39)
-    TP_SET_DECL(is_rrr40)
     TP_SET_DECL(is_rrr41)
     TP_SET_DECL(is_rrr42)
     TP_SET_DECL(is_rrr43)
