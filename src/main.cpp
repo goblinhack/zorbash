@@ -640,11 +640,11 @@ int32_t main (int32_t argc, char *argv[])
     // Create a fresh game if none was loaded
     //
     game->init();
-    game->fini();
-    game->init();
-    game->fini();
-    game->init();
 #if 0
+    game->fini();
+    game->init();
+    game->fini();
+    game->init();
     game->save();
     game->load();
 #endif

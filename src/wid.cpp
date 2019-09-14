@@ -6040,11 +6040,10 @@ static void wid_display (widp w,
         }
     }
 
-    Tilep tile = wid_get_tile(w);
-
     auto width = wid_get_width(w);
     auto height = wid_get_height(w);
-
+    Tilep tile = wid_get_tile(w);
+#if 0
     /*
      * Add the texture tile at a time
      */
@@ -6076,6 +6075,7 @@ static void wid_display (widp w,
             }
         }
     }
+#endif
 
     fsize texuv;
     (void) wid_get_tex(w, &texuv);
@@ -6155,13 +6155,13 @@ static void wid_display (widp w,
             w_box_args.col_tl = w_box_args.col_mid;
             w_box_args.col_br = w_box_args.col_mid;
 
-            ascii_put_box(w_box_args, w->style, L"");
+            ascii_put_box(w_box_args, w->style, tile, L"");
         }
     } else if (w->box) {
         /*
          * Bevelled box
          */
-        ascii_put_box(w_box_args, w->style, L"");
+        ascii_put_box(w_box_args, w->style, tile, L"");
     } else {
         /* shape none */
     }

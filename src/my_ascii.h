@@ -39,22 +39,22 @@ extern struct ascii_ ascii;
 extern int ASCII_WIDTH;
 extern int ASCII_HEIGHT;
 
-int ascii_ok(int x, int y);
 void pixel_to_ascii(int *x, int *y);
 
-void ascii_set_bg(int x, int y, Texp, double tx, double ty, double dx, double dy);
+void ascii_set_bg(int x, int y, Texp, float tx, float ty, float dx, float dy);
 void ascii_set_bg(int x, int y, Tilep);
 void ascii_set_bg(int x, int y, color c);
 void ascii_set_bg(int x, int y, const char *tilename);
 void ascii_set_bg(int x, int y, const wchar_t c);
 void ascii_set_bg2(int x, int y, Tilep);
+void ascii_set_bg2(int x, int y, Tilep, float tx, float ty, float dx, float dy);
 void ascii_set_bg2(int x, int y, color c);
 void ascii_set_fg(int x, int y, Tilep);
 void ascii_set_fg(int x, int y, color c);
 void ascii_set_fg(int x, int y, const char *tilename);
 void ascii_set_fg(int x, int y, const wchar_t c);
 
-void ascii_dim(int x, int y, int z, double alpha);
+void ascii_dim(int x, int y, int z, float alpha);
 
 void ascii_putf(int x, int y, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, const wchar_t *fmt, ...);
@@ -98,19 +98,6 @@ void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename,
                      color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep what, color c);
-
-void ascii_put_shaded_box(int x1, int y1, int x2, int y2,
-                          color col_border_text, color col_tl, color col_mid, color col_br,
-                          void *context);
-void ascii_put_shaded_box(int x1, int x2, int y1, int y2, const char *tilename,
-                          color c1, color c2, color c3, int alpha,
-                          void *context);
-void ascii_put_shaded_box(int x1, int x2, int y1, int y2, wchar_t what,
-                          color c1, color c2, color c3, int alpha,
-                          void *context);
-void ascii_put_shaded_box(int x1, int x2, int y1, int y2, Tilep what,
-                          color c1, color c2, color c3, int alpha,
-                          void *context);
 
 int ascii_strlen(std::wstring &);
 int ascii_strlen(std::wstring &buf, std::wstring *col);
@@ -168,12 +155,33 @@ typedef struct {
 extern color ascii_get_color(int x, int y, int z);
 extern void *ascii_get_context(int x, int y);
 extern void ascii_blit_layer(int z, int no_color);
-extern void ascii_put_box(box_args b, int style, const wchar_t *fmt, ...);
+extern void ascii_put_box(box_args b, int style, Tilep tile, const wchar_t *fmt, ...);
 extern void ascii_set_context(int x, int y, void *context);
 extern void ascii_shade(void);
 
-extern double tile_pix_w;
-extern double tile_pix_h;
+static inline int ascii_ok (int x, int y)
+{
+    if (unlikely(x < 0)) {
+        return (false);
+    }
+
+    if (unlikely(x >= ASCII_WIDTH)) {
+        return (false);
+    }
+
+    if (unlikely(y < 0)) {
+        return (false);
+    }
+
+    if (unlikely(y >= ASCII_HEIGHT)) {
+        return (false);
+    }
+
+    return (true);
+}
+
+extern float tile_pix_w;
+extern float tile_pix_h;
 
 #define ASCII_CURSOR_UCHAR     L'_'
 
