@@ -6064,6 +6064,17 @@ static void wid_display (widp w,
         }
     } else {
         tex = 0;
+
+        double dx = 1.0 / (double)width;
+        double dy = 1.0 / (double)height;
+        int x, y;
+        double tx, ty;
+        for (x = 0, tx = 0.0; x < width; x++, tx += dx) {
+            for (y = 0, ty = 0.0; y < height; y++, ty += dy) {
+                ascii_set_bg2(tlx + x, tly + y, tile);
+                // , tx, ty, dx, dy);
+            }
+        }
     }
 
     fsize texuv;

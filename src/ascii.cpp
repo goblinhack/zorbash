@@ -17,6 +17,7 @@ int ASCII_HEIGHT;
 typedef struct {
     Tilep fg_tile;
     Tilep bg_tile;
+    Tilep bg2_tile;
 
     Texp tex;
     double tx;
@@ -32,6 +33,11 @@ typedef struct {
     color bg_color_bl;
     color bg_color_tr;
     color bg_color_br;
+    color bg2_color_tl;
+    color bg2_color_bl;
+    color bg2_color_tr;
+    color bg2_color_br;
+
     /*
      * Is reset each frame, and so although a pointer potentially should be
      * zeroed out on game load once it is used.
@@ -188,6 +194,17 @@ void ascii_set_bg (int x, int y, const Tilep tile)
     cell->bg_tile = tile;
 }
 
+void ascii_set_bg2 (int x, int y, const Tilep tile)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &cells[x][y];
+
+    cell->bg2_tile = tile;
+}
+
 void ascii_set_bg (int x, int y, const char *tilename)
 {
     ascii_set_bg(x, y, tile_find(tilename));
@@ -196,6 +213,16 @@ void ascii_set_bg (int x, int y, const char *tilename)
 void ascii_set_bg (int x, int y, const wchar_t c)
 {
     ascii_set_bg(x, y, fixed_font->unicode_to_tile(c));
+}
+
+void ascii_set_bg2 (int x, int y, const char *tilename)
+{
+    ascii_set_bg2(x, y, tile_find(tilename));
+}
+
+void ascii_set_bg2 (int x, int y, const wchar_t c)
+{
+    ascii_set_bg2(x, y, fixed_font->unicode_to_tile(c));
 }
 
 void ascii_set_fg (int x, int y, const Tilep tile)
@@ -909,10 +936,6 @@ static void ascii_blit (int no_color)
             }
 
             /*
-             * Small speedup as don't need this
-             */
-
-            /*
              * Background
              */
             if (cell->tex) {
@@ -948,6 +971,29 @@ static void ascii_blit (int no_color)
                                       bg_color_tr,
                                       bg_color_bl,
                                       bg_color_br);
+            }
+
+            if (cell->bg2_tile) {
+                color bg2_color_tl = cell->bg2_color_tl;
+                color bg2_color_tr = cell->bg2_color_tr;
+                color bg2_color_bl = cell->bg2_color_bl;
+                color bg2_color_br = cell->bg2_color_br;
+
+                if (no_color) {
+                    bg2_color_tl = color_to_mono(bg2_color_tl);
+                    bg2_color_tr = color_to_mono(bg2_color_tr);
+                    bg2_color_bl = color_to_mono(bg2_color_bl);
+                    bg2_color_br = color_to_mono(bg2_color_br);
+                }
+
+                tile_blit_colored_fat(0,
+                                      cell->bg2_tile,
+                                      tile_tl,
+                                      tile_br,
+                                      bg2_color_tl,
+                                      bg2_color_tr,
+                                      bg2_color_bl,
+                                      bg2_color_br);
             }
 
             /*

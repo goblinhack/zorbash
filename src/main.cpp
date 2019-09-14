@@ -622,10 +622,6 @@ int32_t main (int32_t argc, char *argv[])
 	ERR("wid_console init");
     }
 
-    if (!wid_test_init()) {
-	ERR("wid_test init");
-    }
-
     if (!command_init()) {
 	ERR("command init");
     }
@@ -652,6 +648,10 @@ int32_t main (int32_t argc, char *argv[])
     game->save();
     game->load();
 #endif
+
+    if (!wid_test_init()) {
+	ERR("wid_test init");
+    }
 
     sdl_loop();
     gl_leave_2d_mode();

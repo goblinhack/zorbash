@@ -10,19 +10,6 @@
 #include "my_tile.h"
 #include "my_color.h"
 
-#define ASCII_MAP_TL_X              (ASCII_WIDTH - ASCII_WIDTH)
-#define ASCII_MAP_BR_X              (ASCII_WIDTH-1)
-#define ASCII_MAP_VISIBLE_WIDTH     (ASCII_MAP_BR_X - ASCII_MAP_TL_X + 1)
-#define ASCII_MAP_VISIBLE_HEIGHT    (ASCII_MAP_BR_Y - ASCII_MAP_TL_Y + 1)
-#define ASCII_UI_NOTIFY_TL_X        ASCII_MAP_TL_X
-#define ASCII_UI_NOTIFY_TL_Y        0
-#define ASCII_UI_NOTIFY_HEIGHT      3 // @ top of screen
-#define ASCII_UI_NOTIFY_WIDTH       ASCII_MAP_VISIBLE_WIDTH
-#define ASCII_UI_NOTIFY_LINES       100 // how much history?
-#define ASCII_UI_NOTIFY2_HEIGHT     2 // @ bottom of screen
-#define ASCII_MAP_TL_Y              (ASCII_UI_NOTIFY_HEIGHT)
-#define ASCII_MAP_BR_Y              (ASCII_HEIGHT-ASCII_UI_NOTIFY2_HEIGHT-1)
-
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_KEYSYM * key);
 typedef int (*ascii_mouse_down_callback)(int x, int y, int button);
 typedef int (*ascii_mouse_over_callback)(int x, int y);
@@ -55,17 +42,17 @@ extern int ASCII_HEIGHT;
 int ascii_ok(int x, int y);
 void pixel_to_ascii(int *x, int *y);
 
-void ascii_set_bg_solid(int x, int y);
-void ascii_set_fg(int x, int y, color c);
+void ascii_set_bg(int x, int y, Texp, double tx, double ty, double dx, double dy);
+void ascii_set_bg(int x, int y, Tilep);
 void ascii_set_bg(int x, int y, color c);
 void ascii_set_bg(int x, int y, const char *tilename);
-void ascii_set_fg(int x, int y, const char *tilename);
 void ascii_set_bg(int x, int y, const wchar_t c);
-void ascii_set_fg(int x, int y, const wchar_t c);
-void ascii_set_bg(int x, int y, Tilep);
+void ascii_set_bg2(int x, int y, Tilep);
+void ascii_set_bg2(int x, int y, color c);
 void ascii_set_fg(int x, int y, Tilep);
-void ascii_set_bg(int x, int y, Texp, double tx, double ty,
-                  double dx, double dy);
+void ascii_set_fg(int x, int y, color c);
+void ascii_set_fg(int x, int y, const char *tilename);
+void ascii_set_fg(int x, int y, const wchar_t c);
 
 void ascii_dim(int x, int y, int z, double alpha);
 
