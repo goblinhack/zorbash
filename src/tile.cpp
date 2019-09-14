@@ -267,9 +267,9 @@ void tile_load_arr (std::string tex_name,
 
         if (y * height > tex_get_height(tex)) {
             if (name != "") {
-                ERR("overflow reading tile arr[%s]", name.c_str());
+                DIE("overflow reading tile arr[%s]", name.c_str());
             } else {
-                ERR("overflow reading tile arr at x %d y %d", x, y);
+                DIE("overflow reading tile arr at x %d y %d", x, y);
             }
         }
     }

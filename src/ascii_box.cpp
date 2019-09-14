@@ -18,15 +18,9 @@ void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
 
     static bool init;
     static const int MAX_STYLES = 5;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_tl;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_br;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_tr;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_bl;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_left;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_right;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_top;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_bot;
-    static std::array<std::vector<Tilep>, MAX_STYLES> tile_ui_bg;
+    static const int MAX_UI_SIZE = 16;
+    static const int MAX_UI_BG_SIZE = MAX_UI_SIZE - 2;
+    static Tilep tiles[MAX_STYLES][MAX_UI_SIZE][MAX_UI_SIZE];
 
     if (style >= MAX_STYLES) {
         DIE("unimplemented style %d", style);
@@ -35,59 +29,44 @@ void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
     if (!init) {
         init = true;
         for (auto styles = 0; styles < 5; styles++) {
-            std::string s = std::to_string(styles);
-            tile_ui_tl[styles].push_back(    tile_find_mand("ui" + s + "-tl"));
-            tile_ui_br[styles].push_back(    tile_find_mand("ui" + s + "-br"));
-            tile_ui_tr[styles].push_back(    tile_find_mand("ui" + s + "-tr"));
-            tile_ui_bl[styles].push_back(    tile_find_mand("ui" + s + "-bl"));
-            tile_ui_left[styles].push_back(  tile_find_mand("ui" + s + "-left1"));
-            tile_ui_left[styles].push_back(  tile_find_mand("ui" + s + "-left2"));
-            tile_ui_right[styles].push_back( tile_find_mand("ui" + s + "-right1"));
-            tile_ui_right[styles].push_back( tile_find_mand("ui" + s + "-right2"));
-            tile_ui_top[styles].push_back(   tile_find_mand("ui" + s + "-top1"));
-            tile_ui_top[styles].push_back(   tile_find_mand("ui" + s + "-top2"));
-            tile_ui_bot[styles].push_back(   tile_find_mand("ui" + s + "-bot1"));
-            tile_ui_bot[styles].push_back(   tile_find_mand("ui" + s + "-bot2"));
-            tile_ui_bg[styles].push_back(    tile_find_mand("ui" + s + "-bg1"));
-            tile_ui_bg[styles].push_back(    tile_find_mand("ui" + s + "-bg2"));
-            tile_ui_bg[styles].push_back(    tile_find_mand("ui" + s + "-bg3"));
-            tile_ui_bg[styles].push_back(    tile_find_mand("ui" + s + "-bg4"));
+            for (auto x = 0; x < MAX_UI_SIZE; x++) {
+                for (auto y = 0; y < MAX_UI_SIZE; y++) {
+                    std::string name = 
+                        "ui" + std::to_string(styles) + "," +
+                        std::to_string(x) + "," + std::to_string(y);
+                    tiles[styles][x][y] = tile_find_mand(name);
+                }
+            }
         }
     }
-
-    int n = 0;
 
     if (y1 == y2) {
         y = y1;
         for (x = x1; x <= x2; x++) {
             ascii_set_bg(x, y, col_mid);
-            ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
-            n++;
+            ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
         }
     } else {
         for (y = y1; y <= y2; y++) {
             for (x = x1; x <= x2; x++) {
+                ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
                 ascii_set_bg(x, y, col_tl);
-                ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
-                n++;
             }
         }
 
         for (y = y1 + 1; y <= y2; y++) {
             for (x = x1 + 1; x <= x2; x++) {
+                ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
                 ascii_set_bg(x, y, col_br);
-                ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
-                n++;
             }
-            ascii_set_bg(x1, y2, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
+            ascii_set_bg(x1, y2, tiles[style][(x1 % MAX_UI_BG_SIZE)+1][(y2 % MAX_UI_BG_SIZE)+1]);
             ascii_set_bg(x1, y2, col_br);
         }
 
         for (y = y1 + 1; y <= y2 - 1; y++) {
             for (x = x1 + 1; x <= x2 - 1; x++) {
+                ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
                 ascii_set_bg(x, y, col_mid);
-                ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
-                n++;
             }
         }
     }
@@ -95,9 +74,8 @@ void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
     for (x = x1; x <= x2; x++) {
         for (y = y1; y <= y2; y++) {
             ascii_set_context(x, y, context);
-            ascii_set_bg(x, y, tile_ui_bg[style][n % tile_ui_bg[style].size()]);
+            ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
             ascii_set_bg(x, y, col_mid);
-            n++;
         }
     }
 
@@ -110,31 +88,23 @@ void ascii_put_shaded_box (int style, int x1, int y1, int x2, int y2,
     }
 
     for (x = x1 + 1; x <= x2 - 1; x++) {
-        ascii_set_bg(x, y1, tile_ui_top[style][n % tile_ui_top[style].size()]);
-        n++;
-        ascii_set_bg(x, y2, tile_ui_bot[style][n % tile_ui_bot[style].size()]);
-        n++;
+        ascii_set_bg(x, y1, tiles[style][(x % MAX_UI_BG_SIZE)+1][0]);
+        ascii_set_bg(x, y2, tiles[style][(x % MAX_UI_BG_SIZE)+1][MAX_UI_SIZE - 1]);
         ascii_set_bg(x, y1, col_border_text);
         ascii_set_bg(x, y2, col_border_text);
     }
 
     for (y = y1 + 1; y <= y2 - 1; y++) {
-        ascii_set_bg(x1, y, tile_ui_left[style][n % tile_ui_left[style].size()]);
-        n++;
-        ascii_set_bg(x2, y, tile_ui_right[style][n % tile_ui_right[style].size()]);
-        n++;
+        ascii_set_bg(x1, y, tiles[style][0][(y % MAX_UI_BG_SIZE)+1]);
+        ascii_set_bg(x2, y, tiles[style][MAX_UI_SIZE - 1][(y % MAX_UI_BG_SIZE)+1]);
         ascii_set_bg(x1, y, col_border_text);
         ascii_set_bg(x2, y, col_border_text);
     }
 
-    ascii_set_bg(x1, y1, tile_ui_tl[style][n % tile_ui_tl[style].size()]);
-    n++;
-    ascii_set_bg(x2, y2, tile_ui_br[style][n % tile_ui_br[style].size()]);
-    n++;
-    ascii_set_bg(x2, y1, tile_ui_tr[style][n % tile_ui_tr[style].size()]);
-    n++;
-    ascii_set_bg(x1, y2, tile_ui_bl[style][n % tile_ui_bl[style].size()]);
-    n++;
+    ascii_set_bg(x1, y1, tiles[style][0][0]);
+    ascii_set_bg(x2, y2, tiles[style][MAX_UI_SIZE - 1][MAX_UI_SIZE - 1]);
+    ascii_set_bg(x2, y1, tiles[style][MAX_UI_SIZE - 1][0]);
+    ascii_set_bg(x1, y2, tiles[style][0][MAX_UI_SIZE - 1]);
 
     ascii_set_bg(x1, y1, col_border_text);
     ascii_set_bg(x2, y2, col_border_text);
