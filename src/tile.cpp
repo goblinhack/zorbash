@@ -293,6 +293,23 @@ Tilep tile_find (std::string name)
     return (result->second);
 }
 
+Tilep tile_find_mand (std::string name)
+{_
+    if (name == "") {
+        DIE("no tile name give");
+	return (0);
+    }
+
+    auto result = all_tiles.find(name);
+
+    if (result == all_tiles.end()) {
+        DIE("tile name %s not found", name.c_str());
+        return (0);
+    }
+
+    return (result->second);
+}
+
 int32_t tile_get_gl_binding (Tilep tile)
 {
     return (tile->gl_surface_binding);

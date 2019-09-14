@@ -60,30 +60,50 @@ def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
 
 def init_16x16_ui():
-    zx.tex_load(
-            file="data/gfx/16x16_ui.tga",
-            name="16x16_ui")
-
+    zx.tex_load(file="data/gfx/16x16_ui0.tga", name="16x16_ui0")
     tiles = [
-            "ui-tl",
-            "ui-top",
-            "",
-            "ui-tr",
-            "ui-left",
-            "ui-bg1",
-            "",
-            "ui-right",
-            "",
-            "",
-            "",
-            "",
-            "ui-bl",
-            "ui-bot",
-            "",
-            "ui-br",
+            "ui0-tl",    "ui0-top1", "ui0-top2", "ui0-tr",
+            "ui0-left1", "ui0-bg1",  "ui0-bg2",  "ui0-right1",
+            "ui0-left2", "ui0-bg3",  "ui0-bg4",  "ui0-right2",
+            "ui0-bl",    "ui0-bot1", "ui0-bot2", "ui0-br",
     ]
+    zx.tile_load_arr(tex_name="16x16_ui0", width=16, height=16, arr=tiles)
 
+    zx.tex_load(file="data/gfx/16x16_ui1.tga", name="16x16_ui")
+    tiles = [
+            "ui1-tl",    "ui1-top1", "ui1-top2", "ui1-tr",
+            "ui1-left1", "ui1-bg1",  "ui1-bg2",  "ui1-right1",
+            "ui1-left2", "ui1-bg3",  "ui1-bg4",  "ui1-right2",
+            "ui1-bl",    "ui1-bot1", "ui1-bot2", "ui1-br",
+    ]
     zx.tile_load_arr(tex_name="16x16_ui", width=16, height=16, arr=tiles)
+
+    zx.tex_load(file="data/gfx/16x16_ui2.tga", name="16x16_ui2")
+    tiles = [
+            "ui2-tl",    "ui2-top1", "ui2-top2", "ui2-tr",
+            "ui2-left1", "ui2-bg1",  "ui2-bg2",  "ui2-right1",
+            "ui2-left2", "ui2-bg3",  "ui2-bg4",  "ui2-right2",
+            "ui2-bl",    "ui2-bot1", "ui2-bot2", "ui2-br",
+    ]
+    zx.tile_load_arr(tex_name="16x16_ui2", width=16, height=16, arr=tiles)
+
+    zx.tex_load(file="data/gfx/16x16_ui3.tga", name="16x16_ui3")
+    tiles = [
+            "ui3-tl",    "ui3-top1", "ui3-top2", "ui3-tr",
+            "ui3-left1", "ui3-bg1",  "ui3-bg2",  "ui3-right1",
+            "ui3-left2", "ui3-bg3",  "ui3-bg4",  "ui3-right2",
+            "ui3-bl",    "ui3-bot1", "ui3-bot2", "ui3-br",
+    ]
+    zx.tile_load_arr(tex_name="16x16_ui3", width=16, height=16, arr=tiles)
+
+    zx.tex_load(file="data/gfx/16x16_ui4.tga", name="16x16_ui4")
+    tiles = [
+            "ui4-tl",    "ui4-top1", "ui4-top2", "ui4-tr",
+            "ui4-left1", "ui4-bg1",  "ui4-bg2",  "ui4-right1",
+            "ui4-left2", "ui4-bg3",  "ui4-bg4",  "ui4-right2",
+            "ui4-bl",    "ui4-bot1", "ui4-bot2", "ui4-br",
+    ]
+    zx.tile_load_arr(tex_name="16x16_ui4", width=16, height=16, arr=tiles)
 
 def init_16x16():
     zx.tex_load(

@@ -6144,13 +6144,13 @@ static void wid_display (widp w,
             w_box_args.col_tl = w_box_args.col_mid;
             w_box_args.col_br = w_box_args.col_mid;
 
-            ascii_put_box(w_box_args, L"");
+            ascii_put_box(w_box_args, w->style, L"");
         }
     } else if (w->box) {
         /*
          * Bevelled box
          */
-        ascii_put_box(w_box_args, L"");
+        ascii_put_box(w_box_args, w->style, L"");
     } else {
         /* shape none */
     }
@@ -6850,4 +6850,30 @@ void wid_move_to_centered_in (widp w, int32_t x, int32_t y, uint32_t ms)
     verify(w.get());
 
     wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
+}
+
+uint8_t wid_is_moving (widp w)
+{
+    verify(w.get());
+
+    if (w->moving) {
+        return (true);
+    }
+
+    return (false);
+}
+
+void wid_set_style (widp w, int style)
+{
+    w->style = style;
+}
+
+void wid_set_tile (widp w, Tilep tile)
+{
+    verify(w.get());
+
+    w->tile = tile;
+    if (!w->first_tile) {
+        w->first_tile = tile;
+    }
 }
