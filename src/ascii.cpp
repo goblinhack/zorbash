@@ -1002,6 +1002,31 @@ static void ascii_blit (int no_color)
                                       bg_color_br);
             }
 
+            tile_x += game->config.ascii_gl_width;
+        }
+
+        tile_y += game->config.ascii_gl_height;
+    }
+
+    //
+    // Tiles outline
+    // 
+    tile_y = 0;
+    for (y = 0; y < ASCII_HEIGHT; y++) {
+
+        tile_x = 0;
+        for (x = 0; x < ASCII_WIDTH; x++) {
+
+            const ascii_cell *cell = &cells[x][y];
+
+            fpoint tile_tl;
+            fpoint tile_br;
+
+            tile_tl.x = tile_x;
+            tile_tl.y = tile_y;
+            tile_br.x = tile_x + game->config.ascii_gl_width;
+            tile_br.y = tile_y + game->config.ascii_gl_height;
+
             if (cell->bg2_tile) {
                 color bg2_color_tl = cell->bg2_color_tl;
                 color bg2_color_tr = cell->bg2_color_tr;
@@ -1015,18 +1040,92 @@ static void ascii_blit (int no_color)
                     bg2_color_br = color_to_mono(bg2_color_br);
                 }
 
-                tile_blit_section_colored(nullptr, 
-                                          cell->bg2_tile,
-                                          fpoint(cell->bg2_tx,
-                                                 cell->bg2_ty),
-                                          fpoint(cell->bg2_tx + cell->bg2_dx,
-                                                 cell->bg2_ty + cell->bg2_dy),
-                                          tile_tl, tile_br,
-                                          bg2_color_tl,
-                                          bg2_color_tr,
-                                          bg2_color_bl,
-                                          bg2_color_br);
+                tile_blit_outline_section_colored(
+                   nullptr, 
+                   cell->bg2_tile,
+                   fpoint(cell->bg2_tx, cell->bg2_ty),
+                   fpoint(cell->bg2_tx + cell->bg2_dx, 
+                          cell->bg2_ty + cell->bg2_dy),
+                   tile_tl, tile_br,
+                   bg2_color_tl,
+                   bg2_color_tr,
+                   bg2_color_bl,
+                   bg2_color_br,
+                   0.05 / cell->bg2_dx);
             }
+
+            tile_x += game->config.ascii_gl_width;
+        }
+
+        tile_y += game->config.ascii_gl_height;
+    }
+
+    //
+    // Tiles
+    // 
+    tile_y = 0;
+    for (y = 0; y < ASCII_HEIGHT; y++) {
+
+        tile_x = 0;
+        for (x = 0; x < ASCII_WIDTH; x++) {
+
+            const ascii_cell *cell = &cells[x][y];
+
+            fpoint tile_tl;
+            fpoint tile_br;
+
+            tile_tl.x = tile_x;
+            tile_tl.y = tile_y;
+            tile_br.x = tile_x + game->config.ascii_gl_width;
+            tile_br.y = tile_y + game->config.ascii_gl_height;
+
+            if (cell->bg2_tile) {
+                color bg2_color_tl = cell->bg2_color_tl;
+                color bg2_color_tr = cell->bg2_color_tr;
+                color bg2_color_bl = cell->bg2_color_bl;
+                color bg2_color_br = cell->bg2_color_br;
+
+                if (no_color) {
+                    bg2_color_tl = color_to_mono(bg2_color_tl);
+                    bg2_color_tr = color_to_mono(bg2_color_tr);
+                    bg2_color_bl = color_to_mono(bg2_color_bl);
+                    bg2_color_br = color_to_mono(bg2_color_br);
+                }
+
+                tile_blit_section_colored(
+                   nullptr, 
+                   cell->bg2_tile,
+                   fpoint(cell->bg2_tx, cell->bg2_ty),
+                   fpoint(cell->bg2_tx + cell->bg2_dx, 
+                          cell->bg2_ty + cell->bg2_dy),
+                   tile_tl, tile_br,
+                   bg2_color_tl,
+                   bg2_color_tr,
+                   bg2_color_bl,
+                   bg2_color_br);
+            }
+
+            tile_x += game->config.ascii_gl_width;
+        }
+
+        tile_y += game->config.ascii_gl_height;
+    }
+
+    tile_y = 0;
+    for (y = 0; y < ASCII_HEIGHT; y++) {
+
+        tile_x = 0;
+        for (x = 0; x < ASCII_WIDTH; x++) {
+
+            const ascii_cell *cell = &cells[x][y];
+
+            fpoint tile_tl;
+            fpoint tile_br;
+
+            tile_tl.x = tile_x;
+            tile_tl.y = tile_y;
+            tile_br.x = tile_x + game->config.ascii_gl_width;
+            tile_br.y = tile_y + game->config.ascii_gl_height;
 
             /*
              * Foreground
