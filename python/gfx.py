@@ -179,7 +179,7 @@ def init_16x16():
             "player1.6",
             "",
             "player1.dead",
-            "",
+            "sword1.1",
             "",
             "",
             "",
@@ -3110,7 +3110,7 @@ def init_weapons_tiles():
             name="weapons")
 
     tiles = [
-            "sword1.1",
+            "",
             "sword1_carry_anim.1",
             "sword1_carry_anim.2",
             "sword1_swing_anim_left.1",
