@@ -103,7 +103,8 @@ static void wid_console_log_ (std::wstring s)
     if (!wid_console_input_line) {
         auto m = std::make_shared< class wid_console_line >(s);
 
-        auto result = wid_console_lines.insert(std::make_pair(log_wid_console_buffered_lines++, m));
+        auto result = wid_console_lines.insert(
+                        std::make_pair(log_wid_console_buffered_lines++, m));
 
         if (result.second == false) {
             DIE("wid console lines insert name [%s] failed", wstring_to_string(s).c_str());
