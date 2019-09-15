@@ -11,6 +11,7 @@
 #include "my_command.h"
 #include "my_time.h"
 #include "my_wid_console.h"
+#include "my_wid_minicon.h"
 #include "my_math.h"
 #include "my_wid_tiles.h"
 #include "my_game.h"
@@ -475,7 +476,7 @@ widp wid_get_next (widp w)
     return (w->next);
 }
 
-static widp wid_get_head (widp w)
+widp wid_get_head (widp w)
 {_
     widp prev;
 
@@ -492,7 +493,7 @@ static widp wid_get_head (widp w)
     return (w);
 }
 
-static widp wid_get_tail (widp w)
+widp wid_get_tail (widp w)
 {_
     widp next;
 

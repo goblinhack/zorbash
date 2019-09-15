@@ -245,6 +245,8 @@ widp wid_find(widp, std::string name);
 widp wid_get_current_focus(void);
 widp wid_get_focus(widp);
 widp wid_get_next(widp);
+widp wid_get_tail(widp);
+widp wid_get_head(widp);
 widp wid_get_parent(widp);
 widp wid_get_prev(widp);
 widp wid_get_scrollbar_horiz(widp);

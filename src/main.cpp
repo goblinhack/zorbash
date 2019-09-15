@@ -12,6 +12,7 @@
 #include "my_python.h"
 #include "my_gl.h"
 #include "my_wid_console.h"
+#include "my_wid_minicon.h"
 #include "my_wid_test.h"
 #include "my_font.h"
 #include "my_dir.h"
@@ -120,6 +121,11 @@ void quit (void)
 {_
     LOG("quit:wid_console_fini");
     wid_console_fini();
+}
+
+{_
+    LOG("quit:wid_minicon_fini");
+    wid_minicon_fini();
 }
 
 {_
@@ -620,6 +626,10 @@ int32_t main (int32_t argc, char *argv[])
 
     if (!wid_console_init()) {
 	ERR("wid_console init");
+    }
+
+    if (!wid_minicon_init()) {
+	ERR("wid_minicon init");
     }
 
     if (!command_init()) {

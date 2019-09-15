@@ -7,6 +7,7 @@
 #include "my_backtrace.h"
 #include "my_wid.h"
 #include "my_wid_console.h"
+#include "my_wid_minicon.h"
 #include "my_python.h"
 #include "my_console.h"
 #include "my_game.h"
@@ -15,9 +16,6 @@ uint8_t croaked;
 
 static bool debug = false;
 
-/*
- * putfg
- */
 static void putfg (uint8_t fg, FILE *fp)
 {
     static const char *data[] = {
@@ -29,9 +27,6 @@ static void putfg (uint8_t fg, FILE *fp)
     fputs(data[fg], fp);
 }
 
-/*
- * putbg
- */
 static void putbg (uint8_t bg, FILE *fp)
 {
     static const char *data[] = {
@@ -267,6 +262,82 @@ void con (const wchar_t *fmt)
     putchar('\n');
 }
 
+static void minicon_ (const char *fmt, va_list args)
+{
+    char buf[MAXSHORTSTR];
+    uint32_t len;
+
+    buf[0] = '\0';
+    timestamp(buf, MAXSHORTSTR);
+    len = (uint32_t)strlen(buf);
+    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+    fflush(MY_STDOUT);
+
+    term_log(buf);
+    putchar('\n');
+
+    wid_minicon_log(buf + len);
+    wid_console_log(buf + len);
+}
+
+static void minicon_ (const wchar_t *fmt, va_list args)
+{
+    {
+        char buf[MAXSHORTSTR];
+
+        buf[0] = '\0';
+        timestamp(buf, MAXSHORTSTR);
+        fprintf(MY_STDOUT, "%s", buf);
+        fflush(MY_STDOUT);
+        term_log(buf);
+    }
+
+    {
+        wchar_t buf[MAXSHORTSTR];
+        auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
+
+        /*
+         * Only a single nul is written, but as we read 2 at a time...
+         */
+        if (wrote && (wrote < MAXSHORTSTR - 1)) {
+            buf[wrote+1] = '\0';
+        } else {
+            fprintf(stderr, "Failed to minicon log: [%S]\n", fmt);
+        }
+
+        fwprintf(MY_STDOUT, L"%S\n", buf);
+        fflush(MY_STDOUT);
+        term_log(buf);
+        wid_minicon_log(buf);
+        wid_console_log(buf);
+    }
+    putchar('\n');
+}
+
+void minicon (const wchar_t *fmt)
+{
+    {
+        char buf[MAXSHORTSTR];
+
+        buf[0] = '\0';
+        timestamp(buf, MAXSHORTSTR);
+        fprintf(MY_STDOUT, "%s", buf);
+        fflush(MY_STDOUT);
+        term_log(buf);
+    }
+
+    {
+        fwprintf(MY_STDOUT, L"%S\n", fmt);
+        fflush(MY_STDOUT);
+        term_log(fmt);
+        wid_minicon_log(fmt);
+        wid_console_log(fmt);
+    }
+    putchar('\n');
+}
+
 static void tip_ (const wchar_t *fmt, va_list args)
 {
     wchar_t buf[MAXSHORTSTR];
@@ -350,6 +421,24 @@ void CON (const wchar_t *fmt, ...)
 
     va_start(args, fmt);
     con_(fmt, args);
+    va_end(args);
+}
+
+void MINICON (const char *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    minicon_(fmt, args);
+    va_end(args);
+}
+
+void MINICON (const wchar_t *fmt, ...)
+{
+    va_list args;
+
+    va_start(args, fmt);
+    minicon_(fmt, args);
     va_end(args);
 }
 

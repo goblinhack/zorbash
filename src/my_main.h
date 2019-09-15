@@ -101,6 +101,13 @@ extern int TILES_DOWN;
 #define CONSOLE_HEIGHT              200
 
 //
+// Minicon
+//
+#define MINICON_TEXT_COLOR          GRAY
+#define MINICON_WIDTH               120
+#define MINICON_HEIGHT              200
+
+//
 // Fonts
 //
 //#define ENABLE_GENERATE_TTF
@@ -235,16 +242,19 @@ void LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void LOGS(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void WARN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void TIP(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void TIP2(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 
 void CON(const wchar_t *fmt, ...);
+void MINICON(const wchar_t *fmt, ...);
 void TIP(const wchar_t *fmt, ...);
 void TIP2(const wchar_t *fmt, ...);
 
-void con (const wchar_t *fmt);
-void tip2 (const wchar_t *fmt);
-void tip (const wchar_t *fmt);
+void con(const wchar_t *fmt);
+void minicon(const wchar_t *fmt);
+void tip2(const wchar_t *fmt);
+void tip(const wchar_t *fmt);
 
 #include "my_callstack.h"
 
