@@ -81,8 +81,8 @@ static void ascii_put_shaded_box (int style, Tilep tile,
     }
 
     if (unlikely(tile != nullptr)) {
-        float dx = 1.0 / ((float)x2 - (float)x1);
-        float dy = 1.0 / ((float)y2 - (float)y1);
+        float dx = 1.0 / ((float)x2 - (float)x1 + 1);
+        float dy = 1.0 / ((float)y2 - (float)y1 + 1);
 
         for (x = x1; x <= x2; x++) {
             for (y = y1; y <= y2; y++) {
@@ -92,14 +92,6 @@ static void ascii_put_shaded_box (int style, Tilep tile,
                 ascii_set_bg2(x, y, col_mid);
             }
         }
-    }
-
-    if (unlikely(y2 - y1) < 2) {
-        return;
-    }
-
-    if (unlikely(x1 == x2)) {
-        return;
     }
 
     for (x = x1 + 1; x <= x2 - 1; x++) {
