@@ -174,30 +174,31 @@ void wid_minicon_log (std::wstring s)
  */
 static void wid_minicon_wid_create (void)
 {_
-    int h = 20;
+    int h = MINICON_VIS_HEIGHT;
+
     {
         point tl = {0, 0};
-        point br = {40, h};
+        point br = {MINICON_VIS_WIDTH, h};
 
         wid_minicon_window = wid_new_square_window("wid_minicon");
         wid_set_name(wid_minicon_window, "wid_minicon window");
         wid_set_pos(wid_minicon_window, tl, br);
-        wid_set_shape_box(wid_minicon_window);
-        wid_set_style(wid_minicon_window, 1);
+        wid_set_shape_none(wid_minicon_window);
+        wid_set_style(wid_minicon_window, 0);
     }
 
     {
         point tl = {0, 0};
-        point br = {40, h};
+        point br = {MINICON_VIS_WIDTH, h};
 
         wid_minicon_container = wid_new_container(wid_minicon_window,
                                                   "wid minicon container");
         wid_set_pos(wid_minicon_container, tl, br);
         wid_set_shape_box(wid_minicon_container);
-        wid_set_style(wid_minicon_container, 2);
+        wid_set_style(wid_minicon_container, 0);
     }
 
-    {
+  {
         int32_t row;
         int row_bottom = h - 1;
 
@@ -243,8 +244,6 @@ static void wid_minicon_wid_create (void)
 
     wid_hide(wid_get_parent(wid_minicon_vert_scroll));
     wid_hide(wid_get_parent(wid_minicon_horiz_scroll));
-
-    wid_move_delta(wid_minicon_window, 10, 10);
 
     wid_update(wid_minicon_window);
 }

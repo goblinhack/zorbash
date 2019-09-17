@@ -26,9 +26,9 @@
 #undef DEBUG_WID_FOCUS
 
 #ifdef ENABLE_INVERTED_GFX
-static bool inverted_gfx = true;
+bool inverted_gfx = true;
 #else
-static bool inverted_gfx = false;
+bool inverted_gfx = false;
 #endif
 
 /*
@@ -6406,23 +6406,13 @@ void wid_display_all (void)
     wid_tick_all();
     wid_move_all();
 
-    blit_fbo_bind(FBO_MAIN);
+    blit_fbo_bind(FBO_WID);
 
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
-    game->display();
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    {
-        for (auto x = 0; x < ASCII_WIDTH; x++) {
-            for (auto y = 0; y < ASCII_HEIGHT; y++) {
-                wid_on_screen_at[x][y] = nullptr;
-            }
-        }
-    }
+    memset(wid_on_screen_at, 0, sizeof(wid_on_screen_at));
 
     for (auto iter = wid_top_level.begin();
          iter != wid_top_level.end(); ++iter) {
@@ -6450,36 +6440,26 @@ void wid_display_all (void)
     }
 #endif
     {
-        ascii_putf(0, ASCII_HEIGHT-1, WHITE, BLACK, wid_tooltip_string.c_str());
+        static const color bg = { 0, 0, 255, 100 };
+        static const color fg = { 200, 200, 200, 200 };
+        ascii_putf(ITEMBAR_TL_X, ITEMBAR_TL_Y - 1, fg, bg, wid_tooltip_string.c_str());
     }
     {
-        ascii_putf(0, ASCII_HEIGHT-2, WHITE, BLACK, wid_tooltip2_string.c_str());
+        static const color bg = { 0, 0, 200, 100 };
+        static const color fg = { 200, 200, 200, 200 };
+        ascii_putf(ITEMBAR_TL_X, ITEMBAR_TL_Y - 2, fg, bg, wid_tooltip2_string.c_str());
     }
 
     /*
      * FPS counter.
      */
     if (game->config.fps_counter) {
-        ascii_putf(0, 1, GREEN, BLACK, L"%u FPS", game->fps_count);
+        ascii_putf(ASCII_WIDTH - 6, 1, GREEN, BLACK, L"%u FPS", game->fps_count);
     }
 
     ascii_display();
 
-    if (inverted_gfx) {
-        glLogicOp(GL_COPY_INVERTED);
-        glEnable(GL_COLOR_LOGIC_OP);
-    }
-
     blit_fbo_unbind();
-
-    glBlendFunc(GL_BLEND_SRC_ALPHA, GL_ZERO);
-    glcolor(WHITE);
-    blit_fbo(FBO_MAIN);
-
-    if (inverted_gfx) {
-        glLogicOp(GL_COPY);
-        glDisable(GL_COLOR_LOGIC_OP);
-    }
 }
 
 uint8_t wid_is_hidden (widp w)

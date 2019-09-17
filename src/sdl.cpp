@@ -992,6 +992,12 @@ void sdl_loop (void)
          */
         sdl_tick();
 
+        //fluid_tick();
+
+        glcolor(WHITE);
+
+        game->display();
+
         /*
          * Do processing of some things, like reading the keyboard or doing
          * stuff with widgets only occasionally if we do not need to.
@@ -1027,16 +1033,30 @@ void sdl_loop (void)
             }
             player_tick();
             things_tick();
+
+            /*
+             * Display UI.
+             */
+            wid_display_all();
         }
 
-        //fluid_tick();
+	glcolor(WHITE);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
+	blit_fbo_bind(FBO_MAIN);
+	blit_fbo(FBO_WID);
+	blit_fbo_unbind();
 
-        glcolor(WHITE);
-
-        /*
-         * Display UI.
-         */
-        wid_display_all();
+	glBlendFunc(GL_ONE, GL_ZERO);
+        extern bool inverted_gfx;
+        if (inverted_gfx) {
+            glLogicOp(GL_COPY_INVERTED);
+            glEnable(GL_COLOR_LOGIC_OP);
+        }
+	blit_fbo(FBO_MAIN);
+        if (inverted_gfx) {
+            glLogicOp(GL_COPY);
+            glDisable(GL_COLOR_LOGIC_OP);
+        }
 
         /*
          * FPS counter.
@@ -1054,7 +1074,6 @@ void sdl_loop (void)
                      * Update FPS counter.
                      */
                     game->fps_count = frames;
-                    //CON("%d FPS", game->fps_count);
 
                     frames = 0;
                 }
