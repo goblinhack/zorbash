@@ -10,9 +10,8 @@ void Game::display (void)
 {_
     blit_fbo_bind(FBO_MAIN);
 
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
-    glcolor(WHITE);
 
     /*
      * thing_render_all must come before thing_move_all as it populates

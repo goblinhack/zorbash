@@ -572,7 +572,6 @@ struct thing_display_sort_cmp : public std::binary_function<struct ThingDisplayS
 typedef std::unordered_map< struct ThingDisplaySortKey, Thingp,
                   thing_display_sort_cmp > ThingDisplayOrder;
 
-Thingp thing_find(uint32_t name);
 Thingp thing_new(std::string tp_name, Thingp owner);
 Thingp thing_new(std::string tp_name, fpoint at, fpoint jitter = fpoint(0, 0));
 bool things_overlap(Thingp t, Thingp o);
