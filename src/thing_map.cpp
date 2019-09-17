@@ -419,7 +419,6 @@ static void thing_blit_water (int minx, int miny, int minz,
     glcolor(WHITE);
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE);
     blit_fbo(FBO_LIGHT_MASK);
-    blit_flush();
 
     //
     // Blit the combined water to the main buffer.

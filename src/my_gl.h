@@ -377,11 +377,12 @@ void glcolor(color s);
 //
 // Frame buffer objects
 //
-#define MAX_FBO          4
+#define MAX_FBO          5
 #define FBO_MAIN         0
-#define FBO_LIGHT_MASK   1
-#define FBO_LIGHT_MERGED 2
-#define FBO_REFLECTION   3
+#define FBO_WID          1
+#define FBO_LIGHT_MASK   2
+#define FBO_LIGHT_MERGED 3
+#define FBO_REFLECTION   4
 
 extern GLuint render_buf_id[MAX_FBO];
 extern GLuint fbo_id[MAX_FBO];

@@ -263,10 +263,10 @@ static void wid_console_wid_create (void)
     wid_console_horiz_scroll =
         wid_new_horiz_scroll_bar(wid_console_window, "", wid_console_container);
 
-    wid_visible(wid_get_parent(wid_console_vert_scroll));
-    wid_visible(wid_get_parent(wid_console_horiz_scroll));
-    wid_visible(wid_console_vert_scroll);
-    wid_visible(wid_console_horiz_scroll);
+    wid_hide(wid_get_parent(wid_console_vert_scroll));
+    wid_hide(wid_get_parent(wid_console_horiz_scroll));
+    wid_hide(wid_console_vert_scroll);
+    wid_hide(wid_console_horiz_scroll);
 
     wid_hide(wid_console_window);
 

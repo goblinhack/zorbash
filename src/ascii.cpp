@@ -409,8 +409,10 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
 
         if (bg_set) {
             if (bg.r || bg.g || bg.b || bg.a) {
-                tile = fixed_font->unicode_to_tile(L'▋');
-
+                static Tilep tile;
+                if (!tile) {
+                    tile = tile_find_mand("CSPACE");
+                }
                 cell->bg_tile = tile;
             } else {
                 cell->bg_tile = 0;

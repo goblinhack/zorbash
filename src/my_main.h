@@ -104,8 +104,21 @@ extern int TILES_DOWN;
 // Minicon
 //
 #define MINICON_TEXT_COLOR          GRAY
-#define MINICON_WIDTH               120
-#define MINICON_HEIGHT              200
+#define SIDEBAR_WIDTH               14
+#define SIDEBAR_HEIGHT              20
+#define INNER_SIDEBAR_WIDTH         12
+#define INNER_SIDEBAR_HEIGHT        12
+#define ITEMBAR_HEIGHT              4
+#define ITEMBAR_WIDTH               4
+#define ITEMBAR_TOT_WIDTH           (10 * ITEMBAR_WIDTH)
+#define ITEMBAR_TL_X                (ASCII_WIDTH / 2 - (ITEMBAR_TOT_WIDTH / 2))
+#define ITEMBAR_TL_Y                (ASCII_HEIGHT - 4)
+#define ITEMBAR_BR_X                (ASCII_WIDTH / 2 + (ITEMBAR_TOT_WIDTH / 2))
+#define ITEMBAR_BR_Y                (ASCII_HEIGHT - 1)
+#define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
+#define MINICON_HEIGHT              200 // scrollbar limit
+#define MINICON_VIS_HEIGHT          4
+#define MINICON_VIS_WIDTH           MINICON_WIDTH
 
 //
 // Fonts
