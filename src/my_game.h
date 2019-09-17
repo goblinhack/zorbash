@@ -337,4 +337,12 @@ uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
 uint8_t game_key_down(const struct SDL_KEYSYM *key);
 void player_tick(void);
 
+//
+// Find an existing thing.
+//
+static inline Thingp thing_find (const uint32_t id)
+{
+    return (world->find_thing_ptr(id));
+}
+    
 #endif

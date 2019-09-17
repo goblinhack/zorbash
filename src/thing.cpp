@@ -552,14 +552,6 @@ void Thing::move_carried_items (void)
     }
 }
 
-//
-// Find an existing thing.
-//
-Thingp thing_find (uint32_t id)
-{_
-    return (world->find_thing_ptr(id));
-}
-
 std::string Thing::to_string (void)
 {_
     auto tpp = tp();

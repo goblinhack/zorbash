@@ -6408,9 +6408,8 @@ void wid_display_all (void)
 
     blit_fbo_bind(FBO_WID);
 
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
-    glcolor(WHITE);
 
     memset(wid_on_screen_at, 0, sizeof(wid_on_screen_at));
 
