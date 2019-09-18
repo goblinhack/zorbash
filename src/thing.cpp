@@ -51,15 +51,7 @@ Thing::Thing_ (void)
 Thing::~Thing_ (void)
 {_
     verify(this);
-    if (is_being_destroyed) {
-        die("death recursion");
-    }
-    is_being_destroyed = true;
     destroy();
-    if (monst) {
-        oldptr(monst);
-        delete monst;
-    }
     oldptr(this);
 }
 
@@ -235,7 +227,19 @@ void Thing::destroy (void)
         log("destroy");
     }
 
+    if (is_being_destroyed) {
+        die("death recursion");
+    }
+    is_being_destroyed = true;
+
     detach();
+
+    unwield("owner is destroyed");
+
+    //
+    // hooks remove must be after unwield
+    //
+    hooks_remove();
 
     auto tpp = tp();
 
@@ -290,14 +294,17 @@ void Thing::destroy (void)
         world->player = nullptr;
     }
 
-    unwield("owner is destroyed");
-
     delete_dmap_scent();
     delete_dmap_goals();
     delete_age_map();
     delete_light();
 
     world->remove_thing_ptr(this);
+
+    if (monst) {
+        oldptr(monst);
+        delete monst;
+    }
 }
 
 void Thing::hide (void)
@@ -355,7 +362,7 @@ void Thing::hooks_remove ()
     //
     // We are owned by something. i.e. we are a sword.
     //
-    Thingp owner = 0;
+    Thingp owner = nullptr;
 
     if (get_owner_id()) {
         owner = owner_get();
@@ -363,16 +370,26 @@ void Thing::hooks_remove ()
 
     if (owner) {
         log("detach %08X from owner %s", id, owner->to_string().c_str());
+
+        if (id == owner->get_weapon_id()) {
+            owner->unwield("remove hooks");
+
+            log("detach from owner %s", owner->to_string().c_str());
+            owner->set_weapon_id(0);
+        }
+
         if (id == owner->get_weapon_id_carry_anim()) {
-            unwield("remove hooks");
+            owner->unwield("remove hooks");
 
             log("detach from carry anim owner %s", owner->to_string().c_str());
-            owner->weapon_set_carry_anim(nullptr);
+            owner->weapon_set_carry_anim_id(0);
         }
 
         if (id == owner->get_weapon_id_use_anim()) {
+            owner->unwield("remove hooks");
+
             log("detach from use anim owner %s", owner->to_string().c_str());
-            owner->weapon_set_use_anim(nullptr);
+            owner->weapon_set_use_anim_id(0);
 
             //
             // End of the use animation, make the sword visible again.
@@ -465,7 +482,7 @@ void Thing::set_owner (Thingp owner)
             log("set owner change %s->%s", old_owner->to_string().c_str(),
                 owner->to_string().c_str());
         } else {
-            log("set owner remove owner %s", old_owner->to_string().c_str());
+            log("remove owner %s", old_owner->to_string().c_str());
         }
     } else {
         if (owner) {
@@ -607,7 +624,6 @@ void Thing::kill (void)
         log("killed");
     }
 
-    hooks_remove();
     is_pending_gc = true;
     things_to_delete.push_back(id);
 }

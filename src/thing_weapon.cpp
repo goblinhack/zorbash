@@ -209,8 +209,15 @@ Thingp Thing::weapon_get_use_anim (void)
 
 void Thing::unwield (const char *why)
 {_
+    if (!get_weapon_id()) {
+        return;
+    }
+
+    log("unwielding %08X, why: %s", get_weapon_id(), why);
+
     auto weapon = weapon_get();
     if (!weapon) {
+        log("could not unwield %08X, why: %s", get_weapon_id(), why);
         return;
     }
 
