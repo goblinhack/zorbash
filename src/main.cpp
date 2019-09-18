@@ -624,6 +624,8 @@ int32_t main (int32_t argc, char *argv[])
     ptrcheck_leak_snapshot();
 #endif
 
+    py_call_void("init2");
+
     if (!wid_console_init()) {
 	ERR("wid_console init");
     }
@@ -641,8 +643,6 @@ int32_t main (int32_t argc, char *argv[])
 	ERR("ptrcheck init");
     }
 #endif
-
-    py_call_void("init2");
 
     tp_init();
 

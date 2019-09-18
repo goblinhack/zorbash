@@ -58,11 +58,13 @@ Fontp ttf_new (std::string name, int pointSize, int style)
             break;
         }
 
+#if 0
         if (!TTF_GlyphIsProvided(ttf, c)) {
             f->u_to_c[c] = 0;
             c++;
             continue;
         }
+#endif
 
         f->u_to_c[c] = d;
         f->valid[d] = true;
