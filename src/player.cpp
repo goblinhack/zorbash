@@ -13,13 +13,6 @@ void player_tick (void)
         return;
     }
 
-static int dd;
-static int ee;
-    dd++;
-    ee++;
-if (!(dd % 10)) {
-MINICON("tick %%fg=green$%d", ee);
-}
     auto player = world->player;
     if (!player || player->is_dead || player->is_hidden) {
         return;

@@ -234,6 +234,7 @@ typedef unsigned long long   uint64_t;
 #define DCHAR '/'
 
 #define DIE(args...)                                                          \
+    _ \
     DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
     CROAK(args);                                                              \
     exit(1);

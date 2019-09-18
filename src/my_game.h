@@ -132,12 +132,12 @@ public:
 
         auto p = &all_thing_ptrs_at[x][y][slot];
         if (unlikely(!*p)) {
-            DIE("thing ptr not found at x %u y %u slot %u for id %u", x, y, slot, id);
+            DIE("thing ptr not found at x %u y %u slot %u for id %08X", x, y, slot, id);
         }
 
         auto t = *p;
         if ((t->id != id)) {
-            t->die("thing mismatch at x %u y %u slot %u, my id is %u, but on-map id is %u. Usually this means a thing was not removed cleanly at level end.", x, y, slot, t->id, id);
+            t->die("thing mismatch at x %u y %u slot %u, my id is %08X, but on-map id is %08X. Usually this means a thing was not removed cleanly at level end.", x, y, slot, t->id, id);
         }
 
         verify(t);
