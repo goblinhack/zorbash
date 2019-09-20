@@ -1,22 +1,7 @@
 # Zorbash
                         
 ```diff
-
--    @@@@@@@@   @@@@@@   @@@@@@@   @@@@@@@    @@@@@@    @@@@@@   @@@  @@@  
--    @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@   @@@  @@@  
--         @@!  @@!  @@@  @@!  @@@  @@!  @@@  @@!  @@@  !@@       @@!  @@@  
--        !@!   !@!  @!@  !@!  @!@  !@   @!@  !@!  @!@  !@!       !@!  @!@  
--       @!!    @!@  !@!  @!@!!@!   @!@!@!@   @!@!@!@!  !!@@!!    @!@!@!@!  
--      !!!     !@!  !!!  !!@!@!    !!!@!!!!  !!!@!!!!   !!@!!!   !!!@!!!!  
--     !!:      !!:  !!!  !!: :!!   !!:  !!!  !!:  !!!       !:!  !!:  !!!  
--    :!:       :!:  !:!  :!:  !:!  :!:  !:!  :!:  !:!      !:!   :!:  !:!  
--    ::: ::::  ::::: ::  ::   :::   :: ::::  ::   :::  :::: ::   ::   :::  
--    : :: : :   : :  :    :   : :   : : ::    :   : :  :: : :     :   : : 
--    : :  : :   :    :    :   :     : : ::    :   : :  :  : :     :   : : 
--    . .  . :   : .  :    .   : .   : . ::    :   : .  .. : :     .   : : 
-
-```
-```
+![Alt text](screenshot.1.png?raw=true "Optional Title")
 
                        Hark! Hear now a tale untold
                        since ancient times of yore
@@ -117,9 +102,3 @@ If it doesn't build, just email goblinhack@gmail.com for help
 <!--                       To resort to the darkest extremes.                     -->
 <!--                       My weakness, my pity had provided                      -->
 <!--                       An excuse for our glorious team.                       -->
-
-test
-
-![Alt text](screenshot.1.png?raw=true "Optional Title")
-
-![Animated gif](animation.gif "Animation that shows auto completion")
