@@ -663,6 +663,8 @@ int32_t main (int32_t argc, char *argv[])
 	ERR("wid_test init");
     }
 
+    wid_minicon_flush();
+
     sdl_loop();
     gl_leave_2d_mode();
 

@@ -1455,6 +1455,21 @@ static PyObject *con_ (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
 }
 
+static PyObject *minicon_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    wchar_t *a = 0;
+
+    if (!PyArg_ParseTuple(args, "u", &a)) {
+        return (0);
+    }
+
+    if (a) {
+        minicon(a);
+    }
+
+    Py_RETURN_NONE;
+}
+
 static PyObject *tip_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     wchar_t *a = 0;
@@ -1546,7 +1561,7 @@ static PyObject *die_ (PyObject *obj, PyObject *args, PyObject *keywds)
 }
 
 static PyMethodDef python_c_METHODS[] = {
- /*
+    /*
      * The cast of the function is necessary since PyCFunction values
      * only take two PyObject *parameters, and some take three.
      */
@@ -1554,6 +1569,11 @@ static PyMethodDef python_c_METHODS[] = {
         (PyCFunction)con_,
         METH_VARARGS,
         "log to the console"},
+
+    {"minicon",
+        (PyCFunction)minicon_,
+        METH_VARARGS,
+        "log to the mini console"},
 
     {"tip",
         (PyCFunction)tip_,

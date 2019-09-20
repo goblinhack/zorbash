@@ -586,6 +586,17 @@ std::string Thing::to_string (void)
 #endif
 }
 
+std::string Thing::to_name (void)
+{_
+    auto tpp = tp();
+    verify(this);
+    verify(tpp);
+
+    return (string_sprintf("%s%s",
+                           is_dead ? "dead " : "",
+                           tpp->name.c_str()));
+}
+
 const char * Thing::to_cstring (void)
 {
     return (to_string().c_str());
@@ -602,6 +613,10 @@ void Thing::kill (void)
     // Unwield weapons
     //
     unwield("owner is dead");
+
+    if (is_player()) {
+        MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
+    }
 
     if (is_corpse_on_death()) {
         if (tp_is_loggable(tp())) {

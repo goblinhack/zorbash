@@ -451,6 +451,7 @@ typedef struct Thing_ {
     std::string bite_damage_hd(void);
     std::string is_nutrition_hd(void);
     std::string to_string(void);
+    std::string to_name(void);
     uint8_t is_dir_bl(void);
     uint8_t is_dir_br(void);
     uint8_t is_dir_down(void);

@@ -126,6 +126,13 @@ static void wid_minicon_log_ (std::wstring s)
     /*
      * Flush the logs now the minicon exists.
      */
+    wid_minicon_flush();
+
+    wid_minicon_scroll(wid_minicon_input_line, s);
+}
+
+void wid_minicon_flush (void)
+{_
     auto iter = wid_minicon_lines.begin();
 
     while (iter != wid_minicon_lines.end()) {
@@ -134,7 +141,7 @@ static void wid_minicon_log_ (std::wstring s)
         iter = wid_minicon_lines.erase(iter);
     }
 
-    wid_minicon_scroll(wid_minicon_input_line, s);
+    wid_minicon_reset_scroll();
 }
 
 /*
@@ -184,7 +191,6 @@ static void wid_minicon_wid_create (void)
         wid_set_name(wid_minicon_window, "wid_minicon window");
         wid_set_pos(wid_minicon_window, tl, br);
         wid_set_shape_none(wid_minicon_window);
-        wid_set_style(wid_minicon_window, 0);
     }
 
     {
@@ -194,8 +200,7 @@ static void wid_minicon_wid_create (void)
         wid_minicon_container = wid_new_container(wid_minicon_window,
                                                   "wid minicon container");
         wid_set_pos(wid_minicon_container, tl, br);
-        wid_set_shape_box(wid_minicon_container);
-        wid_set_style(wid_minicon_container, 0);
+        wid_set_shape_none(wid_minicon_container);
     }
 
   {

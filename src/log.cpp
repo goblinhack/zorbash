@@ -279,7 +279,7 @@ static void minicon_ (const char *fmt, va_list args)
     putchar('\n');
 
     wid_minicon_log(buf + len);
-    wid_console_log(buf + len);
+    //wid_console_log(buf + len);
 }
 
 static void minicon_ (const wchar_t *fmt, va_list args)
@@ -311,7 +311,7 @@ static void minicon_ (const wchar_t *fmt, va_list args)
         fflush(MY_STDOUT);
         term_log(buf);
         wid_minicon_log(buf);
-        wid_console_log(buf);
+        //wid_console_log(buf);
     }
     putchar('\n');
 }
@@ -333,7 +333,7 @@ void minicon (const wchar_t *fmt)
         fflush(MY_STDOUT);
         term_log(fmt);
         wid_minicon_log(fmt);
-        wid_console_log(fmt);
+        //wid_console_log(fmt);
     }
     putchar('\n');
 }

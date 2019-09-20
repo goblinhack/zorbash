@@ -361,7 +361,7 @@ uint8_t command_handle (const char *input,
                               execute_command, context);
     if (matches == 0) {
 #if 0
-        CON("> %%%%fg=red$Unknown command: \"%s\"%%%%fg=reset$", input);
+        CON(">%%fg=red$Unknown command: \"%s\"%%fg=reset$", input);
         return (false);
 #endif
         py_exec(input);
@@ -379,8 +379,11 @@ uint8_t command_handle (const char *input,
 
     if (matches > 1) {
         if (show_ambiguous) {
-            CON("> %%%%fg=red$Incomplete command, "
-                "\"%s\"%%%%fg=reset$. Try:", input);
+            if (*input) {
+                CON(">%%fg=red$Multiple matches, \"%s\"%%fg=reset$. Try:", input);
+            } else {
+                CON(">%%fg=red$Commands:");
+            }
         }
 
         command_matches(input, expandedtext, show_ambiguous, show_complete,
@@ -389,8 +392,7 @@ uint8_t command_handle (const char *input,
         if (!show_ambiguous) {
             if (expandedtext) {
                 if (!strcasecmp(input, expandedtext)) {
-                    CON("> %%%%fg=red$Incomplete command, "
-                        "\"%s\"%%%%fg=reset$. Try:", input);
+                    CON(">%%fg=red$Incomplete command, \"%s\"%%fg=reset$. Try:", input);
 
                     command_matches(input, expandedtext, true, show_complete,
                                     execute_command, context);
@@ -405,8 +407,7 @@ uint8_t command_handle (const char *input,
     }
 
     if (!execute_command && (matches == 1)) {
-        CON("> %%%%fg=red$Incomplete command, "
-            "\"%s\"%%%%fg=reset$. Try:", input);
+        CON(">%%fg=red$Incomplete command, \"%s\"%%fg=reset$. Try:", input);
 
         command_matches(input, expandedtext, true, show_complete,
                         execute_command, context);
