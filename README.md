@@ -120,4 +120,6 @@ If it doesn't build, just email goblinhack@gmail.com for help
 
 test
 
-![Alt text](data/ttf/PressStart2P.ttf_pointsize8.tga?raw=true "Optional Title")
+![Alt text](screenshot.1.png?raw=true "Optional Title")
+
+![Animated gif](animation.gif "Animation that shows auto completion")
