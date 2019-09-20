@@ -292,12 +292,12 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
     int bg_set = false;
     auto text_iter = text.begin();
 
-//printf("ascii_putf__ [%S]/%ld\n", text.c_str(), text.size());
-    if (y < 0) {
+// printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, scissors_br.x, scissors_br.y, scissors_enabled);
+    if (unlikely(y < 0)) {
         return;
     }
 
-    if (y >= ASCII_HEIGHT) {
+    if (unlikely(y >= ASCII_HEIGHT)) {
         return;
     }
 
@@ -309,11 +309,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
         auto c = *text_iter;
         text_iter++;
 
-        if (c == L'`') {
-            c = L' ';
-        }
-
-        if (c == L'%') {
+        if (unlikely(c == L'%')) {
             if (std::string(text_iter, text_iter + 3) == "fg=") {
                 text_iter += 3;
                 auto tmp = std::string(text_iter, text.end());
@@ -356,7 +352,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
             }
         }
 
-        if (!ascii_ok_for_scissors(x, y)) {
+        if (unlikely(!ascii_ok_for_scissors(x, y))) {
             x++;
             continue;
         }
@@ -377,7 +373,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
 
         auto saved_fg = fg;
 
-        if (is_cursor) {
+        if (unlikely(is_cursor)) {
             static uint32_t last;
             static uint8_t first = true;
 
@@ -424,7 +420,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
             cell->bg_color_br = bg;
         }
 
-        if (is_cursor) {
+        if (unlikely(is_cursor)) {
             fg = saved_fg;
         }
     }
@@ -667,34 +663,14 @@ static void ascii_display_mouse (fpoint mouse_tile_tl,
                                  fpoint mouse_tile_br,
                                  point mouse_at)
 {_
-    static uint32_t ts;
-    static int alpha = 100;
+    glcolor(GREEN);
 
-    if (time_have_x_hundredths_passed_since(5, ts)) {
-        static int alpha_mod = 1;
-
-        alpha += alpha_mod;
-
-        if (alpha > 255) {
-            alpha = 255;
-            alpha_mod = -1;
-        }
-
-        if (alpha < 150) {
-            alpha = 150;
-            alpha_mod = 1;
-        }
-    }
-
-    color c = CONSOLE_CURSOR_OTHER_COLOR;
-    c.a = alpha;
-    glcolor(c);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    gl_blitsquare(mouse_tile_tl.x, mouse_tile_tl.y,
-                  mouse_tile_br.x, mouse_tile_br.y);
-
+    blit_init();
+    tile_blit(nullptr, 
+                      tile_find_mand("C543"),
+                      fpoint(mouse_tile_tl.x, mouse_tile_tl.y),
+                      fpoint(mouse_tile_br.x, mouse_tile_br.y));
+    blit_flush();
     /*
      * Save where we are at
      */

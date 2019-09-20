@@ -52,6 +52,7 @@ int joy_balls;
 SDL_Window *window; /* Our window handle */
 SDL_GLContext context; /* Our opengl context handle */
 
+#define ENABlE_GRAPHIC_MOUSE
 void sdl_fini (void)
 {_
 #ifdef ENABlE_GRAPHIC_MOUSE
@@ -979,6 +980,10 @@ void sdl_loop (void)
     }
 
     wid_display_all();
+
+#ifdef ENABlE_GRAPHIC_MOUSE
+    SDL_ShowCursor(0);
+#endif
 
     for (;/*ever*/;) {
         /*

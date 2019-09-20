@@ -6021,10 +6021,12 @@ static void wid_display (widp w,
      * or are not the top level wid.
      */
     if (!disable_scissor) {
-        /*
-         * Text box needs clipping when the text gets too wide.
-         */
+#if 0
+       /*
+        * Why would we not always want scissors on?
+        */
        if (!w->children_display_sorted.empty() || !w->parent || w->show_cursor) {
+#endif
             /*
              * Tell the parent we are doing scissors so they can re-do
              * their own scissors.
@@ -6033,50 +6035,21 @@ static void wid_display (widp w,
                 *updated_scissors = true;
             }
 
+            // printf("set scissors %s %d %d %d %d\n", w->to_string.c_str(), 
+            //tlx, tly, brx, bry);
             wid_set_scissors(
                 tlx,
                 tly,
                 brx,
                 bry);
+#if 0
         }
+#endif
     }
 
     auto width = wid_get_width(w);
     auto height = wid_get_height(w);
     Tilep tile = wid_get_tile(w);
-#if 0
-    /*
-     * Add the texture tile at a time
-     */
-    Texp tex;
-
-    if (!tile) {
-        tex = wid_get_tex(w, 0);
-
-        double dx = 1.0 / (double)width;
-        double dy = 1.0 / (double)height;
-        int x, y;
-        double tx, ty;
-        for (x = 0, tx = 0.0; x < width; x++, tx += dx) {
-            for (y = 0, ty = 0.0; y < height; y++, ty += dy) {
-                ascii_set_bg(tlx + x, tly + y, tex, tx, ty, dx, dy);
-            }
-        }
-    } else {
-        tex = 0;
-
-        double dx = 1.0 / (double)width;
-        double dy = 1.0 / (double)height;
-        int x, y;
-        double tx, ty;
-        for (x = 0, tx = 0.0; x < width; x++, tx += dx) {
-            for (y = 0, ty = 0.0; y < height; y++, ty += dy) {
-                ascii_set_bg2(tlx + x, tly + y, tile);
-                // , tx, ty, dx, dy);
-            }
-        }
-    }
-#endif
 
     fsize texuv;
     (void) wid_get_tex(w, &texuv);
