@@ -94,6 +94,8 @@ public:
     void die(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args); // compile error without
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void minicon_(const char *fmt, va_list args); // compile error without
+    void minicon(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void err_(const char *fmt, va_list args); // compile error without
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

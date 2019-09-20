@@ -960,7 +960,7 @@ void sdl_loop (void)
 
     sdl_main_loop_running = true;
 
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     gl_enter_2d_mode();
@@ -969,7 +969,6 @@ void sdl_loop (void)
 
     /*
      * Don't use this. It seemed to mess up graphics on FireGL.
-
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
      */
 
@@ -978,6 +977,8 @@ void sdl_loop (void)
     } else {
         SDL_GL_SetSwapInterval(0);
     }
+
+    wid_display_all();
 
     for (;/*ever*/;) {
         /*
@@ -1066,7 +1067,6 @@ void sdl_loop (void)
              * Very occasional.
              */
             if (timestamp_now - timestamp_then2 >= 1000) {
-
                 timestamp_then2 = timestamp_now;
 
                 if (game->config.fps_counter) {

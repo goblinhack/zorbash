@@ -117,7 +117,7 @@ extern int TILES_DOWN;
 #define ITEMBAR_BR_Y                (ASCII_HEIGHT - 1)
 #define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
 #define MINICON_HEIGHT              200 // scrollbar limit
-#define MINICON_VIS_HEIGHT          4
+#define MINICON_VIS_HEIGHT          5
 #define MINICON_VIS_WIDTH           MINICON_WIDTH
 
 //

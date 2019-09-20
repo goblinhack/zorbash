@@ -60,7 +60,7 @@ public:
     int valid[TTF_GLYPH_MAX+1]= {};
     Tilep cache[TTF_GLYPH_MAX+1] = {};
 
-    Tilep unicode_to_tile_ (int u)
+    Tilep unicode_to_tile (int u)
     {
         if ((u < 0) || (u >= TTF_GLYPH_MAX)) {
             if (u == L'?') {
@@ -103,12 +103,6 @@ public:
         this->cache[index] = tile;
 
         return (tile);
-    }
-    Tilep unicode_to_tile (int u)
-    {
-        auto tile = unicode_to_tile_(u);
-        printf("%x -> %s\n", u, tile->name.c_str());
-        return tile;
     }
 };
 #endif

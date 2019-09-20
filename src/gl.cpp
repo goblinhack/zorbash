@@ -225,6 +225,10 @@ void gl_init_fbo (void)
 
     for (i = 0; i < MAX_FBO; i++) {
         gl_init_fbo_(&render_buf_id[i], &fbo_id[i], &fbo_tex_id[i]);
+        blit_fbo_bind(i);
+        glClearColor(0, 0, 0, 0);
+        glClear(GL_DEPTH_BUFFER_BIT);
+        blit_fbo_unbind();
     }
 }
 
