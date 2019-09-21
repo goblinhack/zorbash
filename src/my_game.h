@@ -17,8 +17,6 @@ struct Thing_;
 class Light;
 
 typedef class Light* Lightp;
-typedef std::unordered_map< uint32_t, Lightp > Lights;
-
 typedef class World* Worldp;
 
 #include "my_thing.h"
@@ -72,11 +70,6 @@ public:
     Thingp                     player = {};
 
     //
-    // Global lights
-    //
-    Lights                     all_lights;
-
-    //
     // Where we're looking in the map
     //
     fpoint                     map_at;
@@ -95,11 +88,6 @@ public:
       std::array<
         std::array<Thingp, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
           all_thing_ptrs_at;
-    //
-    // All lights at a map cell
-    //
-    std::unordered_map<uint32_t, Lightp> lights[MAP_WIDTH][MAP_HEIGHT];
-
     //
     // All thing IDs
     //
@@ -171,6 +159,15 @@ public:
         world->get_all_interesting_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_interesting_things_at(int x, int y, std::vector<Thingp> &);
+
+    //
+    // Things that emit light
+    //
+    #define FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y)                    \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);                   \
+        world->get_all_light_source_things_at(x, y, JOIN1(tmp, __LINE__)); \
+        for (auto t : JOIN1(tmp, __LINE__))
+    void get_all_light_source_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // Things that move around
