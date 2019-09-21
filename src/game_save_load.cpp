@@ -5,7 +5,7 @@
 
 #include "my_game.h"
 #include "my_dungeon.h"
-#include <strstream>
+#include <sstream>
 #include "minilzo.h"
 
 #define HEAP_ALLOC(var,size) \
@@ -142,7 +142,8 @@ Game::load (void)
 //    std::cout << "decompressed as ";
 //    hexdump((const unsigned char *)uncompressed, uncompressed_len);
 
-    std::istrstream in((const char *)uncompressed, uncompressed_len);
+    std::string s((const char*)uncompressed, (size_t)uncompressed_len);
+    std::istringstream in(s);
     class Game &c = *this;
     in >> bits(c);
 //    this->dump("", std::cout);
