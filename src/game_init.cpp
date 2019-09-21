@@ -891,7 +891,6 @@ _
     game_place_food(dungeon);
     game_place_blood(dungeon);
     game_place_keys(dungeon);
-    lights_calculate();
 
     thing_map_scroll_to_player();
 

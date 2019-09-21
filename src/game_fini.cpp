@@ -63,19 +63,6 @@ void World::fini (void)
     }
 
     //
-    // Check all lights were removed
-    //
-    for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_WIDTH; ++y) {
-            for (auto p : lights[x][y]) {
-                auto l = p.second;
-                verify(l);
-                l->die("world fini: did not detach light %u", l->id);
-            }
-        }
-    }
-
-    //
     // And finally the player
     //
     if (player) {

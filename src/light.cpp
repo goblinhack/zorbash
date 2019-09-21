@@ -6,8 +6,6 @@
 #include "my_game.h"
 #include "my_gl.h"
 
-static uint32_t light_id;
-
 static Texp light_overlay_tex_diffuse;
 static Texp light_overlay_tex_focused;
 static int light_overlay_texid_diffuse;
@@ -42,8 +40,6 @@ Lightp light_new (Thingp owner,
                   LightQuality quality,
                   color col)
 {_
-    auto id = ++light_id;
-
     uint16_t max_light_rays;
     if (owner->is_player()) {
         max_light_rays = MAX_LIGHT_RAYS;
@@ -52,20 +48,8 @@ Lightp light_new (Thingp owner,
     }
 
     auto l = new Light(); // std::make_shared< class Light >();
-    l->world = world;
-    l->id = id;
-    auto p = std::make_pair(l->id, l);
-    auto result = world->all_lights.insert(p);
-    if (result.second == false) {
-        DIE("light insert [%d] failed", id);
-    }
 
     point new_at((int)at.x, (int)at.y);
-    auto n = &world->lights[new_at.x][new_at.y];
-    auto result2 = n->insert(p);
-    if (result2.second == false) {
-        DIE("light insert into map [%d] failed", id);
-    }
 
     l->at             = at;
     l->strength       = strength;
@@ -93,64 +77,19 @@ Lightp light_new (Thingp owner,
 
 void Light::destroy (void)
 {_
-    world->all_lights.erase(id);
-
-    /*
-     * Pop from the map
-     */
-    point old_at((int)at.x, (int)at.y);
-    auto o = &world->lights[old_at.x][old_at.y];
-    auto iter = o->find(id);
-    if (iter == o->end()) {
-        die("thing not found to destroy");
-    }
-
-    o->erase(iter);
-}
-
-void Light::move_to (fpoint to)
-{_
-    point old_at((int)at.x, (int)at.y);
-    point new_at((int)to.x, (int)to.y);
-
-    /*
-     * Keep track of where this light is on the grid
-     */
-    if (old_at != new_at) {
-        /*
-         * Pop
-         */
-        auto o = &world->lights[old_at.x][old_at.y];
-        auto iter = o->find(id);
-        if (iter == o->end()) {
-            die("not found on map, old %d,%d new %d,%d",
-                old_at.x, old_at.y, new_at.x, new_at.y);
-        }
-        auto value = (*o)[id];
-        o->erase(iter);
-
-        /*
-         * Add back
-         */
-        auto n = &world->lights[new_at.x][new_at.y];
-        n->insert(std::make_pair(id, value));
-    }
-
-    at = to;
-}
-
-std::string Light::to_string (void)
-{_
-    return (string_sprintf("%u at (%g,%g)", id, at.x, at.y));
-}
-
-const char * Light::to_cstring (void)
-{
-    return (to_string().c_str());
 }
 
 void Light::calculate (void)
 {
+    //
+    // We precalculate the walls a light hits partly for efficency but also
+    // to avoid lighting walls behind those immediately visible to us. To
+    // do this we do a flood fill of the level and pick the nearest walls.
+    //
+    static int is_nearest_wall[MAP_WIDTH][MAP_HEIGHT] = {};
+    static int is_nearest_wall_val;
+    is_nearest_wall_val++;
+
     verify(this);
     glbuf.clear();
 
@@ -183,7 +122,6 @@ void Light::calculate (void)
      * Walk the light rays in a circle. First pass is to find the nearest
      * walls.
      */
-    memset(is_nearest_wall, 0, sizeof(is_nearest_wall));
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &ray[i];
         double step = 0.0;
@@ -195,7 +133,7 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (world->is_oob(x, y)) {
+            if (unlikely(world->is_oob(x, y))) {
                 break;
             }
 
@@ -219,11 +157,15 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
+            if (unlikely(world->is_oob(x, y))) {
+                break;
+            }
+
             if (!world->is_gfx_large_shadow_caster(x, y)) {
                 break;
             }
 
-            is_nearest_wall[x][y] = true;
+            is_nearest_wall[x][y] = is_nearest_wall_val;
         }
     }
 
@@ -253,11 +195,11 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (world->is_oob(x, y)) {
+            if (unlikely(world->is_oob(x, y))) {
                 break;
             }
 
-            if (!is_nearest_wall[x][y]) {
+            if (is_nearest_wall[x][y] != is_nearest_wall_val) {
                 break;
             }
         }
@@ -265,36 +207,6 @@ void Light::calculate (void)
         r->depth_furthest = r->depth_closest + step;
         if (r->depth_furthest < 0.001) {
             r->depth_furthest = strength;
-        }
-    }
-}
-
-void lights_calculate (void)
-{
-    for (auto x = 0 ; x < CHUNK_WIDTH; x++) {
-        auto X = ((int)world->map_at.x) - (CHUNK_WIDTH / 2);
-        for (auto y = 0 ; y < CHUNK_HEIGHT; y++) {
-            auto Y = ((int)world->map_at.y) - (CHUNK_HEIGHT / 2);
-            if (world->is_oob(X, Y)) {
-                continue;
-            }
-
-            for (auto p : world->lights[X][Y]) {
-                auto l = p.second;
-
-                switch (l->quality) {
-                case LIGHT_QUALITY_HIGH:
-                case LIGHT_QUALITY_LOW:
-                    l->calculate();
-                    break;
-
-                case LIGHT_QUALITY_POINT:
-                    break;
-
-                default:
-                    DIE("unknownd light quality");
-                }
-            }
         }
     }
 }
@@ -502,9 +414,9 @@ void lights_render_points (int minx, int miny, int maxx, int maxy,
     bool have_low_quality = false;
 
     for (auto y = miny; y < maxy; y++) {
-        for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : world->lights[x][y]) {
-                auto l = p.second;
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
+                auto l = t->get_light();
                 if (l->quality == LIGHT_QUALITY_POINT) {
                     continue;
                 }
@@ -536,13 +448,12 @@ void lights_render_points (int minx, int miny, int maxx, int maxy,
     glcolor(WHITE);
     blit_init();
     for (auto y = miny; y < maxy; y++) {
-        for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : world->lights[x][y]) {
-                auto l = p.second;
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
+                auto l = t->get_light();
                 if (l->quality != LIGHT_QUALITY_LOW) {
                     continue;
                 }
-
 #if 0
                 switch (random_range(0, 4)) {
                     case 0:
@@ -586,10 +497,9 @@ void lights_render_high_quality (int minx, int miny,
     Lightp deferred = nullptr;
 
     for (auto y = miny; y < maxy; y++) {
-        for (auto x = maxx - 1; x >= minx; x--) {
-            for (auto p : world->lights[x][y]) {
-                auto l = p.second;
-
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
+                auto l = t->get_light();
                 if (l->quality != LIGHT_QUALITY_HIGH) {
                     continue;
                 }

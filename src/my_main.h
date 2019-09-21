@@ -29,7 +29,7 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define DEBUG_CRASH
+#undef DEBUG_CRASH
 
 #ifdef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors

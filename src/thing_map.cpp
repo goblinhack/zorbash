@@ -1195,9 +1195,11 @@ void thing_render_all (void)
         thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
     }
 
+#if 0
     if (world->terrain) {
         terrain_blit(world->terrain);
     }
+#endif
 
     //lights_render_points_debug(minx, miny, maxx, maxy);
 }

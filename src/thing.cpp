@@ -521,7 +521,7 @@ void Thing::update_light (void)
     //
     auto l = get_light();
     if (l) {
-        l->move_to(get_interpolated_mid_at());
+        l->at = get_interpolated_mid_at();
         l->calculate();
     }
 }
