@@ -1,5 +1,9 @@
 # Zorbash
                         
+```diff
+- **** WORK IN PROGRESS - NOT PLAYABLE YET *****
+```
+
 ![Alt text](screenshot.1.png?raw=true "Optional Title")
 
 ```diff
@@ -43,10 +47,6 @@
                        With his fiersome undead wife
                        Can you save us all, dear hero? 
                        
-```
-
-```diff
-- **** WORK IN PROGRESS - NOT PLAYABLE YET *****
 ```
 
 ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) To build:

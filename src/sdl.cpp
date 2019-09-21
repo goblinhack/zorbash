@@ -673,13 +673,12 @@ static void sdl_event (SDL_Event * event)
         DBG("Clipboard updated");
         break;
 
-    case SDL_QUIT:
+    case SDL_QUIT: {
 #ifdef ENABlE_GRAPHIC_MOUSE
         SDL_ShowCursor(1);
 #endif
-
         DIE("Quit requested");
-        break;
+    }
 
     case SDL_USEREVENT:
         DBG("User event %d", event->user.code);

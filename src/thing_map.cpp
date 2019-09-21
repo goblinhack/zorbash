@@ -338,7 +338,7 @@ static void thing_blit_water (int minx, int miny, int minz,
                 fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
-                tile_blit(tpp, tile, blit_tl, blit_br);
+                tile_blit(tile, blit_tl, blit_br);
             }
         }
     }
@@ -590,7 +590,7 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
                 fpoint blit_tl(t->tl.x - offset_x, t->tl.y - offset_y);
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
-                tile_blit(tpp, tile, blit_tl, blit_br);
+                tile_blit(tile, blit_tl, blit_br);
             }
         }
     }
