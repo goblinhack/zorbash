@@ -666,10 +666,9 @@ static void ascii_display_mouse (fpoint mouse_tile_tl,
     glcolor(GREEN);
 
     blit_init();
-    tile_blit(nullptr, 
-                      tile_find_mand("C543"),
-                      fpoint(mouse_tile_tl.x, mouse_tile_tl.y),
-                      fpoint(mouse_tile_br.x, mouse_tile_br.y));
+    tile_blit(tile_find_mand("C543"),
+              fpoint(mouse_tile_tl.x, mouse_tile_tl.y),
+              fpoint(mouse_tile_br.x, mouse_tile_br.y));
     blit_flush();
     /*
      * Save where we are at
@@ -1019,7 +1018,6 @@ static void ascii_blit (int no_color)
                 }
 
                 tile_blit_outline_section_colored(
-                   nullptr, 
                    cell->bg2_tile,
                    fpoint(cell->bg2_tx, cell->bg2_ty),
                    fpoint(cell->bg2_tx + cell->bg2_dx, 
@@ -1071,7 +1069,6 @@ static void ascii_blit (int no_color)
                 }
 
                 tile_blit_section_colored(
-                   nullptr, 
                    cell->bg2_tile,
                    fpoint(cell->bg2_tx, cell->bg2_ty),
                    fpoint(cell->bg2_tx + cell->bg2_dx, 

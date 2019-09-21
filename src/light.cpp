@@ -123,7 +123,8 @@ void Light::move_to (fpoint to)
         auto o = &world->lights[old_at.x][old_at.y];
         auto iter = o->find(id);
         if (iter == o->end()) {
-            die("not found on map");
+            die("not found on map, old %d,%d new %d,%d",
+                old_at.x, old_at.y, new_at.x, new_at.y);
         }
         auto value = (*o)[id];
         o->erase(iter);
@@ -150,6 +151,7 @@ const char * Light::to_cstring (void)
 
 void Light::calculate (void)
 {
+    verify(this);
     glbuf.clear();
 
     auto light_radius = strength;
