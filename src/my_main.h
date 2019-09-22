@@ -30,9 +30,9 @@
 #define _MY_MAIN_H_
 
 #undef DEBUG_CRASH
+#define ENABLE_ASSERT              // DIE on errors
 
 #ifdef DEBUG_CRASH
-#define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_TRACING             // Function tracing
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV

@@ -33,7 +33,9 @@ public:
     uint8_t                 width  {ROOM_WIDTH};
     uint8_t                 height {ROOM_HEIGHT};
 
-    char                    data[ROOM_WIDTH][ROOM_HEIGHT][MAP_DEPTH] = {{{' '}}};
+    std::array<
+      std::array<
+        std::array<char, MAP_DEPTH>, ROOM_HEIGHT>, ROOM_WIDTH> data;
 
     bool                    has_door_up    {false};
     bool                    has_door_down  {false};

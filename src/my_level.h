@@ -35,7 +35,9 @@ public:
     uint8_t                 height {CHUNK_HEIGHT};
     uint8_t                 depth  {0};
 
-    char                    data[CHUNK_WIDTH][CHUNK_HEIGHT][MAP_DEPTH] = {{{' '}}};
+    std::array<
+      std::array<
+        std::array<char, MAP_DEPTH>, CHUNK_HEIGHT>, CHUNK_WIDTH> data;
 
     static Levelp level_new(void);
     void finalize(void);

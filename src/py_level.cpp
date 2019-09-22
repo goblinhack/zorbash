@@ -166,17 +166,17 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             for (auto x = 0; x < CHUNK_WIDTH; x++) {
-                l->data[x][y][MAP_DEPTH_FLOOR]      = floor_string[x];
-                l->data[x][y][MAP_DEPTH_WATER]      = water_string[x];
-                l->data[x][y][MAP_DEPTH_FLOOR_DECO] = deco_string[x];
-                l->data[x][y][MAP_DEPTH_WALLS]      = walls_string[x];
-                l->data[x][y][MAP_DEPTH_WALLS_DECO] = wall_deco_string[x];
-                l->data[x][y][MAP_DEPTH_EXIT]       = exits_string[x];
-                l->data[x][y][MAP_DEPTH_MONST]      = monst_string[x];
-                l->data[x][y][MAP_DEPTH_FOOD]       = food_string[x];
-                l->data[x][y][MAP_DEPTH_BLOOD]      = blood_string[x];
-                l->data[x][y][MAP_DEPTH_ITEM]       = items_string[x];
-                l->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
+                set(l->data, x, y, MAP_DEPTH_FLOOR,      floor_string[x]);
+                set(l->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
+                set(l->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
+                set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
+                set(l->data, x, y, MAP_DEPTH_WALLS_DECO, wall_deco_string[x]);
+                set(l->data, x, y, MAP_DEPTH_EXIT,       exits_string[x]);
+                set(l->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
+                set(l->data, x, y, MAP_DEPTH_FOOD,       food_string[x]);
+                set(l->data, x, y, MAP_DEPTH_BLOOD,      blood_string[x]);
+                set(l->data, x, y, MAP_DEPTH_ITEM,       items_string[x]);
+                set(l->data, x, y, MAP_DEPTH_PLAYER, ' ');
             }
 
             if (floor_string.size() != CHUNK_WIDTH){
@@ -209,17 +209,17 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             for (auto x = 0; x < CHUNK_WIDTH; x++) {
-                l->data[x][y][MAP_DEPTH_FLOOR]      = floor_string[x];
-                l->data[x][y][MAP_DEPTH_WATER]      = water_string[x];
-                l->data[x][y][MAP_DEPTH_FLOOR_DECO] = deco_string[x];
-                l->data[x][y][MAP_DEPTH_WALLS]      = walls_string[x];
-                l->data[x][y][MAP_DEPTH_WALLS_DECO] = wall_deco_string[x];
-                l->data[x][y][MAP_DEPTH_EXIT]       = exits_string[x];
-                l->data[x][y][MAP_DEPTH_MONST]      = monst_string[x];
-                l->data[x][y][MAP_DEPTH_FOOD]       = food_string[x];
-                l->data[x][y][MAP_DEPTH_BLOOD]      = blood_string[x];
-                l->data[x][y][MAP_DEPTH_ITEM]       = items_string[x];
-                l->data[x][y][MAP_DEPTH_PLAYER]     = ' ';
+                set(l->data, x, y, MAP_DEPTH_FLOOR,      floor_string[x]);
+                set(l->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
+                set(l->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
+                set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
+                set(l->data, x, y, MAP_DEPTH_WALLS_DECO, wall_deco_string[x]);
+                set(l->data, x, y, MAP_DEPTH_EXIT,       exits_string[x]);
+                set(l->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
+                set(l->data, x, y, MAP_DEPTH_FOOD,       food_string[x]);
+                set(l->data, x, y, MAP_DEPTH_BLOOD,      blood_string[x]);
+                set(l->data, x, y, MAP_DEPTH_ITEM,       items_string[x]);
+                set(l->data, x, y, MAP_DEPTH_PLAYER,     ' ');
             }
         }
     }

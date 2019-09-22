@@ -146,7 +146,7 @@ uint32_t history_walk;
  * A tile over the mouse pointer
  */
 widp wid_mouse_template;
-static widp wid_on_screen_at[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
+std::array<std::array<widp, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> wid_on_screen_at;
 
 static uint8_t wid_init_done;
 static uint8_t wid_exiting;
@@ -4090,7 +4090,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 
 static widp wid_find_at (widp w, int32_t x, int32_t y)
 {_
-    w = wid_on_screen_at[x][y];
+    w = get(wid_on_screen_at, x, y);
     if (!w) {
         return (0);
     }
@@ -4893,7 +4893,7 @@ printf("\nmouse at %d, %d  (%d, %d) count %d", x, y, mouse_x, mouse_y, count);
     }
 #endif
 
-    w = wid_on_screen_at[x][y];
+    w = get(wid_on_screen_at, x, y);
     if (w) {
         return (w);
     }
@@ -6146,7 +6146,7 @@ static void wid_display (widp w,
                 if (!ascii_ok(x, y)) {
                     continue;
                 }
-                wid_on_screen_at[x][y] = w;
+                set(wid_on_screen_at, x, y, w);
             }
         }
     }
@@ -6384,7 +6384,7 @@ void wid_display_all (void)
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 
-    memset(wid_on_screen_at, 0, sizeof(wid_on_screen_at));
+    wid_on_screen_at = {};
 
     for (auto iter = wid_top_level.begin();
          iter != wid_top_level.end(); ++iter) {

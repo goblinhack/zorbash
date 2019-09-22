@@ -29,16 +29,20 @@ void Level::finalize (void)
 
 void Level::dump (void)
 {
-    char tmp[width + 1][height + 1];
-    memset(tmp, ' ', sizeof(tmp));
+    std::array<std::array<char, CHUNK_HEIGHT>, CHUNK_WIDTH> tmp;
+    for (auto y = 0; y < height; y++) {
+        for (auto x = 0; x < width; x++) {
+            set(tmp, x, y, ' ');
+        }
+    }
 
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
-            auto c = data[x][y][MAP_DEPTH_WALLS];
+            auto c = get(data, x, y, MAP_DEPTH_WALLS);
             if (!c || (c == ' ')) {
-                c = data[x][y][MAP_DEPTH_FLOOR];
+                c = get(data, x, y, MAP_DEPTH_FLOOR);
             }
-            tmp[x][y] = c;
+            set(tmp, x, y, c);
         }
     }
 
@@ -46,7 +50,7 @@ void Level::dump (void)
     for (auto y = 0; y < height; y++) {
         std::string s;
         for (auto x = 0; x < width; x++) {
-            s += tmp[x][y];
+            s += get(tmp, x, y);
         }
         LOG("LEVEL(%d): %s", levelno, s.c_str());
     }
