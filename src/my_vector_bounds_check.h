@@ -4,6 +4,7 @@
 // Single dimension vector check
 //
 template<class TYPE>
+static inline
 void set(std::vector<TYPE>& vec, std::size_t X, TYPE v){_
     ASSERT(X >= 0)
     ASSERT(X < vec.size())
@@ -11,6 +12,7 @@ void set(std::vector<TYPE>& vec, std::size_t X, TYPE v){_
 }    
 
 template<class TYPE>
+static inline
 TYPE get(std::vector<TYPE> const &vec, std::size_t X){_
     ASSERT(X >= 0)
     ASSERT(X < vec.size())
@@ -18,6 +20,7 @@ TYPE get(std::vector<TYPE> const &vec, std::size_t X){_
 }    
 
 template<class TYPE>
+static inline
 TYPE& getref(std::vector<TYPE> &vec, std::size_t X){_
     ASSERT(X >= 0)
     ASSERT(X < vec.size())
@@ -28,6 +31,7 @@ TYPE& getref(std::vector<TYPE> &vec, std::size_t X){_
 // Two dimension vector check
 //
 template<class TYPE>
+static inline
 void set(std::vector<std::vector<TYPE>>& vec, 
          std::size_t X, std::size_t Y, TYPE v){_
     ASSERT(X >= 0)
@@ -38,6 +42,7 @@ void set(std::vector<std::vector<TYPE>>& vec,
 }    
 
 template<class TYPE>
+static inline
 TYPE& get(std::vector<std::vector<TYPE>> const &vec, 
           std::size_t X, std::size_t Y){_
     ASSERT(X >= 0)
@@ -48,6 +53,7 @@ TYPE& get(std::vector<std::vector<TYPE>> const &vec,
 }    
 
 template<class TYPE>
+static inline
 TYPE& getref(std::vector<std::vector<TYPE>> &vec, 
              std::size_t X, std::size_t Y){_
     ASSERT(X >= 0)
@@ -61,6 +67,7 @@ TYPE& getref(std::vector<std::vector<TYPE>> &vec,
 // Three dimension vector check
 //
 template<class TYPE>
+static inline
 void set(std::vector<std::vector<std::vector<TYPE>>>& vec, 
          std::size_t X, std::size_t Y, std::size_t Z, TYPE v){_
     ASSERT(X >= 0)
@@ -73,6 +80,7 @@ void set(std::vector<std::vector<std::vector<TYPE>>>& vec,
 }    
 
 template<class TYPE>
+static inline
 TYPE get(std::vector<std::vector<std::vector<TYPE>>> const &vec, 
          std::size_t X, std::size_t Y, std::size_t Z){_
     ASSERT(X >= 0)
@@ -85,6 +93,7 @@ TYPE get(std::vector<std::vector<std::vector<TYPE>>> const &vec,
 }    
 
 template<class TYPE>
+static inline
 TYPE& getref(std::vector<std::vector<std::vector<TYPE>>> & vec, 
              std::size_t X, std::size_t Y, std::size_t Z){_
     ASSERT(X >= 0)

@@ -290,7 +290,6 @@ public:
 
     void debug (std::string s)
     {_
-        return;
         LOG("dungeon (%u) %s", seed, s.c_str());
         dump();
     }

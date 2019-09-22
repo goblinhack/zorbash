@@ -48,8 +48,7 @@ extern void callstack_dump (void);
 struct tracer_t {
     tracer_t (const char *file,
               const char *func,
-              const unsigned int line) :
-              file(file), func(func), line(line)
+              const unsigned int line)
     {
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
@@ -67,9 +66,5 @@ struct tracer_t {
             callframes_depth--;
         }
     }
-
-    std::string file;
-    std::string func;
-    unsigned int line;
 };
 #endif

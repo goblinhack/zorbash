@@ -329,7 +329,13 @@ void Nodes::dump (void)
     const auto center = 3;
     const int h = (GRID_HEIGHT+1) * step;
     const int w = (GRID_WIDTH+1) * step;
-    std::array<std::array<char, h>, w> out = {};
+    std::array<std::array<char, h>, w> out;
+
+    for (auto y = 0; y < h; y++) {
+        for (auto x = 0; x < w; x++) {
+            set(out, x, y, ' ');
+        }
+    }
 
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {

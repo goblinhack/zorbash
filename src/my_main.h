@@ -31,6 +31,7 @@
 
 #undef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors
+#define ENABLE_TRACING             // Function tracing
 
 #ifdef DEBUG_CRASH
 #define ENABLE_TRACING             // Function tracing
@@ -239,7 +240,7 @@ extern uint8_t croaked;
 #ifdef ENABLE_ASSERT
 #define ASSERT(x)                                                             \
     if (!(x)) {                                                               \
-        DIE("Failed assert");                                                 \
+        DIE("Failed assert:" #x);                                                 \
     }
 #else
 #define ASSERT(x)
