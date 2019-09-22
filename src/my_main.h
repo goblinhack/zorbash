@@ -159,11 +159,6 @@ extern int TILES_DOWN;
 #define random_range_inclusive(a, b) (pcg32_boundedrand(b - a + 1) + a)
 
 //
-// Serialization support
-//
-#include "c_plus_plus_serializer.h"
-
-//
 // Simple array routines
 //
 #define ARRAY_SIZE(_array_) (sizeof(_array_)/sizeof(_array_[0]))
@@ -270,7 +265,24 @@ void minicon(const wchar_t *fmt);
 void tip2(const wchar_t *fmt);
 void tip(const wchar_t *fmt);
 
+//
+// Code tracing
+// https://github.com/goblinhack/callstack
+//
 #include "my_callstack.h"
+
+//
+// Array bounds checks
+// https://github.com/goblinhack/c-plus-plus-array-bounds-checker
+//
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+
+//
+// Serialization support
+// https://github.com/goblinhack/simple-c-plus-plus-serializer
+//
+#include "c_plus_plus_serializer.h"
 
 void SDL_MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
