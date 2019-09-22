@@ -4,6 +4,7 @@
 // Single dimension array check
 //
 template<class TYPE, std::size_t XDIM>
+static inline
 void set(std::array<TYPE,XDIM>& arr, std::size_t X, TYPE v){_
     ASSERT(X >= 0)
     ASSERT(X < arr.size())
@@ -11,6 +12,7 @@ void set(std::array<TYPE,XDIM>& arr, std::size_t X, TYPE v){_
 }    
 
 template<class TYPE, std::size_t XDIM>
+static inline
 TYPE get(std::array<TYPE,XDIM> const &arr, std::size_t X){_
     ASSERT(X >= 0)
     ASSERT(X < arr.size())
@@ -18,6 +20,7 @@ TYPE get(std::array<TYPE,XDIM> const &arr, std::size_t X){_
 }    
 
 template<class TYPE, std::size_t XDIM>
+static inline
 TYPE& getref(std::array<TYPE,XDIM> &arr, std::size_t X){_
     ASSERT(X >= 0)
     ASSERT(X < arr.size())
@@ -28,6 +31,7 @@ TYPE& getref(std::array<TYPE,XDIM> &arr, std::size_t X){_
 // Two dimension array check
 //
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+static inline
 void set(std::array<std::array<TYPE,YDIM>,XDIM>& arr, 
          std::size_t X, std::size_t Y, TYPE v){_
     ASSERT(X >= 0)
@@ -38,6 +42,7 @@ void set(std::array<std::array<TYPE,YDIM>,XDIM>& arr,
 }    
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+static inline
 void incr(std::array<std::array<TYPE,YDIM>,XDIM>& arr, 
           std::size_t X, std::size_t Y, TYPE v){_
     ASSERT(X >= 0)
@@ -48,6 +53,7 @@ void incr(std::array<std::array<TYPE,YDIM>,XDIM>& arr,
 }    
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+static inline
 void decr(std::array<std::array<TYPE,YDIM>,XDIM>& arr, 
           std::size_t X, std::size_t Y, TYPE v){_
     ASSERT(X >= 0)
@@ -58,6 +64,7 @@ void decr(std::array<std::array<TYPE,YDIM>,XDIM>& arr,
 }    
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+static inline
 TYPE& getref(std::array<std::array<TYPE,YDIM>,XDIM> &arr, 
              std::size_t X, std::size_t Y){_
     ASSERT(X >= 0)
@@ -68,6 +75,7 @@ TYPE& getref(std::array<std::array<TYPE,YDIM>,XDIM> &arr,
 }    
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+static inline
 TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const &arr, 
          std::size_t X, std::size_t Y){_
     ASSERT(X >= 0)
@@ -81,6 +89,7 @@ TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const &arr,
 // Three dimension array check
 //
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
+static inline
 void set(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM>& arr, 
          std::size_t X, std::size_t Y, std::size_t Z, TYPE v){_
     ASSERT(X >= 0)
@@ -93,6 +102,7 @@ void set(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM>& arr,
 }    
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
+static inline
 TYPE get(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> const &arr, 
           std::size_t X, std::size_t Y, std::size_t Z){_
     ASSERT(X >= 0)
@@ -105,6 +115,7 @@ TYPE get(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> const &arr,
 }    
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM>
+static inline
 TYPE& getref(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &arr, 
              std::size_t X, std::size_t Y, std::size_t Z){_
     ASSERT(X >= 0)
