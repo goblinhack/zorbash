@@ -35,12 +35,12 @@ enum {
 class Goal
 {
 public:
-    double score = {0};
+    float score = {0};
     point  at;
     Thingp thing {};
 
     Goal () {}
-    Goal (double score) : score(score) { }
+    Goal (float score) : score(score) { }
     Goal (Thingp target) : thing(target) { }
     Goal (point target) : at(target) { }
 
@@ -61,7 +61,7 @@ public:
 extern Path astar_solve(point start, std::multiset<Goal> &goals, Dmap *dmap);
 
 typedef struct {
-    std::array<std::array<uint32_t, CHUNK_HEIGHT>, CHUNK_WIDTH> val;
+    std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> val;
 } AgeMap;
 std::ostream& operator<<(std::ostream &out, Bits<const AgeMap & > const my);
 std::istream& operator>>(std::istream &in, Bits<AgeMap &> my);
@@ -309,7 +309,7 @@ typedef struct Thing_ {
     Thingp weapon_get_use_anim(void);
     Thingp weapon_get();
     bool ai_collisions_handle(void);
-    bool ai_is_goal_for_me(point p, int priority, double *score);
+    bool ai_is_goal_for_me(point p, int priority, float *score);
     bool ai_is_obstacle_for_me(point p);
     bool ai_possible_hit(Thingp it, int x, int y, int dx, int dy);
     bool move(fpoint future_pos);

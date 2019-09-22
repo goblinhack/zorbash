@@ -1681,7 +1681,7 @@ bool Nodes::create_path_to_exit (int pass)
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            d.val[x][y] = DMAP_IS_WALL;
+            set(d.val, x, y, DMAP_IS_WALL);
         }
     }
 
@@ -1693,20 +1693,20 @@ bool Nodes::create_path_to_exit (int pass)
                 auto Y = (y * 2) + 1;
                 if (n && node_is_a_room(n)) {
                     if (n->has_door_up || n->has_secret_exit_up) {
-                        d.val[X][Y-1] = DMAP_IS_PASSABLE;
+                        set(d.val, X, Y-1, DMAP_IS_PASSABLE);
                     }
                     if (n->has_door_down || n->has_secret_exit_down) {
-                        d.val[X][Y+1] = DMAP_IS_PASSABLE;
+                        set(d.val, X, Y+1, DMAP_IS_PASSABLE);
                     }
                     if (n->has_door_right || n->has_secret_exit_right) {
-                        d.val[X+1][Y] = DMAP_IS_PASSABLE;
+                        set(d.val, X+1, Y, DMAP_IS_PASSABLE);
                     }
                     if (n->has_door_left || n->has_secret_exit_left) {
-                        d.val[X-1][Y] = DMAP_IS_PASSABLE;
+                        set(d.val, X-1, Y, DMAP_IS_PASSABLE);
                     }
-                    d.val[X][Y] = DMAP_IS_PASSABLE;
+                    set(d.val, X, Y, DMAP_IS_PASSABLE);
                 } else {
-                    d.val[X][Y] = DMAP_IS_WALL;
+                    set(d.val, X, Y, DMAP_IS_WALL);
                 }
             }
         }
@@ -1718,28 +1718,28 @@ bool Nodes::create_path_to_exit (int pass)
                 auto Y = (y * 2) + 1;
                 if (n && node_is_a_room(n)) {
                     if (n->has_door_up) {
-                        d.val[X][Y-1] = DMAP_IS_PASSABLE;
+                        set(d.val, X, Y-1, DMAP_IS_PASSABLE);
                     }
                     if (n->has_door_down) {
-                        d.val[X][Y+1] = DMAP_IS_PASSABLE;
+                        set(d.val, X, Y+1, DMAP_IS_PASSABLE);
                     }
                     if (n->has_door_right) {
-                        d.val[X+1][Y] = DMAP_IS_PASSABLE;
+                        set(d.val, X+1, Y, DMAP_IS_PASSABLE);
                     }
                     if (n->has_door_left) {
-                        d.val[X-1][Y] = DMAP_IS_PASSABLE;
+                        set(d.val, X-1, Y, DMAP_IS_PASSABLE);
                     }
-                    d.val[X][Y] = DMAP_IS_PASSABLE;
+                    set(d.val, X, Y, DMAP_IS_PASSABLE);
                 } else {
-                    d.val[X][Y] = DMAP_IS_WALL;
+                    set(d.val, X, Y, DMAP_IS_WALL);
                 }
             }
         }
 
     }
 
-    d.val[end.x*2+1][end.y*2+1] = DMAP_IS_GOAL;
-    d.val[start.x*2+1][start.y*2+1] = DMAP_IS_PASSABLE;
+    set(d.val, end.x*2+1, end.y*2+1, DMAP_IS_GOAL);
+    set(d.val, start.x*2+1, start.y*2+1, DMAP_IS_PASSABLE);
 
     point dmap_start(minx, miny);
     point dmap_end(maxx, maxy);
@@ -1855,7 +1855,7 @@ void Nodes::create_path_lock_to_key (int depth)
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            d.val[x][y] = DMAP_IS_WALL;
+            set(d.val, x, y, DMAP_IS_WALL);
         }
     }
 
@@ -1867,26 +1867,26 @@ void Nodes::create_path_lock_to_key (int depth)
             if (n && (n->pass == 1) &&
                 (n->depth == depth) && node_is_a_room(n)) {
                 if (n->has_door_up) {
-                    d.val[X][Y-1] = DMAP_IS_PASSABLE;
+                    set(d.val, X, Y-1, DMAP_IS_PASSABLE);
                 }
                 if (n->has_door_down) {
-                    d.val[X][Y+1] = DMAP_IS_PASSABLE;
+                    set(d.val, X, Y+1, DMAP_IS_PASSABLE);
                 }
                 if (n->has_door_right) {
-                    d.val[X+1][Y] = DMAP_IS_PASSABLE;
+                    set(d.val, X+1, Y, DMAP_IS_PASSABLE);
                 }
                 if (n->has_door_left) {
-                    d.val[X-1][Y] = DMAP_IS_PASSABLE;
+                    set(d.val, X-1, Y, DMAP_IS_PASSABLE);
                 }
-                d.val[X][Y] = DMAP_IS_PASSABLE;
+                set(d.val, X, Y, DMAP_IS_PASSABLE);
             } else {
-                d.val[X][Y] = DMAP_IS_WALL;
+                set(d.val, X, Y, DMAP_IS_WALL);
             }
         }
     }
 
-    d.val[end.x*2+1][end.y*2+1] = DMAP_IS_GOAL;
-    d.val[start.x*2+1][start.y*2+1] = DMAP_IS_PASSABLE;
+    set(d.val, end.x*2+1, end.y*2+1, DMAP_IS_GOAL);
+    set(d.val, start.x*2+1, start.y*2+1, DMAP_IS_PASSABLE);
 
     point dmap_start(minx, miny);
     point dmap_end(maxx, maxy);
@@ -1974,7 +1974,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            d.val[x][y] = DMAP_IS_WALL;
+            set(d.val, x, y, DMAP_IS_WALL);
         }
     }
 
@@ -1986,18 +1986,18 @@ void Nodes::make_paths_off_critical_path_reachable (void)
 
             if (node_is_a_room(n)) {
                 if (n->has_door_up) {
-                    d.val[X][Y-1] = DMAP_IS_PASSABLE;
+                    set(d.val, X, Y-1, DMAP_IS_PASSABLE);
                 }
                 if (n->has_door_down) {
-                    d.val[X][Y+1] = DMAP_IS_PASSABLE;
+                    set(d.val, X, Y+1, DMAP_IS_PASSABLE);
                 }
                 if (n->has_door_right) {
-                    d.val[X+1][Y] = DMAP_IS_PASSABLE;
+                    set(d.val, X+1, Y, DMAP_IS_PASSABLE);
                 }
                 if (n->has_door_left) {
-                    d.val[X-1][Y] = DMAP_IS_PASSABLE;
+                    set(d.val, X-1, Y, DMAP_IS_PASSABLE);
                 }
-                d.val[X][Y] = DMAP_IS_PASSABLE;
+                set(d.val, X, Y, DMAP_IS_PASSABLE);
             }
         }
     }
@@ -2010,8 +2010,8 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     end.x = (end.x * 2) + 1;
     end.y = (end.y * 2) + 1;
 
-    d.val[end.x][end.y] = DMAP_IS_GOAL;
-    d.val[start.x][start.y] = DMAP_IS_PASSABLE;
+    set(d.val, end.x, end.y, DMAP_IS_GOAL);
+    set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
     dmap_process(&d, dmap_start, dmap_end);
     //dmap_print_walls(&d);
