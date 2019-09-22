@@ -310,13 +310,13 @@ CON("  goal add at: %d, %d", p.x, p.y);
     //
     // Combine the scores of multiple goals on each cell.
     //
-    std::array<std::array<float, CHUNK_WIDTH>, CHUNK_HEIGHT> cell_totals = {};
+    std::array<std::array<float, CHUNK_HEIGHT>, CHUNK_WIDTH> cell_totals = {};
     float highest_least_preferred = 0;
     float lowest_most_preferred = 0;
 //    const float wanderlust = 10;
 
     {
-        std::array<std::array<bool, CHUNK_WIDTH>, CHUNK_HEIGHT> walked = {};
+        std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> walked = {};
         for (auto g : goals_set) {
             auto p = g.at;
 //            if (!get(walked, p.x, p.y)) {
