@@ -10,7 +10,7 @@
 #include <array>
 
 typedef struct {
-    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> val;
+    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> val {};
 } Dmap;
 
 #include <type_traits>
@@ -32,6 +32,7 @@ typename std::remove_all_extents<T>::type* mend(T& arr) {
 }
 
 extern void dmap_process(Dmap *D, point tl, point br);
+extern void dmap_process(Dmap *D);
 extern void dmap_print(const Dmap *d, point start);
 extern void dmap_print_walls(const Dmap *d);
 extern std::vector<point> dmap_solve(const Dmap *d, const point start);

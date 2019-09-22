@@ -290,6 +290,11 @@ void dmap_process (Dmap *D, point tl, point br)
     }
 }
 
+void dmap_process (Dmap *D)
+{
+    dmap_process(D, point(0, 0), point(CHUNK_WIDTH, CHUNK_HEIGHT));
+}
+
 static bool is_movement_blocking_at (const Dmap *D, int x, int y)
 {
     if ((x >= CHUNK_WIDTH) || (y >= CHUNK_HEIGHT) || (x < 0) || (y < 0)) {
