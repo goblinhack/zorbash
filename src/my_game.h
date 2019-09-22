@@ -217,10 +217,6 @@ public:
     bool is_light(const point &p);
     bool is_monst(const int x, const int y);
     bool is_monst(const point &p);
-    bool is_oob(const fpoint p);
-    bool is_oob(const int x, const int y);
-    bool is_oob(const int x, const int y, const int z);
-    bool is_oob(const point p);
     bool is_rock(const int x, const int y);
     bool is_rock(const point &p);
     bool is_snow(const int x, const int y);
@@ -262,6 +258,31 @@ public:
     void unset_soil(const int x, const int y);
     void unset_wall(const int x, const int y);
     void unset_water(const int x, const int y);
+
+    static inline bool is_oob (const int x, const int y, const int z)
+    {
+        return ((x < 0) || (x >= MAP_WIDTH) ||
+                (y < 0) || (y >= MAP_HEIGHT) ||
+                (z < 0) || (z >= MAP_DEPTH));
+    }
+
+    static inline bool is_oob (const int x, const int y)
+    {
+        return ((x < 0) || (x >= MAP_WIDTH) ||
+                (y < 0) || (y >= MAP_HEIGHT));
+    }
+
+    static inline bool is_oob (const fpoint p)
+    {
+        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
+                (p.y < 0) || (p.y >= MAP_HEIGHT));
+    }
+
+    static inline bool is_oob (const point p)
+    {
+        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
+                (p.y < 0) || (p.y >= MAP_HEIGHT));
+    }
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
