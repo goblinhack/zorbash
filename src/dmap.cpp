@@ -6,14 +6,14 @@
 #include "my_main.h"
 #include "my_dmap.h"
 
-void dmap_print_walls (Dmap *d)
+void dmap_print_walls (const Dmap *d)
 {
     uint16_t x;
     uint16_t y;
 
     for (y = 0; y < CHUNK_HEIGHT; y++) {
         for (x = 0; x < CHUNK_WIDTH; x++) {
-            uint16_t e = d->val[x][y];
+            uint16_t e = get(d->val, x, y);
             if (e == DMAP_IS_WALL) {
                 printf("#");
                 continue;
@@ -34,14 +34,14 @@ void dmap_print_walls (Dmap *d)
     printf("\n");
 }
 
-void dmap_print (Dmap *d, point start)
+void dmap_print (const Dmap *d, point start)
 {
     uint16_t x;
     uint16_t y;
 
     for (y = 0; y < CHUNK_HEIGHT; y++) {
         for (x = 0; x < CHUNK_WIDTH; x++) {
-            uint16_t e = d->val[x][y];
+            uint16_t e = get(d->val, x, y);
             if (point(x, y) == start) {
                 printf(" @  ");
                 continue;
@@ -91,24 +91,10 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
                 new_val[x][y] = DMAP_IS_WALL;
                 continue;
             }
-            new_val[x][y] = d->val[(int)X][(int)Y];
+            new_val[x][y] = get(d->val, (int)X, (int)Y);
         }
     }
     std::copy(mbegin(new_val), mend(new_val), mbegin(d->val));
-}
-
-uint64_t dmap_hash (Dmap *d)
-{
-    uint64_t hash = 0;
-
-    for (auto y = 0; y < CHUNK_HEIGHT; y++) {
-        for (auto x = 0; x < CHUNK_WIDTH; x++) {
-            uint16_t e = d->val[x][y];
-            hash += e * x * y;
-            hash --;
-        }
-    }
-    return (hash);
 }
 
 void dmap_process (Dmap *D, point tl, point br)
@@ -166,12 +152,12 @@ void dmap_process (Dmap *D, point tl, point br)
     // trickle off the map
     //
     for (y = miny; y < CHUNK_HEIGHT; y++) {
-        D->val[minx][y] = DMAP_IS_WALL;
-        D->val[maxx][y] = DMAP_IS_WALL;
+        set(D->val, minx, y, DMAP_IS_WALL);
+        set(D->val, maxx, y, DMAP_IS_WALL);
     }
     for (x = 0; x < CHUNK_WIDTH; x++) {
-        D->val[x][miny] = DMAP_IS_WALL;
-        D->val[x][maxy] = DMAP_IS_WALL;
+        set(D->val, x, miny, DMAP_IS_WALL);
+        set(D->val, x, maxy, DMAP_IS_WALL);
     }
 
 #if 0
@@ -188,7 +174,7 @@ void dmap_process (Dmap *D, point tl, point br)
 
     for (y = miny + 1; y < maxy; y++) {
         for (x = minx + 1; x < maxx; x++) {
-            e = &D->val[x ][y];
+            e = &getref(D->val, x , y);
             if (*e != DMAP_IS_WALL) {
                 continue;
             }
@@ -221,7 +207,7 @@ void dmap_process (Dmap *D, point tl, point br)
                     continue;
                 }
 
-                e = &D->val[x  ][y];
+                e = &getref(D->val, x  , y);
 
                 /*
                  * Avoid diagonal moves.
@@ -230,35 +216,35 @@ void dmap_process (Dmap *D, point tl, point br)
                     (D->val[x][y-1] == DMAP_IS_WALL)) {
                     a = DMAP_IS_WALL;
                 } else {
-                    a = D->val[x-1][y-1];
+                    a = get(D->val, x-1, y-1);
                 }
 
-                b = D->val[x  ][y-1];
+                b = get(D->val, x  , y-1);
 
                 if ((D->val[x+1][y] == DMAP_IS_WALL) ||
                     (D->val[x][y-1] == DMAP_IS_WALL)) {
                     c = DMAP_IS_WALL;
                 } else {
-                    c = D->val[x+1][y-1];
+                    c = get(D->val, x+1, y-1);
                 }
 
-                d = D->val[x-1][y];
-                f = D->val[x+1][y];
+                d = get(D->val, x-1, y);
+                f = get(D->val, x+1, y);
 
                 if ((D->val[x-1][y] == DMAP_IS_WALL) ||
                     (D->val[x][y+1] == DMAP_IS_WALL)) {
                     g = DMAP_IS_WALL;
                 } else {
-                    g = D->val[x-1][y+1];
+                    g = get(D->val, x-1, y+1);
                 }
 
-                h = D->val[x  ][y+1];
+                h = get(D->val, x  , y+1);
 
                 if ((D->val[x+1][y] == DMAP_IS_WALL) ||
                     (D->val[x][y+1] == DMAP_IS_WALL)) {
                     i = DMAP_IS_WALL;
                 } else {
-                    i = D->val[x+1][y+1];
+                    i = get(D->val, x+1, y+1);
                 }
 
                 if (a < b) {
@@ -294,7 +280,7 @@ void dmap_process (Dmap *D, point tl, point br)
             if (o != DMAP_IS_WALL) {
                 if (o > DMAP_IS_PASSABLE) {
                     o = o - DMAP_IS_PASSABLE;
-                    int n = D->val[x][y];
+                    int n = get(D->val, x, y);
                     if (o + n < DMAP_IS_PASSABLE) {
                         D->val[x][y] += o;
                     }
@@ -487,7 +473,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
             return out;
         }
 
-        int lowest = D->val[x][y];
+        uint16_t lowest = get(D->val, x, y);
         bool got = false;
         point best;
 
@@ -515,7 +501,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
             if (D->val[tx][ty] == DMAP_IS_PASSABLE) {
                 continue;
             }
-            int c = D->val[tx][ty];
+            int c = get(D->val, tx, ty);
             if (c <= lowest) {
                 got = true;
                 best = t;
