@@ -139,15 +139,11 @@ static bool dungeon_debug = true;
 
 class Grid {
 public:
-    Roomp node_rooms[GRID_WIDTH][GRID_HEIGHT] = {};
+    std::array<std::array<Roomp, GRID_HEIGHT>, GRID_WIDTH> node_rooms;
 
     Grid()
     {
-        for (auto dy = 0; dy < GRID_HEIGHT; dy++) {
-            for (auto dx = 0; dx < GRID_WIDTH; dx++) {
-                node_rooms[dx][dy] = nullptr;
-            }
-        }
+        node_rooms = {};
     }
 };
 
@@ -174,7 +170,7 @@ public:
     int map_height                            {CHUNK_HEIGHT};
     int map_depth                             {MAP_DEPTH};
 
-    int map_jigsaw_buffer_water_depth[CHUNK_WIDTH][CHUNK_HEIGHT] = {};
+    std::array<std::array<int, CHUNK_HEIGHT>, CHUNK_WIDTH> map_jigsaw_buffer_water_depth;
 
     //
     // High level view of the map.
@@ -1191,7 +1187,7 @@ public:
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto dy = 0; dy < r->height; dy++) {
                 for (auto dx = 0; dx < r->width; dx++) {
-                    auto c = r->data[dx][dy][z];
+                    auto c = get(r->data, dx, dy, z);
                     if (c && (c != Charmap::SPACE)) {
                         putc(x + dx, y + dy, z, c);
                     }
@@ -1205,7 +1201,7 @@ public:
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto dy = 0; dy < r->height; dy++) {
                 for (auto dx = 0; dx < r->width; dx++) {
-                    auto c = r->data[dx][dy][z];
+                    auto c = get(r->data, dx, dy, z);
                     if (c == Charmap::DOOR) {
                         putc(x + dx, y + dy, z, c);
                     }
@@ -1223,7 +1219,7 @@ public:
                     continue;
                 }
 
-                Roomp r = g->node_rooms[x][y];
+                Roomp r = get(g->node_rooms, x, y);
                 if (r) {
                     room_print_only_doors_at(r, r->at.x, r->at.y);
                 }
@@ -1242,7 +1238,7 @@ public:
                     continue;
                 }
 
-                Roomp r = g->node_rooms[x][y];
+                Roomp r = get(g->node_rooms, x, y);
                 if (r) {
                     room_print_at(r,
                                   x * ROOM_WIDTH + MAP_BORDER,
@@ -1256,7 +1252,7 @@ public:
     {
         for (auto x = 0; x < nodes->grid_width; x++) {
             for (auto y = 0; y < nodes->grid_height; y++) {
-                auto o = grid.node_rooms[x][y];
+                auto o = get(grid.node_rooms, x, y);
                 if (o == r) {
                     return (false);
                 }
@@ -1316,7 +1312,7 @@ public:
     {
         for (auto x = 0; x < nodes->grid_width; x++) {
             for (auto y = 0; y < nodes->grid_height; y++) {
-                auto o = grid.node_rooms[x][y];
+                auto o = get(grid.node_rooms, x, y);
                 if (o == r) {
                     return (false);
                 }
@@ -1408,7 +1404,7 @@ public:
 	}
 
         auto r = candidates[random_range(0, ncandidates)];
-        g->node_rooms[x][y] = r;
+        set(g->node_rooms, x, y, r);
 
         if (n->has_door_down) {
             Grid old = *g;
@@ -1578,10 +1574,10 @@ public:
                     continue;
                 }
 
-                auto r = grid.node_rooms[x][y];
+                auto r = get(grid.node_rooms, x, y);
 
                 if (n->has_door_down) {
-                    auto o = grid.node_rooms[x][y+1];
+                    auto o = get(grid.node_rooms, x, y+1);
                     if (!o) {
                         debug("bug");
                         DIE("had exit down at %d,%d, but no node exists", x, y);
@@ -1605,7 +1601,7 @@ public:
                 }
 
                 if (n->has_door_right) {
-                    auto o = grid.node_rooms[x+1][y];
+                    auto o = get(grid.node_rooms, x+1, y);
                     if (!o) {
                         debug("bug");
                         DIE("had exit right at %d,%d, but no node exists", x, y);
@@ -1629,7 +1625,7 @@ public:
                 }
 
                 if (n->has_secret_exit_down) {
-                    auto o = grid.node_rooms[x][y+1];
+                    auto o = get(grid.node_rooms, x, y+1);
                     if (!o) {
                         debug("bug");
                         DIE("had secret exit down at %d,%d, but no node exists", x, y);
@@ -1655,7 +1651,7 @@ public:
                 }
 
                 if (n->has_secret_exit_right) {
-                    auto o = grid.node_rooms[x+1][y];
+                    auto o = get(grid.node_rooms, x+1, y);
                     if (!o) {
                         debug("bug");
                         DIE("had secret exit right at %d,%d, but no node exists", x, y);
@@ -1879,10 +1875,10 @@ public:
                     continue;
                 }
 
-                auto r = grid.node_rooms[x][y];
+                auto r = get(grid.node_rooms, x, y);
 
                 if (n->has_door_down) {
-                    auto o = grid.node_rooms[x][y+1];
+                    auto o = get(grid.node_rooms, x, y+1);
 
                     auto rdoori = r->which_door_down;
                     auto odoori = o->which_door_up;
@@ -1904,7 +1900,7 @@ public:
                 }
 
                 if (n->has_door_right) {
-                    auto o = grid.node_rooms[x+1][y];
+                    auto o = get(grid.node_rooms, x+1, y);
 
                     auto rdoori = r->which_door_right;
                     auto odoori = o->which_door_left;
@@ -1926,7 +1922,7 @@ public:
                 }
 
                 if (n->has_secret_exit_down) {
-                    auto o = grid.node_rooms[x][y+1];
+                    auto o = get(grid.node_rooms, x, y+1);
 
                     auto rdoori = r->which_secret_door_down;
                     auto odoori = o->which_secret_door_up;
@@ -1948,7 +1944,7 @@ public:
                 }
 
                 if (n->has_secret_exit_right) {
-                    auto o = grid.node_rooms[x+1][y];
+                    auto o = get(grid.node_rooms, x+1, y);
 
                     auto rdoori = r->which_secret_door_right;
                     auto odoori = o->which_secret_door_left;
@@ -1988,7 +1984,7 @@ public:
                     continue;
                 }
 
-                auto r = grid.node_rooms[x][y];
+                auto r = get(grid.node_rooms, x, y);
                 if (!r) {
                     continue;
                 }
@@ -2018,7 +2014,7 @@ public:
                     continue;
                 }
 
-                auto r = grid.node_rooms[x][y];
+                auto r = get(grid.node_rooms, x, y);
                 if (!r) {
                     continue;
                 }
@@ -2040,7 +2036,7 @@ public:
         for (auto dz = 0 ; dz < MAP_DEPTH; dz++) {
             for (auto dy = 0; dy < r->height; dy++) {
                 for (auto dx = 0; dx < r->width; dx++) {
-                    auto c = r->data[dx][dy][dz];
+                    auto c = get(r->data, dx, dy, dz);
                     if (c != Charmap::SPACE) {
                         putc_fast(x + dx, y + dy, dz, c);
                     }
@@ -2050,7 +2046,7 @@ public:
 
         for (auto dy = 0; dy < r->height; dy++) {
             for (auto dx = 0; dx < r->width; dx++) {
-                auto c = r->data[dx][dy][MAP_DEPTH_FLOOR];
+                auto c = get(r->data, dx, dy, MAP_DEPTH_FLOOR);
                 if (c != Charmap::SPACE) {
                     if (!is_anything_at(x + dx - 1, y + dy - 1)) {
                         putc_fast(x + dx - 1, y + dy - 1,
@@ -2098,7 +2094,7 @@ public:
         for (auto z = 0 ; z < MAP_DEPTH; z++) {
             for (auto y = 0; y < l->height; y++) {
                 for (auto x = 0; x < l->width; x++) {
-                    auto c = l->data[x][y][z];
+                    auto c = get(l->data, x, y, z);
                     if (c && (c != Charmap::SPACE)) {
                         putc(x, y, z, c);
                     }
@@ -2120,7 +2116,7 @@ public:
         for (auto dz = 0 ; dz < MAP_DEPTH; dz++) {
             for (auto dy = 0; dy < r->height; dy++) {
                 for (auto dx = 0; dx < r->width; dx++) {
-                    auto c = r->data[dx][dy][dz];
+                    auto c = get(r->data, dx, dy, dz);
                     if (c != Charmap::SPACE) {
                         putr(x + dx, y + dy, r);
                     }
@@ -2151,7 +2147,7 @@ public:
         for (auto dz = 0 ; dz < MAP_DEPTH; dz++) {
             for (auto dy = 0; dy < r->height; dy++) {
                 for (auto dx = 0; dx < r->width; dx++) {
-                    auto c = r->data[dx][dy][dz];
+                    auto c = get(r->data, dx, dy, dz);
                     if (c != Charmap::SPACE) {
                         if (is_anything_at(x + dx, y + dy)) {
                             return false;
@@ -2207,7 +2203,7 @@ public:
                     continue;
                 }
 
-                auto r = grid.node_rooms[x][y];
+                auto r = get(grid.node_rooms, x, y);
                 if (!r) {
                     continue;
                 }
@@ -2384,7 +2380,7 @@ public:
                     continue;
                 }
 
-                auto r = grid.node_rooms[x][y];
+                auto r = get(grid.node_rooms, x, y);
                 if (!r) {
                     continue;
                 }
@@ -2434,7 +2430,7 @@ public:
                             continue;
                         }
 
-                        auto r = grid.node_rooms[x][y];
+                        auto r = get(grid.node_rooms, x, y);
                         if (r) {
                             r->skip = (random_range(0, 100) < 10);
                         }
@@ -2451,7 +2447,7 @@ public:
                             continue;
                         }
 
-                        auto r = grid.node_rooms[x][y];
+                        auto r = get(grid.node_rooms, x, y);
                         if (!r) {
                             continue;
                         }
@@ -2472,7 +2468,7 @@ public:
                             continue;
                         }
 
-                        auto r = grid.node_rooms[x][y];
+                        auto r = get(grid.node_rooms, x, y);
                         if (!r) {
                             continue;
                         }
@@ -2668,7 +2664,7 @@ public:
                     continue;
                 }
 
-                auto r = grid.node_rooms[x][y];
+                auto r = get(grid.node_rooms, x, y);
                 if (r) {
                     auto n = nodes->getn(x, y);
                     r->depth = n->depth;
@@ -2698,7 +2694,7 @@ public:
                     continue;
                 }
 
-                auto r = grid.node_rooms[x][y];
+                auto r = get(grid.node_rooms, x, y);
                 if (!r) {
                     continue;
                 }
@@ -3248,8 +3244,8 @@ public:
     //
     // Used temporarily during level generation.
     //
-    uint8_t map_save[CHUNK_WIDTH][CHUNK_HEIGHT];
-    uint8_t map_curr[CHUNK_WIDTH][CHUNK_HEIGHT];
+    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> map_save;
+    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> map_curr;
 
     //
     // Grow our cells
@@ -3265,8 +3261,7 @@ public:
 
                 uint8_t adjcount = 0;
 
-#define ADJ(i,j)                                \
-                adjcount += map_curr[x+i][y+j];
+#define ADJ(i,j) adjcount += get(map_curr, x+i, y+j);
 
                 ADJ(-1,-1);
                 ADJ(-1, 0);
@@ -3309,7 +3304,7 @@ public:
                     // map_save set to 0 already.
                     //
                 } else {
-                    map_save[x][y] = 1;
+                    set(map_save, x, y, (uint8_t)1);
                 }
             }
         }
@@ -3355,8 +3350,8 @@ public:
     //
     void water_fixup (void)
     {
-        uint8_t cand[CHUNK_WIDTH][CHUNK_HEIGHT];
-        memset(cand, 0, sizeof(cand));
+        std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> cand;
+        cand = {};
 
         for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
             for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
@@ -3369,7 +3364,7 @@ public:
                     is_water(x - 1, y + 1) &&
                     is_water(x    , y + 1) &&
                     is_water(x + 1, y + 1)) {
-                    cand[x][y] = true;
+                    set(cand, x, y, true);
                 }
             }
         }
@@ -3396,8 +3391,8 @@ public:
                    uint8_t map_generations)
 
     {
-        memset(map_save, 0, sizeof(map_save));
-        memset(map_curr, 0, sizeof(map_curr));
+        map_save = {};
+        map_curr = {};
 
         const int16_t maze_w = CHUNK_WIDTH - 2;
         const int16_t maze_h = CHUNK_HEIGHT - 2;
@@ -3420,20 +3415,20 @@ public:
 
         int16_t x, y, i;
 
-        memset(map_curr, 0, sizeof(map_curr));
+        map_curr = {};
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
                 if ((myrand() % 100) < MAP_FILL_PROB) {
-                    map_curr[x][y] = 1;
+                    set(map_curr, x, y, (uint8_t)1);
                 }
             }
         }
 
         for (i=0; i < MAP_GENERATIONS; i++) {
             cave_generation();
-            memcpy(map_curr, map_save, sizeof(map_curr));
-            memset(map_save, 0, sizeof(map_save));
+            std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+            map_save = {};
         }
 
         for (x=2; x < maze_w-2; x++) {
@@ -3453,8 +3448,8 @@ public:
                    uint8_t map_generations)
 
     {
-        memset(map_save, 0, sizeof(map_save));
-        memset(map_curr, 0, sizeof(map_curr));
+        map_save = {};
+        map_curr = {};
 
         const int16_t maze_w = CHUNK_WIDTH - 2;
         const int16_t maze_h = CHUNK_HEIGHT - 2;
@@ -3477,20 +3472,20 @@ public:
 
         int16_t x, y, i;
 
-        memset(map_curr, 0, sizeof(map_curr));
+        map_curr = {};
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
                 if ((myrand() % 100) < MAP_FILL_PROB) {
-                    map_curr[x][y] = 1;
+                    set(map_curr, x, y, (uint8_t)1);
                 }
             }
         }
 
         for (i=0; i < MAP_GENERATIONS; i++) {
             cave_generation();
-            memcpy(map_curr, map_save, sizeof(map_curr));
-            memset(map_save, 0, sizeof(map_save));
+            std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+            map_save = {};
         }
 
         for (x=2; x < maze_w-2; x++) {
@@ -3510,8 +3505,8 @@ public:
                     uint8_t map_generations)
 
     {
-        memset(map_save, 0, sizeof(map_save));
-        memset(map_curr, 0, sizeof(map_curr));
+        map_save = {};
+        map_curr = {};
 
         const int16_t maze_w = CHUNK_WIDTH - 2;
         const int16_t maze_h = CHUNK_HEIGHT - 2;
@@ -3534,12 +3529,12 @@ public:
 
         int16_t x, y, i;
 
-        memset(map_curr, 0, sizeof(map_curr));
+        map_curr = {};
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
                 if ((myrand() % 100) < MAP_FILL_PROB) {
-                    map_curr[x][y] = 1;
+                    set(map_curr, x, y, (uint8_t)1);
                 }
             }
         }
@@ -3561,8 +3556,8 @@ printf("----------------------------------\n");
 #endif
 
             cave_generation();
-            memcpy(map_curr, map_save, sizeof(map_curr));
-            memset(map_save, 0, sizeof(map_save));
+            std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
+            map_save = {};
         }
 
         for (x=2; x < maze_w-2; x++) {

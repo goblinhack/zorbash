@@ -325,12 +325,11 @@ redo:
 
 void Nodes::dump (void)
 {
-    auto step = 5;
-    auto center = 3;
-
-    char out[(grid_height+1) * step][(grid_width+1) * step];
-
-    memset(out, ' ', sizeof(out));
+    const auto step = 5;
+    const auto center = 3;
+    const int h = (GRID_HEIGHT+1) * step;
+    const int w = (GRID_WIDTH+1) * step;
+    std::array<std::array<char, h>, w> out = {};
 
     for (auto y = 0; y < grid_height; y++) {
         for (auto x = 0; x < grid_width; x++) {
@@ -338,65 +337,65 @@ void Nodes::dump (void)
             auto oy = (y * step) + center;
             auto node = getn(x, y);
             if (node->has_door_down) {
-                out[oy+1][ox] = '|';
-                out[oy+2][ox] = '|';
+                set(out, oy+1, ox, '|');
+                set(out, oy+2, ox, '|');
             }
             if (node->has_door_up) {
-                out[oy-1][ox] = '|';
-                out[oy-2][ox] = '|';
+                set(out, oy-1, ox, '|');
+                set(out, oy-2, ox, '|');
             }
             if (node->has_door_left) {
-                out[oy][ox-1] = '-';
-                out[oy][ox-2] = '-';
+                set(out, oy, ox-1, '-');
+                set(out, oy, ox-2, '-');
             }
             if (node->has_door_right) {
-                out[oy][ox+1] = '-';
-                out[oy][ox+2] = '-';
+                set(out, oy, ox+1, '-');
+                set(out, oy, ox+2, '-');
             }
             if (node->has_secret_exit_down) {
-                out[oy+1][ox] = '?';
-                out[oy+2][ox] = '?';
+                set(out, oy+1, ox, '?');
+                set(out, oy+2, ox, '?');
             }
             if (node->has_secret_exit_up) {
-                out[oy-1][ox] = '?';
-                out[oy-2][ox] = '?';
+                set(out, oy-1, ox, '?');
+                set(out, oy-2, ox, '?');
             }
             if (node->has_secret_exit_left) {
-                out[oy][ox-1] = '?';
-                out[oy][ox-2] = '?';
+                set(out, oy, ox-1, '?');
+                set(out, oy, ox-2, '?');
             }
             if (node->has_secret_exit_right) {
-                out[oy][ox+1] = '?';
-                out[oy][ox+2] = '?';
+                set(out, oy, ox+1, '?');
+                set(out, oy, ox+2, '?');
             }
             if (node->dir_up) {
-                out[oy+1][ox-1] = '^';
+                set(out, oy+1, ox-1, '^');
             }
             if (node->dir_down) {
-                out[oy-1][ox+1] = 'v';
+                set(out, oy-1, ox+1, 'v');
             }
             if (node->dir_left) {
-                out[oy+1][ox-1] = '<';
+                set(out, oy+1, ox-1, '<');
             }
             if (node->dir_right) {
-                out[oy+1][ox+1] = '>';
+                set(out, oy+1, ox+1, '>');
             }
 
             auto t = 0;
             if (node->is_entrance) {
-                out[oy][ox-1] = 'S';
+                set(out, oy, ox-1, 'S');
                 t++;
             }
             if (node->is_exit) {
-                out[oy][ox-1] = 'E';
+                set(out, oy, ox-1, 'E');
                 t++;
             }
             if (node->is_lock) {
-                out[oy][ox-1] = 'D';
+                set(out, oy, ox-1, 'D');
                 t++;
             }
             if (node->is_key) {
-                out[oy][ox-1] = 'K';
+                set(out, oy, ox-1, 'K');
                 t++;
             }
 
@@ -409,14 +408,14 @@ void Nodes::dump (void)
             }
 
             if (node->depth == depth_obstacle) {
-                out[oy][ox] = 'O';
+                set(out, oy, ox, 'O');
             } else if (node->depth) {
-                out[oy][ox] = '0' + node->depth;
+                set(out, oy, ox, (char)('0' + node->depth));
             } else {
-                out[oy][ox] = '.';
+                set(out, oy, ox, '.');
             }
             if (node->on_critical_path) {
-                out[oy-1][ox-1] = '*';
+                set(out, oy-1, ox-1, '*');
             }
         }
     }
@@ -424,7 +423,7 @@ void Nodes::dump (void)
     for (auto y = 0; y < grid_height * step; y++) {
         std::string s;
         for (auto x = 0; x < grid_width * step; x++) {
-            s += out[y][x];
+            s += get(out, y, x);
         }
         if (s != "") {
             LOG("node-grid: [%s]", s.c_str());
@@ -1764,7 +1763,7 @@ bool Nodes::create_path_to_exit (int pass)
             auto Y = y*2 + 1;
 
             if (n && node_is_a_room(n)) {
-                if (d.val[X+1][Y] < d.val[X][Y]) {
+                if (get(d.val, X+1, Y) < d.val[X][Y]) {
                     auto o = getn(x+1, y);
                     if (o && (o->pass == n->pass) && node_is_a_room(o)) {
                         n->dir_up = false;
@@ -1774,7 +1773,7 @@ bool Nodes::create_path_to_exit (int pass)
                         n->dir_right = true;
                     }
                 }
-                if (d.val[X-1][Y] < d.val[X][Y]) {
+                if (get(d.val, X-1, Y) < d.val[X][Y]) {
                     auto o = getn(x-1, y);
                     if (o && (o->pass == n->pass) && node_is_a_room(o)) {
                         n->dir_up = false;
@@ -1784,7 +1783,7 @@ bool Nodes::create_path_to_exit (int pass)
                         n->dir_left = true;
                     }
                 }
-                if (d.val[X][Y+1] < d.val[X][Y]) {
+                if (get(d.val, X, Y+1) < d.val[X][Y]) {
                     auto o = getn(x, y+1);
                     if (o && (o->pass == n->pass) && node_is_a_room(o)) {
                         n->dir_up = false;
@@ -1794,7 +1793,7 @@ bool Nodes::create_path_to_exit (int pass)
                         n->dir_down = true;
                     }
                 }
-                if (d.val[X][Y-1] < d.val[X][Y]) {
+                if (get(d.val, X, Y-1) < d.val[X][Y]) {
                     auto o = getn(x, y-1);
                     if (o && (o->pass == n->pass) && node_is_a_room(o)) {
                         n->dir_up = false;
@@ -1899,32 +1898,32 @@ void Nodes::create_path_lock_to_key (int depth)
             auto X = x*2 + 1;
             auto Y = y*2 + 1;
 
-            if (d.val[X][Y] == DMAP_IS_WALL) {
+            if (get(d.val, X, Y) == DMAP_IS_WALL) {
                 continue;
             }
             if (n && node_is_a_room(n)) {
-                if (d.val[X+1][Y] < d.val[X][Y]) {
+                if (get(d.val, X+1, Y) < d.val[X][Y]) {
                     auto o = getn(x+1, y);
                     if (o && node_is_a_room(o)) {
                         n->dir_right = true;
                         o->dir_left = true;
                     }
                 }
-                if (d.val[X-1][Y] < d.val[X][Y]) {
+                if (get(d.val, X-1, Y) < d.val[X][Y]) {
                     auto o = getn(x-1, y);
                     if (o && node_is_a_room(o)) {
                         n->dir_left = true;
                         o->dir_right = true;
                     }
                 }
-                if (d.val[X][Y+1] < d.val[X][Y]) {
+                if (get(d.val, X, Y+1) < d.val[X][Y]) {
                     auto o = getn(x, y+1);
                     if (o && node_is_a_room(o)) {
                         n->dir_down = true;
                         o->dir_up = true;
                     }
                 }
-                if (d.val[X][Y-1] < d.val[X][Y]) {
+                if (get(d.val, X, Y-1) < d.val[X][Y]) {
                     auto o = getn(x, y-1);
                     if (o && node_is_a_room(o)) {
                         n->dir_up = true;
@@ -2016,8 +2015,8 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     dmap_process(&d, dmap_start, dmap_end);
     //dmap_print_walls(&d);
 
-    bool on_critical_path[grid_width][grid_height];
-    memset(on_critical_path, 0, sizeof(on_critical_path));
+    std::array<std::array<bool, GRID_HEIGHT>, GRID_WIDTH> on_critical_path;
+    on_critical_path = {};
 
     auto p = dmap_solve(&d, start);
     for (auto c : p) {
@@ -2037,7 +2036,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
             DIE("bug");
         }
 
-        on_critical_path[X][Y] = true;
+        set(on_critical_path, X, Y, true);
         auto n = getn(X, Y);
 
         n->on_critical_path = true;
