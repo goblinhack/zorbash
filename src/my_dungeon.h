@@ -361,12 +361,12 @@ public:
             return (nullptr);
         }
 
-        return (&cells[offset(x, y, z)]);
+        return (&getref(cells, offset(x, y, z)));
     }
 
     char *cell_addr_fast (const int x, const int y, const int z)
     {
-        return (&cells[offset(x, y, z)]);
+        return (&getref(cells, offset(x, y, z)));
     }
 
     //
@@ -430,12 +430,12 @@ public:
             return (nullptr);
         }
 
-        return (&cells_room[offset(x, y)]);
+        return (&getref(cells_room, offset(x, y)));
     }
 
     Roomp *cell_rooms_addr_fast (const int x, const int y)
     {
-        return (&cells_room[offset(x, y)]);
+        return (&getref(cells_room, offset(x, y)));
     }
 
     void putr (const int x, const int y, Roomp r)
@@ -1069,8 +1069,8 @@ public:
                     auto c = cr.c;
 
                     if (!c) {
-                        DIE("unknown map char %c at x %d, y %d, depth %d",
-                            m, x, y, d);
+                        DIE("unknown map char 0x%x/%c at x %d, y %d, depth %d",
+                            m, m, x, y, d);
                     }
 
                     if (nodes) {
@@ -1578,17 +1578,17 @@ public:
                 if (n->has_door_down) {
                     auto o = get(grid.node_rooms, x, y+1);
                     if (!o) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("had exit down at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->doors_down.size());
                     auto odoori = random_range(0, o->doors_up.size());
                     if (rdoori >= r->doors_down.size()) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("bug");
                     }
                     if (odoori >= o->doors_up.size()) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("bug");
                     }
 
@@ -1602,17 +1602,17 @@ public:
                 if (n->has_door_right) {
                     auto o = get(grid.node_rooms, x+1, y);
                     if (!o) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("had exit right at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->doors_right.size());
                     auto odoori = random_range(0, o->doors_left.size());
                     if (rdoori >= r->doors_right.size()) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("bug");
                     }
                     if (odoori >= o->doors_left.size()) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("bug");
                     }
 
@@ -1626,18 +1626,18 @@ public:
                 if (n->has_secret_exit_down) {
                     auto o = get(grid.node_rooms, x, y+1);
                     if (!o) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("had secret exit down at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->doors_down.size());
                     auto odoori = random_range(0, o->doors_up.size());
                     if (rdoori >= r->doors_down.size()) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("bug, room %d, down door index %d size %d",
                             r->roomno, (int)rdoori, (int)r->doors_down.size());
                     }
                     if (odoori >= o->doors_up.size()) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("bug, room %d, up door index %d size %d",
                             r->roomno, (int)odoori, (int)r->doors_up.size());
                     }
@@ -1652,18 +1652,18 @@ public:
                 if (n->has_secret_exit_right) {
                     auto o = get(grid.node_rooms, x+1, y);
                     if (!o) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("had secret exit right at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->doors_right.size());
                     auto odoori = random_range(0, o->doors_left.size());
                     if (rdoori >= r->doors_right.size()) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("bug, room %d, right door index %d size %d",
                             r->roomno, (int)rdoori, (int)r->doors_right.size());
                     }
                     if (odoori >= o->doors_left.size()) {
-                        debug("bug");
+                        _ debug("bug");
                         DIE("bug, room %d, left door index %d size %d",
                             r->roomno, (int)odoori, (int)r->doors_left.size());
                     }
@@ -1680,7 +1680,7 @@ public:
 
     void save_level (void)
     {
-        cells_saved = cells;
+        std::copy(mbegin(cells), mend(cells), mbegin(cells_saved));
 
         for (unsigned int rs = 0;
                 rs < (unsigned int) all_placed_rooms.size(); rs++) {
@@ -1691,7 +1691,7 @@ public:
 
     void restore_level (void)
     {
-        cells = cells_saved;
+        std::copy(mbegin(cells_saved), mend(cells_saved), mbegin(cells));
 
         for (unsigned int rs = 0;
                 rs < (unsigned int) all_placed_rooms.size(); rs++) {
@@ -1702,7 +1702,7 @@ public:
 
     int draw_corridor (point start, point end, char w)
     {
-        Dmap d;
+        Dmap d {};
 
 #if 0
         if (w == Charmap::CORRIDOR) {
@@ -1802,7 +1802,7 @@ public:
             for (auto c : p) {
                 putc(c.x, c.y, MAP_DEPTH_FLOOR, Charmap::DEBUG);
             }
-            debug("failed to create corridor, too long a corridor");
+            _ debug("failed to create corridor, too long a corridor");
             return (0);
         }
 #endif
@@ -1825,7 +1825,7 @@ public:
             putc(start.x, start.y, MAP_DEPTH_WALLS, Charmap::DEBUG);
             putc(end.x, end.y, MAP_DEPTH_WALLS, Charmap::DEBUG);
 
-            debug("failed to create corridor, end not found");
+            _ debug("failed to create corridor, end not found");
             LOG("dungeon: failed to create corridor, end not found between %d,%d and %d,%d",
                 start.x, start.y,
                 end.x, end.y);
@@ -1839,7 +1839,7 @@ public:
         putc(start.x, start.y, MAP_DEPTH_WALLS, Charmap::DOOR);
         putc(end.x, end.y, MAP_DEPTH_WALLS, Charmap::DOOR);
 
-        //debug("placed corridor");
+        //_ debug("placed corridor");
         return (p.size());
     }
 
@@ -2217,12 +2217,12 @@ public:
         //
         save_level();
         if (!draw_corridors()) {
-            debug("level before adding corridors is NOT solvable");
+            _ debug("level before adding corridors is NOT solvable");
             return (false);
         }
 
         restore_level();
-        debug("level before adding corridors is solvable");
+        _ debug("level before adding corridors is solvable");
 
         auto failed_attempts = 0;
         auto attempts_to_move_rooms_closer = 200;
@@ -2339,26 +2339,27 @@ public:
                 // then we can keep going. If not, rollback the room to the
                 // last that was solvable.
                 //
-                std::vector<char> cells_ok = cells;
+                std::vector<char> cells_ok;
+                std::copy(mbegin(cells), mend(cells), mbegin(cells_ok));
 
                 if (!draw_corridors()) {
-                    debug("failed to placing corridors, rollback");
+                    _ debug("failed to placing corridors, rollback");
                     restore_level();
 
                     if (failed_attempts++ > 20) {
-                        debug("success, placed compressed layout");
+                        _ debug("success, placed compressed layout");
                         return (true);
                     }
                 } else {
-                    debug("success, placed corridors");
+                    _ debug("success, placed corridors");
                     failed_attempts = 0;
-                    cells = cells_ok;
+                    std::copy(mbegin(cells_ok), mend(cells_ok), mbegin(cells));
                     save_level();
                 }
             }
         }
 
-        debug("success, placed compressed layout");
+        _ debug("success, placed compressed layout");
         return (true);
     }
 
@@ -2395,12 +2396,12 @@ public:
         save_level();
         auto corridor_count = draw_corridors();
         if (!corridor_count) {
-            debug("level before adding corridors is NOT solvable");
+            _ debug("level before adding corridors is NOT solvable");
             return (false);
         }
 
         dump();
-        debug("level before adding shorter corridors is solvable");
+        _ debug("level before adding shorter corridors is solvable");
         restore_level();
 
         auto failed_to_place_all_corridors = 0;
@@ -2605,14 +2606,15 @@ public:
                 // then we can keep going. If not, rollback the room to the
                 // last that was solvable.
                 //
-                std::vector<char> cells_ok = cells;
+                std::vector<char> cells_ok;
+                std::copy(mbegin(cells), mend(cells), mbegin(cells_ok));
 
                 auto new_corridor_count = draw_corridors();
 //CON("corridor_count %d new_corridor_count %d
 //failed_to_make_shorter_corridors %d ",corridor_count, new_corridor_count,
 //failed_to_make_shorter_corridors);
                 if (new_corridor_count >= corridor_count) {
-                    debug("failed to place shorter corridors, rollback");
+                    _ debug("failed to place shorter corridors, rollback");
 
                     restore_level();
                     if (!draw_corridors()) {
@@ -2620,13 +2622,13 @@ public:
                     }
 
                     if (failed_to_make_shorter_corridors++ > 100) {
-                        debug("success, placed shorter corridor layout");
+                        _ debug("success, placed shorter corridor layout");
                         return (true);
                     }
 
                     restore_level();
                 } else if (!new_corridor_count) {
-                    debug("failed to place all corridors, rollback");
+                    _ debug("failed to place all corridors, rollback");
 
                     restore_level();
                     if (!draw_corridors()) {
@@ -2634,22 +2636,22 @@ public:
                     }
 
                     if (failed_to_place_all_corridors++ > 20) {
-                        debug("success, placed shorter corridor layout");
+                        _ debug("success, placed shorter corridor layout");
                         return (true);
                     }
 
                     restore_level();
                 } else {
                     corridor_count = new_corridor_count;
-                    debug("success, placed corridors");
+                    _ debug("success, placed corridors");
                     failed_to_place_all_corridors = 0;
                     failed_to_make_shorter_corridors = 0;
-                    cells = cells_ok;
+                    std::copy(mbegin(cells_ok), mend(cells_ok), mbegin(cells));
                     save_level();
                 }
             }
         }
-        debug("success, placed shorter corridor layout");
+        _ debug("success, placed shorter corridor layout");
 
         return (draw_corridors());
     }
@@ -3243,8 +3245,8 @@ public:
     //
     // Used temporarily during level generation.
     //
-    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> map_save;
-    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> map_curr;
+    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> map_save {};
+    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> map_curr {};
 
     //
     // Grow our cells

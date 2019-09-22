@@ -195,12 +195,16 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
 
 fpoint Thing::ai_get_next_hop (void)
 {_
-    auto minx = 0;
-    auto miny = 0;
-    auto maxx = CHUNK_WIDTH;
-    auto maxy = CHUNK_HEIGHT;
-    fpoint fstart;
+    const auto dx = (CHUNK_WIDTH / 2) - 1;
+    const auto dy = (CHUNK_HEIGHT / 2) - 1;
 
+    auto minx = std::max(0, (int)mid_at.x - dx);
+    auto maxx = std::min(MAP_WIDTH, (int)mid_at.x + dx);
+
+    auto miny = std::max(0, (int)mid_at.y - dy);
+    auto maxy = std::min(MAP_HEIGHT, (int)mid_at.y + dy);
+
+    fpoint fstart;
     auto tpp = tp();
     fstart = mid_at;
     point start((int)fstart.x, (int)fstart.y);
@@ -225,17 +229,20 @@ fpoint Thing::ai_get_next_hop (void)
                 age = 0;
             }
 
+            auto X = x - minx;
+            auto Y = y - miny;
+
             if (ai_is_obstacle_for_me(p)) {
-                set(scent->val, x, y, DMAP_IS_WALL);
-                set(goals->val, x, y, DMAP_IS_WALL);
+                set(scent->val, X, Y, DMAP_IS_WALL);
+                set(goals->val, X, Y, DMAP_IS_WALL);
             } else if ((value = is_less_preferred_terrain(p))) {
-                set(scent->val, x, y, DMAP_IS_PASSABLE);
-                set(goals->val, x, y, DMAP_IS_PASSABLE);
-                incr(goals->val, x, y, (uint16_t)(age + value));
+                set(scent->val, X, Y, DMAP_IS_PASSABLE);
+                set(goals->val, X, Y, DMAP_IS_PASSABLE);
+                incr(goals->val, X, Y, (uint16_t)(age + value));
             } else {
-                set(scent->val, x, y, DMAP_IS_PASSABLE);
-                set(goals->val, x, y, DMAP_IS_PASSABLE);
-                incr(goals->val, x, y, (uint16_t)age);
+                set(scent->val, X, Y, DMAP_IS_PASSABLE);
+                set(goals->val, X, Y, DMAP_IS_PASSABLE);
+                incr(goals->val, X, Y, (uint16_t)age);
             }
         }
     }
@@ -243,15 +250,14 @@ fpoint Thing::ai_get_next_hop (void)
     //
     // We want to find how far everything is from us.
     //
-    set(scent->val, start.x, start.y, DMAP_IS_GOAL);
+_
+    set(scent->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
 
-    point tl(minx, miny);
-    point br(maxx, maxy);
 #if 0
 CON("scent before:");
 dmap_print(dmap_scent, start);
 #endif
-    dmap_process(scent, tl, br);
+    dmap_process(scent);
 #if 0
 CON("scent after:");
 dmap_print(dmap_scent, start);
@@ -269,11 +275,13 @@ CON("goals:");
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
-            fpoint fp(x, y);
+            auto X = x - minx;
+            auto Y = y - miny;
+
             //
             // Too far away to sense?
             //
-            if (get(scent->val, x, y) > tpp->ai_scent_distance) {
+            if (get(scent->val, X, Y) > tpp->ai_scent_distance) {
                 continue;
             }
 
@@ -287,21 +295,21 @@ CON("goals:");
                     continue;
                 }
 
-                score += get(scent->val, p.x, p.y);
+                score += get(scent->val, X, Y);
                 score += 100 * (priority + 1);
 
                 Goal goal(score);
-                goal.at = p;
+                goal.at = point(X, Y);
                 goals_set.insert(goal);
 #if 0
-CON("  goal add at: %d, %d", p.x, p.y);
+con("  goal add at: %d, %d", X, Y);
 #endif
 
                 //
                 // Also take note of the oldest cell age; we will use this
                 // later.
                 //
-                int age = get(age_map->val, p.x, p.y);
+                int age = get(age_map->val, x, y);
                 oldest = std::min(oldest, age);
             }
         }
@@ -324,6 +332,7 @@ CON("  goal add at: %d, %d", p.x, p.y);
 //                get(cell_totals, p.x, p.y) = wanderlust * (age - oldest);
 //            }
 
+_
             set(walked, p.x, p.y, true);
             incr(cell_totals, p.x, p.y, g.score);
             auto score = get(cell_totals, p.x, p.y);
@@ -346,12 +355,14 @@ CON("  goal add at: %d, %d", p.x, p.y);
         score = score - lowest_most_preferred;
         score /= (highest_least_preferred - lowest_most_preferred);
         score *= DMAP_IS_PASSABLE / 2;
+_
         set(goals->val, p.x, p.y, (uint16_t)(int)score);
     }
 
     //
     // Record we've been here.
     //
+_
     set(age_map->val, start.x, start.y, time_get_time_ms());
 
     //
@@ -365,7 +376,7 @@ CON("  goal add at: %d, %d", p.x, p.y);
 #if 0
     dmap_print(dmap_goals, start);
 #endif
-    dmap_process(goals, tl, br);
+    dmap_process(goals);
 #if 0
     CON("goals after:");
     dmap_print(dmap_goals, start);
@@ -375,21 +386,23 @@ CON("  goal add at: %d, %d", p.x, p.y);
     // Make sure we do not ewant to stay put/
     // moving as an option
     //
-    if (get(goals->val, start.x, start.y) > 0) {
-        set(goals->val, start.x, start.y, (uint16_t)(DMAP_IS_WALL - 1));
+    if (get(goals->val, start.x - minx, start.y - miny) > 0) {
+        set(goals->val, start.x - minx, start.y - miny, 
+            (uint16_t)(DMAP_IS_WALL - 1));
     }
 
     //
     // Move diagonally if not blocked by walls
     //
     //auto hops = dmap_solve(dmap_goals, start);
-    auto hops = astar_solve(start, goals_set, goals);
+    point s(start.x - minx, start.y - miny);
+    auto hops = astar_solve(s, goals_set, goals);
     auto hopssize = hops.path.size();
     point best;
     if (hopssize >= 2) {
         auto hop0 = get(hops.path, hopssize - 1);
         auto hop1 = get(hops.path, hopssize - 2);
-        if (dmap_can_i_move_diagonally(goals, start, hop0, hop1)) {
+        if (dmap_can_i_move_diagonally(goals, s, hop0, hop1)) {
             best = hop1;
         } else {
             best = hop0;
@@ -398,8 +411,11 @@ CON("  goal add at: %d, %d", p.x, p.y);
         auto hop0 = get(hops.path, hopssize - 1);
         best = hop0;
     } else {
-        best = start;
+        best = s;
     }
+
+    best.x += minx;
+    best.y += miny;
 
     fpoint fbest;
     fbest.x = best.x + 0.5;

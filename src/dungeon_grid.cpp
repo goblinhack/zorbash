@@ -1670,9 +1670,7 @@ bool Nodes::create_path_to_exit (int pass)
         }
     }
 
-    Dmap d;
-
-    memset(&d, 0, sizeof(d));
+    Dmap d {};
 
     int minx, miny, maxx, maxy;
 
@@ -1844,9 +1842,7 @@ void Nodes::create_path_lock_to_key (int depth)
         }
     }
 
-    Dmap d;
-
-    memset(&d, 0, sizeof(d));
+    Dmap d {};
 
     int minx, miny, maxx, maxy;
 
@@ -1971,8 +1967,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     maxx = grid_width * 2 + 1;
     maxy = grid_height * 2 + 1;
 
-    Dmap d;
-    memset(&d, 0, sizeof(d));
+    Dmap d {};
 
     //
     // Set up obstacles for the exit search
