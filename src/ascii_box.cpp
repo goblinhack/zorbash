@@ -21,7 +21,8 @@ static void ascii_put_shaded_box (int style, Tilep tile,
     static const int MAX_STYLES = 5;
     static const int MAX_UI_SIZE = 16;
     static const int MAX_UI_BG_SIZE = MAX_UI_SIZE - 2;
-    static Tilep tiles[MAX_STYLES][MAX_UI_SIZE][MAX_UI_SIZE];
+    static std::array<std::array<std::array<Tilep, MAX_UI_SIZE>, 
+                                             MAX_UI_SIZE>, MAX_STYLES> tiles;
 
     if (style >= MAX_STYLES) {
         DIE("unimplemented style %d", style);
@@ -35,7 +36,7 @@ static void ascii_put_shaded_box (int style, Tilep tile,
                     std::string name = 
                         "ui" + std::to_string(styles) + "," +
                         std::to_string(x) + "," + std::to_string(y);
-                    tiles[styles][x][y] = tile_find_mand(name);
+                    set(tiles, styles, x, y, tile_find_mand(name));
                 }
             }
         }
@@ -223,16 +224,16 @@ void ascii_put_box (box_args b, int style, Tilep tile, const wchar_t *fmt, ...)
                 continue;
             }
 
-            ascii.sdl_mod[x][y] = b.sdl_mod;
-            ascii.sdl_key[x][y] = b.sdl_key;
-            ascii.mouse_button[x][y] = b.mouse_button;
+            set(ascii.sdl_mod, x, y, b.sdl_mod);
+            set(ascii.sdl_key, x, y, b.sdl_key);
+            set(ascii.mouse_button, x, y, b.mouse_button);
 
             /*
              * Callbacks for ascii co-ords.
              */
-            ascii.key_down[x][y] = b.key_down;
-            ascii.mouse_down[x][y] = b.mouse_down;
-            ascii.mouse_over[x][y] = b.mouse_over;
+            set(ascii.key_down, x, y, b.key_down);
+            set(ascii.mouse_down, x, y, b.mouse_down);
+            set(ascii.mouse_over, x, y, b.mouse_over);
         }
     }
 }

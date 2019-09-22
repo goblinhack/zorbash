@@ -22,16 +22,22 @@ struct ascii_ {
     //
     // UI triggers for ASCII co-ords.
     //
-    int32_t sdl_mod[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
-    int32_t sdl_key[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
-    int32_t mouse_button[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
+    std::array<std::array<int32_t, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> sdl_mod;
+    std::array<std::array<int32_t, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> sdl_key;
+    std::array<std::array<int32_t, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> mouse_button;
 
     //
     // Callbacks for ASCII co-ords.
     //
-    ascii_key_down_callback key_down[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
-    ascii_mouse_down_callback mouse_down[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
-    ascii_mouse_over_callback mouse_over[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
+    std::array<
+      std::array<ascii_key_down_callback, ASCII_HEIGHT_MAX>, 
+                    ASCII_WIDTH_MAX> key_down;
+    std::array<
+      std::array<ascii_mouse_down_callback, ASCII_HEIGHT_MAX>, 
+                    ASCII_WIDTH_MAX> mouse_down;
+    std::array<
+      std::array<ascii_mouse_over_callback, ASCII_HEIGHT_MAX>, 
+                    ASCII_WIDTH_MAX> mouse_over;
 };
 
 extern struct ascii_ ascii;
