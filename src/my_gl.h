@@ -373,9 +373,9 @@ void glcolor(color s);
 #define FBO_LIGHT_MERGED 3
 #define FBO_REFLECTION   4
 
-extern GLuint render_buf_id[MAX_FBO];
-extern GLuint fbo_id[MAX_FBO];
-extern GLuint fbo_tex_id[MAX_FBO];
+extern std::array<GLuint, MAX_FBO> render_buf_id;
+extern std::array<GLuint, MAX_FBO> fbo_id;
+extern std::array<GLuint, MAX_FBO> fbo_tex_id;
 
 void blit_fbo(int fbo);
 void blit_fbo_upside_down(int fbo);

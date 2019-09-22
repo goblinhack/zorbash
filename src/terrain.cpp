@@ -39,17 +39,17 @@ class Terrain
 {
 private:
 public:
-    signed char new_map[MAP_WIDTH*2][MAP_HEIGHT*2]  = {{0}};
-    signed char old_map[MAP_WIDTH*2][MAP_HEIGHT*2]  = {{0}};
-    signed char merged_map[MAP_WIDTH][MAP_HEIGHT]   = {{0}};
-    float       final_map[MAP_WIDTH][MAP_HEIGHT]    = {{0}};
-    float       groundwater[MAP_WIDTH][MAP_HEIGHT]  = {{0}};
-    float       river[MAP_WIDTH][MAP_HEIGHT]  = {{0}};
-    float       humidity[MAP_WIDTH][MAP_HEIGHT]     = {{0}};
-    float       old_humidity[MAP_WIDTH][MAP_HEIGHT] = {{0}};
-    uint16_t    droplet_map[MAP_WIDTH][MAP_HEIGHT]  = {{0}};
-
+    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> new_map;
+    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> old_map;
+    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> merged_map;
+    std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> droplet_map;
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> final_map;
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> groundwater;
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> river;
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> humidity;
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> old_humidity;
     std::array<Droplet, MAX_DROPLETS> droplets;
+
     uint32_t                          tex_groundwater;
     Texp                              tex_groundwater_p = {};
     uint32_t                          tex_clouds;
@@ -361,27 +361,27 @@ public:
                 if (final_map[x][y] < 20) { c = GRAY1; }
                 if (final_map[x][y] < 15) {
                     c = BLUE;
-                    c.b += final_map[x][y];
+                    c.b += get(final_map, x, y);
                 }
                 if (final_map[x][y] < 10) {
                     c = BLUE;
-                    c.b += final_map[x][y];
+                    c.b += get(final_map, x, y);
                 }
                 if (final_map[x][y] < 5) {
                     c = BLUE;
-                    c.b += final_map[x][y];
+                    c.b += get(final_map, x, y);
                 }
                 if (final_map[x][y] < 4) {
                     c = BLUE;
-                    c.b += final_map[x][y];
+                    c.b += get(final_map, x, y);
                 }
                 if (final_map[x][y] < 3) {
                     c = BLUE;
-                    c.b += final_map[x][y];
+                    c.b += get(final_map, x, y);
                 }
                 if (final_map[x][y] < 2) {
                     c = DARKBLUE;
-                    c.b += final_map[x][y];
+                    c.b += get(final_map, x, y);
                 }
 
                 putPixel(image, x, y, c);
@@ -676,7 +676,7 @@ redo:
         x = mod(x, MAP_WIDTH);
         y = mod(y, MAP_WIDTH);
 
-        float height = final_map[x][y];
+        float height = get(final_map, x, y);
         //height /= 1000.0;
 
         return (humidity[x][y] + height);
@@ -708,8 +708,8 @@ redo:
 
     void calculate_attraction (void)
     {
-        memset(humidity, 0, sizeof(humidity));
-        memset(droplet_map, 0, sizeof(droplet_map));
+        humidity = {};
+        droplet_map = {};
 
         for (auto di = 1; di < MAX_DROPLETS; di++) {
             auto d = &droplets[di];

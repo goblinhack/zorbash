@@ -122,9 +122,9 @@ int Thing::is_less_preferred_terrain (point p)
 //
 // Lower scores are more preferred
 // k
-bool Thing::ai_is_goal_for_me (point p, int priority, double *score)
+bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
 {
-    double distance_scale = distance(mid_at, fpoint(p.x, p.y));
+    float distance_scale = distance(mid_at, fpoint(p.x, p.y));
     if (!distance_scale) {
         distance_scale = 1.0;
     }
@@ -231,12 +231,11 @@ fpoint Thing::ai_get_next_hop (void)
             } else if ((value = is_less_preferred_terrain(p))) {
                 set(scent->val, x, y, DMAP_IS_PASSABLE);
                 set(goals->val, x, y, DMAP_IS_PASSABLE);
-                goals->val[x][y] += age;
-                goals->val[x][y] += value;
+                incr(goals->val, x, y, (uint16_t)(age + value));
             } else {
                 set(scent->val, x, y, DMAP_IS_PASSABLE);
                 set(goals->val, x, y, DMAP_IS_PASSABLE);
-                goals->val[x][y] += age;
+                incr(goals->val, x, y, (uint16_t)age);
             }
         }
     }
@@ -274,7 +273,7 @@ CON("goals:");
             //
             // Too far away to sense?
             //
-            if (scent->val[x][y] > tpp->ai_scent_distance) {
+            if (get(scent->val, x, y) > tpp->ai_scent_distance) {
                 continue;
             }
 
@@ -283,7 +282,7 @@ CON("goals:");
             // have multiple goals per cell. We combine them all together.
             //
             for (auto priority = 0; priority < 3; priority++) {
-                double score = 0;
+                float score = 0;
                 if (!ai_is_goal_for_me(p, priority, &score)) {
                     continue;
                 }
@@ -311,25 +310,23 @@ CON("  goal add at: %d, %d", p.x, p.y);
     //
     // Combine the scores of multiple goals on each cell.
     //
-    double cell_totals[CHUNK_WIDTH][CHUNK_HEIGHT];
-    memset(&cell_totals, 0, sizeof(cell_totals));
-    double highest_least_preferred = 0;
-    double lowest_most_preferred = 0;
-//    const double wanderlust = 10;
+    std::array<std::array<float, CHUNK_WIDTH>, CHUNK_HEIGHT> cell_totals = {};
+    float highest_least_preferred = 0;
+    float lowest_most_preferred = 0;
+//    const float wanderlust = 10;
 
     {
-        uint8_t walked[CHUNK_WIDTH][CHUNK_HEIGHT];
-        memset(&walked, 0, sizeof(walked));
+        std::array<std::array<bool, CHUNK_WIDTH>, CHUNK_HEIGHT> walked = {};
         for (auto g : goals_set) {
             auto p = g.at;
-//            if (!walked[p.x][p.y]) {
+//            if (!get(walked, p.x, p.y)) {
 //                int age = get(age_map->val, p.x, p.y);
-//                cell_totals[p.x][p.y] = wanderlust * (age - oldest);
+//                get(cell_totals, p.x, p.y) = wanderlust * (age - oldest);
 //            }
 
-            walked[p.x][p.y] = true;
-            cell_totals[p.x][p.y] += g.score;
-            auto score = cell_totals[p.x][p.y];
+            set(walked, p.x, p.y, true);
+            incr(cell_totals, p.x, p.y, g.score);
+            auto score = get(cell_totals, p.x, p.y);
 
             //
             // Find the highest/least preferred score so we can scale all
@@ -345,7 +342,7 @@ CON("  goal add at: %d, %d", p.x, p.y);
     //
     for (auto g : goals_set) {
         auto p = g.at;
-        auto score = cell_totals[p.x][p.y];
+        auto score = get(cell_totals, p.x, p.y);
         score = score - lowest_most_preferred;
         score /= (highest_least_preferred - lowest_most_preferred);
         score *= DMAP_IS_PASSABLE / 2;
@@ -378,7 +375,7 @@ CON("  goal add at: %d, %d", p.x, p.y);
     // Make sure we do not ewant to stay put/
     // moving as an option
     //
-    if (goals->val[start.x][start.y] > 0) {
+    if (get(goals->val, start.x, start.y) > 0) {
         set(goals->val, start.x, start.y, (uint16_t)(DMAP_IS_WALL - 1));
     }
 
@@ -390,15 +387,15 @@ CON("  goal add at: %d, %d", p.x, p.y);
     auto hopssize = hops.path.size();
     point best;
     if (hopssize >= 2) {
-        auto hop0 = hops.path[hopssize - 1];
-        auto hop1 = hops.path[hopssize - 2];
+        auto hop0 = get(hops.path, hopssize - 1);
+        auto hop1 = get(hops.path, hopssize - 2);
         if (dmap_can_i_move_diagonally(goals, start, hop0, hop1)) {
             best = hop1;
         } else {
             best = hop0;
         }
     } else if (hops.path.size() >= 1) {
-        auto hop0 = hops.path[hopssize - 1];
+        auto hop0 = get(hops.path, hopssize - 1);
         best = hop0;
     } else {
         best = start;

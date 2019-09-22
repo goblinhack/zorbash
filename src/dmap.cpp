@@ -88,10 +88,10 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
 
             if ((X < 0) || (X >= CHUNK_WIDTH) ||
                 (Y < 0) || (Y >= CHUNK_HEIGHT)) {
-                new_val[x][y] = DMAP_IS_WALL;
+                set(new_val, x, y, DMAP_IS_WALL);
                 continue;
             }
-            new_val[x][y] = get(d->val, (int)X, (int)Y);
+            set(new_val, x, y, get(d->val, (int)X, (int)Y));
         }
     }
     std::copy(mbegin(new_val), mend(new_val), mbegin(d->val));

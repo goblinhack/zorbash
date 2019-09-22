@@ -66,7 +66,7 @@ Lightp light_new (Thingp owner,
      */
     double dr = RAD_360 / (double) max_light_rays;
     for (auto i = 0; i < max_light_rays; i++) {
-        auto r = &l->ray[i];
+        auto r = &getref(l->ray, i);
         double rad = dr * (double)i;
         sincos(rad, &r->sinr, &r->cosr);
     }
@@ -86,7 +86,7 @@ void Light::calculate (void)
     // to avoid lighting walls behind those immediately visible to us. To
     // do this we do a flood fill of the level and pick the nearest walls.
     //
-    static uint32_t is_nearest_wall[MAP_WIDTH][MAP_HEIGHT] = {};
+    static std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> is_nearest_wall;
     static uint32_t is_nearest_wall_val;
     is_nearest_wall_val++;
 
@@ -123,7 +123,7 @@ void Light::calculate (void)
      * walls.
      */
     for (int i = 0; i < max_light_rays; i++) {
-        auto r = &ray[i];
+        auto r = &getref(ray, i);
         double step = 0.0;
         for (; step < strength; step += 0.01) {
             double rad = step;
@@ -165,7 +165,7 @@ void Light::calculate (void)
                 break;
             }
 
-            is_nearest_wall[x][y] = is_nearest_wall_val;
+            set(is_nearest_wall, x, y, is_nearest_wall_val);
         }
     }
 
@@ -178,7 +178,7 @@ void Light::calculate (void)
      * for all tiles first.
      */
     for (int i = 0; i < max_light_rays; i++) {
-        auto r = &ray[i];
+        auto r = &getref(ray, i);
         double radius = r->depth_closest;
         double fade = pow(strength - radius, 0.05);
         double step = 0.0;
@@ -199,7 +199,7 @@ void Light::calculate (void)
                 continue;
             }
 
-            if (is_nearest_wall[x][y] != is_nearest_wall_val) {
+            if (get(is_nearest_wall, x, y) != is_nearest_wall_val) {
                 break;
             }
         }
@@ -211,7 +211,7 @@ void Light::calculate (void)
     }
 #if 0
     for (int i = 0; i < max_light_rays; i++) {
-        auto r = &ray[i];
+        auto r = &getref(ray, i);
         printf("%f ", r->depth_furthest);
     }
 printf("\n");
@@ -250,26 +250,24 @@ void Light::render_triangle_fans (void)
             push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
             for (i = 0; i < max_light_rays; i++) {
-                auto r = &ray[i];
+                auto r = &getref(ray, i);
                 double radius = r->depth_furthest;
                 double p1x = light_pos.x + r->cosr * radius * tile_gl_width_pct;
                 double p1y = light_pos.y + r->sinr * radius * tile_gl_height_pct;
 
-                // off white looks better
-                push_point(p1x, p1y, red, green, blue, 1);
+                push_point(p1x, p1y, red, green, blue, alpha);
             }
 
             /*
              * Complete the circle with the first point again.
              */
             i = 0; {
-                auto r = &ray[0];
+                auto r = &getref(ray, i);
                 double radius = r->depth_furthest;
                 double p1x = light_pos.x + r->cosr * radius * tile_gl_width_pct;
                 double p1y = light_pos.y + r->sinr * radius * tile_gl_height_pct;
 
-                // off white looks better
-                push_point(p1x, p1y, red, green, blue, 1);
+                push_point(p1x, p1y, red, green, blue, alpha);
             }
         }
 
@@ -382,15 +380,20 @@ void Light::render (int fbo, int pass)
         render_triangle_fans();
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
         blit_fbo_bind(fbo);
-blit_init();
-blit(fbo_tex_id[FBO_LIGHT_MASK], 0.0, 1.0, 1.0, 0.0,  0.01,  0.01, 0.99, 0.99);
-blit_flush();
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-glcolor(dull);
-blit_init();
-blit(fbo_tex_id[FBO_LIGHT_MASK], 0.0, 1.0, 1.0, 0.0, -0.05, -0.05, 1.05, 1.05);
-blit_flush();
+        blit_init();
+        blit(get(fbo_tex_id, FBO_LIGHT_MASK),
+                 0.0, 1.0, 1.0, 0.0,  0.01,  0.01, 0.99, 0.99);
+        blit_flush();
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glcolor(dull);
+        blit_init();
+        blit(get(fbo_tex_id, FBO_LIGHT_MASK),
+                 0.0, 1.0, 1.0, 0.0, -0.05, -0.05, 1.05, 1.05);
+        blit_flush();
+
         blit_fbo_unbind();
 
         break;

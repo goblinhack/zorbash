@@ -1765,9 +1765,9 @@ public:
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if (is_anything_at_fast(x, y)) {
-                    d.val[x][y] = DMAP_IS_WALL;
+                    set(d.val, x, y, DMAP_IS_WALL);
                 } else {
-                    d.val[x][y] = DMAP_IS_PASSABLE;
+                    set(d.val, x, y, DMAP_IS_PASSABLE);
                 }
             }
         }
@@ -1778,11 +1778,11 @@ public:
         for (auto y = miny + 1; y < maxy - 1; y++) {
             for (auto x = minx + 1; x < maxx - 1; x++) {
                 if (is_corridor_fast(x, y)) {
-                    d.val[x-1][y] = DMAP_IS_WALL;
-                    d.val[x][y-1] = DMAP_IS_WALL;
-                    d.val[x][y] = DMAP_IS_WALL;
-                    d.val[x][y+1] = DMAP_IS_WALL;
-                    d.val[x+1][y] = DMAP_IS_WALL;
+                    set(d.val, x-1, y, DMAP_IS_WALL);
+                    set(d.val, x, y-1, DMAP_IS_WALL);
+                    set(d.val, x, y, DMAP_IS_WALL);
+                    set(d.val, x, y+1, DMAP_IS_WALL);
+                    set(d.val, x+1, y, DMAP_IS_WALL);
                 }
             }
         }
@@ -1790,8 +1790,8 @@ public:
         dmap_start = point(minx, miny);
         dmap_end = point(maxx, maxy);
 
-        d.val[end.x][end.y] = DMAP_IS_GOAL;
-        d.val[start.x][start.y] = DMAP_IS_PASSABLE;
+        set(d.val, end.x, end.y, DMAP_IS_GOAL);
+        set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
         dmap_process(&d, dmap_start, dmap_end);
         //dmap_print_walls(&d);
@@ -2810,9 +2810,9 @@ public:
             for (y = 0; y < CHUNK_HEIGHT; y++) {
 
                 if (is_anything_at(x, y)) {
-                    d->val[x][y] = DMAP_IS_WALL;
+                    set(d->val, x, y, DMAP_IS_WALL);
                 } else {
-                    d->val[x][y] = DMAP_IS_WALL - 1;
+                    set(d->val, x, y, (uint16_t)(DMAP_IS_WALL - 1));
                 }
             }
         }
