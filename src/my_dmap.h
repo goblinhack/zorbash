@@ -32,8 +32,8 @@ typename std::remove_all_extents<T>::type* mend(T& arr) {
 }
 
 extern void dmap_process(Dmap *D, point tl, point br);
-extern void dmap_print(Dmap *d, point start);
-extern void dmap_print_walls(Dmap *d);
+extern void dmap_print(const Dmap *d, point start);
+extern void dmap_print_walls(const Dmap *d);
 extern std::vector<point> dmap_solve(const Dmap *d, const point start);
 extern void dmap_l_shaped_path_to_diag(const Dmap *D,
                                        std::vector<point> &path);
@@ -41,11 +41,9 @@ extern bool dmap_can_i_move_diagonally(const Dmap *D,
                                        const point p,
                                        const point n,
                                        const point m);
-extern void dmap_scale_and_recenter(Dmap *D,
+extern void dmap_scale_and_recenter(const Dmap *D,
                                     const fpoint p,
                                     const int scale);
-extern uint64_t dmap_hash(Dmap *d);
-
-#define DMAP_IS_WALL     65535
-#define DMAP_IS_PASSABLE 1000
-#define DMAP_IS_GOAL     0
+#define DMAP_IS_WALL     ((uint16_t)65535)
+#define DMAP_IS_PASSABLE ((uint16_t)1000)
+#define DMAP_IS_GOAL     ((uint16_t)0)

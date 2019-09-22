@@ -31,8 +31,18 @@ void set(std::array<std::array<TYPE,YDIM>,XDIM>& arr,
 }    
 
 template<class TYPE, std::size_t XDIM, std::size_t YDIM>
-TYPE& get(std::array<std::array<TYPE,YDIM>,XDIM> & arr, 
-          std::size_t X, std::size_t Y){_
+TYPE& getref(std::array<std::array<TYPE,YDIM>,XDIM> &arr, 
+             std::size_t X, std::size_t Y){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    ASSERT(Y >= 0)
+    ASSERT(Y < arr[X].size())
+    return (arr[X][Y]);
+}    
+
+template<class TYPE, std::size_t XDIM, std::size_t YDIM>
+TYPE get(std::array<std::array<TYPE,YDIM>,XDIM> const &arr, 
+         std::size_t X, std::size_t Y){_
     ASSERT(X >= 0)
     ASSERT(X < arr.size())
     ASSERT(Y >= 0)

@@ -1621,7 +1621,7 @@ void Nodes::dmap_print_walls (Dmap *d)
 {
     for (auto y = 0; y < grid_height * 2 + 1; y++) {
         for (auto x = 0; x < grid_width * 2 + 1; x++) {
-            uint16_t e = d->val[x][y];
+            uint16_t e = get(d->val, x, y);
             if (e == DMAP_IS_WALL) {
                 printf("#");
                 continue;

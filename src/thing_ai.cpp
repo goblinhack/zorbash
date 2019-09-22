@@ -226,16 +226,16 @@ fpoint Thing::ai_get_next_hop (void)
             }
 
             if (ai_is_obstacle_for_me(p)) {
-                scent->val[x][y] = DMAP_IS_WALL;
-                goals->val[x][y] = DMAP_IS_WALL;
+                set(scent->val, x, y, DMAP_IS_WALL);
+                set(goals->val, x, y, DMAP_IS_WALL);
             } else if ((value = is_less_preferred_terrain(p))) {
-                scent->val[x][y] = DMAP_IS_PASSABLE;
-                goals->val[x][y] = DMAP_IS_PASSABLE;
+                set(scent->val, x, y, DMAP_IS_PASSABLE);
+                set(goals->val, x, y, DMAP_IS_PASSABLE);
                 goals->val[x][y] += age;
                 goals->val[x][y] += value;
             } else {
-                scent->val[x][y] = DMAP_IS_PASSABLE;
-                goals->val[x][y] = DMAP_IS_PASSABLE;
+                set(scent->val, x, y, DMAP_IS_PASSABLE);
+                set(goals->val, x, y, DMAP_IS_PASSABLE);
                 goals->val[x][y] += age;
             }
         }
@@ -244,7 +244,7 @@ fpoint Thing::ai_get_next_hop (void)
     //
     // We want to find how far everything is from us.
     //
-    scent->val[start.x][start.y] = DMAP_IS_GOAL;
+    set(scent->val, start.x, start.y, DMAP_IS_GOAL);
 
     point tl(minx, miny);
     point br(maxx, maxy);
@@ -288,7 +288,7 @@ CON("goals:");
                     continue;
                 }
 
-                score += scent->val[p.x][p.y];
+                score += get(scent->val, p.x, p.y);
                 score += 100 * (priority + 1);
 
                 Goal goal(score);
@@ -349,7 +349,7 @@ CON("  goal add at: %d, %d", p.x, p.y);
         score = score - lowest_most_preferred;
         score /= (highest_least_preferred - lowest_most_preferred);
         score *= DMAP_IS_PASSABLE / 2;
-        goals->val[p.x][p.y] = score;
+        set(goals->val, p.x, p.y, (uint16_t)(int)score);
     }
 
     //
@@ -379,7 +379,7 @@ CON("  goal add at: %d, %d", p.x, p.y);
     // moving as an option
     //
     if (goals->val[start.x][start.y] > 0) {
-        goals->val[start.x][start.y] = DMAP_IS_WALL - 1;
+        set(goals->val, start.x, start.y, (uint16_t)(DMAP_IS_WALL - 1));
     }
 
     //

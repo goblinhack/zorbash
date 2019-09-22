@@ -132,7 +132,7 @@ public:
             return;
         }
 
-        auto distance_to_nexthop = dmap->val[nexthop.x][nexthop.y];
+        auto distance_to_nexthop = get(dmap->val, nexthop.x, nexthop.y);
         auto cost = current->cost.cost +
                     distance_to_nexthop + heuristic(nexthop);
         auto neighbor = open[nexthop.x][nexthop.y];
@@ -251,7 +251,7 @@ static void dump (Dmap *dmap, point start)
     printf("astar:\n");
     for (y = 0; y < CHUNK_HEIGHT; y++) {
         for (x = 0; x < CHUNK_WIDTH; x++) {
-            uint16_t e = dmap->val[x][y];
+            uint16_t e = get(dmap->val, x, y);
 
             char buf[10] = {};
             if (e == DMAP_IS_WALL) {
