@@ -52,7 +52,7 @@ Tile::Tile (const class Tile *tile)
     py2 = tile->py2;
     gl_surface_binding = tile->gl_surface_binding;
     tex = tile->tex;
-    memcpy(pix, tile->pix, sizeof(pix));
+    std::copy(mbegin(tile->pix), mend(tile->pix), mbegin(pix));
     delay_ms = tile->delay_ms;
     dir = tile->dir;
     is_join_node = tile->is_join_node;
@@ -226,7 +226,7 @@ void tile_load_arr (std::string tex_name,
                             printf("X");
 #endif
                             if ((x1 < MAX_TILE_WIDTH) && (y1 < MAX_TILE_HEIGHT)) {
-                                t->pix[x1][y1] = 1;
+                                set(t->pix, x1, y1, (uint8_t)1);
                             }
                         } else if (p.a > 0) {
 #ifdef DEBUG_TILE
