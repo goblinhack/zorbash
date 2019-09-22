@@ -12,7 +12,7 @@ bool World::is_anything_at (const int x, const int y)
         return (false);
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             return (true);
         }
@@ -46,7 +46,7 @@ void World::set_lava (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_lava[x][y] = true;
+    set(_is_lava, x, y, true);
 }
 
 void World::unset_lava (const int x, const int y)
@@ -54,7 +54,7 @@ void World::unset_lava (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_lava[x][y] = false;
+    set(_is_lava, x, y, false);
 }
 
 bool World::is_blood (const point &p)
@@ -78,7 +78,7 @@ void World::set_blood (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_blood[x][y] = true;
+    set(_is_blood, x, y, true);
 }
 
 void World::unset_blood (const int x, const int y)
@@ -86,7 +86,7 @@ void World::unset_blood (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_blood[x][y] = false;
+    set(_is_blood, x, y, false);
 }
 
 bool World::is_water (const point &p)
@@ -110,7 +110,7 @@ void World::set_water (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_water[x][y] = true;
+    set(_is_water, x, y, true);
 }
 
 void World::unset_water (const int x, const int y)
@@ -118,7 +118,7 @@ void World::unset_water (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_water[x][y] = false;
+    set(_is_water, x, y, false);
 }
 
 bool World::is_deep_water (const point &p)
@@ -142,7 +142,7 @@ void World::set_deep_water (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_deep_water[x][y] = true;
+    set(_is_deep_water, x, y, true);
 }
 
 void World::unset_deep_water (const int x, const int y)
@@ -150,7 +150,7 @@ void World::unset_deep_water (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_deep_water[x][y] = false;
+    set(_is_deep_water, x, y, false);
 }
 
 bool World::is_wall (const point &p)
@@ -174,7 +174,7 @@ void World::set_wall (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_wall[x][y] = true;
+    set(_is_wall, x, y, true);
 }
 
 void World::unset_wall (const int x, const int y)
@@ -182,7 +182,7 @@ void World::unset_wall (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_wall[x][y] = false;
+    set(_is_wall, x, y, false);
 }
 
 bool World::is_light (const point &p)
@@ -206,7 +206,7 @@ void World::set_light (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_light[x][y] = true;
+    set(_is_light, x, y, true);
 }
 
 void World::unset_light (const int x, const int y)
@@ -214,7 +214,7 @@ void World::unset_light (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_light[x][y] = false;
+    set(_is_light, x, y, false);
 }
 
 bool World::is_corridor (const point &p)
@@ -238,7 +238,7 @@ void World::set_corridor (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_corridor[x][y] = true;
+    set(_is_corridor, x, y, true);
 }
 
 void World::unset_corridor (const int x, const int y)
@@ -246,7 +246,7 @@ void World::unset_corridor (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_corridor[x][y] = false;
+    set(_is_corridor, x, y, false);
 }
 
 bool World::is_dirt (const point &p)
@@ -270,7 +270,7 @@ void World::dir_sett (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_dirt[x][y] = true;
+    set(_is_dirt, x, y, true);
 }
 
 void World::undir_sett (const int x, const int y)
@@ -278,7 +278,7 @@ void World::undir_sett (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_dirt[x][y] = false;
+    set(_is_dirt, x, y, false);
 }
 
 bool World::is_grass (const point &p)
@@ -302,7 +302,7 @@ void World::set_grass (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_grass[x][y] = true;
+    set(_is_grass, x, y, true);
 }
 
 void World::unset_grass (const int x, const int y)
@@ -310,7 +310,7 @@ void World::unset_grass (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_grass[x][y] = false;
+    set(_is_grass, x, y, false);
 }
 
 bool World::is_soil (const point &p)
@@ -334,7 +334,7 @@ void World::set_soil (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_soil[x][y] = true;
+    set(_is_soil, x, y, true);
 }
 
 void World::unset_soil (const int x, const int y)
@@ -342,7 +342,7 @@ void World::unset_soil (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_soil[x][y] = false;
+    set(_is_soil, x, y, false);
 }
 
 bool World::is_gravel (const point &p)
@@ -366,7 +366,7 @@ void World::set_gravel (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_gravel[x][y] = true;
+    set(_is_gravel, x, y, true);
 }
 
 void World::unset_gravel (const int x, const int y)
@@ -374,7 +374,7 @@ void World::unset_gravel (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_gravel[x][y] = false;
+    set(_is_gravel, x, y, false);
 }
 
 bool World::is_snow (const point &p)
@@ -398,7 +398,7 @@ void World::set_snow (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_snow[x][y] = true;
+    set(_is_snow, x, y, true);
 }
 
 void World::unset_snow (const int x, const int y)
@@ -406,7 +406,7 @@ void World::unset_snow (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_snow[x][y] = false;
+    set(_is_snow, x, y, false);
 }
 
 bool World::is_floor (const point &p)
@@ -430,7 +430,7 @@ void World::set_floor (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_floor[x][y] = true;
+    set(_is_floor, x, y, true);
 }
 
 void World::unset_floor (const int x, const int y)
@@ -438,7 +438,7 @@ void World::unset_floor (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_floor[x][y] = false;
+    set(_is_floor, x, y, false);
 }
 
 bool World::is_monst (const point &p)
@@ -452,7 +452,7 @@ bool World::is_monst (const int x, const int y)
         return (false);
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
@@ -476,7 +476,7 @@ bool World::is_food (const int x, const int y)
         return (false);
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
@@ -510,7 +510,7 @@ void World::set_rock (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_rock[x][y] = true;
+    set(_is_rock, x, y, true);
 }
 
 void World::unset_rock (const int x, const int y)
@@ -518,7 +518,7 @@ void World::unset_rock (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_rock[x][y] = false;
+    set(_is_rock, x, y, false);
 }
 
 bool World::is_key (const point &p)
@@ -532,7 +532,7 @@ bool World::is_key (const int x, const int y)
         return (false);
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
@@ -566,7 +566,7 @@ void World::set_gfx_large_shadow_caster (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_gfx_large_shadow_caster[x][y] = true;
+    set(_is_gfx_large_shadow_caster, x, y, true);
 }
 
 void World::unset_gfx_large_shadow_caster (const int x, const int y)
@@ -574,7 +574,7 @@ void World::unset_gfx_large_shadow_caster (const int x, const int y)
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    _is_gfx_large_shadow_caster[x][y] = false;
+    set(_is_gfx_large_shadow_caster, x, y, false);
 }
 
 bool World::is_door (const point &p)
@@ -588,7 +588,7 @@ bool World::is_door (const int x, const int y)
         return (false);
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
@@ -630,7 +630,7 @@ void World::put_thing (int x, int y, uint32_t id)
     }
 
     for (auto i = 0; i < MAP_SLOTS; i++) {
-        auto idp = &all_thing_ids_at[x][y][i];
+        auto idp = &getref(all_thing_ids_at, x, y)[i];
         if (!*idp) {
             *idp = id;
             return;
@@ -638,7 +638,7 @@ void World::put_thing (int x, int y, uint32_t id)
     }
 
     for (auto i = 0; i < MAP_SLOTS; i++) {
-        auto idp = &all_thing_ids_at[x][y][i];
+        auto idp = &getref(all_thing_ids_at, x, y)[i];
         if (*idp) {
             auto t = thing_find(*idp);
             t->con("- slot %d ", i);
@@ -665,7 +665,7 @@ void World::remove_thing (int x, int y, uint32_t id)
     }
 
     for (auto i = 0; i < MAP_SLOTS; i++) {
-        auto idp = &all_thing_ids_at[x][y][i];
+        auto idp = &getref(all_thing_ids_at, x, y)[i];
         if (*idp == id) {
             *idp = 0;
             return;
@@ -688,7 +688,7 @@ void World::get_all_things_at_depth (int x, int y, int z,
         return;
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
@@ -708,7 +708,7 @@ void World::get_all_interesting_things_at (int x, int y, std::vector<Thingp> &l)
         return;
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
@@ -727,7 +727,7 @@ void World::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l
         return;
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
@@ -746,7 +746,7 @@ void World::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
         return;
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
@@ -765,7 +765,7 @@ void World::get_all_obstacle_things_at (int x, int y, std::vector<Thingp> &l)
         return;
     }
 
-    for (auto id : all_thing_ids_at[x][y]) {
+    for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
             verify(t);
