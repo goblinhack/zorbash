@@ -99,16 +99,16 @@ void ascii_put_button (button_args b, const wchar_t *fmt, ...)
             continue;
         }
 
-        ascii.sdl_mod[x][y] = b.sdl_mod;
-        ascii.sdl_key[x][y] = b.sdl_key;
-        ascii.mouse_button[x][y] = b.mouse_button;
+        set(ascii.sdl_mod, x, y, b.sdl_mod);
+        set(ascii.sdl_key, x, y, b.sdl_key);
+        set(ascii.mouse_button, x, y, b.mouse_button);
 
         /*
          * Callbacks for ascii co-ords.
          */
-        ascii.key_down[x][y] = b.key_down;
-        ascii.mouse_down[x][y] = b.mouse_down;
-        ascii.mouse_over[x][y] = b.mouse_over;
+        set(ascii.key_down, x, y, b.key_down);
+        set(ascii.mouse_down, x, y, b.mouse_down);
+        set(ascii.mouse_over, x, y, b.mouse_over);
 
         x++;
     }

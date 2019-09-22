@@ -19,23 +19,23 @@ typedef struct {
     Tilep bg_tile;
     Tilep bg2_tile;
 
-    Texp tex;
+    Texp tex {};
 
     //
     // For background tex
     //
-    float tx;
-    float ty;
-    float dx;
-    float dy;
+    float tx {};
+    float ty {};
+    float dx {};
+    float dy {};
 
     //
     // For background tex
     //
-    float bg2_tx;
-    float bg2_ty;
-    float bg2_dx;
-    float bg2_dy;
+    float bg2_tx {};
+    float bg2_ty {};
+    float bg2_dx {};
+    float bg2_dy {};
 
     color fg_color_tl;
     color fg_color_bl;
@@ -54,11 +54,11 @@ typedef struct {
      * Is reset each frame, and so although a pointer potentially should be
      * zeroed out on game load once it is used.
      */
-    void *context;
+    void *context {};
 
 } ascii_cell;
 
-static ascii_cell cells[ASCII_WIDTH_MAX][ASCII_HEIGHT_MAX];
+static std::array<std::array<ascii_cell, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> cells;
 
 /*
  * For drawing the mouse cursor.
@@ -110,7 +110,7 @@ void ascii_set_fg (int x, int y, color c)
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->fg_color_tl = c;
     cell->fg_color_tr = c;
@@ -124,7 +124,7 @@ void ascii_set_bg (int x, int y, color c)
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->bg_color_tl = c;
     cell->bg_color_tr = c;
@@ -138,7 +138,7 @@ void ascii_set_bg2 (int x, int y, color c)
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->bg2_color_tl = c;
     cell->bg2_color_tr = c;
@@ -156,7 +156,7 @@ void ascii_set_context (int x, int y, void *context)
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->context = context;
 }
@@ -167,7 +167,7 @@ void *ascii_get_context (int x, int y)
         return (0);
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     return (cell->context);
 }
@@ -179,7 +179,7 @@ void ascii_set_bg (int x, int y, const Texp tex,
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->tex = tex;
     cell->tx = tx;
@@ -194,7 +194,7 @@ void ascii_set_bg (int x, int y, const Tilep tile)
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->bg_tile = tile;
     cell->tx = 0;
@@ -209,7 +209,7 @@ void ascii_set_bg2 (int x, int y, const Tilep tile)
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->bg2_tile = tile;
     cell->bg2_tx = 0;
@@ -225,7 +225,7 @@ void ascii_set_bg2 (int x, int y, const Tilep tile,
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->bg2_tile = tile;
     cell->bg2_tx = tx;
@@ -260,7 +260,7 @@ void ascii_set_fg (int x, int y, const Tilep tile)
         return;
     }
 
-    ascii_cell *cell = &cells[x][y];
+    ascii_cell *cell = &getref(cells, x, y);
 
     cell->fg_tile = tile;
 }
@@ -394,7 +394,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
             tile = fixed_font->unicode_to_tile(L'_');
         }
 
-        ascii_cell *cell = &cells[x++][y];
+        ascii_cell *cell = &getref(cells, x++, y);
 
         cell->fg_tile = tile;
 
@@ -912,7 +912,7 @@ static void ascii_blit (int no_color)
         tile_x = 0;
         for (x = 0; x < ASCII_WIDTH; x++) {
 
-            const ascii_cell *cell = &cells[x][y];
+            const ascii_cell *cell = &getref(cells, x, y);
 
             fpoint tile_tl;
             fpoint tile_br;
@@ -994,7 +994,7 @@ static void ascii_blit (int no_color)
         tile_x = 0;
         for (x = 0; x < ASCII_WIDTH; x++) {
 
-            const ascii_cell *cell = &cells[x][y];
+            const ascii_cell *cell = &getref(cells, x, y);
 
             fpoint tile_tl;
             fpoint tile_br;
@@ -1045,7 +1045,7 @@ static void ascii_blit (int no_color)
         tile_x = 0;
         for (x = 0; x < ASCII_WIDTH; x++) {
 
-            const ascii_cell *cell = &cells[x][y];
+            const ascii_cell *cell = &getref(cells, x, y);
 
             fpoint tile_tl;
             fpoint tile_br;
@@ -1092,7 +1092,7 @@ static void ascii_blit (int no_color)
         tile_x = 0;
         for (x = 0; x < ASCII_WIDTH; x++) {
 
-            const ascii_cell *cell = &cells[x][y];
+            const ascii_cell *cell = &getref(cells, x, y);
 
             fpoint tile_tl;
             fpoint tile_br;
@@ -1157,5 +1157,5 @@ void ascii_display (void)
     }
 #endif
 
-    memset(cells, 0, sizeof(cells));
+    cells = {};
 }

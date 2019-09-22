@@ -341,7 +341,7 @@ std::ostream& operator<<(std::ostream &out,
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = my.t.all_thing_ids_at[x][y][z];
+                auto id = get(my.t.all_thing_ids_at, x, y)[z];
                 if (id) {
                     auto t = thing_find(id);
                     verify(t);
@@ -378,7 +378,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = my.t.all_thing_ids_at[x][y][z];
+                auto id = get(my.t.all_thing_ids_at, x, y)[z];
                 if (id) {
                     auto t = new Thing();
                     in >> bits(t);
@@ -404,7 +404,7 @@ void World::dump (std::string pfx, std::ostream &out)
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = all_thing_ids_at[x][y][z];
+                auto id = get(all_thing_ids_at, x, y)[z];
                 if (id) {
                     auto t = thing_find(id);
                     verify(t);

@@ -15,7 +15,7 @@ void World::fini (void)
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = all_thing_ids_at[x][y][z];
+                auto id = get(all_thing_ids_at, x, y)[z];
                 if (id) {
                     auto t = thing_find(id);
                     verify(t);
@@ -39,7 +39,7 @@ void World::fini (void)
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = all_thing_ids_at[x][y][z];
+                auto id = get(all_thing_ids_at, x, y)[z];
                 if (id) {
                     auto t = thing_find(id);
                     t->die("world fini: did not detach thing id from all_thing_ids_at");
@@ -54,7 +54,7 @@ void World::fini (void)
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto t = all_thing_ptrs_at[x][y][z];
+                auto t = get(all_thing_ptrs_at, x, y, z);
                 if (t) {
                     t->die("world fini: did not detach thing from all_thing_ptrs_at");
                 }
