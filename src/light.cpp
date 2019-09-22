@@ -86,8 +86,8 @@ void Light::calculate (void)
     // to avoid lighting walls behind those immediately visible to us. To
     // do this we do a flood fill of the level and pick the nearest walls.
     //
-    static int is_nearest_wall[MAP_WIDTH][MAP_HEIGHT] = {};
-    static int is_nearest_wall_val;
+    static uint32_t is_nearest_wall[MAP_WIDTH][MAP_HEIGHT] = {};
+    static uint32_t is_nearest_wall_val;
     is_nearest_wall_val++;
 
     verify(this);
@@ -134,7 +134,7 @@ void Light::calculate (void)
             int y = (int)p1y;
 
             if (unlikely(world->is_oob(x, y))) {
-                break;
+                continue;
             }
 
             if (world->is_gfx_large_shadow_caster(x, y)) {
@@ -158,7 +158,7 @@ void Light::calculate (void)
             int y = (int)p1y;
 
             if (unlikely(world->is_oob(x, y))) {
-                break;
+                continue;
             }
 
             if (!world->is_gfx_large_shadow_caster(x, y)) {
@@ -170,7 +170,7 @@ void Light::calculate (void)
     }
 
     /*
-     * Now for light penetrating into rock. We stop a bit short due to * the
+     * Now for light penetrating into rock. We stop a bit short due to the
      * fuzzing of the light we do when rendering, to avoid light leaking into
      * tiles we should not see.
      *
@@ -196,7 +196,7 @@ void Light::calculate (void)
             int y = (int)p1y;
 
             if (unlikely(world->is_oob(x, y))) {
-                break;
+                continue;
             }
 
             if (is_nearest_wall[x][y] != is_nearest_wall_val) {
@@ -209,6 +209,13 @@ void Light::calculate (void)
             r->depth_furthest = strength;
         }
     }
+#if 0
+    for (int i = 0; i < max_light_rays; i++) {
+        auto r = &ray[i];
+        printf("%f ", r->depth_furthest);
+    }
+printf("\n");
+#endif
 }
 
 void Light::render_triangle_fans (void)
@@ -249,7 +256,7 @@ void Light::render_triangle_fans (void)
                 double p1y = light_pos.y + r->sinr * radius * tile_gl_height_pct;
 
                 // off white looks better
-                push_point(p1x, p1y, red, green*0.8, blue*0.8, 0);
+                push_point(p1x, p1y, red, green, blue, 1);
             }
 
             /*
@@ -262,39 +269,18 @@ void Light::render_triangle_fans (void)
                 double p1y = light_pos.y + r->sinr * radius * tile_gl_height_pct;
 
                 // off white looks better
-                push_point(p1x, p1y, red, green*0.8, blue*0.8, 0);
+                push_point(p1x, p1y, red, green, blue, 1);
             }
         }
 
         auto sz = bufp - gl_array_buf;
         glbuf.resize(sz);
         std::copy(gl_array_buf, bufp, glbuf.begin());
-
-        if (quality == LIGHT_QUALITY_HIGH) {
-            /*
-             * This does multiple renders of the fan with blurring.
-             */
-            blit_flush_triangle_fan_smoothed();
-        } else {
-            /*
-             * Just splat the raw fan, with alpha blended edges.
-             */
-            blit_flush_triangle_fan_smoothed();
-        }
+        blit_flush_triangle_fan();
     } else {
         float *b = &(*glbuf.begin());
         float *e = &(*glbuf.end());
-        if (quality == LIGHT_QUALITY_HIGH) {
-            /*
-             * This does multiple renders of the fan with blurring.
-             */
-            blit_flush_triangle_fan_smoothed(b, e);
-        } else {
-            /*
-             * Just splat the raw fan, with alpha blended edges.
-             */
-            blit_flush_triangle_fan(b, e);
-        }
+        blit_flush_triangle_fan(b, e);
     }
 
     /*
@@ -370,6 +356,8 @@ void Light::render (int fbo, int pass)
         light_overlay_texid = light_overlay_texid_diffuse;
     }
 
+    static const color dull = { 255, 255, 255, 50 };
+
     switch (quality) {
     case LIGHT_QUALITY_LOW:
     case LIGHT_QUALITY_HIGH:
@@ -395,8 +383,16 @@ void Light::render (int fbo, int pass)
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         blit_fbo_bind(fbo);
-        blit_fbo(FBO_LIGHT_MASK);
+blit_init();
+blit(fbo_tex_id[FBO_LIGHT_MASK], 0.0, 1.0, 1.0, 0.0,  0.01,  0.01, 0.99, 0.99);
+blit_flush();
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+glcolor(dull);
+blit_init();
+blit(fbo_tex_id[FBO_LIGHT_MASK], 0.0, 1.0, 1.0, 0.0, -0.05, -0.05, 1.05, 1.05);
+blit_flush();
         blit_fbo_unbind();
+
         break;
 
     case LIGHT_QUALITY_POINT:
@@ -404,7 +400,7 @@ void Light::render (int fbo, int pass)
         break;
 
     default:
-        DIE("unknownd light quality");
+        ERR("unknown light quality");
     }
 }
 

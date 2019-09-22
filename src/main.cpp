@@ -592,12 +592,7 @@ int32_t main (int32_t argc, char *argv[])
     //
     // Create and load the last saved game
     //
-CON("game %p", game);
-CON("world %p", world);
     game = new Game(std::string(appdata));
-CON("game %p", game);
-CON("game %p", &game->world);
-CON("world %p", world);
 
     if (!sdl_init()) {
 	ERR("SDL init");
