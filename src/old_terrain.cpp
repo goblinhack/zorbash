@@ -69,7 +69,7 @@
                     auto ix = mod(cx, MAP_WIDTH);
                     auto iy = mod(cy, MAP_WIDTH);
 
-                    auto odi = droplet_map[ix][iy];
+                    auto odi = get(droplet_map, ix, iy);
                     if (!odi) {
                         continue;
                     }
@@ -329,7 +329,7 @@ redo:
                     float cy = y + dy;
                     auto ix = mod(cx, MAP_WIDTH);
                     auto iy = mod(cy, MAP_WIDTH);
-                    droplet_map[ix][iy] = di;
+                    set(droplet_map, ix, iy, di);
                 }
             }
 #endif

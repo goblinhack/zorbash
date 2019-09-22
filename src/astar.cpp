@@ -11,7 +11,7 @@
 #include <vector>
 
 #ifdef ASTAR_DEBUG
-static char debug[CHUNK_WIDTH][CHUNK_HEIGHT];
+static char get(debug, CHUNK_WIDTH, CHUNK_HEIGHT);
 #endif
 
 class Nodecost {
@@ -56,8 +56,8 @@ public:
 
     static const int width = CHUNK_WIDTH;
     static const int height = CHUNK_HEIGHT;
-    Node *open[width][height] = {{}};
-    Node *closed[width][height] = {{}};
+    std::array<std::array<Node *, height>, width> open = {};
+    std::array<std::array<Node *, height>, width> closed = {};
     Nodemap open_nodes;
     Nodemap closed_nodes;
     point start;
@@ -67,7 +67,7 @@ public:
     void add_to_open (Node *n)
     {
         auto p = n->at;
-        auto o = &open[p.x][p.y];
+        auto o = &getref(open, p.x, p.y);
         if (*o) {
             DIE("already in open");
         }
@@ -81,7 +81,7 @@ public:
     void add_to_closed (Node *n)
     {
         auto p = n->at;
-        auto o = &closed[p.x][p.y];
+        auto o = &getref(closed, p.x, p.y);
         if (*o) {
             DIE("already in closed");
         }
@@ -95,7 +95,7 @@ public:
     void remove_from_open (Node *n)
     {
         auto p = n->at;
-        auto o = &open[p.x][p.y];
+        auto o = &getref(open, p.x, p.y);
         if (!*o) {
             DIE("not in open");
         }
@@ -123,7 +123,7 @@ public:
         }
 
         // Ignore walls.
-        if (dmap->val[nexthop.x][nexthop.y] == DMAP_IS_WALL) {
+        if (get(dmap->val, nexthop.x, nexthop.y) == DMAP_IS_WALL) {
             return;
         }
 
@@ -135,7 +135,7 @@ public:
         auto distance_to_nexthop = get(dmap->val, nexthop.x, nexthop.y);
         auto cost = current->cost.cost +
                     distance_to_nexthop + heuristic(nexthop);
-        auto neighbor = open[nexthop.x][nexthop.y];
+        auto neighbor = get(open, nexthop.x, nexthop.y);
         if (!neighbor) {
             auto ncost = Nodecost(cost + heuristic(nexthop));
             neighbor = new Node(nexthop, ncost);
@@ -210,14 +210,14 @@ printf(" %d(%d) ", came_from->cost.cost, dmap->val[came_from->at.x][came_from->a
 //printf("    best %d\n", cost);
 #ifdef ASTAR_DEBUG
                     for (auto p : path) {
-                        debug[p.x][p.y] = 'A' + *gi;
+                        set(debug, p.x, p.y, 'A' + *gi);
                     }
                     (*gi)++;
 #endif
                 } else {
 #ifdef ASTAR_DEBUG
                     for (auto p : path) {
-                        debug[p.x][p.y] = 'a' + *gi;
+                        set(debug, p.x, p.y, 'a' + *gi);
                     }
                     (*gi)++;
 #endif
@@ -272,7 +272,7 @@ static void dump (Dmap *dmap, point start)
             }
 
             if (debug[x][y]) {
-                buf[2] = debug[x][y];
+                get(buf, 2] = debug[x, y);
             }
 
             printf("%s", buf);
@@ -303,7 +303,7 @@ Path astar_solve (point start, std::multiset<Goal> &goals, Dmap *dmap)
 
 #ifdef ASTAR_DEBUG
     for (auto p : best.path) {
-        debug[p.x][p.y] = '%';
+        set(debug, p.x, p.y, '%');
     }
 
     dump(dmap, start);

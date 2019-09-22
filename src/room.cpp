@@ -33,7 +33,7 @@ Roomp Room::create_w_flip (void)
         for (auto y = 0; y < height; y++) {
             std::string s;
             for (auto x = 0; x < width; x++) {
-                r->data[x][y][z] = data[width - x - 1][y][z];
+                set(r->data, x, y, z, get(data, width - x - 1, y, z));
             }
         }
     }
@@ -45,14 +45,14 @@ Roomp Room::create_w_flip (void)
         for (auto y = 0; y < height; y++) {
             std::string s;
             for (auto x = 0; x < width; x++) {
-                auto c = r->data[x][y][z];
+                auto c = get(r->data, x, y, z);
                 switch (c) {
                     case Charmap::DOOR_UP:    c = Charmap::DOOR_UP; break;
                     case Charmap::DOOR_DOWN:  c = Charmap::DOOR_DOWN; break;
                     case Charmap::DOOR_LEFT:  c = Charmap::DOOR_RIGHT; break;
                     case Charmap::DOOR_RIGHT: c = Charmap::DOOR_LEFT; break;
                 }
-                r->data[x][y][z] = c;
+                set(r->data, x, y, z, c);
             }
         }
     }
@@ -88,7 +88,7 @@ Roomp Room::rotate_clockwise (void)
         for (auto y = 0; y < height; y++) {
             std::string s;
             for (auto x = 0; x < width; x++) {
-                r->data[width - y - 1][x][z] = data[x][y][z];
+                set(r->data, width - y - 1, x, z, get(data, x, y, z));
             }
         }
     }
@@ -100,7 +100,7 @@ Roomp Room::rotate_clockwise (void)
         for (auto y = 0; y < height; y++) {
             std::string s;
             for (auto x = 0; x < width; x++) {
-                auto c = r->data[x][y][z];
+                auto c = get(r->data, x, y, z);
                 switch (c) {
                     case Charmap::DOOR_UP:    c = Charmap::DOOR_RIGHT; break;
                     case Charmap::DOOR_DOWN:  c = Charmap::DOOR_LEFT; break;
@@ -108,7 +108,7 @@ Roomp Room::rotate_clockwise (void)
                     case Charmap::DOOR_RIGHT: c = Charmap::DOOR_DOWN; break;
                 }
 
-                r->data[x][y][z] = c;
+                set(r->data, x, y, z, c);
             }
         }
     }
@@ -140,19 +140,19 @@ void Room::find_doors (void)
 
     for (auto x : range<int>(0, width)) {
         for (auto y : range<int>(0, height)) {
-            if (data[x][y][z] == Charmap::DOOR_UP) {
+            if (get(data, x, y, z) == Charmap::DOOR_UP) {
                 has_door_up = true;
                 doors_up.push_back(point(x, y));
             }
-            if (data[x][y][z] == Charmap::DOOR_DOWN) {
+            if (get(data, x, y, z) == Charmap::DOOR_DOWN) {
                 has_door_down = true;
                 doors_down.push_back(point(x, y));
             }
-            if (data[x][y][z] == Charmap::DOOR_LEFT) {
+            if (get(data, x, y, z) == Charmap::DOOR_LEFT) {
                 has_door_left = true;
                 doors_left.push_back(point(x, y));
             }
-            if (data[x][y][z] == Charmap::DOOR_RIGHT) {
+            if (get(data, x, y, z) == Charmap::DOOR_RIGHT) {
                 has_door_right = true;
                 doors_right.push_back(point(x, y));
             }
@@ -179,16 +179,20 @@ void Room::finalize (void)
 
 void Room::dump (void)
 {
-    char tmp[width + 1][height + 1];
-    memset(tmp, ' ', sizeof(tmp));
+    std::array<std::array<char, CHUNK_HEIGHT>, CHUNK_WIDTH> tmp;
+    for (auto y = 0; y < height; y++) {
+        for (auto x = 0; x < width; x++) {
+            set(tmp, x, y, ' ');
+        }
+    }
 
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
-            auto c = data[x][y][MAP_DEPTH_WALLS];
+            auto c = get(data, x, y, MAP_DEPTH_WALLS);
             if (!c || (c == ' ')) {
-                c = data[x][y][MAP_DEPTH_FLOOR];
+                c = get(data, x, y, MAP_DEPTH_FLOOR);
             }
-            tmp[x][y] = c;
+            set(tmp, x, y, c);
         }
     }
 
@@ -199,7 +203,7 @@ void Room::dump (void)
     for (auto y = 0; y < height; y++) {
         std::string s;
         for (auto x = 0; x < width; x++) {
-            s += tmp[x][y];
+            s += get(tmp, x, y);
         }
         LOG("ROOM(%d): %s", roomno, s.c_str());
     }

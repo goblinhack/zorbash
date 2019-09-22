@@ -149,9 +149,9 @@ typedef struct {
     uint16_t y;
 } xy;
 
-static uint16_t fluid_pool[FLUID_WIDTH][FLUID_HEIGHT];
+static uint16_t get(fluid_pool, FLUID_WIDTH, FLUID_HEIGHT);
 static uint8_t fluid_pool_row[FLUID_HEIGHT];
-static xy fluid_pool_surface[MAX_POOLS][MAX_POOL_SURFACE];
+static xy get(fluid_pool_surface, MAX_POOLS, MAX_POOL_SURFACE);
 static uint16_t fluid_pool_surface_size[MAX_POOLS];
 static uint16_t max_fluid_pools;
 
@@ -163,7 +163,7 @@ void fluid_mass_debug (void)
     for (fy = 1; fy < FLUID_HEIGHT - 1; fy++) {
         for (fx = 1; fx < FLUID_WIDTH - 1; fx++) {
 
-            fluid_t *f = &world->fluid[fx][fy];
+            fluid_t *f = &world->get(fluid, fx, fy);
             if (!f->mass) {
                 continue;
             }
@@ -185,7 +185,7 @@ void fluid_debug (void)
     for (fy = 1; fy < FLUID_HEIGHT - 1; fy++) {
         for (fx = 1; fx < FLUID_WIDTH - 1; fx++) {
 
-            fluid_t *f = &world->fluid[fx][fy];
+            fluid_t *f = &world->get(fluid, fx, fy);
             if (!f->mass) {
                 if (f->type == FLUID_IS_SOLID) {
                     printf("W");
@@ -215,7 +215,7 @@ void fluid_pool_debug (void)
     for (fy = 1; fy < FLUID_HEIGHT - 1; fy++) {
         for (fx = 1; fx < FLUID_WIDTH - 1; fx++) {
 
-            fluid_t *f = &world->fluid[fx][fy];
+            fluid_t *f = &world->get(fluid, fx, fy);
             if (!f->mass) {
                 if (f->type == FLUID_IS_SOLID) {
                     printf("WWW");
@@ -248,7 +248,7 @@ static void fluid_flood_fill (uint16_t x,
         !fluid_pool[dx][dy] &&                              \
         world->fluid[dx][dy].mass) {                \
                                                             \
-        searching[dx][dy] = pool_num;                       \
+        set(searching, dx, dy, pool_num);                       \
         stack[stack_size].x = dx;                           \
         stack[stack_size].y = dy;                           \
         stack_size++;                                       \
@@ -259,7 +259,7 @@ static void fluid_flood_fill (uint16_t x,
         }                                                   \
     }                                                       \
 
-    static uint16_t searching[FLUID_WIDTH][FLUID_HEIGHT];
+    static uint16_t get(searching, FLUID_WIDTH, FLUID_HEIGHT);
     static xy stack[FLUID_WIDTH * FLUID_HEIGHT];
     uint32_t stack_size = 0;
 
@@ -273,7 +273,7 @@ static void fluid_flood_fill (uint16_t x,
         uint16_t x = stack[stack_size].x;
         uint16_t y = stack[stack_size].y;
 
-        fluid_pool[x][y] = pool_num;
+        set(fluid_pool, x, y, pool_num);
 
         if (x > 1) {
             uint16_t dx = x - 1;
@@ -319,7 +319,7 @@ static void fluid_find_pools (void)
 
         for (x = 1; x < FLUID_WIDTH - 1; x++) {
 
-            fluid_t *f = &world->fluid[x][y];
+            fluid_t *f = &world->get(fluid, x, y);
             if (!f->mass) {
                 continue;
             }
@@ -415,7 +415,7 @@ static void fluid_push_down (void)
                     continue;
                 }
 
-                fluid_t *f = &world->fluid[fx][fy];
+                fluid_t *f = &world->get(fluid, fx, fy);
                 fluid_mass_t remaining_mass = f->mass;
 
                 {
@@ -434,7 +434,7 @@ static void fluid_push_down (void)
                                 continue;
                             }
 
-                            fluid_t *nbr = &world->fluid[x][y];
+                            fluid_t *nbr = &world->get(fluid, x, y);
 
                             MASS_TRANSFER(f, nbr);
 
@@ -442,7 +442,7 @@ static void fluid_push_down (void)
                                 break;
                             }
 
-                            nbr = &world->fluid[x][y - 1];
+                            nbr = &world->get(fluid, x, y - 1);
 
                             MASS_TRANSFER(f, nbr);
 
@@ -485,7 +485,7 @@ static void fluid_set_depth (void)
         depth = 0;
 
         for (fy = 1; fy < FLUID_HEIGHT - 1; fy++) {
-            fluid_t *f = &world->fluid[fx][fy];
+            fluid_t *f = &world->get(fluid, fx, fy);
             f->is_surface = 0;
 
             if (!f->mass) {
@@ -497,7 +497,7 @@ static void fluid_set_depth (void)
 
             fluid_pool_row[fy] = 1;
 
-            fluid_t *g = &world->fluid[fx][fy + 1];
+            fluid_t *g = &world->get(fluid, fx, fy + 1);
             if (!g->mass) {
                 depth = 0;
                 continue;
@@ -508,7 +508,7 @@ static void fluid_set_depth (void)
             // even out surface fluids later.
             //
             if (depth == 0) {
-                uint16_t pool_num = fluid_pool[fx][fy];
+                uint16_t pool_num = get(fluid_pool, fx, fy);
                 uint16_t surface_size = fluid_pool_surface_size[pool_num];
 
                 if (surface_size < MAX_POOL_SURFACE) {
@@ -597,7 +597,7 @@ static void fluid_mass_transfer (void)
     for (fy = FLUID_HEIGHT-2; fy > 0; fy--) {
         for (fx = 1; fx < FLUID_WIDTH-2; fx++) {
 
-            fluid_t *f = &world->fluid[fx][fy];
+            fluid_t *f = &world->get(fluid, fx, fy);
 
             fluid_mass_t avg_mass;
             fluid_mass_t remaining_mass = f->mass;
@@ -607,7 +607,7 @@ static void fluid_mass_transfer (void)
 
             fluid_pool_row[fy] = 1;
 
-            fluid_t *d = &world->fluid[fx][fy+1];
+            fluid_t *d = &world->get(fluid, fx, fy+1);
 
 #undef MASS_TRANSFER
 #define MASS_TRANSFER(src, nbr)                                     \
@@ -657,8 +657,8 @@ static void fluid_mass_transfer (void)
                 continue;
             }
 
-            fluid_t *b = &world->fluid[fx-1][fy];
-            fluid_t *c = &world->fluid[fx+1][fy];
+            fluid_t *b = &world->get(fluid, fx-1, fy);
+            fluid_t *c = &world->get(fluid, fx+1, fy);
 
             MASS_TRANSFER_LR(f, c);
             MASS_TRANSFER_LR(f, b);
@@ -929,7 +929,7 @@ void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
 
         for (fx = minx; fx < maxx - 1; fx++) {
 
-            fluid_t *f = &world->fluid[fx][fy];
+            fluid_t *f = &world->get(fluid, fx, fy);
             if (!f->mass) {
                 continue;
             }

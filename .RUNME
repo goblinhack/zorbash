@@ -71,47 +71,14 @@ case `uname` in
     ;;
 esac
 
-
-#
-# Prefer SDL over SDL2 as it seems more common
-#
-case `uname` in
-    *MING*|*MSYS*)
-        for i in \
-            /mingw/bin/sdl-config \
-            /mingw64/bin/sdl-config 
-        do
-            if [ -x $i ]
-            then
-                SDL2_CONFIG=$i
-                break
-            fi
-        done
-    ;;
-    *)
-        for i in \
-            /opt/local/bin/sdl-config \
-            /usr/local/bin/sdl-config \
-            /usr/bin/sdl-config
-        do
-            if [ -x $i ]
-            then
-                SDL2_CONFIG=$i
-                break
-            fi
-        done
-    ;;
-esac
-
-
 sdl_help()
 {
-    log_warn "Is SDL 1.2 or 1.3 installed? If not:"
+    log_warn "Is SDL2 installed? (not SDL1) If not:"
 
     case `uname` in
     *MING*|*MSYS*)
         log_warn "   Installed already:"
-        pacman -Ss | grep '^mingw64/' | grep SDL | sed 's/^mingw64.//g' | grep installed
+        pacman -Ss | grep '^mingw64/' | grep SDL2 | sed 's/^mingw64.//g' | grep installed
         log_warn "   Will try to install needed packages:"
 
         pacman -S \
@@ -121,12 +88,7 @@ sdl_help()
             mingw-w64-x86_64-SDL2_image \
             mingw-w64-x86_64-SDL2_mixer \
             mingw-w64-x86_64-SDL2_net \
-            mingw-w64-x86_64-SDL2_ttf \
-            mingw-w64-x86_64-SDL_gfx \
-            mingw-w64-x86_64-SDL_image \
-            mingw-w64-x86_64-SDL_mixer \
-            mingw-w64-x86_64-SDL_net \
-            mingw-w64-x86_64-SDL_ttf
+            mingw-w64-x86_64-SDL2_ttf
 
         log_warn "Ok, try RUNME again"
         exit 1
@@ -178,7 +140,7 @@ log_info "SDL2 ttf.h       : $SDL2_TTF"
 log_info "SDL2 score       : $SDL2_SCORE"
 
 if [[ $SDL2_SCORE != "2" ]]; then
-    log_err "I need SDL2, SDL mixer and SDL ttf installed"
+    log_err "I need SDL2, SDL2 mixer and SDL2 ttf installed"
     sdl_help
     exit 1
 fi
@@ -197,7 +159,7 @@ fi
 C_FLAGS=`$SDL2_CONFIG --cflags`
 if [ $? -ne 0 ]
 then
-    log_err "Please install SDL 2."
+    log_err "Please install SDL2."
     sdl_help
     exit 1
 fi
