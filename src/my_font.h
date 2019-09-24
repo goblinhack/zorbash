@@ -52,13 +52,13 @@ public:
     {
     }
 
-    glyph glyphs[TTF_GLYPH_MAX+1] = {};
-    glyphtex tex[TTF_GLYPH_MAX+1] = {};
+    std::array<glyph, TTF_GLYPH_MAX+1> glyphs {};
+    std::array<glyphtex, TTF_GLYPH_MAX+1> tex {};
     SDL_Color foreground = {};
     SDL_Color background = {};
-    int u_to_c[TTF_GLYPH_MAX+1]= {};
-    int valid[TTF_GLYPH_MAX+1]= {};
-    Tilep cache[TTF_GLYPH_MAX+1] = {};
+    std::array<int, TTF_GLYPH_MAX+1> u_to_c {};
+    std::array<int, TTF_GLYPH_MAX+1> valid {};
+    std::array<Tilep, TTF_GLYPH_MAX+1> cache {};
 
     Tilep unicode_to_tile (int u)
     {
@@ -71,7 +71,7 @@ public:
             return (unicode_to_tile(L'?'));
         }
 
-        auto index = this->u_to_c[u];
+        auto index = get(this->u_to_c, u);
 
         if ((index < 0) || (index >= TTF_GLYPH_MAX)) {
             if (u == L'?') {
@@ -82,7 +82,7 @@ public:
             return (unicode_to_tile(L'?'));
         }
 
-        auto tile = this->cache[index];
+        auto tile = get(this->cache, index);
         if (tile) {
             return (tile);
         }
@@ -100,7 +100,7 @@ public:
             }
         }
 
-        this->cache[index] = tile;
+        set(this->cache, index, tile);
 
         return (tile);
     }
