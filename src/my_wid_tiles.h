@@ -25,7 +25,7 @@ public:
     int tile_w = {};
     int tile_h = {};
     double scale = {};
-    std::array<std::array<Tilep, 32>, 32> tile;
+    std::array<std::array<Tilep, 32>, 32> tile {};
 };
 
 uint8_t wid_tiles_init(void);

@@ -96,7 +96,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             std::string items_string;
 
             for (auto c : py_obj_to_string(o)) {
-                auto m = Charmap::all_charmaps[c];
+                auto m = get(Charmap::all_charmaps, c);
 
                 if (m.is_floor ||
                     m.is_secret_corridor ||

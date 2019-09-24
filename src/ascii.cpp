@@ -58,7 +58,7 @@ typedef struct {
 
 } ascii_cell;
 
-static std::array<std::array<ascii_cell, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> cells;
+static std::array<std::array<ascii_cell, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> cells = {};
 
 /*
  * For drawing the mouse cursor.

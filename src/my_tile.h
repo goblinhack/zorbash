@@ -76,7 +76,7 @@ public:
 
     int32_t gl_surface_binding {};
     Texp tex;
-    std::array<std::array<uint8_t, MAX_TILE_HEIGHT>, MAX_TILE_WIDTH> pix;
+    std::array<std::array<uint8_t, MAX_TILE_HEIGHT>, MAX_TILE_WIDTH> pix {};
 
     //
     // Delay in ms between frames.

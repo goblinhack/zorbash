@@ -216,7 +216,7 @@ static void wid_test_wid_create (void)
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, 4);
-        wid_set_text(w, L"there this is a long string");
+        wid_set_text(w, L"warrior test");
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);

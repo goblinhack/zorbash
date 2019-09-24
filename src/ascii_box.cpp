@@ -22,7 +22,7 @@ static void ascii_put_shaded_box (int style, Tilep tile,
     static const int MAX_UI_SIZE = 16;
     static const int MAX_UI_BG_SIZE = MAX_UI_SIZE - 2;
     static std::array<std::array<std::array<Tilep, MAX_UI_SIZE>, 
-                                             MAX_UI_SIZE>, MAX_STYLES> tiles;
+                                             MAX_UI_SIZE>, MAX_STYLES> tiles = {};
 
     if (style >= MAX_STYLES) {
         DIE("unimplemented style %d", style);

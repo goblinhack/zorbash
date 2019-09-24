@@ -215,9 +215,9 @@ static void gl_init_fbo_ (
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
 }
 
-std::array<GLuint, MAX_FBO> render_buf_id;
-std::array<GLuint, MAX_FBO> fbo_id;
-std::array<GLuint, MAX_FBO> fbo_tex_id;
+std::array<GLuint, MAX_FBO> render_buf_id = {};
+std::array<GLuint, MAX_FBO> fbo_id = {};
+std::array<GLuint, MAX_FBO> fbo_tex_id = {};
 
 void gl_init_fbo (void)
 {

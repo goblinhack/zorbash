@@ -48,21 +48,21 @@ private:
     //
     // These are caches for fast lookup in display code
     //
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow_caster;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_blood;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_grass;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_soil;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gravel;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_snow;
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock;
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow_caster {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_grass {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_soil {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gravel {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_snow {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
 public:
     //
     // The player!
@@ -87,14 +87,14 @@ public:
     std::array<
       std::array<
         std::array<Thingp, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
-          all_thing_ptrs_at;
+          all_thing_ptrs_at {};
     //
     // All thing IDs
     //
     std::array<
       std::array<
         std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
-          all_thing_ids_at;
+          all_thing_ids_at {};
 
     void put_thing_ptr(uint16_t x, uint16_t y, Thingp t);
     void remove_thing_ptr(Thingp t);
