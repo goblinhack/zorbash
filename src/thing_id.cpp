@@ -21,7 +21,7 @@ void World::put_thing_ptr (uint16_t x, uint16_t y, Thingp t)
     }
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto p = &all_thing_ptrs_at[x][y][slot];
+        auto p = &getref(all_thing_ptrs_at, x, y, slot);
         if (*p == nullptr) {
             *p = t;
             t->id = x | (y << y_shift) | (slot << slots_shift) | ++r << r_shift;
@@ -37,7 +37,7 @@ void World::remove_thing_ptr (Thingp t)
     uint32_t y = (t->id & y_mask) >> y_shift;
     uint32_t slot = (t->id & slots_mask) >> slots_shift;
 
-    auto p = &all_thing_ptrs_at[x][y][slot];
+    auto p = &getref(all_thing_ptrs_at, x, y, slot);
     if (unlikely(!*p)) {
         t->die("thing ptr not found at x %u y %u slot %u", x, y, slot);
     }

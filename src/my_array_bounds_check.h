@@ -13,6 +13,38 @@ void set(std::array<TYPE,XDIM>& arr, std::size_t X, TYPE v){_
 
 template<class TYPE, std::size_t XDIM>
 static inline
+void incr(std::array<TYPE,XDIM>& arr, std::size_t X, TYPE v){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    arr[X] += v;
+}    
+
+template<class TYPE, std::size_t XDIM>
+static inline
+void decr(std::array<TYPE,XDIM>& arr, std::size_t X, TYPE v){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    arr[X] -= v;
+}    
+
+template<class TYPE, std::size_t XDIM>
+static inline
+void incr(std::array<TYPE,XDIM>& arr, std::size_t X){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    arr[X] ++;
+}    
+
+template<class TYPE, std::size_t XDIM>
+static inline
+void decr(std::array<TYPE,XDIM>& arr, std::size_t X){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    arr[X] --;
+}    
+
+template<class TYPE, std::size_t XDIM>
+static inline
 TYPE get(std::array<TYPE,XDIM> const &arr, std::size_t X){_
     ASSERT(X >= 0)
     ASSERT(X < arr.size())

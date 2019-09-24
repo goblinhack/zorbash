@@ -72,7 +72,7 @@ void tp_update (Tpp t)
 //
 Tpp tp_find (uint32_t id)
 {_
-    auto result = tp_id_map[id - 1];
+    auto result = get(tp_id_map, id - 1);
     if (!result) {
         DIE("thing template id %u not found", id);
     }
@@ -144,70 +144,70 @@ void tp_init_after_loading (void)
 
 Tpp tp_random_monst (void)
 {_
-    return tp_monst[myrand() % tp_monst.size()];
+    return get(tp_monst, myrand() % tp_monst.size());
 }
 
 Tpp tp_random_food (void)
 {_
-    return tp_food[myrand() % tp_food.size()];
+    return get(tp_food, myrand() % tp_food.size());
 }
 
 Tpp tp_random_dirt (void)
 {_
-    return tp_dirt[myrand() % tp_dirt.size()];
+    return get(tp_dirt, myrand() % tp_dirt.size());
 }
 
 Tpp tp_random_grass (void)
 {_
-    return tp_grass[myrand() % tp_grass.size()];
+    return get(tp_grass, myrand() % tp_grass.size());
 }
 
 Tpp tp_random_soil (void)
 {_
-    return tp_soil[myrand() % tp_soil.size()];
+    return get(tp_soil, myrand() % tp_soil.size());
 }
 
 Tpp tp_random_gravel (void)
 {_
-    return tp_gravel[myrand() % tp_gravel.size()];
+    return get(tp_gravel, myrand() % tp_gravel.size());
 }
 
 Tpp tp_random_snow (void)
 {_
-    return tp_snow[myrand() % tp_snow.size()];
+    return get(tp_snow, myrand() % tp_snow.size());
 }
 
 Tpp tp_random_ripple (void)
 {_
-    return tp_ripples[myrand() % tp_ripples.size()];
+    return get(tp_ripples, myrand() % tp_ripples.size());
 }
 
 Tpp tp_random_key (void)
 {_
-    return tp_keys[myrand() % tp_keys.size()];
+    return get(tp_keys, myrand() % tp_keys.size());
 }
 
 Tpp tp_random_blood (void)
 {_
-    return tp_blood[myrand() % tp_blood.size()];
+    return get(tp_blood, myrand() % tp_blood.size());
 }
 
 Tpp tp_random_wall (void)
 {_
-    return tp_wall[myrand() % tp_wall.size()];
+    return get(tp_wall, myrand() % tp_wall.size());
 }
 
 Tpp tp_random_floor (void)
 {_
-    return tp_floor[myrand() % tp_floor.size()];
+    return get(tp_floor, myrand() % tp_floor.size());
 }
 
 Tpp tp_random_deco (void)
 {_
-    return tp_deco[myrand() % tp_deco.size()];
+    return get(tp_deco, myrand() % tp_deco.size());
 }
 
 Tpp tp_random_wall_deco (void)
 {_
-    return tp_wall_deco[myrand() % tp_wall_deco.size()];
+    return get(tp_wall_deco, myrand() % tp_wall_deco.size());
 }

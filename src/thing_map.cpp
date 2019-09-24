@@ -378,7 +378,7 @@ static void thing_blit_water (int minx, int miny, int minz,
         for (auto x = minx; x < maxx; x+=2) {
             const auto X = x - minx + 2;
 
-            if (tile_map[X][Y]) {
+            if (get(tile_map, X, Y)) {
                 set(tile_map, X, Y, false);
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
@@ -631,7 +631,7 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
         for (auto x = minx; x < maxx; x++) {
             const auto X = x - minx + 2;
 
-            if (tile_map[X][Y]) {
+            if (get(tile_map, X, Y)) {
                 set(tile_map, X, Y, false);
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);

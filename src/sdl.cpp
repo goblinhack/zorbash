@@ -37,7 +37,7 @@ int sdl_joy2_left;
 int sdl_joy2_down;
 int sdl_joy2_up;
 
-uint8_t sdl_joy_buttons[SDL_MAX_BUTTONS];
+std::array<uint8_t, SDL_MAX_BUTTONS> sdl_joy_buttons;
 
 static SDL_Joystick *joy;
 static SDL_Haptic *haptic;
@@ -578,18 +578,18 @@ static void sdl_event (SDL_Event * event)
         if (sdl_joy_axes[2] > sdl_joy_deadzone) {
             DBG("left fire");
             sdl_left_fire = true;
-            sdl_joy_buttons[SDL_JOY_BUTTON_LEFT_FIRE] = 1;
+            set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t)1);
         } else {
-            sdl_joy_buttons[SDL_JOY_BUTTON_LEFT_FIRE] = 0;
+            set(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE, (uint8_t)0);
         }
 
 
         if (sdl_joy_axes[5] > sdl_joy_deadzone) {
             DBG("right fire");
             sdl_right_fire = true;
-            sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT_FIRE] = 1;
+            set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t)1);
         } else {
-            sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT_FIRE] = 0;
+            set(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE, (uint8_t)0);
         }
 
         if (sdl_right_fire || sdl_left_fire) {
@@ -658,7 +658,7 @@ static void sdl_event (SDL_Event * event)
     case SDL_JOYBUTTONDOWN:
         DBG("Joystick %d: button %d pressed",
             event->jbutton.which, event->jbutton.button);
-        sdl_joy_buttons[event->jbutton.button] = 1;
+        set(sdl_joy_buttons, event->jbutton.button, (uint8_t)1);
         sdl_get_mouse();
         wid_joy_button(mouse_x, mouse_y);
         break;
@@ -666,7 +666,7 @@ static void sdl_event (SDL_Event * event)
     case SDL_JOYBUTTONUP:
         DBG("Joystick %d: button %d released",
             event->jbutton.which, event->jbutton.button);
-        sdl_joy_buttons[event->jbutton.button] = 0;
+        set(sdl_joy_buttons, event->jbutton.button, (uint8_t)0);
         break;
 
     case SDL_CLIPBOARDUPDATE:
@@ -768,36 +768,36 @@ static void sdl_tick (void)
         DBG("right stick, right");
         sdl_joy1_right = true;
 
-        sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT]++;
+        incr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
         wid_joy_button(mouse_x, mouse_y);
-        sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT]--;
+        decr(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT);
     }
 
     if (sdl_joy_axes[3] < -sdl_joy_deadzone) {
         DBG("right stick, left");
         sdl_joy1_left = true;
 
-        sdl_joy_buttons[SDL_JOY_BUTTON_LEFT]++;
+        incr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
         wid_joy_button(mouse_x, mouse_y);
-        sdl_joy_buttons[SDL_JOY_BUTTON_LEFT]--;
+        decr(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT);
     }
 
     if (sdl_joy_axes[4] > sdl_joy_deadzone) {
         DBG("right stick, down");
         sdl_joy1_down = true;
 
-        sdl_joy_buttons[SDL_JOY_BUTTON_DOWN]++;
+        incr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
         wid_joy_button(mouse_x, mouse_y);
-        sdl_joy_buttons[SDL_JOY_BUTTON_DOWN]--;
+        decr(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN);
     }
 
     if (sdl_joy_axes[4] < -sdl_joy_deadzone) {
         DBG("right stick, up");
         sdl_joy1_up = true;
 
-        sdl_joy_buttons[SDL_JOY_BUTTON_UP]++;
+        incr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
         wid_joy_button(mouse_x, mouse_y);
-        sdl_joy_buttons[SDL_JOY_BUTTON_UP]--;
+        decr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
     }
 
     /*

@@ -46,23 +46,23 @@ void player_tick (void)
         key_pressed = true;
     }
 
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_UP]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
         up = true;
     }
 
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_DOWN]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
         down = true;
     }
 
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_LEFT]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
         left = true;
     }
 
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
         right = true;
     }
 
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_LEFT_FIRE]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE)) {
         fire = true;
     }
 

@@ -316,7 +316,7 @@ public:
         if (level >= (int)Level::all_levels.size()) {
             DIE("out of range level %d", level);
         }
-        auto l = Level::all_levels[level];
+        auto l = get(Level::all_levels, level);
 
         cells.resize(l->width * l->height * MAP_DEPTH, Charmap::SPACE);
         std::fill(cells.begin(), cells.end(), Charmap::SPACE);
@@ -2260,7 +2260,7 @@ _
                             continue;
                         }
 
-                        auto r = all_placed_rooms[ri++];
+                        auto r = get(all_placed_rooms, ri++);
                         if (r->roomno == skip_roomno) {
                             continue;
                         }
@@ -2288,7 +2288,7 @@ _
                             continue;
                         }
 
-                        auto r = all_placed_rooms[ri++];
+                        auto r = get(all_placed_rooms, ri++);
                         if (r->roomno != skip_roomno) {
                             continue;
                         }

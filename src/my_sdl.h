@@ -85,7 +85,7 @@ extern int32_t sdl_joy2_left;
 extern int32_t sdl_joy2_down;
 extern int32_t sdl_joy2_up;
 
-extern uint8_t sdl_joy_buttons[SDL_MAX_BUTTONS];
+extern std::array<uint8_t, SDL_MAX_BUTTONS> sdl_joy_buttons;
 extern void sdl_screenshot(void);
 extern uint8_t fps_enable(tokensp, void *context);
 extern uint8_t vsync_enable(tokensp, void *context);

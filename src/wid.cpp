@@ -138,7 +138,7 @@ static int32_t wid_lowest_priority = -1;
  * History for all text widgets.
  */
 #define HISTORY_MAX 16
-std::wstring history[HISTORY_MAX];
+std::array<std::wstring, HISTORY_MAX> history;
 uint32_t history_at;
 uint32_t history_walk;
 
@@ -777,8 +777,8 @@ static uint8_t wid_m_over_b (widp w, uint32_t x, uint32_t y,
     verify(w.get());
 
     if (!(w.get()->on_m_over_b) && !(w.get()->on_m_down)) {
-        if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG] ||
-            w->cfg[WID_MODE_OVER].color_set[WID_COLOR_TEXT]) {
+        if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] ||
+            get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT]) {
             /*
              * Changes appearance on mouse over, so choose this wid even
              * if it has no over callback.
@@ -1590,7 +1590,7 @@ void wid_set_tex_br (widp w, fsize val)
 color wid_get_color (widp w, wid_color which)
 {_
     uint32_t mode = (__typeof__(mode)) wid_get_mode(w); // for c++, no enum walk
-    wid_cfg *cfg = &w->cfg[mode];
+    wid_cfg *cfg = &getref(w->cfg, mode);
 
     if (cfg->color_set[which]) {
         return (cfg->colors[which]);
@@ -1598,14 +1598,14 @@ color wid_get_color (widp w, wid_color which)
 
     if ((wid_focus == w) && (wid_over == w)) {
         mode = WID_MODE_OVER;
-        cfg = &w->cfg[mode];
+        cfg = &getref(w->cfg, mode);
         if (cfg->color_set[which]) {
             return (cfg->colors[which]);
         }
     }
 
     mode = WID_MODE_NORMAL;
-    cfg = &w->cfg[mode];
+    cfg = &getref(w->cfg, mode);
     if (cfg->color_set[which]) {
         return (cfg->colors[which]);
     }
@@ -1619,7 +1619,7 @@ color wid_get_color (widp w, wid_color which)
 color wid_get_mode_color (widp w, wid_color which)
 {_
     uint32_t mode = (__typeof__(mode)) wid_get_mode(w); // for c++, no enum walk
-    wid_cfg *cfg = &w->cfg[mode];
+    wid_cfg *cfg = &getref(w->cfg, mode);
 
     return (cfg->colors[which]);
 }
@@ -3795,7 +3795,7 @@ uint8_t wid_receive_input (widp w, const SDL_KEYSYM *key)
                     history_walk--;
                 }
 
-                wid_set_text(w, history[history_walk]);
+                wid_set_text(w, get(history, history_walk));
                 w->cursor = (uint32_t)wid_get_text(w).length();
                 break;
 
@@ -3805,7 +3805,7 @@ uint8_t wid_receive_input (widp w, const SDL_KEYSYM *key)
                     history_walk = 0;
                 }
 
-                wid_set_text(w, history[history_walk]);
+                wid_set_text(w, get(history, history_walk));
                 w->cursor = (uint32_t)wid_get_text(w).length();
                 break;
 
@@ -3879,7 +3879,7 @@ uint8_t wid_receive_input (widp w, const SDL_KEYSYM *key)
                         w->cursor = updatedtext.length();
                     }
 
-                    history[history_at] = updatedtext;
+                    set(history, history_at, updatedtext);
 
                     history_at++;
                     if (history_at >= HISTORY_MAX) {
@@ -3916,8 +3916,8 @@ uint8_t wid_receive_input (widp w, const SDL_KEYSYM *key)
                         history_walk--;
                     }
 
-                    wid_set_text(w, history[history_walk]);
-                    if (history[history_walk] == L"") {
+                    wid_set_text(w, get(history, history_walk));
+                    if (get(history, history_walk) == L"") {
                         continue;
                     }
 
@@ -3936,8 +3936,8 @@ uint8_t wid_receive_input (widp w, const SDL_KEYSYM *key)
                         history_walk = 0;
                     }
 
-                    wid_set_text(w, history[history_walk]);
-                    if (history[history_walk] == L"") {
+                    wid_set_text(w, get(history, history_walk));
+                    if (get(history, history_walk) == L"") {
                         continue;
                     }
 
@@ -5143,63 +5143,63 @@ void wid_mouse_motion (int32_t x, int32_t y,
  */
 void wid_fake_joy_button (int32_t x, int32_t y)
 {_
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_A]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_A)) {
         wid_mouse_down(SDL_BUTTON_LEFT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_B]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_B)) {
         wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_X]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_X)) {
         wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_Y]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_Y)) {
         wid_mouse_down(2, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_TOP_LEFT]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_TOP_LEFT)) {
         wid_mouse_down(SDL_BUTTON_LEFT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_TOP_RIGHT]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_TOP_RIGHT)) {
         wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_LEFT_STICK_DOWN]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_STICK_DOWN)) {
         wid_mouse_down(SDL_BUTTON_LEFT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT_STICK_DOWN]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_STICK_DOWN)) {
         wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_START]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_START)) {
         wid_mouse_down(SDL_BUTTON_LEFT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_XBOX]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_XBOX)) {
         wid_mouse_down(SDL_BUTTON_LEFT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_BACK]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_BACK)) {
         wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_UP]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_DOWN]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_LEFT]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_LEFT_FIRE]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE)) {
         wid_mouse_down(SDL_BUTTON_LEFT, x, y);
         return;
     }
-    if (sdl_joy_buttons[SDL_JOY_BUTTON_RIGHT_FIRE]) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT_FIRE)) {
         wid_mouse_down(SDL_BUTTON_RIGHT, x, y);
         return;
     }
@@ -5215,15 +5215,15 @@ void wid_joy_button (int32_t x, int32_t y)
     /*
      * Only if there is a change in status, send an event.
      */
-    static uint32_t ts[SDL_MAX_BUTTONS];
+    static std::array<uint32_t, SDL_MAX_BUTTONS> ts;
     int changed = false;
     int b;
 
     for (b = 0; b < SDL_MAX_BUTTONS; b++) {
-        if (sdl_joy_buttons[b]) {
-            if (time_have_x_tenths_passed_since(2, ts[b])) {
+        if (get(sdl_joy_buttons, b)) {
+            if (time_have_x_tenths_passed_since(2, get(ts, b))) {
                 changed = true;
-                ts[b] = time_get_time_ms_cached();
+                set(ts, b, time_get_time_ms_cached());
             }
         }
     }
@@ -6081,9 +6081,9 @@ static void wid_display (widp w,
         w_box_args.over = true;
         w_button_args.over = true;
 
-        if (w->cfg[WID_MODE_OVER].color_set[WID_COLOR_BG]) {
-            auto c = w->cfg[WID_MODE_OVER].colors[WID_COLOR_TEXT];
-            c = w->cfg[WID_MODE_OVER].colors[WID_COLOR_BG];
+        if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG]) {
+            auto c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
+            c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
             w_box_args.col_border_text = c;
             w_button_args.col_tl = c;
             w_button_args.col_mid = c;
@@ -6095,8 +6095,8 @@ static void wid_display (widp w,
             w_box_args.col_br = WHITE;
         }
     } else {
-        if (w->cfg[WID_MODE_NORMAL].color_set[WID_COLOR_BG]) {
-            auto c = w->cfg[WID_MODE_NORMAL].colors[WID_COLOR_BG];
+        if (get(w->cfg, WID_MODE_NORMAL).color_set[WID_COLOR_BG]) {
+            auto c = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
             w_box_args.col_border_text = c;
             w_box_args.col_tl = c;
             w_box_args.col_mid = c;
@@ -6121,7 +6121,7 @@ static void wid_display (widp w,
          */
         if (bry == tly) {
             auto c = L'▋';
-            auto color = w->cfg[WID_MODE_NORMAL].colors[WID_COLOR_BG];
+            auto color = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
 
             ascii_put_solid_line(tlx, tlx + w_box_args.width, tly,
                                  c, color, w_box_args.context);
@@ -6632,7 +6632,7 @@ static void wid_move_dequeue (widp w)
         return;
     }
 
-    wid_move_t *c = &w->move[0];
+    wid_move_t *c = &getref(w->move, 0);
 
     w->moving_start.x = w->moving_end.x;
     w->moving_start.y = w->moving_end.y;
@@ -6644,13 +6644,13 @@ static void wid_move_dequeue (widp w)
     uint8_t i;
     for (i = 0; i < w->moving; i++) {
         if (i < WID_MAX_MOVE_QUEUE - 1) {
-            wid_move_t *c = &w->move[i];
+            wid_move_t *c = &getref(w->move, i);
             memcpy(c, c+1, sizeof(*c));
         }
     }
 
     {
-        wid_move_t *c = &w->move[i];
+        wid_move_t *c = &getref(w->move, i);
         memset(c, 0, sizeof(*c));
     }
 }
