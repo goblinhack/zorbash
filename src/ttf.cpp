@@ -180,11 +180,11 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
         return;
     }
 
-    f->glyphs[d].minx = minx;
-    f->glyphs[d].maxx = maxx;
-    f->glyphs[d].miny = miny;
-    f->glyphs[d].maxy = maxy;
-    f->glyphs[d].advance = advance;
+    getref(f->glyphs, d).minx = minx;
+    getref(f->glyphs, d).maxx = maxx;
+    getref(f->glyphs, d).miny = miny;
+    getref(f->glyphs, d).maxy = maxy;
+    getref(f->glyphs, d).advance = advance;
 
     text[0] = c;
     text[1] = '\0';
@@ -204,12 +204,13 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
     f->tex[d].tex = 0;
 
     ttf_set_color_key(g1, texcoord, 0, 0, 0,
-                      &f->glyphs[d].width, &f->glyphs[d].height);
+                      &getref(f->glyphs, d).width, 
+                      &getref(f->glyphs, d).height);
 
-    f->glyphs[d].texMinX = texcoord[0];
-    f->glyphs[d].texMinY = texcoord[1];
-    f->glyphs[d].texMaxX = texcoord[2];
-    f->glyphs[d].texMaxY = texcoord[3];
+    getref(f->glyphs, d).texMinX = texcoord[0];
+    getref(f->glyphs, d).texMinY = texcoord[1];
+    getref(f->glyphs, d).texMaxX = texcoord[2];
+    getref(f->glyphs, d).texMaxY = texcoord[3];
 }
 
 Fontp
@@ -230,9 +231,9 @@ ttf_read_tga (Fontp f, const char *name, int pointsize)
     }
 
     for (c = 0; c < TTF_GLYPH_MAX; c++) {
-        f->tex[c].tex_p = tex;
-        f->tex[c].tex = tex_get_gl_binding(tex);
-        f->tex[c].image = tex_get_surface(tex);
+        getref(f->tex, c).tex_p = tex;
+        getref(f->tex, c).tex = tex_get_gl_binding(tex);
+        getref(f->tex, c).image = tex_get_surface(tex);
     }
 
     return (f);
@@ -279,13 +280,13 @@ ttf_write_tga (std::string name, int pointsize, int style)
 
     int tot = 0;
     for (c = 0; c < TTF_GLYPH_MAX; c++) {
-        if (!f->valid[c]) {
+        if (!get(f->valid, c)) {
             continue;
         }
         tot++;
 
-        double w = f->glyphs[c].maxx - f->glyphs[c].minx;
-        double h = f->glyphs[c].maxy - f->glyphs[c].miny;
+        double w = get(f->glyphs, c).maxx - get(f->glyphs, c).minx;
+        double h = get(f->glyphs, c).maxy - get(f->glyphs, c).miny;
 
         max_line_height[y] = fmax(max_line_height[y], h);
         max_char_height = fmax(max_char_height, max_line_height[y]);
@@ -334,16 +335,16 @@ ttf_write_tga (std::string name, int pointsize, int style)
     h = 0;
 
     for (c = 0; c < TTF_GLYPH_MAX; c++) {
-        if (!f->valid[c]) {
+        if (!get(f->valid, c)) {
             continue;
         }
 
-        if (f->tex[c].image) {
+        if (get(f->tex, c).image) {
             SDL_Rect dstrect = {
                 (int)(max_char_width * x), (int)h, (int)max_char_width, (int)max_char_height
             };
 
-            SDL_BlitSurface(f->tex[c].image, 0, dst, &dstrect);
+            SDL_BlitSurface(get(f->tex, c).image, 0, dst, &dstrect);
         }
 
         if (++x >= glyph_per_row) {
@@ -409,17 +410,17 @@ ttf_write_tga (std::string name, int pointsize, int style)
 
     for (c = 0; c < TTF_GLYPH_MAX; c++) {
 
-        if (!f->valid[c]) {
+        if (!get(f->valid, c)) {
             continue;
         }
 
         int x1 = x * max_char_width;
-        f->glyphs[c].texMinX = (double)(x1) / (double)dst->w;
-        f->glyphs[c].texMaxX = (double)(x1 + max_char_width) / (double)dst->w;
+        getref(f->glyphs, c).texMinX = (double)(x1) / (double)dst->w;
+        getref(f->glyphs, c).texMaxX = (double)(x1 + max_char_width) / (double)dst->w;
 
         int y1 = y * max_char_height;
-        f->glyphs[c].texMinY = (double)(y1) / (double)dst->h;
-        f->glyphs[c].texMaxY = (double)(y1 + max_char_height) / (double)dst->h;
+        getref(f->glyphs, c).texMinY = (double)(y1) / (double)dst->h;
+        getref(f->glyphs, c).texMaxY = (double)(y1 + max_char_height) / (double)dst->h;
 
         if (++x >= glyph_per_row) {
             x = 0;
@@ -459,12 +460,12 @@ ttf_write_tga (std::string name, int pointsize, int style)
     h = 0;
 
     for (c = 0; c < TTF_GLYPH_MAX; c++) {
-        if (!f->valid[c]) {
+        if (!get(f->valid, c)) {
             continue;
         }
 
-        f->tex[c].image = dst;
-        f->tex[c].tex = tex_get_gl_binding(tex);
+        getref(f->tex, c).image = dst;
+        getref(f->tex, c).tex = tex_get_gl_binding(tex);
     }
 
     return (f);
