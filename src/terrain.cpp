@@ -39,16 +39,16 @@ class Terrain
 {
 private:
 public:
-    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> new_map;
-    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> old_map;
-    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> merged_map;
-    std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> droplet_map;
-    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> final_map;
-    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> groundwater;
-    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> river;
-    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> humidity;
-    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> old_humidity;
-    std::array<Droplet, MAX_DROPLETS> droplets;
+    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> new_map {};
+    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> old_map {};
+    std::array<std::array<signed char, MAP_HEIGHT>, MAP_WIDTH> merged_map {};
+    std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> droplet_map {};
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> final_map {};
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> groundwater {};
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> river {};
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> humidity {};
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> old_humidity {};
+    std::array<Droplet, MAX_DROPLETS> droplets {};
 
     uint32_t                          tex_groundwater;
     Texp                              tex_groundwater_p = {};

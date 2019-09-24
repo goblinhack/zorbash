@@ -348,7 +348,8 @@ static void thing_blit_water (int minx, int miny, int minz,
     // The water tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
-    std::array<std::array<bool, CHUNK_HEIGHT + 8>, CHUNK_WIDTH + 8> tile_map {};
+    std::array<
+      std::array<bool, CHUNK_HEIGHT + 8>, CHUNK_WIDTH + 8> tile_map = {};
 
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
@@ -486,7 +487,8 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
 #define DEEP_WATER_ACROSS 8
 #define DEEP_WATER_DOWN   8
 
-    static std::array<std::array<Tilep, DEEP_WATER_DOWN>, DEEP_WATER_ACROSS> deep_water;
+    static std::array<
+             std::array<Tilep, DEEP_WATER_DOWN>, DEEP_WATER_ACROSS> deep_water;
     if (!deep_water[0][0]) {
         set(deep_water, 0, 0, tile_find("deep_water1a"));
         set(deep_water, 1, 0, tile_find("deep_water2a"));
@@ -600,7 +602,8 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     // The deep_water tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
-    std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> tile_map {};
+    std::array<
+      std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> tile_map {};
 
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
@@ -853,7 +856,8 @@ static void thing_blit_lava (int minx, int miny, int minz,
     // The lava tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
-    std::array<std::array<bool, CHUNK_HEIGHT + 8>, CHUNK_WIDTH + 8> tile_map {};
+    std::array<
+      std::array<bool, CHUNK_HEIGHT + 8>, CHUNK_WIDTH + 8> tile_map = {};
 
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
@@ -932,7 +936,7 @@ static void thing_blit_blood (int minx, int miny, int minz,
 #define BLOOD_ACROSS 1
 #define BLOOD_DOWN   1
 
-    static std::array<std::array<Tilep, BLOOD_DOWN>, BLOOD_ACROSS> blood;
+    static std::array<std::array<Tilep, BLOOD_DOWN>, BLOOD_ACROSS> blood {};
     if (!blood[0][0]) {
         set(blood, 0, 0, tile_find("blood1a"));
     }

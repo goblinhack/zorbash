@@ -146,7 +146,7 @@ uint32_t history_walk;
  * A tile over the mouse pointer
  */
 widp wid_mouse_template;
-std::array<std::array<widp, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> wid_on_screen_at;
+std::array<std::array<widp, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> wid_on_screen_at {};
 
 static uint8_t wid_init_done;
 static uint8_t wid_exiting;

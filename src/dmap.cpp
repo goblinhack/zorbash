@@ -464,8 +464,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
         point(0, 1),
     };
 
-    std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> walked;
-    walked = {};
+    std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> walked = {};
 
     auto at = start;
     std::vector<point> out = { };

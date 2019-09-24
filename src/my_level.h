@@ -37,7 +37,7 @@ public:
 
     std::array<
       std::array<
-        std::array<char, MAP_DEPTH>, CHUNK_HEIGHT>, CHUNK_WIDTH> data;
+        std::array<char, MAP_DEPTH>, CHUNK_HEIGHT>, CHUNK_WIDTH> data {};
 
     static Levelp level_new(void);
     void finalize(void);

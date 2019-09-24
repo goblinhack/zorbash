@@ -86,7 +86,7 @@ void Light::calculate (void)
     // to avoid lighting walls behind those immediately visible to us. To
     // do this we do a flood fill of the level and pick the nearest walls.
     //
-    static std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> is_nearest_wall;
+    static std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> is_nearest_wall = {};
     static uint32_t is_nearest_wall_val;
     is_nearest_wall_val++;
 

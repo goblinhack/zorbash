@@ -18,6 +18,10 @@
 #include <list>
 #include <algorithm>
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+#define AT __FILE__ ":" TOSTRING(__LINE__)
+
 static bool dungeon_debug = true;
 
 //
@@ -139,12 +143,7 @@ static bool dungeon_debug = true;
 
 class Grid {
 public:
-    std::array<std::array<Roomp, GRID_HEIGHT>, GRID_WIDTH> node_rooms;
-
-    Grid()
-    {
-        node_rooms = {};
-    }
+    std::array<std::array<Roomp, GRID_HEIGHT>, GRID_WIDTH> node_rooms {};
 };
 
 typedef class Dungeon *Dungeonp;
@@ -170,7 +169,7 @@ public:
     int map_height                            {CHUNK_HEIGHT};
     int map_depth                             {MAP_DEPTH};
 
-    std::array<std::array<int, CHUNK_HEIGHT>, CHUNK_WIDTH> map_jigsaw_buffer_water_depth;
+    std::array<std::array<int, CHUNK_HEIGHT>, CHUNK_WIDTH> map_jigsaw_buffer_water_depth {};
 
     //
     // High level view of the map.
@@ -288,9 +287,10 @@ public:
         dump();
     }
 
-    void debug (std::string s)
+    void debug (const std::string s)
     {_
         LOG("dungeon (%u) %s", seed, s.c_str());
+        LOG("===========================================================");
         dump();
     }
 
@@ -513,7 +513,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_floor) {
                 return true;
@@ -530,7 +530,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_corridor) {
                 return true;
@@ -547,7 +547,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_corridor) {
                 return true;
@@ -564,7 +564,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_dirt) {
                 return true;
@@ -581,7 +581,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_dirt) {
                 return true;
@@ -598,7 +598,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_grass) {
                 return true;
@@ -615,7 +615,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_grass) {
                 return true;
@@ -632,7 +632,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_secret_corridor) {
                 return true;
@@ -649,7 +649,7 @@ public:
 
         auto d = MAP_DEPTH_WALLS;
         auto c = getc(x, y, d);
-        auto v = Charmap::all_charmaps[c];
+        auto v = get(Charmap::all_charmaps, c);
         return (v.is_wall);
     }
 
@@ -661,7 +661,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_monst) {
                 return true;
@@ -678,7 +678,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_food) {
                 return true;
@@ -695,7 +695,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_blood) {
                 return true;
@@ -712,7 +712,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_rock) {
                 return true;
@@ -729,7 +729,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_door) {
                 return true;
@@ -746,7 +746,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_entrance) {
                 return true;
@@ -763,7 +763,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.gfx_is_floor_deco) {
                 return true;
@@ -780,7 +780,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.gfx_is_wall_deco) {
                 return true;
@@ -797,7 +797,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_exit) {
                 return true;
@@ -814,7 +814,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_lava) {
                 return true;
@@ -831,7 +831,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_water) {
                 return true;
@@ -848,7 +848,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_deep_water) {
                 return true;
@@ -865,7 +865,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_treasure) {
                 return true;
@@ -882,7 +882,7 @@ public:
 
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_key) {
                 return true;
@@ -915,7 +915,7 @@ public:
     {
         const auto d = MAP_DEPTH_FLOOR;
         auto c = getc_fast(x, y, d);
-        auto v = Charmap::all_charmaps[c];
+        auto v = get(Charmap::all_charmaps, c);
 
         return (v.is_floor);
     }
@@ -924,7 +924,7 @@ public:
     {
         auto d = MAP_DEPTH_WALLS;
         auto c = getc_fast(x, y, d);
-        auto v = Charmap::all_charmaps[c];
+        auto v = get(Charmap::all_charmaps, c);
         return (v.is_wall);
     }
 
@@ -932,7 +932,7 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_door) {
                 return true;
@@ -945,7 +945,7 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_entrance) {
                 return true;
@@ -958,7 +958,7 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_exit) {
                 return true;
@@ -971,7 +971,7 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_lava) {
                 return true;
@@ -984,7 +984,7 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_water) {
                 return true;
@@ -997,7 +997,7 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_deep_water) {
                 return true;
@@ -1010,7 +1010,7 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_treasure) {
                 return true;
@@ -1023,7 +1023,7 @@ public:
     {
         for (auto d = 0; d < map_depth; d++) {
             auto c = getc_fast(x, y, d);
-            auto v = Charmap::all_charmaps[c];
+            auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_key) {
                 return true;
@@ -1063,16 +1063,16 @@ public:
                     if (!is_anything_at(x, y, d)) {
                         continue;
                     }
-
+_
                     auto m = getc(x, y, d);
-                    auto cr = Charmap::all_charmaps[m];
+                    auto cr = get(Charmap::all_charmaps, m);
                     auto c = cr.c;
-
+_
                     if (!c) {
                         DIE("unknown map char 0x%x/%c at x %d, y %d, depth %d",
                             m, m, x, y, d);
                     }
-
+_
                     if (nodes) {
                         if (!(x % 2) && !(y % 2)) {
                             if (!is_wall(x, y) && is_floor(x, y)) {
@@ -1122,7 +1122,7 @@ public:
                     }
 
                     auto m = getc(x, y, d);
-                    auto cr = Charmap::all_charmaps[m];
+                    auto cr = get(Charmap::all_charmaps, m);
                     auto c = cr.c;
 
                     if (!c) {
@@ -1182,7 +1182,6 @@ public:
     {_
         r->at.x = x;
         r->at.y = y;
-
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto dy = 0; dy < r->height; dy++) {
                 for (auto dx = 0; dx < r->width; dx++) {
@@ -1369,7 +1368,7 @@ public:
             return (true);
         }
 
-        if (g->node_rooms[x][y]) {
+        if (get(g->node_rooms, x, y)) {
             return (true);
         }
 
@@ -1402,31 +1401,35 @@ public:
             }
 	}
 
-        auto r = candidates[random_range(0, ncandidates)];
+        auto r = get(candidates, random_range(0, ncandidates));
         set(g->node_rooms, x, y, r);
 
         if (n->has_door_down) {
-            Grid old = *g;
+            Grid old;
+            std::copy(mbegin(g->node_rooms), mend(g->node_rooms), mbegin(old.node_rooms));
             if (!solve(x, y+1, g)) {
-                *g = old;
+                std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
             }
         }
         if (n->has_door_up) {
-            Grid old = *g;
+            Grid old;
+            std::copy(mbegin(g->node_rooms), mend(g->node_rooms), mbegin(old.node_rooms));
             if (!solve(x, y-1, g)) {
-                *g = old;
+                std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
             }
         }
         if (n->has_door_right) {
-            Grid old = *g;
+            Grid old;
+            std::copy(mbegin(g->node_rooms), mend(g->node_rooms), mbegin(old.node_rooms));
             if (!solve(x+1, y, g)) {
-                *g = old;
+                std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
             }
         }
         if (n->has_door_left) {
-            Grid old = *g;
+            Grid old;
+            std::copy(mbegin(g->node_rooms), mend(g->node_rooms), mbegin(old.node_rooms));
             if (!solve(x-1, y, g)) {
-                *g = old;
+                std::copy(mbegin(old.node_rooms), mend(old.node_rooms), mbegin(g->node_rooms));
             }
         }
         return (true);
@@ -1684,7 +1687,7 @@ public:
 
         for (unsigned int rs = 0;
                 rs < (unsigned int) all_placed_rooms.size(); rs++) {
-            auto r = all_placed_rooms[rs];
+            auto r = get(all_placed_rooms, rs);
             r->rollback_at = r->at;
         }
     }
@@ -1695,10 +1698,11 @@ public:
 
         for (unsigned int rs = 0;
                 rs < (unsigned int) all_placed_rooms.size(); rs++) {
-            auto r = all_placed_rooms[rs];
+            auto r = get(all_placed_rooms, rs);
             r->at = r->rollback_at;
         }
     }
+
 
     int draw_corridor (point start, point end, char w)
     {
@@ -1882,8 +1886,8 @@ public:
                     auto rdoori = r->which_door_down;
                     auto odoori = o->which_door_up;
 
-                    auto rdoor = r->doors_down[rdoori];
-                    auto odoor = o->doors_up[odoori];
+                    auto rdoor = get(r->doors_down, rdoori);
+                    auto odoor = get(o->doors_up, odoori);
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
@@ -1904,8 +1908,8 @@ public:
                     auto rdoori = r->which_door_right;
                     auto odoori = o->which_door_left;
 
-                    auto rdoor = r->doors_right[rdoori];
-                    auto odoor = o->doors_left[odoori];
+                    auto rdoor = get(r->doors_right, rdoori);
+                    auto odoor = get(o->doors_left, odoori);
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
@@ -1926,8 +1930,8 @@ public:
                     auto rdoori = r->which_secret_door_down;
                     auto odoori = o->which_secret_door_up;
 
-                    auto rdoor = r->doors_down[rdoori];
-                    auto odoor = o->doors_up[odoori];
+                    auto rdoor = get(r->doors_down, rdoori);
+                    auto odoor = get(o->doors_up, odoori);
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
@@ -1948,8 +1952,8 @@ public:
                     auto rdoori = r->which_secret_door_right;
                     auto odoori = o->which_secret_door_left;
 
-                    auto rdoor = r->doors_right[rdoori];
-                    auto odoor = o->doors_left[odoori];
+                    auto rdoor = get(r->doors_right, rdoori);
+                    auto odoor = get(o->doors_left, odoori);
 
                     auto start = r->at + rdoor;
                     auto end = o->at + odoor;
@@ -2237,7 +2241,7 @@ public:
                  rs < (unsigned int) all_placed_rooms.size();
                  rs++) {
 
-                auto r = all_placed_rooms[rs];
+                auto r = get(all_placed_rooms, rs);
                 auto skip_roomno = r->roomno;
 
                 std::fill(cells.begin(), cells.end(), Charmap::SPACE);
@@ -3351,8 +3355,7 @@ public:
     //
     void water_fixup (void)
     {
-        std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> cand;
-        cand = {};
+        std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> cand {};
 
         for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
             for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
@@ -3371,7 +3374,7 @@ public:
         }
         for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
             for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
-                if (cand[x][y]) {
+                if (get(cand, x, y)) {
                     if (random_range(0, 100) < 95) {
                         putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
                     } else {
@@ -3434,7 +3437,7 @@ public:
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
-                if (map_curr[x][y]) {
+                if (get(map_curr, x, y)) {
                     if (!is_anything_at(x, y)) {
                         putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
                     }
@@ -3491,7 +3494,7 @@ public:
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
-                if (map_curr[x][y]) {
+                if (get(map_curr, x, y)) {
                     if (!is_anything_at(x, y)) {
                         putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
                     }
@@ -3545,7 +3548,7 @@ public:
 #if 0
             for (y=2; y < maze_h-2; y++) {
                 for (x=2; x < maze_w-2; x++) {
-                    if (map_curr[x][y]) {
+                    if (get(map_curr, x, y)) {
                         printf("W");
                     } else {
                         printf(" ");
@@ -3563,7 +3566,7 @@ printf("----------------------------------\n");
 
         for (x=2; x < maze_w-2; x++) {
             for (y=2; y < maze_h-2; y++) {
-                if (map_curr[x][y]) {
+                if (get(map_curr, x, y)) {
                     if (!is_anything_at(x, y)) {
                         putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
                     }

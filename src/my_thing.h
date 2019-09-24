@@ -61,7 +61,7 @@ public:
 extern Path astar_solve(point start, std::multiset<Goal> &goals, Dmap *dmap);
 
 typedef struct {
-    std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> val;
+    std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> val {};
 } AgeMap;
 std::ostream& operator<<(std::ostream &out, Bits<const AgeMap & > const my);
 std::istream& operator>>(std::istream &in, Bits<AgeMap &> my);

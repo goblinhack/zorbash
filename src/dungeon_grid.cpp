@@ -2016,8 +2016,7 @@ void Nodes::make_paths_off_critical_path_reachable (void)
     dmap_process(&d, dmap_start, dmap_end);
     //dmap_print_walls(&d);
 
-    std::array<std::array<bool, GRID_HEIGHT>, GRID_WIDTH> on_critical_path;
-    on_critical_path = {};
+    std::array<std::array<bool, GRID_HEIGHT>, GRID_WIDTH> on_critical_path = {};
 
     auto p = dmap_solve(&d, start);
     for (auto c : p) {
