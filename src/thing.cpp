@@ -443,7 +443,7 @@ void Thing::hooks_remove ()
         //
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_HEIGHT; y++) {
-                for (auto t : world->all_thing_ptrs_at[x][y]) {
+                for (auto t : get(world->all_thing_ptrs_at, x, y)) {
                     if (t) {
                         auto o = t->owner_get();
                         if (o && (o == this)) {

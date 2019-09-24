@@ -58,7 +58,7 @@ things_tile_overlap (Thingp A, Thingp B)
 
     for (int y = 0; y < (int)A_tile->pix_height; y++) {
         for (int x = 0; x < (int)A_tile->pix_width; x++) {
-            if (!A_tile->pix[x][y]) {
+            if (!get(A_tile->pix, x, y)) {
 #ifdef DEBUG_COLLISION
                 printf(" ");
 #endif
@@ -85,7 +85,7 @@ things_tile_overlap (Thingp A, Thingp B)
                 continue;
             }
 
-            if (B_tile->pix[dx][dy]) {
+            if (get(B_tile->pix, dx, dy)) {
                 return (true);
             }
         }
@@ -120,7 +120,7 @@ things_tile_overlap (Thingp A, Thingp B)
                 continue;
             }
 
-            if (B_tile->pix[dx][dy]) {
+            if (get(B_tile->pix, dx, dy)) {
                 printf("B");
             } else {
                 printf(" ");

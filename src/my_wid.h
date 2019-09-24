@@ -265,7 +265,7 @@ widp wid_new_window(std::string name);
 // History for all text widgets.
 //
 #define HISTORY_MAX 16
-extern std::wstring history[HISTORY_MAX];
+extern std::array<std::wstring, HISTORY_MAX> history;
 extern uint32_t history_at;
 extern uint32_t history_walk;
 
@@ -273,8 +273,8 @@ typedef struct {
     //
     // Colors
     //
-    color colors[WID_COLOR_MAX];
-    uint8_t color_set [WID_COLOR_MAX];
+    std::array<color, WID_COLOR_MAX> colors;
+    std::array<uint8_t, WID_COLOR_MAX> color_set;
 } wid_cfg;
 
 class tree_wid_key {
@@ -500,7 +500,7 @@ public:
     //
     // Config layers:
     //
-    wid_cfg cfg[WID_MODE_LAST] {};
+    std::array<wid_cfg, WID_MODE_LAST> cfg {};
 
     //
     // Client context
@@ -522,7 +522,7 @@ public:
     // Queue of wid move requests.
     //
 #define WID_MAX_MOVE_QUEUE 4
-    wid_move_t move[WID_MAX_MOVE_QUEUE] {};
+    std::array<wid_move_t, WID_MAX_MOVE_QUEUE> move {};
     point moving_start {};
     point moving_end {};
     uint32_t timestamp_moving_begin {};
