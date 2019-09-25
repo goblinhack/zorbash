@@ -289,6 +289,7 @@ public:
 
     void debug (const std::string s)
     {_
+        return;
         LOG("dungeon (%u) %s", seed, s.c_str());
         LOG("===========================================================");
         dump();
@@ -1063,16 +1064,16 @@ public:
                     if (!is_anything_at(x, y, d)) {
                         continue;
                     }
-_
+
                     auto m = getc(x, y, d);
                     auto cr = get(Charmap::all_charmaps, m);
                     auto c = cr.c;
-_
+
                     if (!c) {
                         DIE("unknown map char 0x%x/%c at x %d, y %d, depth %d",
                             m, m, x, y, d);
                     }
-_
+
                     if (nodes) {
                         if (!(x % 2) && !(y % 2)) {
                             if (!is_wall(x, y) && is_floor(x, y)) {
@@ -1739,7 +1740,7 @@ _
             maxy = dmap_start.y;
         }
 
-        auto border = 3;
+        auto border = 2;
         minx -= border;
         miny -= border;
         maxx += border;
@@ -1829,10 +1830,8 @@ _
             putc(start.x, start.y, MAP_DEPTH_WALLS, Charmap::DEBUG);
             putc(end.x, end.y, MAP_DEPTH_WALLS, Charmap::DEBUG);
 
-            _ debug("failed to create corridor, end not found");
-            LOG("dungeon: failed to create corridor, end not found between %d,%d and %d,%d",
-                start.x, start.y,
-                end.x, end.y);
+            DBG("dungeon: failed to create corridor, end not found between %d,%d and %d,%d",
+                start.x, start.y, end.x, end.y);
             return (0);
         }
 

@@ -32,8 +32,8 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     int level_data_elems = PyList_Size(py_level_data);
     if (level_data_elems % CHUNK_HEIGHT) {
-        DIE("level elems needs to be evenly dividable by level height %d, got %d elems",
-            (int) CHUNK_HEIGHT, (int) PyList_Size(py_level_data));
+        DIE("level elems needs to be evenly dividable by level height %d, got %d elems when loading %s",
+            (int) CHUNK_HEIGHT, (int) PyList_Size(py_level_data), level_name);
     }
 
     auto l = Level::level_new();

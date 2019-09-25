@@ -55,11 +55,11 @@
 //
 // Dungeon has a pad of tiles around the edges
 //
-#define MAP_BORDER                  4
+#define MAP_BORDER                  2
 #define CHUNK_WIDTH                 ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define CHUNK_HEIGHT                ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
-#define MAP_WIDTH                   (CHUNK_WIDTH * 8)
-#define MAP_HEIGHT                  (CHUNK_HEIGHT * 8)
+#define MAP_WIDTH                   (CHUNK_WIDTH * 4)
+#define MAP_HEIGHT                  (CHUNK_HEIGHT * 4)
 #define MAP_SLOTS                   16
 #define MAX_THINGS                  (MAP_WIDTH * MAP_HEIGHT * 2)
 
