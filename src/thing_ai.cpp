@@ -195,8 +195,8 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
 
 fpoint Thing::ai_get_next_hop (void)
 {_
-    const auto dx = (CHUNK_WIDTH / 2) - 1;
-    const auto dy = (CHUNK_HEIGHT / 2) - 1;
+    const auto dx = (CHUNK_WIDTH / 4) - 1;
+    const auto dy = (CHUNK_HEIGHT / 4) - 1;
 
     auto minx = std::max(0, (int)mid_at.x - dx);
     auto maxx = std::min(MAP_WIDTH, (int)mid_at.x + dx);
@@ -257,7 +257,7 @@ _
 CON("scent before:");
 dmap_print(dmap_scent, start);
 #endif
-    dmap_process(scent);
+    dmap_process(scent, point(0, 0), point(maxx - minx, maxy - miny));
 #if 0
 CON("scent after:");
 dmap_print(dmap_scent, start);

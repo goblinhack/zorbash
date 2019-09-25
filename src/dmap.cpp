@@ -112,11 +112,9 @@ void dmap_process (Dmap *D, point tl, point br)
     uint16_t i;
     uint16_t lowest;
     uint16_t changed;
-    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> orig;
-    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> orig_valid;
-    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> valid;
-
-    std::copy(mbegin(D->val), mend(D->val), mbegin(orig));
+    static std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> orig;
+    static std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> orig_valid;
+    static std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> valid;
 
     int minx, miny, maxx, maxy;
     if (tl.x < br.x) {
@@ -147,6 +145,7 @@ void dmap_process (Dmap *D, point tl, point br)
         maxy = CHUNK_HEIGHT - 1;
     }
 
+
     //
     // Need a wall around the dmap or the search will sort of
     // trickle off the map
@@ -155,7 +154,7 @@ void dmap_process (Dmap *D, point tl, point br)
         set(D->val, minx, y, DMAP_IS_WALL);
         set(D->val, maxx, y, DMAP_IS_WALL);
     }
-    for (x = 0; x < CHUNK_WIDTH; x++) {
+    for (x = minx; x < CHUNK_WIDTH; x++) {
         set(D->val, x, miny, DMAP_IS_WALL);
         set(D->val, x, maxy, DMAP_IS_WALL);
     }
@@ -165,17 +164,14 @@ void dmap_process (Dmap *D, point tl, point br)
     dmap_print(D);
 #endif
 
-    for (y = 0; y < CHUNK_HEIGHT; y++) {
-        for (x = 0; x < CHUNK_WIDTH; x++) {
-            set(valid, x, y, (uint8_t)1);
-            set(orig_valid, x, y, (uint8_t)1);
-        }
-    }
-
     for (y = miny + 1; y < maxy; y++) {
         for (x = minx + 1; x < maxx; x++) {
+            set(orig, x, y, get(D->val, x, y));
+
             e = &getref(D->val, x , y);
             if (*e != DMAP_IS_WALL) {
+                set(valid, x, y, (uint8_t)1);
+                set(orig_valid, x, y, (uint8_t)1);
                 continue;
             }
 
@@ -276,13 +272,13 @@ void dmap_process (Dmap *D, point tl, point br)
     //
     for (y = miny + 1; y < maxy - 1; y++) {
         for (x = minx + 1; x < maxx - 1; x++) {
-            int o = get(orig, x, y);
+            uint16_t o = get(orig, x, y);
             if (o != DMAP_IS_WALL) {
                 if (o > DMAP_IS_PASSABLE) {
                     o = o - DMAP_IS_PASSABLE;
-                    int n = get(D->val, x, y);
+                    uint16_t n = get(D->val, x, y);
                     if (o + n < DMAP_IS_PASSABLE) {
-                        D->val[x][y] += o;
+                        incr(D->val, x, y, o);
                     }
                 }
             }
