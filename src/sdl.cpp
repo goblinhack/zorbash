@@ -755,10 +755,6 @@ static void sdl_tick (void)
     sdl_joy2_down = false;
     sdl_joy2_up = false;
 
-    if (!sdl_joy_axes) {
-        return;
-    }
-
     sdl_get_mouse();
 
     /*
@@ -985,21 +981,16 @@ void sdl_loop (void)
 #endif
 
     for (;/*ever*/;) {
-        /*
-         * Clear the screen
-         */
-        glClear(GL_COLOR_BUFFER_BIT);
-
         frames++;
 
         /*
          * Reset joystick handling before we poll and update.
          */
-        sdl_tick();
+        if (unlikely(sdl_joy_axes != nullptr)) {
+            sdl_tick();
+        }
 
         //fluid_tick();
-
-        glcolor(WHITE);
 
         game->display();
 
@@ -1009,7 +1000,7 @@ void sdl_loop (void)
          */
         int timestamp_now = time_update_time_milli();
 
-        if (unlikely(timestamp_now - timestamp_then > 50)) {
+        if (unlikely(timestamp_now - timestamp_then > 10)) {
             /*
              * Give up some CPU to allow events to arrive and time for the GPU
              * to process the above.
@@ -1033,7 +1024,7 @@ void sdl_loop (void)
                 sdl_event(&events[i]);
             }
 
-            if (!sdl_main_loop_running) {
+            if (unlikely(!sdl_main_loop_running)) {
                 break;
             }
             player_tick();
@@ -1070,7 +1061,7 @@ void sdl_loop (void)
             /*
              * Very occasional.
              */
-            if (timestamp_now - timestamp_then2 >= 1000) {
+            if (unlikely(timestamp_now - timestamp_then2 >= 1000)) {
                 timestamp_then2 = timestamp_now;
 
                 if (game->config.fps_counter) {
@@ -1081,22 +1072,20 @@ void sdl_loop (void)
 
                     frames = 0;
                 }
+
+                if (unlikely(sdl_do_screenshot)) {
+                    sdl_do_screenshot = 0;
+                    sdl_screenshot_();
+                }
             }
         }
 
         SDL_Delay(game->config.sdl_delay);
 
-        time_get_time_ms();
-
         /*
          * Flip
          */
         SDL_GL_SwapWindow(window);
-
-        if (unlikely(sdl_do_screenshot)) {
-            sdl_do_screenshot = 0;
-            sdl_screenshot_();
-        }
     }
 
     gl_leave_2d_mode();
