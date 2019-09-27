@@ -185,8 +185,8 @@ void thing_map_blit_background_lit (double offset_x, double offset_y)
 }
 #endif
 
-static void thing_blit_water (int minx, int miny, int minz,
-                              int maxx, int maxy, int maxz,
+static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t minz,
+                              uint16_t maxx, uint16_t maxy, uint16_t maxz,
                               double offset_x,
                               double offset_y)
 {
@@ -275,7 +275,6 @@ static void thing_blit_water (int minx, int miny, int minz,
     }
 
     blit_fbo_bind(FBO_LIGHT_MASK);
-    glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     //
@@ -320,7 +319,6 @@ static void thing_blit_water (int minx, int miny, int minz,
     // again to its own buffer.
     //
     blit_fbo_bind(FBO_LIGHT_MERGED);
-    glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glcolor(WHITE);
@@ -433,7 +431,6 @@ static void thing_blit_water (int minx, int miny, int minz,
     //
     blit_init();
     blit_fbo_bind(FBO_REFLECTION);
-    glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -478,8 +475,8 @@ glBlendFunc(vals[i1], vals[i2]);
     glcolor(WHITE);
 }
 
-static void thing_blit_deep_water (int minx, int miny, int minz,
-                                   int maxx, int maxy, int maxz,
+static void thing_blit_deep_water (uint16_t minx, uint16_t miny, uint16_t minz,
+                                   uint16_t maxx, uint16_t maxy, uint16_t maxz,
                                    double offset_x,
                                    double offset_y)
 {
@@ -573,7 +570,6 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     // again to its own buffer.
     //
     blit_fbo_bind(FBO_LIGHT_MERGED);
-    glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glcolor(WHITE);
@@ -673,8 +669,8 @@ static void thing_blit_deep_water (int minx, int miny, int minz,
     glcolor(WHITE);
 }
 
-static void thing_blit_lava (int minx, int miny, int minz,
-                             int maxx, int maxy, int maxz,
+static void thing_blit_lava (uint16_t minx, uint16_t miny, uint16_t minz,
+                             uint16_t maxx, uint16_t maxy, uint16_t maxz,
                              double offset_x,
                              double offset_y)
 {
@@ -838,7 +834,6 @@ static void thing_blit_lava (int minx, int miny, int minz,
     // Draw the white bitmap that will be the mask for the texture.
     //
     blit_fbo_bind(FBO_LIGHT_MERGED);
-    glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glcolor(WHITE);
@@ -927,8 +922,8 @@ static void thing_blit_lava (int minx, int miny, int minz,
     blit_fbo(FBO_LIGHT_MERGED);
 }
 
-static void thing_blit_blood (int minx, int miny, int minz,
-                              int maxx, int maxy, int maxz,
+static void thing_blit_blood (uint16_t minx, uint16_t miny, uint16_t minz,
+                              uint16_t maxx, uint16_t maxy, uint16_t maxz,
                               double offset_x,
                               double offset_y)
 {
@@ -982,7 +977,6 @@ static void thing_blit_blood (int minx, int miny, int minz,
     // Draw the white bitmap that will be the mask for the texture.
     //
     blit_fbo_bind(FBO_LIGHT_MERGED);
-    glClearColor(0,0,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glcolor(WHITE);
@@ -1029,8 +1023,8 @@ static void thing_blit_blood (int minx, int miny, int minz,
     blit_fbo(FBO_LIGHT_MERGED);
 }
 
-static void thing_blit_things (int minx, int miny, int minz,
-                               int maxx, int maxy, int maxz)
+static void thing_blit_things (uint16_t minx, uint16_t miny, uint16_t minz,
+                               uint16_t maxx, uint16_t maxy, uint16_t maxz)
 {
     double offset_x = world->map_at.x * game->config.tile_gl_width;
     double offset_y = world->map_at.y * game->config.tile_gl_height;
@@ -1145,14 +1139,14 @@ void thing_render_all (void)
     //
     // Get the bounds
     //
-    int minz = 0;
-    int maxz = MAP_DEPTH;
+    uint16_t minz = 0;
+    uint16_t maxz = MAP_DEPTH;
 
-    int minx = std::max(0, (int) world->map_at.x - 4);
-    int maxx = std::min(MAP_WIDTH, (int)world->map_at.x + TILES_ACROSS + 4);
+    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - 1);
+    uint16_t maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + TILES_ACROSS + 2);
 
-    int miny = std::max(0, (int) world->map_at.y - 4);
-    int maxy = std::min(MAP_HEIGHT, (int)world->map_at.y + TILES_DOWN + 4);
+    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - 1);
+    uint16_t maxy = std::min(MAP_HEIGHT, (uint16_t)world->map_at.y + TILES_DOWN + 2);
 
     thing_map_scroll_follow_player();
     thing_map_scroll_do();
@@ -1166,7 +1160,6 @@ void thing_render_all (void)
         // Render light sources first to their own merged buffer
         //
         blit_fbo_bind(FBO_LIGHT_MERGED);
-        glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
         lights_render_points(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);

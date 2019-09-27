@@ -176,7 +176,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 set(l->data, x, y, MAP_DEPTH_FOOD,       food_string[x]);
                 set(l->data, x, y, MAP_DEPTH_BLOOD,      blood_string[x]);
                 set(l->data, x, y, MAP_DEPTH_ITEM,       items_string[x]);
-                set(l->data, x, y, MAP_DEPTH_PLAYER, ' ');
+                set(l->data, x, y, MAP_DEPTH_PLAYER,     ' ');
             }
 
             if (floor_string.size() != CHUNK_WIDTH){

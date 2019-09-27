@@ -4,7 +4,7 @@ import tp
 def tp_init(name):
     x = tp.Tp(name)
 
-    x.set_ai_delay_after_moving_ms(10)
+    x.set_ai_delay_after_moving_ms(100)
     x.set_ai_scent_distance(30)
     x.set_bite_damage_hd("1d4+1")
     x.set_collision_attack(True)

@@ -607,9 +607,24 @@ static void game_place_keys (Dungeonp d)
 
 static void game_place_floor_deco (Dungeonp d)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
-            if (!d->gfx_is_floor_deco_at(x, y)) {
+    for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
+        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+            if (!d->is_floor(x, y)) {
+                continue;
+            }
+
+            if (!d->is_floor(x - 1, y) ||
+                !d->is_floor(x + 1, y) ||
+                !d->is_floor(x, y - 1) ||
+                !d->is_floor(x, y + 1) ||
+                !d->is_floor(x - 1, y - 1) ||
+                !d->is_floor(x + 1, y - 1) ||
+                !d->is_floor(x - 1, y + 1) ||
+                !d->is_floor(x + 1, y + 1)) {
+                continue;
+            }
+
+            if (random_range(0, 100) < 90) {
                 continue;
             }
 
@@ -622,12 +637,21 @@ static void game_place_floor_deco (Dungeonp d)
 static void game_place_wall_deco (Dungeonp d)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
-            if (!d->gfx_is_wall_deco_at(x, y)) {
+        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+            if (!d->is_wall(x, y)) {
                 continue;
             }
 
-            if (!d->is_wall(x, y + 1)) {
+            if (d->is_floor(x, y - 1)) {
+                continue;
+            }
+            if (d->is_wall(x, y + 1)) {
+                continue;
+            }
+            if (d->is_rock(x, y + 1)) {
+                continue;
+            }
+            if (random_range(0, 100) < 90) {
                 continue;
             }
 
