@@ -131,7 +131,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         // at the edges of the fbo
         //
         color col = WHITE;
-        col.a = 250;
         new_light(mid_at, (TILE_WIDTH / 2) + 4, LIGHT_QUALITY_HIGH, col);
 
         has_light = true;
@@ -210,13 +209,15 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     update_coordinates();
     attach();
 
-    if (unlikely(tp_is_light_strength(tp))) {
-        std::string l = tp_str_light_color(tp);
-        color c = string2color(l);
-        c.a = 100;
-        new_light(mid_at, (double) tp_is_light_strength(tp), LIGHT_QUALITY_LOW, c);
-        has_light = true;
+    if (unlikely(!tp_is_player(tp))) {
+        if (unlikely(tp_is_light_strength(tp))) {
+            std::string l = tp_str_light_color(tp);
+            color c = string2color(l);
+            new_light(mid_at, (double) tp_is_light_strength(tp), LIGHT_QUALITY_HIGH, c);
+            has_light = true;
+        }
     }
+    update_light();
 }
 
 void Thing::destroy (void)

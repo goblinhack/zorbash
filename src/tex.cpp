@@ -280,7 +280,6 @@ Texp tex_from_surface (SDL_Surface *surface,
 
     glGenTextures(1, &gl_surface_binding);
 
-printf("ZZZ %s -> %d\n", file.c_str(), gl_surface_binding);
     /*
      * Typical tex generation using data from the bitmap
      */

@@ -1305,7 +1305,6 @@ void blit (int tex,
         blit_init();
         first = true;
     } else if (unlikely(buf_tex != tex)) {
-printf("ZZZ flush %d -> %d\n", buf_tex, tex);
         blit_flush();
         first = true;
     } else {

@@ -11,7 +11,12 @@
 #include <algorithm>
 #include <list>
 
-#define SCALEX 1
+static int water_step1;
+static double water_step2;
+static int deep_water_step1;
+static double deep_water_step2;
+static int lava_step1;
+static double lava_step2;
 
 static void thing_map_scroll_do (void)
 {
@@ -45,6 +50,7 @@ static void thing_map_scroll_do (void)
     //
     // Round to pixels
     //
+#if 0
     world->map_at.x *= 1.0 / game->config.one_pixel_gl_width;
     world->map_at.x = (int)world->map_at.x;
     world->map_at.x /= 1.0 / game->config.one_pixel_gl_width;
@@ -52,6 +58,7 @@ static void thing_map_scroll_do (void)
     world->map_at.y *= 1.0 / game->config.one_pixel_gl_height;
     world->map_at.y = (int)world->map_at.y;
     world->map_at.y /= 1.0 / game->config.one_pixel_gl_height;
+#endif
 }
 
 static void thing_map_scroll_follow_player (void)
@@ -86,104 +93,6 @@ void thing_map_scroll_to_player (void)
         thing_map_scroll_do();
     }
 }
-
-#if 0
-static void thing_map_blit_background (double offset_x, double offset_y)
-{
-    static Texp tex;
-
-    if (!tex) {
-        tex = tex_find("background");
-        if (!tex) {
-            return;
-        }
-    }
-
-    offset_x *= 0.9; // parallax
-    offset_y *= 0.9;
-
-    double w = (MAP_WIDTH  * game->config.tile_pixel_width)/
-                    game->config.video_pix_width;
-    double h = (MAP_HEIGHT * game->config.tile_pixel_height)/
-                    game->config.video_pix_height;
-
-    color c = WHITE;
-    c.a = 100;
-
-    glcolor(c);
-    blit_init();
-    blit(tex_get_gl_binding(tex), 0.0, 0.0, SCALEX, SCALEX,
-         -offset_x, -offset_y, -offset_x + w, -offset_y + h);
-    blit_flush();
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-}
-
-void thing_map_blit_background_lit (double offset_x, double offset_y)
-{
-    static Texp tex;
-
-    if (!tex) {
-        tex = tex_find("background_lit");
-        if (!tex) {
-            return;
-        }
-    }
-
-    double w = (MAP_WIDTH  * game->config.tile_pixel_width)/
-                game->config.video_pix_width;
-    double h = (MAP_HEIGHT * game->config.tile_pixel_height)/
-                game->config.video_pix_height;
-
-    //
-    // The background light is centered on the player
-    //
-    static fpoint blit_tl_last;
-    static fpoint blit_br_last;
-
-    auto t = world->player;
-    if (world->player) {
-        blit_tl_last = fpoint(t->tl.x - offset_x, t->tl.y - offset_y);
-        blit_br_last = fpoint(t->br.x - offset_x, t->br.y - offset_y);
-    }
-
-    auto blit_tl = blit_tl_last;
-    auto blit_br = blit_br_last;
-
-    blit_tl.x -= 0.7;
-    blit_br.x += 0.7;
-    blit_tl.y -= 1.0;
-    blit_br.y += 1.0;
-
-    static Texp light_overlay_tex2;
-    static int light_overlay_texid2;
-    if (!light_overlay_tex2) {
-        light_overlay_tex2 = tex_load("", "light_small", GL_NEAREST);
-        light_overlay_texid2 = tex_get_gl_binding(light_overlay_tex2);
-    }
-
-    offset_x *= 0.9; // parallax
-    offset_y *= 0.9;
-
-    blit_init();
-    glcolor(WHITE);
-    blit(light_overlay_texid2, 0, 0, SCALEX, SCALEX,
-         blit_tl.x, blit_tl.y, blit_br.x, blit_br.y);
-    blit_flush();
-
-    glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_SRC_COLOR); // bright
-    glBlendFunc(GL_DST_COLOR, GL_SRC_COLOR); // brigher spotlight more fading
-    glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR); // brigher spotlight no fading
-
-    glcolor(WHITE);
-    blit_init();
-    blit(tex_get_gl_binding(tex), 0, 0, SCALEX, SCALEX,
-         -offset_x, -offset_y, -offset_x + w, -offset_y + h);
-    blit_flush();
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-}
-#endif
 
 static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t minz,
                               uint16_t maxx, uint16_t maxy, uint16_t maxz,
@@ -260,18 +169,6 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t minz,
         set(water, 5, 7, tile_find("water6h"));
         set(water, 6, 7, tile_find("water7h"));
         set(water, 7, 7, tile_find("water8h"));
-    }
-
-    //
-    // Slow timer to scroll the water.
-    //
-    static int step1;
-    static double step2;
-    if (step1++ >= 20) {
-        step1 = 0;
-        if (step2++ >= (TILE_HEIGHT * 2) - 1) {
-            step2 = 0;
-        }
     }
 
     blit_fbo_bind(FBO_LIGHT_MASK);
@@ -395,15 +292,15 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t minz,
                 brx -= offset_x;
                 bry -= offset_y;
 
-                auto tile = get(water, X % WATER_ACROSS, (Y + (int)step2/4) % WATER_DOWN);
+                auto tile = get(water, X % WATER_ACROSS, (Y + (int)water_step2/4) % WATER_DOWN);
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;
                 auto y2 = tile->y2;
 
                 double one_pix = (1.0 / tex_get_height(tile->tex));
-                y1 += one_pix * step2;
-                y2 += one_pix * step2;
+                y1 += one_pix * water_step2;
+                y2 += one_pix * water_step2;
 
                 blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
             }
@@ -554,18 +451,6 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny, uint16_t minz,
     }
 
     //
-    // Slow timer to scroll the deep_water.
-    //
-    static int step1;
-    static double step2;
-    if (step1++ >= 20) {
-        step1 = 0;
-        if (step2++ >= (TILE_HEIGHT * 2) - 1) {
-            step2 = 0;
-        }
-    }
-
-    //
     // Draw the white bitmap that will be the mask for the texture
     // again to its own buffer.
     //
@@ -646,15 +531,15 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny, uint16_t minz,
                 brx -= offset_x;
                 bry -= offset_y;
 
-                auto tile = get(deep_water, X % DEEP_WATER_ACROSS, (Y + (int)step2/4) % DEEP_WATER_DOWN);
+                auto tile = get(deep_water, X % DEEP_WATER_ACROSS, (Y + (int)deep_water_step2/4) % DEEP_WATER_DOWN);
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;
                 auto y2 = tile->y2;
 
                 double one_pix = (1.0 / tex_get_height(tile->tex));
-                y1 += one_pix * step2;
-                y2 += one_pix * step2;
+                y1 += one_pix * deep_water_step2;
+                y2 += one_pix * deep_water_step2;
 
                 blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
             }
@@ -744,18 +629,6 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny, uint16_t minz,
         set(lava, 5, 7, tile_find("lava6h"));
         set(lava, 6, 7, tile_find("lava7h"));
         set(lava, 7, 7, tile_find("lava8h"));
-    }
-
-    //
-    // Slow timer to scroll the lava.
-    //
-    static int step1;
-    static double step2;
-    if (step1++ >= 5) {
-        step1 = 0;
-        if (step2++ >= (TILE_HEIGHT * 2) - 1) {
-            step2 = 0;
-        }
     }
 
     //
@@ -898,7 +771,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny, uint16_t minz,
                 bry -= offset_y;
 
                 int lx = X % LAVA_ACROSS;
-                int ly = (Y + (int)step2/4) % (LAVA_DOWN-1);
+                int ly = (Y + (int)lava_step2/4) % (LAVA_DOWN-1);
                 auto tile = get(lava, lx, ly);
 
                 auto x1 = tile->x1;
@@ -907,8 +780,8 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny, uint16_t minz,
                 auto y2 = tile->y2;
 
                 double one_pix = (1.0 / tex_get_height(tile->tex));
-                y1 += one_pix * step2;
-                y2 += one_pix * step2;
+                y1 += one_pix * lava_step2;
+                y2 += one_pix * lava_step2;
 
                 blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
             }
@@ -1031,6 +904,37 @@ static void thing_blit_things (uint16_t minx, uint16_t miny, uint16_t minz,
 
     //thing_map_blit_background(offset_x, offset_y);
     //thing_map_blit_background_lit(offset_x, offset_y);
+    //
+    //
+    // Slow timer to scroll the water.
+    //
+    if (water_step1++ >= 20) {
+        water_step1 = 0;
+        if (water_step2++ >= (TILE_HEIGHT * 2) - 1) {
+            water_step2 = 0;
+        }
+    }
+
+    //
+    // Slow timer to scroll the deep_water.
+    //
+    if (deep_water_step1++ >= 20) {
+        deep_water_step1 = 0;
+        if (deep_water_step2++ >= (TILE_HEIGHT * 2) - 1) {
+            deep_water_step2 = 0;
+        }
+    }
+
+    //
+    // Slow timer to scroll the lava.
+    //
+    if (lava_step1++ >= 5) {
+        lava_step1 = 0;
+        if (lava_step2++ >= (TILE_HEIGHT * 2) - 1) {
+            lava_step2 = 0;
+        }
+    }
+
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
@@ -1159,6 +1063,7 @@ void thing_render_all (void)
         //
         // Render light sources first to their own merged buffer
         //
+#if 0
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
@@ -1171,9 +1076,10 @@ void thing_render_all (void)
         // glBlendFunc(GL_SRC_COLOR, GL_ONE);           // orange glow
         glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
         blit_fbo(FBO_LIGHT_MERGED);
+#endif
 
         //
-        // Now overlay the player light source.
+        // Now overlay the high quality lights
         //
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
