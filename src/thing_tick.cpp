@@ -32,35 +32,33 @@ void Thing::collision_check_do (void)
         return;
     }
 
-    bool need_collision_test = false;
-
     if (time_have_x_tenths_passed_since(THING_COLLISION_TEST_DELAY_TENTHS,
                                         get_timestamp_collision())) {
-        need_collision_test = true;
-    }
-
-    if (need_collision_test) {
         ai_collisions_handle();
+
         set_timestamp_collision(
-          time_get_time_ms() +
-          random_range(0, THING_COLLISION_TEST_DELAY_TENTHS));
+            time_get_time_ms() +
+            random_range(0, THING_COLLISION_TEST_DELAY_TENTHS));
     }
 }
 
 void Thing::tick (void)
 {
-    if (is_dead) {
+    if (unlikely(is_dead)) {
         return;
     }
 
     update_interpolated_position();
+
     collision_check_do();
-    if (is_dead) {
+
+    if (unlikely(is_dead)) {
         return;
     }
 
     hunger_clock();
-    if (is_dead) {
+
+    if (unlikely(is_dead)) {
         return;
     }
 
@@ -71,9 +69,10 @@ void Thing::tick (void)
             achieve_goals_in_life();
         }
     }
-    if (is_dead) {
-        return;
-    }
+
+    //
+    // Could be dead here.
+    //
 }
 
 void things_tick (void)
@@ -81,11 +80,11 @@ void things_tick (void)
     //
     // Active things are generally things that move or have a life span
     //
-    int minx = std::max(0, (int) world->map_at.x - CHUNK_WIDTH);
-    int maxx = std::min(MAP_WIDTH, (int)world->map_at.x + CHUNK_WIDTH);
+    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - CHUNK_WIDTH);
+    uint16_t maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + CHUNK_WIDTH);
 
-    int miny = std::max(0, (int) world->map_at.y - CHUNK_HEIGHT);
-    int maxy = std::min(MAP_HEIGHT, (int)world->map_at.y + CHUNK_HEIGHT);
+    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - CHUNK_HEIGHT);
+    uint16_t maxy = std::min(MAP_HEIGHT, (uint16_t)world->map_at.y + CHUNK_HEIGHT);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {

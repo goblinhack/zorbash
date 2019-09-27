@@ -643,6 +643,8 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         if (t->internal_has_dir_anim) {
             tp->internal_has_dir_anim = true;
         }
+    } else {
+        tiles->push_back(nullptr);
     }
 	
     if (tp_name) {	

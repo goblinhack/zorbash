@@ -20,7 +20,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         return;
     }
 
-    if (!world->is_wall(x, y - 1)) {
+    if (tiles->tile_top && !world->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -28,7 +28,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit_outline(tiles->tile_top, tl2, br2);
     }
 
-    if (!world->is_wall(x, y + 1)) {
+    if (tiles->tile_bot && !world->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         //tl2.y += dh;
@@ -36,7 +36,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit_outline(tiles->tile_bot, tl2, br2);
     }
 
-    if (!world->is_wall(x - 1, y)) {
+    if (tiles->tile_left && !world->is_wall(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -44,7 +44,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit_outline(tiles->tile_left, tl2, br2);
     }
 
-    if (!world->is_wall(x + 1, y)) {
+    if (tiles->tile_right && !world->is_wall(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -57,7 +57,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // |...
     //
-    if (!world->is_wall(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_wall(x - 1, y - 1) &&
         !world->is_wall(x - 1, y) &&
         !world->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
@@ -74,7 +75,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ...|
     //
-    if (!world->is_wall(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_wall(x + 1, y - 1) &&
         !world->is_wall(x + 1, y) &&
         !world->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
@@ -92,7 +94,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  .X--
     //  ....
     //
-    if (!world->is_wall(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_wall(x + 1, y - 1) &&
         world->is_wall(x + 1, y) &&
         world->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
@@ -110,7 +113,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  --X.
     //  ....
     //
-    if (!world->is_wall(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_wall(x - 1, y - 1) &&
         world->is_wall(x - 1, y) &&
         world->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
@@ -130,7 +134,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // X---
     //
-    if (!world->is_wall(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_wall(x - 1, y + 1) &&
         !world->is_wall(x - 1, y) &&
         !world->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
@@ -147,7 +152,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ---X
     //
-    if (!world->is_wall(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_wall(x + 1, y + 1) &&
         !world->is_wall(x + 1, y) &&
         !world->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
@@ -165,7 +171,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // .|
     // .|
     //
-    if (!world->is_wall(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_wall(x + 1, y + 1) &&
         world->is_wall(x + 1, y) &&
         world->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
@@ -183,7 +190,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //   |.
     //   |.
     //
-    if (!world->is_wall(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_wall(x - 1, y + 1) &&
         world->is_wall(x - 1, y) &&
         world->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
@@ -211,7 +219,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
         return;
     }
 
-    if (!world->is_grass(x, y - 1)) {
+    if (tiles->tile_top &&
+        !world->is_grass(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -219,7 +228,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
         tile_blit(tiles->tile_top, tl2, br2);
     }
 
-    if (!world->is_grass(x, y + 1)) {
+    if (tiles->tile_bot &&
+        !world->is_grass(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y += dh;
@@ -227,7 +237,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
         tile_blit(tiles->tile_bot, tl2, br2);
     }
 
-    if (!world->is_grass(x - 1, y)) {
+    if (tiles->tile_left &&
+        !world->is_grass(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -235,7 +246,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
         tile_blit(tiles->tile_left, tl2, br2);
     }
 
-    if (!world->is_grass(x + 1, y)) {
+    if (tiles->tile_right &&
+        !world->is_grass(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -248,7 +260,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
     // |...
     // |...
     //
-    if (!world->is_grass(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_grass(x - 1, y - 1) &&
         !world->is_grass(x - 1, y) &&
         !world->is_grass(x, y - 1)) {
         fpoint tl2 = tl;
@@ -265,7 +278,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
     // ...|
     // ...|
     //
-    if (!world->is_grass(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_grass(x + 1, y - 1) &&
         !world->is_grass(x + 1, y) &&
         !world->is_grass(x, y - 1)) {
         fpoint tl2 = tl;
@@ -283,7 +297,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
     //  .X--
     //  ....
     //
-    if (!world->is_grass(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_grass(x + 1, y - 1) &&
         world->is_grass(x + 1, y) &&
         world->is_grass(x, y - 1)) {
         fpoint tl2 = tl;
@@ -301,7 +316,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
     //  --X.
     //  ....
     //
-    if (!world->is_grass(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_grass(x - 1, y - 1) &&
         world->is_grass(x - 1, y) &&
         world->is_grass(x, y - 1)) {
         fpoint tl2 = tl;
@@ -318,7 +334,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
     // |...
     // X---
     //
-    if (!world->is_grass(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_grass(x - 1, y + 1) &&
         !world->is_grass(x - 1, y) &&
         !world->is_grass(x, y + 1)) {
         fpoint tl2 = tl;
@@ -335,7 +352,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
     // ...|
     // ---X
     //
-    if (!world->is_grass(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_grass(x + 1, y + 1) &&
         !world->is_grass(x + 1, y) &&
         !world->is_grass(x, y + 1)) {
         fpoint tl2 = tl;
@@ -353,7 +371,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
     // .|
     // .|
     //
-    if (!world->is_grass(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_grass(x + 1, y + 1) &&
         world->is_grass(x + 1, y) &&
         world->is_grass(x, y + 1)) {
         fpoint tl2 = tl;
@@ -371,7 +390,8 @@ void Thing::blit_grass_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles
     //   |.
     //   |.
     //
-    if (!world->is_grass(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_grass(x - 1, y + 1) &&
         world->is_grass(x - 1, y) &&
         world->is_grass(x, y + 1)) {
         fpoint tl2 = tl;
@@ -399,7 +419,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         return;
     }
 
-    if (!world->is_soil(x, y - 1)) {
+    if (tiles->tile_top &&
+        !world->is_soil(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -407,7 +428,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_top, tl2, br2);
     }
 
-    if (!world->is_soil(x, y + 1)) {
+    if (tiles->tile_bot &&
+        !world->is_soil(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y += dh;
@@ -415,7 +437,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_bot, tl2, br2);
     }
 
-    if (!world->is_soil(x - 1, y)) {
+    if (tiles->tile_left &&
+        !world->is_soil(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -423,7 +446,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_left, tl2, br2);
     }
 
-    if (!world->is_soil(x + 1, y)) {
+    if (tiles->tile_right &&
+        !world->is_soil(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -436,7 +460,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // |...
     //
-    if (!world->is_soil(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_soil(x - 1, y - 1) &&
         !world->is_soil(x - 1, y) &&
         !world->is_soil(x, y - 1)) {
         fpoint tl2 = tl;
@@ -453,7 +478,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ...|
     //
-    if (!world->is_soil(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_soil(x + 1, y - 1) &&
         !world->is_soil(x + 1, y) &&
         !world->is_soil(x, y - 1)) {
         fpoint tl2 = tl;
@@ -471,7 +497,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  .X--
     //  ....
     //
-    if (!world->is_soil(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_soil(x + 1, y - 1) &&
         world->is_soil(x + 1, y) &&
         world->is_soil(x, y - 1)) {
         fpoint tl2 = tl;
@@ -489,7 +516,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  --X.
     //  ....
     //
-    if (!world->is_soil(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_soil(x - 1, y - 1) &&
         world->is_soil(x - 1, y) &&
         world->is_soil(x, y - 1)) {
         fpoint tl2 = tl;
@@ -506,7 +534,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // X---
     //
-    if (!world->is_soil(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_soil(x - 1, y + 1) &&
         !world->is_soil(x - 1, y) &&
         !world->is_soil(x, y + 1)) {
         fpoint tl2 = tl;
@@ -523,7 +552,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ---X
     //
-    if (!world->is_soil(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_soil(x + 1, y + 1) &&
         !world->is_soil(x + 1, y) &&
         !world->is_soil(x, y + 1)) {
         fpoint tl2 = tl;
@@ -541,7 +571,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // .|
     // .|
     //
-    if (!world->is_soil(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_soil(x + 1, y + 1) &&
         world->is_soil(x + 1, y) &&
         world->is_soil(x, y + 1)) {
         fpoint tl2 = tl;
@@ -559,7 +590,8 @@ void Thing::blit_soil_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //   |.
     //   |.
     //
-    if (!world->is_soil(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_soil(x - 1, y + 1) &&
         world->is_soil(x - 1, y) &&
         world->is_soil(x, y + 1)) {
         fpoint tl2 = tl;
@@ -587,7 +619,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
         return;
     }
 
-    if (!world->is_gravel(x, y - 1)) {
+    if (tiles->tile_top &&
+        !world->is_gravel(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -595,7 +628,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
         tile_blit(tiles->tile_top, tl2, br2);
     }
 
-    if (!world->is_gravel(x, y + 1)) {
+    if (tiles->tile_bot &&
+        !world->is_gravel(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y += dh;
@@ -603,7 +637,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
         tile_blit(tiles->tile_bot, tl2, br2);
     }
 
-    if (!world->is_gravel(x - 1, y)) {
+    if (tiles->tile_left &&
+        !world->is_gravel(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -611,7 +646,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
         tile_blit(tiles->tile_left, tl2, br2);
     }
 
-    if (!world->is_gravel(x + 1, y)) {
+    if (tiles->tile_right &&
+        !world->is_gravel(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -624,7 +660,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
     // |...
     // |...
     //
-    if (!world->is_gravel(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_gravel(x - 1, y - 1) &&
         !world->is_gravel(x - 1, y) &&
         !world->is_gravel(x, y - 1)) {
         fpoint tl2 = tl;
@@ -641,7 +678,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
     // ...|
     // ...|
     //
-    if (!world->is_gravel(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_gravel(x + 1, y - 1) &&
         !world->is_gravel(x + 1, y) &&
         !world->is_gravel(x, y - 1)) {
         fpoint tl2 = tl;
@@ -659,7 +697,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
     //  .X--
     //  ....
     //
-    if (!world->is_gravel(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_gravel(x + 1, y - 1) &&
         world->is_gravel(x + 1, y) &&
         world->is_gravel(x, y - 1)) {
         fpoint tl2 = tl;
@@ -677,7 +716,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
     //  --X.
     //  ....
     //
-    if (!world->is_gravel(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_gravel(x - 1, y - 1) &&
         world->is_gravel(x - 1, y) &&
         world->is_gravel(x, y - 1)) {
         fpoint tl2 = tl;
@@ -694,7 +734,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
     // |...
     // X---
     //
-    if (!world->is_gravel(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_gravel(x - 1, y + 1) &&
         !world->is_gravel(x - 1, y) &&
         !world->is_gravel(x, y + 1)) {
         fpoint tl2 = tl;
@@ -711,7 +752,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
     // ...|
     // ---X
     //
-    if (!world->is_gravel(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_gravel(x + 1, y + 1) &&
         !world->is_gravel(x + 1, y) &&
         !world->is_gravel(x, y + 1)) {
         fpoint tl2 = tl;
@@ -729,7 +771,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
     // .|
     // .|
     //
-    if (!world->is_gravel(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_gravel(x + 1, y + 1) &&
         world->is_gravel(x + 1, y) &&
         world->is_gravel(x, y + 1)) {
         fpoint tl2 = tl;
@@ -747,7 +790,8 @@ void Thing::blit_gravel_cladding (fpoint &tl, fpoint &br, const ThingTiles *tile
     //   |.
     //   |.
     //
-    if (!world->is_gravel(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_gravel(x - 1, y + 1) &&
         world->is_gravel(x - 1, y) &&
         world->is_gravel(x, y + 1)) {
         fpoint tl2 = tl;
@@ -775,7 +819,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         return;
     }
 
-    if (!world->is_snow(x, y - 1)) {
+    if (tiles->tile_top &&
+        !world->is_snow(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -783,7 +828,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_top, tl2, br2);
     }
 
-    if (!world->is_snow(x, y + 1)) {
+    if (tiles->tile_bot &&
+        !world->is_snow(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y += dh;
@@ -791,7 +837,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_bot, tl2, br2);
     }
 
-    if (!world->is_snow(x - 1, y)) {
+    if (tiles->tile_left &&
+        !world->is_snow(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -799,7 +846,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_left, tl2, br2);
     }
 
-    if (!world->is_snow(x + 1, y)) {
+    if (tiles->tile_right &&
+        !world->is_snow(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -812,7 +860,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // |...
     //
-    if (!world->is_snow(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_snow(x - 1, y - 1) &&
         !world->is_snow(x - 1, y) &&
         !world->is_snow(x, y - 1)) {
         fpoint tl2 = tl;
@@ -829,7 +878,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ...|
     //
-    if (!world->is_snow(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_snow(x + 1, y - 1) &&
         !world->is_snow(x + 1, y) &&
         !world->is_snow(x, y - 1)) {
         fpoint tl2 = tl;
@@ -847,7 +897,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  .X--
     //  ....
     //
-    if (!world->is_snow(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_snow(x + 1, y - 1) &&
         world->is_snow(x + 1, y) &&
         world->is_snow(x, y - 1)) {
         fpoint tl2 = tl;
@@ -865,7 +916,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  --X.
     //  ....
     //
-    if (!world->is_snow(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_snow(x - 1, y - 1) &&
         world->is_snow(x - 1, y) &&
         world->is_snow(x, y - 1)) {
         fpoint tl2 = tl;
@@ -882,7 +934,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // X---
     //
-    if (!world->is_snow(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_snow(x - 1, y + 1) &&
         !world->is_snow(x - 1, y) &&
         !world->is_snow(x, y + 1)) {
         fpoint tl2 = tl;
@@ -899,7 +952,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ---X
     //
-    if (!world->is_snow(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_snow(x + 1, y + 1) &&
         !world->is_snow(x + 1, y) &&
         !world->is_snow(x, y + 1)) {
         fpoint tl2 = tl;
@@ -917,7 +971,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // .|
     // .|
     //
-    if (!world->is_snow(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_snow(x + 1, y + 1) &&
         world->is_snow(x + 1, y) &&
         world->is_snow(x, y + 1)) {
         fpoint tl2 = tl;
@@ -935,7 +990,8 @@ void Thing::blit_snow_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //   |.
     //   |.
     //
-    if (!world->is_snow(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_snow(x - 1, y + 1) &&
         world->is_snow(x - 1, y) &&
         world->is_snow(x, y + 1)) {
         fpoint tl2 = tl;
@@ -963,7 +1019,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         return;
     }
 
-    if (!world->is_rock(x, y - 1)) {
+    if (tiles->tile_top &&
+        !world->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -971,7 +1028,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit_outline(tiles->tile_top, tl2, br2);
     }
 
-    if (!world->is_rock(x, y + 1)) {
+    if (tiles->tile_bot &&
+        !world->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         //tl2.y += dh;
@@ -979,7 +1037,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit_outline(tiles->tile_bot, tl2, br2);
     }
 
-    if (!world->is_rock(x - 1, y)) {
+    if (tiles->tile_left &&
+        !world->is_rock(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -987,7 +1046,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit_outline(tiles->tile_left, tl2, br2);
     }
 
-    if (!world->is_rock(x + 1, y)) {
+    if (tiles->tile_right &&
+        !world->is_rock(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -1000,7 +1060,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // |...
     //
-    if (!world->is_rock(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_rock(x - 1, y - 1) &&
         !world->is_rock(x - 1, y) &&
         !world->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
@@ -1017,7 +1078,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ...|
     //
-    if (!world->is_rock(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_rock(x + 1, y - 1) &&
         !world->is_rock(x + 1, y) &&
         !world->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
@@ -1035,7 +1097,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  .X--
     //  ....
     //
-    if (!world->is_rock(x + 1, y - 1) &&
+    if (tiles->tile_tr &&
+        !world->is_rock(x + 1, y - 1) &&
         world->is_rock(x + 1, y) &&
         world->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
@@ -1053,7 +1116,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  --X.
     //  ....
     //
-    if (!world->is_rock(x - 1, y - 1) &&
+    if (tiles->tile_tl &&
+        !world->is_rock(x - 1, y - 1) &&
         world->is_rock(x - 1, y) &&
         world->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
@@ -1073,7 +1137,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // X---
     //
-    if (!world->is_rock(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_rock(x - 1, y + 1) &&
         !world->is_rock(x - 1, y) &&
         !world->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
@@ -1090,7 +1155,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ---X
     //
-    if (!world->is_rock(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_rock(x + 1, y + 1) &&
         !world->is_rock(x + 1, y) &&
         !world->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
@@ -1108,7 +1174,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // .|
     // .|
     //
-    if (!world->is_rock(x + 1, y + 1) &&
+    if (tiles->tile_br &&
+        !world->is_rock(x + 1, y + 1) &&
         world->is_rock(x + 1, y) &&
         world->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
@@ -1126,7 +1193,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //   |.
     //   |.
     //
-    if (!world->is_rock(x - 1, y + 1) &&
+    if (tiles->tile_bl &&
+        !world->is_rock(x - 1, y + 1) &&
         world->is_rock(x - 1, y) &&
         world->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
@@ -1548,27 +1616,20 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    //if (!tpp) { // tile_top) {
-    if (tiles.tile_top) {
-        if (is_wall()) {
-            blit_wall_cladding(blit_tl, blit_br, &tiles);
-        }
-        if (tp_is_rock(tpp)) {
-            blit_rock_cladding(blit_tl, blit_br, &tiles);
-        }
-        if (tp_is_grass(tpp)) {
-            blit_grass_cladding(blit_tl, blit_br, &tiles);
-        }
-        if (tp_is_soil(tpp)) {
-            blit_soil_cladding(blit_tl, blit_br, &tiles);
-        }
-        if (tp_is_gravel(tpp)) {
-            blit_gravel_cladding(blit_tl, blit_br, &tiles);
-        }
-        if (tp_is_snow(tpp)) {
-            blit_snow_cladding(blit_tl, blit_br, &tiles);
-        }
+    if (is_wall()) {
+        blit_wall_cladding(blit_tl, blit_br, &tiles);
+    } else if (tp_is_rock(tpp)) {
+        blit_rock_cladding(blit_tl, blit_br, &tiles);
+    } else if (tp_is_grass(tpp)) {
+        blit_grass_cladding(blit_tl, blit_br, &tiles);
+    } else if (tp_is_soil(tpp)) {
+        blit_soil_cladding(blit_tl, blit_br, &tiles);
+    } else if (tp_is_gravel(tpp)) {
+        blit_gravel_cladding(blit_tl, blit_br, &tiles);
+    } if (tp_is_snow(tpp)) {
+        blit_snow_cladding(blit_tl, blit_br, &tiles);
     }
+
     gl_rotate = 0;
 
     last_blit_tl = blit_tl;
@@ -1704,17 +1765,10 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    if (tiles.tile_top) {
-        if (is_wall()) {
-            blit_wall_cladding(blit_tl, blit_br, &tiles);
-        }
-        if (tp_is_rock(tpp)) {
-            blit_rock_cladding(blit_tl, blit_br, &tiles);
-        }
-        /*
-        if (tp_is_grass(tpp)) {
-            blit_grass_cladding(blit_tl, blit_br);
-        }
-         */
+    if (is_wall()) {
+        blit_wall_cladding(blit_tl, blit_br, &tiles);
+    }
+    if (tp_is_rock(tpp)) {
+        blit_rock_cladding(blit_tl, blit_br, &tiles);
     }
 }
