@@ -65,7 +65,7 @@ public:
     void calculate(void);
     void render_triangle_fans(void);
     void render_point_light(void);
-    void render(int fbo, int pass);
+    void render(int fbo);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

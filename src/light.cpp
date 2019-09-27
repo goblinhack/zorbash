@@ -6,17 +6,12 @@
 #include "my_game.h"
 #include "my_gl.h"
 
-static Texp light_overlay_tex_diffuse;
-static Texp light_overlay_tex_focused;
-static int light_overlay_texid_diffuse;
-static int light_overlay_texid_focused;
-static int light_overlay_texid;
 static const int LIGHT_VISIBLE_DIST = TILES_ACROSS + TILES_ACROSS / 2;
 
-#define LIGHT_FOCUSED 0
-#define LIGHT_DIFFUSE 1
-
 Thingp debug_thing;
+
+static Texp light_overlay_tex ;
+static int light_overlay_texid;
 
 Light::Light (void)
 {_
@@ -183,7 +178,7 @@ void Light::calculate (void)
         double fade = pow(strength - radius, 0.05);
         double step = 0.0;
         for (; step < 1.0; step += 0.01) {
-            fade *= 0.99;
+            fade *= 0.90;
             if (fade < 0.001) {
                 break;
             }
@@ -249,6 +244,13 @@ void Light::render_triangle_fans (void)
              */
             push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
+            //
+            // No player lights fade
+            //
+            if (world->player && (owner != world->player)) {
+                alpha = 0.0;
+            }
+
             for (i = 0; i < max_light_rays; i++) {
                 auto r = &getref(ray, i);
                 double radius = r->depth_furthest;
@@ -285,10 +287,20 @@ void Light::render_triangle_fans (void)
      * Blend a texture on top of all the above blending so we get smooth
      * fade off of the light.
      */
-    if (quality == LIGHT_QUALITY_HIGH) {
+    if (world->player && (owner == world->player)) {
         /*
          * To account for the blurring in blit_flush_triangle_fan_smoothed.
          */
+        if (flicker > random_range(10, 20)) {
+            flicker = 0;
+        }
+
+        if (!flicker) {
+            flicker_radius = strength *
+                            (1.1 + ((double)(random_range(0, 100) / 1000.0)));
+        }
+        flicker++;
+
         double lw = flicker_radius * tile_gl_width_pct;
         double lh = flicker_radius * tile_gl_height_pct;
         double p1x = light_pos.x - lw;
@@ -296,13 +308,13 @@ void Light::render_triangle_fans (void)
         double p2x = light_pos.x + lw;
         double p2y = light_pos.y + lh;
 
+        glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA); // hard black light
+
         blit_init();
-        glcolor(WHITE);
-        glBlendFunc(GL_ZERO, GL_SRC_ALPHA); // hard black light
-        // glBlendFunc(GL_SRC_ALPHA, GL_SRC_COLOR); // soft shadows
         blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         blit_flush();
    }
+
    glTranslatef(ox, oy, 0);
 }
 
@@ -327,74 +339,24 @@ void Light::render_point_light (void)
     blit(light_overlay_texid, 0, 0, 1, 1, p1x - ox, p1y - oy, p2x - ox, p2y - oy);
 }
 
-void Light::render (int fbo, int pass)
+void Light::render (int fbo)
 {
-    if (flicker > random_range(10, 20)) {
-        flicker = 0;
+    if (!light_overlay_tex) {
+        light_overlay_tex = tex_load("", "light", GL_LINEAR);
+        light_overlay_texid = tex_get_gl_binding(light_overlay_tex);
     }
-
-    if (!flicker) {
-        flicker_radius = strength *
-                        (1.0 + ((double)(random_range(0, 100) / 1000.0)));
-    }
-    flicker++;
-
-    if (!light_overlay_tex_diffuse) {
-        light_overlay_tex_diffuse = tex_load("", "light", GL_LINEAR);
-        light_overlay_texid_diffuse = tex_get_gl_binding(light_overlay_tex_diffuse);
-    }
-    if (!light_overlay_tex_focused) {
-        light_overlay_tex_focused = tex_load("", "light", GL_LINEAR);
-        light_overlay_texid_focused = tex_get_gl_binding(light_overlay_tex_focused);
-    }
-
-    if (pass == LIGHT_FOCUSED) {
-        light_overlay_texid = light_overlay_texid_focused;
-    } else {
-        light_overlay_texid = light_overlay_texid_diffuse;
-    }
-
-    static const color dull = { 255, 255, 255, 50 };
 
     switch (quality) {
     case LIGHT_QUALITY_LOW:
     case LIGHT_QUALITY_HIGH:
         /*
-         * For high quality we render the light to its own FBO. This gives
-         * better light color blending but is slower.
-         */
-        blit_fbo_bind(FBO_LIGHT_MASK);
-        glClearColor(0,0,0,0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(WHITE);
-
-        /*
          * We want to merge successive light sources together.
          */
         if (quality == LIGHT_QUALITY_LOW) {
             glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_SRC_COLOR);
-        } else {
-            glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
         }
 
         render_triangle_fans();
-
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        blit_fbo_bind(fbo);
-        blit_init();
-        blit(get(fbo_tex_id, FBO_LIGHT_MASK),
-                 0.0, 1.0, 1.0, 0.0,  0.01,  0.01, 0.99, 0.99);
-        blit_flush();
-
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glcolor(dull);
-        blit_init();
-        blit(get(fbo_tex_id, FBO_LIGHT_MASK),
-                 0.0, 1.0, 1.0, 0.0, -0.05, -0.05, 1.05, 1.05);
-        blit_flush();
-
-        blit_fbo_unbind();
 
         break;
 
@@ -407,8 +369,7 @@ void Light::render (int fbo, int pass)
     }
 }
 
-void lights_render_points (int minx, int miny, int maxx, int maxy, 
-                           int fbo, int pass)
+void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
 {
     bool have_low_quality = false;
 
@@ -482,7 +443,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy,
                     }
                 }
 
-                l->render(fbo, pass);
+                l->render(fbo);
             }
         }
     }
@@ -494,6 +455,17 @@ void lights_render_high_quality (int minx, int miny,
                                  int maxx, int maxy, int fbo)
 {
     Lightp deferred = nullptr;
+
+//    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+#endif
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -521,14 +493,28 @@ void lights_render_high_quality (int minx, int miny,
                     }
                 }
 
-//                l->render(fbo, LIGHT_DIFFUSE);
-                l->render(fbo, LIGHT_FOCUSED);
+                l->render(fbo);
             }
         }
     }
 
     if (deferred) {
-//        deferred->render(fbo, LIGHT_DIFFUSE);
-        deferred->render(fbo, LIGHT_FOCUSED);
+        deferred->render(fbo);
     }
+
+#if 0
+    blit_fbo_bind(fbo);
+    blit_init();
+    blit(get(fbo_tex_id, FBO_LIGHT_MASK), 0.0, 1.0, 1.0, 0.0,  0.01,  0.01, 0.99, 0.99);
+    blit_flush();
+
+    static const color dull = { 255, 255, 255, 50 };
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolor(dull);
+    blit_init();
+    blit(get(fbo_tex_id, FBO_LIGHT_MASK), 0.0, 1.0, 1.0, 0.0, -0.05, -0.05, 1.05, 1.05);
+    blit_flush();
+
+    blit_fbo_unbind();
+#endif
 }
