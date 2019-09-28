@@ -94,10 +94,8 @@ void thing_map_scroll_to_player (void)
     }
 }
 
-static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t minz,
-                              uint16_t maxx, uint16_t maxy, uint16_t maxz,
-                              double offset_x,
-                              double offset_y)
+static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint16_t maxy, 
+                              double offset_x, double offset_y)
 {
     auto z = MAP_DEPTH_WATER;
 #define WATER_ACROSS 8
@@ -372,10 +370,9 @@ glBlendFunc(vals[i1], vals[i2]);
     glcolor(WHITE);
 }
 
-static void thing_blit_deep_water (uint16_t minx, uint16_t miny, uint16_t minz,
-                                   uint16_t maxx, uint16_t maxy, uint16_t maxz,
-                                   double offset_x,
-                                   double offset_y)
+static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
+                                   uint16_t maxx, uint16_t maxy,
+                                   double offset_x, double offset_y)
 {
     auto z = MAP_DEPTH_WATER;
 #define DEEP_WATER_ACROSS 8
@@ -554,10 +551,9 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny, uint16_t minz,
     glcolor(WHITE);
 }
 
-static void thing_blit_lava (uint16_t minx, uint16_t miny, uint16_t minz,
-                             uint16_t maxx, uint16_t maxy, uint16_t maxz,
-                             double offset_x,
-                             double offset_y)
+static void thing_blit_lava (uint16_t minx, uint16_t miny,
+                             uint16_t maxx, uint16_t maxy,
+                             double offset_x, double offset_y)
 {
     auto z = MAP_DEPTH_LAVA;
 #define LAVA_ACROSS 8
@@ -795,10 +791,9 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny, uint16_t minz,
     blit_fbo(FBO_LIGHT_MERGED);
 }
 
-static void thing_blit_blood (uint16_t minx, uint16_t miny, uint16_t minz,
-                              uint16_t maxx, uint16_t maxy, uint16_t maxz,
-                              double offset_x,
-                              double offset_y)
+static void thing_blit_blood (uint16_t minx, uint16_t miny,
+                              uint16_t maxx, uint16_t maxy,
+                              double offset_x, double offset_y)
 {
     auto z = MAP_DEPTH_BLOOD;
 #define BLOOD_ACROSS 1
@@ -896,8 +891,8 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny, uint16_t minz,
     blit_fbo(FBO_LIGHT_MERGED);
 }
 
-static void thing_blit_things (uint16_t minx, uint16_t miny, uint16_t minz,
-                               uint16_t maxx, uint16_t maxy, uint16_t maxz)
+static void thing_blit_things (uint16_t minx, uint16_t miny,
+                               uint16_t maxx, uint16_t maxy)
 {
     double offset_x = world->map_at.x * game->config.tile_gl_width;
     double offset_y = world->map_at.y * game->config.tile_gl_height;
@@ -995,23 +990,19 @@ static void thing_blit_things (uint16_t minx, uint16_t miny, uint16_t minz,
     // to the display.
     //
     if (have_lava) {
-        thing_blit_lava(minx, miny, minz, maxx, maxy, maxz,
-                        offset_x, offset_y);
+        thing_blit_lava(minx, miny, maxx, maxy, offset_x, offset_y);
     }
 
     if (have_blood) {
-        thing_blit_blood(minx, miny, minz, maxx, maxy, maxz,
-                         offset_x, offset_y);
+        thing_blit_blood(minx, miny, maxx, maxy, offset_x, offset_y);
     }
 
     if (have_water) {
-        thing_blit_water(minx, miny, minz, maxx, maxy, maxz,
-                         offset_x, offset_y);
+        thing_blit_water(minx, miny, maxx, maxy, offset_x, offset_y);
     }
 
     if (have_deep_water) {
-        thing_blit_deep_water(minx, miny, minz, maxx, maxy, maxz,
-                              offset_x, offset_y);
+        thing_blit_deep_water(minx, miny, maxx, maxy, offset_x, offset_y);
     }
 
     //
@@ -1043,9 +1034,6 @@ void thing_render_all (void)
     //
     // Get the bounds
     //
-    uint16_t minz = 0;
-    uint16_t maxz = MAP_DEPTH;
-
     uint16_t minx = std::max(0, (uint16_t) world->map_at.x - 1);
     uint16_t maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + TILES_ACROSS + 2);
 
@@ -1058,7 +1046,7 @@ void thing_render_all (void)
     if (lighting) {
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
+        thing_blit_things(minx, miny, maxx, maxy);
 
         //
         // Render light sources first to their own merged buffer
@@ -1083,7 +1071,6 @@ void thing_render_all (void)
         //
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(WHITE);
         lights_render_high_quality(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
@@ -1095,7 +1082,7 @@ void thing_render_all (void)
         blit_fbo_bind(FBO_MAIN);
 
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        thing_blit_things(minx, miny, minz, maxx, maxy, maxz);
+        thing_blit_things(minx, miny, maxx, maxy);
     }
 
 #if 0

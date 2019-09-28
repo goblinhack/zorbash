@@ -348,16 +348,11 @@ void Light::render (int fbo)
 
     switch (quality) {
     case LIGHT_QUALITY_LOW:
-    case LIGHT_QUALITY_HIGH:
-        /*
-         * We want to merge successive light sources together.
-         */
-        if (quality == LIGHT_QUALITY_LOW) {
-            glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_SRC_COLOR);
-        }
-
         render_triangle_fans();
+        break;
 
+    case LIGHT_QUALITY_HIGH:
+        render_triangle_fans();
         break;
 
     case LIGHT_QUALITY_POINT:
@@ -454,18 +449,9 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
 void lights_render_high_quality (int minx, int miny, 
                                  int maxx, int maxy, int fbo)
 {
-    Lightp deferred = nullptr;
+    Lightp deferred_player_light = nullptr;
 
-//    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-#endif
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -476,7 +462,7 @@ glBlendFunc(vals[i1], vals[i2]);
                 }
 
                 if (world->player && (l->owner == world->player)) {
-                    deferred = l;
+                    deferred_player_light = l;
                     continue;
                 }
 
@@ -498,23 +484,7 @@ glBlendFunc(vals[i1], vals[i2]);
         }
     }
 
-    if (deferred) {
-        deferred->render(fbo);
+    if (deferred_player_light) {
+        deferred_player_light->render(fbo);
     }
-
-#if 0
-    blit_fbo_bind(fbo);
-    blit_init();
-    blit(get(fbo_tex_id, FBO_LIGHT_MASK), 0.0, 1.0, 1.0, 0.0,  0.01,  0.01, 0.99, 0.99);
-    blit_flush();
-
-    static const color dull = { 255, 255, 255, 50 };
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(dull);
-    blit_init();
-    blit(get(fbo_tex_id, FBO_LIGHT_MASK), 0.0, 1.0, 1.0, 0.0, -0.05, -0.05, 1.05, 1.05);
-    blit_flush();
-
-    blit_fbo_unbind();
-#endif
 }
