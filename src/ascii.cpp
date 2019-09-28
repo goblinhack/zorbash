@@ -305,6 +305,8 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
         bg_set = true;
     }
 
+    tile = nullptr;
+
     while (text_iter != text.end()) {
         auto c = *text_iter;
         text_iter++;
@@ -334,7 +336,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
 
                 int len = 0;
                 auto tp = string2tp(tmp, &len);
-                text_iter += len + 1;
+                text_iter += len;
 
                 tile = tp_first_tile(tp);
                 continue;
@@ -347,7 +349,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
 
                 int len = 0;
                 tile = string2tile(tmp, &len);
-                text_iter += len + 1;
+                text_iter += len;
                 continue;
             }
         }
@@ -359,14 +361,16 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
 
         auto is_cursor = (c == ASCII_CURSOR_UCHAR);
 
-        tile = fixed_font->unicode_to_tile(c);
-        if (tile == nullptr) {
-            tile = fixed_font->unicode_to_tile(L'▋');
+        if (!tile) {
+            tile = fixed_font->unicode_to_tile(c);
             if (tile == nullptr) {
-                tile = fixed_font->unicode_to_tile(L'_');
+                tile = fixed_font->unicode_to_tile(L'▋');
                 if (tile == nullptr) {
-                    x++;
-                    continue;
+                    tile = fixed_font->unicode_to_tile(L'_');
+                    if (tile == nullptr) {
+                        x++;
+                        continue;
+                    }
                 }
             }
         }
@@ -423,6 +427,8 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
         if (unlikely(is_cursor)) {
             fg = saved_fg;
         }
+
+        tile = nullptr;
     }
 }
 

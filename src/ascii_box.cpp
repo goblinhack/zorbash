@@ -46,28 +46,38 @@ static void ascii_put_shaded_box (int style, Tilep tile,
         y = y1;
         for (x = x1; x <= x2; x++) {
             ascii_set_bg(x, y, col_mid);
-            ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+            if (style >= 0) {
+                ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+            }
         }
     } else {
         for (y = y1; y <= y2; y++) {
             for (x = x1; x <= x2; x++) {
-                ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+                if (style >= 0) {
+                    ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+                }
                 ascii_set_bg(x, y, col_tl);
             }
         }
 
         for (y = y1 + 1; y <= y2; y++) {
             for (x = x1 + 1; x <= x2; x++) {
-                ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+                if (style >= 0) {
+                    ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+                }
                 ascii_set_bg(x, y, col_br);
             }
-            ascii_set_bg(x1, y2, tiles[style][(x1 % MAX_UI_BG_SIZE)+1][(y2 % MAX_UI_BG_SIZE)+1]);
+            if (style >= 0) {
+                ascii_set_bg(x1, y2, tiles[style][(x1 % MAX_UI_BG_SIZE)+1][(y2 % MAX_UI_BG_SIZE)+1]);
+            }
             ascii_set_bg(x1, y2, col_br);
         }
 
         for (y = y1 + 1; y <= y2 - 1; y++) {
             for (x = x1 + 1; x <= x2 - 1; x++) {
-                ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+                if (style >= 0) {
+                    ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+                }
                 ascii_set_bg(x, y, col_mid);
             }
         }
@@ -76,7 +86,9 @@ static void ascii_put_shaded_box (int style, Tilep tile,
     for (x = x1; x <= x2; x++) {
         for (y = y1; y <= y2; y++) {
             ascii_set_context(x, y, context);
-            ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+            if (style >= 0) {
+                ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
+            }
             ascii_set_bg(x, y, col_mid);
         }
     }
@@ -96,23 +108,29 @@ static void ascii_put_shaded_box (int style, Tilep tile,
     }
 
     for (x = x1 + 1; x <= x2 - 1; x++) {
-        ascii_set_bg(x, y1, tiles[style][(x % MAX_UI_BG_SIZE)+1][0]);
-        ascii_set_bg(x, y2, tiles[style][(x % MAX_UI_BG_SIZE)+1][MAX_UI_SIZE - 1]);
+        if (style >= 0) {
+            ascii_set_bg(x, y1, tiles[style][(x % MAX_UI_BG_SIZE)+1][0]);
+            ascii_set_bg(x, y2, tiles[style][(x % MAX_UI_BG_SIZE)+1][MAX_UI_SIZE - 1]);
+        }
         ascii_set_bg(x, y1, col_border_text);
         ascii_set_bg(x, y2, col_border_text);
     }
 
     for (y = y1 + 1; y <= y2 - 1; y++) {
-        ascii_set_bg(x1, y, tiles[style][0][(y % MAX_UI_BG_SIZE)+1]);
-        ascii_set_bg(x2, y, tiles[style][MAX_UI_SIZE - 1][(y % MAX_UI_BG_SIZE)+1]);
+        if (style >= 0) {
+            ascii_set_bg(x1, y, tiles[style][0][(y % MAX_UI_BG_SIZE)+1]);
+            ascii_set_bg(x2, y, tiles[style][MAX_UI_SIZE - 1][(y % MAX_UI_BG_SIZE)+1]);
+        }
         ascii_set_bg(x1, y, col_border_text);
         ascii_set_bg(x2, y, col_border_text);
     }
 
-    ascii_set_bg(x1, y1, tiles[style][0][0]);
-    ascii_set_bg(x2, y2, tiles[style][MAX_UI_SIZE - 1][MAX_UI_SIZE - 1]);
-    ascii_set_bg(x2, y1, tiles[style][MAX_UI_SIZE - 1][0]);
-    ascii_set_bg(x1, y2, tiles[style][0][MAX_UI_SIZE - 1]);
+    if (style >= 0) {
+        ascii_set_bg(x1, y1, tiles[style][0][0]);
+        ascii_set_bg(x2, y2, tiles[style][MAX_UI_SIZE - 1][MAX_UI_SIZE - 1]);
+        ascii_set_bg(x2, y1, tiles[style][MAX_UI_SIZE - 1][0]);
+        ascii_set_bg(x1, y2, tiles[style][0][MAX_UI_SIZE - 1]);
+    }
 
     ascii_set_bg(x1, y1, col_border_text);
     ascii_set_bg(x2, y2, col_border_text);
