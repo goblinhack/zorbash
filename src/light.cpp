@@ -6,8 +6,6 @@
 #include "my_game.h"
 #include "my_gl.h"
 
-static const int LIGHT_VISIBLE_DIST = TILES_ACROSS + TILES_ACROSS / 2;
-
 Thingp debug_thing;
 
 static Texp light_overlay_tex ;
@@ -280,6 +278,12 @@ void Light::render_triangle_fans (void)
     } else {
         float *b = &(*glbuf.begin());
         float *e = &(*glbuf.end());
+
+        //
+        // Blending just looks better doing it multiple times
+        //
+        blit_flush_triangle_fan(b, e);
+        blit_flush_triangle_fan(b, e);
         blit_flush_triangle_fan(b, e);
     }
 
@@ -384,7 +388,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
-                    if (len > LIGHT_VISIBLE_DIST + l->strength) {
+                    if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
                         continue;
                     }
                 }
@@ -433,7 +437,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
-                    if (len > LIGHT_VISIBLE_DIST + l->strength) {
+                    if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
                         continue;
                     }
                 }
@@ -465,6 +469,27 @@ void lights_render_high_quality (int minx, int miny,
                     deferred_player_light = l;
                     continue;
                 }
+            }
+        }
+    }
+
+    if (deferred_player_light) {
+        deferred_player_light->render(fbo);
+    }
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR);
+
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
+                auto l = t->get_light();
+                if (l->quality != LIGHT_QUALITY_HIGH) {
+                    continue;
+                }
+
+                if (world->player && (l->owner == world->player)) {
+                    continue;
+                }
 
                 /*
                  * Too far away from the player? Skip rendering.
@@ -474,7 +499,7 @@ void lights_render_high_quality (int minx, int miny,
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
-                    if (len > LIGHT_VISIBLE_DIST + l->strength) {
+                    if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
                         continue;
                     }
                 }
@@ -482,9 +507,5 @@ void lights_render_high_quality (int minx, int miny,
                 l->render(fbo);
             }
         }
-    }
-
-    if (deferred_player_light) {
-        deferred_player_light->render(fbo);
     }
 }

@@ -5,6 +5,7 @@
 
 #include "my_main.h"
 #include "my_game.h"
+#include "my_wid_console.h"
 #include <algorithm>
 
 void Thing::achieve_goals_in_life (void)
@@ -77,6 +78,13 @@ void Thing::tick (void)
 
 void things_tick (void)
 {_
+    //
+    // Allows for debugging
+    //
+    if (wid_console_window && wid_console_window->visible) {
+        return;
+    }
+
     //
     // Active things are generally things that move or have a life span
     //
