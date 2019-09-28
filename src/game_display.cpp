@@ -10,7 +10,6 @@ void Game::display (void)
 {_
     blit_fbo_bind(FBO_MAIN);
 
-    glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     /*
