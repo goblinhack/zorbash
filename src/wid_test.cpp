@@ -17,7 +17,8 @@
 
 static void wid_test_wid_create(void);
 
-widp wid_test_window;
+widp wid_itembar;
+widp wid_sidebar;
 
 void wid_test_fini (void)
 {_
@@ -49,15 +50,15 @@ static void wid_test_wid_create (void)
         point br = {ITEMBAR_BR_X, ITEMBAR_BR_Y};
         color c;
 
-        wid_test_window = wid_new_square_window("text container1");
-        wid_set_pos(wid_test_window, tl, br);
-        wid_set_shape_none(wid_test_window);
-        wid_set_style(wid_test_window, 1);
+        wid_itembar = wid_new_square_window("text container1");
+        wid_set_pos(wid_itembar, tl, br);
+        wid_set_shape_none(wid_itembar);
+        wid_set_style(wid_itembar, 1);
     }
 
     int x = 0;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {0, 0};
         point br = {ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -71,7 +72,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -85,7 +86,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -99,7 +100,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -113,7 +114,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -127,7 +128,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -141,7 +142,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -155,7 +156,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -169,7 +170,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -183,7 +184,7 @@ static void wid_test_wid_create (void)
     }
     x += ITEMBAR_WIDTH;
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
+        auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
@@ -196,32 +197,164 @@ static void wid_test_wid_create (void)
         wid_set_tilename(w, "sword1.1");
     }
 
-    wid_update(wid_test_window);
+    wid_update(wid_itembar);
 
     {
-        point tl = {ASCII_WIDTH - SIDEBAR_WIDTH + 1, 0};
-        point br = {ASCII_WIDTH - 1, SIDEBAR_HEIGHT};
+        point tl = {ASCII_WIDTH - SIDEBAR_WIDTH, 0};
+        point br = {ASCII_WIDTH - 1, ASCII_HEIGHT};
         color c;
 
-        wid_test_window = wid_new_square_window("text container2");
-        wid_set_pos(wid_test_window, tl, br);
-        wid_set_shape_box(wid_test_window);
-        wid_set_style(wid_test_window, 0);
+        wid_sidebar = wid_new_square_window("text container2");
+        wid_set_pos(wid_sidebar, tl, br);
+        wid_set_shape_none(wid_sidebar);
+        wid_set_style(wid_sidebar, 0);
     }
 
     {
-        auto w = wid_new_square_button(wid_test_window, "text box2");
-        point tl = {1, 1};
-        point br = {INNER_SIDEBAR_WIDTH - 1, INNER_SIDEBAR_HEIGHT - 1};
+        auto w = wid_new_square_button(wid_sidebar, "title box");
+        point tl = {0, 0};
+        point br = {5, 5};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, 4);
-        wid_set_text(w, L"warrior test");
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_tilename(w, "player1.1");
     }
 
-    wid_update(wid_test_window);
+    {
+        auto w = wid_new_square_button(wid_sidebar, "title name");
+        point tl = {0, 6};
+        point br = {TITLEBAR_WIDTH, 6};
+
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, 4);
+        wid_set_text(w, L"Ser Hacksalot");
+        wid_set_shape_none(w);
+    }
+
+    {
+        auto w = wid_new_square_button(wid_sidebar, "gold");
+        point tl = {7, 5};
+        point br = {TITLEBAR_WIDTH, 5};
+
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, L"%tile=dollar-icon$%fg=gold$666");
+        wid_set_text_lhs(w, true);
+        wid_set_shape_none(w);
+    }
+
+    {
+        auto w = wid_new_square_button(wid_sidebar, "weight");
+        point tl = {7, 4};
+        point br = {TITLEBAR_WIDTH, 4};
+
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, L"%tile=CWEIGHT$%fg=green$150%fg=grey$lbs");
+        wid_set_text_lhs(w, true);
+        wid_set_shape_none(w);
+    }
+
+    {
+        int y_at = 8;
+        {
+            auto w = wid_new_square_button(wid_sidebar, "health-icon");
+            point tl = {0, y_at};
+            point br = {1, y_at+1};
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, -1);
+            wid_set_tilename(w, "health5-icon");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        {
+            auto w = wid_new_square_button(wid_sidebar, "Health");
+            point tl = {2, y_at};
+            point br = {tl.x + TITLEBAR_WIDTH, tl.y};
+            wid_set_pos(w, tl, br);
+            wid_set_shape_none(w);
+            wid_set_text(w, L"%bg=red$       %bg=black$  10/100");
+            wid_set_text_lhs(w, true);
+        }
+        y_at += 2;
+        {
+            auto w = wid_new_square_button(wid_sidebar, "armour-icon");
+            point tl = {0, y_at};
+            point br = {1, y_at+1};
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, -1);
+            wid_set_tilename(w, "armour-icon");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        {
+            auto w = wid_new_square_button(wid_sidebar, "Armour");
+            point tl = {2, y_at};
+            point br = {tl.x + SIDEBAR_WIDTH, tl.y};
+
+            wid_set_pos(w, tl, br);
+            wid_set_shape_none(w);
+            wid_set_text(w, L"%bg=darkolivegreen4$         %bg=black$90/100");
+            wid_set_text_lhs(w, true);
+        }
+        y_at += 2;
+        {
+            auto w = wid_new_square_button(wid_sidebar, "magic-icon");
+            point tl = {0, y_at};
+            point br = {1, y_at+1};
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, -1);
+            wid_set_tilename(w, "magic-icon");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        {
+            auto w = wid_new_square_button(wid_sidebar, "Magic");
+            point tl = {2, y_at};
+            point br = {tl.x + SIDEBAR_WIDTH, tl.y};
+
+            wid_set_pos(w, tl, br);
+            wid_set_shape_none(w);
+            wid_set_text(w, L"%bg=darkolivegreen$         %bg=black$90/100");
+            wid_set_text_lhs(w, true);
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        y_at += 2;
+        {
+            auto w = wid_new_square_button(wid_sidebar, "karma-icon");
+            point tl = {0, y_at};
+            point br = {1, y_at+1};
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, -1);
+            wid_set_tilename(w, "karma-icon");
+        }
+        {
+            auto w = wid_new_square_button(wid_sidebar, "Karma");
+            point tl = {2, y_at};
+            point br = {tl.x + SIDEBAR_WIDTH, tl.y};
+            wid_set_pos(w, tl, br);
+            wid_set_shape_none(w);
+            wid_set_text(w, L"%bg=darkolivegreen4$         %bg=black$Good");
+            wid_set_text_lhs(w, true);
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+    }
+
+    {
+        for (auto y = 0; y < INVENTORY_DOWN ; y++) {
+            for (auto x = 0; x < INVENTORY_ACROSS ; x++) {
+                int y_at = ASCII_HEIGHT - INVENTORY_ITEM_HEIGHT * (y + 1);
+                int x_at = INVENTORY_ITEM_HEIGHT * x;
+                auto w = wid_new_square_button(wid_sidebar, "text box2");
+                point tl = {x_at, y_at};
+                point br = {x_at+INVENTORY_ITEM_WIDTH - 1, y_at + INVENTORY_ITEM_HEIGHT - 1};
+
+                wid_set_pos(w, tl, br);
+                wid_set_style(w, 0);
+                wid_set_text(w, L"9");
+                wid_set_text_lhs(w, true);
+                wid_set_text_bot(w, true);
+                wid_set_on_m_down(w, wid_test_mouse_down);
+                wid_set_tilename(w, "gem1.6");
+            }
+        }
+    }
+
+    wid_update(wid_sidebar);
 }

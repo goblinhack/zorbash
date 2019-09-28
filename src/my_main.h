@@ -106,10 +106,9 @@ extern int TILES_DOWN;
 // Minicon
 //
 #define MINICON_TEXT_COLOR          GRAY
-#define SIDEBAR_WIDTH               14
-#define SIDEBAR_HEIGHT              20
-#define INNER_SIDEBAR_WIDTH         12
-#define INNER_SIDEBAR_HEIGHT        12
+#define SIDEBAR_WIDTH               15
+#define TITLEBAR_WIDTH              SIDEBAR_WIDTH
+#define TITLEBAR_HEIGHT             SIDEBAR_WIDTH
 #define ITEMBAR_HEIGHT              4
 #define ITEMBAR_WIDTH               4
 #define ITEMBAR_TOT_WIDTH           (10 * ITEMBAR_WIDTH)
@@ -117,6 +116,10 @@ extern int TILES_DOWN;
 #define ITEMBAR_TL_Y                (ASCII_HEIGHT - 4)
 #define ITEMBAR_BR_X                (ASCII_WIDTH / 2 + (ITEMBAR_TOT_WIDTH / 2))
 #define ITEMBAR_BR_Y                (ASCII_HEIGHT - 1)
+#define INVENTORY_ITEM_WIDTH        3
+#define INVENTORY_ITEM_HEIGHT       3
+#define INVENTORY_DOWN              4
+#define INVENTORY_ACROSS            (SIDEBAR_WIDTH / INVENTORY_ITEM_WIDTH)
 #define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
 #define MINICON_HEIGHT              200 // scrollbar limit
 #define MINICON_VIS_HEIGHT          5
