@@ -766,8 +766,8 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                 brx -= offset_x;
                 bry -= offset_y;
 
-                int lx = X % LAVA_ACROSS;
-                int ly = (Y + (int)lava_step2/4) % (LAVA_DOWN-1);
+                int lx = x % LAVA_ACROSS;
+                int ly = (y + (int)lava_step2/4) % (LAVA_DOWN-1);
                 auto tile = get(lava, lx, ly);
 
                 auto x1 = tile->x1;
