@@ -135,6 +135,19 @@ def init_16x16_ui():
     ]
     zx.tile_load_arr(tex_name="16x16_ui4", width=16, height=16, arr=tiles)
 
+def init_64x16_ui():
+    zx.tex_load(file="data/gfx/64x16_status_bar.tga", name="64x16_status_bar")
+    tiles = [
+        "status-bar-9", "status-bar-8", "status-bar-7", "status-bar-6", "status-bar-5",
+        "status-bar-4", "status-bar-3", "status-bar-2", "status-bar-1", "status-bar-0",
+        "karma-status",
+        "health-status",
+        "armour-status",
+        "magick-status",
+        "anxiety-status",
+    ]
+    zx.tile_load_arr(tex_name="64x16_status_bar", width=80, height=16, arr=tiles)
+
 def init_16x16():
     zx.tex_load(
             file="data/gfx/16x16.tga",
@@ -155,7 +168,7 @@ def init_16x16():
             ########################################################
             "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
             ########################################################
-            "health5-icon", "health4-icon", "health3-icon", "health2-icon", "health1-icon", "dollar-icon", "armour-icon", "magic-icon", "karma-icon", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "health5-icon", "health4-icon", "health3-icon", "health2-icon", "health1-icon", "dollar-icon", "armour-icon", "magic-icon", "karma-icon", "anxiety5-icon", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
             ########################################################
             "floor3.1", "floor3.2", "floor3.3", "floor3.4", "floor3.5", "floor3.6", "floor3.7", "floor3.8", "floor3.9", "floor3.10", "floor3.11", "floor3.12", "floor3.13", "floor3.14", "floor3.15", "floor3.16", "floor3.17", "floor3.18", "floor3.19", "floor3.20", "floor3.21", "floor3.22", "floor3.23", "floor3.24", "floor3.25", "floor3.26", "floor3.27", "floor3.28", "floor3.29", "floor3.30", "floor3.31", "floor3.32",
             "floor4.1", "floor4.2", "floor4.3", "floor4.4", "floor4.5", "floor4.6", "floor4.7", "floor4.8", "floor4.9", "floor4.10", "floor4.11", "floor4.12", "floor4.13", "floor4.14", "floor4.15", "floor4.16", "floor4.17", "floor4.18", "floor4.19", "floor4.20", "floor4.21", "floor4.22", "floor4.23", "floor4.24", "floor4.25", "floor4.26", "floor4.27", "floor4.28", "floor4.29", "floor4.30", "floor4.31", "floor4.32",
@@ -634,6 +647,7 @@ def init_weapons_tiles():
 init_text()
 init_light()
 init_16x16_ui()
+init_64x16_ui()
 init_16x16()
 init_16x32()
 init_32x32()
