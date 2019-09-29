@@ -41,7 +41,7 @@
 
 #undef  ENABLE_LEAKCHECK
 #define ENABLE_INVERTED_GFX        // For vision impaired
-#define ENABLE_ASCII_MOUSE
+#undef  ENABLE_ASCII_MOUSE
 #define ENABLE_TILE_COLLISION_CHECKING
 
 //
@@ -116,10 +116,10 @@ extern int TILES_DOWN;
 #define ITEMBAR_TL_Y                (ASCII_HEIGHT - 4)
 #define ITEMBAR_BR_X                (ASCII_WIDTH / 2 + (ITEMBAR_TOT_WIDTH / 2))
 #define ITEMBAR_BR_Y                (ASCII_HEIGHT - 1)
-#define INVENTORY_ITEM_WIDTH        3
-#define INVENTORY_ITEM_HEIGHT       3
-#define INVENTORY_DOWN              4
-#define INVENTORY_ACROSS            (SIDEBAR_WIDTH / INVENTORY_ITEM_WIDTH)
+#define INVENTORY_ITEM_WIDTH        2
+#define INVENTORY_ITEM_HEIGHT       2
+#define INVENTORY_DOWN              5
+#define INVENTORY_ACROSS            6
 #define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
 #define MINICON_HEIGHT              200 // scrollbar limit
 #define MINICON_VIS_HEIGHT          5

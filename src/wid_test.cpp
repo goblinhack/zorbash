@@ -254,223 +254,309 @@ static void wid_test_wid_create (void)
         wid_set_shape_none(w);
     }
 
+    int y_at = 8;
     {
-        int y_at = 8;
-        {
-            auto w = wid_new_square_button(wid_sidebar, "health-icon");
-            point tl = {0, y_at};
-            point br = {2, y_at + 2};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "health5-icon");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "Health-value");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + TITLEBAR_WIDTH, tl.y};
-            wid_set_pos(w, tl, br);
-            wid_set_shape_none(w);
-            wid_set_text(w, L"     10/100");
-            wid_set_text_lhs(w, true);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
-            point tl = {3, y_at};
-            point br = {tl.x + 10, tl.y + 1};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "status-bar-9");
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "health-status");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + 10, tl.y};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "health-status");
-        }
+        auto w = wid_new_square_button(wid_sidebar, "health-icon");
+        point tl = {0, y_at};
+        point br = {2, y_at + 2};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "health5-icon");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "Health-value");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + TITLEBAR_WIDTH, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_shape_none(w);
+        wid_set_text(w, L"     10/100");
+        wid_set_text_lhs(w, true);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "status-bar-9");
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "health-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + 11, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "health-status");
+    }
 
-        y_at += 3;
-        {
-            auto w = wid_new_square_button(wid_sidebar, "strength-icon");
-            point tl = {0, y_at};
-            point br = {2, y_at + 2};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "strength-icon");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "strength-value");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + TITLEBAR_WIDTH, tl.y};
-            wid_set_pos(w, tl, br);
-            wid_set_shape_none(w);
-            wid_set_text(w, L"     10/100");
-            wid_set_text_lhs(w, true);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "strength-status-bar");
-            point tl = {3, y_at};
-            point br = {tl.x + 10, tl.y + 1};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "status-bar-9");
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "strength-status");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + 10, tl.y};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "strength-status");
-        }
+    y_at += 3;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "strength-icon");
+        point tl = {0, y_at};
+        point br = {2, y_at + 2};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "strength-icon");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "strength-value");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + TITLEBAR_WIDTH, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_shape_none(w);
+        wid_set_text(w, L"     10/100");
+        wid_set_text_lhs(w, true);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "strength-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "status-bar-9");
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "strength-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + 11, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "strength-status");
+    }
 
-        y_at += 3;
-        {
-            auto w = wid_new_square_button(wid_sidebar, "armour-icon");
-            point tl = {0, y_at};
-            point br = {2, y_at + 2};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "armour-icon");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "armour-value");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + SIDEBAR_WIDTH, tl.y};
+    y_at += 3;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "armour-icon");
+        point tl = {0, y_at};
+        point br = {2, y_at + 2};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "armour-icon");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "armour-value");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + SIDEBAR_WIDTH, tl.y};
 
-            wid_set_pos(w, tl, br);
-            wid_set_shape_none(w);
-            wid_set_text(w, L"     90/100");
-            wid_set_text_lhs(w, true);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "armour-status-bar");
-            point tl = {3, y_at};
-            point br = {tl.x + 10, tl.y + 1};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "status-bar-7");
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "armour-status");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + 10, tl.y};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "armour-status");
-        }
+        wid_set_pos(w, tl, br);
+        wid_set_shape_none(w);
+        wid_set_text(w, L"     90/100");
+        wid_set_text_lhs(w, true);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "armour-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "status-bar-7");
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "armour-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + 11, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "armour-status");
+    }
 
-        y_at += 3;
-        {
-            auto w = wid_new_square_button(wid_sidebar, "magic-icon");
-            point tl = {0, y_at};
-            point br = {2, y_at + 2};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "magic-icon");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "magic-value");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + SIDEBAR_WIDTH, tl.y};
+    y_at += 3;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "magic-icon");
+        point tl = {0, y_at};
+        point br = {2, y_at + 2};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "magic-icon");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "magic-value");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + SIDEBAR_WIDTH, tl.y};
 
-            wid_set_pos(w, tl, br);
-            wid_set_shape_none(w);
-            wid_set_text(w, L"     90/100");
-            wid_set_text_lhs(w, true);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "magic-status-bar");
-            point tl = {3, y_at};
-            point br = {tl.x + 10, tl.y + 1};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "status-bar-7");
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "magick-status");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + 10, tl.y};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "magick-status");
-        }
+        wid_set_pos(w, tl, br);
+        wid_set_shape_none(w);
+        wid_set_text(w, L"     90/100");
+        wid_set_text_lhs(w, true);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "magic-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "status-bar-7");
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "magick-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + 11, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "magick-status");
+    }
 
-        y_at += 3;
-        {
-            auto w = wid_new_square_button(wid_sidebar, "karma-icon");
-            point tl = {0, y_at};
-            point br = {2, y_at + 2};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "karma-icon");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "karma-status-bar");
-            point tl = {3, y_at};
-            point br = {tl.x + 10, tl.y + 1};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "status-bar-1");
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "karma-status");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + 10, tl.y};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "karma-status");
-        }
+    y_at += 3;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "karma-icon");
+        point tl = {0, y_at};
+        point br = {2, y_at + 2};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "karma-icon");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "karma-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "status-bar-1");
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "karma-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + 11, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "karma-status");
+    }
 
-        y_at += 3;
-        {
-            auto w = wid_new_square_button(wid_sidebar, "anxiety-icon");
-            point tl = {0, y_at};
-            point br = {2, y_at + 2};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "anxiety5-icon");
-            wid_set_color(w, WID_COLOR_BG, WHITE);
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "anxiety-status-bar");
-            point tl = {3, y_at};
-            point br = {tl.x + 10, tl.y + 1};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "status-bar-1");
-        }
-        {
-            auto w = wid_new_square_button(wid_sidebar, "anxiety-status");
-            point tl = {3, y_at + 2};
-            point br = {tl.x + 10, tl.y};
-            wid_set_pos(w, tl, br);
-            wid_set_style(w, -1);
-            wid_set_tilename(w, "anxiety-status");
-        }
+    y_at += 3;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "anxiety-icon");
+        point tl = {0, y_at};
+        point br = {2, y_at + 2};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "anxiety5-icon");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "anxiety-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "status-bar-1");
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "anxiety-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + 11, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "anxiety-status");
+    }
 
+    y_at += 4;
+    y_at += 3;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "corruptions-0");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "corruptions-0");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "corruptions-1");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "corruptions-1");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "buffs-0");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "buffs-0");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "buffs-1");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "buffs-1");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "inventory-0");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "inventory-0");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "inventory-1");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "inventory-1");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "inventory-2");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "inventory-2");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "inventory-3");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "inventory-3");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "inventory-4");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "inventory-4");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "inventory-5");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_tilename(w, "inventory-5");
     }
 
     {
         for (auto y = 0; y < INVENTORY_DOWN ; y++) {
             for (auto x = 0; x < INVENTORY_ACROSS ; x++) {
                 int y_at = ASCII_HEIGHT - INVENTORY_ITEM_HEIGHT * (y + 1);
-                int x_at = INVENTORY_ITEM_HEIGHT * x;
+                int x_at = 3 + INVENTORY_ITEM_HEIGHT * x;
                 auto w = wid_new_square_button(wid_sidebar, "text box2");
                 point tl = {x_at, y_at};
                 point br = {x_at+INVENTORY_ITEM_WIDTH - 1, y_at + INVENTORY_ITEM_HEIGHT - 1};
 
                 wid_set_pos(w, tl, br);
                 wid_set_style(w, 0);
-                wid_set_text(w, L"9");
-                wid_set_text_lhs(w, true);
-                wid_set_text_bot(w, true);
                 wid_set_on_m_down(w, wid_test_mouse_down);
                 wid_set_tilename(w, "gem1.6");
             }
