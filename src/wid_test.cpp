@@ -259,7 +259,7 @@ static void wid_test_wid_create (void)
         {
             auto w = wid_new_square_button(wid_sidebar, "health-icon");
             point tl = {0, y_at};
-            point br = {1, y_at+1};
+            point br = {2, y_at + 2};
             wid_set_pos(w, tl, br);
             wid_set_style(w, -1);
             wid_set_tilename(w, "health5-icon");
@@ -267,18 +267,18 @@ static void wid_test_wid_create (void)
         }
         {
             auto w = wid_new_square_button(wid_sidebar, "Health");
-            point tl = {2, y_at};
+            point tl = {3, y_at + 2};
             point br = {tl.x + TITLEBAR_WIDTH, tl.y};
             wid_set_pos(w, tl, br);
             wid_set_shape_none(w);
-            wid_set_text(w, L"%bg=red$       %bg=black$  10/100");
+            wid_set_text(w, L"     10/100");
             wid_set_text_lhs(w, true);
         }
-        y_at += 2;
+        y_at += 3;
         {
             auto w = wid_new_square_button(wid_sidebar, "armour-icon");
             point tl = {0, y_at};
-            point br = {1, y_at+1};
+            point br = {2, y_at + 2};
             wid_set_pos(w, tl, br);
             wid_set_style(w, -1);
             wid_set_tilename(w, "armour-icon");
@@ -286,19 +286,19 @@ static void wid_test_wid_create (void)
         }
         {
             auto w = wid_new_square_button(wid_sidebar, "Armour");
-            point tl = {2, y_at};
+            point tl = {3, y_at + 2};
             point br = {tl.x + SIDEBAR_WIDTH, tl.y};
 
             wid_set_pos(w, tl, br);
             wid_set_shape_none(w);
-            wid_set_text(w, L"%bg=darkolivegreen4$         %bg=black$90/100");
+            wid_set_text(w, L"     90/100");
             wid_set_text_lhs(w, true);
         }
-        y_at += 2;
+        y_at += 3;
         {
             auto w = wid_new_square_button(wid_sidebar, "magic-icon");
             point tl = {0, y_at};
-            point br = {1, y_at+1};
+            point br = {2, y_at + 2};
             wid_set_pos(w, tl, br);
             wid_set_style(w, -1);
             wid_set_tilename(w, "magic-icon");
@@ -306,31 +306,31 @@ static void wid_test_wid_create (void)
         }
         {
             auto w = wid_new_square_button(wid_sidebar, "Magic");
-            point tl = {2, y_at};
+            point tl = {3, y_at + 2};
             point br = {tl.x + SIDEBAR_WIDTH, tl.y};
 
             wid_set_pos(w, tl, br);
             wid_set_shape_none(w);
-            wid_set_text(w, L"%bg=darkolivegreen$         %bg=black$90/100");
+            wid_set_text(w, L"     90/100");
             wid_set_text_lhs(w, true);
             wid_set_color(w, WID_COLOR_BG, WHITE);
         }
-        y_at += 2;
+        y_at += 3;
         {
             auto w = wid_new_square_button(wid_sidebar, "karma-icon");
             point tl = {0, y_at};
-            point br = {1, y_at+1};
+            point br = {2, y_at + 2};
             wid_set_pos(w, tl, br);
             wid_set_style(w, -1);
             wid_set_tilename(w, "karma-icon");
         }
         {
             auto w = wid_new_square_button(wid_sidebar, "Karma");
-            point tl = {2, y_at};
+            point tl = {3, y_at + 2};
             point br = {tl.x + SIDEBAR_WIDTH, tl.y};
             wid_set_pos(w, tl, br);
             wid_set_shape_none(w);
-            wid_set_text(w, L"%bg=darkolivegreen4$         %bg=black$Good");
+            wid_set_text(w, L"       Good");
             wid_set_text_lhs(w, true);
             wid_set_color(w, WID_COLOR_BG, WHITE);
         }
