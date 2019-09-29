@@ -170,6 +170,18 @@ def init_64x16_ui():
         "inventory-4",
         "inventory-5",
         "inventory-6",
+        "karma-bar-11", 
+        "karma-bar-10",
+        "karma-bar-9", 
+        "karma-bar-8", 
+        "karma-bar-7", 
+        "karma-bar-6", 
+        "karma-bar-5",
+        "karma-bar-4", 
+        "karma-bar-3", 
+        "karma-bar-2", 
+        "karma-bar-1", 
+        "karma-bar-0",
     ]
     zx.tile_load_arr(tex_name="64x16_status_bar", width=96, height=16, arr=tiles)
 
