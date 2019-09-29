@@ -16,6 +16,7 @@ int ASCII_HEIGHT;
 
 typedef struct {
     Tilep fg_tile;
+    Tilep fg2_tile;
     Tilep bg_tile;
     Tilep bg2_tile;
 
@@ -36,6 +37,10 @@ typedef struct {
     float bg2_ty {};
     float bg2_dx {};
     float bg2_dy {};
+    float fg2_tx {};
+    float fg2_ty {};
+    float fg2_dx {};
+    float fg2_dy {};
 
     color fg_color_tl;
     color fg_color_bl;
@@ -49,6 +54,10 @@ typedef struct {
     color bg2_color_bl;
     color bg2_color_tr;
     color bg2_color_br;
+    color fg2_color_tl;
+    color fg2_color_bl;
+    color fg2_color_tr;
+    color fg2_color_br;
 
     /*
      * Is reset each frame, and so although a pointer potentially should be
@@ -144,6 +153,20 @@ void ascii_set_bg2 (int x, int y, color c)
     cell->bg2_color_tr = c;
     cell->bg2_color_bl = c;
     cell->bg2_color_br = c;
+}
+
+void ascii_set_fg2 (int x, int y, color c)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &getref(cells, x, y);
+
+    cell->fg2_color_tl = c;
+    cell->fg2_color_tr = c;
+    cell->fg2_color_bl = c;
+    cell->fg2_color_br = c;
 }
 
 void ascii_set_context (int x, int y, void *context)
@@ -254,6 +277,22 @@ void ascii_set_bg2 (int x, int y, const wchar_t c)
     ascii_set_bg2(x, y, fixed_font->unicode_to_tile(c));
 }
 
+void ascii_set_fg (int x, int y, const Texp tex, 
+                   float tx, float ty, float dx, float dy)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &getref(cells, x, y);
+
+    cell->tex = tex;
+    cell->tx = tx;
+    cell->ty = ty;
+    cell->dx = dx;
+    cell->dy = dy;
+}
+
 void ascii_set_fg (int x, int y, const Tilep tile)
 {
     if (!ascii_ok_for_scissors(x, y)) {
@@ -263,27 +302,61 @@ void ascii_set_fg (int x, int y, const Tilep tile)
     ascii_cell *cell = &getref(cells, x, y);
 
     cell->fg_tile = tile;
+    cell->tx = 0;
+    cell->ty = 0;
+    cell->dx = 1;
+    cell->dy = 1;
+}
+
+void ascii_set_fg2 (int x, int y, const Tilep tile)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &getref(cells, x, y);
+
+    cell->fg2_tile = tile;
+    cell->fg2_tx = 0;
+    cell->fg2_ty = 0;
+    cell->fg2_dx = 1;
+    cell->fg2_dy = 1;
+}
+
+void ascii_set_fg2 (int x, int y, const Tilep tile,
+                    float tx, float ty, float dx, float dy)
+{
+    if (!ascii_ok_for_scissors(x, y)) {
+        return;
+    }
+
+    ascii_cell *cell = &getref(cells, x, y);
+
+    cell->fg2_tile = tile;
+    cell->fg2_tx = tx;
+    cell->fg2_ty = ty;
+    cell->fg2_dx = dx;
+    cell->fg2_dy = dy;
 }
 
 void ascii_set_fg (int x, int y, const char *tilename)
 {
-    Tilep tile;
-
-    if (tilename) {
-        tile = tile_find(tilename);
-        if (!tile) {
-            return;
-        }
-    } else {
-        tile = 0;
-    }
-
-    ascii_set_fg(x, y, tile);
+    ascii_set_fg(x, y, tile_find(tilename));
 }
 
 void ascii_set_fg (int x, int y, const wchar_t c)
 {
     ascii_set_fg(x, y, fixed_font->unicode_to_tile(c));
+}
+
+void ascii_set_fg2 (int x, int y, const char *tilename)
+{
+    ascii_set_fg2(x, y, tile_find(tilename));
+}
+
+void ascii_set_fg2 (int x, int y, const wchar_t c)
+{
+    ascii_set_fg2(x, y, fixed_font->unicode_to_tile(c));
 }
 
 void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
@@ -1084,6 +1157,31 @@ static void ascii_blit (int no_color)
                    bg2_color_tr,
                    bg2_color_bl,
                    bg2_color_br);
+            }
+
+            if (cell->fg2_tile) {
+                color fg2_color_tl = cell->fg2_color_tl;
+                color fg2_color_tr = cell->fg2_color_tr;
+                color fg2_color_bl = cell->fg2_color_bl;
+                color fg2_color_br = cell->fg2_color_br;
+
+                if (no_color) {
+                    fg2_color_tl = color_to_mono(fg2_color_tl);
+                    fg2_color_tr = color_to_mono(fg2_color_tr);
+                    fg2_color_bl = color_to_mono(fg2_color_bl);
+                    fg2_color_br = color_to_mono(fg2_color_br);
+                }
+
+                tile_blit_section_colored(
+                   cell->fg2_tile,
+                   fpoint(cell->fg2_tx, cell->fg2_ty),
+                   fpoint(cell->fg2_tx + cell->fg2_dx, 
+                          cell->fg2_ty + cell->fg2_dy),
+                   tile_tl, tile_br,
+                   fg2_color_tl,
+                   fg2_color_tr,
+                   fg2_color_bl,
+                   fg2_color_br);
             }
 
             tile_x += game->config.ascii_gl_width;

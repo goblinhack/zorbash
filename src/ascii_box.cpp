@@ -8,7 +8,7 @@
 #include "my_ascii.h"
 #include <array>
 
-static void ascii_put_shaded_box (int style, Tilep tile,
+static void ascii_put_shaded_box (int style, Tilep bg_tile, Tilep fg_tile,
                                   int x1, int y1, int x2, int y2,
                                   color col_border_text, 
                                   color col_tl, color col_mid, color col_br,
@@ -93,7 +93,7 @@ static void ascii_put_shaded_box (int style, Tilep tile,
         }
     }
 
-    if (unlikely(tile != nullptr)) {
+    if (unlikely(bg_tile != nullptr)) {
         float dx = 1.0 / ((float)x2 - (float)x1 + 1);
         float dy = 1.0 / ((float)y2 - (float)y1 + 1);
 
@@ -101,8 +101,22 @@ static void ascii_put_shaded_box (int style, Tilep tile,
             for (y = y1; y <= y2; y++) {
                 float tx = (float)(x-x1) * dx;
                 float ty = (float)(y-y1) * dy;
-                ascii_set_bg2(x, y, tile, tx, ty, dx, dy);
+                ascii_set_bg2(x, y, bg_tile, tx, ty, dx, dy);
                 ascii_set_bg2(x, y, col_mid);
+            }
+        }
+    }
+
+    if (unlikely(fg_tile != nullptr)) {
+        float dx = 1.0 / ((float)x2 - (float)x1 + 1);
+        float dy = 1.0 / ((float)y2 - (float)y1 + 1);
+
+        for (x = x1; x <= x2; x++) {
+            for (y = y1; y <= y2; y++) {
+                float tx = (float)(x-x1) * dx;
+                float ty = (float)(y-y1) * dy;
+                ascii_set_fg2(x, y, fg_tile, tx, ty, dx, dy);
+                ascii_set_fg2(x, y, col_mid);
             }
         }
     }
@@ -139,7 +153,8 @@ static void ascii_put_shaded_box (int style, Tilep tile,
 }
 
 static void ascii_put_box_ (int style,
-                            Tilep tile,
+                            Tilep bg_tile,
+                            Tilep fg_tile,
                             int x,
                             int y,
                             int width,
@@ -152,7 +167,7 @@ static void ascii_put_box_ (int style,
                             va_list args)
 {_
     if (!*fmt) {
-        ascii_put_shaded_box(style, tile, x, y,
+        ascii_put_shaded_box(style, bg_tile, fg_tile, x, y,
                              x + width - 1, y + height - 1,
                              col_border_text, col_tl, col_mid, col_br,
                              0 /* context */);
@@ -170,7 +185,7 @@ static void ascii_put_box_ (int style,
         auto b = std::wstring(buf);
         int len = ascii_strlen(b);
 
-        ascii_put_shaded_box(style, tile, x, y,
+        ascii_put_shaded_box(style, bg_tile, fg_tile, x, y,
                              x + width - 1, y + height - 1,
                              col_border_text, col_tl, col_mid, col_br,
                              0 /* context */);
@@ -179,7 +194,7 @@ static void ascii_put_box_ (int style,
     }
 }
 
-void ascii_put_box (box_args b, int style, Tilep tile, const wchar_t *fmt, ...)
+void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const wchar_t *fmt, ...)
 {_
     va_list args;
 
@@ -211,7 +226,8 @@ void ascii_put_box (box_args b, int style, Tilep tile, const wchar_t *fmt, ...)
     va_start(args, fmt);
 
     ascii_put_box_(style,
-                   tile,
+                   bg_tile,
+                   fg_tile,
                    b.x,
                    b.y,
                    b.width,
