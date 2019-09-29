@@ -416,7 +416,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_bg_tilename(w, "status-bar-1");
+        wid_set_bg_tilename(w, "karma-bar-1");
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "karma-status");
