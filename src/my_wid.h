@@ -46,10 +46,6 @@ typedef enum {
 
 #define WID_MODE_FIRST WID_MODE_NORMAL
 
-Texp wid_get_tex(widp, fsize *size);
-Tilep wid_get_tile(widp);
-Tilep wid_get_tile2(widp);
-Tpp wid_get_thing_template(widp);
 color wid_get_color(widp, wid_color which);
 color wid_get_mode_color(widp, wid_color which);
 extern int wid_mouse_visible;
@@ -213,9 +209,7 @@ void wid_set_shape_box(widp);
 void wid_set_shape_none(widp);
 void wid_set_shape_square(widp);
 void wid_set_show_cursor(widp, uint8_t val);
-void wid_set_tex(widp, std::string file, std::string name);
 void wid_set_tex_br(widp, fsize val);
-void wid_set_tex_sz(widp, fsize uv);
 void wid_set_tex_tl(widp, fsize val);
 void wid_set_text(widp, std::wstring);
 void wid_set_text_bot(widp, uint8_t val);
@@ -225,8 +219,8 @@ void wid_set_text_lhs(widp, uint8_t val);
 void wid_set_text_pos(widp, uint8_t val, int32_t x, int32_t y);
 void wid_set_text_rhs(widp, uint8_t val);
 void wid_set_text_top(widp, uint8_t val);
-void wid_set_thing_template(widp, Tpp);
-void wid_set_tilename(widp, std::string name);
+void wid_set_bg_tilename(widp, std::string name);
+void wid_set_fg_tilename(widp, std::string name);
 void wid_set_tooltip(widp, std::wstring string);
 void wid_set_tooltip2(widp, std::wstring string);
 void wid_set_top(widp, uint8_t val);
@@ -477,10 +471,15 @@ public:
     point abs_tl {};
     point abs_br {};
 
+#if 0
     Texp tex {};
-    Tilep tile {};
+#endif
+    Tilep bg_tile {};
+    Tilep fg_tile {};
+#if 0
     Tilep first_tile {};
     Tilep tile_curr {};
+#endif
 
     fsize texuv {};
 
@@ -590,7 +589,8 @@ public:
 
 uint8_t wid_is_moving(widp w);
 void wid_set_style(widp w, int style);
-void wid_set_tile(widp w, Tilep tile);
+void wid_set_bg_tile(widp w, Tilep tile);
+void wid_set_fg_tile(widp w, Tilep tile);
 
 extern widp wid_mouse_template;
 

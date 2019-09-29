@@ -68,7 +68,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "player1.1");
+        wid_set_bg_tilename(w, "player1.1");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -82,7 +82,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "key1.1");
+        wid_set_bg_tilename(w, "key1.1");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -96,7 +96,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "food_frog1");
+        wid_set_bg_tilename(w, "food_frog1");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -110,7 +110,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "gem1.1");
+        wid_set_bg_tilename(w, "gem1.1");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -124,7 +124,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "gem1.2");
+        wid_set_bg_tilename(w, "gem1.2");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -138,7 +138,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "gem1.3");
+        wid_set_bg_tilename(w, "gem1.3");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -152,7 +152,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "gem1.4");
+        wid_set_bg_tilename(w, "gem1.4");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -166,7 +166,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "gem1.5");
+        wid_set_bg_tilename(w, "gem1.5");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -180,7 +180,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "gem1.6");
+        wid_set_bg_tilename(w, "gem1.6");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -194,7 +194,7 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "sword1.1");
+        wid_set_bg_tilename(w, "sword1.1");
     }
 
     wid_update(wid_itembar);
@@ -218,7 +218,7 @@ static void wid_test_wid_create (void)
         wid_set_pos(w, tl, br);
         wid_set_style(w, 4);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_tilename(w, "player1.1");
+        wid_set_bg_tilename(w, "player1.1");
     }
 
     {
@@ -261,7 +261,7 @@ static void wid_test_wid_create (void)
         point br = {2, y_at + 2};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "health5-icon");
+        wid_set_bg_tilename(w, "health5-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
@@ -279,7 +279,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "status-bar-9");
+        wid_set_bg_tilename(w, "status-bar-9");
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "health-status");
@@ -287,7 +287,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "health-status");
+        wid_set_bg_tilename(w, "health-status");
     }
 
     y_at += 3;
@@ -297,7 +297,7 @@ static void wid_test_wid_create (void)
         point br = {2, y_at + 2};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "strength-icon");
+        wid_set_bg_tilename(w, "strength-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
@@ -315,7 +315,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "status-bar-9");
+        wid_set_bg_tilename(w, "status-bar-9");
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "strength-status");
@@ -323,7 +323,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "strength-status");
+        wid_set_bg_tilename(w, "strength-status");
     }
 
     y_at += 3;
@@ -333,7 +333,7 @@ static void wid_test_wid_create (void)
         point br = {2, y_at + 2};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "armour-icon");
+        wid_set_bg_tilename(w, "armour-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
@@ -352,7 +352,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "status-bar-7");
+        wid_set_bg_tilename(w, "status-bar-7");
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "armour-status");
@@ -360,7 +360,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "armour-status");
+        wid_set_bg_tilename(w, "armour-status");
     }
 
     y_at += 3;
@@ -370,7 +370,7 @@ static void wid_test_wid_create (void)
         point br = {2, y_at + 2};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "magic-icon");
+        wid_set_bg_tilename(w, "magic-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
@@ -389,7 +389,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "status-bar-7");
+        wid_set_bg_tilename(w, "status-bar-7");
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "magick-status");
@@ -397,7 +397,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "magick-status");
+        wid_set_bg_tilename(w, "magick-status");
     }
 
     y_at += 3;
@@ -407,7 +407,7 @@ static void wid_test_wid_create (void)
         point br = {2, y_at + 2};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "karma-icon");
+        wid_set_bg_tilename(w, "karma-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
@@ -416,7 +416,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "status-bar-1");
+        wid_set_bg_tilename(w, "status-bar-1");
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "karma-status");
@@ -424,7 +424,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "karma-status");
+        wid_set_bg_tilename(w, "karma-status");
     }
 
     y_at += 3;
@@ -434,7 +434,7 @@ static void wid_test_wid_create (void)
         point br = {2, y_at + 2};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "anxiety5-icon");
+        wid_set_bg_tilename(w, "anxiety5-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
@@ -443,7 +443,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "status-bar-1");
+        wid_set_bg_tilename(w, "status-bar-1");
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "anxiety-status");
@@ -451,10 +451,10 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "anxiety-status");
+        wid_set_bg_tilename(w, "anxiety-status");
     }
 
-    y_at += 4;
+    y_at += 3;
     y_at += 3;
     {
         auto w = wid_new_square_button(wid_sidebar, "corruptions-0");
@@ -462,7 +462,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "corruptions-0");
+        wid_set_bg_tilename(w, "corruptions-0");
     }
     y_at +=2;
     {
@@ -471,7 +471,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "corruptions-1");
+        wid_set_bg_tilename(w, "corruptions-1");
     }
     y_at +=2;
     {
@@ -480,7 +480,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "buffs-0");
+        wid_set_bg_tilename(w, "buffs-0");
     }
     y_at +=2;
     {
@@ -489,7 +489,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "buffs-1");
+        wid_set_bg_tilename(w, "buffs-1");
     }
     y_at +=2;
     {
@@ -498,7 +498,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "inventory-0");
+        wid_set_bg_tilename(w, "inventory-0");
     }
     y_at +=2;
     {
@@ -507,7 +507,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "inventory-1");
+        wid_set_bg_tilename(w, "inventory-1");
     }
     y_at +=2;
     {
@@ -516,7 +516,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "inventory-2");
+        wid_set_bg_tilename(w, "inventory-2");
     }
     y_at +=2;
     {
@@ -525,7 +525,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "inventory-3");
+        wid_set_bg_tilename(w, "inventory-3");
     }
     y_at +=2;
     {
@@ -534,7 +534,7 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "inventory-4");
+        wid_set_bg_tilename(w, "inventory-4");
     }
     y_at +=2;
     {
@@ -543,13 +543,22 @@ static void wid_test_wid_create (void)
         point br = {tl.x + 11, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_tilename(w, "inventory-5");
+        wid_set_bg_tilename(w, "inventory-5");
+    }
+    y_at +=2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "inventory-6");
+        point tl = {3, y_at};
+        point br = {tl.x + 11, tl.y+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_bg_tilename(w, "inventory-6");
     }
 
     {
         for (auto y = 0; y < INVENTORY_DOWN ; y++) {
             for (auto x = 0; x < INVENTORY_ACROSS ; x++) {
-                int y_at = ASCII_HEIGHT - INVENTORY_ITEM_HEIGHT * (y + 1);
+                int y_at = ASCII_HEIGHT - INVENTORY_ITEM_HEIGHT * (y + 1) - 1;
                 int x_at = 3 + INVENTORY_ITEM_HEIGHT * x;
                 auto w = wid_new_square_button(wid_sidebar, "text box2");
                 point tl = {x_at, y_at};
@@ -558,7 +567,7 @@ static void wid_test_wid_create (void)
                 wid_set_pos(w, tl, br);
                 wid_set_style(w, 0);
                 wid_set_on_m_down(w, wid_test_mouse_down);
-                wid_set_tilename(w, "gem1.6");
+                wid_set_fg_tilename(w, "sword1.1");
             }
         }
     }

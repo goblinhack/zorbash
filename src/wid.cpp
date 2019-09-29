@@ -1455,49 +1455,14 @@ void wid_set_text_pos (widp w, uint8_t val, int32_t x, int32_t y)
     w->text_pos_set = val;
 }
 
-Texp wid_get_tex (widp w, fsize *size)
+static Tilep wid_get_bg_tile (widp w)
 {_
-    if (size) {
-        *size = w->texuv;
-    }
-
-    return (w->tex);
+    return (w->bg_tile);
 }
 
-void wid_set_tex (widp w, std::string tex, std::string name)
+static Tilep wid_get_fg_tile (widp w)
 {_
-    verify(w.get());
-
-    if ((tex == "") && (name == "")) {
-        w->tex = 0;
-        return;
-    }
-
-    Texp t = tex_load(tex, name, GL_NEAREST);
-    if (!t) {
-        ERR("failed to set wid tex %s", tex.c_str());
-    }
-
-    w->tex = t;
-
-    fsize sz = {
-        (float) tex_get_width(t),
-        (float) tex_get_height(t)
-    };
-
-    wid_set_tex_sz(w, sz);
-}
-
-void wid_set_tex_sz (widp w, fsize uv)
-{_
-    verify(w.get());
-
-    w->texuv = uv;
-}
-
-Tilep wid_get_tile (widp w)
-{_
-    return (w->tile);
+    return (w->fg_tile);
 }
 
 Tpp wid_get_thing_template (widp w)
@@ -1507,7 +1472,21 @@ Tpp wid_get_thing_template (widp w)
     return (w->tp);
 }
 
-void wid_set_tilename (widp w, std::string name)
+void wid_set_bg_tile (widp w, Tilep tile)
+{
+    verify(w.get());
+
+    w->bg_tile = tile;
+}
+
+void wid_set_fg_tile (widp w, Tilep tile)
+{
+    verify(w.get());
+
+    w->fg_tile = tile;
+}
+
+void wid_set_bg_tilename (widp w, std::string name)
 {_
     verify(w.get());
 
@@ -1520,32 +1499,23 @@ void wid_set_tilename (widp w, std::string name)
         DIE("widget does not exist to set tile %s", name.c_str());
     }
 
-    w->tile = tile;
-    if (!w->first_tile) {
-        w->first_tile = tile;
-    }
+    w->bg_tile = tile;
 }
 
-void wid_set_thing_template (widp w, Tpp t)
+void wid_set_fg_tilename (widp w, std::string name)
 {_
     verify(w.get());
 
-    w->tp = t;
-
-    if (!t) {
-        wid_set_tile(w, 0);
-        return;
-    }
-
-    auto tiles = tp_tiles(t);
-    auto tile = tile_first(tiles);
+    Tilep tile = tile_find(name);
     if (!tile) {
-        return;
+        ERR("failed to find wid tile %s", name.c_str());
     }
 
-    wid_set_tilename(w, tile_name(tile));
+    if (!w) {
+        DIE("widget does not exist to set tile %s", name.c_str());
+    }
 
-    wid_set_name(w, tp_name(t));
+    w->fg_tile = tile;
 }
 
 fsize wid_get_tex_tl (widp w)
@@ -6049,10 +6019,8 @@ static void wid_display (widp w,
 
     auto width = wid_get_width(w);
     auto height = wid_get_height(w);
-    Tilep tile = wid_get_tile(w);
-
-    fsize texuv;
-    (void) wid_get_tex(w, &texuv);
+    Tilep bg_tile = wid_get_bg_tile(w);
+    Tilep fg_tile = wid_get_fg_tile(w);
 
     point tl;
     point br;
@@ -6129,13 +6097,13 @@ static void wid_display (widp w,
             w_box_args.col_tl = w_box_args.col_mid;
             w_box_args.col_br = w_box_args.col_mid;
 
-            ascii_put_box(w_box_args, w->style, tile, L"");
+            ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, L"");
         }
     } else if (w->box) {
         /*
          * Bevelled box
          */
-        ascii_put_box(w_box_args, w->style, tile, L"");
+        ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, L"");
     } else {
         /* shape none */
     }
@@ -6830,14 +6798,4 @@ uint8_t wid_is_moving (widp w)
 void wid_set_style (widp w, int style)
 {
     w->style = style;
-}
-
-void wid_set_tile (widp w, Tilep tile)
-{
-    verify(w.get());
-
-    w->tile = tile;
-    if (!w->first_tile) {
-        w->first_tile = tile;
-    }
 }

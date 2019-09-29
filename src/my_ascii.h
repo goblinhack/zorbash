@@ -55,10 +55,14 @@ void ascii_set_bg(int x, int y, const wchar_t c);
 void ascii_set_bg2(int x, int y, Tilep);
 void ascii_set_bg2(int x, int y, Tilep, float tx, float ty, float dx, float dy);
 void ascii_set_bg2(int x, int y, color c);
+void ascii_set_fg(int x, int y, Texp, float tx, float ty, float dx, float dy);
 void ascii_set_fg(int x, int y, Tilep);
 void ascii_set_fg(int x, int y, color c);
 void ascii_set_fg(int x, int y, const char *tilename);
 void ascii_set_fg(int x, int y, const wchar_t c);
+void ascii_set_fg2(int x, int y, Tilep);
+void ascii_set_fg2(int x, int y, Tilep, float tx, float ty, float dx, float dy);
+void ascii_set_fg2(int x, int y, color c);
 
 void ascii_dim(int x, int y, int z, float alpha);
 
@@ -161,7 +165,7 @@ typedef struct {
 extern color ascii_get_color(int x, int y, int z);
 extern void *ascii_get_context(int x, int y);
 extern void ascii_blit_layer(int z, int no_color);
-extern void ascii_put_box(box_args b, int style, Tilep tile, const wchar_t *fmt, ...);
+extern void ascii_put_box(box_args b, int style, Tilep bg_tile, Tilep fg_tile, const wchar_t *fmt, ...);
 extern void ascii_set_context(int x, int y, void *context);
 extern void ascii_shade(void);
 

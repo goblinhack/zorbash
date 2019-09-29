@@ -159,7 +159,6 @@ def init_64x16_ui():
         "",
         "",
         "",
-        "",
         "corruptions-0",
         "corruptions-1",
         "buffs-0",
@@ -170,6 +169,7 @@ def init_64x16_ui():
         "inventory-3",
         "inventory-4",
         "inventory-5",
+        "inventory-6",
     ]
     zx.tile_load_arr(tex_name="64x16_status_bar", width=96, height=16, arr=tiles)
 
