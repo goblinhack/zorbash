@@ -293,6 +293,42 @@ static void wid_test_wid_create (void)
 
         y_at += 3;
         {
+            auto w = wid_new_square_button(wid_sidebar, "strength-icon");
+            point tl = {0, y_at};
+            point br = {2, y_at + 2};
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, -1);
+            wid_set_tilename(w, "strength-icon");
+            wid_set_color(w, WID_COLOR_BG, WHITE);
+        }
+        {
+            auto w = wid_new_square_button(wid_sidebar, "strength-value");
+            point tl = {3, y_at + 2};
+            point br = {tl.x + TITLEBAR_WIDTH, tl.y};
+            wid_set_pos(w, tl, br);
+            wid_set_shape_none(w);
+            wid_set_text(w, L"     10/100");
+            wid_set_text_lhs(w, true);
+        }
+        {
+            auto w = wid_new_square_button(wid_sidebar, "strength-status-bar");
+            point tl = {3, y_at};
+            point br = {tl.x + 10, tl.y + 1};
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, -1);
+            wid_set_tilename(w, "status-bar-9");
+        }
+        {
+            auto w = wid_new_square_button(wid_sidebar, "strength-status");
+            point tl = {3, y_at + 2};
+            point br = {tl.x + 10, tl.y};
+            wid_set_pos(w, tl, br);
+            wid_set_style(w, -1);
+            wid_set_tilename(w, "strength-status");
+        }
+
+        y_at += 3;
+        {
             auto w = wid_new_square_button(wid_sidebar, "armour-icon");
             point tl = {0, y_at};
             point br = {2, y_at + 2};
