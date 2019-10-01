@@ -567,7 +567,7 @@ static void wid_test_wid_create (void)
                 wid_set_pos(w, tl, br);
                 wid_set_style(w, 0);
                 wid_set_on_m_down(w, wid_test_mouse_down);
-                wid_set_fg_tilename(w, "sword1.1");
+                wid_set_fg_tilename(w, "food_frog1");
             }
         }
     }

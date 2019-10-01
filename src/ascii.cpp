@@ -971,7 +971,7 @@ void ascii_draw_line (int x0, int y0, int x1, int y1,
 /*
  * Display one z layer of the ascii.
  */
-static void ascii_blit (int no_color)
+static void ascii_blit (void)
 {_
     /*
      * Get the mouse position to use. We use this to find the mouse tile that
@@ -1041,13 +1041,6 @@ static void ascii_blit (int no_color)
                 color bg_color_bl = cell->bg_color_bl;
                 color bg_color_br = cell->bg_color_br;
 
-                if (no_color) {
-                    bg_color_tl = color_to_mono(bg_color_tl);
-                    bg_color_tr = color_to_mono(bg_color_tr);
-                    bg_color_bl = color_to_mono(bg_color_bl);
-                    bg_color_br = color_to_mono(bg_color_br);
-                }
-
                 tile_blit_colored_fat(0,
                                       cell->bg_tile,
                                       tile_tl,
@@ -1088,13 +1081,6 @@ static void ascii_blit (int no_color)
                 color bg2_color_tr = cell->bg2_color_tr;
                 color bg2_color_bl = cell->bg2_color_bl;
                 color bg2_color_br = cell->bg2_color_br;
-
-                if (no_color) {
-                    bg2_color_tl = color_to_mono(bg2_color_tl);
-                    bg2_color_tr = color_to_mono(bg2_color_tr);
-                    bg2_color_bl = color_to_mono(bg2_color_bl);
-                    bg2_color_br = color_to_mono(bg2_color_br);
-                }
 
                 tile_blit_outline_section_colored(
                    cell->bg2_tile,
@@ -1140,13 +1126,6 @@ static void ascii_blit (int no_color)
                 color bg2_color_bl = cell->bg2_color_bl;
                 color bg2_color_br = cell->bg2_color_br;
 
-                if (no_color) {
-                    bg2_color_tl = color_to_mono(bg2_color_tl);
-                    bg2_color_tr = color_to_mono(bg2_color_tr);
-                    bg2_color_bl = color_to_mono(bg2_color_bl);
-                    bg2_color_br = color_to_mono(bg2_color_br);
-                }
-
                 tile_blit_section_colored(
                    cell->bg2_tile,
                    fpoint(cell->bg2_tx, cell->bg2_ty),
@@ -1164,13 +1143,6 @@ static void ascii_blit (int no_color)
                 color fg2_color_tr = cell->fg2_color_tr;
                 color fg2_color_bl = cell->fg2_color_bl;
                 color fg2_color_br = cell->fg2_color_br;
-
-                if (no_color) {
-                    fg2_color_tl = color_to_mono(fg2_color_tl);
-                    fg2_color_tr = color_to_mono(fg2_color_tr);
-                    fg2_color_bl = color_to_mono(fg2_color_bl);
-                    fg2_color_br = color_to_mono(fg2_color_br);
-                }
 
                 tile_blit_section_colored(
                    cell->fg2_tile,
@@ -1219,13 +1191,6 @@ static void ascii_blit (int no_color)
                     color fg_color_bl = cell->fg_color_bl;
                     color fg_color_br = cell->fg_color_br;
 
-                    if (no_color) {
-                        fg_color_tl = color_to_mono(fg_color_tl);
-                        fg_color_tr = color_to_mono(fg_color_tr);
-                        fg_color_bl = color_to_mono(fg_color_bl);
-                        fg_color_br = color_to_mono(fg_color_br);
-                    }
-
                     tile_blit_colored_fat(0,
                                           tile,
                                           tile_tl,
@@ -1252,7 +1217,7 @@ void ascii_display (void)
     mouse_found = false;
 
     blit_init();
-    ascii_blit(false /* no color */);
+    ascii_blit();
     blit_flush();
 
 #ifdef ENABLE_ASCII_MOUSE
