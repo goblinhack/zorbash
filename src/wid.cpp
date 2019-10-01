@@ -2368,8 +2368,8 @@ widp wid_new_square_window (std::string name)
     color br;
 
     c = WHITE;
-    tl = GRAY80;
-    br = GRAY90;
+    tl = WHITE;
+    br = WHITE;
 
     c.a = 255;
     tl.a = 200;
@@ -5966,10 +5966,10 @@ static void wid_display (widp w,
             w_button_args.col_mid = c;
             w_button_args.col_br = c;
         } else {
-            w_box_args.col_border_text = WHITE;
-            w_box_args.col_tl = WHITE;
-            w_box_args.col_mid = WHITE;
-            w_box_args.col_br = WHITE;
+            w_box_args.col_border_text = GRAY;
+            w_box_args.col_tl = GRAY;
+            w_box_args.col_mid = GRAY;
+            w_box_args.col_br = GRAY;
         }
     } else {
         if (get(w->cfg, WID_MODE_NORMAL).color_set[WID_COLOR_BG]) {
@@ -5984,10 +5984,10 @@ static void wid_display (widp w,
             w_button_args.col_mid = c;
             w_button_args.col_br = c;
         } else {
-            w_box_args.col_border_text = GREY;
-            w_box_args.col_tl = GREY;
-            w_box_args.col_mid = GREY;
-            w_box_args.col_br = GREY;
+            w_box_args.col_border_text = WHITE;
+            w_box_args.col_tl = WHITE;
+            w_box_args.col_mid = WHITE;
+            w_box_args.col_br = WHITE;
         }
     }
 
