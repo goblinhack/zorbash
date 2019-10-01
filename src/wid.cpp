@@ -62,15 +62,6 @@ static wid_key_map_int wid_top_level4;
 static wid_key_map_int wid_top_level5;
 
 /*
- * Mouse movement
- */
-static widp wid_popup_tooltip;
-static widp wid_popup_tooltip2;
-
-std::wstring wid_tooltip_string;
-std::wstring wid_tooltip2_string;
-
-/*
  * Scope the focus to children of this widget and do not change it.
  * Good for popups.
  */
@@ -193,7 +184,7 @@ void wid_dump (widp w, int depth)
 
     wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-    printf("\n          %*s dump: [%s] text [%S] tip [%S] [%S] %d,%d to %d,%d ", depth * 2, "", wid_name(w).c_str(), wid_get_text(w).c_str(), w->tooltip.c_str(), w->tooltip2.c_str(), tlx, tly, brx, bry);
+    printf("\n          %*s dump: [%s] text [%S] %d,%d to %d,%d ", depth * 2, "", wid_name(w).c_str(), wid_get_text(w).c_str(), tlx, tly, brx, bry);
 
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
@@ -736,32 +727,6 @@ static void wid_m_over_e (void)
     }
 }
 
-void wid_tooltip_set (std::wstring text)
-{_
-    if (!wid_tooltip_string.empty()) {
-        if (wid_tooltip_string == text) {
-            return;
-        }
-
-        wid_destroy(&wid_popup_tooltip);
-    }
-
-    wid_tooltip_string = text;
-}
-
-void wid_tooltip2_set (std::wstring text)
-{_
-    if (!wid_tooltip2_string.empty()) {
-        if (wid_tooltip2_string == text) {
-            return;
-        }
-
-        wid_destroy(&wid_popup_tooltip2);
-    }
-
-    wid_tooltip2_string = text;
-}
-
 static uint8_t wid_m_over_b (widp w, uint32_t x, uint32_t y,
                              int32_t relx, int32_t rely,
                              int32_t wheelx, int32_t wheely)
@@ -804,29 +769,6 @@ static uint8_t wid_m_over_b (widp w, uint32_t x, uint32_t y,
 
     if (w.get()->on_m_over_b) {
         (w.get()->on_m_over_b)(w, relx, rely, wheelx, wheely);
-    }
-
-    if (!w->tooltip.empty()) {
-        if (!wid_tooltip_string.empty()) {
-            if (wid_tooltip_string == w->tooltip) {
-                return (true);
-            }
-
-            wid_destroy(&wid_popup_tooltip);
-        }
-
-        wid_tooltip_string = w->tooltip;
-    }
-
-    if (!w->tooltip2.empty()) {
-        if (!wid_tooltip2_string.empty()) {
-            if (wid_tooltip2_string == w->tooltip2) {
-                return (true);
-            }
-
-            wid_destroy(&wid_popup_tooltip2);
-        }
-        wid_tooltip2_string = w->tooltip2;
     }
 
     return (true);
@@ -1116,13 +1058,6 @@ std::string wid_get_name (widp w)
     return (w->name);
 }
 
-std::wstring wid_get_tooltip (widp w)
-{_
-    verify(w.get());
-
-    return (w->tooltip);
-}
-
 std::wstring wid_get_text_with_cursor (widp w)
 {_
     if (!w->received_input) {
@@ -1166,20 +1101,6 @@ void wid_set_text (widp w, std::wstring text)
     if (w->cursor > len) {
         w->cursor = len;
     }
-}
-
-void wid_set_tooltip (widp w, std::wstring name)
-{_
-    verify(w.get());
-
-    w->tooltip = name;
-}
-
-void wid_set_tooltip2 (widp w, std::wstring name)
-{_
-    verify(w.get());
-
-    w->tooltip2 = name;
 }
 
 uint8_t wid_get_received_input (widp w)
@@ -2233,14 +2154,6 @@ static void wid_destroy_immediate (widp w)
     wid_tree_global_unsorted_remove(w);
 
     wid_destroy_immediate_internal(w);
-
-    if (w == wid_popup_tooltip) {
-        wid_popup_tooltip = 0;
-    }
-
-    if (w == wid_popup_tooltip2) {
-        wid_popup_tooltip2 = 0;
-    }
 
     if (w == wid_focus_locked) {
         wid_focus_locked = 0;
@@ -6379,16 +6292,6 @@ void wid_display_all (void)
         ascii_putf(0, ASCII_HEIGHT-3, WHITE, GRAY, L"over  %s", to_string(wid_over).c_str());
     }
 #endif
-    {
-        static const color bg = { 0, 0, 255, 100 };
-        static const color fg = { 200, 200, 200, 200 };
-        ascii_putf(ITEMBAR_TL_X, ITEMBAR_TL_Y - 1, fg, bg, wid_tooltip_string.c_str());
-    }
-    {
-        static const color bg = { 0, 0, 200, 100 };
-        static const color fg = { 200, 200, 200, 200 };
-        ascii_putf(ITEMBAR_TL_X, ITEMBAR_TL_Y - 2, fg, bg, wid_tooltip2_string.c_str());
-    }
 
     /*
      * FPS counter.

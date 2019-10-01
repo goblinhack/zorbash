@@ -221,16 +221,12 @@ void wid_set_text_rhs(widp, uint8_t val);
 void wid_set_text_top(widp, uint8_t val);
 void wid_set_bg_tilename(widp, std::string name);
 void wid_set_fg_tilename(widp, std::string name);
-void wid_set_tooltip(widp, std::wstring string);
-void wid_set_tooltip2(widp, std::wstring string);
 void wid_set_top(widp, uint8_t val);
 void wid_setx_tl_br_pct(widp, fpoint tl, fpoint br);
 void wid_sety_tl_br_pct(widp, fpoint tl, fpoint br);
 void wid_this_visible(widp);
 void wid_tick_all(void);
 void wid_toggle_hidden(widp);
-void wid_tooltip2_set(std::wstring text);
-void wid_tooltip_set(std::wstring text);
 void wid_update(widp);
 void wid_update_mouse(void);
 void wid_visible(widp);
@@ -251,7 +247,6 @@ widp wid_new_horiz_scroll_bar(widp parent, std::string name, widp scrollbar_owne
 widp wid_new_plain(widp, std::string name);
 widp wid_new_square_button(widp parent, std::string name);
 widp wid_new_square_window(std::string name);
-widp wid_new_tooltip(std::string tooltip);
 widp wid_new_vert_scroll_bar(widp parent, std::string name, widp scrollbar_owner);
 widp wid_new_window(std::string name);
 
@@ -564,12 +559,6 @@ public:
     std::wstring text {};
 
     //
-    // Text that appears as a tooltip.
-    //
-    std::wstring tooltip {};
-    std::wstring tooltip2 {};
-
-    //
     // Action handlers
     //
     on_key_down_t on_key_down         {};
@@ -595,6 +584,4 @@ void wid_set_fg_tile(widp w, Tilep tile);
 extern widp wid_mouse_template;
 
 extern const int32_t wid_destroy_delay_ms;
-extern std::wstring wid_tooltip_string;
-extern std::wstring wid_tooltip2_string;
 #endif
