@@ -54,7 +54,7 @@ SDL_GLContext context; /* Our opengl context handle */
 
 void sdl_fini (void)
 {_
-#ifdef ENABlE_GRAPHIC_MOUSE
+#ifdef ENABLE_ASCII_MOUSE
     SDL_ShowCursor(0);
     SDL_ShowCursor(1);
 #endif
@@ -673,7 +673,7 @@ static void sdl_event (SDL_Event * event)
         break;
 
     case SDL_QUIT: {
-#ifdef ENABlE_GRAPHIC_MOUSE
+#ifdef ENABLE_ASCII_MOUSE
         SDL_ShowCursor(1);
 #endif
         DIE("Quit requested");
@@ -874,7 +874,7 @@ void sdl_exit (void)
 
     LOG("finishing: SDL main loop is exiting...");
 
-#ifdef ENABlE_GRAPHIC_MOUSE
+#ifdef ENABLE_ASCII_MOUSE
     SDL_ShowCursor(1);
 #endif
 
@@ -975,7 +975,7 @@ void sdl_loop (void)
 
     wid_display_all();
 
-#ifdef ENABlE_GRAPHIC_MOUSE
+#ifdef ENABLE_ASCII_MOUSE
     SDL_ShowCursor(0);
 #endif
 
@@ -1089,7 +1089,7 @@ void sdl_loop (void)
 
     gl_leave_2d_mode();
 
-#ifdef ENABlE_GRAPHIC_MOUSE
+#ifdef ENABLE_ASCII_MOUSE
     SDL_ShowCursor(1);
 #endif
 }

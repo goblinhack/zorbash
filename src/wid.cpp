@@ -2303,8 +2303,8 @@ widp wid_new_container (widp parent, std::string name)
 
 #ifdef WID_FULL_LOGNAME
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
-                                name.c_str(), w.get(),
-                                parent->to_string.c_str(), parent.get());
+                                  name.c_str(), w.get(),
+                                  parent->to_string.c_str(), parent.get());
 #else
     w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
 #endif
@@ -5722,9 +5722,7 @@ void wid_get_abs_coords_unclipped (widp w,
 /*
  * Get the onscreen co-ords of the widget, clipped to the parent.
  */
-void wid_get_abs (widp w,
-                  int32_t *x,
-                  int32_t *y)
+void wid_get_abs (widp w, int32_t *x, int32_t *y)
 {_
     int32_t tlx;
     int32_t tly;
@@ -5737,9 +5735,7 @@ void wid_get_abs (widp w,
     *y = (tly + bry) / 2;
 }
 
-void wid_get_pct (widp w,
-                  double *px,
-                  double *py)
+void wid_get_pct (widp w, double *px, double *py)
 {_
     int32_t x;
     int32_t y;
@@ -5964,8 +5960,8 @@ static void wid_display (widp w,
 
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG]) {
             auto c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
-            c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
             w_box_args.col_border_text = c;
+            c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
             w_button_args.col_tl = c;
             w_button_args.col_mid = c;
             w_button_args.col_br = c;
@@ -5977,8 +5973,9 @@ static void wid_display (widp w,
         }
     } else {
         if (get(w->cfg, WID_MODE_NORMAL).color_set[WID_COLOR_BG]) {
-            auto c = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
+            auto c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
             w_box_args.col_border_text = c;
+            c = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
             w_box_args.col_tl = c;
             w_box_args.col_mid = c;
             w_box_args.col_br = c;
@@ -6022,9 +6019,12 @@ static void wid_display (widp w,
     }
 
     {
-        for (auto x = tl.x; x < br.x; x++) {
-            for (auto y = tl.y; y < br.y; y++) {
-                if (!ascii_ok(x, y)) {
+        for (auto x = tl.x; x <= br.x; x++) {
+            if (unlikely(!ascii_x_ok(x))) {
+                continue;
+            }
+            for (auto y = tl.y; y <= br.y; y++) {
+                if (unlikely(!ascii_y_ok(y))) {
                     continue;
                 }
                 set(wid_on_screen_at, x, y, w);

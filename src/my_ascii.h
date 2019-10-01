@@ -190,6 +190,32 @@ static inline int ascii_ok (int x, int y)
     return (true);
 }
 
+static inline int ascii_x_ok (int x)
+{
+    if (unlikely(x < 0)) {
+        return (false);
+    }
+
+    if (unlikely(x >= ASCII_WIDTH)) {
+        return (false);
+    }
+
+    return (true);
+}
+
+static inline int ascii_y_ok (int y)
+{
+    if (unlikely(y < 0)) {
+        return (false);
+    }
+
+    if (unlikely(y >= ASCII_HEIGHT)) {
+        return (false);
+    }
+
+    return (true);
+}
+
 extern float tile_pix_w;
 extern float tile_pix_h;
 

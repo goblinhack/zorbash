@@ -252,9 +252,11 @@ void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const w
     y2 = y + h;
 
     for (x = x1; x <= x2; x++) {
+        if (unlikely(!ascii_x_ok(x))) {
+            continue;
+        }
         for (y = y1; y <= y2; y++) {
-
-            if (!ascii_ok(x, b.y)) {
+            if (unlikely(!ascii_y_ok(y))) {
                 continue;
             }
 
