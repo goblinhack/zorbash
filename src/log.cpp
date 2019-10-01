@@ -338,74 +338,6 @@ void minicon (const wchar_t *fmt)
     putchar('\n');
 }
 
-static void tip_ (const wchar_t *fmt, va_list args)
-{
-    wchar_t buf[MAXSHORTSTR];
-
-    buf[0] = '\0';
-    auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
-
-    /*
-     * Only a single nul is written, but as we read 2 at a time...
-     */
-    if (wrote && (wrote < MAXSHORTSTR - 1)) {
-        buf[wrote+1] = '\0';
-    } else {
-        fprintf(stderr, "Failed to console log: [%S]\n", fmt);
-    }
-
-    wid_tooltip_set(buf);
-}
-
-void tip (const wchar_t *fmt)
-{
-    wid_tooltip_set(fmt);
-}
-
-static void tip2_ (const wchar_t *fmt, va_list args)
-{
-    wchar_t buf[MAXSHORTSTR];
-
-    buf[0] = '\0';
-    auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
-
-    /*
-     * Only a single nul is written, but as we read 2 at a time...
-     */
-    if (wrote && (wrote < MAXSHORTSTR - 1)) {
-        buf[wrote+1] = '\0';
-    } else {
-        fprintf(stderr, "Failed to log: [%S]\n", fmt);
-    }
-
-    wid_tooltip2_set(buf);
-}
-
-void tip2 (const wchar_t *fmt)
-{
-    wid_tooltip2_set(fmt);
-}
-
-static void tip_ (const char *fmt, va_list args)
-{
-    char buf[MAXSHORTSTR];
-
-    buf[0] = '\0';
-    vsnprintf(buf, MAXSHORTSTR, fmt, args);
-
-    wid_tooltip_set(string_to_wstring(buf));
-}
-
-static void tip2_ (const char *fmt, va_list args)
-{
-    char buf[MAXSHORTSTR];
-
-    buf[0] = '\0';
-    vsnprintf(buf, MAXSHORTSTR, fmt, args);
-
-    wid_tooltip2_set(string_to_wstring(buf));
-}
-
 void CON (const char *fmt, ...)
 {
     va_list args;
@@ -536,42 +468,6 @@ static void croak_ (const char *fmt, va_list args)
     croaked = true;
 
     die();
-}
-
-void TIP (const wchar_t *fmt, ...)
-{
-    va_list args;
-
-    va_start(args, fmt);
-    tip_(fmt, args);
-    va_end(args);
-}
-
-void TIP2 (const wchar_t *fmt, ...)
-{
-    va_list args;
-
-    va_start(args, fmt);
-    tip2_(fmt, args);
-    va_end(args);
-}
-
-void TIP (const char *fmt, ...)
-{
-    va_list args;
-
-    va_start(args, fmt);
-    tip_(fmt, args);
-    va_end(args);
-}
-
-void TIP2 (const char *fmt, ...)
-{
-    va_list args;
-
-    va_start(args, fmt);
-    tip2_(fmt, args);
-    va_end(args);
 }
 
 void DYING (const char *fmt, ...)

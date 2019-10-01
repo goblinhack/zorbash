@@ -1470,36 +1470,6 @@ static PyObject *minicon_ (PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
 }
 
-static PyObject *tip_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    wchar_t *a = 0;
-
-    if (!PyArg_ParseTuple(args, "u", &a)) {
-        return (0);
-    }
-
-    if (a) {
-        tip(a);
-    }
-
-    Py_RETURN_NONE;
-}
-
-static PyObject *tip2_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{_
-    wchar_t *a = 0;
-
-    if (!PyArg_ParseTuple(args, "u", &a)) {
-        return (0);
-    }
-
-    if (a) {
-        tip2(a);
-    }
-
-    Py_RETURN_NONE;
-}
-
 static PyObject *puts_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
     char *a = 0;
@@ -1574,16 +1544,6 @@ static PyMethodDef python_c_METHODS[] = {
         (PyCFunction)minicon_,
         METH_VARARGS,
         "log to the mini console"},
-
-    {"tip",
-        (PyCFunction)tip_,
-        METH_VARARGS,
-        "tooltip"},
-
-    {"tip2",
-        (PyCFunction)tip2_,
-        METH_VARARGS,
-        "tooltip2"},
 
     {"puts",
         (PyCFunction)puts_,

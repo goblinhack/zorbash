@@ -244,7 +244,7 @@ extern uint8_t croaked;
 #ifdef ENABLE_ASSERT
 #define ASSERT(x)                                                             \
     if (!(x)) {                                                               \
-        DIE("Failed assert:" #x);                                                 \
+        DIE("Failed assert:" #x);                                             \
     }
 #else
 #define ASSERT(x)
@@ -257,18 +257,12 @@ void LOGS(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void WARN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void TIP(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void TIP2(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 
 void CON(const wchar_t *fmt, ...);
 void MINICON(const wchar_t *fmt, ...);
-void TIP(const wchar_t *fmt, ...);
-void TIP2(const wchar_t *fmt, ...);
 
 void con(const wchar_t *fmt);
 void minicon(const wchar_t *fmt);
-void tip2(const wchar_t *fmt);
-void tip(const wchar_t *fmt);
 
 //
 // Code tracing
