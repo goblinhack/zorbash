@@ -210,10 +210,40 @@ static void wid_test_wid_create (void)
         wid_set_style(wid_sidebar, 0);
     }
 
+    int y_at = 0;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "zorbash-0");
+        point tl = {0, y_at};
+        point br = {TITLEBAR_WIDTH - 1, y_at+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_bg_tilename(w, "zorbash-0");
+    }
+    y_at += 2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "zorbash-1");
+        point tl = {0, y_at};
+        point br = {TITLEBAR_WIDTH - 1, y_at+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_bg_tilename(w, "zorbash-1");
+    }
+    y_at += 2;
+    {
+        auto w = wid_new_square_button(wid_sidebar, "zorbash-2");
+        point tl = {0, y_at};
+        point br = {TITLEBAR_WIDTH - 1, y_at+1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_bg_tilename(w, "zorbash-2");
+    }
+    y_at += 2;
+
+#if 0
     {
         auto w = wid_new_square_button(wid_sidebar, "title box");
-        point tl = {0, 0};
-        point br = {5, 5};
+        point tl = {0, y_at};
+        point br = {5, y_at + 5};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, 4);
@@ -223,8 +253,8 @@ static void wid_test_wid_create (void)
 
     {
         auto w = wid_new_square_button(wid_sidebar, "title name");
-        point tl = {0, 6};
-        point br = {TITLEBAR_WIDTH, 6};
+        point tl = {0, y_at};
+        point br = {TITLEBAR_WIDTH, y_at};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, 4);
@@ -234,8 +264,8 @@ static void wid_test_wid_create (void)
 
     {
         auto w = wid_new_square_button(wid_sidebar, "gold");
-        point tl = {7, 5};
-        point br = {TITLEBAR_WIDTH, 5};
+        point tl = {7, y_at+5};
+        point br = {TITLEBAR_WIDTH, y_at+5};
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=dollar-icon$%fg=gold$666");
@@ -245,8 +275,8 @@ static void wid_test_wid_create (void)
 
     {
         auto w = wid_new_square_button(wid_sidebar, "weight");
-        point tl = {7, 4};
-        point br = {TITLEBAR_WIDTH, 4};
+        point tl = {7, y_at+4};
+        point br = {TITLEBAR_WIDTH, y_at+4};
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=CWEIGHT$%fg=green$150%fg=grey$lbs");
@@ -254,7 +284,7 @@ static void wid_test_wid_create (void)
         wid_set_shape_none(w);
     }
 
-    int y_at = 8;
+    y_at = 8;
     {
         auto w = wid_new_square_button(wid_sidebar, "health-icon");
         point tl = {0, y_at};
@@ -571,6 +601,7 @@ static void wid_test_wid_create (void)
             }
         }
     }
+#endif
 
     wid_update(wid_sidebar);
 }
