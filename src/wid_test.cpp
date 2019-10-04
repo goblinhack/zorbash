@@ -237,9 +237,8 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "zorbash-2");
     }
-    y_at += 2;
+    y_at += 3;
 
-#if 0
     {
         auto w = wid_new_square_button(wid_sidebar, "title box");
         point tl = {0, y_at};
@@ -251,10 +250,11 @@ static void wid_test_wid_create (void)
         wid_set_bg_tilename(w, "player1.1");
     }
 
+    y_at += 3;
     {
         auto w = wid_new_square_button(wid_sidebar, "title name");
-        point tl = {0, y_at};
-        point br = {TITLEBAR_WIDTH, y_at};
+        point tl = {0, y_at + 4};
+        point br = {TITLEBAR_WIDTH, y_at + 4};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, 4);
@@ -264,8 +264,8 @@ static void wid_test_wid_create (void)
 
     {
         auto w = wid_new_square_button(wid_sidebar, "gold");
-        point tl = {7, y_at+5};
-        point br = {TITLEBAR_WIDTH, y_at+5};
+        point tl = {7, y_at-3};
+        point br = {TITLEBAR_WIDTH, y_at-3};
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=dollar-icon$%fg=gold$666");
@@ -275,8 +275,8 @@ static void wid_test_wid_create (void)
 
     {
         auto w = wid_new_square_button(wid_sidebar, "weight");
-        point tl = {7, y_at+4};
-        point br = {TITLEBAR_WIDTH, y_at+4};
+        point tl = {7, y_at-2};
+        point br = {TITLEBAR_WIDTH, y_at-2};
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=CWEIGHT$%fg=green$150%fg=grey$lbs");
@@ -284,7 +284,7 @@ static void wid_test_wid_create (void)
         wid_set_shape_none(w);
     }
 
-    y_at = 8;
+    y_at += 6;
     {
         auto w = wid_new_square_button(wid_sidebar, "health-icon");
         point tl = {0, y_at};
@@ -485,7 +485,6 @@ static void wid_test_wid_create (void)
     }
 
     y_at += 3;
-    y_at += 3;
     {
         auto w = wid_new_square_button(wid_sidebar, "corruptions-0");
         point tl = {3, y_at};
@@ -521,6 +520,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "buffs-1");
     }
+#if 0
     y_at +=2;
     {
         auto w = wid_new_square_button(wid_sidebar, "inventory-0");
