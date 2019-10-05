@@ -5914,7 +5914,7 @@ static void wid_display (widp w,
                 *updated_scissors = true;
             }
 
-            // printf("set scissors %s %d %d %d %d\n", w->to_string.c_str(), 
+            // printf("set scissors %s %d %d %d %d\n", w->to_string.c_str(),
             //tlx, tly, brx, bry);
             wid_set_scissors(
                 tlx,
