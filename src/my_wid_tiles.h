@@ -6,17 +6,17 @@
 #pragma once
 
 #include <memory>
-typedef std::shared_ptr< class wid_tiles > wid_tilesp;
+typedef std::shared_ptr< class WidTiles > wid_tilesp;
 
 #include "my_tile.h"
 
-class wid_tiles {
+class WidTiles {
 public:
-    wid_tiles (void)
+    WidTiles (void)
     {
     }
 
-    ~wid_tiles (void)
+    ~WidTiles (void)
     {
     }
 

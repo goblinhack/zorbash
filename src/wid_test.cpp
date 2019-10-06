@@ -13,11 +13,13 @@
 #include "my_ttf.h"
 #include "my_string.h"
 #include "my_wid.h"
+#include "my_wid_popup.h"
 #include "my_ascii.h"
 
 static void wid_test_wid_create(void);
 
 widp wid_itembar;
+widp wid_item_popup;
 widp wid_sidebar;
 
 void wid_test_fini (void)
@@ -531,4 +533,39 @@ static void wid_test_wid_create (void)
     }
 
     wid_update(wid_sidebar);
+
+#if 0
+    {
+        point tl = {0, MINICON_VIS_HEIGHT + 2};
+        point br = {ITEMBAR_TL_X - 2, ITEMBAR_TL_Y - 2};
+
+        wid_item_popup = wid_new_square_window("text popup window");
+        wid_set_pos(wid_item_popup, tl, br);
+        wid_set_text(wid_item_popup, L"1");
+        wid_update(wid_item_popup);
+    }
+
+    {
+        fpoint tl = {0, 0};
+        fpoint br = {1, 1};
+
+        auto w = wid_new_square_button(wid_item_popup, "text popup");
+        wid_set_pos_pct(w, tl, br);
+        wid_set_style(w, 2);
+        wid_update(w);
+        wid_set_text(w, L"1");
+    }
+#endif
+
+    {
+        point tl = {0, MINICON_VIS_HEIGHT + 2};
+        point br = {ITEMBAR_TL_X - 2, ITEMBAR_TL_Y - 2};
+        auto w = new WidPopup(tl, br);
+        w->log("ello1");
+        w->log("ello2");
+        w->log("ello3");
+        w->log("ello4");
+        w->log("ello5");
+        w->log("ello6");
+    }
 }

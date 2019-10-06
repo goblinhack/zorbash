@@ -45,7 +45,7 @@ static void term_puts_fgbg (unsigned char fg, unsigned char bg)
     };
 
     if (bg == 0) {
- /*
+        /*
          * Allow the default color to be 0, that of the terminal.
          */
         term_puts_fg(fg);

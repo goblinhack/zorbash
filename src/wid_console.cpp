@@ -26,20 +26,7 @@ widp wid_console_horiz_scroll;
 widp wid_console_input_line;
 widp wid_console_window;
 
-class wid_console_line {
-public:
-    wid_console_line (std::wstring buf) : buf(buf)
-    {
-    }
-
-    ~wid_console_line (void)
-    {
-    }
-
-    std::wstring buf;
-};
-
-static std::map< unsigned int, std::shared_ptr< class wid_console_line > > wid_console_lines;
+static std::map< unsigned int, std::wstring > wid_console_lines;
 
 void wid_console_fini (void)
 {_
@@ -101,10 +88,8 @@ static void wid_console_log_ (std::wstring s)
      * Before the console is ready, we buffer the logs.
      */
     if (!wid_console_input_line) {
-        auto m = std::make_shared< class wid_console_line >(s);
-
         auto result = wid_console_lines.insert(
-                        std::make_pair(log_wid_console_buffered_lines++, m));
+                        std::make_pair(log_wid_console_buffered_lines++, s));
 
         if (result.second == false) {
             DIE("wid console lines insert name [%s] failed", wstring_to_string(s).c_str());
@@ -119,8 +104,7 @@ static void wid_console_log_ (std::wstring s)
     auto iter = wid_console_lines.begin();
 
     while (iter != wid_console_lines.end()) {
-        auto node = iter->second;
-        wid_scroll_with_input(wid_console_input_line, node->buf);
+        wid_scroll_with_input(wid_console_input_line, iter->second);
         iter = wid_console_lines.erase(iter);
     }
 
