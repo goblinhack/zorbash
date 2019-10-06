@@ -25,20 +25,7 @@ widp wid_minicon_horiz_scroll;
 widp wid_minicon_input_line;
 widp wid_minicon_window;
 
-class wid_minicon_line {
-public:
-    wid_minicon_line (std::wstring buf) : buf(buf)
-    {
-    }
-
-    ~wid_minicon_line (void)
-    {
-    }
-
-    std::wstring buf;
-};
-
-static std::map< unsigned int, std::shared_ptr< class wid_minicon_line > > wid_minicon_lines;
+static std::map< unsigned int, std::wstring > wid_minicon_lines;
 
 void wid_minicon_fini (void)
 {_
@@ -111,13 +98,12 @@ static void wid_minicon_log_ (std::wstring s)
      * Before the minicon is ready, we buffer the logs.
      */
     if (!wid_minicon_input_line) {
-        auto m = std::make_shared< class wid_minicon_line >(s);
-
         auto result = wid_minicon_lines.insert(
-                        std::make_pair(log_wid_minicon_buffered_lines++, m));
+                        std::make_pair(log_wid_minicon_buffered_lines++, s));
 
         if (result.second == false) {
-            DIE("wid minicon lines insert name [%s] failed", wstring_to_string(s).c_str());
+            DIE("wid minicon lines insert name [%s] failed", 
+                wstring_to_string(s).c_str());
         }
 
         return;
@@ -136,8 +122,7 @@ void wid_minicon_flush (void)
     auto iter = wid_minicon_lines.begin();
 
     while (iter != wid_minicon_lines.end()) {
-        auto node = iter->second;
-        wid_minicon_scroll(wid_minicon_input_line, node->buf);
+        wid_minicon_scroll(wid_minicon_input_line, iter->second);
         iter = wid_minicon_lines.erase(iter);
     }
 

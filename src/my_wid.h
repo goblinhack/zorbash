@@ -10,7 +10,7 @@
 
 #include <memory>
 
-typedef std::shared_ptr< class wid > widp;
+typedef std::shared_ptr< class Wid > widp;
 
 #include <SDL.h>
 #include "my_sdl.h"
@@ -321,17 +321,17 @@ struct tree_wid_key_cmp : public std::binary_function<class tree_wid_key, class 
     }
 };
 
-class wid_key_type {
+class WidKeyType {
 public:
-    wid_key_type (void)
+    WidKeyType (void)
     {
     }
 
-    wid_key_type (uint64_t val) : val(val)
+    WidKeyType (uint64_t val) : val(val)
     {
     }
 
-    bool operator <(const wid_key_type& rhs) const
+    bool operator <(const WidKeyType& rhs) const
     {
         return (val < rhs.val);
     }
@@ -340,10 +340,10 @@ public:
 };
 
 typedef std::map< tree_wid_key, widp, tree_wid_key_cmp > wid_key_map_location;
-typedef std::map< wid_key_type, widp > wid_key_map_int;
+typedef std::map< WidKeyType, widp > wid_key_map_int;
 
-widp wid_unsorted_find(wid_key_type key);
-wid_key_type wid_unsorted_get_key(widp w);
+widp wid_unsorted_find(WidKeyType key);
+WidKeyType wid_unsorted_get_key(widp w);
 
 typedef struct wid_move_ {
     int moving_endx;
@@ -351,29 +351,28 @@ typedef struct wid_move_ {
     uint32_t timestamp_moving_end;
 } wid_move_t;
 
-class wid {
-
+class Wid {
 public:
-    wid (void)
+    Wid (void)
     {
         newptr(this, "wid");
     }
 
-    ~wid (void)
+    ~Wid (void)
     {
         oldptr(this);
     }
 
-    wid_key_type tree_global_key {};
+    WidKeyType tree_global_key {};
 
     //
     // Sorted for display order.
     //
     tree_wid_key key                                    {};
-    wid_key_type tree2_key                              {};
-    wid_key_type tree3_key                              {};
-    wid_key_type tree4_key                              {};
-    wid_key_type tree5_key                              {};
+    WidKeyType tree2_key                              {};
+    WidKeyType tree3_key                              {};
+    WidKeyType tree4_key                              {};
+    WidKeyType tree5_key                              {};
 
     wid_key_map_location *in_tree_root                  {};
     wid_key_map_int *in_tree2_unsorted_root             {};

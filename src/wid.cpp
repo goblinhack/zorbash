@@ -1761,7 +1761,7 @@ static void wid_tree_global_unsorted_insert (widp w)
 {_
     verify(w.get());
 
-    static wid_key_type key;
+    static WidKeyType key;
 
     if (w->in_tree_global_unsorted_root) {
         DIE("wid is already in the global tree");
@@ -1942,7 +1942,7 @@ static void wid_tree_global_unsorted_remove (widp w)
     w->in_tree_global_unsorted_root = nullptr;
 }
 
-widp wid_unsorted_find (wid_key_type key)
+widp wid_unsorted_find (WidKeyType key)
 {_
     auto root = &wid_global;
 
@@ -1963,7 +1963,7 @@ widp wid_unsorted_find (wid_key_type key)
     return (w);
 }
 
-wid_key_type wid_unsorted_get_key (widp w)
+WidKeyType wid_unsorted_get_key (widp w)
 {_
     verify(w.get());
 
@@ -2041,7 +2041,7 @@ static void wid_tree5_ticking_wids_remove (widp w)
  */
 static widp wid_new (widp parent)
 {_
-    auto w = std::make_shared< class wid >();
+    auto w = std::make_shared< class Wid >();
 
     w->parent = parent;
     w->timestamp_created = wid_time;

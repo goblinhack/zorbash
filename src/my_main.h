@@ -102,10 +102,6 @@ extern int TILES_DOWN;
 #define CONSOLE_WIDTH               120
 #define CONSOLE_HEIGHT              200
 
-//
-// Minicon
-//
-#define MINICON_TEXT_COLOR          GRAY
 #define SIDEBAR_WIDTH               15
 #define TITLEBAR_WIDTH              SIDEBAR_WIDTH
 #define TITLEBAR_HEIGHT             SIDEBAR_WIDTH
@@ -120,10 +116,20 @@ extern int TILES_DOWN;
 #define INVENTORY_ITEM_HEIGHT       2
 #define INVENTORY_DOWN              5
 #define INVENTORY_ACROSS            6
+
+//
+// Minicon
+//
+#define MINICON_TEXT_COLOR          GRAY
 #define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
 #define MINICON_HEIGHT              200 // scrollbar limit
 #define MINICON_VIS_HEIGHT          5
 #define MINICON_VIS_WIDTH           MINICON_WIDTH
+
+//
+// Popups
+//
+#define POPUP_TEXT_COLOR            GRAY
 
 //
 // Fonts

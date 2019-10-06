@@ -10,7 +10,7 @@
 #include "my_tex.h"
 
 static int wid_tiles_init_done;
-static std::map<std::string, std::shared_ptr< class wid_tiles > > wid_tiles_all;
+static std::map<std::string, std::shared_ptr< class WidTiles > > wid_tiles_all;
 
 uint8_t wid_tiles_init (void)
 {_
@@ -50,7 +50,7 @@ wid_tilesp wid_tiles_load (std::string name, double scale)
         return (0);
     }
 
-    t = std::make_shared< class wid_tiles >();
+    t = std::make_shared< class WidTiles >();
 
     auto result = wid_tiles_all.insert(std::make_pair(name, t));
 
