@@ -16,8 +16,8 @@ void wid_minicon_flush(void);
 //
 // Global widgets.
 //
-extern widp wid_minicon_input_line;
-extern widp wid_minicon_window;
-extern widp wid_minicon_container;
+extern Widp wid_minicon_input_line;
+extern Widp wid_minicon_window;
+extern Widp wid_minicon_container;
 
 #include "my_sdl.h"

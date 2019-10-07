@@ -18,12 +18,12 @@ static int32_t wid_minicon_inited;
 static int32_t wid_minicon_exiting;
 static void wid_minicon_wid_create(void);
 
-widp wid_minicon_container;
-widp wid_minicon_vert_scroll;
-widp wid_minicon_horiz_scroll;
+Widp wid_minicon_container;
+Widp wid_minicon_vert_scroll;
+Widp wid_minicon_horiz_scroll;
 
-widp wid_minicon_input_line;
-widp wid_minicon_window;
+Widp wid_minicon_input_line;
+Widp wid_minicon_window;
 
 static std::map< unsigned int, std::wstring > wid_minicon_lines;
 
@@ -66,9 +66,9 @@ static void wid_minicon_reset_scroll (void)
     wid_move_to_bottom(wid_minicon_vert_scroll);
 }
 
-void wid_minicon_scroll (widp w, std::wstring str)
+void wid_minicon_scroll (Widp w, std::wstring str)
 {_
-    widp tmp;
+    Widp tmp;
 
     wid_scroll_text(w);
 
@@ -192,8 +192,8 @@ static void wid_minicon_wid_create (void)
         int32_t row;
         int row_bottom = h - 1;
 
-        widp child = 0;
-        widp prev = 0;
+        Widp child = 0;
+        Widp prev = 0;
 
         for (row = 0; row < MINICON_HEIGHT; row++) {
             row_bottom --;

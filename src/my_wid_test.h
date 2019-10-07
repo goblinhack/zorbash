@@ -13,4 +13,4 @@ uint8_t wid_test_init(void);
 //
 // Global widgets.
 //
-extern widp wid_test_window;
+extern Widp wid_test_window;

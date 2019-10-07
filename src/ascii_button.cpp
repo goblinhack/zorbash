@@ -35,7 +35,7 @@ static void ascii_put_button_ (int x,
 
     auto b = std::wstring(buf);
     int len = ascii_strlen(b);
-    auto c = L'▋';
+    auto c = '.';
 
     ascii_put_shaded_line(x, x + width, y, c, col_tl, col_mid, col_br, context);
 

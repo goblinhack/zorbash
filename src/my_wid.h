@@ -10,7 +10,7 @@
 
 #include <memory>
 
-typedef std::shared_ptr< class Wid > widp;
+typedef std::shared_ptr< class Wid > Widp;
 
 #include <SDL.h>
 #include "my_sdl.h"
@@ -20,10 +20,10 @@ typedef std::shared_ptr< class Wid > widp;
 #include "my_game.h"
 
 #ifdef ENABLE_WID_DEBUG
-void WID_LOG(widp, const char *fmt, ...) \
+void WID_LOG(Widp, const char *fmt, ...) \
                      __attribute__ ((format (printf, 2, 3)));
 
-void WID_DBG(widp, const char *fmt, ...) \
+void WID_DBG(Widp, const char *fmt, ...) \
                      __attribute__ ((format (printf, 2, 3)));
 #else
 #define WID_DBG(...)
@@ -46,209 +46,209 @@ typedef enum {
 
 #define WID_MODE_FIRST WID_MODE_NORMAL
 
-color wid_get_color(widp, wid_color which);
-color wid_get_mode_color(widp, wid_color which);
+color wid_get_color(Widp, wid_color which);
+color wid_get_mode_color(Widp, wid_color which);
 extern int wid_mouse_visible;
-fsize wid_get_tex_br(widp);
-fsize wid_get_tex_tl(widp);
-int32_t wid_get_br_x(widp);
-int32_t wid_get_br_y(widp);
-int32_t wid_get_cx(widp);
-int32_t wid_get_cy(widp);
-int32_t wid_get_height(widp);
-int32_t wid_get_tl_x(widp);
-int32_t wid_get_tl_y(widp);
-int32_t wid_get_width(widp);
-std::string to_string(widp);
-std::string wid_get_name(widp);
-std::string wid_name(widp);
-std::wstring wid_get_text(widp);
-std::wstring wid_get_text_with_cursor(widp);
-std::wstring wid_get_tooltip(widp);
-typedef uint8_t(*on_joy_button_t)(widp, int32_t x, int32_t y);
-typedef uint8_t(*on_key_down_t)(widp, const struct SDL_KEYSYM *);
-typedef uint8_t(*on_key_up_t)(widp, const struct SDL_KEYSYM *);
-typedef uint8_t(*on_m_down_t)(widp, int32_t x, int32_t y, uint32_t button);
-typedef uint8_t(*on_m_motion_t)(widp, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-typedef uint8_t(*on_m_up_t)(widp, int32_t x, int32_t y, uint32_t button);
-typedef void(*on_destroy_b_t)(widp);
-typedef void(*on_destroy_t)(widp);
-typedef void(*on_m_focus_b_t)(widp);
-typedef void(*on_m_focus_e_t)(widp);
-typedef void(*on_m_over_b_t)(widp, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-typedef void(*on_m_over_e_t)(widp);
-typedef void(*on_tick_t)(widp);
-uint32_t wid_get_cursor(widp);
-uint32_t wid_get_gllist(widp);
-uint32_t wid_get_mode_gllist(widp);
-uint8_t wid_get_do_not_lower(widp);
-uint8_t wid_get_do_not_raise(widp);
-uint8_t wid_get_focusable(widp);
-uint8_t wid_get_mode_top(widp);
-uint8_t wid_get_movable(widp);
-uint8_t wid_get_movable_bounded(widp);
-uint8_t wid_get_movable_horiz(widp);
-uint8_t wid_get_movable_no_user_scroll(widp);
-uint8_t wid_get_movable_vert(widp);
-uint8_t wid_get_received_input(widp);
-uint8_t wid_get_show_cursor(widp);
-uint8_t wid_get_text_bot(widp);
-uint8_t wid_get_text_centerx(widp);
-uint8_t wid_get_text_centery(widp);
-uint8_t wid_get_text_lhs(widp);
-uint8_t wid_get_text_pos(widp, int32_t *x, int32_t *y);
-uint8_t wid_get_text_rhs(widp);
-uint8_t wid_get_text_top(widp);
-uint8_t wid_ignore_being_destroyed(widp);
-uint8_t wid_ignore_events(widp);
-uint8_t wid_ignore_for_focus(widp);
+fsize wid_get_tex_br(Widp);
+fsize wid_get_tex_tl(Widp);
+int32_t wid_get_br_x(Widp);
+int32_t wid_get_br_y(Widp);
+int32_t wid_get_cx(Widp);
+int32_t wid_get_cy(Widp);
+int32_t wid_get_height(Widp);
+int32_t wid_get_tl_x(Widp);
+int32_t wid_get_tl_y(Widp);
+int32_t wid_get_width(Widp);
+std::string to_string(Widp);
+std::string wid_get_name(Widp);
+std::string wid_name(Widp);
+std::wstring wid_get_text(Widp);
+std::wstring wid_get_text_with_cursor(Widp);
+std::wstring wid_get_tooltip(Widp);
+typedef uint8_t(*on_joy_button_t)(Widp, int32_t x, int32_t y);
+typedef uint8_t(*on_key_down_t)(Widp, const struct SDL_KEYSYM *);
+typedef uint8_t(*on_key_up_t)(Widp, const struct SDL_KEYSYM *);
+typedef uint8_t(*on_m_down_t)(Widp, int32_t x, int32_t y, uint32_t button);
+typedef uint8_t(*on_m_motion_t)(Widp, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+typedef uint8_t(*on_m_up_t)(Widp, int32_t x, int32_t y, uint32_t button);
+typedef void(*on_destroy_b_t)(Widp);
+typedef void(*on_destroy_t)(Widp);
+typedef void(*on_m_focus_b_t)(Widp);
+typedef void(*on_m_focus_e_t)(Widp);
+typedef void(*on_m_over_b_t)(Widp, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+typedef void(*on_m_over_e_t)(Widp);
+typedef void(*on_tick_t)(Widp);
+uint32_t wid_get_cursor(Widp);
+uint32_t wid_get_gllist(Widp);
+uint32_t wid_get_mode_gllist(Widp);
+uint8_t wid_get_do_not_lower(Widp);
+uint8_t wid_get_do_not_raise(Widp);
+uint8_t wid_get_focusable(Widp);
+uint8_t wid_get_mode_top(Widp);
+uint8_t wid_get_movable(Widp);
+uint8_t wid_get_movable_bounded(Widp);
+uint8_t wid_get_movable_horiz(Widp);
+uint8_t wid_get_movable_no_user_scroll(Widp);
+uint8_t wid_get_movable_vert(Widp);
+uint8_t wid_get_received_input(Widp);
+uint8_t wid_get_show_cursor(Widp);
+uint8_t wid_get_text_bot(Widp);
+uint8_t wid_get_text_centerx(Widp);
+uint8_t wid_get_text_centery(Widp);
+uint8_t wid_get_text_lhs(Widp);
+uint8_t wid_get_text_pos(Widp, int32_t *x, int32_t *y);
+uint8_t wid_get_text_rhs(Widp);
+uint8_t wid_get_text_top(Widp);
+uint8_t wid_ignore_being_destroyed(Widp);
+uint8_t wid_ignore_events(Widp);
+uint8_t wid_ignore_for_focus(Widp);
 uint8_t wid_init(void);
-uint8_t wid_is_always_hidden(widp w);
-uint8_t wid_is_hidden(widp w);
-uint8_t wid_receive_input(widp, const SDL_KEYSYM *key);
-uint8_t wid_this_hidden(widp w);
-void *wid_get_context(widp);
-void wid_always_hidden(widp, uint8_t value);
-void wid_destroy(widp *);
-void wid_destroy_in(widp w, uint32_t ms);
-void wid_destroy_nodelay(widp *);
-void wid_destroy_ptr_in(widp *w, uint32_t ms);
+uint8_t wid_is_always_hidden(Widp w);
+uint8_t wid_is_hidden(Widp w);
+uint8_t wid_receive_input(Widp, const SDL_KEYSYM *key);
+uint8_t wid_this_hidden(Widp w);
+void *wid_get_context(Widp);
+void wid_always_hidden(Widp, uint8_t value);
+void wid_destroy(Widp *);
+void wid_destroy_in(Widp w, uint32_t ms);
+void wid_destroy_nodelay(Widp *);
+void wid_destroy_ptr_in(Widp *w, uint32_t ms);
 void wid_display_all(void);
-void wid_dump(widp w, int depth);
+void wid_dump(Widp w, int depth);
 void wid_fake_joy_button(int32_t x, int32_t y);
 void wid_fini(void);
-void wid_focus_lock(widp);
+void wid_focus_lock(Widp);
 void wid_gc_all(void);
 void wid_gc_all_force(void);
-void wid_get_abs(widp w, int32_t *x, int32_t *y);
-void wid_get_abs_coords(widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_t *bry);
-void wid_get_abs_coords_unclipped(widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_t *bry);
-void wid_get_children_size(widp, int32_t *width, int32_t *height);
-void wid_get_move_interpolated_progress(widp w, double *dx, double *dy);
-void wid_get_mxy(widp w, int32_t *x, int32_t *y);
-void wid_get_offset(widp, point *offset);
-void wid_get_pct(widp w, double *x, double *y);
-void wid_get_tl_br(widp, point *tl, point *br);
-void wid_get_tl_x_tl_y_br_x_br_y(widp w, int32_t *tl_x, int32_t *tl_y, int32_t *br_x, int32_t *br_y);
-void wid_hide(widp);
+void wid_get_abs(Widp w, int32_t *x, int32_t *y);
+void wid_get_abs_coords(Widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_t *bry);
+void wid_get_abs_coords_unclipped(Widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_t *bry);
+void wid_get_children_size(Widp, int32_t *width, int32_t *height);
+void wid_get_move_interpolated_progress(Widp w, double *dx, double *dy);
+void wid_get_mxy(Widp w, int32_t *x, int32_t *y);
+void wid_get_offset(Widp, point *offset);
+void wid_get_pct(Widp w, double *x, double *y);
+void wid_get_tl_br(Widp, point *tl, point *br);
+void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int32_t *tl_x, int32_t *tl_y, int32_t *br_x, int32_t *br_y);
+void wid_hide(Widp);
 void wid_joy_button(int32_t x, int32_t y);
 void wid_key_down(const struct SDL_KEYSYM *, int32_t x, int32_t y);
 void wid_key_up(const struct SDL_KEYSYM *, int32_t x, int32_t y);
-void wid_lower(widp);
+void wid_lower(Widp);
 void wid_mouse_down(uint32_t button, int32_t x, int32_t y);
 void wid_mouse_hide(int);
 void wid_mouse_motion(int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-void wid_mouse_move(widp w);
+void wid_mouse_move(Widp w);
 void wid_mouse_up(uint32_t button, int32_t x, int32_t y);
-void wid_mouse_warp(widp w);
+void wid_mouse_warp(Widp w);
 void wid_move_all(void);
-void wid_move_delta(widp, int32_t dx, int32_t dy);
-void wid_move_delta_in(widp w, int32_t dx, int32_t dy, uint32_t ms);
-void wid_move_delta_pct(widp, double dx, double dy);
-void wid_move_delta_pct_in(widp, double dx, double dy, uint32_t delay);
-void wid_move_end(widp);
-void wid_move_to_abs(widp, int32_t dx, int32_t dy);
-void wid_move_to_abs_centered(widp, int32_t dx, int32_t dy);
-void wid_move_to_abs_centered_in(widp, int32_t dx, int32_t dy, uint32_t delay);
-void wid_move_to_abs_in(widp, int32_t dx, int32_t dy, uint32_t delay);
-void wid_move_to_abs_poffset_in(widp w, int32_t x, int32_t y, uint32_t delay);
-void wid_move_to_bottom(widp);
-void wid_move_to_centered_in(widp, int32_t dx, int32_t dy, uint32_t delay);
-void wid_move_to_horiz_pct(widp w, double pct);
-void wid_move_to_horiz_pct_in(widp w, double pct, double in);
-void wid_move_to_horiz_vert_pct_in(widp w, double x, double y, double in);
-void wid_move_to_left(widp);
-void wid_move_to_pct(widp, double dx, double dy);
-void wid_move_to_pct_centered(widp, double dx, double dy);
-void wid_move_to_pct_centered_in(widp, double dx, double dy, uint32_t delay);
-void wid_move_to_pct_in(widp, double dx, double dy, uint32_t delay);
-void wid_move_to_right(widp);
-void wid_move_to_top(widp);
-void wid_move_to_vert_pct(widp w, double pct);
-void wid_move_to_vert_pct_in(widp w, double pct, double in);
-void wid_raise(widp);
-void wid_scroll_text(widp);
-void wid_scroll_with_input(widp, std::wstring str);
-void wid_set_active(widp);
-void wid_set_color(widp, wid_color col, color val);
-void wid_set_context(widp w, void *context);
-void wid_set_cursor(widp, uint32_t val);
-void wid_set_debug(widp, uint8_t);
-void wid_set_do_not_lower(widp, uint8_t val);
-void wid_set_do_not_raise(widp, uint8_t val);
-void wid_set_focus(widp);
-void wid_set_focusable(widp, uint8_t val);
-void wid_set_ignore_events(widp, uint8_t);
-void wid_set_mode(widp, wid_mode mode);
-void wid_set_movable(widp, uint8_t val);
-void wid_set_movable_bounded(widp, uint8_t val);
-void wid_set_movable_horiz(widp, uint8_t val);
-void wid_set_movable_no_user_scroll(widp, uint8_t val);
-void wid_set_movable_vert(widp, uint8_t val);
-void wid_set_name(widp, std::string);
-void wid_set_offset(widp, point offset);
-void wid_set_on_destroy(widp, on_destroy_t fn);
-void wid_set_on_destroy_b(widp, on_destroy_b_t fn);
-void wid_set_on_joy_button(widp, on_joy_button_t fn);
-void wid_set_on_key_down(widp, on_key_down_t fn);
-void wid_set_on_key_up(widp, on_key_up_t fn);
-void wid_set_on_m_down(widp, on_m_down_t fn);
-void wid_set_on_m_focus_b(widp, on_m_focus_b_t fn);
-void wid_set_on_m_focus_e(widp, on_m_focus_e_t fn);
-void wid_set_on_m_motion(widp, on_m_motion_t fn);
-void wid_set_on_m_over_b(widp, on_m_over_b_t fn);
-void wid_set_on_m_over_e(widp, on_m_over_e_t fn);
-void wid_set_on_m_up(widp, on_m_up_t fn);
-void wid_set_on_tick(widp, on_tick_t fn);
-void wid_set_pos(widp, point tl, point br);
-void wid_set_pos_no_relative_offset(widp w, point tl, point br);
-void wid_set_pos_pct(widp, fpoint tl, fpoint br);
-void wid_set_prev(widp w, widp);
-void wid_set_received_input(widp, uint8_t val);
-void wid_set_shape_box(widp);
-void wid_set_shape_none(widp);
-void wid_set_shape_square(widp);
-void wid_set_show_cursor(widp, uint8_t val);
-void wid_set_tex_br(widp, fsize val);
-void wid_set_tex_tl(widp, fsize val);
-void wid_set_text(widp, std::wstring);
-void wid_set_text_bot(widp, uint8_t val);
-void wid_set_text_centerx(widp, uint8_t val);
-void wid_set_text_centery(widp, uint8_t val);
-void wid_set_text_lhs(widp, uint8_t val);
-void wid_set_text_pos(widp, uint8_t val, int32_t x, int32_t y);
-void wid_set_text_rhs(widp, uint8_t val);
-void wid_set_text_top(widp, uint8_t val);
-void wid_set_bg_tilename(widp, std::string name);
-void wid_set_fg_tilename(widp, std::string name);
-void wid_set_top(widp, uint8_t val);
-void wid_setx_tl_br_pct(widp, fpoint tl, fpoint br);
-void wid_sety_tl_br_pct(widp, fpoint tl, fpoint br);
-void wid_this_visible(widp);
+void wid_move_delta(Widp, int32_t dx, int32_t dy);
+void wid_move_delta_in(Widp w, int32_t dx, int32_t dy, uint32_t ms);
+void wid_move_delta_pct(Widp, double dx, double dy);
+void wid_move_delta_pct_in(Widp, double dx, double dy, uint32_t delay);
+void wid_move_end(Widp);
+void wid_move_to_abs(Widp, int32_t dx, int32_t dy);
+void wid_move_to_abs_centered(Widp, int32_t dx, int32_t dy);
+void wid_move_to_abs_centered_in(Widp, int32_t dx, int32_t dy, uint32_t delay);
+void wid_move_to_abs_in(Widp, int32_t dx, int32_t dy, uint32_t delay);
+void wid_move_to_abs_poffset_in(Widp w, int32_t x, int32_t y, uint32_t delay);
+void wid_move_to_bottom(Widp);
+void wid_move_to_centered_in(Widp, int32_t dx, int32_t dy, uint32_t delay);
+void wid_move_to_horiz_pct(Widp w, double pct);
+void wid_move_to_horiz_pct_in(Widp w, double pct, double in);
+void wid_move_to_horiz_vert_pct_in(Widp w, double x, double y, double in);
+void wid_move_to_left(Widp);
+void wid_move_to_pct(Widp, double dx, double dy);
+void wid_move_to_pct_centered(Widp, double dx, double dy);
+void wid_move_to_pct_centered_in(Widp, double dx, double dy, uint32_t delay);
+void wid_move_to_pct_in(Widp, double dx, double dy, uint32_t delay);
+void wid_move_to_right(Widp);
+void wid_move_to_top(Widp);
+void wid_move_to_vert_pct(Widp w, double pct);
+void wid_move_to_vert_pct_in(Widp w, double pct, double in);
+void wid_raise(Widp);
+void wid_scroll_text(Widp);
+void wid_scroll_with_input(Widp, std::wstring str);
+void wid_set_active(Widp);
+void wid_set_color(Widp, wid_color col, color val);
+void wid_set_context(Widp w, void *context);
+void wid_set_cursor(Widp, uint32_t val);
+void wid_set_debug(Widp, uint8_t);
+void wid_set_do_not_lower(Widp, uint8_t val);
+void wid_set_do_not_raise(Widp, uint8_t val);
+void wid_set_focus(Widp);
+void wid_set_focusable(Widp, uint8_t val);
+void wid_set_ignore_events(Widp, uint8_t);
+void wid_set_mode(Widp, wid_mode mode);
+void wid_set_movable(Widp, uint8_t val);
+void wid_set_movable_bounded(Widp, uint8_t val);
+void wid_set_movable_horiz(Widp, uint8_t val);
+void wid_set_movable_no_user_scroll(Widp, uint8_t val);
+void wid_set_movable_vert(Widp, uint8_t val);
+void wid_set_name(Widp, std::string);
+void wid_set_offset(Widp, point offset);
+void wid_set_on_destroy(Widp, on_destroy_t fn);
+void wid_set_on_destroy_b(Widp, on_destroy_b_t fn);
+void wid_set_on_joy_button(Widp, on_joy_button_t fn);
+void wid_set_on_key_down(Widp, on_key_down_t fn);
+void wid_set_on_key_up(Widp, on_key_up_t fn);
+void wid_set_on_m_down(Widp, on_m_down_t fn);
+void wid_set_on_m_focus_b(Widp, on_m_focus_b_t fn);
+void wid_set_on_m_focus_e(Widp, on_m_focus_e_t fn);
+void wid_set_on_m_motion(Widp, on_m_motion_t fn);
+void wid_set_on_m_over_b(Widp, on_m_over_b_t fn);
+void wid_set_on_m_over_e(Widp, on_m_over_e_t fn);
+void wid_set_on_m_up(Widp, on_m_up_t fn);
+void wid_set_on_tick(Widp, on_tick_t fn);
+void wid_set_pos(Widp, point tl, point br);
+void wid_set_pos_no_relative_offset(Widp w, point tl, point br);
+void wid_set_pos_pct(Widp, fpoint tl, fpoint br);
+void wid_set_prev(Widp w, Widp);
+void wid_set_received_input(Widp, uint8_t val);
+void wid_set_shape_box(Widp);
+void wid_set_shape_none(Widp);
+void wid_set_shape_square(Widp);
+void wid_set_show_cursor(Widp, uint8_t val);
+void wid_set_tex_br(Widp, fsize val);
+void wid_set_tex_tl(Widp, fsize val);
+void wid_set_text(Widp, std::wstring);
+void wid_set_text_bot(Widp, uint8_t val);
+void wid_set_text_centerx(Widp, uint8_t val);
+void wid_set_text_centery(Widp, uint8_t val);
+void wid_set_text_lhs(Widp, uint8_t val);
+void wid_set_text_pos(Widp, uint8_t val, int32_t x, int32_t y);
+void wid_set_text_rhs(Widp, uint8_t val);
+void wid_set_text_top(Widp, uint8_t val);
+void wid_set_bg_tilename(Widp, std::string name);
+void wid_set_fg_tilename(Widp, std::string name);
+void wid_set_top(Widp, uint8_t val);
+void wid_setx_tl_br_pct(Widp, fpoint tl, fpoint br);
+void wid_sety_tl_br_pct(Widp, fpoint tl, fpoint br);
+void wid_this_visible(Widp);
 void wid_tick_all(void);
-void wid_toggle_hidden(widp);
-void wid_update(widp);
+void wid_toggle_hidden(Widp);
+void wid_update(Widp);
 void wid_update_mouse(void);
-void wid_visible(widp);
-wid_mode wid_get_mode(widp);
-widp wid_find(widp, std::string name);
-widp wid_get_current_focus(void);
-widp wid_get_focus(widp);
-widp wid_get_next(widp);
-widp wid_get_tail(widp);
-widp wid_get_head(widp);
-widp wid_get_parent(widp);
-widp wid_get_prev(widp);
-widp wid_get_scrollbar_horiz(widp);
-widp wid_get_scrollbar_vert(widp);
-widp wid_get_top_parent(widp);
-widp wid_new_container(widp, std::string name);
-widp wid_new_horiz_scroll_bar(widp parent, std::string name, widp scrollbar_owner);
-widp wid_new_plain(widp, std::string name);
-widp wid_new_square_button(widp parent, std::string name);
-widp wid_new_square_window(std::string name);
-widp wid_new_vert_scroll_bar(widp parent, std::string name, widp scrollbar_owner);
-widp wid_new_window(std::string name);
+void wid_visible(Widp);
+wid_mode wid_get_mode(Widp);
+Widp wid_find(Widp, std::string name);
+Widp wid_get_current_focus(void);
+Widp wid_get_focus(Widp);
+Widp wid_get_next(Widp);
+Widp wid_get_tail(Widp);
+Widp wid_get_head(Widp);
+Widp wid_get_parent(Widp);
+Widp wid_get_prev(Widp);
+Widp wid_get_scrollbar_horiz(Widp);
+Widp wid_get_scrollbar_vert(Widp);
+Widp wid_get_top_parent(Widp);
+Widp wid_new_container(Widp, std::string name);
+Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
+Widp wid_new_plain(Widp, std::string name);
+Widp wid_new_square_button(Widp parent, std::string name);
+Widp wid_new_square_window(std::string name);
+Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
+Widp wid_new_window(std::string name);
 
 //
 // History for all text widgets.
@@ -339,11 +339,11 @@ public:
     uint64_t val {};
 };
 
-typedef std::map< tree_wid_key, widp, tree_wid_key_cmp > wid_key_map_location;
-typedef std::map< WidKeyType, widp > wid_key_map_int;
+typedef std::map< tree_wid_key, Widp, tree_wid_key_cmp > wid_key_map_location;
+typedef std::map< WidKeyType, Widp > wid_key_map_int;
 
-widp wid_unsorted_find(WidKeyType key);
-WidKeyType wid_unsorted_get_key(widp w);
+Widp wid_unsorted_find(WidKeyType key);
+WidKeyType wid_unsorted_get_key(Widp w);
 
 typedef struct wid_move_ {
     int moving_endx;
@@ -450,11 +450,11 @@ public:
     //
     // Optionally set to the previous wid in a list
     //
-    widp prev {};
-    widp next {};
-    widp scrollbar_horiz {};
-    widp scrollbar_vert {};
-    widp scrollbar_owner {};
+    Widp prev {};
+    Widp next {};
+    Widp scrollbar_horiz {};
+    Widp scrollbar_vert {};
+    Widp scrollbar_owner {};
 
     Tpp tp {};
     int style {};
@@ -509,7 +509,7 @@ public:
     uint32_t timestamp_created {};
     uint32_t timestamp_last_mode_change {};
 
-    widp *destroy_ptr {};
+    Widp *destroy_ptr {};
 
     //
     // Queue of wid move requests.
@@ -540,7 +540,7 @@ public:
     //
     // The wids children
     //
-    widp parent {};
+    Widp parent {};
 
     //
     // Widget internal name.
@@ -575,12 +575,12 @@ public:
     on_tick_t on_tick                 {};
 };
 
-uint8_t wid_is_moving(widp w);
-void wid_set_style(widp w, int style);
-void wid_set_bg_tile(widp w, Tilep tile);
-void wid_set_fg_tile(widp w, Tilep tile);
+uint8_t wid_is_moving(Widp w);
+void wid_set_style(Widp w, int style);
+void wid_set_bg_tile(Widp w, Tilep tile);
+void wid_set_fg_tile(Widp w, Tilep tile);
 
-extern widp wid_mouse_template;
+extern Widp wid_mouse_template;
 
 extern const int32_t wid_destroy_delay_ms;
 #endif
