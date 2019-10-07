@@ -18,9 +18,9 @@
 
 static void wid_test_wid_create(void);
 
-widp wid_itembar;
-widp wid_item_popup;
-widp wid_sidebar;
+Widp wid_itembar;
+Widp wid_item_popup;
+Widp wid_sidebar;
 
 void wid_test_fini (void)
 {_
@@ -33,7 +33,7 @@ uint8_t wid_test_init (void)
     return (true);
 }
 
-static uint8_t wid_test_mouse_down (widp w,
+static uint8_t wid_test_mouse_down (Widp w,
                                     int32_t x,
                                     int32_t y,
                                     uint32_t button)
@@ -558,14 +558,9 @@ static void wid_test_wid_create (void)
 #endif
 
     {
-        point tl = {0, MINICON_VIS_HEIGHT + 2};
-        point br = {ITEMBAR_TL_X - 2, ITEMBAR_TL_Y - 2};
+        point tl = {2, MINICON_VIS_HEIGHT + 2};
+        point br = {ITEMBAR_TL_X - 2, 22 }; // ITEMBAR_TL_Y - 2};
         auto w = new WidPopup(tl, br);
-        w->log("ello1");
-        w->log("ello2");
-        w->log("ello3");
-        w->log("ello4");
-        w->log("ello5");
-        w->log("ello6");
+        w->log("This is a really long descriptive string that is a bit boring");
     }
 }

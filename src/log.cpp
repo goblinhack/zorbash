@@ -890,7 +890,7 @@ void Light::dbg (const char *fmt, ...)
 }
 
 #ifdef ENABLE_WID_DEBUG
-static void wid_log_ (widp t, const char *fmt, va_list args)
+static void wid_log_ (Widp t, const char *fmt, va_list args)
 {
     char buf[MAXSHORTSTR];
     uint32_t len;
@@ -905,7 +905,7 @@ static void wid_log_ (widp t, const char *fmt, va_list args)
     putf(MY_STDOUT, buf);
 }
 
-void WID_LOG (widp t, const char *fmt, ...)
+void WID_LOG (Widp t, const char *fmt, ...)
 {
     va_list args;
 
@@ -916,7 +916,7 @@ void WID_LOG (widp t, const char *fmt, ...)
     va_end(args);
 }
 
-void WID_DBG (widp t, const char *fmt, ...)
+void WID_DBG (Widp t, const char *fmt, ...)
 {
     if (!debug) {
         return;

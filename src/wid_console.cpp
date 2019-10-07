@@ -19,12 +19,12 @@ static int32_t wid_console_inited;
 static int32_t wid_console_exiting;
 static void wid_console_wid_create(void);
 
-widp wid_console_container;
-widp wid_console_vert_scroll;
-widp wid_console_horiz_scroll;
+Widp wid_console_container;
+Widp wid_console_vert_scroll;
+Widp wid_console_horiz_scroll;
 
-widp wid_console_input_line;
-widp wid_console_window;
+Widp wid_console_input_line;
+Widp wid_console_window;
 
 static std::map< unsigned int, std::wstring > wid_console_lines;
 
@@ -146,7 +146,7 @@ void wid_console_log (std::wstring s)
 /*
  * Key down etc...
  */
-uint8_t wid_console_receive_input (widp w, const SDL_KEYSYM *key)
+uint8_t wid_console_receive_input (Widp w, const SDL_KEYSYM *key)
 {_
     wid_console_reset_scroll();
 
@@ -194,8 +194,8 @@ static void wid_console_wid_create (void)
         int32_t row;
         int row_bottom = ASCII_HEIGHT - 4;
 
-        widp child = 0;
-        widp prev = 0;
+        Widp child = 0;
+        Widp prev = 0;
 
         for (row = 0; row < CONSOLE_HEIGHT; row++) {
             row_bottom --;
@@ -228,7 +228,7 @@ static void wid_console_wid_create (void)
                 wid_move_delta(child, 2, 0);
                 wid_console_input_line = child;
 
-                widp prefix = wid_new_container(wid_console_container, "");
+                Widp prefix = wid_new_container(wid_console_container, "");
                 wid_set_pos(prefix, tl, br);
                 wid_set_text_lhs(prefix, true);
                 wid_set_shape_none(prefix);

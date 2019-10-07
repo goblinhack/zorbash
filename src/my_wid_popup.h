@@ -7,15 +7,21 @@
 
 #include "my_wid.h"
 
-class WidPopup : Wid {
+class WidPopup {
 private:
     std::map< unsigned int, std::wstring > wid_popup_lines;
+    int width {};
+    int height {};
+    int line_count {};
+    int scroll_height {};
 
-    widp wid_popup_container {};
-    widp wid_popup_vert_scroll {};
-    widp wid_popup_horiz_scroll {};
-    widp wid_popup_input_line {};
-    widp wid_popup_window {};
+    Widp wid_popup_container {};
+    Widp wid_popup_vert_scroll {};
+    Widp wid_popup_horiz_scroll {};
+    Widp wid_popup_input_line {};
+    Widp wid_popup_window {};
+
+    std::vector<Widp> children;
 
 public:
     point tl;

@@ -709,7 +709,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
         tree = w->grid->grid_of_trees[z] + (y * w->grid->width) + x;
 
         TREE_WALK_REVERSE_UNSAFE_INLINE(*tree, node, tree_prev_tree_wid_compare_func_fast) {
-            widp w = node->wid;
+            Widp w = node->wid;
 
             double otlx;
             double otly;
@@ -718,7 +718,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
 
             wid_get_tl_x_tl_y_br_x_br_y(w, &otlx, &otly, &obrx, &obry);
 
-            widp p = w->parent;
+            Widp p = w->parent;
             otlx += p->offset.x;
             otly += p->offset.y;
             obrx += p->offset.x;
@@ -745,7 +745,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
         tree = w->grid->grid_of_trees[z] + (y * w->grid->width) + x;
 
         TREE_WALK_REVERSE_UNSAFE_INLINE(*tree, node, tree_prev_tree_wid_compare_func_fast) {
-            widp w = node->wid;
+            Widp w = node->wid;
 
             double otlx;
             double otly;
@@ -754,7 +754,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
 
             wid_get_tl_x_tl_y_br_x_br_y(w, &otlx, &otly, &obrx, &obry);
 
-            widp p = w->parent;
+            Widp p = w->parent;
             otlx += p->offset.x;
             otly += p->offset.y;
             obrx += p->offset.x;
@@ -777,7 +777,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
 #endif
 
 #if 0
-void fluid_render (widp w, int minx, int miny, int maxx, int maxy)
+void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
 {
     if (player) {
         uint32_t visible_width =

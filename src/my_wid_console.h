@@ -16,10 +16,10 @@ void wid_console_hello(void);
 //
 // Global widgets.
 //
-extern widp wid_console_input_line;
-extern widp wid_console_window;
-extern widp wid_console_container;
+extern Widp wid_console_input_line;
+extern Widp wid_console_window;
+extern Widp wid_console_container;
 
 #include "my_sdl.h"
 
-uint8_t wid_console_receive_input(widp w, const SDL_KEYSYM *key);
+uint8_t wid_console_receive_input(Widp w, const SDL_KEYSYM *key);
