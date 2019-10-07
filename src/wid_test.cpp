@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include <SDL.h>
 
@@ -42,9 +42,9 @@ static uint8_t wid_test_mouse_down (Widp w,
     return (true);
 }
 
-/*
- * Create the test
- */
+//
+// Create the test
+//
 static void wid_test_wid_create (void)
 {_
     {

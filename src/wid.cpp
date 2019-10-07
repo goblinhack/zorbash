@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_main.h"
 #include "my_slre.h"
@@ -31,66 +31,66 @@ bool inverted_gfx = true;
 bool inverted_gfx = false;
 #endif
 
-/*
- * Display sorted.
- */
+//
+// Display sorted.
+//
 static wid_key_map_location wid_top_level;
 
-/*
- * Creation sorted and global.
- */
+//
+// Creation sorted and global.
+//
 static wid_key_map_int wid_global;
 
-/*
- * Creation sorted and per wid parent.
- */
+//
+// Creation sorted and per wid parent.
+//
 static wid_key_map_int wid_top_level2;
 
-/*
- * For moving things.
- */
+//
+// For moving things.
+//
 static wid_key_map_int wid_top_level3;
 
-/*
- * For garbage collection.
- */
+//
+// For garbage collection.
+//
 static wid_key_map_int wid_top_level4;
 
-/*
- * For ticking things.
- */
+//
+// For ticking things.
+//
 static wid_key_map_int wid_top_level5;
 
-/*
- * Scope the focus to children of this widget and do not change it.
- * Good for popups.
- */
+//
+// Scope the focus to children of this widget and do not change it.
+// Good for popups.
+//
 static Widp wid_focus_locked;
 static Widp wid_focus;
 static Widp wid_over;
 
-/*
- * Mouse
- */
+//
+// Mouse
+//
 int wid_mouse_visible = 1;
 
-/*
- * Widget moving
- */
+//
+// Widget moving
+//
 static Widp wid_moving;
 static int32_t wid_moving_last_x;
 static int32_t wid_moving_last_y;
 
 static uint32_t wid_time;
 
-/*
- * Widget effects
- */
+//
+// Widget effects
+//
 const int32_t wid_destroy_delay_ms = 200;
 
-/*
- * Prototypes.
- */
+//
+// Prototypes.
+//
 static void wid_destroy_delay(Widp *wp, int32_t delay);
 static uint8_t wid_scroll_trough_mouse_down(Widp w, int32_t x, int32_t y,
                                             uint32_t button);
@@ -119,23 +119,23 @@ static void wid_display(Widp w,
                         uint8_t *updated_scissors,
                         int clip);
 
-/*
- * Child sort priority
- */
+//
+// Child sort priority
+//
 static int32_t wid_highest_priority = 1;
 static int32_t wid_lowest_priority = -1;
 
-/*
- * History for all text widgets.
- */
+//
+// History for all text widgets.
+//
 #define HISTORY_MAX 16
 std::array<std::wstring, HISTORY_MAX> history;
 uint32_t history_at;
 uint32_t history_walk;
 
-/*
- * A tile over the mouse pointer
- */
+//
+// A tile over the mouse pointer
+//
 Widp wid_mouse_template;
 std::array<std::array<Widp, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> wid_on_screen_at {};
 
@@ -255,9 +255,9 @@ void wid_get_tl_x_tl_y_br_x_br_y (Widp w,
     *br_y = cy + (bry - cy);
 }
 
-/*
- * Set the wid new co-ords. Returns true if there is a change.
- */
+//
+// Set the wid new co-ords. Returns true if there is a change.
+//
 void wid_set_pos (Widp w, point tl, point br)
 {_
     verify(w.get());
@@ -269,9 +269,9 @@ void wid_set_pos (Widp w, point tl, point br)
     w->key.tl = tl;
     w->key.br = br;
 
-    /*
-     * Child postion is relative from the parent.
-     */
+    //
+    // Child postion is relative from the parent.
+    //
     p = w->parent;
     if (p) {
         w->key.tl.x += wid_get_tl_x(p);
@@ -284,9 +284,9 @@ void wid_set_pos (Widp w, point tl, point br)
     wid_tree_attach(w);
 }
 
-/*
- * Set the wid new co-ords. Returns true if there is a change.
- */
+//
+// Set the wid new co-ords. Returns true if there is a change.
+//
 void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
 {_
     verify(w.get());
@@ -312,9 +312,9 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
     int32_t key_br_x = br.x;
     int32_t key_br_y = br.y;
 
-    /*
-     * Child postion is relative from the parent.
-     */
+    //
+    // Child postion is relative from the parent.
+    //
     p = w->parent;
     if (p) {
         key_tl_x += wid_get_tl_x(p);
@@ -332,9 +332,9 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
     wid_tree_attach(w);
 }
 
-/*
- * Set the wid new co-ords. Returns true if there is a change.
- */
+//
+// Set the wid new co-ords. Returns true if there is a change.
+//
 void wid_setx_tl_br_pct (Widp w, fpoint tl, fpoint br)
 {_
     verify(w.get());
@@ -354,9 +354,9 @@ void wid_setx_tl_br_pct (Widp w, fpoint tl, fpoint br)
     w->key.tl.x = round(tl.x);
     w->key.br.x = round(br.x);
 
-    /*
-     * Child postion is relative from the parent.
-     */
+    //
+    // Child postion is relative from the parent.
+    //
     p = w->parent;
     if (p) {
         w->key.tl.x += wid_get_tl_x(p);
@@ -367,9 +367,9 @@ void wid_setx_tl_br_pct (Widp w, fpoint tl, fpoint br)
     wid_tree_attach(w);
 }
 
-/*
- * Set the wid new co-ords. Returns true if there is a change.
- */
+//
+// Set the wid new co-ords. Returns true if there is a change.
+//
 void wid_sety_tl_br_pct (Widp w, fpoint tl, fpoint br)
 {_
     verify(w.get());
@@ -389,9 +389,9 @@ void wid_sety_tl_br_pct (Widp w, fpoint tl, fpoint br)
     w->key.tl.y = round(tl.y);
     w->key.br.y = round(br.y);
 
-    /*
-     * Child postion is relative from the parent.
-     */
+    //
+    // Child postion is relative from the parent.
+    //
     p = w->parent;
     if (p) {
         w->key.tl.y += wid_get_tl_y(p);
@@ -560,9 +560,9 @@ static void wid_set_scissors (int tlx, int tly, int brx, int bry)
     ascii_set_scissors(point(tlx, tly), point(brx, bry));
 }
 
-/*
- * Should this widget be ignored for events?
- */
+//
+// Should this widget be ignored for events?
+//
 uint8_t wid_ignore_events (Widp w)
 {_
     Widp top;
@@ -609,9 +609,9 @@ uint8_t wid_ignore_for_focus (Widp w)
     return (false);
 }
 
-/*
- * Should this widget be ignored for events?
- */
+//
+// Should this widget be ignored for events?
+//
 uint8_t wid_ignore_being_destroyed (Widp w)
 {_
     Widp top;
@@ -715,9 +715,9 @@ static void wid_m_over_e (void)
 
     wid_set_mode(w, WID_MODE_NORMAL);
 
-    /*
-     * Python can try and do cleanup - and if we're exiting already, no point.
-     */
+    //
+    // Python can try and do cleanup - and if we're exiting already, no point.
+    //
     if (wid_exiting) {
         return;
     }
@@ -744,15 +744,15 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
     if (!(w.get()->on_m_over_b) && !(w.get()->on_m_down)) {
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] ||
             get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT]) {
-            /*
-             * Changes appearance on mouse over, so choose this wid even
-             * if it has no over callback.
-             */
+            //
+            // Changes appearance on mouse over, so choose this wid even
+            // if it has no over callback.
+            //
         } else {
-            /*
-             * Can ignore. It doesn't really do anything when the mouse
-             * is over.
-             */
+            //
+            // Can ignore. It doesn't really do anything when the mouse
+            // is over.
+            //
             return (false);
         }
     }
@@ -774,9 +774,9 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
     return (true);
 }
 
-/*
- * Map an SDL key event to the char the user typed
- */
+//
+// Map an SDL key event to the char the user typed
+//
 static char wid_event_to_char (const struct SDL_KEYSYM *evt)
 {_
     switch (evt->mod) {
@@ -923,7 +923,7 @@ static char wid_event_to_char (const struct SDL_KEYSYM *evt)
         case SDLK_y: return ('y');
         case SDLK_z: return ('z');
         case SDLK_DELETE: return ('');
-#if SDL_MAJOR_VERSION == 1 /* { */
+#if SDL_MAJOR_VERSION == 1 // { 
         case SDLK_KP0: return ('0');
         case SDLK_KP1: return ('1');
         case SDLK_KP2: return ('2');
@@ -945,7 +945,7 @@ static char wid_event_to_char (const struct SDL_KEYSYM *evt)
         case SDLK_KP_7: return ('7');
         case SDLK_KP_8: return ('8');
         case SDLK_KP_9: return ('9');
-#endif /* } */
+#endif // } 
         case SDLK_KP_PERIOD: return ('.');
         case SDLK_KP_DIVIDE: return ('/');
         case SDLK_KP_MULTIPLY: return ('*');
@@ -995,9 +995,9 @@ static char wid_event_to_char (const struct SDL_KEYSYM *evt)
     return ('\0');
 }
 
-/*
- * Widget mode, whether it is active, inactive etc...
- */
+//
+// Widget mode, whether it is active, inactive etc...
+//
 void wid_set_mode (Widp w, wid_mode mode)
 {_
     verify(w.get());
@@ -1006,14 +1006,14 @@ void wid_set_mode (Widp w, wid_mode mode)
     w->mode = mode;
 }
 
-/*
- * Widget mode, whether it is active, inactive etc...
- */
+//
+// Widget mode, whether it is active, inactive etc...
+//
 wid_mode wid_get_mode (Widp w)
 {_
-    /*
-     * Allow focus to override less important modes.
-     */
+    //
+    // Allow focus to override less important modes.
+    //
     if (w == wid_focus) {
         if ((w->mode == WID_MODE_NORMAL) || (w->mode == WID_MODE_OVER)) {
             return (WID_MODE_FOCUS);
@@ -1475,9 +1475,9 @@ void wid_set_tex_br (Widp w, fsize val)
     w->tex_br = val;
 }
 
-/*
- * Look at all the wid modes and return the most relevent setting
- */
+//
+// Look at all the wid modes and return the most relevent setting
+//
 color wid_get_color (Widp w, wid_color which)
 {_
     uint32_t mode = (__typeof__(mode)) wid_get_mode(w); // for c++, no enum walk
@@ -1504,9 +1504,9 @@ color wid_get_color (Widp w, wid_color which)
     return (WHITE);
 }
 
-/*
- * Look at all the wid modes and return the most relevent setting
- */
+//
+// Look at all the wid modes and return the most relevent setting
+//
 color wid_get_mode_color (Widp w, wid_color which)
 {_
     uint32_t mode = (__typeof__(mode)) wid_get_mode(w); // for c++, no enum walk
@@ -1515,9 +1515,9 @@ color wid_get_mode_color (Widp w, wid_color which)
     return (cfg->colors[which]);
 }
 
-/*
- * Look at all the widset modes and return the most relevent setting
- */
+//
+// Look at all the widset modes and return the most relevent setting
+//
 void wid_set_color (Widp w, wid_color col, color val)
 {_
     verify(w.get());
@@ -1542,9 +1542,9 @@ void wid_get_offset (Widp w, point *offset)
 
 void wid_set_focus (Widp w)
 {_
-    /*
-     * Don't allow focus override if hard focus is set.
-     */
+    //
+    // Don't allow focus override if hard focus is set.
+    //
     if (w) {
         if (wid_focus_locked) {
             if (wid_get_top_parent(w) != wid_focus_locked) {
@@ -1689,9 +1689,9 @@ void wid_set_on_tick (Widp w, on_tick_t fn)
     wid_tree5_ticking_wids_insert(w);
 }
 
-/*
- * Remove this wid from any trees it is in.
- */
+//
+// Remove this wid from any trees it is in.
+//
 static void wid_tree_detach (Widp w)
 {_
     verify(w.get());
@@ -1699,9 +1699,9 @@ static void wid_tree_detach (Widp w)
     wid_tree_remove(w);
 }
 
-/*
- * Add back to all trees.
- */
+//
+// Add back to all trees.
+//
 static void wid_tree_attach (Widp w)
 {_
     verify(w.get());
@@ -1738,9 +1738,9 @@ static void wid_tree_insert (Widp w)
 
     wid_key_map_location *root;
 
-    /*
-     * Get a wid sort ID.
-     */
+    //
+    // Get a wid sort ID.
+    //
     w->key.key = ++key;
 
     if (!w->parent) {
@@ -2036,9 +2036,9 @@ static void wid_tree5_ticking_wids_remove (Widp w)
     w->on_tick = 0;
 }
 
-/*
- * Initialize a wid with basic settings
- */
+//
+// Initialize a wid with basic settings
+//
 static Widp wid_new (Widp parent)
 {_
     auto w = std::make_shared< class Wid >();
@@ -2052,9 +2052,9 @@ static Widp wid_new (Widp parent)
     wid_tree2_unsorted_insert(w);
     wid_tree_global_unsorted_insert(w);
 
-    /*
-     * Give some lame 3d to the wid
-     */
+    //
+    // Give some lame 3d to the wid
+    //
     wid_set_mode(w, WID_MODE_NORMAL);
 
     fsize sz = {0.0f, 0.0f};
@@ -2141,9 +2141,9 @@ static void wid_destroy_immediate (Widp w)
 {_
     verify(w.get());
 
-    /*
-     * If removing a top level widget, choose a new focus.
-     */
+    //
+    // If removing a top level widget, choose a new focus.
+    //
     if (!w->parent) {
         wid_find_top_focus();
     }
@@ -2232,10 +2232,10 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         (w.get()->on_destroy_b)(w);
     }
 
-    /*
-     * Make sure it stops ticking right now as client pointers this widget
-     * might use in the ticker may no longer be valid.
-     */
+    //
+    // Make sure it stops ticking right now as client pointers this widget
+    // might use in the ticker may no longer be valid.
+    //
     wid_tree5_ticking_wids_remove(w);
 }
 
@@ -2268,9 +2268,9 @@ void wid_destroy_ptr_in (Widp *w, uint32_t ms)
     wid_tree4_wids_being_destroyed_insert(*w);
 }
 
-/*
- * Initialize a top level wid with basic settings
- */
+//
+// Initialize a top level wid with basic settings
+//
 Widp wid_new_window (std::string name)
 {_
     Widp w = wid_new(0);
@@ -2294,9 +2294,9 @@ Widp wid_new_window (std::string name)
     return (w);
 }
 
-/*
- * Initialize a top level wid with basic settings
- */
+//
+// Initialize a top level wid with basic settings
+//
 Widp wid_new_container (Widp parent, std::string name)
 {_
     Widp w = wid_new(parent);
@@ -2325,9 +2325,9 @@ Widp wid_new_container (Widp parent, std::string name)
     return (w);
 }
 
-/*
- * Initialize a top level wid with basic settings
- */
+//
+// Initialize a top level wid with basic settings
+//
 Widp wid_new_plain (Widp parent, std::string name)
 {_
     if (!parent) {
@@ -2352,9 +2352,9 @@ Widp wid_new_plain (Widp parent, std::string name)
     return (w);
 }
 
-/*
- * Initialize a top level wid with basic settings
- */
+//
+// Initialize a top level wid with basic settings
+//
 Widp wid_new_square_window (std::string name)
 {_
     Widp w = wid_new(0);
@@ -2397,9 +2397,9 @@ Widp wid_new_square_button (Widp parent, std::string name)
     return (w);
 }
 
-/*
- * Initialize a wid with basic settings
- */
+//
+// Initialize a wid with basic settings
+//
 static Widp wid_new_scroll_trough (Widp parent)
 {_
     if (!parent) {
@@ -2423,9 +2423,9 @@ static Widp wid_new_scroll_trough (Widp parent)
     return (w);
 }
 
-/*
- * Initialize a wid with basic settings
- */
+//
+// Initialize a wid with basic settings
+//
 static Widp wid_new_scroll_bar (Widp parent,
                                 std::string name,
                                 Widp scrollbar_owner,
@@ -2502,9 +2502,9 @@ Widp wid_new_vert_scroll_bar (Widp parent,
     int32_t pbrx;
     int32_t pbry;
 
-    /*
-     * Make the trough line up with the scrolling window.
-     */
+    //
+    // Make the trough line up with the scrolling window.
+    //
     wid_get_abs_coords(parent, &ptlx, &ptly, &pbrx, &pbry);
     wid_get_abs_coords(scrollbar_owner, &tlx, &tly, &brx, &bry);
 
@@ -2556,9 +2556,9 @@ Widp wid_new_horiz_scroll_bar (Widp parent, std::string name,
     int32_t pbrx;
     int32_t pbry;
 
-    /*
-     * Make the trough line up with the scrolling window.
-     */
+    //
+    // Make the trough line up with the scrolling window.
+    //
     wid_get_abs_coords(parent, &ptlx, &ptly, &pbrx, &pbry);
     wid_get_abs_coords(scrollbar_owner, &tlx, &tly, &brx, &bry);
 
@@ -2613,9 +2613,9 @@ static void wid_raise_internal (Widp w)
 
 static void wid_raise_override (Widp parent)
 {_
-    /*
-     * If some widget wants to be on top, let it.
-     */
+    //
+    // If some widget wants to be on top, let it.
+    //
     Widp w;
 
     verify(parent.get());
@@ -2648,9 +2648,9 @@ void wid_raise (Widp w_in)
 
     wid_raise_internal(w_in);
 
-    /*
-     * If some widget wants to be on top, let it.
-     */
+    //
+    // If some widget wants to be on top, let it.
+    //
     std::vector<Widp> worklist;
     for (auto iter : wid_top_level) {
         auto w = iter.second;
@@ -2665,10 +2665,10 @@ void wid_raise (Widp w_in)
 
     wid_find_top_focus();
 
-    /*
-     * If we were hovering over a window and it was replaced, we need to fake
-     * a mouse movement so we know we are still over it.
-     */
+    //
+    // If we were hovering over a window and it was replaced, we need to fake
+    // a mouse movement so we know we are still over it.
+    //
     if (!w_in->parent.get()) {
         wid_update_mouse();
     }
@@ -2701,9 +2701,9 @@ void wid_lower (Widp w_in)
 
     wid_lower_internal(w_in);
 
-    /*
-     * If some widget wants to be on top, let it.
-     */
+    //
+    // If some widget wants to be on top, let it.
+    //
     for (auto iter : wid_top_level) {
         auto w = iter.second;
         if (w->do_not_raise) {
@@ -2714,10 +2714,10 @@ void wid_lower (Widp w_in)
 
     wid_find_top_focus();
 
-    /*
-     * If we were hovering over a window and it was replaced, we need to fake
-     * a mouse movement so we know we are still over it.
-     */
+    //
+    // If we were hovering over a window and it was replaced, we need to fake
+    // a mouse movement so we know we are still over it.
+    //
     if (!w_in->parent && !w_in->children_display_sorted.empty()) {
         wid_update_mouse();
     }
@@ -2806,9 +2806,9 @@ static Widp wid_find_top_wid_focus (Widp w)
         return (best);
     }
 
-    /*
-     * First time we've looked at this widget, hunt for the first focus.
-     */
+    //
+    // First time we've looked at this widget, hunt for the first focus.
+    //
     if (!w->focus_last) {
         wid_find_first_child_focus(w, &best);
         if (best) {
@@ -2839,9 +2839,9 @@ static void wid_find_top_focus (void)
 
         best = 0;
 
-        /*
-         * First time we've looked at this widget, hunt for the first focus.
-         */
+        //
+        // First time we've looked at this widget, hunt for the first focus.
+        //
         if (!w->focus_last) {
             wid_find_first_child_focus(w, &best);
             if (best) {
@@ -3274,10 +3274,10 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
     uint8_t first = true;
     Widp child;
 
-    /*
-     * Find out the space that the children take up then use this to
-     * adjust the scrollbar dimensions.
-     */
+    //
+    // Find out the space that the children take up then use this to
+    // adjust the scrollbar dimensions.
+    //
     {
         for (auto iter : owner->tree2_children_unsorted) {
             auto child = iter.second;
@@ -3404,10 +3404,10 @@ void wid_get_children_size (Widp owner, int32_t *w, int32_t *h)
     uint8_t first = true;
     Widp child;
 
-    /*
-     * Find out the space that the children take up then use this to
-     * adjust the scrollbar dimensions.
-     */
+    //
+    // Find out the space that the children take up then use this to
+    // adjust the scrollbar dimensions.
+    //
     for (auto iter : owner->children_display_sorted) {
 
         auto child = iter.second;
@@ -3478,32 +3478,32 @@ static void wid_update_internal (Widp w)
 
     wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
 
-    /*
-     * First time around, initialize the wid.
-     */
+    //
+    // First time around, initialize the wid.
+    //
     if (!w->first_update) {
         w->first_update = true;
 
         if (!w->parent) {
-            /*
-             * Find the focus.
-             */
+            //
+            // Find the focus.
+            //
             wid_find_top_focus();
         }
 
-        /*
-         * Set back to normal to undo any settings when creating.
-         *
-         * No, make the clients fix their code.
-         */
+        //
+        // Set back to normal to undo any settings when creating.
+        //
+        // No, make the clients fix their code.
+        //
 //        wid_set_mode(w, WID_MODE_NORMAL);
     }
 
     Widp child;
 
-    /*
-     * Clip all the children. Avoid this for speed for the main game window.
-     */
+    //
+    // Clip all the children. Avoid this for speed for the main game window.
+    //
     std::vector<Widp> worklist;
     for (auto iter : w->tree2_children_unsorted) {
         auto w = iter.second;
@@ -3514,18 +3514,18 @@ static void wid_update_internal (Widp w)
         wid_update_internal(child);
     }
 
-    /*
-     * If the source of the event is the scrollbars themselves...
-     */
+    //
+    // If the source of the event is the scrollbars themselves...
+    //
     if (w->scrollbar_owner) {
         verify(w.get());
         wid_adjust_scrollbar(w, w->scrollbar_owner);
 
         wid_update_internal(w->scrollbar_owner);
     } else {
-        /*
-         * If the source of the event is the owner of the scrollbars...
-         */
+        //
+        // If the source of the event is the owner of the scrollbars...
+        //
         if (w->scrollbar_vert) {
             verify(w.get());
             wid_adjust_scrollbar(w->scrollbar_vert, w);
@@ -3544,10 +3544,10 @@ void wid_update (Widp w)
 
     wid_update_internal(w);
 
-    /*
-     * If we were hovering over a window and it was replaced, we need to fake
-     * a mouse movement so we know we are still over it.
-     */
+    //
+    // If we were hovering over a window and it was replaced, we need to fake
+    // a mouse movement so we know we are still over it.
+    //
     if (!w->parent && !w->children_display_sorted.empty()) {
         wid_update_mouse();
     }
@@ -3555,10 +3555,10 @@ void wid_update (Widp w)
 
 void wid_update_mouse (void)
 {_
-    /*
-     * So if we are now over a new widget that was created on top of the
-     * mouse, we activate it.
-     */
+    //
+    // So if we are now over a new widget that was created on top of the
+    // mouse, we activate it.
+    //
     int32_t x;
     int32_t y;
 
@@ -3573,14 +3573,14 @@ void wid_scroll_text (Widp w)
     Widp prev;
     Widp tmp;
 
-    /*
-     * Get the wid on the top of the list/screen.
-     */
+    //
+    // Get the wid on the top of the list/screen.
+    //
     tmp = wid_get_tail(w);
 
-    /*
-     * Now copy the text up to the parent widgets.
-     */
+    //
+    // Now copy the text up to the parent widgets.
+    //
     while (tmp) {
         prev = wid_get_prev(tmp);
 
@@ -3594,25 +3594,25 @@ void wid_scroll_text (Widp w)
     }
 }
 
-/*
- * Replace the 2nd last line of text and scroll. The assumption is the last
- * line is the input line.
- */
+//
+// Replace the 2nd last line of text and scroll. The assumption is the last
+// line is the input line.
+//
 void wid_scroll_with_input (Widp w, std::wstring str)
 {_
     Widp tmp;
 
     wid_scroll_text(w);
 
-    /*
-     * Get the wid on the bottom of the list/screen.
-     */
+    //
+    // Get the wid on the bottom of the list/screen.
+    //
     tmp = wid_get_head(w);
 
-    /*
-     * Now get the 2nd last line. The last line is the input. The 2nd last
-     * line is where new output goes.
-     */
+    //
+    // Now get the 2nd last line. The last line is the input. The 2nd last
+    // line is where new output goes.
+    //
     if (tmp) {
         tmp = wid_get_next(tmp);
         if (tmp) {
@@ -3835,9 +3835,9 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                 case '`':
                 case '~':
                 case '\\':
-                    /*
-                     * Magic keys we use to toggle the console.
-                     */
+                    //
+                    // Magic keys we use to toggle the console.
+                    //
                     return (false);
 
                 case '?':
@@ -3877,9 +3877,9 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
     return (true);
 }
 
-/*
- * Handle keys no one grabbed.
- */
+//
+// Handle keys no one grabbed.
+//
 static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 {_
     if (game_key_down(key)) {
@@ -3904,9 +3904,9 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 wid_toggle_hidden(wid_console_window);
                 wid_raise(wid_console_window);
 
-                /*
-                 * Need this so the console gets focus over the menu.
-                 */
+                //
+                // Need this so the console gets focus over the menu.
+                //
                 if (w->visible) {
                     wid_set_focus(w);
                     wid_focus_lock(w);
@@ -3921,9 +3921,9 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     wid_hide(w);
                 }
 
-                /*
-                 * Need this so the console gets focus over the menu.
-                 */
+                //
+                // Need this so the console gets focus over the menu.
+                //
                 if (w->visible) {
                     wid_set_focus(w);
                     wid_focus_lock(w);
@@ -4231,10 +4231,10 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
         return (w);
     }
 
-    /*
-     * Prevent mouse events that occur in the bounds of one window, leaking
-     * into lower levels.
-     */
+    //
+    // Prevent mouse events that occur in the bounds of one window, leaking
+    // into lower levels.
+    //
     if (!w->parent) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4303,10 +4303,10 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
         return (w);
     }
 
-    /*
-     * Prevent mouse events that occur in the bounds of one window, leaking
-     * into lower levels.
-     */
+    //
+    // Prevent mouse events that occur in the bounds of one window, leaking
+    // into lower levels.
+    //
     if (!w->parent) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4321,9 +4321,9 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
 
 static void wid_children_move_delta_internal (Widp w, int32_t dx, int32_t dy)
 {_
-    /*
-     * Make sure you can't move a wid outside the parents box.
-     */
+    //
+    // Make sure you can't move a wid outside the parents box.
+    //
     Widp p = w->parent;
     if (p) {
         if (wid_get_movable_bounded(w)) {
@@ -4365,9 +4365,9 @@ static void wid_move_delta_internal (Widp w, int32_t dx, int32_t dy)
 {_
     wid_tree_detach(w);
 
-    /*
-     * Make sure you can't move a wid outside the parents box.
-     */
+    //
+    // Make sure you can't move a wid outside the parents box.
+    //
     Widp p = w->parent;
     if (p) {
         if (wid_get_movable_bounded(w)) {
@@ -4802,32 +4802,32 @@ printf("\nmouse at %d, %d  (%d, %d) count %d", x, y, mouse_x, mouse_y, count);
     return (0);
 }
 
-/*
- * Catch recursive cases like this:
- *
- * #42 0x00000001180a1233 in wid_update (w=0x11f0c0c00) at wid.c:5353
- *
- * #43 0x00000001180bf45d in map_editor_map_thing_replace_template
- *
- * #44 0x00000001180c1509 in map_editor_map_thing_replace (w=0x11f1dca00, x=5,
- *
- * #45 0x00000001180c0275 in map_editor_map_tile_mouse_motion (w=0x11f1dca00,
- *
- * #46 0x00000001180a170f in wid_mouse_motion (x=338, y=357, relx=0, rely=0,
- *
- * #47 0x000000011809ff26 in wid_update_mouse () at wid.c:5371
- *
- * #48 0x00000001180a1233 in wid_update (w=0x11f0c0c00) at wid.c:5353
- *
- * #49 0x00000001180bf45d in map_editor_map_thing_replace_template
- *
- * #50 0x00000001180c1509 in map_editor_map_thing_replace (w=0x11f1dca00, x=5,
- *
- * #51 0x00000001180c0275 in map_editor_map_tile_mouse_motion (w=0x11f1dca00,
- *
- * #52 0x00000001180a170f in wid_mouse_motion (x=338, y=357, relx=0, rely=0,
- *
- */
+//
+// Catch recursive cases like this:
+//
+// #42 0x00000001180a1233 in wid_update (w=0x11f0c0c00) at wid.c:5353
+//
+// #43 0x00000001180bf45d in map_editor_map_thing_replace_template
+//
+// #44 0x00000001180c1509 in map_editor_map_thing_replace (w=0x11f1dca00, x=5,
+//
+// #45 0x00000001180c0275 in map_editor_map_tile_mouse_motion (w=0x11f1dca00,
+//
+// #46 0x00000001180a170f in wid_mouse_motion (x=338, y=357, relx=0, rely=0,
+//
+// #47 0x000000011809ff26 in wid_update_mouse () at wid.c:5371
+//
+// #48 0x00000001180a1233 in wid_update (w=0x11f0c0c00) at wid.c:5353
+//
+// #49 0x00000001180bf45d in map_editor_map_thing_replace_template
+//
+// #50 0x00000001180c1509 in map_editor_map_thing_replace (w=0x11f1dca00, x=5,
+//
+// #51 0x00000001180c0275 in map_editor_map_tile_mouse_motion (w=0x11f1dca00,
+//
+// #52 0x00000001180a170f in wid_mouse_motion (x=338, y=357, relx=0, rely=0,
+//
+//
 static int wid_mouse_motion_recursion;
 
 void wid_mouse_motion (int32_t x, int32_t y,
@@ -4867,9 +4867,9 @@ void wid_mouse_motion (int32_t x, int32_t y,
             continue;
         }
 
-        /*
-         * Allow wheel events to go everywhere
-         */
+        //
+        // Allow wheel events to go everywhere
+        //
         if (!wheelx && !wheely) {
             w = wid_find_at(w, x, y);
             if (!w) {
@@ -4878,9 +4878,9 @@ void wid_mouse_motion (int32_t x, int32_t y,
         }
 
         if (wid_ignore_events(w)) {
-            /*
-             * This wid is ignoring events, but what about the parent?
-             */
+            //
+            // This wid is ignoring events, but what about the parent?
+            //
             w = w->parent;
             while (w) {
                 if (!wid_ignore_events(w)) {
@@ -4894,9 +4894,9 @@ void wid_mouse_motion (int32_t x, int32_t y,
             }
         }
 
-        /*
-         * Over a new wid.
-         */
+        //
+        // Over a new wid.
+        //
 
         while (w &&
                !wid_m_over_b(w, x, y, relx, rely, wheelx, wheely)) {
@@ -4906,14 +4906,14 @@ void wid_mouse_motion (int32_t x, int32_t y,
         uint8_t done = false;
 
         if (!w) {
-            /*
-             * Allow scrollbar to grab.
-             */
+            //
+            // Allow scrollbar to grab.
+            //
         } else {
-            /*
-             * This widget reacted somehow when we went over it. i.e. popup ot
-             * function.
-             */
+            //
+            // This widget reacted somehow when we went over it. i.e. popup ot
+            // function.
+            //
             over = true;
         }
 
@@ -4924,10 +4924,10 @@ void wid_mouse_motion (int32_t x, int32_t y,
                 over = true;
             }
 
-            /*
-             * If the mouse event is fully processed then do not pass onto
-             * scrollbars.
-             */
+            //
+            // If the mouse event is fully processed then do not pass onto
+            // scrollbars.
+            //
             if (w.get()->on_m_motion) {
                 verify(w.get());
                 if ((w.get()->on_m_motion)(w, x, y, relx, rely, wheelx, wheely)) {
@@ -4943,10 +4943,10 @@ void wid_mouse_motion (int32_t x, int32_t y,
             }
 
             while (w) {
-                /*
-                 * If there are scrollbars and the wid did not grab the event
-                 * then scroll for it.
-                 */
+                //
+                // If there are scrollbars and the wid did not grab the event
+                // then scroll for it.
+                //
                 if (wheely) {
                     if (w->scrollbar_vert &&
                         !wid_get_movable_no_user_scroll(w->scrollbar_vert)) {
@@ -4971,9 +4971,9 @@ void wid_mouse_motion (int32_t x, int32_t y,
                     break;
                 }
 
-                /*
-                 * Maybe the container has a scrollbar. Try it.
-                 */
+                //
+                // Maybe the container has a scrollbar. Try it.
+                //
                 w = w->parent;
             }
         }
@@ -4987,10 +4987,10 @@ void wid_mouse_motion (int32_t x, int32_t y,
         wid_m_over_e();
     }
 
-    /*
-     * If nothing then pass the event to the console to allow scrolling
-     * of the console.
-     */
+    //
+    // If nothing then pass the event to the console to allow scrolling
+    // of the console.
+    //
     if (!got_one){
         if (wid_console_container && (wheelx || wheely)) {
             Widp w = wid_console_container->scrollbar_vert;
@@ -5007,9 +5007,9 @@ void wid_mouse_motion (int32_t x, int32_t y,
     wid_mouse_motion_recursion = 0;
 }
 
-/*
- * If no handler for this button, fake a mouse event.
- */
+//
+// If no handler for this button, fake a mouse event.
+//
 void wid_fake_joy_button (int32_t x, int32_t y)
 {_
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_A)) {
@@ -5081,9 +5081,9 @@ void wid_joy_button (int32_t x, int32_t y)
         return;
     }
 
-    /*
-     * Only if there is a change in status, send an event.
-     */
+    //
+    // Only if there is a change in status, send an event.
+    //
     static std::array<uint32_t, SDL_MAX_BUTTONS> ts;
     int changed = false;
     int b;
@@ -5109,13 +5109,13 @@ void wid_joy_button (int32_t x, int32_t y)
         return;
     }
 
-    /*
-     * Raise on mouse.
-     */
+    //
+    // Raise on mouse.
+    //
     if (w.get()->on_joy_button) {
-        /*
-         * If the button doesn't eat the event, try the parent.
-         */
+        //
+        // If the button doesn't eat the event, try the parent.
+        //
         while (!(w.get()->on_joy_button)(w, x, y)) {
             w = w->parent;
 
@@ -5135,9 +5135,9 @@ void wid_joy_button (int32_t x, int32_t y)
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
 
-        /*
-         * Move on mouse.
-         */
+        //
+        // Move on mouse.
+        //
         if (wid_get_movable(w)) {
             wid_mouse_motion_begin(w, x, y);
             return;
@@ -5173,9 +5173,9 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
         return;
     }
 
-    /*
-     * Raise on mouse.
-     */
+    //
+    // Raise on mouse.
+    //
     if ((w.get()->on_m_down && (w.get()->on_m_down)(w, x, y, button)) ||
         wid_get_movable(w)) {
         //CON("grabbed by %s",wid_name(w).c_str());
@@ -5186,9 +5186,9 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
 
-        /*
-         * Move on mouse.
-         */
+        //
+        // Move on mouse.
+        //
         if (wid_get_movable(w)) {
             wid_mouse_motion_begin(w, x, y);
             return;
@@ -5377,23 +5377,23 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
 #ifdef DEBUG_GL_BLEND
 int vals[] = {
 
-/* GL_SRC_COLOR                      */ 0x0300,
-/* GL_ONE_MINUS_SRC_COLOR            */ 0x0301,
-/* GL_SRC_ALPHA                      */ 0x0302,
-/* GL_ONE_MINUS_SRC_ALPHA            */ 0x0303,
-/* GL_DST_ALPHA                      */ 0x0304,
-/* GL_ONE_MINUS_DST_ALPHA            */ 0x0305,
-/* GL_DST_COLOR                      */ 0x0306,
-/* GL_ONE_MINUS_DST_COLOR            */ 0x0307,
-/* GL_SRC_ALPHA_SATURATE             */ 0x0308,
-/* GL_BLEND_DST_RGB                  */ 0x80C8,
-/* GL_BLEND_SRC_RGB                  */ 0x80C9,
-/* GL_BLEND_DST_ALPHA                */ 0x80CA,
-/* GL_BLEND_SRC_ALPHA                */ 0x80CB,
-/* GL_CONSTANT_COLOR                 */ 0x8001,
-/* GL_ONE_MINUS_CONSTANT_COLOR       */ 0x8002,
-/* GL_CONSTANT_ALPHA                 */ 0x8003,
-/* GL_ONE_MINUS_CONSTANT_ALPHA       */ 0x8004,
+// GL_SRC_COLOR                      */ 0x0300,
+// GL_ONE_MINUS_SRC_COLOR            */ 0x0301,
+// GL_SRC_ALPHA                      */ 0x0302,
+// GL_ONE_MINUS_SRC_ALPHA            */ 0x0303,
+// GL_DST_ALPHA                      */ 0x0304,
+// GL_ONE_MINUS_DST_ALPHA            */ 0x0305,
+// GL_DST_COLOR                      */ 0x0306,
+// GL_ONE_MINUS_DST_COLOR            */ 0x0307,
+// GL_SRC_ALPHA_SATURATE             */ 0x0308,
+// GL_BLEND_DST_RGB                  */ 0x80C8,
+// GL_BLEND_SRC_RGB                  */ 0x80C9,
+// GL_BLEND_DST_ALPHA                */ 0x80CA,
+// GL_BLEND_SRC_ALPHA                */ 0x80CB,
+// GL_CONSTANT_COLOR                 */ 0x8001,
+// GL_ONE_MINUS_CONSTANT_COLOR       */ 0x8002,
+// GL_CONSTANT_ALPHA                 */ 0x8003,
+// GL_ONE_MINUS_CONSTANT_ALPHA       */ 0x8004,
 };
 std::string  vals_str[] = {
 
@@ -5472,9 +5472,9 @@ if (wid_event_to_char(key) == '-') {
         verify(wid_focus.get());
 
         if ((wid_focus->on_key_down)(wid_focus, key)) {
-            /*
-             * Do not raise, gets in the way of popups the callback creates.
-             */
+            //
+            // Do not raise, gets in the way of popups the callback creates.
+            //
             return;
         }
 
@@ -5485,17 +5485,17 @@ if (wid_event_to_char(key) == '-') {
 
     w = wid_key_down_handler(x, y);
     if (!w) {
-        /*
-         * If no-one handles it, feed it to the default handler, the console.
-         */
+        //
+        // If no-one handles it, feed it to the default handler, the console.
+        //
         wid_receive_unhandled_input(key);
         return;
     }
 
     if ((w.get()->on_key_down)(w, key)) {
-        /*
-         * Do not raise, gets in the way of popups the callback creates.
-         */
+        //
+        // Do not raise, gets in the way of popups the callback creates.
+        //
 //CON("wid did not handle");
         return;
     }
@@ -5503,17 +5503,17 @@ if (wid_event_to_char(key) == '-') {
 try_parent:
     w = w->parent;
 
-    /*
-     * Ripple the key event to the parent so global things like pressing
-     * escape can do things.
-     */
+    //
+    // Ripple the key event to the parent so global things like pressing
+    // escape can do things.
+    //
     while (w) {
         if (w.get()->on_key_down) {
             if ((w.get()->on_key_down)(w, key)) {
-                /*
-                 * Do not raise, gets in the way of popups the callback
-                 * creates.
-                 */
+                //
+                // Do not raise, gets in the way of popups the callback
+                // creates.
+                //
                 return;
             }
         }
@@ -5521,9 +5521,9 @@ try_parent:
         w = w->parent;
     }
 
-    /*
-     * If no-one handles it, feed it to the default handler, the console.
-     */
+    //
+    // If no-one handles it, feed it to the default handler, the console.
+    //
     wid_receive_unhandled_input(key);
 }
 
@@ -5540,9 +5540,9 @@ void wid_key_up (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
         if ((wid_focus->on_key_up)(wid_focus, key)) {
             wid_set_mode(wid_focus, WID_MODE_ACTIVE);
 
-            /*
-             * Do not raise, gets in the way of popups the callback creates.
-             */
+            //
+            // Do not raise, gets in the way of popups the callback creates.
+            //
             return;
         }
 
@@ -5553,10 +5553,10 @@ void wid_key_up (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 
     w = wid_key_up_handler(x, y);
     if (!w) {
-        /*
-         * If no-one handles it, drop it. We only hand key down to the
-         * console.
-         */
+        //
+        // If no-one handles it, drop it. We only hand key down to the
+        // console.
+        //
         return;
     }
 
@@ -5565,19 +5565,19 @@ void wid_key_up (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 
         wid_set_mode(w, WID_MODE_ACTIVE);
 
-        /*
-         * Do not raise, gets in the way of popups the callback creates.
-         */
+        //
+        // Do not raise, gets in the way of popups the callback creates.
+        //
         return;
     }
 
 try_parent:
     w = w->parent;
 
-    /*
-     * Ripple the key event to the parent so global things like pressing
-     * escape can do things.
-     */
+    //
+    // Ripple the key event to the parent so global things like pressing
+    // escape can do things.
+    //
     while (w) {
         if (w.get()->on_key_up) {
             if ((w.get()->on_key_up)(w, key)) {
@@ -5585,10 +5585,10 @@ try_parent:
 
                 wid_set_mode(w, WID_MODE_ACTIVE);
 
-                /*
-                 * Do not raise, gets in the way of popups the callback
-                 * creates.
-                 */
+                //
+                // Do not raise, gets in the way of popups the callback
+                // creates.
+                //
                 return;
             }
         }
@@ -5597,9 +5597,9 @@ try_parent:
     }
 }
 
-/*
- * Get the onscreen co-ords of the widget, clipped to the parent.
- */
+//
+// Get the onscreen co-ords of the widget, clipped to the parent.
+//
 void wid_get_abs_coords (Widp w,
                          int32_t *tlx,
                          int32_t *tly,
@@ -5659,9 +5659,9 @@ void wid_get_abs_coords (Widp w,
     w->abs_br.y = *bry;
 }
 
-/*
- * Get the onscreen co-ords of the widget, no clipping
- */
+//
+// Get the onscreen co-ords of the widget, no clipping
+//
 void wid_get_abs_coords_unclipped (Widp w,
                                    int32_t *tlx,
                                    int32_t *tly,
@@ -5705,9 +5705,9 @@ void wid_get_abs_coords_unclipped (Widp w,
     w->abs_br.y = *bry;
 }
 
-/*
- * Get the onscreen co-ords of the widget, clipped to the parent.
- */
+//
+// Get the onscreen co-ords of the widget, clipped to the parent.
+//
 void wid_get_abs (Widp w, int32_t *x, int32_t *y)
 {_
     int32_t tlx;
@@ -5732,9 +5732,9 @@ void wid_get_pct (Widp w, double *px, double *py)
     *py = (double)y / (double)ASCII_HEIGHT;
 }
 
-/*
- * Finish off a widgets move.
- */
+//
+// Finish off a widgets move.
+//
 void wid_move_end (Widp w)
 {_
     while (w->moving) {
@@ -5742,9 +5742,9 @@ void wid_move_end (Widp w)
     }
 }
 
-/*
- * Do stuff for widgets once per frame.
- */
+//
+// Do stuff for widgets once per frame.
+//
 static void wid_gc (Widp w)
 {_
     verify(w.get());
@@ -5754,9 +5754,9 @@ static void wid_gc (Widp w)
         return;
     }
 
-    /*
-     * Delayed destroy?
-     */
+    //
+    // Delayed destroy?
+    //
     if (w->destroy_when && (wid_time >= w->destroy_when)) {
         verify(w.get());
 
@@ -5769,9 +5769,9 @@ static void wid_gc (Widp w)
     }
 }
 
-/*
- * Display one wid and its children
- */
+//
+// Display one wid and its children
+//
 static void wid_display (Widp w,
                          uint8_t disable_scissor,
                          uint8_t *updated_scissors,
@@ -5793,19 +5793,19 @@ static void wid_display (Widp w,
     int32_t bry;
     Widp p;
 
-    /*
-     * Bounding box for drawing the wid. Co-ords are negative as we
-     * flipped the screen
-     */
+    //
+    // Bounding box for drawing the wid. Co-ords are negative as we
+    // flipped the screen
+    //
     tlx = w->abs_tl.x;
     tly = w->abs_tl.y;
     brx = w->abs_br.x;
     bry = w->abs_br.y;
 
-    /*
-     * If we're clipped out of existence! then nothing to draw. This can
-     * be outside the bounds of a widget or if at the top level, off screeen.
-     */
+    //
+    // If we're clipped out of existence! then nothing to draw. This can
+    // be outside the bounds of a widget or if at the top level, off screeen.
+    //
     if (clip) {
         clip_width = brx - tlx;
         if (clip_width < 0) {
@@ -5822,20 +5822,20 @@ static void wid_display (Widp w,
     always_hidden = wid_is_always_hidden(w);
 
     if (always_hidden) {
-        /*
-         * Always render. Not hidden yet.
-         */
+        //
+        // Always render. Not hidden yet.
+        //
         return;
     } else if (hidden) {
-        /*
-         * Hidden or parent is hidden.
-         */
+        //
+        // Hidden or parent is hidden.
+        //
         return;
     }
 
-    /*
-     * Record the original pre clip sizes for text centering.
-     */
+    //
+    // Record the original pre clip sizes for text centering.
+    //
     otlx = wid_get_tl_x(w);
     otly = wid_get_tl_y(w);
     obrx = wid_get_br_x(w);
@@ -5852,23 +5852,23 @@ static void wid_display (Widp w,
     owidth = obrx - otlx;
     oheight = obry - otly;
 
-    /*
-     * If this widget was active and the time has elapsed, make it normal.
-     */
+    //
+    // If this widget was active and the time has elapsed, make it normal.
+    //
     if (wid_get_mode(w) == WID_MODE_ACTIVE) {
         if ((wid_time - w->timestamp_last_mode_change) > 250) {
             wid_set_mode(w, WID_MODE_NORMAL);
         }
     }
 
-    /*
-     * Draw the wid frame
-     */
+    //
+    // Draw the wid frame
+    //
     color col_border_text = wid_get_color(w, WID_COLOR_TEXT);
 
-    /*
-     * If inputting text, show a cursor.
-     */
+    //
+    // If inputting text, show a cursor.
+    //
     std::wstring text;
 
     if (wid_get_show_cursor(w)) {
@@ -5881,21 +5881,21 @@ static void wid_display (Widp w,
         disable_scissor = true;
     }
 
-    /*
-     * Should be no need for scissors if you do not have any children
-     * or are not the top level wid.
-     */
+    //
+    // Should be no need for scissors if you do not have any children
+    // or are not the top level wid.
+    //
     if (!disable_scissor) {
 #if 0
-       /*
-        * Why would we not always want scissors on?
-        */
+       //
+       // Why would we not always want scissors on?
+       //
        if (!w->children_display_sorted.empty() || !w->parent || w->show_cursor) {
 #endif
-            /*
-             * Tell the parent we are doing scissors so they can re-do
-             * their own scissors.
-             */
+            //
+            // Tell the parent we are doing scissors so they can re-do
+            // their own scissors.
+            //
             if (updated_scissors) {
                 *updated_scissors = true;
             }
@@ -5980,9 +5980,9 @@ static void wid_display (Widp w,
     if (is_button) {
         ascii_put_button(w_button_args, text.c_str());
     } else if (w->square) {
-        /*
-         * Flat square
-         */
+        //
+        // Flat square
+        //
         if (bry == tly) {
             auto c = '.';
             auto color = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
@@ -5996,12 +5996,12 @@ static void wid_display (Widp w,
             ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, L"");
         }
     } else if (w->box) {
-        /*
-         * Bevelled box
-         */
+        //
+        // Bevelled box
+        //
         ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, L"");
     } else {
-        /* shape none */
+        // shape none */
     }
 
     {
@@ -6023,9 +6023,9 @@ static void wid_display (Widp w,
         int32_t xpc, ypc;
         int32_t width, height;
 
-        /*
-         * Manually specified text position.
-         */
+        //
+        // Manually specified text position.
+        //
         width = ascii_strlen(text);
         height = 0;
 
@@ -6033,13 +6033,13 @@ static void wid_display (Widp w,
             x = (owidth * xpc) - ((int32_t)width / 2) + otlx;
             y = (oheight * ypc) - ((int32_t)height / 2) + otly;
         } else {
-            /*
-             * Position the text
-             */
+            //
+            // Position the text
+            //
             if (((int)width > owidth) && w->show_cursor) {
-                /*
-                 * If the text is too big, center it on the cursor.
-                 */
+                //
+                // If the text is too big, center it on the cursor.
+                //
                 x = ((owidth - (int32_t)width) / 2) + otlx;
 
                 uint32_t c_width = (width / (double)text.length());
@@ -6081,10 +6081,10 @@ static void wid_display (Widp w,
 
         wid_display(child, disable_scissor, &child_updated_scissors, clip);
 
-        /*
-         * Need to re-enforce the parent's scissors if the child did
-         * their own bit of scissoring?
-         */
+        //
+        // Need to re-enforce the parent's scissors if the child did
+        // their own bit of scissoring?
+        //
         if (!disable_scissor && child_updated_scissors) {
             wid_set_scissors(
                 tlx,
@@ -6095,9 +6095,9 @@ static void wid_display (Widp w,
     }
 }
 
-/*
- * Do stuff for all widgets.
- */
+//
+// Do stuff for all widgets.
+//
 void wid_move_all (void)
 {_
     if (wid_top_level3.empty()) {
@@ -6125,9 +6125,9 @@ void wid_move_all (void)
 
             wid_move_dequeue(w);
 
-            /*
-             * If nothing else in the move queue, we're dine.
-             */
+            //
+            // If nothing else in the move queue, we're dine.
+            //
             if (!w->moving) {
                 continue;
             }
@@ -6146,9 +6146,9 @@ void wid_move_all (void)
     }
 }
 
-/*
- * Do stuff for all widgets.
- */
+//
+// Do stuff for all widgets.
+//
 void wid_gc_all (void)
 {_
     Widp w;
@@ -6165,9 +6165,9 @@ void wid_gc_all (void)
     }
 }
 
-/*
- * Do stuff for all widgets.
- */
+//
+// Do stuff for all widgets.
+//
 void wid_tick_all (void)
 {_
 //    wid_time = time_get_time_ms_cached();
@@ -6238,9 +6238,9 @@ void wid_mouse_move (Widp w)
     mouse_y = y;
 }
 
-/*
- * Display all widgets
- */
+//
+// Display all widgets
+//
 void wid_display_all (void)
 {_
     wid_tick_all();
@@ -6279,9 +6279,9 @@ void wid_display_all (void)
     }
 #endif
 
-    /*
-     * FPS counter.
-     */
+    //
+    // FPS counter.
+    //
     if (game->config.fps_counter) {
         ascii_putf(ASCII_WIDTH - 6, 1, GREEN, BLACK, L"%u FPS", game->fps_count);
     }
@@ -6402,9 +6402,9 @@ static void wid_move_enqueue (Widp w,
     verify(w.get());
 
     if (w->moving) {
-        /*
-         * Smoother character moves with this.
-         */
+        //
+        // Smoother character moves with this.
+        //
 #if 1
         w->moving_start.x = moving_start_x;
         w->moving_start.y = moving_start_y;
@@ -6414,10 +6414,10 @@ static void wid_move_enqueue (Widp w,
         w->timestamp_moving_end = wid_time + ms;
         return;
 #else
-        /*
-         * If this is not a widget with a thing, then just zoom it to the
-         * destination. We don't need queues.
-         */
+        //
+        // If this is not a widget with a thing, then just zoom it to the
+        // destination. We don't need queues.
+        //
         Thingp t = wid_get_thing(w);
         if (!t) {
             w->moving_end.x = moving_end_x;
@@ -6524,9 +6524,9 @@ void wid_move_to_pct_in (Widp w, double x, double y, uint32_t ms)
         y *= wid_get_height(w->parent);
     }
 
-    /*
-     * Child postion is relative from the parent.
-     */
+    //
+    // Child postion is relative from the parent.
+    //
     Widp p = w->parent;
     if (p) {
         x += wid_get_tl_x(p);
@@ -6536,10 +6536,10 @@ void wid_move_to_pct_in (Widp w, double x, double y, uint32_t ms)
     wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
-/*
- * Return numbers in the 0 to 1 range indicating how far the move has
- * progressed from start to end.
- */
+//
+// Return numbers in the 0 to 1 range indicating how far the move has
+// progressed from start to end.
+//
 void wid_get_move_interpolated_progress (Widp w, double *dx, double *dy)
 {_
     verify(w.get());
@@ -6580,9 +6580,9 @@ void wid_move_to_abs_poffset_in (Widp w, int32_t x, int32_t y, uint32_t ms)
 {_
     verify(w.get());
 
-    /*
-     * Child postion is relative from the parent.
-     */
+    //
+    // Child postion is relative from the parent.
+    //
     Widp p = w->parent;
     if (p) {
         x += wid_get_tl_x(p);
@@ -6612,9 +6612,9 @@ void wid_move_to_pct_centered_in (Widp w, double x, double y, uint32_t ms)
         y *= wid_get_height(w->parent);
     }
 
-    /*
-     * Child postion is relative from the parent.
-     */
+    //
+    // Child postion is relative from the parent.
+    //
     Widp p = w->parent;
     if (p) {
         x += wid_get_tl_x(p);
@@ -6639,9 +6639,9 @@ void wid_move_delta_pct_in (Widp w, double x, double y, uint32_t ms)
         y *= wid_get_height(w->parent);
     }
 
-    /*
-     * Child postion is relative from the parent.
-     */
+    //
+    // Child postion is relative from the parent.
+    //
     Widp p = w->parent;
     if (p) {
         x += wid_get_tl_x(p);
