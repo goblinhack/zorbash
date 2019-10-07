@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include <SDL.h>
 
@@ -35,9 +35,9 @@ void wid_minicon_fini (void)
         wid_minicon_inited = false;
     }
 
-    /*
-     * Flush the logs now the minicon exists.
-     */
+    //
+    // Flush the logs now the minicon exists.
+    //
     auto iter = wid_minicon_lines.begin();
 
     while (iter != wid_minicon_lines.end()) {
@@ -54,9 +54,9 @@ uint8_t wid_minicon_init (void)
     return (true);
 }
 
-/*
- * Scroll back to the bottom of the screen.
- */
+//
+// Scroll back to the bottom of the screen.
+//
 static void wid_minicon_reset_scroll (void)
 {_
     if (!wid_minicon_vert_scroll) {
@@ -72,18 +72,18 @@ void wid_minicon_scroll (Widp w, std::wstring str)
 
     wid_scroll_text(w);
 
-    /*
-     * Get the wid on the bottom of the list/screen.
-     */
+    //
+    // Get the wid on the bottom of the list/screen.
+    //
     tmp = wid_get_head(w);
     if (tmp) {
         wid_set_text(tmp, str);
     }
 }
 
-/*
- * Log a message to the minicon
- */
+//
+// Log a message to the minicon
+//
 static void wid_minicon_log_ (std::wstring s)
 {_
     static int32_t log_wid_minicon_buffered_lines;
@@ -94,9 +94,9 @@ static void wid_minicon_log_ (std::wstring s)
 
     wid_minicon_reset_scroll();
 
-    /*
-     * Before the minicon is ready, we buffer the logs.
-     */
+    //
+    // Before the minicon is ready, we buffer the logs.
+    //
     if (!wid_minicon_input_line) {
         auto result = wid_minicon_lines.insert(
                         std::make_pair(log_wid_minicon_buffered_lines++, s));
@@ -109,9 +109,9 @@ static void wid_minicon_log_ (std::wstring s)
         return;
     }
 
-    /*
-     * Flush the logs now the minicon exists.
-     */
+    //
+    // Flush the logs now the minicon exists.
+    //
     wid_minicon_flush();
 
     wid_minicon_scroll(wid_minicon_input_line, s);
@@ -129,9 +129,9 @@ void wid_minicon_flush (void)
     wid_minicon_reset_scroll();
 }
 
-/*
- * Log a message to the minicon
- */
+//
+// Log a message to the minicon
+//
 void wid_minicon_log (std::string s)
 {_
     int chars_per_line = MINICON_WIDTH;
@@ -145,9 +145,9 @@ void wid_minicon_log (std::string s)
     }
 }
 
-/*
- * Log a message to the minicon
- */
+//
+// Log a message to the minicon
+//
 void wid_minicon_log (std::wstring s)
 {_
     int chars_per_line = MINICON_WIDTH;
@@ -161,9 +161,9 @@ void wid_minicon_log (std::wstring s)
     }
 }
 
-/*
- * Create the minicon
- */
+//
+// Create the minicon
+//
 static void wid_minicon_wid_create (void)
 {_
     int h = MINICON_VIS_HEIGHT;

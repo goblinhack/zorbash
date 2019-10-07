@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include <SDL.h>
 
@@ -36,9 +36,9 @@ void wid_console_fini (void)
         wid_console_inited = false;
     }
 
-    /*
-     * Flush the logs now the console exists.
-     */
+    //
+    // Flush the logs now the console exists.
+    //
     auto iter = wid_console_lines.begin();
 
     while (iter != wid_console_lines.end()) {
@@ -59,9 +59,9 @@ uint8_t wid_console_init (void)
     return (true);
 }
 
-/*
- * Scroll back to the bottom of the screen.
- */
+//
+// Scroll back to the bottom of the screen.
+//
 static void wid_console_reset_scroll (void)
 {_
     if (!wid_console_vert_scroll) {
@@ -71,9 +71,9 @@ static void wid_console_reset_scroll (void)
     wid_move_to_bottom(wid_console_vert_scroll);
 }
 
-/*
- * Log a message to the console
- */
+//
+// Log a message to the console
+//
 static void wid_console_log_ (std::wstring s)
 {_
     static int32_t log_wid_console_buffered_lines;
@@ -84,9 +84,9 @@ static void wid_console_log_ (std::wstring s)
 
     wid_console_reset_scroll();
 
-    /*
-     * Before the console is ready, we buffer the logs.
-     */
+    //
+    // Before the console is ready, we buffer the logs.
+    //
     if (!wid_console_input_line) {
         auto result = wid_console_lines.insert(
                         std::make_pair(log_wid_console_buffered_lines++, s));
@@ -98,9 +98,9 @@ static void wid_console_log_ (std::wstring s)
         return;
     }
 
-    /*
-     * Flush the logs now the console exists.
-     */
+    //
+    // Flush the logs now the console exists.
+    //
     auto iter = wid_console_lines.begin();
 
     while (iter != wid_console_lines.end()) {
@@ -111,9 +111,9 @@ static void wid_console_log_ (std::wstring s)
     wid_scroll_with_input(wid_console_input_line, s);
 }
 
-/*
- * Log a message to the console
- */
+//
+// Log a message to the console
+//
 void wid_console_log (std::string s)
 {_
     int chars_per_line = CONSOLE_WIDTH;
@@ -127,9 +127,9 @@ void wid_console_log (std::string s)
     }
 }
 
-/*
- * Log a message to the console
- */
+//
+// Log a message to the console
+//
 void wid_console_log (std::wstring s)
 {_
     int chars_per_line = CONSOLE_WIDTH;
@@ -143,9 +143,9 @@ void wid_console_log (std::wstring s)
     }
 }
 
-/*
- * Key down etc...
- */
+//
+// Key down etc...
+//
 uint8_t wid_console_receive_input (Widp w, const SDL_KEYSYM *key)
 {_
     wid_console_reset_scroll();
@@ -159,15 +159,15 @@ uint8_t wid_console_receive_input (Widp w, const SDL_KEYSYM *key)
             break;
     }
 
-    /*
-     * Feed to the general input handler
-     */
+    //
+    // Feed to the general input handler
+    //
     return (wid_receive_input(w, key));
 }
 
-/*
- * Create the console
- */
+//
+// Create the console
+//
 static void wid_console_wid_create (void)
 {_
     {
