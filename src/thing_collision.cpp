@@ -160,9 +160,9 @@ static int circle_box_collision (Thingp C,
 
     double radius = fmin((C1.x - C0.x) / 2.0, (C2.y - C0.y) / 2.0);
 
-    /*
-     * Corner collisions, normal is at 45 degrees. Unless there is a wall.
-     */
+    //
+    // Corner collisions, normal is at 45 degrees. Unless there is a wall.
+    //
     if (distance(C_at, B0) < radius) {
         if (!world->is_wall(B->interpolated_mid_at.x - 1,
                                        B->interpolated_mid_at.y)) {
@@ -266,16 +266,16 @@ collided:
         return (true);
     }
 
-    /*
-     * Sphere may be inside box.
-     */
+    //
+    // Sphere may be inside box.
+    //
     return (false);
 }
 
-/*
- * If two circles collide, the resultant direction is along the normal between
- * the two center of masses of the circles.
- */
+//
+// If two circles collide, the resultant direction is along the normal between
+// the two center of masses of the circles.
+//
 static int circle_circle_collision (Thingp A,
                                     Thingp B,
                                     fpoint at,
@@ -307,9 +307,9 @@ static int circle_circle_collision (Thingp A,
 
     double diff = dist_squared - touching_dist * touching_dist;
     if (diff > 0.0) {
-        /*
-         * Circles are not touching
-         */
+        //
+        // Circles are not touching
+        //
         return (false);
     }
 
@@ -325,9 +325,9 @@ static int circle_circle_collision (Thingp A,
 }
 #endif
 
-/*
- * Add a thing to the list of things that could be hit on this attack.
- */
+//
+// Add a thing to the list of things that could be hit on this attack.
+//
 static void
 thing_add_ai_possible_hit (Thingp target,
                            std::string reason,
@@ -364,33 +364,33 @@ thing_ai_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
 }
 #endif
 
-/*
- * Reset the list of things we can possibly hit.
- */
+//
+// Reset the list of things we can possibly hit.
+//
 static void thing_possible_init (void)
 {
     thing_colls.resize(0);
 }
 
-/*
- * Find the thing with the highest priority to hit.
- */
+//
+// Find the thing with the highest priority to hit.
+//
 void Thing::ai_possible_hits_find_best (void)
 {_
     auto me = this;
     ThingColl *best = nullptr;
 
     for (auto cand : thing_colls) {
-        /*
-         * Don't be silly and hit yourself.
-         */
+        //
+        // Don't be silly and hit yourself.
+        //
         if (cand.target == me) {
             continue;
         }
 
-        /*
-         * Skip things that aren't really hitable.
-         */
+        //
+        // Skip things that aren't really hitable.
+        //
         if (tp_gfx_is_weapon_carry_anim(cand.target->tp())) {
             continue;
         }
@@ -401,14 +401,14 @@ void Thing::ai_possible_hits_find_best (void)
         }
 
         if (cand.priority > best->priority) {
-            /*
-             * If this target is higher prio, prefer it.
-             */
+            //
+            // If this target is higher prio, prefer it.
+            //
             best = &cand;
         } else if (cand.priority == best->priority) {
-            /*
-             * If this target is closer, prefer it.
-             */
+            //
+            // If this target is closer, prefer it.
+            //
             auto me_pos = get_interpolated_mid_at();
             auto best_pos = best->target->get_interpolated_mid_at();
 
@@ -462,9 +462,9 @@ bool things_overlap (const Thingp A, const Thingp B)
 
     if (tp_collision_circle(A->tp) &&
         !tp_collision_circle(B->tp)) {
-        if (circle_box_collision(A, /* circle */
+        if (circle_box_collision(A, // circle 
                                  A_at,
-                                 B, /* box */
+                                 B, // box 
                                  B_at,
                                  &normal_A,
                                  &intersect,
@@ -476,9 +476,9 @@ bool things_overlap (const Thingp A, const Thingp B)
 
     if (!tp_collision_circle(A->tp) &&
          tp_collision_circle(B->tp)) {
-        if (circle_box_collision(B, /* circle */
+        if (circle_box_collision(B, // circle 
                                  B_at,
-                                 A, /* box */
+                                 A, // box 
                                  A_at,
                                  &normal_A,
                                  &intersect,
@@ -490,8 +490,8 @@ bool things_overlap (const Thingp A, const Thingp B)
 
     if (tp_collision_circle(A->tp) &&
         tp_collision_circle(B->tp)) {
-        if (circle_circle_collision(A, /* circle */
-                                    B, /* box */
+        if (circle_circle_collision(A, // circle 
+                                    B, // box 
                                     A_at,
                                     &intersect)) {
             return (things_tile_overlap(A, B));
@@ -521,21 +521,21 @@ bool Thing::ai_possible_hit (Thingp it, int x, int y, int dx, int dy)
     Thingp owner_it = it->owner_get();
     Thingp owner_me = me->owner_get();
 
-    /*
-     * Need this or shields attack the player.
-     */
+    //
+    // Need this or shields attack the player.
+    //
     if ((owner_it == me) || (owner_me == it)) {
         return (true);
     }
 
-    /*
-     * Sword use hits?
-     */
+    //
+    // Sword use hits?
+    //
     if (tp_gfx_is_weapon_use_anim(me_tp)) {
         if (tp_is_monst(it_tp)) {
-            /*
-             * Weapon hits monster or generator.
-             */
+            //
+            // Weapon hits monster or generator.
+            //
             if (things_overlap(me, it)) {
                 thing_ai_possible_hit_add_hitter_killed_on_hitting(
                         it, "sword hit thing");
@@ -556,9 +556,9 @@ bool Thing::ai_possible_hit (Thingp it, int x, int y, int dx, int dy)
     return (true);
 }
 
-/*
- * Have we hit anything?
- */
+//
+// Have we hit anything?
+//
 bool Thing::ai_collisions_handle (void)
 {_
     int minx = mid_at.x - thing_collision_tiles;
