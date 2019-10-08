@@ -562,5 +562,16 @@ static void wid_test_wid_create (void)
         point br = {ITEMBAR_TL_X - 2, 22 }; // ITEMBAR_TL_Y - 2};
         auto w = new WidPopup(tl, br);
         w->log("This is a really long descriptive string that is a bit boring");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("hello");
     }
 }

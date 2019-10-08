@@ -16,10 +16,10 @@ private:
     int scroll_height {};
 
     Widp wid_popup_container {};
-    Widp wid_popup_vert_scroll {};
-    Widp wid_popup_horiz_scroll {};
-    Widp wid_popup_input_line {};
-    Widp wid_popup_window {};
+    Widp wid_vert_scroll {};
+    Widp wid_horiz_scroll {};
+    Widp wid_text_last {};
+    Widp wid_text_area {};
 
     std::vector<Widp> children;
 
