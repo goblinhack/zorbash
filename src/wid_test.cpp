@@ -14,6 +14,7 @@
 #include "my_string.h"
 #include "my_wid.h"
 #include "my_wid_popup.h"
+#include "my_wid_text_box.h"
 #include "my_ascii.h"
 
 static void wid_test_wid_create(void);
@@ -561,6 +562,19 @@ static void wid_test_wid_create (void)
         point tl = {2, MINICON_VIS_HEIGHT + 2};
         point br = {ITEMBAR_TL_X - 2, ITEMBAR_TL_Y - 2};
         auto w = new WidPopup(tl, br, tile_find_mand("player1.1"));
+        w->log("This is a really long descriptive string that is a bit boring");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("..");
+        w->log("hello");
+    }
+
+    {
+        point tl = {20, 2};
+        point br = {30, 10};
+        auto w = new WidTextBox(tl, br);
         w->log("This is a really long descriptive string that is a bit boring");
         w->log("..");
         w->log("..");
