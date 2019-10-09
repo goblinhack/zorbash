@@ -17,43 +17,76 @@
 
 WidPopup::~WidPopup()
 {
-    wid_destroy(&wid_popup_container);
+    wid_destroy(&wid_text_inner_area);
     wid_destroy(&wid_vert_scroll);
     wid_destroy(&wid_horiz_scroll);
     wid_destroy(&wid_text_last);
     wid_destroy(&wid_text_area);
 }
 
-WidPopup::WidPopup (point tl, point br) : tl(tl), br(br)
+WidPopup::WidPopup (point tl, point br, Tilep title_tile) : 
+    tl(tl), br(br), title_tile(title_tile)
 {_
-    int w = br.x - tl.x;
-    int h = br.y - tl.y;
+    int outer_w = br.x - tl.x;
+    int outer_h = br.y - tl.y;
+    width = outer_w;
+    height = outer_h;
 
-    width = w;
-    height = h;
-    scroll_height = h * 2;
+    point inner_tl = point(0, 0);
+    point inner_br = point(width, height);
+    int inner_w = inner_br.x - inner_tl.x;
+    int inner_h = inner_br.y - inner_tl.y;
+    int tile_size = 4;
+    if (title_tile) {
+        inner_h -= tile_size;
+        inner_tl.y += tile_size;
+    }
+CON("outer %d %d -> %d %d",tl.x, tl.y, br.x,br.y);
+CON("inner %d %d -> %d %d",inner_tl.x, inner_tl.y, inner_br.x,inner_br.y);
+
+    scroll_height = inner_h * 2;
     line_count = 0;
 
     {
-        wid_text_area = wid_new_square_window("wid_popup");
-        wid_set_pos(wid_text_area, tl, br);
-        wid_set_shape_box(wid_text_area);
-        wid_set_style(wid_text_area, 1);
+        wid_popup_container = wid_new_square_window("wid_popup");
+        wid_set_pos(wid_popup_container, tl, br);
+        wid_set_shape_box(wid_popup_container);
+        wid_set_style(wid_popup_container, 1);
+    }
+
+    if (title_tile) {
+        wid_title = wid_new_square_button(wid_popup_container,
+                                          "wid title");
+        auto title_x = (outer_w - tile_size) / 2;
+        wid_set_fg_tile(wid_title, title_tile);
+CON("title at %d", title_x);
+        wid_set_pos(wid_title, 
+                    point(title_x, 0),
+                    point(title_x + tile_size - 1, tile_size - 1));
+        wid_set_shape_box(wid_title);
+        wid_set_style(wid_title, 3);
+    }
+
+    {
+        wid_text_area = wid_new_square_button(wid_popup_container,
+                                              "wid text area");
+        wid_set_pos(wid_text_area, inner_tl, inner_br);
+        wid_set_shape_none(wid_text_area);
     }
 
     {
         point tl = {1, 1};
-        point br = {w - 1, h - 1};
+        point br = {inner_w - 1, inner_h - 1};
 
-        wid_popup_container = wid_new_square_button(wid_text_area,
-                                                    "wid popup container");
-        wid_set_pos(wid_popup_container, tl, br);
-        wid_set_style(wid_popup_container, 2);
+        wid_text_inner_area = wid_new_square_button(wid_text_area,
+                                                    "wid text inner area");
+        wid_set_pos(wid_text_inner_area, tl, br);
+        wid_set_shape_none(wid_text_inner_area);
     }
 
     {
         int32_t row;
-        int row_bottom = h - 1;
+        int row_bottom = inner_h - 1;
 
         Widp child = 0;
         Widp prev = 0;
@@ -61,9 +94,9 @@ WidPopup::WidPopup (point tl, point br) : tl(tl), br(br)
         for (row = 0; row < scroll_height; row++) {
             row_bottom --;
             point tl = { 0, row_bottom, };
-            point br = { w - 2, row_bottom, };
+            point br = { inner_w - 2, row_bottom, };
 
-            child = wid_new_container(wid_popup_container, "");
+            child = wid_new_container(wid_text_inner_area, "");
             children.push_back(child);
 
             wid_set_shape_none(child);
@@ -85,14 +118,14 @@ WidPopup::WidPopup (point tl, point br) : tl(tl), br(br)
     }
 
     wid_vert_scroll =
-        wid_new_vert_scroll_bar(wid_text_area, "", wid_popup_container);
+        wid_new_vert_scroll_bar(wid_text_area, "", wid_text_inner_area);
     wid_horiz_scroll =
-        wid_new_horiz_scroll_bar(wid_text_area, "", wid_popup_container);
+        wid_new_horiz_scroll_bar(wid_text_area, "", wid_text_inner_area);
 
     wid_hide(wid_get_parent(wid_vert_scroll));
     wid_hide(wid_get_parent(wid_horiz_scroll));
 
-    wid_update(wid_text_area);
+    wid_update(wid_popup_container);
 }
 
 //

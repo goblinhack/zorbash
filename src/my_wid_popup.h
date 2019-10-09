@@ -20,16 +20,19 @@ private:
     Widp wid_horiz_scroll {};
     Widp wid_text_last {};
     Widp wid_text_area {};
+    Widp wid_text_inner_area {};
+    Widp wid_title {};
 
     std::vector<Widp> children;
 
 public:
     point tl;
     point br;
+    Tile title_tile;
 
 public:
     ~WidPopup();
-    WidPopup(point tl, point br);
+    WidPopup (point tl, point br, Tilep title_tile=nullptr);
 
 private:
     void log_(std::wstring str);
