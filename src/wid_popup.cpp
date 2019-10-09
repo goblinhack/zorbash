@@ -41,8 +41,6 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile) :
         inner_h -= tile_size;
         inner_tl.y += tile_size;
     }
-CON("outer %d %d -> %d %d",tl.x, tl.y, br.x,br.y);
-CON("inner %d %d -> %d %d",inner_tl.x, inner_tl.y, inner_br.x,inner_br.y);
 
     scroll_height = inner_h * 2;
     line_count = 0;
@@ -59,7 +57,6 @@ CON("inner %d %d -> %d %d",inner_tl.x, inner_tl.y, inner_br.x,inner_br.y);
                                           "wid title");
         auto title_x = (outer_w - tile_size) / 2;
         wid_set_fg_tile(wid_title, title_tile);
-CON("title at %d", title_x);
         wid_set_pos(wid_title, 
                     point(title_x, 0),
                     point(title_x + tile_size - 1, tile_size - 1));
