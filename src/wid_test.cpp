@@ -49,6 +49,70 @@ static uint8_t wid_test_mouse_down (Widp w,
 static void wid_test_wid_create (void)
 {_
     {
+        point tl = {10, 10};
+        point br = {39, 39};
+        auto w = new WidTextBox(tl, br);
+        w->log("This is a really long descriptive string that is a bit boring");
+        w->log("1");
+        w->log("12");
+        w->log("123");
+        w->log("1234");
+        w->log("12345");
+        w->log("123456");
+        w->log("1234567");
+        w->log("12345678");
+        w->log("123456789");
+        w->log("1234567890");
+        w->log("1234567890a");
+        w->log("1234567890ab");
+        w->log("1234567890abb");
+        w->log("1234567890abbb");
+        w->log("1234567890abbbb");
+        w->log("1234567890abbbbb");
+        w->log("1234567890abbbbbb");
+        w->log("1234567890abbbbbbb");
+        w->log("1234567890abbbbbbbb");
+        w->log("1234567890abbbbbbbbb");
+        w->log("1234567890abbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+        w->log("1234567890abcdefghijklmnopqrstuvbbbbbbb");
+        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbend");
+    }
+
+    {
         point tl = {ITEMBAR_TL_X, ITEMBAR_TL_Y};
         point br = {ITEMBAR_BR_X, ITEMBAR_BR_Y};
         color c;
@@ -535,52 +599,19 @@ static void wid_test_wid_create (void)
 
     wid_update(wid_sidebar);
 
-#if 0
-    {
-        point tl = {0, MINICON_VIS_HEIGHT + 2};
-        point br = {ITEMBAR_TL_X - 2, ITEMBAR_TL_Y - 2};
-
-        wid_item_popup = wid_new_square_window("text popup window");
-        wid_set_pos(wid_item_popup, tl, br);
-        wid_set_text(wid_item_popup, L"1");
-        wid_update(wid_item_popup);
-    }
-
-    {
-        fpoint tl = {0, 0};
-        fpoint br = {1, 1};
-
-        auto w = wid_new_square_button(wid_item_popup, "text popup");
-        wid_set_pos_pct(w, tl, br);
-        wid_set_style(w, 2);
-        wid_update(w);
-        wid_set_text(w, L"1");
-    }
-#endif
-
     {
         point tl = {2, MINICON_VIS_HEIGHT + 2};
         point br = {ITEMBAR_TL_X - 2, ITEMBAR_TL_Y - 2};
         auto w = new WidPopup(tl, br, tile_find_mand("player1.1"));
         w->log("This is a really long descriptive string that is a bit boring");
-        w->log("..");
-        w->log("..");
-        w->log("..");
-        w->log("..");
-        w->log("..");
+        w->log("hello");
+        w->log("hello");
+        w->log("hello");
+        w->log("hello");
+        w->log("hello");
+        w->log("hello");
+        w->log("hello");
         w->log("hello");
     }
 
-    {
-        point tl = {20, 2};
-        point br = {30, 10};
-        auto w = new WidTextBox(tl, br);
-        w->log("This is a really long descriptive string that is a bit boring");
-        w->log("..");
-        w->log("..");
-        w->log("..");
-        w->log("..");
-        w->log("..");
-        w->log("hello");
-    }
 }

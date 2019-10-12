@@ -47,17 +47,10 @@ typedef enum {
 #define WID_MODE_FIRST WID_MODE_NORMAL
 
 color wid_get_color(Widp, wid_color which);
-color wid_get_mode_color(Widp, wid_color which);
 extern int wid_mouse_visible;
-fsize wid_get_tex_br(Widp);
-fsize wid_get_tex_tl(Widp);
-int32_t wid_get_br_x(Widp);
-int32_t wid_get_br_y(Widp);
-int32_t wid_get_cx(Widp);
-int32_t wid_get_cy(Widp);
-int32_t wid_get_height(Widp);
 int32_t wid_get_tl_x(Widp);
 int32_t wid_get_tl_y(Widp);
+int32_t wid_get_height(Widp);
 int32_t wid_get_width(Widp);
 std::string to_string(Widp);
 std::string wid_get_name(Widp);
@@ -125,8 +118,6 @@ void wid_get_abs_coords(Widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_
 void wid_get_abs_coords_unclipped(Widp w, int32_t *tlx, int32_t *tly, int32_t *brx, int32_t *bry);
 void wid_get_children_size(Widp, int32_t *width, int32_t *height);
 void wid_get_move_interpolated_progress(Widp w, double *dx, double *dy);
-void wid_get_mxy(Widp w, int32_t *x, int32_t *y);
-void wid_get_offset(Widp, point *offset);
 void wid_get_pct(Widp w, double *x, double *y);
 void wid_get_tl_br(Widp, point *tl, point *br);
 void wid_get_tl_x_tl_y_br_x_br_y(Widp w, int32_t *tl_x, int32_t *tl_y, int32_t *br_x, int32_t *br_y);
@@ -186,7 +177,6 @@ void wid_set_movable_horiz(Widp, uint8_t val);
 void wid_set_movable_no_user_scroll(Widp, uint8_t val);
 void wid_set_movable_vert(Widp, uint8_t val);
 void wid_set_name(Widp, std::string);
-void wid_set_offset(Widp, point offset);
 void wid_set_on_destroy(Widp, on_destroy_t fn);
 void wid_set_on_destroy_b(Widp, on_destroy_b_t fn);
 void wid_set_on_joy_button(Widp, on_joy_button_t fn);
@@ -205,7 +195,6 @@ void wid_set_pos_no_relative_offset(Widp w, point tl, point br);
 void wid_set_pos_pct(Widp, fpoint tl, fpoint br);
 void wid_set_prev(Widp w, Widp);
 void wid_set_received_input(Widp, uint8_t val);
-void wid_set_shape_box(Widp);
 void wid_set_shape_none(Widp);
 void wid_set_shape_square(Widp);
 void wid_set_show_cursor(Widp, uint8_t val);
@@ -244,7 +233,6 @@ Widp wid_get_scrollbar_vert(Widp);
 Widp wid_get_top_parent(Widp);
 Widp wid_new_container(Widp, std::string name);
 Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
-Widp wid_new_plain(Widp, std::string name);
 Widp wid_new_square_button(Widp parent, std::string name);
 Widp wid_new_square_window(std::string name);
 Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
@@ -369,10 +357,10 @@ public:
     // Sorted for display order.
     //
     tree_wid_key key                                    {};
-    WidKeyType tree2_key                              {};
-    WidKeyType tree3_key                              {};
-    WidKeyType tree4_key                              {};
-    WidKeyType tree5_key                              {};
+    WidKeyType tree2_key                                {};
+    WidKeyType tree3_key                                {};
+    WidKeyType tree4_key                                {};
+    WidKeyType tree5_key                                {};
 
     wid_key_map_location *in_tree_root                  {};
     wid_key_map_int *in_tree2_unsorted_root             {};
@@ -442,10 +430,8 @@ public:
     uint8_t being_destroyed             {};
     uint8_t do_not_raise                {};
     uint8_t do_not_lower                {};
-    uint8_t can_be_attached_now         {};
     uint8_t disable_scissors            {};
     uint8_t square                      {};
-    uint8_t box                         {};
 
     //
     // Optionally set to the previous wid in a list
@@ -456,7 +442,6 @@ public:
     Widp scrollbar_vert {};
     Widp scrollbar_owner {};
 
-    Tpp tp {};
     int style {};
 
     //

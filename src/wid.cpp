@@ -193,20 +193,6 @@ void wid_dump (Widp w, int depth)
     }
 }
 
-int32_t wid_get_cx (Widp w)
-{_
-    int32_t cx = (w->key.tl.x + w->key.br.x) / 2.0;
-
-    return (cx);
-}
-
-int32_t wid_get_cy (Widp w)
-{_
-    int32_t cy = (w->key.tl.y + w->key.br.y) / 2.0;
-
-    return (cy);
-}
-
 int32_t wid_get_tl_x (Widp w)
 {_
     int32_t cx = (w->key.tl.x + w->key.br.x) / 2.0;
@@ -280,7 +266,6 @@ void wid_set_pos (Widp w, point tl, point br)
         w->key.br.y += wid_get_tl_y(p);
     }
 
-    w->can_be_attached_now = true;
     wid_tree_attach(w);
 }
 
@@ -307,6 +292,19 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
         br.y *= wid_get_height(w->parent);
     }
 
+    if (tl.x < 0) {
+        tl.x = 0;
+    }
+    if (tl.y < 0) {
+        tl.y = 0;
+    }
+    if (br.x >= wid_get_width(w->parent)) {
+        br.x = wid_get_width(w->parent) - 1;
+    }
+    if (br.y >= wid_get_height(w->parent)) {
+        br.y = wid_get_height(w->parent) - 1;
+    }
+
     int32_t key_tl_x = tl.x;
     int32_t key_tl_y = tl.y;
     int32_t key_br_x = br.x;
@@ -328,7 +326,6 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
     w->key.br.x = (int)round(key_br_x);
     w->key.br.y = (int)round(key_br_y);
 
-    w->can_be_attached_now = true;
     wid_tree_attach(w);
 }
 
@@ -363,7 +360,6 @@ void wid_setx_tl_br_pct (Widp w, fpoint tl, fpoint br)
         w->key.br.x += wid_get_tl_x(p);
     }
 
-    w->can_be_attached_now = true;
     wid_tree_attach(w);
 }
 
@@ -398,7 +394,6 @@ void wid_sety_tl_br_pct (Widp w, fpoint tl, fpoint br)
         w->key.br.y += wid_get_tl_y(p);
     }
 
-    w->can_be_attached_now = true;
     wid_tree_attach(w);
 }
 
@@ -417,7 +412,6 @@ void wid_set_pos_no_relative_offset (Widp w, point tl, point br)
     w->key.tl = tl;
     w->key.br = br;
 
-    w->can_be_attached_now = true;
     wid_tree_attach(w);
 }
 
@@ -1129,22 +1123,12 @@ void wid_set_cursor (Widp w, uint32_t val)
 
 int32_t wid_get_width (Widp w)
 {_
-    return (wid_get_br_x(w) - wid_get_tl_x(w));
+    return (wid_get_br_x(w) - wid_get_tl_x(w)) + 1;
 }
 
 int32_t wid_get_height (Widp w)
 {_
-    int32_t h = (wid_get_br_y(w) - wid_get_tl_y(w));
-    if (!h) {
-        return (1);
-    }
-    return (h);
-}
-
-void wid_get_mxy (Widp w, int32_t *x, int32_t *y)
-{_
-    *x = (wid_get_br_x(w) + wid_get_tl_x(w)) / 2.0;
-    *y = (wid_get_br_y(w) + wid_get_tl_y(w)) / 2.0;
+    return (wid_get_br_y(w) - wid_get_tl_y(w)) + 1;
 }
 
 uint8_t wid_get_focusable (Widp w)
@@ -1386,13 +1370,6 @@ static Tilep wid_get_fg_tile (Widp w)
     return (w->fg_tile);
 }
 
-Tpp wid_get_thing_template (Widp w)
-{_
-    verify(w.get());
-
-    return (w->tp);
-}
-
 void wid_set_bg_tile (Widp w, Tilep tile)
 {
     verify(w.get());
@@ -1439,42 +1416,6 @@ void wid_set_fg_tilename (Widp w, std::string name)
     w->fg_tile = tile;
 }
 
-fsize wid_get_tex_tl (Widp w)
-{_
-    if (w->tex_tl_set) {
-        return (w->tex_tl);
-    }
-
-    fsize nosize = {0, 0};
-    return (nosize);
-}
-
-void wid_set_tex_tl (Widp w, fsize val)
-{_
-    verify(w.get());
-
-    w->tex_tl_set = true;
-    w->tex_tl = val;
-}
-
-fsize wid_get_tex_br (Widp w)
-{_
-    if (w->tex_br_set) {
-        return (w->tex_br);
-    }
-
-    fsize size = {1, 1};
-    return (size);
-}
-
-void wid_set_tex_br (Widp w, fsize val)
-{_
-    verify(w.get());
-
-    w->tex_br_set = true;
-    w->tex_br = val;
-}
-
 //
 // Look at all the wid modes and return the most relevent setting
 //
@@ -1505,17 +1446,6 @@ color wid_get_color (Widp w, wid_color which)
 }
 
 //
-// Look at all the wid modes and return the most relevent setting
-//
-color wid_get_mode_color (Widp w, wid_color which)
-{_
-    uint32_t mode = (__typeof__(mode)) wid_get_mode(w); // for c++, no enum walk
-    wid_cfg *cfg = &getref(w->cfg, mode);
-
-    return (cfg->colors[which]);
-}
-
-//
 // Look at all the widset modes and return the most relevent setting
 //
 void wid_set_color (Widp w, wid_color col, color val)
@@ -1524,20 +1454,6 @@ void wid_set_color (Widp w, wid_color col, color val)
 
     w->cfg[wid_get_mode(w)].colors[col] = val;
     w->cfg[wid_get_mode(w)].color_set[col] = true;
-}
-
-void wid_set_offset (Widp w, point offset)
-{_
-    verify(w.get());
-
-    w->offset = offset;
-}
-
-void wid_get_offset (Widp w, point *offset)
-{_
-    verify(w.get());
-
-    *offset = w->offset;
 }
 
 void wid_set_focus (Widp w)
@@ -1563,19 +1479,11 @@ void wid_set_focus (Widp w)
 void wid_set_shape_square (Widp w)
 {
     w->square = true;
-    w->box = false;
 }
 
 void wid_set_shape_none (Widp w)
 {
     w->square = false;
-    w->box = false;
-}
-
-void wid_set_shape_box (Widp w)
-{
-    w->square = false;
-    w->box = true;
 }
 
 void wid_set_active (Widp w)
@@ -2057,12 +1965,6 @@ static Widp wid_new (Widp parent)
     //
     wid_set_mode(w, WID_MODE_NORMAL);
 
-    fsize sz = {0.0f, 0.0f};
-    wid_set_tex_tl(w, sz);
-
-    fsize sz2 = {1.0f, 1.0f};
-    wid_set_tex_br(w, sz2);
-
     w->visible = true;
 
     return (w);
@@ -2289,7 +2191,7 @@ Widp wid_new_window (std::string name)
     wid_set_color(w, WID_COLOR_BG, col);
     wid_set_color(w, WID_COLOR_TEXT, WHITE);
     wid_set_movable(w, false);
-    wid_set_shape_box(w);
+    wid_set_shape_square(w);
 
     return (w);
 }
@@ -2328,33 +2230,6 @@ Widp wid_new_container (Widp parent, std::string name)
 //
 // Initialize a top level wid with basic settings
 //
-Widp wid_new_plain (Widp parent, std::string name)
-{_
-    if (!parent) {
-        ERR("no parent");
-    }
-
-    Widp w = wid_new(parent);
-
-#ifdef WID_FULL_LOGNAME
-    w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
-                                name.c_str(), w.get(),
-                                parent->to_string.c_str(), parent.get());
-#else
-    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
-#endif
-
-    WID_DBG(w, "%s", __FUNCTION__);
-
-    wid_set_name(w, name);
-    wid_set_shape_square(w);
-
-    return (w);
-}
-
-//
-// Initialize a top level wid with basic settings
-//
 Widp wid_new_square_window (std::string name)
 {_
     Widp w = wid_new(0);
@@ -2364,9 +2239,9 @@ Widp wid_new_square_window (std::string name)
     WID_DBG(w, "%s", __FUNCTION__);
 
     wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_movable(w, false);
+    wid_set_movable(w, true);
     wid_set_name(w, name);
-    wid_set_shape_box(w);
+    wid_set_shape_square(w);
 
     wid_raise(w);
 
@@ -2383,8 +2258,8 @@ Widp wid_new_square_button (Widp parent, std::string name)
 
 #ifdef WID_FULL_LOGNAME
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
-                                name.c_str(), w.get(),
-                                parent->to_string.c_str(), parent.get());
+                                  name.c_str(), w.get(),
+                                  parent->to_string.c_str(), parent.get());
 #else
     w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
 #endif
@@ -2392,7 +2267,7 @@ Widp wid_new_square_button (Widp parent, std::string name)
     WID_DBG(w, "%s", __FUNCTION__);
 
     wid_set_name(w, name);
-    wid_set_shape_box(w);
+    wid_set_shape_square(w);
 
     return (w);
 }
@@ -2408,12 +2283,15 @@ static Widp wid_new_scroll_trough (Widp parent)
 
     Widp w = wid_new(parent);
 
-    w->to_string = string_sprintf("%s[%p]", "scroll trough", w.get());
+    w->to_string = string_sprintf("[%p] scroll trough (parent %s[%p])",
+                                  w.get(),
+                                  parent->to_string.c_str(), parent.get());
 
     WID_DBG(w, "%s", __FUNCTION__);
 
     wid_set_mode(w, WID_MODE_NORMAL); {
-        wid_set_color(w, WID_COLOR_BG, GRAY60);
+        color c = GRAY90;
+        wid_set_color(w, WID_COLOR_BG, c);
     }
 
     wid_set_on_m_down(w, wid_scroll_trough_mouse_down);
@@ -2442,9 +2320,13 @@ static Widp wid_new_scroll_bar (Widp parent,
     Widp w = wid_new(parent);
 
     if (vertical) {
-        w->to_string = string_sprintf("%s, %s[%p]", name.c_str(), "vert scroll bar", w.get());
+        w->to_string = string_sprintf("%s, %s[%p]", 
+                                      name.c_str(), 
+                                      "vert scroll bar", w.get());
     } else {
-        w->to_string = string_sprintf("%s, %s[%p]", name.c_str(), "horiz scroll bar", w.get());
+        w->to_string = string_sprintf("%s, %s[%p]", 
+                                      name.c_str(), 
+                                      "horiz scroll bar", w.get());
     }
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -2452,12 +2334,12 @@ static Widp wid_new_scroll_bar (Widp parent,
     wid_set_name(w, name);
 
     wid_set_mode(w, WID_MODE_ACTIVE); {
-        c = RED;
+        color c = GREEN;
         wid_set_color(w, WID_COLOR_BG, c);
     }
 
     wid_set_mode(w, WID_MODE_NORMAL); {
-        c = ORANGE;
+        color c = GRAY50;
         wid_set_color(w, WID_COLOR_BG, c);
     }
 
@@ -2508,25 +2390,21 @@ Widp wid_new_vert_scroll_bar (Widp parent,
     wid_get_abs_coords(parent, &ptlx, &ptly, &pbrx, &pbry);
     wid_get_abs_coords(scrollbar_owner, &tlx, &tly, &brx, &bry);
 
-    tl.x = pbrx;
+    tl.x = tlx - ptlx + wid_get_width(scrollbar_owner);
+    br.x = tl.x;
+
     tl.y = tly - ptly;
-    br.x = pbrx;
-    br.y = tl.y + wid_get_br_y(scrollbar_owner) - wid_get_tl_y(scrollbar_owner);
+    br.y = tly - ptly + wid_get_height(scrollbar_owner) - 1;
 
     Widp trough = wid_new_scroll_trough(parent);
     wid_set_pos(trough, tl, br);
     wid_set_shape_square(trough);
 
     {
-        fpoint tl;
-        fpoint br;
-
-        tl.x = 0.0f;
-        tl.y = 0.0f;
-        br.x = 1.0f;
-        br.y = 1.0f;
-
-        Widp scrollbar = wid_new_scroll_bar(trough, name, scrollbar_owner, true);
+        fpoint tl(0, 0);
+        fpoint br(1, 1);
+        Widp scrollbar = 
+            wid_new_scroll_bar(trough, name, scrollbar_owner, true);
         wid_set_pos_pct(scrollbar, tl, br);
 
         wid_update_internal(scrollbar);
@@ -2563,28 +2441,24 @@ Widp wid_new_horiz_scroll_bar (Widp parent, std::string name,
     wid_get_abs_coords(scrollbar_owner, &tlx, &tly, &brx, &bry);
 
     tl.x = tlx - ptlx;
-    tl.y = tly;
-    br.x = tl.x + wid_get_br_x(scrollbar_owner) - wid_get_tl_x(scrollbar_owner);
-    br.y = tly;
+    br.x = tlx - ptlx + wid_get_width(scrollbar_owner) - 1;
+
+    tl.y = tly - ptly + wid_get_height(scrollbar_owner);
+    br.y = tl.y;
 
     Widp trough = wid_new_scroll_trough(parent);
     wid_set_pos(trough, tl, br);
     wid_set_shape_square(trough);
 
     {
-        fpoint tl;
-        fpoint br;
-
-        tl.x = 0.0f;
-        tl.y = 0.0f;
-        br.x = 1.0f;
-        br.y = 1.0f;
-
+        fpoint tl(0, 0);
+        fpoint br(1, 1);
         Widp scrollbar = wid_new_scroll_bar(trough, name, scrollbar_owner, false);
         wid_set_pos_pct(scrollbar, tl, br);
 
         wid_update_internal(scrollbar);
-        wid_hide(scrollbar->parent);
+        wid_visible(wid_get_parent(scrollbar));
+        wid_visible(scrollbar);
 
         return (scrollbar);
     }
@@ -3295,6 +3169,7 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
                 continue;
             }
 
+
             if (tl_x < minx) {
                 minx = tl_x;
             }
@@ -3321,17 +3196,17 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
     maxx -= ptl_x;
     maxy -= ptl_y;
 
-    child_width = maxx - minx;
-    child_height = maxy - miny;
+    child_width = maxx - minx + 1;
+    child_height = maxy - miny + 1;
 
     if (child_width < width) {
-        maxx = minx + width;
-        child_width = maxx - minx;
+        maxx = minx + width - 1;
+        child_width = maxx - minx + 1;
     }
 
     if (child_height < height) {
-        maxy = miny + height;
-        child_height = maxy - miny;
+        maxy = miny + height - 1;
+        child_height = maxy - miny + 1;
     }
 
     if (owner->scrollbar_vert) {
@@ -3355,7 +3230,8 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
                 pct * (trough_height - scrollbar_height);
 
             wid_tree_detach(scrollbar);
-            scrollbar->key.br.y = wid_get_tl_y(scrollbar) + scrollbar_height;
+            scrollbar->key.br.y = 
+                wid_get_tl_y(scrollbar) + scrollbar_height - 1;
             wid_tree_attach(scrollbar);
 
             wid_set_mode(scrollbar, WID_MODE_ACTIVE);
@@ -3383,7 +3259,8 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
                 pct * (trough_width - scrollbar_width);
 
             wid_tree_detach(scrollbar);
-            scrollbar->key.br.x = wid_get_tl_x(scrollbar) + scrollbar_width;
+            scrollbar->key.br.x = 
+                wid_get_tl_x(scrollbar) + scrollbar_width - 1;
             wid_tree_attach(scrollbar);
 
             wid_set_mode(scrollbar, WID_MODE_ACTIVE);
@@ -4406,8 +4283,6 @@ static void wid_move_delta_internal (Widp w, int32_t dx, int32_t dy)
     for (auto child : worklist) {
         wid_children_move_delta_internal(child, dx, dy);
     }
-
-    w->can_be_attached_now = true;
 }
 
 void wid_move_delta (Widp w, int32_t dx, int32_t dy)
@@ -5130,7 +5005,7 @@ void wid_joy_button (int32_t x, int32_t y)
         }
 
         verify(w.get());
-
+ 
         wid_set_focus(w);
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
@@ -5900,13 +5775,7 @@ static void wid_display (Widp w,
                 *updated_scissors = true;
             }
 
-            // printf("set scissors %s %d %d %d %d\n", w->to_string.c_str(),
-            //tlx, tly, brx, bry);
-            wid_set_scissors(
-                tlx,
-                tly,
-                brx,
-                bry);
+            wid_set_scissors(tlx, tly, brx, bry);
 #if 0
         }
 #endif
@@ -5928,29 +5797,20 @@ static void wid_display (Widp w,
     box_args w_box_args = {
         .x              = tl.x,
         .y              = tl.y,
-        .width          = (br.x - tl.x) + 1,
-        .height         = (br.y - tl.y) + 1,
+        .width          = (br.x - tl.x),
+        .height         = (br.y - tl.y),
     };
 
-    button_args w_button_args = {
-        .x              = tl.x,
-        .y              = tl.y,
-        .width          = (br.x - tl.x) + 1,
-    };
-
-    bool is_button = (bry == tly) && w->square;
-
+if (w->debug) {
+    CON("%s %d %d w %d h %d",w->to_string.c_str(),tl.x, tl.y, w_box_args.width, w_box_args.height);
+}
     if (w == wid_over) {
         w_box_args.over = true;
-        w_button_args.over = true;
 
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG]) {
             auto c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
             w_box_args.col_border_text = c;
             c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
-            w_button_args.col_tl = c;
-            w_button_args.col_mid = c;
-            w_button_args.col_br = c;
         } else {
             w_box_args.col_border_text = GRAY;
             w_box_args.col_tl = GRAY;
@@ -5965,10 +5825,6 @@ static void wid_display (Widp w,
             w_box_args.col_tl = c;
             w_box_args.col_mid = c;
             w_box_args.col_br = c;
-
-            w_button_args.col_tl = c;
-            w_button_args.col_mid = c;
-            w_button_args.col_br = c;
         } else {
             w_box_args.col_border_text = WHITE;
             w_box_args.col_tl = WHITE;
@@ -5977,31 +5833,10 @@ static void wid_display (Widp w,
         }
     }
 
-    if (is_button) {
-        ascii_put_button(w_button_args, text.c_str());
-    } else if (w->square) {
-        //
-        // Flat square
-        //
-        if (bry == tly) {
-            auto c = '.';
-            auto color = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
-
-            ascii_put_solid_line(tlx, tlx + w_box_args.width, tly,
-                                 c, color, w_box_args.context);
-        } else {
-            w_box_args.col_tl = w_box_args.col_mid;
-            w_box_args.col_br = w_box_args.col_mid;
-
-            ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, L"");
-        }
-    } else if (w->box) {
-        //
-        // Bevelled box
-        //
+    if (w->square) {
         ascii_put_box(w_box_args, w->style, bg_tile, fg_tile, L"");
     } else {
-        // shape none */
+        // shape none
     }
 
     {
@@ -6018,7 +5853,7 @@ static void wid_display (Widp w,
         }
     }
 
-    if (!is_button && !text.empty()) {
+    if (!text.empty()) {
         int32_t x, y;
         int32_t xpc, ypc;
         int32_t width, height;

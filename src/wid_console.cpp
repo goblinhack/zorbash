@@ -170,29 +170,30 @@ uint8_t wid_console_receive_input (Widp w, const SDL_KEYSYM *key)
 //
 static void wid_console_wid_create (void)
 {_
-    {
-        point tl = {0, 0};
-        point br = {ASCII_WIDTH - 1, ASCII_HEIGHT - 3};
+    point tl = {0, 0};
+    point br = {ASCII_WIDTH - 1, ASCII_HEIGHT - 1};
+    int w = br.x - tl.x;
+    int h = br.y - tl.y;
 
-        wid_console_window = wid_new_square_window("wid_console");
-        wid_set_name(wid_console_window, "wid_console window");
+    {
+        wid_console_window = wid_new_square_window("wid console");
         wid_set_pos(wid_console_window, tl, br);
-        wid_set_shape_none(wid_console_window);
+        wid_set_style(wid_console_window, 2);
     }
 
     {
         point tl = {0, 0};
-        point br = {ASCII_WIDTH - 1, ASCII_HEIGHT - 3};
+        point br = {w, h};
 
-        wid_console_container = wid_new_container(wid_console_window,
-                                                  "wid console container");
+        wid_console_container = wid_new_square_button(wid_console_window,
+                                                      "wid console inner area");
         wid_set_pos(wid_console_container, tl, br);
         wid_set_shape_none(wid_console_container);
     }
 
     {
         int32_t row;
-        int row_bottom = ASCII_HEIGHT - 4;
+        int row_bottom = CONSOLE_HEIGHT - 1;
 
         Widp child = 0;
         Widp prev = 0;

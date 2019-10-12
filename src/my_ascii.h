@@ -87,23 +87,6 @@ void ascii_put_bg_square(int tlx, int tly, int brx, int bry,
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry,
                          Tilep what, color c);
 
-void ascii_put_shaded_line(int x1, int x2, int y, const char *tilename,
-                           color c1, color c2, color c3,
-                           void *context);
-void ascii_put_shaded_line(int x1, int x2, int y, wchar_t what,
-                           color c1, color c2, color c3,
-                           void *context);
-void ascii_put_shaded_line(int x1, int x2, int y, Tilep what,
-                           color c1, color c2, color c3,
-                           void *context);
-
-void ascii_put_solid_line(int x1, int x2, int y, const char *tilename,
-                          color col, void *context);
-void ascii_put_solid_line(int x1, int x2, int y, wchar_t what,
-                          color col, void *context);
-void ascii_put_solid_line(int x1, int x2, int y, Tilep what,
-                          color col, void *context);
-
 void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename,
                      color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
@@ -136,8 +119,6 @@ typedef struct {
 
     void *context;
 } button_args;
-
-void ascii_put_button(button_args b, const wchar_t *fmt, ...);
 
 typedef struct {
     int x;
