@@ -2872,8 +2872,13 @@ void wid_visible (Widp w)
     verify(w.get());
 
     w->visible = true;
-
     w->hidden = false;
+
+    std::vector<Widp> worklist;
+    for (auto iter : w->children_display_sorted) {
+        auto child = iter.second;
+        wid_visible(child);
+    }
 
     wid_find_top_focus();
 }
@@ -2921,6 +2926,12 @@ void wid_hide (Widp w)
 
     if (w == wid_focus) {
         wid_find_top_focus();
+    }
+
+    std::vector<Widp> worklist;
+    for (auto iter : w->children_display_sorted) {
+        auto child = iter.second;
+        wid_hide(child);
     }
 }
 

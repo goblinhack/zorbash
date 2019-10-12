@@ -6,21 +6,14 @@
 #pragma once
 
 #include "my_wid.h"
+#include "my_wid_text_box.h"
 
 class WidPopup {
 private:
     std::map< unsigned int, std::wstring > wid_popup_lines;
-    int width {};
-    int height {};
-    int line_count {};
-    int scroll_height {};
 
     Widp wid_popup_container {};
-    Widp wid_vert_scroll {};
-    Widp wid_horiz_scroll {};
-    Widp wid_text_last {};
-    Widp wid_text_area {};
-    Widp wid_text_inner_area {};
+    WidTextBox *wid_text_area {};
     Widp wid_title {};
 
     std::vector<Widp> children;
@@ -33,9 +26,6 @@ public:
 public:
     ~WidPopup();
     WidPopup (point tl, point br, Tilep title_tile=nullptr);
-
-private:
-    void log_(std::wstring str);
 
 public:
     void log(std::string s);

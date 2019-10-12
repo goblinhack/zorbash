@@ -604,14 +604,5 @@ static void wid_test_wid_create (void)
         point br = {ITEMBAR_TL_X - 2, ITEMBAR_TL_Y - 2};
         auto w = new WidPopup(tl, br, tile_find_mand("player1.1"));
         w->log("This is a really long descriptive string that is a bit boring");
-        w->log("hello");
-        w->log("hello");
-        w->log("hello");
-        w->log("hello");
-        w->log("hello");
-        w->log("hello");
-        w->log("hello");
-        w->log("hello");
     }
-
 }
