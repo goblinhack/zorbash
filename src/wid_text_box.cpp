@@ -39,11 +39,12 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
         if (parent) {
             wid_text_box_container = wid_new_square_button(parent,
                                                            "wid text box");
+            wid_set_shape_none(wid_text_box_container);
         } else {
             wid_text_box_container = wid_new_square_window("wid text box");
+            wid_set_style(wid_text_box_container, 1);
         }
         wid_set_pos(wid_text_box_container, tl, br);
-        wid_set_style(wid_text_box_container, 1);
     }
 
     {
@@ -105,10 +106,6 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
     wid_hide(wid_get_parent(wid_horiz_scroll));
     wid_hide(wid_vert_scroll);
     wid_hide(wid_horiz_scroll);
-    wid_visible(wid_horiz_scroll);
-    wid_visible(wid_get_parent(wid_horiz_scroll));
-    wid_visible(wid_vert_scroll);
-    wid_visible(wid_get_parent(wid_vert_scroll));
 }
 
 //
@@ -121,8 +118,6 @@ void WidTextBox::log_ (std::wstring str)
     if (line_count < scroll_height) {
         wid_set_text(get(children, scroll_height - line_count - 1), str);
     } else {
-        wid_visible(wid_get_parent(wid_vert_scroll));
-
         wid_scroll_text(wid_text_last);
         tmp = wid_get_head(wid_text_last);
         if (tmp) {
@@ -131,6 +126,12 @@ void WidTextBox::log_ (std::wstring str)
     }
     wid_move_to_top(wid_vert_scroll);
     line_count++;
+
+    int show_scrollbars_at = wid_get_height(wid_text_area);
+    if (line_count > show_scrollbars_at) {
+        wid_visible(wid_get_parent(wid_horiz_scroll));
+        wid_visible(wid_get_parent(wid_vert_scroll));
+    }
 }
 
 //

@@ -178,7 +178,7 @@ static void wid_console_wid_create (void)
     {
         wid_console_window = wid_new_square_window("wid console");
         wid_set_pos(wid_console_window, tl, br);
-        wid_set_style(wid_console_window, 2);
+        wid_set_style(wid_console_window, 0);
     }
 
     {
@@ -250,9 +250,6 @@ static void wid_console_wid_create (void)
 
     wid_hide(wid_get_parent(wid_console_vert_scroll));
     wid_hide(wid_get_parent(wid_console_horiz_scroll));
-    wid_hide(wid_console_vert_scroll);
-    wid_hide(wid_console_horiz_scroll);
-
     wid_hide(wid_console_window);
 
     wid_console_window->ignore_for_mouse_down = true;
