@@ -329,92 +329,6 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
     wid_tree_attach(w);
 }
 
-//
-// Set the wid new co-ords. Returns true if there is a change.
-//
-void wid_setx_tl_br_pct (Widp w, fpoint tl, fpoint br)
-{_
-    verify(w.get());
-
-    Widp p;
-
-    wid_tree_detach(w);
-
-    if (!w->parent) {
-        tl.x *= (double)ASCII_WIDTH;
-        br.x *= (double)ASCII_WIDTH;
-    } else {
-        tl.x *= wid_get_width(w->parent);
-        br.x *= wid_get_width(w->parent);
-    }
-
-    w->key.tl.x = round(tl.x);
-    w->key.br.x = round(br.x);
-
-    //
-    // Child postion is relative from the parent.
-    //
-    p = w->parent;
-    if (p) {
-        w->key.tl.x += wid_get_tl_x(p);
-        w->key.br.x += wid_get_tl_x(p);
-    }
-
-    wid_tree_attach(w);
-}
-
-//
-// Set the wid new co-ords. Returns true if there is a change.
-//
-void wid_sety_tl_br_pct (Widp w, fpoint tl, fpoint br)
-{_
-    verify(w.get());
-
-    Widp p;
-
-    wid_tree_detach(w);
-
-    if (!w->parent) {
-        tl.y *= (double)ASCII_HEIGHT;
-        br.y *= (double)ASCII_HEIGHT;
-    } else {
-        tl.y *= wid_get_height(w->parent);
-        br.y *= wid_get_height(w->parent);
-    }
-
-    w->key.tl.y = round(tl.y);
-    w->key.br.y = round(br.y);
-
-    //
-    // Child postion is relative from the parent.
-    //
-    p = w->parent;
-    if (p) {
-        w->key.tl.y += wid_get_tl_y(p);
-        w->key.br.y += wid_get_tl_y(p);
-    }
-
-    wid_tree_attach(w);
-}
-
-void wid_get_tl_br (Widp w, point *tl, point *br)
-{_
-    verify(w.get());
-
-    *tl = w->key.tl;
-    *br = w->key.br;
-}
-
-void wid_set_pos_no_relative_offset (Widp w, point tl, point br)
-{_
-    wid_tree_detach(w);
-
-    w->key.tl = tl;
-    w->key.br = br;
-
-    wid_tree_attach(w);
-}
-
 void wid_set_context (Widp w, void *context)
 {_
     verify(w.get());
@@ -1052,7 +966,7 @@ std::string wid_get_name (Widp w)
     return (w->name);
 }
 
-std::wstring wid_get_text_with_cursor (Widp w)
+static std::wstring wid_get_text_with_cursor (Widp w)
 {_
     if (!w->received_input) {
         w->cursor = (uint32_t)w->text.length();
@@ -2184,13 +2098,12 @@ Widp wid_new_window (std::string name)
     wid_set_name(w, name);
 
     color col = WHITE;
-    col.a = 255;
     glcolor(col);
 
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_color(w, WID_COLOR_BG, col);
     wid_set_color(w, WID_COLOR_TEXT, WHITE);
-    wid_set_movable(w, false);
+    wid_set_movable(w, true);
     wid_set_shape_square(w);
 
     return (w);
@@ -4521,7 +4434,6 @@ static Widp wid_mouse_up_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-//        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4563,145 +4475,16 @@ static Widp wid_mouse_motion_handler (int32_t x, int32_t y,
 {_
     Widp w;
 
-#if 0
-#ifdef DEBUG_WID_MOTION
-    printf("\n ");
-    printf("\n ");
-    printf("\n ");
-    printf("\n ");
-    printf("\n ");
-    printf("\n ");
-    printf("\n ");
-    printf("\n ");
-    printf("\n ");
-    printf("\n ");
-static int count;
-count++;
-printf("\nmouse at %d, %d  (%d, %d) count %d", x, y, mouse_x, mouse_y, count);
-#endif
-
-    w = wid_mouse_motion_handler_at(wid_focus, x, y,
-                                    relx, rely,
-                                    wheelx, wheely,
-                                    true /* strict */,
-                                    0 /* depth */,
-                                    0 /* debug */);
-    if (w) {
-#ifdef DEBUG_WID_MOTION
-    printf("\ngot focus wid %s",wid_name(w).c_str());
-#endif
-        return (w);
-    }
-
-    w = wid_mouse_motion_handler_at(wid_over, x, y,
-                                    relx, rely,
-                                    wheelx, wheely,
-                                    true /* strict */,
-                                    0 /* depth */,
-                                    0 /* debug */);
-    if (w) {
-#ifdef DEBUG_WID_MOTION
-    printf("\ngot over wid %s",wid_name(w).c_str());
-#endif
-        return (w);
-    }
-
-#ifdef DEBUG_WID_MOTION
-    printf("\n  walk top level:");
-#endif
-    for (auto iter = wid_top_level.rbegin();
-         iter != wid_top_level.rend(); ++iter) {
-        auto w = iter->second;
-
-        verify(w.get());
-
-        if (wid_focus_locked &&
-            (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-#ifdef DEBUG_WID_MOTION
-    printf("\n   focus locked");
-#endif
-            continue;
-        }
-
-        w = wid_mouse_motion_handler_at(w, x, y,
-                                        relx, rely,
-                                        wheelx, wheely,
-                                        true /* strict */,
-                                        0 /* depth */,
-                                        0 /* debug */);
-        if (!w) {
-            continue;
-        }
-
-        return (w);
-    }
-#endif
-
     w = get(wid_on_screen_at, x, y);
     if (w) {
         return (w);
     }
 
-    if (!wheelx && !wheely) {
-        return (0);
-    }
-
-#if 0
-#ifdef DEBUG_WID_MOTION
-    printf("\n  walk top level non strict:");
-#endif
-    for (auto iter = wid_top_level.rbegin();
-         iter != wid_top_level.rend(); ++iter) {
-        auto w = iter->second;
-        verify(w.get());
-
-        if (wid_focus_locked &&
-            (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            continue;
-        }
-
-        w = wid_mouse_motion_handler_at(w, x, y,
-                                        relx, rely,
-                                        wheelx, wheely,
-                                        false /* strict */,
-                                        0 /* depth */,
-                                        0 /* debug */);
-        if (!w) {
-            continue;
-        }
-
-        return (w);
-    }
-
-#endif
     return (0);
 }
 
 //
-// Catch recursive cases like this:
-//
-// #42 0x00000001180a1233 in wid_update (w=0x11f0c0c00) at wid.c:5353
-//
-// #43 0x00000001180bf45d in map_editor_map_thing_replace_template
-//
-// #44 0x00000001180c1509 in map_editor_map_thing_replace (w=0x11f1dca00, x=5,
-//
-// #45 0x00000001180c0275 in map_editor_map_tile_mouse_motion (w=0x11f1dca00,
-//
-// #46 0x00000001180a170f in wid_mouse_motion (x=338, y=357, relx=0, rely=0,
-//
-// #47 0x000000011809ff26 in wid_update_mouse () at wid.c:5371
-//
-// #48 0x00000001180a1233 in wid_update (w=0x11f0c0c00) at wid.c:5353
-//
-// #49 0x00000001180bf45d in map_editor_map_thing_replace_template
-//
-// #50 0x00000001180c1509 in map_editor_map_thing_replace (w=0x11f1dca00, x=5,
-//
-// #51 0x00000001180c0275 in map_editor_map_tile_mouse_motion (w=0x11f1dca00,
-//
-// #52 0x00000001180a170f in wid_mouse_motion (x=338, y=357, relx=0, rely=0,
-//
+// Catch recursive cases:
 //
 static int wid_mouse_motion_recursion;
 
@@ -5535,52 +5318,6 @@ void wid_get_abs_coords (Widp w,
 }
 
 //
-// Get the onscreen co-ords of the widget, no clipping
-//
-void wid_get_abs_coords_unclipped (Widp w,
-                                   int32_t *tlx,
-                                   int32_t *tly,
-                                   int32_t *brx,
-                                   int32_t *bry)
-{_
-    Widp p;
-
-    *tlx = wid_get_tl_x(w);
-    *tly = wid_get_tl_y(w);
-    *brx = wid_get_br_x(w);
-    *bry = wid_get_br_y(w);
-
-    p = w->parent;
-    if (p) {
-        *tlx += p->offset.x;
-        *tly += p->offset.y;
-        *brx += p->offset.x;
-        *bry += p->offset.y;
-    }
-
-    while (p) {
-        int32_t ptlx = wid_get_tl_x(p);
-        int32_t ptly = wid_get_tl_y(p);
-        int32_t pbrx = wid_get_br_x(p);
-        int32_t pbry = wid_get_br_y(p);
-
-        if (p->parent) {
-            ptlx += p->parent->offset.x;
-            ptly += p->parent->offset.y;
-            pbrx += p->parent->offset.x;
-            pbry += p->parent->offset.y;
-        }
-
-        p = p->parent;
-    }
-
-    w->abs_tl.x = *tlx;
-    w->abs_tl.y = *tly;
-    w->abs_br.x = *brx;
-    w->abs_br.y = *bry;
-}
-
-//
 // Get the onscreen co-ords of the widget, clipped to the parent.
 //
 void wid_get_abs (Widp w, int32_t *x, int32_t *y)
@@ -5614,33 +5351,6 @@ void wid_move_end (Widp w)
 {_
     while (w->moving) {
         wid_move_dequeue(w);
-    }
-}
-
-//
-// Do stuff for widgets once per frame.
-//
-static void wid_gc (Widp w)
-{_
-    verify(w.get());
-
-    if (w->being_destroyed) {
-        wid_destroy_immediate(w);
-        return;
-    }
-
-    //
-    // Delayed destroy?
-    //
-    if (w->destroy_when && (wid_time >= w->destroy_when)) {
-        verify(w.get());
-
-        if (w->destroy_ptr) {
-            *(w->destroy_ptr) = 0;
-            w->destroy_ptr = 0;
-        }
-
-        wid_destroy(&w);
     }
 }
 
@@ -5801,9 +5511,6 @@ static void wid_display (Widp w,
         .height         = (br.y - tl.y),
     };
 
-if (w->debug) {
-    CON("%s %d %d w %d h %d",w->to_string.c_str(),tl.x, tl.y, w_box_args.width, w_box_args.height);
-}
     if (w == wid_over) {
         w_box_args.over = true;
 
@@ -5982,6 +5689,30 @@ void wid_move_all (void)
 }
 
 //
+// Delayed destroy?
+//
+static void wid_gc (Widp w)
+{_
+    verify(w.get());
+
+    if (w->being_destroyed) {
+        wid_destroy_immediate(w);
+        return;
+    }
+
+    if (w->destroy_when && (wid_time >= w->destroy_when)) {
+        verify(w.get());
+
+        if (w->destroy_ptr) {
+            *(w->destroy_ptr) = 0;
+            w->destroy_ptr = 0;
+        }
+
+        wid_destroy(&w);
+    }
+}
+
+//
 // Do stuff for all widgets.
 //
 void wid_gc_all (void)
@@ -6147,11 +5878,6 @@ uint8_t wid_is_hidden (Widp w)
     }
 
     return (false);
-}
-
-uint8_t inline wid_this_hidden (Widp w)
-{_
-    return (w->hidden);
 }
 
 uint8_t wid_is_always_hidden (Widp w)
@@ -6371,59 +6097,8 @@ void wid_move_to_pct_in (Widp w, double x, double y, uint32_t ms)
     wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
-//
-// Return numbers in the 0 to 1 range indicating how far the move has
-// progressed from start to end.
-//
-void wid_get_move_interpolated_progress (Widp w, double *dx, double *dy)
-{_
-    verify(w.get());
-
-    if (!wid_is_moving(w)) {
-        *dx = 0.0;
-        *dy = 0.0;
-        return;
-    }
-
-    double x = wid_get_tl_x(w);
-    double y = wid_get_tl_y(w);
-
-    double mx = (double)(x - w->moving_start.x);
-    double my = (double)(y - w->moving_start.y);
-    double wx = (double)(w->moving_end.x - w->moving_start.x);
-    double wy = (double)(w->moving_end.y - w->moving_start.y);
-
-    if (fabs(wx) <= 0.0001) {
-        *dx = 0;
-    } else {
-        *dx = mx / wx;
-    }
-
-    if (fabs(wy) <= 0.0001) {
-        *dy = 0;
-    } else {
-        *dy = my / wy;
-    }
-}
-
 void wid_move_to_abs_in (Widp w, int32_t x, int32_t y, uint32_t ms)
 {_
-    wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
-}
-
-void wid_move_to_abs_poffset_in (Widp w, int32_t x, int32_t y, uint32_t ms)
-{_
-    verify(w.get());
-
-    //
-    // Child postion is relative from the parent.
-    //
-    Widp p = w->parent;
-    if (p) {
-        x += wid_get_tl_x(p);
-        y += wid_get_tl_y(p);
-    }
-
     wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
@@ -6460,35 +6135,6 @@ void wid_move_to_pct_centered_in (Widp w, double x, double y, uint32_t ms)
     y -= (wid_get_br_y(w) - wid_get_tl_y(w))/2;
 
     wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
-}
-
-void wid_move_delta_pct_in (Widp w, double x, double y, uint32_t ms)
-{_
-    verify(w.get());
-
-    if (!w->parent) {
-        x *= (double)ASCII_WIDTH;
-        y *= (double)ASCII_HEIGHT;
-    } else {
-        x *= wid_get_width(w->parent);
-        y *= wid_get_height(w->parent);
-    }
-
-    //
-    // Child postion is relative from the parent.
-    //
-    Widp p = w->parent;
-    if (p) {
-        x += wid_get_tl_x(p);
-        y += wid_get_tl_y(p);
-    }
-
-    wid_move_enqueue(w,
-                     wid_get_tl_x(w),
-                     wid_get_tl_y(w),
-                     wid_get_tl_x(w) + x,
-                     wid_get_tl_y(w) + y,
-                     ms);
 }
 
 void wid_move_to_abs_centered_in (Widp w, int32_t x, int32_t y, uint32_t ms)
