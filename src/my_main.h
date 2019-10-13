@@ -102,7 +102,7 @@ extern int TILES_DOWN;
 #define CONSOLE_WIDTH               120
 #define CONSOLE_HEIGHT              200
 
-#define SIDEBAR_WIDTH               15
+#define SIDEBAR_WIDTH               14
 #define TITLEBAR_WIDTH              SIDEBAR_WIDTH
 #define TITLEBAR_HEIGHT             SIDEBAR_WIDTH
 #define ITEMBAR_HEIGHT              4

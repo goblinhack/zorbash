@@ -185,6 +185,13 @@ def init_64x16_ui():
     ]
     zx.tile_load_arr(tex_name="64x16_status_bar", width=96, height=16, arr=tiles)
 
+def init_popup_ui():
+    zx.tex_load(file="data/gfx/popup_ui.tga", name="popup_ui")
+    tiles = [
+        "popup_ui", 
+    ]
+    zx.tile_load_arr(tex_name="popup_ui", width=160, height=304, arr=tiles)
+
 def init_16x16():
     zx.tex_load(
             file="data/gfx/16x16.tga",
@@ -685,6 +692,7 @@ init_text()
 init_light()
 init_16x16_ui()
 init_64x16_ui()
+init_popup_ui()
 init_16x16()
 init_16x32()
 init_32x32()

@@ -49,70 +49,6 @@ static uint8_t wid_test_mouse_down (Widp w,
 static void wid_test_wid_create (void)
 {_
     {
-        point tl = {10, 10};
-        point br = {39, 39};
-        auto w = new WidTextBox(tl, br);
-        w->log("This is a really long descriptive string that is a bit boring");
-        w->log("1");
-        w->log("12");
-        w->log("123");
-        w->log("1234");
-        w->log("12345");
-        w->log("123456");
-        w->log("1234567");
-        w->log("12345678");
-        w->log("123456789");
-        w->log("1234567890");
-        w->log("1234567890a");
-        w->log("1234567890ab");
-        w->log("1234567890abb");
-        w->log("1234567890abbb");
-        w->log("1234567890abbbb");
-        w->log("1234567890abbbbb");
-        w->log("1234567890abbbbbb");
-        w->log("1234567890abbbbbbb");
-        w->log("1234567890abbbbbbbb");
-        w->log("1234567890abbbbbbbbb");
-        w->log("1234567890abbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-        w->log("1234567890abcdefghijklmnopqrstuvbbbbbbb");
-        w->log("1234567890abbbbbbbbbbbbbbbbbbbbbbbbbend");
-    }
-
-    {
         point tl = {ITEMBAR_TL_X, ITEMBAR_TL_Y};
         point br = {ITEMBAR_BR_X, ITEMBAR_BR_Y};
         color c;
@@ -312,8 +248,8 @@ static void wid_test_wid_create (void)
         point br = {5, y_at + 5};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 4);
         wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_style(w, 4);
         wid_set_bg_tilename(w, "player1.pose");
     }
 
@@ -373,7 +309,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y + 1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "status-bar-9");
@@ -381,7 +317,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "health-status");
         point tl = {3, y_at + 2};
-        point br = {tl.x + 11, tl.y};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "health-status");
@@ -409,7 +345,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "strength-status-bar");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y + 1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "status-bar-9");
@@ -417,7 +353,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "strength-status");
         point tl = {3, y_at + 2};
-        point br = {tl.x + 11, tl.y};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "strength-status");
@@ -446,7 +382,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "armour-status-bar");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y + 1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "status-bar-7");
@@ -454,7 +390,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "armour-status");
         point tl = {3, y_at + 2};
-        point br = {tl.x + 11, tl.y};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "armour-status");
@@ -483,7 +419,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "magic-status-bar");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y + 1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "status-bar-7");
@@ -491,7 +427,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "magick-status");
         point tl = {3, y_at + 2};
-        point br = {tl.x + 11, tl.y};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "magick-status");
@@ -510,7 +446,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "karma-status-bar");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y + 1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "karma-bar-1");
@@ -518,7 +454,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "karma-status");
         point tl = {3, y_at + 2};
-        point br = {tl.x + 11, tl.y};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "karma-status");
@@ -537,7 +473,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "anxiety-status-bar");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y + 1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "status-bar-1");
@@ -545,7 +481,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "anxiety-status");
         point tl = {3, y_at + 2};
-        point br = {tl.x + 11, tl.y};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "anxiety-status");
@@ -555,7 +491,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "blessings-0");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y+1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "blessings-0");
@@ -564,7 +500,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "blessings-1");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y+1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "blessings-1");
@@ -573,7 +509,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "curses-0");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y+1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "curses-0");
@@ -582,7 +518,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "curses-1");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y+1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "curses-1");
@@ -591,7 +527,7 @@ static void wid_test_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "curses-2");
         point tl = {3, y_at};
-        point br = {tl.x + 11, tl.y+1};
+        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "curses-2");
@@ -600,9 +536,9 @@ static void wid_test_wid_create (void)
     wid_update(wid_sidebar);
 
     {
-        point tl = {2, MINICON_VIS_HEIGHT + 2};
-        point br = {ITEMBAR_TL_X - 2, ITEMBAR_TL_Y - 2};
+        point tl = {0, MINICON_VIS_HEIGHT + 2};
+        point br = {ITEMBAR_TL_X - 1, ITEMBAR_TL_Y - 2};
         auto w = new WidPopup(tl, br, tile_find_mand("player1.1"));
-        w->log("This is a really long descriptive string that is a bit boring");
+        w->log("%%fg=yellow$This is a really long descriptive string that is a bit boring");
     }
 }

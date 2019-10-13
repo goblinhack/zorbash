@@ -981,6 +981,7 @@ static void ascii_blit (void)
     //
     // Tiles outline
     // 
+#if 0
     tile_y = 0;
     for (y = 0; y < ASCII_HEIGHT; y++) {
 
@@ -1021,6 +1022,7 @@ static void ascii_blit (void)
 
         tile_y += game->config.ascii_gl_height;
     }
+#endif
 
     //
     // Tiles
