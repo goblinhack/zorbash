@@ -33,7 +33,7 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile) :
     point inner_br = point(width, height);
     int inner_w = inner_br.x - inner_tl.x;
     int inner_h = inner_br.y - inner_tl.y;
-    int tile_size = 4;
+    int tile_size = 6;
     if (title_tile) {
         inner_h -= tile_size;
         inner_tl.y += tile_size;
@@ -42,22 +42,23 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile) :
     {
         wid_popup_container = wid_new_square_window("wid_popup");
         wid_set_pos(wid_popup_container, tl, br);
-        wid_set_style(wid_popup_container, 1);
+        wid_set_style(wid_popup_container, -1);
+        wid_set_bg_tile(wid_popup_container, tile_find_mand("popup_ui"));
     }
 
     if (title_tile) {
-        wid_title = wid_new_square_button(wid_popup_container,
-                                          "wid title");
+        auto w = wid_new_square_button(wid_popup_container, "wid title");
+        wid_title = w;
         auto title_x = (outer_w - tile_size) / 2;
-        wid_set_fg_tile(wid_title, title_tile);
-        wid_set_pos(wid_title, 
-                    point(title_x, 0),
-                    point(title_x + tile_size - 1, tile_size - 1));
-        wid_set_style(wid_title, 3);
+        wid_set_pos(w, 
+                    point(title_x + 1, 1),
+                    point(title_x + tile_size, tile_size));
+        wid_set_style(w, 4);
+        wid_set_bg_tilename(w, "player1.pose");
     }
 
     {
-        point tl = {0, + tile_size};
+        point tl = {0, + tile_size + 2};
         point br = {inner_w, inner_h + tile_size};
         wid_text_area = new WidTextBox(tl, br, wid_popup_container);
     }
