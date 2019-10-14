@@ -537,7 +537,7 @@ static void wid_test_wid_create (void)
 
     {
         point tl = {0, MINICON_VIS_HEIGHT + 2};
-        point br = {ITEMBAR_TL_X - 1, ITEMBAR_TL_Y - 2};
+        point br = {ITEMBAR_TL_X - 1, ITEMBAR_TL_Y - 1};
         auto w = new WidPopup(tl, br, tile_find_mand("player1.1"));
         w->log("%%fg=yellow$This is a really long descriptive string that is a bit boring");
     }
