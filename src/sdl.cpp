@@ -80,7 +80,7 @@ static inline void sdl_list_video_size (void)
 
         SDL_GetDisplayMode(0, i, &mode);
 
-        LOG("- SDL video   : %dx%d available, ratio %f",
+        LOG("- SDL video            : %dx%d available, ratio %f",
             mode.w, mode.h,
             (float)mode.w / (float)mode.h);
     }
@@ -244,30 +244,40 @@ uint8_t sdl_init (void)
         (double)game->config.video_pix_width /
         (double)game->config.video_pix_height;
 
-    game->config.ascii_gl_width =
-                    game->config.video_gl_width  / (double)ASCII_WIDTH_MAX;
-    game->config.ascii_gl_height =
-                    game->config.ascii_gl_width * game->config.video_w_h_ratio;
-
-    ASCII_WIDTH = ASCII_WIDTH_MAX;
-    ASCII_HEIGHT = ((double)ASCII_WIDTH) / game->config.video_w_h_ratio;
+    double ascii_size = 16;
+    ASCII_WIDTH  = (int)(game->config.video_pix_width / ascii_size);
+    ASCII_HEIGHT = (int)(game->config.video_pix_height / ascii_size);
 
     if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
+        LOG("- Ascii hit max width  : %d", ASCII_WIDTH);
         ASCII_WIDTH = ASCII_WIDTH_MAX;
     }
     if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
+        LOG("- Ascii hit max height : %d", ASCII_HEIGHT);
         ASCII_HEIGHT = ASCII_HEIGHT_MAX;
     }
+
+    LOG("- Ascii width          : %d", ASCII_WIDTH);
+    LOG("- Ascii height         : %d", ASCII_HEIGHT);
+    LOG("- Ascii pix            : %dx%d <--- what we can utilize", 
+        (int)(ASCII_WIDTH * ascii_size), (int)(ASCII_HEIGHT * ascii_size));
+    LOG("- SDL video            : %dx%d <--- chosen or from saved file",
+        game->config.video_pix_width, game->config.video_pix_height);
 
     game->config.one_pixel_gl_width =
                     game->config.tile_gl_width / (double)TILE_WIDTH;
     game->config.one_pixel_gl_height =
                     game->config.tile_gl_height / (double)TILE_HEIGHT;
 
-    LOG("- ascii     width      : %d", ASCII_WIDTH);
-    LOG("- ascii     height     : %d", ASCII_HEIGHT);
-    LOG("- ascii gl  width      : %d", ASCII_WIDTH);
-    LOG("- ascii gl  height     : %d", ASCII_HEIGHT);
+    game->config.ascii_gl_width =
+        ((double)(ASCII_WIDTH * ascii_size) / game->config.video_pix_width) /
+        (double) ASCII_WIDTH;
+    game->config.ascii_gl_height =
+        ((double)(ASCII_HEIGHT * ascii_size) / game->config.video_pix_height) /
+        (double) ASCII_HEIGHT;
+
+    LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
+    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
     LOG("- video     gl width   : %f", game->config.video_gl_width);
     LOG("- video     gl height  : %f", game->config.video_gl_height);
     LOG("- tile      gl width   : %f", game->config.tile_gl_width);
@@ -276,8 +286,6 @@ uint8_t sdl_init (void)
     LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
     LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
 
-    LOG("- SDL video   : %dx%d (chosen or from saved file)",
-        game->config.video_pix_width, game->config.video_pix_height);
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
