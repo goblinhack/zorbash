@@ -84,8 +84,8 @@ extern int TILES_DOWN;
 //
 // Dimentions of the fixed text on screen
 //
-#define ASCII_WIDTH_MAX             80
-#define ASCII_HEIGHT_MAX            80
+#define ASCII_WIDTH_MAX             120
+#define ASCII_HEIGHT_MAX            ASCII_WIDTH_MAX
 
 //
 // Largest tile for collisions
