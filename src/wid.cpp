@@ -5041,28 +5041,25 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
 
 #define DEBUG_GL_BLEND
 #ifdef DEBUG_GL_BLEND
-#endif
-
-#ifdef DEBUG_GL_BLEND
 int vals[] = {
 
-// GL_SRC_COLOR                      */ 0x0300,
-// GL_ONE_MINUS_SRC_COLOR            */ 0x0301,
-// GL_SRC_ALPHA                      */ 0x0302,
-// GL_ONE_MINUS_SRC_ALPHA            */ 0x0303,
-// GL_DST_ALPHA                      */ 0x0304,
-// GL_ONE_MINUS_DST_ALPHA            */ 0x0305,
-// GL_DST_COLOR                      */ 0x0306,
-// GL_ONE_MINUS_DST_COLOR            */ 0x0307,
-// GL_SRC_ALPHA_SATURATE             */ 0x0308,
-// GL_BLEND_DST_RGB                  */ 0x80C8,
-// GL_BLEND_SRC_RGB                  */ 0x80C9,
-// GL_BLEND_DST_ALPHA                */ 0x80CA,
-// GL_BLEND_SRC_ALPHA                */ 0x80CB,
-// GL_CONSTANT_COLOR                 */ 0x8001,
-// GL_ONE_MINUS_CONSTANT_COLOR       */ 0x8002,
-// GL_CONSTANT_ALPHA                 */ 0x8003,
-// GL_ONE_MINUS_CONSTANT_ALPHA       */ 0x8004,
+/* GL_SRC_COLOR                      */ 0x0300,
+/* GL_ONE_MINUS_SRC_COLOR            */ 0x0301,
+/* GL_SRC_ALPHA                      */ 0x0302,
+/* GL_ONE_MINUS_SRC_ALPHA            */ 0x0303,
+/* GL_DST_ALPHA                      */ 0x0304,
+/* GL_ONE_MINUS_DST_ALPHA            */ 0x0305,
+/* GL_DST_COLOR                      */ 0x0306,
+/* GL_ONE_MINUS_DST_COLOR            */ 0x0307,
+/* GL_SRC_ALPHA_SATURATE             */ 0x0308,
+/* GL_BLEND_DST_RGB                  */ 0x80C8,
+/* GL_BLEND_SRC_RGB                  */ 0x80C9,
+/* GL_BLEND_DST_ALPHA                */ 0x80CA,
+/* GL_BLEND_SRC_ALPHA                */ 0x80CB,
+/* GL_CONSTANT_COLOR                 */ 0x8001,
+/* GL_ONE_MINUS_CONSTANT_COLOR       */ 0x8002,
+/* GL_CONSTANT_ALPHA                 */ 0x8003,
+/* GL_ONE_MINUS_CONSTANT_ALPHA       */ 0x8004,
 };
 std::string  vals_str[] = {
 
@@ -5114,13 +5111,14 @@ if (wid_event_to_char(key) == '+') {
 	i2 ++;
 	if (i2 >= (int)ARRAY_SIZE(vals)) {
 	    i2 = 0;
-            DIE("wrapped");
+            CON("wrapped");
 	}
     }
     return;
 }
 
 if (wid_event_to_char(key) == '-') {
+CON("- %d %d", i1, i2);
     usleep(50);
     i1 --;
     if (i1 < 0) {
