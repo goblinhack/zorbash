@@ -49,7 +49,7 @@ def init_16x16_ui():
         "ui0,0,14", "ui0,1,14", "ui0,2,14", "ui0,3,14", "ui0,4,14", "ui0,5,14", "ui0,6,14", "ui0,7,14", "ui0,8,14", "ui0,9,14", "ui0,10,14", "ui0,11,14", "ui0,12,14", "ui0,13,14", "ui0,14,14", "ui0,15,14",
         "ui0,0,15", "ui0,1,15", "ui0,2,15", "ui0,3,15", "ui0,4,15", "ui0,5,15", "ui0,6,15", "ui0,7,15", "ui0,8,15", "ui0,9,15", "ui0,10,15", "ui0,11,15", "ui0,12,15", "ui0,13,15", "ui0,14,15", "ui0,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui0", width=16, height=16, arr=tiles)
+    zx.tile_load_arr(tex_name="16x16_ui0", width=8, height=8, arr=tiles)
 
     zx.tex_load(file="data/gfx/16x16_ui1.tga", name="16x16_ui")
     tiles = [
@@ -70,7 +70,7 @@ def init_16x16_ui():
         "ui1,0,14", "ui1,1,14", "ui1,2,14", "ui1,3,14", "ui1,4,14", "ui1,5,14", "ui1,6,14", "ui1,7,14", "ui1,8,14", "ui1,9,14", "ui1,10,14", "ui1,11,14", "ui1,12,14", "ui1,13,14", "ui1,14,14", "ui1,15,14",
         "ui1,0,15", "ui1,1,15", "ui1,2,15", "ui1,3,15", "ui1,4,15", "ui1,5,15", "ui1,6,15", "ui1,7,15", "ui1,8,15", "ui1,9,15", "ui1,10,15", "ui1,11,15", "ui1,12,15", "ui1,13,15", "ui1,14,15", "ui1,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui", width=16, height=16, arr=tiles)
+    zx.tile_load_arr(tex_name="16x16_ui", width=8, height=8, arr=tiles)
 
     zx.tex_load(file="data/gfx/16x16_ui2.tga", name="16x16_ui2")
     tiles = [
@@ -91,7 +91,7 @@ def init_16x16_ui():
         "ui2,0,14", "ui2,1,14", "ui2,2,14", "ui2,3,14", "ui2,4,14", "ui2,5,14", "ui2,6,14", "ui2,7,14", "ui2,8,14", "ui2,9,14", "ui2,10,14", "ui2,11,14", "ui2,12,14", "ui2,13,14", "ui2,14,14", "ui2,15,14",
         "ui2,0,15", "ui2,1,15", "ui2,2,15", "ui2,3,15", "ui2,4,15", "ui2,5,15", "ui2,6,15", "ui2,7,15", "ui2,8,15", "ui2,9,15", "ui2,10,15", "ui2,11,15", "ui2,12,15", "ui2,13,15", "ui2,14,15", "ui2,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui2", width=16, height=16, arr=tiles)
+    zx.tile_load_arr(tex_name="16x16_ui2", width=8, height=8, arr=tiles)
 
     zx.tex_load(file="data/gfx/16x16_ui3.tga", name="16x16_ui3")
     tiles = [
@@ -112,7 +112,7 @@ def init_16x16_ui():
         "ui3,0,14", "ui3,1,14", "ui3,2,14", "ui3,3,14", "ui3,4,14", "ui3,5,14", "ui3,6,14", "ui3,7,14", "ui3,8,14", "ui3,9,14", "ui3,10,14", "ui3,11,14", "ui3,12,14", "ui3,13,14", "ui3,14,14", "ui3,15,14",
         "ui3,0,15", "ui3,1,15", "ui3,2,15", "ui3,3,15", "ui3,4,15", "ui3,5,15", "ui3,6,15", "ui3,7,15", "ui3,8,15", "ui3,9,15", "ui3,10,15", "ui3,11,15", "ui3,12,15", "ui3,13,15", "ui3,14,15", "ui3,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui3", width=16, height=16, arr=tiles)
+    zx.tile_load_arr(tex_name="16x16_ui3", width=8, height=8, arr=tiles)
 
     zx.tex_load(file="data/gfx/16x16_ui4.tga", name="16x16_ui4")
     tiles = [
@@ -133,7 +133,7 @@ def init_16x16_ui():
         "ui4,0,14", "ui4,1,14", "ui4,2,14", "ui4,3,14", "ui4,4,14", "ui4,5,14", "ui4,6,14", "ui4,7,14", "ui4,8,14", "ui4,9,14", "ui4,10,14", "ui4,11,14", "ui4,12,14", "ui4,13,14", "ui4,14,14", "ui4,15,14",
         "ui4,0,15", "ui4,1,15", "ui4,2,15", "ui4,3,15", "ui4,4,15", "ui4,5,15", "ui4,6,15", "ui4,7,15", "ui4,8,15", "ui4,9,15", "ui4,10,15", "ui4,11,15", "ui4,12,15", "ui4,13,15", "ui4,14,15", "ui4,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui4", width=16, height=16, arr=tiles)
+    zx.tile_load_arr(tex_name="16x16_ui4", width=8, height=8, arr=tiles)
 
 def init_64x16_ui():
     zx.tex_load(file="data/gfx/64x16_status_bar.tga", name="64x16_status_bar")
@@ -190,7 +190,7 @@ def init_popup_ui():
     tiles = [
         "popup_ui", 
     ]
-    zx.tile_load_arr(tex_name="popup_ui", width=160, height=304, arr=tiles)
+    zx.tile_load_arr(tex_name="popup_ui", width=80, height=152, arr=tiles)
 
 def init_16x16():
     zx.tex_load(
