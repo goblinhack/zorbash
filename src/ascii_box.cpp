@@ -10,8 +10,7 @@
 
 static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
                              int x1, int y1, int x2, int y2,
-                             color col_border_text, 
-                             color col_tl, color col_mid, color col_br,
+                             color col_bg, color col_fg,
                              void *context)
 {_
     int x;
@@ -52,13 +51,13 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
             for (y = y1; y <= y2; y++) {
                 float tx = (float)(x-x1) * dx;
                 float ty = (float)(y-y1) * dy;
-                if (bg_tile) {
+                if (bg_tile || (col_bg != COLOR_NONE)) {
                     ascii_set_bg2(x, y, bg_tile, tx, ty, dx, dy);
-                    ascii_set_bg2(x, y, col_mid);
+                    ascii_set_bg2(x, y, col_bg);
                 }
-                if (fg_tile) {
+                if (fg_tile || (col_fg != COLOR_NONE)) {
                     ascii_set_fg2(x, y, fg_tile, tx, ty, dx, dy);
-                    ascii_set_fg2(x, y, col_mid);
+                    ascii_set_fg2(x, y, col_fg);
                 }
                 ascii_set_fg(x, y, ' ');
             }
@@ -68,13 +67,13 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
     if (unlikely(y1 == y2)) {
         y = y1;
         for (x = x1; x <= x2; x++) {
-            ascii_set_bg(x, y, col_mid);
+            ascii_set_bg(x, y, col_bg);
         }
         return;
     } else if (unlikely(x1 == x2)) {
         x = x1;
         for (y = y1; y <= y2; y++) {
-            ascii_set_bg(x, y, col_mid);
+            ascii_set_bg(x, y, col_bg);
         }
         return;
     } else {
@@ -83,7 +82,7 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
                 if (style >= 0) {
                     ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
                 }
-                ascii_set_bg(x, y, col_tl);
+                ascii_set_bg(x, y, col_bg);
             }
         }
 
@@ -92,12 +91,12 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
                 if (style >= 0) {
                     ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
                 }
-                ascii_set_bg(x, y, col_br);
+                ascii_set_bg(x, y, col_bg);
             }
             if (style >= 0) {
                 ascii_set_bg(x1, y2, tiles[style][(x1 % MAX_UI_BG_SIZE)+1][(y2 % MAX_UI_BG_SIZE)+1]);
             }
-            ascii_set_bg(x1, y2, col_br);
+            ascii_set_bg(x1, y2, col_bg);
         }
 
         for (y = y1 + 1; y <= y2 - 1; y++) {
@@ -105,7 +104,7 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
                 if (style >= 0) {
                     ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
                 }
-                ascii_set_bg(x, y, col_mid);
+                ascii_set_bg(x, y, col_bg);
             }
         }
     }
@@ -116,7 +115,7 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
             if (style >= 0) {
                 ascii_set_bg(x, y, tiles[style][(x % MAX_UI_BG_SIZE)+1][(y % MAX_UI_BG_SIZE)+1]);
             }
-            ascii_set_bg(x, y, col_mid);
+            ascii_set_bg(x, y, col_bg);
         }
     }
 
@@ -125,8 +124,6 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
             ascii_set_bg(x, y1, tiles[style][(x % MAX_UI_BG_SIZE)+1][0]);
             ascii_set_bg(x, y2, tiles[style][(x % MAX_UI_BG_SIZE)+1][MAX_UI_SIZE - 1]);
         }
-        ascii_set_bg(x, y1, col_border_text);
-        ascii_set_bg(x, y2, col_border_text);
     }
 
     for (y = y1 + 1; y <= y2 - 1; y++) {
@@ -134,8 +131,6 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
             ascii_set_bg(x1, y, tiles[style][0][(y % MAX_UI_BG_SIZE)+1]);
             ascii_set_bg(x2, y, tiles[style][MAX_UI_SIZE - 1][(y % MAX_UI_BG_SIZE)+1]);
         }
-        ascii_set_bg(x1, y, col_border_text);
-        ascii_set_bg(x2, y, col_border_text);
     }
 
     if (style >= 0) {
@@ -144,11 +139,6 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
         ascii_set_bg(x2, y1, tiles[style][MAX_UI_SIZE - 1][0]);
         ascii_set_bg(x1, y2, tiles[style][0][MAX_UI_SIZE - 1]);
     }
-
-    ascii_set_bg(x1, y1, col_border_text);
-    ascii_set_bg(x2, y2, col_border_text);
-    ascii_set_bg(x2, y1, col_border_text);
-    ascii_set_bg(x1, y2, col_border_text);
 }
 
 static void ascii_put_box_ (int style,
@@ -158,18 +148,15 @@ static void ascii_put_box_ (int style,
                             int y,
                             int width,
                             int height,
-                            color col_border_text,
-                            color col_tl,
-                            color col_mid,
-                            color col_br,
+                            color col_bg,
+                            color col_text,
                             const wchar_t *fmt,
                             va_list args)
 {_
     if (!*fmt) {
         ascii_put_box__(style, bg_tile, fg_tile, x, y,
-                             x + width - 1, y + height - 1,
-                             col_border_text, col_tl, col_mid, col_br,
-                             0 /* context */);
+                        x + width - 1, y + height - 1,
+                        col_bg, col_text, 0 /* context */);
     } else {
         wchar_t buf[MAXSHORTSTR];
         auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
@@ -185,11 +172,10 @@ static void ascii_put_box_ (int style,
         int len = ascii_strlen(b);
 
         ascii_put_box__(style, bg_tile, fg_tile, x, y,
-                             x + width - 1, y + height - 1,
-                             col_border_text, col_tl, col_mid, col_br,
-                             0 /* context */);
+                        x + width - 1, y + height - 1,
+                        col_bg, col_text, 0 /* context */);
 
-        ascii_putf__(x + ((width - len) / 2), y + 1, WHITE, COLOR_NONE, b);
+        ascii_putf__(x + ((width - len) / 2), y + 1, col_text, COLOR_NONE, b);
     }
 }
 
@@ -202,16 +188,6 @@ void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const w
         b.y = 0;
         b.width = ASCII_WIDTH;
         b.height = ASCII_HEIGHT;
-    }
-
-    if ((b.col_tl == COLOR_NONE) &&
-        (b.col_mid == COLOR_NONE) &&
-        (b.col_br == COLOR_NONE)) {
-
-        b.col_border_text = WHITE;
-        b.col_tl = WHITE;
-        b.col_mid = WHITE;
-        b.col_br = WHITE;
     }
 
     int x = b.x;
@@ -231,10 +207,8 @@ void ascii_put_box (box_args b, int style, Tilep bg_tile, Tilep fg_tile, const w
                    b.y,
                    b.width,
                    b.height,
-                   b.col_border_text,
-                   b.col_tl,
-                   b.col_mid,
-                   b.col_br,
+                   b.col_bg,
+                   b.col_text,
                    fmt,
                    args);
 

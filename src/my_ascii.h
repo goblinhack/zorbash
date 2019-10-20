@@ -108,10 +108,7 @@ typedef struct {
     int sdl_key;
     int mouse_button;
 
-    color col_border_text; // border text color
-    color col_tl;          // tl background color
-    color col_mid;         // mid background color
-    color col_br;          // br background color
+    color col;
 
     ascii_key_down_callback key_down;
     ascii_mouse_down_callback mouse_down;
@@ -131,10 +128,8 @@ typedef struct {
     int sdl_key;
     int mouse_button;
 
-    color col_border_text; // border text color
-    color col_tl;          // tl background color
-    color col_mid;         // mid background color
-    color col_br;          // br background color
+    color col_bg;
+    color col_text;
 
     ascii_key_down_callback key_down;
     ascii_mouse_down_callback mouse_down;
