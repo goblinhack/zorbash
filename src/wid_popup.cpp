@@ -43,7 +43,7 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile) :
         wid_popup_container = wid_new_square_window("wid_popup");
         wid_set_pos(wid_popup_container, tl, br);
         wid_set_style(wid_popup_container, -1);
-        wid_set_bg_tile(wid_popup_container, tile_find_mand("popup_ui"));
+        wid_set_bg_tile(wid_popup_container, tile_find_mand("ui_popup"));
     }
 
     if (title_tile) {

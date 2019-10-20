@@ -52,10 +52,14 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
             for (y = y1; y <= y2; y++) {
                 float tx = (float)(x-x1) * dx;
                 float ty = (float)(y-y1) * dy;
-                ascii_set_bg2(x, y, bg_tile, tx, ty, dx, dy);
-                ascii_set_bg2(x, y, col_mid);
-                ascii_set_fg2(x, y, fg_tile, tx, ty, dx, dy);
-                ascii_set_fg2(x, y, col_mid);
+                if (bg_tile) {
+                    ascii_set_bg2(x, y, bg_tile, tx, ty, dx, dy);
+                    ascii_set_bg2(x, y, col_mid);
+                }
+                if (fg_tile) {
+                    ascii_set_fg2(x, y, fg_tile, tx, ty, dx, dy);
+                    ascii_set_fg2(x, y, col_mid);
+                }
                 ascii_set_fg(x, y, ' ');
             }
         }
