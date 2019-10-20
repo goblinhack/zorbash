@@ -2097,11 +2097,8 @@ Widp wid_new_window (std::string name)
 
     wid_set_name(w, name);
 
-    color col = WHITE;
-    glcolor(col);
-
     wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_color(w, WID_COLOR_BG, col);
+    wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT, WHITE);
     wid_set_movable(w, true);
     wid_set_shape_square(w);
@@ -2133,7 +2130,7 @@ Widp wid_new_container (Widp parent, std::string name)
     glcolor(col);
 
     wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_color(w, WID_COLOR_BG, col);
+    wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT, WHITE);
     wid_set_shape_square(w);
 
@@ -2155,7 +2152,8 @@ Widp wid_new_square_window (std::string name)
     wid_set_movable(w, true);
     wid_set_name(w, name);
     wid_set_shape_square(w);
-
+    wid_set_color(w, WID_COLOR_BG, WHITE);
+    wid_set_color(w, WID_COLOR_TEXT, WHITE);
     wid_raise(w);
 
     return (w);
@@ -2181,6 +2179,14 @@ Widp wid_new_square_button (Widp parent, std::string name)
 
     wid_set_name(w, name);
     wid_set_shape_square(w);
+
+    wid_set_mode(w, WID_MODE_OVER);
+    wid_set_color(w, WID_COLOR_BG, GRAY90);
+    wid_set_color(w, WID_COLOR_TEXT, WHITE);
+
+    wid_set_mode(w, WID_MODE_NORMAL);
+    wid_set_color(w, WID_COLOR_BG, WHITE);
+    wid_set_color(w, WID_COLOR_TEXT, WHITE);
 
     return (w);
 }
@@ -5458,7 +5464,7 @@ static void wid_display (Widp w,
     //
     // Draw the wid frame
     //
-    color col_border_text = wid_get_color(w, WID_COLOR_TEXT);
+    color col_text = wid_get_color(w, WID_COLOR_TEXT);
 
     //
     // If inputting text, show a cursor.
@@ -5522,31 +5528,11 @@ static void wid_display (Widp w,
 
     if (w == wid_over) {
         w_box_args.over = true;
-
-        if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG]) {
-            auto c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
-            w_box_args.col_border_text = c;
-            c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
-        } else {
-            w_box_args.col_border_text = GRAY;
-            w_box_args.col_tl = GRAY;
-            w_box_args.col_mid = GRAY;
-            w_box_args.col_br = GRAY;
-        }
+        w_box_args.col_text = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
+        w_box_args.col_bg   = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_BG];
     } else {
-        if (get(w->cfg, WID_MODE_NORMAL).color_set[WID_COLOR_BG]) {
-            auto c = get(w->cfg, WID_MODE_OVER).colors[WID_COLOR_TEXT];
-            w_box_args.col_border_text = c;
-            c = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
-            w_box_args.col_tl = c;
-            w_box_args.col_mid = c;
-            w_box_args.col_br = c;
-        } else {
-            w_box_args.col_border_text = WHITE;
-            w_box_args.col_tl = WHITE;
-            w_box_args.col_mid = WHITE;
-            w_box_args.col_br = WHITE;
-        }
+        w_box_args.col_text = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_TEXT];
+        w_box_args.col_bg   = get(w->cfg, WID_MODE_NORMAL).colors[WID_COLOR_BG];
     }
 
     if (w->square) {
@@ -5617,7 +5603,7 @@ static void wid_display (Widp w,
             }
         }
 
-        ascii_putf__(x, y, col_border_text, COLOR_NONE, text);
+        ascii_putf__(x, y, col_text, COLOR_NONE, text);
     }
 
 

@@ -71,6 +71,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "food_frog1");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -84,6 +88,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "key1.1");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -97,6 +105,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "food_frog1");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -110,6 +122,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.1");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -123,6 +139,11 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.2");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -136,6 +157,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.3");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -149,6 +174,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.4");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -162,6 +191,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.5");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -175,6 +208,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.6");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
     {
@@ -188,6 +225,10 @@ static void wid_test_wid_create (void)
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "sword1.1");
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
+        wid_set_mode(w, WID_MODE_NORMAL);
     }
 
     wid_update(wid_itembar);
