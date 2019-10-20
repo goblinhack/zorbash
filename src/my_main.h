@@ -110,7 +110,7 @@ extern int TILES_DOWN;
 #define ITEMBAR_TOT_WIDTH           (10 * ITEMBAR_WIDTH)
 #define ITEMBAR_TL_X                (ASCII_WIDTH / 2 - (ITEMBAR_TOT_WIDTH / 2))
 #define ITEMBAR_TL_Y                (ASCII_HEIGHT - 4)
-#define ITEMBAR_BR_X                (ASCII_WIDTH / 2 + (ITEMBAR_TOT_WIDTH / 2))
+#define ITEMBAR_BR_X                ((ASCII_WIDTH / 2 + (ITEMBAR_TOT_WIDTH / 2)) - 1)
 #define ITEMBAR_BR_Y                (ASCII_HEIGHT - 1)
 #define INVENTORY_ITEM_WIDTH        2
 #define INVENTORY_ITEM_HEIGHT       2

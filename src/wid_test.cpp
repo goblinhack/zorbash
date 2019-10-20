@@ -55,8 +55,8 @@ static void wid_test_wid_create (void)
 
         wid_itembar = wid_new_square_window("text container1");
         wid_set_pos(wid_itembar, tl, br);
-        wid_set_shape_none(wid_itembar);
-        wid_set_style(wid_itembar, 1);
+        wid_set_style(wid_itembar, -1);
+        wid_set_bg_tile(wid_itembar, tile_find_mand("ui_action_bar"));
     }
 
     int x = 0;
@@ -66,12 +66,11 @@ static void wid_test_wid_create (void)
         point br = {ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"1");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "food_frog1");
+        wid_set_fg_tilename(w, "food_frog1");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -80,12 +79,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"2");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "key1.1");
+        wid_set_fg_tilename(w, "key1.1");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -94,12 +92,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"3");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "food_frog1");
+        wid_set_fg_tilename(w, "food_frog1");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -108,12 +105,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"4");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "gem1.1");
+        wid_set_fg_tilename(w, "gem1.1");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -122,12 +118,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"5");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "gem1.2");
+        wid_set_fg_tilename(w, "gem1.2");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -136,12 +131,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"6");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "gem1.3");
+        wid_set_fg_tilename(w, "gem1.3");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -150,12 +144,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"7");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "gem1.4");
+        wid_set_fg_tilename(w, "gem1.4");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -164,12 +157,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"8");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "gem1.5");
+        wid_set_fg_tilename(w, "gem1.5");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -178,12 +170,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"9");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "gem1.6");
+        wid_set_fg_tilename(w, "gem1.6");
     }
     x += ITEMBAR_WIDTH;
     {
@@ -192,12 +183,11 @@ static void wid_test_wid_create (void)
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 0);
-        wid_set_text(w, L"0");
+        wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_m_down(w, wid_test_mouse_down);
-        wid_set_bg_tilename(w, "sword1.1");
+        wid_set_fg_tilename(w, "sword1.1");
     }
 
     wid_update(wid_itembar);

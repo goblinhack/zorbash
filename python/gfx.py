@@ -29,8 +29,8 @@ def init_text():
 def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
 
-def init_16x16_ui():
-    zx.tex_load(file="data/gfx/16x16_ui0.tga", name="16x16_ui0")
+def init_ui_box():
+    zx.tex_load(file="data/gfx/ui_box0.tga", name="ui_box0")
     tiles = [
         "ui0,0,0", "ui0,1,0", "ui0,2,0", "ui0,3,0", "ui0,4,0", "ui0,5,0", "ui0,6,0", "ui0,7,0", "ui0,8,0", "ui0,9,0", "ui0,10,0", "ui0,11,0", "ui0,12,0", "ui0,13,0", "ui0,14,0", "ui0,15,0",
         "ui0,0,1", "ui0,1,1", "ui0,2,1", "ui0,3,1", "ui0,4,1", "ui0,5,1", "ui0,6,1", "ui0,7,1", "ui0,8,1", "ui0,9,1", "ui0,10,1", "ui0,11,1", "ui0,12,1", "ui0,13,1", "ui0,14,1", "ui0,15,1",
@@ -49,9 +49,9 @@ def init_16x16_ui():
         "ui0,0,14", "ui0,1,14", "ui0,2,14", "ui0,3,14", "ui0,4,14", "ui0,5,14", "ui0,6,14", "ui0,7,14", "ui0,8,14", "ui0,9,14", "ui0,10,14", "ui0,11,14", "ui0,12,14", "ui0,13,14", "ui0,14,14", "ui0,15,14",
         "ui0,0,15", "ui0,1,15", "ui0,2,15", "ui0,3,15", "ui0,4,15", "ui0,5,15", "ui0,6,15", "ui0,7,15", "ui0,8,15", "ui0,9,15", "ui0,10,15", "ui0,11,15", "ui0,12,15", "ui0,13,15", "ui0,14,15", "ui0,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui0", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(tex_name="ui_box0", width=8, height=8, arr=tiles)
 
-    zx.tex_load(file="data/gfx/16x16_ui1.tga", name="16x16_ui")
+    zx.tex_load(file="data/gfx/ui_box1.tga", name="ui_box")
     tiles = [
         "ui1,0,0", "ui1,1,0", "ui1,2,0", "ui1,3,0", "ui1,4,0", "ui1,5,0", "ui1,6,0", "ui1,7,0", "ui1,8,0", "ui1,9,0", "ui1,10,0", "ui1,11,0", "ui1,12,0", "ui1,13,0", "ui1,14,0", "ui1,15,0",
         "ui1,0,1", "ui1,1,1", "ui1,2,1", "ui1,3,1", "ui1,4,1", "ui1,5,1", "ui1,6,1", "ui1,7,1", "ui1,8,1", "ui1,9,1", "ui1,10,1", "ui1,11,1", "ui1,12,1", "ui1,13,1", "ui1,14,1", "ui1,15,1",
@@ -70,9 +70,9 @@ def init_16x16_ui():
         "ui1,0,14", "ui1,1,14", "ui1,2,14", "ui1,3,14", "ui1,4,14", "ui1,5,14", "ui1,6,14", "ui1,7,14", "ui1,8,14", "ui1,9,14", "ui1,10,14", "ui1,11,14", "ui1,12,14", "ui1,13,14", "ui1,14,14", "ui1,15,14",
         "ui1,0,15", "ui1,1,15", "ui1,2,15", "ui1,3,15", "ui1,4,15", "ui1,5,15", "ui1,6,15", "ui1,7,15", "ui1,8,15", "ui1,9,15", "ui1,10,15", "ui1,11,15", "ui1,12,15", "ui1,13,15", "ui1,14,15", "ui1,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(tex_name="ui_box", width=8, height=8, arr=tiles)
 
-    zx.tex_load(file="data/gfx/16x16_ui2.tga", name="16x16_ui2")
+    zx.tex_load(file="data/gfx/ui_box2.tga", name="ui_box2")
     tiles = [
         "ui2,0,0", "ui2,1,0", "ui2,2,0", "ui2,3,0", "ui2,4,0", "ui2,5,0", "ui2,6,0", "ui2,7,0", "ui2,8,0", "ui2,9,0", "ui2,10,0", "ui2,11,0", "ui2,12,0", "ui2,13,0", "ui2,14,0", "ui2,15,0",
         "ui2,0,1", "ui2,1,1", "ui2,2,1", "ui2,3,1", "ui2,4,1", "ui2,5,1", "ui2,6,1", "ui2,7,1", "ui2,8,1", "ui2,9,1", "ui2,10,1", "ui2,11,1", "ui2,12,1", "ui2,13,1", "ui2,14,1", "ui2,15,1",
@@ -91,9 +91,9 @@ def init_16x16_ui():
         "ui2,0,14", "ui2,1,14", "ui2,2,14", "ui2,3,14", "ui2,4,14", "ui2,5,14", "ui2,6,14", "ui2,7,14", "ui2,8,14", "ui2,9,14", "ui2,10,14", "ui2,11,14", "ui2,12,14", "ui2,13,14", "ui2,14,14", "ui2,15,14",
         "ui2,0,15", "ui2,1,15", "ui2,2,15", "ui2,3,15", "ui2,4,15", "ui2,5,15", "ui2,6,15", "ui2,7,15", "ui2,8,15", "ui2,9,15", "ui2,10,15", "ui2,11,15", "ui2,12,15", "ui2,13,15", "ui2,14,15", "ui2,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui2", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(tex_name="ui_box2", width=8, height=8, arr=tiles)
 
-    zx.tex_load(file="data/gfx/16x16_ui3.tga", name="16x16_ui3")
+    zx.tex_load(file="data/gfx/ui_box3.tga", name="ui_box3")
     tiles = [
         "ui3,0,0", "ui3,1,0", "ui3,2,0", "ui3,3,0", "ui3,4,0", "ui3,5,0", "ui3,6,0", "ui3,7,0", "ui3,8,0", "ui3,9,0", "ui3,10,0", "ui3,11,0", "ui3,12,0", "ui3,13,0", "ui3,14,0", "ui3,15,0",
         "ui3,0,1", "ui3,1,1", "ui3,2,1", "ui3,3,1", "ui3,4,1", "ui3,5,1", "ui3,6,1", "ui3,7,1", "ui3,8,1", "ui3,9,1", "ui3,10,1", "ui3,11,1", "ui3,12,1", "ui3,13,1", "ui3,14,1", "ui3,15,1",
@@ -112,9 +112,9 @@ def init_16x16_ui():
         "ui3,0,14", "ui3,1,14", "ui3,2,14", "ui3,3,14", "ui3,4,14", "ui3,5,14", "ui3,6,14", "ui3,7,14", "ui3,8,14", "ui3,9,14", "ui3,10,14", "ui3,11,14", "ui3,12,14", "ui3,13,14", "ui3,14,14", "ui3,15,14",
         "ui3,0,15", "ui3,1,15", "ui3,2,15", "ui3,3,15", "ui3,4,15", "ui3,5,15", "ui3,6,15", "ui3,7,15", "ui3,8,15", "ui3,9,15", "ui3,10,15", "ui3,11,15", "ui3,12,15", "ui3,13,15", "ui3,14,15", "ui3,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui3", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(tex_name="ui_box3", width=8, height=8, arr=tiles)
 
-    zx.tex_load(file="data/gfx/16x16_ui4.tga", name="16x16_ui4")
+    zx.tex_load(file="data/gfx/ui_box4.tga", name="ui_box4")
     tiles = [
         "ui4,0,0", "ui4,1,0", "ui4,2,0", "ui4,3,0", "ui4,4,0", "ui4,5,0", "ui4,6,0", "ui4,7,0", "ui4,8,0", "ui4,9,0", "ui4,10,0", "ui4,11,0", "ui4,12,0", "ui4,13,0", "ui4,14,0", "ui4,15,0",
         "ui4,0,1", "ui4,1,1", "ui4,2,1", "ui4,3,1", "ui4,4,1", "ui4,5,1", "ui4,6,1", "ui4,7,1", "ui4,8,1", "ui4,9,1", "ui4,10,1", "ui4,11,1", "ui4,12,1", "ui4,13,1", "ui4,14,1", "ui4,15,1",
@@ -133,10 +133,10 @@ def init_16x16_ui():
         "ui4,0,14", "ui4,1,14", "ui4,2,14", "ui4,3,14", "ui4,4,14", "ui4,5,14", "ui4,6,14", "ui4,7,14", "ui4,8,14", "ui4,9,14", "ui4,10,14", "ui4,11,14", "ui4,12,14", "ui4,13,14", "ui4,14,14", "ui4,15,14",
         "ui4,0,15", "ui4,1,15", "ui4,2,15", "ui4,3,15", "ui4,4,15", "ui4,5,15", "ui4,6,15", "ui4,7,15", "ui4,8,15", "ui4,9,15", "ui4,10,15", "ui4,11,15", "ui4,12,15", "ui4,13,15", "ui4,14,15", "ui4,15,15",
     ]
-    zx.tile_load_arr(tex_name="16x16_ui4", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(tex_name="ui_box4", width=8, height=8, arr=tiles)
 
 def init_64x16_ui():
-    zx.tex_load(file="data/gfx/64x16_status_bar.tga", name="64x16_status_bar")
+    zx.tex_load(file="data/gfx/ui_status_bar.tga", name="ui_status_bar")
     tiles = [
         "status-bar-11", 
         "status-bar-10",
@@ -183,14 +183,21 @@ def init_64x16_ui():
         "karma-bar-1", 
         "karma-bar-0",
     ]
-    zx.tile_load_arr(tex_name="64x16_status_bar", width=96, height=16, arr=tiles)
+    zx.tile_load_arr(tex_name="ui_status_bar", width=96, height=16, arr=tiles)
 
-def init_popup_ui():
-    zx.tex_load(file="data/gfx/popup_ui.tga", name="popup_ui")
+def init_ui_popup():
+    zx.tex_load(file="data/gfx/ui_popup.tga", name="ui_popup")
     tiles = [
-        "popup_ui", 
+        "ui_popup", 
     ]
-    zx.tile_load_arr(tex_name="popup_ui", width=80, height=152, arr=tiles)
+    zx.tile_load_arr(tex_name="ui_popup", width=80, height=152, arr=tiles)
+
+def init_ui_action_bar():
+    zx.tex_load(file="data/gfx/ui_action_bar.tga", name="ui_action_bar")
+    tiles = [
+        "ui_action_bar", 
+    ]
+    zx.tile_load_arr(tex_name="ui_action_bar", width=320, height=32, arr=tiles)
 
 def init_16x16():
     zx.tex_load(
@@ -690,9 +697,10 @@ def init_weapons_tiles():
 
 init_text()
 init_light()
-init_16x16_ui()
+init_ui_box()
 init_64x16_ui()
-init_popup_ui()
+init_ui_popup()
+init_ui_action_bar()
 init_16x16()
 init_16x32()
 init_32x32()
