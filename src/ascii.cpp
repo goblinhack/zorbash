@@ -425,6 +425,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
                 text_iter += len;
                 continue;
             }
+            continue;
         }
 
         if (unlikely(!ascii_ok_for_scissors(x, y))) {

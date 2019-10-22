@@ -354,6 +354,7 @@ static void wid_test_wid_create (void)
         wid_set_bg_tilename(w, "health-status");
     }
 
+#if 0
     y_at += 3;
     {
         auto w = wid_new_square_button(wid_sidebar, "strength-icon");
@@ -563,6 +564,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "curses-2");
     }
+#endif
 
     wid_update(wid_sidebar);
 
