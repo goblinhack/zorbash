@@ -75,7 +75,11 @@ public:
 #endif
 
     int32_t gl_surface_binding {};
+    int32_t gl_surface_binding_black_and_white {};
+
     Texp tex;
+    Texp tex_black_and_white;
+
     std::array<std::array<uint8_t, MAX_TILE_HEIGHT>, MAX_TILE_WIDTH> pix {};
 
     //
@@ -135,9 +139,15 @@ uint8_t tile_init(void);
 void tile_fini(void);
 void tile_load(std::string file, uint32_t width, uint32_t height,
                uint32_t nargs, ...);
-void tile_load_arr(std::string tex,
+void tile_load_arr(std::string file,
+                   std::string tex_name,
                    uint32_t width, uint32_t height,
                    uint32_t nargs, const char * arr[]);
+void tile_load_arr_color_and_black_and_white(std::string file,
+                                             std::string tex_name,
+                                             uint32_t width, uint32_t height,
+                                             uint32_t nargs, 
+                                             const char * arr[]);
 Tilep tile_find(std::string name);
 Tilep tile_find_mand(std::string name);
 Tilep tile_from_surface(SDL_Surface *surface,

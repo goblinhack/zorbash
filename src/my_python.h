@@ -84,17 +84,15 @@ int py_obj_attr_int(const PyObject *py_obj, const char *attr);
 uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr);
 double py_obj_attr_double(const PyObject *py_obj, const char *attr);
 
-PyObject *text_size_ (PyObject *obj, PyObject *args, PyObject *keywds);
-
-PyObject *abs_to_pct_ (PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *pct_to_abs_ (PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *abs_to_pct_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tex_size_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tex_pixel_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *tile_get_size_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tile_load_arr_color_and_black_and_white_(PyObject *obj, PyObject *args, PyObject *keywds);
+
 PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *map_load_level_(PyObject *obj, PyObject *args, PyObject *keywds);
 
