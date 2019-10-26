@@ -1585,25 +1585,15 @@ static PyMethodDef python_c_METHODS[] = {
         METH_VARARGS | METH_KEYWORDS,
         "load a texture"},
 
-    {"tex_size",
-        (PyCFunction)tex_size_,
-        METH_VARARGS | METH_KEYWORDS,
-        "tex info"},
-
-    {"tex_pixel",
-        (PyCFunction)tex_pixel_,
-        METH_VARARGS | METH_KEYWORDS,
-        "get pixels"},
-
     {"tile_load_arr",
         (PyCFunction)tile_load_arr_,
         METH_VARARGS | METH_KEYWORDS,
         "load a tile array"},
 
-    {"tile_size",
-        (PyCFunction)tile_get_size_,
+    {"tile_load_arr_color_and_black_and_white",
+        (PyCFunction)tile_load_arr_color_and_black_and_white_,
         METH_VARARGS | METH_KEYWORDS,
-        "tile size in pixels"},
+        "load a tile array in color and black and white"},
 
     {"tp_load",
         (PyCFunction)tp_load_,

@@ -2,35 +2,28 @@ import zx
 
 
 def init_text():
-
-    #file="data/ttf/dejavu-nerd.ttf_pointsize80.tga",
-    zx.tex_load(
-            file="data/ttf/PressStart2P.ttf_pointsize8.tga",
-            name="text")
-
     tiles = [
-    "C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17", "C18", "C19", "C20", "C21", "C22", "C23", "C24", "C25", "C26", "C27", "C28", "C29", "C30", "C31", "C32", "C33", "C34", "C35", "C36", "C37", "C38", "C39", "C40", "C41", "C42", "C43", "C44", "C45", "C46", "C47", "C48", "C49", "C50", "C51", "C52", "C53", "C54", "C55", "C56", "C57", "C58", "C59", 
-    "C60", "C61", "C62", "C63", "C64", "C65", "C66", "C67", "C68", "C69", "C70", "C71", "C72", "C73", "C74", "C75", "C76", "C77", "C78", "C79", "C80", "C81", "C82", "C83", "C84", "C85", "C86", "C87", "C88", "C89", "C90", "C91", "C92", "C93", "C94", "C95", "C96", "C97", "C98", "C99", "C100", "C101", "C102", "C103", "C104", "C105", "C106", "C107", "C108", "C109", "C110", "C111", "C112", "C113", "C114", "C115", "C116", "C117", "C118", "C119", 
-    "C120", "C121", "C122", "C123", "C124", "C125", "C126", "C127", "C128", "C129", "C130", "C131", "C132", "C133", "C134", "C135", "C136", "C137", "C138", "C139", "C140", "C141", "C142", "C143", "C144", "C145", "C146", "C147", "C148", "C149", "C150", "C151", "C152", "C153", "C154", "C155", "C156", "C157", "C158", "C159", "C160", "C161", "C162", "C163", "C164", "C165", "C166", "C167", "C168", "C169", "C170", "C171", "C172", "C173", "C174", "C175", "C176", "C177", "C178", "C179", 
-    "C180", "C181", "C182", "C183", "C184", "C185", "C186", "C187", "C188", "C189", "C190", "C191", "C192", "C193", "C194", "C195", "C196", "C197", "C198", "C199", "C200", "C201", "C202", "C203", "C204", "C205", "C206", "C207", "C208", "C209", "C210", "C211", "C212", "C213", "C214", "C215", "C216", "C217", "C218", "C219", "C220", "C221", "C222", "C223", "C224", "C225", "C226", "C227", "C228", "C229", "C230", "C231", "C232", "C233", "C234", "C235", "C236", "C237", "C238", "C239", 
-    "C240", "C241", "C242", "C243", "C244", "C245", "C246", "C247", "C248", "C249", "C250", "C251", "C252", "C253", "C254", "C255", "C256", "C257", "C258", "C259", "C260", "C261", "C262", "C263", "C264", "C265", "C266", "C267", "C268", "C269", "C270", "C271", "C272", "C273", "C274", "C275", "C276", "C277", "C278", "C279", "C280", "C281", "C282", "C283", "C284", "C285", "C286", "C287", "C288", "C289", "C290", "C291", "C292", "C293", "C294", "C295", "C296", "C297", "C298", "C299", 
-    "C300", "C301", "C302", "C303", "C304", "C305", "C306", "C307", "C308", "C309", "C310", "C311", "C312", "C313", "C314", "C315", "C316", "C317", "C318", "C319", "C320", "C321", "C322", "C323", "C324", "C325", "C326", "C327", "C328", "C329", "C330", "C331", "C332", "C333", "C334", "C335", "C336", "C337", "C338", "C339", "C340", "C341", "C342", "C343", "C344", "C345", "C346", "C347", "C348", "C349", "C350", "C351", "C352", "C353", "C354", "C355", "C356", "C357", "C358", "C359", 
-    "C360", "C361", "C362", "C363", "C364", "C365", "C366", "C367", "C368", "C369", "C370", "C371", "C372", "C373", "C374", "C375", "C376", "C377", "C378", "C379", "C380", "C381", "C382", "C383", "C384", "C385", "C386", "C387", "C388", "C389", "C390", "C391", "C392", "C393", "C394", "C395", "C396", "C397", "C398", "C399", "C400", "C401", "C402", "C403", "C404", "C405", "C406", "C407", "C408", "C409", "C410", "C411", "C412", "C413", "C414", "C415", "C416", "C417", "C418", "C419", 
-    "C420", "C421", "C422", "C423", "C424", "C425", "C426", "C427", "C428", "C429", "C430", "C431", "C432", "C433", "C434", "C435", "C436", "C437", "C438", "C439", "C440", "C441", "C442", "C443", "C444", "C445", "C446", "C447", "C448", "C449", "C450", "C451", "C452", "C453", "C454", "C455", "C456", "C457", "C458", "C459", "C460", "C461", "C462", "C463", "C464", "C465", "C466", "C467", "C468", "C469", "C470", "C471", "C472", "C473", "C474", "C475", "C476", "C477", "C478", "C479", 
-    "C480", "C481", "C482", "C483", "C484", "C485", "C486", "C487", "C488", "C489", "C490", "C491", "C492", "C493", "C494", "C495", "C496", "C497", "C498", "C499", "C500", "C501", "C502", "C503", "C504", "C505", "C506", "C507", "C508", "C509", "C510", "C511", "C512", "C513", "C514", "C515", "C516", "C517", "C518", "C519", "C520", "C521", "C522", "C523", "C524", "C525", "C526", "C527", "C528", "C529", "C530", "C531", "C532", "C533", "C534", "C535", "C536", "C537", "C538", "C539", 
-    "C540", "C541", "C542", "C543", "C544", "C545", "C546", "C547", "C548", "C549", "C550", "C551", "C552", "C553", "C554", "C555", "CSPACE", "CDOLLAR", "CWEIGHT", "C559", "C560", "C561", "C562", "C563", "C564", "C565", "C566", "C567", "C568", "C569", "C570", "C571", "C572", "C573", "C574", "C575", "C576", "C577", "C578", "C579", "C580", "C581", "C582", "C583", "C584", "C585", "C586", "C587", "C588", "C589", "C590", "C591", "C592", "C593", "C594", "C595", "C596", "C597", "C598", "C599", 
+        "C0", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C14", "C15", "C16", "C17", "C18", "C19", "C20", "C21", "C22", "C23", "C24", "C25", "C26", "C27", "C28", "C29", "C30", "C31", "C32", "C33", "C34", "C35", "C36", "C37", "C38", "C39", "C40", "C41", "C42", "C43", "C44", "C45", "C46", "C47", "C48", "C49", "C50", "C51", "C52", "C53", "C54", "C55", "C56", "C57", "C58", "C59", 
+        "C60", "C61", "C62", "C63", "C64", "C65", "C66", "C67", "C68", "C69", "C70", "C71", "C72", "C73", "C74", "C75", "C76", "C77", "C78", "C79", "C80", "C81", "C82", "C83", "C84", "C85", "C86", "C87", "C88", "C89", "C90", "C91", "C92", "C93", "C94", "C95", "C96", "C97", "C98", "C99", "C100", "C101", "C102", "C103", "C104", "C105", "C106", "C107", "C108", "C109", "C110", "C111", "C112", "C113", "C114", "C115", "C116", "C117", "C118", "C119", 
+        "C120", "C121", "C122", "C123", "C124", "C125", "C126", "C127", "C128", "C129", "C130", "C131", "C132", "C133", "C134", "C135", "C136", "C137", "C138", "C139", "C140", "C141", "C142", "C143", "C144", "C145", "C146", "C147", "C148", "C149", "C150", "C151", "C152", "C153", "C154", "C155", "C156", "C157", "C158", "C159", "C160", "C161", "C162", "C163", "C164", "C165", "C166", "C167", "C168", "C169", "C170", "C171", "C172", "C173", "C174", "C175", "C176", "C177", "C178", "C179", 
+        "C180", "C181", "C182", "C183", "C184", "C185", "C186", "C187", "C188", "C189", "C190", "C191", "C192", "C193", "C194", "C195", "C196", "C197", "C198", "C199", "C200", "C201", "C202", "C203", "C204", "C205", "C206", "C207", "C208", "C209", "C210", "C211", "C212", "C213", "C214", "C215", "C216", "C217", "C218", "C219", "C220", "C221", "C222", "C223", "C224", "C225", "C226", "C227", "C228", "C229", "C230", "C231", "C232", "C233", "C234", "C235", "C236", "C237", "C238", "C239", 
+        "C240", "C241", "C242", "C243", "C244", "C245", "C246", "C247", "C248", "C249", "C250", "C251", "C252", "C253", "C254", "C255", "C256", "C257", "C258", "C259", "C260", "C261", "C262", "C263", "C264", "C265", "C266", "C267", "C268", "C269", "C270", "C271", "C272", "C273", "C274", "C275", "C276", "C277", "C278", "C279", "C280", "C281", "C282", "C283", "C284", "C285", "C286", "C287", "C288", "C289", "C290", "C291", "C292", "C293", "C294", "C295", "C296", "C297", "C298", "C299", 
+        "C300", "C301", "C302", "C303", "C304", "C305", "C306", "C307", "C308", "C309", "C310", "C311", "C312", "C313", "C314", "C315", "C316", "C317", "C318", "C319", "C320", "C321", "C322", "C323", "C324", "C325", "C326", "C327", "C328", "C329", "C330", "C331", "C332", "C333", "C334", "C335", "C336", "C337", "C338", "C339", "C340", "C341", "C342", "C343", "C344", "C345", "C346", "C347", "C348", "C349", "C350", "C351", "C352", "C353", "C354", "C355", "C356", "C357", "C358", "C359", 
+        "C360", "C361", "C362", "C363", "C364", "C365", "C366", "C367", "C368", "C369", "C370", "C371", "C372", "C373", "C374", "C375", "C376", "C377", "C378", "C379", "C380", "C381", "C382", "C383", "C384", "C385", "C386", "C387", "C388", "C389", "C390", "C391", "C392", "C393", "C394", "C395", "C396", "C397", "C398", "C399", "C400", "C401", "C402", "C403", "C404", "C405", "C406", "C407", "C408", "C409", "C410", "C411", "C412", "C413", "C414", "C415", "C416", "C417", "C418", "C419", 
+        "C420", "C421", "C422", "C423", "C424", "C425", "C426", "C427", "C428", "C429", "C430", "C431", "C432", "C433", "C434", "C435", "C436", "C437", "C438", "C439", "C440", "C441", "C442", "C443", "C444", "C445", "C446", "C447", "C448", "C449", "C450", "C451", "C452", "C453", "C454", "C455", "C456", "C457", "C458", "C459", "C460", "C461", "C462", "C463", "C464", "C465", "C466", "C467", "C468", "C469", "C470", "C471", "C472", "C473", "C474", "C475", "C476", "C477", "C478", "C479", 
+        "C480", "C481", "C482", "C483", "C484", "C485", "C486", "C487", "C488", "C489", "C490", "C491", "C492", "C493", "C494", "C495", "C496", "C497", "C498", "C499", "C500", "C501", "C502", "C503", "C504", "C505", "C506", "C507", "C508", "C509", "C510", "C511", "C512", "C513", "C514", "C515", "C516", "C517", "C518", "C519", "C520", "C521", "C522", "C523", "C524", "C525", "C526", "C527", "C528", "C529", "C530", "C531", "C532", "C533", "C534", "C535", "C536", "C537", "C538", "C539", 
+        "C540", "C541", "C542", "C543", "C544", "C545", "C546", "C547", "C548", "C549", "C550", "C551", "C552", "C553", "C554", "C555", "CSPACE", "CDOLLAR", "CWEIGHT", "C559", "C560", "C561", "C562", "C563", "C564", "C565", "C566", "C567", "C568", "C569", "C570", "C571", "C572", "C573", "C574", "C575", "C576", "C577", "C578", "C579", "C580", "C581", "C582", "C583", "C584", "C585", "C586", "C587", "C588", "C589", "C590", "C591", "C592", "C593", "C594", "C595", "C596", "C597", "C598", "C599", 
     ]
 
-    zx.tile_load_arr(tex_name="text",
-                     width=8, height=8,
-                     arr=tiles)
+    zx.tile_load_arr(
+        file="data/ttf/PressStart2P.ttf_pointsize8.tga",
+        name="text", width=8, height=8, arr=tiles)
 
 
 def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
 
 def init_ui_box():
-    zx.tex_load(file="data/gfx/ui_box0.tga", name="ui_box0")
     tiles = [
         "ui0,0,0", "ui0,1,0", "ui0,2,0", "ui0,3,0", "ui0,4,0", "ui0,5,0", "ui0,6,0", "ui0,7,0", "ui0,8,0", "ui0,9,0", "ui0,10,0", "ui0,11,0", "ui0,12,0", "ui0,13,0", "ui0,14,0", "ui0,15,0",
         "ui0,0,1", "ui0,1,1", "ui0,2,1", "ui0,3,1", "ui0,4,1", "ui0,5,1", "ui0,6,1", "ui0,7,1", "ui0,8,1", "ui0,9,1", "ui0,10,1", "ui0,11,1", "ui0,12,1", "ui0,13,1", "ui0,14,1", "ui0,15,1",
@@ -49,9 +42,10 @@ def init_ui_box():
         "ui0,0,14", "ui0,1,14", "ui0,2,14", "ui0,3,14", "ui0,4,14", "ui0,5,14", "ui0,6,14", "ui0,7,14", "ui0,8,14", "ui0,9,14", "ui0,10,14", "ui0,11,14", "ui0,12,14", "ui0,13,14", "ui0,14,14", "ui0,15,14",
         "ui0,0,15", "ui0,1,15", "ui0,2,15", "ui0,3,15", "ui0,4,15", "ui0,5,15", "ui0,6,15", "ui0,7,15", "ui0,8,15", "ui0,9,15", "ui0,10,15", "ui0,11,15", "ui0,12,15", "ui0,13,15", "ui0,14,15", "ui0,15,15",
     ]
-    zx.tile_load_arr(tex_name="ui_box0", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/ui_box0.tga",
+        name="ui_box0", width=8, height=8, arr=tiles)
 
-    zx.tex_load(file="data/gfx/ui_box1.tga", name="ui_box")
     tiles = [
         "ui1,0,0", "ui1,1,0", "ui1,2,0", "ui1,3,0", "ui1,4,0", "ui1,5,0", "ui1,6,0", "ui1,7,0", "ui1,8,0", "ui1,9,0", "ui1,10,0", "ui1,11,0", "ui1,12,0", "ui1,13,0", "ui1,14,0", "ui1,15,0",
         "ui1,0,1", "ui1,1,1", "ui1,2,1", "ui1,3,1", "ui1,4,1", "ui1,5,1", "ui1,6,1", "ui1,7,1", "ui1,8,1", "ui1,9,1", "ui1,10,1", "ui1,11,1", "ui1,12,1", "ui1,13,1", "ui1,14,1", "ui1,15,1",
@@ -70,9 +64,10 @@ def init_ui_box():
         "ui1,0,14", "ui1,1,14", "ui1,2,14", "ui1,3,14", "ui1,4,14", "ui1,5,14", "ui1,6,14", "ui1,7,14", "ui1,8,14", "ui1,9,14", "ui1,10,14", "ui1,11,14", "ui1,12,14", "ui1,13,14", "ui1,14,14", "ui1,15,14",
         "ui1,0,15", "ui1,1,15", "ui1,2,15", "ui1,3,15", "ui1,4,15", "ui1,5,15", "ui1,6,15", "ui1,7,15", "ui1,8,15", "ui1,9,15", "ui1,10,15", "ui1,11,15", "ui1,12,15", "ui1,13,15", "ui1,14,15", "ui1,15,15",
     ]
-    zx.tile_load_arr(tex_name="ui_box", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/ui_box1.tga",
+        name="ui_box", width=8, height=8, arr=tiles)
 
-    zx.tex_load(file="data/gfx/ui_box2.tga", name="ui_box2")
     tiles = [
         "ui2,0,0", "ui2,1,0", "ui2,2,0", "ui2,3,0", "ui2,4,0", "ui2,5,0", "ui2,6,0", "ui2,7,0", "ui2,8,0", "ui2,9,0", "ui2,10,0", "ui2,11,0", "ui2,12,0", "ui2,13,0", "ui2,14,0", "ui2,15,0",
         "ui2,0,1", "ui2,1,1", "ui2,2,1", "ui2,3,1", "ui2,4,1", "ui2,5,1", "ui2,6,1", "ui2,7,1", "ui2,8,1", "ui2,9,1", "ui2,10,1", "ui2,11,1", "ui2,12,1", "ui2,13,1", "ui2,14,1", "ui2,15,1",
@@ -91,9 +86,10 @@ def init_ui_box():
         "ui2,0,14", "ui2,1,14", "ui2,2,14", "ui2,3,14", "ui2,4,14", "ui2,5,14", "ui2,6,14", "ui2,7,14", "ui2,8,14", "ui2,9,14", "ui2,10,14", "ui2,11,14", "ui2,12,14", "ui2,13,14", "ui2,14,14", "ui2,15,14",
         "ui2,0,15", "ui2,1,15", "ui2,2,15", "ui2,3,15", "ui2,4,15", "ui2,5,15", "ui2,6,15", "ui2,7,15", "ui2,8,15", "ui2,9,15", "ui2,10,15", "ui2,11,15", "ui2,12,15", "ui2,13,15", "ui2,14,15", "ui2,15,15",
     ]
-    zx.tile_load_arr(tex_name="ui_box2", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/ui_box2.tga",
+        name="ui_box2", width=8, height=8, arr=tiles)
 
-    zx.tex_load(file="data/gfx/ui_box3.tga", name="ui_box3")
     tiles = [
         "ui3,0,0", "ui3,1,0", "ui3,2,0", "ui3,3,0", "ui3,4,0", "ui3,5,0", "ui3,6,0", "ui3,7,0", "ui3,8,0", "ui3,9,0", "ui3,10,0", "ui3,11,0", "ui3,12,0", "ui3,13,0", "ui3,14,0", "ui3,15,0",
         "ui3,0,1", "ui3,1,1", "ui3,2,1", "ui3,3,1", "ui3,4,1", "ui3,5,1", "ui3,6,1", "ui3,7,1", "ui3,8,1", "ui3,9,1", "ui3,10,1", "ui3,11,1", "ui3,12,1", "ui3,13,1", "ui3,14,1", "ui3,15,1",
@@ -112,9 +108,10 @@ def init_ui_box():
         "ui3,0,14", "ui3,1,14", "ui3,2,14", "ui3,3,14", "ui3,4,14", "ui3,5,14", "ui3,6,14", "ui3,7,14", "ui3,8,14", "ui3,9,14", "ui3,10,14", "ui3,11,14", "ui3,12,14", "ui3,13,14", "ui3,14,14", "ui3,15,14",
         "ui3,0,15", "ui3,1,15", "ui3,2,15", "ui3,3,15", "ui3,4,15", "ui3,5,15", "ui3,6,15", "ui3,7,15", "ui3,8,15", "ui3,9,15", "ui3,10,15", "ui3,11,15", "ui3,12,15", "ui3,13,15", "ui3,14,15", "ui3,15,15",
     ]
-    zx.tile_load_arr(tex_name="ui_box3", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/ui_box3.tga",
+        name="ui_box3", width=8, height=8, arr=tiles)
 
-    zx.tex_load(file="data/gfx/ui_box4.tga", name="ui_box4")
     tiles = [
         "ui4,0,0", "ui4,1,0", "ui4,2,0", "ui4,3,0", "ui4,4,0", "ui4,5,0", "ui4,6,0", "ui4,7,0", "ui4,8,0", "ui4,9,0", "ui4,10,0", "ui4,11,0", "ui4,12,0", "ui4,13,0", "ui4,14,0", "ui4,15,0",
         "ui4,0,1", "ui4,1,1", "ui4,2,1", "ui4,3,1", "ui4,4,1", "ui4,5,1", "ui4,6,1", "ui4,7,1", "ui4,8,1", "ui4,9,1", "ui4,10,1", "ui4,11,1", "ui4,12,1", "ui4,13,1", "ui4,14,1", "ui4,15,1",
@@ -133,10 +130,11 @@ def init_ui_box():
         "ui4,0,14", "ui4,1,14", "ui4,2,14", "ui4,3,14", "ui4,4,14", "ui4,5,14", "ui4,6,14", "ui4,7,14", "ui4,8,14", "ui4,9,14", "ui4,10,14", "ui4,11,14", "ui4,12,14", "ui4,13,14", "ui4,14,14", "ui4,15,14",
         "ui4,0,15", "ui4,1,15", "ui4,2,15", "ui4,3,15", "ui4,4,15", "ui4,5,15", "ui4,6,15", "ui4,7,15", "ui4,8,15", "ui4,9,15", "ui4,10,15", "ui4,11,15", "ui4,12,15", "ui4,13,15", "ui4,14,15", "ui4,15,15",
     ]
-    zx.tile_load_arr(tex_name="ui_box4", width=8, height=8, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/ui_box4.tga",
+        name="ui_box4", width=8, height=8, arr=tiles)
 
 def init_64x16_ui():
-    zx.tex_load(file="data/gfx/ui_status_bar.tga", name="ui_status_bar")
     tiles = [
         "status-bar-11", 
         "status-bar-10",
@@ -183,27 +181,27 @@ def init_64x16_ui():
         "karma-bar-1", 
         "karma-bar-0",
     ]
-    zx.tile_load_arr(tex_name="ui_status_bar", width=96, height=16, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/ui_status_bar.tga",
+        name="ui_status_bar", width=96, height=16, arr=tiles)
 
 def init_ui_popup():
-    zx.tex_load(file="data/gfx/ui_popup.tga", name="ui_popup")
     tiles = [
         "ui_popup", 
     ]
-    zx.tile_load_arr(tex_name="ui_popup", width=80, height=152, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/ui_popup.tga",
+        name="ui_popup", width=80, height=152, arr=tiles)
 
 def init_ui_action_bar():
-    zx.tex_load(file="data/gfx/ui_action_bar.tga", name="ui_action_bar")
     tiles = [
         "ui_action_bar", 
     ]
-    zx.tile_load_arr(tex_name="ui_action_bar", width=320, height=32, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/ui_action_bar.tga",
+        name="ui_action_bar", width=320, height=32, arr=tiles)
 
 def init_16x16():
-    zx.tex_load(
-            file="data/gfx/16x16.tga",
-            name="16x16")
-
     tiles = [
             "player1.1", "player1.2", "player1.3", "player1.4", "player1.5", "player1.6", "", "player1.pose", "player1.dead", "sword1.1", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
             ########################################################
@@ -350,13 +348,11 @@ def init_16x16():
             ########################################################
     ]
 
-    zx.tile_load_arr(tex_name="16x16", width=16, height=16, arr=tiles)
+    zx.tile_load_arr(
+        file="data/gfx/16x16.tga", 
+        name="16x16", width=16, height=16, arr=tiles)
 
 def init_16x32():
-    zx.tex_load(
-            file="data/gfx/16x32.tga",
-            name="16x32")
-
     tiles = [
             ########################################################
             "smoke1.1",
@@ -426,13 +422,11 @@ def init_16x32():
             "brazier1.32",
     ]
 
-    zx.tile_load_arr(tex_name="16x32", width=16, height=32, arr=tiles)
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/16x32.tga",
+        name="16x32", width=16, height=32, arr=tiles)
 
 def init_32x32():
-    zx.tex_load(
-            file="data/gfx/32x32.tga",
-            name="32x32")
-
     tiles = [
             "exit1.1",
             "exit1.2",
@@ -588,13 +582,11 @@ def init_32x32():
             "",
     ]
 
-    zx.tile_load_arr(tex_name="32x32", width=32, height=32, arr=tiles)
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/32x32.tga",
+        name="32x32", width=32, height=32, arr=tiles)
 
 def init_32x32_surface_effects():
-    zx.tex_load(
-            file="data/gfx/32x32_surface_effects.tga",
-            name="32x32_surface_effects")
-
     tiles = [
             "water1.1", "water1.2", "water1.3", "water1.4", "water1.5", "water1.6", "water1.7", "water1.8",
             "water1.9", "water1.10", "water1.11", "water1.12", "water1.13", "water1.14", "water1.15", "water1.16",
@@ -608,13 +600,11 @@ def init_32x32_surface_effects():
             "lava1.9", "lava1.10", "lava1.11", "lava1.12", "lava1.13", "lava1.14", "lava1.15", "lava1.16",
     ]
 
-    zx.tile_load_arr(tex_name="32x32_surface_effects", width=32, height=32, arr=tiles)
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/32x32_surface_effects.tga",
+        name="32x32_surface_effects", width=32, height=32, arr=tiles)
 
 def init_32x32_water():
-    zx.tex_load(
-            file="data/gfx/32x32_water.tga",
-            name="32x32_water")
-
     tiles = [
         "water1a", "water2a", "water3a", "water4a", "water5a", "water6a", "water7a", "water8a",
         "water1b", "water2b", "water3b", "water4b", "water5b", "water6b", "water7b", "water8b",
@@ -626,13 +616,12 @@ def init_32x32_water():
         "water1h", "water2h", "water3h", "water4h", "water5h", "water6h", "water7h", "water8h",
     ]
 
-    zx.tile_load_arr(tex_name="32x32_water", width=32, height=32, arr=tiles)
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/32x32_water.tga",
+        name="32x32_water", width=32, height=32, arr=tiles)
+
 
 def init_32x32_deep_water():
-    zx.tex_load(
-            file="data/gfx/32x32_deep_water.tga",
-            name="32x32_deep_water")
-
     tiles = [
         "deep_water1a", "deep_water2a", "deep_water3a", "deep_water4a", "deep_water5a", "deep_water6a", "deep_water7a", "deep_water8a",
         "deep_water1b", "deep_water2b", "deep_water3b", "deep_water4b", "deep_water5b", "deep_water6b", "deep_water7b", "deep_water8b",
@@ -644,14 +633,12 @@ def init_32x32_deep_water():
         "deep_water1h", "deep_water2h", "deep_water3h", "deep_water4h", "deep_water5h", "deep_water6h", "deep_water7h", "deep_water8h",
     ]
 
-    zx.tile_load_arr(tex_name="32x32_deep_water", width=32, height=32, arr=tiles)
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/32x32_deep_water.tga",
+        name="32x32_deep_water", width=32, height=32, arr=tiles)
 
 
 def init_32x32_lava():
-    zx.tex_load(
-            file="data/gfx/32x32_lava.tga",
-            name="32x32_lava")
-
     tiles = [
         "lava1a", "lava2a", "lava3a", "lava4a", "lava5a", "lava6a", "lava7a", "lava8a",
         "lava1b", "lava2b", "lava3b", "lava4b", "lava5b", "lava6b", "lava7b", "lava8b",
@@ -663,14 +650,11 @@ def init_32x32_lava():
         "lava1h", "lava2h", "lava3h", "lava4h", "lava5h", "lava6h", "lava7h", "lava8h",
     ]
 
-    zx.tile_load_arr(tex_name="32x32_lava", width=32, height=32, arr=tiles)
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/32x32_lava.tga",
+        name="32x32_lava", width=32, height=32, arr=tiles)
 
 def init_weapons_tiles():
-
-    zx.tex_load(
-            file="data/gfx/weapons.tga",
-            name="weapons")
-
     tiles = [
             "",
             "sword1_carry_anim.1",
@@ -693,7 +677,9 @@ def init_weapons_tiles():
             "sword1_swing_anim_up.6",
     ]
 
-    zx.tile_load_arr(tex_name="weapons", width=48, height=48, arr=tiles)
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/weapons.tga",
+        name="weapons", width=48, height=48, arr=tiles)
 
 init_text()
 init_light()

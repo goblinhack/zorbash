@@ -152,6 +152,89 @@ static SDL_Surface *load_image (std::string filename)
     return (surf);
 }
 
+static void load_image_pair (SDL_Surface **surf1_out,
+                             SDL_Surface **surf2_out,
+                             std::string filename)
+{_
+    uint32_t rmask, gmask, bmask, amask;
+    unsigned char *image_data;
+    SDL_Surface *surf1 = 0;
+    SDL_Surface *surf2 = 0;
+    int32_t x, y, comp;
+
+    image_data = load_raw_image(filename, &x, &y, &comp);
+    if (!image_data) {
+        DIE("could not read memory for file, '%s'", filename.c_str());
+    }
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+    rmask = 0xff000000;
+    gmask = 0x00ff0000;
+    bmask = 0x0000ff00;
+    amask = 0x000000ff;
+#else
+    rmask = 0x000000ff;
+    gmask = 0x0000ff00;
+    bmask = 0x00ff0000;
+    amask = 0xff000000;
+#endif
+
+    LOG("- SDL_CreateRGBSurface");
+    if (comp == 4) {
+        surf1 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
+        newptr(surf1, "SDL_CreateRGBSurface");
+    } else if (comp == 3) {
+        surf1 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
+        newptr(surf1, "SDL_CreateRGBSurface");
+    } else if (comp == 2) {
+        surf1 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
+        newptr(surf1, "SDL_CreateRGBSurface");
+    } else {
+        DIE("could not handle image with %d components", comp);
+    }
+
+    if (comp == 4) {
+        surf2 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
+        newptr(surf2, "SDL_CreateRGBSurface");
+    } else if (comp == 3) {
+        surf2 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
+        newptr(surf2, "SDL_CreateRGBSurface");
+    } else if (comp == 2) {
+        surf2 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
+        newptr(surf2, "SDL_CreateRGBSurface");
+    } else {
+        DIE("could not handle image with %d components", comp);
+    }
+
+    memcpy(surf1->pixels, image_data, comp * x * y);
+    memcpy(surf2->pixels, image_data, comp * x * y);
+
+    if (comp == 2) {
+        SDL_Surface *old_surf = surf1;
+        LOG("- SDL_ConvertSurfaceFormat");
+        surf1 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
+        newptr(surf1, "SDL_CreateRGBSurface");
+        oldptr(old_surf);
+        SDL_FreeSurface(old_surf);
+        SDL_SaveBMP(surf1, filename.c_str());
+    }
+
+    if (comp == 2) {
+        SDL_Surface *old_surf = surf2;
+        LOG("- SDL_ConvertSurfaceFormat");
+        surf2 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
+        newptr(surf2, "SDL_CreateRGBSurface");
+        oldptr(old_surf);
+        SDL_FreeSurface(old_surf);
+        SDL_SaveBMP(surf2, filename.c_str());
+    }
+
+    free_raw_image(image_data);
+
+    *surf1_out = surf1;
+    *surf2_out = surf2;
+}
+
 /*
  * Load a texture
  */
@@ -189,6 +272,122 @@ Texp tex_load (std::string file, std::string name, int mode)
     return (t);
 }
 
+static Texp tex_from_surface_black_and_white (SDL_Surface *in,
+                                              std::string file, 
+                                              std::string name, 
+                                              int mode)
+{
+    Texp t = new Tex(name);
+    uint32_t rmask, gmask, bmask, amask;
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+    rmask = 0xff000000;
+    gmask = 0x00ff0000;
+    bmask = 0x0000ff00;
+    amask = 0x000000ff;
+#else
+    rmask = 0x000000ff;
+    gmask = 0x0000ff00;
+    bmask = 0x00ff0000;
+    amask = 0xff000000;
+#endif
+
+    uint32_t iwidth  = in->w;
+    uint32_t iheight = in->h;
+    /*
+     * Subtract space for the single pixel padding and make a surface to
+     * copy pixels to.
+     */
+    uint32_t owidth  = iwidth;
+    uint32_t oheight = iheight;
+
+    int32_t ix;
+    int32_t iy;
+    uint32_t ox;
+    uint32_t oy;
+
+    SDL_Surface *out = SDL_CreateRGBSurface(0, owidth, oheight, 32,
+                                            rmask, gmask, bmask, amask);
+    newptr(out, "SDL_CreateRGBSurface");
+
+    /*
+     * Omit every grid pixel between tiles.
+     */
+    ox = 0;
+
+    for (ix = 0; ix < (int32_t) iwidth; ix++) {
+
+        oy = 0;
+
+        for (iy = 0; iy < (int32_t) iheight; iy++) {
+
+            color c;
+
+            c = getPixel(in, ix, iy);
+            
+            uint8_t avg = ((int)c.r + (int)c.g + (int)c.b) / 3;
+            c.r = avg;
+            c.g = avg;
+            c.b = avg;
+
+            putPixel(out, ox, oy, c);
+
+            oy++;
+        }
+
+        ox++;
+    }
+
+    SDL_FreeSurface(in);
+    oldptr(in);
+
+    t = tex_from_surface(out, file, name, mode);
+
+    return (t);
+}
+
+void tex_load_color_and_black_and_white (Texp *tex,
+                                         Texp *tex_black_and_white,
+                                         std::string file, 
+                                         std::string name, 
+                                         int mode)
+{_
+    Texp t = tex_find(name);
+    if (t) {
+        DIE("tex already eciste '%s'", name.c_str());
+    }
+
+    LOG("loading texture '%s', '%s'", file.c_str(), name.c_str());
+    if (file == "") {
+        if (name == "") {
+            DIE("no file for tex");
+        } else {
+            DIE("no file for tex loading '%s'", name.c_str());
+        }
+    }
+
+    LOG("- create textures '%s', '%s'", file.c_str(), name.c_str());
+    SDL_Surface *surface = 0;
+    SDL_Surface *surface_black_and_white = 0;
+    load_image_pair(&surface, &surface_black_and_white, file);
+
+    if (!surface) {
+        DIE("could not make surface from file '%s'", file.c_str());
+    }
+
+    if (!surface_black_and_white) {
+        DIE("could not make black and white surface from file '%s'",
+            file.c_str());
+    }
+
+    *tex = tex_from_surface(surface, file, name, mode);
+    *tex_black_and_white = 
+        tex_from_surface_black_and_white(surface_black_and_white, file, 
+                                         name + "_black_and_white", mode);
+
+    LOG("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
+}
+
 /*
  * Find an existing tex.
  */
@@ -216,24 +415,6 @@ Texp tex_from_surface (SDL_Surface *surface,
 {_
     if (!surface) {
         DIE("could not make surface from file, '%s'", file.c_str());
-    }
-
-    /*
-     * Check that the sdl_surface's width is a power of 2
-     */
-    if ((surface->w & (surface->w - 1)) != 0) {
-        /*
-        LOG("%s has a width %u that is not a power of 2", file, surface->w);
-         */
-    }
-
-    /*
-     * Also check if the height is a power of 2
-     */
-    if ((surface->h & (surface->h - 1)) != 0) {
-        /*
-        LOG("%s has a height %u that is not a power of 2", file, surface->h);
-        */
     }
 
     DBG("Texture: '%s', %dx%d", file.c_str(), surface->w, surface->h);
