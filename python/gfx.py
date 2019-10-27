@@ -348,7 +348,7 @@ def init_16x16():
             ########################################################
     ]
 
-    zx.tile_load_arr(
+    zx.tile_load_arr_color_and_black_and_white(
         file="data/gfx/16x16.tga", 
         name="16x16", width=16, height=16, arr=tiles)
 

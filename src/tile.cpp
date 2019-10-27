@@ -50,9 +50,8 @@ Tile::Tile (const class Tile *tile)
     py1 = tile->py1;
     px2 = tile->px2;
     py2 = tile->py2;
-    gl_surface_binding = tile->gl_surface_binding;
-    gl_surface_binding_black_and_white = 
-        tile->gl_surface_binding_black_and_white;
+    set_gl_binding(tile->gl_binding());
+    set_gl_binding_black_and_white(tile->gl_binding_black_and_white());
     tex = tile->tex;
     tex_black_and_white = tile->tex_black_and_white;
     std::copy(mbegin(tile->pix), mend(tile->pix), mbegin(pix));
@@ -152,7 +151,7 @@ void tile_load_arr (std::string file, std::string name,
             t->pix_width = width;
             t->pix_height = height;
             t->tex = tex;
-            t->gl_surface_binding = tex_get_gl_binding(tex);
+            t->set_gl_binding(tex_get_gl_binding(tex));
 
             t->x1 = fw * (float)(x);
             t->y1 = fh * (float)(y);
@@ -333,9 +332,8 @@ void tile_load_arr_color_and_black_and_white (std::string file,
             t->pix_height = height;
             t->tex = tex;
             t->tex_black_and_white = tex_black_and_white;
-            t->gl_surface_binding = tex_get_gl_binding(tex);
-            t->gl_surface_binding_black_and_white = 
-                            tex_get_gl_binding(tex_black_and_white);
+            t->set_gl_binding(tex_get_gl_binding(tex));
+            t->set_gl_binding_black_and_white(tex_get_gl_binding(tex_black_and_white));
 
             t->x1 = fw * (float)(x);
             t->y1 = fh * (float)(y);
@@ -496,16 +494,6 @@ Tilep tile_find_mand (std::string name)
     return (result->second);
 }
 
-int32_t tile_get_gl_binding (Tilep tile)
-{
-    return (tile->gl_surface_binding);
-}
-
-int32_t tile_get_gl_binding_black_and_white (Tilep tile)
-{
-    return (tile->gl_surface_binding_black_and_white);
-}
-
 int32_t tile_get_width (Tilep tile)
 {
     return (tile->pix_width);
@@ -613,7 +601,7 @@ Tilep string2tile (std::wstring &s, int *len)
  */
 void tile_blit_at (const Tilep &tile, fpoint tl, fpoint br)
 {
-    blit(tile->gl_surface_binding,
+    blit(tile->gl_binding(),
          tile->x1, tile->y2, tile->x2, tile->y1, tl.x, tl.y, br.x, br.y);
 }
 
@@ -673,7 +661,7 @@ void tile_blit_colored_fat (Tpp tp,
         y2 += bot_off   * pct_h;
     }
 
-    blit_colored(tile->gl_surface_binding,
+    blit_colored(tile->gl_binding(),
                  x1, y2, x2, y1,
                  tl.x, br.y, br.x, tl.y,
                  color_tl,

@@ -74,9 +74,6 @@ public:
     double py2 {};
 #endif
 
-    int32_t gl_surface_binding {};
-    int32_t gl_surface_binding_black_and_white {};
-
     Texp tex;
     Texp tex_black_and_white;
 
@@ -122,6 +119,32 @@ public:
     bool is_end_of_anim {};
     bool is_dead_on_end_of_anim {};
     bool internal_has_dir_anim {};
+
+private:
+    int32_t _gl_binding {};
+    int32_t _gl_binding_black_and_white {};
+public:
+    int32_t gl_binding (void) const { 
+        extern bool thing_map_black_and_white;
+        if (thing_map_black_and_white) {
+            if (_gl_binding_black_and_white) {
+            } else {
+                return (_gl_binding); 
+            }
+            return (_gl_binding_black_and_white); 
+        } else {
+            return (_gl_binding); 
+        }
+    }
+    void set_gl_binding (int32_t v) { 
+        _gl_binding = v; 
+    }
+    int32_t gl_binding_black_and_white (void) const { 
+        return (_gl_binding_black_and_white); 
+    }
+    void set_gl_binding_black_and_white (int32_t v) { 
+        _gl_binding_black_and_white = v; 
+    }
 };
 
 typedef class Tile* Tilep;
@@ -153,7 +176,6 @@ Tilep tile_find_mand(std::string name);
 Tilep tile_from_surface(SDL_Surface *surface,
                         std::string optional_file,
                         std::string name);
-int32_t tile_get_gl_binding(Tilep);
 std::string tile_get_name(Tilep);
 int32_t tile_get_width(Tilep);
 int32_t tile_get_height(Tilep);

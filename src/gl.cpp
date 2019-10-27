@@ -1474,25 +1474,25 @@ void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br)
     const double dx = game->config.one_pixel_gl_width * 0.75;
     const double dy = game->config.one_pixel_gl_height * 0.75;
 
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x + dx, br.y, br.x + dx, tl.y);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y, br.x - dx, tl.y);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x, br.y + dy, br.x, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x, br.y - dy, br.x, tl.y - dy);
 
     glcolor(WHITE);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+    blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
 void tile_blit_outline (uint16_t index, const fpoint &tl, const fpoint &br)
@@ -1530,25 +1530,25 @@ void tile_blit_outline_section (const Tilep &tile,
     const double dx = game->config.one_pixel_gl_width * scale;
     const double dy = game->config.one_pixel_gl_height * scale;
 
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x + dx, br.y + dy, br.x + dx, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y + dy, br.x - dx, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x + dx, br.y - dy, br.x + dx, tl.y - dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x + dx, br.y, br.x + dx, tl.y);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y, br.x - dx, tl.y);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x, br.y + dy, br.x, tl.y + dy);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x, br.y - dy, br.x, tl.y - dy);
 
     glcolor(WHITE);
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+    blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
 void tile_blit_outline_section (const Tilep &tile,
@@ -1583,7 +1583,7 @@ void tile_blit (const Tilep &tile, const fpoint &tl, const fpoint &br)
     y1 = tile->y1;
     y2 = tile->y2;
 
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+    blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
 void tile_blit (uint16_t index, const fpoint &tl, const fpoint &br)
@@ -1613,7 +1613,7 @@ void tile_blit_section (const Tilep &tile,
     y1 = tile->y1 + tile_tl.y * th;
     y2 = tile->y1 + tile_br.y * th;
 
-    blit(tile->gl_surface_binding, x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
+    blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
 void tile_blit_section (uint16_t index,
@@ -1649,7 +1649,7 @@ void tile_blit_section_colored (const Tilep &tile,
     y1 = tile->y1 + tile_tl.y * th;
     y2 = tile->y1 + tile_br.y * th;
 
-    blit_colored(tile->gl_surface_binding, x1, y2, x2, y1, 
+    blit_colored(tile->gl_binding(), x1, y2, x2, y1, 
                  tl.x, br.y, br.x, tl.y,
                  color_bl, color_br, color_tl, color_tr);
 }
