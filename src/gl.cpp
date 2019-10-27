@@ -1444,16 +1444,6 @@ void blit_colored (int tex,
 }
 
 /*
- * Set the current GL color
- */
-void glcolor (color s)
-{
-    gl_last_color = s;
-
-    glColor4ub(s.r, s.g, s.b, s.a);
-}
-
-/*
  * Blits a whole tile. Y co-ords are inverted.
  */
 void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br)

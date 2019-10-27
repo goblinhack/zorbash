@@ -17,7 +17,7 @@ static int deep_water_step1;
 static double deep_water_step2;
 static int lava_step1;
 static double lava_step2;
-bool thing_map_black_and_white = true;
+bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {
@@ -356,6 +356,9 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     blit_fbo_bind(FBO_MAIN);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     color c = CYAN;
+    if (thing_map_black_and_white) {
+        c = GREY80;
+    }
     c.a = 120;
     glcolor(c);
     blit_fbo(FBO_REFLECTION);
@@ -672,6 +675,9 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     // Draw a orange outline to the main display.
     //
     color edge = ORANGE2;
+    if (thing_map_black_and_white) {
+        edge = GREY50;
+    }
     edge.a = 200;
     glcolor(edge);
     glDisable(GL_TEXTURE_2D);
@@ -808,7 +814,12 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     //
     // Draw a black outline to the main display.
     //
-    glcolor(RED4);
+    if (thing_map_black_and_white) {
+        glcolor(GRAY10);
+    } else {
+        glcolor(RED4);
+    }
+
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -898,42 +909,78 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     double offset_x = world->map_at.x * game->config.tile_gl_width;
     double offset_y = world->map_at.y * game->config.tile_gl_height;
 
-    //thing_map_blit_background(offset_x, offset_y);
-    //thing_map_blit_background_lit(offset_x, offset_y);
-    //
-    //
-    // Slow timer to scroll the water.
-    //
-    if (water_step1++ >= 20) {
-        water_step1 = 0;
-        if (water_step2++ >= (TILE_HEIGHT * 2) - 1) {
-            water_step2 = 0;
+    if (thing_map_black_and_white) {
+        //
+        // Slow timer to scroll the water.
+        //
+        if (water_step1++ >= 20) {
+            water_step1 = 0;
+            if (water_step2++ >= (TILE_HEIGHT * 2) - 1) {
+                water_step2 = 0;
+            }
+        }
+
+        //
+        // Slow timer to scroll the deep_water.
+        //
+        if (deep_water_step1++ >= 20) {
+            deep_water_step1 = 0;
+            if (deep_water_step2++ >= (TILE_HEIGHT * 2) - 1) {
+                deep_water_step2 = 0;
+            }
+        }
+
+        //
+        // Slow timer to scroll the lava.
+        //
+        if (lava_step1++ >= 5) {
+            lava_step1 = 0;
+            if (lava_step2++ >= (TILE_HEIGHT * 2) - 1) {
+                lava_step2 = 0;
+            }
         }
     }
-
-    //
-    // Slow timer to scroll the deep_water.
-    //
-    if (deep_water_step1++ >= 20) {
-        deep_water_step1 = 0;
-        if (deep_water_step2++ >= (TILE_HEIGHT * 2) - 1) {
-            deep_water_step2 = 0;
-        }
-    }
-
-    //
-    // Slow timer to scroll the lava.
-    //
-    if (lava_step1++ >= 5) {
-        lava_step1 = 0;
-        if (lava_step2++ >= (TILE_HEIGHT * 2) - 1) {
-            lava_step2 = 0;
-        }
-    }
-
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(WHITE);
+
+    //
+    // Things that were visited in the past
+    //
+    if (thing_map_black_and_white) {
+        blit_init();
+        { auto z = MAP_DEPTH_FLOOR;
+            for (auto y = miny; y < maxy; y++) {
+                for (auto x = minx; x < maxx; x++) {
+                    if (!world->is_visited(x, y)) {
+                        continue;
+                    }
+                    FOR_ALL_THINGS(world, t, x, y, z) {
+                        glcolorfast(GRAY30);
+                        t->blit(offset_x, offset_y, x, y);
+                    }
+                }
+            }
+        }
+        blit_flush();
+
+        blit_init();
+        for (auto y = miny; y < maxy; y++) {
+            auto z = MAP_DEPTH_WALLS;
+            {
+                for (auto x = minx; x < maxx; x++) {
+                    if (!world->is_visited(x, y)) {
+                        continue;
+                    }
+                    FOR_ALL_THINGS(world, t, x, y, z) {
+                        glcolorfast(GRAY50);
+                        t->blit(offset_x, offset_y, x, y);
+                    }
+                }
+            }
+        }
+        blit_flush();
+        return;
+    }
 
     //
     // Floors
@@ -943,6 +990,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS(world, t, x, y, z) {
+                    glcolorfast(WHITE);
                     t->blit(offset_x, offset_y, x, y);
                 }
             }
@@ -1015,6 +1063,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS(world, t, x, y, z) {
+                    glcolorfast(WHITE);
                     t->blit(offset_x, offset_y, x, y);
                 }
             }
@@ -1045,6 +1094,13 @@ void thing_render_all (void)
     thing_map_scroll_do();
     auto lighting = true;
     if (lighting) {
+        blit_fbo_bind(FBO_MAIN_BLACK_AND_WHITE);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        thing_map_black_and_white = true;
+        thing_blit_things(minx, miny, maxx, maxy);
+        thing_map_black_and_white = false;
+
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
@@ -1078,7 +1134,13 @@ void thing_render_all (void)
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
         blit_fbo(FBO_LIGHT_MERGED);
 
+        //
+        // Blend the black and white background of where we have been
+        //
+        glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_COLOR);
+        blit_fbo(FBO_MAIN_BLACK_AND_WHITE);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     } else {
         blit_fbo_bind(FBO_MAIN);
 

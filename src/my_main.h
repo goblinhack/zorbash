@@ -67,7 +67,7 @@
 // Light sources
 //
 #define MAX_LIGHT_RAYS              (360)
-#define MAX_LIGHT_PLAYER_DISTANCE   (TILES_ACROSS * 3)
+#define MAX_LIGHT_PLAYER_DISTANCE   (TILES_ACROSS * 5)
 
 //
 // Per screen

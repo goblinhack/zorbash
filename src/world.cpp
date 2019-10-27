@@ -521,6 +521,38 @@ void World::unset_rock (const int x, const int y)
     set(_is_rock, x, y, false);
 }
 
+bool World::is_visited (const point &p)
+{
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_visited, p.x, p.y));
+}
+
+bool World::is_visited (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_visited, x, y));
+}
+
+void World::set_visited (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_visited, x, y, true);
+}
+
+void World::unset_visited (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_visited, x, y, false);
+}
+
 bool World::is_key (const point &p)
 {
     return (is_key(p.x, p.y));
@@ -612,6 +644,7 @@ void World::clear (void)
     _is_lava = {};
     _is_light = {};
     _is_rock = {};
+    _is_visited = {};
     _is_gfx_large_shadow_caster = {};
     _is_wall = {};
     _is_water = {};
