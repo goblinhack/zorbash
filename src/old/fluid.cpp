@@ -981,7 +981,7 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
             double tx2 = x1 + ((x + 1) * dx);
             double ty2 = y1 + ((y + 1) * dy);
 
-            blit_colored(t->gl_surface_binding,
+            blit_colored(t->gl_binding(),
                          tx1,
                          ty2,
                          tx2,

@@ -1229,7 +1229,7 @@ void Thing::blit_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
     shadow_tl.y += 0.01 * dy;
     shadow_tr.y += 0.01 * dy;
 
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    ::blit(tile->gl_binding(), x1, y2, x2, y1,
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
 
     glcolor(WHITE);
@@ -1347,7 +1347,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     shadow_bl.y -= height;
     shadow_br.y -= height;
 
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    ::blit(tile->gl_binding(), x1, y2, x2, y1,
            shadow_bl, shadow_br, shadow_tl, shadow_tr);
 
     c.a = 50;
@@ -1360,14 +1360,14 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     faded_shadow_tr.x = shadow_tr.x + 0.07 * dx;
     faded_shadow_tl.y = shadow_tl.y + 0.02 * dy;
     faded_shadow_tr.y = shadow_tr.y + 0.02 * dy;
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    ::blit(tile->gl_binding(), x1, y2, x2, y1,
            shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
 
     faded_shadow_tl.x = shadow_tl.x + 0.03 * dx;
     faded_shadow_tr.x = shadow_tr.x + 0.03 * dx;
     faded_shadow_tl.y = shadow_tl.y + 0.01 * dy;
     faded_shadow_tr.y = shadow_tr.y + 0.01 * dy;
-    ::blit(tile->gl_surface_binding, x1, y2, x2, y1,
+    ::blit(tile->gl_binding(), x1, y2, x2, y1,
            shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
 
     glcolor(WHITE);

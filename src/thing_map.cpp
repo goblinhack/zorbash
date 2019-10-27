@@ -17,6 +17,7 @@ static int deep_water_step1;
 static double deep_water_step2;
 static int lava_step1;
 static double lava_step2;
+bool thing_map_black_and_white = true;
 
 static void thing_map_scroll_do (void)
 {
@@ -300,7 +301,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                 y1 += one_pix * water_step2;
                 y2 += one_pix * water_step2;
 
-                blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
+                blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
             }
         }
     }
@@ -538,7 +539,7 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
                 y1 += one_pix * deep_water_step2;
                 y2 += one_pix * deep_water_step2;
 
-                blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
+                blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
             }
         }
     }
@@ -779,7 +780,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                 y1 += one_pix * lava_step2;
                 y2 += one_pix * lava_step2;
 
-                blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
+                blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
             }
         }
     }
@@ -877,7 +878,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
                 auto tly = t->last_blit_tl.y;
                 auto brx = t->last_blit_br.x;
                 auto bry = t->last_blit_br.y;
-                blit(tile->gl_surface_binding, x1, y2, x2, y1, tlx, bry, brx, tly);
+                blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
                 // t->blit(offset_x, offset_y, x, y);
             }
         }
