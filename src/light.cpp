@@ -115,6 +115,8 @@ void Light::calculate (void)
      * Walk the light rays in a circle. First pass is to find the nearest
      * walls.
      */
+    bool do_set_visited = (world->player && (owner == world->player));
+
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
         double step = 0.0;
@@ -128,6 +130,10 @@ void Light::calculate (void)
 
             if (unlikely(world->is_oob(x, y))) {
                 continue;
+            }
+
+            if (do_set_visited) {
+                world->set_visited(x, y);
             }
 
             if (world->is_gfx_large_shadow_caster(x, y)) {
@@ -152,6 +158,10 @@ void Light::calculate (void)
 
             if (unlikely(world->is_oob(x, y))) {
                 continue;
+            }
+
+            if (do_set_visited) {
+                world->set_visited(x, y);
             }
 
             if (!world->is_gfx_large_shadow_caster(x, y)) {
@@ -190,6 +200,10 @@ void Light::calculate (void)
 
             if (unlikely(world->is_oob(x, y))) {
                 continue;
+            }
+
+            if (do_set_visited) {
+                world->set_visited(x, y);
             }
 
             if (get(is_nearest_wall, x, y) != is_nearest_wall_val) {
@@ -340,7 +354,8 @@ void Light::render_point_light (void)
     double p2y = light_pos.y + lh;
 
     glcolor(col);
-    blit(light_overlay_texid, 0, 0, 1, 1, p1x - ox, p1y - oy, p2x - ox, p2y - oy);
+    blit(light_overlay_texid, 0, 0, 1, 1, 
+         p1x - ox, p1y - oy, p2x - ox, p2y - oy);
 }
 
 void Light::render (int fbo)

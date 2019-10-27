@@ -360,18 +360,16 @@ void blit_colored(int tex,
                   color color_br,
                   color color_tl,
                   color color_tr);
-
-void glcolor(color s);
-
 //
 // Frame buffer objects
 //
-#define MAX_FBO          5
-#define FBO_MAIN         0
-#define FBO_WID          1
-#define FBO_LIGHT_MASK   2
-#define FBO_LIGHT_MERGED 3
-#define FBO_REFLECTION   4
+#define MAX_FBO                  6
+#define FBO_MAIN                 0
+#define FBO_MAIN_BLACK_AND_WHITE 1
+#define FBO_WID                  2
+#define FBO_LIGHT_MASK           3
+#define FBO_LIGHT_MERGED         4
+#define FBO_REFLECTION           5
 
 extern std::array<GLuint, MAX_FBO> render_buf_id;
 extern std::array<GLuint, MAX_FBO> fbo_id;
@@ -385,3 +383,21 @@ void blit_fbo_unbind(void);
 extern float *gl_array_buf;
 extern float *gl_array_buf_end;
 extern double gl_rotate;
+
+/*
+ * Set the current GL color
+ */
+static inline void glcolor (color s)
+{
+    gl_last_color = s;
+
+    glColor4ub(s.r, s.g, s.b, s.a);
+}
+
+/*
+ * Set the internal GL color
+ */
+static inline void glcolorfast (color s)
+{
+    gl_last_color = s;
+}

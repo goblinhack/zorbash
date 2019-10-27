@@ -564,7 +564,6 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "curses-2");
     }
-#endif
 
     wid_update(wid_sidebar);
 
@@ -574,4 +573,5 @@ static void wid_test_wid_create (void)
         auto w = new WidPopup(tl, br, tile_find_mand("player1.1"));
         w->log("%%fg=yellow$This is a really long descriptive string that is a bit boring");
     }
+#endif
 }

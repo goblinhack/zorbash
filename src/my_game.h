@@ -63,6 +63,7 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gravel {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_snow {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
 public:
     //
     // The player!
@@ -217,8 +218,6 @@ public:
     bool is_light(const point &p);
     bool is_monst(const int x, const int y);
     bool is_monst(const point &p);
-    bool is_rock(const int x, const int y);
-    bool is_rock(const point &p);
     bool is_snow(const int x, const int y);
     bool is_snow(const point &p);
     bool is_soil(const int x, const int y);
@@ -238,7 +237,6 @@ public:
     void set_gravel(const int x, const int y);
     void set_lava(const int x, const int y);
     void set_light(const int x, const int y);
-    void set_rock(const int x, const int y);
     void set_snow(const int x, const int y);
     void set_soil(const int x, const int y);
     void set_wall(const int x, const int y);
@@ -253,11 +251,20 @@ public:
     void unset_gravel(const int x, const int y);
     void unset_lava(const int x, const int y);
     void unset_light(const int x, const int y);
-    void unset_rock(const int x, const int y);
     void unset_snow(const int x, const int y);
     void unset_soil(const int x, const int y);
     void unset_wall(const int x, const int y);
     void unset_water(const int x, const int y);
+
+    bool is_rock(const int x, const int y);
+    bool is_rock(const point &p);
+    void set_rock(const int x, const int y);
+    void unset_rock(const int x, const int y);
+
+    bool is_visited(const int x, const int y);
+    bool is_visited(const point &p);
+    void set_visited(const int x, const int y);
+    void unset_visited(const int x, const int y);
 
     static inline bool is_oob (const int x, const int y, const int z)
     {
@@ -348,6 +355,7 @@ public:
 
 extern class Game *game;
 extern class World *world;
+extern bool thing_map_black_and_white;
 
 uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
 void game_mouse_over(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);

@@ -12,7 +12,7 @@ def tp_init(name):
     x.set_is_interesting(True)
     x.set_is_light_strength(2)
     x.set_is_loggable(True)
-    x.set_str_light_color("green")
+    x.set_str_light_color("white")
     x.set_z_depth(zx.MAP_DEPTH_EXIT)
 
     delay = 50

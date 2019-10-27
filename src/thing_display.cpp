@@ -1587,7 +1587,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     blit_tl.y -= height;
     blit_br.y -= height;
 
-    if (tp_gfx_outlined(tpp)) {
+    if (tp_gfx_outlined(tpp) && !thing_map_black_and_white) {
         if (is_submerged) {
             tile_blit_outline_section(
                 tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
@@ -1616,18 +1616,20 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    if (is_wall()) {
-        blit_wall_cladding(blit_tl, blit_br, &tiles);
-    } else if (tp_is_rock(tpp)) {
-        blit_rock_cladding(blit_tl, blit_br, &tiles);
-    } else if (tp_is_grass(tpp)) {
-        blit_grass_cladding(blit_tl, blit_br, &tiles);
-    } else if (tp_is_soil(tpp)) {
-        blit_soil_cladding(blit_tl, blit_br, &tiles);
-    } else if (tp_is_gravel(tpp)) {
-        blit_gravel_cladding(blit_tl, blit_br, &tiles);
-    } if (tp_is_snow(tpp)) {
-        blit_snow_cladding(blit_tl, blit_br, &tiles);
+    if (!thing_map_black_and_white) {
+        if (is_wall()) {
+            blit_wall_cladding(blit_tl, blit_br, &tiles);
+        } else if (tp_is_rock(tpp)) {
+            blit_rock_cladding(blit_tl, blit_br, &tiles);
+        } else if (tp_is_grass(tpp)) {
+            blit_grass_cladding(blit_tl, blit_br, &tiles);
+        } else if (tp_is_soil(tpp)) {
+            blit_soil_cladding(blit_tl, blit_br, &tiles);
+        } else if (tp_is_gravel(tpp)) {
+            blit_gravel_cladding(blit_tl, blit_br, &tiles);
+        } if (tp_is_snow(tpp)) {
+            blit_snow_cladding(blit_tl, blit_br, &tiles);
+        }
     }
 
     gl_rotate = 0;
