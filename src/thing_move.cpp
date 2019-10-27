@@ -126,8 +126,17 @@ bool Thing::update_coordinates (void)
 
     tl.x = tx * tile_gl_width;
     tl.y = ty * tile_gl_height;
+
     br.x = (tx+1) * tile_gl_width;
     br.y = (ty+1) * tile_gl_height;
+
+    //
+    // To account for rounding errors in the display
+    //
+    if (z_depth() <= MAP_DEPTH_LAST_FLOOR_TYPE) {
+        br.x += tile_gl_width / (TILE_WIDTH * 4);
+        br.y += tile_gl_height / (TILE_WIDTH * 4);
+    }
 
     auto tile = tile_index_to_tile(tile_curr);
     if (!tile) {
