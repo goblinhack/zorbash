@@ -168,8 +168,6 @@ public:
     int is_explosion {};
     int is_floor {};
     int is_food {};
-    int is_grass {};
-    int is_gravel {};
     int is_interesting {}; // e.g. something edible or a monst or lava
     int is_key {};
     int is_lava {};
@@ -233,8 +231,6 @@ public:
     int is_rrr7 {};
     int is_rrr8 {};
     int is_rrr9 {};
-    int is_snow {};
-    int is_soil {};
     int is_undead {};
     int is_wall {};
     int is_water {};
@@ -260,10 +256,6 @@ void tp_init_after_loading(void);
 Tpp tp_random_monst(void);
 Tpp tp_random_food(void);
 Tpp tp_random_dirt(void);
-Tpp tp_random_grass(void);
-Tpp tp_random_soil(void);
-Tpp tp_random_gravel(void);
-Tpp tp_random_snow(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_key(void);
 Tpp tp_random_blood(void);
@@ -607,24 +599,9 @@ static inline int tp_is_rrr50 (Tpp t)
     return (t->is_rrr50);
 }
 
-static inline int tp_is_snow (Tpp t)
-{
-    return (t->is_snow);
-}
-
-static inline int tp_is_gravel (Tpp t)
-{
-    return (t->is_gravel);
-}
-
 static inline int tp_is_obstacle (Tpp t)
 {
     return (t->is_obstacle);
-}
-
-static inline int tp_is_soil (Tpp t)
-{
-    return (t->is_soil);
 }
 
 static inline int tp_is_attackable (Tpp t)
@@ -755,11 +732,6 @@ static inline int tp_is_light_strength (Tpp t)
 static inline int tp_is_dirt (Tpp t)
 {
     return (t->is_dirt);
-}
-
-static inline int tp_is_grass (Tpp t)
-{
-    return (t->is_grass);
 }
 
 static inline int tp_is_blood (Tpp t)

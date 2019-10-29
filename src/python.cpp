@@ -1699,10 +1699,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr48)
     TP_SET_DECL(is_rrr49)
     TP_SET_DECL(is_rrr50)
-    TP_SET_DECL(is_snow)
-    TP_SET_DECL(is_gravel)
     TP_SET_DECL(is_obstacle)
-    TP_SET_DECL(is_soil)
     TP_SET_DECL(is_attackable)
     TP_SET_DECL(is_water_hater)
     TP_SET_DECL(hunger_constant)
@@ -1730,7 +1727,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_ripple)
     TP_SET_DECL(is_light_strength)
     TP_SET_DECL(is_dirt)
-    TP_SET_DECL(is_grass)
     TP_SET_DECL(is_blood)
     TP_SET_DECL(gfx_animated_can_vflip)
     TP_SET_DECL(gfx_small_shadow_caster)
@@ -2034,10 +2030,6 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS", MAP_DEPTH_WALLS);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MONST", MAP_DEPTH_MONST);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FOOD", MAP_DEPTH_FOOD);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_SOIL", MAP_DEPTH_SOIL);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_GRASS", MAP_DEPTH_GRASS);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_GRAVEL", MAP_DEPTH_GRAVEL);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_SNOW", MAP_DEPTH_SNOW);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_ITEM", MAP_DEPTH_ITEM);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXIT", MAP_DEPTH_EXIT);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR_DECO", MAP_DEPTH_FLOOR_DECO);

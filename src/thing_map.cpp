@@ -47,19 +47,6 @@ static void thing_map_scroll_do (void)
                              (float)MAP_WIDTH - TILES_ACROSS);
     world->map_at.y = std::min(world->map_at.y,
                              (float)MAP_HEIGHT - TILES_DOWN);
-
-    //
-    // Round to pixels
-    //
-#if 0
-    world->map_at.x *= 1.0 / game->config.one_pixel_gl_width;
-    world->map_at.x = (int)world->map_at.x;
-    world->map_at.x /= 1.0 / game->config.one_pixel_gl_width;
-
-    world->map_at.y *= 1.0 / game->config.one_pixel_gl_height;
-    world->map_at.y = (int)world->map_at.y;
-    world->map_at.y /= 1.0 / game->config.one_pixel_gl_height;
-#endif
 }
 
 static void thing_map_scroll_follow_player (void)

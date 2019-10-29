@@ -51,11 +51,6 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_dirt              = true;
 
-    char_index              = Charmap::GRASS;
-    c = &all_charmaps[char_index];
-    c->c                    = char_index;
-    c->is_grass             = true;
-
     char_index              = Charmap::DOOR;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

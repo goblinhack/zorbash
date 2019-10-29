@@ -13,10 +13,6 @@ Tpidmap tp_id_map;
 static Tpidmap tp_monst;
 static Tpidmap tp_food;
 static Tpidmap tp_dirt;
-static Tpidmap tp_grass;
-static Tpidmap tp_soil;
-static Tpidmap tp_gravel;
-static Tpidmap tp_snow;
 static Tpidmap tp_ripples;
 static Tpidmap tp_keys;
 static Tpidmap tp_blood;
@@ -106,18 +102,6 @@ void tp_init_after_loading (void)
         if (tp_is_dirt(tp)) {
             tp_dirt.push_back(tp);
         }
-        if (tp_is_grass(tp)) {
-            tp_grass.push_back(tp);
-        }
-        if (tp_is_soil(tp)) {
-            tp_soil.push_back(tp);
-        }
-        if (tp_is_gravel(tp)) {
-            tp_gravel.push_back(tp);
-        }
-        if (tp_is_snow(tp)) {
-            tp_snow.push_back(tp);
-        }
         if (tp_is_ripple(tp)) {
             tp_ripples.push_back(tp);
         }
@@ -155,26 +139,6 @@ Tpp tp_random_food (void)
 Tpp tp_random_dirt (void)
 {_
     return get(tp_dirt, myrand() % tp_dirt.size());
-}
-
-Tpp tp_random_grass (void)
-{_
-    return get(tp_grass, myrand() % tp_grass.size());
-}
-
-Tpp tp_random_soil (void)
-{_
-    return get(tp_soil, myrand() % tp_soil.size());
-}
-
-Tpp tp_random_gravel (void)
-{_
-    return get(tp_gravel, myrand() % tp_gravel.size());
-}
-
-Tpp tp_random_snow (void)
-{_
-    return get(tp_snow, myrand() % tp_snow.size());
 }
 
 Tpp tp_random_ripple (void)

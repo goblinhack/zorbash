@@ -370,16 +370,6 @@ int Thing::is_food(void)
     return (tp_is_food(tp()));
 }
 
-int Thing::is_grass(void)                                     
-{ 
-    return (tp_is_grass(tp()));
-}
-
-int Thing::is_gravel(void)                                    
-{ 
-    return (tp_is_gravel(tp()));
-}
-
 int Thing::is_key(void)                                       
 { 
     return (tp_is_key(tp()));
@@ -688,16 +678,6 @@ int Thing::is_rrr8(void)
 int Thing::is_rrr9(void)                                      
 { 
     return (tp_is_rrr9(tp()));
-}
-
-int Thing::is_snow(void)                                      
-{ 
-    return (tp_is_snow(tp()));
-}
-
-int Thing::is_soil(void)                                      
-{ 
-    return (tp_is_soil(tp()));
 }
 
 int Thing::is_undead(void)                                    

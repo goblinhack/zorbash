@@ -8,7 +8,6 @@
 
 #include "my_sdl.h"
 #include "my_dmap.h"
-#include "my_terrain.h"
 #include <array>
 #include <list>
 #include <unordered_map>
@@ -27,10 +26,6 @@ enum {
     MAP_DEPTH_LAVA,
     MAP_DEPTH_BLOOD,
 #define MAP_DEPTH_LAST_FLOOR_TYPE MAP_DEPTH_BLOOD
-    MAP_DEPTH_SOIL,
-    MAP_DEPTH_GRASS,
-    MAP_DEPTH_GRAVEL,
-    MAP_DEPTH_SNOW,
     MAP_DEPTH_FLOOR_DECO,
     MAP_DEPTH_WALLS,
     MAP_DEPTH_WALLS_DECO,
@@ -58,10 +53,6 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_grass {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_soil {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gravel {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_snow {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
 public:
@@ -76,11 +67,6 @@ public:
     fpoint                     map_at;
     fpoint                     map_wanted_at;
     point                      map_tile_over;
-
-    //
-    // World map
-    //
-    Terrainp                   terrain {};
 
     //
     // All things. The location forms the ID.
@@ -188,73 +174,67 @@ public:
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_obstacle_things_at(int x, int y, std::vector<Thingp> &);
 
+    void clear(void);
     bool is_anything_at(const int x, const int y);
     bool is_anything_at(const point &p);
-    bool is_blood(const int x, const int y);
-    bool is_blood(const point &p);
-    bool is_corridor(const int x, const int y);
-    bool is_corridor(const point &p);
-    bool is_deep_water(const int x, const int y);
-    bool is_deep_water(const point &p);
-    bool is_dirt(const int x, const int y);
-    bool is_dirt(const point &p);
     bool is_door(const int x, const int y);
     bool is_door(const point &p);
-    bool is_floor(const int x, const int y);
-    bool is_floor(const point &p);
     bool is_food(const int x, const int y);
     bool is_food(const point &p);
-    bool is_gfx_large_shadow_caster(const int x, const int y);
-    bool is_gfx_large_shadow_caster(const point &p);
-    bool is_grass(const int x, const int y);
-    bool is_grass(const point &p);
-    bool is_gravel(const int x, const int y);
-    bool is_gravel(const point &p);
     bool is_key(const int x, const int y);
     bool is_key(const point &p);
-    bool is_lava(const int x, const int y);
-    bool is_lava(const point &p);
-    bool is_light(const int x, const int y);
-    bool is_light(const point &p);
     bool is_monst(const int x, const int y);
     bool is_monst(const point &p);
-    bool is_snow(const int x, const int y);
-    bool is_snow(const point &p);
-    bool is_soil(const int x, const int y);
-    bool is_soil(const point &p);
+
+    bool is_floor(const int x, const int y);
+    bool is_floor(const point &p);
+    void set_floor(const int x, const int y);
+    void unset_floor(const int x, const int y);
+
+    bool is_corridor(const int x, const int y);
+    bool is_corridor(const point &p);
+    void set_corridor(const int x, const int y);
+    void unset_corridor(const int x, const int y);
+
+    bool is_light(const int x, const int y);
+    bool is_light(const point &p);
+    void set_light(const int x, const int y);
+    void unset_light(const int x, const int y);
+
+    bool is_blood(const int x, const int y);
+    bool is_blood(const point &p);
+    void set_blood(const int x, const int y);
+    void unset_blood(const int x, const int y);
+
     bool is_wall(const int x, const int y);
     bool is_wall(const point &p);
+    void set_wall(const int x, const int y);
+    void unset_wall(const int x, const int y);
+
     bool is_water(const int x, const int y);
     bool is_water(const point &p);
-    void clear(void);
-    void dir_sett(const int x, const int y);
-    void set_blood(const int x, const int y);
-    void set_corridor(const int x, const int y);
-    void set_deep_water(const int x, const int y);
-    void set_floor(const int x, const int y);
-    void set_gfx_large_shadow_caster(const int x, const int y);
-    void set_grass(const int x, const int y);
-    void set_gravel(const int x, const int y);
-    void set_lava(const int x, const int y);
-    void set_light(const int x, const int y);
-    void set_snow(const int x, const int y);
-    void set_soil(const int x, const int y);
-    void set_wall(const int x, const int y);
     void set_water(const int x, const int y);
-    void undir_sett(const int x, const int y);
-    void unset_blood(const int x, const int y);
-    void unset_corridor(const int x, const int y);
-    void unset_deep_water(const int x, const int y);
-    void unset_floor(const int x, const int y);
-    void unset_gfx_large_shadow_caster(const int x, const int y);
-    void unset_grass(const int x, const int y);
-    void unset_gravel(const int x, const int y);
-    void unset_lava(const int x, const int y);
-    void unset_light(const int x, const int y);
-    void unset_snow(const int x, const int y);
-    void unset_soil(const int x, const int y);
-    void unset_wall(const int x, const int y);
     void unset_water(const int x, const int y);
+
+    bool is_gfx_large_shadow_caster(const int x, const int y);
+    bool is_gfx_large_shadow_caster(const point &p);
+    void set_gfx_large_shadow_caster(const int x, const int y);
+    void unset_gfx_large_shadow_caster(const int x, const int y);
+
+    bool is_lava(const int x, const int y);
+    bool is_lava(const point &p);
+    void set_lava(const int x, const int y);
+    void unset_lava(const int x, const int y);
+
+    bool is_deep_water(const int x, const int y);
+    bool is_deep_water(const point &p);
+    void set_deep_water(const int x, const int y);
+    void unset_deep_water(const int x, const int y);
+
+    bool is_dirt(const int x, const int y);
+    bool is_dirt(const point &p);
+    void set_dirt(const int x, const int y);
+    void unset_dirt(const int x, const int y);
 
     bool is_rock(const int x, const int y);
     bool is_rock(const point &p);

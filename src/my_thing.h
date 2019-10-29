@@ -370,8 +370,6 @@ typedef struct Thing_ {
     int is_explosion(void);
     int is_floor(void);
     int is_food(void);
-    int is_grass(void);
-    int is_gravel(void);
     int is_key(void);
     int is_lava(void);
     int is_less_preferred_terrain(point p);
@@ -436,8 +434,6 @@ typedef struct Thing_ {
     int is_rrr7(void);
     int is_rrr8(void);
     int is_rrr9(void);
-    int is_snow(void);
-    int is_soil(void);
     int is_undead(void);
     int is_wall(void);
     int is_water(void);
@@ -467,8 +463,6 @@ typedef struct Thing_ {
     void animate();
     void attach(void);
     void blit(double offset_x, double offset_y, int x, int y);
-    void blit_grass_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
-    void blit_gravel_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_non_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
@@ -477,8 +471,6 @@ typedef struct Thing_ {
     void blit_rock_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
-    void blit_snow_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
-    void blit_soil_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_upside_down(double offset_x, double offset_y, int x, int y);
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void bounce(double bounce_height, double bounce_fade, uint32_t ms, uint32_t bounce_count);
