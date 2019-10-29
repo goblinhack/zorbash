@@ -165,19 +165,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         world->set_corridor(new_at.x, new_at.y);
     }
     if (tp_is_dirt(tp)) {
-        world->dir_sett(new_at.x, new_at.y);
-    }
-    if (tp_is_grass(tp)) {
-        world->set_grass(new_at.x, new_at.y);
-    }
-    if (tp_is_soil(tp)) {
-        world->set_soil(new_at.x, new_at.y);
-    }
-    if (tp_is_gravel(tp)) {
-        world->set_gravel(new_at.x, new_at.y);
-    }
-    if (tp_is_snow(tp)) {
-        world->set_snow(new_at.x, new_at.y);
+        world->set_dirt(new_at.x, new_at.y);
     }
     if (tp_is_rock(tp)) {
         world->set_rock(new_at.x, new_at.y);
@@ -271,19 +259,7 @@ void Thing::destroy (void)
         world->unset_corridor(old_at.x, old_at.y);
     }
     if (is_dirt()) {
-        world->undir_sett(old_at.x, old_at.y);
-    }
-    if (is_grass()) {
-        world->unset_grass(old_at.x, old_at.y);
-    }
-    if (is_soil()) {
-        world->unset_soil(old_at.x, old_at.y);
-    }
-    if (is_gravel()) {
-        world->unset_gravel(old_at.x, old_at.y);
-    }
-    if (is_snow()) {
-        world->unset_snow(old_at.x, old_at.y);
+        world->unset_dirt(old_at.x, old_at.y);
     }
     if (is_rock()) {
         world->unset_rock(old_at.x, old_at.y);

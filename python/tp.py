@@ -293,17 +293,8 @@ class Tp:
     def set_is_rrr50(self, value):
         zx.tp_set_is_rrr50(self, value)
 
-    def set_is_snow(self, value):
-        zx.tp_set_is_snow(self, value)
-
-    def set_is_gravel(self, value):
-        zx.tp_set_is_gravel(self, value)
-
     def set_is_obstacle(self, value):
         zx.tp_set_is_obstacle(self, value)
-
-    def set_is_soil(self, value):
-        zx.tp_set_is_soil(self, value)
 
     def set_is_attackable(self, value):
         zx.tp_set_is_attackable(self, value)
@@ -484,9 +475,6 @@ class Tp:
 
     def set_is_dirt(self, value):
         zx.tp_set_is_dirt(self, value)
-
-    def set_is_grass(self, value):
-        zx.tp_set_is_grass(self, value)
 
     def set_is_lava(self, value):
         zx.tp_set_is_lava(self, value)

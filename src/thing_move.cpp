@@ -133,6 +133,7 @@ bool Thing::update_coordinates (void)
     //
     // To account for rounding errors in the display
     //
+CON("XXX fix this");
     if (z_depth() <= MAP_DEPTH_LAST_FLOOR_TYPE) {
         br.x += tile_gl_width / (TILE_WIDTH * 4);
         br.y += tile_gl_height / (TILE_WIDTH * 4);
@@ -339,24 +340,8 @@ void Thing::update_pos (fpoint to, bool immediately)
             world->set_corridor(new_at.x, new_at.y);
         }
         if (is_dirt()) {
-            world->undir_sett(old_at.x, old_at.y);
-            world->dir_sett(new_at.x, new_at.y);
-        }
-        if (is_grass()) {
-            world->unset_grass(old_at.x, old_at.y);
-            world->set_grass(new_at.x, new_at.y);
-        }
-        if (is_soil()) {
-            world->unset_soil(old_at.x, old_at.y);
-            world->set_soil(new_at.x, new_at.y);
-        }
-        if (is_gravel()) {
-            world->unset_gravel(old_at.x, old_at.y);
-            world->set_gravel(new_at.x, new_at.y);
-        }
-        if (is_snow()) {
-            world->unset_snow(old_at.x, old_at.y);
-            world->set_snow(new_at.x, new_at.y);
+            world->unset_dirt(old_at.x, old_at.y);
+            world->set_dirt(new_at.x, new_at.y);
         }
         if (tp_gfx_large_shadow_caster(tpp)) {
             world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);

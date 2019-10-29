@@ -328,10 +328,6 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t._is_deep_water);
     out << bits(my.t._is_corridor);
     out << bits(my.t._is_dirt);
-    out << bits(my.t._is_grass);
-    out << bits(my.t._is_soil);
-    out << bits(my.t._is_gravel);
-    out << bits(my.t._is_snow);
     out << bits(my.t._is_rock);
     out << bits(my.t._is_visited);
     out << bits(my.t.map_at);
@@ -366,10 +362,6 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     in >> bits(my.t._is_deep_water);
     in >> bits(my.t._is_corridor);
     in >> bits(my.t._is_dirt);
-    in >> bits(my.t._is_grass);
-    in >> bits(my.t._is_soil);
-    in >> bits(my.t._is_gravel);
-    in >> bits(my.t._is_snow);
     in >> bits(my.t._is_rock);
     in >> bits(my.t._is_visited);
     in >> bits(my.t.map_at);

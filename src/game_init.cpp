@@ -709,25 +709,6 @@ static void game_place_dirt (Dungeonp d)
     }
 }
 
-static void game_place_grass (Dungeonp d)
-{_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (!world->is_anything_at(x, y)) {
-                if (random_range(0, 100) < 10) {
-                    auto tp = tp_random_grass();
-                    (void) thing_new(tp_name(tp), fpoint(x, y));
-                } else if (random_range(0, 100) < 10) {
-                    auto tp = tp_random_soil();
-                    (void) thing_new(tp_name(tp), fpoint(x, y));
-                } else {
-                    (void) thing_new("water1", fpoint(x, y));
-                }
-            }
-        }
-    }
-}
-
 static void game_place_entrance (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
@@ -899,7 +880,6 @@ _
     game_place_deep_water(dungeon, "deep_water1");
     //fluid_init();
     game_place_random_blood(dungeon);
-    game_place_grass(dungeon);
 
     for (auto x = 0; x < CHUNK_WIDTH; x++) {
         for (auto y = 0; y < CHUNK_HEIGHT; y++) {

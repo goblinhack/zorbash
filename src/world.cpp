@@ -265,7 +265,7 @@ bool World::is_dirt (const int x, const int y)
     return (get(_is_dirt, x, y));
 }
 
-void World::dir_sett (const int x, const int y)
+void World::set_dirt (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return;
@@ -273,148 +273,12 @@ void World::dir_sett (const int x, const int y)
     set(_is_dirt, x, y, true);
 }
 
-void World::undir_sett (const int x, const int y)
+void World::unset_dirt (const int x, const int y)
 {
     if (unlikely(is_oob(x, y))) {
         return;
     }
     set(_is_dirt, x, y, false);
-}
-
-bool World::is_grass (const point &p)
-{
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_grass, p.x, p.y));
-}
-
-bool World::is_grass (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_grass, x, y));
-}
-
-void World::set_grass (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_grass, x, y, true);
-}
-
-void World::unset_grass (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_grass, x, y, false);
-}
-
-bool World::is_soil (const point &p)
-{
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_soil, p.x, p.y));
-}
-
-bool World::is_soil (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_soil, x, y));
-}
-
-void World::set_soil (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_soil, x, y, true);
-}
-
-void World::unset_soil (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_soil, x, y, false);
-}
-
-bool World::is_gravel (const point &p)
-{
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_gravel, p.x, p.y));
-}
-
-bool World::is_gravel (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_gravel, x, y));
-}
-
-void World::set_gravel (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_gravel, x, y, true);
-}
-
-void World::unset_gravel (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_gravel, x, y, false);
-}
-
-bool World::is_snow (const point &p)
-{
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_snow, p.x, p.y));
-}
-
-bool World::is_snow (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_snow, x, y));
-}
-
-void World::set_snow (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_snow, x, y, true);
-}
-
-void World::unset_snow (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_snow, x, y, false);
-}
-
-bool World::is_floor (const point &p)
-{
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_floor, p.x, p.y));
 }
 
 bool World::is_floor (const int x, const int y)
@@ -639,7 +503,6 @@ void World::clear (void)
     _is_corridor = {};
     _is_deep_water = {};
     _is_dirt = {};
-    _is_grass = {};
     _is_floor = {};
     _is_lava = {};
     _is_light = {};
