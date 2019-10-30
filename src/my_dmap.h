@@ -10,7 +10,7 @@
 #include <array>
 
 typedef struct {
-    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> val {};
+    std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> val {};
 } Dmap;
 
 #include <type_traits>

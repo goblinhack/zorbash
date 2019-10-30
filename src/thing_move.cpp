@@ -133,7 +133,11 @@ bool Thing::update_coordinates (void)
     //
     // To account for rounding errors in the display
     //
+static int xxx;
+if (!xxx){
+xxx = 1;
 CON("XXX fix this");
+}
     if (z_depth() <= MAP_DEPTH_LAST_FLOOR_TYPE) {
         br.x += tile_gl_width / (TILE_WIDTH * 4);
         br.y += tile_gl_height / (TILE_WIDTH * 4);

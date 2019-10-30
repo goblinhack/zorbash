@@ -2018,8 +2018,8 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "ASCII_WIDTH", ASCII_WIDTH);
     PyModule_AddIntConstant(zx_mod, "ASCII_HEIGHT", ASCII_HEIGHT);
 
-    PyModule_AddIntConstant(zx_mod, "CHUNK_WIDTH", CHUNK_WIDTH);
-    PyModule_AddIntConstant(zx_mod, "CHUNK_HEIGHT", CHUNK_HEIGHT);
+    PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
+    PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
     PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
 

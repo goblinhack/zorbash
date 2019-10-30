@@ -165,11 +165,11 @@ public:
     //
     std::vector<Roomp>                        cells_room;
 
-    int map_width                             {CHUNK_WIDTH};
-    int map_height                            {CHUNK_HEIGHT};
+    int map_width                             {MAP_WIDTH};
+    int map_height                            {MAP_HEIGHT};
     int map_depth                             {MAP_DEPTH};
 
-    std::array<std::array<int, CHUNK_HEIGHT>, CHUNK_WIDTH> map_jigsaw_buffer_water_depth {};
+    std::array<std::array<int, MAP_HEIGHT>, MAP_WIDTH> map_jigsaw_buffer_water_depth {};
 
     //
     // High level view of the map.
@@ -1435,24 +1435,24 @@ public:
 
     void add_border (void)
     {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_BORDER; x++) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
-                putc(CHUNK_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(MAP_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::WALL);
             }
         }
-        for (auto x = 0; x < CHUNK_WIDTH; x++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_BORDER; y++) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
-                putc(x, CHUNK_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(x, MAP_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
             }
         }
     }
 
     void add_corridor_walls (void)
     {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
-            for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
                 if (is_wall_fast(x, y)) {
                     continue;
                 }
@@ -1490,8 +1490,8 @@ public:
 
     void add_room_walls (void)
     {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
-            for (auto x = 0; x < CHUNK_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
                 if (is_wall_fast(x, y)) {
                     continue;
                 }
@@ -2055,7 +2055,7 @@ public:
 
     void place_level (Levelp l)
     {
-        if ((l->width > CHUNK_WIDTH) || (l->height > CHUNK_HEIGHT)) {
+        if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
             DIE("level has bad size %d,%d", l->width, l->height);
         }
 
@@ -2772,8 +2772,8 @@ public:
     {
         int x, y;
 
-        for (x = 0; x < CHUNK_WIDTH; x++) {
-            for (y = 0; y < CHUNK_HEIGHT; y++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
+            for (y = 0; y < MAP_HEIGHT; y++) {
 
                 if (is_anything_at(x, y)) {
                     set(d->val, x, y, DMAP_IS_WALL);
@@ -3214,16 +3214,16 @@ public:
     //
     // Used temporarily during level generation.
     //
-    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> map_save {};
-    std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> map_curr {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> map_save {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> map_curr {};
 
     //
     // Grow our cells
     //
     void cave_generation (void)
     {
-        const int16_t maze_w = CHUNK_WIDTH - 2;
-        const int16_t maze_h = CHUNK_HEIGHT - 2;
+        const int16_t maze_w = MAP_WIDTH - 2;
+        const int16_t maze_h = MAP_HEIGHT - 2;
         int16_t x, y;
 
         for (x=2; x < maze_w; x++) {
@@ -3285,8 +3285,8 @@ public:
     //
     void water_fixup_shallows (void)
     {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
-            for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
                 if (!is_deep_water_fast(x, y)) {
                     continue;
                 }
@@ -3320,10 +3320,10 @@ public:
     //
     void water_fixup (void)
     {
-        std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> cand {};
+        std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> cand {};
 
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
-            for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
                 if (is_water(x - 1, y - 1) &&
                     is_water(x    , y - 1) &&
                     is_water(x + 1, y - 1) &&
@@ -3337,8 +3337,8 @@ public:
                 }
             }
         }
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
-            for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+            for (auto x = 1; x < MAP_WIDTH - 1; x++) {
                 if (get(cand, x, y)) {
                     if (random_range(0, 100) < 95) {
                         putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
@@ -3363,8 +3363,8 @@ public:
         map_save = {};
         map_curr = {};
 
-        const int16_t maze_w = CHUNK_WIDTH - 2;
-        const int16_t maze_h = CHUNK_HEIGHT - 2;
+        const int16_t maze_w = MAP_WIDTH - 2;
+        const int16_t maze_h = MAP_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;
@@ -3420,8 +3420,8 @@ public:
         map_save = {};
         map_curr = {};
 
-        const int16_t maze_w = CHUNK_WIDTH - 2;
-        const int16_t maze_h = CHUNK_HEIGHT - 2;
+        const int16_t maze_w = MAP_WIDTH - 2;
+        const int16_t maze_h = MAP_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;
@@ -3477,8 +3477,8 @@ public:
         map_save = {};
         map_curr = {};
 
-        const int16_t maze_w = CHUNK_WIDTH - 2;
-        const int16_t maze_h = CHUNK_HEIGHT - 2;
+        const int16_t maze_w = MAP_WIDTH - 2;
+        const int16_t maze_h = MAP_HEIGHT - 2;
 
         if (map_fill_prob) {
             MAP_FILL_PROB             = map_fill_prob;

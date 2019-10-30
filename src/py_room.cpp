@@ -105,6 +105,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     floor_string += c;
                 } else if (m.is_door ||
                            m.is_blood ||
+                           m.is_water ||
+                           m.is_deep_water ||
                            m.gfx_is_floor_deco) {
                     floor_string += Charmap::FLOOR;
                 } else {

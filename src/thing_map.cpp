@@ -230,7 +230,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     // where to draw them to avoid overlaps
     //
     std::array<
-      std::array<bool, CHUNK_HEIGHT + 8>, CHUNK_WIDTH + 8> tile_map = {};
+      std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> tile_map = {};
 
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
@@ -472,7 +472,7 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
     // where to draw them to avoid overlaps
     //
     std::array<
-      std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> tile_map {};
+      std::array<bool, MAP_HEIGHT>, MAP_WIDTH> tile_map {};
 
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
@@ -715,7 +715,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     // where to draw them to avoid overlaps
     //
     std::array<
-      std::array<bool, CHUNK_HEIGHT + 8>, CHUNK_WIDTH + 8> tile_map = {};
+      std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> tile_map = {};
 
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;

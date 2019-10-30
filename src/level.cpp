@@ -29,7 +29,7 @@ void Level::finalize (void)
 
 void Level::dump (void)
 {
-    std::array<std::array<char, CHUNK_HEIGHT>, CHUNK_WIDTH> tmp;
+    std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp;
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
             set(tmp, x, y, ' ');

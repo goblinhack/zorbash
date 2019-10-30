@@ -11,8 +11,8 @@ void dmap_print_walls (const Dmap *d)
     uint16_t x;
     uint16_t y;
 
-    for (y = 0; y < CHUNK_HEIGHT; y++) {
-        for (x = 0; x < CHUNK_WIDTH; x++) {
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
             uint16_t e = get(d->val, x, y);
             if (e == DMAP_IS_WALL) {
                 printf("#");
@@ -39,8 +39,8 @@ void dmap_print (const Dmap *d, point start)
     uint16_t x;
     uint16_t y;
 
-    for (y = 0; y < CHUNK_HEIGHT; y++) {
-        for (x = 0; x < CHUNK_WIDTH; x++) {
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
             uint16_t e = get(d->val, x, y);
             if (point(x, y) == start) {
                 printf(" @  ");
@@ -76,18 +76,18 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
 {
     uint16_t x;
     uint16_t y;
-    const float offx = start.x - ((CHUNK_WIDTH / scale) / 2);
-    const float offy = start.y - ((CHUNK_HEIGHT / scale) / 2);
-    std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> new_val;
+    const float offx = start.x - ((MAP_WIDTH / scale) / 2);
+    const float offy = start.y - ((MAP_HEIGHT / scale) / 2);
+    std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> new_val;
     const float fscale = scale;
 
-    for (y = 0; y < CHUNK_HEIGHT; y++) {
-        for (x = 0; x < CHUNK_WIDTH; x++) {
+    for (y = 0; y < MAP_HEIGHT; y++) {
+        for (x = 0; x < MAP_WIDTH; x++) {
             float X = ((float)x / fscale) + offx;
             float Y = ((float)y / fscale) + offy;
 
-            if ((X < 0) || (X >= CHUNK_WIDTH) ||
-                (Y < 0) || (Y >= CHUNK_HEIGHT)) {
+            if ((X < 0) || (X >= MAP_WIDTH) ||
+                (Y < 0) || (Y >= MAP_HEIGHT)) {
                 set(new_val, x, y, DMAP_IS_WALL);
                 continue;
             }
@@ -112,9 +112,9 @@ void dmap_process (Dmap *D, point tl, point br)
     uint16_t i;
     uint16_t lowest;
     uint16_t changed;
-    static std::array<std::array<uint16_t, CHUNK_HEIGHT>, CHUNK_WIDTH> orig;
-    static std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> orig_valid;
-    static std::array<std::array<uint8_t, CHUNK_HEIGHT>, CHUNK_WIDTH> valid;
+    static std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> orig;
+    static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig_valid;
+    static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> valid;
 
     int minx, miny, maxx, maxy;
     if (tl.x < br.x) {
@@ -138,11 +138,11 @@ void dmap_process (Dmap *D, point tl, point br)
     if (miny < 0) {
         miny = 0;
     }
-    if (maxx >= CHUNK_WIDTH) {
-        maxx = CHUNK_WIDTH - 1;
+    if (maxx >= MAP_WIDTH) {
+        maxx = MAP_WIDTH - 1;
     }
-    if (maxy >= CHUNK_HEIGHT) {
-        maxy = CHUNK_HEIGHT - 1;
+    if (maxy >= MAP_HEIGHT) {
+        maxy = MAP_HEIGHT - 1;
     }
 
 
@@ -150,11 +150,11 @@ void dmap_process (Dmap *D, point tl, point br)
     // Need a wall around the dmap or the search will sort of
     // trickle off the map
     //
-    for (y = miny; y < CHUNK_HEIGHT; y++) {
+    for (y = miny; y < MAP_HEIGHT; y++) {
         set(D->val, minx, y, DMAP_IS_WALL);
         set(D->val, maxx, y, DMAP_IS_WALL);
     }
-    for (x = minx; x < CHUNK_WIDTH; x++) {
+    for (x = minx; x < MAP_WIDTH; x++) {
         set(D->val, x, miny, DMAP_IS_WALL);
         set(D->val, x, maxy, DMAP_IS_WALL);
     }
@@ -288,12 +288,12 @@ void dmap_process (Dmap *D, point tl, point br)
 
 void dmap_process (Dmap *D)
 {
-    dmap_process(D, point(0, 0), point(CHUNK_WIDTH, CHUNK_HEIGHT));
+    dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
 }
 
 static bool is_movement_blocking_at (const Dmap *D, int x, int y)
 {
-    if ((x >= CHUNK_WIDTH) || (y >= CHUNK_HEIGHT) || (x < 0) || (y < 0)) {
+    if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
         return (true);
     }
 
@@ -460,7 +460,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
         point(0, 1),
     };
 
-    std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> walked = {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> walked = {};
 
     auto at = start;
     std::vector<point> out = { };
@@ -469,7 +469,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
         auto x = at.x;
         auto y = at.y;
 
-        if ((x >= CHUNK_WIDTH) || (y >= CHUNK_HEIGHT) || (x < 0) || (y < 0)) {
+        if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
             return out;
         }
 
@@ -486,7 +486,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
             auto tx = t.x;
             auto ty = t.y;
 
-            if ((tx >= CHUNK_WIDTH) || (ty >= CHUNK_HEIGHT) || (tx < 0) || (ty < 0)) {
+            if ((tx >= MAP_WIDTH) || (ty >= MAP_HEIGHT) || (tx < 0) || (ty < 0)) {
                 continue;
             }
 
