@@ -195,8 +195,8 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
 
 fpoint Thing::ai_get_next_hop (void)
 {_
-    const auto dx = (CHUNK_WIDTH / 4) - 1;
-    const auto dy = (CHUNK_HEIGHT / 4) - 1;
+    const auto dx = (MAP_WIDTH / 4) - 1;
+    const auto dy = (MAP_HEIGHT / 4) - 1;
 
     auto minx = std::max(0, (int)mid_at.x - dx);
     auto maxx = std::min(MAP_WIDTH, (int)mid_at.x + dx);
@@ -318,13 +318,13 @@ con("  goal add at: %d, %d", X, Y);
     //
     // Combine the scores of multiple goals on each cell.
     //
-    std::array<std::array<float, CHUNK_HEIGHT>, CHUNK_WIDTH> cell_totals = {};
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> cell_totals = {};
     float highest_least_preferred = 0;
     float lowest_most_preferred = 0;
 //    const float wanderlust = 10;
 
     {
-        std::array<std::array<bool, CHUNK_HEIGHT>, CHUNK_WIDTH> walked = {};
+        std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> walked = {};
         for (auto g : goals_set) {
             auto p = g.at;
 //            if (!get(walked, p.x, p.y)) {

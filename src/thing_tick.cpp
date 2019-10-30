@@ -88,11 +88,11 @@ void things_tick (void)
     //
     // Active things are generally things that move or have a life span
     //
-    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - CHUNK_WIDTH);
-    uint16_t maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + CHUNK_WIDTH);
+    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - MAP_WIDTH);
+    uint16_t maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + MAP_WIDTH);
 
-    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - CHUNK_HEIGHT);
-    uint16_t maxy = std::min(MAP_HEIGHT, (uint16_t)world->map_at.y + CHUNK_HEIGHT);
+    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - MAP_HEIGHT);
+    uint16_t maxy = std::min(MAP_HEIGHT, (uint16_t)world->map_at.y + MAP_HEIGHT);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {

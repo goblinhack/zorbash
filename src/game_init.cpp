@@ -16,8 +16,8 @@ static void game_place_walls (Dungeonp d,
     auto what = tp_name(tp);
 
     while (tries--) {
-        auto x = random_range(0, CHUNK_WIDTH - block_width + 1);
-        auto y = random_range(0, CHUNK_HEIGHT - block_height + 1);
+        auto x = random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -93,8 +93,8 @@ static void game_place_floors (Dungeonp d,
                                int tries)
 {_
     while (tries--) {
-        auto x = random_range(0, CHUNK_WIDTH - block_width + 1);
-        auto y = random_range(0, CHUNK_HEIGHT - block_height + 1);
+        auto x = random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -182,8 +182,8 @@ static void game_place_rocks (Dungeonp d,
                               int tries)
 {_
     while (tries--) {
-        auto x = random_range(0, CHUNK_WIDTH - block_width + 1);
-        auto y = random_range(0, CHUNK_HEIGHT - block_height + 1);
+        auto x = random_range(0, MAP_WIDTH - block_width + 1);
+        auto y = random_range(0, MAP_HEIGHT - block_height + 1);
 
         auto can_place_here = true;
         for (auto dx = 0; dx < block_width; dx++) {
@@ -253,8 +253,8 @@ static void game_place_floor_under_objects (Dungeonp d,
                                             std::string what,
                                             int depth)
 {_
-    for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (world->is_floor(x, y)) {
                 continue;
             }
@@ -428,8 +428,8 @@ static void game_place_floor_under_objects (Dungeonp d,
 static void game_place_lava (Dungeonp d, 
                              std::string what)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_lava(x, y)) {
                 continue;
             }
@@ -449,8 +449,8 @@ static void game_place_lava (Dungeonp d,
 
 static void game_place_random_blood (Dungeonp d)
 {_
-    for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (world->is_blood(x, y)) {
                 continue;
             }
@@ -490,8 +490,8 @@ static void game_place_random_blood (Dungeonp d)
 
 static void game_place_water (Dungeonp d, std::string what)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_water(x, y)) {
                 continue;
             }
@@ -511,8 +511,8 @@ static void game_place_water (Dungeonp d, std::string what)
 
 static void game_place_deep_water (Dungeonp d, std::string what)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_deep_water(x, y)) {
                 continue;
             }
@@ -532,8 +532,8 @@ static void game_place_deep_water (Dungeonp d, std::string what)
 
 static void game_place_monst (Dungeonp d)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_monst(x, y)) {
                 continue;
             }
@@ -551,8 +551,8 @@ static void game_place_monst (Dungeonp d)
 
 static void game_place_food (Dungeonp d)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_food(x, y)) {
                 continue;
             }
@@ -569,8 +569,8 @@ static void game_place_food (Dungeonp d)
 
 static void game_place_blood (Dungeonp d)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_blood(x, y)) {
                 continue;
             }
@@ -588,8 +588,8 @@ static void game_place_blood (Dungeonp d)
 
 static void game_place_keys (Dungeonp d)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_key(x, y)) {
                 continue;
             }
@@ -607,8 +607,8 @@ static void game_place_keys (Dungeonp d)
 
 static void game_place_floor_deco (Dungeonp d)
 {_
-    for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!d->is_floor(x, y)) {
                 continue;
             }
@@ -636,8 +636,8 @@ static void game_place_floor_deco (Dungeonp d)
 
 static void game_place_wall_deco (Dungeonp d)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!d->is_wall(x, y)) {
                 continue;
             }
@@ -666,8 +666,8 @@ static void game_place_wall_deco (Dungeonp d)
 
 static void game_place_remaining_floor (Dungeonp d, std::string what)
 {_
-    for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!d->is_floor(x, y)) {
                 continue;
             }
@@ -680,8 +680,8 @@ static void game_place_remaining_floor (Dungeonp d, std::string what)
 
 static void game_place_corridor (Dungeonp d, std::string what, int depth)
 {_
-    for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!d->is_corridor(x, y)) {
                 continue;
             }
@@ -699,8 +699,8 @@ static void game_place_corridor (Dungeonp d, std::string what, int depth)
 
 static void game_place_dirt (Dungeonp d)
 {_
-    for (auto x = 1; x < CHUNK_WIDTH - 1; x++) {
-        for (auto y = 1; y < CHUNK_HEIGHT - 1; y++) {
+    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!d->is_anything_at(x, y) || d->is_dirt(x, y)) {
                 auto tp = tp_random_dirt();
                 (void) thing_new(tp_name(tp), fpoint(x, y));
@@ -711,8 +711,8 @@ static void game_place_dirt (Dungeonp d)
 
 static void game_place_entrance (Dungeonp d, std::string what)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (!d->is_entrance_at(x, y)) {
                 continue;
             }
@@ -724,8 +724,8 @@ static void game_place_entrance (Dungeonp d, std::string what)
 
 static void game_place_exit (Dungeonp d, std::string what)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (!d->is_exit_at(x, y)) {
                 continue;
             }
@@ -737,8 +737,8 @@ static void game_place_exit (Dungeonp d, std::string what)
 
 static void game_place_door (Dungeonp d, std::string what)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (!d->is_door(x, y)) {
                 continue;
             }
@@ -750,8 +750,8 @@ static void game_place_door (Dungeonp d, std::string what)
 
 static void game_place_remaining_walls (Dungeonp d, std::string what)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_wall(x, y)) {
                 continue;
             }
@@ -767,8 +767,8 @@ static void game_place_remaining_walls (Dungeonp d, std::string what)
 
 static void game_place_remaining_rocks (Dungeonp d, std::string what)
 {_
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (world->is_rock(x, y)) {
                 continue;
             }
@@ -793,7 +793,7 @@ void Game::init (void)
     CON("dungeon: create dungeon %u", seed);
     LOG("===================================================================");
 _
-    auto dungeon = new Dungeon(CHUNK_WIDTH, CHUNK_HEIGHT, GRID_WIDTH,
+    auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
                                GRID_HEIGHT, seed);
     // auto dungeon = new Dungeon(0);
 
@@ -881,8 +881,8 @@ _
     //fluid_init();
     game_place_random_blood(dungeon);
 
-    for (auto x = 0; x < CHUNK_WIDTH; x++) {
-        for (auto y = 0; y < CHUNK_HEIGHT; y++) {
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (dungeon->is_entrance_at(x, y)) {
                 auto t = thing_new("player1", fpoint(x, y));
                 auto w = thing_new("sword1", fpoint(x, y));

@@ -36,8 +36,8 @@ void fluid_init (void)
 
     z = MAP_DEPTH_WATER;
     {
-        for (y = 0; y < CHUNK_HEIGHT; y++) {
-            for (x = 0; x < CHUNK_WIDTH; x++) {
+        for (y = 0; y < MAP_HEIGHT; y++) {
+            for (x = 0; x < MAP_WIDTH; x++) {
                 for (auto p : world->all_things_at[x][y][z]) {
                     auto t = p.second;
                     if (tp_is_water(t->tp) || tp_is_deep_water(t->tp)) {
@@ -51,8 +51,8 @@ void fluid_init (void)
         }
     }
 
-    for (x = 0; x < CHUNK_WIDTH; x++) {
-        for (y = 0; y < CHUNK_HEIGHT; y++) {
+    for (x = 0; x < MAP_WIDTH; x++) {
+        for (y = 0; y < MAP_HEIGHT; y++) {
 
             if (world->is_solid(x, y)) {
                 fluid_place_water(x, y);
@@ -98,8 +98,8 @@ void fluid_update (void)
 {
     uint16_t x, y;
 
-    for (x = 0; x < CHUNK_WIDTH; x++) {
-        for (y = 0; y < CHUNK_HEIGHT; y++) {
+    for (x = 0; x < MAP_WIDTH; x++) {
+        for (y = 0; y < MAP_HEIGHT; y++) {
 
             if (world->is_solid(x, y)) {
                 uint16_t fx;
@@ -528,14 +528,14 @@ static void fluid_set_depth (void)
 
 void fluid_add_droplets (void)
 {
-    uint16_t x = (myrand() % (CHUNK_WIDTH - 4)) + 1;
-    uint16_t y = (myrand() % (CHUNK_HEIGHT - 4)) + 1;
+    uint16_t x = (myrand() % (MAP_WIDTH - 4)) + 1;
+    uint16_t y = (myrand() % (MAP_HEIGHT - 4)) + 1;
 
-    if (x >= CHUNK_WIDTH) {
+    if (x >= MAP_WIDTH) {
         DIE("overflow on x when adding droplets");
     }
 
-    if (y >= CHUNK_HEIGHT) {
+    if (y >= MAP_HEIGHT) {
         DIE("overflow on y");
     }
 
@@ -577,8 +577,8 @@ void fluid_remove_water_radius (int x, int y, int radius)
     int iy = y * FLUID_RESOLUTION;
     radius *= FLUID_RESOLUTION;
 
-    for (x = 0; x < FLUID_RESOLUTION * CHUNK_WIDTH; x++) {
-        for (y = 0; y < FLUID_RESOLUTION * CHUNK_WIDTH; y++) {
+    for (x = 0; x < FLUID_RESOLUTION * MAP_WIDTH; x++) {
+        for (y = 0; y < FLUID_RESOLUTION * MAP_WIDTH; y++) {
             if (DISTANCE(ix, iy, x, y) < radius) {
                 world->fluid[x][y].mass = 0;
                 world->fluid[x][y].type = 0;
@@ -737,8 +737,8 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
     }
 
     {
-        int x = CHUNK_WIDTH - 1;
-        int y = CHUNK_HEIGHT - 1;
+        int x = MAP_WIDTH - 1;
+        int y = MAP_HEIGHT - 1;
         int z = MAP_DEPTH_WALL;
         int got = false;
 
@@ -790,11 +790,11 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
         maxy = player->y + visible_height;
         miny = player->y - visible_height;
 
-        while (maxx > CHUNK_WIDTH) {
+        while (maxx > MAP_WIDTH) {
             maxx--;
             minx--;
         }
-        while (maxy > CHUNK_HEIGHT) {
+        while (maxy > MAP_HEIGHT) {
             maxy--;
             miny--;
         }
@@ -808,9 +808,9 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
         }
     } else {
         minx = 0;
-        maxx = CHUNK_WIDTH;
+        maxx = MAP_WIDTH;
         miny = 0;
-        maxy = CHUNK_HEIGHT;
+        maxy = MAP_HEIGHT;
     }
 
     double tl_x;
@@ -1007,10 +1007,10 @@ int thing_submerged_depth (Thingp t)
     int dy = FLUID_RESOLUTION / 2;
     int water = 0;
 
-    if (t->mid_at.x >= CHUNK_WIDTH) {
+    if (t->mid_at.x >= MAP_WIDTH) {
         return (false);
     }
-    if (t->mid_at.y >= CHUNK_HEIGHT) {
+    if (t->mid_at.y >= MAP_HEIGHT) {
         return (false);
     }
     if (t->mid_at.x < 0) {
@@ -1038,10 +1038,10 @@ int thing_is_submerged (Thingp t)
     int y = t->mid_at.y * FLUID_RESOLUTION;
     int water = 0;
 
-    if (t->mid_at.x >= CHUNK_WIDTH) {
+    if (t->mid_at.x >= MAP_WIDTH) {
         return (false);
     }
-    if (t->mid_at.y >= CHUNK_HEIGHT) {
+    if (t->mid_at.y >= MAP_HEIGHT) {
         return (false);
     }
     if (t->mid_at.x < 0) {
@@ -1073,10 +1073,10 @@ int thing_is_partially_or_fully_submerged (Thingp t)
     int y = t->mid_at.y * FLUID_RESOLUTION;
     int water = 0;
 
-    if (t->mid_at.x >= CHUNK_WIDTH) {
+    if (t->mid_at.x >= MAP_WIDTH) {
         return (false);
     }
-    if (t->mid_at.y >= CHUNK_HEIGHT) {
+    if (t->mid_at.y >= MAP_HEIGHT) {
         return (false);
     }
     if (t->mid_at.x < 0) {

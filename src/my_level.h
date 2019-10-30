@@ -31,13 +31,13 @@ public:
     // Unique per level.
     //
     uint32_t                levelno {0};
-    uint8_t                 width  {CHUNK_WIDTH};
-    uint8_t                 height {CHUNK_HEIGHT};
+    uint8_t                 width  {MAP_WIDTH};
+    uint8_t                 height {MAP_HEIGHT};
     uint8_t                 depth  {0};
 
     std::array<
       std::array<
-        std::array<char, MAP_DEPTH>, CHUNK_HEIGHT>, CHUNK_WIDTH> data {};
+        std::array<char, MAP_DEPTH>, MAP_HEIGHT>, MAP_WIDTH> data {};
 
     static Levelp level_new(void);
     void finalize(void);
