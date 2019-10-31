@@ -30,7 +30,6 @@
 #define _MY_MAIN_H_
 
 #define ENABLE_ASSERT              // DIE on errors
-#define ENABLE_TRACING             // Function tracing
 
 #undef DEBUG_CRASH
 #ifdef DEBUG_CRASH

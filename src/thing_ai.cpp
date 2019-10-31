@@ -68,37 +68,38 @@ bool Thing::will_prefer (const Thingp itp)
 
 bool Thing::ai_is_obstacle_for_me (point p)
 {
-    if (world->is_wall(p)) {
-        return (true);
-    }
-    if (world->is_rock(p)) {
-        return (true);
-    }
-    if (world->is_door(p)) {
-        return (true);
-    }
-    if (world->is_lava(p)) {
-        return (true);
-    }
-
-    //
-    // This is more of a look at the future position that some monst is
-    // already walking toward
-    //
-    if (world->is_monst(p)) {
-        return (true);
-    }
-
     //
     // Avoid threats and treat them as obstacles
     //
-    FOR_ALL_INTERESTING_THINGS(world, t, p.x, p.y) {
+    for (auto t : get(world->all_thing_ptrs_at, p.x, p.y)) {
+        if (!t) {
+            continue;
+        }
+        if (t->is_wall()) {
+            return (true);
+        }
+        if (t->is_rock()) {
+            return (true);
+        }
+        if (t->is_door()) {
+            return (true);
+        }
+        if (t->is_lava()) {
+            return (true);
+        }
         if (t == this) {
             continue;
         }
-
         if (t->is_hidden) {
             continue;
+        }
+
+        //
+        // This is more of a look at the future position that some monst is
+        // already walking toward
+        //
+        if (t->is_monst()) {
+            return (true);
         }
 
         if (will_avoid(t)) {
@@ -195,8 +196,8 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
 
 fpoint Thing::ai_get_next_hop (void)
 {_
-    const auto dx = (MAP_WIDTH / 4) - 1;
-    const auto dy = (MAP_HEIGHT / 4) - 1;
+    const auto dx = (MAP_WIDTH / 2) - 1;
+    const auto dy = (MAP_HEIGHT / 2) - 1;
 
     auto minx = std::max(0, (int)mid_at.x - dx);
     auto maxx = std::min(MAP_WIDTH, (int)mid_at.x + dx);
@@ -250,7 +251,6 @@ fpoint Thing::ai_get_next_hop (void)
     //
     // We want to find how far everything is from us.
     //
-_
     set(scent->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
 
 #if 0
@@ -368,15 +368,10 @@ _
     //
     // Find the best next-hop to the best goal.
     //
-
-    //
-    // Wall clingers create a dmap that is essentially a border around
-    // the existing walls
-    //
 #if 0
     dmap_print(dmap_goals, start);
 #endif
-    dmap_process(goals);
+    dmap_process(goals, point(0, 0), point(maxx - minx, maxy - miny));
 #if 0
     CON("goals after:");
     dmap_print(dmap_goals, start);
