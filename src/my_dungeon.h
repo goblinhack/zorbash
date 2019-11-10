@@ -2778,7 +2778,7 @@ public:
                 if (is_anything_at(x, y)) {
                     set(d->val, x, y, DMAP_IS_WALL);
                 } else {
-                    set(d->val, x, y, (uint16_t)(DMAP_IS_WALL - 1));
+                    set(d->val, x, y, DMAP_IS_PASSABLE);
                 }
             }
         }
