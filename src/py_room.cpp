@@ -90,7 +90,6 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             std::string wall_deco_string;
             std::string walls_string;
             std::string monst_string;
-            std::string food_string;
             std::string blood_string;
             std::string exits_string;
             std::string items_string;
@@ -146,12 +145,6 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     monst_string += Charmap::SPACE;
                 }
 
-                if (m.is_food) {
-                    food_string += c;
-                } else {
-                    food_string += Charmap::SPACE;
-                }
-
                 if (m.is_blood) {
                     blood_string += c;
                 } else {
@@ -167,6 +160,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
                 if (m.is_trap ||
                     m.is_treasure ||
+                    m.is_food ||
                     m.is_key) {
                     items_string += c;
                 } else {
@@ -211,7 +205,6 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 set(r->data, x, y, MAP_DEPTH_WALLS_DECO, wall_deco_string[x]);
                 set(r->data, x, y, MAP_DEPTH_EXIT,       exits_string[x]);
                 set(r->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
-                set(r->data, x, y, MAP_DEPTH_FOOD,       food_string[x]);
                 set(r->data, x, y, MAP_DEPTH_BLOOD,      blood_string[x]);
                 set(r->data, x, y, MAP_DEPTH_ITEM,       items_string[x]);
                 set(r->data, x, y, MAP_DEPTH_PLAYER,     ' ');
