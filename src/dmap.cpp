@@ -8,12 +8,12 @@
 
 void dmap_print_walls (const Dmap *d)
 {
-    uint16_t x;
-    uint16_t y;
+    uint8_t x;
+    uint8_t y;
 
     for (y = 0; y < MAP_HEIGHT; y++) {
         for (x = 0; x < MAP_WIDTH; x++) {
-            uint16_t e = get(d->val, x, y);
+            uint8_t e = get(d->val, x, y);
             if (e == DMAP_IS_WALL) {
                 printf("#");
                 continue;
@@ -34,37 +34,33 @@ void dmap_print_walls (const Dmap *d)
     printf("\n");
 }
 
-void dmap_print (const Dmap *d, point start)
+void dmap_print (const Dmap *d, point at, point start, point end)
 {
-    uint16_t x;
-    uint16_t y;
+    uint8_t x;
+    uint8_t y;
 
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
-            uint16_t e = get(d->val, x, y);
-            if (point(x, y) == start) {
-                printf(" @  ");
+printf("start %d,%d end %d %d at %d,%d\n",
+       start.x, start.y, end.x, end.y, at.x, at.y);
+    for (y = start.y; y < end.y; y++) {
+        for (x = start.x; x < end.x; x++) {
+            uint8_t e = get(d->val, x, y);
+            if (point(x, y) == at) {
+                printf("@  ");
                 continue;
             }
-
             if (e == DMAP_IS_WALL) {
-                printf("##  ");
+                printf("## ");
                 continue;
             }
             if (e == DMAP_IS_PASSABLE) {
-                printf("_   ");
-                continue;
-            }
-
-            if ((e > DMAP_IS_PASSABLE) && (e < DMAP_IS_PASSABLE + 100)) {
-                printf(">%-3d", e - DMAP_IS_PASSABLE);
+                printf("_  ");
                 continue;
             }
 
             if (e > 0) {
-                printf("%-4d", e);
+                printf("%-3X", e);
             } else {
-                printf(".   ");
+                printf("*  ");
             }
         }
         printf("\n");
@@ -74,11 +70,11 @@ void dmap_print (const Dmap *d, point start)
 
 void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
 {
-    uint16_t x;
-    uint16_t y;
+    uint8_t x;
+    uint8_t y;
     const float offx = start.x - ((MAP_WIDTH / scale) / 2);
     const float offy = start.y - ((MAP_HEIGHT / scale) / 2);
-    std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> new_val;
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> new_val;
     const float fscale = scale;
 
     for (y = 0; y < MAP_HEIGHT; y++) {
@@ -99,20 +95,20 @@ void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
 
 void dmap_process (Dmap *D, point tl, point br)
 {
-    uint16_t x;
-    uint16_t y;
-    uint16_t a;
-    uint16_t b;
-    uint16_t c;
-    uint16_t d;
-    uint16_t *e;
-    uint16_t f;
-    uint16_t g;
-    uint16_t h;
-    uint16_t i;
-    uint16_t lowest;
-    uint16_t changed;
-    static std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> orig;
+    uint8_t x;
+    uint8_t y;
+    uint8_t a;
+    uint8_t b;
+    uint8_t c;
+    uint8_t d;
+    uint8_t *e;
+    uint8_t f;
+    uint8_t g;
+    uint8_t h;
+    uint8_t i;
+    uint8_t lowest;
+    uint8_t changed;
+    static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig;
     static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig_valid;
     static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> valid;
 
@@ -183,7 +179,7 @@ void dmap_process (Dmap *D, point tl, point br)
 #if 0
     dmap_print(D);
 
-    uint16_t count = 1;
+    uint8_t count = 1;
 #endif
 
     do {
@@ -272,11 +268,11 @@ void dmap_process (Dmap *D, point tl, point br)
     //
     for (y = miny + 1; y < maxy - 1; y++) {
         for (x = minx + 1; x < maxx - 1; x++) {
-            uint16_t o = get(orig, x, y);
+            uint8_t o = get(orig, x, y);
             if (o != DMAP_IS_WALL) {
                 if (o > DMAP_IS_PASSABLE) {
                     o = o - DMAP_IS_PASSABLE;
-                    uint16_t n = get(D->val, x, y);
+                    uint8_t n = get(D->val, x, y);
                     if (o + n < DMAP_IS_PASSABLE) {
                         incr(D->val, x, y, o);
                     }
@@ -473,7 +469,7 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
             return out;
         }
 
-        uint16_t lowest = get(D->val, x, y);
+        uint8_t lowest = get(D->val, x, y);
         bool got = false;
         point best;
 

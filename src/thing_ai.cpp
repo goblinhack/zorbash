@@ -196,19 +196,31 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
 
 fpoint Thing::ai_get_next_hop (void)
 {_
-    const auto dx = (MAP_WIDTH / 2) - 1;
-    const auto dy = (MAP_HEIGHT / 2) - 1;
+    const float dx = (MAP_WIDTH / 6);
+    const float dy = (MAP_HEIGHT / 6);
 
-    auto minx = std::max(0, (int)mid_at.x - dx);
-    auto maxx = std::min(MAP_WIDTH, (int)mid_at.x + dx);
+con("%f,%f   %f,%f   %f,%f",
+    mid_at.x, mid_at.y, 
+    mid_at.x - dx, mid_at.y - dy, 
+    mid_at.x + dx, mid_at.y + dy);
 
-    auto miny = std::max(0, (int)mid_at.y - dy);
-    auto maxy = std::min(MAP_HEIGHT, (int)mid_at.y + dy);
+    auto minx = std::max(0,         (int)(mid_at.x - dx));
+    auto maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
+
+    auto miny = std::max(0,          (int)(mid_at.y - dy));
+    auto maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
+con("%f,%f   %d,%d   %d,%d",
+    mid_at.x, mid_at.y, 
+    minx, miny,
+    maxx, maxy);
 
     fpoint fstart;
     auto tpp = tp();
     fstart = mid_at;
     point start((int)fstart.x, (int)fstart.y);
+
+con("min %d,%d", start.x - minx, start.y - miny);
+con("max %d,%d", maxx - start.x, maxy - start.y);
 
     auto scent = get_dmap_scent();
     auto goals = get_dmap_goals();
@@ -239,11 +251,11 @@ fpoint Thing::ai_get_next_hop (void)
             } else if ((value = is_less_preferred_terrain(p))) {
                 set(scent->val, X, Y, DMAP_IS_PASSABLE);
                 set(goals->val, X, Y, DMAP_IS_PASSABLE);
-                incr(goals->val, X, Y, (uint16_t)(age + value));
+                incr(goals->val, X, Y, (uint8_t)(age + value));
             } else {
                 set(scent->val, X, Y, DMAP_IS_PASSABLE);
                 set(goals->val, X, Y, DMAP_IS_PASSABLE);
-                incr(goals->val, X, Y, (uint16_t)age);
+                incr(goals->val, X, Y, (uint8_t)age);
             }
         }
     }
@@ -254,13 +266,16 @@ fpoint Thing::ai_get_next_hop (void)
     set(scent->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
 
 #if 0
-CON("scent before:");
-dmap_print(dmap_scent, start);
+    con("scent before:");
+    dmap_print(dmap_scent, start);
 #endif
     dmap_process(scent, point(0, 0), point(maxx - minx, maxy - miny));
-#if 0
-CON("scent after:");
-dmap_print(dmap_scent, start);
+#if 1
+    con("scent after:");
+    dmap_print(scent, 
+               point(start.x - minx, start.y - miny),
+               point(0, 0), 
+               point(maxx - minx, maxy - miny));
 #endif
 
     //
@@ -356,7 +371,7 @@ _
         score /= (highest_least_preferred - lowest_most_preferred);
         score *= DMAP_IS_PASSABLE / 2;
 _
-        set(goals->val, p.x, p.y, (uint16_t)(int)score);
+        set(goals->val, p.x, p.y, (uint8_t)(int)score);
     }
 
     //
@@ -369,21 +384,23 @@ _
     // Find the best next-hop to the best goal.
     //
 #if 0
-    dmap_print(dmap_goals, start);
+    dmap_print(goals, start);
 #endif
     dmap_process(goals, point(0, 0), point(maxx - minx, maxy - miny));
-#if 0
+#if 1
     CON("goals after:");
-    dmap_print(dmap_goals, start);
+    dmap_print(goals, 
+               point(start.x - minx, start.y - miny),
+               point(0, 0), 
+               point(maxx - minx, maxy - miny));
 #endif
 
     //
-    // Make sure we do not ewant to stay put/
-    // moving as an option
+    // Make sure we do not want to stay put/moving as an option
     //
     if (get(goals->val, start.x - minx, start.y - miny) > 0) {
         set(goals->val, start.x - minx, start.y - miny, 
-            (uint16_t)(DMAP_IS_WALL - 1));
+            (uint8_t)(DMAP_IS_WALL - 1));
     }
 
     //

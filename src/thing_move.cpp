@@ -120,28 +120,11 @@ bool Thing::update_coordinates (void)
     double tx = x;
     double ty = y;
 
-    auto sz = tpp->sz;
-    tx -= sz.w / 2;
-    ty -= sz.h / 2;
-
     tl.x = tx * tile_gl_width;
     tl.y = ty * tile_gl_height;
 
-    br.x = (tx+1) * tile_gl_width;
-    br.y = (ty+1) * tile_gl_height;
-
-    //
-    // To account for rounding errors in the display
-    //
-static int xxx;
-if (!xxx){
-xxx = 1;
-CON("XXX fix this");
-}
-    if (z_depth() <= MAP_DEPTH_LAST_FLOOR_TYPE) {
-        br.x += tile_gl_width / (TILE_WIDTH * 4);
-        br.y += tile_gl_height / (TILE_WIDTH * 4);
-    }
+    br.x = tl.x + tile_gl_width;
+    br.y = tl.y + tile_gl_height;
 
     auto tile = tile_index_to_tile(tile_curr);
     if (!tile) {
