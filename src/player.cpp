@@ -22,11 +22,11 @@ void player_tick (void)
         return;
     }
 
-    uint8_t right = 0;
-    uint8_t left  = 0;
-    uint8_t up    = 0;
-    uint8_t down  = 0;
-    uint8_t fire  = 0;
+    uint8_t right  = 0;
+    uint8_t left   = 0;
+    uint8_t up     = 0;
+    uint8_t down   = 0;
+    uint8_t attack = 0;
 
     const uint8_t *state = SDL_GetKeyboardState(0);
 
@@ -34,7 +34,7 @@ void player_tick (void)
     left   = state[SDL_SCANCODE_LEFT] ? 1 : 0;
     up     = state[SDL_SCANCODE_UP] ? 1 : 0;
     down   = state[SDL_SCANCODE_DOWN] ? 1 : 0;
-    fire   = state[SDL_SCANCODE_SPACE] ? 1 : 0;
+    attack   = state[SDL_SCANCODE_SPACE] ? 1 : 0;
 
     bool key_pressed = false;
     static uint32_t last_key_pressed_when;
@@ -63,7 +63,7 @@ void player_tick (void)
     }
 
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE)) {
-        fire = true;
+        attack = true;
     }
 
     if (sdl_joy_axes) {
@@ -119,25 +119,8 @@ void player_tick (void)
 
     fpoint future_pos = player->mid_at + fpoint(dx, dy);
 
-    /*
-     * Place a light to mark the way back
-     */
-#if 0
-    if ((dx != 0) || (dy != 0)) {
-        if (!world->is_light((int)player->at.x,
-                                        (int)player->at.y)) {
-
-            world->is_light[(int)player->at.x]
-                                   [(int)player->at.y] = true;
-            (void) light_new(0, 1,
-                             fpoint(player->at.x, player->at.y),
-                             LIGHT_QUALITY_POINT, GRAY30);
-        }
-    }
-#endif
-
-    player->move(future_pos, up, down, left, right, fire);
-    if (up || down || left || right || fire) {
+    player->move(future_pos, up, down, left, right, attack);
+    if (up || down || left || right || attack) {
         key_pressed = true;
     }
 

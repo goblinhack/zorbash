@@ -358,27 +358,37 @@ void Thing::hooks_remove ()
         if (id == owner->get_weapon_id_carry_anim()) {
             owner->unwield("remove hooks");
 
-            log("detach from carry anim owner %s", owner->to_string().c_str());
+            log("detach from carry-anim owner %s", owner->to_string().c_str());
             owner->weapon_set_carry_anim_id(0);
         }
 
         if (id == owner->get_weapon_id_use_anim()) {
             owner->unwield("remove hooks");
 
-            log("detach from use anim owner %s", owner->to_string().c_str());
+            log("detach from use-anim owner %s", owner->to_string().c_str());
             owner->weapon_set_use_anim_id(0);
 
             //
-            // End of the use animation, make the sword visible again.
+            // End of the use-animation, make the sword visible again.
             //
             auto carrying = owner->weapon_get_carry_anim();
             if (carrying) {
                 //
-                // But only if the owner is visible. They may have reached the
-                // level.
+                // But only if the owner is visible.
                 //
                 if (owner->is_visible()) {
+                    log("reapply carry-anim for owner %s", 
+                        owner->to_string().c_str());
                     carrying->visible();
+                } else {
+                    log("do not reapply carry-anim for invisible owner %s", 
+                        owner->to_string().c_str());
+                }
+            } else {
+                log("no carry-anim for owner %s", owner->to_string().c_str());
+                auto id = owner->get_weapon_id();
+                if (id) {
+                    owner->wield(owner->weapon_get());
                 }
             }
         }
@@ -395,7 +405,7 @@ void Thing::hooks_remove ()
             weapon_set_carry_anim(nullptr);
             verify(item);
             item->remove_owner();
-            item->dead("weapon carry anim owner killed");
+            item->dead("weapon carry-anim owner killed");
         }
     }
 
@@ -405,7 +415,7 @@ void Thing::hooks_remove ()
             weapon_set_use_anim(nullptr);
             verify(item);
             item->remove_owner();
-            item->dead("weapon use anim owner killed");
+            item->dead("weapon use-anim owner killed");
         }
     }
 

@@ -7,17 +7,15 @@
 
 void Thing::animate (void)
 {_
-    auto t = this;
-
     Tilep tile;
     auto tpp = tp();
 
-    tile = tile_index_to_tile(t->tile_curr);
+    tile = tile_index_to_tile(tile_curr);
     if (tile) {
         //
         // If within the animate time of this frame, keep with it.
         //
-        if (t->timestamp_next_frame > time_get_time_ms_cached()) {
+        if (timestamp_next_frame > time_get_time_ms_cached()) {
             return;
         }
 
@@ -26,7 +24,7 @@ void Thing::animate (void)
         //
         if (tile_is_end_of_anim(tile)) {
             if (tile_is_dead_on_end_of_anim(tile)) {
-                t->dead("end of anim");
+                dead("end of anim");
             }
 
             return;
@@ -47,8 +45,8 @@ void Thing::animate (void)
         //
         // If walking and now we've stopped, choose the idle no dir tile.
         //
-        if (t->is_player() && !t->is_dead && !t->is_moving &&
-            (time_get_time_ms() >= t->get_timestamp_move_begin() + 500)) {
+        if (is_player() && !is_dead && !is_moving &&
+            (time_get_time_ms() >= get_timestamp_move_begin() + 500)) {
 
             Tilep new_tile;
 
@@ -59,7 +57,11 @@ void Thing::animate (void)
                 }
 
                 while (new_tile) {
-                    if (tile_is_dir_none(new_tile)) {
+                    if (tile_is_dead(new_tile)) {
+                        //
+                        // Ignore
+                        //
+                    } else if (tile_is_dir_none(new_tile)) {
                         chose_tile = true;
                         tile = new_tile;
                         break;
@@ -97,15 +99,15 @@ void Thing::animate (void)
             }
             verify(tile);
 
-            if (!t->is_dead) {
+            if (!is_dead) {
                 if (tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
             }
 
-            auto health_max = t->get_health_max();
-            auto health = t->get_health();
+            auto health_max = get_health_max();
+            auto health = get_health();
 
             if (tpp->internal_has_hp_anim) {
                 if (health < health_max / 4) {
@@ -131,71 +133,49 @@ void Thing::animate (void)
                 }
             }
 
-            if (!t->is_moving) {
+            if (!is_moving) {
                 if (tile_is_moving(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
             }
 
-            if (t->is_dead) {
+            if (is_dead) {
                 if (!tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (t->is_sleeping) {
+            } else if (is_sleeping) {
                 if (!tile_is_sleeping(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-#if 0
-            } else if (tpp->internal_has_dir_anim && tp_is_dir_tl(t)) {
-                if (!tile_is_dir_tl(tile)) {
-                    tile = tile_next(tiles, tile);
-                    continue;
-                }
-            } else if (tpp->internal_has_dir_anim && tp_is_dir_bl(t)) {
-                if (!tile_is_dir_bl(tile)) {
-                    tile = tile_next(tiles, tile);
-                    continue;
-                }
-            } else if (tpp->internal_has_dir_anim && tp_is_dir_br(t)) {
-                if (!tile_is_dir_br(tile)) {
-                    tile = tile_next(tiles, tile);
-                    continue;
-                }
-            } else if (tpp->internal_has_dir_anim && tp_is_dir_tr(t)) {
-                if (!tile_is_dir_tr(tile)) {
-                    tile = tile_next(tiles, tile);
-                    continue;
-                }
-#endif
-            } else if (tpp->internal_has_dir_anim && t->is_dir_up()) {
+            } else if (tpp->internal_has_dir_anim && is_dir_up()) {
                 if (!tile_is_dir_up(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && t->is_dir_down()) {
+            } else if (tpp->internal_has_dir_anim && is_dir_down()) {
                 if (!tile_is_dir_down(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && t->is_dir_left()) {
+            } else if (tpp->internal_has_dir_anim && is_dir_left()) {
                 if (!tile_is_dir_left(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && t->is_dir_right()) {
+            } else if (tpp->internal_has_dir_anim && is_dir_right()) {
                 if (!tile_is_dir_right(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && t->is_dir_none()) {
+            } else if (tpp->internal_has_dir_anim && is_dir_none()) {
                 if (!tile_is_dir_none(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (t->is_open) {
+            } else if (is_open) {
                 if (!tile_is_open(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
@@ -226,19 +206,12 @@ void Thing::animate (void)
     }
 
 #if 0
-    if (tile && otile) {
-        if (tp_is_joinable(t)) {
-            CON("%s-> %s", tile_name(otile), tile_name(tile));
-        }
-    }
-#endif
-#if 0
-    if (is_monst()) {
+    if (is_player()) {
         CON("set %s", tile_name(tile).c_str());
     }
 #endif
 
-    t->tile_curr = tile->global_index;
+    tile_curr = tile->global_index;
 
     //
     // When does this tile expire ?
@@ -248,5 +221,5 @@ void Thing::animate (void)
         delay = delay + (myrand() % delay) / 5;
     }
 
-    t->timestamp_next_frame = time_get_time_ms_cached() + delay;
+    timestamp_next_frame = time_get_time_ms_cached() + delay;
 }
