@@ -5,92 +5,42 @@
 
 #include "my_main.h"
 #include "my_dmap.h"
-
-void dmap_print_walls (const Dmap *d)
-{
-    uint8_t x;
-    uint8_t y;
-
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
-            uint8_t e = get(d->val, x, y);
-            if (e == DMAP_IS_WALL) {
-                printf("#");
-                continue;
-            }
-            if (e == DMAP_IS_PASSABLE) {
-                printf(" ");
-                continue;
-            }
-
-            if (e > 0) {
-                printf("%d", e % 100);
-            } else {
-                printf(".");
-            }
-        }
-        printf("\n");
-    }
-    printf("\n");
-}
+#include "my_string.h"
 
 void dmap_print (const Dmap *d, point at, point start, point end)
 {
     uint8_t x;
     uint8_t y;
 
-printf("start %d,%d end %d %d at %d,%d\n",
-       start.x, start.y, end.x, end.y, at.x, at.y);
+#if 0
+    log("start %d,%d end %d %d at %d,%d\n",
+        start.x, start.y, end.x, end.y, at.x, at.y);
+#endif
     for (y = start.y; y < end.y; y++) {
+        std::string debug;
         for (x = start.x; x < end.x; x++) {
             uint8_t e = get(d->val, x, y);
             if (point(x, y) == at) {
-                printf("@  ");
+                debug += (" @ ");
                 continue;
             }
             if (e == DMAP_IS_WALL) {
-                printf("## ");
+                debug += ("## ");
                 continue;
             }
             if (e == DMAP_IS_PASSABLE) {
-                printf("_  ");
+                debug += (".  ");
                 continue;
             }
 
             if (e > 0) {
-                printf("%-3X", e);
+                debug += string_sprintf("%-3X", e);
             } else {
-                printf("*  ");
+                debug += "*  ";
             }
         }
-        printf("\n");
+        LOG("DMAP: %s", debug.c_str());
     }
-    printf("\n");
-}
-
-void dmap_scale_and_recenter (Dmap *d, const fpoint start, const int scale)
-{
-    uint8_t x;
-    uint8_t y;
-    const float offx = start.x - ((MAP_WIDTH / scale) / 2);
-    const float offy = start.y - ((MAP_HEIGHT / scale) / 2);
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> new_val;
-    const float fscale = scale;
-
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
-            float X = ((float)x / fscale) + offx;
-            float Y = ((float)y / fscale) + offy;
-
-            if ((X < 0) || (X >= MAP_WIDTH) ||
-                (Y < 0) || (Y >= MAP_HEIGHT)) {
-                set(new_val, x, y, DMAP_IS_WALL);
-                continue;
-            }
-            set(new_val, x, y, get(d->val, (int)X, (int)Y));
-        }
-    }
-    std::copy(mbegin(new_val), mend(new_val), mbegin(d->val));
 }
 
 void dmap_process (Dmap *D, point tl, point br)
@@ -148,11 +98,11 @@ void dmap_process (Dmap *D, point tl, point br)
     //
     for (y = miny; y < MAP_HEIGHT; y++) {
         set(D->val, minx, y, DMAP_IS_WALL);
-        set(D->val, maxx, y, DMAP_IS_WALL);
+        set(D->val, maxx - 1, y, DMAP_IS_WALL);
     }
     for (x = minx; x < MAP_WIDTH; x++) {
         set(D->val, x, miny, DMAP_IS_WALL);
-        set(D->val, x, maxy, DMAP_IS_WALL);
+        set(D->val, x, maxy - 1, DMAP_IS_WALL);
     }
 
 #if 0
@@ -160,8 +110,8 @@ void dmap_process (Dmap *D, point tl, point br)
     dmap_print(D);
 #endif
 
-    for (y = miny + 1; y < maxy; y++) {
-        for (x = minx + 1; x < maxx; x++) {
+    for (y = miny + 1; y < maxy - 1; y++) {
+        for (x = minx + 1; x < maxx - 1; x++) {
             set(orig, x, y, get(D->val, x, y));
 
             e = &getref(D->val, x , y);

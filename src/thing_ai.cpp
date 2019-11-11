@@ -10,6 +10,8 @@
 #include "my_math.h"
 #include <vector>
 
+#define DEBUG_AI
+
 bool Thing::will_attack (const Thingp itp)
 {
     auto me = tp();
@@ -110,31 +112,36 @@ bool Thing::ai_is_obstacle_for_me (point p)
     return (false);
 }
 
-int Thing::is_less_preferred_terrain (point p)
+uint8_t Thing::is_less_preferred_terrain (point p)
 {
+    uint8_t pref = 0;
+
     if (world->is_water(p)) {
         if (is_water_hater()) {
-            return (100);
+            pref += is_water_hater();
         }
     }
-    return (0);
+    return (std::min(DMAP_MAX_LESS_PREFERRED_TERRAIN, pref));
 }
 
 //
-// Lower scores are more preferred
-// k
-bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
+// Higher scores are more preferred
+//
+bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
+                               std::string &debug)
 {
+#ifdef DEBUG_AI
     float distance_scale = distance(mid_at, fpoint(p.x, p.y));
-    if (!distance_scale) {
-        distance_scale = 1.0;
-    }
+#endif
 
     //
     // Check from highest (0) to lowest priority for things to do
     //
     switch (priority) {
     case 0:
+        //
+        // Highest priority
+        //
         if (is_starving) {
             FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
                 if (it == this) {
@@ -146,13 +153,20 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
                 }
 
                 if (will_eat(it)) {
-                    *score -= 1000 / distance_scale;
+                    *score += 100;
+#ifdef DEBUG_AI
+                    debug = "will eat " + it->to_string();
+                    debug += " distance " + std::to_string(distance_scale);
+#endif
                     return (true);
                 }
             }
         }
         break;
     case 1:
+        //
+        // Medium priority
+        //
         if (is_hungry) {
             FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
                 if (it == this) {
@@ -164,18 +178,29 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
                 }
 
                 if (will_eat(it)) {
-                    *score -= 500;
+                    *score += 50;
+#ifdef DEBUG_AI
+                    debug = "will eat " + it->to_string(); 
+                    debug += " distance " + std::to_string(distance_scale);
+#endif
                     return (true);
                 }
 
                 if (will_attack(it)) {
-                    *score -= 1000 / distance_scale;
+                    *score += 100;
+#ifdef DEBUG_AI
+                    debug = "will attack " + it->to_string(); 
+                    debug += " distance " + std::to_string(distance_scale);
+#endif
                     return (true);
                 }
             }
         }
         break;
     case 2:
+        //
+        // Lowest priority
+        //
         FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
             if (it == this) {
                 continue;
@@ -186,6 +211,10 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
             }
 
             if (will_prefer(it)) {
+#ifdef DEBUG_AI
+                debug = "prefer " + it->to_string(); 
+                debug += " distance " + std::to_string(distance_scale);
+#endif
                 return (true);
             }
             break;
@@ -196,66 +225,32 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score)
 
 fpoint Thing::ai_get_next_hop (void)
 {_
+    log("calculate next-hop for ai when at %f,%f:", mid_at.x, mid_at.y);
+
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
 
-con("%f,%f   %f,%f   %f,%f",
-    mid_at.x, mid_at.y, 
-    mid_at.x - dx, mid_at.y - dy, 
-    mid_at.x + dx, mid_at.y + dy);
+    const float minx = std::max(0,         (int)(mid_at.x - dx));
+    const float maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
 
-    auto minx = std::max(0,         (int)(mid_at.x - dx));
-    auto maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
+    const float miny = std::max(0,          (int)(mid_at.y - dy));
+    const float maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
 
-    auto miny = std::max(0,          (int)(mid_at.y - dy));
-    auto maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
-con("%f,%f   %d,%d   %d,%d",
-    mid_at.x, mid_at.y, 
-    minx, miny,
-    maxx, maxy);
-
-    fpoint fstart;
-    auto tpp = tp();
-    fstart = mid_at;
-    point start((int)fstart.x, (int)fstart.y);
-
-con("min %d,%d", start.x - minx, start.y - miny);
-con("max %d,%d", maxx - start.x, maxy - start.y);
+    point start((int)mid_at.x, (int)mid_at.y);
 
     auto scent = get_dmap_scent();
-    auto goals = get_dmap_goals();
     auto age_map = get_age_map();
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
-            int value;
-
-            //
-            // Make newer cells less preferred by factoring in the age
-            //
-            uint32_t age;
-            auto v = get(age_map->val, x, y);
-            if (v) {
-                age = time_get_elapsed_secs(v, get_timestamp_born());
-            } else {
-                age = 0;
-            }
-
             auto X = x - minx;
             auto Y = y - miny;
 
             if (ai_is_obstacle_for_me(p)) {
                 set(scent->val, X, Y, DMAP_IS_WALL);
-                set(goals->val, X, Y, DMAP_IS_WALL);
-            } else if ((value = is_less_preferred_terrain(p))) {
-                set(scent->val, X, Y, DMAP_IS_PASSABLE);
-                set(goals->val, X, Y, DMAP_IS_PASSABLE);
-                incr(goals->val, X, Y, (uint8_t)(age + value));
             } else {
                 set(scent->val, X, Y, DMAP_IS_PASSABLE);
-                set(goals->val, X, Y, DMAP_IS_PASSABLE);
-                incr(goals->val, X, Y, (uint8_t)age);
             }
         }
     }
@@ -265,28 +260,18 @@ con("max %d,%d", maxx - start.x, maxy - start.y);
     //
     set(scent->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
 
-#if 0
-    con("scent before:");
-    dmap_print(dmap_scent, start);
-#endif
     dmap_process(scent, point(0, 0), point(maxx - minx, maxy - miny));
-#if 1
-    con("scent after:");
-    dmap_print(scent, 
-               point(start.x - minx, start.y - miny),
-               point(0, 0), 
-               point(maxx - minx, maxy - miny));
-#endif
 
     //
     // Find all the possible goals we can smell.
     //
     std::multiset<Goal> goals_set;
-    int oldest = 0;
+    uint32_t oldest = 0;
 
-#if 0
-CON("goals:");
+#ifdef DEBUG_AI
+    log("goals:");
 #endif
+    auto tpp = tp();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             point p(x, y);
@@ -297,6 +282,7 @@ CON("goals:");
             // Too far away to sense?
             //
             if (get(scent->val, X, Y) > tpp->ai_scent_distance) {
+                set(scent->val, X, Y, DMAP_IS_WALL);
                 continue;
             }
 
@@ -304,117 +290,163 @@ CON("goals:");
             // Look at the cell for each priority level. This means we can
             // have multiple goals per cell. We combine them all together.
             //
-            for (auto priority = 0; priority < 3; priority++) {
+            bool got_one = false;
+            auto terrain_score = is_less_preferred_terrain(p);
+
+            auto this_cell_scent = get(scent->val, X, Y);
+            const auto max_priority = 3;
+            for (auto priority = 0; priority < max_priority; priority++) {
                 float score = 0;
-                if (!ai_is_goal_for_me(p, priority, &score)) {
+                std::string why;
+                if (!ai_is_goal_for_me(p, priority, &score, why)) {
                     continue;
                 }
 
-                score += get(scent->val, X, Y);
-                score += 100 * (priority + 1);
+                //
+                // Further -> less preferred
+                //
+                score -= this_cell_scent;
+
+                //
+                // Higher priort -> more preferred
+                //
+                score += 100 * (max_priority - priority + 1);
+
+                //
+                // Worse terrain -> less preferred
+                //
+                score -= terrain_score;
 
                 Goal goal(score);
                 goal.at = point(X, Y);
+                goal.why = why;
                 goals_set.insert(goal);
-#if 0
-con("  goal add at: %d, %d", X, Y);
+#ifdef DEBUG_AI
+                log("  goal add %d,%d (%s) prio %d score %f", 
+                    (int)X, (int)Y, why.c_str(), priority, score);
 #endif
 
                 //
                 // Also take note of the oldest cell age; we will use this
                 // later.
                 //
-                int age = get(age_map->val, x, y);
+                uint32_t age = get(age_map->val, x, y);
                 oldest = std::min(oldest, age);
+                got_one = true;
+                break;
+            }
+
+            if (got_one) {
+                set(scent->val, X, Y, DMAP_IS_GOAL);
+            } else if (terrain_score) {
+                set(scent->val, X, Y, terrain_score);
+            } else {
+                set(scent->val, X, Y, DMAP_IS_PASSABLE);
             }
         }
     }
 
-    //
-    // Combine the scores of multiple goals on each cell.
-    //
-    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> cell_totals = {};
-    float highest_least_preferred = 0;
-    float lowest_most_preferred = 0;
-//    const float wanderlust = 10;
-
-    {
-        std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> walked = {};
-        for (auto g : goals_set) {
-            auto p = g.at;
-//            if (!get(walked, p.x, p.y)) {
-//                int age = get(age_map->val, p.x, p.y);
-//                get(cell_totals, p.x, p.y) = wanderlust * (age - oldest);
-//            }
-
-_
-            set(walked, p.x, p.y, true);
-            incr(cell_totals, p.x, p.y, g.score);
-            auto score = get(cell_totals, p.x, p.y);
-
-            //
-            // Find the highest/least preferred score so we can scale all
-            // the goals later.
-            //
-            highest_least_preferred = std::max(highest_least_preferred, score);
-            lowest_most_preferred = std::min(lowest_most_preferred, score);
-        }
-    }
-
-    //
-    // Scale the goals so they will fit in the dmap.
-    //
-    for (auto g : goals_set) {
-        auto p = g.at;
-        auto score = get(cell_totals, p.x, p.y);
-        score = score - lowest_most_preferred;
-        score /= (highest_least_preferred - lowest_most_preferred);
-        score *= DMAP_IS_PASSABLE / 2;
-_
-        set(goals->val, p.x, p.y, (uint8_t)(int)score);
-    }
-
-    //
-    // Record we've been here.
-    //
-_
-    set(age_map->val, start.x, start.y, time_get_time_ms());
-
-    //
-    // Find the best next-hop to the best goal.
-    //
-#if 0
-    dmap_print(goals, start);
-#endif
-    dmap_process(goals, point(0, 0), point(maxx - minx, maxy - miny));
-#if 1
-    CON("goals after:");
-    dmap_print(goals, 
+#ifdef DEBUG_AI
+    log("initial goal map derived:");
+    dmap_print(scent, 
                point(start.x - minx, start.y - miny),
                point(0, 0), 
                point(maxx - minx, maxy - miny));
 #endif
 
     //
-    // Make sure we do not want to stay put/moving as an option
+    // Find the highest/least preferred score so we can scale all the goals 
+    // later so they fit in one byte (makes it easier to debug).
     //
-    if (get(goals->val, start.x - minx, start.y - miny) > 0) {
-        set(goals->val, start.x - minx, start.y - miny, 
-            (uint8_t)(DMAP_IS_WALL - 1));
+    std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> cell_totals = {};
+    float least_preferred = 0;
+    float most_preferred = 0;
+    bool least_preferred_set = false;
+    bool most_preferred_set = false;
+
+    for (auto g : goals_set) {
+        auto p = g.at;
+        incr(cell_totals, p.x, p.y, g.score);
+        auto score = get(cell_totals, p.x, p.y);
+
+        if (least_preferred_set) {
+            least_preferred = std::min(least_preferred, score);
+        } else {
+            least_preferred = score;
+            least_preferred_set = true;
+        }
+        if (most_preferred_set) {
+            most_preferred = std::max(most_preferred, score);
+        } else {
+            most_preferred = score;
+            most_preferred_set = true;
+        }
+    }
+
+#ifdef DEBUG_AI
+    log("sorted goals, %f (best) .. %f (worst) range %f",
+        most_preferred, least_preferred, most_preferred - least_preferred);
+#endif
+
+    //
+    // Scale the goals so they will fit in the dmap.
+    //
+    for (auto g : goals_set) {
+        auto p = g.at;
+        float score = get(cell_totals, p.x, p.y);
+        auto orig_score = score;
+        score = most_preferred - score;
+        score /= (most_preferred - least_preferred);
+        score = 1.0 - score;
+        score *= DMAP_IS_PASSABLE;
+
+        assert(score <= DMAP_IS_PASSABLE);
+        uint8_t score8 = (int)score;
+        set(scent->val, p.x, p.y, score8);
+
+#ifdef DEBUG_AI
+        log("  scale goal %d to %d (%s)", 
+            (int)orig_score, score8, g.why.c_str());
+#endif
+    }
+
+    //
+    // Record we've been here.
+    //
+    set(age_map->val, start.x, start.y, time_get_time_ms());
+
+    //
+    // Find the best next-hop to the best goal.
+    //
+#ifdef DEBUG_AI
+    log("goals:");
+    dmap_print(scent, 
+               point(start.x - minx, start.y - miny),
+               point(0, 0), 
+               point(maxx - minx, maxy - miny));
+#endif
+
+    //
+    // Make sure we do not want to stay in the same position by making
+    // our current cell passable but the very least preferred it can be.
+    //
+    if (get(scent->val, start.x - minx, start.y - miny) > 0) {
+        set(scent->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
     }
 
     //
     // Move diagonally if not blocked by walls
     //
-    //auto hops = dmap_solve(dmap_goals, start);
     point s(start.x - minx, start.y - miny);
-    auto hops = astar_solve(s, goals_set, goals);
+    auto hops = astar_solve(s, goals_set, scent,
+                            point(0, 0), 
+                            point(maxx - minx, maxy - miny));
     auto hopssize = hops.path.size();
     point best;
     if (hopssize >= 2) {
         auto hop0 = get(hops.path, hopssize - 1);
         auto hop1 = get(hops.path, hopssize - 2);
-        if (dmap_can_i_move_diagonally(goals, s, hop0, hop1)) {
+        if (dmap_can_i_move_diagonally(scent, s, hop0, hop1)) {
             best = hop1;
         } else {
             best = hop0;
@@ -432,6 +464,10 @@ _
     fpoint fbest;
     fbest.x = best.x + 0.5;
     fbest.y = best.y + 0.5;
+
+#ifdef DEBUG_AI
+    log("chose next-hop %f,%f", fbest.x, fbest.y);
+#endif
 
     return (fbest);
 }

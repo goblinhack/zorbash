@@ -53,39 +53,6 @@ void Thing::delete_age_map (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// dmap_goals
-////////////////////////////////////////////////////////////////////////////
-Dmap *Thing::get_dmap_goals (void)
-{
-    if (monst) { 
-        return (monst->dmap_goals);
-    } else {
-        return (0);
-    }
-}
-
-void Thing::new_dmap_goals (void)
-{_
-    new_monst();
-    if (!monst->dmap_goals) {
-//con("%s", __FUNCTION__);
-        monst->dmap_goals = new Dmap();
-        newptr(monst->dmap_goals, "Dmap goals");
-    }
-}
-
-void Thing::delete_dmap_goals (void)
-{_
-    if (monst) {
-        verify(monst);
-        if (monst->dmap_goals) { 
-            oldptr(monst->dmap_goals);
-            delete monst->dmap_goals; monst->dmap_goals = 0;
-        }
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////
 // dmap_scent
 ////////////////////////////////////////////////////////////////////////////
 Dmap *Thing::get_dmap_scent (void)

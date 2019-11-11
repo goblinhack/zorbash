@@ -41,12 +41,6 @@ std::ostream& operator<<(std::ostream &out,
         out << bits(my.t.age_map);
     }
 
-    bool dmap_goals = (my.t.dmap_goals != nullptr);
-    out << bits(dmap_goals);
-    if (dmap_goals) {
-        out << bits(my.t.dmap_goals);
-    }
-
     bool dmap_scent = (my.t.dmap_scent != nullptr);
     out << bits(dmap_scent);
     if (dmap_scent) {
@@ -92,13 +86,6 @@ std::istream& operator>>(std::istream &in, Bits<Monst &> my)
     if (age_map) {
         my.t.age_map = new AgeMap();
         in >> bits(my.t.age_map);
-    }
-
-    bool dmap_goals;
-    in >> bits(dmap_goals);
-    if (dmap_goals) {
-        my.t.dmap_goals = new Dmap();
-        in >> bits(my.t.dmap_goals);
     }
 
     bool dmap_scent;
@@ -148,9 +135,6 @@ void Monst::dump (std::string pfx, std::ostream &out)
 
     if (age_map) {
         out << pfx << "has age_map" << std::endl;
-    }
-    if (dmap_goals) {
-        out << pfx << "has dmap_goals" << std::endl;
     }
     if (dmap_scent) {
         out << pfx << "has dmap_scent" << std::endl;
