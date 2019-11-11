@@ -153,12 +153,30 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                 }
 
                 if (will_eat(it)) {
-                    *score += 100;
+                    if (it->get_health() > 2 * get_health()) {
+                        //
+                        // Too powerful
+                        //
+                    } else if (it->get_health() > get_health()) {
+                        //
+                        // A bit of a challenge. Prefer easier eats.
+                        //
+                        *score += 10;
 #ifdef DEBUG_AI
-                    debug = "will eat " + it->to_string();
-                    debug += " distance " + std::to_string(distance_scale);
+                        debug = "will try to eat " + it->to_string();
+                        debug += " distance " + std::to_string(distance_scale);
 #endif
-                    return (true);
+                    } else {
+                        //
+                        // Easy eat
+                        //
+                        *score += 100;
+#ifdef DEBUG_AI
+                        debug = "will eat " + it->to_string();
+                        debug += " distance " + std::to_string(distance_scale);
+#endif
+                        return (true);
+                    }
                 }
             }
         }
@@ -178,12 +196,30 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                 }
 
                 if (will_eat(it)) {
-                    *score += 50;
+                    if (it->get_health() > 2 * get_health()) {
+                        //
+                        // Too powerful
+                        //
+                    } else if (it->get_health() > get_health()) {
+                        //
+                        // A bit of a challenge. Prefer easier eats.
+                        //
+                        *score += 10;
 #ifdef DEBUG_AI
-                    debug = "will eat " + it->to_string(); 
-                    debug += " distance " + std::to_string(distance_scale);
+                        debug = "will try to eat " + it->to_string();
+                        debug += " distance " + std::to_string(distance_scale);
 #endif
-                    return (true);
+                    } else {
+                        //
+                        // Easy eat
+                        //
+                        *score += 100;
+#ifdef DEBUG_AI
+                        debug = "will eat " + it->to_string();
+                        debug += " distance " + std::to_string(distance_scale);
+#endif
+                        return (true);
+                    }
                 }
 
                 if (will_attack(it)) {
@@ -293,7 +329,7 @@ fpoint Thing::ai_get_next_hop (void)
             bool got_one = false;
             auto terrain_score = is_less_preferred_terrain(p);
 
-            auto this_cell_scent = get(scent->val, X, Y);
+            // auto this_cell_scent = get(scent->val, X, Y);
             const auto max_priority = 3;
             for (auto priority = 0; priority < max_priority; priority++) {
                 float score = 0;
@@ -303,9 +339,10 @@ fpoint Thing::ai_get_next_hop (void)
                 }
 
                 //
-                // Further -> less preferred
+                // Further -> less preferred. No, astar will factor this
+                // in anyway
                 //
-                score -= this_cell_scent;
+                // score -= this_cell_scent;
 
                 //
                 // Higher priort -> more preferred

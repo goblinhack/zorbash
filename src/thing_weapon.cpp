@@ -42,16 +42,16 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
         }
 
         if (new_weapon_carry_anim) {
-            log("change weapon carry anim, %s->%s",
+            log("change weapon carry-anim, %s->%s",
                 old_weapon_carry_anim->to_string().c_str(),
                 new_weapon_carry_anim->to_string().c_str());
         } else {
-            log("remove weapon carry anim, %s",
+            log("remove weapon carry-anim, %s",
                 old_weapon_carry_anim->to_string().c_str());
         }
     } else {
         if (new_weapon_carry_anim) {
-            log("set weapon carry anim, %s",
+            log("set weapon carry-anim, %s",
                 new_weapon_carry_anim->to_string().c_str());
         }
     }
@@ -91,16 +91,16 @@ void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
         }
 
         if (weapon_use_anim) {
-            log("change weapon use anim %s->%s",
+            log("change weapon use-anim %s->%s",
                 old_weapon_use_anim->to_string().c_str(),
                 weapon_use_anim->to_string().c_str());
         } else {
-            log("remove weapon use anim %s",
+            log("remove weapon use-anim %s",
                 old_weapon_use_anim->to_string().c_str());
         }
     } else {
         if (weapon_use_anim) {
-            log("set weapon use anim %s", 
+            log("set weapon use-anim %s", 
                 weapon_use_anim->to_string().c_str());
         }
     }
@@ -241,13 +241,13 @@ void Thing::sheath (void)
     //
     auto weapon_carry_anim = weapon_get_carry_anim();
     if (weapon_carry_anim) {
-        weapon_carry_anim->dead("owner sheathed weapon, remove carry anim");
+        weapon_carry_anim->dead("owner sheathed weapon, remove carry-anim");
         weapon_set_carry_anim(nullptr);
     }
 
     auto weapon_use_anim = weapon_get_use_anim();
     if (weapon_use_anim) {
-        weapon_use_anim->dead("owner sheathed weapon, remove use anim");
+        weapon_use_anim->dead("owner sheathed weapon, remove use-anim");
         weapon_set_use_anim(nullptr);
     }
 }
@@ -257,13 +257,12 @@ void Thing::wield (Thingp weapon)
     auto weapon_tp = weapon->tp();
 
     if (weapon_get() == weapon) {
-        log("already wiedling: %s", tp_name(weapon_tp).c_str());
-        return;
+        log("re-wielding: %s", tp_name(weapon_tp).c_str());
+    } else {
+        log("is wielding: %s", tp_name(weapon_tp).c_str());
+
+        unwield("wield new weapon");
     }
-
-    log("is wielding: %s", tp_name(weapon_tp).c_str());
-
-    unwield("wield new weapon");
 
     auto carry_as = tp_weapon_carry_anim(weapon_tp);
     if (carry_as == "") {
@@ -334,7 +333,7 @@ void Thing::use (void)
     weapon_set_use_anim(use_anim);
 
     //
-    // Hide the carry anim while using.
+    // Hide the carry-anim while using.
     //
     auto c = weapon_get_carry_anim();
     if (c) {
