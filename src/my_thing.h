@@ -37,15 +37,16 @@ class Goal
 public:
     float score = {0};
     point  at;
-    Thingp thing {};
+    std::string why;
 
     Goal () {}
     Goal (float score) : score(score) { }
-    Goal (Thingp target) : thing(target) { }
-    Goal (point target) : at(target) { }
 
     friend bool operator<(const class Goal & lhs, const class Goal & rhs) {
-        return lhs.score < rhs.score;
+        //
+        // Reverse sorted
+        //
+        return lhs.score > rhs.score;
     }
 };
 
@@ -58,7 +59,7 @@ public:
     int                cost {};
 };
 
-extern Path astar_solve(point start, std::multiset<Goal> &goals, Dmap *dmap);
+extern Path astar_solve(const point &at, std::multiset<Goal> &goals, Dmap *dmap, const point &start, const point &end);
 
 typedef struct {
     std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> val {};
@@ -79,7 +80,6 @@ typedef struct {
 
 typedef struct Monst_ {
     AgeMap       *age_map = {};              // How old a cell is
-    Dmap         *dmap_goals = {};
     Dmap         *dmap_scent = {};
     Lightp       light = {};                 // Have a light source?
     int          light_strength {};
@@ -160,10 +160,6 @@ typedef struct Thing_ {
     AgeMap *get_age_map(void);
     void new_age_map(void);
     void delete_age_map(void);
-
-    Dmap *get_dmap_goals(void);
-    void new_dmap_goals(void);
-    void delete_dmap_goals(void);
 
     Dmap *get_dmap_scent(void);
     void new_dmap_scent(void);
@@ -301,21 +297,17 @@ typedef struct Thing_ {
     uint32_t set_weapon_id(uint32_t);
     uint32_t get_weapon_id(void);
 
-    fpoint set_interpolated_mid_at(fpoint);
-    fpoint get_interpolated_mid_at(void);
-
     Thingp owner_get();
+    Thingp weapon_get();
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void);
-    Thingp weapon_get();
     bool ai_collisions_handle(void);
-    bool ai_is_goal_for_me(point p, int priority, float *score);
+    bool ai_is_goal_for_me(point p, int priority, float *score, std::string &why);
     bool ai_is_obstacle_for_me(point p);
     bool ai_possible_hit(Thingp it, int x, int y, int dx, int dy);
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire);
     bool update_coordinates(void);
-    void update_interpolated_position(void);
     bool will_attack(const Thingp it);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
@@ -324,6 +316,8 @@ typedef struct Thing_ {
     double collision_radius(void);
     double get_bounce(void);
     fpoint ai_get_next_hop(void);
+    fpoint set_interpolated_mid_at(fpoint);
+    fpoint get_interpolated_mid_at(void);
     int ai_ai_hit_if_possible(Thingp hitter);
     int ai_ai_hit_if_possible(Thingp hitter, int damage);
     int ai_delay_after_moving_ms(void);
@@ -335,7 +329,6 @@ typedef struct Thing_ {
     int collision_check(void);
     int collision_circle(void);
     int collision_hit_priority(void);
-    int is_interesting(void);
     int gfx_animated(void);
     int gfx_animated_can_vflip(void);
     int gfx_animated_no_dir(void);
@@ -370,10 +363,11 @@ typedef struct Thing_ {
     int is_explosion(void);
     int is_floor(void);
     int is_food(void);
+    int is_interesting(void);
     int is_key(void);
     int is_lava(void);
-    int is_less_preferred_terrain(point p);
     int is_light_strength(void);
+    int is_loggable(void);
     int is_made_of_meat(void);
     int is_meat_eater(void);
     int is_monst(void);
@@ -404,7 +398,6 @@ typedef struct Thing_ {
     int is_rrr24(void);
     int is_rrr25(void);
     int is_rrr26(void);
-    int is_loggable(void);
     int is_rrr28(void);
     int is_rrr29(void);
     int is_rrr3(void);
@@ -446,8 +439,8 @@ typedef struct Thing_ {
     int z_depth(void);
     std::string bite_damage_hd(void);
     std::string is_nutrition_hd(void);
-    std::string to_string(void);
     std::string to_name(void);
+    std::string to_string(void);
     uint8_t is_dir_bl(void);
     uint8_t is_dir_br(void);
     uint8_t is_dir_down(void);
@@ -457,6 +450,7 @@ typedef struct Thing_ {
     uint8_t is_dir_tl(void);
     uint8_t is_dir_tr(void);
     uint8_t is_dir_up(void);
+    uint8_t is_less_preferred_terrain(point p);
     uint8_t is_visible();
     void achieve_goals_in_life();
     void ai_possible_hits_find_best(void);
@@ -474,6 +468,7 @@ typedef struct Thing_ {
     void blit_upside_down(double offset_x, double offset_y, int x, int y);
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void bounce(double bounce_height, double bounce_fade, uint32_t ms, uint32_t bounce_count);
+    void carry(Thingp w);
     void collision_check_do();
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args); // compile error without
@@ -496,6 +491,9 @@ typedef struct Thing_ {
     void dir_set_tl(void);
     void dir_set_tr(void);
     void dir_set_up(void);
+    void drop(Thingp w);
+    void drop_all(void);
+    void dump(std::string prefix, std::ostream &out);
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void err_(const char *fmt, va_list args); // compile error without
     void health_boost(int v);
@@ -510,11 +508,13 @@ typedef struct Thing_ {
     void move_delta(fpoint, bool immediately);
     void move_to(fpoint to);
     void move_to_immediately(fpoint to);
-    void set_owner(Thingp owner);
     void remove_owner(void);
+    void set_owner(Thingp owner);
     void sheath(void);
     void tick();
     void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
+    void unwield(const char *why);
+    void update_interpolated_position(void);
     void update_light(void);
     void update_pos(fpoint, bool immediately);
     void use(void);
@@ -526,13 +526,7 @@ typedef struct Thing_ {
     void weapon_set_use_anim(Thingp weapon_use_anim);
     void weapon_set_use_anim_id(uint32_t weapon_use_anim_id);
     void weapon_sheath(void);
-    void unwield(const char *why);
     void wield(Thingp w);
-    void carry(Thingp w);
-    void drop(Thingp w);
-    void drop_all(void);
-
-    void dump(std::string prefix, std::ostream &out);
 } Thing;
 
 std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);

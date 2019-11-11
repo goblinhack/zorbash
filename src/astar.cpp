@@ -8,10 +8,12 @@
 #include "my_game.h"
 #include "my_dmap.h"
 #include "my_math.h"
+#include "my_string.h"
 #include <vector>
 
+#define ASTAR_DEBUG
 #ifdef ASTAR_DEBUG
-static char get(debug, MAP_WIDTH, MAP_HEIGHT);
+static std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> debug {};
 #endif
 
 class Nodecost {
@@ -209,16 +211,16 @@ printf(" %d(%d) ", came_from->cost.cost, dmap->val[came_from->at.x][came_from->a
                     best.cost = cost;
 //printf("    best %d\n", cost);
 #ifdef ASTAR_DEBUG
-                    for (auto p : path) {
-                        set(debug, p.x, p.y, 'A' + *gi);
-                    }
+//                    for (auto p : path) {
+//                        set(debug, p.x, p.y, (char)('A' + *gi));
+//                    }
                     (*gi)++;
 #endif
                 } else {
 #ifdef ASTAR_DEBUG
-                    for (auto p : path) {
-                        set(debug, p.x, p.y, 'a' + *gi);
-                    }
+//                    for (auto p : path) {
+//                        set(debug, p.x, p.y, (char)('a' + *gi));
+//                    }
                     (*gi)++;
 #endif
 //printf("    !best %d\n", cost);
@@ -243,57 +245,60 @@ printf(" %d(%d) ", came_from->cost.cost, dmap->val[came_from->at.x][came_from->a
 };
 
 #ifdef ASTAR_DEBUG
-static void dump (Dmap *dmap, point start)
+static void dump (Dmap *dmap, 
+                  const point &at,
+                  const point &start, 
+                  const point &end)
 {
     int x;
     int y;
 
-    printf("astar:\n");
-    for (y = 0; y < MAP_HEIGHT; y++) {
-        for (x = 0; x < MAP_WIDTH; x++) {
+    LOG("ASTAR:");
+    for (y = start.y; y < end.y; y++) {
+        std::string s;
+        for (x = start.x; x < end.x; x++) {
             uint16_t e = get(dmap->val, x, y);
 
-            char buf[10] = {};
+            std::string buf;
             if (e == DMAP_IS_WALL) {
-                sprintf(buf, "##  ");
+                buf = "## ";
             } else if (e == DMAP_IS_PASSABLE) {
-                sprintf(buf, "_   ");
-            } else if ((e > DMAP_IS_PASSABLE) &&
-                        (e < DMAP_IS_PASSABLE + 100)) {
-                sprintf(buf, ">%-3d", e - DMAP_IS_PASSABLE);
+                buf = ".  ";
             } else if (e > 0) {
-                sprintf(buf, "%-4d", e);
+                buf = string_sprintf("%-3X", e);
             } else {
-                sprintf(buf, ".   ");
+                buf = "*  ";
             }
 
-            if (point(x, y) == start) {
-                sprintf(buf, " @  ");
+            if (point(x, y) == at) {
+                buf = " @ ";
             }
 
-            if (debug[x][y]) {
-                get(buf, 2] = debug[x, y);
+            if (get(debug, x, y)) {
+                buf[2] = get(debug, x, y);
             }
-
-            printf("%s", buf);
+            s += buf;
         }
-        printf("\n");
+        LOG("ASTAR:%s", s.c_str());
     }
-    printf("\n");
 }
 #endif
 
-Path astar_solve (point start, std::multiset<Goal> &goals, Dmap *dmap)
+Path astar_solve (const point &at, 
+                  std::multiset<Goal> &goals, 
+                  Dmap *dmap,
+                  const point &start, 
+                  const point &end)
 {
     auto best = Path();
     best.cost = std::numeric_limits<int>::max();
     char gi = '\0';
 
 #ifdef ASTAR_DEBUG
-    memset(debug, 0, sizeof(debug));
+    debug = {};
 #endif
     for (auto g : goals) {
-        auto a = Astar(start, g.at, dmap);
+        auto a = Astar(at, g.at, dmap);
 
         auto path = a.solve(&gi);
         if (path.cost < best.cost)  {
@@ -306,7 +311,7 @@ Path astar_solve (point start, std::multiset<Goal> &goals, Dmap *dmap)
         set(debug, p.x, p.y, '%');
     }
 
-    dump(dmap, start);
+    dump(dmap, at, start, end);
 #endif
     return (best);
 }

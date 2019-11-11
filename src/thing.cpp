@@ -69,7 +69,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
 
     if (tp_is_monst(tp)) {
         new_dmap_scent();
-        new_dmap_goals();
         new_age_map();
     }
     if (tp_is_monst(tp) || tp_is_player(tp)) {
@@ -274,7 +273,6 @@ void Thing::destroy (void)
     }
 
     delete_dmap_scent();
-    delete_dmap_goals();
     delete_age_map();
     delete_light();
 
@@ -553,7 +551,7 @@ std::string Thing::to_string (void)
     auto tpp = tp();
     verify(this);
     verify(tpp);
-#if 0
+#if 1
     return (string_sprintf("%08X(%s%s) at (%g,%g)",
                            id, tpp->name.c_str(),
                            is_dead ? "/dead" : "",
