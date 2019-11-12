@@ -723,10 +723,7 @@ void Nodes::init_nodes (void)
         }
     }
 
-    auto obstacles = random_range(0, (grid_width * grid_height) / 2);
-
-    obstacles = (grid_width * grid_height) / 4;
-    obstacles = 3;
+    auto obstacles = ((grid_width * grid_height) / 4) * 3;
 
     while (obstacles--) {
         auto x = random_range(0, grid_width);
@@ -2174,7 +2171,7 @@ class Nodes *grid_test (void)
 {
     auto x = 1000 ;
     while (x--) {
-        /* auto d = */ new Nodes(5, 5);
+        /* auto d = */ new Nodes(GRID_WIDTH, GRID_HEIGHT);
 
         continue;
 //        return (d);

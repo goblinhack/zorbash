@@ -108,8 +108,7 @@ public:
     // Manhattan distance.
     int heuristic (const point at)
     {
-        return (0);
-//        return (abs(goal.x - at.x) + abs(goal.y - at.y));
+        return (abs(goal.x - at.x) + abs(goal.y - at.y));
     }
 
     // Evaluate a neighbor for adding to the open set
@@ -134,9 +133,13 @@ public:
             return;
         }
 
-        auto distance_to_nexthop = get(dmap->val, nexthop.x, nexthop.y);
-        auto cost = current->cost.cost +
-                    distance_to_nexthop + heuristic(nexthop);
+        int distance_to_nexthop = get(dmap->val, nexthop.x, nexthop.y);
+        if (distance_to_nexthop == DMAP_IS_PASSABLE) {
+            distance_to_nexthop = 0;
+        }
+
+        int cost = current->cost.cost +
+                   distance_to_nexthop + heuristic(nexthop);
         auto neighbor = get(open, nexthop.x, nexthop.y);
         if (!neighbor) {
             auto ncost = Nodecost(cost + heuristic(nexthop));
@@ -169,7 +172,7 @@ public:
     }
 
     std::tuple<std::vector<point>, int > create_path (Dmap *dmap,
-                                                    const Node *came_from)
+                                                      const Node *came_from)
     {
         std::vector<point> l;
         int cost = came_from->cost.cost;
@@ -178,9 +181,6 @@ public:
             if (came_from->came_from) {
                 l.push_back(came_from->at);
             }
-#if 0
-printf(" %d(%d) ", came_from->cost.cost, dmap->val[came_from->at.x][came_from->at.y]);
-#endif
             came_from = came_from->came_from;
         }
 
@@ -196,34 +196,29 @@ printf(" %d(%d) ", came_from->cost.cost, dmap->val[came_from->at.x][came_from->a
         Path best;
         best.cost = std::numeric_limits<int>::max();
 
-//printf("solve %c\n", 'A' + *gi);
         while (!open_nodes.empty()) {
             auto c = open_nodes.begin();
             Node *current = c->second;
 
             if (current->at == goal) {
-//printf("  path %c ",'A' + *gi);
                 auto [path, cost] = create_path(dmap, current);
-//printf("\n");
 
                 if (cost < best.cost) {
                     best.path = path;
                     best.cost = cost;
-//printf("    best %d\n", cost);
 #ifdef ASTAR_DEBUG
-//                    for (auto p : path) {
-//                        set(debug, p.x, p.y, (char)('A' + *gi));
-//                    }
+                    for (auto p : path) {
+                        set(debug, p.x, p.y, (char)('A' + *gi));
+                    }
                     (*gi)++;
 #endif
                 } else {
 #ifdef ASTAR_DEBUG
-//                    for (auto p : path) {
-//                        set(debug, p.x, p.y, (char)('a' + *gi));
-//                    }
+                    for (auto p : path) {
+                        set(debug, p.x, p.y, (char)('a' + *gi));
+                    }
                     (*gi)++;
 #endif
-//printf("    !best %d\n", cost);
                 }
                 remove_from_open(current);
                 continue;
@@ -308,7 +303,7 @@ Path astar_solve (const point &at,
 
 #ifdef ASTAR_DEBUG
     for (auto p : best.path) {
-        set(debug, p.x, p.y, '%');
+        set(debug, p.x, p.y, 'X');
     }
 
     dump(dmap, at, start, end);

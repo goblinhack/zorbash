@@ -153,26 +153,26 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                 }
 
                 if (will_eat(it)) {
-                    if (it->get_health() > 2 * get_health()) {
-                        //
-                        // Too powerful
-                        //
-                    } else if (it->get_health() > get_health()) {
-                        //
-                        // A bit of a challenge. Prefer easier eats.
-                        //
-                        *score += 10;
+                    auto my_health = get_health();
+                    auto it_health = get_health();
+                    auto health_diff = it_health - my_health;
+
+                    if (it->is_player()) {
+                        *score += 200 - health_diff;
 #ifdef DEBUG_AI
-                        debug = "will try to eat " + it->to_string();
+                        debug = "will try to eat player " + it->to_string();
+                        debug += " distance " + std::to_string(distance_scale);
+#endif
+                    } else if (it->is_monst()) {
+                        *score += 100 - health_diff;
+#ifdef DEBUG_AI
+                        debug = "will try to eat monst " + it->to_string();
                         debug += " distance " + std::to_string(distance_scale);
 #endif
                     } else {
-                        //
-                        // Easy eat
-                        //
-                        *score += 100;
+                        *score += 500 + it_health;
 #ifdef DEBUG_AI
-                        debug = "will eat " + it->to_string();
+                        debug = "will eat food " + it->to_string();
                         debug += " distance " + std::to_string(distance_scale);
 #endif
                         return (true);
@@ -196,26 +196,26 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                 }
 
                 if (will_eat(it)) {
-                    if (it->get_health() > 2 * get_health()) {
-                        //
-                        // Too powerful
-                        //
-                    } else if (it->get_health() > get_health()) {
-                        //
-                        // A bit of a challenge. Prefer easier eats.
-                        //
-                        *score += 10;
+                    auto my_health = get_health();
+                    auto it_health = get_health();
+                    auto health_diff = it_health - my_health;
+
+                    if (it->is_player()) {
+                        *score += 200 - health_diff;
 #ifdef DEBUG_AI
-                        debug = "will try to eat " + it->to_string();
+                        debug = "will try to eat player " + it->to_string();
+                        debug += " distance " + std::to_string(distance_scale);
+#endif
+                    } else if (it->is_monst()) {
+                        *score += 100 - health_diff;
+#ifdef DEBUG_AI
+                        debug = "will try to eat monst " + it->to_string();
                         debug += " distance " + std::to_string(distance_scale);
 #endif
                     } else {
-                        //
-                        // Easy eat
-                        //
-                        *score += 100;
+                        *score += 500 + it_health;
 #ifdef DEBUG_AI
-                        debug = "will eat " + it->to_string();
+                        debug = "will eat food " + it->to_string();
                         debug += " distance " + std::to_string(distance_scale);
 #endif
                         return (true);
@@ -434,8 +434,7 @@ fpoint Thing::ai_get_next_hop (void)
         auto orig_score = score;
         score = most_preferred - score;
         score /= (most_preferred - least_preferred);
-        score = 1.0 - score;
-        score *= DMAP_IS_PASSABLE;
+        score *= DMAP_IS_PASSABLE - 1;
 
         assert(score <= DMAP_IS_PASSABLE);
         uint8_t score8 = (int)score;
