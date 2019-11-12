@@ -201,6 +201,17 @@ void Thing::animate (void)
         }
     }
 
+    //
+    // If we could not find a tile, warn but don't use the dead tile
+    //
+    if (size && (tries >= size) && (size > 1)) {
+        con("could not find a good tile after %d tries; has %d tiles", 
+            tries, size);
+        if (tile_is_dead(tile)) {
+            tile = tile_next(tiles, tile);
+        }
+    }
+
     if (!tile) {
         return;
     }

@@ -562,9 +562,11 @@ std::string Thing::to_string (void)
     verify(this);
     verify(tpp);
 #if 1
-    return (string_sprintf("%08X(%s%s) at (%g,%g)",
+    return (string_sprintf("%08X(%s%s hp %d(%d)) at (%g,%g)",
                            id, tpp->name.c_str(),
                            is_dead ? "/dead" : "",
+                           get_health(),
+                           get_health_max(),
                            mid_at.x, mid_at.y));
 #else
     return (string_sprintf("%08X(%s%s)",

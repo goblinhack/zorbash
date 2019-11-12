@@ -41,6 +41,32 @@ def tp_init(name):
     x.set_tile(tile=name + ".6", is_dir_left=True, is_moving=True,
                delay_ms=delay)
 
+    x.set_tile(tile=name + ".1", is_dir_up=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".2", is_dir_up=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".3", is_dir_up=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".4", is_dir_up=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".5", is_dir_up=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".6", is_dir_up=True, is_moving=True,
+               delay_ms=delay)
+
+    x.set_tile(tile=name + ".1", is_dir_down=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".2", is_dir_down=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".3", is_dir_down=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".4", is_dir_down=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".5", is_dir_down=True, is_moving=True,
+               delay_ms=delay)
+    x.set_tile(tile=name + ".6", is_dir_down=True, is_moving=True,
+               delay_ms=delay)
+
     x.set_tile(tile=name + ".1", is_dir_right=True, is_moving=True,
                delay_ms=delay)
     x.set_tile(tile=name + ".2", is_dir_right=True, is_moving=True,
