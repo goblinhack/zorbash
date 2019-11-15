@@ -388,10 +388,14 @@ void Thing::ai_possible_hits_find_best (void)
             continue;
         }
 
+        log("collision candidate %s", cand.target->to_string().c_str());
+
         //
         // Skip things that aren't really hitable.
         //
         if (tp_gfx_is_weapon_carry_anim(cand.target->tp())) {
+            log("collision candidate %s skip, not hittable",
+                cand.target->to_string().c_str());
             continue;
         }
 
@@ -405,6 +409,8 @@ void Thing::ai_possible_hits_find_best (void)
             // If this target is higher prio, prefer it.
             //
             best = &cand;
+            log("collision candidate best is %s",
+                cand.target->to_string().c_str());
         } else if (cand.priority == best->priority) {
             //
             // If this target is closer, prefer it.
@@ -423,6 +429,8 @@ void Thing::ai_possible_hits_find_best (void)
 
             if (dist_cand < dist_best) {
                 best = &cand;
+                log("collision candidate closer best is %s",
+                    cand.target->to_string().c_str());
             }
         }
     }
@@ -431,18 +439,30 @@ void Thing::ai_possible_hits_find_best (void)
         int damage = 0;
 
         auto it = best->target;
+        log("collision final best is %s", it->to_string().c_str());
+
         if (will_eat(it)) {
             damage = bite_damage();
+            log("collision will eat %s damage %d", it->to_string().c_str(),
+                damage);
             health_boost(it->is_nutrition());
         }
 
         if (it->ai_ai_hit_if_possible(me, damage)) {
+            log("collision will hit %s", it->to_string().c_str());
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");
             }
         } else if (best->hitter_killed_on_hit_or_miss) {
+            //
+            // Missiles?
+            //
+            log("collision will hit %s and kill self",
+                it->to_string().c_str());
             me->dead("self killed on hitting");
         }
+    } else {
+        log("handle collisions; nothing to do");
     }
 
     thing_possible_init();
