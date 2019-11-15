@@ -13,8 +13,8 @@ static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
 static int sdl_do_screenshot;
 
-int TILES_ACROSS  = 20;
-int TILES_DOWN    = 11;
+int TILES_ACROSS;
+int TILES_DOWN;
 
 uint8_t sdl_main_loop_running;
 uint8_t sdl_shift_held;
@@ -233,8 +233,8 @@ uint8_t sdl_init (void)
 
     TILES_ACROSS = game->config.video_pix_width / TILE_WIDTH;
     TILES_DOWN = game->config.video_pix_height / TILE_HEIGHT;
-    TILES_ACROSS /= 4;
-    TILES_DOWN /= 4;
+    TILES_ACROSS /= 1;
+    TILES_DOWN /= 1;
 
     game->config.tile_gl_width =
                     game->config.video_gl_width  / (double)TILES_ACROSS;
@@ -1007,7 +1007,7 @@ void sdl_loop (void)
          */
         int timestamp_now = time_update_time_milli();
 
-        if (unlikely(timestamp_now - timestamp_then > 10)) {
+        if (unlikely(timestamp_now - timestamp_then > 20)) {
             /*
              * Give up some CPU to allow events to arrive and time for the GPU
              * to process the above.

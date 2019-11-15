@@ -87,6 +87,11 @@ void Thing::animate (void)
     uint32_t size = tiles->size();
     uint32_t tries = 0;
 
+#ifdef DEBUG_ANIM
+if (is_player()) {
+log("choose tiles");
+}
+#endif
     if (!chose_tile) {
         while (tries < size) {
             tries++;
@@ -98,6 +103,11 @@ void Thing::animate (void)
                 tile = tile_first(tiles);
             }
             verify(tile);
+#ifdef DEBUG_ANIM
+if (is_player()) {
+log("tile %s", tile_name(tile).c_str());
+}
+#endif
 
             if (!is_dead) {
                 if (tile_is_dead(tile)) {
@@ -141,10 +151,20 @@ void Thing::animate (void)
             }
 
             if (is_dead) {
+#ifdef DEBUG_ANIM
+if (is_player()) {
+log("tile %s is dead", tile_name(tile).c_str());
+}
+#endif
                 if (!tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
+#ifdef DEBUG_ANIM
+if (is_player()) {
+log("tile %s got dead", tile_name(tile).c_str());
+}
+#endif
             } else if (is_sleeping) {
                 if (!tile_is_sleeping(tile)) {
                     tile = tile_next(tiles, tile);
@@ -196,7 +216,13 @@ void Thing::animate (void)
                     continue;
                 }
             }
+#ifdef DEBUG_ANIM
+if (is_player()) {
+log("tile %s got one", tile_name(tile).c_str());
+}
+#endif
 
+            chose_tile = true;
             break;
         }
     }
@@ -204,21 +230,18 @@ void Thing::animate (void)
     //
     // If we could not find a tile, warn but don't use the dead tile
     //
-    if (size && (tries >= size) && (size > 1)) {
-        con("could not find a good tile after %d tries; has %d tiles", 
+    if (!chose_tile) {
+        die("could not find a good tile after %d tries; has %d tiles", 
             tries, size);
-        if (tile_is_dead(tile)) {
-            tile = tile_next(tiles, tile);
-        }
     }
 
     if (!tile) {
         return;
     }
 
-#if 0
+#ifdef DEBUG_ANIM
     if (is_player()) {
-        CON("set %s", tile_name(tile).c_str());
+        log("set %s", tile_name(tile).c_str());
     }
 #endif
 

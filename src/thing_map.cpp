@@ -55,21 +55,24 @@ static void thing_map_scroll_follow_player (void)
         return;
     }
 
-    int dx = world->player->mid_at.x - world->map_wanted_at.x;
+    float x1 = ((float)TILES_ACROSS / 2) - 1.0;
+    float x2 = ((float)TILES_ACROSS / 2) + 1.0;
+    float y1 = ((float)TILES_DOWN / 2) - 1.0;
+    float y2 = ((float)TILES_DOWN / 2) + 1.0;
 
-    if (dx > 10) {
+    float dx = world->player->mid_at.x - world->map_wanted_at.x + 1.0;
+    if (dx > x2) {
         world->map_wanted_at.x++;
     }
-    if (dx < 8) {
+    if (dx < x1) {
         world->map_wanted_at.x--;
     }
 
-    int dy = world->player->mid_at.y - world->map_wanted_at.y;
-
-    if (dy > 5) {
+    float dy = world->player->mid_at.y - world->map_wanted_at.y + 1.0;
+    if (dy > y2) {
         world->map_wanted_at.y++;
     }
-    if (dy < 5) {
+    if (dy < y1) {
         world->map_wanted_at.y--;
     }
 }
@@ -1072,10 +1075,12 @@ void thing_render_all (void)
     // Get the bounds
     //
     uint16_t minx = std::max(0, (uint16_t) world->map_at.x - 1);
-    uint16_t maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + TILES_ACROSS + 2);
+    uint16_t maxx = std::min(MAP_WIDTH, 
+                             (uint16_t)world->map_at.x + TILES_ACROSS + 3);
 
     uint16_t miny = std::max(0, (uint16_t) world->map_at.y - 1);
-    uint16_t maxy = std::min(MAP_HEIGHT, (uint16_t)world->map_at.y + TILES_DOWN + 2);
+    uint16_t maxy = std::min(MAP_HEIGHT, 
+                             (uint16_t)world->map_at.y + TILES_DOWN + 3);
 
     thing_map_scroll_follow_player();
     thing_map_scroll_do();

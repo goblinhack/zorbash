@@ -35,6 +35,7 @@ void Thing::collision_check_do (void)
 
     if (time_have_x_tenths_passed_since(THING_COLLISION_TEST_DELAY_TENTHS,
                                         get_timestamp_collision())) {
+        log("handle collisions");
         ai_collisions_handle();
 
         set_timestamp_collision(
@@ -49,17 +50,20 @@ void Thing::tick (void)
         return;
     }
 
+    log("tick");
     update_interpolated_position();
 
     collision_check_do();
 
     if (unlikely(is_dead)) {
+        log("tick; died");
         return;
     }
 
     hunger_clock();
 
     if (unlikely(is_dead)) {
+        log("tick; died");
         return;
     }
 

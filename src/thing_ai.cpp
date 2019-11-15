@@ -382,6 +382,9 @@ fpoint Thing::ai_get_next_hop (void)
             }
         }
     }
+    if (goals_set.empty()) {
+        CON("TODO WANDER");
+    }
 
 #ifdef DEBUG_AI
     log("initial goal map derived:");
