@@ -422,7 +422,7 @@ typedef struct Thing_ {
     int is_rrr48(void);
     int is_rrr49(void);
     int is_rrr5(void);
-    int is_rrr50(void);
+    int gfx_dead_anim(void);
     int is_rrr6(void);
     int is_rrr7(void);
     int is_rrr8(void);
