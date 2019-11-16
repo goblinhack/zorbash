@@ -622,9 +622,9 @@ int Thing::is_rrr5(void)
     return (tp_is_rrr5(tp()));
 }
 
-int Thing::is_rrr50(void)                                     
+int Thing::gfx_dead_anim(void)                                     
 { 
-    return (tp_is_rrr50(tp()));
+    return (tp_gfx_dead_anim(tp()));
 }
 
 int Thing::is_rrr6(void)                                      

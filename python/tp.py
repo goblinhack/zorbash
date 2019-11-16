@@ -290,8 +290,8 @@ class Tp:
     def set_is_rrr49(self, value):
         zx.tp_set_is_rrr49(self, value)
 
-    def set_is_rrr50(self, value):
-        zx.tp_set_is_rrr50(self, value)
+    def set_gfx_dead_anim(self, value):
+        zx.tp_set_gfx_dead_anim(self, value)
 
     def set_is_obstacle(self, value):
         zx.tp_set_is_obstacle(self, value)

@@ -231,8 +231,14 @@ log("tile %s got one", tile_name(tile).c_str());
     // If we could not find a tile, warn but don't use the dead tile
     //
     if (!chose_tile) {
-        die("could not find a good tile after %d tries; has %d tiles", 
-            tries, size);
+        if (is_dead && !gfx_dead_anim()) {
+            //
+            // ignore
+            //
+        } else {
+            die("could not find a good tile after %d tries; has %d tiles, have tile %s", 
+                tries, size, tile_name(tile).c_str());
+        }
     }
 
     if (!tile) {
