@@ -56,6 +56,8 @@ void World::fini (void)
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto t = get(all_thing_ptrs_at, x, y, z);
                 if (t) {
+                    ERR("world fini: did not detach thing %p from all_thing_ptrs_at", t);
+                    verify(t);
                     t->die("world fini: did not detach thing from all_thing_ptrs_at");
                 }
             }

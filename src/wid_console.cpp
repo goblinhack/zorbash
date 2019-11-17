@@ -22,7 +22,6 @@ static void wid_console_wid_create(void);
 Widp wid_console_container;
 Widp wid_console_vert_scroll;
 Widp wid_console_horiz_scroll;
-
 Widp wid_console_input_line;
 Widp wid_console_window;
 
@@ -36,14 +35,18 @@ void wid_console_fini (void)
         wid_console_inited = false;
     }
 
-    //
-    // Flush the logs now the console exists.
-    //
-    auto iter = wid_console_lines.begin();
+    wid_destroy(&wid_console_container);
+    wid_destroy(&wid_console_vert_scroll);
+    wid_destroy(&wid_console_horiz_scroll);
+    wid_destroy(&wid_console_input_line);
+    wid_destroy(&wid_console_window);
+    wid_gc_all();
 
-    while (iter != wid_console_lines.end()) {
-        iter = wid_console_lines.erase(iter);
-    }
+    wid_console_container.reset();
+    wid_console_vert_scroll.reset();
+    wid_console_horiz_scroll.reset();
+    wid_console_input_line.reset();
+    wid_console_window.reset();
 }
 
 uint8_t wid_console_init (void)

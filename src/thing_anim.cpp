@@ -5,6 +5,8 @@
 
 #include "my_game.h"
 
+#define DEBUG_ANIM
+
 void Thing::animate (void)
 {_
     Tilep tile;
@@ -88,7 +90,7 @@ void Thing::animate (void)
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_player()) {
+if (is_cursor()) {
 log("choose tiles");
 }
 #endif
@@ -104,7 +106,7 @@ log("choose tiles");
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_player()) {
+if (is_cursor()) {
 log("tile %s", tile_name(tile).c_str());
 }
 #endif
@@ -152,7 +154,7 @@ log("tile %s", tile_name(tile).c_str());
 
             if (is_dead) {
 #ifdef DEBUG_ANIM
-if (is_player()) {
+if (is_cursor()) {
 log("tile %s is dead", tile_name(tile).c_str());
 }
 #endif
@@ -161,7 +163,7 @@ log("tile %s is dead", tile_name(tile).c_str());
                     continue;
                 }
 #ifdef DEBUG_ANIM
-if (is_player()) {
+if (is_cursor()) {
 log("tile %s got dead", tile_name(tile).c_str());
 }
 #endif
@@ -217,7 +219,7 @@ log("tile %s got dead", tile_name(tile).c_str());
                 }
             }
 #ifdef DEBUG_ANIM
-if (is_player()) {
+if (is_cursor()) {
 log("tile %s got one", tile_name(tile).c_str());
 }
 #endif
@@ -246,7 +248,7 @@ log("tile %s got one", tile_name(tile).c_str());
     }
 
 #ifdef DEBUG_ANIM
-    if (is_player()) {
+    if (is_cursor()) {
         log("set %s", tile_name(tile).c_str());
     }
 #endif

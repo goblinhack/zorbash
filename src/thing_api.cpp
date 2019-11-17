@@ -612,9 +612,9 @@ int Thing::is_rrr48(void)
     return (tp_is_rrr48(tp()));
 }
 
-int Thing::is_rrr49(void)                                     
+int Thing::is_cursor(void)                                     
 { 
-    return (tp_is_rrr49(tp()));
+    return (tp_is_cursor(tp()));
 }
 
 int Thing::is_rrr5(void)                                      

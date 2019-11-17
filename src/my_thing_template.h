@@ -224,7 +224,7 @@ public:
     int is_rrr46 {};
     int is_rrr47 {};
     int is_rrr48 {};
-    int is_rrr49 {};
+    int is_cursor {};
     int is_rrr5 {};
     int gfx_dead_anim {};
     int is_rrr6 {};
@@ -589,9 +589,9 @@ static inline int tp_is_rrr48 (Tpp t)
     return (t->is_rrr48);
 }
 
-static inline int tp_is_rrr49 (Tpp t)
+static inline int tp_is_cursor (Tpp t)
 {
-    return (t->is_rrr49);
+    return (t->is_cursor);
 }
 
 static inline int tp_gfx_dead_anim (Tpp t)

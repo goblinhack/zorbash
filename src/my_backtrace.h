@@ -55,11 +55,9 @@ inline void backtrace_print(FILE *out,
                             int addrlen)
 {
     fprintf(out, "stack trace:\n");
-    CON("stack trace:");
 
     if (addrlen == 0) {
 	fprintf(out, "  <empty, possibly corrupt>\n");
-	CON("  <empty, possibly corrupt>\n");
 	return;
     }
 
@@ -108,7 +106,6 @@ inline void backtrace_print(FILE *out,
             int status = 0;
             if (char *demangled = abi::__cxa_demangle(cur, 0, 0, &status)) {
                 fprintf(out, "%s%u %s\n", prefix, i, demangled);
-                CON("%s%u %s", prefix, i, demangled);
                 free(demangled);
                 done = true;
                 break;
@@ -120,7 +117,6 @@ inline void backtrace_print(FILE *out,
 
         if (!done) {
             fprintf(out, "%s%s\n", prefix, p);
-            CON("%s%s", prefix, p);
         }
     }
 

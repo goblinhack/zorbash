@@ -25,6 +25,14 @@ Widp wid_sidebar;
 
 void wid_test_fini (void)
 {_
+    wid_destroy(&wid_itembar);
+    wid_destroy(&wid_item_popup);
+    wid_destroy(&wid_sidebar);
+    wid_gc_all();
+
+    wid_itembar.reset();
+    wid_item_popup.reset();
+    wid_sidebar.reset();
 }
 
 uint8_t wid_test_init (void)
