@@ -13,6 +13,11 @@ static int debug_enabled = false;
 
 std::vector<Levelp> Level::all_levels;
 
+void level_fini (void)
+{_
+    Level::all_levels.clear();
+}
+
 Levelp Level::level_new (void)
 {_
     auto r = std::make_shared< class Level >();

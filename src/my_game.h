@@ -34,6 +34,7 @@ enum {
     MAP_DEPTH_MONST,
     MAP_DEPTH_PLAYER,
     MAP_DEPTH_WEAPON,
+    MAP_DEPTH_CURSOR,
     MAP_DEPTH,
 };
 

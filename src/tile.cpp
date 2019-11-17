@@ -28,6 +28,12 @@ void tile_fini (void)
     if (tile_init_done) {
         tile_init_done = false;
     }
+
+    for (auto t : all_tiles) {
+        delete t.second;
+    }
+    all_tiles.clear();
+    all_tiles_array.clear();
 }
 
 Tile::Tile (const class Tile *tile)

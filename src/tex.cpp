@@ -48,6 +48,7 @@ public:
 };
 
 static std::map<std::string, Texp> textures;
+static std::map<std::string, Texp> black_and_white_textures;
 
 uint8_t tex_init (void)
 {_
@@ -56,11 +57,18 @@ uint8_t tex_init (void)
 
 void tex_fini (void)
 {_
+    for (auto t : textures) {
+        delete t.second;
+    }
+    for (auto t : black_and_white_textures) {
+        delete t.second;
+    }
 }
 
 void tex_free (Texp tex)
 {_
     textures.erase(tex->name);
+    black_and_white_textures.erase(tex->name);
     delete(tex);
 }
 
@@ -278,6 +286,7 @@ static Texp tex_from_surface_black_and_white (SDL_Surface *in,
                                               int mode)
 {
     Texp t = new Tex(name);
+    black_and_white_textures.insert(std::make_pair(name, t));
     uint32_t rmask, gmask, bmask, amask;
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN

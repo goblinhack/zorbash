@@ -485,8 +485,6 @@ public:
     uint32_t timestamp_created {};
     uint32_t timestamp_last_mode_change {};
 
-    Widp *destroy_ptr {};
-
     //
     // Queue of wid move requests.
     //

@@ -19,6 +19,8 @@
 #include "my_file.h"
 #include "my_charmap.h"
 #include "my_game.h"
+#include "my_room.h"
+#include "my_level.h"
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;
@@ -104,74 +106,54 @@ void quit (void)
     if (game) {
         game->fini();
     }
-{_
-    python_fini();
-}
 
-{_
+    LOG("quit:room_fini");
+    room_fini();
+
+    LOG("quit:level_fini");
+    level_fini();
+
+    LOG("quit:python_fini");
+    python_fini();
+
     LOG("quit:sdl_exit");
     sdl_exit();
-}
 
-{_
     LOG("quit:tp_fini");
     tp_fini();
-}
 
-{_
     LOG("quit:wid_console_fini");
     wid_console_fini();
-}
 
-{_
     LOG("quit:wid_minicon_fini");
     wid_minicon_fini();
-}
 
-{_
     LOG("quit:wid_test_fini");
     wid_test_fini();
-}
 
-{_
     LOG("quit:command_fini");
     command_fini();
-}
 
-{_
     LOG("quit:wid_fini");
     wid_fini();
-}
 
-{_
     LOG("quit:font_fini");
     font_fini();
-}
 
-{_
     LOG("quit:tex_fini");
     tex_fini();
-}
 
-{_
     LOG("quit:wid_tiles_fini");
     wid_tiles_fini();
-}
 
-{_
     LOG("quit:tile_fini");
     tile_fini();
-}
 
-{_
     LOG("quit:sdl_fini");
     sdl_fini();
-}
 
-{_
     LOG("quit:blit_fini");
     blit_fini();
-}
 
     if (EXEC_FULL_PATH_AND_NAME) {
         myfree(EXEC_FULL_PATH_AND_NAME);
@@ -649,6 +631,7 @@ int32_t main (int32_t argc, char *argv[])
     //
     // Create a fresh game if none was loaded
     //
+    room_init();
     game->init();
 #if 0
     game->fini();

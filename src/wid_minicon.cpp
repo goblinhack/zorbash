@@ -14,14 +14,11 @@
 #include "my_wid.h"
 #include "my_ascii.h"
 
-static int32_t wid_minicon_inited;
-static int32_t wid_minicon_exiting;
 static void wid_minicon_wid_create(void);
 
 Widp wid_minicon_container;
 Widp wid_minicon_vert_scroll;
 Widp wid_minicon_horiz_scroll;
-
 Widp wid_minicon_input_line;
 Widp wid_minicon_window;
 
@@ -29,26 +26,22 @@ static std::map< unsigned int, std::wstring > wid_minicon_lines;
 
 void wid_minicon_fini (void)
 {_
-    wid_minicon_exiting = true;
+    wid_minicon_container.reset();
+    wid_minicon_vert_scroll.reset();
+    wid_minicon_horiz_scroll.reset();
+    wid_minicon_input_line.reset();
+    wid_minicon_window.reset();
+    wid_gc_all();
 
-    if (wid_minicon_inited) {
-        wid_minicon_inited = false;
-    }
-
-    //
-    // Flush the logs now the minicon exists.
-    //
-    auto iter = wid_minicon_lines.begin();
-
-    while (iter != wid_minicon_lines.end()) {
-        iter = wid_minicon_lines.erase(iter);
-    }
+    wid_minicon_container.reset();
+    wid_minicon_vert_scroll.reset();
+    wid_minicon_horiz_scroll.reset();
+    wid_minicon_input_line.reset();
+    wid_minicon_window.reset();
 }
 
 uint8_t wid_minicon_init (void)
 {_
-    wid_minicon_inited = true;
-
     wid_minicon_wid_create();
 
     return (true);
@@ -87,10 +80,6 @@ void wid_minicon_scroll (Widp w, std::wstring str)
 static void wid_minicon_log_ (std::wstring s)
 {_
     static int32_t log_wid_minicon_buffered_lines;
-
-    if (wid_minicon_exiting) {
-        return;
-    }
 
     wid_minicon_reset_scroll();
 

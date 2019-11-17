@@ -6,7 +6,7 @@
 #include "my_charmap.h"
 #include "my_game.h"
 
-typedef std::shared_ptr< class Room > Roomp;
+typedef class Room *Roomp;
 typedef std::vector<Roomp> Rooms;
 
 class Room
@@ -124,3 +124,6 @@ public:
     void finalize(void);
     void dump(void);
 };
+
+void room_init(void);
+void room_fini(void);

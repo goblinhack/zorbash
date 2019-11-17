@@ -43,3 +43,4 @@ public:
     void finalize(void);
     void dump(void);
 };
+void level_fini(void);

@@ -153,22 +153,32 @@ uint8_t wid_init (void)
 
 void wid_fini (void)
 {_
-    if (wid_init_done) {
-        wid_init_done = false;
-        wid_exiting = true;
+    wid_init_done = false;
+    wid_exiting = true;
 
-        wid_gc_all();
+    wid_gc_all();
 
-        for (;;) {
-            if (!wid_top_level.size()) {
-                break;
-            }
-
-            auto iter = wid_top_level.begin();
-            auto child = iter->second;
-            wid_destroy_immediate(child);
+    for (;;) {
+        if (!wid_top_level.size()) {
+            break;
         }
+
+        auto iter = wid_top_level.begin();
+        auto child = iter->second;
+        wid_destroy_immediate(child);
     }
+
+    wid_top_level.clear();
+    wid_global.clear();
+    wid_top_level2.clear();
+    wid_top_level3.clear();
+    wid_top_level4.clear();
+    wid_top_level5.clear();
+    wid_focus_locked.reset();
+    wid_focus.reset();
+    wid_over.reset();
+    wid_moving.reset();
+    wid_mouse_template.reset();
 }
 
 void wid_dump (Widp w, int depth)
@@ -984,6 +994,9 @@ void wid_set_name (Widp w, std::string name)
     verify(w.get());
 
     w->name = name;
+
+    oldptr(w.get());
+    newptr(w.get(), w->name.c_str());
 }
 
 void wid_set_debug (Widp w, uint8_t val)
@@ -1949,8 +1962,6 @@ static void wid_destroy_immediate_internal (Widp w)
             iter = w->tree2_children_unsorted.begin();
         }
     }
-
-    w->parent = 0;
 }
 
 static void wid_destroy_immediate (Widp w)
@@ -1986,6 +1997,20 @@ static void wid_destroy_immediate (Widp w)
     if (w == wid_moving) {
         wid_moving = 0;
     }
+
+    w->prev.reset();
+    w->next.reset();
+    w->scrollbar_horiz.reset();
+    w->scrollbar_vert.reset();
+    w->scrollbar_owner.reset();
+    w->parent.reset();
+    w->wid_tiles.reset();
+
+    w->children_display_sorted.clear();
+    w->tree2_children_unsorted.clear();
+    w->tree3_moving_wids.clear();
+    w->tree4_wids_being_destroyed.clear();
+    w->tree5_ticking_wids.clear();
 }
 
 static void wid_destroy_delay (Widp *wp, int32_t delay)
@@ -2072,16 +2097,6 @@ void wid_destroy_in (Widp w, uint32_t ms)
     w->destroy_when = wid_time + ms;
 
     wid_tree4_wids_being_destroyed_insert(w);
-}
-
-void wid_destroy_ptr_in (Widp *w, uint32_t ms)
-{_
-    verify((*w).get());
-
-    (*w)->destroy_when = wid_time + ms;
-    (*w)->destroy_ptr = w;
-
-    wid_tree4_wids_being_destroyed_insert(*w);
 }
 
 //
@@ -5697,11 +5712,6 @@ static void wid_gc (Widp w)
 
     if (w->destroy_when && (wid_time >= w->destroy_when)) {
         verify(w.get());
-
-        if (w->destroy_ptr) {
-            *(w->destroy_ptr) = 0;
-            w->destroy_ptr = 0;
-        }
 
         wid_destroy(&w);
     }

@@ -13,9 +13,20 @@ static int debug_enabled = false;
 
 std::vector<Roomp> Room::all_rooms;
 
+void room_init (void)
+{_
+}
+
+void room_fini (void)
+{_
+    for (auto r : Room::all_rooms) {
+        delete r;
+    }
+}
+
 Roomp Room::room_new (void)
 {_
-    auto r = std::make_shared< class Room >();
+    auto r = new Room();
     Room::all_rooms.push_back(r);
     return (r);
 }

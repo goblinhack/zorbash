@@ -1697,7 +1697,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr46)
     TP_SET_DECL(is_rrr47)
     TP_SET_DECL(is_rrr48)
-    TP_SET_DECL(is_rrr49)
+    TP_SET_DECL(is_cursor)
     TP_SET_DECL(gfx_dead_anim)
     TP_SET_DECL(is_obstacle)
     TP_SET_DECL(is_attackable)
@@ -2035,6 +2035,7 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS_DECO", MAP_DEPTH_WALLS_DECO);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_PLAYER", MAP_DEPTH_PLAYER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WEAPON", MAP_DEPTH_WEAPON);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_CURSOR", MAP_DEPTH_CURSOR);
 
     PyModule_AddIntConstant(zx_mod, "KMOD_LSHIFT", KMOD_LSHIFT);
     PyModule_AddIntConstant(zx_mod, "KMOD_RSHIFT", KMOD_RSHIFT);

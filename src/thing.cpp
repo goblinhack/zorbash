@@ -57,8 +57,6 @@ Thing::~Thing_ (void)
 
 void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
-    world->put_thing_ptr((int)at.x, (int)at.y, this);
-
     timestamp_next_frame = 0;
 
     const auto tp = tp_find(name);
@@ -66,6 +64,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         DIE("thing [%s] not found", name.c_str());
     }
     tp_id = tp->id;
+    world->put_thing_ptr((int)at.x, (int)at.y, this);
 
     if (tp_is_monst(tp)) {
         new_dmap_scent();
@@ -562,12 +561,19 @@ std::string Thing::to_string (void)
     verify(this);
     verify(tpp);
 #if 1
-    return (string_sprintf("%08X(%s%s hp %d(%d)) at (%g,%g)",
-                           id, tpp->name.c_str(),
-                           is_dead ? "/dead" : "",
-                           get_health(),
-                           get_health_max(),
-                           mid_at.x, mid_at.y));
+    if (get_health_max()) {
+        return (string_sprintf("%08X(%s%s hp %d(%d)) at (%g,%g)",
+                               id, tpp->name.c_str(),
+                               is_dead ? "/dead" : "",
+                               get_health(),
+                               get_health_max(),
+                               mid_at.x, mid_at.y));
+    } else {
+        return (string_sprintf("%08X(%s%s) at (%g,%g)",
+                               id, tpp->name.c_str(),
+                               is_dead ? "/dead" : "",
+                               mid_at.x, mid_at.y));
+    }
 #else
     return (string_sprintf("%08X(%s%s)",
                            id, tpp->name.c_str(),

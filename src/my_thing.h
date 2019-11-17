@@ -127,7 +127,7 @@ typedef struct Thing_ {
     fpoint   mid_at;                     // Grid coordinates.
     fpoint   tl;                         // On screen coordinates
     uint32_t id;                         // Unique per thing.
-    uint16_t tp_id;                      // Common settings
+    int16_t tp_id                 {-1};  // Common settings
     uint16_t tile_curr;
     uint32_t timestamp_next_frame {};
     uint32_t dir:4                {}; // Direction
@@ -151,6 +151,9 @@ typedef struct Thing_ {
 
     Tpp tp(void)
     {
+        if (unlikely(tp_id == -1)) {
+            return (nullptr);
+        }
         return (tp_id_map[tp_id - 1]);
     }
 
@@ -420,7 +423,7 @@ typedef struct Thing_ {
     int is_rrr46(void);
     int is_rrr47(void);
     int is_rrr48(void);
-    int is_rrr49(void);
+    int is_cursor(void);
     int is_rrr5(void);
     int gfx_dead_anim(void);
     int is_rrr6(void);

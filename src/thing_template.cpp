@@ -35,6 +35,9 @@ void tp_fini (void)
     if (tp_init_done) {
         tp_init_done = false;
     }
+    for (auto t : tp_name_map) {
+        delete t.second;
+    }
 }
 
 Tpp tp_load (int id, std::string name)

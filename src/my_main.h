@@ -31,7 +31,7 @@
 
 #define ENABLE_ASSERT              // DIE on errors
 
-#undef DEBUG_CRASH
+#define DEBUG_CRASH
 #ifdef DEBUG_CRASH
 #define ENABLE_TRACING             // Function tracing
 #define ENABLE_PTRCHECK            // Check validity of pointers too
