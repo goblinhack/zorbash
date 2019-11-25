@@ -31,7 +31,7 @@ public:
 
 public:
     ~WidTextBox();
-    WidTextBox (point tl, point br, Widp parent=nullptr);
+    WidTextBox (point tl, point br, Widp);
 
 private:
     void log_(std::wstring str);

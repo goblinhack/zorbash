@@ -38,7 +38,7 @@ Thingp thing_new (std::string tp_name, Thingp owner)
 
 Thingp thing_new (std::string name, fpoint at, fpoint jitter)
 {_
-    auto t = new Thing;
+    auto t = new struct Thing_();
     t->init(name, at, jitter);
     return (t);
 }
@@ -57,8 +57,8 @@ Thing::~Thing_ (void)
 
 void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
+    verify(this);
     timestamp_next_frame = 0;
-
     const auto tp = tp_find(name);
     if (unlikely(!tp)) {
         DIE("thing [%s] not found", name.c_str());

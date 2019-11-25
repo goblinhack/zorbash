@@ -499,13 +499,13 @@ void ERR (const char *fmt, ...)
     err_(fmt, args);
     va_end(args);
 
-    if (wid_console_window && !wid_console_window->visible) {
+    if (wid_console_window && !(wid_console_window->visible)) {
         wid_toggle_hidden(wid_console_window);
         wid_raise(wid_console_window);
     }
 
-    wid_set_focus(0);
-    wid_focus_lock(0);
+    wid_unset_focus();
+    wid_unset_focus_lock();
 }
 
 void CROAK (const char *fmt, ...)

@@ -19,11 +19,11 @@ static int32_t wid_console_inited;
 static int32_t wid_console_exiting;
 static void wid_console_wid_create(void);
 
-Widp wid_console_container;
-Widp wid_console_vert_scroll;
-Widp wid_console_horiz_scroll;
-Widp wid_console_input_line;
-Widp wid_console_window;
+Widp wid_console_container {};
+Widp wid_console_vert_scroll {};
+Widp wid_console_horiz_scroll {};
+Widp wid_console_input_line {};
+Widp wid_console_window {};
 
 static std::map< unsigned int, std::wstring > wid_console_lines;
 
@@ -42,11 +42,11 @@ void wid_console_fini (void)
     wid_destroy(&wid_console_window);
     wid_gc_all();
 
-    wid_console_container.reset();
-    wid_console_vert_scroll.reset();
-    wid_console_horiz_scroll.reset();
-    wid_console_input_line.reset();
-    wid_console_window.reset();
+    wid_console_container = nullptr;
+    wid_console_vert_scroll = nullptr;
+    wid_console_horiz_scroll = nullptr;
+    wid_console_input_line = nullptr;
+    wid_console_window = nullptr;
 }
 
 uint8_t wid_console_init (void)
@@ -199,8 +199,8 @@ static void wid_console_wid_create (void)
         int32_t row;
         int row_bottom = CONSOLE_HEIGHT - 1;
 
-        Widp child = 0;
-        Widp prev = 0;
+        Widp child {};
+        Widp prev {};
 
         for (row = 0; row < CONSOLE_HEIGHT; row++) {
             row_bottom --;

@@ -10,7 +10,7 @@
 
 #include <memory>
 
-typedef std::shared_ptr< class Wid > Widp;
+typedef class Wid* Widp;
 
 #include <SDL.h>
 #include "my_sdl.h"
@@ -109,6 +109,7 @@ void wid_dump(Widp w, int depth);
 void wid_fake_joy_button(int32_t x, int32_t y);
 void wid_fini(void);
 void wid_focus_lock(Widp);
+void wid_unset_focus_lock(void);
 void wid_gc_all(void);
 void wid_gc_all_force(void);
 void wid_get_abs(Widp w, int32_t *x, int32_t *y);
@@ -162,6 +163,7 @@ void wid_set_debug(Widp, uint8_t);
 void wid_set_do_not_lower(Widp, uint8_t val);
 void wid_set_do_not_raise(Widp, uint8_t val);
 void wid_set_focus(Widp);
+void wid_unset_focus();
 void wid_set_focusable(Widp, uint8_t val);
 void wid_set_ignore_events(Widp, uint8_t);
 void wid_set_mode(Widp, wid_mode mode);
@@ -321,7 +323,6 @@ public:
 typedef std::map< tree_wid_key, Widp, tree_wid_key_cmp > wid_key_map_location;
 typedef std::map< WidKeyType, Widp > wid_key_map_int;
 
-Widp wid_unsorted_find(WidKeyType key);
 WidKeyType wid_unsorted_get_key(Widp w);
 
 typedef struct wid_move_ {

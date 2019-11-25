@@ -65,9 +65,9 @@ static wid_key_map_int wid_top_level5;
 // Scope the focus to children of this widget and do not change it.
 // Good for popups.
 //
-static Widp wid_focus_locked;
-static Widp wid_focus;
-static Widp wid_over;
+static Widp wid_focus_locked {};
+static Widp wid_focus {};
+static Widp wid_over {};
 
 //
 // Mouse
@@ -77,7 +77,7 @@ int wid_mouse_visible = 1;
 //
 // Widget moving
 //
-static Widp wid_moving;
+static Widp wid_moving {};
 static int32_t wid_moving_last_x;
 static int32_t wid_moving_last_y;
 
@@ -136,7 +136,7 @@ uint32_t history_walk;
 //
 // A tile over the mouse pointer
 //
-Widp wid_mouse_template;
+Widp wid_mouse_template {};
 std::array<std::array<Widp, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> wid_on_screen_at {};
 
 static uint8_t wid_init_done;
@@ -156,6 +156,8 @@ void wid_fini (void)
     wid_init_done = false;
     wid_exiting = true;
 
+    wid_on_screen_at = {};
+
     wid_gc_all();
 
     for (;;) {
@@ -174,11 +176,11 @@ void wid_fini (void)
     wid_top_level3.clear();
     wid_top_level4.clear();
     wid_top_level5.clear();
-    wid_focus_locked.reset();
-    wid_focus.reset();
-    wid_over.reset();
-    wid_moving.reset();
-    wid_mouse_template.reset();
+    wid_focus_locked = nullptr;
+    wid_focus = nullptr;
+    wid_over = nullptr;
+    wid_moving = nullptr;
+    wid_mouse_template = nullptr;
 }
 
 void wid_dump (Widp w, int depth)
@@ -256,9 +258,7 @@ void wid_get_tl_x_tl_y_br_x_br_y (Widp w,
 //
 void wid_set_pos (Widp w, point tl, point br)
 {_
-    verify(w.get());
-
-    Widp p;
+    Widp p {};
 
     wid_tree_detach(w);
 
@@ -284,9 +284,7 @@ void wid_set_pos (Widp w, point tl, point br)
 //
 void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
 {_
-    verify(w.get());
-
-    Widp p;
+    Widp p {};
 
     wid_tree_detach(w);
 
@@ -341,8 +339,6 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
 
 void wid_set_context (Widp w, void *context)
 {_
-    verify(w.get());
-
     w->context = context;
 }
 
@@ -353,10 +349,16 @@ void *wid_get_context (Widp w)
 
 void wid_set_prev (Widp w, Widp prev)
 {_
-    verify(w.get());
+    verify(w);
+    if (prev) {
+        verify(prev);
+    }
+    if (!w) {
+        DIE("no wid");
+    }
 
     if (w == prev) {
-        ERR("wid list loop");
+        DIE("wid list loop");
     }
 
     w->prev = prev;
@@ -368,9 +370,12 @@ void wid_set_prev (Widp w, Widp prev)
 
 Widp wid_get_prev (Widp w)
 {_
+    if (!w) {
+        DIE("no wid");
+    }
 
     if (w->prev == w) {
-        ERR("wid list get prev loop");
+        DIE("wid list get prev loop");
     }
 
     return (w->prev);
@@ -378,6 +383,10 @@ Widp wid_get_prev (Widp w)
 
 Widp wid_get_next (Widp w)
 {_
+    if (!w) {
+        DIE("no wid");
+    }
+
     if (w->next == w) {
         ERR("wid list get next loop");
     }
@@ -387,10 +396,9 @@ Widp wid_get_next (Widp w)
 
 Widp wid_get_head (Widp w)
 {_
-    Widp prev;
+    Widp prev {};
 
     while (w) {
-
         prev = wid_get_prev(w);
         if (!prev) {
             break;
@@ -404,10 +412,9 @@ Widp wid_get_head (Widp w)
 
 Widp wid_get_tail (Widp w)
 {_
-    Widp next;
+    Widp next {};
 
     while (w) {
-
         next = wid_get_next(w);
         if (!next) {
             break;
@@ -422,7 +429,7 @@ Widp wid_get_tail (Widp w)
 Widp wid_get_top_parent (Widp w)
 {_
     if (!w) {
-        return (0);
+        return (w);
     }
 
     if (!w->parent) {
@@ -438,34 +445,22 @@ Widp wid_get_top_parent (Widp w)
 
 Widp wid_get_parent (Widp w)
 {_
-    if (!w) {
-        return (0);
-    }
-
     return (w->parent);
 }
 
 Widp wid_get_scrollbar_vert (Widp w)
 {_
-    if (!w) {
-        return (0);
-    }
-
     return (w->scrollbar_vert);
 }
 
 Widp wid_get_scrollbar_horiz (Widp w)
 {_
-    if (!w) {
-        return (0);
-    }
-
     return (w->scrollbar_horiz);
 }
 
 static void wid_mouse_motion_end (void)
 {_
-    wid_moving = 0;
+    wid_moving = nullptr;
 }
 
 void wid_set_ignore_events (Widp w, uint8_t val)
@@ -483,13 +478,11 @@ static void wid_set_scissors (int tlx, int tly, int brx, int bry)
 //
 uint8_t wid_ignore_events (Widp w)
 {_
-    Widp top;
+    Widp top {};
 
     if (!w) {
         return (true);
     }
-
-    verify(w.get());
 
     if (w->ignore_events || w->moving || w->hidden || w->being_destroyed) {
         return (true);
@@ -508,7 +501,7 @@ uint8_t wid_ignore_events (Widp w)
 
 uint8_t wid_ignore_for_focus (Widp w)
 {_
-    Widp top;
+    Widp top {};
 
     if (w->hidden ||
         w->being_destroyed) {
@@ -532,7 +525,7 @@ uint8_t wid_ignore_for_focus (Widp w)
 //
 uint8_t wid_ignore_being_destroyed (Widp w)
 {_
-    Widp top;
+    Widp top {};
 
     if (w->being_destroyed) {
         return (true);
@@ -564,18 +557,18 @@ static void wid_mouse_motion_begin (Widp w, int32_t x, int32_t y)
 
 static void wid_mfocus_e (void)
 {_
-    Widp w;
+    Widp w {};
 
     w = wid_focus;
-    wid_focus = 0;
-    wid_focus_locked = 0;
+    wid_focus = nullptr;
+    wid_focus_locked = nullptr;
 
     if (!w) {
         return;
     }
 
-    if (w.get()->on_m_focus_e) {
-        w.get()->on_m_focus_e(w);
+    if (w->on_m_focus_e) {
+        w->on_m_focus_e(w);
     }
 }
 
@@ -586,11 +579,11 @@ Widp wid_get_current_focus (void)
 
 static void wid_mfocus_b (Widp w)
 {_
-    Widp top;
+    Widp top {};
 
     if (!w) {
         wid_mfocus_e();
-        wid_focus = 0;
+        wid_focus = nullptr;
 
         wid_find_top_focus();
         return;
@@ -611,21 +604,21 @@ static void wid_mfocus_b (Widp w)
     wid_focus = w;
     top->focus_last = w->focus_order;
 
-    if (w.get()->on_m_focus_b) {
-        w.get()->on_m_focus_b(w);
+    if (w->on_m_focus_b) {
+        w->on_m_focus_b(w);
     }
 }
 
 static void wid_m_over_e (void)
 {_
-    Widp w;
+    Widp w {};
 
     if (!wid_mouse_visible) {
         return;
     }
 
     w = wid_over;
-    wid_over = 0;
+    wid_over = nullptr;
 
     if (!w) {
         return;
@@ -640,8 +633,8 @@ static void wid_m_over_e (void)
         return;
     }
 
-    if (w.get()->on_m_over_e) {
-        w.get()->on_m_over_e(w);
+    if (w->on_m_over_e) {
+        w->on_m_over_e(w);
     }
 }
 
@@ -657,9 +650,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
         return (true);
     }
 
-    verify(w.get());
-
-    if (!(w.get()->on_m_over_b) && !(w.get()->on_m_down)) {
+    if (!(w->on_m_over_b) && !(w->on_m_down)) {
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] ||
             get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT]) {
             //
@@ -685,8 +676,8 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
 
     wid_set_mode(w, WID_MODE_OVER);
 
-    if (w.get()->on_m_over_b) {
-        (w.get()->on_m_over_b)(w, relx, rely, wheelx, wheely);
+    if (w->on_m_over_b) {
+        (w->on_m_over_b)(w, relx, rely, wheelx, wheely);
     }
 
     return (true);
@@ -918,8 +909,6 @@ static char wid_event_to_char (const struct SDL_KEYSYM *evt)
 //
 void wid_set_mode (Widp w, wid_mode mode)
 {_
-    verify(w.get());
-
     w->timestamp_last_mode_change = wid_time;
     w->mode = mode;
 }
@@ -943,8 +932,6 @@ wid_mode wid_get_mode (Widp w)
 
 std::string to_string (Widp w)
 {_
-    verify(w.get());
-
     return (w->to_string);
 }
 
@@ -957,22 +944,16 @@ const char * to_cstring (Widp w)
 
 std::string wid_name (Widp w)
 {_
-    verify(w.get());
-
     return (w->name);
 }
 
 std::wstring wid_get_text (Widp w)
 {_
-    verify(w.get());
-
     return (w->text);
 }
 
 std::string wid_get_name (Widp w)
 {_
-    verify(w.get());
-
     return (w->name);
 }
 
@@ -991,12 +972,9 @@ static std::wstring wid_get_text_with_cursor (Widp w)
 
 void wid_set_name (Widp w, std::string name)
 {_
-    verify(w.get());
-
+    oldptr(w);
     w->name = name;
-
-    oldptr(w.get());
-    newptr(w.get(), w->name.c_str());
+    newptr(w, name.c_str());
 }
 
 void wid_set_debug (Widp w, uint8_t val)
@@ -1006,8 +984,6 @@ void wid_set_debug (Widp w, uint8_t val)
 
 void wid_set_text (Widp w, std::wstring text)
 {_
-    verify(w.get());
-
     if (text == L"") {
         w->text = L"";
     } else {
@@ -1031,8 +1007,6 @@ uint8_t wid_get_received_input (Widp w)
 
 void wid_set_received_input (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->received_input = val;
 }
 
@@ -1043,8 +1017,6 @@ uint32_t wid_get_cursor (Widp w)
 
 void wid_set_cursor (Widp w, uint32_t val)
 {_
-    verify(w.get());
-
     w->cursor = val;
 }
 
@@ -1065,8 +1037,6 @@ uint8_t wid_get_focusable (Widp w)
 
 void wid_set_focusable (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->focus_order = val;
 }
 
@@ -1077,8 +1047,6 @@ uint8_t wid_get_show_cursor (Widp w)
 
 void wid_set_show_cursor (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->show_cursor = val;
 }
 
@@ -1089,8 +1057,6 @@ uint8_t wid_get_do_not_raise (Widp w)
 
 void wid_set_do_not_raise (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->do_not_raise = val;
 }
 
@@ -1101,8 +1067,6 @@ uint8_t wid_get_do_not_lower (Widp w)
 
 void wid_set_do_not_lower (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->do_not_lower = val;
 }
 
@@ -1117,8 +1081,6 @@ uint8_t wid_get_movable (Widp w)
 
 void wid_set_movable (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->movable = val;
     w->movable_set = true;
 
@@ -1137,8 +1099,6 @@ uint8_t wid_get_movable_horiz (Widp w)
 
 void wid_set_movable_horiz (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->movable_horiz = val;
     w->movable_horiz_set = true;
 }
@@ -1154,8 +1114,6 @@ uint8_t wid_get_movable_vert (Widp w)
 
 void wid_set_movable_vert (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->movable_vert = val;
     w->movable_vert_set = true;
 }
@@ -1171,8 +1129,6 @@ uint8_t wid_get_movable_bounded (Widp w)
 
 void wid_set_movable_bounded (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->movable_bounded = val;
     w->movable_bounded_set = true;
 }
@@ -1188,8 +1144,6 @@ uint8_t wid_get_movable_no_user_scroll (Widp w)
 
 void wid_set_movable_no_user_scroll (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->movable_no_user_scroll = val;
     w->movable_no_user_scroll_set = true;
 }
@@ -1201,8 +1155,6 @@ uint8_t wid_get_text_lhs (Widp w)
 
 void wid_set_text_lhs (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->text_lhs = val;
 }
 
@@ -1213,8 +1165,6 @@ uint8_t wid_get_text_rhs (Widp w)
 
 void wid_set_text_rhs (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->text_rhs = true;
 }
 
@@ -1225,8 +1175,6 @@ uint8_t wid_get_text_centerx (Widp w)
 
 void wid_set_text_centerx (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->text_centerx = val;
 }
 
@@ -1237,8 +1185,6 @@ uint8_t wid_get_text_top (Widp w)
 
 void wid_set_text_top (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->text_top = val;
 }
 
@@ -1249,8 +1195,6 @@ uint8_t wid_get_text_bot (Widp w)
 
 void wid_set_text_bot (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->text_bot = val;
 }
 
@@ -1261,8 +1205,6 @@ uint8_t wid_get_text_centery (Widp w)
 
 void wid_set_text_centery (Widp w, uint8_t val)
 {_
-    verify(w.get());
-
     w->text_centery = val;
 }
 
@@ -1280,8 +1222,6 @@ uint8_t wid_get_text_pos (Widp w, int32_t *x, int32_t *y)
 
 void wid_set_text_pos (Widp w, uint8_t val, int32_t x, int32_t y)
 {_
-    verify(w.get());
-
     w->text_pos.x = x;
     w->text_pos.y = y;
     w->text_pos_set = val;
@@ -1299,22 +1239,16 @@ static Tilep wid_get_fg_tile (Widp w)
 
 void wid_set_bg_tile (Widp w, Tilep tile)
 {
-    verify(w.get());
-
     w->bg_tile = tile;
 }
 
 void wid_set_fg_tile (Widp w, Tilep tile)
 {
-    verify(w.get());
-
     w->fg_tile = tile;
 }
 
 void wid_set_bg_tilename (Widp w, std::string name)
 {_
-    verify(w.get());
-
     Tilep tile = tile_find(name);
     if (!tile) {
         ERR("failed to find wid tile %s", name.c_str());
@@ -1329,8 +1263,6 @@ void wid_set_bg_tilename (Widp w, std::string name)
 
 void wid_set_fg_tilename (Widp w, std::string name)
 {_
-    verify(w.get());
-
     Tilep tile = tile_find(name);
     if (!tile) {
         ERR("failed to find wid tile %s", name.c_str());
@@ -1377,8 +1309,6 @@ color wid_get_color (Widp w, wid_color which)
 //
 void wid_set_color (Widp w, wid_color col, color val)
 {_
-    verify(w.get());
-
     w->cfg[wid_get_mode(w)].colors[col] = val;
     w->cfg[wid_get_mode(w)].color_set[col] = true;
 }
@@ -1403,6 +1333,11 @@ void wid_set_focus (Widp w)
     wid_mfocus_b(w);
 }
 
+void wid_unset_focus (void)
+{_
+    wid_mfocus_e();
+}
+
 void wid_set_shape_square (Widp w)
 {
     w->square = true;
@@ -1420,106 +1355,85 @@ void wid_set_active (Widp w)
 
 void wid_focus_lock (Widp w)
 {_
-    if (w.get()) {
+    if (w) {
         WID_DBG(w, "focus locked");
     }
 
     wid_focus_locked = w;
 }
 
+void wid_unset_focus_lock (void)
+{_
+    wid_focus_locked = nullptr;
+}
+
 void wid_set_on_key_down (Widp w, on_key_down_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_key_down = fn;
+    w->on_key_down = fn;
 }
 
 void wid_set_on_key_up (Widp w, on_key_up_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_key_up = fn;
+    w->on_key_up = fn;
 }
 
 void wid_set_on_joy_button (Widp w, on_joy_button_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_joy_button = fn;
+    w->on_joy_button = fn;
 }
 
 void wid_set_on_m_down (Widp w, on_m_down_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_m_down = fn;
+    w->on_m_down = fn;
 }
 
 void wid_set_on_m_up (Widp w, on_m_up_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_m_up = fn;
+    w->on_m_up = fn;
 }
 
 void wid_set_on_m_motion (Widp w, on_m_motion_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_m_motion = fn;
+    w->on_m_motion = fn;
 }
 
 void wid_set_on_m_focus_b (Widp w, on_m_focus_b_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_m_focus_b = fn;
+    w->on_m_focus_b = fn;
 }
 
 void wid_set_on_m_focus_e (Widp w, on_m_focus_e_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_m_focus_e = fn;
+    w->on_m_focus_e = fn;
 }
 
 void wid_set_on_m_over_b (Widp w, on_m_over_b_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_m_over_b = fn;
+    w->on_m_over_b = fn;
 }
 
 void wid_set_on_m_over_e (Widp w, on_m_over_e_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_m_over_e = fn;
+    w->on_m_over_e = fn;
 }
 
 void wid_set_on_destroy (Widp w, on_destroy_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_destroy = fn;
+    w->on_destroy = fn;
 }
 
 void wid_set_on_destroy_b (Widp w, on_destroy_t fn)
 {_
-    verify(w.get());
-
-    w.get()->on_destroy_b = fn;
+    w->on_destroy_b = fn;
 }
 
 void wid_set_on_tick (Widp w, on_tick_t fn)
 {_
-    verify(w.get());
-
     if (!fn) {
         ERR("no ticker function set");
     }
 
-    w.get()->on_tick = fn;
+    w->on_tick = fn;
 
     wid_tree5_ticking_wids_insert(w);
 }
@@ -1529,8 +1443,6 @@ void wid_set_on_tick (Widp w, on_tick_t fn)
 //
 static void wid_tree_detach (Widp w)
 {_
-    verify(w.get());
-
     wid_tree_remove(w);
 }
 
@@ -1539,8 +1451,6 @@ static void wid_tree_detach (Widp w)
 //
 static void wid_tree_attach (Widp w)
 {_
-    verify(w.get());
-
     wid_key_map_location *root;
 
     if (w->in_tree_root) {
@@ -1553,6 +1463,10 @@ static void wid_tree_attach (Widp w)
         root = &w->parent->children_display_sorted;
     }
 
+    if (!root) {
+        DIE("no root");
+    }
+
     auto result = root->insert(std::make_pair(w->key, w));
     if (result.second == false) {
         DIE("wid insert name [%s] failed", wid_get_name(w).c_str());
@@ -1563,8 +1477,6 @@ static void wid_tree_attach (Widp w)
 
 static void wid_tree_insert (Widp w)
 {_
-    verify(w.get());
-
     static uint64_t key;
 
     if (w->in_tree_root) {
@@ -1584,6 +1496,10 @@ static void wid_tree_insert (Widp w)
         root = &w->parent->children_display_sorted;
     }
 
+    if (!root) {
+        DIE("no root");
+    }
+
     auto result = root->insert(std::make_pair(w->key, w));
     if (result.second == false) {
         DIE("wid insert name [%s] failed", wid_get_name(w).c_str());
@@ -1594,8 +1510,6 @@ static void wid_tree_insert (Widp w)
 
 static void wid_tree_global_unsorted_insert (Widp w)
 {_
-    verify(w.get());
-
     static WidKeyType key;
 
     if (w->in_tree_global_unsorted_root) {
@@ -1617,8 +1531,6 @@ static void wid_tree_global_unsorted_insert (Widp w)
 
 static void wid_tree2_unsorted_insert (Widp w)
 {_
-    verify(w.get());
-
     static uint64_t key;
 
     if (w->in_tree2_unsorted_root) {
@@ -1644,8 +1556,6 @@ static void wid_tree2_unsorted_insert (Widp w)
 
 static void wid_tree3_moving_wids_insert (Widp w)
 {_
-    verify(w.get());
-
     if (w->in_tree3_moving_wids) {
         return;
     }
@@ -1668,8 +1578,6 @@ static void wid_tree3_moving_wids_insert (Widp w)
 
 static void wid_tree4_wids_being_destroyed_insert (Widp w)
 {_
-    verify(w.get());
-
     if (w->in_tree4_wids_being_destroyed) {
         return;
     }
@@ -1695,8 +1603,6 @@ static void wid_tree4_wids_being_destroyed_insert (Widp w)
 
 static void wid_tree5_ticking_wids_insert (Widp w)
 {_
-    verify(w.get());
-
     if (w->in_tree5_ticking_wids) {
         return;
     }
@@ -1722,8 +1628,6 @@ static void wid_tree5_ticking_wids_insert (Widp w)
 
 static void wid_tree_remove (Widp w)
 {_
-    verify(w.get());
-
     wid_key_map_location *root;
 
     root = w->in_tree_root;
@@ -1743,8 +1647,6 @@ static void wid_tree_remove (Widp w)
 
 static void wid_tree2_unsorted_remove (Widp w)
 {_
-    verify(w.get());
-
     auto root = w->in_tree2_unsorted_root;
     if (!root) {
         return;
@@ -1761,8 +1663,6 @@ static void wid_tree2_unsorted_remove (Widp w)
 
 static void wid_tree_global_unsorted_remove (Widp w)
 {_
-    verify(w.get());
-
     auto root = w->in_tree_global_unsorted_root;
     if (!root) {
         return;
@@ -1777,31 +1677,8 @@ static void wid_tree_global_unsorted_remove (Widp w)
     w->in_tree_global_unsorted_root = nullptr;
 }
 
-Widp wid_unsorted_find (WidKeyType key)
-{_
-    auto root = &wid_global;
-
-    if (!key.val) {
-        return (nullptr);
-    }
-
-    auto result = root->find(key.val);
-    if (result == root->end()) {
-        ERR("wid unsorted find did not find wid, %" PRIu64, key.val);
-        return (0);
-    }
-
-    auto w = result->second;
-
-    verify(w.get());
-
-    return (w);
-}
-
 WidKeyType wid_unsorted_get_key (Widp w)
 {_
-    verify(w.get());
-
     auto root = &wid_global;
 
     auto result = root->find(w->tree_global_key);
@@ -1811,15 +1688,11 @@ WidKeyType wid_unsorted_get_key (Widp w)
 
     w = result->second;
 
-    verify(w.get());
-
     return (w->tree_global_key);
 }
 
 static void wid_tree3_moving_wids_remove (Widp w)
 {_
-    verify(w.get());
-
     auto root = w->in_tree3_moving_wids;
     if (!root) {
         return;
@@ -1836,8 +1709,6 @@ static void wid_tree3_moving_wids_remove (Widp w)
 
 static void wid_tree4_wids_being_destroyed_remove (Widp w)
 {_
-    verify(w.get());
-
     auto root = w->in_tree4_wids_being_destroyed;
     if (!root) {
         return;
@@ -1854,8 +1725,6 @@ static void wid_tree4_wids_being_destroyed_remove (Widp w)
 
 static void wid_tree5_ticking_wids_remove (Widp w)
 {_
-    verify(w.get());
-
     auto root = w->in_tree5_ticking_wids;
     if (!root) {
         return;
@@ -1876,7 +1745,7 @@ static void wid_tree5_ticking_wids_remove (Widp w)
 //
 static Widp wid_new (Widp parent)
 {_
-    auto w = std::make_shared< class Wid >();
+    auto w = new Wid ();
 
     w->parent = parent;
     w->timestamp_created = wid_time;
@@ -1897,16 +1766,36 @@ static Widp wid_new (Widp parent)
     return (w);
 }
 
+static Widp wid_new (void)
+{_
+    auto w = new Wid ();
+
+    w->timestamp_created = wid_time;
+
+    WID_DBG(w, "new");
+
+    wid_tree_insert(w);
+    wid_tree2_unsorted_insert(w);
+    wid_tree_global_unsorted_insert(w);
+
+    //
+    // Give some lame 3d to the wid
+    //
+    wid_set_mode(w, WID_MODE_NORMAL);
+
+    w->visible = true;
+
+    return (w);
+}
+
 static void wid_destroy_immediate_internal (Widp w)
 {_
-    verify(w.get());
-
     wid_tree3_moving_wids_remove(w);
     wid_tree4_wids_being_destroyed_remove(w);
     wid_tree5_ticking_wids_remove(w);
 
-    if (w.get()->on_destroy) {
-        (w.get()->on_destroy)(w);
+    if (w->on_destroy) {
+        (w->on_destroy)(w);
     }
 
     if (wid_focus == w) {
@@ -1914,7 +1803,7 @@ static void wid_destroy_immediate_internal (Widp w)
     }
 
     if (wid_focus_locked == w) {
-        wid_focus_locked = 0;
+        wid_focus_locked = nullptr;
     }
 
     if (wid_over == w) {
@@ -1926,20 +1815,20 @@ static void wid_destroy_immediate_internal (Widp w)
     }
 
     if (w->scrollbar_vert) {
-        w->scrollbar_vert->scrollbar_owner = 0;
+        w->scrollbar_vert->scrollbar_owner = nullptr;
     }
 
     if (w->scrollbar_horiz) {
-        w->scrollbar_horiz->scrollbar_owner = 0;
+        w->scrollbar_horiz->scrollbar_owner = nullptr;
     }
 
     if (w->scrollbar_owner) {
         if (w->scrollbar_owner->scrollbar_vert == w) {
-            w->scrollbar_owner->scrollbar_vert = 0;
+            w->scrollbar_owner->scrollbar_vert = nullptr;
         }
 
         if (w->scrollbar_owner->scrollbar_horiz == w) {
-            w->scrollbar_owner->scrollbar_horiz = 0;
+            w->scrollbar_owner->scrollbar_horiz = nullptr;
         }
     }
 
@@ -1966,8 +1855,6 @@ static void wid_destroy_immediate_internal (Widp w)
 
 static void wid_destroy_immediate (Widp w)
 {_
-    verify(w.get());
-
     //
     // If removing a top level widget, choose a new focus.
     //
@@ -1983,28 +1870,28 @@ static void wid_destroy_immediate (Widp w)
     wid_destroy_immediate_internal(w);
 
     if (w == wid_focus_locked) {
-        wid_focus_locked = 0;
+        wid_focus_locked = nullptr;
     }
 
     if (w == wid_focus) {
-        wid_focus = 0;
+        wid_focus = nullptr;
     }
 
     if (w == wid_over) {
-        wid_over = 0;
+        wid_over = nullptr;
     }
 
     if (w == wid_moving) {
-        wid_moving = 0;
+        wid_moving = nullptr;
     }
 
-    w->prev.reset();
-    w->next.reset();
-    w->scrollbar_horiz.reset();
-    w->scrollbar_vert.reset();
-    w->scrollbar_owner.reset();
-    w->parent.reset();
-    w->wid_tiles.reset();
+    w->prev = nullptr;
+    w->next = nullptr;
+    w->scrollbar_horiz = nullptr;
+    w->scrollbar_vert = nullptr;
+    w->scrollbar_owner = nullptr;
+    w->parent = nullptr;
+    w->wid_tiles = nullptr;
 
     w->children_display_sorted.clear();
     w->tree2_children_unsorted.clear();
@@ -2015,8 +1902,6 @@ static void wid_destroy_immediate (Widp w)
 
 static void wid_destroy_delay (Widp *wp, int32_t delay)
 {_
-    Widp w;
-    Widp child;
     int32_t tlx;
     int32_t tly;
     int32_t brx;
@@ -2026,17 +1911,15 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         return;
     }
 
-    w = *wp;
+    auto w = *wp;
 
     if (!w) {
         return;
     }
 
-    verify(w.get());
-
     WID_DBG(w, "destroy");
 
-    *wp = 0;
+    (*wp) = nullptr;
 
     if (w->being_destroyed) {
         if (delay) {
@@ -2061,7 +1944,6 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
 
     for (auto iter : w->tree2_children_unsorted) {
         auto child = iter.second;
-        verify(child.get());
         wid_destroy(&child);
     }
 
@@ -2069,8 +1951,8 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
     }
 
-    if (w.get()->on_destroy_b) {
-        (w.get()->on_destroy_b)(w);
+    if (w->on_destroy_b) {
+        (w->on_destroy_b)(w);
     }
 
     //
@@ -2092,8 +1974,6 @@ void wid_destroy_nodelay (Widp *wp)
 
 void wid_destroy_in (Widp w, uint32_t ms)
 {_
-    verify(w.get());
-
     w->destroy_when = wid_time + ms;
 
     wid_tree4_wids_being_destroyed_insert(w);
@@ -2104,9 +1984,9 @@ void wid_destroy_in (Widp w, uint32_t ms)
 //
 Widp wid_new_window (std::string name)
 {_
-    Widp w = wid_new(0);
+    Widp w = wid_new();
 
-    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
 
     WID_DBG(w, "%s", __FUNCTION__);
 
@@ -2130,10 +2010,10 @@ Widp wid_new_container (Widp parent, std::string name)
 
 #ifdef WID_FULL_LOGNAME
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
-                                  name.c_str(), w.get(),
-                                  parent->to_string.c_str(), parent.get());
+                                  name.c_str(), w,
+                                  parent->to_string.c_str(), parent);
 #else
-    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
 #endif
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -2157,9 +2037,9 @@ Widp wid_new_container (Widp parent, std::string name)
 //
 Widp wid_new_square_window (std::string name)
 {_
-    Widp w = wid_new(0);
+    Widp w = wid_new();
 
-    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
 
     WID_DBG(w, "%s", __FUNCTION__);
 
@@ -2184,10 +2064,10 @@ Widp wid_new_square_button (Widp parent, std::string name)
 
 #ifdef WID_FULL_LOGNAME
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
-                                  name.c_str(), w.get(),
-                                  parent->to_string.c_str(), parent.get());
+                                  name.c_str(), w,
+                                  parent->to_string.c_str(), parent);
 #else
-    w->to_string = string_sprintf("%s[%p]", name.c_str(), w.get());
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
 #endif
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -2218,8 +2098,8 @@ static Widp wid_new_scroll_trough (Widp parent)
     Widp w = wid_new(parent);
 
     w->to_string = string_sprintf("[%p] scroll trough (parent %s[%p])",
-                                  w.get(),
-                                  parent->to_string.c_str(), parent.get());
+                                  w,
+                                  parent->to_string.c_str(), parent);
 
     WID_DBG(w, "%s", __FUNCTION__);
 
@@ -2256,11 +2136,11 @@ static Widp wid_new_scroll_bar (Widp parent,
     if (vertical) {
         w->to_string = string_sprintf("%s, %s[%p]", 
                                       name.c_str(), 
-                                      "vert scroll bar", w.get());
+                                      "vert scroll bar", w);
     } else {
         w->to_string = string_sprintf("%s, %s[%p]", 
                                       name.c_str(), 
-                                      "horiz scroll bar", w.get());
+                                      "horiz scroll bar", w);
     }
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -2400,8 +2280,6 @@ Widp wid_new_horiz_scroll_bar (Widp parent, std::string name,
 
 static void wid_raise_internal (Widp w)
 {_
-    verify(w.get());
-
     if (w->do_not_raise) {
         return;
     }
@@ -2424,18 +2302,12 @@ static void wid_raise_override (Widp parent)
     //
     // If some widget wants to be on top, let it.
     //
-    Widp w;
-
-    verify(parent.get());
-
     if (parent->do_not_lower) {
         wid_raise_internal(parent);
     }
 
     for (auto iter : parent->children_display_sorted) {
         auto w = iter.second;
-
-        verify(w.get());
 
         if (w->do_not_lower) {
             wid_raise_internal(w);
@@ -2448,11 +2320,9 @@ static void wid_raise_override (Widp parent)
 
 void wid_raise (Widp w_in)
 {_
-    if (!w_in.get()) {
+    if (!w_in) {
         return;
     }
-
-    verify(w_in.get());
 
     wid_raise_internal(w_in);
 
@@ -2469,15 +2339,13 @@ void wid_raise (Widp w_in)
         wid_raise_override(w);
     }
 
-    verify(w_in.get());
-
     wid_find_top_focus();
 
     //
     // If we were hovering over a window and it was replaced, we need to fake
     // a mouse movement so we know we are still over it.
     //
-    if (!w_in->parent.get()) {
+    if (!w_in->parent) {
         wid_update_mouse();
     }
 }
@@ -2550,12 +2418,8 @@ static void wid_find_first_child_focus (Widp w, Widp *best)
         }
     }
 
-    Widp child;
-
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
-
-        verify(child.get());
 
         wid_find_first_child_focus(child, best);
     }
@@ -2563,18 +2427,16 @@ static void wid_find_first_child_focus (Widp w, Widp *best)
 
 static void wid_find_first_focus (void)
 {_
-    Widp best;
+    Widp best {};
 
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
-
         if (wid_ignore_for_focus(w)) {
             continue;
         }
 
-        best = 0;
+        best = nullptr;
         wid_find_first_child_focus(w, &best);
         if (best) {
             wid_set_focus(best);
@@ -2593,12 +2455,8 @@ static void wid_find_specific_child_focus (Widp w, Widp *best,
         }
     }
 
-    Widp child;
-
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
-
-        verify(child.get());
 
         wid_find_specific_child_focus(child, best, focus_order);
     }
@@ -2606,9 +2464,7 @@ static void wid_find_specific_child_focus (Widp w, Widp *best,
 
 static Widp wid_find_top_wid_focus (Widp w)
 {_
-    Widp best;
-
-    best = 0;
+    Widp best {};
 
     if (wid_ignore_for_focus(w)) {
         return (best);
@@ -2634,18 +2490,16 @@ static Widp wid_find_top_wid_focus (Widp w)
 
 static void wid_find_top_focus (void)
 {_
-    Widp best;
+    Widp best {};
 
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
-
         if (wid_ignore_for_focus(w)) {
             continue;
         }
 
-        best = 0;
+        best = nullptr;
 
         //
         // First time we've looked at this widget, hunt for the first focus.
@@ -2678,8 +2532,6 @@ static void wid_find_last_child_focus (Widp w, Widp *best)
         }
     }
 
-    Widp child;
-
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
 
@@ -2689,9 +2541,7 @@ static void wid_find_last_child_focus (Widp w, Widp *best)
 
 Widp wid_get_focus (Widp w)
 {_
-    Widp best;
-
-    best = 0;
+    Widp best {};
 
     if (wid_focus) {
         if (wid_get_top_parent(wid_focus) == wid_get_top_parent(w)) {
@@ -2713,18 +2563,16 @@ Widp wid_get_focus (Widp w)
 
 static void wid_find_last_focus (void)
 {_
-    Widp best;
+    Widp best {};
 
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
-
         if (wid_ignore_for_focus(w)) {
             continue;
         }
 
-        best = 0;
+        best = nullptr;
         wid_find_last_child_focus(w, &best);
         if (best) {
             wid_set_focus(best);
@@ -2746,8 +2594,6 @@ static void wid_find_next_child_focus (Widp w, Widp *best)
         }
     }
 
-    Widp child;
-
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
 
@@ -2757,18 +2603,16 @@ static void wid_find_next_child_focus (Widp w, Widp *best)
 
 static void wid_find_next_focus (void)
 {_
-    Widp best;
+    Widp best {};
 
     if (!wid_focus) {
         wid_find_first_focus();
         return;
     }
 
-    best = 0;
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_ignore_for_focus(w)) {
             continue;
@@ -2802,12 +2646,8 @@ static void wid_find_prev_child_focus (Widp w, Widp *best)
         }
     }
 
-    Widp child;
-
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
-
-        verify(child.get());
 
         wid_find_prev_child_focus(child, best);
     }
@@ -2815,18 +2655,16 @@ static void wid_find_prev_child_focus (Widp w, Widp *best)
 
 static void wid_find_prev_focus (void)
 {_
-    Widp best;
+    Widp best {};
 
     if (!wid_focus) {
         wid_find_first_focus();
         return;
     }
 
-    best = 0;
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_ignore_for_focus(w)) {
             continue;
@@ -2849,24 +2687,14 @@ static void wid_find_prev_focus (void)
 
 Widp wid_find (Widp w, std::string name)
 {_
-    verify(w.get());
-
-    if (w->name == "") {
-        return (0);
-    }
-
     if (strcasestr_(w->name.c_str(), name.c_str())) {
         return (w);
     }
 
-    Widp child;
-
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
 
-        verify(child.get());
-
-        Widp ret;
+        Widp ret {};
 
         ret = wid_find(child, name);
         if (ret) {
@@ -2874,23 +2702,19 @@ Widp wid_find (Widp w, std::string name)
         }
     }
 
-    return (0);
+    DIE("wid not found");
 }
 
 void wid_always_hidden (Widp w, uint8_t value)
 {_
-    verify(w.get());
-
     w->always_hidden = value;
 }
 
 void wid_visible (Widp w)
 {_
-    if (!w.get()) {
+    if (!w) {
         return;
     }
-
-    verify(w.get());
 
     w->visible = true;
     w->hidden = false;
@@ -2906,27 +2730,21 @@ void wid_visible (Widp w)
 
 void wid_this_visible (Widp w)
 {_
-    if (!w.get()) {
+    if (!w) {
         return;
     }
 
-    verify(w.get());
-
     w->visible = true;
-
     w->hidden = false;
 }
 
 void wid_hide (Widp w)
 {_
-    verify(w.get());
-
     if (!w) {
         return;
     }
 
     w->hidden = true;
-
     w->visible = false;
 
     if (wid_over == w) {
@@ -2963,9 +2781,6 @@ static uint8_t wid_scroll_trough_mouse_down (Widp w,
 {_
     int32_t dx;
     int32_t dy;
-    Widp child;
-
-    verify(w.get());
 
     std::vector<Widp> worklist;
     for (auto iter : w->children_display_sorted) {
@@ -2974,8 +2789,6 @@ static uint8_t wid_scroll_trough_mouse_down (Widp w,
     }
 
     for (auto child : worklist) {
-        verify(child.get());
-
         dx = 0;
         dy = 0;
 
@@ -3020,7 +2833,6 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
 {_
     int32_t dx;
     int32_t dy;
-    Widp child;
 
     if ((SDL_BUTTON(SDL_BUTTON_LEFT) & SDL_GetMouseState(0, 0)) ||
         wheely || wheelx) {
@@ -3055,8 +2867,6 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
     }
 
     for (auto child : worklist) {
-        verify(child.get());
-
         if (dx || dy) {
             wid_set_mode(child, WID_MODE_ACTIVE);
         }
@@ -3091,7 +2901,6 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
     double maxx = 0;
     double pct;
     uint8_t first = true;
-    Widp child;
 
     //
     // Find out the space that the children take up then use this to
@@ -3224,7 +3033,6 @@ void wid_get_children_size (Widp owner, int32_t *w, int32_t *h)
     double minx = 0;
     double maxx = 0;
     uint8_t first = true;
-    Widp child;
 
     //
     // Find out the space that the children take up then use this to
@@ -3233,8 +3041,6 @@ void wid_get_children_size (Widp owner, int32_t *w, int32_t *h)
     for (auto iter : owner->children_display_sorted) {
 
         auto child = iter.second;
-
-        verify(child.get());
 
         int32_t tminx = wid_get_tl_x(child) - wid_get_tl_x(child->parent);
         int32_t tminy = wid_get_tl_y(child) - wid_get_tl_y(child->parent);
@@ -3291,8 +3097,6 @@ void wid_get_children_size (Widp owner, int32_t *w, int32_t *h)
 
 static void wid_update_internal (Widp w)
 {_
-    verify(w.get());
-
     int32_t tlx;
     int32_t tly;
     int32_t brx;
@@ -3321,8 +3125,6 @@ static void wid_update_internal (Widp w)
 //        wid_set_mode(w, WID_MODE_NORMAL);
     }
 
-    Widp child;
-
     //
     // Clip all the children. Avoid this for speed for the main game window.
     //
@@ -3340,21 +3142,17 @@ static void wid_update_internal (Widp w)
     // If the source of the event is the scrollbars themselves...
     //
     if (w->scrollbar_owner) {
-        verify(w.get());
         wid_adjust_scrollbar(w, w->scrollbar_owner);
-
         wid_update_internal(w->scrollbar_owner);
     } else {
         //
         // If the source of the event is the owner of the scrollbars...
         //
         if (w->scrollbar_vert) {
-            verify(w.get());
             wid_adjust_scrollbar(w->scrollbar_vert, w);
         }
 
         if (w->scrollbar_horiz) {
-            verify(w.get());
             wid_adjust_scrollbar(w->scrollbar_horiz, w);
         }
     }
@@ -3362,8 +3160,6 @@ static void wid_update_internal (Widp w)
 
 void wid_update (Widp w)
 {_
-    verify(w.get());
-
     wid_update_internal(w);
 
     //
@@ -3392,8 +3188,8 @@ void wid_update_mouse (void)
 void wid_scroll_text (Widp w)
 {_
     std::wstring s;
-    Widp prev;
-    Widp tmp;
+    Widp prev {};
+    Widp tmp {};
 
     //
     // Get the wid on the top of the list/screen.
@@ -3422,7 +3218,7 @@ void wid_scroll_text (Widp w)
 //
 void wid_scroll_with_input (Widp w, std::wstring str)
 {_
-    Widp tmp;
+    Widp tmp {};
 
     wid_scroll_text(w);
 
@@ -3708,7 +3504,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
         return (true);
     }
 
-    Widp w;
+    Widp w {};
 
     w = wid_get_top_parent(wid_console_input_line);
 
@@ -3733,8 +3529,8 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     wid_set_focus(w);
                     wid_focus_lock(w);
                 } else {
-                    wid_set_focus(0);
-                    wid_focus_lock(0);
+                    wid_unset_focus();
+                    wid_unset_focus_lock();
                 }
                 break;
 
@@ -3750,8 +3546,8 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     wid_set_focus(w);
                     wid_focus_lock(w);
                 } else {
-                    wid_set_focus(0);
-                    wid_focus_lock(0);
+                    wid_unset_focus();
+                    wid_unset_focus_lock();
                 }
                 break;
 
@@ -3783,14 +3579,12 @@ static Widp wid_find_at (Widp w, int32_t x, int32_t y)
 {_
     w = get(wid_on_screen_at, x, y);
     if (!w) {
-        return (0);
+        return nullptr;
     }
 
     if (wid_ignore_being_destroyed(w)) {
-        return (0);
+        return nullptr;
     }
-
-    verify(w.get());
 
     return (w);
 }
@@ -3798,14 +3592,12 @@ static Widp wid_find_at (Widp w, int32_t x, int32_t y)
 static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
                                      uint8_t strict)
 {_
-    Widp child;
-
     if (!w) {
-        return (0);
+        return nullptr;
     }
 
     if (wid_ignore_events(w)) {
-        return (0);
+        return nullptr;
     }
 
     if (strict) {
@@ -3813,14 +3605,12 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
             (y < w->abs_tl.y) ||
             (x > w->abs_br.x) ||
             (y > w->abs_br.y)) {
-            return (0);
+            return nullptr;
         }
     }
 
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
-
-        verify(child.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(child) != wid_get_top_parent(wid_focus_locked))) {
@@ -3837,8 +3627,6 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
 
-        verify(child.get());
-
         if (wid_focus_locked &&
             (wid_get_top_parent(child) != wid_get_top_parent(wid_focus_locked))) {
             continue;
@@ -3851,39 +3639,37 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    if (w.get()->on_key_down) {
+    if (w->on_key_down) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
     }
 
     w = wid_get_top_parent(w);
-    if (w.get()->on_key_down) {
+    if (w->on_key_down) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
                                      uint8_t strict)
 {_
-    Widp child;
-
     if (!w) {
-        return (0);
+        return nullptr;
     }
 
     if (wid_ignore_events(w)) {
-        return (0);
+        return nullptr;
     }
 
     if (strict) {
@@ -3891,14 +3677,12 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
             (y < w->abs_tl.y) ||
             (x > w->abs_br.x) ||
             (y > w->abs_br.y)) {
-            return (0);
+            return nullptr;
         }
     }
 
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
-
-        verify(child.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(child) != wid_get_top_parent(wid_focus_locked))) {
@@ -3915,8 +3699,6 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
 
-        verify(child.get());
-
         if (wid_focus_locked &&
             (wid_get_top_parent(child) != wid_get_top_parent(wid_focus_locked))) {
             continue;
@@ -3929,29 +3711,27 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    if (w.get()->on_key_up) {
+    if (w->on_key_up) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
                                        uint8_t strict)
 {_
-    Widp child;
-
     if (!w) {
-        return (0);
+        return nullptr;
     }
 
     if (wid_ignore_events(w)) {
-        return (0);
+        return nullptr;
     }
 
     if (strict) {
@@ -3959,14 +3739,12 @@ static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
             (y < w->abs_tl.y) ||
             (x > w->abs_br.x) ||
             (y > w->abs_br.y)) {
-            return (0);
+            return nullptr;
         }
     }
 
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
-
-        verify(child.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(child) != wid_get_top_parent(wid_focus_locked))) {
@@ -3980,33 +3758,31 @@ static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    if (w.get()->on_joy_button) {
+    if (w->on_joy_button) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
                                        uint8_t strict)
 {_
-    Widp child;
-
     if (!w) {
-        return (0);
+        return nullptr;
     }
 
     if (w->ignore_for_mouse_down) {
-        return (0);
+        return nullptr;
     }
 
     if (wid_ignore_events(w)) {
-        return (0);
+        return nullptr;
     }
 
     if (strict) {
@@ -4014,14 +3790,12 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
             (y < w->abs_tl.y) ||
             (x > w->abs_br.x) ||
             (y > w->abs_br.y)) {
-            return (0);
+            return nullptr;
         }
     }
 
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
-
-        verify(child.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(child) != wid_get_top_parent(wid_focus_locked))) {
@@ -4035,10 +3809,10 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    if (w.get()->on_m_down) {
+    if (w->on_m_down) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
@@ -4047,7 +3821,7 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
     if (wid_get_movable(w)) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
@@ -4060,25 +3834,23 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
     if (!w->parent) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t strict)
 {_
-    Widp child;
-
     if (!w) {
-        return (0);
+        return nullptr;
     }
 
     if (wid_ignore_events(w)) {
-        return (0);
+        return nullptr;
     }
 
     if (strict) {
@@ -4086,14 +3858,12 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
             (y < w->abs_tl.y) ||
             (x > w->abs_br.x) ||
             (y > w->abs_br.y)) {
-            return (0);
+            return nullptr;
         }
     }
 
     for (auto iter : w->children_display_sorted) {
         auto child = iter.second;
-
-        verify(child.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(child) != wid_get_top_parent(wid_focus_locked))) {
@@ -4107,10 +3877,10 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
         }
     }
 
-    if (w.get()->on_m_up) {
+    if (w->on_m_up) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
@@ -4119,7 +3889,7 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
     if (wid_get_movable(w)) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
@@ -4132,13 +3902,13 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
     if (!w->parent) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
-            return (0);
+            return nullptr;
         }
 
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static void wid_children_move_delta_internal (Widp w, int32_t dx, int32_t dy)
@@ -4173,8 +3943,6 @@ static void wid_children_move_delta_internal (Widp w, int32_t dx, int32_t dy)
     wid_tree_detach(w);
     w->key.br.y += dy;
     wid_tree_attach(w);
-
-    Widp child;
 
     for (auto iter : w->tree2_children_unsorted) {
         auto child = iter.second;
@@ -4217,8 +3985,6 @@ static void wid_move_delta_internal (Widp w, int32_t dx, int32_t dy)
     w->key.br.y += dy;
     wid_tree_attach(w);
 
-    Widp child;
-
     std::vector<Widp> worklist;
     for (auto iter : w->tree2_children_unsorted) {
         auto w = iter.second;
@@ -4232,8 +3998,6 @@ static void wid_move_delta_internal (Widp w, int32_t dx, int32_t dy)
 
 void wid_move_delta (Widp w, int32_t dx, int32_t dy)
 {_
-    verify(w.get());
-
     wid_move_delta_internal(w, dx, dy);
 
     wid_update_internal(w);
@@ -4248,8 +4012,6 @@ void wid_move_delta_pct (Widp w, double dx, double dy)
         dx *= wid_get_width(w->parent);
         dy *= wid_get_height(w->parent);
     }
-
-    verify(w.get());
 
     wid_move_delta_internal(w, dx, dy);
 
@@ -4378,7 +4140,6 @@ static Widp wid_joy_button_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4393,12 +4154,12 @@ static Widp wid_joy_button_handler (int32_t x, int32_t y)
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static Widp wid_mouse_down_handler (int32_t x, int32_t y)
 {_
-    Widp w;
+    Widp w {};
 
     w = wid_mouse_down_handler_at(wid_focus, x, y, true /* strict */);
     if (w) {
@@ -4413,7 +4174,6 @@ static Widp wid_mouse_down_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4431,7 +4191,6 @@ static Widp wid_mouse_down_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4446,12 +4205,12 @@ static Widp wid_mouse_down_handler (int32_t x, int32_t y)
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static Widp wid_mouse_up_handler (int32_t x, int32_t y)
 {_
-    Widp w;
+    Widp w {};
 
     w = wid_mouse_up_handler_at(wid_focus, x, y, true /* strict */);
     if (w) {
@@ -4483,7 +4242,6 @@ static Widp wid_mouse_up_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4498,21 +4256,21 @@ static Widp wid_mouse_up_handler (int32_t x, int32_t y)
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static Widp wid_mouse_motion_handler (int32_t x, int32_t y,
                                       int32_t relx, int32_t rely,
                                       int32_t wheelx, int32_t wheely)
 {_
-    Widp w;
+    Widp w {};
 
     w = get(wid_on_screen_at, x, y);
     if (w) {
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 //
@@ -4539,8 +4297,6 @@ void wid_mouse_motion (int32_t x, int32_t y,
 
     wid_mouse_motion_recursion = 1;
 
-    Widp w;
-
     if (wid_mouse_template) {
         wid_move_to_abs_centered_in(wid_mouse_template, x, y, 10);
         wid_raise(wid_mouse_template);
@@ -4550,7 +4306,6 @@ void wid_mouse_motion (int32_t x, int32_t y,
 
     for (auto iter : wid_top_level) {
         auto w = iter.second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4618,9 +4373,8 @@ void wid_mouse_motion (int32_t x, int32_t y,
             // If the mouse event is fully processed then do not pass onto
             // scrollbars.
             //
-            if (w.get()->on_m_motion) {
-                verify(w.get());
-                if ((w.get()->on_m_motion)(w, x, y, relx, rely, wheelx, wheely)) {
+            if (w->on_m_motion) {
+                if ((w->on_m_motion)(w, x, y, relx, rely, wheelx, wheely)) {
                     got_one = true;
                     break;
                 }
@@ -4688,8 +4442,8 @@ void wid_mouse_motion (int32_t x, int32_t y,
                 w = w->parent;
             }
 
-            if (w && w.get()->on_m_motion) {
-                (w.get()->on_m_motion)(w, x, y, relx, rely, wheelx, wheely);
+            if (w && w->on_m_motion) {
+                (w->on_m_motion)(w, x, y, relx, rely, wheelx, wheely);
             }
         }
     }
@@ -4791,7 +4545,7 @@ void wid_joy_button (int32_t x, int32_t y)
         return;
     }
 
-    Widp w;
+    Widp w {};
 
     w = wid_joy_button_handler(x, y);
     if (!w) {
@@ -4802,14 +4556,14 @@ void wid_joy_button (int32_t x, int32_t y)
     //
     // Raise on mouse.
     //
-    if (w.get()->on_joy_button) {
+    if (w->on_joy_button) {
         //
         // If the button doesn't eat the event, try the parent.
         //
-        while (!(w.get()->on_joy_button)(w, x, y)) {
+        while (!(w->on_joy_button)(w, x, y)) {
             w = w->parent;
 
-            while (w && !w.get()->on_joy_button) {
+            while (w && !w->on_joy_button) {
                 w = w->parent;
             }
 
@@ -4819,8 +4573,6 @@ void wid_joy_button (int32_t x, int32_t y)
             }
         }
 
-        verify(w.get());
- 
         wid_set_focus(w);
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
@@ -4848,7 +4600,7 @@ void wid_joy_button (int32_t x, int32_t y)
 
 void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
 {_
-    Widp w;
+    Widp w {};
 
     pixel_to_ascii(&x, &y);
     if (!ascii_ok(x, y)) {
@@ -4866,11 +4618,9 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     //
     // Raise on mouse.
     //
-    if ((w.get()->on_m_down && (w.get()->on_m_down)(w, x, y, button)) ||
+    if ((w->on_m_down && (w->on_m_down)(w, x, y, button)) ||
         wid_get_movable(w)) {
         //CON("grabbed by %s",wid_name(w).c_str());
-
-        verify(w.get());
 
         wid_set_focus(w);
         wid_set_mode(w, WID_MODE_ACTIVE);
@@ -4897,7 +4647,7 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
 
 void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
 {_
-    Widp w;
+    Widp w {};
 
     pixel_to_ascii(&x, &y);
     if (!ascii_ok(x, y)) {
@@ -4911,10 +4661,8 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
         return;
     }
 
-    if ((w.get()->on_m_up && (w.get()->on_m_up)(w, x, y, button)) ||
+    if ((w->on_m_up && (w->on_m_up)(w, x, y, button)) ||
         wid_get_movable(w)) {
-
-        verify(w.get());
 
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
@@ -4923,7 +4671,7 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
 
 static Widp wid_key_down_handler (int32_t x, int32_t y)
 {_
-    Widp w;
+    Widp w {};
 
 //CON("key down");
     w = wid_key_down_handler_at(wid_focus, x, y, true /* strict */);
@@ -4955,7 +4703,6 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4975,7 +4722,6 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -4992,12 +4738,12 @@ static Widp wid_key_down_handler (int32_t x, int32_t y)
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 static Widp wid_key_up_handler (int32_t x, int32_t y)
 {_
-    Widp w;
+    Widp w {};
 
     w = wid_key_up_handler_at(wid_focus, x, y, true /* strict */);
     if (w) {
@@ -5024,7 +4770,6 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -5042,7 +4787,6 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
     for (auto iter = wid_top_level.rbegin();
          iter != wid_top_level.rend(); ++iter) {
         auto w = iter->second;
-        verify(w.get());
 
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
@@ -5057,7 +4801,7 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
         return (w);
     }
 
-    return (0);
+    return nullptr;
 }
 
 #define DEBUG_GL_BLEND
@@ -5121,7 +4865,7 @@ glBlendFunc(vals[i1], vals[i2]);
 
 void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 {_
-    Widp w;
+    Widp w {};
 
 #ifdef DEBUG_GL_BLEND
 if (wid_event_to_char(key) == '+') {
@@ -5157,8 +4901,6 @@ CON("- %d %d", i1, i2);
         !wid_is_hidden(wid_focus) &&
         (wid_focus->on_key_down)) {
 
-        verify(wid_focus.get());
-
         if ((wid_focus->on_key_down)(wid_focus, key)) {
             //
             // Do not raise, gets in the way of popups the callback creates.
@@ -5180,7 +4922,7 @@ CON("- %d %d", i1, i2);
         return;
     }
 
-    if ((w.get()->on_key_down)(w, key)) {
+    if ((w->on_key_down)(w, key)) {
         //
         // Do not raise, gets in the way of popups the callback creates.
         //
@@ -5196,8 +4938,8 @@ try_parent:
     // escape can do things.
     //
     while (w) {
-        if (w.get()->on_key_down) {
-            if ((w.get()->on_key_down)(w, key)) {
+        if (w->on_key_down) {
+            if ((w->on_key_down)(w, key)) {
                 //
                 // Do not raise, gets in the way of popups the callback
                 // creates.
@@ -5217,13 +4959,11 @@ try_parent:
 
 void wid_key_up (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 {_
-    Widp w;
+    Widp w {};
 
     if (wid_focus &&
         !wid_is_hidden(wid_focus) &&
         (wid_focus->on_key_up)) {
-
-        verify(wid_focus.get());
 
         if ((wid_focus->on_key_up)(wid_focus, key)) {
             wid_set_mode(wid_focus, WID_MODE_ACTIVE);
@@ -5248,9 +4988,7 @@ void wid_key_up (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
         return;
     }
 
-    if ((w.get()->on_key_up)(w, key)) {
-        verify(w.get());
-
+    if ((w->on_key_up)(w, key)) {
         wid_set_mode(w, WID_MODE_ACTIVE);
 
         //
@@ -5267,10 +5005,8 @@ try_parent:
     // escape can do things.
     //
     while (w) {
-        if (w.get()->on_key_up) {
-            if ((w.get()->on_key_up)(w, key)) {
-                verify(w.get());
-
+        if (w->on_key_up) {
+            if ((w->on_key_up)(w, key)) {
                 wid_set_mode(w, WID_MODE_ACTIVE);
 
                 //
@@ -5294,7 +5030,7 @@ void wid_get_abs_coords (Widp w,
                          int32_t *brx,
                          int32_t *bry)
 {_
-    Widp p;
+    Widp p {};
 
     *tlx = wid_get_tl_x(w);
     *tly = wid_get_tl_y(w);
@@ -5406,7 +5142,7 @@ static void wid_display (Widp w,
     int32_t tly;
     int32_t brx;
     int32_t bry;
-    Widp p;
+    Widp p {};
 
     //
     // Bounding box for drawing the wid. Co-ords are negative as we
@@ -5622,8 +5358,6 @@ static void wid_display (Widp w,
     }
 
 
-    Widp child;
-
     for (auto iter = w->children_display_sorted.begin();
          iter != w->children_display_sorted.end(); ++iter) {
 
@@ -5657,7 +5391,7 @@ void wid_move_all (void)
     }
 
     uint32_t N = wid_top_level3.size();
-    Widp w;
+    Widp w {};
     Widp wids[N];
     uint32_t n = 0;
 
@@ -5703,16 +5437,12 @@ void wid_move_all (void)
 //
 static void wid_gc (Widp w)
 {_
-    verify(w.get());
-
     if (w->being_destroyed) {
         wid_destroy_immediate(w);
         return;
     }
 
     if (w->destroy_when && (wid_time >= w->destroy_when)) {
-        verify(w.get());
-
         wid_destroy(&w);
     }
 }
@@ -5722,8 +5452,6 @@ static void wid_gc (Widp w)
 //
 void wid_gc_all (void)
 {_
-    Widp w;
-
     std::vector<Widp> to_gc;
 
     for (auto iter : wid_top_level4) {
@@ -5748,18 +5476,14 @@ void wid_tick_all (void)
         wid_time += 100/game->config.sdl_delay;
     }
 
-    Widp w;
-
     for (auto iter : wid_top_level5) {
         auto w = iter.second;
 
-        verify(w.get());
-
-        if (!w.get()->on_tick) {
+        if (!w->on_tick) {
             ERR("wid on ticker tree, but no callback set");
         }
 
-        (w.get()->on_tick)(w);
+        (w->on_tick)(w);
     }
 }
 
@@ -5864,8 +5588,6 @@ void wid_display_all (void)
 
 uint8_t wid_is_hidden (Widp w)
 {_
-    verify(w.get());
-
     if (!w) {
         return (false);
     }
@@ -5887,8 +5609,6 @@ uint8_t wid_is_hidden (Widp w)
 
 uint8_t wid_is_always_hidden (Widp w)
 {_
-    verify(w.get());
-
     if (w->always_hidden) {
         return (true);
     }
@@ -5898,8 +5618,6 @@ uint8_t wid_is_always_hidden (Widp w)
 
 void wid_move_to_pct (Widp w, double x, double y)
 {_
-    verify(w.get());
-
     if (!w->parent) {
         x *= (double)ASCII_WIDTH;
         y *= (double)ASCII_HEIGHT;
@@ -5916,8 +5634,6 @@ void wid_move_to_pct (Widp w, double x, double y)
 
 void wid_move_to_abs (Widp w, int32_t x, int32_t y)
 {_
-    verify(w.get());
-
     int32_t dx = x - wid_get_tl_x(w);
     int32_t dy = y - wid_get_tl_y(w);
 
@@ -5926,8 +5642,6 @@ void wid_move_to_abs (Widp w, int32_t x, int32_t y)
 
 void wid_move_to_pct_centered (Widp w, double x, double y)
 {_
-    verify(w.get());
-
     if (!w->parent) {
         x *= (double)ASCII_WIDTH;
         y *= (double)ASCII_HEIGHT;
@@ -5947,8 +5661,6 @@ void wid_move_to_pct_centered (Widp w, double x, double y)
 
 void wid_move_to_abs_centered (Widp w, int32_t x, int32_t y)
 {_
-    verify(w.get());
-
     int32_t dx = x - wid_get_tl_x(w);
     int32_t dy = y - wid_get_tl_y(w);
 
@@ -5965,8 +5677,6 @@ static void wid_move_enqueue (Widp w,
                               int32_t moving_end_y,
                               uint32_t ms)
 {_
-    verify(w.get());
-
     if (w->moving) {
         //
         // Smoother character moves with this.
@@ -6041,8 +5751,6 @@ static void wid_move_enqueue (Widp w,
 
 static void wid_move_dequeue (Widp w)
 {_
-    verify(w.get());
-
     if (!w->moving) {
         return;
     }
@@ -6080,8 +5788,6 @@ static void wid_move_dequeue (Widp w)
 
 void wid_move_to_pct_in (Widp w, double x, double y, uint32_t ms)
 {_
-    verify(w.get());
-
     if (!w->parent) {
         x *= (double)ASCII_WIDTH;
         y *= (double)ASCII_HEIGHT;
@@ -6117,8 +5823,6 @@ void wid_move_delta_in (Widp w, int32_t dx, int32_t dy, uint32_t ms)
 
 void wid_move_to_pct_centered_in (Widp w, double x, double y, uint32_t ms)
 {_
-    verify(w.get());
-
     if (!w->parent) {
         x *= (double)ASCII_WIDTH;
         y *= (double)ASCII_HEIGHT;
@@ -6144,8 +5848,6 @@ void wid_move_to_pct_centered_in (Widp w, double x, double y, uint32_t ms)
 
 void wid_move_to_abs_centered_in (Widp w, int32_t x, int32_t y, uint32_t ms)
 {_
-    verify(w.get());
-
     x -= (wid_get_br_x(w) - wid_get_tl_x(w))/2;
     y -= (wid_get_br_y(w) - wid_get_tl_y(w))/2;
 
@@ -6154,15 +5856,11 @@ void wid_move_to_abs_centered_in (Widp w, int32_t x, int32_t y, uint32_t ms)
 
 void wid_move_to_centered_in (Widp w, int32_t x, int32_t y, uint32_t ms)
 {_
-    verify(w.get());
-
     wid_move_enqueue(w, wid_get_tl_x(w), wid_get_tl_y(w), x, y, ms);
 }
 
 uint8_t wid_is_moving (Widp w)
 {
-    verify(w.get());
-
     if (w->moving) {
         return (true);
     }

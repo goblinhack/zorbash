@@ -64,8 +64,8 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
         int32_t row;
         int row_bottom = h - 1;
 
-        Widp child = 0;
-        Widp prev = 0;
+        Widp child {};
+        Widp prev {};
 
         for (row = 0; row < scroll_height; row++) {
             row_bottom --;
@@ -113,7 +113,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
 //
 void WidTextBox::log_ (std::wstring str)
 {_
-    Widp tmp;
+    Widp tmp {};
 
     if (line_count < scroll_height) {
         wid_set_text(get(children, scroll_height - line_count - 1), str);
