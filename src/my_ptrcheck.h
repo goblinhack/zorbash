@@ -14,6 +14,11 @@
 //
 #define PTRCHECK_AT __FILE__, __PRETTY_FUNCTION__, __LINE__
 
+#define PTRCHECK_CAT(A, B) A ## B
+#define PTRCHECK_CAT2(A, B) PTRCHECK_CAT(A, B)
+#define PTRCHECK_STRINGIFY(A) #A
+#define PTRCHECK_STRING __FILE__ ":" PTRCHECK_STRINGIFY(__LINE__)
+
 //
 // util.c
 //
@@ -65,7 +70,6 @@ uint8_t ptrcheck_free(void *ptr, const char *file, const char *func,
 
 void ptrcheck_leak_print(void);
 void ptrcheck_leak_snapshot(void);
-void ptrcheck_usage_print(void);
 
 #ifdef ENABLE_PTRCHECK // { 
 #define newptr(__ptr__, __what__) (ptrcheck_alloc((__ptr__),( __what__), sizeof(*(__ptr__)), PTRCHECK_AT))

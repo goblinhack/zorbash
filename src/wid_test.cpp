@@ -19,9 +19,9 @@
 
 static void wid_test_wid_create(void);
 
-Widp wid_itembar;
-Widp wid_item_popup;
-Widp wid_sidebar;
+Widp wid_itembar {};
+Widp wid_item_popup {};
+Widp wid_sidebar {};
 
 void wid_test_fini (void)
 {_
@@ -30,9 +30,9 @@ void wid_test_fini (void)
     wid_destroy(&wid_sidebar);
     wid_gc_all();
 
-    wid_itembar.reset();
-    wid_item_popup.reset();
-    wid_sidebar.reset();
+    wid_itembar = nullptr;
+    wid_item_popup = nullptr;
+    wid_sidebar = nullptr;
 }
 
 uint8_t wid_test_init (void)
