@@ -2,6 +2,7 @@
 // Copyright goblinhack@gmail.com
 //
 #include "my_sprintf.h"
+#include <stdarg.h>
 
 std::string string_sprintf (const char *format, ...)
 {
