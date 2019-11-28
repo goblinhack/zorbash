@@ -40,6 +40,7 @@ auto tile = t.second;
 fprintf(MY_STDERR,"destroy %p %s\n", tile, tile->name.c_str());
         delete t.second;
     }
+
     all_tiles.clear();
     all_tiles_array.clear();
 }
@@ -150,11 +151,11 @@ void tile_load_arr (std::string file, std::string name,
                 ERR("tile name [%s] already used", name.c_str());
             }
 
-	    auto t = new Tile(); // std::make_shared< class Tile >();
-	    auto result = all_tiles.insert(std::make_pair(name, t));
-	    if (result.second == false) {
-		DIE("tile insert name [%s] failed", name.c_str());
-	    }
+            auto t = new Tile(); // std::make_shared< class Tile >();
+            auto result = all_tiles.insert(std::make_pair(name, t));
+            if (result.second == false) {
+                DIE("tile insert name [%s] failed", name.c_str());
+            }
 
             //
             // Global array of all tiles
@@ -330,11 +331,11 @@ void tile_load_arr_color_and_black_and_white (std::string file,
                 ERR("tile name [%s] already used", name.c_str());
             }
 
-	    auto t = new Tile(); // std::make_shared< class Tile >();
-	    auto result = all_tiles.insert(std::make_pair(name, t));
-	    if (result.second == false) {
-		DIE("tile insert name [%s] failed", name.c_str());
-	    }
+            auto t = new Tile(); // std::make_shared< class Tile >();
+            auto result = all_tiles.insert(std::make_pair(name, t));
+            if (result.second == false) {
+                DIE("tile insert name [%s] failed", name.c_str());
+            }
 
             //
             // Global array of all tiles
