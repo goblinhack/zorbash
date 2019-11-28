@@ -29,7 +29,7 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define DEBUG_CRASH
+#undef DEBUG_CRASH
 
 #ifdef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors
@@ -37,9 +37,9 @@
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #define ENABLE_PTRCHECK_LEAK
 #define ENABLE_PTRCHECK            // Check validity of pointers too
-#define ENABLE_PTRCHECK_HISTORY 10 // Per pointer history
 #undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #endif
+#define ENABLE_PTRCHECK_HISTORY 10 // Per pointer history
 
 //
 // UI debugging
