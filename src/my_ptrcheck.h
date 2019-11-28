@@ -1,10 +1,3 @@
-//
-// Copyright goblinhack@gmail.com
-// See the README file for license info.
-//
-
-#pragma once
-
 #ifndef _MY__PTRCHECK_H__
 #define _MY__PTRCHECK_H__
 
@@ -12,30 +5,18 @@
 // __FUNCTION__ is not a preprocessor directive so we can't convert it into a
 // string
 //
-#define PTRCHECK_AT __FILE__, __PRETTY_FUNCTION__, __LINE__
-
-#define PTRCHECK_CAT(A, B) A ## B
-#define PTRCHECK_CAT2(A, B) PTRCHECK_CAT(A, B)
-#define PTRCHECK_STRINGIFY(A) #A
-#define PTRCHECK_STRING __FILE__ ":" PTRCHECK_STRINGIFY(__LINE__)
+#define PTRCHECK_AT \
+  std::string(__FILE__), std::string(__PRETTY_FUNCTION__), __LINE__
 
 //
 // util.c
 //
-void *myzalloc_(uint32_t size, const char *what, const char *func,
-                const char *file, uint32_t line);
-
-void *mymalloc_(uint32_t size, const char *what, const char *func,
-                const char *file, uint32_t line);
-
-void *myrealloc_(void *ptr, uint32_t size, const char *what, const char *func,
-                 const char *file, uint32_t line);
-
-void myfree_(void *ptr, const char *func, const char *file,
-             uint32_t line);
-
-char *dupstr_(const char *in, const char *what, const char *func,
-              const char *file, uint32_t line);
+void *myzalloc_(int size, std::string what, std::string func, std::string file, int line);
+void *mymalloc_(int size, std::string what, std::string func, std::string file, int line);
+void *myrealloc_(void *ptr, int size, std::string what, std::string func, std::string file, int line);
+void myfree_(void *ptr, std::string func, std::string file, int line);
+char *dupstr_(const char *in, std::string what, std::string func, std::string file, int line);
+char *strsub_(const char *in, const char *old, const char *replace_with, std::string what, std::string file, std::string func, int line);
 
 #define myzalloc(__size__, __what__) \
     myzalloc_((__size__), (__what__), PTRCHECK_AT)
@@ -52,33 +33,23 @@ char *dupstr_(const char *in, const char *what, const char *func,
 #define dupstr(__ptr__, __what__)   \
     dupstr_((__ptr__), (__what__), PTRCHECK_AT)
 
-uint8_t ptrcheck_init(void);
-void ptrcheck_fini(void);
+#define strsub(a, b, c, __what__) \
+    strsub_(a, b, c, (__what__), PTRCHECK_AT)
 
-void *ptrcheck_alloc(const void *ptr, const char *what, uint32_t size,
-                     const char *file, const char *func, uint32_t line);
-
-uint8_t ptrcheck_verify(const void *ptr, const char *file, const char *func,
-                        uint32_t line);
-
-uint8_t ptrcheck_verify(const void *ptr,
-                             const char *file, const char *func,
-                             uint32_t line);
-
-uint8_t ptrcheck_free(void *ptr, const char *file, const char *func,
-                      uint32_t line);
-
+void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string file, std::string func, int line);
+int ptrcheck_verify(const void *ptr, std::string file, std::string func, int line);
+int ptrcheck_free(void *ptr, std::string file, std::string func, int line);
 void ptrcheck_leak_print(void);
-void ptrcheck_leak_snapshot(void);
 
-#ifdef ENABLE_PTRCHECK // { 
-#define newptr(__ptr__, __what__) (ptrcheck_alloc((__ptr__),( __what__), sizeof(*(__ptr__)), PTRCHECK_AT))
+#ifdef ENABLE_PTRCHECK
+#define newptr(__ptr__, __what__) \
+    (ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), PTRCHECK_AT))
 #define oldptr(__ptr__) (ptrcheck_free((__ptr__), PTRCHECK_AT))
 #define verify(__ptr__) (ptrcheck_verify((__ptr__), PTRCHECK_AT))
-#else // } { 
+#else
 #define newptr(__ptr__, __what__)
 #define oldptr(__ptr__)
 #define verify(__ptr__)
-#endif // ENABLE_PTRCHECK } 
+#endif
 
 #endif // __PTRCHECK_H__ 

@@ -6,7 +6,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/ascii.o 		        \
     $(OBJDIR)/ascii_box.o 		\
     $(OBJDIR)/astar.o 		        \
-    $(OBJDIR)/backtrace.o 		\
     $(OBJDIR)/charmap.o 		\
     $(OBJDIR)/color.o			\
     $(OBJDIR)/command.o 		\
@@ -51,6 +50,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/stb_image.o 		\
     $(OBJDIR)/string.o 			\
+    $(OBJDIR)/sprintf.o 		\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
@@ -74,14 +74,15 @@ GAME_OBJECTS=				\
     $(OBJDIR)/tile.o 			\
     $(OBJDIR)/time.o 			\
     $(OBJDIR)/token.o 			\
+    $(OBJDIR)/traceback.o 		\
     $(OBJDIR)/ttf.o 			\
     $(OBJDIR)/util.o 			\
     $(OBJDIR)/wid.o 			\
     $(OBJDIR)/wid_console.o 		\
-    $(OBJDIR)/wid_popup.o 		\
-    $(OBJDIR)/wid_text_box.o 		\
     $(OBJDIR)/wid_minicon.o 		\
+    $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_test.o 		\
+    $(OBJDIR)/wid_text_box.o 		\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
 

@@ -25,8 +25,16 @@ extern std::vector<class Tile* > all_tiles_array;
 
 class Tile {
 public:
-    Tile (void) { newptr(this, "Tile"); }
-    ~Tile (void) { oldptr(this); }
+    Tile (void) { 
+fprintf(MY_STDERR,"\nZZZ %s %s %d new %p",__FILE__,__FUNCTION__,__LINE__, this);
+callstack_dump();
+        newptr(this, "Tile"); 
+    }
+    ~Tile (void) { 
+fprintf(MY_STDERR,"\nZZZ %s %s %d delete %p",__FILE__,__FUNCTION__,__LINE__, this);
+callstack_dump();
+        oldptr(this); 
+    }
     Tile (const class Tile *tile);
 
     std::string name;
@@ -74,8 +82,8 @@ public:
     double py2 {};
 #endif
 
-    Texp tex;
-    Texp tex_black_and_white;
+    Texp tex {};
+    Texp tex_black_and_white {};
 
     std::array<std::array<uint8_t, MAX_TILE_HEIGHT>, MAX_TILE_WIDTH> pix {};
 

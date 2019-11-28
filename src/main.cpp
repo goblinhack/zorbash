@@ -21,6 +21,7 @@
 #include "my_game.h"
 #include "my_room.h"
 #include "my_level.h"
+#include "my_traceback.h"
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;
@@ -185,9 +186,14 @@ void quit (void)
         GFX_PATH = 0;
     }
 
-#ifdef ENABLE_LEAKCHECK
+    if (EXEC_DIR) {
+        myfree(EXEC_DIR);
+        EXEC_DIR = 0;
+    }
+
+#ifdef ENABLE_PTRCHECK_LEAK
     if (!croaked) {
-        ptrcheck_fini();
+        ptrcheck_leak_print();
     }
 #endif
 }
@@ -232,7 +238,7 @@ static void find_executable (void)
      * Get the current directory, ending in a single /
      */
     curr_dir = dynprintf("%s" DSEP, dir_dot());
-    tmp = strsub(curr_dir, DSEP DSEP, DSEP);
+    tmp = strsub(curr_dir, DSEP DSEP, DSEP, "curr_dir");
     myfree(curr_dir);
     curr_dir = tmp;
 
@@ -240,7 +246,7 @@ static void find_executable (void)
      * Get the parent directory, ending in a single /
      */
     parent_dir = dynprintf("%s" DSEP, dir_dotdot(dir_dot()));
-    tmp = strsub(parent_dir, DSEP DSEP, DSEP);
+    tmp = strsub(parent_dir, DSEP DSEP, DSEP, "parent_dir");
     myfree(parent_dir);
     parent_dir = tmp;
 
@@ -249,7 +255,7 @@ static void find_executable (void)
      */
     exec_expanded_name = dupstr(ARGV[0], __FUNCTION__);
     if (*exec_expanded_name == '.') {
-        tmp = strsub(exec_expanded_name, ".." DSEP, parent_dir);
+        tmp = strsub(exec_expanded_name, ".." DSEP, parent_dir, "exec_expanded_name");
         myfree(exec_expanded_name);
         exec_expanded_name = tmp;
     }
@@ -258,7 +264,7 @@ static void find_executable (void)
      * Get rid of ./ from the program name.
      */
     if (*exec_expanded_name == '.') {
-        tmp = strsub(exec_expanded_name, "." DSEP, "");
+        tmp = strsub(exec_expanded_name, "." DSEP, "", "exec_expanded_name2");
         myfree(exec_expanded_name);
         exec_expanded_name = tmp;
     }
@@ -266,7 +272,7 @@ static void find_executable (void)
     /*
      * Get rid of any // from th path
      */
-    tmp = strsub(exec_expanded_name, DSEP DSEP, DSEP);
+    tmp = strsub(exec_expanded_name, DSEP DSEP, DSEP, "exec_expanded_name3");
     myfree(exec_expanded_name);
     exec_expanded_name = tmp;
 
@@ -335,6 +341,10 @@ cleanup:
     if (parent_dir) {
         myfree(parent_dir);
     }
+
+    if (curr_dir) {
+        myfree(curr_dir);
+    }
 }
 
 /*
@@ -342,16 +352,18 @@ cleanup:
  */
 static void find_exec_dir (void)
 {_
-    char *tmp;
-
     find_executable();
 
     /*
      * Make sure the exec dir ends in a /
      */
-    tmp = dynprintf("%s" DSEP, EXEC_DIR);
-    EXEC_DIR = strsub(tmp, DSEP DSEP, DSEP);
+    auto tmp = dynprintf("%s" DSEP, EXEC_DIR);
+    auto tmp2 = strsub(tmp, DSEP DSEP, DSEP, "EXEC_DIR");
     myfree(tmp);
+    if (EXEC_DIR) {
+        myfree(EXEC_DIR);
+    }
+    EXEC_DIR = tmp2;
 }
 
 /*
@@ -602,10 +614,6 @@ int32_t main (int32_t argc, char *argv[])
 	ERR("wid init");
     }
 
-#ifdef ENABLE_LEAKCHECK
-    ptrcheck_leak_snapshot();
-#endif
-
     py_call_void("init2");
 
     if (!wid_console_init()) {
@@ -619,12 +627,6 @@ int32_t main (int32_t argc, char *argv[])
     if (!command_init()) {
 	ERR("command init");
     }
-
-#ifdef ENABLE_LEAKCHECK
-    if (!ptrcheck_init()) {
-	ERR("ptrcheck init");
-    }
-#endif
 
     tp_init();
 

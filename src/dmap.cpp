@@ -5,7 +5,7 @@
 
 #include "my_main.h"
 #include "my_dmap.h"
-#include "my_string.h"
+#include "my_sprintf.h"
 
 void dmap_print (const Dmap *d, point at, point start, point end)
 {

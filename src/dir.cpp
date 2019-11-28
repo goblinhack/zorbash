@@ -25,7 +25,7 @@ uint8_t dir_exists (const char *indir)
      * msys is crap and unless you remove the / from the end of the name
      * will not think it is a dir.
      */
-    dir = dupstr(indir, __FUNCTION__);
+    dir = dupstr(indir, "dir");
     strchopc(dir, DCHAR);
 
     rc = 0;

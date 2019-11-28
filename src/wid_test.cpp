@@ -28,11 +28,6 @@ void wid_test_fini (void)
     wid_destroy(&wid_itembar);
     wid_destroy(&wid_item_popup);
     wid_destroy(&wid_sidebar);
-    wid_gc_all();
-
-    wid_itembar = nullptr;
-    wid_item_popup = nullptr;
-    wid_sidebar = nullptr;
 }
 
 uint8_t wid_test_init (void)
@@ -362,7 +357,7 @@ static void wid_test_wid_create (void)
         wid_set_bg_tilename(w, "health-status");
     }
 
-#if 0
+#if 1
     y_at += 3;
     {
         auto w = wid_new_square_button(wid_sidebar, "strength-icon");

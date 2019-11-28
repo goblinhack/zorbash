@@ -15,15 +15,11 @@
 #include "my_math.h"
 #include "my_wid_tiles.h"
 #include "my_game.h"
-#include "my_string.h"
+#include "my_sprintf.h"
 #include "my_ascii.h"
 #include "my_gl.h"
 #include "my_game.h"
 #include <stdlib.h>
-
-#undef WID_FULL_LOGNAME
-#undef DEBUG_WID_MOTION
-#undef DEBUG_WID_FOCUS
 
 #ifdef ENABLE_INVERTED_GFX
 bool inverted_gfx = true;
@@ -169,18 +165,6 @@ void wid_fini (void)
         auto child = iter->second;
         wid_destroy_immediate(child);
     }
-
-    wid_top_level.clear();
-    wid_global.clear();
-    wid_top_level2.clear();
-    wid_top_level3.clear();
-    wid_top_level4.clear();
-    wid_top_level5.clear();
-    wid_focus_locked = nullptr;
-    wid_focus = nullptr;
-    wid_over = nullptr;
-    wid_moving = nullptr;
-    wid_mouse_template = nullptr;
 }
 
 void wid_dump (Widp w, int depth)
@@ -972,9 +956,28 @@ static std::wstring wid_get_text_with_cursor (Widp w)
 
 void wid_set_name (Widp w, std::string name)
 {_
-    oldptr(w);
-    w->name = name;
-    newptr(w, name.c_str());
+    if (name != "") {
+        oldptr(w);
+        w->name = name;
+        newptr(w, name);
+    } else {
+        w->name = name;
+    }
+
+#ifdef ENABLE_WID_DEBUG
+#ifdef WID_FULL_LOGNAME
+    if (w->parent) {
+        w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
+                                    name.c_str(), w,
+                                    w->parent->to_string.c_str(), 
+                                    w->parent);
+    } else {
+        w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
+    }
+#else
+    w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
+#endif
+#endif
 }
 
 void wid_set_debug (Widp w, uint8_t val)
@@ -1855,6 +1858,8 @@ static void wid_destroy_immediate_internal (Widp w)
 
 static void wid_destroy_immediate (Widp w)
 {_
+    WID_DBG(w, "destroy immediate");
+_
     //
     // If removing a top level widget, choose a new focus.
     //
@@ -1885,19 +1890,7 @@ static void wid_destroy_immediate (Widp w)
         wid_moving = nullptr;
     }
 
-    w->prev = nullptr;
-    w->next = nullptr;
-    w->scrollbar_horiz = nullptr;
-    w->scrollbar_vert = nullptr;
-    w->scrollbar_owner = nullptr;
-    w->parent = nullptr;
-    w->wid_tiles = nullptr;
-
-    w->children_display_sorted.clear();
-    w->tree2_children_unsorted.clear();
-    w->tree3_moving_wids.clear();
-    w->tree4_wids_being_destroyed.clear();
-    w->tree5_ticking_wids.clear();
+    delete w;
 }
 
 static void wid_destroy_delay (Widp *wp, int32_t delay)
@@ -1917,7 +1910,7 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         return;
     }
 
-    WID_DBG(w, "destroy");
+    WID_DBG(w, "destroy delay");
 
     (*wp) = nullptr;
 
@@ -2008,12 +2001,14 @@ Widp wid_new_container (Widp parent, std::string name)
 {_
     Widp w = wid_new(parent);
 
+#ifdef ENABLE_WID_DEBUG
 #ifdef WID_FULL_LOGNAME
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                   name.c_str(), w,
                                   parent->to_string.c_str(), parent);
 #else
     w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
+#endif
 #endif
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -2062,12 +2057,14 @@ Widp wid_new_square_button (Widp parent, std::string name)
 
     Widp w = wid_new(parent);
 
+#ifdef ENABLE_WID_DEBUG
 #ifdef WID_FULL_LOGNAME
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                   name.c_str(), w,
                                   parent->to_string.c_str(), parent);
 #else
     w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
+#endif
 #endif
 
     WID_DBG(w, "%s", __FUNCTION__);
@@ -5437,6 +5434,8 @@ void wid_move_all (void)
 //
 static void wid_gc (Widp w)
 {_
+    WID_DBG(w, "gc");
+
     if (w->being_destroyed) {
         wid_destroy_immediate(w);
         return;
@@ -5454,12 +5453,13 @@ void wid_gc_all (void)
 {_
     std::vector<Widp> to_gc;
 
-    for (auto iter : wid_top_level4) {
-        auto w = iter.second;
-        to_gc.push_back(w);
-    }
+    for (;;) {
+        if (!wid_top_level4.size()) {
+            return;
+        }
+        auto i = wid_top_level4.begin();
+        auto w = i->second;
 
-    for (auto w : to_gc) {
         wid_gc(w);
     }
 }

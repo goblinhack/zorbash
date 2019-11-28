@@ -1,28 +1,21 @@
 //
 // Copyright goblinhack@gmail.com
-// See the README file for license info.
 //
-
-#pragma once
-
-#ifndef _MY_BACKTRACE_H_
-#define _MY_BACKTRACE_H_
-
-#define MAX_TRACEBACK 63
-
-struct traceback_;
-typedef struct traceback_ * tracebackp;
-
-tracebackp traceback_alloc(void);
-void traceback_free(tracebackp);
-void traceback_stdout(tracebackp);
-void traceback_stderr(tracebackp);
-
+#include "my_traceback.h"
+#include "my_sprintf.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <execinfo.h>
 #include <cxxabi.h>
+
+void Traceback::init (void) {
+#ifndef WIN32
+    size = backtrace(&tb[0], tb.size());
+#else
+    size = 0;
+#endif
+}
 
 //
 // Inspired from https://github.com/nico/demumble/issues
@@ -33,12 +26,12 @@ static bool starts_with(const char* s, const char* prefix) {
 
 static bool is_mangle_char_posix(char c) {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
-           (c >= '0' && c <= '9') || c == '_';
+        (c >= '0' && c <= '9') || c == '_';
 }
 
 static bool is_mangle_char_win(char c) {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
-           (c >= '0' && c <= '9') || strchr("?_@$", c);
+        (c >= '0' && c <= '9') || strchr("?_@$", c);
 }
 
 static bool is_plausible_itanium_prefix(char* s) {
@@ -50,24 +43,23 @@ static bool is_plausible_itanium_prefix(char* s) {
     return strstr(prefix, "_Z");
 }
 
-inline void backtrace_print(FILE *out,
-                            void *addrlist[MAX_TRACEBACK+1],
-                            int addrlen)
+std::string Traceback::to_string (void)
 {
-    fprintf(out, "stack trace:\n");
+    auto addrlist = &tb[0];
+    std::string sout = "stack trace:\n========================================================\n";
 
-    if (addrlen == 0) {
-	fprintf(out, "  <empty, possibly corrupt>\n");
-	return;
+    if (size == 0) {
+        sout +="  <empty, possibly corrupt>\n";
+        return (sout);
     }
 
     // resolve addresses into strings containing "filename(function+address)",
     // this array must be free()-ed
-    char ** symbollist = backtrace_symbols(addrlist, addrlen);
-    const char *prefix = "> ";
+    char **symbollist = backtrace_symbols(addrlist, size);
+    const char *prefix = " ↪ ";
 
     // address of this function.
-    for (int i = 1; i < addrlen; i++) {
+    for (int i = 1; i < size; i++) {
 
         char *p = symbollist[i];
         char *cur = p;
@@ -105,7 +97,7 @@ inline void backtrace_print(FILE *out,
 
             int status = 0;
             if (char *demangled = abi::__cxa_demangle(cur, 0, 0, &status)) {
-                fprintf(out, "%s%u %s\n", prefix, i, demangled);
+                sout += string_sprintf("%s%u %s\n", prefix, i, demangled);
                 free(demangled);
                 done = true;
                 break;
@@ -116,22 +108,20 @@ inline void backtrace_print(FILE *out,
         }
 
         if (!done) {
-            fprintf(out, "%s%s\n", prefix, p);
+            sout += string_sprintf("%s%s\n", prefix, p);
         }
     }
 
+    sout += string_sprintf("end-of-stack\n");
+
     free(symbollist);
+
+    return (sout);
 }
 
-inline void backtrace_print (void)
+void traceback_dump (void) 
 {
-    // storage array for stack trace address data
-    void* addrlist[MAX_TRACEBACK+1];
-
-    // retrieve current stack addresses
-    int addrlen = backtrace(addrlist, sizeof(addrlist) / sizeof(void*));
-
-    backtrace_print(MY_STDERR, addrlist, addrlen);
+    auto tb = new Traceback();
+    tb->init();
+    std::cerr << tb->to_string() << std::endl;
 }
-
-#endif

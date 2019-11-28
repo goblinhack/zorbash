@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_color.h"
 #include "my_dmap.h"
+#include "my_sprintf.h"
 #include <list>
 
 static std::list<uint32_t> things_to_delete;

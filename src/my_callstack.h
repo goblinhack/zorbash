@@ -43,7 +43,7 @@ int callframes_depth;
 extern struct callframe callframes[MAXCALLFRAME];
 extern int callframes_depth;
 #endif
-extern void callstack_dump (void);
+extern void callstack_dump(void);
 
 struct tracer_t {
     tracer_t (const char *file,

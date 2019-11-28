@@ -40,13 +40,6 @@ void wid_console_fini (void)
     wid_destroy(&wid_console_horiz_scroll);
     wid_destroy(&wid_console_input_line);
     wid_destroy(&wid_console_window);
-    wid_gc_all();
-
-    wid_console_container = nullptr;
-    wid_console_vert_scroll = nullptr;
-    wid_console_horiz_scroll = nullptr;
-    wid_console_input_line = nullptr;
-    wid_console_window = nullptr;
 }
 
 uint8_t wid_console_init (void)

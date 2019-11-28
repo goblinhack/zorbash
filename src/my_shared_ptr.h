@@ -4,7 +4,6 @@
 #include <sstream>
 #include <string>
 #include <iostream>
-#include "my_ptrcheck.h"
 
 template <typename T> class SmartPointerWrapper {
 private:

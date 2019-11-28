@@ -4,7 +4,7 @@
  */
 
 #include "my_main.h"
-#include "my_backtrace.h"
+#include "my_traceback.h"
 #include "my_wid.h"
 #include "my_wid_console.h"
 #include "my_wid_minicon.h"
@@ -380,6 +380,7 @@ static void dying_ (const char *fmt, va_list args)
     uint32_t len;
 
     callstack_dump();
+    traceback_dump();
 
     buf[0] = '\0';
     timestamp(buf, MAXSHORTSTR);
@@ -425,7 +426,8 @@ static void err_ (const char *fmt, va_list args)
 
     wid_console_log(buf);
 
-    backtrace_print();
+    callstack_dump();
+    traceback_dump();
     fflush(MY_STDOUT);
 }
 
@@ -713,7 +715,8 @@ void Thing::err_ (const char *fmt, va_list args)
     fprintf(stderr, "%s\n", buf);
     fflush(stderr);
 
-    backtrace_print();
+    callstack_dump();
+    traceback_dump();
     fflush(MY_STDOUT);
 
     wid_console_log(buf);
@@ -857,7 +860,8 @@ void Light::err_ (const char *fmt, va_list args)
     fprintf(stderr, "%s\n", buf);
     fflush(stderr);
 
-    backtrace_print();
+    callstack_dump();
+    traceback_dump();
     fflush(MY_STDOUT);
 
     wid_console_log(buf);
@@ -895,6 +899,7 @@ static void wid_log_ (Widp t, const char *fmt, va_list args)
     char buf[MAXSHORTSTR];
     uint32_t len;
 
+    verify(t);
     buf[0] = '\0';
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
@@ -909,7 +914,7 @@ void WID_LOG (Widp t, const char *fmt, ...)
 {
     va_list args;
 
-    verify(t.get());
+    verify(t);
 
     va_start(args, fmt);
     wid_log_(t, fmt, args);
@@ -918,12 +923,9 @@ void WID_LOG (Widp t, const char *fmt, ...)
 
 void WID_DBG (Widp t, const char *fmt, ...)
 {
-    if (!debug) {
-        return;
-    }
     va_list args;
 
-    verify(t.get());
+    verify(t);
 
     va_start(args, fmt);
     wid_log_(t, fmt, args);
@@ -960,7 +962,9 @@ static void msgerr_ (const char *fmt, va_list args)
 
     wid_console_log(buf);
 
-    backtrace_print();
+    callstack_dump();
+    traceback_dump();
+
     fflush(MY_STDOUT);
 }
 
@@ -1011,7 +1015,8 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
     fprintf(stderr, "%s\n", buf);
     fflush(stderr);
 
-    backtrace_print();
+    callstack_dump();
+    traceback_dump();
 }
 
 void SDL_MSG_BOX (const char *fmt, ...)
