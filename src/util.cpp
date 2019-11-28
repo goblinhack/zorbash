@@ -8,16 +8,16 @@
 #include "stdlib.h"
 #include <string.h>
 
-void *myzalloc_ (uint32_t size,
-                 const char *what,
-                 const char *file,
-                 const char *func,
-                 uint32_t line)
+void *myzalloc_ (int size,
+                 std::string what,
+                 std::string file,
+                 std::string func,
+                 int line)
 {_
     void *ptr = calloc(1, size);
 
     if (!ptr) {
-        DIE("No memory, %s:%s():%u", file, func, line);
+        DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
 #ifdef ENABLE_PTRCHECK
@@ -27,16 +27,16 @@ void *myzalloc_ (uint32_t size,
     return (ptr);
 }
 
-void *mymalloc_ (uint32_t size,
-                 const char *what,
-                 const char *file,
-                 const char *func,
-                 uint32_t line)
+void *mymalloc_ (int size,
+                 std::string what,
+                 std::string file,
+                 std::string func,
+                 int line)
 {_
     void *ptr = malloc(size);
 
     if (!ptr) {
-        DIE("No memory, %s:%s():%u", file, func, line);
+        DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
 #ifdef ENABLE_PTRCHECK
@@ -47,11 +47,11 @@ void *mymalloc_ (uint32_t size,
 }
 
 void *myrealloc_ (void *ptr,
-                  uint32_t size,
-                  const char *what,
-                  const char *file,
-                  const char *func,
-                  uint32_t line)
+                  int size,
+                  std::string what,
+                  std::string file,
+                  std::string func,
+                  int line)
 {_
 #ifdef ENABLE_PTRCHECK
     ptrcheck_free(ptr, file, func, line);
@@ -59,7 +59,7 @@ void *myrealloc_ (void *ptr,
 
     ptr = realloc(ptr, size);
     if (!ptr) {
-        DIE("No memory, %s:%s():%u", file, func, line);
+        DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
 #ifdef ENABLE_PTRCHECK
@@ -70,9 +70,9 @@ void *myrealloc_ (void *ptr,
 }
 
 void myfree_ (void *ptr,
-              const char *file,
-              const char *func,
-              uint32_t line)
+              std::string file,
+              std::string func,
+              int line)
 {_
 #ifdef ENABLE_PTRCHECK
     ptrcheck_free(ptr, file, func, line);
@@ -82,10 +82,10 @@ void myfree_ (void *ptr,
 }
 
 char *dupstr_ (const char *in,
-               const char *what,
-               const char *file,
-               const char *func,
-               uint32_t line)
+               std::string what,
+               std::string file,
+               std::string func,
+               int line)
 {_
     if (!in) {
         ERR("no string to duplicate");
@@ -94,11 +94,11 @@ char *dupstr_ (const char *in,
 
     char *ptr = strdup(in);
 #ifdef ENABLE_PTRCHECK
-    uint32_t size = (__typeof__(size)) strlen(in);
+    int size = (__typeof__(size)) strlen(in);
 #endif
 
     if (!ptr) {
-        DIE("No memory, %s:%s():%u", file, func, line);
+        DIE("No memory, %s:%s():%u", file.c_str(), func.c_str(), line);
     }
 
 #ifdef ENABLE_PTRCHECK

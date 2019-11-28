@@ -29,18 +29,29 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-#define ENABLE_ASSERT              // DIE on errors
-
 #define DEBUG_CRASH
+
 #ifdef DEBUG_CRASH
+#define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_TRACING             // Function tracing
-#define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
-#define ENABLE_LEAKCHECK
+#define ENABLE_PTRCHECK_LEAK
+#define ENABLE_PTRCHECK            // Check validity of pointers too
+#define ENABLE_PTRCHECK_HISTORY 10 // Per pointer history
+#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
+#endif
+
+//
+// UI debugging
+//
+#undef  ENABLE_WID_DEBUG
+#undef  DEBUG_WID_FOCUS
+#ifdef  ENABLE_WID_DEBUG
+#define WID_FULL_LOGNAME
 #endif
 
 #define ENABLE_INVERTED_GFX        // For vision impaired
-#define ENABLE_ASCII_MOUSE
+#undef  ENABLE_ASCII_MOUSE
 #define ENABLE_TILE_COLLISION_CHECKING
 
 //
@@ -237,7 +248,7 @@ typedef unsigned long long   uint64_t;
 #define DCHAR '/'
 
 #define DIE(args...)                                                          \
-    _ \
+    _                                                                         \
     DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
     CROAK(args);                                                              \
     exit(1);

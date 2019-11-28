@@ -98,7 +98,8 @@ char *substr (const char *in, int32_t pos, int32_t len)
  *
  * strsub("foo.zip", ".zip", ""); -> "foo"
  */
-char *strsub (const char *in, const char *old, const char *replace_with)
+char *strsub_ (const char *in, const char *old, const char *replace_with,
+               std::string what, std::string file, std::string func, int line)
 {_
     char *buf;
     const char *at;
@@ -112,7 +113,7 @@ char *strsub (const char *in, const char *old, const char *replace_with)
 
     at = strstr(in, old);
     if (!at) {
-        buf = dupstr(in, __FUNCTION__);
+        buf = dupstr(in, what);
         return (buf);
     }
 
@@ -120,7 +121,8 @@ char *strsub (const char *in, const char *old, const char *replace_with)
     newlen = (uint32_t)strlen(replace_with);
 
     len = (uint32_t)strlen(in) - oldlen + newlen;
-    buf = (__typeof__(buf)) myzalloc(len + sizeof((char)'\0'), "strsub 2");
+    buf = (__typeof__(buf)) 
+            myzalloc_(len + sizeof((char)'\0'), what, file, func, line);
     if (!buf) {
         return (0);
     }
@@ -136,7 +138,7 @@ char *strsub (const char *in, const char *old, const char *replace_with)
 /*
  * Add onto the end of a string.
  *
- * strsub("foo", ".zip"); -> "foo.zip"
+ * strappend("foo", ".zip"); -> "foo.zip"
  */
 char *strappend (const char *in, const char *append)
 {_
@@ -164,7 +166,7 @@ char *strappend (const char *in, const char *append)
 /*
  * Add onto the start of a string.
  *
- * strsub("foo", "bar"); -> "barfoo"
+ * strprepend("foo", "bar"); -> "barfoo"
  */
 char *strprepend (const char *in, const char *prepend)
 {_
@@ -1111,25 +1113,6 @@ int32_t snprintf_realloc (char **str,
 }
 
 #include <string>
-
-std::string string_sprintf (const char *format, ...)
-{_
-    va_list args;
-    char *buf;
-
-    va_start(args, format);
-
-    if (vasprintf(&buf, format, args) == -1) {
-        throw std::bad_alloc();
-    }
-
-    std::string ret = buf;
-    free(buf);
-
-    va_end(args);
-
-    return (ret);
-}
 
 std::vector<std::string> split_tokens(const std::string &s,
                                       const char delimiter)

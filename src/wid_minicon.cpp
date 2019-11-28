@@ -26,18 +26,11 @@ static std::map< unsigned int, std::wstring > wid_minicon_lines;
 
 void wid_minicon_fini (void)
 {_
-    wid_minicon_container = nullptr;
-    wid_minicon_vert_scroll = nullptr;
-    wid_minicon_horiz_scroll = nullptr;
-    wid_minicon_input_line = nullptr;
-    wid_minicon_window = nullptr;
-    wid_gc_all();
-
-    wid_minicon_container = nullptr;
-    wid_minicon_vert_scroll = nullptr;
-    wid_minicon_horiz_scroll = nullptr;
-    wid_minicon_input_line = nullptr;
-    wid_minicon_window = nullptr;
+    wid_destroy(&wid_minicon_container);
+    wid_destroy(&wid_minicon_vert_scroll);
+    wid_destroy(&wid_minicon_horiz_scroll);
+    wid_destroy(&wid_minicon_input_line);
+    wid_destroy(&wid_minicon_window);
 }
 
 uint8_t wid_minicon_init (void)

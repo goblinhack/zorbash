@@ -8,7 +8,7 @@
 #include "my_game.h"
 #include "my_dmap.h"
 #include "my_math.h"
-#include "my_string.h"
+#include "my_sprintf.h"
 #include <vector>
 
 #define ASTAR_DEBUG
