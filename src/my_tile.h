@@ -27,12 +27,10 @@ class Tile {
 public:
     Tile (void) { 
 fprintf(MY_STDERR,"\nZZZ %s %s %d new %p",__FILE__,__FUNCTION__,__LINE__, this);
-callstack_dump();
         newptr(this, "Tile"); 
     }
     ~Tile (void) { 
 fprintf(MY_STDERR,"\nZZZ %s %s %d delete %p",__FILE__,__FUNCTION__,__LINE__, this);
-callstack_dump();
         oldptr(this); 
     }
     Tile (const class Tile *tile);
