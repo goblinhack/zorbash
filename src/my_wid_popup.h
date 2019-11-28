@@ -21,7 +21,7 @@ private:
 public:
     point tl;
     point br;
-    Tile title_tile;
+    Tilep title_tile;
 
 public:
     ~WidPopup();

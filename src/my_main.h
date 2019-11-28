@@ -3,6 +3,29 @@
 // See the README file for license info.
 //
 
+#pragma once
+
+#ifndef _MY_MAIN_H_
+#define _MY_MAIN_H_
+
+//
+// Commonly changed settings
+//
+#undef DEBUG_CRASH
+#ifdef DEBUG_CRASH
+#define ENABLE_ASSERT              // DIE on errors
+#define ENABLE_TRACING             // Function tracing
+#define ENABLE_CRASH_HANDLER       // Intercept SEGV
+#define ENABLE_PTRCHECK_LEAK
+#define ENABLE_PTRCHECK            // Check validity of pointers too
+#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
+#endif
+#define ENABLE_PTRCHECK_HISTORY 10 // Per pointer history
+#define ENABLE_INVERTED_GFX        // For vision impaired
+
+//
+// Settings to override compiler errors
+//
 // `error' to treat this diagnostic as an error, 
 // `warning' to treat it like a warning (even if -Werror is in effect)
 // `ignored' if the diagnostic is to be ignored
@@ -24,23 +47,6 @@
 /*code specific to mingw compilers*/
 #endif
 
-#pragma once
-
-#ifndef _MY_MAIN_H_
-#define _MY_MAIN_H_
-
-#undef DEBUG_CRASH
-
-#ifdef DEBUG_CRASH
-#define ENABLE_ASSERT              // DIE on errors
-#define ENABLE_TRACING             // Function tracing
-#define ENABLE_CRASH_HANDLER       // Intercept SEGV
-#define ENABLE_PTRCHECK_LEAK
-#define ENABLE_PTRCHECK            // Check validity of pointers too
-#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
-#endif
-#define ENABLE_PTRCHECK_HISTORY 10 // Per pointer history
-
 //
 // UI debugging
 //
@@ -50,7 +56,6 @@
 #define WID_FULL_LOGNAME
 #endif
 
-#define ENABLE_INVERTED_GFX        // For vision impaired
 #undef  ENABLE_ASCII_MOUSE
 #define ENABLE_TILE_COLLISION_CHECKING
 

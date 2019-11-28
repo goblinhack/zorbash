@@ -30,14 +30,7 @@ void tile_fini (void)
     }
 
     for (auto t : all_tiles) {
-auto tile = t.second;
-fprintf(MY_STDERR,"will kill %p %s\n", tile, tile->name.c_str());
-    }
-
-    for (auto t : all_tiles) {
         verify(t.second);
-auto tile = t.second;
-fprintf(MY_STDERR,"destroy %p %s\n", tile, tile->name.c_str());
         delete t.second;
     }
 
@@ -48,7 +41,6 @@ fprintf(MY_STDERR,"destroy %p %s\n", tile, tile->name.c_str());
 Tile::Tile (const class Tile *tile)
 {
     newptr(this, "Tile copy");
-fprintf(MY_STDERR,"\nZZZ %s %s %d copy %p",__FILE__,__FUNCTION__,__LINE__, this);
 
     pix_width = tile->pix_width;
     pix_height = tile->pix_height;
