@@ -238,8 +238,9 @@ log("tile %s got one", tile_name(tile).c_str());
             // ignore
             //
         } else {
-            die("could not find a good tile after %d tries; has %d tiles, have tile %s", 
+            err("could not find a good animation tile after %d tries; has %d tiles, have tile %s", 
                 tries, size, tile_name(tile).c_str());
+            return;
         }
     }
 

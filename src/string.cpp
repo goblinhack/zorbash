@@ -6,6 +6,10 @@
 #include <libgen.h>
 #include <string>
 #include <sstream>
+#include <string>
+#include <iostream>
+#include <string>
+#include <algorithm>
 
 #include "my_main.h"
 #include "my_sdl.h"
@@ -1112,8 +1116,6 @@ int32_t snprintf_realloc (char **str,
     }
 }
 
-#include <string>
-
 std::vector<std::string> split_tokens(const std::string &s,
                                       const char delimiter)
 {
@@ -1124,4 +1126,93 @@ std::vector<std::string> split_tokens(const std::string &s,
        tokens.push_back(token);
    }
    return tokens;
+}
+
+// https://www.techiedelight.com/trim-string-cpp-remove-leading-trailing-spaces/
+std::string& ltrim(std::string& s)
+{
+    auto it = std::find_if(s.begin(), s.end(),
+        [](char c) {
+            return !std::isspace<char>(c, std::locale::classic());
+        });
+    s.erase(s.begin(), it);
+    return s;
+}
+
+std::string& rtrim(std::string& s)
+{
+    auto it = std::find_if(s.rbegin(), s.rend(),
+        [](char c) {
+            return !std::isspace<char>(c, std::locale::classic());
+        });
+    s.erase(it.base(), s.end());
+    return s;
+}
+
+std::string& trim(std::string& s)
+{
+   return ltrim(rtrim(s));
+}
+
+const std::string WHITESPACE = " \n\r\t\f\v";
+
+std::string ltrim_ws(const std::string& s)
+{
+    size_t start = s.find_first_not_of(WHITESPACE);
+    return (start == std::string::npos) ? "" : s.substr(start);
+}
+
+std::string rtrim_ws(const std::string& s)
+{
+    size_t end = s.find_last_not_of(WHITESPACE);
+    return (end == std::string::npos) ? "" : s.substr(0, end + 1);
+}
+
+std::string trim_ws(const std::string& s)
+{
+    return rtrim_ws(ltrim_ws(s));
+}
+
+std::wstring& ltrim(std::wstring& s)
+{
+    auto it = std::find_if(s.begin(), s.end(),
+        [](char c) {
+            return !std::isspace<char>(c, std::locale::classic());
+        });
+    s.erase(s.begin(), it);
+    return s;
+}
+
+std::wstring& rtrim(std::wstring& s)
+{
+    auto it = std::find_if(s.rbegin(), s.rend(),
+        [](char c) {
+            return !std::isspace<char>(c, std::locale::classic());
+        });
+    s.erase(it.base(), s.end());
+    return s;
+}
+
+std::wstring& trim(std::wstring& s)
+{
+   return ltrim(rtrim(s));
+}
+
+const std::wstring LWHITESPACE = L" \n\r\t\f\v";
+
+std::wstring ltrim_ws(const std::wstring& s)
+{
+    size_t start = s.find_first_not_of(LWHITESPACE);
+    return (start == std::wstring::npos) ? L"" : s.substr(start);
+}
+
+std::wstring rtrim_ws(const std::wstring& s)
+{
+    size_t end = s.find_last_not_of(LWHITESPACE);
+    return (end == std::wstring::npos) ? L"" : s.substr(0, end + 1);
+}
+
+std::wstring trim_ws(const std::wstring& s)
+{
+    return rtrim_ws(ltrim_ws(s));
 }

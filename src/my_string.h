@@ -54,4 +54,18 @@ extern std::vector<std::string> split_tokens(const std::string &s,
                                              const char delimiter);
 int32_t snprintf_realloc(char **str, int32_t *size, int32_t *used,
                          const char *fmt, ...);
+
+std::string& ltrim(std::string& s);
+std::string& rtrim(std::string& s);
+std::string& trim(std::string& s);
+std::string ltrim_ws(const std::string& s);
+std::string rtrim_ws(const std::string& s);
+std::string trim_ws(const std::string& s);
+
+std::wstring& ltrim(std::wstring& s);
+std::wstring& rtrim(std::wstring& s);
+std::wstring& trim(std::wstring& s);
+std::wstring ltrim_ws(const std::wstring& s);
+std::wstring rtrim_ws(const std::wstring& s);
+std::wstring trim_ws(const std::wstring& s);
 #endif

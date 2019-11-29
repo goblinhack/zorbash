@@ -46,7 +46,8 @@ uint8_t wid_console_init (void)
 {_
     wid_console_inited = true;
 
-    command_add(fps_enable, "set fps [01]", "frames per sec counter");
+    command_add(config_fps_counter_set, "set fps [01]", "frames per sec counter");
+    command_add(config_gfx_inverted_set, "set gfx inverted [01]", "reverse colors");
     command_add(vsync_enable, "set vsync [01]", "vertical sync enable");
     command_add(sdl_user_exit, "quit", "exit game");
 
@@ -167,7 +168,7 @@ uint8_t wid_console_receive_input (Widp w, const SDL_KEYSYM *key)
 static void wid_console_wid_create (void)
 {_
     point tl = {0, 0};
-    point br = {ASCII_WIDTH - 1, ASCII_HEIGHT - 1};
+    point br = {ASCII_WIDTH - 1, ASCII_HEIGHT / 2};
     int w = br.x - tl.x;
     int h = br.y - tl.y;
 
@@ -223,7 +224,7 @@ static void wid_console_wid_create (void)
                 wid_set_show_cursor(child, true);
                 wid_set_name(child, "console input");
                 wid_set_focusable(child, 1);
-                wid_move_delta(child, 2, 0);
+                wid_move_delta(child, 1, 0);
                 wid_console_input_line = child;
 
                 Widp prefix = wid_new_container(wid_console_container, "");
@@ -231,6 +232,7 @@ static void wid_console_wid_create (void)
                 wid_set_text_lhs(prefix, true);
                 wid_set_shape_none(prefix);
                 wid_set_text(prefix, L"\u022e");
+                wid_set_color(child, WID_COLOR_TEXT, CONSOLE_INPUT_COLOR);
             } else {
                 wid_set_color(child, WID_COLOR_TEXT, CONSOLE_TEXT_COLOR);
                 wid_set_name(child, "console output");
