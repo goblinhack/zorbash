@@ -646,7 +646,7 @@ void World::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
         if (id) {
             auto t = thing_find(id);
             verify(t);
-            if (t->is_active()) {
+            if (t->is_active() || t->is_movable()) {
                 l.push_back(t);
             }
         }

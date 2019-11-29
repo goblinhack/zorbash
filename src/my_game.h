@@ -60,6 +60,10 @@ public:
     // The player!
     //
     Thingp                     player = {};
+    Thingp                     cursor = {};
+    fpoint                     cursor_at;
+    fpoint                     cursor_at_old;
+    bool                       cursor_needs_update = true;
 
     //
     // Where we're looking in the map
@@ -280,6 +284,11 @@ public:
 typedef struct {
 public:
     bool               fps_counter                  = true;
+#ifdef ENABLE_INVERTED_GFX
+    bool               gfx_inverted                 = true;
+#else
+    bool               gfx_inverted                 = false;
+#endif
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
     bool               vsync_enable                 = true;
@@ -324,6 +333,7 @@ public:
     Config             config;
     World              world;
     int                seed {};
+    fpoint             mouse_over;
     uint32_t           fps_count = {};
 
     friend std::ostream& operator<<(std::ostream &out, 

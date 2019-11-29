@@ -828,6 +828,21 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     last_blit_tl = blit_tl;
     last_blit_br = blit_br;
+
+    if (world->cursor_needs_update) {
+        if (tp_z_depth(tpp) < MAP_DEPTH_CURSOR) {
+            float tl_mx = game->config.video_pix_width * blit_tl.x;
+            float br_mx = game->config.video_pix_width * blit_br.x;
+            if ((mouse_x >= tl_mx) && (mouse_x <= br_mx)) {
+                float tl_my = game->config.video_pix_height * blit_tl.y;
+                float br_my = game->config.video_pix_height * blit_br.y;
+                if ((mouse_y >= tl_my) && (mouse_y <= br_my)) {
+                    world->cursor_needs_update = false;
+                    world->cursor_at = mid_at;
+                }
+            }
+        }
+    }
 }
 
 void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)

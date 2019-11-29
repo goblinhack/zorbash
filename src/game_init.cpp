@@ -887,7 +887,8 @@ _
                 auto t = thing_new("player1", fpoint(x, y));
                 auto w = thing_new("sword1", fpoint(x, y));
                 t->carry(w);
-                thing_new("cursor", fpoint(x, y));
+                game->world.cursor = thing_new("cursor", fpoint(x, y));
+                game->world.cursor_needs_update = true;
             }
         }
     }

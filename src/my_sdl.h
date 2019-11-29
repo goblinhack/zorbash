@@ -87,6 +87,8 @@ extern int32_t sdl_joy2_up;
 
 extern std::array<uint8_t, SDL_MAX_BUTTONS> sdl_joy_buttons;
 extern void sdl_screenshot(void);
-extern uint8_t fps_enable(tokensp, void *context);
+extern uint8_t config_fps_counter_set(tokensp, void *context);
+extern void gfx_inverted_toggle(void);
+extern uint8_t config_gfx_inverted_set(tokensp, void *context);
 extern uint8_t vsync_enable(tokensp, void *context);
 #endif

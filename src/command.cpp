@@ -140,7 +140,7 @@ void command_add (command_fn_t callback,
     tokens_tostring(readable.c_str(), &command->readable_tokens);
 }
 
-static int32_t command_matches (const char *input,
+static int command_matches (const char *input,
                                 char *output,
                                 uint8_t show_ambiguous,
                                 uint8_t show_complete,
@@ -154,11 +154,11 @@ static int32_t command_matches (const char *input,
     tokens_t input_tokens;
     char match[MAXSHORTSTR];
     char match2[MAXSHORTSTR];
-    int32_t longest_match;
-    int32_t common_len;
-    int32_t matches;
-    int32_t cnt;
-    int32_t t;
+    int longest_match;
+    int common_len;
+    int matches;
+    int cnt;
+    int t;
 
     longest_match = -1;
     matches = 0;
@@ -174,7 +174,7 @@ static int32_t command_matches (const char *input,
     for (auto iter : commands_map) {
         auto command = iter.second;
 
-        for (t = 0; t < (int32_t)std::min(command->tokens.cnt,
+        for (t = 0; t < (int)std::min(command->tokens.cnt,
                                      input_tokens.cnt); t++) {
 
             cnt = strncmp(command->tokens.args[t],
@@ -211,7 +211,7 @@ static int32_t command_matches (const char *input,
     for (auto iter : commands_map) {
         auto command = iter.second;
 
-        for (t = 0; t < (int32_t)std::min(command->tokens.cnt,
+        for (t = 0; t < (int)std::min(command->tokens.cnt,
                                      input_tokens.cnt); t++) {
 
             cnt = strncmp(command->tokens.args[t],
@@ -276,18 +276,18 @@ static int32_t command_matches (const char *input,
             for (auto iter : commands_map) {
                 auto command = iter.second;
 
-                for (t = 0; t < (int32_t)std::min(command->tokens.cnt,
-                                            input_tokens.cnt);
+                for (t = 0; t < (int)std::min(command->tokens.cnt,
+                                                  input_tokens.cnt);
                     t++) {
 
                     cnt = strncmp(command->tokens.args[t],
-                                input_tokens.args[t],
-                                strlen(input_tokens.args[t]));
+                                  input_tokens.args[t],
+                                  strlen(input_tokens.args[t]));
 
                     if (slre_match(&command->tokens.regexp[t],
-                                input_tokens.args[t],
-                                (int) strlen(input_tokens.args[t]),
-                                0 /* captures */)) {
+                                  input_tokens.args[t],
+                                  (int) strlen(input_tokens.args[t]),
+                                  0 /* captures */)) {
                         /*
                          * Success
                          */
@@ -305,13 +305,14 @@ static int32_t command_matches (const char *input,
                     for (t = 0; t < longest_match; t++) {
                         if (strisregexp(command->tokens.args[t])) {
                             strlcat_(cand_expand_to, input_tokens.args[t],
-                                    sizeof(cand_expand_to));
+                                     sizeof(cand_expand_to));
                             strlcat_(cand_expand_to, " ", sizeof(cand_expand_to));
                             continue;
                         }
 
                         strlcat_(cand_expand_to, command->tokens.args[t],
                                 sizeof(cand_expand_to));
+
                         strlcat_(cand_expand_to, " ", sizeof(cand_expand_to));
                     }
 
@@ -348,7 +349,7 @@ uint8_t command_handle (const char *input,
                         uint8_t execute_command,
                         void *context)
 {_
-    int32_t matches;
+    int matches;
 
     if (expandedtext) {
         *expandedtext = '\0';
@@ -465,4 +466,3 @@ uint8_t command_handle (std::wstring input,
 
     return (r);
 }
-

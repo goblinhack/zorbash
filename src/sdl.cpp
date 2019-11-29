@@ -892,16 +892,57 @@ void sdl_exit (void)
 /*
  * User has entered a command, run it
  */
-uint8_t fps_enable (tokens_t *tokens, void *context)
+uint8_t config_fps_counter_set (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[2];
 
     if (!s || (*s == '\0')) {
         game->config.fps_counter = true;
-        CON("FSP counter enabled");
+        CON("FSP counter enabled (default)");
     } else {
-        CON("FSP counter disabled");
         game->config.fps_counter = strtol(s, 0, 10) ? 1 : 0;
+        if (game->config.fps_counter) {
+            CON("FPS counter enabled");
+        } else {
+            CON("FPS counter disabled");
+        }
+    }
+
+    return (true);
+}
+
+/*
+ * User has entered a command, run it
+ */
+void gfx_inverted_toggle (void)
+{_
+    if (!game->config.gfx_inverted) {
+        game->config.gfx_inverted = true;
+        CON("gfx inverted enabled");
+    } else {
+        game->config.gfx_inverted = false;
+        CON("gfx inverted disabled");
+    }
+}
+
+/*
+ * User has entered a command, run it
+ */
+uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
+{_
+    char *s = tokens->args[3];
+
+    if (!s || (*s == '\0')) {
+        game->config.gfx_inverted = true;
+        CON("gfx inverted enabled (default)");
+    } else {
+        int val = strtol(s, 0, 10) ? 1 : 0;
+        game->config.gfx_inverted = val;
+        if (game->config.gfx_inverted) {
+            CON("gfx inverted enabled");
+        } else {
+            CON("gfx inverted disabled");
+        }
     }
 
     return (true);
@@ -1050,13 +1091,12 @@ void sdl_loop (void)
 	blit_fbo_unbind();
 
 	glBlendFunc(GL_ONE, GL_ZERO);
-        extern bool inverted_gfx;
-        if (inverted_gfx) {
+        if (game->config.gfx_inverted) {
             glLogicOp(GL_COPY_INVERTED);
             glEnable(GL_COLOR_LOGIC_OP);
         }
 	blit_fbo(FBO_MAIN);
-        if (inverted_gfx) {
+        if (game->config.gfx_inverted) {
             glLogicOp(GL_COPY);
             glDisable(GL_COLOR_LOGIC_OP);
         }

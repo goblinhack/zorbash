@@ -21,12 +21,6 @@
 #include "my_game.h"
 #include <stdlib.h>
 
-#ifdef ENABLE_INVERTED_GFX
-bool inverted_gfx = true;
-#else
-bool inverted_gfx = false;
-#endif
-
 //
 // Display sorted.
 //
@@ -3267,11 +3261,6 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
         case KMOD_LCTRL:
         case KMOD_RCTRL:
             switch (wid_event_to_char(key)) {
-            case 'i':
-                CON("Screen inverted");
-                inverted_gfx = !inverted_gfx;
-                break;
-
             case 'p':
                 if (!history_walk) {
                     history_walk = HISTORY_MAX - 1;
@@ -3344,7 +3333,7 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                     static std::wstring entered2;
 
                     entered = wid_get_text(w);
-                    entered2 = L"> " + wid_get_text(w);
+                    entered2 = L"\u022e %%fg=green$" + wid_get_text(w);
 
                     wid_scroll_text(w);
                     wid_set_text(w->next, entered2);
@@ -3357,6 +3346,8 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                                         0 /* context */)) {
                          return (true);
                     }
+
+                    updatedtext = trim(updatedtext);
 
                     if (!updatedtext.empty()) {
                         wid_set_text(w, updatedtext);
@@ -3514,8 +3505,11 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 CON("Screenshot taken");
                 break;
 
+            case '1':
+                gfx_inverted_toggle();
+                break;
+
             case '`':
-            case '~':
                 wid_toggle_hidden(wid_console_window);
                 wid_raise(wid_console_window);
 
