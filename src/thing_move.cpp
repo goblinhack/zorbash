@@ -39,6 +39,14 @@ bool Thing::move (fpoint future_pos,
         return (false);
     }
 
+    if (is_player()) {
+        if (!world->map_follow_player) {
+            world->map_follow_player = true;
+            world->cursor_needs_update = true;
+            CON("player move, move cursor");
+        }
+    }
+
     if (tp_gfx_can_hflip(tp())) {
         if (future_pos.x > mid_at.x) {
             if (is_facing_left && !get_timestamp_flip_start()) {

@@ -43,34 +43,32 @@ private:
     //
     // These are caches for fast lookup in display code
     //
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow_caster {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow_caster {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
 public:
-    //
-    // The player!
-    //
-    Thingp                     player = {};
-    Thingp                     cursor = {};
+    bool                       cursor_needs_update = false;
+    bool                       cursor_found = false;
     fpoint                     cursor_at;
     fpoint                     cursor_at_old;
-    bool                       cursor_needs_update = true;
+    bool                       map_follow_player = true;
+    fpoint                     map_at;        // map scroll currently st
+    fpoint                     map_wanted_at; // map scroll desired at
+    int                        mouse {-1};    // ticks for every move
+    int                        mouse_old {-1};
+    uint32_t                   timestamp_dungeon_created {};
 
-    //
-    // Where we're looking in the map
-    //
-    fpoint                     map_at;
-    fpoint                     map_wanted_at;
-    point                      map_tile_over;
+    Thingp                     player = {};
+    Thingp                     cursor = {};
 
     //
     // All things. The location forms the ID.

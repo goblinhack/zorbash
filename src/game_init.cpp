@@ -888,11 +888,14 @@ _
                 auto w = thing_new("sword1", fpoint(x, y));
                 t->carry(w);
                 game->world.cursor = thing_new("cursor", fpoint(x, y));
-                game->world.cursor_needs_update = true;
+                game->world.map_follow_player = true;
+                game->world.mouse = -1;
+                game->world.mouse_old = -1;
             }
         }
     }
 
+    game->world.timestamp_dungeon_created = time_get_time_ms();
     game_place_monst(dungeon);
     game_place_food(dungeon);
     game_place_blood(dungeon);

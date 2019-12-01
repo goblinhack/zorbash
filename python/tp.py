@@ -284,8 +284,8 @@ class Tp:
     def set_is_rrr47(self, value):
         zx.tp_set_is_rrr47(self, value)
 
-    def set_is_rrr48(self, value):
-        zx.tp_set_is_rrr48(self, value)
+    def set_is_cursor_hover(self, value):
+        zx.tp_set_is_cursor_hover(self, value)
 
     def set_is_cursor(self, value):
         zx.tp_set_is_cursor(self, value)

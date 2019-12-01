@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #define __MAIN__
 
@@ -220,9 +220,9 @@ void die (void)
     exit(1);
 }
 
-/*
- * Find the binary we are running.
- */
+//
+// Find the binary we are running.
+//
 static void find_executable (void)
 {_
     char *parent_dir = 0;
@@ -234,25 +234,25 @@ static void find_executable (void)
 
     exec_name = mybasename(ARGV[0], __FUNCTION__);
 
-    /*
-     * Get the current directory, ending in a single /
-     */
+    //
+    // Get the current directory, ending in a single /
+    //
     curr_dir = dynprintf("%s" DSEP, dir_dot());
     tmp = strsub(curr_dir, DSEP DSEP, DSEP, "curr_dir");
     myfree(curr_dir);
     curr_dir = tmp;
 
-    /*
-     * Get the parent directory, ending in a single /
-     */
+    //
+    // Get the parent directory, ending in a single /
+    //
     parent_dir = dynprintf("%s" DSEP, dir_dotdot(dir_dot()));
     tmp = strsub(parent_dir, DSEP DSEP, DSEP, "parent_dir");
     myfree(parent_dir);
     parent_dir = tmp;
 
-    /*
-     * Get rid of ../ from the program name and replace with the path.
-     */
+    //
+    // Get rid of ../ from the program name and replace with the path.
+    //
     exec_expanded_name = dupstr(ARGV[0], __FUNCTION__);
     if (*exec_expanded_name == '.') {
         tmp = strsub(exec_expanded_name, ".." DSEP, parent_dir, "exec_expanded_name");
@@ -260,25 +260,25 @@ static void find_executable (void)
         exec_expanded_name = tmp;
     }
 
-    /*
-     * Get rid of ./ from the program name.
-     */
+    //
+    // Get rid of ./ from the program name.
+    //
     if (*exec_expanded_name == '.') {
         tmp = strsub(exec_expanded_name, "." DSEP, "", "exec_expanded_name2");
         myfree(exec_expanded_name);
         exec_expanded_name = tmp;
     }
 
-    /*
-     * Get rid of any // from th path
-     */
+    //
+    // Get rid of any // from th path
+    //
     tmp = strsub(exec_expanded_name, DSEP DSEP, DSEP, "exec_expanded_name3");
     myfree(exec_expanded_name);
     exec_expanded_name = tmp;
 
-    /*
-     * Look in the simplest case first.
-     */
+    //
+    // Look in the simplest case first.
+    //
     EXEC_FULL_PATH_AND_NAME = dynprintf("%s%s", curr_dir, exec_name.c_str());
     if (file_exists(EXEC_FULL_PATH_AND_NAME)) {
         EXEC_DIR = dupstr(curr_dir, "exec dir 1");
@@ -287,9 +287,9 @@ static void find_executable (void)
 
     myfree(EXEC_FULL_PATH_AND_NAME);
 
-    /*
-     * Try the parent dir.
-     */
+    //
+    // Try the parent dir.
+    //
     EXEC_FULL_PATH_AND_NAME = dynprintf("%s%s", parent_dir, exec_name.c_str());
     if (file_exists(EXEC_FULL_PATH_AND_NAME)) {
         EXEC_DIR = dupstr(parent_dir, "exec dir 2");
@@ -298,9 +298,9 @@ static void find_executable (void)
 
     myfree(EXEC_FULL_PATH_AND_NAME);
 
-    /*
-     * Try the PATH.
-     */
+    //
+    // Try the PATH.
+    //
     path = getenv("PATH");
     if (path) {
         char *dir = 0;
@@ -347,16 +347,16 @@ cleanup:
     }
 }
 
-/*
- * Find all installed file locations.
- */
+//
+// Find all installed file locations.
+//
 static void find_exec_dir (void)
 {_
     find_executable();
 
-    /*
-     * Make sure the exec dir ends in a /
-     */
+    //
+    // Make sure the exec dir ends in a /
+    //
     auto tmp = dynprintf("%s" DSEP, EXEC_DIR);
     auto tmp2 = strsub(tmp, DSEP DSEP, DSEP, "EXEC_DIR");
     myfree(tmp);
@@ -366,9 +366,9 @@ static void find_exec_dir (void)
     EXEC_DIR = tmp2;
 }
 
-/*
- * Hunt down the data/ dir.
- */
+//
+// Hunt down the data/ dir.
+//
 static void find_data_dir (void)
 {_
     DATA_PATH = dynprintf("%sdata" DSEP, EXEC_DIR);
@@ -381,9 +381,9 @@ static void find_data_dir (void)
     DATA_PATH = dupstr(EXEC_DIR, __FUNCTION__);
 }
 
-/*
- * Hunt down the python/ dir.
- */
+//
+// Hunt down the python/ dir.
+//
 static void find_python_dir (void)
 {_
     PYTHON_PATH = dynprintf("%spython" DSEP, EXEC_DIR);
@@ -396,9 +396,9 @@ static void find_python_dir (void)
     PYTHON_PATH = dupstr(EXEC_DIR, __FUNCTION__);
 }
 
-/*
- * Hunt down the world/ dir.
- */
+//
+// Hunt down the world/ dir.
+//
 static void find_world_dir (void)
 {_
     WORLD_PATH = dynprintf("%sdata" DSEP "world" DSEP, EXEC_DIR);
@@ -411,9 +411,9 @@ static void find_world_dir (void)
     WORLD_PATH = dupstr(EXEC_DIR, __FUNCTION__);
 }
 
-/*
- * Hunt down the ttf/ dir.
- */
+//
+// Hunt down the ttf/ dir.
+//
 static void find_ttf_dir (void)
 {_
     TTF_PATH = dynprintf("%sdata" DSEP "ttf" DSEP, EXEC_DIR);
@@ -426,9 +426,9 @@ static void find_ttf_dir (void)
     TTF_PATH = dupstr(EXEC_DIR, __FUNCTION__);
 }
 
-/*
- * Hunt down the gfx/ dir.
- */
+//
+// Hunt down the gfx/ dir.
+//
 static void find_gfx_dir (void)
 {_
     GFX_PATH = dynprintf("%sdata" DSEP "gfx" DSEP, EXEC_DIR);
@@ -441,9 +441,9 @@ static void find_gfx_dir (void)
     GFX_PATH = dupstr(EXEC_DIR, __FUNCTION__);
 }
 
-/*
- * Find all installed file locations.
- */
+//
+// Find all installed file locations.
+//
 static void find_file_locations (void)
 {_
     find_exec_dir();
@@ -477,18 +477,18 @@ static void parse_args (int32_t argc, char *argv[])
 
     LOG("Greetings mortal");
 
-    /*
-     * Parse format args
-     */
+    //
+    // Parse format args
+    //
     LOG("Program name: \"%s\"", argv[0]);
     for (i = 1; i < argc; i++) {
         CON("  arg: \"%s\"", argv[i]);
     }
 
     for (i = 1; i < argc; i++) {
-        /*
-         * Bad argument.
-         */
+        //
+        // Bad argument.
+        //
         if (argv[i][0] == '-') {
             usage();
             WARN("unknown format argument, %s", argv[i]);
@@ -507,10 +507,6 @@ int32_t main (int32_t argc, char *argv[])
     std::normal_distribution<double> distribution;
     distribution.param(std::normal_distribution<double>(mean, std).param());
     rng.seed(std::random_device{}());
-
-    /*
-    mcheck(0);
-     */
 
 #ifdef ENABLE_CRASH_HANDLER
     signal(SIGSEGV, segv_handler);   // install our handler

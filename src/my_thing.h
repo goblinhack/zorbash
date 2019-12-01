@@ -148,6 +148,7 @@ typedef struct Thing_ {
     uint32_t is_submerged:1       {};
     uint32_t is_waiting_for_ai:1  {};
     uint32_t is_pending_gc:1      {};
+    uint32_t is_blitted:1         {};
 
     Tpp tp(void)
     {
@@ -311,6 +312,7 @@ typedef struct Thing_ {
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire);
     bool update_coordinates(void);
+    void update_cursor(void);
     bool will_attack(const Thingp it);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
@@ -422,7 +424,7 @@ typedef struct Thing_ {
     int is_rrr45(void);
     int is_rrr46(void);
     int is_rrr47(void);
-    int is_rrr48(void);
+    int is_cursor_hover(void);
     int is_cursor(void);
     int is_rrr5(void);
     int gfx_dead_anim(void);
@@ -570,5 +572,9 @@ void thing_gc(void);
 void thing_map_scroll_to_player(void);
 void thing_render_all(void);
 void things_tick(void);
+void thing_cursor_move(void);
+void thing_cursor_map_follow(void);
+void thing_cursor_find(uint16_t minx, uint16_t miny, uint16_t maxx, uint16_t maxy);
+void thing_cursor_reset_if_needed(void);
 
 #endif // THING_H

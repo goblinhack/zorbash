@@ -6,6 +6,7 @@ def tp_init(name, tiles=[], tile_lefts=[]):
     
     x = tp.Tp(name)
 
+    x.set_is_cursor_hover(True)
     x.set_is_floor(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
