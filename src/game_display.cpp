@@ -12,10 +12,10 @@ void Game::display (void)
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    /*
-     * thing_render_all must come before thing_move_all as it populates
-     * all the things into the map for collisions.
-     */
+    //
+    // thing_render_all must come before thing_move_all as it populates
+    // all the things into the map for collisions.
+    //
     thing_render_all();
 
     blit_fbo_unbind();

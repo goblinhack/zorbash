@@ -46,6 +46,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
             std::string floor_string;
             std::string water_string;
+            std::string lava_string;
             std::string deco_string;
             std::string wall_deco_string;
             std::string walls_string;
@@ -59,11 +60,13 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
                 if (m.is_floor ||
                     m.is_secret_corridor ||
-                    m.is_dirt ||
-                    m.is_lava) {
+                    m.is_dirt) {
                     floor_string += c;
                 } else if (m.is_door ||
                            m.is_blood ||
+                           m.is_entrance ||
+                           m.is_exit ||
+                           m.is_lava ||
                            m.gfx_is_floor_deco) {
                     floor_string += Charmap::FLOOR;
                 } else {
@@ -75,6 +78,12 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     water_string += c;
                 } else {
                     water_string += Charmap::SPACE;
+                }
+
+                if (m.is_lava) {
+                    lava_string += c;
+                } else {
+                    lava_string += Charmap::SPACE;
                 }
 
                 if (m.is_wall ||
@@ -137,6 +146,10 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 DIE("level water width mismatch, %zu, expected %d",
                     water_string.size(), MAP_WIDTH);
             }
+            if (lava_string.size() != MAP_WIDTH){
+                DIE("level lava width mismatch, %zu, expected %d",
+                    lava_string.size(), MAP_WIDTH);
+            }
             if (deco_string.size() != MAP_WIDTH){
                 DIE("level deco width mismatch, %zu, expected %d",
                     deco_string.size(), MAP_WIDTH);
@@ -164,6 +177,9 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
                 if (water_string[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
+                }
+                if (lava_string[x] != ' ') {
+                    set(l->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
                 }
                 if (deco_string[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
@@ -221,6 +237,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 set(l->data, x, y, MAP_DEPTH_FLOOR,      floor_string[x]);
                 set(l->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
+                set(l->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
                 set(l->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
                 set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
                 set(l->data, x, y, MAP_DEPTH_WALLS_DECO, wall_deco_string[x]);

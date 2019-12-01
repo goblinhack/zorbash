@@ -86,6 +86,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
             std::string floor_string;
             std::string water_string;
+            std::string lava_string;
             std::string deco_string;
             std::string wall_deco_string;
             std::string walls_string;
@@ -99,11 +100,13 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
                 if (m.is_floor ||
                     m.is_secret_corridor ||
-                    m.is_dirt ||
-                    m.is_lava) {
+                    m.is_dirt) {
                     floor_string += c;
                 } else if (m.is_door ||
                            m.is_blood ||
+                           m.is_entrance ||
+                           m.is_exit ||
+                           m.is_lava ||
                            m.is_water ||
                            m.is_deep_water ||
                            m.gfx_is_floor_deco) {
@@ -118,6 +121,13 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 } else {
                     water_string += Charmap::SPACE;
                 }
+
+                if (m.is_lava) {
+                    lava_string += c;
+                } else {
+                    lava_string += Charmap::SPACE;
+                }
+
                 if (m.is_wall ||
                     m.is_door) {
                     walls_string += c;
@@ -176,6 +186,10 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 DIE("room water width mismatch, %zu, expected %d",
                     water_string.size(), ROOM_WIDTH);
             }
+            if (lava_string.size() != ROOM_WIDTH){
+                DIE("room lava width mismatch, %zu, expected %d",
+                    lava_string.size(), ROOM_WIDTH);
+            }
             if (deco_string.size() != ROOM_WIDTH){
                 DIE("room deco width mismatch, %zu, expected %d",
                     deco_string.size(), ROOM_WIDTH);
@@ -200,6 +214,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             for (auto x = 0; x < ROOM_WIDTH; x++) {
                 set(r->data, x, y, MAP_DEPTH_FLOOR,      floor_string[x]);
                 set(r->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
+                set(r->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
                 set(r->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
                 set(r->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
                 set(r->data, x, y, MAP_DEPTH_WALLS_DECO, wall_deco_string[x]);

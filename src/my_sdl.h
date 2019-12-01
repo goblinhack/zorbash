@@ -39,7 +39,7 @@ enum {
     SDL_JOY_BUTTON_DOWN,                    // 12
     SDL_JOY_BUTTON_LEFT,                    // 13
     SDL_JOY_BUTTON_RIGHT,                   // 14
- //
+    //
     // Not real buttons, faking the left and right fire to be buttons.
     //
     SDL_JOY_BUTTON_LEFT_FIRE                = 30,
@@ -56,12 +56,13 @@ enum {
 struct tokens_t_;
 uint8_t sdl_user_exit(struct tokens_t_ *tokens, void *context);
 void sdl_mouse_center(void);
-void sdl_mouse_warp(int32_t x, int32_t y);
+void sdl_mouse_warp(int x, int y);
 
 extern uint32_t mouse_down;
 extern uint32_t mouse_down_when;
-extern int32_t mouse_x;
-extern int32_t mouse_y;
+extern int mouse_x;
+extern int mouse_y;
+extern int mouse_tick;
 extern uint8_t sdl_shift_held;
 
 extern int *sdl_joy_axes;
@@ -72,18 +73,18 @@ extern int joy_axes;
 extern int joy_buttons;
 extern int joy_balls;
 
-extern int32_t sdl_left_fire;
-extern int32_t sdl_right_fire;
+extern int sdl_left_fire;
+extern int sdl_right_fire;
 
-extern int32_t sdl_joy1_right;
-extern int32_t sdl_joy1_left;
-extern int32_t sdl_joy1_down;
-extern int32_t sdl_joy1_up;
+extern int sdl_joy1_right;
+extern int sdl_joy1_left;
+extern int sdl_joy1_down;
+extern int sdl_joy1_up;
 
-extern int32_t sdl_joy2_right;
-extern int32_t sdl_joy2_left;
-extern int32_t sdl_joy2_down;
-extern int32_t sdl_joy2_up;
+extern int sdl_joy2_right;
+extern int sdl_joy2_left;
+extern int sdl_joy2_down;
+extern int sdl_joy2_up;
 
 extern std::array<uint8_t, SDL_MAX_BUTTONS> sdl_joy_buttons;
 extern void sdl_screenshot(void);

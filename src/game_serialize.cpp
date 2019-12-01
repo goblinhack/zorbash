@@ -186,6 +186,7 @@ std::ostream& operator<<(std::ostream &out,
     bits32 |= my.t.is_submerged       << shift; shift++;
     bits32 |= my.t.is_waiting_for_ai  << shift; shift++;
     bits32 |= my.t.is_pending_gc      << shift; shift++;
+    bits32 |= my.t.is_blitted         << shift; shift++;
     if (shift >= (int)(sizeof(bits32) * 8)) {
         DIE("ran out of bits in serialization");
     }
@@ -238,6 +239,7 @@ std::istream& operator>>(std::istream &in, Bits<Thing &> my)
     my.t.is_submerged       = (bits32 >> shift) & 1; shift++;
     my.t.is_waiting_for_ai  = (bits32 >> shift) & 1; shift++;
     my.t.is_pending_gc      = (bits32 >> shift) & 1; shift++;
+    my.t.is_blitted         = (bits32 >> shift) & 1; shift++;
 
     world->put_thing_ptr((int)my.t.last_attached.x, 
                          (int)my.t.last_attached.y, &my.t);
@@ -294,6 +296,7 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "is_submerged        " << is_submerged         << std::endl;
     out << pfx << "is_waiting_for_ai   " << is_waiting_for_ai    << std::endl;
     out << pfx << "is_pending_gc       " << is_pending_gc        << std::endl;
+    out << pfx << "is_blitted          " << is_blitted        << std::endl;
 
     pfx = old_pfx;
     out << pfx << "}" << std::endl;
@@ -302,22 +305,29 @@ void Thing::dump (std::string pfx, std::ostream &out)
 std::ostream& operator<<(std::ostream &out, 
                          Bits<const class World & > const my)
 {_
-    out << bits(my.t._is_wall);
-    out << bits(my.t._is_gfx_large_shadow_caster);
-    out << bits(my.t._is_light);
-    out << bits(my.t._is_floor);
-    out << bits(my.t._is_lava);
     out << bits(my.t._is_blood);
-    out << bits(my.t._is_water);
-    out << bits(my.t._is_deep_water);
     out << bits(my.t._is_corridor);
+    out << bits(my.t._is_deep_water);
     out << bits(my.t._is_dirt);
+    out << bits(my.t._is_floor);
+    out << bits(my.t._is_gfx_large_shadow_caster);
+    out << bits(my.t._is_lava);
+    out << bits(my.t._is_light);
     out << bits(my.t._is_rock);
     out << bits(my.t._is_visited);
-    out << bits(my.t.map_at);
-    out << bits(my.t.map_wanted_at);
-    out << bits(my.t.map_tile_over);
+    out << bits(my.t._is_wall);
+    out << bits(my.t._is_water);
     out << bits(my.t.all_thing_ids_at);
+    out << bits(my.t.cursor_at);
+    out << bits(my.t.cursor_at_old);
+    out << bits(my.t.cursor_needs_update);
+    out << bits(my.t.cursor_found);
+    out << bits(my.t.map_at);
+    out << bits(my.t.map_follow_player);
+    out << bits(my.t.map_wanted_at);
+    out << bits(my.t.mouse);
+    out << bits(my.t.mouse_old);
+    out << bits(my.t.timestamp_dungeon_created);
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
@@ -336,22 +346,33 @@ std::ostream& operator<<(std::ostream &out,
 
 std::istream& operator>>(std::istream &in, Bits<class World &> my)
 {_
-    in >> bits(my.t._is_wall);
-    in >> bits(my.t._is_gfx_large_shadow_caster);
-    in >> bits(my.t._is_light);
-    in >> bits(my.t._is_floor);
-    in >> bits(my.t._is_lava);
+    my.t.player = nullptr;
+    my.t.cursor = nullptr;
+    my.t.all_thing_ptrs_at = {};
+
     in >> bits(my.t._is_blood);
-    in >> bits(my.t._is_water);
-    in >> bits(my.t._is_deep_water);
     in >> bits(my.t._is_corridor);
+    in >> bits(my.t._is_deep_water);
     in >> bits(my.t._is_dirt);
+    in >> bits(my.t._is_floor);
+    in >> bits(my.t._is_gfx_large_shadow_caster);
+    in >> bits(my.t._is_lava);
+    in >> bits(my.t._is_light);
     in >> bits(my.t._is_rock);
     in >> bits(my.t._is_visited);
-    in >> bits(my.t.map_at);
-    in >> bits(my.t.map_wanted_at);
-    in >> bits(my.t.map_tile_over);
+    in >> bits(my.t._is_wall);
+    in >> bits(my.t._is_water);
     in >> bits(my.t.all_thing_ids_at);
+    in >> bits(my.t.cursor_at);
+    in >> bits(my.t.cursor_at_old);
+    in >> bits(my.t.cursor_needs_update);
+    in >> bits(my.t.cursor_found);
+    in >> bits(my.t.map_at);
+    in >> bits(my.t.map_follow_player);
+    in >> bits(my.t.map_wanted_at);
+    in >> bits(my.t.mouse);
+    in >> bits(my.t.mouse_old);
+    in >> bits(my.t.timestamp_dungeon_created);
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
@@ -374,9 +395,12 @@ void World::dump (std::string pfx, std::ostream &out)
     auto old_pfx = pfx;
     pfx += "  ";
 
-    out << pfx << "map_at          " << map_at << std::endl;
-    out << pfx << "map_wanted_at   " << map_wanted_at << std::endl;
-    out << pfx << "map_tile_over   " << map_tile_over << std::endl;
+    out << pfx << "cursor_at                 " << cursor_at << std::endl;
+    out << pfx << "cursor_at_old             " << cursor_at_old << std::endl;
+    out << pfx << "map_at                    " << map_at << std::endl;
+    out << pfx << "map_follow_player         " << map_follow_player << std::endl;
+    out << pfx << "map_wanted_at             " << map_wanted_at << std::endl;
+    out << pfx << "timestamp_dungeon_created " << timestamp_dungeon_created << std::endl;
 
     out << pfx << "all_things" << std::endl;
     for (auto x = 0; x < MAP_WIDTH; ++x) {

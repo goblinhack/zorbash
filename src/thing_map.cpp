@@ -49,38 +49,11 @@ static void thing_map_scroll_do (void)
                              (float)MAP_HEIGHT - TILES_DOWN);
 }
 
-static void thing_map_scroll_follow_player (void)
-{
-    if (!world->player) {
-        return;
-    }
-
-    float x1 = ((float)TILES_ACROSS / 2) - 1.0;
-    float x2 = ((float)TILES_ACROSS / 2) + 1.0;
-    float y1 = ((float)TILES_DOWN / 2) - 1.0;
-    float y2 = ((float)TILES_DOWN / 2) + 1.0;
-
-    float dx = world->player->mid_at.x - world->map_wanted_at.x + 1.0;
-    if (dx > x2) {
-        world->map_wanted_at.x++;
-    }
-    if (dx < x1) {
-        world->map_wanted_at.x--;
-    }
-
-    float dy = world->player->mid_at.y - world->map_wanted_at.y + 1.0;
-    if (dy > y2) {
-        world->map_wanted_at.y++;
-    }
-    if (dy < y1) {
-        world->map_wanted_at.y--;
-    }
-}
 
 void thing_map_scroll_to_player (void)
 {
     for (auto x = 0; x < 1000; x++) {
-        thing_map_scroll_follow_player();
+        thing_cursor_map_follow();
         thing_map_scroll_do();
     }
 }
@@ -1067,6 +1040,13 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
         t->attach();
         t->update_light();
     }
+
+    //
+    // If the cursor is too far away, warp it
+    //
+    thing_cursor_reset_if_needed();
+
+    thing_cursor_find(minx, miny, maxx, maxy);
 }
 
 void thing_render_all (void)
@@ -1082,7 +1062,7 @@ void thing_render_all (void)
     uint16_t maxy = std::min(MAP_HEIGHT, 
                              (uint16_t)world->map_at.y + TILES_DOWN + 3);
 
-    thing_map_scroll_follow_player();
+    thing_cursor_map_follow();
     thing_map_scroll_do();
     auto lighting = true;
     if (lighting) {

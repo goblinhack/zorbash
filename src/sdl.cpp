@@ -23,6 +23,7 @@ uint32_t mouse_down;
 uint32_t mouse_down_when;
 int mouse_x;
 int mouse_y;
+int mouse_tick;
 
 int sdl_left_fire;
 int sdl_right_fire;
@@ -525,6 +526,7 @@ static void sdl_event (SDL_Event * event)
          * a dumb macos thing to ifdef?
          */
         wid_mouse_visible = 1;
+        mouse_tick ++;
         wid_mouse_motion(mouse_x, mouse_y, 0, 0, -wheel_x, wheel_y);
         break;
     }
@@ -537,6 +539,7 @@ static void sdl_event (SDL_Event * event)
             event->motion.xrel, event->motion.yrel, mouse_down);
 
         wid_mouse_visible = 1;
+        mouse_tick ++;
         wid_mouse_motion(mouse_x, mouse_y,
                          event->motion.xrel, event->motion.yrel,
                          0, 0);
@@ -992,6 +995,7 @@ void sdl_loop (void)
     int i;
     uint16_t frames = 0;
 
+    sdl_mouse_center();
     SDL_SetEventFilter(sdl_filter_events, 0);
 
     glEnable(GL_TEXTURE_2D);

@@ -1696,7 +1696,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr45)
     TP_SET_DECL(is_rrr46)
     TP_SET_DECL(is_rrr47)
-    TP_SET_DECL(is_rrr48)
+    TP_SET_DECL(is_cursor_hover)
     TP_SET_DECL(is_cursor)
     TP_SET_DECL(gfx_dead_anim)
     TP_SET_DECL(is_obstacle)

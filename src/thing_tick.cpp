@@ -89,14 +89,10 @@ void things_tick (void)
         return;
     }
 
-    world->cursor_needs_update = true;
-    auto cursor = world->cursor;
-    if (cursor) {
-        if (world->cursor_at != world->cursor_at_old) {
-            world->cursor_at_old = world->cursor_at;
-            cursor->move(world->cursor_at);
-        }
-    }
+    //
+    // Update the cursor position
+    //
+    thing_cursor_move();
 
     //
     // Active things are generally things that move or have a life span

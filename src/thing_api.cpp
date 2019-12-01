@@ -607,9 +607,9 @@ int Thing::is_rrr47(void)
     return (tp_is_rrr47(tp()));
 }
 
-int Thing::is_rrr48(void)                                     
+int Thing::is_cursor_hover(void)                                     
 { 
-    return (tp_is_rrr48(tp()));
+    return (tp_is_cursor_hover(tp()));
 }
 
 int Thing::is_cursor(void)                                     
