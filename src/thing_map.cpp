@@ -1052,15 +1052,24 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
 void thing_render_all (void)
 {
     //
-    // Get the bounds
+    // Get the bounds. Needs to be a bit off-map for reflections.
     //
-    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - 1);
+    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - 3);
     uint16_t maxx = std::min(MAP_WIDTH, 
                              (uint16_t)world->map_at.x + TILES_ACROSS + 3);
 
-    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - 1);
+    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - 3);
     uint16_t maxy = std::min(MAP_HEIGHT, 
                              (uint16_t)world->map_at.y + TILES_DOWN + 3);
+
+    //
+    // For light sources we need to draw a bit off map as the light
+    // has a radius
+    //
+    uint16_t light_minx = std::max(0, minx - TILES_ACROSS / 2);
+    uint16_t light_maxx = std::min(MAP_HEIGHT, maxx + TILES_ACROSS / 2);
+    uint16_t light_miny = std::max(0, miny - TILES_DOWN / 2);
+    uint16_t light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN / 2);
 
     thing_cursor_map_follow();
     thing_map_scroll_do();
@@ -1100,7 +1109,8 @@ void thing_render_all (void)
         //
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
-        lights_render_high_quality(minx, miny, maxx, maxy, FBO_LIGHT_MERGED);
+        lights_render_high_quality(
+          light_minx, light_miny, light_maxx, light_maxy, FBO_LIGHT_MERGED);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);

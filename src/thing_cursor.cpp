@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_wid_console.h"
+#include "my_sdl.h"
 #include <algorithm>
 
 //
@@ -13,6 +14,10 @@
 //
 void thing_cursor_move (void)
 {_
+    if ((wheel_x != 0) || (wheel_y != 0)) {
+        world->map_wanted_at += fpoint(wheel_x, -wheel_y);
+    }
+
     //
     // Dampen mouse moves at level start
     //
