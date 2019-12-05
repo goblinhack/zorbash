@@ -287,6 +287,7 @@ public:
 #else
     bool               gfx_inverted                 = false;
 #endif
+    bool               gfx_lights                   = true;
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
     bool               vsync_enable                 = true;

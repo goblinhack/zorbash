@@ -3509,6 +3509,10 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 gfx_inverted_toggle();
                 break;
 
+            case '2':
+                gfx_lights_toggle();
+                break;
+
             case '`':
                 wid_toggle_hidden(wid_console_window);
                 wid_raise(wid_console_window);
@@ -5572,7 +5576,8 @@ void wid_display_all (void)
     // FPS counter.
     //
     if (game->config.fps_counter) {
-        ascii_putf(ASCII_WIDTH - 6, 1, GREEN, BLACK, L"%u FPS", game->fps_count);
+        ascii_putf(ASCII_WIDTH - 6, ASCII_HEIGHT - 1, GREEN, BLACK,
+                   L"%u FPS", game->fps_count);
     }
 
     ascii_display();

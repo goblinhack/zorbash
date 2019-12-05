@@ -1073,8 +1073,8 @@ void thing_render_all (void)
 
     thing_cursor_map_follow();
     thing_map_scroll_do();
-    auto lighting = true;
-    if (lighting) {
+
+    if (game->config.gfx_lights) {
         blit_fbo_bind(FBO_MAIN_BLACK_AND_WHITE);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

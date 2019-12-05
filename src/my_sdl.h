@@ -93,5 +93,7 @@ extern void sdl_screenshot(void);
 extern uint8_t config_fps_counter_set(tokensp, void *context);
 extern void gfx_inverted_toggle(void);
 extern uint8_t config_gfx_inverted_set(tokensp, void *context);
+extern void gfx_lights_toggle(void);
+extern uint8_t config_gfx_lights_set(tokensp, void *context);
 extern uint8_t vsync_enable(tokensp, void *context);
 #endif
