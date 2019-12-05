@@ -48,6 +48,7 @@ uint8_t wid_console_init (void)
 
     command_add(config_fps_counter_set, "set fps [01]", "frames per sec counter");
     command_add(config_gfx_inverted_set, "set gfx inverted [01]", "reverse colors");
+    command_add(config_gfx_lights_set, "set gfx lights [01]", "enable lights");
     command_add(vsync_enable, "set vsync [01]", "vertical sync enable");
     command_add(sdl_user_exit, "quit", "exit game");
 

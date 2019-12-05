@@ -424,6 +424,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 {_
     out << bits(my.t.fps_counter);
     out << bits(my.t.gfx_inverted);
+    out << bits(my.t.gfx_lights);
     out << bits(my.t.sound_volume);
     out << bits(my.t.music_volume);
     out << bits(my.t.vsync_enable);
@@ -451,6 +452,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 {_
     in >> bits(my.t.fps_counter);
     in >> bits(my.t.gfx_inverted);
+    in >> bits(my.t.gfx_lights);
     in >> bits(my.t.sound_volume);
     in >> bits(my.t.music_volume);
     in >> bits(my.t.vsync_enable);
@@ -482,6 +484,7 @@ void Config::dump (std::string pfx, std::ostream &out)
 
     out << pfx << "fps_counter        " << fps_counter << std::endl;
     out << pfx << "gfx_inverted       " << gfx_inverted << std::endl;
+    out << pfx << "gfx_lights         " << gfx_lights << std::endl;
     out << pfx << "sound_volume       " << sound_volume << std::endl;
     out << pfx << "music_volume       " << music_volume << std::endl;
     out << pfx << "vsync_enable       " << vsync_enable << std::endl;
