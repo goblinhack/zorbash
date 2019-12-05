@@ -62,6 +62,8 @@ extern uint32_t mouse_down;
 extern uint32_t mouse_down_when;
 extern int mouse_x;
 extern int mouse_y;
+extern int wheel_x;
+extern int wheel_y;
 extern int mouse_tick;
 extern uint8_t sdl_shift_held;
 

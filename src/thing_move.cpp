@@ -43,7 +43,6 @@ bool Thing::move (fpoint future_pos,
         if (!world->map_follow_player) {
             world->map_follow_player = true;
             world->cursor_needs_update = true;
-            CON("player move, move cursor");
         }
     }
 

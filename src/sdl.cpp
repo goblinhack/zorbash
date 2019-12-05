@@ -23,6 +23,8 @@ uint32_t mouse_down;
 uint32_t mouse_down_when;
 int mouse_x;
 int mouse_y;
+int wheel_x;
+int wheel_y;
 int mouse_tick;
 
 int sdl_left_fire;
@@ -515,8 +517,8 @@ static void sdl_event (SDL_Event * event)
             ts = time_get_time_ms_cached();
         }
 
-        double wheel_x = event->wheel.x;
-        double wheel_y = event->wheel.y;
+        wheel_x = event->wheel.x;
+        wheel_y = event->wheel.y;
 
         wheel_x *= accel;
         wheel_y *= accel;
@@ -1068,6 +1070,9 @@ void sdl_loop (void)
              * Read events
              */
             SDL_PumpEvents();
+
+            wheel_x = 0;
+            wheel_y = 0;
 
             found = SDL_PeepEvents(events, ARRAY_SIZE(events), SDL_GETEVENT,
                                    SDL_QUIT, SDL_LASTEVENT);
