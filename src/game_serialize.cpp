@@ -315,6 +315,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t._is_light);
     out << bits(my.t._is_rock);
     out << bits(my.t._is_visited);
+    out << bits(my.t._is_dungeon);
     out << bits(my.t._is_wall);
     out << bits(my.t._is_water);
     out << bits(my.t.all_thing_ids_at);
@@ -360,6 +361,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     in >> bits(my.t._is_light);
     in >> bits(my.t._is_rock);
     in >> bits(my.t._is_visited);
+    in >> bits(my.t._is_dungeon);
     in >> bits(my.t._is_wall);
     in >> bits(my.t._is_water);
     in >> bits(my.t.all_thing_ids_at);
