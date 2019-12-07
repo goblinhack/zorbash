@@ -782,6 +782,23 @@ static void game_place_remaining_rocks (Dungeonp d, std::string what)
     }
 }
 
+//
+// Keep track of which tiles were part of the original dungeon so we can
+// display things like just the walls without all the hidden stuff like rock
+//
+static void game_mark_dungeon_tiles (Dungeonp d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (d->is_floor(x, y) ||
+                d->is_corridor(x, y) ||
+                d->is_wall(x, y)) {
+                world->set_dungeon(x, y);
+            }
+        }
+    }
+}
+
 void Game::init (void)
 {_
     tp_init_after_loading();
@@ -800,6 +817,7 @@ _
     LOG("dungeon: create blocks");
     world.clear();
 
+    game_mark_dungeon_tiles(dungeon);
     game_place_entrance(dungeon, "entrance1");
     game_place_exit(dungeon, "exit1");
     game_place_door(dungeon, "door1");

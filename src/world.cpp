@@ -417,6 +417,38 @@ void World::unset_visited (const int x, const int y)
     set(_is_visited, x, y, false);
 }
 
+bool World::is_dungeon (const point &p)
+{
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_dungeon, p.x, p.y));
+}
+
+bool World::is_dungeon (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_dungeon, x, y));
+}
+
+void World::set_dungeon (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_dungeon, x, y, true);
+}
+
+void World::unset_dungeon (const int x, const int y)
+{
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_dungeon, x, y, false);
+}
+
 bool World::is_key (const point &p)
 {
     return (is_key(p.x, p.y));

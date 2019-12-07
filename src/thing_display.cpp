@@ -622,7 +622,11 @@ void Thing::blit_non_player_owned_shadow_section (const Tpp &tpp, const Tilep &t
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
                          const fpoint &tl, const fpoint &br)
 {
-    if (!game->config.gfx_lights) {
+    if (unlikely(!game->config.gfx_lights)) {
+        return;
+    }
+
+    if (unlikely(game->config.gfx_outline)) {
         return;
     }
 
@@ -671,27 +675,17 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         //
     } else if (unlikely(game->config.gfx_outline)) {
         if (world->is_visited(x, y)) {
-            if (is_floor()) {
-                glcolor(WHITE);
-            } else {
+            if (is_wall()) {
                 glcolor(RED);
             }
         } else {
-            if (is_floor()) {
-                glcolor(GRAY50);
-            } else {
+            if (is_wall()) {
                 glcolor(BLUE);
             }
         }
-        for (int dx = -1; dx <= 1; dx++) {
-            for (int dy = -1; dy <= 1; dy++) {
-                if (world->is_floor(x + dx, y + dy)) {
-                    goto do_blit;
-                }
-            }
+        if (!world->is_dungeon(x, y)) {
+            blit = false;
         }
-        blit = false;
-do_blit: ;
     }
 
     auto tpp = tp();
@@ -862,7 +856,7 @@ do_blit: ;
         }
     }
 
-    if (likely(blit)) {
+    if (likely(!game->config.gfx_outline)) {
         if (!thing_map_black_and_white) {
             if (is_wall()) {
                 blit_wall_cladding(blit_tl, blit_br, &tiles);

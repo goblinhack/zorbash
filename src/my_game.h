@@ -53,6 +53,7 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
 public:
@@ -247,6 +248,11 @@ public:
     bool is_visited(const point &p);
     void set_visited(const int x, const int y);
     void unset_visited(const int x, const int y);
+
+    bool is_dungeon(const int x, const int y);
+    bool is_dungeon(const point &p);
+    void set_dungeon(const int x, const int y);
+    void unset_dungeon(const int x, const int y);
 
     static inline bool is_oob (const int x, const int y, const int z)
     {

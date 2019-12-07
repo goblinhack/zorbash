@@ -1437,14 +1437,14 @@ public:
     {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_BORDER; x++) {
-                putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
-                putc(MAP_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
+                putc(MAP_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::ROCK);
             }
         }
         for (auto x = 0; x < MAP_WIDTH; x++) {
             for (auto y = 0; y < MAP_BORDER; y++) {
-                putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
-                putc(x, MAP_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::WALL);
+                putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
+                putc(x, MAP_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::ROCK);
             }
         }
     }
