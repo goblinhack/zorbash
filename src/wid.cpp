@@ -3513,6 +3513,10 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 gfx_lights_toggle();
                 break;
 
+            case '3':
+                gfx_outline_toggle();
+                break;
+
             case '`':
                 wid_toggle_hidden(wid_console_window);
                 wid_raise(wid_console_window);

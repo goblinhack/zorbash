@@ -866,13 +866,9 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_fbo(FBO_LIGHT_MERGED);
 }
 
-static void thing_blit_things (uint16_t minx, uint16_t miny,
-                               uint16_t maxx, uint16_t maxy)
+static void thing_blit_things_common (void)
 {
-    double offset_x = world->map_at.x * game->config.tile_gl_width;
-    double offset_y = world->map_at.y * game->config.tile_gl_height;
-
-    if (thing_map_black_and_white) {
+    if (game->config.gfx_outline || thing_map_black_and_white) {
         //
         // Slow timer to scroll the water.
         //
@@ -903,7 +899,15 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
             }
         }
     }
+}
 
+static void thing_blit_things (uint16_t minx, uint16_t miny,
+                               uint16_t maxx, uint16_t maxy)
+{
+    double offset_x = world->map_at.x * game->config.tile_gl_width;
+    double offset_y = world->map_at.y * game->config.tile_gl_height;
+
+    thing_blit_things_common();
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     //
@@ -1054,13 +1058,13 @@ void thing_render_all (void)
     //
     // Get the bounds. Needs to be a bit off-map for reflections.
     //
-    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - 3);
+    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - 5);
     uint16_t maxx = std::min(MAP_WIDTH, 
-                             (uint16_t)world->map_at.x + TILES_ACROSS + 3);
+                             (uint16_t)world->map_at.x + TILES_ACROSS + 5);
 
-    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - 3);
+    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - 5);
     uint16_t maxy = std::min(MAP_HEIGHT, 
-                             (uint16_t)world->map_at.y + TILES_DOWN + 3);
+                             (uint16_t)world->map_at.y + TILES_DOWN + 5);
 
     //
     // For light sources we need to draw a bit off map as the light
@@ -1074,7 +1078,11 @@ void thing_render_all (void)
     thing_cursor_map_follow();
     thing_map_scroll_do();
 
-    if (game->config.gfx_lights) {
+    if (game->config.gfx_outline) {
+        blit_fbo_bind(FBO_MAIN);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        thing_blit_things(minx, miny, maxx, maxy);
+    } else if (game->config.gfx_lights) {
         blit_fbo_bind(FBO_MAIN_BLACK_AND_WHITE);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1125,7 +1133,6 @@ void thing_render_all (void)
 
     } else {
         blit_fbo_bind(FBO_MAIN);
-
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
     }

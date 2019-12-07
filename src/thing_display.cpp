@@ -495,11 +495,16 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         if (get_owner_id() == world->player->id) {
             // use default shadow for carried items
         } else if (this != world->player) {
+            fpoint p = world->player->get_interpolated_mid_at();
             fpoint d = get_interpolated_mid_at() - 
                              world->player->get_interpolated_mid_at();
             const double D = 5.0;
             dx = d.x / D;
             dy = d.y / D;
+
+            if (distance(mid_at, p) > TILES_ACROSS / 2) {
+                return;
+            }
         }
     } else {
         // use default shadow
@@ -617,6 +622,10 @@ void Thing::blit_non_player_owned_shadow_section (const Tpp &tpp, const Tilep &t
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
                          const fpoint &tl, const fpoint &br)
 {
+    if (!game->config.gfx_lights) {
+        return;
+    }
+
     if (!world->player) {
         blit_non_player_owned_shadow(tpp, tile, tl, br);
         return;
@@ -652,6 +661,37 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 {
     if (unlikely(is_hidden)) {
         return;
+    }
+
+    bool blit = true;
+
+    if (is_cursor()) {
+        //
+        // Always blit
+        //
+    } else if (unlikely(game->config.gfx_outline)) {
+        if (world->is_visited(x, y)) {
+            if (is_floor()) {
+                glcolor(WHITE);
+            } else {
+                glcolor(RED);
+            }
+        } else {
+            if (is_floor()) {
+                glcolor(GRAY50);
+            } else {
+                glcolor(BLUE);
+            }
+        }
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int dy = -1; dy <= 1; dy++) {
+                if (world->is_floor(x + dx, y + dy)) {
+                    goto do_blit;
+                }
+            }
+        }
+        blit = false;
+do_blit: ;
     }
 
     auto tpp = tp();
@@ -774,13 +814,15 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         gl_rotate = get_rot();
     }
 
-    if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
-        if (is_submerged) {
-            blit_shadow_section(
-                tpp, tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
-            blit_shadow(tpp, tile, blit_tl, blit_br);
-        } else {
-            blit_shadow(tpp, tile, blit_tl, blit_br);
+    if (likely(blit)) {
+        if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
+            if (is_submerged) {
+                blit_shadow_section(
+                    tpp, tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
+                blit_shadow(tpp, tile, blit_tl, blit_br);
+            } else {
+                blit_shadow(tpp, tile, blit_tl, blit_br);
+            }
         }
     }
     double height = get_bounce() / 2.0;
@@ -800,14 +842,18 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 c.a = 100;
                 glcolor(c);
                 blit_br.y = blit_tl.y + h;
-                tile_blit(tile, blit_tl, blit_br);
+                if (likely(blit)) {
+                    tile_blit(tile, blit_tl, blit_br);
+                }
             }
 
             glcolor(WHITE);
         } else {
-            tile_blit_outline(tile, blit_tl, blit_br);
+            if (likely(blit)) {
+                tile_blit_outline(tile, blit_tl, blit_br);
+            }
         }
-    } else {
+    } else if (likely(blit)) {
         if (is_submerged) {
             tile_blit_section(
               tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
@@ -816,11 +862,13 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    if (!thing_map_black_and_white) {
-        if (is_wall()) {
-            blit_wall_cladding(blit_tl, blit_br, &tiles);
-        } else if (tp_is_rock(tpp)) {
-            blit_rock_cladding(blit_tl, blit_br, &tiles);
+    if (likely(blit)) {
+        if (!thing_map_black_and_white) {
+            if (is_wall()) {
+                blit_wall_cladding(blit_tl, blit_br, &tiles);
+            } else if (tp_is_rock(tpp)) {
+                blit_rock_cladding(blit_tl, blit_br, &tiles);
+            }
         }
     }
 

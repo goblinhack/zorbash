@@ -236,8 +236,8 @@ uint8_t sdl_init (void)
 
     TILES_ACROSS = game->config.video_pix_width / TILE_WIDTH;
     TILES_DOWN = game->config.video_pix_height / TILE_HEIGHT;
-    TILES_ACROSS /= 4;
-    TILES_DOWN /= 4;
+    TILES_ACROSS /= 2;
+    TILES_DOWN /= 2;
 
     game->config.tile_gl_width =
                     game->config.video_gl_width  / (double)TILES_ACROSS;
@@ -947,6 +947,43 @@ uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
             CON("gfx inverted enabled");
         } else {
             CON("gfx inverted disabled");
+        }
+    }
+
+    return (true);
+}
+
+/*
+ * User has entered a command, run it
+ */
+void gfx_outline_toggle (void)
+{_
+    if (!game->config.gfx_outline) {
+        game->config.gfx_outline = true;
+        CON("gfx outline enabled");
+    } else {
+        game->config.gfx_outline = false;
+        CON("gfx outline disabled");
+    }
+}
+
+/*
+ * User has entered a command, run it
+ */
+uint8_t config_gfx_outline_set (tokens_t *tokens, void *context)
+{_
+    char *s = tokens->args[3];
+
+    if (!s || (*s == '\0')) {
+        game->config.gfx_outline = true;
+        CON("gfx outline enabled (default)");
+    } else {
+        int val = strtol(s, 0, 10) ? 1 : 0;
+        game->config.gfx_outline = val;
+        if (game->config.gfx_outline) {
+            CON("gfx outline enabled");
+        } else {
+            CON("gfx outline disabled");
         }
     }
 
