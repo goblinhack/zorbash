@@ -3517,6 +3517,12 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 gfx_show_hidden_toggle();
                 break;
 
+            case 'r':
+                CON("reloading dungeon");
+                game->fini();
+                game->init();
+                break;
+
             case '`':
                 wid_toggle_hidden(wid_console_window);
                 wid_raise(wid_console_window);

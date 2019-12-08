@@ -510,6 +510,7 @@ void World::clear (void)
     _is_gfx_large_shadow_caster = {};
     _is_wall = {};
     _is_water = {};
+    _is_dungeon = {};
 }
 
 void World::put_thing (int x, int y, uint32_t id)

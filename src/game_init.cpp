@@ -822,17 +822,16 @@ void Game::init (void)
     seed = 667;
     //seed = myrand();
 //        world->terrain = terrain_init(seed);
-    mysrand(seed);
     CON("dungeon: create dungeon %u", seed);
     LOG("===================================================================");
 _
-    auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
-                               GRID_HEIGHT, seed);
-    // auto dungeon = new Dungeon(0);
-
     LOG("dungeon: create blocks");
     world.clear();
 
+    mysrand(seed);
+    auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
+                               GRID_HEIGHT, seed);
+    // auto dungeon = new Dungeon(0);
     game_place_entrance(dungeon, "entrance1");
     game_place_exit(dungeon, "exit1");
     game_place_door(dungeon, "door1");
