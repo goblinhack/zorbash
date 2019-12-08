@@ -50,20 +50,26 @@ void Thing::tick (void)
         return;
     }
 
-    log("tick");
+    if (tp_is_loggable(tp())) {
+        log("tick");
+    }
     update_interpolated_position();
 
     collision_check_do();
 
     if (unlikely(is_dead)) {
-        log("tick; died");
+        if (tp_is_loggable(tp())) {
+            log("tick; died");
+        }
         return;
     }
 
     hunger_clock();
 
     if (unlikely(is_dead)) {
-        log("tick; died");
+        if (tp_is_loggable(tp())) {
+            log("tick; died");
+        }
         return;
     }
 
