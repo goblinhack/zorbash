@@ -312,7 +312,6 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t._is_floor);
     out << bits(my.t._is_gfx_large_shadow_caster);
     out << bits(my.t._is_lava);
-    out << bits(my.t._is_light);
     out << bits(my.t._is_rock);
     out << bits(my.t._is_visited);
     out << bits(my.t._is_dungeon);
@@ -326,6 +325,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.map_at);
     out << bits(my.t.map_follow_player);
     out << bits(my.t.map_wanted_at);
+    out << bits(my.t.minimap_valid);
     out << bits(my.t.mouse);
     out << bits(my.t.mouse_old);
     out << bits(my.t.timestamp_dungeon_created);
@@ -358,7 +358,6 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     in >> bits(my.t._is_floor);
     in >> bits(my.t._is_gfx_large_shadow_caster);
     in >> bits(my.t._is_lava);
-    in >> bits(my.t._is_light);
     in >> bits(my.t._is_rock);
     in >> bits(my.t._is_visited);
     in >> bits(my.t._is_dungeon);
@@ -372,9 +371,14 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     in >> bits(my.t.map_at);
     in >> bits(my.t.map_follow_player);
     in >> bits(my.t.map_wanted_at);
+    in >> bits(my.t.minimap_valid);
     in >> bits(my.t.mouse);
     in >> bits(my.t.mouse_old);
     in >> bits(my.t.timestamp_dungeon_created);
+
+    my.t.minimap_valid = false;
+    my.t.cursor_needs_update = true;
+    my.t.map_follow_player = true;
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
@@ -426,6 +430,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 {_
     out << bits(my.t.fps_counter);
     out << bits(my.t.gfx_inverted);
+    out << bits(my.t.gfx_minimap);
     out << bits(my.t.gfx_outline);
     out << bits(my.t.gfx_lights);
     out << bits(my.t.sound_volume);
@@ -455,6 +460,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 {_
     in >> bits(my.t.fps_counter);
     in >> bits(my.t.gfx_inverted);
+    in >> bits(my.t.gfx_minimap);
     in >> bits(my.t.gfx_outline);
     in >> bits(my.t.gfx_lights);
     in >> bits(my.t.sound_volume);
@@ -488,6 +494,7 @@ void Config::dump (std::string pfx, std::ostream &out)
 
     out << pfx << "fps_counter        " << fps_counter << std::endl;
     out << pfx << "gfx_inverted       " << gfx_inverted << std::endl;
+    out << pfx << "gfx_minimap        " << gfx_minimap << std::endl;
     out << pfx << "gfx_outline        " << gfx_outline << std::endl;
     out << pfx << "gfx_lights         " << gfx_lights << std::endl;
     out << pfx << "sound_volume       " << sound_volume << std::endl;

@@ -1104,36 +1104,36 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
         t->attach();
         t->update_light();
     }
-
-    //
-    // If the cursor is too far away, warp it
-    //
-    thing_cursor_reset_if_needed();
-
-    thing_cursor_find(minx, miny, maxx, maxy);
 }
 
 void thing_render_all (void)
 {
+    uint16_t minx;
+    uint16_t maxx;
+    uint16_t miny;
+    uint16_t maxy;
+    uint16_t light_minx;
+    uint16_t light_maxx;
+    uint16_t light_miny;
+    uint16_t light_maxy;
+
     //
     // Get the bounds. Needs to be a bit off-map for reflections.
     //
-    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - 5);
-    uint16_t maxx = std::min(MAP_WIDTH, 
-                             (uint16_t)world->map_at.x + TILES_ACROSS + 5);
+    minx = std::max(0, (uint16_t) world->map_at.x - 5);
+    maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + TILES_ACROSS + 5);
 
-    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - 5);
-    uint16_t maxy = std::min(MAP_HEIGHT, 
-                             (uint16_t)world->map_at.y + TILES_DOWN + 5);
+    miny = std::max(0, (uint16_t) world->map_at.y - 5);
+    maxy = std::min(MAP_HEIGHT, (uint16_t)world->map_at.y + TILES_DOWN + 5);
 
     //
     // For light sources we need to draw a bit off map as the light
     // has a radius
     //
-    uint16_t light_minx = std::max(0, minx - TILES_ACROSS / 2);
-    uint16_t light_maxx = std::min(MAP_HEIGHT, maxx + TILES_ACROSS / 2);
-    uint16_t light_miny = std::max(0, miny - TILES_DOWN / 2);
-    uint16_t light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN / 2);
+    light_minx = std::max(0, minx - TILES_ACROSS / 2);
+    light_maxx = std::min(MAP_HEIGHT, maxx + TILES_ACROSS / 2);
+    light_miny = std::max(0, miny - TILES_DOWN / 2);
+    light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN / 2);
 
     thing_cursor_map_follow();
     thing_map_scroll_do();
@@ -1204,4 +1204,11 @@ void thing_render_all (void)
 #endif
 
     //lights_render_points_debug(minx, miny, maxx, maxy);
+
+    //
+    // If the cursor is too far away, warp it
+    //
+    thing_cursor_reset_if_needed();
+
+    thing_cursor_find(minx, miny, maxx, maxy);
 }

@@ -67,6 +67,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_hunger.o 		\
     $(OBJDIR)/thing_id.o 		\
     $(OBJDIR)/thing_map.o 		\
+    $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_template.o 		\
     $(OBJDIR)/thing_tick.o 		\

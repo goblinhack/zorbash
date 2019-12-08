@@ -48,6 +48,7 @@ uint8_t wid_console_init (void)
 
     command_add(config_fps_counter_set, "set fps [01]", "enable frames per sec counter");
     command_add(config_gfx_inverted_set, "set gfx inverted [01]", "enable reverse colors");
+    command_add(config_gfx_minimap_set, "set gfx minimap [01]", "enable dungeon minimap");
     command_add(config_gfx_outline_set, "set gfx outline [01]", "enable map floors and walls only");
     command_add(config_gfx_lights_set, "set gfx lights [01]", "enable map lights");
     command_add(vsync_enable, "set vsync [01]", "enable vertical sync enable");

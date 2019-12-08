@@ -185,38 +185,6 @@ void World::unset_wall (const int x, const int y)
     set(_is_wall, x, y, false);
 }
 
-bool World::is_light (const point &p)
-{
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_light, p.x, p.y));
-}
-
-bool World::is_light (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_light, x, y));
-}
-
-void World::set_light (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_light, x, y, true);
-}
-
-void World::unset_light (const int x, const int y)
-{
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_light, x, y, false);
-}
-
 bool World::is_corridor (const point &p)
 {
     if (unlikely(is_oob(p.x, p.y))) {
@@ -537,7 +505,6 @@ void World::clear (void)
     _is_dirt = {};
     _is_floor = {};
     _is_lava = {};
-    _is_light = {};
     _is_rock = {};
     _is_visited = {};
     _is_gfx_large_shadow_caster = {};

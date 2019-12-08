@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_game.h"
 #include "my_gl.h"
@@ -19,32 +19,32 @@ double gl_rotate;
 
 void gl_init_2d_mode (void)
 {_
-    /*
-     * Enable Texture Worldping
-     */
+    //
+    // Enable Texture Worldping
+    //
     glEnable(GL_TEXTURE_2D);
 
-    /*
-     * Enable alpha blending for sprites
-     */
+    //
+    // Enable alpha blending for sprites
+    //
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    /*
-     * Setup our viewport
-     */
+    //
+    // Setup our viewport
+    //
     glViewport(0, 0, game->config.drawable_gl_width,
                game->config.drawable_gl_height);
 
-    /*
-     * Make sure we're changing the model view and not the projection
-     */
+    //
+    // Make sure we're changing the model view and not the projection
+    //
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    /*
-     * Reset the view
-     */
+    //
+    // Reset the view
+    //
     glLoadIdentity();
 
     gl_init_fbo();
@@ -55,33 +55,33 @@ void gl_init_2d_mode (void)
 
 void gl_enter_2d_mode (void)
 {_
-    /*
-     * Change to the projection matrix and set our viewing volume.
-     */
+    //
+    // Change to the projection matrix and set our viewing volume.
+    //
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
 
-    /*
-     * Reset the view
-     */
+    //
+    // Reset the view
+    //
     glLoadIdentity();
 
-    /*
-     * 2D projection
-     */
+    //
+    // 2D projection
+    //
     glOrtho(0,
              game->config.video_gl_width, game->config.video_gl_height,
              0, -1200.0, 1200.0);
 
-    /*
-     * Make sure we're changing the model view and not the projection
-     */
+    //
+    // Make sure we're changing the model view and not the projection
+    //
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
-    /*
-     * Reset the view
-     */
+    //
+    // Reset the view
+    //
     glLoadIdentity();
 }
 
@@ -142,6 +142,7 @@ gl_leave_2_5d_mode (void)
 }
 
 static void gl_init_fbo_ (
+    int fbo,
     GLuint *render_buf_id,
     GLuint *fbo_id,
     GLuint *fbo_tex_id)
@@ -162,9 +163,9 @@ static void gl_init_fbo_ (
                  GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    /*
-     * Create a render buffer object.
-     */
+    //
+    // Create a render buffer object.
+    //
 #ifdef _WIN32
     if (!glFramebufferTexture2D_EXT) {
         SDL_MSG_BOX("glGenRenderbuffers_EXT is not present; fatal");
@@ -178,34 +179,34 @@ static void gl_init_fbo_ (
                           tex_width, tex_height);
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, 0);
 
-    /*
-     * Create a frame buffer object.
-     */
+    //
+    // Create a frame buffer object.
+    //
     glGenFramebuffers_EXT(1, fbo_id);
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, *fbo_id);
 
     LOG("Making FBO, size %d %d id %d",tex_width,tex_height, *fbo_id);
 
-    /*
-     * Attach the texture to FBO color attachment point
-     */
+    //
+    // Attach the texture to FBO color attachment point
+    //
     glFramebufferTexture2D_EXT(GL_FRAMEBUFFER,        // 1. fbo target: GL_FRAMEBUFFER
                                GL_COLOR_ATTACHMENT0,  // 2. attachment point
                                GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
                                *fbo_tex_id,           // 4. tex ID
                                0);                    // 5. mipmap level: 0(base)
 
-    /*
-     * Attach the renderbuffer to depth attachment point
-     */
+    //
+    // Attach the renderbuffer to depth attachment point
+    //
     glFramebufferRenderbuffer_EXT(GL_FRAMEBUFFER,      // 1. fbo target: GL_FRAMEBUFFER
                                   GL_DEPTH_ATTACHMENT, // 2. attachment point
                                   GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
                                   *render_buf_id);     // 4. rbo ID
 
-    /*
-     * Check FBO status
-     */
+    //
+    // Check FBO status
+    //
     GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
     if (status != GL_FRAMEBUFFER_COMPLETE) {
         ERR("Failed to create framebuffer");
@@ -224,7 +225,7 @@ void gl_init_fbo (void)
     int i;
 
     for (i = 0; i < MAX_FBO; i++) {
-        gl_init_fbo_(&render_buf_id[i], &fbo_id[i], &fbo_tex_id[i]);
+        gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i]);
         blit_fbo_bind(i);
         glClearColor(0, 0, 0, 0);
         glClear(GL_DEPTH_BUFFER_BIT);
@@ -256,15 +257,15 @@ void blit_fbo_unbind (void)
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
 }
 
-/*
- * x and y per element.
- */
+//
+// x and y per element.
+//
 #define NUMBER_DIMENSIONS_PER_COORD_2D 2
 #define NUMBER_DIMENSIONS_PER_COORD_3D 3
 
-/*
- * r,g,b,a per element
- */
+//
+// r,g,b,a per element
+//
 #define NUMBER_COMPONENTS_PER_COLOR 4
 
 uint32_t NUMBER_BYTES_PER_VERTICE_2D = sizeof(GLfloat) *
@@ -284,15 +285,15 @@ uint32_t NUMBER_BYTES_PER_VERTICE_3D = sizeof(GLfloat) *
 uint32_t NUMBER_FLOATS_PER_VERTICE_2D = NUMBER_BYTES_PER_VERTICE_2D / sizeof(float);
 uint32_t NUMBER_FLOATS_PER_VERTICE_3D = NUMBER_BYTES_PER_VERTICE_3D / sizeof(float);
 
-/*
- * Two arrays, xy and uv.
- */
+//
+// Two arrays, xy and uv.
+//
 float *gl_array_buf;
 float *gl_array_buf_end;
 
-/*
- * Where we are currently up to in writing to these buffers.
- */
+//
+// Where we are currently up to in writing to these buffers.
+//
 GLfloat *bufp;
 GLfloat *bufp_end;
 int buf_tex;
@@ -306,23 +307,23 @@ void blit_init (void)
         return;
     }
 
-    /*
-     * Our array size requirements.
-     */
+    //
+    // Our array size requirements.
+    //
     uint32_t gl_array_size_required;
 
-    /*
-     * If the screen size has changed or this is the first run, allocate our
-     * buffer if our size requirements have changed.
-     */
+    //
+    // If the screen size has changed or this is the first run, allocate our
+    // buffer if our size requirements have changed.
+    //
     gl_array_size_required = 32 * 1024 * 1024;
 
     gl_array_buf = (__typeof__(gl_array_buf))
                     myzalloc(gl_array_size_required, "GL xy buffer");
 
-    /*
-     * Make the end a bit smaller so we have plenty of headroom.
-     */
+    //
+    // Make the end a bit smaller so we have plenty of headroom.
+    //
     gl_array_buf_end =
             (__typeof__(gl_array_buf_end))
                 ((char *)gl_array_buf) +
@@ -346,9 +347,9 @@ void blit_flush (void)
         return;
     }
 
-    /*
-     * Display all the tiles selected above in one blast.
-     */
+    //
+    // Display all the tiles selected above in one blast.
+    //
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
@@ -401,9 +402,9 @@ void blit_flush_3d (void)
         return;
     }
 
-    /*
-     * Display all the tiles selected above in one blast.
-     */
+    //
+    // Display all the tiles selected above in one blast.
+    //
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
@@ -456,9 +457,9 @@ void blit_flush_colored_triangles (void)
         return;
     }
 
-    /*
-     * Display all the tiles selected above in one blast.
-     */
+    //
+    // Display all the tiles selected above in one blast.
+    //
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
 
@@ -501,9 +502,9 @@ void blit_flush_triangle_fan (void)
 
 void blit_flush_triangle_fan (float *b, float *e)
 {_
-    /*
-     * Display all the tiles selected above in one blast.
-     */
+    //
+    // Display all the tiles selected above in one blast.
+    //
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
 
@@ -545,9 +546,9 @@ void blit_flush_tex_triangle_fan (void)
         return;
     }
 
-    /*
-     * Display all the tiles selected above in one blast.
-     */
+    //
+    // Display all the tiles selected above in one blast.
+    //
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
@@ -600,9 +601,9 @@ void blit_flush_triangle_strip (void)
         return;
     }
 
-    /*
-     * Display all the tiles selected above in one blast.
-     */
+    //
+    // Display all the tiles selected above in one blast.
+    //
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
 
@@ -644,9 +645,9 @@ void blit_flush_triangles (void)
         return;
     }
 
-    /*
-     * Display all the tiles selected above in one blast.
-     */
+    //
+    // Display all the tiles selected above in one blast.
+    //
     glEnableClientState(GL_VERTEX_ARRAY);
 
     static long number_bytes_per_vertice_2d =
@@ -999,24 +1000,24 @@ static void
 setupPixelFormat(HDC hDC)
 {_
     PIXELFORMATDESCRIPTOR pfd = {
-        sizeof(PIXELFORMATDESCRIPTOR),  /* size */
-        1,                              /* version */
+        sizeof(PIXELFORMATDESCRIPTOR),  // size 
+        1,                              // version 
         PFD_SUPPORT_OPENGL |
         PFD_DRAW_TO_WINDOW |
-        PFD_DOUBLEBUFFER,               /* support double-buffering */
-        PFD_TYPE_RGBA,                  /* color type */
-        16,                             /* prefered color depth */
-        0, 0, 0, 0, 0, 0,               /* color bits (ignored) */
-        0,                              /* no alpha buffer */
-        0,                              /* alpha bits (ignored) */
-        0,                              /* no accumulation buffer */
-        0, 0, 0, 0,                     /* accum bits (ignored) */
-        16,                             /* depth buffer */
-        0,                              /* no stencil buffer */
-        0,                              /* no auxiliary buffers */
-        PFD_MAIN_PLANE,                 /* main layer */
-        0,                              /* reserved */
-        0, 0, 0,                        /* no layer, visible, damage masks */
+        PFD_DOUBLEBUFFER,               // support double-buffering 
+        PFD_TYPE_RGBA,                  // color type 
+        16,                             // prefered color depth 
+        0, 0, 0, 0, 0, 0,               // color bits (ignored) 
+        0,                              // no alpha buffer 
+        0,                              // alpha bits (ignored) 
+        0,                              // no accumulation buffer 
+        0, 0, 0, 0,                     // accum bits (ignored) 
+        16,                             // depth buffer 
+        0,                              // no stencil buffer 
+        0,                              // no auxiliary buffers 
+        PFD_MAIN_PLANE,                 // main layer 
+        0,                              // reserved 
+        0, 0, 0,                        // no layer, visible, damage masks 
     };
     int pixelFormat;
 
@@ -1055,7 +1056,7 @@ setupPalette(HDC hDC)
     pPal->palVersion = 0x300;
     pPal->palNumEntries = paletteSize;
 
-    /* build a simple RGB color palette */
+    // build a simple RGB color palette */
     {
         int redMask = (1 << pfd.cRedBits) - 1;
         int greenMask = (1 << pfd.cGreenBits) - 1;
@@ -1135,7 +1136,7 @@ void gl_ext_init (void)
     ShowWindow(hwnd, 0);
     UpdateWindow(hwnd);
 
-    /* initialize OpenGL rendering */
+    // initialize OpenGL rendering */
 
     hDC = GetDC(hwnd);
     setupPixelFormat(hDC);
@@ -1145,7 +1146,7 @@ void gl_ext_init (void)
 
     gl_ext_load();
 
-    /* finish OpenGL rendering */
+    // finish OpenGL rendering */
     if (hGLRC) {
         wglMakeCurrent(NULL, NULL);
         wglDeleteContext(hGLRC);
@@ -1163,9 +1164,9 @@ void gl_ext_init (void)
 }
 #endif
 
-/*
- * gl_push
- */
+//
+// gl_push
+//
 static void
 gl_push (float **P,
          float *p_end,
@@ -1214,10 +1215,10 @@ gl_push (float **P,
     }
 
     if (likely(!first)) {
-        /*
-         * If there is a break in the triangle strip then make a degenerate
-         * triangle.
-         */
+        //
+        // If there is a break in the triangle strip then make a degenerate
+        // triangle.
+        //
         if ((glapi_last_right != bl.x) || (glapi_last_bottom != bl.y)) {
             gl_push_texcoord(p, glapi_last_tex_right, glapi_last_tex_bottom);
             gl_push_vertex(p, glapi_last_right, glapi_last_bottom);
@@ -1252,9 +1253,9 @@ gl_push (float **P,
     *P = p;
 }
 
-/*
- * gl_push
- */
+//
+// gl_push
+//
 void
 gl_push (float **P,
          float *p_end,
@@ -1443,9 +1444,9 @@ void blit_colored (int tex,
             ((double)color_br.a) / 255.0);
 }
 
-/*
- * Blits a whole tile. Y co-ords are inverted.
- */
+//
+// Blits a whole tile. Y co-ords are inverted.
+//
 void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br)
 {
     double x1, x2, y1, y2;
@@ -1490,9 +1491,9 @@ void tile_blit_outline (uint16_t index, const fpoint &tl, const fpoint &br)
     tile_blit_outline(tile_index_to_tile(index), tl, br);
 }
 
-/*
- * Blits a whole tile. Y co-ords are inverted.
- */
+//
+// Blits a whole tile. Y co-ords are inverted.
+//
 void tile_blit_outline_section (const Tilep &tile,
                                 const fpoint &tile_tl, const fpoint &tile_br,
                                 const fpoint &tl, const fpoint &br,
@@ -1560,10 +1561,10 @@ void tile_blit (const Tilep &tile, const fpoint &tl, const fpoint &br)
 {
     double x1, x2, y1, y2;
 
-    /*
-     * Only some walls have deco tiles, so the pointer is left null for
-     * those that do not.
-     */
+    //
+    // Only some walls have deco tiles, so the pointer is left null for
+    // those that do not.
+    //
     if (!tile) {
         return;
     }
@@ -1587,10 +1588,10 @@ void tile_blit_section (const Tilep &tile,
 {
     double x1, x2, y1, y2;
 
-    /*
-     * Only some walls have deco tiles, so the pointer is left null for
-     * those that do not.
-     */
+    //
+    // Only some walls have deco tiles, so the pointer is left null for
+    // those that do not.
+    //
     if (!tile) {
         return;
     }
@@ -1623,10 +1624,10 @@ void tile_blit_section_colored (const Tilep &tile,
 {
     double x1, x2, y1, y2;
 
-    /*
-     * Only some walls have deco tiles, so the pointer is left null for
-     * those that do not.
-     */
+    //
+    // Only some walls have deco tiles, so the pointer is left null for
+    // those that do not.
+    //
     if (!tile) {
         return;
     }

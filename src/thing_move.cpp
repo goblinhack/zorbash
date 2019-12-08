@@ -341,6 +341,13 @@ void Thing::update_pos (fpoint to, bool immediately)
             world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
             world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
         }
+
+        if (is_player()) {
+            if (((int)old_at.x != (int)new_at.x) ||
+                ((int)old_at.y != (int)new_at.y)) {
+                game->update_minimap();
+            }
+        }
     }
 
     int speed;
