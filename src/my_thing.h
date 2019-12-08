@@ -345,7 +345,7 @@ typedef struct Thing_ {
     int gfx_is_weapon_carry_anim(void);
     int gfx_is_weapon_use_anim(void);
     int gfx_large_shadow_caster(void);
-    int gfx_outlined(void);
+    int gfx_show_hiddend(void);
     int gfx_oversized_but_sitting_on_the_ground(void);
     int gfx_small_shadow_caster(void);
     int hunger_at_health_pct(void);

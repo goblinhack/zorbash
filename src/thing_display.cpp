@@ -626,7 +626,7 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
         return;
     }
 
-    if (unlikely(game->config.gfx_outline)) {
+    if (unlikely(game->config.gfx_show_hidden)) {
         return;
     }
 
@@ -673,7 +673,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         //
         // Always blit
         //
-    } else if (unlikely(game->config.gfx_outline)) {
+    } else if (unlikely(game->config.gfx_show_hidden)) {
         if (world->is_visited(x, y)) {
             if (is_wall()) {
                 glcolor(RED);
@@ -823,7 +823,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     blit_tl.y -= height;
     blit_br.y -= height;
 
-    if (tp_gfx_outlined(tpp) && !thing_map_black_and_white) {
+    if (tp_gfx_show_hiddend(tpp) && !thing_map_black_and_white) {
         if (is_submerged) {
             tile_blit_outline_section(
                 tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
@@ -856,7 +856,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    if (likely(!game->config.gfx_outline)) {
+    if (likely(!game->config.gfx_show_hidden)) {
         if (!thing_map_black_and_white) {
             if (is_wall()) {
                 blit_wall_cladding(blit_tl, blit_br, &tiles);
@@ -974,7 +974,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    if (tp_gfx_outlined(tpp)) {
+    if (tp_gfx_show_hiddend(tpp)) {
         if (is_submerged) {
             tile_blit_outline_section(
               tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);

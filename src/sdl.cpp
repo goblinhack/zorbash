@@ -994,14 +994,14 @@ uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-void gfx_outline_toggle (void)
+void gfx_show_hidden_toggle (void)
 {_
-    if (!game->config.gfx_outline) {
-        game->config.gfx_outline = true;
-        CON("gfx outline enabled");
+    if (!game->config.gfx_show_hidden) {
+        game->config.gfx_show_hidden = true;
+        CON("gfx show hidden enabled");
     } else {
-        game->config.gfx_outline = false;
-        CON("gfx outline disabled");
+        game->config.gfx_show_hidden = false;
+        CON("gfx show hidden disabled");
     }
     game->world.minimap_valid = false;
 }
@@ -1009,20 +1009,20 @@ void gfx_outline_toggle (void)
 //
 // User has entered a command, run it
 //
-uint8_t config_gfx_outline_set (tokens_t *tokens, void *context)
+uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[3];
 
     if (!s || (*s == '\0')) {
-        game->config.gfx_outline = true;
-        CON("gfx outline enabled (default)");
+        game->config.gfx_show_hidden = true;
+        CON("gfx show hidden enabled (default)");
     } else {
         int val = strtol(s, 0, 10) ? 1 : 0;
-        game->config.gfx_outline = val;
-        if (game->config.gfx_outline) {
-            CON("gfx outline enabled");
+        game->config.gfx_show_hidden = val;
+        if (game->config.gfx_show_hidden) {
+            CON("gfx show hidden enabled");
         } else {
-            CON("gfx outline disabled");
+            CON("gfx show hidden disabled");
         }
     }
 
