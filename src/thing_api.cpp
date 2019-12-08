@@ -222,9 +222,9 @@ int Thing::gfx_large_shadow_caster(void)
     return (tp_gfx_large_shadow_caster(tp()));
 }
 
-int Thing::gfx_outlined(void)                                 
+int Thing::gfx_show_hiddend(void)                                 
 { 
-    return (tp_gfx_outlined(tp()));
+    return (tp_gfx_show_hiddend(tp()));
 }
 
 int Thing::gfx_oversized_but_sitting_on_the_ground(void)      

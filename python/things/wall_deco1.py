@@ -10,7 +10,7 @@ def tp_init(name,
 
     x.set_gfx_animated(True)
     x.set_gfx_is_wall_deco(True)
-    x.set_gfx_outlined(True)
+    x.set_gfx_show_hiddend(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_is_movement_blocking(True)

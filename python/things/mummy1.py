@@ -15,7 +15,7 @@ def tp_init(name):
     x.set_gfx_animated(True)
     x.set_gfx_bounce_on_move(True)
     x.set_gfx_can_hflip(True)
-    x.set_gfx_outlined(True)
+    x.set_gfx_show_hiddend(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_hunger_at_health_pct(95)
     x.set_hunger_constant(True)

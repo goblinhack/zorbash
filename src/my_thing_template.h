@@ -143,7 +143,7 @@ public:
     int gfx_is_weapon_carry_anim {};
     int gfx_is_weapon_use_anim {};
     int gfx_large_shadow_caster {};
-    int gfx_outlined {};
+    int gfx_show_hiddend {};
     int gfx_oversized_but_sitting_on_the_ground {};
     int gfx_small_shadow_caster {};
     int hunger_at_health_pct {};
@@ -844,9 +844,9 @@ static inline int tp_is_weapon (Tpp t)
     return (t->is_weapon);
 }
 
-static inline int tp_gfx_outlined (Tpp t)
+static inline int tp_gfx_show_hiddend (Tpp t)
 {
-    return (t->gfx_outlined);
+    return (t->gfx_show_hiddend);
 }
 
 static inline int tp_gfx_large_shadow_caster (Tpp t)

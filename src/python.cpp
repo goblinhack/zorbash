@@ -1750,7 +1750,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(gfx_is_weapon_carry_anim)
     TP_SET_DECL(gfx_is_weapon_use_anim)
     TP_SET_DECL(is_weapon)
-    TP_SET_DECL(gfx_outlined)
+    TP_SET_DECL(gfx_show_hiddend)
     TP_SET_DECL(gfx_large_shadow_caster)
     TP_SET_DECL(gfx_can_hflip)
     TP_SET_DECL(z_depth)

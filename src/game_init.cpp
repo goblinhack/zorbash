@@ -806,7 +806,9 @@ static void game_mark_dungeon_tiles (Dungeonp d)
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (d->is_floor(x, y) ||
                 d->is_corridor(x, y) ||
-                d->is_wall(x, y)) {
+                d->is_wall(x, y) ||
+                world->is_floor(x, y) ||
+                world->is_corridor(x, y)) {
                 world->set_dungeon(x, y);
             }
         }
@@ -831,7 +833,6 @@ _
     LOG("dungeon: create blocks");
     world.clear();
 
-    game_mark_dungeon_tiles(dungeon);
     game_place_entrance(dungeon, "entrance1");
     game_place_exit(dungeon, "exit1");
     game_place_door(dungeon, "door1");
@@ -934,6 +935,7 @@ _
     game_place_food(dungeon);
     game_place_blood(dungeon);
     game_place_keys(dungeon);
+    game_mark_dungeon_tiles(dungeon);
 
     thing_map_scroll_to_player();
 

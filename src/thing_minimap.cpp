@@ -21,7 +21,7 @@ void thing_render_minimap (void)
     float dx = 1.0 / MAP_WIDTH;
     float dy = 1.0 / MAP_HEIGHT;
 
-    if (unlikely(game->config.gfx_outline)) {
+    if (unlikely(game->config.gfx_show_hidden)) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 if (world->player &&

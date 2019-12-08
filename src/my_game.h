@@ -289,7 +289,7 @@ public:
     bool               gfx_inverted                 = false;
 #endif
     bool               gfx_minimap                      = true;
-    bool               gfx_outline                  = false;
+    bool               gfx_show_hidden                  = false;
     bool               gfx_lights                   = true;
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};

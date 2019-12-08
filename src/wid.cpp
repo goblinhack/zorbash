@@ -3514,7 +3514,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 break;
 
             case '3':
-                gfx_outline_toggle();
+                gfx_show_hidden_toggle();
                 break;
 
             case '`':

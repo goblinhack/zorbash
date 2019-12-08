@@ -440,8 +440,8 @@ class Tp:
     def set_is_weapon(self, value):
         zx.tp_set_is_weapon(self, value)
 
-    def set_gfx_outlined(self, value):
-        zx.tp_set_gfx_outlined(self, value)
+    def set_gfx_show_hiddend(self, value):
+        zx.tp_set_gfx_show_hiddend(self, value)
 
     def set_gfx_large_shadow_caster(self, value):
         zx.tp_set_gfx_large_shadow_caster(self, value)
