@@ -281,8 +281,8 @@ class Tp:
     def set_is_rrr46(self, value):
         zx.tp_set_is_rrr46(self, value)
 
-    def set_is_rrr47(self, value):
-        zx.tp_set_is_rrr47(self, value)
+    def set_is_secret_door(self, value):
+        zx.tp_set_is_secret_door(self, value)
 
     def set_is_cursor_hover(self, value):
         zx.tp_set_is_cursor_hover(self, value)

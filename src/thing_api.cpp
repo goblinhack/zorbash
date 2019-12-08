@@ -602,9 +602,9 @@ int Thing::is_rrr46(void)
     return (tp_is_rrr46(tp()));
 }
 
-int Thing::is_rrr47(void)                                     
+int Thing::is_secret_door(void)                                     
 { 
-    return (tp_is_rrr47(tp()));
+    return (tp_is_secret_door(tp()));
 }
 
 int Thing::is_cursor_hover(void)                                     
