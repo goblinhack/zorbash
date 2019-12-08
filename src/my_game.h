@@ -50,7 +50,6 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow_caster {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
@@ -64,6 +63,7 @@ public:
     bool                       map_follow_player = true;
     fpoint                     map_at;        // map scroll currently st
     fpoint                     map_wanted_at; // map scroll desired at
+    bool                       minimap_valid = false;
     int                        mouse {-1};    // ticks for every move
     int                        mouse_old {-1};
     uint32_t                   timestamp_dungeon_created {};
@@ -199,11 +199,6 @@ public:
     void set_corridor(const int x, const int y);
     void unset_corridor(const int x, const int y);
 
-    bool is_light(const int x, const int y);
-    bool is_light(const point &p);
-    void set_light(const int x, const int y);
-    void unset_light(const int x, const int y);
-
     bool is_blood(const int x, const int y);
     bool is_blood(const point &p);
     void set_blood(const int x, const int y);
@@ -293,6 +288,7 @@ public:
 #else
     bool               gfx_inverted                 = false;
 #endif
+    bool               gfx_minimap                      = true;
     bool               gfx_outline                  = false;
     bool               gfx_lights                   = true;
     uint32_t           sound_volume                 = {};
@@ -331,6 +327,7 @@ public:
     void save(void);
     void load(void);
     void display(void);
+    void update_minimap(void);
 
     std::string        appdata;
     std::string        saved_dir;

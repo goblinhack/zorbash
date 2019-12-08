@@ -909,6 +909,7 @@ _
                 game->world.map_follow_player = true;
                 game->world.mouse = -1;
                 game->world.mouse_old = -1;
+                game->world.minimap_valid = false;
             }
         }
     }
@@ -920,8 +921,6 @@ _
     game_place_keys(dungeon);
 
     thing_map_scroll_to_player();
-
-    display();
 
     CON("dungeon: created dungeon %u", seed);
     LOG("===================================================================");

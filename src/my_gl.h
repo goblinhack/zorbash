@@ -363,13 +363,14 @@ void blit_colored(int tex,
 //
 // Frame buffer objects
 //
-#define MAX_FBO                  6
 #define FBO_MAIN                 0
 #define FBO_MAIN_BLACK_AND_WHITE 1
 #define FBO_WID                  2
 #define FBO_LIGHT_MASK           3
 #define FBO_LIGHT_MERGED         4
 #define FBO_REFLECTION           5
+#define FBO_MINIMAP              6
+#define MAX_FBO                  7
 
 extern std::array<GLuint, MAX_FBO> render_buf_id;
 extern std::array<GLuint, MAX_FBO> fbo_id;

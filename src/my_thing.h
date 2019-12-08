@@ -571,6 +571,7 @@ bool things_overlap(Thingp t, fpoint t_at, Thingp o);
 void thing_gc(void);
 void thing_map_scroll_to_player(void);
 void thing_render_all(void);
+void thing_render_minimap(void);
 void things_tick(void);
 void thing_cursor_move(void);
 void thing_cursor_map_follow(void);

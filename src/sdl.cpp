@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_gl.h"
 #include "my_game.h"
@@ -52,8 +52,8 @@ int joy_naxes;
 int joy_buttons;
 int joy_balls;
 
-SDL_Window *window; /* Our window handle */
-SDL_GLContext context; /* Our opengl context handle */
+SDL_Window *window; // Our window handle 
+SDL_GLContext context; // Our opengl context handle 
 
 void sdl_fini (void)
 {_
@@ -211,16 +211,16 @@ uint8_t sdl_init (void)
 
     sdl_list_video_size();
 
-    /*
-     * If we have a saved setting, use that.
-     */
+    //
+    // If we have a saved setting, use that.
+    //
     if (game->config.video_pix_width && game->config.video_pix_height) {
         video_width = game->config.video_pix_width;
         video_height = game->config.video_pix_height;
     } else {
-        /*
-         * Else guess.
-         */
+        //
+        // Else guess.
+        //
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
 
@@ -236,8 +236,8 @@ uint8_t sdl_init (void)
 
     TILES_ACROSS = game->config.video_pix_width / TILE_WIDTH;
     TILES_DOWN = game->config.video_pix_height / TILE_HEIGHT;
-    TILES_ACROSS /= 2;
-    TILES_DOWN /= 2;
+    TILES_ACROSS /= 3;
+    TILES_DOWN /= 3;
 
     game->config.tile_gl_width =
                     game->config.video_gl_width  / (double)TILES_ACROSS;
@@ -289,12 +289,11 @@ uint8_t sdl_init (void)
     LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
     LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
 
-
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    /*
-     * Don't use this. It seemed to mess up graphics on FireGL.
-     */
+    //
+    // Don't use this. It seemed to mess up graphics on FireGL.
+    //
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
 #ifdef ENABLE_GENERATE_TTF
@@ -312,10 +311,10 @@ uint8_t sdl_init (void)
     }
 
 #if 0
-    /*
-     * For a lo pixel game this makes no sense as the frame
-     * buffers are really large and slows things down.
-     */
+    //
+    // For a lo pixel game this makes no sense as the frame
+    // buffers are really large and slows things down.
+    //
     LOG("Calling SDL_GetDisplayDPI");
     float dpi;
     if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
@@ -370,8 +369,10 @@ uint8_t sdl_init (void)
         game->config.drawable_gl_width,
         game->config.drawable_gl_height);
 
-    game->config.tile_pixel_width = game->config.drawable_gl_width / TILES_ACROSS;
-    game->config.tile_pixel_height = game->config.drawable_gl_height / TILES_DOWN;
+    game->config.tile_pixel_width = 
+                    game->config.drawable_gl_width / TILES_ACROSS;
+    game->config.tile_pixel_height = 
+                    game->config.drawable_gl_height / TILES_DOWN;
 
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
@@ -415,11 +416,11 @@ uint8_t sdl_init (void)
 static int sdl_filter_events (void *userdata, SDL_Event *event)
 {_
     switch (event->type) {
-        /* This is important!  Queue it if we want to quit. */
+        // This is important!  Queue it if we want to quit. */
         case SDL_QUIT:
             return (1);
 
-        /* Mouse and keyboard events go to threads */
+        // Mouse and keyboard events go to threads */
         case SDL_MOUSEMOTION:
         case SDL_MOUSEBUTTONDOWN:
         case SDL_MOUSEBUTTONUP:
@@ -430,14 +431,14 @@ static int sdl_filter_events (void *userdata, SDL_Event *event)
         case SDL_CONTROLLERBUTTONDOWN:
         case SDL_CONTROLLERBUTTONUP:
         case SDL_CONTROLLERAXISMOTION:
-        case SDL_JOYAXISMOTION:               /* Joystick axis motion */
-        case SDL_JOYBALLMOTION:               /* Joystick trackball motion */
-        case SDL_JOYHATMOTION:                /* Joystick hat position change */
-        case SDL_JOYBUTTONDOWN:               /* Joystick button pressed */
-        case SDL_JOYBUTTONUP:                 /* Joystick button released */
+        case SDL_JOYAXISMOTION:               // Joystick axis motion 
+        case SDL_JOYBALLMOTION:               // Joystick trackball motion 
+        case SDL_JOYHATMOTION:                // Joystick hat position change 
+        case SDL_JOYBUTTONDOWN:               // Joystick button pressed 
+        case SDL_JOYBUTTONUP:                 // Joystick button released 
             return (1);
 
-        /* Drop all other events */
+        // Drop all other events */
         default:
             return (0);
     }
@@ -459,9 +460,9 @@ static void sdl_event (SDL_Event * event)
                 static struct SDL_KEYSYM last;
                 static uint32_t last_time_for_key;
 
-                /*
-                 * SDL2 has no auto repeat.
-                 */
+                //
+                // SDL2 has no auto repeat.
+                //
                 if (!memcmp(&last, key, sizeof(*key))) {
                     if (!time_have_x_hundredths_passed_since(5, last_time_for_key)) {
                         return;
@@ -523,10 +524,10 @@ static void sdl_event (SDL_Event * event)
         wheel_x *= accel;
         wheel_y *= accel;
 
-        /*
-         * Negative wheel x so side scrolls seem natural. Could just be
-         * a dumb macos thing to ifdef?
-         */
+        //
+        // Negative wheel x so side scrolls seem natural. Could just be
+        // a dumb macos thing to ifdef?
+        //
         wid_mouse_visible = 1;
         mouse_tick ++;
         wid_mouse_motion(mouse_x, mouse_y, 0, 0, -wheel_x, wheel_y);
@@ -769,9 +770,9 @@ static void sdl_tick (void)
 
     sdl_get_mouse();
 
-    /*
-     * Right stick
-     */
+    //
+    // Right stick
+    //
     if (sdl_joy_axes[3] > sdl_joy_deadzone) {
         DBG("right stick, right");
         sdl_joy1_right = true;
@@ -808,9 +809,9 @@ static void sdl_tick (void)
         decr(sdl_joy_buttons, SDL_JOY_BUTTON_UP);
     }
 
-    /*
-     * Left stick
-     */
+    //
+    // Left stick
+    //
     int mx = 0;
     int my = 0;
 
@@ -894,9 +895,9 @@ void sdl_exit (void)
     sdl_main_loop_running = false;
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
 uint8_t config_fps_counter_set (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[2];
@@ -916,9 +917,9 @@ uint8_t config_fps_counter_set (tokens_t *tokens, void *context)
     return (true);
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
 void gfx_inverted_toggle (void)
 {_
     if (!game->config.gfx_inverted) {
@@ -930,9 +931,9 @@ void gfx_inverted_toggle (void)
     }
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
 uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[3];
@@ -953,9 +954,46 @@ uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
     return (true);
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
+void gfx_minimap_toggle (void)
+{_
+    if (!game->config.gfx_minimap) {
+        game->config.gfx_minimap = true;
+        CON("gfx map enabled");
+    } else {
+        game->config.gfx_minimap = false;
+        CON("gfx map disabled");
+    }
+}
+
+//
+// User has entered a command, run it
+//
+uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
+{_
+    char *s = tokens->args[3];
+
+    if (!s || (*s == '\0')) {
+        game->config.gfx_minimap = true;
+        CON("gfx map enabled (default)");
+    } else {
+        int val = strtol(s, 0, 10) ? 1 : 0;
+        game->config.gfx_minimap = val;
+        if (game->config.gfx_minimap) {
+            CON("gfx map enabled");
+        } else {
+            CON("gfx map disabled");
+        }
+    }
+
+    return (true);
+}
+
+//
+// User has entered a command, run it
+//
 void gfx_outline_toggle (void)
 {_
     if (!game->config.gfx_outline) {
@@ -965,11 +1003,12 @@ void gfx_outline_toggle (void)
         game->config.gfx_outline = false;
         CON("gfx outline disabled");
     }
+    game->world.minimap_valid = false;
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
 uint8_t config_gfx_outline_set (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[3];
@@ -990,9 +1029,9 @@ uint8_t config_gfx_outline_set (tokens_t *tokens, void *context)
     return (true);
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
 void gfx_lights_toggle (void)
 {_
     if (!game->config.gfx_lights) {
@@ -1004,9 +1043,9 @@ void gfx_lights_toggle (void)
     }
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
 uint8_t config_gfx_lights_set (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[3];
@@ -1027,9 +1066,9 @@ uint8_t config_gfx_lights_set (tokens_t *tokens, void *context)
     return (true);
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
 uint8_t vsync_enable (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[2];
@@ -1051,9 +1090,9 @@ uint8_t vsync_enable (tokens_t *tokens, void *context)
     return (true);
 }
 
-/*
- * User has entered a command, run it
- */
+//
+// User has entered a command, run it
+//
 uint8_t sdl_user_exit (tokens_t *tokens, void *context)
 {_
     sdl_exit();
@@ -1061,9 +1100,9 @@ uint8_t sdl_user_exit (tokens_t *tokens, void *context)
     return (true);
 }
 
-/*
- * Main loop
- */
+//
+// Main loop
+//
 void sdl_loop (void)
 {_
     SDL_Event events[10];
@@ -1076,9 +1115,9 @@ void sdl_loop (void)
 
     glEnable(GL_TEXTURE_2D);
 
-    /*
-     * Wait for events
-     */
+    //
+    // Wait for events
+    //
     int timestamp_then = time_get_time_ms();
     int timestamp_then2 = timestamp_then;
 
@@ -1091,10 +1130,10 @@ void sdl_loop (void)
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    /*
-     * Don't use this. It seemed to mess up graphics on FireGL.
+    //
+    // Don't use this. It seemed to mess up graphics on FireGL.
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-     */
+    //
 
     if (game->config.vsync_enable) {
         SDL_GL_SetSwapInterval(1);
@@ -1111,9 +1150,9 @@ void sdl_loop (void)
     for (;/*ever*/;) {
         frames++;
 
-        /*
-         * Reset joystick handling before we poll and update.
-         */
+        //
+        // Reset joystick handling before we poll and update.
+        //
         if (unlikely(sdl_joy_axes != nullptr)) {
             sdl_tick();
         }
@@ -1122,27 +1161,27 @@ void sdl_loop (void)
 
         game->display();
 
-        /*
-         * Do processing of some things, like reading the keyboard or doing
-         * stuff with widgets only occasionally if we do not need to.
-         */
+        //
+        // Do processing of some things, like reading the keyboard or doing
+        // stuff with widgets only occasionally if we do not need to.
+        //
         int timestamp_now = time_update_time_milli();
 
         if (unlikely(timestamp_now - timestamp_then > 20)) {
-            /*
-             * Give up some CPU to allow events to arrive and time for the GPU
-             * to process the above.
-             */
+            //
+            // Give up some CPU to allow events to arrive and time for the GPU
+            // to process the above.
+            //
             timestamp_then = timestamp_now;
 
-            /*
-             * Clean up dead widgets.
-             */
+            //
+            // Clean up dead widgets.
+            //
             wid_gc_all();
 
-            /*
-             * Read events
-             */
+            //
+            // Read events
+            //
             SDL_PumpEvents();
 
             wheel_x = 0;
@@ -1161,15 +1200,31 @@ void sdl_loop (void)
             player_tick();
             things_tick();
 
-            /*
-             * Display UI.
-             */
+            //
+            // Display UI.
+            //
             wid_display_all();
         }
 
 	glcolor(WHITE);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
 	blit_fbo_bind(FBO_MAIN);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        //
+        // Draw the map
+        //
+        if (game->config.gfx_minimap) {
+            float mx = 0.2;
+            float my = mx * game->config.video_w_h_ratio;
+            glPushMatrix();
+            glTranslatef(1.0 - mx, 0, 0);
+            blit_init();
+            blit(fbo_tex_id[FBO_MINIMAP], 0.0, 1.0, 1.0, 0.0, 0, my, mx, 0.0);
+            blit_flush();
+            glPopMatrix();
+        }
+
 	blit_fbo(FBO_WID);
 	blit_fbo_unbind();
 
@@ -1184,20 +1239,20 @@ void sdl_loop (void)
             glDisable(GL_COLOR_LOGIC_OP);
         }
 
-        /*
-         * FPS counter.
-         */
+        //
+        // FPS counter.
+        //
         {
-            /*
-             * Very occasional.
-             */
+            //
+            // Very occasional.
+            //
             if (unlikely(timestamp_now - timestamp_then2 >= 1000)) {
                 timestamp_then2 = timestamp_now;
 
                 if (game->config.fps_counter) {
-                    /*
-                     * Update FPS counter.
-                     */
+                    //
+                    // Update FPS counter.
+                    //
                     game->fps_count = frames;
 
                     frames = 0;
@@ -1212,9 +1267,9 @@ void sdl_loop (void)
 
         SDL_Delay(game->config.sdl_delay);
 
-        /*
-         * Flip
-         */
+        //
+        // Flip
+        //
         SDL_GL_SwapWindow(window);
     }
 
