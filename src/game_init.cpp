@@ -682,7 +682,8 @@ static void game_place_corridor (Dungeonp d, std::string what, int depth)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (!d->is_corridor(x, y)) {
+            if (!d->is_corridor(x, y) &&
+                !d->is_secret_corridor_at(x, y)) {
                 continue;
             }
 

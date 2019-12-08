@@ -236,6 +236,8 @@ public:
         //
         assign_rooms_to_tiles();
 
+        block_secret_doors();
+
         //
         // Remove all doors and then add them back in, but only between
         // depth changes
@@ -2640,6 +2642,25 @@ public:
                     r->depth = n->depth;
                     map_place_room_ptr(r, r->at.x, r->at.y);
                 }
+            }
+        }
+    }
+
+    void block_secret_doors (void)
+    {
+        for (auto x = 0; x < map_width; x++) {
+            for (auto y = 0; y < map_height; y++) {
+                if (getc(x, y, MAP_DEPTH_WALLS) == Charmap::DOOR) {
+                    for (auto dy = -1; dy <= 1; dy++) {
+                        for (auto dx = -1; dx <= 1; dx++) {
+                            if (getc(x + dx, y + dy, MAP_DEPTH_FLOOR) == Charmap::SECRET_CORRIDOR) {
+                                putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                                goto next;
+                            }
+                        }
+                    }
+                }
+next: ;
             }
         }
     }
