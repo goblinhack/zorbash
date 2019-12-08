@@ -253,7 +253,7 @@ public:
         //
         // Not sure we want this as rooms
         //
-        //place_doors_between_depth_changes();
+        place_doors_between_depth_changes();
 
         //
         // Add a perimeter to the level. Helps avoid off by one bugs.
@@ -701,6 +701,23 @@ public:
             auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_door) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_secret_door (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto v = get(Charmap::all_charmaps, c);
+
+            if (v.is_secret_door) {
                 return true;
             }
         }
@@ -2654,7 +2671,7 @@ public:
                     for (auto dy = -1; dy <= 1; dy++) {
                         for (auto dx = -1; dx <= 1; dx++) {
                             if (getc(x + dx, y + dy, MAP_DEPTH_FLOOR) == Charmap::SECRET_CORRIDOR) {
-                                putc(x, y, MAP_DEPTH_WALLS, Charmap::WALL);
+                                putc(x, y, MAP_DEPTH_WALLS, Charmap::SECRET_DOOR);
                                 goto next;
                             }
                         }

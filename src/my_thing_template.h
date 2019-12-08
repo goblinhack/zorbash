@@ -222,7 +222,7 @@ public:
     int is_rrr44 {};
     int is_rrr45 {};
     int is_rrr46 {};
-    int is_rrr47 {};
+    int is_secret_door {};
     int is_cursor_hover {};
     int is_cursor {};
     int is_rrr5 {};
@@ -579,9 +579,9 @@ static inline int tp_is_rrr46 (Tpp t)
     return (t->is_rrr46);
 }
 
-static inline int tp_is_rrr47 (Tpp t)
+static inline int tp_is_secret_door (Tpp t)
 {
-    return (t->is_rrr47);
+    return (t->is_secret_door);
 }
 
 static inline int tp_is_cursor_hover (Tpp t)

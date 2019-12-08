@@ -423,7 +423,7 @@ typedef struct Thing_ {
     int is_rrr44(void);
     int is_rrr45(void);
     int is_rrr46(void);
-    int is_rrr47(void);
+    int is_secret_door(void);
     int is_cursor_hover(void);
     int is_cursor(void);
     int is_rrr5(void);
