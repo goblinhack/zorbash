@@ -211,11 +211,13 @@ public:
             // Create a cyclic dungeon map.
             //
             create_cyclic_rooms(&grid);
+            _ debug("create cyclic rooms");
 
             //
             // Choose how rooms are linked
             //
             choose_room_doors();
+            _ debug("choose room doors");
 
             //
             // Drag rooms to the center of the map
@@ -235,32 +237,45 @@ public:
         // Keep track of which tile has which room
         //
         assign_rooms_to_tiles();
+        _ debug("assigned rooms to tiles");
 
+        //
+        // Wall off secret doors
+        //
         block_secret_doors();
+        _ debug("blocked secret doors");
 
         //
         // Remove all doors and then add them back in, but only between
         // depth changes
         //
         remove_all_doors();
+        _ debug("remove all doors");
 
         //
         // Place the rooms back on the map, so if there were any intentional
         // doors removed above then they will reappear.
         //
         room_print_only_doors(&grid);
+        _ debug("only doors");
 
         //
         // Not sure we want this as rooms
         //
         place_doors_between_depth_changes();
+        _ debug("add doors between depth changes");
 
         //
         // Add a perimeter to the level. Helps avoid off by one bugs.
         //
         add_corridor_walls();
+        _ debug("add corridor walls");
+
         add_room_walls();
+        _ debug("add room walls");
+
         add_border();
+        _ debug("add border");
 
         LOG("created basic layout:");
         dump();
@@ -1142,6 +1157,8 @@ public:
 
         for (auto r : Room::all_rooms) {
             r->placed = false;
+            r->skip = false;
+            r->depth = 0;
 
             r->which_secret_door_up = 0;
             r->which_secret_door_down = 0;
@@ -1387,7 +1404,8 @@ public:
             }
 	}
 
-        auto r = get(candidates, random_range(0, ncandidates));
+        auto ri = random_range(0, ncandidates);
+        auto r = get(candidates, ri);
         set(g->node_rooms, x, y, r);
 
         if (n->has_door_down) {
