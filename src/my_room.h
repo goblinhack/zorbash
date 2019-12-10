@@ -85,7 +85,7 @@ public:
     //
     // Temp used for skipping rooms in dungeon placement
     //
-    bool                     skip {};
+    bool                     skip {false};
 
     //
     // Direction is the flow of the level, like can a player only go one
