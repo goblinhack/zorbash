@@ -930,6 +930,7 @@ _
     }
 
     game->world.timestamp_dungeon_created = time_get_time_ms();
+
     game_place_monst(dungeon);
     game_place_food(dungeon);
     game_place_blood(dungeon);

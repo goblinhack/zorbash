@@ -63,7 +63,7 @@ void thing_cursor_map_follow (void)
         y_sensitivity = sensitivity;
     } else if (world->cursor && !world->map_follow_player) {
         follow = world->cursor->mid_at;
-        sensitivity = 6;
+        sensitivity = TILES_ACROSS / 4;
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
     } else {
