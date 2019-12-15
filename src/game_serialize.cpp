@@ -329,6 +329,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.mouse);
     out << bits(my.t.mouse_old);
     out << bits(my.t.timestamp_dungeon_created);
+    out << bits(my.t.next_thing_id);
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
@@ -375,6 +376,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     in >> bits(my.t.mouse);
     in >> bits(my.t.mouse_old);
     in >> bits(my.t.timestamp_dungeon_created);
+    in >> bits(my.t.next_thing_id);
 
     my.t.minimap_valid = false;
     my.t.cursor_needs_update = true;
@@ -407,6 +409,7 @@ void World::dump (std::string pfx, std::ostream &out)
     out << pfx << "map_follow_player         " << map_follow_player << std::endl;
     out << pfx << "map_wanted_at             " << map_wanted_at << std::endl;
     out << pfx << "timestamp_dungeon_created " << timestamp_dungeon_created << std::endl;
+    out << pfx << "next_thing_id             " << next_thing_id << std::endl;
 
     out << pfx << "all_things" << std::endl;
     for (auto x = 0; x < MAP_WIDTH; ++x) {

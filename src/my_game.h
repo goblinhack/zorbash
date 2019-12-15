@@ -67,6 +67,7 @@ public:
     int                        mouse {-1};    // ticks for every move
     int                        mouse_old {-1};
     uint32_t                   timestamp_dungeon_created {};
+    uint8_t                    next_thing_id {};
 
     Thingp                     player = {};
     Thingp                     cursor = {};
@@ -291,7 +292,7 @@ public:
     bool               gfx_minimap                  = true;
     bool               gfx_show_hidden              = false;
     bool               gfx_lights                   = true;
-    uint32_t           gfx_zoom                     = 2;
+    uint32_t           gfx_zoom                     = 4;
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
     bool               vsync_enable                 = true;

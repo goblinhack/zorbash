@@ -234,10 +234,14 @@ uint8_t sdl_init (void)
     game->config.video_gl_width = 1.0;
     game->config.video_gl_height = 1.0;
 
-    TILES_ACROSS = game->config.video_pix_width / TILE_WIDTH;
-    TILES_DOWN = game->config.video_pix_height / TILE_HEIGHT;
-    TILES_ACROSS /= 4;
-    TILES_DOWN /= 4;
+    float tiles_across = game->config.video_pix_width / TILE_WIDTH;
+    float tiles_down = game->config.video_pix_height / TILE_HEIGHT;
+
+    tiles_across /= (float)game->config.gfx_zoom;
+    tiles_down /= (float)game->config.gfx_zoom;
+
+    TILES_ACROSS = (int)tiles_across;
+    TILES_DOWN = (int)tiles_down;
 
     game->config.tile_gl_width =
                     game->config.video_gl_width  / (double)TILES_ACROSS;

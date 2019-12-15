@@ -14,7 +14,7 @@ static_assert(MAP_SLOTS  <= (1 << World::slots_bits), "MAP_SLOTS overflow");
 
 void World::put_thing_ptr (uint16_t x, uint16_t y, Thingp t)
 {
-    static uint8_t r;
+    auto r = world->next_thing_id;
 
     if (unlikely(is_oob(x, y))) {
         t->die("oob at %d %d", x, y);

@@ -511,6 +511,8 @@ void World::clear (void)
     _is_wall = {};
     _is_water = {};
     _is_dungeon = {};
+
+    next_thing_id = 1;
 }
 
 void World::put_thing (int x, int y, uint32_t id)
