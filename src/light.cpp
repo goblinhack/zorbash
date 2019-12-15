@@ -8,7 +8,7 @@
 
 Thingp debug_thing;
 
-static Texp light_overlay_tex ;
+static Texp light_overlay_tex;
 static int light_overlay_texid;
 
 Light::Light (void)
@@ -227,8 +227,8 @@ printf("\n");
 
 void Light::render_triangle_fans (void)
 {
-    static const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
-    static const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+    const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
+    const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
 
     auto tx = at.x + 0.5;
     auto ty = at.y + 0.5;

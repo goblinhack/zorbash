@@ -236,8 +236,8 @@ uint8_t sdl_init (void)
 
     TILES_ACROSS = game->config.video_pix_width / TILE_WIDTH;
     TILES_DOWN = game->config.video_pix_height / TILE_HEIGHT;
-    TILES_ACROSS /= 3;
-    TILES_DOWN /= 3;
+    TILES_ACROSS /= 4;
+    TILES_DOWN /= 4;
 
     game->config.tile_gl_width =
                     game->config.video_gl_width  / (double)TILES_ACROSS;
@@ -920,7 +920,7 @@ uint8_t config_fps_counter_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-void gfx_inverted_toggle (void)
+void config_gfx_inverted_toggle (void)
 {_
     if (!game->config.gfx_inverted) {
         game->config.gfx_inverted = true;
@@ -957,7 +957,7 @@ uint8_t config_gfx_inverted_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-void gfx_minimap_toggle (void)
+void config_gfx_minimap_toggle (void)
 {_
     if (!game->config.gfx_minimap) {
         game->config.gfx_minimap = true;
@@ -994,7 +994,7 @@ uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-void gfx_show_hidden_toggle (void)
+void config_gfx_show_hidden_toggle (void)
 {_
     if (!game->config.gfx_show_hidden) {
         game->config.gfx_show_hidden = true;
@@ -1032,7 +1032,7 @@ uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-void gfx_lights_toggle (void)
+void config_gfx_lights_toggle (void)
 {_
     if (!game->config.gfx_lights) {
         game->config.gfx_lights = true;
@@ -1062,6 +1062,92 @@ uint8_t config_gfx_lights_set (tokens_t *tokens, void *context)
             CON("gfx lights disabled");
         }
     }
+
+    return (true);
+}
+
+static void config_gfx_zoom_update (void)
+{
+    float tiles_across = game->config.video_pix_width / TILE_WIDTH;
+    float tiles_down = game->config.video_pix_height / TILE_HEIGHT;
+
+    tiles_across /= (float)game->config.gfx_zoom;
+    tiles_down /= (float)game->config.gfx_zoom;
+
+    TILES_ACROSS = (int)tiles_across;
+    TILES_DOWN = (int)tiles_down;
+
+    game->config.tile_gl_width =
+                    game->config.video_gl_width  / (double)TILES_ACROSS;
+    game->config.tile_gl_height =
+                    game->config.video_gl_height / (double)TILES_DOWN;
+
+    game->config.one_pixel_gl_width =
+                    game->config.tile_gl_width / (double)TILE_WIDTH;
+    game->config.one_pixel_gl_height =
+                    game->config.tile_gl_height / (double)TILE_HEIGHT;
+
+    game->config.tile_pixel_width = 
+                    game->config.drawable_gl_width / TILES_ACROSS;
+    game->config.tile_pixel_height = 
+                    game->config.drawable_gl_height / TILES_DOWN;
+
+    game->world.cursor_needs_update = true;
+    game->world.cursor_found = false;
+    game->world.map_follow_player = true;
+
+    LOG("- video     gl width   : %f", game->config.video_gl_width);
+    LOG("- video     gl height  : %f", game->config.video_gl_height);
+    LOG("- tile      gl width   : %f", game->config.tile_gl_width);
+    LOG("- tile      gl height  : %f", game->config.tile_gl_height);
+    LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
+    LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
+    LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
+
+    Thing::update_all();
+
+    thing_map_scroll_to_player();
+}
+
+//
+// User has entered a command, run it
+//
+void config_gfx_zoom_in (void)
+{_
+    game->config.gfx_zoom++;
+    CON("gfx zoom set to %d", game->config.gfx_zoom);
+    config_gfx_zoom_update();
+}
+
+void config_gfx_zoom_out (void)
+{_
+    game->config.gfx_zoom--;
+    if (game->config.gfx_zoom < 1) {
+        game->config.gfx_zoom = 1;
+    }
+    CON("gfx zoom set to %d", game->config.gfx_zoom);
+    config_gfx_zoom_update();
+}
+
+//
+// User has entered a command, run it
+//
+uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
+{_
+    char *s = tokens->args[3];
+
+    if (!s || (*s == '\0')) {
+        game->config.gfx_zoom = 1;
+        CON("gfx zoom enabled (default)");
+    } else {
+        int val = strtol(s, 0, 10);
+        game->config.gfx_zoom = val;
+        if (game->config.gfx_zoom < 1) {
+            game->config.gfx_zoom = 1;
+        }
+        CON("gfx zoom set to %d", val);
+    }
+    config_gfx_zoom_update();
 
     return (true);
 }

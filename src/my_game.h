@@ -288,9 +288,10 @@ public:
 #else
     bool               gfx_inverted                 = false;
 #endif
-    bool               gfx_minimap                      = true;
-    bool               gfx_show_hidden                  = false;
+    bool               gfx_minimap                  = true;
+    bool               gfx_show_hidden              = false;
     bool               gfx_lights                   = true;
+    uint32_t           gfx_zoom                     = 2;
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
     bool               vsync_enable                 = true;

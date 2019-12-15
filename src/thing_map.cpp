@@ -49,7 +49,6 @@ static void thing_map_scroll_do (void)
                              (float)MAP_HEIGHT - TILES_DOWN);
 }
 
-
 void thing_map_scroll_to_player (void)
 {
     for (auto x = 0; x < 1000; x++) {

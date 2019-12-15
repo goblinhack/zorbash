@@ -141,11 +141,10 @@ gl_leave_2_5d_mode (void)
     glPopMatrix();
 }
 
-static void gl_init_fbo_ (
-    int fbo,
-    GLuint *render_buf_id,
-    GLuint *fbo_id,
-    GLuint *fbo_tex_id)
+static void gl_init_fbo_ (int fbo,
+                          GLuint *render_buf_id,
+                          GLuint *fbo_id,
+                          GLuint *fbo_tex_id)
 {_
     GLuint tex_width = game->config.drawable_gl_width;
     GLuint tex_height = game->config.drawable_gl_height;
