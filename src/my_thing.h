@@ -158,6 +158,8 @@ typedef struct Thing_ {
         return (tp_id_map[tp_id - 1]);
     }
 
+    static void update_all(void);
+
     void new_monst(void);
     void get_tiles(ThingTiles *tiles);
 

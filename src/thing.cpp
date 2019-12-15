@@ -638,3 +638,17 @@ void Thing::kill (void)
     is_pending_gc = true;
     things_to_delete.push_back(id);
 }
+
+void Thing::update_all (void)
+{
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            for (auto t : get(world->all_thing_ptrs_at, x, y)) {
+                if (t) {
+                    t->update_coordinates();
+                    t->update_light();
+                }
+            }
+        }
+    }
+}

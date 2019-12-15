@@ -141,11 +141,11 @@ void command_add (command_fn_t callback,
 }
 
 static int command_matches (const char *input,
-                                char *output,
-                                uint8_t show_ambiguous,
-                                uint8_t show_complete,
-                                uint8_t execute_command,
-                                void *context)
+                            char *output,
+                            uint8_t show_ambiguous,
+                            uint8_t show_complete,
+                            uint8_t execute_command,
+                            void *context)
 {_
     char cand_expand_to[MAXSHORTSTR];
     commandp matched_command = nullptr;

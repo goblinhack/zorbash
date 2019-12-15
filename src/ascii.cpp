@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_ascii.h"
 #include "my_font.h"
@@ -59,19 +59,19 @@ typedef struct {
     color fg2_color_tr;
     color fg2_color_br;
 
-    /*
-     * Is reset each frame, and so although a pointer potentially should be
-     * zeroed out on game load once it is used.
-     */
+    //
+    // Is reset each frame, and so although a pointer potentially should be
+    // zeroed out on game load once it is used.
+    //
     void *context {};
 
 } ascii_cell;
 
 static std::array<std::array<ascii_cell, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> cells = {};
 
-/*
- * For drawing the mouse cursor.
- */
+//
+// For drawing the mouse cursor.
+//
 static fpoint mouse_tile_tl;
 static fpoint mouse_tile_br;
 static int mouse_found = false;
@@ -651,9 +651,9 @@ static void ascii_putf_ (int x, int y,
 
     auto wrote = vswprintf(buf, MAXSHORTSTR, fmt.c_str(), args);
 
-    /*
-     * Only a single nul is written, but as we read 2 at a time...
-     */
+    //
+    // Only a single nul is written, but as we read 2 at a time...
+    //
     if (wrote && (wrote < MAXSHORTSTR - 1)) {
         buf[wrote+1] = '\0';
     }
@@ -672,9 +672,9 @@ static void ascii_putf_ (int x, int y,
 
     auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
-    /*
-     * Only a single nul is written, but as we read 2 at a time...
-     */
+    //
+    // Only a single nul is written, but as we read 2 at a time...
+    //
     if (wrote && (wrote < MAXSHORTSTR - 1)) {
         buf[wrote+1] = '\0';
     }
@@ -750,9 +750,9 @@ static void ascii_display_mouse (fpoint mouse_tile_tl,
               fpoint(mouse_tile_tl.x, mouse_tile_tl.y),
               fpoint(mouse_tile_br.x, mouse_tile_br.y));
     blit_flush();
-    /*
-     * Save where we are at
-     */
+    //
+    // Save where we are at
+    //
     ascii.mouse_at = mouse_at;
 }
 #endif
@@ -890,15 +890,15 @@ void ascii_draw_line (int x0, int y0, int x1, int y1,
     ascii_draw_line (x0, y0, x1, y1, tile_find(tilename), c);
 }
 
-/*
- * Display one z layer of the ascii.
- */
+//
+// Display one z layer of the ascii.
+//
 static void ascii_blit (void)
 {_
-    /*
-     * Get the mouse position to use. We use this to find the mouse tile that
-     * we are over.
-     */
+    //
+    // Get the mouse position to use. We use this to find the mouse tile that
+    // we are over.
+    //
     int x;
     int y;
     float tile_x;
@@ -942,9 +942,9 @@ static void ascii_blit (void)
                 }
             }
 
-            /*
-             * Background
-             */
+            //
+            // Background
+            //
             if (cell->tex) {
 		Texp tex = cell->tex;
 
@@ -1102,9 +1102,9 @@ static void ascii_blit (void)
             tile_br.x = tile_x + game->config.ascii_gl_width;
             tile_br.y = tile_y + game->config.ascii_gl_height;
 
-            /*
-             * Foreground
-             */
+            //
+            // Foreground
+            //
             {
                 tile_br.x = tile_x + game->config.ascii_gl_width;
                 Tilep tile = cell->fg_tile;
@@ -1133,9 +1133,9 @@ static void ascii_blit (void)
     }
 }
 
-/*
- * The big ascii renderer
- */
+//
+// The big ascii renderer
+//
 void ascii_display (void)
 {_
     mouse_found = false;

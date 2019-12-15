@@ -3498,83 +3498,95 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 
     switch (key->mod) {
         default:
+            switch ((int32_t)key->sym) {
+                case '\\':
+                    sdl_screenshot();
+                    CON("Screenshot taken");
+                    break;
 
-        switch ((int32_t)key->sym) {
-            case '\\':
-                sdl_screenshot();
-                CON("Screenshot taken");
-                break;
+                case '1':
+                    config_gfx_inverted_toggle();
+                    break;
 
-            case '1':
-                gfx_inverted_toggle();
-                break;
+                case '2':
+                    config_gfx_lights_toggle();
+                    break;
 
-            case '2':
-                gfx_lights_toggle();
-                break;
+                case '3':
+                    config_gfx_show_hidden_toggle();
+                    break;
 
-            case '3':
-                gfx_show_hidden_toggle();
-                break;
+                case 'z':
+                    config_gfx_zoom_in();
+                    break;
 
-            case 'r':
-                CON("reloading dungeon");
-                game->fini();
-                game->init();
-                break;
+                case 'r':
+                    CON("reloading dungeon");
+                    game->fini();
+                    game->init();
+                    break;
 
-            case '`':
-                wid_toggle_hidden(wid_console_window);
-                wid_raise(wid_console_window);
+                case '`':
+                    wid_toggle_hidden(wid_console_window);
+                    wid_raise(wid_console_window);
 
-                //
-                // Need this so the console gets focus over the menu.
-                //
-                if (w->visible) {
-                    wid_set_focus(w);
-                    wid_focus_lock(w);
-                } else {
-                    wid_unset_focus();
-                    wid_unset_focus_lock();
+                    //
+                    // Need this so the console gets focus over the menu.
+                    //
+                    if (w->visible) {
+                        wid_set_focus(w);
+                        wid_focus_lock(w);
+                    } else {
+                        wid_unset_focus();
+                        wid_unset_focus_lock();
+                    }
+                    break;
+
+                case SDLK_ESCAPE:
+                    if (w->visible) {
+                        wid_hide(w);
+                    }
+
+                    //
+                    // Need this so the console gets focus over the menu.
+                    //
+                    if (w->visible) {
+                        wid_set_focus(w);
+                        wid_focus_lock(w);
+                    } else {
+                        wid_unset_focus();
+                        wid_unset_focus_lock();
+                    }
+                    break;
+
+                case SDLK_TAB:
+                case SDLK_RETURN:
+                case SDLK_DOWN:
+                case SDLK_RIGHT:
+                    wid_find_next_focus();
+                    break;
+
+                case SDLK_UP:
+                case SDLK_LEFT:
+                    wid_find_prev_focus();
+                    break;
+
+                default: {
+                    if (wid_console_window && wid_console_window->visible) {
+                        wid_console_receive_input(wid_console_input_line, key);
+                    }
+                    break;
                 }
-                break;
+            }
+            break;
 
-            case SDLK_ESCAPE:
-                if (w->visible) {
-                    wid_hide(w);
-                }
-
-                //
-                // Need this so the console gets focus over the menu.
-                //
-                if (w->visible) {
-                    wid_set_focus(w);
-                    wid_focus_lock(w);
-                } else {
-                    wid_unset_focus();
-                    wid_unset_focus_lock();
-                }
-                break;
-
-            case SDLK_TAB:
-            case SDLK_RETURN:
-            case SDLK_DOWN:
-            case SDLK_RIGHT:
-                wid_find_next_focus();
-                break;
-
-            case SDLK_UP:
-            case SDLK_LEFT:
-                wid_find_prev_focus();
-                break;
-
-            default: {
-                if (wid_console_window && wid_console_window->visible) {
-                    wid_console_receive_input(wid_console_input_line, key);
-                }
+        case KMOD_LSHIFT:
+        case KMOD_RSHIFT:
+            switch ((int32_t)key->sym) {
+            case 'z':
+                config_gfx_zoom_out();
                 break;
             }
-        }
     }
 
     return (true);

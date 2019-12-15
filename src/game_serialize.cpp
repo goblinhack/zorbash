@@ -144,8 +144,8 @@ void Monst::dump (std::string pfx, std::ostream &out)
     out << pfx << "}" << std::endl;
 }
 
-std::ostream& operator<<(std::ostream &out, 
-                         Bits<const Thing & > const my)
+std::ostream& operator<< (std::ostream &out, 
+                          Bits<const Thing & > const my)
 {
     bool monst = (my.t.monst != nullptr);
     out << bits(monst);
@@ -195,7 +195,7 @@ std::ostream& operator<<(std::ostream &out,
     return (out);
 }
 
-std::istream& operator>>(std::istream &in, Bits<Thing &> my)
+std::istream& operator>> (std::istream &in, Bits<Thing &> my)
 {
     bool monst = (my.t.monst != nullptr);
     in >> bits(monst);
@@ -433,6 +433,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.gfx_minimap);
     out << bits(my.t.gfx_show_hidden);
     out << bits(my.t.gfx_lights);
+    out << bits(my.t.gfx_zoom);
     out << bits(my.t.sound_volume);
     out << bits(my.t.music_volume);
     out << bits(my.t.vsync_enable);
@@ -463,6 +464,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.gfx_minimap);
     in >> bits(my.t.gfx_show_hidden);
     in >> bits(my.t.gfx_lights);
+    in >> bits(my.t.gfx_zoom);
     in >> bits(my.t.sound_volume);
     in >> bits(my.t.music_volume);
     in >> bits(my.t.vsync_enable);
@@ -495,8 +497,9 @@ void Config::dump (std::string pfx, std::ostream &out)
     out << pfx << "fps_counter        " << fps_counter << std::endl;
     out << pfx << "gfx_inverted       " << gfx_inverted << std::endl;
     out << pfx << "gfx_minimap        " << gfx_minimap << std::endl;
-    out << pfx << "gfx_show_hidden        " << gfx_show_hidden << std::endl;
+    out << pfx << "gfx_show_hidden    " << gfx_show_hidden << std::endl;
     out << pfx << "gfx_lights         " << gfx_lights << std::endl;
+    out << pfx << "gfx_zoom           " << gfx_zoom << std::endl;
     out << pfx << "sound_volume       " << sound_volume << std::endl;
     out << pfx << "music_volume       " << music_volume << std::endl;
     out << pfx << "vsync_enable       " << vsync_enable << std::endl;
