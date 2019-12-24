@@ -496,7 +496,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
             // use default shadow for carried items
         } else if (this != world->player) {
             fpoint p = world->player->get_interpolated_mid_at();
-            fpoint d = get_interpolated_mid_at() - 
+            fpoint d = get_interpolated_mid_at() -
                              world->player->get_interpolated_mid_at();
             const double D = 5.0;
             dx = d.x / D;
@@ -767,7 +767,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
                 gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset = 
+                auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
                 blit_tl.y += offset;
@@ -782,7 +782,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             } else {
                 const auto pct_visible_above_surface = 0.1;
                 gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset = 
+                auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
                 blit_tl.y += offset;
@@ -951,7 +951,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
                 gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset = 
+                auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
                 blit_tl.y += offset;
@@ -965,7 +965,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
             } else {
                 const auto pct_visible_above_surface = 0.1;
                 gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset = 
+                auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
                 blit_tl.y += offset;

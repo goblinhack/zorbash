@@ -118,7 +118,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     return (out);
 }
 
-std::ostream& operator<<(std::ostream &out, 
+std::ostream& operator<<(std::ostream &out,
                          Bits<const class World & > const my)
 {_
     out << bits(my.t._is_blood);
@@ -194,7 +194,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     return (out);
 }
 
-std::ostream& operator<<(std::ostream &out, 
+std::ostream& operator<<(std::ostream &out,
                          Bits<const class Game & > const my)
 {_
     out << bits(my.t.appdata);
@@ -247,7 +247,7 @@ Game::save (void)
     if (r == LZO_E_OK) {
         CON("%s: compressed %lu to %lu bytes",
             saved_file.c_str(),
-            (unsigned long) uncompressed_len, 
+            (unsigned long) uncompressed_len,
             (unsigned long) compressed_len);
     } else {
         DIE("LZO internal error - compression failed: %d", r);

@@ -22,7 +22,7 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
     static const int MAX_UI_BG_SIZE = MAX_UI_SIZE - 2;
     static std::array<
                std::array<
-                   std::array<Tilep, MAX_UI_SIZE>, 
+                   std::array<Tilep, MAX_UI_SIZE>,
                        MAX_UI_SIZE>, MAX_STYLES> tiles = {};
 
     if (style >= MAX_STYLES) {
@@ -34,7 +34,7 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
         for (auto styles = 0; styles < 5; styles++) {
             for (auto x = 0; x < MAX_UI_SIZE; x++) {
                 for (auto y = 0; y < MAX_UI_SIZE; y++) {
-                    std::string name = 
+                    std::string name =
                         "ui" + std::to_string(styles) + "," +
                         std::to_string(x) + "," + std::to_string(y);
                     set(tiles, styles, x, y, tile_find_mand(name));

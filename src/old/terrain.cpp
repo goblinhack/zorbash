@@ -60,7 +60,7 @@ public:
     int16_t                           height;
     int16_t                           wind_tick;
 
-    Terrain (int16_t width, int16_t height, int16_t seed) : 
+    Terrain (int16_t width, int16_t height, int16_t seed) :
         width(width), height(height)
     {
         newptr(this, "terrain");
@@ -124,7 +124,7 @@ public:
         }
     }
 
-    void midpoint_disp_algo (signed char displacement) 
+    void midpoint_disp_algo (signed char displacement)
     {
         size_t n = (2 * MAP_WIDTH) - 1;
 
@@ -221,7 +221,7 @@ public:
         auto image = SDL_CreateRGBSurface(0, MAP_WIDTH, MAP_HEIGHT, 32,
                                           rmask, gmask, bmask, amask);
         if (!image) {
-            DIE("no image surface created for size %dx%d", 
+            DIE("no image surface created for size %dx%d",
                 width, height);
         }
 
@@ -286,7 +286,7 @@ public:
         auto image = SDL_CreateRGBSurface(0, MAP_WIDTH, MAP_HEIGHT, 32,
                                           rmask, gmask, bmask, amask);
         if (!image) {
-            DIE("no image surface created for size %dx%d", 
+            DIE("no image surface created for size %dx%d",
                 width, height);
         }
 
@@ -338,7 +338,7 @@ public:
         auto image = SDL_CreateRGBSurface(0, MAP_WIDTH, MAP_HEIGHT, 32,
                                           rmask, gmask, bmask, amask);
         if (!image) {
-            DIE("no image surface created for size %dx%d", 
+            DIE("no image surface created for size %dx%d",
                 width, height);
         }
 

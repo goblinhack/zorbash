@@ -41,40 +41,40 @@ static void putbg (uint8_t bg, FILE *fp)
 static int color_to_index (const char **s)
 {
     if (!strncmp(*s, "black$", sizeof("black$")-1)) {
-	*s += sizeof("black$")-1;
-	return (TERM_COLOR_BLACK);
+        *s += sizeof("black$")-1;
+        return (TERM_COLOR_BLACK);
     }
     if (!strncmp(*s, "red$", sizeof("red$")-1)) {
-	*s += sizeof("red$")-1;
-	return (TERM_COLOR_RED);
+        *s += sizeof("red$")-1;
+        return (TERM_COLOR_RED);
     }
     if (!strncmp(*s, "green$", sizeof("green$")-1)) {
-	*s += sizeof("green$")-1;
-	return (TERM_COLOR_GREEN);
+        *s += sizeof("green$")-1;
+        return (TERM_COLOR_GREEN);
     }
     if (!strncmp(*s, "yellow$", sizeof("yellow$")-1)) {
-	*s += sizeof("yellow$")-1;
-	return (TERM_COLOR_YELLOW);
+        *s += sizeof("yellow$")-1;
+        return (TERM_COLOR_YELLOW);
     }
     if (!strncmp(*s, "blue$", sizeof("blue$")-1)) {
-	*s += sizeof("blue$")-1;
-	return (TERM_COLOR_BLUE);
+        *s += sizeof("blue$")-1;
+        return (TERM_COLOR_BLUE);
     }
     if (!strncmp(*s, "pink$", sizeof("pink$")-1)) {
-	*s += sizeof("pink$")-1;
-	return (TERM_COLOR_PINK);
+        *s += sizeof("pink$")-1;
+        return (TERM_COLOR_PINK);
     }
     if (!strncmp(*s, "cyan$", sizeof("cyan$")-1)) {
-	*s += sizeof("cyan$")-1;
-	return (TERM_COLOR_CYAN);
+        *s += sizeof("cyan$")-1;
+        return (TERM_COLOR_CYAN);
     }
     if (!strncmp(*s, "white$", sizeof("white$")-1)) {
-	*s += sizeof("white$")-1;
-	return (TERM_COLOR_WHITE);
+        *s += sizeof("white$")-1;
+        return (TERM_COLOR_WHITE);
     }
     if (!strncmp(*s, "reset$", sizeof("reset$")-1)) {
-	*s += sizeof("reset$")-1;
-	return (TERM_COLOR_RESET);
+        *s += sizeof("reset$")-1;
+        return (TERM_COLOR_RESET);
     }
 
     return (TERM_COLOR_WHITE);
@@ -86,13 +86,13 @@ static void putf (FILE *fp, const char *s)
     uint8_t looking_for_start = false;
 
     while ((c = *s++) != '\0') {
-	if (!looking_for_start) {
-	    if (c == '%') {
-		looking_for_start = true;
-		continue;
-	    }
-	} else if (looking_for_start) {
-	    if (c == '%') {
+        if (!looking_for_start) {
+            if (c == '%') {
+                looking_for_start = true;
+                continue;
+            }
+        } else if (looking_for_start) {
+            if (c == '%') {
             if (!strncmp(s, "fg=", 3)) {
                 s += 3;
                 putfg(color_to_index(&s), fp);
@@ -106,14 +106,14 @@ static void putf (FILE *fp, const char *s)
                 looking_for_start = false;
                 continue;
             }
-	    }
+            }
 
-	    putc(c, fp);
-	}
+            putc(c, fp);
+        }
 
-	looking_for_start = false;
+        looking_for_start = false;
 
-	putc(c, fp);
+        putc(c, fp);
     }
 
     putc('\n', fp);
@@ -225,8 +225,8 @@ static void con_ (const wchar_t *fmt, va_list args)
         auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
         /*
-         * Only a single nul is written, but as we read 2 at a time...
-         */
+        * Only a single nul is written, but as we read 2 at a time...
+        */
         if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
@@ -299,8 +299,8 @@ static void minicon_ (const wchar_t *fmt, va_list args)
         auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
         /*
-         * Only a single nul is written, but as we read 2 at a time...
-         */
+        * Only a single nul is written, but as we read 2 at a time...
+        */
         if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
@@ -460,8 +460,8 @@ static void croak_ (const char *fmt, va_list args)
     }
 
     /*
-     * Seems to hang on crashes. Is it useful?
-     */
+    * Seems to hang on crashes. Is it useful?
+    */
     py_trace();
 
     croaked = true;
@@ -529,7 +529,7 @@ void Thing::log_ (const char *fmt, va_list args)
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
-             t->to_string().c_str());
+            t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -562,8 +562,8 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
         timestamp(buf, MAXSHORTSTR);
         len = (uint32_t)strlen(buf);
         snprintf(buf + len, MAXSHORTSTR - len, "thing %s: killed by %s: ",
-                 t->to_string().c_str(),
-                 killer->to_string().c_str());
+                t->to_string().c_str(),
+                killer->to_string().c_str());
 
         len = (uint32_t)strlen(buf);
         vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -599,7 +599,7 @@ void Thing::dead_ (const char *fmt, va_list args)
         timestamp(buf, MAXSHORTSTR);
         len = (uint32_t)strlen(buf);
         snprintf(buf + len, MAXSHORTSTR - len, "thing %s: dead: ",
-                 t->to_string().c_str());
+                t->to_string().c_str());
 
         len = (uint32_t)strlen(buf);
         vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -633,7 +633,7 @@ void Thing::die_ (const char *fmt, va_list args)
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
-             t->to_string().c_str());
+            t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -663,7 +663,7 @@ void Thing::con_ (const char *fmt, va_list args)
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
-             t->to_string().c_str());
+            t->to_string().c_str());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -698,7 +698,7 @@ void Thing::err_ (const char *fmt, va_list args)
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);
     snprintf(buf + len, MAXSHORTSTR - len, "ERROR: Thing %s: ",
-             t->to_cstring());
+            t->to_cstring());
 
     len = (uint32_t)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
@@ -997,7 +997,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
 
 #if SDL_MAJOR_VERSION >= 2
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
-	"zorbash", buf + ts_len, 0);
+        "zorbash", buf + ts_len, 0);
 #endif
 
     len = (uint32_t)strlen(buf);

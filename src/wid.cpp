@@ -810,7 +810,7 @@ static char wid_event_to_char (const struct SDL_KEYSYM *evt)
         case SDLK_y: return ('y');
         case SDLK_z: return ('z');
         case SDLK_DELETE: return ('');
-#if SDL_MAJOR_VERSION == 1 // { 
+#if SDL_MAJOR_VERSION == 1 // {
         case SDLK_KP0: return ('0');
         case SDLK_KP1: return ('1');
         case SDLK_KP2: return ('2');
@@ -832,7 +832,7 @@ static char wid_event_to_char (const struct SDL_KEYSYM *evt)
         case SDLK_KP_7: return ('7');
         case SDLK_KP_8: return ('8');
         case SDLK_KP_9: return ('9');
-#endif // } 
+#endif // }
         case SDLK_KP_PERIOD: return ('.');
         case SDLK_KP_DIVIDE: return ('/');
         case SDLK_KP_MULTIPLY: return ('*');
@@ -963,7 +963,7 @@ void wid_set_name (Widp w, std::string name)
     if (w->parent) {
         w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                     name.c_str(), w,
-                                    w->parent->to_string.c_str(), 
+                                    w->parent->to_string.c_str(),
                                     w->parent);
     } else {
         w->to_string = string_sprintf("%s[%p]", name.c_str(), w);
@@ -2125,12 +2125,12 @@ static Widp wid_new_scroll_bar (Widp parent,
     Widp w = wid_new(parent);
 
     if (vertical) {
-        w->to_string = string_sprintf("%s, %s[%p]", 
-                                      name.c_str(), 
+        w->to_string = string_sprintf("%s, %s[%p]",
+                                      name.c_str(),
                                       "vert scroll bar", w);
     } else {
-        w->to_string = string_sprintf("%s, %s[%p]", 
-                                      name.c_str(), 
+        w->to_string = string_sprintf("%s, %s[%p]",
+                                      name.c_str(),
                                       "horiz scroll bar", w);
     }
 
@@ -2208,7 +2208,7 @@ Widp wid_new_vert_scroll_bar (Widp parent,
     {
         fpoint tl(0, 0);
         fpoint br(1, 1);
-        Widp scrollbar = 
+        Widp scrollbar =
             wid_new_scroll_bar(trough, name, scrollbar_owner, true);
         wid_set_pos_pct(scrollbar, tl, br);
 
@@ -2975,7 +2975,7 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
                 pct * (trough_height - scrollbar_height);
 
             wid_tree_detach(scrollbar);
-            scrollbar->key.br.y = 
+            scrollbar->key.br.y =
                 wid_get_tl_y(scrollbar) + scrollbar_height - 1;
             wid_tree_attach(scrollbar);
 
@@ -3004,7 +3004,7 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
                 pct * (trough_width - scrollbar_width);
 
             wid_tree_detach(scrollbar);
-            scrollbar->key.br.x = 
+            scrollbar->key.br.x =
                 wid_get_tl_x(scrollbar) + scrollbar_width - 1;
             wid_tree_attach(scrollbar);
 
@@ -4889,12 +4889,12 @@ if (wid_event_to_char(key) == '+') {
     usleep(50);
     i1 ++;
     if (i1 >= (int)ARRAY_SIZE(vals)) {
-	i1 = 0;
-	i2 ++;
-	if (i2 >= (int)ARRAY_SIZE(vals)) {
-	    i2 = 0;
+        i1 = 0;
+        i2 ++;
+        if (i2 >= (int)ARRAY_SIZE(vals)) {
+            i2 = 0;
             CON("wrapped");
-	}
+        }
     }
     return;
 }
@@ -4904,11 +4904,11 @@ CON("- %d %d", i1, i2);
     usleep(50);
     i1 --;
     if (i1 < 0) {
-	i1 = (int)ARRAY_SIZE(vals);
-	i2 --;
-	if (i2 < 0) {
-	    i2 = (int)ARRAY_SIZE(vals);
-	}
+        i1 = (int)ARRAY_SIZE(vals);
+        i2 --;
+        if (i2 < 0) {
+            i2 = (int)ARRAY_SIZE(vals);
+        }
     }
     return;
 }
@@ -5042,10 +5042,10 @@ try_parent:
 // Get the onscreen co-ords of the widget, clipped to the parent.
 //
 void wid_get_abs_coords (Widp w,
-                         int32_t *tlx,
-                         int32_t *tly,
-                         int32_t *brx,
-                         int32_t *bry)
+                        int32_t *tlx,
+                        int32_t *tly,
+                        int32_t *brx,
+                        int32_t *bry)
 {_
     Widp p {};
 
@@ -5141,9 +5141,9 @@ void wid_move_end (Widp w)
 // Display one wid and its children
 //
 static void wid_display (Widp w,
-                         uint8_t disable_scissor,
-                         uint8_t *updated_scissors,
-                         int clip)
+                        uint8_t disable_scissor,
+                        uint8_t *updated_scissors,
+                        int clip)
 {_
     int32_t clip_height = 0;
     int32_t clip_width = 0;
@@ -5255,10 +5255,10 @@ static void wid_display (Widp w,
     //
     if (!disable_scissor) {
 #if 0
-       //
-       // Why would we not always want scissors on?
-       //
-       if (!w->children_display_sorted.empty() || !w->parent || w->show_cursor) {
+    //
+    // Why would we not always want scissors on?
+    //
+    if (!w->children_display_sorted.empty() || !w->parent || w->show_cursor) {
 #endif
             //
             // Tell the parent we are doing scissors so they can re-do
@@ -5376,7 +5376,7 @@ static void wid_display (Widp w,
 
 
     for (auto iter = w->children_display_sorted.begin();
-         iter != w->children_display_sorted.end(); ++iter) {
+        iter != w->children_display_sorted.end(); ++iter) {
 
         auto child = iter->second;
 
@@ -5569,7 +5569,7 @@ void wid_display_all (void)
     wid_on_screen_at = {};
 
     for (auto iter = wid_top_level.begin();
-         iter != wid_top_level.end(); ++iter) {
+        iter != wid_top_level.end(); ++iter) {
 
         auto w = iter->second;
 
@@ -5599,7 +5599,7 @@ void wid_display_all (void)
     //
     if (game->config.fps_counter) {
         ascii_putf(ASCII_WIDTH - 6, ASCII_HEIGHT - 1, GREEN, BLACK,
-                   L"%u FPS", game->fps_count);
+                L"%u FPS", game->fps_count);
     }
 
     ascii_display();
@@ -5692,11 +5692,11 @@ void wid_move_to_abs_centered (Widp w, int32_t x, int32_t y)
 }
 
 static void wid_move_enqueue (Widp w,
-                              int32_t moving_start_x,
-                              int32_t moving_start_y,
-                              int32_t moving_end_x,
-                              int32_t moving_end_y,
-                              uint32_t ms)
+                            int32_t moving_start_x,
+                            int32_t moving_start_y,
+                            int32_t moving_end_x,
+                            int32_t moving_end_y,
+                            uint32_t ms)
 {_
     if (w->moving) {
         //

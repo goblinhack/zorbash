@@ -10,9 +10,9 @@
 
 void Thing::new_monst (void)
 {
-    if (unlikely(!monst)) { 
+    if (unlikely(!monst)) {
 //con("new");
-        monst = new Monst(); 
+        monst = new Monst();
         // uncomment to see who allocates things
         // err("new monst");
         newptr(monst, "Monst");
@@ -24,7 +24,7 @@ void Thing::new_monst (void)
 ////////////////////////////////////////////////////////////////////////////
 AgeMap *Thing::get_age_map (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->age_map);
     } else {
         return (0);
@@ -45,7 +45,7 @@ void Thing::delete_age_map (void)
 {_
     if (monst) {
         verify(monst);
-        if (monst->age_map) { 
+        if (monst->age_map) {
             oldptr(monst->age_map);
             delete monst->age_map; monst->age_map = 0;
         }
@@ -57,7 +57,7 @@ void Thing::delete_age_map (void)
 ////////////////////////////////////////////////////////////////////////////
 Dmap *Thing::get_dmap_scent (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->dmap_scent);
     } else {
         return (0);
@@ -91,7 +91,7 @@ log("old dmap_scent %p %p", monst, monst->dmap_scent);
 ////////////////////////////////////////////////////////////////////////////
 Lightp Thing::get_light (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->light);
     } else {
         return (0);
@@ -116,599 +116,599 @@ void Thing::delete_light (void)
 {_
     if (monst) {
         verify(monst);
-        if (monst->light) { 
+        if (monst->light) {
             delete monst->light; monst->light = 0;
         }
     }
 }
 
-int Thing::ai_delay_after_moving_ms(void)                     
-{ 
+int Thing::ai_delay_after_moving_ms(void)                    
+{
     return (tp_ai_delay_after_moving_ms(tp()));
 }
 
-int Thing::ai_scent_distance(void)                            
-{ 
+int Thing::ai_scent_distance(void)                           
+{
     return (tp_ai_scent_distance(tp()));
 }
 
-int Thing::bite_damage(void)                                  
-{ 
+int Thing::bite_damage(void)                                 
+{
     return (tp()->bite_damage());
 }
 
-int Thing::collision_attack(void)                             
-{ 
+int Thing::collision_attack(void)                            
+{
     return (tp_collision_attack(tp()));
 }
 
-int Thing::collision_box(void)                                
-{ 
+int Thing::collision_box(void)                               
+{
     return (tp_collision_box(tp()));
 }
 
-int Thing::collision_check(void)                              
-{ 
+int Thing::collision_check(void)                             
+{
     return (tp_collision_check(tp()));
 }
 
-int Thing::collision_circle(void)                             
-{ 
+int Thing::collision_circle(void)                            
+{
     return (tp_collision_circle(tp()));
 }
 
-int Thing::collision_hit_priority(void)                       
-{ 
+int Thing::collision_hit_priority(void)                      
+{
     return (tp_collision_hit_priority(tp()));
 }
 
-int Thing::is_interesting(void)                                 
-{ 
+int Thing::is_interesting(void)                                
+{
     return (tp_is_interesting(tp()));
 }
 
-int Thing::gfx_animated(void)                                 
-{ 
+int Thing::gfx_animated(void)                                
+{
     return (tp_gfx_animated(tp()));
 }
 
-int Thing::gfx_animated_can_vflip(void)                       
-{ 
+int Thing::gfx_animated_can_vflip(void)                      
+{
     return (tp_gfx_animated_can_vflip(tp()));
 }
 
-int Thing::gfx_animated_no_dir(void)                          
-{ 
+int Thing::gfx_animated_no_dir(void)                         
+{
     return (tp_gfx_animated_no_dir(tp()));
 }
 
-int Thing::gfx_bounce_on_move(void)                           
-{ 
+int Thing::gfx_bounce_on_move(void)                          
+{
     return (tp_gfx_bounce_on_move(tp()));
 }
 
-int Thing::gfx_can_hflip(void)                                
-{ 
+int Thing::gfx_can_hflip(void)                               
+{
     return (tp_gfx_can_hflip(tp()));
 }
 
-int Thing::gfx_is_an_animation_only(void)                     
-{ 
+int Thing::gfx_is_an_animation_only(void)                    
+{
     return (tp_gfx_is_an_animation_only(tp()));
 }
 
-int Thing::gfx_is_floor_deco(void)                            
-{ 
+int Thing::gfx_is_floor_deco(void)                           
+{
     return (tp_gfx_is_floor_deco(tp()));
 }
 
-int Thing::gfx_is_wall_deco(void)                             
-{ 
+int Thing::gfx_is_wall_deco(void)                            
+{
     return (tp_gfx_is_wall_deco(tp()));
 }
 
-int Thing::gfx_is_weapon_carry_anim(void)                     
-{ 
+int Thing::gfx_is_weapon_carry_anim(void)                    
+{
     return (tp_gfx_is_weapon_carry_anim(tp()));
 }
 
-int Thing::gfx_is_weapon_use_anim(void)                       
-{ 
+int Thing::gfx_is_weapon_use_anim(void)                      
+{
     return (tp_gfx_is_weapon_use_anim(tp()));
 }
 
-int Thing::gfx_large_shadow_caster(void)                      
-{ 
+int Thing::gfx_large_shadow_caster(void)                     
+{
     return (tp_gfx_large_shadow_caster(tp()));
 }
 
-int Thing::gfx_show_hiddend(void)                                 
-{ 
+int Thing::gfx_show_hiddend(void)                                
+{
     return (tp_gfx_show_hiddend(tp()));
 }
 
-int Thing::gfx_oversized_but_sitting_on_the_ground(void)      
-{ 
+int Thing::gfx_oversized_but_sitting_on_the_ground(void)     
+{
     return (tp_gfx_oversized_but_sitting_on_the_ground(tp()));
 }
 
-int Thing::gfx_small_shadow_caster(void)                      
-{ 
+int Thing::gfx_small_shadow_caster(void)                     
+{
     return (tp_gfx_small_shadow_caster(tp()));
 }
 
-int Thing::hunger_at_health_pct(void)                         
-{ 
+int Thing::hunger_at_health_pct(void)                        
+{
     return (tp_hunger_at_health_pct(tp()));
 }
 
-int Thing::hunger_clock_freq_ms(void)                         
-{ 
+int Thing::hunger_clock_freq_ms(void)                        
+{
     return (tp_hunger_clock_freq_ms(tp()));
 }
 
-int Thing::hunger_constant(void)                              
-{ 
+int Thing::hunger_constant(void)                             
+{
     return (tp_hunger_constant(tp()));
 }
 
-int Thing::hunger_initial_health_at(void)                     
-{ 
+int Thing::hunger_initial_health_at(void)                    
+{
     return (tp_hunger_initial_health_at(tp()));
 }
 
-int Thing::hunger_starving_at_health_pct(void)                
-{ 
+int Thing::hunger_starving_at_health_pct(void)               
+{
     return (tp_hunger_starving_at_health_pct(tp()));
 }
 
-int Thing::is_active(void)                                    
-{ 
+int Thing::is_active(void)                                   
+{
     return (tp_is_active(tp()));
 }
 
-int Thing::is_attackable(void)                                
-{ 
+int Thing::is_attackable(void)                               
+{
     return (tp_is_attackable(tp()));
 }
 
-int Thing::is_bleeder(void)                                   
-{ 
+int Thing::is_bleeder(void)                                  
+{
     return (tp_is_bleeder(tp()));
 }
 
-int Thing::is_blood(void)                                     
-{ 
+int Thing::is_blood(void)                                    
+{
     return (tp_is_blood(tp()));
 }
 
-int Thing::is_combustable(void)                               
-{ 
+int Thing::is_combustable(void)                              
+{
     return (tp_is_combustable(tp()));
 }
 
-int Thing::is_corpse_on_death(void)                           
-{ 
+int Thing::is_corpse_on_death(void)                          
+{
     return (tp_is_corpse_on_death(tp()));
 }
 
-int Thing::is_corridor(void)                                  
-{ 
+int Thing::is_corridor(void)                                 
+{
     return (tp_is_corridor(tp()));
 }
 
-int Thing::is_deep_water(void)                                
-{ 
+int Thing::is_deep_water(void)                               
+{
     return (tp_is_deep_water(tp()));
 }
 
-int Thing::is_dirt(void)                                      
-{ 
+int Thing::is_dirt(void)                                     
+{
     return (tp_is_dirt(tp()));
 }
 
-int Thing::is_door(void)                                      
-{ 
+int Thing::is_door(void)                                     
+{
     return (tp_is_door(tp()));
 }
 
-int Thing::is_entrance(void)                                  
-{ 
+int Thing::is_entrance(void)                                 
+{
     return (tp_is_entrance(tp()));
 }
 
-int Thing::is_exit(void)                                      
-{ 
+int Thing::is_exit(void)                                     
+{
     return (tp_is_exit(tp()));
 }
 
-int Thing::is_explosion(void)                                 
-{ 
+int Thing::is_explosion(void)                                
+{
     return (tp_is_explosion(tp()));
 }
 
-int Thing::is_floor(void)                                     
-{ 
+int Thing::is_floor(void)                                    
+{
     return (tp_is_floor(tp()));
 }
 
-int Thing::is_food(void)                                      
-{ 
+int Thing::is_food(void)                                     
+{
     return (tp_is_food(tp()));
 }
 
-int Thing::is_key(void)                                       
-{ 
+int Thing::is_key(void)                                      
+{
     return (tp_is_key(tp()));
 }
 
-int Thing::is_lava(void)                                      
-{ 
+int Thing::is_lava(void)                                     
+{
     return (tp_is_lava(tp()));
 }
 
-int Thing::is_light_strength(void)                            
-{ 
+int Thing::is_light_strength(void)                           
+{
     return (tp_is_light_strength(tp()));
 }
 
-int Thing::is_made_of_meat(void)                              
-{ 
+int Thing::is_made_of_meat(void)                             
+{
     return (tp_is_made_of_meat(tp()));
 }
 
-int Thing::is_meat_eater(void)                                
-{ 
+int Thing::is_meat_eater(void)                               
+{
     return (tp_is_meat_eater(tp()));
 }
 
-int Thing::is_monst(void)                                     
-{ 
+int Thing::is_monst(void)                                    
+{
     return (tp_is_monst(tp()));
 }
 
-int Thing::is_movable(void)                                   
-{ 
+int Thing::is_movable(void)                                  
+{
     return (tp_is_movable(tp()));
 }
 
-int Thing::is_movement_blocking(void)                         
-{ 
+int Thing::is_movement_blocking(void)                        
+{
     return (tp_is_movement_blocking(tp()));
 }
 
-int Thing::is_obstacle(void)                                  
-{ 
+int Thing::is_obstacle(void)                                 
+{
     return (tp_is_obstacle(tp()));
 }
 
-int Thing::is_player(void)                                    
-{ 
+int Thing::is_player(void)                                   
+{
     return (tp_is_player(tp()));
 }
 
-int Thing::is_projectile(void)                                
-{ 
+int Thing::is_projectile(void)                               
+{
     return (tp_is_projectile(tp()));
 }
 
-int Thing::is_ripple(void)                                    
-{ 
+int Thing::is_ripple(void)                                   
+{
     return (tp_is_ripple(tp()));
 }
 
-int Thing::is_rock(void)                                      
-{ 
+int Thing::is_rock(void)                                     
+{
     return (tp_is_rock(tp()));
 }
 
-int Thing::is_rrr1(void)                                      
-{ 
+int Thing::is_rrr1(void)                                     
+{
     return (tp_is_rrr1(tp()));
 }
 
-int Thing::is_rrr10(void)                                     
-{ 
+int Thing::is_rrr10(void)                                    
+{
     return (tp_is_rrr10(tp()));
 }
 
-int Thing::is_rrr11(void)                                     
-{ 
+int Thing::is_rrr11(void)                                    
+{
     return (tp_is_rrr11(tp()));
 }
 
-int Thing::is_rrr12(void)                                     
-{ 
+int Thing::is_rrr12(void)                                    
+{
     return (tp_is_rrr12(tp()));
 }
 
-int Thing::is_rrr13(void)                                     
-{ 
+int Thing::is_rrr13(void)                                    
+{
     return (tp_is_rrr13(tp()));
 }
 
-int Thing::is_rrr14(void)                                     
-{ 
+int Thing::is_rrr14(void)                                    
+{
     return (tp_is_rrr14(tp()));
 }
 
-int Thing::is_rrr15(void)                                     
-{ 
+int Thing::is_rrr15(void)                                    
+{
     return (tp_is_rrr15(tp()));
 }
 
-int Thing::is_rrr16(void)                                     
-{ 
+int Thing::is_rrr16(void)                                    
+{
     return (tp_is_rrr16(tp()));
 }
 
-int Thing::is_rrr17(void)                                     
-{ 
+int Thing::is_rrr17(void)                                    
+{
     return (tp_is_rrr17(tp()));
 }
 
-int Thing::is_rrr18(void)                                     
-{ 
+int Thing::is_rrr18(void)                                    
+{
     return (tp_is_rrr18(tp()));
 }
 
-int Thing::is_rrr19(void)                                     
-{ 
+int Thing::is_rrr19(void)                                    
+{
     return (tp_is_rrr19(tp()));
 }
 
-int Thing::is_rrr2(void)                                      
-{ 
+int Thing::is_rrr2(void)                                     
+{
     return (tp_is_rrr2(tp()));
 }
 
-int Thing::is_rrr20(void)                                     
-{ 
+int Thing::is_rrr20(void)                                    
+{
     return (tp_is_rrr20(tp()));
 }
 
-int Thing::is_rrr21(void)                                     
-{ 
+int Thing::is_rrr21(void)                                    
+{
     return (tp_is_rrr21(tp()));
 }
 
-int Thing::is_rrr22(void)                                     
-{ 
+int Thing::is_rrr22(void)                                    
+{
     return (tp_is_rrr22(tp()));
 }
 
-int Thing::is_rrr23(void)                                     
-{ 
+int Thing::is_rrr23(void)                                    
+{
     return (tp_is_rrr23(tp()));
 }
 
-int Thing::is_rrr24(void)                                     
-{ 
+int Thing::is_rrr24(void)                                    
+{
     return (tp_is_rrr24(tp()));
 }
 
-int Thing::is_rrr25(void)                                     
-{ 
+int Thing::is_rrr25(void)                                    
+{
     return (tp_is_rrr25(tp()));
 }
 
-int Thing::is_rrr26(void)                                     
-{ 
+int Thing::is_rrr26(void)                                    
+{
     return (tp_is_rrr26(tp()));
 }
 
-int Thing::is_loggable(void)                                     
-{ 
+int Thing::is_loggable(void)                                    
+{
     return (tp_is_loggable(tp()));
 }
 
-int Thing::is_rrr28(void)                                     
-{ 
+int Thing::is_rrr28(void)                                    
+{
     return (tp_is_rrr28(tp()));
 }
 
-int Thing::is_rrr29(void)                                     
-{ 
+int Thing::is_rrr29(void)                                    
+{
     return (tp_is_rrr29(tp()));
 }
 
-int Thing::is_rrr3(void)                                      
-{ 
+int Thing::is_rrr3(void)                                     
+{
     return (tp_is_rrr3(tp()));
 }
 
-int Thing::is_rrr30(void)                                     
-{ 
+int Thing::is_rrr30(void)                                    
+{
     return (tp_is_rrr30(tp()));
 }
 
-int Thing::is_rrr31(void)                                     
-{ 
+int Thing::is_rrr31(void)                                    
+{
     return (tp_is_rrr31(tp()));
 }
 
-int Thing::is_rrr32(void)                                     
-{ 
+int Thing::is_rrr32(void)                                    
+{
     return (tp_is_rrr32(tp()));
 }
 
-int Thing::is_rrr33(void)                                     
-{ 
+int Thing::is_rrr33(void)                                    
+{
     return (tp_is_rrr33(tp()));
 }
 
-int Thing::is_rrr34(void)                                     
-{ 
+int Thing::is_rrr34(void)                                    
+{
     return (tp_is_rrr34(tp()));
 }
 
-int Thing::is_rrr35(void)                                     
-{ 
+int Thing::is_rrr35(void)                                    
+{
     return (tp_is_rrr35(tp()));
 }
 
-int Thing::is_rrr36(void)                                     
-{ 
+int Thing::is_rrr36(void)                                    
+{
     return (tp_is_rrr36(tp()));
 }
 
-int Thing::is_rrr37(void)                                     
-{ 
+int Thing::is_rrr37(void)                                    
+{
     return (tp_is_rrr37(tp()));
 }
 
-int Thing::is_rrr38(void)                                     
-{ 
+int Thing::is_rrr38(void)                                    
+{
     return (tp_is_rrr38(tp()));
 }
 
-int Thing::is_rrr39(void)                                     
-{ 
+int Thing::is_rrr39(void)                                    
+{
     return (tp_is_rrr39(tp()));
 }
 
-int Thing::is_rrr4(void)                                      
-{ 
+int Thing::is_rrr4(void)                                     
+{
     return (tp_is_rrr4(tp()));
 }
 
-int Thing::is_rrr41(void)                                     
-{ 
+int Thing::is_rrr41(void)                                    
+{
     return (tp_is_rrr41(tp()));
 }
 
-int Thing::is_rrr42(void)                                     
-{ 
+int Thing::is_rrr42(void)                                    
+{
     return (tp_is_rrr42(tp()));
 }
 
-int Thing::is_rrr43(void)                                     
-{ 
+int Thing::is_rrr43(void)                                    
+{
     return (tp_is_rrr43(tp()));
 }
 
-int Thing::is_rrr44(void)                                     
-{ 
+int Thing::is_rrr44(void)                                    
+{
     return (tp_is_rrr44(tp()));
 }
 
-int Thing::is_rrr45(void)                                     
-{ 
+int Thing::is_rrr45(void)                                    
+{
     return (tp_is_rrr45(tp()));
 }
 
-int Thing::is_rrr46(void)                                     
-{ 
+int Thing::is_rrr46(void)                                    
+{
     return (tp_is_rrr46(tp()));
 }
 
-int Thing::is_secret_door(void)                                     
-{ 
+int Thing::is_secret_door(void)                                    
+{
     return (tp_is_secret_door(tp()));
 }
 
-int Thing::is_cursor_hover(void)                                     
-{ 
+int Thing::is_cursor_hover(void)                                    
+{
     return (tp_is_cursor_hover(tp()));
 }
 
-int Thing::is_cursor(void)                                     
-{ 
+int Thing::is_cursor(void)                                    
+{
     return (tp_is_cursor(tp()));
 }
 
-int Thing::is_rrr5(void)                                      
-{ 
+int Thing::is_rrr5(void)                                     
+{
     return (tp_is_rrr5(tp()));
 }
 
-int Thing::gfx_dead_anim(void)                                     
-{ 
+int Thing::gfx_dead_anim(void)                                    
+{
     return (tp_gfx_dead_anim(tp()));
 }
 
-int Thing::is_rrr6(void)                                      
-{ 
+int Thing::is_rrr6(void)                                     
+{
     return (tp_is_rrr6(tp()));
 }
 
-int Thing::is_rrr7(void)                                      
-{ 
+int Thing::is_rrr7(void)                                     
+{
     return (tp_is_rrr7(tp()));
 }
 
-int Thing::is_rrr8(void)                                      
-{ 
+int Thing::is_rrr8(void)                                     
+{
     return (tp_is_rrr8(tp()));
 }
 
-int Thing::is_rrr9(void)                                      
-{ 
+int Thing::is_rrr9(void)                                     
+{
     return (tp_is_rrr9(tp()));
 }
 
-int Thing::is_undead(void)                                    
-{ 
+int Thing::is_undead(void)                                   
+{
     return (tp_is_undead(tp()));
 }
 
-int Thing::is_wall(void)                                      
-{ 
+int Thing::is_wall(void)                                     
+{
     return (tp_is_wall(tp()));
 }
 
-int Thing::is_water(void)                                     
-{ 
+int Thing::is_water(void)                                    
+{
     return (tp_is_water(tp()));
 }
 
-int Thing::is_water_dweller(void)                             
-{ 
+int Thing::is_water_dweller(void)                            
+{
     return (tp_is_water_dweller(tp()));
 }
 
-int Thing::is_water_hater(void)                               
-{ 
+int Thing::is_water_hater(void)                              
+{
     return (tp_is_water_hater(tp()));
 }
 
-int Thing::is_weapon(void)                                    
-{ 
+int Thing::is_weapon(void)                                   
+{
     return (tp_is_weapon(tp()));
 }
 
-int Thing::weapon_damage(void)                                
-{ 
+int Thing::weapon_damage(void)                               
+{
     return (tp_weapon_damage(tp()));
 }
 
-int Thing::weapon_use_delay_hundredths(void)                  
-{ 
+int Thing::weapon_use_delay_hundredths(void)                 
+{
     return (tp_weapon_use_delay_hundredths(tp()));
 }
 
-int Thing::weapon_use_distance(void)                          
-{ 
+int Thing::weapon_use_distance(void)                         
+{
     return (tp_weapon_use_distance(tp()));
 }
 
-int Thing::z_depth(void)                                      
-{ 
+int Thing::z_depth(void)                                     
+{
     return (tp_z_depth(tp()));
 }
 
-std::string Thing::bite_damage_hd(void)                       
-{ 
+std::string Thing::bite_damage_hd(void)                      
+{
     return (tp_bite_damage_hd(tp()));
 }
 
-std::string Thing::is_nutrition_hd(void)                      
-{ 
+std::string Thing::is_nutrition_hd(void)                     
+{
     return (tp_is_nutrition_hd(tp()));
 }
 
-int Thing::is_nutrition(void)                      
-{ 
+int Thing::is_nutrition(void)                     
+{
     return (tp()->is_nutrition());
 }
 
@@ -717,7 +717,7 @@ int Thing::is_nutrition(void)
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_bounce_height (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->bounce_height);
     } else {
         return (0);
@@ -736,7 +736,7 @@ void Thing::set_bounce_height (float v)
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_bounce_fade (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->bounce_fade);
     } else {
         return (0);
@@ -755,7 +755,7 @@ void Thing::set_bounce_fade (float v)
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_bounce_count (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->bounce_count);
     } else {
         return (0);
@@ -774,7 +774,7 @@ void Thing::set_bounce_count (int v)
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_rot (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->rot);
     } else {
         return (0);
@@ -793,7 +793,7 @@ void Thing::set_rot (float v)
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_submerged_offset (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->submerged_offset);
     } else {
         return (0);
@@ -812,7 +812,7 @@ void Thing::set_submerged_offset (float v)
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_gold (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->gold);
     } else {
         return (0);
@@ -859,7 +859,7 @@ int Thing::incr_gold (void)
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_health (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->health);
     } else {
         return (0);
@@ -906,7 +906,7 @@ int Thing::incr_health (void)
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_health_max (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->health_max);
     } else {
         return (0);
@@ -953,7 +953,7 @@ int Thing::incr_health_max (void)
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_owned_count (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->owned_count);
     } else {
         return (0);
@@ -1000,7 +1000,7 @@ int Thing::incr_owned_count (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_bounce_begin (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_bounce_begin);
     } else {
         return (0);
@@ -1047,7 +1047,7 @@ uint32_t Thing::incr_timestamp_bounce_begin (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_bounce_end (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_bounce_end);
     } else {
         return (0);
@@ -1094,7 +1094,7 @@ uint32_t Thing::incr_timestamp_bounce_end (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_last_i_was_hit (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_last_i_was_hit);
     } else {
         return (0);
@@ -1141,7 +1141,7 @@ uint32_t Thing::incr_timestamp_last_i_was_hit (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_flip_start (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_flip_start);
     } else {
         return (0);
@@ -1188,7 +1188,7 @@ uint32_t Thing::incr_timestamp_flip_start (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_move_begin (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_move_begin);
     } else {
         return (0);
@@ -1235,7 +1235,7 @@ uint32_t Thing::incr_timestamp_move_begin (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_move_end (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_move_end);
     } else {
         return (0);
@@ -1282,7 +1282,7 @@ uint32_t Thing::incr_timestamp_move_end (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_born (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_born);
     } else {
         return (0);
@@ -1329,7 +1329,7 @@ uint32_t Thing::incr_timestamp_born (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_hunger_tick (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_hunger_tick);
     } else {
         return (0);
@@ -1376,7 +1376,7 @@ uint32_t Thing::incr_timestamp_hunger_tick (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_ai_next (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_ai_next);
     } else {
         return (0);
@@ -1423,7 +1423,7 @@ uint32_t Thing::incr_timestamp_ai_next (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_timestamp_collision (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->timestamp_collision);
     } else {
         return (0);
@@ -1470,7 +1470,7 @@ uint32_t Thing::incr_timestamp_collision (void)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_owner_id (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->owner_id);
     } else {
         return (0);
@@ -1489,7 +1489,7 @@ uint32_t Thing::set_owner_id (uint32_t v)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_weapon_id_carry_anim (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->weapon_id_carry_anim);
     } else {
         return (0);
@@ -1508,7 +1508,7 @@ uint32_t Thing::set_weapon_id_carry_anim (uint32_t v)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_weapon_id_use_anim (void)
 {
-    if (monst) { 
+    if (monst) {
         return (monst->weapon_id_use_anim);
     } else {
         return (0);
@@ -1527,7 +1527,7 @@ uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_weapon_id (void)
 {
-    if (monst) { 
+    if (monst) {
         // con("get weapon id %08X", monst->weapon_id);
         return (monst->weapon_id);
     } else {
@@ -1548,7 +1548,7 @@ uint32_t Thing::set_weapon_id (uint32_t v)
 ////////////////////////////////////////////////////////////////////////////
 fpoint Thing::get_interpolated_mid_at (void)
 {
-    if (monst) { 
+    if (monst) {
         if (monst->interpolated_mid_at == fpoint(0, 0)) {
             return (mid_at);
         } else {

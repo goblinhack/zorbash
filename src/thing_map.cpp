@@ -57,7 +57,7 @@ void thing_map_scroll_to_player (void)
     }
 }
 
-static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint16_t maxy, 
+static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint16_t maxy,
                               double offset_x, double offset_y)
 {
     auto z = MAP_DEPTH_WATER;

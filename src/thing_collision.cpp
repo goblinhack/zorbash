@@ -482,9 +482,9 @@ bool things_overlap (const Thingp A, const Thingp B)
 
     if (tp_collision_circle(A->tp) &&
         !tp_collision_circle(B->tp)) {
-        if (circle_box_collision(A, // circle 
+        if (circle_box_collision(A, // circle
                                  A_at,
-                                 B, // box 
+                                 B, // box
                                  B_at,
                                  &normal_A,
                                  &intersect,
@@ -496,9 +496,9 @@ bool things_overlap (const Thingp A, const Thingp B)
 
     if (!tp_collision_circle(A->tp) &&
          tp_collision_circle(B->tp)) {
-        if (circle_box_collision(B, // circle 
+        if (circle_box_collision(B, // circle
                                  B_at,
-                                 A, // box 
+                                 A, // box
                                  A_at,
                                  &normal_A,
                                  &intersect,
@@ -510,8 +510,8 @@ bool things_overlap (const Thingp A, const Thingp B)
 
     if (tp_collision_circle(A->tp) &&
         tp_collision_circle(B->tp)) {
-        if (circle_circle_collision(A, // circle 
-                                    B, // box 
+        if (circle_circle_collision(A, // circle
+                                    B, // box
                                     A_at,
                                     &intersect)) {
             return (things_tile_overlap(A, B));

@@ -56,10 +56,10 @@ void World::realloc_thing_id (Thingp t)
     auto p = getptr(all_thing_ptrs, slot);
     if (p->ptr) {
         if (p->ptr == t) {
-            t->die("slot in use, cannot be realloc'd for same thing ID %08X", 
+            t->die("slot in use, cannot be realloc'd for same thing ID %08X",
                    t->id);
         } else {
-            t->err("slot in use by another thing, cannot be realloc'd by %08X", 
+            t->err("slot in use by another thing, cannot be realloc'd by %08X",
                    t->id);
             p->ptr->die("this is the current owner");
         }

@@ -86,7 +86,7 @@ static void croak_ (const char *fmt, va_list args)
 {
     static int croaked;
     if (croaked) {
-        std::cerr << 
+        std::cerr <<
           string_sprintf("\nPTRCHECK: NESTED FATAL ERROR %s %s %d ",
                          __FILE__, __FUNCTION__, __LINE__);
         exit(1);
@@ -162,9 +162,9 @@ static hash_t *hash;
 //
 static const int ringbuf_max_size = 200000;
 static int ringbuf_current_size;
-static std::array<class Ptrcheck, ringbuf_max_size> ringbuf; 
-static Ptrcheck *ringbuf_next; 
-static Ptrcheck *ringbuf_base; 
+static std::array<class Ptrcheck, ringbuf_max_size> ringbuf;
+static Ptrcheck *ringbuf_next;
+static Ptrcheck *ringbuf_base;
 
 //
 // Wrapper for calloc.
@@ -337,7 +337,7 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
     }
 
     if (!ptr) {
-        DIE("%s%p NULL pointer %s:%s line %u", 
+        DIE("%s%p NULL pointer %s:%s line %u",
             null_pointer_warning, ptr, file.c_str(), func.c_str(), line);
     }
 
@@ -358,7 +358,7 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         //
         auto l = pc->last_seen[pc->last_seen_at];
         if (!l) {
-            l = pc->last_seen[pc->last_seen_at] = new Ptrcheck_history(); 
+            l = pc->last_seen[pc->last_seen_at] = new Ptrcheck_history();
         }
         l->file = file;
         l->func = func;
@@ -389,7 +389,7 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
     //
     // We may be about to crash. Complain!
     //
-    ERR("%s%p %s:%s line %u", 
+    ERR("%s%p %s:%s line %u",
         unknown_ptr_warning, ptr, file.c_str(), func.c_str(), line);
 
     //
@@ -673,7 +673,7 @@ void ptrcheck_leak_print (void)
 
             auto a = pc->allocated_by;
             if (a) {
-                std::cerr << 
+                std::cerr <<
                     string_sprintf(
                     "PTRCHECK: Leak %p \"%s\" (%u bytes) at %s:%s line %u at %s\n",
                     pc->ptr,

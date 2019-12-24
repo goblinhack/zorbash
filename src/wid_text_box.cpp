@@ -24,7 +24,7 @@ WidTextBox::~WidTextBox()
     wid_destroy(&wid_text_area);
 }
 
-WidTextBox::WidTextBox (point tl, point br, Widp parent) : 
+WidTextBox::WidTextBox (point tl, point br, Widp parent) :
     tl(tl), br(br), wid_parent(parent)
 {_
     int w = br.x - tl.x;
@@ -94,10 +94,10 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
     }
 
     wid_vert_scroll =
-        wid_new_vert_scroll_bar(wid_text_box_container, 
+        wid_new_vert_scroll_bar(wid_text_box_container,
                                 "text box vert scroll", wid_text_area);
     wid_horiz_scroll =
-        wid_new_horiz_scroll_bar(wid_text_box_container, 
+        wid_new_horiz_scroll_bar(wid_text_box_container,
                                  "text box horiz scroll", wid_text_area);
 
     wid_update(wid_text_box_container);

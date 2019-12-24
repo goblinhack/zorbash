@@ -204,7 +204,7 @@ ttf_create_tex_from_char (TTF_Font *ttf, const char *name, Font *f,
     f->tex[d].tex = 0;
 
     ttf_set_color_key(g1, texcoord, 0, 0, 0,
-                      &getref(f->glyphs, d).width, 
+                      &getref(f->glyphs, d).width,
                       &getref(f->glyphs, d).height);
 
     getref(f->glyphs, d).texMinX = texcoord[0];

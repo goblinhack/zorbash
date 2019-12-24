@@ -281,8 +281,8 @@ Texp tex_load (std::string file, std::string name, int mode)
 }
 
 static Texp tex_from_surface_black_and_white (SDL_Surface *in,
-                                              std::string file, 
-                                              std::string name, 
+                                              std::string file,
+                                              std::string name,
                                               int mode)
 {
     Texp t = new Tex(name);
@@ -333,7 +333,7 @@ static Texp tex_from_surface_black_and_white (SDL_Surface *in,
             color c;
 
             c = getPixel(in, ix, iy);
-            
+           
             uint8_t avg = ((int)c.r + (int)c.g + (int)c.b) / 3;
             c.r = avg;
             c.g = avg;
@@ -357,8 +357,8 @@ static Texp tex_from_surface_black_and_white (SDL_Surface *in,
 
 void tex_load_color_and_black_and_white (Texp *tex,
                                          Texp *tex_black_and_white,
-                                         std::string file, 
-                                         std::string name, 
+                                         std::string file,
+                                         std::string name,
                                          int mode)
 {_
     Texp t = tex_find(name);
@@ -390,8 +390,8 @@ void tex_load_color_and_black_and_white (Texp *tex,
     }
 
     *tex = tex_from_surface(surface, file, name, mode);
-    *tex_black_and_white = 
-        tex_from_surface_black_and_white(surface_black_and_white, file, 
+    *tex_black_and_white =
+        tex_from_surface_black_and_white(surface_black_and_white, file,
                                          name + "_black_and_white", mode);
 
     LOG("- loaded texture '%s', '%s'", file.c_str(), name.c_str());

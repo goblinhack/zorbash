@@ -209,8 +209,8 @@ _
         if (unlikely(tp_is_light_strength(tpp))) {
             std::string l = tp_str_light_color(tpp);
             color c = string2color(l);
-            new_light(mid_at, 
-                      (double) tp_is_light_strength(tpp), 
+            new_light(mid_at,
+                      (double) tp_is_light_strength(tpp),
                       LIGHT_QUALITY_HIGH, c);
             has_light = true;
         }
@@ -469,11 +469,11 @@ void Thing::hooks_remove ()
                 // But only if the owner is visible.
                 //
                 if (owner->is_visible()) {
-                    log("reapply carry-anim for owner %s", 
+                    log("reapply carry-anim for owner %s",
                         owner->to_string().c_str());
                     carrying->visible();
                 } else {
-                    log("do not reapply carry-anim for invisible owner %s", 
+                    log("do not reapply carry-anim for invisible owner %s",
                         owner->to_string().c_str());
                 }
             } else {

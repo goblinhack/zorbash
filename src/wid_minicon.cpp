@@ -84,7 +84,7 @@ static void wid_minicon_log_ (std::wstring s)
                         std::make_pair(log_wid_minicon_buffered_lines++, s));
 
         if (result.second == false) {
-            DIE("wid minicon lines insert name [%s] failed", 
+            DIE("wid minicon lines insert name [%s] failed",
                 wstring_to_string(s).c_str());
         }
 
