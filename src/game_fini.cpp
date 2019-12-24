@@ -51,16 +51,13 @@ void World::fini (void)
     //
     // Check for pointers too
     //
-    for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_WIDTH; ++y) {
-            for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto t = get(all_thing_ptrs_at, x, y, z);
-                if (t) {
-                    ERR("world fini: did not detach thing %p from all_thing_ptrs_at", t);
-                    verify(t);
-                    t->die("world fini: did not detach thing from all_thing_ptrs_at");
-                }
-            }
+    for (auto slot = 0; slot < MAX_THINGS; slot++) {
+        auto p = get(all_thing_ptrs, slot);
+        if (p.ptr) {
+            ERR("world fini: did not detach thing %p/%08X", p.ptr, p.id);
+            auto t = p.ptr;
+            verify(t);
+            t->die("world fini: did not detach thing from all_thing_ptrs_at");
         }
     }
 
@@ -78,13 +75,17 @@ void Config::fini (void)
 
 void Game::fini (void)
 {
+    LOG("-");
     CON("dungeon: destroying dungeon %u", seed);
-    LOG("===================================================================");
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
     fps_count = 0;
     config.fini();
     world.fini();
 
+    LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     CON("dungeon: destroyed dungeon %u", seed);
-    LOG("===================================================================");
+    LOG("-");
 }

@@ -33,7 +33,7 @@
 // #pragma GCC diagnostic warning "-Wformat"
 // #pragma GCC diagnostic error "-Wformat"
 // #pragma GCC diagnostic ignored "-Wformat"
-//            
+//
 #ifdef __clang__
 /*code specific to clang compiler*/
 #elif __GNUC__
@@ -74,7 +74,8 @@
 #define MAP_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define MAP_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 #define MAP_SLOTS                   16
-#define MAX_THINGS                  (MAP_WIDTH * MAP_HEIGHT * 2)
+#define MAX_THINGS                  (1 << 15)
+#define MAX_THINGS_MASK             (MAX_THINGS - 1)
 
 //
 // Light sources

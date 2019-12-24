@@ -22,8 +22,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_display.o 		\
     $(OBJDIR)/game_fini.o 		\
     $(OBJDIR)/game_init.o 		\
-    $(OBJDIR)/game_save_load.o 		\
-    $(OBJDIR)/game_serialize.o 		\
+    $(OBJDIR)/game_save.o 		\
+    $(OBJDIR)/game_load.o 		\
+    $(OBJDIR)/game_dump.o 		\
     $(OBJDIR)/gauss.o 		        \
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\

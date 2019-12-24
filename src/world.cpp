@@ -7,7 +7,7 @@
 #include "my_dungeon.h"
 
 bool World::is_anything_at (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -21,12 +21,12 @@ bool World::is_anything_at (const int x, const int y)
 }
 
 bool World::is_anything_at (const point &p)
-{
+{_
     return (is_anything_at(p.x, p.y));
 }
 
 bool World::is_lava (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -34,7 +34,7 @@ bool World::is_lava (const point &p)
 }
 
 bool World::is_lava (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -42,7 +42,7 @@ bool World::is_lava (const int x, const int y)
 }
 
 void World::set_lava (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -50,7 +50,7 @@ void World::set_lava (const int x, const int y)
 }
 
 void World::unset_lava (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -58,7 +58,7 @@ void World::unset_lava (const int x, const int y)
 }
 
 bool World::is_blood (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -66,7 +66,7 @@ bool World::is_blood (const point &p)
 }
 
 bool World::is_blood (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -74,7 +74,7 @@ bool World::is_blood (const int x, const int y)
 }
 
 void World::set_blood (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -82,7 +82,7 @@ void World::set_blood (const int x, const int y)
 }
 
 void World::unset_blood (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -90,7 +90,7 @@ void World::unset_blood (const int x, const int y)
 }
 
 bool World::is_water (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -98,7 +98,7 @@ bool World::is_water (const point &p)
 }
 
 bool World::is_water (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -106,7 +106,7 @@ bool World::is_water (const int x, const int y)
 }
 
 void World::set_water (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -114,7 +114,7 @@ void World::set_water (const int x, const int y)
 }
 
 void World::unset_water (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -122,7 +122,7 @@ void World::unset_water (const int x, const int y)
 }
 
 bool World::is_deep_water (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -130,7 +130,7 @@ bool World::is_deep_water (const point &p)
 }
 
 bool World::is_deep_water (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -138,7 +138,7 @@ bool World::is_deep_water (const int x, const int y)
 }
 
 void World::set_deep_water (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -146,7 +146,7 @@ void World::set_deep_water (const int x, const int y)
 }
 
 void World::unset_deep_water (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -154,7 +154,7 @@ void World::unset_deep_water (const int x, const int y)
 }
 
 bool World::is_wall (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -162,7 +162,7 @@ bool World::is_wall (const point &p)
 }
 
 bool World::is_wall (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -170,7 +170,7 @@ bool World::is_wall (const int x, const int y)
 }
 
 void World::set_wall (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -178,7 +178,7 @@ void World::set_wall (const int x, const int y)
 }
 
 void World::unset_wall (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -186,7 +186,7 @@ void World::unset_wall (const int x, const int y)
 }
 
 bool World::is_corridor (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -194,7 +194,7 @@ bool World::is_corridor (const point &p)
 }
 
 bool World::is_corridor (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -202,7 +202,7 @@ bool World::is_corridor (const int x, const int y)
 }
 
 void World::set_corridor (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -210,7 +210,7 @@ void World::set_corridor (const int x, const int y)
 }
 
 void World::unset_corridor (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -218,7 +218,7 @@ void World::unset_corridor (const int x, const int y)
 }
 
 bool World::is_dirt (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -226,7 +226,7 @@ bool World::is_dirt (const point &p)
 }
 
 bool World::is_dirt (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -234,7 +234,7 @@ bool World::is_dirt (const int x, const int y)
 }
 
 void World::set_dirt (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -242,7 +242,7 @@ void World::set_dirt (const int x, const int y)
 }
 
 void World::unset_dirt (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -250,7 +250,7 @@ void World::unset_dirt (const int x, const int y)
 }
 
 bool World::is_floor (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -258,7 +258,7 @@ bool World::is_floor (const int x, const int y)
 }
 
 void World::set_floor (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -266,7 +266,7 @@ void World::set_floor (const int x, const int y)
 }
 
 void World::unset_floor (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -274,12 +274,12 @@ void World::unset_floor (const int x, const int y)
 }
 
 bool World::is_monst (const point &p)
-{
+{_
     return (is_monst(p.x, p.y));
 }
 
 bool World::is_monst (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -298,12 +298,12 @@ bool World::is_monst (const int x, const int y)
 }
 
 bool World::is_food (const point &p)
-{
+{_
     return (is_food(p.x, p.y));
 }
 
 bool World::is_food (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -322,7 +322,7 @@ bool World::is_food (const int x, const int y)
 }
 
 bool World::is_rock (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -330,7 +330,7 @@ bool World::is_rock (const point &p)
 }
 
 bool World::is_rock (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -338,7 +338,7 @@ bool World::is_rock (const int x, const int y)
 }
 
 void World::set_rock (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -346,7 +346,7 @@ void World::set_rock (const int x, const int y)
 }
 
 void World::unset_rock (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -354,7 +354,7 @@ void World::unset_rock (const int x, const int y)
 }
 
 bool World::is_visited (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -362,7 +362,7 @@ bool World::is_visited (const point &p)
 }
 
 bool World::is_visited (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -370,7 +370,7 @@ bool World::is_visited (const int x, const int y)
 }
 
 void World::set_visited (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -378,7 +378,7 @@ void World::set_visited (const int x, const int y)
 }
 
 void World::unset_visited (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -386,7 +386,7 @@ void World::unset_visited (const int x, const int y)
 }
 
 bool World::is_dungeon (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -394,7 +394,7 @@ bool World::is_dungeon (const point &p)
 }
 
 bool World::is_dungeon (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -402,7 +402,7 @@ bool World::is_dungeon (const int x, const int y)
 }
 
 void World::set_dungeon (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -410,7 +410,7 @@ void World::set_dungeon (const int x, const int y)
 }
 
 void World::unset_dungeon (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -418,12 +418,12 @@ void World::unset_dungeon (const int x, const int y)
 }
 
 bool World::is_key (const point &p)
-{
+{_
     return (is_key(p.x, p.y));
 }
 
 bool World::is_key (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -442,7 +442,7 @@ bool World::is_key (const int x, const int y)
 }
 
 bool World::is_gfx_large_shadow_caster (const point &p)
-{
+{_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
@@ -450,7 +450,7 @@ bool World::is_gfx_large_shadow_caster (const point &p)
 }
 
 bool World::is_gfx_large_shadow_caster (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -458,7 +458,7 @@ bool World::is_gfx_large_shadow_caster (const int x, const int y)
 }
 
 void World::set_gfx_large_shadow_caster (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -466,7 +466,7 @@ void World::set_gfx_large_shadow_caster (const int x, const int y)
 }
 
 void World::unset_gfx_large_shadow_caster (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return;
     }
@@ -474,12 +474,12 @@ void World::unset_gfx_large_shadow_caster (const int x, const int y)
 }
 
 bool World::is_door (const point &p)
-{
+{_
     return (is_door(p.x, p.y));
 }
 
 bool World::is_door (const int x, const int y)
-{
+{_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
@@ -498,7 +498,7 @@ bool World::is_door (const int x, const int y)
 }
 
 void World::clear (void)
-{
+{_
     _is_blood = {};
     _is_corridor = {};
     _is_deep_water = {};
@@ -516,70 +516,93 @@ void World::clear (void)
 }
 
 void World::put_thing (int x, int y, uint32_t id)
-{
+{_
     auto t = thing_find(id);
+    if (!id) {
+        t->die("null id at %d %d", x, y);
+    }
+
     if (!t) {
-        ERR("oob at %d %d for put of id %u", x, y, id);
+        t->die("oob at %d %d for put of id %08X", x, y, id);
     }
 
     if (is_oob(x, y)) {
-        t->die("oob at %d %d for put of id %u", x, y, id);
+        t->die("oob at %d %d for put of id %08X", x, y, id);
         return;
     }
 
-    for (auto i = 0; i < MAP_SLOTS; i++) {
-        auto idp = &getref(all_thing_ids_at, x, y, i);
+    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+        auto idp = &getref(all_thing_ids_at, x, y, slot);
+
+        //
+        // Realloc?
+        //
+        if (*idp == id) {
+            return;
+        }
+
         if (!*idp) {
             *idp = id;
             return;
         }
     }
 
-    for (auto i = 0; i < MAP_SLOTS; i++) {
-        auto idp = &getref(all_thing_ids_at, x, y, i);
+    t->log("out of thing slots at %d %d for put of id %08X, see below:",
+           x, y, id);
+
+    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+        auto idp = &getref(all_thing_ids_at, x, y, slot);
+        LOG("- slot %u id %08X", slot, *idp);
+    }
+
+    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+        auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (*idp) {
             auto t = thing_find(*idp);
-            t->con("- slot %d ", i);
+            t->log("- slot %u", slot);
+        } else {
+            t->log("- empty slot %u", slot);
         }
     }
-    t->die("out of thing slots at %d %d for put of id %u", x, y, id);
+    t->die("out of thing slots at %d %d for put of id %08X", x, y, id);
 }
 
 void World::put_thing (point p, uint32_t id)
-{
+{_
     put_thing(p.x, p.y, id);
 }
 
 void World::remove_thing (int x, int y, uint32_t id)
-{
+{_
     auto t = thing_find(id);
     if (!t) {
-        ERR("oob at %d %d for remove of id %u", x, y, id);
+        ERR("oob at %d %d for remove of id %08X", x, y, id);
     }
 
     if (is_oob(x, y)) {
-        t->die("oob at %d %d for remove of id %u", x, y, id);
+        t->die("oob at %d %d for remove of id %08X", x, y, id);
         return;
     }
 
-    for (auto i = 0; i < MAP_SLOTS; i++) {
-        auto idp = &getref(all_thing_ids_at, x, y, i);
+    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+        auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (*idp == id) {
             *idp = 0;
             return;
         }
     }
-    t->die("out of thing slots at %d %d for remove of id %u", x, y, id);
+    t->die("did not find thing in any slot at %d %d for remove of id %08X",
+           x, y, id);
 }
 
 void World::remove_thing (point p, uint32_t id)
-{
+{_
     remove_thing(p.x, p.y, id);
 }
 
 void World::get_all_things_at_depth (int x, int y, int z,
                                      std::vector<Thingp> &l)
-{
+{_
     l.resize(0);
 
     if (unlikely(is_oob(x, y))) {
@@ -599,7 +622,7 @@ void World::get_all_things_at_depth (int x, int y, int z,
 }
 
 void World::get_all_interesting_things_at (int x, int y, std::vector<Thingp> &l)
-{
+{_
     l.resize(0);
 
     if (unlikely(is_oob(x, y))) {
@@ -618,7 +641,7 @@ void World::get_all_interesting_things_at (int x, int y, std::vector<Thingp> &l)
 }
 
 void World::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l)
-{
+{_
     l.resize(0);
 
     if (unlikely(is_oob(x, y))) {
@@ -637,7 +660,7 @@ void World::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l
 }
 
 void World::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
-{
+{_
     l.resize(0);
 
     if (unlikely(is_oob(x, y))) {
@@ -656,7 +679,7 @@ void World::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
 }
 
 void World::get_all_obstacle_things_at (int x, int y, std::vector<Thingp> &l)
-{
+{_
     l.resize(0);
 
     if (unlikely(is_oob(x, y))) {

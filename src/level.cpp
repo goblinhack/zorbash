@@ -59,5 +59,5 @@ void Level::dump (void)
         }
         LOG("LEVEL(%d): %s", levelno, s.c_str());
     }
-    LOG(" ");
+    LOG("-");
 }

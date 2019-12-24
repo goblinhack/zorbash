@@ -59,6 +59,14 @@ TYPE& getref(std::array<TYPE,XDIM> &arr, std::size_t X){_
     return (arr[X]);
 }    
 
+template<class TYPE, std::size_t XDIM>
+static inline
+TYPE* getptr(std::array<TYPE,XDIM> &arr, std::size_t X){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    return (&arr[X]);
+}    
+
 //
 // Two dimension array check
 //

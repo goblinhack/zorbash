@@ -8,19 +8,14 @@
 void Thing::attach (void)
 {_
     detach();
-
     world->put_thing((int)mid_at.x, (int)mid_at.y, id);
-
     if (is_active()) {
         update_interpolated_position();
     }
-
     auto mx = (int16_t)(int)mid_at.x;
     auto my = (int16_t)(int)mid_at.y;
     is_attached = true;
     last_attached = spoint(mx, my);
-//log("attached at %d %d %d", (int)last_attached.x, (int)last_attached.y,
-//depth);
 }
 
 void Thing::detach (void)
@@ -29,9 +24,5 @@ void Thing::detach (void)
         return;
     }
     is_attached = false;
-
-//log("detach from %d %d %d", (int)last_attached.x, (int)last_attached.y,
-//depth);
-
     world->remove_thing((int)last_attached.x, (int)last_attached.y, id);
 }

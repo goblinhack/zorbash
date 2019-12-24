@@ -9,7 +9,7 @@
 #include "my_main.h"
 #include <array>
 
-typedef struct {
+typedef struct Dmap_ {
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> val {};
 } Dmap;
 

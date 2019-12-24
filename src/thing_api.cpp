@@ -68,8 +68,8 @@ void Thing::new_dmap_scent (void)
 {_
     new_monst();
     if (!monst->dmap_scent) {
-//con("%s", __FUNCTION__);
         monst->dmap_scent = new Dmap();
+log("new dmap_scent %p %p", monst, monst->dmap_scent);
         newptr(monst->dmap_scent, "AgeMap");
     }
 }
@@ -78,7 +78,8 @@ void Thing::delete_dmap_scent (void)
 {_
     if (monst) {
         verify(monst);
-        if (monst->dmap_scent) { 
+        if (monst->dmap_scent) {
+log("old dmap_scent %p %p", monst, monst->dmap_scent);
             oldptr(monst->dmap_scent);
             delete monst->dmap_scent; monst->dmap_scent = 0;
         }
@@ -104,7 +105,6 @@ void Thing::new_light (fpoint at,
 {_
     new_monst();
     if (!monst->light) {
-//con("%s", __FUNCTION__);
         monst->light = light_new(this, at, strength, quality, col);
         monst->light_strength = strength;
         monst->light_quality = quality;
