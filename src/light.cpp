@@ -470,6 +470,7 @@ void lights_render_high_quality (int minx, int miny,
 {
     Lightp deferred_player_light = nullptr;
 
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     for (auto y = miny; y < maxy; y++) {
@@ -499,16 +500,16 @@ void lights_render_high_quality (int minx, int miny,
             FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
                 auto l = t->get_light();
                 if (l->quality != LIGHT_QUALITY_HIGH) {
-                    continue;
+                   continue;
                 }
 
                 if (world->player && (l->owner == world->player)) {
                     continue;
                 }
 
-                /*
-                 * Too far away from the player? Skip rendering.
-                 */
+                //
+                // Too far away from the player? Skip rendering.
+                //
                 if (world->player) {
                     auto p = world->player;
                     auto len = DISTANCE(l->at.x, l->at.y,

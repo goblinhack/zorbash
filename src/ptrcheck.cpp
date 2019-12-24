@@ -5,8 +5,11 @@
 #include "my_main.h"
 #include "my_traceback.h"
 #include "my_sprintf.h"
+#include "my_time.h"
 #include <ctime>
 #include <iostream>
+
+bool ptr_check_some_pointers_changed;
 
 //
 // A single event in the life of a pointer.
@@ -67,12 +70,22 @@ public:
     int last_seen_size {};
 };
 
-std::string timestamp(void)
+std::string &timestamp(void)
 {
+    static uint32_t time_last;
+    static std::string last_timestamp;
+    auto time_now = time_get_time_ms_cached();
+
+    if (time_now - time_last < 1000) {
+        return last_timestamp;
+    }
+
+    time_last = time_now;
     std::time_t result = std::time(nullptr);
     auto s = std::string(std::asctime(std::localtime(&result)));
     s.pop_back();
-    return s;
+    last_timestamp = s;
+    return last_timestamp;
 }
 
 #ifndef DIE
@@ -249,6 +262,8 @@ static void hash_add (hash_t *hash_table, Ptrcheck *pc)
     elem->pc = pc;
     elem->next = *slot;
     *slot = elem;
+
+    ptr_check_some_pointers_changed = true;
 }
 
 //
@@ -314,14 +329,16 @@ static void hash_free (hash_t *hash_table, void *ptr)
 
     local_free(elem->pc);
     local_free(elem);
+
+    ptr_check_some_pointers_changed = true;
 }
 
 //
 // Check a pointer for validity.
 //
 static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
-                                          std::string func,
-                                          std::string file,
+                                          std::string &func,
+                                          std::string &file,
                                           int line,
                                           int dont_store)
 {
@@ -639,9 +656,13 @@ int ptrcheck_free (void *ptr, std::string func, std::string file, int line)
 //
 // Check a pointer for validity with no recording of history.
 //
-int ptrcheck_verify (const void *ptr, std::string func, std::string file,
+int ptrcheck_verify (const void *ptr, std::string &func, std::string &file,
                      int line)
 {
+    if (!ptr_check_some_pointers_changed) {
+        return (true);
+    }
+
     return (ptrcheck_verify_pointer(ptr, file, func, line,
                                     false /* don't store */) != 0);
 }

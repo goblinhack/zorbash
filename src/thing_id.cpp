@@ -8,6 +8,23 @@
 #include "my_dmap.h"
 #include <list>
 
+Thingp World::find_thing_ptr (uint32_t id)
+{_
+    auto slot = id % MAX_THINGS;
+    auto p = &all_thing_ptrs[slot];
+    if (unlikely(!p->ptr)) {
+        DIE("thing ptr not found, slot %u, id %08X", slot, id);
+    }
+
+    if (unlikely(p->id != id)) {
+        DIE("invalid thing ptr, slot %u, id %08X != %08X",
+            slot, id, p->id);
+    }
+
+    verify(p->ptr);
+    return (p->ptr);
+}
+
 void World::alloc_thing_id (Thingp t)
 {_
     for (uint32_t slot = 1; slot < MAX_THINGS; slot++) {

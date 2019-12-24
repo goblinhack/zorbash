@@ -27,6 +27,8 @@ uint8_t tp_init (void)
 {_
     tp_init_done = true;
 
+    tp_init_after_loading();
+
     return (true);
 }
 

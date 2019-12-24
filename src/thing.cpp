@@ -287,6 +287,7 @@ _
         log("recreated");
     }
 _
+con("%u %u", get_timestamp_move_begin(), get_timestamp_move_end());
     update_coordinates();
 _
     //
@@ -739,8 +740,8 @@ void Thing::update_all (void)
     for (auto slot = 0; slot < MAX_THINGS; slot++) {
         auto p = getptr(world->all_thing_ptrs, slot);
         auto t = p->ptr;
-        verify(t);
         if (t) {
+            verify(t);
             t->update_coordinates();
             t->update_light();
         }

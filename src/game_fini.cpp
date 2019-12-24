@@ -12,13 +12,13 @@ void World::fini (void)
     // Destroying all things should detach them from all other places they
     // are referred to.
     //
+    LOG("world fini: destroy all things");
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y)[z];
                 if (id) {
                     auto t = thing_find(id);
-                    verify(t);
 
                     //
                     // If already dead, then we will clean this up in thing_gc
@@ -31,11 +31,13 @@ void World::fini (void)
         }
     }
 
+    LOG("world fini: thing garbage collection:");
     thing_gc();
 
     //
     // Check all things were fully detached
     //
+    LOG("world fini: check all things are detached");
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
@@ -51,6 +53,7 @@ void World::fini (void)
     //
     // Check for pointers too
     //
+    LOG("world fini: check all things ids are released");
     for (auto slot = 0; slot < MAX_THINGS; slot++) {
         auto p = get(all_thing_ptrs, slot);
         if (p.ptr) {

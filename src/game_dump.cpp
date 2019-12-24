@@ -92,7 +92,6 @@ void World::dump (std::string pfx, std::ostream &out)
                 auto id = get(all_thing_ids_at, x, y)[z];
                 if (id) {
                     auto t = thing_find(id);
-                    verify(t);
                     t->log("dump");
                     t->dump(pfx + "  ", out);
                 }

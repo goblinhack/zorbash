@@ -11,7 +11,7 @@
 //
 // Commonly changed settings
 //
-#undef DEBUG_CRASH
+#define DEBUG_CRASH
 #ifdef DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_TRACING             // Function tracing
@@ -20,7 +20,7 @@
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #endif
-#define ENABLE_PTRCHECK_HISTORY 10 // Per pointer history
+#define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_INVERTED_GFX        // For vision impaired
 
 //

@@ -3526,6 +3526,17 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     game->init();
                     break;
 
+                case 's':
+                    CON("player requested save game");
+                    game->save();
+                    break;
+
+                case 'l':
+                    CON("player requested load game");
+                    game->fini();
+                    game->load();
+                    break;
+
                 case '`':
                     wid_toggle_hidden(wid_console_window);
                     wid_raise(wid_console_window);

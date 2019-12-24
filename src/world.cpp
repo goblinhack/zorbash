@@ -287,7 +287,6 @@ bool World::is_monst (const int x, const int y)
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             auto tpp = t->tp();
             if (tp_is_monst(tpp)) {
                 return (true);
@@ -311,7 +310,6 @@ bool World::is_food (const int x, const int y)
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             auto tpp = t->tp();
             if (tp_is_food(tpp)) {
                 return (true);
@@ -431,7 +429,6 @@ bool World::is_key (const int x, const int y)
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             auto tpp = t->tp();
             if (tp_is_key(tpp)) {
                 return (true);
@@ -487,7 +484,6 @@ bool World::is_door (const int x, const int y)
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             auto tpp = t->tp();
             if (tp_is_door(tpp)) {
                 return (true);
@@ -513,6 +509,7 @@ void World::clear (void)
     _is_dungeon = {};
 
     next_thing_id = 1;
+    timestamp_dungeon_created = time_get_time_ms();
 }
 
 void World::put_thing (int x, int y, uint32_t id)
@@ -531,20 +528,22 @@ void World::put_thing (int x, int y, uint32_t id)
         return;
     }
 
+    int free_slot = -1;
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
-
-        //
-        // Realloc?
-        //
         if (*idp == id) {
             return;
         }
 
-        if (!*idp) {
-            *idp = id;
-            return;
+        if ((!*idp) && (free_slot == -1)) {
+            free_slot = slot;
         }
+    }
+
+    if (free_slot != -1) {
+        auto idp = &getref(all_thing_ids_at, x, y, free_slot);
+        *idp = id;
+        return;
     }
 
     t->log("out of thing slots at %d %d for put of id %08X, see below:",
@@ -612,7 +611,6 @@ void World::get_all_things_at_depth (int x, int y, int z,
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             auto tpp = t->tp();
             if (tpp->z_depth == z) {
                 l.push_back(t);
@@ -632,7 +630,6 @@ void World::get_all_interesting_things_at (int x, int y, std::vector<Thingp> &l)
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             if (t->is_interesting()) {
                 l.push_back(t);
             }
@@ -651,7 +648,6 @@ void World::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             if (t->get_light()) {
                 l.push_back(t);
             }
@@ -670,7 +666,6 @@ void World::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             if (t->is_active() || t->is_movable()) {
                 l.push_back(t);
             }
@@ -689,7 +684,6 @@ void World::get_all_obstacle_things_at (int x, int y, std::vector<Thingp> &l)
     for (auto id : get(all_thing_ids_at, x, y)) {
         if (id) {
             auto t = thing_find(id);
-            verify(t);
             if (t->is_obstacle()) {
                 l.push_back(t);
             }

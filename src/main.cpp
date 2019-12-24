@@ -619,6 +619,9 @@ int32_t main (int32_t argc, char *argv[])
     //
     room_init();
     game->init();
+#if 0
+    game->load();
+    game->init();
     game->fini();
     game->init();
     game->fini();
@@ -626,6 +629,7 @@ int32_t main (int32_t argc, char *argv[])
     game->save();
     game->fini();
     game->load();
+#endif
 
     if (!wid_test_init()) {
         ERR("wid_test init");

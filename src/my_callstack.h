@@ -27,7 +27,7 @@
 struct callframe {
     const char *file;
     const char *func;
-    unsigned int line;
+    unsigned short line;
 };
 
 //
@@ -38,17 +38,17 @@ struct callframe {
 #define MAXCALLFRAME 1024
 #ifdef __MAIN__
 struct callframe callframes[MAXCALLFRAME];
-int callframes_depth;
+unsigned short callframes_depth;
 #else
 extern struct callframe callframes[MAXCALLFRAME];
-extern int callframes_depth;
+extern unsigned short callframes_depth;
 #endif
 extern void callstack_dump(void);
 
 struct tracer_t {
     tracer_t (const char *file,
               const char *func,
-              const unsigned int line)
+              const unsigned short line)
     {
         // useful for code tracing in real time
         // fprintf(stderr, "%s %s() line %d\n", file, func, line);
