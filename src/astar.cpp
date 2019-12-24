@@ -240,9 +240,9 @@ public:
 };
 
 #ifdef ASTAR_DEBUG
-static void dump (Dmap *dmap, 
+static void dump (Dmap *dmap,
                   const point &at,
-                  const point &start, 
+                  const point &start,
                   const point &end)
 {
     int x;
@@ -279,10 +279,10 @@ static void dump (Dmap *dmap,
 }
 #endif
 
-Path astar_solve (const point &at, 
-                  std::multiset<Goal> &goals, 
+Path astar_solve (const point &at,
+                  std::multiset<Goal> &goals,
                   Dmap *dmap,
-                  const point &start, 
+                  const point &start,
                   const point &end)
 {
     auto best = Path();

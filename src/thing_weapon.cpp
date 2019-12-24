@@ -100,7 +100,7 @@ void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
         }
     } else {
         if (weapon_use_anim) {
-            log("set weapon use-anim %s", 
+            log("set weapon use-anim %s",
                 weapon_use_anim->to_string().c_str());
         }
     }

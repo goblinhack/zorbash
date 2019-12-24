@@ -226,7 +226,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                 if (will_attack(it)) {
                     *score += 100;
 #ifdef DEBUG_AI
-                    debug = "will attack " + it->to_string(); 
+                    debug = "will attack " + it->to_string();
                     debug += " distance " + std::to_string(distance_scale);
 #endif
                     return (true);
@@ -249,7 +249,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
 
             if (will_prefer(it)) {
 #ifdef DEBUG_AI
-                debug = "prefer " + it->to_string(); 
+                debug = "prefer " + it->to_string();
                 debug += " distance " + std::to_string(distance_scale);
 #endif
                 return (true);
@@ -360,7 +360,7 @@ fpoint Thing::ai_get_next_hop (void)
                 goal.why = why;
                 goals_set.insert(goal);
 #ifdef DEBUG_AI
-                log("  goal add %d,%d (%s) prio %d score %f", 
+                log("  goal add %d,%d (%s) prio %d score %f",
                     (int)X, (int)Y, why.c_str(), priority, score);
 #endif
 
@@ -389,14 +389,14 @@ fpoint Thing::ai_get_next_hop (void)
 
 #ifdef DEBUG_AI
     log("initial goal map derived:");
-    dmap_print(scent, 
+    dmap_print(scent,
                point(start.x - minx, start.y - miny),
-               point(0, 0), 
+               point(0, 0),
                point(maxx - minx, maxy - miny));
 #endif
 
     //
-    // Find the highest/least preferred score so we can scale all the goals 
+    // Find the highest/least preferred score so we can scale all the goals
     // later so they fit in one byte (makes it easier to debug).
     //
     std::array<std::array<float, MAP_HEIGHT>, MAP_WIDTH> cell_totals = {};
@@ -445,7 +445,7 @@ fpoint Thing::ai_get_next_hop (void)
         set(scent->val, p.x, p.y, score8);
 
 #ifdef DEBUG_AI
-        log("  scale goal %d to %d (%s)", 
+        log("  scale goal %d to %d (%s)",
             (int)orig_score, score8, g.why.c_str());
 #endif
     }
@@ -460,9 +460,9 @@ fpoint Thing::ai_get_next_hop (void)
     //
 #ifdef DEBUG_AI
     log("goals:");
-    dmap_print(scent, 
+    dmap_print(scent,
                point(start.x - minx, start.y - miny),
-               point(0, 0), 
+               point(0, 0),
                point(maxx - minx, maxy - miny));
 #endif
 
@@ -479,7 +479,7 @@ fpoint Thing::ai_get_next_hop (void)
     //
     point s(start.x - minx, start.y - miny);
     auto hops = astar_solve(s, goals_set, scent,
-                            point(0, 0), 
+                            point(0, 0),
                             point(maxx - minx, maxy - miny));
     auto hopssize = hops.path.size();
     point best;

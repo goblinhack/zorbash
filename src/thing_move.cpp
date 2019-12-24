@@ -68,7 +68,7 @@ bool Thing::move (fpoint future_pos,
 
     return (true);
 }
-    
+   
 void Thing::update_interpolated_position (void)
 {
     get_bounce();

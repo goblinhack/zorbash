@@ -354,7 +354,7 @@ void Light::render_point_light (void)
     double p2y = light_pos.y + lh;
 
     glcolor(col);
-    blit(light_overlay_texid, 0, 0, 1, 1, 
+    blit(light_overlay_texid, 0, 0, 1, 1,
          p1x - ox, p1y - oy, p2x - ox, p2y - oy);
 }
 
@@ -465,7 +465,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
     glcolor(WHITE);
 }
 
-void lights_render_high_quality (int minx, int miny, 
+void lights_render_high_quality (int minx, int miny,
                                  int maxx, int maxy, int fbo)
 {
     Lightp deferred_player_light = nullptr;

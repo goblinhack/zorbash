@@ -125,7 +125,7 @@ char *strsub_ (const char *in, const char *old, const char *replace_with,
     newlen = (uint32_t)strlen(replace_with);
 
     len = (uint32_t)strlen(in) - oldlen + newlen;
-    buf = (__typeof__(buf)) 
+    buf = (__typeof__(buf))
             myzalloc_(len + sizeof((char)'\0'), what, file, func, line);
     if (!buf) {
         return (0);

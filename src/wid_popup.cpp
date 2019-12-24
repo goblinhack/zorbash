@@ -21,7 +21,7 @@ WidPopup::~WidPopup()
     wid_destroy(&wid_popup_container);
 }
 
-WidPopup::WidPopup (point tl, point br, Tilep title_tile) : 
+WidPopup::WidPopup (point tl, point br, Tilep title_tile) :
     tl(tl), br(br), title_tile(title_tile)
 {_
     int outer_w = br.x - tl.x;
@@ -50,7 +50,7 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile) :
         auto w = wid_new_square_button(wid_popup_container, "wid title");
         wid_title = w;
         auto title_x = (outer_w - tile_size) / 2;
-        wid_set_pos(w, 
+        wid_set_pos(w,
                     point(title_x + 1, 1),
                     point(title_x + tile_size, tile_size));
         wid_set_style(w, 4);

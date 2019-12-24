@@ -120,7 +120,7 @@ std::string Traceback::to_string (void)
     return (sout);
 }
 
-void traceback_dump (void) 
+void traceback_dump (void)
 {
     auto tb = new Traceback();
     tb->init();

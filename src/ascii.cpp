@@ -195,7 +195,7 @@ void *ascii_get_context (int x, int y)
     return (cell->context);
 }
 
-void ascii_set_bg (int x, int y, const Texp tex, 
+void ascii_set_bg (int x, int y, const Texp tex,
                    float tx, float ty, float dx, float dy)
 {
     if (!ascii_ok_for_scissors(x, y)) {
@@ -277,7 +277,7 @@ void ascii_set_bg2 (int x, int y, const wchar_t c)
     ascii_set_bg2(x, y, fixed_font->unicode_to_tile(c));
 }
 
-void ascii_set_fg (int x, int y, const Texp tex, 
+void ascii_set_fg (int x, int y, const Texp tex,
                    float tx, float ty, float dx, float dy)
 {
     if (!ascii_ok_for_scissors(x, y)) {
@@ -946,9 +946,9 @@ static void ascii_blit (void)
             // Background
             //
             if (cell->tex) {
-		Texp tex = cell->tex;
+                Texp tex = cell->tex;
 
-		blit(tex_get_gl_binding(tex),
+                blit(tex_get_gl_binding(tex),
                      cell->tx,
                      cell->ty,
                      cell->tx + cell->dx,
@@ -981,7 +981,7 @@ static void ascii_blit (void)
 
     //
     // Tiles outline
-    // 
+    //
 #if 0
     tile_y = 0;
     for (y = 0; y < ASCII_HEIGHT; y++) {
@@ -1008,7 +1008,7 @@ static void ascii_blit (void)
                 tile_blit_outline_section_colored(
                    cell->bg2_tile,
                    fpoint(cell->bg2_tx, cell->bg2_ty),
-                   fpoint(cell->bg2_tx + cell->bg2_dx, 
+                   fpoint(cell->bg2_tx + cell->bg2_dx,
                           cell->bg2_ty + cell->bg2_dy),
                    tile_tl, tile_br,
                    bg2_color_tl,
@@ -1027,7 +1027,7 @@ static void ascii_blit (void)
 
     //
     // Tiles
-    // 
+    //
     tile_y = 0;
     for (y = 0; y < ASCII_HEIGHT; y++) {
 
@@ -1053,7 +1053,7 @@ static void ascii_blit (void)
                 tile_blit_section_colored(
                    cell->bg2_tile,
                    fpoint(cell->bg2_tx, cell->bg2_ty),
-                   fpoint(cell->bg2_tx + cell->bg2_dx, 
+                   fpoint(cell->bg2_tx + cell->bg2_dx,
                           cell->bg2_ty + cell->bg2_dy),
                    tile_tl, tile_br,
                    bg2_color_tl,
@@ -1071,7 +1071,7 @@ static void ascii_blit (void)
                 tile_blit_section_colored(
                    cell->fg2_tile,
                    fpoint(cell->fg2_tx, cell->fg2_ty),
-                   fpoint(cell->fg2_tx + cell->fg2_dx, 
+                   fpoint(cell->fg2_tx + cell->fg2_dx,
                           cell->fg2_ty + cell->fg2_dy),
                    tile_tl, tile_br,
                    fg2_color_tl,

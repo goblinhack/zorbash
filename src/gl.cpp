@@ -999,24 +999,24 @@ static void
 setupPixelFormat(HDC hDC)
 {_
     PIXELFORMATDESCRIPTOR pfd = {
-        sizeof(PIXELFORMATDESCRIPTOR),  // size 
-        1,                              // version 
+        sizeof(PIXELFORMATDESCRIPTOR),  // size
+        1,                              // version
         PFD_SUPPORT_OPENGL |
         PFD_DRAW_TO_WINDOW |
-        PFD_DOUBLEBUFFER,               // support double-buffering 
-        PFD_TYPE_RGBA,                  // color type 
-        16,                             // prefered color depth 
-        0, 0, 0, 0, 0, 0,               // color bits (ignored) 
-        0,                              // no alpha buffer 
-        0,                              // alpha bits (ignored) 
-        0,                              // no accumulation buffer 
-        0, 0, 0, 0,                     // accum bits (ignored) 
-        16,                             // depth buffer 
-        0,                              // no stencil buffer 
-        0,                              // no auxiliary buffers 
-        PFD_MAIN_PLANE,                 // main layer 
-        0,                              // reserved 
-        0, 0, 0,                        // no layer, visible, damage masks 
+        PFD_DOUBLEBUFFER,               // support double-buffering
+        PFD_TYPE_RGBA,                  // color type
+        16,                             // prefered color depth
+        0, 0, 0, 0, 0, 0,               // color bits (ignored)
+        0,                              // no alpha buffer
+        0,                              // alpha bits (ignored)
+        0,                              // no accumulation buffer
+        0, 0, 0, 0,                     // accum bits (ignored)
+        16,                             // depth buffer
+        0,                              // no stencil buffer
+        0,                              // no auxiliary buffers
+        PFD_MAIN_PLANE,                 // main layer
+        0,                              // reserved
+        0, 0, 0,                        // no layer, visible, damage masks
     };
     int pixelFormat;
 
@@ -1552,7 +1552,7 @@ void tile_blit_outline_section (uint16_t index,
                                 const fpoint &tile_tl, const fpoint &tile_br,
                                 const fpoint &tl, const fpoint &br)
 {
-    tile_blit_outline_section(tile_index_to_tile(index), 
+    tile_blit_outline_section(tile_index_to_tile(index),
                               tile_tl, tile_br, tl, br, 0.75);
 }
 
@@ -1639,7 +1639,7 @@ void tile_blit_section_colored (const Tilep &tile,
     y1 = tile->y1 + tile_tl.y * th;
     y2 = tile->y1 + tile_br.y * th;
 
-    blit_colored(tile->gl_binding(), x1, y2, x2, y1, 
+    blit_colored(tile->gl_binding(), x1, y2, x2, y1,
                  tl.x, br.y, br.x, tl.y,
                  color_bl, color_br, color_tl, color_tr);
 }
@@ -1652,15 +1652,15 @@ void tile_blit_section_colored (uint16_t index,
                                 color color_tl,
                                 color color_tr)
 {
-    tile_blit_section_colored(tile_index_to_tile(index), 
+    tile_blit_section_colored(tile_index_to_tile(index),
                               tile_tl, tile_br, tl, br,
                               color_bl, color_br, color_tl, color_tr);
 }
 
 void tile_blit_outline_section_colored (const Tilep &tile,
-                                        const fpoint &tile_tl, 
+                                        const fpoint &tile_tl,
                                         const fpoint &tile_br,
-                                        const fpoint &tl, 
+                                        const fpoint &tl,
                                         const fpoint &br,
                                         color color_bl,
                                         color color_br,
@@ -1671,24 +1671,24 @@ void tile_blit_outline_section_colored (const Tilep &tile,
 }
 
 void tile_blit_outline_section_colored (uint16_t index,
-                                        const fpoint &tile_tl, 
+                                        const fpoint &tile_tl,
                                         const fpoint &tile_br,
-                                        const fpoint &tl, 
+                                        const fpoint &tl,
                                         const fpoint &br,
                                         color color_bl,
                                         color color_br,
                                         color color_tl,
                                         color color_tr)
 {
-    tile_blit_outline_section_colored(tile_index_to_tile(index), 
+    tile_blit_outline_section_colored(tile_index_to_tile(index),
                                       tile_tl, tile_br, tl, br,
                                       color_bl, color_br, color_tl, color_tr);
 }
 
 void tile_blit_outline_section_colored (const Tilep &tile,
-                                        const fpoint &tile_tl, 
+                                        const fpoint &tile_tl,
                                         const fpoint &tile_br,
-                                        const fpoint &tl, 
+                                        const fpoint &tl,
                                         const fpoint &br,
                                         color color_bl,
                                         color color_br,
@@ -1700,9 +1700,9 @@ void tile_blit_outline_section_colored (const Tilep &tile,
 }
 
 void tile_blit_outline_section_colored (uint16_t index,
-                                        const fpoint &tile_tl, 
+                                        const fpoint &tile_tl,
                                         const fpoint &tile_br,
-                                        const fpoint &tl, 
+                                        const fpoint &tl,
                                         const fpoint &br,
                                         color color_bl,
                                         color color_br,
@@ -1710,8 +1710,8 @@ void tile_blit_outline_section_colored (uint16_t index,
                                         color color_tr,
                                         float scale)
 {
-    tile_blit_outline_section_colored(tile_index_to_tile(index), 
+    tile_blit_outline_section_colored(tile_index_to_tile(index),
                                       tile_tl, tile_br, tl, br,
-                                      color_bl, color_br, 
+                                      color_bl, color_br,
                                       color_tl, color_tr, scale);
 }

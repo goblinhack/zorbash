@@ -425,7 +425,7 @@ static void game_place_floor_under_objects (Dungeonp d,
     }
 }
 
-static void game_place_lava (Dungeonp d, 
+static void game_place_lava (Dungeonp d,
                              std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {

@@ -90,7 +90,7 @@ void thing_cursor_map_follow (void)
     if (dy < y1) {
         world->map_wanted_at.y--;
     }
-//CON("  follow %f %f at %f %f dx %f dy %f", follow.x, follow.y, 
+//CON("  follow %f %f at %f %f dx %f dy %f", follow.x, follow.y,
 //world->map_wanted_at.x, world->map_wanted_at.y, dx - x2, dy - y1);
 }
 
@@ -126,7 +126,7 @@ void thing_cursor_reset_if_needed (void)
     }
 }
 
-void thing_cursor_find (uint16_t minx, uint16_t miny, 
+void thing_cursor_find (uint16_t minx, uint16_t miny,
                         uint16_t maxx, uint16_t maxy)
 {
     if (world->cursor_needs_update) {

@@ -573,43 +573,43 @@ int32_t main (int32_t argc, char *argv[])
     game = new Game(std::string(appdata));
 
     if (!sdl_init()) {
-	ERR("SDL init");
+        ERR("SDL init");
     }
 
     gl_init_2d_mode();
 
     if (!tex_init()) {
-	ERR("tex init");
+        ERR("tex init");
     }
 
     if (!wid_tiles_init()) {
-	ERR("wid tiles init");
+        ERR("wid tiles init");
     }
 
     if (!tile_init()) {
-	ERR("tile init");
+        ERR("tile init");
     }
 
     if (!font_init()) {
-	ERR("Font init");
+        ERR("Font init");
     }
 
     if (!wid_init()) {
-	ERR("wid init");
+        ERR("wid init");
     }
 
     py_call_void("init2");
 
     if (!wid_console_init()) {
-	ERR("wid_console init");
+        ERR("wid_console init");
     }
 
     if (!wid_minicon_init()) {
-	ERR("wid_minicon init");
+        ERR("wid_minicon init");
     }
 
     if (!command_init()) {
-	ERR("command init");
+        ERR("command init");
     }
 
     tp_init();
@@ -619,18 +619,16 @@ int32_t main (int32_t argc, char *argv[])
     //
     room_init();
     game->init();
-#if 0
     game->fini();
     game->init();
     game->fini();
     game->init();
-#endif
     game->save();
     game->fini();
     game->load();
 
     if (!wid_test_init()) {
-	ERR("wid_test init");
+        ERR("wid_test init");
     }
 
     wid_minicon_flush();
@@ -643,4 +641,4 @@ int32_t main (int32_t argc, char *argv[])
     LOG("Goodbye cruel world");
 
     return (0);
-}          
+}

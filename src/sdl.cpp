@@ -52,8 +52,8 @@ int joy_naxes;
 int joy_buttons;
 int joy_balls;
 
-SDL_Window *window; // Our window handle 
-SDL_GLContext context; // Our opengl context handle 
+SDL_Window *window; // Our window handle
+SDL_GLContext context; // Our opengl context handle
 
 void sdl_fini (void)
 {_
@@ -266,7 +266,7 @@ uint8_t sdl_init (void)
 
     LOG("- Ascii width          : %d", ASCII_WIDTH);
     LOG("- Ascii height         : %d", ASCII_HEIGHT);
-    LOG("- Ascii pix            : %dx%d <--- what we can utilize", 
+    LOG("- Ascii pix            : %dx%d <--- what we can utilize",
         (int)(ASCII_WIDTH * ascii_size), (int)(ASCII_HEIGHT * ascii_size));
     LOG("- SDL video            : %dx%d <--- chosen or from saved file",
         game->config.video_pix_width, game->config.video_pix_height);
@@ -373,9 +373,9 @@ uint8_t sdl_init (void)
         game->config.drawable_gl_width,
         game->config.drawable_gl_height);
 
-    game->config.tile_pixel_width = 
+    game->config.tile_pixel_width =
                     game->config.drawable_gl_width / TILES_ACROSS;
-    game->config.tile_pixel_height = 
+    game->config.tile_pixel_height =
                     game->config.drawable_gl_height / TILES_DOWN;
 
     if (SDL_GL_MakeCurrent(window, context) < 0) {
@@ -435,11 +435,11 @@ static int sdl_filter_events (void *userdata, SDL_Event *event)
         case SDL_CONTROLLERBUTTONDOWN:
         case SDL_CONTROLLERBUTTONUP:
         case SDL_CONTROLLERAXISMOTION:
-        case SDL_JOYAXISMOTION:               // Joystick axis motion 
-        case SDL_JOYBALLMOTION:               // Joystick trackball motion 
-        case SDL_JOYHATMOTION:                // Joystick hat position change 
-        case SDL_JOYBUTTONDOWN:               // Joystick button pressed 
-        case SDL_JOYBUTTONUP:                 // Joystick button released 
+        case SDL_JOYAXISMOTION:               // Joystick axis motion
+        case SDL_JOYBALLMOTION:               // Joystick trackball motion
+        case SDL_JOYHATMOTION:                // Joystick hat position change
+        case SDL_JOYBUTTONDOWN:               // Joystick button pressed
+        case SDL_JOYBUTTONUP:                 // Joystick button released
             return (1);
 
         // Drop all other events */
@@ -1091,9 +1091,9 @@ static void config_gfx_zoom_update (void)
     game->config.one_pixel_gl_height =
                     game->config.tile_gl_height / (double)TILE_HEIGHT;
 
-    game->config.tile_pixel_width = 
+    game->config.tile_pixel_width =
                     game->config.drawable_gl_width / TILES_ACROSS;
-    game->config.tile_pixel_height = 
+    game->config.tile_pixel_height =
                     game->config.drawable_gl_height / TILES_DOWN;
 
     game->world.cursor_needs_update = true;
@@ -1296,10 +1296,10 @@ void sdl_loop (void)
             wid_display_all();
         }
 
-	glcolor(WHITE);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
-	blit_fbo_bind(FBO_MAIN);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glcolor(WHITE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
+        blit_fbo_bind(FBO_MAIN);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         //
         // Draw the map
@@ -1315,15 +1315,15 @@ void sdl_loop (void)
             glPopMatrix();
         }
 
-	blit_fbo(FBO_WID);
-	blit_fbo_unbind();
+        blit_fbo(FBO_WID);
+        blit_fbo_unbind();
 
-	glBlendFunc(GL_ONE, GL_ZERO);
+        glBlendFunc(GL_ONE, GL_ZERO);
         if (game->config.gfx_inverted) {
             glLogicOp(GL_COPY_INVERTED);
             glEnable(GL_COLOR_LOGIC_OP);
         }
-	blit_fbo(FBO_MAIN);
+        blit_fbo(FBO_MAIN);
         if (game->config.gfx_inverted) {
             glLogicOp(GL_COPY);
             glDisable(GL_COLOR_LOGIC_OP);

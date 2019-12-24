@@ -288,7 +288,7 @@ void tile_load_arr (std::string file, std::string name,
 void tile_load_arr_color_and_black_and_white (std::string file,
                                               std::string name,
                                               uint32_t width, uint32_t height,
-                                              uint32_t nargs, 
+                                              uint32_t nargs,
                                               const char * arr[])
 {_
     Texp tex;
@@ -473,7 +473,7 @@ void tile_load_arr_color_and_black_and_white (std::string file,
 Tilep tile_find (std::string name)
 {_
     if (name == "") {
-	return (0);
+        return (0);
     }
 
     auto result = all_tiles.find(name);
@@ -489,7 +489,7 @@ Tilep tile_find_mand (std::string name)
 {_
     if (name == "") {
         DIE("no tile name give");
-	return (0);
+        return (0);
     }
 
     auto result = all_tiles.find(name);
@@ -605,17 +605,17 @@ Tilep string2tile (std::wstring &s, int *len)
 }
 
 /*
- * Blits a whole tile.
- */
+* Blits a whole tile.
+*/
 void tile_blit_at (const Tilep &tile, fpoint tl, fpoint br)
 {
     blit(tile->gl_binding(),
-         tile->x1, tile->y2, tile->x2, tile->y1, tl.x, tl.y, br.x, br.y);
+        tile->x1, tile->y2, tile->x2, tile->y1, tl.x, tl.y, br.x, br.y);
 }
 
 /*
- * Blits a whole tile.
- */
+* Blits a whole tile.
+*/
 #if 0
 void tile_blit (const Tilep tile, point at)
 {
@@ -631,8 +631,8 @@ void tile_blit (const Tilep tile, point at)
 #endif
 
 /*
- * Blits a whole tile. Y co-ords are inverted.
- */
+* Blits a whole tile. Y co-ords are inverted.
+*/
 void tile_blit_colored_fat (Tpp tp,
                             Tilep tile,
                             fpoint tl,
@@ -670,12 +670,12 @@ void tile_blit_colored_fat (Tpp tp,
     }
 
     blit_colored(tile->gl_binding(),
-                 x1, y2, x2, y1,
-                 tl.x, br.y, br.x, tl.y,
-                 color_tl,
-                 color_tr,
-                 color_bl,
-                 color_br);
+                x1, y2, x2, y1,
+                tl.x, br.y, br.x, tl.y,
+                color_tl,
+                color_tr,
+                color_bl,
+                color_br);
 }
 
 std::string tile_name (Tilep t)

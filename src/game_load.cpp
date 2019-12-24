@@ -289,7 +289,7 @@ Game::load (void)
     if (r == LZO_E_OK && new_len == uncompressed_len) {
         CON("%s: decompressed %lu to %lu bytes",
             saved_file.c_str(),
-            (unsigned long) compressed_len, 
+            (unsigned long) compressed_len,
             (unsigned long) uncompressed_len);
     } else {
         /* this should NEVER happen */

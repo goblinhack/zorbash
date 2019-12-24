@@ -287,13 +287,13 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                   PyObject *args,
                                   PyObject *keywds,
                                   int dir)
-{	
-    PyObject *py_class = 0;	
-    char *tp_name = 0;	
-    char *fg = 0;	
-    char *bg = 0;	
-    char *fg_color = 0;	
-    char *bg_color = 0;	
+{
+    PyObject *py_class = 0;
+    char *tp_name = 0;
+    char *fg = 0;
+    char *bg = 0;
+    char *fg_color = 0;
+    char *bg_color = 0;
     int delay_ms = 0;
     int is_moving = 0;
     int is_jumping = 0;
@@ -337,7 +337,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_end_of_anim = 0;
     int is_dead_on_end_of_anim = 0;
     char *py_tile_name = nullptr;
-	
+
     static char *kwlist[] = {
         (char*) "class",
         (char*) "tile",
@@ -389,7 +389,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_dead_on_end_of_anim",
         0
     };
-	
+
     if (!PyArg_ParseTupleAndKeywords(args, keywds,
                                      "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
                                      kwlist, &py_class,
@@ -440,29 +440,29 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_dead,
                                      &is_end_of_anim,
                                      &is_dead_on_end_of_anim
-                                     )) {	
-        return (0);	
-    }	
+                                     )) {
+        return (0);
+    }
 
-    if (!py_class) {	
-        ERR("%s, missing class", __FUNCTION__);	
-        return (0);	
-    }	
-	
+    if (!py_class) {
+        ERR("%s, missing class", __FUNCTION__);
+        return (0);
+    }
+
     Tpp tp;
 
-    tp_name = py_obj_attr_str(py_class, "name");	
-    if (!tp_name) {	
-        DIE("%s, missing tp name", __FUNCTION__);	
-    }	
-	
-    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);	
-	
-    tp = tp_find(tp_name);	
-    if (!tp) {	
-        DIE("%s, cannot find tp %s", __FUNCTION__, tp_name);	
-    }	
-	
+    tp_name = py_obj_attr_str(py_class, "name");
+    if (!tp_name) {
+        DIE("%s, missing tp name", __FUNCTION__);
+    }
+
+    DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);
+
+    tp = tp_find(tp_name);
+    if (!tp) {
+        DIE("%s, cannot find tp %s", __FUNCTION__, tp_name);
+    }
+
     Tilemap *tiles = nullptr;
     switch (dir) {
     case THING_DIR_NONE:
@@ -646,13 +646,13 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     } else {
         tiles->push_back(nullptr);
     }
-	
-    if (tp_name) {	
-        myfree(tp_name);	
-    }	
-	
-    Py_RETURN_NONE;	
-}	
+
+    if (tp_name) {
+        myfree(tp_name);
+    }
+
+    Py_RETURN_NONE;
+}
 
 PyObject *tp_set_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
@@ -836,44 +836,44 @@ TP_BODY_SET_STRING(weapon_carry_anim)
 TP_BODY_SET_STRING(weapon_use_anim)
 
 PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
-{	
-    PyObject *py_class = 0;	
-    char *tp_name = 0;	
-    int value = 0;	
+{
+    PyObject *py_class = 0;
+    char *tp_name = 0;
+    int value = 0;
     Tpp tp;
-	
-    static char *kwlist[] = {(char*) "class", (char*) "value", 0};	
-	
+
+    static char *kwlist[] = {(char*) "class", (char*) "value", 0};
+
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class,
-                                     &value)) {	
-        return (0);	
-    }	
-	
-    if (!py_class) {	
-        ERR("%s, missing class", __FUNCTION__);	
-        return (0);	
-    }	
-	
-    tp_name = py_obj_attr_str(py_class, "name");	
-    if (!tp_name) {	
-        ERR("%s, missing tp name", __FUNCTION__);	
-        goto done;	
-    }	
-	
-    DBG("python-to-c: %s(%s -> %d)", __FUNCTION__, tp_name, value);	
-	
-    tp = tp_find(tp_name);	
-    if (!tp) {	
-        ERR("%s, cannot find tp %s", __FUNCTION__, tp_name);	
-        goto done;	
-    }	
-	
+                                     &value)) {
+        return (0);
+    }
+
+    if (!py_class) {
+        ERR("%s, missing class", __FUNCTION__);
+        return (0);
+    }
+
+    tp_name = py_obj_attr_str(py_class, "name");
+    if (!tp_name) {
+        ERR("%s, missing tp name", __FUNCTION__);
+        goto done;
+    }
+
+    DBG("python-to-c: %s(%s -> %d)", __FUNCTION__, tp_name, value);
+
+    tp = tp_find(tp_name);
+    if (!tp) {
+        ERR("%s, cannot find tp %s", __FUNCTION__, tp_name);
+        goto done;
+    }
+
     tp_update(tp);
-	
-done:	
-    if (tp_name) {	
-        myfree(tp_name);	
-    }	
-	
-    Py_RETURN_NONE;	
-}	
+
+done:
+    if (tp_name) {
+        myfree(tp_name);
+    }
+
+    Py_RETURN_NONE;
+}
