@@ -56,6 +56,11 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
 public:
+    //
+    // When this world was made. Used to restore timestamps relative to this.
+    //
+    uint32_t                   timestamp_dungeon_created {};
+
     bool                       cursor_needs_update = false;
     bool                       cursor_found = false;
     fpoint                     cursor_at;
@@ -66,7 +71,6 @@ public:
     bool                       minimap_valid = false;
     int                        mouse {-1};    // ticks for every move
     int                        mouse_old {-1};
-    uint32_t                   timestamp_dungeon_created {};
     uint8_t                    next_thing_id {};
 
     Thingp                     player = {};
@@ -92,22 +96,7 @@ public:
     void alloc_thing_id(Thingp t);
     void realloc_thing_id(Thingp t);
     void free_thing_id(Thingp t);
-
-    Thingp find_thing_ptr (uint32_t id)
-    {
-        auto slot = id % MAX_THINGS;
-        auto p = &all_thing_ptrs[slot];
-        if (unlikely(!p->ptr)) {
-            DIE("thing ptr not found, slot %u, id %08X", slot, p->id);
-        }
-
-        if (unlikely(p->id != id)) {
-            DIE("invalid thing ptr, slot %u, id %08X", slot, p->id);
-        }
-
-        verify(p->ptr);
-        return (p->ptr);
-    }
+    Thingp find_thing_ptr(uint32_t id);
 
     void remove_thing(int x, int y, uint32_t id);
     void remove_thing(point p, uint32_t id);
@@ -351,7 +340,7 @@ static inline Thingp thing_find (const uint32_t id)
 {
     return (world->find_thing_ptr(id));
 }
-    
+
 #define HEAP_ALLOC(var,size) \
     void *var; \
     posix_memalign(&var, sizeof(lzo_align_t), size + size / 16 + 64 + 3);

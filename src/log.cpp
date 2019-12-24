@@ -460,8 +460,8 @@ static void croak_ (const char *fmt, va_list args)
     }
 
     /*
-    * Seems to hang on crashes. Is it useful?
-    */
+     * Seems to hang on crashes. Is it useful?
+     */
     py_trace();
 
     croaked = true;
@@ -515,7 +515,7 @@ void CROAK (const char *fmt, ...)
     croak_(fmt, args);
     va_end(args);
 
-    quit();
+    // quit();
 }
 
 void Thing::log_ (const char *fmt, va_list args)

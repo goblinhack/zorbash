@@ -8,6 +8,20 @@
 #include <sstream>
 #include "minilzo.h"
 
+static uint32_t timestamp_dungeon_created;
+static uint32_t ts_tmp;
+
+//
+// Save timestamps as a delta we can restore.
+//
+static uint32_t save_timestamp (uint32_t ts)
+{
+    if (!ts) {
+        return (0);
+    }
+    return (ts - timestamp_dungeon_created);
+}
+
 std::ostream& operator<<(std::ostream &out, Bits<AgeMapp & > const my)
 {
     out << bits(my.t->val);
@@ -47,16 +61,16 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     out << bits(my.t->health);
     out << bits(my.t->health_max);
     out << bits(my.t->owned_count);
-    out << bits(my.t->timestamp_bounce_begin);
-    out << bits(my.t->timestamp_bounce_end);
-    out << bits(my.t->timestamp_last_i_was_hit);
-    out << bits(my.t->timestamp_flip_start);
-    out << bits(my.t->timestamp_move_begin);
-    out << bits(my.t->timestamp_move_end);
-    out << bits(my.t->timestamp_born);
-    out << bits(my.t->timestamp_hunger_tick);
-    out << bits(my.t->timestamp_ai_next);
-    out << bits(my.t->timestamp_collision);
+    ts_tmp = save_timestamp(my.t->timestamp_bounce_begin);   out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_bounce_end);     out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_last_i_was_hit); out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_flip_start);     out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_move_begin);     out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_move_end);       out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_born);           out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_hunger_tick);    out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_ai_next);        out << bits(ts_tmp);
+    ts_tmp = save_timestamp(my.t->timestamp_collision);      out << bits(ts_tmp);
     out << bits(my.t->owner_id);
     out << bits(my.t->weapon_id_carry_anim);
     out << bits(my.t->weapon_id_use_anim);
@@ -86,7 +100,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     out << bits(my.t->tl);
     out << bits(my.t->id);
     out << bits(my.t->tile_curr);
-    out << bits(my.t->timestamp_next_frame);
+    ts_tmp = save_timestamp(my.t->timestamp_next_frame); out << bits(ts_tmp);
     uint8_t dir = my.t->dir;
     out << bits(dir);
 
@@ -144,7 +158,6 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.minimap_valid);
     out << bits(my.t.mouse);
     out << bits(my.t.mouse_old);
-    out << bits(my.t.timestamp_dungeon_created);
     out << bits(my.t.next_thing_id);
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
@@ -153,7 +166,6 @@ std::ostream& operator<<(std::ostream &out,
                 auto id = get(my.t.all_thing_ids_at, x, y)[z];
                 if (id) {
                     const Thingp t = thing_find(id);
-                    verify(t);
                     t->log("save");
                     out << bits(t);
                 }
@@ -210,6 +222,11 @@ std::ostream& operator<<(std::ostream &out,
 void
 Game::save (void)
 {_
+    //
+    // For timestamp save/load
+    //
+    timestamp_dungeon_created = game->world.timestamp_dungeon_created;
+
     LOG("-");
     CON("dungeon: saving %s seed %d", saved_file.c_str(), seed);
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");

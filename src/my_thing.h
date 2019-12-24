@@ -119,6 +119,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Monst & > const my);
 std::istream& operator>>(std::istream &in, Bits<Monst &> my);
 
 typedef struct Thing_ {
+public:
     Thing_ (void);
     ~Thing_ (void);
     Monst    *monst               {};
@@ -153,12 +154,22 @@ typedef struct Thing_ {
     uint32_t is_pending_gc:1      {};
     uint32_t is_blitted:1         {};
 
+private:
+    //
+    // As this is called a lot, probably worth the memory
+    //
+    Tpp      mytp                 {};
+public:
     const Tpp tp(void)
     {
+        if (likely(mytp != nullptr)) {
+            return (mytp);
+        }
         if (unlikely(tp_id == -1)) {
             return (nullptr);
         }
-        return (tp_id_map[tp_id - 1]);
+        mytp = tp_id_map[tp_id - 1];
+        return (mytp);
     }
 
     static void update_all(void);

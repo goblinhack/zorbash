@@ -8,6 +8,20 @@
 #include <sstream>
 #include "minilzo.h"
 
+static uint32_t timestamp_dungeon_created;
+static uint32_t ts_tmp;
+
+//
+// Save timestamps as a delta we can restore.
+//
+static uint32_t load_timestamp (uint32_t ts)
+{
+    if (!ts) {
+        return (0);
+    }
+    return (timestamp_dungeon_created + ts);
+}
+
 std::istream& operator>>(std::istream &in, Bits<AgeMapp &> my)
 {
     in >> bits(my.t->val);
@@ -51,16 +65,16 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     in >> bits(my.t->health);
     in >> bits(my.t->health_max);
     in >> bits(my.t->owned_count);
-    in >> bits(my.t->timestamp_bounce_begin);
-    in >> bits(my.t->timestamp_bounce_end);
-    in >> bits(my.t->timestamp_last_i_was_hit);
-    in >> bits(my.t->timestamp_flip_start);
-    in >> bits(my.t->timestamp_move_begin);
-    in >> bits(my.t->timestamp_move_end);
-    in >> bits(my.t->timestamp_born);
-    in >> bits(my.t->timestamp_hunger_tick);
-    in >> bits(my.t->timestamp_ai_next);
-    in >> bits(my.t->timestamp_collision);
+    in >> bits(ts_tmp); my.t->timestamp_bounce_begin   = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_bounce_end     = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_last_i_was_hit = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_flip_start     = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_move_begin     = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_move_end       = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_born           = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_hunger_tick    = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_ai_next        = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_collision      = load_timestamp(ts_tmp);
     in >> bits(my.t->owner_id);
     in >> bits(my.t->weapon_id_carry_anim);
     in >> bits(my.t->weapon_id_use_anim);
@@ -76,7 +90,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(name);
     auto tpp = tp_find(name);
     if (!tpp) {
-        DIE("could not reload template %s", name.c_str());
+        DIE("could not find thing template [%s]", name.c_str());
     }
 
     my.t->tp_id = tpp->id;
@@ -97,8 +111,12 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(my.t->mid_at);
     in >> bits(my.t->tl);
     in >> bits(my.t->id);
+    if (!my.t->id) {
+        DIE("loaded a thing with no ID");
+    }
     in >> bits(my.t->tile_curr);
-    in >> bits(my.t->timestamp_next_frame);
+    in >> bits(ts_tmp); my.t->timestamp_next_frame = load_timestamp(ts_tmp);
+
     uint8_t dir;
     in >> dir;
     my.t->dir = dir;
@@ -141,6 +159,8 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     my.t.all_thing_ptrs = {};
     my.t.all_thing_ids_at = {};
 
+    my.t.timestamp_dungeon_created = timestamp_dungeon_created;
+    in >> bits(my.t._is_blood);
     in >> bits(my.t._is_blood);
     in >> bits(my.t._is_corridor);
     in >> bits(my.t._is_deep_water);
@@ -164,7 +184,6 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     in >> bits(my.t.minimap_valid);
     in >> bits(my.t.mouse);
     in >> bits(my.t.mouse_old);
-    in >> bits(my.t.timestamp_dungeon_created);
     in >> bits(my.t.next_thing_id);
 
     my.t.minimap_valid = false;
@@ -299,6 +318,11 @@ Game::load (void)
 //    std::cout << "decompressed as ";
 //    hexdump((const unsigned char *)uncompressed, uncompressed_len);
 
+    //
+    // For timestamp save/load
+    //
+    timestamp_dungeon_created = time_get_time_ms();
+
     std::string s((const char*)uncompressed, (size_t)uncompressed_len);
     std::istringstream in(s);
     class Game &c = *this;
@@ -307,6 +331,8 @@ Game::load (void)
 
     free(uncompressed);
     free(compressed);
+
+    config_gfx_zoom_update();
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");

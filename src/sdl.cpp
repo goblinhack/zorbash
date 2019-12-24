@@ -1070,7 +1070,7 @@ uint8_t config_gfx_lights_set (tokens_t *tokens, void *context)
     return (true);
 }
 
-static void config_gfx_zoom_update (void)
+void config_gfx_zoom_update (void)
 {
     float tiles_across = game->config.video_pix_width / TILE_WIDTH;
     float tiles_down = game->config.video_pix_height / TILE_HEIGHT;
@@ -1361,6 +1361,13 @@ void sdl_loop (void)
         // Flip
         //
         SDL_GL_SwapWindow(window);
+
+        //
+        // Optimization to only bother checking pointers if some kind of
+        // allocation occurred.
+        //
+        extern bool ptr_check_some_pointers_changed;
+        ptr_check_some_pointers_changed = false;
     }
 
     gl_leave_2d_mode();

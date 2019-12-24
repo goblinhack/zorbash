@@ -37,7 +37,7 @@ char *strsub_(const char *in, const char *old, const char *replace_with, std::st
     strsub_(a, b, c, (__what__), PTRCHECK_AT)
 
 void *ptrcheck_alloc(const void *ptr, std::string what, int size, std::string file, std::string func, int line);
-int ptrcheck_verify(const void *ptr, std::string file, std::string func, int line);
+int ptrcheck_verify(const void *ptr, std::string &file, std::string &func, int line);
 int ptrcheck_free(void *ptr, std::string file, std::string func, int line);
 void ptrcheck_leak_print(void);
 
@@ -45,7 +45,12 @@ void ptrcheck_leak_print(void);
 #define newptr(__ptr__, __what__) \
     (ptrcheck_alloc((__ptr__), (__what__), sizeof(*(__ptr__)), PTRCHECK_AT))
 #define oldptr(__ptr__) (ptrcheck_free((__ptr__), PTRCHECK_AT))
-#define verify(__ptr__) (ptrcheck_verify((__ptr__), PTRCHECK_AT))
+#define verify(__ptr__)                                      \
+{                                                            \
+    static std::string a = std::string(__FILE__);            \
+    static std::string b = std::string(__PRETTY_FUNCTION__); \
+    ptrcheck_verify((__ptr__), a, b, __LINE__);              \
+}
 #else
 #define newptr(__ptr__, __what__)
 #define oldptr(__ptr__)
