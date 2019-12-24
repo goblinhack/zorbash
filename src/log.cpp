@@ -379,9 +379,6 @@ static void dying_ (const char *fmt, va_list args)
     char buf[MAXSHORTSTR];
     uint32_t len;
 
-    callstack_dump();
-    traceback_dump();
-
     buf[0] = '\0';
     timestamp(buf, MAXSHORTSTR);
     len = (uint32_t)strlen(buf);

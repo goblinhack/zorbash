@@ -1,6 +1,7 @@
 //
 // Copyright goblinhack@gmail.com
 //
+#include "my_main.h"
 #include "my_traceback.h"
 #include "my_sprintf.h"
 #include <stdio.h>
@@ -123,5 +124,7 @@ void traceback_dump (void)
 {
     auto tb = new Traceback();
     tb->init();
-    std::cerr << tb->to_string() << std::endl;
+    auto s = tb->to_string();
+    std::cerr << s << std::endl;
+    fprintf(MY_STDERR, "%s", s.c_str());
 }

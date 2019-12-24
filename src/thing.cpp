@@ -59,19 +59,26 @@ Thing::~Thing_ (void)
 void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
     verify(this);
+_
     timestamp_next_frame = 0;
-    const auto tp = tp_find(name);
-    if (unlikely(!tp)) {
+    const auto tpp = tp_find(name);
+    if (unlikely(!tpp)) {
         DIE("thing [%s] not found", name.c_str());
     }
-    tp_id = tp->id;
-    world->put_thing_ptr((int)at.x, (int)at.y, this);
 
-    if (tp_is_monst(tp)) {
+    tp_id = tpp->id;
+
+    //
+    // Must do this after TP assignment or logging will fail
+    //
+    world->alloc_thing_id(this);
+
+    if (tp_is_monst(tpp)) {
         new_dmap_scent();
         new_age_map();
     }
-    if (tp_is_monst(tp) || tp_is_player(tp)) {
+
+    if (tp_is_monst(tpp) || tp_is_player(tpp)) {
         set_timestamp_born(time_get_time_ms_cached());
     }
 
@@ -84,7 +91,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     mid_at             = at;
     last_mid_at        = mid_at;
 
-    if (tp_gfx_can_hflip(tp)) {
+    if (tp_gfx_can_hflip(tpp)) {
         dir            = THING_DIR_LEFT;
         is_facing_left = true;
     } else {
@@ -92,16 +99,16 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         is_facing_left = false;
     }
 
-    is_hungry             = tp_hunger_constant(tp);
+    is_hungry = tp_hunger_constant(tpp);
 
-    auto h = tp_hunger_initial_health_at(tp);
+    auto h = tp_hunger_initial_health_at(tpp);
     if (unlikely(h)) {
         set_health(h);
         set_health_max(h);
     }
 
-    auto tiles = tp_tiles(tp);
-    if (tp->gfx_animated) {
+    auto tiles = tp_tiles(tpp);
+    if (tpp->gfx_animated) {
         auto tile = tile_first(tiles);
         if (tile) {
             tile_curr = tile->global_index;
@@ -117,7 +124,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         }
     }
 
-    if (unlikely(tp_is_player(tp))) {
+    if (unlikely(tp_is_player(tpp))) {
         if (world->player && (world->player != this)) {
             DIE("player exists in multiple places on map, %f, %f and %f, %f",
                 world->player->mid_at.x,
@@ -143,39 +150,39 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
     }
 
-    if (tp_is_wall(tp)) {
+    if (tp_is_wall(tpp)) {
         world->set_wall(new_at.x, new_at.y);
     }
-    if (tp_is_floor(tp)) {
+    if (tp_is_floor(tpp)) {
         world->set_floor(new_at.x, new_at.y);
     }
-    if (tp_is_lava(tp)) {
+    if (tp_is_lava(tpp)) {
         world->set_lava(new_at.x, new_at.y);
     }
-    if (tp_is_blood(tp)) {
+    if (tp_is_blood(tpp)) {
         world->set_blood(new_at.x, new_at.y);
     }
-    if (tp_is_water(tp)) {
+    if (tp_is_water(tpp)) {
         world->set_water(new_at.x, new_at.y);
     }
-    if (tp_is_deep_water(tp)) {
+    if (tp_is_deep_water(tpp)) {
         world->set_deep_water(new_at.x, new_at.y);
         world->set_water(new_at.x, new_at.y);
     }
-    if (tp_is_corridor(tp)) {
+    if (tp_is_corridor(tpp)) {
         world->set_corridor(new_at.x, new_at.y);
     }
-    if (tp_is_dirt(tp)) {
+    if (tp_is_dirt(tpp)) {
         world->set_dirt(new_at.x, new_at.y);
     }
-    if (tp_is_rock(tp)) {
+    if (tp_is_rock(tpp)) {
         world->set_rock(new_at.x, new_at.y);
     }
-    if (tp_gfx_large_shadow_caster(tp)) {
+    if (tp_gfx_large_shadow_caster(tpp)) {
         world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
     }
 
-    if (tp_is_loggable(tp)) {
+    if (tp_is_loggable(tpp)) {
         log("created");
     }
 
@@ -198,14 +205,99 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     update_coordinates();
     attach();
 
-    if (unlikely(!tp_is_player(tp))) {
-        if (unlikely(tp_is_light_strength(tp))) {
-            std::string l = tp_str_light_color(tp);
+    if (unlikely(!tp_is_player(tpp))) {
+        if (unlikely(tp_is_light_strength(tpp))) {
+            std::string l = tp_str_light_color(tpp);
             color c = string2color(l);
-            new_light(mid_at, (double) tp_is_light_strength(tp), LIGHT_QUALITY_HIGH, c);
+            new_light(mid_at, 
+                      (double) tp_is_light_strength(tpp), 
+                      LIGHT_QUALITY_HIGH, c);
             has_light = true;
         }
     }
+    update_light();
+}
+
+void Thing::reinit (void)
+{_
+    verify(this);
+_
+    world->realloc_thing_id(this);
+_
+    const auto tpp = tp();
+
+    //
+    // Probably safest to reset this else things might expire on load
+    //
+    timestamp_next_frame = 0;
+    if (tp_is_monst(tpp) || tp_is_player(tpp)) {
+        set_timestamp_born(time_get_time_ms_cached());
+    }
+_
+    if (unlikely(tp_is_player(tpp))) {
+        if (world->player && (world->player != this)) {
+            DIE("player exists in multiple places on map, %f, %f and %f, %f",
+                world->player->mid_at.x,
+                world->player->mid_at.y,
+                mid_at.x,
+                mid_at.y);
+        }
+        world->player = this;
+        log("player recreated");
+    }
+_
+    point new_at((int)mid_at.x, (int)mid_at.y);
+    if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
+        DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
+    }
+_
+    if (tp_is_wall(tpp)) {
+        world->set_wall(new_at.x, new_at.y);
+    }
+    if (tp_is_floor(tpp)) {
+        world->set_floor(new_at.x, new_at.y);
+    }
+    if (tp_is_lava(tpp)) {
+        world->set_lava(new_at.x, new_at.y);
+    }
+    if (tp_is_blood(tpp)) {
+        world->set_blood(new_at.x, new_at.y);
+    }
+    if (tp_is_water(tpp)) {
+        world->set_water(new_at.x, new_at.y);
+    }
+    if (tp_is_deep_water(tpp)) {
+        world->set_deep_water(new_at.x, new_at.y);
+        world->set_water(new_at.x, new_at.y);
+    }
+    if (tp_is_corridor(tpp)) {
+        world->set_corridor(new_at.x, new_at.y);
+    }
+    if (tp_is_dirt(tpp)) {
+        world->set_dirt(new_at.x, new_at.y);
+    }
+    if (tp_is_rock(tpp)) {
+        world->set_rock(new_at.x, new_at.y);
+    }
+    if (tp_gfx_large_shadow_caster(tpp)) {
+        world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
+    }
+_
+    if (tp_is_loggable(tpp)) {
+        log("recreated");
+    }
+_
+    update_coordinates();
+_
+    //
+    // Upon a load it was attached at save time but not now
+    //
+    if (is_attached) {
+        is_attached = false;
+_
+        attach();
+    }
+_
     update_light();
 }
 
@@ -275,9 +367,9 @@ void Thing::destroy (void)
     delete_dmap_scent();
     delete_age_map();
     delete_light();
-
-    world->remove_thing_ptr(this);
-
+_
+    world->free_thing_id(this);
+_
     if (monst) {
         oldptr(monst);
         delete monst;
@@ -428,16 +520,16 @@ void Thing::hooks_remove ()
         //
         // Slow, but not used too often
         //
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-            for (auto y = 0; y < MAP_HEIGHT; y++) {
-                for (auto t : get(world->all_thing_ptrs_at, x, y)) {
-                    if (t) {
-                        auto o = t->owner_get();
-                        if (o && (o == this)) {
-                            t->remove_owner();
-                        }
-                    }
-                }
+        for (auto slot = 0; slot < MAX_THINGS; slot++) {
+            auto p = getptr(world->all_thing_ptrs, slot);
+            auto t = p->ptr;
+            if (!t) {
+                continue;
+            }
+            verify(t);
+            auto o = t->owner_get();
+            if (o && (o == this)) {
+                t->remove_owner();
             }
         }
     }
@@ -508,6 +600,7 @@ void Thing::update_light (void)
     //
     auto l = get_light();
     if (l) {
+        verify(l);
         l->at = get_interpolated_mid_at();
         l->calculate();
     }
@@ -614,24 +707,26 @@ void Thing::kill (void)
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
     }
 
+    const auto tpp = tp();
+
     if (is_corpse_on_death()) {
-        if (tp_is_loggable(tp())) {
+        if (tp_is_loggable(tpp)) {
             log("killed, leaves corpse");
         }
 
-        if (tp_is_bleeder(tp())) {
+        if (tp_is_bleeder(tpp)) {
             int splatters = random_range(2, 10);
             for (int splatter = 0; splatter < splatters; splatter++) {
-                auto tp = tp_random_blood();
-                (void) thing_new(tp_name(tp),
-                                    fpoint(mid_at.x, mid_at.y),
-                                    fpoint(0.25, 0.25));
+                auto tpp = tp_random_blood();
+                (void) thing_new(tp_name(tpp),
+                                 fpoint(mid_at.x, mid_at.y),
+                                 fpoint(0.25, 0.25));
             }
         }
         return;
     }
 
-    if (tp_is_loggable(tp())) {
+    if (tp_is_loggable(tpp)) {
         log("killed");
     }
 
@@ -641,14 +736,13 @@ void Thing::kill (void)
 
 void Thing::update_all (void)
 {
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            for (auto t : get(world->all_thing_ptrs_at, x, y)) {
-                if (t) {
-                    t->update_coordinates();
-                    t->update_light();
-                }
-            }
+    for (auto slot = 0; slot < MAX_THINGS; slot++) {
+        auto p = getptr(world->all_thing_ptrs, slot);
+        auto t = p->ptr;
+        verify(t);
+        if (t) {
+            t->update_coordinates();
+            t->update_light();
         }
     }
 }

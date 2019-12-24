@@ -8,43 +8,64 @@
 #include "my_dmap.h"
 #include <list>
 
-static_assert(MAP_WIDTH  <= (1 << World::x_bits), "MAP_WIDTH overflow");
-static_assert(MAP_HEIGHT <= (1 << World::y_bits), "MAP_HEIGHT overflow");
-static_assert(MAP_SLOTS  <= (1 << World::slots_bits), "MAP_SLOTS overflow");
-
-void World::put_thing_ptr (uint16_t x, uint16_t y, Thingp t)
-{
-    auto r = world->next_thing_id;
-
-    if (unlikely(is_oob(x, y))) {
-        t->die("oob at %d %d", x, y);
-    }
-
-    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto p = &getref(all_thing_ptrs_at, x, y, slot);
-        if (*p == nullptr) {
-            *p = t;
-            t->id = x | (y << y_shift) | (slot << slots_shift) | ++r << r_shift;
+void World::alloc_thing_id (Thingp t)
+{_
+    for (uint32_t slot = 1; slot < MAX_THINGS; slot++) {
+        auto p = getptr(all_thing_ptrs, slot);
+        if (!p->ptr) {
+            p->ptr = t;
+            uint32_t idx = (myrand() & ~MAX_THINGS_MASK) | slot;
+            t->id = idx;
+            p->id = idx;
+            // t->log("alloc id");
             return;
         }
     }
-    t->die("out of thing slots at %d %d", x, y);
+    DIE("out of thing slots, hit max of %u", MAX_THINGS);
 }
 
-void World::remove_thing_ptr (Thingp t)
-{
-    uint32_t x = t->id & x_mask;
-    uint32_t y = (t->id & y_mask) >> y_shift;
-    uint32_t slot = (t->id & slots_mask) >> slots_shift;
-
-    auto p = &getref(all_thing_ptrs_at, x, y, slot);
-    if (unlikely(!*p)) {
-        t->die("thing ptr not found at x %u y %u slot %u", x, y, slot);
+void World::free_thing_id (Thingp t)
+{_
+    uint32_t slot = t->id & MAX_THINGS_MASK;
+    auto p = getptr(all_thing_ptrs, slot);
+    if (!p->ptr) {
+        t->die("double free for thing ID %08X", t->id);
     }
 
-    if (unlikely(*p != t)) {
-        t->die("thing mismatch at x %u y %u slot %u", x, y, slot);
+    if (p->ptr != t) {
+        t->die("wrong owner trying to free thing ID %08X", t->id);
     }
-    *p = nullptr;
+
+    if (p->id != t->id) {
+        t->die("stale owner trying to free thing ID %08X", t->id);
+    }
+
+    // t->log("free id");
+    p->ptr = nullptr;
+    p->id = 0;
     t->id = 0;
+}
+
+void World::realloc_thing_id (Thingp t)
+{_
+    if (!t->id) {
+        t->die("trying to realloc when thing has no ID");
+    }
+
+    uint32_t slot = t->id & MAX_THINGS_MASK;
+    auto p = getptr(all_thing_ptrs, slot);
+    if (p->ptr) {
+        if (p->ptr == t) {
+            t->die("slot in use, cannot be realloc'd for same thing ID %08X", 
+                   t->id);
+        } else {
+            t->err("slot in use by another thing, cannot be realloc'd by %08X", 
+                   t->id);
+            p->ptr->die("this is the current owner");
+        }
+    }
+
+    p->ptr = t;
+    p->id = t->id;
+    // t->log("realloc id");
 }

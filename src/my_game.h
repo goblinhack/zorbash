@@ -73,12 +73,14 @@ public:
     Thingp                     cursor = {};
 
     //
-    // All things. The location forms the ID.
+    // All things. The array index is part of the thing ID
     //
-    std::array<
-      std::array<
-        std::array<Thingp, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
-          all_thing_ptrs_at {};
+    struct Thing_entropy {
+        Thingp   ptr;
+        uint32_t id;
+    };
+    std::array<struct Thing_entropy, MAX_THINGS> all_thing_ptrs {};
+
     //
     // All thing IDs
     //
@@ -87,40 +89,24 @@ public:
         std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
           all_thing_ids_at {};
 
-    void put_thing_ptr(uint16_t x, uint16_t y, Thingp t);
-    void remove_thing_ptr(Thingp t);
-
-    static const uint32_t x_bits = 10;
-    static const uint32_t x_mask = (1<<x_bits)-1;
-
-    static const uint32_t y_bits = 10;
-    static const uint32_t y_shift = x_bits;
-    static const uint32_t y_mask = ((1<<y_bits)-1) << y_shift;
-
-    static const uint32_t slots_bits = 4;
-    static const uint32_t slots_shift = x_bits + y_bits;
-    static const uint32_t slots_mask = ((1<<slots_bits)-1) << slots_shift;
-
-    static const uint32_t r_shift = x_bits + y_bits + slots_bits;
+    void alloc_thing_id(Thingp t);
+    void realloc_thing_id(Thingp t);
+    void free_thing_id(Thingp t);
 
     Thingp find_thing_ptr (uint32_t id)
     {
-        uint32_t x = id & x_mask;
-        uint32_t y = (id & y_mask) >> y_shift;
-        uint32_t slot = (id & slots_mask) >> slots_shift;
-
-        auto p = &all_thing_ptrs_at[x][y][slot];
-        if (unlikely(!*p)) {
-            DIE("thing ptr not found at x %u y %u slot %u for id %08X", x, y, slot, id);
+        auto slot = id % MAX_THINGS;
+        auto p = &all_thing_ptrs[slot];
+        if (unlikely(!p->ptr)) {
+            DIE("thing ptr not found, slot %u, id %08X", slot, p->id);
         }
 
-        auto t = *p;
-        if ((t->id != id)) {
-            t->die("thing mismatch at x %u y %u slot %u, my id is %08X, but on-map id is %08X. Usually this means a thing was not removed cleanly at level end.", x, y, slot, t->id, id);
+        if (unlikely(p->id != id)) {
+            DIE("invalid thing ptr, slot %u, id %08X", slot, p->id);
         }
 
-        verify(t);
-        return (t);
+        verify(p->ptr);
+        return (p->ptr);
     }
 
     void remove_thing(int x, int y, uint32_t id);
@@ -366,4 +352,8 @@ static inline Thingp thing_find (const uint32_t id)
     return (world->find_thing_ptr(id));
 }
     
+#define HEAP_ALLOC(var,size) \
+    void *var; \
+    posix_memalign(&var, sizeof(lzo_align_t), size + size / 16 + 64 + 3);
+
 #endif

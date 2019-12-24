@@ -50,22 +50,6 @@ void callstack_dump (void)
         fprintf(MY_STDERR, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
     }
     fprintf(MY_STDERR, "========================================================\n");
-
-    fprintf(MY_STDOUT, "code trace:\n");
-    fprintf(MY_STDOUT, "========================================================\n");
-    for (auto depth = 0; depth < callframes_depth; depth++) {
-        auto iter = &callframes[depth];
-        fprintf(MY_STDOUT, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
-    }
-    fprintf(MY_STDOUT, "========================================================\n");
-
-    printf("code trace:\n");
-    printf("========================================================\n");
-    for (auto depth = 0; depth < callframes_depth; depth++) {
-        auto iter = &callframes[depth];
-        printf("(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
-    }
-    printf("========================================================\n");
 }
 
 #ifdef ENABLE_CRASH_HANDLER
@@ -92,6 +76,10 @@ static void ctrlc_handler (int sig)
 
 void quit (void)
 {_
+    if (croaked) {
+        return;
+    }
+
     if (quitting) {
         return;
     }
@@ -212,7 +200,7 @@ void restart (void)
 
 void die (void)
 {_
-    quit();
+    // quit();
 
     LOG("Bye, error exit");
     fprintf(MY_STDERR, "exit(1) error\n");
@@ -636,9 +624,10 @@ int32_t main (int32_t argc, char *argv[])
     game->init();
     game->fini();
     game->init();
-    game->save();
-    game->load();
 #endif
+    game->save();
+    game->fini();
+    game->load();
 
     if (!wid_test_init()) {
 	ERR("wid_test init");
@@ -654,4 +643,4 @@ int32_t main (int32_t argc, char *argv[])
     LOG("Goodbye cruel world");
 
     return (0);
-}
+}          

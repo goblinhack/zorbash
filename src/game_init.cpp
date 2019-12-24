@@ -822,8 +822,11 @@ void Game::init (void)
     seed = 667;
     //seed = myrand();
 //        world->terrain = terrain_init(seed);
-    CON("dungeon: create dungeon %u", seed);
-    LOG("===================================================================");
+//
+    LOG("-");
+    CON("dungeon: creating seed %u", seed);
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 _
     LOG("dungeon: create blocks");
     world.clear();
@@ -939,6 +942,8 @@ _
 
     thing_map_scroll_to_player();
 
-    CON("dungeon: created dungeon %u", seed);
-    LOG("===================================================================");
+    LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    CON("dungeon: created seed %u", seed);
+    LOG("-");
 }

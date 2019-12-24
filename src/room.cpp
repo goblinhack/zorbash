@@ -218,5 +218,5 @@ void Room::dump (void)
         }
         LOG("ROOM(%d): %s", roomno, s.c_str());
     }
-    LOG(" ");
+    LOG("-");
 }

@@ -73,10 +73,11 @@ bool Thing::ai_is_obstacle_for_me (point p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto t : get(world->all_thing_ptrs_at, p.x, p.y)) {
-        if (!t) {
+    for (auto slot : get(world->all_thing_ids_at, p.x, p.y)) {
+        if (!slot) {
             continue;
         }
+        auto t = thing_find(slot);
         if (t->is_wall()) {
             return (true);
         }
