@@ -61,7 +61,9 @@ public:
     //
     Ptrcheck_history *allocated_by {};
     Ptrcheck_history *freed_by {};
+#ifdef ENABLE_PTRCHECK_HISTORY
     std::array<Ptrcheck_history *, ENABLE_PTRCHECK_HISTORY> last_seen {};
+#endif
 
     //
     // Where in the history buffer we are.
@@ -347,7 +349,6 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
     int ring_ptr_size;
     Ptrcheck *pc;
     hash_elem_t *e;
-    int i;
 
     if (!hash) {
         return (0);
@@ -373,6 +374,7 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         // Add some free information that we know the pointer is safe at this
         // point in time.
         //
+#ifdef ENABLE_PTRCHECK_HISTORY
         auto l = pc->last_seen[pc->last_seen_at];
         if (!l) {
             l = pc->last_seen[pc->last_seen_at] = new Ptrcheck_history();
@@ -380,7 +382,6 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         l->file = file;
         l->func = func;
         l->line = line;
-
         if (l->tb) {
             delete l->tb;
         }
@@ -399,7 +400,7 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         if (pc->last_seen_size >= ENABLE_PTRCHECK_HISTORY) {
             pc->last_seen_size = ENABLE_PTRCHECK_HISTORY;
         }
-
+#endif
         return (pc);
     }
 
@@ -463,8 +464,9 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
             //
             // Dump the pointer history.
             //
+#ifdef ENABLE_PTRCHECK_HISTORY
             int h = pc->last_seen_at;
-            for (i=0; i < pc->last_seen_size; i++) {
+            for (auto i=0; i < pc->last_seen_size; i++) {
                 if (--h < 0) {
                     h = ENABLE_PTRCHECK_HISTORY-1;
                 }
@@ -483,7 +485,7 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
                     std::cerr << H->tb->to_string() << std::endl;
                 }
             }
-
+#endif
             //
             // Memory reuse can cause a lot of false hits, so stop after
             // the first match.
@@ -715,6 +717,7 @@ void ptrcheck_leak_print (void)
             //
             // Dump the pointer history.
             //
+#ifdef ENABLE_PTRCHECK_HISTORY
             int h = pc->last_seen_at;
             for (auto j=0; j < pc->last_seen_size; j++) {
                 if (--h < 0) {
@@ -733,7 +736,7 @@ void ptrcheck_leak_print (void)
                     std::cerr << H->tb->to_string() << std::endl;
                 }
             }
-
+#endif
             if (elem->next == elem) {
                 DIE("hash table corruption");
             }

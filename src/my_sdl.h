@@ -103,6 +103,7 @@ extern uint8_t config_gfx_lights_set(tokensp, void *context);
 extern void config_gfx_zoom_in(void);
 extern void config_gfx_zoom_out(void);
 extern void config_gfx_zoom_update(void);
+extern void config_update_all(void);
 extern uint8_t config_gfx_zoom_set(tokensp, void *context);
-extern uint8_t vsync_enable(tokensp, void *context);
+extern uint8_t config_vsync_enable(tokensp, void *context);
 #endif

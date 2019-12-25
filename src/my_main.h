@@ -9,9 +9,13 @@
 #define _MY_MAIN_H_
 
 //
+// It crashes? Enable this for more info
+//
+#undef DEBUG_CRASH
+
+//
 // Commonly changed settings
 //
-#define DEBUG_CRASH
 #ifdef DEBUG_CRASH
 #undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #define ENABLE_ASSERT              // DIE on errors
@@ -20,8 +24,8 @@
 #define ENABLE_PTRCHECK_LEAK
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
-#endif
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
+#endif
 #define ENABLE_INVERTED_GFX        // For vision impaired
 
 //

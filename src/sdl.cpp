@@ -1159,7 +1159,7 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-uint8_t vsync_enable (tokens_t *tokens, void *context)
+uint8_t config_vsync_enable (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[2];
 
@@ -1178,6 +1178,21 @@ uint8_t vsync_enable (tokens_t *tokens, void *context)
     }
 
     return (true);
+}
+
+static void config_vsync_update (void)
+{_
+    if (game->config.vsync_enable) {
+        SDL_GL_SetSwapInterval(1);
+    } else {
+        SDL_GL_SetSwapInterval(0);
+    }
+}
+
+void config_update_all (void)
+{
+    config_gfx_zoom_update();
+    config_vsync_update();
 }
 
 //
