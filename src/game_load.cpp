@@ -338,7 +338,7 @@ Game::load (void)
     free(uncompressed);
     free(compressed);
 
-    config_gfx_zoom_update();
+    config_update_all();
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
