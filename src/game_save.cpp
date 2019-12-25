@@ -8,20 +8,6 @@
 #include <sstream>
 #include "minilzo.h"
 
-static uint32_t timestamp_dungeon_created;
-static uint32_t ts_tmp;
-
-//
-// Save timestamps as a delta we can restore.
-//
-static uint32_t save_timestamp (uint32_t ts)
-{
-    if (!ts) {
-        return (0);
-    }
-    return (ts - timestamp_dungeon_created);
-}
-
 std::ostream& operator<<(std::ostream &out, Bits<AgeMapp & > const my)
 {
     out << bits(my.t->val);
@@ -61,16 +47,16 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     out << bits(my.t->health);
     out << bits(my.t->health_max);
     out << bits(my.t->owned_count);
-    ts_tmp = save_timestamp(my.t->timestamp_bounce_begin);   out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_bounce_end);     out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_last_i_was_hit); out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_flip_start);     out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_move_begin);     out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_move_end);       out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_born);           out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_hunger_tick);    out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_ai_next);        out << bits(ts_tmp);
-    ts_tmp = save_timestamp(my.t->timestamp_collision);      out << bits(ts_tmp);
+    out << bits(my.t->timestamp_bounce_begin);
+    out << bits(my.t->timestamp_bounce_end);
+    out << bits(my.t->timestamp_last_i_was_hit);
+    out << bits(my.t->timestamp_flip_start);
+    out << bits(my.t->timestamp_move_begin);
+    out << bits(my.t->timestamp_move_end);
+    out << bits(my.t->timestamp_born);
+    out << bits(my.t->timestamp_hunger_tick);
+    out << bits(my.t->timestamp_ai_next);
+    out << bits(my.t->timestamp_collision);
     out << bits(my.t->owner_id);
     out << bits(my.t->weapon_id_carry_anim);
     out << bits(my.t->weapon_id_use_anim);
@@ -100,9 +86,9 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     out << bits(my.t->tl);
     out << bits(my.t->id);
     out << bits(my.t->tile_curr);
-    ts_tmp = save_timestamp(my.t->timestamp_next_frame); out << bits(ts_tmp);
-    uint8_t dir = my.t->dir;
-    out << bits(dir);
+    out << bits(my.t->timestamp_next_frame);
+
+    uint8_t dir = my.t->dir; out << bits(dir);
 
     uint32_t bits32 = 0;
     int shift = 0;
@@ -135,6 +121,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 std::ostream& operator<<(std::ostream &out,
                          Bits<const class World & > const my)
 {_
+    out << bits(my.t.timestamp_dungeon_created);
+    out << bits(my.t.timestamp_dungeon_saved);
     out << bits(my.t._is_blood);
     out << bits(my.t._is_corridor);
     out << bits(my.t._is_deep_water);
@@ -163,10 +151,12 @@ std::ostream& operator<<(std::ostream &out,
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = get(my.t.all_thing_ids_at, x, y)[z];
+                auto id = get(my.t.all_thing_ids_at, x, y, z);
                 if (id) {
                     const Thingp t = thing_find(id);
+#ifdef ENABLE_THING_ID_LOGS
                     t->log("save");
+#endif
                     out << bits(t);
                 }
             }
@@ -222,11 +212,6 @@ std::ostream& operator<<(std::ostream &out,
 void
 Game::save (void)
 {_
-    //
-    // For timestamp save/load
-    //
-    timestamp_dungeon_created = game->world.timestamp_dungeon_created;
-
     LOG("-");
     CON("dungeon: saving %s seed %d", saved_file.c_str(), seed);
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
@@ -234,6 +219,7 @@ Game::save (void)
 
     std::stringstream s(std::ios::in | std::ios::out | std::ios::binary);
 
+    game->world.timestamp_dungeon_saved = time_get_time_ms();
     const class Game &c = *this;
     s << bits(c);
 
@@ -262,7 +248,7 @@ Game::save (void)
     int r = lzo1x_1_compress((lzo_bytep)uncompressed, uncompressed_len,
                              (lzo_bytep)compressed, &compressed_len, wrkmem);
     if (r == LZO_E_OK) {
-        CON("%s: compressed %lu to %lu bytes",
+        CON("dungeon: saved as %s, compressed from %lu to %lu bytes",
             saved_file.c_str(),
             (unsigned long) uncompressed_len,
             (unsigned long) compressed_len);

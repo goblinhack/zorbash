@@ -75,7 +75,7 @@ Tpp tp_find (uint32_t id)
 {_
     auto result = get(tp_id_map, id - 1);
     if (!result) {
-        DIE("thing template id %08X not found", id);
+        DIE("thing template ID %08X not found", id);
     }
 
     return (result);

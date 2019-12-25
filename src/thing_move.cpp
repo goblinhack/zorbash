@@ -181,8 +181,8 @@ bool Thing::update_coordinates (void)
             // Slow flip
             //
             auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
-            uint32_t flip_time = 100;
-            uint32_t flip_steps = flip_time;
+            timestamp_t flip_time = 100;
+            timestamp_t flip_steps = flip_time;
 
             if (diff > flip_time) {
                 set_timestamp_flip_start(0);
@@ -235,8 +235,8 @@ bool Thing::update_coordinates (void)
 
 void Thing::bounce (double bounce_height,
                     double bounce_fade,
-                    uint32_t ms,
-                    uint32_t bounce_count)
+                    timestamp_t ms,
+                    int bounce_count)
 {
     auto t = set_timestamp_bounce_begin(time_get_time_ms_cached());
     set_timestamp_bounce_end(t + ms);

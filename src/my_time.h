@@ -25,36 +25,35 @@
 #undef ONESEC
 #define ONESEC                          1000
 
-uint8_t time_have_x_ms_passed_since(uint32_t tenths, uint32_t since);
-uint8_t time_have_x_hundredths_passed_since(uint32_t tenths, uint32_t since);
-uint8_t time_have_x_tenths_passed_since(uint32_t tenths, uint32_t since);
-uint8_t time_have_x_secs_passed_since(uint32_t tenths, uint32_t since);
-uint32_t time_get_elapsed_secs(uint32_t val, uint32_t since);
-uint32_t time_get_elapsed_tenths(uint32_t val, uint32_t since);
-const char *time2str(uint32_t ms, char *buf, int32_t len);
+bool time_have_x_ms_passed_since(timestamp_t tenths, timestamp_t since);
+bool time_have_x_hundredths_passed_since(timestamp_t tenths, timestamp_t since);
+bool time_have_x_tenths_passed_since(timestamp_t tenths, timestamp_t since);
+bool time_have_x_secs_passed_since(timestamp_t tenths, timestamp_t since);
+timestamp_t time_get_elapsed_secs(timestamp_t val, timestamp_t since);
+timestamp_t time_get_elapsed_tenths(timestamp_t val, timestamp_t since);
+const char *time2str(timestamp_t ms, char *buf, int32_t len);
 const char *timestamp(char *buf, int32_t len);
 
-extern uint32_t time_now;
+extern timestamp_t time_now;
 #ifdef NOT_NEEDED
-extern uint32_t base_time_in_mill;
+extern timestamp_t base_time_in_mill;
 #endif
 
-extern uint32_t SDL_GetTicks(void);
-static uint32_t time_update_time_milli(void);
+static timestamp_t time_update_time_milli(void);
 
-static inline uint32_t time_get_time_ms (void)
+static inline timestamp_t time_get_time_ms (void)
 {
     time_update_time_milli();
 
     return (time_now);
 }
 
-static inline uint32_t time_get_time_ms_cached (void)
+static inline timestamp_t time_get_time_ms_cached (void)
 {
     return (time_now);
 }
 
-static inline uint32_t time_update_time_milli (void)
+static inline timestamp_t time_update_time_milli (void)
 {
 #ifdef NOT_NEEDED
     //
@@ -95,9 +94,7 @@ static inline uint32_t time_update_time_milli (void)
         return (time_now);
     }
 #endif
-
     time_now = SDL_GetTicks();
-
     return (time_now);
 }
 #endif

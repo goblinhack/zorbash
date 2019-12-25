@@ -59,7 +59,8 @@ public:
     //
     // When this world was made. Used to restore timestamps relative to this.
     //
-    uint32_t                   timestamp_dungeon_created {};
+    timestamp_t                   timestamp_dungeon_created {};
+    timestamp_t                   timestamp_dungeon_saved {};
 
     bool                       cursor_needs_update = false;
     bool                       cursor_found = false;
@@ -96,6 +97,7 @@ public:
     void alloc_thing_id(Thingp t);
     void realloc_thing_id(Thingp t);
     void free_thing_id(Thingp t);
+    Thingp test_thing_ptr(uint32_t id);
     Thingp find_thing_ptr(uint32_t id);
 
     void remove_thing(int x, int y, uint32_t id);

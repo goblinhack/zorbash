@@ -8,16 +8,16 @@
 #include "my_game.h"
 #include "my_time.h"
 
-uint32_t time_now;
-uint32_t base_time_in_mill;
+timestamp_t time_now;
+timestamp_t base_time_in_mill;
 static char buf_[MAXSHORTSTR];
 
-const char *time2str (uint32_t ms, char *buf, int32_t len)
+const char *time2str (timestamp_t ms, char *buf, int len)
 {
-    int32_t log_msec = ms;
-    int32_t log_secs = log_msec / ONESEC;
-    int32_t log_mins = log_secs / 60;
-    int32_t log_hrs = log_mins / 60;
+    int log_msec = ms;
+    int log_secs = log_msec / ONESEC;
+    int log_mins = log_secs / 60;
+    int log_hrs = log_mins / 60;
 
     log_msec = log_msec % ONESEC;
     log_secs = log_secs % 60;
@@ -39,12 +39,12 @@ const char *time2str (uint32_t ms, char *buf, int32_t len)
     return (buf_);
 }
 
-const char *timestamp (char *buf, int32_t len)
+const char *timestamp (char *buf, int len)
 {
-    int32_t log_msec = time_get_time_ms();
-    int32_t log_secs = log_msec / ONESEC;
-    int32_t log_mins = log_secs / 60;
-    int32_t log_hrs = log_mins / 60;
+    int log_msec = time_get_time_ms();
+    int log_secs = log_msec / ONESEC;
+    int log_mins = log_secs / 60;
+    int log_hrs = log_mins / 60;
 
     log_msec = log_msec % ONESEC;
     log_secs = log_secs % 60;
@@ -66,68 +66,68 @@ const char *timestamp (char *buf, int32_t len)
     return (buf_);
 }
 
-uint8_t time_have_x_hundredths_passed_since (uint32_t val, uint32_t since)
+bool time_have_x_hundredths_passed_since (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
     /*
      * Cater for negative future times.
      */
-    int32_t delay = time_now - since;
+    timestamp_t delay = time_now - since;
 
-    return ((int32_t)(delay / 10) > (int32_t)val);
+    return ((timestamp_t)(delay / 10) > (timestamp_t)val);
 }
 
-uint8_t time_have_x_ms_passed_since (uint32_t val, uint32_t since)
+bool time_have_x_ms_passed_since (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
     /*
      * Cater for negative future times.
      */
-    int32_t delay = time_now - since;
+    timestamp_t delay = time_now - since;
 
-    return ((int32_t)(delay) >= (int32_t)val);
+    return ((timestamp_t)(delay) >= (timestamp_t)val);
 }
 
-uint8_t time_have_x_tenths_passed_since (uint32_t val, uint32_t since)
+bool time_have_x_tenths_passed_since (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
     /*
      * Cater for negative future times.
      */
-    int32_t delay = time_now - since;
+    timestamp_t delay = time_now - since;
 
-    return ((int32_t)(delay / 100) >= (int32_t)val);
+    return ((timestamp_t)(delay / 100) >= (timestamp_t)val);
 }
 
-uint8_t time_have_x_secs_passed_since (uint32_t val, uint32_t since)
+bool time_have_x_secs_passed_since (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
     /*
      * Cater for negative future times.
      */
-    int32_t delay = time_now - since;
+    timestamp_t delay = time_now - since;
 
-    return ((int32_t)(delay / ONESEC) >= (int32_t)val);
+    return ((timestamp_t)(delay / ONESEC) >= (timestamp_t)val);
 }
 
-uint32_t time_get_elapsed_secs (uint32_t val, uint32_t since)
+timestamp_t time_get_elapsed_secs (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
-    int32_t delay = val - since;
+    timestamp_t delay = val - since;
 
-    return ((int32_t)(delay / ONESEC));
+    return ((timestamp_t)(delay / ONESEC));
 }
 
-uint32_t time_get_elapsed_tenths (uint32_t val, uint32_t since)
+timestamp_t time_get_elapsed_tenths (timestamp_t val, timestamp_t since)
 {
     time_get_time_ms();
 
-    int32_t delay = val - since;
+    timestamp_t delay = val - since;
 
-    return ((int32_t)(delay / (ONESEC / 10)));
+    return ((timestamp_t)(delay / (ONESEC / 10)));
 }

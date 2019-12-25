@@ -493,112 +493,6 @@ bool World::is_door (const int x, const int y)
     return (false);
 }
 
-void World::clear (void)
-{_
-    _is_blood = {};
-    _is_corridor = {};
-    _is_deep_water = {};
-    _is_dirt = {};
-    _is_floor = {};
-    _is_lava = {};
-    _is_rock = {};
-    _is_visited = {};
-    _is_gfx_large_shadow_caster = {};
-    _is_wall = {};
-    _is_water = {};
-    _is_dungeon = {};
-
-    next_thing_id = 1;
-    timestamp_dungeon_created = time_get_time_ms();
-}
-
-void World::put_thing (int x, int y, uint32_t id)
-{_
-    auto t = thing_find(id);
-    if (!id) {
-        t->die("null id at %d %d", x, y);
-    }
-
-    if (!t) {
-        t->die("oob at %d %d for put of id %08X", x, y, id);
-    }
-
-    if (is_oob(x, y)) {
-        t->die("oob at %d %d for put of id %08X", x, y, id);
-        return;
-    }
-
-    int free_slot = -1;
-    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto idp = &getref(all_thing_ids_at, x, y, slot);
-        if (*idp == id) {
-            return;
-        }
-
-        if ((!*idp) && (free_slot == -1)) {
-            free_slot = slot;
-        }
-    }
-
-    if (free_slot != -1) {
-        auto idp = &getref(all_thing_ids_at, x, y, free_slot);
-        *idp = id;
-        return;
-    }
-
-    t->log("out of thing slots at %d %d for put of id %08X, see below:",
-           x, y, id);
-
-    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto idp = &getref(all_thing_ids_at, x, y, slot);
-        LOG("- slot %u id %08X", slot, *idp);
-    }
-
-    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto idp = &getref(all_thing_ids_at, x, y, slot);
-        if (*idp) {
-            auto t = thing_find(*idp);
-            t->log("- slot %u", slot);
-        } else {
-            t->log("- empty slot %u", slot);
-        }
-    }
-    t->die("out of thing slots at %d %d for put of id %08X", x, y, id);
-}
-
-void World::put_thing (point p, uint32_t id)
-{_
-    put_thing(p.x, p.y, id);
-}
-
-void World::remove_thing (int x, int y, uint32_t id)
-{_
-    auto t = thing_find(id);
-    if (!t) {
-        ERR("oob at %d %d for remove of id %08X", x, y, id);
-    }
-
-    if (is_oob(x, y)) {
-        t->die("oob at %d %d for remove of id %08X", x, y, id);
-        return;
-    }
-
-    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
-        auto idp = &getref(all_thing_ids_at, x, y, slot);
-        if (*idp == id) {
-            *idp = 0;
-            return;
-        }
-    }
-    t->die("did not find thing in any slot at %d %d for remove of id %08X",
-           x, y, id);
-}
-
-void World::remove_thing (point p, uint32_t id)
-{_
-    remove_thing(p.x, p.y, id);
-}
-
 void World::get_all_things_at_depth (int x, int y, int z,
                                      std::vector<Thingp> &l)
 {_
@@ -658,6 +552,9 @@ void World::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l
 void World::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
 {_
     l.resize(0);
+#ifdef DEBUG_CRASH
+    std::vector<uint32_t> ids;
+#endif
 
     if (unlikely(is_oob(x, y))) {
         return;
@@ -668,6 +565,15 @@ void World::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
             auto t = thing_find(id);
             if (t->is_active() || t->is_movable()) {
                 l.push_back(t);
+#ifdef DEBUG_CRASH
+                ids.push_back(id);
+                if (std::count(l.begin(), l.end(), t) > 1) {
+                    t->die("thing appears multiple times on the map");
+                }
+                if (std::count(ids.begin(), ids.end(), id) > 1) {
+                    t->die("ID appears multiple times on the map");
+                }
+#endif
             }
         }
     }

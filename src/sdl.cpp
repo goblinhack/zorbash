@@ -20,7 +20,7 @@ uint8_t sdl_main_loop_running;
 uint8_t sdl_shift_held;
 uint8_t sdl_init_video;
 uint32_t mouse_down;
-uint32_t mouse_down_when;
+timestamp_t mouse_down_when;
 int mouse_x;
 int mouse_y;
 int wheel_x;
@@ -89,7 +89,7 @@ static inline void sdl_list_video_size (void)
     }
 }
 
-void sdl_joy_rumble (float strength, uint32_t ms)
+void sdl_joy_rumble (float strength, timestamp_t ms)
 {_
     if (!haptic) {
         return;
@@ -454,7 +454,7 @@ static void sdl_event (SDL_Event * event)
 
     switch (event->type) {
     case SDL_KEYDOWN:
-        DBG("Keyboard: key pressed keycode 0x%08X = %s",
+        DBG("Keyboard: key pressed keycode 0xID %08X = %s",
             event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 
@@ -462,7 +462,7 @@ static void sdl_event (SDL_Event * event)
 
             {
                 static struct SDL_KEYSYM last;
-                static uint32_t last_time_for_key;
+                static timestamp_t last_time_for_key;
 
                 //
                 // SDL2 has no auto repeat.
@@ -482,7 +482,7 @@ static void sdl_event (SDL_Event * event)
         break;
 
     case SDL_KEYUP:
-        DBG("Keyboard: key released keycode 0x%08X = %s",
+        DBG("Keyboard: key released keycode 0xID %08X = %s",
             event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 
@@ -507,7 +507,7 @@ static void sdl_event (SDL_Event * event)
         static double accel = 1.0;
 
         {
-            static uint32_t ts;
+            static timestamp_t ts;
 
             if (time_have_x_tenths_passed_since(5, ts)) {
                 accel = 1.0;
@@ -844,7 +844,7 @@ static void sdl_tick (void)
     }
 
     static double accel = 1.0;
-    static uint32_t ts;
+    static timestamp_t ts;
 
     if (time_have_x_tenths_passed_since(5, ts)) {
         accel = 1.0;

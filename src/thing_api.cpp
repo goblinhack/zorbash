@@ -996,7 +996,7 @@ int Thing::incr_owned_count (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_bounce_begin
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_bounce_begin (void)
+timestamp_t Thing::get_timestamp_bounce_begin (void)
 {
     if (monst) {
         return (monst->timestamp_bounce_begin);
@@ -1005,35 +1005,35 @@ uint32_t Thing::get_timestamp_bounce_begin (void)
     }
 }
 
-uint32_t Thing::set_timestamp_bounce_begin (uint32_t v)
+timestamp_t Thing::set_timestamp_bounce_begin (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin = v);
 }
 
-uint32_t Thing::decr_timestamp_bounce_begin (uint32_t v)
+timestamp_t Thing::decr_timestamp_bounce_begin (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin -= v);
 }
 
-uint32_t Thing::incr_timestamp_bounce_begin (uint32_t v)
+timestamp_t Thing::incr_timestamp_bounce_begin (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin += v);
 }
 
-uint32_t Thing::decr_timestamp_bounce_begin (void)
+timestamp_t Thing::decr_timestamp_bounce_begin (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin--);
 }
 
-uint32_t Thing::incr_timestamp_bounce_begin (void)
+timestamp_t Thing::incr_timestamp_bounce_begin (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1043,7 +1043,7 @@ uint32_t Thing::incr_timestamp_bounce_begin (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_bounce_end
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_bounce_end (void)
+timestamp_t Thing::get_timestamp_bounce_end (void)
 {
     if (monst) {
         return (monst->timestamp_bounce_end);
@@ -1052,35 +1052,35 @@ uint32_t Thing::get_timestamp_bounce_end (void)
     }
 }
 
-uint32_t Thing::set_timestamp_bounce_end (uint32_t v)
+timestamp_t Thing::set_timestamp_bounce_end (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end = v);
 }
 
-uint32_t Thing::decr_timestamp_bounce_end (uint32_t v)
+timestamp_t Thing::decr_timestamp_bounce_end (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end -= v);
 }
 
-uint32_t Thing::incr_timestamp_bounce_end (uint32_t v)
+timestamp_t Thing::incr_timestamp_bounce_end (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end += v);
 }
 
-uint32_t Thing::decr_timestamp_bounce_end (void)
+timestamp_t Thing::decr_timestamp_bounce_end (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end--);
 }
 
-uint32_t Thing::incr_timestamp_bounce_end (void)
+timestamp_t Thing::incr_timestamp_bounce_end (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1090,7 +1090,7 @@ uint32_t Thing::incr_timestamp_bounce_end (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_last_i_was_hit
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_last_i_was_hit (void)
+timestamp_t Thing::get_timestamp_last_i_was_hit (void)
 {
     if (monst) {
         return (monst->timestamp_last_i_was_hit);
@@ -1099,35 +1099,35 @@ uint32_t Thing::get_timestamp_last_i_was_hit (void)
     }
 }
 
-uint32_t Thing::set_timestamp_last_i_was_hit (uint32_t v)
+timestamp_t Thing::set_timestamp_last_i_was_hit (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_i_was_hit = v);
 }
 
-uint32_t Thing::decr_timestamp_last_i_was_hit (uint32_t v)
+timestamp_t Thing::decr_timestamp_last_i_was_hit (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_i_was_hit -= v);
 }
 
-uint32_t Thing::incr_timestamp_last_i_was_hit (uint32_t v)
+timestamp_t Thing::incr_timestamp_last_i_was_hit (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_i_was_hit += v);
 }
 
-uint32_t Thing::decr_timestamp_last_i_was_hit (void)
+timestamp_t Thing::decr_timestamp_last_i_was_hit (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_i_was_hit--);
 }
 
-uint32_t Thing::incr_timestamp_last_i_was_hit (void)
+timestamp_t Thing::incr_timestamp_last_i_was_hit (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1137,7 +1137,7 @@ uint32_t Thing::incr_timestamp_last_i_was_hit (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_flip_start
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_flip_start (void)
+timestamp_t Thing::get_timestamp_flip_start (void)
 {
     if (monst) {
         return (monst->timestamp_flip_start);
@@ -1146,35 +1146,35 @@ uint32_t Thing::get_timestamp_flip_start (void)
     }
 }
 
-uint32_t Thing::set_timestamp_flip_start (uint32_t v)
+timestamp_t Thing::set_timestamp_flip_start (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start = v);
 }
 
-uint32_t Thing::decr_timestamp_flip_start (uint32_t v)
+timestamp_t Thing::decr_timestamp_flip_start (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start -= v);
 }
 
-uint32_t Thing::incr_timestamp_flip_start (uint32_t v)
+timestamp_t Thing::incr_timestamp_flip_start (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start += v);
 }
 
-uint32_t Thing::decr_timestamp_flip_start (void)
+timestamp_t Thing::decr_timestamp_flip_start (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start--);
 }
 
-uint32_t Thing::incr_timestamp_flip_start (void)
+timestamp_t Thing::incr_timestamp_flip_start (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1184,7 +1184,7 @@ uint32_t Thing::incr_timestamp_flip_start (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_move_start
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_move_begin (void)
+timestamp_t Thing::get_timestamp_move_begin (void)
 {
     if (monst) {
         return (monst->timestamp_move_begin);
@@ -1193,35 +1193,35 @@ uint32_t Thing::get_timestamp_move_begin (void)
     }
 }
 
-uint32_t Thing::set_timestamp_move_begin (uint32_t v)
+timestamp_t Thing::set_timestamp_move_begin (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin = v);
 }
 
-uint32_t Thing::decr_timestamp_move_begin (uint32_t v)
+timestamp_t Thing::decr_timestamp_move_begin (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin -= v);
 }
 
-uint32_t Thing::incr_timestamp_move_begin (uint32_t v)
+timestamp_t Thing::incr_timestamp_move_begin (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin += v);
 }
 
-uint32_t Thing::decr_timestamp_move_begin (void)
+timestamp_t Thing::decr_timestamp_move_begin (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin--);
 }
 
-uint32_t Thing::incr_timestamp_move_begin (void)
+timestamp_t Thing::incr_timestamp_move_begin (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1231,7 +1231,7 @@ uint32_t Thing::incr_timestamp_move_begin (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_move_end
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_move_end (void)
+timestamp_t Thing::get_timestamp_move_end (void)
 {
     if (monst) {
         return (monst->timestamp_move_end);
@@ -1240,35 +1240,35 @@ uint32_t Thing::get_timestamp_move_end (void)
     }
 }
 
-uint32_t Thing::set_timestamp_move_end (uint32_t v)
+timestamp_t Thing::set_timestamp_move_end (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end = v);
 }
 
-uint32_t Thing::decr_timestamp_move_end (uint32_t v)
+timestamp_t Thing::decr_timestamp_move_end (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end -= v);
 }
 
-uint32_t Thing::incr_timestamp_move_end (uint32_t v)
+timestamp_t Thing::incr_timestamp_move_end (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end += v);
 }
 
-uint32_t Thing::decr_timestamp_move_end (void)
+timestamp_t Thing::decr_timestamp_move_end (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end--);
 }
 
-uint32_t Thing::incr_timestamp_move_end (void)
+timestamp_t Thing::incr_timestamp_move_end (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1278,7 +1278,7 @@ uint32_t Thing::incr_timestamp_move_end (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_born
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_born (void)
+timestamp_t Thing::get_timestamp_born (void)
 {
     if (monst) {
         return (monst->timestamp_born);
@@ -1287,35 +1287,35 @@ uint32_t Thing::get_timestamp_born (void)
     }
 }
 
-uint32_t Thing::set_timestamp_born (uint32_t v)
+timestamp_t Thing::set_timestamp_born (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born = v);
 }
 
-uint32_t Thing::decr_timestamp_born (uint32_t v)
+timestamp_t Thing::decr_timestamp_born (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born -= v);
 }
 
-uint32_t Thing::incr_timestamp_born (uint32_t v)
+timestamp_t Thing::incr_timestamp_born (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born += v);
 }
 
-uint32_t Thing::decr_timestamp_born (void)
+timestamp_t Thing::decr_timestamp_born (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born--);
 }
 
-uint32_t Thing::incr_timestamp_born (void)
+timestamp_t Thing::incr_timestamp_born (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1325,7 +1325,7 @@ uint32_t Thing::incr_timestamp_born (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_hunger_tick
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_hunger_tick (void)
+timestamp_t Thing::get_timestamp_hunger_tick (void)
 {
     if (monst) {
         return (monst->timestamp_hunger_tick);
@@ -1334,35 +1334,35 @@ uint32_t Thing::get_timestamp_hunger_tick (void)
     }
 }
 
-uint32_t Thing::set_timestamp_hunger_tick (uint32_t v)
+timestamp_t Thing::set_timestamp_hunger_tick (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick = v);
 }
 
-uint32_t Thing::decr_timestamp_hunger_tick (uint32_t v)
+timestamp_t Thing::decr_timestamp_hunger_tick (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick -= v);
 }
 
-uint32_t Thing::incr_timestamp_hunger_tick (uint32_t v)
+timestamp_t Thing::incr_timestamp_hunger_tick (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick += v);
 }
 
-uint32_t Thing::decr_timestamp_hunger_tick (void)
+timestamp_t Thing::decr_timestamp_hunger_tick (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick--);
 }
 
-uint32_t Thing::incr_timestamp_hunger_tick (void)
+timestamp_t Thing::incr_timestamp_hunger_tick (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1372,7 +1372,7 @@ uint32_t Thing::incr_timestamp_hunger_tick (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_ai_next
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_ai_next (void)
+timestamp_t Thing::get_timestamp_ai_next (void)
 {
     if (monst) {
         return (monst->timestamp_ai_next);
@@ -1381,35 +1381,35 @@ uint32_t Thing::get_timestamp_ai_next (void)
     }
 }
 
-uint32_t Thing::set_timestamp_ai_next (uint32_t v)
+timestamp_t Thing::set_timestamp_ai_next (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next = v);
 }
 
-uint32_t Thing::decr_timestamp_ai_next (uint32_t v)
+timestamp_t Thing::decr_timestamp_ai_next (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next -= v);
 }
 
-uint32_t Thing::incr_timestamp_ai_next (uint32_t v)
+timestamp_t Thing::incr_timestamp_ai_next (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next += v);
 }
 
-uint32_t Thing::decr_timestamp_ai_next (void)
+timestamp_t Thing::decr_timestamp_ai_next (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next--);
 }
 
-uint32_t Thing::incr_timestamp_ai_next (void)
+timestamp_t Thing::incr_timestamp_ai_next (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1419,7 +1419,7 @@ uint32_t Thing::incr_timestamp_ai_next (void)
 ////////////////////////////////////////////////////////////////////////////
 // timestamp_collision
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_timestamp_collision (void)
+timestamp_t Thing::get_timestamp_collision (void)
 {
     if (monst) {
         return (monst->timestamp_collision);
@@ -1428,35 +1428,35 @@ uint32_t Thing::get_timestamp_collision (void)
     }
 }
 
-uint32_t Thing::set_timestamp_collision (uint32_t v)
+timestamp_t Thing::set_timestamp_collision (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision = v);
 }
 
-uint32_t Thing::decr_timestamp_collision (uint32_t v)
+timestamp_t Thing::decr_timestamp_collision (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision -= v);
 }
 
-uint32_t Thing::incr_timestamp_collision (uint32_t v)
+timestamp_t Thing::incr_timestamp_collision (timestamp_t v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision += v);
 }
 
-uint32_t Thing::decr_timestamp_collision (void)
+timestamp_t Thing::decr_timestamp_collision (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision--);
 }
 
-uint32_t Thing::incr_timestamp_collision (void)
+timestamp_t Thing::incr_timestamp_collision (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
@@ -1526,7 +1526,7 @@ uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
 uint32_t Thing::get_weapon_id (void)
 {
     if (monst) {
-        // con("get weapon id %08X", monst->weapon_id);
+        // con("get weapon ID %08X", monst->weapon_id);
         return (monst->weapon_id);
     } else {
         // con("get weapon id => none");
@@ -1537,7 +1537,7 @@ uint32_t Thing::get_weapon_id (void)
 uint32_t Thing::set_weapon_id (uint32_t v)
 {
     new_monst();
-    // con("set weapon id %08X", v);
+    // con("set weapon ID %08X", v);
     return (monst->weapon_id = v);
 }
 

@@ -88,6 +88,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid_text_box.o 		\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
+    $(OBJDIR)/world_fini.o 		\
+    $(OBJDIR)/world_init.o 		\
+    $(OBJDIR)/world_id.o 		\
 
 #
 # compile

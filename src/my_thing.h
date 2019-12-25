@@ -65,7 +65,7 @@ public:
 extern Path astar_solve(const point &at, std::multiset<Goal> &goals, Dmap *dmap, const point &start, const point &end);
 
 typedef struct AgeMap_ {
-    std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> val {};
+    std::array<std::array<timestamp_t, MAP_HEIGHT>, MAP_WIDTH> val {};
 } AgeMap;
 std::ostream& operator<<(std::ostream &out, Bits<const AgeMap & > const my);
 std::istream& operator>>(std::istream &in, Bits<AgeMap &> my);
@@ -98,16 +98,16 @@ typedef struct Monst_ {
     int          health = {}; 
     int          health_max = {}; 
     int          owned_count = {};           // How many things this thing owns.
-    uint32_t     timestamp_bounce_begin {};
-    uint32_t     timestamp_bounce_end {};
-    uint32_t     timestamp_last_i_was_hit {};
-    uint32_t     timestamp_flip_start {};    // Used for animating the steps.
-    uint32_t     timestamp_move_begin {};
-    uint32_t     timestamp_move_end {};
-    uint32_t     timestamp_born {};
-    uint32_t     timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
-    uint32_t     timestamp_ai_next {};
-    uint32_t     timestamp_collision {};
+    timestamp_t  timestamp_bounce_begin {};
+    timestamp_t  timestamp_bounce_end {};
+    timestamp_t  timestamp_last_i_was_hit {};
+    timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
+    timestamp_t  timestamp_move_begin {};
+    timestamp_t  timestamp_move_end {};
+    timestamp_t  timestamp_born {};
+    timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
+    timestamp_t  timestamp_ai_next {};
+    timestamp_t  timestamp_collision {};
     uint32_t     owner_id {};                // Who created this thing?
     uint32_t     weapon_id_carry_anim {};
     uint32_t     weapon_id_use_anim {};
@@ -132,8 +132,8 @@ public:
     fpoint   tl;                         // On screen coordinates
     uint32_t id;                         // Unique per thing.
     int16_t tp_id                 {-1};  // Common settings
-    uint16_t tile_curr;
-    uint32_t timestamp_next_frame {};
+    uint16_t tile_curr            {};
+    timestamp_t timestamp_next_frame {};
     uint32_t dir:4                {}; // Direction
     uint32_t has_ever_moved:1     {};
     uint32_t has_light:1          {};
@@ -235,75 +235,75 @@ public:
     int decr_owned_count(void);
     int incr_owned_count(void);
 
-    uint32_t set_timestamp_bounce_begin(uint32_t);
-    uint32_t get_timestamp_bounce_begin(void);
-    uint32_t decr_timestamp_bounce_begin(uint32_t);
-    uint32_t incr_timestamp_bounce_begin(uint32_t);
-    uint32_t decr_timestamp_bounce_begin(void);
-    uint32_t incr_timestamp_bounce_begin(void);
+    timestamp_t set_timestamp_bounce_begin(timestamp_t);
+    timestamp_t get_timestamp_bounce_begin(void);
+    timestamp_t decr_timestamp_bounce_begin(timestamp_t);
+    timestamp_t incr_timestamp_bounce_begin(timestamp_t);
+    timestamp_t decr_timestamp_bounce_begin(void);
+    timestamp_t incr_timestamp_bounce_begin(void);
 
-    uint32_t set_timestamp_bounce_end(uint32_t);
-    uint32_t get_timestamp_bounce_end(void);
-    uint32_t decr_timestamp_bounce_end(uint32_t);
-    uint32_t incr_timestamp_bounce_end(uint32_t);
-    uint32_t decr_timestamp_bounce_end(void);
-    uint32_t incr_timestamp_bounce_end(void);
+    timestamp_t set_timestamp_bounce_end(timestamp_t);
+    timestamp_t get_timestamp_bounce_end(void);
+    timestamp_t decr_timestamp_bounce_end(timestamp_t);
+    timestamp_t incr_timestamp_bounce_end(timestamp_t);
+    timestamp_t decr_timestamp_bounce_end(void);
+    timestamp_t incr_timestamp_bounce_end(void);
 
-    uint32_t set_timestamp_last_i_was_hit(uint32_t);
-    uint32_t get_timestamp_last_i_was_hit(void);
-    uint32_t decr_timestamp_last_i_was_hit(uint32_t);
-    uint32_t incr_timestamp_last_i_was_hit(uint32_t);
-    uint32_t decr_timestamp_last_i_was_hit(void);
-    uint32_t incr_timestamp_last_i_was_hit(void);
+    timestamp_t set_timestamp_last_i_was_hit(timestamp_t);
+    timestamp_t get_timestamp_last_i_was_hit(void);
+    timestamp_t decr_timestamp_last_i_was_hit(timestamp_t);
+    timestamp_t incr_timestamp_last_i_was_hit(timestamp_t);
+    timestamp_t decr_timestamp_last_i_was_hit(void);
+    timestamp_t incr_timestamp_last_i_was_hit(void);
 
-    uint32_t set_timestamp_flip_start(uint32_t);
-    uint32_t get_timestamp_flip_start(void);
-    uint32_t decr_timestamp_flip_start(uint32_t);
-    uint32_t incr_timestamp_flip_start(uint32_t);
-    uint32_t decr_timestamp_flip_start(void);
-    uint32_t incr_timestamp_flip_start(void);
+    timestamp_t set_timestamp_flip_start(timestamp_t);
+    timestamp_t get_timestamp_flip_start(void);
+    timestamp_t decr_timestamp_flip_start(timestamp_t);
+    timestamp_t incr_timestamp_flip_start(timestamp_t);
+    timestamp_t decr_timestamp_flip_start(void);
+    timestamp_t incr_timestamp_flip_start(void);
 
-    uint32_t set_timestamp_move_begin(uint32_t);
-    uint32_t get_timestamp_move_begin(void);
-    uint32_t decr_timestamp_move_begin(uint32_t);
-    uint32_t incr_timestamp_move_begin(uint32_t);
-    uint32_t decr_timestamp_move_begin(void);
-    uint32_t incr_timestamp_move_begin(void);
+    timestamp_t set_timestamp_move_begin(timestamp_t);
+    timestamp_t get_timestamp_move_begin(void);
+    timestamp_t decr_timestamp_move_begin(timestamp_t);
+    timestamp_t incr_timestamp_move_begin(timestamp_t);
+    timestamp_t decr_timestamp_move_begin(void);
+    timestamp_t incr_timestamp_move_begin(void);
 
-    uint32_t set_timestamp_move_end(uint32_t);
-    uint32_t get_timestamp_move_end(void);
-    uint32_t decr_timestamp_move_end(uint32_t);
-    uint32_t incr_timestamp_move_end(uint32_t);
-    uint32_t decr_timestamp_move_end(void);
-    uint32_t incr_timestamp_move_end(void);
+    timestamp_t set_timestamp_move_end(timestamp_t);
+    timestamp_t get_timestamp_move_end(void);
+    timestamp_t decr_timestamp_move_end(timestamp_t);
+    timestamp_t incr_timestamp_move_end(timestamp_t);
+    timestamp_t decr_timestamp_move_end(void);
+    timestamp_t incr_timestamp_move_end(void);
 
-    uint32_t set_timestamp_born(uint32_t);
-    uint32_t get_timestamp_born(void);
-    uint32_t decr_timestamp_born(uint32_t);
-    uint32_t incr_timestamp_born(uint32_t);
-    uint32_t decr_timestamp_born(void);
-    uint32_t incr_timestamp_born(void);
+    timestamp_t set_timestamp_born(timestamp_t);
+    timestamp_t get_timestamp_born(void);
+    timestamp_t decr_timestamp_born(timestamp_t);
+    timestamp_t incr_timestamp_born(timestamp_t);
+    timestamp_t decr_timestamp_born(void);
+    timestamp_t incr_timestamp_born(void);
 
-    uint32_t set_timestamp_hunger_tick(uint32_t);
-    uint32_t get_timestamp_hunger_tick(void);
-    uint32_t decr_timestamp_hunger_tick(uint32_t);
-    uint32_t incr_timestamp_hunger_tick(uint32_t);
-    uint32_t decr_timestamp_hunger_tick(void);
-    uint32_t incr_timestamp_hunger_tick(void);
+    timestamp_t set_timestamp_hunger_tick(timestamp_t);
+    timestamp_t get_timestamp_hunger_tick(void);
+    timestamp_t decr_timestamp_hunger_tick(timestamp_t);
+    timestamp_t incr_timestamp_hunger_tick(timestamp_t);
+    timestamp_t decr_timestamp_hunger_tick(void);
+    timestamp_t incr_timestamp_hunger_tick(void);
 
-    uint32_t set_timestamp_ai_next(uint32_t);
-    uint32_t get_timestamp_ai_next(void);
-    uint32_t decr_timestamp_ai_next(uint32_t);
-    uint32_t incr_timestamp_ai_next(uint32_t);
-    uint32_t decr_timestamp_ai_next(void);
-    uint32_t incr_timestamp_ai_next(void);
+    timestamp_t set_timestamp_ai_next(timestamp_t);
+    timestamp_t get_timestamp_ai_next(void);
+    timestamp_t decr_timestamp_ai_next(timestamp_t);
+    timestamp_t incr_timestamp_ai_next(timestamp_t);
+    timestamp_t decr_timestamp_ai_next(void);
+    timestamp_t incr_timestamp_ai_next(void);
 
-    uint32_t set_timestamp_collision(uint32_t);
-    uint32_t get_timestamp_collision(void);
-    uint32_t decr_timestamp_collision(uint32_t);
-    uint32_t incr_timestamp_collision(uint32_t);
-    uint32_t decr_timestamp_collision(void);
-    uint32_t incr_timestamp_collision(void);
+    timestamp_t set_timestamp_collision(timestamp_t);
+    timestamp_t get_timestamp_collision(void);
+    timestamp_t decr_timestamp_collision(timestamp_t);
+    timestamp_t incr_timestamp_collision(timestamp_t);
+    timestamp_t decr_timestamp_collision(void);
+    timestamp_t incr_timestamp_collision(void);
 
     uint32_t set_owner_id(uint32_t);
     uint32_t get_owner_id(void);
@@ -488,7 +488,7 @@ public:
     void blit_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
     void blit_upside_down(double offset_x, double offset_y, int x, int y);
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
-    void bounce(double bounce_height, double bounce_fade, uint32_t ms, uint32_t bounce_count);
+    void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);
     void carry(Thingp w);
     void collision_check_do();
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

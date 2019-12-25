@@ -71,12 +71,12 @@ static Widp wid_moving {};
 static int32_t wid_moving_last_x;
 static int32_t wid_moving_last_y;
 
-static uint32_t wid_time;
+static timestamp_t wid_time;
 
 //
 // Widget effects
 //
-const int32_t wid_destroy_delay_ms = 200;
+const timestamp_t wid_destroy_delay_ms = 200;
 
 //
 // Prototypes.
@@ -3501,40 +3501,48 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             switch ((int32_t)key->sym) {
                 case '\\':
                     sdl_screenshot();
-                    CON("Screenshot taken");
+                    CON("player: screenshot taken");
                     break;
 
                 case '1':
+                    CON("player: gfx show inverted toggle");
                     config_gfx_inverted_toggle();
                     break;
 
                 case '2':
+                    CON("player: gfx show lights toggle");
                     config_gfx_lights_toggle();
                     break;
 
                 case '3':
+                    CON("player: gfx show hidden toggle");
                     config_gfx_show_hidden_toggle();
                     break;
 
                 case 'z':
+                    CON("player: zoom in");
                     config_gfx_zoom_in();
                     break;
 
                 case 'r':
-                    CON("reloading dungeon");
+                    CON("player: reloading dungeon, destroy old");
                     game->fini();
                     game->init();
+                    CON("player: reloaded dungeon");
                     break;
 
                 case 's':
-                    CON("player requested save game");
+                    CON("player: saving the game");
                     game->save();
+                    CON("player: saved the game");
                     break;
 
                 case 'l':
-                    CON("player requested load game");
+                    CON("player: loading a saved game, destroy old");
                     game->fini();
+                    CON("player: loaded a saved game, load new");
                     game->load();
+                    CON("player: loaded a saved game");
                     break;
 
                 case '`':
@@ -4556,7 +4564,7 @@ void wid_joy_button (int32_t x, int32_t y)
     //
     // Only if there is a change in status, send an event.
     //
-    static std::array<uint32_t, SDL_MAX_BUTTONS> ts;
+    static std::array<timestamp_t, SDL_MAX_BUTTONS> ts;
     int changed = false;
     int b;
 
