@@ -328,7 +328,7 @@ WidKeyType wid_unsorted_get_key(Widp w);
 typedef struct wid_move_ {
     int moving_endx;
     int moving_endy;
-    uint32_t timestamp_moving_end;
+    timestamp_t timestamp_moving_end;
 } wid_move_t;
 
 class Wid {
@@ -482,9 +482,9 @@ public:
     //
     point text_pos {};
 
-    uint32_t destroy_when {};
-    uint32_t timestamp_created {};
-    uint32_t timestamp_last_mode_change {};
+    timestamp_t destroy_when {};
+    timestamp_t timestamp_created {};
+    timestamp_t timestamp_last_mode_change {};
 
     //
     // Queue of wid move requests.
@@ -493,8 +493,8 @@ public:
     std::array<wid_move_t, WID_MAX_MOVE_QUEUE> move {};
     point moving_start {};
     point moving_end {};
-    uint32_t timestamp_moving_begin {};
-    uint32_t timestamp_moving_end {};
+    timestamp_t timestamp_moving_begin {};
+    timestamp_t timestamp_moving_end {};
     uint8_t moving {};
 
     //

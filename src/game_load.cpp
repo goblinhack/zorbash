@@ -8,18 +8,20 @@
 #include <sstream>
 #include "minilzo.h"
 
-static uint32_t timestamp_dungeon_created;
-static uint32_t ts_tmp;
+static timestamp_t old_timestamp_dungeon_created;
+static timestamp_t new_timestamp_dungeon_created;
+static timestamp_t ts_tmp;
 
 //
 // Save timestamps as a delta we can restore.
 //
-static uint32_t load_timestamp (uint32_t ts)
+static timestamp_t load_timestamp (timestamp_t ts)
 {
     if (!ts) {
         return (0);
     }
-    return (timestamp_dungeon_created + ts);
+    return (ts - old_timestamp_dungeon_created +
+            new_timestamp_dungeon_created);
 }
 
 std::istream& operator>>(std::istream &in, Bits<AgeMapp &> my)
@@ -110,16 +112,11 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(my.t->last_mid_at);
     in >> bits(my.t->mid_at);
     in >> bits(my.t->tl);
-    in >> bits(my.t->id);
-    if (!my.t->id) {
-        DIE("loaded a thing with no ID");
-    }
+    in >> bits(my.t->id); if (!my.t->id) { DIE("loaded a thing with no ID"); }
     in >> bits(my.t->tile_curr);
     in >> bits(ts_tmp); my.t->timestamp_next_frame = load_timestamp(ts_tmp);
 
-    uint8_t dir;
-    in >> dir;
-    my.t->dir = dir;
+    uint8_t dir; in >> dir; my.t->dir = dir;
 
     in >> bits(bits32);
     int shift = 0;
@@ -159,8 +156,14 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     my.t.all_thing_ptrs = {};
     my.t.all_thing_ids_at = {};
 
-    my.t.timestamp_dungeon_created = timestamp_dungeon_created;
-    in >> bits(my.t._is_blood);
+    in >> bits(my.t.timestamp_dungeon_created); old_timestamp_dungeon_created = my.t.timestamp_dungeon_created;
+    in >> bits(my.t.timestamp_dungeon_saved);
+    auto dungeon_age = game->world.timestamp_dungeon_saved -
+                       game->world.timestamp_dungeon_created;
+    new_timestamp_dungeon_created = time_get_time_ms() - dungeon_age;
+    my.t.timestamp_dungeon_created = new_timestamp_dungeon_created;
+    my.t.timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
+
     in >> bits(my.t._is_blood);
     in >> bits(my.t._is_corridor);
     in >> bits(my.t._is_deep_water);
@@ -193,11 +196,19 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = get(my.t.all_thing_ids_at, x, y)[z];
+                auto id = get(my.t.all_thing_ids_at, x, y, z);
                 if (id) {
+#ifdef ENABLE_THING_ID_LOGS
+                    auto o = my.t.test_thing_ptr(id);
+                    if (o) {
+                        o->die("thing already exists for ID %08X", id);
+                    }
+#endif
                     auto t = new Thing();
                     in >> bits(t);
+#ifdef ENABLE_THING_ID_LOGS
                     t->log("load");
+#endif
                     t->reinit();
                 }
             }
@@ -306,7 +317,7 @@ Game::load (void)
     lzo_uint new_len = 0;
     int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
-        CON("%s: decompressed %lu to %lu bytes",
+        CON("dungeon: loading %s, decompressed from %lu to %lu bytes",
             saved_file.c_str(),
             (unsigned long) compressed_len,
             (unsigned long) uncompressed_len);
@@ -318,17 +329,12 @@ Game::load (void)
 //    std::cout << "decompressed as ";
 //    hexdump((const unsigned char *)uncompressed, uncompressed_len);
 
-    //
-    // For timestamp save/load
-    //
-    timestamp_dungeon_created = time_get_time_ms();
-
     std::string s((const char*)uncompressed, (size_t)uncompressed_len);
     std::istringstream in(s);
     class Game &c = *this;
     in >> bits(c);
 //    this->dump("", std::cout);
-
+//
     free(uncompressed);
     free(compressed);
 
@@ -336,6 +342,6 @@ Game::load (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("dungeon: loaded %s seed %d", saved_file.c_str(), seed);
+    CON("dungeon: loaded %s, seed %d", saved_file.c_str(), seed);
     LOG("-");
 }

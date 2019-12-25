@@ -1399,7 +1399,7 @@ public:
             if (!ncandidates) {
                 rooms_print_all(g);
                 dump();
-                DIE("no grid room candidates at %d %d", x, y);
+                DIE("no grid room candidates at (%d,%d)", x, y);
                 return (false);
             }
 	}

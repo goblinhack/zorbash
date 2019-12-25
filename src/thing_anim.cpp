@@ -259,7 +259,7 @@ log("tile %s got one", tile_name(tile).c_str());
     //
     // When does this tile expire ?
     //
-    uint32_t delay = tile_delay_ms(tile);
+    timestamp_t delay = tile_delay_ms(tile);
     if (delay) {
         delay = delay + (myrand() % delay) / 5;
     }

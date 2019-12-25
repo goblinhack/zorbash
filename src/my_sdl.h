@@ -11,6 +11,7 @@
 #include <SDL.h>
 #include <SDL_keyboard.h>
 #include "my_command.h"
+typedef int32_t timestamp_t;
 
 uint8_t sdl_init(void);
 void sdl_fini(void);
@@ -18,7 +19,7 @@ void sdl_loop(void);
 void sdl_show_keyboard(void);
 void my_sdl_hide_keyboard(void);
 void sdl_exit(void);
-void sdl_joy_rumble(float strength, uint32_t ms);
+void sdl_joy_rumble(float strength, timestamp_t ms);
 
 extern uint8_t sdl_init_video;
 extern uint8_t sdl_exiting;
@@ -59,7 +60,7 @@ void sdl_mouse_center(void);
 void sdl_mouse_warp(int x, int y);
 
 extern uint32_t mouse_down;
-extern uint32_t mouse_down_when;
+extern timestamp_t mouse_down_when;
 extern int mouse_x;
 extern int mouse_y;
 extern int wheel_x;

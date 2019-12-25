@@ -13,6 +13,7 @@
 //
 #define DEBUG_CRASH
 #ifdef DEBUG_CRASH
+#undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_TRACING             // Function tracing
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV

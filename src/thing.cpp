@@ -16,7 +16,7 @@ void thing_gc (void)
     for (auto id : things_to_delete) {
         auto t = thing_find(id);
         if (!t) {
-            ERR("thing %08X not found to garbage collect", id);
+            ERR("thing ID %08X not found to garbage collect", id);
             continue;
         }
 
@@ -221,9 +221,8 @@ _
 void Thing::reinit (void)
 {_
     verify(this);
-_
+
     world->realloc_thing_id(this);
-_
     const auto tpp = tp();
 
     //
@@ -233,7 +232,7 @@ _
     if (tp_is_monst(tpp) || tp_is_player(tpp)) {
         set_timestamp_born(time_get_time_ms_cached());
     }
-_
+
     if (unlikely(tp_is_player(tpp))) {
         if (world->player && (world->player != this)) {
             DIE("player exists in multiple places on map, %f, %f and %f, %f",
@@ -245,12 +244,12 @@ _
         world->player = this;
         log("player recreated");
     }
-_
+
     point new_at((int)mid_at.x, (int)mid_at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
         DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
     }
-_
+
     if (tp_is_wall(tpp)) {
         world->set_wall(new_at.x, new_at.y);
     }
@@ -282,23 +281,20 @@ _
     if (tp_gfx_large_shadow_caster(tpp)) {
         world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
     }
-_
+
     if (tp_is_loggable(tpp)) {
         log("recreated");
     }
-_
-con("%u %u", get_timestamp_move_begin(), get_timestamp_move_end());
+
     update_coordinates();
-_
+
     //
     // Upon a load it was attached at save time but not now
     //
     if (is_attached) {
-        is_attached = false;
-_
         attach();
     }
-_
+
     update_light();
 }
 
@@ -439,7 +435,7 @@ void Thing::hooks_remove ()
     }
 
     if (owner) {
-        log("detach %08X from owner %s", id, owner->to_string().c_str());
+        log("detach ID %08X from owner %s", id, owner->to_string().c_str());
 
         if (id == owner->get_weapon_id()) {
             owner->unwield("remove hooks");
@@ -516,7 +512,7 @@ void Thing::hooks_remove ()
     // Some things have lots of things they own
     //
     if (get_owned_count()) {
-        log("remove remaining %08X owned things", get_owned_count());
+        log("remove remaining ID %08X owned things", get_owned_count());
 
         //
         // Slow, but not used too often
@@ -620,7 +616,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_carry_anim()) {
         auto w = thing_find(get_weapon_id_carry_anim());
         if (!w) {
-            die("weapon_id_carry_anim set to %08X but not found",
+            die("weapon_id_carry_anim set to ID %08X but not found",
                 get_weapon_id_carry_anim());
         }
         w->move_to(mid_at);
@@ -630,7 +626,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_use_anim()) {
         auto w = thing_find(get_weapon_id_use_anim());
         if (!w) {
-            die("weapon_id_use_anim set to %08X but not found",
+            die("weapon_id_use_anim set to ID %08X but not found",
                 get_weapon_id_use_anim());
         }
         w->move_to(mid_at);
@@ -655,25 +651,19 @@ std::string Thing::to_string (void)
     auto tpp = tp();
     verify(this);
     verify(tpp);
-#if 1
     if (get_health_max()) {
-        return (string_sprintf("%08X(%s%s hp %d(%d)) at (%g,%g)",
+        return (string_sprintf("ID %08X(%s%s hp %d(%d)) at (%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
                                get_health(),
                                get_health_max(),
                                mid_at.x, mid_at.y));
     } else {
-        return (string_sprintf("%08X(%s%s) at (%g,%g)",
+        return (string_sprintf("ID %08X(%s%s) at (%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
                                mid_at.x, mid_at.y));
     }
-#else
-    return (string_sprintf("%08X(%s%s)",
-                           id, tpp->name.c_str(),
-                           is_dead ? "/dead" : ""));
-#endif
 }
 
 std::string Thing::to_name (void)

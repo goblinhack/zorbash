@@ -95,6 +95,9 @@ void things_tick (void)
         return;
     }
 
+    LOG("-");
+    LOG("tick all things");
+
     //
     // Update the cursor position
     //
