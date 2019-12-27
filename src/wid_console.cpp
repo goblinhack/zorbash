@@ -14,6 +14,8 @@
 #include "my_string.h"
 #include "my_wid.h"
 #include "my_ascii.h"
+#include "my_string.h"
+#include <algorithm>
 
 static int32_t wid_console_inited;
 static int32_t wid_console_exiting;
@@ -258,4 +260,29 @@ static void wid_console_wid_create (void)
     wid_console_window->ignore_for_mouse_down = true;
 
     wid_update(wid_console_window);
+}
+
+std::vector<std::wstring> wid_console_serialize (void)
+{_
+    std::vector<std::wstring> r;
+    auto tmp = wid_get_head(wid_console_input_line);
+    while (tmp) {
+        auto s = wid_get_text(tmp);
+        if (s.size()) {
+            r.push_back(wid_get_text(tmp));
+        }
+        tmp = wid_get_next(tmp);
+    }
+    std::reverse(r.begin(), r.end());
+    return (r);
+}
+
+void wid_console_deserialize(std::vector<std::wstring> r)
+{_
+    for (auto s : r) {
+        auto tmp = wstring_to_string(s);
+        if (tmp.size()) {
+            wid_console_log(s);
+        }
+    }
 }

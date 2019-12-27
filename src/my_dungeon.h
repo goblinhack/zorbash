@@ -300,7 +300,7 @@ public:
 
         water_fixup();
 
-        LOG("final dungeon:");
+        LOG("final DUNGEON:");
         dump();
     }
 
@@ -1054,8 +1054,8 @@ public:
             return;
         }
 
-        LOG("dungeon: seed %u (with room depth)", seed);
-        //printf("dungeon: seed %u (with room depth)\n", seed);
+        LOG("DUNGEON: seed %u (with room depth)", seed);
+        //printf("DUNGEON: seed %u (with room depth)\n", seed);
         for (auto y = 0; y < map_height; y++) {
             std::string s;
             for (auto x = 0; x < map_width; x++) {
@@ -1111,8 +1111,8 @@ public:
         //
         // Pass 2 without room depths
         //
-        LOG("dungeon: seed %u (more readable version)", seed);
-        //printf("dungeon: seed %u (more readable version)\n", seed);
+        LOG("DUNGEON: seed %u (more readable version)", seed);
+        //printf("DUNGEON: seed %u (more readable version)\n", seed);
         for (auto y = 0; y < map_height; y++) {
             std::string s;
             for (auto x = 0; x < map_width; x++) {
@@ -1833,7 +1833,7 @@ public:
             putc(start.x, start.y, MAP_DEPTH_WALLS, Charmap::DEBUG);
             putc(end.x, end.y, MAP_DEPTH_WALLS, Charmap::DEBUG);
 
-            DBG("dungeon: failed to create corridor, end not found between %d,%d and %d,%d",
+            DBG("DUNGEON: failed to create corridor, end not found between %d,%d and %d,%d",
                 start.x, start.y, end.x, end.y);
             return (0);
         }

@@ -1119,7 +1119,7 @@ void config_gfx_zoom_update (void)
 void config_gfx_zoom_in (void)
 {_
     game->config.gfx_zoom++;
-    CON("gfx zoom set to %d", game->config.gfx_zoom);
+    CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
     config_gfx_zoom_update();
 }
 
@@ -1129,7 +1129,7 @@ void config_gfx_zoom_out (void)
     if (game->config.gfx_zoom < 1) {
         game->config.gfx_zoom = 1;
     }
-    CON("gfx zoom set to %d", game->config.gfx_zoom);
+    CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
     config_gfx_zoom_update();
 }
 
@@ -1142,14 +1142,14 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
 
     if (!s || (*s == '\0')) {
         game->config.gfx_zoom = 1;
-        CON("gfx zoom enabled (default)");
+        CON("USERCFG: gfx zoom enabled (default)");
     } else {
         int val = strtol(s, 0, 10);
         game->config.gfx_zoom = val;
         if (game->config.gfx_zoom < 1) {
             game->config.gfx_zoom = 1;
         }
-        CON("gfx zoom set to %d", val);
+        CON("USERCFG: gfx zoom set to %d", val);
     }
     config_gfx_zoom_update();
 
@@ -1170,10 +1170,10 @@ uint8_t config_vsync_enable (tokens_t *tokens, void *context)
     }
 
     if (game->config.vsync_enable) {
-        CON("Vsync enabled");
+        CON("USERCFG: Vsync enabled");
         SDL_GL_SetSwapInterval(1);
     } else {
-        CON("Vsync disabled");
+        CON("USERCFG: Vsync disabled");
         SDL_GL_SetSwapInterval(0);
     }
 

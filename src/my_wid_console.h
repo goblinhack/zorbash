@@ -23,3 +23,6 @@ extern Widp wid_console_container;
 #include "my_sdl.h"
 
 uint8_t wid_console_receive_input(Widp w, const SDL_KEYSYM *key);
+
+std::vector<std::wstring> wid_console_serialize(void);
+void wid_console_deserialize(std::vector<std::wstring> r);

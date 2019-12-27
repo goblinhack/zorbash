@@ -142,7 +142,7 @@ extern int TILES_DOWN;
 //
 #define MINICON_TEXT_COLOR          GRAY
 #define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
-#define MINICON_HEIGHT              200 // scrollbar limit
+#define MINICON_HEIGHT              20 // scrollbar limit
 #define MINICON_VIS_HEIGHT          5
 #define MINICON_VIS_WIDTH           MINICON_WIDTH
 
