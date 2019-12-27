@@ -32,6 +32,8 @@ strlcat_(char * dst, const char * src, size_t size);
 
 std::wstring string_to_wstring(const std::string& s);
 std::string wstring_to_string(const std::wstring& s);
+std::string ws_to_utf8(std::wstring const& s);
+std::wstring utf8_to_ws(std::string const& utf8);
 
 void strrepc(char *s, const char *replace_set, char replace_with);
 char *strappend(const char *in, const char *append);

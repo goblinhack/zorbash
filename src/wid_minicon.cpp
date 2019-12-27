@@ -219,3 +219,26 @@ static void wid_minicon_wid_create (void)
 
     wid_update(wid_minicon_window);
 }
+
+std::vector<std::wstring> wid_minicon_serialize (void)
+{_
+    std::vector<std::wstring> r;
+    auto tmp = wid_get_head(wid_minicon_input_line);
+    while (tmp) {
+        auto s = wid_get_text(tmp);
+        r.push_back(wid_get_text(tmp));
+        tmp = wid_get_next(tmp);
+    }
+    return (r);
+}
+
+void wid_minicon_deserialize(std::vector<std::wstring> r)
+{_
+    for (auto s : r) {
+        auto tmp = wstring_to_string(s);
+        if (tmp.size()) {
+            MINICON("%s", tmp.c_str());
+            wid_minicon_log(s);
+        }
+    }
+}
