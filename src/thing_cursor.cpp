@@ -7,6 +7,8 @@
 #include "my_game.h"
 #include "my_wid_console.h"
 #include "my_sdl.h"
+#include "my_ascii.h"
+#include "my_wid.h"
 #include <algorithm>
 
 //
@@ -14,6 +16,12 @@
 //
 void thing_cursor_move (void)
 {_
+    int x = mouse_x;
+    int y = mouse_y;
+    pixel_to_ascii(&x, &y);
+    if (get(wid_on_screen_at, x, y)) {
+        return;
+    }
     if ((wheel_x != 0) || (wheel_y != 0)) {
         world->map_wanted_at += fpoint(wheel_x, -wheel_y);
     }

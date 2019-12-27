@@ -822,11 +822,11 @@ void Game::init (void)
 //        world->terrain = terrain_init(seed);
 //
     LOG("-");
-    CON("dungeon: creating seed %u", seed);
+    CON("DUNGEON: creating, seed %u", seed);
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 _
-    LOG("dungeon: create blocks");
+    LOG("DUNGEON: create blocks");
     world.clear();
 
     mysrand(seed);
@@ -940,6 +940,6 @@ _
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("dungeon: created seed %u", seed);
+    CON("DUNGEON: created, seed %u", seed);
     LOG("-");
 }

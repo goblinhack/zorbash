@@ -490,6 +490,13 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
+    //
+    // Need this to get the UTF on the console
+    //
+    std::locale loc("");
+    std::ios_base::sync_with_stdio(false);
+    std::wcout.imbue(loc);
+
     double mean = 1.0;
     double std = 0.5;
     std::normal_distribution<double> distribution;

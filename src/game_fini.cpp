@@ -13,7 +13,7 @@ void Config::fini (void)
 void Game::fini (void)
 {
     LOG("-");
-    CON("dungeon: destroying dungeon %u", seed);
+    CON("DUNGEON: destroying dungeon, seed %u", seed);
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -23,6 +23,6 @@ void Game::fini (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("dungeon: destroyed dungeon %u", seed);
+    CON("DUNGEON: destroyed dungeon, seed %u", seed);
     LOG("-");
 }

@@ -8,6 +8,7 @@
 #include <sstream>
 #include "minilzo.h"
 #include "my_wid_minicon.h"
+#include "my_wid_console.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
@@ -259,6 +260,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.config);
     in >> bits(my.t.world);
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
+                                 in >> bits(s); wid_console_deserialize(s);
     return (in);
 }
 
@@ -300,7 +302,7 @@ void
 Game::load (void)
 {_
     LOG("-");
-    CON("dungeon: loading %s", saved_file.c_str());
+    CON("DUNGEON: loading %s", saved_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -319,7 +321,7 @@ Game::load (void)
     lzo_uint new_len = 0;
     int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
-        CON("dungeon: loading %s, decompressed from %lu to %lu bytes",
+        CON("DUNGEON: loading %s, decompressed from %lu to %lu bytes",
             saved_file.c_str(),
             (unsigned long) compressed_len,
             (unsigned long) uncompressed_len);
@@ -344,6 +346,6 @@ Game::load (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("dungeon: loaded %s, seed %d", saved_file.c_str(), seed);
+    CON("DUNGEON: loaded %s, seed %d", saved_file.c_str(), seed);
     LOG("-");
 }

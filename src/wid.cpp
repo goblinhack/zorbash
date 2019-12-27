@@ -57,7 +57,7 @@ static wid_key_map_int wid_top_level5;
 //
 static Widp wid_focus_locked {};
 static Widp wid_focus {};
-static Widp wid_over {};
+Widp wid_over {};
 
 //
 // Mouse
@@ -3502,55 +3502,55 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 case '\\':
                     sdl_screenshot();
                     MINICON("Screenshot taken");
-                    MINICON("player: screenshot taken");
+                    MINICON("USERCFG: screenshot taken");
                     break;
 
                 case '1':
                     MINICON("Show inverted toggle");
-                    CON("player: gfx show inverted toggle");
+                    CON("USERCFG: gfx show inverted toggle");
                     config_gfx_inverted_toggle();
                     break;
 
                 case '2':
                     MINICON("Show lights toggle");
-                    CON("player: gfx show lights toggle");
+                    CON("USERCFG: gfx show lights toggle");
                     config_gfx_lights_toggle();
                     break;
 
                 case '3':
                     MINICON("Show hidden objects toggle");
-                    CON("player: gfx show hidden toggle");
+                    CON("USERCFG: gfx show hidden toggle");
                     config_gfx_show_hidden_toggle();
                     break;
 
                 case 'z':
                     MINICON("Zoom in");
-                    CON("player: zoom in");
+                    CON("USERCFG: zoom in");
                     config_gfx_zoom_in();
                     break;
 
                 case 'r':
                     MINICON("Creating a new dungeon");
-                    CON("player: reloading dungeon, destroy old");
+                    CON("USERCFG: reloading dungeon, destroy old");
                     game->fini();
                     game->init();
-                    CON("player: reloaded dungeon");
+                    CON("USERCFG: reloaded dungeon");
                     break;
 
                 case 's':
                     MINICON("Saving the game");
-                    CON("player: saving the game");
+                    CON("USERCFG: saving the game");
                     game->save();
-                    CON("player: saved the game");
+                    CON("USERCFG: saved the game");
                     break;
 
                 case 'l':
                     MINICON("Loading a saved game");
-                    CON("player: loading a saved game, destroy old");
+                    CON("USERCFG: loading a saved game, destroy old");
                     game->fini();
-                    CON("player: loaded a saved game, load new");
+                    CON("USERCFG: loaded a saved game, load new");
                     game->load();
-                    CON("player: loaded a saved game");
+                    CON("USERCFG: loaded a saved game");
                     break;
 
                 case '`':
@@ -3612,7 +3612,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             switch ((int32_t)key->sym) {
             case 'z':
                 MINICON("Zoom out");
-                CON("player: zoom out");
+                CON("USERCFG: zoom out");
                 config_gfx_zoom_out();
                 break;
             }

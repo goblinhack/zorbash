@@ -8,6 +8,7 @@
 #include <sstream>
 #include "minilzo.h"
 #include "my_wid_minicon.h"
+#include "my_wid_console.h"
 
 std::ostream& operator<<(std::ostream &out, Bits<AgeMapp & > const my)
 {
@@ -208,6 +209,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.config);
     out << bits(my.t.world);
     out << bits(wid_minicon_serialize());
+    out << bits(wid_console_serialize());
 
     return (out);
 }
@@ -216,7 +218,7 @@ void
 Game::save (void)
 {_
     LOG("-");
-    CON("dungeon: saving %s seed %d", saved_file.c_str(), seed);
+    CON("DUNGEON: saving %s seed %d", saved_file.c_str(), seed);
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -251,7 +253,7 @@ Game::save (void)
     int r = lzo1x_1_compress((lzo_bytep)uncompressed, uncompressed_len,
                              (lzo_bytep)compressed, &compressed_len, wrkmem);
     if (r == LZO_E_OK) {
-        CON("dungeon: saved as %s, compressed from %lu to %lu bytes",
+        CON("DUNGEON: saved as %s, compressed from %lu to %lu bytes",
             saved_file.c_str(),
             (unsigned long) uncompressed_len,
             (unsigned long) compressed_len);
@@ -279,6 +281,6 @@ Game::save (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("dungeon: saved %s seed %d", saved_file.c_str(), seed);
+    CON("DUNGEON: saved %s seed %d", saved_file.c_str(), seed);
     LOG("-");
 }

@@ -556,6 +556,9 @@ void wid_set_bg_tile(Widp w, Tilep tile);
 void wid_set_fg_tile(Widp w, Tilep tile);
 
 extern Widp wid_mouse_template;
+extern Widp wid_over;
 
 extern const int32_t wid_destroy_delay_ms;
+extern std::array<
+         std::array<Widp, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> wid_on_screen_at;
 #endif
