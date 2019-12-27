@@ -7,6 +7,7 @@
 #include "my_dungeon.h"
 #include <sstream>
 #include "minilzo.h"
+#include "my_wid_minicon.h"
 
 std::ostream& operator<<(std::ostream &out, Bits<AgeMapp & > const my)
 {
@@ -206,6 +207,8 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.fps_count);
     out << bits(my.t.config);
     out << bits(my.t.world);
+    out << bits(wid_minicon_serialize());
+
     return (out);
 }
 
@@ -226,14 +229,14 @@ Game::save (void)
     //
     // Get the pre compress buffer
     //
-    auto data = s.str().c_str();
+    auto data = s.str();
     s.seekg(0, std::ios::end);
     lzo_uint uncompressed_len = s.tellg();
     s.seekg(0, std::ios::beg);
 
     HEAP_ALLOC(uncompressed, uncompressed_len);
     HEAP_ALLOC(compressed, uncompressed_len);
-    memcpy(uncompressed, data, uncompressed_len);
+    memcpy(uncompressed, data.c_str(), uncompressed_len);
 
 //    std::cout << "before compression ";
 //    (void) hexdump((const unsigned char*)uncompressed, uncompressed_len);

@@ -7,6 +7,7 @@
 #include "my_dungeon.h"
 #include <sstream>
 #include "minilzo.h"
+#include "my_wid_minicon.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
@@ -257,6 +258,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.fps_count);
     in >> bits(my.t.config);
     in >> bits(my.t.world);
+    std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
     return (in);
 }
 

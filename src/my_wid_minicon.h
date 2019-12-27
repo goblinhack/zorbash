@@ -20,4 +20,7 @@ extern Widp wid_minicon_input_line;
 extern Widp wid_minicon_window;
 extern Widp wid_minicon_container;
 
+std::vector<std::wstring> wid_minicon_serialize(void);
+void wid_minicon_deserialize(std::vector<std::wstring> r);
+
 #include "my_sdl.h"

@@ -3501,30 +3501,36 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             switch ((int32_t)key->sym) {
                 case '\\':
                     sdl_screenshot();
-                    CON("player: screenshot taken");
+                    MINICON("Screenshot taken");
+                    MINICON("player: screenshot taken");
                     break;
 
                 case '1':
+                    MINICON("Show inverted toggle");
                     CON("player: gfx show inverted toggle");
                     config_gfx_inverted_toggle();
                     break;
 
                 case '2':
+                    MINICON("Show lights toggle");
                     CON("player: gfx show lights toggle");
                     config_gfx_lights_toggle();
                     break;
 
                 case '3':
+                    MINICON("Show hidden objects toggle");
                     CON("player: gfx show hidden toggle");
                     config_gfx_show_hidden_toggle();
                     break;
 
                 case 'z':
+                    MINICON("Zoom in");
                     CON("player: zoom in");
                     config_gfx_zoom_in();
                     break;
 
                 case 'r':
+                    MINICON("Creating a new dungeon");
                     CON("player: reloading dungeon, destroy old");
                     game->fini();
                     game->init();
@@ -3532,12 +3538,14 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     break;
 
                 case 's':
+                    MINICON("Saving the game");
                     CON("player: saving the game");
                     game->save();
                     CON("player: saved the game");
                     break;
 
                 case 'l':
+                    MINICON("Loading a saved game");
                     CON("player: loading a saved game, destroy old");
                     game->fini();
                     CON("player: loaded a saved game, load new");
@@ -3603,6 +3611,8 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
         case KMOD_RSHIFT:
             switch ((int32_t)key->sym) {
             case 'z':
+                MINICON("Zoom out");
+                CON("player: zoom out");
                 config_gfx_zoom_out();
                 break;
             }
