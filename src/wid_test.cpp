@@ -72,7 +72,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "food_frog1");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -89,7 +89,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "key1.1");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -106,7 +106,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "food_frog1");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -123,7 +123,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.1");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -140,7 +140,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.2");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
@@ -158,7 +158,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.3");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -175,7 +175,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.4");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -192,7 +192,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.5");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -209,7 +209,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "gem1.6");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -226,7 +226,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_fg_tilename(w, "sword1.1");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
@@ -283,7 +283,7 @@ static void wid_test_wid_create (void)
         point br = {5, y_at + 5};
 
         wid_set_pos(w, tl, br);
-        wid_set_on_m_down(w, wid_test_mouse_down);
+        wid_set_on_mouse_down(w, wid_test_mouse_down);
         wid_set_style(w, 4);
         wid_set_bg_tilename(w, "player1.pose");
     }
@@ -575,11 +575,11 @@ static void wid_test_wid_create (void)
 
     wid_update(wid_sidebar);
 
-#if 1
+#if 0
     {
         point tl = {0, MINICON_VIS_HEIGHT + 2};
         point br = {ITEMBAR_TL_X - 1, ITEMBAR_TL_Y - 1};
-        auto w = new WidPopup(tl, br, tile_find_mand("player1.1"));
+        auto w = new WidPopup(tl, br, tile_find_mand("player1.pose"));
         w->log("%%fg=yellow$This is a really long descriptive string that is a bit boring");
     }
 #endif

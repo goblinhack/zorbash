@@ -279,10 +279,14 @@ std::vector<std::wstring> wid_console_serialize (void)
 
 void wid_console_deserialize(std::vector<std::wstring> r)
 {_
+    CON("start of replaying old logs");
+    CON("vvvvvvvvvvvvvvvvvvvvvvvvvvv");
     for (auto s : r) {
         auto tmp = wstring_to_string(s);
         if (tmp.size()) {
             wid_console_log(s);
         }
     }
+    CON("^^^^^^^^^^^^^^^^^^^^^^^^^");
+    CON("end of replaying old logs");
 }

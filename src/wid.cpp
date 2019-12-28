@@ -56,7 +56,7 @@ static wid_key_map_int wid_top_level5;
 // Good for popups.
 //
 static Widp wid_focus_locked {};
-static Widp wid_focus {};
+Widp wid_focus {};
 Widp wid_over {};
 
 //
@@ -330,6 +330,26 @@ void *wid_get_context (Widp w)
     return (w->context);
 }
 
+void wid_set_string_context (Widp w, std::string string_context)
+{_
+    w->string_context = string_context;
+}
+
+std::string wid_get_string_context (Widp w)
+{_
+    return (w->string_context);
+}
+
+void wid_set_int_context (Widp w, int int_context)
+{_
+    w->int_context = int_context;
+}
+
+int wid_get_int_context (Widp w)
+{_
+    return (w->int_context);
+}
+
 void wid_set_prev (Widp w, Widp prev)
 {_
     verify(w);
@@ -538,7 +558,7 @@ static void wid_mouse_motion_begin (Widp w, int32_t x, int32_t y)
     wid_moving_last_y = y;
 }
 
-static void wid_mfocus_e (void)
+static void wid_mfocus_end (void)
 {_
     Widp w {};
 
@@ -550,8 +570,8 @@ static void wid_mfocus_e (void)
         return;
     }
 
-    if (w->on_m_focus_e) {
-        w->on_m_focus_e(w);
+    if (w->on_mouse_focus_end) {
+        w->on_mouse_focus_end(w);
     }
 }
 
@@ -560,12 +580,12 @@ Widp wid_get_current_focus (void)
     return (wid_focus);
 }
 
-static void wid_mfocus_b (Widp w)
+static void wid_mfocus_begin (Widp w)
 {_
     Widp top {};
 
     if (!w) {
-        wid_mfocus_e();
+        wid_mfocus_end();
         wid_focus = nullptr;
 
         wid_find_top_focus();
@@ -576,7 +596,7 @@ static void wid_mfocus_b (Widp w)
         return;
     }
 
-    wid_mfocus_e();
+    wid_mfocus_end();
 
     if (wid_ignore_for_focus(w)) {
         return;
@@ -587,8 +607,8 @@ static void wid_mfocus_b (Widp w)
     wid_focus = w;
     top->focus_last = w->focus_order;
 
-    if (w->on_m_focus_b) {
-        w->on_m_focus_b(w);
+    if (w->on_mouse_focus_begin) {
+        w->on_mouse_focus_begin(w);
     }
 }
 
@@ -616,8 +636,8 @@ static void wid_m_over_e (void)
         return;
     }
 
-    if (w->on_m_over_e) {
-        w->on_m_over_e(w);
+    if (w->on_mouse_over_e) {
+        w->on_mouse_over_e(w);
     }
 }
 
@@ -633,7 +653,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
         return (true);
     }
 
-    if (!(w->on_m_over_b) && !(w->on_m_down)) {
+    if (!(w->on_mouse_over_b) && !(w->on_mouse_down)) {
         if (get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_BG] ||
             get(w->cfg, WID_MODE_OVER).color_set[WID_COLOR_TEXT]) {
             //
@@ -659,8 +679,8 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
 
     wid_set_mode(w, WID_MODE_OVER);
 
-    if (w->on_m_over_b) {
-        (w->on_m_over_b)(w, relx, rely, wheelx, wheely);
+    if (w->on_mouse_over_b) {
+        (w->on_mouse_over_b)(w, relx, rely, wheelx, wheely);
     }
 
     return (true);
@@ -669,7 +689,7 @@ static uint8_t wid_m_over_b (Widp w, uint32_t x, uint32_t y,
 //
 // Map an SDL key event to the char the user typed
 //
-static char wid_event_to_char (const struct SDL_KEYSYM *evt)
+char wid_event_to_char (const struct SDL_KEYSYM *evt)
 {_
     switch (evt->mod) {
         case KMOD_LSHIFT:
@@ -1342,12 +1362,12 @@ void wid_set_focus (Widp w)
         }
     }
 
-    wid_mfocus_b(w);
+    wid_mfocus_begin(w);
 }
 
 void wid_unset_focus (void)
 {_
-    wid_mfocus_e();
+    wid_mfocus_end();
 }
 
 void wid_set_shape_square (Widp w)
@@ -1394,39 +1414,39 @@ void wid_set_on_joy_button (Widp w, on_joy_button_t fn)
     w->on_joy_button = fn;
 }
 
-void wid_set_on_m_down (Widp w, on_m_down_t fn)
+void wid_set_on_mouse_down (Widp w, on_mouse_down_t fn)
 {_
-    w->on_m_down = fn;
+    w->on_mouse_down = fn;
 }
 
-void wid_set_on_m_up (Widp w, on_m_up_t fn)
+void wid_set_on_mouse_up (Widp w, on_mouse_up_t fn)
 {_
-    w->on_m_up = fn;
+    w->on_mouse_up = fn;
 }
 
-void wid_set_on_m_motion (Widp w, on_m_motion_t fn)
+void wid_set_on_mouse_motion (Widp w, on_mouse_motion_t fn)
 {_
-    w->on_m_motion = fn;
+    w->on_mouse_motion = fn;
 }
 
-void wid_set_on_m_focus_b (Widp w, on_m_focus_b_t fn)
+void wid_set_on_mouse_focus_begin (Widp w, on_mouse_focus_begin_t fn)
 {_
-    w->on_m_focus_b = fn;
+    w->on_mouse_focus_begin = fn;
 }
 
-void wid_set_on_m_focus_e (Widp w, on_m_focus_e_t fn)
+void wid_set_on_mouse_focus_end (Widp w, on_mouse_focus_end_t fn)
 {_
-    w->on_m_focus_e = fn;
+    w->on_mouse_focus_end = fn;
 }
 
-void wid_set_on_m_over_b (Widp w, on_m_over_b_t fn)
+void wid_set_on_mouse_over_b (Widp w, on_mouse_over_b_t fn)
 {_
-    w->on_m_over_b = fn;
+    w->on_mouse_over_b = fn;
 }
 
-void wid_set_on_m_over_e (Widp w, on_m_over_e_t fn)
+void wid_set_on_mouse_over_e (Widp w, on_mouse_over_e_t fn)
 {_
-    w->on_m_over_e = fn;
+    w->on_mouse_over_e = fn;
 }
 
 void wid_set_on_destroy (Widp w, on_destroy_t fn)
@@ -1434,9 +1454,9 @@ void wid_set_on_destroy (Widp w, on_destroy_t fn)
     w->on_destroy = fn;
 }
 
-void wid_set_on_destroy_b (Widp w, on_destroy_t fn)
+void wid_set_on_destroy_begin (Widp w, on_destroy_t fn)
 {_
-    w->on_destroy_b = fn;
+    w->on_destroy_begin = fn;
 }
 
 void wid_set_on_tick (Widp w, on_tick_t fn)
@@ -1811,7 +1831,7 @@ static void wid_destroy_immediate_internal (Widp w)
     }
 
     if (wid_focus == w) {
-        wid_mfocus_e();
+        wid_mfocus_end();
     }
 
     if (wid_focus_locked == w) {
@@ -1933,7 +1953,7 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
     wid_tree4_wids_being_destroyed_insert(w);
 
     if (wid_focus == w) {
-        wid_mfocus_e();
+        wid_mfocus_end();
     }
 
     if (wid_over == w) {
@@ -1953,8 +1973,8 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         wid_get_abs_coords(w, &tlx, &tly, &brx, &bry);
     }
 
-    if (w->on_destroy_b) {
-        (w->on_destroy_b)(w);
+    if (w->on_destroy_begin) {
+        (w->on_destroy_begin)(w);
     }
 
     //
@@ -2114,8 +2134,8 @@ static Widp wid_new_scroll_trough (Widp parent)
         wid_set_color(w, WID_COLOR_BG, c);
     }
 
-    wid_set_on_m_down(w, wid_scroll_trough_mouse_down);
-    wid_set_on_m_motion(w, wid_scroll_trough_mouse_motion);
+    wid_set_on_mouse_down(w, wid_scroll_trough_mouse_down);
+    wid_set_on_mouse_motion(w, wid_scroll_trough_mouse_motion);
     wid_set_shape_square(w);
 
     return (w);
@@ -3752,7 +3772,7 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
         }
 
         Widp closer_match = wid_key_up_handler_at(child, x, y,
-                                                    true /* strict */);
+                                                  true /* strict */);
         if (closer_match) {
             return (closer_match);
         }
@@ -3767,7 +3787,7 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
         }
 
         Widp closer_match = wid_key_up_handler_at(child, x, y,
-                                                    false /* strict */);
+                                                  false /* strict */);
         if (closer_match) {
             return (closer_match);
         }
@@ -3871,7 +3891,7 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    if (w->on_m_down) {
+    if (w->on_mouse_down) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
             return nullptr;
@@ -3939,7 +3959,7 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
         }
     }
 
-    if (w->on_m_up) {
+    if (w->on_mouse_up) {
         if (wid_focus_locked &&
             (wid_get_top_parent(w) != wid_get_top_parent(wid_focus_locked))) {
             return nullptr;
@@ -4435,8 +4455,8 @@ void wid_mouse_motion (int32_t x, int32_t y,
             // If the mouse event is fully processed then do not pass onto
             // scrollbars.
             //
-            if (w->on_m_motion) {
-                if ((w->on_m_motion)(w, x, y, relx, rely, wheelx, wheely)) {
+            if (w->on_mouse_motion) {
+                if ((w->on_mouse_motion)(w, x, y, relx, rely, wheelx, wheely)) {
                     got_one = true;
                     break;
                 }
@@ -4504,8 +4524,8 @@ void wid_mouse_motion (int32_t x, int32_t y,
                 w = w->parent;
             }
 
-            if (w && w->on_m_motion) {
-                (w->on_m_motion)(w, x, y, relx, rely, wheelx, wheely);
+            if (w && w->on_mouse_motion) {
+                (w->on_mouse_motion)(w, x, y, relx, rely, wheelx, wheely);
             }
         }
     }
@@ -4680,7 +4700,7 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     //
     // Raise on mouse.
     //
-    if ((w->on_m_down && (w->on_m_down)(w, x, y, button)) ||
+    if ((w->on_mouse_down && (w->on_mouse_down)(w, x, y, button)) ||
         wid_get_movable(w)) {
         //CON("grabbed by %s",wid_name(w).c_str());
 
@@ -4723,7 +4743,7 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
         return;
     }
 
-    if ((w->on_m_up && (w->on_m_up)(w, x, y, button)) ||
+    if ((w->on_mouse_up && (w->on_mouse_up)(w, x, y, button)) ||
         wid_get_movable(w)) {
 
         wid_set_mode(w, WID_MODE_ACTIVE);

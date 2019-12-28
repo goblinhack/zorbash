@@ -74,6 +74,11 @@
 #define ROOM_HEIGHT                 13
 
 //
+// How many save game slots
+//
+#define MAX_SAVE_SLOTS              10
+
+//
 // Dungeon has a pad of tiles around the edges
 //
 #define MAP_BORDER                  20
@@ -139,9 +144,15 @@ extern int TILES_DOWN;
 #define INVENTORY_ACROSS            6
 
 //
+// Default text color
+//
+#define RESET_TEXT_COLOR            GRAY
+#define RESET_TEXT_COLOR_STR        "gray"
+
+//
 // Minicon
 //
-#define MINICON_TEXT_COLOR          GRAY
+#define MINICON_TEXT_COLOR          RESET_TEXT_COLOR
 #define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
 #define MINICON_HEIGHT              20 // scrollbar limit
 #define MINICON_VIS_HEIGHT          5
@@ -150,7 +161,7 @@ extern int TILES_DOWN;
 //
 // Popups
 //
-#define POPUP_TEXT_COLOR            GRAY
+#define POPUP_TEXT_COLOR            RESET_TEXT_COLOR
 
 //
 // Fonts
