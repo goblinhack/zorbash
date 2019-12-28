@@ -4850,7 +4850,7 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
     return nullptr;
 }
 
-#define DEBUG_GL_BLEND
+#undef DEBUG_GL_BLEND
 #ifdef DEBUG_GL_BLEND
 int vals[] = {
 
@@ -4929,7 +4929,7 @@ if (wid_event_to_char(key) == '+') {
 }
 
 if (wid_event_to_char(key) == '-') {
-CON("- %d %d", i1, i2);
+CON("DEBUG_GL_BLEND: %d %d", i1, i2);
     usleep(50);
     i1 --;
     if (i1 < 0) {

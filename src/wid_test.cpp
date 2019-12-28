@@ -237,7 +237,7 @@ static void wid_test_wid_create (void)
     wid_update(wid_itembar);
 
     {
-        point tl = {ASCII_WIDTH - SIDEBAR_WIDTH, 0};
+        point tl = {ASCII_WIDTH - SIDEBAR_WIDTH - 2, 0};
         point br = {ASCII_WIDTH - 1, ASCII_HEIGHT};
         color c;
 
@@ -247,7 +247,7 @@ static void wid_test_wid_create (void)
         wid_set_style(wid_sidebar, 0);
     }
 
-    int y_at = 2;
+    int y_at = 0;
     {
         auto w = wid_new_square_button(wid_sidebar, "zorbash-0");
         point tl = {0, y_at};
@@ -274,8 +274,9 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "zorbash-2");
     }
-    y_at += 3;
+    y_at += 2;
 
+#if 0
     {
         auto w = wid_new_square_button(wid_sidebar, "title box");
         point tl = {0, y_at};
@@ -320,8 +321,9 @@ static void wid_test_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }
+#endif
 
-    y_at += 6;
+    y_at += 1;
     {
         auto w = wid_new_square_button(wid_sidebar, "health-icon");
         point tl = {0, y_at};
@@ -393,6 +395,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "strength-status");
     }
+#endif
 
     y_at += 3;
     {
@@ -431,6 +434,7 @@ static void wid_test_wid_create (void)
         wid_set_bg_tilename(w, "armour-status");
     }
 
+#if 0
     y_at += 3;
     {
         auto w = wid_new_square_button(wid_sidebar, "magic-icon");
@@ -567,6 +571,7 @@ static void wid_test_wid_create (void)
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "curses-2");
     }
+#endif
 
     wid_update(wid_sidebar);
 
@@ -576,5 +581,4 @@ static void wid_test_wid_create (void)
         auto w = new WidPopup(tl, br, tile_find_mand("player1.1"));
         w->log("%%fg=yellow$This is a really long descriptive string that is a bit boring");
     }
-#endif
 }

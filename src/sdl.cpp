@@ -1323,7 +1323,7 @@ void sdl_loop (void)
             float mx = 0.2;
             float my = mx * game->config.video_w_h_ratio;
             glPushMatrix();
-            glTranslatef(1.0 - mx, 0, 0);
+            glTranslatef(1.0 - mx, 1.0 - my, 0);
             blit_init();
             blit(fbo_tex_id[FBO_MINIMAP], 0.0, 1.0, 1.0, 0.0, 0, my, mx, 0.0);
             blit_flush();

@@ -16,6 +16,7 @@ uint8_t croaked;
 
 static bool debug = false;
 
+#ifdef ENABLE_FULL_TIMESTAMPS
 static std::string &timestamp(void)
 {
     static timestamp_t time_last;
@@ -33,12 +34,17 @@ static std::string &timestamp(void)
     last_timestamp = s;
     return last_timestamp;
 }
+#endif
 
 static void get_timestamp (char *buf, int32_t len)
 {
+#ifdef ENABLE_FULL_TIMESTAMPS
     char tmp[MAXSHORTSTR];
     timestamp(tmp, len);
     snprintf(buf, len, "%s %s", timestamp().c_str(), tmp);
+#else
+    timestamp(buf, len);
+#endif
 }
 
 static void putfg (uint8_t fg, FILE *fp)
