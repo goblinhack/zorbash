@@ -9,10 +9,12 @@
 #include "minilzo.h"
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
+#include "my_wid_popup.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
 static timestamp_t ts_tmp;
+static bool load_header_only;
 
 //
 // Save timestamps as a delta we can restore.
@@ -255,6 +257,10 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.save_slot);
     in >> bits(my.t.save_meta);
     in >> bits(my.t.save_file);
+    if (load_header_only) {
+        return (in);
+    }
+
     in >> bits(my.t.appdata);
     in >> bits(my.t.saved_dir);
     in >> bits(my.t.seed);
@@ -285,46 +291,64 @@ std::vector<char> read_file (const std::string filename)
 static std::vector<char> read_lzo_file (const std::string filename,
                                         lzo_uint *uncompressed_sz)
 {_
-    std::ifstream ifs(filename, std::ios::in | std::ios::binary | std::ios::ate);
+    std::ifstream ifs(filename,
+                      std::ios::in | std::ios::binary | std::ios::ate);
+LOG("%d",__LINE__);
     // tellg is not ideal, look into <filesystem> post mojave
     std::ifstream::pos_type sz = ifs.tellg();
+LOG("%d sz %d",__LINE__, (int)sz);
+    if (sz < 0) {
+        return (std::vector<char> ());
+    }
 
     ifs.seekg(0, std::ios::beg);
+LOG("%d",__LINE__);
     ifs.unsetf(std::ios::skipws);
+LOG("%d",__LINE__);
     ifs.read((char*) uncompressed_sz, sizeof(lzo_uint));
+LOG("%d",__LINE__);
 
     sz -= (int) sizeof(lzo_uint);
+LOG("%d",__LINE__);
     std::vector<char> bytes(sz);
+LOG("%d",__LINE__);
     ifs.read(bytes.data(), sz);
+LOG("%d",__LINE__);
 
     return (bytes);
 }
 
-void
-Game::load (void)
+bool
+Game::load (std::string file_to_load, class Game &target)
 {_
-    LOG("-");
-    CON("DUNGEON: loading %s", save_file.c_str());
-    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
-
     //
     // Read to a vector and then copy to a C buffer for LZO to use
     //
+LOG("%d",__LINE__);
     lzo_uint uncompressed_len;
-    auto vec = read_lzo_file(save_file, &uncompressed_len);
+LOG("%d",__LINE__);
+    auto vec = read_lzo_file(file_to_load, &uncompressed_len);
+    if (vec.size() <= 0) {
+        return (false);
+    }
+LOG("%d",__LINE__);
     auto data = vec.data();
+LOG("%d",__LINE__);
     lzo_uint compressed_len = vec.size();
+LOG("%d",__LINE__);
 
     HEAP_ALLOC(compressed, compressed_len);
+LOG("%d",__LINE__);
     HEAP_ALLOC(uncompressed, uncompressed_len);
+LOG("%d",__LINE__);
     memcpy(compressed, data, compressed_len);
+LOG("%d",__LINE__);
 
     lzo_uint new_len = 0;
     int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
         CON("DUNGEON: loading %s, decompressed from %lu to %lu bytes",
-            save_file.c_str(),
+            file_to_load.c_str(),
             (unsigned long) compressed_len,
             (unsigned long) uncompressed_len);
     } else {
@@ -337,12 +361,23 @@ Game::load (void)
 
     std::string s((const char*)uncompressed, (size_t)uncompressed_len);
     std::istringstream in(s);
-    class Game &c = *this;
-    in >> bits(c);
+    in >> bits(target);
 //    this->dump("", std::cout);
 //
     free(uncompressed);
     free(compressed);
+    return (true);
+}
+
+void
+Game::load (void)
+{_
+    LOG("-");
+    CON("DUNGEON: loading %s", save_file.c_str());
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+
+    load(save_file, *this);
 
     config_update_all();
 
@@ -350,4 +385,44 @@ Game::load (void)
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     CON("DUNGEON: loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
+}
+
+void
+Game::select (void)
+{_
+    auto m = (ITEMBAR_TL_X + ITEMBAR_BR_X) / 2;
+    point tl = {m - ITEMBAR_TL_X / 2 - 6, MINICON_VIS_HEIGHT + 4};
+    point br = {m + ITEMBAR_TL_X / 2 + 7, ITEMBAR_TL_Y - 4};
+
+    auto wid_load = new WidPopup(tl, br, tile_find_mand("player1.1"));
+    load_header_only = true;
+
+    wid_load->log("Choose saved tile to load");
+    wid_load->log(" ");
+
+int y_at = 0;
+    for (auto slot = 0; slot < 10; slot++) {
+        Game tmp;
+        auto file_to_load =
+          saved_dir + "saved-slot-" + std::to_string(slot);
+
+        std::string s;
+        if (!load(file_to_load, tmp)) {
+            s = "slot " + std::to_string(slot) + " <empty>";
+        } else {
+            s = "slot " + std::to_string(slot) + " " + tmp.save_meta;
+        }
+
+    {
+        auto p = wid_load->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "save slot");
+        point tl = {1, y_at};
+        point br = {30, y_at + 2};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, 1);
+        wid_set_text(w, string_to_wstring(s));
+    }
+    y_at += 3;
+    }
+    load_header_only = false;
 }

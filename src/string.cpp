@@ -1224,8 +1224,10 @@ std::string& string_timestamp (void)
     static std::string last_timestamp;
     auto time_now = time_get_time_ms_cached();
 
-    if (time_now - time_last < 1000) {
-        return last_timestamp;
+    if (last_timestamp.length()) {
+        if (time_now - time_last < 1000) {
+            return last_timestamp;
+        }
     }
 
     time_last = time_now;

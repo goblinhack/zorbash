@@ -13,12 +13,13 @@ private:
     std::map< unsigned int, std::wstring > wid_popup_lines;
 
     Widp wid_popup_container {};
-    WidTextBox *wid_text_area {};
     Widp wid_title {};
 
     std::vector<Widp> children;
 
 public:
+    WidTextBox *wid_text_area {};
+
     point tl;
     point br;
     Tilep title_tile;

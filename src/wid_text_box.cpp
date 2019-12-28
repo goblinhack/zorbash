@@ -17,7 +17,6 @@
 
 WidTextBox::~WidTextBox()
 {
-    wid_destroy(&wid_text_inner_area);
     wid_destroy(&wid_vert_scroll);
     wid_destroy(&wid_horiz_scroll);
     wid_destroy(&wid_text_last);
