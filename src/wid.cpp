@@ -252,6 +252,11 @@ void wid_set_pos (Widp w, point tl, point br)
         w->key.tl.y += wid_get_tl_y(p);
         w->key.br.x += wid_get_tl_x(p);
         w->key.br.y += wid_get_tl_y(p);
+
+        w->key.tl.x -= p->offset.x;
+        w->key.tl.y -= p->offset.y;
+        w->key.br.x -= p->offset.x;
+        w->key.br.y -= p->offset.y;
     }
 
     wid_tree_attach(w);
@@ -995,6 +1000,16 @@ void wid_set_text (Widp w, std::wstring text)
     if (w->cursor > len) {
         w->cursor = len;
     }
+}
+
+void wid_set_text (Widp w, std::string text)
+{_
+    wid_set_text(w, string_to_wstring(text));
+}
+
+void wid_set_text (Widp w, int v)
+{_
+    wid_set_text(w, std::to_string(v));
 }
 
 uint8_t wid_get_received_input (Widp w)
@@ -5072,10 +5087,10 @@ try_parent:
 // Get the onscreen co-ords of the widget, clipped to the parent.
 //
 void wid_get_abs_coords (Widp w,
-                        int32_t *tlx,
-                        int32_t *tly,
-                        int32_t *brx,
-                        int32_t *bry)
+                         int32_t *tlx,
+                         int32_t *tly,
+                         int32_t *brx,
+                         int32_t *bry)
 {_
     Widp p {};
 
@@ -5083,6 +5098,9 @@ void wid_get_abs_coords (Widp w,
     *tly = wid_get_tl_y(w);
     *brx = wid_get_br_x(w);
     *bry = wid_get_br_y(w);
+if(w->debug) {
+    CON("%d,%d %d,%d", *tlx, *tly, *brx, *bry);
+}
 
     p = w->parent;
     if (p) {
@@ -5090,6 +5108,9 @@ void wid_get_abs_coords (Widp w,
         *tly += p->offset.y;
         *brx += p->offset.x;
         *bry += p->offset.y;
+if(w->debug) {
+    CON("  %d,%d %d,%d", *tlx, *tly, *brx, *bry);
+}
     }
 
     while (p) {
@@ -5121,6 +5142,9 @@ void wid_get_abs_coords (Widp w,
             *bry = pbry;
         }
 
+if(w->debug) {
+    CON("    %d,%d %d,%d", *tlx, *tly, *brx, *bry);
+}
         p = p->parent;
     }
 

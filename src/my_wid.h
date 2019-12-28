@@ -196,6 +196,8 @@ void wid_set_show_cursor(Widp, uint8_t val);
 void wid_set_tex_br(Widp, fsize val);
 void wid_set_tex_tl(Widp, fsize val);
 void wid_set_text(Widp, std::wstring);
+void wid_set_text(Widp, std::string);
+void wid_set_text(Widp, int);
 void wid_set_text_bot(Widp, uint8_t val);
 void wid_set_text_centerx(Widp, uint8_t val);
 void wid_set_text_centery(Widp, uint8_t val);

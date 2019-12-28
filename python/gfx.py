@@ -193,6 +193,14 @@ def init_ui_popup():
         file="data/gfx/ui_popup.tga",
         name="ui_popup", width=80, height=152, arr=tiles)
 
+def init_ui_popup_wide():
+    tiles = [
+        "ui_popup_wide", 
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_popup_wide.tga",
+        name="ui_popup_wide", width=160, height=152, arr=tiles)
+
 def init_ui_action_bar():
     tiles = [
         "ui_action_bar", 
@@ -690,6 +698,7 @@ init_light()
 init_ui_box()
 init_64x16_ui()
 init_ui_popup()
+init_ui_popup_wide()
 init_ui_action_bar()
 init_16x16()
 init_16x32()

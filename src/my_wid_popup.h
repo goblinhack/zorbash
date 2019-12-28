@@ -11,22 +11,22 @@
 class WidPopup {
 private:
     std::map< unsigned int, std::wstring > wid_popup_lines;
-
-    Widp wid_popup_container {};
-    Widp wid_title {};
-
     std::vector<Widp> children;
 
 public:
+    Widp wid_popup_container {};
+    Widp wid_title {};
     WidTextBox *wid_text_area {};
 
-    point tl;
-    point br;
-    Tilep title_tile;
+    point       tl;
+    point       br;
+    Tilep       title_tile;
+    std::string background;
 
 public:
     ~WidPopup();
-    WidPopup (point tl, point br, Tilep title_tile=nullptr);
+    WidPopup (point tl, point br, Tilep title_tile=nullptr,
+              std::string background = "ui_popup");
 
 public:
     void log(std::string s);
