@@ -3551,6 +3551,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     CON("USERCFG: loaded a saved game, load new");
                     game->load();
                     CON("USERCFG: loaded a saved game");
+                    game->select();
                     break;
 
                 case '`':

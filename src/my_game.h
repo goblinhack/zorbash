@@ -305,6 +305,8 @@ public:
     void fini(void);
     void save(void);
     void load(void);
+    bool load(std::string save_file, class Game &target);
+    void select(void);
     void display(void);
     void update_minimap(void);
 

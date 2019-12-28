@@ -19,8 +19,6 @@ private:
     Widp wid_vert_scroll {};
     Widp wid_horiz_scroll {};
     Widp wid_text_last {};
-    Widp wid_text_area {};
-    Widp wid_text_inner_area {};
 
     std::vector<Widp> children;
 
@@ -28,6 +26,7 @@ public:
     point tl;
     point br;
     Widp wid_parent {};
+    Widp wid_text_area {};
 
 public:
     ~WidTextBox();
