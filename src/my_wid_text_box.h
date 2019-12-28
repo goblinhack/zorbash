@@ -15,20 +15,18 @@ private:
     int line_count {};
     int scroll_height {};
 
-    Widp wid_text_box_container {};
-    Widp wid_vert_scroll {};
-    Widp wid_horiz_scroll {};
-    Widp wid_text_last {};
-
     std::vector<Widp> children;
 
 public:
     point tl;
     point br;
+    Widp wid_horiz_scroll {};
     Widp wid_parent {};
     Widp wid_text_area {};
+    Widp wid_text_box_container {};
+    Widp wid_text_last {};
+    Widp wid_vert_scroll {};
 
-public:
     ~WidTextBox();
     WidTextBox (point tl, point br, Widp);
 

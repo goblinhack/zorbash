@@ -21,8 +21,11 @@ WidPopup::~WidPopup()
     wid_destroy(&wid_popup_container);
 }
 
-WidPopup::WidPopup (point tl, point br, Tilep title_tile) :
-    tl(tl), br(br), title_tile(title_tile)
+WidPopup::WidPopup (point tl, point br, Tilep title_tile,
+                    std::string background) :
+    tl(tl), br(br), 
+    title_tile(title_tile),
+    background(background)
 {_
     int outer_w = br.x - tl.x;
     int outer_h = br.y - tl.y;
@@ -43,7 +46,7 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile) :
         wid_popup_container = wid_new_square_window("wid_popup");
         wid_set_pos(wid_popup_container, tl, br);
         wid_set_style(wid_popup_container, -1);
-        wid_set_bg_tile(wid_popup_container, tile_find_mand("ui_popup"));
+        wid_set_bg_tile(wid_popup_container, tile_find_mand(background));
     }
 
     if (title_tile) {

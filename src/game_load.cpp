@@ -391,38 +391,40 @@ void
 Game::select (void)
 {_
     auto m = (ITEMBAR_TL_X + ITEMBAR_BR_X) / 2;
-    point tl = {m - ITEMBAR_TL_X / 2 - 6, MINICON_VIS_HEIGHT + 4};
-    point br = {m + ITEMBAR_TL_X / 2 + 7, ITEMBAR_TL_Y - 4};
+    point tl = {m - ITEMBAR_TL_X / 2 - 6, MINICON_VIS_HEIGHT + 2};
+    point br = {m + ITEMBAR_TL_X / 2 + 7, ITEMBAR_TL_Y - 2};
+    auto width = br.x - tl.x;
 
-    auto wid_load = new WidPopup(tl, br, tile_find_mand("player1.1"));
+    auto wid_load = new WidPopup(tl, br, tile_find_mand("player1.1"),
+                                 "ui_popup_wide");
     load_header_only = true;
 
-    wid_load->log("Choose saved tile to load");
-    wid_load->log(" ");
+    wid_load->log("Choose saved file to load");
 
-int y_at = 0;
+    int y_at = 2;
     for (auto slot = 0; slot < 10; slot++) {
         Game tmp;
         auto file_to_load =
           saved_dir + "saved-slot-" + std::to_string(slot);
 
+        auto p = wid_load->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "save slot");
+        point tl = {0, y_at};
+        point br = {width - 2, y_at + 2};
+
         std::string s;
         if (!load(file_to_load, tmp)) {
             s = "slot " + std::to_string(slot) + " <empty>";
+            wid_set_style(w, 2);
         } else {
             s = "slot " + std::to_string(slot) + " " + tmp.save_meta;
+            wid_set_style(w, 1);
         }
 
-    {
-        auto p = wid_load->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "save slot");
-        point tl = {1, y_at};
-        point br = {30, y_at + 2};
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 1);
-        wid_set_text(w, string_to_wstring(s));
-    }
-    y_at += 3;
+        wid_set_text(w, s);
+        y_at += 3;
     }
     load_header_only = false;
+    wid_update(wid_load->wid_text_area->wid_text_area);
 }
