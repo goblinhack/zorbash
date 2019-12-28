@@ -59,8 +59,8 @@ public:
     //
     // When this world was made. Used to restore timestamps relative to this.
     //
-    timestamp_t                   timestamp_dungeon_created {};
-    timestamp_t                   timestamp_dungeon_saved {};
+    timestamp_t                timestamp_dungeon_created {};
+    timestamp_t                timestamp_dungeon_saved {};
 
     bool                       cursor_needs_update = false;
     bool                       cursor_found = false;
@@ -308,9 +308,14 @@ public:
     void display(void);
     void update_minimap(void);
 
+    //
+    // Save file name, contains the date and other useful save slot info
+    //
+    int                save_slot;
+    std::string        save_meta;
+    std::string        save_file;
     std::string        appdata;
     std::string        saved_dir;
-    std::string        saved_file;
 
     Config             config;
     World              world;

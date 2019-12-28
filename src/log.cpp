@@ -16,31 +16,11 @@ uint8_t croaked;
 
 static bool debug = false;
 
-#ifdef ENABLE_FULL_TIMESTAMPS
-static std::string &timestamp(void)
-{
-    static timestamp_t time_last;
-    static std::string last_timestamp;
-    auto time_now = time_get_time_ms_cached();
-
-    if (time_now - time_last < 1000) {
-        return last_timestamp;
-    }
-
-    time_last = time_now;
-    std::time_t result = std::time(nullptr);
-    auto s = std::string(std::asctime(std::localtime(&result)));
-    s.pop_back();
-    last_timestamp = s;
-    return last_timestamp;
-}
-#endif
-
 static void get_timestamp (char *buf, int32_t len)
 {
 #ifdef ENABLE_FULL_TIMESTAMPS
     char tmp[MAXSHORTSTR];
-    timestamp(tmp, len);
+    string_timestamp(tmp, len);
     snprintf(buf, len, "%s %s", timestamp().c_str(), tmp);
 #else
     timestamp(buf, len);

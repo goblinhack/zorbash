@@ -14,6 +14,7 @@
 #include "my_main.h"
 #include "my_sdl.h"
 #include "my_thing_template.h"
+#include "my_time.h"
 
 std::wstring string_to_wstring(const std::string& s);
 std::string wstring_to_string(const std::wstring& s);
@@ -1215,4 +1216,22 @@ std::wstring rtrim_ws(const std::wstring& s)
 std::wstring trim_ws(const std::wstring& s)
 {
     return rtrim_ws(ltrim_ws(s));
+}
+
+std::string& string_timestamp (void)
+{
+    static timestamp_t time_last;
+    static std::string last_timestamp;
+    auto time_now = time_get_time_ms_cached();
+
+    if (time_now - time_last < 1000) {
+        return last_timestamp;
+    }
+
+    time_last = time_now;
+    std::time_t result = std::time(nullptr);
+    auto s = std::string(std::asctime(std::localtime(&result)));
+    s.pop_back();
+    last_timestamp = s;
+    return last_timestamp;
 }

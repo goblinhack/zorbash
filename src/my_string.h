@@ -70,4 +70,5 @@ std::wstring& trim(std::wstring& s);
 std::wstring ltrim_ws(const std::wstring& s);
 std::wstring rtrim_ws(const std::wstring& s);
 std::wstring trim_ws(const std::wstring& s);
+std::string& string_timestamp(void);
 #endif

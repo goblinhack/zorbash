@@ -146,9 +146,11 @@ void Game::dump (std::string pfx, std::ostream &out)
     auto old_pfx = pfx;
     pfx += "  ";
 
+    out << pfx << "save_slot  " << save_slot << std::endl;
+    out << pfx << "save_meta  " << save_meta << std::endl;
+    out << pfx << "save_file  " << save_file << std::endl;
     out << pfx << "appdata    " << appdata << std::endl;
     out << pfx << "saved_dir  " << saved_dir << std::endl;
-    out << pfx << "saved_file " << saved_file << std::endl;
     out << pfx << "seed       " << seed << std::endl;
     out << pfx << "fps_count  " << fps_count << std::endl;
     config.dump(pfx, out);
