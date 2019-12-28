@@ -201,9 +201,11 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 std::ostream& operator<<(std::ostream &out,
                          Bits<const class Game & > const my)
 {_
+    out << bits(my.t.save_slot);
+    out << bits(my.t.save_meta);
+    out << bits(my.t.save_file);
     out << bits(my.t.appdata);
     out << bits(my.t.saved_dir);
-    out << bits(my.t.saved_file);
     out << bits(my.t.seed);
     out << bits(my.t.fps_count);
     out << bits(my.t.config);
@@ -218,7 +220,7 @@ void
 Game::save (void)
 {_
     LOG("-");
-    CON("DUNGEON: saving %s seed %d", saved_file.c_str(), seed);
+    CON("DUNGEON: saving %s seed %d", save_file.c_str(), seed);
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -254,7 +256,7 @@ Game::save (void)
                              (lzo_bytep)compressed, &compressed_len, wrkmem);
     if (r == LZO_E_OK) {
         CON("DUNGEON: saved as %s, compressed from %lu to %lu bytes",
-            saved_file.c_str(),
+            save_file.c_str(),
             (unsigned long) uncompressed_len,
             (unsigned long) compressed_len);
     } else {
@@ -270,7 +272,7 @@ Game::save (void)
     //
     // Save the post compress buffer
     //
-    auto ofile = fopen(saved_file.c_str(), "wb");
+    auto ofile = fopen(save_file.c_str(), "wb");
     fwrite((char*) &uncompressed_len, sizeof(uncompressed_len), 1, ofile);
     fwrite(compressed, compressed_len, 1, ofile);
     fclose(ofile);
@@ -281,6 +283,6 @@ Game::save (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: saved %s seed %d", saved_file.c_str(), seed);
+    CON("DUNGEON: saved %s seed %d", save_file.c_str(), seed);
     LOG("-");
 }

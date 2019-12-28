@@ -14,7 +14,9 @@ Game::Game (std::string appdata)
     this->appdata = appdata;
 
     saved_dir = appdata + DSEP + "zorbash" + DSEP;
-    saved_file = saved_dir + "saved";
+    save_slot = 1;
+    save_meta = string_timestamp();
+    save_file = saved_dir + "saved-slot-" + std::to_string(save_slot);
 
     ::world = &world;
 }

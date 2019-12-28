@@ -252,9 +252,11 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 
 std::istream& operator>>(std::istream &in, Bits<class Game &> my)
 {_
+    in >> bits(my.t.save_slot);
+    in >> bits(my.t.save_meta);
+    in >> bits(my.t.save_file);
     in >> bits(my.t.appdata);
     in >> bits(my.t.saved_dir);
-    in >> bits(my.t.saved_file);
     in >> bits(my.t.seed);
     in >> bits(my.t.fps_count);
     in >> bits(my.t.config);
@@ -302,7 +304,7 @@ void
 Game::load (void)
 {_
     LOG("-");
-    CON("DUNGEON: loading %s", saved_file.c_str());
+    CON("DUNGEON: loading %s", save_file.c_str());
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
@@ -310,7 +312,7 @@ Game::load (void)
     // Read to a vector and then copy to a C buffer for LZO to use
     //
     lzo_uint uncompressed_len;
-    auto vec = read_lzo_file(saved_file, &uncompressed_len);
+    auto vec = read_lzo_file(save_file, &uncompressed_len);
     auto data = vec.data();
     lzo_uint compressed_len = vec.size();
 
@@ -322,7 +324,7 @@ Game::load (void)
     int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
         CON("DUNGEON: loading %s, decompressed from %lu to %lu bytes",
-            saved_file.c_str(),
+            save_file.c_str(),
             (unsigned long) compressed_len,
             (unsigned long) uncompressed_len);
     } else {
@@ -346,6 +348,6 @@ Game::load (void)
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: loaded %s, seed %d", saved_file.c_str(), seed);
+    CON("DUNGEON: loaded %s, seed %d", save_file.c_str(), seed);
     LOG("-");
 }
