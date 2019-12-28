@@ -305,6 +305,7 @@ public:
     void fini(void);
     void save(void);
     void load(void);
+    void load(int slot);
     bool load(std::string save_file, class Game &target);
     void select(void);
     void display(void);

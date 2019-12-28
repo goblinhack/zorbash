@@ -293,27 +293,19 @@ static std::vector<char> read_lzo_file (const std::string filename,
 {_
     std::ifstream ifs(filename,
                       std::ios::in | std::ios::binary | std::ios::ate);
-LOG("%d",__LINE__);
     // tellg is not ideal, look into <filesystem> post mojave
     std::ifstream::pos_type sz = ifs.tellg();
-LOG("%d sz %d",__LINE__, (int)sz);
     if (sz < 0) {
         return (std::vector<char> ());
     }
 
     ifs.seekg(0, std::ios::beg);
-LOG("%d",__LINE__);
     ifs.unsetf(std::ios::skipws);
-LOG("%d",__LINE__);
     ifs.read((char*) uncompressed_sz, sizeof(lzo_uint));
-LOG("%d",__LINE__);
 
     sz -= (int) sizeof(lzo_uint);
-LOG("%d",__LINE__);
     std::vector<char> bytes(sz);
-LOG("%d",__LINE__);
     ifs.read(bytes.data(), sz);
-LOG("%d",__LINE__);
 
     return (bytes);
 }
@@ -324,33 +316,27 @@ Game::load (std::string file_to_load, class Game &target)
     //
     // Read to a vector and then copy to a C buffer for LZO to use
     //
-LOG("%d",__LINE__);
     lzo_uint uncompressed_len;
-LOG("%d",__LINE__);
     auto vec = read_lzo_file(file_to_load, &uncompressed_len);
     if (vec.size() <= 0) {
         return (false);
     }
-LOG("%d",__LINE__);
     auto data = vec.data();
-LOG("%d",__LINE__);
     lzo_uint compressed_len = vec.size();
-LOG("%d",__LINE__);
 
     HEAP_ALLOC(compressed, compressed_len);
-LOG("%d",__LINE__);
     HEAP_ALLOC(uncompressed, uncompressed_len);
-LOG("%d",__LINE__);
     memcpy(compressed, data, compressed_len);
-LOG("%d",__LINE__);
 
     lzo_uint new_len = 0;
     int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
-        CON("DUNGEON: loading %s, decompressed from %lu to %lu bytes",
-            file_to_load.c_str(),
-            (unsigned long) compressed_len,
-            (unsigned long) uncompressed_len);
+        if (!load_header_only) {
+            CON("DUNGEON: loading %s, decompressed from %lu to %lu bytes",
+                file_to_load.c_str(),
+                (unsigned long) compressed_len,
+                (unsigned long) uncompressed_len);
+        }
     } else {
         /* this should NEVER happen */
         DIE("LZO internal error - decompression failed: %d", r);
@@ -388,38 +374,133 @@ Game::load (void)
 }
 
 void
+Game::load (int slot)
+{_
+    if (slot < 0) {
+        return;
+    }
+
+    if (slot >= MAX_SAVE_SLOTS) {
+        return;
+    }
+
+    auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
+
+    LOG("-");
+    CON("DUNGEON: loading %s", save_file.c_str());
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+
+    load(save_file, *this);
+
+    config_update_all();
+
+    LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    CON("DUNGEON: loaded %s, seed %d", save_file.c_str(), seed);
+    LOG("-");
+}
+
+static WidPopup *wid_load;
+
+static void wid_load_destroy (void)
+{
+    if (wid_load) {
+        delete wid_load;
+        wid_load = nullptr;
+    }
+}
+
+uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
+{
+    switch (key->mod) {
+        case KMOD_LCTRL:
+        case KMOD_RCTRL:
+        default:
+        switch (key->sym) {
+            default: {
+                auto c = wid_event_to_char(key);
+                switch (c) {
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': {
+                        int slot = c - '0';
+                        game->load(slot);
+                        wid_load_destroy();
+                        return (true);
+                    }
+                    case SDLK_ESCAPE: {
+                        CON("PLAYER: load game cancelled");
+                        wid_load_destroy();
+                        return (true);
+                    }
+                }
+            }
+        }
+    }
+
+    return (true);
+}
+
+uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
+{
+    return (true);
+}
+
+uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    auto slot = wid_get_int_context(w);
+    game->load(slot);
+    wid_load_destroy();
+    return (true);
+}
+
+void
 Game::select (void)
 {_
+    if (wid_load) {
+        return;
+    }
+
     auto m = (ITEMBAR_TL_X + ITEMBAR_BR_X) / 2;
     point tl = {m - ITEMBAR_TL_X / 2 - 6, MINICON_VIS_HEIGHT + 2};
     point br = {m + ITEMBAR_TL_X / 2 + 7, ITEMBAR_TL_Y - 2};
     auto width = br.x - tl.x;
 
-    auto wid_load = new WidPopup(tl, br, tile_find_mand("player1.1"),
-                                 "ui_popup_wide");
+    wid_load = new WidPopup(tl, br, tile_find_mand("load"), "ui_popup_wide");
+    wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
+    wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);
+
     load_header_only = true;
 
-    wid_load->log("Choose saved file to load");
+    wid_load->log("Choose a saved file. %%fg=red$ESC%%fg=reset$ to cancel");
 
     int y_at = 2;
-    for (auto slot = 0; slot < 10; slot++) {
+    for (auto slot = 0; slot < MAX_SAVE_SLOTS; slot++) {
         Game tmp;
-        auto file_to_load =
-          saved_dir + "saved-slot-" + std::to_string(slot);
-
+        auto file_to_load = saved_dir + "saved-slot-" + std::to_string(slot);
         auto p = wid_load->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "save slot");
         point tl = {0, y_at};
         point br = {width - 2, y_at + 2};
 
-        std::string s;
+        std::string s = std::to_string(slot) + " ";
         if (!load(file_to_load, tmp)) {
-            s = "slot " + std::to_string(slot) + " <empty>";
+            s += "<empty>";
             wid_set_style(w, 2);
         } else {
-            s = "slot " + std::to_string(slot) + " " + tmp.save_meta;
+            s += tmp.save_meta;
             wid_set_style(w, 1);
         }
+        wid_set_on_mouse_up(w, wid_load_mouse_up);
+        wid_set_int_context(w, slot);
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, s);

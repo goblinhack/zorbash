@@ -46,11 +46,28 @@ typedef enum {
 
 #define WID_MODE_FIRST WID_MODE_NORMAL
 
+Widp wid_find(Widp, std::string name);
+Widp wid_get_current_focus(void);
+Widp wid_get_focus(Widp);
+Widp wid_get_head(Widp);
+Widp wid_get_next(Widp);
+Widp wid_get_parent(Widp);
+Widp wid_get_prev(Widp);
+Widp wid_get_scrollbar_horiz(Widp);
+Widp wid_get_scrollbar_vert(Widp);
+Widp wid_get_tail(Widp);
+Widp wid_get_top_parent(Widp);
+Widp wid_new_container(Widp, std::string name);
+Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
+Widp wid_new_square_button(Widp parent, std::string name);
+Widp wid_new_square_window(std::string name);
+Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
+Widp wid_new_window(std::string name);
+char wid_event_to_char(const struct SDL_KEYSYM *evt);
 color wid_get_color(Widp, wid_color which);
-extern int wid_mouse_visible;
+int32_t wid_get_height(Widp);
 int32_t wid_get_tl_x(Widp);
 int32_t wid_get_tl_y(Widp);
-int32_t wid_get_height(Widp);
 int32_t wid_get_width(Widp);
 std::string to_string(Widp);
 std::string wid_get_name(Widp);
@@ -60,15 +77,15 @@ std::wstring wid_get_tooltip(Widp);
 typedef uint8_t(*on_joy_button_t)(Widp, int32_t x, int32_t y);
 typedef uint8_t(*on_key_down_t)(Widp, const struct SDL_KEYSYM *);
 typedef uint8_t(*on_key_up_t)(Widp, const struct SDL_KEYSYM *);
-typedef uint8_t(*on_m_down_t)(Widp, int32_t x, int32_t y, uint32_t button);
-typedef uint8_t(*on_m_motion_t)(Widp, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-typedef uint8_t(*on_m_up_t)(Widp, int32_t x, int32_t y, uint32_t button);
-typedef void(*on_destroy_b_t)(Widp);
+typedef uint8_t(*on_mouse_down_t)(Widp, int32_t x, int32_t y, uint32_t button);
+typedef uint8_t(*on_mouse_motion_t)(Widp, int32_t x, int32_t y, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+typedef uint8_t(*on_mouse_up_t)(Widp, int32_t x, int32_t y, uint32_t button);
+typedef void(*on_destroy_begin_t)(Widp);
 typedef void(*on_destroy_t)(Widp);
-typedef void(*on_m_focus_b_t)(Widp);
-typedef void(*on_m_focus_e_t)(Widp);
-typedef void(*on_m_over_b_t)(Widp, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
-typedef void(*on_m_over_e_t)(Widp);
+typedef void(*on_mouse_focus_begin_t)(Widp);
+typedef void(*on_mouse_focus_end_t)(Widp);
+typedef void(*on_mouse_over_b_t)(Widp, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely);
+typedef void(*on_mouse_over_e_t)(Widp);
 typedef void(*on_tick_t)(Widp);
 uint32_t wid_get_cursor(Widp);
 uint32_t wid_get_gllist(Widp);
@@ -99,6 +116,8 @@ uint8_t wid_is_always_hidden(Widp w);
 uint8_t wid_is_hidden(Widp w);
 uint8_t wid_receive_input(Widp, const SDL_KEYSYM *key);
 void *wid_get_context(Widp);
+std::string wid_get_string_context(Widp);
+int wid_get_int_context(Widp);
 void wid_always_hidden(Widp, uint8_t value);
 void wid_destroy(Widp *);
 void wid_destroy_in(Widp w, uint32_t ms);
@@ -109,7 +128,6 @@ void wid_dump(Widp w, int depth);
 void wid_fake_joy_button(int32_t x, int32_t y);
 void wid_fini(void);
 void wid_focus_lock(Widp);
-void wid_unset_focus_lock(void);
 void wid_gc_all(void);
 void wid_gc_all_force(void);
 void wid_get_abs(Widp w, int32_t *x, int32_t *y);
@@ -156,14 +174,17 @@ void wid_raise(Widp);
 void wid_scroll_text(Widp);
 void wid_scroll_with_input(Widp, std::wstring str);
 void wid_set_active(Widp);
+void wid_set_bg_tilename(Widp, std::string name);
 void wid_set_color(Widp, wid_color col, color val);
 void wid_set_context(Widp w, void *context);
+void wid_set_string_context(Widp w, std::string);
+void wid_set_int_context(Widp w, int);
 void wid_set_cursor(Widp, uint32_t val);
 void wid_set_debug(Widp, uint8_t);
 void wid_set_do_not_lower(Widp, uint8_t val);
 void wid_set_do_not_raise(Widp, uint8_t val);
+void wid_set_fg_tilename(Widp, std::string name);
 void wid_set_focus(Widp);
-void wid_unset_focus();
 void wid_set_focusable(Widp, uint8_t val);
 void wid_set_ignore_events(Widp, uint8_t);
 void wid_set_mode(Widp, wid_mode mode);
@@ -174,17 +195,17 @@ void wid_set_movable_no_user_scroll(Widp, uint8_t val);
 void wid_set_movable_vert(Widp, uint8_t val);
 void wid_set_name(Widp, std::string);
 void wid_set_on_destroy(Widp, on_destroy_t fn);
-void wid_set_on_destroy_b(Widp, on_destroy_b_t fn);
+void wid_set_on_destroy_begin(Widp, on_destroy_begin_t fn);
 void wid_set_on_joy_button(Widp, on_joy_button_t fn);
 void wid_set_on_key_down(Widp, on_key_down_t fn);
 void wid_set_on_key_up(Widp, on_key_up_t fn);
-void wid_set_on_m_down(Widp, on_m_down_t fn);
-void wid_set_on_m_focus_b(Widp, on_m_focus_b_t fn);
-void wid_set_on_m_focus_e(Widp, on_m_focus_e_t fn);
-void wid_set_on_m_motion(Widp, on_m_motion_t fn);
-void wid_set_on_m_over_b(Widp, on_m_over_b_t fn);
-void wid_set_on_m_over_e(Widp, on_m_over_e_t fn);
-void wid_set_on_m_up(Widp, on_m_up_t fn);
+void wid_set_on_mouse_down(Widp, on_mouse_down_t fn);
+void wid_set_on_mouse_focus_begin(Widp, on_mouse_focus_begin_t fn);
+void wid_set_on_mouse_focus_end(Widp, on_mouse_focus_end_t fn);
+void wid_set_on_mouse_motion(Widp, on_mouse_motion_t fn);
+void wid_set_on_mouse_over_b(Widp, on_mouse_over_b_t fn);
+void wid_set_on_mouse_over_e(Widp, on_mouse_over_e_t fn);
+void wid_set_on_mouse_up(Widp, on_mouse_up_t fn);
 void wid_set_on_tick(Widp, on_tick_t fn);
 void wid_set_pos(Widp, point tl, point br);
 void wid_set_pos_pct(Widp, fpoint tl, fpoint br);
@@ -195,9 +216,9 @@ void wid_set_shape_square(Widp);
 void wid_set_show_cursor(Widp, uint8_t val);
 void wid_set_tex_br(Widp, fsize val);
 void wid_set_tex_tl(Widp, fsize val);
-void wid_set_text(Widp, std::wstring);
-void wid_set_text(Widp, std::string);
 void wid_set_text(Widp, int);
+void wid_set_text(Widp, std::string);
+void wid_set_text(Widp, std::wstring);
 void wid_set_text_bot(Widp, uint8_t val);
 void wid_set_text_centerx(Widp, uint8_t val);
 void wid_set_text_centery(Widp, uint8_t val);
@@ -205,33 +226,16 @@ void wid_set_text_lhs(Widp, uint8_t val);
 void wid_set_text_pos(Widp, uint8_t val, int32_t x, int32_t y);
 void wid_set_text_rhs(Widp, uint8_t val);
 void wid_set_text_top(Widp, uint8_t val);
-void wid_set_bg_tilename(Widp, std::string name);
-void wid_set_fg_tilename(Widp, std::string name);
 void wid_set_top(Widp, uint8_t val);
 void wid_this_visible(Widp);
 void wid_tick_all(void);
 void wid_toggle_hidden(Widp);
+void wid_unset_focus();
+void wid_unset_focus_lock(void);
 void wid_update(Widp);
 void wid_update_mouse(void);
 void wid_visible(Widp);
 wid_mode wid_get_mode(Widp);
-Widp wid_find(Widp, std::string name);
-Widp wid_get_current_focus(void);
-Widp wid_get_focus(Widp);
-Widp wid_get_next(Widp);
-Widp wid_get_tail(Widp);
-Widp wid_get_head(Widp);
-Widp wid_get_parent(Widp);
-Widp wid_get_prev(Widp);
-Widp wid_get_scrollbar_horiz(Widp);
-Widp wid_get_scrollbar_vert(Widp);
-Widp wid_get_top_parent(Widp);
-Widp wid_new_container(Widp, std::string name);
-Widp wid_new_horiz_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
-Widp wid_new_square_button(Widp parent, std::string name);
-Widp wid_new_square_window(std::string name);
-Widp wid_new_vert_scroll_bar(Widp parent, std::string name, Widp scrollbar_owner);
-Widp wid_new_window(std::string name);
 
 //
 // History for all text widgets.
@@ -478,6 +482,8 @@ public:
     // Client context
     //
     void *context {};
+    std::string string_context;
+    int int_context {-1};
 
     //
     // Text placement.
@@ -537,19 +543,19 @@ public:
     //
     // Action handlers
     //
-    on_key_down_t on_key_down         {};
-    on_key_up_t on_key_up             {};
-    on_joy_button_t on_joy_button     {};
-    on_m_down_t on_m_down             {};
-    on_m_up_t on_m_up                 {};
-    on_m_motion_t on_m_motion         {};
-    on_m_focus_b_t on_m_focus_b       {};
-    on_m_focus_e_t on_m_focus_e       {};
-    on_m_over_b_t on_m_over_b         {};
-    on_m_over_e_t on_m_over_e         {};
-    on_destroy_t on_destroy           {};
-    on_destroy_b_t on_destroy_b       {};
-    on_tick_t on_tick                 {};
+    on_key_down_t on_key_down                   {};
+    on_key_up_t on_key_up                       {};
+    on_joy_button_t on_joy_button               {};
+    on_mouse_down_t on_mouse_down               {};
+    on_mouse_up_t on_mouse_up                   {};
+    on_mouse_motion_t on_mouse_motion           {};
+    on_mouse_focus_begin_t on_mouse_focus_begin {};
+    on_mouse_focus_end_t on_mouse_focus_end     {};
+    on_mouse_over_b_t on_mouse_over_b           {};
+    on_mouse_over_e_t on_mouse_over_e           {};
+    on_destroy_t on_destroy                     {};
+    on_destroy_begin_t on_destroy_begin         {};
+    on_tick_t on_tick                           {};
 };
 
 uint8_t wid_is_moving(Widp w);
@@ -557,8 +563,10 @@ void wid_set_style(Widp w, int style);
 void wid_set_bg_tile(Widp w, Tilep tile);
 void wid_set_fg_tile(Widp w, Tilep tile);
 
+extern int wid_mouse_visible;
 extern Widp wid_mouse_template;
 extern Widp wid_over;
+extern Widp wid_focus;
 
 extern const int32_t wid_destroy_delay_ms;
 extern std::array<

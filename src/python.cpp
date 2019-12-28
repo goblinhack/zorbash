@@ -13,7 +13,7 @@
 #include "my_game.h"
 
 static PyObject *zx_mod;
-PyMODINIT_FUNC python_m_y_module_create(void);
+PyMODINIT_FUNC python_mouse_y_module_create(void);
 
 void py_call_void_module_int (const char *module, const char *name, int val1)
 {_
@@ -1783,7 +1783,7 @@ static struct PyModuleDef python_c_MODULE = {
 };
 
 PyMODINIT_FUNC
-python_m_y_module_create (void)
+python_mouse_y_module_create (void)
 {_
    PyObject *m = PyModule_Create(&python_c_MODULE);
    if (! m) {
@@ -2867,7 +2867,7 @@ void python_init (char *argv[])
 #endif
 
     LOG("Calling PyImport_AppendInittab zx module");
-    PyImport_AppendInittab("zx", python_m_y_module_create);
+    PyImport_AppendInittab("zx", python_mouse_y_module_create);
 
     LOG("Calling Py_Initialize");
     Py_Initialize();

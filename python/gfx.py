@@ -199,7 +199,7 @@ def init_ui_popup_wide():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_popup_wide.tga",
-        name="ui_popup_wide", width=160, height=152, arr=tiles)
+        name="ui_popup_wide", width=120, height=152, arr=tiles)
 
 def init_ui_action_bar():
     tiles = [
@@ -211,7 +211,7 @@ def init_ui_action_bar():
 
 def init_16x16():
     tiles = [
-            "player1.1", "player1.2", "player1.3", "player1.4", "player1.5", "player1.6", "", "player1.pose", "player1.dead", "sword1.1", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "player1.1", "player1.2", "player1.3", "player1.4", "player1.5", "player1.6", "", "player1.pose", "player1.dead", "sword1.1", "save", "load", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
             ########################################################
             "gem1.1", "gem1.2", "gem1.3", "gem1.4", "gem1.5", "gem1.6", "gem1.7", "slime1.1.100", "slime1.2.100", "slime1.3.100", "slime1.4.100", "slime1.1.75", "slime1.2.75", "slime1.3.75", "slime1.4.75", "slime1.1.50", "slime1.2.50", "slime1.3.50", "slime1.4.50", "slime1.1.25", "slime1.2.25", "slime1.3.25", "slime1.4.25", "slime1.dead", "mummy1.1.100", "mummy1.2.100", "mummy1.3.100", "key1.1", "key1.2", "key1.3", "key1.4", "key1.5",
             ########################################################
