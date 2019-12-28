@@ -2,7 +2,6 @@
 // Copyright goblinhack@gmail.com
 // See the README file for license info.
 //
-
 #pragma once
 
 #ifndef _MY_MAIN_H_
@@ -17,16 +16,18 @@
 // Commonly changed settings
 //
 #ifdef DEBUG_CRASH
-#undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #define ENABLE_ASSERT              // DIE on errors
-#define ENABLE_TRACING             // Function tracing
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
-#define ENABLE_PTRCHECK_LEAK
 #define ENABLE_PTRCHECK            // Check validity of pointers too
-#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
+#define ENABLE_PTRCHECK_LEAK
+#define ENABLE_TRACING             // Function tracing
+#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
+#undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #endif
+
 #define ENABLE_INVERTED_GFX        // For vision impaired
+#undef  ENABLE_FULL_TIMESTAMPS     // Full timestamps with date in logs
 
 //
 // Settings to override compiler errors
