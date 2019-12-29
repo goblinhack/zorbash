@@ -44,12 +44,12 @@ uint8_t quitting;
 void callstack_dump (void)
 {_
     fprintf(MY_STDERR, "code trace:\n");
-    fprintf(MY_STDERR, "========================================================\n");
+    fprintf(MY_STDERR, "==========:\n");
     for (auto depth = 0; depth < callframes_depth; depth++) {
         auto iter = &callframes[depth];
         fprintf(MY_STDERR, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
     }
-    fprintf(MY_STDERR, "========================================================\n");
+    fprintf(MY_STDERR, "==========:\n");
 }
 
 #ifdef ENABLE_CRASH_HANDLER

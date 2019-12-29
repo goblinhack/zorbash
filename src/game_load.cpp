@@ -10,11 +10,12 @@
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
+#include "my_wid_error.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
 static timestamp_t ts_tmp;
-static bool load_header_only;
+bool game_load_headers_only;
 
 //
 // Save timestamps as a delta we can restore.
@@ -257,7 +258,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.save_slot);
     in >> bits(my.t.save_meta);
     in >> bits(my.t.save_file);
-    if (load_header_only) {
+    if (game_load_headers_only) {
         return (in);
     }
 
@@ -319,6 +320,9 @@ Game::load (std::string file_to_load, class Game &target)
     lzo_uint uncompressed_len;
     auto vec = read_lzo_file(file_to_load, &uncompressed_len);
     if (vec.size() <= 0) {
+        if (!game_load_headers_only) {
+            wid_error("failed to load, empty file?");
+        }
         return (false);
     }
     auto data = vec.data();
@@ -331,7 +335,7 @@ Game::load (std::string file_to_load, class Game &target)
     lzo_uint new_len = 0;
     int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
-        if (!load_header_only) {
+        if (!game_load_headers_only) {
             CON("DUNGEON: loading %s, decompressed from %lu to %lu bytes",
                 file_to_load.c_str(),
                 (unsigned long) compressed_len,
@@ -383,6 +387,8 @@ Game::load (int slot)
     if (slot >= MAX_SAVE_SLOTS) {
         return;
     }
+
+    game->fini();
 
     auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
 
@@ -462,42 +468,41 @@ uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
-void
-Game::select (void)
+void Game::load_select (void)
 {_
     if (wid_load) {
         return;
     }
 
-    auto m = (ITEMBAR_TL_X + ITEMBAR_BR_X) / 2;
-    point tl = {m - ITEMBAR_TL_X / 2 - 6, MINICON_VIS_HEIGHT + 2};
-    point br = {m + ITEMBAR_TL_X / 2 + 7, ITEMBAR_TL_Y - 2};
+    auto m = ASCII_WIDTH / 2;
+    point tl = {m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2};
+    point br = {m + WID_POPUP_WIDTH_WIDE / 2, ITEMBAR_TL_Y - 2};
     auto width = br.x - tl.x;
 
     wid_load = new WidPopup(tl, br, tile_find_mand("load"), "ui_popup_wide");
     wid_set_on_key_up(wid_load->wid_popup_container, wid_load_key_up);
     wid_set_on_key_down(wid_load->wid_popup_container, wid_load_key_down);
 
-    load_header_only = true;
+    game_load_headers_only = true;
 
-    wid_load->log("Choose a saved file. %%fg=red$ESC%%fg=reset$ to cancel");
+    wid_load->log("Choose a save slot. %%fg=red$ESC%%fg=reset$ to cancel");
 
     int y_at = 2;
     for (auto slot = 0; slot < MAX_SAVE_SLOTS; slot++) {
         Game tmp;
-        auto file_to_load = saved_dir + "saved-slot-" + std::to_string(slot);
+        auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
         auto p = wid_load->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "save slot");
         point tl = {0, y_at};
         point br = {width - 2, y_at + 2};
 
         std::string s = std::to_string(slot) + " ";
-        if (!load(file_to_load, tmp)) {
+        if (!load(tmp_file, tmp)) {
             s += "<empty>";
-            wid_set_style(w, 2);
+            wid_set_style(w, WID_STYLE_RED);
         } else {
             s += tmp.save_meta;
-            wid_set_style(w, 1);
+            wid_set_style(w, WID_STYLE_GREEN);
         }
         wid_set_on_mouse_up(w, wid_load_mouse_up);
         wid_set_int_context(w, slot);
@@ -506,6 +511,6 @@ Game::select (void)
         wid_set_text(w, s);
         y_at += 3;
     }
-    load_header_only = false;
+    game_load_headers_only = false;
     wid_update(wid_load->wid_text_area->wid_text_area);
 }

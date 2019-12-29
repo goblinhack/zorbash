@@ -9,6 +9,9 @@
 #include "minilzo.h"
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
+#include "my_wid_popup.h"
+
+extern bool game_load_headers_only;
 
 std::ostream& operator<<(std::ostream &out, Bits<AgeMapp & > const my)
 {
@@ -216,14 +219,8 @@ std::ostream& operator<<(std::ostream &out,
     return (out);
 }
 
-void
-Game::save (void)
+bool Game::save (std::string file_to_save)
 {_
-    LOG("-");
-    CON("DUNGEON: saving %s seed %d", save_file.c_str(), seed);
-    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
-
     std::stringstream s(std::ios::in | std::ios::out | std::ios::binary);
 
     game->world.timestamp_dungeon_saved = time_get_time_ms();
@@ -256,7 +253,7 @@ Game::save (void)
                              (lzo_bytep)compressed, &compressed_len, wrkmem);
     if (r == LZO_E_OK) {
         CON("DUNGEON: saved as %s, compressed from %lu to %lu bytes",
-            save_file.c_str(),
+            file_to_save.c_str(),
             (unsigned long) uncompressed_len,
             (unsigned long) compressed_len);
     } else {
@@ -272,7 +269,7 @@ Game::save (void)
     //
     // Save the post compress buffer
     //
-    auto ofile = fopen(save_file.c_str(), "wb");
+    auto ofile = fopen(file_to_save.c_str(), "wb");
     fwrite((char*) &uncompressed_len, sizeof(uncompressed_len), 1, ofile);
     fwrite(compressed, compressed_len, 1, ofile);
     fclose(ofile);
@@ -281,8 +278,155 @@ Game::save (void)
     free(compressed);
     free(wrkmem);
 
+    return (true);
+}
+
+void
+Game::save (void)
+{_
+    LOG("-");
+    CON("DUNGEON: saving %s", save_file.c_str());
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+
+    save(save_file);
+
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: saved %s seed %d", save_file.c_str(), seed);
+    CON("DUNGEON: saved %s, seed %d", save_file.c_str(), seed);
     LOG("-");
+}
+
+void
+Game::save (int slot)
+{_
+    if (slot < 0) {
+        return;
+    }
+
+    if (slot >= MAX_SAVE_SLOTS) {
+        return;
+    }
+
+    auto save_file = saved_dir + "saved-slot-" + std::to_string(slot);
+
+    LOG("-");
+    CON("DUNGEON: saving %s", save_file.c_str());
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
+
+    save(save_file);
+
+    LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    CON("DUNGEON: saved %s, seed %d", save_file.c_str(), seed);
+    LOG("-");
+}
+
+static WidPopup *wid_save;
+
+static void wid_save_destroy (void)
+{
+    if (wid_save) {
+        delete wid_save;
+        wid_save = nullptr;
+    }
+}
+
+uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
+{
+    switch (key->mod) {
+        case KMOD_LCTRL:
+        case KMOD_RCTRL:
+        default:
+        switch (key->sym) {
+            default: {
+                auto c = wid_event_to_char(key);
+                switch (c) {
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9': {
+                        int slot = c - '0';
+                        game->save(slot);
+                        wid_save_destroy();
+                        return (true);
+                    }
+                    case SDLK_ESCAPE: {
+                        CON("PLAYER: save game cancelled");
+                        wid_save_destroy();
+                        return (true);
+                    }
+                }
+            }
+        }
+    }
+
+    return (true);
+}
+
+uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
+{
+    return (true);
+}
+
+uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    auto slot = wid_get_int_context(w);
+    game->save(slot);
+    wid_save_destroy();
+    return (true);
+}
+
+void Game::save_select (void)
+{_
+    if (wid_save) {
+        return;
+    }
+
+    auto m = ASCII_WIDTH / 2;
+    point tl = {m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2};
+    point br = {m + WID_POPUP_WIDTH_WIDE / 2, ITEMBAR_TL_Y - 2};
+    auto width = br.x - tl.x;
+
+    wid_save = new WidPopup(tl, br, tile_find_mand("save"), "ui_popup_wide");
+    wid_set_on_key_up(wid_save->wid_popup_container, wid_save_key_up);
+    wid_set_on_key_down(wid_save->wid_popup_container, wid_save_key_down);
+
+    game_load_headers_only = true;
+
+    wid_save->log("Choose a save slot. %%fg=red$ESC%%fg=reset$ to cancel");
+
+    int y_at = 2;
+    for (auto slot = 0; slot < MAX_SAVE_SLOTS; slot++) {
+        Game tmp;
+        auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
+        auto p = wid_save->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "save slot");
+        point tl = {0, y_at};
+        point br = {width - 2, y_at + 2};
+
+        std::string s = std::to_string(slot) + " ";
+        if (!load(tmp_file, tmp)) {
+            s += "<empty>";
+            wid_set_style(w, WID_STYLE_RED);
+        } else {
+            s += tmp.save_meta;
+            wid_set_style(w, WID_STYLE_GREEN);
+        }
+        wid_set_on_mouse_up(w, wid_save_mouse_up);
+        wid_set_int_context(w, slot);
+
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, s);
+        y_at += 3;
+    }
+    game_load_headers_only = false;
+    wid_update(wid_save->wid_text_area->wid_text_area);
 }

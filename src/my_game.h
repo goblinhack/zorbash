@@ -301,14 +301,17 @@ class Game {
 public:
     Game (void) {}
     Game (std::string appdata);
-    void init(void);
-    void fini(void);
-    void save(void);
-    void load(void);
-    void load(int slot);
     bool load(std::string save_file, class Game &target);
-    void select(void);
+    bool save(std::string save_file);
     void display(void);
+    void fini(void);
+    void init(void);
+    void load(int slot);
+    void load(void);
+    void load_select(void);
+    void save(int slot);
+    void save(void);
+    void save_select(void);
     void update_minimap(void);
 
     //

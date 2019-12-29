@@ -3575,18 +3575,15 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 case 's':
                     MINICON("Saving the game");
                     CON("USERCFG: saving the game");
-                    game->save();
+                    game->save_select();
                     CON("USERCFG: saved the game");
                     break;
 
                 case 'l':
                     MINICON("Loading a saved game");
                     CON("USERCFG: loading a saved game, destroy old");
-                    game->fini();
-                    CON("USERCFG: loaded a saved game, load new");
-                    game->load();
+                    game->load_select();
                     CON("USERCFG: loaded a saved game");
-                    game->select();
                     break;
 
                 case '`':
