@@ -113,6 +113,19 @@ extern int TILES_DOWN;
 #define ASCII_HEIGHT_MAX            ASCII_WIDTH_MAX
 
 //
+// UI button styles
+//
+#define WID_STYLE_OUTLINE           0
+#define WID_STYLE_GREEN             1
+#define WID_STYLE_RED               2
+#define WID_STYLE_NORMAL            3
+#define WID_STYLE_DARK              4
+
+#define WID_POPUP_WIDTH_NORMAL      24
+#define WID_POPUP_WIDTH_WIDE        36
+#define WID_POPUP_WIDTH_WIDEST      48
+
+//
 // Largest tile for collisions
 //
 #define MAX_TILE_WIDTH              64

@@ -16,12 +16,18 @@
 //
 void thing_cursor_move (void)
 {_
+#if 0
+    //
+    // Blocks scrolling when over item and status bars!
+    //
     int x = mouse_x;
     int y = mouse_y;
     pixel_to_ascii(&x, &y);
     if (get(wid_on_screen_at, x, y)) {
         return;
     }
+#endif
+
     if ((wheel_x != 0) || (wheel_y != 0)) {
         world->map_wanted_at += fpoint(wheel_x, -wheel_y);
     }

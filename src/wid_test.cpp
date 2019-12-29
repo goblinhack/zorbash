@@ -244,7 +244,7 @@ static void wid_test_wid_create (void)
         wid_sidebar = wid_new_square_window("text container2");
         wid_set_pos(wid_sidebar, tl, br);
         wid_set_shape_none(wid_sidebar);
-        wid_set_style(wid_sidebar, 0);
+        wid_set_style(wid_sidebar, WID_STYLE_OUTLINE);
     }
 
     int y_at = 0;
@@ -284,7 +284,7 @@ static void wid_test_wid_create (void)
 
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, wid_test_mouse_down);
-        wid_set_style(w, 4);
+        wid_set_style(w, WID_STYLE_DARK;
         wid_set_bg_tilename(w, "player1.pose");
     }
 
@@ -295,7 +295,7 @@ static void wid_test_wid_create (void)
         point br = {TITLEBAR_WIDTH, y_at + 4};
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, 4);
+        wid_set_style(w, WID_STYLE_DARK;
         wid_set_text(w, L"Ser Hacksalot");
         wid_set_shape_none(w);
     }
@@ -577,8 +577,8 @@ static void wid_test_wid_create (void)
 
 #if 0
     {
-        point tl = {0, MINICON_VIS_HEIGHT + 2};
-        point br = {ITEMBAR_TL_X - 1, ITEMBAR_TL_Y - 1};
+        point tl = {0, 2};
+        point br = {WID_POPUP_WIDTH_NORMAL, ITEMBAR_TL_Y - 2};
         auto w = new WidPopup(tl, br, tile_find_mand("player1.pose"));
         w->log("%%fg=yellow$This is a really long descriptive string that is a bit boring");
     }

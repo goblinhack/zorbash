@@ -47,7 +47,7 @@ static bool is_plausible_itanium_prefix(char* s) {
 std::string Traceback::to_string (void)
 {
     auto addrlist = &tb[0];
-    std::string sout = "stack trace:\n========================================================\n";
+    std::string sout = "stack trace:\n===========\n";
 
     if (size == 0) {
         sout +="  <empty, possibly corrupt>\n";
@@ -57,7 +57,7 @@ std::string Traceback::to_string (void)
     // resolve addresses into strings containing "filename(function+address)",
     // this array must be free()-ed
     char **symbollist = backtrace_symbols(addrlist, size);
-    const char *prefix = " ↪ ";
+    const char *prefix = " >";
 
     // address of this function.
     for (int i = 1; i < size; i++) {

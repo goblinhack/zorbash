@@ -56,7 +56,7 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
         wid_set_pos(w,
                     point(title_x + 1, 1),
                     point(title_x + tile_size, tile_size));
-        wid_set_style(w, 3);
+        wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_fg_tile(w, title_tile);
     }
 
