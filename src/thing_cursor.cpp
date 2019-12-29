@@ -16,6 +16,10 @@
 //
 void thing_cursor_move (void)
 {_
+    if (game->soft_paused || game->hard_paused) {
+        return;
+    }
+
 #if 0
     //
     // Blocks scrolling when over item and status bars!

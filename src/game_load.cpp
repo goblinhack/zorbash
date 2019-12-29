@@ -10,7 +10,7 @@
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
-#include "my_wid_error.h"
+#include "my_game_error.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
@@ -415,6 +415,7 @@ static void wid_load_destroy (void)
         delete wid_load;
         wid_load = nullptr;
     }
+    game->hard_paused = false;
 }
 
 uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -473,6 +474,7 @@ void Game::load_select (void)
     if (wid_load) {
         return;
     }
+    game->hard_paused = true;
 
     auto m = ASCII_WIDTH / 2;
     point tl = {m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2};
