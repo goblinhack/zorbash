@@ -88,6 +88,10 @@ void Thing::tick (void)
 
 void things_tick (void)
 {_
+    if (game->soft_paused || game->hard_paused) {
+        return;
+    }
+
     //
     // Allows for debugging
     //

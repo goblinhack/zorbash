@@ -311,6 +311,7 @@ public:
     void load_select(void);
     void save(int slot);
     void save(void);
+    void pause(void);
     void save_select(void);
     void update_minimap(void);
 
@@ -328,6 +329,12 @@ public:
     int                seed {};
     fpoint             mouse_over;
     uint32_t           fps_count = {};
+
+    //
+    // Soft pause is user initiated. Hard is when a menu is on screen.
+    //
+    bool                       soft_paused = false;
+    bool                       hard_paused = false;
 
     friend std::ostream& operator<<(std::ostream &out, 
                                     Bits<const class Game & > const my);

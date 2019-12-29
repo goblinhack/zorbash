@@ -3586,6 +3586,12 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     CON("USERCFG: loaded a saved game");
                     break;
 
+                case 'p':
+                    MINICON("Pausing the game");
+                    CON("USERCFG: pausing the game");
+                    game->pause();
+                    break;
+
                 case '`':
                     wid_toggle_hidden(wid_console_window);
                     wid_raise(wid_console_window);
