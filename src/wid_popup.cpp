@@ -36,7 +36,14 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
     point inner_br = point(width, height);
     int inner_w = inner_br.x - inner_tl.x;
     int inner_h = inner_br.y - inner_tl.y;
-    int tile_size = 6;
+
+    int tile_size;
+    if (title_tile) {
+        tile_size = 6;
+    } else {
+        tile_size = 0;
+    }
+
     if (title_tile) {
         inner_h -= tile_size;
         inner_tl.y += tile_size;
@@ -46,7 +53,9 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
         wid_popup_container = wid_new_square_window("wid_popup");
         wid_set_pos(wid_popup_container, tl, br);
         wid_set_style(wid_popup_container, -1);
-        wid_set_bg_tile(wid_popup_container, tile_find_mand(background));
+        if (background != "") {
+            wid_set_bg_tile(wid_popup_container, tile_find_mand(background));
+        }
     }
 
     if (title_tile) {

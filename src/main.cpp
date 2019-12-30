@@ -625,8 +625,8 @@ int32_t main (int32_t argc, char *argv[])
     // Create a fresh game if none was loaded
     //
     room_init();
-    game->init();
 #if 0
+    game->init();
     game->load();
     game->init();
     game->fini();
@@ -638,11 +638,14 @@ int32_t main (int32_t argc, char *argv[])
     game->load();
 #endif
 
+#if 0
     if (!wid_test_init()) {
         ERR("wid_test init");
     }
+#endif
 
     wid_minicon_flush();
+    game->title();
 
     sdl_loop();
     gl_leave_2d_mode();
