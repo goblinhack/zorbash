@@ -4,14 +4,10 @@
  */
 
 #include "my_game.h"
-#include "my_dungeon.h"
-#include <sstream>
-#include "minilzo.h"
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
-#include "my_game_paused.h"
-#include "my_traceback.h"
+#include "my_ascii.h"
 
 static WidPopup *wid_paused_window;
 
@@ -75,7 +71,7 @@ void Game::pause (void)
     auto width = br.x - tl.x;
 
     wid_paused_window =
-      new WidPopup(tl, br, tile_find_mand("pause"), "ui_popup_widest");
+      new WidPopup(tl, br, tile_find_mand("pause"), "ui_popup");
     wid_set_on_key_up(
       wid_paused_window->wid_popup_container, wid_paused_key_up);
     wid_set_on_key_down(

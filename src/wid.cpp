@@ -5635,13 +5635,12 @@ void wid_mouse_move (Widp w)
 //
 void wid_display_all (void)
 {_
-    wid_tick_all();
-    wid_move_all();
-
     blit_fbo_bind(FBO_WID);
-
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
+
+    wid_tick_all();
+    wid_move_all();
 
     wid_on_screen_at = {};
 

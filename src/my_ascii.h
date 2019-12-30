@@ -22,9 +22,12 @@ struct ascii_ {
     //
     // UI triggers for ASCII co-ords.
     //
-    std::array<std::array<int32_t, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> sdl_mod {};
-    std::array<std::array<int32_t, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> sdl_key {};
-    std::array<std::array<int32_t, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> mouse_button {};
+    std::array<std::array<int32_t, 
+                    ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> sdl_mod {};
+    std::array<std::array<int32_t, 
+                    ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> sdl_key {};
+    std::array<std::array<int32_t, 
+                    ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> mouse_button {};
 
     //
     // Callbacks for ASCII co-ords.

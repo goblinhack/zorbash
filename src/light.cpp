@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_game.h"
 #include "my_gl.h"
@@ -54,9 +54,9 @@ Lightp light_new (Thingp owner,
     l->ray.resize(max_light_rays);
     std::fill(l->ray.begin(), l->ray.end(), Ray{0});
 
-    /*
-     * First generate the right ray lengths.
-     */
+    //
+    // First generate the right ray lengths.
+    //
     double dr = RAD_360 / (double) max_light_rays;
     for (auto i = 0; i < max_light_rays; i++) {
         auto r = &getref(l->ray, i);
@@ -111,10 +111,10 @@ void Light::calculate (void)
         maxy = MAP_HEIGHT;
     }
 
-    /*
-     * Walk the light rays in a circle. First pass is to find the nearest
-     * walls.
-     */
+    //
+    // Walk the light rays in a circle. First pass is to find the nearest
+    // walls.
+    //
     bool do_set_visited = (world->player && (owner == world->player));
 
     for (int i = 0; i < max_light_rays; i++) {
@@ -143,10 +143,10 @@ void Light::calculate (void)
 
         r->depth_closest = step;
 
-        /*
-         * Let the light leak in a little bit. This handles corners so that
-         * a point hitting on or near a corner will light the corner tile.
-         */
+        //
+        // Let the light leak in a little bit. This handles corners so that
+        // a point hitting on or near a corner will light the corner tile.
+        //
         double step2 = step;
         for (; step2 < step + 0.9; step2 += 0.01) {
             double rad = step2;
@@ -172,14 +172,14 @@ void Light::calculate (void)
         }
     }
 
-    /*
-     * Now for light penetrating into rock. We stop a bit short due to the
-     * fuzzing of the light we do when rendering, to avoid light leaking into
-     * tiles we should not see.
-     *
-     * Cannot merge these two loops as we depend on is_nearest_wall being set
-     * for all tiles first.
-     */
+    //
+    // Now for light penetrating into rock. We stop a bit short due to the
+    // fuzzing of the light we do when rendering, to avoid light leaking into
+    // tiles we should not see.
+    //
+    // Cannot merge these two loops as we depend on is_nearest_wall being set
+    // for all tiles first.
+    //
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
         double radius = r->depth_closest;
@@ -251,9 +251,9 @@ void Light::render_triangle_fans (void)
         {
             int i;
 
-            /*
-             * Walk the light rays in a circle.
-             */
+            //
+            // Walk the light rays in a circle.
+            //
             push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
             //
@@ -272,9 +272,9 @@ void Light::render_triangle_fans (void)
                 push_point(p1x, p1y, red, green, blue, alpha);
             }
 
-            /*
-             * Complete the circle with the first point again.
-             */
+            //
+            // Complete the circle with the first point again.
+            //
             i = 0; {
                 auto r = &getref(ray, i);
                 double radius = r->depth_furthest;
@@ -301,14 +301,14 @@ void Light::render_triangle_fans (void)
         blit_flush_triangle_fan(b, e);
     }
 
-    /*
-     * Blend a texture on top of all the above blending so we get smooth
-     * fade off of the light.
-     */
+    //
+    // Blend a texture on top of all the above blending so we get smooth
+    // fade off of the light.
+    //
     if (world->player && (owner == world->player)) {
-        /*
-         * To account for the blurring in blit_flush_triangle_fan_smoothed.
-         */
+        //
+        // To account for the blurring in blit_flush_triangle_fan_smoothed.
+        //
         if (flicker > random_range(10, 20)) {
             flicker = 0;
         }
@@ -395,9 +395,9 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
                     continue;
                 }
 
-                /*
-                 * Too far away from the player? Skip rendering.
-                 */
+                //
+                // Too far away from the player? Skip rendering.
+                //
                 if (world->player) {
                     auto p = world->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
@@ -444,9 +444,9 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
                         break;
                 }
 #endif
-                /*
-                 * Too far away from the player? Skip rendering.
-                 */
+                //
+                // Too far away from the player? Skip rendering.
+                //
                 if (world->player) {
                     auto p = world->player;
                     auto len = DISTANCE(l->at.x, l->at.y,

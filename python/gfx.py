@@ -185,6 +185,18 @@ def init_64x16_ui():
         file="data/gfx/ui_status_bar.tga",
         name="ui_status_bar", width=96, height=16, arr=tiles)
 
+def init_title():
+    tiles = [
+        "title1", "title2", "title3", "title4", "title5", "title6", "title7", "title8", 
+        "title9", "title10", "title11", "title12", "title13", "title14", "title15", 
+        "title16", "title17", "title18", "title19", "title20", "title21", "title22", 
+        "title23", "title24", "title25", "title26", "title27", "title28", "title29", 
+        "title30", "title31",  "title32",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/zorbash.tga",
+        name="title", width=112, height=84, arr=tiles)
+
 def init_ui_popup():
     tiles = [
         "ui_popup", 
@@ -705,6 +717,7 @@ init_text()
 init_light()
 init_ui_box()
 init_64x16_ui()
+init_title()
 init_ui_popup()
 init_ui_popup_wide()
 init_ui_popup_widest()

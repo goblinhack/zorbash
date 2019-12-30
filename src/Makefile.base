@@ -84,6 +84,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid_console.o 		\
     $(OBJDIR)/game_error.o 		\
     $(OBJDIR)/game_paused.o 		\
+    $(OBJDIR)/game_title.o 		\
     $(OBJDIR)/wid_minicon.o 		\
     $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_test.o 		\

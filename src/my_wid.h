@@ -570,5 +570,6 @@ extern Widp wid_focus;
 
 extern const int32_t wid_destroy_delay_ms;
 extern std::array<
-         std::array<Widp, ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> wid_on_screen_at;
+         std::array<Widp, ASCII_HEIGHT_MAX>,
+            ASCII_WIDTH_MAX> wid_on_screen_at;
 #endif

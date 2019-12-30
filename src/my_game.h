@@ -308,6 +308,7 @@ public:
     void init(void);
     void load(int slot);
     void load(void);
+    void title(void);
     void load_select(void);
     void save(int slot);
     void save(void);
