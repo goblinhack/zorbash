@@ -6,7 +6,6 @@
 ![Alt text](screenshot.1.png?raw=true "")
 ![Alt text](screenshot.2.png?raw=true "")
 ![Alt text](screenshot.3.png?raw=true "")
-![Alt text](screenshot.4.png?raw=true "")
 ```diff
                        Hark! Hear now a tale untold
                        since ancient times of yore
