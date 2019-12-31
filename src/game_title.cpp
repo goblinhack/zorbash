@@ -35,13 +35,12 @@ uint8_t wid_title_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
 
 uint8_t wid_title_config (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    wid_title_destroy();
     return (false);
 }
 
 uint8_t wid_title_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    wid_title_destroy();
+    game->quit_select();
     return (false);
 }
 
@@ -58,11 +57,15 @@ uint8_t wid_title_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case 'n':
                         wid_title_new_game(nullptr, 0, 0, 0);
                         return (true);
-                    case '\n':
-                    case SDLK_ESCAPE: {
-                        wid_title_destroy();
+                    case 'l':
+                        wid_title_load_game(nullptr, 0, 0, 0);
                         return (true);
-                    }
+                    case 'c':
+                        wid_title_config(nullptr, 0, 0, 0);
+                        return (true);
+                    case 'q':
+                        wid_title_quit_game(nullptr, 0, 0, 0);
+                        return (true);
                 }
             }
         }

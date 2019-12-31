@@ -41,7 +41,7 @@ bool Game::paused (void)
         return (true);
     }
 
-    if (!time_have_x_tenths_passed_since(10, last_pause)) {
+    if (!time_have_x_tenths_passed_since(5, last_pause)) {
         return (true);
     }
     return (false);
@@ -68,9 +68,7 @@ uint8_t wid_paused_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {
                 auto c = wid_event_to_char(key);
                 switch (c) {
-#if 0
-                    case ' ': // not safe as used for sword swipe
-#endif
+                    case ' ':
                     case '\n':
                     case SDLK_ESCAPE: {
                         wid_paused_destroy();
@@ -103,11 +101,11 @@ void Game::pause_select (void)
     game->soft_pause();
 
     point tl = {0, ASCII_HEIGHT - 14};
-    point br = {11, ASCII_HEIGHT - 1};
+    point br = {WID_POPUP_WIDTH_NORMAL, ASCII_HEIGHT - 1};
     auto width = br.x - tl.x - 1;
 
     wid_paused_window =
-      new WidPopup(tl, br, tile_find_mand("pause"), "");
+      new WidPopup(tl, br, tile_find_mand("pause"), "ui_popup_short");
     wid_set_on_key_up(
       wid_paused_window->wid_popup_container, wid_paused_key_up);
     wid_set_on_key_down(

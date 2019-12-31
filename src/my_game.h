@@ -302,24 +302,25 @@ public:
     Game (void) {}
     Game (std::string appdata);
     bool load(std::string save_file, class Game &target);
+    bool paused(void);
     bool save(std::string save_file);
     void display(void);
     void fini(void);
+    void hard_pause(void);
+    void hard_unpause(void);
     void init(void);
     void load(int slot);
     void load(void);
-    void title(void);
     void load_select(void);
+    void pause_select(void);
+    void quit_select(void);
     void save(int slot);
     void save(void);
-    void pause_select(void);
     void save_select(void);
-    void update_minimap(void);
     void soft_pause(void);
     void soft_unpause(void);
-    void hard_pause(void);
-    void hard_unpause(void);
-    bool paused(void);
+    void title(void);
+    void update_minimap(void);
 
     //
     // Save file name, contains the date and other useful save slot info

@@ -18,6 +18,8 @@ void Game::fini (void)
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
     fps_count = 0;
+    started = false;
+
     config.fini();
     world.fini();
 
