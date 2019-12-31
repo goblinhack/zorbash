@@ -11,6 +11,7 @@
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_game_error.h"
+#include "my_game_status.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
@@ -380,6 +381,8 @@ Game::load (std::string file_to_load, class Game &target)
 
     if (!game_load_headers_only) {
         wid_visible(wid_minicon_window);
+        game_status_fini();
+        game_status_init();
     }
 //
     free(uncompressed);
