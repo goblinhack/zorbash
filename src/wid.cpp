@@ -3528,36 +3528,31 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
     w = wid_get_top_parent(wid_console_input_line);
 
     switch (key->mod) {
-        default:
+        case KMOD_LCTRL:
+        case KMOD_RCTRL:
             switch ((int32_t)key->sym) {
-                case '\\':
-                    sdl_screenshot();
-                    MINICON("Screenshot taken");
-                    MINICON("USERCFG: screenshot taken");
-                    break;
-
                 case '1':
-                    MINICON("Show inverted toggle");
-                    CON("USERCFG: gfx show inverted toggle");
-                    config_gfx_inverted_toggle();
+                    if(game && game->config.debug_mode) {
+                        MINICON("Show inverted toggle");
+                        CON("USERCFG: gfx show inverted toggle");
+                        config_gfx_inverted_toggle();
+                    }
                     break;
 
                 case '2':
-                    MINICON("Show lights toggle");
-                    CON("USERCFG: gfx show lights toggle");
-                    config_gfx_lights_toggle();
+                    if(game && game->config.debug_mode) {
+                        MINICON("Show lights toggle");
+                        CON("USERCFG: gfx show lights toggle");
+                        config_gfx_lights_toggle();
+                    }
                     break;
 
                 case '3':
-                    MINICON("Show hidden objects toggle");
-                    CON("USERCFG: gfx show hidden toggle");
-                    config_gfx_show_hidden_toggle();
-                    break;
-
-                case 'z':
-                    MINICON("Zoom in");
-                    CON("USERCFG: zoom in");
-                    config_gfx_zoom_in();
+                    if(game && game->config.debug_mode) {
+                        MINICON("Show hidden objects toggle");
+                        CON("USERCFG: gfx show hidden toggle");
+                        config_gfx_show_hidden_toggle();
+                    }
                     break;
 
                 case 'r':
@@ -3566,6 +3561,20 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     game->fini();
                     game->init();
                     CON("USERCFG: reloaded dungeon");
+                    break;
+            }
+        default:
+            switch ((int32_t)key->sym) {
+                case '\\':
+                    sdl_screenshot();
+                    MINICON("Screenshot taken");
+                    MINICON("USERCFG: screenshot taken");
+                    break;
+
+                case 'z':
+                    MINICON("Zoom in");
+                    CON("USERCFG: zoom in");
+                    config_gfx_zoom_in();
                     break;
 
                 case 's':

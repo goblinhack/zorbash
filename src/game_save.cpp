@@ -178,6 +178,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.gfx_show_hidden);
     out << bits(my.t.gfx_lights);
     out << bits(my.t.gfx_zoom);
+    out << bits(my.t.debug_mode);
     out << bits(my.t.sound_volume);
     out << bits(my.t.music_volume);
     out << bits(my.t.vsync_enable);
