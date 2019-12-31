@@ -13,6 +13,10 @@ void player_tick (void)
         return;
     }
 
+    if (game->paused()) {
+        return;
+    }
+
     auto player = world->player;
     if (!player || player->is_dead || player->is_hidden) {
         return;

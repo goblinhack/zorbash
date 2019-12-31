@@ -20,11 +20,15 @@ GAME_OBJECTS=				\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
     $(OBJDIR)/game_display.o 		\
+    $(OBJDIR)/game_dump.o 		\
+    $(OBJDIR)/game_error.o 		\
     $(OBJDIR)/game_fini.o 		\
     $(OBJDIR)/game_init.o 		\
-    $(OBJDIR)/game_save.o 		\
     $(OBJDIR)/game_load.o 		\
-    $(OBJDIR)/game_dump.o 		\
+    $(OBJDIR)/game_paused.o 		\
+    $(OBJDIR)/game_quit.o 		\
+    $(OBJDIR)/game_save.o 		\
+    $(OBJDIR)/game_title.o 		\
     $(OBJDIR)/gauss.o 		        \
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\
@@ -49,9 +53,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
     $(OBJDIR)/slre.o 			\
+    $(OBJDIR)/sprintf.o 		\
     $(OBJDIR)/stb_image.o 		\
     $(OBJDIR)/string.o 			\
-    $(OBJDIR)/sprintf.o 		\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
@@ -82,9 +86,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/util.o 			\
     $(OBJDIR)/wid.o 			\
     $(OBJDIR)/wid_console.o 		\
-    $(OBJDIR)/game_error.o 		\
-    $(OBJDIR)/game_paused.o 		\
-    $(OBJDIR)/game_title.o 		\
     $(OBJDIR)/wid_minicon.o 		\
     $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_test.o 		\
@@ -92,8 +93,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
     $(OBJDIR)/world_fini.o 		\
-    $(OBJDIR)/world_init.o 		\
     $(OBJDIR)/world_id.o 		\
+    $(OBJDIR)/world_init.o 		\
 
 #
 # compile

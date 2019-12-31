@@ -363,6 +363,11 @@ Game::load (std::string file_to_load, class Game &target)
     std::string s((const char*)uncompressed, (size_t)uncompressed_len);
     std::istringstream in(s);
 
+    if (!game_load_headers_only) {
+        wid_minicon_fini();
+        wid_minicon_init();
+    }
+
     game_load_error = "";
     in >> bits(target);
 //    this->dump("", std::cout);
@@ -373,6 +378,9 @@ Game::load (std::string file_to_load, class Game &target)
         return (false);
     }
 
+    if (!game_load_headers_only) {
+        wid_visible(wid_minicon_window);
+    }
 //
     free(uncompressed);
     free(compressed);

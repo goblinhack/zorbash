@@ -3583,6 +3583,10 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     game->load_select();
                     break;
 
+                case 'q':
+                    game->quit_select();
+                    break;
+
                 case 'p':
                     MINICON("Pausing the game");
                     CON("USERCFG: pausing the game");
