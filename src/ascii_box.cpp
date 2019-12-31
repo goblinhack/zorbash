@@ -17,15 +17,14 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
     int y;
 
     static bool init;
-    static const int MAX_STYLES = 5;
     static const int MAX_UI_SIZE = 16;
     static const int MAX_UI_BG_SIZE = MAX_UI_SIZE - 2;
     static std::array<
                std::array<
                    std::array<Tilep, MAX_UI_SIZE>,
-                       MAX_UI_SIZE>, MAX_STYLES> tiles = {};
+                       MAX_UI_SIZE>, WID_STYLE_MAX> tiles = {};
 
-    if (style >= MAX_STYLES) {
+    if (style >= WID_STYLE_MAX) {
         DIE("unimplemented style %d", style);
     }
 

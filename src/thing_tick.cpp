@@ -88,6 +88,10 @@ void Thing::tick (void)
 
 void things_tick (void)
 {_
+    if (!game->started) {
+        return;
+    }
+
     if (game->paused()) {
         return;
     }

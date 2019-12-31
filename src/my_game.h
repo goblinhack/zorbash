@@ -313,6 +313,7 @@ public:
     void load(void);
     void load_select(void);
     void pause_select(void);
+    void dead_select(void);
     void quit_select(void);
     void save(int slot);
     void save(void);

@@ -120,6 +120,8 @@ extern int TILES_DOWN;
 #define WID_STYLE_RED               2
 #define WID_STYLE_NORMAL            3
 #define WID_STYLE_DARK              4
+#define WID_STYLE_NONE              5
+#define WID_STYLE_MAX               6
 
 #define WID_POPUP_WIDTH_NORMAL      24
 #define WID_POPUP_WIDTH_WIDE        36
@@ -140,6 +142,10 @@ extern int TILES_DOWN;
 #define CONSOLE_INPUT_COLOR         ORANGE
 #define CONSOLE_WIDTH               120
 #define CONSOLE_HEIGHT              200
+
+#define CONSOLE_KEY1                '`'
+#define CONSOLE_KEY2                '~'
+#define CONSOLE_KEY3                '\\'
 
 #define SIDEBAR_WIDTH               14
 #define TITLEBAR_WIDTH              SIDEBAR_WIDTH
