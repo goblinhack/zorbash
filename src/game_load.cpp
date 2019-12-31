@@ -232,6 +232,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.gfx_show_hidden);
     in >> bits(my.t.gfx_lights);
     in >> bits(my.t.gfx_zoom);
+    in >> bits(my.t.debug_mode);
     in >> bits(my.t.sound_volume);
     in >> bits(my.t.music_volume);
     in >> bits(my.t.vsync_enable);

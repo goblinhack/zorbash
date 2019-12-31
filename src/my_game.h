@@ -270,6 +270,7 @@ public:
     bool               gfx_show_hidden              = false;
     bool               gfx_lights                   = true;
     uint32_t           gfx_zoom                     = 4;
+    bool               debug_mode                   = false;
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
     bool               vsync_enable                 = true;
