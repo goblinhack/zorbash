@@ -16,7 +16,7 @@
 //
 void thing_cursor_move (void)
 {_
-    if (game->soft_paused || game->hard_paused) {
+    if (game->paused()) {
         return;
     }
 

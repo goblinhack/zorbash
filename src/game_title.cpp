@@ -19,6 +19,32 @@ static void wid_title_destroy (void)
     }
 }
 
+uint8_t wid_title_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    wid_title_destroy();
+    game->init();
+    wid_visible(wid_minicon_window);
+    return (false);
+}
+
+uint8_t wid_title_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    game->load_select();
+    return (false);
+}
+
+uint8_t wid_title_config (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    wid_title_destroy();
+    return (false);
+}
+
+uint8_t wid_title_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    wid_title_destroy();
+    return (false);
+}
+
 uint8_t wid_title_key_up (Widp w, const struct SDL_KEYSYM *key)
 {
     switch (key->mod) {
@@ -29,9 +55,9 @@ uint8_t wid_title_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {
                 auto c = wid_event_to_char(key);
                 switch (c) {
-#if 0
-                    case ' ': // not safe as used for sword swipe
-#endif
+                    case 'n':
+                        wid_title_new_game(nullptr, 0, 0, 0);
+                        return (true);
                     case '\n':
                     case SDLK_ESCAPE: {
                         wid_title_destroy();
@@ -50,12 +76,6 @@ uint8_t wid_title_key_down (Widp w, const struct SDL_KEYSYM *key)
     return (false);
 }
 
-uint8_t wid_title_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{
-    wid_title_destroy();
-    return (false);
-}
-
 void wid_title_tick (Widp w)
 {
     static int frame = 1;
@@ -63,7 +83,7 @@ void wid_title_tick (Widp w)
 
     if (time_have_x_tenths_passed_since(1, ts)) {
         frame++;
-        if (frame > 32) {
+        if (frame > 64) {
             frame = 1;
         }
         ts = time_get_time_ms_cached();
@@ -72,6 +92,12 @@ void wid_title_tick (Widp w)
     blit_init();
     tile_blit(tile_find_mand(t.c_str()), fpoint(0,0), fpoint(1,1));
     blit_flush();
+
+    ascii_putf(1, ASCII_HEIGHT - 2, GRAY, BLACK, L"Version " VERSION);
+
+    if (game->started) {
+        wid_title_destroy();
+    }
 }
 
 void Game::title (void)
@@ -80,10 +106,9 @@ void Game::title (void)
         wid_title_destroy();
     }
 
-    point tl = {ASCII_WIDTH - WID_POPUP_WIDTH_NORMAL - 3,
-                ASCII_HEIGHT - 15 - 3};
-    point br = {ASCII_WIDTH - 2, ASCII_HEIGHT - 2};
-    auto width = br.x - tl.x;
+    point tl = {ASCII_WIDTH - WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 16};
+    point br = {ASCII_WIDTH - 7, ASCII_HEIGHT - 1};
+    auto width = br.x - tl.x - 2;
 
     wid_title_window = new WidPopup(tl, br, nullptr, "");
     {
@@ -98,48 +123,48 @@ void Game::title (void)
         auto p = wid_title_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "New Game");
 
-        point tl = {1, y_at};
-        point br = {width - 3, y_at + 2};
-        wid_set_style(w, WID_STYLE_OUTLINE);
-        wid_set_on_mouse_up(w, wid_title_mouse_up);
+        point tl = {0, y_at};
+        point br = {width, y_at + 2};
+        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_title_new_game);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "New Game");
+        wid_set_text(w, "%%fg=white$N%%fg=reset$ew game");
     }
     y_at += 3;
     {
         auto p = wid_title_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Load Game");
 
-        point tl = {1, y_at};
-        point br = {width - 3, y_at + 2};
-        wid_set_style(w, WID_STYLE_OUTLINE);
-        wid_set_on_mouse_up(w, wid_title_mouse_up);
+        point tl = {0, y_at};
+        point br = {width, y_at + 2};
+        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_title_load_game);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "Load Game");
+        wid_set_text(w, "%%fg=white$L%%fg=reset$oad game");
     }
     y_at += 3;
     {
         auto p = wid_title_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Config");
 
-        point tl = {1, y_at};
-        point br = {width - 3, y_at + 2};
-        wid_set_style(w, WID_STYLE_OUTLINE);
-        wid_set_on_mouse_up(w, wid_title_mouse_up);
+        point tl = {0, y_at};
+        point br = {width, y_at + 2};
+        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_title_config);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "Config");
+        wid_set_text(w, "%%fg=white$C%%fg=reset$onfig");
     }
     y_at += 3;
     {
         auto p = wid_title_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Quit Game");
 
-        point tl = {1, y_at};
-        point br = {width - 3, y_at + 2};
-        wid_set_style(w, WID_STYLE_OUTLINE);
-        wid_set_on_mouse_up(w, wid_title_mouse_up);
+        point tl = {0, y_at};
+        point br = {width, y_at + 2};
+        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, wid_title_quit_game);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "Quit Game");
+        wid_set_text(w, "%%fg=white$Q%%fg=reset$uit Game");
     }
 
     wid_update(wid_title_window->wid_text_area->wid_text_area);
