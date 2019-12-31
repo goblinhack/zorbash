@@ -316,6 +316,7 @@ public:
     void pause_select(void);
     void dead_select(void);
     void quit_select(void);
+    void config_select(void);
     void save(int slot);
     void save(void);
     void save_select(void);
