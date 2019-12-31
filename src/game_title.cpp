@@ -8,6 +8,7 @@
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_ascii.h"
+#include "my_game_status.h"
 
 static WidPopup *wid_title_window;
 
@@ -24,6 +25,8 @@ uint8_t wid_title_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     wid_title_destroy();
     game->init();
     wid_visible(wid_minicon_window);
+    game_status_fini();
+    game_status_init();
     return (false);
 }
 
@@ -108,6 +111,7 @@ void Game::title (void)
     if (wid_title_window) {
         wid_title_destroy();
     }
+    game_status_fini();
 
     point tl = {ASCII_WIDTH - WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 16};
     point br = {ASCII_WIDTH - 7, ASCII_HEIGHT - 1};
