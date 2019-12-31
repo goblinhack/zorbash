@@ -57,6 +57,13 @@ uint8_t wid_title_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {
                 auto c = wid_event_to_char(key);
                 switch (c) {
+                    case CONSOLE_KEY1:
+                    case CONSOLE_KEY2:
+                    case CONSOLE_KEY3:
+                        //
+                        // Magic keys we use to toggle the console.
+                        //
+                        return (false);
                     case 'n':
                         wid_title_new_game(nullptr, 0, 0, 0);
                         return (true);
@@ -79,7 +86,27 @@ uint8_t wid_title_key_up (Widp w, const struct SDL_KEYSYM *key)
 
 uint8_t wid_title_key_down (Widp w, const struct SDL_KEYSYM *key)
 {
-    return (false);
+    switch (key->mod) {
+        case KMOD_LCTRL:
+        case KMOD_RCTRL:
+        default:
+        switch (key->sym) {
+            default: {
+                auto c = wid_event_to_char(key);
+                switch (c) {
+                    case CONSOLE_KEY1:
+                    case CONSOLE_KEY2:
+                    case CONSOLE_KEY3:
+                        //
+                        // Magic keys we use to toggle the console.
+                        //
+                        return (false);
+                }
+            }
+        }
+    }
+
+    return (true);
 }
 
 void wid_title_tick (Widp w)
@@ -108,6 +135,8 @@ void wid_title_tick (Widp w)
 
 void Game::title (void)
 {_
+    CON("Main menu");
+
     if (wid_title_window) {
         wid_title_destroy();
     }

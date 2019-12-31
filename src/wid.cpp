@@ -2044,10 +2044,6 @@ Widp wid_new_container (Widp parent, std::string name)
 
     wid_set_name(w, name);
 
-    color col = BLACK;
-    col.a = 0;
-    glcolor(col);
-
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT, WHITE);
@@ -3473,9 +3469,9 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                         break;
                     }
 
-                case '`':
-                case '~':
-                case '\\':
+                case CONSOLE_KEY1:
+                case CONSOLE_KEY2:
+                case CONSOLE_KEY3:
                     //
                     // Magic keys we use to toggle the console.
                     //
@@ -5646,6 +5642,7 @@ void wid_display_all (void)
     blit_fbo_bind(FBO_WID);
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
+    glcolor(WHITE);
 
     wid_tick_all();
 _

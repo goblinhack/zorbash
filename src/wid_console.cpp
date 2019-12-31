@@ -192,7 +192,8 @@ static void wid_console_wid_create (void)
         wid_console_container = wid_new_square_button(wid_console_window,
                                                       "wid console inner area");
         wid_set_pos(wid_console_container, tl, br);
-        wid_set_shape_none(wid_console_container);
+//        wid_set_shape_none(wid_console_container);
+        wid_set_style(wid_console_container, WID_STYLE_DARK);
     }
 
     {

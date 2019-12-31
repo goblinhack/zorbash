@@ -696,6 +696,7 @@ void Thing::kill (void)
 
     if (is_player()) {
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
+        game->dead_select();
     }
 
     const auto tpp = tp();
