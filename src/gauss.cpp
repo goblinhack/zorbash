@@ -1,8 +1,7 @@
-/*
- * Copyright (C) 2011-2017 goblinhack@gmail.com
- *
- * See the README file for license info for license.
- */
+//
+// Copyright (C) 2011-2017 goblinhack@gmail.com
+// See the README file for license info for license.
+//
 
 #include "my_main.h"
 #include "my_math.h"

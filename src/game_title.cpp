@@ -1,7 +1,7 @@
-/*
- * Copyright goblinhack@gmail.com
- * See the README file for license info.
- */
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
 
 #include "my_game.h"
 #include "my_wid_minicon.h"
@@ -38,6 +38,7 @@ uint8_t wid_title_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
 
 uint8_t wid_title_config (Widp w, int32_t x, int32_t y, uint32_t button)
 {
+    game->config_select();
     return (false);
 }
 
