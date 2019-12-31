@@ -637,7 +637,7 @@ int32_t main (int32_t argc, char *argv[])
     game->load();
 #endif
 
-#if 0
+#if 1
     if (!wid_test_init()) {
         ERR("wid_test init");
     }
