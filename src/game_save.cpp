@@ -333,7 +333,7 @@ static void wid_save_destroy (void)
         delete wid_save;
         wid_save = nullptr;
     }
-    game->hard_paused = false;
+    game->hard_unpause();
 }
 
 uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -392,7 +392,7 @@ void Game::save_select (void)
     if (wid_save) {
         return;
     }
-    game->hard_paused = true;
+    game->hard_pause();
 
     auto m = ASCII_WIDTH / 2;
     point tl = {m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2};

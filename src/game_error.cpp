@@ -21,7 +21,7 @@ static void wid_error_destroy (void)
         delete wid_error_window;
         wid_error_window = nullptr;
     }
-    game->hard_paused = false;
+    game->hard_unpause();
 }
 
 uint8_t wid_error_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -66,7 +66,7 @@ void wid_error (std::string error)
     if (wid_error_window) {
         wid_error_destroy();
     }
-    game->hard_paused = true;
+    game->hard_pause();
 
     auto m = ASCII_WIDTH / 2;
     point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2};
