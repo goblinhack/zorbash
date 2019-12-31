@@ -15,6 +15,7 @@
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
 static timestamp_t ts_tmp;
+static std::string game_load_error;
 bool game_load_headers_only;
 
 //
@@ -255,6 +256,14 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 
 std::istream& operator>>(std::istream &in, Bits<class Game &> my)
 {_
+    in >> bits(my.t.version);
+
+    if (my.t.version != VERSION) {
+        game_load_error = 
+          "bad version '" VERSION "' v '" + my.t.version + "'";
+        return (in);
+    }
+
     in >> bits(my.t.save_slot);
     in >> bits(my.t.save_meta);
     in >> bits(my.t.save_file);
@@ -266,6 +275,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.saved_dir);
     in >> bits(my.t.seed);
     in >> bits(my.t.fps_count);
+    in >> bits(my.t.started);
     in >> bits(my.t.config);
     in >> bits(my.t.world);
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
@@ -321,7 +331,7 @@ Game::load (std::string file_to_load, class Game &target)
     auto vec = read_lzo_file(file_to_load, &uncompressed_len);
     if (vec.size() <= 0) {
         if (!game_load_headers_only) {
-            wid_error("failed to load, empty file?");
+            wid_error("load error, empty file?");
         }
         return (false);
     }
@@ -333,7 +343,8 @@ Game::load (std::string file_to_load, class Game &target)
     memcpy(compressed, data, compressed_len);
 
     lzo_uint new_len = 0;
-    int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, (lzo_bytep)uncompressed, &new_len, NULL);
+    int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, 
+                             (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
         if (!game_load_headers_only) {
             CON("DUNGEON: loading %s, decompressed from %lu to %lu bytes",
@@ -351,8 +362,17 @@ Game::load (std::string file_to_load, class Game &target)
 
     std::string s((const char*)uncompressed, (size_t)uncompressed_len);
     std::istringstream in(s);
+
+    game_load_error = "";
     in >> bits(target);
 //    this->dump("", std::cout);
+    if (game_load_error != "") {
+        if (!game_load_headers_only) {
+            wid_error("load error, " + game_load_error);
+        }
+        return (false);
+    }
+
 //
     free(uncompressed);
     free(compressed);
@@ -415,7 +435,7 @@ static void wid_load_destroy (void)
         delete wid_load;
         wid_load = nullptr;
     }
-    game->hard_paused = false;
+    game->hard_unpause();
 }
 
 uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -471,10 +491,13 @@ uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 
 void Game::load_select (void)
 {_
+    MINICON("Loading a saved game");
+    CON("USERCFG: loading a saved game, destroy old");
+
     if (wid_load) {
         return;
     }
-    game->hard_paused = true;
+    game->hard_pause();
 
     auto m = ASCII_WIDTH / 2;
     point tl = {m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2};
@@ -498,9 +521,13 @@ void Game::load_select (void)
         point tl = {0, y_at};
         point br = {width - 2, y_at + 2};
 
-        std::string s = std::to_string(slot) + " ";
+        std::string s = std::to_string(slot) + ": ";
         if (!load(tmp_file, tmp)) {
-            s += "<empty>";
+            if (game_load_error != "") {
+                s += game_load_error;
+            } else {
+                s += "<empty>";
+            }
             wid_set_style(w, WID_STYLE_RED);
         } else {
             s += tmp.save_meta;
@@ -515,4 +542,5 @@ void Game::load_select (void)
     }
     game_load_headers_only = false;
     wid_update(wid_load->wid_text_area->wid_text_area);
+    CON("USERCFG: loaded a saved game");
 }

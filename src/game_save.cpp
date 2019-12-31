@@ -204,6 +204,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
 std::ostream& operator<<(std::ostream &out,
                          Bits<const class Game & > const my)
 {_
+    out << bits(my.t.version);
     out << bits(my.t.save_slot);
     out << bits(my.t.save_meta);
     out << bits(my.t.save_file);
@@ -211,6 +212,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.saved_dir);
     out << bits(my.t.seed);
     out << bits(my.t.fps_count);
+    out << bits(my.t.started);
     out << bits(my.t.config);
     out << bits(my.t.world);
     out << bits(wid_minicon_serialize());

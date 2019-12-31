@@ -36,6 +36,7 @@ void wid_minicon_fini (void)
 uint8_t wid_minicon_init (void)
 {_
     wid_minicon_wid_create();
+    wid_hide(wid_minicon_window);
 
     return (true);
 }

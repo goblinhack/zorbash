@@ -3580,16 +3580,13 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     break;
 
                 case 'l':
-                    MINICON("Loading a saved game");
-                    CON("USERCFG: loading a saved game, destroy old");
                     game->load_select();
-                    CON("USERCFG: loaded a saved game");
                     break;
 
                 case 'p':
                     MINICON("Pausing the game");
                     CON("USERCFG: pausing the game");
-                    game->pause();
+                    game->pause_select();
                     break;
 
                 case '`':
@@ -5294,8 +5291,11 @@ static void wid_display (Widp w,
         obry += p->offset.y;
     }
 
-    owidth = obrx - otlx;
-    oheight = obry - otly;
+    //
+    // Inclusive width
+    //
+    owidth = obrx - otlx + 1;
+    oheight = obry - otly + 1;
 
     //
     // If this widget was active and the time has elapsed, make it normal.
@@ -5573,9 +5573,13 @@ void wid_tick_all (void)
         wid_time += 100/game->config.sdl_delay;
     }
 
+    std::list<Widp> work;
     for (auto iter : wid_top_level5) {
         auto w = iter.second;
+        work.push_back(w);
+    }
 
+    for (auto w : work) {
         if (!w->on_tick) {
             ERR("wid on ticker tree, but no callback set");
         }
@@ -5640,8 +5644,9 @@ void wid_display_all (void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     wid_tick_all();
+_
     wid_move_all();
-
+_
     wid_on_screen_at = {};
 
     for (auto iter = wid_top_level.begin();

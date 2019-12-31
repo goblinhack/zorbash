@@ -942,4 +942,6 @@ _
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     CON("DUNGEON: created, seed %u", seed);
     LOG("-");
+
+    started = true;
 }

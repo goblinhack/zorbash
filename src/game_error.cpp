@@ -88,8 +88,7 @@ void wid_error (std::string error)
     wid_error_window->log(" ");
     wid_error_window->log(" ");
     wid_error_window->log(" ");
-    wid_error_window->log(" ");
-    wid_error_window->log("If a bug, send a screenshot to %%fg=red$goblinhack@gmail.com");
+    wid_error_window->log("If a bug, send a screenshot to %%fg=white$goblinhack@gmail.com");
     wid_error_window->log(" ");
 
     {

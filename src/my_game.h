@@ -312,13 +312,19 @@ public:
     void load_select(void);
     void save(int slot);
     void save(void);
-    void pause(void);
+    void pause_select(void);
     void save_select(void);
     void update_minimap(void);
+    void soft_pause(void);
+    void soft_unpause(void);
+    void hard_pause(void);
+    void hard_unpause(void);
+    bool paused(void);
 
     //
     // Save file name, contains the date and other useful save slot info
     //
+    std::string        version = VERSION;
     int                save_slot;
     std::string        save_meta;
     std::string        save_file;
@@ -334,8 +340,10 @@ public:
     //
     // Soft pause is user initiated. Hard is when a menu is on screen.
     //
-    bool                       soft_paused = false;
-    bool                       hard_paused = false;
+    bool               soft_paused = false;
+    bool               hard_paused = false;
+    timestamp_t        last_pause;
+    bool               started = false;
 
     friend std::ostream& operator<<(std::ostream &out, 
                                     Bits<const class Game & > const my);
