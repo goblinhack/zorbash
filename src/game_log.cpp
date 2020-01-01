@@ -117,7 +117,7 @@ void Config::log (std::string pfx)
     LOG("%s sound_volume        %u", pfx.c_str(), sound_volume);
     LOG("%s music_volume        %u", pfx.c_str(), music_volume);
     LOG("%s vsync_enable        %u", pfx.c_str(), vsync_enable);
-    LOG("%s full_screen         %u", pfx.c_str(), full_screen);
+    LOG("%s fullscreen          %u", pfx.c_str(), fullscreen);
     LOG("%s video_pix_width     %u", pfx.c_str(), video_pix_width);
     LOG("%s video_pix_height    %u", pfx.c_str(), video_pix_height);
     LOG("%s video_gl_width      %f", pfx.c_str(), video_gl_width);

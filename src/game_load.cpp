@@ -236,7 +236,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.sound_volume);
     in >> bits(my.t.music_volume);
     in >> bits(my.t.vsync_enable);
-    in >> bits(my.t.full_screen);
+    in >> bits(my.t.fullscreen);
     in >> bits(my.t.video_pix_width);
     in >> bits(my.t.video_pix_height);
     in >> bits(my.t.video_gl_width);

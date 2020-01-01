@@ -25,6 +25,7 @@
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;
+extern bool game_needs_restart;
 
 static char **ARGV;
 char *EXEC_FULL_PATH_AND_NAME;
@@ -142,6 +143,9 @@ void quit (void)
 
     LOG("quit:blit_fini");
     blit_fini();
+
+    LOG("quit:color_fini");
+    color_fini();
 
     if (EXEC_FULL_PATH_AND_NAME) {
         myfree(EXEC_FULL_PATH_AND_NAME);
@@ -577,6 +581,7 @@ int32_t main (int32_t argc, char *argv[])
     // Create and load the last saved game
     //
     game = new Game(std::string(appdata));
+    game->load_config();
 
     if (!sdl_init()) {
         ERR("SDL init");
@@ -624,7 +629,6 @@ int32_t main (int32_t argc, char *argv[])
     // Create a fresh game if none was loaded
     //
     room_init();
-    game->load_config();
 #if 0
     game->init();
     game->load();
@@ -654,5 +658,9 @@ int32_t main (int32_t argc, char *argv[])
 
     LOG("Goodbye cruel world");
 
+    if (game_needs_restart) {
+        game_needs_restart = false;
+        execv(argv[0], argv);
+    }
     return (0);
 }

@@ -1501,6 +1501,11 @@ void color_init (void)
     color_set("ink", &INK, 54, 47, 47, 255);
 }
 
+void color_fini (void)
+{_
+    color_map.clear();
+}
+
 color gl_save_color(255, 255, 255, 255);
 color gl_last_color(255, 255, 255, 255);
 

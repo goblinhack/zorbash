@@ -22,11 +22,15 @@ static void game_config_top_destroy (void)
 
 uint8_t game_config_top_graphics (Widp w, int32_t x, int32_t y, uint32_t button)
 {
+    game_config_top_destroy();
+    game->config_gfx_select();
     return (true);
 }
 
 uint8_t game_config_top_sound (Widp w, int32_t x, int32_t y, uint32_t button)
 {
+    game_config_top_destroy();
+    game->config_sound_select();
     return (true);
 }
 
