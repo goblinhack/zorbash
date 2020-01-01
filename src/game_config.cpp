@@ -22,14 +22,26 @@ static void wid_config_destroy (void)
 
 uint8_t wid_config_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
 {
+    CON("USERCFG: reload config");
+    game->load_config();
     wid_config_destroy();
-    return (false);
+    return (true);
 }
 
 uint8_t wid_config_save (Widp w, int32_t x, int32_t y, uint32_t button)
 {
+    CON("USERCFG: save config");
+    game->save_config();
     wid_config_destroy();
-    return (false);
+    return (true);
+}
+
+uint8_t wid_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    CON("USERCFG: toggle debug mode");
+    game->config.debug_mode = !game->config.debug_mode;
+    game->config_select();
+    return (true);
 }
 
 uint8_t wid_config_key_up (Widp w, const struct SDL_KEYSYM *key)
@@ -130,7 +142,7 @@ void Game::config_select (void)
         point tl = {width - 16, y_at};
         point br = {width - 11, y_at + 2};
         wid_set_style(w, WID_STYLE_GREEN);
-        wid_set_on_mouse_up(w, wid_config_cancel);
+        wid_set_on_mouse_up(w, wid_config_save);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
     }
@@ -160,13 +172,19 @@ void Game::config_select (void)
     }
     {
         auto p = wid_config_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Save");
+        auto w = wid_new_square_button(p, "Debug mode value");
 
         point tl = {width / 2 , y_at};
         point br = {width / 2 + 6, y_at + 2};
-        wid_set_style(w, WID_STYLE_RED);
+        wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "False");
+        wid_set_on_mouse_up(w, wid_config_debug_mode_toggle);
+
+        if (game->config.debug_mode) {
+            wid_set_text(w, "True");
+        } else {
+            wid_set_text(w, "False");
+        }
     }
 
     wid_update(wid_config_window->wid_text_area->wid_text_area);

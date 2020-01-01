@@ -122,6 +122,7 @@ public:
     void finish_constructor(void);
     void debug(std::string msg);
     void dump(void);
+    void log(void);
     int offset(const int x, const int y);
     bool is_oob(const int x, const int y);
     Node *node_addr(const int x, const int y);

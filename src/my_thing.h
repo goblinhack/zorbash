@@ -114,6 +114,7 @@ typedef struct Monst_ {
     uint32_t     weapon_id {};               // Current weapon
     std::list<uint32_t> carrying;
     void dump(std::string prefix, std::ostream &out);
+    void log(std::string prefix);
 } Monst;
 std::ostream& operator<<(std::ostream &out, Bits<const Monst & > const my);
 std::istream& operator>>(std::istream &in, Bits<Monst &> my);
@@ -515,6 +516,7 @@ public:
     void drop(Thingp w);
     void drop_all(void);
     void dump(std::string prefix, std::ostream &out);
+    void log(std::string prefix);
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void err_(const char *fmt, va_list args); // compile error without
     void health_boost(int v);

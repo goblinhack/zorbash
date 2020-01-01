@@ -12,6 +12,7 @@
 #include "my_wid_popup.h"
 
 extern bool game_load_headers_only;
+bool game_save_config_only;
 
 std::ostream& operator<<(std::ostream &out, Bits<AgeMapp & > const my)
 {
@@ -324,6 +325,16 @@ Game::save (int slot)
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     CON("DUNGEON: saved %s, seed %d", save_file.c_str(), seed);
     LOG("-");
+}
+
+void
+Game::save_config (void)
+{_
+    auto filename = saved_dir + "config";
+    std::ofstream out(filename, std::ios::binary);
+    const Config &c = game->config;
+    out << bits(c);
+    game->config.log("WROTE:");
 }
 
 static WidPopup *wid_save;

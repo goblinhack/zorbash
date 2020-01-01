@@ -254,11 +254,12 @@ public:
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
+    void log(std::string prefix);
     friend std::ostream& operator<<(std::ostream &out, Bits<const World & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<World &> my);
 };
 
-typedef struct {
+typedef class Config_ {
 public:
     bool               fps_counter                  = true;
 #ifdef ENABLE_INVERTED_GFX
@@ -294,6 +295,7 @@ public:
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
+    void log(std::string prefix);
 } Config;
 std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my);
 std::istream& operator>>(std::istream &in, Bits<Config &> my);
@@ -303,8 +305,10 @@ public:
     Game (void) {}
     Game (std::string appdata);
     bool load(std::string save_file, class Game &target);
+    void load_config(void);
     bool paused(void);
     bool save(std::string save_file);
+    void save_config(void);
     void display(void);
     void fini(void);
     void hard_pause(void);
@@ -354,6 +358,7 @@ public:
     friend std::istream& operator>>(std::istream &in, 
                                     Bits<class Game &> my);
     void dump(std::string prefix, std::ostream &out);
+    void log(std::string prefix);
 };
 
 extern class Game *game;

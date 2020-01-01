@@ -392,6 +392,15 @@ Game::load (std::string file_to_load, class Game &target)
 }
 
 void
+Game::load_config (void)
+{_
+    auto filename = saved_dir + "config";
+    std::ifstream in(filename);
+    in >> bits(*(&game->config));
+    game->config.log("READ:");
+}
+
+void
 Game::load (void)
 {_
     LOG("-");
