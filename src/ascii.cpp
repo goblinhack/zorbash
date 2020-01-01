@@ -471,6 +471,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
             }
 
             tile = fixed_font->unicode_to_tile(L'_');
+                    tile = tile_find_mand("CSPACE");
         }
 
         ascii_cell *cell = &getref(cells, x++, y);

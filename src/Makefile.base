@@ -98,6 +98,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/world_fini.o 		\
     $(OBJDIR)/world_id.o 		\
     $(OBJDIR)/world_init.o 		\
+    $(OBJDIR)/game_log.o 		\
 
 #
 # compile

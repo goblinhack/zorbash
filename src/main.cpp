@@ -624,6 +624,7 @@ int32_t main (int32_t argc, char *argv[])
     // Create a fresh game if none was loaded
     //
     room_init();
+    game->load_config();
 #if 0
     game->init();
     game->load();

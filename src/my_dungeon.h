@@ -1386,7 +1386,7 @@ public:
         }
 
         auto ncandidates = candidates.size();
-	if (!ncandidates) {
+        if (!ncandidates) {
             for (auto r : Room::all_rooms) {
                 if (!room_is_a_candidate_less_restrictive(n, r)) {
                     continue;
@@ -1402,7 +1402,7 @@ public:
                 DIE("no grid room candidates at (%d,%d)", x, y);
                 return (false);
             }
-	}
+        }
 
         auto ri = random_range(0, ncandidates);
         auto r = get(candidates, ri);
