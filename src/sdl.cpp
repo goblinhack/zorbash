@@ -12,6 +12,7 @@
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
 static int sdl_do_screenshot;
+extern bool game_needs_restart;
 
 int TILES_ACROSS;
 int TILES_DOWN;
@@ -310,7 +311,8 @@ uint8_t sdl_init (void)
 
     video_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS;
 
-    if (game->config.full_screen) {
+    if (game->config.fullscreen) {
+        LOG("- SDL mode    : fullscreen");
         video_flags |= SDL_WINDOW_FULLSCREEN;
     }
 
@@ -1086,6 +1088,10 @@ void config_gfx_zoom_update (void)
     game->config.tile_gl_height =
                     game->config.video_gl_height / (double)TILES_DOWN;
 
+    game->config.video_w_h_ratio =
+        (double)game->config.video_pix_width /
+        (double)game->config.video_pix_height;
+
     game->config.one_pixel_gl_width =
                     game->config.tile_gl_width / (double)TILE_WIDTH;
     game->config.one_pixel_gl_height =
@@ -1100,13 +1106,13 @@ void config_gfx_zoom_update (void)
     game->world.cursor_found = false;
     game->world.map_follow_player = true;
 
-    LOG("- video     gl width   : %f", game->config.video_gl_width);
-    LOG("- video     gl height  : %f", game->config.video_gl_height);
-    LOG("- tile      gl width   : %f", game->config.tile_gl_width);
-    LOG("- tile      gl height  : %f", game->config.tile_gl_height);
-    LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
-    LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
-    LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
+    CON("- video     gl width   : %f", game->config.video_gl_width);
+    CON("- video     gl height  : %f", game->config.video_gl_height);
+    CON("- tile      gl width   : %f", game->config.tile_gl_width);
+    CON("- tile      gl height  : %f", game->config.tile_gl_height);
+    CON("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
+    CON("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
+    CON("- width to height ratio: %f", game->config.video_w_h_ratio);
 
     Thing::update_all();
 
@@ -1383,6 +1389,9 @@ void sdl_loop (void)
         //
         extern bool ptr_check_some_pointers_changed;
         ptr_check_some_pointers_changed = false;
+        if (game_needs_restart) {
+            break;
+        }
     }
 
     gl_leave_2d_mode();

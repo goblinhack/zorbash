@@ -110,6 +110,7 @@ typedef std::map< std::string, color > colors;
 extern colors color_map;
 
 void color_init(void);
+void color_fini(void);
 void glcolor_save(void);
 void glcolor_restore(void);
 color string2color(const char **s);

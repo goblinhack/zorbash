@@ -26,7 +26,7 @@
 #undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #endif
 
-#define ENABLE_INVERTED_GFX        // For vision impaired
+#undef  ENABLE_INVERTED_GFX        // For vision impaired
 #undef  ENABLE_FULL_TIMESTAMPS     // Full timestamps with date in logs
 
 //

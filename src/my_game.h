@@ -275,7 +275,7 @@ public:
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
     bool               vsync_enable                 = true;
-    bool               full_screen                  = false;
+    bool               fullscreen                   = false;
     int32_t            video_pix_width              = {};
     int32_t            video_pix_height             = {};
     double             video_gl_width               = {};
@@ -321,6 +321,8 @@ public:
     void dead_select(void);
     void quit_select(void);
     void config_other_select(void);
+    void config_sound_select(void);
+    void config_gfx_select(void);
     void config_top_select(void);
     void save(int slot);
     void save(void);

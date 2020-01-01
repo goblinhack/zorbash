@@ -183,7 +183,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.sound_volume);
     out << bits(my.t.music_volume);
     out << bits(my.t.vsync_enable);
-    out << bits(my.t.full_screen);
+    out << bits(my.t.fullscreen);
     out << bits(my.t.video_pix_width);
     out << bits(my.t.video_pix_height);
     out << bits(my.t.video_gl_width);

@@ -20,6 +20,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
     $(OBJDIR)/game_config_other.o	\
+    $(OBJDIR)/game_config_sound.o	\
+    $(OBJDIR)/game_config_gfx.o		\
     $(OBJDIR)/game_config_top.o 	\
     $(OBJDIR)/game_dead.o 		\
     $(OBJDIR)/game_display.o 		\
