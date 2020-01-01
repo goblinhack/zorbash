@@ -19,7 +19,7 @@ static void wid_dead_destroy (void)
     }
     game->soft_unpause();
     game->fini();
-    game->title();
+    game->main_menu_select();
     wid_hide(wid_minicon_window);
 }
 

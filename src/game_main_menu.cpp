@@ -10,19 +10,24 @@
 #include "my_ascii.h"
 #include "my_game_status.h"
 
-static WidPopup *wid_title_window;
+static WidPopup *game_main_menu_window;
 
-static void wid_title_destroy (void)
+static void game_main_menu_destroy (void)
 {
-    if (wid_title_window) {
-        delete wid_title_window;
-        wid_title_window = nullptr;
+    if (game_main_menu_window) {
+        delete game_main_menu_window;
+        game_main_menu_window = nullptr;
     }
 }
 
-uint8_t wid_title_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
+void game_main_menu_hide (void)
 {
-    wid_title_destroy();
+    wid_hide(game_main_menu_window->wid_text_area->wid_text_area);
+}
+
+uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    game_main_menu_destroy();
     game->init();
     wid_visible(wid_minicon_window);
     game_status_fini();
@@ -30,25 +35,26 @@ uint8_t wid_title_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     return (false);
 }
 
-uint8_t wid_title_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_main_menu_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {
     game->load_select();
     return (false);
 }
 
-uint8_t wid_title_config (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_main_menu_config (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    game->config_select();
+    game->config_top_select();
+    game_main_menu_hide();
     return (false);
 }
 
-uint8_t wid_title_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
 {
     game->quit_select();
     return (false);
 }
 
-uint8_t wid_title_key_up (Widp w, const struct SDL_KEYSYM *key)
+uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
 {
     switch (key->mod) {
         case KMOD_LCTRL:
@@ -66,16 +72,16 @@ uint8_t wid_title_key_up (Widp w, const struct SDL_KEYSYM *key)
                         //
                         return (false);
                     case 'n':
-                        wid_title_new_game(nullptr, 0, 0, 0);
+                        game_main_menu_new_game(nullptr, 0, 0, 0);
                         return (true);
                     case 'l':
-                        wid_title_load_game(nullptr, 0, 0, 0);
+                        game_main_menu_load_game(nullptr, 0, 0, 0);
                         return (true);
                     case 'c':
-                        wid_title_config(nullptr, 0, 0, 0);
+                        game_main_menu_config(nullptr, 0, 0, 0);
                         return (true);
                     case 'q':
-                        wid_title_quit_game(nullptr, 0, 0, 0);
+                        game_main_menu_quit_game(nullptr, 0, 0, 0);
                         return (true);
                 }
             }
@@ -85,7 +91,7 @@ uint8_t wid_title_key_up (Widp w, const struct SDL_KEYSYM *key)
     return (false);
 }
 
-uint8_t wid_title_key_down (Widp w, const struct SDL_KEYSYM *key)
+uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
 {
     switch (key->mod) {
         case KMOD_LCTRL:
@@ -110,7 +116,7 @@ uint8_t wid_title_key_down (Widp w, const struct SDL_KEYSYM *key)
     return (true);
 }
 
-void wid_title_tick (Widp w)
+void game_main_menu_tick (Widp w)
 {
     static int frame = 1;
     static timestamp_t ts;
@@ -130,16 +136,16 @@ void wid_title_tick (Widp w)
     ascii_putf(1, ASCII_HEIGHT - 2, GRAY, BLACK, L"Version " VERSION);
 
     if (game->started) {
-        wid_title_destroy();
+        game_main_menu_destroy();
     }
 }
 
-void Game::title (void)
+void Game::main_menu_select (void)
 {_
     CON("Main menu");
 
-    if (wid_title_window) {
-        wid_title_destroy();
+    if (game_main_menu_window) {
+        game_main_menu_destroy();
     }
     game_status_fini();
 
@@ -147,62 +153,62 @@ void Game::title (void)
     point br = {ASCII_WIDTH - 7, ASCII_HEIGHT - 1};
     auto width = br.x - tl.x - 2;
 
-    wid_title_window = new WidPopup(tl, br, nullptr, "");
+    game_main_menu_window = new WidPopup(tl, br, nullptr, "");
     {
-        Widp w = wid_title_window->wid_popup_container;
-        wid_set_on_key_up(w, wid_title_key_up);
-        wid_set_on_key_down(w, wid_title_key_down);
-        wid_set_on_tick(w, wid_title_tick);
+        Widp w = game_main_menu_window->wid_popup_container;
+        wid_set_on_key_up(w, game_main_menu_key_up);
+        wid_set_on_key_down(w, game_main_menu_key_down);
+        wid_set_on_tick(w, game_main_menu_tick);
     }
 
     int y_at = 0;
     {
-        auto p = wid_title_window->wid_text_area->wid_text_area;
+        auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "New Game");
 
         point tl = {0, y_at};
         point br = {width, y_at + 2};
         wid_set_style(w, WID_STYLE_NORMAL);
-        wid_set_on_mouse_up(w, wid_title_new_game);
+        wid_set_on_mouse_up(w, game_main_menu_new_game);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$N%%fg=reset$ew game");
     }
     y_at += 3;
     {
-        auto p = wid_title_window->wid_text_area->wid_text_area;
+        auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Load Game");
 
         point tl = {0, y_at};
         point br = {width, y_at + 2};
         wid_set_style(w, WID_STYLE_NORMAL);
-        wid_set_on_mouse_up(w, wid_title_load_game);
+        wid_set_on_mouse_up(w, game_main_menu_load_game);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$L%%fg=reset$oad game");
     }
     y_at += 3;
     {
-        auto p = wid_title_window->wid_text_area->wid_text_area;
+        auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Config");
 
         point tl = {0, y_at};
         point br = {width, y_at + 2};
         wid_set_style(w, WID_STYLE_NORMAL);
-        wid_set_on_mouse_up(w, wid_title_config);
+        wid_set_on_mouse_up(w, game_main_menu_config);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$C%%fg=reset$onfig");
     }
     y_at += 3;
     {
-        auto p = wid_title_window->wid_text_area->wid_text_area;
+        auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Quit Game");
 
         point tl = {0, y_at};
         point br = {width, y_at + 2};
         wid_set_style(w, WID_STYLE_NORMAL);
-        wid_set_on_mouse_up(w, wid_title_quit_game);
+        wid_set_on_mouse_up(w, game_main_menu_quit_game);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$Q%%fg=reset$uit Game");
     }
 
-    wid_update(wid_title_window->wid_text_area->wid_text_area);
+    wid_update(game_main_menu_window->wid_text_area->wid_text_area);
 }

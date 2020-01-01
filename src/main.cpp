@@ -645,7 +645,7 @@ int32_t main (int32_t argc, char *argv[])
 #endif
 
     wid_minicon_flush();
-    game->title();
+    game->main_menu_select();
 
     sdl_loop();
     gl_leave_2d_mode();
