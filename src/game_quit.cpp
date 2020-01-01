@@ -28,7 +28,7 @@ uint8_t wid_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
         wid_minicon_fini();
         wid_minicon_init();
         game->fini();
-        game->title();
+        game->main_menu_select();
     } else {
         DIE("USERCFG: quit");
     }

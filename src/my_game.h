@@ -320,13 +320,14 @@ public:
     void pause_select(void);
     void dead_select(void);
     void quit_select(void);
-    void config_select(void);
+    void config_other_select(void);
+    void config_top_select(void);
     void save(int slot);
     void save(void);
     void save_select(void);
     void soft_pause(void);
     void soft_unpause(void);
-    void title(void);
+    void main_menu_select(void);
     void update_minimap(void);
 
     //
@@ -369,6 +370,7 @@ uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
 void game_mouse_over(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
 uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
 uint8_t game_key_down(const struct SDL_KEYSYM *key);
+extern void game_main_menu_hide(void);
 void player_tick(void);
 
 //
