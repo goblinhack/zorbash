@@ -284,6 +284,13 @@ uint8_t sdl_init (void)
         ((double)(ASCII_HEIGHT * ascii_size) / game->config.video_pix_height) /
         (double) ASCII_HEIGHT;
 
+    if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
+        game->config.ascii_gl_width = 1.0 / ASCII_WIDTH_MAX;
+    }
+    if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
+        game->config.ascii_gl_height = 1.0 / ASCII_HEIGHT_MAX;
+    }
+
     LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
     LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
     LOG("- video     gl width   : %f", game->config.video_gl_width);
@@ -1113,6 +1120,55 @@ void config_gfx_zoom_update (void)
     CON("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
     CON("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
     CON("- width to height ratio: %f", game->config.video_w_h_ratio);
+
+    double ascii_size = 16;
+    ASCII_WIDTH  = (int)(game->config.video_pix_width / ascii_size);
+    ASCII_HEIGHT = (int)(game->config.video_pix_height / ascii_size);
+
+    if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
+        LOG("- Ascii hit max width  : %d", ASCII_WIDTH);
+        ASCII_WIDTH = ASCII_WIDTH_MAX;
+    }
+    if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
+        LOG("- Ascii hit max height : %d", ASCII_HEIGHT);
+        ASCII_HEIGHT = ASCII_HEIGHT_MAX;
+    }
+
+    LOG("- Ascii width          : %d", ASCII_WIDTH);
+    LOG("- Ascii height         : %d", ASCII_HEIGHT);
+    LOG("- Ascii pix            : %dx%d <--- what we can utilize",
+        (int)(ASCII_WIDTH * ascii_size), (int)(ASCII_HEIGHT * ascii_size));
+    LOG("- SDL video            : %dx%d <--- chosen or from saved file",
+        game->config.video_pix_width, game->config.video_pix_height);
+
+    game->config.one_pixel_gl_width =
+                    game->config.tile_gl_width / (double)TILE_WIDTH;
+    game->config.one_pixel_gl_height =
+                    game->config.tile_gl_height / (double)TILE_HEIGHT;
+
+    game->config.ascii_gl_width =
+        ((double)(ASCII_WIDTH * ascii_size) / game->config.video_pix_width) /
+        (double) ASCII_WIDTH;
+    game->config.ascii_gl_height =
+        ((double)(ASCII_HEIGHT * ascii_size) / game->config.video_pix_height) /
+        (double) ASCII_HEIGHT;
+
+    if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
+        game->config.ascii_gl_width = 1.0 / ASCII_WIDTH_MAX;
+    }
+    if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
+        game->config.ascii_gl_height = 1.0 / ASCII_HEIGHT_MAX;
+    }
+
+    LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
+    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
+    LOG("- video     gl width   : %f", game->config.video_gl_width);
+    LOG("- video     gl height  : %f", game->config.video_gl_height);
+    LOG("- tile      gl width   : %f", game->config.tile_gl_width);
+    LOG("- tile      gl height  : %f", game->config.tile_gl_height);
+    LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
+    LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
+    LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
 
     Thing::update_all();
 

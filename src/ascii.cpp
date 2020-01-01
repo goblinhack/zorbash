@@ -909,6 +909,9 @@ static void ascii_blit (void)
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+    float mx = (1.0 / game->config.video_pix_width) * mouse_x;
+    float my = (1.0 / game->config.video_pix_height) * mouse_y;
+
     tile_y = 0;
     for (y = 0; y < ASCII_HEIGHT; y++) {
 
@@ -925,16 +928,11 @@ static void ascii_blit (void)
             tile_br.x = tile_x + game->config.ascii_gl_width;
             tile_br.y = tile_y + game->config.ascii_gl_height;
 
-            int mx1 = tile_tl.x * game->config.video_pix_width;
-            int my1 = tile_tl.y * game->config.video_pix_height;
-            int mx2 = tile_br.x * game->config.video_pix_width;
-            int my2 = tile_br.y * game->config.video_pix_height;
-
             if (!mouse_found) {
-                if ((mx1 < mouse_x) &&
-                    (my1 < mouse_y) &&
-                    (mx2 >= mouse_x) &&
-                    (my2 >= mouse_y)) {
+                if ((mx < tile_br.x) &&
+                    (my < tile_br.y) &&
+                    (mx >= tile_tl.x) &&
+                    (my >= tile_tl.y)) {
                     mouse_found = true;
 
                     mouse_tile_tl = tile_tl;
