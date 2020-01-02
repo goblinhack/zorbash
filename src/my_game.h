@@ -305,10 +305,13 @@ public:
     Game (void) {}
     Game (std::string appdata);
     bool load(std::string save_file, class Game &target);
-    void load_config(void);
     bool paused(void);
     bool save(std::string save_file);
-    void save_config(void);
+    void config_gfx_select(void);
+    void config_other_select(void);
+    void config_sound_select(void);
+    void config_top_select(void);
+    void dead_select(void);
     void display(void);
     void fini(void);
     void hard_pause(void);
@@ -316,20 +319,19 @@ public:
     void init(void);
     void load(int slot);
     void load(void);
+    void load_config(void);
     void load_select(void);
+    void main_menu_select(void);
+    void new_game(void);
     void pause_select(void);
-    void dead_select(void);
     void quit_select(void);
-    void config_other_select(void);
-    void config_sound_select(void);
-    void config_gfx_select(void);
-    void config_top_select(void);
+    void help_select(void);
     void save(int slot);
     void save(void);
+    void save_config(void);
     void save_select(void);
     void soft_pause(void);
     void soft_unpause(void);
-    void main_menu_select(void);
     void update_minimap(void);
 
     //

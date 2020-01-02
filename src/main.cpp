@@ -36,6 +36,7 @@ char *PYTHON_PATH;
 char *TTF_PATH;
 char *GFX_PATH;
 int debug;
+static bool opt_new_game;
 
 FILE *LOG_STDOUT;
 FILE *LOG_STDERR;
@@ -480,6 +481,13 @@ static void parse_args (int32_t argc, char *argv[])
         //
         // Bad argument.
         //
+        if (!strcasecmp(argv[i], "--new-game") ||
+            !strcasecmp(argv[i], "-new-game")) {
+            opt_new_game = true;
+            i++;
+            continue;
+        }
+
         if (argv[i][0] == '-') {
             usage();
             WARN("unknown format argument, %s", argv[i]);
@@ -649,7 +657,11 @@ int32_t main (int32_t argc, char *argv[])
 #endif
 
     wid_minicon_flush();
-    game->main_menu_select();
+    if (opt_new_game) {
+        game->new_game();
+    } else {
+        game->main_menu_select();
+    }
 
     sdl_loop();
     gl_leave_2d_mode();

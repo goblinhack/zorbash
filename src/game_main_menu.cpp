@@ -212,3 +212,8 @@ void Game::main_menu_select (void)
 
     wid_update(game_main_menu_window->wid_text_area->wid_text_area);
 }
+
+void Game::new_game (void)
+{_
+    game_main_menu_new_game(nullptr, 0, 0, 0);
+}
