@@ -45,34 +45,34 @@ uint8_t game_config_sound_back (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
-uint8_t game_config_sound_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_sound_effects_volume_incr (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    CON("USERCFG: toggle debug_mode");
-    game->config.debug_mode = !game->config.debug_mode;
+    CON("USERCFG: incr sound_volume");
+    game->config.sound_volume++;
     game->config_sound_select();
     return (true);
 }
 
-uint8_t game_config_sound_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_sound_effects_volume_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    CON("USERCFG: toggle fps_counter");
-    game->config.fps_counter = !game->config.fps_counter;
+    CON("USERCFG: incr sound_volume");
+    game->config.sound_volume--;
     game->config_sound_select();
     return (true);
 }
 
-uint8_t game_config_sound_sdl_delay_incr (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_sound_music_volume_incr (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    CON("USERCFG: incr sdl_delay");
-    game->config.sdl_delay++;
+    CON("USERCFG: incr music_volume");
+    game->config.music_volume++;
     game->config_sound_select();
     return (true);
 }
 
-uint8_t game_config_sound_sdl_delay_decr (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_sound_music_volume_decr (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    CON("USERCFG: incr sdl_delay");
-    game->config.sdl_delay--;
+    CON("USERCFG: incr music_volume");
+    game->config.music_volume--;
     game->config_sound_select();
     return (true);
 }
@@ -208,103 +208,90 @@ void Game::config_sound_select (void)
     y_at += 3;
     {
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Debug mode");
+        auto w = wid_new_square_button(p, "Effects volume");
 
         point tl = {0, y_at};
         point br = {width / 2, y_at + 2};
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Debug mode");
+        wid_set_text(w, "Effects volume");
     }
     {
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Debug mode value");
+        auto w = wid_new_square_button(p, "Effects volume value");
 
         point tl = {width / 2 , y_at};
         point br = {width / 2 + 6, y_at + 2};
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_sound_debug_mode_toggle);
-
-        if (game->config.debug_mode) {
-            wid_set_text(w, "True");
-        } else {
-            wid_set_text(w, "False");
-        }
-    }
-
-    y_at += 3;
-    {
-        auto p = game_config_sound_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "FPS counter");
-
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "FPS counter");
+        wid_set_text(w, std::to_string(game->config.sound_volume));
     }
     {
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "FPS counter value");
-
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
-        wid_set_style(w, WID_STYLE_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_sound_fps_counter_toggle);
-
-        if (game->config.fps_counter) {
-            wid_set_text(w, "True");
-        } else {
-            wid_set_text(w, "False");
-        }
-    }
-
-    y_at += 3;
-    {
-        auto p = game_config_sound_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "SDL delay ms per frame");
-
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "SDL delay ms per frame");
-    }
-    {
-        auto p = game_config_sound_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "SDL delay value");
-
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
-        wid_set_style(w, WID_STYLE_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w,  std::to_string(game->config.sdl_delay));
-    }
-    {
-        auto p = game_config_sound_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "SDL delay value +");
+        auto w = wid_new_square_button(p, "Effects value +");
 
         point tl = {width / 2 + 7 , y_at};
         point br = {width / 2 + 9, y_at + 2};
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_sound_sdl_delay_incr);
+        wid_set_on_mouse_up(w, game_config_sound_effects_volume_incr);
         wid_set_text(w, "+");
     }
     {
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "SDL delay value -");
+        auto w = wid_new_square_button(p, "Effects value -");
 
         point tl = {width / 2 + 10 , y_at};
         point br = {width / 2 + 12, y_at + 2};
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_sound_sdl_delay_decr);
+        wid_set_on_mouse_up(w, game_config_sound_effects_volume_decr);
+        wid_set_text(w, "-");
+    }
+
+    y_at += 3;
+    {
+        auto p = game_config_sound_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Music volume");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Music volume");
+    }
+    {
+        auto p = game_config_sound_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Music volume value");
+
+        point tl = {width / 2 , y_at};
+        point br = {width / 2 + 6, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, std::to_string(game->config.music_volume));
+    }
+    {
+        auto p = game_config_sound_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Music value +");
+
+        point tl = {width / 2 + 7 , y_at};
+        point br = {width / 2 + 9, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_sound_music_volume_incr);
+        wid_set_text(w, "+");
+    }
+    {
+        auto p = game_config_sound_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Music value -");
+
+        point tl = {width / 2 + 10 , y_at};
+        point br = {width / 2 + 12, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_sound_music_volume_decr);
         wid_set_text(w, "-");
     }
 
