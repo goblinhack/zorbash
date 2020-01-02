@@ -38,9 +38,9 @@ uint8_t game_status_init (void)
 }
 
 static uint8_t game_status_mouse_down (Widp w,
-                                    int32_t x,
-                                    int32_t y,
-                                    uint32_t button)
+                                       int32_t x,
+                                       int32_t y,
+                                       uint32_t button)
 {_
     CON("button %d", button);
     return (true);
@@ -51,6 +51,8 @@ static uint8_t game_status_mouse_down (Widp w,
 //
 static void game_status_wid_create (void)
 {_
+    game_status_fini();
+
     {
         point tl = {ITEMBAR_TL_X, ITEMBAR_TL_Y};
         point br = {ITEMBAR_BR_X, ITEMBAR_BR_Y};
@@ -73,7 +75,7 @@ static void game_status_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "food_frog1");
+//        wid_set_fg_tilename(w, "food_frog1");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
@@ -90,7 +92,7 @@ static void game_status_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "key1.1");
+//        wid_set_fg_tilename(w, "key1.1");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
