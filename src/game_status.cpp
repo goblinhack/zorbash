@@ -337,7 +337,7 @@ static void game_status_wid_create (void)
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "Health-value");
-        point tl = {3, y_at + 2};
+        point tl = {3, y_at + 3};
         point br = {tl.x + TITLEBAR_WIDTH, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
@@ -399,7 +399,7 @@ static void game_status_wid_create (void)
     }
 #endif
 
-    y_at += 3;
+    y_at += 4;
     {
         auto w = wid_new_square_button(wid_sidebar, "armour-icon");
         point tl = {0, y_at};
@@ -411,7 +411,7 @@ static void game_status_wid_create (void)
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "armour-value");
-        point tl = {3, y_at + 2};
+        point tl = {3, y_at + 3};
         point br = {tl.x + SIDEBAR_WIDTH, tl.y};
 
         wid_set_pos(w, tl, br);
