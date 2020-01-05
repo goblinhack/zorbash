@@ -24,6 +24,8 @@ def tp_init(name):
     x.set_is_movable(True)
     x.set_is_player(True)
     x.set_stats_attack(3)
+    x.set_stats_attack_rate_tenths(3)
+    x.set_stats_attacked_rate_tenths(10)
     x.set_stats_defence(3)
     x.set_stats_health_hunger_pct(5)
     x.set_stats_health_initial(10)
@@ -90,7 +92,7 @@ def tp_init(name):
     x.set_tile(tile=name + ".dead", is_dead=True)
 
     x.update()
-    
+
 def init():
     tp_init(name="player1")
 

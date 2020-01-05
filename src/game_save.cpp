@@ -43,6 +43,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     out << bits(my.t->bounce_count);
     out << bits(my.t->bounce_fade);
     out << bits(my.t->bounce_height);
+    out << bits(my.t->lunge_to);
     out << bits(my.t->carrying);
     out << bits(my.t->gold);
     out << bits(my.t->interpolated_mid_at);
@@ -54,6 +55,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     out << bits(my.t->rot);
     out << bits(my.t->stats_attack);
     out << bits(my.t->stats_attack_max);
+    out << bits(my.t->stats_attack_rate_tenths);
+    out << bits(my.t->stats_attacked_rate_tenths);
     out << bits(my.t->stats_defence);
     out << bits(my.t->stats_defence_max);
     out << bits(my.t->stats_health);
@@ -65,12 +68,15 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 
     out << bits(my.t->timestamp_ai_next);
     out << bits(my.t->timestamp_born);
+    out << bits(my.t->timestamp_lunge_begin);
+    out << bits(my.t->timestamp_lunge_end);
     out << bits(my.t->timestamp_bounce_begin);
     out << bits(my.t->timestamp_bounce_end);
     out << bits(my.t->timestamp_collision);
     out << bits(my.t->timestamp_flip_start);
     out << bits(my.t->timestamp_hunger_tick);
-    out << bits(my.t->timestamp_last_i_was_hit);
+    out << bits(my.t->timestamp_last_attacked);
+    out << bits(my.t->timestamp_last_attack);
     out << bits(my.t->timestamp_move_begin);
     out << bits(my.t->timestamp_move_end);
 

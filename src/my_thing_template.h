@@ -232,7 +232,29 @@ public:
     int is_water_dweller {};
     int is_water_hater {};
     int is_weapon {};
+    int stats01 {};
+    int stats02 {};
+    int stats03 {};
+    int stats04 {};
+    int stats05 {};
+    int stats06 {};
+    int stats07 {};
+    int stats08 {};
+    int stats09 {};
+    int stats10 {};
+    int stats11 {};
+    int stats12 {};
+    int stats13 {};
+    int stats14 {};
+    int stats15 {};
+    int stats16 {};
+    int stats17 {};
+    int stats18 {};
+    int stats19 {};
+    int stats20 {};
     int stats_attack {};
+    int stats_attack_rate_tenths {};
+    int stats_attacked_rate_tenths {};
     int stats_defence {};
     int stats_health_hunger_pct {};
     int stats_health_initial {};
@@ -577,6 +599,116 @@ static inline int tp_stats_defence (Tpp t)
 static inline int tp_stats_attack (Tpp t)
 {
     return (t->stats_attack);
+}
+
+static inline int tp_stats_attack_rate_tenths (Tpp t)
+{
+    return (t->stats_attack_rate_tenths);
+}
+
+static inline int tp_stats_attacked_rate_tenths (Tpp t)
+{
+    return (t->stats_attacked_rate_tenths);
+}
+
+static inline int tp_stats01 (Tpp t)
+{
+    return (t->stats01);
+}
+
+static inline int tp_stats02 (Tpp t)
+{
+    return (t->stats02);
+}
+
+static inline int tp_stats03 (Tpp t)
+{
+    return (t->stats03);
+}
+
+static inline int tp_stats04 (Tpp t)
+{
+    return (t->stats04);
+}
+
+static inline int tp_stats05 (Tpp t)
+{
+    return (t->stats05);
+}
+
+static inline int tp_stats06 (Tpp t)
+{
+    return (t->stats06);
+}
+
+static inline int tp_stats07 (Tpp t)
+{
+    return (t->stats07);
+}
+
+static inline int tp_stats08 (Tpp t)
+{
+    return (t->stats08);
+}
+
+static inline int tp_stats09 (Tpp t)
+{
+    return (t->stats09);
+}
+
+static inline int tp_stats10 (Tpp t)
+{
+    return (t->stats10);
+}
+
+static inline int tp_stats11 (Tpp t)
+{
+    return (t->stats11);
+}
+
+static inline int tp_stats12 (Tpp t)
+{
+    return (t->stats12);
+}
+
+static inline int tp_stats13 (Tpp t)
+{
+    return (t->stats13);
+}
+
+static inline int tp_stats14 (Tpp t)
+{
+    return (t->stats14);
+}
+
+static inline int tp_stats15 (Tpp t)
+{
+    return (t->stats15);
+}
+
+static inline int tp_stats16 (Tpp t)
+{
+    return (t->stats16);
+}
+
+static inline int tp_stats17 (Tpp t)
+{
+    return (t->stats17);
+}
+
+static inline int tp_stats18 (Tpp t)
+{
+    return (t->stats18);
+}
+
+static inline int tp_stats19 (Tpp t)
+{
+    return (t->stats19);
+}
+
+static inline int tp_stats20 (Tpp t)
+{
+    return (t->stats20);
 }
 
 static inline int tp_is_secret_door (Tpp t)

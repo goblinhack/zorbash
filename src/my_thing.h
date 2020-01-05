@@ -89,6 +89,7 @@ typedef struct Monst_ {
     int          light_quality {};
     color        light_col {};
     fpoint       interpolated_mid_at;
+    fpoint       lunge_to = {};              // When a monst attacks something
     float        bounce_height = {};         // Percentage of tile height.
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
     float        rot = {};                   // GL co-orids
@@ -101,10 +102,35 @@ typedef struct Monst_ {
     int          stats_defence_max = {};
     int          stats_attack = {};
     int          stats_attack_max = {};
+    int          stats_attack_rate_tenths = {};
+    int          stats_attacked_rate_tenths = {};
+    int          stats01 = {};
+    int          stats02 = {};
+    int          stats03 = {};
+    int          stats04 = {};
+    int          stats05 = {};
+    int          stats06 = {};
+    int          stats07 = {};
+    int          stats08 = {};
+    int          stats09 = {};
+    int          stats10 = {};
+    int          stats11 = {};
+    int          stats12 = {};
+    int          stats13 = {};
+    int          stats14 = {};
+    int          stats15 = {};
+    int          stats16 = {};
+    int          stats17 = {};
+    int          stats18 = {};
+    int          stats19 = {};
+    int          stats20 = {};
     int          owned_count = {};           // How many things this thing owns.
+    timestamp_t  timestamp_lunge_begin {};
+    timestamp_t  timestamp_lunge_end {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
-    timestamp_t  timestamp_last_i_was_hit {};
+    timestamp_t  timestamp_last_attacked {};
+    timestamp_t  timestamp_last_attack {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
     timestamp_t  timestamp_move_begin {};
     timestamp_t  timestamp_move_end {};
@@ -197,6 +223,9 @@ public:
                    color col = WHITE);
     void delete_light(void);
 
+    void set_lunge_to(fpoint);
+    fpoint get_lunge_to(void);
+
     void set_bounce_height(float);
     float get_bounce_height(void);
 
@@ -261,12 +290,180 @@ public:
     int decr_stats_attack_max(void);
     int incr_stats_attack_max(void);
 
+    int set_stats_attack_rate_tenths(int);
+    int get_stats_attack_rate_tenths(void);
+    int decr_stats_attack_rate_tenths(int);
+    int incr_stats_attack_rate_tenths(int);
+    int decr_stats_attack_rate_tenths(void);
+    int incr_stats_attack_rate_tenths(void);
+
+    int set_stats_attacked_rate_tenths(int);
+    int get_stats_attacked_rate_tenths(void);
+    int decr_stats_attacked_rate_tenths(int);
+    int incr_stats_attacked_rate_tenths(int);
+    int decr_stats_attacked_rate_tenths(void);
+    int incr_stats_attacked_rate_tenths(void);
+
+    int set_stats01(int);
+    int get_stats01(void);
+    int decr_stats01(int);
+    int incr_stats01(int);
+    int decr_stats01(void);
+    int incr_stats01(void);
+
+    int set_stats02(int);
+    int get_stats02(void);
+    int decr_stats02(int);
+    int incr_stats02(int);
+    int decr_stats02(void);
+    int incr_stats02(void);
+
+    int set_stats03(int);
+    int get_stats03(void);
+    int decr_stats03(int);
+    int incr_stats03(int);
+    int decr_stats03(void);
+    int incr_stats03(void);
+
+    int set_stats04(int);
+    int get_stats04(void);
+    int decr_stats04(int);
+    int incr_stats04(int);
+    int decr_stats04(void);
+    int incr_stats04(void);
+
+    int set_stats05(int);
+    int get_stats05(void);
+    int decr_stats05(int);
+    int incr_stats05(int);
+    int decr_stats05(void);
+    int incr_stats05(void);
+
+    int set_stats06(int);
+    int get_stats06(void);
+    int decr_stats06(int);
+    int incr_stats06(int);
+    int decr_stats06(void);
+    int incr_stats06(void);
+
+    int set_stats07(int);
+    int get_stats07(void);
+    int decr_stats07(int);
+    int incr_stats07(int);
+    int decr_stats07(void);
+    int incr_stats07(void);
+
+    int set_stats08(int);
+    int get_stats08(void);
+    int decr_stats08(int);
+    int incr_stats08(int);
+    int decr_stats08(void);
+    int incr_stats08(void);
+
+    int set_stats09(int);
+    int get_stats09(void);
+    int decr_stats09(int);
+    int incr_stats09(int);
+    int decr_stats09(void);
+    int incr_stats09(void);
+
+    int set_stats10(int);
+    int get_stats10(void);
+    int decr_stats10(int);
+    int incr_stats10(int);
+    int decr_stats10(void);
+    int incr_stats10(void);
+
+    int set_stats11(int);
+    int get_stats11(void);
+    int decr_stats11(int);
+    int incr_stats11(int);
+    int decr_stats11(void);
+    int incr_stats11(void);
+
+    int set_stats12(int);
+    int get_stats12(void);
+    int decr_stats12(int);
+    int incr_stats12(int);
+    int decr_stats12(void);
+    int incr_stats12(void);
+
+    int set_stats13(int);
+    int get_stats13(void);
+    int decr_stats13(int);
+    int incr_stats13(int);
+    int decr_stats13(void);
+    int incr_stats13(void);
+
+    int set_stats14(int);
+    int get_stats14(void);
+    int decr_stats14(int);
+    int incr_stats14(int);
+    int decr_stats14(void);
+    int incr_stats14(void);
+
+    int set_stats15(int);
+    int get_stats15(void);
+    int decr_stats15(int);
+    int incr_stats15(int);
+    int decr_stats15(void);
+    int incr_stats15(void);
+
+    int set_stats16(int);
+    int get_stats16(void);
+    int decr_stats16(int);
+    int incr_stats16(int);
+    int decr_stats16(void);
+    int incr_stats16(void);
+
+    int set_stats17(int);
+    int get_stats17(void);
+    int decr_stats17(int);
+    int incr_stats17(int);
+    int decr_stats17(void);
+    int incr_stats17(void);
+
+    int set_stats18(int);
+    int get_stats18(void);
+    int decr_stats18(int);
+    int incr_stats18(int);
+    int decr_stats18(void);
+    int incr_stats18(void);
+
+    int set_stats19(int);
+    int get_stats19(void);
+    int decr_stats19(int);
+    int incr_stats19(int);
+    int decr_stats19(void);
+    int incr_stats19(void);
+
+    int set_stats20(int);
+    int get_stats20(void);
+    int decr_stats20(int);
+    int incr_stats20(int);
+    int decr_stats20(void);
+    int incr_stats20(void);
+
     int set_owned_count(int);
     int get_owned_count(void);
     int decr_owned_count(int);
     int incr_owned_count(int);
     int decr_owned_count(void);
     int incr_owned_count(void);
+
+    timestamp_t set_timestamp_lunge_begin(timestamp_t);
+    timestamp_t get_timestamp_lunge_begin(void);
+    timestamp_t decr_timestamp_lunge_begin(timestamp_t);
+    timestamp_t incr_timestamp_lunge_begin(timestamp_t);
+    timestamp_t decr_timestamp_lunge_begin(void);
+    timestamp_t incr_timestamp_lunge_begin(void);
+
+    timestamp_t set_timestamp_lunge_end(timestamp_t);
+    timestamp_t get_timestamp_lunge_end(void);
+    timestamp_t decr_timestamp_lunge_end(timestamp_t);
+    timestamp_t incr_timestamp_lunge_end(timestamp_t);
+    timestamp_t decr_timestamp_lunge_end(void);
+    timestamp_t incr_timestamp_lunge_end(void);
 
     timestamp_t set_timestamp_bounce_begin(timestamp_t);
     timestamp_t get_timestamp_bounce_begin(void);
@@ -282,12 +479,19 @@ public:
     timestamp_t decr_timestamp_bounce_end(void);
     timestamp_t incr_timestamp_bounce_end(void);
 
-    timestamp_t set_timestamp_last_i_was_hit(timestamp_t);
-    timestamp_t get_timestamp_last_i_was_hit(void);
-    timestamp_t decr_timestamp_last_i_was_hit(timestamp_t);
-    timestamp_t incr_timestamp_last_i_was_hit(timestamp_t);
-    timestamp_t decr_timestamp_last_i_was_hit(void);
-    timestamp_t incr_timestamp_last_i_was_hit(void);
+    timestamp_t set_timestamp_last_attacked(timestamp_t);
+    timestamp_t get_timestamp_last_attacked(void);
+    timestamp_t decr_timestamp_last_attacked(timestamp_t);
+    timestamp_t incr_timestamp_last_attacked(timestamp_t);
+    timestamp_t decr_timestamp_last_attacked(void);
+    timestamp_t incr_timestamp_last_attacked(void);
+
+    timestamp_t set_timestamp_last_attack(timestamp_t);
+    timestamp_t get_timestamp_last_attack(void);
+    timestamp_t decr_timestamp_last_attack(timestamp_t);
+    timestamp_t incr_timestamp_last_attack(timestamp_t);
+    timestamp_t decr_timestamp_last_attack(void);
+    timestamp_t incr_timestamp_last_attack(void);
 
     timestamp_t set_timestamp_flip_start(timestamp_t);
     timestamp_t get_timestamp_flip_start(void);
@@ -371,11 +575,12 @@ public:
     const char *to_cstring(void);
     double collision_radius(void);
     double get_bounce(void);
+    double get_lunge(void);
     fpoint ai_get_next_hop(void);
     fpoint set_interpolated_mid_at(fpoint);
     fpoint get_interpolated_mid_at(void);
-    int ai_ai_hit_if_possible(Thingp hitter);
-    int ai_ai_hit_if_possible(Thingp hitter, int damage);
+    int ai_hit_if_possible(Thingp hitter);
+    int ai_hit_if_possible(Thingp hitter, int damage);
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, int damage);
     int ai_scent_distance(void);
@@ -523,6 +728,7 @@ public:
     void blit_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
     void blit_upside_down(double offset_x, double offset_y, int x, int y);
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
+    void lunge(fpoint tt);
     void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);
     void carry(Thingp w);
     void collision_check_do();

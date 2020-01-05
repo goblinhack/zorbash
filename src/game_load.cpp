@@ -64,6 +64,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     in >> bits(my.t->bounce_count);
     in >> bits(my.t->bounce_fade);
     in >> bits(my.t->bounce_height);
+    in >> bits(my.t->lunge_to);
     in >> bits(my.t->carrying);
     in >> bits(my.t->gold);
     in >> bits(my.t->interpolated_mid_at);
@@ -75,6 +76,8 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     in >> bits(my.t->rot);
     in >> bits(my.t->stats_attack);
     in >> bits(my.t->stats_attack_max);
+    in >> bits(my.t->stats_attack_rate_tenths);
+    in >> bits(my.t->stats_attacked_rate_tenths);
     in >> bits(my.t->stats_defence);
     in >> bits(my.t->stats_defence_max);
     in >> bits(my.t->stats_health);
@@ -84,9 +87,12 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     in >> bits(my.t->weapon_id_carry_anim);
     in >> bits(my.t->weapon_id_use_anim);
 
+    in >> bits(ts_tmp); my.t->timestamp_lunge_begin    = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_lunge_end      = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_bounce_begin   = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_bounce_end     = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_last_i_was_hit = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_last_attacked  = load_timestamp(ts_tmp);
+    in >> bits(ts_tmp); my.t->timestamp_last_attack    = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_flip_start     = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_move_begin     = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_move_end       = load_timestamp(ts_tmp);

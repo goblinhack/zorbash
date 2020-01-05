@@ -110,6 +110,14 @@ _
     }
 
     {
+        auto v = tp_stats_defence(tpp);
+        if (unlikely(v)) {
+            set_stats_defence(v);
+            set_stats_defence_max(v);
+        }
+    }
+
+    {
         auto v = tp_stats_attack(tpp);
         if (unlikely(v)) {
             set_stats_attack(v);
@@ -118,10 +126,156 @@ _
     }
 
     {
-        auto v = tp_stats_defence(tpp);
+        auto v = tp_stats_attack_rate_tenths(tpp);
         if (unlikely(v)) {
-            set_stats_defence(v);
-            set_stats_defence_max(v);
+            set_stats_attack_rate_tenths(v);
+        }
+    }
+
+    {
+        auto v = tp_stats_attacked_rate_tenths(tpp);
+        if (unlikely(v)) {
+            set_stats_attacked_rate_tenths(v);
+        }
+    }
+
+    {
+        auto v = tp_stats01(tpp);
+        if (unlikely(v)) {
+            set_stats01(v);
+        }
+    }
+
+    {
+        auto v = tp_stats02(tpp);
+        if (unlikely(v)) {
+            set_stats02(v);
+        }
+    }
+
+    {
+        auto v = tp_stats03(tpp);
+        if (unlikely(v)) {
+            set_stats03(v);
+        }
+    }
+
+    {
+        auto v = tp_stats04(tpp);
+        if (unlikely(v)) {
+            set_stats04(v);
+        }
+    }
+
+    {
+        auto v = tp_stats05(tpp);
+        if (unlikely(v)) {
+            set_stats05(v);
+        }
+    }
+
+    {
+        auto v = tp_stats06(tpp);
+        if (unlikely(v)) {
+            set_stats06(v);
+        }
+    }
+
+    {
+        auto v = tp_stats07(tpp);
+        if (unlikely(v)) {
+            set_stats07(v);
+        }
+    }
+
+    {
+        auto v = tp_stats08(tpp);
+        if (unlikely(v)) {
+            set_stats08(v);
+        }
+    }
+
+    {
+        auto v = tp_stats09(tpp);
+        if (unlikely(v)) {
+            set_stats09(v);
+        }
+    }
+
+    {
+        auto v = tp_stats10(tpp);
+        if (unlikely(v)) {
+            set_stats10(v);
+        }
+    }
+
+    {
+        auto v = tp_stats11(tpp);
+        if (unlikely(v)) {
+            set_stats11(v);
+        }
+    }
+
+    {
+        auto v = tp_stats12(tpp);
+        if (unlikely(v)) {
+            set_stats12(v);
+        }
+    }
+
+    {
+        auto v = tp_stats13(tpp);
+        if (unlikely(v)) {
+            set_stats13(v);
+        }
+    }
+
+    {
+        auto v = tp_stats14(tpp);
+        if (unlikely(v)) {
+            set_stats14(v);
+        }
+    }
+
+    {
+        auto v = tp_stats15(tpp);
+        if (unlikely(v)) {
+            set_stats15(v);
+        }
+    }
+
+    {
+        auto v = tp_stats16(tpp);
+        if (unlikely(v)) {
+            set_stats16(v);
+        }
+    }
+
+    {
+        auto v = tp_stats17(tpp);
+        if (unlikely(v)) {
+            set_stats17(v);
+        }
+    }
+
+    {
+        auto v = tp_stats18(tpp);
+        if (unlikely(v)) {
+            set_stats18(v);
+        }
+    }
+
+    {
+        auto v = tp_stats19(tpp);
+        if (unlikely(v)) {
+            set_stats19(v);
+        }
+    }
+
+    {
+        auto v = tp_stats20(tpp);
+        if (unlikely(v)) {
+            set_stats20(v);
         }
     }
 
