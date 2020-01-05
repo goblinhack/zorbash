@@ -28,8 +28,10 @@ def tp_init(name):
     x.set_is_movement_blocking(True)
     x.set_is_undead(True)
     x.set_is_water_hater(100)
-    x.set_stats_attack(2)
+    x.set_stats_attack(1)
     x.set_stats_attack_bite_hd("1d4+1")
+    x.set_stats_attack_rate_tenths(20)
+    x.set_stats_attacked_rate_tenths(0)
     x.set_stats_defence(2)
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial(10)
@@ -42,7 +44,7 @@ def tp_init(name):
     x.set_tile(tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
 
     x.update()
-    
+
 def init():
     tp_init(name="mummy1")
 

@@ -451,7 +451,7 @@ bool Thing::collision_find_best_target (void)
             r = true;
         }
 
-        if (it->ai_ai_hit_if_possible(me, damage)) {
+        if (it->ai_hit_if_possible(me, damage)) {
             log("collision will hit %s", it->to_string().c_str());
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");

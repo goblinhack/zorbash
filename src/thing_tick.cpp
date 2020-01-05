@@ -25,6 +25,7 @@ void Thing::achieve_goals_in_life (void)
             if (collision_check_and_handle(to)) {
                 CON("COLL");
                 stop();
+                lunge(to);
                 return;
             }
 

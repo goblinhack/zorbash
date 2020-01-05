@@ -183,6 +183,22 @@ bool Thing::update_coordinates (void)
         br.y -= height;
     }
 
+    //
+    // Lunge to attack.
+    //
+    {
+        auto lunge = get_lunge();
+        if (lunge) {
+            auto delta = get_lunge_to() - mid_at;
+            auto dx = delta.x * lunge * tile_gl_width * 2;
+            auto dy = delta.y * lunge * tile_gl_height * 2;
+            tl.x -= dx;
+            br.x -= dx;
+            tl.y -= dy;
+            br.y -= dy;
+        }
+    }
+
     if (unlikely(tp_gfx_can_hflip(tpp))) {
         if (get_timestamp_flip_start()) {
             //
@@ -255,6 +271,13 @@ void Thing::bounce (double bounce_height,
     is_bouncing = true;
 }
 
+void Thing::lunge (fpoint to)
+{
+    auto t = set_timestamp_lunge_begin(time_get_time_ms_cached());
+    set_timestamp_lunge_end(t + 100);
+    set_lunge_to(to);
+}
+
 double Thing::get_bounce (void)
 {
     if (!is_bouncing) {
@@ -288,6 +311,29 @@ double Thing::get_bounce (void)
     height *= get_bounce_height();
 
     return (height);
+}
+
+double Thing::get_lunge (void)
+{
+    if (!get_timestamp_lunge_begin()) {
+        return (0);
+    }
+
+    auto t = time_get_time_ms_cached();
+
+    if (t >= get_timestamp_lunge_end()) {
+        return (0);
+    }
+
+    double time_step =
+        (double)(t - get_timestamp_lunge_begin()) /
+        (double)(get_timestamp_lunge_end() - get_timestamp_lunge_begin());
+
+    if (time_step > 0.5) {
+        return (1.0 - time_step);
+    } else {
+        return time_step;
+    }
 }
 
 void Thing::update_pos (fpoint to, bool immediately)
