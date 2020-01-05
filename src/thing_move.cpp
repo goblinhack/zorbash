@@ -353,9 +353,9 @@ void Thing::update_pos (fpoint to, bool immediately)
     int speed;
     auto owner = owner_get();
     if (owner) {
-        speed = tp_move_speed_ms(owner->tp());
+        speed = tp_stats_move_speed_ms(owner->tp());
     } else{
-        speed = tp_move_speed_ms(tpp);
+        speed = tp_stats_move_speed_ms(tpp);
     }
 
     //

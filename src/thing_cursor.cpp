@@ -80,6 +80,10 @@ void thing_cursor_map_follow (void)
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
     } else if (world->cursor && !world->map_follow_player) {
+extern Widp wid_itembar;
+if (wid_over ) {
+    return;
+}
         follow = world->cursor->mid_at;
         sensitivity = TILES_ACROSS / 4;
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;

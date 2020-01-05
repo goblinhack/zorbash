@@ -14,7 +14,6 @@ def tp_init(name):
     x.set_gfx_can_hflip(True)
     x.set_gfx_show_hiddend(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_hunger_initial_health_at(10)
     x.set_is_active(True)
     x.set_is_attackable(True)
     x.set_is_bleeder(True)
@@ -24,7 +23,12 @@ def tp_init(name):
     x.set_is_made_of_meat(True)
     x.set_is_movable(True)
     x.set_is_player(True)
-    x.set_move_speed_ms(100)
+    x.set_stats_attack(3)
+    x.set_stats_defence(3)
+    x.set_stats_health_hunger_pct(5)
+    x.set_stats_health_initial(10)
+    x.set_stats_health_starving_pct(5)
+    x.set_stats_move_speed_ms(100)
     x.set_z_depth(zx.MAP_DEPTH_PLAYER)
 
     delay = 550

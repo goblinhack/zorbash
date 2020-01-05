@@ -40,34 +40,39 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
         out << bits(my.t->dmap_scent);
     }
 
-    out << bits(my.t->light_strength);
-    out << bits(my.t->light_quality);
-    out << bits(my.t->light_col);
-    out << bits(my.t->interpolated_mid_at);
-    out << bits(my.t->bounce_height);
-    out << bits(my.t->bounce_fade);
-    out << bits(my.t->rot);
-    out << bits(my.t->submerged_offset);
     out << bits(my.t->bounce_count);
+    out << bits(my.t->bounce_fade);
+    out << bits(my.t->bounce_height);
+    out << bits(my.t->carrying);
     out << bits(my.t->gold);
-    out << bits(my.t->health);
-    out << bits(my.t->health_max);
+    out << bits(my.t->interpolated_mid_at);
+    out << bits(my.t->light_col);
+    out << bits(my.t->light_quality);
+    out << bits(my.t->light_strength);
     out << bits(my.t->owned_count);
-    out << bits(my.t->timestamp_bounce_begin);
-    out << bits(my.t->timestamp_bounce_end);
-    out << bits(my.t->timestamp_last_i_was_hit);
-    out << bits(my.t->timestamp_flip_start);
-    out << bits(my.t->timestamp_move_begin);
-    out << bits(my.t->timestamp_move_end);
-    out << bits(my.t->timestamp_born);
-    out << bits(my.t->timestamp_hunger_tick);
-    out << bits(my.t->timestamp_ai_next);
-    out << bits(my.t->timestamp_collision);
     out << bits(my.t->owner_id);
+    out << bits(my.t->rot);
+    out << bits(my.t->stats_attack);
+    out << bits(my.t->stats_attack_max);
+    out << bits(my.t->stats_defence);
+    out << bits(my.t->stats_defence_max);
+    out << bits(my.t->stats_health);
+    out << bits(my.t->stats_health_max);
+    out << bits(my.t->submerged_offset);
+    out << bits(my.t->weapon_id);
     out << bits(my.t->weapon_id_carry_anim);
     out << bits(my.t->weapon_id_use_anim);
-    out << bits(my.t->weapon_id);
-    out << bits(my.t->carrying);
+
+    out << bits(my.t->timestamp_ai_next);
+    out << bits(my.t->timestamp_born);
+    out << bits(my.t->timestamp_bounce_begin);
+    out << bits(my.t->timestamp_bounce_end);
+    out << bits(my.t->timestamp_collision);
+    out << bits(my.t->timestamp_flip_start);
+    out << bits(my.t->timestamp_hunger_tick);
+    out << bits(my.t->timestamp_last_i_was_hit);
+    out << bits(my.t->timestamp_move_begin);
+    out << bits(my.t->timestamp_move_end);
 
     return (out);
 }

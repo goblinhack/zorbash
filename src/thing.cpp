@@ -99,12 +99,30 @@ _
         is_facing_left = false;
     }
 
-    is_hungry = tp_hunger_constant(tpp);
+    is_hungry = tp_is_hunger_insatiable(tpp);
 
-    auto h = tp_hunger_initial_health_at(tpp);
-    if (unlikely(h)) {
-        set_health(h);
-        set_health_max(h);
+    {
+        auto v = tp_stats_health_initial(tpp);
+        if (unlikely(v)) {
+            set_stats_health(v);
+            set_stats_health_max(v);
+        }
+    }
+
+    {
+        auto v = tp_stats_attack(tpp);
+        if (unlikely(v)) {
+            set_stats_attack(v);
+            set_stats_attack_max(v);
+        }
+    }
+
+    {
+        auto v = tp_stats_defence(tpp);
+        if (unlikely(v)) {
+            set_stats_defence(v);
+            set_stats_defence_max(v);
+        }
     }
 
     auto tiles = tp_tiles(tpp);
@@ -651,12 +669,12 @@ std::string Thing::to_string (void)
     auto tpp = tp();
     verify(this);
     verify(tpp);
-    if (get_health_max()) {
+    if (get_stats_health_max()) {
         return (string_sprintf("ID %08X(%s%s hp %d(%d)) at (%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
-                               get_health(),
-                               get_health_max(),
+                               get_stats_health(),
+                               get_stats_health_max(),
                                mid_at.x, mid_at.y));
     } else {
         return (string_sprintf("ID %08X(%s%s) at (%g,%g)",

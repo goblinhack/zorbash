@@ -137,20 +137,17 @@ public:
     int gfx_animated_no_dir {};
     int gfx_bounce_on_move {};
     int gfx_can_hflip {};
+    int gfx_dead_anim {};
     int gfx_is_an_animation_only {};
     int gfx_is_floor_deco {};
     int gfx_is_wall_deco {};
     int gfx_is_weapon_carry_anim {};
     int gfx_is_weapon_use_anim {};
     int gfx_large_shadow_caster {};
-    int gfx_show_hiddend {};
     int gfx_oversized_but_sitting_on_the_ground {};
+    int gfx_show_hiddend {};
     int gfx_small_shadow_caster {};
-    int hunger_at_health_pct {};
     int hunger_clock_freq_ms {};
-    int hunger_constant {};
-    int hunger_initial_health_at {};
-    int hunger_starving_at_health_pct {};
     int internal_has_dir_anim {};
     int internal_has_hp_anim {};
     int is_active {}; // e.g. a monst or player or something movable
@@ -160,6 +157,8 @@ public:
     int is_combustable {};
     int is_corpse_on_death {};
     int is_corridor {};
+    int is_cursor {};
+    int is_cursor_hover {};
     int is_deep_water {};
     int is_dirt {};
     int is_door {};
@@ -168,10 +167,12 @@ public:
     int is_explosion {};
     int is_floor {};
     int is_food {};
+    int is_hunger_insatiable {};
     int is_interesting {}; // e.g. something edible or a monst or lava
     int is_key {};
     int is_lava {};
     int is_light_strength {};
+    int is_loggable {};
     int is_made_of_meat {};
     int is_meat_eater {};
     int is_monst {};
@@ -201,7 +202,6 @@ public:
     int is_rrr24 {};
     int is_rrr25 {};
     int is_rrr26 {};
-    int is_loggable {};
     int is_rrr28 {};
     int is_rrr29 {};
     int is_rrr3 {};
@@ -220,28 +220,28 @@ public:
     int is_rrr42 {};
     int is_rrr43 {};
     int is_rrr44 {};
-    int is_rrr45 {};
-    int is_rrr46 {};
-    int is_secret_door {};
-    int is_cursor_hover {};
-    int is_cursor {};
     int is_rrr5 {};
-    int gfx_dead_anim {};
     int is_rrr6 {};
     int is_rrr7 {};
     int is_rrr8 {};
     int is_rrr9 {};
+    int is_secret_door {};
     int is_undead {};
     int is_wall {};
     int is_water {};
     int is_water_dweller {};
     int is_water_hater {};
     int is_weapon {};
-    int move_speed_ms {};
+    int stats_attack {};
+    int stats_defence {};
+    int stats_health_hunger_pct {};
+    int stats_health_initial {};
+    int stats_health_starving_pct {};
+    int stats_move_speed_ms {};
     int weapon_damage {};
     int weapon_use_delay_hundredths {};
     int weapon_use_distance {};
-    std::string bite_damage_hd {};
+    std::string stats_attack_bite_hd {};
     std::string is_nutrition_hd {};
 
     uint8_t z_depth {};
@@ -569,14 +569,14 @@ static inline int tp_is_rrr44 (Tpp t)
     return (t->is_rrr44);
 }
 
-static inline int tp_is_rrr45 (Tpp t)
+static inline int tp_stats_defence (Tpp t)
 {
-    return (t->is_rrr45);
+    return (t->stats_defence);
 }
 
-static inline int tp_is_rrr46 (Tpp t)
+static inline int tp_stats_attack (Tpp t)
 {
-    return (t->is_rrr46);
+    return (t->stats_attack);
 }
 
 static inline int tp_is_secret_door (Tpp t)
@@ -614,9 +614,9 @@ static inline int tp_is_water_hater (Tpp t)
     return (t->is_water_hater);
 }
 
-static inline int tp_hunger_constant (Tpp t)
+static inline int tp_is_hunger_insatiable (Tpp t)
 {
-    return (t->hunger_constant);
+    return (t->is_hunger_insatiable);
 }
 
 static inline int tp_is_undead (Tpp t)
@@ -634,9 +634,9 @@ static inline std::string tp_is_nutrition_hd (Tpp t)
     return (t->is_nutrition_hd);
 }
 
-static inline std::string tp_bite_damage_hd (Tpp t)
+static inline std::string tp_stats_attack_bite_hd (Tpp t)
 {
-    return (t->bite_damage_hd);
+    return (t->stats_attack_bite_hd);
 }
 
 static inline int tp_collision_check (Tpp t)
@@ -694,19 +694,19 @@ static inline int tp_is_active (Tpp t)
     return (t->is_active);
 }
 
-static inline int tp_hunger_starving_at_health_pct (Tpp t)
+static inline int tp_stats_health_starving_pct (Tpp t)
 {
-    return (t->hunger_starving_at_health_pct);
+    return (t->stats_health_starving_pct);
 }
 
-static inline int tp_hunger_initial_health_at (Tpp t)
+static inline int tp_stats_health_initial (Tpp t)
 {
-    return (t->hunger_initial_health_at);
+    return (t->stats_health_initial);
 }
 
-static inline int tp_hunger_at_health_pct (Tpp t)
+static inline int tp_stats_health_hunger_pct (Tpp t)
 {
-    return (t->hunger_at_health_pct);
+    return (t->stats_health_hunger_pct);
 }
 
 static inline int tp_hunger_clock_freq_ms (Tpp t)
@@ -784,9 +784,9 @@ static inline int tp_gfx_is_wall_deco (Tpp t)
     return (t->gfx_is_wall_deco);
 }
 
-static inline int tp_move_speed_ms (Tpp t)
+static inline int tp_stats_move_speed_ms (Tpp t)
 {
-    return (t->move_speed_ms);
+    return (t->stats_move_speed_ms);
 }
 
 static inline int tp_weapon_use_delay_hundredths (Tpp t)

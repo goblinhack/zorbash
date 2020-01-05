@@ -235,9 +235,9 @@ int Thing::gfx_small_shadow_caster(void)
     return (tp_gfx_small_shadow_caster(tp()));
 }
 
-int Thing::hunger_at_health_pct(void)
+int Thing::health_hunger_pct(void)
 {
-    return (tp_hunger_at_health_pct(tp()));
+    return (tp_stats_health_hunger_pct(tp()));
 }
 
 int Thing::hunger_clock_freq_ms(void)
@@ -245,19 +245,19 @@ int Thing::hunger_clock_freq_ms(void)
     return (tp_hunger_clock_freq_ms(tp()));
 }
 
-int Thing::hunger_constant(void)
+int Thing::is_hunger_insatiable(void)
 {
-    return (tp_hunger_constant(tp()));
+    return (tp_is_hunger_insatiable(tp()));
 }
 
-int Thing::hunger_initial_health_at(void)
+int Thing::health_initial(void)
 {
-    return (tp_hunger_initial_health_at(tp()));
+    return (tp_stats_health_initial(tp()));
 }
 
-int Thing::hunger_starving_at_health_pct(void)
+int Thing::health_starving_pct(void)
 {
-    return (tp_hunger_starving_at_health_pct(tp()));
+    return (tp_stats_health_starving_pct(tp()));
 }
 
 int Thing::is_active(void)
@@ -590,14 +590,14 @@ int Thing::is_rrr44(void)
     return (tp_is_rrr44(tp()));
 }
 
-int Thing::is_rrr45(void)
+int Thing::defence(void)
 {
-    return (tp_is_rrr45(tp()));
+    return (tp_stats_defence(tp()));
 }
 
-int Thing::is_rrr46(void)
+int Thing::attack(void)
 {
-    return (tp_is_rrr46(tp()));
+    return (tp_stats_attack(tp()));
 }
 
 int Thing::is_secret_door(void)
@@ -695,9 +695,9 @@ int Thing::z_depth(void)
     return (tp_z_depth(tp()));
 }
 
-std::string Thing::bite_damage_hd(void)
+std::string Thing::stats_attack_bite_hd(void)
 {
-    return (tp_bite_damage_hd(tp()));
+    return (tp_stats_attack_bite_hd(tp()));
 }
 
 std::string Thing::is_nutrition_hd(void)
@@ -855,95 +855,283 @@ int Thing::incr_gold (void)
 ////////////////////////////////////////////////////////////////////////////
 // health
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_health (void)
+int Thing::get_stats_health (void)
 {
     if (monst) {
-        return (monst->health);
+        return (monst->stats_health);
     } else {
         return (0);
     }
 }
 
-int Thing::set_health (int v)
+int Thing::set_stats_health (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health = v);
+    return (monst->stats_health = v);
 }
 
-int Thing::decr_health (int v)
+int Thing::decr_stats_health (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health -= v);
+    return (monst->stats_health -= v);
 }
 
-int Thing::incr_health (int v)
+int Thing::incr_stats_health (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health += v);
+    return (monst->stats_health += v);
 }
 
-int Thing::decr_health (void)
+int Thing::decr_stats_health (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health--);
+    return (monst->stats_health--);
 }
 
-int Thing::incr_health (void)
+int Thing::incr_stats_health (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health++);
+    return (monst->stats_health++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // health_max
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_health_max (void)
+int Thing::get_stats_health_max (void)
 {
     if (monst) {
-        return (monst->health_max);
+        return (monst->stats_health_max);
     } else {
         return (0);
     }
 }
 
-int Thing::set_health_max (int v)
+int Thing::set_stats_health_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health_max = v);
+    return (monst->stats_health_max = v);
 }
 
-int Thing::decr_health_max (int v)
+int Thing::decr_stats_health_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health_max -= v);
+    return (monst->stats_health_max -= v);
 }
 
-int Thing::incr_health_max (int v)
+int Thing::incr_stats_health_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health_max += v);
+    return (monst->stats_health_max += v);
 }
 
-int Thing::decr_health_max (void)
+int Thing::decr_stats_health_max (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health_max--);
+    return (monst->stats_health_max--);
 }
 
-int Thing::incr_health_max (void)
+int Thing::incr_stats_health_max (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->health_max++);
+    return (monst->stats_health_max++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// defence
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_stats_defence (void)
+{
+    if (monst) {
+        return (monst->stats_defence);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_stats_defence (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence = v);
+}
+
+int Thing::decr_stats_defence (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence -= v);
+}
+
+int Thing::incr_stats_defence (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence += v);
+}
+
+int Thing::decr_stats_defence (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence--);
+}
+
+int Thing::incr_stats_defence (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// defence_max
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_stats_defence_max (void)
+{
+    if (monst) {
+        return (monst->stats_defence_max);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_stats_defence_max (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence_max = v);
+}
+
+int Thing::decr_stats_defence_max (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence_max -= v);
+}
+
+int Thing::incr_stats_defence_max (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence_max += v);
+}
+
+int Thing::decr_stats_defence_max (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence_max--);
+}
+
+int Thing::incr_stats_defence_max (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_defence_max++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// attack
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_stats_attack (void)
+{
+    if (monst) {
+        return (monst->stats_attack);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_stats_attack (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack = v);
+}
+
+int Thing::decr_stats_attack (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack -= v);
+}
+
+int Thing::incr_stats_attack (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack += v);
+}
+
+int Thing::decr_stats_attack (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack--);
+}
+
+int Thing::incr_stats_attack (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// attack_max
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_stats_attack_max (void)
+{
+    if (monst) {
+        return (monst->stats_attack_max);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_stats_attack_max (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack_max = v);
+}
+
+int Thing::decr_stats_attack_max (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack_max -= v);
+}
+
+int Thing::incr_stats_attack_max (int v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack_max += v);
+}
+
+int Thing::decr_stats_attack_max (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack_max--);
+}
+
+int Thing::incr_stats_attack_max (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->stats_attack_max++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

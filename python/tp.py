@@ -275,11 +275,11 @@ class Tp:
     def set_is_rrr44(self, value):
         zx.tp_set_is_rrr44(self, value)
 
-    def set_is_rrr45(self, value):
-        zx.tp_set_is_rrr45(self, value)
+    def set_stats_defence(self, value):
+        zx.tp_set_stats_defence(self, value)
 
-    def set_is_rrr46(self, value):
-        zx.tp_set_is_rrr46(self, value)
+    def set_stats_attack(self, value):
+        zx.tp_set_stats_attack(self, value)
 
     def set_is_secret_door(self, value):
         zx.tp_set_is_secret_door(self, value)
@@ -305,8 +305,8 @@ class Tp:
     def set_is_water_hater(self, value):
         zx.tp_set_is_water_hater(self, value)
 
-    def set_hunger_constant(self, value):
-        zx.tp_set_hunger_constant(self, value)
+    def set_is_hunger_insatiable(self, value):
+        zx.tp_set_is_hunger_insatiable(self, value)
 
     def set_is_undead(self, value):
         zx.tp_set_is_undead(self, value)
@@ -317,8 +317,8 @@ class Tp:
     def set_is_nutrition_hd(self, value):
         zx.tp_set_is_nutrition_hd(self, value)
 
-    def set_bite_damage_hd(self, value):
-        zx.tp_set_bite_damage_hd(self, value)
+    def set_stats_attack_bite_hd(self, value):
+        zx.tp_set_stats_attack_bite_hd(self, value)
 
     def set_collision_check(self, value):
         zx.tp_set_collision_check(self, value)
@@ -359,14 +359,20 @@ class Tp:
     def set_is_active(self, value):
         zx.tp_set_is_active(self, value)
 
-    def set_hunger_starving_at_health_pct(self, value):
-        zx.tp_set_hunger_starving_at_health_pct(self, value)
+    def set_stats_health_starving_pct(self, value):
+        zx.tp_set_stats_health_starving_pct(self, value)
 
-    def set_hunger_initial_health_at(self, value):
-        zx.tp_set_hunger_initial_health_at(self, value)
+    def set_stats_health_initial(self, value):
+        zx.tp_set_stats_health_initial(self, value)
 
-    def set_hunger_at_health_pct(self, value):
-        zx.tp_set_hunger_at_health_pct(self, value)
+    def set_stats_health_hunger_pct(self, value):
+        zx.tp_set_stats_health_hunger_pct(self, value)
+
+    def set_stats_attack(self, value):
+        zx.tp_set_stats_attack(self, value)
+
+    def set_stats_defence(self, value):
+        zx.tp_set_stats_defence(self, value)
 
     def set_hunger_clock_freq_ms(self, value):
         zx.tp_set_hunger_clock_freq_ms(self, value)
@@ -404,8 +410,8 @@ class Tp:
     def set_is_entrance(self, value):
         zx.tp_set_is_entrance(self, value)
 
-    def set_move_speed_ms(self, value):
-        zx.tp_set_move_speed_ms(self, value)
+    def set_stats_move_speed_ms(self, value):
+        zx.tp_set_stats_move_speed_ms(self, value)
 
     def set_weapon_use_delay_hundredths(self, value):
         zx.tp_set_weapon_use_delay_hundredths(self, value)

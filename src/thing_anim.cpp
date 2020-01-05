@@ -118,8 +118,8 @@ log("tile %s", tile_name(tile).c_str());
                 }
             }
 
-            auto health_max = get_health_max();
-            auto health = get_health();
+            auto health_max = get_stats_health_max();
+            auto health = get_stats_health();
 
             if (tpp->internal_has_hp_anim) {
                 if (health < health_max / 4) {

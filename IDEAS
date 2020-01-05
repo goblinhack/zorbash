@@ -5,6 +5,16 @@ old gods to new gods scale
 runes lean more torwards old gods
 bibles and stuff lean to new gods
 
+damage system like terraria
+---------------------------
+weapon-damage-chance
+net-damage = min(weapon-min-damage, weapon-attack - (monst-defense * 0.5))
+net-damage = min(weapon-min-damage, weapon-attack - (monst-defense * 0.75) expert mode)
+
+For example:
+With 20 defense, a 40 damage attack is reduced by 10, resulting in 30 damage taken: 40 - (20 * 0.5) = 30
+With 30 defense, a 40 damage attack is reduced by 15, resulting in 25 damage taken: 40 - (30 * 0.5) = 25
+
 monsters
 --------
 j'hson - god of mold summoning
