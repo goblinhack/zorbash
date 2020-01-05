@@ -354,10 +354,12 @@ public:
     Thingp weapon_get();
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void);
-    bool ai_collisions_handle(void);
+    bool collision_check_and_handle(void);
+    bool collision_check_and_handle(fpoint);
     bool ai_is_goal_for_me(point p, int priority, float *score, std::string &why);
     bool ai_is_obstacle_for_me(point p);
     bool ai_possible_hit(Thingp it, int x, int y, int dx, int dy);
+    void stop(void);
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire);
     bool update_coordinates(void);
@@ -507,7 +509,7 @@ public:
     uint8_t is_less_preferred_terrain(point p);
     uint8_t is_visible();
     void achieve_goals_in_life();
-    void ai_possible_hits_find_best(void);
+    bool collision_find_best_target(void);
     void animate();
     void attach(void);
     void blit(double offset_x, double offset_y, int x, int y);

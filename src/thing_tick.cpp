@@ -22,6 +22,12 @@ void Thing::achieve_goals_in_life (void)
         }
 
         if (mid_at != to) {
+            if (collision_check_and_handle(to)) {
+                CON("COLL");
+                stop();
+                return;
+            }
+
             move(to);
         }
     }
@@ -36,7 +42,9 @@ void Thing::collision_check_do (void)
     if (time_have_x_tenths_passed_since(MAX_THING_COLL_DELAY_TENTHS,
                                         get_timestamp_collision())) {
         log("handle collisions");
-        ai_collisions_handle();
+        if (collision_check_and_handle()) {
+            stop();
+        }
 
         set_timestamp_collision(
             time_get_time_ms() +
