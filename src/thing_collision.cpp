@@ -375,7 +375,7 @@ static void thing_possible_init (void)
 //
 // Find the thing with the highest priority to hit.
 //
-void Thing::ai_possible_hits_find_best (void)
+bool Thing::collision_find_best_target (void)
 {_
     auto me = this;
     ThingColl *best = nullptr;
@@ -435,6 +435,8 @@ void Thing::ai_possible_hits_find_best (void)
         }
     }
 
+    bool r = false;
+
     if (best) {
         int damage = 0;
 
@@ -446,6 +448,7 @@ void Thing::ai_possible_hits_find_best (void)
             log("collision will eat %s damage %d", it->to_string().c_str(),
                 damage);
             health_boost(it->is_nutrition());
+            r = true;
         }
 
         if (it->ai_ai_hit_if_possible(me, damage)) {
@@ -453,6 +456,7 @@ void Thing::ai_possible_hits_find_best (void)
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");
             }
+            r = true;
         } else if (best->hitter_killed_on_hit_or_miss) {
             //
             // Missiles?
@@ -460,12 +464,15 @@ void Thing::ai_possible_hits_find_best (void)
             log("collision will hit %s and kill self",
                 it->to_string().c_str());
             me->dead("self killed on hitting");
+            r = true;
         }
     } else {
         log("handle collisions; nothing to do");
+        r = false;
     }
 
     thing_possible_init();
+    return (r);
 }
 
 bool things_overlap (const Thingp A, const Thingp B)
@@ -577,34 +584,35 @@ bool Thing::ai_possible_hit (Thingp it, int x, int y, int dx, int dy)
 }
 
 //
-// Have we hit anything?
+// Have we hit anything? True on having done something at this (future?)
+// position.
 //
-bool Thing::ai_collisions_handle (void)
+bool Thing::collision_check_and_handle (fpoint at)
 {_
-    int minx = mid_at.x - thing_collision_tiles;
+    int minx = at.x - thing_collision_tiles;
     while (minx < 0) {
         minx++;
     }
 
-    int miny = mid_at.y - thing_collision_tiles;
+    int miny = at.y - thing_collision_tiles;
     while (miny < 0) {
         miny++;
     }
 
-    int maxx = mid_at.x + thing_collision_tiles;
+    int maxx = at.x + thing_collision_tiles;
     while (maxx >= MAP_WIDTH) {
         maxx--;
     }
 
-    int maxy = mid_at.y + thing_collision_tiles;
+    int maxy = at.y + thing_collision_tiles;
     while (maxy >= MAP_HEIGHT) {
         maxy--;
     }
 
     for (int16_t x = minx; x <= maxx; x++) {
-        auto dx = x - mid_at.x;
+        auto dx = x - at.x;
         for (int16_t y = miny; y <= maxy; y++) {
-            auto dy = y - mid_at.y;
+            auto dy = y - at.y;
             FOR_ALL_INTERESTING_THINGS(world, it, x, y) {
                 if (this == it) {
                     continue;
@@ -621,7 +629,10 @@ bool Thing::ai_collisions_handle (void)
         }
     }
 
-    ai_possible_hits_find_best();
+    return (collision_find_best_target());
+}
 
-    return (true);
+bool Thing::collision_check_and_handle (void)
+{_
+    return (collision_check_and_handle(mid_at));
 }

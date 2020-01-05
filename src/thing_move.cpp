@@ -5,6 +5,14 @@
 
 #include "my_game.h"
 
+void Thing::stop (void)
+{
+    mid_at = get_interpolated_mid_at();
+    set_timestamp_move_begin(0);
+    set_timestamp_move_end(0);
+    update_interpolated_position();
+}
+
 bool Thing::move (fpoint future_pos)
 {
     bool up     = future_pos.y < mid_at.y;
