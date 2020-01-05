@@ -33,14 +33,14 @@ void Thing::collision_check_do (void)
         return;
     }
 
-    if (time_have_x_tenths_passed_since(THING_COLLISION_TEST_DELAY_TENTHS,
+    if (time_have_x_tenths_passed_since(MAX_THING_COLL_DELAY_TENTHS,
                                         get_timestamp_collision())) {
         log("handle collisions");
         ai_collisions_handle();
 
         set_timestamp_collision(
             time_get_time_ms() +
-            random_range(0, THING_COLLISION_TEST_DELAY_TENTHS));
+            random_range(0, MAX_THING_COLL_DELAY_TENTHS));
     }
 }
 

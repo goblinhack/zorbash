@@ -259,28 +259,31 @@ static void game_status_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "zorbash-0");
         point tl = {0, y_at};
-        point br = {TITLEBAR_WIDTH - 1, y_at+1};
+        point br = {SIDEBAR_WIDTH - 1, y_at+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "zorbash-0");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     y_at += 2;
     {
         auto w = wid_new_square_button(wid_sidebar, "zorbash-1");
         point tl = {0, y_at};
-        point br = {TITLEBAR_WIDTH - 1, y_at+1};
+        point br = {SIDEBAR_WIDTH - 1, y_at+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "zorbash-1");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     y_at += 2;
     {
         auto w = wid_new_square_button(wid_sidebar, "zorbash-2");
         point tl = {0, y_at};
-        point br = {TITLEBAR_WIDTH - 1, y_at+1};
+        point br = {SIDEBAR_WIDTH - 1, y_at+1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "zorbash-2");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     y_at += 2;
 
@@ -294,13 +297,14 @@ static void game_status_wid_create (void)
         wid_set_on_mouse_down(w, game_status_mouse_down);
         wid_set_style(w, WID_STYLE_DARK;
         wid_set_bg_tilename(w, "player1.pose");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
     }
 
     y_at += 3;
     {
         auto w = wid_new_square_button(wid_sidebar, "title name");
         point tl = {0, y_at + 4};
-        point br = {TITLEBAR_WIDTH, y_at + 4};
+        point br = {SIDEBAR_WIDTH, y_at + 4};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, WID_STYLE_DARK;
@@ -311,7 +315,7 @@ static void game_status_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "gold");
         point tl = {7, y_at-3};
-        point br = {TITLEBAR_WIDTH, y_at-3};
+        point br = {SIDEBAR_WIDTH, y_at-3};
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=dollar-icon$%fg=gold$666");
@@ -322,7 +326,7 @@ static void game_status_wid_create (void)
     {
         auto w = wid_new_square_button(wid_sidebar, "weight");
         point tl = {7, y_at-2};
-        point br = {TITLEBAR_WIDTH, y_at-2};
+        point br = {SIDEBAR_WIDTH, y_at-2};
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=CWEIGHT$%fg=green$150%fg=grey$lbs");
@@ -332,19 +336,54 @@ static void game_status_wid_create (void)
 #endif
 
     y_at += 1;
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Health
+    ///////////////////////////////////////////////////////////////////////////
     {
         auto w = wid_new_square_button(wid_sidebar, "health-icon");
         point tl = {0, y_at};
         point br = {2, y_at + 2};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_bg_tilename(w, "health5-icon");
+        int i = ((float)world->player->get_stats_health() /
+                 (float)world->player->get_stats_health_max()) *
+                 (float)HEALTH_ICON_STEPS;
+        i = std::min(i, HEALTH_ICON_STEPS);
+        i = std::max(i, 1);
+        auto icon = "health" + std::to_string(i) + "-icon";
+        wid_set_bg_tilename(w, icon);
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+
+        int i = ((float)world->player->get_stats_health() /
+                 (float)world->player->get_stats_health_max()) *
+                 (float)STATUSBAR_ICON_STEPS - 1;
+        i = std::min(i, STATUSBAR_ICON_STEPS - 1);
+        i = std::max(i, 0);
+        auto icon = "status-bar-" + std::to_string(i);
+        wid_set_bg_tilename(w, icon);
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "health-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_bg_tilename(w, "health-status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
         auto w = wid_new_square_button(wid_sidebar, "Health-value");
         point tl = {3, y_at + 3};
-        point br = {tl.x + TITLEBAR_WIDTH - 3, tl.y};
+        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -354,24 +393,11 @@ static void game_status_wid_create (void)
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
-    {
-        auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
-        point tl = {3, y_at};
-        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_bg_tilename(w, "status-bar-9");
-    }
-    {
-        auto w = wid_new_square_button(wid_sidebar, "health-status");
-        point tl = {3, y_at + 2};
-        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_bg_tilename(w, "health-status");
-    }
-
     y_at += 4;
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Attack
+    ///////////////////////////////////////////////////////////////////////////
     {
         auto w = wid_new_square_button(wid_sidebar, "attack-icon");
         point tl = {0, y_at};
@@ -382,35 +408,48 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
+        auto w = wid_new_square_button(wid_sidebar, "attack-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+
+        int i = ((float)world->player->get_stats_attack() /
+                 (float)world->player->get_stats_attack_max()) *
+                 (float)STATUSBAR_ICON_STEPS - 1;
+        i = std::min(i, STATUSBAR_ICON_STEPS - 1);
+        i = std::max(i, 0);
+        auto icon = "status-bar-" + std::to_string(i);
+        wid_set_bg_tilename(w, icon);
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "attack-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_bg_tilename(w, "attack-status");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
         auto w = wid_new_square_button(wid_sidebar, "attack-value");
         point tl = {3, y_at + 3};
-        point br = {tl.x + TITLEBAR_WIDTH - 3, tl.y};
+        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
+
         std::string s =
             std::to_string(world->player->get_stats_attack()) + "/" +
             std::to_string(world->player->get_stats_attack_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
-    {
-        auto w = wid_new_square_button(wid_sidebar, "attack-status-bar");
-        point tl = {3, y_at};
-        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_bg_tilename(w, "status-bar-9");
-    }
-    {
-        auto w = wid_new_square_button(wid_sidebar, "attack-status");
-        point tl = {3, y_at + 2};
-        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_bg_tilename(w, "attack-status");
-    }
-
     y_at += 4;
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Defence
+    ///////////////////////////////////////////////////////////////////////////
     {
         auto w = wid_new_square_button(wid_sidebar, "defence-icon");
         point tl = {0, y_at};
@@ -421,10 +460,34 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     {
+        auto w = wid_new_square_button(wid_sidebar, "defence-status-bar");
+        point tl = {3, y_at};
+        point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y + 1};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+
+        int i = ((float)world->player->get_stats_defence() /
+                 (float)world->player->get_stats_defence_max()) *
+                 (float)STATUSBAR_ICON_STEPS - 1;
+        i = std::min(i, STATUSBAR_ICON_STEPS - 1);
+        i = std::max(i, 0);
+        auto icon = "status-bar-" + std::to_string(i);
+        wid_set_bg_tilename(w, icon);
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
+        auto w = wid_new_square_button(wid_sidebar, "defence-status");
+        point tl = {3, y_at + 2};
+        point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y};
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_bg_tilename(w, "defence-status");
+        wid_set_color(w, WID_COLOR_BG, WHITE);
+    }
+    {
         auto w = wid_new_square_button(wid_sidebar, "defence-value");
         point tl = {3, y_at + 3};
-        point br = {tl.x + TITLEBAR_WIDTH - 3, tl.y};
-
+        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -434,22 +497,7 @@ static void game_status_wid_create (void)
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
-    {
-        auto w = wid_new_square_button(wid_sidebar, "defence-status-bar");
-        point tl = {3, y_at};
-        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y + 1};
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_bg_tilename(w, "status-bar-7");
-    }
-    {
-        auto w = wid_new_square_button(wid_sidebar, "defence-status");
-        point tl = {3, y_at + 2};
-        point br = {tl.x + TITLEBAR_WIDTH - 4, tl.y};
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_bg_tilename(w, "defence-status");
-    }
+    y_at += 4;
 
     wid_update(wid_sidebar);
 }

@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_color.h"
 #include "my_dmap.h"
+#include "my_game_status.h"
 #include <list>
 
 void Thing::new_monst (void)
@@ -821,35 +822,45 @@ int Thing::set_gold (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->gold = v);
+    auto n = (monst->gold = v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_gold (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->gold -= v);
+    auto n = (monst->gold -= v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_gold (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->gold += v);
+    auto n = (monst->gold += v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_gold (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->gold--);
+    auto n = (monst->gold--);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_gold (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->gold++);
+    auto n = (monst->gold++);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -868,35 +879,45 @@ int Thing::set_stats_health (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health = v);
+    auto n = (monst->stats_health = v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_health (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health -= v);
+    auto n = (monst->stats_health -= v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_health (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health += v);
+    auto n = (monst->stats_health += v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_health (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health--);
+    auto n = (monst->stats_health--);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_health (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health++);
+    auto n = (monst->stats_health++);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -915,35 +936,45 @@ int Thing::set_stats_health_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health_max = v);
+    auto n = (monst->stats_health_max = v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_health_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health_max -= v);
+    auto n = (monst->stats_health_max -= v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_health_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health_max += v);
+    auto n = (monst->stats_health_max += v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_health_max (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health_max--);
+    auto n = (monst->stats_health_max--);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_health_max (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_health_max++);
+    auto n = (monst->stats_health_max++);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -962,35 +993,45 @@ int Thing::set_stats_defence (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence = v);
+    auto n = (monst->stats_defence = v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_defence (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence -= v);
+    auto n = (monst->stats_defence -= v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_defence (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence += v);
+    auto n = (monst->stats_defence += v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_defence (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence--);
+    auto n = (monst->stats_defence--);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_defence (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence++);
+    auto n = (monst->stats_defence++);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -1009,35 +1050,45 @@ int Thing::set_stats_defence_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence_max = v);
+    auto n = (monst->stats_defence_max = v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_defence_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence_max -= v);
+    auto n = (monst->stats_defence_max -= v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_defence_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence_max += v);
+    auto n = (monst->stats_defence_max += v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_defence_max (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence_max--);
+    auto n = (monst->stats_defence_max--);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_defence_max (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_defence_max++);
+    auto n = (monst->stats_defence_max++);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -1056,35 +1107,45 @@ int Thing::set_stats_attack (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack = v);
+    auto n = (monst->stats_attack = v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_attack (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack -= v);
+    auto n = (monst->stats_attack -= v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_attack (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack += v);
+    auto n = (monst->stats_attack += v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_attack (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack--);
+    auto n = (monst->stats_attack--);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_attack (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack++);
+    auto n = (monst->stats_attack++);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -1103,35 +1164,45 @@ int Thing::set_stats_attack_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack_max = v);
+    auto n = (monst->stats_attack_max = v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_attack_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack_max -= v);
+    auto n = (monst->stats_attack_max -= v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_attack_max (int v)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack_max += v);
+    auto n = (monst->stats_attack_max += v);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::decr_stats_attack_max (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack_max--);
+    auto n = (monst->stats_attack_max--);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 int Thing::incr_stats_attack_max (void)
 {
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monst->stats_attack_max++);
+    auto n = (monst->stats_attack_max++);
+    if (is_player()) { game_status_init(); }
+    return (n);
 }
 
 ////////////////////////////////////////////////////////////////////////////

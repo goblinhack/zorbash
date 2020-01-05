@@ -65,6 +65,10 @@
 #undef  ENABLE_ASCII_MOUSE
 #define ENABLE_TILE_COLLISION_CHECKING
 
+////////////////////////////////////////////////////////////////////////////
+// Map
+////////////////////////////////////////////////////////////////////////////
+
 //
 // Dungeon size; composed of a grid of rooms
 //
@@ -74,25 +78,34 @@
 #define ROOM_HEIGHT                 13
 
 //
-// How many save game slots
-//
-#define MAX_SAVE_SLOTS              10
-
-//
 // Dungeon has a pad of tiles around the edges
 //
 #define MAP_BORDER                  20
 #define MAP_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define MAP_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
+
+////////////////////////////////////////////////////////////////////////////
+// Things on map
+////////////////////////////////////////////////////////////////////////////
+
 #define MAP_SLOTS                   16
 #define MAX_THINGS                  (1 << 15)
 #define MAX_THINGS_MASK             (MAX_THINGS - 1)
+#define MAX_THING_COLL_DELAY_TENTHS 1
+
+////////////////////////////////////////////////////////////////////////////
+// Lights
+////////////////////////////////////////////////////////////////////////////
 
 //
 // Light sources
 //
 #define MAX_LIGHT_RAYS              (360)
 #define MAX_LIGHT_PLAYER_DISTANCE   (TILES_ACROSS * 5)
+
+////////////////////////////////////////////////////////////////////////////
+// Tiles
+////////////////////////////////////////////////////////////////////////////
 
 //
 // Per screen
@@ -107,14 +120,21 @@ extern int TILES_DOWN;
 #define TILE_HEIGHT                 16
 
 //
+// Largest tile for collisions
+//
+#define MAX_TILE_WIDTH              64
+#define MAX_TILE_HEIGHT             64
+
+//
 // Dimentions of the fixed text on screen
 //
 #define ASCII_WIDTH_MAX             120
 #define ASCII_HEIGHT_MAX            ASCII_WIDTH_MAX
 
-//
+////////////////////////////////////////////////////////////////////////////
 // UI button styles
-//
+////////////////////////////////////////////////////////////////////////////
+
 #define WID_STYLE_OUTLINE           0
 #define WID_STYLE_GREEN             1
 #define WID_STYLE_RED               2
@@ -127,29 +147,57 @@ extern int TILES_DOWN;
 #define WID_POPUP_WIDTH_WIDE        36
 #define WID_POPUP_WIDTH_WIDEST      48
 
-//
-// Largest tile for collisions
-//
-#define MAX_TILE_WIDTH              64
-#define MAX_TILE_HEIGHT             64
+////////////////////////////////////////////////////////////////////////////
+// UI save slots
+////////////////////////////////////////////////////////////////////////////
 
 //
-// Console
+// How many save game slots
 //
+#define MAX_SAVE_SLOTS              10
+
+////////////////////////////////////////////////////////////////////////////
+// UI console
+////////////////////////////////////////////////////////////////////////////
+
 #define CONSOLE_CURSOR_COLOR        GRAY
 #define CONSOLE_CURSOR_OTHER_COLOR  WHITE
 #define CONSOLE_TEXT_COLOR          GRAY
 #define CONSOLE_INPUT_COLOR         ORANGE
 #define CONSOLE_WIDTH               120
 #define CONSOLE_HEIGHT              200
-
 #define CONSOLE_KEY1                '`'
 #define CONSOLE_KEY2                '~'
 #define CONSOLE_KEY3                '\\'
 
+////////////////////////////////////////////////////////////////////////////
+// UI mini console
+////////////////////////////////////////////////////////////////////////////
+
+//
+// Minicon
+//
+#define MINICON_TEXT_COLOR          RESET_TEXT_COLOR
+#define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
+#define MINICON_HEIGHT              20 // scrollbar limit
+#define MINICON_VIS_HEIGHT          5
+#define MINICON_VIS_WIDTH           MINICON_WIDTH
+
+////////////////////////////////////////////////////////////////////////////
+// UI status bar and inventory
+////////////////////////////////////////////////////////////////////////////
+
+//
+// How many graduations on e.g. the health bar
+//
+#define STATUSBAR_ICON_STEPS        12
+#define HEALTH_ICON_STEPS           5
+
+//
+// Sidebar includes all stats e.g. health / attack / defence
+//
 #define SIDEBAR_WIDTH               14
-#define TITLEBAR_WIDTH              SIDEBAR_WIDTH
-#define TITLEBAR_HEIGHT             SIDEBAR_WIDTH
+
 #define ITEMBAR_HEIGHT              4
 #define ITEMBAR_WIDTH               4
 #define ITEMBAR_TOT_WIDTH           (10 * ITEMBAR_WIDTH)
@@ -162,20 +210,15 @@ extern int TILES_DOWN;
 #define INVENTORY_DOWN              5
 #define INVENTORY_ACROSS            6
 
+////////////////////////////////////////////////////////////////////////////
+// UI text
+////////////////////////////////////////////////////////////////////////////
+
 //
 // Default text color
 //
 #define RESET_TEXT_COLOR            GRAY
 #define RESET_TEXT_COLOR_STR        "gray"
-
-//
-// Minicon
-//
-#define MINICON_TEXT_COLOR          RESET_TEXT_COLOR
-#define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
-#define MINICON_HEIGHT              20 // scrollbar limit
-#define MINICON_VIS_HEIGHT          5
-#define MINICON_VIS_WIDTH           MINICON_WIDTH
 
 //
 // Popups
@@ -196,7 +239,9 @@ extern int TILES_DOWN;
 #define TTF_GLYPH_PER_ROW           60
 #define TTF_CURSOR_CHAR             127
 
-#define THING_COLLISION_TEST_DELAY_TENTHS       1
+////////////////////////////////////////////////////////////////////////////
+// UI mouse
+////////////////////////////////////////////////////////////////////////////
 
 //
 // How much the wheel mouse moves.
@@ -207,18 +252,24 @@ extern int TILES_DOWN;
 #define ENABLE_JOY_SCROLL_SPEED_SCALE           1.0
 #define ENABLE_JOY_MAX_SCROLL_SPEED_SCALE       1.5
 
-#include <cstring>
-#include <string>
+////////////////////////////////////////////////////////////////////////////
+// Random numbers
+////////////////////////////////////////////////////////////////////////////
 
 //
 // Enhanced random number generator.
 //
 #include "my_pcg_basic.h"
-#define myrand()           pcg32_random()
-#define mysrand(a)         pcg32_srandom(a,a)
 
-#define random_range(a, b) (pcg32_boundedrand(b - a) + a)
+#define myrand()                     pcg32_random()
+#define mysrand(a)                   pcg32_srandom(a,a)
+
+#define random_range(a, b)           (pcg32_boundedrand(b - a) + a)
 #define random_range_inclusive(a, b) (pcg32_boundedrand(b - a + 1) + a)
+
+////////////////////////////////////////////////////////////////////////////
+// Misc
+////////////////////////////////////////////////////////////////////////////
 
 //
 // Simple array routines
