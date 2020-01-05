@@ -47,9 +47,9 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
                 orig_hitter->to_name().c_str());
     }
 
-    auto h = decr_health(damage);
+    auto h = decr_stats_health(damage);
     if (h <= 0) {
-        h = set_health(0);
+        h = set_stats_health(0);
 
         //
         // Record who dun it.

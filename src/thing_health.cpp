@@ -9,11 +9,11 @@
 
 void Thing::health_boost (int v)
 {
-    auto old_health = get_health();
+    auto old_health = get_stats_health();
     auto new_health = old_health + v;
-    auto max_health = get_health_max();
+    auto max_health = get_stats_health_max();
     new_health = std::min(new_health, max_health);
-    set_health(new_health);
+    set_stats_health(new_health);
 
     if (new_health == max_health) {
         log("health boost %d, %d -> max(%d)", v, old_health, new_health);

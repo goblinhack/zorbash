@@ -10,7 +10,7 @@ def tp_init(name):
     x.set_collision_radius(0.5)
     x.set_gfx_show_hiddend(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_hunger_initial_health_at(4)
+    x.set_stats_health_initial(4)
     x.set_is_food(True)
     x.set_is_interesting(True)
     x.set_is_loggable(True)

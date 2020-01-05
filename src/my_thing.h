@@ -94,9 +94,13 @@ typedef struct Monst_ {
     float        rot = {};                   // GL co-orids
     float        submerged_offset = {};      // GL co-orids
     int          bounce_count = {};
-    int          gold = {}; 
-    int          health = {}; 
-    int          health_max = {}; 
+    int          gold = {};
+    int          stats_health = {};
+    int          stats_health_max = {};
+    int          stats_defence = {};
+    int          stats_defence_max = {};
+    int          stats_attack = {};
+    int          stats_attack_max = {};
     int          owned_count = {};           // How many things this thing owns.
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
@@ -187,9 +191,9 @@ public:
     void delete_dmap_scent(void);
 
     Lightp get_light(void);
-    void new_light(fpoint at, 
+    void new_light(fpoint at,
                    double strength,
-                   LightQuality quality = LIGHT_QUALITY_POINT, 
+                   LightQuality quality = LIGHT_QUALITY_POINT,
                    color col = WHITE);
     void delete_light(void);
 
@@ -215,19 +219,47 @@ public:
     int decr_gold(void);
     int incr_gold(void);
 
-    int set_health(int);
-    int get_health(void);
-    int decr_health(int);
-    int incr_health(int);
-    int decr_health(void);
-    int incr_health(void);
+    int set_stats_health(int);
+    int get_stats_health(void);
+    int decr_stats_health(int);
+    int incr_stats_health(int);
+    int decr_stats_health(void);
+    int incr_stats_health(void);
 
-    int set_health_max(int);
-    int get_health_max(void);
-    int decr_health_max(int);
-    int incr_health_max(int);
-    int decr_health_max(void);
-    int incr_health_max(void);
+    int set_stats_health_max(int);
+    int get_stats_health_max(void);
+    int decr_stats_health_max(int);
+    int incr_stats_health_max(int);
+    int decr_stats_health_max(void);
+    int incr_stats_health_max(void);
+
+    int set_stats_defence(int);
+    int get_stats_defence(void);
+    int decr_stats_defence(int);
+    int incr_stats_defence(int);
+    int decr_stats_defence(void);
+    int incr_stats_defence(void);
+
+    int set_stats_defence_max(int);
+    int get_stats_defence_max(void);
+    int decr_stats_defence_max(int);
+    int incr_stats_defence_max(int);
+    int decr_stats_defence_max(void);
+    int incr_stats_defence_max(void);
+
+    int set_stats_attack(int);
+    int get_stats_attack(void);
+    int decr_stats_attack(int);
+    int incr_stats_attack(int);
+    int decr_stats_attack(void);
+    int incr_stats_attack(void);
+
+    int set_stats_attack_max(int);
+    int get_stats_attack_max(void);
+    int decr_stats_attack_max(int);
+    int incr_stats_attack_max(int);
+    int decr_stats_attack_max(void);
+    int incr_stats_attack_max(void);
 
     int set_owned_count(int);
     int get_owned_count(void);
@@ -365,11 +397,11 @@ public:
     int gfx_show_hiddend(void);
     int gfx_oversized_but_sitting_on_the_ground(void);
     int gfx_small_shadow_caster(void);
-    int hunger_at_health_pct(void);
+    int health_hunger_pct(void);
     int hunger_clock_freq_ms(void);
-    int hunger_constant(void);
-    int hunger_initial_health_at(void);
-    int hunger_starving_at_health_pct(void);
+    int is_hunger_insatiable(void);
+    int health_initial(void);
+    int health_starving_pct(void);
     int is_active(void);
     int is_attackable(void);
     int is_bleeder(void);
@@ -438,8 +470,8 @@ public:
     int is_rrr42(void);
     int is_rrr43(void);
     int is_rrr44(void);
-    int is_rrr45(void);
-    int is_rrr46(void);
+    int defence(void);
+    int attack(void);
     int is_secret_door(void);
     int is_cursor_hover(void);
     int is_cursor(void);
@@ -459,7 +491,7 @@ public:
     int weapon_use_delay_hundredths(void);
     int weapon_use_distance(void);
     int z_depth(void);
-    std::string bite_damage_hd(void);
+    std::string stats_attack_bite_hd(void);
     std::string is_nutrition_hd(void);
     std::string to_name(void);
     std::string to_string(void);

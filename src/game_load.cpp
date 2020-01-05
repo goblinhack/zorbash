@@ -61,19 +61,29 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
         in >> bits(my.t->dmap_scent);
     }
 
-    in >> bits(my.t->light_strength);
-    in >> bits(my.t->light_quality);
-    in >> bits(my.t->light_col);
-    in >> bits(my.t->interpolated_mid_at);
-    in >> bits(my.t->bounce_height);
-    in >> bits(my.t->bounce_fade);
-    in >> bits(my.t->rot);
-    in >> bits(my.t->submerged_offset);
     in >> bits(my.t->bounce_count);
+    in >> bits(my.t->bounce_fade);
+    in >> bits(my.t->bounce_height);
+    in >> bits(my.t->carrying);
     in >> bits(my.t->gold);
-    in >> bits(my.t->health);
-    in >> bits(my.t->health_max);
+    in >> bits(my.t->interpolated_mid_at);
+    in >> bits(my.t->light_col);
+    in >> bits(my.t->light_quality);
+    in >> bits(my.t->light_strength);
     in >> bits(my.t->owned_count);
+    in >> bits(my.t->owner_id);
+    in >> bits(my.t->rot);
+    in >> bits(my.t->stats_attack);
+    in >> bits(my.t->stats_attack_max);
+    in >> bits(my.t->stats_defence);
+    in >> bits(my.t->stats_defence_max);
+    in >> bits(my.t->stats_health);
+    in >> bits(my.t->stats_health_max);
+    in >> bits(my.t->submerged_offset);
+    in >> bits(my.t->weapon_id);
+    in >> bits(my.t->weapon_id_carry_anim);
+    in >> bits(my.t->weapon_id_use_anim);
+
     in >> bits(ts_tmp); my.t->timestamp_bounce_begin   = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_bounce_end     = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_last_i_was_hit = load_timestamp(ts_tmp);
@@ -84,11 +94,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     in >> bits(ts_tmp); my.t->timestamp_hunger_tick    = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_ai_next        = load_timestamp(ts_tmp);
     in >> bits(ts_tmp); my.t->timestamp_collision      = load_timestamp(ts_tmp);
-    in >> bits(my.t->owner_id);
-    in >> bits(my.t->weapon_id_carry_anim);
-    in >> bits(my.t->weapon_id_use_anim);
-    in >> bits(my.t->weapon_id);
-    in >> bits(my.t->carrying);
 
     return (in);
 }

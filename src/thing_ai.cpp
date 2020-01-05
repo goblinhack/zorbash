@@ -154,9 +154,9 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                 }
 
                 if (will_eat(it)) {
-                    auto my_health = get_health();
-                    auto it_health = get_health();
-                    auto health_diff = it_health - my_health;
+                    auto my_health = get_stats_health();
+                    auto it_stats_health = get_stats_health();
+                    auto health_diff = it_stats_health - my_health;
 
                     if (it->is_player()) {
                         *score += 200 - health_diff;
@@ -171,7 +171,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                         debug += " distance " + std::to_string(distance_scale);
 #endif
                     } else {
-                        *score += 500 + it_health;
+                        *score += 500 + it_stats_health;
 #ifdef DEBUG_AI
                         debug = "will eat food " + it->to_string();
                         debug += " distance " + std::to_string(distance_scale);
@@ -197,9 +197,9 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                 }
 
                 if (will_eat(it)) {
-                    auto my_health = get_health();
-                    auto it_health = get_health();
-                    auto health_diff = it_health - my_health;
+                    auto my_health = get_stats_health();
+                    auto it_stats_health = get_stats_health();
+                    auto health_diff = it_stats_health - my_health;
 
                     if (it->is_player()) {
                         *score += 200 - health_diff;
@@ -214,7 +214,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                         debug += " distance " + std::to_string(distance_scale);
 #endif
                     } else {
-                        *score += 500 + it_health;
+                        *score += 500 + it_stats_health;
 #ifdef DEBUG_AI
                         debug = "will eat food " + it->to_string();
                         debug += " distance " + std::to_string(distance_scale);

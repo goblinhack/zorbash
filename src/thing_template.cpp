@@ -65,7 +65,7 @@ Tpp tp_load (int id, std::string name)
 void tp_update (Tpp t)
 {_
     t->is_nutrition = Dice(t->is_nutrition_hd);
-    t->bite_damage = Dice(t->bite_damage_hd);
+    t->bite_damage = Dice(t->stats_attack_bite_hd);
 }
 
 //
