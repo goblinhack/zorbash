@@ -37,8 +37,8 @@ void tp_fini (void)
     if (tp_init_done) {
         tp_init_done = false;
     }
-    for (auto t : tp_name_map) {
-        delete t.second;
+    for (auto tp : tp_name_map) {
+        delete tp.second;
     }
 }
 
@@ -48,24 +48,24 @@ Tpp tp_load (int id, std::string name)
         ERR("thing template name [%s] already used", name.c_str());
     }
 
-    auto t = new Tp();
-    t->name = name;
+    auto tp = new Tp();
+    tp->name = name;
 
-    auto result = tp_name_map.insert(std::make_pair(name, t));
+    auto result = tp_name_map.insert(std::make_pair(name, tp));
     if (result.second == false) {
         DIE("thing insert name [%s] failed", name.c_str());
     }
 
-    tp_id_map.push_back(t);
-    t->id = tp_id_map.size();
+    tp_id_map.push_back(tp);
+    tp->id = tp_id_map.size();
 
-    return (t);
+    return (tp);
 }
 
-void tp_update (Tpp t)
+void tp_update (Tpp tp)
 {_
-    t->is_nutrition = Dice(t->is_nutrition_hd);
-    t->bite_damage = Dice(t->stats_attack_bite_hd);
+    tp->is_nutrition = Dice(tp->is_nutrition_hd);
+    tp->attack_damage = Dice(tp->stats_attack_hd);
 }
 
 //

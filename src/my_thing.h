@@ -558,11 +558,14 @@ public:
     Thingp weapon_get();
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void);
-    bool collision_check_and_handle(void);
-    bool collision_check_and_handle(fpoint);
+    bool collision_check_and_handle(Thingp it, int x, int y, int dx, int dy);
+    bool collision_check_and_handle(bool *, bool *);
+    bool collision_check_and_handle(fpoint, bool *, bool *);
+    bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
+    bool collision_check_only(void);
+    bool collision_check_only(fpoint);
     bool ai_is_goal_for_me(point p, int priority, float *score, std::string &why);
     bool ai_is_obstacle_for_me(point p);
-    bool ai_possible_hit(Thingp it, int x, int y, int dx, int dy);
     void stop(void);
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire);
@@ -584,7 +587,6 @@ public:
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, int damage);
     int ai_scent_distance(void);
-    int bite_damage(void);
     int collision_attack(void);
     int collision_box(void);
     int collision_check(void);
@@ -698,7 +700,7 @@ public:
     int weapon_use_delay_hundredths(void);
     int weapon_use_distance(void);
     int z_depth(void);
-    std::string stats_attack_bite_hd(void);
+    std::string stats_attack_hd(void);
     std::string is_nutrition_hd(void);
     std::string to_name(void);
     std::string to_string(void);
@@ -714,7 +716,7 @@ public:
     uint8_t is_less_preferred_terrain(point p);
     uint8_t is_visible();
     void achieve_goals_in_life();
-    bool collision_find_best_target(void);
+    bool collision_find_best_target(bool *, bool *);
     void animate();
     void attach(void);
     void blit(double offset_x, double offset_y, int x, int y);
