@@ -122,7 +122,7 @@ public:
     int blit_left_off {};
     int blit_right_off {};
 
-    Dice bite_damage;
+    Dice attack_damage;
     Dice is_nutrition;
     double collision_radius {};
     int ai_delay_after_moving_ms {};
@@ -263,7 +263,7 @@ public:
     int weapon_damage {};
     int weapon_use_delay_hundredths {};
     int weapon_use_distance {};
-    std::string stats_attack_bite_hd {};
+    std::string stats_attack_hd {};
     std::string is_nutrition_hd {};
 
     uint8_t z_depth {};
@@ -766,9 +766,9 @@ static inline std::string tp_is_nutrition_hd (Tpp t)
     return (t->is_nutrition_hd);
 }
 
-static inline std::string tp_stats_attack_bite_hd (Tpp t)
+static inline std::string tp_stats_attack_hd (Tpp t)
 {
-    return (t->stats_attack_bite_hd);
+    return (t->stats_attack_hd);
 }
 
 static inline int tp_collision_check (Tpp t)

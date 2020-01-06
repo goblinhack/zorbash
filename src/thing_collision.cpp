@@ -375,10 +375,14 @@ static void thing_possible_init (void)
 //
 // Find the thing with the highest priority to hit.
 //
-bool Thing::collision_find_best_target (void)
+bool Thing::collision_find_best_target (bool *target_attacked,
+                                        bool *target_overlaps)
 {_
     auto me = this;
     ThingColl *best = nullptr;
+
+    *target_attacked = false;
+    *target_overlaps = false;
 
     for (auto cand : thing_colls) {
         //
@@ -435,28 +439,22 @@ bool Thing::collision_find_best_target (void)
         }
     }
 
-    bool r = false;
-
     if (best) {
         int damage = 0;
+        *target_overlaps = true;
 
         auto it = best->target;
         log("collision final best is %s", it->to_string().c_str());
 
-        if (will_eat(it)) {
-            damage = bite_damage();
-            log("collision will eat %s damage %d", it->to_string().c_str(),
-                damage);
-            health_boost(it->is_nutrition());
-            r = true;
-        }
-
+        damage = get_stats_attack();
         if (it->ai_hit_if_possible(me, damage)) {
-            log("collision will hit %s", it->to_string().c_str());
+            log("collision will hit %s for %d damage",
+                it->to_string().c_str(), damage);
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");
             }
-            r = true;
+            health_boost(it->is_nutrition());
+            *target_attacked = false;
         } else if (best->hitter_killed_on_hit_or_miss) {
             //
             // Missiles?
@@ -464,15 +462,15 @@ bool Thing::collision_find_best_target (void)
             log("collision will hit %s and kill self",
                 it->to_string().c_str());
             me->dead("self killed on hitting");
-            r = true;
+            *target_attacked = false;
+            return (true);
         }
     } else {
         log("handle collisions; nothing to do");
-        r = false;
     }
 
     thing_possible_init();
-    return (r);
+    return (false);
 }
 
 bool things_overlap (const Thingp A, const Thingp B)
@@ -535,7 +533,7 @@ bool things_overlap (const Thingp A, const Thingp B)
 //
 // false aborts the walk
 //
-bool Thing::ai_possible_hit (Thingp it, int x, int y, int dx, int dy)
+bool Thing::collision_check_and_handle (Thingp it, int x, int y, int dx, int dy)
 {_
     auto me = this;
     auto it_tp = it->tp();
@@ -583,11 +581,60 @@ bool Thing::ai_possible_hit (Thingp it, int x, int y, int dx, int dy)
     return (true);
 }
 
+bool Thing::collision_check_only (Thingp it, int x, int y, int dx, int dy)
+{_
+    auto me = this;
+    auto it_tp = it->tp();
+    auto me_tp = me->tp();
+
+    if (it->is_dead) {
+        return (false);
+    }
+
+    Thingp owner_it = it->owner_get();
+    Thingp owner_me = me->owner_get();
+
+    //
+    // Need this or shields attack the player.
+    //
+    if ((owner_it == me) || (owner_me == it)) {
+        return (false);
+    }
+
+    //
+    // Sword use hits?
+    //
+    if (tp_gfx_is_weapon_use_anim(me_tp)) {
+        if (tp_is_monst(it_tp)) {
+            //
+            // Weapon hits monster or generator.
+            //
+            if (things_overlap(me, it)) {
+                return (true);
+            }
+        }
+    } else if (will_attack(it)) {
+        if (tp_collision_attack(me_tp)) {
+            if (things_overlap(me, it)) {
+                return (true);
+            }
+        }
+    } else if (will_eat(it)) {
+        if (things_overlap(me, it)) {
+            return (true);
+        }
+    }
+
+    return (false);
+}
+
 //
 // Have we hit anything? True on having done something at this (future?)
 // position.
 //
-bool Thing::collision_check_and_handle (fpoint at)
+bool Thing::collision_check_and_handle (fpoint at,
+                                        bool *target_attacked,
+                                        bool *target_overlaps)
 {_
     int minx = at.x - thing_collision_tiles;
     while (minx < 0) {
@@ -622,17 +669,71 @@ bool Thing::collision_check_and_handle (fpoint at)
                     continue;
                 }
 
-                if (!ai_possible_hit(it, x, y, dx, dy)) {
+                //
+                // false is used to abort the walk
+                //
+                if (!collision_check_and_handle(it, x, y, dx, dy)) {
                     return (false);
                 }
             }
         }
     }
 
-    return (collision_find_best_target());
+    return (collision_find_best_target(target_attacked, target_overlaps));
 }
 
-bool Thing::collision_check_and_handle (void)
+bool Thing::collision_check_only (fpoint at)
 {_
-    return (collision_check_and_handle(mid_at));
+    int minx = at.x - thing_collision_tiles;
+    while (minx < 0) {
+        minx++;
+    }
+
+    int miny = at.y - thing_collision_tiles;
+    while (miny < 0) {
+        miny++;
+    }
+
+    int maxx = at.x + thing_collision_tiles;
+    while (maxx >= MAP_WIDTH) {
+        maxx--;
+    }
+
+    int maxy = at.y + thing_collision_tiles;
+    while (maxy >= MAP_HEIGHT) {
+        maxy--;
+    }
+
+    for (int16_t x = minx; x <= maxx; x++) {
+        auto dx = x - at.x;
+        for (int16_t y = miny; y <= maxy; y++) {
+            auto dy = y - at.y;
+            FOR_ALL_INTERESTING_THINGS(world, it, x, y) {
+                if (this == it) {
+                    continue;
+                }
+
+                if (it->is_hidden) {
+                    continue;
+                }
+
+                if (collision_check_only(it, x, y, dx, dy)) {
+                    return (true);
+                }
+            }
+        }
+    }
+    return (false);
+}
+
+bool Thing::collision_check_and_handle (bool *target_attacked,
+                                        bool *target_overlaps)
+{_
+    return (collision_check_and_handle(mid_at,
+                                       target_attacked, target_overlaps));
+}
+
+bool Thing::collision_check_only (void)
+{_
+    return (collision_check_only(mid_at));
 }

@@ -41,8 +41,8 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     }
 
     if (is_player()) {
-        MINICON("%%fg=yellow$The %s hits!%%fg=reset$",
-                orig_hitter->to_name().c_str());
+        MINICON("%%fg=yellow$The %s hits for %d damage!%%fg=reset$",
+                orig_hitter->to_name().c_str(), damage);
     }
 
     auto h = decr_stats_health(damage);

@@ -131,11 +131,6 @@ int Thing::ai_scent_distance(void)
     return (tp_ai_scent_distance(tp()));
 }
 
-int Thing::bite_damage(void)
-{
-    return (tp()->bite_damage());
-}
-
 int Thing::collision_attack(void)
 {
     return (tp_collision_attack(tp()));
@@ -696,9 +691,9 @@ int Thing::z_depth(void)
     return (tp_z_depth(tp()));
 }
 
-std::string Thing::stats_attack_bite_hd(void)
+std::string Thing::stats_attack_hd(void)
 {
-    return (tp_stats_attack_bite_hd(tp()));
+    return (tp_stats_attack_hd(tp()));
 }
 
 std::string Thing::is_nutrition_hd(void)
@@ -1116,7 +1111,10 @@ int Thing::incr_stats_defence_max (void)
 int Thing::get_stats_attack (void)
 {
     if (monst) {
-        return (monst->stats_attack);
+        if (monst->stats_attack) {
+            return (monst->stats_attack);
+        }
+        return (tp()->attack_damage.roll());
     } else {
         return (0);
     }

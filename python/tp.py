@@ -323,8 +323,8 @@ class Tp:
     def set_is_nutrition_hd(self, value):
         zx.tp_set_is_nutrition_hd(self, value)
 
-    def set_stats_attack_bite_hd(self, value):
-        zx.tp_set_stats_attack_bite_hd(self, value)
+    def set_stats_attack_hd(self, value):
+        zx.tp_set_stats_attack_hd(self, value)
 
     def set_collision_check(self, value):
         zx.tp_set_collision_check(self, value)

@@ -1743,7 +1743,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(stats19)
     TP_SET_DECL(stats20)
     TP_SET_DECL(stats_attack)
-    TP_SET_DECL(stats_attack_bite_hd)
+    TP_SET_DECL(stats_attack_hd)
     TP_SET_DECL(stats_attack_rate_tenths)
     TP_SET_DECL(stats_attacked_rate_tenths)
     TP_SET_DECL(stats_defence)
