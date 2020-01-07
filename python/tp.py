@@ -272,8 +272,8 @@ class Tp:
     def set_is_rrr43(self, value):
         zx.tp_set_is_rrr43(self, value)
 
-    def set_is_rrr44(self, value):
-        zx.tp_set_is_rrr44(self, value)
+    def set_is_attack_lunge(self, value):
+        zx.tp_set_is_attack_lunge(self, value)
 
     def set_stats_defence(self, value):
         zx.tp_set_stats_defence(self, value)
