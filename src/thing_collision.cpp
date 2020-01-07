@@ -271,6 +271,7 @@ collided:
     //
     return (false);
 }
+#endif
 
 //
 // If two circles collide, the resultant direction is along the normal between
@@ -278,28 +279,20 @@ collided:
 //
 static int circle_circle_collision (Thingp A,
                                     Thingp B,
-                                    fpoint at,
                                     fpoint *intersect)
 {
-    double Ax = A->interpolated_mid_at.x;
-    double Ay = A->interpolated_mid_at.y;
-    Ax += (at.x - A->interpolated_mid_at.x);
-    Ay += (at.y - A->interpolated_mid_at.y);
+    fpoint A_at = A->get_interpolated_mid_at();
+    fpoint B_at = B->get_interpolated_mid_at();
 
-    fpoint A_at = { Ax, Ay };
     //fpoint A0, A1, A2, A3;
     //A->to_coords(&A0, &A1, &A2, &A3);
     //double A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
-    double A_radius = tp_collision_radius(A->tp);
+    double A_radius = A->tp()->collision_radius;
+    double B_radius = B->tp()->collision_radius;
 
-    double Bx = B->interpolated_mid_at.x;
-    double By = B->interpolated_mid_at.y;
-
-    fpoint B_at = { Bx, By };
     //fpoint B0, B1, B2, B3;
     //B->to_coords(&B0, &B1, &B2, &B3);
     //double B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
-    double B_radius = tp_collision_radius(B->tp);
 
     fpoint n = B_at - A_at;
     double touching_dist = A_radius + B_radius;
@@ -319,11 +312,13 @@ static int circle_circle_collision (Thingp A,
     n = unit(n);
     n *= (A_radius - diff);
     n += A_at;
-    *intersect = n;
+
+    if (intersect) {
+        *intersect = n;
+    }
 
     return (true);
 }
-#endif
 
 //
 // Add a thing to the list of things that could be hit on this attack.
@@ -450,6 +445,9 @@ bool Thing::collision_find_best_target (bool *target_attacked,
         if (it->ai_hit_if_possible(me, damage)) {
             log("collision will hit %s for %d damage",
                 it->to_string().c_str(), damage);
+            if (me->is_attack_lunge()) {
+                me->lunge(it->get_interpolated_mid_at());
+            }
             if (best->hitter_killed_on_hitting) {
                 me->dead("self killed on hitting");
             }
@@ -461,6 +459,9 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             //
             log("collision will hit %s and kill self",
                 it->to_string().c_str());
+            if (me->is_attack_lunge()) {
+                me->lunge(it->get_interpolated_mid_at());
+            }
             me->dead("self killed on hitting");
             *target_attacked = false;
             return (true);
@@ -513,17 +514,16 @@ bool things_overlap (const Thingp A, const Thingp B)
         return (false);
     }
 
-    if (tp_collision_circle(A->tp) &&
-        tp_collision_circle(B->tp)) {
+#endif
+    if (tp_collision_circle(A->tp()) &&
+        tp_collision_circle(B->tp())) {
         if (circle_circle_collision(A, // circle
                                     B, // box
-                                    A_at,
-                                    &intersect)) {
+                                    nullptr)) {
             return (things_tile_overlap(A, B));
         }
         return (false);
     }
-#endif
 
     return (things_tile_overlap(A, B));
 }

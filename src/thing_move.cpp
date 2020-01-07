@@ -189,9 +189,11 @@ bool Thing::update_coordinates (void)
     {
         auto lunge = get_lunge();
         if (lunge) {
-            auto delta = get_lunge_to() - mid_at;
-            auto dx = delta.x * lunge * tile_gl_width * 2;
-            auto dy = delta.y * lunge * tile_gl_height * 2;
+            auto delta = get_lunge_to() - get_interpolated_mid_at();
+            auto dx = -delta.x * lunge;
+            auto dy = -delta.y * lunge;
+            dx = -delta.x * lunge * tile_gl_width;
+            dy = -delta.y * lunge * tile_gl_height;
             tl.x -= dx;
             br.x -= dx;
             tl.y -= dy;
@@ -274,7 +276,7 @@ void Thing::bounce (double bounce_height,
 void Thing::lunge (fpoint to)
 {
     auto t = set_timestamp_lunge_begin(time_get_time_ms_cached());
-    set_timestamp_lunge_end(t + 100);
+    set_timestamp_lunge_end(t + 200);
     set_lunge_to(to);
 }
 

@@ -576,7 +576,6 @@ public:
     bool will_eat(const Thingp it);
     bool will_prefer(const Thingp it);
     const char *to_cstring(void);
-    double collision_radius(void);
     double get_bounce(void);
     double get_lunge(void);
     fpoint ai_get_next_hop(void);
@@ -678,7 +677,7 @@ public:
     int is_rrr41(void);
     int is_rrr42(void);
     int is_rrr43(void);
-    int is_rrr44(void);
+    int is_attack_lunge(void);
     int defence(void);
     int attack(void);
     int is_secret_door(void);

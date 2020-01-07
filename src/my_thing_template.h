@@ -219,7 +219,7 @@ public:
     int is_rrr41 {};
     int is_rrr42 {};
     int is_rrr43 {};
-    int is_rrr44 {};
+    int is_attack_lunge {};
     int is_rrr5 {};
     int is_rrr6 {};
     int is_rrr7 {};
@@ -586,9 +586,9 @@ static inline int tp_is_rrr43 (Tpp t)
     return (t->is_rrr43);
 }
 
-static inline int tp_is_rrr44 (Tpp t)
+static inline int tp_is_attack_lunge (Tpp t)
 {
-    return (t->is_rrr44);
+    return (t->is_attack_lunge);
 }
 
 static inline int tp_stats_defence (Tpp t)

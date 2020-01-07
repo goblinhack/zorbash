@@ -581,9 +581,9 @@ int Thing::is_rrr43(void)
     return (tp_is_rrr43(tp()));
 }
 
-int Thing::is_rrr44(void)
+int Thing::is_attack_lunge(void)
 {
-    return (tp_is_rrr44(tp()));
+    return (tp_is_attack_lunge(tp()));
 }
 
 int Thing::defence(void)

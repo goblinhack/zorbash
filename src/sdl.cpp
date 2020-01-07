@@ -1334,7 +1334,7 @@ void sdl_loop (void)
         //
         int timestamp_now = time_update_time_milli();
 
-        if (unlikely(timestamp_now - timestamp_then > 100)) {
+        if (unlikely(timestamp_now - timestamp_then > 50)) {
             //
             // Give up some CPU to allow events to arrive and time for the GPU
             // to process the above.
