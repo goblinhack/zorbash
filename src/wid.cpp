@@ -3532,7 +3532,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
         case KMOD_RCTRL:
             switch ((int32_t)key->sym) {
                 case '1':
-                    if(game && game->config.debug_mode) {
+                    if (game && game->config.debug_mode) {
                         MINICON("Show inverted toggle");
                         CON("USERCFG: gfx show inverted toggle");
                         config_gfx_inverted_toggle();
@@ -3540,7 +3540,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     break;
 
                 case '2':
-                    if(game && game->config.debug_mode) {
+                    if (game && game->config.debug_mode) {
                         MINICON("Show lights toggle");
                         CON("USERCFG: gfx show lights toggle");
                         config_gfx_lights_toggle();
@@ -3548,7 +3548,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     break;
 
                 case '3':
-                    if(game && game->config.debug_mode) {
+                    if (game && game->config.debug_mode) {
                         MINICON("Show hidden objects toggle");
                         CON("USERCFG: gfx show hidden toggle");
                         config_gfx_show_hidden_toggle();

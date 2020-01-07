@@ -116,10 +116,11 @@ void Config::dump (std::string pfx, std::ostream &out)
     out << pfx << "gfx_lights         " << gfx_lights << std::endl;
     out << pfx << "gfx_zoom           " << gfx_zoom << std::endl;
     out << pfx << "debug_mode         " << debug_mode << std::endl;
+    out << pfx << "arcade_mode        " << arcade_mode << std::endl;
     out << pfx << "sound_volume       " << sound_volume << std::endl;
     out << pfx << "music_volume       " << music_volume << std::endl;
     out << pfx << "vsync_enable       " << vsync_enable << std::endl;
-    out << pfx << "fullscreen        " << fullscreen << std::endl;
+    out << pfx << "fullscreen         " << fullscreen << std::endl;
     out << pfx << "video_pix_width    " << video_pix_width << std::endl;
     out << pfx << "video_pix_height   " << video_pix_height << std::endl;
     out << pfx << "video_gl_width     " << video_gl_width << std::endl;
