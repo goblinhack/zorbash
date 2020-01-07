@@ -37,6 +37,8 @@ char *TTF_PATH;
 char *GFX_PATH;
 int debug;
 static bool opt_new_game;
+static bool opt_debug_mode;
+static bool opt_arcade_mode;
 
 FILE *LOG_STDOUT;
 FILE *LOG_STDERR;
@@ -488,6 +490,23 @@ static void parse_args (int32_t argc, char *argv[])
             continue;
         }
 
+        if (!strcasecmp(argv[i], "--debug-mode") ||
+            !strcasecmp(argv[i], "-debug-mode")) {
+            opt_debug_mode = true;
+            i++;
+            continue;
+        }
+
+        if (!strcasecmp(argv[i], "--arcade-mode") ||
+            !strcasecmp(argv[i], "-arcade-mode")) {
+            opt_arcade_mode = true;
+            i++;
+            continue;
+        }
+
+        //
+        // Bad argument.
+        //
         if (argv[i][0] == '-') {
             usage();
             WARN("unknown format argument, %s", argv[i]);
@@ -590,6 +609,14 @@ int32_t main (int32_t argc, char *argv[])
     //
     game = new Game(std::string(appdata));
     game->load_config();
+
+    if (opt_debug_mode) {
+        game->config.debug_mode = opt_debug_mode;
+    }
+
+    if (opt_arcade_mode) {
+        game->config.arcade_mode = opt_arcade_mode;
+    }
 
     if (!sdl_init()) {
         ERR("SDL init");
