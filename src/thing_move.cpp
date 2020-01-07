@@ -91,7 +91,13 @@ void Thing::update_interpolated_position (void)
 
         auto x = last_mid_at.x + dx * step;
         auto y = last_mid_at.y + dy * step;
-        set_interpolated_mid_at(fpoint(x, y));
+
+        fpoint new_pos(x, y);
+        set_interpolated_mid_at(new_pos);
+
+        if (mid_at != new_pos) {
+            game->things_are_moving = true;
+        }
     }
 }
 

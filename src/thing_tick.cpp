@@ -110,6 +110,21 @@ void things_tick (void)
         return;
     }
 
+    game->things_are_moving = false;
+
+    if (game->config.arcade_mode) {
+        //
+        // Always tick
+        //
+    } else {
+        //
+        // Tick on player move
+        //
+        if (game->tick_previous == game->tick_current) {
+            return;
+        }
+    }
+
     //
     // Allows for debugging
     //
@@ -141,5 +156,9 @@ void things_tick (void)
                 t->tick();
             }
         }
+    }
+
+    if (!game->things_are_moving) {
+        game->tick_completed = game->tick_current;
     }
 }
