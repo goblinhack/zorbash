@@ -152,7 +152,6 @@ void Game::log (std::string pfx)
     LOG("%s appdata    %s", pfx.c_str(), appdata.c_str());
     LOG("%s saved_dir  %s", pfx.c_str(), saved_dir.c_str());
     LOG("%s seed       %u", pfx.c_str(), seed);
-    LOG("%s fps_count  %u", pfx.c_str(), fps_count);
     config.log(pfx);
     world.log(pfx);
 

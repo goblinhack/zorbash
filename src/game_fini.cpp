@@ -17,7 +17,11 @@ void Game::fini (void)
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
-    fps_count = 0;
+    fps_value = 0;
+    tick_previous = 0;
+    tick_current = 0;
+    tick_completed = 0;
+    things_are_moving = 0;
     started = false;
 
     config.fini();

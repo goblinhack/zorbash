@@ -154,7 +154,6 @@ void Game::dump (std::string pfx, std::ostream &out)
     out << pfx << "appdata    " << appdata << std::endl;
     out << pfx << "saved_dir  " << saved_dir << std::endl;
     out << pfx << "seed       " << seed << std::endl;
-    out << pfx << "fps_count  " << fps_count << std::endl;
     config.dump(pfx, out);
     world.dump(pfx, out);
 

@@ -225,7 +225,11 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.appdata);
     out << bits(my.t.saved_dir);
     out << bits(my.t.seed);
-    out << bits(my.t.fps_count);
+    out << bits(my.t.fps_value);
+    out << bits(my.t.tick_previous);
+    out << bits(my.t.tick_current);
+    out << bits(my.t.tick_completed);
+    out << bits(my.t.things_are_moving);
     out << bits(my.t.started);
     out << bits(my.t.config);
     out << bits(my.t.world);

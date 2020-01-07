@@ -348,8 +348,25 @@ public:
     Config             config;
     World              world;
     int                seed {};
+
+    //
+    // Mouse cursor
+    //
     fpoint             mouse_over;
-    uint32_t           fps_count = {};
+
+    //
+    // Current framerate
+    //
+    uint32_t           fps_value = {};
+
+    //
+    // Used to drive the game forward. Each player move is one tick.
+    // When things top moving, the tick is completed.
+    //
+    uint32_t           tick_current = {};
+    uint32_t           tick_previous = {};
+    uint32_t           tick_completed = {};
+    uint32_t           things_are_moving = {};
 
     //
     // Soft pause is user initiated. Hard is when a menu is on screen.
@@ -357,6 +374,10 @@ public:
     bool               soft_paused = false;
     bool               hard_paused = false;
     timestamp_t        last_pause;
+
+    //
+    // Game is afoot
+    //
     bool               started = false;
 
     friend std::ostream& operator<<(std::ostream &out, 

@@ -1420,8 +1420,7 @@ void sdl_loop (void)
                     //
                     // Update FPS counter.
                     //
-                    game->fps_count = frames;
-
+                    game->fps_value = frames;
                     frames = 0;
                 }
 

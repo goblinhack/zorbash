@@ -288,7 +288,11 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.appdata);
     in >> bits(my.t.saved_dir);
     in >> bits(my.t.seed);
-    in >> bits(my.t.fps_count);
+    in >> bits(my.t.fps_value);
+    in >> bits(my.t.tick_previous);
+    in >> bits(my.t.tick_current);
+    in >> bits(my.t.tick_completed);
+    in >> bits(my.t.things_are_moving);
     in >> bits(my.t.started);
     in >> bits(my.t.config);
     in >> bits(my.t.world);
