@@ -469,12 +469,12 @@ static void parse_args (int32_t argc, char *argv[])
 {_
     int32_t i;
 
-    LOG("Greetings mortal");
+    CON("Greetings mortal");
 
     //
     // Parse format args
     //
-    LOG("Program name: \"%s\"", argv[0]);
+    CON("Program name: \"%s\"", argv[0]);
     for (i = 1; i < argc; i++) {
         CON("  arg: \"%s\"", argv[i]);
     }
@@ -486,21 +486,18 @@ static void parse_args (int32_t argc, char *argv[])
         if (!strcasecmp(argv[i], "--new-game") ||
             !strcasecmp(argv[i], "-new-game")) {
             opt_new_game = true;
-            i++;
             continue;
         }
 
         if (!strcasecmp(argv[i], "--debug-mode") ||
             !strcasecmp(argv[i], "-debug-mode")) {
             opt_debug_mode = true;
-            i++;
             continue;
         }
 
         if (!strcasecmp(argv[i], "--arcade-mode") ||
             !strcasecmp(argv[i], "-arcade-mode")) {
             opt_arcade_mode = true;
-            i++;
             continue;
         }
 
