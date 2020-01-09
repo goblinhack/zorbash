@@ -520,7 +520,7 @@ bool things_overlap (const Thingp A, const Thingp B)
         if (circle_circle_collision(A, // circle
                                     B, // box
                                     nullptr)) {
-            return (things_tile_overlap(A, B));
+            return (true);
         }
         return (false);
     }
