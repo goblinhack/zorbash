@@ -878,6 +878,63 @@ int Thing::incr_gold (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_tick (void)
+{
+    if (monst) {
+        return (monst->tick);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_tick (uint32_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monst->tick = v);
+    if (is_player()) { game_status_init(); }
+    return (n);
+}
+
+uint32_t Thing::decr_tick (uint32_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monst->tick -= v);
+    if (is_player()) { game_status_init(); }
+    return (n);
+}
+
+uint32_t Thing::incr_tick (uint32_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monst->tick += v);
+    if (is_player()) { game_status_init(); }
+    return (n);
+}
+
+uint32_t Thing::decr_tick (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monst->tick--);
+    if (is_player()) { game_status_init(); }
+    return (n);
+}
+
+uint32_t Thing::incr_tick (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monst->tick++);
+    if (is_player()) { game_status_init(); }
+    return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // health
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_health (void)

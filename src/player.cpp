@@ -22,22 +22,12 @@ void player_tick (void)
         return;
     }
 
-    if (game->config.arcade_mode) {
-        //
-        // Always move
-        //
-        if ((time_get_time_ms_cached() - player->get_timestamp_move_begin()) < 100) {
-            return;
-        }
-    } else {
-        //
-        // Move when all things are done moving
-        //
-        if (game->tick_completed != game->tick_current) {
-            return;
-        }
-        game->tick_current = game->tick_previous + 1;
-        game->tick_previous = game->tick_current;
+    //
+    // Always move
+    //
+    if ((time_get_time_ms_cached() - 
+            player->get_timestamp_move_begin()) < 100) {
+        return;
     }
 
     uint8_t right  = 0;

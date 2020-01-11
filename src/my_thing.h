@@ -94,6 +94,7 @@ typedef struct Monst_ {
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
     float        rot = {};                   // GL co-orids
     float        submerged_offset = {};      // GL co-orids
+    uint32_t     tick = {};                  // Increments on completion of move
     int          bounce_count = {};
     int          gold = {};
     int          stats_health = {};
@@ -181,7 +182,7 @@ public:
     uint32_t is_sleeping:1        {};
     uint32_t is_starving:1        {};
     uint32_t is_submerged:1       {};
-    uint32_t is_waiting_for_ai:1  {};
+    uint32_t is_waiting_to_move:1 {};
     uint32_t is_pending_gc:1      {};
     uint32_t is_blitted:1         {};
 
@@ -240,6 +241,13 @@ public:
 
     void set_submerged_offset(float);
     float get_submerged_offset(void);
+
+    uint32_t set_tick(uint32_t);
+    uint32_t get_tick(void);
+    uint32_t decr_tick(uint32_t);
+    uint32_t incr_tick(uint32_t);
+    uint32_t decr_tick(void);
+    uint32_t incr_tick(void);
 
     int set_gold(int);
     int get_gold(void);

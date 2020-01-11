@@ -40,7 +40,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
         out << bits(my.t->dmap_scent);
     }
 
-    out << bits(my.t->bounce_count);
+    out << bits(my.t->tick);
     out << bits(my.t->bounce_fade);
     out << bits(my.t->bounce_height);
     out << bits(my.t->lunge_to);
@@ -124,7 +124,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     bits32 |= my.t->is_sleeping        << shift; shift++;
     bits32 |= my.t->is_starving        << shift; shift++;
     bits32 |= my.t->is_submerged       << shift; shift++;
-    bits32 |= my.t->is_waiting_for_ai  << shift; shift++;
+    bits32 |= my.t->is_waiting_to_move << shift; shift++;
     bits32 |= my.t->is_pending_gc      << shift; shift++;
     bits32 |= my.t->is_blitted         << shift; shift++;
     if (shift >= (int)(sizeof(bits32) * 8)) {
@@ -226,7 +226,6 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.saved_dir);
     out << bits(my.t.seed);
     out << bits(my.t.fps_value);
-    out << bits(my.t.tick_previous);
     out << bits(my.t.tick_current);
     out << bits(my.t.tick_completed);
     out << bits(my.t.things_are_moving);

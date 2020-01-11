@@ -61,6 +61,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
         in >> bits(my.t->dmap_scent);
     }
 
+    in >> bits(my.t->tick);
     in >> bits(my.t->bounce_count);
     in >> bits(my.t->bounce_fade);
     in >> bits(my.t->bounce_height);
@@ -153,7 +154,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     my.t->is_sleeping        = (bits32 >> shift) & 1; shift++;
     my.t->is_starving        = (bits32 >> shift) & 1; shift++;
     my.t->is_submerged       = (bits32 >> shift) & 1; shift++;
-    my.t->is_waiting_for_ai  = (bits32 >> shift) & 1; shift++;
+    my.t->is_waiting_to_move = (bits32 >> shift) & 1; shift++;
     my.t->is_pending_gc      = (bits32 >> shift) & 1; shift++;
     my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
 
@@ -289,7 +290,6 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.saved_dir);
     in >> bits(my.t.seed);
     in >> bits(my.t.fps_value);
-    in >> bits(my.t.tick_previous);
     in >> bits(my.t.tick_current);
     in >> bits(my.t.tick_completed);
     in >> bits(my.t.things_are_moving);

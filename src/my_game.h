@@ -306,6 +306,8 @@ public:
     Game (void) {}
     Game (std::string appdata);
     bool load(std::string save_file, class Game &target);
+    void tick_begin();
+    void tick_end();
     bool paused(void);
     bool save(std::string save_file);
     void config_gfx_select(void);
@@ -339,7 +341,7 @@ public:
     // Save file name, contains the date and other useful save slot info
     //
     std::string        version = VERSION;
-    int                save_slot;
+    int                save_slot {};
     std::string        save_meta;
     std::string        save_file;
     std::string        appdata;
@@ -363,17 +365,16 @@ public:
     // Used to drive the game forward. Each player move is one tick.
     // When things top moving, the tick is completed.
     //
-    uint32_t           tick_current = {};
-    uint32_t           tick_previous = {};
-    uint32_t           tick_completed = {};
-    uint32_t           things_are_moving = {};
+    uint32_t           tick_current {};
+    uint32_t           tick_completed {};
+    uint32_t           things_are_moving = false;
 
     //
     // Soft pause is user initiated. Hard is when a menu is on screen.
     //
     bool               soft_paused = false;
     bool               hard_paused = false;
-    timestamp_t        last_pause;
+    timestamp_t        last_pause {};
 
     //
     // Game is afoot

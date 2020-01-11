@@ -18,10 +18,9 @@ void Game::fini (void)
     LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
     fps_value = 0;
-    tick_previous = 0;
     tick_current = 0;
     tick_completed = 0;
-    things_are_moving = 0;
+    things_are_moving = false;
     started = false;
 
     config.fini();
