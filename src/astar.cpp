@@ -9,6 +9,7 @@
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_sprintf.h"
+#include "my_thing.h"
 #include <vector>
 
 #define ASTAR_DEBUG

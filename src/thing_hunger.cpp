@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_tile.h"
+#include "my_thing.h"
 
 void Thing::hunger_clock (void)
 {

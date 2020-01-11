@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_dungeon.h"
+#include "my_thing.h"
 
 static void game_place_walls (Dungeonp d,
                               int variant,

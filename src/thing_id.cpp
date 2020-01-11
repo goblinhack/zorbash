@@ -6,7 +6,7 @@
 #include "my_game.h"
 #include "my_color.h"
 #include "my_dmap.h"
-#include <list>
+#include "my_thing.h"
 
 Thingp World::test_thing_ptr (uint32_t id)
 {_

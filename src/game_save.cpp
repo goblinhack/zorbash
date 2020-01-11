@@ -10,6 +10,7 @@
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
+#include "my_thing.h"
 
 extern bool game_load_headers_only;
 bool game_save_config_only;

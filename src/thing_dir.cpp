@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_color.h"
 #include "my_dmap.h"
+#include "my_thing.h"
 
 void Thing::dir_set_none (void)
 {

@@ -1236,4 +1236,22 @@ static inline Tpp tp_find (std::string name)
     return (result->second);
 }
 
+enum {
+    THING_DIR_NONE,
+    THING_DIR_DOWN,
+    THING_DIR_UP,
+    THING_DIR_LEFT,
+    THING_DIR_RIGHT,
+    THING_DIR_TL,
+    THING_DIR_BL,
+    THING_DIR_TR,
+    THING_DIR_BR,
+};
+
+typedef enum {
+    LIGHT_QUALITY_POINT,
+    LIGHT_QUALITY_LOW,
+    LIGHT_QUALITY_HIGH,
+} LightQuality;
+
 #endif // THING_TEMPLATE_H 

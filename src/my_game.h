@@ -16,9 +16,10 @@ struct Thing_;
 class Light;
 
 typedef class Light* Lightp;
+typedef struct Thing_* Thingp;
 typedef class World* Worldp;
 
-#include "my_thing.h"
+//#include "my_thing.h"
 
 enum {
     MAP_DEPTH_FLOOR,

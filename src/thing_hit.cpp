@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_tile.h"
+#include "my_thing.h"
 
 int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
                           Thingp real_hitter, // if an arrow, who fired it

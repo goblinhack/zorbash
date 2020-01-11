@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_tile.h"
 #include "my_game.h"
+#include "my_thing.h"
 
 #undef DEBUG_COLLISION
 
@@ -581,6 +582,74 @@ bool Thing::collision_check_and_handle (Thingp it, int x, int y, int dx, int dy)
     return (true);
 }
 
+bool Thing::collision_obstacle (Thingp it)
+{
+    if (it == this) {
+        return (false);
+    }
+    if (it->is_hidden) {
+        return (false);
+    }
+    if (is_player()) {
+        if (it->is_wall()) {
+            return (true);
+        }
+        if (it->is_rock()) {
+            return (true);
+        }
+        if (it->is_door()) {
+            return (true);
+        }
+        if (it->is_monst()) {
+            return (true);
+        }
+    } else if (is_monst()) {
+        if (it->is_wall()) {
+            return (true);
+        }
+        if (it->is_rock()) {
+            return (true);
+        }
+        if (it->is_door()) {
+            return (true);
+        }
+        if (is_water_hater()) {
+            if (it->is_water()) {
+                return (true);
+            }
+        }
+        if (it->is_lava()) {
+            return (true);
+        }
+        if (it->is_monst()) {
+            return (true);
+        }
+        if (it->is_player()) {
+            return (true);
+        }
+    }
+
+    return (false);
+}
+
+bool Thing::collision_obstacle (fpoint p)
+{
+    //
+    // Avoid threats and treat them as obstacles
+    //
+    for (auto slot : get(world->all_thing_ids_at, p.x, p.y)) {
+        if (!slot) {
+            continue;
+        }
+        auto it = thing_find(slot);
+        if (collision_obstacle(it)) {
+            return (true);
+        }
+    }
+
+    return (false);
+}
+
 bool Thing::collision_check_only (Thingp it, int x, int y, int dx, int dy)
 {_
     auto me = this;
@@ -621,6 +690,12 @@ bool Thing::collision_check_only (Thingp it, int x, int y, int dx, int dy)
         }
     } else if (will_eat(it)) {
         if (things_overlap(me, it)) {
+            return (true);
+        }
+    } else {
+        if (things_overlap(me, it)) {
+            if (collision_obstacle(it))
+con("overlap %s", it->to_string().c_str());
             return (true);
         }
     }

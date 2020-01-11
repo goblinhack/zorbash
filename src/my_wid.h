@@ -17,7 +17,6 @@ typedef class Wid* Widp;
 #include "my_enum.h"
 #include "my_size.h"
 #include "my_wid_tiles.h"
-#include "my_game.h"
 
 #ifdef ENABLE_WID_DEBUG
 void WID_LOG(Widp, const char *fmt, ...) \

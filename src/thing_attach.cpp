@@ -4,6 +4,7 @@
 //
 
 #include "my_game.h"
+#include "my_thing.h"
 
 void Thing::attach (void)
 {_

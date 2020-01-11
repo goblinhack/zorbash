@@ -4,6 +4,7 @@
 //
 
 #include "my_game.h"
+#include "my_thing.h"
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {

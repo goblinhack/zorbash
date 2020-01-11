@@ -5,6 +5,9 @@
 
 #include "my_game.h"
 #include "my_gl.h"
+#include "my_tex.h"
+#include "my_light.h"
+#include "my_thing.h"
 
 Thingp debug_thing;
 
