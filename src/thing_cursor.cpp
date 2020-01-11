@@ -80,10 +80,32 @@ void thing_cursor_map_follow (void)
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
     } else if (world->cursor && !world->map_follow_player) {
-extern Widp wid_itembar;
-if (wid_over ) {
-    return;
-}
+        //
+        // If over a widget, do not scroll
+        //
+        extern Widp wid_itembar;
+        if (wid_over) {
+            return;
+        }
+
+        //
+        // If we are in the portion of the lower screen above the itembar
+        // then do not scroll
+        //
+        int x = mouse_x;
+        int y = mouse_y;
+        pixel_to_ascii(&x, &y);
+
+        static int tlx, tly, brx, bry, cached;
+        if (cached != ASCII_HEIGHT) {
+            cached = ASCII_HEIGHT;
+            wid_get_tl_x_tl_y_br_x_br_y(wid_itembar, &tlx, &tly, &brx, &bry);
+        }
+
+        if ((x >= tlx) && (x <= brx) && (y >= tly - ASCII_HEIGHT / 4)) {
+            return;
+        }
+
         follow = world->cursor->mid_at;
         sensitivity = TILES_ACROSS / 4;
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;

@@ -40,7 +40,6 @@ void Thing::collision_check_do (void)
 
     if (time_have_x_tenths_passed_since(MAX_THING_COLL_DELAY_TENTHS,
                                         get_timestamp_collision())) {
-        log("handle collisions");
         set_timestamp_collision(
             time_get_time_ms() +
             random_range(0, MAX_THING_COLL_DELAY_TENTHS));
@@ -104,7 +103,7 @@ void Thing::tick (void)
             auto tick = get_tick();
             if (tick < game->tick_current) {
                 incr_tick();
-con("achieve goals for tick %d", tick);
+                log("achieve goals in life");
                 is_waiting_to_move = false;
                 achieve_goals_in_life();
             }
@@ -126,7 +125,6 @@ void things_tick (void)
         return;
     }
 
-CON("tick");
     game->things_are_moving = false;
 
     if (game->config.arcade_mode) {
@@ -166,7 +164,6 @@ CON("tick");
                 verify(t);
                 if (t->is_monst()) {
                     if (t->get_tick() != game->tick_current) {
-    t->con("is moving");
                         game->things_are_moving = true;
                     }
                 }
