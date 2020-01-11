@@ -8,5 +8,5 @@
 #ifndef _MY_PY_GAME_H_
 #define _MY_PY_GAME_H_
 
-#include "my_python.h"
+// REMOVED #include "my_python.h"
 #endif

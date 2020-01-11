@@ -14,7 +14,7 @@ typedef class Font * Fontp;
 extern Fontp fixed_font;
 
 #include "SDL_ttf.h"
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_tile.h"
 
 typedef struct {

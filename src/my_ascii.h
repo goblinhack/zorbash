@@ -6,9 +6,9 @@
 #pragma once
 
 #include "wchar.h"
-#include "my_point.h"
+// REMOVED #include "my_point.h"
 #include "my_tile.h"
-#include "my_color.h"
+// REMOVED #include "my_color.h"
 
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_KEYSYM * key);
 typedef int (*ascii_mouse_down_callback)(int x, int y, int button);
