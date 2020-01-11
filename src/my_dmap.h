@@ -6,7 +6,7 @@
 #pragma once
 
 #include "my_point.h"
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include <array>
 
 typedef struct Dmap_ {

@@ -16,7 +16,7 @@
 #endif
 #include <unistd.h>
 #include <sys/time.h>
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_sdl.h"
 
 //

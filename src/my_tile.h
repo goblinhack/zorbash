@@ -17,8 +17,8 @@ extern std::map<std::string, class Tile* > all_tiles;
 extern std::vector<class Tile* > all_tiles_array;
 
 #include "my_main.h"
-#include "my_point.h"
-#include "my_color.h"
+// REMOVED #include "my_point.h"
+// REMOVED #include "my_color.h"
 #include "my_tex.h"
 #include "my_thing_template.h"
 #include "my_gl.h"

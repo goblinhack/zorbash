@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "my_enum.h"
+// REMOVED #include "my_enum.h"
 #include "my_font.h"
 
 #ifndef _MY_TTF_H_

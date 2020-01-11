@@ -23,4 +23,4 @@ extern Widp wid_minicon_container;
 std::vector<std::wstring> wid_minicon_serialize(void);
 void wid_minicon_deserialize(std::vector<std::wstring> r);
 
-#include "my_sdl.h"
+// REMOVED #include "my_sdl.h"

@@ -9,7 +9,7 @@
 #define _MY_LIGHT_H
 
 #include "my_thing_template.h"
-#include "my_point.h"
+// REMOVED #include "my_point.h"
 
 typedef struct {
     double depth_closest;

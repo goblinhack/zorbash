@@ -18,10 +18,10 @@ typedef struct AgeMap_* AgeMapp;
 typedef struct Dmap_* Dmapp;
 typedef std::unordered_map< uint32_t, Thingp > Things;
 
-#include "my_thing_template.h"
+// REMOVED #include "my_thing_template.h"
 #include "my_time.h"
 #include "my_light.h"
-#include "my_dmap.h"
+// REMOVED #include "my_dmap.h"
 
 class Goal
 {
