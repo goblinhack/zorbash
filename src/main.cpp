@@ -39,6 +39,7 @@ int debug;
 static bool opt_new_game;
 static bool opt_debug_mode;
 static bool opt_arcade_mode;
+static bool opt_arcade_mode_set;
 
 FILE *LOG_STDOUT;
 FILE *LOG_STDERR;
@@ -498,6 +499,14 @@ static void parse_args (int32_t argc, char *argv[])
         if (!strcasecmp(argv[i], "--arcade-mode") ||
             !strcasecmp(argv[i], "-arcade-mode")) {
             opt_arcade_mode = true;
+            opt_arcade_mode_set = true;
+            continue;
+        }
+
+        if (!strcasecmp(argv[i], "--rogue-mode") ||
+            !strcasecmp(argv[i], "-rogue-mode")) {
+            opt_arcade_mode = false;
+            opt_arcade_mode_set = true;
             continue;
         }
 
@@ -611,7 +620,7 @@ int32_t main (int32_t argc, char *argv[])
         game->config.debug_mode = opt_debug_mode;
     }
 
-    if (opt_arcade_mode) {
+    if (opt_arcade_mode_set) {
         game->config.arcade_mode = opt_arcade_mode;
     }
 

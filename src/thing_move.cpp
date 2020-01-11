@@ -41,10 +41,22 @@ bool Thing::move (fpoint future_pos,
 
     if (attack) {
         use();
+
+        if (is_player()) {
+            game->tick_begin();
+        }
+
+        if ((x == mid_at.x) && (y == mid_at.y)) {
+            return (false);
+        }
     }
 
     if ((x == mid_at.x) && (y == mid_at.y)) {
         return (false);
+    }
+
+    if (is_player()) {
+        game->tick_begin();
     }
 
     if (is_player()) {
@@ -94,10 +106,6 @@ void Thing::update_interpolated_position (void)
 
         fpoint new_pos(x, y);
         set_interpolated_mid_at(new_pos);
-
-        if (mid_at != new_pos) {
-            game->things_are_moving = true;
-        }
     }
 }
 
@@ -119,8 +127,8 @@ bool Thing::update_coordinates (void)
         y = mid_at.y;
 
         if (is_active()) {
-            if (!is_waiting_for_ai) {
-                is_waiting_for_ai = true;
+            if (!is_waiting_to_move) {
+                is_waiting_to_move = true;
                 auto now = time_get_time_ms_cached();
                 auto delay = tp_ai_delay_after_moving_ms(tpp);
                 auto jitter = random_range(0, delay / 10);

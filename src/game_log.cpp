@@ -62,7 +62,7 @@ void Thing::log (std::string pfx)
     LOG("%s is_sleeping          %u", pfx.c_str(), is_sleeping);
     LOG("%s is_starving          %u", pfx.c_str(), is_starving);
     LOG("%s is_submerged         %u", pfx.c_str(), is_submerged);
-    LOG("%s is_waiting_for_ai    %u", pfx.c_str(), is_waiting_for_ai);
+    LOG("%s is_waiting_to_move   %u", pfx.c_str(), is_waiting_to_move);
     LOG("%s is_pending_gc        %u", pfx.c_str(), is_pending_gc);
     LOG("%s is_blitted           %u", pfx.c_str(), is_blitted);
 

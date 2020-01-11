@@ -87,11 +87,27 @@ void Thing::tick (void)
         return;
     }
 
-    if (is_waiting_for_ai) {
-        auto now = time_get_time_ms_cached();
-        if (now > get_timestamp_ai_next()) {
-            is_waiting_for_ai = false;
-            achieve_goals_in_life();
+    if (is_waiting_to_move) {
+        if (game->config.arcade_mode) {
+            //
+            // Move only after a set amount of time
+            //
+            auto now = time_get_time_ms_cached();
+            if (now > get_timestamp_ai_next()) {
+                is_waiting_to_move = false;
+                achieve_goals_in_life();
+            }
+        } else {
+            //
+            // Tick on player move/change of the current tick
+            //
+            auto tick = get_tick();
+            if (tick < game->tick_current) {
+                incr_tick();
+con("achieve goals for tick %d", tick);
+                is_waiting_to_move = false;
+                achieve_goals_in_life();
+            }
         }
     }
 
@@ -110,6 +126,7 @@ void things_tick (void)
         return;
     }
 
+CON("tick");
     game->things_are_moving = false;
 
     if (game->config.arcade_mode) {
@@ -117,12 +134,6 @@ void things_tick (void)
         // Always tick
         //
     } else {
-        //
-        // Tick on player move
-        //
-        if (game->tick_previous == game->tick_current) {
-            return;
-        }
     }
 
     //
@@ -153,12 +164,18 @@ void things_tick (void)
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_ACTIVE_THINGS(world, t, x, y) {
                 verify(t);
+                if (t->is_monst()) {
+                    if (t->get_tick() != game->tick_current) {
+    t->con("is moving");
+                        game->things_are_moving = true;
+                    }
+                }
                 t->tick();
             }
         }
     }
 
     if (!game->things_are_moving) {
-        game->tick_completed = game->tick_current;
+        game->tick_end();
     }
 }

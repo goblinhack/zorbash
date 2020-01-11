@@ -913,7 +913,10 @@ _
     game_place_water(dungeon, "water1");
     game_place_deep_water(dungeon, "deep_water1");
     //fluid_init();
+if (0) {
+CON("XXX fix place blood");
     game_place_random_blood(dungeon);
+}
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -932,7 +935,10 @@ _
 
     game_place_monst(dungeon);
     game_place_food(dungeon);
+    if (0) {
+CON("XXX fix place blood");
     game_place_blood(dungeon);
+    }
     game_place_keys(dungeon);
     game_mark_dungeon_tiles(dungeon);
 

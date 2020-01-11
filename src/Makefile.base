@@ -19,16 +19,16 @@ GAME_OBJECTS=				\
     $(OBJDIR)/file_read.o 		\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
+    $(OBJDIR)/game_config_gfx.o		\
     $(OBJDIR)/game_config_other.o	\
     $(OBJDIR)/game_config_sound.o	\
-    $(OBJDIR)/game_config_gfx.o		\
     $(OBJDIR)/game_config_top.o 	\
-    $(OBJDIR)/game_help.o 		\
     $(OBJDIR)/game_dead.o 		\
     $(OBJDIR)/game_display.o 		\
     $(OBJDIR)/game_dump.o 		\
     $(OBJDIR)/game_error.o 		\
     $(OBJDIR)/game_fini.o 		\
+    $(OBJDIR)/game_help.o 		\
     $(OBJDIR)/game_init.o 		\
     $(OBJDIR)/game_load.o 		\
     $(OBJDIR)/game_log.o 		\
@@ -37,6 +37,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_quit.o 		\
     $(OBJDIR)/game_save.o 		\
     $(OBJDIR)/game_status.o 		\
+    $(OBJDIR)/game_tick.o		\
     $(OBJDIR)/gauss.o 			\
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\
