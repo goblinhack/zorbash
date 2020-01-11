@@ -23,18 +23,6 @@ typedef std::unordered_map< uint32_t, Thingp > Things;
 #include "my_light.h"
 #include "my_dmap.h"
 
-enum {
-    THING_DIR_NONE,
-    THING_DIR_DOWN,
-    THING_DIR_UP,
-    THING_DIR_LEFT,
-    THING_DIR_RIGHT,
-    THING_DIR_TL,
-    THING_DIR_BL,
-    THING_DIR_TR,
-    THING_DIR_BR,
-};
-
 class Goal
 {
 public:
@@ -572,6 +560,8 @@ public:
     bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
     bool collision_check_only(void);
     bool collision_check_only(fpoint);
+    bool collision_obstacle(fpoint);
+    bool collision_obstacle(Thingp);
     bool ai_is_goal_for_me(point p, int priority, float *score, std::string &why);
     bool ai_is_obstacle_for_me(point p);
     void stop(void);

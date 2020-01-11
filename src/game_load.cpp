@@ -12,6 +12,7 @@
 #include "my_wid_popup.h"
 #include "my_game_error.h"
 #include "my_game_status.h"
+#include "my_thing.h"
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;

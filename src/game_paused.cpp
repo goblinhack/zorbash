@@ -8,6 +8,7 @@
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_ascii.h"
+#include "my_thing.h"
 
 void Game::soft_pause (void)
 {

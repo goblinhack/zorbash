@@ -5,6 +5,7 @@
 
 #include <SDL.h>
 
+#include "my_game.h"
 #include "my_main.h"
 #include "my_sdl.h"
 #include "my_slre.h"
@@ -16,6 +17,7 @@
 #include "my_wid_popup.h"
 #include "my_wid_text_box.h"
 #include "my_ascii.h"
+#include "my_thing.h"
 
 static void game_status_wid_create(void);
 

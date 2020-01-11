@@ -10,6 +10,7 @@
 #include "my_pixel.h"
 #include "my_size.h"
 #include "my_string.h"
+//#include "my_thing.h"
 
 std::map<std::string, class Tile* > all_tiles;
 std::vector<class Tile* > all_tiles_array;
@@ -691,51 +692,6 @@ uint32_t tile_delay_ms (Tilep t)
 uint8_t tile_is_moving (Tilep t)
 {_
     return (t->is_moving);
-}
-
-uint8_t tile_is_dir_down (Tilep t)
-{_
-    return (t->dir == THING_DIR_DOWN);
-}
-
-uint8_t tile_is_dir_up (Tilep t)
-{_
-    return (t->dir == THING_DIR_UP);
-}
-
-uint8_t tile_is_dir_left (Tilep t)
-{_
-    return (t->dir == THING_DIR_LEFT);
-}
-
-uint8_t tile_is_dir_right (Tilep t)
-{_
-    return (t->dir == THING_DIR_RIGHT);
-}
-
-uint8_t tile_is_dir_none (Tilep t)
-{_
-    return (t->dir == THING_DIR_NONE);
-}
-
-uint8_t tile_is_dir_tl (Tilep t)
-{_
-    return (t->dir == THING_DIR_TL);
-}
-
-uint8_t tile_is_dir_bl (Tilep t)
-{_
-    return (t->dir == THING_DIR_BL);
-}
-
-uint8_t tile_is_dir_tr (Tilep t)
-{_
-    return (t->dir == THING_DIR_TR);
-}
-
-uint8_t tile_is_dir_br (Tilep t)
-{_
-    return (t->dir == THING_DIR_BR);
 }
 
 uint8_t tile_is_yyy5 (Tilep t)

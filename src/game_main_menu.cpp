@@ -8,6 +8,7 @@
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_ascii.h"
+#include "my_time.h"
 #include "my_game_status.h"
 
 static WidPopup *game_main_menu_window;

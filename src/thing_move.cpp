@@ -4,6 +4,7 @@
 //
 
 #include "my_game.h"
+#include "my_thing.h"
 
 void Thing::stop (void)
 {
@@ -48,6 +49,16 @@ bool Thing::move (fpoint future_pos,
 
         if ((x == mid_at.x) && (y == mid_at.y)) {
             return (false);
+        }
+    }
+
+    if (is_player()) {
+        if (mid_at != future_pos) {
+            if (collision_check_only(future_pos)) {
+CON("collision");
+                stop();
+                return (false);
+            }
         }
     }
 

@@ -9,6 +9,7 @@
 #include "my_dmap.h"
 #include "my_math.h"
 #include <vector>
+#include "my_thing.h"
 
 #define DEBUG_AI
 

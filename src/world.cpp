@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_dungeon.h"
+#include "my_thing.h"
 
 bool World::is_anything_at (const int x, const int y)
 {_

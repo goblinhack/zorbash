@@ -8,6 +8,7 @@
 #include "my_tex.h"
 #include "my_game.h"
 #include "my_gl.h"
+#include "my_thing.h"
 #include <algorithm>
 #include <list>
 

@@ -14,7 +14,6 @@
 #include "my_wid_minicon.h"
 #include "my_math.h"
 #include "my_wid_tiles.h"
-#include "my_game.h"
 #include "my_sprintf.h"
 #include "my_ascii.h"
 #include "my_gl.h"

@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_tile.h"
+#include "my_thing.h"
 
 void Thing::get_tiles(ThingTiles *out)
 {
@@ -75,4 +76,49 @@ void Thing::get_tiles(ThingTiles *out)
     } else {
         out->tile_bl = 0;
     }
+}
+
+uint8_t tile_is_dir_down (Tilep t)
+{_
+    return (t->dir == THING_DIR_DOWN);
+}
+
+uint8_t tile_is_dir_up (Tilep t)
+{_
+    return (t->dir == THING_DIR_UP);
+}
+
+uint8_t tile_is_dir_left (Tilep t)
+{_
+    return (t->dir == THING_DIR_LEFT);
+}
+
+uint8_t tile_is_dir_right (Tilep t)
+{_
+    return (t->dir == THING_DIR_RIGHT);
+}
+
+uint8_t tile_is_dir_none (Tilep t)
+{_
+    return (t->dir == THING_DIR_NONE);
+}
+
+uint8_t tile_is_dir_tl (Tilep t)
+{_
+    return (t->dir == THING_DIR_TL);
+}
+
+uint8_t tile_is_dir_bl (Tilep t)
+{_
+    return (t->dir == THING_DIR_BL);
+}
+
+uint8_t tile_is_dir_tr (Tilep t)
+{_
+    return (t->dir == THING_DIR_TR);
+}
+
+uint8_t tile_is_dir_br (Tilep t)
+{_
+    return (t->dir == THING_DIR_BR);
 }

@@ -9,6 +9,7 @@
 #include "my_sdl.h"
 #include "my_ascii.h"
 #include "my_wid.h"
+#include "my_thing.h"
 #include <algorithm>
 
 //

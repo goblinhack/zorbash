@@ -7,6 +7,7 @@
 #include "my_color.h"
 #include "my_dmap.h"
 #include "my_game_status.h"
+#include "my_thing.h"
 #include <list>
 
 void Thing::new_monst (void)

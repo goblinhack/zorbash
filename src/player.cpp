@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_game.h"
 #include "my_wid_console.h"
+#include "my_thing.h"
 
 void player_tick (void)
 {_

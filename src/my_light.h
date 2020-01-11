@@ -8,16 +8,8 @@
 #ifndef _MY_LIGHT_H
 #define _MY_LIGHT_H
 
-#include <memory>
-#include "my_game.h"
+#include "my_thing_template.h"
 #include "my_point.h"
-#include "my_thing.h"
-
-typedef enum {
-    LIGHT_QUALITY_POINT,
-    LIGHT_QUALITY_LOW,
-    LIGHT_QUALITY_HIGH,
-} LightQuality;
 
 typedef struct {
     double depth_closest;
