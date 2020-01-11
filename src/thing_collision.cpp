@@ -443,7 +443,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
 
         damage = get_stats_attack();
         if (it->ai_hit_if_possible(me, damage)) {
-            log("collision will hit %s for %d damage",
+            log("collision: will hit %s for %d damage",
                 it->to_string().c_str(), damage);
             if (me->is_attack_lunge()) {
                 me->lunge(it->get_interpolated_mid_at());
@@ -457,7 +457,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             //
             // Missiles?
             //
-            log("collision will hit %s and kill self",
+            log("collision: will hit %s and kill self",
                 it->to_string().c_str());
             if (me->is_attack_lunge()) {
                 me->lunge(it->get_interpolated_mid_at());
@@ -467,7 +467,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             return (true);
         }
     } else {
-        log("handle collisions; nothing to do");
+        log("collision: none");
     }
 
     thing_possible_init();

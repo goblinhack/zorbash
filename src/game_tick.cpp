@@ -12,11 +12,8 @@ void Game::tick_begin (void)
     // Move when all things are done moving
     //
     game->tick_current++;
-CON(" ");
-CON(" ");
-CON("GAME TICK BEGIN tick_current %d tick_completed %d",
-    game->tick_current,
-    game->tick_completed);
+    LOG("-");
+    LOG("game tick %d begin", game->tick_current);
 }
 
 void Game::tick_end (void)
@@ -28,10 +25,5 @@ void Game::tick_end (void)
         return;
     }
     game->tick_completed = game->tick_current;
-CON("GAME TICK END tick_current %d tick_completed %d",
-    game->tick_current,
-    game->tick_completed);
-CON(" ");
-CON(" ");
 }
 
