@@ -12,7 +12,7 @@
 #include "my_thing.h"
 #include <vector>
 
-#define ASTAR_DEBUG
+#undef ASTAR_DEBUG
 #ifdef ASTAR_DEBUG
 static std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> debug {};
 #endif

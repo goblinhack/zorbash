@@ -263,7 +263,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
 
 fpoint Thing::ai_get_next_hop (void)
 {_
-    log("calculate next-hop for ai when at %f,%f:", mid_at.x, mid_at.y);
+    log("calculate next-hop for AI");
 
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
