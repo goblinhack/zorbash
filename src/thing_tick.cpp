@@ -24,6 +24,11 @@ void Thing::achieve_goals_in_life (void)
 
         if (mid_at != to) {
             if (collision_check_only(to)) {
+                bool target_attacked = false;
+                bool target_overlaps = false;
+                collision_check_and_handle(fpoint(to.x, to.y),
+                                           &target_attacked,
+                                           &target_overlaps);
                 stop();
                 return;
             }
@@ -69,7 +74,9 @@ void Thing::tick (void)
     }
     update_interpolated_position();
 
-    collision_check_do();
+    if (game->config.arcade_mode) {
+        collision_check_do();
+    }
 
     if (unlikely(is_dead)) {
         if (tp_is_loggable(tp())) {
