@@ -55,9 +55,9 @@ def init1(name):
     x.set_tile(tile=name + "_up.5", delay_ms=delay, is_dir_down=True)
     x.set_tile(tile=name + "_up.6", delay_ms=delay, is_dir_down=True,
                is_end_of_anim = True, is_dead_on_end_of_anim=True)
-   
+
     x.update()
-    
+
 def init2(name):
     x = tp.Tp(name)
 
@@ -76,9 +76,9 @@ def init2(name):
     x.set_tile(tile=name + ".2", delay_ms=delay)
 
     x.update()
-    
-def init3(name):
-    x = tp.Tp(name)
+
+def init3(name, real_name):
+    x = tp.Tp(name, real_name)
 
     x.set_gfx_animated(True)
     x.set_gfx_can_hflip(True)
@@ -96,10 +96,10 @@ def init3(name):
     x.set_tile(tile=name + ".1")
 
     x.update()
-    
+
 def init():
     init1(name="sword1_swing_anim")
     init2(name="sword1_carry_anim")
-    init3(name="sword1")
+    init3(name="sword1", real_name="sword")
 
 init()

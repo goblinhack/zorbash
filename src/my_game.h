@@ -92,7 +92,7 @@ public:
     //
     std::array<
       std::array<
-        std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH> 
+        std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ids_at {};
 
     void alloc_thing_id(Thingp t);
@@ -128,6 +128,16 @@ public:
         world->get_all_interesting_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_interesting_things_at(int x, int y, std::vector<Thingp> &);
+
+    //
+    // Things that move around and things that do not, but are interesting,
+    // like food
+    //
+    #define FOR_ALL_COLLISION_THINGS(world, t, x, y)                      \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \
+        world->get_all_collision_things_at(x, y, JOIN1(tmp, __LINE__));   \
+        for (auto t : JOIN1(tmp, __LINE__))
+    void get_all_collision_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // Things that emit light
@@ -382,9 +392,9 @@ public:
     //
     bool               started = false;
 
-    friend std::ostream& operator<<(std::ostream &out, 
+    friend std::ostream& operator<<(std::ostream &out,
                                     Bits<const class Game & > const my);
-    friend std::istream& operator>>(std::istream &in, 
+    friend std::istream& operator>>(std::istream &in,
                                     Bits<class Game &> my);
     void dump(std::string prefix, std::ostream &out);
     void log(std::string prefix);

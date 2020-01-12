@@ -23,7 +23,7 @@ WidPopup::~WidPopup()
 
 WidPopup::WidPopup (point tl, point br, Tilep title_tile,
                     std::string background) :
-    tl(tl), br(br), 
+    tl(tl), br(br),
     title_tile(title_tile),
     background(background)
 {_

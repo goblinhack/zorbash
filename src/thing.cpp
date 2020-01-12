@@ -846,9 +846,23 @@ std::string Thing::to_name (void)
     verify(this);
     verify(tpp);
 
-    return (string_sprintf("%s%s",
-                           is_dead ? "dead " : "",
-                           tpp->name.c_str()));
+    std::string real_name = "";
+
+    if (is_undead()) {
+        if (is_dead) {
+            real_name += "inanimate ";
+        } else {
+            real_name += "undead ";
+        }
+    } else {
+        if (is_dead) {
+            real_name += "dead ";
+        }
+    }
+
+    real_name += tpp->real_name;
+
+    return (real_name);
 }
 
 const char * Thing::to_cstring (void)

@@ -5,8 +5,13 @@ import random
 class Tp:
     """thing template"""
 
-    def __init__(self, name):
+    def __init__(self, name, real_name=None):
         self.name = name
+
+        if real_name is None:
+            self.real_name = name
+        else:
+            self.real_name = real_name
 
         #
         # Load it into the game engine
@@ -42,7 +47,6 @@ class Tp:
 
     def set_tile_bl(self, tile_bl=None, **kw):
         zx.tp_set_tile_bl(self, tile_bl, **kw)
-
 
     def set_name(self, value):
         zx.tp_set_name(self, value)
@@ -134,8 +138,8 @@ class Tp:
     def set_str_zzz16(self, value):
         zx.tp_set_str_zzz16(self, value)
 
-    def set_str_zzz17(self, value):
-        zx.tp_set_str_zzz17(self, value)
+    def set_real_name(self, value):
+        zx.tp_set_real_name(self, value)
 
     def set_str_light_color(self, value):
         zx.tp_set_str_light_color(self, value)

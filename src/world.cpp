@@ -532,6 +532,24 @@ void World::get_all_interesting_things_at (int x, int y, std::vector<Thingp> &l)
     }
 }
 
+void World::get_all_collision_things_at (int x, int y, std::vector<Thingp> &l)
+{_
+    l.resize(0);
+
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+
+    for (auto id : get(all_thing_ids_at, x, y)) {
+        if (id) {
+            auto t = thing_find(id);
+            if (t->is_interesting() || t->is_obstacle()) {
+                l.push_back(t);
+            }
+        }
+    }
+}
+
 void World::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l)
 {_
     l.resize(0);

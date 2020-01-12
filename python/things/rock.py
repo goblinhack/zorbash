@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, 
+def tp_init(name,
             tiles=[],
             tile_lefts=[],
             tile_rights=[],
@@ -12,7 +12,7 @@ def tp_init(name,
             tile_trs=[],
             tile_bls=[],
             tile_brs=[]):
-    
+
     x = tp.Tp(name)
 
     x.set_gfx_large_shadow_caster(True)
@@ -79,7 +79,7 @@ def tp_init(name,
         x.set_tile_br(tile_br=name)
 
     x.update()
-    
+
 def init():
     tp_init(name="rock1",
             tiles=[

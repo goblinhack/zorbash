@@ -10,12 +10,12 @@ def dirt_init(name, tiles=[], tile_lefts=[]):
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
-    
+
     for t in tiles:
         x.set_tile(t)
 
     x.update()
-    
+
 def init():
     dirt_init(name="dirt1",
             tiles=[

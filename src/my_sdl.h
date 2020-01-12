@@ -48,11 +48,11 @@ enum {
 #define SDL_MAX_BUTTONS                     32
 };
 
-#if SDL_MAJOR_VERSION == 1 // { 
+#if SDL_MAJOR_VERSION == 1 // {
 #define SDL_KEYSYM SDL_keysym
 #else
 #define SDL_KEYSYM SDL_Keysym
-#endif // } 
+#endif // }
 
 struct tokens_t_;
 uint8_t sdl_user_exit(struct tokens_t_ *tokens, void *context);

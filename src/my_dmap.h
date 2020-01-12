@@ -16,7 +16,7 @@ typedef struct Dmap_ {
 #include <type_traits>
 
 template <typename T>
-size_t len(const T& a) 
+size_t len(const T& a)
 {
     return sizeof(T) / sizeof(typename std::remove_all_extents<T>::type);
 }

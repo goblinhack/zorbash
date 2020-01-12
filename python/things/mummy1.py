@@ -1,8 +1,8 @@
 import zx
 import tp
 
-def tp_init(name):
-    x = tp.Tp(name)
+def tp_init(name, real_name):
+    x = tp.Tp(name, real_name)
 
     x.set_ai_delay_after_moving_ms(100)
     x.set_ai_scent_distance(30)
@@ -46,6 +46,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="mummy1")
+    tp_init(name="mummy1", real_name="mummy")
 
 init()

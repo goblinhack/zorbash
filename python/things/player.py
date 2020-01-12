@@ -2,8 +2,8 @@ import zx
 import tp
 
 
-def tp_init(name):
-    x = tp.Tp(name)
+def tp_init(name, real_name):
+    x = tp.Tp(name, real_name)
 
     x.set_collision_check(True)
     x.set_collision_circle(True)
@@ -94,6 +94,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="player1")
+    tp_init(name="player1", real_name="noble warrior")
 
 init()

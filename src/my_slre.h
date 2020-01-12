@@ -90,4 +90,4 @@ int slre_match(const struct slre *, const char *buf, int buf_len,
 	struct cap *captured_substrings);
 
 void slre_test(void);
-#endif // SLRE_HEADER_DEFINED 
+#endif // SLRE_HEADER_DEFINED

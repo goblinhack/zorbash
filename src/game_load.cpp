@@ -275,7 +275,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.version);
 
     if (my.t.version != VERSION) {
-        game_load_error = 
+        game_load_error =
           "bad version '" VERSION "' v '" + my.t.version + "'";
         return (in);
     }
@@ -362,7 +362,7 @@ Game::load (std::string file_to_load, class Game &target)
     memcpy(compressed, data, compressed_len);
 
     lzo_uint new_len = 0;
-    int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len, 
+    int r = lzo1x_decompress((lzo_bytep)compressed, compressed_len,
                              (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
         if (!game_load_headers_only) {

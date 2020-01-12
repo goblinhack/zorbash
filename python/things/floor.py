@@ -3,7 +3,7 @@ import tp
 
 
 def tp_init(name, tiles=[], tile_lefts=[]):
-    
+
     x = tp.Tp(name)
 
     x.set_is_cursor_hover(True)
@@ -11,12 +11,12 @@ def tp_init(name, tiles=[], tile_lefts=[]):
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
-    
+
     for t in tiles:
         x.set_tile(t)
 
     x.update()
-    
+
 def init():
     tp_init(name="floor1",
             tiles=[

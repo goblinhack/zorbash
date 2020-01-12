@@ -77,9 +77,9 @@ extern Lightp light_new(Thingp owner,
                         double strength,
                         LightQuality quality,
                         color col);
-extern void lights_render_points(int minx, int miny, 
+extern void lights_render_points(int minx, int miny,
                                  int maxx, int maxy, int fbo, int pass);
-extern void lights_render_high_quality(int minx, int miny, 
+extern void lights_render_high_quality(int minx, int miny,
                                        int maxx, int maxy, int fbo);
 
-#endif // LIGHT_H 
+#endif // LIGHT_H

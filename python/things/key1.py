@@ -1,8 +1,8 @@
 import zx
 import tp
 
-def key_init(name):
-    x = tp.Tp(name)
+def key_init(name, real_name):
+    x = tp.Tp(name, real_name)
 
     x.set_gfx_animated(True)
     x.set_gfx_bounce_on_move(True)
@@ -25,8 +25,8 @@ def key_init(name):
     x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=100)
 
     x.update()
-    
+
 def init():
-    key_init(name="key1")
+    key_init(name="key1", real_name="key")
 
 init()

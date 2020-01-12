@@ -26,7 +26,7 @@ void player_tick (void)
     //
     // Always move
     //
-    if ((time_get_time_ms_cached() - 
+    if ((time_get_time_ms_cached() -
             player->get_timestamp_move_begin()) < 100) {
         return;
     }

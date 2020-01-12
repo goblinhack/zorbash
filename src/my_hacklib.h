@@ -22,7 +22,7 @@
 #define NEW_MOON     0
 #define FULL_MOON    4
 
-extern int phase_of_the_moon(void);             // 0-7, with 0: new, 4: full 
+extern int phase_of_the_moon(void);             // 0-7, with 0: new, 4: full
 
 extern int friday_13th(void);
 

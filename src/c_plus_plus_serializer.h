@@ -70,7 +70,7 @@ static inline std::istream& operator>>(std::istream& in, Bits<std::string &> v)
     return in;
 }
 
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<const std::string &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -112,7 +112,7 @@ static inline std::istream& operator>>(std::istream& in, Bits<std::wstring &> v)
     return in;
 }
 
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<const std::wstring &> const v)
 {
     my_size_t sz = v.t.size();
@@ -174,7 +174,7 @@ static inline std::istream& operator>>(std::istream& in, Bits<wchar_t &> v)
     return in;
 }
 
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<const wchar_t &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -242,9 +242,9 @@ std::ostream& operator<<(std::ostream &out, Bits<wchar_t &> const v)
 // Read/write simple container
 ////////////////////////////////////////////////////////////////////////////
 template <
-  class T, 
+  class T,
   template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<C<T> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -257,9 +257,9 @@ static inline std::ostream& operator<<(std::ostream &out,
 }
 
 template <
-  class T, 
+  class T,
   template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<const C<T> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -272,7 +272,7 @@ static inline std::ostream& operator<<(std::ostream &out,
 }
 
 template <
-  class T, 
+  class T,
   template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
 static inline std::istream& operator>>(std::istream &in, Bits<C<T> &> v)
 {
@@ -296,10 +296,10 @@ static inline std::istream& operator>>(std::istream &in, Bits<C<T> &> v)
 // Read/write std::array
 ////////////////////////////////////////////////////////////////////////////
 template <
-  class T, 
+  class T,
   std::size_t N,
   template <typename ELEM, std::size_t > class C>
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<C<T, N> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -312,10 +312,10 @@ static inline std::ostream& operator<<(std::ostream &out,
 }
 
 template <
-  class T, 
+  class T,
   std::size_t N,
   template <typename ELEM, std::size_t > class C>
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<const C<T, N> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -328,7 +328,7 @@ static inline std::ostream& operator<<(std::ostream &out,
 }
 
 template <
-  class T, 
+  class T,
   std::size_t N,
   template <typename ELEM, std::size_t > class C>
 static inline std::istream& operator>>(std::istream &in, Bits<C<T, N> &> v)
@@ -361,7 +361,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<M<K,V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -381,7 +381,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<M<K,const V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -401,7 +401,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::istream& operator>>(std::istream &in, 
+static inline std::istream& operator>>(std::istream &in,
                                        Bits<M<K,V> &> m)
 {
     my_size_t sz = 0;
@@ -434,7 +434,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<M<K,V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -455,7 +455,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::ostream& operator<<(std::ostream &out, 
+static inline std::ostream& operator<<(std::ostream &out,
                                        Bits<M<K,const V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -476,7 +476,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::istream& operator>>(std::istream &in, 
+static inline std::istream& operator>>(std::istream &in,
                                        Bits<M<K,V> &> m)
 {
     my_size_t sz = 0;

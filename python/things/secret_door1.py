@@ -2,8 +2,8 @@ import zx
 import tp
 
 
-def tp_init(name):
-    x = tp.Tp(name)
+def tp_init(name, real_name):
+    x = tp.Tp(name, real_name)
 
     x.set_gfx_large_shadow_caster(True)
     x.set_gfx_show_hiddend(True)
@@ -18,8 +18,8 @@ def tp_init(name):
     x.set_tile(tile=name + ".1-closed")
 
     x.update()
-    
+
 def init():
-    tp_init(name="secret_door1")
+    tp_init(name="secret_door1", real_name="secret door")
 
 init()
