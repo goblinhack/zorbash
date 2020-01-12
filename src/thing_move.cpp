@@ -21,9 +21,10 @@ bool Thing::move (fpoint future_pos)
     bool left   = future_pos.x < mid_at.x;
     bool right  = future_pos.x > mid_at.x;
     bool attack = false;
+    bool idle   = false;
 
     verify(this);
-    return (move(future_pos, up, down, left, right, attack));
+    return (move(future_pos, up, down, left, right, attack, idle));
 }
 
 bool Thing::move (fpoint future_pos,
@@ -31,9 +32,17 @@ bool Thing::move (fpoint future_pos,
                   uint8_t down,
                   uint8_t left,
                   uint8_t right,
-                  uint8_t attack)
+                  uint8_t attack,
+                  uint8_t idle)
 {
     if (is_dead) {
+        return (false);
+    }
+
+    if (idle) {
+        if (is_player()) {
+            game->tick_begin();
+        }
         return (false);
     }
 
@@ -54,13 +63,10 @@ bool Thing::move (fpoint future_pos,
 
     if (is_player()) {
         if (mid_at != future_pos) {
-con("player move, check collision");
             if (collision_check_only(future_pos)) {
-con("collision");
                 stop();
                 return (false);
             }
-con("player move, looksok");
         }
     }
 
