@@ -389,7 +389,6 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
             if (std::string(text_iter, text_iter + 3) == "fg=") {
                 text_iter += 3;
                 auto tmp = std::string(text_iter, text.end());
-
                 int len = 0;
                 fg = string2color(tmp, &len);
                 text_iter += len + 1;
@@ -397,7 +396,6 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
             } else if (std::string(text_iter, text_iter + 3) == "bg=") {
                 text_iter += 3;
                 auto tmp = std::string(text_iter, text.end());
-
                 int len = 0;
                 bg = string2color(tmp, &len);
                 text_iter += len + 1;
@@ -642,6 +640,66 @@ int ascii_strlen (std::wstring &text, std::wstring *col)
     }
 
     return (x);
+}
+
+std::string ascii_strip (std::string const& text)
+{_
+    auto text_iter = text.begin();
+    int x = 0;
+    std::string out;
+
+    for (;;) {
+        auto c = *text_iter;
+        text_iter++;
+
+        if (c == '\0') {
+            break;
+        }
+
+        if (c == '%') {
+            if (text_iter != text.end()) {
+                if (*text_iter == '%') {
+                    text_iter++;
+                }
+            }
+
+            if (std::string(text_iter, text_iter + 3) == "fg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "bg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+                int len = 0;
+                (void) string2tp(tmp, &len);
+                text_iter += len;
+                continue;
+            } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                text_iter += 4;
+                continue;
+            } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                text_iter += 5;
+                auto tmp = std::string(text_iter, text.end());
+                int len = 0;
+                (void) string2tile(tmp, &len);
+                text_iter += len;
+                continue;
+            }
+        }
+        out += c;
+        x++;
+    }
+    return (out);
 }
 
 static void ascii_putf_ (int x, int y,

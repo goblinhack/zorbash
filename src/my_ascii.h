@@ -141,12 +141,13 @@ typedef struct {
     void *context;
 } box_args;
 
-extern color ascii_get_color(int x, int y, int z);
-extern void *ascii_get_context(int x, int y);
-extern void ascii_blit_layer(int z, int no_color);
-extern void ascii_put_box(box_args b, int style, Tilep bg_tile, Tilep fg_tile, const wchar_t *fmt, ...);
-extern void ascii_set_context(int x, int y, void *context);
-extern void ascii_shade(void);
+color ascii_get_color(int x, int y, int z);
+void *ascii_get_context(int x, int y);
+void ascii_blit_layer(int z, int no_color);
+void ascii_put_box(box_args b, int style, Tilep bg_tile, Tilep fg_tile, const wchar_t *fmt, ...);
+void ascii_set_context(int x, int y, void *context);
+void ascii_shade(void);
+std::string ascii_strip(std::string const& text);
 
 static inline int ascii_ok (int x, int y)
 {

@@ -12,6 +12,7 @@
 #include "my_console.h"
 #include "my_game.h"
 #include "my_thing.h"
+#include "my_ascii.h"
 
 uint8_t croaked;
 
@@ -28,6 +29,7 @@ static void get_timestamp (char *buf, int32_t len)
 #endif
 }
 
+#if 0
 static void putfg (uint8_t fg, FILE *fp)
 {
     static const char *data[] = {
@@ -91,43 +93,12 @@ static int color_to_index (const char **s)
 
     return (TERM_COLOR_WHITE);
 }
+#endif
 
 static void putf (FILE *fp, const char *s)
 {
-    char c;
-    uint8_t looking_for_start = false;
-
-    while ((c = *s++) != '\0') {
-        if (!looking_for_start) {
-            if (c == '%') {
-                looking_for_start = true;
-                continue;
-            }
-        } else if (looking_for_start) {
-            if (c == '%') {
-            if (!strncmp(s, "fg=", 3)) {
-                s += 3;
-                putfg(color_to_index(&s), fp);
-                looking_for_start = false;
-                continue;
-            }
-
-            if (!strncmp(s, "bg=", 3)) {
-                s += 3;
-                putbg(color_to_index(&s), fp);
-                looking_for_start = false;
-                continue;
-            }
-            }
-
-            putc(c, fp);
-        }
-
-        looking_for_start = false;
-
-        putc(c, fp);
-    }
-
+    std::string out = ascii_strip(s);
+    fputs(out.c_str(), fp);
     putc('\n', fp);
 }
 
@@ -299,22 +270,21 @@ static void minicon_ (const char *fmt, va_list args)
 static void minicon_ (const wchar_t *fmt, va_list args)
 {
     {
-        char buf[MAXSHORTSTR];
-
-        buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
-        fprintf(MY_STDOUT, "%s", buf);
+        char ts[MAXSHORTSTR];
+        ts[0] = '\0';
+        get_timestamp(ts, MAXSHORTSTR);
+        fprintf(MY_STDOUT, "%sMINICON: ", ts);
         fflush(MY_STDOUT);
-        term_log(buf);
+        term_log(ts);
     }
 
     {
         wchar_t buf[MAXSHORTSTR];
         auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
-        /*
-        * Only a single nul is written, but as we read 2 at a time...
-        */
+        //
+        // Only a single nul is written, but as we read 2 at a time...
+        //
         if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
