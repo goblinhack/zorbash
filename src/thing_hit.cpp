@@ -27,9 +27,11 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     //
     // Protect player from multiple impact - landing hard on a spike.
     //
-    if (!time_have_x_tenths_passed_since(get_stats_attacked_rate_tenths(),
-                                         get_timestamp_last_attacked())) {
-        return (false);
+    if (game->config.arcade_mode) {
+        if (!time_have_x_tenths_passed_since(get_stats_attacked_rate_tenths(),
+                                             get_timestamp_last_attacked())) {
+            return (false);
+        }
     }
     set_timestamp_last_attacked(time_get_time_ms_cached());
 
@@ -99,10 +101,12 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         //
         // Don't attack more than allowed
         //
-        if (!time_have_x_tenths_passed_since(
-                hitter->get_stats_attack_rate_tenths(),
-                hitter->get_timestamp_last_attack())) {
-            return (false);
+        if (game->config.arcade_mode) {
+            if (!time_have_x_tenths_passed_since(
+                    hitter->get_stats_attack_rate_tenths(),
+                    hitter->get_timestamp_last_attack())) {
+                return (false);
+            }
         }
         hitter->set_timestamp_last_attack(time_get_time_ms_cached());
     }

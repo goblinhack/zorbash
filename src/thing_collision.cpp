@@ -591,7 +591,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
         *target_overlaps = true;
 
         auto it = best->target;
-        log("collision final best is %s", it->to_string().c_str());
+        log("collision best candidate is %s", it->to_string().c_str());
 
         damage = get_stats_attack();
         if (it->ai_hit_if_possible(me, damage)) {
@@ -617,6 +617,8 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             me->dead("self killed on hitting");
             *target_attacked = false;
             return (true);
+        } else {
+            log("collision: cannot hit %s", it->to_string().c_str());
         }
     } else {
         log("collision: none");
@@ -898,14 +900,15 @@ bool Thing::collision_check_only (Thingp it, fpoint A_future_pos,
             }
         }
     } else if (will_attack(it)) {
-        log("try to attack %s", it->to_string().c_str());
         if (tp_collision_attack(me_tp)) {
             if (things_overlap(me, A_future_pos, it)) {
                 log("will attack %s", it->to_string().c_str());
                 return (true);
             } else {
-                log("would attack %s but no overlap", it->to_string().c_str());
+                log("cannot attack %s, no overlap", it->to_string().c_str());
             }
+        } else {
+            log("cannot attack %s, not hittable", it->to_string().c_str());
         }
     } else if (will_eat(it)) {
         log("try to eat %s", it->to_string().c_str());
@@ -968,7 +971,7 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
                 //
                 // false is used to abort the walk
                 //
-                if (!collision_check_and_handle(it, future_pos, 
+                if (!collision_check_and_handle(it, future_pos,
                                                 x, y, dx, dy)) {
                     return (false);
                 }

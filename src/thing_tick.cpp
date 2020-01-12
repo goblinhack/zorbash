@@ -14,7 +14,6 @@ void Thing::achieve_goals_in_life (void)
     //
     // If this thing has AI, it can try and reach goals
     //
-    log("achieve goals in life");
     if (get_dmap_scent()) {
         auto to = ai_get_next_hop();
 
@@ -24,7 +23,17 @@ void Thing::achieve_goals_in_life (void)
         }
 
         if (mid_at != to) {
+            //
+            // Check to see if moving to this new location will hit something
+            //
             if (collision_check_only(to)) {
+                //
+                // We would hit something and cannot do this move. However,
+                // see if we can hit the thing that is in the way.
+                //
+                log("movement to %f,%f will collide with something",
+                    to.x, to.y);
+
                 bool target_attacked = false;
                 bool target_overlaps = false;
                 collision_check_and_handle(fpoint(to.x, to.y),
@@ -156,7 +165,6 @@ void things_tick (void)
     }
 
     LOG("-");
-    LOG("tick all things");
 
     //
     // Update the cursor position
