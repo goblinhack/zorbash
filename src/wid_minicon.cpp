@@ -22,6 +22,9 @@ Widp wid_minicon_horiz_scroll {};
 Widp wid_minicon_input_line {};
 Widp wid_minicon_window {};
 
+static std::wstring last_msg;
+static int last_msg_count;
+
 static std::map< unsigned int, std::wstring > wid_minicon_lines;
 
 void wid_minicon_fini (void)
@@ -37,6 +40,9 @@ uint8_t wid_minicon_init (void)
 {_
     wid_minicon_wid_create();
     wid_hide(wid_minicon_window);
+
+    last_msg = L"";
+    last_msg_count = 0;
 
     return (true);
 }
@@ -97,6 +103,12 @@ static void wid_minicon_log_ (std::wstring s)
     //
     wid_minicon_flush();
 
+    if (last_msg == s) {
+        s = last_msg + L" (x" + std::to_wstring(++last_msg_count) + L")";
+    } else {
+        last_msg = s;
+        last_msg_count = 0;
+    }
     wid_minicon_scroll(wid_minicon_input_line, s);
 }
 

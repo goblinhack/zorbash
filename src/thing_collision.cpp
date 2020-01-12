@@ -136,7 +136,7 @@ things_tile_overlap (Thingp A, Thingp B)
 }
 
 static bool
-things_tile_overlap (Thingp A, fpoint A_future_pos, Thingp B)
+things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
 {_
     auto A_tile = tile_index_to_tile(A->tile_curr);
     if (!A_tile) {
@@ -170,8 +170,8 @@ things_tile_overlap (Thingp A, fpoint A_future_pos, Thingp B)
 #endif
 
             auto m = A->get_interpolated_mid_at();
-            float Adx = A_future_pos.x - m.x;
-            float Ady = A_future_pos.y - m.y;
+            float Adx = A_at.x - m.x;
+            float Ady = A_at.y - m.y;
             Adx *= game->config.tile_gl_width;
             Ady *= game->config.tile_gl_height;
 
@@ -390,7 +390,7 @@ static int circle_circle_collision (Thingp A,
                                     Thingp B,
                                     fpoint *intersect)
 {
-    fpoint A_future_pos = A->get_interpolated_mid_at();
+    fpoint A_at = A->get_interpolated_mid_at();
     fpoint B_at = B->get_interpolated_mid_at();
 
     //fpoint A0, A1, A2, A3;
@@ -403,7 +403,7 @@ static int circle_circle_collision (Thingp A,
     //B->to_coords(&B0, &B1, &B2, &B3);
     //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
-    fpoint n = B_at - A_future_pos;
+    fpoint n = B_at - A_at;
     float touching_dist = A_radius + B_radius;
     float dist_squared = n.x*n.x + n.y*n.y;
 
@@ -420,7 +420,7 @@ static int circle_circle_collision (Thingp A,
 
     n = unit(n);
     n *= (A_radius - diff);
-    n += A_future_pos;
+    n += A_at;
 
     if (intersect) {
         *intersect = n;
@@ -430,12 +430,11 @@ static int circle_circle_collision (Thingp A,
 }
 
 static int circle_circle_collision (Thingp A,
-                                    fpoint A_future_pos,
+                                    fpoint A_at,
                                     Thingp B,
+                                    fpoint B_at,
                                     fpoint *intersect)
 {
-    fpoint B_at = B->get_interpolated_mid_at();
-
     //fpoint A0, A1, A2, A3;
     //A->to_coords(&A0, &A1, &A2, &A3);
     //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
@@ -446,7 +445,7 @@ static int circle_circle_collision (Thingp A,
     //B->to_coords(&B0, &B1, &B2, &B3);
     //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
-    fpoint n = B_at - A_future_pos;
+    fpoint n = B_at - A_at;
     float touching_dist = A_radius + B_radius;
     float dist_squared = n.x*n.x + n.y*n.y;
 
@@ -463,7 +462,7 @@ static int circle_circle_collision (Thingp A,
 
     n = unit(n);
     n *= (A_radius - diff);
-    n += A_future_pos;
+    n += A_at;
 
     if (intersect) {
         *intersect = n;
@@ -631,9 +630,9 @@ bool Thing::collision_find_best_target (bool *target_attacked,
 bool things_overlap (const Thingp A, const Thingp B)
 {_
 #if 0
-    fpoint A_future_pos, B_at;
+    fpoint A_at, B_at;
 
-    A_future_pos = A->interpolated_mid_at;
+    A_at = A->interpolated_mid_at;
     B_at = B->interpolated_mid_at;
 
     int check_only = true;
@@ -643,7 +642,7 @@ bool things_overlap (const Thingp A, const Thingp B)
     if (tp_collision_circle(A->tp) &&
         !tp_collision_circle(B->tp)) {
         if (circle_box_collision(A, // circle
-                                 A_future_pos,
+                                 A_at,
                                  B, // box
                                  B_at,
                                  &normal_A,
@@ -659,7 +658,7 @@ bool things_overlap (const Thingp A, const Thingp B)
         if (circle_box_collision(B, // circle
                                  B_at,
                                  A, // box
-                                 A_future_pos,
+                                 A_at,
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
@@ -685,12 +684,12 @@ bool things_overlap (const Thingp A, const Thingp B)
     return (false);
 }
 
-bool things_overlap (const Thingp A, fpoint A_future_pos, const Thingp B)
+bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
 {_
 #if 0
-    fpoint A_future_pos, B_at;
+    fpoint A_at, B_at;
 
-    A_future_pos = A->interpolated_mid_at;
+    A_at = A->interpolated_mid_at;
     B_at = B->interpolated_mid_at;
 
     int check_only = true;
@@ -700,7 +699,7 @@ bool things_overlap (const Thingp A, fpoint A_future_pos, const Thingp B)
     if (tp_collision_circle(A->tp) &&
         !tp_collision_circle(B->tp)) {
         if (circle_box_collision(A, // circle
-                                 A_future_pos,
+                                 A_at,
                                  B, // box
                                  B_at,
                                  &normal_A,
@@ -716,7 +715,7 @@ bool things_overlap (const Thingp A, fpoint A_future_pos, const Thingp B)
         if (circle_box_collision(B, // circle
                                  B_at,
                                  A, // box
-                                 A_future_pos,
+                                 A_at,
                                  &normal_A,
                                  &intersect,
                                  check_only)) {
@@ -729,8 +728,16 @@ bool things_overlap (const Thingp A, fpoint A_future_pos, const Thingp B)
     if (tp_collision_circle(A->tp()) &&
         tp_collision_circle(B->tp())) {
         if (circle_circle_collision(A, // circle
-                                    A_future_pos,
+                                    A_at,
                                     B, // box
+                                    B->mid_at,
+                                    nullptr)) {
+            return (true);
+        }
+        if (circle_circle_collision(A, // circle
+                                    A_at,
+                                    B, // box
+                                    B->get_interpolated_mid_at(),
                                     nullptr)) {
             return (true);
         }
@@ -738,7 +745,7 @@ bool things_overlap (const Thingp A, fpoint A_future_pos, const Thingp B)
     }
 
 #if 0
-    return (things_tile_overlap(A, A_future_pos, B));
+    return (things_tile_overlap(A, A_at, B));
 #endif
     return (false);
 }
@@ -865,7 +872,7 @@ bool Thing::collision_obstacle (fpoint p)
     return (false);
 }
 
-bool Thing::collision_check_only (Thingp it, fpoint A_future_pos,
+bool Thing::collision_check_only (Thingp it, fpoint A_at,
                                   int x, int y, int dx, int dy)
 {_
     auto me = this;
@@ -895,13 +902,13 @@ bool Thing::collision_check_only (Thingp it, fpoint A_future_pos,
             // Weapon hits monster or generator.
             //
             log("try to attack %s", it->to_string().c_str());
-            if (things_overlap(me, A_future_pos, it)) {
+            if (things_overlap(me, A_at, it)) {
                 return (true);
             }
         }
     } else if (will_attack(it)) {
         if (tp_collision_attack(me_tp)) {
-            if (things_overlap(me, A_future_pos, it)) {
+            if (things_overlap(me, A_at, it)) {
                 log("will attack %s", it->to_string().c_str());
                 return (true);
             } else {
@@ -912,12 +919,12 @@ bool Thing::collision_check_only (Thingp it, fpoint A_future_pos,
         }
     } else if (will_eat(it)) {
         log("try to eat %s", it->to_string().c_str());
-        if (things_overlap(me, A_future_pos, it)) {
+        if (things_overlap(me, A_at, it)) {
             return (true);
         }
     } else {
         log("consider %s", it->to_string().c_str());
-        if (things_overlap(me, A_future_pos, it)) {
+        if (things_overlap(me, A_at, it)) {
             if (collision_obstacle(it)) {
                 return (true);
             }

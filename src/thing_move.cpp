@@ -459,6 +459,10 @@ void Thing::update_pos (fpoint to, bool immediately)
     }
 
     move_carried_items();
+
+    if (tp_is_loggable(tpp)) {
+        log("moved");
+    }
 }
 
 void Thing::move_delta (fpoint delta, bool immediately)
