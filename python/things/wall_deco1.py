@@ -2,10 +2,10 @@ import zx
 import tp
 
 
-def tp_init(name, 
+def tp_init(name,
               tiles=[],
               tile_lefts=[]):
-    
+
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
@@ -15,13 +15,13 @@ def tp_init(name,
     x.set_is_loggable(False)
     x.set_is_movement_blocking(True)
     x.set_z_depth(zx.MAP_DEPTH_WALLS_DECO)
-    
+
     delay = 2500
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
 
     x.update()
-    
+
 def init():
     tp_init(name="grate1", tiles=[ "grate1.1", "grate1.2", ])
     tp_init(name="grate2", tiles=[ "grate2.1", "grate2.2", ])

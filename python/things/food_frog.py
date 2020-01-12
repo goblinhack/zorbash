@@ -2,8 +2,8 @@ import zx
 import tp
 
 
-def tp_init(name):
-    x = tp.Tp(name)
+def tp_init(name, real_name):
+    x = tp.Tp(name, real_name)
 
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
@@ -16,11 +16,11 @@ def tp_init(name):
     x.set_is_loggable(True)
     x.set_is_nutrition_hd("1d4")
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
-    
+
     x.set_tile(tile=name, is_hp_100_percent=True)
     x.update()
-    
+
 def init():
-    tp_init(name="food_frog1")
+    tp_init(name="food_frog1", real_name="chocolate frog")
 
 init()

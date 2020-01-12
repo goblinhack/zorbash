@@ -29,11 +29,18 @@ PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
         return (0);
     }
 
+    char *tp_real_name = py_obj_attr_str(py_class, "real_name");
+    if (!tp_real_name) {
+        ERR("tp_load, missing tp real_name");
+        return (0);
+    }
+
     static int id;
     id++;
-    tp_load(id, tp_name);
+    tp_load(id, tp_name, tp_real_name);
 
     myfree(tp_name);
+    myfree(tp_real_name);
 
     Py_RETURN_NONE;
 }
@@ -549,7 +556,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     if (py_tile_name && *py_tile_name) {
         auto t = tile_find(std::string(py_tile_name));
         if (!t) {
-            DIE("%s, cannot find tile '%s' for tp %s", 
+            DIE("%s, cannot find tile '%s' for tp %s",
                 __FUNCTION__, py_tile_name, tp_name);
         }
 
@@ -845,7 +852,7 @@ TP_BODY_SET_STRING(str_zzz13)
 TP_BODY_SET_STRING(str_zzz14)
 TP_BODY_SET_STRING(str_zzz15)
 TP_BODY_SET_STRING(str_zzz16)
-TP_BODY_SET_STRING(str_zzz17)
+TP_BODY_SET_STRING(real_name)
 TP_BODY_SET_STRING(str_zzz2)
 TP_BODY_SET_STRING(str_zzz3)
 TP_BODY_SET_STRING(str_zzz4)

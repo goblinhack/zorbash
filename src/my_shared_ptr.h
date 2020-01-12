@@ -28,13 +28,13 @@ private:
     }
 public:
     // explicit means constructor must match exactly
-    template <typename ...ARGS> explicit 
-      SmartPointerWrapper(const std::string &name, ARGS... a) : name(name) { 
+    template <typename ...ARGS> explicit
+      SmartPointerWrapper(const std::string &name, ARGS... a) : name(name) {
         sptr = std::make_shared<T>(a...);
         debug("make_shared");
     }
 
-    explicit SmartPointerWrapper(const std::string &name) : name(name) { 
+    explicit SmartPointerWrapper(const std::string &name) : name(name) {
         sptr = std::make_shared<T>();
         debug("make_shared");
     }
@@ -47,7 +47,7 @@ public:
         debug("delete");
     }
 
-    void rename(const std::string &name) { 
+    void rename(const std::string &name) {
         this->name = name;
         debug("rename");
     }
@@ -58,9 +58,9 @@ public:
     const T& operator*() const { return *sptr; }
     operator bool() const { return (bool)sptr; }
 
-    void reset() { 
+    void reset() {
         debug("reset");
-        sptr.reset(); 
+        sptr.reset();
     }
 };
 #endif

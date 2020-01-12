@@ -63,6 +63,7 @@ public:
     fsize sz;
 
     std::string name;
+    std::string real_name;
     std::string str_zzz1;
     std::string str_zzz2;
     std::string str_zzz3;
@@ -79,7 +80,6 @@ public:
     std::string str_zzz14;
     std::string str_zzz15;
     std::string str_zzz16;
-    std::string str_zzz17;
     std::string str_light_color;
     std::string weapon_carry_anim;
     std::string weapon_use_anim;
@@ -271,7 +271,7 @@ public:
 
 uint8_t tp_init(void);
 void tp_fini(void);
-Tpp tp_load(int id, std::string file);
+Tpp tp_load(int id, std::string const& file, std::string const& real_name);
 void tp_update(Tpp tp);
 Tpp tp_find(uint32_t id);
 void tp_init_after_loading(void);
@@ -1096,9 +1096,9 @@ static inline std::string tp_str_zzz16 (Tpp t)
     return (t->str_zzz16);
 }
 
-static inline std::string tp_str_zzz17 (Tpp t)
+static inline std::string tp_real_name (Tpp t)
 {
-    return (t->str_zzz17);
+    return (t->real_name);
 }
 
 static inline std::string tp_str_light_color (Tpp t)
@@ -1254,4 +1254,4 @@ typedef enum {
     LIGHT_QUALITY_HIGH,
 } LightQuality;
 
-#endif // THING_TEMPLATE_H 
+#endif // THING_TEMPLATE_H

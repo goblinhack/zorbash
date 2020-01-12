@@ -42,7 +42,7 @@ void tp_fini (void)
     }
 }
 
-Tpp tp_load (int id, std::string name)
+Tpp tp_load (int id, std::string const& name, std::string const& real_name)
 {_
     if (tp_find(name)) {
         ERR("thing template name [%s] already used", name.c_str());
@@ -50,6 +50,7 @@ Tpp tp_load (int id, std::string name)
 
     auto tp = new Tp();
     tp->name = name;
+    tp->real_name = real_name;
 
     auto result = tp_name_map.insert(std::make_pair(name, tp));
     if (result.second == false) {

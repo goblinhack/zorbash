@@ -22,7 +22,7 @@ public:
 
     my_apoint (const my_apoint &a) : x(a.x), y(a.y) { }
 
-    friend std::ostream& operator<<(std::ostream &out, 
+    friend std::ostream& operator<<(std::ostream &out,
                                     Bits<const my_apoint & > const my)
     {
         out << bits(my.t.x) << bits(my.t.y);
@@ -545,4 +545,4 @@ typedef my_apoint3d<int> point3d;
 typedef my_apoint3d<float> fpoint3d;
 #endif
 
-#endif // _MY_POINT_H_ 
+#endif // _MY_POINT_H_

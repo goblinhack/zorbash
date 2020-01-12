@@ -28,7 +28,7 @@ public:
 
     my_acolor (const my_acolor &c) : r(c.r), g(c.g), b(c.b), a(c.a) { }
 
-    friend std::ostream& operator<<(std::ostream &out, 
+    friend std::ostream& operator<<(std::ostream &out,
                                     Bits<const my_acolor & > const my)
     {
         out << bits(my.t.r) << bits(my.t.g) << bits(my.t.b) << bits(my.t.a);
@@ -1604,4 +1604,4 @@ extern color COLOR_NONE;
 #define CONST_YELLOWGREEN { 154, 205, 50, 255 }
 #define CONST_YELLOW { 255, 255, 0, 255 }
 #define CONST_INK { 51, 54, 47, 47 }
-#endif // _MY_COLOR_H_ 
+#endif // _MY_COLOR_H_

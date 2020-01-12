@@ -283,19 +283,19 @@ public:
         //
         // Add a cave as the under-dungeon
         //
-        water_gen(20, // fill prob 
-                  10,  // R1 
-                  5,  // R2 
+        water_gen(20, // fill prob
+                  10,  // R1
+                  5,  // R2
                   4   /* generations */);
 
-        cave_gen(20, // fill prob 
-                 10,  // R1 
-                 5,  // R2 
+        cave_gen(20, // fill prob
+                 10,  // R1
+                 5,  // R2
                  3   /* generations */);
 
-        dirt_gen(20, // fill prob 
-                 10,  // R1 
-                 5,  // R2 
+        dirt_gen(20, // fill prob
+                 10,  // R1
+                 5,  // R2
                  4   /* generations */);
 
         water_fixup();

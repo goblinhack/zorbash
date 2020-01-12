@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, 
+def tp_init(name,
             tiles=[],
             tile_lefts=[],
             tile_rights=[],
@@ -12,9 +12,12 @@ def tp_init(name,
             tile_trs=[],
             tile_bls=[],
             tile_brs=[]):
-    
+
     x = tp.Tp(name)
 
+    x.set_collision_circle(True)
+    x.set_collision_hit_priority(0)
+    x.set_collision_radius(0.50)
     x.set_gfx_large_shadow_caster(True)
     x.set_is_cursor_hover(True)
     x.set_is_interesting(False)
@@ -79,7 +82,7 @@ def tp_init(name,
         x.set_tile_br(tile_br=name)
 
     x.update()
-    
+
 def init():
     tp_init(name="wall1",
             tiles=[
@@ -142,7 +145,7 @@ def init():
                         "wall_deco1.bot.15",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_tls=[ 
+            tile_tls=[
                         "wall_deco1.tl.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
@@ -219,7 +222,7 @@ def init():
                         "wall_deco1.bot.14",
                         "wall_deco1.bot.15",
                 ],
-            tile_tls=[ 
+            tile_tls=[
                         "wall_deco1.tl.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],

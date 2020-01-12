@@ -558,6 +558,8 @@ public:
     bool collision_check_and_handle(bool *, bool *);
     bool collision_check_and_handle(fpoint, bool *, bool *);
     bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
+    bool collision_check_only(Thingp it, fpoint future_pos,
+                              int x, int y, int dx, int dy);
     bool collision_check_only(void);
     bool collision_check_only(fpoint);
     bool collision_obstacle(fpoint);

@@ -54,11 +54,13 @@ bool Thing::move (fpoint future_pos,
 
     if (is_player()) {
         if (mid_at != future_pos) {
+con("player move, check collision");
             if (collision_check_only(future_pos)) {
-CON("collision");
+con("collision");
                 stop();
                 return (false);
             }
+con("player move, looksok");
         }
     }
 

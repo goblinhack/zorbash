@@ -57,4 +57,4 @@ void ptrcheck_leak_print(void);
 #define verify(__ptr__)
 #endif
 
-#endif // __PTRCHECK_H__ 
+#endif // __PTRCHECK_H__

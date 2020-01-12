@@ -1760,7 +1760,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(str_zzz14)
     TP_SET_DECL(str_zzz15)
     TP_SET_DECL(str_zzz16)
-    TP_SET_DECL(str_zzz17)
+    TP_SET_DECL(real_name)
     TP_SET_DECL(str_zzz2)
     TP_SET_DECL(str_zzz3)
     TP_SET_DECL(str_zzz4)

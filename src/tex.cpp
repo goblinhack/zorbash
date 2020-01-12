@@ -333,7 +333,7 @@ static Texp tex_from_surface_black_and_white (SDL_Surface *in,
             color c;
 
             c = getPixel(in, ix, iy);
-           
+
             uint8_t avg = ((int)c.r + (int)c.g + (int)c.b) / 3;
             c.r = avg;
             c.g = avg;

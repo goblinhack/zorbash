@@ -33,8 +33,9 @@ public:
 };
 
 static std::vector<class ThingColl> thing_colls;
-static const double thing_collision_tiles = 1;
+static const float thing_collision_tiles = 1;
 
+#if 0
 static bool
 things_tile_overlap (Thingp A, Thingp B)
 {_
@@ -47,15 +48,15 @@ things_tile_overlap (Thingp A, Thingp B)
         return (false);
     }
 
-    double A_width  = (A->last_blit_br.x - A->last_blit_tl.x);
-    double A_height = (A->last_blit_br.y - A->last_blit_tl.y);
-    double B_width  = (B->last_blit_br.x - B->last_blit_tl.x);
-    double B_height = (B->last_blit_br.y - B->last_blit_tl.y);
+    float A_width  = (A->last_blit_br.x - A->last_blit_tl.x);
+    float A_height = (A->last_blit_br.y - A->last_blit_tl.y);
+    float B_width  = (B->last_blit_br.x - B->last_blit_tl.x);
+    float B_height = (B->last_blit_br.y - B->last_blit_tl.y);
 
-    double A_dw = A_width  / (double)A_tile->pix_width;
-    double A_dh = A_height / (double)A_tile->pix_height;
-    double B_dw = B_width  / (double)B_tile->pix_width;
-    double B_dh = B_height / (double)B_tile->pix_height;
+    float A_dw = A_width  / (float)A_tile->pix_width;
+    float A_dh = A_height / (float)A_tile->pix_height;
+    float B_dw = B_width  / (float)B_tile->pix_width;
+    float B_dh = B_height / (float)B_tile->pix_height;
 
     for (int y = 0; y < (int)A_tile->pix_height; y++) {
         for (int x = 0; x < (int)A_tile->pix_width; x++) {
@@ -68,8 +69,8 @@ things_tile_overlap (Thingp A, Thingp B)
 #ifdef DEBUG_COLLISION
             printf("A");
 #endif
-            double Ax = A->last_blit_tl.x + (((double)x) * A_dw);
-            double Ay = A->last_blit_tl.y + (((double)y) * A_dh);
+            float Ax = A->last_blit_tl.x + (((float)x) * A_dw);
+            float Ay = A->last_blit_tl.y + (((float)y) * A_dh);
             Ax -= B->last_blit_tl.x;
             Ay -= B->last_blit_tl.y;
             Ax /= B_dw;
@@ -101,8 +102,8 @@ things_tile_overlap (Thingp A, Thingp B)
 #ifdef DEBUG_COLLISION
     for (int y = 0; y < (int)A_tile->pix_height; y++) {
         for (int x = 0; x < (int)A_tile->pix_width; x++) {
-            double Ax = A->last_blit_tl.x + (((double)x) * A_dw);
-            double Ay = A->last_blit_tl.y + (((double)y) * A_dh);
+            float Ax = A->last_blit_tl.x + (((float)x) * A_dw);
+            float Ay = A->last_blit_tl.y + (((float)y) * A_dh);
             Ax -= B->last_blit_tl.x;
             Ay -= B->last_blit_tl.y;
             Ax /= B_dw;
@@ -134,6 +135,113 @@ things_tile_overlap (Thingp A, Thingp B)
     return (false);
 }
 
+static bool
+things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
+{_
+    auto A_tile = tile_index_to_tile(A->tile_curr);
+    if (!A_tile) {
+        return (false);
+    }
+    auto B_tile = tile_index_to_tile(B->tile_curr);
+    if (!B_tile) {
+        return (false);
+    }
+
+    float A_width  = (A->last_blit_br.x - A->last_blit_tl.x);
+    float A_height = (A->last_blit_br.y - A->last_blit_tl.y);
+    float B_width  = (B->last_blit_br.x - B->last_blit_tl.x);
+    float B_height = (B->last_blit_br.y - B->last_blit_tl.y);
+
+    float A_dw = A_width  / (float)A_tile->pix_width;
+    float A_dh = A_height / (float)A_tile->pix_height;
+    float B_dw = B_width  / (float)B_tile->pix_width;
+    float B_dh = B_height / (float)B_tile->pix_height;
+
+    for (int y = 0; y < (int)A_tile->pix_height; y++) {
+        for (int x = 0; x < (int)A_tile->pix_width; x++) {
+            if (!get(A_tile->pix, x, y)) {
+#ifdef DEBUG_COLLISION
+                printf(" ");
+#endif
+                continue;
+            }
+#ifdef DEBUG_COLLISION
+            printf("A");
+#endif
+
+            auto m = A->get_interpolated_mid_at();
+            float Adx = A_at.x - m.x;
+            float Ady = A_at.y - m.y;
+            Adx *= game->config.tile_gl_width;
+            Ady *= game->config.tile_gl_height;
+
+            float Ax = A->last_blit_tl.x + Adx + (((float)x) * A_dw);
+            float Ay = A->last_blit_tl.y + Ady + (((float)y) * A_dh);
+            Ax -= B->last_blit_tl.x;
+            Ay -= B->last_blit_tl.y;
+            Ax /= B_dw;
+            Ay /= B_dh;
+
+            int dx = (int)Ax;
+            int dy = (int)Ay;
+
+            if ((dx <=- 1) || (dx >= (int)B_tile->pix_width - 2)) {
+                continue;
+            }
+
+            if ((dy <= 1) || (dy >= (int)B_tile->pix_height - 2)) {
+                continue;
+            }
+
+            if (get(B_tile->pix, dx, dy)) {
+                return (true);
+            }
+        }
+#ifdef DEBUG_COLLISION
+        printf("\n");
+#endif
+    }
+#ifdef DEBUG_COLLISION
+    printf("\n");
+#endif
+
+#ifdef DEBUG_COLLISION
+    for (int y = 0; y < (int)A_tile->pix_height; y++) {
+        for (int x = 0; x < (int)A_tile->pix_width; x++) {
+            float Ax = A->last_blit_tl.x + (((float)x) * A_dw);
+            float Ay = A->last_blit_tl.y + (((float)y) * A_dh);
+            Ax -= B->last_blit_tl.x;
+            Ay -= B->last_blit_tl.y;
+            Ax /= B_dw;
+            Ay /= B_dh;
+
+            int dx = (int)Ax;
+            int dy = (int)Ay;
+
+            if ((dx < 0) || (dx >= (int)B_tile->pix_width)) {
+                printf("-");
+                continue;
+            }
+
+            if ((dy < 0) || (dy >= (int)B_tile->pix_height)) {
+                printf("-");
+                continue;
+            }
+
+            if (get(B_tile->pix, dx, dy)) {
+                printf("B");
+            } else {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+    printf("\n");
+#endif
+    return (false);
+}
+#endif
+
 #if 0
 static int circle_box_collision (Thingp C,
                                  fpoint C_at,
@@ -159,7 +267,7 @@ static int circle_box_collision (Thingp C,
     B2 += B_offset;
     B3 += B_offset;
 
-    double radius = fmin((C1.x - C0.x) / 2.0, (C2.y - C0.y) / 2.0);
+    float radius = fmin((C1.x - C0.x) / 2.0, (C2.y - C0.y) / 2.0);
 
     //
     // Corner collisions, normal is at 45 degrees. Unless there is a wall.
@@ -200,7 +308,7 @@ static int circle_box_collision (Thingp C,
         }
     }
 
-    double dist;
+    float dist;
     if (distance_to_line(C_at, B0, B1, &dist, 0)) {
         if (dist < radius) {
             goto collided;
@@ -287,19 +395,62 @@ static int circle_circle_collision (Thingp A,
 
     //fpoint A0, A1, A2, A3;
     //A->to_coords(&A0, &A1, &A2, &A3);
-    //double A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
-    double A_radius = A->tp()->collision_radius;
-    double B_radius = B->tp()->collision_radius;
+    //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
+    float A_radius = A->tp()->collision_radius;
+    float B_radius = B->tp()->collision_radius;
 
     //fpoint B0, B1, B2, B3;
     //B->to_coords(&B0, &B1, &B2, &B3);
-    //double B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
+    //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
 
     fpoint n = B_at - A_at;
-    double touching_dist = A_radius + B_radius;
-    double dist_squared = n.x*n.x + n.y*n.y;
+    float touching_dist = A_radius + B_radius;
+    float dist_squared = n.x*n.x + n.y*n.y;
 
-    double diff = dist_squared - touching_dist * touching_dist;
+    float diff = dist_squared - touching_dist * touching_dist;
+    if (diff > 0.0) {
+        //
+        // Circles are not touching
+        //
+        return (false);
+    }
+
+    diff = sqrt(fabs(diff));
+    diff /= 2.0;
+
+    n = unit(n);
+    n *= (A_radius - diff);
+    n += A_at;
+
+    if (intersect) {
+        *intersect = n;
+    }
+
+    return (true);
+}
+
+static int circle_circle_collision (Thingp A,
+                                    fpoint A_at,
+                                    Thingp B,
+                                    fpoint *intersect)
+{
+    fpoint B_at = B->get_interpolated_mid_at();
+
+    //fpoint A0, A1, A2, A3;
+    //A->to_coords(&A0, &A1, &A2, &A3);
+    //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
+    float A_radius = A->tp()->collision_radius;
+    float B_radius = B->tp()->collision_radius;
+
+    //fpoint B0, B1, B2, B3;
+    //B->to_coords(&B0, &B1, &B2, &B3);
+    //float B_radius = fmin((B1.x - B0.x) / 2.0, (B2.y - B0.y) / 2.0);
+
+    fpoint n = B_at - A_at;
+    float touching_dist = A_radius + B_radius;
+    float dist_squared = n.x*n.x + n.y*n.y;
+
+    float diff = dist_squared - touching_dist * touching_dist;
     if (diff > 0.0) {
         //
         // Circles are not touching
@@ -418,11 +569,11 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             auto me_pos = get_interpolated_mid_at();
             auto best_pos = best->target->get_interpolated_mid_at();
 
-            double dist_best = DISTANCE(me_pos.x,
+            float dist_best = DISTANCE(me_pos.x,
                                         me_pos.y,
                                         best_pos.x,
                                         best_pos.y);
-            double dist_cand = DISTANCE(me_pos.x,
+            float dist_cand = DISTANCE(me_pos.x,
                                         me_pos.y,
                                         best_pos.x,
                                         best_pos.y);
@@ -526,7 +677,68 @@ bool things_overlap (const Thingp A, const Thingp B)
         return (false);
     }
 
+#if 0
     return (things_tile_overlap(A, B));
+#endif
+    return (false);
+}
+
+bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
+{_
+#if 0
+    fpoint A_at, B_at;
+
+    A_at = A->interpolated_mid_at;
+    B_at = B->interpolated_mid_at;
+
+    int check_only = true;
+    fpoint intersect = {0,0};
+    fpoint normal_A = {0,0};
+
+    if (tp_collision_circle(A->tp) &&
+        !tp_collision_circle(B->tp)) {
+        if (circle_box_collision(A, // circle
+                                 A_at,
+                                 B, // box
+                                 B_at,
+                                 &normal_A,
+                                 &intersect,
+                                 check_only)) {
+            return (things_tile_overlap(A, B));
+        }
+        return (false);
+    }
+
+    if (!tp_collision_circle(A->tp) &&
+         tp_collision_circle(B->tp)) {
+        if (circle_box_collision(B, // circle
+                                 B_at,
+                                 A, // box
+                                 A_at,
+                                 &normal_A,
+                                 &intersect,
+                                 check_only)) {
+            return (things_tile_overlap(A, B));
+        }
+        return (false);
+    }
+
+#endif
+    if (tp_collision_circle(A->tp()) &&
+        tp_collision_circle(B->tp())) {
+        if (circle_circle_collision(A, // circle
+                                    A_at,
+                                    B, // box
+                                    nullptr)) {
+            return (true);
+        }
+        return (false);
+    }
+
+#if 0
+    return (things_tile_overlap(A, A_at, B));
+#endif
+    return (false);
 }
 
 //
@@ -650,7 +862,8 @@ bool Thing::collision_obstacle (fpoint p)
     return (false);
 }
 
-bool Thing::collision_check_only (Thingp it, int x, int y, int dx, int dy)
+bool Thing::collision_check_only (Thingp it, fpoint A_at,
+                                  int x, int y, int dx, int dy)
 {_
     auto me = this;
     auto it_tp = it->tp();
@@ -693,10 +906,10 @@ bool Thing::collision_check_only (Thingp it, int x, int y, int dx, int dy)
             return (true);
         }
     } else {
-        if (things_overlap(me, it)) {
-            if (collision_obstacle(it))
-con("overlap %s", it->to_string().c_str());
-            return (true);
+        if (things_overlap(me, A_at, it)) {
+            if (collision_obstacle(it)) {
+                return (true);
+            }
         }
     }
 
@@ -735,7 +948,7 @@ bool Thing::collision_check_and_handle (fpoint at,
         auto dx = x - at.x;
         for (int16_t y = miny; y <= maxy; y++) {
             auto dy = y - at.y;
-            FOR_ALL_INTERESTING_THINGS(world, it, x, y) {
+            FOR_ALL_COLLISION_THINGS(world, it, x, y) {
                 if (this == it) {
                     continue;
                 }
@@ -757,33 +970,33 @@ bool Thing::collision_check_and_handle (fpoint at,
     return (collision_find_best_target(target_attacked, target_overlaps));
 }
 
-bool Thing::collision_check_only (fpoint at)
+bool Thing::collision_check_only (fpoint future_pos)
 {_
-    int minx = at.x - thing_collision_tiles;
+    int minx = future_pos.x - thing_collision_tiles;
     while (minx < 0) {
         minx++;
     }
 
-    int miny = at.y - thing_collision_tiles;
+    int miny = future_pos.y - thing_collision_tiles;
     while (miny < 0) {
         miny++;
     }
 
-    int maxx = at.x + thing_collision_tiles;
+    int maxx = future_pos.x + thing_collision_tiles;
     while (maxx >= MAP_WIDTH) {
         maxx--;
     }
 
-    int maxy = at.y + thing_collision_tiles;
+    int maxy = future_pos.y + thing_collision_tiles;
     while (maxy >= MAP_HEIGHT) {
         maxy--;
     }
 
     for (int16_t x = minx; x <= maxx; x++) {
-        auto dx = x - at.x;
+        auto dx = x - future_pos.x;
         for (int16_t y = miny; y <= maxy; y++) {
-            auto dy = y - at.y;
-            FOR_ALL_INTERESTING_THINGS(world, it, x, y) {
+            auto dy = y - future_pos.y;
+            FOR_ALL_COLLISION_THINGS(world, it, x, y) {
                 if (this == it) {
                     continue;
                 }
@@ -792,7 +1005,7 @@ bool Thing::collision_check_only (fpoint at)
                     continue;
                 }
 
-                if (collision_check_only(it, x, y, dx, dy)) {
+                if (collision_check_only(it, future_pos, x, y, dx, dy)) {
                     return (true);
                 }
             }

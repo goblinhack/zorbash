@@ -27,7 +27,7 @@ def tp_init(name):
     x.set_tile(tile=name + ".12", delay_ms=delay)
 
     x.update()
-    
+
 def init():
     tp_init(name="cursor")
 

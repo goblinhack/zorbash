@@ -27,7 +27,7 @@ public:
     {
     }
 
-    std::string name; // key 
+    std::string name; // key
 
     int8_t is_file {};
 };
