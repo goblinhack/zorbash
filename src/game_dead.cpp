@@ -40,8 +40,6 @@ uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
                         // Magic keys we use to toggle the console.
                         //
                         return (false);
-                    case ' ':
-                    case '\n':
                     case SDLK_ESCAPE: {
                         wid_dead_destroy();
                         return (true);

@@ -26,6 +26,10 @@ void Thing::achieve_goals_in_life (void)
             //
             // Check to see if moving to this new location will hit something
             //
+            // We need to look at the next-hop at the current time which may
+            // be vacant, but also to the future if a thing is moving to that
+            // spot; in which case we get an attach of opportunity.
+            //
             if (collision_check_only(to)) {
                 //
                 // We would hit something and cannot do this move. However,
@@ -85,9 +89,13 @@ void Thing::tick (void)
         return;
     }
 
-    if (tp_is_loggable(tp())) {
-        log("tick");
-    }
+    //
+    // Too noisy
+    //
+    // if (tp_is_loggable(tp())) {
+    //     log("tick");
+    // }
+    //
     update_interpolated_position();
 
     if (game->config.arcade_mode) {
@@ -164,7 +172,7 @@ void things_tick (void)
         return;
     }
 
-    LOG("-");
+    // LOG("-");
 
     //
     // Update the cursor position
