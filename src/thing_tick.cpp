@@ -14,6 +14,7 @@ void Thing::achieve_goals_in_life (void)
     //
     // If this thing has AI, it can try and reach goals
     //
+    log("achieve goals in life");
     if (get_dmap_scent()) {
         auto to = ai_get_next_hop();
 
@@ -29,10 +30,16 @@ void Thing::achieve_goals_in_life (void)
                 collision_check_and_handle(fpoint(to.x, to.y),
                                            &target_attacked,
                                            &target_overlaps);
+                if (target_attacked) {
+                    log("cannot move to %f,%f, attack", to.x, to.y);
+                } else {
+                    log("cannot move to %f,%f, collision", to.x, to.y);
+                }
                 stop();
                 return;
             }
 
+            log("can move to %f,%f", to.x, to.y);
             move(to);
         }
     }
@@ -111,7 +118,6 @@ void Thing::tick (void)
             auto tick = get_tick();
             if (tick < game->tick_current) {
                 incr_tick();
-                log("achieve goals in life");
                 is_waiting_to_move = false;
                 achieve_goals_in_life();
             }

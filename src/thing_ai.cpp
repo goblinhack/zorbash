@@ -11,7 +11,7 @@
 #include <vector>
 #include "my_thing.h"
 
-#define DEBUG_AI
+#undef DEBUG_AI
 
 bool Thing::will_attack (const Thingp itp)
 {
@@ -436,7 +436,9 @@ fpoint Thing::ai_get_next_hop (void)
     for (auto g : goals_set) {
         auto p = g.at;
         float score = get(cell_totals, p.x, p.y);
+#ifdef DEBUG_AI
         auto orig_score = score;
+#endif
         score = most_preferred - score;
         score /= (most_preferred - least_preferred);
         score *= DMAP_IS_PASSABLE - 1;

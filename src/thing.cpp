@@ -17,7 +17,7 @@ void thing_gc (void)
     for (auto id : things_to_delete) {
         auto t = thing_find(id);
         if (!t) {
-            ERR("thing ID %08X not found to garbage collect", id);
+            ERR("thing ID-%08X not found to garbage collect", id);
             continue;
         }
 
@@ -609,7 +609,7 @@ void Thing::hooks_remove ()
     }
 
     if (owner) {
-        log("detach ID %08X from owner %s", id, owner->to_string().c_str());
+        log("detach ID-%08X from owner %s", id, owner->to_string().c_str());
 
         if (id == owner->get_weapon_id()) {
             owner->unwield("remove hooks");
@@ -686,7 +686,7 @@ void Thing::hooks_remove ()
     // Some things have lots of things they own
     //
     if (get_owned_count()) {
-        log("remove remaining ID %08X owned things", get_owned_count());
+        log("remove remaining ID-%08X owned things", get_owned_count());
 
         //
         // Slow, but not used too often
@@ -790,7 +790,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_carry_anim()) {
         auto w = thing_find(get_weapon_id_carry_anim());
         if (!w) {
-            die("weapon_id_carry_anim set to ID %08X but not found",
+            die("weapon_id_carry_anim set to ID-%08X but not found",
                 get_weapon_id_carry_anim());
         }
         w->move_to(mid_at);
@@ -800,7 +800,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_use_anim()) {
         auto w = thing_find(get_weapon_id_use_anim());
         if (!w) {
-            die("weapon_id_use_anim set to ID %08X but not found",
+            die("weapon_id_use_anim set to ID-%08X but not found",
                 get_weapon_id_use_anim());
         }
         w->move_to(mid_at);
@@ -826,14 +826,14 @@ std::string Thing::to_string (void)
     verify(this);
     verify(tpp);
     if (get_stats_health_max()) {
-        return (string_sprintf("ID %08X(%s%s hp %d(%d)) at (%g,%g)",
+        return (string_sprintf("ID-%08X(%s%s hp %d(%d)) at (%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
                                get_stats_health(),
                                get_stats_health_max(),
                                mid_at.x, mid_at.y));
     } else {
-        return (string_sprintf("ID %08X(%s%s) at (%g,%g)",
+        return (string_sprintf("ID-%08X(%s%s) at (%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
                                mid_at.x, mid_at.y));
