@@ -9,7 +9,7 @@ def init1(name):
     x.set_collision_check(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
-    x.set_collision_radius(0.5)
+    x.set_collision_radius(0.40)
     x.set_gfx_dead_anim(False)
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_vflip(True)

@@ -3,6 +3,30 @@
 ```diff
 - **** WORK IN PROGRESS - NOT PLAYABLE YET *****
 
+--
+
+In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage
+upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness.
+
+Those that remain, scavenge amongst the ruins of once great cities. Religious zealotry
+has taken hold and all technology is viewed as demonic magic and forbidden. To be found
+with Zorbashian tech is a death sentence.
+
+The planet is now a hellscape. Lava flows freely from the gushing wounds in the soil
+and deserts grow larger every year. The animals have mutated into fearsome beasts and
+the only safety is to be found in the undercities.
+
+Your task, nobel one, is only to survive, for in surviving we continue to resist.
+If you are able to strike a blow against the Zorbashian demons then seek out their
+many underground bases. It is from here they spawn from their far off realm. But
+beware, they have many dread beasts guarding their bases.
+
+Legend says that there is a master base somewhere, where the Emperor Zorbash resides.
+Whether this is true or not, cannot be said but to strike at the heart of their rule
+may be enough to drive the Zorbashians out. And then we can be free again.
+
+--
+
 Zorbash is a fusion of turn based and real-time based gaming, called "borrowed time",
 which allows the player to do lots of moves in quick succession. The monsters will
 get the same number of moves, but they move at their own pace. Watch out if you clock
@@ -14,48 +38,48 @@ classical roguelike experience.
 ![Alt text](screenshot.1.png?raw=true "")
 ![Alt text](screenshot.2.png?raw=true "")
 ![Alt text](screenshot.3.png?raw=true "")
-```diff
-                       Hark! Hear now a tale untold
-                       since ancient times of yore
-                       of Zorbash, forgotten beast of old, 
-                       who dwelled deep near the Earth’s core
-                       
-                       ‘Twas from the Abyss he first arose,
-                       Forged treasures gold and gleaming. 
-                       A deadly lure to tempt all those
-                       Prone to greed and scheming
-                       
-                       Many fell before his throne, 
-                       Heroes fell asunder.
-                       His lightning gaze turned flesh to bone
-                       His roar was loud as thunder.
-                       
-                       Quenchless, thirsting, dripping gore
-                       His thousand eyes unmatched
-                       Until one tenacious band of four
-                       From him vict’ry snatched. 
-                       
-                       Although, ‘twas not an easy fight -
-                       A sacrifice was made.
-                       A volunteer, their faithful knight,
-                       Made sure the price was paid. 
-                       
-                       As godlings, the remaining three
-                       rose with fame and glory
-                       But that’s not yet the finale
-                       Of Zorbanadu’s dark story.
-                       
-                       For in the depths of Zorbash’s den, 
-                       A necromancer schemed.
-                       She planned to raise the beast again,
-                       And rule as his Dark Queen.
-                       
-                       So now Zorbash has come to life - 
-                       (Though ‘tis more like life’s dark shadow)
-                       With his fiersome undead wife
-                       Can you save us all, dear hero? 
-                       
-```
+<!--```diff -->
+<!--                       Hark! Hear now a tale untold -->
+<!--                       since ancient times of yore -->
+<!--                       of Zorbash, forgotten beast of old,  -->
+<!--                       who dwelled deep near the Earth’s core -->
+<!--                        -->
+<!--                       ‘Twas from the Abyss he first arose, -->
+<!--                       Forged treasures gold and gleaming.  -->
+<!--                       A deadly lure to tempt all those -->
+<!--                       Prone to greed and scheming -->
+<!--                        -->
+<!--                       Many fell before his throne,  -->
+<!--                       Heroes fell asunder. -->
+<!--                       His lightning gaze turned flesh to bone -->
+<!--                       His roar was loud as thunder. -->
+<!--                        -->
+<!--                       Quenchless, thirsting, dripping gore -->
+<!--                       His thousand eyes unmatched -->
+<!--                       Until one tenacious band of four -->
+<!--                       From him vict’ry snatched.  -->
+<!--                        -->
+<!--                       Although, ‘twas not an easy fight - -->
+<!--                       A sacrifice was made. -->
+<!--                       A volunteer, their faithful knight, -->
+<!--                       Made sure the price was paid.  -->
+<!--                        -->
+<!--                       As godlings, the remaining three -->
+<!--                       rose with fame and glory -->
+<!--                       But that’s not yet the finale -->
+<!--                       Of Zorbanadu’s dark story. -->
+<!--                        -->
+<!--                       For in the depths of Zorbash’s den,  -->
+<!--                       A necromancer schemed. -->
+<!--                       She planned to raise the beast again, -->
+<!--                       And rule as his Dark Queen. -->
+<!--                        -->
+<!--                       So now Zorbash has come to life -  -->
+<!--                       (Though ‘tis more like life’s dark shadow) -->
+<!--                       With his fiersome undead wife -->
+<!--                       Can you save us all, dear hero?  -->
+<!--                        -->
+<!--``` -->
 
 ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) To build:
 
