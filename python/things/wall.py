@@ -17,7 +17,7 @@ def tp_init(name,
 
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
-    x.set_collision_radius(0.50)
+    x.set_collision_radius(0.40)
     x.set_gfx_large_shadow_caster(True)
     x.set_is_cursor_hover(True)
     x.set_is_interesting(False)

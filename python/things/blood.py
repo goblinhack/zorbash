@@ -7,7 +7,7 @@ def tp_init(name, real_name):
 
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
-    x.set_collision_radius(0.5)
+    x.set_collision_radius(0.40)
     x.set_stats_health_initial(4)
     x.set_is_blood(True)
     x.set_is_interesting(True)
