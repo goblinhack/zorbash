@@ -90,7 +90,7 @@ def init3(name, real_name):
     x.set_weapon_carry_anim("sword1_carry_anim")
     x.set_weapon_use_anim("sword1_swing_anim")
     x.set_weapon_use_delay_hundredths(5)
-    x.set_weapon_use_distance(5)
+    x.set_weapon_use_distance(1)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     x.set_tile(tile=name + ".1")

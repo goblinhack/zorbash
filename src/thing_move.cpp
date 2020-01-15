@@ -229,8 +229,8 @@ bool Thing::update_coordinates (void)
             dy = -delta.y * lunge * tile_gl_height;
             tl.x -= dx;
             br.x -= dx;
-            tl.y -= dy;
-            br.y -= dy;
+            tl.y += dy;
+            br.y += dy;
         }
     }
 

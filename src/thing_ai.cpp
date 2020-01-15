@@ -13,7 +13,7 @@
 
 #undef DEBUG_AI
 
-bool Thing::will_attack (const Thingp itp)
+bool Thing::possible_to_attack (const Thingp itp)
 {
     auto me = tp();
     auto it = itp->tp();
@@ -22,11 +22,20 @@ bool Thing::will_attack (const Thingp itp)
         return (false);
     }
 
-    if (tp_is_meat_eater(me)) {
-        if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
+    if (is_monst()) {
+        if (tp_is_meat_eater(me)) {
+            if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
+                log("possible attack %s", itp->to_string().c_str());
+                return (true);
+            }
+        }
+    } else if (is_player()) {
+        if (itp->is_monst()) {
+            log("possible attack %s", itp->to_string().c_str());
             return (true);
         }
     }
+
     return (false);
 }
 
@@ -224,7 +233,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                     }
                 }
 
-                if (will_attack(it)) {
+                if (possible_to_attack(it)) {
                     *score += 100;
 #ifdef DEBUG_AI
                     debug = "will attack " + it->to_string();

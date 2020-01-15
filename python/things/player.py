@@ -6,6 +6,7 @@ def tp_init(name, real_name):
     x = tp.Tp(name, real_name)
 
     x.set_collision_check(True)
+    x.set_collision_attack(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(20)
     x.set_collision_radius(0.40)
