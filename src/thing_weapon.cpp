@@ -113,18 +113,17 @@ void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
     }
 }
 
-void Thing::weapon_get_use_offset (double *dx, double *dy)
+void Thing::weapon_get_use_offset (float *dx, float *dy)
 {_
+    *dx = 0;
+    *dy = 0;
+
     auto weapon = weapon_get();
     if (!weapon) {
         return;
     }
 
-    *dx = 0;
-    *dy = 0;
-
-    double dist_from_wielder =
-        ((double)tp_weapon_use_distance(weapon->tp())) / 10.0;
+    float dist_from_wielder = tp_weapon_use_distance(weapon->tp());
 
     //
     // Try current direction.
@@ -342,4 +341,19 @@ void Thing::use (void)
     }
 
     move_carried_items();
+
+    float dx, dy;
+    weapon_get_use_offset(&dx, &dy);
+
+    bool target_attacked = false;
+    bool target_overlaps = false;
+    auto hit_at = mid_at + fpoint(dx, dy);
+
+    log("attack @%f,%f",hit_at.x, hit_at.y);
+    lunge(hit_at);
+    if (collision_check_and_handle_at(hit_at,
+                                      &target_attacked,
+                                      &target_overlaps)) {
+        return;
+    }
 }

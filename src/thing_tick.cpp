@@ -40,9 +40,9 @@ void Thing::achieve_goals_in_life (void)
 
                 bool target_attacked = false;
                 bool target_overlaps = false;
-                collision_check_and_handle(fpoint(to.x, to.y),
-                                           &target_attacked,
-                                           &target_overlaps);
+                collision_check_and_handle_nearby(fpoint(to.x, to.y),
+                                                  &target_attacked,
+                                                  &target_overlaps);
                 if (target_attacked) {
                     log("cannot move to %f,%f, attack", to.x, to.y);
                 } else {
@@ -72,8 +72,8 @@ void Thing::collision_check_do (void)
 
         bool target_attacked = false;
         bool target_overlaps = false;
-        if (collision_check_and_handle(&target_attacked,
-                                       &target_overlaps)) {
+        if (collision_check_and_handle_at(&target_attacked,
+                                          &target_overlaps)) {
             return;
         }
 

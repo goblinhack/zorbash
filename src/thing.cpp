@@ -826,14 +826,14 @@ std::string Thing::to_string (void)
     verify(this);
     verify(tpp);
     if (get_stats_health_max()) {
-        return (string_sprintf("ID-%08X(%s%s hp %d(%d)) at (%g,%g)",
+        return (string_sprintf("%08X(%s%s hp %d/%d @%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
                                get_stats_health(),
                                get_stats_health_max(),
                                mid_at.x, mid_at.y));
     } else {
-        return (string_sprintf("ID-%08X(%s%s) at (%g,%g)",
+        return (string_sprintf("%08X(%s%s @%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
                                mid_at.x, mid_at.y));

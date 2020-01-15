@@ -784,21 +784,26 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
             //
             // Weapon hits monster or generator.
             //
+            log("candidate attack %s", it->to_string().c_str());
             if (things_overlap(me, future_pos, it)) {
                 thing_ai_possible_hit_add_hitter_killed_on_hitting(
                         it, "sword hit thing");
             }
         }
-    } else if (will_attack(it)) {
-        if (tp_collision_attack(me_tp)) {
-            if (things_overlap(me, future_pos, it)) {
-                thing_ai_possible_hit_add(it, "battle");
-            }
+    } else if (possible_to_attack(it)) {
+        if (things_overlap(me, future_pos, it)) {
+            log("candidate attack %s", it->to_string().c_str());
+            thing_ai_possible_hit_add(it, "battle");
+        } else {
+            log("cannot attack %s, no overlap", it->to_string().c_str());
         }
     } else if (will_eat(it)) {
+        log("candidate eat %s", it->to_string().c_str());
         if (things_overlap(me, future_pos, it)) {
             thing_ai_possible_hit_add(it, "eat");
         }
+    } else {
+        log("candidate ignore %s", it->to_string().c_str());
     }
 
     return (true);
@@ -906,16 +911,12 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at,
                 return (true);
             }
         }
-    } else if (will_attack(it)) {
-        if (tp_collision_attack(me_tp)) {
-            if (things_overlap(me, A_at, it)) {
-                log("will attack %s", it->to_string().c_str());
-                return (true);
-            } else {
-                log("cannot attack %s, no overlap", it->to_string().c_str());
-            }
+    } else if (possible_to_attack(it)) {
+        if (things_overlap(me, A_at, it)) {
+            log("will attack %s", it->to_string().c_str());
+            return (true);
         } else {
-            log("cannot attack %s, not hittable", it->to_string().c_str());
+            log("cannot attack %s, no overlap", it->to_string().c_str());
         }
     } else if (will_eat(it)) {
         log("try to eat %s", it->to_string().c_str());
@@ -934,30 +935,27 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at,
     return (false);
 }
 
-//
-// Have we hit anything? True on having done something at this (future?)
-// position.
-//
 bool Thing::collision_check_and_handle (fpoint future_pos,
                                         bool *target_attacked,
-                                        bool *target_overlaps)
+                                        bool *target_overlaps,
+                                        float radius)
 {_
-    int minx = future_pos.x - thing_collision_tiles;
+    int minx = future_pos.x - radius;
     while (minx < 0) {
         minx++;
     }
 
-    int miny = future_pos.y - thing_collision_tiles;
+    int miny = future_pos.y - radius;
     while (miny < 0) {
         miny++;
     }
 
-    int maxx = future_pos.x + thing_collision_tiles;
+    int maxx = future_pos.x + radius;
     while (maxx >= MAP_WIDTH) {
         maxx--;
     }
 
-    int maxy = future_pos.y + thing_collision_tiles;
+    int maxy = future_pos.y + radius;
     while (maxy >= MAP_HEIGHT) {
         maxy--;
     }
@@ -987,6 +985,30 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
     }
 
     return (collision_find_best_target(target_attacked, target_overlaps));
+}
+
+//
+// Have we hit anything? True on having done something at this (future?)
+// position.
+//
+bool Thing::collision_check_and_handle_nearby (fpoint future_pos,
+                                               bool *target_attacked,
+                                               bool *target_overlaps)
+{_
+    return (collision_check_and_handle (future_pos,
+                                        target_attacked,
+                                        target_overlaps,
+                                        thing_collision_tiles));
+}
+
+bool Thing::collision_check_and_handle_at (fpoint future_pos,
+                                           bool *target_attacked,
+                                           bool *target_overlaps)
+{_
+    return (collision_check_and_handle (future_pos,
+                                        target_attacked,
+                                        target_overlaps,
+                                        0.0));
 }
 
 bool Thing::collision_check_only (fpoint future_pos)
@@ -1033,11 +1055,11 @@ bool Thing::collision_check_only (fpoint future_pos)
     return (false);
 }
 
-bool Thing::collision_check_and_handle (bool *target_attacked,
-                                        bool *target_overlaps)
+bool Thing::collision_check_and_handle_at (bool *target_attacked,
+                                           bool *target_overlaps)
 {_
-    return (collision_check_and_handle(mid_at,
-                                       target_attacked, target_overlaps));
+    return (collision_check_and_handle_at(mid_at,
+                                          target_attacked, target_overlaps));
 }
 
 bool Thing::collision_check_only (void)

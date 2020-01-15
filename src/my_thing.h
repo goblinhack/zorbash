@@ -555,8 +555,10 @@ public:
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
-    bool collision_check_and_handle(bool *, bool *);
-    bool collision_check_and_handle(fpoint, bool *, bool *);
+    bool collision_check_and_handle(fpoint, bool *, bool *, float radius);
+    bool collision_check_and_handle_at(bool *, bool *);
+    bool collision_check_and_handle_at(fpoint, bool *, bool *);
+    bool collision_check_and_handle_nearby(fpoint, bool *, bool *);
     bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
     bool collision_check_only(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_only(void);
@@ -570,7 +572,7 @@ public:
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle);
     bool update_coordinates(void);
     void update_cursor(void);
-    bool will_attack(const Thingp it);
+    bool possible_to_attack(const Thingp it);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
     bool will_prefer(const Thingp it);
@@ -783,7 +785,7 @@ public:
     void update_pos(fpoint, bool immediately);
     void use(void);
     void visible();
-    void weapon_get_use_offset(double *dx, double *dy);
+    void weapon_get_use_offset(float *dx, float *dy);
     void weapon_set_carry_anim(Thingp weapon_carry_anim);
     void weapon_set_carry_anim_id(uint32_t weapon_carry_anim_id);
     void weapon_set_placement(void);
