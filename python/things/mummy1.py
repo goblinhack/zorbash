@@ -42,6 +42,21 @@ def tp_init(name, real_name):
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
     x.set_tile(tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.100", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.100", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.100", is_hp_75_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.100", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.100", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.100", is_hp_50_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".1.100", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.100", is_hp_25_percent=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.100", is_hp_25_percent=True, delay_ms=delay)
+
+    x.set_tile(tile=name + ".1.dead", is_dead=True, delay_ms=delay)
+    x.set_tile(tile=name + ".2.dead", is_dead=True, delay_ms=delay)
+    x.set_tile(tile=name + ".3.dead", is_dead=True, delay_ms=delay)
+    x.set_tile(tile=name + ".4.dead", is_dead=True, delay_ms=delay)
+    x.set_tile(tile=name + ".5.dead", is_dead=True, is_end_of_anim=True)
 
     x.update()
 

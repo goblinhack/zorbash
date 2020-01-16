@@ -91,7 +91,7 @@ void Thing::animate (void)
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_cursor()) {
+if (is_monst()) {
 log("choose tiles");
 }
 #endif
@@ -107,7 +107,7 @@ log("choose tiles");
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_cursor()) {
+if (is_monst()) {
 log("tile %s", tile_name(tile).c_str());
 }
 #endif
@@ -117,45 +117,45 @@ log("tile %s", tile_name(tile).c_str());
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            }
 
-            auto health_max = get_stats_health_max();
-            auto health = get_stats_health();
+                auto health_max = get_stats_health_max();
+                auto health = get_stats_health();
 
-            if (tpp->internal_has_hp_anim) {
-                if (health < health_max / 4) {
-                    if (!tile_is_hp_25_percent(tile)) {
-                        tile = tile_next(tiles, tile);
-                        continue;
-                    }
-                } else if (health < health_max / 2) {
-                    if (!tile_is_hp_50_percent(tile)) {
-                        tile = tile_next(tiles, tile);
-                        continue;
-                    }
-                } else if (health < (health_max / 4) * 3) {
-                    if (!tile_is_hp_75_percent(tile)) {
-                        tile = tile_next(tiles, tile);
-                        continue;
-                    }
-                } else {
-                    if (!tile_is_hp_100_percent(tile)) {
-                        tile = tile_next(tiles, tile);
-                        continue;
+                if (tpp->internal_has_hp_anim) {
+                    if (health < health_max / 4) {
+                        if (!tile_is_hp_25_percent(tile)) {
+                            tile = tile_next(tiles, tile);
+                            continue;
+                        }
+                    } else if (health < health_max / 2) {
+                        if (!tile_is_hp_50_percent(tile)) {
+                            tile = tile_next(tiles, tile);
+                            continue;
+                        }
+                    } else if (health < (health_max / 4) * 3) {
+                        if (!tile_is_hp_75_percent(tile)) {
+                            tile = tile_next(tiles, tile);
+                            continue;
+                        }
+                    } else {
+                        if (!tile_is_hp_100_percent(tile)) {
+                            tile = tile_next(tiles, tile);
+                            continue;
+                        }
                     }
                 }
-            }
 
-            if (!is_moving) {
-                if (tile_is_moving(tile)) {
-                    tile = tile_next(tiles, tile);
-                    continue;
+                if (!is_moving) {
+                    if (tile_is_moving(tile)) {
+                        tile = tile_next(tiles, tile);
+                        continue;
+                    }
                 }
             }
 
             if (is_dead) {
 #ifdef DEBUG_ANIM
-if (is_cursor()) {
+if (is_monst()) {
 log("tile %s is dead", tile_name(tile).c_str());
 }
 #endif
@@ -164,7 +164,7 @@ log("tile %s is dead", tile_name(tile).c_str());
                     continue;
                 }
 #ifdef DEBUG_ANIM
-if (is_cursor()) {
+if (is_monst()) {
 log("tile %s got dead", tile_name(tile).c_str());
 }
 #endif
@@ -220,7 +220,7 @@ log("tile %s got dead", tile_name(tile).c_str());
                 }
             }
 #ifdef DEBUG_ANIM
-if (is_cursor()) {
+if (is_monst()) {
 log("tile %s got one", tile_name(tile).c_str());
 }
 #endif
@@ -250,7 +250,7 @@ log("tile %s got one", tile_name(tile).c_str());
     }
 
 #ifdef DEBUG_ANIM
-    if (is_cursor()) {
+    if (is_monst()) {
         log("set %s", tile_name(tile).c_str());
     }
 #endif
