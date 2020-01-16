@@ -3,29 +3,25 @@
 ```diff
 - **** WORK IN PROGRESS - NOT PLAYABLE YET *****
 
---
-
-In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage
-upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness.
-
-Those that remain, scavenge amongst the ruins of once great cities. Religious zealotry
-has taken hold and all technology is viewed as demonic magic and forbidden. To be found
-with Zorbashian tech is a death sentence.
-
-The planet is now a hellscape. Lava flows freely from the gushing wounds in the soil
-and deserts grow larger every year. The animals have mutated into fearsome beasts and
-the only safety is to be found in the undercities.
-
-Your task, nobel one, is only to survive, for in surviving we continue to resist.
-If you are able to strike a blow against the Zorbashian demons then seek out their
-many underground bases. It is from here they spawn from their far off realm. But
-beware, they have many dread beasts guarding their bases.
-
-Legend says that there is a master base somewhere, where the Emperor Zorbash resides.
-Whether this is true or not, cannot be said but to strike at the heart of their rule
-may be enough to drive the Zorbashians out. And then we can be free again.
-
---
+<!-- In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage -->
+<!-- upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness. -->
+<!--  -->
+<!-- Those that remain, scavenge amongst the ruins of once great cities. Religious zealotry -->
+<!-- has taken hold and all technology is viewed as demonic magic and forbidden. To be found -->
+<!-- with Zorbashian tech is a death sentence. -->
+<!--  -->
+<!-- The planet is now a hellscape. Lava flows freely from the gushing wounds in the soil -->
+<!-- and deserts grow larger every year. The animals have mutated into fearsome beasts and -->
+<!-- the only safety is to be found in the undercities. -->
+<!--  -->
+<!-- Your task, nobel one, is only to survive, for in surviving we continue to resist. -->
+<!-- If you are able to strike a blow against the Zorbashian demons then seek out their -->
+<!-- many underground bases. It is from here they spawn from their far off realm. But -->
+<!-- beware, they have many dread beasts guarding their bases. -->
+<!--  -->
+<!-- Legend says that there is a master base somewhere, where the Emperor Zorbash resides. -->
+<!-- Whether this is true or not, cannot be said but to strike at the heart of their rule -->
+<!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
 
 Zorbash is a fusion of turn based and real-time based gaming, called "borrowed time",
 which allows the player to do lots of moves in quick succession. The monsters will
@@ -34,6 +30,8 @@ up too many moves ahead. If you get stuck, the monsters might get lots of free h
 at you. Alternatively, race through the level as quick as you want, but never pause.
 Or methodically move one step at a time, letting the monsters move in sync for a more
 classical roguelike experience.
+
+I'm still working on a theme :)
 ```
 ![Alt text](screenshot.1.png?raw=true "")
 ![Alt text](screenshot.2.png?raw=true "")
