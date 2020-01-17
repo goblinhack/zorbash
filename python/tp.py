@@ -270,11 +270,11 @@ class Tp:
     def set_is_rrr41(self, value):
         zx.tp_set_is_rrr41(self, value)
 
-    def set_is_rrr42(self, value):
-        zx.tp_set_is_rrr42(self, value)
+    def set_is_no_tile(self, value):
+        zx.tp_set_is_no_tile(self, value)
 
-    def set_is_rrr43(self, value):
-        zx.tp_set_is_rrr43(self, value)
+    def set_is_msg(self, value):
+        zx.tp_set_is_msg(self, value)
 
     def set_is_attack_lunge(self, value):
         zx.tp_set_is_attack_lunge(self, value)
@@ -294,8 +294,8 @@ class Tp:
     def set_is_secret_door(self, value):
         zx.tp_set_is_secret_door(self, value)
 
-    def set_is_cursor_hover(self, value):
-        zx.tp_set_is_cursor_hover(self, value)
+    def set_is_cursor_can_hover_over(self, value):
+        zx.tp_set_is_cursor_can_hover_over(self, value)
 
     def set_is_cursor(self, value):
         zx.tp_set_is_cursor(self, value)
@@ -456,8 +456,8 @@ class Tp:
     def set_is_weapon(self, value):
         zx.tp_set_is_weapon(self, value)
 
-    def set_gfx_show_hiddend(self, value):
-        zx.tp_set_gfx_show_hiddend(self, value)
+    def set_gfx_show_outlined(self, value):
+        zx.tp_set_gfx_show_outlined(self, value)
 
     def set_gfx_large_shadow_caster(self, value):
         zx.tp_set_gfx_large_shadow_caster(self, value)

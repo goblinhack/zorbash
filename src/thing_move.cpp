@@ -174,22 +174,31 @@ bool Thing::update_coordinates (void)
     br.x = tl.x + tile_gl_width;
     br.y = tl.y + tile_gl_height;
 
-    auto tile = tile_index_to_tile(tile_curr);
-    if (!tile) {
-        die("has no tile, index %d", tile_curr);
+    //
+    // Some things (like messages) have no tiles and so use the default.
+    //
+    float tile_pix_width = TILE_WIDTH;
+    float tile_pix_height = TILE_HEIGHT;
+    if (!is_no_tile()) {
+        auto tile = tile_index_to_tile(tile_curr);
+        if (!tile) {
+            die("has no tile, index %d", tile_curr);
+        }
+        tile_pix_width = tile->pix_width;
+        tile_pix_height = tile->pix_height;
     }
 
     //
     // Scale up tiles that are larger to the same pix scale.
     //
-    if (unlikely((tile->pix_width != TILE_WIDTH) ||
-                 (tile->pix_height != TILE_HEIGHT))) {
-        auto xtiles = (tile->pix_width / TILE_WIDTH) / 2.0;
+    if (unlikely((tile_pix_width != TILE_WIDTH) ||
+                 (tile_pix_height != TILE_HEIGHT))) {
+        auto xtiles = (tile_pix_width / TILE_WIDTH) / 2.0;
         auto mx = (br.x + tl.x) / 2.0;
         tl.x = mx - (xtiles * tile_gl_width);
         br.x = mx + (xtiles * tile_gl_width);
 
-        auto ytiles = (tile->pix_height / TILE_HEIGHT) / 2.0;
+        auto ytiles = (tile_pix_height / TILE_HEIGHT) / 2.0;
         auto my = (br.y + tl.y) / 2.0;
         tl.y = my - (ytiles * tile_gl_height);
         br.y = my + (ytiles * tile_gl_height);
@@ -200,7 +209,7 @@ bool Thing::update_coordinates (void)
     //
     if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tpp))) {
         double y_offset =
-            (((tile->pix_height - TILE_HEIGHT) / TILE_HEIGHT) *
+            (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) *
                 tile_gl_height) / 2.0;
         tl.y -= y_offset;
         br.y -= y_offset;

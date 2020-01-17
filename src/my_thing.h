@@ -72,6 +72,7 @@ typedef struct {
 typedef struct Monst_ {
     AgeMap       *age_map = {};              // How old a cell is
     Dmap         *dmap_scent = {};
+    std::string  msg;                        // Text that floats on screen
     Lightp       light = {};                 // Have a light source?
     int          light_strength {};
     int          light_quality {};
@@ -226,6 +227,9 @@ public:
 
     void set_rot(float);
     float get_rot(void);
+
+    void set_msg(std::string);
+    std::string get_msg(void);
 
     void set_submerged_offset(float);
     float get_submerged_offset(void);
@@ -603,7 +607,7 @@ public:
     int gfx_is_weapon_carry_anim(void);
     int gfx_is_weapon_use_anim(void);
     int gfx_large_shadow_caster(void);
-    int gfx_show_hiddend(void);
+    int gfx_show_outlined(void);
     int gfx_oversized_but_sitting_on_the_ground(void);
     int gfx_small_shadow_caster(void);
     int health_hunger_pct(void);
@@ -676,13 +680,13 @@ public:
     int is_rrr39(void);
     int is_rrr4(void);
     int is_rrr41(void);
-    int is_rrr42(void);
-    int is_rrr43(void);
+    int is_no_tile(void);
+    int is_msg(void);
     int is_attack_lunge(void);
     int defence(void);
     int attack(void);
     int is_secret_door(void);
-    int is_cursor_hover(void);
+    int is_cursor_can_hover_over(void);
     int is_cursor(void);
     int is_rrr5(void);
     int gfx_dead_anim(void);
@@ -720,6 +724,7 @@ public:
     void animate();
     void attach(void);
     void blit(double offset_x, double offset_y, int x, int y);
+    void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_non_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);

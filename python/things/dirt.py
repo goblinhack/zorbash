@@ -5,7 +5,7 @@ import tp
 def dirt_init(name, tiles=[], tile_lefts=[]):
     x = tp.Tp(name)
 
-    x.set_is_cursor_hover(True)
+    x.set_is_cursor_can_hover_over(True)
     x.set_is_dirt(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)

@@ -8,7 +8,7 @@ def tp_init(name, real_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
-    x.set_gfx_show_hiddend(True)
+    x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_stats_health_initial(4)
     x.set_is_food(True)

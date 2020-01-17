@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_thing.h"
+#include "my_font.h"
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {
@@ -430,8 +431,10 @@ void Thing::blit_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
     shadow_tl.y += 0.01 * dy;
     shadow_tr.y += 0.01 * dy;
 
-    ::blit(tile->gl_binding(), x1, y2, x2, y1,
-           shadow_bl, shadow_br, shadow_tl, shadow_tr);
+    if (tile != nullptr) {
+        ::blit(tile->gl_binding(), x1, y2, x2, y1,
+               shadow_bl, shadow_br, shadow_tl, shadow_tr);
+    }
 
     glcolor(WHITE);
 }
@@ -662,6 +665,66 @@ void Thing::blit_shadow_section (const Tpp &tpp, const Tilep &tile,
     }
 }
 
+void Thing::blit_text (std::string const& text,
+                       fpoint& blit_tl, fpoint& blit_br)
+{_
+    Tilep tile;
+    auto text_iter = text.begin();
+    color fg = WHITE;
+
+// printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, scissors_br.x, scissors_br.y, scissors_enabled);
+    tile = nullptr;
+
+    auto w = blit_br.x - blit_tl.x;
+
+    while (text_iter != text.end()) {
+        auto c = *text_iter;
+        text_iter++;
+
+        if (unlikely(c == L'%')) {
+            if (std::string(text_iter, text_iter + 3) == "fg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+                int len = 0;
+                fg = string2color(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                auto tp = string2tp(tmp, &len);
+                text_iter += len;
+
+                tile = tp_first_tile(tp);
+                continue;
+            } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                text_iter += 4;
+                continue;
+            } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                text_iter += 5;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                tile = string2tile(tmp, &len);
+                text_iter += len;
+                continue;
+            }
+            continue;
+        }
+
+        tile = fixed_font->unicode_to_tile(c);
+
+        glcolor(fg);
+        tile_blit(tile, blit_tl, blit_br);
+
+        tile = nullptr;
+        blit_tl.x += w;
+        blit_br.x += w;
+    }
+}
+
 void Thing::blit (double offset_x, double offset_y, int x, int y)
 {
     if (unlikely(is_hidden)) {
@@ -809,6 +872,10 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         gl_rotate = get_rot();
     }
 
+    if (is_msg()) {
+        blit_text(get_msg(), blit_tl, blit_br);
+    }
+
     if (likely(blit)) {
         if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
             if (is_submerged) {
@@ -824,7 +891,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     blit_tl.y -= height;
     blit_br.y -= height;
 
-    if (tp_gfx_show_hiddend(tpp) && !thing_map_black_and_white) {
+    if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
         if (is_submerged) {
             tile_blit_outline_section(
                 tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
@@ -877,6 +944,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 {
     if (unlikely(is_hidden)) {
+        return;
+    }
+
+    if (is_msg()) {
+        CON("TODO");
         return;
     }
 
@@ -975,7 +1047,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         }
     }
 
-    if (tp_gfx_show_hiddend(tpp)) {
+    if (tp_gfx_show_outlined(tpp)) {
         if (is_submerged) {
             tile_blit_outline_section(
               tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
