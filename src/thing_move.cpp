@@ -516,6 +516,11 @@ void Thing::move_to (fpoint to)
     move_delta(fpoint(to.x - mid_at.x, to.y - mid_at.y), false);
 }
 
+void Thing::move_delta (fpoint d)
+{_
+    move_delta(d, false);
+}
+
 void Thing::move_to_immediately (fpoint to)
 {_
     move_delta(fpoint(to.x - mid_at.x, to.y - mid_at.y), true);

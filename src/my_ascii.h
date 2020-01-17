@@ -72,10 +72,10 @@ void ascii_dim(int x, int y, int z, float alpha);
 void ascii_putf(int x, int y, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, const wchar_t *fmt, ...);
 void ascii_putf(int x, int y, color fg, color bg, const wchar_t *fmt, ...);
-void ascii_putf(int x, int y, const std::wstring fmt, ...);
-void ascii_putf(int x, int y, color fg, std::wstring fmt, ...);
-void ascii_putf(int x, int y, color fg, color bg, std::wstring fmt, ...);
-void ascii_putf__(int x, int y, color fg, color bg, std::wstring &text);
+void ascii_putf(int x, int y, std::wstring const& fmt, ...);
+void ascii_putf(int x, int y, color fg, std::wstring const& fmt, ...);
+void ascii_putf(int x, int y, color fg, color bg, std::wstring const& fmt, ...);
+void ascii_putf__(int x, int y, color fg, color bg, std::wstring const& text);
 
 void ascii_display(void);
 
@@ -95,8 +95,8 @@ void ascii_draw_line(int x0, int y0, int x1, int y1, const char *tilename,
 void ascii_draw_line(int x0, int y0, int x1, int y1, wchar_t what, color c);
 void ascii_draw_line(int x0, int y0, int x1, int y1, Tilep what, color c);
 
-int ascii_strlen(std::wstring &);
-int ascii_strlen(std::wstring &buf, std::wstring *col);
+int ascii_strlen(std::wstring const&);
+int ascii_strlen(std::wstring const& buf, std::wstring *col);
 
 void ascii_clear_scissors(void);
 void ascii_set_scissors(point tl, point br);
