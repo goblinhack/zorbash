@@ -145,7 +145,7 @@ public:
     int gfx_is_weapon_use_anim {};
     int gfx_large_shadow_caster {};
     int gfx_oversized_but_sitting_on_the_ground {};
-    int gfx_show_hiddend {};
+    int gfx_show_outlined {};
     int gfx_small_shadow_caster {};
     int hunger_clock_freq_ms {};
     int internal_has_dir_anim {};
@@ -158,7 +158,7 @@ public:
     int is_corpse_on_death {};
     int is_corridor {};
     int is_cursor {};
-    int is_cursor_hover {};
+    int is_cursor_can_hover_over {};
     int is_deep_water {};
     int is_dirt {};
     int is_door {};
@@ -217,8 +217,8 @@ public:
     int is_rrr39 {};
     int is_rrr4 {};
     int is_rrr41 {};
-    int is_rrr42 {};
-    int is_rrr43 {};
+    int is_no_tile {};
+    int is_msg {};
     int is_attack_lunge {};
     int is_rrr5 {};
     int is_rrr6 {};
@@ -576,14 +576,14 @@ static inline int tp_is_rrr41 (Tpp t)
     return (t->is_rrr41);
 }
 
-static inline int tp_is_rrr42 (Tpp t)
+static inline int tp_is_no_tile (Tpp t)
 {
-    return (t->is_rrr42);
+    return (t->is_no_tile);
 }
 
-static inline int tp_is_rrr43 (Tpp t)
+static inline int tp_is_msg (Tpp t)
 {
-    return (t->is_rrr43);
+    return (t->is_msg);
 }
 
 static inline int tp_is_attack_lunge (Tpp t)
@@ -716,9 +716,9 @@ static inline int tp_is_secret_door (Tpp t)
     return (t->is_secret_door);
 }
 
-static inline int tp_is_cursor_hover (Tpp t)
+static inline int tp_is_cursor_can_hover_over (Tpp t)
 {
-    return (t->is_cursor_hover);
+    return (t->is_cursor_can_hover_over);
 }
 
 static inline int tp_is_cursor (Tpp t)
@@ -976,9 +976,9 @@ static inline int tp_is_weapon (Tpp t)
     return (t->is_weapon);
 }
 
-static inline int tp_gfx_show_hiddend (Tpp t)
+static inline int tp_gfx_show_outlined (Tpp t)
 {
-    return (t->gfx_show_hiddend);
+    return (t->gfx_show_outlined);
 }
 
 static inline int tp_gfx_large_shadow_caster (Tpp t)

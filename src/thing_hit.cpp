@@ -197,6 +197,9 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
 
     int hit_and_killed;
 
+    auto msg = thing_new("msg", get_interpolated_mid_at());
+    msg->set_msg("hello");
+
     hit_and_killed = ai_hit_actual(orig_hitter, real_hitter, hitter, damage);
 
     return (hit_and_killed);

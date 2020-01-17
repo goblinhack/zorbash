@@ -141,7 +141,7 @@ void thing_cursor_map_follow (void)
 
 void Thing::update_cursor (void)
 {
-    if (is_cursor_hover()) {
+    if (is_cursor_can_hover_over()) {
         if (is_blitted) {
             float tl_mx = game->config.video_pix_width * last_blit_tl.x;
             float br_mx = game->config.video_pix_width * last_blit_br.x;

@@ -217,9 +217,9 @@ int Thing::gfx_large_shadow_caster(void)
     return (tp_gfx_large_shadow_caster(tp()));
 }
 
-int Thing::gfx_show_hiddend(void)
+int Thing::gfx_show_outlined(void)
 {
-    return (tp_gfx_show_hiddend(tp()));
+    return (tp_gfx_show_outlined(tp()));
 }
 
 int Thing::gfx_oversized_but_sitting_on_the_ground(void)
@@ -572,14 +572,14 @@ int Thing::is_rrr41(void)
     return (tp_is_rrr41(tp()));
 }
 
-int Thing::is_rrr42(void)
+int Thing::is_no_tile(void)
 {
-    return (tp_is_rrr42(tp()));
+    return (tp_is_no_tile(tp()));
 }
 
-int Thing::is_rrr43(void)
+int Thing::is_msg(void)
 {
-    return (tp_is_rrr43(tp()));
+    return (tp_is_msg(tp()));
 }
 
 int Thing::is_attack_lunge(void)
@@ -602,9 +602,9 @@ int Thing::is_secret_door(void)
     return (tp_is_secret_door(tp()));
 }
 
-int Thing::is_cursor_hover(void)
+int Thing::is_cursor_can_hover_over(void)
 {
-    return (tp_is_cursor_hover(tp()));
+    return (tp_is_cursor_can_hover_over(tp()));
 }
 
 int Thing::is_cursor(void)
@@ -800,6 +800,25 @@ void Thing::set_rot (float v)
     new_monst();
 //con("%s", __FUNCTION__);
     monst->rot = v;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// msg
+////////////////////////////////////////////////////////////////////////////
+std::string Thing::get_msg (void)
+{
+    if (monst) {
+        return (monst->msg);
+    } else {
+        return ("");
+    }
+}
+
+void Thing::set_msg (std::string v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    monst->msg = v;
 }
 
 ////////////////////////////////////////////////////////////////////////////
