@@ -7,6 +7,7 @@
 #include "my_game.h"
 #include "my_tile.h"
 #include "my_thing.h"
+#include "my_sprintf.h"
 
 int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
                           Thingp real_hitter, // if an arrow, who fired it
@@ -47,6 +48,10 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
         MINICON("%%fg=yellow$The %s hits for %d damage!%%fg=reset$",
                 orig_hitter->to_name().c_str(), damage);
     }
+
+    auto msg = thing_new("msg", get_interpolated_mid_at());
+    msg->set_msg(string_sprintf("%%fg=red$-%d", damage));
+    msg->move_delta(fpoint(0, -3));
 
     auto h = decr_stats_health(damage);
     if (h <= 0) {
@@ -196,9 +201,6 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
     }
 
     int hit_and_killed;
-
-    auto msg = thing_new("msg", get_interpolated_mid_at());
-    msg->set_msg("hello");
 
     hit_and_killed = ai_hit_actual(orig_hitter, real_hitter, hitter, damage);
 

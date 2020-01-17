@@ -360,7 +360,7 @@ void ascii_set_fg2 (int x, int y, const wchar_t c)
     ascii_set_fg2(x, y, fixed_font->unicode_to_tile(c));
 }
 
-void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
+void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
 {_
     Tilep tile;
     int bg_set = false;
@@ -506,7 +506,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring &text)
     }
 }
 
-int ascii_strlen (std::wstring &text)
+int ascii_strlen (std::wstring const& text)
 {_
     auto text_iter = text.begin();
     int x = 0;
@@ -514,10 +514,6 @@ int ascii_strlen (std::wstring &text)
     while (text_iter != text.end()) {
         auto c = *text_iter;
         text_iter++;
-
-        if (c == L'`') {
-            c = L' ';
-        }
 
         if (c == L'%') {
             if (text_iter != text.end()) {
@@ -572,7 +568,7 @@ int ascii_strlen (std::wstring &text)
     return (x);
 }
 
-int ascii_strlen (std::wstring &text, std::wstring *col)
+int ascii_strlen (std::wstring const& text, std::wstring *col)
 {_
     auto text_iter = text.begin();
     int x = 0;
@@ -583,10 +579,6 @@ int ascii_strlen (std::wstring &text, std::wstring *col)
 
         if (c == L'\0') {
             break;
-        }
-
-        if (c == L'`') {
-            c = L' ';
         }
 
         if (c == L'%') {
@@ -705,7 +697,7 @@ std::string ascii_strip (std::string const& text)
 static void ascii_putf_ (int x, int y,
                          color fg,
                          color bg,
-                         std::wstring fmt, va_list args)
+                         std::wstring const& fmt, va_list args)
 {_
     wchar_t buf[MAXSHORTSTR];
 

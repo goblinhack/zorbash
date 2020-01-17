@@ -777,6 +777,7 @@ public:
     void log_(const char *fmt, va_list args); // compile error without
     void move_carried_items(void);
     void move_delta(fpoint, bool immediately);
+    void move_delta(fpoint);
     void move_to(fpoint to);
     void move_to_immediately(fpoint to);
     void remove_owner(void);

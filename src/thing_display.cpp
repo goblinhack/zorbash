@@ -665,6 +665,68 @@ void Thing::blit_shadow_section (const Tpp &tpp, const Tilep &tile,
     }
 }
 
+static int blit_msg_strlen (std::string const& text)
+{_
+    auto text_iter = text.begin();
+    int x = 0;
+
+    while (text_iter != text.end()) {
+        auto c = *text_iter;
+        text_iter++;
+
+        if (c == '%') {
+            if (text_iter != text.end()) {
+                if (*text_iter == '%') {
+                    text_iter++;
+                }
+            }
+
+            if (std::string(text_iter, text_iter + 3) == "fg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "bg=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2color(tmp, &len);
+                text_iter += len + 1;
+
+                continue;
+            } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                text_iter += 3;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tp(tmp, &len);
+                text_iter += len + 1;
+
+                continue;
+            } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                text_iter += 4;
+                continue;
+            } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                text_iter += 5;
+                auto tmp = std::string(text_iter, text.end());
+
+                int len = 0;
+                (void) string2tile(tmp, &len);
+                text_iter += len + 1;
+                continue;
+            }
+        }
+
+        x++;
+    }
+
+    return (x);
+}
+
 void Thing::blit_text (std::string const& text,
                        fpoint& blit_tl, fpoint& blit_br)
 {_
@@ -675,7 +737,15 @@ void Thing::blit_text (std::string const& text,
 // printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, scissors_br.x, scissors_br.y, scissors_enabled);
     tile = nullptr;
 
-    auto w = blit_br.x - blit_tl.x;
+    float w = blit_br.x - blit_tl.x;
+    float h = blit_br.y - blit_tl.y;
+    float cw = w / 6.0;
+    float ch = h / 3.0;
+    float l = blit_msg_strlen(text);
+
+    blit_tl.x -= cw * (l / 2);
+    blit_br.x = blit_tl.x + cw;
+    blit_br.y = blit_tl.y + ch;
 
     while (text_iter != text.end()) {
         auto c = *text_iter;
@@ -720,8 +790,8 @@ void Thing::blit_text (std::string const& text,
         tile_blit(tile, blit_tl, blit_br);
 
         tile = nullptr;
-        blit_tl.x += w;
-        blit_br.x += w;
+        blit_tl.x += cw;
+        blit_br.x += cw;
     }
 }
 
