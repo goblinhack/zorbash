@@ -79,7 +79,7 @@ _
         new_age_map();
     }
 
-    if (tp_is_monst(tpp) || tp_is_player(tpp)) {
+    if (tp_is_monst(tpp) || tp_is_player(tpp) || tp_is_movable(tpp)) {
         set_timestamp_born(time_get_time_ms_cached());
     }
 

@@ -16,19 +16,19 @@
 
 static timestamp_t old_timestamp_dungeon_created;
 static timestamp_t new_timestamp_dungeon_created;
-static timestamp_t ts_tmp;
+static timestamp_t T;
 static std::string game_load_error;
 bool game_load_headers_only;
 
 //
 // Save timestamps as a delta we can restore.
 //
-static timestamp_t load_timestamp (timestamp_t ts)
+static timestamp_t load (timestamp_t T)
 {
-    if (!ts) {
+    if (!T) {
         return (0);
     }
-    return (ts - old_timestamp_dungeon_created +
+    return (T - old_timestamp_dungeon_created +
             new_timestamp_dungeon_created);
 }
 
@@ -62,46 +62,84 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
         in >> bits(my.t->dmap_scent);
     }
 
-    in >> bits(my.t->tick);
-    in >> bits(my.t->bounce_count);
-    in >> bits(my.t->bounce_fade);
-    in >> bits(my.t->bounce_height);
-    in >> bits(my.t->lunge_to);
-    in >> bits(my.t->carrying);
-    in >> bits(my.t->gold);
-    in >> bits(my.t->interpolated_mid_at);
-    in >> bits(my.t->light_col);
-    in >> bits(my.t->light_quality);
-    in >> bits(my.t->light_strength);
-    in >> bits(my.t->owned_count);
-    in >> bits(my.t->owner_id);
-    in >> bits(my.t->rot);
-    in >> bits(my.t->stats_attack);
-    in >> bits(my.t->stats_attack_max);
-    in >> bits(my.t->stats_attack_rate_tenths);
-    in >> bits(my.t->stats_attacked_rate_tenths);
-    in >> bits(my.t->stats_defence);
-    in >> bits(my.t->stats_defence_max);
-    in >> bits(my.t->stats_health);
-    in >> bits(my.t->stats_health_max);
-    in >> bits(my.t->submerged_offset);
-    in >> bits(my.t->weapon_id);
-    in >> bits(my.t->weapon_id_carry_anim);
-    in >> bits(my.t->weapon_id_use_anim);
-
-    in >> bits(ts_tmp); my.t->timestamp_lunge_begin    = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_lunge_end      = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_bounce_begin   = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_bounce_end     = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_last_attacked  = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_last_attack    = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_flip_start     = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_move_begin     = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_move_end       = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_born           = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_hunger_tick    = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_ai_next        = load_timestamp(ts_tmp);
-    in >> bits(ts_tmp); my.t->timestamp_collision      = load_timestamp(ts_tmp);
+    /////////////////////////////////////////////////////////////////////////
+    // Keep these sorted alphabetically to make it easier to see additions
+    // and always update game_load.cpp and game_save.cpp
+    //
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+    /////////////////////////////////////////////////////////////////////////
+    /* color       */ in >> bits(my.t->light_col);
+    /* float       */ in >> bits(my.t->bounce_fade);
+    /* float       */ in >> bits(my.t->bounce_height);
+    /* float       */ in >> bits(my.t->fadeup_fade);
+    /* float       */ in >> bits(my.t->fadeup_height);
+    /* float       */ in >> bits(my.t->rot);
+    /* float       */ in >> bits(my.t->submerged_offset);
+    /* fpoint      */ in >> bits(my.t->interpolated_mid_at);
+    /* fpoint      */ in >> bits(my.t->lunge_to);
+    /* int         */ in >> bits(my.t->bounce_count);
+    /* int         */ in >> bits(my.t->gold);
+    /* int         */ in >> bits(my.t->light_quality);
+    /* int         */ in >> bits(my.t->light_strength);
+    /* int         */ in >> bits(my.t->owned_count);
+    /* int         */ in >> bits(my.t->stats01);
+    /* int         */ in >> bits(my.t->stats02);
+    /* int         */ in >> bits(my.t->stats03);
+    /* int         */ in >> bits(my.t->stats04);
+    /* int         */ in >> bits(my.t->stats05);
+    /* int         */ in >> bits(my.t->stats06);
+    /* int         */ in >> bits(my.t->stats07);
+    /* int         */ in >> bits(my.t->stats08);
+    /* int         */ in >> bits(my.t->stats09);
+    /* int         */ in >> bits(my.t->stats10);
+    /* int         */ in >> bits(my.t->stats11);
+    /* int         */ in >> bits(my.t->stats12);
+    /* int         */ in >> bits(my.t->stats13);
+    /* int         */ in >> bits(my.t->stats14);
+    /* int         */ in >> bits(my.t->stats15);
+    /* int         */ in >> bits(my.t->stats16);
+    /* int         */ in >> bits(my.t->stats17);
+    /* int         */ in >> bits(my.t->stats18);
+    /* int         */ in >> bits(my.t->stats19);
+    /* int         */ in >> bits(my.t->stats20);
+    /* int         */ in >> bits(my.t->stats_attack);
+    /* int         */ in >> bits(my.t->stats_attack_max);
+    /* int         */ in >> bits(my.t->stats_attack_rate_tenths);
+    /* int         */ in >> bits(my.t->stats_attacked_rate_tenths);
+    /* int         */ in >> bits(my.t->stats_defence);
+    /* int         */ in >> bits(my.t->stats_defence_max);
+    /* int         */ in >> bits(my.t->stats_health);
+    /* int         */ in >> bits(my.t->stats_health_max);
+    /* std::list<uint32_t> */ in >> bits(my.t->carrying);
+    /* std::string */ in >> bits(my.t->msg);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_ai_next       = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_born          = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_bounce_begin  = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_bounce_end    = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_collision     = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_fadeup_begin  = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_fadeup_end    = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_flip_start    = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_hunger_tick   = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_last_attack   = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_last_attacked = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_lunge_begin   = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_lunge_end     = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_move_begin    = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_move_end      = load(T);
+    /* uint32_t    */ in >> bits(my.t->owner_id);
+    /* uint32_t    */ in >> bits(my.t->tick);
+    /* uint32_t    */ in >> bits(my.t->weapon_id);
+    /* uint32_t    */ in >> bits(my.t->weapon_id_carry_anim);
+    /* uint32_t    */ in >> bits(my.t->weapon_id_use_anim);
+    /////////////////////////////////////////////////////////////////////////
+    // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    //
+    // Keep these sorted alphabetically to make it easier to see additions
+    // and always update game_load.cpp and game_save.cpp
+    /////////////////////////////////////////////////////////////////////////
 
     return (in);
 }
@@ -134,30 +172,45 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(my.t->tl);
     in >> bits(my.t->id); if (!my.t->id) { DIE("loaded a thing with no ID"); }
     in >> bits(my.t->tile_curr);
-    in >> bits(ts_tmp); my.t->timestamp_next_frame = load_timestamp(ts_tmp);
-
+    in >> bits(T); my.t->timestamp_next_frame = load(T);
     uint8_t dir; in >> dir; my.t->dir = dir;
 
     in >> bits(bits32);
     int shift = 0;
-    my.t->has_ever_moved     = (bits32 >> shift) & 1; shift++;
-    my.t->has_light          = (bits32 >> shift) & 1; shift++;
-    my.t->is_attached        = (bits32 >> shift) & 1; shift++;
-    my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
-    my.t->is_bloodied        = (bits32 >> shift) & 1; shift++;
-    my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
-    my.t->is_dead            = (bits32 >> shift) & 1; shift++;
-    my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;
-    my.t->is_hidden          = (bits32 >> shift) & 1; shift++;
-    my.t->is_hungry          = (bits32 >> shift) & 1; shift++;
-    my.t->is_moving          = (bits32 >> shift) & 1; shift++;
-    my.t->is_open            = (bits32 >> shift) & 1; shift++;
-    my.t->is_sleeping        = (bits32 >> shift) & 1; shift++;
-    my.t->is_starving        = (bits32 >> shift) & 1; shift++;
-    my.t->is_submerged       = (bits32 >> shift) & 1; shift++;
-    my.t->is_waiting_to_move = (bits32 >> shift) & 1; shift++;
-    my.t->is_pending_gc      = (bits32 >> shift) & 1; shift++;
-    my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
+
+    /////////////////////////////////////////////////////////////////////////
+    // Keep these sorted alphabetically to make it easier to see additions
+    // and always update game_load.cpp and game_save.cpp
+    //
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+    /////////////////////////////////////////////////////////////////////////
+    /* uint32_t */ my.t->has_ever_moved     = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->has_light          = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_attached        = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_bloodied        = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_dead            = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_hidden          = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_hungry          = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_moving          = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_open            = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_sleeping        = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_starving        = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_submerged       = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_waiting_to_move = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_pending_gc      = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
+    /////////////////////////////////////////////////////////////////////////
+    // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    //
+    // Keep these sorted alphabetically to make it easier to see additions
+    // and always update game_load.cpp and game_save.cpp
+    /////////////////////////////////////////////////////////////////////////
 
     if (my.t->has_light) {
         my.t->new_light(my.t->mid_at,

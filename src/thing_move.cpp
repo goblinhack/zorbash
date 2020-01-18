@@ -315,6 +315,18 @@ void Thing::bounce (double bounce_height,
     is_bouncing = true;
 }
 
+void Thing::fadeup (double fadeup_height,
+                    double fadeup_fade,
+                    timestamp_t ms)
+{
+    auto t = set_timestamp_fadeup_begin(time_get_time_ms_cached());
+    set_timestamp_fadeup_end(t + ms);
+
+    set_fadeup_height(fadeup_height);
+    set_fadeup_fade(fadeup_fade);
+    is_fadeup = true;
+}
+
 void Thing::lunge (fpoint to)
 {
     auto t = set_timestamp_lunge_begin(time_get_time_ms_cached());
@@ -353,6 +365,36 @@ double Thing::get_bounce (void)
 
     height *= sin(time_step * RAD_180);
     height *= get_bounce_height();
+
+    return (height);
+}
+
+double Thing::get_fadeup (void)
+{
+    if (!is_fadeup) {
+        return (0.0);
+    }
+
+    auto t = time_get_time_ms_cached();
+
+    if (t >= get_timestamp_fadeup_end()) {
+        is_fadeup = false;
+        gl_last_color.a = 0;
+        dead("fadeup finished");
+        return (0);
+    }
+
+    double time_step =
+        (double)(t - get_timestamp_fadeup_begin()) /
+        (double)(get_timestamp_fadeup_end() - get_timestamp_fadeup_begin());
+
+    gl_last_color.a = (uint8_t)(255.0 - (255.0 * time_step));
+    glcolor(gl_last_color);
+
+    double height = br.y - tl.y;
+
+    height *= sin(time_step * RAD_90);
+    height *= get_fadeup_height();
 
     return (height);
 }

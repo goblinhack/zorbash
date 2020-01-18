@@ -72,28 +72,29 @@ typedef struct {
 typedef struct Monst_ {
     AgeMap       *age_map = {};              // How old a cell is
     Dmap         *dmap_scent = {};
-    std::string  msg;                        // Text that floats on screen
     Lightp       light = {};                 // Have a light source?
-    int          light_strength {};
-    int          light_quality {};
+
+    /////////////////////////////////////////////////////////////////////////
+    // Keep these sorted alphabetically to make it easier to see additions
+    // and always update game_load.cpp and game_save.cpp
+    //
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+    /////////////////////////////////////////////////////////////////////////
     color        light_col {};
-    fpoint       interpolated_mid_at;
-    fpoint       lunge_to = {};              // When a monst attacks something
-    float        bounce_height = {};         // Percentage of tile height.
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
+    float        bounce_height = {};         // Percentage of tile height.
+    float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
+    float        fadeup_height = {};         // Percentage of tile height.
     float        rot = {};                   // GL co-orids
     float        submerged_offset = {};      // GL co-orids
-    uint32_t     tick = {};                  // Increments on completion of move
+    fpoint       interpolated_mid_at;
+    fpoint       lunge_to = {};              // When a monst attacks something
     int          bounce_count = {};
     int          gold = {};
-    int          stats_health = {};
-    int          stats_health_max = {};
-    int          stats_defence = {};
-    int          stats_defence_max = {};
-    int          stats_attack = {};
-    int          stats_attack_max = {};
-    int          stats_attack_rate_tenths = {};
-    int          stats_attacked_rate_tenths = {};
+    int          light_quality {};
+    int          light_strength {};
+    int          owned_count = {};           // How many things this thing owns.
     int          stats01 = {};
     int          stats02 = {};
     int          stats03 = {};
@@ -114,25 +115,44 @@ typedef struct Monst_ {
     int          stats18 = {};
     int          stats19 = {};
     int          stats20 = {};
-    int          owned_count = {};           // How many things this thing owns.
-    timestamp_t  timestamp_lunge_begin {};
-    timestamp_t  timestamp_lunge_end {};
+    int          stats_attack = {};
+    int          stats_attack_max = {};
+    int          stats_attack_rate_tenths = {};
+    int          stats_attacked_rate_tenths = {};
+    int          stats_defence = {};
+    int          stats_defence_max = {};
+    int          stats_health = {};
+    int          stats_health_max = {};
+    std::list<uint32_t> carrying;
+    std::string  msg;                        // Text that floats on screen
+    timestamp_t  timestamp_ai_next {};
+    timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
-    timestamp_t  timestamp_last_attacked {};
-    timestamp_t  timestamp_last_attack {};
+    timestamp_t  timestamp_collision {};
+    timestamp_t  timestamp_fadeup_begin {};
+    timestamp_t  timestamp_fadeup_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
+    timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
+    timestamp_t  timestamp_last_attack {};
+    timestamp_t  timestamp_last_attacked {};
+    timestamp_t  timestamp_lunge_begin {};
+    timestamp_t  timestamp_lunge_end {};
     timestamp_t  timestamp_move_begin {};
     timestamp_t  timestamp_move_end {};
-    timestamp_t  timestamp_born {};
-    timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
-    timestamp_t  timestamp_ai_next {};
-    timestamp_t  timestamp_collision {};
     uint32_t     owner_id {};                // Who created this thing?
+    uint32_t     tick = {};                  // Increments on completion of move
+    uint32_t     weapon_id {};               // Current weapon
     uint32_t     weapon_id_carry_anim {};
     uint32_t     weapon_id_use_anim {};
-    uint32_t     weapon_id {};               // Current weapon
-    std::list<uint32_t> carrying;
+    /////////////////////////////////////////////////////////////////////////
+    // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    //
+    // Keep these sorted alphabetically to make it easier to see additions
+    // and always update game_load.cpp and game_save.cpp
+    /////////////////////////////////////////////////////////////////////////
+
     void dump(std::string prefix, std::ostream &out);
     void log(std::string prefix);
 } Monst;
@@ -156,12 +176,21 @@ public:
     uint16_t tile_curr            {};
     timestamp_t timestamp_next_frame {};
     uint32_t dir:4                {}; // Direction
+
+    /////////////////////////////////////////////////////////////////////////
+    // Keep these sorted alphabetically to make it easier to see additions
+    // and always update game_load.cpp and game_save.cpp
+    //
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+    /////////////////////////////////////////////////////////////////////////
     uint32_t has_ever_moved:1     {};
     uint32_t has_light:1          {};
     uint32_t is_attached:1        {};
     uint32_t is_being_destroyed:1 {};
     uint32_t is_bloodied:1        {};
     uint32_t is_bouncing:1        {};
+    uint32_t is_fadeup:1          {};
     uint32_t is_dead:1            {};
     uint32_t is_facing_left:1     {};
     uint32_t is_hidden:1          {};
@@ -174,6 +203,13 @@ public:
     uint32_t is_waiting_to_move:1 {};
     uint32_t is_pending_gc:1      {};
     uint32_t is_blitted:1         {};
+    /////////////////////////////////////////////////////////////////////////
+    // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    //
+    // Keep these sorted alphabetically to make it easier to see additions
+    // and always update game_load.cpp and game_save.cpp
+    /////////////////////////////////////////////////////////////////////////
 
 private:
     //
@@ -224,6 +260,12 @@ public:
 
     void set_bounce_count(int);
     int get_bounce_count(void);
+
+    void set_fadeup_height(float);
+    float get_fadeup_height(void);
+
+    void set_fadeup_fade(float);
+    float get_fadeup_fade(void);
 
     void set_rot(float);
     float get_rot(void);
@@ -479,6 +521,20 @@ public:
     timestamp_t decr_timestamp_bounce_end(void);
     timestamp_t incr_timestamp_bounce_end(void);
 
+    timestamp_t set_timestamp_fadeup_begin(timestamp_t);
+    timestamp_t get_timestamp_fadeup_begin(void);
+    timestamp_t decr_timestamp_fadeup_begin(timestamp_t);
+    timestamp_t incr_timestamp_fadeup_begin(timestamp_t);
+    timestamp_t decr_timestamp_fadeup_begin(void);
+    timestamp_t incr_timestamp_fadeup_begin(void);
+
+    timestamp_t set_timestamp_fadeup_end(timestamp_t);
+    timestamp_t get_timestamp_fadeup_end(void);
+    timestamp_t decr_timestamp_fadeup_end(timestamp_t);
+    timestamp_t incr_timestamp_fadeup_end(timestamp_t);
+    timestamp_t decr_timestamp_fadeup_end(void);
+    timestamp_t incr_timestamp_fadeup_end(void);
+
     timestamp_t set_timestamp_last_attacked(timestamp_t);
     timestamp_t get_timestamp_last_attacked(void);
     timestamp_t decr_timestamp_last_attacked(timestamp_t);
@@ -582,6 +638,7 @@ public:
     bool will_prefer(const Thingp it);
     const char *to_cstring(void);
     double get_bounce(void);
+    double get_fadeup(void);
     double get_lunge(void);
     fpoint ai_get_next_hop(void);
     fpoint set_interpolated_mid_at(fpoint);
@@ -737,6 +794,7 @@ public:
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void lunge(fpoint tt);
     void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);
+    void fadeup(double fadeup_height, double fadeup_fade, timestamp_t ms);
     void carry(Thingp w);
     void collision_check_do();
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

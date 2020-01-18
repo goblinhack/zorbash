@@ -50,8 +50,13 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     }
 
     auto msg = thing_new("msg", get_interpolated_mid_at());
-    msg->set_msg(string_sprintf("%%fg=red$-%d", damage));
-    msg->move_delta(fpoint(0, -3));
+
+    if (is_player()) {
+        msg->set_msg(string_sprintf("%%fg=red$-%d", damage));
+    } else {
+        msg->set_msg(string_sprintf("%%fg=green$-%d", damage));
+    }
+    msg->fadeup(4.0, 0.05, 2000);
 
     auto h = decr_stats_health(damage);
     if (h <= 0) {
