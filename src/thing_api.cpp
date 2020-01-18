@@ -784,6 +784,44 @@ void Thing::set_bounce_count (int v)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// fadeup_height
+////////////////////////////////////////////////////////////////////////////
+float Thing::get_fadeup_height (void)
+{
+    if (monst) {
+        return (monst->fadeup_height);
+    } else {
+        return (0);
+    }
+}
+
+void Thing::set_fadeup_height (float v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    monst->fadeup_height = v;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// fadeup_fade
+////////////////////////////////////////////////////////////////////////////
+float Thing::get_fadeup_fade (void)
+{
+    if (monst) {
+        return (monst->fadeup_fade);
+    } else {
+        return (0);
+    }
+}
+
+void Thing::set_fadeup_fade (float v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    monst->fadeup_fade = v;
+}
+
+////////////////////////////////////////////////////////////////////////////
 // rot
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_rot (void)
@@ -2786,6 +2824,100 @@ timestamp_t Thing::incr_timestamp_bounce_end (void)
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_fadeup_begin
+////////////////////////////////////////////////////////////////////////////
+timestamp_t Thing::get_timestamp_fadeup_begin (void)
+{
+    if (monst) {
+        return (monst->timestamp_fadeup_begin);
+    } else {
+        return (0);
+    }
+}
+
+timestamp_t Thing::set_timestamp_fadeup_begin (timestamp_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_begin = v);
+}
+
+timestamp_t Thing::decr_timestamp_fadeup_begin (timestamp_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_begin -= v);
+}
+
+timestamp_t Thing::incr_timestamp_fadeup_begin (timestamp_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_begin += v);
+}
+
+timestamp_t Thing::decr_timestamp_fadeup_begin (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_begin--);
+}
+
+timestamp_t Thing::incr_timestamp_fadeup_begin (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_begin++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// timestamp_fadeup_end
+////////////////////////////////////////////////////////////////////////////
+timestamp_t Thing::get_timestamp_fadeup_end (void)
+{
+    if (monst) {
+        return (monst->timestamp_fadeup_end);
+    } else {
+        return (0);
+    }
+}
+
+timestamp_t Thing::set_timestamp_fadeup_end (timestamp_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_end = v);
+}
+
+timestamp_t Thing::decr_timestamp_fadeup_end (timestamp_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_end -= v);
+}
+
+timestamp_t Thing::incr_timestamp_fadeup_end (timestamp_t v)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_end += v);
+}
+
+timestamp_t Thing::decr_timestamp_fadeup_end (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_end--);
+}
+
+timestamp_t Thing::incr_timestamp_fadeup_end (void)
+{
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monst->timestamp_fadeup_end++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

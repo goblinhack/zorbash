@@ -547,6 +547,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     }
 
     double height = get_bounce() / 2.0;
+    height += get_fadeup();
     shadow_tl.x -= height;
     shadow_tr.x -= height;
     shadow_bl.x -= height;
@@ -737,9 +738,10 @@ void Thing::blit_text (std::string const& text,
 // printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, scissors_br.x, scissors_br.y, scissors_enabled);
     tile = nullptr;
 
+    auto a = gl_last_color.a;
     float w = blit_br.x - blit_tl.x;
     float h = blit_br.y - blit_tl.y;
-    float cw = w / 6.0;
+    float cw = w / 4.0;
     float ch = h / 3.0;
     float l = blit_msg_strlen(text);
 
@@ -786,6 +788,7 @@ void Thing::blit_text (std::string const& text,
 
         tile = fixed_font->unicode_to_tile(c);
 
+        fg.a = a;
         glcolor(fg);
         tile_blit(tile, blit_tl, blit_br);
 
@@ -942,10 +945,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         gl_rotate = get_rot();
     }
 
-    if (is_msg()) {
-        blit_text(get_msg(), blit_tl, blit_br);
-    }
-
     if (likely(blit)) {
         if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
             if (is_submerged) {
@@ -958,8 +957,13 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         }
     }
     double height = get_bounce() / 2.0;
+    height += get_fadeup();
     blit_tl.y -= height;
     blit_br.y -= height;
+
+    if (is_msg()) {
+        blit_text(get_msg(), blit_tl, blit_br);
+    }
 
     if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
         if (is_submerged) {
