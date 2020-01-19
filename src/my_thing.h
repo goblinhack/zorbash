@@ -737,7 +737,7 @@ public:
     int is_rrr38(void);
     int is_rrr39(void);
     int is_rrr4(void);
-    int is_rrr41(void);
+    int is_blood_splatter(void);
     int is_no_tile(void);
     int is_msg(void);
     int is_attack_lunge(void);

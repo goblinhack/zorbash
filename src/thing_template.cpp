@@ -14,6 +14,7 @@ static Tpidmap tp_monst;
 static Tpidmap tp_food;
 static Tpidmap tp_dirt;
 static Tpidmap tp_ripples;
+static Tpidmap tp_blood_splatters;
 static Tpidmap tp_keys;
 static Tpidmap tp_blood;
 static Tpidmap tp_wall;
@@ -111,6 +112,9 @@ void tp_init_after_loading (void)
         if (tp_is_ripple(tp)) {
             tp_ripples.push_back(tp);
         }
+        if (tp_is_blood_splatter(tp)) {
+            tp_blood_splatters.push_back(tp);
+        }
         if (tp_is_key(tp)) {
             tp_keys.push_back(tp);
         }
@@ -150,6 +154,11 @@ Tpp tp_random_dirt (void)
 Tpp tp_random_ripple (void)
 {_
     return get(tp_ripples, myrand() % tp_ripples.size());
+}
+
+Tpp tp_random_blood_splatter (void)
+{_
+    return get(tp_blood_splatters, myrand() % tp_blood_splatters.size());
 }
 
 Tpp tp_random_key (void)

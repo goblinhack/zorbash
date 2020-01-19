@@ -267,8 +267,8 @@ class Tp:
     def set_is_rrr39(self, value):
         zx.tp_set_is_rrr39(self, value)
 
-    def set_is_rrr41(self, value):
-        zx.tp_set_is_rrr41(self, value)
+    def set_is_blood_splatter(self, value):
+        zx.tp_set_is_blood_splatter(self, value)
 
     def set_is_no_tile(self, value):
         zx.tp_set_is_no_tile(self, value)

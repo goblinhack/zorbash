@@ -1705,7 +1705,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr38)
     TP_SET_DECL(is_rrr39)
     TP_SET_DECL(is_rrr4)
-    TP_SET_DECL(is_rrr41)
+    TP_SET_DECL(is_blood_splatter)
     TP_SET_DECL(is_no_tile)
     TP_SET_DECL(is_msg)
     TP_SET_DECL(is_attack_lunge)

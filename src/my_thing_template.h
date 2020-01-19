@@ -216,7 +216,7 @@ public:
     int is_rrr38 {};
     int is_rrr39 {};
     int is_rrr4 {};
-    int is_rrr41 {};
+    int is_blood_splatter {};
     int is_no_tile {};
     int is_msg {};
     int is_attack_lunge {};
@@ -279,6 +279,7 @@ Tpp tp_random_monst(void);
 Tpp tp_random_food(void);
 Tpp tp_random_dirt(void);
 Tpp tp_random_ripple(void);
+Tpp tp_random_blood_splatter(void);
 Tpp tp_random_key(void);
 Tpp tp_random_blood(void);
 Tpp tp_random_wall(void);
@@ -571,9 +572,9 @@ static inline int tp_is_bleeder (Tpp t)
     return (t->is_bleeder);
 }
 
-static inline int tp_is_rrr41 (Tpp t)
+static inline int tp_is_blood_splatter (Tpp t)
 {
-    return (t->is_rrr41);
+    return (t->is_blood_splatter);
 }
 
 static inline int tp_is_no_tile (Tpp t)

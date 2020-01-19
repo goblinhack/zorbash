@@ -567,9 +567,9 @@ int Thing::is_rrr4(void)
     return (tp_is_rrr4(tp()));
 }
 
-int Thing::is_rrr41(void)
+int Thing::is_blood_splatter(void)
 {
-    return (tp_is_rrr41(tp()));
+    return (tp_is_blood_splatter(tp()));
 }
 
 int Thing::is_no_tile(void)
