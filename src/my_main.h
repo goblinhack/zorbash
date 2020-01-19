@@ -88,7 +88,7 @@
 // Things on map
 ////////////////////////////////////////////////////////////////////////////
 
-#define MAP_SLOTS                   16
+#define MAP_SLOTS                   32
 #define MAX_THINGS                  (1 << 15)
 #define MAX_THINGS_MASK             (MAX_THINGS - 1)
 #define MAX_THING_COLL_DELAY_TENTHS 1
