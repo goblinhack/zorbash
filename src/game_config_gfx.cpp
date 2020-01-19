@@ -55,7 +55,7 @@ uint8_t game_config_gfx_back (Widp w, int32_t x, int32_t y, uint32_t button)
 uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {
     CON("USERCFG: toggle vsync");
-    game->config.vsync_enable = !game->config.vsync_enable;
+    game->config.gfx_vsync_enable = !game->config.gfx_vsync_enable;
     game->config_gfx_select();
     return (true);
 }
@@ -293,7 +293,7 @@ void Game::config_gfx_select (void)
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_vsync_enable_toggle);
 
-        if (game->config.vsync_enable) {
+        if (game->config.gfx_vsync_enable) {
             wid_set_text(w, "True");
         } else {
             wid_set_text(w, "False");

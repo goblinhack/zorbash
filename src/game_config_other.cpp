@@ -45,7 +45,7 @@ uint8_t game_config_other_back (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
-uint8_t game_config_other_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {
     CON("USERCFG: toggle debug_mode");
     game->config.debug_mode = !game->config.debug_mode;
@@ -233,7 +233,7 @@ void Game::config_other_select (void)
         point br = {width / 2 + 6, y_at + 2};
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_other_debug_mode_toggle);
+        wid_set_on_mouse_up(w, game_config_debug_mode_toggle);
 
         if (game->config.debug_mode) {
             wid_set_text(w, "True");

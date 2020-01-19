@@ -54,7 +54,8 @@ uint8_t wid_console_init (void)
     command_add(config_gfx_show_hidden_set, "set gfx show hidden [01]", "enable map floors and walls only");
     command_add(config_gfx_lights_set, "set gfx lights [01]", "enable map lights");
     command_add(config_gfx_zoom_set, "set gfx zoom [0123456789]", "map zoom");
-    command_add(config_vsync_enable, "set vsync [01]", "enable vertical sync enable");
+    command_add(config_gfx_vsync_enable, "set vsync [01]", "enable vertical sync enable");
+    command_add(config_debug_mode, "set debug [01]", "enable debug mode");
     command_add(sdl_user_exit, "quit", "exit game");
 
     wid_console_wid_create();

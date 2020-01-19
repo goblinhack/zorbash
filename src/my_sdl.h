@@ -105,5 +105,6 @@ extern void config_gfx_zoom_out(void);
 extern void config_gfx_zoom_update(void);
 extern void config_update_all(void);
 extern uint8_t config_gfx_zoom_set(tokensp, void *context);
-extern uint8_t config_vsync_enable(tokensp, void *context);
+extern uint8_t config_gfx_vsync_enable(tokensp, void *context);
+extern uint8_t config_debug_mode(tokensp, void *context);
 #endif

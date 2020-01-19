@@ -16,8 +16,6 @@
 
 uint8_t croaked;
 
-static bool debug = false;
-
 static void get_timestamp (char *buf, int32_t len)
 {
 #ifdef ENABLE_FULL_TIMESTAMPS
@@ -464,7 +462,7 @@ void DYING (const char *fmt, ...)
 
 void DBG (const char *fmt, ...)
 {
-    if (!debug) {
+    if (game && !game->config.debug_mode) {
         return;
     }
     va_list args;
@@ -717,7 +715,7 @@ void Thing::err (const char *fmt, ...)
 void Thing::dbg (const char *fmt, ...)
 {
     verify(this);
-    if (!debug) {
+    if (game && !game->config.debug_mode) {
         return;
     }
     auto t = this;
@@ -862,7 +860,7 @@ void Light::err (const char *fmt, ...)
 void Light::dbg (const char *fmt, ...)
 {
     verify(this);
-    if (!debug) {
+    if (game && !game->config.debug_mode) {
         return;
     }
     auto t = this;

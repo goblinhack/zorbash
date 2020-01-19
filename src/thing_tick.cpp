@@ -44,6 +44,7 @@ void Thing::achieve_goals_in_life (void)
                                                   &target_attacked,
                                                   &target_overlaps);
                 if (target_attacked) {
+                    is_move_done = true;
                     log("cannot move to %f,%f, attack", to.x, to.y);
                 } else {
                     log("cannot move to %f,%f, collision", to.x, to.y);
@@ -52,9 +53,12 @@ void Thing::achieve_goals_in_life (void)
                 return;
             }
 
+            is_move_done = true;
             log("can move to %f,%f", to.x, to.y);
             move(to);
         }
+    } else {
+        is_move_done = true;
     }
 }
 
@@ -134,9 +138,12 @@ void Thing::tick (void)
             //
             auto tick = get_tick();
             if (tick < game->tick_current) {
-                incr_tick();
-                is_waiting_to_move = false;
+                is_move_done = false;
                 achieve_goals_in_life();
+                if (is_move_done) {
+                    incr_tick();
+                    is_waiting_to_move = false;
+                }
             }
         }
     }

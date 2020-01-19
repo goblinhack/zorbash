@@ -282,11 +282,11 @@ public:
     bool               gfx_show_hidden              = false;
     bool               gfx_lights                   = true;
     uint32_t           gfx_zoom                     = 4;
+    bool               gfx_vsync_enable             = true;
     bool               debug_mode                   = false;
     bool               arcade_mode                  = false;
     uint32_t           sound_volume                 = {};
     uint32_t           music_volume                 = {};
-    bool               vsync_enable                 = true;
     bool               fullscreen                   = false;
     int32_t            video_pix_width              = {};
     int32_t            video_pix_height             = {};

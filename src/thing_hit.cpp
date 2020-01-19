@@ -49,8 +49,10 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
                 orig_hitter->to_name().c_str(), damage);
     }
 
-    auto msg = thing_new("msg", get_interpolated_mid_at());
-
+    //
+    // Visible hit indication
+    //
+    auto msg = thing_new("msg", mid_at);
     if (is_player()) {
         msg->set_msg(string_sprintf("%%fg=red$-%d", damage));
     } else {
@@ -111,12 +113,10 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         //
         // Don't attack more than allowed
         //
-        if (game->config.arcade_mode) {
-            if (!time_have_x_tenths_passed_since(
-                    hitter->get_stats_attack_rate_tenths(),
-                    hitter->get_timestamp_last_attack())) {
-                return (false);
-            }
+        if (!time_have_x_tenths_passed_since(
+                hitter->get_stats_attack_rate_tenths(),
+                hitter->get_timestamp_last_attack())) {
+            return (false);
         }
         hitter->set_timestamp_last_attack(time_get_time_ms_cached());
     }

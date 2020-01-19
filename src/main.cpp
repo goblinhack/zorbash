@@ -35,7 +35,6 @@ char *WORLD_PATH;
 char *PYTHON_PATH;
 char *TTF_PATH;
 char *GFX_PATH;
-int debug;
 static bool opt_new_game;
 static bool opt_debug_mode;
 static bool opt_arcade_mode;

@@ -547,7 +547,12 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     }
 
     double height = get_bounce() / 2.0;
-    height += get_fadeup();
+    double fadeup = get_fadeup();
+    if (fadeup < 0) {
+        return;
+    }
+    height += fadeup;
+
     shadow_tl.x -= height;
     shadow_tr.x -= height;
     shadow_bl.x -= height;
@@ -790,7 +795,7 @@ void Thing::blit_text (std::string const& text,
 
         fg.a = a;
         glcolor(fg);
-        tile_blit(tile, blit_tl, blit_br);
+        tile_blit_outline(tile, blit_tl, blit_br);
 
         tile = nullptr;
         blit_tl.x += cw;
@@ -956,8 +961,14 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             }
         }
     }
+
     double height = get_bounce() / 2.0;
-    height += get_fadeup();
+    double fadeup = get_fadeup();
+    if (fadeup < 0) {
+        return;
+    }
+    height += fadeup;
+
     blit_tl.y -= height;
     blit_br.y -= height;
 
@@ -1021,11 +1032,6 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         return;
     }
 
-    if (is_msg()) {
-        CON("TODO");
-        return;
-    }
-
     auto tpp = tp();
     ThingTiles tiles;
     get_tiles(&tiles);
@@ -1037,7 +1043,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 
     std::swap(blit_tl.y, blit_br.y);
 
-    if (tile_get_height(tile) != TILE_HEIGHT) {
+    if (tile && tile_get_height(tile) != TILE_HEIGHT) {
         if (tp_gfx_oversized_but_sitting_on_the_ground(tpp)) {
             blit_br.y += diff;
             blit_tl.y += diff;
@@ -1084,6 +1090,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 
     if (is_monst() ||
         is_player() ||
+        is_msg() ||
         tp_gfx_is_weapon_use_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
 
@@ -1119,6 +1126,20 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
             }
             is_submerged = true;
         }
+    }
+
+    double height = get_bounce() / 2.0;
+    double fadeup = get_fadeup();
+    if (fadeup < 0) {
+        return;
+    }
+    height += fadeup;
+
+    blit_tl.y += height;
+    blit_br.y += height;
+
+    if (is_msg()) {
+        blit_text(get_msg(), blit_tl, blit_br);
     }
 
     if (tp_gfx_show_outlined(tpp)) {

@@ -188,21 +188,22 @@ public:
     uint32_t has_light:1          {};
     uint32_t is_attached:1        {};
     uint32_t is_being_destroyed:1 {};
+    uint32_t is_blitted:1         {};
     uint32_t is_bloodied:1        {};
     uint32_t is_bouncing:1        {};
-    uint32_t is_fadeup:1          {};
     uint32_t is_dead:1            {};
     uint32_t is_facing_left:1     {};
+    uint32_t is_fadeup:1          {};
     uint32_t is_hidden:1          {};
     uint32_t is_hungry:1          {};
+    uint32_t is_move_done:1       {}; // has moved/hit and finished its move
     uint32_t is_moving:1          {};
     uint32_t is_open:1            {};
+    uint32_t is_pending_gc:1      {};
     uint32_t is_sleeping:1        {};
     uint32_t is_starving:1        {};
     uint32_t is_submerged:1       {};
     uint32_t is_waiting_to_move:1 {};
-    uint32_t is_pending_gc:1      {};
-    uint32_t is_blitted:1         {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -834,7 +835,7 @@ public:
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args); // compile error without
     void move_carried_items(void);
-    void move_delta(fpoint, bool immediately);
+    void move_set_dir_from_delta(fpoint);
     void move_delta(fpoint);
     void move_to(fpoint to);
     void move_to_immediately(fpoint to);
