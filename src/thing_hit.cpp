@@ -58,6 +58,12 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     } else {
         msg->set_msg(string_sprintf("%%fg=green$-%d", damage));
     }
+    auto splat = thing_new(tp_name(tp_random_blood_splatter()), 
+                           mid_at - fpoint(0.5, 0.5));
+    splat->con("blood");
+    orig_hitter->con("hitter");
+    con("the hit");
+
     msg->fadeup(4.0, 0.05, 2000);
 
     auto h = decr_stats_health(damage);
