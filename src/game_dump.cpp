@@ -59,6 +59,7 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "is_facing_left      " << is_facing_left       << std::endl;
     out << pfx << "is_hidden           " << is_hidden            << std::endl;
     out << pfx << "is_hungry           " << is_hungry            << std::endl;
+    out << pfx << "is_move_done        " << is_move_done         << std::endl;
     out << pfx << "is_moving           " << is_moving            << std::endl;
     out << pfx << "is_open             " << is_open              << std::endl;
     out << pfx << "is_sleeping         " << is_sleeping          << std::endl;
@@ -120,7 +121,7 @@ void Config::dump (std::string pfx, std::ostream &out)
     out << pfx << "arcade_mode        " << arcade_mode << std::endl;
     out << pfx << "sound_volume       " << sound_volume << std::endl;
     out << pfx << "music_volume       " << music_volume << std::endl;
-    out << pfx << "vsync_enable       " << vsync_enable << std::endl;
+    out << pfx << "gfx_vsync_enable   " << gfx_vsync_enable << std::endl;
     out << pfx << "fullscreen         " << fullscreen << std::endl;
     out << pfx << "video_pix_width    " << video_pix_width << std::endl;
     out << pfx << "video_pix_height   " << video_pix_height << std::endl;

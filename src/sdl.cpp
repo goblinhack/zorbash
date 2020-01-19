@@ -1222,17 +1222,17 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
 //
 // User has entered a command, run it
 //
-uint8_t config_vsync_enable (tokens_t *tokens, void *context)
+uint8_t config_gfx_vsync_enable (tokens_t *tokens, void *context)
 {_
     char *s = tokens->args[2];
 
     if (!s || (*s == '\0')) {
-        game->config.vsync_enable = true;
+        game->config.gfx_vsync_enable = true;
     } else {
-        game->config.vsync_enable = strtol(s, 0, 10) ? 1 : 0;
+        game->config.gfx_vsync_enable = strtol(s, 0, 10) ? 1 : 0;
     }
 
-    if (game->config.vsync_enable) {
+    if (game->config.gfx_vsync_enable) {
         CON("USERCFG: Vsync enabled");
         SDL_GL_SetSwapInterval(1);
     } else {
@@ -1243,19 +1243,43 @@ uint8_t config_vsync_enable (tokens_t *tokens, void *context)
     return (true);
 }
 
-static void config_vsync_update (void)
+static void config_gfx_vsync_update (void)
 {_
-    if (game->config.vsync_enable) {
+    if (game->config.gfx_vsync_enable) {
         SDL_GL_SetSwapInterval(1);
     } else {
         SDL_GL_SetSwapInterval(0);
     }
 }
 
+//
+// User has entered a command, run it
+//
+uint8_t config_debug_mode (tokens_t *tokens, void *context)
+{_
+    char *s = tokens->args[2];
+
+    if (!s || (*s == '\0')) {
+        game->config.debug_mode = true;
+    } else {
+        game->config.debug_mode = strtol(s, 0, 10) ? 1 : 0;
+    }
+
+    if (game->config.debug_mode) {
+        CON("USERCFG: Debug mode enabled");
+        SDL_GL_SetSwapInterval(1);
+    } else {
+        CON("USERCFG: Debug mode disabled");
+        SDL_GL_SetSwapInterval(0);
+    }
+
+    return (true);
+}
+
 void config_update_all (void)
 {
     config_gfx_zoom_update();
-    config_vsync_update();
+    config_gfx_vsync_update();
 }
 
 //
@@ -1303,7 +1327,7 @@ void sdl_loop (void)
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
     //
 
-    if (game->config.vsync_enable) {
+    if (game->config.gfx_vsync_enable) {
         SDL_GL_SetSwapInterval(1);
     } else {
         SDL_GL_SetSwapInterval(0);

@@ -41,6 +41,13 @@ uint8_t game_config_top_other (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
+uint8_t game_config_top_back (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    game_config_top_destroy();
+    game->main_menu_select();
+    return (true);
+}
+
 uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
 {
     switch (key->mod) {
@@ -116,7 +123,7 @@ void Game::config_top_select (void)
     point tl = {ASCII_WIDTH / 2 - WID_POPUP_WIDTH_NORMAL / 2,
                 ASCII_HEIGHT / 2 - 5};
     point br = {ASCII_WIDTH / 2 + WID_POPUP_WIDTH_NORMAL / 2 - 1,
-                ASCII_HEIGHT / 2 + 7};
+                ASCII_HEIGHT / 2 + 10};
     auto width = br.x - tl.x - 2;
 
     game_config_top_window = new WidPopup(tl, br, nullptr, "");
@@ -148,19 +155,31 @@ void Game::config_top_select (void)
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_sound);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "%%fg=white$S%%fg=reset$ound");
+        wid_set_text(w, "%%fg=white$S%%fg=reset$ound and music");
     }
     y_at += 3;
     {
         auto p = game_config_top_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Other");
+        auto w = wid_new_square_button(p, "Other stuffs");
 
         point tl = {0, y_at};
         point br = {width, y_at + 2};
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_other);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "%%fg=white$O%%fg=reset$ther");
+        wid_set_text(w, "%%fg=white$O%%fg=reset$ther stuffs");
+    }
+    y_at += 3;
+    {
+        auto p = game_config_top_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Back");
+
+        point tl = {0, y_at};
+        point br = {width, y_at + 2};
+        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, game_config_top_back);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
     }
 
     wid_update(game_config_top_window->wid_text_area->wid_text_area);

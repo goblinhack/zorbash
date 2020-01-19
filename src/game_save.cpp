@@ -160,21 +160,22 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->has_light          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_attached        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_being_destroyed << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_bloodied        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_bouncing        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_fadeup          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_dead            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_facing_left     << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_fadeup          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_hidden          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_hungry          << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_move_done       << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_moving          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_open            << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_pending_gc      << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_sleeping        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_starving        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_submerged       << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_waiting_to_move << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_pending_gc      << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -245,11 +246,11 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.gfx_show_hidden);
     out << bits(my.t.gfx_lights);
     out << bits(my.t.gfx_zoom);
+    out << bits(my.t.gfx_vsync_enable);
     out << bits(my.t.debug_mode);
     out << bits(my.t.arcade_mode);
     out << bits(my.t.sound_volume);
     out << bits(my.t.music_volume);
-    out << bits(my.t.vsync_enable);
     out << bits(my.t.fullscreen);
     out << bits(my.t.video_pix_width);
     out << bits(my.t.video_pix_height);

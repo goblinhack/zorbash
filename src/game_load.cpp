@@ -189,21 +189,22 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->has_light          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_attached        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_bloodied        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_dead            = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_hidden          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_hungry          = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_move_done       = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_moving          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_open            = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_pending_gc      = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_sleeping        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_starving        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_submerged       = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_waiting_to_move = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_pending_gc      = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -298,11 +299,11 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.gfx_show_hidden);
     in >> bits(my.t.gfx_lights);
     in >> bits(my.t.gfx_zoom);
+    in >> bits(my.t.gfx_vsync_enable);
     in >> bits(my.t.debug_mode);
     in >> bits(my.t.arcade_mode);
     in >> bits(my.t.sound_volume);
     in >> bits(my.t.music_volume);
-    in >> bits(my.t.vsync_enable);
     in >> bits(my.t.fullscreen);
     in >> bits(my.t.video_pix_width);
     in >> bits(my.t.video_pix_height);

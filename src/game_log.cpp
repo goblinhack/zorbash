@@ -52,20 +52,21 @@ void Thing::log (std::string pfx)
     LOG("%s has_light            %u", pfx.c_str(), has_light);
     LOG("%s is_attached          %u", pfx.c_str(), is_attached);
     LOG("%s is_being_destroyed   %u", pfx.c_str(), is_being_destroyed);
+    LOG("%s is_blitted           %u", pfx.c_str(), is_blitted);
     LOG("%s is_bloodied          %u", pfx.c_str(), is_bloodied);
     LOG("%s is_bouncing          %u", pfx.c_str(), is_bouncing);
     LOG("%s is_dead              %u", pfx.c_str(), is_dead);
     LOG("%s is_facing_left       %u", pfx.c_str(), is_facing_left);
     LOG("%s is_hidden            %u", pfx.c_str(), is_hidden);
     LOG("%s is_hungry            %u", pfx.c_str(), is_hungry);
+    LOG("%s is_move_done         %u", pfx.c_str(), is_move_done);
     LOG("%s is_moving            %u", pfx.c_str(), is_moving);
     LOG("%s is_open              %u", pfx.c_str(), is_open);
+    LOG("%s is_pending_gc        %u", pfx.c_str(), is_pending_gc);
     LOG("%s is_sleeping          %u", pfx.c_str(), is_sleeping);
     LOG("%s is_starving          %u", pfx.c_str(), is_starving);
     LOG("%s is_submerged         %u", pfx.c_str(), is_submerged);
     LOG("%s is_waiting_to_move   %u", pfx.c_str(), is_waiting_to_move);
-    LOG("%s is_pending_gc        %u", pfx.c_str(), is_pending_gc);
-    LOG("%s is_blitted           %u", pfx.c_str(), is_blitted);
 
     pfx = old_pfx;
     LOG("%s }", pfx.c_str());
@@ -118,7 +119,7 @@ void Config::log (std::string pfx)
     LOG("%s arcade_mode         %u", pfx.c_str(), arcade_mode);
     LOG("%s sound_volume        %u", pfx.c_str(), sound_volume);
     LOG("%s music_volume        %u", pfx.c_str(), music_volume);
-    LOG("%s vsync_enable        %u", pfx.c_str(), vsync_enable);
+    LOG("%s gfx_vsync_enable    %u", pfx.c_str(), gfx_vsync_enable);
     LOG("%s fullscreen          %u", pfx.c_str(), fullscreen);
     LOG("%s video_pix_width     %u", pfx.c_str(), video_pix_width);
     LOG("%s video_pix_height    %u", pfx.c_str(), video_pix_height);

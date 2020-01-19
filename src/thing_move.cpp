@@ -48,6 +48,13 @@ bool Thing::move (fpoint future_pos,
 
     auto x = future_pos.x;
     auto y = future_pos.y;
+    auto delta = fpoint(x, y) - mid_at;
+
+    if (tp_gfx_bounce_on_move(tp())) {
+        bounce(0.1, 0.1, 100, 3);
+    }
+
+    move_set_dir_from_delta(delta);
 
     if (attack) {
         use();
@@ -98,11 +105,7 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (up || down || left || right) {
-        move_delta(fpoint(x, y) - mid_at, false);
-    }
-
-    if (tp_gfx_bounce_on_move(tp())) {
-        bounce(0.1, 0.1, 100, 3);
+        move_delta(delta);
     }
 
     return (true);
@@ -235,7 +238,7 @@ bool Thing::update_coordinates (void)
             auto dx = -delta.x * lunge;
             auto dy = -delta.y * lunge;
             dx = -delta.x * lunge * tile_gl_width;
-            dy = -delta.y * lunge * tile_gl_height;
+            dy = delta.y * lunge * tile_gl_height;
             tl.x -= dx;
             br.x -= dx;
             tl.y += dy;
@@ -378,17 +381,16 @@ double Thing::get_fadeup (void)
     auto t = time_get_time_ms_cached();
 
     if (t >= get_timestamp_fadeup_end()) {
-        is_fadeup = false;
         gl_last_color.a = 0;
         dead("fadeup finished");
-        return (0);
+        return (-1);
     }
 
     double time_step =
         (double)(t - get_timestamp_fadeup_begin()) /
         (double)(get_timestamp_fadeup_end() - get_timestamp_fadeup_begin());
 
-    gl_last_color.a = (uint8_t)(255.0 - (255.0 * time_step));
+    gl_last_color.a = (uint8_t)(255.0 - (250.0 * time_step));
     glcolor(gl_last_color);
 
     double height = br.y - tl.y;
@@ -512,15 +514,15 @@ void Thing::update_pos (fpoint to, bool immediately)
     move_carried_items();
 
     if (tp_is_loggable(tpp)) {
-        log("moved");
+        dbg("moved");
     }
 }
 
-void Thing::move_delta (fpoint delta, bool immediately)
+void Thing::move_set_dir_from_delta (fpoint delta)
 {_
     //
     // If not moving and this is the first move then break out of the
-    // idle animation.
+    // idle animati.
     //
     if (is_dir_none()) {
         timestamp_next_frame = time_get_time_ms_cached();
@@ -549,23 +551,26 @@ void Thing::move_delta (fpoint delta, bool immediately)
         is_moving = true;
         has_ever_moved = true;
     }
-
-    update_pos(mid_at + delta, immediately);
 }
 
 void Thing::move_to (fpoint to)
 {_
-    move_delta(fpoint(to.x - mid_at.x, to.y - mid_at.y), false);
+    auto delta = to - mid_at;
+    move_set_dir_from_delta(delta);
+    update_pos(to, false);
 }
 
-void Thing::move_delta (fpoint d)
+void Thing::move_delta (fpoint delta)
 {_
-    move_delta(d, false);
+    move_set_dir_from_delta(delta);
+    update_pos(mid_at + delta, false);
 }
 
 void Thing::move_to_immediately (fpoint to)
 {_
-    move_delta(fpoint(to.x - mid_at.x, to.y - mid_at.y), true);
+    auto delta = to - mid_at;
+    move_set_dir_from_delta(delta);
+    update_pos(to, true);
 }
 
 void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)

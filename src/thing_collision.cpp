@@ -603,7 +603,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
                 me->dead("self killed on hitting");
             }
             health_boost(it->is_nutrition());
-            *target_attacked = false;
+            *target_attacked = true;
         } else if (best->hitter_killed_on_hit_or_miss) {
             //
             // Missiles?
@@ -614,7 +614,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
                 me->lunge(it->get_interpolated_mid_at());
             }
             me->dead("self killed on hitting");
-            *target_attacked = false;
+            *target_attacked = true;
             return (true);
         } else {
             log("collision: cannot hit %s", it->to_string().c_str());
@@ -924,7 +924,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at,
             return (true);
         }
     } else {
-        log("consider %s", it->to_string().c_str());
+        dbg("consider %s", it->to_string().c_str());
         if (things_overlap(me, A_at, it)) {
             if (collision_obstacle(it)) {
                 return (true);
@@ -995,20 +995,20 @@ bool Thing::collision_check_and_handle_nearby (fpoint future_pos,
                                                bool *target_attacked,
                                                bool *target_overlaps)
 {_
-    return (collision_check_and_handle (future_pos,
-                                        target_attacked,
-                                        target_overlaps,
-                                        thing_collision_tiles));
+    return (collision_check_and_handle(future_pos,
+                                       target_attacked,
+                                       target_overlaps,
+                                       thing_collision_tiles));
 }
 
 bool Thing::collision_check_and_handle_at (fpoint future_pos,
                                            bool *target_attacked,
                                            bool *target_overlaps)
 {_
-    return (collision_check_and_handle (future_pos,
-                                        target_attacked,
-                                        target_overlaps,
-                                        0.0));
+    return (collision_check_and_handle(future_pos,
+                                       target_attacked,
+                                       target_overlaps,
+                                       0.0));
 }
 
 bool Thing::collision_check_only (fpoint future_pos)
