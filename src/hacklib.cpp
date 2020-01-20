@@ -5,6 +5,7 @@
 
 #include "my_main.h"
 #include "my_hacklib.h"
+#include <time.h>
 
 static struct tm *getlt (void)
 {_
