@@ -81,16 +81,14 @@ I'm still working on a theme :)
 
 ![#1589F0](https://placehold.it/15/1589F0/000000?text=+) To build:
 
-    git clone git@github.com:goblinhack/zorbash.git
+    On Linux:
+        sh ./RUNME
 
-    Linux:
-        ./RUNME
+    On MacOS:
+        sh ./RUNME
 
-    MacOS:
-        ./RUNME
-
-    Windows: (install msys2 first via https://www.msys2.org/)
-        ./RUNME.windows.mingw64
+    On Windows: (install msys2 first via https://www.msys2.org/)
+        sh ./RUNME.windows.mingw64
 
 If it doesn't build, just email goblinhack@gmail.com for help
 <!--                       Secret Verses:                                         -->
