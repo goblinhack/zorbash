@@ -283,14 +283,20 @@ bool Thing::update_coordinates (void)
             // Fast flip
             //
             if (is_dir_right()) {
+if (gfx_is_attack_anim()) { con("right"); }
                 std::swap(tl.x, br.x);
+            } else {
+if (gfx_is_attack_anim()) { con("left"); }
             }
         }
     }
 
     if (unlikely(tp_gfx_animated_can_vflip(tpp))) {
         if (is_dir_up()) {
+if (gfx_is_attack_anim()) { con("up"); }
             std::swap(tl.y, br.y);
+        } else {
+if (gfx_is_attack_anim()) { con("down"); }
         }
     }
 
@@ -529,25 +535,49 @@ void Thing::move_set_dir_from_delta (fpoint delta)
     }
 
     if (delta.x < 0) {
-        dir_set_left();
+        if (delta.y > 0) {
+            dir_set_bl();
+        } else if (delta.y < 0) {
+            dir_set_tl();
+        } else {
+            dir_set_left();
+        }
         is_moving = true;
         has_ever_moved = true;
     }
 
     if (delta.x > 0) {
-        dir_set_right();
+        if (delta.y > 0) {
+            dir_set_br();
+        } else if (delta.y < 0) {
+            dir_set_tr();
+        } else {
+            dir_set_left();
+        }
         is_moving = true;
         has_ever_moved = true;
     }
 
     if (delta.y > 0) {
-        dir_set_up();
+        if (delta.x > 0) {
+            dir_set_br();
+        } else if (delta.x < 0) {
+            dir_set_bl();
+        } else {
+            dir_set_down();
+        }
         is_moving = true;
         has_ever_moved = true;
     }
 
     if (delta.y < 0) {
-        dir_set_down();
+        if (delta.x > 0) {
+            dir_set_tr();
+        } else if (delta.x < 0) {
+            dir_set_tl();
+        } else {
+            dir_set_up();
+        }
         is_moving = true;
         has_ever_moved = true;
     }

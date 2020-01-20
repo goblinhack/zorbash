@@ -71,6 +71,10 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
 
     if (tp_gfx_bounce_on_move(real_hitter->tp())) {
         real_hitter->bounce(0.5, 0.1, 100, 3);
+        real_hitter->move_set_dir_from_delta(mid_at - real_hitter->mid_at);
+        real_hitter->update_coordinates();
+auto delta = mid_at - real_hitter->mid_at;
+con("delta %f,%f dir %d",delta.x,delta.y, real_hitter->dir);
     }
 
     auto h = decr_stats_health(damage);
