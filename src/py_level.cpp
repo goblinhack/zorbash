@@ -139,35 +139,35 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             if (floor_string.size() != MAP_WIDTH){
-                DIE("level floor width mismatch, %zu, expected %d",
+                DIE("level floor width mismatch, %" PRI_SIZET ", expected %d",
                     floor_string.size(), MAP_WIDTH);
             }
             if (water_string.size() != MAP_WIDTH){
-                DIE("level water width mismatch, %zu, expected %d",
+                DIE("level water width mismatch, %" PRI_SIZET ", expected %d",
                     water_string.size(), MAP_WIDTH);
             }
             if (lava_string.size() != MAP_WIDTH){
-                DIE("level lava width mismatch, %zu, expected %d",
+                DIE("level lava width mismatch, %" PRI_SIZET ", expected %d",
                     lava_string.size(), MAP_WIDTH);
             }
             if (deco_string.size() != MAP_WIDTH){
-                DIE("level deco width mismatch, %zu, expected %d",
+                DIE("level deco width mismatch, %" PRI_SIZET ", expected %d",
                     deco_string.size(), MAP_WIDTH);
             }
             if (deco_string.size() != MAP_WIDTH){
-                DIE("level deco width mismatch, %zu, expected %d",
+                DIE("level deco width mismatch, %" PRI_SIZET ", expected %d",
                     deco_string.size(), MAP_WIDTH);
             }
             if (walls_string.size() != MAP_WIDTH){
-                DIE("level walls width mismatch, %zu, expected %d",
+                DIE("level walls width mismatch, %" PRI_SIZET ", expected %d",
                     walls_string.size(), MAP_WIDTH);
             }
             if (exits_string.size() != MAP_WIDTH){
-                DIE("level exits width mismatch, %zu, expected %d",
+                DIE("level exits width mismatch, %" PRI_SIZET ", expected %d",
                     exits_string.size(), MAP_WIDTH);
             }
             if (items_string.size() != MAP_WIDTH){
-                DIE("level items width mismatch, %zu, expected %d",
+                DIE("level items width mismatch, %" PRI_SIZET ", expected %d",
                     items_string.size(), MAP_WIDTH);
             }
 
@@ -206,31 +206,31 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             if (floor_string.size() != MAP_WIDTH){
-                DIE("level floor width mismatch, %zu, expected %d",
+                DIE("level floor width mismatch, %" PRI_SIZET ", expected %d",
                     floor_string.size(), MAP_WIDTH);
             }
             if (water_string.size() != MAP_WIDTH){
-                DIE("level water width mismatch, %zu, expected %d",
+                DIE("level water width mismatch, %" PRI_SIZET ", expected %d",
                     water_string.size(), MAP_WIDTH);
             }
             if (deco_string.size() != MAP_WIDTH){
-                DIE("level deco width mismatch, %zu, expected %d",
+                DIE("level deco width mismatch, %" PRI_SIZET ", expected %d",
                     deco_string.size(), MAP_WIDTH);
             }
             if (deco_string.size() != MAP_WIDTH){
-                DIE("level deco width mismatch, %zu, expected %d",
+                DIE("level deco width mismatch, %" PRI_SIZET ", expected %d",
                     deco_string.size(), MAP_WIDTH);
             }
             if (walls_string.size() != MAP_WIDTH){
-                DIE("level walls width mismatch, %zu, expected %d",
+                DIE("level walls width mismatch, %" PRI_SIZET ", expected %d",
                     walls_string.size(), MAP_WIDTH);
             }
             if (exits_string.size() != MAP_WIDTH){
-                DIE("level exits width mismatch, %zu, expected %d",
+                DIE("level exits width mismatch, %" PRI_SIZET ", expected %d",
                     exits_string.size(), MAP_WIDTH);
             }
             if (items_string.size() != MAP_WIDTH){
-                DIE("level items width mismatch, %zu, expected %d",
+                DIE("level items width mismatch, %" PRI_SIZET ", expected %d",
                     items_string.size(), MAP_WIDTH);
             }
 

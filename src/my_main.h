@@ -53,6 +53,19 @@
 #endif
 
 //
+// " PRI_SIZET " workaround for moronic windows
+//
+#ifdef _WIN32
+#  ifdef _WIN64
+#    define PRI_SIZET PRIu64
+#  else
+#    define PRI_SIZET PRIu32
+#  endif
+#else
+#  define PRI_SIZET "zu"
+#endif
+
+//
 // UI debugging
 //
 #undef  ENABLE_WID_DEBUG

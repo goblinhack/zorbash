@@ -179,35 +179,35 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             if (floor_string.size() != ROOM_WIDTH){
-                DIE("room floor width mismatch, %zu, expected %d",
+                DIE("room floor width mismatch, %" PRI_SIZET ", expected %d",
                     floor_string.size(), ROOM_WIDTH);
             }
             if (water_string.size() != ROOM_WIDTH){
-                DIE("room water width mismatch, %zu, expected %d",
+                DIE("room water width mismatch, %" PRI_SIZET ", expected %d",
                     water_string.size(), ROOM_WIDTH);
             }
             if (lava_string.size() != ROOM_WIDTH){
-                DIE("room lava width mismatch, %zu, expected %d",
+                DIE("room lava width mismatch, %" PRI_SIZET ", expected %d",
                     lava_string.size(), ROOM_WIDTH);
             }
             if (deco_string.size() != ROOM_WIDTH){
-                DIE("room deco width mismatch, %zu, expected %d",
+                DIE("room deco width mismatch, %" PRI_SIZET ", expected %d",
                     deco_string.size(), ROOM_WIDTH);
             }
             if (deco_string.size() != ROOM_WIDTH){
-                DIE("room deco width mismatch, %zu, expected %d",
+                DIE("room deco width mismatch, %" PRI_SIZET ", expected %d",
                     deco_string.size(), ROOM_WIDTH);
             }
             if (walls_string.size() != ROOM_WIDTH){
-                DIE("room walls width mismatch, %zu, expected %d",
+                DIE("room walls width mismatch, %" PRI_SIZET ", expected %d",
                     walls_string.size(), ROOM_WIDTH);
             }
             if (exits_string.size() != ROOM_WIDTH){
-                DIE("room exits width mismatch, %zu, expected %d",
+                DIE("room exits width mismatch, %" PRI_SIZET ", expected %d",
                     exits_string.size(), ROOM_WIDTH);
             }
             if (items_string.size() != ROOM_WIDTH){
-                DIE("room items width mismatch, %zu, expected %d",
+                DIE("room items width mismatch, %" PRI_SIZET ", expected %d",
                     items_string.size(), ROOM_WIDTH);
             }
 
