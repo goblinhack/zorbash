@@ -417,8 +417,14 @@ static inline Thingp thing_find (const uint32_t id)
     return (world->find_thing_ptr(id));
 }
 
+if defined(__MINGW32__)
+#define HEAP_ALLOC(var,size) \
+    void *var; \
+   _aligned_malloc(&var, sizeof(lzo_align_t), size + size / 16 + 64 + 3);
+#else
 #define HEAP_ALLOC(var,size) \
     void *var; \
     posix_memalign(&var, sizeof(lzo_align_t), size + size / 16 + 64 + 3);
+#endif
 
 #endif
