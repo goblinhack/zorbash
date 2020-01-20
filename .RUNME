@@ -510,8 +510,7 @@ fi
 
 case `uname` in
     *MSYS*)
-        echo "CC=/mingw64/bin/x86_64-w64-mingw32-gcc.exe # AUTOGEN" >> .Makefile
-
+        echo "CC=/mingw64/bin/x86_64-w64-mingw32-g++.exe # AUTOGEN" >> .Makefile
         LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /mingw64/lib/libSDL2main.a -L/mingw64/lib -lSDL2main -lSDL2"
     ;;
 esac
