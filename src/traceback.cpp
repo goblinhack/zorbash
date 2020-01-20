@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef WIN32
+#ifndef _WIN32
 #include <execinfo.h>
 #endif
 #include <cxxabi.h>
