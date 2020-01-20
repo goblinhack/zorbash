@@ -22,7 +22,7 @@ bool Thing::possible_to_attack (const Thingp itp)
         return (false);
     }
 
-    if (is_monst()) {
+    if (is_alive_monst()) {
         if (tp_is_meat_eater(me)) {
             if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
                 log("possible attack %s", itp->to_string().c_str());
@@ -111,9 +111,9 @@ bool Thing::ai_is_obstacle_for_me (point p)
         // This is more of a look at the future position that some monst is
         // already walking toward
         //
-        if (t->is_monst()) {
-            return (true);
-        }
+//        if (t->is_alive_monst()) {
+//            return (true);
+//        }
 
         if (will_avoid(t)) {
             return (true);
@@ -174,7 +174,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                         debug = "will try to eat player " + it->to_string();
                         debug += " distance " + std::to_string(distance_scale);
 #endif
-                    } else if (it->is_monst()) {
+                    } else if (it->is_alive_monst()) {
                         *score += 100 - health_diff;
 #ifdef DEBUG_AI
                         debug = "will try to eat monst " + it->to_string();
@@ -217,7 +217,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                         debug = "will try to eat player " + it->to_string();
                         debug += " distance " + std::to_string(distance_scale);
 #endif
-                    } else if (it->is_monst()) {
+                    } else if (it->is_alive_monst()) {
                         *score += 100 - health_diff;
 #ifdef DEBUG_AI
                         debug = "will try to eat monst " + it->to_string();
