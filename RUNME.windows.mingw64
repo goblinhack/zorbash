@@ -98,6 +98,7 @@ fi
 log_info "MING64 install dir $MINGW64_DIR"
 
 pacman -S tar \
+    make \
     mingw-w64-x86_64-SDL2 \
     mingw-w64-x86_64-SDL2_gfx \
     mingw-w64-x86_64-SDL2_image \

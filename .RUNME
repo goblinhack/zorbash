@@ -290,10 +290,10 @@ if [ "$Python3_CONFIG" != "" ]; then
 fi
 
 if [ "$Python2_CONFIG" != "" ]; then
-    log_info "Python2 config      : $Python2_CONFIG"
-    log_info "Python2             : "`$Python2_CONFIG --exec-prefix`
-    log_info "Python2 include path: $Python2_INC_PATH"
-    log_info "Python2 score       : $Python2_SCORE"
+    log_info "Default Python config      : $Python2_CONFIG"
+    log_info "Default Python             : "`$Python2_CONFIG --exec-prefix`
+    log_info "Default Python include path: $Python2_INC_PATH"
+    log_info "Default Python score       : $Python2_SCORE"
 fi
 
 if [[ "$Python3_CONFIG" != "" ]]; then
@@ -378,7 +378,7 @@ mv Makefile.tmp Makefile
 
 case `uname` in
     *MING*|*MSYS*)
-        makedepend *.cpp -p .o/ 2>/dev/null
+        ../makedepend *.cpp -p .o/ 2>/dev/null
 
         if [ $? -ne 0 ]; then
             ../third-party/makedepend *.cpp -p .o/ 2>/dev/null
