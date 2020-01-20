@@ -583,6 +583,11 @@ case `uname` in
     *inux*)
         CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
     ;;
+    MSYS*)
+        CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
+        # debugging
+        CORES="1"
+    ;;
 esac
 
 if [ "$CORES" != "" ]
