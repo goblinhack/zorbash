@@ -13,7 +13,7 @@
 #include <cxxabi.h>
 
 void Traceback::init (void) {
-#ifndef WIN32
+#ifndef _WIN32
     size = backtrace(&tb[0], tb.size());
 #else
     size = 0;
