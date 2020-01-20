@@ -84,32 +84,9 @@ run() {
 run ./.RUNME $LOG
 
 if [ $? -ne 0 ]; then
-
     log_err "Build failed."
-    log_err "Enter 'y' if I can send $LOG to $MAINTAINER ?"
-    read ans
-
-    if [ "$ans" = "y" ]; then
-        tech_support
-        cat $LOG | mail -s "zorbash build failed" $MAINTAINER
-        if [ $? -ne 0 ]; then
-            log_err "Rats. That failed too!"
-            log_err "Could you send $LOG manually to $MAINTAINER?"
-            log_err "Or file an issue at https://github.com/goblinhack/zorbash"
-        fi
-    fi
+    log_err "Could you send $LOG to $MAINTAINER?"
+    log_err "Or file an issue at https://github.com/goblinhack/zorbash"
 else
-    if [ ! -f .built ]; then
-        touch .built
-
-#        log "Built successfully. Would you mind if I send this build log to the $MAINTAINER"
-#        log "so I can keep track of what gcc version works? If not, no problem."
-#        log "Enter 'y' if this is ok"
-#        read ans
-#
-#        if [ "$ans" = "y" ]; then
-#            tech_support
-#            cat $LOG | mail -s "zorbash build passed" $MAINTAINER
-#        fi
-    fi
+    log "Built successfully"
 fi
