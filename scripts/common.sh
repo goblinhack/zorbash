@@ -71,23 +71,23 @@ log() {
 }
 
 log_info() {
-    echo "mmeus: ${GREEN}$*${RESET}"
+    echo "zorbash: ${GREEN}$*${RESET}"
 }
 
 log_echo() {
-    echo "mmeus: $*"
+    echo "zorbash: $*"
 }
 
 log_err() {
-    echo "mmeus: ${RED}ERROR: $*${RESET}"
+    echo "zorbash: ${RED}ERROR: $*${RESET}"
 }
 
 log_warn() {
-    echo "mmeus: ${CYAN}WARN: $*${RESET}"
+    echo "zorbash: ${CYAN}WARN: $*${RESET}"
 }
 
 log_die() {
-    echo "mmeus: ${RED}FATAL ERROR: $*${RESET}"
+    echo "zorbash: ${RED}FATAL ERROR: $*${RESET}"
     echo "Mail goblinhack@gmail.com for help"
     exit 1
 }
