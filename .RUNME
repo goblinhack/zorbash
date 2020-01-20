@@ -164,9 +164,8 @@ then
     exit 1
 fi
 
-log_info "SDL version:" 
-log_info "SDL version      : " `$SDL2_CONFIG --version`
-log_info "SDL config       : " ($SDL2_CONFIG)
+log_info "SDL version      : " $($SDL2_CONFIG --version)
+log_info "SDL config       : " $($SDL2_CONFIG)
 
 #
 # -funwind-tables and -rdynamic for backtrace info on linux.
