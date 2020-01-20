@@ -89,14 +89,10 @@ I'm still working on a theme :)
     MacOS:
         ./RUNME
 
-    MacOS+Xcode: (future)
-        ./RUNME.Xcode-OSX
-
-    Windows+MSYS2: (future)
-        ./RUNME.windows.msys2
+    Windows: (install msys2 first via https://www.msys2.org/)
+        ./RUNME.windows.mingw64
 
 If it doesn't build, just email goblinhack@gmail.com for help
-
 <!--                       Secret Verses:                                         -->
 <!--                       Twas not an easy fight, it’s true                      -->
 <!--                       But not in the way you think.                          -->
