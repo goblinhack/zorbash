@@ -22,6 +22,7 @@
 #include "my_room.h"
 #include "my_level.h"
 #include "my_traceback.h"
+#include "my_ascii.h"
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;
@@ -525,6 +526,8 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
+    ascii_init();
+
     //
     // Need this to get the UTF on the console
     //
