@@ -4,8 +4,14 @@
 //
 
 
-#include "wchar.h"
-#include "my_tile.h"
+#include <wchar.h>
+#include "my_point.h"
+#include "my_color.h"
+
+class Tile;
+typedef class Tile* Tilep;
+class Tex;
+typedef class Tex* Texp;
 
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_KEYSYM * key);
 typedef int (*ascii_mouse_down_callback)(int x, int y, int button);
