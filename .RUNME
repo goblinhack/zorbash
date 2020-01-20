@@ -430,6 +430,7 @@ case `uname` in
         LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
         LDLIBS="$LDLIBS -lopengl32"
         LDLIBS="$LDLIBS -funwind-tables"
+        LDLIBS="$LDLIBS -static-libstdc++ -static-libgcc"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -static-libasan"
