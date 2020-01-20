@@ -48,6 +48,9 @@ static bool is_plausible_itanium_prefix(char* s) {
 
 std::string Traceback::to_string (void)
 {
+#ifdef _WIN32
+    return ("<no backtrace on win32, sorry>");
+#else
     auto addrlist = &tb[0];
     std::string sout = "stack trace:\n===========\n";
 
@@ -120,6 +123,7 @@ std::string Traceback::to_string (void)
     free(symbollist);
 
     return (sout);
+#endif
 }
 
 void traceback_dump (void)
