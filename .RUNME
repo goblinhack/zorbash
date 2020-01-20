@@ -457,48 +457,48 @@ case `uname` in
         PATH=/mingw64/bin:$PATH
         export PATH
 
-	EXE=".exe"
+        EXE=".exe"
         C_FLAGS="$C_FLAGS -mwin32"
         C_FLAGS="$C_FLAGS -I/mingw64/x86_64-w64-mingw32/include"
         LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-mingw32/lib/"
-	LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
-	LDLIBS="$LDLIBS -lopengl32"
-	LDLIBS="$LDLIBS -funwind-tables"
+        LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
+        LDLIBS="$LDLIBS -lopengl32"
+        LDLIBS="$LDLIBS -funwind-tables"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -static-libasan"
         ;;
     *Darwin*)
-	EXE=""
-	LDLIBS="$LDLIBS -funwind-tables"
-	LDLIBS="$LDLIBS -rdynamic"
-	LDLIBS="$LDLIBS -Wl,-framework,Opengl"
-	DSYM="dsymutil ../zorbash"
+        EXE=""
+        LDLIBS="$LDLIBS -funwind-tables"
+        LDLIBS="$LDLIBS -rdynamic"
+        LDLIBS="$LDLIBS -Wl,-framework,Opengl"
+        DSYM="dsymutil ../zorbash"
         WERROR="-Werror"
         COMPILER_WARN="-Wmissing-prototypes"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer -static-libstdc++ -static-libgcc "
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -L/opt/local/lib/gcc6 -lasan"
-	;;
+        ;;
     *MING*)
-	EXE=""
-	LDLIBS="$LDLIBS -funwind-tables"
-	LDLIBS="$LDLIBS -lopengl32"
-	LDLIBS="$LDLIBS -Wl,-framework,Opengl"
-	DSYM="dsymutil ../zorbash"
+        EXE=""
+        LDLIBS="$LDLIBS -funwind-tables"
+        LDLIBS="$LDLIBS -lopengl32"
+        LDLIBS="$LDLIBS -Wl,-framework,Opengl"
+        DSYM="dsymutil ../zorbash"
         WERROR="-Werror"
         COMPILER_WARN="-Wmissing-prototypes"
-	;;
+        ;;
     *)
-	EXE=""
-	LDLIBS="$LDLIBS -funwind-tables"
-	LDLIBS="$LDLIBS -lGL"
+        EXE=""
+        LDLIBS="$LDLIBS -funwind-tables"
+        LDLIBS="$LDLIBS -lGL"
         #
         # Better to leave off for production
         #
         WERROR="-Werror"
         COMPILER_WARN="-Wmissing-prototypes"
-	;;
+        ;;
 esac
 
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
@@ -562,8 +562,8 @@ then
     mv .Makefile Makefile
     if [ ! -f Makefile ]
     then
-	log_err "No makefile?!"
-	exit 1
+        log_err "No makefile?!"
+        exit 1
     fi
 else 
     log_err "Makefile create fail?!"
@@ -577,11 +577,11 @@ CORES=""
 
 case `uname` in
     *Darwin*)
-	CORES=`/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g'`
+        CORES=`/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g'`
     ;;
 
     *inux*)
-	CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
+        CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
     ;;
 esac
 
