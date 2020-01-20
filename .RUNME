@@ -416,7 +416,7 @@ case `uname` in
         echo PATH $PATH
 
         EXE=".exe"
-        C_FLAGS="$C_FLAGS -mwin3 2"
+        C_FLAGS="$C_FLAGS -mwin32 "
         C_FLAGS+="$C_FLAGS -I/mingw64/x86_64-w64-mingw32/include "
         # https://stackoverflow.com/questions/156510/increase-stack-size-on-windows-gcc
         C_FLAGS+="$LDLIBS -Wl,--stack,1677716 "
