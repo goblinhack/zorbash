@@ -6,7 +6,6 @@
 //
 // Implements layered cycles that can be used to then create a dungeon
 //
-// REMOVED #include "my_dmap.h"
 
 class Node {
 public:

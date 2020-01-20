@@ -3,7 +3,8 @@
 // See the README file for license info.
 //
 
-#pragma once
+#ifndef _MY_WID_TEXT_BOX_H_
+#define _MY_WID_TEXT_BOX_H_
 
 #include "my_wid.h"
 
@@ -37,3 +38,4 @@ public:
     void log(std::string s);
     void log(std::wstring s);
 };
+#endif

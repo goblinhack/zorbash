@@ -3,9 +3,8 @@
 // See the README file for license info.
 //
 
-#pragma once
-
-// REMOVED #include "my_wid.h"
+#ifndef _MY_WID_POPUP_H_
+#define _MY_WID_POPUP_H_
 #include "my_wid_text_box.h"
 
 class WidPopup {
@@ -32,3 +31,4 @@ public:
     void log(std::string s);
     void log(std::wstring s);
 };
+#endif

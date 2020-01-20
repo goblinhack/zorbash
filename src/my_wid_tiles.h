@@ -3,7 +3,8 @@
 // See the README file for license info.
 //
 
-#pragma once
+#ifndef _MY_WID_TILES_H_
+#define _MY_WID_TILES_H_
 
 #include <memory>
 typedef std::shared_ptr< class WidTiles > wid_tilesp;
@@ -32,3 +33,4 @@ uint8_t wid_tiles_init(void);
 void wid_tiles_fini(void);
 wid_tilesp wid_tiles_load(std::string name, double scale);
 wid_tilesp wid_tiles_find(std::string name);
+#endif

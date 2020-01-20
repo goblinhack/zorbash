@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 #ifndef _MY_TERM_H_
 #define _MY_TERM_H_

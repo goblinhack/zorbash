@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 void wid_minicon_fini(void);
 uint8_t wid_minicon_init(void);
@@ -23,4 +22,3 @@ extern Widp wid_minicon_container;
 std::vector<std::wstring> wid_minicon_serialize(void);
 void wid_minicon_deserialize(std::vector<std::wstring> r);
 
-// REMOVED #include "my_sdl.h"

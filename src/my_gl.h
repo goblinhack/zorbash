@@ -3,8 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
-
 #ifndef _MY_GLAPI_H_
 #define _MY_GLAPI_H_
 #define GL_GLEXT_PROTOTYPES
@@ -306,7 +304,6 @@ extern uint32_t NUMBER_BYTES_PER_VERTICE_2D;
 extern uint32_t NUMBER_BYTES_PER_VERTICE_3D;
 extern uint32_t NUMBER_FLOATS_PER_VERTICE_2D;
 extern uint32_t NUMBER_FLOATS_PER_VERTICE_3D;
-#endif
 
 void gl_ortho_set(int32_t width, int32_t height);
 
@@ -402,3 +399,5 @@ static inline void glcolorfast (color s)
 {
     gl_last_color = s;
 }
+
+#endif

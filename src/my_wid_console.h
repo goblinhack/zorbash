@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 void wid_console_fini(void);
 uint8_t wid_console_init(void);
@@ -20,7 +19,6 @@ extern Widp wid_console_input_line;
 extern Widp wid_console_window;
 extern Widp wid_console_container;
 
-// REMOVED #include "my_sdl.h"
 
 uint8_t wid_console_receive_input(Widp w, const SDL_KEYSYM *key);
 

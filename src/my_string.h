@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 #ifndef _MY_STRING_UTILL_H_
 #define _MY_STRING_UTILL_H_

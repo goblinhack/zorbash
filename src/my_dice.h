@@ -3,7 +3,8 @@
 // See the README file for license info.
 //
 
-#pragma once
+#ifndef _MY_DICE_H_
+#define _MY_DICE_H_
 
 #include <string>
 #include <sstream>
@@ -63,3 +64,4 @@ public:
         return (roll());
     }
 };
+#endif

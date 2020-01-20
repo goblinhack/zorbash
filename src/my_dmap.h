@@ -3,10 +3,10 @@
 // See the README file for license info.
 //
 
-#pragma once
+#ifndef _MY_DMAP_H_
+#define _MY_DMAP_H_
 
 #include "my_point.h"
-// REMOVED #include "my_main.h"
 #include <array>
 
 typedef struct Dmap_ {
@@ -46,3 +46,5 @@ extern bool dmap_can_i_move_diagonally(const Dmap *D,
 #define DMAP_IS_PASSABLE                 ((uint8_t)254)
 #define DMAP_MAX_LESS_PREFERRED_TERRAIN  ((uint8_t)100)
 #define DMAP_IS_GOAL                     ((uint8_t)0)
+
+#endif

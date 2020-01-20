@@ -3,7 +3,8 @@
 // See the README file for license info.
 //
 
-#pragma once
+#ifndef _MY_CMAP_H_
+#define _MY_CMAP_H_
 
 class Charmap;
 class Charmap {
@@ -65,3 +66,4 @@ public:
     static std::vector<Charmap> all_charmaps;
     static void init_charmaps(void);
 };
+#endif

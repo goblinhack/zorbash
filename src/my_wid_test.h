@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 void wid_test_fini(void);
 uint8_t wid_test_init(void);
