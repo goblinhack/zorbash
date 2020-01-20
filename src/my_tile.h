@@ -9,6 +9,7 @@
 #define _MY_TILE_H_
 
 #include <memory>
+#include <vector>
 #include <map>
 
 typedef class Tile* Tilep;
