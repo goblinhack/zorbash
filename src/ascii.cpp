@@ -6,7 +6,6 @@
 #include "my_ascii.h"
 #include "my_font.h"
 #include "my_game.h"
-#include "my_gl.h"
 #include "my_time.h"
 
 struct ascii_ ascii;
