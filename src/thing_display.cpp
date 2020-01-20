@@ -867,7 +867,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     // We render these offset form their owner, so if dead, then it is
     // likely they also have no owner as the swing has ended.
     //
-    if (tp_gfx_is_weapon_use_anim(tpp) ||
+    if (tp_gfx_is_attack_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
         if (is_dead) {
             return;
@@ -876,7 +876,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     if (is_monst() ||
         is_player() ||
-        tp_gfx_is_weapon_use_anim(tpp) ||
+        tp_gfx_is_attack_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
 
         set_submerged_offset(0);
@@ -1081,7 +1081,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     // We render these offset form their owner, so if dead, then it is
     // likely they also have no owner as the swing has ended.
     //
-    if (tp_gfx_is_weapon_use_anim(tpp) ||
+    if (tp_gfx_is_attack_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
         if (is_dead) {
             return;
@@ -1091,7 +1091,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     if (is_monst() ||
         is_player() ||
         is_msg() ||
-        tp_gfx_is_weapon_use_anim(tpp) ||
+        tp_gfx_is_attack_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
 
         if (world->is_deep_water((int)map_loc.x, (int)map_loc.y)) {

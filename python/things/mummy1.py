@@ -13,7 +13,7 @@ def tp_init(name, real_name):
     x.set_collision_radius(0.40)
     x.set_gfx_animated(True)
     x.set_gfx_bounce_on_move(True)
-    x.set_gfx_can_hflip(True)
+    x.set_gfx_animated_can_hflip(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_active(True)
@@ -36,6 +36,7 @@ def tp_init(name, real_name):
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial(10)
     x.set_stats_move_speed_ms(300)
+    x.set_weapon_use_anim("claws1")
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 200

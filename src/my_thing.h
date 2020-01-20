@@ -658,12 +658,12 @@ public:
     int gfx_animated_can_vflip(void);
     int gfx_animated_no_dir(void);
     int gfx_bounce_on_move(void);
-    int gfx_can_hflip(void);
+    int gfx_animated_can_hflip(void);
     int gfx_is_an_animation_only(void);
     int gfx_is_floor_deco(void);
     int gfx_is_wall_deco(void);
     int gfx_is_weapon_carry_anim(void);
-    int gfx_is_weapon_use_anim(void);
+    int gfx_is_attack_anim(void);
     int gfx_large_shadow_caster(void);
     int gfx_show_outlined(void);
     int gfx_oversized_but_sitting_on_the_ground(void);

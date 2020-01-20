@@ -92,7 +92,7 @@ bool Thing::move (fpoint future_pos,
         }
     }
 
-    if (tp_gfx_can_hflip(tp())) {
+    if (tp_gfx_animated_can_hflip(tp())) {
         if (future_pos.x > mid_at.x) {
             if (is_facing_left && !get_timestamp_flip_start()) {
                 set_timestamp_flip_start(time_get_time_ms_cached());
@@ -246,7 +246,7 @@ bool Thing::update_coordinates (void)
         }
     }
 
-    if (unlikely(tp_gfx_can_hflip(tpp))) {
+    if (unlikely(tp_gfx_animated_can_hflip(tpp))) {
         if (get_timestamp_flip_start()) {
             //
             // Slow flip

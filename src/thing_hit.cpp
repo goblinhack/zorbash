@@ -54,14 +54,24 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     if (is_player()) {
         msg->set_msg(string_sprintf("%%fg=red$-%d", damage));
     } else {
-        msg->set_msg(string_sprintf("%%fg=green$-%d", damage));
+        msg->set_msg(string_sprintf("%%fg=white$-%d", damage));
     }
+
     msg->fadeup(4.0, 0.05, 2000);
 
     //
     // Blood splat
     //
     thing_new(tp_name(tp_random_blood_splatter()), mid_at - fpoint(0.5, 0.5));
+
+    auto claws = tp_weapon_use_anim(real_hitter->tp());
+    if (claws != "") {
+        thing_new(claws, mid_at - fpoint(0.5, 0.5));
+    }
+
+    if (tp_gfx_bounce_on_move(real_hitter->tp())) {
+        real_hitter->bounce(0.5, 0.1, 100, 3);
+    }
 
     auto h = decr_stats_health(damage);
     if (h <= 0) {
@@ -145,7 +155,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         if (is_door() || is_wall()) {
             if (!tp_is_explosion(hitter_tp)     &&
                 !tp_is_projectile(hitter_tp)    &&
-                !tp_gfx_is_weapon_use_anim(hitter_tp)) {
+                !tp_gfx_is_attack_anim(hitter_tp)) {
                 //
                 // Not something that typically damages walls.
                 //
@@ -153,7 +163,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             }
         }
 
-        if (tp_gfx_is_weapon_use_anim(hitter_tp)) {
+        if (tp_gfx_is_attack_anim(hitter_tp)) {
             //
             // Get the player using the weapon as the hitter.
             //

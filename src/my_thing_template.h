@@ -136,13 +136,13 @@ public:
     int gfx_animated_can_vflip {};
     int gfx_animated_no_dir {};
     int gfx_bounce_on_move {};
-    int gfx_can_hflip {};
+    int gfx_animated_can_hflip {};
     int gfx_dead_anim {};
     int gfx_is_an_animation_only {};
     int gfx_is_floor_deco {};
     int gfx_is_wall_deco {};
     int gfx_is_weapon_carry_anim {};
-    int gfx_is_weapon_use_anim {};
+    int gfx_is_attack_anim {};
     int gfx_large_shadow_caster {};
     int gfx_oversized_but_sitting_on_the_ground {};
     int gfx_show_outlined {};
@@ -967,9 +967,9 @@ static inline int tp_gfx_is_weapon_carry_anim (Tpp t)
     return (t->gfx_is_weapon_carry_anim);
 }
 
-static inline int tp_gfx_is_weapon_use_anim (Tpp t)
+static inline int tp_gfx_is_attack_anim (Tpp t)
 {
-    return (t->gfx_is_weapon_use_anim);
+    return (t->gfx_is_attack_anim);
 }
 
 static inline int tp_is_weapon (Tpp t)
@@ -987,9 +987,9 @@ static inline int tp_gfx_large_shadow_caster (Tpp t)
     return (t->gfx_large_shadow_caster);
 }
 
-static inline int tp_gfx_can_hflip (Tpp t)
+static inline int tp_gfx_animated_can_hflip (Tpp t)
 {
-    return (t->gfx_can_hflip);
+    return (t->gfx_animated_can_hflip);
 }
 
 static inline int tp_z_depth (Tpp t)
