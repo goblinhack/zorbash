@@ -418,12 +418,12 @@ case `uname` in
         EXE=".exe"
         C_FLAGS="$C_FLAGS -mwin32"
         C_FLAGS="$C_FLAGS -I/mingw64/x86_64-w64-mingw32/include"
+        # https://stackoverflow.com/questions/156510/increase-stack-size-on-windows-gcc
+        C_FLAGS="$LDLIBS -Wl,--stack,1677716"
         LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-mingw32/lib/"
         LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
         LDLIBS="$LDLIBS -lopengl32"
         LDLIBS="$LDLIBS -funwind-tables"
-        # https://stackoverflow.com/questions/156510/increase-stack-size-on-windows-gcc
-        LDLIBS="$LDLIBS -Wl,--stack,1677716"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -static-libasan"
