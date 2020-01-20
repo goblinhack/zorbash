@@ -164,8 +164,9 @@ then
     exit 1
 fi
 
-log_info "SDL version:" `$SDL2_CONFIG --version`
-log_info "  ($SDL2_CONFIG)"
+log_info "SDL version:" 
+log_info "SDL version      : " `$SDL2_CONFIG --version`
+log_info "SDL config       : " ($SDL2_CONFIG)
 
 #
 # -funwind-tables and -rdynamic for backtrace info on linux.
@@ -297,10 +298,10 @@ if [ "$Python2_CONFIG" != "" ]; then
 fi
 
 if [[ "$Python3_CONFIG" != "" ]]; then
-    log_info "Python3 config      : $Python3_CONFIG"
-    log_info "Python3             : "`$Python3_CONFIG --exec-prefix`
-    log_info "Python3 include path: $Python3_INC_PATH"
-    log_info "Python3 score       : $Python3_SCORE"
+    log_info "Python3        config      : $Python3_CONFIG"
+    log_info "Python3                    : "`$Python3_CONFIG --exec-prefix`
+    log_info "Python3        include path: $Python3_INC_PATH"
+    log_info "Python3        score       : $Python3_SCORE"
 fi
 
 USE_Python2=0
@@ -456,6 +457,7 @@ case `uname` in
     *MSYS*)
         PATH=/mingw64/bin:$PATH
         export PATH
+        echo PATH $PATH
 
         EXE=".exe"
         C_FLAGS="$C_FLAGS -mwin32"
