@@ -914,8 +914,8 @@ _
     game_place_water(dungeon, "water1");
     game_place_deep_water(dungeon, "deep_water1");
     //fluid_init();
+CON("TODO fix place blood");
 if (0) {
-CON("XXX fix place blood");
     game_place_random_blood(dungeon);
 }
 
@@ -936,8 +936,8 @@ CON("XXX fix place blood");
 
     game_place_monst(dungeon);
     game_place_food(dungeon);
+CON("TODO fix place blood");
     if (0) {
-CON("XXX fix place blood");
     game_place_blood(dungeon);
     }
     game_place_keys(dungeon);

@@ -282,21 +282,16 @@ bool Thing::update_coordinates (void)
             //
             // Fast flip
             //
-            if (is_dir_right()) {
-if (gfx_is_attack_anim()) { con("right"); }
+            if (is_dir_right() || is_dir_tr() || is_dir_br()) {
                 std::swap(tl.x, br.x);
             } else {
-if (gfx_is_attack_anim()) { con("left"); }
             }
         }
     }
 
     if (unlikely(tp_gfx_animated_can_vflip(tpp))) {
-        if (is_dir_up()) {
-if (gfx_is_attack_anim()) { con("up"); }
+        if (is_dir_down() || is_dir_br() || is_dir_bl()) {
             std::swap(tl.y, br.y);
-        } else {
-if (gfx_is_attack_anim()) { con("down"); }
         }
     }
 
@@ -544,6 +539,7 @@ void Thing::move_set_dir_from_delta (fpoint delta)
         }
         is_moving = true;
         has_ever_moved = true;
+        return;
     }
 
     if (delta.x > 0) {
@@ -552,10 +548,11 @@ void Thing::move_set_dir_from_delta (fpoint delta)
         } else if (delta.y < 0) {
             dir_set_tr();
         } else {
-            dir_set_left();
+            dir_set_right();
         }
         is_moving = true;
         has_ever_moved = true;
+        return;
     }
 
     if (delta.y > 0) {
@@ -568,6 +565,7 @@ void Thing::move_set_dir_from_delta (fpoint delta)
         }
         is_moving = true;
         has_ever_moved = true;
+        return;
     }
 
     if (delta.y < 0) {
@@ -580,6 +578,7 @@ void Thing::move_set_dir_from_delta (fpoint delta)
         }
         is_moving = true;
         has_ever_moved = true;
+        return;
     }
 }
 

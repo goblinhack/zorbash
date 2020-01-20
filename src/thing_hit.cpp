@@ -64,17 +64,20 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     //
     thing_new(tp_name(tp_random_blood_splatter()), mid_at - fpoint(0.5, 0.5));
 
+    auto delta = mid_at - real_hitter->mid_at;
+
     auto claws = tp_weapon_use_anim(real_hitter->tp());
     if (claws != "") {
-        thing_new(claws, mid_at - fpoint(0.5, 0.5));
+        auto attack = thing_new(claws, mid_at - fpoint(0.5, 0.5));
+        attack->bounce(0.1, 0.1, 100, 3);
+        attack->move_set_dir_from_delta(delta);
+        attack->update_coordinates();
     }
 
     if (tp_gfx_bounce_on_move(real_hitter->tp())) {
         real_hitter->bounce(0.5, 0.1, 100, 3);
-        real_hitter->move_set_dir_from_delta(mid_at - real_hitter->mid_at);
+        real_hitter->move_set_dir_from_delta(delta);
         real_hitter->update_coordinates();
-auto delta = mid_at - real_hitter->mid_at;
-con("delta %f,%f dir %d",delta.x,delta.y, real_hitter->dir);
     }
 
     auto h = decr_stats_health(damage);
