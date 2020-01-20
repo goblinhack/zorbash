@@ -11,6 +11,7 @@
 #include <string>
 #include <algorithm>
 #include <time.h>
+#include <ctime>
 
 #include "my_main.h"
 #include "my_sdl.h"
