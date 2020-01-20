@@ -7,7 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef WIN32
 #include <execinfo.h>
+#endif
 #include <cxxabi.h>
 
 void Traceback::init (void) {
