@@ -1,0 +1,162 @@
+#!/bin/sh
+# 
+# Copyright (C) 2014 Neil McGill
+#
+# This game is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This game is distributed in the hope that it will be fun,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this game; if not, write to the Free
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+
+TOP_DIR=`pwd`
+TP_DIR=third-party
+
+. ./scripts/common.sh
+
+# https://www.msys2.org/
+# pacman -Syu
+# reopen terminal
+# pacman -Su
+# pacman -S git
+# pacman -S unzip
+# pacman -S vim
+# set up your .ssh keys if you want to use git instead of https
+# git clone git@github.com:goblinhack/zorbash.git
+# git clone https://github.com/goblinhack/zorbash.git
+for i in /mingw64
+do
+    if [ -d "$i" ]
+    then
+        MINGW64_DIR=$i
+        break
+    fi
+done
+
+if [ $MINGW64_DIR = "" ]
+then
+    log_err "Could not find MINGW64 dir"
+    exit 1
+fi
+
+log_info "MING64 install dir $MINGW64_DIR"
+
+pacman -S tar \
+    mingw-w64-x86_64-SDL2 \
+    mingw-w64-x86_64-SDL2_gfx \
+    mingw-w64-x86_64-SDL2_image \
+    mingw-w64-x86_64-SDL2_mixer \
+    mingw-w64-x86_64-SDL2_net \
+    mingw-w64-x86_64-SDL2_ttf \
+    mingw-w64-x86_64-binutils \
+    mingw-w64-x86_64-bzip2 \
+    mingw-w64-x86_64-crt-git \
+    mingw-w64-x86_64-expat \
+    mingw-w64-x86_64-flac \
+    mingw-w64-x86_64-fluidsynth \
+    mingw-w64-x86_64-gcc \
+    mingw-w64-x86_64-gcc-libs \
+    mingw-w64-x86_64-gdb \
+    mingw-w64-x86_64-gdbm \
+    mingw-w64-x86_64-gettext \
+    mingw-w64-x86_64-giflib \
+    mingw-w64-x86_64-glib2 \
+    mingw-w64-x86_64-gmp \
+    mingw-w64-x86_64-headers-git \
+    mingw-w64-x86_64-isl \
+    mingw-w64-x86_64-libffi \
+    mingw-w64-x86_64-libiconv \
+    mingw-w64-x86_64-libjpeg-turbo \
+    mingw-w64-x86_64-libmodplug \
+    mingw-w64-x86_64-libogg \
+    mingw-w64-x86_64-libpng \
+    mingw-w64-x86_64-libsndfile \
+    mingw-w64-x86_64-libsystre \
+    mingw-w64-x86_64-libtiff \
+    mingw-w64-x86_64-libtre-git \
+    mingw-w64-x86_64-libvorbis \
+    mingw-w64-x86_64-libwebp \
+    mingw-w64-x86_64-libwinpthread-git \
+    mingw-w64-x86_64-mpc \
+    mingw-w64-x86_64-mpfr \
+    mingw-w64-x86_64-ncurses \
+    mingw-w64-x86_64-openssl \
+    mingw-w64-x86_64-portaudio \
+    mingw-w64-x86_64-readline \
+    mingw-w64-x86_64-smpeg2 \
+    mingw-w64-x86_64-speex \
+    mingw-w64-x86_64-speexdsp \
+    mingw-w64-x86_64-termcap \
+    mingw-w64-x86_64-windows-default-manifest \
+    mingw-w64-x86_64-winpthreads-git \
+    mingw-w64-x86_64-xz \
+    mingw-w64-x86_64-zlib \
+    mingw-w64-x86_64-python3 \
+    mingw-w64-x86_64-python3-pip
+
+if [[ $? -ne 0 ]];
+then
+    log_err "Install failed. I'll try and continue."
+fi
+    
+for i in colored hexdump flake8
+do
+    /mingw64/bin/pip3 install $i
+    if [[ $? -ne 0 ]];
+    then
+            log_err "Install failed for pip3 hexdump I'll try and continue."
+    fi
+done
+
+mycp()
+{
+    local a=$1
+    local b=$2
+
+    for i in $a 
+    do
+        run cp -rpvf $i $b
+
+        if [ $? -ne 0 ]
+        then
+            log_err "Failed to copy $i to $MINGW64_DIR"
+            exit 1
+        fi
+    done
+}
+
+#
+# Extract tar files
+#
+(
+    pushd $TP_DIR >/dev/null
+
+    for i in \
+            makedepend-1.0.5.tar.gz
+    do
+        run tar xf $i
+    done
+
+    popd >/dev/null
+)
+
+mycp "third-party/makedepend-1.0.5/*.exe" $MINGW64_DIR/bin/
+mycp "third-party/makedepend-1.0.5/*.exe" $TOP_DIR
+
+cd $TOP_DIR
+
+./RUNME
+
+if [ $? -eq 0 ]
+then
+    cd windows
+    ./windows.sh
+fi
