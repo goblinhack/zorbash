@@ -349,7 +349,7 @@ public:
     //
     // Save file name, contains the date and other useful save slot info
     //
-    std::string        version = VERSION;
+    std::string        version = "" VERSION "";
     int                save_slot {};
     std::string        save_meta;
     std::string        save_file;
