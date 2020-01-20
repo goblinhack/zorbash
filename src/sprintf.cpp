@@ -18,7 +18,8 @@ int _vscprintf_so(const char * format, va_list pargs) {
     va_copy(argcopy, pargs);
     retval = vsnprintf(NULL, 0, format, argcopy);
     va_end(argcopy);
-    return retval;}
+    return retval;
+}
 #endif // _vscprintf
 
 #ifndef vasprintf
@@ -30,7 +31,8 @@ int vasprintf(char **strp, const char *fmt, va_list ap) {
     int r = vsnprintf(str, len + 1, fmt, ap); /* "secure" version of vsprintf */
     if (r == -1) return free(str), -1;
     *strp = str;
-    return r;}
+    return r;
+}
 #endif // vasprintf
 
 #ifndef asprintf
@@ -49,7 +51,7 @@ std::string string_sprintf (const char *format, ...)
 
     va_start(args, format);
 
-    if (asprintf(&buf, format, args) == -1) {
+    if (vasprintf(&buf, format, args) == -1) {
         throw std::bad_alloc();
     }
 
