@@ -14,10 +14,10 @@ int ASCII_WIDTH;
 int ASCII_HEIGHT;
 
 typedef struct {
-    Tilep fg_tile;
-    Tilep fg2_tile;
-    Tilep bg_tile;
-    Tilep bg2_tile;
+    Tilep fg_tile {};
+    Tilep fg2_tile {};
+    Tilep bg_tile {};
+    Tilep bg2_tile {};
 
     Texp tex {};
 
@@ -66,8 +66,21 @@ typedef struct {
 
 } ascii_cell;
 
-static std::array<std::array<ascii_cell,
-                ASCII_HEIGHT_MAX>, ASCII_WIDTH_MAX> cells = {};
+static std::vector<std::vector<ascii_cell> > cells = {};
+
+void ascii_init (void)
+{
+    cells.reserve(ASCII_HEIGHT_MAX);
+    for (auto y = 0; y < ASCII_HEIGHT_MAX; y++) {
+        cells[y].reserve(ASCII_WIDTH_MAX);
+    }
+
+    for (auto x = 0; x < ASCII_WIDTH_MAX; x++) {
+        for (auto y = 0; y < ASCII_HEIGHT_MAX; y++) {
+            cells[x][y] = {};
+        }
+    }
+}
 
 //
 // For drawing the mouse cursor.

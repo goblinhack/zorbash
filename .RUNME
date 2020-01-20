@@ -418,8 +418,14 @@ case `uname` in
         EXE=".exe"
         C_FLAGS="$C_FLAGS -mwin32 "
         C_FLAGS+="$C_FLAGS -I/mingw64/x86_64-w64-mingw32/include "
+
+        #
+        # Does not seem tot work
+        #
         # https://stackoverflow.com/questions/156510/increase-stack-size-on-windows-gcc
-        C_FLAGS+="$LDLIBS -Wl,--stack,128777216 "
+        # C_FLAGS+="$LDLIBS -Wl,--stack,128777216 "
+        #
+
         LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-mingw32/lib/"
         LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
         LDLIBS="$LDLIBS -lopengl32"

@@ -49,6 +49,7 @@ extern struct ascii_ ascii;
 
 extern int ASCII_WIDTH;
 extern int ASCII_HEIGHT;
+extern void ascii_init(void);
 
 void pixel_to_ascii(int *x, int *y);
 
