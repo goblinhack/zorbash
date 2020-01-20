@@ -3,13 +3,13 @@ NAME=zorbash
 OBJDIR=.o
 
 GAME_OBJECTS=				\
-    $(OBJDIR)/ascii.o 			\
-    $(OBJDIR)/ascii_box.o 		\
     $(OBJDIR)/astar.o 			\
     $(OBJDIR)/charmap.o 		\
     $(OBJDIR)/color.o			\
     $(OBJDIR)/command.o 		\
     $(OBJDIR)/console.o 		\
+    $(OBJDIR)/ascii.o 			\
+    $(OBJDIR)/ascii_box.o 		\
     $(OBJDIR)/dice.o			\
     $(OBJDIR)/dir.o 			\
     $(OBJDIR)/dmap.o 			\

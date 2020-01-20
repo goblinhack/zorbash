@@ -19,30 +19,6 @@
 
 . ./scripts/common.sh
 
-#case `uname` in
-#    *MING*|*MSYS*)
-#        # Good link for mingw install hints
-#        #         log_info "Installing python dependancies:"
-#        log_info "Installing python dependancies:"
-#        pacman --force --noconfirm -S mingw-w64-x86_64-python3
-#        pacman --force --noconfirm -S mingw-w64-x86_64-python3-pip
-#        pacman --force --noconfirm -S mingw-w64-x86_64-python3-cx_Freeze
-#        /mingw64/bin/pip3 install colored
-#        /mingw64/bin/pip3 install hexdump
-#    ;;
-#    *Darwin*)
-#        # sudo python3 -m pip install --upgrade pip
-#        port install python3-pip
-#        python3 -m pip install colored
-#        python3 -m pip install hexdump
-#    ;;
-#    *)
-#        apt-get install python3-pip3
-#        pip3 install colored
-#        pip3 install hexdump
-#    ;;
-#esac
-
 case `uname` in
     *MING*|*MSYS*)
         for i in \
@@ -77,20 +53,9 @@ sdl_help()
 
     case `uname` in
     *MING*|*MSYS*)
-        log_warn "   Installed already:"
+        log_warn "Installed already:"
         pacman -Ss | grep '^mingw64/' | grep SDL2 | sed 's/^mingw64.//g' | grep installed
-        log_warn "   Will try to install needed packages:"
-
-        pacman -S \
-            mingw-w64-x86_64-SDL \
-            mingw-w64-x86_64-SDL2 \
-            mingw-w64-x86_64-SDL2_gfx \
-            mingw-w64-x86_64-SDL2_image \
-            mingw-w64-x86_64-SDL2_mixer \
-            mingw-w64-x86_64-SDL2_net \
-            mingw-w64-x86_64-SDL2_ttf
-
-        log_warn "Ok, try RUNME again"
+        log_err "Cannot find SDL2"
         exit 1
         ;;
 
@@ -132,12 +97,12 @@ if [ "$SDL2_CONFIG" != "" ]; then
     fi
 fi
 
-log_info "SDL2 config      : $SDL2_CONFIG"
-log_info "SDL2 version     : "`$SDL2_CONFIG --version`
-log_info "SDL2 include path: $SDL2_INC_PATH"
-log_info "SDL2 mixer.h     : $SDL2_MIXER"
-log_info "SDL2 ttf.h       : $SDL2_TTF"
-log_info "SDL2 score       : $SDL2_SCORE"
+log_info "SDL2 config                : $SDL2_CONFIG"
+log_info "SDL2 version               : "`$SDL2_CONFIG --version`
+log_info "SDL2 include path          : $SDL2_INC_PATH"
+log_info "SDL2 mixer.h               : $SDL2_MIXER"
+log_info "SDL2 ttf.h                 : $SDL2_TTF"
+log_info "SDL2 score                 : $SDL2_SCORE"
 
 if [[ $SDL2_SCORE != "2" ]]; then
     log_err "I need SDL2, SDL2 mixer and SDL2 ttf installed"
@@ -164,7 +129,7 @@ then
     exit 1
 fi
 
-log_info "SDL version      :" $($SDL2_CONFIG --version)
+log_info "SDL version                :" $($SDL2_CONFIG --version)
 
 #
 # -funwind-tables and -rdynamic for backtrace info on linux.
@@ -241,16 +206,9 @@ python_help()
 
     case `uname` in
     *MING*|*MSYS*)
-        log_warn "   Installed already:"
+        log_warn "Installed already:"
         pacman -Ss | grep '^mingw64/' | grep python3 | sed 's/^mingw64.//g' | grep installed
-        log_warn "   Will try to install needed packages:"
-
-        pacman -S \
-            mingw-w64-x86_64-python3 \
-            mingw-w64-x86_64-python3-pip \
-            mingw-w64-x86_64-python3-py
-
-        log_warn "Ok, try RUNME again"
+        log_err "Cannot find python3"
         exit 1
         ;;
 
