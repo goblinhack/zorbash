@@ -3,7 +3,9 @@
 // See the README file for license info.
 //
 
+#if defined(__linux__)
 #include <sys/errno.h>
+#endif
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
