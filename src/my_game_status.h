@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 void game_status_fini(void);
 uint8_t game_status_init(void);

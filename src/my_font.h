@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 #ifndef _MY_FONT_H_
 #define _MY_FONT_H_
@@ -14,7 +13,6 @@ typedef class Font * Fontp;
 extern Fontp fixed_font;
 
 #include "SDL_ttf.h"
-// REMOVED #include "my_main.h"
 #include "my_tile.h"
 
 typedef struct {

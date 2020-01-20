@@ -3,12 +3,9 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 #include "wchar.h"
-// REMOVED #include "my_point.h"
 #include "my_tile.h"
-// REMOVED #include "my_color.h"
 
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_KEYSYM * key);
 typedef int (*ascii_mouse_down_callback)(int x, int y, int button);

@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 #ifndef _MY_THING_H
 #define _MY_THING_H
@@ -18,10 +17,8 @@ typedef struct AgeMap_* AgeMapp;
 typedef struct Dmap_* Dmapp;
 typedef std::unordered_map< uint32_t, Thingp > Things;
 
-// REMOVED #include "my_thing_template.h"
 #include "my_time.h"
 #include "my_light.h"
-// REMOVED #include "my_dmap.h"
 
 class Goal
 {

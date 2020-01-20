@@ -3,15 +3,9 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
 #include "my_game.h"
-// REMOVED #include "my_point.h"
-// REMOVED #include "my_tile.h"
 #include "my_room.h"
 #include "my_level.h"
-// REMOVED #include "my_charmap.h"
-// REMOVED #include "my_dmap.h"
-// REMOVED #include "my_range.h"
 #include "my_dungeon_grid.h"
 #include "my_ascii.h"
 #include <stack>

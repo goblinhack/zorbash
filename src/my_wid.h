@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 #ifndef _MY_WID_H_
 #define _MY_WID_H_
@@ -14,8 +13,6 @@ typedef class Wid* Widp;
 
 #include <SDL.h>
 #include "my_sdl.h"
-// REMOVED #include "my_enum.h"
-// REMOVED #include "my_size.h"
 #include "my_wid_tiles.h"
 
 #ifdef ENABLE_WID_DEBUG

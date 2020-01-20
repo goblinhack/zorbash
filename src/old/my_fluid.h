@@ -4,7 +4,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 void fluid_init(void);
 void fluid_tick(void);

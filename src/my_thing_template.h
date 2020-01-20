@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 #ifndef _MY_THING_TEMPLATE_H
 #define _MY_THING_TEMPLATE_H

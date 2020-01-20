@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#pragma once
 
 #ifndef _MY__ENUM_H__
 #define _MY__ENUM_H__
