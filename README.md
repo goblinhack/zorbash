@@ -1,8 +1,5 @@
 # Zorbash
                         
-```diff
-- **** WORK IN PROGRESS - NOT PLAYABLE YET *****
-
 <!-- In days of old, The Zorbashian Empire discovered the Earth and they wrought much rage -->
 <!-- upon her verdant soils. Their wrath was mighty and left the world scarred and in darkness. -->
 <!--  -->
@@ -22,6 +19,9 @@
 <!-- Legend says that there is a master base somewhere, where the Emperor Zorbash resides. -->
 <!-- Whether this is true or not, cannot be said but to strike at the heart of their rule -->
 <!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
+
+```diff
+- **** WORK IN PROGRESS - NOT PLAYABLE YET *****
 
 Zorbash is a fusion of turn based and real-time based gaming, called "borrowed time",
 which allows the player to do lots of moves in quick succession. The monsters will
