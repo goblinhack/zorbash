@@ -779,7 +779,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
     //
     // Sword use hits?
     //
-    if (tp_gfx_is_weapon_use_anim(me_tp)) {
+    if (tp_gfx_is_attack_anim(me_tp)) {
         if (tp_is_monst(it_tp)) {
             //
             // Weapon hits monster or generator.
@@ -901,7 +901,7 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at,
     //
     // Sword use hits?
     //
-    if (tp_gfx_is_weapon_use_anim(me_tp)) {
+    if (tp_gfx_is_attack_anim(me_tp)) {
         if (tp_is_monst(it_tp)) {
             //
             // Weapon hits monster or generator.

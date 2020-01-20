@@ -450,8 +450,8 @@ class Tp:
     def set_gfx_is_weapon_carry_anim(self, value):
         zx.tp_set_gfx_is_weapon_carry_anim(self, value)
 
-    def set_gfx_is_weapon_use_anim(self, value):
-        zx.tp_set_gfx_is_weapon_use_anim(self, value)
+    def set_gfx_is_attack_anim(self, value):
+        zx.tp_set_gfx_is_attack_anim(self, value)
 
     def set_is_weapon(self, value):
         zx.tp_set_is_weapon(self, value)
@@ -468,8 +468,8 @@ class Tp:
     def set_is_movable(self, value):
         zx.tp_set_is_movable(self, value)
 
-    def set_gfx_can_hflip(self, value):
-        zx.tp_set_gfx_can_hflip(self, value)
+    def set_gfx_animated_can_hflip(self, value):
+        zx.tp_set_gfx_animated_can_hflip(self, value)
 
     def set_gfx_animated_can_vflip(self, value):
         zx.tp_set_gfx_animated_can_vflip(self, value)

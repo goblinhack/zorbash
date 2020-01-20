@@ -95,7 +95,7 @@ _
     mid_at             = at;
     last_mid_at        = mid_at;
 
-    if (tp_gfx_can_hflip(tpp)) {
+    if (tp_gfx_animated_can_hflip(tpp)) {
         dir            = THING_DIR_LEFT;
         is_facing_left = true;
     } else {

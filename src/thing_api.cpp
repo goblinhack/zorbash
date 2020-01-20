@@ -182,9 +182,9 @@ int Thing::gfx_bounce_on_move(void)
     return (tp_gfx_bounce_on_move(tp()));
 }
 
-int Thing::gfx_can_hflip(void)
+int Thing::gfx_animated_can_hflip(void)
 {
-    return (tp_gfx_can_hflip(tp()));
+    return (tp_gfx_animated_can_hflip(tp()));
 }
 
 int Thing::gfx_is_an_animation_only(void)
@@ -207,9 +207,9 @@ int Thing::gfx_is_weapon_carry_anim(void)
     return (tp_gfx_is_weapon_carry_anim(tp()));
 }
 
-int Thing::gfx_is_weapon_use_anim(void)
+int Thing::gfx_is_attack_anim(void)
 {
-    return (tp_gfx_is_weapon_use_anim(tp()));
+    return (tp_gfx_is_attack_anim(tp()));
 }
 
 int Thing::gfx_large_shadow_caster(void)
