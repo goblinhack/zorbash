@@ -30,7 +30,7 @@ def tp_init(name, real_name):
     x.set_is_undead(True)
     x.set_is_water_hater(100)
     x.set_stats_attack_hd("1d1+1")
-    x.set_stats_attack_rate_tenths(2)
+    x.set_stats_attack_rate_tenths(1)
     x.set_stats_attacked_rate_tenths(0)
     x.set_stats_defence(2)
     x.set_stats_health_hunger_pct(95)

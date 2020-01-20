@@ -827,7 +827,7 @@ bool Thing::collision_obstacle (Thingp it)
         if (it->is_door()) {
             return (true);
         }
-        if (it->is_monst()) {
+        if (it->is_alive_monst()) {
             return (true);
         }
     } else if (is_monst()) {
@@ -848,7 +848,7 @@ bool Thing::collision_obstacle (Thingp it)
         if (it->is_lava()) {
             return (true);
         }
-        if (it->is_monst()) {
+        if (it->is_alive_monst()) {
             return (true);
         }
         if (it->is_player()) {

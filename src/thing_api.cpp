@@ -362,6 +362,11 @@ int Thing::is_monst(void)
     return (tp_is_monst(tp()));
 }
 
+int Thing::is_alive_monst(void)
+{
+    return (tp_is_monst(tp()) && !is_dead);
+}
+
 int Thing::is_movable(void)
 {
     return (tp_is_movable(tp()));

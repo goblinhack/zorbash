@@ -28,11 +28,9 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     //
     // Protect player from multiple impact - landing hard on a spike.
     //
-    if (game->config.arcade_mode) {
-        if (!time_have_x_tenths_passed_since(get_stats_attacked_rate_tenths(),
-                                             get_timestamp_last_attacked())) {
-            return (false);
-        }
+    if (!time_have_x_tenths_passed_since(get_stats_attacked_rate_tenths(),
+                                            get_timestamp_last_attacked())) {
+        return (false);
     }
     set_timestamp_last_attacked(time_get_time_ms_cached());
 
@@ -58,13 +56,12 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     } else {
         msg->set_msg(string_sprintf("%%fg=green$-%d", damage));
     }
-    auto splat = thing_new(tp_name(tp_random_blood_splatter()), 
-                           mid_at - fpoint(0.5, 0.5));
-    splat->con("blood");
-    orig_hitter->con("hitter");
-    con("the hit");
-
     msg->fadeup(4.0, 0.05, 2000);
+
+    //
+    // Blood splat
+    //
+    thing_new(tp_name(tp_random_blood_splatter()), mid_at - fpoint(0.5, 0.5));
 
     auto h = decr_stats_health(damage);
     if (h <= 0) {

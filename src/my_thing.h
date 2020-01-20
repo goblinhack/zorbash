@@ -696,6 +696,7 @@ public:
     int is_made_of_meat(void);
     int is_meat_eater(void);
     int is_monst(void);
+    int is_alive_monst(void);
     int is_movable(void);
     int is_movement_blocking(void);
     int is_nutrition(void);
