@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-
 #include <wchar.h>
 #include "my_point.h"
 #include "my_color.h"
