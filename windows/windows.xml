@@ -16,14 +16,14 @@
             <desktopShortcutList>
                 <shortcut>
                     <comment>zorbash</comment>
-                    <exec>${installdir}/mundusmeus/mundusmeus</exec>
-                    <icon>${installdir}/mundusmeus//windows/zorbash.ico</icon>
-                    <name>mundusmeus</name>
-                    <path>${installdir}/mundusmeus</path>
+                    <exec>${installdir}/zorbash/zorbash</exec>
+                    <icon>${installdir}/zorbash//windows/zorbash.ico</icon>
+                    <name>zorbash</name>
+                    <path>${installdir}/zorbash</path>
                     <platforms>all</platforms>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${installdir}/mundusmeus.exe</windowsExec>
+                    <windowsExec>${installdir}/zorbash.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
                     <windowsIcon>${installdir}/zorbash.ico</windowsIcon>
                     <windowsPath>${installdir}/</windowsPath>
@@ -137,7 +137,7 @@
                             <origin>C:/msys64/mingw64/bin/libeay32.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/home/nmcgill/zorbash/mundusmeus.exe</origin>
+                            <origin>C:/msys64/home/nmcgill/zorbash/zorbash.exe</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>C:/msys64/home/nmcgill/zorbash/python</origin>
@@ -152,14 +152,14 @@
                             <origin>C:/msys64/home/nmcgill/zorbash/windows/zorbash.ico</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/home/nmcgill/zorbash/mundusmeus-config.py</origin>
+                            <origin>C:/msys64/home/nmcgill/zorbash/zorbash-config.py</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
                 <folder>
-                    <description>mundusmeus</description>
-                    <destination>${installdir}/mundusmeus</destination>
-                    <name>mundusmeus</name>
+                    <description>zorbash</description>
+                    <destination>${installdir}/zorbash</destination>
+                    <name>zorbash</name>
                     <platforms>all</platforms>
                 </folder>
             </folderList>
@@ -176,13 +176,13 @@
                 </startMenuShortcut>
                 <startMenuShortcut>
                     <comment>The Dungeons of Doom</comment>
-                    <name>mundusmeus</name>
+                    <name>zorbash</name>
                     <runAsAdmin>0</runAsAdmin>
                     <runInTerminal>0</runInTerminal>
-                    <windowsExec>${installdir}/mundusmeus/mundusmeus/src/mundusmeus.exe</windowsExec>
+                    <windowsExec>${installdir}/zorbash/zorbash/src/zorbash.exe</windowsExec>
                     <windowsExecArgs></windowsExecArgs>
-                    <windowsIcon>${installdir}/mundusmeus/mundusmeus/windows/zorbash.ico</windowsIcon>
-                    <windowsPath>${installdir}/mundusmeus/mundusmeus</windowsPath>
+                    <windowsIcon>${installdir}/zorbash/zorbash/windows/zorbash.ico</windowsIcon>
+                    <windowsPath>${installdir}/zorbash/zorbash</windowsPath>
                 </startMenuShortcut>
             </startMenuShortcutList>
         </component>
