@@ -531,15 +531,21 @@ int32_t main (int32_t argc, char *argv[])
     //
     // Need this to get the UTF on the console
     //
+#ifndef _WIN32
     std::locale loc("");
     std::ios_base::sync_with_stdio(false);
     std::wcout.imbue(loc);
+#endif
 
+    //
+    // Random numbers
+    //
     double mean = 1.0;
     double std = 0.5;
     std::normal_distribution<double> distribution;
     distribution.param(std::normal_distribution<double>(mean, std).param());
     rng.seed(std::random_device{}());
+    mysrand(time(0));
 
 #ifdef ENABLE_CRASH_HANDLER
     signal(SIGSEGV, segv_handler);   // install our handler
@@ -548,11 +554,7 @@ int32_t main (int32_t argc, char *argv[])
 #endif
 
     const char *appdata;
-
-    mysrand(time(0));
-
     appdata = getenv("APPDATA");
-
     if (!appdata || !appdata[0]) {
         appdata = "appdata";
     }
