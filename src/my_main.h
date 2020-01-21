@@ -53,7 +53,8 @@
 #endif
 
 //
-// " PRI_SIZET " workaround for moronic windows
+// "%zu" workaround for moronic windows
+// https://stackoverflow.com/questions/44382862/how-to-printf-a-size-t-without-warning-in-mingw-w64-gcc-7-1
 //
 #ifdef _WIN32
 #  ifdef _WIN64
