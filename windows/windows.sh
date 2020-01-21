@@ -5,7 +5,7 @@ then
     exit 1
 fi
 
-cp /c/Users/nmcgill/Documents/InstallBuilder/output/mundusmeus-0.01-windows-installer.exe ../mundusmeus-installer.exe
+cp /c/Users/nmcgill/Documents/InstallBuilder/output/zorbash-0.01-windows-installer.exe ../zorbash-installer.exe
 if [ -d /c/Users/nmcgill/Google\ Drive/ ]; then
-    cp ../mundusmeus-installer.exe  /c/Users/nmcgill/Google\ Drive/
+    cp ../zorbash-installer.exe  /c/Users/nmcgill/Google\ Drive/
 fi
