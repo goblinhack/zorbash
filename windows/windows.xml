@@ -5,7 +5,7 @@
     <installerFilename></installerFilename>
     <licenseFile>C:/msys64/home/nmcgill/zorbash/LICENSE</licenseFile>
     <logoImage>C:/msys64/home/nmcgill/zorbash/windows/zorbash.png</logoImage>
-    <splashImage>C:/msys64/home/nmcgill/zorbash/windows/splash.png</splashImage>
+    <splashImage>C:/msys64/home/nmcgill/zorbash/windows/zorbash.png</splashImage>
     <componentList>
         <component>
             <name>default</name>
