@@ -42,9 +42,6 @@ Thingp thing_new (std::string name, fpoint at, fpoint jitter)
 {_
     auto t = new struct Thing_();
     t->init(name, at, jitter);
-    if (t->is_entrance()) {
-        t->con("entrance");
-    }
     return (t);
 }
 

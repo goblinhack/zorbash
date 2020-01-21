@@ -167,10 +167,34 @@ case `uname` in
     ;;
 esac
 
+case `uname` in
+    *MING*|*MSYS*)
+        for i in \
+            /mingw/bin/python3 \
+            /mingw64/bin/python3 
+        do
+            if [ -x $i ]
+            then
+                Python3=$i
+                break
+            fi
+        done
+    ;;
+    *)
+        for i in \
+            /usr/local/bin/python3 \
+            /opt/local/bin/python3 \
+            /usr/bin/python3 
+        do
+            if [ -x $i ]
+            then
+                Python3=$i
+                break
+            fi
+        done
+    ;;
+esac
 
-#
-# Prefer Python over Python3 as it seems more common
-#
 case `uname` in
     *MING*|*MSYS*)
         for i in \
@@ -199,6 +223,33 @@ case `uname` in
     ;;
 esac
 
+case `uname` in
+    *MING*|*MSYS*)
+        for i in \
+            /mingw/bin/python \
+            /mingw64/bin/python 
+        do
+            if [ -x $i ]
+            then
+                Python2=$i
+                break
+            fi
+        done
+    ;;
+    *)
+        for i in \
+            /opt/local/bin/python \
+            /usr/local/bin/python \
+            /usr/bin/python
+        do
+            if [ -x $i ]
+            then
+                Python2=$i
+                break
+            fi
+        done
+    ;;
+esac
 
 python_help()
 {
@@ -247,15 +298,17 @@ if [ "$Python3_CONFIG" != "" ]; then
 fi
 
 if [ "$Python2_CONFIG" != "" ]; then
+    log_info "Default Python             : $Python2"
     log_info "Default Python config      : $Python2_CONFIG"
-    log_info "Default Python             : "`$Python2_CONFIG --exec-prefix`
+    log_info "Default Python exec        : "`$Python2_CONFIG --exec-prefix`
     log_info "Default Python include path: $Python2_INC_PATH"
     log_info "Default Python score       : $Python2_SCORE"
 fi
 
 if [[ "$Python3_CONFIG" != "" ]]; then
+    log_info "Python3                    : $Python3"
     log_info "Python3        config      : $Python3_CONFIG"
-    log_info "Python3                    : "`$Python3_CONFIG --exec-prefix`
+    log_info "Python3        exec        : "`$Python3_CONFIG --exec-prefix`
     log_info "Python3        include path: $Python3_INC_PATH"
     log_info "Python3        score       : $Python3_SCORE"
 fi
@@ -270,6 +323,7 @@ if [[ $Python2_SCORE = "0" ]]; then
         exit 1
     else
         Python_CONFIG=$Python3_CONFIG
+        Python=$Python3
         USE_Python3=1
     fi
 elif [[ $Python3_SCORE = "0" ]]; then
@@ -279,6 +333,7 @@ elif [[ $Python3_SCORE = "0" ]]; then
         exit 1
     else
 #        Python_CONFIG=$Python2_CONFIG
+#        Python=$Python2
 #        USE_Python2=1
         log_err "I need Python3"
         python_help
@@ -286,8 +341,9 @@ elif [[ $Python3_SCORE = "0" ]]; then
     fi
 else
     if [[ $Python3_SCORE -ge $Python2_SCORE ]]; then
-        log_info "Prefer Python3"
+#        log_info "Prefer Python3"
         Python_CONFIG=$Python3_CONFIG
+        Python=$Python3
         USE_Python3=1
     else
         log_err "I need Python3"
@@ -295,34 +351,15 @@ else
         exit 1
 #        log_info "Prefer Python2"
 #        Python_CONFIG=$Python2_CONFIG
+#        Python=$Python2
 #        USE_Python2=1
     fi
 fi
 
-/bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
+PYTHON_VERSION=$(Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
+log_info "Python         lib version : $PYTHON_VERSION"
 
-### #
-### # Make the ramdisk
-### #
-### RAMDISK_FILES=.ramdisk_files
-### 
-### log_info "Creating ramdisk filelist"
-### 
-### find data -type f | grep -v Resources | grep -v DS_Store | grep -v "\.ttf$" | grep -v "xcf" | grep -v "mp3" | grep -v "\.session" | grep -v "^\." > $RAMDISK_FILES
-### if [ ! -s $ramdisk_files ]
-### then
-###     cd src
-###     log_die "Failed to build list of ramdisk files"
-### fi
-### 
-### mkdir -p src/asm
-### scripts/RUNME.ramdisk.pl $RAMDISK_FILES
-### if [ $? -ne 0 ]
-### then
-###     log_die "Failed to make ramdisk files"
-### fi
-### 
-### /bin/rm -f $RAMDISK_FILES
+/bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
 
 #
 # Make the makefile
@@ -469,6 +506,7 @@ case `uname` in
 esac
 
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
+C_FLAGS="$C_FLAGS -DPYTHON_VERSION=\\\"$PYTHON_VERSION\\\""
 
 #
 # Better to leave off for production
@@ -551,8 +589,6 @@ case `uname` in
     ;;
     MSYS*)
         CORES=`cat /proc/cpuinfo | grep "cpu cores" | wc -l`
-        # debugging
-        CORES="1"
     ;;
 esac
 
@@ -570,16 +606,14 @@ make $CORES $* all
 
 if [ $? -eq 0 ]
 then
-    echo
     case `uname` in
         *MING*|*MSYS*)
-
-            log_info "You likely will need the following to run:"
-            log_info "export PYTHONPATH=/mingw64/lib/python3.5/:/mingw64/lib/python3.5/lib-dynload:/mingw64/lib/python3.5/site-packages/"
-            log_info "Run ./zorbash.exe to start"
+            log_info "Run:"
+            log_info "  export PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages ./zorbash.exe"
             ;;
         *)
-            log_info "Run ./zorbash to start"
+            log_info "Run:"
+            log_info "  ./zorbash"
             ;;
     esac
 

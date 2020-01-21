@@ -2861,11 +2861,11 @@ static void python_add_consts (void)
 void python_init (char *argv[])
 {_
 #if 0
-    PyRun_SimpleString("import sys; sys.path.append('./python3.5/')\n");
-    PyRun_SimpleString("import sys; sys.path.append('./python3.5/lib-dynload')\n");
+    PyRun_SimpleString("import sys; sys.path.append('./python" PYTHON_VERSION "/')\n");
+    PyRun_SimpleString("import sys; sys.path.append('./python" PYTHON_VERSION "/lib-dynload')\n");
 #endif
 #ifdef __WIN32
-     _putenv_s("PYTHONPATH", "python/;python3.5/;python3.5/lib-dynload;python3.5/site-packages");
+     _putenv_s("PYTHONPATH", "python/;python" PYTHON_VERSION "/;python" PYTHON_VERSION "/lib-dynload;python" PYTHON_VERSION "/site-packages");
 
     {
         int wc_len;
@@ -2900,7 +2900,7 @@ void python_init (char *argv[])
     py_add_to_path(PYTHON_PATH);
 
 #ifdef __APPLE__
-    py_add_to_path("/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/");
+    py_add_to_path("/Library/Frameworks/Python.framework/Versions/3.5/lib/python" PYTHON_VERSION "/site-packages/");
 #endif
 
     LOG("Calling PyImport_ImportModule for zx module");
