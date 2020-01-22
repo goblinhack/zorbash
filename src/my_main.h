@@ -58,7 +58,11 @@
 //
 #ifdef _WIN32
 #  ifdef _WIN64
-#    define PRI_SIZET PRIu64
+#    ifdef __MINGW32__
+#      define PRI_SIZET "llu"
+#    else
+#      define PRI_SIZET PRIu64
+#    endif
 #  else
 #    define PRI_SIZET PRIu32
 #  endif
