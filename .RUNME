@@ -450,6 +450,9 @@ LDLIBS="$LDLIBS $Python_LIBS"
 #
 case `uname` in
     *MSYS*)
+        log_err "compile for ming64, not msys"
+        exit 1
+    *MING*)
         PATH=/mingw64/bin:$PATH
         export PATH
         echo PATH $PATH
@@ -488,15 +491,6 @@ case `uname` in
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer -static-libstdc++ -static-libgcc "
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -L/opt/local/lib/gcc6 -lasan"
-        ;;
-    *MING*)
-        EXE=""
-        LDLIBS="$LDLIBS -funwind-tables"
-        LDLIBS="$LDLIBS -lopengl32"
-        LDLIBS="$LDLIBS -Wl,-framework,Opengl"
-        DSYM="dsymutil ../zorbash"
-        WERROR="-Werror"
-        COMPILER_WARN="-Wmissing-prototypes"
         ;;
     *)
         EXE=""
