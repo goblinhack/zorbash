@@ -609,7 +609,7 @@ then
     case `uname` in
         *MING*|*MSYS*)
             log_info "Run:"
-            log_info "  export PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages ./zorbash.exe"
+            log_info "  PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages ./zorbash.exe"
             ;;
         *)
             log_info "Run:"
