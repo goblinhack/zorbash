@@ -102,7 +102,7 @@ log_info "SDL2 version               : "`$SDL2_CONFIG --version`
 log_info "SDL2 include path          : $SDL2_INC_PATH"
 log_info "SDL2 mixer.h               : $SDL2_MIXER"
 log_info "SDL2 ttf.h                 : $SDL2_TTF"
-log_info "SDL2 score                 : $SDL2_SCORE"
+#log_info "SDL2 found                 : $SDL2_SCORE"
 
 if [[ $SDL2_SCORE != "2" ]]; then
     log_err "I need SDL2, SDL2 mixer and SDL2 ttf installed"
@@ -136,8 +136,10 @@ log_info "SDL version                :" $($SDL2_CONFIG --version)
 # But it seemed to help little.
 #
 LDLIBS="$SDL_LIBS"
-LDLIBS="$LDLIBS -lSDL2_ttf"
 LDLIBS="$LDLIBS -lSDL2_mixer"
+LDLIBS="$LDLIBS -lSDL2_ttf"
+LDLIBS="$LDLIBS /mingw64/lib/libSDL2_mixer.a"
+LDLIBS="$LDLIBS /mingw64/lib/libSDL2_ttf.a"
 
 case `uname` in
     *MING*|*MSYS*)
@@ -302,15 +304,15 @@ if [ "$Python2_CONFIG" != "" ]; then
     log_info "Default Python config      : $Python2_CONFIG"
     log_info "Default Python exec        : "`$Python2_CONFIG --exec-prefix`
     log_info "Default Python include path: $Python2_INC_PATH"
-    log_info "Default Python score       : $Python2_SCORE"
+    #log_info "Default Python found       : $Python2_SCORE"
 fi
 
 if [[ "$Python3_CONFIG" != "" ]]; then
     log_info "Python3                    : $Python3"
-    log_info "Python3        config      : $Python3_CONFIG"
-    log_info "Python3        exec        : "`$Python3_CONFIG --exec-prefix`
-    log_info "Python3        include path: $Python3_INC_PATH"
-    log_info "Python3        score       : $Python3_SCORE"
+    log_info "Python3 config             : $Python3_CONFIG"
+    log_info "Python3 exec               : "`$Python3_CONFIG --exec-prefix`
+    log_info "Python3 include path       : $Python3_INC_PATH"
+    #log_info "Python3 found              : $Python3_SCORE"
 fi
 
 USE_Python2=0
@@ -356,7 +358,7 @@ else
     fi
 fi
 
-PYTHON_VERSION=$(Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
+PYTHON_VERSION=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
 log_info "Python         lib version : $PYTHON_VERSION"
 
 /bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
@@ -457,7 +459,7 @@ case `uname` in
         C_FLAGS+="$C_FLAGS -I/mingw64/x86_64-w64-mingw32/include "
 
         #
-        # Does not seem tot work
+        # Does not seem to work
         #
         # https://stackoverflow.com/questions/156510/increase-stack-size-on-windows-gcc
         # C_FLAGS+="$LDLIBS -Wl,--stack,128777216 "
@@ -466,7 +468,7 @@ case `uname` in
         LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-mingw32/lib/"
         LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
         LDLIBS="$LDLIBS -funwind-tables"
-        LDLIBS="$LDLIBS -static"
+        #LDLIBS="$LDLIBS -static"
         LDLIBS="$LDLIBS -static-libstdc++"
         LDLIBS="$LDLIBS -static-libgcc"
         LDLIBS="$LDLIBS -lopengl32"
@@ -552,6 +554,9 @@ fi
 case `uname` in
     *MSYS*)
         echo "CC=/mingw64/bin/x86_64-w64-mingw32-g++.exe # AUTOGEN" >> .Makefile
+	#
+	# To resolve WinMain, add these at the end again
+	#
         LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /mingw64/lib/libSDL2main.a -L/mingw64/lib -lSDL2main -lSDL2"
     ;;
 esac
