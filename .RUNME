@@ -465,9 +465,12 @@ case `uname` in
 
         LDLIBS="$LDLIBS -L/mingw64/x86_64-w64-mingw32/lib/"
         LDLIBS=`echo $LDLIBS | sed -e 's/-lmingw32 //g'`
-        LDLIBS="$LDLIBS -lopengl32"
         LDLIBS="$LDLIBS -funwind-tables"
-        LDLIBS="$LDLIBS -static-libstdc++ -static-libgcc"
+        LDLIBS="$LDLIBS -static"
+        LDLIBS="$LDLIBS -static-libstdc++"
+        LDLIBS="$LDLIBS -static-libgcc"
+        LDLIBS="$LDLIBS -lopengl32"
+        LDLIBS="$LDLIBS -lpthread"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -static-libasan"
