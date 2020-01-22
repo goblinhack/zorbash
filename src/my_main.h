@@ -52,6 +52,20 @@
 /*code specific to mingw compilers*/
 #endif
 
+
+
+
+// %d--> for int
+//
+// %u--> for unsigned int
+//
+// %ld--> for long int
+//
+// %lu--> for unsigned long int
+//
+// %lld--> for long long int
+//
+// %llu--> for unsigned long long int
 //
 // "%zu" workaround for moronic windows
 // https://stackoverflow.com/questions/44382862/how-to-printf-a-size-t-without-warning-in-mingw-w64-gcc-7-1
