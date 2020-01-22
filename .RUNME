@@ -547,11 +547,11 @@ else
 fi
 
 case `uname` in
-    *MSYS*)
+    *MING*)
         echo "CC=/mingw64/bin/x86_64-w64-mingw32-g++.exe # AUTOGEN" >> .Makefile
-	#
-	# To resolve WinMain, add these at the end again
-	#
+        #
+        # To resolve WinMain, add these at the end again
+        #
         LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /mingw64/lib/libSDL2main.a -L/mingw64/lib -lSDL2main -lSDL2"
     ;;
 esac
@@ -610,7 +610,7 @@ make $CORES $* all
 if [ $? -eq 0 ]
 then
     case `uname` in
-        *MING*|*MSYS*)
+        *MING*)
             log_info "Run:"
             log_info "  PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages ./zorbash.exe"
             ;;
