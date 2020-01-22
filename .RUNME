@@ -359,7 +359,7 @@ else
 fi
 
 PYTHON_VERSION=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
-log_info "Python         lib version : $PYTHON_VERSION"
+log_info "Python lib version         : $PYTHON_VERSION"
 
 /bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
 
@@ -452,6 +452,7 @@ case `uname` in
     *MSYS*)
         log_err "compile for ming64, not msys"
         exit 1
+        ;;
     *MING*)
         PATH=/mingw64/bin:$PATH
         export PATH
