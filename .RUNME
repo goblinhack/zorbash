@@ -475,6 +475,7 @@ case `uname` in
         #LDLIBS="$LDLIBS -static"
         LDLIBS="$LDLIBS -static-libstdc++"
         LDLIBS="$LDLIBS -static-libgcc"
+        LDLIBS="$LDLIBS -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic"
         LDLIBS="$LDLIBS -lopengl32"
         LDLIBS="$LDLIBS -lpthread"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
@@ -612,7 +613,9 @@ then
     case `uname` in
         *MING*)
             log_info "Run:"
-            log_info "  PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages ./zorbash.exe"
+            log_info "  export PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages"
+            log_info "  export PYTHONHOME=/mingw64/bin"
+            log_info "  ./zorbash.exe"
             ;;
         *)
             log_info "Run:"
