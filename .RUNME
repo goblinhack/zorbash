@@ -613,13 +613,13 @@ then
     case `uname` in
         *MING*)
             log_info "Run:"
-            log_info "  export PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages"
-            log_info "  export PYTHONHOME=/mingw64/bin"
-            log_info "  ./zorbash.exe"
+            echo "  export PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages"
+            echo "  export PYTHONHOME=/mingw64/bin"
+            echo "  ./zorbash.exe"
             ;;
         *)
             log_info "Run:"
-            log_info "  ./zorbash"
+            echo "  ./zorbash"
             ;;
     esac
 
