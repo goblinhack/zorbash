@@ -11,11 +11,12 @@
 //
 #undef DEBUG_CRASH
 
+#define ENABLE_ASSERT              // DIE on errors
+
 //
 // Commonly changed settings
 //
 #ifdef DEBUG_CRASH
-#define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
