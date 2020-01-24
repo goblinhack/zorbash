@@ -246,12 +246,12 @@ void con (const wchar_t *fmt)
 static void minicon_ (const char *fmt, va_list args)
 {
     char buf[MAXSHORTSTR];
-    char ts[MAXSHORTSTR];
+    char ts[MAXSHORTSTR/2];
     int len;
 
     buf[0] = '\0';
     get_timestamp(ts, MAXSHORTSTR);
-    sprintf(buf, "%sMINICON: ", ts);
+    snprintf(buf, sizeof(buf) - 1, "%sMINICON: ", ts);
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 

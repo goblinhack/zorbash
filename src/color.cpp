@@ -6,6 +6,7 @@
 #include "my_main.h"
 #include "my_gl.h"
 #include "my_string.h"
+#include <cstring>
 
 color COLOR_NONE;
 color ALICE_BLUE;
