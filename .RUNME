@@ -138,8 +138,6 @@ log_info "SDL version                :" $($SDL2_CONFIG --version)
 LDLIBS="$SDL_LIBS"
 LDLIBS="$LDLIBS -lSDL2_mixer"
 LDLIBS="$LDLIBS -lSDL2_ttf"
-LDLIBS="$LDLIBS /mingw64/lib/libSDL2_mixer.a"
-LDLIBS="$LDLIBS /mingw64/lib/libSDL2_ttf.a"
 
 case `uname` in
     *MING*|*MSYS*)
@@ -478,6 +476,8 @@ case `uname` in
         LDLIBS="$LDLIBS -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic"
         LDLIBS="$LDLIBS -lopengl32"
         LDLIBS="$LDLIBS -lpthread"
+        LDLIBS="$LDLIBS /mingw64/lib/libSDL2_mixer.a"
+        LDLIBS="$LDLIBS /mingw64/lib/libSDL2_ttf.a"
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -static-libasan"
