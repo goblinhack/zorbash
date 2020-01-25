@@ -526,6 +526,22 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
+#ifdef _WIN32
+    CON("INIT: _WIN32");
+#endif
+#ifdef __MINGW32__
+    CON("INIT: __MINGW32__");
+#endif
+#ifdef __MINGW64__
+    CON("INIT: __MINGW64__");
+#endif
+#ifdef __APPLE__
+    CON("INIT: __APPLE__");
+#endif
+#ifdef __linux__
+    CON("INIT: __linux__");
+#endif
+
     LOG("INIT: ascii");
     ascii_init();
 
@@ -533,7 +549,7 @@ int32_t main (int32_t argc, char *argv[])
     // Need this to get the UTF on the console
     //
 #ifndef _WIN32
-    LOG("INIT: locale");
+    CON("INIT: locale");
     std::locale loc("");
     std::ios_base::sync_with_stdio(false);
     std::wcout.imbue(loc);
