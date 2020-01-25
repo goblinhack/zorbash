@@ -795,231 +795,268 @@ PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB_EXT;
 
 static void gl_ext_load (void)
 {_
-    glCreateProgram_EXT =
-        (__typeof__(glCreateProgram_EXT))
+    glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT))
         wglGetProcAddress("glCreateProgram");
     if (!glCreateProgram_EXT) {
-        LOG("glCreateProgram failed to find OpenGL extension");
+        LOG("INIT: - glCreateProgram_EXT - not present");
+    } else {
+        LOG("INIT: - glCreateProgram_EXT - present");
     }
-
 
     glDeleteProgram_EXT =
         (__typeof__(glDeleteProgram_EXT)) wglGetProcAddress("glDeleteProgram");
     if (!glDeleteProgram_EXT) {
-        LOG("glDeleteProgram failed to find OpenGL extension");
+        LOG("INIT: - glDeleteProgram_EXT - not present");
+    } else {
+        LOG("INIT: - glDeleteProgram_EXT - present");
     }
-
 
     glIsProgram_EXT =
         (__typeof__(glIsProgram_EXT)) wglGetProcAddress("glIsProgram");
     if (!glIsProgram_EXT) {
-        LOG("glIsProgram failed to find OpenGL extension");
+        LOG("INIT: - glIsProgram_EXT - not present");
+    } else {
+        LOG("INIT: - glIsProgram_EXT - present");
     }
-
 
     glCreateShader_EXT =
         (__typeof__(glCreateShader_EXT)) wglGetProcAddress("glCreateShader");
     if (!glCreateShader_EXT) {
-        LOG("glCreateShader failed to find OpenGL extension");
+        LOG("INIT: - glCreateShader_EXT - not present");
+    } else {
+        LOG("INIT: - glCreateShader_EXT - present");
     }
-
 
     glDeleteShader_EXT =
         (__typeof__(glDeleteShader_EXT)) wglGetProcAddress("glDeleteShader");
     if (!glDeleteShader_EXT) {
-        LOG("glDeleteShader failed to find OpenGL extension");
+        LOG("INIT: - glDeleteShader_EXT - not present");
+    } else {
+        LOG("INIT: - glDeleteShader_EXT - present");
     }
-
 
     glShaderSource_EXT =
         (__typeof__(glShaderSource_EXT)) wglGetProcAddress("glShaderSource");
     if (!glShaderSource_EXT) {
-        LOG("glShaderSource failed to find OpenGL extension");
+        LOG("INIT: - glShaderSource_EXT - not present");
+    } else {
+        LOG("INIT: - glShaderSource_EXT - present");
     }
-
 
     glCompileShader_EXT =
         (__typeof__(glCompileShader_EXT)) wglGetProcAddress("glCompileShader");
     if (!glCompileShader_EXT) {
-        LOG("glCompileShader failed to find OpenGL extension");
+        LOG("INIT: - glCompileShader_EXT - not present");
+    } else {
+        LOG("INIT: - glCompileShader_EXT - present");
     }
-
 
     glAttachShader_EXT =
         (__typeof__(glAttachShader_EXT)) wglGetProcAddress("glAttachShader");
     if (!glAttachShader_EXT) {
-        LOG("glAttachShader failed to find OpenGL extension");
+        LOG("INIT: - glAttachShader_EXT - not present");
+    } else {
+        LOG("INIT: - glAttachShader_EXT - present");
     }
-
 
     glDetachShader_EXT =
         (__typeof__(glDetachShader_EXT)) wglGetProcAddress("glDetachShader");
     if (!glDetachShader_EXT) {
-        LOG("glDetachShader failed to find OpenGL extension");
+        LOG("INIT: - glDetachShader_EXT - not present");
+    } else {
+        LOG("INIT: - glDetachShader_EXT - present");
     }
-
 
     glGetAttachedShaders_EXT =
         (__typeof__(glGetAttachedShaders_EXT)) wglGetProcAddress("glGetAttachedShaders");
     if (!glGetAttachedShaders_EXT) {
-        LOG("glGetAttachedShaders failed to find OpenGL extension");
+        LOG("INIT: - glGetAttachedShaders_EXT - not present");
+    } else {
+        LOG("INIT: - glGetAttachedShaders_EXT - present");
     }
-
 
     glLinkProgram_EXT =
         (__typeof__(glLinkProgram_EXT)) wglGetProcAddress("glLinkProgram");
     if (!glLinkProgram_EXT) {
-        LOG("glLinkProgram failed to find OpenGL extension");
+        LOG("INIT: - glLinkProgram_EXT - not present");
+    } else {
+        LOG("INIT: - glLinkProgram_EXT - present");
     }
-
 
     glUseProgram_EXT =
         (__typeof__(glUseProgram_EXT)) wglGetProcAddress("glUseProgram");
     if (!glUseProgram_EXT) {
-        LOG("glUseProgram failed to find OpenGL extension");
+        LOG("INIT: - glUseProgram_EXT - not present");
+    } else {
+        LOG("INIT: - glUseProgram_EXT - present");
     }
-
 
     glGetShaderInfoLog_EXT =
         (__typeof__(glGetShaderInfoLog_EXT)) wglGetProcAddress("glGetShaderInfoLog");
     if (!glGetShaderInfoLog_EXT) {
-        LOG("glGetShaderInfoLog failed to find OpenGL extension");
+        LOG("INIT: - glGetShaderInfoLog_EXT - not present");
+    } else {
+        LOG("INIT: - glGetShaderInfoLog_EXT - present");
     }
-
 
     glGetProgramInfoLog_EXT =
         (__typeof__(glGetProgramInfoLog_EXT)) wglGetProcAddress("glGetProgramInfoLog");
     if (!glGetProgramInfoLog_EXT) {
-        LOG("glGetProgramInfoLog failed to find OpenGL extension");
+        LOG("INIT: - glGetProgramInfoLog_EXT - not present");
+    } else {
+        LOG("INIT: - glGetProgramInfoLog_EXT - present");
     }
-
 
     glGetUniformLocation_EXT =
         (__typeof__(glGetUniformLocation_EXT)) wglGetProcAddress("glGetUniformLocation");
     if (!glGetUniformLocation_EXT) {
-        LOG("glGetUniformLocation failed to find OpenGL extension");
+        LOG("INIT: - glGetUniformLocation_EXT - not present");
+    } else {
+        LOG("INIT: - glGetUniformLocation_EXT - present");
     }
-
 
     glUniform1f_EXT =
         (__typeof__(glUniform1f_EXT)) wglGetProcAddress("glUniform1f");
     if (!glUniform1f_EXT) {
-        LOG("glUniform1f failed to find OpenGL extension");
+        LOG("INIT: - glUniform1f_EXT - not present");
+    } else {
+        LOG("INIT: - glUniform1f_EXT - present");
     }
-
 
     glUniform1i_EXT =
         (__typeof__(glUniform1i_EXT)) wglGetProcAddress("glUniform1i");
     if (!glUniform1i_EXT) {
-        LOG("glUniform1i failed to find OpenGL extension");
+        LOG("INIT: - glUniform1i_EXT - not present");
+    } else {
+        LOG("INIT: - glUniform1i_EXT - present");
     }
-
 
     glUniform2fv_EXT =
         (__typeof__(glUniform2fv_EXT)) wglGetProcAddress("glUniform2fv");
     if (!glUniform2fv_EXT) {
-        LOG("glUniform2fv failed to find OpenGL extension");
+        LOG("INIT: - glUniform2fv_EXT - not present");
+    } else {
+        LOG("INIT: - glUniform2fv_EXT - present");
     }
-
 
     glUniform3fv_EXT =
         (__typeof__(glUniform3fv_EXT)) wglGetProcAddress("glUniform3fv");
     if (!glUniform3fv_EXT) {
-        LOG("glUniform3fv failed to find OpenGL extension");
+        LOG("INIT: - glUniform3fv_EXT - not present");
+    } else {
+        LOG("INIT: - glUniform3fv_EXT - present");
     }
-
 
     glGenerateMipmap_EXT =
         (__typeof__(glGenerateMipmap_EXT)) wglGetProcAddress("glGenerateMipmap");
     if (!glGenerateMipmap_EXT) {
-        LOG("glGenerateMipmap failed to find OpenGL extension");
+        LOG("INIT: - glGenerateMipmap_EXT - not present");
+    } else {
+        LOG("INIT: - glGenerateMipmap_EXT - present");
     }
-
 
     glGenFramebuffers_EXT =
         (__typeof__(glGenFramebuffers_EXT)) wglGetProcAddress("glGenFramebuffers");
     if (!glGenFramebuffers_EXT) {
-        LOG("glGenFramebuffers failed to find OpenGL extension");
+        LOG("INIT: - glGenFramebuffers_EXT - not present");
+    } else {
+        LOG("INIT: - glGenFramebuffers_EXT - present");
     }
-
 
     glDeleteFramebuffers_EXT =
         (__typeof__(glDeleteFramebuffers_EXT)) wglGetProcAddress("glDeleteFramebuffers");
     if (!glDeleteFramebuffers_EXT) {
-        LOG("glDeleteFramebuffers failed to find OpenGL extension");
+        LOG("INIT: - glDeleteFramebuffers_EXT - not present");
+    } else {
+        LOG("INIT: - glDeleteFramebuffers_EXT - present");
     }
-
 
     glBindFramebuffer_EXT =
         (__typeof__(glBindFramebuffer_EXT)) wglGetProcAddress("glBindFramebuffer");
     if (!glBindFramebuffer_EXT) {
-        LOG("glBindFramebuffer failed to find OpenGL extension");
+        LOG("INIT: - glBindFramebuffer_EXT - not present");
+    } else {
+        LOG("INIT: - glBindFramebuffer_EXT - present");
     }
-
 
     glGenRenderbuffers_EXT =
         (__typeof__(glGenRenderbuffers_EXT)) wglGetProcAddress("glGenRenderbuffers");
     if (!glGenRenderbuffers_EXT) {
-        LOG("glGenRenderbuffers failed to find OpenGL extension");
+        LOG("INIT: - glGenRenderbuffers_EXT - not present");
+    } else {
+        LOG("INIT: - glGenRenderbuffers_EXT - present");
     }
-
 
     glDeleteRenderbuffers_EXT =
         (__typeof__(glDeleteRenderbuffers_EXT)) wglGetProcAddress("glDeleteRenderbuffers");
     if (!glDeleteRenderbuffers_EXT) {
-        LOG("glDeleteRenderbuffers failed to find OpenGL extension");
+        LOG("INIT: - glDeleteRenderbuffers_EXT - not present");
+    } else {
+        LOG("INIT: - glDeleteRenderbuffers_EXT - present");
     }
-
 
     glBindRenderbuffer_EXT =
         (__typeof__(glBindRenderbuffer_EXT)) wglGetProcAddress("glBindRenderbuffer");
     if (!glBindRenderbuffer_EXT) {
-        LOG("glBindRenderbuffer failed to find OpenGL extension");
+        LOG("INIT: - glBindRenderbuffer_EXT - not present");
+    } else {
+        LOG("INIT: - glBindRenderbuffer_EXT - present");
     }
-
 
     glRenderbufferStorage_EXT =
         (__typeof__(glRenderbufferStorage_EXT)) wglGetProcAddress("glRenderbufferStorage");
     if (!glRenderbufferStorage_EXT) {
-        LOG("glRenderbufferStorage failed to find OpenGL extension");
+        LOG("INIT: - glRenderbufferStorage_EXT - not present");
+    } else {
+        LOG("INIT: - glRenderbufferStorage_EXT - present");
     }
-
 
     glFramebufferRenderbuffer_EXT =
         (__typeof__(glFramebufferRenderbuffer_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
     if (!glFramebufferRenderbuffer_EXT) {
-        LOG("glFramebufferRenderbuffer failed to find OpenGL extension");
+        LOG("INIT: - glFramebufferRenderbuffer_EXT - not present");
+    } else {
+        LOG("INIT: - glFramebufferRenderbuffer_EXT - present");
     }
-
 
     glFramebufferTexture2D_EXT =
         (__typeof__(glFramebufferTexture2D_EXT)) wglGetProcAddress("glFramebufferTexture2D");
     if (!glFramebufferTexture2D_EXT) {
-        LOG("glFramebufferTexture2D failed to find OpenGL extension");
+        LOG("INIT: - glFramebufferTexture2D_EXT - not present");
+    } else {
+        LOG("INIT: - glFramebufferTexture2D_EXT - present");
     }
 
     glGenBuffersARB_EXT =
         (__typeof__(glGenBuffersARB_EXT)) wglGetProcAddress("glGenBuffersARB");
     if (!glGenBuffersARB_EXT) {
-        LOG("glGenBuffersARB failed to find OpenGL extension");
+        LOG("INIT: - glGenBuffersARB_EXT - not present");
+    } else {
+        LOG("INIT: - glGenBuffersARB_EXT - present");
     }
 
     glBindBufferARB_EXT =
         (__typeof__(glBindBufferARB_EXT)) wglGetProcAddress("glBindBufferARB");
     if (!glBindBufferARB_EXT) {
-        LOG("glBindBufferARB failed to find OpenGL extension");
+        LOG("INIT: - glBindBufferARB_EXT - not present");
+    } else {
+        LOG("INIT: - glBindBufferARB_EXT - present");
     }
 
     glDeleteBuffersARB_EXT =
         (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
     if (!glDeleteBuffersARB_EXT) {
-        LOG("glDeleteBuffersARB failed to find OpenGL extension");
+        LOG("INIT: - glDeleteBuffersARB_EXT - not present");
+    } else {
+        LOG("INIT: - glDeleteBuffersARB_EXT - present");
     }
 
     glDeleteBuffersARB_EXT =
         (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
     if (!glDeleteBuffersARB_EXT) {
-        LOG("glDeleteBuffersARB failed to find OpenGL extension");
+        LOG("INIT: - glDeleteBuffersARB_EXT - not present");
+    } else {
+        LOG("INIT: - glDeleteBuffersARB_EXT - present");
     }
 }
 
