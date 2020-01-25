@@ -542,7 +542,7 @@ int32_t main (int32_t argc, char *argv[])
     //
     // Random numbers
     //
-    LOG("INIT: random numbers");
+    LOG("INIT: random number generators");
     double mean = 1.0;
     double std = 0.5;
     std::normal_distribution<double> distribution;
@@ -557,7 +557,7 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGINT, ctrlc_handler);   // install our handler
 #endif
 
-    LOG("INIT: Find APPDATA location");
+    LOG("INIT: set APPDATA location");
     const char *appdata;
     appdata = getenv("APPDATA");
     if (!appdata || !appdata[0]) {
@@ -580,13 +580,13 @@ int32_t main (int32_t argc, char *argv[])
     myfree(dir);
 
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
-    LOG_STDOUT = fopen(out, "w+");
     LOG("INIT: Set log file STDOUT to %s", out);
+    LOG_STDOUT = fopen(out, "w+");
     myfree(out);
 
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
-    LOG_STDERR = fopen(err, "w+");
     LOG("INIT: Set log file STDERR to %s", out);
+    LOG_STDERR = fopen(err, "w+");
     myfree(err);
 
     ARGV = argv;
