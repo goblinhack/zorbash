@@ -576,17 +576,21 @@ int32_t main (int32_t argc, char *argv[])
 #else
     mkdir(dir, 0700);
 #endif
-    LOG("INIT: Set APPDATA to %s", dir);
+    LOG("INIT: APPDATA %s", dir);
     myfree(dir);
 
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
-    LOG("INIT: Set log file STDOUT to %s", out);
+    LOG("INIT: STDOUT %s", out);
+
+    LOG("INIT: a");
+    LOG_STDOUT = fopen("a", "w+");
+    LOG("INIT: a done");
+
     LOG_STDOUT = fopen(out, "w+");
-    LOG("INIT: Set log file STDOUT to %s", out);
     myfree(out);
 
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
-    LOG("INIT: Set log file STDERR to %s", out);
+    LOG("INIT: STDERR %s", out);
     LOG_STDERR = fopen(err, "w+");
     myfree(err);
 
