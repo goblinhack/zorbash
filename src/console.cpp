@@ -20,7 +20,10 @@ static inline void term_puts_fg (unsigned char a)
         ERR("overflow");
     }
 
+#ifndef _WIN32
+    //
     fputs(data[a], stdout);
+#endif
 }
 
 static void term_puts_fgbg (unsigned char fg, unsigned char bg)
