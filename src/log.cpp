@@ -125,26 +125,6 @@ void LOG (const char *fmt, ...)
     va_end(args);
 }
 
-static void logs_ (const char *fmt, va_list args)
-{
-    char buf[MAXSHORTSTR];
-
-    buf[0] = '\0';
-    vsnprintf(buf, MAXSHORTSTR, fmt, args);
-
-    fwrite(buf, strlen(buf), 1, MY_STDOUT);
-    fflush(MY_STDOUT);
-}
-
-void LOGS (const char *fmt, ...)
-{
-    va_list args;
-
-    va_start(args, fmt);
-    logs_(fmt, args);
-    va_end(args);
-}
-
 static void warn_ (const char *fmt, va_list args)
 {
     char buf[MAXSHORTSTR];
@@ -185,7 +165,9 @@ static void con_ (const char *fmt, va_list args)
 
     term_log(buf);
     putchar('\n');
-
+#ifdef _WIN32
+    putf(stdout, buf);
+#endif
     wid_console_log(buf);
 }
 
