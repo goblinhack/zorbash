@@ -19,6 +19,8 @@ double gl_rotate;
 
 #define GL_ERROR_CHECK() { \
     auto errCode = glGetError();                                   \
+    ERR("OpenGL: error at %s:%s line %u",                          \
+                     __FILE__, __PRETTY_FUNCTION__, __LINE__);     \
     if (errCode == GL_NO_ERROR) {                                  \
     } else if (errCode == GL_INVALID_ENUM) {                       \
         ERR("OpenGL: error, GL_INVALID_ENUM");                     \
@@ -181,21 +183,28 @@ static void gl_init_fbo_ (int fbo,
 
     CON("INIT: - glGenTextures");
     glGenTextures(1, fbo_tex_id);
+    GL_ERROR_CHECK();
 
     CON("INIT: - glBindTexture");
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
+    GL_ERROR_CHECK();
 
     CON("INIT: - glTexParameterf");
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    GL_ERROR_CHECK();
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    GL_ERROR_CHECK();
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    GL_ERROR_CHECK();
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    GL_ERROR_CHECK();
 
     CON("INIT: - glTexImage2D");
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
                  tex_width, tex_height, 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
+    GL_ERROR_CHECK();
 
     //
     // Create a render buffer object.
@@ -207,25 +216,31 @@ static void gl_init_fbo_ (int fbo,
 
     CON("INIT: - glGenRenderbuffers_EXT");
     glGenRenderbuffers_EXT(1, render_buf_id);
+    GL_ERROR_CHECK();
 
     CON("INIT: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, *render_buf_id);
+    GL_ERROR_CHECK();
 
     CON("INIT: - glRenderbufferStorage_EXT");
     glRenderbufferStorage_EXT(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
                               tex_width, tex_height);
+    GL_ERROR_CHECK();
 
     CON("INIT: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, 0);
+    GL_ERROR_CHECK();
 
     //
     // Create a frame buffer object.
     //
     CON("INIT: - glGenFramebuffers_EXT");
     glGenFramebuffers_EXT(1, fbo_id);
+    GL_ERROR_CHECK();
 
     CON("INIT: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, *fbo_id);
+    GL_ERROR_CHECK();
 
     //
     // Attach the texture to FBO color attachment point
@@ -236,6 +251,7 @@ static void gl_init_fbo_ (int fbo,
                                GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
                                *fbo_tex_id,           // 4. tex ID
                                0);                    // 5. mipmap level: 0(base)
+    GL_ERROR_CHECK();
 
     //
     // Attach the renderbuffer to depth attachment point
@@ -245,12 +261,14 @@ static void gl_init_fbo_ (int fbo,
                                   GL_DEPTH_ATTACHMENT, // 2. attachment point
                                   GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
                                   *render_buf_id);     // 4. rbo ID
+    GL_ERROR_CHECK();
 
     //
     // Check FBO status
     //
     CON("INIT: - glCheckFramebufferStatus_EXT");
     GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
+    GL_ERROR_CHECK();
     if (status != GL_FRAMEBUFFER_COMPLETE) {
         ERR("Failed to create framebuffer, error: %d", status);
 
