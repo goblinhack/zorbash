@@ -526,24 +526,67 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
-    CON("INIT: _WIN32");
+    ARGV = argv;
+
+    //////////////////////////////////////////////////////////////////////////////
+    // Use LOG instead of CON until we set stdout or you see two logs
+    // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v 
+    //////////////////////////////////////////////////////////////////////////////
 #ifdef _WIN32
-    CON("INIT: _WIN32");
+    LOG("INIT: _WIN32");
 #endif
 #ifdef __MINGW32__
-    CON("INIT: __MINGW32__");
+    LOG("INIT: __MINGW32__");
 #endif
 #ifdef __MINGW64__
-    CON("INIT: __MINGW64__");
+    LOG("INIT: __MINGW64__");
 #endif
 #ifdef __APPLE__
-    CON("INIT: __APPLE__");
+    LOG("INIT: __APPLE__");
 #endif
 #ifdef __linux__
-    CON("INIT: __linux__");
+    LOG("INIT: __linux__");
 #endif
 
-    LOG("INIT: ascii");
+    LOG("INIT: getenv APPDATA or use default, 'appdata'");
+    const char *appdata;
+    appdata = getenv("APPDATA");
+    if (!appdata || !appdata[0]) {
+        appdata = "appdata";
+    }
+
+    LOG("INIT: create APPDATA dir %s", appdata);
+#ifdef _WIN32
+    mkdir(appdata);
+#else
+    mkdir(appdata, 0700);
+#endif
+
+    char *dir = dynprintf("%s%s%s", appdata, DSEP, "zorbash");
+#ifdef _WIN32
+    mkdir(dir);
+#else
+    mkdir(dir, 0700);
+#endif
+    LOG("INIT: set APPDATA to %s", dir);
+    myfree(dir);
+
+    char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
+    LOG("INIT: set STDOUT to %s", out);
+    LOG_STDOUT = fopen(out, "w+");
+    myfree(out);
+
+    char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
+    LOG("INIT: set STDERR to %s", out);
+    LOG_STDERR = fopen(err, "w+");
+    myfree(err);
+
+    //////////////////////////////////////////////////////////////////////////////
+    // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ Use LOG 
+    // instead of CON until we set stdout or you see two logs
+    //////////////////////////////////////////////////////////////////////////////
+
+    LOG("INIT: ascii console");
     ascii_init();
 
     //
@@ -555,6 +598,9 @@ int32_t main (int32_t argc, char *argv[])
     std::ios_base::sync_with_stdio(false);
     std::wcout.imbue(loc);
 #endif
+
+    //dospath2unix(ARGV[0]);
+    //LOG("Set unix path to %s", ARGV[0]);
 
     //
     // Random numbers
@@ -573,42 +619,6 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGABRT, segv_handler);   // install our handler
     signal(SIGINT, ctrlc_handler);   // install our handler
 #endif
-
-    LOG("INIT: set APPDATA location");
-    const char *appdata;
-    appdata = getenv("APPDATA");
-    if (!appdata || !appdata[0]) {
-        appdata = "appdata";
-    }
-
-#ifdef _WIN32
-    mkdir(appdata);
-#else
-    mkdir(appdata, 0700);
-#endif
-
-    char *dir = dynprintf("%s%s%s", appdata, DSEP, "zorbash");
-#ifdef _WIN32
-    mkdir(dir);
-#else
-    mkdir(dir, 0700);
-#endif
-    LOG("INIT: APPDATA %s", dir);
-    myfree(dir);
-
-    char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
-    LOG("INIT: STDOUT %s", out);
-    LOG_STDOUT = fopen(out, "w+");
-    myfree(out);
-
-    char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
-    LOG("INIT: STDERR %s", out);
-    LOG_STDERR = fopen(err, "w+");
-    myfree(err);
-
-    ARGV = argv;
-    //dospath2unix(ARGV[0]);
-    //LOG("Set unix path to %s", ARGV[0]);
 
     CON("INIT: arguments");
     parse_args(argc, argv);
