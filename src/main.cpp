@@ -526,6 +526,7 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
+    CON("INIT: _WIN32");
 #ifdef _WIN32
     CON("INIT: _WIN32");
 #endif
