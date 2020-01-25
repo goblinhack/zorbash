@@ -581,17 +581,19 @@ int32_t main (int32_t argc, char *argv[])
 
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
     LOG_STDOUT = fopen(out, "w+");
+    LOG("Set log file STDOUT to %s", out);
     myfree(out);
 
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
     LOG_STDERR = fopen(err, "w+");
+    LOG("Set log file STDERR to %s", out);
     myfree(err);
 
     ARGV = argv;
+    //dospath2unix(ARGV[0]);
+    //LOG("Set unix path to %s", ARGV[0]);
 
-    dospath2unix(ARGV[0]);
-
-    CON("Inirt arguments");
+    CON("INIT arguments");
     parse_args(argc, argv);
 
     CON("INIT: colors");
