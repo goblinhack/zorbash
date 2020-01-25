@@ -582,6 +582,7 @@ int32_t main (int32_t argc, char *argv[])
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
     LOG("INIT: Set log file STDOUT to %s", out);
     LOG_STDOUT = fopen(out, "w+");
+    LOG("INIT: Set log file STDOUT to %s", out);
     myfree(out);
 
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
