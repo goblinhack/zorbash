@@ -579,6 +579,10 @@ int32_t main (int32_t argc, char *argv[])
     LOG("INIT: APPDATA %s", dir);
     myfree(dir);
 
+    LOG("INIT: a");
+    LOG_STDOUT = fopen("\a.txt", "w+");
+    LOG("INIT: a ok");
+
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
     LOG("INIT: STDOUT %s", out);
     LOG_STDOUT = fopen(out, "w+");
