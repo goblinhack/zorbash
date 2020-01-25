@@ -557,7 +557,7 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGINT, ctrlc_handler);   // install our handler
 #endif
 
-    LOG("Find APPDATA location");
+    LOG("INIT: Find APPDATA location");
     const char *appdata;
     appdata = getenv("APPDATA");
     if (!appdata || !appdata[0]) {
@@ -576,24 +576,24 @@ int32_t main (int32_t argc, char *argv[])
 #else
     mkdir(dir, 0700);
 #endif
-    LOG("Set APPDATA to %s", dir);
+    LOG("INIT: Set APPDATA to %s", dir);
     myfree(dir);
 
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
     LOG_STDOUT = fopen(out, "w+");
-    LOG("Set log file STDOUT to %s", out);
+    LOG("INIT: Set log file STDOUT to %s", out);
     myfree(out);
 
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
     LOG_STDERR = fopen(err, "w+");
-    LOG("Set log file STDERR to %s", out);
+    LOG("INIT: Set log file STDERR to %s", out);
     myfree(err);
 
     ARGV = argv;
     //dospath2unix(ARGV[0]);
     //LOG("Set unix path to %s", ARGV[0]);
 
-    CON("INIT arguments");
+    CON("INIT: arguments");
     parse_args(argc, argv);
 
     CON("INIT: colors");
