@@ -19,23 +19,25 @@ double gl_rotate;
 
 #define GL_ERROR_CHECK() { \
     auto errCode = glGetError();                                   \
-    ERR("OpenGL: error at %s:%s line %u",                          \
-                     __FILE__, __PRETTY_FUNCTION__, __LINE__);     \
     if (errCode == GL_NO_ERROR) {                                  \
-    } else if (errCode == GL_INVALID_ENUM) {                       \
-        ERR("OpenGL: error, GL_INVALID_ENUM");                     \
-    } else if (errCode == GL_INVALID_VALUE) {                      \
-        ERR("OpenGL: error, GL_INVALID_VALUE");                    \
-    } else if (errCode == GL_INVALID_OPERATION) {                  \
-        ERR("OpenGL: error, GL_INVALID_OPERATION");                \
-    } else if (errCode == GL_STACK_OVERFLOW) {                     \
-        ERR("OpenGL: error, GL_STACK_OVERFLOW");                   \
-    } else if (errCode == GL_STACK_UNDERFLOW) {                    \
-        ERR("OpenGL: error, GL_STACK_UNDERFLOW");                  \
-    } else if (errCode == GL_OUT_OF_MEMORY) {                      \
-        ERR("OpenGL: error, GL_OUT_OF_MEMORY");                    \
     } else {                                                       \
-        ERR("OpenGL: unknown error, %d", errCode);                 \
+        ERR("OpenGL: error at %s:%s line %u",                      \
+            __FILE__, __PRETTY_FUNCTION__, __LINE__);              \
+        if (errCode == GL_INVALID_ENUM) {                          \
+            ERR("OpenGL: error, GL_INVALID_ENUM");                 \
+        } else if (errCode == GL_INVALID_VALUE) {                  \
+            ERR("OpenGL: error, GL_INVALID_VALUE");                \
+        } else if (errCode == GL_INVALID_OPERATION) {              \
+            ERR("OpenGL: error, GL_INVALID_OPERATION");            \
+        } else if (errCode == GL_STACK_OVERFLOW) {                 \
+            ERR("OpenGL: error, GL_STACK_OVERFLOW");               \
+        } else if (errCode == GL_STACK_UNDERFLOW) {                \
+            ERR("OpenGL: error, GL_STACK_UNDERFLOW");              \
+        } else if (errCode == GL_OUT_OF_MEMORY) {                  \
+            ERR("OpenGL: error, GL_OUT_OF_MEMORY");                \
+        } else {                                                   \
+            ERR("OpenGL: unknown error, %d", errCode);             \
+        }                                                          \
     }                                                              \
 }
 
