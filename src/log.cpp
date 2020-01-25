@@ -14,6 +14,22 @@
 #include "my_thing.h"
 #include "my_ascii.h"
 
+#define FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS() \
+    fflush(stdout); \
+    fflush(stderr); \
+    fflush(MY_STDOUT); \
+    fflush(MY_STDERR);
+
+#ifdef _WIN32
+//
+// windows is such utter garbage that if the program crashes it does not flush 
+// the goddamned console! So we need this...
+//
+#define FLUSH_THE_CONSOLE() FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS()
+#else
+#define FLUSH_THE_CONSOLE() // sensible OS
+#endif
+
 uint8_t croaked;
 
 static void get_timestamp (char *buf, int32_t len)
@@ -111,7 +127,6 @@ static void log_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 
     // wid_console_log(buf + len);
 }
@@ -136,7 +151,7 @@ static void warn_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
+    FLUSH_THE_CONSOLE();
 
     wid_console_log(buf);
 }
@@ -156,25 +171,18 @@ static void con_ (const char *fmt, va_list args)
     int len;
 
     buf[0] = '\0';
-printf("CON %d\n", __LINE__);
     get_timestamp(buf, MAXSHORTSTR);
-printf("CON %d\n", __LINE__);
     len = (int)strlen(buf);
-printf("CON %d\n", __LINE__);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
-printf("CON %d\n", __LINE__);
 
     putf(MY_STDOUT, buf);
-printf("CON %d\n", __LINE__);
-    fflush(MY_STDOUT);
-printf("CON %d\n", __LINE__);
 
     term_log(buf);
-printf("CON %d\n", __LINE__);
     putchar('\n');
-printf("CON %d\n", __LINE__);
 
     wid_console_log(buf);
+
+    FLUSH_THE_CONSOLE();
 }
 
 static void con_ (const wchar_t *fmt, va_list args)
@@ -183,15 +191,9 @@ static void con_ (const wchar_t *fmt, va_list args)
         char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
-printf("CON %d\n", __LINE__);
         get_timestamp(buf, MAXSHORTSTR);
-printf("CON %d\n", __LINE__);
         fprintf(MY_STDOUT, "%s", buf);
-printf("CON %d\n", __LINE__);
-        fflush(MY_STDOUT);
-printf("CON %d\n", __LINE__);
         term_log(buf);
-printf("CON %d\n", __LINE__);
     }
 
     {
@@ -201,23 +203,19 @@ printf("CON %d\n", __LINE__);
         //
         // Only a single nul is written, but as we read 2 at a time...
         //
-printf("CON %d\n", __LINE__);
         if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
             fprintf(stderr, "Failed to console log: [%S]\n", fmt);
         }
-printf("CON %d\n", __LINE__);
 
         fwprintf(MY_STDOUT, L"%S\n", buf);
-printf("CON %d\n", __LINE__);
-        fflush(MY_STDOUT);
-printf("CON %d\n", __LINE__);
         term_log(buf);
-printf("CON %d\n", __LINE__);
         wid_console_log(buf);
     }
+
     putchar('\n');
+    FLUSH_THE_CONSOLE();
 }
 
 void con (const wchar_t *fmt)
@@ -225,30 +223,20 @@ void con (const wchar_t *fmt)
     {
         char buf[MAXSHORTSTR];
 
-printf("CON %d\n", __LINE__);
         buf[0] = '\0';
         get_timestamp(buf, MAXSHORTSTR);
-printf("CON %d\n", __LINE__);
         fprintf(MY_STDOUT, "%s", buf);
-printf("CON %d\n", __LINE__);
-        fflush(MY_STDOUT);
-printf("CON %d\n", __LINE__);
         term_log(buf);
-printf("CON %d\n", __LINE__);
     }
 
     {
-printf("CON %d\n", __LINE__);
         fwprintf(MY_STDOUT, L"%S\n", fmt);
-printf("CON %d\n", __LINE__);
-        fflush(MY_STDOUT);
-printf("CON %d\n", __LINE__);
         term_log(fmt);
-printf("CON %d\n", __LINE__);
         wid_console_log(fmt);
-printf("CON %d\n", __LINE__);
     }
+
     putchar('\n');
+    FLUSH_THE_CONSOLE();
 }
 
 static void minicon_ (const char *fmt, va_list args)
@@ -264,13 +252,13 @@ static void minicon_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 
     term_log(buf);
     putchar('\n');
 
     wid_minicon_log(buf + len);
     //wid_console_log(buf + len);
+    FLUSH_THE_CONSOLE();
 }
 
 static void minicon_ (const wchar_t *fmt, va_list args)
@@ -280,7 +268,6 @@ static void minicon_ (const wchar_t *fmt, va_list args)
         ts[0] = '\0';
         get_timestamp(ts, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%sMINICON: ", ts);
-        fflush(MY_STDOUT);
         term_log(ts);
     }
 
@@ -298,12 +285,13 @@ static void minicon_ (const wchar_t *fmt, va_list args)
         }
 
         fwprintf(MY_STDOUT, L"%S\n", buf);
-        fflush(MY_STDOUT);
         term_log(buf);
         wid_minicon_log(buf);
         //wid_console_log(buf);
     }
+
     putchar('\n');
+    FLUSH_THE_CONSOLE();
 }
 
 void minicon (const wchar_t *fmt)
@@ -314,44 +302,35 @@ void minicon (const wchar_t *fmt)
         buf[0] = '\0';
         get_timestamp(buf, MAXSHORTSTR);
         fprintf(MY_STDOUT, "%s", buf);
-        fflush(MY_STDOUT);
         term_log(buf);
     }
 
     {
         fwprintf(MY_STDOUT, L"%S\n", fmt);
-        fflush(MY_STDOUT);
         term_log(fmt);
         wid_minicon_log(fmt);
         //wid_console_log(fmt);
     }
     putchar('\n');
+    FLUSH_THE_CONSOLE();
 }
 
 void CON (const char *fmt, ...)
 {
     va_list args;
 
-printf("CON %d\n", __LINE__);
     va_start(args, fmt);
-printf("CON %d\n", __LINE__);
     con_(fmt, args);
-printf("CON %d\n", __LINE__);
     va_end(args);
-printf("CON %d\n", __LINE__);
 }
 
 void CON (const wchar_t *fmt, ...)
 {
     va_list args;
 
-printf("CON %d\n", __LINE__);
     va_start(args, fmt);
-printf("CON %d\n", __LINE__);
     con_(fmt, args);
-printf("CON %d\n", __LINE__);
     va_end(args);
-printf("CON %d\n", __LINE__);
 }
 
 void MINICON (const char *fmt, ...)
@@ -387,10 +366,9 @@ static void dying_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     fprintf(stderr, "%s\n", buf);
-    fflush(stderr);
-
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
+
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
 static void err_ (const char *fmt, va_list args)
@@ -411,10 +389,8 @@ static void err_ (const char *fmt, va_list args)
     snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
-    fflush(MY_STDERR);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 
     term_log(buf);
     putchar('\n');
@@ -423,7 +399,8 @@ static void err_ (const char *fmt, va_list args)
 
     callstack_dump();
     traceback_dump();
-    fflush(MY_STDOUT);
+
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
 static void croak_ (const char *fmt, va_list args)
@@ -449,21 +426,22 @@ static void croak_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     fprintf(stderr, "%s\n", buf);
-    fflush(stderr);
 
     ERR("%s", buf + tslen);
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
     if (croaked) {
         return;
     }
 
-    /*
-     * Seems to hang on crashes. Is it useful?
-     */
+    //
+    // Seems to hang on crashes. Is it useful?
+    //
     py_trace();
 
     croaked = true;
 
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
     die();
 }
 
@@ -533,7 +511,6 @@ void Thing::log_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 }
 
 void Thing::log (const char *fmt, ...)
@@ -567,7 +544,6 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
         vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
         putf(MY_STDOUT, buf);
-        fflush(MY_STDOUT);
     }
 
     kill();
@@ -603,7 +579,6 @@ void Thing::dead_ (const char *fmt, va_list args)
         vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
         putf(MY_STDOUT, buf);
-        fflush(MY_STDOUT);
     }
 
     kill();
@@ -667,11 +642,11 @@ void Thing::con_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 
     term_log(buf);
     putchar('\n');
     wid_console_log(buf);
+    FLUSH_THE_CONSOLE();
 }
 
 void Thing::con (const char *fmt, ...)
@@ -702,19 +677,16 @@ void Thing::err_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 
     putf(MY_STDERR, buf);
-    fflush(MY_STDERR);
 
     fprintf(stderr, "%s\n", buf);
-    fflush(stderr);
 
     callstack_dump();
     traceback_dump();
-    fflush(MY_STDOUT);
 
     wid_console_log(buf);
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
 void Thing::err (const char *fmt, ...)
@@ -758,7 +730,6 @@ void Light::log_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 }
 
 void Light::log (const char *fmt, ...)
@@ -847,19 +818,16 @@ void Light::err_ (const char *fmt, va_list args)
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 
     putf(MY_STDERR, buf);
-    fflush(MY_STDERR);
 
     fprintf(stderr, "%s\n", buf);
-    fflush(stderr);
 
     callstack_dump();
     traceback_dump();
-    fflush(MY_STDOUT);
 
     wid_console_log(buf);
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
 void Light::err (const char *fmt, ...)
@@ -947,20 +915,17 @@ static void msgerr_ (const char *fmt, va_list args)
     snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
-    fflush(MY_STDERR);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 
     fprintf(stderr, "%s\n", buf);
-    fflush(stderr);
 
     wid_console_log(buf);
 
     callstack_dump();
     traceback_dump();
 
-    fflush(MY_STDOUT);
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
 void MSG_BOX (const char *fmt, ...)
@@ -1002,16 +967,16 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
     snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
-    fflush(MY_STDERR);
 
     putf(MY_STDOUT, buf);
-    fflush(MY_STDOUT);
 
     fprintf(stderr, "%s\n", buf);
-    fflush(stderr);
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
     callstack_dump();
     traceback_dump();
+
+    FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
 void SDL_MSG_BOX (const char *fmt, ...)
