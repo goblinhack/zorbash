@@ -596,69 +596,34 @@ int32_t main (int32_t argc, char *argv[])
     LOG("INIT: APPDATA %s", dir);
     myfree(dir);
 
-printf("main %d\n",__LINE__);
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
-printf("main %d\n",__LINE__);
     LOG("INIT: STDOUT %s", out);
-printf("main %d\n",__LINE__);
-fflush(stdout);
     LOG_STDOUT = fopen(out, "w+");
-printf("main %d\n",__LINE__);
-fflush(stdout);
     myfree(out);
-printf("main %d\n",__LINE__);
-fflush(stdout);
 
-printf("main %d\n",__LINE__);
-fflush(stdout);
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
-printf("main %d\n",__LINE__);
-fflush(stdout);
     LOG("INIT: STDERR %s", out);
-printf("main %d\n",__LINE__);
-fflush(stdout);
     LOG_STDERR = fopen(err, "w+");
-printf("main %d\n",__LINE__);
     myfree(err);
-printf("main %d\n",__LINE__);
 
-printf("main %d\n",__LINE__);
     ARGV = argv;
-printf("main %d\n",__LINE__);
     //dospath2unix(ARGV[0]);
-printf("main %d\n",__LINE__);
     //LOG("Set unix path to %s", ARGV[0]);
-printf("main %d\n",__LINE__);
 
-printf("main %d\n",__LINE__);
     CON("INIT: arguments");
-printf("main %d\n",__LINE__);
     parse_args(argc, argv);
-printf("main %d\n",__LINE__);
 
-printf("main %d\n",__LINE__);
     CON("INIT: colors");
-printf("main %d\n",__LINE__);
     color_init();
-printf("main %d\n",__LINE__);
 
-printf("main %d\n",__LINE__);
     CON("INIT: resource locations");
-printf("main %d\n",__LINE__);
     find_file_locations();
-printf("main %d\n",__LINE__);
 
-printf("main %d\n",__LINE__);
     CON("INIT: charmaps");
-printf("main %d\n",__LINE__);
     Charmap::init_charmaps();
-printf("main %d\n",__LINE__);
 
-printf("main %d\n",__LINE__);
     CON("INIT: python");
-printf("main %d\n",__LINE__);
     python_init(argv);
-printf("main %d\n",__LINE__);
 
 #if 0
     extern int grid_test(void);
