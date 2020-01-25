@@ -165,6 +165,7 @@ static void con_ (const char *fmt, va_list args)
 
     term_log(buf);
     putchar('\n');
+
     wid_console_log(buf);
 }
 
@@ -635,11 +636,6 @@ void Thing::con_ (const char *fmt, va_list args)
     term_log(buf);
     putchar('\n');
     wid_console_log(buf);
-#ifdef _WIN32
-    printf("HELLO\n");
-    printf("HELLO [%s]\n", buf);
-    putf(stdout, buf);
-#endif
 }
 
 void Thing::con (const char *fmt, ...)
