@@ -157,7 +157,7 @@ static void gl_init_fbo_ (int fbo,
     GLuint tex_width = game->config.drawable_gl_width;
     GLuint tex_height = game->config.drawable_gl_height;
 
-    CON("INIT: GL FBO, size %dx%d", tex_width, tex_height);
+    CON("INIT: OpenGL FBO, size %dx%d", tex_width, tex_height);
 
     glGenTextures(1, fbo_tex_id);
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
@@ -192,7 +192,7 @@ static void gl_init_fbo_ (int fbo,
     glGenFramebuffers_EXT(1, fbo_id);
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, *fbo_id);
 
-    LOG("Making FBO, size %d %d id %d",tex_width,tex_height, *fbo_id);
+    LOG("Making FBO, size %d %d id %d", tex_width, tex_height, *fbo_id);
 
     //
     // Attach the texture to FBO color attachment point
@@ -231,7 +231,7 @@ void gl_init_fbo (void)
 {
     int i;
 
-    CON("INIT: GL create FBOs");
+    CON("INIT: OpenGL create FBOs");
     for (i = 0; i < MAX_FBO; i++) {
         gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i]);
         blit_fbo_bind(i);
