@@ -22,33 +22,39 @@ void gl_init_2d_mode (void)
     //
     // Enable Texture Worldping
     //
+    CON("INIT: OpenGL enable textures");
     glEnable(GL_TEXTURE_2D);
 
     //
     // Enable alpha blending for sprites
     //
+    CON("INIT: OpenGL enable blending");
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     //
     // Setup our viewport
     //
+    CON("INIT: OpenGL enable viewport");
     glViewport(0, 0, game->config.drawable_gl_width,
                game->config.drawable_gl_height);
 
     //
     // Make sure we're changing the model view and not the projection
     //
+    CON("INIT: OpenGL modelview");
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
 
     //
     // Reset the view
     //
+    CON("INIT: OpenGL identity");
     glLoadIdentity();
 
     gl_init_fbo();
 
+    CON("INIT: OpenGL misc");
     glLineWidth(2.0);
     glEnable(GL_LINE_SMOOTH);
 }
@@ -60,6 +66,7 @@ void gl_enter_2d_mode (void)
     //
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
+    CON("INIT: OpenGL enter 2D mode");
 
     //
     // Reset the view
@@ -69,9 +76,10 @@ void gl_enter_2d_mode (void)
     //
     // 2D projection
     //
+    CON("INIT: OpenGL enable ortho projection");
     glOrtho(0,
-             game->config.video_gl_width, game->config.video_gl_height,
-             0, -1200.0, 1200.0);
+            game->config.video_gl_width, game->config.video_gl_height,
+            0, -1200.0, 1200.0);
 
     //
     // Make sure we're changing the model view and not the projection
@@ -149,7 +157,7 @@ static void gl_init_fbo_ (int fbo,
     GLuint tex_width = game->config.drawable_gl_width;
     GLuint tex_height = game->config.drawable_gl_height;
 
-    LOG("Making FBO, size %dx%d", tex_width, tex_height);
+    CON("INIT: GL FBO, size %dx%d", tex_width, tex_height);
 
     glGenTextures(1, fbo_tex_id);
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
@@ -223,6 +231,7 @@ void gl_init_fbo (void)
 {
     int i;
 
+    CON("INIT: GL create FBOs");
     for (i = 0; i < MAX_FBO; i++) {
         gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i]);
         blit_fbo_bind(i);

@@ -100,55 +100,55 @@ void quit (void)
         game->fini();
     }
 
-    LOG("quit:room_fini");
+    LOG("FINI: room_fini");
     room_fini();
 
-    LOG("quit:level_fini");
+    LOG("FINI: level_fini");
     level_fini();
 
-    LOG("quit:python_fini");
+    LOG("FINI: python_fini");
     python_fini();
 
-    LOG("quit:sdl_exit");
+    LOG("FINI: sdl_exit");
     sdl_exit();
 
-    LOG("quit:tp_fini");
+    LOG("FINI: tp_fini");
     tp_fini();
 
-    LOG("quit:wid_console_fini");
+    LOG("FINI: wid_console_fini");
     wid_console_fini();
 
-    LOG("quit:wid_minicon_fini");
+    LOG("FINI: wid_minicon_fini");
     wid_minicon_fini();
 
-    LOG("quit:wid_test_fini");
+    LOG("FINI: wid_test_fini");
     wid_test_fini();
 
-    LOG("quit:command_fini");
+    LOG("FINI: command_fini");
     command_fini();
 
-    LOG("quit:wid_fini");
+    LOG("FINI: wid_fini");
     wid_fini();
 
-    LOG("quit:font_fini");
+    LOG("FINI: font_fini");
     font_fini();
 
-    LOG("quit:tex_fini");
+    LOG("FINI: tex_fini");
     tex_fini();
 
-    LOG("quit:wid_tiles_fini");
+    LOG("FINI: wid_tiles_fini");
     wid_tiles_fini();
 
-    LOG("quit:tile_fini");
+    LOG("FINI: tile_fini");
     tile_fini();
 
-    LOG("quit:sdl_fini");
+    LOG("FINI: sdl_fini");
     sdl_fini();
 
-    LOG("quit:blit_fini");
+    LOG("FINI: blit_fini");
     blit_fini();
 
-    LOG("quit:color_fini");
+    LOG("FINI: color_fini");
     color_fini();
 
     if (EXEC_FULL_PATH_AND_NAME) {
@@ -526,12 +526,14 @@ static void parse_args (int32_t argc, char *argv[])
 
 int32_t main (int32_t argc, char *argv[])
 {_
+    LOG("INIT: ascii");
     ascii_init();
 
     //
     // Need this to get the UTF on the console
     //
 #ifndef _WIN32
+    LOG("INIT: locale");
     std::locale loc("");
     std::ios_base::sync_with_stdio(false);
     std::wcout.imbue(loc);
@@ -540,6 +542,7 @@ int32_t main (int32_t argc, char *argv[])
     //
     // Random numbers
     //
+    LOG("INIT: random numbers");
     double mean = 1.0;
     double std = 0.5;
     std::normal_distribution<double> distribution;
@@ -548,11 +551,13 @@ int32_t main (int32_t argc, char *argv[])
     mysrand(time(0));
 
 #ifdef ENABLE_CRASH_HANDLER
+    LOG("INIT: crash handlers");
     signal(SIGSEGV, segv_handler);   // install our handler
     signal(SIGABRT, segv_handler);   // install our handler
     signal(SIGINT, ctrlc_handler);   // install our handler
 #endif
 
+    LOG("Find APPDATA location");
     const char *appdata;
     appdata = getenv("APPDATA");
     if (!appdata || !appdata[0]) {
@@ -571,6 +576,7 @@ int32_t main (int32_t argc, char *argv[])
 #else
     mkdir(dir, 0700);
 #endif
+    LOG("Set APPDATA to %s", dir);
     myfree(dir);
 
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
@@ -585,14 +591,19 @@ int32_t main (int32_t argc, char *argv[])
 
     dospath2unix(ARGV[0]);
 
+    CON("Inirt arguments");
     parse_args(argc, argv);
 
+    CON("INIT: colors");
     color_init();
 
+    CON("INIT: resource locations");
     find_file_locations();
 
+    CON("INIT: charmaps");
     Charmap::init_charmaps();
 
+    CON("INIT: python");
     python_init(argv);
 
 #if 0
@@ -617,6 +628,7 @@ int32_t main (int32_t argc, char *argv[])
     //
     // Create and load the last saved game
     //
+    CON("INIT: game config");
     game = new Game(std::string(appdata));
     game->load_config();
 
@@ -628,51 +640,63 @@ int32_t main (int32_t argc, char *argv[])
         game->config.arcade_mode = opt_arcade_mode;
     }
 
+    CON("INIT: SDL");
     if (!sdl_init()) {
         ERR("SDL init");
     }
 
+    CON("INIT: OpenGL 2D mode");
     gl_init_2d_mode();
 
+    CON("INIT: textures");
     if (!tex_init()) {
         ERR("tex init");
     }
 
+    CON("INIT: UI tiles");
     if (!wid_tiles_init()) {
         ERR("wid tiles init");
     }
 
+    CON("INIT: tiles");
     if (!tile_init()) {
         ERR("tile init");
     }
 
+    CON("INIT: fonts");
     if (!font_init()) {
         ERR("Font init");
     }
 
+    CON("INIT: UI");
     if (!wid_init()) {
         ERR("wid init");
     }
 
     py_call_void("init2");
 
+    CON("INIT: UI console");
     if (!wid_console_init()) {
         ERR("wid_console init");
     }
 
+    CON("INIT: UI minicon");
     if (!wid_minicon_init()) {
         ERR("wid_minicon init");
     }
 
+    CON("INIT: UI commands");
     if (!command_init()) {
         ERR("command init");
     }
 
+    CON("INIT: thing templates");
     tp_init();
 
     //
     // Create a fresh game if none was loaded
     //
+    CON("INIT: rooms");
     room_init();
 #if 0
     game->init();
@@ -693,16 +717,22 @@ int32_t main (int32_t argc, char *argv[])
     }
 #endif
 
+    CON("Clear minicon");
     wid_minicon_flush();
     if (opt_new_game) {
+        CON("Goto new game");
         game->new_game();
     } else {
+        CON("Goto game menu");
         game->main_menu_select();
     }
 
     sdl_loop();
+
+    CON("Leave 2D mode");
     gl_leave_2d_mode();
 
+    CON("Quit");
     quit();
 
     LOG("Goodbye cruel world");
