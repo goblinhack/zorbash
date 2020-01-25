@@ -156,15 +156,23 @@ static void con_ (const char *fmt, va_list args)
     int len;
 
     buf[0] = '\0';
+printf("CON %d\n", __LINE__);
     get_timestamp(buf, MAXSHORTSTR);
+printf("CON %d\n", __LINE__);
     len = (int)strlen(buf);
+printf("CON %d\n", __LINE__);
     vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+printf("CON %d\n", __LINE__);
 
     putf(MY_STDOUT, buf);
+printf("CON %d\n", __LINE__);
     fflush(MY_STDOUT);
+printf("CON %d\n", __LINE__);
 
     term_log(buf);
+printf("CON %d\n", __LINE__);
     putchar('\n');
+printf("CON %d\n", __LINE__);
 
     wid_console_log(buf);
 }
@@ -175,28 +183,38 @@ static void con_ (const wchar_t *fmt, va_list args)
         char buf[MAXSHORTSTR];
 
         buf[0] = '\0';
+printf("CON %d\n", __LINE__);
         get_timestamp(buf, MAXSHORTSTR);
+printf("CON %d\n", __LINE__);
         fprintf(MY_STDOUT, "%s", buf);
+printf("CON %d\n", __LINE__);
         fflush(MY_STDOUT);
+printf("CON %d\n", __LINE__);
         term_log(buf);
+printf("CON %d\n", __LINE__);
     }
 
     {
         wchar_t buf[MAXSHORTSTR];
         auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
 
-        /*
-        * Only a single nul is written, but as we read 2 at a time...
-        */
+        //
+        // Only a single nul is written, but as we read 2 at a time...
+        //
+printf("CON %d\n", __LINE__);
         if (wrote && (wrote < MAXSHORTSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
             fprintf(stderr, "Failed to console log: [%S]\n", fmt);
         }
+printf("CON %d\n", __LINE__);
 
         fwprintf(MY_STDOUT, L"%S\n", buf);
+printf("CON %d\n", __LINE__);
         fflush(MY_STDOUT);
+printf("CON %d\n", __LINE__);
         term_log(buf);
+printf("CON %d\n", __LINE__);
         wid_console_log(buf);
     }
     putchar('\n');
@@ -314,18 +332,26 @@ void CON (const char *fmt, ...)
 {
     va_list args;
 
+printf("CON %d\n", __LINE__);
     va_start(args, fmt);
+printf("CON %d\n", __LINE__);
     con_(fmt, args);
+printf("CON %d\n", __LINE__);
     va_end(args);
+printf("CON %d\n", __LINE__);
 }
 
 void CON (const wchar_t *fmt, ...)
 {
     va_list args;
 
+printf("CON %d\n", __LINE__);
     va_start(args, fmt);
+printf("CON %d\n", __LINE__);
     con_(fmt, args);
+printf("CON %d\n", __LINE__);
     va_end(args);
+printf("CON %d\n", __LINE__);
 }
 
 void MINICON (const char *fmt, ...)
