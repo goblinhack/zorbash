@@ -470,14 +470,13 @@ static void parse_args (int32_t argc, char *argv[])
 {_
     int32_t i;
 
-    CON("Greetings mortal");
-
     //
     // Parse format args
     //
-    CON("Program name: \"%s\"", argv[0]);
+    CON("INIT: parse command line arguments");
+    CON("INIT: - program name: \"%s\"", argv[0]);
     for (i = 1; i < argc; i++) {
-        CON("  arg: \"%s\"", argv[i]);
+      CON("INIT:   - argument: \"%s\"", argv[i]);
     }
 
     for (i = 1; i < argc; i++) {
@@ -527,6 +526,7 @@ static void parse_args (int32_t argc, char *argv[])
 int32_t main (int32_t argc, char *argv[])
 {_
     ARGV = argv;
+    LOG("INIT: Greetings mortal");
 
     //////////////////////////////////////////////////////////////////////////////
     // Use LOG instead of CON until we set stdout or you see two logs
@@ -547,6 +547,7 @@ int32_t main (int32_t argc, char *argv[])
 #ifdef __linux__
     LOG("INIT: __linux__");
 #endif
+
 
     LOG("INIT: getenv APPDATA or use default, 'appdata'");
     const char *appdata;
@@ -620,19 +621,18 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGINT, ctrlc_handler);   // install our handler
 #endif
 
-    CON("INIT: arguments");
     parse_args(argc, argv);
 
-    CON("INIT: colors");
+    CON("INIT: color names");
     color_init();
 
-    CON("INIT: resource locations");
+    CON("INIT: resource locations for gfx and music");
     find_file_locations();
 
-    CON("INIT: charmaps");
+    CON("INIT: dungeon character maps");
     Charmap::init_charmaps();
 
-    CON("INIT: python");
+    CON("INIT: python modules");
     python_init(argv);
 
 #if 0
@@ -687,17 +687,17 @@ int32_t main (int32_t argc, char *argv[])
         ERR("wid tiles init");
     }
 
-    CON("INIT: tiles");
+    CON("INIT: UI and gfx tiles");
     if (!tile_init()) {
         ERR("tile init");
     }
 
-    CON("INIT: fonts");
+    CON("INIT: UI fonts");
     if (!font_init()) {
         ERR("Font init");
     }
 
-    CON("INIT: UI");
+    CON("INIT: UI widgets");
     if (!wid_init()) {
         ERR("wid init");
     }

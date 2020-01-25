@@ -157,14 +157,21 @@ static void gl_init_fbo_ (int fbo,
     GLuint tex_width = game->config.drawable_gl_width;
     GLuint tex_height = game->config.drawable_gl_height;
 
-    CON("INIT: OpenGL FBO, size %dx%d", tex_width, tex_height);
+    CON("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
 
+    CON("INIT: - glGenTextures");
     glGenTextures(1, fbo_tex_id);
+
+    CON("INIT: - glBindTexture");
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
+
+    CON("INIT: - glTexParameterf");
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    CON("INIT: - glTexImage2D");
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
                  tex_width, tex_height, 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, 0);
@@ -173,30 +180,39 @@ static void gl_init_fbo_ (int fbo,
     //
     // Create a render buffer object.
     //
-#ifdef _WIN32
     if (!glFramebufferTexture2D_EXT) {
         SDL_MSG_BOX("glGenRenderbuffers_EXT is not present; fatal");
         DIE("glGenRenderbuffers_EXT is not present; fatal");
     }
-#endif
 
+    CON("INIT: - glGenRenderbuffers_EXT");
     glGenRenderbuffers_EXT(1, render_buf_id);
+
+    CON("INIT: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, *render_buf_id);
+
+    CON("INIT: - glRenderbufferStorage_EXT");
     glRenderbufferStorage_EXT(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
                               tex_width, tex_height);
+
+    CON("INIT: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, 0);
 
     //
     // Create a frame buffer object.
     //
+    CON("INIT: - glGenFramebuffers_EXT");
     glGenFramebuffers_EXT(1, fbo_id);
+
+    CON("INIT: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, *fbo_id);
 
-    LOG("Making FBO, size %d %d id %d", tex_width, tex_height, *fbo_id);
+    CON("INITL - making FBO, size %d %d id %d", tex_width, tex_height, *fbo_id);
 
     //
     // Attach the texture to FBO color attachment point
     //
+    CON("INIT: - glFramebufferTexture2D_EXT");
     glFramebufferTexture2D_EXT(GL_FRAMEBUFFER,        // 1. fbo target: GL_FRAMEBUFFER
                                GL_COLOR_ATTACHMENT0,  // 2. attachment point
                                GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
@@ -206,6 +222,7 @@ static void gl_init_fbo_ (int fbo,
     //
     // Attach the renderbuffer to depth attachment point
     //
+    CON("INIT: - glFramebufferRenderbuffer_EXT");
     glFramebufferRenderbuffer_EXT(GL_FRAMEBUFFER,      // 1. fbo target: GL_FRAMEBUFFER
                                   GL_DEPTH_ATTACHMENT, // 2. attachment point
                                   GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
@@ -214,12 +231,14 @@ static void gl_init_fbo_ (int fbo,
     //
     // Check FBO status
     //
+    CON("INIT: - glCheckFramebufferStatus_EXT");
     GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
     if (status != GL_FRAMEBUFFER_COMPLETE) {
         ERR("Failed to create framebuffer");
     }
 
     // switch back to window-system-provided framebuffer
+    CON("INIT: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
 }
 
@@ -1106,6 +1125,9 @@ void gl_ext_init (void)
     WNDCLASSEX wc;
     HWND hwnd;
 
+    CON("INIT: OpenGL extensions");
+
+    CON("INIT: - GetModuleHandle");
     HINSTANCE hInstance = GetModuleHandle(0);
 
     wc.cbSize        = sizeof(WNDCLASSEX);
@@ -1121,19 +1143,20 @@ void gl_ext_init (void)
     wc.lpszClassName = g_szClassName;
     wc.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
 
+    CON("INIT: - RegisterClassEx");
     if (!RegisterClassEx(&wc)) {
         MessageBox(NULL, "Window Registration Failed!", "Error!",
             MB_ICONEXCLAMATION | MB_OK);
         return;
     }
 
-    hwnd = CreateWindowEx(
-                        WS_EX_CLIENTEDGE,
-                        g_szClassName,
-                        "zorbash startup",
-                        WS_OVERLAPPEDWINDOW,
-                        CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
-                        NULL, NULL, hInstance, NULL);
+    CON("INIT: - CreateWindowEx");
+    hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,
+                          g_szClassName,
+                          "zorbash startup",
+                          WS_OVERLAPPEDWINDOW,
+                          CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
+                          NULL, NULL, hInstance, NULL);
 
     if (hwnd == NULL) {
         MessageBox(NULL, "Window Creation Failed!", "Error!",
@@ -1144,7 +1167,7 @@ void gl_ext_init (void)
     ShowWindow(hwnd, 0);
     UpdateWindow(hwnd);
 
-    // initialize OpenGL rendering */
+    // initialize OpenGL rendering
 
     hDC = GetDC(hwnd);
     setupPixelFormat(hDC);
@@ -1154,7 +1177,7 @@ void gl_ext_init (void)
 
     gl_ext_load();
 
-    // finish OpenGL rendering */
+    // finish OpenGL rendering
     if (hGLRC) {
         wglMakeCurrent(NULL, NULL);
         wglDeleteContext(hGLRC);
