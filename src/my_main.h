@@ -370,8 +370,13 @@ typedef unsigned long long   uint64_t;
 //
 // msys functions seem to accept either / or \ so we don't need to worry.
 //
+#ifdef _WIN32
+#define DSEP "\\"
+#define DCHAR '\\'
+#else
 #define DSEP "/"
 #define DCHAR '/'
+#endif
 
 #define DIE(args...)                                                          \
     _                                                                         \
