@@ -17,6 +17,13 @@ float glapi_last_right;
 float glapi_last_bottom;
 double gl_rotate;
 
+#define GL_ERROR_CHECK() { \
+    auto errCode = glGetError(); \
+    if (errCode != GL_NO_ERROR) { \
+        ERR("OpenGL: error, %d", errCode); \
+    } \
+}
+
 void gl_init_2d_mode (void)
 {_
     //
@@ -207,8 +214,6 @@ static void gl_init_fbo_ (int fbo,
     CON("INIT: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, *fbo_id);
 
-    CON("INITL - making FBO, size %d %d id %d", tex_width, tex_height, *fbo_id);
-
     //
     // Attach the texture to FBO color attachment point
     //
@@ -234,12 +239,45 @@ static void gl_init_fbo_ (int fbo,
     CON("INIT: - glCheckFramebufferStatus_EXT");
     GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
     if (status != GL_FRAMEBUFFER_COMPLETE) {
-        ERR("Failed to create framebuffer");
+        ERR("Failed to create framebuffer, error: %d", status);
+
+#ifdef GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
+        if (status == GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT) {
+            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT Not all framebuffer attachment points are framebuffer attachment complete. This means that at least one attachment point with a renderbuffer or texture attached has its attached object no longer in existence or has an attached image with a width or height of zero, or the color attachment point has a non-color-renderable image attached, or the depth attachment point has a non-depth-renderable image attached, or the stencil attachment point has a non-stencil-renderable image attached.  Color-renderable formats include GL_RGBA4, GL_RGB5_A1, and GL_RGB565. GL_DEPTH_COMPONENT16 is the only depth-renderable format. GL_STENCIL_INDEX8 is the only stencil-renderable format.");
+        }
+#endif
+#ifdef GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS
+        if (status == GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS) {
+            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS Not all attached images have the same width and height.");
+        }
+#endif
+#ifdef GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT
+        if (status == GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT) {
+            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT No images are attached to the framebuffer.");
+        }
+#endif
+#ifdef GL_FRAMEBUFFER_UNSUPPORTED
+        if (status == GL_FRAMEBUFFER_UNSUPPORTED) {
+            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_UNSUPPORTED The combination of internal formats of the attached images violates an implementation-dependent set of restrictions.");
+        }
+#endif
+#ifdef GL_FRAMEBUFFER_UNSUPPORTED
+        if (status == GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER) {
+            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER");
+        }
+#endif
+#ifdef GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER
+        if (status == GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER) {
+            ERR("INIT: - OpenGL: GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER");
+        }
+#endif
     }
+    GL_ERROR_CHECK();
 
     // switch back to window-system-provided framebuffer
     CON("INIT: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
+    GL_ERROR_CHECK();
 }
 
 std::array<GLuint, MAX_FBO> render_buf_id = {};
