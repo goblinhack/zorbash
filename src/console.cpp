@@ -22,6 +22,8 @@ static inline void term_puts_fg (unsigned char a)
 
 #ifndef _WIN32
     //
+    // Seems to mess up the windows console so you get no outut... sad.
+    //
     fputs(data[a], stdout);
 #endif
 }
@@ -55,7 +57,9 @@ static void term_puts_fgbg (unsigned char fg, unsigned char bg)
         return;
     }
 
+#ifndef _WIN32
     fputs((char*)data[(bg & 7) * 8 + (fg & 7)], stdout);
+#endif
 }
 
 static term_color term_color_string_to_index (const wchar_t **s)

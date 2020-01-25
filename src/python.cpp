@@ -1913,6 +1913,7 @@ catchOutErr = CatchOutErr()\n\
 sys.stdout = catchOutErr\n\
 sys.stderr = catchOutErr\n\
 ";
+printf("PYEXEC\n");
 
     PyObject *pModule = PyImport_AddModule("__main__");
 
