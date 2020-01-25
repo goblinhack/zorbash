@@ -582,7 +582,15 @@ int32_t main (int32_t argc, char *argv[])
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
     LOG("INIT: STDOUT %s", out);
 
-    LOG("INIT: a");
+    LOG("INIT: a r");
+    LOG_STDOUT = fopen("a", "r");
+    LOG("INIT: a done");
+
+    LOG("INIT: a w");
+    LOG_STDOUT = fopen("a", "w");
+    LOG("INIT: a done");
+
+    LOG("INIT: a w+");
     LOG_STDOUT = fopen("a", "w+");
     LOG("INIT: a done");
 
