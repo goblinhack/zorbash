@@ -798,265 +798,273 @@ static void gl_ext_load (void)
     glCreateProgram_EXT = (__typeof__(glCreateProgram_EXT))
         wglGetProcAddress("glCreateProgram");
     if (!glCreateProgram_EXT) {
-        LOG("INIT: - glCreateProgram_EXT - not present");
+        CON("INIT: - glCreateProgram_EXT - NOT present");
     } else {
-        LOG("INIT: - glCreateProgram_EXT - present");
+        CON("INIT: - glCreateProgram_EXT - present");
     }
 
     glDeleteProgram_EXT =
         (__typeof__(glDeleteProgram_EXT)) wglGetProcAddress("glDeleteProgram");
     if (!glDeleteProgram_EXT) {
-        LOG("INIT: - glDeleteProgram_EXT - not present");
+        CON("INIT: - glDeleteProgram_EXT - NOT present");
     } else {
-        LOG("INIT: - glDeleteProgram_EXT - present");
+        CON("INIT: - glDeleteProgram_EXT - present");
     }
 
     glIsProgram_EXT =
         (__typeof__(glIsProgram_EXT)) wglGetProcAddress("glIsProgram");
     if (!glIsProgram_EXT) {
-        LOG("INIT: - glIsProgram_EXT - not present");
+        CON("INIT: - glIsProgram_EXT - NOT present");
     } else {
-        LOG("INIT: - glIsProgram_EXT - present");
+        CON("INIT: - glIsProgram_EXT - present");
     }
 
     glCreateShader_EXT =
         (__typeof__(glCreateShader_EXT)) wglGetProcAddress("glCreateShader");
     if (!glCreateShader_EXT) {
-        LOG("INIT: - glCreateShader_EXT - not present");
+        CON("INIT: - glCreateShader_EXT - NOT present");
     } else {
-        LOG("INIT: - glCreateShader_EXT - present");
+        CON("INIT: - glCreateShader_EXT - present");
     }
 
     glDeleteShader_EXT =
         (__typeof__(glDeleteShader_EXT)) wglGetProcAddress("glDeleteShader");
     if (!glDeleteShader_EXT) {
-        LOG("INIT: - glDeleteShader_EXT - not present");
+        CON("INIT: - glDeleteShader_EXT - NOT present");
     } else {
-        LOG("INIT: - glDeleteShader_EXT - present");
+        CON("INIT: - glDeleteShader_EXT - present");
     }
 
     glShaderSource_EXT =
         (__typeof__(glShaderSource_EXT)) wglGetProcAddress("glShaderSource");
     if (!glShaderSource_EXT) {
-        LOG("INIT: - glShaderSource_EXT - not present");
+        CON("INIT: - glShaderSource_EXT - NOT present");
     } else {
-        LOG("INIT: - glShaderSource_EXT - present");
+        CON("INIT: - glShaderSource_EXT - present");
     }
 
     glCompileShader_EXT =
         (__typeof__(glCompileShader_EXT)) wglGetProcAddress("glCompileShader");
     if (!glCompileShader_EXT) {
-        LOG("INIT: - glCompileShader_EXT - not present");
+        CON("INIT: - glCompileShader_EXT - NOT present");
     } else {
-        LOG("INIT: - glCompileShader_EXT - present");
+        CON("INIT: - glCompileShader_EXT - present");
     }
 
     glAttachShader_EXT =
         (__typeof__(glAttachShader_EXT)) wglGetProcAddress("glAttachShader");
     if (!glAttachShader_EXT) {
-        LOG("INIT: - glAttachShader_EXT - not present");
+        CON("INIT: - glAttachShader_EXT - NOT present");
     } else {
-        LOG("INIT: - glAttachShader_EXT - present");
+        CON("INIT: - glAttachShader_EXT - present");
     }
 
     glDetachShader_EXT =
         (__typeof__(glDetachShader_EXT)) wglGetProcAddress("glDetachShader");
     if (!glDetachShader_EXT) {
-        LOG("INIT: - glDetachShader_EXT - not present");
+        CON("INIT: - glDetachShader_EXT - NOT present");
     } else {
-        LOG("INIT: - glDetachShader_EXT - present");
+        CON("INIT: - glDetachShader_EXT - present");
     }
 
     glGetAttachedShaders_EXT =
         (__typeof__(glGetAttachedShaders_EXT)) wglGetProcAddress("glGetAttachedShaders");
     if (!glGetAttachedShaders_EXT) {
-        LOG("INIT: - glGetAttachedShaders_EXT - not present");
+        CON("INIT: - glGetAttachedShaders_EXT - NOT present");
     } else {
-        LOG("INIT: - glGetAttachedShaders_EXT - present");
+        CON("INIT: - glGetAttachedShaders_EXT - present");
     }
 
     glLinkProgram_EXT =
         (__typeof__(glLinkProgram_EXT)) wglGetProcAddress("glLinkProgram");
     if (!glLinkProgram_EXT) {
-        LOG("INIT: - glLinkProgram_EXT - not present");
+        CON("INIT: - glLinkProgram_EXT - NOT present");
     } else {
-        LOG("INIT: - glLinkProgram_EXT - present");
+        CON("INIT: - glLinkProgram_EXT - present");
     }
 
     glUseProgram_EXT =
         (__typeof__(glUseProgram_EXT)) wglGetProcAddress("glUseProgram");
     if (!glUseProgram_EXT) {
-        LOG("INIT: - glUseProgram_EXT - not present");
+        CON("INIT: - glUseProgram_EXT - NOT present");
     } else {
-        LOG("INIT: - glUseProgram_EXT - present");
+        CON("INIT: - glUseProgram_EXT - present");
     }
 
     glGetShaderInfoLog_EXT =
         (__typeof__(glGetShaderInfoLog_EXT)) wglGetProcAddress("glGetShaderInfoLog");
     if (!glGetShaderInfoLog_EXT) {
-        LOG("INIT: - glGetShaderInfoLog_EXT - not present");
+        CON("INIT: - glGetShaderInfoLog_EXT - NOT present");
     } else {
-        LOG("INIT: - glGetShaderInfoLog_EXT - present");
+        CON("INIT: - glGetShaderInfoLog_EXT - present");
     }
 
     glGetProgramInfoLog_EXT =
         (__typeof__(glGetProgramInfoLog_EXT)) wglGetProcAddress("glGetProgramInfoLog");
     if (!glGetProgramInfoLog_EXT) {
-        LOG("INIT: - glGetProgramInfoLog_EXT - not present");
+        CON("INIT: - glGetProgramInfoLog_EXT - NOT present");
     } else {
-        LOG("INIT: - glGetProgramInfoLog_EXT - present");
+        CON("INIT: - glGetProgramInfoLog_EXT - present");
     }
 
     glGetUniformLocation_EXT =
         (__typeof__(glGetUniformLocation_EXT)) wglGetProcAddress("glGetUniformLocation");
     if (!glGetUniformLocation_EXT) {
-        LOG("INIT: - glGetUniformLocation_EXT - not present");
+        CON("INIT: - glGetUniformLocation_EXT - NOT present");
     } else {
-        LOG("INIT: - glGetUniformLocation_EXT - present");
+        CON("INIT: - glGetUniformLocation_EXT - present");
     }
 
     glUniform1f_EXT =
         (__typeof__(glUniform1f_EXT)) wglGetProcAddress("glUniform1f");
     if (!glUniform1f_EXT) {
-        LOG("INIT: - glUniform1f_EXT - not present");
+        CON("INIT: - glUniform1f_EXT - NOT present");
     } else {
-        LOG("INIT: - glUniform1f_EXT - present");
+        CON("INIT: - glUniform1f_EXT - present");
     }
 
     glUniform1i_EXT =
         (__typeof__(glUniform1i_EXT)) wglGetProcAddress("glUniform1i");
     if (!glUniform1i_EXT) {
-        LOG("INIT: - glUniform1i_EXT - not present");
+        CON("INIT: - glUniform1i_EXT - NOT present");
     } else {
-        LOG("INIT: - glUniform1i_EXT - present");
+        CON("INIT: - glUniform1i_EXT - present");
     }
 
     glUniform2fv_EXT =
         (__typeof__(glUniform2fv_EXT)) wglGetProcAddress("glUniform2fv");
     if (!glUniform2fv_EXT) {
-        LOG("INIT: - glUniform2fv_EXT - not present");
+        CON("INIT: - glUniform2fv_EXT - NOT present");
     } else {
-        LOG("INIT: - glUniform2fv_EXT - present");
+        CON("INIT: - glUniform2fv_EXT - present");
     }
 
     glUniform3fv_EXT =
         (__typeof__(glUniform3fv_EXT)) wglGetProcAddress("glUniform3fv");
     if (!glUniform3fv_EXT) {
-        LOG("INIT: - glUniform3fv_EXT - not present");
+        CON("INIT: - glUniform3fv_EXT - NOT present");
     } else {
-        LOG("INIT: - glUniform3fv_EXT - present");
+        CON("INIT: - glUniform3fv_EXT - present");
     }
 
     glGenerateMipmap_EXT =
         (__typeof__(glGenerateMipmap_EXT)) wglGetProcAddress("glGenerateMipmap");
     if (!glGenerateMipmap_EXT) {
-        LOG("INIT: - glGenerateMipmap_EXT - not present");
+        CON("INIT: - glGenerateMipmap_EXT - NOT present");
     } else {
-        LOG("INIT: - glGenerateMipmap_EXT - present");
+        CON("INIT: - glGenerateMipmap_EXT - present");
     }
 
     glGenFramebuffers_EXT =
         (__typeof__(glGenFramebuffers_EXT)) wglGetProcAddress("glGenFramebuffers");
     if (!glGenFramebuffers_EXT) {
-        LOG("INIT: - glGenFramebuffers_EXT - not present");
+        CON("INIT: - glGenFramebuffers_EXT - NOT present");
     } else {
-        LOG("INIT: - glGenFramebuffers_EXT - present");
+        CON("INIT: - glGenFramebuffers_EXT - present");
     }
 
     glDeleteFramebuffers_EXT =
         (__typeof__(glDeleteFramebuffers_EXT)) wglGetProcAddress("glDeleteFramebuffers");
     if (!glDeleteFramebuffers_EXT) {
-        LOG("INIT: - glDeleteFramebuffers_EXT - not present");
+        CON("INIT: - glDeleteFramebuffers_EXT - NOT present");
     } else {
-        LOG("INIT: - glDeleteFramebuffers_EXT - present");
+        CON("INIT: - glDeleteFramebuffers_EXT - present");
     }
 
     glBindFramebuffer_EXT =
         (__typeof__(glBindFramebuffer_EXT)) wglGetProcAddress("glBindFramebuffer");
     if (!glBindFramebuffer_EXT) {
-        LOG("INIT: - glBindFramebuffer_EXT - not present");
+        CON("INIT: - glBindFramebuffer_EXT - NOT present");
     } else {
-        LOG("INIT: - glBindFramebuffer_EXT - present");
+        CON("INIT: - glBindFramebuffer_EXT - present");
     }
 
     glGenRenderbuffers_EXT =
         (__typeof__(glGenRenderbuffers_EXT)) wglGetProcAddress("glGenRenderbuffers");
     if (!glGenRenderbuffers_EXT) {
-        LOG("INIT: - glGenRenderbuffers_EXT - not present");
+        CON("INIT: - glGenRenderbuffers_EXT - NOT present");
     } else {
-        LOG("INIT: - glGenRenderbuffers_EXT - present");
+        CON("INIT: - glGenRenderbuffers_EXT - present");
     }
 
     glDeleteRenderbuffers_EXT =
         (__typeof__(glDeleteRenderbuffers_EXT)) wglGetProcAddress("glDeleteRenderbuffers");
     if (!glDeleteRenderbuffers_EXT) {
-        LOG("INIT: - glDeleteRenderbuffers_EXT - not present");
+        CON("INIT: - glDeleteRenderbuffers_EXT - NOT present");
     } else {
-        LOG("INIT: - glDeleteRenderbuffers_EXT - present");
+        CON("INIT: - glDeleteRenderbuffers_EXT - present");
     }
 
     glBindRenderbuffer_EXT =
         (__typeof__(glBindRenderbuffer_EXT)) wglGetProcAddress("glBindRenderbuffer");
     if (!glBindRenderbuffer_EXT) {
-        LOG("INIT: - glBindRenderbuffer_EXT - not present");
+        CON("INIT: - glBindRenderbuffer_EXT - NOT present");
     } else {
-        LOG("INIT: - glBindRenderbuffer_EXT - present");
+        CON("INIT: - glBindRenderbuffer_EXT - present");
     }
 
     glRenderbufferStorage_EXT =
         (__typeof__(glRenderbufferStorage_EXT)) wglGetProcAddress("glRenderbufferStorage");
     if (!glRenderbufferStorage_EXT) {
-        LOG("INIT: - glRenderbufferStorage_EXT - not present");
+        CON("INIT: - glRenderbufferStorage_EXT - NOT present");
     } else {
-        LOG("INIT: - glRenderbufferStorage_EXT - present");
+        CON("INIT: - glRenderbufferStorage_EXT - present");
     }
 
     glFramebufferRenderbuffer_EXT =
         (__typeof__(glFramebufferRenderbuffer_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
     if (!glFramebufferRenderbuffer_EXT) {
-        LOG("INIT: - glFramebufferRenderbuffer_EXT - not present");
+        CON("INIT: - glFramebufferRenderbuffer_EXT - NOT present");
     } else {
-        LOG("INIT: - glFramebufferRenderbuffer_EXT - present");
+        CON("INIT: - glFramebufferRenderbuffer_EXT - present");
+    }
+
+    glCheckFramebufferStatus_EXT =
+        (__typeof__(glCheckFramebufferStatus_EXT)) wglGetProcAddress("glFramebufferRenderbuffer");
+    if (!glCheckFramebufferStatus_EXT) {
+        CON("INIT: - glCheckFramebufferStatus_EXT - NOT present");
+    } else {
+        CON("INIT: - glCheckFramebufferStatus_EXT - present");
     }
 
     glFramebufferTexture2D_EXT =
         (__typeof__(glFramebufferTexture2D_EXT)) wglGetProcAddress("glFramebufferTexture2D");
     if (!glFramebufferTexture2D_EXT) {
-        LOG("INIT: - glFramebufferTexture2D_EXT - not present");
+        CON("INIT: - glFramebufferTexture2D_EXT - NOT present");
     } else {
-        LOG("INIT: - glFramebufferTexture2D_EXT - present");
+        CON("INIT: - glFramebufferTexture2D_EXT - present");
     }
 
     glGenBuffersARB_EXT =
         (__typeof__(glGenBuffersARB_EXT)) wglGetProcAddress("glGenBuffersARB");
     if (!glGenBuffersARB_EXT) {
-        LOG("INIT: - glGenBuffersARB_EXT - not present");
+        CON("INIT: - glGenBuffersARB_EXT - NOT present");
     } else {
-        LOG("INIT: - glGenBuffersARB_EXT - present");
+        CON("INIT: - glGenBuffersARB_EXT - present");
     }
 
     glBindBufferARB_EXT =
         (__typeof__(glBindBufferARB_EXT)) wglGetProcAddress("glBindBufferARB");
     if (!glBindBufferARB_EXT) {
-        LOG("INIT: - glBindBufferARB_EXT - not present");
+        CON("INIT: - glBindBufferARB_EXT - NOT present");
     } else {
-        LOG("INIT: - glBindBufferARB_EXT - present");
+        CON("INIT: - glBindBufferARB_EXT - present");
     }
 
     glDeleteBuffersARB_EXT =
         (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
     if (!glDeleteBuffersARB_EXT) {
-        LOG("INIT: - glDeleteBuffersARB_EXT - not present");
+        CON("INIT: - glDeleteBuffersARB_EXT - NOT present");
     } else {
-        LOG("INIT: - glDeleteBuffersARB_EXT - present");
+        CON("INIT: - glDeleteBuffersARB_EXT - present");
     }
 
     glDeleteBuffersARB_EXT =
         (__typeof__(glDeleteBuffersARB_EXT)) wglGetProcAddress("glDeleteBuffersARB");
     if (!glDeleteBuffersARB_EXT) {
-        LOG("INIT: - glDeleteBuffersARB_EXT - not present");
+        CON("INIT: - glDeleteBuffersARB_EXT - NOT present");
     } else {
-        LOG("INIT: - glDeleteBuffersARB_EXT - present");
+        CON("INIT: - glDeleteBuffersARB_EXT - present");
     }
 }
 
