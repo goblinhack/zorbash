@@ -207,18 +207,28 @@ void con (const wchar_t *fmt)
     {
         char buf[MAXSHORTSTR];
 
+printf("CON %d\n", __LINE__);
         buf[0] = '\0';
         get_timestamp(buf, MAXSHORTSTR);
+printf("CON %d\n", __LINE__);
         fprintf(MY_STDOUT, "%s", buf);
+printf("CON %d\n", __LINE__);
         fflush(MY_STDOUT);
+printf("CON %d\n", __LINE__);
         term_log(buf);
+printf("CON %d\n", __LINE__);
     }
 
     {
+printf("CON %d\n", __LINE__);
         fwprintf(MY_STDOUT, L"%S\n", fmt);
+printf("CON %d\n", __LINE__);
         fflush(MY_STDOUT);
+printf("CON %d\n", __LINE__);
         term_log(fmt);
+printf("CON %d\n", __LINE__);
         wid_console_log(fmt);
+printf("CON %d\n", __LINE__);
     }
     putchar('\n');
 }
