@@ -483,7 +483,8 @@ void _backtrace2(void)
 
         // Get the file name of the file containing the function
         TCHAR module_buffer[MaxPath];
-        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base, module_buffer, MaxPath);
+//        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base, 
+//        module_buffer, MaxPath);
 //        if ((module_base != 0) && (mod_file != 0)) {
 //            module_info.module_name = module_buffer;
 //        }
