@@ -421,6 +421,7 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 }
 
 #include <psapi.h>
+#include <dbghelp.h>
 
 void _backtrace2(void)
 {
