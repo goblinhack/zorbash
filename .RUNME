@@ -481,6 +481,7 @@ case `uname` in
         #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
         #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
         #LDLIBS+=" -static-libasan"
+        #-L/mingw64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz 
         ;;
     *Darwin*)
         EXE=""
