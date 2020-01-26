@@ -400,14 +400,14 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
         }
         if (func == NULL) {
             printf("%p : %s : %s %s \n",
-                frame.AddrPC.Offset,
+                (void*) frame.AddrPC.Offset,
                 module_name,
                 file,
                 bfd_errors[err]);
         }
         else {
             printf("%p : %s : %s (%d) : in function (%s) \n",
-                frame.AddrPC.Offset,
+                (void*) frame.AddrPC.Offset,
                 module_name,
                 file,
                 line,
