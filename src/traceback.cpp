@@ -448,17 +448,8 @@ void _backtrace2(void)
     stack_frame.AddrFrame.Mode      = AddrModeFlat;
 
     // Randomly saw this was supposed to be called prior to StackWalk so tried it
-    if (!SymInitialize(process, 0, false))
-    {
+    if (!SymInitialize(process, 0, false)) {
         wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
-    }
-
-    // Get memory address of base module. Returns 0 although when 
-    // SymInitialize is called before it the GetLastError returns 0 without 
-    // return 6
-    DWORD64 module_base = SymGetModuleBase(process, stack_frame.AddrPC.Offset);
-    if (module_base == 0) {
-        wprintf(L"SymGetModuleBase is unable to get virtual address!! Error: %d\r\n", GetLastError());
     }
 
     for (ULONG frame = 0; ; frame++)
@@ -466,7 +457,7 @@ void _backtrace2(void)
 printf("frame %d\n", (int)frame);
         // Check for frames
         BOOL result = StackWalk(machine, process, thread, &stack_frame, &context, 0,
-            SymFunctionTableAccess, module_base, 0);
+            SymFunctionTableAccess, SymGetModuleBase, 0);
 
 
         // Initalize more memory
