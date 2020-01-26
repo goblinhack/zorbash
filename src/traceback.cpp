@@ -442,7 +442,7 @@ void _backtrace2(void)
 
     // Randomly saw this was supposed to be called prior to StackWalk so tried
     // it
-    if (!SymInitialize(process, 0, false)) {
+    if (!SymInitialize(process, 0, true)) {
         wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", 
             GetLastError());
     }
@@ -470,7 +470,7 @@ void _backtrace2(void)
     printf(search_path_debug);
 
     // Initalize more memory
-    CONTEXT                         context;
+    CONTEXT context;
     memset(&context, 0, sizeof(CONTEXT));
     context.ContextFlags = CONTEXT_FULL;
     RtlCaptureContext(&context);
@@ -501,7 +501,6 @@ void _backtrace2(void)
 
     for (ULONG frame = 0; ; frame++)
     {
-printf("frame %d\n", (int)frame);
         // Check for frames
         BOOL result = StackWalk(machine, 
                                 process, 
@@ -542,7 +541,6 @@ printf("frame %d\n", (int)frame);
         symbol.MaxNameLength = STACKWALK_MAX_NAMELEN;
 
         // Initalize more memory and clear it out
-        printf("offset %d\n", (int)stack.AddrPC.Offset);
         if (SymGetSymFromAddr64(process, 
                                 stack.AddrPC.Offset,
                                 &csEntry.offsetFromSmybol, 
