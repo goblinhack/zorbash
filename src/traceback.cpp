@@ -451,13 +451,22 @@ void _backtrace2(void)
     symOptions |= SYMOPT_FAIL_CRITICAL_ERRORS;
     symOptions = SymSetOptions(symOptions);
 
-    char buf[STACKWALK_MAX_NAMELEN] = {0};
-    SymGetSearchPath(process, buf, STACKWALK_MAX_NAMELEN);
+    char szSearchPath[STACKWALK_MAX_NAMELEN] = {0};
+    SymGetSearchPath(process, szSearchPath, STACKWALK_MAX_NAMELEN);
 
     char  szUserName[STACKWALK_MAX_NAMELEN] = {0};
     DWORD dwSize = STACKWALK_MAX_NAMELEN;
     GetUserNameA(szUserName, &dwSize);
-//    this->m_parent->OnSymInit(buf, symOptions, szUserName);
+
+    CHAR   search_path_debug[STACKWALK_MAX_NAMELEN];
+    size_t maxLen = STACKWALK_MAX_NAMELEN;
+#if _MSC_VER >= 1400
+    maxLen = _TRUNCATE;
+#endif
+    _snprintf_s(search_path_debug, maxLen, "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
+               szSearchPath, symOptions, szUserName);
+    search_path_debug[STACKWALK_MAX_NAMELEN - 1] = 0;
+    printf(search_path_debug);
 
 #ifdef _M_IX86
     auto machine = IMAGE_FILE_MACHINE_I386;
