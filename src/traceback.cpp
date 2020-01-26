@@ -518,8 +518,8 @@ void _backtrace2(void)
         }
 
         // Initalize memory
-        LPWSTR console_message = (LPWSTR*) new TCHAR[MaxMsgLength];
-        LPWSTR file_message = (LPWSTR*) (LPWSTR*) new TCHAR[MaxMsgLength];
+        LPWSTR console_message = (LPWSTR) new TCHAR[MaxMsgLength];
+        LPWSTR file_message = (LPWSTR) new TCHAR[MaxMsgLength];
 
         // Set some strings
         swprintf(console_message, MaxMsgLength, L">> Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
