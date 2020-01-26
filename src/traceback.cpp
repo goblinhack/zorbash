@@ -448,7 +448,7 @@ void _backtrace2(void)
     stack_frame.AddrFrame.Offset    = context.Rbp;
     stack_frame.AddrFrame.Mode      = AddrModeFlat;
 
-    IMAGEHLP_SYMBOL64 *pSym = 
+    IMAGEHLP_SYMBOL64 *pSym =
       (IMAGEHLP_SYMBOL64*)malloc(sizeof(IMAGEHLP_SYMBOL64) + STACKWALK_MAX_NAMELEN);
     memset(pSym, 0, sizeof(IMAGEHLP_SYMBOL64) + STACKWALK_MAX_NAMELEN);
     pSym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
@@ -481,7 +481,7 @@ printf("frame %d\n", (int)frame);
 //        }
 
         // Initalize more memory and clear it out
-        if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, psym)) {
+        if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, pSym)) {
 //            name_buffer = symbol->Name;
         }
 
