@@ -251,7 +251,7 @@ lookup_section(bfd *abfd, asection *sec, void *opaque_data)
 }
 
 static void
-find(struct bfd_ctx * b, PDWORD64 offset, const char **file, const char **func, unsigned *line)
+find(struct bfd_ctx * b, DWORD offset, const char **file, const char **func, unsigned *line)
 {
     struct find_info data;
     data.func = NULL;
