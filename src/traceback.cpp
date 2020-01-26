@@ -455,13 +455,12 @@ void _backtrace2(void)
     CONTEXT                         context;
     STACKFRAME                      s;
 
-    // Set some memory
     memset(&context, 0, sizeof(CONTEXT));
-    memset(&s, 0, sizeof(STACKFRAME));
-
+    c.ContextFlags = CONTEXT_FULL
     RtlCaptureContext(&context);
 
     // Initalize a few things here and there
+    memset(&s, 0, sizeof(STACKFRAME));
     s.AddrPC.Offset       = context.Rip;
     s.AddrPC.Mode         = AddrModeFlat;
     s.AddrStack.Offset    = context.Rsp;
