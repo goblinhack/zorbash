@@ -467,6 +467,7 @@ void _backtrace2(void)
 
     for (ULONG frame = 0; ; frame++)
     {
+printf("frame %d\n", frame);
         // Check for frames
         BOOL result = StackWalk(machine, process, thread, &stack_frame, &context, 0,
             SymFunctionTableAccess, SymGetModuleBase, 0);
@@ -560,9 +561,13 @@ void testn (void)
     memset( &stack, 0, sizeof( STACKFRAME64 ) );
 
     struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
+    printf("test1\n");
     _backtrace(set, 12, &context);
+    printf("\n\n");
 
-	_backtrace2();
+    printf("test2\n");
+    _backtrace2();
+    printf("\n\n");
     DIE("test");
 }
 
