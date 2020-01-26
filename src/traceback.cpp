@@ -342,6 +342,8 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
     HANDLE process = GetCurrentProcess();
     HANDLE thread = GetCurrentThread();
 
+    SymInitialize(process, 0, false);
+
     char symbol_buffer[sizeof(IMAGEHLP_SYMBOL) + 255];
     char module_name_raw[MAX_PATH];
 
@@ -418,6 +420,125 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
     }
 }
 
+void _backtrace2(void)
+{
+    // Initalize some memory
+    DWORD                           machine = IMAGE_FILE_MACHINE_AMD64;
+    HANDLE                          process = ::GetCurrentProcess();
+    HANDLE                          thread = GetCurrentThread();
+
+    // Initalize more memory
+    CONTEXT                         context;
+    STACKFRAME                      stack_frame;
+
+    // Set some memory
+    memset(&context, 0, sizeof(CONTEXT));
+    memset(&stack_frame, 0, sizeof(STACKFRAME));
+
+    // Capture the context
+    RtlCaptureContext(&context);
+
+    // Initalize a few things here and there
+    stack_frame.AddrPC.Offset       = context.Rip;
+    stack_frame.AddrPC.Mode         = AddrModeFlat;
+    stack_frame.AddrStack.Offset    = context.Rsp;
+    stack_frame.AddrStack.Mode      = AddrModeFlat;
+    stack_frame.AddrFrame.Offset    = context.Rbp;
+    stack_frame.AddrFrame.Mode      = AddrModeFlat;
+
+    // Randomly saw this was supposed to be called prior to StackWalk so tried it
+    if (!SymInitialize(process, 0, false))
+    {
+        wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
+    }
+
+    for (ULONG frame = 0; ; frame++)
+    {
+        // Check for frames
+        BOOL result = StackWalk(machine, process, thread, &stack_frame, &context, 0,
+            SymFunctionTableAccess, SymGetModuleBase, 0);
+
+        // Get memory address of base module. Returns 0 although when SymInitialize is called before it the GetLastError returns 0 without return 6
+        DWORD64 module_base = SymGetModuleBase(process, stack_frame.AddrPC.Offset);
+        if (module_base == 0) {
+            wprintf(L"SymGetModuleBase is unable to get virutal address!! Error: %d\r\n", GetLastError());
+        }
+
+        // Initalize more memory
+        MODULEINFO                  module_info;
+        SecureZeroMemory(&module_info, sizeof(MODULEINFO));
+
+        // Get the file name of the file containing the function
+        TCHAR module_buffer[log::MaxPath];
+        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base, module_buffer, log::MaxPath);
+        if ((module_base != 0) && (mod_file != 0))
+        {
+            module_info.module_name = module_buffer;
+        }
+
+        // Initalize more memory and clear it out
+        PIMAGEHLP_SYMBOL64      symbol;
+        IMAGEHLP_LINE64         line_num;
+        SecureZeroMemory(&symbol, sizeof(PIMAGEHLP_SYMBOL64));
+        SecureZeroMemory(&symbol, sizeof(IMAGEHLP_LINE64));
+
+        // Get the symbol
+        TCHAR symbol_buffer[log::MaxPath];
+        symbol = (PIMAGEHLP_SYMBOL)symbol_buffer;
+        symbol->SizeOfStruct = (sizeof(IMAGEHLP_SYMBOL) + log::MaxPath);
+        symbol->MaxNameLength = 254;
+
+        // Attempt to get name from symbol (fails)
+        LPSTR name_buffer = new CHAR[254];
+        if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, symbol))
+        {
+            name_buffer = symbol->Name;
+        }
+
+        // Set the size of something
+        DWORD offset = 0;
+        line_num.SizeOfStruct = sizeof(IMAGEHLP_LINE64);
+
+        // Attempt to get the line and file name of where the symbol is
+        if (SymGetLineFromAddr(process, stack_frame.AddrPC.Offset, &offset, &line_num))
+        {
+            module_info.line = line_num.LineNumber;
+            module_info.file = line_num.FileName;
+        }
+
+        // Initalize memory
+        LPWSTR console_message = new TCHAR[log::MaxMsgLength];
+        LPWSTR file_message = new TCHAR[log::MaxMsgLength];
+
+        // Set some strings
+        swprintf(console_message, log::MaxMsgLength, L">> Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
+            frame, stack_frame.AddrPC.Offset, stack_frame.AddrStack.Offset, stack_frame.AddrFrame.Offset, stack_frame.AddrReturn.Offset);
+        swprintf(file_message, log::MaxMsgLength, L"Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
+            frame, stack_frame.AddrPC.Offset, stack_frame.AddrStack.Offset, stack_frame.AddrFrame.Offset, stack_frame.AddrReturn.Offset);
+
+        /* When the symbol can yield the name, line and file name the above strings
+        will also include that information */
+        // To go here . . . 
+
+        // Write some strings
+        wprintf(console_message);
+        WriteAsync(file_message);
+
+        // Delete some memory
+        if (console_message) {
+            delete[] console_message;   console_message = nullptr;
+        }
+        if (file_message) {
+            delete[] file_message;  file_message = nullptr;
+        }
+
+        // If nothing else to do break loop
+        if (!result) {
+            break;
+        }
+    }
+}
+
 void testn (void)
 {
     CONTEXT             context;
@@ -428,6 +549,8 @@ void testn (void)
 
     struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
     _backtrace(set, 12, &context);
+
+	_backtrace2();
     DIE("test");
 }
 
