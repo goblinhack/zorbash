@@ -484,10 +484,9 @@ void _backtrace2(void)
         // Get the file name of the file containing the function
         TCHAR module_buffer[MaxPath];
         DWORD mod_file = GetModuleFileName((HINSTANCE)module_base, module_buffer, MaxPath);
-        if ((module_base != 0) && (mod_file != 0))
-        {
-            module_info.module_name = module_buffer;
-        }
+//        if ((module_base != 0) && (mod_file != 0)) {
+//            module_info.module_name = module_buffer;
+//        }
 
         // Initalize more memory and clear it out
         PIMAGEHLP_SYMBOL64      symbol;
@@ -513,10 +512,9 @@ void _backtrace2(void)
         line_num.SizeOfStruct = sizeof(IMAGEHLP_LINE64);
 
         // Attempt to get the line and file name of where the symbol is
-        if (SymGetLineFromAddr(process, stack_frame.AddrPC.Offset, &offset, &line_num))
-        {
-            module_info.line = line_num.LineNumber;
-            module_info.file = line_num.FileName;
+        if (SymGetLineFromAddr(process, stack_frame.AddrPC.Offset, &offset, &line_num)) {
+//            module_info.line = line_num.LineNumber;
+//            module_info.file = line_num.FileName;
         }
 
         // Initalize memory
@@ -534,8 +532,8 @@ void _backtrace2(void)
         // To go here . . . 
 
         // Write some strings
-        wprintf("CONSOLE: %s\n", console_message);
-        wprintf("FILE: %s\n", file_message);
+        wprintf(L"CONSOLE: %s\n", console_message);
+        wprintf(L"FILE: %s\n", file_message);
 
         // Delete some memory
         if (console_message) {
