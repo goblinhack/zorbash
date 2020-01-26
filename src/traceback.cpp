@@ -437,13 +437,14 @@ typedef enum CallstackEntryType
 
 void _backtrace2(void)
 {
-    // Initalize some memory
     HANDLE                          process = ::GetCurrentProcess();
+    HANDLE                          thread = GetCurrentThread();
 
     // Randomly saw this was supposed to be called prior to StackWalk so tried
     // it
     if (!SymInitialize(process, 0, false)) {
-        wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
+        wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", 
+            GetLastError());
     }
 
     DWORD symOptions = SymGetOptions();
@@ -459,14 +460,34 @@ void _backtrace2(void)
     GetUserNameA(szUserName, &dwSize);
 
     CHAR   search_path_debug[STACKWALK_MAX_NAMELEN];
-    size_t maxLen = STACKWALK_MAX_NAMELEN;
+    size_t maxLen = STACKWAK_MAX_NAMELEN;
 #if _MSC_VER >= 1400
     maxLen = _TRUNCATE;
 #endif
     _snprintf_s(search_path_debug, maxLen, "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
-               szSearchPath, symOptions, szUserName);
+            szSearchPath, symOptions, szUserName);
     search_path_debug[STACKWALK_MAX_NAMELEN - 1] = 0;
     printf(search_path_debug);
+
+    // Initalize more memory
+    CONTEXT                         context;
+    memset(&context, 0, sizeof(CONTEXT));
+    context.ContextFlags = CONTEXT_FULL;
+    RtlCaptureContext(&context);
+
+    // Initalize a few things here and there
+    STACKFRAME stack;
+    memset(&stack, 0, sizeof(STACKFRAME));
+    stack.AddrPC.Offset       = context.Rip;
+    stack.AddrPC.Mode         = AddrModeFlat;
+    stack.AddrStack.Offset    = context.Rsp;
+    stack.AddrStack.Mode      = AddrModeFlat;
+    stack.AddrFrame.Offset    = context.Rbp;
+    stack.AddrFrame.Mode      = AddrModeFlat;
+
+//    IMAGEHLP_MODULE64_V3 Module;
+//    memset(&Module, 0, sizeof(Module));
+//    Module.SizeOfStruct = sizeof(Module);
 
 #ifdef _M_IX86
     auto machine = IMAGE_FILE_MACHINE_I386;
@@ -478,49 +499,22 @@ void _backtrace2(void)
 #error "platform not supported!"
 #endif
 
-    HANDLE                          thread = GetCurrentThread();
-
-    // Initalize more memory
-    CONTEXT                         context;
-    STACKFRAME                      s;
-
-    memset(&context, 0, sizeof(CONTEXT));
-    context.ContextFlags = CONTEXT_FULL;
-    RtlCaptureContext(&context);
-
-    // Initalize a few things here and there
-    memset(&s, 0, sizeof(STACKFRAME));
-    s.AddrPC.Offset       = context.Rip;
-    s.AddrPC.Mode         = AddrModeFlat;
-    s.AddrStack.Offset    = context.Rsp;
-    s.AddrStack.Mode      = AddrModeFlat;
-    s.AddrFrame.Offset    = context.Rbp;
-    s.AddrFrame.Mode      = AddrModeFlat;
-
-    IMAGEHLP_SYMBOL64 *pSym =
-      (IMAGEHLP_SYMBOL64*)malloc(sizeof(IMAGEHLP_SYMBOL64) + STACKWALK_MAX_NAMELEN);
-    memset(pSym, 0, sizeof(IMAGEHLP_SYMBOL64) + STACKWALK_MAX_NAMELEN);
-    pSym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
-    pSym->MaxNameLength = STACKWALK_MAX_NAMELEN;
-
-    CallstackEntry csEntry;
-
-    IMAGEHLP_LINE64 line;
-    memset(&line, 0, sizeof(line));
-    line.SizeOfStruct = sizeof(line);
-
-//    IMAGEHLP_MODULE64_V3 Module;
-//    memset(&Module, 0, sizeof(Module));
-//    Module.SizeOfStruct = sizeof(Module);
-
     for (ULONG frame = 0; ; frame++)
     {
 printf("frame %d\n", (int)frame);
         // Check for frames
-        BOOL result = StackWalk(machine, process, thread, &s, &context, 0,
-            SymFunctionTableAccess, SymGetModuleBase, 0);
+        BOOL result = StackWalk(machine, 
+                                process, 
+                                thread, 
+                                &stack,
+                                &context,
+                                0,
+                                SymFunctionTableAccess, 
+                                SymGetModuleBase, 
+                                0);
 
-        csEntry.offset = s.AddrPC.Offset;
+        CallstackEntry csEntry;
+        csEntry.offset = stack.AddrPC.Offset;
         csEntry.name[0] = 0;
         csEntry.undName[0] = 0;
         csEntry.undFullName[0] = 0;
@@ -543,20 +537,51 @@ printf("frame %d\n", (int)frame);
 //            module_info.module_name = module_buffer;
 //        }
 
+        IMAGEHLP_SYMBOL64 symbol {};
+        symbol.SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
+        symbol.MaxNameLength = STACKWALK_MAX_NAMELEN;
+
         // Initalize more memory and clear it out
-        printf("offset %d\n", (int)s.AddrPC.Offset);
-        if (SymGetSymFromAddr64(process, s.AddrPC.Offset,
-                                &csEntry.offsetFromSmybol, pSym)) {
-            printf("got sym offset %d\n", (int)csEntry.offsetFromSmybol);
+        printf("offset %d\n", (int)stack.AddrPC.Offset);
+        if (SymGetSymFromAddr64(process, 
+                                stack.AddrPC.Offset,
+                                &csEntry.offsetFromSmybol, 
+                                symbol)) {
+            printf("got symbol offset %d\n", (int)csEntry.offsetFromSmybol);
         } else {
-            printf("no sym offset %d\n", (int)csEntry.offsetFromSmybol);
+            printf("no symbol offset %d\n", (int)csEntry.offsetFromSmybol);
         }
-        if (SymGetLineFromAddr64(process, s.AddrPC.Offset,
-                                 &csEntry.offsetFromLine, &line)) {
+
+        char name[STACKWALK_MAX_NAMELEN];
+        UnDecorateSymbolName(symbol.Name, (PSTR)name, sizeof(name), 
+                             UNDNAME_COMPLETE );
+
+        IMAGEHLP_LINE64 line {};
+        line.SizeOfStruct = sizeof(line);
+
+        if (SymGetLineFromAddr64(process, 
+                                 stack.AddrPC.Offset,
+                                 &csEntry.offsetFromLine, 
+                                 &line)) {
             printf("got line offset %d\n", (int)csEntry.offsetFromLine);
         } else {
             printf("no line offset %d\n", (int)csEntry.offsetFromLine);
         }
+
+
+        printf("Frame %lu:\n"
+               "    Symbol name:    %s\n"
+               "    PC address:     0x%08LX\n"
+               "    Stack address:  0x%08LX\n"
+               "    Frame address:  0x%08LX\n"
+               "\n",
+               frame,
+               symbol.Name,
+               (ULONG64)stack.AddrPC.Offset,
+               (ULONG64)stack.AddrStack.Offset,
+               (ULONG64)stack.AddrFrame.Offset
+           );
+
 
 #if 0
         // Initalize memory
