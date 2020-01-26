@@ -475,13 +475,21 @@ void _backtrace2(void)
     pSym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
     pSym->MaxNameLength = STACKWALK_MAX_NAMELEN;
 
-    // Randomly saw this was supposed to be called prior to StackWalk so tried 
+    // Randomly saw this was supposed to be called prior to StackWalk so tried
     // it
     if (!SymInitialize(process, 0, false)) {
         wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
     }
 
     CallstackEntry csEntry;
+
+    IMAGEHLP_LINE64 Line;
+    memset(&Line, 0, sizeof(Line));
+    Line.SizeOfStruct = sizeof(Line);
+
+//    IMAGEHLP_MODULE64_V3 Module;
+//    memset(&Module, 0, sizeof(Module));
+//    Module.SizeOfStruct = sizeof(Module);
 
     for (ULONG frame = 0; ; frame++)
     {
@@ -507,7 +515,7 @@ printf("frame %d\n", (int)frame);
 
         // Get the file name of the file containing the function
 //        TCHAR module_buffer[MaxPath];
-//        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base, 
+//        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base,
 //        module_buffer, MaxPath);
 //        if ((module_base != 0) && (mod_file != 0)) {
 //            module_info.module_name = module_buffer;
@@ -521,8 +529,8 @@ printf("frame %d\n", (int)frame);
         } else {
             printf("no sym offset %d\n", (int)csEntry.offsetFromSmybol);
         }
-        if (SymGetLineFromAddr64(process, s.AddrPC.Offset, 
-                                 &csEntry.offsetFromLine, pSym)) {
+        if (SymGetLineFromAddr64(process, s.AddrPC.Offset,
+                                 &csEntry.offsetFromLine, &line)) {
             printf("got line offset %d\n", (int)csEntry.offsetFromLine);
         } else {
             printf("no line offset %d\n", (int)csEntry.offsetFromLine);
@@ -541,7 +549,7 @@ printf("frame %d\n", (int)frame);
 
         /* When the symbol can yield the name, line and file name the above strings
         will also include that information */
-        // To go here . . . 
+        // To go here . . .
 
         // Write some strings
         wprintf(L"CONSOLE: %s\n", console_message);
