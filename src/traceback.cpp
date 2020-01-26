@@ -452,7 +452,7 @@ void _backtrace2(void)
     symOptions = SymSetOptions(symOptions);
 
     char buf[STACKWALK_MAX_NAMELEN] = {0};
-    SymGetSearchPath(process, buf);
+    SymGetSearchPath(process, buf, STACKWALK_MAX_NAMELEN);
 
     char  szUserName[STACKWALK_MAX_NAMELEN] = {0};
     DWORD dwSize = STACKWALK_MAX_NAMELEN;
