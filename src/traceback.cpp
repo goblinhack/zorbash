@@ -341,6 +341,8 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 
     HANDLE process = GetCurrentProcess();
     HANDLE thread = GetCurrentThread();
+    printf("current process (void*)%p\n", process);
+    printf("current thread (void*)%p\n", thread);
 
     char symbol_buffer[sizeof(IMAGEHLP_SYMBOL) + 255];
     char module_name_raw[MAX_PATH];
@@ -373,6 +375,7 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
         symbol->MaxNameLength = 254;
 
         DWORD64 module_base = SymGetModuleBase(process, frame.AddrPC.Offset);
+        printf("module_base %p\n", (void*)process);
 
         const char * module_name = "[unknown module]";
         if (module_base &&
