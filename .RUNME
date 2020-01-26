@@ -479,15 +479,11 @@ case `uname` in
         LDLIBS="$LDLIBS /mingw64/lib/libSDL2_mixer.a"
         LDLIBS="$LDLIBS /mingw64/lib/libSDL2_ttf.a"
 
-        #C_FLAGS+="-ggdb -fsanitize=leak -fno-omit-frame-pointer"
-        #C_FLAGS+="-ggdb -fsanitize=address -fno-omit-frame-pointer"
-        #LDLIBS+=" -static-libasan"
-
         #
         # For symbol decode StackTrace that doesn't really work without
         # visual studio. sigh
         #
-        LDLIBS+="-L/mingw64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
+        LDLIBS="$LDLIBS -L/mingw64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
         ;;
     *Darwin*)
         EXE=""
