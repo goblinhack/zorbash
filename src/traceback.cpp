@@ -409,6 +409,7 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 
 #include <psapi.h>
 #include <dbghelp.h>
+#define STACKWALK_MAX_NAMELEN 1024
 
 void _backtrace2(void)
 {
@@ -447,7 +448,14 @@ void _backtrace2(void)
     stack_frame.AddrFrame.Offset    = context.Rbp;
     stack_frame.AddrFrame.Mode      = AddrModeFlat;
 
-    // Randomly saw this was supposed to be called prior to StackWalk so tried it
+    IMAGEHLP_SYMBOL64 *pSym = 
+      (IMAGEHLP_SYMBOL64*)malloc(sizeof(IMAGEHLP_SYMBOL64) + STACKWALK_MAX_NAMELEN);
+    memset(pSym, 0, sizeof(IMAGEHLP_SYMBOL64) + STACKWALK_MAX_NAMELEN);
+    pSym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
+    pSym->MaxNameLength = STACKWALK_MAX_NAMELEN;
+
+    // Randomly saw this was supposed to be called prior to StackWalk so tried 
+    // it
     if (!SymInitialize(process, 0, false)) {
         wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
     }
@@ -473,24 +481,9 @@ printf("frame %d\n", (int)frame);
 //        }
 
         // Initalize more memory and clear it out
-        PIMAGEHLP_SYMBOL64      symbol;
-        IMAGEHLP_LINE64         line_num;
-        SecureZeroMemory(&symbol, sizeof(PIMAGEHLP_SYMBOL64));
-        SecureZeroMemory(&symbol, sizeof(IMAGEHLP_LINE64));
-
-        // Get the symbol
-        TCHAR symbol_buffer[MaxPath];
-        symbol = (PIMAGEHLP_SYMBOL)symbol_buffer;
-        symbol->SizeOfStruct = (sizeof(IMAGEHLP_SYMBOL) + MaxPath);
-        symbol->MaxNameLength = 254;
-
-        // Attempt to get name from symbol (fails)
-//        LPSTR name_buffer = new CHAR[254];
-//        if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, 
-//        symbol))
-//        {
+        if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, psym)) {
 //            name_buffer = symbol->Name;
-//        }
+        }
 
         // Set the size of something
         DWORD offset = 0;
