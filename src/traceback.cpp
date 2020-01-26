@@ -468,13 +468,13 @@ void _backtrace2(void)
 
     for (ULONG frame = 0; ; frame++)
     {
-printf("frame %d\n", frame);
+printf("frame %d\n", (int)frame);
         // Check for frames
         BOOL result = StackWalk(machine, process, thread, &stack_frame, &context, 0,
             SymFunctionTableAccess, SymGetModuleBase, 0);
 
         // Get memory address of base module. Returns 0 although when SymInitialize is called before it the GetLastError returns 0 without return 6
-        DWORD64 module_base = SymGetModuleBase(process, stack_frame.AddrPC.Offset);
+        DWORD64 module_base = SymGetModuleBase64(process, stack_frame.AddrPC.Offset);
         if (module_base == 0) {
             wprintf(L"SymGetModuleBase is unable to get virutal address!! Error: %d\r\n", GetLastError());
         }
