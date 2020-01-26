@@ -424,6 +424,7 @@ void test (void)
     RtlCaptureContext( &context );
     memset( &stack, 0, sizeof( STACKFRAME64 ) );
 
-    _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
+    struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
+    _backtrace(set, 2, ^context)
 }
 #endif
