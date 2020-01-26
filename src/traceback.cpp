@@ -411,6 +411,31 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 #include <dbghelp.h>
 #define STACKWALK_MAX_NAMELEN 1024
 
+typedef struct CallstackEntry
+{
+    DWORD64 offset; // if 0, we have no valid entry
+    CHAR    name[STACKWALK_MAX_NAMELEN];
+    CHAR    undName[STACKWALK_MAX_NAMELEN];
+    CHAR    undFullName[STACKWALK_MAX_NAMELEN];
+    DWORD64 offsetFromSmybol;
+    DWORD   offsetFromLine;
+    DWORD   lineNumber;
+    CHAR    lineFileName[STACKWALK_MAX_NAMELEN];
+    DWORD   symType;
+    LPCSTR  symTypeString;
+    CHAR    moduleName[STACKWALK_MAX_NAMELEN];
+    DWORD64 baseOfImage;
+    CHAR    loadedImageName[STACKWALK_MAX_NAMELEN];
+  } CallstackEntry;
+
+  typedef enum CallstackEntryType
+  {
+    firstEntry,
+    nextEntry,
+    lastEntry
+  } CallstackEntryType;
+
+
 void _backtrace2(void)
 {
 #ifdef _M_IX86
