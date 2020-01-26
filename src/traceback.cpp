@@ -422,8 +422,20 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 
 void _backtrace2(void)
 {
+    auto int MaxPath = 256;
+    auto int MaxMsgLength = 256;
+
+#ifdef _M_IX86
+    auto machine = IMAGE_FILE_MACHINE_I386;
+#elif _M_X64
+    auto machine = IMAGE_FILE_MACHINE_AMD64;
+#elif _M_IA64
+    auto machine = IMAGE_FILE_MACHINE_IA64;
+#else
+#error "platform not supported!"
+#endif
+
     // Initalize some memory
-    DWORD                           machine = IMAGE_FILE_MACHINE_AMD64;
     HANDLE                          process = ::GetCurrentProcess();
     HANDLE                          thread = GetCurrentThread();
 
@@ -435,7 +447,6 @@ void _backtrace2(void)
     memset(&context, 0, sizeof(CONTEXT));
     memset(&stack_frame, 0, sizeof(STACKFRAME));
 
-    // Capture the context
     RtlCaptureContext(&context);
 
     // Initalize a few things here and there
@@ -469,8 +480,8 @@ void _backtrace2(void)
         SecureZeroMemory(&module_info, sizeof(MODULEINFO));
 
         // Get the file name of the file containing the function
-        TCHAR module_buffer[log::MaxPath];
-        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base, module_buffer, log::MaxPath);
+        TCHAR module_buffer[MaxPath];
+        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base, module_buffer, MaxPath);
         if ((module_base != 0) && (mod_file != 0))
         {
             module_info.module_name = module_buffer;
@@ -483,9 +494,9 @@ void _backtrace2(void)
         SecureZeroMemory(&symbol, sizeof(IMAGEHLP_LINE64));
 
         // Get the symbol
-        TCHAR symbol_buffer[log::MaxPath];
+        TCHAR symbol_buffer[MaxPath];
         symbol = (PIMAGEHLP_SYMBOL)symbol_buffer;
-        symbol->SizeOfStruct = (sizeof(IMAGEHLP_SYMBOL) + log::MaxPath);
+        symbol->SizeOfStruct = (sizeof(IMAGEHLP_SYMBOL) + MaxPath);
         symbol->MaxNameLength = 254;
 
         // Attempt to get name from symbol (fails)
@@ -507,13 +518,13 @@ void _backtrace2(void)
         }
 
         // Initalize memory
-        LPWSTR console_message = new TCHAR[log::MaxMsgLength];
-        LPWSTR file_message = new TCHAR[log::MaxMsgLength];
+        LPWSTR console_message = new TCHAR[MaxMsgLength];
+        LPWSTR file_message = new TCHAR[MaxMsgLength];
 
         // Set some strings
-        swprintf(console_message, log::MaxMsgLength, L">> Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
+        swprintf(console_message, MaxMsgLength, L">> Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
             frame, stack_frame.AddrPC.Offset, stack_frame.AddrStack.Offset, stack_frame.AddrFrame.Offset, stack_frame.AddrReturn.Offset);
-        swprintf(file_message, log::MaxMsgLength, L"Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
+        swprintf(file_message, MaxMsgLength, L"Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
             frame, stack_frame.AddrPC.Offset, stack_frame.AddrStack.Offset, stack_frame.AddrFrame.Offset, stack_frame.AddrReturn.Offset);
 
         /* When the symbol can yield the name, line and file name the above strings
