@@ -456,7 +456,7 @@ void _backtrace2(void)
     STACKFRAME                      s;
 
     memset(&context, 0, sizeof(CONTEXT));
-    c.ContextFlags = CONTEXT_FULL
+    context.ContextFlags = CONTEXT_FULL
     RtlCaptureContext(&context);
 
     // Initalize a few things here and there
