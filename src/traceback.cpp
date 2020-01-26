@@ -420,6 +420,8 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
     }
 }
 
+#include <psapi.h>
+
 void _backtrace2(void)
 {
     int MaxPath = 256;
@@ -519,7 +521,7 @@ void _backtrace2(void)
 
         // Initalize memory
         LPWSTR console_message = (LPWSTR*) new TCHAR[MaxMsgLength];
-        LPWSTR file_message = (LPWSTR*) new TCHAR[MaxMsgLength];
+        LPWSTR file_message = (LPWSTR*) (LPWSTR*) new TCHAR[MaxMsgLength];
 
         // Set some strings
         swprintf(console_message, MaxMsgLength, L">> Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
@@ -532,8 +534,8 @@ void _backtrace2(void)
         // To go here . . . 
 
         // Write some strings
-        printf("CONSOLE: %s\n", console_message);
-        printf("FILE: %s\n", file_message);
+        wprintf("CONSOLE: %s\n", console_message);
+        wprintf("FILE: %s\n", file_message);
 
         // Delete some memory
         if (console_message) {
