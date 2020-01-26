@@ -355,7 +355,7 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 #error "platform not supported!"
 #endif
 
-    while(StackWalk(platform,
+    while(StackWalk64(platform,
         process,
         thread,
         &frame,
@@ -416,7 +416,7 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
     }
 }
 
-void test (void)
+void testn (void)
 {
     CONTEXT             context;
     STACKFRAME64        stack;
@@ -425,6 +425,15 @@ void test (void)
     memset( &stack, 0, sizeof( STACKFRAME64 ) );
 
     struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
-    _backtrace(set, 2, &context);
+    _backtrace(set, 12, &context);
+    DIE("test");
 }
+
+void test1 (void) { testn(); }
+void test2 (void) { test1(); }
+void test3 (void) { test2(); }
+void test4 (void) { test3(); }
+void test5 (void) { test4(); }
+void test (void) { test5(); }
+
 #endif
