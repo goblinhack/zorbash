@@ -426,15 +426,14 @@ typedef struct CallstackEntry
     CHAR    moduleName[STACKWALK_MAX_NAMELEN];
     DWORD64 baseOfImage;
     CHAR    loadedImageName[STACKWALK_MAX_NAMELEN];
-  } CallstackEntry;
+} CallstackEntry;
 
-  typedef enum CallstackEntryType
-  {
+typedef enum CallstackEntryType
+{
     firstEntry,
     nextEntry,
     lastEntry
-  } CallstackEntryType;
-
+} CallstackEntryType;
 
 void _backtrace2(void)
 {
@@ -454,21 +453,21 @@ void _backtrace2(void)
 
     // Initalize more memory
     CONTEXT                         context;
-    STACKFRAME                      stack_frame;
+    STACKFRAME                      s;
 
     // Set some memory
     memset(&context, 0, sizeof(CONTEXT));
-    memset(&stack_frame, 0, sizeof(STACKFRAME));
+    memset(&s, 0, sizeof(STACKFRAME));
 
     RtlCaptureContext(&context);
 
     // Initalize a few things here and there
-    stack_frame.AddrPC.Offset       = context.Rip;
-    stack_frame.AddrPC.Mode         = AddrModeFlat;
-    stack_frame.AddrStack.Offset    = context.Rsp;
-    stack_frame.AddrStack.Mode      = AddrModeFlat;
-    stack_frame.AddrFrame.Offset    = context.Rbp;
-    stack_frame.AddrFrame.Mode      = AddrModeFlat;
+    s.AddrPC.Offset       = context.Rip;
+    s.AddrPC.Mode         = AddrModeFlat;
+    s.AddrStack.Offset    = context.Rsp;
+    s.AddrStack.Mode      = AddrModeFlat;
+    s.AddrFrame.Offset    = context.Rbp;
+    s.AddrFrame.Mode      = AddrModeFlat;
 
     IMAGEHLP_SYMBOL64 *pSym =
       (IMAGEHLP_SYMBOL64*)malloc(sizeof(IMAGEHLP_SYMBOL64) + STACKWALK_MAX_NAMELEN);
@@ -488,7 +487,7 @@ void _backtrace2(void)
     {
 printf("frame %d\n", (int)frame);
         // Check for frames
-        BOOL result = StackWalk(machine, process, thread, &stack_frame, &context, 0,
+        BOOL result = StackWalk(machine, process, thread, &s, &context, 0,
             SymFunctionTableAccess, SymGetModuleBase, 0);
 
         csEntry.offset = s.AddrPC.Offset;
@@ -515,13 +514,13 @@ printf("frame %d\n", (int)frame);
 //        }
 
         // Initalize more memory and clear it out
-        printf("offset %ld\n", stack_frame.AddrPC.Offset);
-        if (SymGetSymFromAddr64(process, stack_frame.AddrPC.Offset, 
+        printf("offset %ld\n", s.AddrPC.Offset);
+        if (SymGetSymFromAddr64(process, s.AddrPC.Offset, 
                                 &csEntry.offsetFromSmybol, pSym)) {
             printf("got sym\n");
 //            name_buffer = symbol->Name;
         }
-        if (SymGetLineFromAddr64(process, stack_frame.AddrPC.Offset, 
+        if (SymGetLineFromAddr64(process, s.AddrPC.Offset, 
                                  &csEntry.offsetFromLine, &line)) {
             printf("got line\n");
 //            name_buffer = symbol->Name;
@@ -534,9 +533,9 @@ printf("frame %d\n", (int)frame);
 
         // Set some strings
         swprintf(console_message, MaxMsgLength, L">> Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
-            frame, stack_frame.AddrPC.Offset, stack_frame.AddrStack.Offset, stack_frame.AddrFrame.Offset, stack_frame.AddrReturn.Offset);
+            frame, s.AddrPC.Offset, s.AddrStack.Offset, s.AddrFrame.Offset, s.AddrReturn.Offset);
         swprintf(file_message, MaxMsgLength, L"Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
-            frame, stack_frame.AddrPC.Offset, stack_frame.AddrStack.Offset, stack_frame.AddrFrame.Offset, stack_frame.AddrReturn.Offset);
+            frame, s.AddrPC.Offset, s.AddrStack.Offset, s.AddrFrame.Offset, s.AddrReturn.Offset);
 
         /* When the symbol can yield the name, line and file name the above strings
         will also include that information */
