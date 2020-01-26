@@ -425,6 +425,6 @@ void test (void)
     memset( &stack, 0, sizeof( STACKFRAME64 ) );
 
     struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
-    _backtrace(set, 2, ^context)
+    _backtrace(set, 2, &context)
 }
 #endif
