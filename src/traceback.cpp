@@ -449,9 +449,15 @@ void _backtrace2(void)
     DWORD symOptions = SymGetOptions();
     symOptions |= SYMOPT_LOAD_LINES;
     symOptions |= SYMOPT_FAIL_CRITICAL_ERRORS;
-    //symOptions |= SYMOPT_NO_PROMPTS;
-    // SymSetOptions
     symOptions = SymSetOptions(symOptions);
+
+    char buf[StackWalker::STACKWALK_MAX_NAMELEN] = {0};
+    SymGetSearchPath(process, buf);
+
+    char  szUserName[1024] = {0};
+    DWORD dwSize = 1024;
+    GetUserNameA(szUserName, &dwSize);
+//    this->m_parent->OnSymInit(buf, symOptions, szUserName);
 
 #ifdef _M_IX86
     auto machine = IMAGE_FILE_MACHINE_I386;
