@@ -451,11 +451,11 @@ void _backtrace2(void)
     symOptions |= SYMOPT_FAIL_CRITICAL_ERRORS;
     symOptions = SymSetOptions(symOptions);
 
-    char buf[StackWalker::STACKWALK_MAX_NAMELEN] = {0};
+    char buf[STACKWALK_MAX_NAMELEN] = {0};
     SymGetSearchPath(process, buf);
 
-    char  szUserName[1024] = {0};
-    DWORD dwSize = 1024;
+    char  szUserName[STACKWALK_MAX_NAMELEN] = {0};
+    DWORD dwSize = STACKWALK_MAX_NAMELEN;
     GetUserNameA(szUserName, &dwSize);
 //    this->m_parent->OnSymInit(buf, symOptions, szUserName);
 
