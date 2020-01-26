@@ -342,7 +342,7 @@ get_bc(struct bfd_set *set , const char *procname, int *err)
     if (init_bfd_ctx(&bc, procname, err)) {
         return NULL;
     }
-    set->next = static_cast<bdf_set *>(calloc(1, sizeof(*set)));
+    set->next = static_cast<struct bdf_set *>(calloc(1, sizeof(*set)));
     set->bc = static_cast<bdf_ctx *>(malloc(sizeof(struct bfd_ctx)));
     memcpy(set->bc, &bc, sizeof(bc));
     set->name = strdup(procname);
@@ -376,9 +376,9 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
 
     frame.AddrPC.Offset = context->Rip;
     frame.AddrPC.Mode = AddrModeFlat;
-    frame.AddrStack.Offset = context->Esp;
+    frame.AddrStack.Offset = context->Rsp;
     frame.AddrStack.Mode = AddrModeFlat;
-    frame.AddrFrame.Offset = context->Ebp;
+    frame.AddrFrame.Offset = context->Rbp;
     frame.AddrFrame.Mode = AddrModeFlat;
 
     HANDLE process = GetCurrentProcess();
