@@ -590,6 +590,10 @@ int32_t main (int32_t argc, char *argv[])
     LOG("INIT: ascii console");
     ascii_init();
 
+#ifdef _WIN32
+    extern void test (void);
+    test();
+#endif
     //
     // Need this to get the UTF on the console
     //
@@ -745,8 +749,6 @@ int32_t main (int32_t argc, char *argv[])
         ERR("wid_test init");
     }
 #endif
-    extern void test (void);
-    test();
 
     CON("INIT: clear minicon");
     wid_minicon_flush();
