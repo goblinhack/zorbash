@@ -342,8 +342,8 @@ get_bc(struct bfd_set *set , const char *procname, int *err)
     if (init_bfd_ctx(&bc, procname, err)) {
         return NULL;
     }
-    set->next = calloc(1, sizeof(*set));
-    set->bc = malloc(sizeof(struct bfd_ctx));
+    set->next = static_cast<bdf_set *>(calloc(1, sizeof(*set)));
+    set->bc = static_cast<bdf_ctx *>(malloc(sizeof(struct bfd_ctx)));
     memcpy(set->bc, &bc, sizeof(bc));
     set->name = strdup(procname);
 
@@ -374,7 +374,7 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
     STACKFRAME frame;
     memset(&frame,0,sizeof(frame));
 
-    frame.AddrPC.Offset = context->Eip;
+    frame.AddrPC.Offset = context->Rip;
     frame.AddrPC.Mode = AddrModeFlat;
     frame.AddrStack.Offset = context->Esp;
     frame.AddrStack.Mode = AddrModeFlat;
