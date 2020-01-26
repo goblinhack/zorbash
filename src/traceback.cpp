@@ -286,19 +286,6 @@ init_bfd_ctx(struct bfd_ctx *bc, const char * procname, int *err)
     return 0;
 }
 
-static void
-close_bfd_ctx(struct bfd_ctx *bc)
-{
-    if (bc) {
-        if (bc->symbol) {
-            free(bc->symbol);
-        }
-        if (bc->handle) {
-            bfd_close(bc->handle);
-        }
-    }
-}
-
 static struct bfd_ctx *
 get_bc(struct bfd_set *set , const char *procname, int *err)
 {
@@ -476,7 +463,7 @@ printf("frame %d\n", (int)frame);
         // Get memory address of base module. Returns 0 although when SymInitialize is called before it the GetLastError returns 0 without return 6
         DWORD64 module_base = SymGetModuleBase64(process, stack_frame.AddrPC.Offset);
         if (module_base == 0) {
-            wprintf(L"SymGetModuleBase is unable to get virutal address!! Error: %d\r\n", GetLastError());
+            wprintf(L"SymGetModuleBase is unable to get virtual address!! Error: %d\r\n", GetLastError());
         }
 
         // Initalize more memory
@@ -484,7 +471,7 @@ printf("frame %d\n", (int)frame);
         SecureZeroMemory(&module_info, sizeof(MODULEINFO));
 
         // Get the file name of the file containing the function
-        TCHAR module_buffer[MaxPath];
+//        TCHAR module_buffer[MaxPath];
 //        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base, 
 //        module_buffer, MaxPath);
 //        if ((module_base != 0) && (mod_file != 0)) {
@@ -504,11 +491,12 @@ printf("frame %d\n", (int)frame);
         symbol->MaxNameLength = 254;
 
         // Attempt to get name from symbol (fails)
-        LPSTR name_buffer = new CHAR[254];
-        if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, symbol))
-        {
-            name_buffer = symbol->Name;
-        }
+//        LPSTR name_buffer = new CHAR[254];
+//        if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, 
+//        symbol))
+//        {
+//            name_buffer = symbol->Name;
+//        }
 
         // Set the size of something
         DWORD offset = 0;
