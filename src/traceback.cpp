@@ -413,8 +413,6 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 
 void _backtrace2(void)
 {
-    int MaxMsgLength = 256;
-
 #ifdef _M_IX86
     auto machine = IMAGE_FILE_MACHINE_I386;
 #elif _M_X64
@@ -481,6 +479,7 @@ printf("frame %d\n", (int)frame);
 
         // Initalize more memory and clear it out
         if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, pSym)) {
+            printf("got sym\n");
 //            name_buffer = symbol->Name;
         }
 
