@@ -399,14 +399,14 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
             }
         }
         if (func == NULL) {
-            printf("0x%08x : %s : %s %s \n",
+            printf("%p : %s : %s %s \n",
                 frame.AddrPC.Offset,
                 module_name,
                 file,
                 bfd_errors[err]);
         }
         else {
-            printf("0x%08x : %s : %s (%d) : in function (%s) \n",
+            printf("%p : %s : %s (%d) : in function (%s) \n",
                 frame.AddrPC.Offset,
                 module_name,
                 file,
