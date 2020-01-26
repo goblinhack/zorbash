@@ -202,36 +202,7 @@ struct find_info {
     unsigned line;
 };
 
-struct output_buffer {
-    char * buf;
-    size_t sz;
-    size_t ptr;
-};
-
 static void
-output_init(struct output_buffer *ob, char * buf, size_t sz)
-{
-    ob->buf = buf;
-    ob->sz = sz;
-    ob->ptr = 0;
-    ob->buf[0] = '\0';
-}
-
-static void
-output_print(struct output_buffer *ob, const char * format, ...)
-{
-    if (ob->sz == ob->ptr)
-        return;
-    ob->buf[ob->ptr] = '\0';
-    va_list ap;
-    va_start(ap,format);
-    vsnprintf(ob->buf + ob->ptr , ob->sz - ob->ptr , format, ap);
-    va_end(ap);
-
-    ob->ptr = strlen(ob->buf + ob->ptr) + ob->ptr;
-}
-
-static void 
 lookup_section(bfd *abfd, asection *sec, void *opaque_data)
 {
     struct find_info *data = static_cast<struct find_info *>(opaque_data);
@@ -239,11 +210,11 @@ lookup_section(bfd *abfd, asection *sec, void *opaque_data)
     if (data->func)
         return;
 
-    if (!(bfd_get_section_flags(abfd, sec) & SEC_ALLOC)) 
+    if (!(bfd_get_section_flags(abfd, sec) & SEC_ALLOC))
         return;
 
     bfd_vma vma = bfd_get_section_vma(abfd, sec);
-    if (data->counter < vma || vma + bfd_get_section_size(sec) <= data->counter) 
+    if (data->counter < vma || vma + bfd_get_section_size(sec) <= data->counter)
         return;
 
     bfd_find_nearest_line(abfd, sec, data->symbol, data->counter - vma, &(data->file), &(data->func), &(data->line));
@@ -350,19 +321,7 @@ get_bc(struct bfd_set *set , const char *procname, int *err)
 }
 
 static void
-release_set(struct bfd_set *set)
-{
-    while(set) {
-        struct bfd_set * temp = set->next;
-        free(set->name);
-        close_bfd_ctx(set->bc);
-        free(set);
-        set = temp;
-    }
-}
-
-static void
-_backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT context)
+_backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 {
     char procname[MAX_PATH];
     GetModuleFileNameA(NULL, procname, sizeof procname);
@@ -386,13 +345,23 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
     char symbol_buffer[sizeof(IMAGEHLP_SYMBOL) + 255];
     char module_name_raw[MAX_PATH];
 
-    while(StackWalk(IMAGE_FILE_MACHINE_I386, 
-        process, 
-        thread, 
-        &frame, 
-        context, 
-        0, 
-        SymFunctionTableAccess, 
+#ifdef _M_IX86
+    auto platform = IMAGE_FILE_MACHINE_I386;
+#elif _M_X64
+    auto platform = IMAGE_FILE_MACHINE_AMD64;
+#elif _M_IA64
+    auto platform = IMAGE_FILE_MACHINE_IA64;
+#else
+#error "platform not supported!"
+#endif
+
+    while(StackWalk(platform,
+        process,
+        thread,
+        &frame,
+        context,
+        0,
+        SymFunctionTableAccess,
         SymGetModuleBase, 0)) {
 
         --depth;
@@ -406,7 +375,7 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
         DWORD64 module_base = SymGetModuleBase(process, frame.AddrPC.Offset);
 
         const char * module_name = "[unknown module]";
-        if (module_base && 
+        if (module_base &&
             GetModuleFileNameA((HINSTANCE)module_base, module_name_raw, MAX_PATH)) {
             module_name = module_name_raw;
             bc = get_bc(set, module_name, &err);
@@ -430,14 +399,14 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
             }
         }
         if (func == NULL) {
-            output_print(ob,"0x%08x : %s : %s %s \n",
+            printf("0x%08x : %s : %s %s \n",
                 frame.AddrPC.Offset,
                 module_name,
                 file,
                 bfd_errors[err]);
         }
         else {
-            output_print(ob,"0x%08x : %s : %s (%d) : in function (%s) \n",
+            printf("0x%08x : %s : %s (%d) : in function (%s) \n",
                 frame.AddrPC.Offset,
                 module_name,
                 file,
@@ -454,75 +423,7 @@ void test (void)
 
     RtlCaptureContext( &context );
     memset( &stack, 0, sizeof( STACKFRAME64 ) );
-}
 
-static char * g_output = NULL;
-static LPTOP_LEVEL_EXCEPTION_FILTER g_prev = NULL;
-
-static LONG WINAPI 
-exception_filter(LPEXCEPTION_POINTERS info)
-{
-    struct output_buffer ob;
-    output_init(&ob, g_output, BUFFER_MAX);
-
-    if (!SymInitialize(GetCurrentProcess(), 0, TRUE)) {
-        output_print(&ob,"Failed to init symbol context\n");
-    }
-    else {
-        bfd_init();
-        struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
-        _backtrace(&ob , set , 128 , info->ContextRecord);
-        release_set(set);
-
-        SymCleanup(GetCurrentProcess());
-    }
-
-    fputs(g_output , stderr);
-
-    return EXCEPTION_CONTINUE_SEARCH;
-}
-
-static void
-backtrace_register(void)
-{
-    if (g_output == NULL) {
-        g_output = (char*) malloc(BUFFER_MAX);
-        g_prev = SetUnhandledExceptionFilter(exception_filter);
-    }
-}
-
-static void
-backtrace_unregister(void)
-{
-    if (g_output) {
-        free(g_output);
-        SetUnhandledExceptionFilter(g_prev);
-        g_prev = NULL;
-        g_output = NULL;
-    }
-}
-
-int
-__printf__(const char * format, ...) {
-    int value;
-    va_list arg;
-    va_start(arg, format);
-    value = vprintf ( format, arg );
-    va_end(arg);
-    return value;
-}
-
-BOOL WINAPI 
-DllMain(HINSTANCE hinstDLL, DWORD64 dwReason, LPVOID lpvReserved)
-{
-    switch (dwReason) {
-    case DLL_PROCESS_ATTACH:
-        backtrace_register();
-        break;
-    case DLL_PROCESS_DETACH:
-        backtrace_unregister();
-        break;
-    }
-    return TRUE;
+    _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 }
 #endif
