@@ -1,7 +1,6 @@
 //
 // Copyright goblinhack@gmail.com
 //
-#if 0
 #include "my_main.h"
 #include "my_traceback.h"
 #include "my_sprintf.h"
@@ -137,8 +136,8 @@ void traceback_dump (void)
     std::cerr << s << std::endl;
     fprintf(MY_STDERR, "%s", s.c_str());
 }
-#endif
 
+#ifdef _WIN32
 /*
     Copyright (c) 2010 ,
         Cloud Wu . All rights reserved.
@@ -517,3 +516,4 @@ DllMain(HINSTANCE hinstDLL, DWORD64 dwReason, LPVOID lpvReserved)
     }
     return TRUE;
 }
+#endif
