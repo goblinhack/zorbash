@@ -483,9 +483,9 @@ void _backtrace2(void)
 
     CallstackEntry csEntry;
 
-    IMAGEHLP_LINE64 Line;
-    memset(&Line, 0, sizeof(Line));
-    Line.SizeOfStruct = sizeof(Line);
+    IMAGEHLP_LINE64 line;
+    memset(&line, 0, sizeof(line));
+    line.SizeOfStruct = sizeof(line);
 
 //    IMAGEHLP_MODULE64_V3 Module;
 //    memset(&Module, 0, sizeof(Module));
