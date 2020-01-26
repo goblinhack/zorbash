@@ -422,8 +422,8 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 
 void _backtrace2(void)
 {
-    auto int MaxPath = 256;
-    auto int MaxMsgLength = 256;
+    int MaxPath = 256;
+    int MaxMsgLength = 256;
 
 #ifdef _M_IX86
     auto machine = IMAGE_FILE_MACHINE_I386;
