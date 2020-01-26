@@ -270,8 +270,7 @@ static void gl_init_fbo_ (int fbo,
     //
     CON("INIT: - glCheckFramebufferStatus_EXT");
     GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
-    GL_ERROR_CHECK();
-    if (status != GL_FRAMEBUFFER_COMPLETE) {
+    if (status && (status != GL_FRAMEBUFFER_COMPLETE)) {
         ERR("Failed to create framebuffer, error: %d", status);
 
 #ifdef GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
