@@ -466,7 +466,7 @@ void DBG (const char *fmt, ...)
     va_end(args);
 }
 
-void ERR (const char *fmt, ...)
+void myerr (const char *fmt, ...)
 {
     va_list args;
 
@@ -928,7 +928,7 @@ static void msgerr_ (const char *fmt, va_list args)
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-void MSG_BOX (const char *fmt, ...)
+void GAME_UI_MSG_BOX (const char *fmt, ...)
 {
     va_list args;
 

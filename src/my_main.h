@@ -378,13 +378,13 @@ typedef unsigned long long   uint64_t;
 #define DCHAR '/'
 #endif
 
+void CROAK(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 #define DIE(args...)                                                          \
     _                                                                         \
     DYING("Died at %s:%s():%u", __FILE__, __FUNCTION__, __LINE__);            \
     CROAK(args);                                                              \
     exit(1);
-
-extern uint8_t croaked;
 
 #ifdef ENABLE_ASSERT
 #define ASSERT(x)                                                             \
@@ -394,19 +394,6 @@ extern uint8_t croaked;
 #else
 #define ASSERT(x)
 #endif
-
-void CROAK(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void WARN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void CON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-
-void CON(const wchar_t *fmt, ...);
-void MINICON(const wchar_t *fmt, ...);
-
-void con(const wchar_t *fmt);
-void minicon(const wchar_t *fmt);
 
 //
 // Code tracing
@@ -427,20 +414,55 @@ void minicon(const wchar_t *fmt);
 //
 #include "c_plus_plus_serializer.h"
 
+//
+// Nested crash detection.
+//
+extern uint8_t croaked;
+
+//
+// Serious errors
+//
+void WARN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+
+//
+// Also serious. UI msg box popups, in game and pre game with SDL
+//
 void SDL_MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void ERR(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void GAME_UI_MSG_BOX(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+
+//
+// Add _ so we get a traceback element.
+//
+void myerr(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+#define ERR _ myerr
+
+//
+// Normal logging
+//
+void LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+
+//
+// Consoles
+//
+void CON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void CON(const wchar_t *fmt, ...);
+void MINICON(const wchar_t *fmt, ...);
+void con(const wchar_t *fmt);
+void minicon(const wchar_t *fmt);
+
+//
+// Enabled only when debug_mode is on
+//
 void DBG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 
 //
 // main.c
 //
-extern FILE *LOG_STDOUT;
-extern FILE *LOG_STDERR;
-
 #define MY_STDOUT (LOG_STDOUT ? LOG_STDOUT : stdout)
 #define MY_STDERR (LOG_STDERR ? LOG_STDERR : stderr)
-
+extern FILE *LOG_STDOUT;
+extern FILE *LOG_STDERR;
 extern char *EXEC_FULL_PATH_AND_NAME;
 extern char *EXEC_DIR;
 extern char *DATA_PATH;
@@ -448,15 +470,9 @@ extern char *PYTHON_PATH;
 extern char *GFX_PATH;
 extern char *TTF_PATH;
 extern uint8_t quitting;
-
-void quit(void);
-void restart(void);
-void die(void);
-
-//
-// dice.cpp
-//
-int dice_roll(const std::string &s);
+extern void quit(void);
+extern void restart(void);
+extern void die(void);
 
 #include "my_ptrcheck.h"
 
