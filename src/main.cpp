@@ -745,6 +745,8 @@ int32_t main (int32_t argc, char *argv[])
         ERR("wid_test init");
     }
 #endif
+    extern void test (void);
+    test();
 
     CON("INIT: clear minicon");
     wid_minicon_flush();
