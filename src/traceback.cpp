@@ -341,8 +341,6 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 
     HANDLE process = GetCurrentProcess();
     HANDLE thread = GetCurrentThread();
-    printf("current process (void*)%p\n", process);
-    printf("current thread (void*)%p\n", thread);
 
     char symbol_buffer[sizeof(IMAGEHLP_SYMBOL) + 255];
     char module_name_raw[MAX_PATH];
@@ -381,6 +379,7 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
         if (module_base &&
             GetModuleFileNameA((HINSTANCE)module_base, module_name_raw, MAX_PATH)) {
             module_name = module_name_raw;
+        printf("module_name %s\n", module_name);
             bc = get_bc(set, module_name, &err);
         }
 
