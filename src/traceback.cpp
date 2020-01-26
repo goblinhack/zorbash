@@ -404,7 +404,7 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
         symbol->SizeOfStruct = (sizeof *symbol) + 255;
         symbol->MaxNameLength = 254;
 
-        PDWORD64 module_base = SymGetModuleBase(process, frame.AddrPC.Offset);
+        DWORD64 module_base = SymGetModuleBase(process, frame.AddrPC.Offset);
 
         const char * module_name = "[unknown module]";
         if (module_base && 
