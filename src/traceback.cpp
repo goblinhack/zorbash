@@ -413,7 +413,6 @@ _backtrace(struct bfd_set *set, int depth , LPCONTEXT context)
 
 void _backtrace2(void)
 {
-    int MaxPath = 256;
     int MaxMsgLength = 256;
 
 #ifdef _M_IX86
@@ -485,16 +484,7 @@ printf("frame %d\n", (int)frame);
 //            name_buffer = symbol->Name;
         }
 
-        // Set the size of something
-        DWORD offset = 0;
-        line_num.SizeOfStruct = sizeof(IMAGEHLP_LINE64);
-
-        // Attempt to get the line and file name of where the symbol is
-        if (SymGetLineFromAddr(process, stack_frame.AddrPC.Offset, &offset, &line_num)) {
-//            module_info.line = line_num.LineNumber;
-//            module_info.file = line_num.FileName;
-        }
-
+#if 0
         // Initalize memory
         LPWSTR console_message = (LPWSTR) new TCHAR[MaxMsgLength];
         LPWSTR file_message = (LPWSTR) new TCHAR[MaxMsgLength];
@@ -521,6 +511,7 @@ printf("frame %d\n", (int)frame);
             delete[] file_message;  file_message = nullptr;
         }
 
+#endif
         // If nothing else to do break loop
         if (!result) {
             break;
