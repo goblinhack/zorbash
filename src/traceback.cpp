@@ -460,7 +460,7 @@ void _backtrace2(void)
     GetUserNameA(szUserName, &dwSize);
 
     CHAR   search_path_debug[STACKWALK_MAX_NAMELEN];
-    size_t maxLen = STACKWAK_MAX_NAMELEN;
+    size_t maxLen = STACKWALK_MAX_NAMELEN;
 #if _MSC_VER >= 1400
     maxLen = _TRUNCATE;
 #endif
@@ -546,7 +546,7 @@ printf("frame %d\n", (int)frame);
         if (SymGetSymFromAddr64(process, 
                                 stack.AddrPC.Offset,
                                 &csEntry.offsetFromSmybol, 
-                                symbol)) {
+                                &symbol)) {
             printf("got symbol offset %d\n", (int)csEntry.offsetFromSmybol);
         } else {
             printf("no symbol offset %d\n", (int)csEntry.offsetFromSmybol);
