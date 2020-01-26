@@ -12,6 +12,7 @@
 #undef DEBUG_CRASH
 
 #define ENABLE_ASSERT              // DIE on errors
+#define ENABLE_TRACING             // Function tracing
 
 //
 // Commonly changed settings
@@ -21,7 +22,6 @@
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_PTRCHECK_LEAK
-#define ENABLE_TRACING             // Function tracing
 #undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #endif
