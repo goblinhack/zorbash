@@ -251,7 +251,7 @@ lookup_section(bfd *abfd, asection *sec, void *opaque_data)
 }
 
 static void
-find(struct bfd_ctx * b, DWORD offset, const char **file, const char **func, unsigned *line)
+find(struct bfd_ctx * b, PDWORD64 offset, const char **file, const char **func, unsigned *line)
 {
     struct find_info data;
     data.func = NULL;
@@ -343,7 +343,7 @@ get_bc(struct bfd_set *set , const char *procname, int *err)
         return NULL;
     }
     set->next = (struct bfd_set *) calloc(1, sizeof(*set));
-    set->bc = static_cast<bdf_ctx *>(malloc(sizeof(struct bfd_ctx)));
+    set->bc = (struct bfd_ctx *) malloc(sizeof(struct bfd_ctx));
     memcpy(set->bc, &bc, sizeof(bc));
     set->name = strdup(procname);
 
@@ -404,7 +404,7 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
         symbol->SizeOfStruct = (sizeof *symbol) + 255;
         symbol->MaxNameLength = 254;
 
-        DWORD module_base = SymGetModuleBase(process, frame.AddrPC.Offset);
+        PDWORD64 module_base = SymGetModuleBase(process, frame.AddrPC.Offset);
 
         const char * module_name = "[unknown module]";
         if (module_base && 
@@ -422,7 +422,7 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
         }
 
         if (file == NULL) {
-            DWORD dummy = 0;
+            PDWORD64 dummy = 0;
             if (SymGetSymFromAddr(process, frame.AddrPC.Offset, &dummy, symbol)) {
                 file = symbol->Name;
             }
@@ -505,7 +505,7 @@ __printf__(const char * format, ...) {
 }
 
 BOOL WINAPI 
-DllMain(HINSTANCE hinstDLL, DWORD dwReason, LPVOID lpvReserved)
+DllMain(HINSTANCE hinstDLL, PDWORD64 dwReason, LPVOID lpvReserved)
 {
     switch (dwReason) {
     case DLL_PROCESS_ATTACH:
