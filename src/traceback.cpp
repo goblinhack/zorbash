@@ -422,7 +422,7 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
         }
 
         if (file == NULL) {
-            PDWORD64 dummy = 0;
+            DWORD64 dummy = 0;
             if (SymGetSymFromAddr(process, frame.AddrPC.Offset, &dummy, symbol)) {
                 file = symbol->Name;
             }
@@ -462,7 +462,7 @@ exception_filter(LPEXCEPTION_POINTERS info)
     }
     else {
         bfd_init();
-        struct bfd_set *set = calloc(1,sizeof(*set));
+        struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
         _backtrace(&ob , set , 128 , info->ContextRecord);
         release_set(set);
 
@@ -478,7 +478,7 @@ static void
 backtrace_register(void)
 {
     if (g_output == NULL) {
-        g_output = malloc(BUFFER_MAX);
+        g_output = (char*) malloc(BUFFER_MAX);
         g_prev = SetUnhandledExceptionFilter(exception_filter);
     }
 }
@@ -505,7 +505,7 @@ __printf__(const char * format, ...) {
 }
 
 BOOL WINAPI 
-DllMain(HINSTANCE hinstDLL, PDWORD64 dwReason, LPVOID lpvReserved)
+DllMain(HINSTANCE hinstDLL, DWORD64 dwReason, LPVOID lpvReserved)
 {
     switch (dwReason) {
     case DLL_PROCESS_ATTACH:
