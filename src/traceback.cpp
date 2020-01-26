@@ -545,9 +545,6 @@ void _backtrace2(void)
                                 stack.AddrPC.Offset,
                                 &csEntry.offsetFromSmybol, 
                                 &symbol)) {
-            printf("got symbol offset %d\n", (int)csEntry.offsetFromSmybol);
-        } else {
-            printf("no symbol offset %d\n", (int)csEntry.offsetFromSmybol);
         }
 
         char name[STACKWALK_MAX_NAMELEN];
@@ -561,11 +558,7 @@ void _backtrace2(void)
                                  stack.AddrPC.Offset,
                                  &csEntry.offsetFromLine, 
                                  &line)) {
-            printf("got line offset %d\n", (int)csEntry.offsetFromLine);
-        } else {
-            printf("no line offset %d\n", (int)csEntry.offsetFromLine);
         }
-
 
         printf("Frame %lu:\n"
                "    Symbol name:    %s\n"
@@ -579,7 +572,6 @@ void _backtrace2(void)
                (ULONG64)stack.AddrStack.Offset,
                (ULONG64)stack.AddrFrame.Offset
            );
-
 
 #if 0
         // Initalize memory
