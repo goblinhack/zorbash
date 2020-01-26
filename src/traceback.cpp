@@ -235,7 +235,7 @@ output_print(struct output_buffer *ob, const char * format, ...)
 static void 
 lookup_section(bfd *abfd, asection *sec, void *opaque_data)
 {
-    struct find_info *data = opaque_data;
+    struct find_info *data = static_cast<struct find_info *> opaque_data;
 
     if (data->func)
         return;
@@ -310,7 +310,7 @@ init_bfd_ctx(struct bfd_ctx *bc, const char * procname, int *err)
     }
 
     bc->handle = b;
-    bc->symbol = symbol_table;
+    bc->symbol = static_cast<asymbol **> symbol_table;
 
     if(err) { *err = BFD_ERR_OK; }
     return 0;
