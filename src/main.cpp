@@ -719,13 +719,13 @@ int32_t main (int32_t argc, char *argv[])
         ERR("command init");
     }
 
-    CON("INIT: thing templates");
+    CON("INIT: dungeon thing templates");
     tp_init();
 
     //
     // Create a fresh game if none was loaded
     //
-    CON("INIT: rooms");
+    CON("INIT: dungeon rooms");
     room_init();
 #if 0
     game->init();
@@ -746,29 +746,31 @@ int32_t main (int32_t argc, char *argv[])
     }
 #endif
 
-    CON("Clear minicon");
+    CON("INIT: clear minicon");
     wid_minicon_flush();
+
     if (opt_new_game) {
-        CON("Goto new game");
+        CON("INIT: goto new game");
         game->new_game();
     } else {
-        CON("Goto game menu");
+        CON("INIT: goto game menu");
         game->main_menu_select();
     }
 
     sdl_loop();
 
-    CON("Leave 2D mode");
+    CON("FINI: leave 2D mode");
     gl_leave_2d_mode();
 
-    CON("Quit");
+    CON("FINI: quit");
     quit();
 
-    LOG("Goodbye cruel world");
-
     if (game_needs_restart) {
+        CON("FINI: restart");
         game_needs_restart = false;
         execv(argv[0], argv);
     }
+
+    CON("FINI: Goodbye cruel world");
     return (0);
 }
