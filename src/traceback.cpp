@@ -447,6 +447,15 @@ _backtrace(struct output_buffer *ob, struct bfd_set *set, int depth , LPCONTEXT 
     }
 }
 
+void test (void)
+{
+    CONTEXT             context;
+    STACKFRAME64        stack;
+
+    RtlCaptureContext( &context );
+    memset( &stack, 0, sizeof( STACKFRAME64 ) );
+}
+
 static char * g_output = NULL;
 static LPTOP_LEVEL_EXCEPTION_FILTER g_prev = NULL;
 
