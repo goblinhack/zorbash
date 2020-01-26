@@ -514,16 +514,18 @@ printf("frame %d\n", (int)frame);
 //        }
 
         // Initalize more memory and clear it out
-        printf("offset %ld\n", s.AddrPC.Offset);
-        if (SymGetSymFromAddr64(process, s.AddrPC.Offset, 
+        printf("offset %d\n", (int)s.AddrPC.Offset);
+        if (SymGetSymFromAddr64(process, s.AddrPC.Offset,
                                 &csEntry.offsetFromSmybol, pSym)) {
-            printf("got sym\n");
-//            name_buffer = symbol->Name;
+            printf("got sym offset %d\n", (int)csEntry.offsetFromSmybol);
+        } else {
+            printf("no sym offset %d\n", (int)csEntry.offsetFromSmybol);
         }
         if (SymGetLineFromAddr64(process, s.AddrPC.Offset, 
                                  &csEntry.offsetFromLine, &line)) {
-            printf("got line\n");
-//            name_buffer = symbol->Name;
+            printf("got line offset %d\n", (int)csEntry.offsetFromLine);
+        } else {
+            printf("no line offset %d\n", (int)csEntry.offsetFromLine);
         }
 
 #if 0
