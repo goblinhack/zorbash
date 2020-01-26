@@ -113,6 +113,8 @@ pacman -S tar \
     mingw-w64-x86_64-flac \
     mingw-w64-x86_64-fluidsynth \
     mingw-w64-x86_64-gcc \
+    mingw-w64-x86_64-clang \
+    mingw-w64-x86_64-clang-tools-extra \
     mingw-w64-x86_64-gcc-libs \
     mingw-w64-x86_64-gdb \
     mingw-w64-x86_64-gdbm \
