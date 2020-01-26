@@ -522,7 +522,7 @@ printf("frame %d\n", (int)frame);
             printf("no sym offset %d\n", (int)csEntry.offsetFromSmybol);
         }
         if (SymGetLineFromAddr64(process, s.AddrPC.Offset, 
-                                 &csEntry.offsetFromLine, &line)) {
+                                 &csEntry.offsetFromLine, pSym)) {
             printf("got line offset %d\n", (int)csEntry.offsetFromLine);
         } else {
             printf("no line offset %d\n", (int)csEntry.offsetFromLine);
