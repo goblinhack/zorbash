@@ -342,7 +342,7 @@ get_bc(struct bfd_set *set , const char *procname, int *err)
     if (init_bfd_ctx(&bc, procname, err)) {
         return NULL;
     }
-    set->next = (typeof(set->next)) calloc(1, sizeof(*set)));
+    set->next = (struct bfd_set *) calloc(1, sizeof(*set));
     set->bc = static_cast<bdf_ctx *>(malloc(sizeof(struct bfd_ctx)));
     memcpy(set->bc, &bc, sizeof(bc));
     set->name = strdup(procname);
