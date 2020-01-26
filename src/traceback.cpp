@@ -437,6 +437,22 @@ typedef enum CallstackEntryType
 
 void _backtrace2(void)
 {
+    // Initalize some memory
+    HANDLE                          process = ::GetCurrentProcess();
+
+    // Randomly saw this was supposed to be called prior to StackWalk so tried
+    // it
+    if (!SymInitialize(process, 0, false)) {
+        wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
+    }
+
+    DWORD symOptions = SymGetOptions();
+    symOptions |= SYMOPT_LOAD_LINES;
+    symOptions |= SYMOPT_FAIL_CRITICAL_ERRORS;
+    //symOptions |= SYMOPT_NO_PROMPTS;
+    // SymSetOptions
+    symOptions = SymSetOptions(symOptions);
+
 #ifdef _M_IX86
     auto machine = IMAGE_FILE_MACHINE_I386;
 #elif _M_X64
@@ -447,8 +463,6 @@ void _backtrace2(void)
 #error "platform not supported!"
 #endif
 
-    // Initalize some memory
-    HANDLE                          process = ::GetCurrentProcess();
     HANDLE                          thread = GetCurrentThread();
 
     // Initalize more memory
@@ -473,12 +487,6 @@ void _backtrace2(void)
     memset(pSym, 0, sizeof(IMAGEHLP_SYMBOL64) + STACKWALK_MAX_NAMELEN);
     pSym->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
     pSym->MaxNameLength = STACKWALK_MAX_NAMELEN;
-
-    // Randomly saw this was supposed to be called prior to StackWalk so tried
-    // it
-    if (!SymInitialize(process, 0, false)) {
-        wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
-    }
 
     CallstackEntry csEntry;
 
