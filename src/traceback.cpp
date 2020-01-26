@@ -457,6 +457,8 @@ void _backtrace2(void)
         wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", GetLastError());
     }
 
+    CallstackEntry csEntry;
+
     for (ULONG frame = 0; ; frame++)
     {
 printf("frame %d\n", (int)frame);
@@ -464,6 +466,16 @@ printf("frame %d\n", (int)frame);
         BOOL result = StackWalk(machine, process, thread, &stack_frame, &context, 0,
             SymFunctionTableAccess, SymGetModuleBase, 0);
 
+        csEntry.offset = s.AddrPC.Offset;
+        csEntry.name[0] = 0;
+        csEntry.undName[0] = 0;
+        csEntry.undFullName[0] = 0;
+        csEntry.offsetFromSmybol = 0;
+        csEntry.offsetFromLine = 0;
+        csEntry.lineFileName[0] = 0;
+        csEntry.lineNumber = 0;
+        csEntry.loadedImageName[0] = 0;
+        csEntry.moduleName[0] = 0;
 
         // Initalize more memory
         MODULEINFO                  module_info;
@@ -478,8 +490,15 @@ printf("frame %d\n", (int)frame);
 //        }
 
         // Initalize more memory and clear it out
-        if (SymGetSymFromAddr(process, stack_frame.AddrPC.Offset, 0, pSym)) {
+        printf("offset %ld\n", stack_frame.AddrPC.Offset);
+        if (SymGetSymFromAddr64(process, stack_frame.AddrPC.Offset, 
+                                &csEntry.offsetFromSmybol, pSym)) {
             printf("got sym\n");
+//            name_buffer = symbol->Name;
+        }
+        if (SymGetLineFromAddr64(process, stack_frame.AddrPC.Offset, 
+                                 &csEntry.offsetFromLine, &line)) {
+            printf("got line\n");
 //            name_buffer = symbol->Name;
         }
 
