@@ -160,7 +160,7 @@ how to use: Call LoadLibraryA("backtrace.dll"); at beginning of your program .
 #include <windows.h>
 #include <excpt.h>
 #include <imagehlp.h>
-#include <bfd.h>
+#include <binutils/bfd.h>
 #include <psapi.h>
 #include <stdlib.h>
 #include <stdio.h>
