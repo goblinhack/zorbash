@@ -590,10 +590,11 @@ int32_t main (int32_t argc, char *argv[])
     LOG("INIT: ascii console");
     ascii_init();
 
-#ifdef _WIN32
+#if 0
     extern void test (void);
     test();
 #endif
+
     //
     // Need this to get the UTF on the console
     //

@@ -478,6 +478,7 @@ case `uname` in
         LDLIBS="$LDLIBS -lpthread"
         LDLIBS="$LDLIBS /mingw64/lib/libSDL2_mixer.a"
         LDLIBS="$LDLIBS /mingw64/lib/libSDL2_ttf.a"
+        C_FLAGS+="-gcodeview"
 
         #
         # For symbol decode StackTrace that doesn't really work without
@@ -553,6 +554,10 @@ fi
 case `uname` in
     *MING*)
         echo "CC=/mingw64/bin/x86_64-w64-mingw32-g++.exe # AUTOGEN" >> .Makefile
+        #
+        # Better for .pdb file support for debugging
+        #
+        echo "CC=/mingw64/bin/x86_64-w64-mingw32-clang++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
