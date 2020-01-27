@@ -51,7 +51,7 @@ static bool is_plausible_itanium_prefix(char* s) {
 std::string Traceback::to_string (void)
 {
 #ifdef _WIN32
-    return ("stack trace: disabled on win32");
+    return ("<no backtrace on win32, sorry>");
 #else
     auto addrlist = &tb[0];
     std::string sout = "stack trace:\n===========\n";
@@ -138,8 +138,25 @@ void traceback_dump (void)
 }
 
 #ifdef _WIN32
+/*
+    Copyright (c) 2010 ,
+        Cloud Wu . All rights reserved.
+
+        http://www.codingnow.com
+
+    Use, modification and distribution are subject to the "New BSD License"
+    as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
+
+filename: backtrace.c
+compiler: gcc 3.4.5 (mingw-win32)
+build command: gcc -O2 -shared -Wall -o backtrace.dll backtrace.c -lbfd -liberty -limagehlp
+how to use: Call LoadLibraryA("backtrace.dll"); at beginning of your program .
+*/
+
+#define PACKAGE "your-program-name"
+#define PACKAGE_VERSION "0.1"
+
 #include <windows.h>
-#include <config.h>
 #include <excpt.h>
 #include <imagehlp.h>
 #include <binutils/bfd.h>
@@ -150,10 +167,9 @@ void traceback_dump (void)
 #include <string.h>
 #include <stdbool.h>
 
-#define BUFFER_MAX (16*1024)
+
 #include <psapi.h>
 #include <dbghelp.h>
-
 #define STACKWALK_MAX_NAMELEN 1024
 
 typedef struct CallstackEntry
@@ -180,13 +196,10 @@ typedef enum CallstackEntryType
     lastEntry
 } CallstackEntryType;
 
-//
-// Needs .pdb filea to work and clang is not creating them for some reason
-//
-void _backtrace (void)
+void _backtrace2(void)
 {
-    HANDLE process = ::GetCurrentProcess();
-    HANDLE thread = GetCurrentThread();
+    HANDLE                          process = ::GetCurrentProcess();
+    HANDLE                          thread = GetCurrentThread();
 
     // Randomly saw this was supposed to be called prior to StackWalk so tried
     // it
@@ -276,6 +289,14 @@ void _backtrace (void)
         MODULEINFO                  module_info;
         SecureZeroMemory(&module_info, sizeof(MODULEINFO));
 
+        // Get the file name of the file containing the function
+//        TCHAR module_buffer[MaxPath];
+//        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base,
+//        module_buffer, MaxPath);
+//        if ((module_base != 0) && (mod_file != 0)) {
+//            module_info.module_name = module_buffer;
+//        }
+
         IMAGEHLP_SYMBOL64 symbol {};
         symbol.SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
         symbol.MaxNameLength = STACKWALK_MAX_NAMELEN;
@@ -285,7 +306,6 @@ void _backtrace (void)
                                 stack.AddrPC.Offset,
                                 &csEntry.offsetFromSmybol, 
                                 &symbol)) {
-            printf("got sym\n");
         }
 
         char name[STACKWALK_MAX_NAMELEN];
@@ -299,7 +319,6 @@ void _backtrace (void)
                                  stack.AddrPC.Offset,
                                  &csEntry.offsetFromLine, 
                                  &line)) {
-            printf("got line\n");
         }
 
         printf("Frame %lu:\n"
@@ -350,11 +369,30 @@ void _backtrace (void)
     }
 }
 
-void does_not_work (void)
+void testn (void)
 {
+    CONTEXT             context;
+    STACKFRAME64        stack;
+
+    RtlCaptureContext( &context );
+    memset( &stack, 0, sizeof( STACKFRAME64 ) );
+
+    struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
+    printf("test1\n");
+    _backtrace(set, 12, &context);
+    printf("\n\n");
+
     printf("test2\n");
-    _backtrace();
+    _backtrace2();
     printf("\n\n");
     DIE("test");
 }
+
+void test1 (void) { testn(); }
+void test2 (void) { test1(); }
+void test3 (void) { test2(); }
+void test4 (void) { test3(); }
+void test5 (void) { test4(); }
+void test (void) { test5(); }
+
 #endif
