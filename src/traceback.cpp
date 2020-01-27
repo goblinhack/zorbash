@@ -51,7 +51,7 @@ static bool is_plausible_itanium_prefix(char* s) {
 std::string Traceback::to_string (void)
 {
 #ifdef _WIN32
-    return ("<no backtrace on win32, sorry>");
+    return ("");
 #else
     auto addrlist = &tb[0];
     std::string sout = "stack trace:\n===========\n";
@@ -138,24 +138,6 @@ void traceback_dump (void)
 }
 
 #ifdef _WIN32
-/*
-    Copyright (c) 2010 ,
-        Cloud Wu . All rights reserved.
-
-        http://www.codingnow.com
-
-    Use, modification and distribution are subject to the "New BSD License"
-    as listed at <url: http://www.opensource.org/licenses/bsd-license.php >.
-
-filename: backtrace.c
-compiler: gcc 3.4.5 (mingw-win32)
-build command: gcc -O2 -shared -Wall -o backtrace.dll backtrace.c -lbfd -liberty -limagehlp
-how to use: Call LoadLibraryA("backtrace.dll"); at beginning of your program .
-*/
-
-#define PACKAGE "your-program-name"
-#define PACKAGE_VERSION "0.1"
-
 #include <windows.h>
 #include <excpt.h>
 #include <imagehlp.h>
