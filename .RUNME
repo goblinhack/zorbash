@@ -486,7 +486,7 @@ case `uname` in
         # visual studio. sigh
         #
         LDLIBS="$LDLIBS -L/mingw64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
-        C_FLAGS=`echo $CFLAGS | sed -e 's/-mwin32 //g'`
+        C_FLAGS=`echo $C_FLAGS | sed -e 's/-mwin32 //g'`
         ;;
     *Darwin*)
         EXE=""
