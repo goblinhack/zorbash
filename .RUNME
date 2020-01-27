@@ -557,7 +557,7 @@ case `uname` in
         #
         # Better for .pdb file support for debugging
         #
-        echo "CC=/mingw64/bin/x86_64-w64-mingw32-clang++.exe # AUTOGEN" >> .Makefile
+        echo "CC=clang++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
