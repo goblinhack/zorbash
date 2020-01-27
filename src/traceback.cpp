@@ -138,16 +138,6 @@ void traceback_dump (void)
 }
 
 #ifdef _WIN32
-#include <windows.h>
-#include <excpt.h>
-#include <imagehlp.h>
-#include <binutils/bfd.h>
-#include <psapi.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdbool.h>
 #include <psapi.h>
 #include <dbghelp.h>
 
