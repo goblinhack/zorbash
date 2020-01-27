@@ -590,7 +590,7 @@ int32_t main (int32_t argc, char *argv[])
     LOG("INIT: ascii console");
     ascii_init();
 
-#if 0
+#if 1
     extern void test (void);
     test();
 #endif
