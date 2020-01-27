@@ -1,6 +1,9 @@
 //
 // Copyright goblinhack@gmail.com
 //
+//
+#define PACKAGE "zorbash"
+#define PACKAGE_VERSION "0.1"
 #include "my_main.h"
 #include "my_traceback.h"
 #include "my_sprintf.h"
