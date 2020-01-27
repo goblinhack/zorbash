@@ -350,7 +350,7 @@ void _backtrace (void)
 void does_not_work (void)
 {
     printf("test2\n");
-    _backtrace2();
+    _backtrace();
     printf("\n\n");
     DIE("test");
 }
