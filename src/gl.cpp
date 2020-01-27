@@ -304,6 +304,9 @@ static void gl_init_fbo_ (int fbo,
         }
 #endif
     }
+    if (!status) {
+        glGetError();
+    }
     GL_ERROR_CHECK();
 
     // switch back to window-system-provided framebuffer
