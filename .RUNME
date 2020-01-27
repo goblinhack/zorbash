@@ -457,6 +457,7 @@ case `uname` in
         echo PATH $PATH
 
         EXE=".exe"
+        # gcc only
         C_FLAGS="$C_FLAGS -mwin32 "
         C_FLAGS+="$C_FLAGS -I/mingw64/x86_64-w64-mingw32/include "
 
