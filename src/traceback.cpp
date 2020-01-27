@@ -139,6 +139,7 @@ void traceback_dump (void)
 
 #ifdef _WIN32
 #include <windows.h>
+#include <config.h>
 #include <excpt.h>
 #include <imagehlp.h>
 #include <binutils/bfd.h>
