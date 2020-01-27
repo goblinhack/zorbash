@@ -197,14 +197,12 @@ typedef enum CallstackEntryType
 
 void _backtrace (void)
 {
-    HANDLE                          process = ::GetCurrentProcess();
-    HANDLE                          thread = GetCurrentThread();
+    HANDLE process = ::GetCurrentProcess();
+    HANDLE thread = GetCurrentThread();
 
-    // Randomly saw this was supposed to be called prior to StackWalk so tried
-    // it
     if (!SymInitialize(process, 0, true)) {
         wprintf(L"SymInitialize unable to find process!! Error: %d\r\n", 
-            GetLastError());
+                GetLastError());
     }
 
     DWORD symOptions = SymGetOptions();
@@ -224,8 +222,9 @@ void _backtrace (void)
 #if _MSC_VER >= 1400
     maxLen = _TRUNCATE;
 #endif
-    _snprintf_s(search_path_debug, maxLen, "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
-            szSearchPath, symOptions, szUserName);
+    _snprintf_s(search_path_debug, maxLen, 
+                "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
+                szSearchPath, symOptions, szUserName);
     search_path_debug[MAX_SYMBOL_LEN - 1] = 0;
     printf(search_path_debug);
 
@@ -245,10 +244,6 @@ void _backtrace (void)
     stack.AddrFrame.Offset    = context.Rbp;
     stack.AddrFrame.Mode      = AddrModeFlat;
 
-//    IMAGEHLP_MODULE64_V3 Module;
-//    memset(&Module, 0, sizeof(Module));
-//    Module.SizeOfStruct = sizeof(Module);
-
 #ifdef _M_IX86
     auto machine = IMAGE_FILE_MACHINE_I386;
 #elif _M_X64
@@ -258,10 +253,7 @@ void _backtrace (void)
 #else
 #error "platform not supported!"
 #endif
-
-    for (ULONG frame = 0; ; frame++)
-    {
-        // Check for frames
+    for (ULONG frame = 0; ; frame++) {
         BOOL result = StackWalk(machine, 
                                 process, 
                                 thread, 
@@ -294,10 +286,6 @@ void _backtrace (void)
                                 &csEntry.offsetFromSmybol, 
                                 &symbol)) {
         }
-
-        char name[MAX_SYMBOL_LEN];
-        UnDecorateSymbolName(symbol.Name, (PSTR)name, sizeof(name), 
-                             UNDNAME_COMPLETE );
 
         IMAGEHLP_LINE64 line {};
         line.SizeOfStruct = sizeof(line);
