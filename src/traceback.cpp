@@ -545,6 +545,7 @@ void _backtrace2(void)
                                 stack.AddrPC.Offset,
                                 &csEntry.offsetFromSmybol, 
                                 &symbol)) {
+            printf("got sym\n");
         }
 
         char name[STACKWALK_MAX_NAMELEN];
@@ -558,6 +559,7 @@ void _backtrace2(void)
                                  stack.AddrPC.Offset,
                                  &csEntry.offsetFromLine, 
                                  &line)) {
+            printf("got line\n");
         }
 
         printf("Frame %lu:\n"
@@ -607,31 +609,5 @@ void _backtrace2(void)
         }
     }
 }
-
-void testn (void)
-{
-    CONTEXT             context;
-    STACKFRAME64        stack;
-
-    RtlCaptureContext( &context );
-    memset( &stack, 0, sizeof( STACKFRAME64 ) );
-
-    struct bfd_set *set = (struct bfd_set *) calloc(1,sizeof(*set));
-    printf("test1\n");
-    _backtrace(set, 12, &context);
-    printf("\n\n");
-
-    printf("test2\n");
-    _backtrace2();
-    printf("\n\n");
-    DIE("test");
-}
-
-void test1 (void) { testn(); }
-void test2 (void) { test1(); }
-void test3 (void) { test2(); }
-void test4 (void) { test3(); }
-void test5 (void) { test4(); }
-void test (void) { test5(); }
 
 #endif

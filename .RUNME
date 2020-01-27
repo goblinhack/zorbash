@@ -479,14 +479,20 @@ case `uname` in
         LDLIBS="$LDLIBS -lpthread"
         LDLIBS="$LDLIBS /mingw64/lib/libSDL2_mixer.a"
         LDLIBS="$LDLIBS /mingw64/lib/libSDL2_ttf.a"
-        C_FLAGS+="-gcodeview"
+
+        #
+        # Except it does not work and does not generate pdb files for clang
+        #
+        #C_FLAGS+="-gcodeview"
+        #C_FLAGS=`echo $C_FLAGS | sed -e 's/-mwin32 //g'`
+        # And use this later
+        # echo "CC=clang++.exe # AUTOGEN" >> .Makefile
 
         #
         # For symbol decode StackTrace that doesn't really work without
         # visual studio. sigh
         #
         LDLIBS="$LDLIBS -L/mingw64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
-        C_FLAGS=`echo $C_FLAGS | sed -e 's/-mwin32 //g'`
         ;;
     *Darwin*)
         EXE=""
@@ -556,10 +562,6 @@ fi
 case `uname` in
     *MING*)
         echo "CC=/mingw64/bin/x86_64-w64-mingw32-g++.exe # AUTOGEN" >> .Makefile
-        #
-        # Better for .pdb file support for debugging
-        #
-        echo "CC=clang++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
