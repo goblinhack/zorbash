@@ -166,27 +166,26 @@ how to use: Call LoadLibraryA("backtrace.dll"); at beginning of your program .
 #include <stdarg.h>
 #include <string.h>
 #include <stdbool.h>
-
-
 #include <psapi.h>
 #include <dbghelp.h>
-#define STACKWALK_MAX_NAMELEN 1024
+
+#define MAX_SYMBOL_LEN 1024
 
 typedef struct CallstackEntry
 {
     DWORD64 offset; // if 0, we have no valid entry
-    CHAR    name[STACKWALK_MAX_NAMELEN];
-    CHAR    undName[STACKWALK_MAX_NAMELEN];
-    CHAR    undFullName[STACKWALK_MAX_NAMELEN];
+    CHAR    name[MAX_SYMBOL_LEN];
+    CHAR    undName[MAX_SYMBOL_LEN];
+    CHAR    undFullName[MAX_SYMBOL_LEN];
     DWORD64 offsetFromSmybol;
     DWORD   offsetFromLine;
     DWORD   lineNumber;
-    CHAR    lineFileName[STACKWALK_MAX_NAMELEN];
+    CHAR    lineFileName[MAX_SYMBOL_LEN];
     DWORD   symType;
     LPCSTR  symTypeString;
-    CHAR    moduleName[STACKWALK_MAX_NAMELEN];
+    CHAR    moduleName[MAX_SYMBOL_LEN];
     DWORD64 baseOfImage;
-    CHAR    loadedImageName[STACKWALK_MAX_NAMELEN];
+    CHAR    loadedImageName[MAX_SYMBOL_LEN];
 } CallstackEntry;
 
 typedef enum CallstackEntryType
@@ -196,7 +195,7 @@ typedef enum CallstackEntryType
     lastEntry
 } CallstackEntryType;
 
-void _backtrace2(void)
+void _backtrace (void)
 {
     HANDLE                          process = ::GetCurrentProcess();
     HANDLE                          thread = GetCurrentThread();
@@ -213,21 +212,21 @@ void _backtrace2(void)
     symOptions |= SYMOPT_FAIL_CRITICAL_ERRORS;
     symOptions = SymSetOptions(symOptions);
 
-    char szSearchPath[STACKWALK_MAX_NAMELEN] = {0};
-    SymGetSearchPath(process, szSearchPath, STACKWALK_MAX_NAMELEN);
+    char szSearchPath[MAX_SYMBOL_LEN] = {0};
+    SymGetSearchPath(process, szSearchPath, MAX_SYMBOL_LEN);
 
-    char  szUserName[STACKWALK_MAX_NAMELEN] = {0};
-    DWORD dwSize = STACKWALK_MAX_NAMELEN;
+    char  szUserName[MAX_SYMBOL_LEN] = {0};
+    DWORD dwSize = MAX_SYMBOL_LEN;
     GetUserNameA(szUserName, &dwSize);
 
-    CHAR   search_path_debug[STACKWALK_MAX_NAMELEN];
-    size_t maxLen = STACKWALK_MAX_NAMELEN;
+    CHAR   search_path_debug[MAX_SYMBOL_LEN];
+    size_t maxLen = MAX_SYMBOL_LEN;
 #if _MSC_VER >= 1400
     maxLen = _TRUNCATE;
 #endif
     _snprintf_s(search_path_debug, maxLen, "SymInit: Symbol-SearchPath: '%s', symOptions: %d, UserName: '%s'\n",
             szSearchPath, symOptions, szUserName);
-    search_path_debug[STACKWALK_MAX_NAMELEN - 1] = 0;
+    search_path_debug[MAX_SYMBOL_LEN - 1] = 0;
     printf(search_path_debug);
 
     // Initalize more memory
@@ -285,21 +284,9 @@ void _backtrace2(void)
         csEntry.loadedImageName[0] = 0;
         csEntry.moduleName[0] = 0;
 
-        // Initalize more memory
-        MODULEINFO                  module_info;
-        SecureZeroMemory(&module_info, sizeof(MODULEINFO));
-
-        // Get the file name of the file containing the function
-//        TCHAR module_buffer[MaxPath];
-//        DWORD mod_file = GetModuleFileName((HINSTANCE)module_base,
-//        module_buffer, MaxPath);
-//        if ((module_base != 0) && (mod_file != 0)) {
-//            module_info.module_name = module_buffer;
-//        }
-
         IMAGEHLP_SYMBOL64 symbol {};
         symbol.SizeOfStruct = sizeof(IMAGEHLP_SYMBOL64);
-        symbol.MaxNameLength = STACKWALK_MAX_NAMELEN;
+        symbol.MaxNameLength = MAX_SYMBOL_LEN;
 
         // Initalize more memory and clear it out
         if (SymGetSymFromAddr64(process, 
@@ -308,7 +295,7 @@ void _backtrace2(void)
                                 &symbol)) {
         }
 
-        char name[STACKWALK_MAX_NAMELEN];
+        char name[MAX_SYMBOL_LEN];
         UnDecorateSymbolName(symbol.Name, (PSTR)name, sizeof(name), 
                              UNDNAME_COMPLETE );
 
@@ -334,52 +321,10 @@ void _backtrace2(void)
                (ULONG64)stack.AddrFrame.Offset
            );
 
-#if 0
-        // Initalize memory
-        LPWSTR console_message = (LPWSTR) new TCHAR[MaxMsgLength];
-        LPWSTR file_message = (LPWSTR) new TCHAR[MaxMsgLength];
-
-        // Set some strings
-        swprintf(console_message, MaxMsgLength, L">> Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
-            frame, s.AddrPC.Offset, s.AddrStack.Offset, s.AddrFrame.Offset, s.AddrReturn.Offset);
-        swprintf(file_message, MaxMsgLength, L"Frame %02lu: called from: %016X Stack: %016X Frame: %016X Address return: %016X\r\n",
-            frame, s.AddrPC.Offset, s.AddrStack.Offset, s.AddrFrame.Offset, s.AddrReturn.Offset);
-
-        /* When the symbol can yield the name, line and file name the above strings
-        will also include that information */
-        // To go here . . .
-
-        // Write some strings
-        wprintf(L"CONSOLE: %s\n", console_message);
-        wprintf(L"FILE: %s\n", file_message);
-
-        // Delete some memory
-        if (console_message) {
-            delete[] console_message;   console_message = nullptr;
-        }
-        if (file_message) {
-            delete[] file_message;  file_message = nullptr;
-        }
-
-#endif
         // If nothing else to do break loop
         if (!result) {
             break;
         }
     }
 }
-
-void testn (void)
-{
-    _backtrace2();
-    DIE("test");
-}
-
-void test1 (void) { testn(); }
-void test2 (void) { test1(); }
-void test3 (void) { test2(); }
-void test4 (void) { test3(); }
-void test5 (void) { test4(); }
-void test (void) { test5(); }
-
 #endif
