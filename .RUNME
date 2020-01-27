@@ -486,6 +486,7 @@ case `uname` in
         # visual studio. sigh
         #
         LDLIBS="$LDLIBS -L/mingw64/lib/binutils -lbfd -lintl -ldbghelp -liberty -lz"
+        C_FLAGS=`echo $CFLAGS | sed -e 's/-mwin32 //g'`
         ;;
     *Darwin*)
         EXE=""
@@ -564,7 +565,6 @@ case `uname` in
         #
         LDLIBS="$LDLIBS -lmingw32 -lSDL2main -lSDL2 -mwindows /mingw64/lib/libSDL2main.a -L/mingw64/lib -lSDL2main -lSDL2"
         # clang
-        C_FLAGS=`echo $CFLAGS | sed -e 's/-mwin32 //g'`
     ;;
 esac
 
