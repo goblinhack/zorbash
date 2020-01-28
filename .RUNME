@@ -359,7 +359,10 @@ fi
 PYTHON_VERSION=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
 log_info "Python lib version         : $PYTHON_VERSION"
 
-cat windows/windows.xml.tmpl | sed "s/PYTHON_VERSION/$PYTHON_VERSION/g" > windows/windows.xml
+cat windows/windows.xml.tmpl | \
+    sed -e "s/PYTHON_VERSION/$PYTHON_VERSION/g" \
+        -e "s/GAME_VERSION/$VERSION/g" \
+    > windows/windows.xml
 
 /bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
 
