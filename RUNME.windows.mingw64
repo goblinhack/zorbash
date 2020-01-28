@@ -108,13 +108,13 @@ pacman -S tar \
     mingw-w64-x86_64-SDL2_ttf \
     mingw-w64-x86_64-binutils \
     mingw-w64-x86_64-bzip2 \
+    mingw-w64-x86_64-clang \
+    mingw-w64-x86_64-clang-tools-extra \
     mingw-w64-x86_64-crt-git \
     mingw-w64-x86_64-expat \
     mingw-w64-x86_64-flac \
     mingw-w64-x86_64-fluidsynth \
     mingw-w64-x86_64-gcc \
-    mingw-w64-x86_64-clang \
-    mingw-w64-x86_64-clang-tools-extra \
     mingw-w64-x86_64-gcc-libs \
     mingw-w64-x86_64-gdb \
     mingw-w64-x86_64-gdbm \
@@ -127,6 +127,7 @@ pacman -S tar \
     mingw-w64-x86_64-libffi \
     mingw-w64-x86_64-libiconv \
     mingw-w64-x86_64-libjpeg-turbo \
+    mingw-w64-x86_64-libmad \
     mingw-w64-x86_64-libmodplug \
     mingw-w64-x86_64-libogg \
     mingw-w64-x86_64-libpng \
@@ -141,6 +142,7 @@ pacman -S tar \
     mingw-w64-x86_64-mpfr \
     mingw-w64-x86_64-ncurses \
     mingw-w64-x86_64-openssl \
+    mingw-w64-x86_64-openssl-devel \
     mingw-w64-x86_64-portaudio \
     mingw-w64-x86_64-python3 \
     mingw-w64-x86_64-python3-pip \
