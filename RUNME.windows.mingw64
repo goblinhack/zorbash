@@ -1,4 +1,4 @@
-#!/bin/sh
+poen#!/bin/sh
 #
 # This script will try and build the game for mingw64, installing files
 # it needs. There is some manual prep needed first:
@@ -142,7 +142,6 @@ pacman -S tar \
     mingw-w64-x86_64-mpfr \
     mingw-w64-x86_64-ncurses \
     mingw-w64-x86_64-openssl \
-    mingw-w64-x86_64-openssl-devel \
     mingw-w64-x86_64-portaudio \
     mingw-w64-x86_64-python3 \
     mingw-w64-x86_64-python3-pip \
