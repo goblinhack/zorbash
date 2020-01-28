@@ -1,7 +1,7 @@
 <project>
-    <shortName>gorynlich</shortName>
-    <fullName>gorynlich</fullName>
-    <version>0.01</version>
+    <shortName>zorbash</shortName>
+    <fullName>zorbash</fullName>
+    <version>0.0.1</version>
     <installerFilename></installerFilename>
     <licenseFile>C:/msys64/home/nmcgill/zorbash/LICENSE</licenseFile>
     <logoImage>C:/msys64/home/nmcgill/zorbash/windows/zorbash.png</logoImage>
