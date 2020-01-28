@@ -5,7 +5,5 @@ then
     exit 1
 fi
 
-cp /c/Users/nmcgill/Documents/InstallBuilder/output/zorbash-0-0-1-windows-installer.exe ../zorbash-installer.exe
-if [ -d /c/Users/nmcgill/Google\ Drive/ ]; then
-    cp ../zorbash-installer.exe  /c/Users/nmcgill/Google\ Drive/
-fi
+ls -la /c/Users/nmcgill/Documents/InstallBuilder/output/
+cp /c/Users/nmcgill/Documents/InstallBuilder/output/zorbash-0.0.1-windows-installer.exe
