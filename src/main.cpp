@@ -265,7 +265,7 @@ static void find_executable (void)
     }
 
     //
-    // Get rid of any // from th path
+    // Get rid of any // from the path
     //
     tmp = strsub(exec_expanded_name, DSEP DSEP, DSEP, "exec_expanded_name3");
     myfree(exec_expanded_name);
@@ -353,8 +353,15 @@ static void find_exec_dir (void)
     // Make sure the exec dir ends in a /
     //
     auto tmp = dynprintf("%s" DSEP, EXEC_DIR);
-    auto tmp2 = strsub(tmp, DSEP DSEP, DSEP, "EXEC_DIR");
+    auto tmp2 = strsub(tmp, "//", DSEP, "EXEC_DIR");
+    auto tmp3 = strsub(tmp2, "\\\\", DSEP, "EXEC_DIR");
+    auto tmp4 = strsub(tmp3, "/", DSEP, "EXEC_DIR");
+    auto tmp5 = strsub(tmp4, "\\", DSEP, "EXEC_DIR");
     myfree(tmp);
+    myfree(tmp2);
+    myfree(tmp3);
+    myfree(tmp4);
+    myfree(tmp5);
     if (EXEC_DIR) {
         myfree(EXEC_DIR);
     }
@@ -548,7 +555,6 @@ int32_t main (int32_t argc, char *argv[])
     LOG("INIT: __linux__");
 #endif
 
-
     LOG("INIT: getenv APPDATA or use default, 'appdata'");
     const char *appdata;
     appdata = getenv("APPDATA");
@@ -573,12 +579,12 @@ int32_t main (int32_t argc, char *argv[])
     myfree(dir);
 
     char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
-    LOG("INIT: set STDOUT to %s", out);
+    LOG("INIT: set STDOUT to %s, APPDATA %s", out, dir);
     LOG_STDOUT = fopen(out, "w+");
     myfree(out);
 
     char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
-    LOG("INIT: set STDERR to %s", out);
+    LOG("INIT: set STDERR to %s, APPDATA %s", err, dir);
     LOG_STDERR = fopen(err, "w+");
     myfree(err);
 
