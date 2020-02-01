@@ -1939,11 +1939,9 @@ static void py_add_to_path (const char *path)
     wchar_t *wc_new_path;
     char *item;
 
-    LOG("- %s", path);
+    CON("- %s", path);
 
- /*
     LOG("Current system python path:");
-     */
 
     new_path = dupstr(path, __FUNCTION__);
     py_cur_path = PySys_GetObject("path");
@@ -1968,7 +1966,7 @@ static void py_add_to_path (const char *path)
             continue;
         }
 
-        //LOG("  %s", item);
+        LOG("  %s", item);
 
         tmp = strappend(new_path, item);
         myfree(new_path);
@@ -1985,7 +1983,7 @@ static void py_add_to_path (const char *path)
         DIE("path alloc fail");
     }
 
-    // LOG("Set python path: %s", new_path);
+    LOG("Set python path: %s", new_path);
 
     mbstowcs(wc_new_path, new_path, wc_len);
     PySys_SetPath(wc_new_path);
@@ -2860,55 +2858,32 @@ static void python_add_consts (void)
 
 void python_init (char *argv[])
 {_
-#if 0
-    PyRun_SimpleString("import sys; sys.path.append('./python" PYTHON_VERSION "/')\n");
-    PyRun_SimpleString("import sys; sys.path.append('./python" PYTHON_VERSION "/lib-dynload')\n");
-#endif
+    CON("INIT: PYTHONVERSION set to          %s", PYTHONVERSION);
 #ifdef _WIN32
-    // PYTHONPATH is c:\Program Files (x86)\{APPNAME}\python{PYTHON_VERSION}"
-    auto pythonpath = dynprintf("%s:.", PYTHON_PATH);
+    CON("INIT: PYTHONPATH    set to (exec)   %s", EXEC_PYTHONPATH);
+    CON("INIT: PYTHONPATH    set to (build)  %s", PYTHONPATH);
+
+    auto pythonpath = dynprintf("%s:%s",
+                                EXEC_PYTHONPATH,
+                                PYTHONPATH);
+    CON("INIT: PYTHONPATH    set to (final)  %s", pythonpath);
+
     _putenv_s("PYTHONPATH", pythonpath);
 #endif
-#if 0
 
-     _putenv_s("PYTHONPATH", ".:python/;python" PYTHON_VERSION "/;python" PYTHON_VERSION "/lib-dynload;python" PYTHON_VERSION "/site-packages");
-    {
-        int wc_len;
-        wchar_t *wc_new_str;
-        const char *str = argv[0];
-
-        /* Convert to wide chars. */
-        wc_len = sizeof(wchar_t) * (strlen(str) + 1);
-
-        wc_new_str = (wchar_t *) myzalloc(wc_len, "wchar str");
-        if (!wc_new_str) {
-            DIE("program name alloc fail");
-        }
-
-        LOG("Calling Py_SetProgramName: \"%s\"", str);
-
-        mbstowcs(wc_new_str, str, wc_len);
-        Py_SetProgramName(wc_new_str);
-        myfree(wc_new_str);
-    }
-#endif
-
-    LOG("Calling PyImport_AppendInittab zx module");
+    CON("INIT: Calling PyImport_AppendInittab zx module");
     PyImport_AppendInittab("zx", python_mouse_y_module_create);
 
-    LOG("Calling Py_Initialize");
+    CON("INIT: Calling Py_Initialize");
     Py_Initialize();
 
-    LOG("Adding to python path:");
+    CON("INIT: Adding to python path:");
+    py_add_to_path("python");
     py_add_to_path(GFX_PATH);
     py_add_to_path(DATA_PATH);
-    py_add_to_path(PYTHON_PATH);
+    py_add_to_path(EXEC_PYTHONPATH);
 
-#ifdef __APPLE__
-    py_add_to_path("/Library/Frameworks/Python.framework/Versions/3.5/lib/python" PYTHON_VERSION "/site-packages/");
-#endif
-
-    LOG("Calling PyImport_ImportModule for zx module");
+    LOG("INIT: Calling PyImport_ImportModule for zx module");
 
     zx_mod = PyImport_ImportModule("zx");
     if (!zx_mod) {
@@ -2918,7 +2893,7 @@ void python_init (char *argv[])
 
     python_add_consts();
 
-    LOG("Calling PyImport_ImportModule for init module");
+    LOG("INIT: Calling PyImport_ImportModule for init module");
 
     zx_mod = PyImport_ImportModule("init");
     if (!zx_mod) {

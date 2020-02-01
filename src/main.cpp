@@ -33,7 +33,7 @@ char *EXEC_FULL_PATH_AND_NAME;
 char *EXEC_DIR;
 char *DATA_PATH;
 char *WORLD_PATH;
-char *PYTHON_PATH;
+char *EXEC_PYTHONPATH;
 char *TTF_PATH;
 char *GFX_PATH;
 static bool opt_new_game;
@@ -161,9 +161,9 @@ void quit (void)
         DATA_PATH = 0;
     }
 
-    if (PYTHON_PATH) {
-        myfree(PYTHON_PATH);
-        PYTHON_PATH = 0;
+    if (EXEC_PYTHONPATH) {
+        myfree(EXEC_PYTHONPATH);
+        EXEC_PYTHONPATH = 0;
     }
 
     if (WORLD_PATH) {
@@ -228,6 +228,7 @@ static void find_executable (void)
     char *tmp;
 
     exec_name = mybasename(ARGV[0], __FUNCTION__);
+    CON("INIT: EXEC_NAME     set to %s", exec_name.c_str());
 
     //
     // Get the current directory, ending in a single /
@@ -320,7 +321,8 @@ static void find_executable (void)
     EXEC_DIR = dupstr(dirname(exec_expanded_name), "exec dir");
 
 cleanup:
-    DBG("Exec name   : \"%s\"", exec_name.c_str());
+    CON("INIT: EXEC_DIR      set to %s", EXEC_DIR);
+
     DBG("Parent dir  : \"%s\"", parent_dir);
     DBG("Curr dir    : \"%s\"", curr_dir);
     DBG("Full name   : \"%s\"", exec_expanded_name);
@@ -361,11 +363,12 @@ static void find_exec_dir (void)
     myfree(tmp2);
     myfree(tmp3);
     myfree(tmp4);
-    myfree(tmp5);
     if (EXEC_DIR) {
         myfree(EXEC_DIR);
     }
-    EXEC_DIR = tmp2;
+    EXEC_DIR = tmp5;
+
+    CON("INIT: EXEC_DIR (os) set to %s", EXEC_DIR);
 }
 
 //
@@ -388,14 +391,7 @@ static void find_data_dir (void)
 //
 static void find_python_dir (void)
 {_
-    PYTHON_PATH = dynprintf("%spython%s" DSEP, EXEC_DIR, PYTHON_VERSION);
-    if (dir_exists(PYTHON_PATH)) {
-        return;
-    }
-
-    myfree(PYTHON_PATH);
-
-    PYTHON_PATH = dupstr(EXEC_DIR, __FUNCTION__);
+    EXEC_PYTHONPATH = dynprintf("%spython%s" DSEP, EXEC_DIR, PYTHONVERSION);
 }
 
 //
@@ -635,11 +631,10 @@ int32_t main (int32_t argc, char *argv[])
     CON("INIT: resource locations for gfx and music");
     find_file_locations();
 
+    python_init(argv);
+
     CON("INIT: dungeon character maps");
     Charmap::init_charmaps();
-
-    CON("INIT: python modules");
-    python_init(argv);
 
 #if 0
     extern int grid_test(void);

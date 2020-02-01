@@ -35,7 +35,7 @@ uint8_t croaked;
 static void get_timestamp (char *buf, int32_t len)
 {
 #ifdef ENABLE_FULL_TIMESTAMPS
-    char tmp[MAXSHORTSTR];
+    char tmp[MAXSTR];
     string_timestamp(tmp, len);
     snprintf(buf, len, "%s %s", timestamp().c_str(), tmp);
 #else
@@ -118,13 +118,13 @@ static void putf (FILE *fp, const char *s)
 
 static void log_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -142,13 +142,13 @@ void LOG (const char *fmt, ...)
 
 static void warn_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
     FLUSH_THE_CONSOLE();
@@ -167,13 +167,13 @@ void WARN (const char *fmt, ...)
 
 static void con_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -188,22 +188,22 @@ static void con_ (const char *fmt, va_list args)
 static void con_ (const wchar_t *fmt, va_list args)
 {
     {
-        char buf[MAXSHORTSTR];
+        char buf[MAXSTR];
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
+        get_timestamp(buf, MAXSTR);
         fprintf(MY_STDOUT, "%s", buf);
         term_log(buf);
     }
 
     {
-        wchar_t buf[MAXSHORTSTR];
-        auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
+        wchar_t buf[MAXSTR];
+        auto wrote = vswprintf(buf, MAXSTR, fmt, args);
 
         //
         // Only a single nul is written, but as we read 2 at a time...
         //
-        if (wrote && (wrote < MAXSHORTSTR - 1)) {
+        if (wrote && (wrote < MAXSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
             fprintf(stderr, "Failed to console log: [%S]\n", fmt);
@@ -221,10 +221,10 @@ static void con_ (const wchar_t *fmt, va_list args)
 void con (const wchar_t *fmt)
 {
     {
-        char buf[MAXSHORTSTR];
+        char buf[MAXSTR];
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
+        get_timestamp(buf, MAXSTR);
         fprintf(MY_STDOUT, "%s", buf);
         term_log(buf);
     }
@@ -241,15 +241,15 @@ void con (const wchar_t *fmt)
 
 static void minicon_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
-    char ts[MAXSHORTSTR/2];
+    char buf[MAXSTR];
+    char ts[MAXSTR/2];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(ts, MAXSHORTSTR);
+    get_timestamp(ts, MAXSTR);
     snprintf(buf, sizeof(buf) - 1, "%sMINICON: ", ts);
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -264,21 +264,21 @@ static void minicon_ (const char *fmt, va_list args)
 static void minicon_ (const wchar_t *fmt, va_list args)
 {
     {
-        char ts[MAXSHORTSTR];
+        char ts[MAXSTR];
         ts[0] = '\0';
-        get_timestamp(ts, MAXSHORTSTR);
+        get_timestamp(ts, MAXSTR);
         fprintf(MY_STDOUT, "%sMINICON: ", ts);
         term_log(ts);
     }
 
     {
-        wchar_t buf[MAXSHORTSTR];
-        auto wrote = vswprintf(buf, MAXSHORTSTR, fmt, args);
+        wchar_t buf[MAXSTR];
+        auto wrote = vswprintf(buf, MAXSTR, fmt, args);
 
         //
         // Only a single nul is written, but as we read 2 at a time...
         //
-        if (wrote && (wrote < MAXSHORTSTR - 1)) {
+        if (wrote && (wrote < MAXSTR - 1)) {
             buf[wrote+1] = '\0';
         } else {
             fprintf(stderr, "Failed to minicon log: [%S]\n", fmt);
@@ -297,10 +297,10 @@ static void minicon_ (const wchar_t *fmt, va_list args)
 void minicon (const wchar_t *fmt)
 {
     {
-        char buf[MAXSHORTSTR];
+        char buf[MAXSTR];
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
+        get_timestamp(buf, MAXSTR);
         fprintf(MY_STDOUT, "%s", buf);
         term_log(buf);
     }
@@ -353,17 +353,17 @@ void MINICON (const wchar_t *fmt, ...)
 
 static void dying_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSHORTSTR - len, "DYING: ");
+    snprintf(buf + len, MAXSTR - len, "DYING: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     fprintf(stderr, "%s\n", buf);
     putf(MY_STDOUT, buf);
@@ -373,20 +373,20 @@ static void dying_ (const char *fmt, va_list args)
 
 static void err_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSTR - len, "ERROR: %%%%fg=red$");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
 
@@ -412,18 +412,18 @@ static void croak_ (const char *fmt, va_list args)
     }
     croaked = 1;
 
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
     int tslen;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     tslen = len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSHORTSTR - len, "FATAL ERROR: ");
+    snprintf(buf + len, MAXSTR - len, "FATAL ERROR: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     fprintf(stderr, "%s\n", buf);
 
@@ -498,17 +498,17 @@ void Thing::log_ (const char *fmt, va_list args)
 {
     verify(this);
     auto t = this;
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
+    snprintf(buf + len, MAXSTR - len, "thing %s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 }
@@ -530,18 +530,18 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 
     if (tp_is_loggable(tp())) {
         auto t = this;
-        char buf[MAXSHORTSTR];
+        char buf[MAXSTR];
         int len;
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
+        get_timestamp(buf, MAXSTR);
         len = (int)strlen(buf);
-        snprintf(buf + len, MAXSHORTSTR - len, "thing %s: killed by %s: ",
+        snprintf(buf + len, MAXSTR - len, "thing %s: killed by %s: ",
                 t->to_string().c_str(),
                 killer->to_string().c_str());
 
         len = (int)strlen(buf);
-        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+        vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
         putf(MY_STDOUT, buf);
     }
@@ -566,17 +566,17 @@ void Thing::dead_ (const char *fmt, va_list args)
 
     if (tp_is_loggable(tp())) {
         auto t = this;
-        char buf[MAXSHORTSTR];
+        char buf[MAXSTR];
         int len;
 
         buf[0] = '\0';
-        get_timestamp(buf, MAXSHORTSTR);
+        get_timestamp(buf, MAXSTR);
         len = (int)strlen(buf);
-        snprintf(buf + len, MAXSHORTSTR - len, "thing %s: dead: ",
+        snprintf(buf + len, MAXSTR - len, "thing %s: dead: ",
                 t->to_string().c_str());
 
         len = (int)strlen(buf);
-        vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+        vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
         putf(MY_STDOUT, buf);
     }
@@ -599,17 +599,17 @@ void Thing::die_ (const char *fmt, va_list args)
 {
     verify(this);
     auto t = this;
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
+    snprintf(buf + len, MAXSTR - len, "thing %s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     DIE("%s",buf);
 }
@@ -629,17 +629,17 @@ void Thing::con_ (const char *fmt, va_list args)
 {
     verify(this);
     auto t = this;
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "thing %s: ",
+    snprintf(buf + len, MAXSTR - len, "thing %s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -664,17 +664,17 @@ void Thing::err_ (const char *fmt, va_list args)
 {
     verify(this);
     auto t = this;
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: Thing %s: ",
+    snprintf(buf + len, MAXSTR - len, "ERROR: Thing %s: ",
             t->to_cstring());
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -718,16 +718,16 @@ void Thing::dbg (const char *fmt, ...)
 void Light::log_ (const char *fmt, va_list args)
 {
     verify(this);
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "light: ");
+    snprintf(buf + len, MAXSTR - len, "light: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 }
@@ -746,16 +746,16 @@ void Light::log (const char *fmt, ...)
 void Light::die_ (const char *fmt, va_list args)
 {
     verify(this);
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "light: ");
+    snprintf(buf + len, MAXSTR - len, "light: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     DIE("%s",buf);
 }
@@ -774,16 +774,16 @@ void Light::die (const char *fmt, ...)
 void Light::con_ (const char *fmt, va_list args)
 {
     verify(this);
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "light: ");
+    snprintf(buf + len, MAXSTR - len, "light: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -806,16 +806,16 @@ void Light::con (const char *fmt, ...)
 void Light::err_ (const char *fmt, va_list args)
 {
     verify(this);
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: Light: ");
+    snprintf(buf + len, MAXSTR - len, "ERROR: Light: ");
 
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 
@@ -859,16 +859,16 @@ void Light::dbg (const char *fmt, ...)
 #ifdef ENABLE_WID_DEBUG
 static void wid_log_ (Widp t, const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     verify(t);
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "wid   %s: ", to_string(t).c_str());
+    snprintf(buf + len, MAXSTR - len, "wid   %s: ", to_string(t).c_str());
     len = (int)strlen(buf);
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     putf(MY_STDOUT, buf);
 }
@@ -898,21 +898,21 @@ void WID_DBG (Widp t, const char *fmt, ...)
 
 static void msgerr_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSTR - len, "ERROR: %%%%fg=red$");
 
     len = (int)strlen(buf);
 
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
 
@@ -939,24 +939,24 @@ void GAME_UI_MSG_BOX (const char *fmt, ...)
 
 static void sdl_msgerr_ (const char *fmt, va_list args)
 {
-    char buf[MAXSHORTSTR];
+    char buf[MAXSTR];
 #if SDL_MAJOR_VERSION >= 2
     int ts_len;
 #endif
     int len;
 
     buf[0] = '\0';
-    get_timestamp(buf, MAXSHORTSTR);
+    get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
 
-    snprintf(buf + len, MAXSHORTSTR - len, "ERROR: %%%%fg=red$");
+    snprintf(buf + len, MAXSTR - len, "ERROR: %%%%fg=red$");
 
     len = (int)strlen(buf);
 #if SDL_MAJOR_VERSION >= 2
     ts_len = len;
 #endif
 
-    vsnprintf(buf + len, MAXSHORTSTR - len, fmt, args);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
 #if SDL_MAJOR_VERSION >= 2
     SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR,
@@ -964,7 +964,7 @@ static void sdl_msgerr_ (const char *fmt, va_list args)
 #endif
 
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSHORTSTR - len, "%%%%fg=reset$");
+    snprintf(buf + len, MAXSTR - len, "%%%%fg=reset$");
 
     putf(MY_STDERR, buf);
 

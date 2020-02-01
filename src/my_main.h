@@ -466,7 +466,7 @@ extern FILE *LOG_STDERR;
 extern char *EXEC_FULL_PATH_AND_NAME;
 extern char *EXEC_DIR;
 extern char *DATA_PATH;
-extern char *PYTHON_PATH;
+extern char *EXEC_PYTHONPATH;
 extern char *GFX_PATH;
 extern char *TTF_PATH;
 extern uint8_t quitting;

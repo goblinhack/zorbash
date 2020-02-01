@@ -354,10 +354,10 @@ void strnoescape (char *uncompressed)
 
 static const char *dynvprintf_ (const char *fmt, va_list args)
 {_
-    static char buf[MAXSHORTSTR];
+    static char buf[MAXSTR];
 
     buf[0] = '\0';
-    vsnprintf(buf, MAXSHORTSTR, fmt, args);
+    vsnprintf(buf, MAXSTR, fmt, args);
 
     return (buf);
 }
@@ -380,10 +380,10 @@ char *dynprintf (const char *fmt, ...)
 
 char *dynvprintf (const char *fmt, va_list args)
 {_
-    static char buf[MAXSHORTSTR];
+    static char buf[MAXSTR];
 
     buf[0] = '\0';
-    vsnprintf(buf, MAXSHORTSTR, fmt, args);
+    vsnprintf(buf, MAXSTR, fmt, args);
 
     return (dupstr(buf, __FUNCTION__));
 }
@@ -1085,7 +1085,7 @@ int32_t snprintf_realloc (char **str,
         usedspace = *used;
     }
 
-    char add[MAXSHORTSTR];
+    char add[MAXSTR];
     va_start(ap, fmt);
     vsnprintf(add, sizeof(add) - 1, fmt, ap);
     va_end(ap);
