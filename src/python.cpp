@@ -2864,9 +2864,14 @@ void python_init (char *argv[])
     PyRun_SimpleString("import sys; sys.path.append('./python" PYTHON_VERSION "/')\n");
     PyRun_SimpleString("import sys; sys.path.append('./python" PYTHON_VERSION "/lib-dynload')\n");
 #endif
+#ifdef _WIN32
+    // PYTHONPATH is c:\Program Files (x86)\{APPNAME}\python{PYTHON_VERSION}"
+    auto pythonpath = dynprintf("%s:.", PYTHON_PATH);
+    _putenv_s("PYTHONPATH", pythonpath);
+#endif
 #if 0
-     _putenv_s("PYTHONPATH", "python/;python" PYTHON_VERSION "/;python" PYTHON_VERSION "/lib-dynload;python" PYTHON_VERSION "/site-packages");
 
+     _putenv_s("PYTHONPATH", ".:python/;python" PYTHON_VERSION "/;python" PYTHON_VERSION "/lib-dynload;python" PYTHON_VERSION "/site-packages");
     {
         int wc_len;
         wchar_t *wc_new_str;
