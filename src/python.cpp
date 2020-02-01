@@ -2864,7 +2864,7 @@ void python_init (char *argv[])
     PyRun_SimpleString("import sys; sys.path.append('./python" PYTHON_VERSION "/')\n");
     PyRun_SimpleString("import sys; sys.path.append('./python" PYTHON_VERSION "/lib-dynload')\n");
 #endif
-#if __WIN32
+#if 0
      _putenv_s("PYTHONPATH", "python/;python" PYTHON_VERSION "/;python" PYTHON_VERSION "/lib-dynload;python" PYTHON_VERSION "/site-packages");
 
     {
