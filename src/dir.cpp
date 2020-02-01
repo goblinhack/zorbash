@@ -26,7 +26,7 @@ uint8_t dir_exists (const char *indir)
      * will not think it is a dir.
      */
     dir = dupstr(indir, "dir");
-    strchopc(dir, DCHAR);
+    strchopc(dir, DIR_SEP_CHAR);
 
     rc = 0;
     if (stat(dir, &buf) >= 0) {
