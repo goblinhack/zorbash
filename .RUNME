@@ -459,8 +459,6 @@ case `uname` in
         ;;
     *MING*)
         PATH=/mingw64/bin:$PATH
-        export PATH
-        echo PATH $PATH
 
         EXE=".exe"
         # gcc only
@@ -524,7 +522,10 @@ case `uname` in
         ;;
 esac
 
-PYTHONPATH=$(python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
+# This is better, but make thinks ; is a new job
+PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
+# So we do this and fix the path in program
+PYTHONPATH=$($Python -c 'import sys; print(":PATHSEP:".join(x for x in sys.path if x))')
 
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
 C_FLAGS="$C_FLAGS -DPYTHONVERSION=\\\"$PYTHONVERSION\\\""
