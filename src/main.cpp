@@ -233,16 +233,16 @@ static void find_executable (void)
     //
     // Get the current directory, ending in a single /
     //
-    curr_dir = dynprintf("%s" DSEP, dir_dot());
-    tmp = strsub(curr_dir, DSEP DSEP, DSEP, "curr_dir");
+    curr_dir = dynprintf("%s" DIR_SEP, dir_dot());
+    tmp = strsub(curr_dir, DIR_SEP DIR_SEP, DIR_SEP, "curr_dir");
     myfree(curr_dir);
     curr_dir = tmp;
 
     //
     // Get the parent directory, ending in a single /
     //
-    parent_dir = dynprintf("%s" DSEP, dir_dotdot(dir_dot()));
-    tmp = strsub(parent_dir, DSEP DSEP, DSEP, "parent_dir");
+    parent_dir = dynprintf("%s" DIR_SEP, dir_dotdot(dir_dot()));
+    tmp = strsub(parent_dir, DIR_SEP DIR_SEP, DIR_SEP, "parent_dir");
     myfree(parent_dir);
     parent_dir = tmp;
 
@@ -251,7 +251,7 @@ static void find_executable (void)
     //
     exec_expanded_name = dupstr(ARGV[0], __FUNCTION__);
     if (*exec_expanded_name == '.') {
-        tmp = strsub(exec_expanded_name, ".." DSEP, parent_dir, "exec_expanded_name");
+        tmp = strsub(exec_expanded_name, ".." DIR_SEP, parent_dir, "exec_expanded_name");
         myfree(exec_expanded_name);
         exec_expanded_name = tmp;
     }
@@ -260,7 +260,7 @@ static void find_executable (void)
     // Get rid of ./ from the program name.
     //
     if (*exec_expanded_name == '.') {
-        tmp = strsub(exec_expanded_name, "." DSEP, "", "exec_expanded_name2");
+        tmp = strsub(exec_expanded_name, "." DIR_SEP, "", "exec_expanded_name2");
         myfree(exec_expanded_name);
         exec_expanded_name = tmp;
     }
@@ -268,7 +268,7 @@ static void find_executable (void)
     //
     // Get rid of any // from the path
     //
-    tmp = strsub(exec_expanded_name, DSEP DSEP, DSEP, "exec_expanded_name3");
+    tmp = strsub(exec_expanded_name, DIR_SEP DIR_SEP, DIR_SEP, "exec_expanded_name3");
     myfree(exec_expanded_name);
     exec_expanded_name = tmp;
 
@@ -304,9 +304,9 @@ static void find_executable (void)
         path = dupstr(path, "path");
 
         for (dir = strtok(path, ":"); dir; dir = strtok(0, ":")) {
-            EXEC_FULL_PATH_AND_NAME = dynprintf("%s" DSEP "%s", dir, exec_name.c_str());
+            EXEC_FULL_PATH_AND_NAME = dynprintf("%s" DIR_SEP "%s", dir, exec_name.c_str());
             if (file_exists(EXEC_FULL_PATH_AND_NAME)) {
-                EXEC_DIR = dynprintf("%s" DSEP, dir);
+                EXEC_DIR = dynprintf("%s" DIR_SEP, dir);
                 goto cleanup;
             }
 
@@ -354,11 +354,11 @@ static void find_exec_dir (void)
     //
     // Make sure the exec dir ends in a /
     //
-    auto tmp = dynprintf("%s" DSEP, EXEC_DIR);
-    auto tmp2 = strsub(tmp, "//", DSEP, "EXEC_DIR");
-    auto tmp3 = strsub(tmp2, "\\\\", DSEP, "EXEC_DIR");
-    auto tmp4 = strsub(tmp3, "/", DSEP, "EXEC_DIR");
-    auto tmp5 = strsub(tmp4, "\\", DSEP, "EXEC_DIR");
+    auto tmp = dynprintf("%s" DIR_SEP, EXEC_DIR);
+    auto tmp2 = strsub(tmp, "//", DIR_SEP, "EXEC_DIR");
+    auto tmp3 = strsub(tmp2, "\\\\", DIR_SEP, "EXEC_DIR");
+    auto tmp4 = strsub(tmp3, "/", DIR_SEP, "EXEC_DIR");
+    auto tmp5 = strsub(tmp4, "\\", DIR_SEP, "EXEC_DIR");
     myfree(tmp);
     myfree(tmp2);
     myfree(tmp3);
@@ -376,7 +376,7 @@ static void find_exec_dir (void)
 //
 static void find_data_dir (void)
 {_
-    DATA_PATH = dynprintf("%sdata" DSEP, EXEC_DIR);
+    DATA_PATH = dynprintf("%sdata" DIR_SEP, EXEC_DIR);
     if (dir_exists(DATA_PATH)) {
         return;
     }
@@ -391,7 +391,7 @@ static void find_data_dir (void)
 //
 static void find_python_dir (void)
 {_
-    EXEC_PYTHONPATH = dynprintf("%spython%s" DSEP, EXEC_DIR, PYTHONVERSION);
+    EXEC_PYTHONPATH = dynprintf("%spython%s" DIR_SEP, EXEC_DIR, PYTHONVERSION);
 }
 
 //
@@ -399,7 +399,7 @@ static void find_python_dir (void)
 //
 static void find_world_dir (void)
 {_
-    WORLD_PATH = dynprintf("%sdata" DSEP "world" DSEP, EXEC_DIR);
+    WORLD_PATH = dynprintf("%sdata" DIR_SEP "world" DIR_SEP, EXEC_DIR);
     if (dir_exists(WORLD_PATH)) {
         return;
     }
@@ -414,7 +414,7 @@ static void find_world_dir (void)
 //
 static void find_ttf_dir (void)
 {_
-    TTF_PATH = dynprintf("%sdata" DSEP "ttf" DSEP, EXEC_DIR);
+    TTF_PATH = dynprintf("%sdata" DIR_SEP "ttf" DIR_SEP, EXEC_DIR);
     if (dir_exists(TTF_PATH)) {
         return;
     }
@@ -429,7 +429,7 @@ static void find_ttf_dir (void)
 //
 static void find_gfx_dir (void)
 {_
-    GFX_PATH = dynprintf("%sdata" DSEP "gfx" DSEP, EXEC_DIR);
+    GFX_PATH = dynprintf("%sdata" DIR_SEP "gfx" DIR_SEP, EXEC_DIR);
     if (dir_exists(GFX_PATH)) {
         return;
     }
@@ -565,7 +565,7 @@ int32_t main (int32_t argc, char *argv[])
     mkdir(appdata, 0700);
 #endif
 
-    char *dir = dynprintf("%s%s%s", appdata, DSEP, "zorbash");
+    char *dir = dynprintf("%s%s%s", appdata, DIR_SEP, "zorbash");
 #ifdef _WIN32
     mkdir(dir);
 #else
@@ -574,12 +574,12 @@ int32_t main (int32_t argc, char *argv[])
     LOG("INIT: set APPDATA to %s", dir);
     myfree(dir);
 
-    char *out = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stdout.txt");
+    char *out = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
     LOG("INIT: set STDOUT to %s, APPDATA %s", out, dir);
     LOG_STDOUT = fopen(out, "w+");
     myfree(out);
 
-    char *err = dynprintf("%s%s%s%s%s", appdata, DSEP, "zorbash", DSEP, "stderr.txt");
+    char *err = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
     LOG("INIT: set STDERR to %s, APPDATA %s", err, dir);
     LOG_STDERR = fopen(err, "w+");
     myfree(err);

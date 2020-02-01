@@ -1947,11 +1947,7 @@ static void py_add_to_path (const char *path)
     py_cur_path = PySys_GetObject("path");
 
     for (i = 0; i < PyList_Size(py_cur_path); i++) {
-#ifdef _WIN32
-        char *tmp = strappend(new_path, ";");
-#else
-        char *tmp = strappend(new_path, ":");
-#endif
+        char *tmp = strappend(new_path, PATHSEP);
         myfree(new_path);
         new_path = tmp;
 
@@ -2863,7 +2859,10 @@ void python_init (char *argv[])
     CON("INIT: PYTHONPATH    set to (exec)   %s", EXEC_PYTHONPATH);
     CON("INIT: PYTHONPATH    set to (build)  %s", PYTHONPATH);
 
-    auto pythonpath = dynprintf("%s:%s",
+    //
+    // Note ; below
+    //
+    auto pythonpath = dynprintf("%s"PATHSEP"%s",
                                 EXEC_PYTHONPATH,
                                 PYTHONPATH);
     CON("INIT: PYTHONPATH    set to (final)  %s", pythonpath);

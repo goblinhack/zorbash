@@ -371,11 +371,13 @@ typedef unsigned long long   uint64_t;
 // msys functions seem to accept either / or \ so we don't need to worry.
 //
 #ifdef _WIN32
-#define DSEP "\\"
-#define DCHAR '\\'
+#define PATHSEP ";"
+#define DIR_SEP "\\"
+#define DIR_SEP_CHAR '\\'
 #else
-#define DSEP "/"
-#define DCHAR '/'
+#define PATHSEP ":"
+#define DIR_SEP "/"
+#define DIR_SEP_CHAR '/'
 #endif
 
 void CROAK(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
