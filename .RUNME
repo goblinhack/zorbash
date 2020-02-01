@@ -356,11 +356,12 @@ else
     fi
 fi
 
-PYTHON_VERSION=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
-log_info "Python lib version         : $PYTHON_VERSION"
+PYTHONVERSION=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
+
+log_info "Python lib version         : $PYTHONVERSION"
 
 cat windows/windows.xml.tmpl | \
-    sed -e "s/PYTHON_VERSION/$PYTHON_VERSION/g" \
+    sed -e "s/PYTHONVERSION/$PYTHONVERSION/g" \
         -e "s/GAME_VERSION/$VERSION/g" \
     > windows/windows.xml
 
@@ -523,8 +524,11 @@ case `uname` in
         ;;
 esac
 
+PYTHONPATH=$(python -c "import sys; print(':'.join(x for x in sys.path if x))")
+
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
-C_FLAGS="$C_FLAGS -DPYTHON_VERSION=\\\"$PYTHON_VERSION\\\""
+C_FLAGS="$C_FLAGS -DPYTHONVERSION=\\\"$PYTHONVERSION\\\""
+C_FLAGS="$C_FLAGS -DPYTHONPATH=\\\"$PYTHONPATH\\\""
 
 #
 # Better to leave off for production
@@ -631,7 +635,7 @@ then
     case `uname` in
         *MING*)
             log_info "Run:"
-            echo "  export PYTHONPATH=/mingw64/lib/python${PYTHON_VERSION}/:/mingw64/lib/python${PYTHON_VERSION}/lib-dynload:/mingw64/lib/python${PYTHON_VERSION}/site-packages"
+            echo "  export PYTHONPATH=/mingw64/lib/python${PYTHONVERSION}/:/mingw64/lib/python${PYTHONVERSION}/lib-dynload:/mingw64/lib/python${PYTHONVERSION}/site-packages"
             echo "  export PYTHONHOME=/mingw64/bin"
             echo "  ./zorbash.exe"
             ;;
