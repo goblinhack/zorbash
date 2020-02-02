@@ -7,6 +7,7 @@ fi
 
 /bin/rm -rf python${PYTHONVERSION}.tar
 /bin/rm -rf python${PYTHONVERSION}
+ls -la
 
 echo
 echo Zipping python files
@@ -21,7 +22,7 @@ echo ======================
 echo tar -xf python${PYTHONVERSION}.tar
 tar -xf python${PYTHONVERSION}.tar
 
-mv mingw/lib/* .
+mv mingw/lib/python$(PYTHONVERSION) .
 /bin/rm -rf mingw
 
 echo
