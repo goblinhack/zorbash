@@ -1,5 +1,13 @@
 
 source python.version.sh
+if [[ "$PYTHONVERSION" = "" ]]; then
+    echo "$0: python.version.sh does not have PYTHONVERSION set"
+    exit 1
+fi
+
+/bin/rm -rf python${PYTHONVERSION}.tar
+/bin/rm -rf python${PYTHONVERSION}
+
 tar -c python${PYTHONVERSION}.tar --exclude __pycache__ /mingw64/lib/python${PYTHONVERSION}
 tar -xvf python${PYTHONVERSION}.tar
 
