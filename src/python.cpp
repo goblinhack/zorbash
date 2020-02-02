@@ -2871,6 +2871,16 @@ void python_init (char *argv[])
     auto newpath = pythonpath;
     newpath += PATHSEP;
     newpath += EXEC_PYTHONPATH;
+    newpath += PATHSEP;
+    newpath += EXEC_DIR;
+    newpath += PATHSEP;
+    newpath += "/mingw64/lib/python" PYTHONVERSION "/";
+    newpath += PATHSEP;
+    newpath += "/mingw64/lib/python" PYTHONVERSION "/lib-dynload";
+    newpath += PATHSEP;
+    newpath += "/mingw64/lib/python" PYTHONVERSION "/site-packages";
+    newpath += PATHSEP;
+    newpath += "/mingw64/bin";
 
     // Attempt to append to path.
     CON("INIT: PYTHONPATH    modified to     %s", newpath.c_str());
