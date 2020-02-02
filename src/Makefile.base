@@ -39,6 +39,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_status.o 		\
     $(OBJDIR)/game_tick.o		\
     $(OBJDIR)/gauss.o 			\
+    $(OBJDIR)/gfx.o			\
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\
     $(OBJDIR)/hexdump.o 		\

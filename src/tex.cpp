@@ -243,9 +243,9 @@ static void load_image_pair (SDL_Surface **surf1_out,
     *surf2_out = surf2;
 }
 
-/*
- * Load a texture
- */
+//
+// Load a texture
+//
 Texp tex_load (std::string file, std::string name, int mode)
 {_
     Texp t = tex_find(name);
@@ -303,10 +303,10 @@ static Texp tex_from_surface_black_and_white (SDL_Surface *in,
 
     uint32_t iwidth  = in->w;
     uint32_t iheight = in->h;
-    /*
-     * Subtract space for the single pixel padding and make a surface to
-     * copy pixels to.
-     */
+    //
+    // Subtract space for the single pixel padding and make a surface to
+    // copy pixels to.
+    //
     uint32_t owidth  = iwidth;
     uint32_t oheight = iheight;
 
@@ -319,9 +319,9 @@ static Texp tex_from_surface_black_and_white (SDL_Surface *in,
                                             rmask, gmask, bmask, amask);
     newptr(out, "SDL_CreateRGBSurface");
 
-    /*
-     * Omit every grid pixel between tiles.
-     */
+    //
+    // Omit every grid pixel between tiles.
+    //
     ox = 0;
 
     for (ix = 0; ix < (int32_t) iwidth; ix++) {
@@ -397,9 +397,9 @@ void tex_load_color_and_black_and_white (Texp *tex,
     LOG("- loaded texture '%s', '%s'", file.c_str(), name.c_str());
 }
 
-/*
- * Find an existing tex.
- */
+//
+// Find an existing tex.
+//
 Texp tex_find (std::string file)
 {_
     if (file == "") {
@@ -414,9 +414,9 @@ Texp tex_find (std::string file)
     return (result->second);
 }
 
-/*
- * Creae a texture from a surface
- */
+//
+// Creae a texture from a surface
+//
 Texp tex_from_surface (SDL_Surface *surface,
                        std::string file,
                        std::string name,
@@ -428,25 +428,25 @@ Texp tex_from_surface (SDL_Surface *surface,
 
     DBG("Texture: '%s', %dx%d", file.c_str(), surface->w, surface->h);
 
-    /*
-     * Get the number of channels in the SDL surface
-     */
+    //
+    // Get the number of channels in the SDL surface
+    //
     int32_t channels = surface->format->BytesPerPixel;
     int32_t textureFormat = 0;
 
     if (channels == 4) {
-        /*
-         * Contains alpha channel
-         */
+        //
+        // Contains alpha channel
+        //
         if (surface->format->Rmask == 0x000000ff) {
             textureFormat = GL_RGBA;
         } else {
             textureFormat = GL_BGRA;
         }
     } else if (channels == 3) {
-        /*
-         * Contains no alpha channel
-         */
+        //
+        // Contains no alpha channel
+        //
         if (surface->format->Rmask == 0x000000ff) {
             textureFormat = GL_RGB;
         } else {
@@ -461,23 +461,23 @@ Texp tex_from_surface (SDL_Surface *surface,
             channels);
     }
 
-    /*
-     * Create the tex
-     */
+    //
+    // Create the tex
+    //
     GLuint gl_surface_binding = 0;
 
-    glEnable(GL_TEXTURE_2D); /* Apparently needed for ATI drivers */
+    glEnable(GL_TEXTURE_2D); // Apparently needed for ATI drivers
 
     glGenTextures(1, &gl_surface_binding);
 
-    /*
-     * Typical tex generation using data from the bitmap
-     */
+    //
+    // Typical tex generation using data from the bitmap
+    //
     glBindTexture(GL_TEXTURE_2D, gl_surface_binding);
 
-    /*
-     * Generate the tex
-     */
+    //
+    // Generate the tex
+    //
     glTexImage2D(
         GL_TEXTURE_2D,
         0,
@@ -490,10 +490,10 @@ Texp tex_from_surface (SDL_Surface *surface,
         surface->pixels
     );
 
-    /*
-     * linear filtering. Nearest is meant to be quicker but I didn't see
-     * that in reality.
-     */
+    //
+    // linear filtering. Nearest is meant to be quicker but I didn't see
+    // that in reality.
+    //
     if (mode == GL_NEAREST) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -505,9 +505,9 @@ Texp tex_from_surface (SDL_Surface *surface,
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-    /*
-     * For clouds
-     */
+    //
+    // For clouds
+    //
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 

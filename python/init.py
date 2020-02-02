@@ -25,7 +25,7 @@ def load_one_plugin(filename):
     if basename(filename) == "tp.py":
         return
 
-    zx.log("- loading init plugin: " + filename)
+    zx.con("PYtHON: - loading init plugin: " + filename)
 
     mod_name, file_ext = os.path.splitext(os.path.split(filename)[-1])
 
@@ -37,7 +37,7 @@ def load_one_plugin(filename):
 
 def load_all_plugins():
     plug_path = os.path.normcase(os.path.join(dirname(__file__), ""))
-    zx.log("Init module, load all plugins from " + plug_path)
+    zx.con("PYTHON: Init module, load all plugins from " + plug_path)
     for filename in find_plugins(plug_path, '*.py'):
         load_one_plugin(filename)
 
@@ -48,7 +48,7 @@ def load_plugin(plugin):
 
 def init1():
 
-    zx.con("Init module: running in: {}".format(os.getcwd()))
+    zx.con("PYTHON: Init module: running in: {}".format(os.getcwd()))
 
 def init2():
 

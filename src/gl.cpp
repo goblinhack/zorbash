@@ -90,7 +90,6 @@ void gl_enter_2d_mode (void)
     //
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
-    CON("INIT: OpenGL enter 2D mode");
 
     //
     // Reset the view
@@ -100,7 +99,6 @@ void gl_enter_2d_mode (void)
     //
     // 2D projection
     //
-    CON("INIT: OpenGL enable ortho projection");
     glOrtho(0,
             game->config.video_gl_width, game->config.video_gl_height,
             0, -1200.0, 1200.0);
