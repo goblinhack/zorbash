@@ -100,11 +100,11 @@ char *substr (const char *in, int32_t pos, int32_t len)
     return (out);
 }
 
-/*
- * Replace part of a string with another.
- *
- * strsub("foo.zip", ".zip", ""); -> "foo"
- */
+//
+// Recursively replace part of a string with another.
+//
+// strsub("foo.zip", ".zip", ""); -> "foo"
+//
 char *strsub_ (const char *in, const char *old, const char *replace_with,
                std::string what, std::string file, std::string func, int line)
 {_
@@ -118,6 +118,7 @@ char *strsub_ (const char *in, const char *old, const char *replace_with,
         return (0);
     }
 
+printf("replace %s with %s in %s\n", in, old, replace_with);
     at = strstr(in, old);
     if (!at) {
         buf = dupstr(in, what);
@@ -139,7 +140,13 @@ char *strsub_ (const char *in, const char *old, const char *replace_with,
     strcat(buf, replace_with);
     strcat(buf, at + oldlen);
 
-    return (buf);
+    if (!strcmp(buf, in)) {
+        return (buf);
+    }
+
+    auto out = strsub_(buf, old, replace_with, what, file, func, line);
+    myfree(buf);
+    return (out);
 }
 
 /*
