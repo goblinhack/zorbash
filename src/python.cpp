@@ -2857,12 +2857,10 @@ void python_init (char *argv[])
     CON("INIT: PYTHONVERSION set to          %s", PYTHONVERSION);
     CON("INIT: PYTHONPATH    set to (exec)   %s", EXEC_PYTHONPATH);
 #ifdef _WIN32
-    CON("INIT: PYTHONPATH    set to          %s", PYTHONPATH);
-
     char *pythonpath;
     size_t requiredSize;
 
-    getenv_s( &requiredSize, NULL, 0, "PYTHONPATH");
+    getenv_s(&requiredSize, NULL, 0, "PYTHONPATH");
     if (requiredSize == 0) {
       DIE("PYTHONPATH doesn't exist!");
     }
@@ -2871,7 +2869,7 @@ void python_init (char *argv[])
 
     // Get the value of the PYTHONPATH environment variable.
     getenv_s(&requiredSize, pythonpath, requiredSize, "PYTHONPATH");
-    CON("INIT: PYTHONPATH    set to          %s", pythonpath);
+    CON("INIT: PYTHONPATH    os set to       %s", pythonpath);
 
     // Attempt to append to path.
     auto newpath = dynprintf("%s"PATH_SEP"%s", pythonpath, EXEC_PYTHONPATH);
