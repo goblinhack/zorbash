@@ -13,7 +13,6 @@ echo Zipping python files
 echo ====================
 tar -cf python${PYTHONVERSION}.tar \
   --exclude __pycache__ \
-  --exclude /mingw64/lib/python3.8 \
   --exclude /mingw64/lib/python3.8/asyncio \
   --exclude /mingw64/lib/python3.8/collections \
   --exclude /mingw64/lib/python3.8/concurrent \
