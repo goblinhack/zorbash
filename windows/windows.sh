@@ -9,8 +9,11 @@ fi
 /bin/rm -rf python${PYTHONVERSION}.tar
 /bin/rm -rf python${PYTHONVERSION}
 
+set -x
+echo zipping
 tar -c python${PYTHONVERSION}.tar --exclude __pycache__ /mingw64/lib/python${PYTHONVERSION}
-tar -xvf python${PYTHONVERSION}.tar
+echo unzipping
+tar -x python${PYTHONVERSION}.tar
 
 "/c/Program Files (x86)/BitRock InstallBuilder Enterprise 19.12.0/bin/builder-cli.exe" build windows.xml 
 if [[ $? -ne 0 ]];
