@@ -1,5 +1,4 @@
 import zx
-import random
 
 
 class Tp:
