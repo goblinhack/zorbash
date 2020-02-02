@@ -105,7 +105,9 @@ char *substr (const char *in, int32_t pos, int32_t len)
 //
 // strsub("foo.zip", ".zip", ""); -> "foo"
 //
-char *strsub_ (const char *in, const char *old, const char *replace_with,
+char *strsub_ (const char *in, 
+               const char *look_for, 
+               const char *replace_with,
                std::string what, std::string file, std::string func, int line)
 {_
     char *buf;
@@ -114,18 +116,20 @@ char *strsub_ (const char *in, const char *old, const char *replace_with,
     int32_t oldlen;
     int32_t len;
 
-    if (!in || !old || !replace_with) {
+    if (!in || !look_for || !replace_with) {
         return (0);
     }
 
-printf("replace %s with %s in %s\n", in, old, replace_with);
-    at = strstr(in, old);
+printf("in %s\n", in);
+printf("  look for %s\n", look_for);
+printf("  replace  %s\n", replace_with);
+    at = strstr(in, look_for);
     if (!at) {
         buf = dupstr(in, what);
         return (buf);
     }
 
-    oldlen = (uint32_t)strlen(old);
+    oldlen = (uint32_t)strlen(look_for);
     newlen = (uint32_t)strlen(replace_with);
 
     len = (uint32_t)strlen(in) - oldlen + newlen;
@@ -144,7 +148,7 @@ printf("replace %s with %s in %s\n", in, old, replace_with);
         return (buf);
     }
 
-    auto out = strsub_(buf, old, replace_with, what, file, func, line);
+    auto out = strsub_(buf, look_for, replace_with, what, file, func, line);
     myfree(buf);
     return (out);
 }
