@@ -11,6 +11,9 @@
 #include "my_string.h"
 #include "my_ascii.h"
 #include "my_game.h"
+#ifdef _WIN32
+#include <sec_api/stdlib_s.h> /* errno_t, size_t */
+#endif
 
 static PyObject *zx_mod;
 PyMODINIT_FUNC python_mouse_y_module_create(void);
@@ -2857,6 +2860,13 @@ void python_init (char *argv[])
     CON("INIT: PYTHONVERSION set to          %s", PYTHONVERSION);
     CON("INIT: PYTHONPATH    set to (exec)   %s", EXEC_PYTHONPATH);
 #ifdef _WIN32
+    errno_t getenv_s(
+        size_t     *ret_required_buf_size,
+        char       *buf,
+        size_t      buf_size_in_bytes,
+        const char *name
+    );
+
     char *pythonpath;
     size_t requiredSize;
 
