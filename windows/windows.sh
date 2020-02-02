@@ -22,7 +22,7 @@ echo ======================
 echo tar -xf python${PYTHONVERSION}.tar
 tar -xf python${PYTHONVERSION}.tar
 
-mv mingw/lib/python$(PYTHONVERSION) .
+mv mingw/lib/python${PYTHONVERSION} .
 /bin/rm -rf mingw
 
 echo
