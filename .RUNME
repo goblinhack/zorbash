@@ -531,6 +531,10 @@ C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
 C_FLAGS="$C_FLAGS -DPYTHONVERSION=\\\"$PYTHONVERSION\\\""
 C_FLAGS="$C_FLAGS -DPYTHONPATH=\\\"$PYTHONPATH\\\""
 
+log_info "VERSION                    : $VERSION"
+log_info "PYTHONVERSION              : $PYTHONVERSION"
+log_info "PYTHONPATH                 : $PYTHONPATH"
+
 #
 # Better to leave off for production
 #
