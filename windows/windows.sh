@@ -1,5 +1,6 @@
 
-source python.version.sh
+ls -la 
+source ./python.version.sh
 if [[ "$PYTHONVERSION" = "" ]]; then
     echo "$0: python.version.sh does not have PYTHONVERSION set"
     exit 1
