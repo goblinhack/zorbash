@@ -286,6 +286,179 @@ void tile_load_arr (std::string file, std::string name,
     }
 }
 
+void tile_load_arr (std::string file, std::string name,
+                    uint32_t width, uint32_t height,
+                    std::vector<std::string> arr)
+{_
+    Texp tex = tex_load(file, name, GL_NEAREST);
+
+    float fw = 1.0 / (((float)tex_get_width(tex)) / ((float)width));
+    float fh = 1.0 / (((float)tex_get_height(tex)) / ((float)height));
+    float pw = 1.0 / ((float)tex_get_width(tex));
+    float ph = 1.0 / ((float)tex_get_height(tex));
+    pw /= 2.0;
+    ph /= 2.0;
+
+    int x = 0;
+    int y = 0;
+    int idx = 0;
+
+    size pixel_size;
+
+    pixel_size.w = width;
+    pixel_size.h = height;
+
+    for (auto name : arr) {
+        idx++;
+
+        if (name != "") {
+            if (tile_find(name)) {
+                ERR("tile name [%s] already used", name.c_str());
+            }
+
+            auto t = new Tile(); // std::make_shared< class Tile >();
+            auto result = all_tiles.insert(std::make_pair(name, t));
+            if (result.second == false) {
+                DIE("tile insert name [%s] failed", name.c_str());
+            }
+
+            //
+            // Global array of all tiles
+            //
+            all_tiles_array.push_back(t);
+            t->global_index = all_tiles_array.size();
+
+            t->name = name;
+            t->index = idx - 1;
+            t->pix_width = width;
+            t->pix_height = height;
+            t->tex = tex;
+            t->set_gl_binding(tex_get_gl_binding(tex));
+
+            t->x1 = fw * (float)(x);
+            t->y1 = fh * (float)(y);
+            t->x2 = t->x1 + fw;
+            t->y2 = t->y1 + fh;
+
+#ifdef ENABLE_TILE_COLLISION_CHECKING
+            t->ox1 = t->x1;
+            t->oy1 = t->y1;
+            t->ox2 = t->x2;
+            t->oy2 = t->y2;
+#endif
+
+#if 0
+            /*
+             * Why? Texture atlas and GL_LINEAR will cause problems blending
+             * with tiles adjacent in the atlas, so we trim 0.5 of a pixel
+             * all around.
+             */
+            t->x1 += pw;
+            t->x2 -= pw;
+            t->y1 += ph;
+            t->y2 -= ph;
+#endif
+
+            t->pct_width = fw;
+            t->pct_height = fh;
+
+#ifdef DEBUG_TILE
+            printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
+#endif
+
+#ifdef ENABLE_TILE_COLLISION_CHECKING
+            if ((pixel_size.w <= MAX_TILE_WIDTH) &&
+                (pixel_size.h <= MAX_TILE_HEIGHT)) {
+                SDL_Surface *s = tex_get_surface(tex);
+
+                point AT = {
+                    pixel_size.w * x,
+                    pixel_size.h * y
+                };
+
+                point MAX = {
+                    pixel_size.w * x,
+                    pixel_size.h * y
+                };
+
+                point MIN = {
+                    (pixel_size.w * x) + pixel_size.w - 1,
+                    (pixel_size.h * y) + pixel_size.h - 1
+                };
+
+                int x1, y1;
+
+                for (y1=pixel_size.h - 1; y1>=0; y1--) {
+                    for (x1=0; x1<pixel_size.w; x1++) {
+
+                        point at = {
+                            (pixel_size.w * x) + x1,
+                            (pixel_size.h * y) + y1
+                        };
+
+                        color p = getPixel(s, at.x, at.y);
+
+                        /*
+                         * If solid...
+                         */
+                        if (p.a >= 0xef) {
+                            MIN.x = std::min(at.x, MIN.x);
+                            MIN.y = std::min(at.y, MIN.y);
+                            MAX.x = std::max(at.x, MAX.x);
+                            MAX.y = std::max(at.y, MAX.y);
+#ifdef DEBUG_TILE
+                            printf("X");
+#endif
+                            if ((x1 < MAX_TILE_WIDTH) && (y1 < MAX_TILE_HEIGHT)) {
+                                set(t->pix, x1, y1, (uint8_t)1);
+                            }
+                        } else if (p.a > 0) {
+#ifdef DEBUG_TILE
+                            printf(".");
+#endif
+                        } else {
+#ifdef DEBUG_TILE
+                            printf(" ");
+#endif
+                        }
+                    }
+#ifdef DEBUG_TILE
+                    printf("\n");
+#endif
+                }
+
+                t->px1 = ((double) (MIN.x - AT.x)) / (double) pixel_size.w;
+                t->px2 = ((double) (MAX.x - AT.x + 1)) / (double) pixel_size.w;
+                t->py1 = ((double) (MIN.y - AT.y)) / (double) pixel_size.h;
+                t->py2 = ((double) (MAX.y - AT.y + 1)) / (double) pixel_size.h;
+            }
+#endif
+
+#ifdef DEBUG_TILE
+            printf("^^^  %s %f %f %f %f min x %d %d min y %d %d\n",name.c_str(),t->px1,t->py1,t->px2,t->py2, MIN.x,MAX.x,MIN.y,MAX.y);
+#endif
+        }
+
+        x++;
+
+        /*
+         * Check the whole tile can be read
+         */
+        if ((x * width) + (width - 1) >= tex_get_width(tex)) {
+            x = 0;
+            y++;
+        }
+
+        if (y * height > tex_get_height(tex)) {
+            if (name != "") {
+                DIE("overflow reading tile arr[%s]", name.c_str());
+            } else {
+                DIE("overflow reading tile arr at x %d y %d", x, y);
+            }
+        }
+    }
+}
+
 void tile_load_arr_color_and_black_and_white (std::string file,
                                               std::string name,
                                               uint32_t width, uint32_t height,

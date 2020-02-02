@@ -168,6 +168,10 @@ void tile_load_arr(std::string file,
                    std::string tex_name,
                    uint32_t width, uint32_t height,
                    uint32_t nargs, const char * arr[]);
+void tile_load_arr(std::string file,
+                   std::string tex_name,
+                   uint32_t width, uint32_t height,
+                   std::vector<std::string> arr);
 void tile_load_arr_color_and_black_and_white(std::string file,
                                              std::string tex_name,
                                              uint32_t width, uint32_t height,

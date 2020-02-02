@@ -1939,7 +1939,7 @@ static void py_add_to_path (const char *path)
     wchar_t *wc_new_path;
     char *item;
 
-    CON("- %s", path);
+    LOG("- %s", path);
 
     LOG("Current system python path:");
 
@@ -2862,18 +2862,24 @@ std::string get_env(const char* env) {
 
 void python_init (char *argv[])
 {_
-    CON("INIT: PYTHONVERSION set to          %s", PYTHONVERSION);
-    CON("INIT: PYTHONPATH    set to (exec)   %s", EXEC_PYTHONPATH);
+    CON("INIT: PYTHONVERSION %s", PYTHONVERSION);
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     auto pythonpath = get_env("PYTHONPATH");
-    CON("INIT: PYTHONPATH    os set to       %s", pythonpath.c_str());
+    CON("INIT: PYTHONPATH is currently '%s'", pythonpath.c_str());
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     auto newpath = pythonpath;
-    newpath += PATHSEP;
+    if (pythonpath.size()) {
+        newpath += PATHSEP;
+    }
     newpath += EXEC_PYTHONPATH;
     newpath += PATHSEP;
     newpath += EXEC_DIR;
     newpath += PATHSEP;
+#ifdef INIT
     newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION;
     newpath += PATHSEP;
     newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION DIR_SEP "lib-dynload";
@@ -2881,26 +2887,35 @@ void python_init (char *argv[])
     newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION DIR_SEP "site-packages";
     newpath += PATHSEP;
     newpath += "C:" DIR_SEP "msys64" DIR_SEP "mingw64" DIR_SEP "bin";
+#endif
 
     // Attempt to append to path.
-    CON("INIT: PYTHONPATH    modified to     %s", newpath.c_str());
+    CON("INIT: PYTHONPATH is modified to '%s'", newpath.c_str());
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //
 #ifdef _WIN32
     _putenv_s("PYTHONPATH", newpath.c_str());
 #else
     setenv("PYTHONPATH", newpath.c_str(), 1);
 #endif
 
-    CON("INIT: Calling PyImport_AppendInittab zx module");
+    CON("INIT: Calling PyImport_AppendInittab");
     PyImport_AppendInittab("zx", python_mouse_y_module_create);
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     CON("INIT: Calling Py_Initialize");
     Py_Initialize();
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: Adding to python path:");
     py_add_to_path("python");
     py_add_to_path(GFX_PATH);
     py_add_to_path(DATA_PATH);
     py_add_to_path(EXEC_PYTHONPATH);
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     LOG("INIT: Calling PyImport_ImportModule for zx module");
 
@@ -2919,6 +2934,8 @@ void python_init (char *argv[])
         py_err();
         DIE("module init import failed");
     }
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 
 void python_fini (void)

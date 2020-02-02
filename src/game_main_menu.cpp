@@ -81,7 +81,7 @@ uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case 'l':
                         game_main_menu_load_game(nullptr, 0, 0, 0);
                         return (true);
-                    case 'c':
+                    case 'o':
                         game_main_menu_config(nullptr, 0, 0, 0);
                         return (true);
                     case 'q':
@@ -192,14 +192,14 @@ void Game::main_menu_select (void)
     y_at += 3;
     {
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Config");
+        auto w = wid_new_square_button(p, "Options");
 
         point tl = {0, y_at};
         point br = {width, y_at + 2};
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_config);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "%%fg=white$C%%fg=reset$onfig");
+        wid_set_text(w, "%%fg=white$O%%fg=reset$ptions");
     }
     y_at += 3;
     {

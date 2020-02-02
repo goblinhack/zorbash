@@ -23,6 +23,7 @@
 #include "my_level.h"
 #include "my_traceback.h"
 #include "my_ascii.h"
+#include "my_gfx.h"
 
 #include <random>       // std::default_random_engine
 std::default_random_engine rng;
@@ -228,7 +229,7 @@ static void find_executable (void)
     char *tmp;
 
     exec_name = mybasename(ARGV[0], __FUNCTION__);
-    CON("INIT: EXEC_NAME     set to %s", exec_name.c_str());
+    CON("INIT: Will use EXEC_NAME as '%s'", exec_name.c_str());
 
     //
     // Get the current directory, ending in a single /
@@ -322,8 +323,7 @@ static void find_executable (void)
 
 cleanup:
     EXEC_DIR = strsub(EXEC_DIR, "/", DIR_SEP, "EXEC_DIR");
-    CON("INIT: EXEC_DIR      set to %s", EXEC_DIR);
-
+    LOG("INIT: EXEC_DIR set to %s", EXEC_DIR);
     DBG("Parent dir  : \"%s\"", parent_dir);
     DBG("Curr dir    : \"%s\"", curr_dir);
     DBG("Full name   : \"%s\"", exec_expanded_name);
@@ -369,7 +369,7 @@ static void find_exec_dir (void)
     }
     EXEC_DIR = tmp5;
 
-    CON("INIT: EXEC_DIR (os) set to %s", EXEC_DIR);
+    CON("INIT: Will use EXEC_DIR as '%s'", EXEC_DIR);
 }
 
 //
@@ -477,8 +477,7 @@ static void parse_args (int32_t argc, char *argv[])
     //
     // Parse format args
     //
-    CON("INIT: parse command line arguments");
-    CON("INIT: - program name: \"%s\"", argv[0]);
+    CON("INIT: Parse command line arguments for '%s'", argv[0]);
     for (i = 1; i < argc; i++) {
       CON("INIT:   - argument: \"%s\"", argv[i]);
     }
@@ -537,29 +536,28 @@ int32_t main (int32_t argc, char *argv[])
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v 
     //////////////////////////////////////////////////////////////////////////////
 #ifdef _WIN32
-    LOG("INIT: _WIN32");
+    LOG("INIT: Platform is _WIN32");
 #endif
 #ifdef __MINGW32__
-    LOG("INIT: __MINGW32__");
+    LOG("INIT: Platform is __MINGW32__");
 #endif
 #ifdef __MINGW64__
-    LOG("INIT: __MINGW64__");
+    LOG("INIT: Platform is __MINGW64__");
 #endif
 #ifdef __APPLE__
-    LOG("INIT: __APPLE__");
+    LOG("INIT: Platform is __APPLE__");
 #endif
 #ifdef __linux__
-    LOG("INIT: __linux__");
+    LOG("INIT: Platform is __linux__");
 #endif
 
-    LOG("INIT: getenv APPDATA or use default, 'appdata'");
     const char *appdata;
     appdata = getenv("APPDATA");
     if (!appdata || !appdata[0]) {
         appdata = "appdata";
     }
 
-    LOG("INIT: create APPDATA dir %s", appdata);
+    LOG("INIT: Create the APPDATA dir, '%s'", appdata);
 #ifdef _WIN32
     mkdir(appdata);
 #else
@@ -572,16 +570,16 @@ int32_t main (int32_t argc, char *argv[])
 #else
     mkdir(dir, 0700);
 #endif
-    LOG("INIT: set APPDATA to %s", dir);
+    LOG("INIT: Will use APPDATA, '%s'", dir);
     myfree(dir);
 
     char *out = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
-    LOG("INIT: set STDOUT to %s, APPDATA %s", out, dir);
+    LOG("INIT: Will use STDOUT as '%s'", out);
     LOG_STDOUT = fopen(out, "w+");
     myfree(out);
 
     char *err = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
-    LOG("INIT: set STDERR to %s, APPDATA %s", err, dir);
+    LOG("INIT: Will use STDERR as '%s'", err);
     LOG_STDERR = fopen(err, "w+");
     myfree(err);
 
@@ -590,18 +588,44 @@ int32_t main (int32_t argc, char *argv[])
     // instead of CON until we set stdout or you see two logs
     //////////////////////////////////////////////////////////////////////////////
 
-    LOG("INIT: ascii console");
+    LOG("INIT: Create ascii console");
     ascii_init();
 
     //
     // Need this to get the UTF on the console
     //
 #ifndef _WIN32
-    CON("INIT: locale");
+    CON("INIT: Init locale for console");
     std::locale loc("");
     std::ios_base::sync_with_stdio(false);
     std::wcout.imbue(loc);
 #endif
+
+    //
+    // Create and load the last saved game
+    //
+    CON("INIT: Load game config");
+    game = new Game(std::string(appdata));
+    game->load_config();
+
+    if (opt_debug_mode) {
+        game->config.debug_mode = opt_debug_mode;
+    }
+
+    if (opt_arcade_mode_set) {
+        game->config.arcade_mode = opt_arcade_mode;
+    }
+
+    CON("INIT: SDL create window");
+    if (!sdl_init()) {
+        ERR("SDL init");
+    }
+
+    CON("INIT: OpenGL enter 2D mode");
+    gl_init_2d_mode();
+
+    CON("INIT: Load early gfx tiles, text, UI etc...");
+    gfx_init();
 
     //dospath2unix(ARGV[0]);
     //LOG("Set unix path to %s", ARGV[0]);
@@ -625,17 +649,7 @@ int32_t main (int32_t argc, char *argv[])
 #endif
 
     parse_args(argc, argv);
-
-    CON("INIT: color names");
     color_init();
-
-    CON("INIT: resource locations for gfx and music");
-    find_file_locations();
-
-    python_init(argv);
-
-    CON("INIT: dungeon character maps");
-    Charmap::init_charmaps();
 
 #if 0
     extern int grid_test(void);
@@ -656,79 +670,86 @@ int32_t main (int32_t argc, char *argv[])
     }
 #endif
 
-    //
-    // Create and load the last saved game
-    //
-    CON("INIT: load game config");
-    game = new Game(std::string(appdata));
-    game->load_config();
-
-    if (opt_debug_mode) {
-        game->config.debug_mode = opt_debug_mode;
-    }
-
-    if (opt_arcade_mode_set) {
-        game->config.arcade_mode = opt_arcade_mode;
-    }
-
-    CON("INIT: SDL");
-    if (!sdl_init()) {
-        ERR("SDL init");
-    }
-
-    CON("INIT: OpenGL 2D mode");
-    gl_init_2d_mode();
-
-    CON("INIT: textures");
-    if (!tex_init()) {
-        ERR("tex init");
-    }
-
-    CON("INIT: UI tiles");
-    if (!wid_tiles_init()) {
-        ERR("wid tiles init");
-    }
-
-    CON("INIT: UI and gfx tiles");
-    if (!tile_init()) {
-        ERR("tile init");
-    }
-
-    CON("INIT: UI fonts");
+    CON("INIT: Create UI fonts");
     if (!font_init()) {
         ERR("Font init");
     }
 
-    CON("INIT: UI widgets");
+    CON("INIT: Load UI widgets");
     if (!wid_init()) {
         ERR("wid init");
     }
 
-    py_call_void("init2");
-
-    CON("INIT: UI console");
+    CON("INIT: Load UI console");
     if (!wid_console_init()) {
         ERR("wid_console init");
     }
+    wid_toggle_hidden(wid_console_window);
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: UI minicon");
+    CON("INIT: Load UI tiles");
+    if (!wid_tiles_init()) {
+        ERR("wid tiles init");
+    }
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    CON("INIT: Load UI and gfx tiles");
+    if (!tile_init()) {
+        ERR("tile init");
+    }
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    CON("INIT: Load textures");
+    if (!tex_init()) {
+        ERR("tex init");
+    }
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    CON("INIT: Load UI minicon");
     if (!wid_minicon_init()) {
         ERR("wid_minicon init");
     }
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: UI commands");
+    CON("INIT: Find resource locations for gfx and music");
+    find_file_locations();
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    CON("INIT: Load UI commands");
     if (!command_init()) {
         ERR("command init");
     }
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    CON("INIT: dungeon thing templates");
+    CON("INIT: Load dungeon character maps");
+    Charmap::init_charmaps();
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    python_init(argv);
+    py_call_void("init2");
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    CON("INIT: Load dungeon thing templates");
     tp_init();
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //
     // Create a fresh game if none was loaded
     //
-    CON("INIT: dungeon rooms");
+    CON("INIT: Load dungeon rooms");
     room_init();
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 #if 0
     game->init();
     game->load();
@@ -748,27 +769,33 @@ int32_t main (int32_t argc, char *argv[])
     }
 #endif
 
-    CON("INIT: clear minicon");
+    CON("INIT: Clear minicon");
     wid_minicon_flush();
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (opt_new_game) {
-        CON("INIT: goto new game");
+        CON("INIT: New game");
         game->new_game();
     } else {
-        CON("INIT: goto game menu");
+        CON("INIT: Game menu");
         game->main_menu_select();
     }
+    sdl_flush_display();
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    wid_toggle_hidden(wid_console_window);
 
     sdl_loop();
 
-    CON("FINI: leave 2D mode");
+    CON("FINI: Leave 2D mode");
     gl_leave_2d_mode();
 
-    CON("FINI: quit");
+    CON("FINI: Quit");
     quit();
 
     if (game_needs_restart) {
-        CON("FINI: restart");
+        CON("FINI: Restart");
         game_needs_restart = false;
         execv(argv[0], argv);
     }

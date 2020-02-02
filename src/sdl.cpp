@@ -1521,3 +1521,24 @@ static void sdl_screenshot_ (void)
     myfree(filename);
     myfree(pixels);
 }
+
+void sdl_flush_display (void)
+{
+    glcolor(GREEN);
+    glEnable(GL_TEXTURE_2D);
+    glClearColor(0, 0, 0, 0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    gl_enter_2d_mode();
+    wid_display_all();
+    glBlendFunc(GL_ONE, GL_ZERO);
+    if (game->config.gfx_inverted) {
+        glLogicOp(GL_COPY_INVERTED);
+        glEnable(GL_COLOR_LOGIC_OP);
+    }
+    blit_fbo(FBO_WID);
+    if (game->config.gfx_inverted) {
+        glLogicOp(GL_COPY);
+        glDisable(GL_COLOR_LOGIC_OP);
+    }
+    SDL_GL_SwapWindow(window);
+}
