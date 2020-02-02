@@ -524,7 +524,7 @@ case `uname` in
         ;;
 esac
 
-PYTHONPATH=$(python -c "import sys; print(':'.join(x for x in sys.path if x))")
+PYTHONPATH=$(python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
 
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
 C_FLAGS="$C_FLAGS -DPYTHONVERSION=\\\"$PYTHONVERSION\\\""
