@@ -2865,6 +2865,10 @@ void python_init (char *argv[])
     auto pythonpath = dynprintf("%s"PATHSEP"%s",
                                 EXEC_PYTHONPATH,
                                 PYTHONPATH);
+    auto pythonpath2 = strsub(pythonpath, ":PATHSEP:", PATHSEP, "curr_dir");
+    pythonpath = pythonpath2;
+    myfree(pythonpath);
+
     CON("INIT: PYTHONPATH    set to (final)  %s", pythonpath);
 
     _putenv_s("PYTHONPATH", pythonpath);
