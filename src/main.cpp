@@ -303,7 +303,7 @@ static void find_executable (void)
 
         path = dupstr(path, "path");
 
-        for (dir = strtok(path, ":"); dir; dir = strtok(0, ":")) {
+        for (dir = strtok(path, PATHSEP); dir; dir = strtok(0, PATHSEP)) {
             EXEC_FULL_PATH_AND_NAME = dynprintf("%s" DIR_SEP "%s", dir, exec_name.c_str());
             if (file_exists(EXEC_FULL_PATH_AND_NAME)) {
                 EXEC_DIR = dynprintf("%s" DIR_SEP, dir);
@@ -319,6 +319,7 @@ static void find_executable (void)
 
     EXEC_FULL_PATH_AND_NAME = dupstr(exec_expanded_name, "full path");
     EXEC_DIR = dupstr(dirname(exec_expanded_name), "exec dir");
+    EXEC_DIR = strsub(EXEC_DIR, "/", DIR_SEP, "EXEC_DIR");
 
 cleanup:
     CON("INIT: EXEC_DIR      set to %s", EXEC_DIR);
