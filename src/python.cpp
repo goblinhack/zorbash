@@ -2874,13 +2874,13 @@ void python_init (char *argv[])
     newpath += PATHSEP;
     newpath += EXEC_DIR;
     newpath += PATHSEP;
-    newpath += "/mingw64/lib/python" PYTHONVERSION "/";
+    newpath += DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION;
     newpath += PATHSEP;
-    newpath += "/mingw64/lib/python" PYTHONVERSION "/lib-dynload";
+    newpath += DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION DIR_SEP "lib-dynload";
     newpath += PATHSEP;
-    newpath += "/mingw64/lib/python" PYTHONVERSION "/site-packages";
+    newpath += DIR_SEP "mingw64" DIR_SEP "lib" DIR_SEP "python" PYTHONVERSION DIR_SEP "site-packages";
     newpath += PATHSEP;
-    newpath += "/mingw64/bin";
+    newpath += DIR_SEP "mingw64" DIR_SEP "bin";
 
     // Attempt to append to path.
     CON("INIT: PYTHONPATH    modified to     %s", newpath.c_str());
