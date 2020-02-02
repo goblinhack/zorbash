@@ -120,9 +120,9 @@ char *strsub_ (const char *in,
         return (0);
     }
 
-printf("in %s\n", in);
-printf("  look for %s\n", look_for);
-printf("  replace  %s\n", replace_with);
+    // printf("in %s\n", in);
+    // printf("  look for %s\n", look_for);
+    // printf("  replace  %s\n", replace_with);
     at = strstr(in, look_for);
     if (!at) {
         buf = dupstr(in, what);
