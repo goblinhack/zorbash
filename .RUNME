@@ -357,6 +357,7 @@ else
 fi
 
 PYTHONVERSION=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
+echo "PYTHONVERSION=$PYTHONVERSION" > windows/python.version.sh
 
 log_info "Python lib version         : $PYTHONVERSION"
 
