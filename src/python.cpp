@@ -2882,7 +2882,7 @@ void python_init (char *argv[])
     CON("INIT: PYTHONPATH    os set to       %s", pythonpath);
 
     // Attempt to append to path.
-    auto newpath = dynprintf("%s"PATH_SEP"%s", pythonpath, EXEC_PYTHONPATH);
+    auto newpath = dynprintf("%s" PATHSEP "%s", pythonpath, EXEC_PYTHONPATH);
     CON("INIT: PYTHONPATH    modified to     %s", newpath);
     _putenv_s("PYTHONPATH", newpath);
      myfree(newpath);
