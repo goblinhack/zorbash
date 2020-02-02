@@ -522,18 +522,13 @@ case `uname` in
         ;;
 esac
 
-# This is better, but make thinks ; is a new job on win32
 PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
-# So we do this and fix the path in program
-PYTHONPATH=$($Python -c 'import sys; print(":PATHSEP:".join(x for x in sys.path if x))')
-
 C_FLAGS="$C_FLAGS -DVERSION=\\\"$VERSION\\\""
 C_FLAGS="$C_FLAGS -DPYTHONVERSION=\\\"$PYTHONVERSION\\\""
-C_FLAGS="$C_FLAGS -DPYTHONPATH=\\\"$PYTHONPATH\\\""
 
-log_info "VERSION                    : $VERSION"
 log_info "PYTHONVERSION              : $PYTHONVERSION"
 log_info "PYTHONPATH                 : $PYTHONPATH"
+log_info "VERSION (game)             : $VERSION"
 
 #
 # Better to leave off for production
