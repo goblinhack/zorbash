@@ -7,7 +7,6 @@ fi
 
 /bin/rm -rf python${PYTHONVERSION}.tar
 /bin/rm -rf python${PYTHONVERSION}
-ls -la
 
 echo
 echo Zipping python files
