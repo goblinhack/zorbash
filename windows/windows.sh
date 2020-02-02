@@ -22,8 +22,8 @@ echo ======================
 echo tar -xf python${PYTHONVERSION}.tar
 tar -xf python${PYTHONVERSION}.tar
 
-mv mingw/lib/python${PYTHONVERSION} .
-/bin/rm -rf mingw
+mv mingw64/lib/python${PYTHONVERSION} .
+/bin/rm -rf mingw64
 
 echo
 echo Final files to package
