@@ -2855,11 +2855,24 @@ static void python_add_consts (void)
 
 }
 
+#include <cstdlib>
+#include <optional>
+std::optional<std::string> get_env(const char* env) {
+    auto t = std::getenv(env);
+    if (t) return t;
+    return {};
+}
+
 void python_init (char *argv[])
 {_
     CON("INIT: PYTHONVERSION set to          %s", PYTHONVERSION);
     CON("INIT: PYTHONPATH    set to (exec)   %s", EXEC_PYTHONPATH);
+
 #ifdef _WIN32
+    //
+    // Append the executable path where our python DLL is to the
+    // current PYTHONPATH
+    //
     errno_t getenv_s(
         size_t     *ret_required_buf_size,
         char       *buf,
