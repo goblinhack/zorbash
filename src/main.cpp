@@ -319,9 +319,9 @@ static void find_executable (void)
 
     EXEC_FULL_PATH_AND_NAME = dupstr(exec_expanded_name, "full path");
     EXEC_DIR = dupstr(dirname(exec_expanded_name), "exec dir");
-    EXEC_DIR = strsub(EXEC_DIR, "/", DIR_SEP, "EXEC_DIR");
 
 cleanup:
+    EXEC_DIR = strsub(EXEC_DIR, "/", DIR_SEP, "EXEC_DIR");
     CON("INIT: EXEC_DIR      set to %s", EXEC_DIR);
 
     DBG("Parent dir  : \"%s\"", parent_dir);
