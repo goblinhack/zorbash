@@ -2855,20 +2855,37 @@ static void python_add_consts (void)
 void python_init (char *argv[])
 {_
     CON("INIT: PYTHONVERSION set to          %s", PYTHONVERSION);
-#ifdef _WIN32
     CON("INIT: PYTHONPATH    set to (exec)   %s", EXEC_PYTHONPATH);
-    CON("INIT: PYTHONPATH    set to (build)  %s", PYTHONPATH);
+#ifdef _WIN32
+    CON("INIT: PYTHONPATH    set to          %s", PYTHONPATH);
 
-    //
-    // Note ; below
-    //
-    auto pythonpath1 = dynprintf("%s"PATHSEP"%s", EXEC_PYTHONPATH, PYTHONPATH);
-    auto pythonpath = strsub(pythonpath1, ":PATHSEP:", PATHSEP, "curr_dir");
-    myfree(pythonpath1);
+    char *pythonpath;
+    size_t requiredSize;
 
+    getenv_s( &requiredSize, NULL, 0, "PYTHONPATH");
+    if (requiredSize == 0) {
+      DIE("PYTHONPATH doesn't exist!");
+    }
+
+    pythonpath = (char*) malloc(requiredSize * sizeof(char));
+
+    // Get the value of the PYTHONPATH environment variable.
+    getenv_s(&requiredSize, pythonpath, requiredSize, "PYTHONPATH");
+    CON("INIT: PYTHONPATH    set to          %s", pythonpath);
+
+    // Attempt to append to path.
+    auto newpath = dynprintf("%s"PATH_SEP"%s", pythonpath, EXEC_PYTHONPATH);
+    CON("INIT: PYTHONPATH    modified to     %s", newpath);
+    _putenv_s("PYTHONPATH", newpath);
+     myfree(newpath);
+
+    getenv_s(&requiredSize, NULL, 0, "PYTHONPATH");
+    pythonpath = (char*) realloc(pythonpath, requiredSize * sizeof(char));
+
+    // Get the new value of the PYTHONPATH environment variable.
+    getenv_s(&requiredSize, pythonpath, requiredSize, "PYTHONPATH");
     CON("INIT: PYTHONPATH    set to (final)  %s", pythonpath);
-
-    _putenv_s("PYTHONPATH", pythonpath);
+    free(pythonpath);
 #endif
 
     CON("INIT: Calling PyImport_AppendInittab zx module");
