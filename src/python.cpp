@@ -11,9 +11,6 @@
 #include "my_string.h"
 #include "my_ascii.h"
 #include "my_game.h"
-#ifdef _WIN32
-#include <sec_api/stdlib_s.h> /* errno_t, size_t */
-#endif
 
 static PyObject *zx_mod;
 PyMODINIT_FUNC python_mouse_y_module_create(void);
@@ -2857,10 +2854,10 @@ static void python_add_consts (void)
 
 #include <cstdlib>
 #include <optional>
-std::optional<std::string> get_env(const char* env) {
+std::string get_env(const char* env) {
     auto t = std::getenv(env);
     if (t) return t;
-    return {};
+    return "";
 }
 
 void python_init (char *argv[])
@@ -2868,45 +2865,19 @@ void python_init (char *argv[])
     CON("INIT: PYTHONVERSION set to          %s", PYTHONVERSION);
     CON("INIT: PYTHONPATH    set to (exec)   %s", EXEC_PYTHONPATH);
 
-#ifdef _WIN32
-    //
-    // Append the executable path where our python DLL is to the
-    // current PYTHONPATH
-    //
-    errno_t getenv_s(
-        size_t     *ret_required_buf_size,
-        char       *buf,
-        size_t      buf_size_in_bytes,
-        const char *name
-    );
+    auto pythonpath = get_env("PYTHONPATH");
+    CON("INIT: PYTHONPATH    os set to       %s", pythonpath.c_str());
 
-    char *pythonpath;
-    size_t requiredSize;
-
-    getenv_s(&requiredSize, NULL, 0, "PYTHONPATH");
-    if (requiredSize == 0) {
-      DIE("PYTHONPATH doesn't exist!");
-    }
-
-    pythonpath = (char*) malloc(requiredSize * sizeof(char));
-
-    // Get the value of the PYTHONPATH environment variable.
-    getenv_s(&requiredSize, pythonpath, requiredSize, "PYTHONPATH");
-    CON("INIT: PYTHONPATH    os set to       %s", pythonpath);
+    auto newpath = pythonpath;
+    newpath += PATHSEP;
+    newpath += EXEC_PYTHONPATH;
 
     // Attempt to append to path.
-    auto newpath = dynprintf("%s" PATHSEP "%s", pythonpath, EXEC_PYTHONPATH);
-    CON("INIT: PYTHONPATH    modified to     %s", newpath);
-    _putenv_s("PYTHONPATH", newpath);
-     myfree(newpath);
-
-    getenv_s(&requiredSize, NULL, 0, "PYTHONPATH");
-    pythonpath = (char*) realloc(pythonpath, requiredSize * sizeof(char));
-
-    // Get the new value of the PYTHONPATH environment variable.
-    getenv_s(&requiredSize, pythonpath, requiredSize, "PYTHONPATH");
-    CON("INIT: PYTHONPATH    set to (final)  %s", pythonpath);
-    free(pythonpath);
+    CON("INIT: PYTHONPATH    modified to     %s", newpath.c_str());
+#ifdef _WIN32
+    _putenv_s("PYTHONPATH", newpath.c_str());
+#else
+    setenv("PYTHONPATH", newpath.c_str(), 1);
 #endif
 
     CON("INIT: Calling PyImport_AppendInittab zx module");
