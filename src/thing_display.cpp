@@ -27,7 +27,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_top, tl2, br2);
+        tile_blit(tiles->tile_top, tl2, br2);
     }
 
     if (tiles->tile_bot && !world->is_wall(x, y + 1)) {
@@ -35,7 +35,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_bot, tl2, br2);
+        tile_blit(tiles->tile_bot, tl2, br2);
     }
 
     if (tiles->tile_left && !world->is_wall(x - 1, y)) {
@@ -43,7 +43,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit_outline(tiles->tile_left, tl2, br2);
+        tile_blit(tiles->tile_left, tl2, br2);
     }
 
     if (tiles->tile_right && !world->is_wall(x + 1, y)) {
@@ -51,7 +51,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit_outline(tiles->tile_right, tl2, br2);
+        tile_blit(tiles->tile_right, tl2, br2);
     }
 
     //
@@ -69,7 +69,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_tl, tl2, br2);
+        tile_blit(tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -87,7 +87,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_tr, tl2, br2);
+        tile_blit(tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -106,7 +106,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_tr, tl2, br2);
+        tile_blit(tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -125,7 +125,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_tl, tl2, br2);
+        tile_blit(tiles->tile_tl, tl2, br2);
     }
 
     dw = 0.00;
@@ -146,7 +146,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x -= dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_bl, tl2, br2);
+        tile_blit(tiles->tile_bl, tl2, br2);
     }
 
     //
@@ -164,7 +164,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_br, tl2, br2);
+        tile_blit(tiles->tile_br, tl2, br2);
     }
 
     //
@@ -183,7 +183,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_br, tl2, br2);
+        tile_blit(tiles->tile_br, tl2, br2);
     }
 
     //
@@ -202,7 +202,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_bl, tl2, br2);
+        tile_blit(tiles->tile_bl, tl2, br2);
     }
 }
 
@@ -227,7 +227,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_top, tl2, br2);
+        tile_blit(tiles->tile_top, tl2, br2);
     }
 
     if (tiles->tile_bot &&
@@ -236,7 +236,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_bot, tl2, br2);
+        tile_blit(tiles->tile_bot, tl2, br2);
     }
 
     if (tiles->tile_left &&
@@ -245,7 +245,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit_outline(tiles->tile_left, tl2, br2);
+        tile_blit(tiles->tile_left, tl2, br2);
     }
 
     if (tiles->tile_right &&
@@ -254,7 +254,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit_outline(tiles->tile_right, tl2, br2);
+        tile_blit(tiles->tile_right, tl2, br2);
     }
 
     //
@@ -272,7 +272,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_tl, tl2, br2);
+        tile_blit(tiles->tile_tl, tl2, br2);
     }
 
     //
@@ -290,7 +290,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_tr, tl2, br2);
+        tile_blit(tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -309,7 +309,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_tr, tl2, br2);
+        tile_blit(tiles->tile_tr, tl2, br2);
     }
 
     //
@@ -328,7 +328,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit_outline(tiles->tile_tl, tl2, br2);
+        tile_blit(tiles->tile_tl, tl2, br2);
     }
 
     dw = 0.00;
@@ -349,7 +349,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x -= dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_bl, tl2, br2);
+        tile_blit(tiles->tile_bl, tl2, br2);
     }
 
     //
@@ -367,7 +367,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_br, tl2, br2);
+        tile_blit(tiles->tile_br, tl2, br2);
     }
 
     //
@@ -386,7 +386,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_br, tl2, br2);
+        tile_blit(tiles->tile_br, tl2, br2);
     }
 
     //
@@ -405,7 +405,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         //tl2.y += dh;
         //br2.y += dh;
-        tile_blit_outline(tiles->tile_bl, tl2, br2);
+        tile_blit(tiles->tile_bl, tl2, br2);
     }
 }
 
