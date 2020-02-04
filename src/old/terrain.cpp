@@ -221,7 +221,7 @@ public:
         auto image = SDL_CreateRGBSurface(0, MAP_WIDTH, MAP_HEIGHT, 32,
                                           rmask, gmask, bmask, amask);
         if (!image) {
-            DIE("no image surface created for size %dx%d",
+            ERR("no image surface created for size %dx%d",
                 width, height);
         }
 
@@ -255,7 +255,7 @@ public:
         static const char *name = "groundwater";
         tex_groundwater_p = tex_from_surface(image, name, name, GL_NEAREST);
         if (!tex_groundwater_p) {
-            DIE("could not convert terrain to tex_groundwater");
+            ERR("could not convert terrain to tex_groundwater");
         }
 
         tex_groundwater = tex_get_gl_binding(tex_groundwater_p);
@@ -286,7 +286,7 @@ public:
         auto image = SDL_CreateRGBSurface(0, MAP_WIDTH, MAP_HEIGHT, 32,
                                           rmask, gmask, bmask, amask);
         if (!image) {
-            DIE("no image surface created for size %dx%d",
+            ERR("no image surface created for size %dx%d",
                 width, height);
         }
 
@@ -307,7 +307,7 @@ public:
         static const char *name = "clouds";
         tex_clouds_p = tex_from_surface(image, name, name, GL_NEAREST);
         if (!tex_clouds_p) {
-            DIE("could not convert terrain to tex_clouds");
+            ERR("could not convert terrain to tex_clouds");
         }
 
         tex_clouds = tex_get_gl_binding(tex_clouds_p);
@@ -338,7 +338,7 @@ public:
         auto image = SDL_CreateRGBSurface(0, MAP_WIDTH, MAP_HEIGHT, 32,
                                           rmask, gmask, bmask, amask);
         if (!image) {
-            DIE("no image surface created for size %dx%d",
+            ERR("no image surface created for size %dx%d",
                 width, height);
         }
 
@@ -391,7 +391,7 @@ public:
         static const char *name = "ground";
         tex_ground_p = tex_from_surface(image, name, name, GL_NEAREST);
         if (!tex_ground_p) {
-            DIE("could not convert terrain to tex_ground");
+            ERR("could not convert terrain to tex_ground");
         }
 
         tex_ground = tex_get_gl_binding(tex_ground_p);

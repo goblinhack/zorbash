@@ -64,7 +64,8 @@ _
     timestamp_next_frame = 0;
     const auto tpp = tp_find(name);
     if (unlikely(!tpp)) {
-        DIE("thing [%s] not found", name.c_str());
+        ERR("thing template [%s] not found", name.c_str());
+        return;
     }
 
     tp_id = tpp->id;
@@ -300,11 +301,12 @@ _
 
     if (unlikely(tp_is_player(tpp))) {
         if (world->player && (world->player != this)) {
-            DIE("player exists in multiple places on map, %f, %f and %f, %f",
+            ERR("player exists in multiple places on map, %f, %f and %f, %f",
                 world->player->mid_at.x,
                 world->player->mid_at.y,
                 mid_at.x,
                 mid_at.y);
+            return;
         }
         world->player = this;
 
@@ -321,7 +323,8 @@ _
 
     point new_at((int)at.x, (int)at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
-        DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
+        ERR("new thing is oob at %d, %d", new_at.x, new_at.y);
+        return;
     }
 
     if (tp_is_wall(tpp)) {
@@ -409,11 +412,12 @@ void Thing::reinit (void)
 
     if (unlikely(tp_is_player(tpp))) {
         if (world->player && (world->player != this)) {
-            DIE("player exists in multiple places on map, %f, %f and %f, %f",
+            ERR("player exists in multiple places on map, %f, %f and %f, %f",
                 world->player->mid_at.x,
                 world->player->mid_at.y,
                 mid_at.x,
                 mid_at.y);
+            return;
         }
         world->player = this;
         log("player recreated");
@@ -421,7 +425,8 @@ void Thing::reinit (void)
 
     point new_at((int)mid_at.x, (int)mid_at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
-        DIE("new thing is oob at %d, %d", new_at.x, new_at.y);
+        ERR("new thing is oob at %d, %d", new_at.x, new_at.y);
+        return;
     }
 
     if (tp_is_wall(tpp)) {
@@ -481,7 +486,8 @@ void Thing::destroy (void)
     }
 
     if (is_being_destroyed) {
-        die("death recursion");
+        err("death recursion in thing destroy");
+        return;
     }
     is_being_destroyed = true;
 
@@ -790,8 +796,9 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_carry_anim()) {
         auto w = thing_find(get_weapon_id_carry_anim());
         if (!w) {
-            die("weapon_id_carry_anim set to ID-%08X but not found",
+            err("weapon_id_carry_anim set to ID-%08X but not found",
                 get_weapon_id_carry_anim());
+            return;
         }
         w->move_to(mid_at);
         w->dir = dir;
@@ -800,8 +807,9 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_use_anim()) {
         auto w = thing_find(get_weapon_id_use_anim());
         if (!w) {
-            die("weapon_id_use_anim set to ID-%08X but not found",
+            err("weapon_id_use_anim set to ID-%08X but not found",
                 get_weapon_id_use_anim());
+            return;
         }
         w->move_to(mid_at);
         w->dir = dir;

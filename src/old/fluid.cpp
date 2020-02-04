@@ -326,7 +326,7 @@ static void fluid_find_pools (void)
 
             if (fluid_pool[x][y]) {
                 if (!f->mass) {
-                    DIE("pool set but no mass");
+                    ERR("pool set but no mass");
                 }
                 continue;
             }
@@ -517,7 +517,7 @@ static void fluid_set_depth (void)
                     fluid_pool_surface_size[pool_num]++;
                     f->is_surface = 1;
                 } else {
-                    DIE("too much surface area in pool");
+                    ERR("too much surface area in pool");
                 }
             }
 
@@ -532,15 +532,15 @@ void fluid_add_droplets (void)
     uint16_t y = (myrand() % (MAP_HEIGHT - 4)) + 1;
 
     if (x >= MAP_WIDTH) {
-        DIE("overflow on x when adding droplets");
+        ERR("overflow on x when adding droplets");
     }
 
     if (y >= MAP_HEIGHT) {
-        DIE("overflow on y");
+        ERR("overflow on y");
     }
 
     if (y == 0) {
-        DIE("underflow on y");
+        ERR("underflow on y");
     }
 
     if (!world->is_solid(x, y) &&
@@ -558,11 +558,11 @@ void fluid_add_droplets (void)
             fy += myrand() % FLUID_RESOLUTION;
 
             if (fx >= FLUID_WIDTH) {
-                DIE("overflow fx fluid");
+                ERR("overflow fx fluid");
             }
 
             if (fy >= FLUID_HEIGHT) {
-                DIE("overflow fx fluid");
+                ERR("overflow fx fluid");
             }
 
             world->fluid[fx][fy].mass = 10;

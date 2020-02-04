@@ -185,7 +185,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
     if (shift >= (int)(sizeof(bits32) * 8)) {
-        DIE("ran out of bits in serialization");
+        ERR("ran out of bits in serialization");
     }
     out << bits(bits32);
 
@@ -319,7 +319,7 @@ bool Game::save (std::string file_to_save)
 //    (void) hexdump((const unsigned char*)uncompressed, uncompressed_len);
 
     if (lzo_init() != LZO_E_OK) {
-        DIE("LZO init fail: enable '-DLZO_DEBUG' for diagnostics)");
+        ERR("LZO init fail: enable '-DLZO_DEBUG' for diagnostics)");
     }
 
     HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);
@@ -333,7 +333,8 @@ bool Game::save (std::string file_to_save)
             (unsigned long) uncompressed_len,
             (unsigned long) compressed_len);
     } else {
-        DIE("LZO internal error - compression failed: %d", r);
+        ERR("LZO internal error - compression failed: %d", r);
+        return (false);
     }
 
     //

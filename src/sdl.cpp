@@ -9,6 +9,7 @@
 #include "my_ascii.h"
 #include "my_time.h"
 #include "my_thing.h"
+#include "my_wid_console.h"
 
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
@@ -191,12 +192,12 @@ uint8_t sdl_init (void)
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         SDL_MSG_BOX("SDL_Init failed %s", SDL_GetError());
-        DIE("SDL_Init failed %s", SDL_GetError());
+        ERR("SDL_Init failed %s", SDL_GetError());
     }
 
     if (SDL_VideoInit(0) != 0) {
         SDL_MSG_BOX("SDL_VideoInit failed %s", SDL_GetError());
-        DIE("SDL_VideoInit failed %s", SDL_GetError());
+        ERR("SDL_VideoInit failed %s", SDL_GetError());
     }
 
     LOG("SDL version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
@@ -352,7 +353,7 @@ uint8_t sdl_init (void)
                     video_width, video_height,
                     SDL_GetError());
 
-        DIE("Couldn't set windowed display %ux%u: %s",
+        ERR("Couldn't set windowed display %ux%u: %s",
             video_width, video_height,
             SDL_GetError());
     }
@@ -376,7 +377,7 @@ uint8_t sdl_init (void)
     if (!context) {
         SDL_MSG_BOX("SDL_GL_CreateContext failed %s", SDL_GetError());
         SDL_ClearError();
-        DIE("SDL_GL_CreateContext failed %s", SDL_GetError());
+        ERR("SDL_GL_CreateContext failed %s", SDL_GetError());
     }
 
     LOG("Calling SDL_GL_CreateContext (drawable size %dx%d) done",
@@ -391,7 +392,7 @@ uint8_t sdl_init (void)
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
         SDL_ClearError();
-        DIE("SDL_GL_MakeCurrent failed %s", SDL_GetError());
+        ERR("SDL_GL_MakeCurrent failed %s", SDL_GetError());
     }
 
     SDL_ClearError();
@@ -1267,12 +1268,20 @@ uint8_t config_debug_mode (tokens_t *tokens, void *context)
 
     if (game->config.debug_mode) {
         CON("USERCFG: Debug mode enabled");
-        SDL_GL_SetSwapInterval(1);
     } else {
         CON("USERCFG: Debug mode disabled");
-        SDL_GL_SetSwapInterval(0);
     }
 
+    return (true);
+}
+
+//
+// User has entered a command, run it
+//
+uint8_t config_errored (tokens_t *tokens, void *context)
+{_
+    errored = false;
+    CON("USERCFG: Errored mode cleared");
     return (true);
 }
 
@@ -1351,6 +1360,21 @@ void sdl_loop (void)
 
         //fluid_tick();
 
+        static bool old_errored;
+        if (errored) {
+            if (errored != old_errored) {
+                ERR("An error occurred. Check the logs above.");
+                ERR("To continue try 'clear errored'");
+                if (wid_console_window && !(wid_console_window->visible)) {
+                    wid_visible(wid_console_window);
+                    wid_raise(wid_console_window);
+                    wid_set_focus(wid_console_window);
+                    wid_focus_lock(wid_console_window);
+                }
+            }
+        }
+        old_errored = errored;
+
         game->display();
 
         //
@@ -1389,8 +1413,11 @@ void sdl_loop (void)
             if (unlikely(!sdl_main_loop_running)) {
                 break;
             }
-            player_tick();
-            things_tick();
+
+            if (!errored) {
+                player_tick();
+                things_tick();
+            }
 
             //
             // Display UI.

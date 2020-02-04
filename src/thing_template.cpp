@@ -55,7 +55,7 @@ Tpp tp_load (int id, std::string const& name, std::string const& real_name)
 
     auto result = tp_name_map.insert(std::make_pair(name, tp));
     if (result.second == false) {
-        DIE("thing insert name [%s] failed", name.c_str());
+        ERR("thing insert name [%s] failed", name.c_str());
     }
 
     tp_id_map.push_back(tp);
@@ -77,7 +77,7 @@ Tpp tp_find (uint32_t id)
 {_
     auto result = get(tp_id_map, id - 1);
     if (!result) {
-        DIE("thing template ID-%08X not found", id);
+        ERR("thing template ID-%08X not found", id);
     }
 
     return (result);
@@ -88,7 +88,7 @@ Tilep tp_first_tile (Tpp tp)
     auto tiles = tp_tiles(tp);
 
     if (!tiles || tiles->empty()) {
-        DIE("tp %s has no tiles", tp_name(tp).c_str());
+        ERR("tp %s has no tiles", tp_name(tp).c_str());
     }
 
     //

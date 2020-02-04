@@ -49,11 +49,24 @@ uint8_t quitting;
 
 void callstack_dump (void)
 {_
+    static int done;
+    if (done) {
+        return;
+    }
+    done = true;
+
     fprintf(MY_STDERR, "code trace:\n");
     fprintf(MY_STDERR, "==========:\n");
     for (auto depth = 0; depth < callframes_depth; depth++) {
         auto iter = &callframes[depth];
         fprintf(MY_STDERR, "(stack) %d %s %s, line %u\n", depth, iter->file, iter->func, iter->line);
+    }
+
+    CON("code trace:");
+    CON("==========:");
+    for (auto depth = 0; depth < callframes_depth; depth++) {
+        auto iter = &callframes[depth];
+        CON("(stack) %d %s %s, line %u", depth, iter->file, iter->func, iter->line);
     }
 }
 
@@ -69,7 +82,7 @@ static void segv_handler (int sig)
 
     crashed = 1;
     fprintf(MY_STDERR, "Crash!!!");
-    DIE("Crashed");
+    ERR("Crashed");
 }
 
 static void ctrlc_handler (int sig)
@@ -95,6 +108,7 @@ void quit (void)
     signal(SIGSEGV, 0);   // uninstall our handler
     signal(SIGABRT, 0);   // uninstall our handler
     signal(SIGINT, 0);    // uninstall our handler
+    signal(SIGPIPE, 0);   // uninstall our handler
 #endif
 
     if (game) {
@@ -646,6 +660,7 @@ int32_t main (int32_t argc, char *argv[])
     signal(SIGSEGV, segv_handler);   // install our handler
     signal(SIGABRT, segv_handler);   // install our handler
     signal(SIGINT, ctrlc_handler);   // install our handler
+    signal(SIGPIPE, ctrlc_handler);  // install our handler
 #endif
 
     parse_args(argc, argv);

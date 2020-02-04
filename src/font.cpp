@@ -23,7 +23,7 @@ static Fontp font_load (std::string name, std::string file, int size, int style)
     }
 
     if (name == "") {
-        DIE("no name for font %s", __FUNCTION__);
+        ERR("no name for font %s", __FUNCTION__);
         return (0);
     }
 
@@ -32,7 +32,8 @@ static Fontp font_load (std::string name, std::string file, int size, int style)
     auto result = fonts.insert(std::make_pair(name, f));
 
     if (result.second == false) {
-        DIE("font insert name [%s] failed", name.c_str());
+        ERR("font insert name [%s] failed", name.c_str());
+        return (f);
     }
 
 #ifdef ENABLE_GENERATE_TTF
@@ -45,7 +46,8 @@ static Fontp font_load (std::string name, std::string file, int size, int style)
 Fontp font_find (std::string file)
 {_
     if (file == "") {
-        DIE("no filename given for font find %s", __FUNCTION__);
+        ERR("no filename given for font find %s", __FUNCTION__);
+        return (0);
     }
 
     auto result = fonts.find(file);

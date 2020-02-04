@@ -88,7 +88,6 @@ uint8_t wid_error_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 void wid_error (std::string error)
 {_
     ERR("%s", error.c_str());
-    wid_toggle_hidden(wid_console_window);
 
     if (wid_error_window) {
         wid_error_destroy();
