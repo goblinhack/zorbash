@@ -63,12 +63,12 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
     }
 
     if (!py_room_data) {
-        DIE("map_load_room, missing floor data");
+        ERR("map_load_room, missing floor data");
     }
 
     int room_data_elems = PyList_Size(py_room_data);
     if (room_data_elems % ROOM_HEIGHT) {
-        DIE("room elems needs to be evenly dividable by room height %d, got %d elems",
+        ERR("room elems needs to be evenly dividable by room height %d, got %d elems",
             (int) ROOM_HEIGHT, (int) PyList_Size(py_room_data));
     }
 
@@ -179,35 +179,35 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             }
 
             if (floor_string.size() != ROOM_WIDTH){
-                DIE("room floor width mismatch, %d, expected %d",
+                ERR("room floor width mismatch, %d, expected %d",
                     (int)floor_string.size(), ROOM_WIDTH);
             }
             if (water_string.size() != ROOM_WIDTH){
-                DIE("room water width mismatch, %d, expected %d",
+                ERR("room water width mismatch, %d, expected %d",
                     (int)water_string.size(), ROOM_WIDTH);
             }
             if (lava_string.size() != ROOM_WIDTH){
-                DIE("room lava width mismatch, %d, expected %d",
+                ERR("room lava width mismatch, %d, expected %d",
                     (int)lava_string.size(), ROOM_WIDTH);
             }
             if (deco_string.size() != ROOM_WIDTH){
-                DIE("room deco width mismatch, %d, expected %d",
+                ERR("room deco width mismatch, %d, expected %d",
                     (int)deco_string.size(), ROOM_WIDTH);
             }
             if (deco_string.size() != ROOM_WIDTH){
-                DIE("room deco width mismatch, %d, expected %d",
+                ERR("room deco width mismatch, %d, expected %d",
                     (int)deco_string.size(), ROOM_WIDTH);
             }
             if (walls_string.size() != ROOM_WIDTH){
-                DIE("room walls width mismatch, %d, expected %d",
+                ERR("room walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), ROOM_WIDTH);
             }
             if (exits_string.size() != ROOM_WIDTH){
-                DIE("room exits width mismatch, %d, expected %d",
+                ERR("room exits width mismatch, %d, expected %d",
                     (int)exits_string.size(), ROOM_WIDTH);
             }
             if (items_string.size() != ROOM_WIDTH){
-                DIE("room items width mismatch, %d, expected %d",
+                ERR("room items width mismatch, %d, expected %d",
                     (int)items_string.size(), ROOM_WIDTH);
             }
 

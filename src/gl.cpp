@@ -211,7 +211,8 @@ static void gl_init_fbo_ (int fbo,
     //
     if (!glFramebufferTexture2D_EXT) {
         SDL_MSG_BOX("glGenRenderbuffers_EXT is not present; fatal");
-        DIE("glGenRenderbuffers_EXT is not present; fatal");
+        ERR("glGenRenderbuffers_EXT is not present; fatal");
+        return;
     }
 
     LOG("INIT: - glGenRenderbuffers_EXT");
@@ -1334,7 +1335,8 @@ gl_push (float **P,
     float *p = *P;
 
     if (unlikely(p >= p_end)) {
-        DIE("overflow on gl bug %s", __FUNCTION__);
+        ERR("overflow on gl bug %s", __FUNCTION__);
+        return;
     }
 
     if (gl_rotate) {

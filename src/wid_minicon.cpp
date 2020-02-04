@@ -165,7 +165,7 @@ static void wid_minicon_wid_create (void)
 
     {
         point tl = {0, 0};
-        point br = {MINICON_VIS_WIDTH, h};
+        point br = {MINICON_VIS_WIDTH - 1, h};
 
         wid_minicon_window = wid_new_square_window("wid_minicon");
         wid_set_name(wid_minicon_window, "wid_minicon window");
@@ -175,12 +175,16 @@ static void wid_minicon_wid_create (void)
 
     {
         point tl = {0, 0};
-        point br = {MINICON_VIS_WIDTH, h};
+        point br = {MINICON_VIS_WIDTH - 1, h};
 
         wid_minicon_container = wid_new_container(wid_minicon_window,
                                                   "wid minicon container");
         wid_set_pos(wid_minicon_container, tl, br);
-        wid_set_shape_none(wid_minicon_container);
+        wid_set_shape_square(wid_minicon_container);
+        wid_set_style(wid_minicon_container, 1);
+        color c = GRAY;
+        c.a = 150;
+            wid_set_color(wid_minicon_container, WID_COLOR_BG, c);
     }
 
   {

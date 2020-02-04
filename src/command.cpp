@@ -127,14 +127,15 @@ void command_add (command_fn_t callback,
     auto result = commands_map.insert(std::make_pair(input, command));
 
     if (result.second == false) {
-        DIE("command insert name [%s] failed", input.c_str());
+        ERR("command insert name [%s] failed", input.c_str());
+        return;
     }
 
     command->callback = callback;
 
- /*
-     * Convert the command into tokens for matching.
-     */
+    //
+    // Convert the command into tokens for matching.
+    //
     tokens_tostring(input.c_str(), &command->tokens);
     tokens_tostring(input.c_str(), &command->input_tokens);
     tokens_tostring(readable.c_str(), &command->readable_tokens);

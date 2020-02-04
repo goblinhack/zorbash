@@ -326,7 +326,8 @@ public:
     Dungeon (int level)
     {_
         if (level >= (int)Level::all_levels.size()) {
-            DIE("out of range level %d", level);
+            ERR("out of range level %d", level);
+            return;
         }
         auto l = get(Level::all_levels, level);
 
@@ -387,10 +388,10 @@ public:
     void putc (const int x, const int y, const int z, const char c)
     {
         if (!c) {
-            DIE("putting nul char at %d,%d,%d", x, y, z);
+            ERR("putting nul char at %d,%d,%d", x, y, z);
         }
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
         auto p = cell_addr(x, y, z);
         if (p != nullptr) {
@@ -415,7 +416,7 @@ public:
     char getc (const int x, const int y, const int z)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
         auto p = cell_addr(x, y, z);
         if (p != nullptr) {
@@ -479,7 +480,7 @@ public:
     bool is_anything_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -494,7 +495,7 @@ public:
     bool is_anything_at (const int x, const int y, const int z)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         auto c = getc(x, y, z);
@@ -520,7 +521,7 @@ public:
     bool is_floor (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -537,7 +538,7 @@ public:
     bool is_corridor (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -554,7 +555,7 @@ public:
     bool is_corridor_fast (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -571,7 +572,7 @@ public:
     bool is_dirt (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -588,7 +589,7 @@ public:
     bool is_dirt_fast (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -605,7 +606,7 @@ public:
     bool is_secret_corridor_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -622,7 +623,7 @@ public:
     bool is_wall (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         auto d = MAP_DEPTH_WALLS;
@@ -634,7 +635,7 @@ public:
     bool is_monst (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -651,7 +652,7 @@ public:
     bool is_food (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -668,7 +669,7 @@ public:
     bool is_blood (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -685,7 +686,7 @@ public:
     bool is_rock (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -702,7 +703,7 @@ public:
     bool is_door (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -719,7 +720,7 @@ public:
     bool is_secret_door (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -736,7 +737,7 @@ public:
     bool is_entrance_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -753,7 +754,7 @@ public:
     bool gfx_is_floor_deco_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -770,7 +771,7 @@ public:
     bool gfx_is_wall_deco_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -787,7 +788,7 @@ public:
     bool is_exit_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -804,7 +805,7 @@ public:
     bool is_lava (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -821,7 +822,7 @@ public:
     bool is_water (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -838,7 +839,7 @@ public:
     bool is_deep_water (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -855,7 +856,7 @@ public:
     bool is_treasure_at (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -872,7 +873,7 @@ public:
     bool is_key (const int x, const int y)
     {
         if (is_oob(x, y)) {
-            DIE("oob %s at (%d,%d)", __FUNCTION__, x, y);
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
         }
 
         for (auto d = 0; d < map_depth; d++) {
@@ -1030,12 +1031,12 @@ public:
     void create_node_map (void)
     {
         if (grid_width > GRID_WIDTH) {
-            DIE("nodes width overflow. got %d, max %d",
+            ERR("nodes width overflow. got %d, max %d",
                 grid_width, GRID_WIDTH);
         }
 
         if (grid_height > GRID_HEIGHT) {
-            DIE("nodes height overflow. got %d, max %d",
+            ERR("nodes height overflow. got %d, max %d",
                 grid_height, GRID_HEIGHT);
         }
 
@@ -1064,7 +1065,7 @@ public:
                     auto c = cr.c;
 
                     if (!c) {
-                        DIE("unknown map char 0x%x/%c at x %d, y %d, depth %d",
+                        ERR("unknown map char 0x%x/%c at x %d, y %d, depth %d",
                             m, m, x, y, d);
                     }
 
@@ -1121,7 +1122,7 @@ public:
                     auto c = cr.c;
 
                     if (!c) {
-                        DIE("unknown map char %c at x %d, y %d, depth %d",
+                        ERR("unknown map char %c at x %d, y %d, depth %d",
                             m, x, y, d);
                     }
 
@@ -1393,7 +1394,7 @@ public:
             if (!ncandidates) {
                 rooms_print_all(g);
                 dump();
-                DIE("no grid room candidates at (%d,%d)", x, y);
+                ERR("no grid room candidates at (%d,%d)", x, y);
                 return (false);
             }
         }
@@ -1443,7 +1444,7 @@ public:
                 }
                 if (!solve(x, y, g)) {
                     dump();
-                    DIE("could not solve level at %d,%d", x, y);
+                    ERR("could not solve level at %d,%d", x, y);
                 }
                 break;
             }
@@ -1580,17 +1581,17 @@ public:
                     auto o = get(grid.node_rooms, x, y+1);
                     if (!o) {
                         _ debug("bug");
-                        DIE("had exit down at %d,%d, but no node exists", x, y);
+                        ERR("had exit down at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->doors_down.size());
                     auto odoori = random_range(0, o->doors_up.size());
                     if (rdoori >= r->doors_down.size()) {
                         _ debug("bug");
-                        DIE("bug");
+                        ERR("bug");
                     }
                     if (odoori >= o->doors_up.size()) {
                         _ debug("bug");
-                        DIE("bug");
+                        ERR("bug");
                     }
 
                     r->which_door_down = rdoori;
@@ -1604,17 +1605,17 @@ public:
                     auto o = get(grid.node_rooms, x+1, y);
                     if (!o) {
                         _ debug("bug");
-                        DIE("had exit right at %d,%d, but no node exists", x, y);
+                        ERR("had exit right at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->doors_right.size());
                     auto odoori = random_range(0, o->doors_left.size());
                     if (rdoori >= r->doors_right.size()) {
                         _ debug("bug");
-                        DIE("bug");
+                        ERR("bug");
                     }
                     if (odoori >= o->doors_left.size()) {
                         _ debug("bug");
-                        DIE("bug");
+                        ERR("bug");
                     }
 
                     r->which_door_right = rdoori;
@@ -1628,18 +1629,18 @@ public:
                     auto o = get(grid.node_rooms, x, y+1);
                     if (!o) {
                         _ debug("bug");
-                        DIE("had secret exit down at %d,%d, but no node exists", x, y);
+                        ERR("had secret exit down at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->doors_down.size());
                     auto odoori = random_range(0, o->doors_up.size());
                     if (rdoori >= r->doors_down.size()) {
                         _ debug("bug");
-                        DIE("bug, room %d, down door index %d size %d",
+                        ERR("bug, room %d, down door index %d size %d",
                             r->roomno, (int)rdoori, (int)r->doors_down.size());
                     }
                     if (odoori >= o->doors_up.size()) {
                         _ debug("bug");
-                        DIE("bug, room %d, up door index %d size %d",
+                        ERR("bug, room %d, up door index %d size %d",
                             r->roomno, (int)odoori, (int)r->doors_up.size());
                     }
 
@@ -1654,18 +1655,18 @@ public:
                     auto o = get(grid.node_rooms, x+1, y);
                     if (!o) {
                         _ debug("bug");
-                        DIE("had secret exit right at %d,%d, but no node exists", x, y);
+                        ERR("had secret exit right at %d,%d, but no node exists", x, y);
                     }
                     auto rdoori = random_range(0, r->doors_right.size());
                     auto odoori = random_range(0, o->doors_left.size());
                     if (rdoori >= r->doors_right.size()) {
                         _ debug("bug");
-                        DIE("bug, room %d, right door index %d size %d",
+                        ERR("bug, room %d, right door index %d size %d",
                             r->roomno, (int)rdoori, (int)r->doors_right.size());
                     }
                     if (odoori >= o->doors_left.size()) {
                         _ debug("bug");
-                        DIE("bug, room %d, left door index %d size %d",
+                        ERR("bug, room %d, left door index %d size %d",
                             r->roomno, (int)odoori, (int)r->doors_left.size());
                     }
 
@@ -2087,7 +2088,7 @@ public:
     void place_level (Levelp l)
     {
         if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
-            DIE("level has bad size %d,%d", l->width, l->height);
+            ERR("level has bad size %d,%d", l->width, l->height);
         }
 
         for (auto z = 0 ; z < MAP_DEPTH; z++) {
@@ -2109,7 +2110,7 @@ public:
     void map_place_room_ptr (Roomp r, int x, int y)
     {
         if (!r) {
-            DIE("no room to place");
+            ERR("no room to place");
         }
 
         for (auto dz = 0 ; dz < MAP_DEPTH; dz++) {
@@ -2586,7 +2587,7 @@ public:
                             }
                             break;
                         case 4:
-                            DIE("wtf");
+                            ERR("wtf");
                         }
 
                         if (moved_one) {
@@ -2618,7 +2619,7 @@ public:
 
                     restore_level();
                     if (!draw_corridors()) {
-                        DIE("rolled back level was not solvable");
+                        ERR("rolled back level was not solvable");
                     }
 
                     if (failed_to_make_shorter_corridors++ > 100) {
@@ -2632,7 +2633,7 @@ public:
 
                     restore_level();
                     if (!draw_corridors()) {
-                        DIE("rolled back level was not solvable");
+                        ERR("rolled back level was not solvable");
                     }
 
                     if (failed_to_place_all_corridors++ > 20) {
@@ -2722,7 +2723,7 @@ next: ;
                 if (r->down_room) {
                     auto o = r->down_room;
                     if (!o) {
-                        DIE("room linkage bug");
+                        ERR("room linkage bug");
                     }
 
                     if (r->depth > o->depth) {
@@ -2734,7 +2735,7 @@ next: ;
                 if (r->up_room) {
                     auto o = r->up_room;
                     if (!o) {
-                        DIE("room linkage bug");
+                        ERR("room linkage bug");
                     }
 
                     if (r->depth > o->depth) {
@@ -2746,7 +2747,7 @@ next: ;
                 if (r->right_room) {
                     auto o = r->right_room;
                     if (!o) {
-                        DIE("room linkage bug");
+                        ERR("room linkage bug");
                     }
 
                     if (r->depth > o->depth) {
@@ -2758,7 +2759,7 @@ next: ;
                 if (r->left_room) {
                     auto o = r->left_room;
                     if (!o) {
-                        DIE("room linkage bug");
+                        ERR("room linkage bug");
                     }
 
                     if (r->depth > o->depth) {
@@ -2770,7 +2771,7 @@ next: ;
                 if (r->secret_down_room) {
                     auto o = r->secret_down_room;
                     if (!o) {
-                        DIE("room linkage bug");
+                        ERR("room linkage bug");
                     }
 
                     putc(r->down_secret_door_at.x, r->down_secret_door_at.y,
@@ -2782,7 +2783,7 @@ next: ;
                 if (r->secret_up_room) {
                     auto o = r->secret_up_room;
                     if (!o) {
-                        DIE("room linkage bug");
+                        ERR("room linkage bug");
                     }
 
                     putc(r->up_secret_door_at.x, r->up_secret_door_at.y,
@@ -2794,7 +2795,7 @@ next: ;
                 if (r->secret_right_room) {
                     auto o = r->secret_right_room;
                     if (!o) {
-                        DIE("room linkage bug");
+                        ERR("room linkage bug");
                     }
 
                     putc(r->right_secret_door_at.x, r->right_secret_door_at.y,
@@ -2806,7 +2807,7 @@ next: ;
                 if (r->secret_left_room) {
                     auto o = r->secret_left_room;
                     if (!o) {
-                        DIE("room linkage bug");
+                        ERR("room linkage bug");
                     }
 
                     putc(r->left_secret_door_at.x, r->left_secret_door_at.y,

@@ -106,7 +106,7 @@ Tile::Tile (const class Tile *tile)
 
     auto result = all_tiles.insert(std::make_pair(name, this));
     if (result.second == false) {
-        DIE("tile copy insert name [%s] failed", name.c_str());
+        ERR("tile copy insert name [%s] failed", name.c_str());
     }
     all_tiles_array.push_back(this);
 }
@@ -146,7 +146,7 @@ void tile_load_arr (std::string file, std::string name,
             auto t = new Tile(); // std::make_shared< class Tile >();
             auto result = all_tiles.insert(std::make_pair(name, t));
             if (result.second == false) {
-                DIE("tile insert name [%s] failed", name.c_str());
+                ERR("tile insert name [%s] failed", name.c_str());
             }
 
             //
@@ -278,9 +278,9 @@ void tile_load_arr (std::string file, std::string name,
 
         if (y * height > tex_get_height(tex)) {
             if (name != "") {
-                DIE("overflow reading tile arr[%s]", name.c_str());
+                ERR("overflow reading tile arr[%s]", name.c_str());
             } else {
-                DIE("overflow reading tile arr at x %d y %d", x, y);
+                ERR("overflow reading tile arr at x %d y %d", x, y);
             }
         }
     }
@@ -319,7 +319,7 @@ void tile_load_arr (std::string file, std::string name,
             auto t = new Tile(); // std::make_shared< class Tile >();
             auto result = all_tiles.insert(std::make_pair(name, t));
             if (result.second == false) {
-                DIE("tile insert name [%s] failed", name.c_str());
+                ERR("tile insert name [%s] failed", name.c_str());
             }
 
             //
@@ -451,9 +451,9 @@ void tile_load_arr (std::string file, std::string name,
 
         if (y * height > tex_get_height(tex)) {
             if (name != "") {
-                DIE("overflow reading tile arr[%s]", name.c_str());
+                ERR("overflow reading tile arr[%s]", name.c_str());
             } else {
-                DIE("overflow reading tile arr at x %d y %d", x, y);
+                ERR("overflow reading tile arr at x %d y %d", x, y);
             }
         }
     }
@@ -499,7 +499,7 @@ void tile_load_arr_color_and_black_and_white (std::string file,
             auto t = new Tile(); // std::make_shared< class Tile >();
             auto result = all_tiles.insert(std::make_pair(name, t));
             if (result.second == false) {
-                DIE("tile insert name [%s] failed", name.c_str());
+                ERR("tile insert name [%s] failed", name.c_str());
             }
 
             //
@@ -633,9 +633,9 @@ void tile_load_arr_color_and_black_and_white (std::string file,
 
         if (y * height > tex_get_height(tex)) {
             if (name != "") {
-                DIE("overflow reading tile arr[%s]", name.c_str());
+                ERR("overflow reading tile arr[%s]", name.c_str());
             } else {
-                DIE("overflow reading tile arr at x %d y %d", x, y);
+                ERR("overflow reading tile arr at x %d y %d", x, y);
             }
         }
     }
@@ -662,14 +662,14 @@ Tilep tile_find (std::string name)
 Tilep tile_find_mand (std::string name)
 {_
     if (name == "") {
-        DIE("no tile name give");
+        ERR("no tile name give");
         return (0);
     }
 
     auto result = all_tiles.find(name);
 
     if (result == all_tiles.end()) {
-        DIE("tile name %s not found", name.c_str());
+        ERR("tile name %s not found", name.c_str());
         return (0);
     }
 
@@ -733,7 +733,7 @@ Tilep string2tile (const char **s)
 
     auto result = all_tiles.find(tmp);
     if (result == all_tiles.end()) {
-        DIE("unknown tile [%s]", tmp);
+        ERR("unknown tile [%s]", tmp);
         return (0);
     }
 
@@ -757,7 +757,7 @@ Tilep string2tile (std::string &s, int *len)
     }
 
     if (iter == s.end()) {
-        DIE("unknown tile [%s]", out.c_str());
+        ERR("unknown tile [%s]", out.c_str());
     }
 
     if (len) {
@@ -766,7 +766,7 @@ Tilep string2tile (std::string &s, int *len)
 
     auto result = all_tiles.find(out);
     if (result == all_tiles.end()) {
-        DIE("unknown tile [%s]", out.c_str());
+        ERR("unknown tile [%s]", out.c_str());
     }
 
     return (result->second);

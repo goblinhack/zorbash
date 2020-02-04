@@ -76,7 +76,8 @@ static void game_place_walls (Dungeonp d,
                 auto t = thing_new(what, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
-                    DIE("wall tile %s not found", tilename.c_str());
+                    ERR("wall tile %s not found", tilename.c_str());
+                    return;
                 }
 
                 t->tile_curr = tile->global_index;
@@ -167,7 +168,8 @@ static void game_place_floors (Dungeonp d,
                 auto t = thing_new(new_thing, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
-                    DIE("floor tile %s not found", tilename.c_str());
+                    ERR("floor tile %s not found", tilename.c_str());
+                    return;
                 }
                 t->tile_curr = tile->global_index;
             }
@@ -242,7 +244,8 @@ static void game_place_rocks (Dungeonp d,
                 auto t = thing_new(what, fpoint(X, Y));
                 auto tile = tile_find(tilename);
                 if (!tile) {
-                    DIE("rock tile %s not found", tilename.c_str());
+                    ERR("rock tile %s not found", tilename.c_str());
+                    return;
                 }
                 t->tile_curr = tile->global_index;
             }

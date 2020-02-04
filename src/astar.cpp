@@ -72,12 +72,14 @@ public:
         auto p = n->at;
         auto o = &getref(open, p.x, p.y);
         if (*o) {
-            DIE("already in open");
+            ERR("already in open");
+            return;
         }
         *o = n;
         auto result = open_nodes.insert(std::make_pair(n->cost, n));
         if (result.second == false) {
-            DIE("open insert fail");
+            ERR("open insert fail");
+            return;
         }
     }
 
@@ -86,12 +88,14 @@ public:
         auto p = n->at;
         auto o = &getref(closed, p.x, p.y);
         if (*o) {
-            DIE("already in closed");
+            ERR("already in closed");
+            return;
         }
         *o = n;
         auto result = closed_nodes.insert(std::make_pair(n->cost, n));
         if (result.second == false) {
-            DIE("closed insert fail");
+            ERR("closed insert fail");
+            return;
         }
     }
 
@@ -100,7 +104,8 @@ public:
         auto p = n->at;
         auto o = &getref(open, p.x, p.y);
         if (!*o) {
-            DIE("not in open");
+            ERR("not in open");
+            return;
         }
         *o = nullptr;
         open_nodes.erase(n->cost);

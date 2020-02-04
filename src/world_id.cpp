@@ -11,15 +11,15 @@ void World::put_thing (int x, int y, uint32_t id)
 {_
     auto t = thing_find(id);
     if (!id) {
-        t->die("null id at (%d,%d)", x, y);
+        t->err("null id at (%d,%d)", x, y);
     }
 
     if (!t) {
-        t->die("oob at (%d,%d) for put of ID-%08X", x, y, id);
+        t->err("oob at (%d,%d) for put of ID-%08X", x, y, id);
     }
 
     if (is_oob(x, y)) {
-        t->die("oob at (%d,%d) for put of ID-%08X", x, y, id);
+        t->err("oob at (%d,%d) for put of ID-%08X", x, y, id);
     }
 
     int free_slot = -1;
@@ -63,7 +63,7 @@ void World::put_thing (int x, int y, uint32_t id)
             t->log("- empty slot %u", slot);
         }
     }
-    t->die("out of thing slots at (%d,%d) for put of ID-%08X", x, y, id);
+    t->err("out of thing slots at (%d,%d) for put of ID-%08X", x, y, id);
 }
 
 void World::put_thing (point p, uint32_t id)
@@ -75,11 +75,11 @@ void World::remove_thing (int x, int y, uint32_t id)
 {_
     auto t = thing_find(id);
     if (!t) {
-        DIE("oob at (%d,%d) for remove of ID-%08X", x, y, id);
+        ERR("oob at (%d,%d) for remove of ID-%08X", x, y, id);
     }
 
     if (is_oob(x, y)) {
-        t->die("oob at (%d,%d) for remove of ID-%08X", x, y, id);
+        t->ERR("oob at (%d,%d) for remove of ID-%08X", x, y, id);
         return;
     }
 
@@ -93,7 +93,7 @@ void World::remove_thing (int x, int y, uint32_t id)
             return;
         }
     }
-    t->die("did not find thing in any slot at (%d,%d) for remove of ID-%08X",
+    t->err("did not find thing in any slot at (%d,%d) for remove of ID-%08X",
            x, y, id);
 }
 

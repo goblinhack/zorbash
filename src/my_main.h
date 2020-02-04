@@ -13,12 +13,12 @@
 
 #define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_TRACING             // Function tracing
+#define ENABLE_CRASH_HANDLER       // Intercept SEGV
 
 //
 // Commonly changed settings
 //
 #ifdef DEBUG_CRASH
-#define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_PTRCHECK_LEAK
@@ -210,7 +210,7 @@ extern int TILES_DOWN;
 // Minicon
 //
 #define MINICON_TEXT_COLOR          RESET_TEXT_COLOR
-#define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
+#define MINICON_WIDTH               (ASCII_WIDTH - (SIDEBAR_WIDTH + 2))
 #define MINICON_HEIGHT              20 // scrollbar limit
 #define MINICON_VIS_HEIGHT          5
 #define MINICON_VIS_WIDTH           MINICON_WIDTH
@@ -391,7 +391,7 @@ void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 #ifdef ENABLE_ASSERT
 #define ASSERT(x)                                                             \
     if (!(x)) {                                                               \
-        DIE("Failed assert:" #x);                                             \
+        ERR("Failed assert:" #x);                                             \
     }
 #else
 #define ASSERT(x)
@@ -420,6 +420,7 @@ void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 // Nested crash detection.
 //
 extern uint8_t croaked;
+extern uint8_t errored;
 
 //
 // Serious errors

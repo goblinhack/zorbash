@@ -31,6 +31,7 @@
 #endif
 
 uint8_t croaked;
+uint8_t errored;
 
 static void get_timestamp (char *buf, int32_t len)
 {
@@ -468,16 +469,13 @@ void DBG (const char *fmt, ...)
 
 void myerr (const char *fmt, ...)
 {
+    errored = true;
+
     va_list args;
 
     va_start(args, fmt);
     err_(fmt, args);
     va_end(args);
-
-    if (wid_console_window && !(wid_console_window->visible)) {
-        wid_toggle_hidden(wid_console_window);
-        wid_raise(wid_console_window);
-    }
 
     wid_unset_focus();
     wid_unset_focus_lock();
@@ -616,6 +614,8 @@ void Thing::die_ (const char *fmt, va_list args)
 
 void Thing::die (const char *fmt, ...)
 {
+    errored = true;
+
     verify(this);
     auto t = this;
     va_list args;
@@ -691,6 +691,8 @@ void Thing::err_ (const char *fmt, va_list args)
 
 void Thing::err (const char *fmt, ...)
 {
+    errored = true;
+
     verify(this);
     auto t = this;
     va_list args;
@@ -762,6 +764,8 @@ void Light::die_ (const char *fmt, va_list args)
 
 void Light::die (const char *fmt, ...)
 {
+    errored = true;
+
     verify(this);
     auto t = this;
     va_list args;
@@ -832,6 +836,8 @@ void Light::err_ (const char *fmt, va_list args)
 
 void Light::err (const char *fmt, ...)
 {
+    errored = true;
+
     verify(this);
     auto t = this;
     va_list args;

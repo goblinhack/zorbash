@@ -151,7 +151,8 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(name);
     auto tpp = tp_find(name);
     if (!tpp) {
-        DIE("could not find thing template [%s]", name.c_str());
+        ERR("could not find thing template [%s]", name.c_str());
+        return (in);
     }
 
     my.t->tp_id = tpp->id;
@@ -171,7 +172,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(my.t->last_mid_at);
     in >> bits(my.t->mid_at);
     in >> bits(my.t->tl);
-    in >> bits(my.t->id); if (!my.t->id) { DIE("loaded a thing with no ID"); }
+    in >> bits(my.t->id); if (!my.t->id) { ERR("loaded a thing with no ID"); }
     in >> bits(my.t->tile_curr);
     in >> bits(T); my.t->timestamp_next_frame = load(T);
     uint8_t dir; in >> dir; my.t->dir = dir;
@@ -428,7 +429,8 @@ Game::load (std::string file_to_load, class Game &target)
         }
     } else {
         /* this should NEVER happen */
-        DIE("LZO internal error - decompression failed: %d", r);
+        ERR("LZO internal error - decompression failed: %d", r);
+        return (false);
     }
 
 //    std::cout << "decompressed as ";

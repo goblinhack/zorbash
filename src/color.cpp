@@ -776,7 +776,7 @@ static void color_set (std::string name,
 
     auto result = color_map.insert(std::make_pair(name, *c));
     if (result.second == false) {
-        DIE("color insert name [%s] failed", name.c_str());
+        ERR("color insert name [%s] failed", name.c_str());
     }
 }
 
@@ -1551,7 +1551,8 @@ color string2color (const char **s)
     auto result = color_map.find(std::string(tmp));
 
     if (result == color_map.end()) {
-        DIE("unknown color [%s]", tmp);
+        ERR("unknown color [%s]", tmp);
+        return (WHITE);
     }
 
     return (result->second);
@@ -1587,7 +1588,8 @@ color string2color (const wchar_t **s)
     auto result = color_map.find(f);
 
     if (result == color_map.end()) {
-        DIE("unknown color [%s]", f.c_str());
+        ERR("unknown color [%s]", f.c_str());
+        return (WHITE);
     }
 
     return (result->second);
@@ -1620,7 +1622,8 @@ color string2color (std::string &s, int *len)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        DIE("unknown color [%s]", out.c_str());
+        ERR("unknown color [%s]", out.c_str());
+        return (WHITE);
     }
 
     return (result->second);
@@ -1649,7 +1652,7 @@ color string2color (std::string &s)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        DIE("unknown color [%s]", out.c_str());
+        ERR("unknown color [%s]", out.c_str());
     }
 
     return (result->second);
@@ -1690,7 +1693,8 @@ const char *string2colorname (const char **s)
     auto result = color_map.find(std::string(tmp));
 
     if (result == color_map.end()) {
-        DIE("unknown color [%s]", tmp);
+        ERR("unknown color [%s]", tmp);
+        return ("");
     }
 
     return (tmp);
@@ -1723,7 +1727,8 @@ std::string string2colorname (std::string &s)
     auto result = color_map.find(out);
 
     if (result == color_map.end()) {
-        DIE("unknown color [%s]", out.c_str());
+        ERR("unknown color [%s]", out.c_str());
+        return ("");
     }
 
     return (out);
@@ -1743,6 +1748,7 @@ color color_find (const char *s)
 
     if (result == color_map.end()) {
         ERR("unknown color [%s]", s);
+        return (WHITE);
     }
 
     return (result->second);

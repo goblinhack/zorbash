@@ -73,7 +73,7 @@ void Thing::animate (void)
                     auto otile = new_tile;
                     new_tile = tile_next(tiles, new_tile);
                     if (new_tile == otile) {
-                        DIE("wtf");
+                        ERR("anim loop");
                     }
                     continue;
                 }

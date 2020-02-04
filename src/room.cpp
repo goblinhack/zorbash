@@ -175,7 +175,7 @@ void Room::find_doors (void)
         !doors_left.size() &&
         !doors_right.size()) {
         dump();
-        DIE("room has no doors");
+        ERR("room has no doors");
     }
 }
 

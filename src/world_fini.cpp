@@ -72,6 +72,6 @@ void World::fini (void)
     // And finally the player
     //
     if (player) {
-        DIE("world fini: did not detach player");
+        ERR("world fini: did not detach player");
     }
 }
