@@ -38,7 +38,7 @@ Fontp ttf_new (std::string name, int pointSize, int style)
     TTF_Init();
     ttf = TTF_OpenFont(name.c_str(), pointSize);
     if (!ttf) {
-        ERR("cannot open font file %s: %s", name.c_str(), TTF_GetError())
+        ERR("cannot open font file %s: %s", name.c_str(), TTF_GetError());
     }
 
     f->foreground.r = 255;

@@ -391,7 +391,7 @@ void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 #ifdef ENABLE_ASSERT
 #define ASSERT(x)                                                             \
     if (!(x)) {                                                               \
-        ERR("Failed assert:" #x);                                             \
+        DIE("Failed assert:" #x);                                             \
     }
 #else
 #define ASSERT(x)

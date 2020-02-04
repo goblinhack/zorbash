@@ -79,7 +79,7 @@ void World::remove_thing (int x, int y, uint32_t id)
     }
 
     if (is_oob(x, y)) {
-        t->ERR("oob at (%d,%d) for remove of ID-%08X", x, y, id);
+        t->err("oob at (%d,%d) for remove of ID-%08X", x, y, id);
         return;
     }
 
