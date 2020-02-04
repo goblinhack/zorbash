@@ -460,14 +460,14 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
 
     tp_name = py_obj_attr_str(py_class, "name");
     if (!tp_name) {
-        DIE("%s, missing tp name", __FUNCTION__);
+        ERR("%s, missing tp name", __FUNCTION__);
     }
 
     DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);
 
     tp = tp_find(tp_name);
     if (!tp) {
-        DIE("%s, cannot find tp %s", __FUNCTION__, tp_name);
+        ERR("%s, cannot find tp %s", __FUNCTION__, tp_name);
     }
 
     Tilemap *tiles = nullptr;
@@ -550,13 +550,13 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->x_tiles;
     }
     if (!tiles) {
-        DIE("no tiles for [%s]", py_tile_name);
+        ERR("no tiles for [%s]", py_tile_name);
     }
 
     if (py_tile_name && *py_tile_name) {
         auto t = tile_find(std::string(py_tile_name));
         if (!t) {
-            DIE("%s, cannot find tile '%s' for tp %s",
+            ERR("%s, cannot find tile '%s' for tp %s",
                 __FUNCTION__, py_tile_name, tp_name);
         }
 

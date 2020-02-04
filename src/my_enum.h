@@ -77,7 +77,7 @@ enum_name enum_name ## _str2val (const char *val)               \
                 (uint32_t)(iter - arr)));                       \
                                                                 \
             if (result.second == false) {                       \
-                DIE("enum insert name [%s] failed", *iter);     \
+                ERR("enum insert name [%s] failed", *iter);     \
             }                                                   \
         }                                                       \
     }                                                           \
