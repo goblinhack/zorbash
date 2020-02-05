@@ -1244,7 +1244,7 @@ uint8_t config_gfx_vsync_enable (tokens_t *tokens, void *context)
     return (true);
 }
 
-static void config_gfx_vsync_update (void)
+void config_gfx_vsync_update (void)
 {_
     if (game->config.gfx_vsync_enable) {
         SDL_GL_SetSwapInterval(1);
@@ -1551,13 +1551,9 @@ static void sdl_screenshot_ (void)
 
 void sdl_flush_display (void)
 {
-    glcolor(GREEN);
     glEnable(GL_TEXTURE_2D);
-    glClearColor(0, 0, 0, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
     gl_enter_2d_mode();
     wid_display_all();
-    glBlendFunc(GL_ONE, GL_ZERO);
     if (game->config.gfx_inverted) {
         glLogicOp(GL_COPY_INVERTED);
         glEnable(GL_COLOR_LOGIC_OP);

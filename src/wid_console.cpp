@@ -191,10 +191,9 @@ static void wid_console_wid_create (void)
         point tl = {0, 0};
         point br = {w, h};
 
-        wid_console_container = wid_new_square_button(wid_console_window,
+        wid_console_container = wid_new_container(wid_console_window,
                                                       "wid console inner area");
         wid_set_pos(wid_console_container, tl, br);
-//        wid_set_shape_none(wid_console_container);
         wid_set_style(wid_console_container, WID_STYLE_DARK);
     }
 
@@ -233,7 +232,7 @@ static void wid_console_wid_create (void)
                 wid_set_show_cursor(child, true);
                 wid_set_name(child, "console input");
                 wid_set_focusable(child, 1);
-                wid_move_delta(child, 1, 0);
+                wid_move_delta(child, 2, 0);
                 wid_console_input_line = child;
 
                 Widp prefix = wid_new_container(wid_console_container, "");

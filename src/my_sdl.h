@@ -107,5 +107,6 @@ extern uint8_t config_gfx_zoom_set(tokensp, void *context);
 extern uint8_t config_gfx_vsync_enable(tokensp, void *context);
 extern uint8_t config_debug_mode(tokensp, void *context);
 extern uint8_t config_errored(tokensp, void *context);
+extern void config_gfx_vsync_update(void);
 extern void sdl_flush_display(void);
 #endif
