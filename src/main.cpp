@@ -638,6 +638,11 @@ int32_t main (int32_t argc, char *argv[])
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
 
+    //
+    // So console is faster
+    //
+    SDL_GL_SetSwapInterval(0);
+
     CON("INIT: Load early gfx tiles, text, UI etc...");
     gfx_init();
 
@@ -800,6 +805,8 @@ int32_t main (int32_t argc, char *argv[])
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     wid_toggle_hidden(wid_console_window);
+
+    config_gfx_vsync_update();
 
     sdl_loop();
 
