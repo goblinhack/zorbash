@@ -70,6 +70,13 @@ void player_tick (void)
         return;
     }
 
+    if (state[game->config.key_save]) {
+        MINICON("Saving the game");
+        CON("USERCFG: saving the game");
+        game->save_select();
+        return;
+    }
+
     if (state[game->config.key_pause]) {
         MINICON("Pausing the game");
         CON("USERCFG: pausing the game");
@@ -77,10 +84,8 @@ void player_tick (void)
         return;
     }
 
-    if (state[game->config.key_save]) {
-        MINICON("Saving the game");
-        CON("USERCFG: saving the game");
-        game->save_select();
+    if (state[game->config.key_help]) {
+        game->config_keyboard_select();
         return;
     }
 

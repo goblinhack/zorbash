@@ -30,7 +30,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_error.o 		\
     $(OBJDIR)/game_notice.o 		\
     $(OBJDIR)/game_fini.o 		\
-    $(OBJDIR)/game_help.o 		\
     $(OBJDIR)/game_init.o 		\
     $(OBJDIR)/game_load.o 		\
     $(OBJDIR)/game_log.o 		\

@@ -3575,8 +3575,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     break;
 
                 case '?':
-                case 'h':
-                    game->help_select();
+                    game->config_keyboard_select();
                     break;
 
                 case '`':

@@ -313,6 +313,7 @@ public:
     uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};
     uint32_t           key_zoom_out                 = {SDL_SCANCODE_X};
     uint32_t           key_pause                    = {SDL_SCANCODE_P};
+    uint32_t           key_help                     = {SDL_SCANCODE_H};
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
