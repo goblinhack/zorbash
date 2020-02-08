@@ -58,6 +58,10 @@ int joy_balls;
 SDL_Window *window; // Our window handle
 SDL_GLContext context; // Our opengl context handle
 
+SDL_Scancode sdl_grabbed_scancode;
+bool sdl_grab_next_key;
+on_sdl_key_grab_t on_sdl_key_grab;
+
 void sdl_fini (void)
 {_
 #ifdef ENABLE_ASCII_MOUSE
@@ -465,6 +469,20 @@ static void sdl_event (SDL_Event * event)
 
     switch (event->type) {
     case SDL_KEYDOWN:
+        if (sdl_grab_next_key) {
+            CON("Keyboard: grabbed 0xID-%08X = %s / %s",
+                event->key.keysym.sym,
+                SDL_GetKeyName(event->key.keysym.sym),
+                SDL_GetScancodeName(event->key.keysym.scancode));
+
+            sdl_grab_next_key = false;
+            sdl_grabbed_scancode = event->key.keysym.scancode;
+            if (on_sdl_key_grab) {
+                (*on_sdl_key_grab)(sdl_grabbed_scancode);
+            }
+            return;
+        }
+
         DBG("Keyboard: key pressed keycode 0xID-%08X = %s",
             event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));

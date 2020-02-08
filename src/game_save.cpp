@@ -269,6 +269,12 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.tile_pixel_width);
     out << bits(my.t.tile_pixel_height);
     out << bits(my.t.sdl_delay);
+    out << bits(my.t.key_up);
+    out << bits(my.t.key_down);
+    out << bits(my.t.key_left);
+    out << bits(my.t.key_right);
+    out << bits(my.t.key_attack);
+    out << bits(my.t.key_wait);
     return (out);
 }
 

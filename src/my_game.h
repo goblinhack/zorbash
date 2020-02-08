@@ -283,8 +283,8 @@ public:
     bool               gfx_vsync_enable             = true;
     bool               debug_mode                   = false;
     bool               arcade_mode                  = false;
-    uint32_t           sound_volume                 = {};
-    uint32_t           music_volume                 = {};
+    uint32_t           sound_volume                 = {MIX_MAX_VOLUME / 2};
+    uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
     bool               fullscreen                   = false;
     int32_t            video_pix_width              = {};
     int32_t            video_pix_height             = {};
@@ -302,6 +302,12 @@ public:
     double             tile_pixel_width             = {};
     double             tile_pixel_height            = {};
     uint32_t           sdl_delay                    = 1;
+    uint32_t           key_up                       = {SDL_SCANCODE_UP};
+    uint32_t           key_down                     = {SDL_SCANCODE_DOWN};
+    uint32_t           key_left                     = {SDL_SCANCODE_LEFT};
+    uint32_t           key_right                    = {SDL_SCANCODE_RIGHT};
+    uint32_t           key_attack                   = {SDL_SCANCODE_SPACE};
+    uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
@@ -322,6 +328,7 @@ public:
     void config_gfx_select(void);
     void config_other_select(void);
     void config_sound_select(void);
+    void config_keyboard_select(void);
     void config_top_select(void);
     void dead_select(void);
     void display(void);

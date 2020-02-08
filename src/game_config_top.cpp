@@ -27,6 +27,13 @@ uint8_t game_config_top_graphics (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
+uint8_t game_config_top_keyboard (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    game_config_top_destroy();
+    game->config_keyboard_select();
+    return (true);
+}
+
 uint8_t game_config_top_sound (Widp w, int32_t x, int32_t y, uint32_t button)
 {
     game_config_top_destroy();
@@ -75,6 +82,9 @@ uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case 's':
                         game_config_top_sound(nullptr, 0, 0, 0);
                         return (true);
+                    case 'k':
+                        game_config_top_keyboard(nullptr, 0, 0, 0);
+                        return (true);
                     case 'o':
                         game_config_top_other(nullptr, 0, 0, 0);
                         return (true);
@@ -121,9 +131,9 @@ void Game::config_top_select (void)
     game_status_fini();
 
     point tl = {ASCII_WIDTH / 2 - WID_POPUP_WIDTH_NORMAL / 2,
-                ASCII_HEIGHT / 2 - 5};
+                ASCII_HEIGHT / 2 - 4};
     point br = {ASCII_WIDTH / 2 + WID_POPUP_WIDTH_NORMAL / 2 - 1,
-                ASCII_HEIGHT / 2 + 10};
+                ASCII_HEIGHT / 2 + 14};
     auto width = br.x - tl.x - 2;
 
     game_config_top_window = new WidPopup(tl, br, nullptr, "");
@@ -136,7 +146,7 @@ void Game::config_top_select (void)
     int y_at = 0;
     {
         auto p = game_config_top_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "New Game");
+        auto w = wid_new_square_button(p, "graphics");
 
         point tl = {0, y_at};
         point br = {width, y_at + 2};
@@ -148,7 +158,7 @@ void Game::config_top_select (void)
     y_at += 3;
     {
         auto p = game_config_top_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Load Game");
+        auto w = wid_new_square_button(p, "sound");
 
         point tl = {0, y_at};
         point br = {width, y_at + 2};
@@ -156,6 +166,18 @@ void Game::config_top_select (void)
         wid_set_on_mouse_up(w, game_config_top_sound);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$S%%fg=reset$ound and music");
+    }
+    y_at += 3;
+    {
+        auto p = game_config_top_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "keyboard");
+
+        point tl = {0, y_at};
+        point br = {width, y_at + 2};
+        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_on_mouse_up(w, game_config_top_keyboard);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, "%%fg=white$K%%fg=reset$eyboard");
     }
     y_at += 3;
     {
