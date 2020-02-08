@@ -323,6 +323,12 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.tile_pixel_width);
     in >> bits(my.t.tile_pixel_height);
     in >> bits(my.t.sdl_delay);
+    in >> bits(my.t.key_up);
+    in >> bits(my.t.key_down);
+    in >> bits(my.t.key_left);
+    in >> bits(my.t.key_right);
+    in >> bits(my.t.key_attack);
+    in >> bits(my.t.key_wait);
     return (in);
 }
 

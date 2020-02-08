@@ -23,13 +23,16 @@ void player_tick (void)
         return;
     }
 
+    int delay = 100;
+#if 0
     //
     // Always move
     //
     if ((time_get_time_ms_cached() -
-            player->get_timestamp_move_begin()) < 100) {
+            player->get_timestamp_move_begin()) < delay) {
         return;
     }
+#endif
 
     uint8_t right  = 0;
     uint8_t left   = 0;
@@ -40,12 +43,12 @@ void player_tick (void)
 
     const uint8_t *state = SDL_GetKeyboardState(0);
 
-    right  = state[SDL_SCANCODE_RIGHT] ? 1 : 0;
-    left   = state[SDL_SCANCODE_LEFT] ? 1 : 0;
-    up     = state[SDL_SCANCODE_UP] ? 1 : 0;
-    down   = state[SDL_SCANCODE_DOWN] ? 1 : 0;
-    attack = state[SDL_SCANCODE_SPACE] ? 1 : 0;
-    idle   = state[SDL_SCANCODE_PERIOD] ? 1 : 0;
+    right  = state[game->config.key_right] ? 1 : 0;
+    left   = state[game->config.key_left] ? 1 : 0;
+    up     = state[game->config.key_up] ? 1 : 0;
+    down   = state[game->config.key_down] ? 1 : 0;
+    attack = state[game->config.key_attack] ? 1 : 0;
+    idle   = state[game->config.key_wait] ? 1 : 0;
 
     bool key_pressed = false;
     static uint32_t last_key_pressed_when;
@@ -53,7 +56,7 @@ void player_tick (void)
         last_key_pressed_when = time_get_time_ms_cached() - 1000;
     }
 
-    if ((time_get_time_ms_cached() - last_key_pressed_when) > 100) {
+    if ((time_get_time_ms_cached() - last_key_pressed_when) > (uint)delay) {
         if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
             up = true;
         }
