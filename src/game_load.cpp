@@ -334,6 +334,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.key_zoom_in);
     in >> bits(my.t.key_zoom_out);
     in >> bits(my.t.key_pause);
+    in >> bits(my.t.key_help);
     return (in);
 }
 

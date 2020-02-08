@@ -31,7 +31,13 @@ uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32_t butt
     CON("USERCFG: reload config");
     game->load_config();
     game_config_keyboard_destroy();
-    game->config_top_select();
+    if (game->started) {
+        //
+        // Back to the game
+        //
+    } else {
+        game->config_top_select();
+    }
     return (true);
 }
 
@@ -40,14 +46,26 @@ uint8_t game_config_keyboard_save (Widp w, int32_t x, int32_t y, uint32_t button
     CON("USERCFG: save config");
     game->save_config();
     game_config_keyboard_destroy();
-    game->config_top_select();
+    if (game->started) {
+        //
+        // Back to the game
+        //
+    } else {
+        game->config_top_select();
+    }
     return (true);
 }
 
 uint8_t game_config_keyboard_back (Widp w, int32_t x, int32_t y, uint32_t button)
 {
     game_config_keyboard_destroy();
-    game->config_top_select();
+    if (game->started) {
+        //
+        // Back to the game
+        //
+    } else {
+        game->config_top_select();
+    }
     return (true);
 }
 
@@ -114,6 +132,12 @@ static void game_config_key_zoom_out_set (SDL_Scancode code)
 static void game_config_key_pause_set (SDL_Scancode code)
 {
     game->config.key_pause = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_help_set (SDL_Scancode code)
+{
+    game->config.key_help = code;
     game->config_keyboard_select();
 }
 
@@ -200,6 +224,13 @@ uint8_t game_config_key_pause (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
+uint8_t game_config_key_help (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_help_set;
+    return (true);
+}
+
 uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
 {
     switch (key->mod) {
@@ -267,7 +298,8 @@ void Game::config_keyboard_select (void)
     point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ITEMBAR_TL_Y - 2};
     auto width = br.x - tl.x;
 
-    game_config_keyboard_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
+    game_config_keyboard_window =
+                    new WidPopup(tl, br, nullptr, "ui_popup_widest");
     {
         Widp w = game_config_keyboard_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_keyboard_key_up);
@@ -277,13 +309,13 @@ void Game::config_keyboard_select (void)
     int y_at = 0;
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "configuration");
+        auto w = wid_new_square_button(p, "The keys of mighty power");
 
         point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point br = {width - 2, y_at + 2};
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "Configuration");
+        wid_set_text(w, "The keys of mighty power");
     }
 
     y_at = 3;
@@ -292,11 +324,15 @@ void Game::config_keyboard_select (void)
         auto w = wid_new_square_button(p, "Back");
 
         point tl = {1, y_at};
-        point br = {6, y_at + 2};
+        point br = {8, y_at + 2};
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_keyboard_back);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "Back");
+        if (started) {
+            wid_set_text(w, "Resume");
+        } else {
+            wid_set_text(w, "Back");
+        }
     }
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -549,7 +585,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "zoom_in game");
+        wid_set_text(w, "Zoom in");
     }
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -576,7 +612,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "zoom_out game");
+        wid_set_text(w, "Zoom out");
     }
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -603,7 +639,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "pause game");
+        wid_set_text(w, "Pause game");
     }
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -616,6 +652,33 @@ void Game::config_keyboard_select (void)
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_pause));
         wid_set_on_mouse_up(w, game_config_key_pause);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // help
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "help");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "This help");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_help));
+        wid_set_on_mouse_up(w, game_config_key_help);
     }
 
     wid_update(game_config_keyboard_window->wid_text_area->wid_text_area);
