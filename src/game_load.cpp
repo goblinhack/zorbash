@@ -329,6 +329,11 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.key_right);
     in >> bits(my.t.key_attack);
     in >> bits(my.t.key_wait);
+    in >> bits(my.t.key_load);
+    in >> bits(my.t.key_save);
+    in >> bits(my.t.key_zoom_in);
+    in >> bits(my.t.key_zoom_out);
+    in >> bits(my.t.key_pause);
     return (in);
 }
 
@@ -412,7 +417,7 @@ Game::load (std::string file_to_load, class Game &target)
     auto vec = read_lzo_file(file_to_load, &uncompressed_len);
     if (vec.size() <= 0) {
         if (!game_load_headers_only) {
-            wid_error("load error, empty file?");
+            game_error("load error, empty file?");
         }
         return (false);
     }
@@ -455,7 +460,7 @@ Game::load (std::string file_to_load, class Game &target)
 //    this->dump("", std::cout);
     if (game_load_error != "") {
         if (!game_load_headers_only) {
-            wid_error("load error, " + game_load_error);
+            game_error("load error, " + game_load_error);
         }
         return (false);
     }

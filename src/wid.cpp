@@ -3570,23 +3570,6 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                     MINICON("USERCFG: screenshot taken");
                     break;
 
-                case 'z':
-                    MINICON("Zoom in");
-                    CON("USERCFG: zoom in");
-                    config_gfx_zoom_in();
-                    break;
-
-                case 's':
-                    MINICON("Saving the game");
-                    CON("USERCFG: saving the game");
-                    game->save_select();
-                    CON("USERCFG: saved the game");
-                    break;
-
-                case 'l':
-                    game->load_select();
-                    break;
-
                 case 'q':
                     game->quit_select();
                     break;
@@ -3594,12 +3577,6 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
                 case '?':
                 case 'h':
                     game->help_select();
-                    break;
-
-                case 'p':
-                    MINICON("Pausing the game");
-                    CON("USERCFG: pausing the game");
-                    game->pause_select();
                     break;
 
                 case '`':
@@ -3659,11 +3636,6 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
         case KMOD_LSHIFT:
         case KMOD_RSHIFT:
             switch ((int32_t)key->sym) {
-            case 'z':
-                MINICON("Zoom out");
-                CON("USERCFG: zoom out");
-                config_gfx_zoom_out();
-                break;
             }
     }
 

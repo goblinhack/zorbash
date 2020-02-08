@@ -39,7 +39,7 @@ void player_tick (void)
     uint8_t up     = 0;
     uint8_t down   = 0;
     uint8_t attack = 0;
-    uint8_t idle   = 0;
+    uint8_t wait   = 0;
 
     const uint8_t *state = SDL_GetKeyboardState(0);
 
@@ -48,7 +48,41 @@ void player_tick (void)
     up     = state[game->config.key_up] ? 1 : 0;
     down   = state[game->config.key_down] ? 1 : 0;
     attack = state[game->config.key_attack] ? 1 : 0;
-    idle   = state[game->config.key_wait] ? 1 : 0;
+    wait   = state[game->config.key_wait] ? 1 : 0;
+
+    if (state[game->config.key_zoom_in]) {
+        MINICON("Zoom in");
+        CON("USERCFG: zoom in");
+        config_gfx_zoom_in();
+        return;
+    }
+
+    if (state[game->config.key_zoom_out]) {
+        MINICON("Zoom out");
+        CON("USERCFG: zoom out");
+        config_gfx_zoom_out();
+        return;
+    }
+
+    if (state[game->config.key_load]) {
+        CON("USERCFG: loading game");
+        game->load_select();
+        return;
+    }
+
+    if (state[game->config.key_pause]) {
+        MINICON("Pausing the game");
+        CON("USERCFG: pausing the game");
+        game->pause_select();
+        return;
+    }
+
+    if (state[game->config.key_save]) {
+        MINICON("Saving the game");
+        CON("USERCFG: saving the game");
+        game->save_select();
+        return;
+    }
 
     bool key_pressed = false;
     static uint32_t last_key_pressed_when;
@@ -128,13 +162,13 @@ void player_tick (void)
             dy = d;
         }
 
-        if (up || down || left || right || attack || idle) {
+        if (up || down || left || right || attack || wait) {
             key_pressed = true;
         }
 
         if (key_pressed) {
             fpoint future_pos = player->mid_at + fpoint(dx, dy);
-            player->move(future_pos, up, down, left, right, attack, idle);
+            player->move(future_pos, up, down, left, right, attack, wait);
             last_key_pressed_when = time_get_time_ms_cached();
         }
     }
