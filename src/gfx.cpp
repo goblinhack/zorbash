@@ -165,6 +165,14 @@ static void gfx_init_ui_box (void)
 
     {
         std::initializer_list<std::string> tiles = {
+            "ui_popup_notice",
+        };
+        std::vector<std::string> arr(tiles);
+        tile_load_arr("data/gfx/ui_popup_notice.tga", "ui_popup_notice", 80, 34, arr);
+    }
+
+    {
+        std::initializer_list<std::string> tiles = {
             "ui_popup_wide",
         };
         std::vector<std::string> arr(tiles);

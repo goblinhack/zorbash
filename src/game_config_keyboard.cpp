@@ -8,6 +8,7 @@
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
 #include "my_ascii.h"
+#include "my_game_notice.h"
 
 static WidPopup *game_config_keyboard_window;
 
@@ -86,45 +87,116 @@ static void game_config_key_wait_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
+static void game_config_key_save_set (SDL_Scancode code)
+{
+    game->config.key_save = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_load_set (SDL_Scancode code)
+{
+    game->config.key_load = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_zoom_in_set (SDL_Scancode code)
+{
+    game->config.key_zoom_in = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_zoom_out_set (SDL_Scancode code)
+{
+    game->config.key_zoom_out = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_pause_set (SDL_Scancode code)
+{
+    game->config.key_pause = code;
+    game->config_keyboard_select();
+}
+
+static void grab_key (void) 
+{
+    game_notice("Press any key");
+    sdl_grab_next_key = true;
+}
+
 uint8_t game_config_key_left (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    sdl_grab_next_key = true;
+    grab_key();
     on_sdl_key_grab = game_config_key_left_set;
     return (true);
 }
 
 uint8_t game_config_key_right (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    sdl_grab_next_key = true;
+    grab_key();
     on_sdl_key_grab = game_config_key_right_set;
     return (true);
 }
 
 uint8_t game_config_key_up (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    sdl_grab_next_key = true;
+    grab_key();
     on_sdl_key_grab = game_config_key_up_set;
     return (true);
 }
 
 uint8_t game_config_key_down (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    sdl_grab_next_key = true;
+    grab_key();
     on_sdl_key_grab = game_config_key_down_set;
     return (true);
 }
 
 uint8_t game_config_key_attack (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    sdl_grab_next_key = true;
+    grab_key();
     on_sdl_key_grab = game_config_key_attack_set;
     return (true);
 }
 
 uint8_t game_config_key_wait (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    sdl_grab_next_key = true;
+    grab_key();
     on_sdl_key_grab = game_config_key_wait_set;
+    return (true);
+}
+
+uint8_t game_config_key_save (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_save_set;
+    return (true);
+}
+
+uint8_t game_config_key_load (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_load_set;
+    return (true);
+}
+
+uint8_t game_config_key_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_zoom_in_set;
+    return (true);
+}
+
+uint8_t game_config_key_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_zoom_out_set;
+    return (true);
+}
+
+uint8_t game_config_key_pause (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_pause_set;
     return (true);
 }
 
@@ -183,6 +255,8 @@ uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_KEYSYM *key)
 
 void Game::config_keyboard_select (void)
 {_
+    game_notice_destroy();
+
     if (game_config_keyboard_window) {
         game_config_keyboard_destroy();
     }
@@ -407,6 +481,141 @@ void Game::config_keyboard_select (void)
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_wait));
         wid_set_on_mouse_up(w, game_config_key_wait);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // save
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "save");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Save game");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_save));
+        wid_set_on_mouse_up(w, game_config_key_save);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // load
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "load");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Load game");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_load));
+        wid_set_on_mouse_up(w, game_config_key_load);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // zoom_in
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "zoom_in");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "zoom_in game");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_zoom_in));
+        wid_set_on_mouse_up(w, game_config_key_zoom_in);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // zoom_out
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "zoom_out");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "zoom_out game");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_zoom_out));
+        wid_set_on_mouse_up(w, game_config_key_zoom_out);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // pause
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "pause");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "pause game");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_pause));
+        wid_set_on_mouse_up(w, game_config_key_pause);
     }
 
     wid_update(game_config_keyboard_window->wid_text_area->wid_text_area);

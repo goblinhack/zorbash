@@ -308,6 +308,11 @@ public:
     uint32_t           key_right                    = {SDL_SCANCODE_RIGHT};
     uint32_t           key_attack                   = {SDL_SCANCODE_SPACE};
     uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
+    uint32_t           key_load                     = {SDL_SCANCODE_F11};
+    uint32_t           key_save                     = {SDL_SCANCODE_F12};
+    uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};
+    uint32_t           key_zoom_out                 = {SDL_SCANCODE_X};
+    uint32_t           key_pause                    = {SDL_SCANCODE_P};
 
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
