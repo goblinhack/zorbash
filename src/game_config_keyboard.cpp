@@ -15,7 +15,7 @@ static WidPopup *game_config_keyboard_window;
 //
 // Check for saving keys to config can fit
 //
-static_assert(sizeof(SDL_Scancode) <= sizeof(game->config.key_left));
+static_assert(sizeof(SDL_Scancode) <= sizeof(game->config.key_move_left));
 
 static void game_config_keyboard_destroy (void)
 {
@@ -69,27 +69,51 @@ uint8_t game_config_keyboard_back (Widp w, int32_t x, int32_t y, uint32_t button
     return (true);
 }
 
-static void game_config_key_left_set (SDL_Scancode code)
+static void game_config_key_move_left_set (SDL_Scancode code)
 {
-    game->config.key_left = code;
+    game->config.key_move_left = code;
     game->config_keyboard_select();
 }
 
-static void game_config_key_right_set (SDL_Scancode code)
+static void game_config_key_move_right_set (SDL_Scancode code)
 {
-    game->config.key_right = code;
+    game->config.key_move_right = code;
     game->config_keyboard_select();
 }
 
-static void game_config_key_up_set (SDL_Scancode code)
+static void game_config_key_move_up_set (SDL_Scancode code)
 {
-    game->config.key_up = code;
+    game->config.key_move_up = code;
     game->config_keyboard_select();
 }
 
-static void game_config_key_down_set (SDL_Scancode code)
+static void game_config_key_move_down_set (SDL_Scancode code)
 {
-    game->config.key_down = code;
+    game->config.key_move_down = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_map_left_set (SDL_Scancode code)
+{
+    game->config.key_map_left = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_map_right_set (SDL_Scancode code)
+{
+    game->config.key_map_right = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_map_up_set (SDL_Scancode code)
+{
+    game->config.key_map_up = code;
+    game->config_keyboard_select();
+}
+
+static void game_config_key_map_down_set (SDL_Scancode code)
+{
+    game->config.key_map_down = code;
     game->config_keyboard_select();
 }
 
@@ -147,31 +171,89 @@ static void grab_key (void)
     sdl_grab_next_key = true;
 }
 
-uint8_t game_config_key_left (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_keyboard_profile_arrow_keys (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    grab_key();
-    on_sdl_key_grab = game_config_key_left_set;
+    game->config.key_move_up    = SDL_SCANCODE_UP;
+    game->config.key_move_left  = SDL_SCANCODE_LEFT;
+    game->config.key_move_down  = SDL_SCANCODE_DOWN;
+    game->config.key_move_right = SDL_SCANCODE_RIGHT;
+    game->config.key_map_up     = SDL_SCANCODE_W;
+    game->config.key_map_left   = SDL_SCANCODE_A;
+    game->config.key_map_down   = SDL_SCANCODE_S;
+    game->config.key_map_right  = SDL_SCANCODE_D;
+    game->config_keyboard_select();
+
     return (true);
 }
 
-uint8_t game_config_key_right (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_keyboard_profile_wasd (Widp w, int32_t x, int32_t y, uint32_t button)
 {
-    grab_key();
-    on_sdl_key_grab = game_config_key_right_set;
+    game->config.key_move_up    = SDL_SCANCODE_W;
+    game->config.key_move_left  = SDL_SCANCODE_A;
+    game->config.key_move_down  = SDL_SCANCODE_S;
+    game->config.key_move_right = SDL_SCANCODE_D;
+    game->config.key_map_up     = SDL_SCANCODE_UP;
+    game->config.key_map_left   = SDL_SCANCODE_LEFT;
+    game->config.key_map_down   = SDL_SCANCODE_DOWN;
+    game->config.key_map_right  = SDL_SCANCODE_RIGHT;
+    game->config_keyboard_select();
+
     return (true);
 }
 
-uint8_t game_config_key_up (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_key_move_left (Widp w, int32_t x, int32_t y, uint32_t button)
 {
     grab_key();
-    on_sdl_key_grab = game_config_key_up_set;
+    on_sdl_key_grab = game_config_key_move_left_set;
     return (true);
 }
 
-uint8_t game_config_key_down (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_key_move_right (Widp w, int32_t x, int32_t y, uint32_t button)
 {
     grab_key();
-    on_sdl_key_grab = game_config_key_down_set;
+    on_sdl_key_grab = game_config_key_move_right_set;
+    return (true);
+}
+
+uint8_t game_config_key_move_up (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_move_up_set;
+    return (true);
+}
+
+uint8_t game_config_key_move_down (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_move_down_set;
+    return (true);
+}
+
+uint8_t game_config_key_map_left (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_map_left_set;
+    return (true);
+}
+
+uint8_t game_config_key_map_right (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_map_right_set;
+    return (true);
+}
+
+uint8_t game_config_key_map_up (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_map_up_set;
+    return (true);
+}
+
+uint8_t game_config_key_map_down (Widp w, int32_t x, int32_t y, uint32_t button)
+{
+    grab_key();
+    on_sdl_key_grab = game_config_key_map_down_set;
     return (true);
 }
 
@@ -356,62 +438,42 @@ void Game::config_keyboard_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Cancel");
     }
-    ///////////////////////////////////////////////////////////////////////
-    // left
-    ///////////////////////////////////////////////////////////////////////
-    y_at += 4;
-    {
-        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Move left");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Move left");
-    }
-    {
-        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "value");
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
-        wid_set_style(w, WID_STYLE_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_left));
-        wid_set_on_mouse_up(w, game_config_key_left);
-    }
-    ///////////////////////////////////////////////////////////////////////
-    // right
-    ///////////////////////////////////////////////////////////////////////
     y_at += 3;
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Move right");
+        auto w = wid_new_square_button(p, "");
 
         point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
-        wid_set_shape_none(w);
+        point br = {46, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_on_mouse_up(w, game_config_keyboard_profile_wasd);
         wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Move right");
+        wid_set_text(w, "Use W,A,S,D for moving, arrow keys for map");
     }
+    y_at += 3;
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "value");
+        auto w = wid_new_square_button(p, "");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = {0, y_at};
+        point br = {46, y_at + 2};
         wid_set_style(w, WID_STYLE_DARK);
+        wid_set_on_mouse_up(w, game_config_keyboard_profile_arrow_keys);
         wid_set_pos(w, tl, br);
-        wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_right));
-        wid_set_on_mouse_up(w, game_config_key_right);
+        wid_set_text(w, "Use arrow keys for moving, W,A,S,D for map");
     }
+
     ///////////////////////////////////////////////////////////////////////
-    // up
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////
+    // Move up
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
     {
@@ -434,11 +496,38 @@ void Game::config_keyboard_select (void)
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_up));
-        wid_set_on_mouse_up(w, game_config_key_up);
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_move_up));
+        wid_set_on_mouse_up(w, game_config_key_move_up);
     }
     ///////////////////////////////////////////////////////////////////////
-    // down
+    // Move left
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Move left");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Move left");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_move_left));
+        wid_set_on_mouse_up(w, game_config_key_move_left);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // Move down
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
     {
@@ -461,9 +550,154 @@ void Game::config_keyboard_select (void)
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_down));
-        wid_set_on_mouse_up(w, game_config_key_down);
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_move_down));
+        wid_set_on_mouse_up(w, game_config_key_move_down);
     }
+    ///////////////////////////////////////////////////////////////////////
+    // Move right
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Move right");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Move right");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_move_right));
+        wid_set_on_mouse_up(w, game_config_key_move_right);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////
+    // Map up
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Map up");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Map up");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_map_up));
+        wid_set_on_mouse_up(w, game_config_key_map_up);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // Map left
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Map left");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Map left");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_map_left));
+        wid_set_on_mouse_up(w, game_config_key_map_left);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // Map down
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Map down");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Map down");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_map_down));
+        wid_set_on_mouse_up(w, game_config_key_map_down);
+    }
+    ///////////////////////////////////////////////////////////////////////
+    // Map right
+    ///////////////////////////////////////////////////////////////////////
+    y_at += 3;
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Map right");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Map right");
+    }
+    {
+        auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "value");
+
+        point tl = {width / 2 + 8, y_at};
+        point br = {width / 2 + 22, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w,
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_map_right));
+        wid_set_on_mouse_up(w, game_config_key_map_right);
+    }
+
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////////
     // attack
     ///////////////////////////////////////////////////////////////////////
@@ -477,7 +711,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Move attack");
+        wid_set_text(w, "Attack");
     }
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -504,7 +738,7 @@ void Game::config_keyboard_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Move wait");
+        wid_set_text(w, "Wait / pass time");
     }
     {
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
@@ -518,6 +752,11 @@ void Game::config_keyboard_select (void)
           SDL_GetScancodeName((SDL_Scancode)game->config.key_wait));
         wid_set_on_mouse_up(w, game_config_key_wait);
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////////
     // save
     ///////////////////////////////////////////////////////////////////////
@@ -572,6 +811,11 @@ void Game::config_keyboard_select (void)
           SDL_GetScancodeName((SDL_Scancode)game->config.key_load));
         wid_set_on_mouse_up(w, game_config_key_load);
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////////
     // zoom_in
     ///////////////////////////////////////////////////////////////////////
@@ -626,6 +870,11 @@ void Game::config_keyboard_select (void)
           SDL_GetScancodeName((SDL_Scancode)game->config.key_zoom_out));
         wid_set_on_mouse_up(w, game_config_key_zoom_out);
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    y_at++;
+    ///////////////////////////////////////////////////////////////////////
+
     ///////////////////////////////////////////////////////////////////////
     // pause
     ///////////////////////////////////////////////////////////////////////
