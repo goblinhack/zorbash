@@ -43,49 +43,79 @@ void player_tick (void)
 
     const uint8_t *state = SDL_GetKeyboardState(0);
 
-    right  = state[game->config.key_right] ? 1 : 0;
-    left   = state[game->config.key_left] ? 1 : 0;
-    up     = state[game->config.key_up] ? 1 : 0;
-    down   = state[game->config.key_down] ? 1 : 0;
+    right  = state[game->config.key_move_right] ? 1 : 0;
+    left   = state[game->config.key_move_left] ? 1 : 0;
+    up     = state[game->config.key_move_up] ? 1 : 0;
+    down   = state[game->config.key_move_down] ? 1 : 0;
     attack = state[game->config.key_attack] ? 1 : 0;
     wait   = state[game->config.key_wait] ? 1 : 0;
+    bool some_key_event_was_pressed = false;
 
-    if (state[game->config.key_zoom_in]) {
-        MINICON("Zoom in");
-        CON("USERCFG: zoom in");
-        config_gfx_zoom_in();
-        return;
+    if (state[game->config.key_map_left]) {
+        world->map_wanted_at.x--;
+        world->cursor_needs_update = true;
+        world->cursor_found = false;
+        world->map_follow_player = false;
+        some_key_event_was_pressed = true;
+    }
+
+    if (state[game->config.key_map_right]) {
+        world->map_wanted_at.x++;
+        world->cursor_needs_update = true;
+        world->cursor_found = false;
+        world->map_follow_player = false;
+        some_key_event_was_pressed = true;
+    }
+
+    if (state[game->config.key_map_up]) {
+        world->map_wanted_at.y--;
+        world->cursor_needs_update = true;
+        world->cursor_found = false;
+        world->map_follow_player = false;
+        some_key_event_was_pressed = true;
+    }
+
+    if (state[game->config.key_map_down]) {
+        world->map_wanted_at.y++;
+        world->cursor_needs_update = true;
+        world->cursor_found = false;
+        world->map_follow_player = false;
+        some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_zoom_out]) {
         MINICON("Zoom out");
         CON("USERCFG: zoom out");
         config_gfx_zoom_out();
-        return;
+        some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_load]) {
         CON("USERCFG: loading game");
         game->load_select();
-        return;
+        some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_save]) {
         MINICON("Saving the game");
         CON("USERCFG: saving the game");
         game->save_select();
-        return;
+        some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_pause]) {
         MINICON("Pausing the game");
         CON("USERCFG: pausing the game");
         game->pause_select();
-        return;
+        some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_help]) {
         game->config_keyboard_select();
+        some_key_event_was_pressed = true;
+    }
+
+    if (some_key_event_was_pressed) {
         return;
     }
 
