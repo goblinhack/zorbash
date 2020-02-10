@@ -149,3 +149,9 @@ void Thing::cursor_path_grab (void)
         cursor_path_pop_next_and_move();
     }
 }
+
+void Thing::cursor_path_stop (void)
+{
+    new_monst();
+    monst->move_path.clear();
+}
