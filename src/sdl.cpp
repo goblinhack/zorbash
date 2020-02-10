@@ -470,7 +470,7 @@ static void sdl_event (SDL_Event * event)
     switch (event->type) {
     case SDL_KEYDOWN:
         if (sdl_grab_next_key) {
-            CON("Keyboard: grabbed 0xID-%08X = %s / %s",
+            CON("Keyboard: grabbed 0x%08X = %s / %s",
                 event->key.keysym.sym,
                 SDL_GetKeyName(event->key.keysym.sym),
                 SDL_GetScancodeName(event->key.keysym.scancode));
@@ -483,7 +483,7 @@ static void sdl_event (SDL_Event * event)
             return;
         }
 
-        DBG("Keyboard: key pressed keycode 0xID-%08X = %s",
+        DBG("Keyboard: key pressed keycode 0x%08X = %s",
             event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 
@@ -511,7 +511,7 @@ static void sdl_event (SDL_Event * event)
         break;
 
     case SDL_KEYUP:
-        DBG("Keyboard: key released keycode 0xID-%08X = %s",
+        DBG("Keyboard: key released keycode 0x%08X = %s",
             event->key.keysym.sym,
             SDL_GetKeyName(event->key.keysym.sym));
 
