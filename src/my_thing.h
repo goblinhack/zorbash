@@ -121,6 +121,7 @@ typedef struct Monst_ {
     int          stats_health = {};
     int          stats_health_max = {};
     std::list<uint32_t> carrying;
+    std::vector<point>  move_path;
     std::string  msg;                        // Text that floats on screen
     timestamp_t  timestamp_ai_next {};
     timestamp_t  timestamp_born {};
