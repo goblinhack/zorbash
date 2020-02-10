@@ -2016,7 +2016,6 @@ Widp wid_new_window (std::string name)
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_color(w, WID_COLOR_BG, WHITE);
     wid_set_color(w, WID_COLOR_TEXT, WHITE);
-    wid_set_movable(w, true);
     wid_set_shape_square(w);
 
     return (w);
@@ -2063,7 +2062,6 @@ Widp wid_new_square_window (std::string name)
     WID_DBG(w, "%s", __FUNCTION__);
 
     wid_set_mode(w, WID_MODE_NORMAL);
-    wid_set_movable(w, true);
     wid_set_name(w, name);
     wid_set_shape_square(w);
     wid_set_color(w, WID_COLOR_BG, WHITE);
@@ -3518,10 +3516,6 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
 //
 static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 {_
-    if (game_key_down(key)) {
-        return (true);
-    }
-
     Widp w {};
 
     w = wid_get_top_parent(wid_console_input_line);
@@ -4671,9 +4665,6 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
 
     w = wid_mouse_down_handler(x, y);
     if (!w) {
-        if (game_mouse_down(x, y, button)) {
-            return;
-        }
         return;
     }
 
@@ -4682,7 +4673,6 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
     //
     if ((w->on_mouse_down && (w->on_mouse_down)(w, x, y, button)) ||
         wid_get_movable(w)) {
-        //CON("grabbed by %s",wid_name(w).c_str());
 
         wid_set_focus(w);
         wid_set_mode(w, WID_MODE_ACTIVE);
@@ -4703,6 +4693,10 @@ void wid_mouse_down (uint32_t button, int32_t x, int32_t y)
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
         wid_mouse_motion_begin(w, x, y);
+        return;
+    }
+
+    if (game_mouse_down(x, y, button)) {
         return;
     }
 }
@@ -4728,6 +4722,11 @@ void wid_mouse_up (uint32_t button, int32_t x, int32_t y)
 
         wid_set_mode(w, WID_MODE_ACTIVE);
         wid_raise(w);
+        return;
+    }
+
+    if (game_mouse_up(x, y, button)) {
+        return;
     }
 }
 

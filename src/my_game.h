@@ -430,12 +430,10 @@ extern class Game *game;
 extern class World *world;
 extern bool thing_map_black_and_white;
 
-uint8_t game_mouse_motion(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
-void game_mouse_over(int32_t x, int32_t y, int32_t wheelx, int32_t wheely);
-uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
-uint8_t game_key_down(const struct SDL_KEYSYM *key);
+extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
+extern uint8_t game_mouse_up(int32_t x, int32_t y, uint32_t button);
 extern void game_main_menu_hide(void);
-void player_tick(void);
+extern void player_tick(void);
 
 //
 // Find an existing thing.
