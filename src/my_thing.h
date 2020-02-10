@@ -733,7 +733,7 @@ public:
     int is_rrr36(void);
     int is_rrr37(void);
     int is_rrr38(void);
-    int is_rrr39(void);
+    int is_cursor_path(void);
     int is_rrr4(void);
     int is_blood_splatter(void);
     int is_no_tile(void);

@@ -164,6 +164,16 @@ public:
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_obstacle_things_at(int x, int y, std::vector<Thingp> &);
 
+    //
+    // Things that move around and things that do not, but are interesting,
+    // like food
+    //
+    #define FOR_ALL_CURSOR_PATH_THINGS(world, t, x, y)                    \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \
+        world->get_all_cursor_path_things_at(x, y, JOIN1(tmp, __LINE__)); \
+        for (auto t : JOIN1(tmp, __LINE__))
+    void get_all_cursor_path_things_at(int x, int y, std::vector<Thingp> &);
+
     void clear(void);
     bool is_anything_at(const int x, const int y);
     bool is_anything_at(const point &p);

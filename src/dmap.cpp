@@ -12,8 +12,8 @@ void dmap_print (const Dmap *d, point at, point start, point end)
     uint8_t x;
     uint8_t y;
 
-#if 0
-    log("start %d,%d end %d %d at %d,%d\n",
+#if 1
+    LOG("DMAP: start %d,%d end %d %d at %d,%d\n",
         start.x, start.y, end.x, end.y, at.x, at.y);
 #endif
     for (y = start.y; y < end.y; y++) {
@@ -151,9 +151,9 @@ void dmap_process (Dmap *D, point tl, point br)
 
                 e = &getref(D->val, x  , y);
 
-                /*
-                 * Avoid diagonal moves.
-                 */
+                //
+                // Avoid diagonal moves.
+                //
                 if ((get(D->val, x-1, y) == DMAP_IS_WALL) ||
                     (get(D->val, x, y-1) == DMAP_IS_WALL)) {
                     a = DMAP_IS_WALL;
@@ -237,6 +237,165 @@ void dmap_process (Dmap *D)
     dmap_process(D, point(0, 0), point(MAP_WIDTH, MAP_HEIGHT));
 }
 
+void dmap_process_allow_diagonals (Dmap *D, point tl, point br)
+{
+    uint8_t x;
+    uint8_t y;
+    uint8_t a;
+    uint8_t b;
+    uint8_t c;
+    uint8_t d;
+    uint8_t *e;
+    uint8_t f;
+    uint8_t g;
+    uint8_t h;
+    uint8_t i;
+    uint8_t lowest;
+    uint8_t changed;
+    static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig;
+    static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> orig_valid;
+    static std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> valid;
+
+    int minx, miny, maxx, maxy;
+    if (tl.x < br.x) {
+        minx = tl.x;
+        maxx = br.x;
+    } else {
+        minx = br.x;
+        maxx = tl.x;
+    }
+    if (tl.y < br.y) {
+        miny = tl.y;
+        maxy = br.y;
+    } else {
+        miny = br.y;
+        maxy = tl.y;
+    }
+
+    if (minx < 0) {
+        minx = 0;
+    }
+    if (miny < 0) {
+        miny = 0;
+    }
+    if (maxx >= MAP_WIDTH) {
+        maxx = MAP_WIDTH - 1;
+    }
+    if (maxy >= MAP_HEIGHT) {
+        maxy = MAP_HEIGHT - 1;
+    }
+
+
+    //
+    // Need a wall around the dmap or the search will sort of
+    // trickle off the map
+    //
+    for (y = miny; y < MAP_HEIGHT; y++) {
+        set(D->val, minx, y, DMAP_IS_WALL);
+        set(D->val, maxx - 1, y, DMAP_IS_WALL);
+    }
+    for (x = minx; x < MAP_WIDTH; x++) {
+        set(D->val, x, miny, DMAP_IS_WALL);
+        set(D->val, x, maxy - 1, DMAP_IS_WALL);
+    }
+
+#if 0
+    CON("dmap bounds %d,%d to %d,%d", minx, miny, maxx, maxy);
+    dmap_print(D);
+#endif
+
+    for (y = miny + 1; y < maxy - 1; y++) {
+        for (x = minx + 1; x < maxx - 1; x++) {
+            set(orig, x, y, get(D->val, x, y));
+
+            e = &getref(D->val, x , y);
+            if (*e != DMAP_IS_WALL) {
+                set(valid, x, y, (uint8_t)1);
+                set(orig_valid, x, y, (uint8_t)1);
+                continue;
+            }
+
+            set(valid, x, y, (uint8_t)0);
+            set(orig_valid, x, y, (uint8_t)0);
+        }
+    }
+
+#if 0
+    dmap_print(D);
+
+    uint8_t count = 1;
+#endif
+
+    do {
+        changed = false;
+
+#if 0
+        printf("run %d %d %d\n", count, x, y);
+        count++;
+#endif
+        for (y = miny + 1; y < maxy - 1; y++) {
+            for (x = minx + 1; x < maxx - 1; x++) {
+                if (!get(orig_valid, x, y)) {
+                    continue;
+                }
+
+                if (!get(valid, x, y)) {
+                    continue;
+                }
+
+                e = &getref(D->val, x  , y);
+                a = get(D->val, x-1, y-1);
+                b = get(D->val, x  , y-1);
+                c = get(D->val, x+1, y-1);
+                d = get(D->val, x-1, y);
+                f = get(D->val, x+1, y);
+                g = get(D->val, x-1, y+1);
+                h = get(D->val, x  , y+1);
+                i = get(D->val, x+1, y+1);
+
+                if (a < b) {
+                    lowest = a;
+                } else {
+                    lowest = b;
+                }
+
+                if (c < lowest) { lowest = c; }
+                if (d < lowest) { lowest = d; }
+                if (f < lowest) { lowest = f; }
+                if (g < lowest) { lowest = g; }
+                if (h < lowest) { lowest = h; }
+                if (i < lowest) { lowest = i; }
+
+                if (*e - lowest >= 2) {
+                    *e = lowest + 1;
+                    changed = true;
+                }
+            }
+        }
+#if 0
+        dmap_print(D);
+#endif
+    } while (changed);
+
+    //
+    // Mix in any original depth modifiers
+    //
+    for (y = miny + 1; y < maxy - 1; y++) {
+        for (x = minx + 1; x < maxx - 1; x++) {
+            uint8_t o = get(orig, x, y);
+            if (o != DMAP_IS_WALL) {
+                if (o > DMAP_IS_PASSABLE) {
+                    o = o - DMAP_IS_PASSABLE;
+                    uint8_t n = get(D->val, x, y);
+                    if (o + n < DMAP_IS_PASSABLE) {
+                        incr(D->val, x, y, o);
+                    }
+                }
+            }
+        }
+    }
+}
+
 static bool is_movement_blocking_at (const Dmap *D, int x, int y)
 {
     if ((x >= MAP_WIDTH) || (y >= MAP_HEIGHT) || (x < 0) || (y < 0)) {
@@ -248,97 +407,6 @@ static bool is_movement_blocking_at (const Dmap *D, int x, int y)
     }
 
     return (false);
-}
-
-/*
- * Make L shaped moves into diagonal ones
- */
-void dmap_l_shaped_path_to_diag (const Dmap *D, std::vector<point> &path)
-{
-    for (;/*ever*/;) {
-        auto modified = false;
-        size_t i = 0;
-
-        for (;/*ever*/;) {
-            if (i + 2 >= path.size()) {
-                break;
-            }
-
-            auto p = path[i];
-            auto px = p.x;
-            auto py = p.y;
-
-            auto n = path[i + 1];
-            auto nx = n.x;
-            auto ny = n.y;
-
-            auto m = path[i + 2];
-            auto mx = m.x;
-            auto my = m.y;
-
-            if (px - 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
-                ! is_movement_blocking_at(D, px - 1, py)) {
-                path.erase(path.begin() + i);
-                modified = true;
-                break;
-            }
-
-            if (px - 1 == mx && py + 1 == my && px - 1 == nx && py == ny &&
-                ! is_movement_blocking_at(D, px, py + 1)) {
-                path.erase(path.begin() + i);
-                modified = true;
-                break;
-            }
-
-            if (px + 1 == mx && py + 1 == my && px == nx && py + 1 == ny &&
-                ! is_movement_blocking_at(D, px + 1, py)) {
-                path.erase(path.begin() + i);
-                modified = true;
-                break;
-            }
-
-            if (px + 1 == mx && py + 1 == my && px + 1 == nx && py == ny &&
-                ! is_movement_blocking_at(D, px, py + 1)) {
-                path.erase(path.begin() + i);
-                modified = true;
-                break;
-            }
-
-            if (px - 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
-                ! is_movement_blocking_at(D, px - 1, py)) {
-                path.erase(path.begin() + i);
-                modified = true;
-                break;
-            }
-
-            if (px - 1 == mx && py - 1 == my && px - 1 == nx && py == ny &&
-                ! is_movement_blocking_at(D, px, py - 1)) {
-                path.erase(path.begin() + i);
-                modified = true;
-                break;
-            }
-
-            if (px + 1 == mx && py - 1 == my && px == nx && py - 1 == ny &&
-                ! is_movement_blocking_at(D, px + 1, py)) {
-                path.erase(path.begin() + i);
-                modified = true;
-                break;
-            }
-
-            if (px + 1 == mx && py - 1 == my && px + 1 == nx && py == ny && \
-                ! is_movement_blocking_at(D, px, py - 1)) {
-                path.erase(path.begin() + i);
-                modified = true;
-                break;
-            }
-
-            i++;
-        }
-
-        if (! modified) {
-            break;
-        }
-    }
 }
 
 //
@@ -397,15 +465,9 @@ bool dmap_can_i_move_diagonally (const Dmap *D, point a, point b, point c)
     return (false);
 }
 
-std::vector<point> dmap_solve (const Dmap *D, const point start)
+static std::vector<point> dmap_solve_ (const Dmap *D, const point start,
+                                       const std::vector<point> &all_deltas)
 {
-    static const std::vector<point> all_deltas = {
-        point(0, -1),
-        point(-1, 0),
-        point(1, 0),
-        point(0, 1),
-    };
-
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> walked = {};
 
     auto at = start;
@@ -464,4 +526,30 @@ std::vector<point> dmap_solve (const Dmap *D, const point start)
         set(walked, best.x, best.y, true);
     }
     return (out);
+}
+
+std::vector<point> dmap_solve_allow_diagonal (const Dmap *D, const point start)
+{
+    static const std::vector<point> all_deltas = {
+        point(-1, -1),
+        point( 1, -1),
+        point(-1,  1),
+        point( 1,  1),
+        point(0, -1),
+        point(-1, 0),
+        point(1, 0),
+        point(0, 1),
+    };
+    return (dmap_solve_(D, start, all_deltas));
+}
+
+std::vector<point> dmap_solve (const Dmap *D, const point start)
+{
+    static const std::vector<point> all_deltas = {
+        point(0, -1),
+        point(-1, 0),
+        point(1, 0),
+        point(0, 1),
+    };
+    return (dmap_solve_(D, start, all_deltas));
 }

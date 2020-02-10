@@ -476,6 +476,11 @@ extern uint8_t quitting;
 extern void quit(void);
 extern void restart(void);
 extern void die(void);
+extern bool opt_new_game;
+extern bool opt_fast_start;
+extern bool opt_debug_mode;
+extern bool opt_arcade_mode;
+extern bool opt_arcade_mode_set;
 
 #include "my_ptrcheck.h"
 
