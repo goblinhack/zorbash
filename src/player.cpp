@@ -115,6 +115,11 @@ void player_tick (void)
         some_key_event_was_pressed = true;
     }
 
+    if (state[game->config.key_quit]) {
+        game->quit_select();
+        some_key_event_was_pressed = true;
+    }
+
     if (some_key_event_was_pressed) {
         return;
     }
