@@ -144,9 +144,11 @@ void thing_cursor_move (void)
                 }
             }
             if (world->player) {
+            if (!world->map_follow_player) {
                 thing_cursor_path_draw(
                   point(world->player->mid_at.x, world->player->mid_at.y),
                   point(world->cursor_at.x, world->cursor_at.y));
+            }
             }
         }
     }

@@ -54,8 +54,15 @@ void thing_render_minimap (void)
                 } else if (world->is_dirt(x, y)) {
                     glcolor(GRAY20);
                 } else {
-                    color c = GRAY10;
-                    c.a = 50;
+                    if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
+                        color c = DARKGREEN;
+                        c.a = 100;
+                        glcolor(c);
+                    } else {
+                        color c = DARKGREEN;
+                        c.a = 30;
+                        glcolor(c);
+                    }
                 }
 
                 gl_blitquad(((float)x) * dx,
@@ -71,9 +78,15 @@ void thing_render_minimap (void)
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 if (!world->is_visited(x, y)) {
-                    color c = DARKGREEN;
-                    c.a = 30;
-                    glcolor(c);
+                    if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
+                        color c = DARKGREEN;
+                        c.a = 100;
+                        glcolor(c);
+                    } else {
+                        color c = DARKGREEN;
+                        c.a = 30;
+                        glcolor(c);
+                    }
                 } else if (world->player &&
                     (x == (int)world->player->mid_at.x) &&
                     (y == (int)world->player->mid_at.y)) {
