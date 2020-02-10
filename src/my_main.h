@@ -9,7 +9,7 @@
 //
 // It crashes? Enable this for more info
 //
-#undef DEBUG_CRASH
+#define DEBUG_CRASH
 
 #define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_TRACING             // Function tracing

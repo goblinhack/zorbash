@@ -17,7 +17,7 @@ Thingp World::test_thing_ptr (uint32_t id)
     }
 
     if (unlikely(p->id != id)) {
-        ERR("invalid thing ptr, index %u, ID-%08X != ID-%08X",
+        ERR("invalid thing ptr, index %u, %08X != %08X",
             index, id, p->id);
     }
 
@@ -30,11 +30,11 @@ Thingp World::find_thing_ptr (uint32_t id)
     auto index = id % MAX_THINGS;
     auto p = &all_thing_ptrs[index];
     if (unlikely(!p->ptr)) {
-        ERR("thing ptr not found, index %u, ID-%08X", index, id);
+        ERR("thing ptr not found, index %u, %08X", index, id);
     }
 
     if (unlikely(p->id != id)) {
-        ERR("invalid thing ptr, index %u, ID-%08X != ID-%08X",
+        ERR("invalid thing ptr, index %u, %08X != %08X",
             index, id, p->id);
     }
 
@@ -76,15 +76,15 @@ void World::free_thing_id (Thingp t)
     uint32_t index = t->id & MAX_THINGS_MASK;
     auto p = getptr(all_thing_ptrs, index);
     if (!p->ptr) {
-        t->err("double free for thing ID-%08X", t->id);
+        t->err("double free for thing %08X", t->id);
     }
 
     if (p->ptr != t) {
-        t->err("wrong owner trying to free thing ID-%08X", t->id);
+        t->err("wrong owner trying to free thing %08X", t->id);
     }
 
     if (p->id != t->id) {
-        t->err("stale owner trying to free thing ID-%08X", t->id);
+        t->err("stale owner trying to free thing %08X", t->id);
     }
 
 #ifdef ENABLE_THING_ID_LOGS
@@ -105,10 +105,10 @@ void World::realloc_thing_id (Thingp t)
     auto p = getptr(all_thing_ptrs, index);
     if (p->ptr) {
         if (p->ptr == t) {
-            t->err("index in use, cannot be realloc'd for same thing ID-%08X",
+            t->err("index in use, cannot be realloc'd for same thing %08X",
                    t->id);
         } else {
-            t->err("index in use by another thing, cannot be realloc'd by ID-%08X",
+            t->err("index in use by another thing, cannot be realloc'd by %08X",
                    t->id);
             p->ptr->err("realloc failed for ID, this is the current owner");
         }

@@ -80,6 +80,7 @@ static void thing_cursor_path_draw (point start, point end)
     dmap_process_allow_diagonals(&d, dmap_start, dmap_end);
     // dmap_print(&d, start, dmap_start, dmap_end);
     auto p = dmap_solve_allow_diagonal(&d, start);
+    game->move_path = p;
 
     for (auto c : p) {
         thing_new("cursor_path", fpoint(c.x , c.y));
@@ -135,21 +136,40 @@ void thing_cursor_move (void)
         if (world->cursor_at != world->cursor_at_old) {
             world->cursor_at_old = world->cursor_at;
             cursor->move(world->cursor_at);
+            thing_cursor_find_path();
+        }
+    }
+}
 
-            for (auto y = 0; y < MAP_HEIGHT; y++) {
-                for (auto x = 0; x < MAP_WIDTH; x++) {
-                    FOR_ALL_CURSOR_PATH_THINGS(world, t, x, y) {
-                        t->dead("eol");
-                    }
-                }
+void thing_cursor_find_path (void)
+{_
+    if (game->paused()) {
+        return;
+    }
+
+    auto cursor = world->cursor;
+    if (!cursor) {
+        return;
+    }
+
+    game->move_path.clear();
+
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            FOR_ALL_CURSOR_PATH_THINGS(world, t, x, y) {
+                t->dead("eol");
             }
-            if (world->player) {
-            if (!world->map_follow_player) {
-                thing_cursor_path_draw(
-                  point(world->player->mid_at.x, world->player->mid_at.y),
-                  point(world->cursor_at.x, world->cursor_at.y));
-            }
-            }
+        }
+    }
+
+    //
+    // If not following the player, draw the path
+    //
+    if (world->player) {
+        if (!world->map_follow_player) {
+            thing_cursor_path_draw(
+                point(world->player->mid_at.x, world->player->mid_at.y),
+                point(world->cursor_at.x, world->cursor_at.y));
         }
     }
 }

@@ -3411,7 +3411,7 @@ uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
 uint32_t Thing::get_weapon_id (void)
 {
     if (monst) {
-        // con("get weapon ID-%08X", monst->weapon_id);
+        // con("get weapon %08X", monst->weapon_id);
         return (monst->weapon_id);
     } else {
         // con("get weapon id => none");
@@ -3422,7 +3422,7 @@ uint32_t Thing::get_weapon_id (void)
 uint32_t Thing::set_weapon_id (uint32_t v)
 {
     new_monst();
-    // con("set weapon ID-%08X", v);
+    // con("set weapon %08X", v);
     return (monst->weapon_id = v);
 }
 

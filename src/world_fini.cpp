@@ -20,7 +20,7 @@ void World::fini (void)
                 auto id = get(all_thing_ids_at, x, y, z);
                 if (id) {
 #ifdef ENABLE_THING_ID_LOGS
-                    LOG("clean thing ID-%08X at %u,%u", id, x, y);
+                    LOG("clean thing %08X at %u,%u", id, x, y);
 #endif
                     auto t = thing_find(id);
 
@@ -61,7 +61,7 @@ void World::fini (void)
     for (auto slot = 0; slot < MAX_THINGS; slot++) {
         auto p = get(all_thing_ptrs, slot);
         if (p.ptr) {
-            ERR("world fini: did not detach thing %p/ID-%08X", p.ptr, p.id);
+            ERR("world fini: did not detach thing %p/%08X", p.ptr, p.id);
             auto t = p.ptr;
             verify(t);
             t->die("world fini: did not detach thing from all_thing_ptrs_at");

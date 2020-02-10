@@ -278,7 +278,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
 #ifdef ENABLE_THING_ID_LOGS
                     auto o = my.t.test_thing_ptr(id);
                     if (o) {
-                        o->die("thing already exists for ID-%08X", id);
+                        o->die("thing already exists for %08X", id);
                     }
 #endif
                     auto t = new Thing();

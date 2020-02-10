@@ -12,6 +12,13 @@
 void Thing::achieve_goals_in_life (void)
 {
     //
+    // If there is a next hop to go to, do it.
+    //
+    if (follow_path()) {
+        return;
+    }
+
+    //
     // If this thing has AI, it can try and reach goals
     //
     if (get_dmap_scent()) {

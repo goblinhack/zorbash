@@ -629,6 +629,7 @@ public:
     void stop(void);
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle);
+    bool follow_path(void);
     bool update_coordinates(void);
     void update_cursor(void);
     bool possible_to_attack(const Thingp it);
@@ -899,6 +900,7 @@ void thing_render_all(void);
 void thing_render_minimap(void);
 void things_tick(void);
 void thing_cursor_move(void);
+void thing_cursor_find_path(void);
 void thing_cursor_map_follow(void);
 void thing_cursor_find(uint16_t minx, uint16_t miny, uint16_t maxx, uint16_t maxy);
 void thing_cursor_reset_if_needed(void);
