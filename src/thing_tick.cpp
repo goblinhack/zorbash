@@ -11,10 +11,19 @@
 
 void Thing::achieve_goals_in_life (void)
 {
+    if (is_player()) {
+        //
+        // Make sure we have a path shown if we just completed one.
+        //
+        if (!monst->move_path.size()) {
+            thing_cursor_path_create();
+        }
+    }
+
     //
     // If there is a next hop to go to, do it.
     //
-    if (follow_path()) {
+    if (cursor_path_pop_next_and_move()) {
         return;
     }
 

@@ -76,6 +76,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
+    $(OBJDIR)/thing_cursor_path.o 	\
     $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_health.o 		\

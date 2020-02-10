@@ -29,18 +29,11 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         return (false);
     }
 
-CON("mouse down");
-    if (!game->move_path.size()) {
-CON("mouse down ok");
-        thing_cursor_find_path();
-    }
-
-    if (game->move_path.size()) {
-        auto player = world->player;
-        player->new_monst();
-        player->monst->move_path = game->move_path;
-        player->follow_path();
-    }
+    //
+    // Grab the current move path and start walking toward it. This will
+    // consume one move by the player.
+    //
+    world->player->cursor_path_grab();
 
     return (false);
 }
@@ -48,9 +41,5 @@ CON("mouse down ok");
 uint8_t
 game_mouse_up (int32_t x, int32_t y, uint32_t button)
 {_
-    if (world->cursor && world->player && !game->started) {
-        return (false);
-    }
-CON("TBD %s", __FUNCTION__);
     return (false);
 }

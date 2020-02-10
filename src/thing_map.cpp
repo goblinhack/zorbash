@@ -53,7 +53,7 @@ static void thing_map_scroll_do (void)
 void thing_map_scroll_to_player (void)
 {
     for (auto x = 0; x < 1000; x++) {
-        thing_cursor_map_follow();
+        thing_cursor_scroll_map_to_follow();
         thing_map_scroll_do();
     }
 }
@@ -1135,7 +1135,7 @@ void thing_render_all (void)
     light_miny = std::max(0, miny - TILES_DOWN / 2);
     light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN / 2);
 
-    thing_cursor_map_follow();
+    thing_cursor_scroll_map_to_follow();
     thing_map_scroll_do();
 
     if (game->config.gfx_show_hidden) {

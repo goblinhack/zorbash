@@ -10,7 +10,7 @@ def tp_init(name):
     x.set_is_movable(True)
     x.set_is_cursor_path(True)
     x.set_stats_move_speed_ms(10)
-    x.set_z_depth(zx.MAP_DEPTH_CURSOR)
+    x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 50
     x.set_tile(tile=name + ".1", delay_ms=delay)

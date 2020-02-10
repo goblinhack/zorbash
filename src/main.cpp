@@ -337,7 +337,10 @@ static void find_executable (void)
     EXEC_DIR = dupstr(dirname(exec_expanded_name), "exec dir");
 
 cleanup:
-    EXEC_DIR = strsub(EXEC_DIR, "/", DIR_SEP, "EXEC_DIR");
+    auto new_EXEC_DIR = strsub(EXEC_DIR, "/", DIR_SEP, "EXEC_DIR");
+    myfree(EXEC_DIR);
+    EXEC_DIR = new_EXEC_DIR;
+
     LOG("INIT: EXEC_DIR set to %s", EXEC_DIR);
     DBG("Parent dir  : \"%s\"", parent_dir);
     DBG("Curr dir    : \"%s\"", curr_dir);
