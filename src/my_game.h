@@ -165,8 +165,7 @@ public:
     void get_all_obstacle_things_at(int x, int y, std::vector<Thingp> &);
 
     //
-    // Things that move around and things that do not, but are interesting,
-    // like food
+    // Cursor path is the highlighted path the player follows.
     //
     #define FOR_ALL_CURSOR_PATH_THINGS(world, t, x, y)                    \
         static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \

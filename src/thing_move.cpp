@@ -110,18 +110,6 @@ bool Thing::move (fpoint future_pos,
     return (true);
 }
 
-bool Thing::follow_path (void)
-{
-    if (monst && monst->move_path.size()) {
-        auto to = monst->move_path[0];
-        auto future_pos = fpoint(to.x + 0.5, to.y + 0.5);
-        monst->move_path.erase(monst->move_path.begin());
-        return (move(future_pos));
-    } else {
-        return (false);
-    }
-}
-
 void Thing::update_interpolated_position (void)
 {
     get_bounce();
