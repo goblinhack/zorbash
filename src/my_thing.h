@@ -631,6 +631,7 @@ public:
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle);
     bool cursor_path_pop_next_and_move(void);
     void cursor_path_grab(void);
+    void cursor_path_stop(void);
     bool update_coordinates(void);
     void update_cursor(void);
     bool possible_to_attack(const Thingp it);

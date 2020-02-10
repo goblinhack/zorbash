@@ -29,7 +29,7 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     // Protect player from multiple impact - landing hard on a spike.
     //
     if (!time_have_x_tenths_passed_since(get_stats_attacked_rate_tenths(),
-                                            get_timestamp_last_attacked())) {
+                                         get_timestamp_last_attacked())) {
         return (false);
     }
     set_timestamp_last_attacked(time_get_time_ms_cached());
@@ -95,6 +95,11 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
         log("is hit by (%s) for %u, health now %d",
             orig_hitter->to_string().c_str(), damage, h);
     }
+
+    //
+    // If hit by something then abort following any path
+    //
+    cursor_path_stop();
 
     return (true);
 }

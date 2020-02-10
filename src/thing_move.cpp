@@ -12,6 +12,7 @@ void Thing::stop (void)
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);
     update_interpolated_position();
+    cursor_path_stop();
 }
 
 bool Thing::move (fpoint future_pos)
