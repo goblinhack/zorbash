@@ -37,10 +37,11 @@ char *WORLD_PATH;
 char *EXEC_PYTHONPATH;
 char *TTF_PATH;
 char *GFX_PATH;
-static bool opt_new_game;
-static bool opt_debug_mode;
-static bool opt_arcade_mode;
-static bool opt_arcade_mode_set;
+bool opt_new_game;
+bool opt_fast_start;
+bool opt_debug_mode;
+bool opt_arcade_mode;
+bool opt_arcade_mode_set;
 
 FILE *LOG_STDOUT;
 FILE *LOG_STDERR;
@@ -496,6 +497,10 @@ static void parse_args (int32_t argc, char *argv[])
       CON("INIT:   - argument: \"%s\"", argv[i]);
     }
 
+    if (argc) {
+        opt_fast_start = true;
+    }
+
     for (i = 1; i < argc; i++) {
         //
         // Bad argument.
@@ -798,6 +803,7 @@ int32_t main (int32_t argc, char *argv[])
 
     config_gfx_vsync_update();
 
+    opt_fast_start = false;
     sdl_loop();
 
     CON("FINI: Leave 2D mode");

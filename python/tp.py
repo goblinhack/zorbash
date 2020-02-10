@@ -263,8 +263,8 @@ class Tp:
     def set_is_rrr38(self, value):
         zx.tp_set_is_rrr38(self, value)
 
-    def set_is_rrr39(self, value):
-        zx.tp_set_is_rrr39(self, value)
+    def set_is_cursor_path(self, value):
+        zx.tp_set_is_cursor_path(self, value)
 
     def set_is_blood_splatter(self, value):
         zx.tp_set_is_blood_splatter(self, value)

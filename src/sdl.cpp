@@ -1569,6 +1569,10 @@ static void sdl_screenshot_ (void)
 
 void sdl_flush_display (void)
 {
+    if (opt_fast_start) {
+        return;
+    }
+
     glEnable(GL_TEXTURE_2D);
     gl_enter_2d_mode();
     wid_display_all();

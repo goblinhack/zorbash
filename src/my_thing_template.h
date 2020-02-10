@@ -213,7 +213,7 @@ public:
     int is_rrr36 {};
     int is_rrr37 {};
     int is_rrr38 {};
-    int is_rrr39 {};
+    int is_cursor_path {};
     int is_rrr4 {};
     int is_blood_splatter {};
     int is_no_tile {};
@@ -561,9 +561,9 @@ static inline int tp_is_rrr38 (Tpp t)
     return (t->is_rrr38);
 }
 
-static inline int tp_is_rrr39 (Tpp t)
+static inline int tp_is_cursor_path (Tpp t)
 {
-    return (t->is_rrr39);
+    return (t->is_cursor_path);
 }
 
 static inline int tp_is_bleeder (Tpp t)

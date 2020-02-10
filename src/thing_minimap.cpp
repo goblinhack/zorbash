@@ -15,7 +15,8 @@
 void thing_render_minimap (void)
 {
     blit_fbo_bind(FBO_MINIMAP);
-    glClearColor(255, 0, 0, 0);
+    glClearColor(0, 0, 0, 0);
+    glBlendFunc(GL_ONE, GL_ZERO);
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_TEXTURE_2D);
     blit_init();
@@ -53,7 +54,8 @@ void thing_render_minimap (void)
                 } else if (world->is_dirt(x, y)) {
                     glcolor(GRAY20);
                 } else {
-                    continue;
+                    color c = GRAY10;
+                    c.a = 50;
                 }
 
                 gl_blitquad(((float)x) * dx,
@@ -69,10 +71,10 @@ void thing_render_minimap (void)
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 if (!world->is_visited(x, y)) {
-                    continue;
-                }
-
-                if (world->player &&
+                    color c = DARKGREEN;
+                    c.a = 30;
+                    glcolor(c);
+                } else if (world->player &&
                     (x == (int)world->player->mid_at.x) &&
                     (y == (int)world->player->mid_at.y)) {
                     glcolor(PINK);
