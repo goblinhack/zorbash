@@ -14,12 +14,6 @@ def tp_init(name):
 
     delay = 50
     x.set_tile(tile=name + ".1", delay_ms=delay)
-    x.set_tile(tile=name + ".3", delay_ms=delay)
-    x.set_tile(tile=name + ".4", delay_ms=delay)
-    x.set_tile(tile=name + ".5", delay_ms=delay)
-    x.set_tile(tile=name + ".4", delay_ms=delay)
-    x.set_tile(tile=name + ".3", delay_ms=delay)
-    x.set_tile(tile=name + ".2", delay_ms=delay)
 
     x.update()
 

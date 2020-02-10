@@ -811,7 +811,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     bool blit = true;
 
-    if (is_cursor()) {
+    if (is_cursor() || is_cursor_path()) {
         //
         // Always blit
         //

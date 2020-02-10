@@ -25,7 +25,7 @@ def load_one_plugin(filename):
     if basename(filename) == "tp.py":
         return
 
-    zx.con("PYTHON: - loading init plugin: " + filename)
+    zx.log("PYTHON: - loading init plugin: " + filename)
 
     mod_name, file_ext = os.path.splitext(os.path.split(filename)[-1])
 
