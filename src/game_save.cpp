@@ -285,6 +285,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.key_zoom_out);
     out << bits(my.t.key_pause);
     out << bits(my.t.key_help);
+    out << bits(my.t.key_quit);
     return (out);
 }
 
