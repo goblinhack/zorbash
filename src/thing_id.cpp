@@ -17,8 +17,7 @@ Thingp World::test_thing_ptr (uint32_t id)
     }
 
     if (unlikely(p->id != id)) {
-        ERR("invalid thing ptr, index %u, %08X != %08X",
-            index, id, p->id);
+        ERR("invalid thing ptr, index %u, %08X != %08X", index, id, p->id);
     }
 
     verify(p->ptr);

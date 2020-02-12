@@ -27,7 +27,9 @@ void World::put_thing (int x, int y, uint32_t id)
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (*idp == id) {
 #ifdef ENABLE_THING_ID_LOGS
-            t->log("found %08X at %u,%u slot %u", id, x, y, slot);
+            if (t->is_loggable()) {
+                t->log("found %08X at %u,%u slot %u", id, x, y, slot);
+            }
 #endif
             return;
         }
@@ -40,7 +42,9 @@ void World::put_thing (int x, int y, uint32_t id)
     if (free_slot != -1) {
         auto idp = &getref(all_thing_ids_at, x, y, free_slot);
 #ifdef ENABLE_THING_ID_LOGS
-        t->log("put thing %08X at %u,%u slot %u", id, x, y, free_slot);
+        if (t->is_loggable()) {
+            t->log("put thing %08X at %u,%u slot %u", id, x, y, free_slot);
+        }
 #endif
         *idp = id;
         return;
@@ -88,7 +92,9 @@ void World::remove_thing (int x, int y, uint32_t id)
         if (*idp == id) {
             *idp = 0;
 #ifdef ENABLE_THING_ID_LOGS
-            t->log("rem thing %08X at %u,%u slot %u", id, x, y, slot);
+            if (t->is_loggable()) {
+                t->log("rem thing %08X at %u,%u slot %u", id, x, y, slot);
+            }
 #endif
             return;
         }

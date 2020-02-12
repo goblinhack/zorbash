@@ -28,6 +28,19 @@ bool Thing::move (fpoint future_pos)
     return (move(future_pos, up, down, left, right, attack, idle));
 }
 
+bool Thing::attack (fpoint future_pos)
+{
+    bool up     = future_pos.y < mid_at.y;
+    bool down   = future_pos.y > mid_at.y;
+    bool left   = future_pos.x < mid_at.x;
+    bool right  = future_pos.x > mid_at.x;
+    bool attack = true;
+    bool idle   = false;
+
+    verify(this);
+    return (move(future_pos, up, down, left, right, attack, idle));
+}
+
 bool Thing::move (fpoint future_pos,
                   uint8_t up,
                   uint8_t down,

@@ -25,7 +25,7 @@ Game::Game (std::string appdata)
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
-    if (world->cursor && world->player && !game->started) {
+    if (!game || !game->started || !world || !world->player) {
         return (false);
     }
 
@@ -35,11 +35,29 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     //
     world->player->cursor_path_grab();
 
+    //
+    // Close enough to attack?
+    //
+    if ((std::abs(world->player->mid_at.x - world->cursor->mid_at.x) <= 1) &&
+        (std::abs(world->player->mid_at.y - world->cursor->mid_at.y) <= 1)) {
+        int x = world->cursor->mid_at.x;
+        int y = world->cursor->mid_at.y;
+        FOR_ALL_INTERESTING_THINGS(world, t, x, y) {
+            if (t != world->player) {
+                world->player->attack(world->cursor->mid_at);
+                return (true);
+            }
+        }
+    }
     return (false);
 }
 
 uint8_t
 game_mouse_up (int32_t x, int32_t y, uint32_t button)
 {_
+    if (!game) {
+        return (false);
+    }
+
     return (false);
 }

@@ -545,6 +545,10 @@ void Thing::destroy (void)
     delete_age_map();
     delete_light();
 _
+    if (is_loggable()) {
+        log("destroyed");
+    }
+_
     world->free_thing_id(this);
 _
     if (monst) {
