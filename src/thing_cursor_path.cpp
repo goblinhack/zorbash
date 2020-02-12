@@ -65,6 +65,7 @@ static void thing_cursor_path_draw (point start, point end)
             if (world->is_deep_water(x,y)  ||
                 world->is_water(x,y)       ||
                 world->is_monst(x,y)       ||
+                world->is_door(x,y)        ||
                 world->is_lava(x,y)        ||
                 world->is_wall(x, y)) {
                 set(d.val, x, y, DMAP_IS_WALL);

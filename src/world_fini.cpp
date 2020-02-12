@@ -28,14 +28,14 @@ void World::fini (void)
                     // If already dead, then we will clean this up in thing_gc
                     //
                     if (!t->is_pending_gc) {
-                        delete t;
+                        t->destroy();
                     }
                 }
             }
         }
     }
 
-    LOG("world fini: thing garbage collection:");
+    LOG("world fini: garbage collection of things still on the map:");
     thing_gc();
 
     //
@@ -47,8 +47,9 @@ void World::fini (void)
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y, z);
                 if (id) {
+                    ERR("world fini: did not detach thing id %08X at %d,%d,%d", id, x, y, z);
                     auto t = thing_find(id);
-                    t->die("world fini: did not detach thing id from all_thing_ids_at");
+                    t->err("world fini: did not detach thing id from all_thing_ids_at");
                 }
             }
         }
@@ -64,7 +65,7 @@ void World::fini (void)
             ERR("world fini: did not detach thing %p/%08X", p.ptr, p.id);
             auto t = p.ptr;
             verify(t);
-            t->die("world fini: did not detach thing from all_thing_ptrs_at");
+            t->err("world fini: did not detach thing from all_thing_ptrs_at");
         }
     }
 

@@ -10,7 +10,6 @@ def key_init(name, real_name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_interesting(True)
     x.set_is_key(True)
-    x.set_is_loggable(True)
     x.set_is_movable(True)
     x.set_is_movement_blocking(True)
     x.set_z_depth(zx.MAP_DEPTH_ITEM)

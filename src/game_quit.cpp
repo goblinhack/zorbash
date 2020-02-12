@@ -109,6 +109,9 @@ void Game::quit_select (void)
 
     auto m = ASCII_WIDTH / 2;
     auto n = ASCII_HEIGHT / 2;
+    if (game->started) {
+        n = ASCII_HEIGHT / 3;
+    }
     point tl = {m - WID_POPUP_WIDTH_NORMAL / 2, n - 4};
     point br = {m + WID_POPUP_WIDTH_NORMAL / 2, n + 5};
     auto width = br.x - tl.x;

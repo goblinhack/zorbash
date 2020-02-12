@@ -13,7 +13,6 @@ def tp_init(name, real_name):
     x.set_stats_health_initial(4)
     x.set_is_food(True)
     x.set_is_interesting(True)
-    x.set_is_loggable(True)
     x.set_is_nutrition_hd("1d4")
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
 
