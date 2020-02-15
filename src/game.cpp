@@ -11,7 +11,7 @@ class Game *game;
 class World *world;
 
 Game::Game (std::string appdata)
-{
+{_
     this->appdata = appdata;
 
     saved_dir = appdata + DIR_SEP + "zorbash" + DIR_SEP;

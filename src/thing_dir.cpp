@@ -9,7 +9,7 @@
 #include "my_thing.h"
 
 void Thing::dir_set_none (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -23,12 +23,12 @@ void Thing::dir_set_none (void)
 }
 
 uint8_t Thing::is_dir_none (void)
-{
+{_
     return (dir == THING_DIR_NONE);
 }
 
 void Thing::dir_set_down (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -40,12 +40,12 @@ void Thing::dir_set_down (void)
 }
 
 uint8_t Thing::is_dir_down (void)
-{
+{_
     return (dir == THING_DIR_DOWN);
 }
 
 void Thing::dir_set_up (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -57,12 +57,12 @@ void Thing::dir_set_up (void)
 }
 
 uint8_t Thing::is_dir_up (void)
-{
+{_
     return (dir == THING_DIR_UP);
 }
 
 void Thing::dir_set_left (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -74,12 +74,12 @@ void Thing::dir_set_left (void)
 }
 
 uint8_t Thing::is_dir_left (void)
-{
+{_
     return (dir == THING_DIR_LEFT);
 }
 
 void Thing::dir_set_right (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -91,12 +91,12 @@ void Thing::dir_set_right (void)
 }
 
 uint8_t Thing::is_dir_right (void)
-{
+{_
     return (dir == THING_DIR_RIGHT);
 }
 
 void Thing::dir_set_tl (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -108,12 +108,12 @@ void Thing::dir_set_tl (void)
 }
 
 uint8_t Thing::is_dir_tl (void)
-{
+{_
     return (dir == THING_DIR_TL);
 }
 
 void Thing::dir_set_bl (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -125,12 +125,12 @@ void Thing::dir_set_bl (void)
 }
 
 uint8_t Thing::is_dir_bl (void)
-{
+{_
     return (dir == THING_DIR_BL);
 }
 
 void Thing::dir_set_tr (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -142,12 +142,12 @@ void Thing::dir_set_tr (void)
 }
 
 uint8_t Thing::is_dir_tr (void)
-{
+{_
     return (dir == THING_DIR_TR);
 }
 
 void Thing::dir_set_br (void)
-{
+{_
     if (tp_gfx_animated_no_dir(tp())) {
         return;
     }
@@ -159,6 +159,6 @@ void Thing::dir_set_br (void)
 }
 
 uint8_t Thing::is_dir_br (void)
-{
+{_
     return (dir == THING_DIR_BR);
 }

@@ -11,7 +11,7 @@ void Config::fini (void)
 }
 
 void Game::fini (void)
-{
+{_
     LOG("-");
     CON("DUNGEON: destroying dungeon, seed %u", seed);
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");

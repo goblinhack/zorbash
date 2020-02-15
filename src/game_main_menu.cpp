@@ -14,7 +14,7 @@
 static WidPopup *game_main_menu_window;
 
 static void game_main_menu_destroy (void)
-{
+{_
     if (game_main_menu_window) {
         delete game_main_menu_window;
         game_main_menu_window = nullptr;
@@ -22,12 +22,12 @@ static void game_main_menu_destroy (void)
 }
 
 void game_main_menu_hide (void)
-{
+{_
     wid_hide(game_main_menu_window->wid_text_area->wid_text_area);
 }
 
 uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_main_menu_destroy();
     game->init();
     game_status_fini();
@@ -40,32 +40,32 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 uint8_t game_main_menu_load_game (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game->load_select();
     return (false);
 }
 
 uint8_t game_main_menu_config (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game->config_top_select();
     game_main_menu_hide();
     return (false);
 }
 
 uint8_t game_main_menu_quit_game (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game->quit_select();
     return (false);
 }
 
 uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -96,13 +96,13 @@ uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -121,7 +121,7 @@ uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
 }
 
 void game_main_menu_tick (Widp w)
-{
+{_
     static int frame = 1;
     static timestamp_t ts;
 
@@ -158,7 +158,7 @@ void Game::main_menu_select (void)
     auto width = br.x - tl.x - 2;
 
     game_main_menu_window = new WidPopup(tl, br, nullptr, "");
-    {
+    {_
         Widp w = game_main_menu_window->wid_popup_container;
         wid_set_on_key_up(w, game_main_menu_key_up);
         wid_set_on_key_down(w, game_main_menu_key_down);
@@ -166,7 +166,7 @@ void Game::main_menu_select (void)
     }
 
     int y_at = 0;
-    {
+    {_
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "New Game");
 
@@ -178,7 +178,7 @@ void Game::main_menu_select (void)
         wid_set_text(w, "%%fg=white$N%%fg=reset$ew game");
     }
     y_at += 3;
-    {
+    {_
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Load Game");
 
@@ -190,7 +190,7 @@ void Game::main_menu_select (void)
         wid_set_text(w, "%%fg=white$L%%fg=reset$oad game");
     }
     y_at += 3;
-    {
+    {_
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Options");
 
@@ -202,7 +202,7 @@ void Game::main_menu_select (void)
         wid_set_text(w, "%%fg=white$O%%fg=reset$ptions");
     }
     y_at += 3;
-    {
+    {_
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Quit Game");
 

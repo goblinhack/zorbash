@@ -21,7 +21,7 @@ static double lava_step2;
 bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
-{
+{_
     const double step = 10.0;
 
     auto dx = world->map_at.x - world->map_wanted_at.x;
@@ -51,7 +51,7 @@ static void thing_map_scroll_do (void)
 }
 
 void thing_map_scroll_to_player (void)
-{
+{_
     for (auto x = 0; x < 1000; x++) {
         thing_cursor_scroll_map_to_follow();
         thing_map_scroll_do();
@@ -60,7 +60,7 @@ void thing_map_scroll_to_player (void)
 
 static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint16_t maxy,
                               double offset_x, double offset_y)
-{
+{_
     auto z = MAP_DEPTH_WATER;
 #define WATER_ACROSS 8
 #define WATER_DOWN   8
@@ -360,7 +360,7 @@ glBlendFunc(vals[i1], vals[i2]);
 static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
                                    uint16_t maxx, uint16_t maxy,
                                    double offset_x, double offset_y)
-{
+{_
     auto z = MAP_DEPTH_WATER;
 #define DEEP_WATER_ACROSS 8
 #define DEEP_WATER_DOWN   8
@@ -551,7 +551,7 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
 static void thing_blit_lava (uint16_t minx, uint16_t miny,
                              uint16_t maxx, uint16_t maxy,
                              double offset_x, double offset_y)
-{
+{_
     auto z = MAP_DEPTH_LAVA;
 #define LAVA_ACROSS 8
 #define LAVA_DOWN   8
@@ -809,7 +809,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
 static void thing_blit_blood (uint16_t minx, uint16_t miny,
                               uint16_t maxx, uint16_t maxy,
                               double offset_x, double offset_y)
-{
+{_
     auto z = MAP_DEPTH_BLOOD;
 #define BLOOD_ACROSS 1
 #define BLOOD_DOWN   1
@@ -927,12 +927,12 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
 }
 
 static void thing_blit_things_common (void)
-{
+{_
     if (game->config.gfx_show_hidden || thing_map_black_and_white) {
         //
         // Slow timer to scroll the water.
         //
-        if (water_step1++ >= 20) {
+        if (water_step1++ >= 40) {
             water_step1 = 0;
             if (water_step2++ >= (TILE_HEIGHT * 2) - 1) {
                 water_step2 = 0;
@@ -963,7 +963,7 @@ static void thing_blit_things_common (void)
 
 static void thing_blit_things (uint16_t minx, uint16_t miny,
                                uint16_t maxx, uint16_t maxy)
-{
+{_
     double offset_x = world->map_at.x * game->config.tile_gl_width;
     double offset_y = world->map_at.y * game->config.tile_gl_height;
 
@@ -993,7 +993,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
         blit_init();
         for (auto y = miny; y < maxy; y++) {
             auto z = MAP_DEPTH_WALLS;
-            {
+            {_
                 for (auto x = minx; x < maxx; x++) {
                     if (!world->is_visited(x, y)) {
                         continue;
@@ -1107,7 +1107,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
 }
 
 void thing_render_all (void)
-{
+{_
     uint16_t minx;
     uint16_t maxx;
     uint16_t miny;

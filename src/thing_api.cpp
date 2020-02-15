@@ -11,7 +11,7 @@
 #include <list>
 
 void Thing::new_monst (void)
-{
+{_
     if (unlikely(!monst)) {
 //con("new");
         monst = new Monst();
@@ -25,7 +25,7 @@ void Thing::new_monst (void)
 // age_map
 ////////////////////////////////////////////////////////////////////////////
 AgeMap *Thing::get_age_map (void)
-{
+{_
     if (monst) {
         return (monst->age_map);
     } else {
@@ -58,7 +58,7 @@ void Thing::delete_age_map (void)
 // dmap_scent
 ////////////////////////////////////////////////////////////////////////////
 Dmap *Thing::get_dmap_scent (void)
-{
+{_
     if (monst) {
         return (monst->dmap_scent);
     } else {
@@ -90,7 +90,7 @@ void Thing::delete_dmap_scent (void)
 // light
 ////////////////////////////////////////////////////////////////////////////
 Lightp Thing::get_light (void)
-{
+{_
     if (monst) {
         return (monst->light);
     } else {
@@ -123,592 +123,592 @@ void Thing::delete_light (void)
 }
 
 int Thing::ai_delay_after_moving_ms(void)
-{
+{_
     return (tp_ai_delay_after_moving_ms(tp()));
 }
 
 int Thing::ai_scent_distance(void)
-{
+{_
     return (tp_ai_scent_distance(tp()));
 }
 
 int Thing::collision_attack(void)
-{
+{_
     return (tp_collision_attack(tp()));
 }
 
 int Thing::collision_box(void)
-{
+{_
     return (tp_collision_box(tp()));
 }
 
 int Thing::collision_check(void)
-{
+{_
     return (tp_collision_check(tp()));
 }
 
 int Thing::collision_circle(void)
-{
+{_
     return (tp_collision_circle(tp()));
 }
 
 int Thing::collision_hit_priority(void)
-{
+{_
     return (tp_collision_hit_priority(tp()));
 }
 
 int Thing::is_interesting(void)
-{
+{_
     return (tp_is_interesting(tp()));
 }
 
 int Thing::gfx_animated(void)
-{
+{_
     return (tp_gfx_animated(tp()));
 }
 
 int Thing::gfx_animated_can_vflip(void)
-{
+{_
     return (tp_gfx_animated_can_vflip(tp()));
 }
 
 int Thing::gfx_animated_no_dir(void)
-{
+{_
     return (tp_gfx_animated_no_dir(tp()));
 }
 
 int Thing::gfx_bounce_on_move(void)
-{
+{_
     return (tp_gfx_bounce_on_move(tp()));
 }
 
 int Thing::gfx_animated_can_hflip(void)
-{
+{_
     return (tp_gfx_animated_can_hflip(tp()));
 }
 
 int Thing::gfx_is_an_animation_only(void)
-{
+{_
     return (tp_gfx_is_an_animation_only(tp()));
 }
 
 int Thing::gfx_is_floor_deco(void)
-{
+{_
     return (tp_gfx_is_floor_deco(tp()));
 }
 
 int Thing::gfx_is_wall_deco(void)
-{
+{_
     return (tp_gfx_is_wall_deco(tp()));
 }
 
 int Thing::gfx_is_weapon_carry_anim(void)
-{
+{_
     return (tp_gfx_is_weapon_carry_anim(tp()));
 }
 
 int Thing::gfx_is_attack_anim(void)
-{
+{_
     return (tp_gfx_is_attack_anim(tp()));
 }
 
 int Thing::gfx_large_shadow_caster(void)
-{
+{_
     return (tp_gfx_large_shadow_caster(tp()));
 }
 
 int Thing::gfx_show_outlined(void)
-{
+{_
     return (tp_gfx_show_outlined(tp()));
 }
 
 int Thing::gfx_oversized_but_sitting_on_the_ground(void)
-{
+{_
     return (tp_gfx_oversized_but_sitting_on_the_ground(tp()));
 }
 
 int Thing::gfx_small_shadow_caster(void)
-{
+{_
     return (tp_gfx_small_shadow_caster(tp()));
 }
 
 int Thing::health_hunger_pct(void)
-{
+{_
     return (tp_stats_health_hunger_pct(tp()));
 }
 
 int Thing::hunger_clock_freq_ms(void)
-{
+{_
     return (tp_hunger_clock_freq_ms(tp()));
 }
 
 int Thing::is_hunger_insatiable(void)
-{
+{_
     return (tp_is_hunger_insatiable(tp()));
 }
 
 int Thing::health_initial(void)
-{
+{_
     return (tp_stats_health_initial(tp()));
 }
 
 int Thing::health_starving_pct(void)
-{
+{_
     return (tp_stats_health_starving_pct(tp()));
 }
 
 int Thing::is_active(void)
-{
+{_
     return (tp_is_active(tp()));
 }
 
 int Thing::is_attackable(void)
-{
+{_
     return (tp_is_attackable(tp()));
 }
 
 int Thing::is_bleeder(void)
-{
+{_
     return (tp_is_bleeder(tp()));
 }
 
 int Thing::is_blood(void)
-{
+{_
     return (tp_is_blood(tp()));
 }
 
 int Thing::is_combustable(void)
-{
+{_
     return (tp_is_combustable(tp()));
 }
 
 int Thing::is_corpse_on_death(void)
-{
+{_
     return (tp_is_corpse_on_death(tp()));
 }
 
 int Thing::is_corridor(void)
-{
+{_
     return (tp_is_corridor(tp()));
 }
 
 int Thing::is_deep_water(void)
-{
+{_
     return (tp_is_deep_water(tp()));
 }
 
 int Thing::is_dirt(void)
-{
+{_
     return (tp_is_dirt(tp()));
 }
 
 int Thing::is_door(void)
-{
+{_
     return (tp_is_door(tp()));
 }
 
 int Thing::is_entrance(void)
-{
+{_
     return (tp_is_entrance(tp()));
 }
 
 int Thing::is_exit(void)
-{
+{_
     return (tp_is_exit(tp()));
 }
 
 int Thing::is_explosion(void)
-{
+{_
     return (tp_is_explosion(tp()));
 }
 
 int Thing::is_floor(void)
-{
+{_
     return (tp_is_floor(tp()));
 }
 
 int Thing::is_food(void)
-{
+{_
     return (tp_is_food(tp()));
 }
 
 int Thing::is_key(void)
-{
+{_
     return (tp_is_key(tp()));
 }
 
 int Thing::is_lava(void)
-{
+{_
     return (tp_is_lava(tp()));
 }
 
 int Thing::is_light_strength(void)
-{
+{_
     return (tp_is_light_strength(tp()));
 }
 
 int Thing::is_made_of_meat(void)
-{
+{_
     return (tp_is_made_of_meat(tp()));
 }
 
 int Thing::is_meat_eater(void)
-{
+{_
     return (tp_is_meat_eater(tp()));
 }
 
 int Thing::is_monst(void)
-{
+{_
     return (tp_is_monst(tp()));
 }
 
 int Thing::is_alive_monst(void)
-{
+{_
     return (tp_is_monst(tp()) && !is_dead);
 }
 
 int Thing::is_movable(void)
-{
+{_
     return (tp_is_movable(tp()));
 }
 
 int Thing::is_movement_blocking(void)
-{
+{_
     return (tp_is_movement_blocking(tp()));
 }
 
 int Thing::is_obstacle(void)
-{
+{_
     return (tp_is_obstacle(tp()));
 }
 
 int Thing::is_player(void)
-{
+{_
     return (tp_is_player(tp()));
 }
 
 int Thing::is_projectile(void)
-{
+{_
     return (tp_is_projectile(tp()));
 }
 
 int Thing::is_ripple(void)
-{
+{_
     return (tp_is_ripple(tp()));
 }
 
 int Thing::is_rock(void)
-{
+{_
     return (tp_is_rock(tp()));
 }
 
 int Thing::is_rrr1(void)
-{
+{_
     return (tp_is_rrr1(tp()));
 }
 
 int Thing::is_rrr10(void)
-{
+{_
     return (tp_is_rrr10(tp()));
 }
 
 int Thing::is_rrr11(void)
-{
+{_
     return (tp_is_rrr11(tp()));
 }
 
 int Thing::is_rrr12(void)
-{
+{_
     return (tp_is_rrr12(tp()));
 }
 
 int Thing::is_rrr13(void)
-{
+{_
     return (tp_is_rrr13(tp()));
 }
 
 int Thing::is_rrr14(void)
-{
+{_
     return (tp_is_rrr14(tp()));
 }
 
 int Thing::is_rrr15(void)
-{
+{_
     return (tp_is_rrr15(tp()));
 }
 
 int Thing::is_rrr16(void)
-{
+{_
     return (tp_is_rrr16(tp()));
 }
 
 int Thing::is_rrr17(void)
-{
+{_
     return (tp_is_rrr17(tp()));
 }
 
 int Thing::is_rrr18(void)
-{
+{_
     return (tp_is_rrr18(tp()));
 }
 
 int Thing::is_rrr19(void)
-{
+{_
     return (tp_is_rrr19(tp()));
 }
 
 int Thing::is_rrr2(void)
-{
+{_
     return (tp_is_rrr2(tp()));
 }
 
 int Thing::is_rrr20(void)
-{
+{_
     return (tp_is_rrr20(tp()));
 }
 
 int Thing::is_rrr21(void)
-{
+{_
     return (tp_is_rrr21(tp()));
 }
 
 int Thing::is_rrr22(void)
-{
+{_
     return (tp_is_rrr22(tp()));
 }
 
 int Thing::is_rrr23(void)
-{
+{_
     return (tp_is_rrr23(tp()));
 }
 
 int Thing::is_rrr24(void)
-{
+{_
     return (tp_is_rrr24(tp()));
 }
 
 int Thing::is_rrr25(void)
-{
+{_
     return (tp_is_rrr25(tp()));
 }
 
 int Thing::is_rrr26(void)
-{
+{_
     return (tp_is_rrr26(tp()));
 }
 
 int Thing::is_loggable(void)
-{
+{_
     return (tp_is_loggable(tp()));
 }
 
 int Thing::is_rrr28(void)
-{
+{_
     return (tp_is_rrr28(tp()));
 }
 
 int Thing::is_rrr29(void)
-{
+{_
     return (tp_is_rrr29(tp()));
 }
 
 int Thing::is_rrr3(void)
-{
+{_
     return (tp_is_rrr3(tp()));
 }
 
 int Thing::is_rrr30(void)
-{
+{_
     return (tp_is_rrr30(tp()));
 }
 
 int Thing::is_rrr31(void)
-{
+{_
     return (tp_is_rrr31(tp()));
 }
 
 int Thing::is_rrr32(void)
-{
+{_
     return (tp_is_rrr32(tp()));
 }
 
 int Thing::is_rrr33(void)
-{
+{_
     return (tp_is_rrr33(tp()));
 }
 
 int Thing::is_rrr34(void)
-{
+{_
     return (tp_is_rrr34(tp()));
 }
 
 int Thing::is_rrr35(void)
-{
+{_
     return (tp_is_rrr35(tp()));
 }
 
 int Thing::is_rrr36(void)
-{
+{_
     return (tp_is_rrr36(tp()));
 }
 
-int Thing::is_rrr37(void)
-{
-    return (tp_is_rrr37(tp()));
+int Thing::is_attack_shove(void)
+{_
+    return (tp_is_attack_shove(tp()));
 }
 
-int Thing::is_rrr38(void)
-{
-    return (tp_is_rrr38(tp()));
+int Thing::is_shovable(void)
+{_
+    return (tp_is_shovable(tp()));
 }
 
 int Thing::is_cursor_path(void)
-{
+{_
     return (tp_is_cursor_path(tp()));
 }
 
 int Thing::is_rrr4(void)
-{
+{_
     return (tp_is_rrr4(tp()));
 }
 
 int Thing::is_blood_splatter(void)
-{
+{_
     return (tp_is_blood_splatter(tp()));
 }
 
 int Thing::is_no_tile(void)
-{
+{_
     return (tp_is_no_tile(tp()));
 }
 
 int Thing::is_msg(void)
-{
+{_
     return (tp_is_msg(tp()));
 }
 
 int Thing::is_attack_lunge(void)
-{
+{_
     return (tp_is_attack_lunge(tp()));
 }
 
 int Thing::defence(void)
-{
+{_
     return (tp_stats_defence(tp()));
 }
 
 int Thing::attack(void)
-{
+{_
     return (tp_stats_attack(tp()));
 }
 
 int Thing::is_secret_door(void)
-{
+{_
     return (tp_is_secret_door(tp()));
 }
 
 int Thing::is_cursor_can_hover_over(void)
-{
+{_
     return (tp_is_cursor_can_hover_over(tp()));
 }
 
 int Thing::is_cursor(void)
-{
+{_
     return (tp_is_cursor(tp()));
 }
 
 int Thing::is_rrr5(void)
-{
+{_
     return (tp_is_rrr5(tp()));
 }
 
 int Thing::gfx_dead_anim(void)
-{
+{_
     return (tp_gfx_dead_anim(tp()));
 }
 
 int Thing::is_rrr6(void)
-{
+{_
     return (tp_is_rrr6(tp()));
 }
 
 int Thing::is_rrr7(void)
-{
+{_
     return (tp_is_rrr7(tp()));
 }
 
 int Thing::is_rrr8(void)
-{
+{_
     return (tp_is_rrr8(tp()));
 }
 
 int Thing::is_rrr9(void)
-{
+{_
     return (tp_is_rrr9(tp()));
 }
 
 int Thing::is_undead(void)
-{
+{_
     return (tp_is_undead(tp()));
 }
 
 int Thing::is_wall(void)
-{
+{_
     return (tp_is_wall(tp()));
 }
 
 int Thing::is_water(void)
-{
+{_
     return (tp_is_water(tp()));
 }
 
 int Thing::is_water_dweller(void)
-{
+{_
     return (tp_is_water_dweller(tp()));
 }
 
 int Thing::is_water_hater(void)
-{
+{_
     return (tp_is_water_hater(tp()));
 }
 
 int Thing::is_weapon(void)
-{
+{_
     return (tp_is_weapon(tp()));
 }
 
 int Thing::weapon_damage(void)
-{
+{_
     return (tp_weapon_damage(tp()));
 }
 
 int Thing::weapon_use_delay_hundredths(void)
-{
+{_
     return (tp_weapon_use_delay_hundredths(tp()));
 }
 
 int Thing::weapon_use_distance(void)
-{
+{_
     return (tp_weapon_use_distance(tp()));
 }
 
 int Thing::z_depth(void)
-{
+{_
     return (tp_z_depth(tp()));
 }
 
 std::string Thing::stats_attack_hd(void)
-{
+{_
     return (tp_stats_attack_hd(tp()));
 }
 
 std::string Thing::is_nutrition_hd(void)
-{
+{_
     return (tp_is_nutrition_hd(tp()));
 }
 
 int Thing::is_nutrition(void)
-{
+{_
     return (tp()->is_nutrition());
 }
 
@@ -716,7 +716,7 @@ int Thing::is_nutrition(void)
 // lunge_to
 ////////////////////////////////////////////////////////////////////////////
 fpoint Thing::get_lunge_to (void)
-{
+{_
     if (monst) {
         return (monst->lunge_to);
     } else {
@@ -725,7 +725,7 @@ fpoint Thing::get_lunge_to (void)
 }
 
 void Thing::set_lunge_to (fpoint v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->lunge_to = v;
@@ -735,7 +735,7 @@ void Thing::set_lunge_to (fpoint v)
 // bounce_height
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_bounce_height (void)
-{
+{_
     if (monst) {
         return (monst->bounce_height);
     } else {
@@ -744,7 +744,7 @@ float Thing::get_bounce_height (void)
 }
 
 void Thing::set_bounce_height (float v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->bounce_height = v;
@@ -754,7 +754,7 @@ void Thing::set_bounce_height (float v)
 // bounce_fade
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_bounce_fade (void)
-{
+{_
     if (monst) {
         return (monst->bounce_fade);
     } else {
@@ -763,7 +763,7 @@ float Thing::get_bounce_fade (void)
 }
 
 void Thing::set_bounce_fade (float v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->bounce_fade = v;
@@ -773,7 +773,7 @@ void Thing::set_bounce_fade (float v)
 // bounce_count
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_bounce_count (void)
-{
+{_
     if (monst) {
         return (monst->bounce_count);
     } else {
@@ -782,7 +782,7 @@ int Thing::get_bounce_count (void)
 }
 
 void Thing::set_bounce_count (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->bounce_count = v;
@@ -792,7 +792,7 @@ void Thing::set_bounce_count (int v)
 // fadeup_height
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_fadeup_height (void)
-{
+{_
     if (monst) {
         return (monst->fadeup_height);
     } else {
@@ -801,7 +801,7 @@ float Thing::get_fadeup_height (void)
 }
 
 void Thing::set_fadeup_height (float v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->fadeup_height = v;
@@ -811,7 +811,7 @@ void Thing::set_fadeup_height (float v)
 // fadeup_fade
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_fadeup_fade (void)
-{
+{_
     if (monst) {
         return (monst->fadeup_fade);
     } else {
@@ -820,7 +820,7 @@ float Thing::get_fadeup_fade (void)
 }
 
 void Thing::set_fadeup_fade (float v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->fadeup_fade = v;
@@ -830,7 +830,7 @@ void Thing::set_fadeup_fade (float v)
 // rot
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_rot (void)
-{
+{_
     if (monst) {
         return (monst->rot);
     } else {
@@ -839,7 +839,7 @@ float Thing::get_rot (void)
 }
 
 void Thing::set_rot (float v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->rot = v;
@@ -849,7 +849,7 @@ void Thing::set_rot (float v)
 // msg
 ////////////////////////////////////////////////////////////////////////////
 std::string Thing::get_msg (void)
-{
+{_
     if (monst) {
         return (monst->msg);
     } else {
@@ -858,7 +858,7 @@ std::string Thing::get_msg (void)
 }
 
 void Thing::set_msg (std::string v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->msg = v;
@@ -868,7 +868,7 @@ void Thing::set_msg (std::string v)
 // submerged_offset
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_submerged_offset (void)
-{
+{_
     if (monst) {
         return (monst->submerged_offset);
     } else {
@@ -877,7 +877,7 @@ float Thing::get_submerged_offset (void)
 }
 
 void Thing::set_submerged_offset (float v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     monst->submerged_offset = v;
@@ -887,7 +887,7 @@ void Thing::set_submerged_offset (float v)
 // gold
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_gold (void)
-{
+{_
     if (monst) {
         return (monst->gold);
     } else {
@@ -896,7 +896,7 @@ int Thing::get_gold (void)
 }
 
 int Thing::set_gold (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->gold = v);
@@ -905,7 +905,7 @@ int Thing::set_gold (int v)
 }
 
 int Thing::decr_gold (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->gold -= v);
@@ -914,7 +914,7 @@ int Thing::decr_gold (int v)
 }
 
 int Thing::incr_gold (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->gold += v);
@@ -923,7 +923,7 @@ int Thing::incr_gold (int v)
 }
 
 int Thing::decr_gold (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->gold--);
@@ -932,7 +932,7 @@ int Thing::decr_gold (void)
 }
 
 int Thing::incr_gold (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->gold++);
@@ -944,7 +944,7 @@ int Thing::incr_gold (void)
 // tick
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_tick (void)
-{
+{_
     if (monst) {
         return (monst->tick);
     } else {
@@ -953,7 +953,7 @@ uint32_t Thing::get_tick (void)
 }
 
 uint32_t Thing::set_tick (uint32_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->tick = v);
@@ -962,7 +962,7 @@ uint32_t Thing::set_tick (uint32_t v)
 }
 
 uint32_t Thing::decr_tick (uint32_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->tick -= v);
@@ -971,7 +971,7 @@ uint32_t Thing::decr_tick (uint32_t v)
 }
 
 uint32_t Thing::incr_tick (uint32_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->tick += v);
@@ -980,7 +980,7 @@ uint32_t Thing::incr_tick (uint32_t v)
 }
 
 uint32_t Thing::decr_tick (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->tick--);
@@ -989,7 +989,7 @@ uint32_t Thing::decr_tick (void)
 }
 
 uint32_t Thing::incr_tick (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->tick++);
@@ -1001,7 +1001,7 @@ uint32_t Thing::incr_tick (void)
 // health
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_health (void)
-{
+{_
     if (monst) {
         return (monst->stats_health);
     } else {
@@ -1010,7 +1010,7 @@ int Thing::get_stats_health (void)
 }
 
 int Thing::set_stats_health (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health = v);
@@ -1019,7 +1019,7 @@ int Thing::set_stats_health (int v)
 }
 
 int Thing::decr_stats_health (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health -= v);
@@ -1028,7 +1028,7 @@ int Thing::decr_stats_health (int v)
 }
 
 int Thing::incr_stats_health (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health += v);
@@ -1037,7 +1037,7 @@ int Thing::incr_stats_health (int v)
 }
 
 int Thing::decr_stats_health (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health--);
@@ -1046,7 +1046,7 @@ int Thing::decr_stats_health (void)
 }
 
 int Thing::incr_stats_health (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health++);
@@ -1058,7 +1058,7 @@ int Thing::incr_stats_health (void)
 // health_max
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_health_max (void)
-{
+{_
     if (monst) {
         return (monst->stats_health_max);
     } else {
@@ -1067,7 +1067,7 @@ int Thing::get_stats_health_max (void)
 }
 
 int Thing::set_stats_health_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health_max = v);
@@ -1076,7 +1076,7 @@ int Thing::set_stats_health_max (int v)
 }
 
 int Thing::decr_stats_health_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health_max -= v);
@@ -1085,7 +1085,7 @@ int Thing::decr_stats_health_max (int v)
 }
 
 int Thing::incr_stats_health_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health_max += v);
@@ -1094,7 +1094,7 @@ int Thing::incr_stats_health_max (int v)
 }
 
 int Thing::decr_stats_health_max (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health_max--);
@@ -1103,7 +1103,7 @@ int Thing::decr_stats_health_max (void)
 }
 
 int Thing::incr_stats_health_max (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_health_max++);
@@ -1115,7 +1115,7 @@ int Thing::incr_stats_health_max (void)
 // defence
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_defence (void)
-{
+{_
     if (monst) {
         return (monst->stats_defence);
     } else {
@@ -1124,7 +1124,7 @@ int Thing::get_stats_defence (void)
 }
 
 int Thing::set_stats_defence (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence = v);
@@ -1133,7 +1133,7 @@ int Thing::set_stats_defence (int v)
 }
 
 int Thing::decr_stats_defence (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence -= v);
@@ -1142,7 +1142,7 @@ int Thing::decr_stats_defence (int v)
 }
 
 int Thing::incr_stats_defence (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence += v);
@@ -1151,7 +1151,7 @@ int Thing::incr_stats_defence (int v)
 }
 
 int Thing::decr_stats_defence (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence--);
@@ -1160,7 +1160,7 @@ int Thing::decr_stats_defence (void)
 }
 
 int Thing::incr_stats_defence (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence++);
@@ -1172,7 +1172,7 @@ int Thing::incr_stats_defence (void)
 // defence_max
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_defence_max (void)
-{
+{_
     if (monst) {
         return (monst->stats_defence_max);
     } else {
@@ -1181,7 +1181,7 @@ int Thing::get_stats_defence_max (void)
 }
 
 int Thing::set_stats_defence_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence_max = v);
@@ -1190,7 +1190,7 @@ int Thing::set_stats_defence_max (int v)
 }
 
 int Thing::decr_stats_defence_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence_max -= v);
@@ -1199,7 +1199,7 @@ int Thing::decr_stats_defence_max (int v)
 }
 
 int Thing::incr_stats_defence_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence_max += v);
@@ -1208,7 +1208,7 @@ int Thing::incr_stats_defence_max (int v)
 }
 
 int Thing::decr_stats_defence_max (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence_max--);
@@ -1217,7 +1217,7 @@ int Thing::decr_stats_defence_max (void)
 }
 
 int Thing::incr_stats_defence_max (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_defence_max++);
@@ -1229,7 +1229,7 @@ int Thing::incr_stats_defence_max (void)
 // attack
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_attack (void)
-{
+{_
     if (monst) {
         if (monst->stats_attack) {
             return (monst->stats_attack);
@@ -1241,7 +1241,7 @@ int Thing::get_stats_attack (void)
 }
 
 int Thing::set_stats_attack (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack = v);
@@ -1250,7 +1250,7 @@ int Thing::set_stats_attack (int v)
 }
 
 int Thing::decr_stats_attack (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack -= v);
@@ -1259,7 +1259,7 @@ int Thing::decr_stats_attack (int v)
 }
 
 int Thing::incr_stats_attack (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack += v);
@@ -1268,7 +1268,7 @@ int Thing::incr_stats_attack (int v)
 }
 
 int Thing::decr_stats_attack (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack--);
@@ -1277,7 +1277,7 @@ int Thing::decr_stats_attack (void)
 }
 
 int Thing::incr_stats_attack (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack++);
@@ -1289,7 +1289,7 @@ int Thing::incr_stats_attack (void)
 // attack_max
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_attack_max (void)
-{
+{_
     if (monst) {
         return (monst->stats_attack_max);
     } else {
@@ -1298,7 +1298,7 @@ int Thing::get_stats_attack_max (void)
 }
 
 int Thing::set_stats_attack_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_max = v);
@@ -1307,7 +1307,7 @@ int Thing::set_stats_attack_max (int v)
 }
 
 int Thing::decr_stats_attack_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_max -= v);
@@ -1316,7 +1316,7 @@ int Thing::decr_stats_attack_max (int v)
 }
 
 int Thing::incr_stats_attack_max (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_max += v);
@@ -1325,7 +1325,7 @@ int Thing::incr_stats_attack_max (int v)
 }
 
 int Thing::decr_stats_attack_max (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_max--);
@@ -1334,7 +1334,7 @@ int Thing::decr_stats_attack_max (void)
 }
 
 int Thing::incr_stats_attack_max (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_max++);
@@ -1346,7 +1346,7 @@ int Thing::incr_stats_attack_max (void)
 // attack_rate_tenths
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_attack_rate_tenths (void)
-{
+{_
     if (monst) {
         return (monst->stats_attack_rate_tenths);
     } else {
@@ -1355,7 +1355,7 @@ int Thing::get_stats_attack_rate_tenths (void)
 }
 
 int Thing::set_stats_attack_rate_tenths (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_rate_tenths = v);
@@ -1364,7 +1364,7 @@ int Thing::set_stats_attack_rate_tenths (int v)
 }
 
 int Thing::decr_stats_attack_rate_tenths (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_rate_tenths -= v);
@@ -1373,7 +1373,7 @@ int Thing::decr_stats_attack_rate_tenths (int v)
 }
 
 int Thing::incr_stats_attack_rate_tenths (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_rate_tenths += v);
@@ -1382,7 +1382,7 @@ int Thing::incr_stats_attack_rate_tenths (int v)
 }
 
 int Thing::decr_stats_attack_rate_tenths (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_rate_tenths--);
@@ -1391,7 +1391,7 @@ int Thing::decr_stats_attack_rate_tenths (void)
 }
 
 int Thing::incr_stats_attack_rate_tenths (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attack_rate_tenths++);
@@ -1403,7 +1403,7 @@ int Thing::incr_stats_attack_rate_tenths (void)
 // attacked_rate_tenths
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats_attacked_rate_tenths (void)
-{
+{_
     if (monst) {
         return (monst->stats_attacked_rate_tenths);
     } else {
@@ -1412,7 +1412,7 @@ int Thing::get_stats_attacked_rate_tenths (void)
 }
 
 int Thing::set_stats_attacked_rate_tenths (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attacked_rate_tenths = v);
@@ -1421,7 +1421,7 @@ int Thing::set_stats_attacked_rate_tenths (int v)
 }
 
 int Thing::decr_stats_attacked_rate_tenths (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attacked_rate_tenths -= v);
@@ -1430,7 +1430,7 @@ int Thing::decr_stats_attacked_rate_tenths (int v)
 }
 
 int Thing::incr_stats_attacked_rate_tenths (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attacked_rate_tenths += v);
@@ -1439,7 +1439,7 @@ int Thing::incr_stats_attacked_rate_tenths (int v)
 }
 
 int Thing::decr_stats_attacked_rate_tenths (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attacked_rate_tenths--);
@@ -1448,7 +1448,7 @@ int Thing::decr_stats_attacked_rate_tenths (void)
 }
 
 int Thing::incr_stats_attacked_rate_tenths (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats_attacked_rate_tenths++);
@@ -1460,7 +1460,7 @@ int Thing::incr_stats_attacked_rate_tenths (void)
 // stats01
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats01 (void)
-{
+{_
     if (monst) {
         return (monst->stats01);
     } else {
@@ -1469,7 +1469,7 @@ int Thing::get_stats01 (void)
 }
 
 int Thing::set_stats01 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats01 = v);
@@ -1478,7 +1478,7 @@ int Thing::set_stats01 (int v)
 }
 
 int Thing::decr_stats01 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats01 -= v);
@@ -1487,7 +1487,7 @@ int Thing::decr_stats01 (int v)
 }
 
 int Thing::incr_stats01 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats01 += v);
@@ -1496,7 +1496,7 @@ int Thing::incr_stats01 (int v)
 }
 
 int Thing::decr_stats01 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats01--);
@@ -1505,7 +1505,7 @@ int Thing::decr_stats01 (void)
 }
 
 int Thing::incr_stats01 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats01++);
@@ -1517,7 +1517,7 @@ int Thing::incr_stats01 (void)
 // stats02
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats02 (void)
-{
+{_
     if (monst) {
         return (monst->stats02);
     } else {
@@ -1526,7 +1526,7 @@ int Thing::get_stats02 (void)
 }
 
 int Thing::set_stats02 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats02 = v);
@@ -1535,7 +1535,7 @@ int Thing::set_stats02 (int v)
 }
 
 int Thing::decr_stats02 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats02 -= v);
@@ -1544,7 +1544,7 @@ int Thing::decr_stats02 (int v)
 }
 
 int Thing::incr_stats02 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats02 += v);
@@ -1553,7 +1553,7 @@ int Thing::incr_stats02 (int v)
 }
 
 int Thing::decr_stats02 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats02--);
@@ -1562,7 +1562,7 @@ int Thing::decr_stats02 (void)
 }
 
 int Thing::incr_stats02 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats02++);
@@ -1574,7 +1574,7 @@ int Thing::incr_stats02 (void)
 // stats03
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats03 (void)
-{
+{_
     if (monst) {
         return (monst->stats03);
     } else {
@@ -1583,7 +1583,7 @@ int Thing::get_stats03 (void)
 }
 
 int Thing::set_stats03 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats03 = v);
@@ -1592,7 +1592,7 @@ int Thing::set_stats03 (int v)
 }
 
 int Thing::decr_stats03 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats03 -= v);
@@ -1601,7 +1601,7 @@ int Thing::decr_stats03 (int v)
 }
 
 int Thing::incr_stats03 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats03 += v);
@@ -1610,7 +1610,7 @@ int Thing::incr_stats03 (int v)
 }
 
 int Thing::decr_stats03 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats03--);
@@ -1619,7 +1619,7 @@ int Thing::decr_stats03 (void)
 }
 
 int Thing::incr_stats03 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats03++);
@@ -1631,7 +1631,7 @@ int Thing::incr_stats03 (void)
 // stats04
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats04 (void)
-{
+{_
     if (monst) {
         return (monst->stats04);
     } else {
@@ -1640,7 +1640,7 @@ int Thing::get_stats04 (void)
 }
 
 int Thing::set_stats04 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats04 = v);
@@ -1649,7 +1649,7 @@ int Thing::set_stats04 (int v)
 }
 
 int Thing::decr_stats04 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats04 -= v);
@@ -1658,7 +1658,7 @@ int Thing::decr_stats04 (int v)
 }
 
 int Thing::incr_stats04 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats04 += v);
@@ -1667,7 +1667,7 @@ int Thing::incr_stats04 (int v)
 }
 
 int Thing::decr_stats04 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats04--);
@@ -1676,7 +1676,7 @@ int Thing::decr_stats04 (void)
 }
 
 int Thing::incr_stats04 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats04++);
@@ -1688,7 +1688,7 @@ int Thing::incr_stats04 (void)
 // stats05
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats05 (void)
-{
+{_
     if (monst) {
         return (monst->stats05);
     } else {
@@ -1697,7 +1697,7 @@ int Thing::get_stats05 (void)
 }
 
 int Thing::set_stats05 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats05 = v);
@@ -1706,7 +1706,7 @@ int Thing::set_stats05 (int v)
 }
 
 int Thing::decr_stats05 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats05 -= v);
@@ -1715,7 +1715,7 @@ int Thing::decr_stats05 (int v)
 }
 
 int Thing::incr_stats05 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats05 += v);
@@ -1724,7 +1724,7 @@ int Thing::incr_stats05 (int v)
 }
 
 int Thing::decr_stats05 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats05--);
@@ -1733,7 +1733,7 @@ int Thing::decr_stats05 (void)
 }
 
 int Thing::incr_stats05 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats05++);
@@ -1745,7 +1745,7 @@ int Thing::incr_stats05 (void)
 // stats06
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats06 (void)
-{
+{_
     if (monst) {
         return (monst->stats06);
     } else {
@@ -1754,7 +1754,7 @@ int Thing::get_stats06 (void)
 }
 
 int Thing::set_stats06 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats06 = v);
@@ -1763,7 +1763,7 @@ int Thing::set_stats06 (int v)
 }
 
 int Thing::decr_stats06 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats06 -= v);
@@ -1772,7 +1772,7 @@ int Thing::decr_stats06 (int v)
 }
 
 int Thing::incr_stats06 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats06 += v);
@@ -1781,7 +1781,7 @@ int Thing::incr_stats06 (int v)
 }
 
 int Thing::decr_stats06 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats06--);
@@ -1790,7 +1790,7 @@ int Thing::decr_stats06 (void)
 }
 
 int Thing::incr_stats06 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats06++);
@@ -1802,7 +1802,7 @@ int Thing::incr_stats06 (void)
 // stats07
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats07 (void)
-{
+{_
     if (monst) {
         return (monst->stats07);
     } else {
@@ -1811,7 +1811,7 @@ int Thing::get_stats07 (void)
 }
 
 int Thing::set_stats07 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats07 = v);
@@ -1820,7 +1820,7 @@ int Thing::set_stats07 (int v)
 }
 
 int Thing::decr_stats07 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats07 -= v);
@@ -1829,7 +1829,7 @@ int Thing::decr_stats07 (int v)
 }
 
 int Thing::incr_stats07 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats07 += v);
@@ -1838,7 +1838,7 @@ int Thing::incr_stats07 (int v)
 }
 
 int Thing::decr_stats07 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats07--);
@@ -1847,7 +1847,7 @@ int Thing::decr_stats07 (void)
 }
 
 int Thing::incr_stats07 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats07++);
@@ -1859,7 +1859,7 @@ int Thing::incr_stats07 (void)
 // stats08
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats08 (void)
-{
+{_
     if (monst) {
         return (monst->stats08);
     } else {
@@ -1868,7 +1868,7 @@ int Thing::get_stats08 (void)
 }
 
 int Thing::set_stats08 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats08 = v);
@@ -1877,7 +1877,7 @@ int Thing::set_stats08 (int v)
 }
 
 int Thing::decr_stats08 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats08 -= v);
@@ -1886,7 +1886,7 @@ int Thing::decr_stats08 (int v)
 }
 
 int Thing::incr_stats08 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats08 += v);
@@ -1895,7 +1895,7 @@ int Thing::incr_stats08 (int v)
 }
 
 int Thing::decr_stats08 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats08--);
@@ -1904,7 +1904,7 @@ int Thing::decr_stats08 (void)
 }
 
 int Thing::incr_stats08 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats08++);
@@ -1916,7 +1916,7 @@ int Thing::incr_stats08 (void)
 // stats09
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats09 (void)
-{
+{_
     if (monst) {
         return (monst->stats09);
     } else {
@@ -1925,7 +1925,7 @@ int Thing::get_stats09 (void)
 }
 
 int Thing::set_stats09 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats09 = v);
@@ -1934,7 +1934,7 @@ int Thing::set_stats09 (int v)
 }
 
 int Thing::decr_stats09 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats09 -= v);
@@ -1943,7 +1943,7 @@ int Thing::decr_stats09 (int v)
 }
 
 int Thing::incr_stats09 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats09 += v);
@@ -1952,7 +1952,7 @@ int Thing::incr_stats09 (int v)
 }
 
 int Thing::decr_stats09 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats09--);
@@ -1961,7 +1961,7 @@ int Thing::decr_stats09 (void)
 }
 
 int Thing::incr_stats09 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats09++);
@@ -1973,7 +1973,7 @@ int Thing::incr_stats09 (void)
 // stats10
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats10 (void)
-{
+{_
     if (monst) {
         return (monst->stats10);
     } else {
@@ -1982,7 +1982,7 @@ int Thing::get_stats10 (void)
 }
 
 int Thing::set_stats10 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats10 = v);
@@ -1991,7 +1991,7 @@ int Thing::set_stats10 (int v)
 }
 
 int Thing::decr_stats10 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats10 -= v);
@@ -2000,7 +2000,7 @@ int Thing::decr_stats10 (int v)
 }
 
 int Thing::incr_stats10 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats10 += v);
@@ -2009,7 +2009,7 @@ int Thing::incr_stats10 (int v)
 }
 
 int Thing::decr_stats10 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats10--);
@@ -2018,7 +2018,7 @@ int Thing::decr_stats10 (void)
 }
 
 int Thing::incr_stats10 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats10++);
@@ -2030,7 +2030,7 @@ int Thing::incr_stats10 (void)
 // stats11
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats11 (void)
-{
+{_
     if (monst) {
         return (monst->stats11);
     } else {
@@ -2039,7 +2039,7 @@ int Thing::get_stats11 (void)
 }
 
 int Thing::set_stats11 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats11 = v);
@@ -2048,7 +2048,7 @@ int Thing::set_stats11 (int v)
 }
 
 int Thing::decr_stats11 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats11 -= v);
@@ -2057,7 +2057,7 @@ int Thing::decr_stats11 (int v)
 }
 
 int Thing::incr_stats11 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats11 += v);
@@ -2066,7 +2066,7 @@ int Thing::incr_stats11 (int v)
 }
 
 int Thing::decr_stats11 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats11--);
@@ -2075,7 +2075,7 @@ int Thing::decr_stats11 (void)
 }
 
 int Thing::incr_stats11 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats11++);
@@ -2087,7 +2087,7 @@ int Thing::incr_stats11 (void)
 // stats12
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats12 (void)
-{
+{_
     if (monst) {
         return (monst->stats12);
     } else {
@@ -2096,7 +2096,7 @@ int Thing::get_stats12 (void)
 }
 
 int Thing::set_stats12 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats12 = v);
@@ -2105,7 +2105,7 @@ int Thing::set_stats12 (int v)
 }
 
 int Thing::decr_stats12 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats12 -= v);
@@ -2114,7 +2114,7 @@ int Thing::decr_stats12 (int v)
 }
 
 int Thing::incr_stats12 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats12 += v);
@@ -2123,7 +2123,7 @@ int Thing::incr_stats12 (int v)
 }
 
 int Thing::decr_stats12 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats12--);
@@ -2132,7 +2132,7 @@ int Thing::decr_stats12 (void)
 }
 
 int Thing::incr_stats12 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats12++);
@@ -2144,7 +2144,7 @@ int Thing::incr_stats12 (void)
 // stats13
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats13 (void)
-{
+{_
     if (monst) {
         return (monst->stats13);
     } else {
@@ -2153,7 +2153,7 @@ int Thing::get_stats13 (void)
 }
 
 int Thing::set_stats13 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats13 = v);
@@ -2162,7 +2162,7 @@ int Thing::set_stats13 (int v)
 }
 
 int Thing::decr_stats13 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats13 -= v);
@@ -2171,7 +2171,7 @@ int Thing::decr_stats13 (int v)
 }
 
 int Thing::incr_stats13 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats13 += v);
@@ -2180,7 +2180,7 @@ int Thing::incr_stats13 (int v)
 }
 
 int Thing::decr_stats13 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats13--);
@@ -2189,7 +2189,7 @@ int Thing::decr_stats13 (void)
 }
 
 int Thing::incr_stats13 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats13++);
@@ -2201,7 +2201,7 @@ int Thing::incr_stats13 (void)
 // stats14
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats14 (void)
-{
+{_
     if (monst) {
         return (monst->stats14);
     } else {
@@ -2210,7 +2210,7 @@ int Thing::get_stats14 (void)
 }
 
 int Thing::set_stats14 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats14 = v);
@@ -2219,7 +2219,7 @@ int Thing::set_stats14 (int v)
 }
 
 int Thing::decr_stats14 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats14 -= v);
@@ -2228,7 +2228,7 @@ int Thing::decr_stats14 (int v)
 }
 
 int Thing::incr_stats14 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats14 += v);
@@ -2237,7 +2237,7 @@ int Thing::incr_stats14 (int v)
 }
 
 int Thing::decr_stats14 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats14--);
@@ -2246,7 +2246,7 @@ int Thing::decr_stats14 (void)
 }
 
 int Thing::incr_stats14 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats14++);
@@ -2258,7 +2258,7 @@ int Thing::incr_stats14 (void)
 // stats15
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats15 (void)
-{
+{_
     if (monst) {
         return (monst->stats15);
     } else {
@@ -2267,7 +2267,7 @@ int Thing::get_stats15 (void)
 }
 
 int Thing::set_stats15 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats15 = v);
@@ -2276,7 +2276,7 @@ int Thing::set_stats15 (int v)
 }
 
 int Thing::decr_stats15 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats15 -= v);
@@ -2285,7 +2285,7 @@ int Thing::decr_stats15 (int v)
 }
 
 int Thing::incr_stats15 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats15 += v);
@@ -2294,7 +2294,7 @@ int Thing::incr_stats15 (int v)
 }
 
 int Thing::decr_stats15 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats15--);
@@ -2303,7 +2303,7 @@ int Thing::decr_stats15 (void)
 }
 
 int Thing::incr_stats15 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats15++);
@@ -2315,7 +2315,7 @@ int Thing::incr_stats15 (void)
 // stats16
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats16 (void)
-{
+{_
     if (monst) {
         return (monst->stats16);
     } else {
@@ -2324,7 +2324,7 @@ int Thing::get_stats16 (void)
 }
 
 int Thing::set_stats16 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats16 = v);
@@ -2333,7 +2333,7 @@ int Thing::set_stats16 (int v)
 }
 
 int Thing::decr_stats16 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats16 -= v);
@@ -2342,7 +2342,7 @@ int Thing::decr_stats16 (int v)
 }
 
 int Thing::incr_stats16 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats16 += v);
@@ -2351,7 +2351,7 @@ int Thing::incr_stats16 (int v)
 }
 
 int Thing::decr_stats16 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats16--);
@@ -2360,7 +2360,7 @@ int Thing::decr_stats16 (void)
 }
 
 int Thing::incr_stats16 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats16++);
@@ -2372,7 +2372,7 @@ int Thing::incr_stats16 (void)
 // stats17
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats17 (void)
-{
+{_
     if (monst) {
         return (monst->stats17);
     } else {
@@ -2381,7 +2381,7 @@ int Thing::get_stats17 (void)
 }
 
 int Thing::set_stats17 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats17 = v);
@@ -2390,7 +2390,7 @@ int Thing::set_stats17 (int v)
 }
 
 int Thing::decr_stats17 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats17 -= v);
@@ -2399,7 +2399,7 @@ int Thing::decr_stats17 (int v)
 }
 
 int Thing::incr_stats17 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats17 += v);
@@ -2408,7 +2408,7 @@ int Thing::incr_stats17 (int v)
 }
 
 int Thing::decr_stats17 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats17--);
@@ -2417,7 +2417,7 @@ int Thing::decr_stats17 (void)
 }
 
 int Thing::incr_stats17 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats17++);
@@ -2429,7 +2429,7 @@ int Thing::incr_stats17 (void)
 // stats18
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats18 (void)
-{
+{_
     if (monst) {
         return (monst->stats18);
     } else {
@@ -2438,7 +2438,7 @@ int Thing::get_stats18 (void)
 }
 
 int Thing::set_stats18 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats18 = v);
@@ -2447,7 +2447,7 @@ int Thing::set_stats18 (int v)
 }
 
 int Thing::decr_stats18 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats18 -= v);
@@ -2456,7 +2456,7 @@ int Thing::decr_stats18 (int v)
 }
 
 int Thing::incr_stats18 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats18 += v);
@@ -2465,7 +2465,7 @@ int Thing::incr_stats18 (int v)
 }
 
 int Thing::decr_stats18 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats18--);
@@ -2474,7 +2474,7 @@ int Thing::decr_stats18 (void)
 }
 
 int Thing::incr_stats18 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats18++);
@@ -2486,7 +2486,7 @@ int Thing::incr_stats18 (void)
 // stats19
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats19 (void)
-{
+{_
     if (monst) {
         return (monst->stats19);
     } else {
@@ -2495,7 +2495,7 @@ int Thing::get_stats19 (void)
 }
 
 int Thing::set_stats19 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats19 = v);
@@ -2504,7 +2504,7 @@ int Thing::set_stats19 (int v)
 }
 
 int Thing::decr_stats19 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats19 -= v);
@@ -2513,7 +2513,7 @@ int Thing::decr_stats19 (int v)
 }
 
 int Thing::incr_stats19 (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats19 += v);
@@ -2522,7 +2522,7 @@ int Thing::incr_stats19 (int v)
 }
 
 int Thing::decr_stats19 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats19--);
@@ -2531,7 +2531,7 @@ int Thing::decr_stats19 (void)
 }
 
 int Thing::incr_stats19 (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monst->stats19++);
@@ -2540,58 +2540,58 @@ int Thing::incr_stats19 (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// stats20
+// stats_strength
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats20 (void)
-{
+int Thing::get_stats_strength (void)
+{_
     if (monst) {
-        return (monst->stats20);
+        return (monst->stats_strength);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats20 (int v)
-{
+int Thing::set_stats_strength (int v)
+{_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats20 = v);
+    auto n = (monst->stats_strength = v);
     if (is_player()) { game_status_init(); }
     return (n);
 }
 
-int Thing::decr_stats20 (int v)
-{
+int Thing::decr_stats_strength (int v)
+{_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats20 -= v);
+    auto n = (monst->stats_strength -= v);
     if (is_player()) { game_status_init(); }
     return (n);
 }
 
-int Thing::incr_stats20 (int v)
-{
+int Thing::incr_stats_strength (int v)
+{_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats20 += v);
+    auto n = (monst->stats_strength += v);
     if (is_player()) { game_status_init(); }
     return (n);
 }
 
-int Thing::decr_stats20 (void)
-{
+int Thing::decr_stats_strength (void)
+{_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats20--);
+    auto n = (monst->stats_strength--);
     if (is_player()) { game_status_init(); }
     return (n);
 }
 
-int Thing::incr_stats20 (void)
-{
+int Thing::incr_stats_strength (void)
+{_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats20++);
+    auto n = (monst->stats_strength++);
     if (is_player()) { game_status_init(); }
     return (n);
 }
@@ -2600,7 +2600,7 @@ int Thing::incr_stats20 (void)
 // owned_count
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_owned_count (void)
-{
+{_
     if (monst) {
         return (monst->owned_count);
     } else {
@@ -2609,35 +2609,35 @@ int Thing::get_owned_count (void)
 }
 
 int Thing::set_owned_count (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->owned_count = v);
 }
 
 int Thing::decr_owned_count (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->owned_count -= v);
 }
 
 int Thing::incr_owned_count (int v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->owned_count += v);
 }
 
 int Thing::decr_owned_count (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->owned_count--);
 }
 
 int Thing::incr_owned_count (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->owned_count++);
@@ -2647,7 +2647,7 @@ int Thing::incr_owned_count (void)
 // timestamp_lunge_begin
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_lunge_begin (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_lunge_begin);
     } else {
@@ -2656,35 +2656,35 @@ timestamp_t Thing::get_timestamp_lunge_begin (void)
 }
 
 timestamp_t Thing::set_timestamp_lunge_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_begin = v);
 }
 
 timestamp_t Thing::decr_timestamp_lunge_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_begin -= v);
 }
 
 timestamp_t Thing::incr_timestamp_lunge_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_begin += v);
 }
 
 timestamp_t Thing::decr_timestamp_lunge_begin (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_begin--);
 }
 
 timestamp_t Thing::incr_timestamp_lunge_begin (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_begin++);
@@ -2694,7 +2694,7 @@ timestamp_t Thing::incr_timestamp_lunge_begin (void)
 // timestamp_lunge_end
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_lunge_end (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_lunge_end);
     } else {
@@ -2703,35 +2703,35 @@ timestamp_t Thing::get_timestamp_lunge_end (void)
 }
 
 timestamp_t Thing::set_timestamp_lunge_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_end = v);
 }
 
 timestamp_t Thing::decr_timestamp_lunge_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_end -= v);
 }
 
 timestamp_t Thing::incr_timestamp_lunge_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_end += v);
 }
 
 timestamp_t Thing::decr_timestamp_lunge_end (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_end--);
 }
 
 timestamp_t Thing::incr_timestamp_lunge_end (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_lunge_end++);
@@ -2741,7 +2741,7 @@ timestamp_t Thing::incr_timestamp_lunge_end (void)
 // timestamp_bounce_begin
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_bounce_begin (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_bounce_begin);
     } else {
@@ -2750,35 +2750,35 @@ timestamp_t Thing::get_timestamp_bounce_begin (void)
 }
 
 timestamp_t Thing::set_timestamp_bounce_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin = v);
 }
 
 timestamp_t Thing::decr_timestamp_bounce_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin -= v);
 }
 
 timestamp_t Thing::incr_timestamp_bounce_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin += v);
 }
 
 timestamp_t Thing::decr_timestamp_bounce_begin (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin--);
 }
 
 timestamp_t Thing::incr_timestamp_bounce_begin (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_begin++);
@@ -2788,7 +2788,7 @@ timestamp_t Thing::incr_timestamp_bounce_begin (void)
 // timestamp_bounce_end
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_bounce_end (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_bounce_end);
     } else {
@@ -2797,35 +2797,35 @@ timestamp_t Thing::get_timestamp_bounce_end (void)
 }
 
 timestamp_t Thing::set_timestamp_bounce_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end = v);
 }
 
 timestamp_t Thing::decr_timestamp_bounce_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end -= v);
 }
 
 timestamp_t Thing::incr_timestamp_bounce_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end += v);
 }
 
 timestamp_t Thing::decr_timestamp_bounce_end (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end--);
 }
 
 timestamp_t Thing::incr_timestamp_bounce_end (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_bounce_end++);
@@ -2835,7 +2835,7 @@ timestamp_t Thing::incr_timestamp_bounce_end (void)
 // timestamp_fadeup_begin
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_fadeup_begin (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_fadeup_begin);
     } else {
@@ -2844,35 +2844,35 @@ timestamp_t Thing::get_timestamp_fadeup_begin (void)
 }
 
 timestamp_t Thing::set_timestamp_fadeup_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_begin = v);
 }
 
 timestamp_t Thing::decr_timestamp_fadeup_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_begin -= v);
 }
 
 timestamp_t Thing::incr_timestamp_fadeup_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_begin += v);
 }
 
 timestamp_t Thing::decr_timestamp_fadeup_begin (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_begin--);
 }
 
 timestamp_t Thing::incr_timestamp_fadeup_begin (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_begin++);
@@ -2882,7 +2882,7 @@ timestamp_t Thing::incr_timestamp_fadeup_begin (void)
 // timestamp_fadeup_end
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_fadeup_end (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_fadeup_end);
     } else {
@@ -2891,35 +2891,35 @@ timestamp_t Thing::get_timestamp_fadeup_end (void)
 }
 
 timestamp_t Thing::set_timestamp_fadeup_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_end = v);
 }
 
 timestamp_t Thing::decr_timestamp_fadeup_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_end -= v);
 }
 
 timestamp_t Thing::incr_timestamp_fadeup_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_end += v);
 }
 
 timestamp_t Thing::decr_timestamp_fadeup_end (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_end--);
 }
 
 timestamp_t Thing::incr_timestamp_fadeup_end (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_fadeup_end++);
@@ -2929,7 +2929,7 @@ timestamp_t Thing::incr_timestamp_fadeup_end (void)
 // timestamp_last_attacked
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_last_attacked (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_last_attacked);
     } else {
@@ -2938,35 +2938,35 @@ timestamp_t Thing::get_timestamp_last_attacked (void)
 }
 
 timestamp_t Thing::set_timestamp_last_attacked (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attacked = v);
 }
 
 timestamp_t Thing::decr_timestamp_last_attacked (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attacked -= v);
 }
 
 timestamp_t Thing::incr_timestamp_last_attacked (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attacked += v);
 }
 
 timestamp_t Thing::decr_timestamp_last_attacked (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attacked--);
 }
 
 timestamp_t Thing::incr_timestamp_last_attacked (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attacked++);
@@ -2976,7 +2976,7 @@ timestamp_t Thing::incr_timestamp_last_attacked (void)
 // timestamp_last_attack
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_last_attack (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_last_attack);
     } else {
@@ -2985,35 +2985,35 @@ timestamp_t Thing::get_timestamp_last_attack (void)
 }
 
 timestamp_t Thing::set_timestamp_last_attack (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attack = v);
 }
 
 timestamp_t Thing::decr_timestamp_last_attack (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attack -= v);
 }
 
 timestamp_t Thing::incr_timestamp_last_attack (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attack += v);
 }
 
 timestamp_t Thing::decr_timestamp_last_attack (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attack--);
 }
 
 timestamp_t Thing::incr_timestamp_last_attack (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_last_attack++);
@@ -3023,7 +3023,7 @@ timestamp_t Thing::incr_timestamp_last_attack (void)
 // timestamp_flip_start
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_flip_start (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_flip_start);
     } else {
@@ -3032,35 +3032,35 @@ timestamp_t Thing::get_timestamp_flip_start (void)
 }
 
 timestamp_t Thing::set_timestamp_flip_start (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start = v);
 }
 
 timestamp_t Thing::decr_timestamp_flip_start (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start -= v);
 }
 
 timestamp_t Thing::incr_timestamp_flip_start (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start += v);
 }
 
 timestamp_t Thing::decr_timestamp_flip_start (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start--);
 }
 
 timestamp_t Thing::incr_timestamp_flip_start (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_flip_start++);
@@ -3070,7 +3070,7 @@ timestamp_t Thing::incr_timestamp_flip_start (void)
 // timestamp_move_start
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_move_begin (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_move_begin);
     } else {
@@ -3079,35 +3079,35 @@ timestamp_t Thing::get_timestamp_move_begin (void)
 }
 
 timestamp_t Thing::set_timestamp_move_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin = v);
 }
 
 timestamp_t Thing::decr_timestamp_move_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin -= v);
 }
 
 timestamp_t Thing::incr_timestamp_move_begin (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin += v);
 }
 
 timestamp_t Thing::decr_timestamp_move_begin (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin--);
 }
 
 timestamp_t Thing::incr_timestamp_move_begin (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_begin++);
@@ -3117,7 +3117,7 @@ timestamp_t Thing::incr_timestamp_move_begin (void)
 // timestamp_move_end
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_move_end (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_move_end);
     } else {
@@ -3126,35 +3126,35 @@ timestamp_t Thing::get_timestamp_move_end (void)
 }
 
 timestamp_t Thing::set_timestamp_move_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end = v);
 }
 
 timestamp_t Thing::decr_timestamp_move_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end -= v);
 }
 
 timestamp_t Thing::incr_timestamp_move_end (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end += v);
 }
 
 timestamp_t Thing::decr_timestamp_move_end (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end--);
 }
 
 timestamp_t Thing::incr_timestamp_move_end (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_move_end++);
@@ -3164,7 +3164,7 @@ timestamp_t Thing::incr_timestamp_move_end (void)
 // timestamp_born
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_born (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_born);
     } else {
@@ -3173,35 +3173,35 @@ timestamp_t Thing::get_timestamp_born (void)
 }
 
 timestamp_t Thing::set_timestamp_born (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born = v);
 }
 
 timestamp_t Thing::decr_timestamp_born (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born -= v);
 }
 
 timestamp_t Thing::incr_timestamp_born (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born += v);
 }
 
 timestamp_t Thing::decr_timestamp_born (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born--);
 }
 
 timestamp_t Thing::incr_timestamp_born (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_born++);
@@ -3211,7 +3211,7 @@ timestamp_t Thing::incr_timestamp_born (void)
 // timestamp_hunger_tick
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_hunger_tick (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_hunger_tick);
     } else {
@@ -3220,35 +3220,35 @@ timestamp_t Thing::get_timestamp_hunger_tick (void)
 }
 
 timestamp_t Thing::set_timestamp_hunger_tick (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick = v);
 }
 
 timestamp_t Thing::decr_timestamp_hunger_tick (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick -= v);
 }
 
 timestamp_t Thing::incr_timestamp_hunger_tick (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick += v);
 }
 
 timestamp_t Thing::decr_timestamp_hunger_tick (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick--);
 }
 
 timestamp_t Thing::incr_timestamp_hunger_tick (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_hunger_tick++);
@@ -3258,7 +3258,7 @@ timestamp_t Thing::incr_timestamp_hunger_tick (void)
 // timestamp_ai_next
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_ai_next (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_ai_next);
     } else {
@@ -3267,35 +3267,35 @@ timestamp_t Thing::get_timestamp_ai_next (void)
 }
 
 timestamp_t Thing::set_timestamp_ai_next (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next = v);
 }
 
 timestamp_t Thing::decr_timestamp_ai_next (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next -= v);
 }
 
 timestamp_t Thing::incr_timestamp_ai_next (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next += v);
 }
 
 timestamp_t Thing::decr_timestamp_ai_next (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next--);
 }
 
 timestamp_t Thing::incr_timestamp_ai_next (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_ai_next++);
@@ -3305,7 +3305,7 @@ timestamp_t Thing::incr_timestamp_ai_next (void)
 // timestamp_collision
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_collision (void)
-{
+{_
     if (monst) {
         return (monst->timestamp_collision);
     } else {
@@ -3314,35 +3314,35 @@ timestamp_t Thing::get_timestamp_collision (void)
 }
 
 timestamp_t Thing::set_timestamp_collision (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision = v);
 }
 
 timestamp_t Thing::decr_timestamp_collision (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision -= v);
 }
 
 timestamp_t Thing::incr_timestamp_collision (timestamp_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision += v);
 }
 
 timestamp_t Thing::decr_timestamp_collision (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision--);
 }
 
 timestamp_t Thing::incr_timestamp_collision (void)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->timestamp_collision++);
@@ -3352,7 +3352,7 @@ timestamp_t Thing::incr_timestamp_collision (void)
 // owner_id
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_owner_id (void)
-{
+{_
     if (monst) {
         return (monst->owner_id);
     } else {
@@ -3361,7 +3361,7 @@ uint32_t Thing::get_owner_id (void)
 }
 
 uint32_t Thing::set_owner_id (uint32_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->owner_id = v);
@@ -3371,7 +3371,7 @@ uint32_t Thing::set_owner_id (uint32_t v)
 // weapon_id_carry_anim
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_weapon_id_carry_anim (void)
-{
+{_
     if (monst) {
         return (monst->weapon_id_carry_anim);
     } else {
@@ -3380,7 +3380,7 @@ uint32_t Thing::get_weapon_id_carry_anim (void)
 }
 
 uint32_t Thing::set_weapon_id_carry_anim (uint32_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->weapon_id_carry_anim = v);
@@ -3390,7 +3390,7 @@ uint32_t Thing::set_weapon_id_carry_anim (uint32_t v)
 // weapon_id_use_anim
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_weapon_id_use_anim (void)
-{
+{_
     if (monst) {
         return (monst->weapon_id_use_anim);
     } else {
@@ -3399,7 +3399,7 @@ uint32_t Thing::get_weapon_id_use_anim (void)
 }
 
 uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->weapon_id_use_anim = v);
@@ -3409,7 +3409,7 @@ uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
 // weapon_tp_id
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_weapon_id (void)
-{
+{_
     if (monst) {
         // con("get weapon %08X", monst->weapon_id);
         return (monst->weapon_id);
@@ -3420,7 +3420,7 @@ uint32_t Thing::get_weapon_id (void)
 }
 
 uint32_t Thing::set_weapon_id (uint32_t v)
-{
+{_
     new_monst();
     // con("set weapon %08X", v);
     return (monst->weapon_id = v);
@@ -3430,7 +3430,7 @@ uint32_t Thing::set_weapon_id (uint32_t v)
 // interpolated_mid_at
 ////////////////////////////////////////////////////////////////////////////
 fpoint Thing::get_interpolated_mid_at (void)
-{
+{_
     if (monst) {
         if (monst->interpolated_mid_at == fpoint(0, 0)) {
             return (mid_at);
@@ -3443,7 +3443,7 @@ fpoint Thing::get_interpolated_mid_at (void)
 }
 
 fpoint Thing::set_interpolated_mid_at (fpoint v)
-{
+{_
     new_monst();
 //con("%s", __FUNCTION__);
     return (monst->interpolated_mid_at = v);

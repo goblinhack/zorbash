@@ -53,7 +53,7 @@ void Thing::animate (void)
 
             Tilep new_tile;
 
-            {
+            {_
                 new_tile = tile_next(tiles, tile);
                 if (!new_tile) {
                     new_tile = tile_first(tiles);

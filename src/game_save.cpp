@@ -17,19 +17,19 @@ extern bool game_load_headers_only;
 bool game_save_config_only;
 
 std::ostream& operator<<(std::ostream &out, Bits<AgeMapp & > const my)
-{
+{_
     out << bits(my.t->val);
     return (out);
 }
 
 std::ostream& operator<<(std::ostream &out, Bits<Dmapp & > const my)
-{
+{_
     out << bits(my.t->val);
     return (out);
 }
 
 std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
-{
+{_
     bool age_map = (my.t->age_map != nullptr);
     out << bits(age_map);
     if (age_map) {
@@ -82,7 +82,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int         */ out << bits(my.t->stats17);
     /* int         */ out << bits(my.t->stats18);
     /* int         */ out << bits(my.t->stats19);
-    /* int         */ out << bits(my.t->stats20);
+    /* int         */ out << bits(my.t->stats_strength);
     /* int         */ out << bits(my.t->stats_attack);
     /* int         */ out << bits(my.t->stats_attack_max);
     /* int         */ out << bits(my.t->stats_attack_rate_tenths);
@@ -126,7 +126,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 }
 
 std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
-{
+{_
     std::string name(tp_id_map[my.t->tp_id - 1]->name);
     out << bits(name);
 
@@ -431,7 +431,7 @@ Game::save_config (void)
 static WidPopup *wid_save;
 
 static void wid_save_destroy (void)
-{
+{_
     if (wid_save) {
         delete wid_save;
         wid_save = nullptr;
@@ -440,13 +440,13 @@ static void wid_save_destroy (void)
 }
 
 uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -465,13 +465,13 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case '6':
                     case '7':
                     case '8':
-                    case '9': {
+                    case '9': {_
                         int slot = c - '0';
                         game->save(slot);
                         wid_save_destroy();
                         return (true);
                     }
-                    case SDLK_ESCAPE: {
+                    case SDLK_ESCAPE: {_
                         CON("PLAYER: save game cancelled");
                         wid_save_destroy();
                         return (true);
@@ -485,13 +485,13 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -510,7 +510,7 @@ uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t wid_save_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     auto slot = wid_get_int_context(w);
     game->save(slot);
     wid_save_destroy();

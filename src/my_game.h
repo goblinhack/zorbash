@@ -246,26 +246,26 @@ public:
     void unset_dungeon(const int x, const int y);
 
     static inline bool is_oob (const int x, const int y, const int z)
-    {
+    {_
         return ((x < 0) || (x >= MAP_WIDTH) ||
                 (y < 0) || (y >= MAP_HEIGHT) ||
                 (z < 0) || (z >= MAP_DEPTH));
     }
 
     static inline bool is_oob (const int x, const int y)
-    {
+    {_
         return ((x < 0) || (x >= MAP_WIDTH) ||
                 (y < 0) || (y >= MAP_HEIGHT));
     }
 
     static inline bool is_oob (const fpoint p)
-    {
+    {_
         return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 
     static inline bool is_oob (const point p)
-    {
+    {_
         return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
@@ -455,7 +455,7 @@ extern void player_tick(void);
 // Find an existing thing.
 //
 static inline Thingp thing_find (const uint32_t id)
-{
+{_
     return (world->find_thing_ptr(id));
 }
 

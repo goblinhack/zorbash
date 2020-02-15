@@ -111,7 +111,7 @@ typedef struct Monst_ {
     int          stats17 = {};
     int          stats18 = {};
     int          stats19 = {};
-    int          stats20 = {};
+    int          stats_strength = {};
     int          stats_attack = {};
     int          stats_attack_max = {};
     int          stats_attack_rate_tenths = {};
@@ -478,12 +478,12 @@ public:
     int decr_stats19(void);
     int incr_stats19(void);
 
-    int set_stats20(int);
-    int get_stats20(void);
-    int decr_stats20(int);
-    int incr_stats20(int);
-    int decr_stats20(void);
-    int incr_stats20(void);
+    int set_stats_strength(int);
+    int get_stats_strength(void);
+    int decr_stats_strength(int);
+    int incr_stats_strength(int);
+    int decr_stats_strength(void);
+    int incr_stats_strength(void);
 
     int set_owned_count(int);
     int get_owned_count(void);
@@ -736,8 +736,8 @@ public:
     int is_rrr34(void);
     int is_rrr35(void);
     int is_rrr36(void);
-    int is_rrr37(void);
-    int is_rrr38(void);
+    int is_attack_shove(void);
+    int is_shovable(void);
     int is_cursor_path(void);
     int is_rrr4(void);
     int is_blood_splatter(void);

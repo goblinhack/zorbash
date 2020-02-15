@@ -18,7 +18,7 @@ static WidPopup *game_config_keyboard_window;
 static_assert(sizeof(SDL_Scancode) <= sizeof(game->config.key_move_left));
 
 static void game_config_keyboard_destroy (void)
-{
+{_
     if (game_config_keyboard_window) {
         delete game_config_keyboard_window;
         game_config_keyboard_window = nullptr;
@@ -27,7 +27,7 @@ static void game_config_keyboard_destroy (void)
 }
 
 uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: reload config");
     game->load_config();
     game_config_keyboard_destroy();
@@ -42,7 +42,7 @@ uint8_t game_config_keyboard_cancel (Widp w, int32_t x, int32_t y, uint32_t butt
 }
 
 uint8_t game_config_keyboard_save (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: save config");
     game->save_config();
     game_config_keyboard_destroy();
@@ -57,7 +57,7 @@ uint8_t game_config_keyboard_save (Widp w, int32_t x, int32_t y, uint32_t button
 }
 
 uint8_t game_config_keyboard_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_config_keyboard_destroy();
     if (game->started) {
         //
@@ -70,115 +70,115 @@ uint8_t game_config_keyboard_back (Widp w, int32_t x, int32_t y, uint32_t button
 }
 
 static void game_config_key_move_left_set (SDL_Scancode code)
-{
+{_
     game->config.key_move_left = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_move_right_set (SDL_Scancode code)
-{
+{_
     game->config.key_move_right = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_move_up_set (SDL_Scancode code)
-{
+{_
     game->config.key_move_up = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_move_down_set (SDL_Scancode code)
-{
+{_
     game->config.key_move_down = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_map_left_set (SDL_Scancode code)
-{
+{_
     game->config.key_map_left = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_map_right_set (SDL_Scancode code)
-{
+{_
     game->config.key_map_right = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_map_up_set (SDL_Scancode code)
-{
+{_
     game->config.key_map_up = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_map_down_set (SDL_Scancode code)
-{
+{_
     game->config.key_map_down = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_attack_set (SDL_Scancode code)
-{
+{_
     game->config.key_attack = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_wait_set (SDL_Scancode code)
-{
+{_
     game->config.key_wait = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_save_set (SDL_Scancode code)
-{
+{_
     game->config.key_save = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_load_set (SDL_Scancode code)
-{
+{_
     game->config.key_load = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_zoom_in_set (SDL_Scancode code)
-{
+{_
     game->config.key_zoom_in = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_zoom_out_set (SDL_Scancode code)
-{
+{_
     game->config.key_zoom_out = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_pause_set (SDL_Scancode code)
-{
+{_
     game->config.key_pause = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_help_set (SDL_Scancode code)
-{
+{_
     game->config.key_help = code;
     game->config_keyboard_select();
 }
 
 static void game_config_key_quit_set (SDL_Scancode code)
-{
+{_
     game->config.key_quit = code;
     game->config_keyboard_select();
 }
 
 static void grab_key (void) 
-{
+{_
     game_notice("Press any key");
     sdl_grab_next_key = true;
 }
 
 uint8_t game_config_keyboard_profile_arrow_keys (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game->config.key_move_up    = SDL_SCANCODE_UP;
     game->config.key_move_left  = SDL_SCANCODE_LEFT;
     game->config.key_move_down  = SDL_SCANCODE_DOWN;
@@ -193,7 +193,7 @@ uint8_t game_config_keyboard_profile_arrow_keys (Widp w, int32_t x, int32_t y, u
 }
 
 uint8_t game_config_keyboard_profile_wasd (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game->config.key_move_up    = SDL_SCANCODE_W;
     game->config.key_move_left  = SDL_SCANCODE_A;
     game->config.key_move_down  = SDL_SCANCODE_S;
@@ -208,132 +208,132 @@ uint8_t game_config_keyboard_profile_wasd (Widp w, int32_t x, int32_t y, uint32_
 }
 
 uint8_t game_config_key_move_left (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_move_left_set;
     return (true);
 }
 
 uint8_t game_config_key_move_right (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_move_right_set;
     return (true);
 }
 
 uint8_t game_config_key_move_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_move_up_set;
     return (true);
 }
 
 uint8_t game_config_key_move_down (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_move_down_set;
     return (true);
 }
 
 uint8_t game_config_key_map_left (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_map_left_set;
     return (true);
 }
 
 uint8_t game_config_key_map_right (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_map_right_set;
     return (true);
 }
 
 uint8_t game_config_key_map_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_map_up_set;
     return (true);
 }
 
 uint8_t game_config_key_map_down (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_map_down_set;
     return (true);
 }
 
 uint8_t game_config_key_attack (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_attack_set;
     return (true);
 }
 
 uint8_t game_config_key_wait (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_wait_set;
     return (true);
 }
 
 uint8_t game_config_key_save (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_save_set;
     return (true);
 }
 
 uint8_t game_config_key_load (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_load_set;
     return (true);
 }
 
 uint8_t game_config_key_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_zoom_in_set;
     return (true);
 }
 
 uint8_t game_config_key_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_zoom_out_set;
     return (true);
 }
 
 uint8_t game_config_key_pause (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_pause_set;
     return (true);
 }
 
 uint8_t game_config_key_help (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_help_set;
     return (true);
 }
 
 uint8_t game_config_key_quit (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     grab_key();
     on_sdl_key_grab = game_config_key_quit_set;
     return (true);
 }
 
 uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -355,13 +355,13 @@ uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -395,14 +395,14 @@ void Game::config_keyboard_select (void)
 
     game_config_keyboard_window =
                     new WidPopup(tl, br, nullptr, "ui_popup_widest");
-    {
+    {_
         Widp w = game_config_keyboard_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_keyboard_key_up);
         wid_set_on_key_down(w, game_config_keyboard_key_down);
     }
 
     int y_at = 0;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "The keys of mighty power");
 
@@ -414,7 +414,7 @@ void Game::config_keyboard_select (void)
     }
 
     y_at = 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
@@ -429,7 +429,7 @@ void Game::config_keyboard_select (void)
             wid_set_text(w, "Back");
         }
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
@@ -440,7 +440,7 @@ void Game::config_keyboard_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Save");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
@@ -457,7 +457,7 @@ void Game::config_keyboard_select (void)
     ///////////////////////////////////////////////////////////////////////
 
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "");
 
@@ -469,7 +469,7 @@ void Game::config_keyboard_select (void)
         wid_set_text(w, "Use W,A,S,D for moving, arrow keys for map");
     }
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "");
 
@@ -489,7 +489,7 @@ void Game::config_keyboard_select (void)
     // Move up
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Move up");
 
@@ -500,7 +500,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Move up");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -516,7 +516,7 @@ void Game::config_keyboard_select (void)
     // Move left
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Move left");
 
@@ -527,7 +527,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Move left");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -543,7 +543,7 @@ void Game::config_keyboard_select (void)
     // Move down
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Move down");
 
@@ -554,7 +554,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Move down");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -570,7 +570,7 @@ void Game::config_keyboard_select (void)
     // Move right
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Move right");
 
@@ -581,7 +581,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Move right");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -602,7 +602,7 @@ void Game::config_keyboard_select (void)
     // Map up
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Map up");
 
@@ -613,7 +613,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Map up");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -629,7 +629,7 @@ void Game::config_keyboard_select (void)
     // Map left
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Map left");
 
@@ -640,7 +640,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Map left");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -656,7 +656,7 @@ void Game::config_keyboard_select (void)
     // Map down
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Map down");
 
@@ -667,7 +667,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Map down");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -683,7 +683,7 @@ void Game::config_keyboard_select (void)
     // Map right
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Map right");
 
@@ -694,7 +694,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Map right");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -715,7 +715,7 @@ void Game::config_keyboard_select (void)
     // attack
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Attack");
 
@@ -726,7 +726,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Attack");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -742,7 +742,7 @@ void Game::config_keyboard_select (void)
     // wait
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Wait");
 
@@ -753,7 +753,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Wait / pass time");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -774,7 +774,7 @@ void Game::config_keyboard_select (void)
     // save
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "save");
 
@@ -785,7 +785,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Save game");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -801,7 +801,7 @@ void Game::config_keyboard_select (void)
     // load
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "load");
 
@@ -812,7 +812,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Load game");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -833,7 +833,7 @@ void Game::config_keyboard_select (void)
     // zoom_in
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "zoom_in");
 
@@ -844,7 +844,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Zoom in");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -860,7 +860,7 @@ void Game::config_keyboard_select (void)
     // zoom_out
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "zoom_out");
 
@@ -871,7 +871,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Zoom out");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -892,7 +892,7 @@ void Game::config_keyboard_select (void)
     // pause
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "pause");
 
@@ -903,7 +903,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Pause game");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -919,7 +919,7 @@ void Game::config_keyboard_select (void)
     // quit
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "quit");
 
@@ -930,7 +930,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Quit");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
@@ -946,7 +946,7 @@ void Game::config_keyboard_select (void)
     // help
     ///////////////////////////////////////////////////////////////////////
     y_at += 3;
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "help");
 
@@ -957,7 +957,7 @@ void Game::config_keyboard_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "This help");
     }
-    {
+    {_
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 

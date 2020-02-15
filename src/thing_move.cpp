@@ -7,7 +7,7 @@
 #include "my_thing.h"
 
 void Thing::stop (void)
-{
+{_
     mid_at = get_interpolated_mid_at();
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);
@@ -16,7 +16,7 @@ void Thing::stop (void)
 }
 
 bool Thing::move (fpoint future_pos)
-{
+{_
     bool up     = future_pos.y < mid_at.y;
     bool down   = future_pos.y > mid_at.y;
     bool left   = future_pos.x < mid_at.x;
@@ -29,7 +29,7 @@ bool Thing::move (fpoint future_pos)
 }
 
 bool Thing::attack (fpoint future_pos)
-{
+{_
     bool up     = future_pos.y < mid_at.y;
     bool down   = future_pos.y > mid_at.y;
     bool left   = future_pos.x < mid_at.x;
@@ -48,7 +48,7 @@ bool Thing::move (fpoint future_pos,
                   uint8_t right,
                   uint8_t attack,
                   uint8_t idle)
-{
+{_
     if (is_dead) {
         return (false);
     }
@@ -125,7 +125,7 @@ bool Thing::move (fpoint future_pos,
 }
 
 void Thing::update_interpolated_position (void)
-{
+{_
     get_bounce();
     if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         set_interpolated_mid_at(mid_at);
@@ -145,7 +145,7 @@ void Thing::update_interpolated_position (void)
 }
 
 bool Thing::update_coordinates (void)
-{
+{_
     auto old_br = br;
     auto tpp = tp();
 
@@ -198,7 +198,8 @@ bool Thing::update_coordinates (void)
     if (!is_no_tile()) {
         auto tile = tile_index_to_tile(tile_curr);
         if (!tile) {
-            die("has no tile, index %d", tile_curr);
+            err("has no tile, index %d", tile_curr);
+            return (false);
         }
         tile_pix_width = tile->pix_width;
         tile_pix_height = tile->pix_height;
@@ -244,7 +245,7 @@ bool Thing::update_coordinates (void)
     //
     // Lunge to attack.
     //
-    {
+    {_
         auto lunge = get_lunge();
         if (lunge) {
             auto delta = get_lunge_to() - get_interpolated_mid_at();
@@ -322,7 +323,7 @@ void Thing::bounce (double bounce_height,
                     double bounce_fade,
                     timestamp_t ms,
                     int bounce_count)
-{
+{_
     auto t = set_timestamp_bounce_begin(time_get_time_ms_cached());
     set_timestamp_bounce_end(t + ms);
 
@@ -335,7 +336,7 @@ void Thing::bounce (double bounce_height,
 void Thing::fadeup (double fadeup_height,
                     double fadeup_fade,
                     timestamp_t ms)
-{
+{_
     auto t = set_timestamp_fadeup_begin(time_get_time_ms_cached());
     set_timestamp_fadeup_end(t + ms);
 
@@ -345,14 +346,14 @@ void Thing::fadeup (double fadeup_height,
 }
 
 void Thing::lunge (fpoint to)
-{
+{_
     auto t = set_timestamp_lunge_begin(time_get_time_ms_cached());
     set_timestamp_lunge_end(t + 200);
     set_lunge_to(to);
 }
 
 double Thing::get_bounce (void)
-{
+{_
     if (!is_bouncing) {
         return (0.0);
     }
@@ -387,7 +388,7 @@ double Thing::get_bounce (void)
 }
 
 double Thing::get_fadeup (void)
-{
+{_
     if (!is_fadeup) {
         return (0.0);
     }
@@ -416,7 +417,7 @@ double Thing::get_fadeup (void)
 }
 
 double Thing::get_lunge (void)
-{
+{_
     if (!get_timestamp_lunge_begin()) {
         return (0);
     }
@@ -510,7 +511,7 @@ void Thing::update_pos (fpoint to, bool immediately)
     auto owner = owner_get();
     if (owner) {
         speed = tp_stats_move_speed_ms(owner->tp());
-    } else{
+    } else{_
         speed = tp_stats_move_speed_ms(tpp);
     }
 
@@ -616,7 +617,7 @@ void Thing::move_to_immediately (fpoint to)
 }
 
 void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)
-{
+{_
     P0->x = tl.x;
     P0->y = tl.y;
     P1->x = br.x;

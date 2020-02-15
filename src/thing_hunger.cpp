@@ -9,7 +9,7 @@
 #include "my_thing.h"
 
 void Thing::hunger_clock (void)
-{
+{_
     auto tpp = tp();
 
     //

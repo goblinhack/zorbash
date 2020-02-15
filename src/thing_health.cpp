@@ -9,7 +9,7 @@
 #include "my_thing.h"
 
 void Thing::health_boost (int v)
-{
+{_
     auto old_health = get_stats_health();
     auto new_health = old_health + v;
     auto max_health = get_stats_health_max();

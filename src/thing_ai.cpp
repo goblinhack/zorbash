@@ -14,7 +14,7 @@
 #undef DEBUG_AI
 
 bool Thing::possible_to_attack (const Thingp itp)
-{
+{_
     auto me = tp();
     auto it = itp->tp();
 
@@ -40,7 +40,7 @@ bool Thing::possible_to_attack (const Thingp itp)
 }
 
 bool Thing::will_avoid (const Thingp itp)
-{
+{_
     auto me = tp();
     auto it = itp->tp();
 
@@ -53,7 +53,7 @@ bool Thing::will_avoid (const Thingp itp)
 }
 
 bool Thing::will_eat (const Thingp itp)
-{
+{_
     auto me = tp();
     auto it = itp->tp();
 
@@ -66,7 +66,7 @@ bool Thing::will_eat (const Thingp itp)
 }
 
 bool Thing::will_prefer (const Thingp itp)
-{
+{_
     auto me = tp();
     auto it = itp->tp();
 
@@ -79,7 +79,7 @@ bool Thing::will_prefer (const Thingp itp)
 }
 
 bool Thing::ai_is_obstacle_for_me (point p)
-{
+{_
     //
     // Avoid threats and treat them as obstacles
     //
@@ -124,7 +124,7 @@ bool Thing::ai_is_obstacle_for_me (point p)
 }
 
 uint8_t Thing::is_less_preferred_terrain (point p)
-{
+{_
     uint8_t pref = 0;
 
     if (world->is_water(p)) {
@@ -140,7 +140,7 @@ uint8_t Thing::is_less_preferred_terrain (point p)
 //
 bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                                std::string &debug)
-{
+{_
 #ifdef DEBUG_AI
     float distance_scale = distance(mid_at, fpoint(p.x, p.y));
 #endif

@@ -250,7 +250,7 @@ static int circle_box_collision (Thingp C,
                                  fpoint *normal,
                                  fpoint *intersect,
                                  int check_only)
-{
+{_
     fpoint C0, C1, C2, C3;
     C->to_coords(&C0, &C1, &C2, &C3);
     auto C_offset = C_at - C->interpolated_mid_at;
@@ -389,7 +389,7 @@ collided:
 static int circle_circle_collision (Thingp A,
                                     Thingp B,
                                     fpoint *intersect)
-{
+{_
     fpoint A_at = A->get_interpolated_mid_at();
     fpoint B_at = B->get_interpolated_mid_at();
 
@@ -434,7 +434,7 @@ static int circle_circle_collision (Thingp A,
                                     Thingp B,
                                     fpoint B_at,
                                     fpoint *intersect)
-{
+{_
     //fpoint A0, A1, A2, A3;
     //A->to_coords(&A0, &A1, &A2, &A3);
     //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
@@ -490,14 +490,14 @@ thing_add_ai_possible_hit (Thingp target,
 
 static void
 thing_ai_possible_hit_add (Thingp target, std::string reason)
-{
+{_
     thing_add_ai_possible_hit(target, reason, false, false);
 }
 
 static void
 thing_ai_possible_hit_add_hitter_killed_on_hitting (Thingp target,
                                                  std::string reason)
-{
+{_
     thing_add_ai_possible_hit(target, reason, true, false);
 }
 
@@ -505,7 +505,7 @@ thing_ai_possible_hit_add_hitter_killed_on_hitting (Thingp target,
 static void
 thing_ai_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
                                                      std::string reason)
-{
+{_
     thing_add_ai_possible_hit(target, reason, false, true);
 }
 #endif
@@ -514,7 +514,7 @@ thing_ai_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
 // Reset the list of things we can possibly hit.
 //
 static void thing_possible_init (void)
-{
+{_
     thing_colls.resize(0);
 }
 
@@ -810,7 +810,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
 }
 
 bool Thing::collision_obstacle (Thingp it)
-{
+{_
     if (it == this) {
         return (false);
     }
@@ -860,7 +860,7 @@ bool Thing::collision_obstacle (Thingp it)
 }
 
 bool Thing::collision_obstacle (fpoint p)
-{
+{_
     //
     // Avoid threats and treat them as obstacles
     //

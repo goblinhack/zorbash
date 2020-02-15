@@ -13,7 +13,7 @@
 #include <list>
 
 void thing_render_minimap (void)
-{
+{_
     blit_fbo_bind(FBO_MINIMAP);
     glClearColor(0, 0, 0, 0);
     glBlendFunc(GL_ONE, GL_ZERO);

@@ -8,7 +8,7 @@
 #include "my_font.h"
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
-{
+{_
     double dw = game->config.one_pixel_gl_width;
     double dh = game->config.one_pixel_gl_height;
 
@@ -207,7 +207,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 }
 
 void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
-{
+{_
     double dw = game->config.one_pixel_gl_width;
     double dh = game->config.one_pixel_gl_height;
 
@@ -413,7 +413,7 @@ void Thing::blit_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
                                               double x1, double y1,
                                               double x2, double y2,
                                               const fpoint &tl, const fpoint &br)
-{
+{_
     fpoint shadow_tl = tl;
     fpoint shadow_tr(br.x, tl.y);
     fpoint shadow_bl(tl.x, br.y);
@@ -441,7 +441,7 @@ void Thing::blit_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
 
 void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                       const fpoint &tl, const fpoint &br)
-{
+{_
     double x1;
     double x2;
     double y1;
@@ -462,7 +462,7 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 void Thing::blit_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
                                               const fpoint &tile_tl, const fpoint &tile_br,
                                               const fpoint &tl, const fpoint &br)
-{
+{_
     double x1, x2, y1, y2;
 
     if (!tile) {
@@ -487,7 +487,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                           double x1, double y1,
                                           double x2, double y2,
                                           const fpoint &tl, const fpoint &br)
-{
+{_
     fpoint shadow_bl(tl.x, br.y);
     fpoint shadow_br = br;
     fpoint shadow_tl = shadow_bl;
@@ -590,7 +590,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                           const fpoint &tl, const fpoint &br)
-{
+{_
     double x1;
     double x2;
     double y1;
@@ -611,7 +611,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 void Thing::blit_non_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
                                                   const fpoint &tile_tl, const fpoint &tile_br,
                                                   const fpoint &tl, const fpoint &br)
-{
+{_
     double x1, x2, y1, y2;
 
     if (!tile) {
@@ -631,7 +631,7 @@ void Thing::blit_non_player_owned_shadow_section (const Tpp &tpp, const Tilep &t
 
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
                          const fpoint &tl, const fpoint &br)
-{
+{_
     if (unlikely(!game->config.gfx_lights)) {
         return;
     }
@@ -655,7 +655,7 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
 void Thing::blit_shadow_section (const Tpp &tpp, const Tilep &tile,
                                  const fpoint &tile_tl, const fpoint &tile_br,
                                  const fpoint &tl, const fpoint &br)
-{
+{_
     if (!world->player) {
         blit_non_player_owned_shadow_section(
             tpp, tile, tile_tl, tile_br, tl, br);
@@ -804,7 +804,7 @@ void Thing::blit_text (std::string const& text,
 }
 
 void Thing::blit (double offset_x, double offset_y, int x, int y)
-{
+{_
     if (unlikely(is_hidden)) {
         return;
     }
@@ -1027,7 +1027,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 }
 
 void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
-{
+{_
     if (unlikely(is_hidden)) {
         return;
     }

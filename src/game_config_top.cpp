@@ -13,7 +13,7 @@
 static WidPopup *game_config_top_window;
 
 static void game_config_top_destroy (void)
-{
+{_
     if (game_config_top_window) {
         delete game_config_top_window;
         game_config_top_window = nullptr;
@@ -21,48 +21,48 @@ static void game_config_top_destroy (void)
 }
 
 uint8_t game_config_top_graphics (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_config_top_destroy();
     game->config_gfx_select();
     return (true);
 }
 
 uint8_t game_config_top_keyboard (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_config_top_destroy();
     game->config_keyboard_select();
     return (true);
 }
 
 uint8_t game_config_top_sound (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_config_top_destroy();
     game->config_sound_select();
     return (true);
 }
 
 uint8_t game_config_top_other (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_config_top_destroy();
     game->config_other_select();
     return (true);
 }
 
 uint8_t game_config_top_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_config_top_destroy();
     game->main_menu_select();
     return (true);
 }
 
 uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -97,13 +97,13 @@ uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t game_config_top_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -137,14 +137,14 @@ void Game::config_top_select (void)
     auto width = br.x - tl.x - 2;
 
     game_config_top_window = new WidPopup(tl, br, nullptr, "");
-    {
+    {_
         Widp w = game_config_top_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_top_key_up);
         wid_set_on_key_down(w, game_config_top_key_down);
     }
 
     int y_at = 0;
-    {
+    {_
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "graphics");
 
@@ -156,7 +156,7 @@ void Game::config_top_select (void)
         wid_set_text(w, "%%fg=white$G%%fg=reset$raphics");
     }
     y_at += 3;
-    {
+    {_
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "sound");
 
@@ -168,7 +168,7 @@ void Game::config_top_select (void)
         wid_set_text(w, "%%fg=white$S%%fg=reset$ound and music");
     }
     y_at += 3;
-    {
+    {_
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "keyboard");
 
@@ -180,7 +180,7 @@ void Game::config_top_select (void)
         wid_set_text(w, "%%fg=white$K%%fg=reset$eyboard");
     }
     y_at += 3;
-    {
+    {_
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Other stuffs");
 
@@ -192,7 +192,7 @@ void Game::config_top_select (void)
         wid_set_text(w, "%%fg=white$O%%fg=reset$ther stuffs");
     }
     y_at += 3;
-    {
+    {_
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
