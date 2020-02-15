@@ -257,11 +257,11 @@ class Tp:
     def set_is_rrr36(self, value):
         zx.tp_set_is_rrr36(self, value)
 
-    def set_is_rrr37(self, value):
-        zx.tp_set_is_rrr37(self, value)
+    def set_is_attack_shove(self, value):
+        zx.tp_set_is_attack_shove(self, value)
 
-    def set_is_rrr38(self, value):
-        zx.tp_set_is_rrr38(self, value)
+    def set_is_shovable(self, value):
+        zx.tp_set_is_shovable(self, value)
 
     def set_is_cursor_path(self, value):
         zx.tp_set_is_cursor_path(self, value)
@@ -277,6 +277,9 @@ class Tp:
 
     def set_is_attack_lunge(self, value):
         zx.tp_set_is_attack_lunge(self, value)
+
+    def set_stats_strength(self, value):
+        zx.tp_set_stats_strength(self, value)
 
     def set_stats_defence(self, value):
         zx.tp_set_stats_defence(self, value)

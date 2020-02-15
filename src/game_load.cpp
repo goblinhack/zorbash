@@ -25,7 +25,7 @@ bool game_load_headers_only;
 // Save timestamps as a delta we can restore.
 //
 static timestamp_t load (timestamp_t T)
-{
+{_
     if (!T) {
         return (0);
     }
@@ -34,19 +34,19 @@ static timestamp_t load (timestamp_t T)
 }
 
 std::istream& operator>>(std::istream &in, Bits<AgeMapp &> my)
-{
+{_
     in >> bits(my.t->val);
     return (in);
 }
 
 std::istream& operator>>(std::istream &in, Bits<Dmapp &> my)
-{
+{_
     in >> bits(my.t->val);
     return (in);
 }
 
 std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
-{
+{_
     bool age_map;
     in >> bits(age_map);
     if (age_map) {
@@ -103,7 +103,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->stats17);
     /* int         */ in >> bits(my.t->stats18);
     /* int         */ in >> bits(my.t->stats19);
-    /* int         */ in >> bits(my.t->stats20);
+    /* int         */ in >> bits(my.t->stats_strength);
     /* int         */ in >> bits(my.t->stats_attack);
     /* int         */ in >> bits(my.t->stats_attack_max);
     /* int         */ in >> bits(my.t->stats_attack_rate_tenths);
@@ -147,7 +147,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
 }
 
 std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
-{
+{_
     std::string name;
     in >> bits(name);
     auto tpp = tp_find(name);
@@ -543,7 +543,7 @@ Game::load (int slot)
 static WidPopup *wid_load;
 
 static void wid_load_destroy (void)
-{
+{_
     if (wid_load) {
         delete wid_load;
         wid_load = nullptr;
@@ -552,13 +552,13 @@ static void wid_load_destroy (void)
 }
 
 uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -577,13 +577,13 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
                     case '6':
                     case '7':
                     case '8':
-                    case '9': {
+                    case '9': {_
                         int slot = c - '0';
                         game->load(slot);
                         wid_load_destroy();
                         return (true);
                     }
-                    case SDLK_ESCAPE: {
+                    case SDLK_ESCAPE: {_
                         CON("PLAYER: load game cancelled");
                         wid_load_destroy();
                         return (true);
@@ -597,13 +597,13 @@ uint8_t wid_load_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -622,7 +622,7 @@ uint8_t wid_load_key_down (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     auto slot = wid_get_int_context(w);
     game->load(slot);
     wid_load_destroy();

@@ -211,8 +211,8 @@ public:
     int is_rrr34 {};
     int is_rrr35 {};
     int is_rrr36 {};
-    int is_rrr37 {};
-    int is_rrr38 {};
+    int is_attack_shove {};
+    int is_shovable {};
     int is_cursor_path {};
     int is_rrr4 {};
     int is_blood_splatter {};
@@ -250,7 +250,7 @@ public:
     int stats17 {};
     int stats18 {};
     int stats19 {};
-    int stats20 {};
+    int stats_strength {};
     int stats_attack {};
     int stats_attack_rate_tenths {};
     int stats_attacked_rate_tenths {};
@@ -287,932 +287,1114 @@ Tpp tp_random_deco(void);
 Tpp tp_random_wall_deco(void);
 
 static inline int32_t tp_blit_top_off (Tpp &t)
-{
+{_
     return (t->blit_top_off);
 }
 
 static inline int32_t tp_blit_bot_off (Tpp &t)
-{
+{_
     return (t->blit_bot_off);
 }
 
 static inline int32_t tp_blit_left_off (Tpp &t)
-{
+{_
     return (t->blit_left_off);
 }
 
 static inline int32_t tp_blit_right_off (Tpp &t)
-{
+{_
     return (t->blit_right_off);
 }
 
 static inline int tp_to_id (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return -1; }
     return (t->id);
 }
 
 static inline int tp_is_floor (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_floor);
 }
 
 static inline int tp_is_wall (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_wall);
 }
 
 static inline int tp_is_door (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_door);
 }
 
 static inline int tp_is_lava (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_lava);
 }
 
 static inline int tp_is_water (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_water);
 }
 
 static inline int tp_is_deep_water (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_deep_water);
 }
 
 static inline int tp_is_monst (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_monst);
 }
 
 static inline int tp_is_food (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_food);
 }
 
 static inline int tp_is_player (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_player);
 }
 
 static inline int tp_gfx_is_an_animation_only (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_is_an_animation_only);
 }
 
 static inline int tp_gfx_animated (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_animated);
 }
 
 static inline int tp_gfx_animated_no_dir (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_animated_no_dir);
 }
 
 static inline int tp_is_rrr1 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr1);
 }
 
 static inline int tp_is_rrr2 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr2);
 }
 
 static inline int tp_is_rrr3 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr3);
 }
 
 static inline int tp_is_rrr4 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr4);
 }
 
 static inline int tp_is_rrr5 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr5);
 }
 
 static inline int tp_is_rrr6 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr6);
 }
 
 static inline int tp_is_rrr7 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr7);
 }
 
 static inline int tp_is_rrr8 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr8);
 }
 
 static inline int tp_is_rrr9 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr9);
 }
 
 static inline int tp_is_rrr10 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr10);
 }
 
 static inline int tp_is_rrr11 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr11);
 }
 
 static inline int tp_is_rrr12 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr12);
 }
 
 static inline int tp_is_rrr13 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr13);
 }
 
 static inline int tp_is_rrr14 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr14);
 }
 
 static inline int tp_is_rrr15 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr15);
 }
 
 static inline int tp_is_rrr16 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr16);
 }
 
 static inline int tp_is_rrr17 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr17);
 }
 
 static inline int tp_is_rrr18 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr18);
 }
 
 static inline int tp_is_rrr19 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr19);
 }
 
 static inline int tp_is_rrr20 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr20);
 }
 
 static inline int tp_is_rrr21 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr21);
 }
 
 static inline int tp_is_rrr22 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr22);
 }
 
 static inline int tp_is_rrr23 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr23);
 }
 
 static inline int tp_is_rrr24 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr24);
 }
 
 static inline int tp_is_rrr25 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr25);
 }
 
 static inline int tp_is_rrr26 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr26);
 }
 
 static inline int tp_is_loggable (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_loggable);
 }
 
 static inline int tp_is_rrr28 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr28);
 }
 
 static inline int tp_is_rrr29 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr29);
 }
 
 static inline int tp_is_rrr30 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr30);
 }
 
 static inline int tp_is_rrr31 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr31);
 }
 
 static inline int tp_is_rrr32 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr32);
 }
 
 static inline int tp_is_rrr33 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr33);
 }
 
 static inline int tp_is_rrr34 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr34);
 }
 
 static inline int tp_is_rrr35 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr35);
 }
 
 static inline int tp_is_rrr36 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rrr36);
 }
 
-static inline int tp_is_rrr37 (Tpp t)
-{
-    return (t->is_rrr37);
+static inline int tp_is_attack_shove (Tpp t)
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
+    return (t->is_attack_shove);
 }
 
-static inline int tp_is_rrr38 (Tpp t)
-{
-    return (t->is_rrr38);
+static inline int tp_is_shovable (Tpp t)
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
+    return (t->is_shovable);
 }
 
 static inline int tp_is_cursor_path (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_cursor_path);
 }
 
 static inline int tp_is_bleeder (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_bleeder);
 }
 
 static inline int tp_is_blood_splatter (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_blood_splatter);
 }
 
 static inline int tp_is_no_tile (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_no_tile);
 }
 
 static inline int tp_is_msg (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_msg);
 }
 
 static inline int tp_is_attack_lunge (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_attack_lunge);
 }
 
 static inline int tp_stats_defence (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats_defence);
 }
 
 static inline int tp_stats_attack (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats_attack);
 }
 
 static inline int tp_stats_attack_rate_tenths (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats_attack_rate_tenths);
 }
 
 static inline int tp_stats_attacked_rate_tenths (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats_attacked_rate_tenths);
 }
 
 static inline int tp_stats01 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats01);
 }
 
 static inline int tp_stats02 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats02);
 }
 
 static inline int tp_stats03 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats03);
 }
 
 static inline int tp_stats04 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats04);
 }
 
 static inline int tp_stats05 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats05);
 }
 
 static inline int tp_stats06 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats06);
 }
 
 static inline int tp_stats07 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats07);
 }
 
 static inline int tp_stats08 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats08);
 }
 
 static inline int tp_stats09 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats09);
 }
 
 static inline int tp_stats10 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats10);
 }
 
 static inline int tp_stats11 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats11);
 }
 
 static inline int tp_stats12 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats12);
 }
 
 static inline int tp_stats13 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats13);
 }
 
 static inline int tp_stats14 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats14);
 }
 
 static inline int tp_stats15 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats15);
 }
 
 static inline int tp_stats16 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats16);
 }
 
 static inline int tp_stats17 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats17);
 }
 
 static inline int tp_stats18 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats18);
 }
 
 static inline int tp_stats19 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->stats19);
 }
 
-static inline int tp_stats20 (Tpp t)
-{
-    return (t->stats20);
+static inline int tp_stats_strength (Tpp t)
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
+    return (t->stats_strength);
 }
 
 static inline int tp_is_secret_door (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_secret_door);
 }
 
 static inline int tp_is_cursor_can_hover_over (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_cursor_can_hover_over);
 }
 
 static inline int tp_is_cursor (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_cursor);
 }
 
 static inline int tp_gfx_dead_anim (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return 0; }
     return (t->gfx_dead_anim);
 }
 
 static inline int tp_is_obstacle (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_obstacle);
 }
 
 static inline int tp_is_attackable (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_attackable);
 }
 
 static inline int tp_is_water_hater (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_water_hater);
 }
 
 static inline int tp_is_hunger_insatiable (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_hunger_insatiable);
 }
 
 static inline int tp_is_undead (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_undead);
 }
 
 static inline int tp_is_rock (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_rock);
 }
 
 static inline std::string tp_is_nutrition_hd (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->is_nutrition_hd);
 }
 
 static inline std::string tp_stats_attack_hd (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->stats_attack_hd);
 }
 
 static inline int tp_collision_check (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->collision_check);
 }
 
 static inline int tp_collision_attack (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->collision_attack);
 }
 
 static inline int tp_is_water_dweller (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_water_dweller);
 }
 
 static inline int tp_collision_hit_priority (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->collision_hit_priority);
 }
 
 static inline double tp_collision_radius (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->collision_radius);
 }
 
 static inline int tp_ai_delay_after_moving_ms (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->ai_delay_after_moving_ms);
 }
 
 static inline int tp_gfx_bounce_on_move (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_bounce_on_move);
 }
 
 static inline int tp_is_corpse_on_death (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_corpse_on_death);
 }
 
 static inline int tp_is_meat_eater (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_meat_eater);
 }
 
 static inline int tp_is_made_of_meat (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_made_of_meat);
 }
 
 static inline int tp_is_active (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_active);
 }
 
 static inline int tp_stats_health_starving_pct (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->stats_health_starving_pct);
 }
 
 static inline int tp_stats_health_initial (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->stats_health_initial);
 }
 
 static inline int tp_stats_health_hunger_pct (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->stats_health_hunger_pct);
 }
 
 static inline int tp_hunger_clock_freq_ms (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->hunger_clock_freq_ms);
 }
 
 static inline int tp_ai_scent_distance (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->ai_scent_distance);
 }
 
 static inline int tp_is_ripple (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_ripple);
 }
 
 static inline int tp_is_light_strength (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_light_strength);
 }
 
 static inline int tp_is_dirt (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_dirt);
 }
 
 static inline int tp_is_blood (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_blood);
 }
 
 static inline int tp_gfx_animated_can_vflip (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_animated_can_vflip);
 }
 
 static inline int tp_gfx_small_shadow_caster (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_small_shadow_caster);
 }
 
 static inline int tp_is_corridor (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_corridor);
 }
 
 static inline int tp_gfx_oversized_but_sitting_on_the_ground (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_oversized_but_sitting_on_the_ground);
 }
 
 static inline int tp_is_interesting (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_interesting);
 }
 
 static inline int tp_is_exit (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_exit);
 }
 
 static inline int tp_is_entrance (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_entrance);
 }
 
 static inline int tp_gfx_is_floor_deco (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_is_floor_deco);
 }
 
 static inline int tp_gfx_is_wall_deco (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_is_wall_deco);
 }
 
 static inline int tp_stats_move_speed_ms (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->stats_move_speed_ms);
 }
 
 static inline int tp_weapon_use_delay_hundredths (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->weapon_use_delay_hundredths);
 }
 
 static inline int tp_collision_box (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->collision_box);
 }
 
 static inline int tp_collision_circle (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->collision_circle);
 }
 
 static inline int tp_weapon_damage (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->weapon_damage);
 }
 
 static inline int tp_is_projectile (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_projectile);
 }
 
 static inline int tp_is_explosion (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_explosion);
 }
 
 static inline int tp_is_combustable (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_combustable);
 }
 
 static inline int tp_weapon_use_distance (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->weapon_use_distance);
 }
 
 static inline int tp_gfx_is_weapon_carry_anim (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_is_weapon_carry_anim);
 }
 
 static inline int tp_gfx_is_attack_anim (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_is_attack_anim);
 }
 
 static inline int tp_is_weapon (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_weapon);
 }
 
 static inline int tp_gfx_show_outlined (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_show_outlined);
 }
 
 static inline int tp_gfx_large_shadow_caster (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_large_shadow_caster);
 }
 
 static inline int tp_gfx_animated_can_hflip (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->gfx_animated_can_hflip);
 }
 
 static inline int tp_z_depth (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->z_depth);
 }
 
 static inline int tp_is_movable (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_movable);
 }
 
 static inline int tp_is_movement_blocking (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_movement_blocking);
 }
 
 static inline int tp_is_key (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_key);
 }
 
 static inline std::string tp_name (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return "<no tp>"; }
     return (t->name);
 }
 
 static inline std::string tp_str_zzz1 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz1);
 }
 
 static inline std::string tp_str_zzz2 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz2);
 }
 
 static inline std::string tp_str_zzz3 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz3);
 }
 
 static inline std::string tp_str_zzz4 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz4);
 }
 
 static inline std::string tp_str_zzz5 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz5);
 }
 
 static inline std::string tp_str_zzz6 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz6);
 }
 
 static inline std::string tp_str_zzz7 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz7);
 }
 
 static inline std::string tp_str_zzz8 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz8);
 }
 
 static inline std::string tp_str_zzz9 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz9);
 }
 
 static inline std::string tp_str_zzz10 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz10);
 }
 
 static inline std::string tp_str_zzz11 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz11);
 }
 
 static inline std::string tp_str_zzz12 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz12);
 }
 
 static inline std::string tp_str_zzz13 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz13);
 }
 
 static inline std::string tp_str_zzz14 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz14);
 }
 
 static inline std::string tp_str_zzz15 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz15);
 }
 
 static inline std::string tp_str_zzz16 (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_zzz16);
 }
 
 static inline std::string tp_real_name (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->real_name);
 }
 
 static inline std::string tp_str_light_color (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->str_light_color);
 }
 
 static inline std::string tp_weapon_carry_anim (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->weapon_carry_anim);
 }
 
 static inline std::string tp_weapon_use_anim (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return ""; }
     return (t->weapon_use_anim);
 }
 
 static inline Tilemap *tp_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tiles);
 }
 
 static inline Tilemap *tp_tile_lefts (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tile_lefts);
 }
 
 static inline Tilemap *tp_tile_rights (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tile_rights);
 }
 
 static inline Tilemap *tp_tile_tops (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tile_tops);
 }
 
 static inline Tilemap *tp_tile_bots (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tile_bots);
 }
 
 static inline Tilemap *tp_tile_tls (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tile_tls);
 }
 
 static inline Tilemap *tp_tile_trs (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tile_trs);
 }
 
 static inline Tilemap *tp_tile_bls (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tile_bls);
 }
 
 static inline Tilemap *tp_tile_brs (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->tile_brs);
 }
 
 static inline Tilemap *tp_horiz_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->horiz_tiles);
 }
 
 static inline Tilemap *tp_vert_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->vert_tiles);
 }
 
 static inline Tilemap *tp_l90_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->l90_tiles);
 }
 
 static inline Tilemap *tp_l180_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->l180_tiles);
 }
 
 static inline Tilemap *tp_l_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->l_tiles);
 }
 
 static inline Tilemap *tp_l270_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->l270_tiles);
 }
 
 static inline Tilemap *tp_t_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->t_tiles);
 }
 
 static inline Tilemap *tp_t90_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->t90_tiles);
 }
 
 static inline Tilemap *tp_t180_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->t180_tiles);
 }
 
 static inline Tilemap *tp_t270_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->t270_tiles);
 }
 
 static inline Tilemap *tp_x_tiles (Tpp t)
-{
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
     return (&t->x_tiles);
 }
 

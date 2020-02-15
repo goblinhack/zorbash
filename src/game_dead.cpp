@@ -12,7 +12,7 @@
 static WidPopup *wid_dead_window;
 
 static void wid_dead_destroy (void)
-{
+{_
     if (wid_dead_window) {
         delete wid_dead_window;
         wid_dead_window = nullptr;
@@ -24,13 +24,13 @@ static void wid_dead_destroy (void)
 }
 
 uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -40,7 +40,7 @@ uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
                         // Magic keys we use to toggle the console.
                         //
                         return (false);
-                    case SDLK_ESCAPE: {
+                    case SDLK_ESCAPE: {_
                         wid_dead_destroy();
                         return (true);
                     }
@@ -53,13 +53,13 @@ uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t wid_dead_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -78,7 +78,7 @@ uint8_t wid_dead_key_down (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t wid_dead_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     wid_dead_destroy();
     return (true);
 }
@@ -113,7 +113,7 @@ void Game::dead_select (void)
     wid_dead_window->log(" ");
     wid_dead_window->log("long headed walrus with manuy tusks");
 
-    {
+    {_
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 
@@ -127,7 +127,7 @@ void Game::dead_select (void)
         wid_set_text(w, "Killed by");
     }
 
-    {
+    {_
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 

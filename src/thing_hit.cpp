@@ -13,7 +13,7 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
                           Thingp real_hitter, // if an arrow, who fired it
                           Thingp hitter,
                           int damage)
-{
+{_
     //
     // Cruel to let things keep on hitting you when you're dead
     //
@@ -108,7 +108,7 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
 // Returns true on the target being dead.
 //
 int Thing::ai_hit_if_possible (Thingp hitter, int damage)
-{
+{_
     //
     // Cruel to let things keep on hitting you when you're dead
     //
@@ -238,6 +238,6 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
 }
 
 int Thing::ai_hit_if_possible (Thingp hitter)
-{
+{_
     return (ai_hit_if_possible(hitter, 0));
 }

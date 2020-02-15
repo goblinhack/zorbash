@@ -14,6 +14,10 @@ static void game_place_walls (Dungeonp d,
                               int tries)
 {_
     auto tp = tp_random_wall();
+    if (!tp) {
+        ERR("game_place_walls failed");
+        return;
+    }
     auto what = tp_name(tp);
 
     while (tries--) {
@@ -483,6 +487,9 @@ static void game_place_random_blood (Dungeonp d)
                 int splatters = random_range(2, 10);
                 for (int splatter = 0; splatter < splatters; splatter++) {
                     auto tp = tp_random_blood();
+                    if (!tp) {
+                        return;
+                    }
                     (void) thing_new(tp_name(tp),
                                      fpoint(x, y),
                                      fpoint(0.25, 0.25));
@@ -547,6 +554,9 @@ static void game_place_monst (Dungeonp d)
             }
 
             auto tp = tp_random_monst();
+            if (!tp) {
+                return;
+            }
 
             (void) thing_new(tp_name(tp), fpoint(x, y));
         }
@@ -566,6 +576,10 @@ static void game_place_food (Dungeonp d)
             }
 
             auto tp = tp_random_food();
+            if (!tp) {
+                return;
+            }
+
             (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
@@ -584,6 +598,9 @@ static void game_place_blood (Dungeonp d)
             }
 
             auto tp = tp_random_blood();
+            if (!tp) {
+                return;
+            }
 
             (void) thing_new(tp_name(tp), fpoint(x, y));
         }
@@ -603,6 +620,10 @@ static void game_place_keys (Dungeonp d)
             }
 
             auto tp = tp_random_key();
+            if (!tp) {
+                return;
+            }
+
             auto t = thing_new(tp_name(tp), fpoint(x, y));
             t->bounce(0.2, 1.0, 500, 99999);
         }
@@ -633,6 +654,10 @@ static void game_place_floor_deco (Dungeonp d)
             }
 
             auto tp = tp_random_deco();
+            if (!tp) {
+                return;
+            }
+
             thing_new(tp_name(tp), fpoint(x, y));
         }
     }
@@ -660,6 +685,10 @@ static void game_place_wall_deco (Dungeonp d)
             }
 
             auto tp = tp_random_wall_deco();
+            if (!tp) {
+                return;
+            }
+
             thing_new(tp_name(tp), fpoint(x, y));
 
             tp = tp_random_wall();
@@ -708,6 +737,10 @@ static void game_place_dirt (Dungeonp d)
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!d->is_anything_at(x, y) || d->is_dirt(x, y)) {
                 auto tp = tp_random_dirt();
+                if (!tp) {
+                    return;
+                }
+
                 (void) thing_new(tp_name(tp), fpoint(x, y));
             }
         }
@@ -836,32 +869,55 @@ _
     mysrand(seed);
     auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
                                GRID_HEIGHT, seed);
+    if (errored) { return; }
     // auto dungeon = new Dungeon(0);
     game_place_entrance(dungeon, "entrance1");
+    if (errored) { return; }
     game_place_exit(dungeon, "exit1");
+    if (errored) { return; }
     game_place_door(dungeon, "door1");
+    if (errored) { return; }
     game_place_secret_door(dungeon, "secret_door1");
+    if (errored) { return; }
 
     auto tries = 1000;
 
     game_place_walls(dungeon, 1, 6, 6, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 2, 6, 6, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 1, 6, 3, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 1, 3, 6, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 1, 3, 3, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 2, 3, 3, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 3, 3, 3, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 4, 3, 3, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 1, 2, 2, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 2, 2, 2, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 1, 2, 1, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 2, 2, 1, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 3, 2, 1, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 4, 2, 1, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 1, 1, 2, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 2, 1, 2, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 3, 2, 1, tries);
+    if (errored) { return; }
     game_place_walls(dungeon, 4, 2, 1, tries);
+    if (errored) { return; }
 
     for (auto d = 1; d < 3; d++) {
         int nloops = 10;
@@ -880,42 +936,79 @@ _
     }
 
     game_place_floor_under_objects(dungeon, "floor1", 1);
+    if (errored) { return; }
     game_place_floor_under_objects(dungeon, "floor2", 2);
+    if (errored) { return; }
     game_place_floor_under_objects(dungeon, "floor3", 3);
+    if (errored) { return; }
     game_place_floor_under_objects(dungeon, "floor4", 4);
+    if (errored) { return; }
     game_place_floor_under_objects(dungeon, "floor5", 5);
+    if (errored) { return; }
     game_place_floor_under_objects(dungeon, "floor6", 6);
+    if (errored) { return; }
     game_place_floor_under_objects(dungeon, "floor7", 7);
+    if (errored) { return; }
     game_place_floor_under_objects(dungeon, "floor8", 8);
+    if (errored) { return; }
     game_place_floor_under_objects(dungeon, "floor9", 9);
+    if (errored) { return; }
     game_place_remaining_walls(dungeon, "wall1");
+    if (errored) { return; }
     game_place_remaining_floor(dungeon, "floor1");
+    if (errored) { return; }
     game_place_corridor(dungeon, "corridor1", 0);
+    if (errored) { return; }
     game_place_floor_deco(dungeon);
+    if (errored) { return; }
     game_place_wall_deco(dungeon);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 1, 6, 6, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 2, 6, 6, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 1, 6, 3, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 1, 3, 6, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 1, 3, 3, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 2, 3, 3, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 3, 3, 3, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 4, 3, 3, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 1, 2, 2, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 2, 2, 2, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 1, 2, 1, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 2, 2, 1, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 3, 2, 1, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 1, 1, 2, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 2, 1, 2, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 3, 2, 1, tries);
+    if (errored) { return; }
     game_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
+    if (errored) { return; }
     game_place_remaining_rocks(dungeon, "rock1");
+    if (errored) { return; }
     game_place_dirt(dungeon);
+    if (errored) { return; }
     game_place_lava(dungeon, "lava1");
+    if (errored) { return; }
     game_place_water(dungeon, "water1");
+    if (errored) { return; }
     game_place_deep_water(dungeon, "deep_water1");
+    if (errored) { return; }
     //fluid_init();
 CON("TODO fix place blood");
 if (0) {
@@ -936,17 +1029,24 @@ if (0) {
             }
         }
     }
+    if (errored) { return; }
 
     game_place_monst(dungeon);
+    if (errored) { return; }
     game_place_food(dungeon);
+    if (errored) { return; }
 CON("TODO fix place blood");
     if (0) {
     game_place_blood(dungeon);
+    if (errored) { return; }
     }
     game_place_keys(dungeon);
+    if (errored) { return; }
     game_mark_dungeon_tiles(dungeon);
+    if (errored) { return; }
 
     thing_map_scroll_to_player();
+    if (errored) { return; }
 
     LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");

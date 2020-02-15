@@ -80,7 +80,7 @@ void thing_cursor_move (void)
 // Make the map scroll to the cursor (or the player)
 //
 void thing_cursor_scroll_map_to_follow (void)
-{
+{_
     fpoint follow;
     float sensitivity;
     float x_sensitivity;
@@ -97,6 +97,10 @@ void thing_cursor_scroll_map_to_follow (void)
         //
         extern Widp wid_itembar;
         if (wid_over) {
+            return;
+        }
+        if (!wid_itembar) {
+            ERR("no wid_itembar");
             return;
         }
 
@@ -151,7 +155,7 @@ void thing_cursor_scroll_map_to_follow (void)
 }
 
 void Thing::update_cursor (void)
-{
+{_
     if (is_cursor_can_hover_over()) {
         if (is_blitted) {
             float tl_mx = game->config.video_pix_width * last_blit_tl.x;
@@ -169,7 +173,7 @@ void Thing::update_cursor (void)
 }
 
 void thing_cursor_reset_if_needed (void)
-{
+{_
     if (world->map_follow_player) {
         if (world->cursor) {
             if (world->player) {
@@ -184,7 +188,7 @@ void thing_cursor_reset_if_needed (void)
 
 void thing_cursor_find (uint16_t minx, uint16_t miny,
                         uint16_t maxx, uint16_t maxy)
-{
+{_
     if (world->cursor_needs_update) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {

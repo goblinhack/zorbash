@@ -12,7 +12,7 @@
 static WidPopup *game_config_sound_window;
 
 static void game_config_sound_destroy (void)
-{
+{_
     if (game_config_sound_window) {
         delete game_config_sound_window;
         game_config_sound_window = nullptr;
@@ -21,7 +21,7 @@ static void game_config_sound_destroy (void)
 }
 
 uint8_t game_config_sound_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: reload config");
     game->load_config();
     game_config_sound_destroy();
@@ -30,7 +30,7 @@ uint8_t game_config_sound_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 uint8_t game_config_sound_save (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: save config");
     game->save_config();
     game_config_sound_destroy();
@@ -39,14 +39,14 @@ uint8_t game_config_sound_save (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 uint8_t game_config_sound_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_config_sound_destroy();
     game->config_top_select();
     return (true);
 }
 
 uint8_t game_config_sound_effects_volume_incr (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: incr sound_volume");
     game->config.sound_volume++;
     game->config_sound_select();
@@ -54,7 +54,7 @@ uint8_t game_config_sound_effects_volume_incr (Widp w, int32_t x, int32_t y, uin
 }
 
 uint8_t game_config_sound_effects_volume_decr (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: incr sound_volume");
     game->config.sound_volume--;
     game->config_sound_select();
@@ -62,7 +62,7 @@ uint8_t game_config_sound_effects_volume_decr (Widp w, int32_t x, int32_t y, uin
 }
 
 uint8_t game_config_sound_music_volume_incr (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: incr music_volume");
     game->config.music_volume++;
     game->config_sound_select();
@@ -70,7 +70,7 @@ uint8_t game_config_sound_music_volume_incr (Widp w, int32_t x, int32_t y, uint3
 }
 
 uint8_t game_config_sound_music_volume_decr (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: incr music_volume");
     game->config.music_volume--;
     game->config_sound_select();
@@ -78,13 +78,13 @@ uint8_t game_config_sound_music_volume_decr (Widp w, int32_t x, int32_t y, uint3
 }
 
 uint8_t game_config_sound_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -115,13 +115,13 @@ uint8_t game_config_sound_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t game_config_sound_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -152,14 +152,14 @@ void Game::config_sound_select (void)
     auto width = br.x - tl.x;
 
     game_config_sound_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
-    {
+    {_
         Widp w = game_config_sound_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_sound_key_up);
         wid_set_on_key_down(w, game_config_sound_key_down);
     }
 
     int y_at = 0;
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "configuration");
 
@@ -171,7 +171,7 @@ void Game::config_sound_select (void)
     }
 
     y_at = 3;
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
@@ -182,7 +182,7 @@ void Game::config_sound_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
     }
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
@@ -193,7 +193,7 @@ void Game::config_sound_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
     }
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
@@ -206,7 +206,7 @@ void Game::config_sound_select (void)
     }
 
     y_at += 3;
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects volume");
 
@@ -217,7 +217,7 @@ void Game::config_sound_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Effects volume");
     }
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects volume value");
 
@@ -227,7 +227,7 @@ void Game::config_sound_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, std::to_string(game->config.sound_volume));
     }
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects value +");
 
@@ -238,7 +238,7 @@ void Game::config_sound_select (void)
         wid_set_on_mouse_up(w, game_config_sound_effects_volume_incr);
         wid_set_text(w, "+");
     }
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects value -");
 
@@ -251,7 +251,7 @@ void Game::config_sound_select (void)
     }
 
     y_at += 3;
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Music volume");
 
@@ -262,7 +262,7 @@ void Game::config_sound_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Music volume");
     }
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Music volume value");
 
@@ -272,7 +272,7 @@ void Game::config_sound_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, std::to_string(game->config.music_volume));
     }
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Music value +");
 
@@ -283,7 +283,7 @@ void Game::config_sound_select (void)
         wid_set_on_mouse_up(w, game_config_sound_music_volume_incr);
         wid_set_text(w, "+");
     }
-    {
+    {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Music value -");
 

@@ -17,7 +17,7 @@
 // Create the cursor path, avoiding things like lava
 //
 static void thing_cursor_path_draw (point start, point end)
-{
+{_
     Dmap d {};
     point dmap_start = start;
     point dmap_end = end;
@@ -127,7 +127,7 @@ void thing_cursor_path_create (void)
 }
 
 bool Thing::cursor_path_pop_next_and_move (void)
-{
+{_
     if (monst && monst->move_path.size()) {
         auto to = monst->move_path[0];
         auto future_pos = fpoint(to.x + 0.5, to.y + 0.5);
@@ -142,7 +142,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
 }
 
 void Thing::cursor_path_grab (void)
-{
+{_
     if (game->move_path.size()) {
         new_monst();
         monst->move_path = game->move_path;
@@ -152,7 +152,7 @@ void Thing::cursor_path_grab (void)
 }
 
 void Thing::cursor_path_stop (void)
-{
+{_
     new_monst();
     monst->move_path.clear();
 }

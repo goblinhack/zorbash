@@ -1997,7 +1997,7 @@ extern "C" {
 #  elif (LZO_CC_CLANG && (LZO_CC_CLANG < 0x020900ul)) && defined(__cplusplus)
 #    define LZO_COMPILE_TIME_ASSERT_HEADER(e)  LZO_EXTERN_C_BEGIN int __LZO_CTA_NAME(lzo_cta_f__)(int [1-2*!(e)]); LZO_EXTERN_C_END
 #  elif (LZO_CC_GNUC) && defined(__CHECKER__) && defined(__SPARSE_CHECKER__)
-#    define LZO_COMPILE_TIME_ASSERT_HEADER(e)  LZO_EXTERN_C_BEGIN enum {__LZO_CTA_NAME(lzo_cta_e__)=1/!!(e)} __attribute__((__unused__)); LZO_EXTERN_C_END
+#    define LZO_COMPILE_TIME_ASSERT_HEADER(e)  LZO_EXTERN_C_BEGIN enum {_LZO_CTA_NAME(lzo_cta_e__)=1/!!(e)} __attribute__((__unused__)); LZO_EXTERN_C_END
 #  else
 #    define LZO_COMPILE_TIME_ASSERT_HEADER(e)  LZO_EXTERN_C_BEGIN extern int __LZO_CTA_NAME(lzo_cta__)[1-2*!(e)]; LZO_EXTERN_C_END
 #  endif
@@ -2012,7 +2012,7 @@ extern "C" {
 #  elif (LZO_CC_GNUC) && defined(__CHECKER__) && defined(__SPARSE_CHECKER__)
 #    define LZO_COMPILE_TIME_ASSERT(e)  {(void) (0/!!(e));}
 #  elif (LZO_CC_GNUC >= 0x040700ul) && (LZO_CFG_USE_COUNTER) && defined(__cplusplus)
-#    define LZO_COMPILE_TIME_ASSERT(e)  {enum {__LZO_CTA_NAME(lzo_cta_e__)=1/!!(e)} __attribute__((__unused__));}
+#    define LZO_COMPILE_TIME_ASSERT(e)  {enum {_LZO_CTA_NAME(lzo_cta_e__)=1/!!(e)} __attribute__((__unused__));}
 #  elif (LZO_CC_GNUC >= 0x040700ul)
 #    define LZO_COMPILE_TIME_ASSERT(e)  {typedef int __LZO_CTA_NAME(lzo_cta_t__)[1-2*!(e)] __attribute__((__unused__));}
 #  elif (LZO_CC_MSC && (_MSC_VER < 900))

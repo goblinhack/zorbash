@@ -61,7 +61,7 @@ static void game_status_wid_create (void)
 
     game_status_fini();
 
-    {
+    {_
         point tl = {ITEMBAR_TL_X, ITEMBAR_TL_Y};
         point br = {ITEMBAR_BR_X, ITEMBAR_BR_Y};
         color c;
@@ -73,7 +73,7 @@ static void game_status_wid_create (void)
     }
 
     int x = 0;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {0, 0};
         point br = {ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -90,7 +90,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -107,7 +107,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -124,7 +124,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -141,7 +141,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -159,7 +159,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -176,7 +176,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -193,7 +193,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -210,7 +210,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -227,7 +227,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
     x += ITEMBAR_WIDTH;
-    {
+    {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
         point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
@@ -246,7 +246,7 @@ static void game_status_wid_create (void)
 
     wid_update(wid_itembar);
 
-    {
+    {_
         point tl = {ASCII_WIDTH - SIDEBAR_WIDTH - 2, 0};
         point br = {ASCII_WIDTH - 1, ASCII_HEIGHT};
         color c;
@@ -258,7 +258,7 @@ static void game_status_wid_create (void)
     }
 
     int y_at = 0;
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "zorbash-0");
         point tl = {0, y_at};
         point br = {SIDEBAR_WIDTH - 1, y_at+1};
@@ -268,7 +268,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     y_at += 2;
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "zorbash-1");
         point tl = {0, y_at};
         point br = {SIDEBAR_WIDTH - 1, y_at+1};
@@ -278,7 +278,7 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
     y_at += 2;
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "zorbash-2");
         point tl = {0, y_at};
         point br = {SIDEBAR_WIDTH - 1, y_at+1};
@@ -290,7 +290,7 @@ static void game_status_wid_create (void)
     y_at += 2;
 
 #if 0
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "title box");
         point tl = {0, y_at};
         point br = {5, y_at + 5};
@@ -303,7 +303,7 @@ static void game_status_wid_create (void)
     }
 
     y_at += 3;
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "title name");
         point tl = {0, y_at + 4};
         point br = {SIDEBAR_WIDTH, y_at + 4};
@@ -314,7 +314,7 @@ static void game_status_wid_create (void)
         wid_set_shape_none(w);
     }
 
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "gold");
         point tl = {7, y_at-3};
         point br = {SIDEBAR_WIDTH, y_at-3};
@@ -325,7 +325,7 @@ static void game_status_wid_create (void)
         wid_set_shape_none(w);
     }
 
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "weight");
         point tl = {7, y_at-2};
         point br = {SIDEBAR_WIDTH, y_at-2};
@@ -342,7 +342,7 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     // Health
     ///////////////////////////////////////////////////////////////////////////
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "health-icon");
         point tl = {0, y_at};
         point br = {2, y_at + 2};
@@ -357,7 +357,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, icon);
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
         point tl = {3, y_at};
         point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y + 1};
@@ -373,7 +373,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, icon);
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "health-status");
         point tl = {3, y_at + 2};
         point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y};
@@ -382,7 +382,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, "health-status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "Health-value");
         point tl = {3, y_at + 3};
         point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
@@ -400,7 +400,7 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     // Attack
     ///////////////////////////////////////////////////////////////////////////
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "attack-icon");
         point tl = {0, y_at};
         point br = {2, y_at + 2};
@@ -409,7 +409,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, "attack-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "attack-status-bar");
         point tl = {3, y_at};
         point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y + 1};
@@ -425,7 +425,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, icon);
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "attack-status");
         point tl = {3, y_at + 2};
         point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y};
@@ -434,7 +434,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, "attack-status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "attack-value");
         point tl = {3, y_at + 3};
         point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
@@ -452,7 +452,7 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     // Defence
     ///////////////////////////////////////////////////////////////////////////
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "defence-icon");
         point tl = {0, y_at};
         point br = {2, y_at + 2};
@@ -461,7 +461,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, "defence-icon");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "defence-status-bar");
         point tl = {3, y_at};
         point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y + 1};
@@ -477,7 +477,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, icon);
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "defence-status");
         point tl = {3, y_at + 2};
         point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y};
@@ -486,7 +486,7 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, "defence-status");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    {
+    {_
         auto w = wid_new_square_button(wid_sidebar, "defence-value");
         point tl = {3, y_at + 3};
         point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};

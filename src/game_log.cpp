@@ -8,7 +8,7 @@
 #include "my_thing.h"
 
 void Monst::log (std::string pfx)
-{
+{_
     LOG("%s Monst {", pfx.c_str());
     auto old_pfx = pfx;
     pfx += "  ";
@@ -25,7 +25,7 @@ void Monst::log (std::string pfx)
 }
 
 void Thing::log (std::string pfx)
-{
+{_
     LOG("%s Thing {", pfx.c_str());
     auto old_pfx = pfx;
     pfx += "  ";
@@ -73,7 +73,7 @@ void Thing::log (std::string pfx)
 }
 
 void World::log (std::string pfx)
-{
+{_
     LOG("%s World {", pfx.c_str());
     auto old_pfx = pfx;
     pfx += "  ";
@@ -143,7 +143,7 @@ void Config::log (std::string pfx)
 }
 
 void Game::log (std::string pfx)
-{
+{_
     LOG("%s Game {", pfx.c_str());
     auto old_pfx = pfx;
     pfx += "  ";

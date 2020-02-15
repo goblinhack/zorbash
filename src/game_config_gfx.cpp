@@ -14,7 +14,7 @@ static bool local_game_needs_restart = false;
 bool game_needs_restart = false;
 
 static void game_config_gfx_destroy (void)
-{
+{_
     if (game_config_gfx_window) {
         delete game_config_gfx_window;
         game_config_gfx_window = nullptr;
@@ -23,7 +23,7 @@ static void game_config_gfx_destroy (void)
 }
 
 uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: reload config");
     game->load_config();
     config_gfx_zoom_update();
@@ -33,7 +33,7 @@ uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: save config");
     game->save_config();
     game_config_gfx_destroy();
@@ -46,14 +46,14 @@ uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 uint8_t game_config_gfx_back (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_config_gfx_destroy();
     game->config_top_select();
     return (true);
 }
 
 uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: toggle vsync");
     game->config.gfx_vsync_enable = !game->config.gfx_vsync_enable;
     game->config_gfx_select();
@@ -61,7 +61,7 @@ uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint3
 }
 
 uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: toggle fullscreen");
     game->config.fullscreen = !game->config.fullscreen;
     game->config_gfx_select();
@@ -70,7 +70,7 @@ uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_
 }
 
 uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: toggle inverted");
     game->config.gfx_inverted = !game->config.gfx_inverted;
     game->config_gfx_select();
@@ -78,7 +78,7 @@ uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, uint32_t 
 }
 
 uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: incr resolution");
     auto res = std::to_string(game->config.video_pix_width) + "x" +
                std::to_string(game->config.video_pix_height);
@@ -111,7 +111,7 @@ uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t 
 }
 
 uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     CON("USERCFG: decr resolution");
     auto res = std::to_string(game->config.video_pix_width) + "x" +
                std::to_string(game->config.video_pix_height);
@@ -144,13 +144,13 @@ uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t 
 }
 
 uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -181,13 +181,13 @@ uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t game_config_gfx_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -218,14 +218,14 @@ void Game::config_gfx_select (void)
     auto width = br.x - tl.x;
 
     game_config_gfx_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
-    {
+    {_
         Widp w = game_config_gfx_window->wid_popup_container;
         wid_set_on_key_up(w, game_config_gfx_key_up);
         wid_set_on_key_down(w, game_config_gfx_key_down);
     }
 
     int y_at = 0;
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "configuration");
 
@@ -237,7 +237,7 @@ void Game::config_gfx_select (void)
     }
 
     y_at = 3;
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
@@ -248,7 +248,7 @@ void Game::config_gfx_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
     }
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
@@ -259,7 +259,7 @@ void Game::config_gfx_select (void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
     }
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
@@ -272,7 +272,7 @@ void Game::config_gfx_select (void)
     }
 
     y_at += 3;
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Vertical sync");
 
@@ -283,7 +283,7 @@ void Game::config_gfx_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Vertical sync");
     }
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Vertical sync value");
 
@@ -301,7 +301,7 @@ void Game::config_gfx_select (void)
     }
 
     y_at += 3;
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Full screen");
 
@@ -312,7 +312,7 @@ void Game::config_gfx_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Full screen (on restart)");
     }
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Full screen value");
 
@@ -330,7 +330,7 @@ void Game::config_gfx_select (void)
     }
 
     y_at += 3;
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Inverted graphics");
 
@@ -341,7 +341,7 @@ void Game::config_gfx_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Inverted graphics");
     }
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Inverted graphics value");
 
@@ -359,7 +359,7 @@ void Game::config_gfx_select (void)
     }
 
     y_at += 3;
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Resolution");
 
@@ -370,7 +370,7 @@ void Game::config_gfx_select (void)
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Resolution");
     }
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Resolution value");
 
@@ -383,7 +383,7 @@ void Game::config_gfx_select (void)
                    std::to_string(game->config.video_pix_height);
         wid_set_text(w, res);
     }
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Resolution value +");
 
@@ -394,7 +394,7 @@ void Game::config_gfx_select (void)
         wid_set_on_mouse_up(w, game_config_gfx_resolution_incr);
         wid_set_text(w, "+");
     }
-    {
+    {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Resolution value -");
 

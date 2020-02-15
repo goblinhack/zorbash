@@ -138,55 +138,99 @@ void tp_init_after_loading (void)
 
 Tpp tp_random_monst (void)
 {_
+    if (unlikely(!tp_monst.size())) {
+        ERR("no monsts found");
+        return (nullptr);
+    }
     return get(tp_monst, myrand() % tp_monst.size());
 }
 
 Tpp tp_random_food (void)
 {_
+    if (unlikely(!tp_food.size())) {
+        ERR("no foods found");
+        return (nullptr);
+    }
     return get(tp_food, myrand() % tp_food.size());
 }
 
 Tpp tp_random_dirt (void)
 {_
+    if (unlikely(!tp_dirt.size())) {
+        ERR("no dirts found");
+        return (nullptr);
+    }
     return get(tp_dirt, myrand() % tp_dirt.size());
 }
 
 Tpp tp_random_ripple (void)
 {_
+    if (unlikely(!tp_ripples.size())) {
+        ERR("no ripples found");
+        return (nullptr);
+    }
     return get(tp_ripples, myrand() % tp_ripples.size());
 }
 
 Tpp tp_random_blood_splatter (void)
 {_
+    if (unlikely(!tp_blood_splatters.size())) {
+        ERR("no blood_splatters found");
+        return (nullptr);
+    }
     return get(tp_blood_splatters, myrand() % tp_blood_splatters.size());
 }
 
 Tpp tp_random_key (void)
 {_
+    if (unlikely(!tp_keys.size())) {
+        ERR("no keys found");
+        return (nullptr);
+    }
     return get(tp_keys, myrand() % tp_keys.size());
 }
 
 Tpp tp_random_blood (void)
 {_
+    if (unlikely(!tp_blood.size())) {
+        ERR("no bloods found");
+        return (nullptr);
+    }
     return get(tp_blood, myrand() % tp_blood.size());
 }
 
 Tpp tp_random_wall (void)
 {_
+    if (unlikely(!tp_wall.size())) {
+        ERR("no walls found");
+        return (nullptr);
+    }
     return get(tp_wall, myrand() % tp_wall.size());
 }
 
 Tpp tp_random_floor (void)
 {_
+    if (unlikely(!tp_floor.size())) {
+        ERR("no floors found");
+        return (nullptr);
+    }
     return get(tp_floor, myrand() % tp_floor.size());
 }
 
 Tpp tp_random_deco (void)
 {_
+    if (unlikely(!tp_deco.size())) {
+        ERR("no decos found");
+        return (nullptr);
+    }
     return get(tp_deco, myrand() % tp_deco.size());
 }
 
 Tpp tp_random_wall_deco (void)
 {_
+    if (unlikely(!tp_wall_deco.size())) {
+        ERR("no wall_decos found");
+        return (nullptr);
+    }
     return get(tp_wall_deco, myrand() % tp_wall_deco.size());
 }

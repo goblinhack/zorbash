@@ -8,7 +8,7 @@
 #include "my_thing.h"
 
 void Monst::dump (std::string pfx, std::ostream &out)
-{
+{_
     out << pfx << "Monst {" << std::endl;
     auto old_pfx = pfx;
     pfx += "  ";
@@ -25,7 +25,7 @@ void Monst::dump (std::string pfx, std::ostream &out)
 }
 
 void Thing::dump (std::string pfx, std::ostream &out)
-{
+{_
     out << pfx << "Thing {" << std::endl;
     auto old_pfx = pfx;
     pfx += "  ";
@@ -74,7 +74,7 @@ void Thing::dump (std::string pfx, std::ostream &out)
 }
 
 void World::dump (std::string pfx, std::ostream &out)
-{
+{_
     out << pfx << "World {" << std::endl;
     auto old_pfx = pfx;
     pfx += "  ";
@@ -145,7 +145,7 @@ void Config::dump (std::string pfx, std::ostream &out)
 }
 
 void Game::dump (std::string pfx, std::ostream &out)
-{
+{_
     out << pfx << "Game {" << std::endl;
     auto old_pfx = pfx;
     pfx += "  ";

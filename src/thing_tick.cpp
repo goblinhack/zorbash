@@ -10,7 +10,7 @@
 #include <algorithm>
 
 void Thing::achieve_goals_in_life (void)
-{
+{_
     if (is_player()) {
         //
         // Make sure we have a path shown if we just completed one.
@@ -79,7 +79,7 @@ void Thing::achieve_goals_in_life (void)
 }
 
 void Thing::collision_check_do (void)
-{
+{_
     if (!tp_collision_check(tp())) {
         return;
     }
@@ -104,7 +104,7 @@ void Thing::collision_check_do (void)
 }
 
 void Thing::tick (void)
-{
+{_
     if (unlikely(is_dead)) {
         return;
     }

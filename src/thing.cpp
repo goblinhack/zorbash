@@ -13,7 +13,7 @@
 static std::list<uint32_t> things_to_delete;
 
 void thing_gc (void)
-{
+{_
     for (auto id : things_to_delete) {
         auto t = thing_find(id);
         if (!t) {
@@ -104,7 +104,7 @@ _
 
     is_hungry = tp_is_hunger_insatiable(tpp);
 
-    {
+    {_
         auto v = tp_stats_health_initial(tpp);
         if (unlikely(v)) {
             set_stats_health(v);
@@ -112,7 +112,7 @@ _
         }
     }
 
-    {
+    {_
         auto v = tp_stats_defence(tpp);
         if (unlikely(v)) {
             set_stats_defence(v);
@@ -120,7 +120,7 @@ _
         }
     }
 
-    {
+    {_
         auto v = tp_stats_attack(tpp);
         if (unlikely(v)) {
             set_stats_attack(v);
@@ -128,157 +128,157 @@ _
         }
     }
 
-    {
+    {_
         auto v = tp_stats_attack_rate_tenths(tpp);
         if (unlikely(v)) {
             set_stats_attack_rate_tenths(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats_attacked_rate_tenths(tpp);
         if (unlikely(v)) {
             set_stats_attacked_rate_tenths(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats01(tpp);
         if (unlikely(v)) {
             set_stats01(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats02(tpp);
         if (unlikely(v)) {
             set_stats02(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats03(tpp);
         if (unlikely(v)) {
             set_stats03(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats04(tpp);
         if (unlikely(v)) {
             set_stats04(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats05(tpp);
         if (unlikely(v)) {
             set_stats05(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats06(tpp);
         if (unlikely(v)) {
             set_stats06(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats07(tpp);
         if (unlikely(v)) {
             set_stats07(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats08(tpp);
         if (unlikely(v)) {
             set_stats08(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats09(tpp);
         if (unlikely(v)) {
             set_stats09(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats10(tpp);
         if (unlikely(v)) {
             set_stats10(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats11(tpp);
         if (unlikely(v)) {
             set_stats11(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats12(tpp);
         if (unlikely(v)) {
             set_stats12(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats13(tpp);
         if (unlikely(v)) {
             set_stats13(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats14(tpp);
         if (unlikely(v)) {
             set_stats14(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats15(tpp);
         if (unlikely(v)) {
             set_stats15(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats16(tpp);
         if (unlikely(v)) {
             set_stats16(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats17(tpp);
         if (unlikely(v)) {
             set_stats17(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats18(tpp);
         if (unlikely(v)) {
             set_stats18(v);
         }
     }
 
-    {
+    {_
         auto v = tp_stats19(tpp);
         if (unlikely(v)) {
             set_stats19(v);
         }
     }
 
-    {
-        auto v = tp_stats20(tpp);
+    {_
+        auto v = tp_stats_strength(tpp);
         if (unlikely(v)) {
-            set_stats20(v);
+            set_stats_strength(v);
         }
     }
 
@@ -401,6 +401,10 @@ void Thing::reinit (void)
 
     world->realloc_thing_id(this);
     const auto tpp = tp();
+    if (unlikely(!tpp)) {
+        ERR("no tp");
+        return;
+    }
 
     //
     // Probably safest to reset this else things might expire on load
@@ -500,8 +504,6 @@ void Thing::destroy (void)
     //
     hooks_remove();
 
-    auto tpp = tp();
-
     //
     // Pop from the map
     //
@@ -534,9 +536,16 @@ void Thing::destroy (void)
     if (is_rock()) {
         world->unset_rock(old_at.x, old_at.y);
     }
-    if (tp_gfx_large_shadow_caster(tpp)) {
-        world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
+
+    auto tpp = tp();
+    if (unlikely(!tpp)) {
+        ERR("no tp");
+    } else {
+        if (tp_gfx_large_shadow_caster(tpp)) {
+            world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
+        }
     }
+
     if (is_player()) {
         world->player = nullptr;
     }
@@ -599,7 +608,7 @@ void Thing::visible (void)
 }
 
 uint8_t Thing::is_visible (void)
-{
+{_
     return (!is_hidden);
 }
 
@@ -672,7 +681,7 @@ void Thing::hooks_remove ()
     //
     // We own things like a sword. i.e. we are a player.
     //
-    {
+    {_
         auto item = weapon_get_carry_anim();
         if (item) {
             weapon_set_carry_anim(nullptr);
@@ -682,7 +691,7 @@ void Thing::hooks_remove ()
         }
     }
 
-    {
+    {_
         auto item = weapon_get_use_anim();
         if (item) {
             weapon_set_use_anim(nullptr);
@@ -717,7 +726,7 @@ void Thing::hooks_remove ()
 }
 
 Thingp Thing::owner_get (void)
-{
+{_
     auto id = get_owner_id();
     if (id) {
         return (thing_find(id));
@@ -727,7 +736,7 @@ Thingp Thing::owner_get (void)
 }
 
 void Thing::set_owner (Thingp owner)
-{
+{_
     if (owner) {
         verify(owner);
     }
@@ -762,7 +771,7 @@ void Thing::set_owner (Thingp owner)
 }
 
 void Thing::remove_owner (void)
-{
+{_
     auto old_owner = owner_get();
     if (!old_owner) {
         return;
@@ -837,7 +846,14 @@ std::string Thing::to_string (void)
     auto tpp = tp();
     verify(this);
     verify(tpp);
-    if (get_stats_health_max()) {
+    if (unlikely(!tpp)) {
+        return (string_sprintf("%08X(<no tp>%s hp %d/%d @%g,%g)",
+                               id,
+                               is_dead ? "/dead" : "",
+                               get_stats_health(),
+                               get_stats_health_max(),
+                               mid_at.x, mid_at.y));
+    } else if (get_stats_health_max()) {
         return (string_sprintf("%08X(%s%s hp %d/%d @%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
@@ -857,6 +873,9 @@ std::string Thing::to_name (void)
     auto tpp = tp();
     verify(this);
     verify(tpp);
+    if (unlikely(!tpp)) {
+        return ("<no tp>");
+    }
 
     std::string real_name = "";
 
@@ -878,7 +897,7 @@ std::string Thing::to_name (void)
 }
 
 const char * Thing::to_cstring (void)
-{
+{_
     return (to_string().c_str());
 }
 
@@ -900,26 +919,29 @@ void Thing::kill (void)
     }
 
     const auto tpp = tp();
-
-    if (is_corpse_on_death()) {
-        if (tp_is_loggable(tpp)) {
-            log("killed, leaves corpse");
-        }
-
-        if (tp_is_bleeder(tpp)) {
-            int splatters = random_range(2, 10);
-            for (int splatter = 0; splatter < splatters; splatter++) {
-                auto tpp = tp_random_blood();
-                (void) thing_new(tp_name(tpp),
-                                 fpoint(mid_at.x, mid_at.y),
-                                 fpoint(0.25, 0.25));
+    if (unlikely(!tpp)) {
+        ERR("no tp");
+    } else {
+        if (is_corpse_on_death()) {
+            if (tp_is_loggable(tpp)) {
+                log("killed, leaves corpse");
             }
-        }
-        return;
-    }
 
-    if (tp_is_loggable(tpp)) {
-        log("killed");
+            if (tp_is_bleeder(tpp)) {
+                int splatters = random_range(2, 10);
+                for (int splatter = 0; splatter < splatters; splatter++) {
+                    auto tpp = tp_random_blood();
+                    (void) thing_new(tp_name(tpp),
+                                     fpoint(mid_at.x, mid_at.y),
+                                     fpoint(0.25, 0.25));
+                }
+            }
+            return;
+        }
+
+        if (tp_is_loggable(tpp)) {
+            log("killed");
+        }
     }
 
     is_pending_gc = true;
@@ -927,7 +949,7 @@ void Thing::kill (void)
 }
 
 void Thing::update_all (void)
-{
+{_
     for (auto slot = 0; slot < MAX_THINGS; slot++) {
         auto p = getptr(world->all_thing_ptrs, slot);
         auto t = p->ptr;

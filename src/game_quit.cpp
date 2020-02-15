@@ -12,7 +12,7 @@
 static WidPopup *game_quit_window;
 
 static void game_quit_destroy (void)
-{
+{_
     if (game_quit_window) {
         delete game_quit_window;
         game_quit_window = nullptr;
@@ -21,7 +21,7 @@ static void game_quit_destroy (void)
 }
 
 uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_quit_destroy();
     if (game->started) {
         LOG("USERCFG: restart game");
@@ -36,19 +36,19 @@ uint8_t game_quit_yes (Widp w, int32_t x, int32_t y, uint32_t button)
 }
 
 uint8_t game_quit_no (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     game_quit_destroy();
     return (false);
 }
 
 uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -76,13 +76,13 @@ uint8_t game_quit_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t game_quit_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -117,14 +117,14 @@ void Game::quit_select (void)
     auto width = br.x - tl.x;
 
     game_quit_window = new WidPopup(tl, br, nullptr, "ui_popup_short");
-    {
+    {_
         Widp w = game_quit_window->wid_popup_container;
         wid_set_on_key_up(w, game_quit_key_up);
         wid_set_on_key_down(w, game_quit_key_down);
     }
 
     int y_at = 0;
-    {
+    {_
         auto p = game_quit_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Quit");
 
@@ -137,7 +137,7 @@ void Game::quit_select (void)
     }
 
     y_at = 3;
-    {
+    {_
         auto p = game_quit_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Yes");
 
@@ -149,7 +149,7 @@ void Game::quit_select (void)
         wid_set_text(w, "%%fg=white$Y%%fg=reset$es");
     }
 
-    {
+    {_
         auto p = game_quit_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "No");
 

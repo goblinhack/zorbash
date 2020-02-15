@@ -11,12 +11,12 @@
 #include "my_thing.h"
 
 void Game::soft_pause (void)
-{
+{_
     soft_paused = true;
 }
 
 void Game::soft_unpause (void)
-{
+{_
     soft_paused = false;
     if (!hard_paused) {
         last_pause = time_get_time_ms();
@@ -24,12 +24,12 @@ void Game::soft_unpause (void)
 }
 
 void Game::hard_pause (void)
-{
+{_
     hard_paused = true;
 }
 
 void Game::hard_unpause (void)
-{
+{_
     hard_paused = false;
     if (!soft_paused) {
         last_pause = time_get_time_ms();
@@ -37,7 +37,7 @@ void Game::hard_unpause (void)
 }
 
 bool Game::paused (void)
-{
+{_
     if (soft_paused || hard_paused) {
         return (true);
     }
@@ -51,7 +51,7 @@ bool Game::paused (void)
 static WidPopup *wid_paused_window;
 
 static void wid_paused_destroy (void)
-{
+{_
     if (wid_paused_window) {
         delete wid_paused_window;
         wid_paused_window = nullptr;
@@ -60,13 +60,13 @@ static void wid_paused_destroy (void)
 }
 
 uint8_t wid_paused_key_up (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -78,7 +78,7 @@ uint8_t wid_paused_key_up (Widp w, const struct SDL_KEYSYM *key)
                         return (false);
                     case ' ':
                     case '\n':
-                    case SDLK_ESCAPE: {
+                    case SDLK_ESCAPE: {_
                         wid_paused_destroy();
                         return (true);
                     }
@@ -91,13 +91,13 @@ uint8_t wid_paused_key_up (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t wid_paused_key_down (Widp w, const struct SDL_KEYSYM *key)
-{
+{_
     switch (key->mod) {
         case KMOD_LCTRL:
         case KMOD_RCTRL:
         default:
         switch (key->sym) {
-            default: {
+            default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
                     case CONSOLE_KEY1:
@@ -116,7 +116,7 @@ uint8_t wid_paused_key_down (Widp w, const struct SDL_KEYSYM *key)
 }
 
 uint8_t wid_paused_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
-{
+{_
     wid_paused_destroy();
     return (true);
 }
@@ -139,7 +139,7 @@ void Game::pause_select (void)
     wid_set_on_key_down(
       wid_paused_window->wid_popup_container, wid_paused_key_down);
 
-    {
+    {_
         auto p = wid_paused_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "PAUSED");
 

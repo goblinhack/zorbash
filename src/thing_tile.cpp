@@ -9,7 +9,7 @@
 #include "my_thing.h"
 
 void Thing::get_tiles(ThingTiles *out)
-{
+{_
     auto n = id;
     auto tpp = tp();
 

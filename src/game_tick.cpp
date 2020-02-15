@@ -7,7 +7,7 @@
 #include "my_dungeon.h"
 
 void Game::tick_begin (void)
-{
+{_
     //
     // Move when all things are done moving
     //
@@ -17,7 +17,7 @@ void Game::tick_begin (void)
 }
 
 void Game::tick_end (void)
-{
+{_
     //
     // Move when all things are done moving
     //
