@@ -628,6 +628,8 @@ public:
     bool ai_is_obstacle_for_me(point p);
     void stop(void);
     bool move(fpoint future_pos);
+    bool try_to_shove(fpoint future_pos);
+    void msg(std::string const &);
     bool attack(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle);
     bool cursor_path_pop_next_and_move(void);

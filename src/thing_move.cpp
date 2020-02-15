@@ -94,32 +94,7 @@ bool Thing::move (fpoint future_pos,
     if (is_player()) {
         if (mid_at != future_pos) {
             if (collision_check_only(future_pos)) {
-
-                if (is_attack_shove()) {
-                    point p(future_pos.x, future_pos.y);
-                    FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
-                        if (it->is_shovable()) {
-                            fpoint shove_delta = delta;
-                            fpoint shove_pos = it->mid_at + shove_delta;
-                            if (it->collision_check_only(shove_pos)) {
-                                MINICON("The %s cannot be shoved!", it->to_name().c_str());
-                            } else {
-                                if (it->get_stats_strength() <
-                                    get_stats_strength()) {
-                                    MINICON("The %s resists being shoved and pushes back!", it->to_name().c_str());
-                                } else {
-                                    MINICON("You shove the %s!", it->to_name().c_str());
-                                    it->move_to_immediately_delta(shove_delta);
-                                    auto msg = thing_new("msg", it->mid_at);
-                                    msg->set_msg(string_sprintf("%%fg=red$!!!"));
-                                    msg->fadeup(4.0, 0.05, 2000);
-                                }
-                                break;
-                            }
-                        }
-                    }
-                }
-
+                try_to_shove(future_pos);
                 lunge(future_pos);
                 return (false);
             }
