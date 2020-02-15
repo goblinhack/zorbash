@@ -50,13 +50,11 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     //
     // Visible hit indication
     //
-    auto msg = thing_new("msg", mid_at);
     if (is_player()) {
-        msg->set_msg(string_sprintf("%%fg=red$-%d", damage));
+        msg(string_sprintf("%%fg=red$-%d", damage));
     } else {
-        msg->set_msg(string_sprintf("%%fg=white$-%d", damage));
+        msg(string_sprintf("%%fg=white$-%d", damage));
     }
-    msg->fadeup(4.0, 0.05, 2000);
 
     //
     // Blood splat
