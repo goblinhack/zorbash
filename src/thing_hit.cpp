@@ -56,7 +56,6 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     } else {
         msg->set_msg(string_sprintf("%%fg=white$-%d", damage));
     }
-
     msg->fadeup(4.0, 0.05, 2000);
 
     //

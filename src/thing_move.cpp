@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_thing.h"
+#include "my_sprintf.h"
 
 void Thing::stop (void)
 {_
@@ -82,20 +83,47 @@ bool Thing::move (fpoint future_pos,
         }
     }
 
-    if (is_player()) {
-        if (mid_at != future_pos) {
-            if (collision_check_only(future_pos)) {
-                return (false);
-            }
-        }
-    }
-
     if ((x == mid_at.x) && (y == mid_at.y)) {
         return (false);
     }
 
     if (is_player()) {
         game->tick_begin();
+    }
+
+    if (is_player()) {
+        if (mid_at != future_pos) {
+            if (collision_check_only(future_pos)) {
+
+                if (is_attack_shove()) {
+                    point p(future_pos.x, future_pos.y);
+                    FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
+                        if (it->is_shovable()) {
+                            fpoint shove_delta = delta;
+                            fpoint shove_pos = it->mid_at + shove_delta;
+                            if (it->collision_check_only(shove_pos)) {
+                                MINICON("The %s cannot be shoved!", it->to_name().c_str());
+                            } else {
+                                if (it->get_stats_strength() <
+                                    get_stats_strength()) {
+                                    MINICON("The %s resists being shoved and pushes back!", it->to_name().c_str());
+                                } else {
+                                    MINICON("You shove the %s!", it->to_name().c_str());
+                                    it->move_to_immediately_delta(shove_delta);
+                                    auto msg = thing_new("msg", it->mid_at);
+                                    msg->set_msg(string_sprintf("%%fg=red$!!!"));
+                                    msg->fadeup(4.0, 0.05, 2000);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                lunge(future_pos);
+                return (false);
+            }
+        }
     }
 
     if (is_player()) {
@@ -614,6 +642,12 @@ void Thing::move_to_immediately (fpoint to)
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
     update_pos(to, true);
+}
+
+void Thing::move_to_immediately_delta (fpoint delta)
+{_
+    move_set_dir_from_delta(delta);
+    update_pos(mid_at + delta, true);
 }
 
 void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)

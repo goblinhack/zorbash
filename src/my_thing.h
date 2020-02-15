@@ -842,6 +842,7 @@ public:
     void move_delta(fpoint);
     void move_to(fpoint to);
     void move_to_immediately(fpoint to);
+    void move_to_immediately_delta(fpoint delta);
     void remove_owner(void);
     void set_owner(Thingp owner);
     void sheath(void);
