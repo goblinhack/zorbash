@@ -66,6 +66,12 @@ typedef struct {
     uint16_t tile_tr;
 } ThingTiles;
 
+typedef enum {
+    THING_SHOVE_TRIED_AND_FAILED,
+    THING_SHOVE_TRIED_AND_PASSED,
+    THING_SHOVE_NEVER_TRIED,
+} ThingShoved;
+
 typedef struct Monst_ {
     AgeMap       *age_map = {};              // How old a cell is
     Dmap         *dmap_scent = {};
@@ -628,7 +634,8 @@ public:
     bool ai_is_obstacle_for_me(point p);
     void stop(void);
     bool move(fpoint future_pos);
-    bool try_to_shove(fpoint future_pos);
+    ThingShoved try_to_shove(fpoint future_pos);
+    ThingShoved try_to_shove(Thingp it, fpoint delta);
     void msg(std::string const &);
     bool attack(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle);
