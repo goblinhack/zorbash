@@ -38,7 +38,7 @@ def tp_init(name, real_name):
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial(10)
     x.set_stats_move_speed_ms(300)
-    x.set_stats_strength(5)
+    x.set_stats_strength(20)
     x.set_weapon_use_anim("claws1")
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 

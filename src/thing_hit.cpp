@@ -42,9 +42,33 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
         return (false);
     }
 
+    //
+    // If hit by something then abort following any path
+    //
+    cursor_path_stop();
+
     if (is_player()) {
         MINICON("%%fg=yellow$The %s hits for %d damage!%%fg=reset$",
                 orig_hitter->to_name().c_str(), damage);
+    }
+
+//if (world->is_lava((int)map_loc.x, (int)map_loc.y)) {
+//auto shoved_to_position = mid_at + delta;
+
+    auto delta = mid_at - real_hitter->mid_at;
+    if (tp_gfx_bounce_on_move(real_hitter->tp())) {
+        real_hitter->bounce(0.5, 0.1, 100, 3);
+        real_hitter->move_set_dir_from_delta(delta);
+        real_hitter->update_coordinates();
+    }
+
+    switch (orig_hitter->try_to_shove(this, delta)) {
+        case THING_SHOVE_TRIED_AND_FAILED:
+            return (true);
+        case THING_SHOVE_TRIED_AND_PASSED:
+            return (true);
+        case THING_SHOVE_NEVER_TRIED:
+            break;
     }
 
     //
@@ -56,12 +80,11 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
         msg(string_sprintf("%%fg=white$-%d", damage));
     }
 
+
     //
     // Blood splat
     //
     thing_new(tp_name(tp_random_blood_splatter()), mid_at - fpoint(0.5, 0.5));
-
-    auto delta = mid_at - real_hitter->mid_at;
 
     auto claws = tp_weapon_use_anim(real_hitter->tp());
     if (claws != "") {
@@ -69,12 +92,6 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
         attack->bounce(0.1, 0.1, 100, 3);
         attack->move_set_dir_from_delta(delta);
         attack->update_coordinates();
-    }
-
-    if (tp_gfx_bounce_on_move(real_hitter->tp())) {
-        real_hitter->bounce(0.5, 0.1, 100, 3);
-        real_hitter->move_set_dir_from_delta(delta);
-        real_hitter->update_coordinates();
     }
 
     auto h = decr_stats_health(damage);
@@ -92,11 +109,6 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
         log("is hit by (%s) for %u, health now %d",
             orig_hitter->to_string().c_str(), damage, h);
     }
-
-    //
-    // If hit by something then abort following any path
-    //
-    cursor_path_stop();
 
     return (true);
 }
