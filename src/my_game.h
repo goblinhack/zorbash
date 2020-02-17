@@ -23,6 +23,7 @@ enum {
     MAP_DEPTH_FLOOR,
     MAP_DEPTH_WATER,
     MAP_DEPTH_LAVA,
+    MAP_DEPTH_CHASM,
     MAP_DEPTH_BLOOD,
 #define MAP_DEPTH_LAST_FLOOR_TYPE MAP_DEPTH_BLOOD
     MAP_DEPTH_FLOOR_DECO,
@@ -43,15 +44,17 @@ private:
     // These are caches for fast lookup in display code
     //
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow_caster {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
 public:
@@ -219,6 +222,16 @@ public:
     bool is_lava(const point &p);
     void set_lava(const int x, const int y);
     void unset_lava(const int x, const int y);
+
+    bool is_chasm(const int x, const int y);
+    bool is_chasm(const point &p);
+    void set_chasm(const int x, const int y);
+    void unset_chasm(const int x, const int y);
+
+    bool is_hazard(const int x, const int y);
+    bool is_hazard(const point &p);
+    void set_hazard(const int x, const int y);
+    void unset_hazard(const int x, const int y);
 
     bool is_deep_water(const int x, const int y);
     bool is_deep_water(const point &p);

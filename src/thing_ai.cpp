@@ -97,7 +97,7 @@ bool Thing::ai_is_obstacle_for_me (point p)
         if (t->is_door()) {
             return (true);
         }
-        if (t->is_lava()) {
+        if (t->is_hazard()) {
             return (true);
         }
         if (t == this) {

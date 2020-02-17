@@ -199,15 +199,17 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.timestamp_dungeon_created);
     out << bits(my.t.timestamp_dungeon_saved);
     out << bits(my.t._is_blood);
+    out << bits(my.t._is_chasm);
     out << bits(my.t._is_corridor);
     out << bits(my.t._is_deep_water);
     out << bits(my.t._is_dirt);
+    out << bits(my.t._is_dungeon);
     out << bits(my.t._is_floor);
     out << bits(my.t._is_gfx_large_shadow_caster);
+    out << bits(my.t._is_hazard);
     out << bits(my.t._is_lava);
     out << bits(my.t._is_rock);
     out << bits(my.t._is_visited);
-    out << bits(my.t._is_dungeon);
     out << bits(my.t._is_wall);
     out << bits(my.t._is_water);
     out << bits(my.t.all_thing_ids_at);

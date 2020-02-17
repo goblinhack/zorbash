@@ -242,15 +242,17 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     my.t.timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
 
     in >> bits(my.t._is_blood);
+    in >> bits(my.t._is_chasm);
     in >> bits(my.t._is_corridor);
     in >> bits(my.t._is_deep_water);
     in >> bits(my.t._is_dirt);
+    in >> bits(my.t._is_dungeon);
     in >> bits(my.t._is_floor);
     in >> bits(my.t._is_gfx_large_shadow_caster);
+    in >> bits(my.t._is_hazard);
     in >> bits(my.t._is_lava);
     in >> bits(my.t._is_rock);
     in >> bits(my.t._is_visited);
-    in >> bits(my.t._is_dungeon);
     in >> bits(my.t._is_wall);
     in >> bits(my.t._is_water);
     in >> bits(my.t.all_thing_ids_at);

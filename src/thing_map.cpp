@@ -806,6 +806,257 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_fbo(FBO_LIGHT_MERGED);
 }
 
+static void thing_blit_chasm (uint16_t minx, uint16_t miny,
+                              uint16_t maxx, uint16_t maxy,
+                              double offset_x, double offset_y)
+{_
+    auto z = MAP_DEPTH_CHASM;
+#define CHASM_ACROSS 8
+#define CHASM_DOWN   8
+
+    static std::array<std::array<Tilep, CHASM_DOWN>, CHASM_ACROSS> chasm;
+    if (!chasm[0][0]) {
+        set(chasm, 0, 0, tile_find("chasm1a"));
+        set(chasm, 1, 0, tile_find("chasm2a"));
+        set(chasm, 2, 0, tile_find("chasm3a"));
+        set(chasm, 3, 0, tile_find("chasm4a"));
+        set(chasm, 4, 0, tile_find("chasm5a"));
+        set(chasm, 5, 0, tile_find("chasm6a"));
+        set(chasm, 6, 0, tile_find("chasm7a"));
+        set(chasm, 7, 0, tile_find("chasm8a"));
+        set(chasm, 0, 1, tile_find("chasm1b"));
+        set(chasm, 1, 1, tile_find("chasm2b"));
+        set(chasm, 2, 1, tile_find("chasm3b"));
+        set(chasm, 3, 1, tile_find("chasm4b"));
+        set(chasm, 4, 1, tile_find("chasm5b"));
+        set(chasm, 5, 1, tile_find("chasm6b"));
+        set(chasm, 6, 1, tile_find("chasm7b"));
+        set(chasm, 7, 1, tile_find("chasm8b"));
+        set(chasm, 0, 2, tile_find("chasm1c"));
+        set(chasm, 1, 2, tile_find("chasm2c"));
+        set(chasm, 2, 2, tile_find("chasm3c"));
+        set(chasm, 3, 2, tile_find("chasm4c"));
+        set(chasm, 4, 2, tile_find("chasm5c"));
+        set(chasm, 5, 2, tile_find("chasm6c"));
+        set(chasm, 6, 2, tile_find("chasm7c"));
+        set(chasm, 7, 2, tile_find("chasm8c"));
+        set(chasm, 0, 3, tile_find("chasm1d"));
+        set(chasm, 1, 3, tile_find("chasm2d"));
+        set(chasm, 2, 3, tile_find("chasm3d"));
+        set(chasm, 3, 3, tile_find("chasm4d"));
+        set(chasm, 4, 3, tile_find("chasm5d"));
+        set(chasm, 5, 3, tile_find("chasm6d"));
+        set(chasm, 6, 3, tile_find("chasm7d"));
+        set(chasm, 7, 3, tile_find("chasm8d"));
+        set(chasm, 0, 4, tile_find("chasm1e"));
+        set(chasm, 1, 4, tile_find("chasm2e"));
+        set(chasm, 2, 4, tile_find("chasm3e"));
+        set(chasm, 3, 4, tile_find("chasm4e"));
+        set(chasm, 4, 4, tile_find("chasm5e"));
+        set(chasm, 5, 4, tile_find("chasm6e"));
+        set(chasm, 6, 4, tile_find("chasm7e"));
+        set(chasm, 7, 4, tile_find("chasm8e"));
+        set(chasm, 0, 5, tile_find("chasm1f"));
+        set(chasm, 1, 5, tile_find("chasm2f"));
+        set(chasm, 2, 5, tile_find("chasm3f"));
+        set(chasm, 3, 5, tile_find("chasm4f"));
+        set(chasm, 4, 5, tile_find("chasm5f"));
+        set(chasm, 5, 5, tile_find("chasm6f"));
+        set(chasm, 6, 5, tile_find("chasm7f"));
+        set(chasm, 7, 5, tile_find("chasm8f"));
+        set(chasm, 0, 6, tile_find("chasm1g"));
+        set(chasm, 1, 6, tile_find("chasm2g"));
+        set(chasm, 2, 6, tile_find("chasm3g"));
+        set(chasm, 3, 6, tile_find("chasm4g"));
+        set(chasm, 4, 6, tile_find("chasm5g"));
+        set(chasm, 5, 6, tile_find("chasm6g"));
+        set(chasm, 6, 6, tile_find("chasm7g"));
+        set(chasm, 7, 6, tile_find("chasm8g"));
+        set(chasm, 0, 7, tile_find("chasm1h"));
+        set(chasm, 1, 7, tile_find("chasm2h"));
+        set(chasm, 2, 7, tile_find("chasm3h"));
+        set(chasm, 3, 7, tile_find("chasm4h"));
+        set(chasm, 4, 7, tile_find("chasm5h"));
+        set(chasm, 5, 7, tile_find("chasm6h"));
+        set(chasm, 6, 7, tile_find("chasm7h"));
+        set(chasm, 7, 7, tile_find("chasm8h"));
+    }
+
+    //
+    // Draw a black outline to the main display.
+    //
+    glcolor(BLACK);
+    blit_init();
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
+                if (unlikely(game->config.gfx_show_hidden)) {
+                    if (!world->is_dungeon(x, y)) {
+                        continue;
+                    }
+                }
+                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
+                        offset_y + game->config.one_pixel_gl_height * 2,
+                        x, y);
+                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
+                        offset_y + game->config.one_pixel_gl_height * 2,
+                        x, y);
+                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
+                        offset_y + game->config.one_pixel_gl_height,
+                        x, y);
+                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
+                        offset_y + game->config.one_pixel_gl_height,
+                        x, y);
+                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
+                        offset_y - game->config.one_pixel_gl_height * 2,
+                        x, y);
+                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
+                        offset_y - game->config.one_pixel_gl_height * 2,
+                        x, y);
+                t->blit(offset_x,
+                        offset_y + game->config.one_pixel_gl_height * 3,
+                        x, y);
+                t->blit(offset_x,
+                        offset_y + game->config.one_pixel_gl_height * 2,
+                        x, y);
+                t->blit(offset_x,
+                        offset_y - game->config.one_pixel_gl_height * 2,
+                        x, y);
+            }
+        }
+    }
+    blit_flush();
+
+    //
+    // Draw a orange outline to the main display.
+    //
+    color edge = GREY10;
+    edge.a = 200;
+    glcolor(edge);
+    glDisable(GL_TEXTURE_2D);
+    blit_init();
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
+                if (unlikely(game->config.gfx_show_hidden)) {
+                    if (!world->is_dungeon(x, y)) {
+                        continue;
+                    }
+                }
+                t->blit(offset_x + game->config.one_pixel_gl_width,
+                        offset_y + game->config.one_pixel_gl_height,
+                        x, y);
+                t->blit(offset_x - game->config.one_pixel_gl_width,
+                        offset_y + game->config.one_pixel_gl_height,
+                        x, y);
+                t->blit(offset_x + game->config.one_pixel_gl_width,
+                        offset_y - game->config.one_pixel_gl_height,
+                        x, y);
+                t->blit(offset_x - game->config.one_pixel_gl_width,
+                        offset_y - game->config.one_pixel_gl_height,
+                        x, y);
+                t->blit(offset_x,
+                        offset_y + game->config.one_pixel_gl_height,
+                        x, y);
+            }
+        }
+    }
+    glEnable(GL_TEXTURE_2D);
+    blit_flush();
+
+    //
+    // Draw the white bitmap that will be the mask for the texture.
+    //
+    blit_fbo_bind(FBO_LIGHT_MERGED);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    glcolor(WHITE);
+    blit_init();
+    for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+            FOR_ALL_THINGS(world, t, x, y, z) {
+                t->blit(offset_x, offset_y, x, y);
+            }
+        }
+    }
+    blit_flush();
+
+    //
+    // The chasm tiles are twice the size of normal tiles, so work out
+    // where to draw them to avoid overlaps
+    //
+    std::array<
+      std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> tile_map = {};
+
+    for (auto y = miny; y < maxy; y++) {
+        const auto Y = y - miny + 2;
+        for (auto x = minx; x < maxx; x++) {
+            if (world->is_chasm(x, y)) {
+                if (unlikely(game->config.gfx_show_hidden)) {
+                    if (!world->is_dungeon(x, y)) {
+                        continue;
+                    }
+                }
+                const auto X = x - minx + 2;
+                for (auto dx = -2; dx <= 3; dx++) {
+                    for (auto dy = -2; dy <= 3; dy++) {
+                        set(tile_map, X+dx, Y+dy, true);
+                    }
+                }
+            }
+        }
+    }
+
+    //
+    // Finally blit the chasm and then the buffer to the display.
+    //
+    glBlendFunc(GL_DST_ALPHA, GL_ZERO);
+    glcolor(WHITE);
+    blit_init();
+    for (auto y = miny; y < maxy; y++) {
+        const auto Y = y - miny + 2;
+        for (auto x = minx; x < maxx; x++) {
+            const auto X = x - minx + 2;
+            if (get(tile_map, X, Y)) {
+                set(tile_map, X, Y, false);
+                auto tx = (double)(x &~1);
+                auto ty = (double)(y &~1);
+                double tlx = tx * game->config.tile_gl_width;
+                double tly = ty * game->config.tile_gl_height;
+                double brx = tlx + (2.0 * game->config.tile_gl_width);
+                double bry = tly + (2.0 * game->config.tile_gl_height);
+
+                tlx -= game->config.tile_gl_width;
+                tly -= game->config.tile_gl_height;
+                brx -= game->config.tile_gl_width;
+                bry -= game->config.tile_gl_height;
+
+                tlx -= offset_x;
+                tly -= offset_y;
+                brx -= offset_x;
+                bry -= offset_y;
+
+                int lx = x % CHASM_ACROSS;
+                int ly = x % CHASM_DOWN;
+                auto tile = get(chasm, lx, ly);
+
+                auto x1 = tile->x1;
+                auto x2 = tile->x2;
+                auto y1 = tile->y1;
+                auto y2 = tile->y2;
+
+                blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
+            }
+        }
+    }
+    blit_flush();
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    blit_fbo_bind(FBO_MAIN);
+    blit_fbo(FBO_LIGHT_MERGED);
+}
+
 static void thing_blit_blood (uint16_t minx, uint16_t miny,
                               uint16_t maxx, uint16_t maxy,
                               double offset_x, double offset_y)
@@ -1033,6 +1284,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     bool have_deep_water = false;
     bool have_water = false;
     bool have_lava = false;
+    bool have_chasm = false;
     bool have_blood = false;
 
     std::list<Thingp> moved;
@@ -1043,6 +1295,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     auto tpp = t->tp();
 
                     have_lava       |= tp_is_lava(tpp);
+                    have_chasm      |= tp_is_lava(tpp);
                     have_deep_water |= tp_is_deep_water(tpp);
                     have_water      |= tp_is_water(tpp);
                     have_blood      |= tp_is_blood(tpp);
@@ -1067,6 +1320,10 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     //
     if (have_lava) {
         thing_blit_lava(minx, miny, maxx, maxy, offset_x, offset_y);
+    }
+
+    if (have_chasm) {
+        thing_blit_chasm(minx, miny, maxx, maxy, offset_x, offset_y);
     }
 
     if (have_blood) {

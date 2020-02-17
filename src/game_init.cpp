@@ -455,6 +455,28 @@ static void game_place_lava (Dungeonp d,
     }
 }
 
+static void game_place_chasm (Dungeonp d,
+                              std::string what)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (world->is_chasm(x, y)) {
+                continue;
+            }
+
+            if (!d->is_chasm(x, y)) {
+                continue;
+            }
+
+            (void) thing_new(what, fpoint(x, y));
+
+            if (random_range(0, 1000) < 10) {
+                thing_new("smoke1", fpoint(x, y), fpoint(0.5, 0.5));
+            }
+        }
+    }
+}
+
 static void game_place_random_blood (Dungeonp d)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
@@ -477,6 +499,10 @@ static void game_place_random_blood (Dungeonp d)
                 }
 
                 if (world->is_lava(x, y)) {
+                    continue;
+                }
+
+                if (world->is_chasm(x, y)) {
                     continue;
                 }
 
@@ -1004,6 +1030,8 @@ _
     game_place_dirt(dungeon);
     if (errored) { return; }
     game_place_lava(dungeon, "lava1");
+    if (errored) { return; }
+    game_place_chasm(dungeon, "chasm1");
     if (errored) { return; }
     game_place_water(dungeon, "water1");
     if (errored) { return; }

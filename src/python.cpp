@@ -1727,8 +1727,8 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr32)
     TP_SET_DECL(is_rrr33)
     TP_SET_DECL(is_rrr34)
-    TP_SET_DECL(is_rrr35)
-    TP_SET_DECL(is_rrr36)
+    TP_SET_DECL(is_chasm)
+    TP_SET_DECL(is_hazard)
     TP_SET_DECL(is_attack_shove)
     TP_SET_DECL(is_shovable)
     TP_SET_DECL(is_cursor_path)
@@ -2069,6 +2069,7 @@ static void python_add_consts (void)
 
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_LAVA", MAP_DEPTH_LAVA);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_CHASM", MAP_DEPTH_CHASM);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_BLOOD", MAP_DEPTH_BLOOD);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS", MAP_DEPTH_WALLS);

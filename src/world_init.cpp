@@ -15,6 +15,7 @@ void World::clear (void)
     _is_dirt = {};
     _is_floor = {};
     _is_lava = {};
+    _is_chasm = {};
     _is_rock = {};
     _is_visited = {};
     _is_gfx_large_shadow_caster = {};

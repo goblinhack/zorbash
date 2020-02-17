@@ -9,11 +9,12 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 
-int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
-                          Thingp real_hitter, // if an arrow, who fired it
-                          Thingp hitter,
+int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
+                          Thingp real_hitter, // who fired the arrow?
                           int damage)
 {_
+    auto delta = mid_at - hitter->mid_at;
+
     //
     // Cruel to let things keep on hitting you when you're dead
     //
@@ -37,7 +38,7 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     //
     // Keep hitting until all damage is used up or the thing is dead.
     //
-    if (this == orig_hitter) {
+    if (this == hitter) {
         die("hitting thyself");
         return (false);
     }
@@ -47,28 +48,32 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
     //
     cursor_path_stop();
 
-    if (is_player()) {
-        MINICON("%%fg=yellow$The %s hits for %d damage!%%fg=reset$",
-                orig_hitter->to_name().c_str(), damage);
-    }
-
-//if (world->is_lava((int)map_loc.x, (int)map_loc.y)) {
-//auto shoved_to_position = mid_at + delta;
-
-    auto delta = mid_at - real_hitter->mid_at;
     if (tp_gfx_bounce_on_move(real_hitter->tp())) {
         real_hitter->bounce(0.5, 0.1, 100, 3);
         real_hitter->move_set_dir_from_delta(delta);
         real_hitter->update_coordinates();
     }
 
-    switch (orig_hitter->try_to_shove(this, delta)) {
-        case THING_SHOVE_TRIED_AND_FAILED:
-            return (true);
-        case THING_SHOVE_TRIED_AND_PASSED:
-            return (true);
-        case THING_SHOVE_NEVER_TRIED:
-            break;
+    if (is_attack_shove()) {
+        auto shoved_to_position = mid_at + delta;
+        if (
+            world->is_water((int)shoved_to_position.x,
+                            (int)shoved_to_position.y)) {
+
+            switch (hitter->try_to_shove(this, delta)) {
+                case THING_SHOVE_TRIED_AND_FAILED:
+                    return (true);
+                case THING_SHOVE_TRIED_AND_PASSED:
+                    return (true);
+                case THING_SHOVE_NEVER_TRIED:
+                    break;
+            }
+        }
+    }
+
+    if (is_player()) {
+        MINICON("%%fg=yellow$The %s hits for %d damage!%%fg=reset$",
+                real_hitter->to_name().c_str(), damage);
     }
 
     //
@@ -103,11 +108,11 @@ int Thing::ai_hit_actual (Thingp orig_hitter, // e.g. an arrow or monst
         //
         // log("is hit terminally, health %d, damage %d, now dead",
         //     h, damage);
-        dead(orig_hitter, "is hit terminally by %s",
+        dead(hitter, "is hit terminally by %s",
              real_hitter->to_string().c_str());
     } else {
         log("is hit by (%s) for %u, health now %d",
-            orig_hitter->to_string().c_str(), damage, h);
+            real_hitter->to_string().c_str(), damage, h);
     }
 
     return (true);
@@ -124,8 +129,6 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
     if (is_dead) {
         return (false);
     }
-
-    Thingp orig_hitter = hitter;
 
     //
     // If an arrow, who really fired it?
@@ -241,7 +244,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
 
     int hit_and_killed;
 
-    hit_and_killed = ai_hit_actual(orig_hitter, real_hitter, hitter, damage);
+    hit_and_killed = ai_hit_actual(real_hitter, hitter, damage);
 
     return (hit_and_killed);
 }

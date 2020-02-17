@@ -29,6 +29,7 @@ public:
         EXIT            = 'E',
         KEY             = 'k',
         LAVA            = 'L',
+        CHASM           = 'C',
         WATER           = 'w',
         DEEP_WATER      = 'W',
         ROCK            = 'r',
@@ -55,6 +56,7 @@ public:
     bool                      is_exit              {false};
     bool                      is_key               {false};
     bool                      is_lava              {false};
+    bool                      is_chasm             {false};
     bool                      is_water             {false};
     bool                      is_deep_water        {false};
     bool                      is_treasure          {false};

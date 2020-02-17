@@ -7,6 +7,7 @@ def lava_init(name, real_name, tiles=[], tile_lefts=[]):
     x = tp.Tp(name, real_name)
 
     x.set_gfx_animated(True)
+    x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_lava(True)
     x.set_is_light_strength(1)
