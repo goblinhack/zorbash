@@ -209,8 +209,8 @@ public:
     int is_rrr32 {};
     int is_rrr33 {};
     int is_rrr34 {};
-    int is_rrr35 {};
-    int is_rrr36 {};
+    int is_chasm {};
+    int is_hazard {};
     int is_attack_shove {};
     int is_shovable {};
     int is_cursor_path {};
@@ -588,16 +588,16 @@ static inline int tp_is_rrr34 (Tpp t)
     return (t->is_rrr34);
 }
 
-static inline int tp_is_rrr35 (Tpp t)
+static inline int tp_is_chasm (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr35);
+    return (t->is_chasm);
 }
 
-static inline int tp_is_rrr36 (Tpp t)
+static inline int tp_is_hazard (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr36);
+    return (t->is_hazard);
 }
 
 static inline int tp_is_attack_shove (Tpp t)

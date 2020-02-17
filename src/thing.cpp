@@ -336,6 +336,12 @@ _
     if (tp_is_lava(tpp)) {
         world->set_lava(new_at.x, new_at.y);
     }
+    if (tp_is_chasm(tpp)) {
+        world->set_chasm(new_at.x, new_at.y);
+    }
+    if (tp_is_hazard(tpp)) {
+        world->set_hazard(new_at.x, new_at.y);
+    }
     if (tp_is_blood(tpp)) {
         world->set_blood(new_at.x, new_at.y);
     }
@@ -442,6 +448,9 @@ void Thing::reinit (void)
     if (tp_is_lava(tpp)) {
         world->set_lava(new_at.x, new_at.y);
     }
+    if (tp_is_chasm(tpp)) {
+        world->set_chasm(new_at.x, new_at.y);
+    }
     if (tp_is_blood(tpp)) {
         world->set_blood(new_at.x, new_at.y);
     }
@@ -517,6 +526,12 @@ void Thing::destroy (void)
     }
     if (is_lava()) {
         world->unset_lava(old_at.x, old_at.y);
+    }
+    if (is_chasm()) {
+        world->unset_chasm(old_at.x, old_at.y);
+    }
+    if (is_hazard()) {
+        world->unset_hazard(old_at.x, old_at.y);
     }
     if (is_blood()) {
         world->unset_blood(old_at.x, old_at.y);

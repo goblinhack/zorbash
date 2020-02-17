@@ -658,7 +658,7 @@ public:
     int ai_hit_if_possible(Thingp hitter);
     int ai_hit_if_possible(Thingp hitter, int damage);
     int ai_delay_after_moving_ms(void);
-    int ai_hit_actual(Thingp orig_hitter, Thingp real_hitter, Thingp hitter, int damage);
+    int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
     int ai_scent_distance(void);
     int collision_attack(void);
     int collision_box(void);
@@ -743,8 +743,8 @@ public:
     int is_rrr32(void);
     int is_rrr33(void);
     int is_rrr34(void);
-    int is_rrr35(void);
-    int is_rrr36(void);
+    int is_chasm(void);
+    int is_hazard(void);
     int is_attack_shove(void);
     int is_shovable(void);
     int is_cursor_path(void);

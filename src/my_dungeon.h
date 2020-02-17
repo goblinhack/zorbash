@@ -819,6 +819,23 @@ public:
         return false;
     }
 
+    bool is_chasm (const int x, const int y)
+    {
+        if (is_oob(x, y)) {
+            ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+        }
+
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc(x, y, d);
+            auto v = get(Charmap::all_charmaps, c);
+
+            if (v.is_chasm) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     bool is_water (const int x, const int y)
     {
         if (is_oob(x, y)) {
@@ -970,6 +987,19 @@ public:
             auto v = get(Charmap::all_charmaps, c);
 
             if (v.is_lava) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool is_chasm_fast (const int x, const int y)
+    {
+        for (auto d = 0; d < map_depth; d++) {
+            auto c = getc_fast(x, y, d);
+            auto v = get(Charmap::all_charmaps, c);
+
+            if (v.is_chasm) {
                 return true;
             }
         }

@@ -7,6 +7,7 @@ def deep_tp_init(name, real_name, tiles=[]):
 
     x.set_gfx_animated(True)
     x.set_is_deep_water(True)
+    x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_obstacle(True)

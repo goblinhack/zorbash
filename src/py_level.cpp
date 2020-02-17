@@ -47,6 +47,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             std::string floor_string;
             std::string water_string;
             std::string lava_string;
+            std::string chasm_string;
             std::string deco_string;
             std::string wall_deco_string;
             std::string walls_string;
@@ -84,6 +85,12 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     lava_string += c;
                 } else {
                     lava_string += Charmap::SPACE;
+                }
+
+                if (m.is_chasm) {
+                    chasm_string += c;
+                } else {
+                    chasm_string += Charmap::SPACE;
                 }
 
                 if (m.is_wall ||
@@ -150,6 +157,10 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 ERR("level lava width mismatch, %d, expected %d",
                     (int)lava_string.size(), MAP_WIDTH);
             }
+            if (chasm_string.size() != MAP_WIDTH){
+                ERR("level chasm width mismatch, %d, expected %d",
+                    (int)chasm_string.size(), MAP_WIDTH);
+            }
             if (deco_string.size() != MAP_WIDTH){
                 ERR("level deco width mismatch, %d, expected %d",
                     (int)deco_string.size(), MAP_WIDTH);
@@ -180,6 +191,9 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
                 if (lava_string[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
+                }
+                if (chasm_string[x] != ' ') {
+                    set(l->data, x, y, MAP_DEPTH_CHASM,      chasm_string[x]);
                 }
                 if (deco_string[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
@@ -238,6 +252,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 set(l->data, x, y, MAP_DEPTH_FLOOR,      floor_string[x]);
                 set(l->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
                 set(l->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
+                set(l->data, x, y, MAP_DEPTH_CHASM,      chasm_string[x]);
                 set(l->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
                 set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
                 set(l->data, x, y, MAP_DEPTH_WALLS_DECO, wall_deco_string[x]);

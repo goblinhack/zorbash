@@ -87,6 +87,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
             std::string floor_string;
             std::string water_string;
             std::string lava_string;
+            std::string chasm_string;
             std::string deco_string;
             std::string wall_deco_string;
             std::string walls_string;
@@ -126,6 +127,12 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     lava_string += c;
                 } else {
                     lava_string += Charmap::SPACE;
+                }
+
+                if (m.is_chasm) {
+                    chasm_string += c;
+                } else {
+                    chasm_string += Charmap::SPACE;
                 }
 
                 if (m.is_wall ||
@@ -190,6 +197,10 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 ERR("room lava width mismatch, %d, expected %d",
                     (int)lava_string.size(), ROOM_WIDTH);
             }
+            if (chasm_string.size() != ROOM_WIDTH){
+                ERR("room chasm width mismatch, %d, expected %d",
+                    (int)chasm_string.size(), ROOM_WIDTH);
+            }
             if (deco_string.size() != ROOM_WIDTH){
                 ERR("room deco width mismatch, %d, expected %d",
                     (int)deco_string.size(), ROOM_WIDTH);
@@ -213,15 +224,36 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
             for (auto x = 0; x < ROOM_WIDTH; x++) {
                 set(r->data, x, y, MAP_DEPTH_FLOOR,      floor_string[x]);
-                set(r->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
-                set(r->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
-                set(r->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
-                set(r->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
-                set(r->data, x, y, MAP_DEPTH_WALLS_DECO, wall_deco_string[x]);
-                set(r->data, x, y, MAP_DEPTH_EXIT,       exits_string[x]);
-                set(r->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
-                set(r->data, x, y, MAP_DEPTH_BLOOD,      blood_string[x]);
-                set(r->data, x, y, MAP_DEPTH_ITEM,       items_string[x]);
+                if (water_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
+                }
+                if (lava_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
+                }
+                if (chasm_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_CHASM,      chasm_string[x]);
+                }
+                if (deco_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_FLOOR_DECO, deco_string[x]);
+                }
+                if (walls_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
+                }
+                if (wall_deco_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_WALLS_DECO, wall_deco_string[x]);
+                }
+                if (exits_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_EXIT,       exits_string[x]);
+                }
+                if (monst_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
+                }
+                if (blood_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_BLOOD,      blood_string[x]);
+                }
+                if (items_string[x] != ' ') {
+                    set(r->data, x, y, MAP_DEPTH_ITEM,       items_string[x]);
+                }
                 set(r->data, x, y, MAP_DEPTH_PLAYER,     ' ');
             }
         }

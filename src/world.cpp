@@ -58,6 +58,62 @@ void World::unset_lava (const int x, const int y)
     set(_is_lava, x, y, false);
 }
 
+bool World::is_chasm (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_chasm, x, y));
+}
+
+void World::set_chasm (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_chasm, x, y, true);
+}
+
+void World::unset_chasm (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_chasm, x, y, false);
+}
+
+bool World::is_hazard (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_hazard, p.x, p.y));
+}
+
+bool World::is_hazard (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_hazard, x, y));
+}
+
+void World::set_hazard (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_hazard, x, y, true);
+}
+
+void World::unset_hazard (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_hazard, x, y, false);
+}
+
 bool World::is_blood (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {

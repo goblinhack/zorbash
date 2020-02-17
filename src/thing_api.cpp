@@ -542,14 +542,14 @@ int Thing::is_rrr34(void)
     return (tp_is_rrr34(tp()));
 }
 
-int Thing::is_rrr35(void)
+int Thing::is_chasm(void)
 {_
-    return (tp_is_rrr35(tp()));
+    return (tp_is_chasm(tp()));
 }
 
-int Thing::is_rrr36(void)
+int Thing::is_hazard(void)
 {_
-    return (tp_is_rrr36(tp()));
+    return (tp_is_hazard(tp()));
 }
 
 int Thing::is_attack_shove(void)

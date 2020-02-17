@@ -190,7 +190,7 @@ static inline color getPixel (SDL_Surface * surface, uint32_t x, uint32_t y)
     color     col;
 
     if ((x >= (uint32_t)surface->w) || (y >= (uint32_t)surface->h)) {
-        ERR("getPixel out of range, pix %d,%d in size %d,%d",
+        DIE("getPixel out of range, pix %d,%d in size %d,%d",
             x, y, surface->w, surface->h);
     }
 

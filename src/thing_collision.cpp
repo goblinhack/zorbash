@@ -845,7 +845,7 @@ bool Thing::collision_obstacle (Thingp it)
                 return (true);
             }
         }
-        if (it->is_lava()) {
+        if (it->is_hazard()) {
             return (true);
         }
         if (it->is_alive_monst()) {

@@ -111,6 +111,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_lava              = true;
 
+    char_index              = Charmap::CHASM;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_chasm             = true;
+
     char_index              = Charmap::WATER;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

@@ -473,9 +473,17 @@ void Thing::update_pos (fpoint to, bool immediately)
             world->unset_floor(old_at.x, old_at.y);
             world->set_floor(new_at.x, new_at.y);
         }
+        if (is_hazard()) {
+            world->unset_hazard(old_at.x, old_at.y);
+            world->set_hazard(new_at.x, new_at.y);
+        }
         if (is_lava()) {
             world->unset_lava(old_at.x, old_at.y);
             world->set_lava(new_at.x, new_at.y);
+        }
+        if (is_chasm()) {
+            world->unset_chasm(old_at.x, old_at.y);
+            world->set_chasm(new_at.x, new_at.y);
         }
         if (is_blood()) {
             world->unset_blood(old_at.x, old_at.y);

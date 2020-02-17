@@ -34,6 +34,8 @@ void thing_render_minimap (void)
                     glcolor(RED);
                 } else if (world->is_lava(x, y)) {
                     glcolor(ORANGE);
+                } else if (world->is_chasm(x, y)) {
+                    glcolor(BLACK);
                 } else if (world->is_wall(x, y)) {
                        if (world->is_visited(x, y)) {
                         glcolor(GRAY80);
@@ -95,6 +97,8 @@ void thing_render_minimap (void)
                     glcolor(RED);
                 } else if (world->is_lava(x, y)) {
                     glcolor(ORANGE);
+                } else if (world->is_chasm(x, y)) {
+                    glcolor(BLACK);
                 } else if (world->is_wall(x, y)) {
                        if (world->is_visited(x, y)) {
                         glcolor(GRAY80);
