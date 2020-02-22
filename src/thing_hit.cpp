@@ -54,21 +54,16 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         real_hitter->update_coordinates();
     }
 
-    if (is_attack_shove()) {
-        auto shoved_to_position = mid_at + delta;
-        if (
-            world->is_water((int)shoved_to_position.x,
-                            (int)shoved_to_position.y)) {
-
-            switch (hitter->try_to_shove(this, delta)) {
-                case THING_SHOVE_TRIED_AND_FAILED:
-                    return (true);
-                case THING_SHOVE_TRIED_AND_PASSED:
-                    return (true);
-                case THING_SHOVE_NEVER_TRIED:
-                    break;
-            }
-        }
+    //
+    // Try to push the thing into a hazard if we can just to be sneaky
+    //
+    switch (hitter->try_to_shove_into_hazard(this, delta)) {
+        case THING_SHOVE_TRIED_AND_FAILED:
+            return (true);
+        case THING_SHOVE_TRIED_AND_PASSED:
+            return (true);
+        case THING_SHOVE_NEVER_TRIED:
+            break;
     }
 
     if (is_player()) {
