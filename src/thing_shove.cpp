@@ -75,3 +75,15 @@ ThingShoved Thing::try_to_shove (fpoint future_pos)
 
     return (THING_SHOVE_NEVER_TRIED);
 }
+
+ThingShoved Thing::try_to_shove_into_hazard (Thingp it, fpoint delta)
+{
+    if (is_attack_shove()) {
+        auto shoved_to_position = it->mid_at + delta;
+        if (world->is_hazard((int)shoved_to_position.x, 
+                             (int)shoved_to_position.y)) {
+            return (try_to_shove(it, delta));
+        }
+    }
+    return (THING_SHOVE_NEVER_TRIED);
+}
