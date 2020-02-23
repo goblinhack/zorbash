@@ -485,41 +485,43 @@ static void game_place_random_blood (Dungeonp d)
                 continue;
             }
 
-            if (d->is_floor(x, y) &&
-                d->is_floor(x - 1, y) &&
-                d->is_floor(x + 1, y) &&
-                d->is_floor(x - 1, y - 1) &&
-                d->is_floor(x + 1, y + 1)) {
-                if (world->is_water(x, y)) {
-                    continue;
-                }
+            if (!d->is_floor(x, y) ||
+                !d->is_floor(x - 1, y) ||
+                !d->is_floor(x + 1, y) ||
+                !d->is_floor(x, y - 1) ||
+                !d->is_floor(x, y + 1) ||
+                !d->is_floor(x - 1, y - 1) ||
+                !d->is_floor(x + 1, y - 1) ||
+                !d->is_floor(x - 1, y + 1) ||
+                !d->is_floor(x + 1, y + 1)) {
+                continue;
+            }
 
-                if (world->is_deep_water(x, y)) {
-                    continue;
-                }
+            if (d->is_hazard(x, y) ||
+                d->is_hazard(x - 1, y) ||
+                d->is_hazard(x + 1, y) ||
+                d->is_hazard(x, y - 1) ||
+                d->is_hazard(x, y + 1) ||
+                d->is_hazard(x - 1, y - 1) ||
+                d->is_hazard(x + 1, y - 1) ||
+                d->is_hazard(x - 1, y + 1) ||
+                d->is_hazard(x + 1, y + 1)) {
+                continue;
+            }
 
-                if (world->is_lava(x, y)) {
-                    continue;
-                }
+            if (random_range(0, 1000) > 20) {
+                continue;
+            }
 
-                if (world->is_chasm(x, y)) {
-                    continue;
+            int splatters = random_range(2, 10);
+            for (int splatter = 0; splatter < splatters; splatter++) {
+                auto tp = tp_random_blood();
+                if (!tp) {
+                    return;
                 }
-
-                if (random_range(0, 1000) > 20) {
-                    continue;
-                }
-
-                int splatters = random_range(2, 10);
-                for (int splatter = 0; splatter < splatters; splatter++) {
-                    auto tp = tp_random_blood();
-                    if (!tp) {
-                        return;
-                    }
-                    (void) thing_new(tp_name(tp),
-                                     fpoint(x, y),
-                                     fpoint(0.25, 0.25));
-                }
+                (void) thing_new(tp_name(tp),
+                                 fpoint(x, y),
+                                 fpoint(0.25, 0.25));
             }
         }
     }
@@ -623,6 +625,30 @@ static void game_place_blood (Dungeonp d)
                 continue;
             }
 
+            if (!d->is_floor(x, y) ||
+                !d->is_floor(x - 1, y) ||
+                !d->is_floor(x + 1, y) ||
+                !d->is_floor(x, y - 1) ||
+                !d->is_floor(x, y + 1) ||
+                !d->is_floor(x - 1, y - 1) ||
+                !d->is_floor(x + 1, y - 1) ||
+                !d->is_floor(x - 1, y + 1) ||
+                !d->is_floor(x + 1, y + 1)) {
+                continue;
+            }
+
+            if (d->is_hazard(x, y) ||
+                d->is_hazard(x - 1, y) ||
+                d->is_hazard(x + 1, y) ||
+                d->is_hazard(x, y - 1) ||
+                d->is_hazard(x, y + 1) ||
+                d->is_hazard(x - 1, y - 1) ||
+                d->is_hazard(x + 1, y - 1) ||
+                d->is_hazard(x - 1, y + 1) ||
+                d->is_hazard(x + 1, y + 1)) {
+                continue;
+            }
+
             auto tp = tp_random_blood();
             if (!tp) {
                 return;
@@ -672,6 +698,18 @@ static void game_place_floor_deco (Dungeonp d)
                 !d->is_floor(x + 1, y - 1) ||
                 !d->is_floor(x - 1, y + 1) ||
                 !d->is_floor(x + 1, y + 1)) {
+                continue;
+            }
+
+            if (d->is_hazard(x, y) ||
+                d->is_hazard(x - 1, y) ||
+                d->is_hazard(x + 1, y) ||
+                d->is_hazard(x, y - 1) ||
+                d->is_hazard(x, y + 1) ||
+                d->is_hazard(x - 1, y - 1) ||
+                d->is_hazard(x + 1, y - 1) ||
+                d->is_hazard(x - 1, y + 1) ||
+                d->is_hazard(x + 1, y + 1)) {
                 continue;
             }
 
@@ -1038,10 +1076,7 @@ _
     game_place_deep_water(dungeon, "deep_water1");
     if (errored) { return; }
     //fluid_init();
-CON("TODO fix place blood");
-if (0) {
     game_place_random_blood(dungeon);
-}
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -1063,11 +1098,8 @@ if (0) {
     if (errored) { return; }
     game_place_food(dungeon);
     if (errored) { return; }
-CON("TODO fix place blood");
-    if (0) {
     game_place_blood(dungeon);
     if (errored) { return; }
-    }
     game_place_keys(dungeon);
     if (errored) { return; }
     game_mark_dungeon_tiles(dungeon);
