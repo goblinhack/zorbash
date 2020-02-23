@@ -935,8 +935,8 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     //
     // Draw a orange outline to the main display.
     //
-    color edge = GREY10;
-    edge.a = 100;
+    color edge = GREY30;
+    edge.a = 50;
     glcolor(edge);
     glDisable(GL_TEXTURE_2D);
     blit_init();
