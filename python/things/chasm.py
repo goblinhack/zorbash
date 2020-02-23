@@ -11,8 +11,6 @@ def chasm_init(name, real_name, tiles=[], tile_lefts=[]):
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_obstacle(True)
-    x.set_is_light_strength(1)
-    x.set_str_light_color("darkblue")
     x.set_z_depth(zx.MAP_DEPTH_CHASM)
 
     delay = 1250
@@ -32,13 +30,13 @@ def init():
                 "chasm1.6",
                 "chasm1.7",
                 "chasm1.8",
-#                "chasm1.9",
-#                "chasm1.10",
-#                "chasm1.11",
-#                "chasm1.12",
-#                "chasm1.13",
-#                "chasm1.14",
-#                "chasm1.15",
-#                "chasm1.16",
+                "chasm1.9",
+                "chasm1.10",
+                "chasm1.11",
+                "chasm1.12",
+                "chasm1.13",
+                "chasm1.14",
+                "chasm1.15",
+                "chasm1.16",
                 ])
 init()
