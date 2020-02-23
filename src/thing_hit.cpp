@@ -76,22 +76,26 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     if (is_player()) {
         msg(string_sprintf("%%fg=red$-%d", damage));
-    } else {
+    } else if (is_monst()) {
         msg(string_sprintf("%%fg=white$-%d", damage));
     }
-
 
     //
     // Blood splat
     //
     thing_new(tp_name(tp_random_blood_splatter()), mid_at - fpoint(0.5, 0.5));
 
-    auto claws = tp_weapon_use_anim(real_hitter->tp());
-    if (claws != "") {
-        auto attack = thing_new(claws, mid_at - fpoint(0.5, 0.5));
-        attack->bounce(0.1, 0.1, 100, 3);
-        attack->move_set_dir_from_delta(delta);
-        attack->update_coordinates();
+    //
+    // Visible claw attack?
+    //
+    if (is_monst() || is_player()) {
+        auto claws = tp_weapon_use_anim(real_hitter->tp());
+        if (claws != "") {
+            auto claw_attack = thing_new(claws, mid_at - fpoint(0.5, 0.5));
+            claw_attack->bounce(0.1, 0.1, 100, 3);
+            claw_attack->move_set_dir_from_delta(delta);
+            claw_attack->update_coordinates();
+        }
     }
 
     auto h = decr_stats_health(damage);

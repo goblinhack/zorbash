@@ -935,7 +935,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     //
     // Draw a orange outline to the main display.
     //
-    color edge = GREY30;
+    color edge = GREY20;
     edge.a = 50;
     glcolor(edge);
     glDisable(GL_TEXTURE_2D);
@@ -1304,7 +1304,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     auto tpp = t->tp();
 
                     have_lava       |= tp_is_lava(tpp);
-                    have_chasm      |= tp_is_lava(tpp);
+                    have_chasm      |= tp_is_chasm(tpp);
                     have_deep_water |= tp_is_deep_water(tpp);
                     have_water      |= tp_is_water(tpp);
                     have_blood      |= tp_is_blood(tpp);
