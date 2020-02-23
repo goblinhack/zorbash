@@ -885,7 +885,12 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     //
     // Draw a black outline to the main display.
     //
-    glcolor(BLACK);
+    color edge1 = BLACK;
+    edge1.r = 0;
+    edge1.g = 10;
+    edge1.b = 0;
+    edge1.a = 200;
+    glcolor(edge1);
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -931,7 +936,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     // Draw a orange outline to the main display.
     //
     color edge = GREY10;
-    edge.a = 200;
+    edge.a = 100;
     glcolor(edge);
     glDisable(GL_TEXTURE_2D);
     blit_init();
@@ -999,7 +1004,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 }
                 const auto X = x - minx + 2;
                 for (auto dx = -2; dx <= 3; dx++) {
-                    for (auto dy = -2; dy <= 3; dy++) {
+                    for (auto dy = 0; dy <= 2; dy++) {
                         set(tile_map, X+dx, Y+dy, true);
                     }
                 }
@@ -1013,10 +1018,11 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
     blit_init();
-    for (auto y = miny; y < maxy; y++) {
-        const auto Y = y - miny + 2;
-        for (auto x = minx; x < maxx; x++) {
-            const auto X = x - minx + 2;
+    for (auto x = minx; x < maxx; x++) {
+        const auto X = x - minx + 2;
+        int in_chasm = 0;
+        for (auto y = miny; y < maxy; y++) {
+            const auto Y = y - miny + 2;
             if (get(tile_map, X, Y)) {
                 set(tile_map, X, Y, false);
                 auto tx = (double)(x &~1);
@@ -1036,8 +1042,9 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 brx -= offset_x;
                 bry -= offset_y;
 
-                int lx = x % CHASM_ACROSS;
-                int ly = x % CHASM_DOWN;
+                int lx = (x / 2 ) % CHASM_ACROSS;
+                int ly = (in_chasm / 2) % CHASM_DOWN;
+                in_chasm++;
                 auto tile = get(chasm, lx, ly);
 
                 auto x1 = tile->x1;
@@ -1046,6 +1053,8 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 auto y2 = tile->y2;
 
                 blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
+            } else {
+                in_chasm = 0;
             }
         }
     }

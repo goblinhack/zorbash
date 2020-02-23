@@ -881,7 +881,12 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
         set_submerged_offset(0);
 
-        if (world->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
+        if ((map_loc.y < MAP_HEIGHT - 1) &&
+             world->is_chasm((int)map_loc.x, (int)map_loc.y + 1)) {
+            double offset = game->config.one_pixel_gl_height * 5;
+            blit_br.y -= offset;
+            blit_tl.y -= offset;
+        } else if (world->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
             if (owner) {
                 auto offset = owner->get_submerged_offset();
