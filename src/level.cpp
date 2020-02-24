@@ -11,28 +11,28 @@
 
 static int debug_enabled = false;
 
-std::vector<Levelp> Level::all_levels;
+std::vector<PlacedLevelp> PlacedLevel::all_placed_levels;
 
 void level_fini (void)
 {_
-    Level::all_levels.clear();
+    PlacedLevel::all_placed_levels.clear();
 }
 
-Levelp Level::level_new (void)
+PlacedLevelp PlacedLevel::level_new (void)
 {_
-    auto r = std::make_shared< class Level >();
-    Level::all_levels.push_back(r);
+    auto r = std::make_shared< class PlacedLevel >();
+    PlacedLevel::all_placed_levels.push_back(r);
     return (r);
 }
 
-void Level::finalize (void)
+void PlacedLevel::finalize (void)
 {
     if (debug_enabled) {
         dump();
     }
 }
 
-void Level::dump (void)
+void PlacedLevel::dump (void)
 {
     std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp;
     for (auto y = 0; y < height; y++) {

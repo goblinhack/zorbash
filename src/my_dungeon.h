@@ -325,11 +325,11 @@ public:
     //
     Dungeon (int level)
     {_
-        if (level >= (int)Level::all_levels.size()) {
+        if (level >= (int)PlacedLevel::all_placed_levels.size()) {
             ERR("out of range level %d", level);
             return;
         }
-        auto l = get(Level::all_levels, level);
+        auto l = get(PlacedLevel::all_placed_levels, level);
 
         cells.resize(l->width * l->height * MAP_DEPTH, Charmap::SPACE);
         std::fill(cells.begin(), cells.end(), Charmap::SPACE);
@@ -2141,7 +2141,7 @@ public:
         }
     }
 
-    void place_level (Levelp l)
+    void place_level (PlacedLevelp l)
     {
         if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
             ERR("level has bad size %d,%d", l->width, l->height);
@@ -2892,7 +2892,7 @@ next: ;
     }
 
     /*
-    Cellular Automata Method for Generating Random Cave-Like Levels
+    Cellular Automata Method for Generating Random Cave-Like PlacedLevels
 
 
         From RogueBasin
