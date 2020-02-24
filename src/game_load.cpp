@@ -252,6 +252,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     in >> bits(my.t._is_hazard);
     in >> bits(my.t._is_lava);
     in >> bits(my.t._is_rock);
+    in >> bits(my.t._is_secret_door);
     in >> bits(my.t._is_visited);
     in >> bits(my.t._is_wall);
     in >> bits(my.t._is_water);

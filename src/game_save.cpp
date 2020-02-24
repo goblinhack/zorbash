@@ -209,6 +209,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t._is_hazard);
     out << bits(my.t._is_lava);
     out << bits(my.t._is_rock);
+    out << bits(my.t._is_secret_door);
     out << bits(my.t._is_visited);
     out << bits(my.t._is_wall);
     out << bits(my.t._is_water);

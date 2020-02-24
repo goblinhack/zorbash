@@ -477,6 +477,10 @@ void Thing::update_pos (fpoint to, bool immediately)
             world->unset_hazard(old_at.x, old_at.y);
             world->set_hazard(new_at.x, new_at.y);
         }
+        if (is_secret_door()) {
+            world->unset_secret_door(old_at.x, old_at.y);
+            world->set_secret_door(new_at.x, new_at.y);
+        }
         if (is_lava()) {
             world->unset_lava(old_at.x, old_at.y);
             world->set_lava(new_at.x, new_at.y);

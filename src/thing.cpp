@@ -327,42 +327,23 @@ _
         return;
     }
 
-    if (tp_is_wall(tpp)) {
-        world->set_wall(new_at.x, new_at.y);
-    }
-    if (tp_is_floor(tpp)) {
-        world->set_floor(new_at.x, new_at.y);
-    }
-    if (tp_is_lava(tpp)) {
-        world->set_lava(new_at.x, new_at.y);
-    }
-    if (tp_is_chasm(tpp)) {
-        world->set_chasm(new_at.x, new_at.y);
-    }
-    if (tp_is_hazard(tpp)) {
-        world->set_hazard(new_at.x, new_at.y);
-    }
-    if (tp_is_blood(tpp)) {
-        world->set_blood(new_at.x, new_at.y);
-    }
-    if (tp_is_water(tpp)) {
-        world->set_water(new_at.x, new_at.y);
+    if (tp_is_blood(tpp))       { world->set_blood(new_at.x, new_at.y); }
+    if (tp_is_chasm(tpp))       { world->set_chasm(new_at.x, new_at.y); }
+    if (tp_is_corridor(tpp))    { world->set_corridor(new_at.x, new_at.y); }
+    if (tp_is_dirt(tpp))        { world->set_dirt(new_at.x, new_at.y); }
+    if (tp_is_floor(tpp))       { world->set_floor(new_at.x, new_at.y); }
+    if (tp_is_hazard(tpp))      { world->set_hazard(new_at.x, new_at.y); }
+    if (tp_is_lava(tpp))        { world->set_lava(new_at.x, new_at.y); }
+    if (tp_is_rock(tpp))        { world->set_rock(new_at.x, new_at.y); }
+    if (tp_is_secret_door(tpp)) { world->set_secret_door(new_at.x, new_at.y); }
+    if (tp_is_wall(tpp))        { world->set_wall(new_at.x, new_at.y); }
+    if (tp_is_water(tpp))       { world->set_water(new_at.x, new_at.y); }
+    if (tp_gfx_large_shadow_caster(tpp)) { 
+        world->set_gfx_large_shadow_caster(new_at.x, new_at.y); 
     }
     if (tp_is_deep_water(tpp)) {
         world->set_deep_water(new_at.x, new_at.y);
         world->set_water(new_at.x, new_at.y);
-    }
-    if (tp_is_corridor(tpp)) {
-        world->set_corridor(new_at.x, new_at.y);
-    }
-    if (tp_is_dirt(tpp)) {
-        world->set_dirt(new_at.x, new_at.y);
-    }
-    if (tp_is_rock(tpp)) {
-        world->set_rock(new_at.x, new_at.y);
-    }
-    if (tp_gfx_large_shadow_caster(tpp)) {
-        world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
     }
 
     if (tp_is_loggable(tpp)) {
@@ -439,36 +420,20 @@ void Thing::reinit (void)
         return;
     }
 
-    if (tp_is_wall(tpp)) {
-        world->set_wall(new_at.x, new_at.y);
-    }
-    if (tp_is_floor(tpp)) {
-        world->set_floor(new_at.x, new_at.y);
-    }
-    if (tp_is_lava(tpp)) {
-        world->set_lava(new_at.x, new_at.y);
-    }
-    if (tp_is_chasm(tpp)) {
-        world->set_chasm(new_at.x, new_at.y);
-    }
-    if (tp_is_blood(tpp)) {
-        world->set_blood(new_at.x, new_at.y);
-    }
-    if (tp_is_water(tpp)) {
-        world->set_water(new_at.x, new_at.y);
-    }
+    if (tp_is_blood(tpp))       { world->set_blood(new_at.x, new_at.y); }
+    if (tp_is_chasm(tpp))       { world->set_chasm(new_at.x, new_at.y); }
+    if (tp_is_corridor(tpp))    { world->set_corridor(new_at.x, new_at.y); }
+    if (tp_is_dirt(tpp))        { world->set_dirt(new_at.x, new_at.y); }
+    if (tp_is_floor(tpp))       { world->set_floor(new_at.x, new_at.y); }
+    if (tp_is_hazard(tpp))      { world->set_hazard(new_at.x, new_at.y); }
+    if (tp_is_lava(tpp))        { world->set_lava(new_at.x, new_at.y); }
+    if (tp_is_rock(tpp))        { world->set_rock(new_at.x, new_at.y); }
+    if (tp_is_secret_door(tpp)) { world->set_secret_door(new_at.x, new_at.y); }
+    if (tp_is_wall(tpp))        { world->set_wall(new_at.x, new_at.y); }
+    if (tp_is_water(tpp))       { world->set_water(new_at.x, new_at.y); }
     if (tp_is_deep_water(tpp)) {
         world->set_deep_water(new_at.x, new_at.y);
         world->set_water(new_at.x, new_at.y);
-    }
-    if (tp_is_corridor(tpp)) {
-        world->set_corridor(new_at.x, new_at.y);
-    }
-    if (tp_is_dirt(tpp)) {
-        world->set_dirt(new_at.x, new_at.y);
-    }
-    if (tp_is_rock(tpp)) {
-        world->set_rock(new_at.x, new_at.y);
     }
     if (tp_gfx_large_shadow_caster(tpp)) {
         world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
@@ -518,39 +483,18 @@ void Thing::destroy (void)
     //
     point old_at((int)mid_at.x, (int)mid_at.y);
 
-    if (is_wall()) {
-        world->unset_wall(old_at.x, old_at.y);
-    }
-    if (is_floor()) {
-        world->unset_floor(old_at.x, old_at.y);
-    }
-    if (is_lava()) {
-        world->unset_lava(old_at.x, old_at.y);
-    }
-    if (is_chasm()) {
-        world->unset_chasm(old_at.x, old_at.y);
-    }
-    if (is_hazard()) {
-        world->unset_hazard(old_at.x, old_at.y);
-    }
-    if (is_blood()) {
-        world->unset_blood(old_at.x, old_at.y);
-    }
-    if (is_water()) {
-        world->unset_water(old_at.x, old_at.y);
-    }
-    if (is_deep_water()) {
-        world->unset_deep_water(old_at.x, old_at.y);
-    }
-    if (is_corridor()) {
-        world->unset_corridor(old_at.x, old_at.y);
-    }
-    if (is_dirt()) {
-        world->unset_dirt(old_at.x, old_at.y);
-    }
-    if (is_rock()) {
-        world->unset_rock(old_at.x, old_at.y);
-    }
+    if (is_wall())        { world->unset_wall(old_at.x, old_at.y); }
+    if (is_floor())       { world->unset_floor(old_at.x, old_at.y); }
+    if (is_lava())        { world->unset_lava(old_at.x, old_at.y); }
+    if (is_chasm())       { world->unset_chasm(old_at.x, old_at.y); }
+    if (is_hazard())      { world->unset_hazard(old_at.x, old_at.y); }
+    if (is_secret_door()) { world->unset_secret_door(old_at.x, old_at.y); }
+    if (is_blood())       { world->unset_blood(old_at.x, old_at.y); }
+    if (is_water())       { world->unset_water(old_at.x, old_at.y); }
+    if (is_deep_water())  { world->unset_deep_water(old_at.x, old_at.y); }
+    if (is_corridor())    { world->unset_corridor(old_at.x, old_at.y); }
+    if (is_dirt())        { world->unset_dirt(old_at.x, old_at.y); }
+    if (is_rock())        { world->unset_rock(old_at.x, old_at.y); }
 
     auto tpp = tp();
     if (unlikely(!tpp)) {

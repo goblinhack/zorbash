@@ -537,9 +537,9 @@ int Thing::is_rrr33(void)
     return (tp_is_rrr33(tp()));
 }
 
-int Thing::is_rrr34(void)
+int Thing::is_attack_shove_chance_d1000(void)
 {_
-    return (tp_is_rrr34(tp()));
+    return (tp_is_attack_shove_chance_d1000(tp()));
 }
 
 int Thing::is_chasm(void)

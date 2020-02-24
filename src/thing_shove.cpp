@@ -17,6 +17,10 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         return (THING_SHOVE_NEVER_TRIED);
     }
 
+    if (tp_is_attack_shove_chance_d1000(tp()) > (int)random_range(0, 1000)) {
+        return (THING_SHOVE_NEVER_TRIED);
+    }
+
     fpoint shove_delta = delta;
     fpoint shove_pos = it->mid_at + shove_delta;
     if (it->collision_check_only(shove_pos)) {

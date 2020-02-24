@@ -208,7 +208,7 @@ public:
     int is_rrr31 {};
     int is_rrr32 {};
     int is_rrr33 {};
-    int is_rrr34 {};
+    int is_attack_shove_chance_d1000 {};
     int is_chasm {};
     int is_hazard {};
     int is_attack_shove {};
@@ -582,10 +582,10 @@ static inline int tp_is_rrr33 (Tpp t)
     return (t->is_rrr33);
 }
 
-static inline int tp_is_rrr34 (Tpp t)
+static inline int tp_is_attack_shove_chance_d1000 (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr34);
+    return (t->is_attack_shove_chance_d1000);
 }
 
 static inline int tp_is_chasm (Tpp t)
