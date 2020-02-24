@@ -608,7 +608,7 @@ CORES=""
 
 case `uname` in
     *Darwin*)
-        CORES=`/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g'`
+        CORES=`/usr/sbin/system_profiler -detailPlacedLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g'`
     ;;
 
     *inux*)

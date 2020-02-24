@@ -36,7 +36,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             (int) MAP_HEIGHT, (int) PyList_Size(py_level_data), level_name);
     }
 
-    auto l = Level::level_new();
+    auto l = PlacedLevel::level_new();
     for (auto n=0; n < MAP_WIDTH; n++) {
         for (auto y=0; y<MAP_HEIGHT; y++) {
             auto o = PyList_GetItem(py_level_data, y); /* Can't fail */

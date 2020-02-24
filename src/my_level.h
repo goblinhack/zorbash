@@ -6,23 +6,23 @@
 #include "my_charmap.h"
 #include "my_game.h"
 
-typedef std::shared_ptr< class Level > Levelp;
-typedef std::vector<Levelp> Levels;
+typedef std::shared_ptr< class PlacedLevel > PlacedLevelp;
+typedef std::vector<PlacedLevelp> PlacedLevels;
 
-class Level
+class PlacedLevel
 {
 private:
 public:
-    static Levels all_levels;
+    static PlacedLevels all_placed_levels;
 
-    Level (void)
+    PlacedLevel (void)
     {
-        this->levelno = all_levels.size();
+        this->levelno = all_placed_levels.size();
 
         newptr(this, "level");
     }
 
-    ~Level (void)
+    ~PlacedLevel (void)
     {
         oldptr(this);
     }
@@ -39,7 +39,7 @@ public:
       std::array<
         std::array<char, MAP_DEPTH>, MAP_HEIGHT>, MAP_WIDTH> data {};
 
-    static Levelp level_new(void);
+    static PlacedLevelp level_new(void);
     void finalize(void);
     void dump(void);
 };
