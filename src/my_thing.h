@@ -743,7 +743,7 @@ public:
     int is_rrr31(void);
     int is_rrr32(void);
     int is_rrr33(void);
-    int is_rrr34(void);
+    int is_attack_shove_chance_d1000(void);
     int is_chasm(void);
     int is_hazard(void);
     int is_attack_shove(void);

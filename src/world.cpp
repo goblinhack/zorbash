@@ -114,6 +114,38 @@ void World::unset_hazard (const int x, const int y)
     set(_is_hazard, x, y, false);
 }
 
+bool World::is_secret_door (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_secret_door, p.x, p.y));
+}
+
+bool World::is_secret_door (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_secret_door, x, y));
+}
+
+void World::set_secret_door (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_secret_door, x, y, true);
+}
+
+void World::unset_secret_door (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_secret_door, x, y, false);
+}
+
 bool World::is_blood (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {

@@ -248,8 +248,8 @@ class Tp:
     def set_is_rrr33(self, value):
         zx.tp_set_is_rrr33(self, value)
 
-    def set_is_rrr34(self, value):
-        zx.tp_set_is_rrr34(self, value)
+    def set_is_attack_shove_chance_d1000(self, value):
+        zx.tp_set_is_attack_shove_chance_d1000(self, value)
 
     def set_is_chasm(self, value):
         zx.tp_set_is_chasm(self, value)

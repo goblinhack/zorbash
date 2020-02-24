@@ -54,6 +54,7 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
@@ -232,6 +233,11 @@ public:
     bool is_hazard(const point &p);
     void set_hazard(const int x, const int y);
     void unset_hazard(const int x, const int y);
+
+    bool is_secret_door(const int x, const int y);
+    bool is_secret_door(const point &p);
+    void set_secret_door(const int x, const int y);
+    void unset_secret_door(const int x, const int y);
 
     bool is_deep_water(const int x, const int y);
     bool is_deep_water(const point &p);
