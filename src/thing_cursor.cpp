@@ -100,7 +100,6 @@ void thing_cursor_scroll_map_to_follow (void)
             return;
         }
         if (!wid_itembar) {
-            ERR("no wid_itembar");
             return;
         }
 

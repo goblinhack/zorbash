@@ -18,6 +18,10 @@ void Game::display (void)
         return;
     }
 
+    if (!level->minimap_valid) {
+        thing_render_minimap();
+    }
+
     thing_render_minimap();
 
     blit_fbo_bind(FBO_MAIN);

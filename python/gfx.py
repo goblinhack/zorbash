@@ -1,8 +1,13 @@
 import zx
 
 
+def init_solid():
+    zx.tex_load(file="data/gfx/solid.tga", name="solid")
+
+
 def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
+
 
 def init_64x16_ui():
     tiles = [
@@ -611,6 +616,7 @@ def init_claws_tiles():
         file="data/gfx/hit_claws_50x50px.tga",
         name="claws", width=25, height=25, arr=tiles)
 
+init_solid()
 init_light()
 init_64x16_ui()
 init_title()

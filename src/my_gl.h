@@ -357,6 +357,13 @@ void blit_colored(int tex,
                   color color_br,
                   color color_tl,
                   color color_tr);
+
+void blit(int tex, float left, float top, float right, float bottom);
+void blit(int tex, fpoint tl, fpoint tr, fpoint bl, fpoint br);
+void blit_colored(int tex, float left, float top, float right, float bottom,
+                  color color_bl, color color_br,
+                  color color_tl, color color_tr);
+
 //
 // Frame buffer objects
 //
