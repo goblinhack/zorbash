@@ -14,9 +14,10 @@ void Game::update_minimap (void)
 
 void Game::display (void)
 {_
-    if (!game->world.minimap_valid) {
-        thing_render_minimap();
+    if (!level) {
+        return;
     }
+    thing_render_minimap();
 
     blit_fbo_bind(FBO_MAIN);
     glClearColor(0, 0, 0, 0);

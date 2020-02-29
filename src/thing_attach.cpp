@@ -9,7 +9,7 @@
 void Thing::attach (void)
 {_
     detach();
-    world->put_thing((int)mid_at.x, (int)mid_at.y, id);
+    level->put_thing((int)mid_at.x, (int)mid_at.y, id);
     if (is_active()) {
         update_interpolated_position();
     }
@@ -25,5 +25,5 @@ void Thing::detach (void)
         return;
     }
     is_attached = false;
-    world->remove_thing((int)last_attached.x, (int)last_attached.y, id);
+    level->remove_thing((int)last_attached.x, (int)last_attached.y, id);
 }

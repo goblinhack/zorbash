@@ -1036,7 +1036,10 @@ void config_gfx_show_hidden_toggle (void)
         game->config.gfx_show_hidden = false;
         CON("gfx show hidden disabled");
     }
-    game->world.minimap_valid = false;
+
+    if (level) {
+        level->minimap_valid = false;
+    }
 }
 
 //
@@ -1129,9 +1132,9 @@ void config_gfx_zoom_update (void)
     game->config.tile_pixel_height =
                     game->config.drawable_gl_height / TILES_DOWN;
 
-    game->world.cursor_needs_update = true;
-    game->world.cursor_found = false;
-    game->world.map_follow_player = true;
+    level->cursor_needs_update = true;
+    level->cursor_found = false;
+    level->map_follow_player = true;
 
     CON("- video     gl width   : %f", game->config.video_gl_width);
     CON("- video     gl height  : %f", game->config.video_gl_height);

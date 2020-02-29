@@ -7,7 +7,7 @@
 #include "my_dungeon.h"
 #include "my_thing.h"
 
-void World::put_thing (int x, int y, uint32_t id)
+void Level::put_thing (int x, int y, uint32_t id)
 {_
     auto t = thing_find(id);
     if (!id) {
@@ -70,12 +70,12 @@ void World::put_thing (int x, int y, uint32_t id)
     t->err("out of thing slots at (%d,%d) for put of %08X", x, y, id);
 }
 
-void World::put_thing (point p, uint32_t id)
+void Level::put_thing (point p, uint32_t id)
 {_
     put_thing(p.x, p.y, id);
 }
 
-void World::remove_thing (int x, int y, uint32_t id)
+void Level::remove_thing (int x, int y, uint32_t id)
 {_
     auto t = thing_find(id);
     if (!t) {
@@ -103,7 +103,7 @@ void World::remove_thing (int x, int y, uint32_t id)
            x, y, id);
 }
 
-void World::remove_thing (point p, uint32_t id)
+void Level::remove_thing (point p, uint32_t id)
 {_
     remove_thing(p.x, p.y, id);
 }

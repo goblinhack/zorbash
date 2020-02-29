@@ -381,7 +381,6 @@ typedef my_apoint<int16_t> spoint;
 typedef my_apoint<int> point;
 typedef my_apoint<float> fpoint;
 
-#ifdef NEED_3D_MATH
 template<class T> class my_apoint3d
 {
 public:
@@ -539,10 +538,16 @@ public:
     {
         return (my_apoint3d(a.x * b, a.y * b, a.z * b));
     }
+
+    std::string to_string(void)
+    {
+        return "(" + std::to_string(x) + ", " +
+                     std::to_string(y) + ", " +
+                     std::to_string(z) + ", " + ")";
+    }
 };
 
 typedef my_apoint3d<int> point3d;
 typedef my_apoint3d<float> fpoint3d;
-#endif
 
 #endif // _MY_POINT_H_

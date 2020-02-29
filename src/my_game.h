@@ -18,6 +18,7 @@ class Light;
 typedef class Light* Lightp;
 typedef struct Thing_* Thingp;
 typedef class World* Worldp;
+typedef class Level* Levelp;
 
 enum {
     MAP_DEPTH_FLOOR,
@@ -38,7 +39,7 @@ enum {
     MAP_DEPTH,
 };
 
-class World {
+class Level {
 private:
     //
     // These are caches for fast lookup in display code
@@ -60,10 +61,15 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
 public:
     //
-    // When this world was made. Used to restore timestamps relative to this.
+    // When this Level was made. Used to restore timestamps relative to this.
     //
     timestamp_t                timestamp_dungeon_created {};
     timestamp_t                timestamp_dungeon_saved {};
+
+    //
+    // Where we are in the world
+    //
+    point3d                    world_at;
 
     bool                       cursor_needs_update = false;
     bool                       cursor_found = false;
@@ -115,9 +121,9 @@ public:
     //
     // Display depth filter
     //
-    #define FOR_ALL_THINGS(world, t, x, y, z)                          \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);               \
-        world->get_all_things_at_depth(x, y, z, JOIN1(tmp, __LINE__)); \
+    #define FOR_ALL_THINGS(level, t, x, y, z)                         \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);              \
+        level->get_all_things_at_depth(x, y, z, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_things_at_depth(int x, int y, int z, std::vector<Thingp> &);
 
@@ -125,9 +131,9 @@ public:
     // Things that move around and things that do not, but are interesting,
     // like food
     //
-    #define FOR_ALL_INTERESTING_THINGS(world, t, x, y)                    \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \
-        world->get_all_interesting_things_at(x, y, JOIN1(tmp, __LINE__)); \
+    #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)                   \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);                 \
+        level->get_all_interesting_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_interesting_things_at(int x, int y, std::vector<Thingp> &);
 
@@ -135,45 +141,45 @@ public:
     // Things that move around and things that do not, but are interesting,
     // like food
     //
-    #define FOR_ALL_COLLISION_THINGS(world, t, x, y)                      \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \
-        world->get_all_collision_things_at(x, y, JOIN1(tmp, __LINE__));   \
+    #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                     \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);                 \
+        level->get_all_collision_things_at(x, y, JOIN1(tmp, __LINE__));   \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_collision_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // Things that emit light
     //
-    #define FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y)                    \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);                   \
-        world->get_all_light_source_things_at(x, y, JOIN1(tmp, __LINE__)); \
+    #define FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y)                   \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \
+        level->get_all_light_source_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_light_source_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // Things that move around
     //
-    #define FOR_ALL_ACTIVE_THINGS(world, t, x, y)                    \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);             \
-        world->get_all_active_things_at(x, y, JOIN1(tmp, __LINE__)); \
+    #define FOR_ALL_ACTIVE_THINGS(level, t, x, y)                   \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);            \
+        level->get_all_active_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_active_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // Things that block progress
     //
-    #define FOR_ALL_OBSTACLE_THINGS(world, t, x, y)                    \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);               \
-        world->get_all_obstacle_things_at(x, y, JOIN1(tmp, __LINE__)); \
+    #define FOR_ALL_OBSTACLE_THINGS(level, t, x, y)                   \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);              \
+        level->get_all_obstacle_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_obstacle_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // Cursor path is the highlighted path the player follows.
     //
-    #define FOR_ALL_CURSOR_PATH_THINGS(world, t, x, y)                    \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \
-        world->get_all_cursor_path_things_at(x, y, JOIN1(tmp, __LINE__)); \
+    #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                   \
+        static std::vector<Thingp> JOIN1(tmp, __LINE__);                 \
+        level->get_all_cursor_path_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_cursor_path_things_at(int x, int y, std::vector<Thingp> &);
 
@@ -289,9 +295,35 @@ public:
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 
+    void init(point3d at, int seed);
+    std::string to_string(void);
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
     void log(std::string prefix);
+    void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void log_(const char *fmt, va_list args); // compile error without
+    friend std::ostream& operator<<(std::ostream &out, Bits<const Level & > const my);
+    friend std::istream& operator>>(std::istream &in, Bits<Level &> my);
+};
+
+class World {
+public:
+    std::array<
+      std::array<
+        std::array<Levelp, LEVELS_DEEP>,
+                           LEVELS_DOWN>,
+                           LEVELS_ACROSS>
+          levels {};
+    //
+    // Which level in the world
+    //
+    point3d at;
+
+    void clear(void);
+    void fini(void);
+    void dump(std::string prefix, std::ostream &out);
+    void log(std::string prefix);
+    void new_level_at(point3d at, int seed);
     friend std::ostream& operator<<(std::ostream &out, Bits<const World & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<World &> my);
 };
@@ -404,6 +436,15 @@ public:
 
     Config             config;
     World              world;
+
+    //
+    // Where we are in the world.
+    //
+    point3d            current_level;
+
+    //
+    // All randomness jumps off of this as the root
+    //
     int                seed {};
 
     //
@@ -463,6 +504,7 @@ public:
 
 extern class Game *game;
 extern class World *world;
+extern class Level *level;
 extern bool thing_map_black_and_white;
 
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);
@@ -475,7 +517,7 @@ extern void player_tick(void);
 //
 static inline Thingp thing_find (const uint32_t id)
 {_
-    return (world->find_thing_ptr(id));
+    return (level->find_thing_ptr(id));
 }
 
 #endif

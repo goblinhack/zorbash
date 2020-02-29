@@ -64,7 +64,7 @@ ThingShoved Thing::try_to_shove (fpoint future_pos)
     auto y = future_pos.y;
     auto delta = fpoint(x, y) - mid_at;
     point p(future_pos.x, future_pos.y);
-    FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
+    FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
         if (this == it) {
             continue;
         }
@@ -84,7 +84,7 @@ ThingShoved Thing::try_to_shove_into_hazard (Thingp it, fpoint delta)
 {
     if (is_attack_shove()) {
         auto shoved_to_position = it->mid_at + delta;
-        if (world->is_hazard((int)shoved_to_position.x, 
+        if (level->is_hazard((int)shoved_to_position.x, 
                              (int)shoved_to_position.y)) {
             return (try_to_shove(it, delta));
         }

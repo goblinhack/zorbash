@@ -22,7 +22,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         return;
     }
 
-    if (tiles->tile_top && !world->is_wall(x, y - 1)) {
+    if (tiles->tile_top && !level->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -30,7 +30,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_top, tl2, br2);
     }
 
-    if (tiles->tile_bot && !world->is_wall(x, y + 1)) {
+    if (tiles->tile_bot && !level->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         //tl2.y += dh;
@@ -38,7 +38,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_bot, tl2, br2);
     }
 
-    if (tiles->tile_left && !world->is_wall(x - 1, y)) {
+    if (tiles->tile_left && !level->is_wall(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -46,7 +46,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         tile_blit(tiles->tile_left, tl2, br2);
     }
 
-    if (tiles->tile_right && !world->is_wall(x + 1, y)) {
+    if (tiles->tile_right && !level->is_wall(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -60,9 +60,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     //
     if (tiles->tile_tl &&
-        !world->is_wall(x - 1, y - 1) &&
-        !world->is_wall(x - 1, y) &&
-        !world->is_wall(x, y - 1)) {
+        !level->is_wall(x - 1, y - 1) &&
+        !level->is_wall(x - 1, y) &&
+        !level->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -78,9 +78,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     //
     if (tiles->tile_tr &&
-        !world->is_wall(x + 1, y - 1) &&
-        !world->is_wall(x + 1, y) &&
-        !world->is_wall(x, y - 1)) {
+        !level->is_wall(x + 1, y - 1) &&
+        !level->is_wall(x + 1, y) &&
+        !level->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -97,9 +97,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  ....
     //
     if (tiles->tile_tr &&
-        !world->is_wall(x + 1, y - 1) &&
-        world->is_wall(x + 1, y) &&
-        world->is_wall(x, y - 1)) {
+        !level->is_wall(x + 1, y - 1) &&
+        level->is_wall(x + 1, y) &&
+        level->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -116,9 +116,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  ....
     //
     if (tiles->tile_tl &&
-        !world->is_wall(x - 1, y - 1) &&
-        world->is_wall(x - 1, y) &&
-        world->is_wall(x, y - 1)) {
+        !level->is_wall(x - 1, y - 1) &&
+        level->is_wall(x - 1, y) &&
+        level->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -137,9 +137,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // X---
     //
     if (tiles->tile_bl &&
-        !world->is_wall(x - 1, y + 1) &&
-        !world->is_wall(x - 1, y) &&
-        !world->is_wall(x, y + 1)) {
+        !level->is_wall(x - 1, y + 1) &&
+        !level->is_wall(x - 1, y) &&
+        !level->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -155,9 +155,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ---X
     //
     if (tiles->tile_br &&
-        !world->is_wall(x + 1, y + 1) &&
-        !world->is_wall(x + 1, y) &&
-        !world->is_wall(x, y + 1)) {
+        !level->is_wall(x + 1, y + 1) &&
+        !level->is_wall(x + 1, y) &&
+        !level->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -174,9 +174,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // .|
     //
     if (tiles->tile_br &&
-        !world->is_wall(x + 1, y + 1) &&
-        world->is_wall(x + 1, y) &&
-        world->is_wall(x, y + 1)) {
+        !level->is_wall(x + 1, y + 1) &&
+        level->is_wall(x + 1, y) &&
+        level->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -193,9 +193,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //   |.
     //
     if (tiles->tile_bl &&
-        !world->is_wall(x - 1, y + 1) &&
-        world->is_wall(x - 1, y) &&
-        world->is_wall(x, y + 1)) {
+        !level->is_wall(x - 1, y + 1) &&
+        level->is_wall(x - 1, y) &&
+        level->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -222,7 +222,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->tile_top &&
-        !world->is_rock(x, y - 1)) {
+        !level->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
@@ -231,7 +231,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->tile_bot &&
-        !world->is_rock(x, y + 1)) {
+        !level->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         //tl2.y += dh;
@@ -240,7 +240,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->tile_left &&
-        !world->is_rock(x - 1, y)) {
+        !level->is_rock(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -249,7 +249,7 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->tile_right &&
-        !world->is_rock(x + 1, y)) {
+        !level->is_rock(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -263,9 +263,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     //
     if (tiles->tile_tl &&
-        !world->is_rock(x - 1, y - 1) &&
-        !world->is_rock(x - 1, y) &&
-        !world->is_rock(x, y - 1)) {
+        !level->is_rock(x - 1, y - 1) &&
+        !level->is_rock(x - 1, y) &&
+        !level->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -281,9 +281,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     //
     if (tiles->tile_tr &&
-        !world->is_rock(x + 1, y - 1) &&
-        !world->is_rock(x + 1, y) &&
-        !world->is_rock(x, y - 1)) {
+        !level->is_rock(x + 1, y - 1) &&
+        !level->is_rock(x + 1, y) &&
+        !level->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -300,9 +300,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  ....
     //
     if (tiles->tile_tr &&
-        !world->is_rock(x + 1, y - 1) &&
-        world->is_rock(x + 1, y) &&
-        world->is_rock(x, y - 1)) {
+        !level->is_rock(x + 1, y - 1) &&
+        level->is_rock(x + 1, y) &&
+        level->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -319,9 +319,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //  ....
     //
     if (tiles->tile_tl &&
-        !world->is_rock(x - 1, y - 1) &&
-        world->is_rock(x - 1, y) &&
-        world->is_rock(x, y - 1)) {
+        !level->is_rock(x - 1, y - 1) &&
+        level->is_rock(x - 1, y) &&
+        level->is_rock(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -340,9 +340,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // X---
     //
     if (tiles->tile_bl &&
-        !world->is_rock(x - 1, y + 1) &&
-        !world->is_rock(x - 1, y) &&
-        !world->is_rock(x, y + 1)) {
+        !level->is_rock(x - 1, y + 1) &&
+        !level->is_rock(x - 1, y) &&
+        !level->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
@@ -358,9 +358,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ---X
     //
     if (tiles->tile_br &&
-        !world->is_rock(x + 1, y + 1) &&
-        !world->is_rock(x + 1, y) &&
-        !world->is_rock(x, y + 1)) {
+        !level->is_rock(x + 1, y + 1) &&
+        !level->is_rock(x + 1, y) &&
+        !level->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -377,9 +377,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // .|
     //
     if (tiles->tile_br &&
-        !world->is_rock(x + 1, y + 1) &&
-        world->is_rock(x + 1, y) &&
-        world->is_rock(x, y + 1)) {
+        !level->is_rock(x + 1, y + 1) &&
+        level->is_rock(x + 1, y) &&
+        level->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -396,9 +396,9 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     //   |.
     //
     if (tiles->tile_bl &&
-        !world->is_rock(x - 1, y + 1) &&
-        world->is_rock(x - 1, y) &&
-        world->is_rock(x, y + 1)) {
+        !level->is_rock(x - 1, y + 1) &&
+        level->is_rock(x - 1, y) &&
+        level->is_rock(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
@@ -495,13 +495,13 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 
     double dx = 1.0;
     double dy = 1.0;
-    if (world->player) {
-        if (get_owner_id() == world->player->id) {
+    if (level->player) {
+        if (get_owner_id() == level->player->id) {
             // use default shadow for carried items
-        } else if (this != world->player) {
-            fpoint p = world->player->get_interpolated_mid_at();
+        } else if (this != level->player) {
+            fpoint p = level->player->get_interpolated_mid_at();
             fpoint d = get_interpolated_mid_at() -
-                             world->player->get_interpolated_mid_at();
+                             level->player->get_interpolated_mid_at();
             const double D = 5.0;
             dx = d.x / D;
             dy = d.y / D;
@@ -640,12 +640,12 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
         return;
     }
 
-    if (!world->player) {
+    if (!level->player) {
         blit_non_player_owned_shadow(tpp, tile, tl, br);
         return;
     }
 
-    if (is_player() || (get_owner_id() == world->player->id)) {
+    if (is_player() || (get_owner_id() == level->player->id)) {
         blit_player_owned_shadow(tpp, tile, tl, br);
     } else {
         blit_non_player_owned_shadow(tpp, tile, tl, br);
@@ -656,13 +656,13 @@ void Thing::blit_shadow_section (const Tpp &tpp, const Tilep &tile,
                                  const fpoint &tile_tl, const fpoint &tile_br,
                                  const fpoint &tl, const fpoint &br)
 {_
-    if (!world->player) {
+    if (!level->player) {
         blit_non_player_owned_shadow_section(
             tpp, tile, tile_tl, tile_br, tl, br);
         return;
     }
 
-    if (is_player() || (get_owner_id() == world->player->id)) {
+    if (is_player() || (get_owner_id() == level->player->id)) {
         blit_player_owned_shadow_section(
             tpp, tile, tile_tl, tile_br, tl, br);
     } else {
@@ -816,7 +816,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         // Always blit
         //
     } else if (unlikely(game->config.gfx_show_hidden)) {
-        if (world->is_visited(x, y)) {
+        if (level->is_visited(x, y)) {
             if (is_wall()) {
                 glcolor(RED);
             }
@@ -825,7 +825,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 glcolor(BLUE);
             }
         }
-        if (!world->is_dungeon(x, y)) {
+        if (!level->is_dungeon(x, y)) {
             blit = false;
         }
     }
@@ -882,11 +882,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         set_submerged_offset(0);
 
         if ((map_loc.y < MAP_HEIGHT - 1) &&
-             world->is_chasm((int)map_loc.x, (int)map_loc.y + 1)) {
+             level->is_chasm((int)map_loc.x, (int)map_loc.y + 1)) {
             double offset = game->config.one_pixel_gl_height * 5;
             blit_br.y -= offset;
             blit_tl.y -= offset;
-        } else if (world->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
+        } else if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
             if (owner) {
                 auto offset = owner->get_submerged_offset();
@@ -903,7 +903,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 blit_tl.y += offset;
             }
             is_submerged = true;
-        } else if (world->is_lava((int)map_loc.x, (int)map_loc.y)) {
+        } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
             if (owner) {
                 auto offset = owner->get_submerged_offset();
@@ -921,7 +921,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             }
             is_submerged = true;
             lava = true;
-        } else if (world->is_water((int)map_loc.x, (int)map_loc.y)) {
+        } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
             if (owner) {
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
@@ -1099,7 +1099,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         tp_gfx_is_attack_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
 
-        if (world->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
+        if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             const auto pct_visible_above_surface = 0.5;
             if (owner) {
                 auto offset = owner->get_submerged_offset();
@@ -1116,7 +1116,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
                 blit_tl.y += offset;
             }
             is_submerged = true;
-        } else if (world->is_water((int)map_loc.x, (int)map_loc.y)) {
+        } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
             if (owner) {
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;

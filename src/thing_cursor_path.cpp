@@ -62,13 +62,13 @@ static void thing_cursor_path_draw (point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (world->is_deep_water(x,y)  ||
-                world->is_water(x,y)       ||
-                world->is_monst(x,y)       ||
-                world->is_door(x,y)        ||
-                world->is_secret_door(x,y) ||
-                world->is_hazard(x,y)      ||
-                world->is_wall(x, y)) {
+            if (level->is_deep_water(x,y)  ||
+                level->is_water(x,y)       ||
+                level->is_monst(x,y)       ||
+                level->is_door(x,y)        ||
+                level->is_secret_door(x,y) ||
+                level->is_hazard(x,y)      ||
+                level->is_wall(x, y)) {
                 set(d.val, x, y, DMAP_IS_WALL);
             } else {
                 set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -102,7 +102,7 @@ void thing_cursor_path_create (void)
         return;
     }
 
-    auto cursor = world->cursor;
+    auto cursor = level->cursor;
     if (!cursor) {
         return;
     }
@@ -111,7 +111,7 @@ void thing_cursor_path_create (void)
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            FOR_ALL_CURSOR_PATH_THINGS(world, t, x, y) {
+            FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y) {
                 t->dead("eol");
             }
         }
@@ -120,10 +120,10 @@ void thing_cursor_path_create (void)
     //
     // If not following the player, draw the path
     //
-    if (world->player) {
+    if (level->player) {
         thing_cursor_path_draw(
-            point(world->player->mid_at.x, world->player->mid_at.y),
-            point(world->cursor_at.x, world->cursor_at.y));
+            point(level->player->mid_at.x, level->player->mid_at.y),
+            point(level->cursor_at.x, level->cursor_at.y));
     }
 }
 
@@ -132,7 +132,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
     if (monst && monst->move_path.size()) {
         auto to = monst->move_path[0];
         auto future_pos = fpoint(to.x + 0.5, to.y + 0.5);
-        FOR_ALL_CURSOR_PATH_THINGS(world, t, to.x, to.y) {
+        FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) {
             t->dead("eol");
         }
         monst->move_path.erase(monst->move_path.begin());

@@ -9,6 +9,7 @@
 
 class Game *game;
 class World *world;
+class Level *level;
 
 Game::Game (std::string appdata)
 {_
@@ -25,7 +26,7 @@ Game::Game (std::string appdata)
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
-    if (!game || !game->started || !world || !world->player) {
+    if (!game || !game->started || !world || !level->player) {
         return (false);
     }
 
@@ -33,18 +34,18 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     // Grab the current move path and start walking toward it. This will
     // consume one move by the player.
     //
-    world->player->cursor_path_grab();
+    level->player->cursor_path_grab();
 
     //
     // Close enough to attack?
     //
-    if ((std::abs(world->player->mid_at.x - world->cursor->mid_at.x) <= 1) &&
-        (std::abs(world->player->mid_at.y - world->cursor->mid_at.y) <= 1)) {
-        int x = world->cursor->mid_at.x;
-        int y = world->cursor->mid_at.y;
-        FOR_ALL_INTERESTING_THINGS(world, t, x, y) {
-            if (t != world->player) {
-                world->player->attack(world->cursor->mid_at);
+    if ((std::abs(level->player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
+        (std::abs(level->player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+        int x = level->cursor->mid_at.x;
+        int y = level->cursor->mid_at.y;
+        FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
+            if (t != level->player) {
+                level->player->attack(level->cursor->mid_at);
                 return (true);
             }
         }

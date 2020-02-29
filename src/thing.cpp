@@ -73,7 +73,7 @@ _
     //
     // Must do this after TP assignment or logging will fail
     //
-    world->alloc_thing_id(this);
+    level->alloc_thing_id(this);
 
     if (tp_is_monst(tpp)) {
         new_dmap_scent();
@@ -300,15 +300,15 @@ _
     }
 
     if (unlikely(tp_is_player(tpp))) {
-        if (world->player && (world->player != this)) {
+        if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
-                world->player->mid_at.x,
-                world->player->mid_at.y,
+                level->player->mid_at.x,
+                level->player->mid_at.y,
                 mid_at.x,
                 mid_at.y);
             return;
         }
-        world->player = this;
+        level->player = this;
 
         //
         // keep the light strength half the tiles drawn or we get artifacts
@@ -327,23 +327,23 @@ _
         return;
     }
 
-    if (tp_is_blood(tpp))       { world->set_blood(new_at.x, new_at.y); }
-    if (tp_is_chasm(tpp))       { world->set_chasm(new_at.x, new_at.y); }
-    if (tp_is_corridor(tpp))    { world->set_corridor(new_at.x, new_at.y); }
-    if (tp_is_dirt(tpp))        { world->set_dirt(new_at.x, new_at.y); }
-    if (tp_is_floor(tpp))       { world->set_floor(new_at.x, new_at.y); }
-    if (tp_is_hazard(tpp))      { world->set_hazard(new_at.x, new_at.y); }
-    if (tp_is_lava(tpp))        { world->set_lava(new_at.x, new_at.y); }
-    if (tp_is_rock(tpp))        { world->set_rock(new_at.x, new_at.y); }
-    if (tp_is_secret_door(tpp)) { world->set_secret_door(new_at.x, new_at.y); }
-    if (tp_is_wall(tpp))        { world->set_wall(new_at.x, new_at.y); }
-    if (tp_is_water(tpp))       { world->set_water(new_at.x, new_at.y); }
+    if (tp_is_blood(tpp))       { level->set_blood(new_at.x, new_at.y); }
+    if (tp_is_chasm(tpp))       { level->set_chasm(new_at.x, new_at.y); }
+    if (tp_is_corridor(tpp))    { level->set_corridor(new_at.x, new_at.y); }
+    if (tp_is_dirt(tpp))        { level->set_dirt(new_at.x, new_at.y); }
+    if (tp_is_floor(tpp))       { level->set_floor(new_at.x, new_at.y); }
+    if (tp_is_hazard(tpp))      { level->set_hazard(new_at.x, new_at.y); }
+    if (tp_is_lava(tpp))        { level->set_lava(new_at.x, new_at.y); }
+    if (tp_is_rock(tpp))        { level->set_rock(new_at.x, new_at.y); }
+    if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
+    if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
+    if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
     if (tp_gfx_large_shadow_caster(tpp)) { 
-        world->set_gfx_large_shadow_caster(new_at.x, new_at.y); 
+        level->set_gfx_large_shadow_caster(new_at.x, new_at.y); 
     }
     if (tp_is_deep_water(tpp)) {
-        world->set_deep_water(new_at.x, new_at.y);
-        world->set_water(new_at.x, new_at.y);
+        level->set_deep_water(new_at.x, new_at.y);
+        level->set_water(new_at.x, new_at.y);
     }
 
     if (tp_is_loggable(tpp)) {
@@ -386,7 +386,7 @@ void Thing::reinit (void)
 {_
     verify(this);
 
-    world->realloc_thing_id(this);
+    level->realloc_thing_id(this);
     const auto tpp = tp();
     if (unlikely(!tpp)) {
         ERR("no tp");
@@ -402,15 +402,15 @@ void Thing::reinit (void)
     }
 
     if (unlikely(tp_is_player(tpp))) {
-        if (world->player && (world->player != this)) {
+        if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
-                world->player->mid_at.x,
-                world->player->mid_at.y,
+                level->player->mid_at.x,
+                level->player->mid_at.y,
                 mid_at.x,
                 mid_at.y);
             return;
         }
-        world->player = this;
+        level->player = this;
         log("player recreated");
     }
 
@@ -420,23 +420,23 @@ void Thing::reinit (void)
         return;
     }
 
-    if (tp_is_blood(tpp))       { world->set_blood(new_at.x, new_at.y); }
-    if (tp_is_chasm(tpp))       { world->set_chasm(new_at.x, new_at.y); }
-    if (tp_is_corridor(tpp))    { world->set_corridor(new_at.x, new_at.y); }
-    if (tp_is_dirt(tpp))        { world->set_dirt(new_at.x, new_at.y); }
-    if (tp_is_floor(tpp))       { world->set_floor(new_at.x, new_at.y); }
-    if (tp_is_hazard(tpp))      { world->set_hazard(new_at.x, new_at.y); }
-    if (tp_is_lava(tpp))        { world->set_lava(new_at.x, new_at.y); }
-    if (tp_is_rock(tpp))        { world->set_rock(new_at.x, new_at.y); }
-    if (tp_is_secret_door(tpp)) { world->set_secret_door(new_at.x, new_at.y); }
-    if (tp_is_wall(tpp))        { world->set_wall(new_at.x, new_at.y); }
-    if (tp_is_water(tpp))       { world->set_water(new_at.x, new_at.y); }
+    if (tp_is_blood(tpp))       { level->set_blood(new_at.x, new_at.y); }
+    if (tp_is_chasm(tpp))       { level->set_chasm(new_at.x, new_at.y); }
+    if (tp_is_corridor(tpp))    { level->set_corridor(new_at.x, new_at.y); }
+    if (tp_is_dirt(tpp))        { level->set_dirt(new_at.x, new_at.y); }
+    if (tp_is_floor(tpp))       { level->set_floor(new_at.x, new_at.y); }
+    if (tp_is_hazard(tpp))      { level->set_hazard(new_at.x, new_at.y); }
+    if (tp_is_lava(tpp))        { level->set_lava(new_at.x, new_at.y); }
+    if (tp_is_rock(tpp))        { level->set_rock(new_at.x, new_at.y); }
+    if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
+    if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
+    if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
     if (tp_is_deep_water(tpp)) {
-        world->set_deep_water(new_at.x, new_at.y);
-        world->set_water(new_at.x, new_at.y);
+        level->set_deep_water(new_at.x, new_at.y);
+        level->set_water(new_at.x, new_at.y);
     }
     if (tp_gfx_large_shadow_caster(tpp)) {
-        world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
+        level->set_gfx_large_shadow_caster(new_at.x, new_at.y);
     }
 
     if (tp_is_loggable(tpp)) {
@@ -483,30 +483,30 @@ void Thing::destroy (void)
     //
     point old_at((int)mid_at.x, (int)mid_at.y);
 
-    if (is_wall())        { world->unset_wall(old_at.x, old_at.y); }
-    if (is_floor())       { world->unset_floor(old_at.x, old_at.y); }
-    if (is_lava())        { world->unset_lava(old_at.x, old_at.y); }
-    if (is_chasm())       { world->unset_chasm(old_at.x, old_at.y); }
-    if (is_hazard())      { world->unset_hazard(old_at.x, old_at.y); }
-    if (is_secret_door()) { world->unset_secret_door(old_at.x, old_at.y); }
-    if (is_blood())       { world->unset_blood(old_at.x, old_at.y); }
-    if (is_water())       { world->unset_water(old_at.x, old_at.y); }
-    if (is_deep_water())  { world->unset_deep_water(old_at.x, old_at.y); }
-    if (is_corridor())    { world->unset_corridor(old_at.x, old_at.y); }
-    if (is_dirt())        { world->unset_dirt(old_at.x, old_at.y); }
-    if (is_rock())        { world->unset_rock(old_at.x, old_at.y); }
+    if (is_wall())        { level->unset_wall(old_at.x, old_at.y); }
+    if (is_floor())       { level->unset_floor(old_at.x, old_at.y); }
+    if (is_lava())        { level->unset_lava(old_at.x, old_at.y); }
+    if (is_chasm())       { level->unset_chasm(old_at.x, old_at.y); }
+    if (is_hazard())      { level->unset_hazard(old_at.x, old_at.y); }
+    if (is_secret_door()) { level->unset_secret_door(old_at.x, old_at.y); }
+    if (is_blood())       { level->unset_blood(old_at.x, old_at.y); }
+    if (is_water())       { level->unset_water(old_at.x, old_at.y); }
+    if (is_deep_water())  { level->unset_deep_water(old_at.x, old_at.y); }
+    if (is_corridor())    { level->unset_corridor(old_at.x, old_at.y); }
+    if (is_dirt())        { level->unset_dirt(old_at.x, old_at.y); }
+    if (is_rock())        { level->unset_rock(old_at.x, old_at.y); }
 
     auto tpp = tp();
     if (unlikely(!tpp)) {
         ERR("no tp");
     } else {
         if (tp_gfx_large_shadow_caster(tpp)) {
-            world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
+            level->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
         }
     }
 
     if (is_player()) {
-        world->player = nullptr;
+        level->player = nullptr;
     }
 
     delete_dmap_scent();
@@ -517,7 +517,7 @@ _
         log("destroyed");
     }
 _
-    world->free_thing_id(this);
+    level->free_thing_id(this);
 _
     if (monst) {
         oldptr(monst);
@@ -670,7 +670,7 @@ void Thing::hooks_remove ()
         // Slow, but not used too often
         //
         for (auto slot = 0; slot < MAX_THINGS; slot++) {
-            auto p = getptr(world->all_thing_ptrs, slot);
+            auto p = getptr(level->all_thing_ptrs, slot);
             auto t = p->ptr;
             if (!t) {
                 continue;
@@ -791,7 +791,7 @@ void Thing::move_carried_items (void)
     // If something moves on the water, make a ripple
     //
     if (is_monst() || is_player()) {
-        if (world->is_water((int)mid_at.x, (int)mid_at.y)) {
+        if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
             fpoint at(mid_at.x - 0.5, mid_at.y - 0.5);
             if (random_range(0, 1000) > 500) {
                 thing_new(tp_name(tp_random_ripple()), at);
@@ -910,7 +910,7 @@ void Thing::kill (void)
 void Thing::update_all (void)
 {_
     for (auto slot = 0; slot < MAX_THINGS; slot++) {
-        auto p = getptr(world->all_thing_ptrs, slot);
+        auto p = getptr(level->all_thing_ptrs, slot);
         auto t = p->ptr;
         if (t) {
             verify(t);

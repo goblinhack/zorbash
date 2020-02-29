@@ -73,7 +73,7 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "}" << std::endl;
 }
 
-void World::dump (std::string pfx, std::ostream &out)
+void Level::dump (std::string pfx, std::ostream &out)
 {_
     out << pfx << "World {" << std::endl;
     auto old_pfx = pfx;
@@ -89,13 +89,35 @@ void World::dump (std::string pfx, std::ostream &out)
 
     out << pfx << "all_things" << std::endl;
     for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_WIDTH; ++y) {
+        for (auto y = 0; y < MAP_HEIGHT; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y, z);
                 if (id) {
                     auto t = thing_find(id);
                     t->log("dump");
                     t->dump(pfx + "  ", out);
+                }
+            }
+        }
+    }
+
+    pfx = old_pfx;
+    out << pfx << "}" << std::endl;
+}
+
+void World::dump (std::string pfx, std::ostream &out)
+{_
+    out << pfx << "Level {" << std::endl;
+    auto old_pfx = pfx;
+    pfx += "  ";
+
+    out << pfx << "levels" << std::endl;
+    for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+        for (auto y = 0; y < LEVELS_DOWN; ++y) {
+            for (auto z = 0; z < LEVELS_DEEP; ++z) {
+                auto l = get(levels, x, y, z);
+                if (l) {
+                    l->dump(pfx + "  ", out);
                 }
             }
         }
