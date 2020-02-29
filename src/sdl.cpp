@@ -85,11 +85,8 @@ static inline void sdl_list_video_size (void)
     int i;
 
     for (i = 0; i < SDL_GetNumDisplayModes(0); ++i) {
-
         SDL_DisplayMode mode;
-
         SDL_GetDisplayMode(0, i, &mode);
-
         LOG("- SDL video            : %dx%d available, ratio %f",
             mode.w, mode.h,
             (float)mode.w / (float)mode.h);

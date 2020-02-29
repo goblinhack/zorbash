@@ -543,7 +543,7 @@ public:
     {
         return "(" + std::to_string(x) + ", " +
                      std::to_string(y) + ", " +
-                     std::to_string(z) + ", " + ")";
+                     std::to_string(z) + ")";
     }
 };
 

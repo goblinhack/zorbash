@@ -73,6 +73,9 @@ void Level::clear (void)
 
 void Level::init (point3d at, int seed_in)
 {_
+    clear();
+
+    world_at = at;
     seed = seed_in;
     seed += (at.x + 1) * (at.y + 1) * (at.z + 1);
     mysrand(seed);
