@@ -66,7 +66,7 @@ bool Thing::move (fpoint future_pos,
     auto delta = fpoint(x, y) - mid_at;
 
     if (tp_gfx_bounce_on_move(tp())) {
-        bounce(0.1, 0.1, 100, 3);
+        bounce(0.1, 0.1, 250, 3);
     }
 
     move_set_dir_from_delta(delta);

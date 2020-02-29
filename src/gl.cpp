@@ -1593,6 +1593,24 @@ void blit_colored (int tex,
             ((double)color_br.a) / 255.0);
 }
 
+void blit (int tex, float left, float top, float right, float bottom)
+{
+    blit(tex, 0, 0, 1, 1, left, top, right, bottom);
+}
+
+void blit (int tex, fpoint tl, fpoint tr, fpoint bl, fpoint br)
+{
+    blit(tex, 0, 0, 1, 1, tl, tr, bl, br);
+}
+
+void blit_colored (int tex, float left, float top, float right, float bottom,
+                   color color_bl, color color_br,
+                   color color_tl, color color_tr)
+{
+    blit_colored(tex, 0, 0, 1, 1, left, top, right, bottom,
+                 color_bl, color_br, color_tl, color_tr);
+}
+
 //
 // Blits a whole tile. Y co-ords are inverted.
 //

@@ -23,6 +23,13 @@ void thing_render_minimap (void)
     float dx = 1.0 / MAP_WIDTH;
     float dy = 1.0 / MAP_HEIGHT;
 
+    static Texp solid_tex;
+    static int solid_tex_id;
+    if (!solid_tex) {
+        solid_tex = tex_load("", "solid", GL_LINEAR);
+        solid_tex_id = tex_get_gl_binding(solid_tex);
+    }
+
     if (unlikely(game->config.gfx_show_hidden)) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -67,10 +74,11 @@ void thing_render_minimap (void)
                     }
                 }
 
-                gl_blitquad(((float)x) * dx,
-                            1.0 - ((float)y) * dy,
-                            ((float)x+1) * dx,
-                            1.0 - ((float)y+1) * dy);
+                blit(solid_tex_id,
+                     ((float)x) * dx,
+                     1.0 - ((float)y) * dy,
+                     ((float)x+1) * dx,
+                     1.0 - ((float)y+1) * dy);
             }
         }
     } else {
@@ -122,10 +130,11 @@ void thing_render_minimap (void)
                     continue;
                 }
 
-                gl_blitquad(((float)x) * dx,
-                            1.0 - ((float)y) * dy,
-                            ((float)x+1) * dx,
-                            1.0 - ((float)y+1) * dy);
+                blit(solid_tex_id,
+                     ((float)x) * dx,
+                     1.0 - ((float)y) * dy,
+                     ((float)x+1) * dx,
+                     1.0 - ((float)y+1) * dy);
             }
         }
     }
