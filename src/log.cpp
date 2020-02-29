@@ -522,6 +522,36 @@ void Thing::log (const char *fmt, ...)
     va_end(args);
 }
 
+void Level::log_ (const char *fmt, va_list args)
+{
+    verify(this);
+    auto t = this;
+    char buf[MAXSTR];
+    int len;
+
+    buf[0] = '\0';
+    get_timestamp(buf, MAXSTR);
+    len = (int)strlen(buf);
+    snprintf(buf + len, MAXSTR - len, "level %s: ",
+            t->to_string().c_str());
+
+    len = (int)strlen(buf);
+    vsnprintf(buf + len, MAXSTR - len, fmt, args);
+
+    putf(MY_STDOUT, buf);
+}
+
+void Level::log (const char *fmt, ...)
+{
+    verify(this);
+    auto t = this;
+    va_list args;
+
+    va_start(args, fmt);
+    t->log_(fmt, args);
+    va_end(args);
+}
+
 void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 {
     verify(this);

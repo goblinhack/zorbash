@@ -20,7 +20,7 @@
 #include "my_charmap.h"
 #include "my_game.h"
 #include "my_room.h"
-#include "my_level.h"
+#include "my_placed_level.h"
 #include "my_traceback.h"
 #include "my_ascii.h"
 #include "my_gfx.h"

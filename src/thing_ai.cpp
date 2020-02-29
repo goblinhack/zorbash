@@ -83,7 +83,7 @@ bool Thing::ai_is_obstacle_for_me (point p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto slot : get(world->all_thing_ids_at, p.x, p.y)) {
+    for (auto slot : get(level->all_thing_ids_at, p.x, p.y)) {
         if (!slot) {
             continue;
         }
@@ -127,7 +127,7 @@ uint8_t Thing::is_less_preferred_terrain (point p)
 {_
     uint8_t pref = 0;
 
-    if (world->is_water(p)) {
+    if (level->is_water(p)) {
         if (is_water_hater()) {
             pref += is_water_hater();
         }
@@ -154,7 +154,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
         // Highest priority
         //
         if (is_starving) {
-            FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
+            FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
                 if (it == this) {
                     continue;
                 }
@@ -197,7 +197,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
         // Medium priority
         //
         if (is_hungry) {
-            FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
+            FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
                 if (it == this) {
                     continue;
                 }
@@ -248,7 +248,7 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
         //
         // Lowest priority
         //
-        FOR_ALL_INTERESTING_THINGS(world, it, p.x, p.y) {
+        FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) {
                 continue;
             }

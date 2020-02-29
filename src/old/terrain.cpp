@@ -67,7 +67,7 @@ public:
         mysrand(seed);
 
         for (unsigned x = 0; x < MAP_WIDTH; ++x) {
-            for (unsigned y = 0; y < MAP_WIDTH; ++y) {
+            for (unsigned y = 0; y < MAP_HEIGHT; ++y) {
                 old_map[x][y] = scrand();
             }
         }
@@ -101,7 +101,7 @@ public:
     {
         for (unsigned loops = 0; loops < 4; loops++) {
             for (unsigned x = 0; x < MAP_WIDTH; ++x) {
-                for (unsigned y = 0; y < MAP_WIDTH; ++y) {
+                for (unsigned y = 0; y < MAP_HEIGHT; ++y) {
                     old_map[x][y] = scrand();
                 }
             }
@@ -111,14 +111,14 @@ public:
             }
 
             for (unsigned x = 0; x < MAP_WIDTH; ++x) {
-                for (unsigned y = 0; y < MAP_WIDTH; ++y) {
+                for (unsigned y = 0; y < MAP_HEIGHT; ++y) {
                     merged_map[x][y] = std::max(merged_map[x][y], new_map[x][y]);
                 }
             }
         }
 
         for (unsigned x = 0; x < MAP_WIDTH; ++x) {
-            for (unsigned y = 0; y < MAP_WIDTH; ++y) {
+            for (unsigned y = 0; y < MAP_HEIGHT; ++y) {
                 new_map[x][y] = merged_map[x][y];
             }
         }
@@ -479,7 +479,7 @@ redo:
         }
 
         for (unsigned x = 0; x < MAP_WIDTH; ++x) {
-            for (unsigned y = 0; y < MAP_WIDTH; ++y) {
+            for (unsigned y = 0; y < MAP_HEIGHT; ++y) {
                 final_map[x][y] = new_map[x][y];
             }
         }

@@ -72,9 +72,9 @@ void Thing::log (std::string pfx)
     LOG("%s }", pfx.c_str());
 }
 
-void World::log (std::string pfx)
+void Level::log (std::string pfx)
 {_
-    LOG("%s World {", pfx.c_str());
+    LOG("%s Level {", pfx.c_str());
     auto old_pfx = pfx;
     pfx += "  ";
 
@@ -88,12 +88,34 @@ void World::log (std::string pfx)
 
     LOG("%s all_things", pfx.c_str());
     for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_WIDTH; ++y) {
+        for (auto y = 0; y < MAP_HEIGHT; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y, z);
                 if (id) {
                     auto t = thing_find(id);
                     t->log(pfx + "  ");
+                }
+            }
+        }
+    }
+
+    pfx = old_pfx;
+    LOG("%s }", pfx.c_str());
+}
+
+void World::log (std::string pfx)
+{_
+    LOG("%s World {", pfx.c_str());
+    auto old_pfx = pfx;
+    pfx += "  ";
+
+    LOG("%s levels", pfx.c_str());
+    for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+        for (auto y = 0; y < LEVELS_DOWN; ++y) {
+            for (auto z = 0; z < LEVELS_DEEP; ++z) {
+                auto l = get(levels, x, y, z);
+                if (l) {
+                    l->log(pfx + "  ");
                 }
             }
         }

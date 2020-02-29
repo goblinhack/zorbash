@@ -228,68 +228,14 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
 std::istream& operator>>(std::istream &in, Bits<class World &> my)
 {_
-    my.t.player = nullptr;
-    my.t.cursor = nullptr;
-    my.t.all_thing_ptrs = {};
-    my.t.all_thing_ids_at = {};
-
-    in >> bits(my.t.timestamp_dungeon_created); old_timestamp_dungeon_created = my.t.timestamp_dungeon_created;
-    in >> bits(my.t.timestamp_dungeon_saved);
-    auto dungeon_age = game->world.timestamp_dungeon_saved -
-                       game->world.timestamp_dungeon_created;
-    new_timestamp_dungeon_created = time_get_time_ms() - dungeon_age;
-    my.t.timestamp_dungeon_created = new_timestamp_dungeon_created;
-    my.t.timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
-
-    in >> bits(my.t._is_blood);
-    in >> bits(my.t._is_chasm);
-    in >> bits(my.t._is_corridor);
-    in >> bits(my.t._is_deep_water);
-    in >> bits(my.t._is_dirt);
-    in >> bits(my.t._is_dungeon);
-    in >> bits(my.t._is_floor);
-    in >> bits(my.t._is_gfx_large_shadow_caster);
-    in >> bits(my.t._is_hazard);
-    in >> bits(my.t._is_lava);
-    in >> bits(my.t._is_rock);
-    in >> bits(my.t._is_secret_door);
-    in >> bits(my.t._is_visited);
-    in >> bits(my.t._is_wall);
-    in >> bits(my.t._is_water);
-    in >> bits(my.t.all_thing_ids_at);
-    in >> bits(my.t.cursor_at);
-    in >> bits(my.t.cursor_at_old);
-    in >> bits(my.t.cursor_needs_update);
-    in >> bits(my.t.cursor_found);
-    in >> bits(my.t.map_at);
-    in >> bits(my.t.map_follow_player);
-    in >> bits(my.t.map_wanted_at);
-    in >> bits(my.t.minimap_valid);
-    in >> bits(my.t.mouse);
-    in >> bits(my.t.mouse_old);
-    in >> bits(my.t.next_thing_id);
-
-    my.t.minimap_valid = false;
-    my.t.cursor_needs_update = true;
-    my.t.map_follow_player = true;
-
-    for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_WIDTH; ++y) {
-            for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = get(my.t.all_thing_ids_at, x, y, z);
-                if (id) {
-#ifdef ENABLE_THING_ID_LOGS
-                    auto o = my.t.test_thing_ptr(id);
-                    if (o) {
-                        o->die("thing already exists for %08X", id);
-                    }
-#endif
-                    auto t = new Thing();
-                    in >> bits(t);
-#ifdef ENABLE_THING_ID_LOGS
-                    t->log("load");
-#endif
-                    t->reinit();
+    for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+        for (auto y = 0; y < LEVELS_DOWN; ++y) {
+            for (auto z = 0; z < LEVELS_DEEP; ++z) {
+                auto l = get(my.t.levels, x, y, z);
+                if (l) {
+                    auto l = new Level();
+                    set(my.t.levels, x, y, z, l);
+                    in >> bits(l);
                 }
             }
         }
@@ -374,6 +320,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.started);
     in >> bits(my.t.config);
     in >> bits(my.t.world);
+    in >> bits(my.t.current_level);
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
     return (in);

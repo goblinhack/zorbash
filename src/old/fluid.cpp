@@ -21,8 +21,8 @@ static void fluid_place_water (int x, int y)
                 fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                 fy++) {
 
-            world->fluid[fx][fy].mass = FLUID_MAX_MASS;
-            world->fluid[fx][fy].type = FLUID_IS_WATER;
+            level->fluid[fx][fy].mass = FLUID_MAX_MASS;
+            level->fluid[fx][fy].type = FLUID_IS_WATER;
         }
     }
 }
@@ -32,13 +32,13 @@ void fluid_init (void)
     int no_random_water = false;
     uint16_t x, y, z;
 
-    memset(world->fluid, 0, sizeof(world->fluid));
+    memset(level->fluid, 0, sizeof(level->fluid));
 
     z = MAP_DEPTH_WATER;
     {
         for (y = 0; y < MAP_HEIGHT; y++) {
             for (x = 0; x < MAP_WIDTH; x++) {
-                for (auto p : world->all_things_at[x][y][z]) {
+                for (auto p : level->all_things_at[x][y][z]) {
                     auto t = p.second;
                     if (tp_is_water(t->tp) || tp_is_deep_water(t->tp)) {
                         t->dead("place water");
@@ -54,7 +54,7 @@ void fluid_init (void)
     for (x = 0; x < MAP_WIDTH; x++) {
         for (y = 0; y < MAP_HEIGHT; y++) {
 
-            if (world->is_solid(x, y)) {
+            if (level->is_solid(x, y)) {
                 fluid_place_water(x, y);
                 uint16_t fx;
                 uint16_t fy;
@@ -66,8 +66,8 @@ void fluid_init (void)
                          fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                          fy++) {
 
-                        world->fluid[fx][fy].mass = 0;
-                        world->fluid[fx][fy].type = FLUID_IS_SOLID;
+                        level->fluid[fx][fy].mass = 0;
+                        level->fluid[fx][fy].type = FLUID_IS_SOLID;
                     }
                 }
             } else {
@@ -86,8 +86,8 @@ void fluid_init (void)
                     fx += myrand() % FLUID_RESOLUTION;
                     fy += myrand() % FLUID_RESOLUTION;
 
-                    world->fluid[fx][fy].mass = FLUID_MAX_MASS;
-                    world->fluid[fx][fy].type = FLUID_IS_WATER;
+                    level->fluid[fx][fy].mass = FLUID_MAX_MASS;
+                    level->fluid[fx][fy].type = FLUID_IS_WATER;
                 }
             }
         }
@@ -101,7 +101,7 @@ void fluid_update (void)
     for (x = 0; x < MAP_WIDTH; x++) {
         for (y = 0; y < MAP_HEIGHT; y++) {
 
-            if (world->is_solid(x, y)) {
+            if (level->is_solid(x, y)) {
                 uint16_t fx;
                 uint16_t fy;
 
@@ -112,8 +112,8 @@ void fluid_update (void)
                          fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                          fy++) {
 
-                        world->fluid[fx][fy].mass = 0;
-                        world->fluid[fx][fy].type = FLUID_IS_SOLID;
+                        level->fluid[fx][fy].mass = 0;
+                        level->fluid[fx][fy].type = FLUID_IS_SOLID;
                     }
                 }
             } else {
@@ -127,9 +127,9 @@ void fluid_update (void)
                          fy < (y * FLUID_RESOLUTION) + FLUID_RESOLUTION;
                          fy++) {
 
-                        if (world->fluid[fx][fy].type == FLUID_IS_SOLID) {
-                            world->fluid[fx][fy].mass = 0;
-                            world->fluid[fx][fy].type = FLUID_IS_AIR;
+                        if (level->fluid[fx][fy].type == FLUID_IS_SOLID) {
+                            level->fluid[fx][fy].mass = 0;
+                            level->fluid[fx][fy].type = FLUID_IS_AIR;
                         }
                     }
                 }
@@ -163,7 +163,7 @@ void fluid_mass_debug (void)
     for (fy = 1; fy < FLUID_HEIGHT - 1; fy++) {
         for (fx = 1; fx < FLUID_WIDTH - 1; fx++) {
 
-            fluid_t *f = &world->get(fluid, fx, fy);
+            fluid_t *f = &level->get(fluid, fx, fy);
             if (!f->mass) {
                 continue;
             }
@@ -185,7 +185,7 @@ void fluid_debug (void)
     for (fy = 1; fy < FLUID_HEIGHT - 1; fy++) {
         for (fx = 1; fx < FLUID_WIDTH - 1; fx++) {
 
-            fluid_t *f = &world->get(fluid, fx, fy);
+            fluid_t *f = &level->get(fluid, fx, fy);
             if (!f->mass) {
                 if (f->type == FLUID_IS_SOLID) {
                     printf("W");
@@ -215,7 +215,7 @@ void fluid_pool_debug (void)
     for (fy = 1; fy < FLUID_HEIGHT - 1; fy++) {
         for (fx = 1; fx < FLUID_WIDTH - 1; fx++) {
 
-            fluid_t *f = &world->get(fluid, fx, fy);
+            fluid_t *f = &level->get(fluid, fx, fy);
             if (!f->mass) {
                 if (f->type == FLUID_IS_SOLID) {
                     printf("WWW");
@@ -246,7 +246,7 @@ static void fluid_flood_fill (uint16_t x,
                                                             \
     if ((searching[dx][dy] != pool_num) &&                  \
         !fluid_pool[dx][dy] &&                              \
-        world->fluid[dx][dy].mass) {                \
+        level->fluid[dx][dy].mass) {                \
                                                             \
         set(searching, dx, dy, pool_num);                       \
         stack[stack_size].x = dx;                           \
@@ -319,7 +319,7 @@ static void fluid_find_pools (void)
 
         for (x = 1; x < FLUID_WIDTH - 1; x++) {
 
-            fluid_t *f = &world->get(fluid, x, y);
+            fluid_t *f = &level->get(fluid, x, y);
             if (!f->mass) {
                 continue;
             }
@@ -331,7 +331,7 @@ static void fluid_find_pools (void)
                 continue;
             }
 
-            if (!world->fluid[x][y+1].mass) {
+            if (!level->fluid[x][y+1].mass) {
                 continue;
             }
 
@@ -377,7 +377,7 @@ static void fluid_push_down (void)
             uint16_t x = fluid_pool_surface[pool_num][s].x;
             uint16_t y = fluid_pool_surface[pool_num][s].y;
 
-            mass_at_depth[y] += world->fluid[x][y].mass;
+            mass_at_depth[y] += level->fluid[x][y].mass;
             mass_at_depth_cnt[y]++;
         }
 
@@ -415,7 +415,7 @@ static void fluid_push_down (void)
                     continue;
                 }
 
-                fluid_t *f = &world->get(fluid, fx, fy);
+                fluid_t *f = &level->get(fluid, fx, fy);
                 fluid_mass_t remaining_mass = f->mass;
 
                 {
@@ -434,7 +434,7 @@ static void fluid_push_down (void)
                                 continue;
                             }
 
-                            fluid_t *nbr = &world->get(fluid, x, y);
+                            fluid_t *nbr = &level->get(fluid, x, y);
 
                             MASS_TRANSFER(f, nbr);
 
@@ -442,7 +442,7 @@ static void fluid_push_down (void)
                                 break;
                             }
 
-                            nbr = &world->get(fluid, x, y - 1);
+                            nbr = &level->get(fluid, x, y - 1);
 
                             MASS_TRANSFER(f, nbr);
 
@@ -476,7 +476,7 @@ static void fluid_set_depth (void)
     uint16_t fx, fy;
     uint8_t depth;
 
-    memset(world->is_water, 0, sizeof(world->is_water));
+    memset(level->is_water, 0, sizeof(level->is_water));
 
     memset(fluid_pool_row, 0, sizeof(fluid_pool_row));
     memset(fluid_pool_surface_size, 0, sizeof(fluid_pool_surface_size));
@@ -485,7 +485,7 @@ static void fluid_set_depth (void)
         depth = 0;
 
         for (fy = 1; fy < FLUID_HEIGHT - 1; fy++) {
-            fluid_t *f = &world->get(fluid, fx, fy);
+            fluid_t *f = &level->get(fluid, fx, fy);
             f->is_surface = 0;
 
             if (!f->mass) {
@@ -493,11 +493,11 @@ static void fluid_set_depth (void)
                 continue;
             }
 
-            world->is_water(fx / FLUID_RESOLUTION, fy / FLUID_RESOLUTION) = true;
+            level->is_water(fx / FLUID_RESOLUTION, fy / FLUID_RESOLUTION) = true;
 
             fluid_pool_row[fy] = 1;
 
-            fluid_t *g = &world->get(fluid, fx, fy + 1);
+            fluid_t *g = &level->get(fluid, fx, fy + 1);
             if (!g->mass) {
                 depth = 0;
                 continue;
@@ -543,8 +543,8 @@ void fluid_add_droplets (void)
         ERR("underflow on y");
     }
 
-    if (!world->is_solid(x, y) &&
-         world->is_solid(x, y - 1)) {
+    if (!level->is_solid(x, y) &&
+         level->is_solid(x, y - 1)) {
 
         uint16_t r;
 
@@ -565,8 +565,8 @@ void fluid_add_droplets (void)
                 ERR("overflow fx fluid");
             }
 
-            world->fluid[fx][fy].mass = 10;
-            world->fluid[fx][fy].type = FLUID_IS_WATER;
+            level->fluid[fx][fy].mass = 10;
+            level->fluid[fx][fy].type = FLUID_IS_WATER;
         }
     }
 }
@@ -580,8 +580,8 @@ void fluid_remove_water_radius (int x, int y, int radius)
     for (x = 0; x < FLUID_RESOLUTION * MAP_WIDTH; x++) {
         for (y = 0; y < FLUID_RESOLUTION * MAP_WIDTH; y++) {
             if (DISTANCE(ix, iy, x, y) < radius) {
-                world->fluid[x][y].mass = 0;
-                world->fluid[x][y].type = 0;
+                level->fluid[x][y].mass = 0;
+                level->fluid[x][y].type = 0;
             }
         }
     }
@@ -597,7 +597,7 @@ static void fluid_mass_transfer (void)
     for (fy = FLUID_HEIGHT-2; fy > 0; fy--) {
         for (fx = 1; fx < FLUID_WIDTH-2; fx++) {
 
-            fluid_t *f = &world->get(fluid, fx, fy);
+            fluid_t *f = &level->get(fluid, fx, fy);
 
             fluid_mass_t avg_mass;
             fluid_mass_t remaining_mass = f->mass;
@@ -607,7 +607,7 @@ static void fluid_mass_transfer (void)
 
             fluid_pool_row[fy] = 1;
 
-            fluid_t *d = &world->get(fluid, fx, fy+1);
+            fluid_t *d = &level->get(fluid, fx, fy+1);
 
 #undef MASS_TRANSFER
 #define MASS_TRANSFER(src, nbr)                                     \
@@ -657,8 +657,8 @@ static void fluid_mass_transfer (void)
                 continue;
             }
 
-            fluid_t *b = &world->get(fluid, fx-1, fy);
-            fluid_t *c = &world->get(fluid, fx+1, fy);
+            fluid_t *b = &level->get(fluid, fx-1, fy);
+            fluid_t *c = &level->get(fluid, fx+1, fy);
 
             MASS_TRANSFER_LR(f, c);
             MASS_TRANSFER_LR(f, b);
@@ -929,7 +929,7 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
 
         for (fx = minx; fx < maxx - 1; fx++) {
 
-            fluid_t *f = &world->get(fluid, fx, fy);
+            fluid_t *f = &level->get(fluid, fx, fy);
             if (!f->mass) {
                 continue;
             }
@@ -1021,7 +1021,7 @@ int thing_submerged_depth (Thingp t)
     }
 
     while (y > 0) {
-        if (world->fluid[x + dx][y + dy].mass > 0) {
+        if (level->fluid[x + dx][y + dy].mass > 0) {
             water++;
         }
 
@@ -1053,7 +1053,7 @@ int thing_is_submerged (Thingp t)
 
     for (dy = 0; dy < FLUID_RESOLUTION; dy++) {
         for (dx = 0; dx < FLUID_RESOLUTION; dx++) {
-            if (world->fluid[x + dx][y + dy].mass > 0) {
+            if (level->fluid[x + dx][y + dy].mass > 0) {
                 water++;
             }
         }
@@ -1088,7 +1088,7 @@ int thing_is_partially_or_fully_submerged (Thingp t)
 
     for (dy = 0; dy < FLUID_RESOLUTION; dy++) {
         for (dx = 0; dx < FLUID_RESOLUTION; dx++) {
-            if (world->fluid[x + dx][y + dy].mass > 0) {
+            if (level->fluid[x + dx][y + dy].mass > 0) {
                 water++;
             }
         }

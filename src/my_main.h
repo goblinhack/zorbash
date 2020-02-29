@@ -98,9 +98,8 @@
 #define ENABLE_TILE_COLLISION_CHECKING
 
 ////////////////////////////////////////////////////////////////////////////
-// Map
+// Level
 ////////////////////////////////////////////////////////////////////////////
-
 //
 // Dungeon size; composed of a grid of rooms
 //
@@ -110,11 +109,18 @@
 #define ROOM_HEIGHT                 13
 
 //
-// Dungeon has a pad of tiles around the edges
+// Dungeon level has a pad of tiles around the edges
 //
 #define MAP_BORDER                  20
 #define MAP_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define MAP_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
+
+////////////////////////////////////////////////////////////////////////////
+// World
+////////////////////////////////////////////////////////////////////////////
+#define LEVELS_DEEP                 32
+#define LEVELS_ACROSS               MAP_WIDTH
+#define LEVELS_DOWN                 MAP_HEIGHT
 
 ////////////////////////////////////////////////////////////////////////////
 // Things on map

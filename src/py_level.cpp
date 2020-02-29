@@ -6,7 +6,7 @@
 #include "my_main.h"
 #include "my_python.h"
 #include "my_tile.h"
-#include "my_level.h"
+#include "my_placed_level.h"
 
 PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_

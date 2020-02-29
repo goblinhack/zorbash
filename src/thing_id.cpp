@@ -8,7 +8,7 @@
 #include "my_dmap.h"
 #include "my_thing.h"
 
-Thingp World::test_thing_ptr (uint32_t id)
+Thingp Level::test_thing_ptr (uint32_t id)
 {_
     auto index = id % MAX_THINGS;
     auto p = &all_thing_ptrs[index];
@@ -24,7 +24,7 @@ Thingp World::test_thing_ptr (uint32_t id)
     return (p->ptr);
 }
 
-Thingp World::find_thing_ptr (uint32_t id)
+Thingp Level::find_thing_ptr (uint32_t id)
 {_
     auto index = id % MAX_THINGS;
     auto p = &all_thing_ptrs[index];
@@ -41,7 +41,7 @@ Thingp World::find_thing_ptr (uint32_t id)
     return (p->ptr);
 }
 
-void World::alloc_thing_id (Thingp t)
+void Level::alloc_thing_id (Thingp t)
 {_
     static uint32_t index = 1;
 
@@ -70,7 +70,7 @@ void World::alloc_thing_id (Thingp t)
     ERR("out of thing indexes, hit max of %u", MAX_THINGS);
 }
 
-void World::free_thing_id (Thingp t)
+void Level::free_thing_id (Thingp t)
 {_
     uint32_t index = t->id & MAX_THINGS_MASK;
     auto p = getptr(all_thing_ptrs, index);
@@ -94,7 +94,7 @@ void World::free_thing_id (Thingp t)
     t->id = 0;
 }
 
-void World::realloc_thing_id (Thingp t)
+void Level::realloc_thing_id (Thingp t)
 {_
     if (!t->id) {
         t->err("trying to realloc when thing has no ID");

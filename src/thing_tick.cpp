@@ -205,15 +205,15 @@ void things_tick (void)
     //
     // Active things are generally things that move or have a life span
     //
-    uint16_t minx = std::max(0, (uint16_t) world->map_at.x - MAP_WIDTH);
-    uint16_t maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + MAP_WIDTH);
+    uint16_t minx = std::max(0, (uint16_t) level->map_at.x - MAP_WIDTH);
+    uint16_t maxx = std::min(MAP_WIDTH, (uint16_t)level->map_at.x + MAP_WIDTH);
 
-    uint16_t miny = std::max(0, (uint16_t) world->map_at.y - MAP_HEIGHT);
-    uint16_t maxy = std::min(MAP_HEIGHT, (uint16_t)world->map_at.y + MAP_HEIGHT);
+    uint16_t miny = std::max(0, (uint16_t) level->map_at.y - MAP_HEIGHT);
+    uint16_t maxy = std::min(MAP_HEIGHT, (uint16_t)level->map_at.y + MAP_HEIGHT);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_ACTIVE_THINGS(world, t, x, y) {
+            FOR_ALL_ACTIVE_THINGS(level, t, x, y) {
                 verify(t);
                 if (t->is_monst()) {
                     if (t->get_tick() != game->tick_current) {

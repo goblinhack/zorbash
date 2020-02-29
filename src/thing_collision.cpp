@@ -273,7 +273,7 @@ static int circle_box_collision (Thingp C,
     // Corner collisions, normal is at 45 degrees. Unless there is a wall.
     //
     if (distance(C_at, B0) < radius) {
-        if (!world->is_wall(B->interpolated_mid_at.x - 1,
+        if (!level->is_wall(B->interpolated_mid_at.x - 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B0.x;
             normal->y = C_at.y - B0.y;
@@ -282,7 +282,7 @@ static int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B1) < radius) {
-        if (!world->is_wall(B->interpolated_mid_at.x + 1,
+        if (!level->is_wall(B->interpolated_mid_at.x + 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B1.x;
             normal->y = C_at.y - B1.y;
@@ -291,7 +291,7 @@ static int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B2) < radius) {
-        if (!world->is_wall(B->interpolated_mid_at.x + 1,
+        if (!level->is_wall(B->interpolated_mid_at.x + 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B2.x;
             normal->y = C_at.y - B2.y;
@@ -300,7 +300,7 @@ static int circle_box_collision (Thingp C,
     }
 
     if (distance(C_at, B3) < radius) {
-        if (!world->is_wall(B->interpolated_mid_at.x - 1,
+        if (!level->is_wall(B->interpolated_mid_at.x - 1,
                                        B->interpolated_mid_at.y)) {
             normal->x = C_at.x - B3.x;
             normal->y = C_at.y - B3.y;
@@ -864,7 +864,7 @@ bool Thing::collision_obstacle (fpoint p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto slot : get(world->all_thing_ids_at, p.x, p.y)) {
+    for (auto slot : get(level->all_thing_ids_at, p.x, p.y)) {
         if (!slot) {
             continue;
         }
@@ -964,7 +964,7 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
         auto dx = x - future_pos.x;
         for (int16_t y = miny; y <= maxy; y++) {
             auto dy = y - future_pos.y;
-            FOR_ALL_COLLISION_THINGS(world, it, x, y) {
+            FOR_ALL_COLLISION_THINGS(level, it, x, y) {
                 if (this == it) {
                     continue;
                 }
@@ -1037,7 +1037,7 @@ bool Thing::collision_check_only (fpoint future_pos)
         auto dx = x - future_pos.x;
         for (int16_t y = miny; y <= maxy; y++) {
             auto dy = y - future_pos.y;
-            FOR_ALL_COLLISION_THINGS(world, it, x, y) {
+            FOR_ALL_COLLISION_THINGS(level, it, x, y) {
                 if (this == it) {
                     continue;
                 }

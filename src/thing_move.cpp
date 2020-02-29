@@ -102,9 +102,9 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (is_player()) {
-        if (!world->map_follow_player) {
-            world->map_follow_player = true;
-            world->cursor_needs_update = true;
+        if (!level->map_follow_player) {
+            level->map_follow_player = true;
+            level->cursor_needs_update = true;
         }
     }
 
@@ -447,7 +447,7 @@ void Thing::update_pos (fpoint to, bool immediately)
     auto tpp = tp();
 
     point new_at((int)to.x, (int)to.y);
-    if (world->is_oob(new_at)) {
+    if (level->is_oob(new_at)) {
         return;
     }
 
@@ -466,52 +466,52 @@ void Thing::update_pos (fpoint to, bool immediately)
     //
     if (old_at != new_at) {
         if (is_wall()) {
-            world->unset_wall(old_at.x, old_at.y);
-            world->set_wall(new_at.x, new_at.y);
+            level->unset_wall(old_at.x, old_at.y);
+            level->set_wall(new_at.x, new_at.y);
         }
         if (is_floor()) {
-            world->unset_floor(old_at.x, old_at.y);
-            world->set_floor(new_at.x, new_at.y);
+            level->unset_floor(old_at.x, old_at.y);
+            level->set_floor(new_at.x, new_at.y);
         }
         if (is_hazard()) {
-            world->unset_hazard(old_at.x, old_at.y);
-            world->set_hazard(new_at.x, new_at.y);
+            level->unset_hazard(old_at.x, old_at.y);
+            level->set_hazard(new_at.x, new_at.y);
         }
         if (is_secret_door()) {
-            world->unset_secret_door(old_at.x, old_at.y);
-            world->set_secret_door(new_at.x, new_at.y);
+            level->unset_secret_door(old_at.x, old_at.y);
+            level->set_secret_door(new_at.x, new_at.y);
         }
         if (is_lava()) {
-            world->unset_lava(old_at.x, old_at.y);
-            world->set_lava(new_at.x, new_at.y);
+            level->unset_lava(old_at.x, old_at.y);
+            level->set_lava(new_at.x, new_at.y);
         }
         if (is_chasm()) {
-            world->unset_chasm(old_at.x, old_at.y);
-            world->set_chasm(new_at.x, new_at.y);
+            level->unset_chasm(old_at.x, old_at.y);
+            level->set_chasm(new_at.x, new_at.y);
         }
         if (is_blood()) {
-            world->unset_blood(old_at.x, old_at.y);
-            world->set_blood(new_at.x, new_at.y);
+            level->unset_blood(old_at.x, old_at.y);
+            level->set_blood(new_at.x, new_at.y);
         }
         if (is_water()) {
-            world->unset_water(old_at.x, old_at.y);
-            world->set_water(new_at.x, new_at.y);
+            level->unset_water(old_at.x, old_at.y);
+            level->set_water(new_at.x, new_at.y);
         }
         if (is_deep_water()) {
-            world->unset_deep_water(old_at.x, old_at.y);
-            world->set_deep_water(new_at.x, new_at.y);
+            level->unset_deep_water(old_at.x, old_at.y);
+            level->set_deep_water(new_at.x, new_at.y);
         }
         if (is_corridor()) {
-            world->unset_corridor(old_at.x, old_at.y);
-            world->set_corridor(new_at.x, new_at.y);
+            level->unset_corridor(old_at.x, old_at.y);
+            level->set_corridor(new_at.x, new_at.y);
         }
         if (is_dirt()) {
-            world->unset_dirt(old_at.x, old_at.y);
-            world->set_dirt(new_at.x, new_at.y);
+            level->unset_dirt(old_at.x, old_at.y);
+            level->set_dirt(new_at.x, new_at.y);
         }
         if (tp_gfx_large_shadow_caster(tpp)) {
-            world->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
-            world->set_gfx_large_shadow_caster(new_at.x, new_at.y);
+            level->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
+            level->set_gfx_large_shadow_caster(new_at.x, new_at.y);
         }
 
         if (is_player()) {

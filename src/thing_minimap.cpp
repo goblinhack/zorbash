@@ -26,34 +26,34 @@ void thing_render_minimap (void)
     if (unlikely(game->config.gfx_show_hidden)) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
-                if (world->player &&
-                    (x == (int)world->player->mid_at.x) &&
-                    (y == (int)world->player->mid_at.y)) {
+                if (level->player &&
+                    (x == (int)level->player->mid_at.x) &&
+                    (y == (int)level->player->mid_at.y)) {
                     glcolor(PINK);
-                } else if (world->is_door(x, y)) {
+                } else if (level->is_door(x, y)) {
                     glcolor(RED);
-                } else if (world->is_lava(x, y)) {
+                } else if (level->is_lava(x, y)) {
                     glcolor(ORANGE);
-                } else if (world->is_chasm(x, y)) {
+                } else if (level->is_chasm(x, y)) {
                     glcolor(BLACK);
-                } else if (world->is_wall(x, y)) {
-                       if (world->is_visited(x, y)) {
+                } else if (level->is_wall(x, y)) {
+                       if (level->is_visited(x, y)) {
                         glcolor(GRAY80);
                     } else {
                         glcolor(GRAY70);
                     }
-                } else if (world->is_floor(x, y) ||
-                           world->is_corridor(x, y)) {
-                    if (world->is_visited(x, y)) {
+                } else if (level->is_floor(x, y) ||
+                           level->is_corridor(x, y)) {
+                    if (level->is_visited(x, y)) {
                         glcolor(GRAY40);
                     } else {
                         glcolor(GRAY20);
                     }
-                } else if (world->is_deep_water(x, y)) {
+                } else if (level->is_deep_water(x, y)) {
                     glcolor(DARKBLUE);
-                } else if (world->is_water(x, y)) {
+                } else if (level->is_water(x, y)) {
                     glcolor(BLUE2);
-                } else if (world->is_dirt(x, y)) {
+                } else if (level->is_dirt(x, y)) {
                     glcolor(GRAY20);
                 } else {
                     if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
@@ -79,7 +79,7 @@ void thing_render_minimap (void)
         //
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
-                if (!world->is_visited(x, y)) {
+                if (!level->is_visited(x, y)) {
                     if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
                         color c = DARKGREEN;
                         c.a = 100;
@@ -89,34 +89,34 @@ void thing_render_minimap (void)
                         c.a = 30;
                         glcolor(c);
                     }
-                } else if (world->player &&
-                    (x == (int)world->player->mid_at.x) &&
-                    (y == (int)world->player->mid_at.y)) {
+                } else if (level->player &&
+                    (x == (int)level->player->mid_at.x) &&
+                    (y == (int)level->player->mid_at.y)) {
                     glcolor(PINK);
-                } else if (world->is_door(x, y)) {
+                } else if (level->is_door(x, y)) {
                     glcolor(RED);
-                } else if (world->is_lava(x, y)) {
+                } else if (level->is_lava(x, y)) {
                     glcolor(ORANGE);
-                } else if (world->is_chasm(x, y)) {
+                } else if (level->is_chasm(x, y)) {
                     glcolor(BLACK);
-                } else if (world->is_wall(x, y)) {
-                       if (world->is_visited(x, y)) {
+                } else if (level->is_wall(x, y)) {
+                       if (level->is_visited(x, y)) {
                         glcolor(GRAY80);
                     } else {
                         glcolor(GRAY70);
                     }
-                } else if (world->is_floor(x, y) ||
-                           world->is_corridor(x, y)) {
-                    if (world->is_visited(x, y)) {
+                } else if (level->is_floor(x, y) ||
+                           level->is_corridor(x, y)) {
+                    if (level->is_visited(x, y)) {
                         glcolor(GRAY40);
                     } else {
                         glcolor(GRAY20);
                     }
-                } else if (world->is_deep_water(x, y)) {
+                } else if (level->is_deep_water(x, y)) {
                     glcolor(DARKBLUE);
-                } else if (world->is_water(x, y)) {
+                } else if (level->is_water(x, y)) {
                     glcolor(BLUE2);
-                } else if (world->is_dirt(x, y)) {
+                } else if (level->is_dirt(x, y)) {
                     glcolor(GRAY20);
                 } else {
                     continue;
@@ -132,5 +132,5 @@ void thing_render_minimap (void)
     blit_flush();
     blit_fbo_unbind();
     glEnable(GL_TEXTURE_2D);
-    world->minimap_valid = true;
+    level->minimap_valid = true;
 }

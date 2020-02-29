@@ -91,7 +91,6 @@ void dmap_process (Dmap *D, point tl, point br)
         maxy = MAP_HEIGHT - 1;
     }
 
-
     //
     // Need a wall around the dmap or the search will sort of
     // trickle off the map
@@ -284,7 +283,6 @@ void dmap_process_allow_diagonals (Dmap *D, point tl, point br)
     if (maxy >= MAP_HEIGHT) {
         maxy = MAP_HEIGHT - 1;
     }
-
 
     //
     // Need a wall around the dmap or the search will sort of

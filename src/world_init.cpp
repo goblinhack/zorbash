@@ -9,21 +9,27 @@
 
 void World::clear (void)
 {_
-    _is_blood = {};
-    _is_corridor = {};
-    _is_deep_water = {};
-    _is_dirt = {};
-    _is_floor = {};
-    _is_lava = {};
-    _is_chasm = {};
-    _is_rock = {};
-    _is_visited = {};
-    _is_gfx_large_shadow_caster = {};
-    _is_wall = {};
-    _is_water = {};
-    _is_dungeon = {};
+    LOG("world init: clear all levels");
+    for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+        for (auto y = 0; y < LEVELS_DOWN; ++y) {
+            for (auto z = 0; z < LEVELS_DEEP; ++z) {
+                auto l = get(levels, x, y, z);
+                if (l) {
+                    l->clear();
+                }
+            }
+        }
+    }
+}
 
-    next_thing_id = 1;
-    timestamp_dungeon_created = time_get_time_ms();
-    timestamp_dungeon_saved = 0;
+void World::new_level_at (point3d at, int seed)
+{_
+    seed = 667;
+    auto l = get(levels, at.x, at.y, at.z);
+    if (l) {
+        delete l;
+    }
+    level = new Level();
+    set(levels, at.x, at.y, at.z, level);
+    level->init(at, seed);
 }

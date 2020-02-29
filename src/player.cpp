@@ -18,7 +18,11 @@ void player_tick (void)
         return;
     }
 
-    auto player = world->player;
+    if (!level) {
+        return;
+    }
+
+    auto player = level->player;
     if (!player || player->is_dead || player->is_hidden) {
         return;
     }
@@ -52,34 +56,34 @@ void player_tick (void)
     bool some_key_event_was_pressed = false;
 
     if (state[game->config.key_map_left]) {
-        world->map_wanted_at.x--;
-        world->cursor_needs_update = true;
-        world->cursor_found = false;
-        world->map_follow_player = false;
+        level->map_wanted_at.x--;
+        level->cursor_needs_update = true;
+        level->cursor_found = false;
+        level->map_follow_player = false;
         some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_map_right]) {
-        world->map_wanted_at.x++;
-        world->cursor_needs_update = true;
-        world->cursor_found = false;
-        world->map_follow_player = false;
+        level->map_wanted_at.x++;
+        level->cursor_needs_update = true;
+        level->cursor_found = false;
+        level->map_follow_player = false;
         some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_map_up]) {
-        world->map_wanted_at.y--;
-        world->cursor_needs_update = true;
-        world->cursor_found = false;
-        world->map_follow_player = false;
+        level->map_wanted_at.y--;
+        level->cursor_needs_update = true;
+        level->cursor_found = false;
+        level->map_follow_player = false;
         some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_map_down]) {
-        world->map_wanted_at.y++;
-        world->cursor_needs_update = true;
-        world->cursor_found = false;
-        world->map_follow_player = false;
+        level->map_wanted_at.y++;
+        level->cursor_needs_update = true;
+        level->cursor_found = false;
+        level->map_follow_player = false;
         some_key_event_was_pressed = true;
     }
 

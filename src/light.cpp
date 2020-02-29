@@ -118,7 +118,7 @@ void Light::calculate (void)
     // Walk the light rays in a circle. First pass is to find the nearest
     // walls.
     //
-    bool do_set_visited = (world->player && (owner == world->player));
+    bool do_set_visited = (level->player && (owner == level->player));
 
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
@@ -131,15 +131,15 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (unlikely(world->is_oob(x, y))) {
+            if (unlikely(level->is_oob(x, y))) {
                 continue;
             }
 
             if (do_set_visited) {
-                world->set_visited(x, y);
+                level->set_visited(x, y);
             }
 
-            if (world->is_gfx_large_shadow_caster(x, y)) {
+            if (level->is_gfx_large_shadow_caster(x, y)) {
                 break;
             }
         }
@@ -159,15 +159,15 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (unlikely(world->is_oob(x, y))) {
+            if (unlikely(level->is_oob(x, y))) {
                 continue;
             }
 
             if (do_set_visited) {
-                world->set_visited(x, y);
+                level->set_visited(x, y);
             }
 
-            if (!world->is_gfx_large_shadow_caster(x, y)) {
+            if (!level->is_gfx_large_shadow_caster(x, y)) {
                 break;
             }
 
@@ -201,12 +201,12 @@ void Light::calculate (void)
             int x = (int)p1x;
             int y = (int)p1y;
 
-            if (unlikely(world->is_oob(x, y))) {
+            if (unlikely(level->is_oob(x, y))) {
                 continue;
             }
 
             if (do_set_visited) {
-                world->set_visited(x, y);
+                level->set_visited(x, y);
             }
 
             if (get(is_nearest_wall, x, y) != is_nearest_wall_val) {
@@ -238,8 +238,8 @@ void Light::render_triangle_fans (void)
     fpoint light_pos(tx * game->config.tile_gl_width,
                      ty * game->config.tile_gl_height);
 
-    auto ox = world->map_at.x * game->config.tile_gl_width;
-    auto oy = world->map_at.y * game->config.tile_gl_height;
+    auto ox = level->map_at.x * game->config.tile_gl_width;
+    auto oy = level->map_at.y * game->config.tile_gl_height;
 
     glTranslatef(-ox, -oy, 0);
 
@@ -262,7 +262,7 @@ void Light::render_triangle_fans (void)
             //
             // No player lights fade
             //
-            if (world->player && (owner != world->player)) {
+            if (level->player && (owner != level->player)) {
                 alpha = 0.0;
             }
 
@@ -308,7 +308,7 @@ void Light::render_triangle_fans (void)
     // Blend a texture on top of all the above blending so we get smooth
     // fade off of the light.
     //
-    if (world->player && (owner == world->player)) {
+    if (level->player && (owner == level->player)) {
         //
         // To account for the blurring in blit_flush_triangle_fan_smoothed.
         //
@@ -346,8 +346,8 @@ void Light::render_point_light (void)
     fpoint light_pos(tx * game->config.tile_gl_width,
                      ty * game->config.tile_gl_height);
 
-    auto ox = world->map_at.x * game->config.tile_gl_width;
-    auto oy = world->map_at.y * game->config.tile_gl_height;
+    auto ox = level->map_at.x * game->config.tile_gl_width;
+    auto oy = level->map_at.y * game->config.tile_gl_height;
 
     double lw = strength * game->config.tile_gl_width;
     double lh = strength * game->config.tile_gl_height;
@@ -392,7 +392,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
+            FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
                 auto l = t->get_light();
                 if (l->quality == LIGHT_QUALITY_POINT) {
                     continue;
@@ -401,8 +401,8 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
                 //
                 // Too far away from the player? Skip rendering.
                 //
-                if (world->player) {
-                    auto p = world->player;
+                if (level->player) {
+                    auto p = level->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
@@ -426,7 +426,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
+            FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
                 auto l = t->get_light();
                 if (l->quality != LIGHT_QUALITY_LOW) {
                     continue;
@@ -450,8 +450,8 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
                 //
                 // Too far away from the player? Skip rendering.
                 //
-                if (world->player) {
-                    auto p = world->player;
+                if (level->player) {
+                    auto p = level->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
@@ -478,13 +478,13 @@ void lights_render_high_quality (int minx, int miny,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
+            FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
                 auto l = t->get_light();
                 if (l->quality != LIGHT_QUALITY_HIGH) {
                     continue;
                 }
 
-                if (world->player && (l->owner == world->player)) {
+                if (level->player && (l->owner == level->player)) {
                     deferred_player_light = l;
                     continue;
                 }
@@ -500,21 +500,21 @@ void lights_render_high_quality (int minx, int miny,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHT_SOURCE_THINGS(world, t, x, y) {
+            FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
                 auto l = t->get_light();
                 if (l->quality != LIGHT_QUALITY_HIGH) {
                    continue;
                 }
 
-                if (world->player && (l->owner == world->player)) {
+                if (level->player && (l->owner == level->player)) {
                     continue;
                 }
 
                 //
                 // Too far away from the player? Skip rendering.
                 //
-                if (world->player) {
-                    auto p = world->player;
+                if (level->player) {
+                    auto p = level->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 

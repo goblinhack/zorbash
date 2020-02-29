@@ -194,10 +194,11 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 }
 
 std::ostream& operator<<(std::ostream &out,
-                         Bits<const class World & > const my)
+                         Bits<const class Level & > const my)
 {_
     out << bits(my.t.timestamp_dungeon_created);
-    out << bits(my.t.timestamp_dungeon_saved);
+    timestamp_t timestamp_dungeon_saved = time_get_time_ms();
+    out << bits(timestamp_dungeon_saved);
     out << bits(my.t._is_blood);
     out << bits(my.t._is_chasm);
     out << bits(my.t._is_corridor);
@@ -216,8 +217,8 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.all_thing_ids_at);
     out << bits(my.t.cursor_at);
     out << bits(my.t.cursor_at_old);
-    out << bits(my.t.cursor_needs_update);
     out << bits(my.t.cursor_found);
+    out << bits(my.t.cursor_needs_update);
     out << bits(my.t.map_at);
     out << bits(my.t.map_follow_player);
     out << bits(my.t.map_wanted_at);
@@ -225,9 +226,10 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.mouse);
     out << bits(my.t.mouse_old);
     out << bits(my.t.next_thing_id);
+    out << bits(my.t.world_at);
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
-        for (auto y = 0; y < MAP_WIDTH; ++y) {
+        for (auto y = 0; y < MAP_HEIGHT; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(my.t.all_thing_ids_at, x, y, z);
                 if (id) {
@@ -236,6 +238,22 @@ std::ostream& operator<<(std::ostream &out,
                     t->log("save");
 #endif
                     out << bits(t);
+                }
+            }
+        }
+    }
+    return (out);
+}
+
+std::ostream& operator<<(std::ostream &out,
+                         Bits<const class World & > const my)
+{_
+    for (auto x = 0; x < LEVELS_ACROSS; ++x) {
+        for (auto y = 0; y < LEVELS_DOWN; ++y) {
+            for (auto z = 0; z < LEVELS_DEEP; ++z) {
+                auto l = get(my.t.levels, x, y, z);
+                if (l) {
+                    out << bits(l);
                 }
             }
         }
@@ -310,6 +328,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.started);
     out << bits(my.t.config);
     out << bits(my.t.world);
+    out << bits(my.t.current_level);
     out << bits(wid_minicon_serialize());
     out << bits(wid_console_serialize());
 
@@ -320,7 +339,6 @@ bool Game::save (std::string file_to_save)
 {_
     std::stringstream s(std::ios::in | std::ios::out | std::ios::binary);
 
-    game->world.timestamp_dungeon_saved = time_get_time_ms();
     const class Game &c = *this;
     s << bits(c);
 

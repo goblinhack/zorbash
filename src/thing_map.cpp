@@ -24,29 +24,29 @@ static void thing_map_scroll_do (void)
 {_
     const double step = 10.0;
 
-    auto dx = world->map_at.x - world->map_wanted_at.x;
+    auto dx = level->map_at.x - level->map_wanted_at.x;
     if (dx) {
-        world->map_at.x -= dx / step;
+        level->map_at.x -= dx / step;
     }
 
-    auto dy = world->map_at.y - world->map_wanted_at.y;
+    auto dy = level->map_at.y - level->map_wanted_at.y;
     if (dy) {
-        world->map_at.y -= dy / step;
+        level->map_at.y -= dy / step;
     }
 
-    world->map_at.x *= game->config.tile_pixel_width;
-    world->map_at.x = (int) world->map_at.x;
-    world->map_at.x /= game->config.tile_pixel_width;
+    level->map_at.x *= game->config.tile_pixel_width;
+    level->map_at.x = (int) level->map_at.x;
+    level->map_at.x /= game->config.tile_pixel_width;
 
-    world->map_at.y *= game->config.tile_pixel_height;
-    world->map_at.y = (int) world->map_at.y;
-    world->map_at.y /= game->config.tile_pixel_height;
+    level->map_at.y *= game->config.tile_pixel_height;
+    level->map_at.y = (int) level->map_at.y;
+    level->map_at.y /= game->config.tile_pixel_height;
 
-    world->map_at.x = std::max(world->map_at.x, (float)0.0);
-    world->map_at.y = std::max(world->map_at.y, (float)0.0);
-    world->map_at.x = std::min(world->map_at.x,
+    level->map_at.x = std::max(level->map_at.x, (float)0.0);
+    level->map_at.y = std::max(level->map_at.y, (float)0.0);
+    level->map_at.x = std::min(level->map_at.x,
                              (float)MAP_WIDTH - TILES_ACROSS);
-    world->map_at.y = std::min(world->map_at.y,
+    level->map_at.y = std::min(level->map_at.y,
                              (float)MAP_HEIGHT - TILES_DOWN);
 }
 
@@ -144,13 +144,13 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp)) {
                     continue;
                 }
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -190,13 +190,13 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp) && !tp_is_deep_water(tpp)) {
                     continue;
                 }
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -221,9 +221,9 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
-            if (world->is_water(x, y) || world->is_deep_water(x, y)) {
+            if (level->is_water(x, y) || level->is_deep_water(x, y)) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -312,11 +312,11 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
-                FOR_ALL_THINGS(world, t, x, y, z) {
+                FOR_ALL_THINGS(level, t, x, y, z) {
                     t->blit_upside_down(offset_x, offset_y, x, y);
                 }
             }
@@ -446,14 +446,14 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 auto tpp = t->tp();
 
                 if (!tp_is_deep_water(tpp)) {
                     continue;
                 }
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -478,9 +478,9 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
-            if (world->is_deep_water(x, y)) {
+            if (level->is_deep_water(x, y)) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -631,9 +631,9 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -682,9 +682,9 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -719,7 +719,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
             }
         }
@@ -736,9 +736,9 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
-            if (world->is_lava(x, y)) {
+            if (level->is_lava(x, y)) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -894,9 +894,9 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -942,9 +942,9 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -979,7 +979,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
             }
         }
@@ -996,9 +996,9 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
-            if (world->is_chasm(x, y)) {
+            if (level->is_chasm(x, y)) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -1091,9 +1091,9 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -1136,9 +1136,9 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -1156,9 +1156,9 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(world, t, x, y, z) {
+            FOR_ALL_THINGS(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!world->is_dungeon(x, y)) {
+                    if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
@@ -1224,8 +1224,8 @@ static void thing_blit_things_common (void)
 static void thing_blit_things (uint16_t minx, uint16_t miny,
                                uint16_t maxx, uint16_t maxy)
 {_
-    double offset_x = world->map_at.x * game->config.tile_gl_width;
-    double offset_y = world->map_at.y * game->config.tile_gl_height;
+    double offset_x = level->map_at.x * game->config.tile_gl_width;
+    double offset_y = level->map_at.y * game->config.tile_gl_height;
 
     thing_blit_things_common();
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1238,10 +1238,10 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
         { auto z = MAP_DEPTH_FLOOR;
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
-                    if (!world->is_visited(x, y)) {
+                    if (!level->is_visited(x, y)) {
                         continue;
                     }
-                    FOR_ALL_THINGS(world, t, x, y, z) {
+                    FOR_ALL_THINGS(level, t, x, y, z) {
                         glcolorfast(GRAY30);
                         t->blit(offset_x, offset_y, x, y);
                     }
@@ -1255,10 +1255,10 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
             auto z = MAP_DEPTH_WALLS;
             {_
                 for (auto x = minx; x < maxx; x++) {
-                    if (!world->is_visited(x, y)) {
+                    if (!level->is_visited(x, y)) {
                         continue;
                     }
-                    FOR_ALL_THINGS(world, t, x, y, z) {
+                    FOR_ALL_THINGS(level, t, x, y, z) {
                         glcolorfast(GRAY50);
                         t->blit(offset_x, offset_y, x, y);
                     }
@@ -1276,7 +1276,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     { auto z = MAP_DEPTH_FLOOR;
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS(world, t, x, y, z) {
+                FOR_ALL_THINGS(level, t, x, y, z) {
                     glcolorfast(WHITE);
                     t->blit(offset_x, offset_y, x, y);
                 }
@@ -1300,7 +1300,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             for (auto z = 0; z < MAP_DEPTH; z++) {
-                FOR_ALL_THINGS(world, t, x, y, z) {
+                FOR_ALL_THINGS(level, t, x, y, z) {
                     auto tpp = t->tp();
 
                     have_lava       |= tp_is_lava(tpp);
@@ -1315,7 +1315,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                 }
             }
 
-            FOR_ALL_ACTIVE_THINGS(world, t, x, y) {
+            FOR_ALL_ACTIVE_THINGS(level, t, x, y) {
                 if (t->update_coordinates()) {
                     moved.push_back(t);
                 }
@@ -1355,7 +1355,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS(world, t, x, y, z) {
+                FOR_ALL_THINGS(level, t, x, y, z) {
                     glcolorfast(WHITE);
                     t->blit(offset_x, offset_y, x, y);
                 }
@@ -1386,11 +1386,11 @@ void thing_render_all (void)
     //
     // Get the bounds. Needs to be a bit off-map for reflections.
     //
-    minx = std::max(0, (uint16_t) world->map_at.x - 5);
-    maxx = std::min(MAP_WIDTH, (uint16_t)world->map_at.x + TILES_ACROSS + 5);
+    minx = std::max(0, (uint16_t) level->map_at.x - 5);
+    maxx = std::min(MAP_WIDTH, (uint16_t)level->map_at.x + TILES_ACROSS + 5);
 
-    miny = std::max(0, (uint16_t) world->map_at.y - 5);
-    maxy = std::min(MAP_HEIGHT, (uint16_t)world->map_at.y + TILES_DOWN + 5);
+    miny = std::max(0, (uint16_t) level->map_at.y - 5);
+    maxy = std::min(MAP_HEIGHT, (uint16_t)level->map_at.y + TILES_DOWN + 5);
 
     //
     // For light sources we need to draw a bit off map as the light
@@ -1464,8 +1464,8 @@ void thing_render_all (void)
     }
 
 #if 0
-    if (world->terrain) {
-        terrain_blit(world->terrain);
+    if (level->terrain) {
+        terrain_blit(level->terrain);
     }
 #endif
 
