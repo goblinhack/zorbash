@@ -537,36 +537,36 @@ bool Level::is_key (const int x, const int y)
     return (false);
 }
 
-bool Level::is_gfx_large_shadow_caster (const point &p)
+bool Level::is_gfx_large_shadow (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
         return (false);
     }
-    return (get(_is_gfx_large_shadow_caster, p.x, p.y));
+    return (get(_is_gfx_large_shadow, p.x, p.y));
 }
 
-bool Level::is_gfx_large_shadow_caster (const int x, const int y)
+bool Level::is_gfx_large_shadow (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return (false);
     }
-    return (get(_is_gfx_large_shadow_caster, x, y));
+    return (get(_is_gfx_large_shadow, x, y));
 }
 
-void Level::set_gfx_large_shadow_caster (const int x, const int y)
+void Level::set_gfx_large_shadow (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_gfx_large_shadow_caster, x, y, true);
+    set(_is_gfx_large_shadow, x, y, true);
 }
 
-void Level::unset_gfx_large_shadow_caster (const int x, const int y)
+void Level::unset_gfx_large_shadow (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {
         return;
     }
-    set(_is_gfx_large_shadow_caster, x, y, false);
+    set(_is_gfx_large_shadow, x, y, false);
 }
 
 bool Level::is_door (const point &p)

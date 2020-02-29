@@ -142,7 +142,7 @@ public:
     int gfx_is_wall_deco {};
     int gfx_is_weapon_carry_anim {};
     int gfx_is_attack_anim {};
-    int gfx_large_shadow_caster {};
+    int gfx_large_shadow {};
     int gfx_oversized_but_sitting_on_the_ground {};
     int gfx_show_outlined {};
     int gfx_small_shadow_caster {};
@@ -1116,10 +1116,10 @@ static inline int tp_gfx_show_outlined (Tpp t)
     return (t->gfx_show_outlined);
 }
 
-static inline int tp_gfx_large_shadow_caster (Tpp t)
+static inline int tp_gfx_large_shadow (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_large_shadow_caster);
+    return (t->gfx_large_shadow);
 }
 
 static inline int tp_gfx_animated_can_hflip (Tpp t)

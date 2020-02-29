@@ -139,7 +139,7 @@ void Light::calculate (void)
                 level->set_visited(x, y);
             }
 
-            if (level->is_gfx_large_shadow_caster(x, y)) {
+            if (level->is_gfx_large_shadow(x, y)) {
                 break;
             }
         }
@@ -167,7 +167,7 @@ void Light::calculate (void)
                 level->set_visited(x, y);
             }
 
-            if (!level->is_gfx_large_shadow_caster(x, y)) {
+            if (!level->is_gfx_large_shadow(x, y)) {
                 break;
             }
 

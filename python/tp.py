@@ -461,8 +461,8 @@ class Tp:
     def set_gfx_show_outlined(self, value):
         zx.tp_set_gfx_show_outlined(self, value)
 
-    def set_gfx_large_shadow_caster(self, value):
-        zx.tp_set_gfx_large_shadow_caster(self, value)
+    def set_gfx_large_shadow(self, value):
+        zx.tp_set_gfx_large_shadow(self, value)
 
     def set_z_depth(self, value):
         zx.tp_set_z_depth(self, value)
