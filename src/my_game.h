@@ -71,6 +71,11 @@ public:
     //
     point3d                    world_at;
 
+    //
+    // All randomness jumps off of this as the root
+    //
+    int                        seed {};
+
     bool                       cursor_needs_update = false;
     bool                       cursor_found = false;
     fpoint                     cursor_at;
@@ -296,12 +301,19 @@ public:
     }
 
     void init(point3d at, int seed);
+    const char *to_cstring(void);
     std::string to_string(void);
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
     void log(std::string prefix);
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args); // compile error without
+    void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void con_(const char *fmt, va_list args); // compile error without
+    void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void err_(const char *fmt, va_list args); // compile error without
+    void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void dbg_(const char *fmt, va_list args); // compile error without
     friend std::ostream& operator<<(std::ostream &out, Bits<const Level & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<Level &> my);
 };

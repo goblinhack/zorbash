@@ -76,11 +76,10 @@ void Level::init (point3d at, int seed)
     seed += (at.x + 1) * (at.y + 1) * (at.z + 1);
     mysrand(seed);
 
-    LOG("-");
-    CON("DUNGEON: creating, seed %u", seed);
-    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
-    LOG("DUNGEON: create blocks");
+    log("-");
+    log("creating, seed %u", seed);
+    log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
     auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
                                GRID_HEIGHT, seed);
@@ -259,10 +258,10 @@ void Level::init (point3d at, int seed)
     thing_map_scroll_to_player();
     if (errored) { return; }
 
-    LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: created, seed %u", seed);
-    LOG("-");
+    log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
+    log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
+    log("created, seed %u", seed);
+    log("-");
 
     game->started = true;
 }
