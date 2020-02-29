@@ -17,6 +17,7 @@ void Game::display (void)
     if (!level) {
         return;
     }
+
     thing_render_minimap();
 
     blit_fbo_bind(FBO_MAIN);

@@ -26,4 +26,3 @@ void Game::tick_end (void)
     }
     game->tick_completed = game->tick_current;
 }
-
