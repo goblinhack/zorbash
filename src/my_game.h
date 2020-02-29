@@ -51,7 +51,7 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow_caster {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
@@ -225,10 +225,10 @@ public:
     void set_water(const int x, const int y);
     void unset_water(const int x, const int y);
 
-    bool is_gfx_large_shadow_caster(const int x, const int y);
-    bool is_gfx_large_shadow_caster(const point &p);
-    void set_gfx_large_shadow_caster(const int x, const int y);
-    void unset_gfx_large_shadow_caster(const int x, const int y);
+    bool is_gfx_large_shadow(const int x, const int y);
+    bool is_gfx_large_shadow(const point &p);
+    void set_gfx_large_shadow(const int x, const int y);
+    void unset_gfx_large_shadow(const int x, const int y);
 
     bool is_lava(const int x, const int y);
     bool is_lava(const point &p);

@@ -1661,7 +1661,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(gfx_is_wall_deco)
     TP_SET_DECL(gfx_is_weapon_carry_anim)
     TP_SET_DECL(gfx_is_attack_anim)
-    TP_SET_DECL(gfx_large_shadow_caster)
+    TP_SET_DECL(gfx_large_shadow)
     TP_SET_DECL(gfx_oversized_but_sitting_on_the_ground)
     TP_SET_DECL(gfx_show_outlined)
     TP_SET_DECL(gfx_small_shadow_caster)

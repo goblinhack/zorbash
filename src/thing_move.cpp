@@ -509,9 +509,9 @@ void Thing::update_pos (fpoint to, bool immediately)
             level->unset_dirt(old_at.x, old_at.y);
             level->set_dirt(new_at.x, new_at.y);
         }
-        if (tp_gfx_large_shadow_caster(tpp)) {
-            level->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
-            level->set_gfx_large_shadow_caster(new_at.x, new_at.y);
+        if (tp_gfx_large_shadow(tpp)) {
+            level->unset_gfx_large_shadow(old_at.x, old_at.y);
+            level->set_gfx_large_shadow(new_at.x, new_at.y);
         }
 
         if (is_player()) {

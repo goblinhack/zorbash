@@ -212,9 +212,9 @@ int Thing::gfx_is_attack_anim(void)
     return (tp_gfx_is_attack_anim(tp()));
 }
 
-int Thing::gfx_large_shadow_caster(void)
+int Thing::gfx_large_shadow(void)
 {_
-    return (tp_gfx_large_shadow_caster(tp()));
+    return (tp_gfx_large_shadow(tp()));
 }
 
 int Thing::gfx_show_outlined(void)

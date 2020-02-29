@@ -196,38 +196,40 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 std::ostream& operator<<(std::ostream &out,
                          Bits<const class Level & > const my)
 {_
+CON("read level");
     out << bits(my.t.timestamp_dungeon_created);
     timestamp_t timestamp_dungeon_saved = time_get_time_ms();
     out << bits(timestamp_dungeon_saved);
-    out << bits(my.t._is_blood);
-    out << bits(my.t._is_chasm);
-    out << bits(my.t._is_corridor);
-    out << bits(my.t._is_deep_water);
-    out << bits(my.t._is_dirt);
-    out << bits(my.t._is_dungeon);
-    out << bits(my.t._is_floor);
-    out << bits(my.t._is_gfx_large_shadow_caster);
-    out << bits(my.t._is_hazard);
-    out << bits(my.t._is_lava);
-    out << bits(my.t._is_rock);
-    out << bits(my.t._is_secret_door);
-    out << bits(my.t._is_visited);
-    out << bits(my.t._is_wall);
-    out << bits(my.t._is_water);
-    out << bits(my.t.all_thing_ids_at);
-    out << bits(my.t.cursor_at);
-    out << bits(my.t.cursor_at_old);
-    out << bits(my.t.cursor_found);
-    out << bits(my.t.cursor_needs_update);
-    out << bits(my.t.map_at);
-    out << bits(my.t.map_follow_player);
-    out << bits(my.t.map_wanted_at);
-    out << bits(my.t.minimap_valid);
-    out << bits(my.t.mouse);
-    out << bits(my.t.mouse_old);
-    out << bits(my.t.next_thing_id);
-    out << bits(my.t.world_at);
-    out << bits(my.t.seed);
+
+    /* _is_blood */            out << bits(my.t._is_blood);
+    /* _is_chasm */            out << bits(my.t._is_chasm);
+    /* _is_corridor */         out << bits(my.t._is_corridor);
+    /* _is_deep_water */       out << bits(my.t._is_deep_water);
+    /* _is_dirt */             out << bits(my.t._is_dirt);
+    /* _is_dungeon */          out << bits(my.t._is_dungeon);
+    /* _is_floor */            out << bits(my.t._is_floor);
+    /* _is_gfx_large_shadow */ out << bits(my.t._is_gfx_large_shadow);
+    /* _is_hazard */           out << bits(my.t._is_hazard);
+    /* _is_lava */             out << bits(my.t._is_lava);
+    /* _is_rock */             out << bits(my.t._is_rock);
+    /* _is_secret_door */      out << bits(my.t._is_secret_door);
+    /* _is_visited */          out << bits(my.t._is_visited);
+    /* _is_wall */             out << bits(my.t._is_wall);
+    /* _is_water */            out << bits(my.t._is_water);
+    /* all_thing_ids_at */     out << bits(my.t.all_thing_ids_at);
+    /* cursor_at */            out << bits(my.t.cursor_at);
+    /* cursor_at_old */        out << bits(my.t.cursor_at_old);
+    /* cursor_found */         out << bits(my.t.cursor_found);
+    /* cursor_needs_update */  out << bits(my.t.cursor_needs_update);
+    /* map_at */               out << bits(my.t.map_at);
+    /* map_follow_player */    out << bits(my.t.map_follow_player);
+    /* map_wanted_at */        out << bits(my.t.map_wanted_at);
+    /* minimap_valid */        out << bits(my.t.minimap_valid);
+    /* mouse */                out << bits(my.t.mouse);
+    /* mouse_old */            out << bits(my.t.mouse_old);
+    /* next_thing_id */        out << bits(my.t.next_thing_id);
+    /* seed */                 out << bits(my.t.seed);
+    /* world_at */             out << bits(my.t.world_at);
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_HEIGHT; ++y) {

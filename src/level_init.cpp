@@ -61,7 +61,7 @@ void Level::clear (void)
     _is_chasm = {};
     _is_rock = {};
     _is_visited = {};
-    _is_gfx_large_shadow_caster = {};
+    _is_gfx_large_shadow = {};
     _is_wall = {};
     _is_water = {};
     _is_dungeon = {};
@@ -71,8 +71,9 @@ void Level::clear (void)
     timestamp_dungeon_saved = 0;
 }
 
-void Level::init (point3d at, int seed)
+void Level::init (point3d at, int seed_in)
 {_
+    seed = seed_in;
     seed += (at.x + 1) * (at.y + 1) * (at.z + 1);
     mysrand(seed);
 

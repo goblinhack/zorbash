@@ -338,8 +338,8 @@ _
     if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
     if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
-    if (tp_gfx_large_shadow_caster(tpp)) { 
-        level->set_gfx_large_shadow_caster(new_at.x, new_at.y); 
+    if (tp_gfx_large_shadow(tpp)) { 
+        level->set_gfx_large_shadow(new_at.x, new_at.y); 
     }
     if (tp_is_deep_water(tpp)) {
         level->set_deep_water(new_at.x, new_at.y);
@@ -435,8 +435,8 @@ void Thing::reinit (void)
         level->set_deep_water(new_at.x, new_at.y);
         level->set_water(new_at.x, new_at.y);
     }
-    if (tp_gfx_large_shadow_caster(tpp)) {
-        level->set_gfx_large_shadow_caster(new_at.x, new_at.y);
+    if (tp_gfx_large_shadow(tpp)) {
+        level->set_gfx_large_shadow(new_at.x, new_at.y);
     }
 
     if (tp_is_loggable(tpp)) {
@@ -500,8 +500,8 @@ void Thing::destroy (void)
     if (unlikely(!tpp)) {
         ERR("no tp");
     } else {
-        if (tp_gfx_large_shadow_caster(tpp)) {
-            level->unset_gfx_large_shadow_caster(old_at.x, old_at.y);
+        if (tp_gfx_large_shadow(tpp)) {
+            level->unset_gfx_large_shadow(old_at.x, old_at.y);
         }
     }
 
