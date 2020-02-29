@@ -12,6 +12,11 @@ std::string Level::to_string (void)
     return (world_at.to_string());
 }
 
+const char * Level::to_cstring (void)
+{_
+    return (to_string().c_str());
+}
+
 bool Level::is_anything_at (const int x, const int y)
 {_
     if (unlikely(is_oob(x, y))) {

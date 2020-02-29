@@ -227,6 +227,7 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.mouse_old);
     out << bits(my.t.next_thing_id);
     out << bits(my.t.world_at);
+    out << bits(my.t.seed);
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_HEIGHT; ++y) {

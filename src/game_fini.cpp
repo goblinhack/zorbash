@@ -12,11 +12,6 @@ void Config::fini (void)
 
 void Game::fini (void)
 {_
-    LOG("-");
-    CON("DUNGEON: destroying dungeon, seed %u", seed);
-    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    LOG("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
-
     fps_value = 0;
     tick_current = 0;
     tick_completed = 0;
@@ -25,9 +20,4 @@ void Game::fini (void)
 
     config.fini();
     world.fini();
-
-    LOG("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
-    LOG("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
-    CON("DUNGEON: destroyed dungeon, seed %u", seed);
-    LOG("-");
 }
