@@ -17,6 +17,7 @@ void World::fini (void)
                 if (l) {
                     l->fini();
                     delete l;
+                    set(levels, x, y, z, (Level*)nullptr);
                 }
             }
         }

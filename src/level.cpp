@@ -569,6 +569,38 @@ void Level::unset_gfx_large_shadow (const int x, const int y)
     set(_is_gfx_large_shadow, x, y, false);
 }
 
+bool Level::is_corpse (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_corpse, p.x, p.y));
+}
+
+bool Level::is_corpse (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_corpse, x, y));
+}
+
+void Level::set_corpse (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_corpse, x, y, true);
+}
+
+void Level::unset_corpse (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_corpse, x, y, false);
+}
+
 bool Level::is_door (const point &p)
 {_
     return (is_door(p.x, p.y));

@@ -338,6 +338,7 @@ _
     if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
     if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
+
     if (tp_is_deep_water(tpp)) {
         level->set_deep_water(new_at.x, new_at.y);
         level->set_water(new_at.x, new_at.y);
@@ -431,6 +432,7 @@ void Thing::reinit (void)
     if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
     if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
+
     if (tp_is_deep_water(tpp)) {
         level->set_deep_water(new_at.x, new_at.y);
         level->set_water(new_at.x, new_at.y);
@@ -483,18 +485,19 @@ void Thing::destroy (void)
     //
     point old_at((int)mid_at.x, (int)mid_at.y);
 
-    if (is_wall())        { level->unset_wall(old_at.x, old_at.y); }
-    if (is_floor())       { level->unset_floor(old_at.x, old_at.y); }
-    if (is_lava())        { level->unset_lava(old_at.x, old_at.y); }
-    if (is_chasm())       { level->unset_chasm(old_at.x, old_at.y); }
-    if (is_hazard())      { level->unset_hazard(old_at.x, old_at.y); }
-    if (is_secret_door()) { level->unset_secret_door(old_at.x, old_at.y); }
     if (is_blood())       { level->unset_blood(old_at.x, old_at.y); }
-    if (is_water())       { level->unset_water(old_at.x, old_at.y); }
-    if (is_deep_water())  { level->unset_deep_water(old_at.x, old_at.y); }
+    if (is_chasm())       { level->unset_chasm(old_at.x, old_at.y); }
+    if (is_corpse())      { level->unset_corpse(old_at.x, old_at.y); }
     if (is_corridor())    { level->unset_corridor(old_at.x, old_at.y); }
+    if (is_deep_water())  { level->unset_deep_water(old_at.x, old_at.y); }
     if (is_dirt())        { level->unset_dirt(old_at.x, old_at.y); }
+    if (is_floor())       { level->unset_floor(old_at.x, old_at.y); }
+    if (is_hazard())      { level->unset_hazard(old_at.x, old_at.y); }
+    if (is_lava())        { level->unset_lava(old_at.x, old_at.y); }
     if (is_rock())        { level->unset_rock(old_at.x, old_at.y); }
+    if (is_secret_door()) { level->unset_secret_door(old_at.x, old_at.y); }
+    if (is_wall())        { level->unset_wall(old_at.x, old_at.y); }
+    if (is_water())       { level->unset_water(old_at.x, old_at.y); }
 
     auto tpp = tp();
     if (unlikely(!tpp)) {
@@ -885,6 +888,8 @@ void Thing::kill (void)
             if (tp_is_loggable(tpp)) {
                 log("killed, leaves corpse");
             }
+
+            level->set_corpse(mid_at.x, mid_at.y);
 
             if (tp_is_bleeder(tpp)) {
                 int splatters = random_range(2, 10);

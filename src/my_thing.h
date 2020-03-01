@@ -691,6 +691,7 @@ public:
     int is_blood(void);
     int is_combustable(void);
     int is_corpse_on_death(void);
+    int is_corpse(void);
     int is_corridor(void);
     int is_deep_water(void);
     int is_dirt(void);

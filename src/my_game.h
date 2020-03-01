@@ -46,6 +46,7 @@ private:
     //
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
@@ -249,6 +250,11 @@ public:
     bool is_secret_door(const point &p);
     void set_secret_door(const int x, const int y);
     void unset_secret_door(const int x, const int y);
+
+    bool is_corpse(const int x, const int y);
+    bool is_corpse(const point &p);
+    void set_corpse(const int x, const int y);
+    void unset_corpse(const int x, const int y);
 
     bool is_deep_water(const int x, const int y);
     bool is_deep_water(const point &p);
