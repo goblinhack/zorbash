@@ -57,15 +57,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Try to push the thing into a hazard if we can just to be sneaky
     //
-    if (!is_player()) {
-        switch (hitter->try_to_shove_into_hazard(this, delta)) {
-            case THING_SHOVE_TRIED_AND_FAILED:
-                return (true);
-            case THING_SHOVE_TRIED_AND_PASSED:
-                return (true);
-            case THING_SHOVE_NEVER_TRIED:
-                break;
-        }
+    switch (hitter->try_to_shove_into_hazard(this, delta)) {
+        case THING_SHOVE_TRIED_AND_FAILED:
+            return (true);
+        case THING_SHOVE_TRIED_AND_PASSED:
+            return (true);
+        case THING_SHOVE_NEVER_TRIED:
+            break;
     }
 
     if (is_player()) {

@@ -338,12 +338,12 @@ _
     if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
     if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
-    if (tp_gfx_large_shadow(tpp)) { 
-        level->set_gfx_large_shadow(new_at.x, new_at.y); 
-    }
     if (tp_is_deep_water(tpp)) {
         level->set_deep_water(new_at.x, new_at.y);
         level->set_water(new_at.x, new_at.y);
+    }
+    if (tp_gfx_large_shadow(tpp)) {
+        level->set_gfx_large_shadow(new_at.x, new_at.y);
     }
 
     if (tp_is_loggable(tpp)) {
