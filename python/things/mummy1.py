@@ -19,7 +19,7 @@ def tp_init(name, real_name):
     x.set_is_active(True)
     x.set_is_attack_lunge(True)
     x.set_is_attack_shove(True)
-    x.set_is_attack_shove_chance_d1000(50)
+    x.set_is_attack_shove_chance_d1000(1000)
     x.set_is_attackable(True)
     x.set_is_corpse_on_death(True)
     x.set_is_hunger_insatiable(True)

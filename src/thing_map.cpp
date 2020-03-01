@@ -933,9 +933,9 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_flush();
 
     //
-    // Draw a orange outline to the main display.
+    // Draw an outline to the main display.
     //
-    color edge = GREY20;
+    color edge = GRAY20;
     edge.a = 50;
     glcolor(edge);
     glDisable(GL_TEXTURE_2D);
@@ -954,18 +954,19 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 t->blit(offset_x - game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x + game->config.one_pixel_gl_width,
-                        offset_y - game->config.one_pixel_gl_height,
-                        x, y);
-                t->blit(offset_x - game->config.one_pixel_gl_width,
-                        offset_y - game->config.one_pixel_gl_height,
-                        x, y);
                 t->blit(offset_x,
                         offset_y + game->config.one_pixel_gl_height,
+                        x, y);
+                t->blit(offset_x,
+                        offset_y + game->config.one_pixel_gl_height * 2,
+                        x, y);
+                t->blit(offset_x,
+                        offset_y + game->config.one_pixel_gl_height * 12,
                         x, y);
             }
         }
     }
+
     glEnable(GL_TEXTURE_2D);
     blit_flush();
 
@@ -1051,6 +1052,14 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;
                 auto y2 = tile->y2;
+
+                //
+                // Slight parallax
+                //
+                float d = level->player->mid_at.x - level->map_at.x;
+                d *= 0.001;
+                x1 += d;
+                x2 += d;
 
                 blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
             } else {
