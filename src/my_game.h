@@ -101,6 +101,9 @@ public:
     };
     std::array<struct Thing_entropy, MAX_THINGS> all_thing_ptrs {};
 
+    std::map<uint32_t, Thingp> all_things {};
+    std::map<uint32_t, Thingp> all_active_things {};
+
     //
     // All thing IDs
     //

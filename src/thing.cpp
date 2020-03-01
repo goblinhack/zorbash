@@ -75,6 +75,18 @@ _
     //
     level->alloc_thing_id(this);
 
+    auto result = level->all_things.insert(std::pair(id, this));
+    if (result.second == false) {
+        err("failed to insert into thing map");
+    }
+
+    if (is_active()) {
+        auto result = level->all_active_things.insert(std::pair(id, this));
+        if (result.second == false) {
+            err("failed to insert into active thing map");
+        }
+    }
+
     if (tp_is_monst(tpp)) {
         new_dmap_scent();
         new_age_map();
@@ -394,6 +406,18 @@ void Thing::reinit (void)
         return;
     }
 
+    auto result = level->all_things.insert(std::pair(id, this));
+    if (result.second == false) {
+        err("failed to reinsert into thing map");
+    }
+
+    if (is_active()) {
+        auto result = level->all_active_things.insert(std::pair(id, this));
+        if (result.second == false) {
+            err("failed to reinsert into active thing map");
+        }
+    }
+
     //
     // Probably safest to reset this else things might expire on load
     //
@@ -518,6 +542,14 @@ void Thing::destroy (void)
 _
     if (is_loggable()) {
         log("destroyed");
+    }
+_
+    auto f = level->all_things.find(id);
+    level->all_things.erase(f);
+_
+    if (is_active()) {
+        auto f = level->all_active_things.find(id);
+        level->all_active_things.erase(f);
     }
 _
     level->free_thing_id(this);
