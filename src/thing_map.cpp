@@ -1252,23 +1252,6 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     }
 
     //
-    // Floors
-    //
-    blit_init();
-    { auto z = MAP_DEPTH_FLOOR;
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS(level, t, x, y, z) {
-                    glcolorfast(WHITE);
-                    t->blit(offset_x, offset_y, x, y);
-                }
-            }
-        }
-    }
-
-    blit_flush();
-
-    //
     // Work out what we will need to display ahead of time so we
     // can avoid needless fbo blits
     //
@@ -1278,12 +1261,20 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     bool have_chasm = false;
     bool have_blood = false;
 
+    //
+    // Floors
+    //
+    blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             for (auto z = 0; z < MAP_DEPTH; z++) {
                 FOR_ALL_THINGS(level, t, x, y, z) {
-                    auto tpp = t->tp();
+                    if (z == MAP_DEPTH_FLOOR) {
+                        glcolorfast(WHITE);
+                        t->blit(offset_x, offset_y, x, y);
+                    }
 
+                    auto tpp = t->tp();
                     have_lava       |= tp_is_lava(tpp);
                     have_chasm      |= tp_is_chasm(tpp);
                     have_deep_water |= tp_is_deep_water(tpp);
@@ -1297,15 +1288,13 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
             }
         }
     }
+    blit_flush();
 
     std::list<Thingp> moved;
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-            FOR_ALL_ACTIVE_THINGS(level, t, x, y) {
-                if (t->update_coordinates()) {
-                    moved.push_back(t);
-                }
-            }
+    for (auto i : level->all_active_things) {
+        auto t = i.second;
+        if (t->update_coordinates()) {
+            moved.push_back(t);
         }
     }
 
