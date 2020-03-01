@@ -481,6 +481,10 @@ void Thing::update_pos (fpoint to, bool immediately)
             level->unset_secret_door(old_at.x, old_at.y);
             level->set_secret_door(new_at.x, new_at.y);
         }
+        if (is_corpse()) {
+            level->unset_corpse(old_at.x, old_at.y);
+            level->set_corpse(new_at.x, new_at.y);
+        }
         if (is_lava()) {
             level->unset_lava(old_at.x, old_at.y);
             level->set_lava(new_at.x, new_at.y);

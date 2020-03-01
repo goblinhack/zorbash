@@ -203,6 +203,7 @@ CON("read level");
 
     /* _is_blood */            out << bits(my.t._is_blood);
     /* _is_chasm */            out << bits(my.t._is_chasm);
+    /* _is_corpse */           out << bits(my.t._is_corpse);
     /* _is_corridor */         out << bits(my.t._is_corridor);
     /* _is_deep_water */       out << bits(my.t._is_deep_water);
     /* _is_dirt */             out << bits(my.t._is_dirt);

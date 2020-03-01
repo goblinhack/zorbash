@@ -62,12 +62,12 @@ static void thing_cursor_path_draw (point start, point end)
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (level->is_deep_water(x,y)  ||
-                level->is_water(x,y)       ||
-                level->is_monst(x,y)       ||
-                level->is_door(x,y)        ||
-                level->is_secret_door(x,y) ||
-                level->is_hazard(x,y)      ||
+            if (level->is_deep_water(x,y)                        ||
+                level->is_water(x,y)                             ||
+                (level->is_monst(x,y) && !level->is_corpse(x,y)) ||
+                level->is_door(x,y)                              ||
+                level->is_secret_door(x,y)                       ||
+                level->is_hazard   (x,y)                         ||
                 level->is_wall(x, y)) {
                 set(d.val, x, y, DMAP_IS_WALL);
             } else {

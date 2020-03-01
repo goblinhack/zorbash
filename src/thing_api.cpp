@@ -287,6 +287,11 @@ int Thing::is_corpse_on_death(void)
     return (tp_is_corpse_on_death(tp()));
 }
 
+int Thing::is_corpse (void)
+{_
+    return (is_dead && is_corpse_on_death());
+}
+
 int Thing::is_corridor(void)
 {_
     return (tp_is_corridor(tp()));

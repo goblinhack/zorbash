@@ -250,6 +250,7 @@ CON("write leavel");
     /* _is_dungeon */          in >> bits(my.t._is_dungeon);
     /* _is_floor */            in >> bits(my.t._is_floor);
     /* _is_gfx_large_shadow */ in >> bits(my.t._is_gfx_large_shadow);
+    /* _is_corpse */           in >> bits(my.t._is_corpse);
     /* _is_hazard */           in >> bits(my.t._is_hazard);
     /* _is_lava */             in >> bits(my.t._is_lava);
     /* _is_rock */             in >> bits(my.t._is_rock);

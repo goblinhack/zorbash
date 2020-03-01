@@ -62,6 +62,7 @@ void Level::clear (void)
     _is_rock = {};
     _is_visited = {};
     _is_gfx_large_shadow = {};
+    _is_corpse = {};
     _is_wall = {};
     _is_water = {};
     _is_dungeon = {};
