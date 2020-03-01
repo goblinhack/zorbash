@@ -17,7 +17,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         return (THING_SHOVE_NEVER_TRIED);
     }
 
-    if (tp_is_attack_shove_chance_d1000(tp()) > (int)random_range(0, 1000)) {
+    if ((int)random_range(0, 1000) > tp_is_attack_shove_chance_d1000(tp())) {
         return (THING_SHOVE_NEVER_TRIED);
     }
 
@@ -84,7 +84,7 @@ ThingShoved Thing::try_to_shove_into_hazard (Thingp it, fpoint delta)
 {
     if (is_attack_shove()) {
         auto shoved_to_position = it->mid_at + delta;
-        if (level->is_hazard((int)shoved_to_position.x, 
+        if (level->is_hazard((int)shoved_to_position.x,
                              (int)shoved_to_position.y)) {
             return (try_to_shove(it, delta));
         }

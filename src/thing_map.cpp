@@ -886,10 +886,6 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     // Draw a black outline to the main display.
     //
     color edge1 = BLACK;
-    edge1.r = 0;
-    edge1.g = 10;
-    edge1.b = 0;
-    edge1.a = 200;
     glcolor(edge1);
     blit_init();
     for (auto y = miny; y < maxy; y++) {
@@ -900,32 +896,15 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                         continue;
                     }
                 }
-                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
-                        offset_y + game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
-                        offset_y + game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
+                t->blit(offset_x - game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
+                t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
-                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
-                        offset_y - game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
-                        offset_y - game->config.one_pixel_gl_height * 2,
-                        x, y);
                 t->blit(offset_x,
-                        offset_y + game->config.one_pixel_gl_height * 3,
-                        x, y);
-                t->blit(offset_x,
-                        offset_y + game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x,
-                        offset_y - game->config.one_pixel_gl_height * 2,
+                        offset_y + game->config.one_pixel_gl_height * 
+                            ((level->seed * x) % 10),
                         x, y);
             }
         }
@@ -956,12 +935,6 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                         x, y);
                 t->blit(offset_x,
                         offset_y + game->config.one_pixel_gl_height,
-                        x, y);
-                t->blit(offset_x,
-                        offset_y + game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x,
-                        offset_y + game->config.one_pixel_gl_height * 12,
                         x, y);
             }
         }
