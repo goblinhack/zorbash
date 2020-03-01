@@ -22,7 +22,7 @@ bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {_
-    const double step = 10.0;
+    const double step = 20.0;
 
     auto dx = level->map_at.x - level->map_wanted_at.x;
     if (dx) {
@@ -992,6 +992,12 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
     blit_init();
+
+    float dx = level->map_wanted_at.x - level->map_at.x;
+    dx *= -0.002;
+    float dy = level->map_wanted_at.y - level->map_at.y;
+    dy *= -0.002;
+
     for (auto x = minx; x < maxx; x++) {
         const auto X = x - minx + 2;
         int in_chasm = 0;
@@ -1016,7 +1022,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 brx -= offset_x;
                 bry -= offset_y;
 
-                int lx = (x / 2 ) % CHASM_ACROSS;
+                int lx = (x / 2) % CHASM_ACROSS;
                 int ly = (in_chasm / 2) % CHASM_DOWN;
                 in_chasm++;
                 auto tile = get(chasm, lx, ly);
@@ -1029,10 +1035,11 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 //
                 // Slight parallax
                 //
-                float d = level->player->mid_at.x - level->map_at.x;
-                d *= 0.001;
-                x1 += d;
-                x2 += d;
+                x1 += dx;
+                x2 += dx;
+
+                y1 += dy;
+                y2 += dy;
 
                 blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
             } else {

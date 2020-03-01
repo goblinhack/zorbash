@@ -27,7 +27,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     //
-    // Protect player from multiple impact - landing hard on a spike.
+    // Protect player from multiple impact
     //
     if (!time_have_x_tenths_passed_since(get_stats_attacked_rate_tenths(),
                                          get_timestamp_last_attacked())) {
