@@ -450,38 +450,6 @@ void Level::unset_rock (const int x, const int y)
     set(_is_rock, x, y, false);
 }
 
-bool Level::is_visited (const point &p)
-{_
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_visited, p.x, p.y));
-}
-
-bool Level::is_visited (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_visited, x, y));
-}
-
-void Level::set_visited (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_visited, x, y, true);
-}
-
-void Level::unset_visited (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_visited, x, y, false);
-}
-
 bool Level::is_dungeon (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
@@ -535,38 +503,6 @@ bool Level::is_key (const int x, const int y)
         }
     }
     return (false);
-}
-
-bool Level::is_gfx_large_shadow (const point &p)
-{_
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_gfx_large_shadow, p.x, p.y));
-}
-
-bool Level::is_gfx_large_shadow (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_gfx_large_shadow, x, y));
-}
-
-void Level::set_gfx_large_shadow (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_gfx_large_shadow, x, y, true);
-}
-
-void Level::unset_gfx_large_shadow (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    set(_is_gfx_large_shadow, x, y, false);
 }
 
 bool Level::is_corpse (const point &p)

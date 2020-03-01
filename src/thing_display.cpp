@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_thing.h"
 #include "my_font.h"
+#include "my_level.h"
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {_
@@ -949,12 +950,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     }
 #endif
 
-    if (owner) {
-        gl_rotate = owner->get_rot();
-    } else {
-        gl_rotate = get_rot();
-    }
-
     if (likely(blit)) {
         if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
             if (is_submerged) {
@@ -1023,8 +1018,6 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
             }
         }
     }
-
-    gl_rotate = 0;
 
     last_blit_tl = blit_tl;
     last_blit_br = blit_br;

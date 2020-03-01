@@ -66,7 +66,6 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "is_starving         " << is_starving          << std::endl;
     out << pfx << "is_submerged        " << is_submerged         << std::endl;
     out << pfx << "is_waiting_to_move  " << is_waiting_to_move   << std::endl;
-    out << pfx << "is_pending_gc       " << is_pending_gc        << std::endl;
     out << pfx << "is_blitted          " << is_blitted           << std::endl;
 
     pfx = old_pfx;

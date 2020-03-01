@@ -307,63 +307,6 @@ extern uint32_t NUMBER_FLOATS_PER_VERTICE_3D;
 
 void gl_ortho_set(int32_t width, int32_t height);
 
-void
-gl_push(float **P,
-        float *p_end,
-        uint8_t first,
-        float tex_left,
-        float tex_top,
-        float tex_right,
-        float tex_bottom,
-        float left,
-        float top,
-        float right,
-        float bottom,
-        float r1, float g1, float b1, float a1,
-        float r2, float g2, float b2, float a2,
-        float r3, float g3, float b3, float a3,
-        float r4, float g4, float b4, float a4);
-
-void blit(int tex,
-          float texMinX,
-          float texMinY,
-          float texMaxX,
-          float texMaxY,
-          float left,
-          float top,
-          float right,
-          float bottom);
-
-void blit(int tex,
-          float texMinX,
-          float texMinY,
-          float texMaxX,
-          float texMaxY,
-          fpoint tl,
-          fpoint tr,
-          fpoint bl,
-          fpoint br);
-
-void blit_colored(int tex,
-                  float texMinX,
-                  float texMinY,
-                  float texMaxX,
-                  float texMaxY,
-                  float left,
-                  float top,
-                  float right,
-                  float bottom,
-                  color color_bl,
-                  color color_br,
-                  color color_tl,
-                  color color_tr);
-
-void blit(int tex, float left, float top, float right, float bottom);
-void blit(int tex, fpoint tl, fpoint tr, fpoint bl, fpoint br);
-void blit_colored(int tex, float left, float top, float right, float bottom,
-                  color color_bl, color color_br,
-                  color color_tl, color color_tr);
-
 //
 // Frame buffer objects
 //
@@ -387,7 +330,6 @@ void blit_fbo_unbind(void);
 
 extern float *gl_array_buf;
 extern float *gl_array_buf_end;
-extern double gl_rotate;
 
 /*
  * Set the current GL color
@@ -407,4 +349,284 @@ static inline void glcolorfast (color s)
     gl_last_color = s;
 }
 
+//
+// gl_push
+//
+static inline void
+gl_push (float **P,
+         float *p_end,
+         uint8_t first,
+         float tex_left,
+         float tex_top,
+         float tex_right,
+         float tex_bottom,
+         fpoint tl,
+         fpoint tr,
+         fpoint bl,
+         fpoint br,
+         float r1, float g1, float b1, float a1,
+         float r2, float g2, float b2, float a2,
+         float r3, float g3, float b3, float a3,
+         float r4, float g4, float b4, float a4)
+{
+    float *p = *P;
+
+    if (unlikely(p >= p_end)) {
+        ERR("overflow on gl bug %s", __FUNCTION__);
+        return;
+    }
+
+    if (likely(!first)) {
+        //
+        // If there is a break in the triangle strip then make a degenerate
+        // triangle.
+        //
+        if ((glapi_last_right != bl.x) || (glapi_last_bottom != bl.y)) {
+            gl_push_texcoord(p, glapi_last_tex_right, glapi_last_tex_bottom);
+            gl_push_vertex(p, glapi_last_right, glapi_last_bottom);
+            gl_push_rgba(p, r4, g4, b4, a4);
+
+            gl_push_texcoord(p, tex_left,  tex_top);
+            gl_push_vertex(p, tl.x,  tl.y);
+            gl_push_rgba(p, r1, g1, b1, a1);
+        }
+    }
+
+    gl_push_texcoord(p, tex_left,  tex_top);
+    gl_push_vertex(p, tl.x,  tl.y);
+    gl_push_rgba(p, r1, g1, b1, a1);
+
+    gl_push_texcoord(p, tex_left,  tex_bottom);
+    gl_push_vertex(p, bl.x,  bl.y);
+    gl_push_rgba(p, r2, g2, b2, a2);
+
+    gl_push_texcoord(p, tex_right, tex_top);
+    gl_push_vertex(p, tr.x, tr.y);
+    gl_push_rgba(p, r3, g3, b3, a3);
+
+    gl_push_texcoord(p, tex_right, tex_bottom);
+    gl_push_vertex(p, br.x, br.y);
+    gl_push_rgba(p, r4, g4, b4, a4);
+
+    glapi_last_tex_right = tex_right;
+    glapi_last_tex_bottom = tex_bottom;
+    glapi_last_right = br.x;
+    glapi_last_bottom = br.y;
+    *P = p;
+}
+
+//
+// gl_push
+//
+static inline void
+gl_push (float **P,
+         float *p_end,
+         uint8_t first,
+         float tex_left,
+         float tex_top,
+         float tex_right,
+         float tex_bottom,
+         float left,
+         float top,
+         float right,
+         float bottom,
+         float r1, float g1, float b1, float a1,
+         float r2, float g2, float b2, float a2,
+         float r3, float g3, float b3, float a3,
+         float r4, float g4, float b4, float a4)
+{
+    fpoint tl(left, top);
+    fpoint tr(right, top);
+    fpoint bl(left, bottom);
+    fpoint br(right, bottom);
+
+    gl_push(P, p_end, first,
+            tex_left,
+            tex_top,
+            tex_right,
+            tex_bottom,
+            tl, tr, bl, br,
+            r1, g1, b1, a1,
+            r2, g2, b2, a2,
+            r3, g3, b3, a3,
+            r4, g4, b4, a4);
+}
+
+static inline
+void blit (int tex,
+           float texMinX,
+           float texMinY,
+           float texMaxX,
+           float texMaxY,
+           float left,
+           float top,
+           float right,
+           float bottom)
+{
+    uint8_t first;
+
+    if (unlikely(!buf_tex)) {
+        blit_init();
+        first = true;
+    } else if (unlikely(buf_tex != tex)) {
+        blit_flush();
+        first = true;
+    } else {
+        first = false;
+    }
+
+    buf_tex = tex;
+
+    color c = gl_color_current();
+
+    float r = ((float)c.r) / 255.0;
+    float g = ((float)c.g) / 255.0;
+    float b = ((float)c.b) / 255.0;
+    float a = ((float)c.a) / 255.0;
+
+    gl_push(&bufp,
+            bufp_end,
+            first,
+            texMinX,
+            texMinY,
+            texMaxX,
+            texMaxY,
+            left,
+            top,
+            right,
+            bottom,
+            r, g, b, a,
+            r, g, b, a,
+            r, g, b, a,
+            r, g, b, a);
+}
+
+static inline
+void blit (int tex,
+           float texMinX,
+           float texMinY,
+           float texMaxX,
+           float texMaxY,
+           fpoint tl,
+           fpoint tr,
+           fpoint bl,
+           fpoint br)
+{
+    uint8_t first;
+
+    if (unlikely(!buf_tex)) {
+        blit_init();
+        first = true;
+    } else if (unlikely(buf_tex != tex)) {
+        blit_flush();
+        first = true;
+    } else {
+        first = false;
+    }
+
+    buf_tex = tex;
+
+    color c = gl_color_current();
+
+    float r = ((float)c.r) / 255.0;
+    float g = ((float)c.g) / 255.0;
+    float b = ((float)c.b) / 255.0;
+    float a = ((float)c.a) / 255.0;
+
+    gl_push(&bufp,
+            bufp_end,
+            first,
+            texMinX,
+            texMinY,
+            texMaxX,
+            texMaxY,
+            tl,
+            tr,
+            bl,
+            br,
+            r, g, b, a,
+            r, g, b, a,
+            r, g, b, a,
+            r, g, b, a);
+}
+
+static inline
+void blit_colored (int tex,
+                   float texMinX,
+                   float texMinY,
+                   float texMaxX,
+                   float texMaxY,
+                   float left,
+                   float top,
+                   float right,
+                   float bottom,
+                   color color_bl,
+                   color color_br,
+                   color color_tl,
+                   color color_tr
+                   )
+{
+    uint8_t first;
+
+    if (unlikely(!buf_tex)) {
+        blit_init();
+        first = true;
+    } else if (unlikely(buf_tex != tex)) {
+        blit_flush();
+        first = true;
+    } else {
+        first = false;
+    }
+
+    buf_tex = tex;
+
+    gl_push(&bufp,
+            bufp_end,
+            first,
+            texMinX,
+            texMinY,
+            texMaxX,
+            texMaxY,
+            left,
+            top,
+            right,
+            bottom,
+            ((double)color_tl.r) / 255.0,
+            ((double)color_tl.g) / 255.0,
+            ((double)color_tl.b) / 255.0,
+            ((double)color_tl.a) / 255.0,
+            ((double)color_bl.r) / 255.0,
+            ((double)color_bl.g) / 255.0,
+            ((double)color_bl.b) / 255.0,
+            ((double)color_bl.a) / 255.0,
+            ((double)color_tr.r) / 255.0,
+            ((double)color_tr.g) / 255.0,
+            ((double)color_tr.b) / 255.0,
+            ((double)color_tr.a) / 255.0,
+            ((double)color_br.r) / 255.0,
+            ((double)color_br.g) / 255.0,
+            ((double)color_br.b) / 255.0,
+            ((double)color_br.a) / 255.0);
+}
+
+static inline
+void blit (int tex, float left, float top, float right, float bottom)
+{
+    blit(tex, 0, 0, 1, 1, left, top, right, bottom);
+}
+
+static inline
+void blit (int tex, fpoint tl, fpoint tr, fpoint bl, fpoint br)
+{
+    blit(tex, 0, 0, 1, 1, tl, tr, bl, br);
+}
+
+static inline
+void blit_colored (int tex, float left, float top, float right, float bottom,
+                   color color_bl, color color_br,
+                   color color_tl, color color_tr)
+{
+    blit_colored(tex, 0, 0, 1, 1, left, top, right, bottom,
+                 color_bl, color_br, color_tl, color_tr);
+}
 #endif

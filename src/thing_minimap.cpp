@@ -14,6 +14,12 @@
 
 void thing_render_minimap (void)
 {_
+    static int last_rendered;
+    if (!time_have_x_secs_passed_since(1, last_rendered)) {
+        return;
+    }
+    last_rendered = time_get_time_ms_cached();
+
     blit_fbo_bind(FBO_MINIMAP);
     glClearColor(0, 0, 0, 0);
     glBlendFunc(GL_ONE, GL_ZERO);
