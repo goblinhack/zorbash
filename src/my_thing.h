@@ -89,7 +89,6 @@ typedef struct Monst_ {
     float        bounce_height = {};         // Percentage of tile height.
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
-    float        rot = {};                   // GL co-orids
     float        submerged_offset = {};      // GL co-orids
     fpoint       interpolated_mid_at;
     fpoint       lunge_to = {};              // When a monst attacks something
@@ -203,7 +202,6 @@ public:
     uint32_t is_move_done:1       {}; // has moved/hit and finished its move
     uint32_t is_moving:1          {};
     uint32_t is_open:1            {};
-    uint32_t is_pending_gc:1      {};
     uint32_t is_sleeping:1        {};
     uint32_t is_starving:1        {};
     uint32_t is_submerged:1       {};
@@ -271,9 +269,6 @@ public:
 
     void set_fadeup_fade(float);
     float get_fadeup_fade(void);
-
-    void set_rot(float);
-    float get_rot(void);
 
     void set_msg(std::string);
     std::string get_msg(void);

@@ -75,7 +75,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* float       */ in >> bits(my.t->bounce_height);
     /* float       */ in >> bits(my.t->fadeup_fade);
     /* float       */ in >> bits(my.t->fadeup_height);
-    /* float       */ in >> bits(my.t->rot);
     /* float       */ in >> bits(my.t->submerged_offset);
     /* fpoint      */ in >> bits(my.t->interpolated_mid_at);
     /* fpoint      */ in >> bits(my.t->lunge_to);
@@ -203,7 +202,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->is_move_done       = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_moving          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_open            = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_pending_gc      = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_sleeping        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_starving        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_submerged       = (bits32 >> shift) & 1; shift++;

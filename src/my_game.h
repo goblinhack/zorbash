@@ -103,6 +103,7 @@ public:
 
     std::map<uint32_t, Thingp> all_things {};
     std::map<uint32_t, Thingp> all_active_things {};
+    std::map<uint32_t, Thingp> all_gc_things {};
 
     //
     // All thing IDs
@@ -229,11 +230,6 @@ public:
     void set_water(const int x, const int y);
     void unset_water(const int x, const int y);
 
-    bool is_gfx_large_shadow(const int x, const int y);
-    bool is_gfx_large_shadow(const point &p);
-    void set_gfx_large_shadow(const int x, const int y);
-    void unset_gfx_large_shadow(const int x, const int y);
-
     bool is_lava(const int x, const int y);
     bool is_lava(const point &p);
     void set_lava(const int x, const int y);
@@ -274,39 +270,104 @@ public:
     void set_rock(const int x, const int y);
     void unset_rock(const int x, const int y);
 
-    bool is_visited(const int x, const int y);
-    bool is_visited(const point &p);
-    void set_visited(const int x, const int y);
-    void unset_visited(const int x, const int y);
-
     bool is_dungeon(const int x, const int y);
     bool is_dungeon(const point &p);
     void set_dungeon(const int x, const int y);
     void unset_dungeon(const int x, const int y);
 
-    static inline bool is_oob (const int x, const int y, const int z)
+    //
+    // Used in lighting, so inlined
+    //
+    inline bool is_oob (const int x, const int y, const int z)
     {_
         return ((x < 0) || (x >= MAP_WIDTH) ||
                 (y < 0) || (y >= MAP_HEIGHT) ||
                 (z < 0) || (z >= MAP_DEPTH));
     }
 
-    static inline bool is_oob (const int x, const int y)
+    inline bool is_oob (const int x, const int y)
     {_
         return ((x < 0) || (x >= MAP_WIDTH) ||
                 (y < 0) || (y >= MAP_HEIGHT));
     }
 
-    static inline bool is_oob (const fpoint p)
+    inline bool is_oob (const fpoint p)
     {_
         return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 
-    static inline bool is_oob (const point p)
+    inline bool is_oob (const point p)
     {_
         return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
+    }
+
+    inline bool is_visited (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_visited, p.x, p.y));
+    }
+
+    inline bool is_visited (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_visited, x, y));
+    }
+
+    inline void set_visited (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_visited, x, y, true);
+    }
+
+    inline void unset_visited (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_visited, x, y, false);
+    }
+
+    //
+    // Used in lighting, so inlined
+    //
+    inline bool is_gfx_large_shadow (const point &p)
+    {_
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_gfx_large_shadow, p.x, p.y));
+    }
+
+    inline bool is_gfx_large_shadow (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_gfx_large_shadow, x, y));
+    }
+
+    inline void set_gfx_large_shadow (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_gfx_large_shadow, x, y, true);
+    }
+
+    inline void unset_gfx_large_shadow (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_gfx_large_shadow, x, y, false);
     }
 
     void init(point3d at, int seed);

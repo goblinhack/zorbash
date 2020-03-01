@@ -10,11 +10,16 @@
 #include "my_thing.h"
 #include <list>
 
-static std::list<uint32_t> things_to_delete;
-
 void thing_gc (void)
 {_
-    for (auto id : things_to_delete) {
+    for (;;) {
+        auto i = level->all_gc_things.begin();
+        if (i == level->all_gc_things.end()) {
+            break;
+        }
+        auto id = i->first;
+        level->all_gc_things.erase(i);
+
         auto t = thing_find(id);
         if (!t) {
             ERR("thing %08X not found to garbage collect", id);
@@ -25,12 +30,10 @@ void thing_gc (void)
             t->log("garbage collect");
         }
         delete t;
+
     }
 
-    //
-    // No need to call remove as we did the safe destroy above.
-    //
-    things_to_delete.clear();
+    level->all_gc_things.clear();
 }
 
 Thingp thing_new (std::string tp_name, Thingp owner)
@@ -544,12 +547,25 @@ _
         log("destroyed");
     }
 _
-    auto f = level->all_things.find(id);
-    level->all_things.erase(f);
+    {
+        auto f = level->all_things.find(id);
+        if (f != level->all_things.end()) {
+            level->all_things.erase(f);
+        }
+    }
 _
     if (is_active()) {
         auto f = level->all_active_things.find(id);
-        level->all_active_things.erase(f);
+        if (f != level->all_active_things.end()) {
+            level->all_active_things.erase(f);
+        }
+    }
+_
+    {
+        auto f = level->all_gc_things.find(id);
+        if (f != level->all_gc_things.end()) {
+            level->all_gc_things.erase(f);
+        }
     }
 _
     level->free_thing_id(this);
@@ -940,8 +956,10 @@ void Thing::kill (void)
         }
     }
 
-    is_pending_gc = true;
-    things_to_delete.push_back(id);
+    auto result = level->all_gc_things.insert(std::pair(id, this));
+    if (result.second == false) {
+        err("failed to insert into gc thing map");
+    }
 }
 
 void Thing::update_all (void)

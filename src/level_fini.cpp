@@ -28,13 +28,7 @@ void Level::fini (void)
                     LOG("clean thing %08X at %u,%u", id, x, y);
 #endif
                     auto t = thing_find(id);
-
-                    //
-                    // If already dead, then we will clean this up in thing_gc
-                    //
-                    if (!t->is_pending_gc) {
-                        t->destroy();
-                    }
+                    t->destroy();
                 }
             }
         }

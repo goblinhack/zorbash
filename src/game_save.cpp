@@ -54,7 +54,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* float       */ out << bits(my.t->bounce_height);
     /* float       */ out << bits(my.t->fadeup_fade);
     /* float       */ out << bits(my.t->fadeup_height);
-    /* float       */ out << bits(my.t->rot);
     /* float       */ out << bits(my.t->submerged_offset);
     /* fpoint      */ out << bits(my.t->interpolated_mid_at);
     /* fpoint      */ out << bits(my.t->lunge_to);
@@ -173,7 +172,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_move_done       << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_moving          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_open            << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_pending_gc      << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_sleeping        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_starving        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_submerged       << shift; shift++;
