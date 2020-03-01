@@ -94,6 +94,13 @@ void player_tick (void)
         some_key_event_was_pressed = true;
     }
 
+    if (state[game->config.key_zoom_in]) {
+        MINICON("Zoom in");
+        CON("USERCFG: zoom in");
+        config_gfx_zoom_in();
+        some_key_event_was_pressed = true;
+    }
+
     if (state[game->config.key_load]) {
         CON("USERCFG: loading game");
         game->load_select();

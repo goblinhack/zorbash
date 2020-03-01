@@ -1278,7 +1278,6 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     bool have_chasm = false;
     bool have_blood = false;
 
-    std::list<Thingp> moved;
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             for (auto z = 0; z < MAP_DEPTH; z++) {
@@ -1296,7 +1295,12 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     }
                 }
             }
+        }
+    }
 
+    std::list<Thingp> moved;
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
             FOR_ALL_ACTIVE_THINGS(level, t, x, y) {
                 if (t->update_coordinates()) {
                     moved.push_back(t);
@@ -1368,11 +1372,12 @@ void thing_render_all (void)
     //
     // Get the bounds. Needs to be a bit off-map for reflections.
     //
-    minx = std::max(0, (uint16_t) level->map_at.x - 5);
-    maxx = std::min(MAP_WIDTH, (uint16_t)level->map_at.x + TILES_ACROSS + 5);
+    int border = 5;
+    minx = std::max(0, (uint16_t) level->map_at.x - border);
+    maxx = std::min(MAP_WIDTH, (uint16_t)level->map_at.x + TILES_ACROSS + border);
 
-    miny = std::max(0, (uint16_t) level->map_at.y - 5);
-    maxy = std::min(MAP_HEIGHT, (uint16_t)level->map_at.y + TILES_DOWN + 5);
+    miny = std::max(0, (uint16_t) level->map_at.y - border);
+    maxy = std::min(MAP_HEIGHT, (uint16_t)level->map_at.y + TILES_DOWN + border);
 
     //
     // For light sources we need to draw a bit off map as the light
