@@ -20,6 +20,7 @@ static timestamp_t new_timestamp_dungeon_created;
 static timestamp_t T;
 static std::string game_load_error;
 bool game_load_headers_only;
+extern int GAME_SAVE_MARKER_EOL;
 
 //
 // Save timestamps as a delta we can restore.
@@ -224,64 +225,63 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     return (in);
 }
 
-std::istream& operator>>(std::istream &in, Bits<class Level &> my)
+std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 {_
-CON("write leavel");
-    my.t.player = nullptr;
-    my.t.cursor = nullptr;
-    my.t.all_thing_ptrs = {};
-    my.t.all_thing_ids_at = {};
+    my.t->player = nullptr;
+    my.t->cursor = nullptr;
+    my.t->all_thing_ptrs = {};
+    my.t->all_thing_ids_at = {};
 
-    in >> bits(my.t.timestamp_dungeon_created); old_timestamp_dungeon_created = my.t.timestamp_dungeon_created;
-    in >> bits(my.t.timestamp_dungeon_saved);
+    in >> bits(my.t->timestamp_dungeon_created); old_timestamp_dungeon_created = my.t->timestamp_dungeon_created;
+    in >> bits(my.t->timestamp_dungeon_saved);
     auto dungeon_age = level->timestamp_dungeon_saved -
                        level->timestamp_dungeon_created;
     new_timestamp_dungeon_created = time_get_time_ms() - dungeon_age;
-    my.t.timestamp_dungeon_created = new_timestamp_dungeon_created;
-    my.t.timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
+    my.t->timestamp_dungeon_created = new_timestamp_dungeon_created;
+    my.t->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
 
-    /* _is_blood */            in >> bits(my.t._is_blood);
-    /* _is_chasm */            in >> bits(my.t._is_chasm);
-    /* _is_corridor */         in >> bits(my.t._is_corridor);
-    /* _is_deep_water */       in >> bits(my.t._is_deep_water);
-    /* _is_dirt */             in >> bits(my.t._is_dirt);
-    /* _is_dungeon */          in >> bits(my.t._is_dungeon);
-    /* _is_floor */            in >> bits(my.t._is_floor);
-    /* _is_gfx_large_shadow */ in >> bits(my.t._is_gfx_large_shadow);
-    /* _is_corpse */           in >> bits(my.t._is_corpse);
-    /* _is_hazard */           in >> bits(my.t._is_hazard);
-    /* _is_lava */             in >> bits(my.t._is_lava);
-    /* _is_rock */             in >> bits(my.t._is_rock);
-    /* _is_secret_door */      in >> bits(my.t._is_secret_door);
-    /* _is_visited */          in >> bits(my.t._is_visited);
-    /* _is_wall */             in >> bits(my.t._is_wall);
-    /* _is_water */            in >> bits(my.t._is_water);
-    /* all_thing_ids_at */     in >> bits(my.t.all_thing_ids_at);
-    /* cursor_at */            in >> bits(my.t.cursor_at);
-    /* cursor_at_old */        in >> bits(my.t.cursor_at_old);
-    /* cursor_found */         in >> bits(my.t.cursor_found);
-    /* cursor_needs_update */  in >> bits(my.t.cursor_needs_update);
-    /* map_at */               in >> bits(my.t.map_at);
-    /* map_follow_player */    in >> bits(my.t.map_follow_player);
-    /* map_wanted_at */        in >> bits(my.t.map_wanted_at);
-    /* minimap_valid */        in >> bits(my.t.minimap_valid);
-    /* mouse */                in >> bits(my.t.mouse);
-    /* mouse_old */            in >> bits(my.t.mouse_old);
-    /* next_thing_id */        in >> bits(my.t.next_thing_id);
-    /* seed */                 in >> bits(my.t.seed);
-    /* world_at */             in >> bits(my.t.world_at);
+    /* _is_blood */            in >> bits(my.t->_is_blood);
+    /* _is_chasm */            in >> bits(my.t->_is_chasm);
+    /* _is_corpse */           in >> bits(my.t->_is_corpse);
+    /* _is_corridor */         in >> bits(my.t->_is_corridor);
+    /* _is_deep_water */       in >> bits(my.t->_is_deep_water);
+    /* _is_dirt */             in >> bits(my.t->_is_dirt);
+    /* _is_dungeon */          in >> bits(my.t->_is_dungeon);
+    /* _is_floor */            in >> bits(my.t->_is_floor);
+    /* _is_gfx_large_shadow */ in >> bits(my.t->_is_gfx_large_shadow);
+    /* _is_hazard */           in >> bits(my.t->_is_hazard);
+    /* _is_lava */             in >> bits(my.t->_is_lava);
+    /* _is_rock */             in >> bits(my.t->_is_rock);
+    /* _is_secret_door */      in >> bits(my.t->_is_secret_door);
+    /* _is_visited */          in >> bits(my.t->_is_visited);
+    /* _is_wall */             in >> bits(my.t->_is_wall);
+    /* _is_water */            in >> bits(my.t->_is_water);
+    /* all_thing_ids_at */     in >> bits(my.t->all_thing_ids_at);
+    /* cursor_at */            in >> bits(my.t->cursor_at);
+    /* cursor_at_old */        in >> bits(my.t->cursor_at_old);
+    /* cursor_found */         in >> bits(my.t->cursor_found);
+    /* cursor_needs_update */  in >> bits(my.t->cursor_needs_update);
+    /* map_at */               in >> bits(my.t->map_at);
+    /* map_follow_player */    in >> bits(my.t->map_follow_player);
+    /* map_wanted_at */        in >> bits(my.t->map_wanted_at);
+    /* minimap_valid */        in >> bits(my.t->minimap_valid);
+    /* mouse */                in >> bits(my.t->mouse);
+    /* mouse_old */            in >> bits(my.t->mouse_old);
+    /* next_thing_id */        in >> bits(my.t->next_thing_id);
+    /* seed */                 in >> bits(my.t->seed);
+    /* world_at */             in >> bits(my.t->world_at);
 
-    my.t.minimap_valid = false;
-    my.t.cursor_needs_update = true;
-    my.t.map_follow_player = true;
+    my.t->minimap_valid = false;
+    my.t->cursor_needs_update = true;
+    my.t->map_follow_player = true;
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = get(my.t.all_thing_ids_at, x, y, z);
+                auto id = get(my.t->all_thing_ids_at, x, y, z);
                 if (id) {
 #ifdef ENABLE_THING_ID_LOGS
-                    auto o = my.t.test_thing_ptr(id);
+                    auto o = my.t->test_thing_ptr(id);
                     if (o) {
                         o->die("thing already exists for %08X", id);
                     }
@@ -304,11 +304,28 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
     for (auto x = 0; x < LEVELS_ACROSS; ++x) {
         for (auto y = 0; y < LEVELS_DOWN; ++y) {
             for (auto z = 0; z < LEVELS_DEEP; ++z) {
-                auto l = get(my.t.levels, x, y, z);
-                if (l) {
+                point3d p;
+                bool exists;
+                in >> bits(p);
+                in >> bits(exists);
+                if (p != point3d(x, y, z)) {
+                    ERR("level mismatch expected %d,%d,%d vs found %d,%d,%d",
+                        x, y, z, p.x, p.y, p.z);
+                    return (in);
+                }
+
+                if (exists) {
+                    CON("DUNGEON: loading level %d,%d,%d", p.x, p.y, p.z);
                     auto l = new Level();
                     set(my.t.levels, x, y, z, l);
                     in >> bits(l);
+                    int eol;
+                    in >> bits(eol);
+                    if (eol != GAME_SAVE_MARKER_EOL) {
+                        ERR("end of level %d,%d,%d not found", x, y, z);
+                        return (in);
+                    }
+                    CON("DUNGEON: loaded level %d,%d,%d", p.x, p.y, p.z);
                 }
             }
         }
@@ -369,20 +386,14 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
 std::istream& operator>>(std::istream &in, Bits<class Game &> my)
 {_
     in >> bits(my.t.version);
-
     if (my.t.version != VERSION) {
         game_load_error =
           "bad version '" VERSION "' v '" + my.t.version + "'";
         return (in);
     }
-
     in >> bits(my.t.save_slot);
     in >> bits(my.t.save_meta);
-    in >> bits(my.t.save_file);
-    if (game_load_headers_only) {
-        return (in);
-    }
-
+    in >> bits(my.t.save_file); if (game_load_headers_only) { return (in); }
     in >> bits(my.t.appdata);
     in >> bits(my.t.saved_dir);
     in >> bits(my.t.seed);

@@ -21,7 +21,7 @@ def tp_init(name,
     x.set_gfx_large_shadow(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_interesting(False)
-    x.set_is_loggable(False)
+    x.set_is_loggable(True)
     x.set_is_movement_blocking(True)
     x.set_is_obstacle(True)
     x.set_is_rock(True)
