@@ -395,6 +395,19 @@ public:
 
     my_apoint3d (const my_apoint3d &a) : x(a.x), y(a.y), z(a.z) { }
 
+    friend std::ostream& operator<<(std::ostream &out,
+                                    Bits<const my_apoint3d & > const my)
+    {
+        out << bits(my.t.x) << bits(my.t.y) << bits(my.t.z);
+        return (out);
+    }
+
+    friend std::istream& operator>>(std::istream &in, Bits<my_apoint3d &> my)
+    {
+        in >> bits(my.t.x) >> bits(my.t.y) >> bits(my.t.z);
+        return (in);
+    }
+
     void operator+= (my_apoint3d a)
     {
         x += a.x; y += a.y; z += a.z;

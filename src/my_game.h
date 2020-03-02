@@ -40,7 +40,7 @@ enum {
 };
 
 class Level {
-private:
+public:
     //
     // These are caches for fast lookup in display code
     //
@@ -60,7 +60,7 @@ private:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
-public:
+
     //
     // When this Level was made. Used to restore timestamps relative to this.
     //

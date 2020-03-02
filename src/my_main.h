@@ -23,8 +23,9 @@
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_PTRCHECK_LEAK
 #undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
-#undef  ENABLE_THING_ID_LOGS       // Thing ID allocations
 #endif
+
+#define ENABLE_THING_ID_LOGS       // Thing ID allocations
 
 #undef  ENABLE_INVERTED_GFX        // For vision impaired
 #undef  ENABLE_FULL_TIMESTAMPS     // Full timestamps with date in logs

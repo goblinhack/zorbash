@@ -87,7 +87,7 @@ void Level::free_thing_id (Thingp t)
     }
 
 #ifdef ENABLE_THING_ID_LOGS
-    t->log("free index %u", index);
+    t->log("free index %u, %p, %08X", index, t, t->id);
 #endif
     p->ptr = nullptr;
     p->id = 0;
@@ -107,8 +107,8 @@ void Level::realloc_thing_id (Thingp t)
             t->err("index in use, cannot be realloc'd for same thing %08X",
                    t->id);
         } else {
-            t->err("index in use by another thing, cannot be realloc'd by %08X",
-                   t->id);
+            t->err("index in use by another thing %p, cannot be realloc'd by %p, %08X",
+                   p->ptr, t, t->id);
             p->ptr->err("realloc failed for ID, this is the current owner");
         }
     }
