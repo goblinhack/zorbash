@@ -482,6 +482,16 @@ void Thing::reinit (void)
     }
 
     update_light();
+
+    //
+    // Relearn the cursor after loading.
+    //
+    if (is_cursor()) {
+        level->cursor = this;
+    }
+    if (is_player()) {
+        level->player = this;
+    }
 }
 
 void Thing::destroy (void)
