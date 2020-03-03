@@ -231,6 +231,9 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     my.t->cursor = nullptr;
     my.t->all_thing_ptrs = {};
     my.t->all_thing_ids_at = {};
+    my.t->all_things = {};
+    my.t->all_active_things = {};
+    my.t->all_gc_things = {};
 
     in >> bits(my.t->timestamp_dungeon_created); old_timestamp_dungeon_created = my.t->timestamp_dungeon_created;
     in >> bits(my.t->timestamp_dungeon_saved);
@@ -317,6 +320,7 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
                 if (exists) {
                     CON("DUNGEON: loading level %d,%d,%d", p.x, p.y, p.z);
                     auto l = new Level();
+                    level = l;
                     set(my.t.levels, x, y, z, l);
                     in >> bits(l);
                     int eol;
