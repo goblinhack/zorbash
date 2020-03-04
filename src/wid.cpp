@@ -430,6 +430,7 @@ Widp wid_get_tail (Widp w)
 
 Widp wid_get_top_parent (Widp w)
 {_
+    verify(w);
     if (!w) {
         return (w);
     }
@@ -439,6 +440,7 @@ Widp wid_get_top_parent (Widp w)
     }
 
     while (w->parent) {
+        verify(w);
         w = w->parent;
     }
 

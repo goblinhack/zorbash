@@ -69,6 +69,15 @@ uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_
     return (true);
 }
 
+uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    CON("USERCFG: toggle allow_highdpi");
+    game->config.allow_highdpi = !game->config.allow_highdpi;
+    game->config_gfx_select();
+    local_game_needs_restart = true;
+    return (true);
+}
+
 uint8_t game_config_gfx_inverted_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle inverted");
@@ -310,7 +319,7 @@ void Game::config_gfx_select (void)
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Full screen (on restart)");
+        wid_set_text(w, "Full screen (restart)");
     }
     {_
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
@@ -323,6 +332,35 @@ void Game::config_gfx_select (void)
         wid_set_on_mouse_up(w, game_config_gfx_fullscreen_toggle);
 
         if (game->config.fullscreen) {
+            wid_set_text(w, "True");
+        } else {
+            wid_set_text(w, "False");
+        }
+    }
+
+    y_at += 3;
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "High DPI");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Allow high DPI (restart)");
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "High DPI value");
+
+        point tl = {width / 2 , y_at};
+        point br = {width / 2 + 6, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_gfx_allow_highdpi_toggle);
+
+        if (game->config.allow_highdpi) {
             wid_set_text(w, "True");
         } else {
             wid_set_text(w, "False");
