@@ -326,18 +326,20 @@ uint8_t sdl_init (void)
         video_flags |= SDL_WINDOW_FULLSCREEN;
     }
 
-#if 0
-    //
-    // For a lo pixel game this makes no sense as the frame
-    // buffers are really large and slows things down.
-    //
-    LOG("Calling SDL_GetDisplayDPI");
-    float dpi;
-    if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
-        LOG("- enable high DPI");
-        video_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
+    if (game->config.allow_highdpi) {
+        //
+        // For a lo pixel game this makes no sense as the frame
+        // buffers are really large and slows things down.
+        //
+        LOG("Calling SDL_GetDisplayDPI");
+        float dpi;
+        if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
+            LOG("- enable high DPI");
+            video_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
+        } else {
+            ERR("- cannot enable high DPI");
+        }
     }
-#endif
 
     LOG("Calling SDL_CreateWindow");
     window = SDL_CreateWindow("zorbash",
