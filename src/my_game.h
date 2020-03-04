@@ -114,6 +114,16 @@ public:
         std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ids_at {};
 
+    Level (void)
+    {_
+        newptr(this, "level");
+    }
+
+    ~Level (void)
+    {_
+        oldptr(this);
+    }
+
     void alloc_thing_id(Thingp t);
     void realloc_thing_id(Thingp t);
     void free_thing_id(Thingp t);

@@ -430,10 +430,10 @@ Widp wid_get_tail (Widp w)
 
 Widp wid_get_top_parent (Widp w)
 {_
-    verify(w);
     if (!w) {
         return (w);
     }
+    verify(w);
 
     if (!w->parent) {
         return (w);
