@@ -28,7 +28,7 @@ void Level::fini (void)
                     LOG("clean thing %08X at %u,%u", id, x, y);
 #endif
                     auto t = thing_find(id);
-                    t->destroy();
+                    delete t;
                 }
             }
         }
