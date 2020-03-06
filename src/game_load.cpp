@@ -479,10 +479,10 @@ Game::load (std::string file_to_load, class Game &target)
                              (lzo_bytep)uncompressed, &new_len, NULL);
     if (r == LZO_E_OK && new_len == uncompressed_len) {
         if (!game_load_headers_only) {
-            CON("DUNGEON: loading %s, decompressed from %lu to %lu bytes",
+            CON("DUNGEON: loading %s, decompress %luMb -> %luMb",
                 file_to_load.c_str(),
-                (unsigned long) compressed_len,
-                (unsigned long) uncompressed_len);
+                (unsigned long) compressed_len / (1024 * 1024),
+                (unsigned long) uncompressed_len / (1024 * 1024));
         }
     } else {
         /* this should NEVER happen */
@@ -721,5 +721,4 @@ void Game::load_select (void)
     }
     game_load_headers_only = false;
     wid_update(wid_load->wid_text_area->wid_text_area);
-    CON("USERCFG: loaded a saved game");
 }

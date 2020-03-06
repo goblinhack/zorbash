@@ -55,6 +55,12 @@ void thing_render_minimap (void)
                     } else {
                         glcolor(GRAY70);
                     }
+                } else if (level->is_rock(x, y)) {
+                       if (level->is_visited(x, y)) {
+                        glcolor(GRAY40);
+                    } else {
+                        glcolor(GRAY30);
+                    }
                 } else if (level->is_floor(x, y) ||
                            level->is_corridor(x, y)) {
                     if (level->is_visited(x, y)) {
@@ -118,6 +124,12 @@ void thing_render_minimap (void)
                         glcolor(GRAY80);
                     } else {
                         glcolor(GRAY70);
+                    }
+                } else if (level->is_rock(x, y)) {
+                       if (level->is_visited(x, y)) {
+                        glcolor(GRAY40);
+                    } else {
+                        glcolor(GRAY30);
                     }
                 } else if (level->is_floor(x, y) ||
                            level->is_corridor(x, y)) {
