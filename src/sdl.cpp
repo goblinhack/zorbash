@@ -1135,13 +1135,13 @@ void config_gfx_zoom_update (void)
     level->cursor_found = false;
     level->map_follow_player = true;
 
-    CON("- video     gl width   : %f", game->config.video_gl_width);
-    CON("- video     gl height  : %f", game->config.video_gl_height);
-    CON("- tile      gl width   : %f", game->config.tile_gl_width);
-    CON("- tile      gl height  : %f", game->config.tile_gl_height);
-    CON("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
-    CON("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
-    CON("- width to height ratio: %f", game->config.video_w_h_ratio);
+    LOG("- video     gl width   : %f", game->config.video_gl_width);
+    LOG("- video     gl height  : %f", game->config.video_gl_height);
+    LOG("- tile      gl width   : %f", game->config.tile_gl_width);
+    LOG("- tile      gl height  : %f", game->config.tile_gl_height);
+    LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
+    LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
+    LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
 
     double ascii_size = 16;
     ASCII_WIDTH  = (int)(game->config.video_pix_width / ascii_size);

@@ -384,10 +384,10 @@ bool Game::save (std::string file_to_save)
     int r = lzo1x_1_compress((lzo_bytep)uncompressed, uncompressed_len,
                              (lzo_bytep)compressed, &compressed_len, wrkmem);
     if (r == LZO_E_OK) {
-        CON("DUNGEON: saved as %s, compressed from %lu to %lu bytes",
+        CON("DUNGEON: saved as %s, compress %luMb -> %luMb",
             file_to_save.c_str(),
-            (unsigned long) uncompressed_len,
-            (unsigned long) compressed_len);
+            (unsigned long) uncompressed_len / (1024 * 1024),
+            (unsigned long) compressed_len / (1024 * 1024));
     } else {
         ERR("LZO internal error - compression failed: %d", r);
         return (false);
