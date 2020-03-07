@@ -127,10 +127,10 @@ void tp_init_after_loading (void)
         if (tp_is_floor(tp)) {
             tp_floor.push_back(tp);
         }
-        if (tp_gfx_is_floor_deco(tp)) {
+        if (tp_is_floor_deco(tp)) {
             tp_deco.push_back(tp);
         }
-        if (tp_gfx_is_wall_deco(tp)) {
+        if (tp_is_wall_deco(tp)) {
             tp_wall_deco.push_back(tp);
         }
     }

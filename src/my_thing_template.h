@@ -138,8 +138,8 @@ public:
     int gfx_animated_can_hflip {};
     int gfx_dead_anim {};
     int gfx_is_an_animation_only {};
-    int gfx_is_floor_deco {};
-    int gfx_is_wall_deco {};
+    int is_floor_deco {};
+    int is_wall_deco {};
     int gfx_is_weapon_carry_anim {};
     int gfx_is_attack_anim {};
     int gfx_large_shadow {};
@@ -1026,16 +1026,16 @@ static inline int tp_is_entrance (Tpp t)
     return (t->is_entrance);
 }
 
-static inline int tp_gfx_is_floor_deco (Tpp t)
+static inline int tp_is_floor_deco (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_is_floor_deco);
+    return (t->is_floor_deco);
 }
 
-static inline int tp_gfx_is_wall_deco (Tpp t)
+static inline int tp_is_wall_deco (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_is_wall_deco);
+    return (t->is_wall_deco);
 }
 
 static inline int tp_stats_move_speed_ms (Tpp t)

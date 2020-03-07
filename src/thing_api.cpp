@@ -192,14 +192,14 @@ int Thing::gfx_is_an_animation_only(void)
     return (tp_gfx_is_an_animation_only(tp()));
 }
 
-int Thing::gfx_is_floor_deco(void)
+int Thing::is_floor_deco(void)
 {_
-    return (tp_gfx_is_floor_deco(tp()));
+    return (tp_is_floor_deco(tp()));
 }
 
-int Thing::gfx_is_wall_deco(void)
+int Thing::is_wall_deco(void)
 {_
-    return (tp_gfx_is_wall_deco(tp()));
+    return (tp_is_wall_deco(tp()));
 }
 
 int Thing::gfx_is_weapon_carry_anim(void)

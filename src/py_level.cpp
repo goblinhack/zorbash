@@ -68,7 +68,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_entrance ||
                            m.is_exit ||
                            m.is_lava ||
-                           m.gfx_is_floor_deco) {
+                           m.is_floor_deco) {
                     floor_string += Charmap::FLOOR;
                 } else {
                     floor_string += Charmap::SPACE;
@@ -98,19 +98,19 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_door ||
                     m.is_rock) {
                     walls_string += c;
-                } else if (m.gfx_is_wall_deco) {
+                } else if (m.is_wall_deco) {
                     walls_string += Charmap::WALL;
                 } else {
                     walls_string += Charmap::SPACE;
                 }
 
-                if (m.gfx_is_floor_deco) {
+                if (m.is_floor_deco) {
                     deco_string += c;
                 } else {
                     deco_string += Charmap::SPACE;
                 }
 
-                if (m.gfx_is_wall_deco) {
+                if (m.is_wall_deco) {
                     wall_deco_string += c;
                 } else {
                     wall_deco_string += Charmap::SPACE;

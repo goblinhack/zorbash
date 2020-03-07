@@ -7,7 +7,7 @@ def tp_init(name, real_name, tiles=[]):
     x = tp.Tp(name, real_name)
 
     x.set_gfx_animated(True)
-    x.set_gfx_is_floor_deco(True)
+    x.set_is_floor_deco(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_small_shadow_caster(True)
