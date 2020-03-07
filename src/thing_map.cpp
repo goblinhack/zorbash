@@ -1356,24 +1356,24 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
 
 void thing_render_all (void)
 {_
-    uint16_t minx;
-    uint16_t maxx;
-    uint16_t miny;
-    uint16_t maxy;
-    uint16_t light_minx;
-    uint16_t light_maxx;
-    uint16_t light_miny;
-    uint16_t light_maxy;
+    int minx;
+    int maxx;
+    int miny;
+    int maxy;
+    int light_minx;
+    int light_maxx;
+    int light_miny;
+    int light_maxy;
 
     //
     // Get the bounds. Needs to be a bit off-map for reflections.
     //
     int border = 5;
-    minx = std::max(0, (uint16_t) level->map_at.x - border);
-    maxx = std::min(MAP_WIDTH, (uint16_t)level->map_at.x + TILES_ACROSS + border);
+    minx = std::max(0, (int) level->map_at.x - border);
+    maxx = std::min(MAP_WIDTH, (int)level->map_at.x + TILES_ACROSS + border);
 
-    miny = std::max(0, (uint16_t) level->map_at.y - border);
-    maxy = std::min(MAP_HEIGHT, (uint16_t)level->map_at.y + TILES_DOWN + border);
+    miny = std::max(0, (int) level->map_at.y - border);
+    maxy = std::min(MAP_HEIGHT, (int)level->map_at.y + TILES_DOWN + border);
 
     //
     // For light sources we need to draw a bit off map as the light

@@ -79,8 +79,7 @@ public:
     Roomp getr(const int x, const int y);
     Roomp getr_fast(const int x, const int y);
     bool can_place_room(Roomp r, int x, int y);
-    bool compress_room_corridors(void);
-    bool compress_room_layout_to_center_of_map(void);
+    bool rooms_move_closer_together(void);
     bool create_cyclic_rooms(Grid *g);
     bool is_floor_deco_at(const int x, const int y);
     bool is_wall_deco_at(const int x, const int y);
@@ -112,8 +111,6 @@ public:
     bool is_lava(const int x, const int y);
     bool is_lava_fast(const int x, const int y);
     bool is_monst(const int x, const int y);
-    bool is_oob(const int x, const int y);
-    bool is_oob(const int x, const int y, const int z);
     bool is_rock(const int x, const int y);
     bool is_secret_corridor_at(const int x, const int y);
     bool is_secret_door(const int x, const int y);
@@ -126,8 +123,6 @@ public:
     bool room_is_a_candidate(const Node *n, Roomp r);
     bool room_is_a_candidate_less_restrictive(const Node *n, Roomp r);
     bool solve(int x, int y, Grid *g);
-    char *cell_addr(const int x, const int y, const int z);
-    char *cell_addr_fast(const int x, const int y, const int z);
     char getc(const int x, const int y, const int z);
     char getc_fast(const int x, const int y, const int z);
     int draw_corridor(point start, point end, char w);
@@ -190,6 +185,33 @@ public:
                     uint8_t map_r1,
                     uint8_t map_r2,
                     uint8_t map_generations);
+
+    bool is_oob (const int x, const int y, const int z)
+    {
+        return ((x < 0) || (x >= map_width) ||
+                (y < 0) || (y >= map_height) ||
+                (z < 0) || (z >= map_depth));
+    }
+
+    bool is_oob (const int x, const int y)
+    {
+        return ((x < 0) || (x >= map_width) ||
+                (y < 0) || (y >= map_height));
+    }
+
+    char *cell_addr (const int x, const int y, const int z)
+    {
+        if (unlikely(is_oob(x, y, z))) {
+            return (nullptr);
+        }
+
+        return (&getref(cells, offset(x, y, z)));
+    }
+
+    char *cell_addr_fast (const int x, const int y, const int z)
+    {
+        return (&getref(cells, offset(x, y, z)));
+    }
 };
 
 extern class Dungeon *dungeon_test(void);

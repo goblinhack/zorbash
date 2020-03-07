@@ -976,6 +976,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         blit_text(get_msg(), blit_tl, blit_br);
     }
 
+    //
+    // A bit of pixel offset to account for screen rounding
+    //
+    blit_br.y += game->config.one_pixel_gl_height / 8;
+
     if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
         if (is_submerged) {
             tile_blit_outline_section(

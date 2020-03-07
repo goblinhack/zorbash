@@ -149,15 +149,9 @@ void Dungeon::make_dungeon (void)
         _ debug("choose room doors");
 
         //
-        // Drag rooms to the center of the map
+        // Drag rooms closer together
         //
-#if 0
-        if (!compress_room_layout_to_center_of_map()) {
-            continue;
-        }
-#endif
-
-        if (compress_room_corridors()) {
+        if (rooms_move_closer_together()) {
             break;
         }
 
@@ -289,33 +283,6 @@ int Dungeon::offset (const int x, const int y)
     offset += x;
 
     return (offset);
-}
-
-bool Dungeon::is_oob (const int x, const int y, const int z)
-{
-    return ((x < 0) || (x >= map_width) ||
-            (y < 0) || (y >= map_height) ||
-            (z < 0) || (z >= map_depth));
-}
-
-bool Dungeon::is_oob (const int x, const int y)
-{
-    return ((x < 0) || (x >= map_width) ||
-            (y < 0) || (y >= map_height));
-}
-
-char *Dungeon::cell_addr (const int x, const int y, const int z)
-{
-    if (is_oob(x, y, z)) {
-        return (nullptr);
-    }
-
-    return (&getref(cells, offset(x, y, z)));
-}
-
-char *Dungeon::cell_addr_fast (const int x, const int y, const int z)
-{
-    return (&getref(cells, offset(x, y, z)));
 }
 
 //
@@ -2150,17 +2117,17 @@ void Dungeon::map_place_room_ptr (Roomp r, int x, int y)
 //
 bool Dungeon::can_place_room (Roomp r, int x, int y)
 {
-    if (x < 0) {
+    if (x < MAP_BORDER) {
         return false;
     }
-    if (x + r->width >= map_width) {
+    if (x + r->width >= map_width - MAP_BORDER) {
         return false;
     }
 
-    if (y < 0) {
+    if (y < MAP_BORDER) {
         return false;
     }
-    if (y + r->height >= map_height) {
+    if (y + r->height >= map_height - MAP_BORDER) {
         return false;
     }
 
@@ -2169,14 +2136,14 @@ bool Dungeon::can_place_room (Roomp r, int x, int y)
             for (auto dx = 0; dx < r->width; dx++) {
                 auto c = get(r->data, dx, dy, dz);
                 if (c != Charmap::SPACE) {
-                    if (is_anything_at(x + dx, y + dy)) {
+                    if (is_anything_at_fast(x + dx, y + dy)) {
                         return false;
                     }
 
-                    if (is_wall(x + dx - 1, y + dy) ||
-                        is_wall(x + dx + 1, y + dy) ||
-                        is_wall(x + dx, y + dy - 1) ||
-                        is_wall(x + dx, y + dy + 1)) {
+                    if (is_wall_fast(x + dx - 1, y + dy) ||
+                        is_wall_fast(x + dx + 1, y + dy) ||
+                        is_wall_fast(x + dx, y + dy - 1) ||
+                        is_wall_fast(x + dx, y + dy + 1)) {
                         return false;
                     }
                 }
@@ -2187,186 +2154,7 @@ bool Dungeon::can_place_room (Roomp r, int x, int y)
     return true;
 }
 
-//
-// Repeat placing all rooms bar one random one. Try to move
-// that random one closer to the center. Repeat.
-//
-bool Dungeon::compress_room_layout_to_center_of_map (void)
-{
-    auto mx = map_width / 2;
-    auto my = map_height / 2;
-    auto delta = 1;
-
-    all_placed_rooms.resize(0);
-
-    for (auto r : Room::all_rooms) {
-        r->placed = false;
-    }
-
-    for (auto x = 0; x < nodes->grid_width; x++) {
-        for (auto y = 0; y < nodes->grid_height; y++) {
-            auto n = nodes->getn(x, y);
-            if (n->depth <= 0 ) {
-                continue;
-            }
-
-            auto r = get(grid.node_rooms, x, y);
-            if (!r) {
-                continue;
-            }
-
-            all_placed_rooms.push_back(r);
-            r->placed = true;
-        }
-    }
-
-    //
-    // Make sure we start with a solvable room
-    //
-    save_level();
-    if (!draw_corridors()) {
-        _ debug("level before adding corridors is NOT solvable");
-        return (false);
-    }
-
-    restore_level();
-    _ debug("level before adding corridors is solvable");
-
-    auto failed_attempts = 0;
-    auto attempts_to_move_rooms_closer = 100;
-
-    choose_room_doors();
-
-    while (attempts_to_move_rooms_closer--) {
-
-        center_room_layout();
-
-        for (unsigned int rs = 0;
-             rs < (unsigned int) all_placed_rooms.size();
-             rs++) {
-
-            auto r = get(all_placed_rooms, rs);
-            auto skip_roomno = r->roomno;
-
-            std::fill(cells.begin(), cells.end(), Charmap::SPACE);
-
-            auto moved = false;
-
-            //
-            // Place all except one room
-            //
-            auto ri = 0;
-            for (auto x = 0; x < nodes->grid_width; x++) {
-                for (auto y = 0; y < nodes->grid_height; y++) {
-
-                    auto n = nodes->getn(x, y);
-                    if (n->depth <= 0 ) {
-                        continue;
-                    }
-
-                    auto r = get(all_placed_rooms, ri++);
-                    if (r->roomno == skip_roomno) {
-                        continue;
-                    }
-
-                    place_room(r, r->at.x, r->at.y);
-                }
-            }
-
-            //
-            // Place the room we want to move
-            //
-            ri = 0;
-            for (auto x = 0; x < nodes->grid_width; x++) {
-                for (auto y = 0; y < nodes->grid_height; y++) {
-
-                    auto n = nodes->getn(x, y);
-                    if (!n->depth) {
-                        continue;
-                    }
-
-                    //
-                    // water etc..
-                    //
-                    if (n->depth == nodes->depth_obstacle) {
-                        continue;
-                    }
-
-                    auto r = get(all_placed_rooms, ri++);
-                    if (r->roomno != skip_roomno) {
-                        continue;
-                    }
-
-                    if (r->at.x + r->width > mx) {
-                        if (can_place_room(r, r->at.x - delta, r->at.y)) {
-                            r->at.x--;
-                            place_room(r, r->at.x, r->at.y);
-                            moved = true;
-                            break;
-                        }
-                    }
-
-                    if (r->at.x < mx) {
-                        if (can_place_room(r, r->at.x + delta, r->at.y)) {
-                            r->at.x++;
-                            place_room(r, r->at.x, r->at.y);
-                            moved = true;
-                            break;
-                        }
-                    }
-
-                    if (r->at.y + r->height > my) {
-                        if (can_place_room(r, r->at.x, r->at.y - delta)) {
-                            r->at.y--;
-                            place_room(r, r->at.x, r->at.y);
-                            moved = true;
-                            break;
-                        }
-                    }
-
-                    if (r->at.y < my) {
-                        if (can_place_room(r, r->at.x, r->at.y + delta)) {
-                            r->at.y++;
-                            place_room(r, r->at.x, r->at.y);
-                            moved = true;
-                            break;
-                        }
-                    }
-
-                    place_room(r, r->at.x, r->at.y);
-                    break;
-                }
-            }
-
-            if (!moved) {
-                continue;
-            }
-
-            //
-            // Ok we've moved one room. If we can still place corridors
-            // then we can keep going. If not, rollback the room to the
-            // last that was solvable.
-            //
-            std::vector<char> cells_ok;
-            std::copy(mbegin(cells), mend(cells), mbegin(cells_ok));
-
-            if (!draw_corridors()) {
-                LOG("failed to placing corridors, rollback");
-                restore_level();
-            } else {
-                _ debug("success, placed corridors");
-                failed_attempts = 0;
-                std::copy(mbegin(cells_ok), mend(cells_ok), mbegin(cells));
-                save_level();
-            }
-        }
-    }
-
-    _ debug("success, placed compressed layout");
-    return (true);
-}
-
-bool Dungeon::compress_room_corridors (void)
+bool Dungeon::rooms_move_closer_together (void)
 {
     auto delta = 1;
 
@@ -2415,7 +2203,6 @@ bool Dungeon::compress_room_corridors (void)
 
     while (attempts_to_move_rooms_closer --) {
         center_room_layout();
-CON("%d", attempts_to_move_rooms_closer);
 
         for (unsigned int rs = 0;
              rs < (unsigned int) all_placed_rooms.size();
@@ -2479,7 +2266,7 @@ CON("%d", attempts_to_move_rooms_closer);
                         continue;
                     }
 
-                    delta = 1 + random_range(0, 3);
+                    delta = 1 + random_range(0, 2);
 
                     auto moved_one = false;
                     switch (random_range(0, 4)) {
@@ -2614,8 +2401,8 @@ CON("%d", attempts_to_move_rooms_closer);
             std::vector<char> cells_ok;
             std::copy(mbegin(cells), mend(cells), mbegin(cells_ok));
 
-            auto new_corridor_count = draw_corridors();
-            if (new_corridor_count >= corridor_count) {
+            auto new_total_corridor_len = draw_corridors();
+            if (new_total_corridor_len >= corridor_count) {
                 restore_level();
                 if (!draw_corridors()) {
                     ERR("rolled back level was not solvable");
@@ -2629,7 +2416,7 @@ CON("%d", attempts_to_move_rooms_closer);
 #endif
 
                 restore_level();
-            } else if (!new_corridor_count) {
+            } else if (!new_total_corridor_len) {
                 restore_level();
                 if (!draw_corridors()) {
                     ERR("rolled back level was not solvable");
@@ -2644,9 +2431,9 @@ CON("%d", attempts_to_move_rooms_closer);
 
                 restore_level();
             } else {
-CON("new_corridor_count %d", new_corridor_count);
-                corridor_count = new_corridor_count;
-                _ debug("success, placed corridors");
+                corridor_count = new_total_corridor_len;
+                DBG("moved rooms closer, new_total_corridor_len now %d", 
+                    new_total_corridor_len);
                 failed_to_place_all_corridors = 0;
                 failed_to_make_shorter_corridors = 0;
                 std::copy(mbegin(cells_ok), mend(cells_ok), mbegin(cells));
@@ -2654,9 +2441,10 @@ CON("new_corridor_count %d", new_corridor_count);
             }
         }
     }
-    _ debug("success, placed shorter corridor layout");
 
-    return (draw_corridors());
+    auto ret = draw_corridors();
+    _ debug("success, placed shorter corridor layout");
+    return (ret);
 }
 
 void Dungeon::assign_rooms_to_tiles (void)
@@ -2703,6 +2491,7 @@ void Dungeon::remove_all_doors (void)
         for (auto y = 0; y < map_height; y++) {
             if (getc(x, y, MAP_DEPTH_WALLS) == Charmap::DOOR) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::SPACE);
+                putc(x, y, MAP_DEPTH_FLOOR, Charmap::FLOOR);
             }
         }
     }
