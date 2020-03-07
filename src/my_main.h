@@ -11,7 +11,6 @@
 //
 #undef DEBUG_CRASH
 
-#define ENABLE_ASSERT              // DIE on errors
 #define ENABLE_TRACING             // Function tracing
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 
@@ -19,6 +18,7 @@
 // Commonly changed settings
 //
 #ifdef DEBUG_CRASH
+#define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_PTRCHECK_LEAK
@@ -274,7 +274,12 @@ extern int TILES_DOWN;
 #define FONT_SIZE                   8
 
 #define TTF_GLYPH_MIN               ' '
-#define TTF_GLYPH_MAX               0xffff // SDL can only do 2b fonts
+//
+// Do we really need all these glyphs? It's slow to generate
+//
+// #define TTF_GLYPH_MAX            0xffff // SDL can only do 2b fonts
+#define TTF_GLYPH_MAX               559 /* As we use UNICODE_0x22e */
+
 #define TTF_GLYPH_PER_ROW           60
 #define TTF_CURSOR_CHAR             127
 

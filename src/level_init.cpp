@@ -26,8 +26,8 @@ static void level_place_rocks(Dungeonp d,
                               int block_height,
                               int tries);
 static void level_place_floor_under_objects(Dungeonp d,
-                                           std::string what,
-                                           int depth);
+                                            std::string what,
+                                            int depth);
 static void level_place_lava(Dungeonp d, std::string what);
 static void level_place_chasm(Dungeonp d, std::string what);
 static void level_place_random_blood(Dungeonp d);
@@ -525,13 +525,13 @@ static void level_place_floor_under_objects (Dungeonp d,
                                             std::string what,
                                             int depth)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
-            if (level->is_floor(x, y)) {
+    for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
+        for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
+            if (!d->is_floor_fast(x, y)) {
                 continue;
             }
 
-            if (!d->is_floor(x, y)) {
+            if (level->is_floor(x, y)) {
                 continue;
             }
 
@@ -743,8 +743,8 @@ static void level_place_chasm (Dungeonp d,
 
 static void level_place_random_blood (Dungeonp d)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+    for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
+        for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
             if (level->is_blood(x, y)) {
                 continue;
             }
@@ -948,9 +948,22 @@ static void level_place_keys (Dungeonp d)
 
 static void level_place_floor_deco (Dungeonp d)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+    for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
+        for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
             if (!d->is_floor(x, y)) {
+                continue;
+            }
+
+            if (random_range(0, 100) < 95) {
+                continue;
+            }
+
+            if (d->is_food(x, y)        ||
+                d->is_door(x, y)        ||
+                d->is_key(x, y)         ||
+                d->is_blood(x, y)       ||
+                d->is_secret_door(x, y) ||
+                d->is_monst(x, y)) {
                 continue;
             }
 
@@ -974,10 +987,6 @@ static void level_place_floor_deco (Dungeonp d)
                 d->is_hazard(x + 1, y - 1) ||
                 d->is_hazard(x - 1, y + 1) ||
                 d->is_hazard(x + 1, y + 1)) {
-                continue;
-            }
-
-            if (random_range(0, 100) < 90) {
                 continue;
             }
 
@@ -1041,8 +1050,8 @@ static void level_place_remaining_floor (Dungeonp d, std::string what)
 
 static void level_place_corridor (Dungeonp d, std::string what, int depth)
 {_
-    for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-        for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+    for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
+        for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
             if (!d->is_corridor(x, y) &&
                 !d->is_secret_corridor_at(x, y)) {
                 continue;
