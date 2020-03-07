@@ -227,9 +227,8 @@ void Dungeon::make_dungeon (void)
              4   /* generations */);
 
     water_fixup();
-
     add_border();
-    _ debug("add border");
+    add_remaining();
 
     LOG("final DUNGEON:");
     dump();
@@ -2234,7 +2233,7 @@ bool Dungeon::compress_room_layout_to_center_of_map (void)
     _ debug("level before adding corridors is solvable");
 
     auto failed_attempts = 0;
-    auto attempts_to_move_rooms_closer = 200;
+    auto attempts_to_move_rooms_closer = 100;
 
     choose_room_doors();
 
@@ -2436,7 +2435,7 @@ CON("%d", attempts_to_move_rooms_closer);
 
                     auto r = get(grid.node_rooms, x, y);
                     if (r) {
-                        r->skip = (random_range(0, 100) < 80);
+                        r->skip = (random_range(0, 100) < 50);
                     }
                 }
             }
@@ -2480,29 +2479,31 @@ CON("%d", attempts_to_move_rooms_closer);
                         continue;
                     }
 
+                    delta = 1 + random_range(0, 3);
+
                     auto moved_one = false;
                     switch (random_range(0, 4)) {
                     case 0:
                         if (can_place_room(r, r->at.x - delta, r->at.y)) {
-                            r->at.x--;
+                            r->at.x -= delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x + delta, r->at.y)) {
-                            r->at.x++;
+                            r->at.x += delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x, r->at.y - delta)) {
-                            r->at.y--;
+                            r->at.y -= delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x, r->at.y + delta)) {
-                            r->at.y++;
+                            r->at.y += delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
@@ -2511,25 +2512,25 @@ CON("%d", attempts_to_move_rooms_closer);
 
                     case 1:
                         if (can_place_room(r, r->at.x + delta, r->at.y)) {
-                            r->at.x++;
+                            r->at.x += delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x - delta, r->at.y)) {
-                            r->at.x--;
-                            place_room(r, r->at.x, r->at.y);
-                            moved_one = true;
-                            break;
-                        }
-                        if (can_place_room(r, r->at.x, r->at.y - delta)) {
-                            r->at.y--;
+                            r->at.x -= delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x, r->at.y + delta)) {
-                            r->at.y++;
+                            r->at.y += delta;
+                            place_room(r, r->at.x, r->at.y);
+                            moved_one = true;
+                            break;
+                        }
+                        if (can_place_room(r, r->at.x, r->at.y - delta)) {
+                            r->at.y -= delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
@@ -2538,25 +2539,25 @@ CON("%d", attempts_to_move_rooms_closer);
 
                     case 2:
                         if (can_place_room(r, r->at.x, r->at.y - delta)) {
-                            r->at.y--;
+                            r->at.y -= delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x - delta, r->at.y)) {
-                            r->at.x--;
+                            r->at.x -= delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x + delta, r->at.y)) {
-                            r->at.x++;
+                            r->at.x += delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x, r->at.y + delta)) {
-                            r->at.y++;
+                            r->at.y += delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
@@ -2565,25 +2566,25 @@ CON("%d", attempts_to_move_rooms_closer);
 
                     case 3:
                         if (can_place_room(r, r->at.x, r->at.y + delta)) {
-                            r->at.y++;
-                            place_room(r, r->at.x, r->at.y);
-                            moved_one = true;
-                            break;
-                        }
-                        if (can_place_room(r, r->at.x - delta, r->at.y)) {
-                            r->at.x--;
-                            place_room(r, r->at.x, r->at.y);
-                            moved_one = true;
-                            break;
-                        }
-                        if (can_place_room(r, r->at.x + delta, r->at.y)) {
-                            r->at.x++;
+                            r->at.y += delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
                         }
                         if (can_place_room(r, r->at.x, r->at.y - delta)) {
-                            r->at.y--;
+                            r->at.y -= delta;
+                            place_room(r, r->at.x, r->at.y);
+                            moved_one = true;
+                            break;
+                        }
+                        if (can_place_room(r, r->at.x - delta, r->at.y)) {
+                            r->at.x -= delta;
+                            place_room(r, r->at.x, r->at.y);
+                            moved_one = true;
+                            break;
+                        }
+                        if (can_place_room(r, r->at.x + delta, r->at.y)) {
+                            r->at.x += delta;
                             place_room(r, r->at.x, r->at.y);
                             moved_one = true;
                             break;
@@ -3388,6 +3389,23 @@ void Dungeon::water_fixup (void)
                     putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
                 }
             }
+        }
+    }
+}
+
+void Dungeon::add_remaining (void)
+{
+    for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+        for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+            if (is_anything_at(x, y)) {
+                continue;
+            }
+
+            if (random_range(0, 100) < 95) {
+                putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
+            }
+            putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
+            putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
         }
     }
 }

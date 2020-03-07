@@ -136,6 +136,7 @@ public:
     int offset(const int x, const int y);
     int offset(const int x, const int y, const int z);
     void add_border(void);
+    void add_remaining(void);
     void add_corridor_walls(void);
     void add_room_walls(void);
     void assign_rooms_to_tiles(void);
