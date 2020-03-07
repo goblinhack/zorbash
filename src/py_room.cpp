@@ -110,7 +110,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_lava ||
                            m.is_water ||
                            m.is_deep_water ||
-                           m.gfx_is_floor_deco) {
+                           m.is_floor_deco) {
                     floor_string += Charmap::FLOOR;
                 } else {
                     floor_string += Charmap::SPACE;
@@ -138,19 +138,19 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 if (m.is_wall ||
                     m.is_door) {
                     walls_string += c;
-                } else if (m.gfx_is_wall_deco) {
+                } else if (m.is_wall_deco) {
                     walls_string += Charmap::WALL;
                 } else {
                     walls_string += Charmap::SPACE;
                 }
 
-                if (m.gfx_is_floor_deco) {
+                if (m.is_floor_deco) {
                     deco_string += c;
                 } else {
                     deco_string += Charmap::SPACE;
                 }
 
-                if (m.gfx_is_wall_deco) {
+                if (m.is_wall_deco) {
                     wall_deco_string += c;
                 } else {
                     wall_deco_string += Charmap::SPACE;
