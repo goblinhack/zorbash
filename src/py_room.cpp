@@ -103,13 +103,19 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_secret_corridor ||
                     m.is_dirt) {
                     floor_string += c;
-                } else if (m.is_door ||
-                           m.is_blood ||
-                           m.is_entrance ||
-                           m.is_exit ||
-                           m.is_lava ||
-                           m.is_water ||
-                           m.is_deep_water ||
+                } else if (m.is_blood       ||
+                           m.is_deep_water  ||
+                           m.is_door        ||
+                           m.is_entrance    ||
+                           m.is_exit        ||
+                           m.is_floor_deco  ||
+                           m.is_food        ||
+                           m.is_key         ||
+                           m.is_lava        ||
+                           m.is_monst       ||
+                           m.is_secret_door ||
+                           m.is_trap        ||
+                           m.is_water       ||
                            m.is_floor_deco) {
                     floor_string += Charmap::FLOOR;
                 } else {
