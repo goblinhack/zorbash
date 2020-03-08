@@ -67,7 +67,8 @@ static void thing_cursor_path_draw (point start, point end)
                 (level->is_monst(x,y) && !level->is_corpse(x,y)) ||
                 level->is_door(x,y)                              ||
                 level->is_secret_door(x,y)                       ||
-                level->is_hazard   (x,y)                         ||
+                level->is_hazard(x,y)                            ||
+                level->is_rock(x, y)                             ||
                 level->is_wall(x, y)) {
                 set(d.val, x, y, DMAP_IS_WALL);
             } else {

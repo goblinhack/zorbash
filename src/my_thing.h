@@ -914,5 +914,7 @@ void thing_map_scroll_to_player(void);
 void thing_render_all(void);
 void thing_render_minimap(void);
 void things_tick(void);
+int thing_can_reach(point start, point end);
+int thing_can_reach_player(point start);
 
 #endif // THING_H
