@@ -13,6 +13,7 @@ Thingp debug_thing;
 
 static Texp light_overlay_tex;
 static int light_overlay_texid;
+static float light_dim = 1.0;
 
 Light::Light (void)
 {_
@@ -250,6 +251,10 @@ void Light::render_triangle_fans (void)
         auto blue  = ((double)c.b) / 255.0;
         auto alpha = ((double)c.a) / 255.0;
 
+        red *= light_dim;
+        green *= light_dim;
+        blue *= light_dim;
+
         blit_init();
         {
             int i;
@@ -402,11 +407,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
                 // Too far away from the player? Skip rendering.
                 //
                 if (level->player) {
-                    auto p = level->player;
-                    auto len = DISTANCE(l->at.x, l->at.y,
-                                        p->mid_at.x, p->mid_at.y);
-
-                    if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
+                    if (!thing_can_reach_player(point(l->at.x, l->at.y))) {
                         continue;
                     }
                 }
@@ -451,11 +452,7 @@ void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
                 // Too far away from the player? Skip rendering.
                 //
                 if (level->player) {
-                    auto p = level->player;
-                    auto len = DISTANCE(l->at.x, l->at.y,
-                                        p->mid_at.x, p->mid_at.y);
-
-                    if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
+                    if (!thing_can_reach_player(point(l->at.x, l->at.y))) {
                         continue;
                     }
                 }
@@ -513,12 +510,23 @@ void lights_render_high_quality (int minx, int miny,
                 //
                 // Too far away from the player? Skip rendering.
                 //
+                light_dim = 1.0;
+
                 if (level->player) {
                     auto p = level->player;
                     auto len = DISTANCE(l->at.x, l->at.y,
                                         p->mid_at.x, p->mid_at.y);
 
                     if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
+                        continue;
+                    }
+                    auto dist =
+                      thing_can_reach_player(point(l->at.x, l->at.y));
+                    if (!dist || (dist >= MAX_LIGHT_PLAYER_DISTANCE)) {
+                        continue;
+                    }
+                    light_dim = 1.0 - (0.05 * (float)dist);
+                    if (light_dim < 0) {
                         continue;
                     }
                 }

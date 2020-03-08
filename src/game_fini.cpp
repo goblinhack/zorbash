@@ -20,4 +20,8 @@ void Game::fini (void)
 
     config.fini();
     world.fini();
+
+    if (player_dmap) {
+        delete player_dmap;
+    }
 }

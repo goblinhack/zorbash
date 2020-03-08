@@ -577,6 +577,11 @@ public:
     //
     std::vector<point> move_path;
 
+    //
+    // How to reach the player. Updated each move.
+    //
+    Dmap               *player_dmap {};
+
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^

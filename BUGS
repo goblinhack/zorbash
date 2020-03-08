@@ -1,3 +1,5 @@
+if 2 monsts attacking player at the same time, only one gets to attack
+player can be pushed through a wall
 hide lava and lights behind doors and secret doors
 door can be next to an empty corridor, need double door?
 if a monst is eating and being attacked, it should defend itself
