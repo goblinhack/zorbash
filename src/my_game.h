@@ -114,6 +114,11 @@ public:
         std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ids_at {};
 
+    std::array<
+      std::array<
+        std::array<Thingp, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
+          all_thing_ptrs_at {};
+
     Level (void)
     {_
         newptr(this, "level");

@@ -166,3 +166,51 @@ TYPE& getref(std::array<std::array<std::array<TYPE,ZDIM>,YDIM>,XDIM> &arr,
     ASSERT(Z < arr[X][Y].size())
     return (arr[X][Y][Z]);
 }
+
+//
+// Four dimension array check
+//
+template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
+static inline
+void set(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM>& arr,
+         std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    ASSERT(Y >= 0)
+    ASSERT(Y < arr[X].size())
+    ASSERT(Z >= 0)
+    ASSERT(Z < arr[X][Y].size())
+    ASSERT(I >= 0)
+    ASSERT(I < arr[X][Y][Z].size())
+    arr[X][Y][Z][I] = v;
+}
+
+template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
+static inline
+TYPE get(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> const &arr,
+          std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    ASSERT(Y >= 0)
+    ASSERT(Y < arr[X].size())
+    ASSERT(Z >= 0)
+    ASSERT(Z < arr[X][Y].size())
+    ASSERT(I >= 0)
+    ASSERT(I < arr[X][Y][Z].size())
+    return (arr[X][Y][Z][I]);
+}
+
+template<class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM>
+static inline
+TYPE& getref(std::array<std::array<std::array<std::array<TYPE,IDIM>,ZDIM>,YDIM>,XDIM> &arr,
+             std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
+    ASSERT(X >= 0)
+    ASSERT(X < arr.size())
+    ASSERT(Y >= 0)
+    ASSERT(Y < arr[X].size())
+    ASSERT(Z >= 0)
+    ASSERT(Z < arr[X][Y].size())
+    ASSERT(I >= 0)
+    ASSERT(I < arr[X][Y][Z].size())
+    return (arr[X][Y][Z][I]);
+}

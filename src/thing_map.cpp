@@ -144,6 +144,9 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
+            if (!level->is_water(x, y)) {
+                continue;
+            }
             FOR_ALL_THINGS(level, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp)) {
@@ -190,6 +193,9 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
+            if (!level->is_water(x, y)) {
+                continue;
+            }
             FOR_ALL_THINGS(level, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp) && !tp_is_deep_water(tpp)) {

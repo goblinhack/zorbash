@@ -231,6 +231,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     my.t->cursor = nullptr;
     my.t->all_thing_ptrs = {};
     my.t->all_thing_ids_at = {};
+    my.t->all_thing_ptrs_at = {};
     my.t->all_things = {};
     my.t->all_active_things = {};
     my.t->all_gc_things = {};
