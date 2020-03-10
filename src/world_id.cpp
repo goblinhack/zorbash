@@ -41,12 +41,14 @@ void Level::put_thing (int x, int y, uint32_t id)
 
     if (free_slot != -1) {
         auto idp = &getref(all_thing_ids_at, x, y, free_slot);
+        auto t_p = &getref(all_thing_ptrs_at, x, y, free_slot);
 #ifdef ENABLE_THING_ID_LOGS
         if (t->is_loggable()) {
             t->log("put thing %08X at %u,%u slot %u", id, x, y, free_slot);
         }
 #endif
         *idp = id;
+        *t_p = t;
         return;
     }
 
@@ -90,7 +92,9 @@ void Level::remove_thing (int x, int y, uint32_t id)
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (*idp == id) {
+            auto t_p = &getref(all_thing_ptrs_at, x, y, slot);
             *idp = 0;
+            *t_p = 0;
 #ifdef ENABLE_THING_ID_LOGS
             if (t->is_loggable()) {
                 t->log("rem thing %08X at %u,%u slot %u", id, x, y, slot);

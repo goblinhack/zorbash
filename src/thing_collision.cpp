@@ -864,11 +864,10 @@ bool Thing::collision_obstacle (fpoint p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto slot : get(level->all_thing_ids_at, p.x, p.y)) {
-        if (!slot) {
+    for (auto it : get(level->all_thing_ptrs_at, p.x, p.y)) {
+        if (!it) {
             continue;
         }
-        auto it = thing_find(slot);
         if (collision_obstacle(it)) {
             return (true);
         }
