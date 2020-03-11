@@ -23,8 +23,9 @@ bool Level::is_anything_at (const int x, const int y)
         return (false);
     }
 
-    for (auto id : get(all_thing_ptrs_at, x, y)) {
-        if (id) {
+    for (auto t : get(all_thing_ptrs_at, x, y)) {
+        if (t) {
+            verify(t);
             return (true);
         }
     }
@@ -385,6 +386,7 @@ bool Level::is_monst (const int x, const int y)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             auto tpp = t->tp();
             if (tp_is_monst(tpp)) {
                 return (true);
@@ -407,6 +409,7 @@ bool Level::is_food (const int x, const int y)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             auto tpp = t->tp();
             if (tp_is_food(tpp)) {
                 return (true);
@@ -493,6 +496,7 @@ bool Level::is_key (const int x, const int y)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             auto tpp = t->tp();
             if (tp_is_key(tpp)) {
                 return (true);
@@ -547,6 +551,7 @@ bool Level::is_door (const int x, const int y)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             auto tpp = t->tp();
             if (tp_is_door(tpp)) {
                 return (true);
@@ -567,6 +572,7 @@ void Level::get_all_things_at_depth (int x, int y, int z,
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             auto tpp = t->tp();
             if (tpp->z_depth == z) {
                 l.push_back(t);
@@ -585,6 +591,7 @@ void Level::get_all_interesting_things_at (int x, int y, std::vector<Thingp> &l)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             if (t->is_interesting()) {
                 l.push_back(t);
             }
@@ -602,6 +609,7 @@ void Level::get_all_collision_things_at (int x, int y, std::vector<Thingp> &l)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             if (t->is_interesting() || t->is_obstacle()) {
                 l.push_back(t);
             }
@@ -619,6 +627,7 @@ void Level::get_all_cursor_path_things_at (int x, int y, std::vector<Thingp> &l)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             if (t->is_cursor_path()) {
                 l.push_back(t);
             }
@@ -636,6 +645,7 @@ void Level::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             if (t->get_light()) {
                 l.push_back(t);
             }
@@ -646,9 +656,6 @@ void Level::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l
 void Level::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
 {_
     l.resize(0);
-#ifdef DEBUG_CRASH
-    std::vector<uint32_t> ids;
-#endif
 
     if (unlikely(is_oob(x, y))) {
         return;
@@ -656,15 +663,12 @@ void Level::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             if (t->is_active() || t->is_movable()) {
                 l.push_back(t);
 #ifdef DEBUG_CRASH
-                ids.push_back(id);
                 if (std::count(l.begin(), l.end(), t) > 1) {
                     t->die("thing appears multiple times on the map");
-                }
-                if (std::count(ids.begin(), ids.end(), id) > 1) {
-                    t->die("ID appears multiple times on the map");
                 }
 #endif
             }
@@ -682,6 +686,7 @@ void Level::get_all_obstacle_things_at (int x, int y, std::vector<Thingp> &l)
 
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
+            verify(t);
             if (t->is_obstacle()) {
                 l.push_back(t);
             }

@@ -27,6 +27,7 @@ void Thing::new_monst (void)
 AgeMap *Thing::get_age_map (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->age_map);
     } else {
         return (0);
@@ -60,6 +61,7 @@ void Thing::delete_age_map (void)
 Dmap *Thing::get_dmap_scent (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->dmap_scent);
     } else {
         return (0);
@@ -92,6 +94,7 @@ void Thing::delete_dmap_scent (void)
 Lightp Thing::get_light (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->light);
     } else {
         return (0);
@@ -723,6 +726,7 @@ int Thing::is_nutrition(void)
 fpoint Thing::get_lunge_to (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->lunge_to);
     } else {
         return (fpoint(0, 0));
@@ -742,6 +746,7 @@ void Thing::set_lunge_to (fpoint v)
 float Thing::get_bounce_height (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->bounce_height);
     } else {
         return (0);
@@ -761,6 +766,7 @@ void Thing::set_bounce_height (float v)
 float Thing::get_bounce_fade (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->bounce_fade);
     } else {
         return (0);
@@ -780,6 +786,7 @@ void Thing::set_bounce_fade (float v)
 int Thing::get_bounce_count (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->bounce_count);
     } else {
         return (0);
@@ -799,6 +806,7 @@ void Thing::set_bounce_count (int v)
 float Thing::get_fadeup_height (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->fadeup_height);
     } else {
         return (0);
@@ -818,6 +826,7 @@ void Thing::set_fadeup_height (float v)
 float Thing::get_fadeup_fade (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->fadeup_fade);
     } else {
         return (0);
@@ -837,6 +846,7 @@ void Thing::set_fadeup_fade (float v)
 std::string Thing::get_msg (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->msg);
     } else {
         return ("");
@@ -856,6 +866,7 @@ void Thing::set_msg (std::string v)
 float Thing::get_submerged_offset (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->submerged_offset);
     } else {
         return (0);
@@ -875,6 +886,7 @@ void Thing::set_submerged_offset (float v)
 int Thing::get_gold (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->gold);
     } else {
         return (0);
@@ -932,6 +944,7 @@ int Thing::incr_gold (void)
 uint32_t Thing::get_tick (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->tick);
     } else {
         return (0);
@@ -989,6 +1002,7 @@ uint32_t Thing::incr_tick (void)
 int Thing::get_stats_health (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats_health);
     } else {
         return (0);
@@ -1046,6 +1060,7 @@ int Thing::incr_stats_health (void)
 int Thing::get_stats_health_max (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats_health_max);
     } else {
         return (0);
@@ -1103,6 +1118,7 @@ int Thing::incr_stats_health_max (void)
 int Thing::get_stats_defence (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats_defence);
     } else {
         return (0);
@@ -1160,6 +1176,7 @@ int Thing::incr_stats_defence (void)
 int Thing::get_stats_defence_max (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats_defence_max);
     } else {
         return (0);
@@ -1217,6 +1234,7 @@ int Thing::incr_stats_defence_max (void)
 int Thing::get_stats_attack (void)
 {_
     if (monst) {
+        verify(monst);
         if (monst->stats_attack) {
             return (monst->stats_attack);
         }
@@ -1277,6 +1295,7 @@ int Thing::incr_stats_attack (void)
 int Thing::get_stats_attack_max (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats_attack_max);
     } else {
         return (0);
@@ -1334,6 +1353,7 @@ int Thing::incr_stats_attack_max (void)
 int Thing::get_stats_attack_rate_tenths (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats_attack_rate_tenths);
     } else {
         return (0);
@@ -1391,6 +1411,7 @@ int Thing::incr_stats_attack_rate_tenths (void)
 int Thing::get_stats_attacked_rate_tenths (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats_attacked_rate_tenths);
     } else {
         return (0);
@@ -1448,6 +1469,7 @@ int Thing::incr_stats_attacked_rate_tenths (void)
 int Thing::get_stats01 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats01);
     } else {
         return (0);
@@ -1505,6 +1527,7 @@ int Thing::incr_stats01 (void)
 int Thing::get_stats02 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats02);
     } else {
         return (0);
@@ -1562,6 +1585,7 @@ int Thing::incr_stats02 (void)
 int Thing::get_stats03 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats03);
     } else {
         return (0);
@@ -1619,6 +1643,7 @@ int Thing::incr_stats03 (void)
 int Thing::get_stats04 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats04);
     } else {
         return (0);
@@ -1676,6 +1701,7 @@ int Thing::incr_stats04 (void)
 int Thing::get_stats05 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats05);
     } else {
         return (0);
@@ -1733,6 +1759,7 @@ int Thing::incr_stats05 (void)
 int Thing::get_stats06 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats06);
     } else {
         return (0);
@@ -1790,6 +1817,7 @@ int Thing::incr_stats06 (void)
 int Thing::get_stats07 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats07);
     } else {
         return (0);
@@ -1847,6 +1875,7 @@ int Thing::incr_stats07 (void)
 int Thing::get_stats08 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats08);
     } else {
         return (0);
@@ -1904,6 +1933,7 @@ int Thing::incr_stats08 (void)
 int Thing::get_stats09 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats09);
     } else {
         return (0);
@@ -1961,6 +1991,7 @@ int Thing::incr_stats09 (void)
 int Thing::get_stats10 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats10);
     } else {
         return (0);
@@ -2018,6 +2049,7 @@ int Thing::incr_stats10 (void)
 int Thing::get_stats11 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats11);
     } else {
         return (0);
@@ -2075,6 +2107,7 @@ int Thing::incr_stats11 (void)
 int Thing::get_stats12 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats12);
     } else {
         return (0);
@@ -2132,6 +2165,7 @@ int Thing::incr_stats12 (void)
 int Thing::get_stats13 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats13);
     } else {
         return (0);
@@ -2189,6 +2223,7 @@ int Thing::incr_stats13 (void)
 int Thing::get_stats14 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats14);
     } else {
         return (0);
@@ -2246,6 +2281,7 @@ int Thing::incr_stats14 (void)
 int Thing::get_stats15 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats15);
     } else {
         return (0);
@@ -2303,6 +2339,7 @@ int Thing::incr_stats15 (void)
 int Thing::get_stats16 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats16);
     } else {
         return (0);
@@ -2360,6 +2397,7 @@ int Thing::incr_stats16 (void)
 int Thing::get_stats17 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats17);
     } else {
         return (0);
@@ -2417,6 +2455,7 @@ int Thing::incr_stats17 (void)
 int Thing::get_stats18 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats18);
     } else {
         return (0);
@@ -2474,6 +2513,7 @@ int Thing::incr_stats18 (void)
 int Thing::get_stats19 (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats19);
     } else {
         return (0);
@@ -2531,6 +2571,7 @@ int Thing::incr_stats19 (void)
 int Thing::get_stats_strength (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->stats_strength);
     } else {
         return (0);
@@ -2588,6 +2629,7 @@ int Thing::incr_stats_strength (void)
 int Thing::get_owned_count (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->owned_count);
     } else {
         return (0);
@@ -2635,6 +2677,7 @@ int Thing::incr_owned_count (void)
 timestamp_t Thing::get_timestamp_lunge_begin (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_lunge_begin);
     } else {
         return (0);
@@ -2682,6 +2725,7 @@ timestamp_t Thing::incr_timestamp_lunge_begin (void)
 timestamp_t Thing::get_timestamp_lunge_end (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_lunge_end);
     } else {
         return (0);
@@ -2729,6 +2773,7 @@ timestamp_t Thing::incr_timestamp_lunge_end (void)
 timestamp_t Thing::get_timestamp_bounce_begin (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_bounce_begin);
     } else {
         return (0);
@@ -2776,6 +2821,7 @@ timestamp_t Thing::incr_timestamp_bounce_begin (void)
 timestamp_t Thing::get_timestamp_bounce_end (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_bounce_end);
     } else {
         return (0);
@@ -2823,6 +2869,7 @@ timestamp_t Thing::incr_timestamp_bounce_end (void)
 timestamp_t Thing::get_timestamp_fadeup_begin (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_fadeup_begin);
     } else {
         return (0);
@@ -2870,6 +2917,7 @@ timestamp_t Thing::incr_timestamp_fadeup_begin (void)
 timestamp_t Thing::get_timestamp_fadeup_end (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_fadeup_end);
     } else {
         return (0);
@@ -2917,6 +2965,7 @@ timestamp_t Thing::incr_timestamp_fadeup_end (void)
 timestamp_t Thing::get_timestamp_last_attacked (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_last_attacked);
     } else {
         return (0);
@@ -2964,6 +3013,7 @@ timestamp_t Thing::incr_timestamp_last_attacked (void)
 timestamp_t Thing::get_timestamp_last_attack (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_last_attack);
     } else {
         return (0);
@@ -3011,6 +3061,7 @@ timestamp_t Thing::incr_timestamp_last_attack (void)
 timestamp_t Thing::get_timestamp_flip_start (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_flip_start);
     } else {
         return (0);
@@ -3058,6 +3109,7 @@ timestamp_t Thing::incr_timestamp_flip_start (void)
 timestamp_t Thing::get_timestamp_move_begin (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_move_begin);
     } else {
         return (0);
@@ -3105,6 +3157,7 @@ timestamp_t Thing::incr_timestamp_move_begin (void)
 timestamp_t Thing::get_timestamp_move_end (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_move_end);
     } else {
         return (0);
@@ -3152,6 +3205,7 @@ timestamp_t Thing::incr_timestamp_move_end (void)
 timestamp_t Thing::get_timestamp_born (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_born);
     } else {
         return (0);
@@ -3199,6 +3253,7 @@ timestamp_t Thing::incr_timestamp_born (void)
 timestamp_t Thing::get_timestamp_hunger_tick (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_hunger_tick);
     } else {
         return (0);
@@ -3246,6 +3301,7 @@ timestamp_t Thing::incr_timestamp_hunger_tick (void)
 timestamp_t Thing::get_timestamp_ai_next (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_ai_next);
     } else {
         return (0);
@@ -3293,6 +3349,7 @@ timestamp_t Thing::incr_timestamp_ai_next (void)
 timestamp_t Thing::get_timestamp_collision (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->timestamp_collision);
     } else {
         return (0);
@@ -3340,6 +3397,7 @@ timestamp_t Thing::incr_timestamp_collision (void)
 uint32_t Thing::get_owner_id (void)
 {_
     if (monst) {
+        verify(monst);
         return (monst->owner_id);
     } else {
         return (0);

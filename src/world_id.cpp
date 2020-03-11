@@ -41,14 +41,13 @@ void Level::put_thing (int x, int y, uint32_t id)
 
     if (free_slot != -1) {
         auto idp = &getref(all_thing_ids_at, x, y, free_slot);
-        auto t_p = &getref(all_thing_ptrs_at, x, y, free_slot);
+        level->all_thing_ptrs_at[x][y].push_back(t);
 #ifdef ENABLE_THING_ID_LOGS
         if (t->is_loggable()) {
             t->log("put thing %08X at %u,%u slot %u", id, x, y, free_slot);
         }
 #endif
         *idp = id;
-        *t_p = t;
         return;
     }
 
@@ -92,9 +91,23 @@ void Level::remove_thing (int x, int y, uint32_t id)
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (*idp == id) {
-            auto t_p = &getref(all_thing_ptrs_at, x, y, slot);
             *idp = 0;
-            *t_p = 0;
+            auto v = &level->all_thing_ptrs_at[x][y];
+            auto b = v->begin();
+            auto e = v->end();
+
+#ifdef SLOWER_BUT_USES_FANCY_STL
+            auto r = std::remove_if(b, e, [t /* pass t by value */](Thingp x) { return (x == t); });
+            v->erase(r, e);
+#else
+            for (auto i = b; i < e; i++) {
+                if (*i == t) {
+                    v->erase(i);
+                    break;
+                }
+            }
+#endif
+
 #ifdef ENABLE_THING_ID_LOGS
             if (t->is_loggable()) {
                 t->log("rem thing %08X at %u,%u slot %u", id, x, y, slot);

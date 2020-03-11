@@ -116,7 +116,7 @@ public:
 
     std::array<
       std::array<
-        std::array<Thingp, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
+        std::vector<Thingp>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ptrs_at {};
 
     Level (void)
