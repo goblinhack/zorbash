@@ -147,10 +147,17 @@ public:
     //
     // Display depth filter
     //
-    #define FOR_ALL_THINGS(level, t, x, y, z)                         \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);              \
-        level->get_all_things_at_depth(x, y, z, JOIN1(tmp, __LINE__)); \
-        for (auto t : JOIN1(tmp, __LINE__))
+    #define FOR_ALL_THINGS(level, t, x, y, z)                       \
+        if (!(level)->is_oob(x, y)) {                               \
+            for (auto t : get(level->all_thing_ptrs_at, x, y)) {    \
+                verify(t);                                          \
+                auto tpp = t->tp();                                 \
+                if (tpp->z_depth != z) {                            \
+                    continue;                                       \
+                }
+
+    #define FOR_ALL_THINGS_END() } }
+
     void get_all_things_at_depth(int x, int y, int z, std::vector<Thingp> &);
 
     //

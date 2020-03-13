@@ -175,7 +175,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                         offset_y + game->config.one_pixel_gl_height, x, y);
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height, x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     glEnable(GL_TEXTURE_2D);
@@ -212,7 +212,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
                 tile_blit(tile, blit_tl, blit_br);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -221,8 +221,9 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     // The water tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
-    std::array<
+    static std::array<
       std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> tile_map = {};
+    tile_map = {};
 
     for (auto y = miny; y < maxy; y++) {
         const auto Y = y - miny + 2;
@@ -324,7 +325,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                 }
                 FOR_ALL_THINGS(level, t, x, y, z) {
                     t->blit_upside_down(offset_x, offset_y, x, y);
-                }
+                } FOR_ALL_THINGS_END()
             }
         }
     }
@@ -469,7 +470,7 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
                 tile_blit(tile, blit_tl, blit_br);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -670,7 +671,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                 t->blit(offset_x,
                         offset_y - game->config.one_pixel_gl_height * 2,
                         x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -709,7 +710,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                 t->blit(offset_x,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     glEnable(GL_TEXTURE_2D);
@@ -727,7 +728,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_THINGS(level, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -912,7 +913,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                         offset_y + game->config.one_pixel_gl_height * 
                             ((level->seed * x) % 10),
                         x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -942,7 +943,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 t->blit(offset_x,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
 
@@ -961,7 +962,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_THINGS(level, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -1116,7 +1117,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
                 t->blit(offset_x,
                         offset_y - game->config.one_pixel_gl_height,
                         x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -1138,7 +1139,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
                     }
                 }
                 t->blit(offset_x, offset_y, x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -1169,7 +1170,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
                 auto bry = t->last_blit_br.y;
                 blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
                 // t->blit(offset_x, offset_y, x, y);
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     blit_flush();
@@ -1239,7 +1240,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     FOR_ALL_THINGS(level, t, x, y, z) {
                         glcolorfast(GRAY30);
                         t->blit(offset_x, offset_y, x, y);
-                    }
+                    } FOR_ALL_THINGS_END()
                 }
             }
         }
@@ -1256,7 +1257,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     FOR_ALL_THINGS(level, t, x, y, z) {
                         glcolorfast(GRAY50);
                         t->blit(offset_x, offset_y, x, y);
-                    }
+                    } FOR_ALL_THINGS_END()
                 }
             }
         }
@@ -1297,7 +1298,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     if (unlikely(tp_gfx_animated(tpp))) {
                         t->animate();
                     }
-                }
+                } FOR_ALL_THINGS_END()
             }
         }
     }
@@ -1346,7 +1347,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                 FOR_ALL_THINGS(level, t, x, y, z) {
                     glcolorfast(WHITE);
                     t->blit(offset_x, offset_y, x, y);
-                }
+                } FOR_ALL_THINGS_END()
             }
         }
     }

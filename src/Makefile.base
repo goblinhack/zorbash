@@ -20,20 +20,20 @@ GAME_OBJECTS=				\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
     $(OBJDIR)/game_config_gfx.o		\
+    $(OBJDIR)/game_config_keyboard.o	\
     $(OBJDIR)/game_config_other.o	\
     $(OBJDIR)/game_config_sound.o	\
-    $(OBJDIR)/game_config_keyboard.o	\
     $(OBJDIR)/game_config_top.o 	\
     $(OBJDIR)/game_dead.o 		\
     $(OBJDIR)/game_display.o 		\
     $(OBJDIR)/game_dump.o 		\
     $(OBJDIR)/game_error.o 		\
-    $(OBJDIR)/game_notice.o 		\
     $(OBJDIR)/game_fini.o 		\
     $(OBJDIR)/game_init.o 		\
     $(OBJDIR)/game_load.o 		\
     $(OBJDIR)/game_log.o 		\
     $(OBJDIR)/game_main_menu.o 		\
+    $(OBJDIR)/game_notice.o 		\
     $(OBJDIR)/game_paused.o 		\
     $(OBJDIR)/game_quit.o 		\
     $(OBJDIR)/game_save.o 		\
@@ -44,14 +44,17 @@ GAME_OBJECTS=				\
     $(OBJDIR)/gl.o 			\
     $(OBJDIR)/hacklib.o 		\
     $(OBJDIR)/hexdump.o 		\
-    $(OBJDIR)/placed_level.o 		\
     $(OBJDIR)/level.o 			\
+    $(OBJDIR)/level_fini.o 		\
+    $(OBJDIR)/level_init.o 		\
+    $(OBJDIR)/level_thing.o 		\
     $(OBJDIR)/light.o 			\
     $(OBJDIR)/log.o 			\
     $(OBJDIR)/main.o 			\
     $(OBJDIR)/map.o 			\
     $(OBJDIR)/minilzo.o 		\
     $(OBJDIR)/pcg_basic.o 		\
+    $(OBJDIR)/placed_level.o 		\
     $(OBJDIR)/player.o 			\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_level.o 		\
@@ -78,7 +81,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
-    $(OBJDIR)/thing_path.o 		\
     $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_health.o 		\
@@ -88,8 +90,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
-    $(OBJDIR)/thing_shove.o 		\
     $(OBJDIR)/thing_msg.o 		\
+    $(OBJDIR)/thing_path.o 		\
+    $(OBJDIR)/thing_shove.o 		\
     $(OBJDIR)/thing_template.o 		\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_tile.o 		\
@@ -109,10 +112,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/wid_tiles.o 		\
     $(OBJDIR)/world.o 			\
     $(OBJDIR)/world_fini.o 		\
-    $(OBJDIR)/level_fini.o 		\
-    $(OBJDIR)/world_id.o 		\
     $(OBJDIR)/world_init.o 		\
-    $(OBJDIR)/level_init.o 		\
 
 #
 # compile
