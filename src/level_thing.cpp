@@ -10,6 +10,7 @@
 void Level::put_thing (int x, int y, uint32_t id)
 {_
     auto t = thing_find(id);
+
     if (!id) {
         t->err("null id at (%d,%d)", x, y);
     }

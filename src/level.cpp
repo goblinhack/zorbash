@@ -570,6 +570,12 @@ void Level::get_all_things_at_depth (int x, int y, int z,
         return;
     }
 
+#ifdef FUTURE_GCC
+    auto v = get(all_thing_ptrs_at, x, y);
+    for (auto element : v | views::filter([](auto i) { return i != nullptr; }))
+    {
+    }
+#endif
     for (auto t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
             verify(t);
