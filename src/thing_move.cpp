@@ -521,7 +521,7 @@ void Thing::update_pos (fpoint to, bool immediately)
         if (is_player()) {
             if (((int)old_at.x != (int)new_at.x) ||
                 ((int)old_at.y != (int)new_at.y)) {
-                game->update_minimap();
+                level->minimap_valid = false;
             }
         }
     }

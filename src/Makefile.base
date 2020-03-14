@@ -47,6 +47,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level.o 			\
     $(OBJDIR)/level_fini.o 		\
     $(OBJDIR)/level_init.o 		\
+    $(OBJDIR)/level_map.o 		\
     $(OBJDIR)/level_thing.o 		\
     $(OBJDIR)/light.o 			\
     $(OBJDIR)/log.o 			\

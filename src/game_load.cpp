@@ -276,6 +276,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* world_at */             in >> bits(my.t->world_at);
 
     my.t->minimap_valid = false;
+    my.t->map_changed = true;
     my.t->cursor_needs_update = true;
     my.t->map_follow_player = true;
 
@@ -413,6 +414,7 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.current_level);
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
+    my.t.update_map();
     return (in);
 }
 

@@ -77,6 +77,11 @@ public:
     //
     int                        seed {};
 
+    //
+    // Something moved on the map; update caches
+    //
+    bool                       map_changed {};
+
     bool                       cursor_needs_update = false;
     bool                       cursor_found = false;
     fpoint                     cursor_at;
@@ -105,6 +110,9 @@ public:
     std::map<uint32_t, Thingp> all_things {};
     std::map<uint32_t, Thingp> all_active_things {};
     std::map<uint32_t, Thingp> all_gc_things {};
+
+    std::array< 
+      std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> water_tile_map = {};
 
     //
     // All thing IDs
@@ -215,6 +223,10 @@ public:
         level->get_all_cursor_path_things_at(x, y, JOIN1(tmp, __LINE__)); \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_cursor_path_things_at(int x, int y, std::vector<Thingp> &);
+
+    void update_map(void);
+    void update_minimap(void);
+    void update_water_map(void);
 
     void clear(void);
     bool is_anything_at(const int x, const int y);
@@ -528,7 +540,7 @@ public:
     void save_select(void);
     void soft_pause(void);
     void soft_unpause(void);
-    void update_minimap(void);
+    void update_map(void);
 
     //
     // Save file name, contains the date and other useful save slot info

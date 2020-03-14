@@ -218,47 +218,18 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     blit_flush();
 
     //
-    // The water tiles are twice the size of normal tiles, so work out
-    // where to draw them to avoid overlaps
-    //
-    static std::array<
-      std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> tile_map = {};
-    tile_map = {};
-
-    for (auto y = miny; y < maxy; y++) {
-        const auto Y = y - miny + 2;
-        for (auto x = minx; x < maxx; x++) {
-            if (level->is_water(x, y) || level->is_deep_water(x, y)) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                const auto X = x - minx + 2;
-                for (auto dx = -2; dx <= 3; dx++) {
-                    for (auto dy = -2; dy <= 3; dy++) {
-                        set(tile_map, X+dx, Y+dy, true);
-                    }
-                }
-            }
-        }
-    }
-
-    //
     // Finally blit the transparent water tiles, still to its
     // own buffer.
     //
     blit_fbo_bind(FBO_LIGHT_MERGED);
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
+    auto tile_map = level->water_tile_map;
     blit_init();
     for (auto y = miny; y < maxy; y+=2) {
-        const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x+=2) {
-            const auto X = x - minx + 2;
-
-            if (get(tile_map, X, Y)) {
-                set(tile_map, X, Y, false);
+            if (get(tile_map, x, y)) {
+                set(tile_map, x, y, false);
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game->config.tile_gl_width;
@@ -276,7 +247,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                 brx -= offset_x;
                 bry -= offset_y;
 
-                auto tile = get(water, X % WATER_ACROSS, (Y + (int)water_step2/4) % WATER_DOWN);
+                auto tile = get(water, x % WATER_ACROSS, (y + (int)water_step2/4) % WATER_DOWN);
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;
