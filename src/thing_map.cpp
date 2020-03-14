@@ -447,45 +447,17 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
     blit_flush();
 
     //
-    // The deep_water tiles are twice the size of normal tiles, so work out
-    // where to draw them to avoid overlaps
-    //
-    std::array<
-      std::array<bool, MAP_HEIGHT>, MAP_WIDTH> tile_map {};
-
-    for (auto y = miny; y < maxy; y++) {
-        const auto Y = y - miny + 2;
-        for (auto x = minx; x < maxx; x++) {
-            if (level->is_deep_water(x, y)) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                const auto X = x - minx + 2;
-                for (auto dx = -2; dx <= 3; dx++) {
-                    for (auto dy = -2; dy <= 3; dy++) {
-                        set(tile_map, X+dx, Y+dy, true);
-                    }
-                }
-            }
-        }
-    }
-
-    //
     // Finally blit the transparent deep_water tiles, still to its
     // own buffer.
     //
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
+    auto tile_map = level->deep_water_tile_map;
     blit_init();
     for (auto y = miny; y < maxy; y++) {
-        const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
-            const auto X = x - minx + 2;
-
-            if (get(tile_map, X, Y)) {
-                set(tile_map, X, Y, false);
+            if (get(tile_map, x, y)) {
+                set(tile_map, x, y, false);
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game->config.tile_gl_width;
@@ -503,7 +475,7 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
                 brx -= offset_x;
                 bry -= offset_y;
 
-                auto tile = get(deep_water, X % DEEP_WATER_ACROSS, (Y + (int)deep_water_step2/4) % DEEP_WATER_DOWN);
+                auto tile = get(deep_water, x % DEEP_WATER_ACROSS, (y + (int)deep_water_step2/4) % DEEP_WATER_DOWN);
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;
