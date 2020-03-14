@@ -268,6 +268,7 @@ void Level::init (point3d at, int seed_in)
     log("created, seed %u", seed);
     log("-");
 
+    update_map();
     game->started = true;
 }
 

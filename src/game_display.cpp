@@ -7,9 +7,9 @@
 #include "my_dungeon.h"
 #include "my_thing.h"
 
-void Game::update_minimap (void)
+void Game::update_map (void)
 {_
-    thing_render_minimap();
+    level->update_map();
 }
 
 void Game::display (void)
@@ -18,11 +18,18 @@ void Game::display (void)
         return;
     }
 
-    if (!level->minimap_valid) {
-        thing_render_minimap();
+    if (level->map_changed) {
+        static int last_done;
+        if (time_have_x_secs_passed_since(1, last_done)) {
+            level->map_changed = false;
+            last_done = time_get_time_ms_cached();
+            game->update_map();
+        }
     }
 
-    thing_render_minimap();
+    if (!level->minimap_valid) {
+        level->update_minimap();
+    }
 
     blit_fbo_bind(FBO_MAIN);
     glClearColor(0, 0, 0, 0);

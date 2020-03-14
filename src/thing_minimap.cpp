@@ -12,10 +12,10 @@
 #include <algorithm>
 #include <list>
 
-void thing_render_minimap (void)
+void Level::update_minimap (void)
 {_
     static int last_rendered;
-    if (!time_have_x_secs_passed_since(1, last_rendered)) {
+    if (!time_have_x_tenths_passed_since(1, last_rendered)) {
         return;
     }
     last_rendered = time_get_time_ms_cached();
@@ -50,13 +50,13 @@ void thing_render_minimap (void)
                 } else if (level->is_chasm(x, y)) {
                     glcolor(BLACK);
                 } else if (level->is_wall(x, y)) {
-                       if (level->is_visited(x, y)) {
+                    if (level->is_visited(x, y)) {
                         glcolor(GRAY80);
                     } else {
                         glcolor(GRAY70);
                     }
                 } else if (level->is_rock(x, y)) {
-                       if (level->is_visited(x, y)) {
+                    if (level->is_visited(x, y)) {
                         glcolor(GRAY70);
                     } else {
                         glcolor(GRAY60);
