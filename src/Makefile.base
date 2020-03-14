@@ -46,6 +46,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/hexdump.o 		\
     $(OBJDIR)/level.o 			\
     $(OBJDIR)/level_fini.o 		\
+    $(OBJDIR)/level_display.o 		\
     $(OBJDIR)/level_init.o 		\
     $(OBJDIR)/level_map.o 		\
     $(OBJDIR)/level_thing.o 		\

@@ -9,11 +9,12 @@
 
 void Level::update_water_map (void)
 {
-CON("upd map");
     //
     // The water tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
+    lava_tile_map = {};
+    chasm_tile_map = {};
     water_tile_map = {};
     deep_water_tile_map = {};
 
@@ -31,6 +32,32 @@ CON("upd map");
                         if (level->is_deep_water(x, y)) {
                             set(deep_water_tile_map, x+dx, y+dy, true);
                         }
+                    }
+                }
+            }
+
+            if (level->is_lava(x, y)) {
+                if (unlikely(game->config.gfx_show_hidden)) {
+                    if (!level->is_dungeon(x, y)) {
+                        continue;
+                    }
+                }
+                for (auto dx = -2; dx <= 3; dx++) {
+                    for (auto dy = -2; dy <= 3; dy++) {
+                        set(lava_tile_map, x+dx, y+dy, true);
+                    }
+                }
+            }
+
+            if (level->is_chasm(x, y)) {
+                if (unlikely(game->config.gfx_show_hidden)) {
+                    if (!level->is_dungeon(x, y)) {
+                        continue;
+                    }
+                }
+                for (auto dx = -2; dx <= 3; dx++) {
+                    for (auto dy = 0; dy <= 2; dy++) {
+                        set(chasm_tile_map, x+dx, y+dy, true);
                     }
                 }
             }

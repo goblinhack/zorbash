@@ -301,6 +301,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
             }
         }
     }
+    my.t->update_map();
     return (in);
 }
 
@@ -414,7 +415,6 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.current_level);
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
-    my.t.update_map();
     return (in);
 }
 

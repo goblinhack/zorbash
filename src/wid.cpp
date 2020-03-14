@@ -5661,7 +5661,7 @@ _
     // FPS counter.
     //
     if (game->config.fps_counter) {
-        ascii_putf(ASCII_WIDTH - 6, ASCII_HEIGHT - 1, GREEN, BLACK,
+        ascii_putf(0, ASCII_HEIGHT - 1, GREEN, BLACK,
                    L"%u FPS", game->fps_value);
     }
 

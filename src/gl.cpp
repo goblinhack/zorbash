@@ -414,7 +414,7 @@ void blit_init (void)
     // If the screen size has changed or this is the first run, allocate our
     // buffer if our size requirements have changed.
     //
-    gl_array_size_required = 32 * 1024 * 1024;
+    gl_array_size_required = 8 * 1024 * 1024;
 
     gl_array_buf = (__typeof__(gl_array_buf))
                     myzalloc(gl_array_size_required, "GL xy buffer");

@@ -115,6 +115,10 @@ public:
                     water_tile_map = {};
     std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
                     deep_water_tile_map = {};
+    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    lava_tile_map = {};
+    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    chasm_tile_map = {};
 
     //
     // All thing IDs
@@ -154,10 +158,14 @@ public:
     #define JOIN1(X,Y) X##Y
     #define JOIN(X,Y) JOIN1(X,Y)
 
-    //
-    // Display depth filter
-    //
-    #define FOR_ALL_THINGS(level, t, x, y, z)                       \
+    #define FOR_ALL_THINGS(level, t, x, y)                          \
+        if (!(level)->is_oob(x, y)) {                               \
+            for (auto t : get(level->all_thing_ptrs_at, x, y)) {    \
+                verify(t);                                          \
+
+    #define FOR_ALL_THINGS_END() } }
+
+    #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : get(level->all_thing_ptrs_at, x, y)) {    \
                 verify(t);                                          \
@@ -166,7 +174,7 @@ public:
                     continue;                                       \
                 }
 
-    #define FOR_ALL_THINGS_END() } }
+    #define FOR_ALL_THINGS_AT_DEPTH_END() } }
 
     void get_all_things_at_depth(int x, int y, int z, std::vector<Thingp> &);
 
@@ -226,6 +234,7 @@ public:
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_cursor_path_things_at(int x, int y, std::vector<Thingp> &);
 
+    void display(void);
     void update_map(void);
     void update_minimap(void);
     void update_water_map(void);
@@ -542,7 +551,6 @@ public:
     void save_select(void);
     void soft_pause(void);
     void soft_unpause(void);
-    void update_map(void);
 
     //
     // Save file name, contains the date and other useful save slot info
