@@ -147,7 +147,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
             if (!level->is_water(x, y)) {
                 continue;
             }
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp)) {
                     continue;
@@ -175,7 +175,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                         offset_y + game->config.one_pixel_gl_height, x, y);
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height, x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     glEnable(GL_TEXTURE_2D);
@@ -196,7 +196,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
             if (!level->is_water(x, y)) {
                 continue;
             }
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp) && !tp_is_deep_water(tpp)) {
                     continue;
@@ -212,7 +212,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
                 tile_blit(tile, blit_tl, blit_br);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
@@ -226,10 +226,10 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     glcolor(WHITE);
     auto tile_map = level->water_tile_map;
     blit_init();
+
     for (auto y = miny; y < maxy; y+=2) {
         for (auto x = minx; x < maxx; x+=2) {
             if (get(tile_map, x, y)) {
-                set(tile_map, x, y, false);
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game->config.tile_gl_width;
@@ -294,9 +294,9 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                         continue;
                     }
                 }
-                FOR_ALL_THINGS(level, t, x, y, z) {
+                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                     t->blit_upside_down(offset_x, offset_y, x, y);
-                } FOR_ALL_THINGS_END()
+                } FOR_ALL_THINGS_AT_DEPTH_END()
             }
         }
     }
@@ -320,7 +320,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     if (thing_map_black_and_white) {
         c = GREY80;
     }
-    c.a = 120;
+    c.a = 180;
     glcolor(c);
     blit_fbo(FBO_REFLECTION);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -424,7 +424,7 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
 
                 if (!tp_is_deep_water(tpp)) {
@@ -441,7 +441,7 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
                 fpoint blit_br(t->br.x - offset_x, t->br.y - offset_y);
 
                 tile_blit(tile, blit_tl, blit_br);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
@@ -454,10 +454,10 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
     glcolor(WHITE);
     auto tile_map = level->deep_water_tile_map;
     blit_init();
+
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             if (get(tile_map, x, y)) {
-                set(tile_map, x, y, false);
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game->config.tile_gl_width;
@@ -581,7 +581,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
                     if (!level->is_dungeon(x, y)) {
                         continue;
@@ -614,7 +614,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                 t->blit(offset_x,
                         offset_y - game->config.one_pixel_gl_height * 2,
                         x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
@@ -632,7 +632,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
                     if (!level->is_dungeon(x, y)) {
                         continue;
@@ -653,7 +653,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                 t->blit(offset_x,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     glEnable(GL_TEXTURE_2D);
@@ -669,51 +669,25 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
 
     //
-    // The lava tiles are twice the size of normal tiles, so work out
-    // where to draw them to avoid overlaps
-    //
-    std::array<
-      std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> tile_map = {};
-
-    for (auto y = miny; y < maxy; y++) {
-        const auto Y = y - miny + 2;
-        for (auto x = minx; x < maxx; x++) {
-            if (level->is_lava(x, y)) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                const auto X = x - minx + 2;
-                for (auto dx = -2; dx <= 3; dx++) {
-                    for (auto dy = -2; dy <= 3; dy++) {
-                        set(tile_map, X+dx, Y+dy, true);
-                    }
-                }
-            }
-        }
-    }
-
-    //
     // Finally blit the lava and then the buffer to the display.
     //
+
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
+    auto tile_map = level->lava_tile_map;
     blit_init();
+
     for (auto y = miny; y < maxy; y++) {
-        const auto Y = y - miny + 2;
         for (auto x = minx; x < maxx; x++) {
-            const auto X = x - minx + 2;
-            if (get(tile_map, X, Y)) {
-                set(tile_map, X, Y, false);
+            if (get(tile_map, x, y)) {
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game->config.tile_gl_width;
@@ -840,7 +814,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
                     if (!level->is_dungeon(x, y)) {
                         continue;
@@ -856,7 +830,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                         offset_y + game->config.one_pixel_gl_height * 
                             ((level->seed * x) % 10),
                         x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
@@ -871,7 +845,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
                     if (!level->is_dungeon(x, y)) {
                         continue;
@@ -886,7 +860,7 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
                 t->blit(offset_x,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
 
@@ -903,58 +877,33 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
-
-    //
-    // The chasm tiles are twice the size of normal tiles, so work out
-    // where to draw them to avoid overlaps
-    //
-    std::array<
-      std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> tile_map = {};
-
-    for (auto y = miny; y < maxy; y++) {
-        const auto Y = y - miny + 2;
-        for (auto x = minx; x < maxx; x++) {
-            if (level->is_chasm(x, y)) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                const auto X = x - minx + 2;
-                for (auto dx = -2; dx <= 3; dx++) {
-                    for (auto dy = 0; dy <= 2; dy++) {
-                        set(tile_map, X+dx, Y+dy, true);
-                    }
-                }
-            }
-        }
-    }
 
     //
     // Finally blit the chasm and then the buffer to the display.
     //
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
+    auto tile_map = level->chasm_tile_map;
     blit_init();
 
+    //
+    // Parallax
+    //
     float dx = level->map_wanted_at.x - level->map_at.x;
     dx *= -0.002;
     float dy = level->map_wanted_at.y - level->map_at.y;
     dy *= -0.002;
 
     for (auto x = minx; x < maxx; x++) {
-        const auto X = x - minx + 2;
         int in_chasm = 0;
         for (auto y = miny; y < maxy; y++) {
-            const auto Y = y - miny + 2;
-            if (get(tile_map, X, Y)) {
-                set(tile_map, X, Y, false);
+            if (get(tile_map, x, y)) {
                 auto tx = (double)(x &~1);
                 auto ty = (double)(y &~1);
                 double tlx = tx * game->config.tile_gl_width;
@@ -1030,7 +979,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
                     if (!level->is_dungeon(x, y)) {
                         continue;
@@ -1060,7 +1009,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
                 t->blit(offset_x,
                         offset_y - game->config.one_pixel_gl_height,
                         x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
@@ -1075,14 +1024,14 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
                     if (!level->is_dungeon(x, y)) {
                         continue;
                     }
                 }
                 t->blit(offset_x, offset_y, x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
@@ -1095,7 +1044,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 if (unlikely(game->config.gfx_show_hidden)) {
                     if (!level->is_dungeon(x, y)) {
                         continue;
@@ -1113,7 +1062,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
                 auto bry = t->last_blit_br.y;
                 blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
                 // t->blit(offset_x, offset_y, x, y);
-            } FOR_ALL_THINGS_END()
+            } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
     blit_flush();
@@ -1180,10 +1129,10 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     if (!level->is_visited(x, y)) {
                         continue;
                     }
-                    FOR_ALL_THINGS(level, t, x, y, z) {
+                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                         glcolorfast(GRAY30);
                         t->blit(offset_x, offset_y, x, y);
-                    } FOR_ALL_THINGS_END()
+                    } FOR_ALL_THINGS_AT_DEPTH_END()
                 }
             }
         }
@@ -1197,10 +1146,10 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     if (!level->is_visited(x, y)) {
                         continue;
                     }
-                    FOR_ALL_THINGS(level, t, x, y, z) {
+                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                         glcolorfast(GRAY50);
                         t->blit(offset_x, offset_y, x, y);
-                    } FOR_ALL_THINGS_END()
+                    } FOR_ALL_THINGS_AT_DEPTH_END()
                 }
             }
         }
@@ -1225,7 +1174,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             for (auto z = 0; z < MAP_DEPTH; z++) {
-                FOR_ALL_THINGS(level, t, x, y, z) {
+                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                     if (z == MAP_DEPTH_FLOOR) {
                         glcolorfast(WHITE);
                         t->blit(offset_x, offset_y, x, y);
@@ -1241,7 +1190,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     if (unlikely(tp_gfx_animated(tpp))) {
                         t->animate();
                     }
-                } FOR_ALL_THINGS_END()
+                } FOR_ALL_THINGS_AT_DEPTH_END()
             }
         }
     }
@@ -1287,10 +1236,10 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     for (auto y = miny; y < maxy; y++) {
         for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
             for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS(level, t, x, y, z) {
+                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                     glcolorfast(WHITE);
                     t->blit(offset_x, offset_y, x, y);
-                } FOR_ALL_THINGS_END()
+                } FOR_ALL_THINGS_AT_DEPTH_END()
             }
         }
     }

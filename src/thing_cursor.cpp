@@ -191,11 +191,9 @@ void thing_cursor_find (uint16_t minx, uint16_t miny,
     if (level->cursor_needs_update) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                for (auto z = 0; z < MAP_DEPTH; z++) {
-                    FOR_ALL_THINGS(level, t, x, y, z) {
-                        t->update_cursor();
-                    } FOR_ALL_THINGS_END();
-                }
+                FOR_ALL_THINGS(level, t, x, y) {
+                    t->update_cursor();
+                } FOR_ALL_THINGS_END();
             }
         }
     }
