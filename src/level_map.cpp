@@ -9,11 +9,13 @@
 
 void Level::update_water_map (void)
 {
+CON("upd map");
     //
     // The water tiles are twice the size of normal tiles, so work out
     // where to draw them to avoid overlaps
     //
     water_tile_map = {};
+    deep_water_tile_map = {};
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -26,6 +28,9 @@ void Level::update_water_map (void)
                 for (auto dx = -2; dx <= 3; dx++) {
                     for (auto dy = -2; dy <= 3; dy++) {
                         set(water_tile_map, x+dx, y+dy, true);
+                        if (level->is_deep_water(x, y)) {
+                            set(deep_water_tile_map, x+dx, y+dy, true);
+                        }
                     }
                 }
             }

@@ -111,8 +111,10 @@ public:
     std::map<uint32_t, Thingp> all_active_things {};
     std::map<uint32_t, Thingp> all_gc_things {};
 
-    std::array< 
-      std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8> water_tile_map = {};
+    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    water_tile_map = {};
+    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    deep_water_tile_map = {};
 
     //
     // All thing IDs
