@@ -147,15 +147,15 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
             if (!level->is_water(x, y)) {
                 continue;
             }
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
+                }
+            }
             FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp)) {
                     continue;
-                }
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
                 }
                 t->blit_outline_only(offset_x, offset_y, x, y);
             } FOR_ALL_THINGS_AT_DEPTH_END()
@@ -179,15 +179,15 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
             if (!level->is_water(x, y)) {
                 continue;
             }
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
+                }
+            }
             FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tp_is_water(tpp) && !tp_is_deep_water(tpp)) {
                     continue;
-                }
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
                 }
 
                 uint16_t tile = t->tile_curr;
@@ -407,16 +407,16 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
+                }
+            }
             FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
 
                 if (!tp_is_deep_water(tpp)) {
                     continue;
-                }
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
                 }
 
                 Tilep tile = tile_index_to_tile(t->tile_curr);
@@ -564,12 +564,12 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
                 }
+            }
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 t->blit(offset_x + game->config.one_pixel_gl_width * 2,
                         offset_y + game->config.one_pixel_gl_height * 2,
                         x, y);
@@ -615,12 +615,12 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
                 }
+            }
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
@@ -797,12 +797,12 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
                 }
+            }
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 t->blit(offset_x - game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
@@ -828,12 +828,12 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
                 }
+            }
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
@@ -962,12 +962,12 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
                 }
+            }
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 t->blit(offset_x + game->config.one_pixel_gl_width,
                         offset_y + game->config.one_pixel_gl_height,
                         x, y);
@@ -1007,12 +1007,12 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
+            if (unlikely(game->config.gfx_show_hidden)) {
+                if (!level->is_dungeon(x, y)) {
+                    continue;
                 }
+            }
+            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 t->blit(offset_x, offset_y, x, y);
             } FOR_ALL_THINGS_AT_DEPTH_END()
         }
