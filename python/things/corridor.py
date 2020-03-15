@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def corridor_init(name, tiles=[], tile_lefts=[]):
+def corridor_init(name, tiles=[], left_tiles=[]):
     x = tp.Tp(name)
 
     x.set_is_corridor(True)

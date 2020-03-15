@@ -43,6 +43,13 @@ public:
     // Index within the overall texture, left to right, top to bottom.
     //
     uint16_t index {};
+
+    //
+    // IF this tile has a specific outline pattern, like water ripples,
+    // then this is the jump to that outline within the same texture
+    //
+    uint16_t gfx_outline_index_offset {};
+
     uint16_t pix_width {};
     uint16_t pix_height {};
 
@@ -103,6 +110,7 @@ public:
     bool is_join_t90 {};
     bool is_join_t {};
     bool is_join_x {};
+    bool is_outline {};
 
     bool is_moving {};
     bool is_yyy5 {};
@@ -342,6 +350,7 @@ uint8_t tile_is_hp_25_percent(Tilep);
 uint8_t tile_is_hp_50_percent(Tilep);
 uint8_t tile_is_hp_75_percent(Tilep);
 uint8_t tile_is_hp_100_percent(Tilep);
+uint8_t gfx_outline_index_offset(Tilep);
 uint8_t tile_is_moving(Tilep);
 uint8_t tile_is_sleeping(Tilep);
 uint8_t tile_is_open(Tilep);

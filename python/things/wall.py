@@ -4,14 +4,14 @@ import tp
 
 def tp_init(name,
             tiles=[],
-            tile_lefts=[],
-            tile_rights=[],
-            tile_tops=[],
-            tile_bots=[],
-            tile_tls=[],
-            tile_trs=[],
-            tile_bls=[],
-            tile_brs=[]):
+            left_tiles=[],
+            right_tiles=[],
+            top_tiles=[],
+            bot_tiles=[],
+            tl_tiles=[],
+            tr_tiles=[],
+            bl_tiles=[],
+            br_tiles=[]):
 
     x = tp.Tp(name)
 
@@ -33,50 +33,50 @@ def tp_init(name,
     else:
         x.set_tile(tile=name)
 
-    if tile_lefts is not None:
-        for t in tile_lefts:
+    if left_tiles is not None:
+        for t in left_tiles:
             x.set_tile_left(t)
     else:
         x.set_tile_left(tile_left=name)
 
-    if tile_rights is not None:
-        for t in tile_rights:
+    if right_tiles is not None:
+        for t in right_tiles:
             x.set_tile_right(t)
     else:
         x.set_tile_right(tile_right=name)
 
-    if tile_tops is not None:
-        for t in tile_tops:
+    if top_tiles is not None:
+        for t in top_tiles:
             x.set_tile_top(t)
     else:
         x.set_tile_top(tile_top=name)
 
-    if tile_bots is not None:
-        for t in tile_bots:
+    if bot_tiles is not None:
+        for t in bot_tiles:
             x.set_tile_bot(t)
     else:
         x.set_tile_bot(tile_bot=name)
 
-    if tile_tls is not None:
-        for t in tile_tls:
+    if tl_tiles is not None:
+        for t in tl_tiles:
             x.set_tile_tl(t)
     else:
         x.set_tile_tl(tile_tl=name)
 
-    if tile_trs is not None:
-        for t in tile_trs:
+    if tr_tiles is not None:
+        for t in tr_tiles:
             x.set_tile_tr(t)
     else:
         x.set_tile_tr(tile_tr=name)
 
-    if tile_bls is not None:
-        for t in tile_bls:
+    if bl_tiles is not None:
+        for t in bl_tiles:
             x.set_tile_bl(t)
     else:
         x.set_tile_bl(tile_bl=name)
 
-    if tile_brs is not None:
-        for t in tile_brs:
+    if br_tiles is not None:
+        for t in br_tiles:
             x.set_tile_br(t)
     else:
         x.set_tile_br(tile_br=name)
@@ -103,19 +103,19 @@ def init():
                         "wall1.15",
                         "wall1.16",
                 ],
-            tile_lefts=[
+            left_tiles=[
                         "wall_deco1.left.1",
                         "wall_deco1.left.2",
                         "wall_deco1.left.3",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_rights=[
+            right_tiles=[
                         "wall_deco1.right.1",
                         "wall_deco1.right.2",
                         "wall_deco1.right.3",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_tops=[
+            top_tiles=[
                         "wall_deco1.top.1",
                         "wall_deco1.top.2",
                         "wall_deco1.top.3",
@@ -127,7 +127,7 @@ def init():
                         "wall_deco1.top.9",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_bots=[
+            bot_tiles=[
                         "wall_deco1.bot.1",
                         "wall_deco1.bot.2",
                         "wall_deco1.bot.3",
@@ -145,19 +145,19 @@ def init():
                         "wall_deco1.bot.15",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_tls=[
+            tl_tiles=[
                         "wall_deco1.tl.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_trs=[
+            tr_tiles=[
                         "wall_deco1.tr.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_brs=[
+            br_tiles=[
                         "wall_deco1.br.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_bls=[
+            bl_tiles=[
                         "wall_deco1.bl.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ])
@@ -181,19 +181,19 @@ def init():
                         "wall2.15",
                         "wall2.16",
                 ],
-            tile_lefts=[
+            left_tiles=[
                         "wall_deco1.left.1",
                         "wall_deco1.left.2",
                         "wall_deco1.left.3",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_rights=[
+            right_tiles=[
                         "wall_deco1.right.1",
                         "wall_deco1.right.2",
                         "wall_deco1.right.3",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_tops=[
+            top_tiles=[
                         "wall_deco1.top.1",
                         "wall_deco1.top.2",
                         "wall_deco1.top.3",
@@ -205,7 +205,7 @@ def init():
                         "wall_deco1.top.9",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_bots=[
+            bot_tiles=[
                         "wall_deco1.bot.1",
                         "wall_deco1.bot.2",
                         "wall_deco1.bot.3",
@@ -222,19 +222,19 @@ def init():
                         "wall_deco1.bot.14",
                         "wall_deco1.bot.15",
                 ],
-            tile_tls=[
+            tl_tiles=[
                         "wall_deco1.tl.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_trs=[
+            tr_tiles=[
                         "wall_deco1.tr.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_brs=[
+            br_tiles=[
                         "wall_deco1.br.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ],
-            tile_bls=[
+            bl_tiles=[
                         "wall_deco1.bl.1",
                         "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 ])

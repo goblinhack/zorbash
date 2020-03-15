@@ -4,14 +4,14 @@ import tp
 
 def tp_init(name,
             tiles=[],
-            tile_lefts=[],
-            tile_rights=[],
-            tile_tops=[],
-            tile_bots=[],
-            tile_tls=[],
-            tile_trs=[],
-            tile_bls=[],
-            tile_brs=[]):
+            left_tiles=[],
+            right_tiles=[],
+            top_tiles=[],
+            bot_tiles=[],
+            tl_tiles=[],
+            tr_tiles=[],
+            bl_tiles=[],
+            br_tiles=[]):
 
     x = tp.Tp(name)
 
@@ -33,50 +33,50 @@ def tp_init(name,
     else:
         x.set_tile(tile=name)
 
-    if tile_lefts is not None:
-        for t in tile_lefts:
+    if left_tiles is not None:
+        for t in left_tiles:
             x.set_tile_left(t)
     else:
         x.set_tile_left(tile_left=name)
 
-    if tile_rights is not None:
-        for t in tile_rights:
+    if right_tiles is not None:
+        for t in right_tiles:
             x.set_tile_right(t)
     else:
         x.set_tile_right(tile_right=name)
 
-    if tile_tops is not None:
-        for t in tile_tops:
+    if top_tiles is not None:
+        for t in top_tiles:
             x.set_tile_top(t)
     else:
         x.set_tile_top(tile_top=name)
 
-    if tile_bots is not None:
-        for t in tile_bots:
+    if bot_tiles is not None:
+        for t in bot_tiles:
             x.set_tile_bot(t)
     else:
         x.set_tile_bot(tile_bot=name)
 
-    if tile_tls is not None:
-        for t in tile_tls:
+    if tl_tiles is not None:
+        for t in tl_tiles:
             x.set_tile_tl(t)
     else:
         x.set_tile_tl(tile_tl=name)
 
-    if tile_trs is not None:
-        for t in tile_trs:
+    if tr_tiles is not None:
+        for t in tr_tiles:
             x.set_tile_tr(t)
     else:
         x.set_tile_tr(tile_tr=name)
 
-    if tile_bls is not None:
-        for t in tile_bls:
+    if bl_tiles is not None:
+        for t in bl_tiles:
             x.set_tile_bl(t)
     else:
         x.set_tile_bl(tile_bl=name)
 
-    if tile_brs is not None:
-        for t in tile_brs:
+    if br_tiles is not None:
+        for t in br_tiles:
             x.set_tile_br(t)
     else:
         x.set_tile_br(tile_br=name)

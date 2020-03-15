@@ -91,14 +91,14 @@ public:
     //
     // Adjacent tiles.
     //
-    Tilemap tile_tops;
-    Tilemap tile_bots;
-    Tilemap tile_lefts;
-    Tilemap tile_rights;
-    Tilemap tile_tls;
-    Tilemap tile_trs;
-    Tilemap tile_bls;
-    Tilemap tile_brs;
+    Tilemap top_tiles;
+    Tilemap bot_tiles;
+    Tilemap left_tiles;
+    Tilemap right_tiles;
+    Tilemap tl_tiles;
+    Tilemap tr_tiles;
+    Tilemap bl_tiles;
+    Tilemap br_tiles;
 
     //
     // Join tiles
@@ -114,6 +114,11 @@ public:
     Tilemap t180_tiles;
     Tilemap t270_tiles;
     Tilemap x_tiles;
+
+    //
+    // For water ripples
+    //
+    Tilemap outline_tiles;
 
     int blit_off {};
     int blit_top_off {};
@@ -1284,52 +1289,58 @@ static inline Tilemap *tp_tiles (Tpp t)
     return (&t->tiles);
 }
 
-static inline Tilemap *tp_tile_lefts (Tpp t)
+static inline Tilemap *tp_left_tiles (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tile_lefts);
+    return (&t->left_tiles);
 }
 
-static inline Tilemap *tp_tile_rights (Tpp t)
+static inline Tilemap *tp_right_tiles (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tile_rights);
+    return (&t->right_tiles);
 }
 
-static inline Tilemap *tp_tile_tops (Tpp t)
+static inline Tilemap *tp_top_tiles (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tile_tops);
+    return (&t->top_tiles);
 }
 
-static inline Tilemap *tp_tile_bots (Tpp t)
+static inline Tilemap *tp_bot_tiles (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tile_bots);
+    return (&t->bot_tiles);
 }
 
-static inline Tilemap *tp_tile_tls (Tpp t)
+static inline Tilemap *tp_tl_tiles (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tile_tls);
+    return (&t->tl_tiles);
 }
 
-static inline Tilemap *tp_tile_trs (Tpp t)
+static inline Tilemap *tp_tr_tiles (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tile_trs);
+    return (&t->tr_tiles);
 }
 
-static inline Tilemap *tp_tile_bls (Tpp t)
+static inline Tilemap *tp_bl_tiles (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tile_bls);
+    return (&t->bl_tiles);
 }
 
-static inline Tilemap *tp_tile_brs (Tpp t)
+static inline Tilemap *tp_br_tiles (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tile_brs);
+    return (&t->br_tiles);
+}
+
+static inline Tilemap *tp_outline_tiles (Tpp t)
+{_
+    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
+    return (&t->outline_tiles);
 }
 
 static inline Tilemap *tp_horiz_tiles (Tpp t)

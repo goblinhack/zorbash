@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def chasm_init(name, real_name, tiles=[], tile_lefts=[]):
+def chasm_init(name, real_name, tiles=[], left_tiles=[]):
 
     x = tp.Tp(name, real_name)
 

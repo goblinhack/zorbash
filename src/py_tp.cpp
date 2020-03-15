@@ -305,6 +305,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_moving = 0;
     int is_jumping = 0;
     int begin_jump = 0;
+    int is_outline = 0;
     int is_join_lock = 0;
     int is_join_horiz = 0;
     int is_join_vert = 0;
@@ -337,6 +338,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_hp_50_percent = 0;
     int is_hp_75_percent = 0;
     int is_hp_100_percent = 0;
+    int gfx_outline_index_offset = 0;
     int is_submerged = 0;
     int is_sleeping = 0;
     int is_open = 0;
@@ -356,6 +358,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_moving",
         (char*) "is_jumping",
         (char*) "begin_jump",
+        (char*) "is_outline",
         (char*) "is_join_lock",
         (char*) "is_join_horiz",
         (char*) "is_join_vert",
@@ -388,6 +391,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_hp_50_percent",
         (char*) "is_hp_75_percent",
         (char*) "is_hp_100_percent",
+        (char*) "gfx_outline_index_offset",
         (char*) "is_submerged",
         (char*) "is_sleeping",
         (char*) "is_open",
@@ -398,7 +402,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     };
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds,
-                                     "O|sssssiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+                                     "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
                                      kwlist, &py_class,
                                      &py_tile_name,
                                      &fg,
@@ -409,6 +413,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_moving,
                                      &is_jumping,
                                      &begin_jump,
+                                     &is_outline,
                                      &is_join_lock,
                                      &is_join_horiz,
                                      &is_join_vert,
@@ -441,6 +446,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_hp_50_percent,
                                      &is_hp_75_percent,
                                      &is_hp_100_percent,
+                                     &gfx_outline_index_offset,
                                      &is_submerged,
                                      &is_sleeping,
                                      &is_open,
@@ -476,31 +482,34 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->tiles;
         break;
     case THING_DIR_DOWN:
-        tiles = &tp->tile_bots;
+        tiles = &tp->bot_tiles;
         break;
     case THING_DIR_UP:
-        tiles = &tp->tile_tops;
+        tiles = &tp->top_tiles;
         break;
     case THING_DIR_LEFT:
-        tiles = &tp->tile_lefts;
+        tiles = &tp->left_tiles;
         break;
     case THING_DIR_RIGHT:
-        tiles = &tp->tile_rights;
+        tiles = &tp->right_tiles;
         break;
     case THING_DIR_TL:
-        tiles = &tp->tile_tls;
+        tiles = &tp->tl_tiles;
         break;
     case THING_DIR_BL:
-        tiles = &tp->tile_bls;
+        tiles = &tp->bl_tiles;
         break;
     case THING_DIR_TR:
-        tiles = &tp->tile_trs;
+        tiles = &tp->tr_tiles;
         break;
     case THING_DIR_BR:
-        tiles = &tp->tile_brs;
+        tiles = &tp->br_tiles;
         break;
     }
 
+    if (is_outline) {
+        tiles = &tp->outline_tiles;
+    }
     if (is_join_horiz) {
         tiles = &tp->horiz_tiles;
     }
@@ -511,16 +520,16 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->tiles;
     }
     if (is_join_left) {
-        tiles = &tp->tile_lefts;
+        tiles = &tp->left_tiles;
     }
     if (is_join_right) {
-        tiles = &tp->tile_rights;
+        tiles = &tp->right_tiles;
     }
     if (is_join_top) {
-        tiles = &tp->tile_tops;
+        tiles = &tp->top_tiles;
     }
     if (is_join_bot) {
-        tiles = &tp->tile_bots;
+        tiles = &tp->bot_tiles;
     }
     if (is_join_l90) {
         tiles = &tp->l90_tiles;
@@ -574,6 +583,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         t->delay_ms = delay_ms;
         t->is_moving = is_moving;
 
+        t->is_outline = is_outline;
         t->is_join_horiz = is_join_horiz;
         t->is_join_vert = is_join_vert;
         t->is_join_node = is_join_node;
@@ -601,6 +611,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         t->is_hp_50_percent = is_hp_50_percent;
         t->is_hp_75_percent = is_hp_75_percent;
         t->is_hp_100_percent = is_hp_100_percent;
+        t->gfx_outline_index_offset = gfx_outline_index_offset;
         t->is_sleeping = is_sleeping;
         t->is_open = is_open;
         t->is_dead = is_dead;

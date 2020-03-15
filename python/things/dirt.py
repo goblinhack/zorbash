@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def dirt_init(name, tiles=[], tile_lefts=[]):
+def dirt_init(name, tiles=[], left_tiles=[]):
     x = tp.Tp(name)
 
     x.set_is_cursor_can_hover_over(True)
