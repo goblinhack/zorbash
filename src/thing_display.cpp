@@ -1029,6 +1029,27 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     is_blitted = true;
 }
 
+void Thing::blit_outline_only (double offset_x, double offset_y, int x, int y)
+{_
+    last_blit_tl = fpoint(tl.x - offset_x, tl.y - offset_y);
+    last_blit_br = fpoint(br.x - offset_x, br.y - offset_y);
+    auto blit_tl = last_blit_tl;
+    auto blit_br = last_blit_br;
+
+    ThingTiles tiles;
+    get_tiles(&tiles);
+
+    //
+    // A bit of pixel offset to account for screen rounding
+    //
+    blit_br.y += game->config.one_pixel_gl_height / 8;
+
+    tile_blit(tiles.tile_outline, blit_tl, blit_br);
+    last_blit_tl = blit_tl;
+    last_blit_br = blit_br;
+    is_blitted = true;
+}
+
 void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
 {_
     if (unlikely(is_hidden)) {

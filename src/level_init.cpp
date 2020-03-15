@@ -348,7 +348,6 @@ static void level_place_walls (Dungeonp d,
                     ERR("wall tile %s not found", tilename.c_str());
                     return;
                 }
-
                 t->tile_curr = tile->global_index;
             }
         }

@@ -13,15 +13,24 @@ void Thing::get_tiles(ThingTiles *out)
     auto n = id;
     auto tpp = tp();
 
-    auto tiles = tp_tile_lefts(tpp);
-    auto tile = tile_n(tiles, n++);
+    auto curr = tile_index_to_tile(tile_curr);
+    auto tiles = tp_outline_tiles(tpp);
+    auto tile = tile_n(tiles, curr->index + curr->gfx_outline_index_offset);
+    if (tile) {
+        out->tile_outline = tile->global_index;
+    } else {
+        out->tile_outline = 0;
+    }
+
+    tiles = tp_left_tiles(tpp);
+    tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_left = tile->global_index;
     } else {
         out->tile_left = 0;
     }
 
-    tiles = tp_tile_rights(tpp);
+    tiles = tp_right_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_right = tile->global_index;
@@ -29,7 +38,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_right = 0;
     }
 
-    tiles = tp_tile_tops(tpp);
+    tiles = tp_top_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_top = tile->global_index;
@@ -37,7 +46,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_top = 0;
     }
 
-    tiles = tp_tile_bots(tpp);
+    tiles = tp_bot_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_bot = tile->global_index;
@@ -45,7 +54,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_bot = 0;
     }
 
-    tiles = tp_tile_tls(tpp);
+    tiles = tp_tl_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_tl = tile->global_index;
@@ -53,7 +62,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_tl = 0;
     }
 
-    tiles = tp_tile_trs(tpp);
+    tiles = tp_tr_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_tr = tile->global_index;
@@ -61,7 +70,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_tr = 0;
     }
 
-    tiles = tp_tile_brs(tpp);
+    tiles = tp_br_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_br = tile->global_index;
@@ -69,7 +78,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_br = 0;
     }
 
-    tiles = tp_tile_bls(tpp);
+    tiles = tp_bl_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_bl = tile->global_index;

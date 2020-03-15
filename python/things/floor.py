@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, tiles=[], tile_lefts=[]):
+def tp_init(name, tiles=[], left_tiles=[]):
 
     x = tp.Tp(name)
 

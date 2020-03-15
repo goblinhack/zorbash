@@ -64,6 +64,7 @@ typedef struct {
     uint16_t tile_tl;
     uint16_t tile_top;
     uint16_t tile_tr;
+    uint16_t tile_outline;
 } ThingTiles;
 
 typedef enum {
@@ -791,6 +792,7 @@ public:
     void animate();
     void attach(void);
     void blit(double offset_x, double offset_y, int x, int y);
+    void blit_outline_only(double offset_x, double offset_y, int x, int y);
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_non_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);

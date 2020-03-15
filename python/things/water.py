@@ -16,28 +16,31 @@ def tp_init(name, real_name, tiles=[]):
 
     delay = 1250
     for t in tiles:
-        x.set_tile(tile=t, delay_ms=delay)
+        x.set_tile(tile="water" + t, 
+                   delay_ms=delay, 
+                   gfx_outline_index_offset=16)
+        x.set_tile(tile="water_outline" + t, delay_ms=delay, is_outline=True)
 
     x.update()
 
 def init():
     tp_init(name="water1", real_name="water",
             tiles=[
-                "water1.1",
-                "water1.2",
-                "water1.3",
-                "water1.4",
-                "water1.5",
-                "water1.6",
-                "water1.7",
-                "water1.8",
-                "water1.9",
-                "water1.10",
-                "water1.11",
-                "water1.12",
-                "water1.13",
-                "water1.14",
-                "water1.15",
-                "water1.16",
+                "1.1",
+                "1.2",
+                "1.3",
+                "1.4",
+                "1.5",
+                "1.6",
+                "1.7",
+                "1.8",
+                "1.9",
+                "1.10",
+                "1.11",
+                "1.12",
+                "1.13",
+                "1.14",
+                "1.15",
+                "1.16",
                 ])
 init()

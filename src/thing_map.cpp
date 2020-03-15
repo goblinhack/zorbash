@@ -157,24 +157,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                         continue;
                     }
                 }
-                t->blit(offset_x - game->config.one_pixel_gl_width,
-                        offset_y - game->config.one_pixel_gl_height, x, y);
-                t->blit(offset_x,
-                        offset_y - game->config.one_pixel_gl_height, x, y);
-                t->blit(offset_x + game->config.one_pixel_gl_width,
-                        offset_y - game->config.one_pixel_gl_height, x, y);
-
-                t->blit(offset_x - game->config.one_pixel_gl_width,
-                        offset_y, x, y);
-                t->blit(offset_x + game->config.one_pixel_gl_width,
-                        offset_y, x, y);
-
-                t->blit(offset_x - game->config.one_pixel_gl_width,
-                        offset_y + game->config.one_pixel_gl_height, x, y);
-                t->blit(offset_x,
-                        offset_y + game->config.one_pixel_gl_height, x, y);
-                t->blit(offset_x + game->config.one_pixel_gl_width,
-                        offset_y + game->config.one_pixel_gl_height, x, y);
+                t->blit_outline_only(offset_x, offset_y, x, y);
             } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }

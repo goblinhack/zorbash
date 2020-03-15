@@ -4,7 +4,7 @@ import tp
 
 def tp_init(name,
               tiles=[],
-              tile_lefts=[]):
+              left_tiles=[]):
 
     x = tp.Tp(name)
 
