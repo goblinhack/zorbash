@@ -502,8 +502,12 @@ def init_32x32_surface_effects():
             "deep_water1.9", "deep_water1.10", "deep_water1.11", "deep_water1.12", "deep_water1.13", "deep_water1.14", "deep_water1.15", "deep_water1.16",
             "lava1.1", "lava1.2", "lava1.3", "lava1.4", "lava1.5", "lava1.6", "lava1.7", "lava1.8",
             "lava1.9", "lava1.10", "lava1.11", "lava1.12", "lava1.13", "lava1.14", "lava1.15", "lava1.16",
+            "lava_outline1.1", "lava_outline1.2", "lava_outline1.3", "lava_outline1.4", "lava_outline1.5", "lava_outline1.6", "lava_outline1.7", "lava_outline1.8",
+            "lava_outline1.9", "lava_outline1.10", "lava_outline1.11", "lava_outline1.12", "lava_outline1.13", "lava_outline1.14", "lava_outline1.15", "lava_outline1.16",
             "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5", "chasm1.6", "chasm1.7", "chasm1.8",
             "chasm1.9", "chasm1.10", "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15", "chasm1.16",
+            "chasm_outline1.1", "chasm_outline1.2", "chasm_outline1.3", "chasm_outline1.4", "chasm_outline1.5", "chasm_outline1.6", "chasm_outline1.7", "chasm_outline1.8",
+            "chasm_outline1.9", "chasm_outline1.10", "chasm_outline1.11", "chasm_outline1.12", "chasm_outline1.13", "chasm_outline1.14", "chasm_outline1.15", "chasm_outline1.16",
     ]
 
     zx.tile_load_arr_color_and_black_and_white(

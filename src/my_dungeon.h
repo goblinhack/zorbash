@@ -16,8 +16,6 @@
 #define TOSTRING(x) STRINGIFY(x)
 #define AT __FILE__ ":" TOSTRING(__LINE__)
 
-static bool dungeon_debug = true;
-
 class Grid {
 public:
     std::array<std::array<Roomp, GRID_HEIGHT>, GRID_WIDTH> node_rooms {};
