@@ -17,11 +17,13 @@ void Game::fini (void)
     tick_completed = 0;
     things_are_moving = false;
     started = false;
-
+_
     config.fini();
+_
     world.fini();
-
+_
     if (player_dmap) {
         delete player_dmap;
+        player_dmap = nullptr;
     }
 }

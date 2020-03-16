@@ -1,7 +1,5 @@
-if already on water, cursor path should work
-if 2 monsts attacking player at the same time, only one gets to attack
 player can be pushed through a wall
-hide lava and lights behind doors and secret doors
+if 2 monsts attacking player at the same time, only one gets to attack
 door can be next to an empty corridor, need double door?
 if a monst is eating and being attacked, it should defend itself
 chocolate frogs must melt in lava

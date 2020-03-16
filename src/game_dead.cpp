@@ -131,8 +131,8 @@ void Game::dead_select (void)
         auto p = wid_dead_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dead");
 
-        point tl = {4, 17};
-        point br = {width - 5, 19};
+        point tl = {4, 16};
+        point br = {width - 5, 18};
 
         wid_set_style(w, WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
