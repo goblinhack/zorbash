@@ -60,19 +60,58 @@ static void thing_cursor_path_draw (point start, point end)
     //
     // Set up obstacles for the search
     //
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            if (level->is_deep_water(x,y)                        ||
-                level->is_water(x,y)                             ||
-                (level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-                level->is_door(x,y)                              ||
-                level->is_secret_door(x,y)                       ||
-                level->is_hazard(x,y)                            ||
-                level->is_rock(x, y)                             ||
-                level->is_wall(x, y)) {
-                set(d.val, x, y, DMAP_IS_WALL);
-            } else {
-                set(d.val, x, y, DMAP_IS_PASSABLE);
+    auto player = level->player;
+    auto cursor = level->cursor;
+
+    if (player &&
+        level->is_hazard((int)player->mid_at.x, (int)player->mid_at.y)) {
+        //
+        // If already on a hazard we can plot a course via hazards.
+        //
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
+                    level->is_door(x,y)                              ||
+                    level->is_secret_door(x,y)                       ||
+                    level->is_rock(x, y)                             ||
+                    level->is_wall(x, y)) {
+                    set(d.val, x, y, DMAP_IS_WALL);
+                } else {
+                    set(d.val, x, y, DMAP_IS_PASSABLE);
+                }
+            }
+        }
+    } else if (cursor &&
+        level->is_hazard((int)cursor->mid_at.x, (int)cursor->mid_at.y)) {
+        //
+        // If the cursor is on a hazard we can plot a course via hazards.
+        //
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
+                    level->is_door(x,y)                              ||
+                    level->is_secret_door(x,y)                       ||
+                    level->is_rock(x, y)                             ||
+                    level->is_wall(x, y)) {
+                    set(d.val, x, y, DMAP_IS_WALL);
+                } else {
+                    set(d.val, x, y, DMAP_IS_PASSABLE);
+                }
+            }
+        }
+    } else {
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
+                    level->is_door(x,y)                              ||
+                    level->is_secret_door(x,y)                       ||
+                    level->is_hazard(x,y)                            ||
+                    level->is_rock(x, y)                             ||
+                    level->is_wall(x, y)) {
+                    set(d.val, x, y, DMAP_IS_WALL);
+                } else {
+                    set(d.val, x, y, DMAP_IS_PASSABLE);
+                }
             }
         }
     }
