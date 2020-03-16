@@ -470,6 +470,7 @@ void lights_render_high_quality (int minx, int miny,
 {
     Lightp deferred_player_light = nullptr;
 
+    light_dim = 1.0;
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -525,6 +526,7 @@ void lights_render_high_quality (int minx, int miny,
                     if (!dist || (dist >= MAX_LIGHT_PLAYER_DISTANCE)) {
                         continue;
                     }
+
                     light_dim = 1.0 - (0.05 * (float)dist);
                     if (light_dim < 0) {
                         continue;

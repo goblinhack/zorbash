@@ -5,6 +5,8 @@
 
 #include "my_dungeon.h"
 
+static bool dungeon_debug = true;
+
 //
 // The algorithm
 //
@@ -1507,7 +1509,7 @@ void Dungeon::add_room_walls (void)
             if (is_wall_fast(x, y)) {
                 continue;
             }
-            if (is_floor_fast(x, y)) {
+            if (is_floor_fast(x, y) || is_chasm_fast(x, y)) {
                 if (!is_anything_at_fast(x - 1, y - 1)) {
                     putc(x - 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
@@ -2012,6 +2014,9 @@ void Dungeon::center_room_layout (void)
 //
 void Dungeon::place_room (Roomp r, int x, int y)
 {
+    //
+    // Place the room tiles
+    //
     for (auto dz = 0 ; dz < MAP_DEPTH; dz++) {
         for (auto dy = 0; dy < r->height; dy++) {
             for (auto dx = 0; dx < r->width; dx++) {
@@ -2023,9 +2028,13 @@ void Dungeon::place_room (Roomp r, int x, int y)
         }
     }
 
+    //
+    // Place a border around the room
+    //
     for (auto dy = 0; dy < r->height; dy++) {
         for (auto dx = 0; dx < r->width; dx++) {
             auto f = get(r->data, dx, dy, MAP_DEPTH_FLOOR);
+            auto c = get(r->data, dx, dy, MAP_DEPTH_CHASM);
             auto d = get(r->data, dx, dy, MAP_DEPTH_WALLS);
             if ((d == Charmap::DOOR_UP) ||
                 (d == Charmap::DOOR_DOWN) ||
@@ -2034,7 +2043,7 @@ void Dungeon::place_room (Roomp r, int x, int y)
                 //
                 // Do not wrap doors in walls so we can move the rooms closer
                 //
-            } else if (f != Charmap::SPACE) {
+            } else if ((f != Charmap::SPACE) || (c != Charmap::SPACE)) {
                 if (!is_anything_at(x + dx - 1, y + dy - 1)) {
                     putc_fast(x + dx - 1, y + dy - 1,
                               MAP_DEPTH_WALLS, Charmap::WALL);

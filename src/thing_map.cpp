@@ -230,7 +230,9 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                 brx -= offset_x;
                 bry -= offset_y;
 
-                auto tile = get(water, x % WATER_ACROSS, (y + (int)water_step2/4) % WATER_DOWN);
+                auto tile = get(water,
+                                (x&~1) % WATER_ACROSS,
+                                ((y&~1) + (int)water_step2/4) % WATER_DOWN);
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;
@@ -458,7 +460,9 @@ static void thing_blit_deep_water (uint16_t minx, uint16_t miny,
                 brx -= offset_x;
                 bry -= offset_y;
 
-                auto tile = get(deep_water, x % DEEP_WATER_ACROSS, (y + (int)deep_water_step2/4) % DEEP_WATER_DOWN);
+                auto tile = get(deep_water,
+                                (x&~1) % DEEP_WATER_ACROSS,
+                                ((y&~1) + (int)water_step2/4) % DEEP_WATER_DOWN);
                 auto x1 = tile->x1;
                 auto x2 = tile->x2;
                 auto y1 = tile->y1;
@@ -570,33 +574,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                 }
             }
             FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
-                        offset_y + game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
-                        offset_y + game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
-                        offset_y + game->config.one_pixel_gl_height,
-                        x, y);
-                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
-                        offset_y + game->config.one_pixel_gl_height,
-                        x, y);
-                t->blit(offset_x + game->config.one_pixel_gl_width * 2,
-                        offset_y - game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x - game->config.one_pixel_gl_width * 2,
-                        offset_y - game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x,
-                        offset_y + game->config.one_pixel_gl_height * 3,
-                        x, y);
-                t->blit(offset_x,
-                        offset_y + game->config.one_pixel_gl_height * 2,
-                        x, y);
-                t->blit(offset_x,
-                        offset_y - game->config.one_pixel_gl_height * 2,
-                        x, y);
+                t->blit_outline_only(offset_x, offset_y, x, y);
             } FOR_ALL_THINGS_AT_DEPTH_END()
         }
     }
@@ -634,7 +612,7 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                         offset_y - game->config.one_pixel_gl_height,
                         x, y);
                 t->blit(offset_x,
-                        offset_y + game->config.one_pixel_gl_height,
+                        offset_y - game->config.one_pixel_gl_height,
                         x, y);
             } FOR_ALL_THINGS_AT_DEPTH_END()
         }
@@ -688,8 +666,8 @@ static void thing_blit_lava (uint16_t minx, uint16_t miny,
                 brx -= offset_x;
                 bry -= offset_y;
 
-                int lx = x % LAVA_ACROSS;
-                int ly = (y + (int)lava_step2/4) % (LAVA_DOWN-1);
+                int lx = (x&~1) % LAVA_ACROSS;
+                int ly = ((y&~1) + (int)lava_step2/4) % (LAVA_DOWN-1);
                 auto tile = get(lava, lx, ly);
 
                 auto x1 = tile->x1;

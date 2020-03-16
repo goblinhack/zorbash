@@ -474,7 +474,7 @@ public:
     uint32_t           sound_volume                 = {MIX_MAX_VOLUME / 2};
     uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
     bool               fullscreen                   = false;
-    bool               allow_highdpi                      = true;
+    bool               allow_highdpi                = false;
     int32_t            video_pix_width              = {};
     int32_t            video_pix_height             = {};
     double             video_gl_width               = {};

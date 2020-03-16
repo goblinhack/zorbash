@@ -15,15 +15,19 @@ void Thing::get_tiles(ThingTiles *out)
 
     auto curr = tile_index_to_tile(tile_curr);
     auto tiles = tp_outline_tiles(tpp);
-    auto tile = tile_n(tiles, curr->index + curr->gfx_outline_index_offset);
-    if (tile) {
-        out->tile_outline = tile->global_index;
+    if (curr) {
+        auto tile = tile_n(tiles, curr->index + curr->gfx_outline_index_offset);
+        if (tile) {
+            out->tile_outline = tile->global_index;
+        } else {
+            out->tile_outline = 0;
+        }
     } else {
         out->tile_outline = 0;
     }
 
     tiles = tp_left_tiles(tpp);
-    tile = tile_n(tiles, n++);
+    auto tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_left = tile->global_index;
     } else {
