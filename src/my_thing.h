@@ -121,7 +121,7 @@ typedef struct Monst_ {
     int          stats_attack = {};
     int          stats_attack_max = {};
     int          stats_attack_rate_tenths = {};
-    int          stats_attacked_rate_tenths = {};
+    int          stats21 = {};
     int          stats_defence = {};
     int          stats_defence_max = {};
     int          stats_health = {};
@@ -340,12 +340,12 @@ public:
     int decr_stats_attack_rate_tenths(void);
     int incr_stats_attack_rate_tenths(void);
 
-    int set_stats_attacked_rate_tenths(int);
-    int get_stats_attacked_rate_tenths(void);
-    int decr_stats_attacked_rate_tenths(int);
-    int incr_stats_attacked_rate_tenths(int);
-    int decr_stats_attacked_rate_tenths(void);
-    int incr_stats_attacked_rate_tenths(void);
+    int set_stats21(int);
+    int get_stats21(void);
+    int decr_stats21(int);
+    int incr_stats21(int);
+    int decr_stats21(void);
+    int incr_stats21(void);
 
     int set_stats01(int);
     int get_stats01(void);

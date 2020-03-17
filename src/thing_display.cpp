@@ -534,10 +534,6 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         dy = std::min(m, dy);
     }
 
-    color c = BLACK;
-    c.a = 100;
-    glcolor(c);
-
     shadow_tl.x += 0.40 * dx;
     shadow_tr.x += 0.40 * dx;
     shadow_tl.y += 0.40 * dy;
@@ -562,6 +558,10 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     shadow_tr.y -= height;
     shadow_bl.y -= height;
     shadow_br.y -= height;
+
+    color c = BLACK;
+    c.a = 100;
+    glcolor(c);
 
     ::blit(tile->gl_binding(), x1, y2, x2, y1,
            shadow_bl, shadow_br, shadow_tl, shadow_tr);

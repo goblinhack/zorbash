@@ -1,9 +1,8 @@
-player can be pushed through a wall
 if 2 monsts attacking player at the same time, only one gets to attack
-door can be next to an empty corridor, need double door?
 if a monst is eating and being attacked, it should defend itself
-chocolate frogs must melt in lava
+door can be next to an empty corridor, need double door?
 player must burn in lava
+chocolate frogs must melt in lava
 fall through chasm
 damage from falling into chasm, 80% damage 20% death
 doors open/close

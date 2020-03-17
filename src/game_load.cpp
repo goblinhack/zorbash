@@ -107,7 +107,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->stats_attack);
     /* int         */ in >> bits(my.t->stats_attack_max);
     /* int         */ in >> bits(my.t->stats_attack_rate_tenths);
-    /* int         */ in >> bits(my.t->stats_attacked_rate_tenths);
+    /* int         */ in >> bits(my.t->stats21);
     /* int         */ in >> bits(my.t->stats_defence);
     /* int         */ in >> bits(my.t->stats_defence_max);
     /* int         */ in >> bits(my.t->stats_health);

@@ -28,7 +28,6 @@ def tp_init(name, real_name):
     x.set_is_shovable(True)
     x.set_stats_attack(3)
     x.set_stats_attack_rate_tenths(3)
-    x.set_stats_attacked_rate_tenths(3)
     x.set_stats_defence(3)
     x.set_stats_health_hunger_pct(5)
     x.set_stats_health_initial(100)
