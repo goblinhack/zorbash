@@ -1408,57 +1408,57 @@ int Thing::incr_stats_attack_rate_tenths (void)
 ////////////////////////////////////////////////////////////////////////////
 // attacked_rate_tenths
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_attacked_rate_tenths (void)
+int Thing::get_stats21 (void)
 {_
     if (monst) {
         verify(monst);
-        return (monst->stats_attacked_rate_tenths);
+        return (monst->stats21);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats_attacked_rate_tenths (int v)
+int Thing::set_stats21 (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats_attacked_rate_tenths = v);
+    auto n = (monst->stats21 = v);
     if (is_player()) { game_status_init(); }
     return (n);
 }
 
-int Thing::decr_stats_attacked_rate_tenths (int v)
+int Thing::decr_stats21 (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats_attacked_rate_tenths -= v);
+    auto n = (monst->stats21 -= v);
     if (is_player()) { game_status_init(); }
     return (n);
 }
 
-int Thing::incr_stats_attacked_rate_tenths (int v)
+int Thing::incr_stats21 (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats_attacked_rate_tenths += v);
+    auto n = (monst->stats21 += v);
     if (is_player()) { game_status_init(); }
     return (n);
 }
 
-int Thing::decr_stats_attacked_rate_tenths (void)
+int Thing::decr_stats21 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats_attacked_rate_tenths--);
+    auto n = (monst->stats21--);
     if (is_player()) { game_status_init(); }
     return (n);
 }
 
-int Thing::incr_stats_attacked_rate_tenths (void)
+int Thing::incr_stats21 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monst->stats_attacked_rate_tenths++);
+    auto n = (monst->stats21++);
     if (is_player()) { game_status_init(); }
     return (n);
 }

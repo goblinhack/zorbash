@@ -27,15 +27,6 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     //
-    // Protect player from multiple impact
-    //
-    if (!time_have_x_tenths_passed_since(get_stats_attacked_rate_tenths(),
-                                         get_timestamp_last_attacked())) {
-        return (false);
-    }
-    set_timestamp_last_attacked(time_get_time_ms_cached());
-
-    //
     // Keep hitting until all damage is used up or the thing is dead.
     //
     if (this == hitter) {

@@ -258,7 +258,7 @@ public:
     int stats_strength {};
     int stats_attack {};
     int stats_attack_rate_tenths {};
-    int stats_attacked_rate_tenths {};
+    int stats21 {};
     int stats_defence {};
     int stats_health_hunger_pct {};
     int stats_health_initial {};
@@ -671,10 +671,10 @@ static inline int tp_stats_attack_rate_tenths (Tpp t)
     return (t->stats_attack_rate_tenths);
 }
 
-static inline int tp_stats_attacked_rate_tenths (Tpp t)
+static inline int tp_stats21 (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats_attacked_rate_tenths);
+    return (t->stats21);
 }
 
 static inline int tp_stats01 (Tpp t)

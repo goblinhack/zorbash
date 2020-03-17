@@ -1516,7 +1516,11 @@ void sdl_loop (void)
         //
         extern bool ptr_check_some_pointers_changed;
         ptr_check_some_pointers_changed = false;
-        if (game_needs_restart) {
+
+        //
+        // Config change?
+        //
+        if (unlikely(game_needs_restart)) {
             break;
         }
     }

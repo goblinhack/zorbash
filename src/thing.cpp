@@ -151,9 +151,9 @@ _
     }
 
     {_
-        auto v = tp_stats_attacked_rate_tenths(tpp);
+        auto v = tp_stats21(tpp);
         if (unlikely(v)) {
-            set_stats_attacked_rate_tenths(v);
+            set_stats21(v);
         }
     }
 
