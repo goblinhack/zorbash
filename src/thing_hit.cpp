@@ -60,6 +60,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (is_player()) {
         MINICON("%%fg=yellow$The %s hits for %d damage!%%fg=reset$",
                 real_hitter->to_name().c_str(), damage);
+    } else {
+        add_enemy(real_hitter);
     }
 
     //

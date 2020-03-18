@@ -125,7 +125,7 @@ static void thing_cursor_path_draw (point start, point end)
     dmap_process_allow_diagonals(&d, dmap_start, dmap_end);
     // dmap_print(&d, start, dmap_start, dmap_end);
     auto p = dmap_solve_allow_diagonal(&d, start);
-    game->move_path = p;
+    game->cursor_move_path = p;
 
     for (auto c : p) {
         thing_new("cursor_path", fpoint(c.x , c.y));
@@ -147,7 +147,7 @@ void thing_cursor_path_create (void)
         return;
     }
 
-    game->move_path.clear();
+    game->cursor_move_path.clear();
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -184,10 +184,10 @@ bool Thing::cursor_path_pop_next_and_move (void)
 
 void Thing::cursor_path_grab (void)
 {_
-    if (game->move_path.size()) {
+    if (game->cursor_move_path.size()) {
         new_monst();
-        monst->move_path = game->move_path;
-        game->move_path.clear();
+        monst->move_path = game->cursor_move_path;
+        game->cursor_move_path.clear();
         cursor_path_pop_next_and_move();
     }
 }

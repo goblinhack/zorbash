@@ -127,6 +127,7 @@ typedef struct Monst_ {
     int          stats_health = {};
     int          stats_health_max = {};
     std::list<uint32_t> carrying;
+    std::vector<uint32_t> enemies;           // List of things that wronged us
     std::vector<point>  move_path;
     std::string  msg;                        // Text that floats on screen
     timestamp_t  timestamp_ai_next {};
@@ -656,6 +657,7 @@ public:
     int ai_hit_if_possible(Thingp hitter, int damage);
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
+    void add_enemy(Thingp attacker);
     int ai_scent_distance(void);
     int collision_attack(void);
     int collision_box(void);

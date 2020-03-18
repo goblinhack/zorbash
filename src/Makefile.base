@@ -76,6 +76,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
+    $(OBJDIR)/thing_string.o 		\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_attach.o 		\
@@ -87,6 +88,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_health.o 		\
     $(OBJDIR)/thing_hit.o 		\
+    $(OBJDIR)/thing_enemy.o 		\
     $(OBJDIR)/thing_hunger.o 		\
     $(OBJDIR)/thing_id.o 		\
     $(OBJDIR)/thing_map.o 		\
