@@ -11,7 +11,7 @@
 #include <vector>
 #include "my_thing.h"
 
-#undef DEBUG_AI
+#define DEBUG_AI
 
 bool Thing::possible_to_attack (const Thingp itp)
 {_
@@ -167,7 +167,13 @@ bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
                     auto it_stats_health = get_stats_health();
                     auto health_diff = it_stats_health - my_health;
 
-                    if (it->is_player()) {
+                    if (is_enemy(it)) {
+                        *score += 1000 - health_diff;
+#ifdef DEBUG_AI
+                        debug = "will try to attack enemy " + it->to_string();
+                        debug += " distance " + std::to_string(distance_scale);
+#endif
+                    } else if (it->is_player()) {
                         *score += 200 - health_diff;
 #ifdef DEBUG_AI
                         debug = "will try to eat player " + it->to_string();
