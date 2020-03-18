@@ -658,6 +658,7 @@ public:
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
     void add_enemy(Thingp attacker);
+    bool is_enemy(Thingp attacker);
     int ai_scent_distance(void);
     int collision_attack(void);
     int collision_box(void);

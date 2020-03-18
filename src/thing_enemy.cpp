@@ -9,18 +9,32 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 
-void Thing::add_enemy (Thingp attacker)
+bool Thing::is_enemy (Thingp attacker)
 {_
-    if (!monst) {
-        return;
+    if (unlikely(!monst)) {
+        return (false);
     }
 
     auto enemy = attacker->id;
     for (auto e : monst->enemies) {
         if (e == enemy) {
-            return;
+            return (true);
         }
     }
+    return (false);
+}
+
+void Thing::add_enemy (Thingp attacker)
+{_
+    if (unlikely(!monst)) {
+        return;
+    }
+
+    if (is_enemy(attacker)) {
+        return;
+    }
+
+    auto enemy = attacker->id;
     monst->enemies.push_back(enemy);
     con("add enemy %s", attacker->to_string().c_str());
 }
