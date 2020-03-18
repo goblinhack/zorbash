@@ -609,7 +609,7 @@ public:
     //
     // Last cursor path shown.
     //
-    std::vector<point> move_path;
+    std::vector<point> cursor_move_path;
 
     //
     // How to reach the player. Updated each move.

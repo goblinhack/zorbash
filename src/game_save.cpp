@@ -91,8 +91,9 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int         */ out << bits(my.t->stats_defence_max);
     /* int         */ out << bits(my.t->stats_health);
     /* int         */ out << bits(my.t->stats_health_max);
-    /* std::list<uint32_t> */ out << bits(my.t->carrying);
-    /* std::vector<point> */  out << bits(my.t->move_path);
+    /* std::list<uint32_t> */   out << bits(my.t->carrying);
+    /* std::vector<point> */    out << bits(my.t->move_path);
+    /* std::vector<uint32_t> */ out << bits(my.t->enemies);
     /* std::string */ out << bits(my.t->msg);
     /* timestamp_t */ out << bits(my.t->timestamp_ai_next);
     /* timestamp_t */ out << bits(my.t->timestamp_born);

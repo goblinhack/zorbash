@@ -112,8 +112,9 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->stats_defence_max);
     /* int         */ in >> bits(my.t->stats_health);
     /* int         */ in >> bits(my.t->stats_health_max);
-    /* std::list<uint32_t> */ in >> bits(my.t->carrying);
-    /* std::vector<point> */  in >> bits(my.t->move_path);
+    /* std::list<uint32_t> */   in >> bits(my.t->carrying);
+    /* std::vector<point> */    in >> bits(my.t->move_path);
+    /* std::vector<uint32_t> */ in >> bits(my.t->enemies);
     /* std::string */ in >> bits(my.t->msg);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_ai_next       = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_born          = load(T);
