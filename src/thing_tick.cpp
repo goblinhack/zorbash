@@ -35,6 +35,8 @@ void Thing::achieve_goals_in_life (void)
 
         point toi(to.x, to.y);
         if (is_less_preferred_terrain(toi)) {
+            log("movement to %f,%f is less preferred terrain, avoid",
+                to.x, to.y);
             return;
         }
 

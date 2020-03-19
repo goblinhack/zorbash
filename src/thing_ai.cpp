@@ -11,7 +11,7 @@
 #include <vector>
 #include "my_thing.h"
 
-#define DEBUG_AI
+#define DEBUG_AI_VERBOSE
 
 bool Thing::possible_to_attack (const Thingp itp)
 {_
@@ -65,7 +65,7 @@ bool Thing::will_eat (const Thingp itp)
     return (false);
 }
 
-bool Thing::will_prefer (const Thingp itp)
+bool Thing::will_prefer_terrain (const Thingp itp)
 {_
     auto me = tp();
     auto it = itp->tp();
@@ -134,147 +134,6 @@ uint8_t Thing::is_less_preferred_terrain (point p)
     return (std::min(DMAP_MAX_LESS_PREFERRED_TERRAIN, pref));
 }
 
-//
-// Higher scores are more preferred
-//
-bool Thing::ai_is_goal_for_me (point p, int priority, float *score,
-                               std::string &debug)
-{_
-#ifdef DEBUG_AI
-    float distance_scale = distance(mid_at, fpoint(p.x, p.y));
-#endif
-
-    //
-    // Check from highest (0) to lowest priority for things to do
-    //
-    switch (priority) {
-    case 0:
-        //
-        // Highest priority
-        //
-        if (is_starving) {
-            FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
-                if (it == this) {
-                    continue;
-                }
-
-                if (it->is_hidden) {
-                    continue;
-                }
-
-                if (will_eat(it)) {
-                    auto my_health = get_stats_health();
-                    auto it_stats_health = get_stats_health();
-                    auto health_diff = it_stats_health - my_health;
-
-                    if (is_enemy(it)) {
-                        *score += 1000 - health_diff;
-#ifdef DEBUG_AI
-                        debug = "will try to attack enemy " + it->to_string();
-                        debug += " distance " + std::to_string(distance_scale);
-#endif
-                    } else if (it->is_player()) {
-                        *score += 200 - health_diff;
-#ifdef DEBUG_AI
-                        debug = "will try to eat player " + it->to_string();
-                        debug += " distance " + std::to_string(distance_scale);
-#endif
-                    } else if (it->is_alive_monst()) {
-                        *score += 100 - health_diff;
-#ifdef DEBUG_AI
-                        debug = "will try to eat monst " + it->to_string();
-                        debug += " distance " + std::to_string(distance_scale);
-#endif
-                    } else {
-                        *score += 500 + it_stats_health;
-#ifdef DEBUG_AI
-                        debug = "will eat food " + it->to_string();
-                        debug += " distance " + std::to_string(distance_scale);
-#endif
-                        return (true);
-                    }
-                }
-            }
-        }
-        break;
-    case 1:
-        //
-        // Medium priority
-        //
-        if (is_hungry) {
-            FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
-                if (it == this) {
-                    continue;
-                }
-
-                if (it->is_hidden) {
-                    continue;
-                }
-
-                if (will_eat(it)) {
-                    auto my_health = get_stats_health();
-                    auto it_stats_health = get_stats_health();
-                    auto health_diff = it_stats_health - my_health;
-
-                    if (it->is_player()) {
-                        *score += 200 - health_diff;
-#ifdef DEBUG_AI
-                        debug = "will try to eat player " + it->to_string();
-                        debug += " distance " + std::to_string(distance_scale);
-#endif
-                    } else if (it->is_alive_monst()) {
-                        *score += 100 - health_diff;
-#ifdef DEBUG_AI
-                        debug = "will try to eat monst " + it->to_string();
-                        debug += " distance " + std::to_string(distance_scale);
-#endif
-                    } else {
-                        *score += 500 + it_stats_health;
-#ifdef DEBUG_AI
-                        debug = "will eat food " + it->to_string();
-                        debug += " distance " + std::to_string(distance_scale);
-#endif
-                        return (true);
-                    }
-                }
-
-                if (possible_to_attack(it)) {
-                    *score += 100;
-#ifdef DEBUG_AI
-                    debug = "will attack " + it->to_string();
-                    debug += " distance " + std::to_string(distance_scale);
-#endif
-                    return (true);
-                }
-            }
-        }
-        break;
-    case 2:
-        //
-        // Lowest priority
-        //
-        FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
-            if (it == this) {
-                continue;
-            }
-
-            if (it->is_hidden) {
-                continue;
-            }
-
-            if (will_prefer(it)) {
-#ifdef DEBUG_AI
-                debug = "prefer " + it->to_string();
-                debug += " distance " + std::to_string(distance_scale);
-#endif
-                return (true);
-            }
-            break;
-        }
-    }
-    return (false);
-}
-
 fpoint Thing::ai_get_next_hop (void)
 {_
     log("calculate next-hop for AI");
@@ -318,91 +177,105 @@ fpoint Thing::ai_get_next_hop (void)
     // Find all the possible goals we can smell.
     //
     std::multiset<Goal> goals_set;
-    uint32_t oldest = 0;
 
 #ifdef DEBUG_AI
-    log("goals:");
+    log("goals (higher are preferred):");
 #endif
     auto tpp = tp();
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            point p(x, y);
-            auto X = x - minx;
-            auto Y = y - miny;
+    for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
+        point p(x, y);
+        auto X = x - minx;
+        auto Y = y - miny;
+
+        //
+        // Too far away to sense?
+        //
+        if (get(scent->val, X, Y) > tpp->ai_scent_distance) {
+            set(scent->val, X, Y, DMAP_IS_WALL);
+            continue;
+        }
+
+        bool got_one = false;
+        uint8_t terrain_score = is_less_preferred_terrain(p);
+        int total_score = -(int)terrain_score;
+
+#define GOAL_ADD(score, msg) \
+        total_score += (score); \
+        got_one = true; \
+        log("+ goal (%d,%d) score %d, total %d, %s, %s", \
+            p.x, p.y, score, total_score, msg, it->to_string().c_str()); \
+
+        FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
+            if (it == this) { continue; }
+            if (it->is_hidden) { continue; }
 
             //
-            // Too far away to sense?
+            // Worse terrain, less preferred. Higher score, more preferred.
             //
-            if (get(scent->val, X, Y) > tpp->ai_scent_distance) {
-                set(scent->val, X, Y, DMAP_IS_WALL);
-                continue;
-            }
+            auto my_health = get_stats_health();
+            auto it_stats_health = it->get_stats_health();
+            auto health_diff = it_stats_health - my_health;
 
-            //
-            // Look at the cell for each priority level. This means we can
-            // have multiple goals per cell. We combine them all together.
-            //
-            bool got_one = false;
-            auto terrain_score = is_less_preferred_terrain(p);
-
-            // auto this_cell_scent = get(scent->val, X, Y);
-            const auto max_priority = 3;
-            for (auto priority = 0; priority < max_priority; priority++) {
-                float score = 0;
-                std::string why;
-                if (!ai_is_goal_for_me(p, priority, &score, why)) {
-                    continue;
+            if (is_starving) {
+                if (will_eat(it)) {
+                    //
+                    // If starving, prefer the thing with most health
+                    //
+                    GOAL_ADD(it_stats_health, "eat player");
                 }
-
-                //
-                // Further -> less preferred. No, astar will factor this
-                // in anyway
-                //
-                // score -= this_cell_scent;
-
-                //
-                // Higher priort -> more preferred
-                //
-                score += 100 * (max_priority - priority + 1);
-
-                //
-                // Worse terrain -> less preferred
-                //
-                score -= terrain_score;
-
-                Goal goal(score);
-                goal.at = point(X, Y);
-                goal.why = why;
-                goals_set.insert(goal);
-#ifdef DEBUG_AI
-                log("  goal add %d,%d (%s) prio %d score %f",
-                    (int)X, (int)Y, why.c_str(), priority, score);
-#endif
-
-                //
-                // Also take note of the oldest cell age; we will use this
-                // later.
-                //
-                uint32_t age = get(age_map->val, x, y);
-                oldest = std::min(oldest, age);
-                got_one = true;
-                break;
+            } else if (is_hungry) {
+                if (will_eat(it)) {
+                    //
+                    // Prefer easy food over attacking the player and prefer
+                    // the player over a monster. Factor in health so we will
+                    // go for the easier kill in preference.
+                    //
+                    if (it->is_player()) {
+                        GOAL_ADD(- health_diff, "eat player");
+                    } else if (it->is_alive_monst()) {
+                        GOAL_ADD(- health_diff, "eat monst");
+                    } else {
+                        GOAL_ADD(it_stats_health, "eat food");
+                    }
+                }
             }
 
-            if (got_one) {
-                set(scent->val, X, Y, DMAP_IS_GOAL);
-            } else if (terrain_score) {
-                set(scent->val, X, Y, terrain_score);
-            } else {
-                set(scent->val, X, Y, DMAP_IS_PASSABLE);
+            if (will_prefer_terrain(it)) {
+                //
+                // Prefer certain terrains over others. i.e. I prefer water.
+                //
+                GOAL_ADD(1, "preferred terrain");
+            }
+
+            if (is_enemy(it)) {
+                //
+                // The closer an enemy is (something that attacked us), the
+                // higher the scoree
+                //
+                float dist = distance(it->mid_at, mid_at);
+                float max_dist = ai_scent_distance();
+
+                if (dist < max_dist) {
+                    GOAL_ADD((int)(max_dist - dist) * 10, "attack enemy");
+                }
             }
         }
-    }
+
+        if (got_one) {
+            goals_set.insert(Goal(total_score, point(X, Y)));
+            set(scent->val, X, Y, DMAP_IS_GOAL);
+        } else if (terrain_score) {
+            set(scent->val, X, Y, terrain_score);
+        } else {
+            set(scent->val, X, Y, DMAP_IS_PASSABLE);
+        }
+    } }
+
     if (goals_set.empty()) {
         CON("TODO WANDER");
     }
 
-#ifdef DEBUG_AI
+#ifdef DEBUG_AI_VERBOSE
     log("initial goal map derived:");
     dmap_print(scent,
                point(start.x - minx, start.y - miny),
@@ -462,8 +335,8 @@ fpoint Thing::ai_get_next_hop (void)
         set(scent->val, p.x, p.y, score8);
 
 #ifdef DEBUG_AI
-        log("  scale goal %d to %d (%s)",
-            (int)orig_score, score8, g.why.c_str());
+        log("  scale goal (%d,%d) %d to %d",
+            g.at.x, g.at.y, (int)orig_score, (int)score8);
 #endif
     }
 
@@ -475,7 +348,7 @@ fpoint Thing::ai_get_next_hop (void)
     //
     // Find the best next-hop to the best goal.
     //
-#ifdef DEBUG_AI
+#ifdef DEBUG_AI_VERBOSE
     log("goals:");
     dmap_print(scent,
                point(start.x - minx, start.y - miny),

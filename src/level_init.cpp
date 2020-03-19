@@ -889,18 +889,6 @@ static void level_place_blood (Dungeonp d)
                 continue;
             }
 
-            if (!d->is_floor(x, y) ||
-                !d->is_floor(x - 1, y) ||
-                !d->is_floor(x + 1, y) ||
-                !d->is_floor(x, y - 1) ||
-                !d->is_floor(x, y + 1) ||
-                !d->is_floor(x - 1, y - 1) ||
-                !d->is_floor(x + 1, y - 1) ||
-                !d->is_floor(x - 1, y + 1) ||
-                !d->is_floor(x + 1, y + 1)) {
-                continue;
-            }
-
             if (d->is_hazard(x, y) ||
                 d->is_hazard(x - 1, y) ||
                 d->is_hazard(x + 1, y) ||
