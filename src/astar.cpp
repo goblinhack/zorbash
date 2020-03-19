@@ -12,7 +12,7 @@
 #include "my_thing.h"
 #include <vector>
 
-#undef ASTAR_DEBUG
+#define ASTAR_DEBUG
 #ifdef ASTAR_DEBUG
 static std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> debug {};
 #endif
@@ -302,6 +302,7 @@ Path astar_solve (const point &at,
         auto a = Astar(at, g.at, dmap);
 
         auto path = a.solve(&gi);
+        LOG("cost of goal (%d,%d) => %d", g.at.x, g.at.y, path.cost);
         if (path.cost < best.cost)  {
             best = path;
         }
@@ -309,7 +310,7 @@ Path astar_solve (const point &at,
 
 #ifdef ASTAR_DEBUG
     for (auto p : best.path) {
-        set(debug, p.x, p.y, 'X');
+        set(debug, p.x, p.y, '*');
     }
 
     dump(dmap, at, start, end);

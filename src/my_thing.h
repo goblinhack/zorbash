@@ -24,11 +24,10 @@ class Goal
 {
 public:
     float score = {0};
-    point  at;
-    std::string why;
+    point at;
 
     Goal () {}
-    Goal (float score) : score(score) { }
+    Goal (float score, point at) : score(score), at(at) {}
 
     friend bool operator<(const class Goal & lhs, const class Goal & rhs) {
         //
@@ -627,7 +626,6 @@ public:
     bool collision_check_only(fpoint);
     bool collision_obstacle(fpoint);
     bool collision_obstacle(Thingp);
-    bool ai_is_goal_for_me(point p, int priority, float *score, std::string &why);
     bool ai_is_obstacle_for_me(point p);
     void stop(void);
     bool move(fpoint future_pos);
@@ -645,7 +643,7 @@ public:
     bool possible_to_attack(const Thingp it);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
-    bool will_prefer(const Thingp it);
+    bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void);
     double get_bounce(void);
     double get_fadeup(void);
