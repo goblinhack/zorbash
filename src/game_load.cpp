@@ -160,11 +160,11 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     my.t->tp_id = tpp->id;
 
     uint32_t bits32;
-    bool monst = (my.t->monst != nullptr);
+    bool monst = (my.t->monstp != nullptr);
     in >> bits(monst);
     if (monst) {
         my.t->new_monst();
-        in >> bits(my.t->monst);
+        in >> bits(my.t->monstp);
     }
 
     in >> bits(my.t->last_attached);
@@ -218,9 +218,9 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
     if (my.t->has_light) {
         my.t->new_light(my.t->mid_at,
-                        my.t->monst->light_strength,
-                        (LightQuality)my.t->monst->light_quality,
-                        my.t->monst->light_col);
+                        my.t->monstp->light_strength,
+                        (LightQuality)my.t->monstp->light_quality,
+                        my.t->monstp->light_col);
     }
 
     return (in);

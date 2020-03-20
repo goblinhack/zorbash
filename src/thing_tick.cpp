@@ -15,7 +15,7 @@ void Thing::achieve_goals_in_life (void)
         //
         // Make sure we have a path shown if we just completed one.
         //
-        if (!monst->move_path.size()) {
+        if (!monstp->move_path.size()) {
             thing_cursor_path_create();
         }
     }

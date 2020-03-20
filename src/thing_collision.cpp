@@ -784,7 +784,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
             //
             // Weapon hits monster or generator.
             //
-            log("candidate attack %s", it->to_string().c_str());
+            log("candidate to attack %s", it->to_string().c_str());
             if (things_overlap(me, future_pos, it)) {
                 thing_ai_possible_hit_add_hitter_killed_on_hitting(
                         it, "sword hit thing");
@@ -792,13 +792,13 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
         }
     } else if (possible_to_attack(it)) {
         if (things_overlap(me, future_pos, it)) {
-            log("candidate attack %s", it->to_string().c_str());
+            log("candidate to attack %s", it->to_string().c_str());
             thing_ai_possible_hit_add(it, "battle");
         } else {
             log("cannot attack %s, no overlap", it->to_string().c_str());
         }
     } else if (will_eat(it)) {
-        log("candidate eat %s", it->to_string().c_str());
+        log("candidate to eat %s", it->to_string().c_str());
         if (things_overlap(me, future_pos, it)) {
             thing_ai_possible_hit_add(it, "eat");
         }

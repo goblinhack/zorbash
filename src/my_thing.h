@@ -167,7 +167,7 @@ typedef struct Thing_ {
 public:
     Thing_ (void);
     ~Thing_ (void);
-    Monst    *monst               {};
+    Monst    *monstp              {};
     spoint   last_attached;
     fpoint   br;                         // On screen coordinates
     fpoint   last_blit_br;               // GL co-orids

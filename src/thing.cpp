@@ -580,9 +580,9 @@ _
 _
     level->free_thing_id(this);
 _
-    if (monst) {
-        oldptr(monst);
-        delete monst;
+    if (monstp) {
+        oldptr(monstp);
+        delete monstp;
     }
 }
 

@@ -34,8 +34,8 @@ void Thing::dump (std::string pfx, std::ostream &out)
     auto tp = tp_find(tp_id);
     out << pfx << "tp_id               " << tp_id                << " " << tp_name(tp) << std::endl;
 
-    if (monst) {
-        monst->dump(pfx + "  ", out);
+    if (monstp) {
+        monstp->dump(pfx + "  ", out);
     }
 
     out << pfx << "last_attached       " << last_attached        << std::endl;

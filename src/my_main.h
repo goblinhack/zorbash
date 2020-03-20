@@ -28,7 +28,9 @@
 
 #undef  ENABLE_INVERTED_GFX        // For vision impaired
 #undef  ENABLE_FULL_TIMESTAMPS     // Full timestamps with date in logs
-#define DEBUG_AI                   // Monster AI
+
+#undef DEBUG_AI                    // Monster AI decisions
+#undef DEBUG_ASTAR_PATH            // Astar AI path costs
 
 //
 // Settings to override compiler errors
