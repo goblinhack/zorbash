@@ -17,12 +17,12 @@ void Thing::carry (Thingp what)
     }
 
     new_monst();
-    for (auto item : monst->carrying) {
+    for (auto item : monstp->carrying) {
         if (item == what->id) {
             return;
         }
     }
-    monst->carrying.push_front(what->id);
+    monstp->carrying.push_front(what->id);
     what->set_owner(this);
     what->hide();
 
@@ -38,7 +38,7 @@ void Thing::carry (Thingp what)
 
 void Thing::drop (Thingp what)
 {_
-    if (!monst) {
+    if (!monstp) {
         return;
     }
     auto existing_owner = what->owner_get();
@@ -50,18 +50,18 @@ void Thing::drop (Thingp what)
     what->remove_owner();
     what->visible();
 
-    monst->carrying.remove(what->id);
+    monstp->carrying.remove(what->id);
     log("dropped %s", what->to_string().c_str());
 }
 
 void Thing::drop_all (void)
 {_
-    if (!monst) {
+    if (!monstp) {
         return;
     }
 
-    while (!monst->carrying.empty()) {
-        auto id = *monst->carrying.begin();
+    while (!monstp->carrying.empty()) {
+        auto id = *monstp->carrying.begin();
         return (drop(thing_find(id)));
     }
 }

@@ -11,7 +11,7 @@
 #include <vector>
 #include "my_thing.h"
 
-#define DEBUG_AI_VERBOSE
+#undef DEBUG_AI_VERBOSE
 
 bool Thing::possible_to_attack (const Thingp itp)
 {_
@@ -199,11 +199,17 @@ fpoint Thing::ai_get_next_hop (void)
         uint8_t terrain_score = is_less_preferred_terrain(p);
         int total_score = -(int)terrain_score;
 
+#ifdef DEBUG_AI
 #define GOAL_ADD(score, msg) \
         total_score += (score); \
         got_one = true; \
         log("+ goal (%d,%d) score %d, total %d, %s, %s", \
-            p.x, p.y, score, total_score, msg, it->to_string().c_str()); \
+            p.x, p.y, score, total_score, msg, it->to_string().c_str());
+#else
+#define GOAL_ADD(score, msg) \
+        total_score += (score); \
+        got_one = true;
+#endif
 
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
@@ -326,9 +332,9 @@ fpoint Thing::ai_get_next_hop (void)
 #ifdef DEBUG_AI
         auto orig_score = score;
 #endif
-        score = most_preferred - score;
         score /= (most_preferred - least_preferred);
-        score *= DMAP_IS_PASSABLE - 1;
+        score *= DMAP_IS_PASSABLE - 2;
+        score++;
 
         assert(score <= DMAP_IS_PASSABLE);
         uint8_t score8 = (int)score;

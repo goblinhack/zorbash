@@ -169,13 +169,13 @@ void thing_cursor_path_create (void)
 
 bool Thing::cursor_path_pop_next_and_move (void)
 {_
-    if (monst && monst->move_path.size()) {
-        auto to = monst->move_path[0];
+    if (monstp && monstp->move_path.size()) {
+        auto to = monstp->move_path[0];
         auto future_pos = fpoint(to.x + 0.5, to.y + 0.5);
         FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) {
             t->dead("eol");
         }
-        monst->move_path.erase(monst->move_path.begin());
+        monstp->move_path.erase(monstp->move_path.begin());
         return (move(future_pos));
     } else {
         return (false);
@@ -186,7 +186,7 @@ void Thing::cursor_path_grab (void)
 {_
     if (game->cursor_move_path.size()) {
         new_monst();
-        monst->move_path = game->cursor_move_path;
+        monstp->move_path = game->cursor_move_path;
         game->cursor_move_path.clear();
         cursor_path_pop_next_and_move();
     }
@@ -195,5 +195,5 @@ void Thing::cursor_path_grab (void)
 void Thing::cursor_path_stop (void)
 {_
     new_monst();
-    monst->move_path.clear();
+    monstp->move_path.clear();
 }

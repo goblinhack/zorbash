@@ -12,8 +12,7 @@
 #include "my_thing.h"
 #include <vector>
 
-#define ASTAR_DEBUG
-#ifdef ASTAR_DEBUG
+#ifdef DEBUG_ASTAR_PATH
 static std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> debug {};
 #endif
 
@@ -212,14 +211,14 @@ public:
                 if (cost < best.cost) {
                     best.path = path;
                     best.cost = cost;
-#ifdef ASTAR_DEBUG
+#ifdef DEBUG_ASTAR_PATH
                     for (auto p : path) {
                         set(debug, p.x, p.y, (char)('A' + *gi));
                     }
                     (*gi)++;
 #endif
                 } else {
-#ifdef ASTAR_DEBUG
+#ifdef DEBUG_ASTAR_PATH
                     for (auto p : path) {
                         set(debug, p.x, p.y, (char)('a' + *gi));
                     }
@@ -245,7 +244,7 @@ public:
     }
 };
 
-#ifdef ASTAR_DEBUG
+#ifdef DEBUG_ASTAR_PATH
 static void dump (Dmap *dmap,
                   const point &at,
                   const point &start,
@@ -295,20 +294,27 @@ Path astar_solve (const point &at,
     best.cost = std::numeric_limits<int>::max();
     char gi = '\0';
 
-#ifdef ASTAR_DEBUG
+#ifdef DEBUG_ASTAR_PATH
     debug = {};
 #endif
     for (auto g : goals) {
+#if DEBUG_ASTAR_PATH_VERBOSE
+        debug = {};
+#endif
         auto a = Astar(at, g.at, dmap);
-
         auto path = a.solve(&gi);
+#if DEBUG_ASTAR_PATH
         LOG("cost of goal (%d,%d) => %d", g.at.x, g.at.y, path.cost);
+#endif
+#if DEBUG_ASTAR_PATH_VERBOSE
+        dump(dmap, at, start, end);
+#endif
         if (path.cost < best.cost)  {
             best = path;
         }
     }
 
-#ifdef ASTAR_DEBUG
+#ifdef DEBUG_ASTAR_PATH
     for (auto p : best.path) {
         set(debug, p.x, p.y, '*');
     }

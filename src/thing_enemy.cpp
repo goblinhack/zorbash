@@ -11,12 +11,12 @@
 
 bool Thing::is_enemy (Thingp attacker)
 {_
-    if (unlikely(!monst)) {
+    if (unlikely(!monstp)) {
         return (false);
     }
 
     auto enemy = attacker->id;
-    for (auto e : monst->enemies) {
+    for (auto e : monstp->enemies) {
         if (e == enemy) {
             return (true);
         }
@@ -26,7 +26,11 @@ bool Thing::is_enemy (Thingp attacker)
 
 void Thing::add_enemy (Thingp attacker)
 {_
-    if (unlikely(!monst)) {
+    if (unlikely(!is_monst())) {
+        return;
+    }
+
+    if (unlikely(!monstp)) {
         return;
     }
 
@@ -35,6 +39,6 @@ void Thing::add_enemy (Thingp attacker)
     }
 
     auto enemy = attacker->id;
-    monst->enemies.push_back(enemy);
-    con("add enemy %s", attacker->to_string().c_str());
+    monstp->enemies.push_back(enemy);
+    log("add enemy %s", attacker->to_string().c_str());
 }

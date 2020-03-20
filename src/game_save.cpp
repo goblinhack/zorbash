@@ -131,10 +131,10 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     std::string name(tp_id_map[my.t->tp_id - 1]->name);
     out << bits(name);
 
-    bool monst = (my.t->monst != nullptr);
+    bool monst = (my.t->monstp != nullptr);
     out << bits(monst);
     if (monst) {
-        out << bits(my.t->monst);
+        out << bits(my.t->monstp);
     }
 
     out << bits(my.t->last_attached);

@@ -33,8 +33,8 @@ void Thing::log (std::string pfx)
     LOG("%s id                  %08X", pfx.c_str(), id);
     LOG("%s tp_id               %d", pfx.c_str(), tp_id);
 
-    if (monst) {
-        monst->log(pfx + "  ");
+    if (monstp) {
+        monstp->log(pfx + "  ");
     }
 
     LOG("%s last_attached        %s", pfx.c_str(), last_attached.to_string().c_str());
