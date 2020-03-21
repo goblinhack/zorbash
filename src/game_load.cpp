@@ -136,6 +136,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* uint32_t    */ in >> bits(my.t->weapon_id);
     /* uint32_t    */ in >> bits(my.t->weapon_id_carry_anim);
     /* uint32_t    */ in >> bits(my.t->weapon_id_use_anim);
+    /* uint32_t    */ in >> bits(my.t->on_fire_id_anim);
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

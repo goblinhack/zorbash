@@ -149,6 +149,7 @@ typedef struct Monst_ {
     uint32_t     weapon_id {};               // Current weapon
     uint32_t     weapon_id_carry_anim {};
     uint32_t     weapon_id_use_anim {};
+    uint32_t     on_fire_id_anim {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -598,6 +599,12 @@ public:
     timestamp_t incr_timestamp_collision(timestamp_t);
     timestamp_t decr_timestamp_collision(void);
     timestamp_t incr_timestamp_collision(void);
+
+    uint32_t set_on_fire_anim_id(uint32_t);
+    uint32_t get_on_fire_anim_id(void);
+
+    void unset_on_fire(void);
+    void set_on_fire(void);
 
     uint32_t set_owner_id(uint32_t);
     uint32_t get_owner_id(void);

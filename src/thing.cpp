@@ -396,6 +396,10 @@ _
         }
     }
     update_light();
+    if (tp_is_player(tpp)) {
+        set_on_fire();
+    }
+
 }
 
 void Thing::reinit (void)
@@ -660,7 +664,7 @@ void Thing::hooks_remove ()
         if (id == owner->get_weapon_id_carry_anim()) {
             owner->unwield("remove hooks");
 
-            log("detach from carry-anim owner %s", owner->to_string().c_str());
+            log("detach from carry_anim owner %s", owner->to_string().c_str());
             owner->weapon_set_carry_anim_id(0);
         }
 
@@ -679,15 +683,15 @@ void Thing::hooks_remove ()
                 // But only if the owner is visible.
                 //
                 if (owner->is_visible()) {
-                    log("reapply carry-anim for owner %s",
+                    log("reapply carry_anim for owner %s",
                         owner->to_string().c_str());
                     carrying->visible();
                 } else {
-                    log("do not reapply carry-anim for invisible owner %s",
+                    log("do not reapply carry_anim for invisible owner %s",
                         owner->to_string().c_str());
                 }
             } else {
-                log("no carry-anim for owner %s", owner->to_string().c_str());
+                log("no carry_anim for owner %s", owner->to_string().c_str());
                 auto id = owner->get_weapon_id();
                 if (id) {
                     owner->wield(owner->weapon_get());
@@ -707,7 +711,7 @@ void Thing::hooks_remove ()
             weapon_set_carry_anim(nullptr);
             verify(item);
             item->remove_owner();
-            item->dead("weapon carry-anim owner killed");
+            item->dead("weapon carry_anim owner killed");
         }
     }
 
@@ -828,24 +832,18 @@ void Thing::move_carried_items (void)
     //
     if (get_weapon_id_carry_anim()) {
         auto w = thing_find(get_weapon_id_carry_anim());
-        if (!w) {
-            err("weapon_id_carry_anim set to %08X but not found",
-                get_weapon_id_carry_anim());
-            return;
+        if (w) {
+            w->move_to(mid_at);
+            w->dir = dir;
         }
-        w->move_to(mid_at);
-        w->dir = dir;
     }
 
     if (get_weapon_id_use_anim()) {
         auto w = thing_find(get_weapon_id_use_anim());
-        if (!w) {
-            err("weapon_id_use_anim set to %08X but not found",
-                get_weapon_id_use_anim());
-            return;
+        if (w) {
+            w->move_to(mid_at);
+            w->dir = dir;
         }
-        w->move_to(mid_at);
-        w->dir = dir;
     }
 
     //
@@ -857,6 +855,15 @@ void Thing::move_carried_items (void)
             if (random_range(0, 1000) > 500) {
                 thing_new(tp_name(tp_random_ripple()), at);
             }
+        }
+    }
+
+    auto on_fire_anim_id = get_on_fire_anim_id();
+    if (on_fire_anim_id) {
+        auto w = thing_find(on_fire_anim_id);
+        if (w) {
+            w->move_to(mid_at);
+            w->dir = dir;
         }
     }
 }

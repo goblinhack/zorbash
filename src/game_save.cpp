@@ -115,6 +115,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* uint32_t    */ out << bits(my.t->weapon_id);
     /* uint32_t    */ out << bits(my.t->weapon_id_carry_anim);
     /* uint32_t    */ out << bits(my.t->weapon_id_use_anim);
+    /* uint32_t    */ out << bits(my.t->on_fire_id_anim);
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
