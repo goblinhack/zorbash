@@ -715,6 +715,7 @@ static void level_place_lava (Dungeonp d,
             if (random_range(0, 100) < 80) {
                 thing_new("smoke1", fpoint(x, y), fpoint(0.5, 0.5));
             }
+thing_new("fire", fpoint(x, y), fpoint(0.5, 0.5));
         }
     }
 }
