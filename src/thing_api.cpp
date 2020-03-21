@@ -3492,3 +3492,22 @@ fpoint Thing::set_interpolated_mid_at (fpoint v)
 //con("%s", __FUNCTION__);
     return (monstp->interpolated_mid_at = v);
 }
+
+////////////////////////////////////////////////////////////////////////////
+// on_fire_id_anim
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_on_fire_anim_id (void)
+{_
+    if (monstp) {
+        return (monstp->on_fire_id_anim);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_on_fire_anim_id (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->on_fire_id_anim = v);
+}
