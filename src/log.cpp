@@ -542,9 +542,13 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
         vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
         putf(MY_STDOUT, buf);
-    }
 
-    kill();
+        char reason[MAXSTR];
+        vsnprintf(reason, MAXSTR, fmt, args);
+        kill(reason);
+    } else {
+        kill("no reason");
+    }
 }
 
 void Thing::dead (Thingp killer, const char *fmt, ...)
@@ -571,15 +575,63 @@ void Thing::dead_ (const char *fmt, va_list args)
         get_timestamp(buf, MAXSTR);
         len = (int)strlen(buf);
         snprintf(buf + len, MAXSTR - len, "thing %s: dead: ",
-                t->to_string().c_str());
+                 t->to_string().c_str());
 
         len = (int)strlen(buf);
         vsnprintf(buf + len, MAXSTR - len, fmt, args);
 
         putf(MY_STDOUT, buf);
+        char reason[MAXSTR];
+        vsnprintf(reason, MAXSTR, fmt, args);
+        kill(reason);
+    } else {
+        kill("no reason");
     }
+}
 
-    kill();
+void Thing::dead (Thingp killer, std::string &reason)
+{
+    verify(this);
+
+    if (tp_is_loggable(tp())) {
+        auto t = this;
+        char buf[MAXSTR];
+        int len;
+
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSTR);
+        len = (int)strlen(buf);
+        snprintf(buf + len, MAXSTR - len, "thing %s: killed by %s: ",
+                t->to_string().c_str(),
+                killer->to_string().c_str());
+
+        putf(MY_STDOUT, reason.c_str());
+        kill(reason);
+    } else {
+        kill("no reason");
+    }
+}
+
+void Thing::dead (std::string &reason)
+{
+    verify(this);
+
+    if (tp_is_loggable(tp())) {
+        auto t = this;
+        char buf[MAXSTR];
+        int len;
+
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSTR);
+        len = (int)strlen(buf);
+        snprintf(buf + len, MAXSTR - len, "thing %s: dead: ",
+                 t->to_string().c_str());
+
+        putf(MY_STDOUT, reason.c_str());
+        kill(reason);
+    } else {
+        kill("no reason");
+    }
 }
 
 void Thing::dead (const char *fmt, ...)

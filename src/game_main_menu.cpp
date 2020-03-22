@@ -31,7 +31,7 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     game_main_menu_destroy();
     game->init();
     game_status_fini();
-    game_status_init();
+    game_status_wid_init();
     wid_minicon_fini();
     wid_minicon_init();
     wid_visible(wid_minicon_window);

@@ -11,6 +11,16 @@
 
 void Thing::achieve_goals_in_life (void)
 {_
+    hunger_clock();
+    if (is_dead) {
+        return;
+    }
+
+    on_fire_tick();
+    if (is_dead) {
+        return;
+    }
+
     if (is_player()) {
         //
         // Make sure we have a path shown if we just completed one.
@@ -130,8 +140,6 @@ void Thing::tick (void)
         }
         return;
     }
-
-    hunger_clock();
 
     if (unlikely(is_dead)) {
         if (tp_is_loggable(tp())) {

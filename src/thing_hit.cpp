@@ -98,10 +98,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         //
         // Record who dun it.
         //
-        // log("is hit terminally, health %d, damage %d, now dead",
-        //     h, damage);
-        dead(hitter, "is hit terminally by %s",
-             real_hitter->to_string().c_str());
+        log("is killed by (%s) for %u, health now %d",
+            real_hitter->to_string().c_str(), damage, h);
+        auto reason = "Killed by " + real_hitter->to_name();
+        dead(hitter, reason);
     } else {
         log("is hit by (%s) for %u, health now %d",
             real_hitter->to_string().c_str(), damage, h);

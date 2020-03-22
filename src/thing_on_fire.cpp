@@ -5,6 +5,7 @@
 
 #include "my_game.h"
 #include "my_thing.h"
+#include "my_sprintf.h"
 
 void Thing::unset_on_fire (void)
 {_
@@ -32,4 +33,36 @@ void Thing::set_on_fire (void)
     set_on_fire_anim_id(on_fire_anim->id);
     on_fire_anim->set_owner(this);
     move_carried_items();
+}
+
+void Thing::on_fire_tick (void)
+{_
+    auto id = get_on_fire_anim_id();
+    if (!id) {
+        return;
+    }
+
+    auto fire_anim = thing_find(id);
+    if (!fire_anim) {
+        return;
+    }
+
+    auto damage = fire_anim->get_stats_attack();
+    if (is_player()) {
+        MINICON("%%fg=yellow$You take %d fire damage!%%fg=reset$", damage);
+    }
+
+    //
+    // Visible hit indication
+    //
+    msg(string_sprintf("%%fg=yellow$-%d ON FIRE!", damage));
+
+    decr_stats_health(damage);
+
+    if (get_stats_health() <= 1) {
+        //
+        // starvation is just annoying for players
+        //
+        dead("Burned to death");
+    }
 }

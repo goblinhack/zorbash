@@ -533,7 +533,7 @@ public:
     void config_sound_select(void);
     void config_keyboard_select(void);
     void config_top_select(void);
-    void dead_select(void);
+    void dead_select(const char *reason);
     void display(void);
     void fini(void);
     void hard_pause(void);

@@ -34,7 +34,7 @@ void game_status_fini (void)
     wid_destroy(&wid_sidebar);
 }
 
-uint8_t game_status_init (void)
+uint8_t game_status_wid_init (void)
 {_
     game_status_wid_create();
 
