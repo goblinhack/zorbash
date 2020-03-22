@@ -3,8 +3,10 @@ import tp
 
 
 def corridor_init(name, tiles=[], left_tiles=[]):
-    x = tp.Tp(name)
+    real_name = "corridor"
+    x = tp.Tp(name, real_name)
 
+    x.set_a_or_an_prefix("the");
     x.set_is_corridor(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_interesting(False)

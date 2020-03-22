@@ -790,7 +790,8 @@ public:
     int z_depth(void);
     std::string stats_attack_hd(void);
     std::string is_nutrition_hd(void);
-    std::string to_name(void);
+    std::string a_or_an(void);
+    std::string the(void);
     std::string to_string(void);
     uint8_t is_dir_bl(void);
     uint8_t is_dir_br(void);

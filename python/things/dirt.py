@@ -3,12 +3,14 @@ import tp
 
 
 def dirt_init(name, tiles=[], left_tiles=[]):
-    x = tp.Tp(name)
+    real_name = "dirt"
+    x = tp.Tp(name, real_name)
 
     x.set_is_cursor_can_hover_over(True)
     x.set_is_dirt(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
+    x.set_a_or_an_prefix("the");
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
 
     for t in tiles:

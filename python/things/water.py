@@ -12,6 +12,7 @@ def tp_init(name, real_name, tiles=[]):
     x.set_is_loggable(False)
     x.set_is_obstacle(True)
     x.set_is_water(True)
+    x.set_a_or_an_prefix("the");
     x.set_z_depth(zx.MAP_DEPTH_WATER)
 
     delay = 1250

@@ -3,13 +3,15 @@ import tp
 
 
 def tp_init(name):
-    x = tp.Tp(name)
+    real_name = "cursor"
+    x = tp.Tp(name, real_name)
 
+    x.set_a_or_an_prefix("the");
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
-    x.set_is_movable(True)
-    x.set_is_cursor(True)
     x.set_is_active(True)
+    x.set_is_cursor(True)
+    x.set_is_movable(True)
     x.set_stats_move_speed_ms(10)
     x.set_z_depth(zx.MAP_DEPTH_CURSOR)
 

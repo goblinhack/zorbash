@@ -3,18 +3,17 @@ import tp
 
 
 def init1(name):
-    x = tp.Tp(name)
+    real_name = "claw attack"
+    x = tp.Tp(name, real_name)
 
-    x.set_gfx_dead_anim(False)
+    x.set_a_or_an_prefix("a");
     x.set_gfx_animated(True)
-    x.set_gfx_animated_can_vflip(True)
     x.set_gfx_animated_can_hflip(True)
+    x.set_gfx_animated_can_vflip(True)
+    x.set_gfx_dead_anim(False)
     x.set_gfx_is_attack_anim(True)
     x.set_gfx_show_outlined(True)
-    #
-    # Noisy
-    #
-    # x.set_is_loggable(True)
+    x.set_is_loggable(False)
     x.set_is_movable(True)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 

@@ -137,14 +137,14 @@ class Tp:
     def set_str_zzz15(self, value):
         zx.tp_set_str_zzz15(self, value)
 
-    def set_str_zzz16(self, value):
-        zx.tp_set_str_zzz16(self, value)
+    def set_a_or_an_prefix(self, value):
+        zx.tp_set_a_or_an_prefix(self, value)
 
     def set_real_name(self, value):
         zx.tp_set_real_name(self, value)
 
-    def set_str_light_color(self, value):
-        zx.tp_set_str_light_color(self, value)
+    def set_light_color(self, value):
+        zx.tp_set_light_color(self, value)
 
     def set_weapon_carry_anim(self, value):
         zx.tp_set_weapon_carry_anim(self, value)

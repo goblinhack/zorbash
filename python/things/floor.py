@@ -3,13 +3,13 @@ import tp
 
 
 def tp_init(name, tiles=[], left_tiles=[]):
-
     x = tp.Tp(name)
 
     x.set_is_cursor_can_hover_over(True)
     x.set_is_floor(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
+    x.set_a_or_an_prefix("the");
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
 
     for t in tiles:

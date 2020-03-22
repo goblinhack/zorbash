@@ -77,7 +77,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_on_fire.o 		\
-    $(OBJDIR)/thing_string.o 		\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_attach.o 		\
@@ -85,19 +84,22 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
+    $(OBJDIR)/thing_dead.o 		\
     $(OBJDIR)/thing_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
+    $(OBJDIR)/thing_enemy.o 		\
     $(OBJDIR)/thing_health.o 		\
     $(OBJDIR)/thing_hit.o 		\
-    $(OBJDIR)/thing_enemy.o 		\
     $(OBJDIR)/thing_hunger.o 		\
     $(OBJDIR)/thing_id.o 		\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_msg.o 		\
+    $(OBJDIR)/thing_name.o 		\
     $(OBJDIR)/thing_path.o 		\
     $(OBJDIR)/thing_shove.o 		\
+    $(OBJDIR)/thing_string.o 		\
     $(OBJDIR)/thing_template.o 		\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_tile.o 		\

@@ -78,8 +78,8 @@ public:
     std::string str_zzz13;
     std::string str_zzz14;
     std::string str_zzz15;
-    std::string str_zzz16;
-    std::string str_light_color;
+    std::string a_or_an_prefix;
+    std::string light_color;
     std::string weapon_carry_anim;
     std::string weapon_use_anim;
 
@@ -1253,10 +1253,10 @@ static inline std::string tp_str_zzz15 (Tpp t)
     return (t->str_zzz15);
 }
 
-static inline std::string tp_str_zzz16 (Tpp t)
+static inline std::string tp_a_or_an_prefix (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz16);
+    return (t->a_or_an_prefix);
 }
 
 static inline std::string tp_real_name (Tpp t)
@@ -1265,10 +1265,10 @@ static inline std::string tp_real_name (Tpp t)
     return (t->real_name);
 }
 
-static inline std::string tp_str_light_color (Tpp t)
+static inline std::string tp_light_color (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_light_color);
+    return (t->light_color);
 }
 
 static inline std::string tp_weapon_carry_anim (Tpp t)

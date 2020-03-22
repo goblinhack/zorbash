@@ -9,10 +9,11 @@ def tp_init(name,
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
-    x.set_is_wall_deco(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_is_movement_blocking(True)
+    x.set_is_wall_deco(True)
+    x.set_a_or_an_prefix("a");
     x.set_z_depth(zx.MAP_DEPTH_WALLS_DECO)
 
     delay = 2500
