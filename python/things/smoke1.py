@@ -9,7 +9,7 @@ def tp_init(name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
-    x.set_a_or_an_prefix("");
+    x.set_a_or_an("");
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 50

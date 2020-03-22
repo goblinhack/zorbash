@@ -34,7 +34,7 @@ std::string Thing::a_or_an (void)
     }
 
     if (out == "") {
-        auto prefix = tp_a_or_an_prefix(tpp);
+        auto prefix = tp_a_or_an(tpp);
         if (prefix == "") {
             out = tpp->real_name;
         } else {
@@ -56,7 +56,7 @@ std::string Thing::the (void)
         return ("<no name>");
     }
 
-    std::string out = "";
+    std::string out = "the ";
 
     if (is_undead()) {
         if (is_dead) {
@@ -72,5 +72,12 @@ std::string Thing::the (void)
 
     out += tpp->real_name;
 
+    return (out);
+}
+
+std::string Thing::The (void)
+{_
+    auto out = the();
+    out[0] = toupper(out[0]);
     return (out);
 }

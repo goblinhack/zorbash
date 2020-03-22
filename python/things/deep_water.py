@@ -5,7 +5,7 @@ import tp
 def deep_tp_init(name, real_name, tiles=[]):
     x = tp.Tp(name, real_name)
 
-    x.set_a_or_an_prefix("the");
+    x.set_a_or_an("the");
     x.set_gfx_animated(True)
     x.set_is_deep_water(True)
     x.set_is_hazard(True)

@@ -13,7 +13,7 @@ def lava_init(name, real_name, tiles=[], left_tiles=[]):
     x.set_is_loggable(False)
     x.set_is_obstacle(True)
     x.set_light_color("white")
-    x.set_a_or_an_prefix("");
+    x.set_a_or_an("");
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
 
     delay = 1250

@@ -6,7 +6,7 @@ def tp_init(name):
     real_name = "cursor"
     x = tp.Tp(name, real_name)
 
-    x.set_a_or_an_prefix("the");
+    x.set_a_or_an("the");
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
     x.set_is_active(True)

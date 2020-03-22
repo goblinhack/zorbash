@@ -5,7 +5,7 @@ import tp
 def chasm_init(name, real_name, tiles=[], left_tiles=[]):
     x = tp.Tp(name, real_name)
 
-    x.set_a_or_an_prefix("a");
+    x.set_a_or_an("a");
     x.set_is_chasm(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)

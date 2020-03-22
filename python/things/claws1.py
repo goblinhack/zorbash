@@ -6,7 +6,7 @@ def init1(name):
     real_name = "claw attack"
     x = tp.Tp(name, real_name)
 
-    x.set_a_or_an_prefix("a");
+    x.set_a_or_an("a");
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_animated_can_vflip(True)

@@ -58,8 +58,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     if (is_player()) {
-        MINICON("%%fg=yellow$The %s hits for %d damage!%%fg=reset$",
-                real_hitter->a_or_an().c_str(), damage);
+        MINICON("%%fg=yellow$%s hits for %d damage!%%fg=reset$",
+                real_hitter->The().c_str(), damage);
     } else {
         add_enemy(real_hitter);
     }
@@ -101,7 +101,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         log("is killed by (%s) for %u, health now %d",
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->a_or_an();
-        auto reason = "Killed by " + real_hitter->a_or_an();
+        auto reason = "Killed by " + killer;
         dead(hitter, reason);
     } else {
         log("is hit by (%s) for %u, health now %d",

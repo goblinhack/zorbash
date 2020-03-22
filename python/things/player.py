@@ -26,7 +26,7 @@ def tp_init(name, real_name):
     x.set_is_movable(True)
     x.set_is_player(True)
     x.set_is_shovable(True)
-    x.set_a_or_an_prefix("the");
+    x.set_a_or_an("the");
     x.set_stats_attack(3)
     x.set_stats_attack_rate_tenths(3)
     x.set_stats_defence(3)
