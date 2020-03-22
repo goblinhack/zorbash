@@ -212,7 +212,7 @@ public:
     int is_rrr30 {};
     int is_rrr31 {};
     int is_rrr32 {};
-    int is_rrr33 {};
+    int gfx_is_on_fire_anim {};
     int is_attack_shove_chance_d1000 {};
     int is_chasm {};
     int is_hazard {};
@@ -581,10 +581,10 @@ static inline int tp_is_rrr32 (Tpp t)
     return (t->is_rrr32);
 }
 
-static inline int tp_is_rrr33 (Tpp t)
+static inline int tp_gfx_is_attack_anim (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr33);
+    return (t->gfx_is_attack_anim);
 }
 
 static inline int tp_is_attack_shove_chance_d1000 (Tpp t)
@@ -1103,10 +1103,10 @@ static inline int tp_gfx_is_weapon_carry_anim (Tpp t)
     return (t->gfx_is_weapon_carry_anim);
 }
 
-static inline int tp_gfx_is_attack_anim (Tpp t)
+static inline int tp_gfx_is_on_fire_anim (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_is_attack_anim);
+    return (t->gfx_is_on_fire_anim);
 }
 
 static inline int tp_is_weapon (Tpp t)

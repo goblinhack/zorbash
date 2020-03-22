@@ -877,6 +877,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     if (is_monst() ||
         is_player() ||
+        tp_gfx_is_on_fire_anim(tpp) ||
         tp_gfx_is_attack_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
 
@@ -980,6 +981,22 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     // A bit of pixel offset to account for screen rounding
     //
     blit_br.y += game->config.one_pixel_gl_height / 8;
+
+    if (get_on_fire_anim_id()) {
+        static uint32_t ts;
+        static color c = WHITE;
+        if (time_have_x_tenths_passed_since(1, ts)) {
+            ts = time_get_time_ms_cached();
+            if (random_range(0, 100) < 10) {
+                c = WHITE;
+            } else if (random_range(0, 100) < 50) {
+                c = ORANGE;
+            } else {
+                c = RED;
+            }
+        }
+        glcolor(c);
+    }
 
     if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
         if (is_submerged) {
@@ -1116,6 +1133,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         is_player() ||
         is_msg() ||
         tp_gfx_is_attack_anim(tpp) ||
+        tp_gfx_is_on_fire_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
 
         if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {

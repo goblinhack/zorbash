@@ -1725,7 +1725,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr30)
     TP_SET_DECL(is_rrr31)
     TP_SET_DECL(is_rrr32)
-    TP_SET_DECL(is_rrr33)
+    TP_SET_DECL(gfx_is_on_fire_anim)
     TP_SET_DECL(is_attack_shove_chance_d1000)
     TP_SET_DECL(is_chasm)
     TP_SET_DECL(is_hazard)

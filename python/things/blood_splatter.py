@@ -9,6 +9,7 @@ def tp_init(name):
     x.set_is_loggable(False)
     x.set_is_blood_splatter(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
+    x.set_gfx_show_outlined(True)
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
 
     delay = 20
