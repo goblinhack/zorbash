@@ -39,52 +39,61 @@ void Level::update_minimap (void)
     if (unlikely(game->config.gfx_show_hidden)) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
+                color c = WHITE;
                 if (level->player &&
                     (x == (int)level->player->mid_at.x) &&
                     (y == (int)level->player->mid_at.y)) {
-                    glcolor(PINK);
+                    c = PINK;
                 } else if (level->is_door(x, y)) {
-                    glcolor(RED);
+                    c = RED;
                 } else if (level->is_lava(x, y)) {
-                    glcolor(ORANGE);
+                    c = ORANGE;
                 } else if (level->is_chasm(x, y)) {
-                    glcolor(BLACK);
+                    c = BLACK;
                 } else if (level->is_wall(x, y)) {
                     if (level->is_visited(x, y)) {
-                        glcolor(GRAY80);
+                        c = GRAY80;
                     } else {
-                        glcolor(GRAY70);
+                        c = GRAY70;
                     }
                 } else if (level->is_rock(x, y)) {
                     if (level->is_visited(x, y)) {
-                        glcolor(GRAY70);
+                        c = GRAY70;
                     } else {
-                        glcolor(GRAY60);
+                        c = GRAY60;
                     }
                 } else if (level->is_floor(x, y) ||
                            level->is_corridor(x, y)) {
                     if (level->is_visited(x, y)) {
-                        glcolor(GRAY40);
+                        c = GRAY40;
                     } else {
-                        glcolor(GRAY20);
+                        c = GRAY20;
                     }
                 } else if (level->is_deep_water(x, y)) {
-                    glcolor(DARKBLUE);
+                    c = DARKBLUE;
                 } else if (level->is_water(x, y)) {
-                    glcolor(BLUE2);
+                    c = BLUE2;
                 } else if (level->is_dirt(x, y)) {
-                    glcolor(GRAY20);
+                    c = GRAY20;
                 } else {
                     if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
-                        color c = DARKGREEN;
+                        c = DARKGREEN;
                         c.a = 100;
-                        glcolor(c);
                     } else {
-                        color c = DARKGREEN;
+                        c = DARKGREEN;
                         c.a = 30;
-                        glcolor(c);
                     }
                 }
+
+                if ((x >= level->map_tl.x) && (x <= level->map_br.x) &&
+                    (y >= level->map_tl.y) && (y <= level->map_br.y)) {
+                } else {
+                    c.r /= 2;
+                    c.g /= 2;
+                    c.b /= 2;
+                }
+
+                glcolor(c);
 
                 blit(solid_tex_id,
                      ((float)x) * dx,
@@ -99,54 +108,64 @@ void Level::update_minimap (void)
         //
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
+                color c = WHITE;
+
                 if (!level->is_visited(x, y)) {
                     if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
-                        color c = DARKGREEN;
+                        c = DARKGREEN;
                         c.a = 100;
-                        glcolor(c);
                     } else {
-                        color c = DARKGREEN;
+                        c = DARKGREEN;
                         c.a = 30;
-                        glcolor(c);
                     }
                 } else if (level->player &&
                     (x == (int)level->player->mid_at.x) &&
                     (y == (int)level->player->mid_at.y)) {
-                    glcolor(PINK);
+                    c = PINK;
                 } else if (level->is_door(x, y)) {
-                    glcolor(RED);
+                    c = RED;
                 } else if (level->is_lava(x, y)) {
-                    glcolor(ORANGE);
+                    c = ORANGE;
                 } else if (level->is_chasm(x, y)) {
-                    glcolor(BLACK);
+                    c = BLACK;
                 } else if (level->is_wall(x, y)) {
                        if (level->is_visited(x, y)) {
-                        glcolor(GRAY80);
+                        c = GRAY80;
                     } else {
-                        glcolor(GRAY70);
+                        c = GRAY70;
                     }
                 } else if (level->is_rock(x, y)) {
                        if (level->is_visited(x, y)) {
-                        glcolor(GRAY70);
+                        c = GRAY70;
                     } else {
-                        glcolor(GRAY60);
+                        c = GRAY60;
                     }
                 } else if (level->is_floor(x, y) ||
                            level->is_corridor(x, y)) {
                     if (level->is_visited(x, y)) {
-                        glcolor(GRAY40);
+                        c = GRAY40;
                     } else {
-                        glcolor(GRAY20);
+                        c = GRAY20;
                     }
                 } else if (level->is_deep_water(x, y)) {
-                    glcolor(DARKBLUE);
+                    c = DARKBLUE;
                 } else if (level->is_water(x, y)) {
-                    glcolor(BLUE2);
+                    c = BLUE2;
                 } else if (level->is_dirt(x, y)) {
-                    glcolor(GRAY20);
+                    c = GRAY20;
                 } else {
-                    continue;
+                    c = BLACK;
                 }
+
+                if ((x >= level->map_tl.x) && (x <= level->map_br.x) &&
+                    (y >= level->map_tl.y) && (y <= level->map_br.y)) {
+                } else {
+                    c.r /= 2;
+                    c.g /= 2;
+                    c.b /= 2;
+                }
+
+                glcolor(c);
 
                 blit(solid_tex_id,
                      ((float)x) * dx,
