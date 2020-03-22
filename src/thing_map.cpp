@@ -934,7 +934,7 @@ static void thing_blit_blood (uint16_t minx, uint16_t miny,
     if (thing_map_black_and_white) {
         glcolor(GRAY10);
     } else {
-        glcolor(RED4);
+        glcolor(DARKRED);
     }
 
     blit_init();

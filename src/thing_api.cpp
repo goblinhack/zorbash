@@ -540,9 +540,9 @@ int Thing::is_rrr32(void)
     return (tp_is_rrr32(tp()));
 }
 
-int Thing::is_rrr33(void)
+int Thing::gfx_is_on_fire_anim(void)
 {_
-    return (tp_is_rrr33(tp()));
+    return (tp_gfx_is_on_fire_anim(tp()));
 }
 
 int Thing::is_attack_shove_chance_d1000(void)
@@ -3508,6 +3508,6 @@ uint32_t Thing::get_on_fire_anim_id (void)
 uint32_t Thing::set_on_fire_anim_id (uint32_t v)
 {_
     new_monst();
-//con("%s", __FUNCTION__);
+//con("%s %08X", __FUNCTION__, v);
     return (monstp->on_fire_id_anim = v);
 }

@@ -74,6 +74,9 @@ class Tp:
     def set_gfx_is_an_animation_only(self, value):
         zx.tp_set_gfx_is_an_animation_only(self, value)
 
+    def set_gfx_is_on_fire_anim(self, value):
+        zx.tp_set_gfx_is_on_fire_anim(self, value)
+
     def set_is_monst(self, value):
         zx.tp_set_is_monst(self, value)
 
@@ -245,8 +248,8 @@ class Tp:
     def set_is_rrr32(self, value):
         zx.tp_set_is_rrr32(self, value)
 
-    def set_is_rrr33(self, value):
-        zx.tp_set_is_rrr33(self, value)
+    def set_gfx_is_attack_anim(self, value):
+        zx.tp_set_gfx_is_attack_anim(self, value)
 
     def set_is_attack_shove_chance_d1000(self, value):
         zx.tp_set_is_attack_shove_chance_d1000(self, value)
