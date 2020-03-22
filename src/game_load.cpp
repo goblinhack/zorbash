@@ -84,6 +84,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->light_quality);
     /* int         */ in >> bits(my.t->light_strength);
     /* int         */ in >> bits(my.t->owned_count);
+    /* int         */ in >> bits(my.t->on_fire_count);
     /* int         */ in >> bits(my.t->stats01);
     /* int         */ in >> bits(my.t->stats02);
     /* int         */ in >> bits(my.t->stats03);
@@ -519,7 +520,7 @@ Game::load (std::string file_to_load, class Game &target)
     if (!game_load_headers_only) {
         wid_visible(wid_minicon_window);
         game_status_fini();
-        game_status_init();
+        game_status_wid_init();
     }
 //
     free(uncompressed);

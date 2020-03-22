@@ -5,7 +5,7 @@
 
 
 void game_status_fini(void);
-uint8_t game_status_init(void);
+uint8_t game_status_wid_init(void);
 
 #include "my_wid.h"
 

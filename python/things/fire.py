@@ -13,6 +13,8 @@ def tp_init(name):
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_movable(True)
+    x.set_stats_attack_hd("1d6+1")
+    x.set_stats_attack_rate_tenths(10)
     x.set_z_depth(zx.MAP_DEPTH_FIRE)
 
     delay = 75

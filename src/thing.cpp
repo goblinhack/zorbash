@@ -12,6 +12,10 @@
 
 void thing_gc (void)
 {_
+    if (!level) {
+        return;
+    }
+
     for (;;) {
         auto i = level->all_gc_things.begin();
         if (i == level->all_gc_things.end()) {
@@ -397,9 +401,8 @@ _
     }
     update_light();
     if (tp_is_player(tpp)) {
-        set_on_fire();
+        incr_on_fire_count();
     }
-
 }
 
 void Thing::reinit (void)
@@ -820,7 +823,7 @@ void Thing::update_light (void)
     }
 }
 
-void Thing::kill (void)
+void Thing::kill (const char *reason)
 {_
     if (is_dead) {
         return;
@@ -833,8 +836,9 @@ void Thing::kill (void)
     unwield("owner is dead");
 
     if (is_player()) {
+        MINICON("%s", reason);
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
-        game->dead_select();
+        game->dead_select(reason);
     }
 
     const auto tpp = tp();
@@ -869,6 +873,11 @@ void Thing::kill (void)
     if (result.second == false) {
         err("failed to insert into gc thing map");
     }
+}
+
+void Thing::kill (std::string &reason)
+{_
+    kill(reason.c_str());
 }
 
 void Thing::update_all (void)

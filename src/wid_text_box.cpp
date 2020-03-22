@@ -76,7 +76,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
 
             wid_set_shape_none(child);
             wid_set_pos(child, tl, br);
-            wid_set_text_lhs(child, true);
+            wid_set_text_centerx(child, true);
 
             wid_set_prev(child, prev);
             prev = child;

@@ -97,6 +97,7 @@ typedef struct Monst_ {
     int          light_quality {};
     int          light_strength {};
     int          owned_count = {};           // How many things this thing owns.
+    int          on_fire_count = {};
     int          stats01 = {};
     int          stats02 = {};
     int          stats03 = {};
@@ -340,6 +341,13 @@ public:
     int incr_stats_attack_rate_tenths(int);
     int decr_stats_attack_rate_tenths(void);
     int incr_stats_attack_rate_tenths(void);
+
+    int set_on_fire_count(int);
+    int get_on_fire_count(void);
+    int decr_on_fire_count(int);
+    int incr_on_fire_count(int);
+    int decr_on_fire_count(void);
+    int incr_on_fire_count(void);
 
     int set_stats21(int);
     int get_stats21(void);
@@ -822,6 +830,8 @@ public:
     void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
     void dead(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void dead(std::string &);
+    void dead(Thingp killer, std::string &);
     void dead_(Thingp killer, const char *fmt, va_list args); // compile error without
     void dead_(const char *fmt, va_list args); // compile error without
     void destroy();
@@ -848,9 +858,11 @@ public:
     void hide();
     void hooks_remove();
     void hunger_clock();
+    void on_fire_tick();
     void init(std::string name, fpoint at, fpoint jitter);
     void reinit(void);
-    void kill(void);
+    void kill(const char *reason);
+    void kill(std::string &reason);
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args); // compile error without
     void move_carried_items(void);
