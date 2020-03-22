@@ -1235,6 +1235,9 @@ void thing_render_all (void)
     miny = std::max(0, (int) level->map_at.y - border);
     maxy = std::min(MAP_HEIGHT, (int)level->map_at.y + TILES_DOWN + border);
 
+    level->map_tl = point(minx, miny);
+    level->map_br = point(maxx, maxy);
+
     //
     // For light sources we need to draw a bit off map as the light
     // has a radius

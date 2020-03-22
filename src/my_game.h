@@ -90,6 +90,8 @@ public:
     bool                       map_follow_player = true;
     fpoint                     map_at;        // map scroll currently st
     fpoint                     map_wanted_at; // map scroll desired at
+    point                      map_tl;        // visible map tl
+    point                      map_br;        // visible map br
     bool                       minimap_valid = false;
     int                        mouse {-1};    // ticks for every move
     int                        mouse_old {-1};
