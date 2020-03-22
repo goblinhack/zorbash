@@ -78,7 +78,7 @@ public:
     std::string str_zzz13;
     std::string str_zzz14;
     std::string str_zzz15;
-    std::string a_or_an_prefix;
+    std::string a_or_an;
     std::string light_color;
     std::string weapon_carry_anim;
     std::string weapon_use_anim;
@@ -1253,10 +1253,10 @@ static inline std::string tp_str_zzz15 (Tpp t)
     return (t->str_zzz15);
 }
 
-static inline std::string tp_a_or_an_prefix (Tpp t)
+static inline std::string tp_a_or_an (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->a_or_an_prefix);
+    return (t->a_or_an);
 }
 
 static inline std::string tp_real_name (Tpp t)

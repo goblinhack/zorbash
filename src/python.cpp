@@ -1787,7 +1787,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(str_zzz13)
     TP_SET_DECL(str_zzz14)
     TP_SET_DECL(str_zzz15)
-    TP_SET_DECL(a_or_an_prefix)
+    TP_SET_DECL(a_or_an)
     TP_SET_DECL(real_name)
     TP_SET_DECL(str_zzz2)
     TP_SET_DECL(str_zzz3)

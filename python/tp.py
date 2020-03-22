@@ -137,8 +137,8 @@ class Tp:
     def set_str_zzz15(self, value):
         zx.tp_set_str_zzz15(self, value)
 
-    def set_a_or_an_prefix(self, value):
-        zx.tp_set_a_or_an_prefix(self, value)
+    def set_a_or_an(self, value):
+        zx.tp_set_a_or_an(self, value)
 
     def set_real_name(self, value):
         zx.tp_set_real_name(self, value)

@@ -5,7 +5,7 @@ import tp
 def tp_init(name, real_name):
     x = tp.Tp(name, real_name)
 
-    x.set_a_or_an_prefix("a");
+    x.set_a_or_an("a");
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)

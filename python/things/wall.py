@@ -25,7 +25,7 @@ def tp_init(name,
     x.set_is_movement_blocking(True)
     x.set_is_obstacle(True)
     x.set_is_wall(True)
-    x.set_a_or_an_prefix("a");
+    x.set_a_or_an("a");
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     if tiles is not None:
