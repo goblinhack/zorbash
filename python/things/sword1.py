@@ -10,20 +10,18 @@ def init1(name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
-    x.set_gfx_dead_anim(False)
     x.set_gfx_animated(True)
-    x.set_gfx_animated_can_vflip(True)
     x.set_gfx_animated_can_hflip(True)
+    x.set_gfx_animated_can_vflip(True)
+    x.set_gfx_dead_anim(False)
     x.set_gfx_is_attack_anim(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_active(True)
     x.set_is_interesting(True)
-    #
-    # Noisy
-    #
-    # x.set_is_loggable(True)
+    x.set_is_loggable(False)
     x.set_is_movable(True)
+    x.set_a_or_an_prefix("a");
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 20
@@ -69,6 +67,7 @@ def init2(name):
     x.set_is_active(True)
     x.set_is_loggable(True)
     x.set_is_movable(True)
+    x.set_a_or_an_prefix("a");
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 550
@@ -87,6 +86,7 @@ def init3(name, real_name):
     x.set_is_loggable(True)
     x.set_is_movable(True)
     x.set_is_weapon(True)
+    x.set_a_or_an_prefix("a");
     x.set_weapon_carry_anim("sword1_carry_anim")
     x.set_weapon_use_anim("sword1_swing_anim")
     x.set_weapon_use_delay_hundredths(5)

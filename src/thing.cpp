@@ -391,7 +391,7 @@ _
 
     if (unlikely(!tp_is_player(tpp))) {
         if (unlikely(tp_is_light_strength(tpp))) {
-            std::string l = tp_str_light_color(tpp);
+            std::string l = tp_light_color(tpp);
             color c = string2color(l);
             new_light(mid_at,
                       (double) tp_is_light_strength(tpp),
@@ -821,63 +821,6 @@ void Thing::update_light (void)
         l->at = get_interpolated_mid_at();
         l->calculate();
     }
-}
-
-void Thing::kill (const char *reason)
-{_
-    if (is_dead) {
-        return;
-    }
-    is_dead = true;
-
-    //
-    // Unwield weapons
-    //
-    unwield("owner is dead");
-
-    if (is_player()) {
-        MINICON("%s", reason);
-        MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
-        game->dead_select(reason);
-    }
-
-    const auto tpp = tp();
-    if (unlikely(!tpp)) {
-        ERR("no tp");
-    } else {
-        if (is_corpse_on_death()) {
-            if (tp_is_loggable(tpp)) {
-                log("killed, leaves corpse");
-            }
-
-            level->set_corpse(mid_at.x, mid_at.y);
-
-            if (tp_is_bleeder(tpp)) {
-                int splatters = random_range(2, 10);
-                for (int splatter = 0; splatter < splatters; splatter++) {
-                    auto tpp = tp_random_blood();
-                    (void) thing_new(tp_name(tpp),
-                                     fpoint(mid_at.x, mid_at.y),
-                                     fpoint(0.25, 0.25));
-                }
-            }
-            return;
-        }
-
-        if (tp_is_loggable(tpp)) {
-            log("killed");
-        }
-    }
-
-    auto result = level->all_gc_things.insert(std::pair(id, this));
-    if (result.second == false) {
-        err("failed to insert into gc thing map");
-    }
-}
-
-void Thing::kill (std::string &reason)
-{_
-    kill(reason.c_str());
 }
 
 void Thing::update_all (void)

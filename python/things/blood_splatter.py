@@ -1,15 +1,16 @@
 import zx
 import tp
 
-def tp_init(name):
-    x = tp.Tp(name)
+def tp_init(name, real_name):
+    x = tp.Tp(name, real_name)
 
+    x.set_a_or_an_prefix("a");
     x.set_gfx_animated(True)
-    x.set_is_interesting(False)
-    x.set_is_loggable(False)
-    x.set_is_blood_splatter(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
+    x.set_is_blood_splatter(True)
+    x.set_is_interesting(False)
+    x.set_is_loggable(False)
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
 
     delay = 20
@@ -31,6 +32,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="blood_splatter1")
+    tp_init(name="blood_splatter1", real_name="blood splatter")
 
 init()

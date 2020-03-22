@@ -11,7 +11,8 @@ def tp_init(name, real_name):
     x.set_is_entrance(True)
     x.set_is_interesting(True)
     x.set_is_light_strength(2)
-    x.set_str_light_color("white")
+    x.set_light_color("white")
+    x.set_a_or_an_prefix("the");
     x.set_z_depth(zx.MAP_DEPTH_EXIT)
 
     delay = 1000

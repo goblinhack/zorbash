@@ -5,14 +5,15 @@ def tp_init(name):
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
+    x.set_gfx_is_on_fire_anim(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_gfx_is_on_fire_anim(True)
     x.set_is_active(True)
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_movable(True)
+    x.set_a_or_an_prefix("");
     x.set_stats_attack_hd("1d6+1")
     x.set_stats_attack_rate_tenths(10)
     x.set_z_depth(zx.MAP_DEPTH_FIRE)

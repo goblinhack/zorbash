@@ -32,6 +32,7 @@ def tp_init(name, real_name):
     x.set_is_shovable(True)
     x.set_is_undead(True)
     x.set_is_water_hater(100)
+    x.set_a_or_an_prefix("a");
     x.set_stats_attack_hd("1d1+1")
     x.set_stats_attack_rate_tenths(10)
     x.set_stats_defence(2)

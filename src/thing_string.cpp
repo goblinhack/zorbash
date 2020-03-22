@@ -37,34 +37,6 @@ std::string Thing::to_string (void)
     }
 }
 
-std::string Thing::to_name (void)
-{_
-    auto tpp = tp();
-    verify(this);
-    verify(tpp);
-    if (unlikely(!tpp)) {
-        return ("<no tp>");
-    }
-
-    std::string real_name = "";
-
-    if (is_undead()) {
-        if (is_dead) {
-            real_name += "inanimate ";
-        } else {
-            real_name += "undead ";
-        }
-    } else {
-        if (is_dead) {
-            real_name += "dead ";
-        }
-    }
-
-    real_name += tpp->real_name;
-
-    return (real_name);
-}
-
 const char * Thing::to_cstring (void)
 {_
     return (to_string().c_str());
