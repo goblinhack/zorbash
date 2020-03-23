@@ -16,6 +16,7 @@ def tp_init(name, real_name, tiles=[]):
     x.set_is_loggable(False)
     x.set_is_movement_blocking(True)
     x.set_light_color("white")
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR_DECO)
 
     delay=50

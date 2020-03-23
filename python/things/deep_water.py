@@ -12,6 +12,7 @@ def deep_tp_init(name, real_name, tiles=[]):
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_obstacle(True)
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_WATER)
 
     delay = 1250

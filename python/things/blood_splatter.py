@@ -11,6 +11,7 @@ def tp_init(name, real_name):
     x.set_is_blood_splatter(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
 
     delay = 20

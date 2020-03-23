@@ -13,6 +13,7 @@ def tp_init(name, real_name):
     x.set_is_interesting(True)
     x.set_is_secret_door(True)
     x.set_a_or_an("a");
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_EXIT)
 
     x.set_tile(tile=name + ".1-closed")

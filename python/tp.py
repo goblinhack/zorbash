@@ -245,8 +245,8 @@ class Tp:
     def set_is_rrr31(self, value):
         zx.tp_set_is_rrr31(self, value)
 
-    def set_is_rrr32(self, value):
-        zx.tp_set_is_rrr32(self, value)
+    def set_is_combustible(self, value):
+        zx.tp_set_is_combustible(self, value)
 
     def set_gfx_is_attack_anim(self, value):
         zx.tp_set_gfx_is_attack_anim(self, value)
@@ -293,8 +293,8 @@ class Tp:
     def set_stats_attack_rate_tenths(self, value):
         zx.tp_set_stats_attack_rate_tenths(self, value)
 
-    def set_stats21(self, value):
-        zx.tp_set_stats21(self, value)
+    def set_lifespan_count(self, value):
+        zx.tp_set_lifespan_count(self, value)
 
     def set_is_secret_door(self, value):
         zx.tp_set_is_secret_door(self, value)
@@ -446,8 +446,8 @@ class Tp:
     def set_is_explosion(self, value):
         zx.tp_set_is_explosion(self, value)
 
-    def set_is_combustable(self, value):
-        zx.tp_set_is_combustable(self, value)
+    def set_is_combustible(self, value):
+        zx.tp_set_is_combustible(self, value)
 
     def set_weapon_use_distance(self, value):
         zx.tp_set_weapon_use_distance(self, value)

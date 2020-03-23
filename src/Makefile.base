@@ -76,7 +76,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
+    $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_on_fire.o 		\
+    $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_attach.o 		\

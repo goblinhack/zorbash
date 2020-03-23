@@ -19,7 +19,7 @@ def tp_init(name, real_name):
     x.set_is_active(True)
     x.set_is_attack_lunge(True)
     x.set_is_attack_shove(True)
-    x.set_is_attack_shove_chance_d1000(100)
+    x.set_is_attack_shove_chance_d1000(200)
     x.set_is_attackable(True)
     x.set_is_corpse_on_death(True)
     x.set_is_hunger_insatiable(True)
@@ -39,8 +39,9 @@ def tp_init(name, real_name):
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial(10)
     x.set_stats_move_speed_ms(300)
-    x.set_stats_strength(20)
+    x.set_stats_strength(9)
     x.set_weapon_use_anim("claws1")
+    x.set_is_combustible(True)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 200
