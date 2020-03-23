@@ -22,6 +22,7 @@ def init1(name):
     x.set_is_loggable(False)
     x.set_is_movable(True)
     x.set_a_or_an("a");
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 20
@@ -68,6 +69,7 @@ def init2(name):
     x.set_is_loggable(True)
     x.set_is_movable(True)
     x.set_a_or_an("a");
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 550
@@ -91,6 +93,7 @@ def init3(name, real_name):
     x.set_weapon_use_anim("sword1_swing_anim")
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     x.set_tile(tile=name + ".1")

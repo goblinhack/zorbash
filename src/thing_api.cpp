@@ -280,9 +280,9 @@ int Thing::is_blood(void)
     return (tp_is_blood(tp()));
 }
 
-int Thing::is_combustable(void)
+int Thing::is_combustible(void)
 {_
-    return (tp_is_combustable(tp()));
+    return (tp_is_combustible(tp()));
 }
 
 int Thing::is_corpse_on_death(void)
@@ -533,11 +533,6 @@ int Thing::is_rrr30(void)
 int Thing::is_rrr31(void)
 {_
     return (tp_is_rrr31(tp()));
-}
-
-int Thing::is_rrr32(void)
-{_
-    return (tp_is_rrr32(tp()));
 }
 
 int Thing::gfx_is_on_fire_anim(void)
@@ -1408,57 +1403,57 @@ int Thing::incr_stats_attack_rate_tenths (void)
 ////////////////////////////////////////////////////////////////////////////
 // attacked_rate_tenths
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats21 (void)
+int Thing::get_lifespan_count (void)
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats21);
+        return (monstp->lifespan_count);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats21 (int v)
+int Thing::set_lifespan_count (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats21 = v);
+    auto n = (monstp->lifespan_count = v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::decr_stats21 (int v)
+int Thing::decr_lifespan_count (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats21 -= v);
+    auto n = (monstp->lifespan_count -= v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::incr_stats21 (int v)
+int Thing::incr_lifespan_count (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats21 += v);
+    auto n = (monstp->lifespan_count += v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::decr_stats21 (void)
+int Thing::decr_lifespan_count (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats21--);
+    auto n = (monstp->lifespan_count--);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::incr_stats21 (void)
+int Thing::incr_lifespan_count (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats21++);
+    auto n = (monstp->lifespan_count++);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }

@@ -11,6 +11,7 @@ def dirt_init(name, tiles=[], left_tiles=[]):
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_a_or_an("the");
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_FLOOR)
 
     for t in tiles:

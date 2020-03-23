@@ -155,9 +155,9 @@ _
     }
 
     {_
-        auto v = tp_stats21(tpp);
+        auto v = tp_lifespan_count(tpp);
         if (unlikely(v)) {
-            set_stats21(v);
+            set_lifespan_count(v);
         }
     }
 
@@ -400,9 +400,6 @@ _
         }
     }
     update_light();
-    if (tp_is_player(tpp)) {
-        incr_on_fire_count();
-    }
 }
 
 void Thing::reinit (void)

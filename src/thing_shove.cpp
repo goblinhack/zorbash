@@ -17,8 +17,10 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         return (THING_SHOVE_NEVER_TRIED);
     }
 
-    if ((int)random_range(0, 1000) > tp_is_attack_shove_chance_d1000(tp())) {
-        return (THING_SHOVE_NEVER_TRIED);
+    if (!is_player()) {
+        if ((int)random_range(0, 1000) > tp_is_attack_shove_chance_d1000(tp())) {
+            return (THING_SHOVE_NEVER_TRIED);
+        }
     }
 
     fpoint shove_delta = delta;

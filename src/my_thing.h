@@ -121,7 +121,7 @@ typedef struct Monst_ {
     int          stats_attack = {};
     int          stats_attack_max = {};
     int          stats_attack_rate_tenths = {};
-    int          stats21 = {};
+    int          lifespan_count = {};
     int          stats_defence = {};
     int          stats_defence_max = {};
     int          stats_health = {};
@@ -349,12 +349,12 @@ public:
     int decr_on_fire_count(void);
     int incr_on_fire_count(void);
 
-    int set_stats21(int);
-    int get_stats21(void);
-    int decr_stats21(int);
-    int incr_stats21(int);
-    int decr_stats21(void);
-    int incr_stats21(void);
+    int set_lifespan_count(int);
+    int get_lifespan_count(void);
+    int decr_lifespan_count(int);
+    int incr_lifespan_count(int);
+    int decr_lifespan_count(void);
+    int incr_lifespan_count(void);
 
     int set_stats01(int);
     int get_stats01(void);
@@ -711,7 +711,7 @@ public:
     int is_blood(void);
     int is_blood_splatter(void);
     int is_chasm(void);
-    int is_combustable(void);
+    int is_combustible(void);
     int is_corpse(void);
     int is_corpse_on_death(void);
     int is_corridor(void);
@@ -769,7 +769,6 @@ public:
     int is_rrr3(void);
     int is_rrr30(void);
     int is_rrr31(void);
-    int is_rrr32(void);
     int is_rrr4(void);
     int is_rrr5(void);
     int is_rrr6(void);
@@ -861,6 +860,8 @@ public:
     void hooks_remove();
     void hunger_clock();
     void on_fire_tick();
+    void lava_tick();
+    void lifespan_tick();
     void init(std::string name, fpoint at, fpoint jitter);
     void reinit(void);
     void kill(const char *reason);

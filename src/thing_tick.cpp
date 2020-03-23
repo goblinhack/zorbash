@@ -11,16 +11,26 @@
 
 void Thing::achieve_goals_in_life (void)
 {_
+    lifespan_tick();
+    if (is_dead) {
+        return;
+    }
+_
     hunger_clock();
     if (is_dead) {
         return;
     }
-
+_
+    lava_tick();
+    if (is_dead) {
+        return;
+    }
+_
     on_fire_tick();
     if (is_dead) {
         return;
     }
-
+_
     if (is_player()) {
         //
         // Make sure we have a path shown if we just completed one.

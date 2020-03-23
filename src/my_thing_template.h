@@ -158,7 +158,6 @@ public:
     int is_attackable {};
     int is_bleeder {};
     int is_blood {};
-    int is_combustable {};
     int is_corpse_on_death {};
     int is_corridor {};
     int is_cursor {};
@@ -211,7 +210,7 @@ public:
     int is_rrr3 {};
     int is_rrr30 {};
     int is_rrr31 {};
-    int is_rrr32 {};
+    int is_combustible {};
     int gfx_is_on_fire_anim {};
     int is_attack_shove_chance_d1000 {};
     int is_chasm {};
@@ -258,7 +257,7 @@ public:
     int stats_strength {};
     int stats_attack {};
     int stats_attack_rate_tenths {};
-    int stats21 {};
+    int lifespan_count {};
     int stats_defence {};
     int stats_health_hunger_pct {};
     int stats_health_initial {};
@@ -575,10 +574,10 @@ static inline int tp_is_rrr31 (Tpp t)
     return (t->is_rrr31);
 }
 
-static inline int tp_is_rrr32 (Tpp t)
+static inline int tp_is_combustible (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr32);
+    return (t->is_combustible);
 }
 
 static inline int tp_gfx_is_attack_anim (Tpp t)
@@ -671,10 +670,10 @@ static inline int tp_stats_attack_rate_tenths (Tpp t)
     return (t->stats_attack_rate_tenths);
 }
 
-static inline int tp_stats21 (Tpp t)
+static inline int tp_lifespan_count (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats21);
+    return (t->lifespan_count);
 }
 
 static inline int tp_stats01 (Tpp t)
@@ -1083,12 +1082,6 @@ static inline int tp_is_explosion (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_explosion);
-}
-
-static inline int tp_is_combustable (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_combustable);
 }
 
 static inline int tp_weapon_use_distance (Tpp t)

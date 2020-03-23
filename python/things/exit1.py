@@ -13,6 +13,7 @@ def tp_init(name, real_name):
     x.set_is_light_strength(2)
     x.set_light_color("white")
     x.set_a_or_an("the");
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_EXIT)
 
     delay = 50

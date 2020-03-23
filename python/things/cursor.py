@@ -13,6 +13,7 @@ def tp_init(name):
     x.set_is_cursor(True)
     x.set_is_movable(True)
     x.set_stats_move_speed_ms(10)
+    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_CURSOR)
 
     delay = 50
