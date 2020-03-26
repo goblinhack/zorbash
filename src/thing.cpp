@@ -67,7 +67,7 @@ Thing::~Thing_ (void)
 void Thing::init (std::string name, fpoint at, fpoint jitter)
 {_
     verify(this);
-_
+
     timestamp_next_frame = 0;
     const auto tpp = tp_find(name);
     if (unlikely(!tpp)) {
@@ -556,34 +556,34 @@ void Thing::destroy (void)
     delete_dmap_scent();
     delete_age_map();
     delete_light();
-_
+
     if (is_loggable()) {
         log("destroyed");
     }
-_
+
     {
         auto f = level->all_things.find(id);
         if (f != level->all_things.end()) {
             level->all_things.erase(f);
         }
     }
-_
+
     if (is_active()) {
         auto f = level->all_active_things.find(id);
         if (f != level->all_active_things.end()) {
             level->all_active_things.erase(f);
         }
     }
-_
+
     {
         auto f = level->all_gc_things.find(id);
         if (f != level->all_gc_things.end()) {
             level->all_gc_things.erase(f);
         }
     }
-_
+
     level->free_thing_id(this);
-_
+
     if (monstp) {
         oldptr(monstp);
         delete monstp;
@@ -771,15 +771,19 @@ void Thing::set_owner (Thingp owner)
             return;
         }
 
-        if (owner) {
-            log("set owner change %s->%s", old_owner->to_string().c_str(),
-                owner->to_string().c_str());
-        } else {
-            log("remove owner %s", old_owner->to_string().c_str());
+        if (tp_is_loggable(tp())) {
+            if (owner) {
+                log("set owner change %s->%s", old_owner->to_string().c_str(),
+                    owner->to_string().c_str());
+            } else {
+                log("remove owner %s", old_owner->to_string().c_str());
+            }
         }
     } else {
-        if (owner) {
-            log("set owner %s", owner->to_string().c_str());
+        if (tp_is_loggable(tp())) {
+            if (owner) {
+                log("set owner %s", owner->to_string().c_str());
+            }
         }
     }
 
@@ -801,7 +805,9 @@ void Thing::remove_owner (void)
         return;
     }
 
-    log("remove owner %s", old_owner->to_string().c_str());
+    if (tp_is_loggable(tp())) {
+        log("remove owner %s", old_owner->to_string().c_str());
+    }
 
     set_owner_id(0);
     old_owner->decr_owned_count();

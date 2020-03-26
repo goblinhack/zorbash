@@ -135,7 +135,7 @@ uint8_t Thing::is_less_preferred_terrain (point p)
     return (std::min(DMAP_MAX_LESS_PREFERRED_TERRAIN, pref));
 }
 
-std::multiset<Next_hop> Thing::ai_get_next_hop (void)
+void Thing::ai_get_next_hop (void)
 {_
     log("calculate next-hop for AI");
 
@@ -340,7 +340,7 @@ std::multiset<Next_hop> Thing::ai_get_next_hop (void)
         set(dmap_scent->val, goal_target.x, goal_target.y, score8);
 
 #ifdef DEBUG_AI
-        log("  scale goal (%d,%d) %d to %d",
+        log(" scale goal (%d,%d) %d to %d",
             (int)minx + goal.at.x, (int)miny + goal.at.y, 
             (int)orig_score, (int)score8);
 #endif
@@ -387,17 +387,19 @@ std::multiset<Next_hop> Thing::ai_get_next_hop (void)
     int index = 0;
 #endif
     for (auto goal : goals) {
-#ifdef DEBUG_ASTAR_PATH_VERBOSE
+#ifdef DEBUG_ASTAR_PATH
         astar_debug = {};
 #endif
         auto astar_end = goal.at;
         auto result = astar_solve(path_debug, astar_start, astar_end, dmap_scent);
         auto hops = result.path;
+#ifdef DEBUG_ASTAR_PATH
         auto cost = result.cost;
+#endif
         auto hops_len = hops.size();
         point best;
 
-#ifdef DEBUG_ASTAR_PATH_VERBOSE
+#ifdef DEBUG_ASTAR_PATH
         dump(dmap, at, start, end);
 #endif
         if (hops_len >= 2) {
@@ -417,10 +419,9 @@ std::multiset<Next_hop> Thing::ai_get_next_hop (void)
 
         auto nh = fpoint(best.x + minx + 0.5,
                          best.y + miny + 0.5);
-        next_hops.insert(Next_hop(cost, goal.at, nh));
 
 #ifdef DEBUG_ASTAR_PATH
-        log("goal (%d,%d) next-hop(%d,%d) => cost %d (lower is better)",
+        log("try goal (%d,%d) next-hop(%d,%d) => cost %d (lower is better)",
             (int)minx + goal.at.x, (int)miny + goal.at.y, 
             (int)nh.x, (int)nh.y, cost);
 #endif
@@ -436,7 +437,54 @@ std::multiset<Next_hop> Thing::ai_get_next_hop (void)
         }
         index++;
 #endif
+        point nh_i(nh.x, nh.y);
+
+        if (is_less_preferred_terrain(nh_i)) {
+            log("move to %f,%f is less preferred terrain, avoid",
+                nh.x, nh.y);
+            continue;
+        }
+
+        if (mid_at == nh) {
+            continue;
+        }
+
+        //
+        // Check to see if moving to this new location will hit something
+        //
+        // We need to look at the next-hop at the current time which may
+        // be vacant, but also to the future if a thing is moving to that
+        // spot; in which case we get an attach of opportunity.
+        //
+        if (collision_check_only(nh)) {
+            //
+            // We would hit something and cannot do this move. However,
+            // see if we can hit the thing that is in the way.
+            //
+            log("move to %f,%f will collide with something",
+                nh.x, nh.y);
+
+            bool target_attacked = false;
+            bool target_overlaps = false;
+            collision_check_and_handle_nearby(fpoint(nh.x, nh.y),
+                                              &target_attacked,
+                                              &target_overlaps);
+            if (target_attacked) {
+                is_move_done = true;
+                log("cannot move to %f,%f, attack", nh.x, nh.y);
+                return;
+            } else {
+                log("cannot move to %f,%f, collision", nh.x, nh.y);
+                continue;
+            }
+        } else {
+            is_move_done = true;
+            log("move to %f,%f", nh.x, nh.y);
+            move(nh);
+            return;
+        }
     }
 
-    return (next_hops);
+    stop();
+    return;
 }

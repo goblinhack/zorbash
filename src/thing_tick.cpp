@@ -9,28 +9,34 @@
 #include "my_thing.h"
 #include <algorithm>
 
+unsigned short thing_callframes_depth;
+
 void Thing::achieve_goals_in_life (void)
 {_
+    if (tp_is_loggable(tp())) {
+        log("move");
+    }
+
     lifespan_tick();
     if (is_dead) {
         return;
     }
-_
+
     hunger_clock();
     if (is_dead) {
         return;
     }
-_
+
     lava_tick();
     if (is_dead) {
         return;
     }
-_
+
     on_fire_tick();
     if (is_dead) {
         return;
     }
-_
+
     if (is_player()) {
         //
         // Make sure we have a path shown if we just completed one.
@@ -51,63 +57,7 @@ _
     // If this thing has AI, it can try and reach goals
     //
     if (get_dmap_scent()) {
-        bool got_one = false;
-        for (auto goal : ai_get_next_hop()) {
-            auto to = goal.next_hop;
-            point toi(to.x, to.y);
-            log("try next-hop(%f,%f) cost %f (lower is better)",
-                goal.next_hop.x, goal.next_hop.y, goal.cost);
-
-            if (is_less_preferred_terrain(toi)) {
-                log("movement to %f,%f is less preferred terrain, avoid",
-                    to.x, to.y);
-                continue;
-            }
-
-            if (mid_at != to) {
-                //
-                // Check to see if moving to this new location will hit something
-                //
-                // We need to look at the next-hop at the current time which may
-                // be vacant, but also to the future if a thing is moving to that
-                // spot; in which case we get an attach of opportunity.
-                //
-                if (collision_check_only(to)) {
-                    //
-                    // We would hit something and cannot do this move. However,
-                    // see if we can hit the thing that is in the way.
-                    //
-                    log("movement to %f,%f will collide with something",
-                        to.x, to.y);
-
-                    bool target_attacked = false;
-                    bool target_overlaps = false;
-                    collision_check_and_handle_nearby(fpoint(to.x, to.y),
-                                                      &target_attacked,
-                                                      &target_overlaps);
-                    if (target_attacked) {
-                        is_move_done = true;
-                        log("cannot move to %f,%f, attack", to.x, to.y);
-                        got_one = true;
-                        break;
-                    } else {
-                        log("cannot move to %f,%f, collision", to.x, to.y);
-                    }
-                    continue;
-                } else {
-                    is_move_done = true;
-                    log("can move to %f,%f", to.x, to.y);
-                    move(to);
-                    got_one = true;
-                    break;
-                }
-            }
-        }
-
-        if (!got_one) {
-            stop();
-            return;
-        }
+        ai_get_next_hop();
     } else {
         is_move_done = true;
     }
@@ -144,13 +94,8 @@ void Thing::tick (void)
         return;
     }
 
-    //
-    // Too noisy
-    //
-    // if (tp_is_loggable(tp())) {
-    //     log("tick");
-    // }
-    //
+    thing_callframes_depth = callframes_depth;
+
     update_interpolated_position();
 
     if (game->config.arcade_mode) {
