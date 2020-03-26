@@ -938,7 +938,7 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
                                         bool *target_attacked,
                                         bool *target_overlaps,
                                         float radius)
-{_
+{
     int minx = future_pos.x - radius;
     while (minx < 0) {
         minx++;
@@ -993,7 +993,7 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
 bool Thing::collision_check_and_handle_nearby (fpoint future_pos,
                                                bool *target_attacked,
                                                bool *target_overlaps)
-{_
+{
     return (collision_check_and_handle(future_pos,
                                        target_attacked,
                                        target_overlaps,
@@ -1003,7 +1003,7 @@ bool Thing::collision_check_and_handle_nearby (fpoint future_pos,
 bool Thing::collision_check_and_handle_at (fpoint future_pos,
                                            bool *target_attacked,
                                            bool *target_overlaps)
-{_
+{
     return (collision_check_and_handle(future_pos,
                                        target_attacked,
                                        target_overlaps,
@@ -1011,7 +1011,7 @@ bool Thing::collision_check_and_handle_at (fpoint future_pos,
 }
 
 bool Thing::collision_check_only (fpoint future_pos)
-{_
+{
     int minx = future_pos.x - thing_collision_tiles;
     while (minx < 0) {
         minx++;
@@ -1056,12 +1056,12 @@ bool Thing::collision_check_only (fpoint future_pos)
 
 bool Thing::collision_check_and_handle_at (bool *target_attacked,
                                            bool *target_overlaps)
-{_
+{
     return (collision_check_and_handle_at(mid_at,
                                           target_attacked, target_overlaps));
 }
 
 bool Thing::collision_check_only (void)
-{_
+{
     return (collision_check_only(mid_at));
 }

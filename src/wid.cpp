@@ -1889,7 +1889,7 @@ static void wid_destroy_immediate_internal (Widp w)
 static void wid_destroy_immediate (Widp w)
 {_
     WID_DBG(w, "destroy immediate");
-_
+
     //
     // If removing a top level widget, choose a new focus.
     //
@@ -5626,9 +5626,9 @@ void wid_display_all (void)
     glcolor(WHITE);
 
     wid_tick_all();
-_
+
     wid_move_all();
-_
+
     wid_on_screen_at = {};
 
     for (auto iter = wid_top_level.begin();

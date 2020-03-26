@@ -628,7 +628,7 @@ public:
     double get_bounce(void);
     double get_fadeup(void);
     double get_lunge(void);
-    std::multiset<Next_hop> ai_get_next_hop(void);
+    void ai_get_next_hop(void);
     fpoint set_interpolated_mid_at(fpoint);
     fpoint get_interpolated_mid_at(void);
     int ai_hit_if_possible(Thingp hitter);
@@ -905,5 +905,6 @@ void thing_render_all(void);
 void things_tick(void);
 int thing_can_reach(point start, point end);
 int thing_can_reach_player(point start);
+extern unsigned short thing_callframes_depth;
 
 #endif // THING_H

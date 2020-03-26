@@ -123,6 +123,9 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         return (false);
     }
 
+    log("possible attack by (%s) for %u", 
+        hitter->to_string().c_str(), damage);
+
     //
     // If an arrow, who really fired it?
     //
@@ -146,6 +149,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         if (!time_have_x_tenths_passed_since(
                 hitter->get_stats_attack_rate_tenths(),
                 hitter->get_timestamp_last_attack())) {
+            log(" ignore, too-frequent attack");
             return (false);
         }
         hitter->set_timestamp_last_attack(time_get_time_ms_cached());
@@ -157,6 +161,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         // damage. We don't want the player to keep absorbing hits when
         // already dead though.
         //
+        log(" ignore, attacker is dead");
         return (false);
     }
 
@@ -176,6 +181,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
                 //
                 // Not something that typically damages walls.
                 //
+                log(" ignore weapon, immune");
                 return (false);
             }
         }
@@ -186,6 +192,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             //
             hitter = hitter->owner_get();
             if (!hitter) {
+                log(" ignore weapon, no owner");
                 return (false);
             }
 
@@ -196,6 +203,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             //
             weapon = hitter->weapon_get();
             if (!weapon) {
+                log(" ignore weapon, no weapon");
                 return (false);
             }
 
@@ -209,6 +217,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             //
             hitter = hitter->owner_get();
             if (!hitter) {
+                log(" ignore hitter, no owner");
                 return (false);
             }
 
@@ -219,6 +228,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             //
             weapon = hitter->weapon_get();
             if (!weapon) {
+                log(" ignore hitter, no weapon");
                 return (false);
             }
 
@@ -231,6 +241,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         // Don't let our own potion hit ourselves!
         //
         if (hitter == this) {
+            log(" ignore, do not hit self");
             return (false);
         }
     }

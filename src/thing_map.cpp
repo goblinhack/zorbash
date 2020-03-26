@@ -1249,7 +1249,7 @@ void thing_render_all (void)
 
     thing_cursor_scroll_map_to_follow();
     thing_map_scroll_do();
-_
+
     if (game->config.gfx_show_hidden) {
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1261,11 +1261,11 @@ _
         thing_map_black_and_white = true;
         thing_blit_things(minx, miny, maxx, maxy);
         thing_map_black_and_white = false;
-_
+
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
-_
+
         //
         // Render light sources first to their own merged buffer
         //
@@ -1283,7 +1283,7 @@ _
         glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
         blit_fbo(FBO_LIGHT_MERGED);
 #endif
-_
+
         //
         // Now overlay the high quality lights
         //
@@ -1302,25 +1302,25 @@ _
         glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_COLOR);
         blit_fbo(FBO_MAIN_BLACK_AND_WHITE);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-_
+
     } else {
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
     }
-_
+
 #if 0
     if (level->terrain) {
         terrain_blit(level->terrain);
     }
 #endif
-_
+
     //lights_render_points_debug(minx, miny, maxx, maxy);
 
     //
     // If the cursor is too far away, warp it
     //
     thing_cursor_reset_if_needed();
-_
+
     thing_cursor_find(minx, miny, maxx, maxy);
 }

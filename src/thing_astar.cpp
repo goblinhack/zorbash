@@ -273,9 +273,11 @@ void astar_dump (const Dmap *dmap,
                 buf = " @ ";
             }
 
+#ifdef DEBUG_ASTAR_PATH
             if (get(astar_debug, x, y)) {
                 buf[2] = get(astar_debug, x, y);
             }
+#endif
             s += buf;
         }
         LOG("ASTAR:%s", s.c_str());

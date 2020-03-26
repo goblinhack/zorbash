@@ -502,8 +502,9 @@ void Thing::log_ (const char *fmt, va_list args)
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%s: ",
-            t->to_string().c_str());
+    snprintf(buf + len, MAXSTR - len, "%30s:%*s",
+             t->to_string().c_str(), 
+             callframes_depth - thing_callframes_depth, "");
 
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSTR - len, fmt, args);
