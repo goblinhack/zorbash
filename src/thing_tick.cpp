@@ -51,49 +51,62 @@ _
     // If this thing has AI, it can try and reach goals
     //
     if (get_dmap_scent()) {
-        auto to = ai_get_next_hop();
+        bool got_one = false;
+        for (auto goal : ai_get_next_hop()) {
+            auto to = goal.next_hop;
+            point toi(to.x, to.y);
+            log("try next-hop(%f,%f) cost %f (lower is better)",
+                goal.next_hop.x, goal.next_hop.y, goal.cost);
 
-        point toi(to.x, to.y);
-        if (is_less_preferred_terrain(toi)) {
-            log("movement to %f,%f is less preferred terrain, avoid",
-                to.x, to.y);
-            return;
-        }
-
-        if (mid_at != to) {
-            //
-            // Check to see if moving to this new location will hit something
-            //
-            // We need to look at the next-hop at the current time which may
-            // be vacant, but also to the future if a thing is moving to that
-            // spot; in which case we get an attach of opportunity.
-            //
-            if (collision_check_only(to)) {
-                //
-                // We would hit something and cannot do this move. However,
-                // see if we can hit the thing that is in the way.
-                //
-                log("movement to %f,%f will collide with something",
+            if (is_less_preferred_terrain(toi)) {
+                log("movement to %f,%f is less preferred terrain, avoid",
                     to.x, to.y);
-
-                bool target_attacked = false;
-                bool target_overlaps = false;
-                collision_check_and_handle_nearby(fpoint(to.x, to.y),
-                                                  &target_attacked,
-                                                  &target_overlaps);
-                if (target_attacked) {
-                    is_move_done = true;
-                    log("cannot move to %f,%f, attack", to.x, to.y);
-                } else {
-                    log("cannot move to %f,%f, collision", to.x, to.y);
-                }
-                stop();
-                return;
+                continue;
             }
 
-            is_move_done = true;
-            log("can move to %f,%f", to.x, to.y);
-            move(to);
+            if (mid_at != to) {
+                //
+                // Check to see if moving to this new location will hit something
+                //
+                // We need to look at the next-hop at the current time which may
+                // be vacant, but also to the future if a thing is moving to that
+                // spot; in which case we get an attach of opportunity.
+                //
+                if (collision_check_only(to)) {
+                    //
+                    // We would hit something and cannot do this move. However,
+                    // see if we can hit the thing that is in the way.
+                    //
+                    log("movement to %f,%f will collide with something",
+                        to.x, to.y);
+
+                    bool target_attacked = false;
+                    bool target_overlaps = false;
+                    collision_check_and_handle_nearby(fpoint(to.x, to.y),
+                                                      &target_attacked,
+                                                      &target_overlaps);
+                    if (target_attacked) {
+                        is_move_done = true;
+                        log("cannot move to %f,%f, attack", to.x, to.y);
+                        got_one = true;
+                        break;
+                    } else {
+                        log("cannot move to %f,%f, collision", to.x, to.y);
+                    }
+                    continue;
+                } else {
+                    is_move_done = true;
+                    log("can move to %f,%f", to.x, to.y);
+                    move(to);
+                    got_one = true;
+                    break;
+                }
+            }
+        }
+
+        if (!got_one) {
+            stop();
+            return;
         }
     } else {
         is_move_done = true;

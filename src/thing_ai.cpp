@@ -107,12 +107,13 @@ bool Thing::ai_is_obstacle_for_me (point p)
         }
 
         //
-        // This is more of a look at the future position that some monst is
-        // already walking toward
+        // Do not include this check. It stops monsts seeing down a corridor
+        // with a monst already in it
         //
-//        if (t->is_alive_monst()) {
-//            return (true);
-//        }
+        // if (t->is_alive_monst()) {
+        //   return (true);
+        // }
+        //
 
         if (will_avoid(t)) {
             return (true);
@@ -134,7 +135,7 @@ uint8_t Thing::is_less_preferred_terrain (point p)
     return (std::min(DMAP_MAX_LESS_PREFERRED_TERRAIN, pref));
 }
 
-fpoint Thing::ai_get_next_hop (void)
+std::multiset<Next_hop> Thing::ai_get_next_hop (void)
 {_
     log("calculate next-hop for AI");
 
@@ -149,8 +150,7 @@ fpoint Thing::ai_get_next_hop (void)
 
     point start((int)mid_at.x, (int)mid_at.y);
 
-    auto scent = get_dmap_scent();
-    auto age_map = get_age_map();
+    auto dmap_scent = get_dmap_scent();
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -159,9 +159,9 @@ fpoint Thing::ai_get_next_hop (void)
             auto Y = y - miny;
 
             if (ai_is_obstacle_for_me(p)) {
-                set(scent->val, X, Y, DMAP_IS_WALL);
+                set(dmap_scent->val, X, Y, DMAP_IS_WALL);
             } else {
-                set(scent->val, X, Y, DMAP_IS_PASSABLE);
+                set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
             }
         }
     }
@@ -169,17 +169,17 @@ fpoint Thing::ai_get_next_hop (void)
     //
     // We want to find how far everything is from us.
     //
-    set(scent->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
+    set(dmap_scent->val, start.x - minx, start.y - miny, DMAP_IS_GOAL);
 
-    dmap_process(scent, point(0, 0), point(maxx - minx, maxy - miny));
+    dmap_process(dmap_scent, point(0, 0), point(maxx - minx, maxy - miny));
 
     //
     // Find all the possible goals we can smell.
     //
-    std::multiset<Goal> goals_set;
+    std::multiset<Goal> goals;
 
 #ifdef DEBUG_AI
-    log("goals (higher are preferred):");
+    log("goals (higher scores are preferred):");
 #endif
     auto tpp = tp();
     for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
@@ -190,8 +190,8 @@ fpoint Thing::ai_get_next_hop (void)
         //
         // Too far away to sense?
         //
-        if (get(scent->val, X, Y) > tpp->ai_scent_distance) {
-            set(scent->val, X, Y, DMAP_IS_WALL);
+        if (get(dmap_scent->val, X, Y) > tpp->ai_scent_distance) {
+            set(dmap_scent->val, X, Y, DMAP_IS_WALL);
             continue;
         }
 
@@ -210,7 +210,6 @@ fpoint Thing::ai_get_next_hop (void)
         total_score += (score); \
         got_one = true;
 #endif
-
         FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
             if (it == this) { continue; }
             if (it->is_hidden) { continue; }
@@ -268,16 +267,16 @@ fpoint Thing::ai_get_next_hop (void)
         }
 
         if (got_one) {
-            goals_set.insert(Goal(total_score, point(X, Y)));
-            set(scent->val, X, Y, DMAP_IS_GOAL);
+            goals.insert(Goal(total_score, point(X, Y)));
+            set(dmap_scent->val, X, Y, DMAP_IS_GOAL);
         } else if (terrain_score) {
-            set(scent->val, X, Y, terrain_score);
+            set(dmap_scent->val, X, Y, terrain_score);
         } else {
-            set(scent->val, X, Y, DMAP_IS_PASSABLE);
+            set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
         }
     } }
 
-    if (goals_set.empty()) {
+    if (goals.empty()) {
         CON("TODO WANDER");
     }
 
@@ -299,10 +298,10 @@ fpoint Thing::ai_get_next_hop (void)
     bool least_preferred_set = false;
     bool most_preferred_set = false;
 
-    for (auto g : goals_set) {
-        auto p = g.at;
-        incr(cell_totals, p.x, p.y, g.score);
-        auto score = get(cell_totals, p.x, p.y);
+    for (auto goal : goals) {
+        auto goal_target = goal.at;
+        incr(cell_totals, goal_target.x, goal_target.y, goal.score);
+        auto score = get(cell_totals, goal_target.x, goal_target.y);
 
         if (least_preferred_set) {
             least_preferred = std::min(least_preferred, score);
@@ -326,9 +325,9 @@ fpoint Thing::ai_get_next_hop (void)
     //
     // Scale the goals so they will fit in the dmap.
     //
-    for (auto g : goals_set) {
-        auto p = g.at;
-        float score = get(cell_totals, p.x, p.y);
+    for (auto goal : goals) {
+        auto goal_target = goal.at;
+        float score = get(cell_totals, goal_target.x, goal_target.y);
 #ifdef DEBUG_AI
         auto orig_score = score;
 #endif
@@ -338,18 +337,19 @@ fpoint Thing::ai_get_next_hop (void)
 
         assert(score <= DMAP_IS_PASSABLE);
         uint8_t score8 = (int)score;
-        set(scent->val, p.x, p.y, score8);
+        set(dmap_scent->val, goal_target.x, goal_target.y, score8);
 
 #ifdef DEBUG_AI
         log("  scale goal (%d,%d) %d to %d",
-            g.at.x, g.at.y, (int)orig_score, (int)score8);
+            (int)minx + goal.at.x, (int)miny + goal.at.y, 
+            (int)orig_score, (int)score8);
 #endif
     }
 
     //
-    // Record we've been here.
+    // Record we've been here. TODO not used yet.
     //
-    set(age_map->val, start.x, start.y, time_get_time_ms());
+    // set(age_map->val, start.x, start.y, time_get_time_ms());
 
     //
     // Find the best next-hop to the best goal.
@@ -366,44 +366,77 @@ fpoint Thing::ai_get_next_hop (void)
     // Make sure we do not want to stay in the same position by making
     // our current cell passable but the very least preferred it can be.
     //
-    if (get(scent->val, start.x - minx, start.y - miny) > 0) {
-        set(scent->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
+    if (get(dmap_scent->val, start.x - minx, start.y - miny) > 0) {
+        set(dmap_scent->val, start.x - minx, start.y - miny, DMAP_IS_PASSABLE);
     }
 
     //
     // Move diagonally if not blocked by walls
     //
-    point s(start.x - minx, start.y - miny);
-    auto hops = astar_solve(s, goals_set, scent,
-                            point(0, 0),
-                            point(maxx - minx, maxy - miny));
-    auto hopssize = hops.path.size();
-    point best;
-    if (hopssize >= 2) {
-        auto hop0 = get(hops.path, hopssize - 1);
-        auto hop1 = get(hops.path, hopssize - 2);
-        if (dmap_can_i_move_diagonally(scent, s, hop0, hop1)) {
-            best = hop1;
-        } else {
+    point astar_start(start.x - minx, start.y - miny);
+
+    //
+    // Modify the given goals with scores that indicate the cost of the
+    // path to that goal. The result should be a sorted set of goals.
+    //
+    std::multiset<Next_hop> next_hops;
+    char path_debug = '\0'; // astart path debug
+
+#ifdef DEBUG_ASTAR_PATH
+    astar_debug = {};
+    int index = 0;
+#endif
+    for (auto goal : goals) {
+#ifdef DEBUG_ASTAR_PATH_VERBOSE
+        astar_debug = {};
+#endif
+        auto astar_end = goal.at;
+        auto result = astar_solve(path_debug, astar_start, astar_end, dmap_scent);
+        auto hops = result.path;
+        auto cost = result.cost;
+        auto hops_len = hops.size();
+        point best;
+
+#ifdef DEBUG_ASTAR_PATH_VERBOSE
+        dump(dmap, at, start, end);
+#endif
+        if (hops_len >= 2) {
+            auto hop0 = get(hops, hops_len - 1);
+            auto hop1 = get(hops, hops_len - 2);
+            if (dmap_can_i_move_diagonally(dmap_scent, astar_start, hop0, hop1)) {
+                best = hop1;
+            } else {
+                best = hop0;
+            }
+        } else if (hops_len >= 1) {
+            auto hop0 = get(hops, hops_len - 1);
             best = hop0;
+        } else {
+            continue;
         }
-    } else if (hops.path.size() >= 1) {
-        auto hop0 = get(hops.path, hopssize - 1);
-        best = hop0;
-    } else {
-        best = s;
-    }
 
-    best.x += minx;
-    best.y += miny;
+        auto nh = fpoint(best.x + minx + 0.5,
+                         best.y + miny + 0.5);
+        next_hops.insert(Next_hop(cost, goal.at, nh));
 
-    fpoint fbest;
-    fbest.x = best.x + 0.5;
-    fbest.y = best.y + 0.5;
-
-#ifdef DEBUG_AI
-    log("chose next-hop %f,%f", fbest.x, fbest.y);
+#ifdef DEBUG_ASTAR_PATH
+        log("goal (%d,%d) next-hop(%d,%d) => cost %d (lower is better)",
+            (int)minx + goal.at.x, (int)miny + goal.at.y, 
+            (int)nh.x, (int)nh.y, cost);
 #endif
 
-    return (fbest);
+#ifdef DEBUG_ASTAR_PATH
+        if (!index) {
+            for (auto p : hops) {
+                set(astar_debug, p.x, p.y, '*');
+            }
+            auto start = point(0, 0);
+            auto end = point(maxx - minx, maxy - miny);
+            astar_dump(dmap_scent, goal.at, start, end);
+        }
+        index++;
+#endif
+    }
+
+    return (next_hops);
 }

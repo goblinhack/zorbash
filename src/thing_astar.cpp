@@ -13,7 +13,7 @@
 #include <vector>
 
 #ifdef DEBUG_ASTAR_PATH
-static std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> debug {};
+std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> astar_debug {};
 #endif
 
 class Nodecost {
@@ -54,7 +54,7 @@ typedef std::map< Nodecost, Node * > Nodemap;
 
 class Astar {
 public:
-    Astar (point s, point g, Dmap *d) : start(s), goal(g), dmap(d) { }
+    Astar (point s, point g, const Dmap *d) : start(s), goal(g), dmap(d) { }
 
     static const int width = MAP_WIDTH;
     static const int height = MAP_HEIGHT;
@@ -64,7 +64,7 @@ public:
     Nodemap closed_nodes;
     point start;
     point goal;
-    Dmap *dmap {};
+    const Dmap *dmap {};
 
     void add_to_open (Node *n)
     {
@@ -119,36 +119,36 @@ public:
     // Evaluate a neighbor for adding to the open set
     void eval_neighbor (Node *current, point delta)
     {
-        auto nexthop = current->at + delta;
+        auto next_hop = current->at + delta;
 
-        if ((nexthop.x <= 0) ||
-            (nexthop.y <= 0) ||
-            (nexthop.x >= width - 1) ||
-            (nexthop.y >= height - 1)) {
+        if ((next_hop.x <= 0) ||
+            (next_hop.y <= 0) ||
+            (next_hop.x >= width - 1) ||
+            (next_hop.y >= height - 1)) {
             return;
         }
 
         // Ignore walls.
-        if (get(dmap->val, nexthop.x, nexthop.y) == DMAP_IS_WALL) {
+        if (get(dmap->val, next_hop.x, next_hop.y) == DMAP_IS_WALL) {
             return;
         }
 
         // If in the closed set already, ignore.
-        if (closed[nexthop.x][nexthop.y]) {
+        if (closed[next_hop.x][next_hop.y]) {
             return;
         }
 
-        int distance_to_nexthop = get(dmap->val, nexthop.x, nexthop.y);
-        if (distance_to_nexthop == DMAP_IS_PASSABLE) {
-            distance_to_nexthop = 0;
+        int distance_to_next_hop = get(dmap->val, next_hop.x, next_hop.y);
+        if (distance_to_next_hop == DMAP_IS_PASSABLE) {
+            distance_to_next_hop = 0;
         }
 
         int cost = current->cost.cost +
-                   distance_to_nexthop + heuristic(nexthop);
-        auto neighbor = get(open, nexthop.x, nexthop.y);
+                   distance_to_next_hop + heuristic(next_hop);
+        auto neighbor = get(open, next_hop.x, next_hop.y);
         if (!neighbor) {
-            auto ncost = Nodecost(cost + heuristic(nexthop));
-            neighbor = new Node(nexthop, ncost);
+            auto ncost = Nodecost(cost + heuristic(next_hop));
+            neighbor = new Node(next_hop, ncost);
             neighbor->came_from = current;
             add_to_open(neighbor);
             return;
@@ -176,7 +176,7 @@ public:
         }
     }
 
-    std::tuple<std::vector<point>, int > create_path (Dmap *dmap,
+    std::tuple<std::vector<point>, int > create_path (const Dmap *dmap,
                                                       const Node *came_from)
     {
         std::vector<point> l;
@@ -192,10 +192,10 @@ public:
         return {l, cost};
     }
 
-    Path solve (char *gi)
+    Path solve (char *path_debug)
     {
-        auto distance_to_nexthop = 0;
-        auto ncost = Nodecost(distance_to_nexthop + heuristic(start));
+        auto distance_to_next_hop = 0;
+        auto ncost = Nodecost(distance_to_next_hop + heuristic(start));
         auto neighbor = new Node(start, ncost);
         add_to_open(neighbor);
         Path best;
@@ -213,16 +213,16 @@ public:
                     best.cost = cost;
 #ifdef DEBUG_ASTAR_PATH
                     for (auto p : path) {
-                        set(debug, p.x, p.y, (char)('A' + *gi));
+                        set(astar_debug, p.x, p.y, (char)('A' + *path_debug));
                     }
-                    (*gi)++;
+                    (*path_debug)++;
 #endif
                 } else {
 #ifdef DEBUG_ASTAR_PATH
                     for (auto p : path) {
-                        set(debug, p.x, p.y, (char)('a' + *gi));
+                        set(astar_debug, p.x, p.y, (char)('a' + *path_debug));
                     }
-                    (*gi)++;
+                    (*path_debug)++;
 #endif
                 }
                 remove_from_open(current);
@@ -244,11 +244,10 @@ public:
     }
 };
 
-#ifdef DEBUG_ASTAR_PATH
-static void dump (Dmap *dmap,
-                  const point &at,
-                  const point &start,
-                  const point &end)
+void astar_dump (const Dmap *dmap,
+                 const point &at,
+                 const point &start,
+                 const point &end)
 {
     int x;
     int y;
@@ -274,52 +273,18 @@ static void dump (Dmap *dmap,
                 buf = " @ ";
             }
 
-            if (get(debug, x, y)) {
-                buf[2] = get(debug, x, y);
+            if (get(astar_debug, x, y)) {
+                buf[2] = get(astar_debug, x, y);
             }
             s += buf;
         }
         LOG("ASTAR:%s", s.c_str());
     }
 }
-#endif
 
-Path astar_solve (const point &at,
-                  std::multiset<Goal> &goals,
-                  Dmap *dmap,
-                  const point &start,
-                  const point &end)
+Path astar_solve (char path_debug, point s, point g, const Dmap *d)
 {
-    auto best = Path();
-    best.cost = std::numeric_limits<int>::max();
-    char gi = '\0';
-
-#ifdef DEBUG_ASTAR_PATH
-    debug = {};
-#endif
-    for (auto g : goals) {
-#if DEBUG_ASTAR_PATH_VERBOSE
-        debug = {};
-#endif
-        auto a = Astar(at, g.at, dmap);
-        auto path = a.solve(&gi);
-#if DEBUG_ASTAR_PATH
-        LOG("cost of goal (%d,%d) => %d", g.at.x, g.at.y, path.cost);
-#endif
-#if DEBUG_ASTAR_PATH_VERBOSE
-        dump(dmap, at, start, end);
-#endif
-        if (path.cost < best.cost)  {
-            best = path;
-        }
-    }
-
-#ifdef DEBUG_ASTAR_PATH
-    for (auto p : best.path) {
-        set(debug, p.x, p.y, '*');
-    }
-
-    dump(dmap, at, start, end);
-#endif
-    return (best);
+    char tmp = path_debug;
+    auto a = Astar(s, g, d);
+    return (a.solve(&tmp));
 }

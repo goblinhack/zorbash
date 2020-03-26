@@ -502,7 +502,7 @@ void Thing::log_ (const char *fmt, va_list args)
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "thing %s: ",
+    snprintf(buf + len, MAXSTR - len, "%s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
@@ -534,7 +534,7 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
         buf[0] = '\0';
         get_timestamp(buf, MAXSTR);
         len = (int)strlen(buf);
-        snprintf(buf + len, MAXSTR - len, "thing %s: killed by %s: ",
+        snprintf(buf + len, MAXSTR - len, "%s: killed by %s: ",
                 t->to_string().c_str(),
                 killer->to_string().c_str());
 
@@ -574,7 +574,7 @@ void Thing::dead_ (const char *fmt, va_list args)
         buf[0] = '\0';
         get_timestamp(buf, MAXSTR);
         len = (int)strlen(buf);
-        snprintf(buf + len, MAXSTR - len, "thing %s: dead: ",
+        snprintf(buf + len, MAXSTR - len, "%s: dead: ",
                  t->to_string().c_str());
 
         len = (int)strlen(buf);
@@ -601,7 +601,7 @@ void Thing::dead (Thingp killer, std::string &reason)
         buf[0] = '\0';
         get_timestamp(buf, MAXSTR);
         len = (int)strlen(buf);
-        snprintf(buf + len, MAXSTR - len, "thing %s: killed by %s: ",
+        snprintf(buf + len, MAXSTR - len, "%s: killed by %s: ",
                 t->to_string().c_str(),
                 killer->to_string().c_str());
 
@@ -624,7 +624,7 @@ void Thing::dead (std::string &reason)
         buf[0] = '\0';
         get_timestamp(buf, MAXSTR);
         len = (int)strlen(buf);
-        snprintf(buf + len, MAXSTR - len, "thing %s: dead: ",
+        snprintf(buf + len, MAXSTR - len, "%s: dead: ",
                  t->to_string().c_str());
 
         putf(MY_STDOUT, reason.c_str());
@@ -655,7 +655,7 @@ void Thing::die_ (const char *fmt, va_list args)
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "thing %s: ",
+    snprintf(buf + len, MAXSTR - len, "%s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
@@ -716,7 +716,7 @@ void Thing::con_ (const char *fmt, va_list args)
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "thing %s: ",
+    snprintf(buf + len, MAXSTR - len, "%s: ",
             t->to_string().c_str());
 
     len = (int)strlen(buf);
