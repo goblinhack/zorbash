@@ -5,7 +5,6 @@ OBJDIR=.o
 GAME_OBJECTS=				\
     $(OBJDIR)/ascii.o 			\
     $(OBJDIR)/ascii_box.o 		\
-    $(OBJDIR)/astar.o 			\
     $(OBJDIR)/charmap.o 		\
     $(OBJDIR)/color.o			\
     $(OBJDIR)/command.o 		\
@@ -45,8 +44,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/hacklib.o 		\
     $(OBJDIR)/hexdump.o 		\
     $(OBJDIR)/level.o 			\
-    $(OBJDIR)/level_fini.o 		\
     $(OBJDIR)/level_display.o 		\
+    $(OBJDIR)/level_fini.o 		\
     $(OBJDIR)/level_init.o 		\
     $(OBJDIR)/level_map.o 		\
     $(OBJDIR)/level_thing.o 		\
@@ -76,11 +75,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
-    $(OBJDIR)/thing_lifespan.o 		\
-    $(OBJDIR)/thing_on_fire.o 		\
-    $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
+    $(OBJDIR)/thing_astar.o 		\
     $(OBJDIR)/thing_attach.o 		\
     $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_collision.o 	\
@@ -94,11 +91,14 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_hunger.o 		\
     $(OBJDIR)/thing_id.o 		\
+    $(OBJDIR)/thing_lava.o 		\
+    $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_msg.o 		\
     $(OBJDIR)/thing_name.o 		\
+    $(OBJDIR)/thing_on_fire.o 		\
     $(OBJDIR)/thing_path.o 		\
     $(OBJDIR)/thing_shove.o 		\
     $(OBJDIR)/thing_string.o 		\

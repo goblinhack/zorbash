@@ -13,46 +13,11 @@
 
 typedef struct Thing_* Thingp;
 typedef struct Monst_* Monstp;
-typedef struct AgeMap_* AgeMapp;
-typedef struct Dmap_* Dmapp;
 typedef std::unordered_map< uint32_t, Thingp > Things;
 
 #include "my_time.h"
 #include "my_light.h"
-
-class Goal
-{
-public:
-    float score = {0};
-    point at;
-
-    Goal () {}
-    Goal (float score, point at) : score(score), at(at) {}
-
-    friend bool operator<(const class Goal & lhs, const class Goal & rhs) {
-        //
-        // Reverse sorted
-        //
-        return lhs.score > rhs.score;
-    }
-};
-
-class Path {
-public:
-    Path () {}
-    Path (std::vector<point> &p, int c) : path(p), cost(c) { }
-
-    std::vector<point> path;
-    int                cost {};
-};
-
-extern Path astar_solve(const point &at, std::multiset<Goal> &goals, Dmap *dmap, const point &start, const point &end);
-
-typedef struct AgeMap_ {
-    std::array<std::array<timestamp_t, MAP_HEIGHT>, MAP_WIDTH> val {};
-} AgeMap;
-std::ostream& operator<<(std::ostream &out, Bits<const AgeMap & > const my);
-std::istream& operator>>(std::istream &in, Bits<AgeMap &> my);
+#include "my_thing_ai.h"
 
 typedef struct {
     uint16_t tile_bl;
@@ -663,7 +628,7 @@ public:
     double get_bounce(void);
     double get_fadeup(void);
     double get_lunge(void);
-    fpoint ai_get_next_hop(void);
+    std::multiset<Next_hop> ai_get_next_hop(void);
     fpoint set_interpolated_mid_at(fpoint);
     fpoint get_interpolated_mid_at(void);
     int ai_hit_if_possible(Thingp hitter);
