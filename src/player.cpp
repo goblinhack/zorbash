@@ -187,7 +187,7 @@ void player_tick (void)
             }
         }
 
-        double d = 0.1;
+        double d = 0.5;
         double dx = 0.0;
         double dy = 0.0;
 
