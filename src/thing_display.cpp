@@ -840,13 +840,13 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     double h = blit_br.y - blit_tl.y;
 
     is_submerged = false;
-    bool lava = false;
+    is_in_lava = false;
 
     ThingTiles tiles;
     get_tiles(&tiles);
 
-    fpoint gl_tile_tl(0, 0);
-    fpoint gl_tile_br(1, 1);
+    fpoint sub_tile_tl(0, 0);
+    fpoint sub_tile_br(1, 1);
 
     //
     // If the owner is submerged, so is the weapon
@@ -894,11 +894,11 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
                 blit_tl.y += offset;
-                gl_tile_br = fpoint(1, pct_visible_above_surface);
+                sub_tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
-                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -911,18 +911,18 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
                 blit_tl.y += offset;
-                gl_tile_br = fpoint(1, pct_visible_above_surface);
+                sub_tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
-                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
                 blit_tl.y += offset;
             }
             is_submerged = true;
-            lava = true;
+            is_in_lava = true;
         } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
             if (owner) {
                 auto offset = owner->get_submerged_offset();
@@ -930,7 +930,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 blit_tl.y += offset;
             } else {
                 const auto pct_visible_above_surface = 0.1;
-                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -955,7 +955,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
             if (is_submerged) {
                 blit_shadow_section(
-                    tpp, tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
+                    tpp, tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
                 blit_shadow(tpp, tile, blit_tl, blit_br);
             } else {
                 blit_shadow(tpp, tile, blit_tl, blit_br);
@@ -1001,12 +1001,12 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
         if (is_submerged) {
             tile_blit_outline_section(
-                tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
+                tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
 
             //
             // Show the bottom part of the body transparent
             //
-            if (!lava) {
+            if (!is_in_lava) {
                 color c = WHITE;
                 c.a = 100;
                 glcolor(c);
@@ -1025,7 +1025,7 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     } else if (likely(blit)) {
         if (is_submerged) {
             tile_blit_section(
-              tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
+              tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
         } else {
             tile_blit(tile, blit_tl, blit_br);
         }
@@ -1097,8 +1097,8 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
         blit_tl.y += diff;
     }
 
-    fpoint gl_tile_tl(0, 0);
-    fpoint gl_tile_br(1, 1);
+    fpoint sub_tile_tl(0, 0);
+    fpoint sub_tile_br(1, 1);
 
     is_submerged = false;
 
@@ -1142,11 +1142,11 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
                 auto offset = owner->get_submerged_offset();
                 blit_br.y += offset;
                 blit_tl.y += offset;
-                gl_tile_br = fpoint(1, pct_visible_above_surface);
+                sub_tile_br = fpoint(1, pct_visible_above_surface);
                 blit_br.y -=
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
             } else {
-                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -1160,7 +1160,7 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
                 blit_tl.y += offset;
             } else {
                 const auto pct_visible_above_surface = 0.1;
-                gl_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
                 auto offset =
                   (blit_br.y - blit_tl.y) * pct_visible_above_surface;
                 set_submerged_offset(offset);
@@ -1187,14 +1187,14 @@ void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
     if (tp_gfx_show_outlined(tpp)) {
         if (is_submerged) {
             tile_blit_outline_section(
-              tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
+              tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
         } else {
             tile_blit_outline(tile, blit_tl, blit_br);
         }
     } else {
         if (is_submerged) {
             tile_blit_section(
-              tile, gl_tile_tl, gl_tile_br, blit_tl, blit_br);
+              tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
         } else {
             tile_blit(tile, blit_tl, blit_br);
         }

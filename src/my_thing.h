@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-
 #ifndef _MY_THING_H
 #define _MY_THING_H
 
@@ -173,6 +172,7 @@ public:
     uint32_t is_sleeping:1        {};
     uint32_t is_starving:1        {};
     uint32_t is_submerged:1       {};
+    uint32_t is_in_lava:1         {};
     uint32_t is_waiting_to_move:1 {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
@@ -601,7 +601,7 @@ public:
     bool collision_check_and_handle_at(fpoint, bool *, bool *);
     bool collision_check_and_handle_nearby(fpoint, bool *, bool *);
     bool collision_check_only(Thingp it, int x, int y, int dx, int dy);
-    bool collision_check_only(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
+    bool collision_check_only(Thingp it, fpoint future_pos, int x, int y);
     bool collision_check_only(void);
     bool collision_check_only(fpoint);
     bool collision_obstacle(fpoint);
@@ -774,6 +774,10 @@ public:
     void animate();
     void attach(void);
     void blit(double offset_x, double offset_y, int x, int y);
+    bool blit_check(fpoint &blit_tl, fpoint &blit_br,
+                    fpoint &sub_tile_tl, fpoint &sub_tile_br,
+                    Tilep &tile);
+    void blit_test(void);
     void blit_outline_only(double offset_x, double offset_y, int x, int y);
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
@@ -902,6 +906,7 @@ void thing_cursor_path_create(void);
 void thing_cursor_reset_if_needed(void);
 void thing_map_scroll_to_player(void);
 void thing_render_all(void);
+void thing_render_all_test(void);
 void things_tick(void);
 int thing_can_reach(point start, point end);
 int thing_can_reach_player(point start);

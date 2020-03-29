@@ -22,7 +22,7 @@ bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {_
-    const double step = 20.0;
+    const double step = 16.0;
 
     auto dx = level->map_at.x - level->map_wanted_at.x;
     if (dx) {
@@ -33,14 +33,6 @@ static void thing_map_scroll_do (void)
     if (dy) {
         level->map_at.y -= dy / step;
     }
-
-    level->map_at.x *= game->config.tile_pixel_width;
-    level->map_at.x = (int) level->map_at.x;
-    level->map_at.x /= game->config.tile_pixel_width;
-
-    level->map_at.y *= game->config.tile_pixel_height;
-    level->map_at.y = (int) level->map_at.y;
-    level->map_at.y /= game->config.tile_pixel_height;
 
     level->map_at.x = std::max(level->map_at.x, (float)0.0);
     level->map_at.y = std::max(level->map_at.y, (float)0.0);
@@ -856,9 +848,9 @@ static void thing_blit_chasm (uint16_t minx, uint16_t miny,
     //
     // Parallax
     //
-    float dx = level->map_wanted_at.x - level->map_at.x;
+    float dx = level->map_wanted_at.x - level->pixel_map_at.x;
     dx *= -0.002;
-    float dy = level->map_wanted_at.y - level->map_at.y;
+    float dy = level->map_wanted_at.y - level->pixel_map_at.y;
     dy *= -0.002;
 
     for (auto x = minx; x < maxx; x++) {
@@ -1073,8 +1065,8 @@ static void thing_blit_things_common (void)
 static void thing_blit_things (uint16_t minx, uint16_t miny,
                                uint16_t maxx, uint16_t maxy)
 {_
-    double offset_x = level->map_at.x * game->config.tile_gl_width;
-    double offset_y = level->map_at.y * game->config.tile_gl_height;
+    double offset_x = level->pixel_map_at.x * game->config.tile_gl_width;
+    double offset_y = level->pixel_map_at.y * game->config.tile_gl_height;
 
     thing_blit_things_common();
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1092,7 +1084,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     }
                     FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                         glcolorfast(GRAY30);
-                        t->blit(offset_x, offset_y, x, y);
+                        t->blit_test();
                     } FOR_ALL_THINGS_AT_DEPTH_END()
                 }
             }
@@ -1109,7 +1101,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     }
                     FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                         glcolorfast(GRAY50);
-                        t->blit(offset_x, offset_y, x, y);
+                        t->blit_test();
                     } FOR_ALL_THINGS_AT_DEPTH_END()
                 }
             }
@@ -1138,7 +1130,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                     if (z == MAP_DEPTH_FLOOR) {
                         glcolorfast(WHITE);
-                        t->blit(offset_x, offset_y, x, y);
+                        t->blit_test();
                     }
 
                     auto tpp = t->tp();
@@ -1199,7 +1191,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                     glcolorfast(WHITE);
-                    t->blit(offset_x, offset_y, x, y);
+                    t->blit_test();
                 } FOR_ALL_THINGS_AT_DEPTH_END()
             }
         }
@@ -1229,11 +1221,11 @@ void thing_render_all (void)
     // Get the bounds. Needs to be a bit off-map for reflections.
     //
     int border = 5;
-    minx = std::max(0, (int) level->map_at.x - border);
-    maxx = std::min(MAP_WIDTH, (int)level->map_at.x + TILES_ACROSS + border);
+    minx = std::max(0, (int) level->pixel_map_at.x - border);
+    maxx = std::min(MAP_WIDTH, (int)level->pixel_map_at.x + TILES_ACROSS + border);
 
-    miny = std::max(0, (int) level->map_at.y - border);
-    maxy = std::min(MAP_HEIGHT, (int)level->map_at.y + TILES_DOWN + border);
+    miny = std::max(0, (int) level->pixel_map_at.y - border);
+    maxy = std::min(MAP_HEIGHT, (int)level->pixel_map_at.y + TILES_DOWN + border);
 
     level->map_tl = point(minx, miny);
     level->map_br = point(maxx, maxy);
@@ -1249,6 +1241,22 @@ void thing_render_all (void)
 
     thing_cursor_scroll_map_to_follow();
     thing_map_scroll_do();
+
+    float map_move_delta = TILE_WIDTH * 6;
+
+    fpoint map_at = level->map_at;
+    fpoint offset(map_at.x - floor(map_at.x), map_at.y - floor(map_at.y));
+
+    offset.x *= map_move_delta;
+    offset.x = floor(offset.x);
+    offset.x /= map_move_delta;
+
+    offset.y *= map_move_delta;
+    offset.y = floor(offset.y);
+    offset.y /= map_move_delta;
+
+    level->pixel_map_at =
+      fpoint(floor(map_at.x) + offset.x, floor(map_at.y) + offset.y);
 
     if (game->config.gfx_show_hidden) {
         blit_fbo_bind(FBO_MAIN);
@@ -1320,6 +1328,450 @@ void thing_render_all (void)
     //
     // If the cursor is too far away, warp it
     //
+    thing_cursor_reset_if_needed();
+
+    thing_cursor_find(minx, miny, maxx, maxy);
+}
+
+bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
+                        fpoint &sub_tile_tl, fpoint &sub_tile_br,
+                        Tilep &tile)
+{_
+    int x = (int)mid_at.x;
+    int y = (int)mid_at.y;
+
+    if (unlikely(is_hidden)) {
+        return (false);
+    }
+
+    if (unlikely(is_cursor() || is_cursor_path())) {
+        //
+        // Always blit
+        //
+    } else if (unlikely(game->config.gfx_show_hidden)) {
+        if (level->is_visited(x, y)) {
+            if (is_wall()) {
+                glcolor(RED);
+            }
+        } else {
+            if (is_wall()) {
+                glcolor(BLUE);
+            }
+        }
+
+        if (!level->is_dungeon(x, y)) {
+            return (false);
+        }
+    }
+
+    //
+    // We render these offset form their owner, so if dead, then it is
+    // likely they also have no owner as the swing has ended.
+    //
+    auto tpp = tp();
+
+    if (tp_gfx_is_attack_anim(tpp) ||
+        tp_gfx_is_weapon_carry_anim(tpp)) {
+        if (is_dead) {
+            return (false);
+        }
+    }
+
+    bool lava = false;
+    is_submerged = false;
+
+    float pixw = 1.0 / (float) game->config.video_pix_width;
+    float pixh = 1.0 / (float) game->config.video_pix_height;
+    float scale = 4;
+    float tilew = pixw * TILE_WIDTH * scale;
+    float tileh = pixh * TILE_HEIGHT * scale;
+
+    fpoint at = get_interpolated_mid_at();
+    float X = at.x - level->pixel_map_at.x;
+    float Y = at.y - level->pixel_map_at.y;
+
+    blit_tl.x = (float)X * tilew;
+    blit_tl.y = (float)Y * tileh;
+    blit_br.x = blit_tl.x + tilew;
+    blit_br.y = blit_tl.y + tileh;
+
+    //
+    // Some things (like messages) have no tiles and so use the default.
+    //
+    float tile_pix_width = TILE_WIDTH;
+    float tile_pix_height = TILE_HEIGHT;
+    if (!is_no_tile()) {
+        tile = tile_index_to_tile(tile_curr);
+        if (!tile) {
+            err("has no tile, index %d", tile_curr);
+            return (false);
+        }
+        tile_pix_width = tile->pix_width;
+        tile_pix_height = tile->pix_height;
+    } else {
+        tile = {};
+    }
+
+    //
+    // Scale up tiles that are larger to the same pix scale.
+    //
+    if (unlikely((tile_pix_width != TILE_WIDTH) ||
+                 (tile_pix_height != TILE_HEIGHT))) {
+        auto xtiles = tile_pix_width / TILE_WIDTH;
+        blit_tl.x -= ((xtiles-1) * tilew) / 2;
+        blit_br.x += ((xtiles-1) * tilew) / 2;
+
+        auto ytiles = tile_pix_height / TILE_HEIGHT;
+        blit_tl.y -= ((ytiles-1) * tileh) / 2;
+        blit_br.y += ((ytiles-1) * tileh) / 2;
+    }
+
+    //
+    // Put larger tiles on the same y base as small ones.
+    //
+    if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tpp))) {
+        double y_offset =
+            (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
+        blit_tl.y -= y_offset;
+        blit_br.y -= y_offset;
+    }
+
+    //
+    // Flipping
+    //
+    if (unlikely(tp_gfx_animated_can_hflip(tpp))) {
+        if (get_timestamp_flip_start()) {
+            //
+            // Slow flip
+            //
+            auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
+            timestamp_t flip_time = 100;
+            timestamp_t flip_steps = flip_time;
+
+            if (diff > flip_time) {
+                set_timestamp_flip_start(0);
+                is_facing_left = !is_facing_left;
+                if (is_dir_left() ||
+                    is_dir_tl()   ||
+                    is_dir_bl()) {
+                    std::swap(blit_tl.x, blit_br.x);
+                }
+            } else {
+                if (is_dir_right() ||
+                    is_dir_tr()   ||
+                    is_dir_br()) {
+                    std::swap(blit_tl.x, blit_br.x);
+                }
+                double w = blit_br.x - blit_tl.x;
+                double dw = w / flip_steps;
+                double tlx = blit_tl.x;
+                double brx = blit_br.x;
+
+                blit_tl.x = tlx + dw * diff;
+                blit_br.x = brx - dw * diff;
+                std::swap(blit_tl.x, blit_br.x);
+            }
+        } else {
+            //
+            // Fast flip
+            //
+            if (is_dir_right() || is_dir_tr() || is_dir_br()) {
+                std::swap(blit_tl.x, blit_br.x);
+            }
+        }
+    }
+
+    if (unlikely(tp_gfx_animated_can_vflip(tpp))) {
+        if (is_dir_down() || is_dir_br() || is_dir_bl()) {
+            std::swap(blit_tl.y, blit_br.y);
+        }
+    }
+
+    //
+    // Boing.
+    //
+    if (unlikely(is_bouncing)) {
+        double b = get_bounce();
+        blit_tl.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
+        blit_br.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
+    }
+
+    //
+    // Fading.
+    //
+    double fadeup = get_fadeup();
+    if (likely(fadeup == 0)) {
+    } else if (fadeup < 0) {
+        return (false);
+    } else {
+        blit_tl.y -= fadeup;
+        blit_br.y -= fadeup;
+    }
+
+    //
+    // If the owner is submerged, so is the weapon
+    //
+    auto owner = owner_get();
+    if (owner && owner->is_submerged) {
+        is_submerged = true;
+    }
+
+    //
+    // Render the weapon and player on the same tile rules
+    //
+    auto map_loc = mid_at;
+    if (owner) {
+        map_loc = owner->mid_at;
+    }
+
+    sub_tile_tl = fpoint(0, 0);
+    sub_tile_br = fpoint(1, 1);
+
+    if (is_monst() ||
+        is_player() ||
+        tp_gfx_is_on_fire_anim(tpp) ||
+        tp_gfx_is_attack_anim(tpp) ||
+        tp_gfx_is_weapon_carry_anim(tpp)) {
+
+        set_submerged_offset(0);
+
+        if ((map_loc.y < MAP_HEIGHT - 1) &&
+             level->is_chasm((int)map_loc.x, (int)map_loc.y + 1)) {
+            double offset = game->config.one_pixel_gl_height * 5;
+            blit_br.y -= offset;
+            blit_tl.y -= offset;
+        } else if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
+            const auto pct_visible_above_surface = 0.5;
+            if (owner) {
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
+                sub_tile_br = fpoint(1, pct_visible_above_surface);
+                blit_br.y -=
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            } else {
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                auto offset =
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
+            }
+            is_submerged = true;
+        } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
+            const auto pct_visible_above_surface = 0.5;
+            if (owner) {
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
+                sub_tile_br = fpoint(1, pct_visible_above_surface);
+                blit_br.y -=
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            } else {
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                auto offset =
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
+            }
+            is_submerged = true;
+            lava = true;
+        } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
+            if (owner) {
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
+            } else {
+                const auto pct_visible_above_surface = 0.1;
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                auto offset =
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
+            }
+            is_submerged = true;
+        }
+    }
+    return (true);
+}
+
+void Thing::blit_test (void)
+{_
+    fpoint sub_tile_tl, sub_tile_br;
+    fpoint blit_tl, blit_br;
+    Tilep tile = {};
+
+    if (!blit_check(blit_tl, blit_br, sub_tile_tl, sub_tile_br, tile)) {
+        return;
+    }
+
+    auto tpp = tp();
+    bool lava = false;
+    is_submerged = false;
+
+    if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
+        if (is_submerged) {
+            blit_shadow_section(
+                tpp, tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
+            blit_shadow(tpp, tile, blit_tl, blit_br);
+        } else {
+            blit_shadow(tpp, tile, blit_tl, blit_br);
+        }
+    }
+
+    if (unlikely(is_msg())) {
+        blit_text(get_msg(), blit_tl, blit_br);
+    }
+
+    if (unlikely(get_on_fire_anim_id())) {
+        static uint32_t ts;
+        static color c = WHITE;
+        if (time_have_x_tenths_passed_since(1, ts)) {
+            ts = time_get_time_ms_cached();
+            if (random_range(0, 100) < 10) {
+                c = WHITE;
+            } else if (random_range(0, 100) < 50) {
+                c = ORANGE;
+            } else {
+                c = RED;
+            }
+        }
+        glcolor(c);
+    }
+
+    if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
+        if (is_submerged) {
+            tile_blit_outline_section(
+                tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
+
+            //
+            // Show the bottom part of the body transparent
+            //
+            if (!lava) {
+                color c = WHITE;
+                c.a = 100;
+                glcolor(c);
+                double h = blit_br.y - blit_tl.y;
+                blit_br.y = blit_tl.y + h;
+                tile_blit(tile, blit_tl, blit_br);
+            }
+
+            glcolor(WHITE);
+        } else {
+            tile_blit_outline(tile, blit_tl, blit_br);
+        }
+    } else {
+        if (is_submerged) {
+            tile_blit_section(
+            tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
+        } else {
+            tile_blit(tile, blit_tl, blit_br);
+        }
+    }
+
+    if (likely(!game->config.gfx_show_hidden)) {
+        if (!thing_map_black_and_white) {
+            ThingTiles tiles;
+            get_tiles(&tiles);
+
+            if (is_wall()) {
+                blit_wall_cladding(blit_tl, blit_br, &tiles);
+            } else if (is_rock()) {
+                blit_rock_cladding(blit_tl, blit_br, &tiles);
+            }
+        }
+    }
+
+    last_blit_tl = blit_tl;
+    last_blit_br = blit_br;
+    is_blitted = true;
+}
+
+void thing_render_all_test (void)
+{_
+    int minx;
+    int maxx;
+    int miny;
+    int maxy;
+#if 0
+    int light_minx;
+    int light_maxx;
+    int light_miny;
+    int light_maxy;
+#endif
+
+    //
+    // Get the bounds. Needs to be a bit off-map for reflections.
+    //
+    int border = 5;
+    minx = std::max(0, (int) level->pixel_map_at.x - border);
+    maxx = std::min(MAP_WIDTH, (int)level->pixel_map_at.x + TILES_ACROSS + border);
+
+    miny = std::max(0, (int) level->pixel_map_at.y - border);
+    maxy = std::min(MAP_HEIGHT, (int)level->pixel_map_at.y + TILES_DOWN + border);
+
+    level->map_tl = point(minx, miny);
+    level->map_br = point(maxx, maxy);
+
+    //
+    // For light sources we need to draw a bit off map as the light
+    // has a radius
+    //
+#if 0
+    light_minx = std::max(0, minx - TILES_ACROSS / 2);
+    light_maxx = std::min(MAP_HEIGHT, maxx + TILES_ACROSS / 2);
+    light_miny = std::max(0, miny - TILES_DOWN / 2);
+    light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN / 2);
+#endif
+
+    thing_cursor_scroll_map_to_follow();
+    thing_map_scroll_do();
+
+    float map_move_delta = TILE_WIDTH * 6;
+
+    fpoint map_at = level->map_at;
+    fpoint offset(map_at.x - floor(map_at.x), map_at.y - floor(map_at.y));
+
+    offset.x *= map_move_delta;
+    offset.x = floor(offset.x);
+    offset.x /= map_move_delta;
+
+    offset.y *= map_move_delta;
+    offset.y = floor(offset.y);
+    offset.y /= map_move_delta;
+
+    level->pixel_map_at =
+      fpoint(floor(map_at.x) + offset.x, floor(map_at.y) + offset.y);
+
+    std::list<Thingp> moved;
+    for (auto i : level->all_active_things) {
+        auto t = i.second;
+        if (t->update_coordinates()) {
+            moved.push_back(t);
+        }
+    }
+
+    glcolor(WHITE);
+    blit_fbo_bind(FBO_MAIN);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    blit_init();
+    { for (auto z = 0; z < MAP_DEPTH; z++)
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                    t->blit_test();
+                } FOR_ALL_THINGS_AT_DEPTH_END()
+            }
+        }
+    }
+    blit_flush();
+
+    for (auto t : moved) {
+        t->detach();
+        t->attach();
+        t->update_light();
+    }
+
     thing_cursor_reset_if_needed();
 
     thing_cursor_find(minx, miny, maxx, maxy);

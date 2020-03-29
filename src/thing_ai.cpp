@@ -25,13 +25,13 @@ bool Thing::possible_to_attack (const Thingp itp)
     if (is_alive_monst()) {
         if (tp_is_meat_eater(me)) {
             if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
-                log("possible attack %s", itp->to_string().c_str());
+                dbg("possible attack %s", itp->to_string().c_str());
                 return (true);
             }
         }
     } else if (is_player()) {
         if (itp->is_monst()) {
-            log("possible attack %s", itp->to_string().c_str());
+            dbg("possible attack %s", itp->to_string().c_str());
             return (true);
         }
     }
@@ -137,7 +137,7 @@ uint8_t Thing::is_less_preferred_terrain (point p)
 
 void Thing::ai_get_next_hop (void)
 {_
-    log("calculate next-hop for AI");
+    log("AI (higher scores prefd):");
 
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
@@ -178,9 +178,6 @@ void Thing::ai_get_next_hop (void)
     //
     std::multiset<Goal> goals;
 
-#ifdef DEBUG_AI
-    log("goals (higher scores are preferred):");
-#endif
     auto tpp = tp();
     for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
         point p(x, y);
@@ -203,8 +200,8 @@ void Thing::ai_get_next_hop (void)
 #define GOAL_ADD(score, msg) \
         total_score += (score); \
         got_one = true; \
-        log("+ goal (%d,%d) score %d, total %d, %s, %s", \
-            p.x, p.y, score, total_score, msg, it->to_string().c_str());
+        log(" goal (%d,%d) score %d %s, %s", \
+            p.x, p.y, score, msg, it->to_string().c_str());
 #else
 #define GOAL_ADD(score, msg) \
         total_score += (score); \
@@ -226,7 +223,7 @@ void Thing::ai_get_next_hop (void)
                     //
                     // If starving, prefer the thing with most health
                     //
-                    GOAL_ADD(it_stats_health, "eat player");
+                    GOAL_ADD(it_stats_health, "eatp1");
                 }
             } else if (is_hungry) {
                 if (will_eat(it)) {
@@ -236,11 +233,11 @@ void Thing::ai_get_next_hop (void)
                     // go for the easier kill in preference.
                     //
                     if (it->is_player()) {
-                        GOAL_ADD(- health_diff, "eat player");
+                        GOAL_ADD(- health_diff, "eatp2");
                     } else if (it->is_alive_monst()) {
-                        GOAL_ADD(- health_diff, "eat monst");
+                        GOAL_ADD(- health_diff, "eatm1");
                     } else {
-                        GOAL_ADD(it_stats_health, "eat food");
+                        GOAL_ADD(it_stats_health, "eatf1");
                     }
                 }
             }
@@ -318,8 +315,8 @@ void Thing::ai_get_next_hop (void)
     }
 
 #ifdef DEBUG_AI
-    log("sorted goals, %f (best) .. %f (worst) range %f",
-        most_preferred, least_preferred, most_preferred - least_preferred);
+    log("sorted goals, %d (best) .. %d (worst)",
+        (int)most_preferred, (int)least_preferred);
 #endif
 
     //
@@ -340,7 +337,7 @@ void Thing::ai_get_next_hop (void)
         set(dmap_scent->val, goal_target.x, goal_target.y, score8);
 
 #ifdef DEBUG_AI
-        log(" scale goal (%d,%d) %d to %d",
+        dbg(" scale goal (%d,%d) %d to %d",
             (int)minx + goal.at.x, (int)miny + goal.at.y, 
             (int)orig_score, (int)score8);
 #endif
@@ -393,9 +390,7 @@ void Thing::ai_get_next_hop (void)
         auto astar_end = goal.at;
         auto result = astar_solve(path_debug, astar_start, astar_end, dmap_scent);
         auto hops = result.path;
-#ifdef DEBUG_ASTAR_PATH
         auto cost = result.cost;
-#endif
         auto hops_len = hops.size();
         point best;
 
@@ -420,11 +415,9 @@ void Thing::ai_get_next_hop (void)
         auto nh = fpoint(best.x + minx + 0.5,
                          best.y + miny + 0.5);
 
-#ifdef DEBUG_ASTAR_PATH
-        log("try goal (%d,%d) next-hop(%d,%d) => cost %d (lower is better)",
-            (int)minx + goal.at.x, (int)miny + goal.at.y, 
-            (int)nh.x, (int)nh.y, cost);
-#endif
+        log("assess (%d,%d) next (%d,%d) cost %d (lower pref)",
+            (int)minx + goal.at.x, (int)miny + goal.at.y,
+            (int)(nh.x), (int)(nh.y), (int)cost);
 
 #ifdef DEBUG_ASTAR_PATH
         if (!index) {
@@ -461,7 +454,7 @@ void Thing::ai_get_next_hop (void)
             // We would hit something and cannot do this move. However,
             // see if we can hit the thing that is in the way.
             //
-            log("move to %f,%f will collide with something",
+            log("move to %f,%f hit obstacle",
                 nh.x, nh.y);
 
             bool target_attacked = false;
@@ -471,10 +464,10 @@ void Thing::ai_get_next_hop (void)
                                               &target_overlaps);
             if (target_attacked) {
                 is_move_done = true;
-                log("cannot move to %f,%f, attack", nh.x, nh.y);
+                log("cannot move to %f,%f, must attack", nh.x, nh.y);
                 return;
             } else {
-                log("cannot move to %f,%f, collision", nh.x, nh.y);
+                log("cannot move to %f,%f, obstacle", nh.x, nh.y);
                 continue;
             }
         } else {
@@ -485,6 +478,7 @@ void Thing::ai_get_next_hop (void)
         }
     }
 
+    is_move_done = true;
     stop();
     return;
 }
