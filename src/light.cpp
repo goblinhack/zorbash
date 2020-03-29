@@ -239,8 +239,8 @@ void Light::render_triangle_fans (void)
     fpoint light_pos(tx * game->config.tile_gl_width,
                      ty * game->config.tile_gl_height);
 
-    auto ox = level->map_at.x * game->config.tile_gl_width;
-    auto oy = level->map_at.y * game->config.tile_gl_height;
+    auto ox = level->pixel_map_at.x * game->config.tile_gl_width;
+    auto oy = level->pixel_map_at.y * game->config.tile_gl_height;
 
     glTranslatef(-ox, -oy, 0);
 
@@ -351,8 +351,8 @@ void Light::render_point_light (void)
     fpoint light_pos(tx * game->config.tile_gl_width,
                      ty * game->config.tile_gl_height);
 
-    auto ox = level->map_at.x * game->config.tile_gl_width;
-    auto oy = level->map_at.y * game->config.tile_gl_height;
+    auto ox = level->pixel_map_at.x * game->config.tile_gl_width;
+    auto oy = level->pixel_map_at.y * game->config.tile_gl_height;
 
     double lw = strength * game->config.tile_gl_width;
     double lh = strength * game->config.tile_gl_height;

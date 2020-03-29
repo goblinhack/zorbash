@@ -14,7 +14,7 @@ unsigned short thing_callframes_depth;
 void Thing::achieve_goals_in_life (void)
 {_
     if (tp_is_loggable(tp())) {
-        log("move");
+        log("achieve goals");
     }
 
     lifespan_tick();

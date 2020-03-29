@@ -538,13 +538,13 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             continue;
         }
 
-        log("collision candidate %s", cand.target->to_string().c_str());
-
+        log("cand %s", cand.target->to_string().c_str());
+_
         //
         // Skip things that aren't really hitable.
         //
         if (tp_gfx_is_weapon_carry_anim(cand.target->tp())) {
-            log("collision candidate %s skip, not hittable",
+            log("ignore %s skip, not hittable",
                 cand.target->to_string().c_str());
             continue;
         }
@@ -559,8 +559,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             // If this target is higher prio, prefer it.
             //
             best = &cand;
-            log("collision candidate best is %s",
-                cand.target->to_string().c_str());
+            log("add %s", cand.target->to_string().c_str());
         } else if (cand.priority == best->priority) {
             //
             // If this target is closer, prefer it.
@@ -569,19 +568,20 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             auto best_pos = best->target->get_interpolated_mid_at();
 
             float dist_best = DISTANCE(me_pos.x,
-                                        me_pos.y,
-                                        best_pos.x,
-                                        best_pos.y);
+                                       me_pos.y,
+                                       best_pos.x,
+                                       best_pos.y);
             float dist_cand = DISTANCE(me_pos.x,
-                                        me_pos.y,
-                                        best_pos.x,
-                                        best_pos.y);
+                                       me_pos.y,
+                                       best_pos.x,
+                                       best_pos.y);
 
             if (dist_cand < dist_best) {
                 best = &cand;
-                log("collision candidate closer best is %s",
-                    cand.target->to_string().c_str());
+                log("add %s", cand.target->to_string().c_str());
             }
+        } else {
+            log("ignore %s", cand.target->to_string().c_str());
         }
     }
 
@@ -590,8 +590,8 @@ bool Thing::collision_find_best_target (bool *target_attacked,
         *target_overlaps = true;
 
         auto it = best->target;
-        log("collision best candidate is %s", it->to_string().c_str());
-
+        log("best cand is %s", it->to_string().c_str());
+_
         damage = get_stats_attack();
         if (it->ai_hit_if_possible(me, damage)) {
             log("collision: will hit %s for %d damage",
@@ -803,7 +803,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
             thing_ai_possible_hit_add(it, "eat");
         }
     } else {
-        log("candidate ignore %s", it->to_string().c_str());
+        log("cand ignore %s", it->to_string().c_str());
     }
 
     return (true);
@@ -876,8 +876,7 @@ bool Thing::collision_obstacle (fpoint p)
     return (false);
 }
 
-bool Thing::collision_check_only (Thingp it, fpoint A_at,
-                                  int x, int y, int dx, int dy)
+bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
 {_
     auto me = this;
     auto it_tp = it->tp();
@@ -897,6 +896,8 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at,
         return (false);
     }
 
+    log("collision check with %s", it->to_string().c_str());
+_
     //
     // Sword use hits?
     //
@@ -912,19 +913,21 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at,
         }
     } else if (possible_to_attack(it)) {
         if (things_overlap(me, A_at, it)) {
-            log("will attack %s", it->to_string().c_str());
+            log("can attack %s", it->to_string().c_str());
             return (true);
         } else {
             log("cannot attack %s, no overlap", it->to_string().c_str());
         }
     } else if (will_eat(it)) {
-        log("try to eat %s", it->to_string().c_str());
         if (things_overlap(me, A_at, it)) {
+            log("can eat %s", it->to_string().c_str());
             return (true);
+        } else {
+            log("cannot eat %s, no overlap", it->to_string().c_str());
         }
     } else {
-        dbg("consider %s", it->to_string().c_str());
         if (things_overlap(me, A_at, it)) {
+            log("consider %s", it->to_string().c_str());
             if (collision_obstacle(it)) {
                 return (true);
             }
@@ -1032,10 +1035,9 @@ bool Thing::collision_check_only (fpoint future_pos)
         maxy--;
     }
 
+    log("check for collisions");
     for (int16_t x = minx; x <= maxx; x++) {
-        auto dx = x - future_pos.x;
         for (int16_t y = miny; y <= maxy; y++) {
-            auto dy = y - future_pos.y;
             FOR_ALL_COLLISION_THINGS(level, it, x, y) {
                 if (this == it) {
                     continue;
@@ -1045,7 +1047,7 @@ bool Thing::collision_check_only (fpoint future_pos)
                     continue;
                 }
 
-                if (collision_check_only(it, future_pos, x, y, dx, dy)) {
+                if (collision_check_only(it, future_pos, x, y)) {
                     return (true);
                 }
             }

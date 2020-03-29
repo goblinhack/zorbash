@@ -193,6 +193,7 @@ bool Thing::update_coordinates (void)
     br.x = tl.x + tile_gl_width;
     br.y = tl.y + tile_gl_height;
 
+#if 0
     //
     // Some things (like messages) have no tiles and so use the default.
     //
@@ -262,55 +263,7 @@ bool Thing::update_coordinates (void)
             br.y += dy;
         }
     }
-
-    if (unlikely(tp_gfx_animated_can_hflip(tpp))) {
-        if (get_timestamp_flip_start()) {
-            //
-            // Slow flip
-            //
-            auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
-            timestamp_t flip_time = 100;
-            timestamp_t flip_steps = flip_time;
-
-            if (diff > flip_time) {
-                set_timestamp_flip_start(0);
-                is_facing_left = !is_facing_left;
-                if (is_dir_left() ||
-                    is_dir_tl()   ||
-                    is_dir_bl()) {
-                    std::swap(tl.x, br.x);
-                }
-            } else {
-                if (is_dir_right() ||
-                    is_dir_tr()   ||
-                    is_dir_br()) {
-                    std::swap(tl.x, br.x);
-                }
-                double w = br.x - tl.x;
-                double dw = w / flip_steps;
-                double tlx = tl.x;
-                double brx = br.x;
-
-                tl.x = tlx + dw * diff;
-                br.x = brx - dw * diff;
-                std::swap(tl.x, br.x);
-            }
-        } else {
-            //
-            // Fast flip
-            //
-            if (is_dir_right() || is_dir_tr() || is_dir_br()) {
-                std::swap(tl.x, br.x);
-            } else {
-            }
-        }
-    }
-
-    if (unlikely(tp_gfx_animated_can_vflip(tpp))) {
-        if (is_dir_down() || is_dir_br() || is_dir_bl()) {
-            std::swap(tl.y, br.y);
-        }
-    }
+#endif
 
     //
     // If we've moved, need to update the display sort order.
@@ -382,7 +335,7 @@ double Thing::get_bounce (void)
         (double)(t - get_timestamp_bounce_begin()) /
         (double)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
 
-    double height = br.y - tl.y;
+    double height = 1.0;
 
     height *= sin(time_step * RAD_180);
     height *= get_bounce_height();
