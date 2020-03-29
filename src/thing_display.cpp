@@ -410,47 +410,84 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 }
 
-//
-// Blits a whole tile. Y co-ords are inverted.
-//
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                           const fpoint &blit_tl,
                                           const fpoint &blit_br)
 {_
     fpoint shadow_tl = blit_tl;
     fpoint shadow_br = blit_br;
-#if 0
-    double dx = 1.0;
-    double dy = 1.0;
+
+    float dx = game->config.one_pixel_gl_width;
+    float dy = game->config.one_pixel_gl_width;
+
+    color c = BLACK;
+    c.a = 100;
+
     if (level->player) {
         if (get_owner_id() == level->player->id) {
-            // use default shadow for carried items
+            dx *= -4;
+            dy *= -4;
         } else if (this != level->player) {
             fpoint p = level->player->at;
             fpoint d = at - p;
-            const double D = 5.0;
+            const double D = 50.0;
             dx = d.x / D;
             dy = d.y / D;
 
-            if (distance(at, p) > TILES_ACROSS / 2) {
+            auto dist = distance(at, p);
+            if (dist > 3) {
                 return;
+            }
+
+            if (dist > 0) {
+                float a = 200 - (dist * 100);
+                if (a <= 0) {
+                    return;
+                }
+                c.a = (int)a;
+            } else {
+                c.a = 0;
             }
         }
     } else {
-        // use default shadow
+        dx *= -4;
+        dy *= -4;
     }
-#endif
 
-    float d = game->config.tile_pixel_width * 1;
-
-    shadow_tl.x += d;
-    shadow_tl.y += d;
-    shadow_br.x += d;
-    shadow_br.y += d;
-
-    color c = RED;
-    c.a = 255;
     glcolor(c);
+
+    shadow_tl.x += dx;
+    shadow_tl.y += dy;
+    shadow_br.x += dx;
+    shadow_br.y += dy;
+
+    tile_blit(tile, shadow_tl, shadow_br);
+
+    glcolor(WHITE);
+}
+
+void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
+                                      const fpoint &blit_tl,
+                                      const fpoint &blit_br)
+{_
+    fpoint shadow_tl = blit_tl;
+    fpoint shadow_br = blit_br;
+
+    float dx = game->config.one_pixel_gl_width;
+    float dy = game->config.one_pixel_gl_width;
+
+    color c = BLACK;
+    c.a = 100;
+
+    dx *= -4;
+    dy *= -4;
+
+    glcolor(c);
+
+    shadow_tl.x += dx;
+    shadow_tl.y += dy;
+    shadow_br.x += dx;
+    shadow_br.y += dy;
 
     tile_blit(tile, shadow_tl, shadow_br);
 
@@ -474,6 +511,7 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
     }
 
     if (is_player() || (get_owner_id() == level->player->id)) {
+        blit_player_owned_shadow(tpp, tile, blit_tl, blit_br);
     } else {
         blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
     }
