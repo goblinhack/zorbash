@@ -1675,7 +1675,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_corridor)
     TP_SET_DECL(is_cursor)
     TP_SET_DECL(is_cursor_can_hover_over)
-    TP_SET_DECL(is_deep_water)
     TP_SET_DECL(is_dirt)
     TP_SET_DECL(is_door)
     TP_SET_DECL(is_entrance)
@@ -1727,7 +1726,6 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_combustible)
     TP_SET_DECL(gfx_is_on_fire_anim)
     TP_SET_DECL(is_attack_shove_chance_d1000)
-    TP_SET_DECL(is_chasm)
     TP_SET_DECL(is_hazard)
     TP_SET_DECL(is_attack_shove)
     TP_SET_DECL(is_shovable)
@@ -2068,10 +2066,7 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
 
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_LAVA", MAP_DEPTH_LAVA);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_CHASM", MAP_DEPTH_CHASM);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_BLOOD", MAP_DEPTH_BLOOD);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_HAZARD", MAP_DEPTH_HAZARD);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS", MAP_DEPTH_WALLS);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MONST", MAP_DEPTH_MONST);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_ITEM", MAP_DEPTH_ITEM);

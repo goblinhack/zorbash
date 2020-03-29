@@ -442,10 +442,6 @@ void Thing::update_pos (fpoint to, bool immediately)
             level->unset_lava(old_at.x, old_at.y);
             level->set_lava(new_at.x, new_at.y);
         }
-        if (is_chasm()) {
-            level->unset_chasm(old_at.x, old_at.y);
-            level->set_chasm(new_at.x, new_at.y);
-        }
         if (is_blood()) {
             level->unset_blood(old_at.x, old_at.y);
             level->set_blood(new_at.x, new_at.y);
@@ -453,10 +449,6 @@ void Thing::update_pos (fpoint to, bool immediately)
         if (is_water()) {
             level->unset_water(old_at.x, old_at.y);
             level->set_water(new_at.x, new_at.y);
-        }
-        if (is_deep_water()) {
-            level->unset_deep_water(old_at.x, old_at.y);
-            level->set_deep_water(new_at.x, new_at.y);
         }
         if (is_corridor()) {
             level->unset_corridor(old_at.x, old_at.y);

@@ -31,6 +31,5 @@ void Level::display (void)
     // all the things into the map for collisions.
     //
     thing_render_all();
-    //thing_render_all_test();
     blit_fbo_unbind();
 }

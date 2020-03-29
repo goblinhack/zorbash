@@ -86,12 +86,8 @@ public:
     bool is_anything_at_fast(const int x, const int y);
     bool is_anything_at_fast(const int x, const int y, const int z);
     bool is_blood(const int x, const int y);
-    bool is_chasm(const int x, const int y);
-    bool is_chasm_fast(const int x, const int y);
     bool is_corridor(const int x, const int y);
     bool is_corridor_fast(const int x, const int y);
-    bool is_deep_water(const int x, const int y);
-    bool is_deep_water_fast(const int x, const int y);
     bool is_dirt(const int x, const int y);
     bool is_dirt_fast(const int x, const int y);
     bool is_door(const int x, const int y);

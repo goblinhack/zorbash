@@ -171,7 +171,7 @@ public:
     uint32_t is_open:1            {};
     uint32_t is_sleeping:1        {};
     uint32_t is_starving:1        {};
-    uint32_t is_submerged:1       {};
+    uint32_t is_in_water:1        {};
     uint32_t is_in_lava:1         {};
     uint32_t is_waiting_to_move:1 {};
     /////////////////////////////////////////////////////////////////////////
@@ -675,7 +675,6 @@ public:
     int is_bleeder(void);
     int is_blood(void);
     int is_blood_splatter(void);
-    int is_chasm(void);
     int is_combustible(void);
     int is_corpse(void);
     int is_corpse_on_death(void);
@@ -773,12 +772,12 @@ public:
     bool collision_find_best_target(bool *, bool *);
     void animate();
     void attach(void);
-    void blit(double offset_x, double offset_y, int x, int y);
+    void blit();
     bool blit_check(fpoint &blit_tl, fpoint &blit_br,
                     fpoint &sub_tile_tl, fpoint &sub_tile_br,
                     Tilep &tile);
     void blit_test(void);
-    void blit_outline_only(double offset_x, double offset_y, int x, int y);
+    void blit_outline_only(int x, int y);
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_non_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
@@ -788,7 +787,7 @@ public:
     void blit_rock_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
-    void blit_upside_down(double offset_x, double offset_y, int x, int y);
+    void blit_upside_down(int x, int y);
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void lunge(fpoint tt);
     void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);

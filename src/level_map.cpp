@@ -7,67 +7,8 @@
 #include "my_dungeon.h"
 #include "my_thing.h"
 
-void Level::update_water_map (void)
-{
-    //
-    // The water tiles are twice the size of normal tiles, so work out
-    // where to draw them to avoid overlaps
-    //
-    lava_tile_map = {};
-    chasm_tile_map = {};
-    water_tile_map = {};
-    deep_water_tile_map = {};
-
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-            if (level->is_water(x, y) || level->is_deep_water(x, y)) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                for (auto dx = -2; dx <= 3; dx++) {
-                    for (auto dy = -2; dy <= 3; dy++) {
-                        set(water_tile_map, x+dx, y+dy, true);
-                        if (level->is_deep_water(x, y)) {
-                            set(deep_water_tile_map, x+dx, y+dy, true);
-                        }
-                    }
-                }
-            }
-
-            if (level->is_lava(x, y)) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                for (auto dx = -2; dx <= 3; dx++) {
-                    for (auto dy = -2; dy <= 3; dy++) {
-                        set(lava_tile_map, x+dx, y+dy, true);
-                    }
-                }
-            }
-
-            if (level->is_chasm(x, y)) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                for (auto dx = -2; dx <= 3; dx++) {
-                    for (auto dy = 0; dy <= 2; dy++) {
-                        set(chasm_tile_map, x+dx, y+dy, true);
-                    }
-                }
-            }
-        }
-    }
-}
-
 void Level::update_map (void)
 {
-    update_water_map();
 }
 
 bool Level::is_anything_at (const int x, const int y)
@@ -122,32 +63,6 @@ void Level::unset_lava (const int x, const int y)
     }
     map_changed = true;
     set(_is_lava, x, y, false);
-}
-
-bool Level::is_chasm (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_chasm, x, y));
-}
-
-void Level::set_chasm (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    map_changed = true;
-    set(_is_chasm, x, y, true);
-}
-
-void Level::unset_chasm (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    map_changed = true;
-    set(_is_chasm, x, y, false);
 }
 
 bool Level::is_hazard (const point &p)
@@ -282,40 +197,6 @@ void Level::unset_water (const int x, const int y)
     }
     map_changed = true;
     set(_is_water, x, y, false);
-}
-
-bool Level::is_deep_water (const point &p)
-{_
-    if (unlikely(is_oob(p.x, p.y))) {
-        return (false);
-    }
-    return (get(_is_deep_water, p.x, p.y));
-}
-
-bool Level::is_deep_water (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return (false);
-    }
-    return (get(_is_deep_water, x, y));
-}
-
-void Level::set_deep_water (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    map_changed = true;
-    set(_is_deep_water, x, y, true);
-}
-
-void Level::unset_deep_water (const int x, const int y)
-{_
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-    map_changed = true;
-    set(_is_deep_water, x, y, false);
 }
 
 bool Level::is_wall (const point &p)

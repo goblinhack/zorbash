@@ -339,7 +339,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_hp_75_percent = 0;
     int is_hp_100_percent = 0;
     int gfx_outline_index_offset = 0;
-    int is_submerged = 0;
+    int is_in_water = 0;
     int is_sleeping = 0;
     int is_open = 0;
     int is_dead = 0;
@@ -392,7 +392,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_hp_75_percent",
         (char*) "is_hp_100_percent",
         (char*) "gfx_outline_index_offset",
-        (char*) "is_submerged",
+        (char*) "is_in_water",
         (char*) "is_sleeping",
         (char*) "is_open",
         (char*) "is_dead",
@@ -447,7 +447,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_hp_75_percent,
                                      &is_hp_100_percent,
                                      &gfx_outline_index_offset,
-                                     &is_submerged,
+                                     &is_in_water,
                                      &is_sleeping,
                                      &is_open,
                                      &is_dead,
@@ -746,7 +746,6 @@ TP_BODY_SET_INT(is_attackable)
 TP_BODY_SET_INT(is_bleeder)
 TP_BODY_SET_INT(is_blood)
 TP_BODY_SET_INT(is_blood_splatter)
-TP_BODY_SET_INT(is_chasm)
 TP_BODY_SET_INT(is_combustible)
 TP_BODY_SET_INT(is_corpse_on_death)
 TP_BODY_SET_INT(is_corridor)

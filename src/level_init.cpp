@@ -29,13 +29,9 @@ static void level_place_floor_under_objects(Dungeonp d,
                                             std::string what,
                                             int depth);
 static void level_place_lava(Dungeonp d, std::string what);
-static void level_place_chasm(Dungeonp d, std::string what);
-static void level_place_random_blood(Dungeonp d);
 static void level_place_water(Dungeonp d, std::string what);
-static void level_place_deep_water(Dungeonp d, std::string what);
 static void level_place_monst(Dungeonp d);
 static void level_place_food(Dungeonp d);
-static void level_place_blood(Dungeonp d);
 static void level_place_keys(Dungeonp d);
 static void level_place_floor_deco(Dungeonp d);
 static void level_place_wall_deco(Dungeonp d);
@@ -54,11 +50,9 @@ void Level::clear (void)
 {_
     _is_blood = {};
     _is_corridor = {};
-    _is_deep_water = {};
     _is_dirt = {};
     _is_floor = {};
     _is_lava = {};
-    _is_chasm = {};
     _is_rock = {};
     _is_visited = {};
     _is_gfx_large_shadow = {};
@@ -224,14 +218,9 @@ void Level::init (point3d at, int seed_in)
     if (errored) { return; }
     level_place_lava(dungeon, "lava1");
     if (errored) { return; }
-    level_place_chasm(dungeon, "chasm1");
-    if (errored) { return; }
     level_place_water(dungeon, "water1");
     if (errored) { return; }
-    level_place_deep_water(dungeon, "deep_water1");
-    if (errored) { return; }
     //fluid_init();
-    level_place_random_blood(dungeon);
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -252,8 +241,6 @@ void Level::init (point3d at, int seed_in)
     level_place_monst(dungeon);
     if (errored) { return; }
     level_place_food(dungeon);
-    if (errored) { return; }
-    level_place_blood(dungeon);
     if (errored) { return; }
     level_place_keys(dungeon);
     if (errored) { return; }
@@ -633,38 +620,6 @@ static void level_place_floor_under_objects (Dungeonp d,
                 }
             }
 
-            c = DARKBLUE;
-            c.a = 200;
-            light_strength = 2.0;
-            if (d->is_deep_water(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    auto n = thing_new(what, fpoint(x, y + 1));
-                    n->new_light(fpoint(x, y + 0.5),
-                                 light_strength, LIGHT_QUALITY_POINT, c);
-                }
-            }
-            if (d->is_deep_water(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    auto n = thing_new(what, fpoint(x, y - 1));
-                    n->new_light(fpoint(x, y - 0.5),
-                                 light_strength, LIGHT_QUALITY_POINT, c);
-                }
-            }
-            if (d->is_deep_water(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    auto n = thing_new(what, fpoint(x + 1, y));
-                    n->new_light(fpoint(x + 0.5, y),
-                                 light_strength, LIGHT_QUALITY_POINT, c);
-                }
-            }
-            if (d->is_deep_water(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    auto n = thing_new(what, fpoint(x - 1, y));
-                    n->new_light(fpoint(x - 0.5, y),
-                                 light_strength, LIGHT_QUALITY_POINT, c);
-                }
-            }
-
             if (d->is_monst(x, y + 1) ||
                 d->is_food(x, y + 1) ||
                 d->is_key(x, y + 1)) {
@@ -719,78 +674,6 @@ static void level_place_lava (Dungeonp d,
     }
 }
 
-static void level_place_chasm (Dungeonp d,
-                              std::string what)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_chasm(x, y)) {
-                continue;
-            }
-
-            if (!d->is_chasm(x, y)) {
-                continue;
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-
-            if (random_range(0, 1000) < 10) {
-                thing_new("smoke1", fpoint(x, y), fpoint(0.5, 0.5));
-            }
-        }
-    }
-}
-
-static void level_place_random_blood (Dungeonp d)
-{_
-    for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
-        for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
-            if (level->is_blood(x, y)) {
-                continue;
-            }
-
-            if (!d->is_floor(x, y) ||
-                !d->is_floor(x - 1, y) ||
-                !d->is_floor(x + 1, y) ||
-                !d->is_floor(x, y - 1) ||
-                !d->is_floor(x, y + 1) ||
-                !d->is_floor(x - 1, y - 1) ||
-                !d->is_floor(x + 1, y - 1) ||
-                !d->is_floor(x - 1, y + 1) ||
-                !d->is_floor(x + 1, y + 1)) {
-                continue;
-            }
-
-            if (d->is_hazard(x, y) ||
-                d->is_hazard(x - 1, y) ||
-                d->is_hazard(x + 1, y) ||
-                d->is_hazard(x, y - 1) ||
-                d->is_hazard(x, y + 1) ||
-                d->is_hazard(x - 1, y - 1) ||
-                d->is_hazard(x + 1, y - 1) ||
-                d->is_hazard(x - 1, y + 1) ||
-                d->is_hazard(x + 1, y + 1)) {
-                continue;
-            }
-
-            if (random_range(0, 1000) > 20) {
-                continue;
-            }
-
-            int splatters = random_range(2, 10);
-            for (int splatter = 0; splatter < splatters; splatter++) {
-                auto tp = tp_random_blood();
-                if (!tp) {
-                    return;
-                }
-                (void) thing_new(tp_name(tp),
-                                 fpoint(x, y),
-                                 fpoint(0.25, 0.25));
-            }
-        }
-    }
-}
-
 static void level_place_water (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -807,27 +690,6 @@ static void level_place_water (Dungeonp d, std::string what)
 
             if (!d->is_floor(x, y)) {
                 (void) thing_new("dirt2", fpoint(x, y));
-            }
-        }
-    }
-}
-
-static void level_place_deep_water (Dungeonp d, std::string what)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_deep_water(x, y)) {
-                continue;
-            }
-
-            if (!d->is_deep_water(x, y)) {
-                continue;
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-
-            if (!d->is_floor(x, y)) {
-                (void) thing_new("dirt3", fpoint(x, y));
             }
         }
     }
@@ -877,40 +739,6 @@ static void level_place_food (Dungeonp d)
     }
 }
 
-static void level_place_blood (Dungeonp d)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_blood(x, y)) {
-                continue;
-            }
-
-            if (!d->is_blood(x, y)) {
-                continue;
-            }
-
-            if (d->is_hazard(x, y) ||
-                d->is_hazard(x - 1, y) ||
-                d->is_hazard(x + 1, y) ||
-                d->is_hazard(x, y - 1) ||
-                d->is_hazard(x, y + 1) ||
-                d->is_hazard(x - 1, y - 1) ||
-                d->is_hazard(x + 1, y - 1) ||
-                d->is_hazard(x - 1, y + 1) ||
-                d->is_hazard(x + 1, y + 1)) {
-                continue;
-            }
-
-            auto tp = tp_random_blood();
-            if (!tp) {
-                return;
-            }
-
-            (void) thing_new(tp_name(tp), fpoint(x, y));
-        }
-    }
-}
-
 static void level_place_keys (Dungeonp d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -949,7 +777,6 @@ static void level_place_floor_deco (Dungeonp d)
             if (d->is_food(x, y)        ||
                 d->is_door(x, y)        ||
                 d->is_key(x, y)         ||
-                d->is_blood(x, y)       ||
                 d->is_secret_door(x, y) ||
                 d->is_monst(x, y)) {
                 continue;

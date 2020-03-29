@@ -48,8 +48,6 @@ void Level::update_minimap (void)
                     c = RED;
                 } else if (level->is_lava(x, y)) {
                     c = ORANGE;
-                } else if (level->is_chasm(x, y)) {
-                    c = BLACK;
                 } else if (level->is_wall(x, y)) {
                     if (level->is_visited(x, y)) {
                         c = GRAY80;
@@ -69,8 +67,6 @@ void Level::update_minimap (void)
                     } else {
                         c = GRAY20;
                     }
-                } else if (level->is_deep_water(x, y)) {
-                    c = DARKBLUE;
                 } else if (level->is_water(x, y)) {
                     c = BLUE2;
                 } else if (level->is_dirt(x, y)) {
@@ -126,8 +122,6 @@ void Level::update_minimap (void)
                     c = RED;
                 } else if (level->is_lava(x, y)) {
                     c = ORANGE;
-                } else if (level->is_chasm(x, y)) {
-                    c = BLACK;
                 } else if (level->is_wall(x, y)) {
                        if (level->is_visited(x, y)) {
                         c = GRAY80;
@@ -147,8 +141,6 @@ void Level::update_minimap (void)
                     } else {
                         c = GRAY20;
                     }
-                } else if (level->is_deep_water(x, y)) {
-                    c = DARKBLUE;
                 } else if (level->is_water(x, y)) {
                     c = BLUE2;
                 } else if (level->is_dirt(x, y)) {

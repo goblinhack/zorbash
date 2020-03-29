@@ -501,8 +501,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
             // use default shadow for carried items
         } else if (this != level->player) {
             fpoint p = level->player->get_interpolated_mid_at();
-            fpoint d = get_interpolated_mid_at() -
-                             level->player->get_interpolated_mid_at();
+            fpoint d = get_interpolated_mid_at() - p;
             const double D = 5.0;
             dx = d.x / D;
             dy = d.y / D;
@@ -543,7 +542,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         std::swap(shadow_tl, shadow_tr);
     }
 
-    double height = get_bounce() / 2.0;
+    double height = get_bounce() / 10.0;
     double fadeup = get_fadeup();
     if (fadeup < 0) {
         return;
@@ -804,15 +803,83 @@ void Thing::blit_text (std::string const& text,
     }
 }
 
-void Thing::blit (double offset_x, double offset_y, int x, int y)
+void Thing::blit_outline_only (int x, int y)
 {_
-    if (unlikely(is_hidden)) {
+    fpoint sub_tile_tl, sub_tile_br;
+    fpoint blit_tl, blit_br;
+    Tilep tile = {};
+
+    if (!blit_check(blit_tl, blit_br, sub_tile_tl, sub_tile_br, tile)) {
         return;
     }
 
-    bool blit = true;
+    ThingTiles tiles;
+    get_tiles(&tiles);
+    tile_blit(tiles.tile_outline, blit_tl, blit_br);
+    is_blitted = true;
+}
 
-    if (is_cursor() || is_cursor_path()) {
+void Thing::blit_upside_down (int x, int y)
+{_
+    fpoint sub_tile_tl, sub_tile_br;
+    fpoint blit_tl, blit_br;
+    Tilep tile = {};
+
+    if (!blit_check(blit_tl, blit_br, sub_tile_tl, sub_tile_br, tile)) {
+        return;
+    }
+
+    auto diff = blit_br.y - blit_tl.y;
+
+    auto tpp = tp();
+    if (tile && tile_get_height(tile) != TILE_HEIGHT) {
+        if (tp_gfx_oversized_but_sitting_on_the_ground(tpp)) {
+            blit_br.y += diff;
+            blit_tl.y += diff;
+        } else {
+            blit_br.y += game->config.tile_gl_height;
+            blit_tl.y += game->config.tile_gl_height;
+        }
+    } else {
+            blit_tl.y += diff;
+        blit_br.y += diff;
+    }
+
+    std::swap(blit_tl.y, blit_br.y);
+
+    if (is_msg()) {
+        blit_text(get_msg(), blit_tl, blit_br);
+    }
+
+    if (tp_gfx_show_outlined(tpp)) {
+        tile_blit_outline(tile, blit_tl, blit_br);
+    } else {
+        tile_blit(tile, blit_tl, blit_br);
+    }
+
+    ThingTiles tiles;
+    get_tiles(&tiles);
+
+    if (is_wall()) {
+        blit_wall_cladding(blit_tl, blit_br, &tiles);
+    }
+    if (tp_is_rock(tpp)) {
+        blit_rock_cladding(blit_tl, blit_br, &tiles);
+    }
+}
+
+bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
+                        fpoint &sub_tile_tl, fpoint &sub_tile_br,
+                        Tilep &tile)
+{_
+    int x = (int)mid_at.x;
+    int y = (int)mid_at.y;
+
+    if (unlikely(is_hidden)) {
+        return (false);
+    }
+
+    if (unlikely(is_cursor() || is_cursor_path())) {
         //
         // Always blit
         //
@@ -826,34 +893,162 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
                 glcolor(BLUE);
             }
         }
+
         if (!level->is_dungeon(x, y)) {
-            blit = false;
+            return (false);
         }
     }
 
+    //
+    // We render these offset form their owner, so if dead, then it is
+    // likely they also have no owner as the swing has ended.
+    //
     auto tpp = tp();
-    Tilep tile = tile_index_to_tile(tile_curr);
-    last_blit_tl = fpoint(tl.x - offset_x, tl.y - offset_y);
-    last_blit_br = fpoint(br.x - offset_x, br.y - offset_y);
-    auto blit_tl = last_blit_tl;
-    auto blit_br = last_blit_br;
-    double h = blit_br.y - blit_tl.y;
 
-    is_submerged = false;
+    if (tp_gfx_is_attack_anim(tpp) ||
+        tp_gfx_is_weapon_carry_anim(tpp)) {
+        if (is_dead) {
+            return (false);
+        }
+    }
+
     is_in_lava = false;
+    is_in_water = false;
 
-    ThingTiles tiles;
-    get_tiles(&tiles);
+    float pixw = 1.0 / (float) game->config.video_pix_width;
+    float pixh = 1.0 / (float) game->config.video_pix_height;
+    float scale = 4;
+    float tilew = pixw * TILE_WIDTH * scale;
+    float tileh = pixh * TILE_HEIGHT * scale;
 
-    fpoint sub_tile_tl(0, 0);
-    fpoint sub_tile_br(1, 1);
+    fpoint at = get_interpolated_mid_at();
+    float X = at.x - level->pixel_map_at.x;
+    float Y = at.y - level->pixel_map_at.y;
+
+    blit_tl.x = (float)X * tilew;
+    blit_tl.y = (float)Y * tileh;
+    blit_br.x = blit_tl.x + tilew;
+    blit_br.y = blit_tl.y + tileh;
+
+    //
+    // Some things (like messages) have no tiles and so use the default.
+    //
+    float tile_pix_width = TILE_WIDTH;
+    float tile_pix_height = TILE_HEIGHT;
+    if (!is_no_tile()) {
+        tile = tile_index_to_tile(tile_curr);
+        if (!tile) {
+            err("has no tile, index %d", tile_curr);
+            return (false);
+        }
+        tile_pix_width = tile->pix_width;
+        tile_pix_height = tile->pix_height;
+    } else {
+        tile = {};
+    }
+
+    //
+    // Scale up tiles that are larger to the same pix scale.
+    //
+    if (unlikely((tile_pix_width != TILE_WIDTH) ||
+                 (tile_pix_height != TILE_HEIGHT))) {
+        auto xtiles = tile_pix_width / TILE_WIDTH;
+        blit_tl.x -= ((xtiles-1) * tilew) / 2;
+        blit_br.x += ((xtiles-1) * tilew) / 2;
+
+        auto ytiles = tile_pix_height / TILE_HEIGHT;
+        blit_tl.y -= ((ytiles-1) * tileh) / 2;
+        blit_br.y += ((ytiles-1) * tileh) / 2;
+    }
+
+    //
+    // Put larger tiles on the same y base as small ones.
+    //
+    if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tpp))) {
+        double y_offset =
+            (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
+        blit_tl.y -= y_offset;
+        blit_br.y -= y_offset;
+    }
+
+    //
+    // Flipping
+    //
+    if (unlikely(tp_gfx_animated_can_hflip(tpp))) {
+        if (get_timestamp_flip_start()) {
+            //
+            // Slow flip
+            //
+            auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
+            timestamp_t flip_time = 100;
+            timestamp_t flip_steps = flip_time;
+
+            if (diff > flip_time) {
+                set_timestamp_flip_start(0);
+                is_facing_left = !is_facing_left;
+                if (is_dir_left() ||
+                    is_dir_tl()   ||
+                    is_dir_bl()) {
+                    std::swap(blit_tl.x, blit_br.x);
+                }
+            } else {
+                if (is_dir_right() ||
+                    is_dir_tr()   ||
+                    is_dir_br()) {
+                    std::swap(blit_tl.x, blit_br.x);
+                }
+                double w = blit_br.x - blit_tl.x;
+                double dw = w / flip_steps;
+                double tlx = blit_tl.x;
+                double brx = blit_br.x;
+
+                blit_tl.x = tlx + dw * diff;
+                blit_br.x = brx - dw * diff;
+                std::swap(blit_tl.x, blit_br.x);
+            }
+        } else {
+            //
+            // Fast flip
+            //
+            if (is_dir_right() || is_dir_tr() || is_dir_br()) {
+                std::swap(blit_tl.x, blit_br.x);
+            }
+        }
+    }
+
+    if (unlikely(tp_gfx_animated_can_vflip(tpp))) {
+        if (is_dir_down() || is_dir_br() || is_dir_bl()) {
+            std::swap(blit_tl.y, blit_br.y);
+        }
+    }
+
+    //
+    // Boing.
+    //
+    if (unlikely(is_bouncing)) {
+        double b = get_bounce();
+        blit_tl.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
+        blit_br.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
+    }
+
+    //
+    // Fading.
+    //
+    double fadeup = get_fadeup();
+    if (likely(fadeup == 0)) {
+    } else if (fadeup < 0) {
+        return (false);
+    } else {
+        blit_tl.y -= fadeup;
+        blit_br.y -= fadeup;
+    }
 
     //
     // If the owner is submerged, so is the weapon
     //
     auto owner = owner_get();
-    if (owner && owner->is_submerged) {
-        is_submerged = true;
+    if (owner && owner->is_in_water) {
+        is_in_water = true;
     }
 
     //
@@ -864,16 +1059,8 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
         map_loc = owner->mid_at;
     }
 
-    //
-    // We render these offset form their owner, so if dead, then it is
-    // likely they also have no owner as the swing has ended.
-    //
-    if (tp_gfx_is_attack_anim(tpp) ||
-        tp_gfx_is_weapon_carry_anim(tpp)) {
-        if (is_dead) {
-            return;
-        }
-    }
+    sub_tile_tl = fpoint(0, 0);
+    sub_tile_br = fpoint(1, 1);
 
     if (is_monst() ||
         is_player() ||
@@ -883,106 +1070,48 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
         set_submerged_offset(0);
 
-        if ((map_loc.y < MAP_HEIGHT - 1) &&
-             level->is_chasm((int)map_loc.x, (int)map_loc.y + 1)) {
-            double offset = game->config.one_pixel_gl_height * 5;
-            blit_br.y -= offset;
-            blit_tl.y -= offset;
-        } else if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
-            const auto pct_visible_above_surface = 0.5;
-            if (owner) {
-                auto offset = owner->get_submerged_offset();
-                blit_br.y += offset;
-                blit_tl.y += offset;
-                sub_tile_br = fpoint(1, pct_visible_above_surface);
-                blit_br.y -=
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-            } else {
-                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset =
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                set_submerged_offset(offset);
-                blit_tl.y += offset;
-            }
-            is_submerged = true;
-        } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
-            const auto pct_visible_above_surface = 0.5;
-            if (owner) {
-                auto offset = owner->get_submerged_offset();
-                blit_br.y += offset;
-                blit_tl.y += offset;
-                sub_tile_br = fpoint(1, pct_visible_above_surface);
-                blit_br.y -=
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-            } else {
-                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset =
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                set_submerged_offset(offset);
-                blit_tl.y += offset;
-            }
-            is_submerged = true;
+        if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
             is_in_lava = true;
         } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
-            if (owner) {
-                auto offset = owner->get_submerged_offset();
-                blit_br.y += offset;
-                blit_tl.y += offset;
-            } else {
-                const auto pct_visible_above_surface = 0.1;
-                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset =
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                set_submerged_offset(offset);
-                blit_tl.y += offset;
-            }
-            is_submerged = true;
+            is_in_water = true;
         }
     }
 
-#if 0
-    if ((mouse_x > blit_tl.x * game->config.video_pix_width) && (mouse_x < blit_br.x * game->config.video_pix_width) &&
-        (mouse_y > blit_tl.y * game->config.video_pix_height) && (mouse_y < blit_br.y * game->config.video_pix_height)) {
-        if (is_wall()) {
-//            con("over");
-//            extern Thingp debug_thing;
-//            debug_thing = this;
-        }
-    }
-#endif
+    last_blit_tl = blit_tl;
+    last_blit_br = blit_br;
 
-    if (likely(blit)) {
-        if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
-            if (is_submerged) {
-                blit_shadow_section(
-                    tpp, tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
-                blit_shadow(tpp, tile, blit_tl, blit_br);
-            } else {
-                blit_shadow(tpp, tile, blit_tl, blit_br);
-            }
-        }
-    }
+    return (true);
+}
 
-    double height = get_bounce() / 2.0;
-    double fadeup = get_fadeup();
-    if (fadeup < 0) {
+void Thing::blit (void)
+{_
+    fpoint sub_tile_tl, sub_tile_br;
+    fpoint blit_tl, blit_br;
+    Tilep tile = {};
+
+    if (!blit_check(blit_tl, blit_br, sub_tile_tl, sub_tile_br, tile)) {
         return;
     }
-    height += fadeup;
 
-    blit_tl.y -= height;
-    blit_br.y -= height;
+    auto tpp = tp();
+    bool lava = false;
+    is_in_water = false;
 
-    if (is_msg()) {
+    if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
+        if (is_in_water) {
+            blit_shadow_section(
+                tpp, tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
+            blit_shadow(tpp, tile, blit_tl, blit_br);
+        } else {
+            blit_shadow(tpp, tile, blit_tl, blit_br);
+        }
+    }
+
+    if (unlikely(is_msg())) {
         blit_text(get_msg(), blit_tl, blit_br);
     }
 
-    //
-    // A bit of pixel offset to account for screen rounding
-    //
-    blit_br.y += game->config.one_pixel_gl_height / 8;
-
-    if (get_on_fire_anim_id()) {
+    if (unlikely(get_on_fire_anim_id())) {
         static uint32_t ts;
         static color c = WHITE;
         if (time_have_x_tenths_passed_since(1, ts)) {
@@ -999,33 +1128,30 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
     }
 
     if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
-        if (is_submerged) {
+        if (is_in_water) {
             tile_blit_outline_section(
                 tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
 
             //
             // Show the bottom part of the body transparent
             //
-            if (!is_in_lava) {
+            if (!lava) {
                 color c = WHITE;
                 c.a = 100;
                 glcolor(c);
+                double h = blit_br.y - blit_tl.y;
                 blit_br.y = blit_tl.y + h;
-                if (likely(blit)) {
-                    tile_blit(tile, blit_tl, blit_br);
-                }
+                tile_blit(tile, blit_tl, blit_br);
             }
 
             glcolor(WHITE);
         } else {
-            if (likely(blit)) {
-                tile_blit_outline(tile, blit_tl, blit_br);
-            }
+            tile_blit_outline(tile, blit_tl, blit_br);
         }
-    } else if (likely(blit)) {
-        if (is_submerged) {
+    } else {
+        if (is_in_water) {
             tile_blit_section(
-              tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
+            tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
         } else {
             tile_blit(tile, blit_tl, blit_br);
         }
@@ -1033,177 +1159,16 @@ void Thing::blit (double offset_x, double offset_y, int x, int y)
 
     if (likely(!game->config.gfx_show_hidden)) {
         if (!thing_map_black_and_white) {
+            ThingTiles tiles;
+            get_tiles(&tiles);
+
             if (is_wall()) {
                 blit_wall_cladding(blit_tl, blit_br, &tiles);
-            } else if (tp_is_rock(tpp)) {
+            } else if (is_rock()) {
                 blit_rock_cladding(blit_tl, blit_br, &tiles);
             }
         }
     }
 
-    last_blit_tl = blit_tl;
-    last_blit_br = blit_br;
     is_blitted = true;
-}
-
-void Thing::blit_outline_only (double offset_x, double offset_y, int x, int y)
-{_
-    last_blit_tl = fpoint(tl.x - offset_x, tl.y - offset_y);
-    last_blit_br = fpoint(br.x - offset_x, br.y - offset_y);
-    auto blit_tl = last_blit_tl;
-    auto blit_br = last_blit_br;
-
-    ThingTiles tiles;
-    get_tiles(&tiles);
-
-    //
-    // A bit of pixel offset to account for screen rounding
-    //
-    blit_br.y += game->config.one_pixel_gl_height / 8;
-
-    tile_blit(tiles.tile_outline, blit_tl, blit_br);
-    last_blit_tl = blit_tl;
-    last_blit_br = blit_br;
-    is_blitted = true;
-}
-
-void Thing::blit_upside_down (double offset_x, double offset_y, int x, int y)
-{_
-    if (unlikely(is_hidden)) {
-        return;
-    }
-
-    auto tpp = tp();
-    ThingTiles tiles;
-    get_tiles(&tiles);
-
-    Tilep tile = tile_index_to_tile(tile_curr);
-    fpoint blit_tl(tl.x - offset_x, tl.y - offset_y);
-    fpoint blit_br(br.x - offset_x, br.y - offset_y);
-    auto diff = blit_br.y - blit_tl.y;
-
-    std::swap(blit_tl.y, blit_br.y);
-
-    if (tile && tile_get_height(tile) != TILE_HEIGHT) {
-        if (tp_gfx_oversized_but_sitting_on_the_ground(tpp)) {
-            blit_br.y += diff;
-            blit_tl.y += diff;
-        } else {
-            blit_br.y += game->config.tile_gl_height;
-            blit_tl.y += game->config.tile_gl_height;
-        }
-    } else {
-        blit_br.y += diff;
-        blit_tl.y += diff;
-    }
-
-    fpoint sub_tile_tl(0, 0);
-    fpoint sub_tile_br(1, 1);
-
-    is_submerged = false;
-
-    //
-    // If the owner is submerged, so is the weapon
-    //
-    auto owner = owner_get();
-    if (owner && owner->is_submerged) {
-        is_submerged = true;
-    }
-
-    //
-    // Render the weapon and player on the same tile rules
-    //
-    auto map_loc = mid_at;
-    if (owner) {
-        map_loc = owner->mid_at;
-    }
-
-    //
-    // We render these offset form their owner, so if dead, then it is
-    // likely they also have no owner as the swing has ended.
-    //
-    if (tp_gfx_is_attack_anim(tpp) ||
-        tp_gfx_is_weapon_carry_anim(tpp)) {
-        if (is_dead) {
-            return;
-        }
-    }
-
-    if (is_monst() ||
-        is_player() ||
-        is_msg() ||
-        tp_gfx_is_attack_anim(tpp) ||
-        tp_gfx_is_on_fire_anim(tpp) ||
-        tp_gfx_is_weapon_carry_anim(tpp)) {
-
-        if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
-            const auto pct_visible_above_surface = 0.5;
-            if (owner) {
-                auto offset = owner->get_submerged_offset();
-                blit_br.y += offset;
-                blit_tl.y += offset;
-                sub_tile_br = fpoint(1, pct_visible_above_surface);
-                blit_br.y -=
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-            } else {
-                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset =
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                set_submerged_offset(offset);
-                blit_tl.y += offset;
-            }
-            is_submerged = true;
-        } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
-            if (owner) {
-                auto offset = owner->get_submerged_offset();
-                blit_br.y += offset;
-                blit_tl.y += offset;
-            } else {
-                const auto pct_visible_above_surface = 0.1;
-                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset =
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                set_submerged_offset(offset);
-                blit_tl.y += offset;
-            }
-            is_submerged = true;
-        }
-    }
-
-    double height = get_bounce() / 2.0;
-    double fadeup = get_fadeup();
-    if (fadeup < 0) {
-        return;
-    }
-    height += fadeup;
-
-    blit_tl.y += height;
-    blit_br.y += height;
-
-    if (is_msg()) {
-        blit_text(get_msg(), blit_tl, blit_br);
-    }
-
-    if (tp_gfx_show_outlined(tpp)) {
-        if (is_submerged) {
-            tile_blit_outline_section(
-              tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
-        } else {
-            tile_blit_outline(tile, blit_tl, blit_br);
-        }
-    } else {
-        if (is_submerged) {
-            tile_blit_section(
-              tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
-        } else {
-            tile_blit(tile, blit_tl, blit_br);
-        }
-    }
-
-    if (is_wall()) {
-        blit_wall_cladding(blit_tl, blit_br, &tiles);
-    }
-    if (tp_is_rock(tpp)) {
-        blit_rock_cladding(blit_tl, blit_br, &tiles);
-    }
 }

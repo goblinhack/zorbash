@@ -34,7 +34,7 @@ void fluid_init (void)
 
     memset(level->fluid, 0, sizeof(level->fluid));
 
-    z = MAP_DEPTH_WATER;
+    z = MAP_DEPTH_HAZARD;
     {
         for (y = 0; y < MAP_HEIGHT; y++) {
             for (x = 0; x < MAP_WIDTH; x++) {
@@ -1031,7 +1031,7 @@ int thing_submerged_depth (Thingp t)
     return (water);
 }
 
-int thing_is_submerged (Thingp t)
+int thing_is_in_water (Thingp t)
 {
     int dx, dy;
     int x = t->mid_at.x * FLUID_RESOLUTION;

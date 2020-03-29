@@ -213,7 +213,6 @@ public:
     int is_combustible {};
     int gfx_is_on_fire_anim {};
     int is_attack_shove_chance_d1000 {};
-    int is_chasm {};
     int is_hazard {};
     int is_attack_shove {};
     int is_shovable {};
@@ -590,12 +589,6 @@ static inline int tp_is_attack_shove_chance_d1000 (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
     return (t->is_attack_shove_chance_d1000);
-}
-
-static inline int tp_is_chasm (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_chasm);
 }
 
 static inline int tp_is_hazard (Tpp t)
