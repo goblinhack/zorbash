@@ -56,7 +56,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* float       */ out << bits(my.t->fadeup_fade);
     /* float       */ out << bits(my.t->fadeup_height);
     /* float       */ out << bits(my.t->submerged_offset);
-    /* fpoint      */ out << bits(my.t->interpolated_mid_at);
     /* fpoint      */ out << bits(my.t->lunge_to);
     /* int         */ out << bits(my.t->bounce_count);
     /* int         */ out << bits(my.t->gold);
@@ -139,13 +138,8 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
         out << bits(my.t->monstp);
     }
 
-    out << bits(my.t->last_attached);
-    out << bits(my.t->br);
-    out << bits(my.t->last_blit_br);
-    out << bits(my.t->last_blit_tl);
-    out << bits(my.t->last_mid_at);
-    out << bits(my.t->mid_at);
-    out << bits(my.t->tl);
+    out << bits(my.t->at);
+    out << bits(my.t->target);
     out << bits(my.t->id);
     out << bits(my.t->tile_curr);
     out << bits(my.t->timestamp_next_frame);

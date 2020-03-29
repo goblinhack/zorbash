@@ -9,7 +9,7 @@
 
 void Thing::msg (std::string const &m)
 {
-    auto msg = thing_new("msg", mid_at);
+    auto msg = thing_new("msg", at);
     msg->set_msg(m);
     msg->fadeup(4.0, 0.05, 2000);
 }

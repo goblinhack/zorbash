@@ -24,7 +24,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     fpoint shove_delta = delta;
-    fpoint shove_pos = it->mid_at + shove_delta;
+    fpoint shove_pos = it->at + shove_delta;
     if (it->collision_check_only(shove_pos)) {
         if (is_player()) {
             MINICON("%s cannot be shoved!", it->The().c_str());
@@ -62,7 +62,7 @@ ThingShoved Thing::try_to_shove (fpoint future_pos)
 
     auto x = future_pos.x;
     auto y = future_pos.y;
-    auto delta = fpoint(x, y) - mid_at;
+    auto delta = fpoint(x, y) - at;
     point p(future_pos.x, future_pos.y);
     FOR_ALL_INTERESTING_THINGS(level, it, p.x, p.y) {
         if (this == it) {
@@ -83,7 +83,7 @@ ThingShoved Thing::try_to_shove (fpoint future_pos)
 ThingShoved Thing::try_to_shove_into_hazard (Thingp it, fpoint delta)
 {
     if (is_attack_shove()) {
-        auto shoved_to_position = it->mid_at + delta;
+        auto shoved_to_position = it->at + delta;
         if (level->is_hazard((int)shoved_to_position.x,
                              (int)shoved_to_position.y)) {
             return (try_to_shove(it, delta));

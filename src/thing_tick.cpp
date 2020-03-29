@@ -96,8 +96,6 @@ void Thing::tick (void)
 
     thing_callframes_depth = callframes_depth;
 
-    update_interpolated_position();
-
     if (game->config.arcade_mode) {
         collision_check_do();
     }

@@ -13,8 +13,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     double dw = game->config.one_pixel_gl_width;
     double dh = game->config.one_pixel_gl_height;
 
-    int x = (int) mid_at.x;
-    int y = (int) mid_at.y;
+    int x = (int) at.x;
+    int y = (int) at.y;
 
     if (unlikely(x <= 0) ||
         unlikely(y <= 0) ||
@@ -212,8 +212,8 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     double dw = game->config.one_pixel_gl_width;
     double dh = game->config.one_pixel_gl_height;
 
-    int x = (int) mid_at.x;
-    int y = (int) mid_at.y;
+    int x = (int) at.x;
+    int y = (int) at.y;
 
     if (unlikely(x <= 0) ||
         unlikely(y <= 0) ||
@@ -410,227 +410,55 @@ void Thing::blit_rock_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 }
 
-void Thing::blit_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
-                                              double x1, double y1,
-                                              double x2, double y2,
-                                              const fpoint &tl, const fpoint &br)
-{_
-    fpoint shadow_tl = tl;
-    fpoint shadow_tr(br.x, tl.y);
-    fpoint shadow_bl(tl.x, br.y);
-    fpoint shadow_br = br;
-
-    double dx = 1.0;
-    double dy = 1.0;
-
-    color c = BLACK;
-    c.a = 100;
-    glcolor(c);
-
-    shadow_tl.x += 0.05 * dx;
-    shadow_tr.x += 0.05 * dx;
-    shadow_tl.y += 0.01 * dy;
-    shadow_tr.y += 0.01 * dy;
-
-    if (tile != nullptr) {
-        ::blit(tile->gl_binding(), x1, y2, x2, y1,
-               shadow_bl, shadow_br, shadow_tl, shadow_tr);
-    }
-
-    glcolor(WHITE);
-}
-
-void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                                      const fpoint &tl, const fpoint &br)
-{_
-    double x1;
-    double x2;
-    double y1;
-    double y2;
-
-    if (!tile) {
-        return;
-    }
-
-    x1 = tile->x1;
-    x2 = tile->x2;
-    y1 = tile->y1;
-    y2 = tile->y2;
-
-    blit_player_owned_shadow_section(tpp, tile, x1, y1, x2, y2, tl, br);
-}
-
-void Thing::blit_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
-                                              const fpoint &tile_tl, const fpoint &tile_br,
-                                              const fpoint &tl, const fpoint &br)
-{_
-    double x1, x2, y1, y2;
-
-    if (!tile) {
-        return;
-    }
-
-    double tw = tile->x2 - tile->x1;
-    double th = tile->y2 - tile->y1;
-
-    x1 = tile->x1 + tile_tl.x * tw;
-    x2 = tile->x1 + tile_br.x * tw;
-    y1 = tile->y1 + tile_tl.y * th;
-    y2 = tile->y1 + tile_br.y * th;
-
-    blit_player_owned_shadow_section(tpp, tile, x1, y1, x2, y2, tl, br);
-}
-
 //
 // Blits a whole tile. Y co-ords are inverted.
 //
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                                          double x1, double y1,
-                                          double x2, double y2,
-                                          const fpoint &tl, const fpoint &br)
+                                          const fpoint &blit_tl,
+                                          const fpoint &blit_br)
 {_
-    fpoint shadow_bl(tl.x, br.y);
-    fpoint shadow_br = br;
-    fpoint shadow_tl = shadow_bl;
-    fpoint shadow_tr = shadow_br;
-
+    fpoint shadow_tl = blit_tl;
+    fpoint shadow_br = blit_br;
+#if 0
     double dx = 1.0;
     double dy = 1.0;
     if (level->player) {
         if (get_owner_id() == level->player->id) {
             // use default shadow for carried items
         } else if (this != level->player) {
-            fpoint p = level->player->get_interpolated_mid_at();
-            fpoint d = get_interpolated_mid_at() - p;
+            fpoint p = level->player->at;
+            fpoint d = at - p;
             const double D = 5.0;
             dx = d.x / D;
             dy = d.y / D;
 
-            if (distance(mid_at, p) > TILES_ACROSS / 2) {
+            if (distance(at, p) > TILES_ACROSS / 2) {
                 return;
             }
         }
     } else {
         // use default shadow
     }
+#endif
 
-    double n = 0.1;
-    if (dy < 0) {
-        dy = std::min(-n, dy);
-    } else {
-        dy = std::max(n, dy);
-    }
+    float d = game->config.tile_pixel_width * 1;
 
-    double m = 0.5;
-    if (dx < 0) {
-        dx = std::max(-m, dx);
-    } else {
-        dx = std::min(m, dx);
-    }
-    if (dy < 0) {
-        dy = std::max(-m, dy);
-    } else {
-        dy = std::min(m, dy);
-    }
+    shadow_tl.x += d;
+    shadow_tl.y += d;
+    shadow_br.x += d;
+    shadow_br.y += d;
 
-    shadow_tl.x += 0.40 * dx;
-    shadow_tr.x += 0.40 * dx;
-    shadow_tl.y += 0.40 * dy;
-    shadow_tr.y += 0.40 * dy;
-
-    if (shadow_tl.x > shadow_tr.x) {
-        std::swap(shadow_tl, shadow_tr);
-    }
-
-    double height = get_bounce() / 10.0;
-    double fadeup = get_fadeup();
-    if (fadeup < 0) {
-        return;
-    }
-    height += fadeup;
-
-    shadow_tl.x -= height;
-    shadow_tr.x -= height;
-    shadow_bl.x -= height;
-    shadow_br.x -= height;
-    shadow_tl.y -= height;
-    shadow_tr.y -= height;
-    shadow_bl.y -= height;
-    shadow_br.y -= height;
-
-    color c = BLACK;
-    c.a = 100;
+    color c = RED;
+    c.a = 255;
     glcolor(c);
 
-    ::blit(tile->gl_binding(), x1, y2, x2, y1,
-           shadow_bl, shadow_br, shadow_tl, shadow_tr);
-
-    c.a = 50;
-    glcolor(c);
-
-    fpoint faded_shadow_tl;
-    fpoint faded_shadow_tr;
-
-    faded_shadow_tl.x = shadow_tl.x + 0.07 * dx;
-    faded_shadow_tr.x = shadow_tr.x + 0.07 * dx;
-    faded_shadow_tl.y = shadow_tl.y + 0.02 * dy;
-    faded_shadow_tr.y = shadow_tr.y + 0.02 * dy;
-    ::blit(tile->gl_binding(), x1, y2, x2, y1,
-           shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
-
-    faded_shadow_tl.x = shadow_tl.x + 0.03 * dx;
-    faded_shadow_tr.x = shadow_tr.x + 0.03 * dx;
-    faded_shadow_tl.y = shadow_tl.y + 0.01 * dy;
-    faded_shadow_tr.y = shadow_tr.y + 0.01 * dy;
-    ::blit(tile->gl_binding(), x1, y2, x2, y1,
-           shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
+    tile_blit(tile, shadow_tl, shadow_br);
 
     glcolor(WHITE);
 }
 
-void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                                          const fpoint &tl, const fpoint &br)
-{_
-    double x1;
-    double x2;
-    double y1;
-    double y2;
-
-    if (!tile) {
-        return;
-    }
-
-    x1 = tile->x1;
-    x2 = tile->x2;
-    y1 = tile->y1;
-    y2 = tile->y2;
-
-    blit_non_player_owned_shadow(tpp, tile, x1, y1, x2, y2, tl, br);
-}
-
-void Thing::blit_non_player_owned_shadow_section (const Tpp &tpp, const Tilep &tile,
-                                                  const fpoint &tile_tl, const fpoint &tile_br,
-                                                  const fpoint &tl, const fpoint &br)
-{_
-    double x1, x2, y1, y2;
-
-    if (!tile) {
-        return;
-    }
-
-    double tw = tile->x2 - tile->x1;
-    double th = tile->y2 - tile->y1;
-
-    x1 = tile->x1 + tile_tl.x * tw;
-    x2 = tile->x1 + tile_br.x * tw;
-    y1 = tile->y1 + tile_tl.y * th;
-    y2 = tile->y1 + tile_br.y * th;
-
-    blit_non_player_owned_shadow(tpp, tile, x1, y1, x2, y2, tl, br);
-}
-
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
-                         const fpoint &tl, const fpoint &br)
+                         const fpoint &blit_tl, const fpoint &blit_br)
 {_
     if (unlikely(!game->config.gfx_lights)) {
         return;
@@ -641,33 +469,13 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
     }
 
     if (!level->player) {
-        blit_non_player_owned_shadow(tpp, tile, tl, br);
+        blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
         return;
     }
 
     if (is_player() || (get_owner_id() == level->player->id)) {
-        blit_player_owned_shadow(tpp, tile, tl, br);
     } else {
-        blit_non_player_owned_shadow(tpp, tile, tl, br);
-    }
-}
-
-void Thing::blit_shadow_section (const Tpp &tpp, const Tilep &tile,
-                                 const fpoint &tile_tl, const fpoint &tile_br,
-                                 const fpoint &tl, const fpoint &br)
-{_
-    if (!level->player) {
-        blit_non_player_owned_shadow_section(
-            tpp, tile, tile_tl, tile_br, tl, br);
-        return;
-    }
-
-    if (is_player() || (get_owner_id() == level->player->id)) {
-        blit_player_owned_shadow_section(
-            tpp, tile, tile_tl, tile_br, tl, br);
-    } else {
-        blit_non_player_owned_shadow_section(
-            tpp, tile, tile_tl, tile_br, tl, br);
+        blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
     }
 }
 
@@ -819,61 +627,12 @@ void Thing::blit_outline_only (int x, int y)
     is_blitted = true;
 }
 
-void Thing::blit_upside_down (int x, int y)
-{_
-    fpoint sub_tile_tl, sub_tile_br;
-    fpoint blit_tl, blit_br;
-    Tilep tile = {};
-
-    if (!blit_check(blit_tl, blit_br, sub_tile_tl, sub_tile_br, tile)) {
-        return;
-    }
-
-    auto diff = blit_br.y - blit_tl.y;
-
-    auto tpp = tp();
-    if (tile && tile_get_height(tile) != TILE_HEIGHT) {
-        if (tp_gfx_oversized_but_sitting_on_the_ground(tpp)) {
-            blit_br.y += diff;
-            blit_tl.y += diff;
-        } else {
-            blit_br.y += game->config.tile_gl_height;
-            blit_tl.y += game->config.tile_gl_height;
-        }
-    } else {
-            blit_tl.y += diff;
-        blit_br.y += diff;
-    }
-
-    std::swap(blit_tl.y, blit_br.y);
-
-    if (is_msg()) {
-        blit_text(get_msg(), blit_tl, blit_br);
-    }
-
-    if (tp_gfx_show_outlined(tpp)) {
-        tile_blit_outline(tile, blit_tl, blit_br);
-    } else {
-        tile_blit(tile, blit_tl, blit_br);
-    }
-
-    ThingTiles tiles;
-    get_tiles(&tiles);
-
-    if (is_wall()) {
-        blit_wall_cladding(blit_tl, blit_br, &tiles);
-    }
-    if (tp_is_rock(tpp)) {
-        blit_rock_cladding(blit_tl, blit_br, &tiles);
-    }
-}
-
 bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
                         fpoint &sub_tile_tl, fpoint &sub_tile_br,
                         Tilep &tile)
 {_
-    int x = (int)mid_at.x;
-    int y = (int)mid_at.y;
+    int x = (int)at.x;
+    int y = (int)at.y;
 
     if (unlikely(is_hidden)) {
         return (false);
@@ -921,7 +680,6 @@ bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
     float tilew = pixw * TILE_WIDTH * scale;
     float tileh = pixh * TILE_HEIGHT * scale;
 
-    fpoint at = get_interpolated_mid_at();
     float X = at.x - level->pixel_map_at.x;
     float Y = at.y - level->pixel_map_at.y;
 
@@ -1054,9 +812,9 @@ bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
     //
     // Render the weapon and player on the same tile rules
     //
-    auto map_loc = mid_at;
+    auto map_loc = at;
     if (owner) {
-        map_loc = owner->mid_at;
+        map_loc = owner->at;
     }
 
     sub_tile_tl = fpoint(0, 0);
@@ -1094,17 +852,11 @@ void Thing::blit (void)
     }
 
     auto tpp = tp();
-    bool lava = false;
+    is_in_lava = false;
     is_in_water = false;
 
     if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
-        if (is_in_water) {
-            blit_shadow_section(
-                tpp, tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
-            blit_shadow(tpp, tile, blit_tl, blit_br);
-        } else {
-            blit_shadow(tpp, tile, blit_tl, blit_br);
-        }
+        blit_shadow(tpp, tile, blit_tl, blit_br);
     }
 
     if (unlikely(is_msg())) {
@@ -1128,33 +880,9 @@ void Thing::blit (void)
     }
 
     if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
-        if (is_in_water) {
-            tile_blit_outline_section(
-                tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
-
-            //
-            // Show the bottom part of the body transparent
-            //
-            if (!lava) {
-                color c = WHITE;
-                c.a = 100;
-                glcolor(c);
-                double h = blit_br.y - blit_tl.y;
-                blit_br.y = blit_tl.y + h;
-                tile_blit(tile, blit_tl, blit_br);
-            }
-
-            glcolor(WHITE);
-        } else {
-            tile_blit_outline(tile, blit_tl, blit_br);
-        }
+        tile_blit_outline(tile, blit_tl, blit_br);
     } else {
-        if (is_in_water) {
-            tile_blit_section(
-            tile, sub_tile_tl, sub_tile_br, blit_tl, blit_br);
-        } else {
-            tile_blit(tile, blit_tl, blit_br);
-        }
+        tile_blit(tile, blit_tl, blit_br);
     }
 
     if (likely(!game->config.gfx_show_hidden)) {

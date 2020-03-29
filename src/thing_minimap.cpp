@@ -41,8 +41,8 @@ void Level::update_minimap (void)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
                 if (level->player &&
-                    (x == (int)level->player->mid_at.x) &&
-                    (y == (int)level->player->mid_at.y)) {
+                    (x == (int)level->player->at.x) &&
+                    (y == (int)level->player->at.y)) {
                     c = PINK;
                 } else if (level->is_door(x, y)) {
                     c = RED;
@@ -115,8 +115,8 @@ void Level::update_minimap (void)
                         c.a = 30;
                     }
                 } else if (level->player &&
-                    (x == (int)level->player->mid_at.x) &&
-                    (y == (int)level->player->mid_at.y)) {
+                    (x == (int)level->player->at.x) &&
+                    (y == (int)level->player->at.y)) {
                     c = PINK;
                 } else if (level->is_door(x, y)) {
                     c = RED;

@@ -54,7 +54,6 @@ typedef struct Monst_ {
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
     float        submerged_offset = {};      // GL co-orids
-    fpoint       interpolated_mid_at;
     fpoint       lunge_to = {};              // When a monst attacks something
     int          bounce_count = {};
     int          gold = {};
@@ -135,12 +134,10 @@ public:
     ~Thing_ (void);
     Monst    *monstp              {};
     spoint   last_attached;
-    fpoint   br;                         // On screen coordinates
-    fpoint   last_blit_br;               // GL co-orids
-    fpoint   last_blit_tl;               // GL co-orids
-    fpoint   last_mid_at;                // Previous hop where we were.
-    fpoint   mid_at;                     // Grid coordinates.
-    fpoint   tl;                         // On screen coordinates
+    fpoint   at;                         // Current pos
+    fpoint   target;                     // Where we are moving to
+    fpoint   last_blit_tl;               // Last on screen coords
+    fpoint   last_blit_br;               // Last on screen coords
     uint32_t id;                         // Unique per thing.
     int16_t tp_id                 {-1};  // Common settings
     uint16_t tile_curr            {};
@@ -618,7 +615,6 @@ public:
     bool cursor_path_pop_next_and_move(void);
     void cursor_path_grab(void);
     void cursor_path_stop(void);
-    bool update_coordinates(void);
     void update_cursor(void);
     bool possible_to_attack(const Thingp it);
     bool will_avoid(const Thingp it);
@@ -629,8 +625,6 @@ public:
     double get_fadeup(void);
     double get_lunge(void);
     void ai_get_next_hop(void);
-    fpoint set_interpolated_mid_at(fpoint);
-    fpoint get_interpolated_mid_at(void);
     int ai_hit_if_possible(Thingp hitter);
     int ai_hit_if_possible(Thingp hitter, int damage);
     int ai_delay_after_moving_ms(void);
@@ -776,18 +770,12 @@ public:
     bool blit_check(fpoint &blit_tl, fpoint &blit_br,
                     fpoint &sub_tile_tl, fpoint &sub_tile_br,
                     Tilep &tile);
-    void blit_test(void);
     void blit_outline_only(int x, int y);
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
-    void blit_non_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
-    void blit_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br); void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, double x1, double y1, double x2, double y2, const fpoint &tl, const fpoint &br);
-    void blit_player_owned_shadow_section(const Tpp &tp, const Tilep &tile, double x1, double y1, double x2, double y2, const fpoint &tl, const fpoint &br);
     void blit_rock_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
-    void blit_shadow_section(const Tpp &tp, const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const fpoint &tl, const fpoint &br);
-    void blit_upside_down(int x, int y);
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void lunge(fpoint tt);
     void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);
@@ -846,9 +834,7 @@ public:
     void set_owner(Thingp owner);
     void sheath(void);
     void tick();
-    void to_coords(fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3);
     void unwield(const char *why);
-    void update_interpolated_position(void);
     void update_light(void);
     void update_pos(fpoint, bool immediately);
     void use(void);

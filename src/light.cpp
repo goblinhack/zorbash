@@ -152,7 +152,7 @@ void Light::calculate (void)
         // a point hitting on or near a corner will light the corner tile.
         //
         double step2 = step;
-        for (; step2 < step + 0.9; step2 += 0.01) {
+        for (; step2 < step + 0.1; step2 += 0.01) {
             double rad = step2;
             double p1x = at.x + r->cosr * rad;
             double p1y = at.y + r->sinr * rad;
@@ -305,17 +305,18 @@ void Light::render_triangle_fans (void)
         // Blending just looks better doing it multiple times
         //
         blit_flush_triangle_fan(b, e);
-        blit_flush_triangle_fan(b, e);
-        blit_flush_triangle_fan(b, e);
+//        blit_flush_triangle_fan(b, e);
+//        blit_flush_triangle_fan(b, e);
     }
 
     //
     // Blend a texture on top of all the above blending so we get smooth
     // fade off of the light.
     //
+#if 0
     if (level->player && (owner == level->player)) {
         //
-        // To account for the blurring in blit_flush_triangle_fan_smoothed.
+        // To account for the blurring in blit_flush_triangle_fan_smoothed
         //
         if (flicker > random_range(10, 20)) {
             flicker = 0;
@@ -340,6 +341,7 @@ void Light::render_triangle_fans (void)
         blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         blit_flush();
    }
+#endif
 
    glTranslatef(ox, oy, 0);
 }
@@ -515,8 +517,7 @@ void lights_render_high_quality (int minx, int miny,
 
                 if (level->player) {
                     auto p = level->player;
-                    auto len = DISTANCE(l->at.x, l->at.y,
-                                        p->mid_at.x, p->mid_at.y);
+                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
 
                     if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
                         continue;

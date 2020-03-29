@@ -87,7 +87,7 @@ void thing_cursor_scroll_map_to_follow (void)
     float y_sensitivity;
 
     if (level->player && level->map_follow_player) {
-        follow = level->player->mid_at;
+        follow = level->player->at;
         sensitivity = 0.5;
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
@@ -121,7 +121,7 @@ void thing_cursor_scroll_map_to_follow (void)
             return;
         }
 
-        follow = level->cursor->mid_at;
+        follow = level->cursor->at;
         sensitivity = TILES_ACROSS / 4;
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
@@ -163,7 +163,7 @@ void Thing::update_cursor (void)
             float br_my = game->config.video_pix_height * last_blit_br.y;
             if ((mouse_x >= tl_mx) && (mouse_x <= br_mx)) {
                 if ((mouse_y >= tl_my) && (mouse_y <= br_my)) {
-                    level->cursor_at = mid_at;
+                    level->cursor_at = at;
                     level->cursor_found = true;
                 }
             }
@@ -176,7 +176,7 @@ void thing_cursor_reset_if_needed (void)
     if (level->map_follow_player) {
         if (level->cursor) {
             if (level->player) {
-                auto d = distance(level->player->mid_at, level->cursor->mid_at);
+                auto d = distance(level->player->at, level->cursor->at);
                 if (d > std::min(TILES_ACROSS/4, TILES_DOWN/4)) {
                     level->cursor_needs_update = true;
                 }

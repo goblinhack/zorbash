@@ -37,14 +37,14 @@ void Thing::kill (const char *reason)
                 log("killed, leaves corpse");
             }
 
-            level->set_corpse(mid_at.x, mid_at.y);
+            level->set_corpse(at.x, at.y);
 
             if (tp_is_bleeder(tpp)) {
                 int splatters = random_range(2, 10);
                 for (int splatter = 0; splatter < splatters; splatter++) {
                     auto tpp = tp_random_blood();
                     (void) thing_new(tp_name(tpp),
-                                     fpoint(mid_at.x, mid_at.y),
+                                     fpoint(at.x, at.y),
                                      fpoint(0.25, 0.25));
                 }
             }

@@ -37,13 +37,8 @@ void Thing::log (std::string pfx)
         monstp->log(pfx + "  ");
     }
 
-    LOG("%s last_attached        %s", pfx.c_str(), last_attached.to_string().c_str());
-    LOG("%s br                   %s", pfx.c_str(), br.to_string().c_str());
-    LOG("%s last_blit_br         %s", pfx.c_str(), last_blit_br.to_string().c_str());
-    LOG("%s last_blit_tl         %s", pfx.c_str(), last_blit_tl.to_string().c_str());
-    LOG("%s last_mid_at          %s", pfx.c_str(), last_mid_at.to_string().c_str());
-    LOG("%s mid_at               %s", pfx.c_str(), mid_at.to_string().c_str());
-    LOG("%s tl                   %s", pfx.c_str(), tl.to_string().c_str());
+    LOG("%s at                   %s", pfx.c_str(), at.to_string().c_str());
+    LOG("%s target               %s", pfx.c_str(), target.to_string().c_str());
     LOG("%s tile_curr            %u", pfx.c_str(), tile_curr);
     LOG("%s timestamp_next_frame %u", pfx.c_str(), timestamp_next_frame);
     LOG("%s dir                  %u", pfx.c_str(), dir);
