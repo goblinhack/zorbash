@@ -77,7 +77,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* float       */ in >> bits(my.t->fadeup_fade);
     /* float       */ in >> bits(my.t->fadeup_height);
     /* float       */ in >> bits(my.t->submerged_offset);
-    /* fpoint      */ in >> bits(my.t->interpolated_mid_at);
     /* fpoint      */ in >> bits(my.t->lunge_to);
     /* int         */ in >> bits(my.t->bounce_count);
     /* int         */ in >> bits(my.t->gold);
@@ -169,13 +168,8 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
         in >> bits(my.t->monstp);
     }
 
-    in >> bits(my.t->last_attached);
-    in >> bits(my.t->br);
-    in >> bits(my.t->last_blit_br);
-    in >> bits(my.t->last_blit_tl);
-    in >> bits(my.t->last_mid_at);
-    in >> bits(my.t->mid_at);
-    in >> bits(my.t->tl);
+    in >> bits(my.t->at);
+    in >> bits(my.t->target);
     in >> bits(my.t->id); if (!my.t->id) { ERR("loaded a thing with no ID"); }
     in >> bits(my.t->tile_curr);
     in >> bits(T); my.t->timestamp_next_frame = load(T);
@@ -220,7 +214,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /////////////////////////////////////////////////////////////////////////
 
     if (my.t->has_light) {
-        my.t->new_light(my.t->mid_at,
+        my.t->new_light(my.t->at,
                         my.t->monstp->light_strength,
                         (LightQuality)my.t->monstp->light_quality,
                         my.t->monstp->light_col);

@@ -64,7 +64,7 @@ static void thing_cursor_path_draw (point start, point end)
     auto cursor = level->cursor;
 
     if (player &&
-        level->is_hazard((int)player->mid_at.x, (int)player->mid_at.y)) {
+        level->is_hazard((int)player->at.x, (int)player->at.y)) {
         //
         // If already on a hazard we can plot a course via hazards.
         //
@@ -82,7 +82,7 @@ static void thing_cursor_path_draw (point start, point end)
             }
         }
     } else if (cursor &&
-        level->is_hazard((int)cursor->mid_at.x, (int)cursor->mid_at.y)) {
+        level->is_hazard((int)cursor->at.x, (int)cursor->at.y)) {
         //
         // If the cursor is on a hazard we can plot a course via hazards.
         //
@@ -162,7 +162,7 @@ void thing_cursor_path_create (void)
     //
     if (level->player) {
         thing_cursor_path_draw(
-            point(level->player->mid_at.x, level->player->mid_at.y),
+            point(level->player->at.x, level->player->at.y),
             point(level->cursor_at.x, level->cursor_at.y));
     }
 }

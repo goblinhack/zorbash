@@ -251,30 +251,6 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     blit_fbo(FBO_LIGHT_MERGED);
 
     //
-    // Add reflections
-    //
-    blit_init();
-    blit_fbo_bind(FBO_REFLECTION);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    for (auto y = miny; y < maxy; y++) {
-        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
-            for (auto x = minx; x < maxx; x++) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                    t->blit_upside_down(x, y);
-                } FOR_ALL_THINGS_AT_DEPTH_END()
-            }
-        }
-    }
-    blit_flush();
-
-    //
     // Blend the mask of the water with the above inverted tiles
     //
     glBlendFunc(GL_DST_COLOR, GL_ZERO);
@@ -292,9 +268,6 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
     if (thing_map_black_and_white) {
         c = GREY80;
     }
-    c.a = 180;
-    glcolor(c);
-    blit_fbo(FBO_REFLECTION);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 #if 0
 extern int vals[];
@@ -398,14 +371,6 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     }
     blit_flush();
 
-    std::list<Thingp> moved;
-    for (auto i : level->all_active_things) {
-        auto t = i.second;
-        if (t->update_coordinates()) {
-            moved.push_back(t);
-        }
-    }
-
     //
     // Lava and most other layers are drawn to its own buffer and then blitted
     // to the display.
@@ -431,12 +396,6 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     }
 
     blit_flush();
-
-    for (auto t : moved) {
-        t->detach();
-        t->attach();
-        t->update_light();
-    }
 }
 
 void thing_render_all (void)
@@ -563,5 +522,5 @@ void thing_render_all (void)
     //
     thing_cursor_reset_if_needed();
 
-    thing_cursor_find(minx, miny, maxx, maxy);
+//    thing_cursor_find(minx, miny, maxx, maxy);
 }

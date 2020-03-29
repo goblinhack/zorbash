@@ -315,9 +315,8 @@ void gl_ortho_set(int32_t width, int32_t height);
 #define FBO_WID                  2
 #define FBO_LIGHT_MASK           3
 #define FBO_LIGHT_MERGED         4
-#define FBO_REFLECTION           5
-#define FBO_MINIMAP              6
-#define MAX_FBO                  7
+#define FBO_MINIMAP              5
+#define MAX_FBO                  6
 
 extern std::array<GLuint, MAX_FBO> render_buf_id;
 extern std::array<GLuint, MAX_FBO> fbo_id;

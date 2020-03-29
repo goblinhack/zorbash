@@ -9,19 +9,16 @@
 
 void Thing::stop (void)
 {_
-    mid_at = get_interpolated_mid_at();
-    set_timestamp_move_begin(0);
-    set_timestamp_move_end(0);
-    update_interpolated_position();
+    target = at;
     cursor_path_stop();
 }
 
 bool Thing::move (fpoint future_pos)
 {_
-    bool up     = future_pos.y < mid_at.y;
-    bool down   = future_pos.y > mid_at.y;
-    bool left   = future_pos.x < mid_at.x;
-    bool right  = future_pos.x > mid_at.x;
+    bool up     = future_pos.y < at.y;
+    bool down   = future_pos.y > at.y;
+    bool left   = future_pos.x < at.x;
+    bool right  = future_pos.x > at.x;
     bool attack = false;
     bool idle   = false;
 
@@ -31,10 +28,10 @@ bool Thing::move (fpoint future_pos)
 
 bool Thing::attack (fpoint future_pos)
 {_
-    bool up     = future_pos.y < mid_at.y;
-    bool down   = future_pos.y > mid_at.y;
-    bool left   = future_pos.x < mid_at.x;
-    bool right  = future_pos.x > mid_at.x;
+    bool up     = future_pos.y < at.y;
+    bool down   = future_pos.y > at.y;
+    bool left   = future_pos.x < at.x;
+    bool right  = future_pos.x > at.x;
     bool attack = true;
     bool idle   = false;
 
@@ -63,7 +60,7 @@ bool Thing::move (fpoint future_pos,
 
     auto x = future_pos.x;
     auto y = future_pos.y;
-    auto delta = fpoint(x, y) - mid_at;
+    auto delta = fpoint(x, y) - at;
 
     if (tp_gfx_bounce_on_move(tp())) {
         bounce(0.1, 0.1, 250, 3);
@@ -78,12 +75,12 @@ bool Thing::move (fpoint future_pos,
             game->tick_begin();
         }
 
-        if ((x == mid_at.x) && (y == mid_at.y)) {
+        if ((x == at.x) && (y == at.y)) {
             return (false);
         }
     }
 
-    if ((x == mid_at.x) && (y == mid_at.y)) {
+    if ((x == at.x) && (y == at.y)) {
         return (false);
     }
 
@@ -92,7 +89,7 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (is_player()) {
-        if (mid_at != future_pos) {
+        if (at != future_pos) {
             if (collision_check_only(future_pos)) {
                 try_to_shove(future_pos);
                 lunge(future_pos);
@@ -109,11 +106,11 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (tp_gfx_animated_can_hflip(tp())) {
-        if (future_pos.x > mid_at.x) {
+        if (future_pos.x > at.x) {
             if (is_facing_left && !get_timestamp_flip_start()) {
                 set_timestamp_flip_start(time_get_time_ms_cached());
             }
-        } else if (future_pos.x < mid_at.x) {
+        } else if (future_pos.x < at.x) {
             if (!is_facing_left && !get_timestamp_flip_start()) {
                 set_timestamp_flip_start(time_get_time_ms_cached());
             }
@@ -125,154 +122,6 @@ bool Thing::move (fpoint future_pos,
     }
 
     return (true);
-}
-
-void Thing::update_interpolated_position (void)
-{_
-    get_bounce();
-    if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
-        set_interpolated_mid_at(mid_at);
-    } else {
-        double t = get_timestamp_move_end() - get_timestamp_move_begin();
-        double dt = time_get_time_ms_cached() - get_timestamp_move_begin();
-        double step = dt / t;
-        double dx = mid_at.x - last_mid_at.x;
-        double dy = mid_at.y - last_mid_at.y;
-
-        auto x = last_mid_at.x + dx * step;
-        auto y = last_mid_at.y + dy * step;
-
-        fpoint new_pos(x, y);
-        set_interpolated_mid_at(new_pos);
-    }
-}
-
-bool Thing::update_coordinates (void)
-{_
-    auto old_br = br;
-    auto tpp = tp();
-
-    get_bounce();
-
-    const double tile_gl_width = game->config.tile_gl_width;
-    const double tile_gl_height = game->config.tile_gl_height;
-
-    double x;
-    double y;
-
-    if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
-        x = mid_at.x;
-        y = mid_at.y;
-
-        if (is_active()) {
-            if (!is_waiting_to_move) {
-                is_waiting_to_move = true;
-                auto now = time_get_time_ms_cached();
-                auto delay = tp_ai_delay_after_moving_ms(tpp);
-                auto jitter = random_range(0, delay / 10);
-                set_timestamp_ai_next(now + delay + jitter);
-            }
-        }
-    } else {
-        double t = get_timestamp_move_end() - get_timestamp_move_begin();
-        double dt = time_get_time_ms_cached() - get_timestamp_move_begin();
-        double step = dt / t;
-        double dx = mid_at.x - last_mid_at.x;
-        double dy = mid_at.y - last_mid_at.y;
-
-        x = last_mid_at.x + dx * step;
-        y = last_mid_at.y + dy * step;
-    }
-
-    double tx = x;
-    double ty = y;
-
-    tl.x = tx * tile_gl_width;
-    tl.y = ty * tile_gl_height;
-
-    br.x = tl.x + tile_gl_width;
-    br.y = tl.y + tile_gl_height;
-
-#if 0
-    //
-    // Some things (like messages) have no tiles and so use the default.
-    //
-    float tile_pix_width = TILE_WIDTH;
-    float tile_pix_height = TILE_HEIGHT;
-    if (!is_no_tile()) {
-        auto tile = tile_index_to_tile(tile_curr);
-        if (!tile) {
-            err("has no tile, index %d", tile_curr);
-            return (false);
-        }
-        tile_pix_width = tile->pix_width;
-        tile_pix_height = tile->pix_height;
-    }
-
-    //
-    // Scale up tiles that are larger to the same pix scale.
-    //
-    if (unlikely((tile_pix_width != TILE_WIDTH) ||
-                 (tile_pix_height != TILE_HEIGHT))) {
-        auto xtiles = (tile_pix_width / TILE_WIDTH) / 2.0;
-        auto mx = (br.x + tl.x) / 2.0;
-        tl.x = mx - (xtiles * tile_gl_width);
-        br.x = mx + (xtiles * tile_gl_width);
-
-        auto ytiles = (tile_pix_height / TILE_HEIGHT) / 2.0;
-        auto my = (br.y + tl.y) / 2.0;
-        tl.y = my - (ytiles * tile_gl_height);
-        br.y = my + (ytiles * tile_gl_height);
-    }
-
-    //
-    // Put larger tiles on the same y base as small ones.
-    //
-    if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tpp))) {
-        double y_offset =
-            (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) *
-                tile_gl_height) / 2.0;
-        tl.y -= y_offset;
-        br.y -= y_offset;
-    }
-
-    //
-    // Boing.
-    //
-    if (unlikely(is_bouncing)) {
-        double height = get_bounce();
-
-        tl.y -= height;
-        br.y -= height;
-    }
-
-    //
-    // Lunge to attack.
-    //
-    {_
-        auto lunge = get_lunge();
-        if (lunge) {
-            auto delta = get_lunge_to() - get_interpolated_mid_at();
-            auto dx = -delta.x * lunge;
-            auto dy = -delta.y * lunge;
-            dx = -delta.x * lunge * tile_gl_width;
-            dy = delta.y * lunge * tile_gl_height;
-            tl.x -= dx;
-            br.x -= dx;
-            tl.y += dy;
-            br.y += dy;
-        }
-    }
-#endif
-
-    //
-    // If we've moved, need to update the display sort order.
-    //
-    if (br != old_br) {
-        return (true);
-    }
-
-    return (false);
 }
 
 void Thing::bounce (double bounce_height,
@@ -364,7 +213,7 @@ double Thing::get_fadeup (void)
     gl_last_color.a = (uint8_t)(255.0 - (250.0 * time_step));
     glcolor(gl_last_color);
 
-    double height = br.y - tl.y;
+    double height = last_blit_br.y - last_blit_tl.y;
 
     height *= sin(time_step * RAD_90);
     height *= get_fadeup_height();
@@ -404,14 +253,12 @@ void Thing::update_pos (fpoint to, bool immediately)
         return;
     }
 
-    point old_at((int)mid_at.x, (int)mid_at.y);
+    point old_at((int)at.x, (int)at.y);
 
     has_ever_moved = true;
 
     if (!has_ever_moved) {
-        last_mid_at = to;
-    } else {
-        last_mid_at = mid_at;
+        at = to;
     }
 
     //
@@ -483,7 +330,7 @@ void Thing::update_pos (fpoint to, bool immediately)
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
-    mid_at = to;
+    at = to;
 
     if (!immediately) {
         set_timestamp_move_begin(time_get_time_ms_cached());
@@ -562,7 +409,7 @@ void Thing::move_set_dir_from_delta (fpoint delta)
 
 void Thing::move_to (fpoint to)
 {_
-    auto delta = to - mid_at;
+    auto delta = to - at;
     move_set_dir_from_delta(delta);
     update_pos(to, false);
 }
@@ -570,12 +417,12 @@ void Thing::move_to (fpoint to)
 void Thing::move_delta (fpoint delta)
 {_
     move_set_dir_from_delta(delta);
-    update_pos(mid_at + delta, false);
+    update_pos(at + delta, false);
 }
 
 void Thing::move_to_immediately (fpoint to)
 {_
-    auto delta = to - mid_at;
+    auto delta = to - at;
     move_set_dir_from_delta(delta);
     update_pos(to, true);
 }
@@ -583,19 +430,7 @@ void Thing::move_to_immediately (fpoint to)
 void Thing::move_to_immediately_delta (fpoint delta)
 {_
     move_set_dir_from_delta(delta);
-    update_pos(mid_at + delta, true);
-}
-
-void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)
-{_
-    P0->x = tl.x;
-    P0->y = tl.y;
-    P1->x = br.x;
-    P1->y = tl.y;
-    P2->x = br.x;
-    P2->y = br.y;
-    P3->x = tl.x;
-    P3->y = br.y;
+    update_pos(at + delta, true);
 }
 
 void Thing::move_carried_items (void)
@@ -611,7 +446,7 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_carry_anim()) {
         auto w = thing_find(get_weapon_id_carry_anim());
         if (w) {
-            w->move_to(mid_at);
+            w->move_to(at);
             w->dir = dir;
         }
     }
@@ -619,17 +454,16 @@ void Thing::move_carried_items (void)
     if (get_weapon_id_use_anim()) {
         auto w = thing_find(get_weapon_id_use_anim());
         if (w) {
-            w->move_to(mid_at);
+            w->move_to(at);
             w->dir = dir;
         }
     }
 
     //
-    // If something moves on the water, make a ripple
+    // If something moves on the water, make bubbles?
     //
     if (is_monst() || is_player()) {
-        if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
-            fpoint at(mid_at.x - 0.5, mid_at.y - 0.5);
+        if (level->is_water((int)at.x, (int)at.y)) {
             if (random_range(0, 1000) > 500) {
                 thing_new(tp_name(tp_random_ripple()), at);
             }
@@ -640,9 +474,8 @@ void Thing::move_carried_items (void)
     if (on_fire_anim_id) {
         auto w = thing_find(on_fire_anim_id);
         if (w) {
-            w->move_to(mid_at);
+            w->move_to(at);
             w->dir = dir;
-        } else {
         }
     }
 }

@@ -172,8 +172,10 @@ void Level::init (point3d at, int seed_in)
     if (errored) { return; }
     level_place_corridor(dungeon, "corridor1", 0);
     if (errored) { return; }
-    level_place_floor_deco(dungeon);
-    if (errored) { return; }
+    if (0) {
+        level_place_floor_deco(dungeon);
+        if (errored) { return; }
+    }
     level_place_wall_deco(dungeon);
     if (errored) { return; }
     level_place_rocks(dungeon, "rock1", 1, 6, 6, tries);
@@ -233,6 +235,7 @@ void Level::init (point3d at, int seed_in)
                 level->mouse = -1;
                 level->mouse_old = -1;
                 level->minimap_valid = false;
+                level->cursor->hide();
             }
         }
     }
@@ -668,7 +671,7 @@ static void level_place_lava (Dungeonp d,
             (void) thing_new(what, fpoint(x, y));
 
             if (random_range(0, 100) < 20) {
-                thing_new("smoke1", fpoint(x, y), fpoint(0.5, 0.5));
+                thing_new("smoke1", fpoint(x, y));
             }
         }
     }

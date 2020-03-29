@@ -28,15 +28,6 @@ void player_tick (void)
     }
 
     int delay = 100;
-#if 0
-    //
-    // Always move
-    //
-    if ((time_get_time_ms_cached() -
-            player->get_timestamp_move_begin()) < delay) {
-        return;
-    }
-#endif
 
     uint8_t right  = 0;
     uint8_t left   = 0;
@@ -196,7 +187,7 @@ void player_tick (void)
             }
         }
 
-        double d = 1.0;
+        double d = 0.1;
         double dx = 0.0;
         double dy = 0.0;
 
@@ -218,7 +209,7 @@ void player_tick (void)
         }
 
         if (key_pressed) {
-            fpoint future_pos = player->mid_at + fpoint(dx, dy);
+            fpoint future_pos = player->at + fpoint(dx, dy);
             player->move(future_pos, up, down, left, right, attack, wait);
             last_key_pressed_when = time_get_time_ms_cached();
         }

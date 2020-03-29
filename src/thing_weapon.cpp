@@ -347,7 +347,7 @@ void Thing::use (void)
 
     bool target_attacked = false;
     bool target_overlaps = false;
-    auto hit_at = mid_at + fpoint(dx, dy);
+    auto hit_at = at + fpoint(dx, dy);
 
     log("attack @%f,%f",hit_at.x, hit_at.y);
     lunge(hit_at);

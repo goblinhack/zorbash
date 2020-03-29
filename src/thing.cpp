@@ -42,7 +42,7 @@ void thing_gc (void)
 
 Thingp thing_new (std::string tp_name, Thingp owner)
 {_
-    return thing_new(tp_name, owner->mid_at - fpoint(0.5, 0.5));
+    return thing_new(tp_name, owner->at);
 }
 
 Thingp thing_new (std::string name, fpoint at, fpoint jitter)
@@ -64,9 +64,12 @@ Thing::~Thing_ (void)
     oldptr(this);
 }
 
-void Thing::init (std::string name, fpoint at, fpoint jitter)
+void Thing::init (std::string name, fpoint born, fpoint jitter)
 {_
     verify(this);
+
+    at     = born;
+    target = born;
 
     timestamp_next_frame = 0;
     const auto tpp = tp_find(name);
@@ -102,15 +105,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     if (tp_is_monst(tpp) || tp_is_player(tpp) || tp_is_movable(tpp)) {
         set_timestamp_born(time_get_time_ms_cached());
     }
-
-    static const auto sz = fsize(1.0, 1.0);
-    at += fpoint(sz.w / 2, sz.h / 2);
-
-    //
-    // Find which wall is the closest to cling onto if this is a wall clinger
-    //
-    mid_at             = at;
-    last_mid_at        = mid_at;
 
     if (tp_gfx_animated_can_hflip(tpp)) {
         dir            = THING_DIR_LEFT;
@@ -321,10 +315,10 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     if (unlikely(tp_is_player(tpp))) {
         if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
-                level->player->mid_at.x,
-                level->player->mid_at.y,
-                mid_at.x,
-                mid_at.y);
+                level->player->at.x,
+                level->player->at.y,
+                at.x,
+                at.y);
             return;
         }
         level->player = this;
@@ -334,7 +328,7 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         // at the edges of the fbo
         //
         color col = WHITE;
-        new_light(mid_at, (TILE_WIDTH / 2) + 4, LIGHT_QUALITY_HIGH, col);
+        new_light(at, (TILE_WIDTH / 2) + 4, LIGHT_QUALITY_HIGH, col);
 
         has_light = true;
         log("player created");
@@ -378,18 +372,16 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
         dx *= jitter.x;
         dy *= jitter.y;
 
-        move_to_immediately(fpoint(mid_at.x + dx, mid_at.y + dy));
+        move_to_immediately(fpoint(at.x + dx, at.y + dy));
     }
 
-    update_coordinates();
     attach();
 
     if (unlikely(!tp_is_player(tpp))) {
         if (unlikely(tp_is_light_strength(tpp))) {
             std::string l = tp_light_color(tpp);
             color c = string2color(l);
-            new_light(mid_at,
-                      (double) tp_is_light_strength(tpp),
+            new_light(at, (double) tp_is_light_strength(tpp),
                       LIGHT_QUALITY_HIGH, c);
             has_light = true;
         }
@@ -431,17 +423,15 @@ void Thing::reinit (void)
     if (unlikely(tp_is_player(tpp))) {
         if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
-                level->player->mid_at.x,
-                level->player->mid_at.y,
-                mid_at.x,
-                mid_at.y);
+                level->player->at.x, level->player->at.y,
+                at.x, at.y);
             return;
         }
         level->player = this;
         log("player recreated");
     }
 
-    point new_at((int)mid_at.x, (int)mid_at.y);
+    point new_at((int)at.x, (int)at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
         ERR("new thing is oob at %d, %d", new_at.x, new_at.y);
         return;
@@ -465,8 +455,6 @@ void Thing::reinit (void)
     if (tp_is_loggable(tpp)) {
         log("recreated");
     }
-
-    update_coordinates();
 
     //
     // Upon a load it was attached at save time but not now
@@ -514,7 +502,7 @@ void Thing::destroy (void)
     //
     // Pop from the map
     //
-    point old_at((int)mid_at.x, (int)mid_at.y);
+    point old_at((int)at.x, (int)at.y);
 
     if (is_blood())       { level->unset_blood(old_at.x, old_at.y); }
     if (is_corpse())      { level->unset_corpse(old_at.x, old_at.y); }
@@ -809,7 +797,7 @@ void Thing::update_light (void)
     auto l = get_light();
     if (l) {
         verify(l);
-        l->at = get_interpolated_mid_at();
+        l->at = at;
         l->calculate();
     }
 }
@@ -821,7 +809,6 @@ void Thing::update_all (void)
         auto t = p->ptr;
         if (t) {
             verify(t);
-            t->update_coordinates();
             t->update_light();
         }
     }

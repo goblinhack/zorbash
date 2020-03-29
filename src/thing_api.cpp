@@ -3461,29 +3461,6 @@ uint32_t Thing::set_weapon_id (uint32_t v)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// interpolated_mid_at
-////////////////////////////////////////////////////////////////////////////
-fpoint Thing::get_interpolated_mid_at (void)
-{_
-    if (monstp) {
-        if (monstp->interpolated_mid_at == fpoint(0, 0)) {
-            return (mid_at);
-        } else {
-            return (monstp->interpolated_mid_at);
-        }
-    } else {
-        return (mid_at);
-    }
-}
-
-fpoint Thing::set_interpolated_mid_at (fpoint v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->interpolated_mid_at = v);
-}
-
-////////////////////////////////////////////////////////////////////////////
 // on_fire_id_anim
 ////////////////////////////////////////////////////////////////////////////
 uint32_t Thing::get_on_fire_anim_id (void)

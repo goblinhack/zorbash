@@ -142,13 +142,13 @@ void Thing::ai_get_next_hop (void)
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
 
-    const float minx = std::max(0,         (int)(mid_at.x - dx));
-    const float maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
+    const float minx = std::max(0,         (int)(at.x - dx));
+    const float maxx = std::min(MAP_WIDTH, (int)(at.x + dx - 1));
 
-    const float miny = std::max(0,          (int)(mid_at.y - dy));
-    const float maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
+    const float miny = std::max(0,          (int)(at.y - dy));
+    const float maxy = std::min(MAP_HEIGHT, (int)(at.y + dy - 1));
 
-    point start((int)mid_at.x, (int)mid_at.y);
+    point start((int)at.x, (int)at.y);
 
     auto dmap_scent = get_dmap_scent();
 
@@ -254,7 +254,7 @@ void Thing::ai_get_next_hop (void)
                 // The closer an enemy is (something that attacked us), the
                 // higher the scoree
                 //
-                float dist = distance(it->mid_at, mid_at);
+                float dist = distance(it->at, at);
                 float max_dist = ai_scent_distance();
 
                 if (dist < max_dist) {
@@ -438,7 +438,7 @@ void Thing::ai_get_next_hop (void)
             continue;
         }
 
-        if (mid_at == nh) {
+        if (at == nh) {
             continue;
         }
 

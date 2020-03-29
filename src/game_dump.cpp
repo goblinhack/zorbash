@@ -38,13 +38,8 @@ void Thing::dump (std::string pfx, std::ostream &out)
         monstp->dump(pfx + "  ", out);
     }
 
-    out << pfx << "last_attached       " << last_attached        << std::endl;
-    out << pfx << "br                  " << br                   << std::endl;
-    out << pfx << "last_blit_br        " << last_blit_br         << std::endl;
-    out << pfx << "last_blit_tl        " << last_blit_tl         << std::endl;
-    out << pfx << "last_mid_at         " << last_mid_at          << std::endl;
-    out << pfx << "mid_at              " << mid_at               << std::endl;
-    out << pfx << "tl                  " << tl                   << std::endl;
+    out << pfx << "at                  " << at               << std::endl;
+    out << pfx << "target              " << target               << std::endl;
     out << pfx << "tile_curr           " << tile_curr            << std::endl;
     out << pfx << "timestamp_next_frame" << timestamp_next_frame << std::endl;
     out << pfx << "dir                 " << dir                  << std::endl;
