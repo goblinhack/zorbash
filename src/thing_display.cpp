@@ -34,8 +34,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     if (tiles->tile_bot && !level->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        //tl2.y += dh;
-        //br2.y += dh;
+        double dh = game->config.tile_gl_height;
+        tl2.y += dh;
+        br2.y += dh;
         tile_blit(tiles->tile_bot, tl2, br2);
     }
 
