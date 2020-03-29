@@ -347,7 +347,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     }
 
     if (tp_is_blood(tpp))       { level->set_blood(new_at.x, new_at.y); }
-    if (tp_is_chasm(tpp))       { level->set_chasm(new_at.x, new_at.y); }
     if (tp_is_corridor(tpp))    { level->set_corridor(new_at.x, new_at.y); }
     if (tp_is_dirt(tpp))        { level->set_dirt(new_at.x, new_at.y); }
     if (tp_is_floor(tpp))       { level->set_floor(new_at.x, new_at.y); }
@@ -358,10 +357,6 @@ void Thing::init (std::string name, fpoint at, fpoint jitter)
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
     if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
 
-    if (tp_is_deep_water(tpp)) {
-        level->set_deep_water(new_at.x, new_at.y);
-        level->set_water(new_at.x, new_at.y);
-    }
     if (tp_gfx_large_shadow(tpp)) {
         level->set_gfx_large_shadow(new_at.x, new_at.y);
     }
@@ -453,7 +448,6 @@ void Thing::reinit (void)
     }
 
     if (tp_is_blood(tpp))       { level->set_blood(new_at.x, new_at.y); }
-    if (tp_is_chasm(tpp))       { level->set_chasm(new_at.x, new_at.y); }
     if (tp_is_corridor(tpp))    { level->set_corridor(new_at.x, new_at.y); }
     if (tp_is_dirt(tpp))        { level->set_dirt(new_at.x, new_at.y); }
     if (tp_is_floor(tpp))       { level->set_floor(new_at.x, new_at.y); }
@@ -464,10 +458,6 @@ void Thing::reinit (void)
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
     if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
 
-    if (tp_is_deep_water(tpp)) {
-        level->set_deep_water(new_at.x, new_at.y);
-        level->set_water(new_at.x, new_at.y);
-    }
     if (tp_gfx_large_shadow(tpp)) {
         level->set_gfx_large_shadow(new_at.x, new_at.y);
     }
@@ -527,10 +517,8 @@ void Thing::destroy (void)
     point old_at((int)mid_at.x, (int)mid_at.y);
 
     if (is_blood())       { level->unset_blood(old_at.x, old_at.y); }
-    if (is_chasm())       { level->unset_chasm(old_at.x, old_at.y); }
     if (is_corpse())      { level->unset_corpse(old_at.x, old_at.y); }
     if (is_corridor())    { level->unset_corridor(old_at.x, old_at.y); }
-    if (is_deep_water())  { level->unset_deep_water(old_at.x, old_at.y); }
     if (is_dirt())        { level->unset_dirt(old_at.x, old_at.y); }
     if (is_floor())       { level->unset_floor(old_at.x, old_at.y); }
     if (is_hazard())      { level->unset_hazard(old_at.x, old_at.y); }

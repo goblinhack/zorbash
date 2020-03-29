@@ -178,7 +178,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_open            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_sleeping        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_starving        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_submerged       << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_in_water        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_in_lava         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_waiting_to_move << shift; shift++;
     /////////////////////////////////////////////////////////////////////////
@@ -205,10 +205,8 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(timestamp_dungeon_saved);
 
     /* _is_blood */            out << bits(my.t->_is_blood);
-    /* _is_chasm */            out << bits(my.t->_is_chasm);
     /* _is_corpse */           out << bits(my.t->_is_corpse);
     /* _is_corridor */         out << bits(my.t->_is_corridor);
-    /* _is_deep_water */       out << bits(my.t->_is_deep_water);
     /* _is_dirt */             out << bits(my.t->_is_dirt);
     /* _is_dungeon */          out << bits(my.t->_is_dungeon);
     /* _is_floor */            out << bits(my.t->_is_floor);

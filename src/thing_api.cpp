@@ -545,11 +545,6 @@ int Thing::is_attack_shove_chance_d1000(void)
     return (tp_is_attack_shove_chance_d1000(tp()));
 }
 
-int Thing::is_chasm(void)
-{_
-    return (tp_is_chasm(tp()));
-}
-
 int Thing::is_hazard(void)
 {_
     return (tp_is_hazard(tp()));
