@@ -806,8 +806,8 @@ void tile_blit (const Tilep tile, point at)
 #endif
 
 /*
-* Blits a whole tile. Y co-ords are inverted.
-*/
+ * Blits a whole tile. Y co-ords are inverted.
+ */
 void tile_blit_colored_fat (Tpp tp,
                             Tilep tile,
                             fpoint tl,
@@ -845,12 +845,34 @@ void tile_blit_colored_fat (Tpp tp,
     }
 
     blit_colored(tile->gl_binding(),
-                x1, y2, x2, y1,
-                tl.x, br.y, br.x, tl.y,
-                color_tl,
-                color_tr,
-                color_bl,
-                color_br);
+                 x1, y2, x2, y1,
+                 tl.x, br.y, br.x, tl.y,
+                 color_tl,
+                 color_tr,
+                 color_bl,
+                 color_br);
+}
+
+void tile_blit_colored (Tilep tile,
+                        fpoint tl,
+                        fpoint br,
+                        color color_tl,
+                        color color_tr,
+                        color color_bl,
+                        color color_br)
+{
+    double x1 = tile->x1;
+    double x2 = tile->x2;
+    double y1 = tile->y1;
+    double y2 = tile->y2;
+
+    blit_colored(tile->gl_binding(),
+                 x1, y2, x2, y1,
+                 tl.x, br.y, br.x, tl.y,
+                 color_tl,
+                 color_tr,
+                 color_bl,
+                 color_br);
 }
 
 std::string tile_name (Tilep t)

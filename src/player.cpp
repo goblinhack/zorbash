@@ -187,7 +187,7 @@ void player_tick (void)
             }
         }
 
-        double d = 0.5;
+        double d = (1.0 / TILE_WIDTH) * 2;
         double dx = 0.0;
         double dy = 0.0;
 

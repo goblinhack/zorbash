@@ -8,6 +8,44 @@
 #include "my_font.h"
 #include "my_level.h"
 
+void Thing::blit_wall_shadow (Tilep tile, fpoint &tl, fpoint &br)
+{_
+    int x = (int) at.x;
+    int y = (int) at.y;
+
+    if (unlikely(x <= 0) ||
+        unlikely(y <= 0) ||
+        unlikely(x >= MAP_WIDTH - 1) ||
+        unlikely(y >= MAP_HEIGHT - 1)) {
+        return;
+    }
+
+    color bright = GRAY10;
+    color dark = BLACK;
+    dark.a = 100;
+
+    if (!level->is_wall(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        double dh = game->config.tile_gl_height / 2;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit_colored(tile, tl2, br2, bright, bright, dark, dark);
+    }
+
+    if (!level->is_wall(x + 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        double dh = game->config.tile_gl_height / 2;
+        double dw = game->config.tile_gl_width / 2;
+        tl2.x += dw;
+        br2.x += dw;
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit_colored(tile, tl2, br2, bright, dark, bright, dark);
+    }
+}
+
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {_
     double dw = game->config.one_pixel_gl_width;
@@ -34,7 +72,6 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     if (tiles->tile_bot && !level->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
-        double dh = game->config.tile_gl_height;
         tl2.y += dh;
         br2.y += dh;
         tile_blit(tiles->tile_bot, tl2, br2);
@@ -916,6 +953,10 @@ void Thing::blit (void)
             }
         }
         glcolor(c);
+    }
+
+    if (is_wall()) {
+        blit_wall_shadow(tile, blit_tl, blit_br);
     }
 
     if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {

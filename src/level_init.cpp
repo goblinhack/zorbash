@@ -177,6 +177,7 @@ void Level::init (point3d at, int seed_in)
         if (errored) { return; }
     }
     level_place_wall_deco(dungeon);
+    if (0) {
     if (errored) { return; }
     level_place_rocks(dungeon, "rock1", 1, 6, 6, tries);
     if (errored) { return; }
@@ -222,6 +223,7 @@ void Level::init (point3d at, int seed_in)
     if (errored) { return; }
     level_place_water(dungeon, "water1");
     if (errored) { return; }
+    }
     //fluid_init();
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -268,8 +270,6 @@ static void level_place_walls (Dungeonp d,
                               int block_height,
                               int tries)
 {_
-CON("FIXME");
-variant = 1;
     auto tp = tp_random_wall();
     if (!tp) {
         ERR("level_place_walls failed");
@@ -444,8 +444,6 @@ static void level_place_rocks (Dungeonp d,
                               int block_height,
                               int tries)
 {_
-CON("FIXME");
-variant = 1;
     while (tries--) {
         auto x = random_range(0, MAP_WIDTH - block_width + 1);
         auto y = random_range(0, MAP_HEIGHT - block_height + 1);

@@ -777,6 +777,7 @@ public:
     void blit_rock_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
+    void blit_wall_shadow(Tilep, fpoint &tl, fpoint &br);
     void lunge(fpoint tt);
     void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);
     void fadeup(double fadeup_height, double fadeup_fade, timestamp_t ms);
