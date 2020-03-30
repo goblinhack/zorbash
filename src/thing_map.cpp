@@ -520,7 +520,8 @@ void thing_render_all (void)
     //
     // If the cursor is too far away, warp it
     //
-    thing_cursor_reset_if_needed();
-
-    thing_cursor_find(minx, miny, maxx, maxy);
+    if (0) {
+        thing_cursor_reset_if_needed();
+        thing_cursor_find(minx, miny, maxx, maxy);
+    }
 }
