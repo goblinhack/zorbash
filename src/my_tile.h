@@ -207,6 +207,13 @@ void tile_blit_colored_fat(Tpp tp,
                            color color_tr,
                            color color_bl,
                            color color_br);
+void tile_blit_colored(Tilep tile,
+                       fpoint tl,
+                       fpoint br,
+                       color color_tl,
+                       color color_tr,
+                       color color_bl,
+                       color color_br);
 
 //
 // Blits a whole tile. Y co-ords are inverted.

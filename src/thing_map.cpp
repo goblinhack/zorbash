@@ -522,5 +522,5 @@ void thing_render_all (void)
     //
     thing_cursor_reset_if_needed();
 
-//    thing_cursor_find(minx, miny, maxx, maxy);
+    thing_cursor_find(minx, miny, maxx, maxy);
 }
