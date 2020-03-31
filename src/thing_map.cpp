@@ -18,7 +18,7 @@ bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {_
-    const double step = 16.0;
+    const double step = 8.0;
 
     auto dx = level->map_at.x - level->map_wanted_at.x;
     if (dx) {
@@ -454,7 +454,7 @@ void thing_render_all (void)
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
-    } else if (game->config.gfx_lights) {
+    } else if (0 && game->config.gfx_lights) {
         blit_fbo_bind(FBO_MAIN_BLACK_AND_WHITE);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -509,18 +509,10 @@ void thing_render_all (void)
         thing_blit_things(minx, miny, maxx, maxy);
     }
 
-#if 0
-    if (level->terrain) {
-        terrain_blit(level->terrain);
-    }
-#endif
-
-    //lights_render_points_debug(minx, miny, maxx, maxy);
-
     //
     // If the cursor is too far away, warp it
     //
-    if (0) {
+    if (1) {
         thing_cursor_reset_if_needed();
         thing_cursor_find(minx, miny, maxx, maxy);
     }

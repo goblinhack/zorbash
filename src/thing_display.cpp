@@ -752,7 +752,7 @@ bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
 
     float pixw = 1.0 / (float) game->config.video_pix_width;
     float pixh = 1.0 / (float) game->config.video_pix_height;
-    float scale = 4;
+    float scale = game->config.gfx_zoom;
     float tilew = pixw * TILE_WIDTH * scale;
     float tileh = pixh * TILE_HEIGHT * scale;
 
