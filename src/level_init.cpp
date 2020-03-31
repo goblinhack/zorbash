@@ -177,7 +177,8 @@ void Level::init (point3d at, int seed_in)
         if (errored) { return; }
     }
     level_place_wall_deco(dungeon);
-    if (0) {
+
+    if (1) {
     if (errored) { return; }
     level_place_rocks(dungeon, "rock1", 1, 6, 6, tries);
     if (errored) { return; }
@@ -216,6 +217,9 @@ void Level::init (point3d at, int seed_in)
     level_place_rocks(dungeon, "rock1", 4, 2, 1, tries);
     if (errored) { return; }
     level_place_remaining_rocks(dungeon, "rock1");
+    }
+
+    if (0) {
     if (errored) { return; }
     level_place_dirt(dungeon);
     if (errored) { return; }
@@ -237,7 +241,7 @@ void Level::init (point3d at, int seed_in)
                 level->mouse = -1;
                 level->mouse_old = -1;
                 level->minimap_valid = false;
-                level->cursor->hide();
+//                level->cursor->hide();
             }
         }
     }

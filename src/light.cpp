@@ -88,7 +88,7 @@ void Light::calculate (void)
     is_nearest_wall_val++;
 
     verify(this);
-    glbuf.clear();
+    cached_gl_cmds.clear();
 
     auto light_radius = strength;
     auto visible_width = light_radius + 1;
@@ -121,13 +121,15 @@ void Light::calculate (void)
     //
     bool do_set_visited = (level->player && (owner == level->player));
 
+    auto light_at = at + fpoint(0.5, 0.5);
+
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
         double step = 0.0;
         for (; step < strength; step += 0.01) {
             double rad = step;
-            double p1x = at.x + r->cosr * rad;
-            double p1y = at.y + r->sinr * rad;
+            double p1x = light_at.x + r->cosr * rad;
+            double p1y = light_at.y + r->sinr * rad;
 
             int x = (int)p1x;
             int y = (int)p1y;
@@ -154,8 +156,8 @@ void Light::calculate (void)
         double step2 = step;
         for (; step2 < step + 0.1; step2 += 0.01) {
             double rad = step2;
-            double p1x = at.x + r->cosr * rad;
-            double p1y = at.y + r->sinr * rad;
+            double p1x = light_at.x + r->cosr * rad;
+            double p1y = light_at.y + r->sinr * rad;
 
             int x = (int)p1x;
             int y = (int)p1y;
@@ -196,8 +198,8 @@ void Light::calculate (void)
             }
 
             double rad = radius + 0.0 + step;
-            double p1x = at.x + r->cosr * rad;
-            double p1y = at.y + r->sinr * rad;
+            double p1x = light_at.x + r->cosr * rad;
+            double p1y = light_at.y + r->sinr * rad;
 
             int x = (int)p1x;
             int y = (int)p1y;
@@ -231,25 +233,23 @@ printf("\n");
 
 void Light::render_triangle_fans (void)
 {
-    const double tile_gl_width_pct = 1.0 / (double)TILES_ACROSS;
-    const double tile_gl_height_pct = 1.0 / (double)TILES_DOWN;
+    float pixw = 1.0 / (float) game->config.video_pix_width;
+    float pixh = 1.0 / (float) game->config.video_pix_height;
+    float scale = game->config.gfx_zoom;
+    float tilew = pixw * TILE_WIDTH * scale;
+    float tileh = pixh * TILE_HEIGHT * scale;
+    fpoint light_pos((owner->last_blit_br.x + owner->last_blit_tl.x) / 2,
+                     (owner->last_blit_br.y + owner->last_blit_tl.y) / 2);
+    auto light_offset = light_pos - cached_light_pos;
 
-    auto tx = at.x + 0.5;
-    auto ty = at.y + 0.5;
-    fpoint light_pos(tx * game->config.tile_gl_width,
-                     ty * game->config.tile_gl_height);
-
-    auto ox = level->pixel_map_at.x * game->config.tile_gl_width;
-    auto oy = level->pixel_map_at.y * game->config.tile_gl_height;
-
-    glTranslatef(-ox, -oy, 0);
-
-    if (!glbuf.size()) {
+    if (!cached_gl_cmds.size()) {
         auto c = col;
         auto red   = ((double)c.r) / 255.0;
         auto green = ((double)c.g) / 255.0;
         auto blue  = ((double)c.b) / 255.0;
         auto alpha = ((double)c.a) / 255.0;
+
+        cached_light_pos = light_pos;
 
         red *= light_dim;
         green *= light_dim;
@@ -274,8 +274,8 @@ void Light::render_triangle_fans (void)
             for (i = 0; i < max_light_rays; i++) {
                 auto r = &getref(ray, i);
                 double radius = r->depth_furthest;
-                double p1x = light_pos.x + r->cosr * radius * tile_gl_width_pct;
-                double p1y = light_pos.y + r->sinr * radius * tile_gl_height_pct;
+                double p1x = light_pos.x + r->cosr * radius * tilew;
+                double p1y = light_pos.y + r->sinr * radius * tileh;
 
                 push_point(p1x, p1y, red, green, blue, alpha);
             }
@@ -286,34 +286,30 @@ void Light::render_triangle_fans (void)
             i = 0; {
                 auto r = &getref(ray, i);
                 double radius = r->depth_furthest;
-                double p1x = light_pos.x + r->cosr * radius * tile_gl_width_pct;
-                double p1y = light_pos.y + r->sinr * radius * tile_gl_height_pct;
+                double p1x = light_pos.x + r->cosr * radius * tilew;
+                double p1y = light_pos.y + r->sinr * radius * tileh;
 
                 push_point(p1x, p1y, red, green, blue, alpha);
             }
         }
 
         auto sz = bufp - gl_array_buf;
-        glbuf.resize(sz);
-        std::copy(gl_array_buf, bufp, glbuf.begin());
+        cached_gl_cmds.resize(sz);
+        std::copy(gl_array_buf, bufp, cached_gl_cmds.begin());
         blit_flush_triangle_fan();
     } else {
-        float *b = &(*glbuf.begin());
-        float *e = &(*glbuf.end());
+        float *b = &(*cached_gl_cmds.begin());
+        float *e = &(*cached_gl_cmds.end());
 
-        //
-        // Blending just looks better doing it multiple times
-        //
+        glTranslatef(light_offset.x, light_offset.y, 0);
         blit_flush_triangle_fan(b, e);
-//        blit_flush_triangle_fan(b, e);
-//        blit_flush_triangle_fan(b, e);
+        glTranslatef(-light_offset.x, -light_offset.y, 0);
     }
 
     //
     // Blend a texture on top of all the above blending so we get smooth
     // fade off of the light.
     //
-#if 0
     if (level->player && (owner == level->player)) {
         //
         // To account for the blurring in blit_flush_triangle_fan_smoothed
@@ -328,8 +324,8 @@ void Light::render_triangle_fans (void)
         }
         flicker++;
 
-        double lw = flicker_radius * tile_gl_width_pct;
-        double lh = flicker_radius * tile_gl_height_pct;
+        double lw = flicker_radius * tilew;
+        double lh = flicker_radius * tileh;
         double p1x = light_pos.x - lw;
         double p1y = light_pos.y - lh;
         double p2x = light_pos.x + lw;
@@ -338,23 +334,17 @@ void Light::render_triangle_fans (void)
         glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA); // hard black light
 
         blit_init();
+        glTranslatef(light_offset.x, light_offset.y, 0);
         blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+        glTranslatef(-light_offset.x, -light_offset.y, 0);
         blit_flush();
    }
-#endif
-
-   glTranslatef(ox, oy, 0);
 }
 
 void Light::render_point_light (void)
 {
-    auto tx = at.x;
-    auto ty = at.y;
-    fpoint light_pos(tx * game->config.tile_gl_width,
-                     ty * game->config.tile_gl_height);
-
-    auto ox = level->pixel_map_at.x * game->config.tile_gl_width;
-    auto oy = level->pixel_map_at.y * game->config.tile_gl_height;
+    fpoint light_pos((owner->last_blit_br.x + owner->last_blit_tl.x) / 2,
+                     (owner->last_blit_br.y + owner->last_blit_tl.y) / 2);
 
     double lw = strength * game->config.tile_gl_width;
     double lh = strength * game->config.tile_gl_height;
@@ -364,8 +354,7 @@ void Light::render_point_light (void)
     double p2y = light_pos.y + lh;
 
     glcolor(col);
-    blit(light_overlay_texid, 0, 0, 1, 1,
-         p1x - ox, p1y - oy, p2x - ox, p2y - oy);
+    blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
 }
 
 void Light::render (int fbo)

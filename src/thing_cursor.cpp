@@ -122,7 +122,7 @@ void thing_cursor_scroll_map_to_follow (void)
         }
 
         follow = level->cursor->at;
-        sensitivity = TILES_ACROSS / 4;
+        sensitivity = TILES_ACROSS / 6;
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
     } else {
@@ -149,8 +149,8 @@ void thing_cursor_scroll_map_to_follow (void)
     if (dy < y1) {
         level->map_wanted_at.y--;
     }
-//CON("  follow %f %f at %f %f dx %f dy %f", follow.x, follow.y,
-//level->map_wanted_at.x, level->map_wanted_at.y, dx - x2, dy - y1);
+//CON("  follow %f %f at %f %f dx %f dy %f", follow.x, 
+//follow.y,level->map_wanted_at.x, level->map_wanted_at.y, dx - x2, dy - y1);
 }
 
 void Thing::update_cursor (void)
