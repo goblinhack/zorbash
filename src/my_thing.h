@@ -767,9 +767,7 @@ public:
     void animate();
     void attach(void);
     void blit();
-    bool blit_check(fpoint &blit_tl, fpoint &blit_br,
-                    fpoint &sub_tile_tl, fpoint &sub_tile_br,
-                    Tilep &tile);
+    bool blit_check(fpoint &blit_tl, fpoint &blit_br, Tilep &tile);
     void blit_outline_only(int x, int y);
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
@@ -848,6 +846,7 @@ public:
     void weapon_set_use_anim_id(uint32_t weapon_use_anim_id);
     void weapon_sheath(void);
     void wield(Thingp w);
+    void get_coords(Levelp level, fpoint &blit_tl, fpoint &blit_br);
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);

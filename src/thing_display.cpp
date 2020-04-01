@@ -689,11 +689,10 @@ void Thing::blit_text (std::string const& text,
 
 void Thing::blit_outline_only (int x, int y)
 {_
-    fpoint sub_tile_tl, sub_tile_br;
     fpoint blit_tl, blit_br;
     Tilep tile = {};
 
-    if (!blit_check(blit_tl, blit_br, sub_tile_tl, sub_tile_br, tile)) {
+    if (!blit_check(blit_tl, blit_br, tile)) {
         return;
     }
 
@@ -703,9 +702,7 @@ void Thing::blit_outline_only (int x, int y)
     is_blitted = true;
 }
 
-bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
-                        fpoint &sub_tile_tl, fpoint &sub_tile_br,
-                        Tilep &tile)
+bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
 {_
     int x = (int)at.x;
     int y = (int)at.y;
@@ -893,9 +890,6 @@ bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
         map_loc = owner->at;
     }
 
-    sub_tile_tl = fpoint(0, 0);
-    sub_tile_br = fpoint(1, 1);
-
     if (is_monst() ||
         is_player() ||
         tp_gfx_is_on_fire_anim(tpp) ||
@@ -919,11 +913,10 @@ bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br,
 
 void Thing::blit (void)
 {_
-    fpoint sub_tile_tl, sub_tile_br;
     fpoint blit_tl, blit_br;
     Tilep tile = {};
 
-    if (!blit_check(blit_tl, blit_br, sub_tile_tl, sub_tile_br, tile)) {
+    if (!blit_check(blit_tl, blit_br, tile)) {
         return;
     }
 
