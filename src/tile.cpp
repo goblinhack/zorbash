@@ -175,18 +175,6 @@ void tile_load_arr (std::string file, std::string name,
             t->oy2 = t->y2;
 #endif
 
-#if 0
-            /*
-             * Why? Texture atlas and GL_LINEAR will cause problems blending
-             * with tiles adjacent in the atlas, so we trim 0.5 of a pixel
-             * all around.
-             */
-            t->x1 += pw;
-            t->x2 -= pw;
-            t->y1 += ph;
-            t->y2 -= ph;
-#endif
-
             t->pct_width = fw;
             t->pct_height = fh;
 
@@ -226,9 +214,9 @@ void tile_load_arr (std::string file, std::string name,
 
                         color p = getPixel(s, at.x, at.y);
 
-                        /*
-                         * If solid...
-                         */
+                        //
+                        // If solid...
+                        //
                         if (p.a >= 0xef) {
                             MIN.x = std::min(at.x, MIN.x);
                             MIN.y = std::min(at.y, MIN.y);
@@ -269,9 +257,9 @@ void tile_load_arr (std::string file, std::string name,
 
         x++;
 
-        /*
-         * Check the whole tile can be read
-         */
+        //
+        // Check the whole tile can be read
+        //
         if ((x * width) + (width - 1) >= tex_get_width(tex)) {
             x = 0;
             y++;
@@ -348,18 +336,6 @@ void tile_load_arr (std::string file, std::string name,
             t->oy2 = t->y2;
 #endif
 
-#if 0
-            /*
-             * Why? Texture atlas and GL_LINEAR will cause problems blending
-             * with tiles adjacent in the atlas, so we trim 0.5 of a pixel
-             * all around.
-             */
-            t->x1 += pw;
-            t->x2 -= pw;
-            t->y1 += ph;
-            t->y2 -= ph;
-#endif
-
             t->pct_width = fw;
             t->pct_height = fh;
 
@@ -399,9 +375,9 @@ void tile_load_arr (std::string file, std::string name,
 
                         color p = getPixel(s, at.x, at.y);
 
-                        /*
-                         * If solid...
-                         */
+                        //
+                        // If solid...
+                        //
                         if (p.a >= 0xef) {
                             MIN.x = std::min(at.x, MIN.x);
                             MIN.y = std::min(at.y, MIN.y);
@@ -442,9 +418,9 @@ void tile_load_arr (std::string file, std::string name,
 
         x++;
 
-        /*
-         * Check the whole tile can be read
-         */
+        //
+        // Check the whole tile can be read
+        //
         if ((x * width) + (width - 1) >= tex_get_width(tex)) {
             x = 0;
             y++;
@@ -530,18 +506,6 @@ void tile_load_arr_color_and_black_and_white (std::string file,
             t->oy2 = t->y2;
 #endif
 
-#if 0
-            /*
-             * Why? Texture atlas and GL_LINEAR will cause problems blending
-             * with tiles adjacent in the atlas, so we trim 0.5 of a pixel
-             * all around.
-             */
-            t->x1 += pw;
-            t->x2 -= pw;
-            t->y1 += ph;
-            t->y2 -= ph;
-#endif
-
             t->pct_width = fw;
             t->pct_height = fh;
 
@@ -581,9 +545,9 @@ void tile_load_arr_color_and_black_and_white (std::string file,
 
                         color p = getPixel(s, at.x, at.y);
 
-                        /*
-                         * If solid...
-                         */
+                        //
+                        // If solid...
+                        //
                         if (p.a >= 0xef) {
                             MIN.x = std::min(at.x, MIN.x);
                             MIN.y = std::min(at.y, MIN.y);
@@ -624,9 +588,9 @@ void tile_load_arr_color_and_black_and_white (std::string file,
 
         x++;
 
-        /*
-         * Check the whole tile can be read
-         */
+        //
+        // Check the whole tile can be read
+        //
         if ((x * width) + (width - 1) >= tex_get_width(tex)) {
             x = 0;
             y++;
@@ -642,9 +606,9 @@ void tile_load_arr_color_and_black_and_white (std::string file,
     }
 }
 
-/*
- * Find an existing tile.
- */
+//
+// Find an existing tile.
+//
 Tilep tile_find (std::string name)
 {_
     if (name == "") {
@@ -779,35 +743,18 @@ Tilep string2tile (std::wstring &s, int *len)
     return (string2tile(v, len));
 }
 
-/*
-* Blits a whole tile.
-*/
+//
+// Blits a whole tile.
+//
 void tile_blit_at (const Tilep &tile, fpoint tl, fpoint br)
 {
     blit(tile->gl_binding(),
         tile->x1, tile->y2, tile->x2, tile->y1, tl.x, tl.y, br.x, br.y);
 }
 
-/*
-* Blits a whole tile.
-*/
-#if 0
-void tile_blit (const Tilep tile, point at)
-{
-    fpoint tl, br;
-
-    tl.x = at.x - tile->pix_width/2;
-    br.y = at.y - tile->pix_height/2;
-    br.x = at.x + tile->pix_width/2;
-    tl.y = at.y + tile->pix_height/2;
-
-    tile_blit_at(tile, tl, br);
-}
-#endif
-
-/*
- * Blits a whole tile. Y co-ords are inverted.
- */
+//
+// Blits a whole tile. Y co-ords are inverted.
+//
 void tile_blit_colored_fat (Tpp tp,
                             Tilep tile,
                             fpoint tl,
