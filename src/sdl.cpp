@@ -275,10 +275,8 @@ uint8_t sdl_init (void)
     LOG("- SDL video            : %dx%d <--- chosen or from saved file",
         game->config.video_pix_width, game->config.video_pix_height);
 
-    game->config.one_pixel_gl_width =
-                    game->config.tile_gl_width / (double)TILE_WIDTH;
-    game->config.one_pixel_gl_height =
-                    game->config.tile_gl_height / (double)TILE_HEIGHT;
+    game->config.one_pixel_gl_width = 1.0 / game->config.video_pix_width;
+    game->config.one_pixel_gl_height = 1.0 / game->config.video_pix_height;
 
     game->config.ascii_gl_width =
         ((double)(ASCII_WIDTH * ascii_size) / game->config.video_pix_width) /
@@ -1121,10 +1119,8 @@ void config_gfx_zoom_update (void)
         (double)game->config.video_pix_width /
         (double)game->config.video_pix_height;
 
-    game->config.one_pixel_gl_width =
-                    game->config.tile_gl_width / (double)TILE_WIDTH;
-    game->config.one_pixel_gl_height =
-                    game->config.tile_gl_height / (double)TILE_HEIGHT;
+    game->config.one_pixel_gl_width = 1.0 / game->config.video_pix_width;
+    game->config.one_pixel_gl_height = 1.0 / game->config.video_pix_height;
 
     game->config.tile_pixel_width =
                     game->config.drawable_gl_width / TILES_ACROSS;
@@ -1163,10 +1159,8 @@ void config_gfx_zoom_update (void)
     LOG("- SDL video            : %dx%d <--- chosen or from saved file",
         game->config.video_pix_width, game->config.video_pix_height);
 
-    game->config.one_pixel_gl_width =
-                    game->config.tile_gl_width / (double)TILE_WIDTH;
-    game->config.one_pixel_gl_height =
-                    game->config.tile_gl_height / (double)TILE_HEIGHT;
+    game->config.one_pixel_gl_width = 1.0 / game->config.video_pix_width;
+    game->config.one_pixel_gl_height = 1.0 / game->config.video_pix_height;
 
     game->config.ascii_gl_width =
         ((double)(ASCII_WIDTH * ascii_size) / game->config.video_pix_width) /

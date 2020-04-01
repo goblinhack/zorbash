@@ -55,7 +55,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* float       */ out << bits(my.t->bounce_height);
     /* float       */ out << bits(my.t->fadeup_fade);
     /* float       */ out << bits(my.t->fadeup_height);
-    /* float       */ out << bits(my.t->submerged_offset);
     /* fpoint      */ out << bits(my.t->lunge_to);
     /* int         */ out << bits(my.t->bounce_count);
     /* int         */ out << bits(my.t->gold);

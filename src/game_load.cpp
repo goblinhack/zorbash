@@ -76,7 +76,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* float       */ in >> bits(my.t->bounce_height);
     /* float       */ in >> bits(my.t->fadeup_fade);
     /* float       */ in >> bits(my.t->fadeup_height);
-    /* float       */ in >> bits(my.t->submerged_offset);
     /* fpoint      */ in >> bits(my.t->lunge_to);
     /* int         */ in >> bits(my.t->bounce_count);
     /* int         */ in >> bits(my.t->gold);

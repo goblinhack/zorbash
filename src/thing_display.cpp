@@ -692,7 +692,7 @@ void Thing::blit_outline_only (int x, int y)
     fpoint blit_tl, blit_br;
     Tilep tile = {};
 
-    if (!blit_check(blit_tl, blit_br, tile)) {
+    if (!get_coords(blit_tl, blit_br, tile)) {
         return;
     }
 
@@ -702,7 +702,7 @@ void Thing::blit_outline_only (int x, int y)
     is_blitted = true;
 }
 
-bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
+bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
 {_
     int x = (int)at.x;
     int y = (int)at.y;
@@ -747,12 +747,11 @@ bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
     is_in_lava = false;
     is_in_water = false;
 
-    float pixw = 1.0 / (float) game->config.video_pix_width;
-    float pixh = 1.0 / (float) game->config.video_pix_height;
+    float pixw = game->config.one_pixel_gl_width;
+    float pixh = game->config.one_pixel_gl_height;
     float scale = game->config.gfx_zoom;
     float tilew = pixw * TILE_WIDTH * scale;
     float tileh = pixh * TILE_HEIGHT * scale;
-
     float X = at.x - level->pixel_map_at.x;
     float Y = at.y - level->pixel_map_at.y;
 
@@ -882,21 +881,19 @@ bool Thing::blit_check (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
         is_in_water = true;
     }
 
-    //
-    // Render the weapon and player on the same tile rules
-    //
-    auto map_loc = at;
-    if (owner) {
-        map_loc = owner->at;
-    }
-
     if (is_monst() ||
         is_player() ||
         tp_gfx_is_on_fire_anim(tpp) ||
         tp_gfx_is_attack_anim(tpp) ||
         tp_gfx_is_weapon_carry_anim(tpp)) {
 
-        set_submerged_offset(0);
+        //
+        // Render the weapon and player on the same tile rules
+        //
+        auto map_loc = at;
+        if (owner) {
+            map_loc = owner->at;
+        }
 
         if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
             is_in_lava = true;
@@ -916,7 +913,7 @@ void Thing::blit (void)
     fpoint blit_tl, blit_br;
     Tilep tile = {};
 
-    if (!blit_check(blit_tl, blit_br, tile)) {
+    if (!get_coords(blit_tl, blit_br, tile)) {
         return;
     }
 

@@ -53,7 +53,6 @@ typedef struct Monst_ {
     float        bounce_height = {};         // Percentage of tile height.
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
-    float        submerged_offset = {};      // GL co-orids
     fpoint       lunge_to = {};              // When a monst attacks something
     int          bounce_count = {};
     int          gold = {};
@@ -237,9 +236,6 @@ public:
 
     void set_msg(std::string);
     std::string get_msg(void);
-
-    void set_submerged_offset(float);
-    float get_submerged_offset(void);
 
     uint32_t set_tick(uint32_t);
     uint32_t get_tick(void);
@@ -767,7 +763,6 @@ public:
     void animate();
     void attach(void);
     void blit();
-    bool blit_check(fpoint &blit_tl, fpoint &blit_br, Tilep &tile);
     void blit_outline_only(int x, int y);
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
@@ -846,7 +841,7 @@ public:
     void weapon_set_use_anim_id(uint32_t weapon_use_anim_id);
     void weapon_sheath(void);
     void wield(Thingp w);
-    void get_coords(Levelp level, fpoint &blit_tl, fpoint &blit_br);
+    bool get_coords(fpoint &blit_tl, fpoint &blit_br, Tilep &tile);
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);

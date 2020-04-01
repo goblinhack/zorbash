@@ -180,7 +180,7 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                 fpoint blit_tl, blit_br;
                 Tilep tile = {};
 
-                if (!t->blit_check(blit_tl, blit_br, tile)) {
+                if (!t->get_coords(blit_tl, blit_br, tile)) {
                     continue;
                 }
 

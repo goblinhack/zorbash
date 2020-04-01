@@ -233,8 +233,8 @@ printf("\n");
 
 void Light::render_triangle_fans (void)
 {
-    float pixw = 1.0 / (float) game->config.video_pix_width;
-    float pixh = 1.0 / (float) game->config.video_pix_height;
+    float pixw = game->config.one_pixel_gl_width;
+    float pixh = game->config.one_pixel_gl_height;
     float scale = game->config.gfx_zoom;
     float tilew = pixw * TILE_WIDTH * scale;
     float tileh = pixh * TILE_HEIGHT * scale;
