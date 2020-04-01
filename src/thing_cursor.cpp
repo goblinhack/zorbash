@@ -69,7 +69,9 @@ void thing_cursor_move (void)
             //
             if (level->player) {
                 if (!level->map_follow_player) {
-                    thing_cursor_path_create();
+                    if (0) { // no longer used
+                        thing_cursor_path_create();
+                    }
                 }
             }
         }

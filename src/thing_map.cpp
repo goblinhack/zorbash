@@ -177,12 +177,10 @@ static void thing_blit_water (uint16_t minx, uint16_t miny, uint16_t maxx, uint1
                     continue;
                 }
 
-                fpoint sub_tile_tl, sub_tile_br;
                 fpoint blit_tl, blit_br;
                 Tilep tile = {};
 
-                if (!t->blit_check(blit_tl, blit_br, 
-                                   sub_tile_tl, sub_tile_br, tile)) {
+                if (!t->blit_check(blit_tl, blit_br, tile)) {
                     continue;
                 }
 
