@@ -22,18 +22,6 @@ void thing_cursor_move (void)
         return;
     }
 
-#if 0
-    //
-    // Blocks scrolling when over item and status bars!
-    //
-    int x = mouse_x;
-    int y = mouse_y;
-    pixel_to_ascii(&x, &y);
-    if (get(wid_on_screen_at, x, y)) {
-        return;
-    }
-#endif
-
     if ((wheel_x != 0) || (wheel_y != 0)) {
         level->map_wanted_at += fpoint(wheel_x, -wheel_y);
     }
@@ -124,19 +112,58 @@ void thing_cursor_scroll_map_to_follow (void)
         }
 
         follow = level->cursor->at;
-        sensitivity = TILES_ACROSS / 6;
+
+        //
+        // How many tiles away from the edge at each zoom level we use
+        // to auto scroll
+        //
+        switch (game->config.gfx_zoom) {
+            case 1: // really zoomed out
+                sensitivity = TILES_ACROSS / 10;
+                break;
+            case 4:
+                sensitivity = TILES_ACROSS / 8;
+                break;
+            case 6:
+                sensitivity = TILES_ACROSS / 6;
+                break;
+            case 8:
+                sensitivity = TILES_ACROSS / 4;
+                break;
+            case 10: // really zoomed in
+                sensitivity = TILES_ACROSS / 4;
+                break;
+            default:
+                sensitivity = TILES_ACROSS / 8;
+                break;
+        }
+
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
     } else {
         return;
     }
 
+    //
+    // Auto scroll if we cross these limits
+    //
     float x1 = ((float)TILES_ACROSS / 2) - x_sensitivity;
     float x2 = ((float)TILES_ACROSS / 2) + x_sensitivity;
     float y1 = ((float)TILES_DOWN / 2) - y_sensitivity;
     float y2 = ((float)TILES_DOWN / 2) + y_sensitivity;
 
-    float dx = follow.x - level->map_wanted_at.x + 1.0;
+    //
+    // Make sure we have a couple of tiles always at the edge to scroll
+    //
+    if (y1 < 2) { y1 = 2; }
+    if (x1 < 2) { x1 = 2; }
+    if (y2 > TILES_DOWN - 1) { y2 = TILES_DOWN - 2; }
+    if (x2 > TILES_ACROSS - 1) { x2 = TILES_ACROSS - 2; }
+
+    //
+    // Auto scroll
+    //
+    float dx = follow.x - level->map_wanted_at.x;
     if (dx > x2) {
         level->map_wanted_at.x++;
     }
@@ -144,15 +171,13 @@ void thing_cursor_scroll_map_to_follow (void)
         level->map_wanted_at.x--;
     }
 
-    float dy = follow.y - level->map_wanted_at.y + 1.0;
+    float dy = follow.y - level->map_wanted_at.y;
     if (dy > y2) {
         level->map_wanted_at.y++;
     }
     if (dy < y1) {
         level->map_wanted_at.y--;
     }
-//CON("  follow %f %f at %f %f dx %f dy %f", follow.x, 
-//follow.y,level->map_wanted_at.x, level->map_wanted_at.y, dx - x2, dy - y1);
 }
 
 void Thing::update_cursor (void)

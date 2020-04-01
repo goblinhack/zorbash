@@ -66,7 +66,8 @@ public:
 
 #ifdef ENABLE_TILE_COLLISION_CHECKING
     //
-    // As above but not clipped 0.5 pixels.
+    // As above but not clipped 0.5 pixels. Actually we do not clip anymore,
+    // it didn't help. Best to choose a resolution that works.
     //
     double ox1 {};
     double oy1 {};

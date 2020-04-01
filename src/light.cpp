@@ -233,11 +233,8 @@ printf("\n");
 
 void Light::render_triangle_fans (void)
 {
-    float pixw = game->config.one_pixel_gl_width;
-    float pixh = game->config.one_pixel_gl_height;
-    float scale = game->config.gfx_zoom;
-    float tilew = pixw * TILE_WIDTH * scale;
-    float tileh = pixh * TILE_HEIGHT * scale;
+    float tilew = game->config.tile_gl_width;
+    float tileh = game->config.tile_gl_height;
     fpoint light_pos((owner->last_blit_br.x + owner->last_blit_tl.x) / 2,
                      (owner->last_blit_br.y + owner->last_blit_tl.y) / 2);
     auto light_offset = light_pos - cached_light_pos;
