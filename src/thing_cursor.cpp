@@ -184,10 +184,10 @@ void Thing::update_cursor (void)
 {_
     if (is_cursor_can_hover_over()) {
         if (is_blitted) {
-            float tl_mx = game->config.video_pix_width * last_blit_tl.x;
-            float br_mx = game->config.video_pix_width * last_blit_br.x;
-            float tl_my = game->config.video_pix_height * last_blit_tl.y;
-            float br_my = game->config.video_pix_height * last_blit_br.y;
+            float tl_mx = game->config.video_pix_width * tl.x;
+            float br_mx = game->config.video_pix_width * br.x;
+            float tl_my = game->config.video_pix_height * tl.y;
+            float br_my = game->config.video_pix_height * br.y;
             if ((mouse_x >= tl_mx) && (mouse_x <= br_mx)) {
                 if ((mouse_y >= tl_my) && (mouse_y <= br_my)) {
                     level->cursor_at = at;

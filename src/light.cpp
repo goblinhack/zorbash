@@ -233,10 +233,15 @@ printf("\n");
 
 void Light::render_triangle_fans (void)
 {
+    fpoint blit_tl, blit_br;
+    Tilep tile = {};
+    if (!owner->get_map_offset_coords(blit_tl, blit_br, tile)) {
+        return;
+    }
+    fpoint light_pos((blit_tl.x + blit_br.x) / 2,
+                     (blit_br.y + blit_br.y) / 2);
     float tilew = game->config.tile_gl_width;
     float tileh = game->config.tile_gl_height;
-    fpoint light_pos((owner->last_blit_br.x + owner->last_blit_tl.x) / 2,
-                     (owner->last_blit_br.y + owner->last_blit_tl.y) / 2);
     auto light_offset = light_pos - cached_light_pos;
 
     if (!cached_gl_cmds.size()) {
@@ -340,8 +345,13 @@ void Light::render_triangle_fans (void)
 
 void Light::render_point_light (void)
 {
-    fpoint light_pos((owner->last_blit_br.x + owner->last_blit_tl.x) / 2,
-                     (owner->last_blit_br.y + owner->last_blit_tl.y) / 2);
+    fpoint blit_tl, blit_br;
+    Tilep tile = {};
+    if (!owner->get_map_offset_coords(blit_tl, blit_br, tile)) {
+        return;
+    }
+    fpoint light_pos((blit_tl.x + blit_br.x) / 2,
+                     (blit_br.y + blit_br.y) / 2);
 
     double lw = strength * game->config.tile_gl_width;
     double lh = strength * game->config.tile_gl_height;

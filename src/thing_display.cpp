@@ -692,7 +692,7 @@ void Thing::blit_outline_only (int x, int y)
     fpoint blit_tl, blit_br;
     Tilep tile = {};
 
-    if (!get_coords(blit_tl, blit_br, tile)) {
+    if (!get_map_offset_coords(blit_tl, blit_br, tile)) {
         return;
     }
 
@@ -707,14 +707,28 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
     int x = (int)at.x;
     int y = (int)at.y;
 
-    if (unlikely(is_hidden)) {
-        return (false);
-    }
+    //
+    // We render these offset form their owner, so if dead, then it is
+    // likely they also have no owner as the swing has ended.
+    //
+    auto tpp = tp();
+    auto blit = true;
 
-    if (unlikely(is_cursor() || is_cursor_path())) {
+    if (unlikely(is_hidden)) {
+        blit = false;
+    } else if (unlikely(tp_gfx_is_attack_anim(tpp) ||
+                        tp_gfx_is_weapon_carry_anim(tpp))) {
         //
-        // Always blit
+        // Hide weapons that have swung
         //
+        if (is_dead) {
+            blit = false;
+        }
+    } else if (unlikely(is_cursor() || is_cursor_path())) {
+        //
+        // Blit only if we need the cursor
+        //
+        blit = true;
     } else if (unlikely(game->config.gfx_show_hidden)) {
         if (level->is_visited(x, y)) {
             if (is_wall()) {
@@ -727,33 +741,20 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
         }
 
         if (!level->is_dungeon(x, y)) {
-            return (false);
+            blit = false;
         }
     }
 
     //
-    // We render these offset form their owner, so if dead, then it is
-    // likely they also have no owner as the swing has ended.
+    // Keep track of what we are submerged in!
     //
-    auto tpp = tp();
-
-    if (tp_gfx_is_attack_anim(tpp) ||
-        tp_gfx_is_weapon_carry_anim(tpp)) {
-        if (is_dead) {
-            return (false);
-        }
-    }
-
     is_in_lava = false;
     is_in_water = false;
 
-    float pixw = game->config.one_pixel_gl_width;
-    float pixh = game->config.one_pixel_gl_height;
-    float scale = game->config.gfx_zoom;
-    float tilew = pixw * TILE_WIDTH * scale;
-    float tileh = pixh * TILE_HEIGHT * scale;
-    float X = at.x - level->pixel_map_at.x;
-    float Y = at.y - level->pixel_map_at.y;
+    float tilew = game->config.tile_gl_width;
+    float tileh = game->config.tile_gl_height;
+    float X = at.x;
+    float Y = at.y;
 
     blit_tl.x = (float)X * tilew;
     blit_tl.y = (float)Y * tileh;
@@ -769,7 +770,7 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
         tile = tile_index_to_tile(tile_curr);
         if (!tile) {
             err("has no tile, index %d", tile_curr);
-            return (false);
+            blit = false;
         }
         tile_pix_width = tile->pix_width;
         tile_pix_height = tile->pix_height;
@@ -867,7 +868,7 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
     double fadeup = get_fadeup();
     if (likely(fadeup == 0)) {
     } else if (fadeup < 0) {
-        return (false);
+        blit = false;
     } else {
         blit_tl.y -= fadeup;
         blit_br.y -= fadeup;
@@ -902,10 +903,26 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
         }
     }
 
-    last_blit_tl = blit_tl;
-    last_blit_br = blit_br;
+    tl = blit_tl;
+    br = blit_br;
 
-    return (true);
+    return (blit);
+}
+
+bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
+{_
+    auto blit = get_coords(blit_tl, blit_br, tile);
+
+    float tilew = game->config.tile_gl_width;
+    float tileh = game->config.tile_gl_height;
+    float dx = - level->pixel_map_at.x * tilew;
+    float dy = - level->pixel_map_at.y * tileh;
+    blit_tl.x += dx;
+    blit_tl.y += dy;
+    blit_br.x += dx;
+    blit_br.y += dy;
+
+    return (blit);
 }
 
 void Thing::blit (void)
@@ -913,7 +930,7 @@ void Thing::blit (void)
     fpoint blit_tl, blit_br;
     Tilep tile = {};
 
-    if (!get_coords(blit_tl, blit_br, tile)) {
+    if (!get_map_offset_coords(blit_tl, blit_br, tile)) {
         return;
     }
 

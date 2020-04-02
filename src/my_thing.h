@@ -135,8 +135,12 @@ public:
     spoint   last_attached;
     fpoint   at;                         // Current pos
     fpoint   target;                     // Where we are moving to
-    fpoint   last_blit_tl;               // Last on screen coords
-    fpoint   last_blit_br;               // Last on screen coords
+    //
+    // These coords are not offset from the map scroll. i.e. they are constant
+    // regardless of the map view.
+    //
+    fpoint   tl;
+    fpoint   br;
     uint32_t id;                         // Unique per thing.
     int16_t tp_id                 {-1};  // Common settings
     uint16_t tile_curr            {};
@@ -842,6 +846,7 @@ public:
     void weapon_sheath(void);
     void wield(Thingp w);
     bool get_coords(fpoint &blit_tl, fpoint &blit_br, Tilep &tile);
+    bool get_map_offset_coords(fpoint &blit_tl, fpoint &blit_br, Tilep &tile);
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
