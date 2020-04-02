@@ -213,7 +213,7 @@ double Thing::get_fadeup (void)
     gl_last_color.a = (uint8_t)(255.0 - (250.0 * time_step));
     glcolor(gl_last_color);
 
-    double height = last_blit_br.y - last_blit_tl.y;
+    double height = br.y - tl.y;
 
     height *= sin(time_step * RAD_90);
     height *= get_fadeup_height();
@@ -342,6 +342,12 @@ void Thing::update_pos (fpoint to, bool immediately)
     if (tp_is_loggable(tpp)) {
         dbg("moved");
     }
+
+    fpoint blit_tl;
+    fpoint blit_br;
+    Tilep tile;
+
+    get_coords(blit_tl, blit_br, tile);
 }
 
 void Thing::move_set_dir_from_delta (fpoint delta)

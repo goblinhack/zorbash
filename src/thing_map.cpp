@@ -163,7 +163,7 @@ void thing_render_all (void)
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
-    } else if (0 && game->config.gfx_lights) {
+    } else if (game->config.gfx_lights) {
         blit_fbo_bind(FBO_MAIN_BLACK_AND_WHITE);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

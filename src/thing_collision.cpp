@@ -48,10 +48,10 @@ things_tile_overlap (Thingp A, Thingp B)
         return (false);
     }
 
-    float A_width  = (A->last_blit_br.x - A->last_blit_tl.x);
-    float A_height = (A->last_blit_br.y - A->last_blit_tl.y);
-    float B_width  = (B->last_blit_br.x - B->last_blit_tl.x);
-    float B_height = (B->last_blit_br.y - B->last_blit_tl.y);
+    float A_width  = (A->br.x - A->tl.x);
+    float A_height = (A->br.y - A->tl.y);
+    float B_width  = (B->br.x - B->tl.x);
+    float B_height = (B->br.y - B->tl.y);
 
     float A_dw = A_width  / (float)A_tile->pix_width;
     float A_dh = A_height / (float)A_tile->pix_height;
@@ -69,10 +69,10 @@ things_tile_overlap (Thingp A, Thingp B)
 #ifdef DEBUG_COLLISION
             printf("A");
 #endif
-            float Ax = A->last_blit_tl.x + (((float)x) * A_dw);
-            float Ay = A->last_blit_tl.y + (((float)y) * A_dh);
-            Ax -= B->last_blit_tl.x;
-            Ay -= B->last_blit_tl.y;
+            float Ax = A->tl.x + (((float)x) * A_dw);
+            float Ay = A->tl.y + (((float)y) * A_dh);
+            Ax -= B->tl.x;
+            Ay -= B->tl.y;
             Ax /= B_dw;
             Ay /= B_dh;
 
@@ -102,10 +102,10 @@ things_tile_overlap (Thingp A, Thingp B)
 #ifdef DEBUG_COLLISION
     for (int y = 0; y < (int)A_tile->pix_height; y++) {
         for (int x = 0; x < (int)A_tile->pix_width; x++) {
-            float Ax = A->last_blit_tl.x + (((float)x) * A_dw);
-            float Ay = A->last_blit_tl.y + (((float)y) * A_dh);
-            Ax -= B->last_blit_tl.x;
-            Ay -= B->last_blit_tl.y;
+            float Ax = A->tl.x + (((float)x) * A_dw);
+            float Ay = A->tl.y + (((float)y) * A_dh);
+            Ax -= B->tl.x;
+            Ay -= B->tl.y;
             Ax /= B_dw;
             Ay /= B_dh;
 
@@ -147,10 +147,10 @@ things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
         return (false);
     }
 
-    float A_width  = (A->last_blit_br.x - A->last_blit_tl.x);
-    float A_height = (A->last_blit_br.y - A->last_blit_tl.y);
-    float B_width  = (B->last_blit_br.x - B->last_blit_tl.x);
-    float B_height = (B->last_blit_br.y - B->last_blit_tl.y);
+    float A_width  = (A->br.x - A->tl.x);
+    float A_height = (A->br.y - A->tl.y);
+    float B_width  = (B->br.x - B->tl.x);
+    float B_height = (B->br.y - B->tl.y);
 
     float A_dw = A_width  / (float)A_tile->pix_width;
     float A_dh = A_height / (float)A_tile->pix_height;
@@ -175,10 +175,10 @@ things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
             Adx *= game->config.tile_gl_width;
             Ady *= game->config.tile_gl_height;
 
-            float Ax = A->last_blit_tl.x + Adx + (((float)x) * A_dw);
-            float Ay = A->last_blit_tl.y + Ady + (((float)y) * A_dh);
-            Ax -= B->last_blit_tl.x;
-            Ay -= B->last_blit_tl.y;
+            float Ax = A->tl.x + Adx + (((float)x) * A_dw);
+            float Ay = A->tl.y + Ady + (((float)y) * A_dh);
+            Ax -= B->tl.x;
+            Ay -= B->tl.y;
             Ax /= B_dw;
             Ay /= B_dh;
 
@@ -208,10 +208,10 @@ things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
 #ifdef DEBUG_COLLISION
     for (int y = 0; y < (int)A_tile->pix_height; y++) {
         for (int x = 0; x < (int)A_tile->pix_width; x++) {
-            float Ax = A->last_blit_tl.x + (((float)x) * A_dw);
-            float Ay = A->last_blit_tl.y + (((float)y) * A_dh);
-            Ax -= B->last_blit_tl.x;
-            Ay -= B->last_blit_tl.y;
+            float Ax = A->tl.x + (((float)x) * A_dw);
+            float Ay = A->tl.y + (((float)y) * A_dh);
+            Ax -= B->tl.x;
+            Ay -= B->tl.y;
             Ax /= B_dw;
             Ay /= B_dh;
 
