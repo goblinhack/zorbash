@@ -119,13 +119,13 @@ void thing_cursor_scroll_map_to_follow (void)
         //
         switch (game->config.gfx_zoom) {
             case 1: // really zoomed out
-                sensitivity = TILES_ACROSS / 10;
+                sensitivity = TILES_ACROSS / 10; // larger -> more sensitive
                 break;
             case 4:
-                sensitivity = TILES_ACROSS / 8;
+                sensitivity = TILES_ACROSS / 4;
                 break;
             case 6:
-                sensitivity = TILES_ACROSS / 6;
+                sensitivity = TILES_ACROSS / 4;
                 break;
             case 8:
                 sensitivity = TILES_ACROSS / 4;
@@ -184,12 +184,23 @@ void Thing::update_cursor (void)
 {_
     if (is_cursor_can_hover_over()) {
         if (is_blitted) {
-            float tl_mx = game->config.video_pix_width * tl.x;
-            float br_mx = game->config.video_pix_width * br.x;
-            float tl_my = game->config.video_pix_height * tl.y;
-            float br_my = game->config.video_pix_height * br.y;
-            if ((mouse_x >= tl_mx) && (mouse_x <= br_mx)) {
-                if ((mouse_y >= tl_my) && (mouse_y <= br_my)) {
+            fpoint blit_tl = tl;
+            fpoint blit_br = br;
+            float tilew = game->config.tile_gl_width;
+            float tileh = game->config.tile_gl_height;
+            float dx = - level->pixel_map_at.x * tilew;
+            float dy = - level->pixel_map_at.y * tileh;
+            blit_tl.x += dx;
+            blit_tl.y += dy;
+            blit_br.x += dx;
+            blit_br.y += dy;
+            blit_tl.x *= (float)game->config.video_pix_width;
+            blit_tl.y *= (float)game->config.video_pix_height;
+            blit_br.x *= (float)game->config.video_pix_width;
+            blit_br.y *= (float)game->config.video_pix_height;
+
+            if ((mouse_x >= blit_tl.x) && (mouse_x <= blit_br.x)) {
+                if ((mouse_y >= blit_tl.y) && (mouse_y <= blit_br.y)) {
                     level->cursor_at = at;
                     level->cursor_found = true;
                 }
