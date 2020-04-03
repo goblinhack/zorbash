@@ -11,6 +11,8 @@ def key_init(name, real_name):
     x.set_is_interesting(True)
     x.set_is_key(True)
     x.set_is_movable(True)
+    x.set_light_color("white")
+    x.set_is_light_strength(1)
     x.set_is_movement_blocking(True)
     x.set_a_or_an("an");
     x.set_is_combustible(False)

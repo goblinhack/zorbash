@@ -87,9 +87,7 @@ void Thing::tick (void)
 
     thing_callframes_depth = callframes_depth;
 
-    if (game->config.arcade_mode) {
-        collision_check_do();
-    }
+    collision_check_do();
 
     if (unlikely(is_dead)) {
         if (tp_is_loggable(tp())) {
@@ -106,28 +104,13 @@ void Thing::tick (void)
     }
 
     if (is_waiting_to_move) {
-        if (game->config.arcade_mode) {
-            //
-            // Move only after a set amount of time
-            //
-            auto now = time_get_time_ms_cached();
-            if (now > get_timestamp_ai_next()) {
-                is_waiting_to_move = false;
-                achieve_goals_in_life();
-            }
-        } else {
-            //
-            // Tick on player move/change of the current tick
-            //
-            auto tick = get_tick();
-            if (tick < game->tick_current) {
-                is_move_done = false;
-                achieve_goals_in_life();
-                if (is_move_done) {
-                    incr_tick();
-                    is_waiting_to_move = false;
-                }
-            }
+        //
+        // Move only after a set amount of time
+        //
+        auto now = time_get_time_ms_cached();
+        if (now > get_timestamp_ai_next()) {
+            is_waiting_to_move = false;
+            achieve_goals_in_life();
         }
     }
 
@@ -144,15 +127,6 @@ void things_tick (void)
 
     if (game->paused()) {
         return;
-    }
-
-    game->things_are_moving = false;
-
-    if (game->config.arcade_mode) {
-        //
-        // Always tick
-        //
-    } else {
     }
 
     //
@@ -175,15 +149,6 @@ void things_tick (void)
     for (auto i : level->all_active_things) {
         auto t = i.second;
         verify(t);
-        if (t->is_monst()) {
-            if (t->get_tick() != game->tick_current) {
-                game->things_are_moving = true;
-            }
-        }
         t->tick();
-    }
-
-    if (!game->things_are_moving) {
-        game->tick_end();
     }
 }

@@ -53,14 +53,6 @@ uint8_t game_config_debug_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t bu
     return (true);
 }
 
-uint8_t game_config_other_arcade_mode_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    CON("USERCFG: toggle arcade_mode");
-    game->config.arcade_mode = !game->config.arcade_mode;
-    game->config_other_select();
-    return (true);
-}
-
 uint8_t game_config_other_fps_counter_toggle (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: toggle fps_counter");
@@ -236,35 +228,6 @@ void Game::config_other_select (void)
         wid_set_on_mouse_up(w, game_config_debug_mode_toggle);
 
         if (game->config.debug_mode) {
-            wid_set_text(w, "True");
-        } else {
-            wid_set_text(w, "False");
-        }
-    }
-
-    y_at += 3;
-    {_
-        auto p = game_config_other_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Arcade mode");
-
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Arcade mode");
-    }
-    {_
-        auto p = game_config_other_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Arcade mode value");
-
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
-        wid_set_style(w, WID_STYLE_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_other_arcade_mode_toggle);
-
-        if (game->config.arcade_mode) {
             wid_set_text(w, "True");
         } else {
             wid_set_text(w, "False");

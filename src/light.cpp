@@ -121,15 +121,15 @@ void Light::calculate (void)
     //
     bool do_set_visited = (level->player && (owner == level->player));
 
-    auto light_at = at + fpoint(0.5, 0.5);
+    auto light_pos = at;
 
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
         double step = 0.0;
         for (; step < strength; step += 0.01) {
             double rad = step;
-            double p1x = light_at.x + r->cosr * rad;
-            double p1y = light_at.y + r->sinr * rad;
+            double p1x = light_pos.x + r->cosr * rad;
+            double p1y = light_pos.y + r->sinr * rad;
 
             int x = (int)p1x;
             int y = (int)p1y;
@@ -156,8 +156,8 @@ void Light::calculate (void)
         double step2 = step;
         for (; step2 < step + 0.1; step2 += 0.01) {
             double rad = step2;
-            double p1x = light_at.x + r->cosr * rad;
-            double p1y = light_at.y + r->sinr * rad;
+            double p1x = light_pos.x + r->cosr * rad;
+            double p1y = light_pos.y + r->sinr * rad;
 
             int x = (int)p1x;
             int y = (int)p1y;
@@ -198,8 +198,8 @@ void Light::calculate (void)
             }
 
             double rad = radius + 0.0 + step;
-            double p1x = light_at.x + r->cosr * rad;
-            double p1y = light_at.y + r->sinr * rad;
+            double p1x = light_pos.x + r->cosr * rad;
+            double p1y = light_pos.y + r->sinr * rad;
 
             int x = (int)p1x;
             int y = (int)p1y;
@@ -243,6 +243,8 @@ void Light::render_triangle_fans (void)
     float tilew = game->config.tile_gl_width;
     float tileh = game->config.tile_gl_height;
     auto light_offset = light_pos - cached_light_pos;
+glTranslatef(-game->config.tile_gl_width / 2,
+             -game->config.tile_gl_height, 0);
 
     if (!cached_gl_cmds.size()) {
         auto c = col;
@@ -267,7 +269,7 @@ void Light::render_triangle_fans (void)
             push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
             //
-            // No player lights fade
+            // Non player lights fade
             //
             if (level->player && (owner != level->player)) {
                 alpha = 0.0;
@@ -341,6 +343,8 @@ void Light::render_triangle_fans (void)
         glTranslatef(-light_offset.x, -light_offset.y, 0);
         blit_flush();
    }
+glTranslatef(game->config.tile_gl_width / 2,
+             game->config.tile_gl_height, 0);
 }
 
 void Light::render_point_light (void)

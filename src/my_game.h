@@ -452,7 +452,6 @@ public:
     uint32_t           gfx_zoom                     = 4;
     bool               gfx_vsync_enable             = true;
     bool               debug_mode                   = false;
-    bool               arcade_mode                  = false;
     uint32_t           sound_volume                 = {MIX_MAX_VOLUME / 2};
     uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
     bool               fullscreen                   = false;
@@ -503,8 +502,6 @@ public:
     Game (void) {}
     Game (std::string appdata);
     bool load(std::string save_file, class Game &target);
-    void tick_begin();
-    void tick_end();
     bool paused(void);
     bool save(std::string save_file);
     void config_gfx_select(void);
@@ -566,14 +563,6 @@ public:
     // Current framerate
     //
     uint32_t           fps_value = {};
-
-    //
-    // Used to drive the game forward. Each player move is one tick.
-    // When things top moving, the tick is completed.
-    //
-    uint32_t           tick_current {};
-    uint32_t           tick_completed {};
-    uint32_t           things_are_moving = false;
 
     //
     // Soft pause is user initiated. Hard is when a menu is on screen.

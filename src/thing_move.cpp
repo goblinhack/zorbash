@@ -52,9 +52,6 @@ bool Thing::move (fpoint future_pos,
     }
 
     if (idle) {
-        if (is_player()) {
-            game->tick_begin();
-        }
         return (false);
     }
 
@@ -71,10 +68,6 @@ bool Thing::move (fpoint future_pos,
     if (attack) {
         use();
 
-        if (is_player()) {
-            game->tick_begin();
-        }
-
         if ((x == at.x) && (y == at.y)) {
             return (false);
         }
@@ -82,10 +75,6 @@ bool Thing::move (fpoint future_pos,
 
     if ((x == at.x) && (y == at.y)) {
         return (false);
-    }
-
-    if (is_player()) {
-        game->tick_begin();
     }
 
     if (is_player()) {

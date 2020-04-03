@@ -345,7 +345,6 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.gfx_zoom);
     in >> bits(my.t.gfx_vsync_enable);
     in >> bits(my.t.debug_mode);
-    in >> bits(my.t.arcade_mode);
     in >> bits(my.t.sound_volume);
     in >> bits(my.t.music_volume);
     in >> bits(my.t.fullscreen);
@@ -401,9 +400,6 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.saved_dir);
     in >> bits(my.t.seed);
     in >> bits(my.t.fps_value);
-    in >> bits(my.t.tick_current);
-    in >> bits(my.t.tick_completed);
-    in >> bits(my.t.things_are_moving);
     in >> bits(my.t.started);
     in >> bits(my.t.config);
     in >> bits(my.t.world);
