@@ -24,6 +24,8 @@ def tp_init(name, real_name):
     x.set_is_corpse_on_death(True)
     x.set_is_hunger_insatiable(True)
     x.set_is_interesting(True)
+    x.set_light_color("green")
+    x.set_is_light_strength(1)
     x.set_is_loggable(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)

@@ -13,9 +13,6 @@ void Config::fini (void)
 void Game::fini (void)
 {_
     fps_value = 0;
-    tick_current = 0;
-    tick_completed = 0;
-    things_are_moving = false;
     started = false;
 
     config.fini();

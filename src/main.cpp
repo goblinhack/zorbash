@@ -40,8 +40,6 @@ char *GFX_PATH;
 bool opt_new_game;
 bool opt_fast_start;
 bool opt_debug_mode;
-bool opt_arcade_mode;
-bool opt_arcade_mode_set;
 
 FILE *LOG_STDOUT;
 FILE *LOG_STDERR;
@@ -520,20 +518,6 @@ static void parse_args (int32_t argc, char *argv[])
             continue;
         }
 
-        if (!strcasecmp(argv[i], "--arcade-mode") ||
-            !strcasecmp(argv[i], "-arcade-mode")) {
-            opt_arcade_mode = true;
-            opt_arcade_mode_set = true;
-            continue;
-        }
-
-        if (!strcasecmp(argv[i], "--rogue-mode") ||
-            !strcasecmp(argv[i], "-rogue-mode")) {
-            opt_arcade_mode = false;
-            opt_arcade_mode_set = true;
-            continue;
-        }
-
         //
         // Bad argument.
         //
@@ -632,10 +616,6 @@ int32_t main (int32_t argc, char *argv[])
 
     if (opt_debug_mode) {
         game->config.debug_mode = opt_debug_mode;
-    }
-
-    if (opt_arcade_mode_set) {
-        game->config.arcade_mode = opt_arcade_mode;
     }
 
     CON("INIT: SDL create window");

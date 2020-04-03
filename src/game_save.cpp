@@ -282,7 +282,6 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.gfx_zoom);
     out << bits(my.t.gfx_vsync_enable);
     out << bits(my.t.debug_mode);
-    out << bits(my.t.arcade_mode);
     out << bits(my.t.sound_volume);
     out << bits(my.t.music_volume);
     out << bits(my.t.fullscreen);
@@ -334,9 +333,6 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.saved_dir);
     out << bits(my.t.seed);
     out << bits(my.t.fps_value);
-    out << bits(my.t.tick_current);
-    out << bits(my.t.tick_completed);
-    out << bits(my.t.things_are_moving);
     out << bits(my.t.started);
     out << bits(my.t.config);
     out << bits(my.t.world);
