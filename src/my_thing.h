@@ -216,7 +216,6 @@ public:
     Lightp get_light(void);
     void new_light(fpoint at,
                    double strength,
-                   LightQuality quality = LIGHT_QUALITY_POINT,
                    color col = WHITE);
     void delete_light(void);
 

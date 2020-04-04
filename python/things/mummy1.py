@@ -4,6 +4,7 @@ import tp
 def tp_init(name, real_name):
     x = tp.Tp(name, real_name)
 
+    x.set_a_or_an("a");
     x.set_ai_delay_after_moving_ms(100)
     x.set_ai_scent_distance(40)
     x.set_collision_attack(True)
@@ -21,11 +22,11 @@ def tp_init(name, real_name):
     x.set_is_attack_shove(True)
     x.set_is_attack_shove_chance_d1000(200)
     x.set_is_attackable(True)
+    x.set_is_combustible(True)
     x.set_is_corpse_on_death(True)
     x.set_is_hunger_insatiable(True)
     x.set_is_interesting(True)
-    x.set_light_color("green")
-    x.set_is_light_strength(1)
+    x.set_is_light_strength(2)
     x.set_is_loggable(True)
     x.set_is_meat_eater(True)
     x.set_is_monst(True)
@@ -34,7 +35,7 @@ def tp_init(name, real_name):
     x.set_is_shovable(True)
     x.set_is_undead(True)
     x.set_is_water_hater(100)
-    x.set_a_or_an("a");
+    x.set_light_color("palegreen")
     x.set_stats_attack_hd("1d1+1")
     x.set_stats_attack_rate_tenths(10)
     x.set_stats_defence(2)
@@ -43,7 +44,6 @@ def tp_init(name, real_name):
     x.set_stats_move_speed_ms(300)
     x.set_stats_strength(9)
     x.set_weapon_use_anim("claws1")
-    x.set_is_combustible(True)
     x.set_z_depth(zx.MAP_DEPTH_MONST)
 
     delay = 200

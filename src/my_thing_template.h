@@ -1427,10 +1427,4 @@ enum {
     THING_DIR_BR,
 };
 
-typedef enum {
-    LIGHT_QUALITY_POINT,
-    LIGHT_QUALITY_LOW,
-    LIGHT_QUALITY_HIGH,
-} LightQuality;
-
 #endif // THING_TEMPLATE_H

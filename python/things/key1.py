@@ -4,18 +4,18 @@ import tp
 def key_init(name, real_name):
     x = tp.Tp(name, real_name)
 
+    x.set_a_or_an("an");
     x.set_gfx_animated(True)
     x.set_gfx_bounce_on_move(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_is_combustible(False)
     x.set_is_interesting(True)
     x.set_is_key(True)
+    x.set_is_light_strength(2)
     x.set_is_movable(True)
-    x.set_light_color("white")
-    x.set_is_light_strength(1)
     x.set_is_movement_blocking(True)
-    x.set_a_or_an("an");
-    x.set_is_combustible(False)
+    x.set_light_color("yellow")
     x.set_z_depth(zx.MAP_DEPTH_ITEM)
 
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=100)

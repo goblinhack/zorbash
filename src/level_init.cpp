@@ -397,35 +397,6 @@ static void level_place_floor_under_objects (Dungeonp d,
 
             (void) thing_new(what, fpoint(x, y));
 
-            if (d->is_lava(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    auto n = thing_new(what, fpoint(x, y + 1));
-                    n->new_light(fpoint(x, y + 1.0), 2,
-                                 LIGHT_QUALITY_POINT, ORANGE);
-                }
-            }
-            if (d->is_lava(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    auto n = thing_new(what, fpoint(x, y - 1));
-                    n->new_light(fpoint(x, y - 1.0), 2,
-                                 LIGHT_QUALITY_POINT, ORANGE);
-                }
-            }
-            if (d->is_lava(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    auto n = thing_new(what, fpoint(x + 1, y));
-                    n->new_light(fpoint(x + 1.0, y), 2,
-                                 LIGHT_QUALITY_POINT, ORANGE);
-                }
-            }
-            if (d->is_lava(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    auto n = thing_new(what, fpoint(x - 1, y));
-                    n->new_light(fpoint(x - 1.0, y), 2,
-                                 LIGHT_QUALITY_POINT, ORANGE);
-                }
-            }
-
             color c = CYAN;
             c.a = 50;
             double light_strength = 1.0;
@@ -433,28 +404,28 @@ static void level_place_floor_under_objects (Dungeonp d,
                 if (!level->is_floor(x, y + 1)) {
                     auto n = thing_new(what, fpoint(x, y + 1));
                     n->new_light(fpoint(x, y + 0.5),
-                                 light_strength, LIGHT_QUALITY_POINT, c);
+                                 light_strength, c);
                 }
             }
             if (d->is_water(x, y - 1)) {
                 if (!level->is_floor(x, y - 1)) {
                     auto n = thing_new(what, fpoint(x, y - 1));
                     n->new_light(fpoint(x, y - 0.5),
-                                 light_strength, LIGHT_QUALITY_POINT, c);
+                                 light_strength, c);
                 }
             }
             if (d->is_water(x + 1, y)) {
                 if (!level->is_floor(x + 1, y)) {
                     auto n = thing_new(what, fpoint(x + 1, y));
                     n->new_light(fpoint(x + 0.5, y),
-                                 light_strength, LIGHT_QUALITY_POINT, c);
+                                 light_strength, c);
                 }
             }
             if (d->is_water(x - 1, y)) {
                 if (!level->is_floor(x - 1, y)) {
                     auto n = thing_new(what, fpoint(x - 1, y));
                     n->new_light(fpoint(x - 0.5, y),
-                                 light_strength, LIGHT_QUALITY_POINT, c);
+                                 light_strength, c);
                 }
             }
 

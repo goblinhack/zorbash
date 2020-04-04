@@ -101,16 +101,12 @@ Lightp Thing::get_light (void)
     }
 }
 
-void Thing::new_light (fpoint at,
-                       double strength,
-                       LightQuality quality,
-                       color col)
+void Thing::new_light (fpoint at, double strength, color col)
 {_
     new_monst();
     if (!monstp->light) {
-        monstp->light = light_new(this, at, strength, quality, col);
+        monstp->light = light_new(this, at, strength, col);
         monstp->light_strength = strength;
-        monstp->light_quality = quality;
         monstp->light_col = col;
     }
 }

@@ -328,7 +328,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         // at the edges of the fbo
         //
         color col = WHITE;
-        new_light(at, (TILE_WIDTH / 2) + 4, LIGHT_QUALITY_HIGH, col);
+        new_light(at, TILE_WIDTH, col);
 
         has_light = true;
         log("player created");
@@ -377,12 +377,14 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
 
     attach();
 
+    //
+    // If not the player and has a light source, create the ligh
+    //
     if (unlikely(!tp_is_player(tpp))) {
         if (unlikely(tp_is_light_strength(tpp))) {
             std::string l = tp_light_color(tpp);
             color c = string2color(l);
-            new_light(at, (double) tp_is_light_strength(tpp),
-                      LIGHT_QUALITY_HIGH, c);
+            new_light(at, (double) tp_is_light_strength(tpp), c);
             has_light = true;
         }
     }
