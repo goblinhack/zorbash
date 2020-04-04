@@ -59,8 +59,8 @@ void gl_init_2d_mode (void)
     // Setup our viewport
     //
     CON("INIT: OpenGL enable viewport");
-    glViewport(0, 0, game->config.drawable_gl_width,
-               game->config.drawable_gl_height);
+    glViewport(0, 0, game->config.video_pix_width,
+               game->config.video_pix_height);
 
     //
     // Make sure we're changing the model view and not the projection
@@ -175,8 +175,8 @@ static void gl_init_fbo_ (int fbo,
                           GLuint *fbo_id,
                           GLuint *fbo_tex_id)
 {_
-    GLuint tex_width = game->config.drawable_gl_width;
-    GLuint tex_height = game->config.drawable_gl_height;
+    GLuint tex_width = game->config.video_pix_width;
+    GLuint tex_height = game->config.video_pix_height;
 
     CON("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
 

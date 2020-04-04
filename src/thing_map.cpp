@@ -168,38 +168,20 @@ void thing_render_all (void)
         thing_blit_things(minx, miny, maxx, maxy);
 
         //
-        // Render light sources first to their own merged buffer
-        //
-#if 0
-        blit_fbo_bind(FBO_LIGHT_MERGED);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glcolor(WHITE);
-        lights_render_points(minx, miny, maxx, maxy, FBO_LIGHT_MERGED, 1);
-        glBindTexture(GL_TEXTURE_2D, 0);
-        blit_fbo_bind(FBO_MAIN);
-        // glBlendFunc(GL_DST_COLOR, GL_ONE);           // normal light redder
-        // lava
-        // glBlendFunc(GL_ONE, GL_ONE);                 // yellow glow
-        // glBlendFunc(GL_SRC_COLOR, GL_ONE);           // orange glow
-        glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
-        blit_fbo(FBO_LIGHT_MERGED);
-#endif
-
-        //
         // Now overlay the high quality lights
         //
 #ifdef DEBUG_LIGHT
         lights_render(light_minx, light_miny, light_maxx, light_maxy, 
-                      FBO_LIGHT_MERGED);
+                      FBO_LIGHT);
 #else
-        blit_fbo_bind(FBO_LIGHT_MERGED);
+        blit_fbo_bind(FBO_LIGHT);
         glClear(GL_COLOR_BUFFER_BIT);
         lights_render(light_minx, light_miny, light_maxx, light_maxy, 
-                      FBO_LIGHT_MERGED);
+                      FBO_LIGHT);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
-        blit_fbo(FBO_LIGHT_MERGED);
+        blit_fbo(FBO_LIGHT);
 
         //
         // Blend the black and white background of where we have been

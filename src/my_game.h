@@ -461,8 +461,6 @@ public:
     double             video_gl_width               = {};
     double             video_gl_height              = {};
     double             video_w_h_ratio              = {};
-    int32_t            drawable_gl_width            = {};
-    int32_t            drawable_gl_height           = {};
     double             tile_gl_width                = {};
     double             tile_gl_height               = {};
     double             one_pixel_gl_width           = {};

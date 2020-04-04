@@ -353,8 +353,6 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.video_gl_width);
     in >> bits(my.t.video_gl_height);
     in >> bits(my.t.video_w_h_ratio);
-    in >> bits(my.t.drawable_gl_width);
-    in >> bits(my.t.drawable_gl_height);
     in >> bits(my.t.tile_gl_width);
     in >> bits(my.t.tile_gl_height);
     in >> bits(my.t.one_pixel_gl_width);
@@ -682,7 +680,7 @@ void Game::load_select (void)
 
     game_load_headers_only = true;
 
-    wid_load->log("Choose a save slot. %%fg=red$ESC%%fg=reset$ to cancel");
+    wid_load->log("Choose a load slot. %%fg=red$ESC%%fg=reset$ to cancel");
 
     int y_at = 2;
     for (auto slot = 0; slot < MAX_SAVE_SLOTS; slot++) {

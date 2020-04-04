@@ -450,7 +450,6 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
         }
     }
 
-    glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     if (deferred_player_light) {
