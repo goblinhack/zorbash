@@ -101,79 +101,229 @@ def init_ui_action_bar():
 
 def init_16x16():
     tiles = [
-            "player1.1", "player1.2", "player1.3", "player1.4", "player1.5", "player1.6", "", "player1.pose", "player1.dead", "sword1.1", "save", "load", "bug", "pause", "dead", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "health5-icon", "health4-icon", "health3-icon",
+            "health2-icon", "health1-icon",
+            "dollar-icon", "defence-icon", "attack-icon",
+            "magic-icon", "karma-icon",
+            "save", "load", "bug", "pause", "dead",
+            "", "", "", "",
             ########################################################
-            "gem1.1", "gem1.2", "gem1.3", "gem1.4", "gem1.5", "gem1.6", "gem1.7", "slime1.1.100", "slime1.2.100", "slime1.3.100", "slime1.4.100", "slime1.1.75", "slime1.2.75", "slime1.3.75", "slime1.4.75", "slime1.1.50", "slime1.2.50", "slime1.3.50", "slime1.4.50", "slime1.1.25", "slime1.2.25", "slime1.3.25", "slime1.4.25", "slime1.dead", "", "", "", "key1.1", "key1.2", "key1.3", "key1.4", "key1.5",
+            "nothing",
+            "cursor.1", "cursor.2", "cursor.3", "cursor.4", "cursor.5",
+            "cursor.6", "cursor.7", "cursor.8", "cursor.9", "cursor.10",
+            "cursor.11", "cursor.12", "cursor_path.1",
+            "", "", "", "", "",
             ########################################################
-            "blood1a", "blood1.100", "blood2.100", "blood3.100", "blood4.100", "", "", "mummy1.1.100", "mummy1.2.100", "mummy1.3.100", "mummy1.1.dead", "mummy1.2.dead", "mummy1.3.dead", "mummy1.4.dead", "mummy1.5.dead", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "key1.1", "key1.2", "key1.3", "key1.4", "key1.5",
+            "food_frog1",
+            "gem1.1", "gem1.2", "gem1.3", "gem1.4", "gem1.5", "gem1.6",
+            "gem1.7",
+            "", "", "", "", "", "",
             ########################################################
-            "nothing", "blood1.75", "blood2.75", "blood3.75", "blood4.75", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "player1.1", "player1.2", "player1.3", "player1.4",
+            "player1.5", "player1.6", "",
+            "player1.pose", "player1.dead", "sword1.1",
+            "", "", "", "", "", "", "", "", "",
             ########################################################
-            "", "blood1.50", "blood2.50", "blood3.50", "blood4.50", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "mummy1.1.100", "mummy1.2.100", "mummy1.3.100",
+            "mummy1.1.dead", "mummy1.2.dead", "mummy1.3.dead",
+            "mummy1.4.dead", "mummy1.5.dead",
+            "", "", "", "", "", "", "", "", "", "", "",
             ########################################################
-            "", "blood1.25", "blood2.25", "blood3.25", "blood4.25", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "slime1.1.100", "slime1.2.100", "slime1.3.100", "slime1.4.100",
+            "slime1.1.75", "slime1.2.75", "slime1.3.75", "slime1.4.75",
+            "slime1.1.50", "slime1.2.50", "slime1.3.50", "slime1.4.50",
+            "slime1.1.25", "slime1.2.25", "slime1.3.25", "slime1.4.25",
+            "slime1.dead", "", "",
             ########################################################
-            "food_frog1", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            # floor 0, for inaccessible areas
             ########################################################
-            "health5-icon", "health4-icon", "health3-icon", "health2-icon", "health1-icon", "dollar-icon", "defence-icon", "magic-icon", "karma-icon", "anxiety5-icon", "anxiety4-icon", "anxiety3-icon", "anxiety2-icon", "anxiety1-icon", "attack-icon", "cursor.1", "cursor.2", "cursor.3", "cursor.4", "cursor.5", "cursor.6", "cursor.7", "cursor.8", "cursor.9", "cursor.10", "cursor.11", "cursor.12", "cursor_path.1", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "floor0.1.2x1.1", "floor0.1.2x1.2", "floor0.1.6x6.1",
+            "floor0.1.6x6.2", "floor0.1.6x6.3", "floor0.1.6x6.4",
+            "floor0.1.6x6.5", "floor0.1.6x6.6", "floor0.1.6x3.1",
+            "floor0.1.6x3.2", "floor0.1.6x3.3", "floor0.1.6x3.4",
+            "floor0.1.6x3.5", "floor0.1.6x3.6", "floor0.1.3x6.1",
+            "floor0.1.3x6.2", "floor0.1.3x6.3", "floor0.1.2x2.1",
+            "floor0.1.2x2.2",
+            #-------------------------------------------------------
+            "floor0.1.1x2.1", "floor0.2.1x2.1", "floor0.1.6x6.7",
+            "floor0.1.6x6.8", "floor0.1.6x6.9", "floor0.1.6x6.10",
+            "floor0.1.6x6.11", "floor0.1.6x6.12", "floor0.1.6x3.7",
+            "floor0.1.6x3.8", "floor0.1.6x3.9", "floor0.1.6x3.10",
+            "floor0.1.6x3.11", "floor0.1.6x3.12", "floor0.1.3x6.4",
+            "floor0.1.3x6.5", "floor0.1.3x6.6", "floor0.1.2x2.3",
+            "floor0.1.2x2.4",
+            #-------------------------------------------------------
+            "floor0.1.1x2.2", "floor0.2.1x2.2", "floor0.1.6x6.13",
+            "floor0.1.6x6.14", "floor0.1.6x6.15", "floor0.1.6x6.16",
+            "floor0.1.6x6.17", "floor0.1.6x6.18", "floor0.1.6x3.13",
+            "floor0.1.6x3.14", "floor0.1.6x3.15", "floor0.1.6x3.16",
+            "floor0.1.6x3.17", "floor0.1.6x3.18", "floor0.1.3x6.7",
+            "floor0.1.3x6.8", "floor0.1.3x6.9", "floor0.2.2x2.1",
+            "floor0.2.2x2.2",
+            #-------------------------------------------------------
+            "floor0.2.2x1.1", "floor0.2.2x1.2", "floor0.1.6x6.19",
+            "floor0.1.6x6.20", "floor0.1.6x6.21", "floor0.1.6x6.22",
+            "floor0.1.6x6.23", "floor0.1.6x6.24", "floor0.1.3x3.1",
+            "floor0.1.3x3.2", "floor0.1.3x3.3", "floor0.2.3x3.1",
+            "floor0.2.3x3.2", "floor0.2.3x3.3", "floor0.1.3x6.10",
+            "floor0.1.3x6.11", "floor0.1.3x6.12", "floor0.2.2x2.3",
+            "floor0.2.2x2.4",
+            #-------------------------------------------------------
+            "floor0.3.2x1.1", "floor0.3.2x1.2", "floor0.1.6x6.25",
+            "floor0.1.6x6.26", "floor0.1.6x6.27", "floor0.1.6x6.28",
+            "floor0.1.6x6.29", "floor0.1.6x6.30", "floor0.1.3x3.4",
+            "floor0.1.3x3.5", "floor0.1.3x3.6", "floor0.2.3x3.4",
+            "floor0.2.3x3.5", "floor0.2.3x3.6", "floor0.1.3x6.13",
+            "floor0.1.3x6.14", "floor0.1.3x6.15", "floor0.3.2x2.1",
+            "floor0.3.2x2.2",
+            #-------------------------------------------------------
+            "floor0.4.2x1.1", "floor0.4.2x1.2", "floor0.1.6x6.31",
+            "floor0.1.6x6.32", "floor0.1.6x6.33", "floor0.1.6x6.34",
+            "floor0.1.6x6.35", "floor0.1.6x6.36", "floor0.1.3x3.7",
+            "floor0.1.3x3.8", "floor0.1.3x3.9", "floor0.2.3x3.7",
+            "floor0.2.3x3.8", "floor0.2.3x3.9", "floor0.1.3x6.16",
+            "floor0.1.3x6.17", "floor0.1.3x6.18", "floor0.3.2x2.3",
+            "floor0.3.2x2.4",
+            #-------------------------------------------------------
+            "floor0.1", "floor0.2", "floor0.3", "floor0.4", "floor0.5",
+            "floor0.6", "floor0.7", "floor0.8", "floor0.9", "floor0.10",
+            "floor0.11", "floor0.12", "floor0.13", "floor0.14", "floor0.15",
+            "floor0.16", "floor0.17", "floor0.18", "floor0.19",
             ########################################################
-            "floor0.1.2x1.1", "floor0.1.2x1.2", "floor0.1.6x6.1", "floor0.1.6x6.2", "floor0.1.6x6.3", "floor0.1.6x6.4", "floor0.1.6x6.5", "floor0.1.6x6.6", "floor0.1.6x3.1", "floor0.1.6x3.2", "floor0.1.6x3.3", "floor0.1.6x3.4", "floor0.1.6x3.5", "floor0.1.6x3.6", "floor0.1.3x6.1", "floor0.1.3x6.2", "floor0.1.3x6.3", "floor0.1.2x2.1", "floor0.1.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor0.1.1x2.1", "floor0.2.1x2.1", "floor0.1.6x6.7", "floor0.1.6x6.8", "floor0.1.6x6.9", "floor0.1.6x6.10", "floor0.1.6x6.11", "floor0.1.6x6.12", "floor0.1.6x3.7", "floor0.1.6x3.8", "floor0.1.6x3.9", "floor0.1.6x3.10", "floor0.1.6x3.11", "floor0.1.6x3.12", "floor0.1.3x6.4", "floor0.1.3x6.5", "floor0.1.3x6.6", "floor0.1.2x2.3", "floor0.1.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor0.1.1x2.2", "floor0.2.1x2.2", "floor0.1.6x6.13", "floor0.1.6x6.14", "floor0.1.6x6.15", "floor0.1.6x6.16", "floor0.1.6x6.17", "floor0.1.6x6.18", "floor0.1.6x3.13", "floor0.1.6x3.14", "floor0.1.6x3.15", "floor0.1.6x3.16", "floor0.1.6x3.17", "floor0.1.6x3.18", "floor0.1.3x6.7", "floor0.1.3x6.8", "floor0.1.3x6.9", "floor0.2.2x2.1", "floor0.2.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor0.2.2x1.1", "floor0.2.2x1.2", "floor0.1.6x6.19", "floor0.1.6x6.20", "floor0.1.6x6.21", "floor0.1.6x6.22", "floor0.1.6x6.23", "floor0.1.6x6.24", "floor0.1.3x3.1", "floor0.1.3x3.2", "floor0.1.3x3.3", "floor0.2.3x3.1", "floor0.2.3x3.2", "floor0.2.3x3.3", "floor0.1.3x6.10", "floor0.1.3x6.11", "floor0.1.3x6.12", "floor0.2.2x2.3", "floor0.2.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor0.3.2x1.1", "floor0.3.2x1.2", "floor0.1.6x6.25", "floor0.1.6x6.26", "floor0.1.6x6.27", "floor0.1.6x6.28", "floor0.1.6x6.29", "floor0.1.6x6.30", "floor0.1.3x3.4", "floor0.1.3x3.5", "floor0.1.3x3.6", "floor0.2.3x3.4", "floor0.2.3x3.5", "floor0.2.3x3.6", "floor0.1.3x6.13", "floor0.1.3x6.14", "floor0.1.3x6.15", "floor0.3.2x2.1", "floor0.3.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor0.4.2x1.1", "floor0.4.2x1.2", "floor0.1.6x6.31", "floor0.1.6x6.32", "floor0.1.6x6.33", "floor0.1.6x6.34", "floor0.1.6x6.35", "floor0.1.6x6.36", "floor0.1.3x3.7", "floor0.1.3x3.8", "floor0.1.3x3.9", "floor0.2.3x3.7", "floor0.2.3x3.8", "floor0.2.3x3.9", "floor0.1.3x6.16", "floor0.1.3x6.17", "floor0.1.3x6.18", "floor0.3.2x2.3", "floor0.3.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor0.1", "floor0.2", "floor0.3", "floor0.4", "floor0.5", "floor0.6", "floor0.7", "floor0.8", "floor0.9", "floor0.10", "floor0.11", "floor0.12", "floor0.13", "floor0.14", "floor0.15", "floor0.16", "floor0.17", "floor0.18", "floor0.19", "floor0.20", "floor0.21", "floor0.22", "floor0.23", "floor0.24", "floor0.25", "floor0.26", "floor0.27", "floor0.28", "floor0.29", "floor0.30", "floor0.31", "floor0.32",
+            # floor 1, for normal backgrounds
             ########################################################
-            "floor1.1.2x1.1", "floor1.1.2x1.2", "floor1.1.6x6.1", "floor1.1.6x6.2", "floor1.1.6x6.3", "floor1.1.6x6.4", "floor1.1.6x6.5", "floor1.1.6x6.6", "floor1.1.6x3.1", "floor1.1.6x3.2", "floor1.1.6x3.3", "floor1.1.6x3.4", "floor1.1.6x3.5", "floor1.1.6x3.6", "floor1.1.3x6.1", "floor1.1.3x6.2", "floor1.1.3x6.3", "floor1.1.2x2.1", "floor1.1.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor1.1.1x2.1", "floor1.2.1x2.1", "floor1.1.6x6.7", "floor1.1.6x6.8", "floor1.1.6x6.9", "floor1.1.6x6.10", "floor1.1.6x6.11", "floor1.1.6x6.12", "floor1.1.6x3.7", "floor1.1.6x3.8", "floor1.1.6x3.9", "floor1.1.6x3.10", "floor1.1.6x3.11", "floor1.1.6x3.12", "floor1.1.3x6.4", "floor1.1.3x6.5", "floor1.1.3x6.6", "floor1.1.2x2.3", "floor1.1.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor1.1.1x2.2", "floor1.2.1x2.2", "floor1.1.6x6.13", "floor1.1.6x6.14", "floor1.1.6x6.15", "floor1.1.6x6.16", "floor1.1.6x6.17", "floor1.1.6x6.18", "floor1.1.6x3.13", "floor1.1.6x3.14", "floor1.1.6x3.15", "floor1.1.6x3.16", "floor1.1.6x3.17", "floor1.1.6x3.18", "floor1.1.3x6.7", "floor1.1.3x6.8", "floor1.1.3x6.9", "floor1.2.2x2.1", "floor1.2.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor1.2.2x1.1", "floor1.2.2x1.2", "floor1.1.6x6.19", "floor1.1.6x6.20", "floor1.1.6x6.21", "floor1.1.6x6.22", "floor1.1.6x6.23", "floor1.1.6x6.24", "floor1.1.3x3.1", "floor1.1.3x3.2", "floor1.1.3x3.3", "floor1.2.3x3.1", "floor1.2.3x3.2", "floor1.2.3x3.3", "floor1.1.3x6.10", "floor1.1.3x6.11", "floor1.1.3x6.12", "floor1.2.2x2.3", "floor1.2.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor1.3.2x1.1", "floor1.3.2x1.2", "floor1.1.6x6.25", "floor1.1.6x6.26", "floor1.1.6x6.27", "floor1.1.6x6.28", "floor1.1.6x6.29", "floor1.1.6x6.30", "floor1.1.3x3.4", "floor1.1.3x3.5", "floor1.1.3x3.6", "floor1.2.3x3.4", "floor1.2.3x3.5", "floor1.2.3x3.6", "floor1.1.3x6.13", "floor1.1.3x6.14", "floor1.1.3x6.15", "floor1.3.2x2.1", "floor1.3.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor1.4.2x1.1", "floor1.4.2x1.2", "floor1.1.6x6.31", "floor1.1.6x6.32", "floor1.1.6x6.33", "floor1.1.6x6.34", "floor1.1.6x6.35", "floor1.1.6x6.36", "floor1.1.3x3.7", "floor1.1.3x3.8", "floor1.1.3x3.9", "floor1.2.3x3.7", "floor1.2.3x3.8", "floor1.2.3x3.9", "floor1.1.3x6.16", "floor1.1.3x6.17", "floor1.1.3x6.18", "floor1.3.2x2.3", "floor1.3.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor1.1", "floor1.2", "floor1.3", "floor1.4", "floor1.5", "floor1.6", "floor1.7", "floor1.8", "floor1.9", "floor1.10", "floor1.11", "floor1.12", "floor1.13", "floor1.14", "floor1.15", "floor1.16", "floor1.17", "floor1.18", "floor1.19", "floor1.20", "floor1.21", "floor1.22", "floor1.23", "floor1.24", "floor1.25", "floor1.26", "floor1.27", "floor1.28", "floor1.29", "floor1.30", "floor1.31", "floor1.32",
+            "floor1.1.2x1.1", "floor1.1.2x1.2", "floor1.1.6x6.1",
+            "floor1.1.6x6.2", "floor1.1.6x6.3", "floor1.1.6x6.4",
+            "floor1.1.6x6.5", "floor1.1.6x6.6", "floor1.1.6x3.1",
+            "floor1.1.6x3.2", "floor1.1.6x3.3", "floor1.1.6x3.4",
+            "floor1.1.6x3.5", "floor1.1.6x3.6", "floor1.1.3x6.1",
+            "floor1.1.3x6.2", "floor1.1.3x6.3", "floor1.1.2x2.1",
+            "floor1.1.2x2.2",
+            #-------------------------------------------------------
+            "floor1.1.1x2.1", "floor1.2.1x2.1", "floor1.1.6x6.7",
+            "floor1.1.6x6.8", "floor1.1.6x6.9", "floor1.1.6x6.10",
+            "floor1.1.6x6.11", "floor1.1.6x6.12", "floor1.1.6x3.7",
+            "floor1.1.6x3.8", "floor1.1.6x3.9", "floor1.1.6x3.10",
+            "floor1.1.6x3.11", "floor1.1.6x3.12", "floor1.1.3x6.4",
+            "floor1.1.3x6.5", "floor1.1.3x6.6", "floor1.1.2x2.3",
+            "floor1.1.2x2.4",
+            #-------------------------------------------------------
+            "floor1.1.1x2.2", "floor1.2.1x2.2", "floor1.1.6x6.13",
+            "floor1.1.6x6.14", "floor1.1.6x6.15", "floor1.1.6x6.16",
+            "floor1.1.6x6.17", "floor1.1.6x6.18", "floor1.1.6x3.13",
+            "floor1.1.6x3.14", "floor1.1.6x3.15", "floor1.1.6x3.16",
+            "floor1.1.6x3.17", "floor1.1.6x3.18", "floor1.1.3x6.7",
+            "floor1.1.3x6.8", "floor1.1.3x6.9", "floor1.2.2x2.1",
+            "floor1.2.2x2.2",
+            #-------------------------------------------------------
+            "floor1.2.2x1.1", "floor1.2.2x1.2", "floor1.1.6x6.19",
+            "floor1.1.6x6.20", "floor1.1.6x6.21", "floor1.1.6x6.22",
+            "floor1.1.6x6.23", "floor1.1.6x6.24", "floor1.1.3x3.1",
+            "floor1.1.3x3.2", "floor1.1.3x3.3", "floor1.2.3x3.1",
+            "floor1.2.3x3.2", "floor1.2.3x3.3", "floor1.1.3x6.10",
+            "floor1.1.3x6.11", "floor1.1.3x6.12", "floor1.2.2x2.3",
+            "floor1.2.2x2.4",
+            #-------------------------------------------------------
+            "floor1.3.2x1.1", "floor1.3.2x1.2", "floor1.1.6x6.25",
+            "floor1.1.6x6.26", "floor1.1.6x6.27", "floor1.1.6x6.28",
+            "floor1.1.6x6.29", "floor1.1.6x6.30", "floor1.1.3x3.4",
+            "floor1.1.3x3.5", "floor1.1.3x3.6", "floor1.2.3x3.4",
+            "floor1.2.3x3.5", "floor1.2.3x3.6", "floor1.1.3x6.13",
+            "floor1.1.3x6.14", "floor1.1.3x6.15", "floor1.3.2x2.1",
+            "floor1.3.2x2.2",
+            #-------------------------------------------------------
+            "floor1.4.2x1.1", "floor1.4.2x1.2", "floor1.1.6x6.31",
+            "floor1.1.6x6.32", "floor1.1.6x6.33", "floor1.1.6x6.34",
+            "floor1.1.6x6.35", "floor1.1.6x6.36", "floor1.1.3x3.7",
+            "floor1.1.3x3.8", "floor1.1.3x3.9", "floor1.2.3x3.7",
+            "floor1.2.3x3.8", "floor1.2.3x3.9", "floor1.1.3x6.16",
+            "floor1.1.3x6.17", "floor1.1.3x6.18", "floor1.3.2x2.3",
+            "floor1.3.2x2.4",
+            #-------------------------------------------------------
+            "floor1.1", "floor1.2", "floor1.3", "floor1.4", "floor1.5",
+            "floor1.6", "floor1.7", "floor1.8", "floor1.9", "floor1.10",
+            "floor1.11", "floor1.12", "floor1.13", "floor1.14", "floor1.15",
+            "floor1.16", "floor1.17", "floor1.18", "floor1.19",
             ########################################################
-            "floor2.1.2x1.1", "floor2.1.2x1.2", "floor2.1.6x6.1", "floor2.1.6x6.2", "floor2.1.6x6.3", "floor2.1.6x6.4", "floor2.1.6x6.5", "floor2.1.6x6.6", "floor2.1.6x3.1", "floor2.1.6x3.2", "floor2.1.6x3.3", "floor2.1.6x3.4", "floor2.1.6x3.5", "floor2.1.6x3.6", "floor2.1.3x6.1", "floor2.1.3x6.2", "floor2.1.3x6.3", "floor2.1.2x2.1", "floor2.1.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor2.1.1x2.1", "floor2.2.1x2.1", "floor2.1.6x6.7", "floor2.1.6x6.8", "floor2.1.6x6.9", "floor2.1.6x6.10", "floor2.1.6x6.11", "floor2.1.6x6.12", "floor2.1.6x3.7", "floor2.1.6x3.8", "floor2.1.6x3.9", "floor2.1.6x3.10", "floor2.1.6x3.11", "floor2.1.6x3.12", "floor2.1.3x6.4", "floor2.1.3x6.5", "floor2.1.3x6.6", "floor2.1.2x2.3", "floor2.1.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor2.1.1x2.2", "floor2.2.1x2.2", "floor2.1.6x6.13", "floor2.1.6x6.14", "floor2.1.6x6.15", "floor2.1.6x6.16", "floor2.1.6x6.17", "floor2.1.6x6.18", "floor2.1.6x3.13", "floor2.1.6x3.14", "floor2.1.6x3.15", "floor2.1.6x3.16", "floor2.1.6x3.17", "floor2.1.6x3.18", "floor2.1.3x6.7", "floor2.1.3x6.8", "floor2.1.3x6.9", "floor2.2.2x2.1", "floor2.2.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor2.2.2x1.1", "floor2.2.2x1.2", "floor2.1.6x6.19", "floor2.1.6x6.20", "floor2.1.6x6.21", "floor2.1.6x6.22", "floor2.1.6x6.23", "floor2.1.6x6.24", "floor2.1.3x3.1", "floor2.1.3x3.2", "floor2.1.3x3.3", "floor2.2.3x3.1", "floor2.2.3x3.2", "floor2.2.3x3.3", "floor2.1.3x6.10", "floor2.1.3x6.11", "floor2.1.3x6.12", "floor2.2.2x2.3", "floor2.2.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor2.3.2x1.1", "floor2.3.2x1.2", "floor2.1.6x6.25", "floor2.1.6x6.26", "floor2.1.6x6.27", "floor2.1.6x6.28", "floor2.1.6x6.29", "floor2.1.6x6.30", "floor2.1.3x3.4", "floor2.1.3x3.5", "floor2.1.3x3.6", "floor2.2.3x3.4", "floor2.2.3x3.5", "floor2.2.3x3.6", "floor2.1.3x6.13", "floor2.1.3x6.14", "floor2.1.3x6.15", "floor2.3.2x2.1", "floor2.3.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor2.4.2x1.1", "floor2.4.2x1.2", "floor2.1.6x6.31", "floor2.1.6x6.32", "floor2.1.6x6.33", "floor2.1.6x6.34", "floor2.1.6x6.35", "floor2.1.6x6.36", "floor2.1.3x3.7", "floor2.1.3x3.8", "floor2.1.3x3.9", "floor2.2.3x3.7", "floor2.2.3x3.8", "floor2.2.3x3.9", "floor2.1.3x6.16", "floor2.1.3x6.17", "floor2.1.3x6.18", "floor2.3.2x2.3", "floor2.3.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "floor2.1", "floor2.2", "floor2.3", "floor2.4", "floor2.5", "floor2.6", "floor2.7", "floor2.8", "floor2.9", "floor2.10", "floor2.11", "floor2.12", "floor2.13", "floor2.14", "floor2.15", "floor2.16", "floor2.17", "floor2.18", "floor2.19", "floor2.20", "floor2.21", "floor2.22", "floor2.23", "floor2.24", "floor2.25", "floor2.26", "floor2.27", "floor2.28", "floor2.29", "floor2.30", "floor2.31", "floor2.32",
+            # wall 1, for normal walls
             ########################################################
-            "wall1.1.2x1.1", "wall1.1.2x1.2", "wall1.1.6x6.1", "wall1.1.6x6.2", "wall1.1.6x6.3", "wall1.1.6x6.4", "wall1.1.6x6.5", "wall1.1.6x6.6", "wall1.1.6x3.1", "wall1.1.6x3.2", "wall1.1.6x3.3", "wall1.1.6x3.4", "wall1.1.6x3.5", "wall1.1.6x3.6", "wall1.1.3x6.1", "wall1.1.3x6.2", "wall1.1.3x6.3", "wall1.1.2x2.1", "wall1.1.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "wall1.1.1x2.1", "wall1.2.1x2.1", "wall1.1.6x6.7", "wall1.1.6x6.8", "wall1.1.6x6.9", "wall1.1.6x6.10", "wall1.1.6x6.11", "wall1.1.6x6.12", "wall1.1.6x3.7", "wall1.1.6x3.8", "wall1.1.6x3.9", "wall1.1.6x3.10", "wall1.1.6x3.11", "wall1.1.6x3.12", "wall1.1.3x6.4", "wall1.1.3x6.5", "wall1.1.3x6.6", "wall1.1.2x2.3", "wall1.1.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "wall1.1.1x2.2", "wall1.2.1x2.2", "wall1.1.6x6.13", "wall1.1.6x6.14", "wall1.1.6x6.15", "wall1.1.6x6.16", "wall1.1.6x6.17", "wall1.1.6x6.18", "wall1.1.6x3.13", "wall1.1.6x3.14", "wall1.1.6x3.15", "wall1.1.6x3.16", "wall1.1.6x3.17", "wall1.1.6x3.18", "wall1.1.3x6.7", "wall1.1.3x6.8", "wall1.1.3x6.9", "wall1.1", "wall1.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "wall1.2.2x1.1", "wall1.2.2x1.2", "wall1.1.6x6.19", "wall1.1.6x6.20", "wall1.1.6x6.21", "wall1.1.6x6.22", "wall1.1.6x6.23", "wall1.1.6x6.24", "wall1.1.3x3.1", "wall1.1.3x3.2", "wall1.1.3x3.3", "wall1.2.3x3.1", "wall1.2.3x3.2", "wall1.2.3x3.3", "wall1.1.3x6.10", "wall1.1.3x6.11", "wall1.1.3x6.12", "wall1.3", "wall1.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "wall1.1.6x6.25", "wall1.1.6x6.26", "wall1.1.6x6.27", "wall1.1.6x6.28", "wall1.1.6x6.29", "wall1.1.6x6.30", "wall1.1.3x3.4", "wall1.1.3x3.5", "wall1.1.3x3.6", "wall1.2.3x3.4", "wall1.2.3x3.5", "wall1.2.3x3.6", "wall1.1.3x6.13", "wall1.1.3x6.14", "wall1.1.3x6.15", "wall1.5", "wall1.6", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "wall1.1.6x6.31", "wall1.1.6x6.32", "wall1.1.6x6.33", "wall1.1.6x6.34", "wall1.1.6x6.35", "wall1.1.6x6.36", "wall1.1.3x3.7", "wall1.1.3x3.8", "wall1.1.3x3.9", "wall1.2.3x3.7", "wall1.2.3x3.8", "wall1.2.3x3.9", "wall1.1.3x6.16", "wall1.1.3x6.17", "wall1.1.3x6.18", "wall1.7", "wall1.8", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "wall1.1.2x1.1", "wall1.1.2x1.2", "wall1.1.6x6.1",
+            "wall1.1.6x6.2", "wall1.1.6x6.3", "wall1.1.6x6.4",
+            "wall1.1.6x6.5", "wall1.1.6x6.6", "wall1.1.6x3.1",
+            "wall1.1.6x3.2", "wall1.1.6x3.3", "wall1.1.6x3.4",
+            "wall1.1.6x3.5", "wall1.1.6x3.6", "wall1.1.3x6.1",
+            "wall1.1.3x6.2", "wall1.1.3x6.3", "wall1.1.2x2.1",
+            "wall1.1.2x2.2",
+            #-------------------------------------------------------
+            "wall1.1.1x2.1", "wall1.2.1x2.1", "wall1.1.6x6.7",
+            "wall1.1.6x6.8", "wall1.1.6x6.9", "wall1.1.6x6.10",
+            "wall1.1.6x6.11", "wall1.1.6x6.12", "wall1.1.6x3.7",
+            "wall1.1.6x3.8", "wall1.1.6x3.9", "wall1.1.6x3.10",
+            "wall1.1.6x3.11", "wall1.1.6x3.12", "wall1.1.3x6.4",
+            "wall1.1.3x6.5", "wall1.1.3x6.6", "wall1.1.2x2.3",
+            "wall1.1.2x2.4",
+            #-------------------------------------------------------
+            "wall1.1.1x2.2", "wall1.2.1x2.2", "wall1.1.6x6.13",
+            "wall1.1.6x6.14", "wall1.1.6x6.15", "wall1.1.6x6.16",
+            "wall1.1.6x6.17", "wall1.1.6x6.18", "wall1.1.6x3.13",
+            "wall1.1.6x3.14", "wall1.1.6x3.15", "wall1.1.6x3.16",
+            "wall1.1.6x3.17", "wall1.1.6x3.18", "wall1.1.3x6.7",
+            "wall1.1.3x6.8", "wall1.1.3x6.9", "wall1.2.2x2.1",
+            "wall1.2.2x2.2",
+            #-------------------------------------------------------
+            "wall1.2.2x1.1", "wall1.2.2x1.2", "wall1.1.6x6.19",
+            "wall1.1.6x6.20", "wall1.1.6x6.21", "wall1.1.6x6.22",
+            "wall1.1.6x6.23", "wall1.1.6x6.24", "wall1.1.3x3.1",
+            "wall1.1.3x3.2", "wall1.1.3x3.3", "wall1.2.3x3.1",
+            "wall1.2.3x3.2", "wall1.2.3x3.3", "wall1.1.3x6.10",
+            "wall1.1.3x6.11", "wall1.1.3x6.12", "wall1.2.2x2.3",
+            "wall1.2.2x2.4",
+            #-------------------------------------------------------
+            "wall1.3.2x1.1", "wall1.3.2x1.2", "wall1.1.6x6.25",
+            "wall1.1.6x6.26", "wall1.1.6x6.27", "wall1.1.6x6.28",
+            "wall1.1.6x6.29", "wall1.1.6x6.30", "wall1.1.3x3.4",
+            "wall1.1.3x3.5", "wall1.1.3x3.6", "wall1.2.3x3.4",
+            "wall1.2.3x3.5", "wall1.2.3x3.6", "wall1.1.3x6.13",
+            "wall1.1.3x6.14", "wall1.1.3x6.15", "wall1.3.2x2.1",
+            "wall1.3.2x2.2",
+            #-------------------------------------------------------
+            "wall1.4.2x1.1", "wall1.4.2x1.2", "wall1.1.6x6.31",
+            "wall1.1.6x6.32", "wall1.1.6x6.33", "wall1.1.6x6.34",
+            "wall1.1.6x6.35", "wall1.1.6x6.36", "wall1.1.3x3.7",
+            "wall1.1.3x3.8", "wall1.1.3x3.9", "wall1.2.3x3.7",
+            "wall1.2.3x3.8", "wall1.2.3x3.9", "wall1.1.3x6.16",
+            "wall1.1.3x6.17", "wall1.1.3x6.18", "wall1.3.2x2.3",
+            "wall1.3.2x2.4",
+            #-------------------------------------------------------
+            "wall1.1", "wall1.2", "wall1.3", "wall1.4", "wall1.5",
+            "wall1.6", "wall1.7", "wall1.8", "wall1.9", "wall1.10",
+            "wall1.11", "wall1.12", "wall1.13", "wall1.14", "wall1.15",
+            "wall1.16", "wall1.17", "wall1.18", "wall1.19",
             ########################################################
-            "wall1.3.2x1.1", "wall1.3.2x1.2", "wall1.2.6x6.1", "wall1.2.6x6.2", "wall1.2.6x6.3", "wall1.2.6x6.4", "wall1.2.6x6.5", "wall1.2.6x6.6", "wall1.2.6x3.1", "wall1.2.6x3.2", "wall1.2.6x3.3", "wall1.2.6x3.4", "wall1.2.6x3.5", "wall1.2.6x3.6", "wall1.2.3x6.1", "wall1.2.3x6.2", "wall1.2.3x6.3", "wall1.2.2x2.1", "wall1.2.2x2.2", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "wall1.3.1x2.1", "wall1.4.1x2.1", "wall1.2.6x6.7", "wall1.2.6x6.8", "wall1.2.6x6.9", "wall1.2.6x6.10", "wall1.2.6x6.11", "wall1.2.6x6.12", "wall1.2.6x3.7", "wall1.2.6x3.8", "wall1.2.6x3.9", "wall1.2.6x3.10", "wall1.2.6x3.11", "wall1.2.6x3.12", "wall1.2.3x6.4", "wall1.2.3x6.5", "wall1.2.3x6.6", "wall1.2.2x2.3", "wall1.2.2x2.4", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "wall1.3.1x2.2", "wall1.4.1x2.2", "wall1.2.6x6.13", "wall1.2.6x6.14", "wall1.2.6x6.15", "wall1.2.6x6.16", "wall1.2.6x6.17", "wall1.2.6x6.18", "wall1.2.6x3.13", "wall1.2.6x3.14", "wall1.2.6x3.15", "wall1.2.6x3.16", "wall1.2.6x3.17", "wall1.2.6x3.18", "wall1.2.3x6.7", "wall1.2.3x6.8", "wall1.2.3x6.9", "wall1.9", "wall1.10", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "wall1.4.2x1.1", "wall1.4.2x1.2", "wall1.2.6x6.19", "wall1.2.6x6.20", "wall1.2.6x6.21", "wall1.2.6x6.22", "wall1.2.6x6.23", "wall1.2.6x6.24", "wall1.3.3x3.1", "wall1.3.3x3.2", "wall1.3.3x3.3", "wall1.4.3x3.1", "wall1.4.3x3.2", "wall1.4.3x3.3", "wall1.2.3x6.10", "wall1.2.3x6.11", "wall1.2.3x6.12", "wall1.11", "wall1.12", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "wall1.2.6x6.25", "wall1.2.6x6.26", "wall1.2.6x6.27", "wall1.2.6x6.28", "wall1.2.6x6.29", "wall1.2.6x6.30", "wall1.3.3x3.4", "wall1.3.3x3.5", "wall1.3.3x3.6", "wall1.4.3x3.4", "wall1.4.3x3.5", "wall1.4.3x3.6", "wall1.2.3x6.13", "wall1.2.3x6.14", "wall1.2.3x6.15", "wall1.13", "wall1.14", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "wall1.2.6x6.31", "wall1.2.6x6.32", "wall1.2.6x6.33", "wall1.2.6x6.34", "wall1.2.6x6.35", "wall1.2.6x6.36", "wall1.3.3x3.7", "wall1.3.3x3.8", "wall1.3.3x3.9", "wall1.4.3x3.7", "wall1.4.3x3.8", "wall1.4.3x3.9", "wall1.2.3x6.16", "wall1.2.3x6.17", "wall1.2.3x6.18", "wall1.15", "wall1.16", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            # deco for above
             ########################################################
-            "", "", "wall_deco1.tl.1", "wall_deco1.top.1", "wall_deco1.top.2", "wall_deco1.top.3", "wall_deco1.tr.1", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "wall_deco1.left.1", "wall_deco1.top.4", "wall_deco1.top.5", "wall_deco1.top.6", "wall_deco1.right.1", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "wall_deco1.left.2", "wall_deco1.top.7", "wall_deco1.top.8", "wall_deco1.top.9", "wall_deco1.right.2", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "wall_deco1.left.3", "wall_deco1.bot.1", "wall_deco1.bot.2", "wall_deco1.bot.3", "wall_deco1.right.3", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "wall_deco1.bl.1", "wall_deco1.bot.4", "wall_deco1.bot.5", "wall_deco1.bot.6", "wall_deco1.br.1", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "wall_deco1.bot.7", "wall_deco1.bot.8", "wall_deco1.bot.9", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "wall_deco1.bot.10", "wall_deco1.bot.11", "wall_deco1.bot.12", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "wall_deco1.bot.13", "wall_deco1.bot.14", "wall_deco1.bot.15", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "wall_deco1.tl.1", "wall_deco1.tl.2", "wall_deco1.tl.3",
+            "wall_deco1.tl.4", "wall_deco1.tl.5", "wall_deco1.tl.6",
+            "wall_deco1.top.1", "wall_deco1.top.2", "wall_deco1.top.3",
+            "wall_deco1.top.4", "wall_deco1.top.5", "wall_deco1.top.6",
+            "wall_deco1.top.7",
+            "wall_deco1.tr.1", "wall_deco1.tr.2", "wall_deco1.tr.3",
+            "wall_deco1.tr.4", "wall_deco1.tr.5", "wall_deco1.tr.6",
+            #-------------------------------------------------------
+            "wall_deco1.left.1", "wall_deco1.left.2", "wall_deco1.left.3",
+            "wall_deco1.left.4", "wall_deco1.left.5", "wall_deco1.left.6",
+            "", "", "", "", "", "", "",
+            "wall_deco1.right.1", "wall_deco1.right.2", "wall_deco1.right.3",
+            "wall_deco1.right.4", "wall_deco1.right.5", "wall_deco1.right.6",
+            #-------------------------------------------------------
+            "wall_deco1.bl.1", "wall_deco1.bl.2", "wall_deco1.bl.3",
+            "wall_deco1.bl.4", "wall_deco1.bl.5", "wall_deco1.bl.6",
+            "wall_deco1.bot.1", "wall_deco1.bot.2", "wall_deco1.bot.3",
+            "wall_deco1.bot.4", "wall_deco1.bot.5", "wall_deco1.bot.6",
+            "wall_deco1.bot.7",
+            "wall_deco1.br.1", "wall_deco1.br.2", "wall_deco1.br.3",
+            "wall_deco1.br.4", "wall_deco1.br.5", "wall_deco1.br.6",
             ########################################################
     ]
 
@@ -492,38 +642,6 @@ def init_32x32_deep_water():
         name="32x32_deep_water", width=32, height=32, arr=tiles)
 
 
-def init_32x32_lava():
-    tiles = [
-        "lava1a", "lava2a", "lava3a", "lava4a", "lava5a", "lava6a", "lava7a", "lava8a",
-        "lava1b", "lava2b", "lava3b", "lava4b", "lava5b", "lava6b", "lava7b", "lava8b",
-        "lava1c", "lava2c", "lava3c", "lava4c", "lava5c", "lava6c", "lava7c", "lava8c",
-        "lava1d", "lava2d", "lava3d", "lava4d", "lava5d", "lava6d", "lava7d", "lava8d",
-        "lava1e", "lava2e", "lava3e", "lava4e", "lava5e", "lava6e", "lava7e", "lava8e",
-        "lava1f", "lava2f", "lava3f", "lava4f", "lava5f", "lava6f", "lava7f", "lava8f",
-        "lava1g", "lava2g", "lava3g", "lava4g", "lava5g", "lava6g", "lava7g", "lava8g",
-        "lava1h", "lava2h", "lava3h", "lava4h", "lava5h", "lava6h", "lava7h", "lava8h",
-    ]
-
-    zx.tile_load_arr_color_and_black_and_white(
-        file="data/gfx/32x32_lava.tga",
-        name="32x32_lava", width=32, height=32, arr=tiles)
-
-def init_32x32_chasm():
-    tiles = [
-        "chasm1a", "chasm2a", "chasm3a", "chasm4a", "chasm5a", "chasm6a", "chasm7a", "chasm8a",
-        "chasm1b", "chasm2b", "chasm3b", "chasm4b", "chasm5b", "chasm6b", "chasm7b", "chasm8b",
-        "chasm1c", "chasm2c", "chasm3c", "chasm4c", "chasm5c", "chasm6c", "chasm7c", "chasm8c",
-        "chasm1d", "chasm2d", "chasm3d", "chasm4d", "chasm5d", "chasm6d", "chasm7d", "chasm8d",
-        "chasm1e", "chasm2e", "chasm3e", "chasm4e", "chasm5e", "chasm6e", "chasm7e", "chasm8e",
-        "chasm1f", "chasm2f", "chasm3f", "chasm4f", "chasm5f", "chasm6f", "chasm7f", "chasm8f",
-        "chasm1g", "chasm2g", "chasm3g", "chasm4g", "chasm5g", "chasm6g", "chasm7g", "chasm8g",
-        "chasm1h", "chasm2h", "chasm3h", "chasm4h", "chasm5h", "chasm6h", "chasm7h", "chasm8h",
-    ]
-
-    zx.tile_load_arr_color_and_black_and_white(
-        file="data/gfx/32x32_chasm.tga",
-        name="32x32_chasm", width=32, height=32, arr=tiles)
-
 def init_weapons_tiles():
     tiles = [
             "",
@@ -578,7 +696,5 @@ init_32x32()
 init_32x32_water()
 init_32x32_deep_water()
 init_32x32_surface_effects()
-init_32x32_lava()
-init_32x32_chasm()
 init_weapons_tiles()
 init_claws_tiles()
