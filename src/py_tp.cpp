@@ -15,24 +15,24 @@ PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char*) "tp", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "O", kwlist, &py_class)) {
-        return (0);
+        Py_RETURN_NONE;
     }
 
     if (!py_class) {
         ERR("tp_load, missing name attr");
-        return (0);
+        Py_RETURN_NONE;
     }
 
     char *tp_name = py_obj_attr_str(py_class, "name");
     if (!tp_name) {
         ERR("tp_load, missing tp name");
-        return (0);
+        Py_RETURN_NONE;
     }
 
     char *tp_real_name = py_obj_attr_str(py_class, "real_name");
     if (!tp_real_name) {
         ERR("tp_load, missing tp real_name");
-        return (0);
+        Py_RETURN_NONE;
     }
 
     static int id;
@@ -62,12 +62,12 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                 \
     if (!py_class) {                                                            \
         ERR("%s, missing class", __FUNCTION__);                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     if (!value) {                                                               \
         ERR("%s, missing value", __FUNCTION__);                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     tp_name = py_obj_attr_str(py_class, "name");                                \
@@ -112,12 +112,12 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                 \
     if (!py_class) {                                                            \
         ERR("%s, missing class", __FUNCTION__);                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     if (!value) {                                                               \
         ERR("%s, missing value", __FUNCTION__);                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     tp_name = py_obj_attr_str(py_class, "name");                                \
@@ -158,17 +158,17 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                 \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class,    \
                                      &value)) {                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     if (!py_class) {                                                            \
         ERR("%s, missing class", __FUNCTION__);                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     if (!value) {                                                               \
         ERR("%s, missing value", __FUNCTION__);                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     tp_name = py_obj_attr_str(py_class, "name");                                \
@@ -214,12 +214,12 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                 \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class,    \
                                      &value)) {                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     if (!py_class) {                                                            \
         ERR("%s, missing class", __FUNCTION__);                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     tp_name = py_obj_attr_str(py_class, "name");                                \
@@ -258,12 +258,12 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                 \
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|d", kwlist, &py_class,    \
                                      &value)) {                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     if (!py_class) {                                                            \
         ERR("%s, missing class", __FUNCTION__);                                 \
-        return (0);                                                             \
+        Py_RETURN_NONE;                                                         \
     }                                                                           \
                                                                                 \
     tp_name = py_obj_attr_str(py_class, (char*) "name");                        \
@@ -459,7 +459,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
 
     if (!py_class) {
         ERR("%s, missing class", __FUNCTION__);
-        return (0);
+        Py_RETURN_NONE;
     }
 
     Tpp tp;
@@ -467,6 +467,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     tp_name = py_obj_attr_str(py_class, "name");
     if (!tp_name) {
         ERR("%s, missing tp name", __FUNCTION__);
+        Py_RETURN_NONE;
     }
 
     DBG("python-to-c: %s(%s -> \"%s\")", __FUNCTION__, tp_name, py_tile_name);
@@ -474,6 +475,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     tp = tp_find(tp_name);
     if (!tp) {
         ERR("%s, cannot find tp %s", __FUNCTION__, tp_name);
+        Py_RETURN_NONE;
     }
 
     Tilemap *tiles = nullptr;
@@ -560,6 +562,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     }
     if (!tiles) {
         ERR("no tiles for [%s]", py_tile_name);
+        Py_RETURN_NONE;
     }
 
     if (py_tile_name && *py_tile_name) {
@@ -567,6 +570,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         if (!t) {
             ERR("%s, cannot find tile '%s' for tp %s",
                 __FUNCTION__, py_tile_name, tp_name);
+            Py_RETURN_NONE;
         }
 
         //
@@ -884,12 +888,12 @@ PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class,
                                      &value)) {
-        return (0);
+        Py_RETURN_NONE;
     }
 
     if (!py_class) {
         ERR("%s, missing class", __FUNCTION__);
-        return (0);
+        Py_RETURN_NONE;
     }
 
     tp_name = py_obj_attr_str(py_class, "name");

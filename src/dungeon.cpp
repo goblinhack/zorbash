@@ -1114,6 +1114,10 @@ void Dungeon::rooms_print_all (Grid *g)
             }
 
             Roomp r = get(g->node_rooms, x, y);
+            if (!r) {
+                DIE("unable to get any rooms");
+                return;
+            }
             auto rx = x * ROOM_WIDTH + MAP_BORDER;
             auto ry = y * ROOM_HEIGHT + MAP_BORDER;
             room_print_at(r, rx, ry);

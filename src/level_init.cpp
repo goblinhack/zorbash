@@ -7,7 +7,7 @@
 #include "my_dungeon.h"
 #include "my_thing.h"
 
-static void level_place_walls (Dungeonp d,
+static void level_place_walls(Dungeonp d,
                               int variant,
                               int block_width,
                               int block_height,
@@ -19,10 +19,6 @@ static void level_place_floors(Dungeonp d,
                                int block_width,
                                int block_height,
                                int tries);
-static void level_place_floor_under_objects(Dungeonp d,
-                                            std::string what,
-                                            int depth);
-static void level_place_lava(Dungeonp d, std::string what);
 static void level_place_water(Dungeonp d, std::string what);
 static void level_place_monst(Dungeonp d);
 static void level_place_food(Dungeonp d);
@@ -84,11 +80,9 @@ void Level::init (point3d at, int seed_in)
     level_place_secret_door(dungeon, "secret_door1");
     if (errored) { return; }
 
-    auto tries = 1000;
+    auto tries = 5000;
 
     level_place_walls(dungeon, 1, 6, 6, tries);
-    if (errored) { return; }
-    level_place_walls(dungeon, 2, 6, 6, tries);
     if (errored) { return; }
     level_place_walls(dungeon, 1, 6, 3, tries);
     if (errored) { return; }
@@ -96,55 +90,22 @@ void Level::init (point3d at, int seed_in)
     if (errored) { return; }
     level_place_walls(dungeon, 1, 3, 3, tries);
     if (errored) { return; }
-    level_place_walls(dungeon, 2, 3, 3, tries);
-    if (errored) { return; }
-    level_place_walls(dungeon, 3, 3, 3, tries);
-    if (errored) { return; }
-    level_place_walls(dungeon, 4, 3, 3, tries);
-    if (errored) { return; }
     level_place_walls(dungeon, 1, 2, 2, tries);
-    if (errored) { return; }
-    level_place_walls(dungeon, 2, 2, 2, tries);
     if (errored) { return; }
     level_place_walls(dungeon, 1, 2, 1, tries);
     if (errored) { return; }
-    level_place_walls(dungeon, 2, 2, 1, tries);
-    if (errored) { return; }
-    level_place_walls(dungeon, 3, 2, 1, tries);
-    if (errored) { return; }
-    level_place_walls(dungeon, 4, 2, 1, tries);
-    if (errored) { return; }
     level_place_walls(dungeon, 1, 1, 2, tries);
     if (errored) { return; }
-    level_place_walls(dungeon, 2, 1, 2, tries);
-    if (errored) { return; }
-    level_place_walls(dungeon, 3, 2, 1, tries);
-    if (errored) { return; }
-    level_place_walls(dungeon, 4, 2, 1, tries);
-    if (errored) { return; }
 
-    for (auto d = 0; d < 3; d++) {
+    for (auto d = 0; d < 2; d++) {
         int nloops = 100;
         while (nloops--) {
             auto s = "floor";
-
             int tries = 100;
-            switch (random_range(0, 5)) {
-                case 0: level_place_floors(dungeon, s, d, 1, 3, 3, tries); break;
-                case 1: level_place_floors(dungeon, s, d, 2, 3, 3, tries); break;
-                case 2: level_place_floors(dungeon, s, d, 1, 2, 2, tries); break;
-                case 3: level_place_floors(dungeon, s, d, 2, 2, 2, tries); break;
-                case 4: level_place_floors(dungeon, s, d, 3, 2, 2, tries); break;
-            }
+            level_place_floors(dungeon, s, d, 1, 3, 3, tries);
         }
     }
 
-    if(0) {
-    level_place_floor_under_objects(dungeon, "floor1", 1);
-    if (errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor2", 2);
-    if (errored) { return; }
-    }
     level_place_remaining_walls(dungeon, "wall1");
     if (errored) { return; }
     level_place_remaining_floor(dungeon);
@@ -156,8 +117,6 @@ void Level::init (point3d at, int seed_in)
     level_place_wall_deco(dungeon);
 
     if (0) {
-    if (errored) { return; }
-    level_place_lava(dungeon, "lava1");
     if (errored) { return; }
     level_place_water(dungeon, "water1");
     if (errored) { return; }
@@ -375,143 +334,6 @@ static void level_place_floors (Dungeonp d,
     }
 }
 
-static void level_place_floor_under_objects (Dungeonp d,
-                                            std::string what,
-                                            int depth)
-{_
-    for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
-        for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
-            if (!d->is_floor_fast(x, y)) {
-                continue;
-            }
-
-            if (level->is_floor(x, y)) {
-                continue;
-            }
-
-            if (depth) {
-                if (depth != d->get_grid_depth_at(x, y)) {
-                    continue;
-                }
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-
-            color c = CYAN;
-            c.a = 50;
-            double light_strength = 1.0;
-            if (d->is_water(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    auto n = thing_new(what, fpoint(x, y + 1));
-                    n->new_light(fpoint(x, y + 0.5),
-                                 light_strength, c);
-                }
-            }
-            if (d->is_water(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    auto n = thing_new(what, fpoint(x, y - 1));
-                    n->new_light(fpoint(x, y - 0.5),
-                                 light_strength, c);
-                }
-            }
-            if (d->is_water(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    auto n = thing_new(what, fpoint(x + 1, y));
-                    n->new_light(fpoint(x + 0.5, y),
-                                 light_strength, c);
-                }
-            }
-            if (d->is_water(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    auto n = thing_new(what, fpoint(x - 1, y));
-                    n->new_light(fpoint(x - 0.5, y),
-                                 light_strength, c);
-                }
-            }
-
-            if (d->is_monst(x, y + 1) ||
-                d->is_food(x, y + 1) ||
-                d->is_key(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    thing_new(what, fpoint(x, y + 1));
-                }
-            }
-            if (d->is_monst(x, y - 1) ||
-                d->is_food(x, y - 1) ||
-                d->is_key(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    thing_new(what, fpoint(x, y - 1));
-                }
-            }
-            if (d->is_monst(x + 1, y) ||
-                d->is_food(x + 1, y) ||
-                d->is_key(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    thing_new(what, fpoint(x + 1, y));
-                }
-            }
-            if (d->is_monst(x - 1, y) ||
-                d->is_food(x - 1, y) ||
-                d->is_key(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    thing_new(what, fpoint(x - 1, y));
-                }
-            }
-
-            if (d->is_monst(x, y + 1) ||
-                d->is_food(x, y + 1) ||
-                d->is_key(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    thing_new(what, fpoint(x, y + 1));
-                }
-            }
-            if (d->is_monst(x, y - 1) ||
-                d->is_food(x, y - 1) ||
-                d->is_key(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    thing_new(what, fpoint(x, y - 1));
-                }
-            }
-            if (d->is_monst(x + 1, y) ||
-                d->is_food(x + 1, y) ||
-                d->is_key(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    thing_new(what, fpoint(x + 1, y));
-                }
-            }
-            if (d->is_monst(x - 1, y) ||
-                d->is_food(x - 1, y) ||
-                d->is_key(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    thing_new(what, fpoint(x - 1, y));
-                }
-            }
-        }
-    }
-}
-
-static void level_place_lava (Dungeonp d,
-                             std::string what)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_lava(x, y)) {
-                continue;
-            }
-
-            if (!d->is_lava(x, y)) {
-                continue;
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-
-            if (random_range(0, 100) < 20) {
-                thing_new("smoke1", fpoint(x, y));
-            }
-        }
-    }
-}
-
 static void level_place_water (Dungeonp d, std::string what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
@@ -701,15 +523,9 @@ static void level_place_remaining_floor (Dungeonp d)
                             thing_new("floor1", fpoint(x, y));
                             break;
                         }
-                    case 2:
-                        if (d->is_floor(x, y)) {
-                            thing_new("floor2", fpoint(x, y));
-                            break;
-                        }
-                        break;
                     default:
                         if (d->is_floor(x, y)) {
-                            thing_new("floor0", fpoint(x, y));
+                            thing_new("floor1", fpoint(x, y));
                             break;
                         }
                         break;
