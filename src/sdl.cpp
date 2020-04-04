@@ -362,17 +362,17 @@ uint8_t sdl_init (void)
 
     if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
         SDL_GL_GetDrawableSize(window,
-                               &game->config.drawable_gl_width,
-                               &game->config.drawable_gl_height);
+                               &game->config.video_pix_width,
+                               &game->config.video_pix_height);
     } else {
         SDL_GetWindowSize(window,
-                          &game->config.drawable_gl_width,
-                          &game->config.drawable_gl_height);
+                          &game->config.video_pix_width,
+                          &game->config.video_pix_height);
     }
 
     LOG("Palling SDL_GL_CreateContext (drawable size %dx%d)...",
-        game->config.drawable_gl_width,
-        game->config.drawable_gl_height);
+        game->config.video_pix_width,
+        game->config.video_pix_height);
 
     context = SDL_GL_CreateContext(window);
 
@@ -383,13 +383,13 @@ uint8_t sdl_init (void)
     }
 
     LOG("Calling SDL_GL_CreateContext (drawable size %dx%d) done",
-        game->config.drawable_gl_width,
-        game->config.drawable_gl_height);
+        game->config.video_pix_width,
+        game->config.video_pix_height);
 
     game->config.tile_pixel_width =
-                    game->config.drawable_gl_width / TILES_ACROSS;
+                    game->config.video_pix_width / TILES_ACROSS;
     game->config.tile_pixel_height =
-                    game->config.drawable_gl_height / TILES_DOWN;
+                    game->config.video_pix_height / TILES_DOWN;
 
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
@@ -1124,9 +1124,9 @@ void config_gfx_zoom_update (void)
         (double)game->config.video_pix_height;
 
     game->config.tile_pixel_width =
-                    game->config.drawable_gl_width / TILES_ACROSS;
+                    game->config.video_pix_width / TILES_ACROSS;
     game->config.tile_pixel_height =
-                    game->config.drawable_gl_height / TILES_DOWN;
+                    game->config.video_pix_height / TILES_DOWN;
 
     level->cursor_needs_update = true;
     level->cursor_found = false;
@@ -1547,8 +1547,8 @@ void sdl_screenshot (void)
 static void sdl_screenshot_ (void)
 {_
     FILE *fp;
-    int w = game->config.drawable_gl_width;
-    int h = game->config.drawable_gl_height;
+    int w = game->config.video_pix_width;
+    int h = game->config.video_pix_height;
 
     static int count;
     char *filename = dynprintf("screenshot.%d.ppm", ++count);

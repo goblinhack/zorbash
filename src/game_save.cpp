@@ -291,8 +291,6 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.video_gl_width);
     out << bits(my.t.video_gl_height);
     out << bits(my.t.video_w_h_ratio);
-    out << bits(my.t.drawable_gl_width);
-    out << bits(my.t.drawable_gl_height);
     out << bits(my.t.tile_gl_width);
     out << bits(my.t.tile_gl_height);
     out << bits(my.t.one_pixel_gl_width);

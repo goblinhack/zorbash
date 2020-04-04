@@ -143,8 +143,6 @@ void Config::log (std::string pfx)
     LOG("%s video_gl_width      %f", pfx.c_str(), video_gl_width);
     LOG("%s video_gl_height     %f", pfx.c_str(), video_gl_height);
     LOG("%s video_w_h_ratio     %f", pfx.c_str(), video_w_h_ratio);
-    LOG("%s drawable_gl_width   %u", pfx.c_str(), drawable_gl_width);
-    LOG("%s drawable_gl_height  %u", pfx.c_str(), drawable_gl_height);
     LOG("%s tile_gl_width       %f", pfx.c_str(), tile_gl_width);
     LOG("%s tile_gl_height      %f", pfx.c_str(), tile_gl_height);
     LOG("%s one_pixel_gl_width  %f", pfx.c_str(), one_pixel_gl_width);
