@@ -34,24 +34,20 @@ Light::~Light (void)
 Lightp light_new (Thingp owner,
                   fpoint at,
                   double strength,
-                  LightQuality quality,
                   color col)
 {_
     uint16_t max_light_rays;
     if (owner->is_player()) {
         max_light_rays = MAX_LIGHT_RAYS;
     } else {
-        max_light_rays = MAX_LIGHT_RAYS / 8;
+        max_light_rays = MAX_LIGHT_RAYS / 64;
     }
 
     auto l = new Light(); // std::make_shared< class Light >();
 
-    point new_at((int)at.x, (int)at.y);
-
     l->at             = at;
     l->strength       = strength;
     l->owner          = owner;
-    l->quality        = quality;
     l->col            = col;
     l->max_light_rays = max_light_rays;
 
@@ -94,10 +90,12 @@ void Light::calculate (void)
     auto visible_width = light_radius + 1;
     auto visible_height = light_radius + 1;
 
-    int16_t maxx = at.x + visible_width;
-    int16_t minx = at.x - visible_width;
-    int16_t maxy = at.y + visible_height;
-    int16_t miny = at.y - visible_height;
+    auto light_pos = owner->at + fpoint(0.5, 0.5);
+
+    int16_t maxx = light_pos.x + visible_width;
+    int16_t minx = light_pos.x - visible_width;
+    int16_t maxy = light_pos.y + visible_height;
+    int16_t miny = light_pos.y - visible_height;
 
     if (unlikely(minx < 0)) {
         minx = 0;
@@ -120,8 +118,6 @@ void Light::calculate (void)
     // walls.
     //
     bool do_set_visited = (level->player && (owner == level->player));
-
-    auto light_pos = at;
 
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
@@ -186,49 +182,52 @@ void Light::calculate (void)
     // Cannot merge these two loops as we depend on is_nearest_wall being set
     // for all tiles first.
     //
-    for (int i = 0; i < max_light_rays; i++) {
-        auto r = &getref(ray, i);
-        double radius = r->depth_closest;
-        double fade = pow(strength - radius, 0.05);
-        double step = 0.0;
-        for (; step < 1.0; step += 0.01) {
-            fade *= 0.90;
-            if (fade < 0.001) {
-                break;
+    if (level->player && (owner == level->player)) {
+        for (int i = 0; i < max_light_rays; i++) {
+            auto r = &getref(ray, i);
+            double radius = r->depth_closest;
+            double fade = pow(strength - radius, 0.05);
+            double step = 0.0;
+            for (; step < 1.0; step += 0.01) {
+                fade *= 0.99;
+                if (fade < 0.0001) {
+                    break;
+                }
+
+                double rad = radius + 0.0 + step;
+                double p1x = light_pos.x + r->cosr * rad;
+                double p1y = light_pos.y + r->sinr * rad;
+
+                int x = (int)p1x;
+                int y = (int)p1y;
+
+                if (unlikely(level->is_oob(x, y))) {
+                    continue;
+                }
+
+                if (do_set_visited) {
+                    level->set_visited(x, y);
+                }
+
+                if (get(is_nearest_wall, x, y) != is_nearest_wall_val) {
+                    break;
+                }
             }
 
-            double rad = radius + 0.0 + step;
-            double p1x = light_pos.x + r->cosr * rad;
-            double p1y = light_pos.y + r->sinr * rad;
-
-            int x = (int)p1x;
-            int y = (int)p1y;
-
-            if (unlikely(level->is_oob(x, y))) {
-                continue;
-            }
-
-            if (do_set_visited) {
-                level->set_visited(x, y);
-            }
-
-            if (get(is_nearest_wall, x, y) != is_nearest_wall_val) {
-                break;
+            r->depth_furthest = r->depth_closest + step;
+            if (r->depth_furthest < 0.0001) {
+                r->depth_furthest = strength;
             }
         }
-
-        r->depth_furthest = r->depth_closest + step;
-        if (r->depth_furthest < 0.001) {
-            r->depth_furthest = strength;
+    } else {
+        for (int i = 0; i < max_light_rays; i++) {
+            auto r = &getref(ray, i);
+            r->depth_furthest = r->depth_closest;
+            if (r->depth_furthest < 0.0001) {
+                r->depth_furthest = strength;
+            }
         }
     }
-#if 0
-    for (int i = 0; i < max_light_rays; i++) {
-        auto r = &getref(ray, i);
-        printf("%f ", r->depth_furthest);
-    }
-printf("\n");
-#endif
 }
 
 void Light::render_triangle_fans (void)
@@ -238,15 +237,33 @@ void Light::render_triangle_fans (void)
     if (!owner->get_map_offset_coords(blit_tl, blit_br, tile)) {
         return;
     }
-    fpoint light_pos((blit_tl.x + blit_br.x) / 2,
-                     (blit_br.y + blit_br.y) / 2);
+    fpoint light_pos = (blit_tl + blit_br) / 2;
     float tilew = game->config.tile_gl_width;
     float tileh = game->config.tile_gl_height;
     auto light_offset = light_pos - cached_light_pos;
-glTranslatef(-game->config.tile_gl_width / 2,
-             -game->config.tile_gl_height, 0);
 
+#ifdef DEBUG_LIGHT
+    blit_fbo_bind(FBO_MAIN);
+    color c = RED;
+    c.a = 150;
+    glcolor(c);
+    gl_blitline(blit_tl.x, blit_tl.y, blit_br.x, blit_tl.y);
+    gl_blitline(blit_tl.x, blit_tl.y, blit_tl.x, blit_br.y);
+    gl_blitline(blit_br.x, blit_br.y, blit_br.x, blit_tl.y);
+    gl_blitline(blit_br.x, blit_br.y, blit_tl.x, blit_br.y);
+    gl_blitline(blit_tl.x, blit_tl.y, light_pos.x, light_pos.y);
+    gl_blitline(blit_br.x, blit_tl.y, light_pos.x, light_pos.y);
+    gl_blitline(blit_tl.x, blit_br.y, light_pos.x, light_pos.y);
+    gl_blitline(blit_br.x, blit_br.y, light_pos.x, light_pos.y);
+
+    c = GREEN;
+    c.a = 150;
+    glcolor(c);
+
+    if (1) {
+#else
     if (!cached_gl_cmds.size()) {
+#endif
         auto c = col;
         auto red   = ((double)c.r) / 255.0;
         auto green = ((double)c.g) / 255.0;
@@ -268,6 +285,7 @@ glTranslatef(-game->config.tile_gl_width / 2,
             //
             push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
 
+
             //
             // Non player lights fade
             //
@@ -282,6 +300,9 @@ glTranslatef(-game->config.tile_gl_width / 2,
                 double p1y = light_pos.y + r->sinr * radius * tileh;
 
                 push_point(p1x, p1y, red, green, blue, alpha);
+#ifdef DEBUG_LIGHT
+                gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
+#endif
             }
 
             //
@@ -294,18 +315,29 @@ glTranslatef(-game->config.tile_gl_width / 2,
                 double p1y = light_pos.y + r->sinr * radius * tileh;
 
                 push_point(p1x, p1y, red, green, blue, alpha);
+#ifdef DEBUG_LIGHT
+                gl_blitline(light_pos.x, light_pos.y, p1x, p1y);
+#endif
             }
         }
 
         auto sz = bufp - gl_array_buf;
         cached_gl_cmds.resize(sz);
         std::copy(gl_array_buf, bufp, cached_gl_cmds.begin());
+#ifndef DEBUG_LIGHT
         blit_flush_triangle_fan();
+        blit_flush_triangle_fan();
+#endif
     } else {
         float *b = &(*cached_gl_cmds.begin());
         float *e = &(*cached_gl_cmds.end());
 
         glTranslatef(light_offset.x, light_offset.y, 0);
+
+        //
+        // Lights glow more with more blends
+        //
+        blit_flush_triangle_fan(b, e);
         blit_flush_triangle_fan(b, e);
         glTranslatef(-light_offset.x, -light_offset.y, 0);
     }
@@ -324,7 +356,7 @@ glTranslatef(-game->config.tile_gl_width / 2,
 
         if (!flicker) {
             flicker_radius = strength *
-                            (1.1 + ((double)(random_range(0, 100) / 1000.0)));
+                            (1.0 + ((double)(random_range(0, 10) / 1000.0)));
         }
         flicker++;
 
@@ -343,8 +375,6 @@ glTranslatef(-game->config.tile_gl_width / 2,
         glTranslatef(-light_offset.x, -light_offset.y, 0);
         blit_flush();
    }
-glTranslatef(game->config.tile_gl_width / 2,
-             game->config.tile_gl_height, 0);
 }
 
 void Light::render_point_light (void)
@@ -354,18 +384,42 @@ void Light::render_point_light (void)
     if (!owner->get_map_offset_coords(blit_tl, blit_br, tile)) {
         return;
     }
-    fpoint light_pos((blit_tl.x + blit_br.x) / 2,
-                     (blit_br.y + blit_br.y) / 2);
 
-    double lw = strength * game->config.tile_gl_width;
-    double lh = strength * game->config.tile_gl_height;
+    fpoint light_pos = (blit_tl + blit_br) / 2;
+    float tilew = game->config.tile_gl_width * strength;
+    float tileh = game->config.tile_gl_height * strength;
+
+    double lw = tilew;
+    double lh = tileh;
     double p1x = light_pos.x - lw;
     double p1y = light_pos.y - lh;
     double p2x = light_pos.x + lw;
     double p2y = light_pos.y + lh;
 
-    glcolor(col);
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+
+    blit_init();
+glcolor(col);
     blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+    blit_flush();
+#if 0
+    color c = RED;
+    c.a = 150;
+    glcolor(c);
+    gl_blitline(blit_tl.x, blit_tl.y, blit_br.x, blit_tl.y);
+    gl_blitline(blit_tl.x, blit_tl.y, blit_tl.x, blit_br.y);
+    gl_blitline(blit_br.x, blit_br.y, blit_br.x, blit_tl.y);
+    gl_blitline(blit_br.x, blit_br.y, blit_tl.x, blit_br.y);
+    gl_blitline(blit_tl.x, blit_tl.y, light_pos.x, light_pos.y);
+    gl_blitline(blit_br.x, blit_tl.y, light_pos.x, light_pos.y);
+    gl_blitline(blit_tl.x, blit_br.y, light_pos.x, light_pos.y);
+    gl_blitline(blit_br.x, blit_br.y, light_pos.x, light_pos.y);
+#endif
 }
 
 void Light::render (int fbo)
@@ -375,115 +429,19 @@ void Light::render (int fbo)
         light_overlay_texid = tex_get_gl_binding(light_overlay_tex);
     }
 
-    switch (quality) {
-    case LIGHT_QUALITY_LOW:
-        render_triangle_fans();
-        break;
-
-    case LIGHT_QUALITY_HIGH:
-        render_triangle_fans();
-        break;
-
-    case LIGHT_QUALITY_POINT:
-        render_point_light();
-        break;
-
-    default:
-        ERR("unknown light quality");
-    }
+    render_triangle_fans();
 }
 
-void lights_render_points (int minx, int miny, int maxx, int maxy, int fbo)
-{
-    bool have_low_quality = false;
-
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
-                auto l = t->get_light();
-                if (l->quality == LIGHT_QUALITY_POINT) {
-                    continue;
-                }
-
-                //
-                // Too far away from the player? Skip rendering.
-                //
-                if (level->player) {
-                    if (!thing_can_reach_player(point(l->at.x, l->at.y))) {
-                        continue;
-                    }
-                }
-
-                have_low_quality = true;
-            }
-        }
-    }
-
-    if (!have_low_quality) {
-        return;
-    }
-
-    blit_fbo_bind(fbo);
-    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE);
-    glcolor(WHITE);
-    blit_init();
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
-                auto l = t->get_light();
-                if (l->quality != LIGHT_QUALITY_LOW) {
-                    continue;
-                }
-#if 0
-                switch (random_range(0, 4)) {
-                    case 0:
-                        glBlendFunc(GL_DST_COLOR, GL_ONE);           // normal light redder lava
-                        break;
-                    case 1:
-                        glBlendFunc(GL_ONE_MINUS_SRC_ALPHA, GL_ONE); // normal glow
-                        break;
-                    case 2:
-                        glBlendFunc(GL_ONE, GL_ONE);                 // yellow glow
-                        break;
-                    case 3:
-                        glBlendFunc(GL_SRC_COLOR, GL_ONE);           // orange glow
-                        break;
-                }
-#endif
-                //
-                // Too far away from the player? Skip rendering.
-                //
-                if (level->player) {
-                    if (!thing_can_reach_player(point(l->at.x, l->at.y))) {
-                        continue;
-                    }
-                }
-
-                l->render(fbo);
-            }
-        }
-    }
-    blit_flush();
-    glcolor(WHITE);
-}
-
-void lights_render_high_quality (int minx, int miny,
-                                 int maxx, int maxy, int fbo)
+void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 {
     Lightp deferred_player_light = nullptr;
 
     light_dim = 1.0;
 
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
                 auto l = t->get_light();
-                if (l->quality != LIGHT_QUALITY_HIGH) {
-                    continue;
-                }
-
                 if (level->player && (l->owner == level->player)) {
                     deferred_player_light = l;
                     continue;
@@ -492,20 +450,19 @@ void lights_render_high_quality (int minx, int miny,
         }
     }
 
+    glcolor(WHITE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     if (deferred_player_light) {
         deferred_player_light->render(fbo);
     }
 
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR);
+    glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
                 auto l = t->get_light();
-                if (l->quality != LIGHT_QUALITY_HIGH) {
-                   continue;
-                }
-
                 if (level->player && (l->owner == level->player)) {
                     continue;
                 }

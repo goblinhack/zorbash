@@ -215,7 +215,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     if (my.t->has_light) {
         my.t->new_light(my.t->at,
                         my.t->monstp->light_strength,
-                        (LightQuality)my.t->monstp->light_quality,
                         my.t->monstp->light_col);
     }
 

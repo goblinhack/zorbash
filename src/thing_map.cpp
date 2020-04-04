@@ -57,26 +57,18 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
         { auto z = MAP_DEPTH_FLOOR;
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
-                    if (!level->is_visited(x, y)) {
-                        continue;
-                    }
                     FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                        glcolorfast(GRAY30);
+                        glcolorfast(GRAY50);
                         t->blit();
                     } FOR_ALL_THINGS_AT_DEPTH_END()
                 }
             }
         }
-        blit_flush();
 
-        blit_init();
         for (auto y = miny; y < maxy; y++) {
             auto z = MAP_DEPTH_WALLS;
             {_
                 for (auto x = minx; x < maxx; x++) {
-                    if (!level->is_visited(x, y)) {
-                        continue;
-                    }
                     FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                         glcolorfast(GRAY50);
                         t->blit();
@@ -196,10 +188,14 @@ void thing_render_all (void)
         //
         // Now overlay the high quality lights
         //
+#ifdef DEBUG_LIGHT
+        lights_render(light_minx, light_miny, light_maxx, light_maxy, 
+                      FBO_LIGHT_MERGED);
+#else
         blit_fbo_bind(FBO_LIGHT_MERGED);
         glClear(GL_COLOR_BUFFER_BIT);
-        lights_render_high_quality(
-          light_minx, light_miny, light_maxx, light_maxy, FBO_LIGHT_MERGED);
+        lights_render(light_minx, light_miny, light_maxx, light_maxy, 
+                      FBO_LIGHT_MERGED);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
@@ -211,7 +207,7 @@ void thing_render_all (void)
         glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_COLOR);
         blit_fbo(FBO_MAIN_BLACK_AND_WHITE);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+#endif
     } else {
         blit_fbo_bind(FBO_MAIN);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -221,8 +217,6 @@ void thing_render_all (void)
     //
     // If the cursor is too far away, warp it
     //
-    if (1) {
-        thing_cursor_reset_if_needed();
-        thing_cursor_find(minx, miny, maxx, maxy);
-    }
+    thing_cursor_reset_if_needed();
+    thing_cursor_find(minx, miny, maxx, maxy);
 }

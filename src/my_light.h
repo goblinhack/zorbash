@@ -46,7 +46,6 @@ public:
     std::vector<float>  cached_gl_cmds;
     fpoint              cached_light_pos;
 
-    LightQuality        quality;
     color               col;
 
     uint8_t             is_being_destroyed:1 {};
@@ -75,11 +74,7 @@ public:
 extern Lightp light_new(Thingp owner,
                         fpoint at,
                         double strength,
-                        LightQuality quality,
                         color col);
-extern void lights_render_points(int minx, int miny,
-                                 int maxx, int maxy, int fbo, int pass);
-extern void lights_render_high_quality(int minx, int miny,
-                                       int maxx, int maxy, int fbo);
+extern void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
 
 #endif // LIGHT_H
