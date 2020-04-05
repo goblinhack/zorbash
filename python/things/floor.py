@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def tp_init(name, tiles=[], left_tiles=[]):
+def tp_init(name, tiles=[], left1_tiles=[]):
     x = tp.Tp(name)
 
     x.set_is_cursor_can_hover_over(True)

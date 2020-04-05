@@ -26,7 +26,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_outline = 0;
     }
 
-    tiles = tp_left_tiles(tpp);
+    tiles = tp_left1_tiles(tpp);
     auto tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_left = tile->global_index;
@@ -34,7 +34,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_left = 0;
     }
 
-    tiles = tp_right_tiles(tpp);
+    tiles = tp_right1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_right = tile->global_index;
@@ -42,7 +42,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_right = 0;
     }
 
-    tiles = tp_top_tiles(tpp);
+    tiles = tp_top1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_top = tile->global_index;
@@ -50,7 +50,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_top = 0;
     }
 
-    tiles = tp_bot_tiles(tpp);
+    tiles = tp_bot1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_bot = tile->global_index;
@@ -58,7 +58,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_bot = 0;
     }
 
-    tiles = tp_tl_tiles(tpp);
+    tiles = tp_tl1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_tl = tile->global_index;
@@ -66,7 +66,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_tl = 0;
     }
 
-    tiles = tp_tr_tiles(tpp);
+    tiles = tp_tr1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_tr = tile->global_index;
@@ -74,7 +74,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_tr = 0;
     }
 
-    tiles = tp_br_tiles(tpp);
+    tiles = tp_br1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_br = tile->global_index;
@@ -82,7 +82,7 @@ void Thing::get_tiles(ThingTiles *out)
         out->tile_br = 0;
     }
 
-    tiles = tp_bl_tiles(tpp);
+    tiles = tp_bl1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tile_bl = tile->global_index;

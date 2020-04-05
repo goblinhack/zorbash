@@ -325,6 +325,30 @@ def init_16x16():
             "wall_deco1.br.1", "wall_deco1.br.2", "wall_deco1.br.3",
             "wall_deco1.br.4", "wall_deco1.br.5", "wall_deco1.br.6",
             ########################################################
+            # shadow deco
+            ########################################################
+            "wall_shadow_deco1.tl.1", "wall_shadow_deco1.tl.2", "wall_shadow_deco1.tl.3",
+            "wall_shadow_deco1.tl.4", "wall_shadow_deco1.tl.5", "wall_shadow_deco1.tl.6",
+            "wall_shadow_deco1.top.1", "wall_shadow_deco1.top.2", "wall_shadow_deco1.top.3",
+            "wall_shadow_deco1.top.4", "wall_shadow_deco1.top.5", "wall_shadow_deco1.top.6",
+            "wall_shadow_deco1.top.7",
+            "wall_shadow_deco1.tr.1", "wall_shadow_deco1.tr.2", "wall_shadow_deco1.tr.3",
+            "wall_shadow_deco1.tr.4", "wall_shadow_deco1.tr.5", "wall_shadow_deco1.tr.6",
+            #-------------------------------------------------------
+            "wall_shadow_deco1.left.1", "wall_shadow_deco1.left.2", "wall_shadow_deco1.left.3",
+            "wall_shadow_deco1.left.4", "wall_shadow_deco1.left.5", "wall_shadow_deco1.left.6",
+            "", "", "", "", "", "", "",
+            "wall_shadow_deco1.right.1", "wall_shadow_deco1.right.2", "wall_shadow_deco1.right.3",
+            "wall_shadow_deco1.right.4", "wall_shadow_deco1.right.5", "wall_shadow_deco1.right.6",
+            #-------------------------------------------------------
+            "wall_shadow_deco1.bl.1", "wall_shadow_deco1.bl.2", "wall_shadow_deco1.bl.3",
+            "wall_shadow_deco1.bl.4", "wall_shadow_deco1.bl.5", "wall_shadow_deco1.bl.6",
+            "wall_shadow_deco1.bot.1", "wall_shadow_deco1.bot.2", "wall_shadow_deco1.bot.3",
+            "wall_shadow_deco1.bot.4", "wall_shadow_deco1.bot.5", "wall_shadow_deco1.bot.6",
+            "wall_shadow_deco1.bot.7",
+            "wall_shadow_deco1.br.1", "wall_shadow_deco1.br.2", "wall_shadow_deco1.br.3",
+            "wall_shadow_deco1.br.4", "wall_shadow_deco1.br.5", "wall_shadow_deco1.br.6",
+            ########################################################
     ]
 
     zx.tile_load_arr_color_and_black_and_white(
