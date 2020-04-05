@@ -4,14 +4,14 @@ import tp
 
 def tp_init(name,
             tiles=[],
-            left_tiles=[],
-            right_tiles=[],
-            top_tiles=[],
-            bot_tiles=[],
-            tl_tiles=[],
-            tr_tiles=[],
-            bl_tiles=[],
-            br_tiles=[]):
+            left1_tiles=[],
+            right1_tiles=[],
+            top1_tiles=[],
+            bot1_tiles=[],
+            tl1_tiles=[],
+            tr1_tiles=[],
+            bl1_tiles=[],
+            br1_tiles=[]):
 
     x = tp.Tp(name)
 
@@ -35,50 +35,50 @@ def tp_init(name,
     else:
         x.set_tile(tile=name)
 
-    if left_tiles is not None:
-        for t in left_tiles:
+    if left1_tiles is not None:
+        for t in left1_tiles:
             x.set_tile_left(t)
     else:
         x.set_tile_left(tile_left=name)
 
-    if right_tiles is not None:
-        for t in right_tiles:
+    if right1_tiles is not None:
+        for t in right1_tiles:
             x.set_tile_right(t)
     else:
         x.set_tile_right(tile_right=name)
 
-    if top_tiles is not None:
-        for t in top_tiles:
+    if top1_tiles is not None:
+        for t in top1_tiles:
             x.set_tile_top(t)
     else:
         x.set_tile_top(tile_top=name)
 
-    if bot_tiles is not None:
-        for t in bot_tiles:
+    if bot1_tiles is not None:
+        for t in bot1_tiles:
             x.set_tile_bot(t)
     else:
         x.set_tile_bot(tile_bot=name)
 
-    if tl_tiles is not None:
-        for t in tl_tiles:
+    if tl1_tiles is not None:
+        for t in tl1_tiles:
             x.set_tile_tl(t)
     else:
         x.set_tile_tl(tile_tl=name)
 
-    if tr_tiles is not None:
-        for t in tr_tiles:
+    if tr1_tiles is not None:
+        for t in tr1_tiles:
             x.set_tile_tr(t)
     else:
         x.set_tile_tr(tile_tr=name)
 
-    if bl_tiles is not None:
-        for t in bl_tiles:
+    if bl1_tiles is not None:
+        for t in bl1_tiles:
             x.set_tile_bl(t)
     else:
         x.set_tile_bl(tile_bl=name)
 
-    if br_tiles is not None:
-        for t in br_tiles:
+    if br1_tiles is not None:
+        for t in br1_tiles:
             x.set_tile_br(t)
     else:
         x.set_tile_br(tile_br=name)
@@ -92,30 +92,30 @@ def init():
                           "wall1.9", "wall1.10", "wall1.11", "wall1.12",
                           "wall1.13", "wall1.14", "wall1.15", "wall1.16",
                           "wall1.17", "wall1.18", "wall1.19", ],
-            left_tiles=[  "wall_deco1.left.1", "wall_deco1.left.2",
+            left1_tiles=[  "wall_deco1.left.1", "wall_deco1.left.2",
                           "wall_deco1.left.3", "wall_deco1.left.4",
                           "wall_deco1.left.5", "wall_deco1.left.6", ],
-            right_tiles=[ "wall_deco1.right.1", "wall_deco1.right.2",
+            right1_tiles=[ "wall_deco1.right.1", "wall_deco1.right.2",
                           "wall_deco1.right.3", "wall_deco1.right.4",
                           "wall_deco1.right.5", "wall_deco1.right.6", ],
-            top_tiles=[   "wall_deco1.top.1", "wall_deco1.top.2",
+            top1_tiles=[   "wall_deco1.top.1", "wall_deco1.top.2",
                           "wall_deco1.top.3", "wall_deco1.top.4",
                           "wall_deco1.top.5", "wall_deco1.top.6",
                           "wall_deco1.top.7", ],
-            bot_tiles=[   "wall_deco1.bot.1", "wall_deco1.bot.2",
+            bot1_tiles=[   "wall_deco1.bot.1", "wall_deco1.bot.2",
                           "wall_deco1.bot.3", "wall_deco1.bot.4",
                           "wall_deco1.bot.5", "wall_deco1.bot.6",
                           "wall_deco1.bot.7", ],
-            tl_tiles=[    "wall_deco1.tl.1", "wall_deco1.tl.2",
+            tl1_tiles=[    "wall_deco1.tl.1", "wall_deco1.tl.2",
                           "wall_deco1.tl.3", "wall_deco1.tl.4",
                           "wall_deco1.tl.5", "wall_deco1.tl.6", ],
-            tr_tiles=[    "wall_deco1.tr.1", "wall_deco1.tr.2",
+            tr1_tiles=[    "wall_deco1.tr.1", "wall_deco1.tr.2",
                           "wall_deco1.tr.3", "wall_deco1.tr.4",
                           "wall_deco1.tr.5", "wall_deco1.tr.6", ],
-            br_tiles=[    "wall_deco1.br.1", "wall_deco1.br.2",
+            br1_tiles=[    "wall_deco1.br.1", "wall_deco1.br.2",
                           "wall_deco1.br.3", "wall_deco1.br.4",
                           "wall_deco1.br.5", "wall_deco1.br.6", ],
-            bl_tiles=[    "wall_deco1.bl.1", "wall_deco1.bl.2",
+            bl1_tiles=[    "wall_deco1.bl.1", "wall_deco1.bl.2",
                           "wall_deco1.bl.3", "wall_deco1.bl.4",
                           "wall_deco1.bl.5", "wall_deco1.bl.6", ])
 

@@ -484,28 +484,28 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->tiles;
         break;
     case THING_DIR_DOWN:
-        tiles = &tp->bot_tiles;
+        tiles = &tp->bot1_tiles;
         break;
     case THING_DIR_UP:
-        tiles = &tp->top_tiles;
+        tiles = &tp->top1_tiles;
         break;
     case THING_DIR_LEFT:
-        tiles = &tp->left_tiles;
+        tiles = &tp->left1_tiles;
         break;
     case THING_DIR_RIGHT:
-        tiles = &tp->right_tiles;
+        tiles = &tp->right1_tiles;
         break;
     case THING_DIR_TL:
-        tiles = &tp->tl_tiles;
+        tiles = &tp->tl1_tiles;
         break;
     case THING_DIR_BL:
-        tiles = &tp->bl_tiles;
+        tiles = &tp->bl1_tiles;
         break;
     case THING_DIR_TR:
-        tiles = &tp->tr_tiles;
+        tiles = &tp->tr1_tiles;
         break;
     case THING_DIR_BR:
-        tiles = &tp->br_tiles;
+        tiles = &tp->br1_tiles;
         break;
     }
 
@@ -522,16 +522,16 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->tiles;
     }
     if (is_join_left) {
-        tiles = &tp->left_tiles;
+        tiles = &tp->left1_tiles;
     }
     if (is_join_right) {
-        tiles = &tp->right_tiles;
+        tiles = &tp->right1_tiles;
     }
     if (is_join_top) {
-        tiles = &tp->top_tiles;
+        tiles = &tp->top1_tiles;
     }
     if (is_join_bot) {
-        tiles = &tp->bot_tiles;
+        tiles = &tp->bot1_tiles;
     }
     if (is_join_l90) {
         tiles = &tp->l90_tiles;
