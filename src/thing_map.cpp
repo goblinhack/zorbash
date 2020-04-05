@@ -54,22 +54,19 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
     //
     if (thing_map_black_and_white) {
         blit_init();
-        { auto z = MAP_DEPTH_FLOOR;
+        for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
                     FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                        glcolorfast(GRAY50);
-                        t->blit();
-                    } FOR_ALL_THINGS_AT_DEPTH_END()
-                }
-            }
-        }
-
-        for (auto y = miny; y < maxy; y++) {
-            auto z = MAP_DEPTH_WALLS;
-            {_
-                for (auto x = minx; x < maxx; x++) {
-                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                        if (t->is_monst()) {
+                            continue;
+                        }
+                        if (t->owner_get()) {
+                            continue;
+                        }
+                        if (t->get_light()) {
+                            continue;
+                        }
                         glcolorfast(GRAY50);
                         t->blit();
                     } FOR_ALL_THINGS_AT_DEPTH_END()

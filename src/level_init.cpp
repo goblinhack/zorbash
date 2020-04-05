@@ -111,8 +111,8 @@ void Level::init (point3d at, int seed_in)
     level_place_remaining_floor(dungeon);
     if (errored) { return; }
     if (0) {
-        level_place_floor_deco(dungeon);
-        if (errored) { return; }
+    level_place_floor_deco(dungeon);
+    if (errored) { return; }
     }
     level_place_wall_deco(dungeon);
 
@@ -430,26 +430,24 @@ static void level_place_floor_deco (Dungeonp d)
                 continue;
             }
 
-            if (random_range(0, 100) < 95) {
+            if (random_range(0, 100) < 15) {
                 continue;
             }
 
             if (d->is_food(x, y)        ||
                 d->is_door(x, y)        ||
                 d->is_key(x, y)         ||
+                d->is_wall(x, y)        ||
                 d->is_secret_door(x, y) ||
                 d->is_monst(x, y)) {
                 continue;
             }
 
-            if (!d->is_floor(x - 1, y) ||
-                !d->is_floor(x + 1, y) ||
-                !d->is_floor(x, y - 1) ||
-                !d->is_floor(x, y + 1) ||
-                !d->is_floor(x - 1, y - 1) ||
-                !d->is_floor(x + 1, y - 1) ||
-                !d->is_floor(x - 1, y + 1) ||
-                !d->is_floor(x + 1, y + 1)) {
+            if (!d->is_wall(x, y + 1)) {
+                continue;
+            }
+
+            if (!d->is_floor(x, y - 1)) {
                 continue;
             }
 
