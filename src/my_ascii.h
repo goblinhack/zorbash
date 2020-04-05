@@ -82,8 +82,8 @@ void ascii_putf__(int x, int y, color fg, color bg, std::wstring const& text);
 
 void ascii_display(void);
 
-int ascii_tp_tile_tl(int x, int y, fpoint *);
-int ascii_tp_tile_br(int x, int y, fpoint *);
+int ascii_tp_tl1_tile(int x, int y, fpoint *);
+int ascii_tp_br1_tile(int x, int y, fpoint *);
 int ascii_tp_tile_mid(int x, int y, fpoint *);
 
 void ascii_put_bg_square(int tlx, int tly, int brx, int bry,

@@ -8,44 +8,6 @@
 #include "my_font.h"
 #include "my_level.h"
 
-void Thing::blit_wall_shadow (Tilep tile, fpoint &tl, fpoint &br)
-{_
-    int x = (int) at.x;
-    int y = (int) at.y;
-
-    if (unlikely(x <= 0) ||
-        unlikely(y <= 0) ||
-        unlikely(x >= MAP_WIDTH - 1) ||
-        unlikely(y >= MAP_HEIGHT - 1)) {
-        return;
-    }
-
-    color bright = GRAY10;
-    color dark = BLACK;
-    dark.a = 100;
-
-    if (!level->is_wall(x, y + 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        double dh = game->config.tile_gl_height / 2;
-        tl2.y += dh;
-        br2.y += dh;
-        tile_blit_colored(tile, tl2, br2, bright, bright, dark, dark);
-    }
-
-    if (!level->is_wall(x + 1, y)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
-        double dh = game->config.tile_gl_height / 2;
-        double dw = game->config.tile_gl_width / 2;
-        tl2.x += dw;
-        br2.x += dw;
-        tl2.y += dh;
-        br2.y += dh;
-        tile_blit_colored(tile, tl2, br2, bright, dark, bright, dark);
-    }
-}
-
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {_
     double dw = game->config.one_pixel_gl_width * 4;
@@ -61,36 +23,36 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         return;
     }
 
-    if (tiles->tile_top && !level->is_wall(x, y - 1)) {
+    if (tiles->top1_tile && !level->is_wall(x, y - 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tiles->tile_top, tl2, br2);
+        tile_blit(tiles->top1_tile, tl2, br2);
     }
 
-    if (tiles->tile_bot && !level->is_wall(x, y + 1)) {
+    if (tiles->bot1_tile && !level->is_wall(x, y + 1)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.y += dh;
         br2.y += dh;
-        tile_blit(tiles->tile_bot, tl2, br2);
+        tile_blit(tiles->bot1_tile, tl2, br2);
     }
 
-    if (tiles->tile_left && !level->is_wall(x - 1, y)) {
+    if (tiles->left1_tile && !level->is_wall(x - 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        tile_blit(tiles->tile_left, tl2, br2);
+        tile_blit(tiles->left1_tile, tl2, br2);
     }
 
-    if (tiles->tile_right && !level->is_wall(x + 1, y)) {
+    if (tiles->right1_tile && !level->is_wall(x + 1, y)) {
         fpoint tl2 = tl;
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        tile_blit(tiles->tile_right, tl2, br2);
+        tile_blit(tiles->right1_tile, tl2, br2);
     }
 
     //
@@ -98,7 +60,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // |...
     //
-    if (tiles->tile_tl &&
+    if (tiles->tl1_tile &&
         !level->is_wall(x - 1, y - 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y - 1)) {
@@ -108,7 +70,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x -= dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tiles->tile_tl, tl2, br2);
+        tile_blit(tiles->tl1_tile, tl2, br2);
     }
 
     //
@@ -116,7 +78,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ...|
     //
-    if (tiles->tile_tr &&
+    if (tiles->tr1_tile &&
         !level->is_wall(x + 1, y - 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y - 1)) {
@@ -126,7 +88,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         br2.x += dw;
         tl2.y -= dh;
         br2.y -= dh;
-        tile_blit(tiles->tile_tr, tl2, br2);
+        tile_blit(tiles->tr1_tile, tl2, br2);
     }
 
     //
@@ -134,7 +96,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // |...
     // X---
     //
-    if (tiles->tile_bl &&
+    if (tiles->bl1_tile &&
         !level->is_wall(x - 1, y + 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y + 1)) {
@@ -142,9 +104,9 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit(tiles->tile_bl, tl2, br2);
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tiles->bl1_tile, tl2, br2);
     }
 
     //
@@ -152,7 +114,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     // ...|
     // ---X
     //
-    if (tiles->tile_br &&
+    if (tiles->br1_tile &&
         !level->is_wall(x + 1, y + 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y + 1)) {
@@ -160,9 +122,129 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         fpoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
-        //tl2.y += dh;
-        //br2.y += dh;
-        tile_blit(tiles->tile_br, tl2, br2);
+        tl2.y += dh;
+        br2.y += dh;
+        tile_blit(tiles->br1_tile, tl2, br2);
+    }
+}
+
+void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
+{_
+    double dw = game->config.one_pixel_gl_width * 4;
+    double dh = game->config.one_pixel_gl_height * 4;
+    double tw = game->config.tile_gl_width;
+    double th = game->config.tile_gl_height;
+
+    int x = (int) at.x;
+    int y = (int) at.y;
+
+    if (unlikely(x <= 0) ||
+        unlikely(y <= 0) ||
+        unlikely(x >= MAP_WIDTH - 1) ||
+        unlikely(y >= MAP_HEIGHT - 1)) {
+        return;
+    }
+
+    if (tiles->top2_tile && !level->is_wall(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tiles->top2_tile, tl2, br2);
+    }
+
+    if (tiles->bot2_tile && !level->is_wall(x, y + 1) &&
+                            level->is_wall(x - 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y += th;
+        br2.y += th;
+        tile_blit(tiles->bot2_tile, tl2, br2);
+    }
+
+    if (tiles->left2_tile && !level->is_wall(x - 1, y)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tile_blit(tiles->left2_tile, tl2, br2);
+    }
+
+    if (tiles->right2_tile && !level->is_wall(x + 1, y) &&
+                               level->is_wall(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += tw;
+        br2.x += tw;
+        tile_blit(tiles->right2_tile, tl2, br2);
+    }
+
+    //
+    // X---
+    // |...
+    // |...
+    //
+    if (tiles->tl2_tile &&
+        !level->is_wall(x - 1, y - 1) &&
+        !level->is_wall(x - 1, y) &&
+        !level->is_wall(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x -= dw;
+        br2.x -= dw;
+        tl2.y -= dh;
+        br2.y -= dh;
+        tile_blit(tiles->tl2_tile, tl2, br2);
+    }
+
+    //
+    // ---X
+    // ...|
+    // ...|
+    //
+    if (tiles->tr2_tile &&
+        !level->is_wall(x + 1, y - 1) &&
+        !level->is_wall(x + 1, y) &&
+        !level->is_wall(x, y - 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.x += tw;
+        br2.x += tw;
+        tile_blit(tiles->tr2_tile, tl2, br2);
+    }
+
+    //
+    // |...
+    // |...
+    // X---
+    //
+    if (tiles->bl2_tile &&
+        !level->is_wall(x - 1, y + 1) &&
+        !level->is_wall(x - 1, y) &&
+        !level->is_wall(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y += th;
+        br2.y += th;
+        tile_blit(tiles->bl2_tile, tl2, br2);
+    }
+
+    //
+    // ...|
+    // ...|
+    // ---X
+    //
+    if (tiles->br2_tile &&
+        !level->is_wall(x + 1, y + 1) &&
+        !level->is_wall(x + 1, y) &&
+        !level->is_wall(x, y + 1)) {
+        fpoint tl2 = tl;
+        fpoint br2 = br;
+        tl2.y += th;
+        br2.y += th;
+        tl2.x += tw;
+        br2.x += tw;
+        tile_blit(tiles->br2_tile, tl2, br2);
     }
 }
 
@@ -680,10 +762,6 @@ void Thing::blit (void)
         glcolor(c);
     }
 
-    if (is_wall()) {
-        blit_wall_shadow(tile, blit_tl, blit_br);
-    }
-
     if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
         tile_blit_outline(tile, blit_tl, blit_br);
     } else {
@@ -691,13 +769,12 @@ void Thing::blit (void)
     }
 
     if (likely(!game->config.gfx_show_hidden)) {
-        if (!thing_map_black_and_white) {
-            ThingTiles tiles;
-            get_tiles(&tiles);
+        ThingTiles tiles;
+        get_tiles(&tiles);
 
-            if (is_wall()) {
-                blit_wall_cladding(blit_tl, blit_br, &tiles);
-            }
+        if (is_wall()) {
+            blit_wall_shadow(blit_tl, blit_br, &tiles);
+            blit_wall_cladding(blit_tl, blit_br, &tiles);
         }
     }
 

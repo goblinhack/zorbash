@@ -29,65 +29,129 @@ void Thing::get_tiles(ThingTiles *out)
     tiles = tp_left1_tiles(tpp);
     auto tile = tile_n(tiles, n++);
     if (tile) {
-        out->tile_left = tile->global_index;
+        out->left1_tile = tile->global_index;
     } else {
-        out->tile_left = 0;
+        out->left1_tile = 0;
     }
 
     tiles = tp_right1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
-        out->tile_right = tile->global_index;
+        out->right1_tile = tile->global_index;
     } else {
-        out->tile_right = 0;
+        out->right1_tile = 0;
     }
 
     tiles = tp_top1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
-        out->tile_top = tile->global_index;
+        out->top1_tile = tile->global_index;
     } else {
-        out->tile_top = 0;
+        out->top1_tile = 0;
     }
 
     tiles = tp_bot1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
-        out->tile_bot = tile->global_index;
+        out->bot1_tile = tile->global_index;
     } else {
-        out->tile_bot = 0;
+        out->bot1_tile = 0;
     }
 
     tiles = tp_tl1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
-        out->tile_tl = tile->global_index;
+        out->tl1_tile = tile->global_index;
     } else {
-        out->tile_tl = 0;
+        out->tl1_tile = 0;
     }
 
     tiles = tp_tr1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
-        out->tile_tr = tile->global_index;
+        out->tr1_tile = tile->global_index;
     } else {
-        out->tile_tr = 0;
+        out->tr1_tile = 0;
     }
 
     tiles = tp_br1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
-        out->tile_br = tile->global_index;
+        out->br1_tile = tile->global_index;
     } else {
-        out->tile_br = 0;
+        out->br1_tile = 0;
     }
 
     tiles = tp_bl1_tiles(tpp);
     tile = tile_n(tiles, n++);
     if (tile) {
-        out->tile_bl = tile->global_index;
+        out->bl1_tile = tile->global_index;
     } else {
-        out->tile_bl = 0;
+        out->bl1_tile = 0;
+    }
+
+    tiles = tp_left2_tiles(tpp);
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->left2_tile = tile->global_index;
+    } else {
+        out->left2_tile = 0;
+    }
+
+    tiles = tp_right2_tiles(tpp);
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->right2_tile = tile->global_index;
+    } else {
+        out->right2_tile = 0;
+    }
+
+    tiles = tp_top2_tiles(tpp);
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->top2_tile = tile->global_index;
+    } else {
+        out->top2_tile = 0;
+    }
+
+    tiles = tp_bot2_tiles(tpp);
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->bot2_tile = tile->global_index;
+    } else {
+        out->bot2_tile = 0;
+    }
+
+    tiles = tp_tl2_tiles(tpp);
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->tl2_tile = tile->global_index;
+    } else {
+        out->tl2_tile = 0;
+    }
+
+    tiles = tp_tr2_tiles(tpp);
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->tr2_tile = tile->global_index;
+    } else {
+        out->tr2_tile = 0;
+    }
+
+    tiles = tp_br2_tiles(tpp);
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->br2_tile = tile->global_index;
+    } else {
+        out->br2_tile = 0;
+    }
+
+    tiles = tp_bl2_tiles(tpp);
+    tile = tile_n(tiles, n++);
+    if (tile) {
+        out->bl2_tile = tile->global_index;
+    } else {
+        out->bl2_tile = 0;
     }
 }
 

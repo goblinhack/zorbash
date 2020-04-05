@@ -825,8 +825,8 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
     uint16_t fx;
     uint16_t fy;
 
-    fpoint tile_tl;
-    fpoint tile_br;
+    fpoint tl1_tile;
+    fpoint br1_tile;
 
     //
     // Preload all the animation tiles for fluids.
@@ -923,9 +923,9 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
             continue;
         }
 
-        tile_tl.y = tl_y + fy * tile_pix_h;
-        tile_br.x = tile_tl.x + tile_pix_w;
-        tile_br.y = tile_tl.y + tile_pix_h;
+        tl1_tile.y = tl_y + fy * tile_pix_h;
+        br1_tile.x = tl1_tile.x + tile_pix_w;
+        br1_tile.y = tl1_tile.y + tile_pix_h;
 
         for (fx = minx; fx < maxx - 1; fx++) {
 
@@ -934,10 +934,10 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
                 continue;
             }
 
-            tile_tl.x = tl_x + fx * tile_pix_w;
-            tile_tl.y = tl_y + fy * tile_pix_h;
-            tile_br.x = tile_tl.x + tile_pix_w;
-            tile_br.y = tile_tl.y + tile_pix_h;
+            tl1_tile.x = tl_x + fx * tile_pix_w;
+            tl1_tile.y = tl_y + fy * tile_pix_h;
+            br1_tile.x = tl1_tile.x + tile_pix_w;
+            br1_tile.y = tl1_tile.y + tile_pix_h;
 
             //
             // Tiles on the sureface have a sinusoidal wave effect.
@@ -951,7 +951,7 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
                     height = 1;
                 }
 
-                tile_tl.y = tile_br.y - dy * ((double)height);
+                tl1_tile.y = br1_tile.y - dy * ((double)height);
 
                 bg_color_tl.a = 255;
                 bg_color_tr.a = 255;
@@ -986,10 +986,10 @@ void fluid_render (Widp w, int minx, int miny, int maxx, int maxy)
                          ty2,
                          tx2,
                          ty1,
-                         tile_tl.x,
-                         tile_br.y,
-                         tile_br.x,
-                         tile_tl.y,
+                         tl1_tile.x,
+                         br1_tile.y,
+                         br1_tile.x,
+                         tl1_tile.y,
                          bg_color_tl,
                          bg_color_tr,
                          bg_color_bl,
