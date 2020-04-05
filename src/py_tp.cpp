@@ -293,7 +293,8 @@ done:                                                                           
 static PyObject *tp_set_tile_dir (PyObject *obj,
                                   PyObject *args,
                                   PyObject *keywds,
-                                  int dir)
+                                  int dir,
+                                  int level)
 {
     PyObject *py_class = 0;
     char *tp_name = 0;
@@ -484,28 +485,76 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tiles = &tp->tiles;
         break;
     case THING_DIR_DOWN:
-        tiles = &tp->bot1_tiles;
+        if (level == 1) {
+            tiles = &tp->bot1_tiles;
+        } else if (level == 2) {
+            tiles = &tp->bot2_tiles;
+        } else {
+            DIE("bug");
+        }
         break;
     case THING_DIR_UP:
-        tiles = &tp->top1_tiles;
+        if (level == 1) {
+            tiles = &tp->top1_tiles;
+        } else if (level == 2) {
+            tiles = &tp->top2_tiles;
+        } else {
+            DIE("bug");
+        }
         break;
     case THING_DIR_LEFT:
-        tiles = &tp->left1_tiles;
+        if (level == 1) {
+            tiles = &tp->left1_tiles;
+        } else if (level == 2) {
+            tiles = &tp->left2_tiles;
+        } else {
+            DIE("bug");
+        }
         break;
     case THING_DIR_RIGHT:
-        tiles = &tp->right1_tiles;
+        if (level == 1) {
+            tiles = &tp->right1_tiles;
+        } else if (level == 2) {
+            tiles = &tp->right2_tiles;
+        } else {
+            DIE("bug");
+        }
         break;
     case THING_DIR_TL:
-        tiles = &tp->tl1_tiles;
+        if (level == 1) {
+            tiles = &tp->tl1_tiles;
+        } else if (level == 2) {
+            tiles = &tp->tl2_tiles;
+        } else {
+            DIE("bug");
+        }
         break;
     case THING_DIR_BL:
-        tiles = &tp->bl1_tiles;
+        if (level == 1) {
+            tiles = &tp->bl1_tiles;
+        } else if (level == 2) {
+            tiles = &tp->bl2_tiles;
+        } else {
+            DIE("bug");
+        }
         break;
     case THING_DIR_TR:
-        tiles = &tp->tr1_tiles;
+        if (level == 1) {
+            tiles = &tp->tr1_tiles;
+        } else if (level == 2) {
+            tiles = &tp->tr2_tiles;
+        } else {
+            DIE("bug");
+        }
         break;
     case THING_DIR_BR:
-        tiles = &tp->br1_tiles;
+        if (level == 1) {
+            tiles = &tp->br1_tiles;
+        } else if (level == 2) {
+            tiles = &tp->br2_tiles;
+        } else {
+            DIE("bug");
+        }
         break;
     }
 
@@ -678,39 +727,71 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
 
 PyObject *tp_set_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_NONE, 1));
 }
-PyObject *tp_set_tile_top (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_top1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP, 1));
 }
-PyObject *tp_set_tile_bot (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_bot1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 1));
 }
-PyObject *tp_set_tile_left (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_left1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT, 1));
 }
-PyObject *tp_set_tile_right (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_right1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT, 1));
 }
-PyObject *tp_set_tile_tl (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tl1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL, 1));
 }
-PyObject *tp_set_tile_tr (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_tr1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR, 1));
 }
-PyObject *tp_set_tile_bl (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_bl1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL, 1));
 }
-PyObject *tp_set_tile_br (PyObject *obj, PyObject *args, PyObject *keywds)
+PyObject *tp_set_br1_tile (PyObject *obj, PyObject *args, PyObject *keywds)
 {_
-    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR));
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR, 1));
+}
+PyObject *tp_set_top2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_UP, 2));
+}
+PyObject *tp_set_bot2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_DOWN, 2));
+}
+PyObject *tp_set_left2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_LEFT, 2));
+}
+PyObject *tp_set_right2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_RIGHT, 2));
+}
+PyObject *tp_set_tl2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TL, 2));
+}
+PyObject *tp_set_tr2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_TR, 2));
+}
+PyObject *tp_set_bl2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BL, 2));
+}
+PyObject *tp_set_br2_tile (PyObject *obj, PyObject *args, PyObject *keywds)
+{_
+    return (tp_set_tile_dir(obj, args, keywds, THING_DIR_BR, 2));
 }
 
 TP_BODY_SET_DOUBLE(collision_radius)

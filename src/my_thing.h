@@ -19,15 +19,23 @@ typedef std::unordered_map< uint32_t, Thingp > Things;
 #include "my_thing_ai.h"
 
 typedef struct {
-    uint16_t tile_bl;
-    uint16_t tile_bot;
-    uint16_t tile_br;
-    uint16_t tile_left;
-    uint16_t tile_right;
-    uint16_t tile_tl;
-    uint16_t tile_top;
-    uint16_t tile_tr;
     uint16_t tile_outline;
+    uint16_t bl1_tile;
+    uint16_t bot1_tile;
+    uint16_t br1_tile;
+    uint16_t left1_tile;
+    uint16_t right1_tile;
+    uint16_t tl1_tile;
+    uint16_t top1_tile;
+    uint16_t tr1_tile;
+    uint16_t bl2_tile;
+    uint16_t bot2_tile;
+    uint16_t br2_tile;
+    uint16_t left2_tile;
+    uint16_t right2_tile;
+    uint16_t tl2_tile;
+    uint16_t top2_tile;
+    uint16_t tr2_tile;
 } ThingTiles;
 
 typedef enum {
@@ -770,10 +778,9 @@ public:
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
-    void blit_rock_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void blit_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
-    void blit_wall_shadow(Tilep, fpoint &tl, fpoint &br);
+    void blit_wall_shadow(fpoint &tl, fpoint &br, const ThingTiles *tiles);
     void lunge(fpoint tt);
     void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);
     void fadeup(double fadeup_height, double fadeup_fade, timestamp_t ms);
