@@ -54,6 +54,7 @@ int joy_index;
 int joy_naxes;
 int joy_buttons;
 int joy_balls;
+double ascii_size = 16;
 
 SDL_Window *window; // Our window handle
 SDL_GLContext context; // Our opengl context handle
@@ -215,12 +216,16 @@ uint8_t sdl_init (void)
 
     sdl_list_video_size();
 
+//game->config.inner_pix_width = 720;
+//game->config.inner_pix_height = 450;
+game->config.gfx_zoom = 4;
+
     //
     // If we have a saved setting, use that.
     //
-    if (game->config.video_pix_width && game->config.video_pix_height) {
-        video_width = game->config.video_pix_width;
-        video_height = game->config.video_pix_height;
+    if (game->config.outer_pix_width && game->config.outer_pix_height) {
+        video_width = game->config.outer_pix_width;
+        video_height = game->config.outer_pix_height;
     } else {
         //
         // Else guess.
@@ -228,18 +233,18 @@ uint8_t sdl_init (void)
         SDL_DisplayMode mode;
         SDL_GetCurrentDisplayMode(0, &mode);
 
-        game->config.video_pix_width = mode.w;
-        game->config.video_pix_height = mode.h;
+        game->config.outer_pix_width = mode.w;
+        game->config.outer_pix_height = mode.h;
 
-        video_width = game->config.video_pix_width;
-        video_height = game->config.video_pix_height;
+        video_width = game->config.outer_pix_width;
+        video_height = game->config.outer_pix_height;
     }
 
-    game->config.video_gl_width = 1.0;
-    game->config.video_gl_height = 1.0;
+    game->config.inner_pix_width = video_width;
+    game->config.inner_pix_height = video_height;
 
-    float tiles_across = game->config.video_pix_width / TILE_WIDTH;
-    float tiles_down = game->config.video_pix_height / TILE_HEIGHT;
+    float tiles_across = game->config.inner_pix_width / TILE_WIDTH;
+    float tiles_down = game->config.inner_pix_height / TILE_HEIGHT;
 
     tiles_across /= (float)game->config.gfx_zoom;
     tiles_down /= (float)game->config.gfx_zoom;
@@ -247,8 +252,8 @@ uint8_t sdl_init (void)
     TILES_ACROSS = (int)tiles_across;
     TILES_DOWN = (int)tiles_down;
 
-    game->config.one_pixel_gl_width = 1.0 / game->config.video_pix_width;
-    game->config.one_pixel_gl_height = 1.0 / game->config.video_pix_height;
+    game->config.one_pixel_gl_width = 1.0;
+    game->config.one_pixel_gl_height = 1.0;
 
     game->config.tile_gl_width =
         game->config.one_pixel_gl_width * TILE_WIDTH * game->config.gfx_zoom;
@@ -256,20 +261,22 @@ uint8_t sdl_init (void)
         game->config.one_pixel_gl_height * TILE_HEIGHT * game->config.gfx_zoom;
 
     game->config.video_w_h_ratio =
-        (double)game->config.video_pix_width /
-        (double)game->config.video_pix_height;
+        (double)game->config.inner_pix_width /
+        (double)game->config.inner_pix_height;
 
-    double ascii_size = 16;
-    ASCII_WIDTH  = (int)(game->config.video_pix_width / ascii_size);
-    ASCII_HEIGHT = (int)(game->config.video_pix_height / ascii_size);
+    ASCII_WIDTH  = (int)(game->config.inner_pix_width / ascii_size);
+    ASCII_HEIGHT = (int)(game->config.inner_pix_height / ascii_size);
 
     if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
         LOG("- Ascii hit max width  : %d", ASCII_WIDTH);
-        ASCII_WIDTH = ASCII_WIDTH_MAX;
+        ASCII_WIDTH  = (int)(game->config.inner_pix_width / ASCII_WIDTH_MAX);
+        LOG("- Ascii height now     : %d", ASCII_WIDTH);
     }
+
     if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
         LOG("- Ascii hit max height : %d", ASCII_HEIGHT);
-        ASCII_HEIGHT = ASCII_HEIGHT_MAX;
+        ASCII_HEIGHT = (int)(game->config.inner_pix_height / ASCII_HEIGHT_MAX);
+        LOG("- Ascii width now      : %d", ASCII_WIDTH);
     }
 
     LOG("- Ascii width          : %d", ASCII_WIDTH);
@@ -277,26 +284,13 @@ uint8_t sdl_init (void)
     LOG("- Ascii pix            : %dx%d <--- what we can utilize",
         (int)(ASCII_WIDTH * ascii_size), (int)(ASCII_HEIGHT * ascii_size));
     LOG("- SDL video            : %dx%d <--- chosen or from saved file",
-        game->config.video_pix_width, game->config.video_pix_height);
+        game->config.inner_pix_width, game->config.inner_pix_height);
 
-    game->config.ascii_gl_width =
-        ((double)(ASCII_WIDTH * ascii_size) / game->config.video_pix_width) /
-        (double) ASCII_WIDTH;
-    game->config.ascii_gl_height =
-        ((double)(ASCII_HEIGHT * ascii_size) / game->config.video_pix_height) /
-        (double) ASCII_HEIGHT;
-
-    if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
-        game->config.ascii_gl_width = 1.0 / ASCII_WIDTH_MAX;
-    }
-    if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
-        game->config.ascii_gl_height = 1.0 / ASCII_HEIGHT_MAX;
-    }
+    game->config.ascii_gl_width = ascii_size;
+    game->config.ascii_gl_height = ascii_size;
 
     LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
     LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
-    LOG("- video     gl width   : %f", game->config.video_gl_width);
-    LOG("- video     gl height  : %f", game->config.video_gl_height);
     LOG("- tile      gl width   : %f", game->config.tile_gl_width);
     LOG("- tile      gl height  : %f", game->config.tile_gl_height);
     LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
@@ -348,9 +342,6 @@ uint8_t sdl_init (void)
                               video_height,
                               video_flags);
     if (!window) {
-        game->config.video_pix_width = 0;
-        game->config.video_pix_height = 0;
-
         SDL_MSG_BOX("Couldn't set windowed display %ux%u: %s",
                     video_width, video_height,
                     SDL_GetError());
@@ -362,17 +353,17 @@ uint8_t sdl_init (void)
 
     if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
         SDL_GL_GetDrawableSize(window,
-                               &game->config.video_pix_width,
-                               &game->config.video_pix_height);
+                               &game->config.inner_pix_width,
+                               &game->config.inner_pix_height);
     } else {
         SDL_GetWindowSize(window,
-                          &game->config.video_pix_width,
-                          &game->config.video_pix_height);
+                          &game->config.inner_pix_width,
+                          &game->config.inner_pix_height);
     }
 
     LOG("Palling SDL_GL_CreateContext (drawable size %dx%d)...",
-        game->config.video_pix_width,
-        game->config.video_pix_height);
+        game->config.inner_pix_width,
+        game->config.inner_pix_height);
 
     context = SDL_GL_CreateContext(window);
 
@@ -383,13 +374,13 @@ uint8_t sdl_init (void)
     }
 
     LOG("Calling SDL_GL_CreateContext (drawable size %dx%d) done",
-        game->config.video_pix_width,
-        game->config.video_pix_height);
+        game->config.inner_pix_width,
+        game->config.inner_pix_height);
 
     game->config.tile_pixel_width =
-                    game->config.video_pix_width / TILES_ACROSS;
+                    game->config.inner_pix_width / TILES_ACROSS;
     game->config.tile_pixel_height =
-                    game->config.video_pix_height / TILES_DOWN;
+                    game->config.inner_pix_height / TILES_DOWN;
 
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
@@ -757,8 +748,8 @@ void sdl_mouse_center (void)
 {_
     int x, y;
 
-    x = game->config.video_pix_width / 2;
-    y = game->config.video_pix_height / 2;
+    x = game->config.outer_pix_width / 2;
+    y = game->config.outer_pix_height / 2;
 
     sdl_mouse_warp(x, y);
 }
@@ -769,13 +760,13 @@ void sdl_mouse_warp (int x, int y)
 
     if (x <= 0) {
         x = border;
-    } else if (x >= game->config.video_pix_width - border) {
-        x = game->config.video_pix_width - border;
+    } else if (x >= game->config.outer_pix_width - border) {
+        x = game->config.outer_pix_width - border;
     }
     if (y <= 0) {
         y = border;
-    } else if (y >= game->config.video_pix_height - border) {
-        y = game->config.video_pix_height - border;
+    } else if (y >= game->config.outer_pix_height - border) {
+        y = game->config.outer_pix_height - border;
     }
 
     SDL_WarpMouseInWindow(window, x, y);
@@ -897,12 +888,12 @@ static void sdl_tick (void)
             y = 0;
         }
 
-        if (x > game->config.video_pix_width - 1) {
-            x = game->config.video_pix_width - 1;
+        if (x > game->config.outer_pix_width - 1) {
+            x = game->config.outer_pix_width - 1;
         }
 
-        if (y > game->config.video_pix_height - 1) {
-            y = game->config.video_pix_height - 1;
+        if (y > game->config.outer_pix_height - 1) {
+            y = game->config.outer_pix_height - 1;
         }
 
         if (wid_mouse_visible) {
@@ -1102,8 +1093,8 @@ uint8_t config_gfx_lights_set (tokens_t *tokens, void *context)
 
 void config_gfx_zoom_update (void)
 {
-    float tiles_across = game->config.video_pix_width / TILE_WIDTH;
-    float tiles_down = game->config.video_pix_height / TILE_HEIGHT;
+    float tiles_across = game->config.inner_pix_width / TILE_WIDTH;
+    float tiles_down = game->config.inner_pix_height / TILE_HEIGHT;
 
     tiles_across /= (float)game->config.gfx_zoom;
     tiles_down /= (float)game->config.gfx_zoom;
@@ -1111,8 +1102,8 @@ void config_gfx_zoom_update (void)
     TILES_ACROSS = (int)tiles_across;
     TILES_DOWN = (int)tiles_down;
 
-    game->config.one_pixel_gl_width = 1.0 / game->config.video_pix_width;
-    game->config.one_pixel_gl_height = 1.0 / game->config.video_pix_height;
+    game->config.one_pixel_gl_width = 1;
+    game->config.one_pixel_gl_height = 1;
 
     game->config.tile_gl_width =
         game->config.one_pixel_gl_width * TILE_WIDTH * game->config.gfx_zoom;
@@ -1120,37 +1111,39 @@ void config_gfx_zoom_update (void)
         game->config.one_pixel_gl_height * TILE_HEIGHT * game->config.gfx_zoom;
 
     game->config.video_w_h_ratio =
-        (double)game->config.video_pix_width /
-        (double)game->config.video_pix_height;
+        (double)game->config.inner_pix_width /
+        (double)game->config.inner_pix_height;
 
     game->config.tile_pixel_width =
-                    game->config.video_pix_width / TILES_ACROSS;
+                    game->config.inner_pix_width / TILES_ACROSS;
     game->config.tile_pixel_height =
-                    game->config.video_pix_height / TILES_DOWN;
+                    game->config.inner_pix_height / TILES_DOWN;
 
     level->cursor_needs_update = true;
     level->cursor_found = false;
     level->map_follow_player = true;
 
-    LOG("- video     gl width   : %f", game->config.video_gl_width);
-    LOG("- video     gl height  : %f", game->config.video_gl_height);
+    LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
+    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
     LOG("- tile      gl width   : %f", game->config.tile_gl_width);
     LOG("- tile      gl height  : %f", game->config.tile_gl_height);
     LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
     LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
     LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
 
-    double ascii_size = 16;
-    ASCII_WIDTH  = (int)(game->config.video_pix_width / ascii_size);
-    ASCII_HEIGHT = (int)(game->config.video_pix_height / ascii_size);
+    ASCII_WIDTH  = (int)(game->config.inner_pix_width / ascii_size);
+    ASCII_HEIGHT = (int)(game->config.inner_pix_height / ascii_size);
 
     if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
         LOG("- Ascii hit max width  : %d", ASCII_WIDTH);
-        ASCII_WIDTH = ASCII_WIDTH_MAX;
+        ASCII_WIDTH  = (int)(game->config.inner_pix_width / ASCII_WIDTH_MAX);
+        LOG("- Ascii height now     : %d", ASCII_WIDTH);
     }
+
     if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
         LOG("- Ascii hit max height : %d", ASCII_HEIGHT);
-        ASCII_HEIGHT = ASCII_HEIGHT_MAX;
+        ASCII_HEIGHT = (int)(game->config.inner_pix_height / ASCII_HEIGHT_MAX);
+        LOG("- Ascii width now      : %d", ASCII_WIDTH);
     }
 
     LOG("- Ascii width          : %d", ASCII_WIDTH);
@@ -1158,26 +1151,14 @@ void config_gfx_zoom_update (void)
     LOG("- Ascii pix            : %dx%d <--- what we can utilize",
         (int)(ASCII_WIDTH * ascii_size), (int)(ASCII_HEIGHT * ascii_size));
     LOG("- SDL video            : %dx%d <--- chosen or from saved file",
-        game->config.video_pix_width, game->config.video_pix_height);
+        game->config.inner_pix_width, game->config.inner_pix_height);
 
-    game->config.ascii_gl_width =
-        ((double)(ASCII_WIDTH * ascii_size) / game->config.video_pix_width) /
-        (double) ASCII_WIDTH;
-    game->config.ascii_gl_height =
-        ((double)(ASCII_HEIGHT * ascii_size) / game->config.video_pix_height) /
-        (double) ASCII_HEIGHT;
+    game->config.ascii_gl_width = ascii_size;
+    game->config.ascii_gl_height = ascii_size;
 
-    if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
-        game->config.ascii_gl_width = 1.0 / ASCII_WIDTH_MAX;
-    }
-    if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
-        game->config.ascii_gl_height = 1.0 / ASCII_HEIGHT_MAX;
-    }
 
     LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
     LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
-    LOG("- video     gl width   : %f", game->config.video_gl_width);
-    LOG("- video     gl height  : %f", game->config.video_gl_height);
     LOG("- tile      gl width   : %f", game->config.tile_gl_width);
     LOG("- tile      gl height  : %f", game->config.tile_gl_height);
     LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
@@ -1463,6 +1444,8 @@ void sdl_loop (void)
         if (game->config.gfx_minimap) {
             float mx = 0.2;
             float my = mx * game->config.video_w_h_ratio;
+            mx *= game->config.inner_pix_width;
+            my *= game->config.inner_pix_height;
             glPushMatrix();
             glTranslatef(1.0 - mx, 1.0 - my, 0);
             blit_init();
@@ -1547,8 +1530,8 @@ void sdl_screenshot (void)
 static void sdl_screenshot_ (void)
 {_
     FILE *fp;
-    int w = game->config.video_pix_width;
-    int h = game->config.video_pix_height;
+    int w = game->config.inner_pix_width;
+    int h = game->config.inner_pix_height;
 
     static int count;
     char *filename = dynprintf("screenshot.%d.ppm", ++count);

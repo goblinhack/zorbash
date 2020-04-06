@@ -891,8 +891,8 @@ void terrain_blit (Terrainp t)
 
     t->tick();
 
-    uint32_t tw = game->config.video_pix_width / 2;
-    uint32_t th = game->config.video_pix_height / 2;
+    uint32_t tw = game->config.inner_pix_width / 2;
+    uint32_t th = game->config.inner_pix_height / 2;
     double window_w = tw;
     double window_h = th;
     double square = window_w / window_h;

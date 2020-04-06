@@ -322,7 +322,6 @@ extern std::array<GLuint, MAX_FBO> fbo_id;
 extern std::array<GLuint, MAX_FBO> fbo_tex_id;
 
 void blit_fbo(int fbo);
-void blit_fbo_upside_down(int fbo);
 void blit_fbo_bind(int fbo);
 void blit_fbo_unbind(void);
 

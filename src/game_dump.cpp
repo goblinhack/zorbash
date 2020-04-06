@@ -140,10 +140,10 @@ void Config::dump (std::string pfx, std::ostream &out)
     out << pfx << "gfx_vsync_enable   " << gfx_vsync_enable << std::endl;
     out << pfx << "fullscreen         " << fullscreen << std::endl;
     out << pfx << "allow_highdpi      " << allow_highdpi << std::endl;
-    out << pfx << "video_pix_width    " << video_pix_width << std::endl;
-    out << pfx << "video_pix_height   " << video_pix_height << std::endl;
-    out << pfx << "video_gl_width     " << video_gl_width << std::endl;
-    out << pfx << "video_gl_height    " << video_gl_height << std::endl;
+    out << pfx << "inner_pix_width    " << inner_pix_width << std::endl;
+    out << pfx << "inner_pix_height   " << inner_pix_height << std::endl;
+    out << pfx << "outer_pix_width    " << outer_pix_width << std::endl;
+    out << pfx << "outer_pix_height   " << outer_pix_height << std::endl;
     out << pfx << "video_w_h_ratio    " << video_w_h_ratio << std::endl;
     out << pfx << "tile_gl_width      " << tile_gl_width << std::endl;
     out << pfx << "tile_gl_height     " << tile_gl_height << std::endl;

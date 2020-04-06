@@ -103,8 +103,8 @@ void ascii_set_scissors (point tl, point br)
 
 void pixel_to_ascii (int *x, int *y)
 {
-    *x = (int)(floor((float)(*x) / ((float)game->config.video_pix_width / ASCII_WIDTH)));
-    *y = (int)(floor((float)(*y) / ((float)game->config.video_pix_height / ASCII_HEIGHT)));
+    *x = (int)(floor((float)(*x) / ((float)game->config.outer_pix_width / ASCII_WIDTH)));
+    *y = (int)(floor((float)(*y) / ((float)game->config.outer_pix_height / ASCII_HEIGHT)));
 }
 
 static int ascii_ok_for_scissors (int x, int y)
@@ -971,8 +971,8 @@ static void ascii_blit (void)
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    float mx = (1.0 / game->config.video_pix_width) * mouse_x;
-    float my = (1.0 / game->config.video_pix_height) * mouse_y;
+    float mx = mouse_x;
+    float my = mouse_y;
 
     tile_y = 0;
     for (y = 0; y < ASCII_HEIGHT; y++) {
