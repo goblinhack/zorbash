@@ -456,10 +456,21 @@ public:
     uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
     bool               fullscreen                   = false;
     bool               allow_highdpi                = false;
-    int32_t            inner_pix_width              = {};
-    int32_t            inner_pix_height             = {};
+    //
+    // This is the window size.
+    //
     int32_t            outer_pix_width              = {};
     int32_t            outer_pix_height             = {};
+    //
+    // This is the virtual size of the game within the above window.
+    //
+    int32_t            inner_pix_width              = {};
+    int32_t            inner_pix_height             = {};
+    //
+    // The ratiou of outer to inner
+    //
+    int32_t            scale_pix_width              = {};
+    int32_t            scale_pix_height             = {};
     double             video_w_h_ratio              = {};
     double             tile_gl_width                = {};
     double             tile_gl_height               = {};
