@@ -54,7 +54,7 @@ int joy_index;
 int joy_naxes;
 int joy_buttons;
 int joy_balls;
-double ascii_size = 16;
+double ascii_size = 8;
 
 SDL_Window *window; // Our window handle
 SDL_GLContext context; // Our opengl context handle
@@ -218,7 +218,7 @@ uint8_t sdl_init (void)
 
 //game->config.inner_pix_width = 720;
 //game->config.inner_pix_height = 450;
-game->config.gfx_zoom = 4;
+game->config.gfx_zoom = 2;
 
     //
     // If we have a saved setting, use that.
@@ -240,8 +240,11 @@ game->config.gfx_zoom = 4;
         video_height = game->config.outer_pix_height;
     }
 
-    game->config.inner_pix_width = video_width;
-    game->config.inner_pix_height = video_height;
+    game->config.scale_pix_width = 2;
+    game->config.scale_pix_height = 2;
+
+    game->config.inner_pix_width = video_width / game->config.scale_pix_width;
+    game->config.inner_pix_height = video_height / game->config.scale_pix_height;
 
     float tiles_across = game->config.inner_pix_width / TILE_WIDTH;
     float tiles_down = game->config.inner_pix_height / TILE_HEIGHT;
@@ -351,6 +354,7 @@ game->config.gfx_zoom = 4;
             SDL_GetError());
     }
 
+#if 0
     if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
         SDL_GL_GetDrawableSize(window,
                                &game->config.inner_pix_width,
@@ -364,6 +368,7 @@ game->config.gfx_zoom = 4;
     LOG("Palling SDL_GL_CreateContext (drawable size %dx%d)...",
         game->config.inner_pix_width,
         game->config.inner_pix_height);
+#endif
 
     context = SDL_GL_CreateContext(window);
 
@@ -1383,6 +1388,10 @@ void sdl_loop (void)
         }
         old_errored = errored;
 
+        glViewport(0, 0, 
+                   game->config.inner_pix_width,
+                   game->config.inner_pix_height);
+
         game->display();
 
         //
@@ -1456,6 +1465,10 @@ void sdl_loop (void)
 
         blit_fbo(FBO_WID);
         blit_fbo_unbind();
+
+        glViewport(0, 0, 
+                   game->config.outer_pix_width,
+                   game->config.outer_pix_height);
 
         glBlendFunc(GL_ONE, GL_ZERO);
         if (game->config.gfx_inverted) {

@@ -16,7 +16,7 @@ bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {_
-    const double step = 8.0;
+    const double step = 16.0;
 
     auto dx = level->map_at.x - level->map_wanted_at.x;
     if (dx) {

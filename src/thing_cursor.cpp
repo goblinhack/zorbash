@@ -119,7 +119,10 @@ void thing_cursor_scroll_map_to_follow (void)
         //
         switch (game->config.gfx_zoom) {
             case 1: // really zoomed out
-                sensitivity = TILES_ACROSS / 10; // larger -> more sensitive
+                sensitivity = TILES_ACROSS / 4; // larger -> more sensitive
+                break;
+            case 2: // really zoomed out
+                sensitivity = TILES_ACROSS / 4;
                 break;
             case 4:
                 sensitivity = TILES_ACROSS / 4;
@@ -195,8 +198,13 @@ void Thing::update_cursor (void)
             blit_br.x += dx;
             blit_br.y += dy;
 
-            if ((mouse_x >= blit_tl.x) && (mouse_x <= blit_br.x)) {
-                if ((mouse_y >= blit_tl.y) && (mouse_y <= blit_br.y)) {
+            auto mx = mouse_x;
+            auto my = mouse_y;
+            mx /= game->config.scale_pix_width;
+            my /= game->config.scale_pix_height;
+
+            if ((mx >= blit_tl.x) && (mx <= blit_br.x)) {
+                if ((my >= blit_tl.y) && (my <= blit_br.y)) {
                     level->cursor_at = at;
                     level->cursor_found = true;
                 }

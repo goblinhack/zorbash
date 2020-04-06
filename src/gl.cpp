@@ -59,9 +59,9 @@ void gl_init_2d_mode (void)
     // Setup our viewport
     //
     CON("INIT: OpenGL enable viewport");
-    glViewport(0, 0, game->config.outer_pix_width,
+    glViewport(0, 0, 
+               game->config.outer_pix_width,
                game->config.outer_pix_height);
-
     //
     // Make sure we're changing the model view and not the projection
     //
@@ -99,8 +99,8 @@ void gl_enter_2d_mode (void)
     // 2D projection
     //
     glOrtho(0, // left
-            game->config.outer_pix_width, // right
-            game->config.outer_pix_height, // bottom
+            game->config.inner_pix_width, // right
+            game->config.inner_pix_height, // bottom
             0, //top
             -1200.0,
             1200.0);
