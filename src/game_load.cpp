@@ -348,10 +348,10 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.music_volume);
     in >> bits(my.t.fullscreen);
     in >> bits(my.t.allow_highdpi);
-    in >> bits(my.t.video_pix_width);
-    in >> bits(my.t.video_pix_height);
-    in >> bits(my.t.video_gl_width);
-    in >> bits(my.t.video_gl_height);
+    in >> bits(my.t.inner_pix_width);
+    in >> bits(my.t.inner_pix_height);
+    in >> bits(my.t.outer_pix_width);
+    in >> bits(my.t.outer_pix_height);
     in >> bits(my.t.video_w_h_ratio);
     in >> bits(my.t.tile_gl_width);
     in >> bits(my.t.tile_gl_height);

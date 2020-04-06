@@ -138,10 +138,10 @@ void Config::log (std::string pfx)
     LOG("%s gfx_vsync_enable    %u", pfx.c_str(), gfx_vsync_enable);
     LOG("%s fullscreen          %u", pfx.c_str(), fullscreen);
     LOG("%s allow_highdpi       %u", pfx.c_str(), allow_highdpi);
-    LOG("%s video_pix_width     %u", pfx.c_str(), video_pix_width);
-    LOG("%s video_pix_height    %u", pfx.c_str(), video_pix_height);
-    LOG("%s video_gl_width      %f", pfx.c_str(), video_gl_width);
-    LOG("%s video_gl_height     %f", pfx.c_str(), video_gl_height);
+    LOG("%s inner_pix_width     %u", pfx.c_str(), inner_pix_width);
+    LOG("%s inner_pix_height    %u", pfx.c_str(), inner_pix_height);
+    LOG("%s outer_pix_width     %u", pfx.c_str(), outer_pix_width);
+    LOG("%s outer_pix_height    %u", pfx.c_str(), outer_pix_height);
     LOG("%s video_w_h_ratio     %f", pfx.c_str(), video_w_h_ratio);
     LOG("%s tile_gl_width       %f", pfx.c_str(), tile_gl_width);
     LOG("%s tile_gl_height      %f", pfx.c_str(), tile_gl_height);

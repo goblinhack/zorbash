@@ -134,7 +134,10 @@ void game_main_menu_tick (Widp w)
     }
     std::string t = "title" + std::to_string(frame);
     blit_init();
-    tile_blit(tile_find_mand(t.c_str()), fpoint(0,0), fpoint(1,1));
+    tile_blit(tile_find_mand(t.c_str()), 
+              fpoint(0,0), 
+              fpoint(game->config.inner_pix_width,
+                     game->config.inner_pix_height));
     blit_flush();
 
     ascii_putf(1, ASCII_HEIGHT - 2, GRAY, BLACK, L"Version " VERSION);

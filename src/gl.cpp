@@ -59,8 +59,8 @@ void gl_init_2d_mode (void)
     // Setup our viewport
     //
     CON("INIT: OpenGL enable viewport");
-    glViewport(0, 0, game->config.video_pix_width,
-               game->config.video_pix_height);
+    glViewport(0, 0, game->config.outer_pix_width,
+               game->config.outer_pix_height);
 
     //
     // Make sure we're changing the model view and not the projection
@@ -98,10 +98,12 @@ void gl_enter_2d_mode (void)
     //
     // 2D projection
     //
-    glOrtho(0,
-            game->config.video_gl_width, game->config.video_gl_height,
-            0, -1200.0, 1200.0);
-
+    glOrtho(0, // left
+            game->config.outer_pix_width, // right
+            game->config.outer_pix_height, // bottom
+            0, //top
+            -1200.0,
+            1200.0);
     //
     // Make sure we're changing the model view and not the projection
     //
@@ -175,8 +177,8 @@ static void gl_init_fbo_ (int fbo,
                           GLuint *fbo_id,
                           GLuint *fbo_tex_id)
 {_
-    GLuint tex_width = game->config.video_pix_width;
-    GLuint tex_height = game->config.video_pix_height;
+    GLuint tex_width = game->config.inner_pix_width;
+    GLuint tex_height = game->config.inner_pix_height;
 
     CON("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
 
@@ -334,14 +336,11 @@ void gl_init_fbo (void)
 void blit_fbo (int fbo)
 {
     blit_init();
-    blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 0, 1.0, 1.0);
-    blit_flush();
-}
-
-void blit_fbo_upside_down (int fbo)
-{
-    blit_init();
-    blit(fbo_tex_id[fbo], 0.0, 1.0, 1.0, 0.0, 0, 1.0, 1.0, 0.0);
+    blit(fbo_tex_id[fbo],
+         0.0, 1.0, 1.0, 0.0,
+         0, 0,
+         game->config.inner_pix_width,
+         game->config.inner_pix_height);
     blit_flush();
 }
 

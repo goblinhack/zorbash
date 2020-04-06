@@ -194,10 +194,6 @@ void Thing::update_cursor (void)
             blit_tl.y += dy;
             blit_br.x += dx;
             blit_br.y += dy;
-            blit_tl.x *= (float)game->config.video_pix_width;
-            blit_tl.y *= (float)game->config.video_pix_height;
-            blit_br.x *= (float)game->config.video_pix_width;
-            blit_br.y *= (float)game->config.video_pix_height;
 
             if ((mouse_x >= blit_tl.x) && (mouse_x <= blit_br.x)) {
                 if ((mouse_y >= blit_tl.y) && (mouse_y <= blit_br.y)) {

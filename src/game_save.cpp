@@ -286,10 +286,10 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.music_volume);
     out << bits(my.t.fullscreen);
     out << bits(my.t.allow_highdpi);
-    out << bits(my.t.video_pix_width);
-    out << bits(my.t.video_pix_height);
-    out << bits(my.t.video_gl_width);
-    out << bits(my.t.video_gl_height);
+    out << bits(my.t.inner_pix_width);
+    out << bits(my.t.inner_pix_height);
+    out << bits(my.t.outer_pix_width);
+    out << bits(my.t.outer_pix_height);
     out << bits(my.t.video_w_h_ratio);
     out << bits(my.t.tile_gl_width);
     out << bits(my.t.tile_gl_height);

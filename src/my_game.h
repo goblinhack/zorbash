@@ -456,10 +456,10 @@ public:
     uint32_t           music_volume                 = {MIX_MAX_VOLUME / 2};
     bool               fullscreen                   = false;
     bool               allow_highdpi                = false;
-    int32_t            video_pix_width              = {};
-    int32_t            video_pix_height             = {};
-    double             video_gl_width               = {};
-    double             video_gl_height              = {};
+    int32_t            inner_pix_width              = {};
+    int32_t            inner_pix_height             = {};
+    int32_t            outer_pix_width              = {};
+    int32_t            outer_pix_height             = {};
     double             video_w_h_ratio              = {};
     double             tile_gl_width                = {};
     double             tile_gl_height               = {};
