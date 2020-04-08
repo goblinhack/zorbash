@@ -35,12 +35,6 @@ Fontp ttf_new (std::string name, int pointSize, int style)
 
     DBG("Load TTF: %s", name.c_str());
 
-    TTF_Init();
-    ttf = TTF_OpenFont(name.c_str(), pointSize);
-    if (!ttf) {
-        ERR("cannot open font file %s: %s", name.c_str(), TTF_GetError());
-    }
-
     f->foreground.r = 255;
     f->foreground.g = 255;
     f->foreground.b = 255;
@@ -48,7 +42,11 @@ Fontp ttf_new (std::string name, int pointSize, int style)
     f->background.g = 0;
     f->background.b = 0;
 
-    TTF_SetFontStyle(ttf, style);
+    TTF_Init();
+    ttf = TTF_OpenFont(name.c_str(), pointSize);
+    if (ttf) {
+        TTF_SetFontStyle(ttf, style);
+    }
 
     uint32_t d = 0;
     uint32_t c = TTF_GLYPH_MIN;
@@ -68,12 +66,16 @@ Fontp ttf_new (std::string name, int pointSize, int style)
 
         f->u_to_c[c] = d;
         f->valid[d] = true;
-        ttf_create_tex_from_char(ttf, name.c_str(), f, c, d);
+        if (ttf) {
+            ttf_create_tex_from_char(ttf, name.c_str(), f, c, d);
+        }
         c++;
         d++;
     }
 
-    TTF_CloseFont(ttf);
+    if (ttf) {
+        TTF_CloseFont(ttf);
+    }
 
     return (f);
 }

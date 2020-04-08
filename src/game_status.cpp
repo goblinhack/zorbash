@@ -247,7 +247,7 @@ static void game_status_wid_create (void)
     wid_update(wid_itembar);
 
     {_
-        point tl = {ASCII_WIDTH - SIDEBAR_WIDTH - 2, 0};
+        point tl = {ASCII_WIDTH - SIDEBAR_WIDTH, 0};
         point br = {ASCII_WIDTH - 1, ASCII_HEIGHT};
         color c;
 
@@ -345,7 +345,7 @@ static void game_status_wid_create (void)
     {_
         auto w = wid_new_square_button(wid_sidebar, "health-icon");
         point tl = {0, y_at};
-        point br = {2, y_at + 2};
+        point br = {1, y_at + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         int i = ((float)level->player->get_stats_health() /
@@ -359,7 +359,7 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
-        point tl = {3, y_at};
+        point tl = {2, y_at};
         point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);

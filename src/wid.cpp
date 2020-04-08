@@ -3363,7 +3363,7 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                     static std::wstring entered2;
 
                     entered = wid_get_text(w);
-                    entered2 = L"\u022e %%fg=green$" + wid_get_text(w);
+                    entered2 = L"\u0084 %%fg=green$" + wid_get_text(w);
 
                     wid_scroll_text(w);
                     wid_set_text(w->next, entered2);

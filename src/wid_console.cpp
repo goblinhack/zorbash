@@ -239,7 +239,7 @@ static void wid_console_wid_create (void)
                 wid_set_pos(prefix, tl, br);
                 wid_set_text_lhs(prefix, true);
                 wid_set_shape_none(prefix);
-                wid_set_text(prefix, L"\u022e");
+                wid_set_text(prefix, L"\u0084");
                 wid_set_color(child, WID_COLOR_TEXT, CONSOLE_INPUT_COLOR);
             } else {
                 wid_set_color(child, WID_COLOR_TEXT, CONSOLE_TEXT_COLOR);
