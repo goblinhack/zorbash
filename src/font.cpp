@@ -61,9 +61,9 @@ Fontp font_find (std::string file)
 uint8_t font_init (void)
 {_
 #ifdef ENABLE_GENERATE_TTF
-    /*
-     * Generate bitmaps from TTF.
-     */
+    //
+    // Generate bitmaps from TTF.
+    //
     auto tmp = std::string(TTF_PATH) + mybasename(FIXED_FONT, __FUNCTION__);
     ttf_write_tga(tmp, FONT_SIZE, TTF_STYLE_NORMAL);
 
@@ -71,7 +71,7 @@ uint8_t font_init (void)
 #endif
 
     fixed_font = font_load("fixed", (char*)FIXED_FONT,
-                           FONT_SIZE,
+                           FONT_WIDTH,
                            TTF_STYLE_NORMAL);
 
     return (true);

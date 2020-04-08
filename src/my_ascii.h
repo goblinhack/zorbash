@@ -202,4 +202,4 @@ static inline int ascii_y_ok (int y)
 extern float tile_pix_w;
 extern float tile_pix_h;
 
-#define ASCII_CURSOR_UCHAR     L'¦'
+#define ASCII_CURSOR_UCHAR     L'_'

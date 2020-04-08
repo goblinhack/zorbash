@@ -481,7 +481,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             }
 
             tile = fixed_font->unicode_to_tile(L'_');
-                    tile = tile_find_mand("CSPACE");
+                    tile = tile_find_mand("C97");
         }
 
         AsciiCell *cell = &getref(cells, x++, y);
@@ -497,7 +497,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             if (bg.r || bg.g || bg.b || bg.a) {
                 static Tilep tile;
                 if (!tile) {
-                    tile = tile_find_mand("CSPACE");
+                    tile = tile_find_mand("C97");
                 }
                 cell->bg_tile = tile;
             } else {
@@ -810,7 +810,7 @@ static void ascii_display_mouse (fpoint mouse_tile_tl,
     glcolor(GREEN);
 
     blit_init();
-    tile_blit(tile_find_mand("C543"),
+    tile_blit(tile_find_mand("C97"),
               fpoint(mouse_tile_tl.x, mouse_tile_tl.y),
               fpoint(mouse_tile_br.x, mouse_tile_br.y));
     blit_flush();
@@ -838,14 +838,14 @@ void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
 void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
                           const char *tilename, color c)
 {_
-    ascii_put_bg_square (tlx, tly, brx, bry, tile_find(tilename), c);
+    ascii_put_bg_square(tlx, tly, brx, bry, tile_find(tilename), c);
 }
 
 void ascii_put_bg_square (int tlx, int tly, int brx, int bry,
                           wchar_t what, color c)
 {_
-    ascii_put_bg_square (tlx, tly, brx, bry,
-                         fixed_font->unicode_to_tile(what), c);
+    ascii_put_bg_square(tlx, tly, brx, bry,
+                        fixed_font->unicode_to_tile(what), c);
 }
 
 static void ascii_map_thing_replace (int x, int y, Tilep tile, color c)

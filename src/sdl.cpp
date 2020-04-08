@@ -54,7 +54,6 @@ int joy_index;
 int joy_naxes;
 int joy_buttons;
 int joy_balls;
-double ascii_size = 8;
 
 SDL_Window *window; // Our window handle
 SDL_GLContext context; // Our opengl context handle
@@ -218,7 +217,7 @@ uint8_t sdl_init (void)
 
 //game->config.inner_pix_width = 720;
 //game->config.inner_pix_height = 450;
-game->config.gfx_zoom = 2;
+game->config.gfx_zoom = 1;
 
     //
     // If we have a saved setting, use that.
@@ -240,8 +239,8 @@ game->config.gfx_zoom = 2;
         video_height = game->config.outer_pix_height;
     }
 
-    game->config.scale_pix_width = 2;
-    game->config.scale_pix_height = 2;
+    game->config.scale_pix_width = 4;
+    game->config.scale_pix_height = 4;
 
     game->config.inner_pix_width = video_width / game->config.scale_pix_width;
     game->config.inner_pix_height = video_height / game->config.scale_pix_height;
@@ -267,33 +266,37 @@ game->config.gfx_zoom = 2;
         (double)game->config.inner_pix_width /
         (double)game->config.inner_pix_height;
 
-    ASCII_WIDTH  = (int)(game->config.inner_pix_width / ascii_size);
-    ASCII_HEIGHT = (int)(game->config.inner_pix_height / ascii_size);
+    ASCII_WIDTH  = (int)(game->config.inner_pix_width / FONT_WIDTH);
+    ASCII_HEIGHT = (int)(game->config.inner_pix_height / FONT_HEIGHT);
 
     if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
-        LOG("- Ascii hit max width  : %d", ASCII_WIDTH);
+        LOG("- ascii hit max width  : %d", ASCII_WIDTH);
         ASCII_WIDTH  = (int)(game->config.inner_pix_width / ASCII_WIDTH_MAX);
-        LOG("- Ascii height now     : %d", ASCII_WIDTH);
+        LOG("- ascii height now     : %d", ASCII_WIDTH);
     }
 
     if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
-        LOG("- Ascii hit max height : %d", ASCII_HEIGHT);
+        LOG("- ascii hit max height : %d", ASCII_HEIGHT);
         ASCII_HEIGHT = (int)(game->config.inner_pix_height / ASCII_HEIGHT_MAX);
-        LOG("- Ascii width now      : %d", ASCII_WIDTH);
+        LOG("- ascii width now      : %d", ASCII_WIDTH);
     }
 
-    LOG("- Ascii width          : %d", ASCII_WIDTH);
-    LOG("- Ascii height         : %d", ASCII_HEIGHT);
-    LOG("- Ascii pix            : %dx%d <--- what we can utilize",
-        (int)(ASCII_WIDTH * ascii_size), (int)(ASCII_HEIGHT * ascii_size));
+    game->config.ascii_gl_width = FONT_WIDTH;
+    game->config.ascii_gl_height = FONT_HEIGHT;
+
+    LOG("- outer    pix width   : %d", game->config.outer_pix_width);
+    LOG("- outer    pix width   : %d", game->config.outer_pix_height);
+    LOG("- inner    pix width   : %d", game->config.inner_pix_width);
+    LOG("- inner    pix width   : %d", game->config.inner_pix_height);
+    LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
+    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
+    LOG("- ascii width          : %d", ASCII_WIDTH);
+    LOG("- ascii height         : %d", ASCII_HEIGHT);
+    LOG("- ascii pix            : %dx%d <--- what we can utilize",
+        (int)(ASCII_WIDTH * FONT_WIDTH), (int)(ASCII_HEIGHT * FONT_HEIGHT));
     LOG("- SDL video            : %dx%d <--- chosen or from saved file",
         game->config.inner_pix_width, game->config.inner_pix_height);
 
-    game->config.ascii_gl_width = ascii_size;
-    game->config.ascii_gl_height = ascii_size;
-
-    LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
-    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
     LOG("- tile      gl width   : %f", game->config.tile_gl_width);
     LOG("- tile      gl height  : %f", game->config.tile_gl_height);
     LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
@@ -1128,6 +1131,11 @@ void config_gfx_zoom_update (void)
     level->cursor_found = false;
     level->map_follow_player = true;
 
+    LOG("- outer    pix width   : %d", game->config.outer_pix_width);
+    LOG("- outer    pix width   : %d", game->config.outer_pix_height);
+    LOG("- inner    pix width   : %d", game->config.inner_pix_width);
+    LOG("- inner    pix width   : %d", game->config.inner_pix_height);
+    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
     LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
     LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
     LOG("- tile      gl width   : %f", game->config.tile_gl_width);
@@ -1136,31 +1144,30 @@ void config_gfx_zoom_update (void)
     LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
     LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
 
-    ASCII_WIDTH  = (int)(game->config.inner_pix_width / ascii_size);
-    ASCII_HEIGHT = (int)(game->config.inner_pix_height / ascii_size);
+    ASCII_WIDTH  = (int)(game->config.inner_pix_width / FONT_WIDTH);
+    ASCII_HEIGHT = (int)(game->config.inner_pix_height / FONT_HEIGHT);
 
     if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
-        LOG("- Ascii hit max width  : %d", ASCII_WIDTH);
+        LOG("- ascii hit max width  : %d", ASCII_WIDTH);
         ASCII_WIDTH  = (int)(game->config.inner_pix_width / ASCII_WIDTH_MAX);
-        LOG("- Ascii height now     : %d", ASCII_WIDTH);
+        LOG("- ascii height now     : %d", ASCII_WIDTH);
     }
 
     if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
-        LOG("- Ascii hit max height : %d", ASCII_HEIGHT);
+        LOG("- ascii hit max height : %d", ASCII_HEIGHT);
         ASCII_HEIGHT = (int)(game->config.inner_pix_height / ASCII_HEIGHT_MAX);
-        LOG("- Ascii width now      : %d", ASCII_WIDTH);
+        LOG("- ascii width now      : %d", ASCII_WIDTH);
     }
 
-    LOG("- Ascii width          : %d", ASCII_WIDTH);
-    LOG("- Ascii height         : %d", ASCII_HEIGHT);
-    LOG("- Ascii pix            : %dx%d <--- what we can utilize",
-        (int)(ASCII_WIDTH * ascii_size), (int)(ASCII_HEIGHT * ascii_size));
+    LOG("- ascii width          : %d", ASCII_WIDTH);
+    LOG("- ascii height         : %d", ASCII_HEIGHT);
+    LOG("- ascii pix            : %dx%d <--- what we can utilize",
+        (int)(ASCII_WIDTH * FONT_WIDTH), (int)(ASCII_HEIGHT * FONT_HEIGHT));
     LOG("- SDL video            : %dx%d <--- chosen or from saved file",
         game->config.inner_pix_width, game->config.inner_pix_height);
 
-    game->config.ascii_gl_width = ascii_size;
-    game->config.ascii_gl_height = ascii_size;
-
+    game->config.ascii_gl_width = FONT_WIDTH;
+    game->config.ascii_gl_height = FONT_HEIGHT;
 
     LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
     LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);

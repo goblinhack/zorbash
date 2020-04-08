@@ -220,7 +220,7 @@ extern int TILES_DOWN;
 // Minicon
 //
 #define MINICON_TEXT_COLOR          RESET_TEXT_COLOR
-#define MINICON_WIDTH               (ASCII_WIDTH - (SIDEBAR_WIDTH + 2))
+#define MINICON_WIDTH               (ASCII_WIDTH - SIDEBAR_WIDTH)
 #define MINICON_HEIGHT              20 // scrollbar limit
 #define MINICON_VIS_HEIGHT          5
 #define MINICON_VIS_WIDTH           MINICON_WIDTH
@@ -238,7 +238,7 @@ extern int TILES_DOWN;
 //
 // Sidebar includes all stats e.g. health / attack / defence
 //
-#define SIDEBAR_WIDTH               14
+#define SIDEBAR_WIDTH               12
 
 #define ITEMBAR_HEIGHT              4
 #define ITEMBAR_WIDTH               4
@@ -273,8 +273,11 @@ extern int TILES_DOWN;
 //#define ENABLE_GENERATE_TTF
 //#define FIXED_FONT                "data/ttf/dejavu-nerd.ttf"
 //#define FIXED_FONT                "data/ttf/unscii-16.ttf"
-#define FIXED_FONT                  "data/ttf/PressStart2P.ttf"
-#define FONT_SIZE                   8
+//#define FIXED_FONT                "data/ttf/PressStart2P.ttf"
+//#define FONT_SIZE                 8
+#define FIXED_FONT                  "data/ttf/6x6.tga"
+#define FONT_WIDTH                  5
+#define FONT_HEIGHT                 6
 
 #define TTF_GLYPH_MIN               ' '
 //
