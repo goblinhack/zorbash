@@ -189,10 +189,8 @@ void Thing::update_cursor (void)
         if (is_blitted) {
             fpoint blit_tl = tl;
             fpoint blit_br = br;
-            float tilew = game->config.tile_gl_width;
-            float tileh = game->config.tile_gl_height;
-            float dx = - level->pixel_map_at.x * tilew;
-            float dy = - level->pixel_map_at.y * tileh;
+            float dx = - level->pixel_map_at.x;
+            float dy = - level->pixel_map_at.y;
             blit_tl.x += dx;
             blit_tl.y += dy;
             blit_br.x += dx;

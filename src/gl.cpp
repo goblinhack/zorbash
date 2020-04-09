@@ -1328,12 +1328,11 @@ void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br)
 
     auto last_color = gl_last_color;
     color c = BLACK;
-    c.a = last_color.a;
+    c.a = last_color.a / 2;
     glcolor(c);
 
-    float scale = game->config.gfx_zoom / 2;
-    const double dx = game->config.one_pixel_gl_width * scale;
-    const double dy = game->config.one_pixel_gl_height * scale;
+    const double dx = game->config.one_pixel_gl_width;
+    const double dy = game->config.one_pixel_gl_height;
 
     blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);

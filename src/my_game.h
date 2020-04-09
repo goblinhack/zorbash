@@ -83,9 +83,9 @@ public:
     fpoint                     cursor_at;
     fpoint                     cursor_at_old;
     bool                       map_follow_player = true;
-    fpoint                     map_at;        // map scroll currently st
-    fpoint                     pixel_map_at;  // rounded to screen pixels
+    fpoint                     map_at;        // map tile location
     fpoint                     map_wanted_at; // map scroll desired at
+    point                      pixel_map_at;  // map pixel location
     point                      map_tl;        // visible map tl
     point                      map_br;        // visible map br
     bool                       minimap_valid = false;

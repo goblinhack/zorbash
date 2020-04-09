@@ -327,6 +327,7 @@ void Light::render_triangle_fans (void)
 #ifndef DEBUG_LIGHT
         blit_flush_triangle_fan();
         blit_flush_triangle_fan();
+        blit_flush_triangle_fan();
 #endif
     } else {
         float *b = &(*cached_gl_cmds.begin());
@@ -337,6 +338,7 @@ void Light::render_triangle_fans (void)
         //
         // Lights glow more with more blends
         //
+        blit_flush_triangle_fan(b, e);
         blit_flush_triangle_fan(b, e);
         blit_flush_triangle_fan(b, e);
         glTranslatef(-light_offset.x, -light_offset.y, 0);
@@ -377,51 +379,6 @@ void Light::render_triangle_fans (void)
    }
 }
 
-void Light::render_point_light (void)
-{
-    fpoint blit_tl, blit_br;
-    Tilep tile = {};
-    if (!owner->get_map_offset_coords(blit_tl, blit_br, tile)) {
-        return;
-    }
-
-    fpoint light_pos = (blit_tl + blit_br) / 2;
-    float tilew = game->config.tile_gl_width * strength;
-    float tileh = game->config.tile_gl_height * strength;
-
-    double lw = tilew;
-    double lh = tileh;
-    double p1x = light_pos.x - lw;
-    double p1y = light_pos.y - lh;
-    double p2x = light_pos.x + lw;
-    double p2y = light_pos.y + lh;
-
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-
-    blit_init();
-glcolor(col);
-    blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
-    blit_flush();
-#if 0
-    color c = RED;
-    c.a = 150;
-    glcolor(c);
-    gl_blitline(blit_tl.x, blit_tl.y, blit_br.x, blit_tl.y);
-    gl_blitline(blit_tl.x, blit_tl.y, blit_tl.x, blit_br.y);
-    gl_blitline(blit_br.x, blit_br.y, blit_br.x, blit_tl.y);
-    gl_blitline(blit_br.x, blit_br.y, blit_tl.x, blit_br.y);
-    gl_blitline(blit_tl.x, blit_tl.y, light_pos.x, light_pos.y);
-    gl_blitline(blit_br.x, blit_tl.y, light_pos.x, light_pos.y);
-    gl_blitline(blit_tl.x, blit_br.y, light_pos.x, light_pos.y);
-    gl_blitline(blit_br.x, blit_br.y, light_pos.x, light_pos.y);
-#endif
-}
-
 void Light::render (int fbo)
 {
     if (!light_overlay_tex) {
@@ -456,7 +413,11 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
         deferred_player_light->render(fbo);
     }
 
-    glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+    //
+    // Can't tell the difference between these
+    //
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -474,19 +435,21 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
                 if (level->player) {
                     auto p = level->player;
                     auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
-
                     if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
                         continue;
                     }
+
                     auto dist =
                       thing_can_reach_player(point(l->at.x, l->at.y));
-                    if (!dist || (dist >= MAX_LIGHT_PLAYER_DISTANCE)) {
+                    if (dist >= MAX_LIGHT_PLAYER_DISTANCE) {
                         continue;
                     }
 
-                    light_dim = 1.0 - (0.05 * (float)dist);
-                    if (light_dim < 0) {
-                        continue;
+                    if (dist > 0) {
+                        light_dim = 1.0 - (0.05 * (float)dist);
+                        if (light_dim <= 0) {
+                            continue;
+                        }
                     }
                 }
 
