@@ -16,7 +16,7 @@ bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {_
-    const double step = 16.0;
+    const double step = 4.0;
 
     auto dx = level->map_at.x - level->map_wanted_at.x;
     if (dx) {
@@ -111,11 +111,11 @@ void thing_render_all (void)
     // Get the bounds. Needs to be a bit off-map for reflections.
     //
     int border = 5;
-    minx = std::max(0, (int) level->pixel_map_at.x - border);
-    maxx = std::min(MAP_WIDTH, (int)level->pixel_map_at.x + TILES_ACROSS + border);
+    minx = std::max(0, (int) level->map_at.x - border);
+    maxx = std::min(MAP_WIDTH, (int)level->map_at.x + TILES_ACROSS + border);
 
-    miny = std::max(0, (int) level->pixel_map_at.y - border);
-    maxy = std::min(MAP_HEIGHT, (int)level->pixel_map_at.y + TILES_DOWN + border);
+    miny = std::max(0, (int) level->map_at.y - border);
+    maxy = std::min(MAP_HEIGHT, (int)level->map_at.y + TILES_DOWN + border);
 
     level->map_tl = point(minx, miny);
     level->map_br = point(maxx, maxy);
@@ -132,21 +132,8 @@ void thing_render_all (void)
     thing_cursor_scroll_map_to_follow();
     thing_map_scroll_do();
 
-    float map_move_delta = TILE_WIDTH * 6;
-
-    fpoint map_at = level->map_at;
-    fpoint offset(map_at.x - floor(map_at.x), map_at.y - floor(map_at.y));
-
-    offset.x *= map_move_delta;
-    offset.x = floor(offset.x);
-    offset.x /= map_move_delta;
-
-    offset.y *= map_move_delta;
-    offset.y = floor(offset.y);
-    offset.y /= map_move_delta;
-
-    level->pixel_map_at =
-      fpoint(floor(map_at.x) + offset.x, floor(map_at.y) + offset.y);
+    level->pixel_map_at = point(level->map_at.x * TILE_WIDTH,
+                                level->map_at.y * TILE_HEIGHT);
 
     if (game->config.gfx_show_hidden) {
         blit_fbo_bind(FBO_MAIN);

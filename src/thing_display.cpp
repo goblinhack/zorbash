@@ -713,10 +713,8 @@ bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile
 {_
     auto blit = get_coords(blit_tl, blit_br, tile);
 
-    float tilew = game->config.tile_gl_width;
-    float tileh = game->config.tile_gl_height;
-    float dx = - level->pixel_map_at.x * tilew;
-    float dy = - level->pixel_map_at.y * tileh;
+    float dx = - level->pixel_map_at.x;
+    float dy = - level->pixel_map_at.y;
     blit_tl.x += dx;
     blit_tl.y += dy;
     blit_br.x += dx;
