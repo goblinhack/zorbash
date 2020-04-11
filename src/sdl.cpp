@@ -1099,89 +1099,6 @@ uint8_t config_gfx_lights_set (tokens_t *tokens, void *context)
     return (true);
 }
 
-void config_gfx_zoom_update (void)
-{
-    float tiles_across = game->config.inner_pix_width / TILE_WIDTH;
-    float tiles_down = game->config.inner_pix_height / TILE_HEIGHT;
-
-    tiles_across /= (float)game->config.gfx_zoom;
-    tiles_down /= (float)game->config.gfx_zoom;
-
-    TILES_ACROSS = (int)tiles_across;
-    TILES_DOWN = (int)tiles_down;
-
-    game->config.one_pixel_gl_width = 1;
-    game->config.one_pixel_gl_height = 1;
-
-    game->config.tile_gl_width =
-        game->config.one_pixel_gl_width * TILE_WIDTH * game->config.gfx_zoom;
-    game->config.tile_gl_height =
-        game->config.one_pixel_gl_height * TILE_HEIGHT * game->config.gfx_zoom;
-
-    game->config.video_w_h_ratio =
-        (double)game->config.inner_pix_width /
-        (double)game->config.inner_pix_height;
-
-    game->config.tile_pixel_width =
-                    game->config.inner_pix_width / TILES_ACROSS;
-    game->config.tile_pixel_height =
-                    game->config.inner_pix_height / TILES_DOWN;
-
-    level->cursor_needs_update = true;
-    level->cursor_found = false;
-    level->map_follow_player = true;
-
-    LOG("- outer    pix width   : %d", game->config.outer_pix_width);
-    LOG("- outer    pix width   : %d", game->config.outer_pix_height);
-    LOG("- inner    pix width   : %d", game->config.inner_pix_width);
-    LOG("- inner    pix width   : %d", game->config.inner_pix_height);
-    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
-    LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
-    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
-    LOG("- tile      gl width   : %f", game->config.tile_gl_width);
-    LOG("- tile      gl height  : %f", game->config.tile_gl_height);
-    LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
-    LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
-    LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
-
-    ASCII_WIDTH  = (int)(game->config.inner_pix_width / FONT_WIDTH);
-    ASCII_HEIGHT = (int)(game->config.inner_pix_height / FONT_HEIGHT);
-
-    if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
-        LOG("- ascii hit max width  : %d", ASCII_WIDTH);
-        ASCII_WIDTH  = (int)(game->config.inner_pix_width / ASCII_WIDTH_MAX);
-        LOG("- ascii height now     : %d", ASCII_WIDTH);
-    }
-
-    if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
-        LOG("- ascii hit max height : %d", ASCII_HEIGHT);
-        ASCII_HEIGHT = (int)(game->config.inner_pix_height / ASCII_HEIGHT_MAX);
-        LOG("- ascii width now      : %d", ASCII_WIDTH);
-    }
-
-    LOG("- ascii width          : %d", ASCII_WIDTH);
-    LOG("- ascii height         : %d", ASCII_HEIGHT);
-    LOG("- ascii pix            : %dx%d <--- what we can utilize",
-        (int)(ASCII_WIDTH * FONT_WIDTH), (int)(ASCII_HEIGHT * FONT_HEIGHT));
-    LOG("- SDL video            : %dx%d <--- chosen or from saved file",
-        game->config.inner_pix_width, game->config.inner_pix_height);
-
-    game->config.ascii_gl_width = FONT_WIDTH;
-    game->config.ascii_gl_height = FONT_HEIGHT;
-
-    LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
-    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
-    LOG("- tile      gl width   : %f", game->config.tile_gl_width);
-    LOG("- tile      gl height  : %f", game->config.tile_gl_height);
-    LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
-    LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
-    LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
-
-    Thing::update_all();
-
-    thing_map_scroll_to_player();
-}
-
 //
 // User has entered a command, run it
 //
@@ -1602,4 +1519,81 @@ void sdl_flush_display (void)
         glDisable(GL_COLOR_LOGIC_OP);
     }
     SDL_GL_SwapWindow(window);
+}
+
+void config_gfx_zoom_update (void)
+{
+        game->config.gfx_zoom = 4;
+    game->config.ascii_gl_width = FONT_WIDTH;
+    game->config.ascii_gl_height = FONT_HEIGHT;
+
+    if (!game->config.gfx_zoom) {
+        game->config.gfx_zoom = 1;
+    }
+
+    game->config.one_pixel_gl_width = 1;
+    game->config.one_pixel_gl_height = 1;
+
+    game->config.scale_pix_width = game->config.gfx_zoom;
+    game->config.scale_pix_height = game->config.gfx_zoom;
+
+    game->config.inner_pix_width =
+        game->config.outer_pix_width / game->config.scale_pix_width;
+    game->config.inner_pix_height =
+        game->config.outer_pix_height / game->config.scale_pix_height;
+
+    float tiles_across = game->config.inner_pix_width / TILE_WIDTH;
+    float tiles_down = game->config.inner_pix_height / TILE_HEIGHT;
+
+    tiles_across /= (float)game->config.gfx_zoom;
+    tiles_down /= (float)game->config.gfx_zoom;
+
+    TILES_ACROSS = (int)tiles_across;
+    TILES_DOWN = (int)tiles_down;
+
+    game->config.tile_gl_width =
+        game->config.one_pixel_gl_width * TILE_WIDTH * game->config.gfx_zoom;
+    game->config.tile_gl_height =
+        game->config.one_pixel_gl_height * TILE_HEIGHT * game->config.gfx_zoom;
+
+    game->config.video_w_h_ratio =
+        (double)game->config.inner_pix_width /
+        (double)game->config.inner_pix_height;
+
+    game->config.tile_pixel_width =
+        game->config.inner_pix_width / TILES_ACROSS;
+    game->config.tile_pixel_height =
+        game->config.inner_pix_height / TILES_DOWN;
+
+    CON("Graphics zoom          : %d", game->config.gfx_zoom);
+    CON("- outer    pix size    : %dx%d", game->config.outer_pix_width,
+                                          game->config.outer_pix_height);
+    CON("- inner    pix size    : %dx%d", game->config.inner_pix_width,
+                                          game->config.inner_pix_height);
+
+    ASCII_WIDTH  = (int)(game->config.inner_pix_width / FONT_WIDTH);
+    ASCII_HEIGHT = (int)(game->config.inner_pix_height / FONT_HEIGHT);
+
+    if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
+        LOG("Exceeded console hit max width  : %d", ASCII_WIDTH);
+        ASCII_WIDTH = ASCII_WIDTH_MAX;
+        game->config.ascii_gl_width =
+            (float)game->config.inner_pix_width / (float)ASCII_WIDTH;
+    }
+
+    if (ASCII_HEIGHT >= ASCII_HEIGHT_MAX) {
+        LOG("Exceeded console hit max height : %d", ASCII_HEIGHT);
+        ASCII_HEIGHT = ASCII_HEIGHT_MAX;
+        game->config.ascii_gl_height =
+            (float)game->config.inner_pix_height / (float)ASCII_HEIGHT;
+    }
+
+    CON("- console              : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
+    CON("- width to height ratio: %f", game->config.video_w_h_ratio);
+
+    if (level) {
+        Thing::update_all();
+
+        thing_map_scroll_to_player();
+    }
 }
