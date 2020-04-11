@@ -117,6 +117,11 @@ int thing_can_reach_player (point start)
         if (tl.x >= MAP_WIDTH) { tl.x = MAP_WIDTH - 1; }
         if (tl.y >= MAP_HEIGHT) { tl.y = MAP_HEIGHT - 1; }
 
+        if (br.x < 0) { br.x = 0; }
+        if (br.y < 0) { br.y = 0; }
+        if (br.x >= MAP_WIDTH) { br.x = MAP_WIDTH - 1; }
+        if (br.y >= MAP_HEIGHT) { br.y = MAP_HEIGHT - 1; }
+
         //
         // Set up obstacles for the search
         //
