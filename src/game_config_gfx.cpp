@@ -152,6 +152,24 @@ uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t 
     return (true);
 }
 
+uint8_t game_config_gfx_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    config_gfx_zoom_in();
+    local_game_needs_restart = true;
+    game_config_gfx_save(nullptr, 0, 0, 0);
+    game->config_gfx_select();
+    return (true);
+}
+
+uint8_t game_config_gfx_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
+{_
+    config_gfx_zoom_out();
+    local_game_needs_restart = true;
+    game_config_gfx_save(nullptr, 0, 0, 0);
+    game->config_gfx_select();
+    return (true);
+}
+
 uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
     switch (key->mod) {
@@ -222,7 +240,7 @@ void Game::config_gfx_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2};
+    point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT - 2};
     point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ITEMBAR_TL_Y - 2};
     auto width = br.x - tl.x;
 
@@ -441,6 +459,51 @@ void Game::config_gfx_select (void)
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_resolution_decr);
+        wid_set_text(w, "-");
+    }
+
+    y_at += 3;
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Zoom");
+
+        point tl = {0, y_at};
+        point br = {width / 2, y_at + 2};
+        wid_set_shape_none(w);
+        wid_set_pos(w, tl, br);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Zoom");
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Zoom volume value");
+
+        point tl = {width / 2 , y_at};
+        point br = {width / 2 + 6, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_text(w, std::to_string(game->config.gfx_zoom));
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Zoom out");
+
+        point tl = {width / 2 + 7 , y_at};
+        point br = {width / 2 + 9, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_gfx_zoom_in);
+        wid_set_text(w, "+");
+    }
+    {_
+        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+        auto w = wid_new_square_button(p, "Zoom in");
+
+        point tl = {width / 2 + 10 , y_at};
+        point br = {width / 2 + 12, y_at + 2};
+        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_pos(w, tl, br);
+        wid_set_on_mouse_up(w, game_config_gfx_zoom_out);
         wid_set_text(w, "-");
     }
 
