@@ -215,10 +215,6 @@ uint8_t sdl_init (void)
 
     sdl_list_video_size();
 
-//game->config.inner_pix_width = 720;
-//game->config.inner_pix_height = 450;
-game->config.gfx_zoom = 1;
-
     //
     // If we have a saved setting, use that.
     //
@@ -239,69 +235,7 @@ game->config.gfx_zoom = 1;
         video_height = game->config.outer_pix_height;
     }
 
-    game->config.scale_pix_width = 4;
-    game->config.scale_pix_height = 4;
-
-    game->config.inner_pix_width = video_width / game->config.scale_pix_width;
-    game->config.inner_pix_height = video_height / game->config.scale_pix_height;
-
-    float tiles_across = game->config.inner_pix_width / TILE_WIDTH;
-    float tiles_down = game->config.inner_pix_height / TILE_HEIGHT;
-
-    tiles_across /= (float)game->config.gfx_zoom;
-    tiles_down /= (float)game->config.gfx_zoom;
-
-    TILES_ACROSS = (int)tiles_across;
-    TILES_DOWN = (int)tiles_down;
-
-    game->config.one_pixel_gl_width = 1.0;
-    game->config.one_pixel_gl_height = 1.0;
-
-    game->config.tile_gl_width =
-        game->config.one_pixel_gl_width * TILE_WIDTH * game->config.gfx_zoom;
-    game->config.tile_gl_height =
-        game->config.one_pixel_gl_height * TILE_HEIGHT * game->config.gfx_zoom;
-
-    game->config.video_w_h_ratio =
-        (double)game->config.inner_pix_width /
-        (double)game->config.inner_pix_height;
-
-    ASCII_WIDTH  = (int)(game->config.inner_pix_width / FONT_WIDTH);
-    ASCII_HEIGHT = (int)(game->config.inner_pix_height / FONT_HEIGHT);
-
-    if (ASCII_WIDTH > ASCII_WIDTH_MAX) {
-        LOG("- ascii hit max width  : %d", ASCII_WIDTH);
-        ASCII_WIDTH  = (int)(game->config.inner_pix_width / ASCII_WIDTH_MAX);
-        LOG("- ascii height now     : %d", ASCII_WIDTH);
-    }
-
-    if (ASCII_HEIGHT > ASCII_HEIGHT_MAX) {
-        LOG("- ascii hit max height : %d", ASCII_HEIGHT);
-        ASCII_HEIGHT = (int)(game->config.inner_pix_height / ASCII_HEIGHT_MAX);
-        LOG("- ascii width now      : %d", ASCII_WIDTH);
-    }
-
-    game->config.ascii_gl_width = FONT_WIDTH;
-    game->config.ascii_gl_height = FONT_HEIGHT;
-
-    LOG("- outer    pix width   : %d", game->config.outer_pix_width);
-    LOG("- outer    pix width   : %d", game->config.outer_pix_height);
-    LOG("- inner    pix width   : %d", game->config.inner_pix_width);
-    LOG("- inner    pix width   : %d", game->config.inner_pix_height);
-    LOG("- ascii     gl width   : %f", game->config.ascii_gl_width);
-    LOG("- ascii     gl height  : %f", game->config.ascii_gl_height);
-    LOG("- ascii width          : %d", ASCII_WIDTH);
-    LOG("- ascii height         : %d", ASCII_HEIGHT);
-    LOG("- ascii pix            : %dx%d <--- what we can utilize",
-        (int)(ASCII_WIDTH * FONT_WIDTH), (int)(ASCII_HEIGHT * FONT_HEIGHT));
-    LOG("- SDL video            : %dx%d <--- chosen or from saved file",
-        game->config.inner_pix_width, game->config.inner_pix_height);
-
-    LOG("- tile      gl width   : %f", game->config.tile_gl_width);
-    LOG("- tile      gl height  : %f", game->config.tile_gl_height);
-    LOG("- one pixel gl width   : %f", game->config.one_pixel_gl_width);
-    LOG("- one pixel gl height  : %f", game->config.one_pixel_gl_height);
-    LOG("- width to height ratio: %f", game->config.video_w_h_ratio);
+    config_gfx_zoom_update();
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
@@ -1105,14 +1039,8 @@ uint8_t config_gfx_lights_set (tokens_t *tokens, void *context)
 void config_gfx_zoom_in (void)
 {_
     game->config.gfx_zoom++;
-    //
-    // Odd numbers give pixel rounding errors
-    //
-    if (game->config.gfx_zoom & 1) {
-        game->config.gfx_zoom++;
-    }
-    if (game->config.gfx_zoom > 10) {
-        game->config.gfx_zoom = 10;
+    if (game->config.gfx_zoom > 5) {
+        game->config.gfx_zoom = 5;
     }
     CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
     config_gfx_zoom_update();
@@ -1121,12 +1049,6 @@ void config_gfx_zoom_in (void)
 void config_gfx_zoom_out (void)
 {_
     game->config.gfx_zoom--;
-    //
-    // Odd numbers give pixel rounding errors
-    //
-    if (game->config.gfx_zoom & 1) {
-        game->config.gfx_zoom--;
-    }
     if (game->config.gfx_zoom < 1) {
         game->config.gfx_zoom = 1;
     }
@@ -1523,7 +1445,6 @@ void sdl_flush_display (void)
 
 void config_gfx_zoom_update (void)
 {
-        game->config.gfx_zoom = 4;
     game->config.ascii_gl_width = FONT_WIDTH;
     game->config.ascii_gl_height = FONT_HEIGHT;
 
@@ -1545,16 +1466,13 @@ void config_gfx_zoom_update (void)
     float tiles_across = game->config.inner_pix_width / TILE_WIDTH;
     float tiles_down = game->config.inner_pix_height / TILE_HEIGHT;
 
-    tiles_across /= (float)game->config.gfx_zoom;
-    tiles_down /= (float)game->config.gfx_zoom;
-
     TILES_ACROSS = (int)tiles_across;
     TILES_DOWN = (int)tiles_down;
 
     game->config.tile_gl_width =
-        game->config.one_pixel_gl_width * TILE_WIDTH * game->config.gfx_zoom;
+        game->config.one_pixel_gl_width * TILE_WIDTH;
     game->config.tile_gl_height =
-        game->config.one_pixel_gl_height * TILE_HEIGHT * game->config.gfx_zoom;
+        game->config.one_pixel_gl_height * TILE_HEIGHT;
 
     game->config.video_w_h_ratio =
         (double)game->config.inner_pix_width /
@@ -1591,9 +1509,11 @@ void config_gfx_zoom_update (void)
     CON("- console              : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
     CON("- width to height ratio: %f", game->config.video_w_h_ratio);
 
+#if 0
     if (level) {
         Thing::update_all();
 
         thing_map_scroll_to_player();
     }
+#endif
 }
