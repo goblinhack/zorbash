@@ -117,7 +117,7 @@ void thing_cursor_scroll_map_to_follow (void)
         // How many tiles away from the edge at each zoom level we use
         // to auto scroll
         //
-        sensitivity = TILES_ACROSS / 4; // larger -> more sensitive
+        sensitivity = TILES_ACROSS / 2; // larger N -> more sensitive
 
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
