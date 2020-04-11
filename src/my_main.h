@@ -142,7 +142,7 @@
 //
 // Light sources
 //
-#define MAX_LIGHT_RAYS              (720)
+#define MAX_LIGHT_RAYS              (360)
 #define MAX_LIGHT_PLAYER_DISTANCE   (TILES_ACROSS + (TILES_ACROSS / 2))
 
 ////////////////////////////////////////////////////////////////////////////
@@ -170,7 +170,7 @@ extern int TILES_DOWN;
 //
 // Dimentions of the fixed text on screen
 //
-#define ASCII_WIDTH_MAX             120
+#define ASCII_WIDTH_MAX             80
 #define ASCII_HEIGHT_MAX            ASCII_WIDTH_MAX
 
 ////////////////////////////////////////////////////////////////////////////
