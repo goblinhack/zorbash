@@ -1234,11 +1234,19 @@ void sdl_loop (void)
         }
         old_errored = errored;
 
-        glViewport(0, 0, 
+        gl_enter_2d_mode();
+        glViewport(0, 0,
                    game->config.inner_pix_width,
                    game->config.inner_pix_height);
 
+        glcolor(WHITE);
         game->display();
+        blit_fbo_unbind();
+
+        glViewport(0, 0,
+                   game->config.outer_pix_width,
+                   game->config.outer_pix_height);
+        gl_enter_2d_mode_outer();
 
         //
         // Do processing of some things, like reading the keyboard or doing
@@ -1288,10 +1296,13 @@ void sdl_loop (void)
             wid_display_all();
         }
 
+        blit_fbo_bind(FBO_FINAL);
+        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0, 0, 0, 0);
         glcolor(WHITE);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
-        blit_fbo_bind(FBO_MAIN);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendFunc(GL_ONE, GL_ZERO);
+        blit_fbo_outer(FBO_MAP);
 
         //
         // Draw the map
@@ -1299,29 +1310,28 @@ void sdl_loop (void)
         if (game->config.gfx_minimap) {
             float mx = 0.2;
             float my = mx * game->config.video_w_h_ratio;
-            mx *= game->config.inner_pix_width;
-            my *= game->config.inner_pix_height;
+            mx *= game->config.outer_pix_width;
+            my *= game->config.outer_pix_height;
+            glcolor(WHITE);
             glPushMatrix();
-            glTranslatef(1.0 - mx, 1.0 - my, 0);
+            glTranslatef(game->config.outer_pix_width - mx,
+                         game->config.outer_pix_height - my, 0);
             blit_init();
             blit(fbo_tex_id[FBO_MINIMAP], 0.0, 1.0, 1.0, 0.0, 0, my, mx, 0.0);
             blit_flush();
             glPopMatrix();
         }
 
-        blit_fbo(FBO_WID);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        blit_fbo_outer(FBO_WID);
         blit_fbo_unbind();
-
-        glViewport(0, 0, 
-                   game->config.outer_pix_width,
-                   game->config.outer_pix_height);
 
         glBlendFunc(GL_ONE, GL_ZERO);
         if (game->config.gfx_inverted) {
             glLogicOp(GL_COPY_INVERTED);
             glEnable(GL_COLOR_LOGIC_OP);
         }
-        blit_fbo(FBO_MAIN);
+        blit_fbo_outer(FBO_FINAL);
         if (game->config.gfx_inverted) {
             glLogicOp(GL_COPY);
             glDisable(GL_COLOR_LOGIC_OP);
@@ -1445,9 +1455,6 @@ void sdl_flush_display (void)
 
 void config_gfx_zoom_update (void)
 {
-    game->config.ascii_gl_width = FONT_WIDTH;
-    game->config.ascii_gl_height = FONT_HEIGHT;
-
     if (!game->config.gfx_zoom) {
         game->config.gfx_zoom = 1;
     }
@@ -1489,21 +1496,24 @@ void config_gfx_zoom_update (void)
     CON("- inner    pix size    : %dx%d", game->config.inner_pix_width,
                                           game->config.inner_pix_height);
 
-    ASCII_WIDTH  = (int)(game->config.inner_pix_width / FONT_WIDTH);
-    ASCII_HEIGHT = (int)(game->config.inner_pix_height / FONT_HEIGHT);
+    game->config.ascii_gl_width = FONT_WIDTH;
+    game->config.ascii_gl_height = FONT_HEIGHT;
+
+    ASCII_WIDTH  = (int)(game->config.outer_pix_width / FONT_WIDTH);
+    ASCII_HEIGHT = (int)(game->config.outer_pix_height / FONT_HEIGHT);
 
     if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
         LOG("Exceeded console hit max width  : %d", ASCII_WIDTH);
         ASCII_WIDTH = ASCII_WIDTH_MAX;
         game->config.ascii_gl_width =
-            (float)game->config.inner_pix_width / (float)ASCII_WIDTH;
+            (float)game->config.outer_pix_width / (float)ASCII_WIDTH;
     }
 
     if (ASCII_HEIGHT >= ASCII_HEIGHT_MAX) {
         LOG("Exceeded console hit max height : %d", ASCII_HEIGHT);
         ASCII_HEIGHT = ASCII_HEIGHT_MAX;
         game->config.ascii_gl_height =
-            (float)game->config.inner_pix_height / (float)ASCII_HEIGHT;
+            (float)game->config.outer_pix_height / (float)ASCII_HEIGHT;
     }
 
     CON("- console              : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);

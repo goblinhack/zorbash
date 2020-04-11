@@ -136,18 +136,18 @@ void thing_render_all (void)
                                 level->map_at.y * TILE_HEIGHT);
 
     if (game->config.gfx_show_hidden) {
-        blit_fbo_bind(FBO_MAIN);
+        blit_fbo_bind(FBO_MAP);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
     } else if (game->config.gfx_lights) {
-        blit_fbo_bind(FBO_MAIN_BLACK_AND_WHITE);
+        blit_fbo_bind(FBO_MAP_BLACK_AND_WHITE);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_map_black_and_white = true;
         thing_blit_things(minx, miny, maxx, maxy);
         thing_map_black_and_white = false;
 
-        blit_fbo_bind(FBO_MAIN);
+        blit_fbo_bind(FBO_MAP);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
 
@@ -163,7 +163,7 @@ void thing_render_all (void)
         lights_render(light_minx, light_miny, light_maxx, light_maxy, 
                       FBO_LIGHT);
         glBindTexture(GL_TEXTURE_2D, 0);
-        blit_fbo_bind(FBO_MAIN);
+        blit_fbo_bind(FBO_MAP);
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
         blit_fbo(FBO_LIGHT);
 
@@ -171,11 +171,11 @@ void thing_render_all (void)
         // Blend the black and white background of where we have been
         //
         glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_COLOR);
-        blit_fbo(FBO_MAIN_BLACK_AND_WHITE);
+        blit_fbo(FBO_MAP_BLACK_AND_WHITE);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 #endif
     } else {
-        blit_fbo_bind(FBO_MAIN);
+        blit_fbo_bind(FBO_MAP);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
     }

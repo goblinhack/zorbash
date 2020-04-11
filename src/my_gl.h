@@ -52,6 +52,7 @@
 //
 void gl_init_2d_mode(void);
 void gl_enter_2d_mode(void);
+void gl_enter_2d_mode_outer(void);
 void gl_leave_2d_mode(void);
 void gl_enter_2_5d_mode(void);
 void gl_leave_2_5d_mode(void);
@@ -310,18 +311,20 @@ void gl_ortho_set(int32_t width, int32_t height);
 //
 // Frame buffer objects
 //
-#define FBO_MAIN                 0
-#define FBO_MAIN_BLACK_AND_WHITE 1
-#define FBO_WID                  2
-#define FBO_LIGHT                3
-#define FBO_MINIMAP              4
-#define MAX_FBO                  5
+#define FBO_MAP                 0
+#define FBO_MAP_BLACK_AND_WHITE 1
+#define FBO_WID                 2
+#define FBO_LIGHT               3
+#define FBO_MINIMAP             4
+#define FBO_FINAL               5
+#define MAX_FBO                 6
 
 extern std::array<GLuint, MAX_FBO> render_buf_id;
 extern std::array<GLuint, MAX_FBO> fbo_id;
 extern std::array<GLuint, MAX_FBO> fbo_tex_id;
 
 void blit_fbo(int fbo);
+void blit_fbo_outer(int fbo);
 void blit_fbo_bind(int fbo);
 void blit_fbo_unbind(void);
 

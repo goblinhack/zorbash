@@ -22,7 +22,7 @@ void Level::display (void)
         update_minimap();
     }
 
-    blit_fbo_bind(FBO_MAIN);
+    blit_fbo_bind(FBO_MAP);
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
 
