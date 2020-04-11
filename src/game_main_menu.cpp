@@ -140,7 +140,7 @@ void game_main_menu_tick (Widp w)
                      game->config.inner_pix_height));
     blit_flush();
 
-    ascii_putf(1, ASCII_HEIGHT - 2, GRAY, BLACK, L"Version " VERSION);
+    ascii_putf(1, ASCII_HEIGHT - 2, GREEN, BLACK, L"Version " VERSION);
 
     if (game->started) {
         game_main_menu_destroy();
