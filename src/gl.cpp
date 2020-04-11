@@ -10,7 +10,6 @@
 
 static void gl_init_fbo(void);
 
-int gl_need_degen_;
 float glapi_last_tex_right;
 float glapi_last_tex_bottom;
 float glapi_last_right;
