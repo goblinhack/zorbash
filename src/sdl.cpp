@@ -1234,19 +1234,15 @@ void sdl_loop (void)
         }
         old_errored = errored;
 
-        gl_enter_2d_mode();
-        glViewport(0, 0,
-                   game->config.inner_pix_width,
-                   game->config.inner_pix_height);
+        gl_enter_2d_mode(game->config.inner_pix_width,
+                         game->config.inner_pix_height);
 
         glcolor(WHITE);
         game->display();
         blit_fbo_unbind();
 
-        glViewport(0, 0,
-                   game->config.outer_pix_width,
-                   game->config.outer_pix_height);
-        gl_enter_2d_mode_outer();
+        gl_enter_2d_mode(game->config.outer_pix_width,
+                         game->config.outer_pix_height);
 
         //
         // Do processing of some things, like reading the keyboard or doing
@@ -1313,6 +1309,7 @@ void sdl_loop (void)
             mx *= game->config.outer_pix_width;
             my *= game->config.outer_pix_height;
             glcolor(WHITE);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glPushMatrix();
             glTranslatef(game->config.outer_pix_width - mx,
                          game->config.outer_pix_height - my, 0);

@@ -52,7 +52,7 @@
 //
 void gl_init_2d_mode(void);
 void gl_enter_2d_mode(void);
-void gl_enter_2d_mode_outer(void);
+void gl_enter_2d_mode(int, int);
 void gl_leave_2d_mode(void);
 void gl_enter_2_5d_mode(void);
 void gl_leave_2_5d_mode(void);

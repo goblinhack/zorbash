@@ -58,7 +58,7 @@ void gl_init_2d_mode (void)
     // Setup our viewport
     //
     CON("INIT: OpenGL enable viewport");
-    glViewport(0, 0, 
+    glViewport(0, 0,
                game->config.outer_pix_width,
                game->config.outer_pix_height);
     //
@@ -103,6 +103,7 @@ void gl_enter_2d_mode (void)
             0, //top
             -1200.0,
             1200.0);
+
     //
     // Make sure we're changing the model view and not the projection
     //
@@ -115,7 +116,7 @@ void gl_enter_2d_mode (void)
     glLoadIdentity();
 }
 
-void gl_enter_2d_mode_outer (void)
+void gl_enter_2d_mode (int w, int h)
 {_
     //
     // Change to the projection matrix and set our viewing volume.
@@ -132,11 +133,14 @@ void gl_enter_2d_mode_outer (void)
     // 2D projection
     //
     glOrtho(0, // left
-            game->config.outer_pix_width, // right
-            game->config.outer_pix_height, // bottom
+            w, // right
+            h, // bottom
             0, //top
             -1200.0,
             1200.0);
+
+    glViewport(0, 0, w, h);
+
     //
     // Make sure we're changing the model view and not the projection
     //
@@ -364,9 +368,12 @@ void gl_init_fbo (void)
             case FBO_MAP:
             case FBO_MAP_BLACK_AND_WHITE:
             case FBO_LIGHT:
-            case FBO_MINIMAP:
                 tex_width = game->config.inner_pix_width;
                 tex_height = game->config.inner_pix_height;
+                break;
+            case FBO_MINIMAP:
+                tex_width = MAP_WIDTH;
+                tex_height = MAP_HEIGHT;
                 break;
             case FBO_WID:
             case FBO_FINAL:

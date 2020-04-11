@@ -20,15 +20,16 @@ void Level::update_minimap (void)
     }
     last_rendered = time_get_time_ms_cached();
 
+    gl_enter_2d_mode(MAP_WIDTH + 1, MAP_HEIGHT + 1);
+
     blit_fbo_bind(FBO_MINIMAP);
-    glClearColor(255, 0, 0, 255);
+    glClearColor(0, 0, 0, 0);
     glBlendFunc(GL_ONE, GL_ZERO);
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_TEXTURE_2D);
     blit_init();
-    float dx = game->config.inner_pix_width / MAP_WIDTH;
-    float dy = game->config.inner_pix_height / MAP_HEIGHT;
-//    float bot = game->config.inner_pix_height;
+    float dx = 1;
+    float dy = 1;
 
     static Texp solid_tex;
     static int solid_tex_id;
@@ -37,7 +38,7 @@ void Level::update_minimap (void)
         solid_tex_id = tex_get_gl_binding(solid_tex);
     }
 
-    if (unlikely(1 || game->config.gfx_show_hidden)) {
+    if (unlikely(game->config.gfx_show_hidden)) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
@@ -85,9 +86,9 @@ void Level::update_minimap (void)
                 if ((x >= level->map_tl.x) && (x <= level->map_br.x) &&
                     (y >= level->map_tl.y) && (y <= level->map_br.y)) {
                 } else {
-//                    c.r /= 2;
-//                    c.g /= 2;
-//                    c.b /= 2;
+                    c.r /= 2;
+                    c.g /= 2;
+                    c.b /= 2;
                 }
 
                 glcolor(c);

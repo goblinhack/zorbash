@@ -18,10 +18,6 @@ void Level::display (void)
         }
     }
 
-    if (!minimap_valid) {
-        update_minimap();
-    }
-
     blit_fbo_bind(FBO_MAP);
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -32,4 +28,8 @@ void Level::display (void)
     //
     thing_render_all();
     blit_fbo_unbind();
+
+    if (!minimap_valid) {
+        update_minimap();
+    }
 }
