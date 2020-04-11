@@ -17,7 +17,7 @@ void Thing::new_monst (void)
         monstp = new Monst();
         // uncomment to see who allocates things
         // err("new monst");
-        newptr(monst, "Monst");
+        newptr(monstp, "Monst");
     }
 }
 
