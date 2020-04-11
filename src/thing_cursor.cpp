@@ -117,29 +117,7 @@ void thing_cursor_scroll_map_to_follow (void)
         // How many tiles away from the edge at each zoom level we use
         // to auto scroll
         //
-        switch (game->config.gfx_zoom) {
-            case 1: // really zoomed out
-                sensitivity = TILES_ACROSS / 4; // larger -> more sensitive
-                break;
-            case 2: // really zoomed out
-                sensitivity = TILES_ACROSS / 4;
-                break;
-            case 4:
-                sensitivity = TILES_ACROSS / 4;
-                break;
-            case 6:
-                sensitivity = TILES_ACROSS / 4;
-                break;
-            case 8:
-                sensitivity = TILES_ACROSS / 4;
-                break;
-            case 10: // really zoomed in
-                sensitivity = TILES_ACROSS / 4;
-                break;
-            default:
-                sensitivity = TILES_ACROSS / 8;
-                break;
-        }
+        sensitivity = TILES_ACROSS / 4; // larger -> more sensitive
 
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
