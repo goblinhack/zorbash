@@ -115,6 +115,40 @@ void gl_enter_2d_mode (void)
     glLoadIdentity();
 }
 
+void gl_enter_2d_mode_outer (void)
+{_
+    //
+    // Change to the projection matrix and set our viewing volume.
+    //
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+
+    //
+    // Reset the view
+    //
+    glLoadIdentity();
+
+    //
+    // 2D projection
+    //
+    glOrtho(0, // left
+            game->config.outer_pix_width, // right
+            game->config.outer_pix_height, // bottom
+            0, //top
+            -1200.0,
+            1200.0);
+    //
+    // Make sure we're changing the model view and not the projection
+    //
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+
+    //
+    // Reset the view
+    //
+    glLoadIdentity();
+}
+
 void
 gl_leave_2d_mode (void)
 {_
@@ -174,11 +208,10 @@ gl_leave_2_5d_mode (void)
 static void gl_init_fbo_ (int fbo,
                           GLuint *render_buf_id,
                           GLuint *fbo_id,
-                          GLuint *fbo_tex_id)
+                          GLuint *fbo_tex_id,
+                          GLuint tex_width,
+                          GLuint tex_height)
 {_
-    GLuint tex_width = game->config.inner_pix_width;
-    GLuint tex_height = game->config.inner_pix_height;
-
     CON("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
 
     LOG("INIT: - glGenTextures");
@@ -324,7 +357,26 @@ void gl_init_fbo (void)
 
     CON("INIT: OpenGL create FBOs");
     for (i = 0; i < MAX_FBO; i++) {
-        gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i]);
+        GLuint tex_width = game->config.inner_pix_width;
+        GLuint tex_height = game->config.inner_pix_height;
+
+        switch (i) {
+            case FBO_MAP:
+            case FBO_MAP_BLACK_AND_WHITE:
+            case FBO_LIGHT:
+            case FBO_MINIMAP:
+                tex_width = game->config.inner_pix_width;
+                tex_height = game->config.inner_pix_height;
+                break;
+            case FBO_WID:
+            case FBO_FINAL:
+                tex_width = game->config.outer_pix_width;
+                tex_height = game->config.outer_pix_height;
+                break;
+        }
+
+        gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i],
+                     tex_width, tex_height);
         blit_fbo_bind(i);
         glClearColor(0, 0, 0, 0);
         glClear(GL_DEPTH_BUFFER_BIT);
@@ -340,6 +392,17 @@ void blit_fbo (int fbo)
          0, 0,
          game->config.inner_pix_width,
          game->config.inner_pix_height);
+    blit_flush();
+}
+
+void blit_fbo_outer (int fbo)
+{
+    blit_init();
+    blit(fbo_tex_id[fbo],
+         0.0, 1.0, 1.0, 0.0,
+         0, 0,
+         game->config.outer_pix_width,
+         game->config.outer_pix_height);
     blit_flush();
 }
 

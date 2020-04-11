@@ -243,7 +243,7 @@ void Light::render_triangle_fans (void)
     auto light_offset = light_pos - cached_light_pos;
 
 #ifdef DEBUG_LIGHT
-    blit_fbo_bind(FBO_MAIN);
+    blit_fbo_bind(FBO_MAP);
     color c = RED;
     c.a = 150;
     glcolor(c);

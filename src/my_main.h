@@ -276,8 +276,8 @@ extern int TILES_DOWN;
 //#define FIXED_FONT                "data/ttf/PressStart2P.ttf"
 //#define FONT_SIZE                 8
 #define FIXED_FONT                  "data/ttf/6x6.tga"
-#define FONT_WIDTH                  5
-#define FONT_HEIGHT                 6
+#define FONT_WIDTH                  20
+#define FONT_HEIGHT                 24
 
 #define TTF_GLYPH_MIN               ' '
 //
