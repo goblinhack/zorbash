@@ -58,7 +58,7 @@ def init_64x16_ui():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_status_bar.tga",
-        name="ui_status_bar", width=96, height=16, arr=tiles)
+        name="ui_status_bar", width=60, height=6, arr=tiles)
 
 def init_title():
     tiles = [
