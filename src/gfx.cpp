@@ -246,7 +246,8 @@ static void gfx_init_text (void)
     };
 
     std::vector<std::string> arr(tiles);
-    tile_load_arr("data/ttf/6x6.tga", "text", FONT_WIDTH, FONT_HEIGHT, arr);
+    tile_load_arr("data/ttf/loresfont.tga", "text", 
+                  FONT_WIDTH, FONT_HEIGHT, arr);
 }
 
 void gfx_init (void)

@@ -9,7 +9,7 @@ def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
 
 
-def init_64x16_ui():
+def init_ui_status_bar():
     tiles = [
         "status-bar-11",
         "status-bar-10",
@@ -29,36 +29,20 @@ def init_64x16_ui():
         "magick-status",
         "anxiety-status",
         "attack-status",
-        "zorbash-0",
-        "zorbash-1",
-        "zorbash-2",
-        "blessings-0",
-        "blessings-1",
-        "curses-0",
-        "curses-1",
-        "curses-2",
-        "inventory-0",
-        "inventory-1",
-        "inventory-2",
-        "inventory-3",
-        "inventory-4",
-        "inventory-5",
-        "karma-bar-11",
-        "karma-bar-10",
-        "karma-bar-9",
-        "karma-bar-8",
-        "karma-bar-7",
-        "karma-bar-6",
-        "karma-bar-5",
-        "karma-bar-4",
-        "karma-bar-3",
-        "karma-bar-2",
-        "karma-bar-1",
-        "karma-bar-0",
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_status_bar.tga",
-        name="ui_status_bar", width=96, height=16, arr=tiles)
+        name="ui_status_bar", width=200, height=24, arr=tiles)
+
+def init_ui_status_bar_title():
+    tiles = [
+        "zorbash-0",
+        "zorbash-1",
+        "zorbash-2",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/zorbash_small.tga",
+        name="status_bar_title", width=240, height=48, arr=tiles)
 
 def init_title():
     tiles = [
@@ -710,8 +694,8 @@ def init_claws_tiles():
 
 init_solid()
 init_light()
-init_64x16_ui()
-init_title()
+init_ui_status_bar()
+init_ui_status_bar_title()
 init_ui_dead()
 init_ui_action_bar()
 init_16x16()
