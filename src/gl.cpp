@@ -166,7 +166,7 @@ gl_leave_2d_mode (void)
 void gl_enter_2_5d_mode (void)
 {_
     glEnable(GL_DEPTH_TEST);
-    glClear(GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -384,9 +384,10 @@ void gl_init_fbo (void)
 
         gl_init_fbo_(i, &render_buf_id[i], &fbo_id[i], &fbo_tex_id[i],
                      tex_width, tex_height);
+        gl_enter_2d_mode(tex_width, tex_height);
         blit_fbo_bind(i);
         glClearColor(0, 0, 0, 0);
-        glClear(GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);
         blit_fbo_unbind();
     }
 }

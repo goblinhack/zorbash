@@ -141,15 +141,15 @@ static void game_config_key_load_set (SDL_Scancode code)
     game->config_keyboard_select();
 }
 
-static void game_config_key_zoom_in_set (SDL_Scancode code)
+static void game_config_key_todo1_set (SDL_Scancode code)
 {_
-    game->config.key_zoom_in = code;
+    game->config.key_todo1 = code;
     game->config_keyboard_select();
 }
 
-static void game_config_key_zoom_out_set (SDL_Scancode code)
+static void game_config_key_todo2_set (SDL_Scancode code)
 {_
-    game->config.key_zoom_out = code;
+    game->config.key_todo2 = code;
     game->config_keyboard_select();
 }
 
@@ -291,17 +291,17 @@ uint8_t game_config_key_load (Widp w, int32_t x, int32_t y, uint32_t button)
     return (true);
 }
 
-uint8_t game_config_key_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_key_todo1 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
-    on_sdl_key_grab = game_config_key_zoom_in_set;
+    on_sdl_key_grab = game_config_key_todo1_set;
     return (true);
 }
 
-uint8_t game_config_key_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
+uint8_t game_config_key_todo2 (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     grab_key();
-    on_sdl_key_grab = game_config_key_zoom_out_set;
+    on_sdl_key_grab = game_config_key_todo2_set;
     return (true);
 }
 
@@ -853,8 +853,8 @@ void Game::config_keyboard_select (void)
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_zoom_in));
-        wid_set_on_mouse_up(w, game_config_key_zoom_in);
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_todo1));
+        wid_set_on_mouse_up(w, game_config_key_todo1);
     }
     ///////////////////////////////////////////////////////////////////////
     // zoom_out
@@ -880,8 +880,8 @@ void Game::config_keyboard_select (void)
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
-          SDL_GetScancodeName((SDL_Scancode)game->config.key_zoom_out));
-        wid_set_on_mouse_up(w, game_config_key_zoom_out);
+          SDL_GetScancodeName((SDL_Scancode)game->config.key_todo2));
+        wid_set_on_mouse_up(w, game_config_key_todo2);
     }
 
     ///////////////////////////////////////////////////////////////////////

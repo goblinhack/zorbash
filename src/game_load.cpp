@@ -376,8 +376,8 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.key_wait);
     in >> bits(my.t.key_load);
     in >> bits(my.t.key_save);
-    in >> bits(my.t.key_zoom_in);
-    in >> bits(my.t.key_zoom_out);
+    in >> bits(my.t.key_todo1);
+    in >> bits(my.t.key_todo2);
     in >> bits(my.t.key_pause);
     in >> bits(my.t.key_help);
     in >> bits(my.t.key_quit);
