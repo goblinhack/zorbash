@@ -147,10 +147,10 @@ void Config::dump (std::string pfx, std::ostream &out)
     out << pfx << "scale_pix_width    " << scale_pix_width << std::endl;
     out << pfx << "scale_pix_height   " << scale_pix_height << std::endl;
     out << pfx << "video_w_h_ratio    " << video_w_h_ratio << std::endl;
-    out << pfx << "tile_gl_width      " << tile_gl_width << std::endl;
-    out << pfx << "tile_gl_height     " << tile_gl_height << std::endl;
-    out << pfx << "one_pixel_gl_width " << one_pixel_gl_width << std::endl;
-    out << pfx << "one_pixel_gl_height" << one_pixel_gl_height << std::endl;
+    out << pfx << "tile_pix_width      " << tile_pix_width << std::endl;
+    out << pfx << "tile_pix_height     " << tile_pix_height << std::endl;
+    out << pfx << "one_pixel_width " << one_pixel_width << std::endl;
+    out << pfx << "one_pixel_height" << one_pixel_height << std::endl;
     out << pfx << "ascii_gl_width     " << ascii_gl_width << std::endl;
     out << pfx << "ascii_gl_height    " << ascii_gl_height << std::endl;
     out << pfx << "tile_pixel_width   " << tile_pixel_width << std::endl;

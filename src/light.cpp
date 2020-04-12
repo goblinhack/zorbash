@@ -40,7 +40,7 @@ Lightp light_new (Thingp owner,
     if (owner->is_player()) {
         max_light_rays = MAX_LIGHT_RAYS;
     } else {
-        max_light_rays = MAX_LIGHT_RAYS / 64;
+        max_light_rays = MAX_LIGHT_RAYS / 16;
     }
 
     auto l = new Light(); // std::make_shared< class Light >();
@@ -238,8 +238,8 @@ void Light::render_triangle_fans (void)
         return;
     }
     fpoint light_pos = (blit_tl + blit_br) / 2;
-    float tilew = game->config.tile_gl_width;
-    float tileh = game->config.tile_gl_height;
+    float tilew = game->config.tile_pix_width;
+    float tileh = game->config.tile_pix_height;
     auto light_offset = light_pos - cached_light_pos;
 
 #ifdef DEBUG_LIGHT

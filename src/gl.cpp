@@ -1401,8 +1401,8 @@ void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br)
     c.a = last_color.a / 2;
     glcolor(c);
 
-    const double dx = game->config.one_pixel_gl_width;
-    const double dy = game->config.one_pixel_gl_height;
+    const double dx = game->config.one_pixel_width;
+    const double dy = game->config.one_pixel_height;
 
     blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);
@@ -1458,8 +1458,8 @@ void tile_blit_outline_section (const Tilep &tile,
     if (scale < 0.2) {
         scale = 0.2;
     }
-    const double dx = game->config.one_pixel_gl_width * scale;
-    const double dy = game->config.one_pixel_gl_height * scale;
+    const double dx = game->config.one_pixel_width * scale;
+    const double dy = game->config.one_pixel_height * scale;
 
     blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x - dx, br.y - dy, br.x - dx, tl.y - dy);

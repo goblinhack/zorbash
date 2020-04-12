@@ -355,10 +355,10 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.scale_pix_width);
     in >> bits(my.t.scale_pix_height);
     in >> bits(my.t.video_w_h_ratio);
-    in >> bits(my.t.tile_gl_width);
-    in >> bits(my.t.tile_gl_height);
-    in >> bits(my.t.one_pixel_gl_width);
-    in >> bits(my.t.one_pixel_gl_height);
+    in >> bits(my.t.tile_pix_width);
+    in >> bits(my.t.tile_pix_height);
+    in >> bits(my.t.one_pixel_width);
+    in >> bits(my.t.one_pixel_height);
     in >> bits(my.t.ascii_gl_width);
     in >> bits(my.t.ascii_gl_height);
     in >> bits(my.t.tile_pixel_width);
