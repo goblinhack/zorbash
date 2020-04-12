@@ -78,16 +78,16 @@ void player_tick (void)
         some_key_event_was_pressed = true;
     }
 
-    if (state[game->config.key_zoom_out]) {
-        MINICON("Zoom out");
-        CON("USERCFG: zoom out");
+    if (state[game->config.key_todo2]) {
+        MINICON("TODO key1");
+        CON("USERCFG: TODO key1");
         config_gfx_zoom_out();
         some_key_event_was_pressed = true;
     }
 
-    if (state[game->config.key_zoom_in]) {
-        MINICON("Zoom in");
-        CON("USERCFG: zoom in");
+    if (state[game->config.key_todo1]) {
+        MINICON("TODO key2");
+        CON("USERCFG: TODO key2");
         config_gfx_zoom_in();
         some_key_event_was_pressed = true;
     }

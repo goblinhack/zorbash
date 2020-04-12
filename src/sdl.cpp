@@ -1185,15 +1185,8 @@ void sdl_loop (void)
 
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
-
-    gl_enter_2d_mode();
-
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
-    //
-    // Don't use this. It seemed to mess up graphics on FireGL.
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-    //
 
     if (game->config.gfx_vsync_enable) {
         SDL_GL_SetSwapInterval(1);
@@ -1201,7 +1194,7 @@ void sdl_loop (void)
         SDL_GL_SetSwapInterval(0);
     }
 
-    wid_display_all();
+    gl_enter_2d_mode();
 
 #ifdef ENABLE_ASCII_MOUSE
     SDL_ShowCursor(0);
@@ -1515,12 +1508,4 @@ void config_gfx_zoom_update (void)
 
     CON("- console              : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
     CON("- width to height ratio: %f", game->config.video_w_h_ratio);
-
-#if 0
-    if (level) {
-        Thing::update_all();
-
-        thing_map_scroll_to_player();
-    }
-#endif
 }

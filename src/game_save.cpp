@@ -314,8 +314,8 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.key_wait);
     out << bits(my.t.key_load);
     out << bits(my.t.key_save);
-    out << bits(my.t.key_zoom_in);
-    out << bits(my.t.key_zoom_out);
+    out << bits(my.t.key_todo1);
+    out << bits(my.t.key_todo2);
     out << bits(my.t.key_pause);
     out << bits(my.t.key_help);
     out << bits(my.t.key_quit);
