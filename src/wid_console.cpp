@@ -232,7 +232,7 @@ static void wid_console_wid_create (void)
                 wid_set_show_cursor(child, true);
                 wid_set_name(child, "console input");
                 wid_set_focusable(child, 1);
-                wid_move_delta(child, 2, 0);
+                wid_move_delta(child, 1, 0);
                 wid_console_input_line = child;
 
                 Widp prefix = wid_new_container(wid_console_container, "");

@@ -202,4 +202,6 @@ static inline int ascii_y_ok (int y)
 extern float tile_pix_w;
 extern float tile_pix_h;
 
-#define ASCII_CURSOR_UCHAR     L'_'
+#define ASCII_CURSOR_UCHAR ((wchar_t)('z' + 6))
+#define ASCII_CURSOR_TILE  "C97" // block
+#define ASCII_UNKNOWN_TILE "C31" // ?

@@ -444,24 +444,16 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             continue;
         }
 
-        auto is_cursor = (c == ASCII_CURSOR_UCHAR);
-
         if (!tile) {
             tile = fixed_font->unicode_to_tile(c);
             if (tile == nullptr) {
-                tile = fixed_font->unicode_to_tile(L'▋');
-                if (tile == nullptr) {
-                    tile = fixed_font->unicode_to_tile(L'_');
-                    if (tile == nullptr) {
-                        x++;
-                        continue;
-                    }
-                }
+                tile = tile_find_mand(ASCII_UNKNOWN_TILE);
             }
         }
 
         auto saved_fg = fg;
 
+        auto is_cursor = (c == ASCII_CURSOR_UCHAR);
         if (unlikely(is_cursor)) {
             static uint32_t last;
             static uint8_t first = true;
@@ -479,9 +471,6 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             } else {
                 fg = CONSOLE_CURSOR_OTHER_COLOR;
             }
-
-            tile = fixed_font->unicode_to_tile(L'_');
-                    tile = tile_find_mand("C97");
         }
 
         AsciiCell *cell = &getref(cells, x++, y);
@@ -497,7 +486,7 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             if (bg.r || bg.g || bg.b || bg.a) {
                 static Tilep tile;
                 if (!tile) {
-                    tile = tile_find_mand("C97");
+                    tile = tile_find_mand(ASCII_CURSOR_TILE);
                 }
                 cell->bg_tile = tile;
             } else {

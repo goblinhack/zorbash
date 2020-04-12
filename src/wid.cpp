@@ -969,7 +969,7 @@ static std::wstring wid_get_text_with_cursor (Widp w)
 
     std::wstring t = w->text;
     std::wstring o = t.substr(0, w->cursor) + ASCII_CURSOR_UCHAR +
-                    t.substr(w->cursor);
+                     t.substr(w->cursor);
 
     return (o);
 }
