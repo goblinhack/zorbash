@@ -319,11 +319,6 @@ uint8_t sdl_init (void)
         game->config.inner_pix_width,
         game->config.inner_pix_height);
 
-    game->config.tile_pixel_width =
-                    game->config.inner_pix_width / TILES_ACROSS;
-    game->config.tile_pixel_height =
-                    game->config.inner_pix_height / TILES_DOWN;
-
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
         SDL_ClearError();
@@ -1449,8 +1444,8 @@ void config_gfx_zoom_update (void)
         game->config.gfx_zoom = 1;
     }
 
-    game->config.one_pixel_gl_width = 1;
-    game->config.one_pixel_gl_height = 1;
+    game->config.one_pixel_width = 1;
+    game->config.one_pixel_height = 1;
 
     game->config.scale_pix_width = game->config.gfx_zoom;
     game->config.scale_pix_height = game->config.gfx_zoom;
@@ -1466,10 +1461,10 @@ void config_gfx_zoom_update (void)
     TILES_ACROSS = (int)tiles_across;
     TILES_DOWN = (int)tiles_down;
 
-    game->config.tile_gl_width =
-        game->config.one_pixel_gl_width * TILE_WIDTH;
-    game->config.tile_gl_height =
-        game->config.one_pixel_gl_height * TILE_HEIGHT;
+    game->config.tile_pix_width =
+        game->config.one_pixel_width * TILE_WIDTH;
+    game->config.tile_pix_height =
+        game->config.one_pixel_height * TILE_HEIGHT;
 
     game->config.video_w_h_ratio =
         (double)game->config.inner_pix_width /
@@ -1480,11 +1475,11 @@ void config_gfx_zoom_update (void)
     game->config.tile_pixel_height =
         game->config.inner_pix_height / TILES_DOWN;
 
-    CON("Graphics zoom          : %d", game->config.gfx_zoom);
-    CON("- outer    pix size    : %dx%d", game->config.outer_pix_width,
-                                          game->config.outer_pix_height);
-    CON("- inner    pix size    : %dx%d", game->config.inner_pix_width,
-                                          game->config.inner_pix_height);
+    CON("INIT: Graphics zoom          : %d", game->config.gfx_zoom);
+    CON("INIT: - outer    pix size    : %dx%d", game->config.outer_pix_width,
+                                                game->config.outer_pix_height);
+    CON("INIT: - inner    pix size    : %dx%d", game->config.inner_pix_width,
+                                                game->config.inner_pix_height);
 
     game->config.ascii_gl_width = FONT_WIDTH;
     game->config.ascii_gl_height = FONT_HEIGHT;
@@ -1493,19 +1488,19 @@ void config_gfx_zoom_update (void)
     ASCII_HEIGHT = (int)(game->config.outer_pix_height / FONT_HEIGHT);
 
     if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
-        LOG("Exceeded console hit max width  : %d", ASCII_WIDTH);
+        LOG("INIT: Exceeded console hit max width  : %d", ASCII_WIDTH);
         ASCII_WIDTH = ASCII_WIDTH_MAX;
         game->config.ascii_gl_width =
             (float)game->config.outer_pix_width / (float)ASCII_WIDTH;
     }
 
     if (ASCII_HEIGHT >= ASCII_HEIGHT_MAX) {
-        LOG("Exceeded console hit max height : %d", ASCII_HEIGHT);
+        LOG("INIT: Exceeded console hit max height : %d", ASCII_HEIGHT);
         ASCII_HEIGHT = ASCII_HEIGHT_MAX;
         game->config.ascii_gl_height =
             (float)game->config.outer_pix_height / (float)ASCII_HEIGHT;
     }
 
-    CON("- console              : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
-    CON("- width to height ratio: %f", game->config.video_w_h_ratio);
+    CON("INIT: - console size         : %dx%d", ASCII_WIDTH, ASCII_HEIGHT);
+    CON("INIT: - width to height ratio: %f", game->config.video_w_h_ratio);
 }

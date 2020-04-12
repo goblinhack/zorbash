@@ -10,8 +10,8 @@
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {_
-    double dw = game->config.one_pixel_gl_width * 4;
-    double dh = game->config.one_pixel_gl_height * 4;
+    double dw = game->config.one_pixel_width * 4;
+    double dh = game->config.one_pixel_height * 4;
 
     int x = (int) at.x;
     int y = (int) at.y;
@@ -130,10 +130,10 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 
 void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {_
-    double dw = game->config.one_pixel_gl_width * 4;
-    double dh = game->config.one_pixel_gl_height * 4;
-    double tw = game->config.tile_gl_width;
-    double th = game->config.tile_gl_height;
+    double dw = game->config.one_pixel_width * 4;
+    double dh = game->config.one_pixel_height * 4;
+    double tw = game->config.tile_pix_width;
+    double th = game->config.tile_pix_height;
 
     int x = (int) at.x;
     int y = (int) at.y;
@@ -255,8 +255,8 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     fpoint shadow_tl = blit_tl;
     fpoint shadow_br = blit_br;
 
-    float dx = game->config.one_pixel_gl_width;
-    float dy = game->config.one_pixel_gl_width;
+    float dx = game->config.one_pixel_width;
+    float dy = game->config.one_pixel_width;
 
     color c = BLACK;
     c.a = 100;
@@ -310,8 +310,8 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     fpoint shadow_tl = blit_tl;
     fpoint shadow_br = blit_br;
 
-    float dx = game->config.one_pixel_gl_width;
-    float dy = game->config.one_pixel_gl_width;
+    float dx = game->config.one_pixel_width;
+    float dy = game->config.one_pixel_width;
 
     color c = BLACK;
     c.a = 100;
@@ -550,8 +550,8 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
     is_in_lava = false;
     is_in_water = false;
 
-    float tilew = game->config.tile_gl_width;
-    float tileh = game->config.tile_gl_height;
+    float tilew = game->config.tile_pix_width;
+    float tileh = game->config.tile_pix_height;
     float X = at.x;
     float Y = at.y;
 

@@ -172,8 +172,8 @@ things_tile_overlap (Thingp A, fpoint A_at, Thingp B)
             auto m = A->at;
             float Adx = A_at.x - m.x;
             float Ady = A_at.y - m.y;
-            Adx *= game->config.tile_gl_width;
-            Ady *= game->config.tile_gl_height;
+            Adx *= game->config.tile_pix_width;
+            Ady *= game->config.tile_pix_height;
 
             float Ax = A->tl.x + Adx + (((float)x) * A_dw);
             float Ay = A->tl.y + Ady + (((float)y) * A_dh);

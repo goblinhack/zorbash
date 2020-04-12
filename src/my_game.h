@@ -472,10 +472,10 @@ public:
     int32_t            scale_pix_width              = {};
     int32_t            scale_pix_height             = {};
     double             video_w_h_ratio              = {};
-    double             tile_gl_width                = {};
-    double             tile_gl_height               = {};
-    double             one_pixel_gl_width           = {};
-    double             one_pixel_gl_height          = {};
+    double             tile_pix_width                = {};
+    double             tile_pix_height               = {};
+    double             one_pixel_width           = {};
+    double             one_pixel_height          = {};
     double             ascii_gl_width               = {};
     double             ascii_gl_height              = {};
     double             tile_pixel_width             = {};
