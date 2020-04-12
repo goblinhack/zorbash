@@ -56,6 +56,7 @@ uint8_t game_config_gfx_vsync_enable_toggle (Widp w, int32_t x, int32_t y, uint3
 {_
     CON("USERCFG: toggle vsync");
     game->config.gfx_vsync_enable = !game->config.gfx_vsync_enable;
+    config_gfx_vsync_update();
     game->config_gfx_select();
     return (true);
 }
@@ -241,7 +242,7 @@ void Game::config_gfx_select (void)
 
     auto m = ASCII_WIDTH / 2;
     point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT - 2};
-    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ITEMBAR_TL_Y - 2};
+    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2};
     auto width = br.x - tl.x;
 
     game_config_gfx_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");

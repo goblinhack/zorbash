@@ -390,7 +390,7 @@ void Game::config_keyboard_select (void)
 
     auto m = ASCII_WIDTH / 2;
     point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2};
-    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ITEMBAR_TL_Y - 2};
+    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2};
     auto width = br.x - tl.x;
 
     game_config_keyboard_window =

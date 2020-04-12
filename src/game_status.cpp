@@ -62,8 +62,8 @@ static void game_status_wid_create (void)
     game_status_fini();
 
     {_
-        point tl = {ITEMBAR_TL_X, ITEMBAR_TL_Y};
-        point br = {ITEMBAR_BR_X, ITEMBAR_BR_Y};
+        point tl = {ACTIONBAR_TL_X, ACTIONBAR_TL_Y};
+        point br = {ACTIONBAR_BR_X, ACTIONBAR_BR_Y};
         color c;
 
         wid_itembar = wid_new_square_window("text container1");
@@ -76,7 +76,7 @@ static void game_status_wid_create (void)
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {0, 0};
-        point br = {ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -89,11 +89,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -106,11 +106,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -123,11 +123,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -140,11 +140,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -158,11 +158,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -175,11 +175,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -192,11 +192,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -209,11 +209,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -226,11 +226,11 @@ static void game_status_wid_create (void)
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
     }
-    x += ITEMBAR_WIDTH;
+    x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = {x, 0};
-        point br = {x+ITEMBAR_WIDTH - 1, ITEMBAR_HEIGHT - 1};
+        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);

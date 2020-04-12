@@ -148,7 +148,7 @@ void Game::config_other_select (void)
 
     auto m = ASCII_WIDTH / 2;
     point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2};
-    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ITEMBAR_TL_Y - 2};
+    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2};
     auto width = br.x - tl.x;
 
     game_config_other_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");

@@ -240,13 +240,13 @@ extern int TILES_DOWN;
 //
 #define SIDEBAR_WIDTH               12
 
-#define ITEMBAR_HEIGHT              4
-#define ITEMBAR_WIDTH               4
-#define ITEMBAR_TOT_WIDTH           (10 * ITEMBAR_WIDTH)
-#define ITEMBAR_TL_X                (ASCII_WIDTH / 2 - (ITEMBAR_TOT_WIDTH / 2))
-#define ITEMBAR_TL_Y                (ASCII_HEIGHT - 4)
-#define ITEMBAR_BR_X                ((ASCII_WIDTH / 2 + (ITEMBAR_TOT_WIDTH / 2)) - 1)
-#define ITEMBAR_BR_Y                (ASCII_HEIGHT - 1)
+#define ACTIONBAR_HEIGHT            3
+#define ACTIONBAR_WIDTH             3
+#define ACTIONBAR_TOT_WIDTH         (10 * ACTIONBAR_WIDTH)
+#define ACTIONBAR_TL_X              (ASCII_WIDTH / 2 - (ACTIONBAR_TOT_WIDTH / 2))
+#define ACTIONBAR_TL_Y              (ASCII_HEIGHT - 4)
+#define ACTIONBAR_BR_X              ((ASCII_WIDTH / 2 + (ACTIONBAR_TOT_WIDTH / 2)) - 1)
+#define ACTIONBAR_BR_Y              (ASCII_HEIGHT - 1)
 #define INVENTORY_ITEM_WIDTH        2
 #define INVENTORY_ITEM_HEIGHT       2
 #define INVENTORY_DOWN              5
