@@ -403,7 +403,7 @@ static void game_status_wid_create (void)
     {_
         auto w = wid_new_square_button(wid_sidebar, "attack-icon");
         point tl = {0, y_at};
-        point br = {2, y_at + 2};
+        point br = {1, y_at + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "attack-icon");
@@ -455,7 +455,7 @@ static void game_status_wid_create (void)
     {_
         auto w = wid_new_square_button(wid_sidebar, "defence-icon");
         point tl = {0, y_at};
-        point br = {2, y_at + 2};
+        point br = {1, y_at + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "defence-icon");
@@ -463,8 +463,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "defence-status-bar");
-        point tl = {3, y_at};
-        point br = {tl.x + SIDEBAR_WIDTH - 4, tl.y + 1};
+        point tl = {2, y_at};
+        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y + 1};
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
 
