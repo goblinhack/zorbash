@@ -1920,6 +1920,14 @@ static void wid_destroy_immediate (Widp w)
         wid_moving = nullptr;
     }
 
+    for (auto x = 0; x < ASCII_WIDTH; x++) {
+        for (auto y = 0; y < ASCII_HEIGHT; y++) {
+            if (get(wid_on_screen_at, x, y) == w) {
+                set(wid_on_screen_at, x, y, static_cast<Widp>(0));
+            }
+        }
+    }
+
     delete w;
 }
 
@@ -3640,6 +3648,7 @@ static Widp wid_find_at (Widp w, int32_t x, int32_t y)
         return nullptr;
     }
 
+    verify(w);
     if (wid_ignore_being_destroyed(w)) {
         return nullptr;
     }
@@ -4325,6 +4334,7 @@ static Widp wid_mouse_motion_handler (int32_t x, int32_t y,
 
     w = get(wid_on_screen_at, x, y);
     if (w) {
+        verify(w);
         return (w);
     }
 

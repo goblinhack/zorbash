@@ -555,7 +555,7 @@ void Game::save_select (void)
 
     auto m = ASCII_WIDTH / 2;
     point tl = {m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2};
-    point br = {m + WID_POPUP_WIDTH_WIDE / 2, ITEMBAR_TL_Y - 2};
+    point br = {m + WID_POPUP_WIDTH_WIDE / 2, ACTIONBAR_TL_Y - 2};
     auto width = br.x - tl.x;
 
     wid_save = new WidPopup(tl, br, tile_find_mand("save"), "ui_popup_wide");

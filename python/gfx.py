@@ -81,7 +81,7 @@ def init_ui_action_bar():
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_action_bar.tga",
-        name="ui_action_bar", width=320, height=32, arr=tiles)
+        name="ui_action_bar", width=600, height=72, arr=tiles)
 
 def init_16x16():
     tiles = [
@@ -693,6 +693,7 @@ def init_claws_tiles():
         name="claws", width=25, height=25, arr=tiles)
 
 init_solid()
+init_title()
 init_light()
 init_ui_status_bar()
 init_ui_status_bar_title()
