@@ -268,9 +268,8 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         } else if (this != level->player) {
             fpoint p = level->player->at;
             fpoint d = at - p;
-            const double D = 50.0;
-            dx = d.x / D;
-            dy = d.y / D;
+            dx = d.x * 10;
+            dy = d.y * 10;
 
             auto dist = distance(at, p);
             if (dist > 3) {
