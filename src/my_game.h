@@ -472,10 +472,10 @@ public:
     int32_t            scale_pix_width              = {};
     int32_t            scale_pix_height             = {};
     double             video_w_h_ratio              = {};
-    double             tile_pix_width                = {};
-    double             tile_pix_height               = {};
-    double             one_pixel_width           = {};
-    double             one_pixel_height          = {};
+    double             tile_pix_width               = {};
+    double             tile_pix_height              = {};
+    double             one_pixel_width              = {};
+    double             one_pixel_height             = {};
     double             ascii_gl_width               = {};
     double             ascii_gl_height              = {};
     double             tile_pixel_width             = {};
@@ -618,6 +618,7 @@ public:
 extern class Game *game;
 extern class World *world;
 extern class Level *level;
+extern struct Thing_ *player;
 extern bool thing_map_black_and_white;
 
 extern uint8_t game_mouse_down(int32_t x, int32_t y, uint32_t button);

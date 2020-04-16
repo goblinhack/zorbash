@@ -91,32 +91,47 @@ void Thing::delete_dmap_scent (void)
 ////////////////////////////////////////////////////////////////////////////
 // light
 ////////////////////////////////////////////////////////////////////////////
-Lightp Thing::get_light (void)
+std::vector<Lightp> &Thing::get_light (void)
 {_
     if (monstp) {
         verify(monstp);
         return (monstp->light);
     } else {
+        static std::vector<Lightp> no_light;
+        return no_light;
+    }
+}
+
+std::size_t Thing::get_light_count (void)
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->light.size());
+    } else {
         return (0);
     }
 }
 
-void Thing::new_light (fpoint at, double strength, color col)
+void Thing::new_light (fpoint at, fpoint offset, double strength, color col)
 {_
     new_monst();
-    if (!monstp->light) {
-        monstp->light = light_new(this, at, strength, col);
-        monstp->light_strength = strength;
-        monstp->light_col = col;
-    }
+    auto l = light_new(this, at, offset, strength, col);
+    monstp->light.push_back(l);
+    monstp->light_strength = strength;
+    monstp->light_col = col;
+}
+
+void Thing::new_light (fpoint at, double strength, color col)
+{_
+    new_light(at, fpoint(0, 0), strength, col);
 }
 
 void Thing::delete_light (void)
 {_
     if (monstp) {
         verify(monstp);
-        if (monstp->light) {
-            delete monstp->light; monstp->light = 0;
+        for (auto l : monstp->light) {
+            delete l;
         }
     }
 }

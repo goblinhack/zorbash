@@ -214,6 +214,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
     if (my.t->has_light) {
         my.t->new_light(my.t->at,
+                        fpoint(0, 0),
                         my.t->monstp->light_strength,
                         my.t->monstp->light_col);
     }
