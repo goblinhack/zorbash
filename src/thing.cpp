@@ -102,6 +102,10 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         new_age_map();
     }
 
+    if (tp_is_player(tpp)) {
+        player = this;
+    }
+
     if (tp_is_monst(tpp) || tp_is_player(tpp) || tp_is_movable(tpp)) {
         set_timestamp_born(time_get_time_ms_cached());
     }
@@ -315,10 +319,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     if (unlikely(tp_is_player(tpp))) {
         if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
-                level->player->at.x,
-                level->player->at.y,
-                at.x,
-                at.y);
+                level->player->at.x, level->player->at.y, at.x, at.y);
             return;
         }
         level->player = this;
@@ -329,6 +330,26 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         //
         color col = WHITE;
         new_light(at, TILE_WIDTH, col);
+#if 1
+        float d1 = 0.1;
+        float d2 = 0.05;
+        new_light(at, fpoint(d1, d1), TILE_WIDTH, col);
+        new_light(at, fpoint(d1, d2), TILE_WIDTH, col);
+        new_light(at, fpoint(d2, d1), TILE_WIDTH, col);
+        new_light(at, fpoint(d2, d2), TILE_WIDTH, col);
+        new_light(at, fpoint(d1, -d1), TILE_WIDTH, col);
+        new_light(at, fpoint(d1, -d2), TILE_WIDTH, col);
+        new_light(at, fpoint(d2, -d1), TILE_WIDTH, col);
+        new_light(at, fpoint(d2, -d2), TILE_WIDTH, col);
+        new_light(at, fpoint(-d1, d1), TILE_WIDTH, col);
+        new_light(at, fpoint(-d1, d2), TILE_WIDTH, col);
+        new_light(at, fpoint(-d2, d1), TILE_WIDTH, col);
+        new_light(at, fpoint(-d2, d2), TILE_WIDTH, col);
+        new_light(at, fpoint(-d1, -d1), TILE_WIDTH, col);
+        new_light(at, fpoint(-d1, -d2), TILE_WIDTH, col);
+        new_light(at, fpoint(-d2, -d1), TILE_WIDTH, col);
+        new_light(at, fpoint(-d2, -d2), TILE_WIDTH, col);
+#endif
 
         has_light = true;
         log("player created");
@@ -561,6 +582,10 @@ void Thing::destroy (void)
     }
 
     level->free_thing_id(this);
+
+    if (this == player) {
+        player = nullptr;
+    }
 
     if (monstp) {
         oldptr(monstp);
@@ -796,8 +821,7 @@ void Thing::update_light (void)
     //
     // Light source follows the thing.
     //
-    auto l = get_light();
-    if (l) {
+    for (auto l : get_light()) {
         verify(l);
         l->at = at;
         l->calculate();

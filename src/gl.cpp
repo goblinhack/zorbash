@@ -77,7 +77,7 @@ void gl_init_2d_mode (void)
     gl_init_fbo();
 
     CON("INIT: OpenGL misc");
-    glLineWidth(2.0);
+    glLineWidth(1.0);
     glEnable(GL_LINE_SMOOTH);
 }
 

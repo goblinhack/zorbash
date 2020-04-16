@@ -28,6 +28,7 @@ public:
     // if the light moves.
     //
     fpoint             at;
+    fpoint             offset;
 
     //
     // The owner of the light, so we don't block our own light.
@@ -54,8 +55,8 @@ public:
     void destroyed(void);
     void reset(void);
     void calculate(void);
-    void render_triangle_fans(void);
-    void render(int fbo);
+    void render_triangle_fans(int last, int count);
+    void render(int fbo, int last, int count);
 
     void log_(const char *fmt, va_list args); // compile error without
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -72,6 +73,7 @@ public:
 
 extern Lightp light_new(Thingp owner,
                         fpoint at,
+                        fpoint offset,
                         double strength,
                         color col);
 extern void lights_render(int minx, int miny, int maxx, int maxy, int fbo);

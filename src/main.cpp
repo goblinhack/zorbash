@@ -483,6 +483,9 @@ static void usage (void)
 
     CON("zorbash, options:");
     CON(" ");
+    CON(" --new-game");
+    CON(" --debug-mode");
+    CON(" ");
     CON("Written by goblinhack@gmail.com");
 }
 
@@ -495,7 +498,7 @@ static void parse_args (int32_t argc, char *argv[])
     //
     CON("INIT: Parse command line arguments for '%s'", argv[0]);
     for (i = 1; i < argc; i++) {
-      CON("INIT:   - argument: \"%s\"", argv[i]);
+      CON("INIT: argument: \"%s\"", argv[i]);
     }
 
     if (argc) {
@@ -523,12 +526,11 @@ static void parse_args (int32_t argc, char *argv[])
         //
         if (argv[i][0] == '-') {
             usage();
-            WARN("unknown format argument, %s", argv[i]);
-            continue;
+            DIE("unknown format argument, %s", argv[i]);
         }
 
         usage();
-        WARN("unknown format argument, %s", argv[i]);
+        DIE("unknown format argument, %s", argv[i]);
     }
 }
 

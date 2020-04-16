@@ -14,6 +14,7 @@ Thingp debug_thing;
 static Texp light_overlay_tex;
 static int light_overlay_texid;
 static float light_dim = 1.0;
+#undef DEBUG_LIGHT
 
 Light::Light (void)
 {_
@@ -33,6 +34,7 @@ Light::~Light (void)
 
 Lightp light_new (Thingp owner,
                   fpoint at,
+                  fpoint offset,
                   double strength,
                   color col)
 {_
@@ -41,11 +43,13 @@ Lightp light_new (Thingp owner,
         max_light_rays = MAX_LIGHT_RAYS;
     } else {
         max_light_rays = MAX_LIGHT_RAYS / 16;
+        max_light_rays = std::max(8, (int)max_light_rays);
     }
 
     auto l = new Light(); // std::make_shared< class Light >();
 
     l->at             = at;
+    l->offset         = offset;
     l->strength       = strength;
     l->owner          = owner;
     l->col            = col;
@@ -90,7 +94,7 @@ void Light::calculate (void)
     auto visible_width = light_radius + 1;
     auto visible_height = light_radius + 1;
 
-    auto light_pos = owner->at + fpoint(0.5, 0.5);
+    auto light_pos = at + fpoint(0.5, 0.5) + offset;
 
     int16_t maxx = light_pos.x + visible_width;
     int16_t minx = light_pos.x - visible_width;
@@ -230,22 +234,30 @@ void Light::calculate (void)
     }
 }
 
-void Light::render_triangle_fans (void)
+void Light::render_triangle_fans (int last, int count)
 {
     fpoint blit_tl, blit_br;
     Tilep tile = {};
     if (!owner->get_map_offset_coords(blit_tl, blit_br, tile)) {
         return;
     }
+
+    fpoint sz = blit_tl - blit_br;
+    if (sz.x < 0) { sz.x = -sz.x; }
+    if (sz.y < 0) { sz.y = -sz.x; }
     fpoint light_pos = (blit_tl + blit_br) / 2;
     float tilew = game->config.tile_pix_width;
     float tileh = game->config.tile_pix_height;
+    light_pos.x += offset.x * tilew;
+    light_pos.y += offset.y * tileh;
+
     auto light_offset = light_pos - cached_light_pos;
 
 #ifdef DEBUG_LIGHT
     blit_fbo_bind(FBO_MAP);
     color c = RED;
     c.a = 150;
+#if 0
     glcolor(c);
     gl_blitline(blit_tl.x, blit_tl.y, blit_br.x, blit_tl.y);
     gl_blitline(blit_tl.x, blit_tl.y, blit_tl.x, blit_br.y);
@@ -255,6 +267,7 @@ void Light::render_triangle_fans (void)
     gl_blitline(blit_br.x, blit_tl.y, light_pos.x, light_pos.y);
     gl_blitline(blit_tl.x, blit_br.y, light_pos.x, light_pos.y);
     gl_blitline(blit_br.x, blit_br.y, light_pos.x, light_pos.y);
+#endif
 
     c = GREEN;
     c.a = 150;
@@ -275,6 +288,7 @@ void Light::render_triangle_fans (void)
         red *= light_dim;
         green *= light_dim;
         blue *= light_dim;
+        alpha *= 1.0 / (float)count;
 
         blit_init();
         {
@@ -284,7 +298,6 @@ void Light::render_triangle_fans (void)
             // Walk the light rays in a circle.
             //
             push_point(light_pos.x, light_pos.y, red, green, blue, alpha);
-
 
             //
             // Non player lights fade
@@ -326,8 +339,8 @@ void Light::render_triangle_fans (void)
         std::copy(gl_array_buf, bufp, cached_gl_cmds.begin());
 #ifndef DEBUG_LIGHT
         blit_flush_triangle_fan();
-        blit_flush_triangle_fan();
-        blit_flush_triangle_fan();
+//        blit_flush_triangle_fan();
+//        blit_flush_triangle_fan();
 #endif
     } else {
         float *b = &(*cached_gl_cmds.begin());
@@ -339,8 +352,8 @@ void Light::render_triangle_fans (void)
         // Lights glow more with more blends
         //
         blit_flush_triangle_fan(b, e);
-        blit_flush_triangle_fan(b, e);
-        blit_flush_triangle_fan(b, e);
+//        blit_flush_triangle_fan(b, e);
+//        blit_flush_triangle_fan(b, e);
         glTranslatef(-light_offset.x, -light_offset.y, 0);
     }
 
@@ -348,7 +361,7 @@ void Light::render_triangle_fans (void)
     // Blend a texture on top of all the above blending so we get smooth
     // fade off of the light.
     //
-    if (level->player && (owner == level->player)) {
+    if (last && (level->player && (owner == level->player))) {
         //
         // To account for the blurring in blit_flush_triangle_fan_smoothed
         //
@@ -379,81 +392,86 @@ void Light::render_triangle_fans (void)
    }
 }
 
-void Light::render (int fbo)
+void Light::render (int fbo, int last, int count)
 {
     if (!light_overlay_tex) {
         light_overlay_tex = tex_load("", "light", GL_LINEAR);
         light_overlay_texid = tex_get_gl_binding(light_overlay_tex);
     }
 
-    render_triangle_fans();
+    render_triangle_fans(last, count);
 }
 
 void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 {
-    Lightp deferred_player_light = nullptr;
-
     light_dim = 1.0;
 
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
-                auto l = t->get_light();
-                if (level->player && (l->owner == level->player)) {
-                    deferred_player_light = l;
-                    continue;
-                }
-            }
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+    if (player) {
+
+        auto lc = player->get_light_count();
+        size_t c = 0;
+        for (auto l : player->get_light()) {
+//glBlendEquation(GL_FUNC_ADD);
+//glBlendFunc(vals[i1], vals[i2]);
+            l->render(fbo, (c == lc - 1), lc);
+            c++;
         }
-    }
-
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    if (deferred_player_light) {
-        deferred_player_light->render(fbo);
     }
 
     //
     // Can't tell the difference between these
     //
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR);
+#if 1
+//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+//glBlendFunc(vals[i1], vals[i2]);
+#endif
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
-                auto l = t->get_light();
-                if (level->player && (l->owner == level->player)) {
-                    continue;
-                }
-
-                //
-                // Too far away from the player? Skip rendering.
-                //
-                light_dim = 1.0;
-
-                if (level->player) {
-                    auto p = level->player;
-                    auto len = DISTANCE(l->at.x, l->at.y, p->at.x, p->at.y);
-                    if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
+                for (auto l : t->get_light()) {
+                    if (level->player && (l->owner == level->player)) {
                         continue;
                     }
 
-                    auto dist =
-                      thing_can_reach_player(point(l->at.x, l->at.y));
-                    if (dist >= MAX_LIGHT_PLAYER_DISTANCE) {
-                        continue;
-                    }
+                    //
+                    // Too far away from the player? Skip rendering.
+                    //
+                    light_dim = 1.0;
 
-                    if (dist > 0) {
-                        light_dim = 1.0 - (0.05 * (float)dist);
-                        if (light_dim <= 0) {
+                    if (level->player) {
+                        auto p = level->player;
+                        auto len = DISTANCE(l->at.x, l->at.y,
+                                            p->at.x, p->at.y);
+                        if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
                             continue;
                         }
-                    }
-                }
 
-                l->render(fbo);
+                        auto dist =
+                          thing_can_reach_player(point(l->at.x, l->at.y));
+                        if (dist >= MAX_LIGHT_PLAYER_DISTANCE) {
+                            continue;
+                        }
+
+                        if (dist > 0) {
+                            light_dim = 1.0 - (0.05 * (float)dist);
+                            if (light_dim <= 0) {
+                                continue;
+                            }
+                        }
+                    }
+
+                    l->render(fbo, false, 1);
+                }
             }
         }
     }

@@ -47,7 +47,7 @@ typedef enum {
 typedef struct Monst_ {
     AgeMap       *age_map = {};              // How old a cell is
     Dmap         *dmap_scent = {};
-    Lightp       light = {};                 // Have a light source?
+    std::vector<Lightp> light = {};          // Has light sources?
 
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
@@ -221,10 +221,10 @@ public:
     void new_dmap_scent(void);
     void delete_dmap_scent(void);
 
-    Lightp get_light(void);
-    void new_light(fpoint at,
-                   double strength,
-                   color col = WHITE);
+    std::vector<Lightp> & get_light(void);
+    std::size_t get_light_count(void);
+    void new_light(fpoint at, fpoint offset, double strength, color col = WHITE);
+    void new_light(fpoint at, double strength, color col = WHITE);
     void delete_light(void);
 
     void set_lunge_to(fpoint);

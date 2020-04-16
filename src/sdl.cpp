@@ -191,25 +191,25 @@ uint8_t sdl_init (void)
     int video_height;
     int value;
 
+    LOG("INIT: SDL version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
+
+    LOG("INIT: SDL_Init");
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
         SDL_MSG_BOX("SDL_Init failed %s", SDL_GetError());
         ERR("SDL_Init failed %s", SDL_GetError());
     }
 
+    LOG("INIT: SDL_VideoInit");
     if (SDL_VideoInit(0) != 0) {
         SDL_MSG_BOX("SDL_VideoInit failed %s", SDL_GetError());
         ERR("SDL_VideoInit failed %s", SDL_GetError());
     }
-
-    LOG("SDL version: %u.%u", SDL_MAJOR_VERSION, SDL_MINOR_VERSION);
 
     int x = 0;
     if (x) {
         sdl_init_joystick();
         sdl_init_rumble();
     }
-
-    LOG("SDL init video:");
 
     sdl_init_video = 1;
 
@@ -235,8 +235,6 @@ uint8_t sdl_init (void)
         video_height = game->config.outer_pix_height;
     }
 
-    config_gfx_zoom_update();
-
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
     //
@@ -250,12 +248,12 @@ uint8_t sdl_init (void)
 
     uint32_t video_flags;
 
-    LOG("- SDL mode    : window");
-
+    LOG("INIT: SDL_WINDOW_OPENGL");
+    LOG("INIT: SDL_WINDOW_BORDERLESS");
     video_flags = SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS;
 
     if (game->config.fullscreen) {
-        LOG("- SDL mode    : fullscreen");
+        LOG("INIT: SDL_WINDOW_FULLSCREEN");
         video_flags |= SDL_WINDOW_FULLSCREEN;
     }
 
@@ -264,17 +262,17 @@ uint8_t sdl_init (void)
         // For a lo pixel game this makes no sense as the frame
         // buffers are really large and slows things down.
         //
-        LOG("Calling SDL_GetDisplayDPI");
+        LOG("INIT: Calling SDL_GetDisplayDPI");
         float dpi;
         if (SDL_GetDisplayDPI(0, 0, &dpi, 0) == 0) {
-            LOG("- enable high DPI");
             video_flags |= SDL_WINDOW_ALLOW_HIGHDPI;
+            LOG("INIT: SDL_WINDOW_ALLOW_HIGHDPI");
         } else {
-            ERR("- cannot enable high DPI");
+            ERR("INIT: Cannot enable high DPI");
         }
     }
 
-    LOG("Calling SDL_CreateWindow");
+    LOG("INIT: SDL_CreateWindow");
     window = SDL_CreateWindow("zorbash",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
@@ -291,21 +289,19 @@ uint8_t sdl_init (void)
             SDL_GetError());
     }
 
-#if 0
     if (video_flags & SDL_WINDOW_ALLOW_HIGHDPI) {
         SDL_GL_GetDrawableSize(window,
-                               &game->config.inner_pix_width,
-                               &game->config.inner_pix_height);
+                               &game->config.outer_pix_width,
+                               &game->config.outer_pix_height);
     } else {
         SDL_GetWindowSize(window,
-                          &game->config.inner_pix_width,
-                          &game->config.inner_pix_height);
+                          &game->config.outer_pix_width,
+                          &game->config.outer_pix_height);
     }
 
-    LOG("Palling SDL_GL_CreateContext (drawable size %dx%d)...",
-        game->config.inner_pix_width,
-        game->config.inner_pix_height);
-#endif
+    LOG("INIT: SDL_GL_CreateContext (%dx%d)",
+        game->config.outer_pix_width,
+        game->config.outer_pix_height);
 
     context = SDL_GL_CreateContext(window);
 
@@ -315,10 +311,6 @@ uint8_t sdl_init (void)
         ERR("SDL_GL_CreateContext failed %s", SDL_GetError());
     }
 
-    LOG("Calling SDL_GL_CreateContext (drawable size %dx%d) done",
-        game->config.inner_pix_width,
-        game->config.inner_pix_height);
-
     if (SDL_GL_MakeCurrent(window, context) < 0) {
         SDL_MSG_BOX("SDL_GL_MakeCurrent failed %s", SDL_GetError());
         SDL_ClearError();
@@ -327,13 +319,15 @@ uint8_t sdl_init (void)
 
     SDL_ClearError();
 
-    LOG("Callig SDL_SetWindowTitle");
+    config_gfx_zoom_update();
+
+    LOG("INIT: SDL_SetWindowTitle");
     SDL_SetWindowTitle(window, "zorbash");
 
-    LOG("- GL Vendor   : %s", glGetString(GL_VENDOR));
-    LOG("- GL Renderer : %s", glGetString(GL_RENDERER));
-    LOG("- GL Version  : %s", glGetString(GL_VERSION));
-    DBG("- GL Exts     : %s", glGetString(GL_EXTENSIONS));
+    LOG("INIT: GL Vendor   : %s", glGetString(GL_VENDOR));
+    LOG("INIT: GL Renderer : %s", glGetString(GL_RENDERER));
+    LOG("INIT: GL Version  : %s", glGetString(GL_VERSION));
+    DBG("INIT: GL Exts     : %s", glGetString(GL_EXTENSIONS));
 
     SDL_GL_GetAttribute(SDL_GL_RED_SIZE, &value);
     DBG("Red         : %d", value);

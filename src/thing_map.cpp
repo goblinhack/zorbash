@@ -64,7 +64,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                         if (t->owner_get()) {
                             continue;
                         }
-                        if (t->get_light()) {
+                        if (t->get_light_count()) {
                             continue;
                         }
                         glcolorfast(GRAY50);
@@ -164,14 +164,25 @@ void thing_render_all (void)
                       FBO_LIGHT);
         glBindTexture(GL_TEXTURE_2D, 0);
         blit_fbo_bind(FBO_MAP);
+#if 0
+//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+#endif
         glBlendFunc(GL_ZERO, GL_SRC_COLOR);
         blit_fbo(FBO_LIGHT);
 
         //
         // Blend the black and white background of where we have been
         //
+#if 0
         glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_COLOR);
         blit_fbo(FBO_MAP_BLACK_AND_WHITE);
+#endif
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 #endif
     } else {

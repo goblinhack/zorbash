@@ -10,6 +10,7 @@
 class Game *game;
 class World *world;
 class Level *level;
+struct Thing_ *player;
 
 Game::Game (std::string appdata)
 {_
