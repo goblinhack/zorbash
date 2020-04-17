@@ -366,7 +366,8 @@ void gl_init_fbo (void)
 
         switch (i) {
             case FBO_MAP:
-            case FBO_MAP_BLACK_AND_WHITE:
+            case FBO_MAP_HIDDEN:
+            case FBO_MAP_VISIBLE:
             case FBO_LIGHT:
                 tex_width = game->config.inner_pix_width;
                 tex_height = game->config.inner_pix_height;
