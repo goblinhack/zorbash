@@ -43,6 +43,7 @@ Lightp light_new (Thingp owner,
         max_light_rays = MAX_LIGHT_RAYS;
     } else {
         max_light_rays = MAX_LIGHT_RAYS / 16;
+        max_light_rays = 32;
         max_light_rays = std::max(8, (int)max_light_rays);
     }
 
@@ -339,8 +340,14 @@ void Light::render_triangle_fans (int last, int count)
         std::copy(gl_array_buf, bufp, cached_gl_cmds.begin());
 #ifndef DEBUG_LIGHT
         blit_flush_triangle_fan();
-//        blit_flush_triangle_fan();
-//        blit_flush_triangle_fan();
+        //
+        // Makes non player lights more intense
+        //
+        if (level->player && (owner != level->player)) {
+            blit_flush_triangle_fan();
+            blit_flush_triangle_fan();
+            blit_flush_triangle_fan();
+        }
 #endif
     } else {
         float *b = &(*cached_gl_cmds.begin());
@@ -352,8 +359,15 @@ void Light::render_triangle_fans (int last, int count)
         // Lights glow more with more blends
         //
         blit_flush_triangle_fan(b, e);
-//        blit_flush_triangle_fan(b, e);
-//        blit_flush_triangle_fan(b, e);
+
+        //
+        // Makes non player lights more intense
+        //
+        if (level->player && (owner != level->player)) {
+            blit_flush_triangle_fan(b, e);
+            blit_flush_triangle_fan(b, e);
+            blit_flush_triangle_fan(b, e);
+        }
         glTranslatef(-light_offset.x, -light_offset.y, 0);
     }
 
@@ -409,12 +423,9 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
     if (player) {
-
         auto lc = player->get_light_count();
         size_t c = 0;
         for (auto l : player->get_light()) {
-//glBlendEquation(GL_FUNC_ADD);
-//glBlendFunc(vals[i1], vals[i2]);
             l->render(fbo, (c == lc - 1), lc);
             c++;
         }
@@ -424,16 +435,8 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
     // Can't tell the difference between these
     //
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR);
-#if 1
-//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-//glBlendFunc(vals[i1], vals[i2]);
-#endif
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
