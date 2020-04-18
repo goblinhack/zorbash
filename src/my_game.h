@@ -153,14 +153,14 @@ public:
 
     #define FOR_ALL_THINGS(level, t, x, y)                          \
         if (!(level)->is_oob(x, y)) {                               \
-            for (auto t : get(level->all_thing_ptrs_at, x, y)) {    \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
 
     #define FOR_ALL_THINGS_END() } }
 
     #define FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z)              \
         if (!(level)->is_oob(x, y)) {                               \
-            for (auto t : get(level->all_thing_ptrs_at, x, y)) {    \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
                 auto tpp = t->tp();                                 \
                 if (tpp->z_depth != z) {                            \
@@ -168,6 +168,16 @@ public:
                 }
 
     #define FOR_ALL_THINGS_AT_DEPTH_END() } }
+
+    #define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                 \
+        if (!(level)->is_oob(x, y)) {                               \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
+                verify(t);                                          \
+                if (!t->get_light_count()) {                        \
+                    continue;                                       \
+                }
+
+    #define FOR_ALL_LIGHTS_AT_DEPTH_END() } }
 
     void get_all_things_at_depth(int x, int y, int z, std::vector<Thingp> &);
 
@@ -190,15 +200,6 @@ public:
         level->get_all_collision_things_at(x, y, JOIN1(tmp, __LINE__));   \
         for (auto t : JOIN1(tmp, __LINE__))
     void get_all_collision_things_at(int x, int y, std::vector<Thingp> &);
-
-    //
-    // Things that emit light
-    //
-    #define FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y)                   \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);                  \
-        level->get_all_light_source_things_at(x, y, JOIN1(tmp, __LINE__)); \
-        for (auto t : JOIN1(tmp, __LINE__))
-    void get_all_light_source_things_at(int x, int y, std::vector<Thingp> &);
 
     //
     // Things that move around

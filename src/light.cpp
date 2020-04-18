@@ -35,7 +35,7 @@ Light::~Light (void)
 Lightp light_new (Thingp owner,
                   fpoint at,
                   fpoint offset,
-                  double strength,
+                  float strength,
                   color col)
 {_
     uint16_t max_light_rays;
@@ -62,11 +62,11 @@ Lightp light_new (Thingp owner,
     //
     // First generate the right ray lengths.
     //
-    double dr = RAD_360 / (double) max_light_rays;
+    float dr = RAD_360 / (float) max_light_rays;
     for (auto i = 0; i < max_light_rays; i++) {
         auto r = &getref(l->ray, i);
-        double rad = dr * (double)i;
-        sincos(rad, &r->sinr, &r->cosr);
+        float rad = dr * (float)i;
+        sincosf(rad, &r->sinr, &r->cosr);
     }
 
     //log("created");
@@ -126,11 +126,11 @@ void Light::calculate (void)
 
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
-        double step = 0.0;
+        float step = 0.0;
         for (; step < strength; step += 0.01) {
-            double rad = step;
-            double p1x = light_pos.x + r->cosr * rad;
-            double p1y = light_pos.y + r->sinr * rad;
+            float rad = step;
+            float p1x = light_pos.x + r->cosr * rad;
+            float p1y = light_pos.y + r->sinr * rad;
 
             int x = (int)p1x;
             int y = (int)p1y;
@@ -154,11 +154,11 @@ void Light::calculate (void)
         // Let the light leak in a little bit. This handles corners so that
         // a point hitting on or near a corner will light the corner tile.
         //
-        double step2 = step;
+        float step2 = step;
         for (; step2 < step + 0.1; step2 += 0.01) {
-            double rad = step2;
-            double p1x = light_pos.x + r->cosr * rad;
-            double p1y = light_pos.y + r->sinr * rad;
+            float rad = step2;
+            float p1x = light_pos.x + r->cosr * rad;
+            float p1y = light_pos.y + r->sinr * rad;
 
             int x = (int)p1x;
             int y = (int)p1y;
@@ -187,21 +187,21 @@ void Light::calculate (void)
     // Cannot merge these two loops as we depend on is_nearest_wall being set
     // for all tiles first.
     //
-    if (level->player && (owner == level->player)) {
+    if (1) { ///level->player && (owner == level->player)) {
         for (int i = 0; i < max_light_rays; i++) {
             auto r = &getref(ray, i);
-            double radius = r->depth_closest;
-            double fade = pow(strength - radius, 0.05);
-            double step = 0.0;
+            float radius = r->depth_closest;
+            float fade = pow(strength - radius, 0.05);
+            float step = 0.0;
             for (; step < 1.0; step += 0.01) {
-                fade *= 0.99;
+                fade *= 0.95;
                 if (fade < 0.0001) {
                     break;
                 }
 
-                double rad = radius + 0.0 + step;
-                double p1x = light_pos.x + r->cosr * rad;
-                double p1y = light_pos.y + r->sinr * rad;
+                float rad = radius + 0.0 + step;
+                float p1x = light_pos.x + r->cosr * rad;
+                float p1y = light_pos.y + r->sinr * rad;
 
                 int x = (int)p1x;
                 int y = (int)p1y;
@@ -279,10 +279,10 @@ void Light::render_triangle_fans (int last, int count)
     if (!cached_gl_cmds.size()) {
 #endif
         auto c = col;
-        auto red   = ((double)c.r) / 255.0;
-        auto green = ((double)c.g) / 255.0;
-        auto blue  = ((double)c.b) / 255.0;
-        auto alpha = ((double)c.a) / 255.0;
+        auto red   = ((float)c.r) / 255.0;
+        auto green = ((float)c.g) / 255.0;
+        auto blue  = ((float)c.b) / 255.0;
+        auto alpha = ((float)c.a) / 255.0;
 
         cached_light_pos = light_pos;
 
@@ -309,9 +309,9 @@ void Light::render_triangle_fans (int last, int count)
 
             for (i = 0; i < max_light_rays; i++) {
                 auto r = &getref(ray, i);
-                double radius = r->depth_furthest;
-                double p1x = light_pos.x + r->cosr * radius * tilew;
-                double p1y = light_pos.y + r->sinr * radius * tileh;
+                float radius = r->depth_furthest;
+                float p1x = light_pos.x + r->cosr * radius * tilew;
+                float p1y = light_pos.y + r->sinr * radius * tileh;
 
                 push_point(p1x, p1y, red, green, blue, alpha);
 #ifdef DEBUG_LIGHT
@@ -324,9 +324,9 @@ void Light::render_triangle_fans (int last, int count)
             //
             i = 0; {
                 auto r = &getref(ray, i);
-                double radius = r->depth_furthest;
-                double p1x = light_pos.x + r->cosr * radius * tilew;
-                double p1y = light_pos.y + r->sinr * radius * tileh;
+                float radius = r->depth_furthest;
+                float p1x = light_pos.x + r->cosr * radius * tilew;
+                float p1y = light_pos.y + r->sinr * radius * tileh;
 
                 push_point(p1x, p1y, red, green, blue, alpha);
 #ifdef DEBUG_LIGHT
@@ -379,22 +379,22 @@ void Light::render_triangle_fans (int last, int count)
         //
         // To account for the blurring in blit_flush_triangle_fan_smoothed
         //
-        if (flicker > random_range(10, 20)) {
+        if (flicker > random_range(5, 20)) {
             flicker = 0;
         }
 
         if (!flicker) {
             flicker_radius = strength *
-                            (1.0 + ((double)(random_range(0, 10) / 1000.0)));
+                            (1.0 + ((float)(random_range(0, 10) / 100.0)));
         }
         flicker++;
 
-        double lw = flicker_radius * tilew;
-        double lh = flicker_radius * tileh;
-        double p1x = light_pos.x - lw;
-        double p1y = light_pos.y - lh;
-        double p2x = light_pos.x + lw;
-        double p2y = light_pos.y + lh;
+        float lw = flicker_radius * tilew;
+        float lh = flicker_radius * tileh;
+        float p1x = light_pos.x - lw;
+        float p1y = light_pos.y - lh;
+        float p2x = light_pos.x + lw;
+        float p2y = light_pos.y + lh;
 
         glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA); // hard black light
 
@@ -440,7 +440,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHT_SOURCE_THINGS(level, t, x, y) {
+            FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y) {
                 for (auto l : t->get_light()) {
                     if (level->player && (l->owner == level->player)) {
                         continue;
@@ -475,7 +475,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 
                     l->render(fbo, false, 1);
                 }
-            }
+            } FOR_ALL_LIGHTS_AT_DEPTH_END();
         }
     }
 }
