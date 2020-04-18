@@ -599,24 +599,6 @@ void Level::get_all_cursor_path_things_at (int x, int y, std::vector<Thingp> &l)
     }
 }
 
-void Level::get_all_light_source_things_at (int x, int y, std::vector<Thingp> &l)
-{_
-    l.resize(0);
-
-    if (unlikely(is_oob(x, y))) {
-        return;
-    }
-
-    for (auto t : get(all_thing_ptrs_at, x, y)) {
-        if (t) {
-            verify(t);
-            if (t->get_light_count()) {
-                l.push_back(t);
-            }
-        }
-    }
-}
-
 void Level::get_all_active_things_at (int x, int y, std::vector<Thingp> &l)
 {_
     l.resize(0);

@@ -10,10 +10,10 @@
 #include "my_thing_template.h"
 
 typedef struct {
-    double depth_closest;
-    double depth_furthest;
-    double sinr;
-    double cosr;
+    float depth_closest;
+    float depth_furthest;
+    float sinr;
+    float cosr;
 } Ray;
 
 class Light
@@ -35,13 +35,13 @@ public:
     //
     Thingp             owner;
 
-    double             flicker_radius;
+    float              flicker_radius;
     uint8_t            flicker {0};
 
     //
     // Precalculated light rays.
     //
-    double              strength;
+    float               strength;
     uint16_t            max_light_rays;
     std::vector<Ray>    ray;
     std::vector<float>  cached_gl_cmds;
@@ -74,7 +74,7 @@ public:
 extern Lightp light_new(Thingp owner,
                         fpoint at,
                         fpoint offset,
-                        double strength,
+                        float strength,
                         color col);
 extern void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
 
