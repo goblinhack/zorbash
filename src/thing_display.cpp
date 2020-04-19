@@ -495,8 +495,7 @@ void Thing::blit_outline_only (int x, int y)
         return;
     }
 
-    ThingTiles tiles;
-    get_tiles(&tiles);
+    get_tiles();
     tile_blit(tiles.tile_outline, blit_tl, blit_br);
     is_blitted = true;
 }
@@ -766,9 +765,7 @@ void Thing::blit (void)
     }
 
     if (likely(!game->config.gfx_show_hidden)) {
-        ThingTiles tiles;
-        get_tiles(&tiles);
-
+        get_tiles();
         if (is_wall()) {
             blit_wall_shadow(blit_tl, blit_br, &tiles);
             blit_wall_cladding(blit_tl, blit_br, &tiles);

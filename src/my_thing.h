@@ -152,6 +152,7 @@ public:
     uint32_t id;                         // Unique per thing.
     int16_t tp_id                 {-1};  // Common settings
     uint16_t tile_curr            {};
+    ThingTiles tiles              {};
     timestamp_t timestamp_next_frame {};
     uint32_t dir:4                {}; // Direction
 
@@ -162,6 +163,7 @@ public:
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
+    uint32_t inited_tiles:1       {};
     uint32_t has_ever_moved:1     {};
     uint32_t has_light:1          {};
     uint32_t is_attached:1        {};
@@ -211,7 +213,7 @@ public:
     static void update_all(void);
 
     void new_monst(void);
-    void get_tiles(ThingTiles *tiles);
+    void get_tiles(void);
 
     AgeMap *get_age_map(void);
     void new_age_map(void);

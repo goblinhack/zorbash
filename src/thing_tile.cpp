@@ -8,10 +8,11 @@
 #include "my_tile.h"
 #include "my_thing.h"
 
-void Thing::get_tiles(ThingTiles *out)
+void Thing::get_tiles ()
 {_
     auto n = id;
     auto tpp = tp();
+    auto out = &tiles;
 
     auto curr = tile_index_to_tile(tile_curr);
     auto tiles = tp_outline_tiles(tpp);
@@ -19,12 +20,13 @@ void Thing::get_tiles(ThingTiles *out)
         auto tile = tile_n(tiles, curr->index + curr->gfx_outline_index_offset);
         if (tile) {
             out->tile_outline = tile->global_index;
-        } else {
-            out->tile_outline = 0;
         }
-    } else {
-        out->tile_outline = 0;
     }
+
+    if (inited_tiles) {
+        return;
+    }
+    inited_tiles = true;
 
     tiles = tp_left1_tiles(tpp);
     auto tile = tile_n(tiles, n++);
