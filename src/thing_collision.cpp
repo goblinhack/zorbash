@@ -978,7 +978,7 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
                                                 x, y, dx, dy)) {
                     return (false);
                 }
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
 
@@ -1046,7 +1046,7 @@ bool Thing::collision_check_only (fpoint future_pos)
                 if (collision_check_only(it, future_pos, x, y)) {
                     return (true);
                 }
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
     return (false);

@@ -75,7 +75,7 @@ ThingShoved Thing::try_to_shove (fpoint future_pos)
 
         fpoint shove_delta = delta;
         return (try_to_shove(it, shove_delta));
-    }
+    } FOR_ALL_THINGS_END()
 
     return (THING_SHOVE_NEVER_TRIED);
 }

@@ -167,8 +167,6 @@ public:
                     continue;                                       \
                 }
 
-    #define FOR_ALL_THINGS_AT_DEPTH_END() } }
-
     #define FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y)                 \
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
@@ -177,56 +175,40 @@ public:
                     continue;                                       \
                 }
 
-    #define FOR_ALL_LIGHTS_AT_DEPTH_END() } }
-
-    void get_all_things_at_depth(int x, int y, int z, std::vector<Thingp> &);
+    //
+    // Things that move around and things that do not, but are interesting,
+    // like food
+    //
+    #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)                    \
+        if (!(level)->is_oob(x, y)) {                                     \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) {       \
+                verify(t);                                                \
+                if (!t->is_interesting()) {                               \
+                    continue;                                             \
+                }                                                         \
 
     //
     // Things that move around and things that do not, but are interesting,
     // like food
     //
-    #define FOR_ALL_INTERESTING_THINGS(level, t, x, y)                   \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);                 \
-        level->get_all_interesting_things_at(x, y, JOIN1(tmp, __LINE__)); \
-        for (auto t : JOIN1(tmp, __LINE__))
-    void get_all_interesting_things_at(int x, int y, std::vector<Thingp> &);
-
-    //
-    // Things that move around and things that do not, but are interesting,
-    // like food
-    //
-    #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                     \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);                 \
-        level->get_all_collision_things_at(x, y, JOIN1(tmp, __LINE__));   \
-        for (auto t : JOIN1(tmp, __LINE__))
-    void get_all_collision_things_at(int x, int y, std::vector<Thingp> &);
-
-    //
-    // Things that move around
-    //
-    #define FOR_ALL_ACTIVE_THINGS(level, t, x, y)                   \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);            \
-        level->get_all_active_things_at(x, y, JOIN1(tmp, __LINE__)); \
-        for (auto t : JOIN1(tmp, __LINE__))
-    void get_all_active_things_at(int x, int y, std::vector<Thingp> &);
-
-    //
-    // Things that block progress
-    //
-    #define FOR_ALL_OBSTACLE_THINGS(level, t, x, y)                   \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);              \
-        level->get_all_obstacle_things_at(x, y, JOIN1(tmp, __LINE__)); \
-        for (auto t : JOIN1(tmp, __LINE__))
-    void get_all_obstacle_things_at(int x, int y, std::vector<Thingp> &);
+    #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                      \
+        if (!(level)->is_oob(x, y)) {                                     \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) {       \
+                verify(t);                                                \
+                if (!t->is_interesting() && !t->is_obstacle()) {          \
+                    continue;                                             \
+                }                                                         \
 
     //
     // Cursor path is the highlighted path the player follows.
     //
-    #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                   \
-        static std::vector<Thingp> JOIN1(tmp, __LINE__);                 \
-        level->get_all_cursor_path_things_at(x, y, JOIN1(tmp, __LINE__)); \
-        for (auto t : JOIN1(tmp, __LINE__))
-    void get_all_cursor_path_things_at(int x, int y, std::vector<Thingp> &);
+    #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                    \
+        if (!(level)->is_oob(x, y)) {                                     \
+            for (auto t : getref(level->all_thing_ptrs_at, x, y)) {       \
+                verify(t);                                                \
+                if (!t->is_cursor_path()) {                               \
+                    continue;                                             \
+                }                                                         \
 
     void display(void);
     void update_map(void);
@@ -340,12 +322,22 @@ public:
         return (get(_is_visited, p.x, p.y));
     }
 
+    inline bool is_visited_unsafe (const point &p)
+    {_
+        return (get_unsafe(_is_visited, p.x, p.y));
+    }
+
     inline bool is_visited (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (get(_is_visited, x, y));
+    }
+
+    inline bool is_visited_unsafe (const int x, const int y)
+    {_
+        return (get_unsafe(_is_visited, x, y));
     }
 
     inline void set_visited (const int x, const int y)
@@ -356,12 +348,22 @@ public:
         set(_is_visited, x, y, true);
     }
 
+    inline void set_visited_unsafe (const int x, const int y)
+    {_
+        set_unsafe(_is_visited, x, y, true);
+    }
+
     inline void unset_visited (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
         set(_is_visited, x, y, false);
+    }
+
+    inline void unset_visited_unsafe (const int x, const int y)
+    {_
+        set_unsafe(_is_visited, x, y, false);
     }
 
     //
@@ -375,12 +377,22 @@ public:
         return (get(_is_gfx_large_shadow, p.x, p.y));
     }
 
+    inline bool is_gfx_large_shadow_unsafe (const point &p)
+    {_
+        return (get_unsafe(_is_gfx_large_shadow, p.x, p.y));
+    }
+
     inline bool is_gfx_large_shadow (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
         return (get(_is_gfx_large_shadow, x, y));
+    }
+
+    inline bool is_gfx_large_shadow_unsafe (const int x, const int y)
+    {_
+        return (get_unsafe(_is_gfx_large_shadow, x, y));
     }
 
     inline void set_gfx_large_shadow (const int x, const int y)
@@ -391,12 +403,22 @@ public:
         set(_is_gfx_large_shadow, x, y, true);
     }
 
+    inline void set_gfx_large_shadow_unsafe (const int x, const int y)
+    {_
+        set_unsafe(_is_gfx_large_shadow, x, y, true);
+    }
+
     inline void unset_gfx_large_shadow (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
         set(_is_gfx_large_shadow, x, y, false);
+    }
+
+    inline void unset_gfx_large_shadow_unsafe (const int x, const int y)
+    {_
+        set_unsafe(_is_gfx_large_shadow, x, y, false);
     }
 
     void init(point3d at, int seed);
