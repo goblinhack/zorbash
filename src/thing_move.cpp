@@ -337,6 +337,8 @@ void Thing::update_pos (fpoint to, bool immediately)
     Tilep tile;
 
     get_coords(blit_tl, blit_br, tile);
+
+    attach();
 }
 
 void Thing::move_set_dir_from_delta (fpoint delta)
