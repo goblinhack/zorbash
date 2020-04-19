@@ -287,7 +287,8 @@ void Thing::wield (Thingp weapon)
     //
     carry_anim->set_owner(this);
 
-    move_carried_items();
+    // Needed?
+    // move_carried_items();
 }
 
 void Thing::use (void)
