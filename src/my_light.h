@@ -54,7 +54,7 @@ public:
     void destroy();
     void destroyed(void);
     void reset(void);
-    void calculate(void);
+    void calculate(int last);
     void render_triangle_fans(int last, int count);
     void render(int fbo, int last, int count);
 

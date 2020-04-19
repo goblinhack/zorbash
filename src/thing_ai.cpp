@@ -261,7 +261,7 @@ void Thing::ai_get_next_hop (void)
                     GOAL_ADD((int)(max_dist - dist) * 10, "attack enemy");
                 }
             }
-        }
+        } FOR_ALL_THINGS_END()
 
         if (got_one) {
             goals.insert(Goal(total_score, point(X, Y)));

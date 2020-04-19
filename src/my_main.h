@@ -142,7 +142,7 @@
 //
 // Light sources
 //
-#define MAX_LIGHT_RAYS              (360)
+#define MAX_LIGHT_RAYS              (180)
 #define MAX_LIGHT_PLAYER_DISTANCE   (TILES_ACROSS + (TILES_ACROSS / 2))
 
 ////////////////////////////////////////////////////////////////////////////

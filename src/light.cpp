@@ -77,15 +77,15 @@ void Light::destroy (void)
 {_
 }
 
-void Light::calculate (void)
+void Light::calculate (int last)
 {
     //
     // We precalculate the walls a light hits partly for efficency but also
     // to avoid lighting walls behind those immediately visible to us. To
     // do this we do a flood fill of the level and pick the nearest walls.
     //
-    static std::array<std::array<uint32_t, MAP_HEIGHT>, MAP_WIDTH> is_nearest_wall = {};
-    static uint32_t is_nearest_wall_val;
+    static std::array<std::array<uint16_t, MAP_HEIGHT>, MAP_WIDTH> is_nearest_wall = {};
+    static uint16_t is_nearest_wall_val;
     is_nearest_wall_val++;
 
     verify(this);
@@ -122,12 +122,14 @@ void Light::calculate (void)
     // Walk the light rays in a circle. First pass is to find the nearest
     // walls.
     //
-    bool do_set_visited = (level->player && (owner == level->player));
+    bool do_set_visited = last && (level->player && (owner == level->player));
+    float step_delta1 = 0.02;
+    float step_delta2 = 0.05;
 
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
         float step = 0.0;
-        for (; step < strength; step += 0.01) {
+        for (; step < strength; step += step_delta1) {
             float rad = step;
             float p1x = light_pos.x + r->cosr * rad;
             float p1y = light_pos.y + r->sinr * rad;
@@ -140,10 +142,10 @@ void Light::calculate (void)
             }
 
             if (do_set_visited) {
-                level->set_visited(x, y);
+                level->set_visited_unsafe(x, y);
             }
 
-            if (level->is_gfx_large_shadow(x, y)) {
+            if (level->is_gfx_large_shadow_unsafe(x, y)) {
                 break;
             }
         }
@@ -155,7 +157,7 @@ void Light::calculate (void)
         // a point hitting on or near a corner will light the corner tile.
         //
         float step2 = step;
-        for (; step2 < step + 0.1; step2 += 0.01) {
+        for (; step2 < step + 0.5; step2 += step_delta2) {
             float rad = step2;
             float p1x = light_pos.x + r->cosr * rad;
             float p1y = light_pos.y + r->sinr * rad;
@@ -168,14 +170,14 @@ void Light::calculate (void)
             }
 
             if (do_set_visited) {
-                level->set_visited(x, y);
+                level->set_visited_unsafe(x, y);
             }
 
-            if (!level->is_gfx_large_shadow(x, y)) {
+            if (!level->is_gfx_large_shadow_unsafe(x, y)) {
                 break;
             }
 
-            set(is_nearest_wall, x, y, is_nearest_wall_val);
+            set_unsafe(is_nearest_wall, x, y, is_nearest_wall_val);
         }
     }
 
@@ -187,14 +189,14 @@ void Light::calculate (void)
     // Cannot merge these two loops as we depend on is_nearest_wall being set
     // for all tiles first.
     //
-    if (1) { ///level->player && (owner == level->player)) {
+    {
         for (int i = 0; i < max_light_rays; i++) {
             auto r = &getref(ray, i);
             float radius = r->depth_closest;
             float fade = pow(strength - radius, 0.05);
             float step = 0.0;
-            for (; step < 1.0; step += 0.01) {
-                fade *= 0.95;
+            for (; step < 0.5; step += step_delta2) {
+                fade *= 0.90;
                 if (fade < 0.0001) {
                     break;
                 }
@@ -211,23 +213,15 @@ void Light::calculate (void)
                 }
 
                 if (do_set_visited) {
-                    level->set_visited(x, y);
+                    level->set_visited_unsafe(x, y);
                 }
 
-                if (get(is_nearest_wall, x, y) != is_nearest_wall_val) {
+                if (get_unsafe(is_nearest_wall, x, y) != is_nearest_wall_val) {
                     break;
                 }
             }
 
             r->depth_furthest = r->depth_closest + step;
-            if (r->depth_furthest < 0.0001) {
-                r->depth_furthest = strength;
-            }
-        }
-    } else {
-        for (int i = 0; i < max_light_rays; i++) {
-            auto r = &getref(ray, i);
-            r->depth_furthest = r->depth_closest;
             if (r->depth_furthest < 0.0001) {
                 r->depth_furthest = strength;
             }
@@ -475,7 +469,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 
                     l->render(fbo, false, 1);
                 }
-            } FOR_ALL_LIGHTS_AT_DEPTH_END();
+            } FOR_ALL_THINGS_END()
         }
     }
 }

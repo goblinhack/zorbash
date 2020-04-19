@@ -153,7 +153,7 @@ void thing_cursor_path_create (void)
         for (auto x = 0; x < MAP_WIDTH; x++) {
             FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y) {
                 t->dead("eol");
-            }
+            } FOR_ALL_THINGS_END()
         }
     }
 
@@ -174,7 +174,7 @@ bool Thing::cursor_path_pop_next_and_move (void)
         auto future_pos = fpoint(to.x + 0.5, to.y + 0.5);
         FOR_ALL_CURSOR_PATH_THINGS(level, t, to.x, to.y) {
             t->dead("eol");
-        }
+        } FOR_ALL_THINGS_END()
         monstp->move_path.erase(monstp->move_path.begin());
         return (move(future_pos));
     } else {

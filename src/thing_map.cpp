@@ -72,7 +72,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                         }
                         glcolorfast(WHITE);
                         t->blit();
-                    } FOR_ALL_THINGS_AT_DEPTH_END()
+                    } FOR_ALL_THINGS_END()
                 }
             }
         }
@@ -92,7 +92,7 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
                     if (unlikely(tp_gfx_animated(tpp))) {
                         t->animate();
                     }
-                } FOR_ALL_THINGS_AT_DEPTH_END()
+                } FOR_ALL_THINGS_END()
             }
         }
     }

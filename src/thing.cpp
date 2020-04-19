@@ -330,9 +330,9 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         //
         color col = WHITE;
         new_light(at, TILE_WIDTH, col);
-#if 1
-        float d1 = 0.1;
-        float d2 = 0.05;
+
+        float d1 = 0.2;
+        float d2 = 0.15;
         new_light(at, fpoint(d1, d1), TILE_WIDTH, col);
         new_light(at, fpoint(d1, d2), TILE_WIDTH, col);
         new_light(at, fpoint(d2, d1), TILE_WIDTH, col);
@@ -349,7 +349,6 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         new_light(at, fpoint(-d1, -d2), TILE_WIDTH, col);
         new_light(at, fpoint(-d2, -d1), TILE_WIDTH, col);
         new_light(at, fpoint(-d2, -d2), TILE_WIDTH, col);
-#endif
 
         has_light = true;
         log("player created");
@@ -821,10 +820,12 @@ void Thing::update_light (void)
     //
     // Light source follows the thing.
     //
+    auto lc = get_light_count();
+    size_t c = 0;
     for (auto l : get_light()) {
-        verify(l);
         l->at = at;
-        l->calculate();
+        l->calculate(c == lc - 1);
+        c++;
     }
 }
 
