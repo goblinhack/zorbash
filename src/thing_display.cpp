@@ -10,8 +10,8 @@
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {_
-    double dw = game->config.one_pixel_width * 4;
-    double dh = game->config.one_pixel_height * 4;
+    double dw = game->config.one_pixel_width * 1;
+    double dh = game->config.one_pixel_height * 1;
 
     int x = (int) at.x;
     int y = (int) at.y;
@@ -130,8 +130,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 
 void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {_
-    double dw = game->config.one_pixel_width * 4;
-    double dh = game->config.one_pixel_height * 4;
+    double dw = game->config.one_pixel_width * 1;
+    double dh = game->config.one_pixel_height * 1;
     double tw = game->config.tile_pix_width;
     double th = game->config.tile_pix_height;
 

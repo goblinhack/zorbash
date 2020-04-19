@@ -68,8 +68,8 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
 {_
     verify(this);
 
-    at     = born;
-    target = born;
+    at      = born;
+    last_at = born;
 
     timestamp_next_frame = 0;
     const auto tpp = tp_find(name);
@@ -117,7 +117,6 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         dir            = THING_DIR_NONE;
         is_facing_left = false;
     }
-    is_waiting_to_move = true;
 
     is_hungry = tp_is_hunger_insatiable(tpp);
 

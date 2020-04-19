@@ -9,7 +9,6 @@
 
 void Thing::stop (void)
 {_
-    target = at;
     cursor_path_stop();
 }
 

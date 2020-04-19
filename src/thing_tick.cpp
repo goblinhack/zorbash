@@ -103,15 +103,12 @@ void Thing::tick (void)
         return;
     }
 
-    if (is_waiting_to_move) {
-        //
-        // Move only after a set amount of time
-        //
-        auto now = time_get_time_ms_cached();
-        if (now > get_timestamp_ai_next()) {
-            is_waiting_to_move = false;
-            achieve_goals_in_life();
-        }
+    //
+    // Move only after a set amount of time
+    //
+    auto now = time_get_time_ms_cached();
+    if (now > get_timestamp_ai_next()) {
+        achieve_goals_in_life();
     }
 
     //

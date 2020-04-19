@@ -38,7 +38,7 @@ void Thing::log (std::string pfx)
     }
 
     LOG("%s at                   %s", pfx.c_str(), at.to_string().c_str());
-    LOG("%s target               %s", pfx.c_str(), target.to_string().c_str());
+    LOG("%s last_at              %s", pfx.c_str(), last_at.to_string().c_str());
     LOG("%s tile_curr            %u", pfx.c_str(), tile_curr);
     LOG("%s timestamp_next_frame %u", pfx.c_str(), timestamp_next_frame);
     LOG("%s dir                  %u", pfx.c_str(), dir);
@@ -61,7 +61,6 @@ void Thing::log (std::string pfx)
     LOG("%s is_starving          %u", pfx.c_str(), is_starving);
     LOG("%s is_in_water          %u", pfx.c_str(), is_in_water);
     LOG("%s is_in_lava           %u", pfx.c_str(), is_in_lava);
-    LOG("%s is_waiting_to_move   %u", pfx.c_str(), is_waiting_to_move);
 
     pfx = old_pfx;
     LOG("%s }", pfx.c_str());

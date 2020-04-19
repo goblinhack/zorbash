@@ -38,8 +38,8 @@ void Thing::dump (std::string pfx, std::ostream &out)
         monstp->dump(pfx + "  ", out);
     }
 
-    out << pfx << "at                  " << at               << std::endl;
-    out << pfx << "target              " << target               << std::endl;
+    out << pfx << "at                  " << at                   << std::endl;
+    out << pfx << "last_at             " << last_at              << std::endl;
     out << pfx << "tile_curr           " << tile_curr            << std::endl;
     out << pfx << "timestamp_next_frame" << timestamp_next_frame << std::endl;
     out << pfx << "dir                 " << dir                  << std::endl;
@@ -61,7 +61,6 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "is_starving         " << is_starving          << std::endl;
     out << pfx << "is_in_water         " << is_in_water          << std::endl;
     out << pfx << "is_in_lava          " << is_in_lava           << std::endl;
-    out << pfx << "is_waiting_to_move  " << is_waiting_to_move   << std::endl;
     out << pfx << "is_blitted          " << is_blitted           << std::endl;
 
     pfx = old_pfx;

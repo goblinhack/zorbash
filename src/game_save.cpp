@@ -138,7 +138,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     }
 
     out << bits(my.t->at);
-    out << bits(my.t->target);
+    out << bits(my.t->last_at);
     out << bits(my.t->id);
     out << bits(my.t->tile_curr);
     out << bits(my.t->timestamp_next_frame);
@@ -173,7 +173,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_starving        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_in_water        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_in_lava         << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_waiting_to_move << shift; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

@@ -27,7 +27,7 @@ void player_tick (void)
         return;
     }
 
-    int delay = 100;
+    int delay = 10;
 
     uint8_t right  = 0;
     uint8_t left   = 0;
@@ -187,7 +187,7 @@ void player_tick (void)
             }
         }
 
-        double d = 0.5;
+        double d = 0.1;
         double dx = 0.0;
         double dy = 0.0;
 

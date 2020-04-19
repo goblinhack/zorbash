@@ -11,7 +11,7 @@
 #include <vector>
 #include "my_thing.h"
 
-#undef DEBUG_AI_VERBOSE
+#define DEBUG_AI_VERBOSE
 
 bool Thing::possible_to_attack (const Thingp itp)
 {_
@@ -279,7 +279,7 @@ void Thing::ai_get_next_hop (void)
 
 #ifdef DEBUG_AI_VERBOSE
     log("initial goal map derived:");
-    dmap_print(scent,
+    dmap_print(dmap_scent,
                point(start.x - minx, start.y - miny),
                point(0, 0),
                point(maxx - minx, maxy - miny));
@@ -353,7 +353,7 @@ void Thing::ai_get_next_hop (void)
     //
 #ifdef DEBUG_AI_VERBOSE
     log("goals:");
-    dmap_print(scent,
+    dmap_print(dmap_scent,
                point(start.x - minx, start.y - miny),
                point(0, 0),
                point(maxx - minx, maxy - miny));
@@ -412,8 +412,16 @@ void Thing::ai_get_next_hop (void)
             continue;
         }
 
-        auto nh = fpoint(best.x + minx + 0.5,
-                         best.y + miny + 0.5);
+        auto nh_tile = fpoint(best.x + minx + 0.5,
+                              best.y + miny + 0.5);
+        fpoint nh = at;
+        float dx = 0.1;
+        float dy = 0.1;
+
+        if (nh_tile.x < at.x) { nh.x = at.x - dx; }
+        if (nh_tile.x > at.x) { nh.x = at.x + dx; }
+        if (nh_tile.y < at.y) { nh.y = at.y - dy; }
+        if (nh_tile.y > at.y) { nh.y = at.y + dy; }
 
         log("assess (%d,%d) next (%d,%d) cost %d (lower pref)",
             (int)minx + goal.at.x, (int)miny + goal.at.y,
