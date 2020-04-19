@@ -142,7 +142,7 @@ public:
     Monst    *monstp              {};
     spoint   last_attached;
     fpoint   at;                         // Current pos
-    fpoint   target;                     // Where we are moving to
+    fpoint   last_at;
     //
     // These coords are not offset from the map scroll. i.e. they are constant
     // regardless of the map view.
@@ -183,7 +183,6 @@ public:
     uint32_t is_starving:1        {};
     uint32_t is_in_water:1        {};
     uint32_t is_in_lava:1         {};
-    uint32_t is_waiting_to_move:1 {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

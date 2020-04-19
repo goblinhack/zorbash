@@ -168,7 +168,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     }
 
     in >> bits(my.t->at);
-    in >> bits(my.t->target);
+    in >> bits(my.t->last_at);
     in >> bits(my.t->id); if (!my.t->id) { ERR("loaded a thing with no ID"); }
     in >> bits(my.t->tile_curr);
     in >> bits(T); my.t->timestamp_next_frame = load(T);
@@ -203,7 +203,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->is_starving        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_in_water        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_in_lava         = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_waiting_to_move = (bits32 >> shift) & 1; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
