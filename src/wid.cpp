@@ -5628,7 +5628,6 @@ void wid_mouse_move (Widp w)
 void wid_display_all (void)
 {_
     blit_fbo_bind(FBO_WID);
-    glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT);
     glcolor(WHITE);
 
