@@ -415,8 +415,8 @@ void Thing::ai_get_next_hop (void)
         auto nh_tile = fpoint(best.x + minx + 0.5,
                               best.y + miny + 0.5);
         fpoint nh = at;
-        float dx = 0.1;
-        float dy = 0.1;
+        float dx = 0.05;
+        float dy = 0.05;
 
         if (nh_tile.x < at.x) { nh.x = at.x - dx; }
         if (nh_tile.x > at.x) { nh.x = at.x + dx; }

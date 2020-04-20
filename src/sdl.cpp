@@ -319,6 +319,13 @@ uint8_t sdl_init (void)
 
     SDL_ClearError();
 
+    glClearColor(0, 0, 0, 0);
+    SDL_Delay(400); // avoids white flash on startup!
+    glClear(GL_COLOR_BUFFER_BIT |
+            GL_DEPTH_BUFFER_BIT |
+            GL_ACCUM_BUFFER_BIT |
+            GL_STENCIL_BUFFER_BIT);
+
     config_gfx_zoom_update();
 
     LOG("INIT: SDL_SetWindowTitle");
@@ -1172,8 +1179,6 @@ void sdl_loop (void)
 
     sdl_main_loop_running = true;
 
-    glClearColor(0, 0, 0, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
@@ -1276,7 +1281,6 @@ void sdl_loop (void)
 
         blit_fbo_bind(FBO_FINAL);
         glClear(GL_COLOR_BUFFER_BIT);
-        glClearColor(0, 0, 0, 0);
         glcolor(WHITE);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
         glBlendFunc(GL_ONE, GL_ZERO);

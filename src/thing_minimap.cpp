@@ -23,7 +23,6 @@ void Level::update_minimap (void)
     gl_enter_2d_mode(MAP_WIDTH + 1, MAP_HEIGHT + 1);
 
     blit_fbo_bind(FBO_MINIMAP);
-    glClearColor(0, 0, 0, 0);
     glBlendFunc(GL_ONE, GL_ZERO);
     glClear(GL_COLOR_BUFFER_BIT);
     glDisable(GL_TEXTURE_2D);

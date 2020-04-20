@@ -27,7 +27,7 @@ void player_tick (void)
         return;
     }
 
-    int delay = 10;
+    int delay = 1;
 
     uint8_t right  = 0;
     uint8_t left   = 0;

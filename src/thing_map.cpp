@@ -16,16 +16,19 @@ bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {_
-    const double step = 4.0;
+    const double step = 1.0 / 16.0;
 
-    auto dx = level->map_at.x - level->map_wanted_at.x;
-    if (dx) {
-        level->map_at.x -= dx / step;
+    if (level->map_at.x > level->map_wanted_at.x) {
+        level->map_at.x -= step;
     }
-
-    auto dy = level->map_at.y - level->map_wanted_at.y;
-    if (dy) {
-        level->map_at.y -= dy / step;
+    if (level->map_at.x < level->map_wanted_at.x) {
+        level->map_at.x += step;
+    }
+    if (level->map_at.y > level->map_wanted_at.y) {
+        level->map_at.y -= step;
+    }
+    if (level->map_at.y < level->map_wanted_at.y) {
+        level->map_at.y += step;
     }
 
     level->map_at.x = std::max(level->map_at.x, (float)0.0);
