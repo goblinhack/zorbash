@@ -16,20 +16,61 @@ bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {_
-    const double step = 1.0 / 16.0;
+    const float bigstep = 4.0;
+    const float medstep = 2.0 / TILE_WIDTH;
+    const float smallstep = 1.0 / TILE_WIDTH;
 
-    if (level->map_at.x > level->map_wanted_at.x) {
-        level->map_at.x -= step;
+    auto dx = level->map_at.x - level->map_wanted_at.x;
+    auto dy = level->map_at.y - level->map_wanted_at.y;
+
+    //
+    // If following the player scroll in smaller chunks
+    //
+    if (level->map_follow_player) {
+        if (fabs(dx) > 5) {
+            level->map_at.x -= dx / bigstep;
+        } else if (fabs(dx) > 3) {
+            if (level->map_at.x > level->map_wanted_at.x) {
+                level->map_at.x -= medstep;
+            } else if (level->map_at.x < level->map_wanted_at.x) {
+                level->map_at.x += medstep;
+            }
+        } else if (level->map_at.x > level->map_wanted_at.x) {
+            level->map_at.x -= smallstep;
+        } else if (level->map_at.x < level->map_wanted_at.x) {
+            level->map_at.x += smallstep;
+        }
+
+        if (fabs(dy) > 5) {
+            level->map_at.y -= dy / bigstep;
+        } else if (fabs(dy) > 3) {
+            if (level->map_at.y > level->map_wanted_at.y) {
+                level->map_at.y -= medstep;
+            } else if (level->map_at.y < level->map_wanted_at.y) {
+                level->map_at.y += medstep;
+            }
+        } else if (level->map_at.y > level->map_wanted_at.y) {
+            level->map_at.y -= smallstep;
+        } else if (level->map_at.y < level->map_wanted_at.y) {
+            level->map_at.y += smallstep;
+        }
+    } else {
+        //
+        // Else following the mouse. Bigger chunks are less sick inducing.
+        //
+        level->map_at.x -= dx / bigstep;
+        level->map_at.y -= dy / bigstep;
     }
-    if (level->map_at.x < level->map_wanted_at.x) {
-        level->map_at.x += step;
-    }
-    if (level->map_at.y > level->map_wanted_at.y) {
-        level->map_at.y -= step;
-    }
-    if (level->map_at.y < level->map_wanted_at.y) {
-        level->map_at.y += step;
-    }
+
+    //
+    // Round to pixels
+    //
+    level->map_at.x *= TILE_WIDTH;
+    level->map_at.y *= TILE_HEIGHT;
+    level->map_at.x = (int) level->map_at.x;
+    level->map_at.y = (int) level->map_at.y;
+    level->map_at.x /= TILE_WIDTH;
+    level->map_at.y /= TILE_HEIGHT;
 
     level->map_at.x = std::max(level->map_at.x, (float)0.0);
     level->map_at.y = std::max(level->map_at.y, (float)0.0);
