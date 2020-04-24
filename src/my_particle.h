@@ -14,7 +14,7 @@ typedef struct Particle_ {
 public:
     Particle_ (void) {}
     ~Particle_ (void) {}
-    bool    is_valid {};
+    bool    in_use {};
     bool    is_new {};
     fpoint  at;
     fpoint  orig_at;

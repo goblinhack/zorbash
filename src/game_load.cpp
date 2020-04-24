@@ -224,12 +224,14 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
 
 std::istream& operator>> (std::istream &in, Bits<Particle &> my)
 {_
-    in >> bits(my.t.is_valid);
-    in >> bits(my.t.is_new);
-    in >> bits(my.t.at);
-    in >> bits(my.t.orig_at);
-    in >> bits(my.t.force);
-    in >> bits(my.t.velocity);
+    in >> bits(my.t.in_use);
+    if (my.t.in_use) {
+        in >> bits(my.t.is_new);
+        in >> bits(my.t.at);
+        in >> bits(my.t.orig_at);
+        in >> bits(my.t.force);
+        in >> bits(my.t.velocity);
+    }
 
     return (in);
 }

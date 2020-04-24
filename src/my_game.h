@@ -129,10 +129,16 @@ public:
     //
     std::array<
       std::array<
-        std::array<uint32_t, PARTICLE_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
+        std::array<uint32_t, PARTICLE_SLOTS>, PARTICLES_HEIGHT>, PARTICLES_WIDTH>
           all_particle_ids_at {};
 
     std::array<Particle, PARTICLE_MAX> all_particles {};
+
+    void new_particle(const fpoint &at);
+    void free_particle(Particle *p);
+    void attach_particle(const Particle *p);
+    void detach_particle(const Particle *p);
+    void move_particle(Particle *p, fpoint to);
 
     Level (void)
     {_
