@@ -893,7 +893,7 @@ Thingp thing_new(std::string tp_name, fpoint at, fpoint jitter = fpoint(0, 0));
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
 void thing_gc(void);
-void thing_cursor_find(uint16_t minx, uint16_t miny, uint16_t maxx, uint16_t maxy);
+void thing_cursor_find(const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
 void thing_cursor_scroll_map_to_follow(void);
 void thing_cursor_move(void);
 void thing_cursor_path_create(void);

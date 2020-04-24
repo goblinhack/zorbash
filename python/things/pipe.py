@@ -8,6 +8,7 @@ def pipe_init(name, real_name):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_pipe(True)
+    x.set_is_active(True)
     x.set_is_light_strength(2)
     x.set_light_color("blue")
     x.set_z_depth(zx.MAP_DEPTH_ITEM)

@@ -1271,6 +1271,9 @@ void sdl_loop (void)
             if (!errored) {
                 player_tick();
                 things_tick();
+                if (level) {
+                    level->tick_particles();
+                }
             }
 
             //

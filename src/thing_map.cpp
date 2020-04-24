@@ -88,8 +88,8 @@ void thing_map_scroll_to_player (void)
     }
 }
 
-static void thing_blit_things (uint16_t minx, uint16_t miny,
-                               uint16_t maxx, uint16_t maxy)
+static void thing_blit_things (const uint16_t minx, const uint16_t miny,
+                               const uint16_t maxx, const uint16_t maxy)
 {_
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -141,6 +141,8 @@ static void thing_blit_things (uint16_t minx, uint16_t miny,
         }
     }
     blit_flush();
+
+    level->blit_particles(minx, miny, maxx, maxy);
 }
 
 void thing_render_all (void)
@@ -186,7 +188,7 @@ void thing_render_all (void)
         blit_fbo_bind(FBO_MAP);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
-    } else if (game->config.gfx_lights) {
+    } else if (0 && game->config.gfx_lights) {
         {
             //
             // Generate an FBO with all light sources merged together
