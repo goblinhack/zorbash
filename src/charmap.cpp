@@ -106,6 +106,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_key               = true;
 
+    char_index              = Charmap::PIPE;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_pipe              = true;
+
     char_index              = Charmap::LAVA;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

@@ -3,8 +3,8 @@
 // See the README file for license info.
 //
 
-#ifndef _MY_THING_H
-#define _MY_THING_H
+#ifndef _MY_THING_H_
+#define _MY_THING_H_
 
 #include <unordered_map>
 #include <memory>
@@ -12,7 +12,9 @@
 
 typedef struct Thing_* Thingp;
 typedef struct Monst_* Monstp;
-typedef std::unordered_map< uint32_t, Thingp > Things;
+
+// Not used
+// typedef std::unordered_map< uint32_t, Thingp > Things;
 
 #include "my_time.h"
 #include "my_light.h"
@@ -731,7 +733,7 @@ public:
     int is_rrr25(void);
     int is_rrr26(void);
     int is_rrr28(void);
-    int is_rrr29(void);
+    int is_pipe(void);
     int is_rrr3(void);
     int is_rrr30(void);
     int is_rrr31(void);
@@ -904,4 +906,4 @@ int thing_can_reach(point start, point end);
 int thing_can_reach_player(point start);
 extern unsigned short thing_callframes_depth;
 
-#endif // THING_H
+#endif // _MY_THING_H_

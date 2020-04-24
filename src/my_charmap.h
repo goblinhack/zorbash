@@ -28,6 +28,7 @@ public:
         ENTRANCE        = 'S',
         EXIT            = 'E',
         KEY             = 'k',
+        PIPE            = 'P',
         LAVA            = 'L',
         WATER           = 'w',
         DEEP_WATER      = 'W',
@@ -53,6 +54,7 @@ public:
     bool                      is_wall_deco         {false};
     bool                      is_exit              {false};
     bool                      is_key               {false};
+    bool                      is_pipe              {false};
     bool                      is_lava              {false};
     bool                      is_water             {false};
     bool                      is_treasure          {false};

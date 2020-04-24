@@ -101,7 +101,8 @@ public:
     bool is_food(const int x, const int y);
     bool is_hazard(const int x, const int y);
     bool is_key(const int x, const int y);
-    bool is_key_fast(const int x, const int y);
+    bool is_pipe(const int x, const int y);
+    bool is_pipe_fast(const int x, const int y);
     bool is_lava(const int x, const int y);
     bool is_lava_fast(const int x, const int y);
     bool is_monst(const int x, const int y);
@@ -109,7 +110,6 @@ public:
     bool is_secret_corridor_at(const int x, const int y);
     bool is_secret_door(const int x, const int y);
     bool is_treasure_at(const int x, const int y);
-    bool is_treasure_at_fast(const int x, const int y);
     bool is_wall(const int x, const int y);
     bool is_wall_fast(const int x, const int y);
     bool is_water(const int x, const int y);
