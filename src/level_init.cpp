@@ -23,6 +23,7 @@ static void level_place_water(Dungeonp d, std::string what);
 static void level_place_monst(Dungeonp d);
 static void level_place_food(Dungeonp d);
 static void level_place_keys(Dungeonp d);
+static void level_place_pipes(Dungeonp d);
 static void level_place_floor_deco(Dungeonp d);
 static void level_place_wall_deco(Dungeonp d);
 static void level_place_remaining_floor(Dungeonp d);
@@ -145,6 +146,8 @@ void Level::init (point3d at, int seed_in)
     level_place_food(dungeon);
     if (errored) { return; }
     level_place_keys(dungeon);
+    if (errored) { return; }
+    level_place_pipes(dungeon);
     if (errored) { return; }
     game_mark_dungeon_tiles(dungeon);
     if (errored) { return; }
@@ -418,6 +421,19 @@ static void level_place_keys (Dungeonp d)
 
             auto t = thing_new(tp_name(tp), fpoint(x, y));
             t->bounce(0.2, 1.0, 500, 99999);
+        }
+    }
+}
+
+static void level_place_pipes (Dungeonp d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (!d->is_pipe(x, y)) {
+                continue;
+            }
+
+            thing_new("pipe", fpoint(x, y));
         }
     }
 }

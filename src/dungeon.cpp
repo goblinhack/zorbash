@@ -777,6 +777,23 @@ bool Dungeon::is_key (const int x, const int y)
     return false;
 }
 
+bool Dungeon::is_pipe (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_pipe) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Dungeon::is_anything_at_fast (const int x, const int y)
 {
     for (auto d = 0; d < map_depth; d++) {
@@ -873,32 +890,6 @@ bool Dungeon::is_water_fast (const int x, const int y)
         auto v = get(Charmap::all_charmaps, c);
 
         if (v.is_water) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Dungeon::is_treasure_at_fast (const int x, const int y)
-{
-    for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
-        auto v = get(Charmap::all_charmaps, c);
-
-        if (v.is_treasure) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Dungeon::is_key_fast (const int x, const int y)
-{
-    for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
-        auto v = get(Charmap::all_charmaps, c);
-
-        if (v.is_key) {
             return true;
         }
     }

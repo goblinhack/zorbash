@@ -67,6 +67,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_floor_deco  ||
                            m.is_food        ||
                            m.is_key         ||
+                           m.is_pipe        ||
                            m.is_lava        ||
                            m.is_monst       ||
                            m.is_secret_door ||
@@ -126,10 +127,11 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     exits_string += Charmap::SPACE;
                 }
 
-                if (m.is_trap ||
+                if (m.is_trap     ||
                     m.is_treasure ||
-                    m.is_food ||
-                    m.is_key) {
+                    m.is_food     ||
+                    m.is_key      ||
+                    m.is_pipe) {
                     items_string += c;
                 } else {
                     items_string += Charmap::SPACE;
