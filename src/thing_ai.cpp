@@ -411,6 +411,17 @@ void Thing::ai_get_next_hop (void)
         } else {
             continue;
         }
+#ifdef DEBUG_ASTAR_PATH
+        if (!index) {
+            for (auto p : hops) {
+                set(astar_debug, p.x, p.y, '*');
+            }
+            auto start = point(0, 0);
+            auto end = point(maxx - minx, maxy - miny);
+            astar_dump(dmap_scent, goal.at, start, end);
+        }
+        index++;
+#endif
 
         auto nh_tile = fpoint(best.x + minx + 0.5,
                               best.y + miny + 0.5);
@@ -427,17 +438,6 @@ void Thing::ai_get_next_hop (void)
             (int)minx + goal.at.x, (int)miny + goal.at.y,
             (int)(nh.x), (int)(nh.y), (int)cost);
 
-#ifdef DEBUG_ASTAR_PATH
-        if (!index) {
-            for (auto p : hops) {
-                set(astar_debug, p.x, p.y, '*');
-            }
-            auto start = point(0, 0);
-            auto end = point(maxx - minx, maxy - miny);
-            astar_dump(dmap_scent, goal.at, start, end);
-        }
-        index++;
-#endif
         point nh_i(nh.x, nh.y);
 
         if (is_less_preferred_terrain(nh_i)) {
@@ -462,8 +462,7 @@ void Thing::ai_get_next_hop (void)
             // We would hit something and cannot do this move. However,
             // see if we can hit the thing that is in the way.
             //
-            log("move to %f,%f hit obstacle",
-                nh.x, nh.y);
+            log("move to %f,%f hit obstacle", nh.x, nh.y);
 
             bool target_attacked = false;
             bool target_overlaps = false;
