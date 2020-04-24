@@ -101,30 +101,70 @@
 #define ENABLE_TILE_COLLISION_CHECKING
 
 ////////////////////////////////////////////////////////////////////////////
+// Tiles
+////////////////////////////////////////////////////////////////////////////
+
+//
+// Per screen
+//
+extern int TILES_ACROSS;
+extern int TILES_DOWN;
+
+//
+// Tile size of the player
+//
+#define TILE_WIDTH       16
+#define TILE_HEIGHT      16
+
+//
+// Largest tile for collisions
+//
+#define MAX_TILE_WIDTH   64
+#define MAX_TILE_HEIGHT  64
+
+//
+// Dimentions of the fixed text on screen
+//
+#define ASCII_WIDTH_MAX  80
+#define ASCII_HEIGHT_MAX ASCII_WIDTH_MAX
+
+////////////////////////////////////////////////////////////////////////////
 // Level
 ////////////////////////////////////////////////////////////////////////////
 //
 // Dungeon size; composed of a grid of rooms
 //
-#define GRID_WIDTH                  5
-#define GRID_HEIGHT                 5
-#define ROOM_WIDTH                  13
-#define ROOM_HEIGHT                 13
+#define GRID_WIDTH      5
+#define GRID_HEIGHT     5
+#define ROOM_WIDTH      13
+#define ROOM_HEIGHT     13
 
 //
 // Dungeon level has a pad of tiles around the edges
 //
-#define MAP_BORDER                  10
-#define MAP_ROCK_BORDER             1
-#define MAP_WIDTH                   ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
-#define MAP_HEIGHT                  ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
+#define MAP_BORDER      10
+#define MAP_ROCK_BORDER 1
+#define MAP_WIDTH       ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
+#define MAP_HEIGHT      ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
+
+////////////////////////////////////////////////////////////////////////////
+// Particles
+////////////////////////////////////////////////////////////////////////////
+//
+// Particle size in pixels
+//
+#define PARTICLE_SLOTS  4
+#define PARTICLE_RADIUS 4
+#define PARTICLE_MAX    10000
+#define PARTICLE_WIDTH  (MAP_WIDTH * (TILE_WIDTH / PARTICLE_RADIUS))
+#define PARTICLE_HEIGHT (MAP_HEIGHT * (TILE_HEIGHT / PARTICLE_RADIUS))
 
 ////////////////////////////////////////////////////////////////////////////
 // World
 ////////////////////////////////////////////////////////////////////////////
-#define LEVELS_DEEP                 32
-#define LEVELS_ACROSS               MAP_WIDTH
-#define LEVELS_DOWN                 MAP_HEIGHT
+#define LEVELS_DEEP   32
+#define LEVELS_ACROSS MAP_WIDTH
+#define LEVELS_DOWN   MAP_HEIGHT
 
 ////////////////////////////////////////////////////////////////////////////
 // Things on map
@@ -144,34 +184,6 @@
 //
 #define MAX_LIGHT_RAYS              (180)
 #define MAX_LIGHT_PLAYER_DISTANCE   (TILES_ACROSS + (TILES_ACROSS / 2))
-
-////////////////////////////////////////////////////////////////////////////
-// Tiles
-////////////////////////////////////////////////////////////////////////////
-
-//
-// Per screen
-//
-extern int TILES_ACROSS;
-extern int TILES_DOWN;
-
-//
-// Tile size of the player
-//
-#define TILE_WIDTH                  16
-#define TILE_HEIGHT                 16
-
-//
-// Largest tile for collisions
-//
-#define MAX_TILE_WIDTH              64
-#define MAX_TILE_HEIGHT             64
-
-//
-// Dimentions of the fixed text on screen
-//
-#define ASCII_WIDTH_MAX             80
-#define ASCII_HEIGHT_MAX            ASCII_WIDTH_MAX
 
 ////////////////////////////////////////////////////////////////////////////
 // UI button styles

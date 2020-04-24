@@ -8,6 +8,7 @@
 
 #include "my_sdl.h"
 #include "my_dmap.h"
+#include "my_particle.h"
 #include <array>
 #include <list>
 #include <unordered_map>
@@ -110,9 +111,6 @@ public:
     std::map<uint32_t, Thingp> all_active_things {};
     std::map<uint32_t, Thingp> all_gc_things {};
 
-    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
-                    water_tile_map = {};
-
     //
     // All thing IDs
     //
@@ -125,6 +123,16 @@ public:
       std::array<
         std::vector<Thingp>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ptrs_at {};
+
+    //
+    // All particles
+    //
+    std::array<
+      std::array<
+        std::array<uint32_t, PARTICLE_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
+          all_particle_ids_at {};
+
+    std::array<Particle, PARTICLE_MAX> all_particles {};
 
     Level (void)
     {_

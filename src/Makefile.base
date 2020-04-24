@@ -53,6 +53,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/main.o 			\
     $(OBJDIR)/map.o 			\
     $(OBJDIR)/minilzo.o 		\
+    $(OBJDIR)/particle.o 		\
     $(OBJDIR)/pcg_basic.o 		\
     $(OBJDIR)/placed_level.o 		\
     $(OBJDIR)/player.o 			\
@@ -83,7 +84,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
     $(OBJDIR)/thing_dead.o 		\
-    $(OBJDIR)/thing_move_dir.o 		\
     $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_enemy.o 		\
     $(OBJDIR)/thing_health.o 		\
@@ -95,6 +95,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
+    $(OBJDIR)/thing_move_dir.o 		\
     $(OBJDIR)/thing_msg.o 		\
     $(OBJDIR)/thing_name.o 		\
     $(OBJDIR)/thing_on_fire.o 		\

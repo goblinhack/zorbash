@@ -96,7 +96,7 @@ def init_16x16():
             "cursor.1", "cursor.2", "cursor.3", "cursor.4", "cursor.5",
             "cursor.6", "cursor.7", "cursor.8", "cursor.9", "cursor.10",
             "cursor.11", "cursor.12", "cursor_path.1",
-            "", "", "", "", "",
+            "particle", "", "", "", "",
             ########################################################
             "key1.1", "key1.2", "key1.3", "key1.4", "key1.5",
             "food_frog1",

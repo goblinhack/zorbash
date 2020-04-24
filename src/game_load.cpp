@@ -167,6 +167,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
         in >> bits(my.t->monstp);
     }
 
+    in >> bits(my.t->last_attached);
     in >> bits(my.t->at);
     in >> bits(my.t->last_at);
     in >> bits(my.t->id); if (!my.t->id) { ERR("loaded a thing with no ID"); }
@@ -221,6 +222,18 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     return (in);
 }
 
+std::istream& operator>> (std::istream &in, Bits<Particle &> my)
+{_
+    in >> bits(my.t.is_valid);
+    in >> bits(my.t.is_new);
+    in >> bits(my.t.at);
+    in >> bits(my.t.orig_at);
+    in >> bits(my.t.force);
+    in >> bits(my.t.velocity);
+
+    return (in);
+}
+
 std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 {_
     my.t->player = nullptr;
@@ -229,6 +242,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     my.t->all_thing_ids_at = {};
     my.t->all_thing_ptrs_at = {};
     my.t->all_things = {};
+    my.t->all_particles = {};
+    my.t->all_particle_ids_at = {};
     my.t->all_active_things = {};
     my.t->all_gc_things = {};
 
@@ -255,6 +270,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* _is_wall */             in >> bits(my.t->_is_wall);
     /* _is_water */            in >> bits(my.t->_is_water);
     /* all_thing_ids_at */     in >> bits(my.t->all_thing_ids_at);
+    /* all_particle_ids_at */  in >> bits(my.t->all_particle_ids_at);
     /* cursor_at */            in >> bits(my.t->cursor_at);
     /* cursor_at_old */        in >> bits(my.t->cursor_at_old);
     /* cursor_found */         in >> bits(my.t->cursor_found);
@@ -276,8 +292,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
     for (auto x = 0; x < MAP_WIDTH; ++x) {
         for (auto y = 0; y < MAP_WIDTH; ++y) {
-            for (auto z = 0; z < MAP_SLOTS; ++z) {
-                auto id = get(my.t->all_thing_ids_at, x, y, z);
+            for (auto slot = 0; slot < MAP_SLOTS; ++slot) {
+                auto id = get(my.t->all_thing_ids_at, x, y, slot);
                 if (id) {
 #ifdef ENABLE_THING_ID_LOGS
                     auto o = my.t->test_thing_ptr(id);
@@ -291,6 +307,13 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
                     t->log("load");
 #endif
                     t->reinit();
+                }
+
+                auto idx = get(my.t->all_particle_ids_at, x, y, slot);
+                if (idx) {
+                    Particle t;
+                    in >> bits(t);
+                    set(my.t->all_particles, idx, t);
                 }
             }
         }

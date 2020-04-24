@@ -139,22 +139,22 @@ typedef struct Thing_ {
 public:
     Thing_ (void);
     ~Thing_ (void);
-    Monst    *monstp              {};
-    spoint   last_attached;
-    fpoint   at;                         // Current pos
-    fpoint   last_at;
+    Monst       *monstp              {};
+    spoint      last_attached;
+    fpoint      at;                         // Current pos
+    fpoint      last_at;
     //
     // These coords are not offset from the map scroll. i.e. they are constant
     // regardless of the map view.
     //
-    fpoint   tl;
-    fpoint   br;
-    uint32_t id;                         // Unique per thing.
-    int16_t tp_id                 {-1};  // Common settings
-    uint16_t tile_curr            {};
-    ThingTiles tiles              {};
+    fpoint      tl;
+    fpoint      br;
+    uint32_t    id;                         // Unique per thing.
+    int16_t     tp_id                {-1};  // Common settings
+    uint16_t    tile_curr            {};
+    ThingTiles  tiles                {};
     timestamp_t timestamp_next_frame {};
-    uint32_t dir:4                {}; // Direction
+    uint32_t    dir:4                {}; // Direction
 
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
