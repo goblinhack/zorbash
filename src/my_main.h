@@ -153,11 +153,11 @@ extern int TILES_DOWN;
 //
 // Particle size in pixels
 //
-#define PARTICLE_SLOTS  4
-#define PARTICLE_RADIUS 4
-#define PARTICLE_MAX    10000
-#define PARTICLE_WIDTH  (MAP_WIDTH * (TILE_WIDTH / PARTICLE_RADIUS))
-#define PARTICLE_HEIGHT (MAP_HEIGHT * (TILE_HEIGHT / PARTICLE_RADIUS))
+#define PARTICLE_SLOTS   4
+#define PARTICLE_RADIUS  4
+#define PARTICLE_MAX     10000
+#define PARTICLES_WIDTH  (MAP_WIDTH * (TILE_WIDTH / PARTICLE_RADIUS))
+#define PARTICLES_HEIGHT (MAP_HEIGHT * (TILE_HEIGHT / PARTICLE_RADIUS))
 
 ////////////////////////////////////////////////////////////////////////////
 // World
