@@ -203,8 +203,8 @@ void thing_cursor_reset_if_needed (void)
     }
 }
 
-void thing_cursor_find (uint16_t minx, uint16_t miny,
-                        uint16_t maxx, uint16_t maxy)
+void thing_cursor_find (const uint16_t minx, const uint16_t miny,
+                        const uint16_t maxx, const uint16_t maxy)
 {_
     if (level->cursor_needs_update) {
         for (auto y = miny; y < maxy; y++) {

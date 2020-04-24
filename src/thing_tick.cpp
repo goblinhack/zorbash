@@ -111,6 +111,12 @@ void Thing::tick (void)
         achieve_goals_in_life();
     }
 
+    if (is_pipe()) {
+        if (random_range(0, 100) < 50) {
+            level->new_particle(at);
+        }
+    }
+
     //
     // Could be dead here.
     //
