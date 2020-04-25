@@ -18,6 +18,7 @@ public:
     bool    is_new {};
     bool    is_coll {};
     fpoint  at;
+    fpoint  prev_at;
     fpoint  orig_at;
     fpoint  force;
     fpoint  velocity;
