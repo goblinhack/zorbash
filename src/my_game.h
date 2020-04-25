@@ -135,14 +135,19 @@ public:
     std::array<Particle, PARTICLE_MAX> all_particles {};
 
     void new_particle(const fpoint &at);
-    void free_particle(Particle *p);
-    void attach_particle(Particle *p);
-    void detach_particle(Particle *p);
-    void move_particle(Particle *p, fpoint to);
+    void free_particle(Particlep p);
+    void attach_particle(Particlep p);
+    void detach_particle(Particlep p);
+    void move_particle(Particlep p, fpoint to);
     void blit_particles(const uint16_t minx, const uint16_t miny,
                         const uint16_t maxx, const uint16_t maxy);
     void tick_particles(void);
-
+    void collision_check_particle(Particlep p);
+    int particle_box_collision(Particlep p,
+                               fpoint tl,
+                               fpoint br,
+                               fpoint *normal,
+                               fpoint *intersect);
     Level (void)
     {_
         newptr(this, "level");
