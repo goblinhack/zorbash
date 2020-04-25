@@ -72,7 +72,7 @@ void Level::attach_particle (Particle *p)
         return;
     }
     auto at = particle_to_grid(p);
-    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+    for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
         auto idp = &getref(all_particle_ids_at, at.x, at.y, slot);
         if (!*idp) {
             auto idx = p - getptr(all_particles, 0);
@@ -86,7 +86,7 @@ void Level::detach_particle (Particle *p)
 {_
     auto at = particle_to_grid(p);
     auto idx = p - getptr(all_particles, 0);
-    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+    for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
         auto idp = &getref(all_particle_ids_at, at.x, at.y, slot);
         if (*idp == idx) {
             *idp = 0;
@@ -105,10 +105,12 @@ void Level::move_particle (Particle *p, fpoint to)
     }
 
     detach_particle(p);
-    if (unlikely(is_oob(p->at))) {
+
+    if (unlikely(is_oob(to))) {
         free_particle(p);
         return;
     }
+
     p->at = to;
     attach_particle(p);
 }
