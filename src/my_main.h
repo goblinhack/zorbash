@@ -9,7 +9,7 @@
 //
 // It crashes? Enable this for more info
 //
-#define DEBUG_CRASH
+#undef DEBUG_CRASH
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 
 //
