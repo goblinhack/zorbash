@@ -1271,15 +1271,18 @@ void sdl_loop (void)
             if (!errored) {
                 player_tick();
                 things_tick();
-                if (level) {
-                    level->tick_particles();
-                }
             }
 
             //
             // Display UI.
             //
             wid_display_all();
+        }
+
+        if (!errored) {
+            if (level) {
+                level->tick_particles();
+            }
         }
 
         blit_fbo_bind(FBO_FINAL);
