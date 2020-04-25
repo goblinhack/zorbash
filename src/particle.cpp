@@ -9,6 +9,7 @@
 #include "my_point.h"
 #include "my_font.h"
 
+#if 0
 static void blit_text (std::string const& text,
                        fpoint& blit_tl, fpoint& blit_br)
 {_
@@ -78,6 +79,8 @@ static void blit_text (std::string const& text,
         blit_br.x += cw;
     }
 }
+#endif
+
 #if 0
 int Level::particle_box_collision (Particlep p,
                                    fpoint tl,
@@ -291,7 +294,7 @@ int Level::particle_box_collision (Particlep C,
 {
     //int idx = C - getptr(all_particles, 0);
     const float radius = (1.0 / TILE_WIDTH) * PARTICLE_RADIUS;
-    fpoint start = C->prev_at;
+    fpoint start = C->at;
     fpoint end = C->at + C->velocity;
     const float L = tl.x;
     const float T = tl.y;
@@ -618,7 +621,7 @@ void Level::move_particle (Particlep p, fpoint to)
     auto old_at = particle_to_grid(p);
     auto new_at = point_to_grid(to);
     if (old_at == new_at) {
-        p->prev_at = p->at;
+        //p->prev_at = p->at;
         p->at = to;
         return;
     }
@@ -630,7 +633,7 @@ void Level::move_particle (Particlep p, fpoint to)
         return;
     }
 
-    p->prev_at = p->at;
+    //p->prev_at = p->at;
     p->at = to;
     attach_particle(p);
 }
@@ -662,7 +665,7 @@ void Level::blit_particles (const uint16_t minx, const uint16_t miny,
 
                     float dpx = PARTICLE_RADIUS * game->config.one_pixel_width;
                     float dpy = PARTICLE_RADIUS * game->config.one_pixel_height;
-
+#if 0
                     if (0) {
                         fpoint a(p->prev_at.x + dx, p->prev_at.y + dy);
                         a.x *= tilew;
@@ -676,7 +679,7 @@ void Level::blit_particles (const uint16_t minx, const uint16_t miny,
                         glcolorfast(BLUE);
                         tile_blit(ptex, tl, br);
                     }
-
+#endif
                     fpoint a(p->at.x + dx, p->at.y + dy);
                     a.x *= tilew;
                     a.y *= tileh;
@@ -685,19 +688,22 @@ void Level::blit_particles (const uint16_t minx, const uint16_t miny,
 
                     fpoint tl(a.x - dpx, a.y - dpy);
                     fpoint br(a.x + dpx, a.y + dpy);
-
+#if 0
                     if (p->is_coll) {
                         glcolorfast(RED);
                     } else {
                         glcolorfast(WHITE);
                     }
+#endif
                     tile_blit(ptex, tl, br);
 
-                    br.x += (br.x - tl.x) * 1;
-                    br.y += (br.y - tl.y) * 0.5;
+#if 0
                     if (0) {
-                    blit_text(std::to_string(idx), tl, br);
+                        br.x += (br.x - tl.x) * 1;
+                        br.y += (br.y - tl.y) * 0.5;
+                        blit_text(std::to_string(idx), tl, br);
                     }
+#endif
                 }
             }
         }
@@ -751,7 +757,7 @@ bool Level::collision_check_particle (Particlep p, int16_t x, int16_t y)
     return (true);
 }
 
-void Level::collision_check_particle (Particlep p)
+bool Level::collision_check_particle (Particlep p)
 {
     const spoint c((int)p->at.x, (int)p->at.y);
     for (auto x = c.x - 1; x <= c.x + 1; x++) {
@@ -765,7 +771,7 @@ void Level::collision_check_particle (Particlep p)
             }
 
             if (collision_check_particle(p, x, y)) {
-                return;
+                return (true);
             }
         }
     }
@@ -794,6 +800,7 @@ void Level::collision_check_particle (Particlep p)
         }
     }
 #endif
+    return (false);
 }
 
 void Level::tick_particles (void)
@@ -802,8 +809,9 @@ void Level::tick_particles (void)
     auto eop = getptr(all_particles, PARTICLE_MAX - 1);
     for (auto p = sop; p <= eop; p++) {
         if (p->in_use) {
-            move_particle(p, p->at + p->velocity);
-            collision_check_particle(p);
+            if (!collision_check_particle(p)) {
+                move_particle(p, p->at + p->velocity);
+            }
         }
     }
 }

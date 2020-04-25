@@ -142,13 +142,13 @@ public:
     void blit_particles(const uint16_t minx, const uint16_t miny,
                         const uint16_t maxx, const uint16_t maxy);
     void tick_particles(void);
-    void collision_check_particle(Particlep p);
     int particle_box_collision(Particlep p,
                                fpoint tl,
                                fpoint br,
                                fpoint *normal,
                                fpoint *intersect);
     bool collision_check_particle(Particlep p, int16_t x, int16_t y);
+    bool collision_check_particle(Particlep p);
 
     Level (void)
     {_
