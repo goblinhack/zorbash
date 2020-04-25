@@ -706,66 +706,71 @@ void Level::blit_particles (const uint16_t minx, const uint16_t miny,
     blit_flush();
 }
 
+bool Level::collision_check_particle (Particlep p, int16_t x, int16_t y)
+{
+    fpoint normal;
+    fpoint intersect;
+
+    if (!particle_box_collision(p,
+                                fpoint((float)x - 0.5, (float)y - 0.5),
+                                fpoint((float)x + 0.5, (float)y + 0.5),
+                                &normal,
+                                &intersect)) {
+        return (false);
+    }
+
+    fpoint normal_unit = unit(normal);
+    fpoint tangent_unit = { -normal_unit.y, normal_unit.x };
+    fpoint vA = p->velocity;
+    fpoint vB(0, 0);
+
+    float normal_A_len = normal_unit.dot(vA);
+    float normal_B_len = normal_unit.dot(vB);
+
+    float tangent_A_len = tangent_unit.dot(vA);
+
+    /*
+     * Tangent velocity doesn't change.after collision.
+     */
+    float tangent_A_velocity = tangent_A_len;
+
+    /*
+     * Do one dimensional elastic collision.
+     */
+    const float mA = 1;
+    const float mB = 1000;
+    float normal_A_velocity =
+        (normal_A_len * (mA - mB) + 2.0 * mB * normal_B_len) / (mA + mB);
+
+    fpoint normal_velocity_A  = normal_unit * normal_A_velocity;
+    fpoint tangent_velocity_A = tangent_unit * tangent_A_velocity;
+
+    p->velocity.x = normal_velocity_A.x + tangent_velocity_A.x;
+    p->velocity.y = normal_velocity_A.y + tangent_velocity_A.y;
+
+    return (true);
+}
+
 void Level::collision_check_particle (Particlep p)
 {
     const spoint c((int)p->at.x, (int)p->at.y);
-//CON("at %f,%f",p->at.x,p->at.y);
-//CON("  at %d,%d",c.x,c.y);
     for (auto x = c.x - 1; x <= c.x + 1; x++) {
         for (auto y = c.y - 1; y <= c.y + 1; y++) {
             if (unlikely(is_oob(x, y))) {
                 continue;
             }
-            if (level->is_wall(x, y)) {
-                fpoint normal;
-                fpoint intersect;
-//CON("  wall at %d,%d",x,y);
-                if (particle_box_collision(
-                       p,
-                       fpoint((float)x - 0.5, (float)y - 0.5),
-                       fpoint((float)x + 0.5, (float)y + 0.5),
-                       &normal,
-                       &intersect)) {
-//CON("     collide vel %f %f mor %f %f", p->velocity.x, p->velocity.y,
-//normal.x, normal.y);
 
-fpoint normal_unit = unit(normal);
-fpoint tangent_unit = { -normal_unit.y, normal_unit.x };
-fpoint vA = p->velocity;
-fpoint vB(0, 0);
-        float normal_A_len = normal_unit.dot(vA);
-        float normal_B_len = normal_unit.dot(vB);
+            if (!level->is_wall(x, y)) {
+                continue;
+            }
 
-        float tangent_A_len = tangent_unit.dot(vA);
-
-        /*
-         * Tangent velocity doesn't change.after collision.
-         */
-        float tangent_A_velocity = tangent_A_len;
-
-        /*
-         * Do one dimensional elastic collision.
-         */
-        float mA = 1;
-        float mB = 1000;
-        float normal_A_velocity =
-            (normal_A_len*(mA - mB) + 2.0 * mB*normal_B_len) / (mA + mB);
-
-        fpoint normal_velocity_A  = normal_unit * normal_A_velocity;
-        fpoint tangent_velocity_A = tangent_unit * tangent_A_velocity;
-
-        p->velocity.x = normal_velocity_A.x + tangent_velocity_A.x;
-        p->velocity.y = normal_velocity_A.y + tangent_velocity_A.y;
-
-//                    p->is_coll = true;
-//                    p->velocity = normal;
-                    return;
-                }
+            if (collision_check_particle(p, x, y)) {
+                return;
             }
         }
     }
 
-#if 1
+#if 0
     for (auto x = c.x - 2; x <= c.x + 2; x++) {
         for (auto y = c.y - 2; y <= c.y + 2; y++) {
             if (unlikely(is_oob(x, y))) {
