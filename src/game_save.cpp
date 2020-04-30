@@ -195,7 +195,9 @@ std::ostream& operator<< (std::ostream &out, Bits<const Particle & > const my)
     if (my.t.in_use) {
         out << bits(my.t.is_new);
         out << bits(my.t.at);
-        out << bits(my.t.orig_at);
+        out << bits(my.t.old_at);
+        out << bits(my.t.density);
+        out << bits(my.t.near_density);
         out << bits(my.t.force);
         out << bits(my.t.velocity);
     }

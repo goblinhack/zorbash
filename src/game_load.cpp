@@ -228,7 +228,9 @@ std::istream& operator>> (std::istream &in, Bits<Particle &> my)
     if (my.t.in_use) {
         in >> bits(my.t.is_new);
         in >> bits(my.t.at);
-        in >> bits(my.t.orig_at);
+        in >> bits(my.t.old_at);
+        in >> bits(my.t.density);
+        in >> bits(my.t.near_density);
         in >> bits(my.t.force);
         in >> bits(my.t.velocity);
     }

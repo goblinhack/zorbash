@@ -3251,7 +3251,8 @@ Dungeonp dungeon_test (void)
 #else
     int x = 663;
     mysrand(x);
-    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
+    //auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
+    auto d = new Dungeon(1);
 
     return (d);
 #endif

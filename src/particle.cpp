@@ -9,7 +9,29 @@
 #include "my_point.h"
 #include "my_font.h"
 
-#if 0
+static const float p_radius = 5 * ((1.0 / TILE_WIDTH) * PARTICLE_RADIUS);
+static const float viscocity1 = 0.90;
+static const float viscocity2 = 0.30;
+static const float gravity = 0.006;
+static const float rest_density = 6.4;
+static const float stiffness = 0.0015;
+static const float near_stiffness = 0.26;
+static const float damping = 0.2;
+static const float delta = 1.0;
+static const int near_radius = 2;
+
+static spoint point_to_grid (const fpoint &p)
+{
+    return spoint(p.x * (PARTICLES_WIDTH / MAP_WIDTH),
+                  p.y * (PARTICLES_HEIGHT / MAP_HEIGHT));
+}
+
+static spoint particle_to_grid (const Particlep p)
+{
+    return point_to_grid(p->at);
+}
+
+#if 1
 static void blit_text (std::string const& text,
                        fpoint& blit_tl, fpoint& blit_br)
 {_
@@ -81,207 +103,6 @@ static void blit_text (std::string const& text,
 }
 #endif
 
-#if 0
-int Level::particle_box_collision (Particlep p,
-                                   fpoint tl,
-                                   fpoint br,
-                                   fpoint *normal,
-                                   fpoint *intersect)
-{_
-    const fpoint b = (tl + br) / 2;
-    const fpoint tr(br.x, tl.y);
-    const fpoint bl(tl.x, br.y);
-    const auto r = (1.0 / TILE_WIDTH) * PARTICLE_RADIUS;
-    const auto c = p->at;
-
-    //
-    // Corner collisions, normal is at 45 degrees. Unless there is a wall.
-    //
-    if (distance(c, tl) < r) {
-        if (!level->is_wall(b.x - 1, b.y)) {
-            normal->x = c.x - tl.x;
-            normal->y = c.y - tl.y;
-CON("p %p coll %d p %f,%f b %f,%f .. %f,%f",p,  __LINE__, p->at.x, p->at.y, tl.x, tl.y, br.x, br.y);
-            return (true);
-        }
-    }
-
-    if (distance(c, tr) < r) {
-        if (!level->is_wall(b.x + 1, b.y)) {
-            normal->x = c.x - tr.x;
-            normal->y = c.y - tr.y;
-CON("p %p coll %d p %f,%f b %f,%f .. %f,%f",p,  __LINE__, p->at.x, p->at.y, tl.x, tl.y, br.x, br.y);
-            return (true);
-        }
-    }
-
-    if (distance(c, br) < r) {
-        if (!level->is_wall(b.x + 1, b.y)) {
-            normal->x = c.x - br.x;
-            normal->y = c.y - br.y;
-CON("p %p coll %d p %f,%f b %f,%f .. %f,%f",p,  __LINE__, p->at.x, p->at.y, tl.x, tl.y, br.x, br.y);
-            return (true);
-        }
-    }
-
-    if (distance(c, bl) < r) {
-        if (!level->is_wall(b.x - 1, b.y)) {
-            normal->x = c.x - bl.x;
-            normal->y = c.y - bl.y;
-CON("p %p coll %d p %f,%f b %f,%f .. %f,%f",p,  __LINE__, p->at.x, p->at.y, tl.x, tl.y, br.x, br.y);
-            return (true);
-        }
-    }
-
-    float dist;
-    if (distance_to_line(c, tl, tr, &dist, 0)) {
-        if (dist < r) {
-            goto collided;
-        }
-    }
-
-    if (distance_to_line(c, tr, br, &dist, 0)) {
-        if (dist < r) {
-            goto collided;
-        }
-    }
-
-    if (distance_to_line(c, br, bl, &dist, 0)) {
-        if (dist < r) {
-            goto collided;
-        }
-    }
-
-    if (distance_to_line(c, bl, tl, &dist, 0)) {
-        if (dist < r) {
-            goto collided;
-        }
-    }
-
-    return (false);
-
-collided:
-    fpoint delta;
-
-    if (get_line_intersection(c, b, tl, tr, intersect)) {
-        delta.x = tl.x - tr.x;
-        delta.y = tl.y - tr.y;
-        normal->x = -delta.y;
-        normal->y = delta.x;
-        return (true);
-    }
-
-    if (get_line_intersection(c, b, tr, br, intersect)) {
-        delta.x = tr.x - br.x;
-        delta.y = tr.y - br.y;
-        normal->x = -delta.y;
-        normal->y = delta.x;
-        return (true);
-    }
-
-    if (get_line_intersection(c, b, br, bl, intersect)) {
-        delta.x = br.x - bl.x;
-        delta.y = br.y - bl.y;
-        normal->x = -delta.y;
-        normal->y = delta.x;
-        return (true);
-    }
-
-    if (get_line_intersection(c, b, bl, tl, intersect)) {
-        delta.x = bl.x - tl.x;
-        delta.y = bl.y - tl.y;
-        normal->x = -delta.y;
-        normal->y = delta.x;
-        return (true);
-    }
-
-    //
-    // Particle may be inside box.
-    //
-    return (false);
-}
-#endif
-
-#if 0
-int Level::particle_box_collision (Particlep C,
-                                   fpoint tl,
-                                   fpoint br,
-                                   fpoint *normal_out,
-                                   fpoint *penetration_out)
-{
-    const fpoint B_at = (tl + br) / 2;
-    const fpoint B_tr(br.x, tl.y);
-    const fpoint B_bl(tl.x, br.y);
-
-    // Vector from A(box) to B(circle)
-    fpoint n = C->at - B_at;
-
-    // Closest point on A to center of B(circle)
-    fpoint closest = n;
-
-    // Calculate half extents along each axis
-    float x_extent = (br.x - tl.x) / 2;
-    float y_extent = (br.y - tl.y) / 2;
-
-    // Clamp point to edges of the AABB
-    closest.x = std::min(x_extent, std::max(closest.x, -x_extent));
-    closest.y = std::min(y_extent, std::max(closest.y, -y_extent));
-
-    bool inside = false;
-
-    // Circle is inside the AABB, so we need to clamp the circle's center
-    // to the closest edge
-    if (n == closest) {
-        inside = true;
-
-CON("inside");
-        // Find closest axis
-        if (abs(n.x) > abs(n.y)) {
-            // Clamp to closest extent
-            if(closest.x > 0) {
-                closest.x = x_extent;
-            } else {
-                closest.x = -x_extent;
-            }
-        } else {
-            // y axis is shorter
-            // Clamp to closest extent
-            if (closest.y > 0) {
-                closest.y = y_extent;
-            } else {
-                closest.y = -y_extent;
-            }
-        }
-    }
-
-    fpoint normal = n - closest;
-    float d = normal.length(); d = d * d;
-    const float r = (1.0 / TILE_WIDTH) * PARTICLE_RADIUS;
-
-    // Early out of the radius is shorter than distance to closest point and
-    // Circle not inside the AABB
-    if (d > r * r && !inside) {
-        return false;
-    }
-
-    // Avoided sqrt until we needed
-    d = sqrt(d);
-
-    // Collision normal needs to be flipped to point outside if circle was
-    // inside the AABB
-    if (inside) {
-        *normal_out = n * -1;
-        //*penetration_out = r - d;
-    } else {
-        *normal_out = n;
-        //*penetration_out = r - d;
-    }
-
-CON("coll");
-    return true;
-}
-#endif
-
 //
 // Adapted from
 // https://stackoverflow.com/questions/18704999/how-to-fix-circle-and-rectangle-overlap-in-collision-response/18790389#18790389
@@ -292,10 +113,12 @@ int Level::particle_box_collision (Particlep C,
                                    fpoint *normal,
                                    fpoint *intersection)
 {
-    //int idx = C - getptr(all_particles, 0);
+#if 0
+    int idx = C - getptr(all_particles, 0);
+#endif
     const float radius = (1.0 / TILE_WIDTH) * PARTICLE_RADIUS;
-    fpoint start = C->at;
-    fpoint end = C->at + C->velocity;
+    fpoint start = C->old_at;
+    fpoint end = C->at;
     const float L = tl.x;
     const float T = tl.y;
     const float R = br.x;
@@ -333,7 +156,9 @@ int Level::particle_box_collision (Particlep C,
                 normal->y = 0;
                 intersection->x = L;
                 intersection->y = ly;
-                //CON("%d line %d left", idx, __LINE__);
+#if 0
+                CON("%d line %d left", idx, __LINE__);
+#endif
                 return (true);
             }
         }
@@ -352,7 +177,9 @@ int Level::particle_box_collision (Particlep C,
                 normal->y = 0;
                 intersection->x = R;
                 intersection->y = ry;
-                //CON("%d line %d right", idx, __LINE__);
+#if 0
+                CON("%d line %d right", idx, __LINE__);
+#endif
                 return (true);
             }
         }
@@ -371,7 +198,9 @@ int Level::particle_box_collision (Particlep C,
                 normal->y = -1;
                 intersection->x = tx;
                 intersection->y = T;
-                //CON("%d line %d top", idx, __LINE__);
+#if 0
+                CON("%d line %d top", idx, __LINE__);
+#endif
                 return (true);
             }
         }
@@ -390,7 +219,9 @@ int Level::particle_box_collision (Particlep C,
                 normal->y = 1;
                 intersection->x = bx;
                 intersection->y = B;
-                //CON("%d line %d bot", idx, __LINE__);
+#if 0
+                CON("%d line %d bot", idx, __LINE__);
+#endif
                 return (true);
             }
         }
@@ -399,7 +230,9 @@ int Level::particle_box_collision (Particlep C,
 
     if ((cornerX == std::numeric_limits<float>::max()) &&
         (cornerY == std::numeric_limits<float>::max())) {
-        //CON("%d line %d no overlap", idx, __LINE__);
+#if 0
+        CON("%d line %d no overlap", idx, __LINE__);
+#endif
         return (false);
     }
 
@@ -453,7 +286,9 @@ int Level::particle_box_collision (Particlep C,
 
     // If the circle is too close, no intersection.
     if (cornerDistance < radius) {
-        //CON("%d line %d too close", idx, __LINE__);
+#if 0
+        CON("%d line %d too close", idx, __LINE__);
+#endif
         C->velocity.x = 0;
         C->velocity.y = 0;
         return (false);
@@ -467,7 +302,9 @@ int Level::particle_box_collision (Particlep C,
         // return a negative time which indicates a previous intersection, and
         // can also return a time > 1.0f which can predict a corner intersection.
         if (time > 1.0f || time < 0.0f) {
-            //CON("%d line %d hit corner straight on", idx, __LINE__);
+#if 0
+            CON("%d line %d hit corner straight on", idx, __LINE__);
+#endif
             normal->x = -C->velocity.x;
             normal->y = -C->velocity.y;
             return (true);
@@ -483,7 +320,9 @@ int Level::particle_box_collision (Particlep C,
         intersection->x = cornerX;
         intersection->y = cornerY;
 
-        //CON("%d line %d hit corner straight on", idx, __LINE__);
+#if 0
+        CON("%d line %d hit corner straight on", idx, __LINE__);
+#endif
         return (true);
     }
 
@@ -492,8 +331,9 @@ int Level::particle_box_collision (Particlep C,
 
     // The angle is too large, there cannot be an intersection
     if (abs(angle1Sin) > 1.0f) {
-        //CON("%d line %d hit corner, angle too large angle1Sin %f", idx, 
-        //__LINE__, angle1Sin);
+#if 0
+        CON("%d line %d hit corner, angle too large angle1Sin %f", idx, __LINE__, angle1Sin);
+#endif
         return (false);
     }
 
@@ -509,7 +349,9 @@ int Level::particle_box_collision (Particlep C,
     // return a negative time which indicates a previous intersection, and
     // can also return a time > 1.0f which can predict a corner intersection.
     if (time > 1.0f || time < 0.0f) {
-        //CON("%d line %d hit corner future or past", idx, __LINE__);
+#if 0
+        CON("%d line %d hit corner future or past", idx, __LINE__);
+#endif
         return (false);
     }
 
@@ -523,20 +365,10 @@ int Level::particle_box_collision (Particlep C,
     normal->y = ny;
     intersection->x = cornerX;
     intersection->y = cornerY;
-    //CON("%d line %d hit corner a1 %f a2 %f", idx, __LINE__,
-    //    (angle1 / RAD_360) * 360, (angle2 / RAD_360) * 360);
+#if 0
+    CON("%d line %d hit corner a1 %f a2 %f", idx, __LINE__, (angle1 / RAD_360) * 360, (angle2 / RAD_360) * 360);
+#endif
     return (true);
-}
-
-static spoint point_to_grid (const fpoint &p)
-{
-    return spoint(p.x * (PARTICLES_WIDTH / MAP_WIDTH),
-                  p.y * (PARTICLES_HEIGHT / MAP_HEIGHT));
-}
-
-static spoint particle_to_grid (const Particlep p)
-{
-    return point_to_grid(p->at);
 }
 
 void Level::new_particle (const fpoint &at)
@@ -561,13 +393,15 @@ void Level::new_particle (const fpoint &at)
         s->at = at + fpoint(0, 1); // hack
         s->in_use = true;
         s->is_new = true;
-        s->orig_at = at;
+        s->old_at = at;
         s->force = fpoint(0, 0);
         s->velocity = fpoint(0, 0);
+        s->density = 0;
+        s->near_density = 0;
 
         auto angle = random_range(0, 360) * (1.0 / RAD_360);
         float scale = 0.05;
-        sincosf(angle, &s->velocity.x, &s->velocity.y);
+        sincosf(angle, &s->force.x, &s->force.y);
 
         s->velocity.x *= scale;
         s->velocity.y *= scale;
@@ -601,6 +435,7 @@ void Level::attach_particle (Particlep p)
             return;
         }
     }
+    ERR("out of slots");
 }
 
 void Level::detach_particle (Particlep p)
@@ -621,19 +456,18 @@ void Level::move_particle (Particlep p, fpoint to)
     auto old_at = particle_to_grid(p);
     auto new_at = point_to_grid(to);
     if (old_at == new_at) {
-        //p->prev_at = p->at;
+        //p->old_at = p->at;
         p->at = to;
         return;
     }
 
     detach_particle(p);
-
     if (unlikely(is_oob(to))) {
         free_particle(p);
         return;
     }
 
-    //p->prev_at = p->at;
+    //p->old_at = p->at;
     p->at = to;
     attach_particle(p);
 }
@@ -697,9 +531,9 @@ void Level::blit_particles (const uint16_t minx, const uint16_t miny,
 #endif
                     tile_blit(ptex, tl, br);
 
-#if 0
+#if 1
                     if (0) {
-                        br.x += (br.x - tl.x) * 1;
+                        br.x += (br.x - tl.x) * 0.5;
                         br.y += (br.y - tl.y) * 0.5;
                         blit_text(std::to_string(idx), tl, br);
                     }
@@ -725,6 +559,7 @@ bool Level::collision_check_particle (Particlep p, int16_t x, int16_t y)
         return (false);
     }
 
+    move_particle(p, p->old_at);
     fpoint normal_unit = unit(normal);
     fpoint tangent_unit = { -normal_unit.y, normal_unit.x };
     fpoint vA = p->velocity;
@@ -753,6 +588,8 @@ bool Level::collision_check_particle (Particlep p, int16_t x, int16_t y)
 
     p->velocity.x = normal_velocity_A.x + tangent_velocity_A.x;
     p->velocity.y = normal_velocity_A.y + tangent_velocity_A.y;
+    p->velocity.x *= damping;
+    p->velocity.y *= damping;
 
     return (true);
 }
@@ -803,15 +640,544 @@ bool Level::collision_check_particle (Particlep p)
     return (false);
 }
 
-void Level::tick_particles (void)
+void Level::apply_particle_forces (void)
 {
     auto sop = getptr(all_particles, 1);
     auto eop = getptr(all_particles, PARTICLE_MAX - 1);
     for (auto p = sop; p <= eop; p++) {
-        if (p->in_use) {
-            if (!collision_check_particle(p)) {
-                move_particle(p, p->at + p->velocity);
+        if (!p->in_use) {
+            continue;
+        }
+
+        p->old_at = p->at;
+        move_particle(p, p->at + p->force);
+
+        p->force = fpoint(0, 0);
+        p->near_density = 0.0;
+        p->density = 0.0;
+
+        if (!p->is_new) {
+//            p->velocity = p->at - p->old_at;
+        }
+
+        p->is_new = false;
+
+        // apply gravity.
+        p->velocity.y += gravity;
+
+        //
+        // do viscosity impules to modify velocity(algorithm 5 from the paper)
+        //
+        auto sp = particle_to_grid(p);
+        if (unlikely((sp.x <= 1) || (sp.x >= PARTICLES_WIDTH - 1) ||
+                     (sp.y <= 1) || (sp.y >= PARTICLES_HEIGHT - 1))) {
+            detach_particle(p);
+            free_particle(p);
+            continue;
+        }
+
+        //
+        // For all nearby particles
+        //
+        auto pidx = p - getptr(all_particles, 0);
+        for (auto ox = sp.x - near_radius; ox <= sp.x + near_radius; ox++) {
+            for (auto oy = sp.y - near_radius; oy <= sp.y + near_radius; oy++) {
+                for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
+                    auto qidx = get(all_particle_ids_at, ox, oy, slot);
+                    if (likely(!qidx)) { // ignore empty cells
+                        continue;
+                    }
+
+                    if (unlikely(qidx == pidx)) { // ignore our own particle
+                        continue;
+                    }
+
+                    auto q = getptr(all_particles, qidx);
+                    if (!q->in_use) { // remove this
+                        continue;
+                    }
+
+                    auto dp = p->at - q->at;
+                    auto r2 = dp.dot(dp);
+                    if (r2 <= 0.0 || r2 > p_radius * p_radius) {
+                        continue;
+                    }
+
+                    auto r = sqrt(r2);
+                    fpoint normalized_r = dp * (1.0 / r);
+                    float one_minus_q = 1 - r / p_radius;
+
+                    fpoint vi_minus_vj = p->velocity - q->velocity;
+                    float u = vi_minus_vj.dot(normalized_r);
+                    float T = 0;
+                    if (u > 0) {
+                        T = delta * one_minus_q * (viscocity1 * u + viscocity2 * u * u) * 0.5;
+                        if (T < u) {
+                            // T = T;
+                        } else {
+                            T = u;
+                        }
+                    } else {
+                        T = delta * one_minus_q * (viscocity1 * u - viscocity2 * u * u) * 0.5;
+                        if (T > u) {
+                            // T = T;
+                        } else {
+                            T = u;
+                        }
+                    }
+
+                    fpoint I_div2 = normalized_r * T;
+
+                    p->velocity += I_div2 * -1.0;
+                    q->velocity += I_div2 * +1.0;
+                }
             }
         }
     }
+}
+
+void Level::apply_particle_velocity (void)
+{
+    auto sop = getptr(all_particles, 1);
+    auto eop = getptr(all_particles, PARTICLE_MAX - 1);
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+
+        // save the original particle position, then apply velocity.
+        // p->old_at = p->at;
+        move_particle(p, p->at + p->velocity);
+#if 0
+CON("%f %f   v %f %f", p->at.x,p->at.y, p->velocity.x, p->velocity.y);
+#endif
+    }
+
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+        auto sp = particle_to_grid(p);
+        auto pidx = p - getptr(all_particles, 0);
+        for (auto ox = sp.x - near_radius; ox <= sp.x + near_radius; ox++) {
+            for (auto oy = sp.y - near_radius; oy <= sp.y + near_radius; oy++) {
+                for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
+                    auto qidx = get(all_particle_ids_at, ox, oy, slot);
+                    if (likely(!qidx)) { // ignore empty cells
+                        continue;
+                    }
+
+                    if (unlikely(qidx == pidx)) { // ignore our own particle
+                        continue;
+                    }
+
+                    auto q = getptr(all_particles, qidx);
+                    if (!q->in_use) { // remove this
+                        continue;
+                    }
+
+                    auto dp = p->at - q->at;
+                    auto r2 = dp.dot(dp);
+                    if (r2 <= 0.0 || r2 > p_radius * p_radius) {
+                        continue;
+                    }
+
+                    float r = sqrt(r2);
+                    float a = 1 - r / p_radius;
+                    float aa = a * a;
+                    float aaa = aa * a;
+
+                    p->density += aa;
+                    q->density += aa;
+
+                    p->near_density += aaa;
+                    q->near_density += aaa;
+#if 0
+                    if (p->density > 10) {
+                        detach_particle(p);
+                        free_particle(p);
+                    }
+#endif
+                }
+            }
+        }
+
+        if (collision_check_particle(p)) {
+        }
+    }
+}
+
+void Level::apply_density_relaxation (void)
+{
+    auto sop = getptr(all_particles, 1);
+    auto eop = getptr(all_particles, PARTICLE_MAX - 1);
+#if 0
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+        auto pidx = p - getptr(all_particles, 0);
+        CON("before %d at %f,%f force %f,%f v %f,%f", (int)pidx, p->at.x, p->at.y, p->force.x, p->force.y, p->velocity.x, p->velocity.y);
+    }
+#endif
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+
+        p->nebs = 0;
+        float pressure = stiffness * (p->density - rest_density);
+        float near_pressure = near_stiffness * p->near_density;
+
+        auto sp = particle_to_grid(p);
+        auto pidx = p - getptr(all_particles, 0);
+#if 0
+CON("p %d dens %f ndens %f", (int)pidx, p->density, p->near_density);
+#endif
+        for (auto ox = sp.x - near_radius; ox <= sp.x + near_radius; ox++) {
+            for (auto oy = sp.y - near_radius; oy <= sp.y + near_radius; oy++) {
+                for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
+                    auto qidx = get(all_particle_ids_at, ox, oy, slot);
+                    if (likely(!qidx)) { // ignore empty cells
+                        continue;
+                    }
+
+                    if (unlikely(qidx == pidx)) { // ignore our own particle
+                        continue;
+                    }
+
+                    auto q = getptr(all_particles, qidx);
+                    if (!q->in_use) { // remove this
+                        continue;
+                    }
+
+                    auto dp = p->at - q->at;
+                    auto r2 = dp.dot(dp);
+                    if (r2 <= 0.0 || r2 > p_radius * p_radius) {
+                        continue;
+                    }
+
+                    float r = sqrt(r2);
+                    float a = 1 - r / p_radius;
+
+                    float D = delta * delta * (pressure * a + near_pressure * a * a) * 0.05;
+                    fpoint DA = dp * (D / r);
+#if 0
+CON("  q %d r %f DA %f %f", (int)qidx, r, DA.x,DA.y);
+#endif
+                    p->force += DA;
+
+                    q->force -= DA;
+                    p->nebs ++;
+
+                    float m = 0.1;
+                    if (p->force.x > m) { p->force.x = m; }
+                    if (p->force.x < -m) { p->force.x = -m; }
+                    if (p->force.y > m) { p->force.y = m; }
+                    if (p->force.y < -m) { p->force.y = -m; }
+                    if (q->force.x > m) { q->force.x = m; }
+                    if (q->force.x < -m) { q->force.x = -m; }
+                    if (q->force.y > m) { q->force.y = m; }
+                    if (q->force.y < -m) { q->force.y = -m; }
+                }
+            }
+        }
+    }
+#if 0
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+        auto pidx = p - getptr(all_particles, 0);
+        CON("after %d nebs %d at %f,%f force %f,%f v %f,%f", (int)pidx, p->nebs, p->at.x, p->at.y, p->force.x, p->force.y, p->velocity.x, p->velocity.y);
+    }
+#endif
+}
+
+static const float REST_DENSITY = 1;
+static const float STIFFNESS = 10;
+static const float VISCOCITY = 12;
+static const float PARTICLE_SPACING = p_radius;
+static const float PARTICLE_MASS = 1;
+static const float KERNEL_RANGE = 2 * PARTICLE_SPACING;
+static const float GRAVITY = 0.3;
+static const float TIMESTEP = 0.01f;
+
+#if 0
+#define PI_FLOAT 3.1415927410125732421875f
+#define PARTICLE_RESTING_DENSITY 1000
+// Mass = Density * Volume
+#define SMOOTHING_LENGTH (4 * p_radius)
+#define PARTICLE_STIFFNESS 2000
+#define PARTICLE_VISCOSITY 3000.f
+#define GRAVITY_FORCE fpoint(0, 1.0)
+#define TIME_STEP 1.0f
+#endif
+
+// Poly6 Kernel
+float kernel(fpoint x, float h)
+{
+    float r2 = x.x * x.x + x.y * x.y;
+    float h2 = h * h;
+
+    if (r2 < 0 || r2 > h2) return 0.0f;
+
+    return 315.0f / (64.0f * M_PI * pow(h, 9)) * pow(h2 - r2, 3);
+}
+
+// Gradient of Spiky Kernel
+fpoint gradKernel(fpoint x, float h)
+{
+    float r = sqrt(x.x * x.x + x.y * x.y);
+    if (r == 0.0f) return fpoint(0.0f, 0.0f);
+
+    float t1 = -45.0f / (M_PI * pow(h, 6));
+    fpoint t2 = x / r;
+    float t3 = pow(h - r, 2);
+
+    return t2 * (t1 * t3);
+}
+
+// Laplacian of Viscosity Kernel
+float laplaceKernel(fpoint x, float h)
+{
+    float r = sqrt(x.x * x.x + x.y * x.y);
+    return 45.0f / (M_PI * pow(h, 6)) * (h - r);
+}
+
+void Level::calculate_density (void)
+{
+    auto sop = getptr(all_particles, 1);
+    auto eop = getptr(all_particles, PARTICLE_MAX - 1);
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+
+        auto sp = particle_to_grid(p);
+
+        float density_sum = 0.1f;
+        for (auto ox = sp.x - near_radius; ox <= sp.x + near_radius; ox++) {
+            for (auto oy = sp.y - near_radius; oy <= sp.y + near_radius; oy++) {
+                for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
+                    auto qidx = get(all_particle_ids_at, ox, oy, slot);
+                    if (likely(!qidx)) { // ignore empty cells
+                        continue;
+                    }
+
+                    auto q = getptr(all_particles, qidx);
+                    fpoint delta = p->at - q->at;
+                    density_sum += PARTICLE_MASS * kernel(delta, KERNEL_RANGE);
+                }
+            }
+        }
+        if (!density_sum) {
+            DIE("no density");
+        }
+        p->density = density_sum;
+        p->pressure = fmax(STIFFNESS * (p->density - REST_DENSITY), 0.0f);
+    }
+
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+
+        auto sp = particle_to_grid(p);
+
+        fpoint fPressure(0.0f, 0.0f);
+        fpoint fViscosity(0.0f, 0.0f);
+        fpoint fGravity(0.0f, 0.0f);
+
+        for (auto ox = sp.x - near_radius; ox <= sp.x + near_radius; ox++) {
+            for (auto oy = sp.y - near_radius; oy <= sp.y + near_radius; oy++) {
+                for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
+                    auto qidx = get(all_particle_ids_at, ox, oy, slot);
+                    if (likely(!qidx)) { // ignore empty cells
+                        continue;
+                    }
+
+                    auto q = getptr(all_particles, qidx);
+                    fpoint delta = p->at - q->at;
+
+                    // Pressure force density
+                    fPressure += gradKernel(delta, KERNEL_RANGE) *
+                                 (PARTICLE_MASS * (p->pressure + q->pressure) / (2.0f * q->density));
+
+                    // Viscosity force density
+                    fpoint dv = (q->velocity - p->velocity);
+                    fViscosity += dv * PARTICLE_MASS / q->density * laplaceKernel(delta, KERNEL_RANGE);
+
+                    // Color field
+                    //p->color += q->mass / q->density * kernel(x, KERNEL_RANGE);
+                }
+            }
+        }
+
+        // Gravitational force density
+        fGravity = fpoint(0, GRAVITY) * p->density;
+        fPressure *= -1.0f;
+        fViscosity *= VISCOCITY;
+
+        //p->force += fPressure + fViscosity + fGravity + fSurface;
+        p->force += fPressure + fViscosity + fGravity;
+    }
+
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+
+        p->velocity += p->force * TIMESTEP / p->density;
+        p->old_at = p->at;
+        move_particle(p, p->at + p->velocity * TIMESTEP);
+    }
+
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+
+        collision_check_particle(p);
+    }
+}
+
+void Level::tick_particles (void)
+{
+    if (1) {
+        calculate_density();
+    }
+    if (0) {
+        apply_particle_forces();
+        apply_particle_velocity();
+        apply_density_relaxation();
+    }
+#if 0
+    auto sop = getptr(all_particles, 1);
+    auto eop = getptr(all_particles, PARTICLE_MAX - 1);
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+        if (!collision_check_particle(p)) {
+            move_particle(p, p->at + p->velocity);
+        }
+    }
+#endif
+
+#if 0
+    auto sop = getptr(all_particles, 1);
+    auto eop = getptr(all_particles, PARTICLE_MAX - 1);
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+
+        auto sp = particle_to_grid(p);
+        auto pidx = p - getptr(all_particles, 0);
+
+        float density_sum = 0.f;
+        for (auto ox = sp.x - near_radius; ox <= sp.x + near_radius; ox++) {
+            for (auto oy = sp.y - near_radius; oy <= sp.y + near_radius; oy++) {
+                for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
+                    auto qidx = get(all_particle_ids_at, ox, oy, slot);
+                    if (likely(!qidx)) { // ignore empty cells
+                        continue;
+                    }
+
+                    if (unlikely(qidx == pidx)) { // ignore our own particle
+                        continue;
+                    }
+
+                    auto q = getptr(all_particles, qidx);
+                    if (!q->in_use) { // remove this
+                        continue;
+                    }
+
+                    fpoint delta = p->at - q->at;
+                    float r = delta.length();
+                    if (r < SMOOTHING_LENGTH) {
+                        density_sum += 
+                           PARTICLE_MASS * /* poly6 kernel */ 315.f *
+                           pow(SMOOTHING_LENGTH * SMOOTHING_LENGTH - r * r, 3) /
+                           (64.f * PI_FLOAT * pow(SMOOTHING_LENGTH, 9));
+                    }
+                }
+            }
+        }
+        p->density = density_sum;
+        // compute pressure
+        p->pressure = fmax(PARTICLE_STIFFNESS *
+                          (density_sum - PARTICLE_RESTING_DENSITY), 0.f);
+    }
+
+    for (auto p = sop; p <= eop; p++) {
+        if (!p->in_use) {
+            continue;
+        }
+
+        fpoint pressure_force(0, 0);
+        fpoint viscosity_force(0, 0);
+
+        auto sp = particle_to_grid(p);
+        auto pidx = p - getptr(all_particles, 0);
+
+        for (auto ox = sp.x - near_radius; ox <= sp.x + near_radius; ox++) {
+            for (auto oy = sp.y - near_radius; oy <= sp.y + near_radius; oy++) {
+                for (auto slot = 0; slot < PARTICLE_SLOTS; slot++) {
+                    auto qidx = get(all_particle_ids_at, ox, oy, slot);
+                    if (likely(!qidx)) { // ignore empty cells
+                        continue;
+                    }
+
+                    if (unlikely(qidx == pidx)) { // ignore our own particle
+                        continue;
+                    }
+
+                    auto q = getptr(all_particles, qidx);
+                    if (!q->in_use) { // remove this
+                        continue;
+                    }
+
+                    fpoint delta = p->at - q->at;
+                    fpoint u = delta; u.unit();
+                    float r = delta.length();
+
+                    if (r < SMOOTHING_LENGTH) {
+                        pressure_force -=
+                            u *
+                            PARTICLE_MASS * (p->pressure + q->pressure) / (2.f * q->density) *
+                            // gradient of spiky kernel
+                            -45.f / (PI_FLOAT * (float) pow(SMOOTHING_LENGTH, 6)) *
+                            pow(SMOOTHING_LENGTH - r, 2);
+
+                        auto dv = (q->velocity - p->velocity);
+                        dv /= q->density;
+
+                        viscosity_force += dv * PARTICLE_MASS *
+                             // Laplacian of viscosity kernel
+                            45.f / (PI_FLOAT * (float) pow(SMOOTHING_LENGTH, 6)) *
+                        (SMOOTHING_LENGTH - r);
+                    }
+                }
+            }
+        }
+        viscosity_force *= PARTICLE_VISCOSITY;
+        fpoint external_force = GRAVITY_FORCE * p->density;
+
+        p->force = pressure_force + viscosity_force + external_force;
+
+        fpoint acceleration = p->force / p->density;
+
+        fpoint new_velocity = p->velocity + (acceleration * TIME_STEP);
+
+        fpoint new_position = p->at + (new_velocity * TIME_STEP);
+
+        move_particle(p, new_position);
+        p->velocity = new_velocity;
+
+        if (collision_check_particle(p)) {
+        }
+    }
+#endif
 }

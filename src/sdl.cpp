@@ -10,6 +10,7 @@
 #include "my_time.h"
 #include "my_thing.h"
 #include "my_wid_console.h"
+#include "stb_image_write.h"
 
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
@@ -1387,38 +1388,36 @@ void sdl_screenshot (void)
 
 static void sdl_screenshot_ (void)
 {_
-    FILE *fp;
     int w = game->config.inner_pix_width;
     int h = game->config.inner_pix_height;
 
     static int count;
-    char *filename = dynprintf("screenshot.%d.ppm", ++count);
-    unsigned char * pixels = (unsigned char *)
-                    mymalloc(w*h*4, "screenshot"); // 4 bytes for RGBA
-
-    fp = fopen(filename, "w");
 
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
     glReadBuffer(GL_BACK_LEFT);
 
-    glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+    std::vector<uint8_t> pixels(3 * w * h);
+    glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
 
-    fprintf(fp, "P6\n%d %d\n255\n",w,h);
-
-    int i, j;
-    for (j=h-1;j>=0;j--) {
-        for (i=0;i<w;i++) {
-            fputc(pixels[3*j*w+3*i+0], fp);
-            fputc(pixels[3*j*w+3*i+1], fp);
-            fputc(pixels[3*j*w+3*i+2], fp);
-        }
+    for(int line = 0; line != h/2; ++line) {
+        std::swap_ranges(pixels.begin() + 3 * w * line,
+                            pixels.begin() + 3 * w * (line+1),
+                            pixels.begin() + 3 * w * (h-line-1));
     }
 
-    CON("screenshot: %s", filename);
+    int components = 3;
 
-    fclose(fp);
-    myfree(filename);
-    myfree(pixels);
+    char *png = dynprintf("screenshot.%d.png", count);
+    stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
+    MINICON("Screenshot: %s", png);
+    myfree(png);
+
+    char *tga = dynprintf("screenshot.%d.tga", count);
+    stbi_write_tga(tga, w, h, components, pixels.data());
+    MINICON("Screenshot: %s", tga);
+    myfree(tga);
+
+    count++;
 }
 
 void sdl_flush_display (void)

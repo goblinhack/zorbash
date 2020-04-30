@@ -149,6 +149,11 @@ public:
                                fpoint *intersect);
     bool collision_check_particle(Particlep p, int16_t x, int16_t y);
     bool collision_check_particle(Particlep p);
+    void apply_particle_forces(void);
+    void apply_particle_velocity(void);
+    void apply_density_relaxation(void);
+
+    void calculate_density(void);
 
     Level (void)
     {_
