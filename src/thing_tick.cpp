@@ -112,7 +112,7 @@ void Thing::tick (void)
     }
 
     if (is_pipe()) {
-        if (random_range(0, 100) < 50) {
+        if (random_range(0, 100) < 10) {
             level->new_particle(at);
         }
     }

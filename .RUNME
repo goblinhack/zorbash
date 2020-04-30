@@ -628,7 +628,6 @@ else
     log_info "Compiling"
 fi
 
-echo $PATH
 make $CORES $* all
 
 if [ $? -eq 0 ]

@@ -16,8 +16,12 @@ public:
     ~Particle_ (void) {}
     bool    in_use {};
     bool    is_new {};
+    int     nebs {};
+    float   pressure {};
+    float   density {};
+    float   near_density {};
     fpoint  at;
-    fpoint  orig_at;
+    fpoint  old_at;
     fpoint  force;
     fpoint  velocity;
 } Particle;
