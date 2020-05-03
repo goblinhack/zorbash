@@ -182,7 +182,7 @@ void thing_render_all (void)
         blit_fbo_bind(FBO_MAP);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         thing_blit_things(minx, miny, maxx, maxy);
-    } else if (0 && game->config.gfx_lights) {
+    } else if (game->config.gfx_lights) {
         {
             //
             // Generate an FBO with all light sources merged together

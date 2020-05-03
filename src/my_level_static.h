@@ -6,17 +6,17 @@
 #include "my_charmap.h"
 
 typedef std::shared_ptr< class PlacedLevel > PlacedLevelp;
-typedef std::vector<PlacedLevelp> PlacedLevels;
+typedef std::vector<PlacedLevelp> LevelsStatic;
 
 class PlacedLevel
 {
 private:
 public:
-    static PlacedLevels all_placed_levels;
+    static LevelsStatic all_static_levels;
 
     PlacedLevel (void)
     {
-        this->levelno = all_placed_levels.size();
+        this->levelno = all_static_levels.size();
 
         newptr(this, "level");
     }

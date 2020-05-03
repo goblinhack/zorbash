@@ -3,10 +3,10 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_game.h"
 #include "my_gl.h"
-#include "my_time.h"
+// REMOVED #include "my_time.h"
 #include "my_thing_template.h"
 
 static void gl_init_fbo(void);

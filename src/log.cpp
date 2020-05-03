@@ -3,16 +3,16 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_game.h"
 #include "my_traceback.h"
-#include "my_wid.h"
+// REMOVED #include "my_wid.h"
 #include "my_wid_console.h"
 #include "my_wid_minicon.h"
 #include "my_python.h"
 #include "my_console.h"
-#include "my_thing.h"
-#include "my_ascii.h"
+// REMOVED #include "my_thing.h"
+// REMOVED #include "my_ascii.h"
 #include "my_log.h"
 
 static void log_ (const char *fmt, va_list args)

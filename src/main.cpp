@@ -6,11 +6,11 @@
 #define __MAIN__
 
 #include <libgen.h> // dirname
-#include <signal.h>
+// REMOVED #include <signal.h>
 #include <random>  // std::default_random_engine
 std::default_random_engine rng;
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_game.h"
 #include "my_thing_template.h"
 #include "my_python.h"
@@ -21,13 +21,13 @@ std::default_random_engine rng;
 #include "my_font.h"
 #include "my_dir.h"
 #include "my_file.h"
-#include "my_charmap.h"
+// REMOVED #include "my_charmap.h"
 #include "my_room.h"
-#include "my_placed_level.h"
-#include "my_traceback.h"
-#include "my_ascii.h"
+#include "my_level_static.h"
+// REMOVED #include "my_traceback.h"
+// REMOVED #include "my_ascii.h"
 #include "my_gfx.h"
-#include "my_globals.h"
+// REMOVED #include "my_globals.h"
 
 static char **ARGV;
 

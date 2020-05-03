@@ -29,7 +29,7 @@
  */
 
 #include "my_pcg_basic.h"
-#include <stdio.h>
+// REMOVED #include <stdio.h>
 
 // state for global RNGs
 

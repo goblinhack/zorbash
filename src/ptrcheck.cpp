@@ -2,12 +2,12 @@
 // Copyright goblinhack@gmail.com
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_traceback.h"
 #include "my_sprintf.h"
 #include "my_time.h"
-#include <ctime>
-#include <iostream>
+// REMOVED #include <ctime>
+// REMOVED #include <iostream>
 
 bool ptr_check_some_pointers_changed;
 

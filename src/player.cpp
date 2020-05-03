@@ -3,7 +3,7 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_game.h"
 #include "my_wid_console.h"
 #include "my_thing.h"

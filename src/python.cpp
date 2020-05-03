@@ -3,12 +3,12 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_py_tp.h"
 #include "my_depth.h"
 #include "my_python.h"
 #include "my_py_sdl.h"
-#include "my_string.h"
+// REMOVED #include "my_string.h"
 #include "my_ascii.h"
 #include "frameobject.h"
 
@@ -2885,8 +2885,8 @@ static void python_add_consts (void)
 
 }
 
-#include <cstdlib>
-#include <optional>
+// REMOVED #include <cstdlib>
+// REMOVED #include <optional>
 std::string get_env(const char* env) {
     auto t = std::getenv(env);
     if (t) return t;

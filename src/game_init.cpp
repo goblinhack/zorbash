@@ -4,7 +4,7 @@
 //
 
 #include "my_game.h"
-#include "my_thing.h"
+// REMOVED #include "my_thing.h"
 
 void Game::init (void)
 {_

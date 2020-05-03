@@ -3,9 +3,9 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
-#include "my_sdl.h"
-#include "my_font.h"
+// REMOVED #include "my_main.h"
+// REMOVED #include "my_sdl.h"
+// REMOVED #include "my_font.h"
 #include "my_ascii.h"
 
 static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,

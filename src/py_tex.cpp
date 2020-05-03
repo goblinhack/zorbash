@@ -3,13 +3,13 @@
 // See the README file for license info.
 //
 
-#include <SDL.h>
+// REMOVED #include <SDL.h>
 #include "my_main.h"
 #include "my_gl.h"
 #include "my_python.h"
-#include "my_sdl.h"
+// REMOVED #include "my_sdl.h"
 #include "my_tex.h"
-#include "my_pixel.h"
+// REMOVED #include "my_pixel.h"
 
 PyObject *tex_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_

@@ -3,27 +3,27 @@
 // See the README file for license info.
 //
 
-#include <bitset>
-#include "my_main.h"
+// REMOVED #include <bitset>
+// REMOVED #include "my_main.h"
 #include "my_level.h"
-#include "my_depth.h"
-#include "my_tile.h"
-#include "my_placed_level.h"
-#include "my_range.h"
+// REMOVED #include "my_depth.h"
+// REMOVED #include "my_tile.h"
+#include "my_level_static.h"
+// REMOVED #include "my_range.h"
 
 static int debug_enabled = false;
 
-std::vector<PlacedLevelp> PlacedLevel::all_placed_levels;
+std::vector<PlacedLevelp> PlacedLevel::all_static_levels;
 
 void level_fini (void)
 {_
-    PlacedLevel::all_placed_levels.clear();
+    PlacedLevel::all_static_levels.clear();
 }
 
 PlacedLevelp PlacedLevel::level_new (void)
 {_
     auto r = std::make_shared< class PlacedLevel >();
-    PlacedLevel::all_placed_levels.push_back(r);
+    PlacedLevel::all_static_levels.push_back(r);
     return (r);
 }
 

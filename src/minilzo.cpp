@@ -42,8 +42,8 @@
 #ifdef MINILZO_HAVE_CONFIG_H
 #  include <config.h>
 #endif
-#include <limits.h>
-#include <stddef.h>
+// REMOVED // REMOVED #include <limits.h>
+// REMOVED // REMOVED #include <stddef.h>
 #if defined(MINILZO_CFG_USE_INTERNAL_LZODEFS)
 
 #ifndef __LZODEFS_H_INCLUDED
@@ -3319,10 +3319,10 @@ LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_int_fast64_t) == sizeof(lzo_uint_fast6
 #endif
 #include <limits.h>
 #include <stddef.h>
-#include <lzo/lzodefs.h>
+// REMOVED #include <lzo/lzodefs.h>
 #endif
 #endif
-#include <lzo/lzoconf.h>
+// REMOVED #include <lzo/lzoconf.h>
 #if defined(LZO_CFG_EXTRA_CONFIG_HEADER2)
 #  include LZO_CFG_EXTRA_CONFIG_HEADER2
 #endif
@@ -3552,7 +3552,7 @@ LZO_COMPILE_TIME_ASSERT_HEADER(sizeof(lzo_uint64_t) == 8)
 #elif (LZO_OS_WIN32 || LZO_OS_WIN64) && ((LZO_CC_INTELC_MSC && (__INTEL_COMPILER >= 1010)) || (LZO_CC_MSC && (_MSC_VER >= 1400)))
 #define LZO_BITOPS_USE_MSC_BITSCAN 1
 #if (LZO_CC_MSC) && (LZO_ARCH_AMD64 || LZO_ARCH_I386)
-#include <intrin.h>
+// REMOVED #include <intrin.h>
 #endif
 #if (LZO_CC_MSC) && (LZO_ARCH_AMD64 || LZO_ARCH_I386)
 #pragma intrinsic(_BitScanReverse)
@@ -4636,7 +4636,7 @@ int __far __pascal LibMain ( int a, short b, short c, long d )
 #endif
 
 #if !defined(__LZO_IN_MINILZO)
-#include <lzo/lzo1x.h>
+// REMOVED #include <lzo/lzo1x.h>
 #endif
 
 #ifndef LZO_EOF_CODE

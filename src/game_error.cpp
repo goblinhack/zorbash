@@ -3,14 +3,14 @@
 // See the README file for license info.
 //
 
-#include <sstream>
+// REMOVED #include <sstream>
 #include "my_game.h"
-#include "my_dungeon.h"
-#include "minilzo.h"
-#include "my_wid_minicon.h"
-#include "my_wid_console.h"
+// REMOVED #include "my_dungeon.h"
+// REMOVED #include "minilzo.h"
+// REMOVED #include "my_wid_minicon.h"
+// REMOVED #include "my_wid_console.h"
 #include "my_wid_popup.h"
-#include "my_game_error.h"
+// REMOVED #include "my_game_error.h"
 #include "my_traceback.h"
 
 static WidPopup *game_error_window;

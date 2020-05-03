@@ -3,10 +3,10 @@
 // See the README file for license info.
 //
 
-#include "my_particle.h"
-#include "my_tile.h"
-#include "my_point.h"
-#include "my_font.h"
+// REMOVED #include "my_particle.h"
+// REMOVED #include "my_tile.h"
+// REMOVED #include "my_point.h"
+// REMOVED #include "my_font.h"
 
 static const float p_radius = 5 * ((1.0 / TILE_WIDTH) * PARTICLE_RADIUS);
 static const float viscocity1 = 0.90;
