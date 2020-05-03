@@ -3,19 +3,19 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_game.h"
-#include "my_sdl.h"
-#include "my_slre.h"
-#include "my_level.h"
+// REMOVED #include "my_sdl.h"
+// REMOVED #include "my_slre.h"
+// REMOVED #include "my_level.h"
 #include "my_game_status.h"
-#include "my_command.h"
-#include "my_ttf.h"
-#include "my_string.h"
-#include "my_wid.h"
-#include "my_wid_popup.h"
-#include "my_wid_text_box.h"
-#include "my_ascii.h"
+// REMOVED #include "my_command.h"
+// REMOVED #include "my_ttf.h"
+// REMOVED #include "my_string.h"
+// REMOVED #include "my_wid.h"
+// REMOVED #include "my_wid_popup.h"
+// REMOVED #include "my_wid_text_box.h"
+// REMOVED #include "my_ascii.h"
 #include "my_thing.h"
 
 static void game_status_wid_create(void);

@@ -3,12 +3,12 @@
  * See the LICENSE file for license.
  */
 
-#include <array>
-#include <vector>
-#include "my_main.h"
-#include "my_point.h"
-#include "my_depth.h"
-#include "my_dmap.h"
+// REMOVED #include <array>
+// REMOVED #include <vector>
+// REMOVED #include "my_main.h"
+// REMOVED #include "my_point.h"
+// REMOVED #include "my_depth.h"
+// REMOVED #include "my_dmap.h"
 #include "my_dungeon.h"
 
 static bool dungeon_debug = true;
@@ -262,11 +262,11 @@ Dungeon::Dungeon (int map_width, int map_height,
 //
 Dungeon::Dungeon (int level)
 {_
-    if (level >= (int)PlacedLevel::all_placed_levels.size()) {
+    if (level >= (int)PlacedLevel::all_static_levels.size()) {
         ERR("out of range level %d", level);
         return;
     }
-    auto l = get(PlacedLevel::all_placed_levels, level);
+    auto l = get(PlacedLevel::all_static_levels, level);
 
     cells.resize(l->width * l->height * MAP_DEPTH, Charmap::SPACE);
     std::fill(cells.begin(), cells.end(), Charmap::SPACE);
@@ -2552,8 +2552,8 @@ void Dungeon::dmap_set_walls (Dmap *d)
 }
 
 /*
-Cellular Automata Method for Generating Random Cave-Like PlacedLevels
-
+ *
+Cellular Automata Method for Generating Random Levels
 
     From RogueBasin
 
@@ -3257,8 +3257,7 @@ Dungeonp dungeon_test (void)
 #else
     int x = 663;
     mysrand(x);
-    //auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
-    auto d = new Dungeon(1);
+    auto d = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH, GRID_HEIGHT, x);
 
     return (d);
 #endif

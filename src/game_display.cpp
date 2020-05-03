@@ -4,8 +4,8 @@
 //
 
 #include "my_game.h"
-#include "my_globals.h"
-#include "my_level.h"
+// REMOVED #include "my_globals.h"
+// REMOVED #include "my_level.h"
 #include "my_thing.h"
 
 void Game::display (void)

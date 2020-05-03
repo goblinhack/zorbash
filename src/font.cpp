@@ -4,7 +4,7 @@
 //
 
 #include "my_ttf.h"
-#include "my_string.h"
+// REMOVED #include "my_string.h"
 
 Fontp fixed_font;
 

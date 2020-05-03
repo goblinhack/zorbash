@@ -4,7 +4,7 @@
 //
 
 #include "my_main.h"
-#include "my_math.h"
+// REMOVED #include "my_math.h"
 
 double gaussrand (double mean, double stddev)
 {

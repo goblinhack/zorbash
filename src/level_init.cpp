@@ -68,11 +68,14 @@ void Level::init (point3d at, int seed_in)
     log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");
     log("v v v v v v v v v v v v v v v v v v v v v v v v v v v ");
 
-#if 0
     auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
                                GRID_HEIGHT, seed);
-#endif
+#if 0
+    //
+    // Static level
+    //
     auto dungeon = new Dungeon(0);
+#endif
     if (g_errored) { return; }
     // auto dungeon = new Dungeon(0);
     level_place_entrance(dungeon, "entrance1");

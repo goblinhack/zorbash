@@ -3,10 +3,10 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_ascii.h"
 #include "my_font.h"
-#include "my_time.h"
+// REMOVED #include "my_time.h"
 #include "my_game.h"
 #include "my_gl.h"
 #include "my_thing_template.h"

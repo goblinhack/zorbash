@@ -4,7 +4,7 @@
 //
 
 #include "my_game.h"
-#include "my_dungeon.h"
+// REMOVED #include "my_dungeon.h"
 #include "my_thing.h"
 
 void Monst::log (std::string pfx)

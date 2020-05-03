@@ -3,11 +3,11 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_python.h"
 #include "my_thing_template.h"
-#include "my_py_tp.h"
-#include "my_tile.h"
+// REMOVED #include "my_py_tp.h"
+// REMOVED #include "my_tile.h"
 
 PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {_

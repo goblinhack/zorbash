@@ -4,8 +4,8 @@
 /* NetHack may be freely redistributed.  See license for details. */
 
 #include "my_main.h"
-#include "my_hacklib.h"
-#include <time.h>
+// REMOVED #include "my_hacklib.h"
+// REMOVED #include <time.h>
 
 static struct tm *getlt (void)
 {_

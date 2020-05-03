@@ -3,7 +3,7 @@
 // See the README file for license info.
 //
 
-#include <sstream>
+// REMOVED #include <sstream>
 #include "minilzo.h"
 #include "my_game.h"
 #include "my_wid_minicon.h"

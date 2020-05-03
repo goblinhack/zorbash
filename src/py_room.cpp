@@ -3,9 +3,9 @@
 // See the README file for license info.
 //
 
-#include "my_main.h"
+// REMOVED #include "my_main.h"
 #include "my_python.h"
-#include "my_tile.h"
+// REMOVED #include "my_tile.h"
 #include "my_room.h"
 
 PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
