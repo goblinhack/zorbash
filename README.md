@@ -21,7 +21,7 @@
 <!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
 
 ```diff
-- **** WORK IN PROGRESS - NOT PLAYABLE YET *****
+**** WORK IN PROGRESS - NOT PLAYABLE YET *****
 
 Zorbash is a fusion of turn based and real-time based gaming, called "borrowed time",
 which allows the player to do lots of moves in quick succession. The monsters will
