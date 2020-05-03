@@ -3,9 +3,8 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
-#include "my_dungeon.h"
 #include <sstream>
+#include "my_game.h"
 #include "minilzo.h"
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
@@ -222,22 +221,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     return (in);
 }
 
-std::istream& operator>> (std::istream &in, Bits<Particle &> my)
-{_
-    in >> bits(my.t.in_use);
-    if (my.t.in_use) {
-        in >> bits(my.t.is_new);
-        in >> bits(my.t.at);
-        in >> bits(my.t.old_at);
-        in >> bits(my.t.density);
-        in >> bits(my.t.near_density);
-        in >> bits(my.t.force);
-        in >> bits(my.t.velocity);
-    }
-
-    return (in);
-}
-
 std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 {_
     my.t->player = nullptr;
@@ -246,8 +229,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     my.t->all_thing_ids_at = {};
     my.t->all_thing_ptrs_at = {};
     my.t->all_things = {};
-    my.t->all_particles = {};
-    my.t->all_particle_ids_at = {};
     my.t->all_active_things = {};
     my.t->all_gc_things = {};
 
@@ -274,7 +255,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* _is_wall */             in >> bits(my.t->_is_wall);
     /* _is_water */            in >> bits(my.t->_is_water);
     /* all_thing_ids_at */     in >> bits(my.t->all_thing_ids_at);
-    /* all_particle_ids_at */  in >> bits(my.t->all_particle_ids_at);
     /* cursor_at */            in >> bits(my.t->cursor_at);
     /* cursor_at_old */        in >> bits(my.t->cursor_at_old);
     /* cursor_found */         in >> bits(my.t->cursor_found);
@@ -311,13 +291,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
                     t->log("load");
 #endif
                     t->reinit();
-                }
-
-                auto idx = get(my.t->all_particle_ids_at, x, y, slot);
-                if (idx) {
-                    Particle t;
-                    in >> bits(t);
-                    set(my.t->all_particles, idx, t);
                 }
             }
         }

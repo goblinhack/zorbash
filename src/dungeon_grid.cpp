@@ -7,7 +7,14 @@
 // Implements layered cycles that can be used to then create a dungeon
 //
 
+#include <stack>
+#include <list>
+#include <algorithm>
+#include <random>       // std::default_random_engine
+#include <chrono>       // std::chrono::system_clock
+#include "my_sdl.h"
 #include "my_main.h"
+#include "my_depth.h"
 #include "my_point.h"
 #include "my_tile.h"
 #include "my_room.h"
@@ -15,11 +22,6 @@
 #include "my_dmap.h"
 #include "my_range.h"
 #include "my_dungeon_grid.h"
-#include <stack>
-#include <list>
-#include <algorithm>
-#include <random>       // std::default_random_engine
-#include <chrono>       // std::chrono::system_clock
 
 static bool debug_enabled = false;
 

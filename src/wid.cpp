@@ -3,6 +3,11 @@
 // See the README file for license info.
 //
 
+#include <list>
+#include "my_main.h"
+#include "my_game.h"
+#include "my_depth.h"
+#include "my_wid.h"
 #include "my_main.h"
 #include "my_slre.h"
 #include "my_wid.h"
@@ -17,8 +22,6 @@
 #include "my_sprintf.h"
 #include "my_ascii.h"
 #include "my_gl.h"
-#include "my_game.h"
-#include <stdlib.h>
 
 //
 // Display sorted.
@@ -119,8 +122,8 @@ static int32_t wid_lowest_priority = -1;
 //
 #define HISTORY_MAX 16
 std::array<std::wstring, HISTORY_MAX> history;
-uint32_t history_at;
-uint32_t history_walk;
+uint32_t g_history_at;
+uint32_t g_history_walk;
 
 //
 // A tile over the mouse pointer
@@ -3300,23 +3303,23 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
         case KMOD_RCTRL:
             switch (wid_event_to_char(key)) {
             case 'p':
-                if (!history_walk) {
-                    history_walk = HISTORY_MAX - 1;
+                if (!g_history_walk) {
+                    g_history_walk = HISTORY_MAX - 1;
                 } else {
-                    history_walk--;
+                    g_history_walk--;
                 }
 
-                wid_set_text(w, get(history, history_walk));
+                wid_set_text(w, get(history, g_history_walk));
                 w->cursor = (uint32_t)wid_get_text(w).length();
                 break;
 
             case 'n':
-                history_walk++;
-                if (history_walk >= HISTORY_MAX) {
-                    history_walk = 0;
+                g_history_walk++;
+                if (g_history_walk >= HISTORY_MAX) {
+                    g_history_walk = 0;
                 }
 
-                wid_set_text(w, get(history, history_walk));
+                wid_set_text(w, get(history, g_history_walk));
                 w->cursor = (uint32_t)wid_get_text(w).length();
                 break;
 
@@ -3392,13 +3395,13 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                         w->cursor = updatedtext.length();
                     }
 
-                    set(history, history_at, updatedtext);
+                    set(history, g_history_at, updatedtext);
 
-                    history_at++;
-                    if (history_at >= HISTORY_MAX) {
-                        history_at = 0;
+                    g_history_at++;
+                    if (g_history_at >= HISTORY_MAX) {
+                        g_history_at = 0;
                     }
-                    history_walk = history_at;
+                    g_history_walk = g_history_at;
 
                     wid_set_text(w, L"");
                     w->cursor = 0;
@@ -3423,14 +3426,14 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                 cnt = 0;
                 while (cnt < HISTORY_MAX) {
                     cnt++;
-                    if (!history_walk) {
-                        history_walk = HISTORY_MAX - 1;
+                    if (!g_history_walk) {
+                        g_history_walk = HISTORY_MAX - 1;
                     } else {
-                        history_walk--;
+                        g_history_walk--;
                     }
 
-                    wid_set_text(w, get(history, history_walk));
-                    if (get(history, history_walk) == L"") {
+                    wid_set_text(w, get(history, g_history_walk));
+                    if (get(history, g_history_walk) == L"") {
                         continue;
                     }
 
@@ -3444,13 +3447,13 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                 while (cnt < HISTORY_MAX) {
                     cnt++;
 
-                    history_walk++;
-                    if (history_walk >= HISTORY_MAX) {
-                        history_walk = 0;
+                    g_history_walk++;
+                    if (g_history_walk >= HISTORY_MAX) {
+                        g_history_walk = 0;
                     }
 
-                    wid_set_text(w, get(history, history_walk));
-                    if (get(history, history_walk) == L"") {
+                    wid_set_text(w, get(history, g_history_walk));
+                    if (get(history, g_history_walk) == L"") {
                         continue;
                     }
 

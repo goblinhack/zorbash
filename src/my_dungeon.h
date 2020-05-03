@@ -3,14 +3,16 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
 #include "my_room.h"
+#include "my_dmap.h"
+#include "my_point.h"
 #include "my_placed_level.h"
 #include "my_dungeon_grid.h"
-#include "my_ascii.h"
-#include <stack>
-#include <list>
-#include <algorithm>
+#include <vector>
+
+//#include <stack>
+//#include <list>
+//#include <algorithm>
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)

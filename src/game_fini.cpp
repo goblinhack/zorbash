@@ -4,7 +4,6 @@
 //
 
 #include "my_game.h"
-#include "my_dungeon.h"
 
 void Config::fini (void)
 {_

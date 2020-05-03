@@ -129,8 +129,6 @@ then
     exit 1
 fi
 
-log_info "SDL version                :" $($SDL2_CONFIG --version)
-
 #
 # -funwind-tables and -rdynamic for backtrace info on linux.
 # But it seemed to help little.

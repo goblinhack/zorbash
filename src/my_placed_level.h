@@ -4,7 +4,6 @@
 //
 
 #include "my_charmap.h"
-#include "my_game.h"
 
 typedef std::shared_ptr< class PlacedLevel > PlacedLevelp;
 typedef std::vector<PlacedLevelp> PlacedLevels;

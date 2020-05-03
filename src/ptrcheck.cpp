@@ -99,20 +99,20 @@ static void die (void)
 
 static void croak_ (const char *fmt, va_list args)
 {
-    static int croaked;
-    if (croaked) {
+    static int g_croaked;
+    if (g_croaked) {
         std::cerr <<
           string_sprintf("\nPTRCHECK: NESTED FATAL ERROR %s %s %d ",
                          __FILE__, __FUNCTION__, __LINE__);
         exit(1);
     }
-    croaked = 1;
+    g_croaked = 1;
 
     auto err = "\n" + timestamp();
     err += ": PTRCHECK: FATAL ERROR: ";
     err += string_sprintf(fmt, args);
     std::cerr << err << std::endl;
-    croaked = true;
+    g_croaked = true;
     die();
 }
 

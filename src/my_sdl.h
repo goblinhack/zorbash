@@ -3,13 +3,13 @@
 // See the README file for license info.
 //
 
-
 #ifndef _MY_SDL_H_
 #define _MY_SDL_H_
 
 #include <SDL.h>
 #include <SDL_keyboard.h>
 #include <SDL_mixer.h>
+#include "my_main.h"
 #include "my_command.h"
 typedef int32_t timestamp_t;
 
@@ -90,7 +90,7 @@ extern int sdl_joy2_down;
 extern int sdl_joy2_up;
 
 extern SDL_Scancode sdl_grabbed_scancode;
-extern bool sdl_grab_next_key;
+extern bool g_grab_next_key;
 typedef void(*on_sdl_key_grab_t)(SDL_Scancode);
 extern on_sdl_key_grab_t on_sdl_key_grab;
 

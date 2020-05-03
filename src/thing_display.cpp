@@ -3,10 +3,13 @@
 // See the README file for license info.
 //
 
+#include "my_main.h"
 #include "my_game.h"
+#include "my_depth.h"
 #include "my_thing.h"
 #include "my_font.h"
 #include "my_level.h"
+#include "my_gl.h"
 
 void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 {_
@@ -758,7 +761,7 @@ void Thing::blit (void)
         glcolor(c);
     }
 
-    if (tp_gfx_show_outlined(tpp) && !thing_map_black_and_white) {
+    if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
         tile_blit_outline(tile, blit_tl, blit_br);
     } else {
         tile_blit(tile, blit_tl, blit_br);

@@ -10,9 +10,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <time.h>
-
 #include "my_main.h"
 #include "my_file.h"
+#include "my_globals.h"
 
 unsigned char *file_read (const char *filename, int32_t *out_len)
 {_

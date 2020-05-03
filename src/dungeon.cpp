@@ -3,6 +3,12 @@
  * See the LICENSE file for license.
  */
 
+#include <array>
+#include <vector>
+#include "my_main.h"
+#include "my_point.h"
+#include "my_depth.h"
+#include "my_dmap.h"
 #include "my_dungeon.h"
 
 static bool dungeon_debug = true;

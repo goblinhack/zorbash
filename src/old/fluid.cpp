@@ -5,7 +5,6 @@
 //
 
 #include "my_main.h"
-#include "my_game.h"
 #include "my_fluid.h"
 #include "my_thing.h"
 

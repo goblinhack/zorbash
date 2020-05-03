@@ -4,12 +4,16 @@
 //
 
 #include <algorithm>
+#include <vector>
+#include <set>
 #include "my_main.h"
-#include "my_game.h"
+#include "my_level.h"
+#include "my_depth.h"
+#include "my_main.h"
 #include "my_dmap.h"
 #include "my_math.h"
-#include <vector>
 #include "my_thing.h"
+#include "my_thing_ai.h"
 
 #define DEBUG_AI_VERBOSE
 

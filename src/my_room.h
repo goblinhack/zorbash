@@ -3,8 +3,11 @@
 // See the README file for license info.
 //
 
+#include "my_main.h"
+#include "my_point.h"
+#include "my_depth.h"
 #include "my_charmap.h"
-#include "my_game.h"
+#include <vector>
 
 typedef class Room *Roomp;
 typedef std::vector<Roomp> Rooms;

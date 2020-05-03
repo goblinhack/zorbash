@@ -4,8 +4,11 @@
 //
 
 #include "my_main.h"
-#include "my_wid.h"
 #include "my_python.h"
+#include "my_size.h"
+#include "my_token.h"
+#include "my_command.h"
+#include "my_command_history.h"
 
 /*
  * Simple console expanding code, takes a comand input and expands it as
@@ -368,13 +371,13 @@ uint8_t command_handle (const char *input,
 #endif
         py_exec(input);
 
-        history[history_at] = string_to_wstring(std::string(input));
+        history[g_history_at] = string_to_wstring(std::string(input));
 
-        history_at++;
-        if (history_at >= HISTORY_MAX) {
-            history_at = 0;
+        g_history_at++;
+        if (g_history_at >= HISTORY_MAX) {
+            g_history_at = 0;
         }
-        history_walk = history_at;
+        g_history_walk = g_history_at;
 
         return (true);
     }

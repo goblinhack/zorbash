@@ -3,14 +3,21 @@
 // See the README file for license info.
 //
 
+#ifndef _MY_ASCII_H_
+#define _MY_ASCII_H_
+
 #include <wchar.h>
+#include <array>
 #include "my_point.h"
 #include "my_color.h"
+#include "my_tex.h"
+#include "my_tile.h"
 
-class Tile;
-typedef class Tile* Tilep;
-class Tex;
-typedef class Tex* Texp;
+//
+// Dimentions of the fixed text on screen
+//
+#define ASCII_WIDTH_MAX  80
+#define ASCII_HEIGHT_MAX ASCII_WIDTH_MAX
 
 typedef int (*ascii_key_down_callback)(int x, int y, const struct SDL_KEYSYM * key);
 typedef int (*ascii_mouse_down_callback)(int x, int y, int button);
@@ -205,3 +212,5 @@ extern float tile_pix_h;
 #define ASCII_CURSOR_UCHAR ((wchar_t)('z' + 6))
 #define ASCII_CURSOR_TILE  "C97" // block
 #define ASCII_UNKNOWN_TILE "C31" // ?
+
+#endif

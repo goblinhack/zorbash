@@ -1,6 +1,6 @@
 #pragma once
 #include <array>
-#include "bounds_check.h"
+#include "my_bounds_check.h"
 
 //
 // Single dimension array check

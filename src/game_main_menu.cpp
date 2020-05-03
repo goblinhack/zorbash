@@ -10,6 +10,7 @@
 #include "my_ascii.h"
 #include "my_time.h"
 #include "my_game_status.h"
+#include "my_gl.h"
 
 static WidPopup *game_main_menu_window;
 

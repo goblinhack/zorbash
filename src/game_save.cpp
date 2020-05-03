@@ -3,10 +3,9 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
-#include "my_dungeon.h"
 #include <sstream>
 #include "minilzo.h"
+#include "my_game.h"
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"
 #include "my_wid_popup.h"
@@ -189,22 +188,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     return (out);
 }
 
-std::ostream& operator<< (std::ostream &out, Bits<const Particle & > const my)
-{_
-    out << bits(my.t.in_use);
-    if (my.t.in_use) {
-        out << bits(my.t.is_new);
-        out << bits(my.t.at);
-        out << bits(my.t.old_at);
-        out << bits(my.t.density);
-        out << bits(my.t.near_density);
-        out << bits(my.t.force);
-        out << bits(my.t.velocity);
-    }
-
-    return (out);
-}
-
 std::ostream& operator<<(std::ostream &out,
                          Bits<Level* & > const my)
 {_
@@ -228,7 +211,6 @@ std::ostream& operator<<(std::ostream &out,
     /* _is_wall */             out << bits(my.t->_is_wall);
     /* _is_water */            out << bits(my.t->_is_water);
     /* all_thing_ids_at */     out << bits(my.t->all_thing_ids_at);
-    /* all_particle_ids_at */  out << bits(my.t->all_particle_ids_at);
     /* cursor_at */            out << bits(my.t->cursor_at);
     /* cursor_at_old */        out << bits(my.t->cursor_at_old);
     /* cursor_found */         out << bits(my.t->cursor_found);
@@ -252,12 +234,6 @@ std::ostream& operator<<(std::ostream &out,
 #ifdef ENABLE_THING_ID_LOGS
                     t->log("save");
 #endif
-                    out << bits(t);
-                }
-
-                auto idx = get(my.t->all_particle_ids_at, x, y, slot);
-                if (idx) {
-                    auto t = get(my.t->all_particles, idx);
                     out << bits(t);
                 }
             }

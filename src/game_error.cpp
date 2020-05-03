@@ -3,9 +3,9 @@
 // See the README file for license info.
 //
 
+#include <sstream>
 #include "my_game.h"
 #include "my_dungeon.h"
-#include <sstream>
 #include "minilzo.h"
 #include "my_wid_minicon.h"
 #include "my_wid_console.h"

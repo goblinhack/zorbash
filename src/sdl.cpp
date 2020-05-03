@@ -3,28 +3,25 @@
 // See the README file for license info.
 //
 
-#include "my_gl.h"
 #include "my_game.h"
+#include "my_gl.h"
 #include "my_wid.h"
 #include "my_ascii.h"
 #include "my_time.h"
 #include "my_thing.h"
+#include "my_player.h"
 #include "my_wid_console.h"
 #include "stb_image_write.h"
 
 static int sdl_get_mouse(void);
 static void sdl_screenshot_(void);
-static int sdl_do_screenshot;
-extern bool game_needs_restart;
-
-int TILES_ACROSS;
-int TILES_DOWN;
 
 uint8_t sdl_main_loop_running;
 uint8_t sdl_shift_held;
 uint8_t sdl_init_video;
 uint32_t mouse_down;
 timestamp_t mouse_down_when;
+
 int mouse_x;
 int mouse_y;
 int wheel_x;
@@ -60,7 +57,6 @@ SDL_Window *window; // Our window handle
 SDL_GLContext context; // Our opengl context handle
 
 SDL_Scancode sdl_grabbed_scancode;
-bool sdl_grab_next_key;
 on_sdl_key_grab_t on_sdl_key_grab;
 
 void sdl_fini (void)
@@ -397,13 +393,13 @@ static void sdl_event (SDL_Event * event)
 
     switch (event->type) {
     case SDL_KEYDOWN:
-        if (sdl_grab_next_key) {
+        if (g_grab_next_key) {
             CON("Keyboard: grabbed 0x%08X = %s / %s",
                 event->key.keysym.sym,
                 SDL_GetKeyName(event->key.keysym.sym),
                 SDL_GetScancodeName(event->key.keysym.scancode));
 
-            sdl_grab_next_key = false;
+            g_grab_next_key = false;
             sdl_grabbed_scancode = event->key.keysym.scancode;
             if (on_sdl_key_grab) {
                 (*on_sdl_key_grab)(sdl_grabbed_scancode);
@@ -1136,7 +1132,7 @@ uint8_t config_debug_mode (tokens_t *tokens, void *context)
 //
 uint8_t config_errored (tokens_t *tokens, void *context)
 {_
-    errored = false;
+    g_errored = false;
     CON("USERCFG: Errored mode cleared");
     return (true);
 }
@@ -1207,11 +1203,11 @@ void sdl_loop (void)
 
         //fluid_tick();
 
-        static bool old_errored;
-        if (errored) {
-            if (errored != old_errored) {
+        static bool old_g_errored;
+        if (g_errored) {
+            if (g_errored != old_g_errored) {
                 ERR("An error occurred. Check the logs above.");
-                ERR("To continue try 'clear errored'");
+                ERR("To continue try 'clear g_errored'");
                 if (wid_console_window && !(wid_console_window->visible)) {
                     wid_visible(wid_console_window);
                     wid_raise(wid_console_window);
@@ -1220,7 +1216,7 @@ void sdl_loop (void)
                 }
             }
         }
-        old_errored = errored;
+        old_g_errored = g_errored;
 
         gl_enter_2d_mode(game->config.inner_pix_width,
                          game->config.inner_pix_height);
@@ -1269,7 +1265,7 @@ void sdl_loop (void)
                 break;
             }
 
-            if (!errored) {
+            if (!g_errored) {
                 player_tick();
                 things_tick();
             }
@@ -1278,12 +1274,6 @@ void sdl_loop (void)
             // Display UI.
             //
             wid_display_all();
-        }
-
-        if (!errored) {
-            if (level) {
-                level->tick_particles();
-            }
         }
 
         blit_fbo_bind(FBO_FINAL);
@@ -1345,8 +1335,8 @@ void sdl_loop (void)
                     frames = 0;
                 }
 
-                if (unlikely(sdl_do_screenshot)) {
-                    sdl_do_screenshot = 0;
+                if (unlikely(g_do_screenshot)) {
+                    g_do_screenshot = 0;
                     sdl_screenshot_();
                 }
             }
@@ -1369,7 +1359,7 @@ void sdl_loop (void)
         //
         // Config change?
         //
-        if (unlikely(game_needs_restart)) {
+        if (unlikely(g_need_restart)) {
             break;
         }
     }
@@ -1383,7 +1373,7 @@ void sdl_loop (void)
 
 void sdl_screenshot (void)
 {_
-    sdl_do_screenshot = 1;
+    g_do_screenshot = 1;
 }
 
 static void sdl_screenshot_ (void)
@@ -1422,7 +1412,7 @@ static void sdl_screenshot_ (void)
 
 void sdl_flush_display (void)
 {
-    if (opt_fast_start) {
+    if (g_opt_fast_start) {
         return;
     }
 

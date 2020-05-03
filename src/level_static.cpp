@@ -3,11 +3,13 @@
 // See the README file for license info.
 //
 
+#include <bitset>
 #include "my_main.h"
+#include "my_level.h"
+#include "my_depth.h"
 #include "my_tile.h"
 #include "my_placed_level.h"
 #include "my_range.h"
-#include <bitset>
 
 static int debug_enabled = false;
 

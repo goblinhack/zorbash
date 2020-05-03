@@ -17,11 +17,8 @@
 #include <sys/time.h>
 #include "my_sdl.h"
 
-//
-// Misc
-//
 #undef ONESEC
-#define ONESEC                          1000
+#define ONESEC 1000
 
 bool time_have_x_ms_passed_since(timestamp_t tenths, timestamp_t since);
 bool time_have_x_hundredths_passed_since(timestamp_t tenths, timestamp_t since);
@@ -31,6 +28,7 @@ timestamp_t time_get_elapsed_secs(timestamp_t val, timestamp_t since);
 timestamp_t time_get_elapsed_tenths(timestamp_t val, timestamp_t since);
 const char *time2str(timestamp_t ms, char *buf, int32_t len);
 const char *timestamp(char *buf, int32_t len);
+void get_timestamp(char *buf, int32_t len);
 
 extern timestamp_t time_now;
 #ifdef NOT_NEEDED
