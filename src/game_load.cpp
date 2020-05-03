@@ -167,8 +167,8 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     }
 
     in >> bits(my.t->last_attached);
-    in >> bits(my.t->at);
-    in >> bits(my.t->last_at);
+    in >> bits(my.t->mid_at);
+    in >> bits(my.t->last_mid_at);
     in >> bits(my.t->id); if (!my.t->id) { ERR("loaded a thing with no ID"); }
     in >> bits(my.t->tile_curr);
     in >> bits(T); my.t->timestamp_next_frame = load(T);
@@ -212,7 +212,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /////////////////////////////////////////////////////////////////////////
 
     if (my.t->has_light) {
-        my.t->new_light(my.t->at,
+        my.t->new_light(my.t->mid_at,
                         fpoint(0, 0),
                         my.t->monstp->light_strength,
                         my.t->monstp->light_col);
@@ -376,8 +376,8 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.key_wait);
     in >> bits(my.t.key_load);
     in >> bits(my.t.key_save);
-    in >> bits(my.t.key_todo1);
-    in >> bits(my.t.key_todo2);
+    in >> bits(my.t.key_zoom_in);
+    in >> bits(my.t.key_zoom_out);
     in >> bits(my.t.key_pause);
     in >> bits(my.t.key_help);
     in >> bits(my.t.key_quit);

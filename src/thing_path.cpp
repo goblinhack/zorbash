@@ -95,7 +95,7 @@ int thing_can_reach_player (point start)
 
     static point last_player_at;
     static Levelp last_level;
-    point end((int)player->at.x, player->at.y);
+    point end((int)player->mid_at.x, player->mid_at.y);
 
     if ((last_level != level) || (end != last_player_at) ||
         !game->player_dmap) {

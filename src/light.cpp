@@ -448,7 +448,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
                     if (level->player) {
                         auto p = level->player;
                         auto len = DISTANCE(l->at.x, l->at.y,
-                                            p->at.x, p->at.y);
+                                            p->mid_at.x, p->mid_at.y);
                         if (len > MAX_LIGHT_PLAYER_DISTANCE + l->strength) {
                             continue;
                         }

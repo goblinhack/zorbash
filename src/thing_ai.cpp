@@ -146,13 +146,13 @@ void Thing::ai_get_next_hop (void)
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
 
-    const float minx = std::max(0,         (int)(at.x - dx));
-    const float maxx = std::min(MAP_WIDTH, (int)(at.x + dx - 1));
+    const float minx = std::max(0,         (int)(mid_at.x - dx));
+    const float maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
 
-    const float miny = std::max(0,          (int)(at.y - dy));
-    const float maxy = std::min(MAP_HEIGHT, (int)(at.y + dy - 1));
+    const float miny = std::max(0,          (int)(mid_at.y - dy));
+    const float maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
 
-    point start((int)at.x, (int)at.y);
+    point start((int)mid_at.x, (int)mid_at.y);
 
     auto dmap_scent = get_dmap_scent();
 
@@ -258,7 +258,7 @@ void Thing::ai_get_next_hop (void)
                 // The closer an enemy is (something that attacked us), the
                 // higher the scoree
                 //
-                float dist = distance(it->at, at);
+                float dist = distance(it->mid_at, mid_at);
                 float max_dist = ai_scent_distance();
 
                 if (dist < max_dist) {
@@ -429,14 +429,14 @@ void Thing::ai_get_next_hop (void)
 
         auto nh_tile = fpoint(best.x + minx + 0.5,
                               best.y + miny + 0.5);
-        fpoint nh = at;
+        fpoint nh = mid_at;
         float dx = 0.05;
         float dy = 0.05;
 
-        if (nh_tile.x < at.x) { nh.x = at.x - dx; }
-        if (nh_tile.x > at.x) { nh.x = at.x + dx; }
-        if (nh_tile.y < at.y) { nh.y = at.y - dy; }
-        if (nh_tile.y > at.y) { nh.y = at.y + dy; }
+        if (nh_tile.x < mid_at.x) { nh.x = mid_at.x - dx; }
+        if (nh_tile.x > mid_at.x) { nh.x = mid_at.x + dx; }
+        if (nh_tile.y < mid_at.y) { nh.y = mid_at.y - dy; }
+        if (nh_tile.y > mid_at.y) { nh.y = mid_at.y + dy; }
 
         log("assess (%d,%d) next (%d,%d) cost %d (lower pref)",
             (int)minx + goal.at.x, (int)miny + goal.at.y,
@@ -450,7 +450,7 @@ void Thing::ai_get_next_hop (void)
             continue;
         }
 
-        if (at == nh) {
+        if (mid_at == nh) {
             continue;
         }
 
@@ -492,4 +492,27 @@ void Thing::ai_get_next_hop (void)
     is_move_done = true;
     stop();
     return;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// interpolated_mid_at
+////////////////////////////////////////////////////////////////////////////
+fpoint Thing::get_interpolated_mid_at (void)
+{_
+    if (monstp) {
+        if (monstp->interpolated_mid_at == fpoint(0, 0)) {
+            return (mid_at);
+        } else {
+            return (monstp->interpolated_mid_at);
+        }
+    } else {
+        return (mid_at);
+    }
+}
+
+fpoint Thing::set_interpolated_mid_at (fpoint v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->interpolated_mid_at = v);
 }

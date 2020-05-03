@@ -362,6 +362,11 @@ int Thing::is_lava(void)
     return (tp_is_lava(tp()));
 }
 
+int Thing::is_chasm(void)
+{_
+    return (tp_is_chasm(tp()));
+}
+
 int Thing::is_light_strength(void)
 {_
     return (tp_is_light_strength(tp()));

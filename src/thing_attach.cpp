@@ -11,9 +11,9 @@
 void Thing::attach (void)
 {_
     detach();
-    level->put_thing((int)at.x, (int)at.y, id);
-    auto mx = (int16_t)(int)at.x;
-    auto my = (int16_t)(int)at.y;
+    level->put_thing((int)mid_at.x, (int)mid_at.y, id);
+    auto mx = (int16_t)(int)mid_at.x;
+    auto my = (int16_t)(int)mid_at.y;
     is_attached = true;
     last_attached = spoint(mx, my);
 }

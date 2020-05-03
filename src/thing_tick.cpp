@@ -10,8 +10,6 @@
 #include "my_wid_console.h"
 #include "my_thing.h"
 
-unsigned short g_thing_callframes_depth;
-
 void Thing::achieve_goals_in_life (void)
 {_
     if (tp_is_loggable(tp())) {
@@ -36,6 +34,15 @@ void Thing::achieve_goals_in_life (void)
     on_fire_tick();
     if (is_dead) {
         return;
+    }
+
+    if (is_player()) {
+        //
+        // Make sure we have a path shown if we just completed one.
+        //
+        if (!monstp->move_path.size()) {
+            thing_cursor_path_create();
+        }
     }
 
     //
@@ -88,7 +95,7 @@ void Thing::tick (void)
 
     g_thing_callframes_depth = callframes_depth;
 
-    collision_check_do();
+    update_interpolated_position();
 
     if (unlikely(is_dead)) {
         if (tp_is_loggable(tp())) {
@@ -104,12 +111,19 @@ void Thing::tick (void)
         return;
     }
 
-    //
-    // Move only after a set amount of time
-    //
-    auto now = time_get_time_ms_cached();
-    if (now > get_timestamp_ai_next()) {
-        achieve_goals_in_life();
+    if (is_waiting_to_move) {
+        //
+        // Tick on player move/change of the current tick
+        //
+        auto tick = get_tick();
+        if (tick < game->tick_current) {
+            is_move_done = false;
+            achieve_goals_in_life();
+            if (is_move_done) {
+                incr_tick();
+                is_waiting_to_move = false;
+            }
+        }
     }
 
     //
@@ -126,6 +140,8 @@ void things_tick (void)
     if (game->paused()) {
         return;
     }
+
+    game->things_are_moving = false;
 
     //
     // Allows for debugging
@@ -147,6 +163,15 @@ void things_tick (void)
     for (auto i : level->all_active_things) {
         auto t = i.second;
         verify(t);
+        if (t->is_monst()) {
+            if (t->get_tick() != game->tick_current) {
+                game->things_are_moving = true;
+            }
+        }
         t->tick();
+    }
+
+    if (!game->things_are_moving) {
+        game->tick_end();
     }
 }

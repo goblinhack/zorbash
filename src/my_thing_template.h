@@ -345,6 +345,12 @@ static inline int tp_is_lava (Tpp t)
     return (t->is_lava);
 }
 
+static inline int tp_is_chasm (Tpp t)
+{_
+    if (unlikely(!t)) { ERR("no tp"); return false; }
+    return (t->is_chasm);
+}
+
 static inline int tp_is_water (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }

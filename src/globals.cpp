@@ -35,3 +35,5 @@ bool g_grab_next_key;
 
 int TILES_ACROSS;
 int TILES_DOWN;
+
+uint16_t g_thing_callframes_depth;

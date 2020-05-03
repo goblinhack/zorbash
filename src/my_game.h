@@ -67,8 +67,8 @@ public:
     uint32_t           key_wait                     = {SDL_SCANCODE_PERIOD};
     uint32_t           key_load                     = {SDL_SCANCODE_F11};
     uint32_t           key_save                     = {SDL_SCANCODE_F12};
-    uint32_t           key_todo1                    = {SDL_SCANCODE_Z};
-    uint32_t           key_todo2                    = {SDL_SCANCODE_X};
+    uint32_t           key_zoom_in                  = {SDL_SCANCODE_Z};
+    uint32_t           key_zoom_out                 = {SDL_SCANCODE_X};
     uint32_t           key_pause                    = {SDL_SCANCODE_P};
     uint32_t           key_help                     = {SDL_SCANCODE_H};
     uint32_t           key_quit                     = {SDL_SCANCODE_Q};
@@ -85,6 +85,8 @@ public:
     Game (void) {}
     Game (std::string appdata);
     bool load(std::string save_file, class Game &target);
+    void tick_begin();
+    void tick_end();
     bool paused(void);
     bool save(std::string save_file);
     void config_gfx_select(void);

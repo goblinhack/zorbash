@@ -43,7 +43,7 @@ void thing_gc (void)
 
 Thingp thing_new (std::string tp_name, Thingp owner)
 {_
-    return thing_new(tp_name, owner->at);
+    return thing_new(tp_name, owner->mid_at);
 }
 
 Thingp thing_new (std::string name, fpoint at, fpoint jitter)
@@ -69,8 +69,8 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
 {_
     verify(this);
 
-    at      = born;
-    last_at = born;
+    mid_at      = born;
+    last_mid_at = born;
 
     timestamp_next_frame = 0;
     const auto tpp = tp_find(name);
@@ -319,7 +319,8 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     if (unlikely(tp_is_player(tpp))) {
         if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
-                level->player->at.x, level->player->at.y, at.x, at.y);
+                level->player->mid_at.x, level->player->mid_at.y, 
+                mid_at.x, mid_at.y);
             return;
         }
         level->player = this;
@@ -329,32 +330,32 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         // at the edges of the fbo
         //
         color col = WHITE;
-        new_light(at, TILE_WIDTH, col);
+        new_light(mid_at, TILE_WIDTH, col);
 
         float d1 = 0.2;
         float d2 = 0.15;
-        new_light(at, fpoint(d1, d1), TILE_WIDTH, col);
-        new_light(at, fpoint(d1, d2), TILE_WIDTH, col);
-        new_light(at, fpoint(d2, d1), TILE_WIDTH, col);
-        new_light(at, fpoint(d2, d2), TILE_WIDTH, col);
-        new_light(at, fpoint(d1, -d1), TILE_WIDTH, col);
-        new_light(at, fpoint(d1, -d2), TILE_WIDTH, col);
-        new_light(at, fpoint(d2, -d1), TILE_WIDTH, col);
-        new_light(at, fpoint(d2, -d2), TILE_WIDTH, col);
-        new_light(at, fpoint(-d1, d1), TILE_WIDTH, col);
-        new_light(at, fpoint(-d1, d2), TILE_WIDTH, col);
-        new_light(at, fpoint(-d2, d1), TILE_WIDTH, col);
-        new_light(at, fpoint(-d2, d2), TILE_WIDTH, col);
-        new_light(at, fpoint(-d1, -d1), TILE_WIDTH, col);
-        new_light(at, fpoint(-d1, -d2), TILE_WIDTH, col);
-        new_light(at, fpoint(-d2, -d1), TILE_WIDTH, col);
-        new_light(at, fpoint(-d2, -d2), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(d1, d1), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(d1, d2), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(d2, d1), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(d2, d2), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(d1, -d1), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(d1, -d2), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(d2, -d1), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(d2, -d2), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(-d1, d1), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(-d1, d2), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(-d2, d1), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(-d2, d2), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(-d1, -d1), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(-d1, -d2), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(-d2, -d1), TILE_WIDTH, col);
+        new_light(mid_at, fpoint(-d2, -d2), TILE_WIDTH, col);
 
         has_light = true;
         log("player created");
     }
 
-    point new_at((int)at.x, (int)at.y);
+    point new_at((int)mid_at.x, (int)mid_at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
         ERR("new thing is oob at %d, %d", new_at.x, new_at.y);
         return;
@@ -392,7 +393,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         dx *= jitter.x;
         dy *= jitter.y;
 
-        move_to_immediately(fpoint(at.x + dx, at.y + dy));
+        move_to_immediately(fpoint(mid_at.x + dx, mid_at.y + dy));
     }
 
     attach();
@@ -404,7 +405,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         if (unlikely(tp_is_light_strength(tpp))) {
             std::string l = tp_light_color(tpp);
             color c = string2color(l);
-            new_light(at, (double) tp_is_light_strength(tpp), c);
+            new_light(mid_at, (double) tp_is_light_strength(tpp), c);
             has_light = true;
         }
     }
@@ -445,15 +446,15 @@ void Thing::reinit (void)
     if (unlikely(tp_is_player(tpp))) {
         if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
-                level->player->at.x, level->player->at.y,
-                at.x, at.y);
+                level->player->mid_at.x, level->player->mid_at.y,
+                mid_at.x, mid_at.y);
             return;
         }
         level->player = this;
         log("player recreated");
     }
 
-    point new_at((int)at.x, (int)at.y);
+    point new_at((int)mid_at.x, (int)mid_at.y);
     if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
         ERR("new thing is oob at %d, %d", new_at.x, new_at.y);
         return;
@@ -524,7 +525,7 @@ void Thing::destroy (void)
     //
     // Pop from the map
     //
-    point old_at((int)at.x, (int)at.y);
+    point old_at((int)mid_at.x, (int)mid_at.y);
 
     if (is_blood())       { level->unset_blood(old_at.x, old_at.y); }
     if (is_corpse())      { level->unset_corpse(old_at.x, old_at.y); }
@@ -823,7 +824,7 @@ void Thing::update_light (void)
     auto lc = get_light_count();
     size_t c = 0;
     for (auto l : get_light()) {
-        l->at = at;
+        l->at = mid_at;
         l->calculate(c == lc - 1);
         c++;
     }
