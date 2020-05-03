@@ -32,6 +32,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_load.o 		\
     $(OBJDIR)/game_log.o 		\
     $(OBJDIR)/game_main_menu.o 		\
+    $(OBJDIR)/game_mouse.o		\
     $(OBJDIR)/game_notice.o 		\
     $(OBJDIR)/game_paused.o 		\
     $(OBJDIR)/game_quit.o 		\
@@ -40,22 +41,25 @@ GAME_OBJECTS=				\
     $(OBJDIR)/gauss.o 			\
     $(OBJDIR)/gfx.o			\
     $(OBJDIR)/gl.o 			\
+    $(OBJDIR)/globals.o 		\
     $(OBJDIR)/hacklib.o 		\
     $(OBJDIR)/hexdump.o 		\
     $(OBJDIR)/level.o 			\
     $(OBJDIR)/level_display.o 		\
     $(OBJDIR)/level_fini.o 		\
     $(OBJDIR)/level_init.o 		\
+    $(OBJDIR)/level_log.o 		\
     $(OBJDIR)/level_map.o 		\
+    $(OBJDIR)/level_static.o 		\
     $(OBJDIR)/level_thing.o 		\
     $(OBJDIR)/light.o 			\
+    $(OBJDIR)/light_log.o 		\
     $(OBJDIR)/log.o 			\
+    $(OBJDIR)/log_util.o 		\
     $(OBJDIR)/main.o 			\
     $(OBJDIR)/map.o 			\
     $(OBJDIR)/minilzo.o 		\
-    $(OBJDIR)/particle.o 		\
     $(OBJDIR)/pcg_basic.o 		\
-    $(OBJDIR)/placed_level.o 		\
     $(OBJDIR)/player.o 			\
     $(OBJDIR)/ptrcheck.o 		\
     $(OBJDIR)/py_level.o 		\
@@ -90,7 +94,9 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_hunger.o 		\
     $(OBJDIR)/thing_id.o 		\
+    $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lava.o 		\
+    $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_minimap.o 		\
@@ -114,6 +120,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/util.o 			\
     $(OBJDIR)/wid.o 			\
     $(OBJDIR)/wid_console.o 		\
+    $(OBJDIR)/wid_log.o 		\
     $(OBJDIR)/wid_minicon.o 		\
     $(OBJDIR)/wid_popup.o 		\
     $(OBJDIR)/wid_test.o 		\

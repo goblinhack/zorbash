@@ -1,4 +1,3 @@
-#include "my_game.h"
 #include "my_math.h"
 #include "my_color.h"
 #include "my_tex.h"

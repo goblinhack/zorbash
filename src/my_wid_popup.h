@@ -5,6 +5,8 @@
 
 #ifndef _MY_WID_POPUP_H_
 #define _MY_WID_POPUP_H_
+
+#include "my_main.h"
 #include "my_wid_text_box.h"
 
 class WidPopup {

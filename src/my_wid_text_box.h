@@ -6,6 +6,7 @@
 #ifndef _MY_WID_TEXT_BOX_H_
 #define _MY_WID_TEXT_BOX_H_
 
+#include "my_main.h"
 #include "my_wid.h"
 
 class WidTextBox {

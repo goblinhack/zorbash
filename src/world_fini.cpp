@@ -3,8 +3,9 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
-#include "my_dungeon.h"
+#include "my_main.h"
+#include "my_world.h"
+#include "my_depth.h"
 #include "my_thing.h"
 
 void World::fini (void)

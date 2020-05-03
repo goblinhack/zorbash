@@ -16,6 +16,7 @@
 #include "my_main.h"
 #include "my_sdl.h"
 #include "my_thing_template.h"
+#include "my_tex.h"
 #include "my_time.h"
 
 std::wstring string_to_wstring(const std::string& s);

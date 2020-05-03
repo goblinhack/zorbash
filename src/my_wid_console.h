@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#include "my_main.h"
 
 void wid_console_fini(void);
 uint8_t wid_console_init(void);

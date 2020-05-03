@@ -6,16 +6,14 @@
 #ifndef _MY_THING_H_
 #define _MY_THING_H_
 
-#include <unordered_map>
-#include <memory>
-#include <set>
-
-typedef struct Thing_* Thingp;
-typedef struct Monst_* Monstp;
+//#include <unordered_map>
+//#include <memory>
+//#include <set>
 
 // Not used
 // typedef std::unordered_map< uint32_t, Thingp > Things;
 
+#include <list>
 #include "my_time.h"
 #include "my_light.h"
 #include "my_thing_ai.h"
@@ -861,33 +859,7 @@ public:
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
 //std::istream& operator>>(std::istream &in, Bits<Thing &> my);
 
-struct ThingDisplaySortKey {
-    int16_t y;
-    uint32_t id;
-};
-
-struct thing_display_sort_cmp : public std::binary_function<struct ThingDisplaySortKey, struct ThingDisplaySortKey, bool>
-{
-    bool operator()(const struct ThingDisplaySortKey& lhs,
-                    const struct ThingDisplaySortKey& rhs) const
-    {
-        if (lhs.y < rhs.y) {
-            return (true);
-        } else if (lhs.y > rhs.y) {
-            return (false);
-        }
-
-        if (lhs.id < rhs.id) {
-            return (true);
-        } else {
-            return (false);
-        }
-    }
-};
-
-typedef std::unordered_map< struct ThingDisplaySortKey, Thingp,
-                  thing_display_sort_cmp > ThingDisplayOrder;
-
+Thingp thing_find(const uint32_t id);
 Thingp thing_new(std::string tp_name, Thingp owner);
 Thingp thing_new(std::string tp_name, fpoint at, fpoint jitter = fpoint(0, 0));
 bool things_overlap(Thingp t, Thingp o);
@@ -904,6 +876,5 @@ void thing_render_all_test(void);
 void things_tick(void);
 int thing_can_reach(point start, point end);
 int thing_can_reach_player(point start);
-extern unsigned short thing_callframes_depth;
 
 #endif // _MY_THING_H_

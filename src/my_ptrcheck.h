@@ -1,6 +1,8 @@
 #ifndef _MY__PTRCHECK_H__
 #define _MY__PTRCHECK_H__
 
+#include <string>
+
 //
 // __FUNCTION__ is not a preprocessor directive so we can't convert it into a
 // string

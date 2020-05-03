@@ -3,15 +3,14 @@
 // See the README file for license info.
 //
 
-
 #ifndef _MY_WID_H_
 #define _MY_WID_H_
 
-#include <memory>
-
+#include "my_main.h"
+#include "my_point.h"
+#include "my_size.h"
+#include "my_ascii.h"
 typedef class Wid* Widp;
-
-#include <SDL.h>
 #include "my_sdl.h"
 #include "my_wid_tiles.h"
 
@@ -232,14 +231,6 @@ void wid_update(Widp);
 void wid_update_mouse(void);
 void wid_visible(Widp);
 wid_mode wid_get_mode(Widp);
-
-//
-// History for all text widgets.
-//
-#define HISTORY_MAX 16
-extern std::array<std::wstring, HISTORY_MAX> history;
-extern uint32_t history_at;
-extern uint32_t history_walk;
 
 typedef struct {
     //

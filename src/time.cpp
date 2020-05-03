@@ -5,7 +5,6 @@
 
 #include "my_main.h"
 #include "my_string.h"
-#include "my_game.h"
 #include "my_time.h"
 
 timestamp_t time_now;
@@ -130,4 +129,15 @@ timestamp_t time_get_elapsed_tenths (timestamp_t val, timestamp_t since)
     timestamp_t delay = val - since;
 
     return ((timestamp_t)(delay / (ONESEC / 10)));
+}
+
+void get_timestamp (char *buf, int32_t len)
+{
+#ifdef ENABLE_FULL_TIMESTAMPS
+    char tmp[MAXSTR];
+    string_timestamp(tmp, len);
+    snprintf(buf, len, "%s %s", timestamp().c_str(), tmp);
+#else
+    timestamp(buf, len);
+#endif
 }

@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
 

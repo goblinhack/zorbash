@@ -3,14 +3,16 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
+#include "my_main.h"
+#include "my_depth.h"
 #include "my_gl.h"
 #include "my_tile.h"
 #include "my_tex.h"
 #include "my_pixel.h"
 #include "my_size.h"
 #include "my_string.h"
-//#include "my_thing.h"
+#include "my_thing_template.h"
+#include "my_dmap.h"
 
 std::map<std::string, class Tile* > all_tiles;
 std::vector<class Tile* > all_tiles_array;
@@ -956,4 +958,32 @@ Tilep tile_next (Tilemap *tiles, Tilep in)
         cursor = 0;
     }
     return ((*tiles)[cursor]);
+}
+
+int32_t Tile::gl_binding (void) const 
+{
+    if (g_render_black_and_white) {
+        if (_gl_binding_black_and_white) {
+        } else {
+            return (_gl_binding);
+        }
+        return (_gl_binding_black_and_white);
+    } else {
+        return (_gl_binding);
+    }
+}
+
+void Tile::set_gl_binding (int32_t v) 
+{
+    _gl_binding = v;
+}
+
+int32_t Tile::gl_binding_black_and_white (void) const 
+{
+    return (_gl_binding_black_and_white);
+}
+
+void Tile::set_gl_binding_black_and_white (int32_t v) 
+{
+    _gl_binding_black_and_white = v;
 }

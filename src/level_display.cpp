@@ -3,8 +3,7 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
-#include "my_dungeon.h"
+#include "my_level.h"
 #include "my_thing.h"
 
 void Level::display (void)
@@ -18,14 +17,5 @@ void Level::display (void)
         }
     }
 
-    //
-    // thing_render_all must come before thing_move_all as it populates
-    // all the things into the map for collisions.
-    //
     thing_render_all();
-    blit_fbo_unbind();
-
-    if (!minimap_valid) {
-        update_minimap();
-    }
 }

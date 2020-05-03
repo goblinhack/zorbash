@@ -4,15 +4,11 @@
 //
 
 #include "my_main.h"
+#include "my_game.h"
 #include "my_tile.h"
 #include "my_tex.h"
-#include "my_game.h"
 #include "my_gl.h"
 #include "my_thing.h"
-#include <algorithm>
-#include <list>
-
-bool thing_map_black_and_white;
 
 static void thing_map_scroll_do (void)
 {_
@@ -96,7 +92,7 @@ static void thing_blit_things (const uint16_t minx, const uint16_t miny,
     //
     // Things that were visited in the past
     //
-    if (thing_map_black_and_white) {
+    if (g_render_black_and_white) {
         blit_init();
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto y = miny; y < maxy; y++) {
@@ -141,8 +137,6 @@ static void thing_blit_things (const uint16_t minx, const uint16_t miny,
         }
     }
     blit_flush();
-
-    level->blit_particles(minx, miny, maxx, maxy);
 }
 
 void thing_render_all (void)
@@ -207,9 +201,9 @@ void thing_render_all (void)
             blit_fbo_bind(FBO_MAP_HIDDEN);
             glClear(GL_COLOR_BUFFER_BIT);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            thing_map_black_and_white = true;
+            g_render_black_and_white = true;
             thing_blit_things(minx, miny, maxx, maxy);
-            thing_map_black_and_white = false;
+            g_render_black_and_white = false;
         }
 
         {
@@ -256,4 +250,10 @@ void thing_render_all (void)
     //
     thing_cursor_reset_if_needed();
     thing_cursor_find(minx, miny, maxx, maxy);
+
+    blit_fbo_unbind();
+
+    if (!level->minimap_valid) {
+        level->update_minimap();
+    }
 }

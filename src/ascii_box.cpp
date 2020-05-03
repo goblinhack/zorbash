@@ -3,10 +3,10 @@
 // See the README file for license info.
 //
 
+#include "my_main.h"
 #include "my_sdl.h"
 #include "my_font.h"
 #include "my_ascii.h"
-#include <array>
 
 static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
                              int x1, int y1, int x2, int y2,

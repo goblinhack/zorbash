@@ -3,8 +3,7 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
-#include "my_dungeon.h"
+#include "my_level.h"
 #include "my_thing.h"
 
 void Level::update_map (void)

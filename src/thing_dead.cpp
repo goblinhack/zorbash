@@ -3,12 +3,13 @@
 // See the README file for license info.
 //
 
+#include "my_main.h"
 #include "my_game.h"
+#include "my_depth.h"
 #include "my_color.h"
 #include "my_dmap.h"
 #include "my_sprintf.h"
 #include "my_thing.h"
-#include <list>
 
 void Thing::kill (const char *reason)
 {_

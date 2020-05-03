@@ -10,8 +10,7 @@
 #include "my_ascii.h"
 
 static WidPopup *game_config_gfx_window;
-static bool local_game_needs_restart = false;
-bool game_needs_restart = false;
+static bool local_g_need_restart = false;
 
 static void game_config_gfx_destroy (void)
 {_
@@ -39,8 +38,8 @@ uint8_t game_config_gfx_save (Widp w, int32_t x, int32_t y, uint32_t button)
     game_config_gfx_destroy();
     game->config_top_select();
 
-    if (local_game_needs_restart) {
-        game_needs_restart = true;
+    if (local_g_need_restart) {
+        g_need_restart = true;
     }
     return (true);
 }
@@ -66,7 +65,7 @@ uint8_t game_config_gfx_fullscreen_toggle (Widp w, int32_t x, int32_t y, uint32_
     CON("USERCFG: toggle fullscreen");
     game->config.fullscreen = !game->config.fullscreen;
     game->config_gfx_select();
-    local_game_needs_restart = true;
+    local_g_need_restart = true;
     return (true);
 }
 
@@ -75,7 +74,7 @@ uint8_t game_config_gfx_allow_highdpi_toggle (Widp w, int32_t x, int32_t y, uint
     CON("USERCFG: toggle allow_highdpi");
     game->config.allow_highdpi = !game->config.allow_highdpi;
     game->config_gfx_select();
-    local_game_needs_restart = true;
+    local_g_need_restart = true;
     return (true);
 }
 
@@ -111,7 +110,7 @@ uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t 
             CON(" - chosen: %s", cand.c_str());
             game->config.outer_pix_width = mode.w;
             game->config.outer_pix_height = mode.h;
-            local_game_needs_restart = true;
+            local_g_need_restart = true;
         }
     }
     game_config_gfx_save(nullptr, 0, 0, 0);
@@ -144,7 +143,7 @@ uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t 
             CON(" - chosen: %s", cand.c_str());
             game->config.outer_pix_width = mode.w;
             game->config.outer_pix_height = mode.h;
-            local_game_needs_restart = true;
+            local_g_need_restart = true;
         }
     }
     game_config_gfx_save(nullptr, 0, 0, 0);
@@ -156,7 +155,7 @@ uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t 
 uint8_t game_config_gfx_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     config_gfx_zoom_in();
-    local_game_needs_restart = true;
+    local_g_need_restart = true;
     game_config_gfx_save(nullptr, 0, 0, 0);
     game->config_gfx_select();
     return (true);
@@ -165,7 +164,7 @@ uint8_t game_config_gfx_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
 uint8_t game_config_gfx_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     config_gfx_zoom_out();
-    local_game_needs_restart = true;
+    local_g_need_restart = true;
     game_config_gfx_save(nullptr, 0, 0, 0);
     game->config_gfx_select();
     return (true);

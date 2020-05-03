@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
 #include "my_particle.h"
 #include "my_tile.h"
 #include "my_point.h"

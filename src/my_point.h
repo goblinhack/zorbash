@@ -6,7 +6,6 @@
 #ifndef _MY_POINT_H_
 #define _MY_POINT_H_
 
-#include "my_main.h"
 #include "my_math.h"
 #include "c_plus_plus_serializer.h"
 

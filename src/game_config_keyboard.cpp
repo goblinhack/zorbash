@@ -174,7 +174,7 @@ static void game_config_key_quit_set (SDL_Scancode code)
 static void grab_key (void) 
 {_
     game_notice("Press any key");
-    sdl_grab_next_key = true;
+    g_grab_next_key = true;
 }
 
 uint8_t game_config_keyboard_profile_arrow_keys (Widp w, int32_t x, int32_t y, uint32_t button)

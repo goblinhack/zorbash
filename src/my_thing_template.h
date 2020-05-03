@@ -10,14 +10,6 @@
 #include <unordered_map>
 #include <memory>
 
-typedef class Tp* Tpp;
-
-typedef std::vector< Tpp > Tpidmap;
-typedef std::unordered_map< std::string, Tpp > Tpnamemap;
-
-extern Tpidmap tp_id_map;
-extern Tpnamemap tp_name_map;
-
 #include "my_dice.h"
 #include "my_tile.h"
 #include "my_size.h"

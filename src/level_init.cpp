@@ -73,33 +73,33 @@ void Level::init (point3d at, int seed_in)
                                GRID_HEIGHT, seed);
 #endif
     auto dungeon = new Dungeon(0);
-    if (errored) { return; }
+    if (g_errored) { return; }
     // auto dungeon = new Dungeon(0);
     level_place_entrance(dungeon, "entrance1");
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_exit(dungeon, "exit1");
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_door(dungeon, "door1");
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_secret_door(dungeon, "secret_door1");
-    if (errored) { return; }
+    if (g_errored) { return; }
 
     auto tries = 5000;
 
     level_place_walls(dungeon, 1, 6, 6, tries);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_walls(dungeon, 1, 6, 3, tries);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_walls(dungeon, 1, 3, 6, tries);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_walls(dungeon, 1, 3, 3, tries);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_walls(dungeon, 1, 2, 2, tries);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_walls(dungeon, 1, 2, 1, tries);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_walls(dungeon, 1, 1, 2, tries);
-    if (errored) { return; }
+    if (g_errored) { return; }
 
     for (auto d = 0; d < 2; d++) {
         int nloops = 100;
@@ -111,19 +111,19 @@ void Level::init (point3d at, int seed_in)
     }
 
     level_place_remaining_walls(dungeon, "wall1");
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_remaining_floor(dungeon);
-    if (errored) { return; }
+    if (g_errored) { return; }
     if (0) {
     level_place_floor_deco(dungeon);
-    if (errored) { return; }
+    if (g_errored) { return; }
     }
     level_place_wall_deco(dungeon);
 
     if (0) {
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_water(dungeon, "water1");
-    if (errored) { return; }
+    if (g_errored) { return; }
     }
     //fluid_init();
 
@@ -142,21 +142,21 @@ void Level::init (point3d at, int seed_in)
             }
         }
     }
-    if (errored) { return; }
+    if (g_errored) { return; }
 
     level_place_monst(dungeon);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_food(dungeon);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_keys(dungeon);
-    if (errored) { return; }
+    if (g_errored) { return; }
     level_place_pipes(dungeon);
-    if (errored) { return; }
+    if (g_errored) { return; }
     game_mark_dungeon_tiles(dungeon);
-    if (errored) { return; }
+    if (g_errored) { return; }
 
     thing_map_scroll_to_player();
-    if (errored) { return; }
+    if (g_errored) { return; }
 
     log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
     log("| | | | | | | | | | | | | | | | | | | | | | | | | | | ");

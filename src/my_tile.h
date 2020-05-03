@@ -3,23 +3,14 @@
 // See the README file for license info.
 //
 
-
 #ifndef _MY_TILE_H_
 #define _MY_TILE_H_
 
-#include <memory>
-#include <vector>
-#include <map>
-
-typedef class Tile* Tilep;
-typedef std::vector<Tilep> Tilemap;
-extern std::map<std::string, class Tile* > all_tiles;
-extern std::vector<class Tile* > all_tiles_array;
-
 #include "my_main.h"
-#include "my_tex.h"
-#include "my_thing_template.h"
-#include "my_gl.h"
+#include "my_sdl.h"
+#include "my_globals.h"
+#include "my_point.h"
+#include "my_color.h"
 
 class Tile {
 public:
@@ -135,27 +126,10 @@ private:
     int32_t _gl_binding {};
     int32_t _gl_binding_black_and_white {};
 public:
-    int32_t gl_binding (void) const {
-        extern bool thing_map_black_and_white;
-        if (thing_map_black_and_white) {
-            if (_gl_binding_black_and_white) {
-            } else {
-                return (_gl_binding);
-            }
-            return (_gl_binding_black_and_white);
-        } else {
-            return (_gl_binding);
-        }
-    }
-    void set_gl_binding (int32_t v) {
-        _gl_binding = v;
-    }
-    int32_t gl_binding_black_and_white (void) const {
-        return (_gl_binding_black_and_white);
-    }
-    void set_gl_binding_black_and_white (int32_t v) {
-        _gl_binding_black_and_white = v;
-    }
+    int32_t gl_binding (void) const;
+    void set_gl_binding (int32_t v);
+    int32_t gl_binding_black_and_white (void) const;
+    void set_gl_binding_black_and_white (int32_t v);
 };
 
 typedef class Tile* Tilep;

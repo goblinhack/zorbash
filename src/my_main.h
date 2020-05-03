@@ -55,9 +55,6 @@
 /*code specific to mingw compilers*/
 #endif
 
-
-
-
 // %d--> for int
 //
 // %u--> for unsigned int
@@ -120,12 +117,6 @@ extern int TILES_DOWN;
 //
 #define MAX_TILE_WIDTH   64
 #define MAX_TILE_HEIGHT  64
-
-//
-// Dimentions of the fixed text on screen
-//
-#define ASCII_WIDTH_MAX  80
-#define ASCII_HEIGHT_MAX ASCII_WIDTH_MAX
 
 ////////////////////////////////////////////////////////////////////////////
 // Level
@@ -427,34 +418,10 @@ void DYING(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 #endif
 
 //
-// Code tracing
-// https://github.com/goblinhack/callstack
-//
-#include "my_callstack.h"
-
-//
-// Array bounds checks
-// https://github.com/goblinhack/c-plus-plus-array-bounds-checker
-//
-#include "my_array_bounds_check.h"
-#include "my_vector_bounds_check.h"
-
-//
-// Serialization support
-// https://github.com/goblinhack/simple-c-plus-plus-serializer
-//
-#include "c_plus_plus_serializer.h"
-
-//
-// Nested crash detection.
-//
-extern uint8_t croaked;
-extern uint8_t errored;
-
-//
 // Serious errors
 //
 void WARN(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+#define ERR _ myerr
 
 //
 // Also serious. UI msg box popups, in game and pre game with SDL
@@ -491,24 +458,37 @@ void DBG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 //
 // main.c
 //
-#define MY_STDOUT (LOG_STDOUT ? LOG_STDOUT : stdout)
-#define MY_STDERR (LOG_STDERR ? LOG_STDERR : stderr)
-extern FILE *LOG_STDOUT;
-extern FILE *LOG_STDERR;
-extern char *EXEC_FULL_PATH_AND_NAME;
-extern char *EXEC_DIR;
-extern char *DATA_PATH;
-extern char *EXEC_PYTHONPATH;
-extern char *GFX_PATH;
-extern char *TTF_PATH;
-extern uint8_t quitting;
+#define MY_STDOUT (g_log_stdout ? g_log_stdout : stdout)
+#define MY_STDERR (g_log_stderr ? g_log_stderr : stderr)
+
 extern void quit(void);
 extern void restart(void);
 extern void die(void);
-extern bool opt_new_game;
-extern bool opt_fast_start;
-extern bool opt_debug_mode;
 
+//
+// Memory debugging
+//
 #include "my_ptrcheck.h"
+
+//
+// Code tracing
+// https://github.com/goblinhack/callstack
+//
+#include "my_callstack.h"
+
+//
+// Array bounds checks
+// https://github.com/goblinhack/c-plus-plus-array-bounds-checker
+//
+#include "my_array_bounds_check.h"
+#include "my_vector_bounds_check.h"
+
+//
+// Serialization support
+// https://github.com/goblinhack/simple-c-plus-plus-serializer
+//
+#include "c_plus_plus_serializer.h"
+
+#include "my_globals.h"
 
 #endif

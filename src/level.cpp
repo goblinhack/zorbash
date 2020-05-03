@@ -3,9 +3,7 @@
 // See the README file for license info.
 //
 
-#include "my_game.h"
-#include "my_dungeon.h"
-#include "my_thing.h"
+#include "my_level.h"
 
 std::string Level::to_string (void)
 {_

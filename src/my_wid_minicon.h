@@ -3,6 +3,9 @@
 // See the README file for license info.
 //
 
+#include "my_main.h"
+#include "my_point.h"
+#include "my_size.h"
 
 void wid_minicon_fini(void);
 uint8_t wid_minicon_init(void);

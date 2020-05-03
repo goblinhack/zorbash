@@ -5,11 +5,12 @@
 
 #include "my_main.h"
 #include "my_game.h"
+#include "my_depth.h"
+#include "my_main.h"
 #include "my_wid_console.h"
 #include "my_thing.h"
-#include <algorithm>
 
-unsigned short thing_callframes_depth;
+unsigned short g_thing_callframes_depth;
 
 void Thing::achieve_goals_in_life (void)
 {_
@@ -85,7 +86,7 @@ void Thing::tick (void)
         return;
     }
 
-    thing_callframes_depth = callframes_depth;
+    g_thing_callframes_depth = callframes_depth;
 
     collision_check_do();
 
@@ -109,12 +110,6 @@ void Thing::tick (void)
     auto now = time_get_time_ms_cached();
     if (now > get_timestamp_ai_next()) {
         achieve_goals_in_life();
-    }
-
-    if (is_pipe()) {
-        if (random_range(0, 100) < 10) {
-            level->new_particle(at);
-        }
     }
 
     //

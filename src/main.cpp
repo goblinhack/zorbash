@@ -7,8 +7,12 @@
 
 #include <libgen.h> // dirname
 #include <signal.h>
+#include <random>  // std::default_random_engine
+std::default_random_engine rng;
 
 #include "my_main.h"
+#include "my_game.h"
+#include "my_thing_template.h"
 #include "my_python.h"
 #include "my_gl.h"
 #include "my_wid_console.h"
@@ -18,33 +22,14 @@
 #include "my_dir.h"
 #include "my_file.h"
 #include "my_charmap.h"
-#include "my_game.h"
 #include "my_room.h"
 #include "my_placed_level.h"
 #include "my_traceback.h"
 #include "my_ascii.h"
 #include "my_gfx.h"
-
-#include <random>       // std::default_random_engine
-std::default_random_engine rng;
-extern bool game_needs_restart;
+#include "my_globals.h"
 
 static char **ARGV;
-char *EXEC_FULL_PATH_AND_NAME;
-char *EXEC_DIR;
-char *DATA_PATH;
-char *WORLD_PATH;
-char *EXEC_PYTHONPATH;
-char *TTF_PATH;
-char *GFX_PATH;
-bool opt_new_game;
-bool opt_fast_start;
-bool opt_debug_mode;
-
-FILE *LOG_STDOUT;
-FILE *LOG_STDERR;
-
-uint8_t quitting;
 
 void callstack_dump (void)
 {_
@@ -93,15 +78,15 @@ static void ctrlc_handler (int sig)
 
 void quit (void)
 {_
-    if (croaked) {
+    if (g_croaked) {
         return;
     }
 
-    if (quitting) {
+    if (g_quitting) {
         return;
     }
 
-    quitting = true;
+    g_quitting = true;
 
 #ifdef ENABLE_CRASH_HANDLER
     signal(SIGSEGV, 0);   // uninstall our handler
@@ -201,7 +186,7 @@ void quit (void)
     }
 
 #ifdef ENABLE_PTRCHECK_LEAK
-    if (!croaked) {
+    if (!g_croaked) {
         ptrcheck_leak_print();
     }
 #endif
@@ -502,7 +487,7 @@ static void parse_args (int32_t argc, char *argv[])
     }
 
     if (argc) {
-        opt_fast_start = true;
+        g_opt_fast_start = true;
     }
 
     for (i = 1; i < argc; i++) {
@@ -511,13 +496,13 @@ static void parse_args (int32_t argc, char *argv[])
         //
         if (!strcasecmp(argv[i], "--new-game") ||
             !strcasecmp(argv[i], "-new-game")) {
-            opt_new_game = true;
+            g_opt_new_game = true;
             continue;
         }
 
         if (!strcasecmp(argv[i], "--debug-mode") ||
             !strcasecmp(argv[i], "-debug-mode")) {
-            opt_debug_mode = true;
+            g_opt_debug_mode = true;
             continue;
         }
 
@@ -583,12 +568,12 @@ int32_t main (int32_t argc, char *argv[])
 
     char *out = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stdout.txt");
     LOG("INIT: Will use STDOUT as '%s'", out);
-    LOG_STDOUT = fopen(out, "w+");
+    g_log_stdout = fopen(out, "w+");
     myfree(out);
 
     char *err = dynprintf("%s%s%s%s%s", appdata, DIR_SEP, "zorbash", DIR_SEP, "stderr.txt");
     LOG("INIT: Will use STDERR as '%s'", err);
-    LOG_STDERR = fopen(err, "w+");
+    g_log_stderr = fopen(err, "w+");
     myfree(err);
 
     //////////////////////////////////////////////////////////////////////////////
@@ -616,8 +601,8 @@ int32_t main (int32_t argc, char *argv[])
     game = new Game(std::string(appdata));
     game->load_config();
 
-    if (opt_debug_mode) {
-        game->config.debug_mode = opt_debug_mode;
+    if (g_opt_debug_mode) {
+        game->config.debug_mode = g_opt_debug_mode;
     }
 
     CON("INIT: SDL create window");
@@ -774,7 +759,7 @@ int32_t main (int32_t argc, char *argv[])
     sdl_flush_display();
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if (opt_new_game) {
+    if (g_opt_new_game) {
         CON("INIT: New game");
         game->new_game();
     } else {
@@ -788,7 +773,7 @@ int32_t main (int32_t argc, char *argv[])
 
     config_gfx_vsync_update();
 
-    opt_fast_start = false;
+    g_opt_fast_start = false;
     sdl_loop();
 
     CON("FINI: Leave 2D mode");
@@ -797,9 +782,9 @@ int32_t main (int32_t argc, char *argv[])
     CON("FINI: Quit");
     quit();
 
-    if (game_needs_restart) {
+    if (g_need_restart) {
         CON("FINI: Restart");
-        game_needs_restart = false;
+        g_need_restart = false;
         execv(argv[0], argv);
     }
 

@@ -6,9 +6,9 @@
 #ifndef _MY_WID_TILES_H_
 #define _MY_WID_TILES_H_
 
+#include "my_main.h"
 #include <memory>
 typedef std::shared_ptr< class WidTiles > wid_tilesp;
-
 #include "my_tile.h"
 
 class WidTiles {

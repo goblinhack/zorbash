@@ -5,12 +5,12 @@
 
 #include "my_main.h"
 #include "my_py_tp.h"
+#include "my_depth.h"
 #include "my_python.h"
 #include "my_py_sdl.h"
-#include "frameobject.h"
 #include "my_string.h"
 #include "my_ascii.h"
-#include "my_game.h"
+#include "frameobject.h"
 
 static PyObject *zx_mod;
 PyMODINIT_FUNC python_mouse_y_module_create(void);

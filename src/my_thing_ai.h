@@ -6,9 +6,10 @@
 #ifndef _MY_THING_AI_H
 #define _MY_THING_AI_H
 
-#include <unordered_map>
-#include <memory>
-#include <set>
+//#include <unordered_map>
+//#include <memory>
+//#include <set>
+#include "my_dmap.h"
 
 typedef struct AgeMap_* AgeMapp;
 typedef struct Dmap_* Dmapp;
