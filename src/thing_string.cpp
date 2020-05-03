@@ -20,29 +20,29 @@ std::string Thing::to_string (void)
         return (string_sprintf("%08X(<no tp>%s @%g,%g)",
                                id,
                                is_dead ? "/dead" : "",
-                               at.x, at.y));
+                               mid_at.x, mid_at.y));
 //        return (string_sprintf("%08X(<no tp>%s hp %d/%d @%g,%g)",
 //                               id,
 //                               is_dead ? "/dead" : "",
 //                               get_stats_health(),
 //                               get_stats_health_max(),
-//                               at.x, at.y));
+//                               mid_at.x, mid_at.y));
     } else if (get_stats_health_max()) {
         return (string_sprintf("%08X(%s%s @%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
-                               at.x, at.y));
+                               mid_at.x, mid_at.y));
 //        return (string_sprintf("%08X(%s%s hp %d/%d @%g,%g)",
 //                               id, tpp->name.c_str(),
 //                               is_dead ? "/dead" : "",
 //                               get_stats_health(),
 //                               get_stats_health_max(),
-//                               at.x, at.y));
+//                               mid_at.x, mid_at.y));
     } else {
         return (string_sprintf("%08X(%s%s @%g,%g)",
                                id, tpp->name.c_str(),
                                is_dead ? "/dead" : "",
-                               at.x, at.y));
+                               mid_at.x, mid_at.y));
     }
 }
 

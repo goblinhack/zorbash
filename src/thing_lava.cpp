@@ -15,7 +15,7 @@ void Thing::lava_tick (void)
         return;
     }
 
-    if (level->is_lava(at.x, at.y)) {
+    if (level->is_lava(mid_at.x, mid_at.y)) {
         incr_on_fire_count();
         auto id = get_on_fire_anim_id();
         if (!id) {

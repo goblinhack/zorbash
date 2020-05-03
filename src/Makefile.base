@@ -38,6 +38,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/game_quit.o 		\
     $(OBJDIR)/game_save.o 		\
     $(OBJDIR)/game_status.o 		\
+    $(OBJDIR)/game_tick.o 		\
     $(OBJDIR)/gauss.o 			\
     $(OBJDIR)/gfx.o			\
     $(OBJDIR)/gl.o 			\
@@ -94,10 +95,10 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_hunger.o 		\
     $(OBJDIR)/thing_id.o 		\
-    $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
+    $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\

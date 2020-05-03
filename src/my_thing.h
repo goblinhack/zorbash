@@ -61,7 +61,8 @@ typedef struct Monst_ {
     float        bounce_height = {};         // Percentage of tile height.
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
-    fpoint       lunge_to = {};              // When a monst attacks something
+    fpoint       lunge_to;                   // When a monst attacks something
+    fpoint       interpolated_mid_at;
     int          bounce_count = {};
     int          gold = {};
     int          light_quality {};
@@ -141,8 +142,8 @@ public:
     ~Thing_ (void);
     Monst       *monstp              {};
     spoint      last_attached;
-    fpoint      at;                         // Current pos
-    fpoint      last_at;
+    fpoint      last_mid_at;         // Previous hop where we were.
+    fpoint      mid_at;              // Grid coordinates.
     //
     // These coords are not offset from the map scroll. i.e. they are constant
     // regardless of the map view.
@@ -183,6 +184,7 @@ public:
     uint32_t is_starving:1        {};
     uint32_t is_in_water:1        {};
     uint32_t is_in_lava:1         {};
+    uint32_t is_waiting_to_move:1 {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -624,6 +626,7 @@ public:
     void cursor_path_grab(void);
     void cursor_path_stop(void);
     void update_cursor(void);
+    bool update_coordinates(void);
     bool possible_to_attack(const Thingp it);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
@@ -633,6 +636,9 @@ public:
     double get_fadeup(void);
     double get_lunge(void);
     void ai_get_next_hop(void);
+    fpoint set_interpolated_mid_at(fpoint);
+    fpoint get_interpolated_mid_at(void);
+    void update_interpolated_position(void);
     int ai_hit_if_possible(Thingp hitter);
     int ai_hit_if_possible(Thingp hitter, int damage);
     int ai_delay_after_moving_ms(void);
@@ -696,6 +702,7 @@ public:
     int is_interesting(void);
     int is_key(void);
     int is_lava(void);
+    int is_chasm(void);
     int is_light_strength(void);
     int is_loggable(void);
     int is_made_of_meat(void);

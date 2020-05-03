@@ -12,7 +12,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                           Thingp real_hitter, // who fired the arrow?
                           int damage)
 {_
-    auto delta = at - hitter->at;
+    auto delta = mid_at - hitter->mid_at;
 
     //
     // Cruel to let things keep on hitting you when you're dead
@@ -74,7 +74,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Blood splat
     //
-    thing_new(tp_name(tp_random_blood_splatter()), at);
+    thing_new(tp_name(tp_random_blood_splatter()), mid_at);
 
     //
     // Visible claw attack?
@@ -82,7 +82,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (is_monst() || is_player()) {
         auto claws = tp_weapon_use_anim(real_hitter->tp());
         if (claws != "") {
-            auto claw_attack = thing_new(claws, at);
+            auto claw_attack = thing_new(claws, mid_at);
             claw_attack->bounce(0.1, 0.1, 100, 3);
             claw_attack->move_set_dir_from_delta(delta);
         }

@@ -3,8 +3,6 @@
 // See the README file for license info.
 //
 
-#include <algorithm>
-#include "my_main.h"
 #include "my_game.h"
 #include "my_depth.h"
 #include "my_wid_console.h"
@@ -18,7 +16,7 @@
 // Move the cursor to whatever thing it is now over
 //
 void thing_cursor_move (void)
-{_
+{
     if (game->paused()) {
         return;
     }
@@ -71,14 +69,14 @@ void thing_cursor_move (void)
 // Make the map scroll to the cursor (or the player)
 //
 void thing_cursor_scroll_map_to_follow (void)
-{_
+{
     fpoint follow;
     float sensitivity;
     float x_sensitivity;
     float y_sensitivity;
 
     if (level->player && level->map_follow_player) {
-        follow = level->player->at;
+        follow = level->player->mid_at;
         sensitivity = 0.5;
         x_sensitivity = sensitivity * game->config.video_w_h_ratio;
         y_sensitivity = sensitivity;
@@ -112,7 +110,7 @@ void thing_cursor_scroll_map_to_follow (void)
             return;
         }
 
-        follow = level->cursor->at;
+        follow = level->cursor->mid_at;
 
         //
         // How many tiles away from the edge at each zoom level we use
@@ -163,7 +161,7 @@ void thing_cursor_scroll_map_to_follow (void)
 }
 
 void Thing::update_cursor (void)
-{_
+{
     if (is_cursor_can_hover_over()) {
         if (is_blitted) {
             fpoint blit_tl = tl;
@@ -182,7 +180,7 @@ void Thing::update_cursor (void)
 
             if ((mx >= blit_tl.x) && (mx <= blit_br.x)) {
                 if ((my >= blit_tl.y) && (my <= blit_br.y)) {
-                    level->cursor_at = at;
+                    level->cursor_at = mid_at;
                     level->cursor_found = true;
                 }
             }
@@ -191,11 +189,12 @@ void Thing::update_cursor (void)
 }
 
 void thing_cursor_reset_if_needed (void)
-{_
+{
     if (level->map_follow_player) {
         if (level->cursor) {
             if (level->player) {
-                auto d = distance(level->player->at, level->cursor->at);
+                auto d = distance(level->player->mid_at, 
+                                  level->cursor->mid_at);
                 if (d > std::min(TILES_ACROSS/4, TILES_DOWN/4)) {
                     level->cursor_needs_update = true;
                 }
@@ -206,7 +205,7 @@ void thing_cursor_reset_if_needed (void)
 
 void thing_cursor_find (const uint16_t minx, const uint16_t miny,
                         const uint16_t maxx, const uint16_t maxy)
-{_
+{
     if (level->cursor_needs_update) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {

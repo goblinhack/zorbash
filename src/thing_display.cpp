@@ -16,8 +16,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     double dw = game->config.one_pixel_width * 1;
     double dh = game->config.one_pixel_height * 1;
 
-    int x = (int) at.x;
-    int y = (int) at.y;
+    int x = (int) mid_at.x;
+    int y = (int) mid_at.y;
 
     if (unlikely(x <= 0) ||
         unlikely(y <= 0) ||
@@ -138,8 +138,8 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     double tw = game->config.tile_pix_width;
     double th = game->config.tile_pix_height;
 
-    int x = (int) at.x;
-    int y = (int) at.y;
+    int x = (int) mid_at.x;
+    int y = (int) mid_at.y;
 
     if (unlikely(x <= 0) ||
         unlikely(y <= 0) ||
@@ -269,12 +269,12 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
             dx *= -4;
             dy *= -4;
         } else if (this != level->player) {
-            fpoint p = level->player->at;
-            fpoint d = at - p;
+            fpoint p = level->player->mid_at;
+            fpoint d = mid_at - p;
             dx = d.x * 10;
             dy = d.y * 10;
 
-            auto dist = distance(at, p);
+            auto dist = distance(mid_at, p);
             if (dist > 3) {
                 return;
             }
@@ -505,8 +505,8 @@ void Thing::blit_outline_only (int x, int y)
 
 bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
 {_
-    int x = (int)at.x;
-    int y = (int)at.y;
+    int x = (int)mid_at.x;
+    int y = (int)mid_at.y;
 
     //
     // We render these offset form their owner, so if dead, then it is
@@ -554,8 +554,8 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
 
     float tilew = game->config.tile_pix_width;
     float tileh = game->config.tile_pix_height;
-    float X = at.x;
-    float Y = at.y;
+    float X = mid_at.x;
+    float Y = mid_at.y;
 
     blit_tl.x = (float)X * tilew;
     blit_tl.y = (float)Y * tileh;
@@ -692,9 +692,9 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
         //
         // Render the weapon and player on the same tile rules
         //
-        auto map_loc = at;
+        auto map_loc = mid_at;
         if (owner) {
-            map_loc = owner->at;
+            map_loc = owner->mid_at;
         }
 
         if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {

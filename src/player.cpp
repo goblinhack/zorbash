@@ -3,7 +3,7 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
+#include "my_main.h"
 #include "my_game.h"
 #include "my_wid_console.h"
 #include "my_thing.h"
@@ -27,7 +27,16 @@ void player_tick (void)
         return;
     }
 
-    int delay = 1;
+    int delay = 100;
+#if 0
+    //
+    // Always move
+    //
+    if ((time_get_time_ms_cached() -
+            player->get_timestamp_move_begin()) < delay) {
+        return;
+    }
+#endif
 
     uint8_t right  = 0;
     uint8_t left   = 0;
@@ -78,16 +87,16 @@ void player_tick (void)
         some_key_event_was_pressed = true;
     }
 
-    if (state[game->config.key_todo2]) {
-        MINICON("TODO key1");
-        CON("USERCFG: TODO key1");
+    if (state[game->config.key_zoom_out]) {
+        MINICON("Zoom out");
+        CON("USERCFG: zoom out");
         config_gfx_zoom_out();
         some_key_event_was_pressed = true;
     }
 
-    if (state[game->config.key_todo1]) {
-        MINICON("TODO key2");
-        CON("USERCFG: TODO key2");
+    if (state[game->config.key_zoom_in]) {
+        MINICON("Zoom in");
+        CON("USERCFG: zoom in");
         config_gfx_zoom_in();
         some_key_event_was_pressed = true;
     }
@@ -187,7 +196,7 @@ void player_tick (void)
             }
         }
 
-        double d = 0.1;
+        double d = 1.0;
         double dx = 0.0;
         double dy = 0.0;
 
@@ -209,7 +218,7 @@ void player_tick (void)
         }
 
         if (key_pressed) {
-            fpoint future_pos = player->at + fpoint(dx, dy);
+            fpoint future_pos = player->mid_at + fpoint(dx, dy);
             player->move(future_pos, up, down, left, right, attack, wait);
             last_key_pressed_when = time_get_time_ms_cached();
         }

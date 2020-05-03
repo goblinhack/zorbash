@@ -49,14 +49,14 @@ void Thing::on_fire_tick (void)
         return;
     }
 
-    if (level->is_water(at.x, at.y)) {
+    if (level->is_water(mid_at.x, mid_at.y)) {
         decr_on_fire_count();
         auto id = get_on_fire_anim_id();
         if (!id) {
             if (is_player()) {
                 MINICON("%%fg=yellow$You extinguish the flames!%%fg=reset$");
             }
-            auto smoke = thing_new("smoke1", fpoint((int)at.x, (int)at.y));
+            auto smoke = thing_new("smoke1", fpoint((int)mid_at.x, (int)mid_at.y));
             smoke->set_lifespan_count(4);
             return;
         }
