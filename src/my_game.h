@@ -148,6 +148,14 @@ public:
     uint32_t           fps_value = {};
 
     //
+    // Used to drive the game forward. Each player move is one tick.
+    // When things top moving, the tick is completed.
+    //
+    uint32_t           tick_current {};
+    uint32_t           tick_completed {};
+    uint32_t           things_are_moving = false;
+
+    //
     // Soft pause is user initiated. Hard is when a menu is on screen.
     //
     bool               soft_paused = false;

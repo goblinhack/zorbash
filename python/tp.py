@@ -260,8 +260,8 @@ class Tp:
     def set_is_rrr28(self, value):
         zx.tp_set_is_rrr28(self, value)
 
-    def set_is_pipe(self, value):
-        zx.tp_set_is_pipe(self, value)
+    def set_is_rrr29(self, value):
+        zx.tp_set_is_rrr29(self, value)
 
     def set_is_rrr30(self, value):
         zx.tp_set_is_rrr30(self, value)
@@ -523,6 +523,9 @@ class Tp:
 
     def set_is_lava(self, value):
         zx.tp_set_is_lava(self, value)
+
+    def set_is_chasm(self, value):
+        zx.tp_set_is_chasm(self, value)
 
     def set_is_water(self, value):
         zx.tp_set_is_water(self, value)

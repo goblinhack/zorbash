@@ -178,6 +178,7 @@ public:
     int is_interesting {}; // e.g. something edible or a monst or lava
     int is_key {};
     int is_lava {};
+    int is_chasm {};
     int is_light_strength {};
     int is_loggable {};
     int is_made_of_meat {};
@@ -210,7 +211,7 @@ public:
     int is_rrr25 {};
     int is_rrr26 {};
     int is_rrr28 {};
-    int is_pipe {};
+    int is_rrr29 {};
     int is_rrr3 {};
     int is_rrr30 {};
     int is_rrr31 {};
@@ -289,6 +290,7 @@ Tpp tp_random_blood_splatter(void);
 Tpp tp_random_key(void);
 Tpp tp_random_blood(void);
 Tpp tp_random_wall(void);
+Tpp tp_random_rock(void);
 Tpp tp_random_floor(void);
 Tpp tp_random_deco(void);
 Tpp tp_random_wall_deco(void);
@@ -559,10 +561,10 @@ static inline int tp_is_rrr28 (Tpp t)
     return (t->is_rrr28);
 }
 
-static inline int tp_is_pipe (Tpp t)
+static inline int tp_is_rrr29 (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_pipe);
+    return (t->is_rrr29);
 }
 
 static inline int tp_is_rrr30 (Tpp t)

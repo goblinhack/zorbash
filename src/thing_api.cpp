@@ -527,9 +527,9 @@ int Thing::is_rrr28(void)
     return (tp_is_rrr28(tp()));
 }
 
-int Thing::is_pipe(void)
+int Thing::is_rrr29(void)
 {_
-    return (tp_is_pipe(tp()));
+    return (tp_is_rrr29(tp()));
 }
 
 int Thing::is_rrr3(void)

@@ -22,6 +22,7 @@ static Tpidmap tp_blood_splatters;
 static Tpidmap tp_keys;
 static Tpidmap tp_blood;
 static Tpidmap tp_wall;
+static Tpidmap tp_rock;
 static Tpidmap tp_floor;
 static Tpidmap tp_deco;
 static Tpidmap tp_wall_deco;
@@ -128,6 +129,9 @@ void tp_init_after_loading (void)
         if (tp_is_wall(tp)) {
             tp_wall.push_back(tp);
         }
+        if (tp_is_rock(tp)) {
+            tp_rock.push_back(tp);
+        }
         if (tp_is_floor(tp)) {
             tp_floor.push_back(tp);
         }
@@ -210,6 +214,15 @@ Tpp tp_random_wall (void)
         return (nullptr);
     }
     return get(tp_wall, myrand() % tp_wall.size());
+}
+
+Tpp tp_random_rock (void)
+{_
+    if (unlikely(!tp_rock.size())) {
+        ERR("no rocks found");
+        return (nullptr);
+    }
+    return get(tp_rock, myrand() % tp_rock.size());
 }
 
 Tpp tp_random_floor (void)

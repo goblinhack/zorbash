@@ -3,12 +3,6 @@
  * See the LICENSE file for license.
  */
 
-// REMOVED #include <array>
-// REMOVED #include <vector>
-// REMOVED #include "my_main.h"
-// REMOVED #include "my_point.h"
-// REMOVED #include "my_depth.h"
-// REMOVED #include "my_dmap.h"
 #include "my_dungeon.h"
 
 static bool dungeon_debug = true;
@@ -228,6 +222,7 @@ void Dungeon::make_dungeon (void)
              5,  // R2
              4   /* generations */);
 
+    water_fixup();
     add_border();
     add_remaining();
 
@@ -262,11 +257,11 @@ Dungeon::Dungeon (int map_width, int map_height,
 //
 Dungeon::Dungeon (int level)
 {_
-    if (level >= (int)PlacedLevel::all_static_levels.size()) {
+    if (level >= (int)LevelStatic::all_static_levels.size()) {
         ERR("out of range level %d", level);
         return;
     }
-    auto l = get(PlacedLevel::all_static_levels, level);
+    auto l = get(LevelStatic::all_static_levels, level);
 
     cells.resize(l->width * l->height * MAP_DEPTH, Charmap::SPACE);
     std::fill(cells.begin(), cells.end(), Charmap::SPACE);
@@ -312,9 +307,9 @@ void Dungeon::putc (const int x, const int y, const int z, const char c)
 //
 // Puts a tile on the map
 //
-void Dungeon::putc_fast (const int x, const int y, const int z, const char c)
+void Dungeon::putc_unsafe (const int x, const int y, const int z, const char c)
 {
-    auto p = cell_addr_fast(x, y, z);
+    auto p = cell_addr_unsafe(x, y, z);
     if (p != nullptr) {
         *p = c;
     }
@@ -338,9 +333,9 @@ char Dungeon::getc (const int x, const int y, const int z)
 //
 // Gets a tile of the map or None
 //
-char Dungeon::getc_fast (const int x, const int y, const int z)
+char Dungeon::getc_unsafe (const int x, const int y, const int z)
 {
-    auto p = cell_addr_fast(x, y, z);
+    auto p = cell_addr_unsafe(x, y, z);
     if (p != nullptr) {
         return (*p);
     }
@@ -356,7 +351,7 @@ Roomp *Dungeon::cell_rooms_addr (const int x, const int y)
     return (&getref(cells_room, offset(x, y)));
 }
 
-Roomp *Dungeon::cell_rooms_addr_fast (const int x, const int y)
+Roomp *Dungeon::cell_rooms_addr_unsafe (const int x, const int y)
 {
     return (&getref(cells_room, offset(x, y)));
 }
@@ -378,9 +373,9 @@ Roomp Dungeon::getr (const int x, const int y)
     return (nullptr);
 }
 
-Roomp Dungeon::getr_fast (const int x, const int y)
+Roomp Dungeon::getr_unsafe (const int x, const int y)
 {
-    auto p = cell_rooms_addr_fast(x, y);
+    auto p = cell_rooms_addr_unsafe(x, y);
     if (p != nullptr) {
         return (*p);
     }
@@ -462,14 +457,14 @@ bool Dungeon::is_corridor (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_corridor_fast (const int x, const int y)
+bool Dungeon::is_corridor_unsafe (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
+        auto c = getc_unsafe(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
         if (v.is_corridor) {
@@ -496,14 +491,14 @@ bool Dungeon::is_dirt (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_dirt_fast (const int x, const int y)
+bool Dungeon::is_dirt_unsafe (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
     }
 
     for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
+        auto c = getc_unsafe(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
         if (v.is_dirt) {
@@ -570,6 +565,23 @@ bool Dungeon::is_food (const int x, const int y)
         auto v = get(Charmap::all_charmaps, c);
 
         if (v.is_food) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Dungeon::is_blood (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_blood) {
             return true;
         }
     }
@@ -712,6 +724,23 @@ bool Dungeon::is_lava (const int x, const int y)
     return false;
 }
 
+bool Dungeon::is_chasm (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_chasm) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Dungeon::is_water (const int x, const int y)
 {
     if (is_oob(x, y)) {
@@ -729,6 +758,23 @@ bool Dungeon::is_water (const int x, const int y)
     return false;
 }
 
+bool Dungeon::is_deep_water (const int x, const int y)
+{
+    if (is_oob(x, y)) {
+        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
+    }
+
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_deep_water) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Dungeon::is_hazard (const int x, const int y)
 {
     if (is_oob(x, y)) {
@@ -739,7 +785,13 @@ bool Dungeon::is_hazard (const int x, const int y)
         auto c = getc(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
+        if (v.is_deep_water) {
+            return true;
+        }
         if (v.is_water) {
+            return true;
+        }
+        if (v.is_chasm) {
             return true;
         }
         if (v.is_lava) {
@@ -783,27 +835,10 @@ bool Dungeon::is_key (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_pipe (const int x, const int y)
-{
-    if (is_oob(x, y)) {
-        ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);
-    }
-
-    for (auto d = 0; d < map_depth; d++) {
-        auto c = getc(x, y, d);
-        auto v = get(Charmap::all_charmaps, c);
-
-        if (v.is_pipe) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Dungeon::is_anything_at_fast (const int x, const int y)
+bool Dungeon::is_anything_at_unsafe (const int x, const int y)
 {
     for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
+        auto c = getc_unsafe(x, y, d);
         if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
             return true;
         }
@@ -811,91 +846,65 @@ bool Dungeon::is_anything_at_fast (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_anything_at_fast (const int x, const int y, const int z)
+bool Dungeon::is_anything_at_unsafe (const int x, const int y, const int z)
 {
-    auto c = getc_fast(x, y, z);
+    auto c = getc_unsafe(x, y, z);
     if ((c != Charmap::NONE) && (c != Charmap::SPACE)) {
         return true;
     }
     return false;
 }
 
-bool Dungeon::is_floor_fast (const int x, const int y)
+bool Dungeon::is_floor_unsafe (const int x, const int y)
 {
     const auto d = MAP_DEPTH_FLOOR;
-    auto c = getc_fast(x, y, d);
+    auto c = getc_unsafe(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
 
     return (v.is_floor);
 }
 
-bool Dungeon::is_wall_fast (const int x, const int y)
+bool Dungeon::is_wall_unsafe (const int x, const int y)
 {
     auto d = MAP_DEPTH_WALLS;
-    auto c = getc_fast(x, y, d);
+    auto c = getc_unsafe(x, y, d);
     auto v = get(Charmap::all_charmaps, c);
     return (v.is_wall);
 }
 
-bool Dungeon::is_door_fast (const int x, const int y)
+bool Dungeon::is_chasm_unsafe (const int x, const int y)
 {
     for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
+        auto c = getc_unsafe(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
-        if (v.is_door) {
+        if (v.is_chasm) {
             return true;
         }
     }
     return false;
 }
 
-bool Dungeon::is_entrance_at_fast (const int x, const int y)
+bool Dungeon::is_water_unsafe (const int x, const int y)
 {
     for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
-        auto v = get(Charmap::all_charmaps, c);
-
-        if (v.is_entrance) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Dungeon::is_exit_at_fast (const int x, const int y)
-{
-    for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
-        auto v = get(Charmap::all_charmaps, c);
-
-        if (v.is_exit) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Dungeon::is_lava_fast (const int x, const int y)
-{
-    for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
-        auto v = get(Charmap::all_charmaps, c);
-
-        if (v.is_lava) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool Dungeon::is_water_fast (const int x, const int y)
-{
-    for (auto d = 0; d < map_depth; d++) {
-        auto c = getc_fast(x, y, d);
+        auto c = getc_unsafe(x, y, d);
         auto v = get(Charmap::all_charmaps, c);
 
         if (v.is_water) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Dungeon::is_deep_water_unsafe (const int x, const int y)
+{
+    for (auto d = 0; d < map_depth; d++) {
+        auto c = getc_unsafe(x, y, d);
+        auto v = get(Charmap::all_charmaps, c);
+
+        if (v.is_deep_water) {
             return true;
         }
     }
@@ -1111,10 +1120,6 @@ void Dungeon::rooms_print_all (Grid *g)
             }
 
             Roomp r = get(g->node_rooms, x, y);
-            if (!r) {
-                DIE("unable to get any rooms");
-                return;
-            }
             auto rx = x * ROOM_WIDTH + MAP_BORDER;
             auto ry = y * ROOM_HEIGHT + MAP_BORDER;
             room_print_at(r, rx, ry);
@@ -1347,20 +1352,20 @@ void Dungeon::add_border (void)
 {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_BORDER; x++) {
-            if (! is_anything_at_fast(x, y)) {
+            if (! is_anything_at_unsafe(x, y)) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
             }
-            if (! is_anything_at_fast(MAP_WIDTH - (x+1), y)) {
+            if (! is_anything_at_unsafe(MAP_WIDTH - (x+1), y)) {
                 putc(MAP_WIDTH - (x+1), y, MAP_DEPTH_WALLS, Charmap::ROCK);
             }
         }
     }
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_BORDER; y++) {
-            if (! is_anything_at_fast(x, y)) {
+            if (! is_anything_at_unsafe(x, y)) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
             }
-            if (! is_anything_at_fast(x, MAP_HEIGHT - (y+1))) {
+            if (! is_anything_at_unsafe(x, MAP_HEIGHT - (y+1))) {
                 putc(x, MAP_HEIGHT - (y+1), MAP_DEPTH_WALLS, Charmap::ROCK);
             }
         }
@@ -1384,34 +1389,34 @@ void Dungeon::add_corridor_walls (void)
 {
     for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
         for (auto x = 1; x < MAP_WIDTH - 1; x++) {
-            if (is_wall_fast(x, y)) {
+            if (is_wall_unsafe(x, y)) {
                 continue;
             }
-            if (is_corridor_fast(x, y)) {
-                if (!is_anything_at_fast(x - 1, y - 1)) {
+            if (is_corridor_unsafe(x, y)) {
+                if (!is_anything_at_unsafe(x - 1, y - 1)) {
                     putc(x - 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x, y - 1)) {
+                if (!is_anything_at_unsafe(x, y - 1)) {
                     putc(x, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x + 1, y - 1)) {
+                if (!is_anything_at_unsafe(x + 1, y - 1)) {
                     putc(x + 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
 
-                if (!is_anything_at_fast(x - 1, y)) {
+                if (!is_anything_at_unsafe(x - 1, y)) {
                     putc(x - 1, y, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x + 1, y)) {
+                if (!is_anything_at_unsafe(x + 1, y)) {
                     putc(x + 1, y, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
 
-                if (!is_anything_at_fast(x - 1, y + 1)) {
+                if (!is_anything_at_unsafe(x - 1, y + 1)) {
                     putc(x - 1, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x, y + 1)) {
+                if (!is_anything_at_unsafe(x, y + 1)) {
                     putc(x, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x + 1, y + 1)) {
+                if (!is_anything_at_unsafe(x + 1, y + 1)) {
                     putc(x + 1, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
             }
@@ -1423,34 +1428,34 @@ void Dungeon::add_room_walls (void)
 {
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            if (is_wall_fast(x, y)) {
+            if (is_wall_unsafe(x, y)) {
                 continue;
             }
-            if (is_floor_fast(x, y)) {
-                if (!is_anything_at_fast(x - 1, y - 1)) {
+            if (is_floor_unsafe(x, y) || is_chasm_unsafe(x, y)) {
+                if (!is_anything_at_unsafe(x - 1, y - 1)) {
                     putc(x - 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x, y - 1)) {
+                if (!is_anything_at_unsafe(x, y - 1)) {
                     putc(x, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x + 1, y - 1)) {
+                if (!is_anything_at_unsafe(x + 1, y - 1)) {
                     putc(x + 1, y - 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
 
-                if (!is_anything_at_fast(x - 1, y)) {
+                if (!is_anything_at_unsafe(x - 1, y)) {
                     putc(x - 1, y, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x + 1, y)) {
+                if (!is_anything_at_unsafe(x + 1, y)) {
                     putc(x + 1, y, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
 
-                if (!is_anything_at_fast(x - 1, y + 1)) {
+                if (!is_anything_at_unsafe(x - 1, y + 1)) {
                     putc(x - 1, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x, y + 1)) {
+                if (!is_anything_at_unsafe(x, y + 1)) {
                     putc(x, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
-                if (!is_anything_at_fast(x + 1, y + 1)) {
+                if (!is_anything_at_unsafe(x + 1, y + 1)) {
                     putc(x + 1, y + 1, MAP_DEPTH_WALLS, Charmap::WALL);
                 }
             }
@@ -1660,7 +1665,7 @@ int Dungeon::draw_corridor (point start, point end, char w)
     //
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (is_anything_at_fast(x, y)) {
+            if (is_anything_at_unsafe(x, y)) {
                 set(d.val, x, y, DMAP_IS_WALL);
             } else {
                 set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -1673,7 +1678,7 @@ int Dungeon::draw_corridor (point start, point end, char w)
     //
     for (auto y = miny + 1; y < maxy - 1; y++) {
         for (auto x = minx + 1; x < maxx - 1; x++) {
-            if (is_corridor_fast(x, y)) {
+            if (is_corridor_unsafe(x, y)) {
                 set(d.val, x-1, y, DMAP_IS_WALL);
                 set(d.val, x, y-1, DMAP_IS_WALL);
                 set(d.val, x, y, DMAP_IS_WALL);
@@ -1939,7 +1944,7 @@ void Dungeon::place_room (Roomp r, int x, int y)
             for (auto dx = 0; dx < r->width; dx++) {
                 auto c = get(r->data, dx, dy, dz);
                 if ((c != Charmap::SPACE) && (c != Charmap::NONE)) {
-                    putc_fast(x + dx, y + dy, dz, c);
+                    putc_unsafe(x + dx, y + dy, dz, c);
                 }
             }
         }
@@ -1951,6 +1956,7 @@ void Dungeon::place_room (Roomp r, int x, int y)
     for (auto dy = 0; dy < r->height; dy++) {
         for (auto dx = 0; dx < r->width; dx++) {
             auto f = get(r->data, dx, dy, MAP_DEPTH_FLOOR);
+            auto c = get(r->data, dx, dy, MAP_DEPTH_CHASM);
             auto d = get(r->data, dx, dy, MAP_DEPTH_WALLS);
             if ((d == Charmap::DOOR_UP) ||
                 (d == Charmap::DOOR_DOWN) ||
@@ -1959,37 +1965,37 @@ void Dungeon::place_room (Roomp r, int x, int y)
                 //
                 // Do not wrap doors in walls so we can move the rooms closer
                 //
-            } else if (f != Charmap::SPACE) {
+            } else if ((f != Charmap::SPACE) || (c != Charmap::SPACE)) {
                 if (!is_anything_at(x + dx - 1, y + dy - 1)) {
-                    putc_fast(x + dx - 1, y + dy - 1,
+                    putc_unsafe(x + dx - 1, y + dy - 1,
                               MAP_DEPTH_WALLS, Charmap::WALL);
                 }
                 if (!is_anything_at(x + dx, y + dy - 1)) {
-                    putc_fast(x + dx, y + dy - 1,
+                    putc_unsafe(x + dx, y + dy - 1,
                               MAP_DEPTH_WALLS, Charmap::WALL);
                 }
                 if (!is_anything_at(x + dx + 1, y + dy - 1)) {
-                    putc_fast(x + dx + 1, y + dy - 1,
+                    putc_unsafe(x + dx + 1, y + dy - 1,
                               MAP_DEPTH_WALLS, Charmap::WALL);
                 }
                 if (!is_anything_at(x + dx - 1, y + dy)) {
-                    putc_fast(x + dx - 1, y + dy,
+                    putc_unsafe(x + dx - 1, y + dy,
                               MAP_DEPTH_WALLS, Charmap::WALL);
                 }
                 if (!is_anything_at(x + dx + 1, y + dy)) {
-                    putc_fast(x + dx + 1, y + dy,
+                    putc_unsafe(x + dx + 1, y + dy,
                               MAP_DEPTH_WALLS, Charmap::WALL);
                 }
                 if (!is_anything_at(x + dx - 1, y + dy + 1)) {
-                    putc_fast(x + dx - 1, y + dy + 1,
+                    putc_unsafe(x + dx - 1, y + dy + 1,
                               MAP_DEPTH_WALLS, Charmap::WALL);
                 }
                 if (!is_anything_at(x + dx, y + dy + 1)) {
-                    putc_fast(x + dx, y + dy + 1,
+                    putc_unsafe(x + dx, y + dy + 1,
                               MAP_DEPTH_WALLS, Charmap::WALL);
                 }
                 if (!is_anything_at(x + dx + 1, y + dy + 1)) {
-                    putc_fast(x + dx + 1, y + dy + 1,
+                    putc_unsafe(x + dx + 1, y + dy + 1,
                               MAP_DEPTH_WALLS, Charmap::WALL);
                 }
             }
@@ -1997,7 +2003,7 @@ void Dungeon::place_room (Roomp r, int x, int y)
     }
 }
 
-void Dungeon::place_level (PlacedLevelp l)
+void Dungeon::place_level (LevelStaticp l)
 {
     if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
         ERR("level has bad size %d,%d", l->width, l->height);
@@ -2061,14 +2067,14 @@ bool Dungeon::can_place_room (Roomp r, int x, int y)
             for (auto dx = 0; dx < r->width; dx++) {
                 auto c = get(r->data, dx, dy, dz);
                 if (c != Charmap::SPACE) {
-                    if (is_anything_at_fast(x + dx, y + dy)) {
+                    if (is_anything_at_unsafe(x + dx, y + dy)) {
                         return false;
                     }
 
-                    if (is_wall_fast(x + dx - 1, y + dy) ||
-                        is_wall_fast(x + dx + 1, y + dy) ||
-                        is_wall_fast(x + dx, y + dy - 1) ||
-                        is_wall_fast(x + dx, y + dy + 1)) {
+                    if (is_wall_unsafe(x + dx - 1, y + dy) ||
+                        is_wall_unsafe(x + dx + 1, y + dy) ||
+                        is_wall_unsafe(x + dx, y + dy - 1) ||
+                        is_wall_unsafe(x + dx, y + dy + 1)) {
                         return false;
                     }
                 }
@@ -2552,8 +2558,8 @@ void Dungeon::dmap_set_walls (Dmap *d)
 }
 
 /*
- *
-Cellular Automata Method for Generating Random Levels
+Cellular Automata Method for Generating Random Cave-Like LevelsStatic
+
 
     From RogueBasin
 
@@ -3036,6 +3042,77 @@ void Dungeon::cave_generation (void)
     }
 }
 
+//
+// Any water next to cave walls make it shallow
+//
+void Dungeon::water_fixup_shallows (void)
+{
+    for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+        for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+            if (!is_deep_water_unsafe(x, y)) {
+                continue;
+            }
+
+            if (is_wall(x - 1, y - 1) ||
+                is_wall(x    , y - 1) ||
+                is_wall(x + 1, y - 1) ||
+                is_wall(x - 1, y    ) ||
+                is_wall(x    , y    ) ||
+                is_wall(x + 1, y    ) ||
+                is_wall(x - 1, y + 1) ||
+                is_wall(x    , y + 1) ||
+                is_wall(x + 1, y + 1) ||
+                is_rock(x - 1, y - 1) ||
+                is_rock(x    , y - 1) ||
+                is_rock(x + 1, y - 1) ||
+                is_rock(x - 1, y    ) ||
+                is_rock(x    , y    ) ||
+                is_rock(x + 1, y    ) ||
+                is_rock(x - 1, y + 1) ||
+                is_rock(x    , y + 1) ||
+                is_rock(x + 1, y + 1)) {
+                putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
+            }
+        }
+    }
+}
+
+//
+// Add deepwater and islands of safety.
+//
+void Dungeon::water_fixup (void)
+{
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> cand {};
+
+    for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+        for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+            if (is_water(x - 1, y - 1) &&
+                is_water(x    , y - 1) &&
+                is_water(x + 1, y - 1) &&
+                is_water(x - 1, y    ) &&
+                is_water(x    , y    ) &&
+                is_water(x + 1, y    ) &&
+                is_water(x - 1, y + 1) &&
+                is_water(x    , y + 1) &&
+                is_water(x + 1, y + 1)) {
+                set(cand, x, y, true);
+            }
+        }
+    }
+    for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
+        for (auto x = 1; x < MAP_WIDTH - 1; x++) {
+            if (get(cand, x, y)) {
+                if (random_range(0, 100) < 95) {
+                    putc(x, y, MAP_DEPTH_WATER, Charmap::DEEP_WATER);
+                } else {
+                    putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
+                    putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
+                }
+            }
+        }
+    }
+}
+
 void Dungeon::add_remaining (void)
 {
     for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -3047,7 +3124,7 @@ void Dungeon::add_remaining (void)
             if (random_range(0, 100) < 95) {
                 putc(x, y, MAP_DEPTH_WALLS, Charmap::ROCK);
             }
-            putc(x, y, MAP_DEPTH_HAZARD, Charmap::SPACE);
+            putc(x, y, MAP_DEPTH_WATER, Charmap::SPACE);
             putc(x, y, MAP_DEPTH_FLOOR, Charmap::DIRT);
         }
     }
@@ -3234,7 +3311,7 @@ printf("----------------------------------\n");
         for (y=2; y < maze_h-2; y++) {
             if (get(map_curr, x, y)) {
                 if (!is_anything_at(x, y)) {
-                    putc(x, y, MAP_DEPTH_HAZARD, Charmap::WATER);
+                    putc(x, y, MAP_DEPTH_WATER, Charmap::WATER);
                 }
             }
         }

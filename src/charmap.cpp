@@ -4,6 +4,7 @@
 //
 
 #include "my_main.h"
+#include "my_tile.h"
 #include "my_charmap.h"
 
 std::vector<Charmap> Charmap::all_charmaps;
@@ -105,20 +106,25 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_key               = true;
 
-    char_index              = Charmap::PIPE;
-    c = &all_charmaps[char_index];
-    c->c                    = char_index;
-    c->is_pipe              = true;
-
     char_index              = Charmap::LAVA;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_lava              = true;
 
+    char_index              = Charmap::CHASM;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_chasm             = true;
+
     char_index              = Charmap::WATER;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_water             = true;
+
+    char_index              = Charmap::DEEP_WATER;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_deep_water        = true;
 
     char_index              = Charmap::TREASURE;
     c = &all_charmaps[char_index];
@@ -134,6 +140,11 @@ void Charmap::init_charmaps (void)
     c = &all_charmaps[char_index];
     c->c                    = char_index;
     c->is_food              = true;
+
+    char_index              = Charmap::BLOOD;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_blood             = true;
 
     char_index              = Charmap::TRAP;
     c = &all_charmaps[char_index];
