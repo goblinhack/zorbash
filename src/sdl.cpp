@@ -1207,7 +1207,7 @@ void sdl_loop (void)
         if (g_errored) {
             if (g_errored != old_g_errored) {
                 ERR("An error occurred. Check the logs above.");
-                ERR("To continue try 'clear g_errored'");
+                ERR("To continue try 'clear errored'");
                 if (wid_console_window && !(wid_console_window->visible)) {
                     wid_visible(wid_console_window);
                     wid_raise(wid_console_window);

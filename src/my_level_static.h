@@ -5,23 +5,23 @@
 
 #include "my_charmap.h"
 
-typedef std::shared_ptr< class PlacedLevel > PlacedLevelp;
-typedef std::vector<PlacedLevelp> LevelsStatic;
+typedef std::shared_ptr< class LevelStatic > LevelStaticp;
+typedef std::vector<LevelStaticp> LevelsStatic;
 
-class PlacedLevel
+class LevelStatic
 {
 private:
 public:
     static LevelsStatic all_static_levels;
 
-    PlacedLevel (void)
+    LevelStatic (void)
     {
         this->levelno = all_static_levels.size();
 
         newptr(this, "level");
     }
 
-    ~PlacedLevel (void)
+    ~LevelStatic (void)
     {
         oldptr(this);
     }
@@ -38,7 +38,7 @@ public:
       std::array<
         std::array<char, MAP_DEPTH>, MAP_HEIGHT>, MAP_WIDTH> data {};
 
-    static PlacedLevelp level_new(void);
+    static LevelStaticp level_new(void);
     void finalize(void);
     void dump(void);
 };

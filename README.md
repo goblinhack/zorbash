@@ -23,12 +23,18 @@
 ```diff
 - **** WORK IN PROGRESS - NOT PLAYABLE YET *****
 
-Zorbash is a work in progress, currently heading towards a platform game. Probably
-roguelike in nature. I'm still working on a theme :)
+Zorbash is a fusion of turn based and real-time based gaming, called "borrowed time",
+which allows the player to do lots of moves in quick succession. The monsters will
+get the same number of moves, but they move at their own pace. Watch out if you clock
+up too many moves ahead. If you get stuck, the monsters might get lots of free hits
+at you. Alternatively, race through the level as quick as you want, but never pause.
+Or methodically move one step at a time, letting the monsters move in sync for a more
+classical roguelike experience.
+
+I'm still working on a theme :)
 ```
 ![Alt text](screenshot.1.png?raw=true "")
 ![Alt text](screenshot.2.png?raw=true "")
-Older screenshots when the game was top-down:
 ![Alt text](screenshot.3.png?raw=true "")
 ![Alt text](screenshot.4.png?raw=true "")
 <!--```diff -->

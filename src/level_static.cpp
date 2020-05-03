@@ -13,28 +13,28 @@
 
 static int debug_enabled = false;
 
-std::vector<PlacedLevelp> PlacedLevel::all_static_levels;
+std::vector<LevelStaticp> LevelStatic::all_static_levels;
 
 void level_fini (void)
 {_
-    PlacedLevel::all_static_levels.clear();
+    LevelStatic::all_static_levels.clear();
 }
 
-PlacedLevelp PlacedLevel::level_new (void)
+LevelStaticp LevelStatic::level_new (void)
 {_
-    auto r = std::make_shared< class PlacedLevel >();
-    PlacedLevel::all_static_levels.push_back(r);
+    auto r = std::make_shared< class LevelStatic >();
+    LevelStatic::all_static_levels.push_back(r);
     return (r);
 }
 
-void PlacedLevel::finalize (void)
+void LevelStatic::finalize (void)
 {
     if (debug_enabled) {
         dump();
     }
 }
 
-void PlacedLevel::dump (void)
+void LevelStatic::dump (void)
 {
     std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> tmp;
     for (auto y = 0; y < height; y++) {

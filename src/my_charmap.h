@@ -28,8 +28,8 @@ public:
         ENTRANCE        = 'S',
         EXIT            = 'E',
         KEY             = 'k',
-        PIPE            = 'P',
         LAVA            = 'L',
+        CHASM           = 'C',
         WATER           = 'w',
         DEEP_WATER      = 'W',
         ROCK            = 'r',
@@ -37,6 +37,7 @@ public:
         TRAP            = 'i',
         MONST           = 'm',
         FOOD            = 'f',
+        BLOOD           = 'b',
         DEBUG           = '@',
     };
 
@@ -54,12 +55,14 @@ public:
     bool                      is_wall_deco         {false};
     bool                      is_exit              {false};
     bool                      is_key               {false};
-    bool                      is_pipe              {false};
     bool                      is_lava              {false};
+    bool                      is_chasm             {false};
     bool                      is_water             {false};
+    bool                      is_deep_water        {false};
     bool                      is_treasure          {false};
     bool                      is_monst             {false};
     bool                      is_food              {false};
+    bool                      is_blood             {false};
     bool                      is_trap              {false};
 
     static std::vector<Charmap> all_charmaps;

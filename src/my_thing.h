@@ -731,7 +731,7 @@ public:
     int is_rrr25(void);
     int is_rrr26(void);
     int is_rrr28(void);
-    int is_pipe(void);
+    int is_rrr29(void);
     int is_rrr3(void);
     int is_rrr30(void);
     int is_rrr31(void);

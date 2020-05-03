@@ -16,8 +16,10 @@ public:
     // These are caches for fast lookup in display code
     //
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_blood {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_chasm {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corpse {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
@@ -82,6 +84,18 @@ public:
     std::map<uint32_t, Thingp> all_things {};
     std::map<uint32_t, Thingp> all_active_things {};
     std::map<uint32_t, Thingp> all_gc_things {};
+
+    //
+    // Tile maps for rendering solid blocks of water etc...
+    //
+    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    water_tile_map = {};
+    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    deep_water_tile_map = {};
+    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    lava_tile_map = {};
+    std::array<std::array<bool, MAP_HEIGHT + 8>, MAP_WIDTH + 8>
+                    chasm_tile_map = {};
 
     //
     // All thing IDs
@@ -183,6 +197,7 @@ public:
     void display(void);
     void update_map(void);
     void update_minimap(void);
+    void update_hazard_map(void);
 
     void clear(void);
     bool is_anything_at(const int x, const int y);
@@ -226,6 +241,11 @@ public:
     void set_lava(const int x, const int y);
     void unset_lava(const int x, const int y);
 
+    bool is_chasm(const int x, const int y);
+    bool is_chasm(const point &p);
+    void set_chasm(const int x, const int y);
+    void unset_chasm(const int x, const int y);
+
     bool is_hazard(const int x, const int y);
     bool is_hazard(const point &p);
     void set_hazard(const int x, const int y);
@@ -240,6 +260,11 @@ public:
     bool is_corpse(const point &p);
     void set_corpse(const int x, const int y);
     void unset_corpse(const int x, const int y);
+
+    bool is_deep_water(const int x, const int y);
+    bool is_deep_water(const point &p);
+    void set_deep_water(const int x, const int y);
+    void unset_deep_water(const int x, const int y);
 
     bool is_dirt(const int x, const int y);
     bool is_dirt(const point &p);
