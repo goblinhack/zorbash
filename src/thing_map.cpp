@@ -98,13 +98,16 @@ static void thing_blit_things (const uint16_t minx, const uint16_t miny,
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
+                    if (!level->is_visited(x, y)) {
+                        continue;
+                    }
                     FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                         if (t->is_monst()) {
                             continue;
                         }
-                        //if (t->is_floor()) {
-                        //    continue;
-                        //}
+                        if (t->is_floor()) {
+                            continue;
+                        }
                         if (t->owner_get()) {
                             continue;
                         }
@@ -232,7 +235,7 @@ void thing_render_all (void)
             glBlendFunc(GL_ONE, GL_ZERO);
             blit_fbo(FBO_LIGHT);
             glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-            glcolorfast(GRAY10);
+            glcolorfast(GRAY60);
             blit_fbo(FBO_MAP_HIDDEN);
             glBlendFunc(GL_ONE, GL_ONE);
             glcolorfast(WHITE);
