@@ -269,7 +269,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
             fpoint p = level->player->get_interpolated_mid_at();
             fpoint d = get_interpolated_mid_at() -
                              level->player->get_interpolated_mid_at();
-            const double D = 5.0;
+            const double D = 16.0;
             dx = d.x / D;
             dy = d.y / D;
 
@@ -281,14 +281,17 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         // use default shadow
     }
 
-    double n = 1;
+    double n = 0.0;
     if (dy < 0) {
         dy = std::min(-n, dy);
     } else {
         dy = std::max(n, dy);
     }
 
-    double m = 1;
+    //
+    // Max length of shadow
+    //
+    double m = 3;
     if (dx < 0) {
         dx = std::max(-m, dx);
     } else {
@@ -300,10 +303,10 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         dy = std::min(m, dy);
     }
 
-    shadow_tl.x += TILE_WIDTH * dx;
-    shadow_tr.x += TILE_WIDTH * dx;
-    shadow_tl.y += TILE_WIDTH * dy;
-    shadow_tr.y += TILE_WIDTH * dy;
+    shadow_tl.x += (float)TILE_WIDTH * dx * 10;
+    shadow_tr.x += (float)TILE_WIDTH * dx * 10;
+    shadow_tl.y += (float)TILE_WIDTH * dy * 10;
+    shadow_tr.y += (float)TILE_WIDTH * dy * 10;
 
     if (shadow_tl.x > shadow_tr.x) {
         std::swap(shadow_tl, shadow_tr);
