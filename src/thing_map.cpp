@@ -78,6 +78,7 @@ static void thing_map_scroll_do (void)
 
 void thing_map_scroll_to_player (void)
 {_
+    level->map_follow_player = true;
     for (auto x = 0; x < 1000; x++) {
         thing_cursor_scroll_map_to_follow();
         thing_map_scroll_do();

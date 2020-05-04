@@ -630,4 +630,5 @@ void blit_colored (int tex, float left, float top, float right, float bottom,
     blit_colored(tex, 0, 0, 1, 1, left, top, right, bottom,
                  color_bl, color_br, color_tl, color_tr);
 }
+    extern void gl_init_fbo(void);
 #endif

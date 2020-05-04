@@ -1036,7 +1036,12 @@ void config_gfx_zoom_in (void)
         game->config.gfx_zoom = 5;
     }
     CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
+
+    CON("INIT: OpenGL leave 2D mode");
     config_gfx_zoom_update();
+    CON("INIT: OpenGL enter 2D mode");
+    gl_init_2d_mode();
+    thing_map_scroll_to_player();
 }
 
 void config_gfx_zoom_out (void)
@@ -1046,7 +1051,12 @@ void config_gfx_zoom_out (void)
         game->config.gfx_zoom = 1;
     }
     CON("USERCFG: gfx zoom set to %d", game->config.gfx_zoom);
+
+    CON("INIT: OpenGL leave 2D mode");
     config_gfx_zoom_update();
+    CON("INIT: OpenGL enter 2D mode");
+    gl_init_2d_mode();
+    thing_map_scroll_to_player();
 }
 
 //
@@ -1067,7 +1077,12 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
         }
         CON("USERCFG: gfx zoom set to %d", val);
     }
+
+    CON("INIT: OpenGL leave 2D mode");
     config_gfx_zoom_update();
+    CON("INIT: OpenGL enter 2D mode");
+    gl_init_2d_mode();
+    thing_map_scroll_to_player();
 
     return (true);
 }
@@ -1139,8 +1154,12 @@ uint8_t config_errored (tokens_t *tokens, void *context)
 
 void config_update_all (void)
 {
+    CON("INIT: OpenGL leave 2D mode");
     config_gfx_zoom_update();
     config_gfx_vsync_update();
+    CON("INIT: OpenGL enter 2D mode");
+    gl_init_2d_mode();
+    thing_map_scroll_to_player();
 }
 
 //
@@ -1218,6 +1237,7 @@ void sdl_loop (void)
         }
         old_g_errored = g_errored;
 
+        gl_leave_2d_mode();
         gl_enter_2d_mode(game->config.inner_pix_width,
                          game->config.inner_pix_height);
 
@@ -1225,6 +1245,7 @@ void sdl_loop (void)
         game->display();
         blit_fbo_unbind();
 
+        gl_leave_2d_mode();
         gl_enter_2d_mode(game->config.outer_pix_width,
                          game->config.outer_pix_height);
 
@@ -1234,7 +1255,7 @@ void sdl_loop (void)
         //
         int timestamp_now = time_update_time_milli();
 
-        if (unlikely(timestamp_now - timestamp_then > 10)) {
+        if (unlikely(timestamp_now - timestamp_then > 50)) {
             //
             // Give up some CPU to allow events to arrive and time for the GPU
             // to process the above.

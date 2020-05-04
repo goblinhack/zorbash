@@ -25,7 +25,7 @@ uint8_t game_config_gfx_cancel (Widp w, int32_t x, int32_t y, uint32_t button)
 {_
     CON("USERCFG: reload config");
     game->load_config();
-    config_gfx_zoom_update();
+    config_update_all();
     game_config_gfx_destroy();
     game->config_top_select();
     return (true);
@@ -114,7 +114,7 @@ uint8_t game_config_gfx_resolution_incr (Widp w, int32_t x, int32_t y, uint32_t 
         }
     }
     game_config_gfx_save(nullptr, 0, 0, 0);
-    config_gfx_zoom_update();
+    config_update_all();
     game->config_gfx_select();
     return (true);
 }
@@ -147,28 +147,28 @@ uint8_t game_config_gfx_resolution_decr (Widp w, int32_t x, int32_t y, uint32_t 
         }
     }
     game_config_gfx_save(nullptr, 0, 0, 0);
-    config_gfx_zoom_update();
+    config_update_all();
     game->config_gfx_select();
     return (true);
 }
 
-uint8_t game_config_gfx_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    config_gfx_zoom_in();
-    local_g_need_restart = true;
-    game_config_gfx_save(nullptr, 0, 0, 0);
-    game->config_gfx_select();
-    return (true);
-}
-
-uint8_t game_config_gfx_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
-{_
-    config_gfx_zoom_out();
-    local_g_need_restart = true;
-    game_config_gfx_save(nullptr, 0, 0, 0);
-    game->config_gfx_select();
-    return (true);
-}
+//uint8_t game_config_gfx_zoom_in (Widp w, int32_t x, int32_t y, uint32_t button)
+//{_
+//    config_gfx_zoom_in();
+//    local_g_need_restart = true;
+//    game_config_gfx_save(nullptr, 0, 0, 0);
+//    game->config_gfx_select();
+//    return (true);
+//}
+//
+//uint8_t game_config_gfx_zoom_out (Widp w, int32_t x, int32_t y, uint32_t button)
+//{_
+//    config_gfx_zoom_out();
+//    local_g_need_restart = true;
+//    game_config_gfx_save(nullptr, 0, 0, 0);
+//    game->config_gfx_select();
+//    return (true);
+//}
 
 uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
 {_
@@ -462,50 +462,50 @@ void Game::config_gfx_select (void)
         wid_set_text(w, "-");
     }
 
-    y_at += 3;
-    {_
-        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Zoom");
-
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
-        wid_set_shape_none(w);
-        wid_set_pos(w, tl, br);
-        wid_set_text_lhs(w, true);
-        wid_set_text(w, "Zoom");
-    }
-    {_
-        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Zoom volume value");
-
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
-        wid_set_style(w, WID_STYLE_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_text(w, std::to_string(game->config.gfx_zoom));
-    }
-    {_
-        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Zoom out");
-
-        point tl = {width / 2 + 7 , y_at};
-        point br = {width / 2 + 9, y_at + 2};
-        wid_set_style(w, WID_STYLE_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_gfx_zoom_in);
-        wid_set_text(w, "+");
-    }
-    {_
-        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
-        auto w = wid_new_square_button(p, "Zoom in");
-
-        point tl = {width / 2 + 10 , y_at};
-        point br = {width / 2 + 12, y_at + 2};
-        wid_set_style(w, WID_STYLE_DARK);
-        wid_set_pos(w, tl, br);
-        wid_set_on_mouse_up(w, game_config_gfx_zoom_out);
-        wid_set_text(w, "-");
-    }
+//    y_at += 3;
+//    {_
+//        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+//        auto w = wid_new_square_button(p, "Zoom");
+//
+//        point tl = {0, y_at};
+//        point br = {width / 2, y_at + 2};
+//        wid_set_shape_none(w);
+//        wid_set_pos(w, tl, br);
+//        wid_set_text_lhs(w, true);
+//        wid_set_text(w, "Zoom");
+//    }
+//    {_
+//        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+//        auto w = wid_new_square_button(p, "Zoom value");
+//
+//        point tl = {width / 2 , y_at};
+//        point br = {width / 2 + 6, y_at + 2};
+//        wid_set_style(w, WID_STYLE_DARK);
+//        wid_set_pos(w, tl, br);
+//        wid_set_text(w, std::to_string(game->config.gfx_zoom));
+//    }
+//    {_
+//        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+//        auto w = wid_new_square_button(p, "Zoom out");
+//
+//        point tl = {width / 2 + 7 , y_at};
+//        point br = {width / 2 + 9, y_at + 2};
+//        wid_set_style(w, WID_STYLE_DARK);
+//        wid_set_pos(w, tl, br);
+//        wid_set_on_mouse_up(w, game_config_gfx_zoom_in);
+//        wid_set_text(w, "+");
+//    }
+//    {_
+//        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
+//        auto w = wid_new_square_button(p, "Zoom in");
+//
+//        point tl = {width / 2 + 10 , y_at};
+//        point br = {width / 2 + 12, y_at + 2};
+//        wid_set_style(w, WID_STYLE_DARK);
+//        wid_set_pos(w, tl, br);
+//        wid_set_on_mouse_up(w, game_config_gfx_zoom_out);
+//        wid_set_text(w, "-");
+//    }
 
     wid_update(game_config_gfx_window->wid_text_area->wid_text_area);
 }

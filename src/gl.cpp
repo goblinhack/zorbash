@@ -9,12 +9,11 @@
 // REMOVED #include "my_time.h"
 #include "my_thing_template.h"
 
-static void gl_init_fbo(void);
-
 float glapi_last_tex_right;
 float glapi_last_tex_bottom;
 float glapi_last_right;
 float glapi_last_bottom;
+static int in_2d_mode;
 
 #define GL_ERROR_CHECK() { \
     auto errCode = glGetError();                                   \
@@ -47,13 +46,16 @@ void gl_init_2d_mode (void)
     //
     CON("INIT: OpenGL enable textures");
     glEnable(GL_TEXTURE_2D);
+    GL_ERROR_CHECK();
 
     //
     // Enable alpha blending for sprites
     //
     CON("INIT: OpenGL enable blending");
     glEnable(GL_BLEND);
+    GL_ERROR_CHECK();
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    GL_ERROR_CHECK();
 
     //
     // Setup our viewport
@@ -62,38 +64,43 @@ void gl_init_2d_mode (void)
     glViewport(0, 0,
                game->config.outer_pix_width,
                game->config.outer_pix_height);
-    //
-    // Make sure we're changing the model view and not the projection
-    //
-    CON("INIT: OpenGL modelview");
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
+    GL_ERROR_CHECK();
 
     //
     // Reset the view
     //
     CON("INIT: OpenGL identity");
     glLoadIdentity();
+    GL_ERROR_CHECK();
 
     gl_init_fbo();
 
     CON("INIT: OpenGL misc");
     glLineWidth(1.0);
+    GL_ERROR_CHECK();
     glEnable(GL_LINE_SMOOTH);
+    GL_ERROR_CHECK();
 }
 
 void gl_enter_2d_mode (void)
 {_
+    if (in_2d_mode) {
+        gl_leave_2d_mode();
+    }
+
     //
     // Change to the projection matrix and set our viewing volume.
     //
     glMatrixMode(GL_PROJECTION);
+    GL_ERROR_CHECK();
     glPushMatrix();
+    GL_ERROR_CHECK();
 
     //
     // Reset the view
     //
     glLoadIdentity();
+    GL_ERROR_CHECK();
 
     //
     // 2D projection
@@ -104,31 +111,43 @@ void gl_enter_2d_mode (void)
             0, //top
             -1200.0,
             1200.0);
+    GL_ERROR_CHECK();
 
     //
     // Make sure we're changing the model view and not the projection
     //
     glMatrixMode(GL_MODELVIEW);
+    GL_ERROR_CHECK();
     glPushMatrix();
+    GL_ERROR_CHECK();
 
     //
     // Reset the view
     //
     glLoadIdentity();
+    GL_ERROR_CHECK();
+    in_2d_mode = true;
 }
 
 void gl_enter_2d_mode (int w, int h)
 {_
+    if (in_2d_mode) {
+        gl_leave_2d_mode();
+    }
+
     //
     // Change to the projection matrix and set our viewing volume.
     //
     glMatrixMode(GL_PROJECTION);
+    GL_ERROR_CHECK();
     glPushMatrix();
+    GL_ERROR_CHECK();
 
     //
     // Reset the view
     //
     glLoadIdentity();
+    GL_ERROR_CHECK();
 
     //
     // 2D projection
@@ -139,29 +158,43 @@ void gl_enter_2d_mode (int w, int h)
             0, //top
             -1200.0,
             1200.0);
+    GL_ERROR_CHECK();
 
     glViewport(0, 0, w, h);
+    GL_ERROR_CHECK();
 
     //
     // Make sure we're changing the model view and not the projection
     //
     glMatrixMode(GL_MODELVIEW);
+    GL_ERROR_CHECK();
     glPushMatrix();
+    GL_ERROR_CHECK();
 
     //
     // Reset the view
     //
     glLoadIdentity();
+    GL_ERROR_CHECK();
+    in_2d_mode = true;
 }
 
 void
 gl_leave_2d_mode (void)
 {_
+    if (!in_2d_mode) {
+        return;
+    }
     glMatrixMode(GL_MODELVIEW);
+    GL_ERROR_CHECK();
     glPopMatrix();
+    GL_ERROR_CHECK();
 
     glMatrixMode(GL_PROJECTION);
+    GL_ERROR_CHECK();
     glPopMatrix();
+    GL_ERROR_CHECK();
+    in_2d_mode = false;
 }
 
 void gl_enter_2_5d_mode (void)
@@ -218,8 +251,13 @@ static void gl_init_fbo_ (int fbo,
                           GLuint tex_height)
 {_
     CON("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
+    GL_ERROR_CHECK();
 
     LOG("INIT: - glGenTextures");
+    if (*fbo_tex_id) {
+        glDeleteTextures(1, fbo_tex_id);
+        *fbo_tex_id = 0;
+    }
     glGenTextures(1, fbo_tex_id);
     GL_ERROR_CHECK();
 
@@ -361,6 +399,8 @@ void gl_init_fbo (void)
     int i;
 
     CON("INIT: OpenGL create FBOs");
+    GL_ERROR_CHECK();
+
     for (i = 0; i < MAX_FBO; i++) {
         GLuint tex_width = game->config.inner_pix_width;
         GLuint tex_height = game->config.inner_pix_height;
@@ -392,6 +432,9 @@ void gl_init_fbo (void)
         glClear(GL_COLOR_BUFFER_BIT);
         blit_fbo_unbind();
     }
+
+    CON("INIT: OpenGL created FBOs");
+    GL_ERROR_CHECK();
 }
 
 void blit_fbo (int fbo)
