@@ -1562,6 +1562,30 @@ void tile_blit (const Tilep &tile, const fpoint &tl, const fpoint &br)
     blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
 }
 
+void tile_blit (const Tilep &tile,
+                const fpoint &tl,
+                const fpoint &tr,
+                const fpoint &bl,
+                const fpoint &br)
+{
+    double x1, x2, y1, y2;
+
+    //
+    // Only some walls have deco tiles, so the pointer is left null for
+    // those that do not.
+    //
+    if (!tile) {
+        return;
+    }
+
+    x1 = tile->x1;
+    x2 = tile->x2;
+    y1 = tile->y1;
+    y2 = tile->y2;
+
+    blit(tile->gl_binding(), x1, y2, x2, y1, tl, tr, bl, br);
+}
+
 void tile_blit (uint16_t index, const fpoint &tl, const fpoint &br)
 {
     tile_blit(tile_index_to_tile(index), tl, br);

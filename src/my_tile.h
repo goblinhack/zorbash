@@ -204,6 +204,11 @@ void tile_blit(const Tpp &tp,
 void tile_blit(const Tilep &tile,
                const fpoint &tl,
                const fpoint &br);
+void tile_blit(const Tilep &tile,
+               const fpoint &tl,
+               const fpoint &tr,
+               const fpoint &bl,
+               const fpoint &br);
 void tile_blit(uint16_t index,
                const fpoint &tl,
                const fpoint &br);

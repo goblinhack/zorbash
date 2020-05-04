@@ -33,7 +33,7 @@ def tp_init(name, real_name):
     x.set_stats_health_hunger_pct(5)
     x.set_stats_health_initial(100)
     x.set_stats_health_starving_pct(5)
-    x.set_stats_move_speed_ms(100)
+    x.set_stats_move_speed_ms(75)
     x.set_stats_strength(10)
     x.set_is_combustible(True)
     x.set_z_depth(zx.MAP_DEPTH_PLAYER)
