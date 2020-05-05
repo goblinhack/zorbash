@@ -67,7 +67,9 @@ bool Thing::move (fpoint future_pos,
     auto delta = fpoint(x, y) - mid_at;
 
     if (tp_gfx_bounce_on_move(tp())) {
-        bounce(0.1, 0.1, 250, 3);
+        if (get_bounce() == 0) {
+            bounce(0.2 /* height */, 0.1 /* fade */, 200, 3);
+        }
     }
 
     move_set_dir_from_delta(delta);
@@ -270,20 +272,6 @@ bool Thing::update_coordinates (void)
     return (false);
 }
 
-void Thing::bounce (double bounce_height,
-                    double bounce_fade,
-                    timestamp_t ms,
-                    int bounce_count)
-{
-    auto t = set_timestamp_bounce_begin(time_get_time_ms_cached());
-    set_timestamp_bounce_end(t + ms);
-
-    set_bounce_height(bounce_height);
-    set_bounce_fade(bounce_fade);
-    set_bounce_count(bounce_count);
-    is_bouncing = true;
-}
-
 void Thing::fadeup (double fadeup_height,
                     double fadeup_fade,
                     timestamp_t ms)
@@ -301,41 +289,6 @@ void Thing::lunge (fpoint to)
     auto t = set_timestamp_lunge_begin(time_get_time_ms_cached());
     set_timestamp_lunge_end(t + 200);
     set_lunge_to(to);
-}
-
-double Thing::get_bounce (void)
-{
-    if (!is_bouncing) {
-        return (0.0);
-    }
-
-    auto t = time_get_time_ms_cached();
-
-    if (t >= get_timestamp_bounce_end()) {
-        is_bouncing = false;
-
-        if (get_bounce_count()) {
-            bounce(
-                get_bounce_height() * get_bounce_fade(),
-                get_bounce_fade(),
-                (double)(get_timestamp_bounce_end() -
-                         get_timestamp_bounce_begin()) * get_bounce_fade(),
-                get_bounce_count() - 1);
-        }
-
-        return (0);
-    }
-
-    double time_step =
-        (double)(t - get_timestamp_bounce_begin()) /
-        (double)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
-
-    double height = 1.0;
-
-    height *= sin(time_step * RAD_180);
-    height *= get_bounce_height();
-
-    return (height);
 }
 
 double Thing::get_fadeup (void)

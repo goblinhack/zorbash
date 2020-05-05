@@ -105,9 +105,9 @@ static void thing_blit_things (const uint16_t minx, const uint16_t miny,
                         if (t->is_monst()) {
                             continue;
                         }
-                        if (t->is_floor()) {
-                            continue;
-                        }
+                        //if (t->is_floor()) {
+                        //    continue;
+                        //}
                         if (t->owner_get()) {
                             continue;
                         }
@@ -208,6 +208,17 @@ void thing_render_all (void)
             g_render_black_and_white = true;
             thing_blit_things(minx, miny, maxx, maxy);
             g_render_black_and_white = false;
+            glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int i1;
+extern int i2;
+CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
+glBlendFunc(vals[i1], vals[i2]);
+#endif
+            glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
+            blit_fbo(FBO_LIGHT);
         }
 
         {
@@ -235,7 +246,7 @@ void thing_render_all (void)
             glBlendFunc(GL_ONE, GL_ZERO);
             blit_fbo(FBO_LIGHT);
             glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-            glcolorfast(GRAY60);
+            glcolorfast(GRAY50);
             blit_fbo(FBO_MAP_HIDDEN);
             glBlendFunc(GL_ONE, GL_ONE);
             glcolorfast(WHITE);
