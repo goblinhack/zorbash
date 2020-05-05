@@ -100,6 +100,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_map.o 		\
+    $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_move_dir.o 		\
