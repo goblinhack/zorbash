@@ -114,8 +114,14 @@ static void thing_blit_things (const uint16_t minx, const uint16_t miny,
                         if (t->get_light_count()) {
                             continue;
                         }
-                        glcolorfast(WHITE);
-                        t->blit();
+                        if (!t->is_water() &&
+                            !t->is_deep_water() &&
+                            !t->is_lava() &&
+                            !t->is_chasm() &&
+                            !t->is_lava()) {
+                            glcolorfast(WHITE);
+                            t->blit();
+                        }
                     } FOR_ALL_THINGS_END()
                 }
             }
@@ -130,7 +136,13 @@ static void thing_blit_things (const uint16_t minx, const uint16_t miny,
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                     glcolorfast(WHITE);
-                    t->blit();
+                    if (!t->is_water() &&
+                        !t->is_deep_water() &&
+                        !t->is_lava() &&
+                        !t->is_chasm() &&
+                        !t->is_lava()) {
+                        t->blit();
+                    }
 
                     auto tpp = t->tp();
                     if (unlikely(tp_gfx_animated(tpp))) {
