@@ -6,7 +6,6 @@
 #include "my_game.h"
 #include "my_gl.h"
 #include "my_tex.h"
-// REMOVED #include "my_light.h"
 #include "my_thing.h"
 
 Thingp debug_thing;
@@ -195,7 +194,7 @@ void Light::calculate (int last)
             float radius = r->depth_closest;
             float fade = pow(strength - radius, 0.05);
             float step = 0.0;
-            for (; step < 0.5; step += step_delta2) {
+            for (; step < 1.0; step += step_delta2) {
                 fade *= 0.90;
                 if (fade < 0.0001) {
                     break;

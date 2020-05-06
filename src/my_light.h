@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-
 #ifndef _MY_LIGHT_H
 #define _MY_LIGHT_H
 
