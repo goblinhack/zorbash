@@ -554,7 +554,11 @@ void Thing::blit_outline_only (int x, int y)
     is_blitted = true;
 }
 
-bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
+bool Thing::get_coords (fpoint &blit_tl,
+                        fpoint &blit_br,
+                        fpoint &pre_effect_blit_tl,
+                        fpoint &pre_effect_blit_br, 
+                        Tilep &tile)
 {_
     fpoint mid_at = get_interpolated_mid_at();
     int x = (int)mid_at.x;
@@ -706,6 +710,9 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
         }
     }
 
+    pre_effect_blit_tl = blit_tl;
+    pre_effect_blit_br = blit_br;
+
     //
     // Boing.
     //
@@ -762,9 +769,16 @@ bool Thing::get_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
     return (blit);
 }
 
-bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile)
+bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br,
+                                   Tilep &tile)
 {_
-    auto blit = get_coords(blit_tl, blit_br, tile);
+    fpoint pre_effect_blit_tl;
+    fpoint pre_effect_blit_br;
+
+    auto blit = get_coords(blit_tl, blit_br,
+                           pre_effect_blit_tl,
+                           pre_effect_blit_br,
+                           tile);
 
     float dx = - level->pixel_map_at.x;
     float dy = - level->pixel_map_at.y;
@@ -772,6 +786,31 @@ bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br, Tilep &tile
     blit_tl.y += dy;
     blit_br.x += dx;
     blit_br.y += dy;
+
+    return (blit);
+}
+
+bool Thing::get_pre_effect_map_offset_coords (fpoint &blit_tl,
+                                              fpoint &blit_br,
+                                              Tilep &tile)
+{_
+    fpoint pre_effect_blit_tl;
+    fpoint pre_effect_blit_br;
+
+    auto blit = get_coords(blit_tl, blit_br,
+                           pre_effect_blit_tl,
+                           pre_effect_blit_br,
+                           tile);
+
+    float dx = - level->pixel_map_at.x;
+    float dy = - level->pixel_map_at.y;
+    pre_effect_blit_tl.x += dx;
+    pre_effect_blit_tl.y += dy;
+    pre_effect_blit_br.x += dx;
+    pre_effect_blit_br.y += dy;
+
+    blit_tl = pre_effect_blit_tl;
+    blit_br = pre_effect_blit_br;
 
     return (blit);
 }

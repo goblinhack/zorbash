@@ -859,8 +859,14 @@ public:
     void weapon_set_use_anim_id(uint32_t weapon_use_anim_id);
     void weapon_sheath(void);
     void wield(Thingp w);
-    bool get_coords(fpoint &blit_tl, fpoint &blit_br, Tilep &tile);
+    bool get_coords(fpoint &blit_tl,
+                    fpoint &blit_br,
+                    fpoint &pre_effect_blit_tl,
+                    fpoint &pre_effect_blit_br,
+                    Tilep &tile);
     bool get_map_offset_coords(fpoint &blit_tl, fpoint &blit_br, Tilep &tile);
+    bool get_pre_effect_map_offset_coords(fpoint &blit_tl, fpoint &blit_br,
+                                          Tilep &tile);
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
