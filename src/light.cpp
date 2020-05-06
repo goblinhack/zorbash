@@ -232,7 +232,7 @@ void Light::render_triangle_fans (int last, int count)
 {
     fpoint blit_tl, blit_br;
     Tilep tile = {};
-    if (!owner->get_map_offset_coords(blit_tl, blit_br, tile)) {
+    if (!owner->get_pre_effect_map_offset_coords(blit_tl, blit_br, tile)) {
         return;
     }
 
