@@ -206,8 +206,8 @@ void Level::display_map (void)
     //
     // If the cursor is too far away, warp it
     //
-    thing_cursor_reset_if_needed();
-    thing_cursor_find(minx, miny, maxx, maxy);
+    cursor_check_if_scroll_needed();
+    cursor_find_on_visible_things(minx, miny, maxx, maxy);
 
     blit_fbo_unbind();
 

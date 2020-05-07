@@ -41,7 +41,7 @@ void Thing::achieve_goals_in_life (void)
         // Make sure we have a path shown if we just completed one.
         //
         if (!monstp->move_path.size()) {
-            thing_cursor_path_create();
+            level->cursor_path_create();
         }
     }
 
@@ -157,7 +157,7 @@ void things_tick (void)
     //
     // Update the cursor position
     //
-    thing_cursor_move();
+    level->cursor_move();
 
     //
     // Active things are generally things that move or have a life span
