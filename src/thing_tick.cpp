@@ -104,13 +104,6 @@ void Thing::tick (void)
         return;
     }
 
-    if (unlikely(is_dead)) {
-        if (tp_is_loggable(tp())) {
-            log("tick; died");
-        }
-        return;
-    }
-
     if (is_waiting_to_move) {
         //
         // Tick on player move/change of the current tick

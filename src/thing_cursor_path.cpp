@@ -15,7 +15,6 @@
 
 bool Thing::cursor_path_pop_next_and_move (void)
 {_
-CON("path size %d",(int)monstp->move_path.size());
     if (monstp && monstp->move_path.size()) {
         auto to = monstp->move_path[0];
         auto future_pos = fpoint(to.x, to.y);
