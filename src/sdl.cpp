@@ -1041,7 +1041,9 @@ void config_gfx_zoom_in (void)
     config_gfx_zoom_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
-    thing_map_scroll_to_player();
+    if (level) {
+        level->scroll_map_to_player();
+    }
 }
 
 void config_gfx_zoom_out (void)
@@ -1056,7 +1058,9 @@ void config_gfx_zoom_out (void)
     config_gfx_zoom_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
-    thing_map_scroll_to_player();
+    if (level) {
+        level->scroll_map_to_player();
+    }
 }
 
 //
@@ -1082,7 +1086,9 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
     config_gfx_zoom_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
-    thing_map_scroll_to_player();
+    if (level) {
+        level->scroll_map_to_player();
+    }
 
     return (true);
 }
@@ -1159,7 +1165,9 @@ void config_update_all (void)
     config_gfx_vsync_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
-    thing_map_scroll_to_player();
+    if (level) {
+        level->scroll_map_to_player();
+    }
 }
 
 //

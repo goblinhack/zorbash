@@ -68,7 +68,7 @@ void thing_cursor_move (void)
 //
 // Make the map scroll to the cursor (or the player)
 //
-void thing_cursor_scroll_map_to_follow (void)
+void scroll_map (void)
 {
     fpoint follow;
     float sensitivity;
