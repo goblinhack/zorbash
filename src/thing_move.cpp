@@ -542,20 +542,6 @@ void Thing::move_to_immediately_delta (fpoint delta)
     update_pos(mid_at + delta, true);
 }
 
-#if 0
-void Thing::to_coords (fpoint *P0, fpoint *P1, fpoint *P2, fpoint *P3)
-{
-    P0->x = tl.x;
-    P0->y = tl.y;
-    P1->x = br.x;
-    P1->y = tl.y;
-    P2->x = br.x;
-    P2->y = br.y;
-    P3->x = tl.x;
-    P3->y = br.y;
-}
-#endif
-
 void Thing::move_carried_items (void)
 {
     //
@@ -587,7 +573,7 @@ void Thing::move_carried_items (void)
     //
     if (is_monst() || is_player()) {
         if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
-            fpoint at(mid_at.x - 0.5, mid_at.y - 0.5);
+            fpoint at(mid_at.x, mid_at.y);
             if (random_range(0, 1000) > 500) {
                 thing_new(tp_name(tp_random_ripple()), at);
             }

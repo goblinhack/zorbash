@@ -427,8 +427,7 @@ void Thing::ai_get_next_hop (void)
         index++;
 #endif
 
-        auto nh_tile = fpoint(best.x + minx + 0.5,
-                              best.y + miny + 0.5);
+        auto nh_tile = fpoint(best.x + minx, best.y + miny);
         fpoint nh = mid_at;
         float dx = 0.05;
         float dy = 0.05;
