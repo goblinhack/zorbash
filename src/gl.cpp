@@ -409,6 +409,8 @@ void gl_init_fbo (void)
             case FBO_MAP:
             case FBO_MAP_HIDDEN:
             case FBO_MAP_VISIBLE:
+            case FBO_MASK1:
+            case FBO_MASK2:
             case FBO_LIGHT:
                 tex_width = game->config.inner_pix_width;
                 tex_height = game->config.inner_pix_height;
@@ -418,6 +420,10 @@ void gl_init_fbo (void)
                 tex_height = MAP_HEIGHT;
                 break;
             case FBO_WID:
+                //
+                // Outer for the UI allows use to have more detail in
+                // the logo and other things
+                //
             case FBO_FINAL:
                 tex_width = game->config.outer_pix_width;
                 tex_height = game->config.outer_pix_height;
