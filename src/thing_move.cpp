@@ -138,6 +138,7 @@ void Thing::update_interpolated_position (void)
         set_interpolated_mid_at(mid_at);
         attach();
         update_light();
+        is_waiting_to_move = true;
     } else {
         double t = get_timestamp_move_end() - get_timestamp_move_begin();
         double dt = time_get_time_ms_cached() - get_timestamp_move_begin();
@@ -154,122 +155,6 @@ void Thing::update_interpolated_position (void)
         attach();
         update_light();
     }
-}
-
-bool Thing::update_coordinates (void)
-{
-    auto old_br = br;
-    auto tpp = tp();
-
-    get_bounce();
-
-    double x;
-    double y;
-
-    if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
-        x = mid_at.x;
-        y = mid_at.y;
-
-        if (is_active()) {
-            if (!is_waiting_to_move) {
-                is_waiting_to_move = true;
-                auto now = time_get_time_ms_cached();
-                auto delay = tp_ai_delay_after_moving_ms(tpp);
-                auto jitter = random_range(0, delay / 10);
-                set_timestamp_ai_next(now + delay + jitter);
-            }
-        }
-    } else {
-        double t = get_timestamp_move_end() - get_timestamp_move_begin();
-        double dt = time_get_time_ms_cached() - get_timestamp_move_begin();
-        double step = dt / t;
-        double dx = mid_at.x - last_mid_at.x;
-        double dy = mid_at.y - last_mid_at.y;
-
-        x = last_mid_at.x + dx * step;
-        y = last_mid_at.y + dy * step;
-    }
-
-#if 0
-    //
-    // Some things (like messages) have no tiles and so use the default.
-    //
-    float tile_pix_width = TILE_WIDTH;
-    float tile_pix_height = TILE_HEIGHT;
-    if (!is_no_tile()) {
-        auto tile = tile_index_to_tile(tile_curr);
-        if (!tile) {
-            err("has no tile, index %d", tile_curr);
-            return (false);
-        }
-        tile_pix_width = tile->pix_width;
-        tile_pix_height = tile->pix_height;
-    }
-
-    //
-    // Scale up tiles that are larger to the same pix scale.
-    //
-    if (unlikely((tile_pix_width != TILE_WIDTH) ||
-                 (tile_pix_height != TILE_HEIGHT))) {
-        auto xtiles = (tile_pix_width / TILE_WIDTH) / 2.0;
-        auto mx = (br.x + tl.x) / 2.0;
-        tl.x = mx - (xtiles * tile_gl_width);
-        br.x = mx + (xtiles * tile_gl_width);
-
-        auto ytiles = (tile_pix_height / TILE_HEIGHT) / 2.0;
-        auto my = (br.y + tl.y) / 2.0;
-        tl.y = my - (ytiles * tile_gl_height);
-        br.y = my + (ytiles * tile_gl_height);
-    }
-
-    //
-    // Put larger tiles on the same y base as small ones.
-    //
-    if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tpp))) {
-        double y_offset =
-            (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) *
-                tile_gl_height) / 2.0;
-        tl.y -= y_offset;
-        br.y -= y_offset;
-    }
-
-    //
-    // Boing.
-    //
-    if (unlikely(is_bouncing)) {
-        double height = get_bounce();
-
-        tl.y -= height;
-        br.y -= height;
-    }
-
-    //
-    // Lunge to attack.
-    //
-    {
-        auto lunge = get_lunge();
-        if (lunge) {
-            auto delta = get_lunge_to() - get_interpolated_mid_at();
-            auto dx = -delta.x * lunge;
-            auto dy = -delta.y * lunge;
-            dx = -delta.x * lunge * tile_gl_width;
-            dy = delta.y * lunge * tile_gl_height;
-            tl.x -= dx;
-            br.x -= dx;
-            tl.y += dy;
-            br.y += dy;
-        }
-    }
-#endif
-
-    //
-    // If we've moved, need to update the display sort order.
-    //
-    if (br != old_br) {
-        return (true);
-    }
-
-    return (false);
 }
 
 void Thing::fadeup (double fadeup_height,

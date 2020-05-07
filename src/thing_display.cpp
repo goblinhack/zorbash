@@ -481,15 +481,12 @@ void Thing::blit_text (std::string const& text,
     tile = nullptr;
 
     auto a = gl_last_color.a;
-    float w = blit_br.x - blit_tl.x;
-    float h = blit_br.y - blit_tl.y;
-    float cw = w / 4.0;
-    float ch = h / 3.0;
-    float l = blit_msg_strlen(text);
+    int l = blit_msg_strlen(text);
 
-    blit_tl.x -= cw * (l / 2);
-    blit_br.x = blit_tl.x + cw;
-    blit_br.y = blit_tl.y + ch;
+    blit_tl.x = ((blit_br.x + blit_tl.x) / 2) - (FONT_SIZE * l / 2);;
+    blit_br.x = blit_tl.x + FONT_SIZE;
+    blit_tl.y = ((blit_br.y + blit_tl.y) / 2) - (FONT_SIZE * l / 2);;
+    blit_br.y = blit_tl.y + FONT_SIZE;
 
     while (text_iter != text.end()) {
         auto c = *text_iter;
@@ -535,8 +532,8 @@ void Thing::blit_text (std::string const& text,
         tile_blit_outline(tile, blit_tl, blit_br);
 
         tile = nullptr;
-        blit_tl.x += cw;
-        blit_br.x += cw;
+        blit_tl.x += FONT_SIZE;
+        blit_br.x += FONT_SIZE;
     }
 }
 

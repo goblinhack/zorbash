@@ -626,7 +626,6 @@ public:
     void cursor_path_pop_first_move(void);
     void cursor_path_stop(void);
     void cursor_hover_over_check(void);
-    bool update_coordinates(void);
     bool possible_to_attack(const Thingp it);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
