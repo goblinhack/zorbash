@@ -198,13 +198,16 @@ public:
     void scroll_map(void);
     void scroll_map_to_player(void);
     void scroll_map_set_target(void);
-    void display_map_things(const uint16_t minx, const uint16_t miny,
-                           const uint16_t maxx, const uint16_t maxy);
+    void display_map_things(const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map(void);
     void update_map(void);
     void update_minimap(void);
     void update_hazard_map(void);
-
+    void cursor_check_if_scroll_needed(void);
+    void cursor_find_on_visible_things(const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void cursor_move(void);
+    void cursor_path_draw(point start, point end);
+    void cursor_path_create(void);
     void clear(void);
     bool is_anything_at(const int x, const int y);
     bool is_anything_at(const point &p);
