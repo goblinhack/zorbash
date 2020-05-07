@@ -195,6 +195,12 @@ public:
                 }                                                         \
 
     void display(void);
+    void scroll_map(void);
+    void scroll_map_to_player(void);
+    void scroll_map_set_target(void);
+    void display_map_things(const uint16_t minx, const uint16_t miny,
+                           const uint16_t maxx, const uint16_t maxy);
+    void display_map(void);
     void update_map(void);
     void update_minimap(void);
     void update_hazard_map(void);

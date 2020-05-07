@@ -47,6 +47,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/hexdump.o 		\
     $(OBJDIR)/level.o 			\
     $(OBJDIR)/level_display.o 		\
+    $(OBJDIR)/level_scroll.o 		\
+    $(OBJDIR)/level_cursor.o 		\
     $(OBJDIR)/level_fini.o 		\
     $(OBJDIR)/level_init.o 		\
     $(OBJDIR)/level_log.o 		\
@@ -99,7 +101,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_log.o 		\
-    $(OBJDIR)/thing_map.o 		\
     $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\

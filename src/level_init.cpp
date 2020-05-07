@@ -247,7 +247,7 @@ void Level::init (point3d at, int seed_in)
     game_mark_dungeon_tiles(dungeon);
     if (g_errored) { return; }
 
-    thing_map_scroll_to_player();
+    scroll_map_to_player();
     if (g_errored) { return; }
 
     log("^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ");
