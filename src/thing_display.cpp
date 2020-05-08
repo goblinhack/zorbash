@@ -477,7 +477,6 @@ void Thing::blit_text (std::string const& text,
     auto text_iter = text.begin();
     color fg = WHITE;
 
-// printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, scissors_br.x, scissors_br.y, scissors_enabled);
     tile = nullptr;
 
     auto a = gl_last_color.a;
