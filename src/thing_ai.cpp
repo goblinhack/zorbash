@@ -4,16 +4,12 @@
 //
 
 #include <algorithm>
-#include <vector>
 #include <set>
 #include "my_main.h"
 #include "my_level.h"
-#include "my_depth.h"
-#include "my_main.h"
 #include "my_dmap.h"
 #include "my_math.h"
 #include "my_thing.h"
-#include "my_thing_ai.h"
 
 #define DEBUG_AI_VERBOSE
 
@@ -265,7 +261,7 @@ void Thing::ai_get_next_hop (void)
                     GOAL_ADD((int)(max_dist - dist) * 10, "attack enemy");
                 }
             }
-        } FOR_ALL_THINGS_END()
+        } FOR_ALL_THINGS_END();
 
         if (got_one) {
             goals.insert(Goal(total_score, point(X, Y)));
@@ -415,6 +411,14 @@ void Thing::ai_get_next_hop (void)
         } else {
             continue;
         }
+
+        auto nh = fpoint(best.x + minx,
+                         best.y + miny);
+
+        log("assess (%d,%d) next (%d,%d) cost %d (lower pref)",
+            (int)minx + goal.at.x, (int)miny + goal.at.y,
+            (int)(nh.x), (int)(nh.y), (int)cost);
+
 #ifdef DEBUG_ASTAR_PATH
         if (!index) {
             for (auto p : hops) {
@@ -426,21 +430,6 @@ void Thing::ai_get_next_hop (void)
         }
         index++;
 #endif
-
-        auto nh_tile = fpoint(best.x + minx, best.y + miny);
-        fpoint nh = mid_at;
-        float dx = 0.05;
-        float dy = 0.05;
-
-        if (nh_tile.x < mid_at.x) { nh.x = mid_at.x - dx; }
-        if (nh_tile.x > mid_at.x) { nh.x = mid_at.x + dx; }
-        if (nh_tile.y < mid_at.y) { nh.y = mid_at.y - dy; }
-        if (nh_tile.y > mid_at.y) { nh.y = mid_at.y + dy; }
-
-        log("assess (%d,%d) next (%d,%d) cost %d (lower pref)",
-            (int)minx + goal.at.x, (int)miny + goal.at.y,
-            (int)(nh.x), (int)(nh.y), (int)cost);
-
         point nh_i(nh.x, nh.y);
 
         if (is_less_preferred_terrain(nh_i)) {
@@ -490,28 +479,4 @@ void Thing::ai_get_next_hop (void)
 
     is_move_done = true;
     stop();
-    return;
-}
-
-////////////////////////////////////////////////////////////////////////////
-// interpolated_mid_at
-////////////////////////////////////////////////////////////////////////////
-fpoint Thing::get_interpolated_mid_at (void)
-{_
-    if (monstp) {
-        if (monstp->interpolated_mid_at == fpoint(0, 0)) {
-            return (mid_at);
-        } else {
-            return (monstp->interpolated_mid_at);
-        }
-    } else {
-        return (mid_at);
-    }
-}
-
-fpoint Thing::set_interpolated_mid_at (fpoint v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    return (monstp->interpolated_mid_at = v);
 }

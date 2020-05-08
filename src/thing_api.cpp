@@ -3555,3 +3555,26 @@ int Thing::incr_on_fire_count (void)
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
+
+////////////////////////////////////////////////////////////////////////////
+// interpolated_mid_at
+////////////////////////////////////////////////////////////////////////////
+fpoint Thing::get_interpolated_mid_at (void)
+{_
+    if (monstp) {
+        if (monstp->interpolated_mid_at == fpoint(0, 0)) {
+            return (mid_at);
+        } else {
+            return (monstp->interpolated_mid_at);
+        }
+    } else {
+        return (mid_at);
+    }
+}
+
+fpoint Thing::set_interpolated_mid_at (fpoint v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->interpolated_mid_at = v);
+}
