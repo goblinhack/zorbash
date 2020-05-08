@@ -110,6 +110,16 @@ public:
         std::vector<Thingp>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ptrs_at {};
 
+    //
+    // Animation loop counters for surface effects
+    //
+    int   water_step1 {};
+    float water_step2 {};
+    int   deep_water_step1 {};
+    float deep_water_step2 {};
+    int   lava_step1 {};
+    float lava_step2 {};
+
     Level (void)
     {_
         newptr(this, "level");
@@ -195,10 +205,12 @@ public:
                 }                                                         \
 
     void display(void);
+    void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void scroll_map(void);
+    void display_anim(void);
     void scroll_map_to_player(void);
     void scroll_map_set_target(void);
-    void display_map_things(const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_map(void);
     void update_map(void);
     void update_minimap(void);
