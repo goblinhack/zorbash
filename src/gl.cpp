@@ -411,6 +411,7 @@ void gl_init_fbo (void)
             case FBO_MAP_VISIBLE:
             case FBO_MASK1:
             case FBO_MASK2:
+            case FBO_REFLECTION:
             case FBO_LIGHT:
                 tex_width = game->config.inner_pix_width;
                 tex_height = game->config.inner_pix_height;

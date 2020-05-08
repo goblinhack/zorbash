@@ -24,7 +24,8 @@ void Level::display (void)
     display_map();
 }
 
-void Level::display_map_things (const uint16_t minx, const uint16_t miny,
+void Level::display_map_things (int fbo,
+                                const uint16_t minx, const uint16_t miny,
                                 const uint16_t maxx, const uint16_t maxy)
 {_
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -33,6 +34,7 @@ void Level::display_map_things (const uint16_t minx, const uint16_t miny,
     // Things that were visited in the past
     //
     if (g_render_black_and_white) {
+        blit_fbo_bind(fbo);
         blit_init();
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto y = miny; y < maxy; y++) {
@@ -69,17 +71,14 @@ void Level::display_map_things (const uint16_t minx, const uint16_t miny,
         return;
     }
 
+    blit_fbo_bind(fbo);
     blit_init();
     for (auto z = 0; z < MAP_DEPTH; z++) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                    glcolorfast(WHITE);
-                    if (!t->is_water() &&
-                        !t->is_deep_water() &&
-                        !t->is_lava() &&
-                        !t->is_chasm() &&
-                        !t->is_lava()) {
+                    if (z == MAP_DEPTH_FLOOR) {
+                        glcolorfast(WHITE);
                         t->blit();
                     }
 
@@ -87,6 +86,27 @@ void Level::display_map_things (const uint16_t minx, const uint16_t miny,
                     if (unlikely(tp_gfx_animated(tpp))) {
                         t->animate();
                     }
+                } FOR_ALL_THINGS_END()
+            }
+        }
+    }
+    blit_flush();
+
+    display_water(fbo, minx, miny, maxx, maxy);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glcolorfast(WHITE);
+
+    //
+    // Blit effects
+    //
+    blit_fbo_bind(fbo);
+    blit_init();
+    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                    glcolorfast(WHITE);
+                    t->blit();
                 } FOR_ALL_THINGS_END()
             }
         }
@@ -127,17 +147,18 @@ void Level::display_map (void)
     light_miny = std::max(0, miny - TILES_DOWN / 2);
     light_maxy = std::min(MAP_HEIGHT, maxy + TILES_DOWN / 2);
 
+    display_anim();
     scroll_map_set_target();
     scroll_map();
 
     pixel_map_at = point(map_at.x * TILE_WIDTH,
                                 map_at.y * TILE_HEIGHT);
 
-    if (game->config.gfx_show_hidden) {
+    if (unlikely(game->config.gfx_show_hidden)) {
         blit_fbo_bind(FBO_MAP);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        display_map_things(minx, miny, maxx, maxy);
-    } else if (game->config.gfx_lights) {
+        display_map_things(FBO_MAP, minx, miny, maxx, maxy);
+    } else if (0 && game->config.gfx_lights) {
         {
             //
             // Generate an FBO with all light sources merged together
@@ -157,7 +178,7 @@ void Level::display_map (void)
             glClear(GL_COLOR_BUFFER_BIT);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             g_render_black_and_white = true;
-            display_map_things(minx, miny, maxx, maxy);
+            display_map_things(FBO_MAP_HIDDEN, minx, miny, maxx, maxy);
             g_render_black_and_white = false;
             glBlendFunc(GL_ZERO, GL_ONE_MINUS_SRC_COLOR);
             blit_fbo(FBO_LIGHT);
@@ -170,7 +191,7 @@ void Level::display_map (void)
             blit_fbo_bind(FBO_MAP_VISIBLE);
             glClear(GL_COLOR_BUFFER_BIT);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            display_map_things(minx, miny, maxx, maxy);
+            display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
             glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
             blit_fbo(FBO_LIGHT);
         }
@@ -200,7 +221,7 @@ void Level::display_map (void)
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        display_map_things(minx, miny, maxx, maxy);
+        display_map_things(FBO_MAP, minx, miny, maxx, maxy);
     }
 
     //
@@ -213,5 +234,38 @@ void Level::display_map (void)
 
     if (!minimap_valid) {
         update_minimap();
+    }
+}
+
+void Level::display_anim (void)
+{
+    //
+    // Slow timer to scroll the water.
+    //
+    if (water_step1++ >= 40) {
+        water_step1 = 0;
+        if (water_step2++ >= (TILE_HEIGHT * 2) - 1) {
+            water_step2 = 0;
+        }
+    }
+
+    //
+    // Slow timer to scroll the deep_water.
+    //
+    if (deep_water_step1++ >= 20) {
+        deep_water_step1 = 0;
+        if (deep_water_step2++ >= (TILE_HEIGHT * 2) - 1) {
+            deep_water_step2 = 0;
+        }
+    }
+
+    //
+    // Slow timer to scroll the lava.
+    //
+    if (lava_step1++ >= 5) {
+        lava_step1 = 0;
+        if (lava_step2++ >= (TILE_HEIGHT * 2) - 1) {
+            lava_step2 = 0;
+        }
     }
 }
