@@ -206,6 +206,7 @@ public:
 
     void display(void);
     void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void scroll_map(void);
     void display_anim(void);
     void scroll_map_to_player(void);

@@ -536,20 +536,6 @@ void Thing::blit_text (std::string const& text,
     }
 }
 
-void Thing::blit_outline_only (int x, int y)
-{_
-    fpoint blit_tl, blit_br;
-    Tilep tile = {};
-
-    if (!get_map_offset_coords(blit_tl, blit_br, tile)) {
-        return;
-    }
-
-    get_tiles();
-    tile_blit(tiles.tile_outline, blit_tl, blit_br);
-    is_blitted = true;
-}
-
 bool Thing::get_coords (fpoint &blit_tl,
                         fpoint &blit_br,
                         fpoint &pre_effect_blit_tl,

@@ -19,31 +19,28 @@ def lava_init(name, real_name, tiles=[], left_tiles=[]):
 
     delay = 1250
     for t in tiles:
-        x.set_tile(tile="lava" + t, 
-                   delay_ms=delay, 
-                   gfx_outline_index_offset=16)
-        x.set_tile(tile="lava_outline" + t, delay_ms=delay, is_outline=True)
+        x.set_tile(tile=t, delay_ms=delay)
 
     x.update()
 
 def init():
     lava_init(name="lava1", real_name="lava",
             tiles=[
-                "1.1",
-                "1.2",
-                "1.3",
-                "1.4",
-                "1.5",
-                "1.6",
-                "1.7",
-                "1.8",
-                "1.9",
-                "1.10",
-                "1.11",
-                "1.12",
-                "1.13",
-                "1.14",
-                "1.15",
-                "1.16",
+                "lava1.1",
+                "lava1.2",
+                "lava1.3",
+                "lava1.4",
+                "lava1.5",
+                "lava1.6",
+                "lava1.7",
+                "lava1.8",
+                "lava1.9",
+                "lava1.10",
+                "lava1.11",
+                "lava1.12",
+                "lava1.13",
+                "lava1.14",
+                "lava1.15",
+                "lava1.16",
                 ])
 init()

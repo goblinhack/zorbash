@@ -369,10 +369,7 @@ void Light::render_triangle_fans (int last, int count)
     // fade off of the light.
     //
     if (last && (level->player && (owner == level->player))) {
-        //
-        // To account for the blurring in blit_flush_triangle_fan_smoothed
-        //
-        if (flicker > random_range(5, 20)) {
+        if (flicker > random_range(20, 30)) {
             flicker = 0;
         }
 

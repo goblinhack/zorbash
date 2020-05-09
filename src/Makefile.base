@@ -48,6 +48,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level.o 			\
     $(OBJDIR)/level_display.o 		\
     $(OBJDIR)/level_display_water.o 	\
+    $(OBJDIR)/level_display_deep_water.o \
     $(OBJDIR)/level_scroll.o 		\
     $(OBJDIR)/level_cursor.o 		\
     $(OBJDIR)/level_cursor_path.o 	\

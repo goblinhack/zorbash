@@ -199,6 +199,7 @@ std::ostream& operator<<(std::ostream &out,
     /* _is_blood */            out << bits(my.t->_is_blood);
     /* _is_corpse */           out << bits(my.t->_is_corpse);
     /* _is_corridor */         out << bits(my.t->_is_corridor);
+    /* _is_deep_water */       out << bits(my.t->_is_deep_water);
     /* _is_dirt */             out << bits(my.t->_is_dirt);
     /* _is_dungeon */          out << bits(my.t->_is_dungeon);
     /* _is_floor */            out << bits(my.t->_is_floor);

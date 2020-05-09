@@ -372,6 +372,8 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
     if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
+    if (tp_is_deep_water(tpp))  { level->set_water(new_at.x, new_at.y); }
+    if (tp_is_deep_water(tpp))  { level->set_deep_water(new_at.x, new_at.y); }
 
     if (tp_gfx_large_shadow(tpp)) {
         level->set_gfx_large_shadow(new_at.x, new_at.y);
@@ -471,6 +473,8 @@ void Thing::reinit (void)
     if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
     if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
+    if (tp_is_deep_water(tpp))  { level->set_water(new_at.x, new_at.y); }
+    if (tp_is_deep_water(tpp))  { level->set_deep_water(new_at.x, new_at.y); }
 
     if (tp_gfx_large_shadow(tpp)) {
         level->set_gfx_large_shadow(new_at.x, new_at.y);
@@ -539,6 +543,8 @@ void Thing::destroy (void)
     if (is_secret_door()) { level->unset_secret_door(old_at.x, old_at.y); }
     if (is_wall())        { level->unset_wall(old_at.x, old_at.y); }
     if (is_water())       { level->unset_water(old_at.x, old_at.y); }
+    if (is_deep_water())  { level->unset_water(old_at.x, old_at.y); }
+    if (is_deep_water())  { level->unset_deep_water(old_at.x, old_at.y); }
 
     auto tpp = tp();
     if (unlikely(!tpp)) {

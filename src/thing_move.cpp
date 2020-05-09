@@ -288,6 +288,8 @@ void Thing::update_pos (fpoint to, bool immediately)
             level->set_water(new_at.x, new_at.y);
         }
         if (is_deep_water()) {
+            level->unset_water(old_at.x, old_at.y);
+            level->set_water(new_at.x, new_at.y);
             level->unset_deep_water(old_at.x, old_at.y);
             level->set_deep_water(new_at.x, new_at.y);
         }

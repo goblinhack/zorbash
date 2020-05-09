@@ -30,53 +30,24 @@ void Level::display_map_things (int fbo,
 {_
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    //
-    // Things that were visited in the past
-    //
-    if (g_render_black_and_white) {
-        blit_fbo_bind(fbo);
-        blit_init();
-        for (auto z = 0; z < MAP_DEPTH; z++) {
-            for (auto y = miny; y < maxy; y++) {
-                for (auto x = minx; x < maxx; x++) {
-                    if (!is_visited(x, y)) {
-                        continue;
-                    }
-                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                        if (t->is_monst()) {
-                            continue;
-                        }
-                        //if (t->is_floor()) {
-                        //    continue;
-                        //}
-                        if (t->owner_get()) {
-                            continue;
-                        }
-                        if (t->get_light_count()) {
-                            continue;
-                        }
-                        if (!t->is_water() &&
-                            !t->is_deep_water() &&
-                            !t->is_lava() &&
-                            !t->is_chasm() &&
-                            !t->is_lava()) {
-                            glcolorfast(WHITE);
-                            t->blit();
-                        }
-                    } FOR_ALL_THINGS_END()
-                }
-            }
-        }
-        blit_flush();
-        return;
-    }
-
     blit_fbo_bind(fbo);
     blit_init();
     for (auto z = 0; z < MAP_DEPTH; z++) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
+                if (g_render_black_and_white) {
+                    if (!is_visited(x, y)) {
+                        continue;
+                    }
+                }
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                    if (g_render_black_and_white) {
+                        if (t->is_monst() ||
+                            t->owner_get() ||
+                            t->get_light_count()) {
+                            continue;
+                        }
+                    }
                     if (z == MAP_DEPTH_FLOOR) {
                         glcolorfast(WHITE);
                         t->blit();
@@ -93,6 +64,7 @@ void Level::display_map_things (int fbo,
     blit_flush();
 
     display_water(fbo, minx, miny, maxx, maxy);
+    display_deep_water(fbo, minx, miny, maxx, maxy);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolorfast(WHITE);
 
@@ -104,7 +76,19 @@ void Level::display_map_things (int fbo,
     for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
+                if (g_render_black_and_white) {
+                    if (!is_visited(x, y)) {
+                        continue;
+                    }
+                }
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                    if (g_render_black_and_white) {
+                        if (t->is_monst() ||
+                            t->owner_get() ||
+                            t->get_light_count()) {
+                            continue;
+                        }
+                    }
                     glcolorfast(WHITE);
                     t->blit();
                 } FOR_ALL_THINGS_END()
