@@ -781,7 +781,6 @@ public:
     void animate();
     void attach(void);
     void blit();
-    void blit_outline_only(int x, int y);
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);

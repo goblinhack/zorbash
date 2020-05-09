@@ -89,9 +89,9 @@ void Level::display_water (int fbo,
 
     auto z = MAP_DEPTH_WATER;
 
-    //
-    // Draw an outline to the same buffer
-    //
+    /////////////////////////////////////////////////////////////////////
+    // Draw white mask tiles only
+    /////////////////////////////////////////////////////////////////////
     blit_init();
     glcolor(WHITE);
     glDisable(GL_TEXTURE_2D);
@@ -100,6 +100,9 @@ void Level::display_water (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
+            if (!is_visited(x, y)) {
+                continue;
+            }
             if (!level->is_water(x, y)) {
                 continue;
             }
@@ -113,55 +116,16 @@ void Level::display_water (int fbo,
                 if (!tp_is_water(tpp)) {
                     continue;
                 }
-                t->blit_outline_only(x, y);
+                t->blit();
             } FOR_ALL_THINGS_END()
         }
     }
     glEnable(GL_TEXTURE_2D);
     blit_flush();
 
-#if 0
-    //
-    // Draw the white bitmap that will be the mask for the texture
-    // again to its own buffer.
-    //
-    blit_fbo_bind(FBO_MASK2);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-    glcolor(WHITE);
-    blit_init();
-
-    for (auto y = miny; y < maxy; y++) {
-        for (auto x = minx; x < maxx; x++) {
-            if (!level->is_water(x, y)) {
-                continue;
-            }
-            if (unlikely(game->config.gfx_show_hidden)) {
-                if (!level->is_dungeon(x, y)) {
-                    continue;
-                }
-            }
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                auto tpp = t->tp();
-                if (!tp_is_water(tpp) && !tp_is_deep_water(tpp)) {
-                    continue;
-                }
-
-                uint16_t tile = t->tile_curr;
-                fpoint blit_tl(t->tl.x, t->tl.y);
-                fpoint blit_br(t->br.x, t->br.y);
-
-                tile_blit(tile, blit_tl, blit_br);
-            } FOR_ALL_THINGS_END()
-        }
-    }
-    blit_flush();
-#endif
-
-    //
-    // Finally blit the transparent water tiles, still to its
-    // own buffer.
-    //
+    /////////////////////////////////////////////////////////////////////
+    // Draw the tiles that we will want to combine with the mask later
+    /////////////////////////////////////////////////////////////////////
     blit_init();
     glcolor(WHITE);
     blit_fbo_bind(FBO_MASK2);
@@ -169,6 +133,9 @@ void Level::display_water (int fbo,
     auto tile_map = level->water_tile_map;
     for (auto y = miny; y < maxy; y+=2) {
         for (auto x = minx; x < maxx; x+=2) {
+            if (!is_visited(x, y)) {
+                continue;
+            }
             if (get(tile_map, x, y)) {
                 int tx = (x & ~1);
                 int ty = (y & ~1);
@@ -201,17 +168,23 @@ void Level::display_water (int fbo,
     }
     blit_flush();
 
+    /////////////////////////////////////////////////////////////////////
+    // Merge the mask and tiles
+    /////////////////////////////////////////////////////////////////////
     blit_fbo_bind(FBO_MASK3);
     glClear(GL_COLOR_BUFFER_BIT);
     blit_fbo(FBO_MASK1);
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     blit_fbo(FBO_MASK2);
 
+    /////////////////////////////////////////////////////////////////////
+    // Create an outline mask
+    /////////////////////////////////////////////////////////////////////
     blit_fbo_bind(FBO_MASK4);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     color c = WHITE;
-    c.a = 255;
+    c.a = 200;
     glcolor(c);
     glTranslatef(-1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  1, 0);
     glTranslatef( 0, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  1, 0);
@@ -221,20 +194,17 @@ void Level::display_water (int fbo,
     glTranslatef(-1,  1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1, -1, 0);
     glTranslatef( 0,  1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -1, 0);
     glTranslatef( 1,  1, 0); blit_fbo(FBO_MASK1); glTranslatef(-1, -1, 0);
+
+    /////////////////////////////////////////////////////////////////////
+    // Create a hole in the middle of the outline mask
+    /////////////////////////////////////////////////////////////////////
     glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_COLOR);
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int g_blend_a;
-extern int g_blend_b;
-CON("%d %d %s %s", g_blend_a, g_blend_b, vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
-#endif
     glcolor(BLACK);
     blit_fbo(FBO_MASK3);
 
-    //
-    // Now merge the transparent water and the edge tiles.
-    //
+    /////////////////////////////////////////////////////////////////////
+    // Merge the outline mask and the masked tiles
+    /////////////////////////////////////////////////////////////////////
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     blit_fbo_bind(fbo);

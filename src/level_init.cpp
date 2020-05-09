@@ -52,19 +52,19 @@ static void game_mark_dungeon_tiles(Dungeonp d);
 void Level::clear (void)
 {_
     _is_blood = {};
+    _is_chasm = {};
+    _is_corpse = {};
     _is_corridor = {};
     _is_deep_water = {};
     _is_dirt = {};
+    _is_dungeon = {};
     _is_floor = {};
+    _is_gfx_large_shadow = {};
     _is_lava = {};
-    _is_chasm = {};
     _is_rock = {};
     _is_visited = {};
-    _is_gfx_large_shadow = {};
-    _is_corpse = {};
     _is_wall = {};
     _is_water = {};
-    _is_dungeon = {};
 
     next_thing_id = 1;
     timestamp_dungeon_created = time_get_time_ms();
