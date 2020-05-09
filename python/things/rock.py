@@ -11,7 +11,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     x.set_is_loggable(False)
     x.set_a_or_an("the");
     x.set_is_combustible(False)
-    x.set_z_depth(zx.MAP_DEPTH_FLOOR)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     for t in tiles:
         x.set_tile(t)
