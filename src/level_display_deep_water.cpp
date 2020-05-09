@@ -16,10 +16,10 @@ void Level::display_deep_water (int fbo,
                                 uint16_t minx, uint16_t miny,
                                 uint16_t maxx, uint16_t maxy)
 {_
-#define DEEP_WATER_ACROSS 8
-#define DEEP_WATER_DOWN   8
+#define WATER_ACROSS 8
+#define WATER_DOWN   8
 
-    static std::array<std::array<Tilep, DEEP_WATER_DOWN>, DEEP_WATER_ACROSS> deep_water;
+    static std::array<std::array<Tilep, WATER_DOWN>, WATER_ACROSS> deep_water;
     if (!deep_water[0][0]) {
         set(deep_water, 0, 0, tile_find("deep_water1a"));
         set(deep_water, 1, 0, tile_find("deep_water2a"));
@@ -100,14 +100,11 @@ void Level::display_deep_water (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (!is_visited(x, y)) {
+            if (likely(!level->is_deep_water(x, y))) {
                 continue;
             }
-            if (!level->is_deep_water(x, y)) {
-                continue;
-            }
-            if (unlikely(game->config.gfx_show_hidden)) {
-                if (!level->is_dungeon(x, y)) {
+            if (likely(!game->config.gfx_show_hidden)) {
+                if (!is_visited(x, y)) {
                     continue;
                 }
             }
@@ -133,37 +130,40 @@ void Level::display_deep_water (int fbo,
     auto tile_map = level->deep_water_tile_map;
     for (auto y = miny; y < maxy; y+=2) {
         for (auto x = minx; x < maxx; x+=2) {
-            if (!is_visited(x, y)) {
+            if (likely(!get(tile_map, x, y))) {
                 continue;
             }
-            if (get(tile_map, x, y)) {
-                int tx = (x & ~1);
-                int ty = (y & ~1);
-                int tlx = tx * TILE_WIDTH;
-                int tly = ty * TILE_HEIGHT;
-                int brx = tlx + (2 * TILE_WIDTH);
-                int bry = tly + (2 * TILE_HEIGHT);
-
-                tlx -= pixel_map_at.x;
-                tly -= pixel_map_at.y;
-                brx -= pixel_map_at.x;
-                bry -= pixel_map_at.y;
-
-                auto tile = get(deep_water,
-                                (x&~1) % DEEP_WATER_ACROSS,
-                                (y&~1) % DEEP_WATER_DOWN);
-                                // (y + (int)deep_water_step2/4) % DEEP_WATER_DOWN);
-                auto x1 = tile->x1;
-                auto x2 = tile->x2;
-                auto y1 = tile->y1;
-                auto y2 = tile->y2;
-
-                float one_pix = (1.0 / tex_get_height(tile->tex));
-                y1 += one_pix * deep_water_step2;
-                y2 += one_pix * deep_water_step2;
-
-                blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
+            if (likely(!game->config.gfx_show_hidden)) {
+                if (!is_visited(x, y)) {
+                    continue;
+                }
             }
+            int tx = (x & ~1);
+            int ty = (y & ~1);
+            int tlx = tx * TILE_WIDTH;
+            int tly = ty * TILE_HEIGHT;
+            int brx = tlx + (2 * TILE_WIDTH);
+            int bry = tly + (2 * TILE_HEIGHT);
+
+            tlx -= pixel_map_at.x;
+            tly -= pixel_map_at.y;
+            brx -= pixel_map_at.x;
+            bry -= pixel_map_at.y;
+
+            auto tile = get(deep_water,
+                            (x&~1) % WATER_ACROSS,
+                            (y&~1) % WATER_DOWN);
+                            // (y + (int)deep_water_step2/4) % WATER_DOWN);
+            auto x1 = tile->x1;
+            auto x2 = tile->x2;
+            auto y1 = tile->y1;
+            auto y2 = tile->y2;
+
+            float one_pix = (1.0 / tex_get_height(tile->tex));
+            y1 += one_pix * deep_water_step2;
+            y2 += one_pix * deep_water_step2;
+
+            blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
         }
     }
     blit_flush();
@@ -178,7 +178,7 @@ void Level::display_deep_water (int fbo,
     blit_fbo(FBO_MASK2);
 
     /////////////////////////////////////////////////////////////////////
-    // Blit the combination
+    // Merge the outline mask and the masked tiles
     /////////////////////////////////////////////////////////////////////
     glcolor(WHITE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

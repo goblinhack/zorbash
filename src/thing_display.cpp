@@ -392,10 +392,6 @@ void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
         return;
     }
 
-    if (unlikely(game->config.gfx_show_hidden)) {
-        return;
-    }
-
     if (!level->player) {
         blit_non_player_owned_shadow(tpp, tile, blit_tl, blit_br);
         return;
@@ -577,10 +573,6 @@ bool Thing::get_coords (fpoint &blit_tl,
             if (is_wall()) {
                 glcolor(BLUE);
             }
-        }
-
-        if (!level->is_dungeon(x, y)) {
-            blit = false;
         }
     }
 
@@ -840,12 +832,10 @@ void Thing::blit (void)
         tile_blit(tile, blit_tl, blit_br);
     }
 
-    if (likely(!game->config.gfx_show_hidden)) {
-        get_tiles();
-        if (is_wall()) {
-            blit_wall_shadow(blit_tl, blit_br, &tiles);
-            blit_wall_cladding(blit_tl, blit_br, &tiles);
-        }
+    get_tiles();
+    if (is_wall()) {
+        blit_wall_shadow(blit_tl, blit_br, &tiles);
+        blit_wall_cladding(blit_tl, blit_br, &tiles);
     }
 
     is_blitted = true;

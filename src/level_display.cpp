@@ -135,11 +135,18 @@ void Level::display_map (void)
     scroll_map_set_target();
     scroll_map();
 
-    pixel_map_at = point(map_at.x * TILE_WIDTH,
-                                map_at.y * TILE_HEIGHT);
+    pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
+
+    int debug = 0;
+    if (debug) {
+        game->config.gfx_lights = 0;
+        game->config.gfx_show_hidden = 1;
+        update_hazard_map();
+    }
 
     if (unlikely(game->config.gfx_show_hidden)) {
         blit_fbo_bind(FBO_MAP);
+        glClear(GL_COLOR_BUFFER_BIT);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         display_map_things(FBO_MAP, minx, miny, maxx, maxy);
     } else if (game->config.gfx_lights) {
