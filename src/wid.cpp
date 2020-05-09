@@ -4922,8 +4922,8 @@ std::string  vals_str[] = {
     "GL_SRC_COLOR",
 };
 
-int i1;
-int i2;
+int g_blend_a;
+int g_blend_b;
 #endif
 
 #if 0
@@ -4931,10 +4931,10 @@ glBlendEquation(GL_FUNC_ADD);
 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 extern int vals[];
 extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
+extern int g_blend_a;
+extern int g_blend_b;
+CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
 #endif
 
 void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
@@ -4944,13 +4944,13 @@ void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 #ifdef DEBUG_GL_BLEND
 if (wid_event_to_char(key) == '+') {
     usleep(50);
-    i1 ++;
-    if (i1 >= (int)ARRAY_SIZE(vals)) {
-        i1 = 0;
-        i2 ++;
-        if (i2 >= (int)ARRAY_SIZE(vals)) {
-            i2 = 0;
-            DIE("wrapped");
+    g_blend_a ++;
+    if (g_blend_a >= (int)ARRAY_SIZE(vals)) {
+        g_blend_a = 0;
+        g_blend_b ++;
+        if (g_blend_b >= (int)ARRAY_SIZE(vals)) {
+            g_blend_b = 0;
+            ERR("wrapped");
         }
     }
     return;
@@ -4958,12 +4958,12 @@ if (wid_event_to_char(key) == '+') {
 
 if (wid_event_to_char(key) == '-') {
     usleep(50);
-    i1 --;
-    if (i1 < 0) {
-        i1 = (int)ARRAY_SIZE(vals);
-        i2 --;
-        if (i2 < 0) {
-            i2 = (int)ARRAY_SIZE(vals);
+    g_blend_a --;
+    if (g_blend_a < 0) {
+        g_blend_a = (int)ARRAY_SIZE(vals) - 1;
+        g_blend_b --;
+        if (g_blend_b < 0) {
+            g_blend_b = (int)ARRAY_SIZE(vals) - 1;
         }
     }
     return;

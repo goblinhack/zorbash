@@ -158,7 +158,7 @@ void Level::display_map (void)
         blit_fbo_bind(FBO_MAP);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         display_map_things(FBO_MAP, minx, miny, maxx, maxy);
-    } else if (0 && game->config.gfx_lights) {
+    } else if (game->config.gfx_lights) {
         {
             //
             // Generate an FBO with all light sources merged together

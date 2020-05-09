@@ -97,6 +97,7 @@ void Level::display_water (int fbo,
     glDisable(GL_TEXTURE_2D);
     blit_fbo_bind(FBO_MASK1);
     glClear(GL_COLOR_BUFFER_BIT);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             if (!level->is_water(x, y)) {
@@ -162,8 +163,9 @@ void Level::display_water (int fbo,
     // own buffer.
     //
     blit_init();
-    glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     glcolor(WHITE);
+    blit_fbo_bind(FBO_MASK2);
+    glBlendFunc(GL_ONE, GL_ZERO);
     auto tile_map = level->water_tile_map;
     for (auto y = miny; y < maxy; y+=2) {
         for (auto x = minx; x < maxx; x+=2) {
@@ -199,18 +201,47 @@ void Level::display_water (int fbo,
     }
     blit_flush();
 
-    blit_fbo_bind(fbo);
+    blit_fbo_bind(FBO_MASK3);
+    glClear(GL_COLOR_BUFFER_BIT);
     blit_fbo(FBO_MASK1);
+    glBlendFunc(GL_DST_ALPHA, GL_ZERO);
+    blit_fbo(FBO_MASK2);
+
+    blit_fbo_bind(FBO_MASK4);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    color c = WHITE;
+    c.a = 255;
+    glcolor(c);
+    glTranslatef(-1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  1, 0);
+    glTranslatef( 0, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  1, 0);
+    glTranslatef( 1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef(-1,  1, 0);
+    glTranslatef(-1,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  0, 0);
+    glTranslatef( 1,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-1,  0, 0);
+    glTranslatef(-1,  1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1, -1, 0);
+    glTranslatef( 0,  1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -1, 0);
+    glTranslatef( 1,  1, 0); blit_fbo(FBO_MASK1); glTranslatef(-1, -1, 0);
+    glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE_MINUS_SRC_COLOR);
 #if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int g_blend_a;
+extern int g_blend_b;
+CON("%d %d %s %s", g_blend_a, g_blend_b, vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+#endif
+    glcolor(BLACK);
+    blit_fbo(FBO_MASK3);
 
     //
     // Now merge the transparent water and the edge tiles.
     //
-    blit_init();
     glcolor(WHITE);
-    glBlendFunc(GL_ONE_MINUS_DST_ALPHA, GL_ONE);
-    blit_fbo(FBO_MASK1);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    blit_fbo_bind(fbo);
+    blit_fbo(FBO_MASK4);
+    blit_fbo(FBO_MASK3);
 
+#if 0
     //
     // Blit the combined water to the main buffer.
     //
@@ -264,14 +295,6 @@ void Level::display_water (int fbo,
     glcolor(c);
     blit_fbo(FBO_REFLECTION);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int i1;
-extern int i2;
-CON("%s %s", vals_str[i1].c_str(), vals_str[i2].c_str());
-glBlendFunc(vals[i1], vals[i2]);
-#endif
     glcolor(WHITE);
 #endif
 }
