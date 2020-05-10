@@ -153,9 +153,10 @@ public:
     uint32_t    id;                         // Unique per thing.
     int16_t     tp_id                {-1};  // Common settings
     uint16_t    tile_curr            {};
+    uint8_t     alpha                {255}; // For fading
     ThingTiles  tiles                {};
     timestamp_t timestamp_next_frame {};
-    uint32_t    dir:4                {}; // Direction
+    uint32_t    dir:4                {};    // Direction
 
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
