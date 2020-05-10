@@ -41,7 +41,6 @@ static void blit_text (std::string const& text,
 // printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, scissors_br.x, scissors_br.y, scissors_enabled);
     tile = nullptr;
 
-    auto a = gl_last_color.a;
     float w = blit_br.x - blit_tl.x;
     float h = blit_br.y - blit_tl.y;
     float cw = w / 4.0;
@@ -509,7 +508,7 @@ void Level::blit_particles (const uint16_t minx, const uint16_t miny,
                         fpoint tl(a.x - dpx, a.y - dpy);
                         fpoint br(a.x + dpx, a.y + dpy);
 
-                        glcolorfast(BLUE);
+                        glcolor(BLUE);
                         tile_blit(ptex, tl, br);
                     }
 #endif
@@ -523,9 +522,9 @@ void Level::blit_particles (const uint16_t minx, const uint16_t miny,
                     fpoint br(a.x + dpx, a.y + dpy);
 #if 0
                     if (p->is_coll) {
-                        glcolorfast(RED);
+                        glcolor(RED);
                     } else {
-                        glcolorfast(WHITE);
+                        glcolor(WHITE);
                     }
 #endif
                     tile_blit(ptex, tl, br);

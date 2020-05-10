@@ -49,7 +49,6 @@ void Level::display_map_things (int fbo,
                         }
                     }
                     if (z == MAP_DEPTH_FLOOR) {
-                        glcolorfast(WHITE);
                         t->blit();
                     }
 
@@ -66,7 +65,7 @@ void Level::display_map_things (int fbo,
     display_water(fbo, minx, miny, maxx, maxy);
     display_deep_water(fbo, minx, miny, maxx, maxy);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolorfast(WHITE);
+    glcolor(WHITE);
 
     //
     // Blit effects
@@ -89,7 +88,6 @@ void Level::display_map_things (int fbo,
                             continue;
                         }
                     }
-                    glcolorfast(WHITE);
                     t->blit();
                 } FOR_ALL_THINGS_END()
             }
@@ -196,14 +194,14 @@ void Level::display_map (void)
             //
             blit_fbo_bind(FBO_MAP);
             glClear(GL_COLOR_BUFFER_BIT);
-            glcolorfast(WHITE);
+            glcolor(WHITE);
             glBlendFunc(GL_ONE, GL_ZERO);
             blit_fbo(FBO_LIGHT);
             glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
-            glcolorfast(GRAY50);
+            glcolor(GRAY50);
             blit_fbo(FBO_MAP_HIDDEN);
             glBlendFunc(GL_ONE, GL_ONE);
-            glcolorfast(WHITE);
+            glcolor(WHITE);
             blit_fbo(FBO_MAP_VISIBLE);
         }
 

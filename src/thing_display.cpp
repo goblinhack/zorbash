@@ -475,7 +475,6 @@ void Thing::blit_text (std::string const& text,
 
     tile = nullptr;
 
-    auto a = gl_last_color.a;
     int l = blit_msg_strlen(text);
 
     blit_tl.x = ((blit_br.x + blit_tl.x) / 2) - (FONT_SIZE * l / 2);;
@@ -522,9 +521,7 @@ void Thing::blit_text (std::string const& text,
 
         tile = fixed_font->unicode_to_tile(c);
 
-        fg.a = a;
-        glcolor(fg);
-        tile_blit_outline(tile, blit_tl, blit_br);
+        tile_blit_outline(tile, blit_tl, blit_br, fg);
 
         tile = nullptr;
         blit_tl.x += FONT_SIZE;
@@ -789,15 +786,9 @@ bool Thing::get_pre_effect_map_offset_coords (fpoint &blit_tl,
     return (blit);
 }
 
-void Thing::blit (void)
+void Thing::blit_internal (fpoint &blit_tl, fpoint &blit_br, 
+                           const Tilep tile, const color &c)
 {_
-    fpoint blit_tl, blit_br;
-    Tilep tile = {};
-
-    if (!get_map_offset_coords(blit_tl, blit_br, tile)) {
-        return;
-    }
-
     auto tpp = tp();
     is_in_lava = false;
     is_in_water = false;
@@ -827,11 +818,13 @@ void Thing::blit (void)
     }
 
     if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
-        tile_blit_outline(tile, blit_tl, blit_br);
+        tile_blit_outline(tile, blit_tl, blit_br, c);
     } else {
+        glcolor(c);
         tile_blit(tile, blit_tl, blit_br);
     }
 
+    glcolor(WHITE);
     get_tiles();
     if (is_wall()) {
         blit_wall_shadow(blit_tl, blit_br, &tiles);
@@ -839,4 +832,35 @@ void Thing::blit (void)
     }
 
     is_blitted = true;
+}
+
+void Thing::blit (void)
+{_
+    fpoint blit_tl, blit_br;
+    Tilep tile = {};
+
+    if (!get_map_offset_coords(blit_tl, blit_br, tile)) {
+        return;
+    }
+
+    blit_internal(blit_tl, blit_br, tile, WHITE);
+}
+
+void Thing::blit_upside_down (void)
+{_
+    fpoint blit_tl, blit_br;
+    Tilep tile = {};
+
+    if (!get_map_offset_coords(blit_tl, blit_br, tile)) {
+        return;
+    }
+
+    auto diff = blit_br.y - blit_tl.y;
+    blit_tl.y += diff;
+    blit_br.y += diff;
+    std::swap(blit_tl.y, blit_br.y);
+
+    const color reflection = {255,255,255,200};
+    glcolor(reflection);
+    blit_internal(blit_tl, blit_br, tile, reflection);
 }

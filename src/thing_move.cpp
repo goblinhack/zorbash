@@ -185,7 +185,6 @@ double Thing::get_fadeup (void)
     auto t = time_get_time_ms_cached();
 
     if (t >= get_timestamp_fadeup_end()) {
-        gl_last_color.a = 0;
         dead("fadeup finished");
         return (-1);
     }
@@ -193,9 +192,6 @@ double Thing::get_fadeup (void)
     double time_step =
         (double)(t - get_timestamp_fadeup_begin()) /
         (double)(get_timestamp_fadeup_end() - get_timestamp_fadeup_begin());
-
-    gl_last_color.a = (uint8_t)(255.0 - (250.0 * time_step));
-    glcolor(gl_last_color);
 
     double height = br.y - tl.y;
 
