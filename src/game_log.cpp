@@ -59,7 +59,6 @@ void Thing::log (std::string pfx)
     LOG("%s is_open              %u", pfx.c_str(), is_open);
     LOG("%s is_sleeping          %u", pfx.c_str(), is_sleeping);
     LOG("%s is_starving          %u", pfx.c_str(), is_starving);
-    LOG("%s is_in_water          %u", pfx.c_str(), is_in_water);
     LOG("%s is_in_lava           %u", pfx.c_str(), is_in_lava);
 
     pfx = old_pfx;

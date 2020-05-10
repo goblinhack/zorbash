@@ -201,7 +201,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->is_open            = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_sleeping        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_starving        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_in_water        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_in_lava         = (bits32 >> shift) & 1; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
