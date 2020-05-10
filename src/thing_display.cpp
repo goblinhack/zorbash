@@ -472,6 +472,7 @@ void Thing::blit_text (std::string const& text,
     Tilep tile;
     auto text_iter = text.begin();
     color fg = WHITE;
+    fg.a = alpha;
 
     tile = nullptr;
 
@@ -492,6 +493,7 @@ void Thing::blit_text (std::string const& text,
                 auto tmp = std::string(text_iter, text.end());
                 int len = 0;
                 fg = string2color(tmp, &len);
+                fg.a = alpha;
                 text_iter += len + 1;
                 continue;
             } else if (std::string(text_iter, text_iter + 3) == "tp=") {

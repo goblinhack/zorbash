@@ -179,6 +179,7 @@ void Thing::lunge (fpoint to)
 double Thing::get_fadeup (void)
 {
     if (!is_fadeup) {
+        alpha = 255;
         return (0.0);
     }
 
@@ -186,6 +187,7 @@ double Thing::get_fadeup (void)
 
     if (t >= get_timestamp_fadeup_end()) {
         dead("fadeup finished");
+        alpha = 0;
         return (-1);
     }
 
@@ -194,6 +196,8 @@ double Thing::get_fadeup (void)
         (double)(get_timestamp_fadeup_end() - get_timestamp_fadeup_begin());
 
     double height = br.y - tl.y;
+
+    alpha = (uint8_t)(255.0 - (250.0 * time_step));
 
     height *= sin(time_step * RAD_90);
     height *= get_fadeup_height();
