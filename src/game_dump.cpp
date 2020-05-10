@@ -59,8 +59,6 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "is_open             " << is_open              << std::endl;
     out << pfx << "is_sleeping         " << is_sleeping          << std::endl;
     out << pfx << "is_starving         " << is_starving          << std::endl;
-    out << pfx << "is_in_water         " << is_in_water          << std::endl;
-    out << pfx << "is_in_lava          " << is_in_lava           << std::endl;
     out << pfx << "is_blitted          " << is_blitted           << std::endl;
 
     pfx = old_pfx;

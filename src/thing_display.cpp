@@ -723,9 +723,7 @@ bool Thing::get_coords (fpoint &blit_tl,
 
     if (is_monst() ||
         is_player() ||
-        tp_gfx_is_on_fire_anim(tpp) ||
-        tp_gfx_is_attack_anim(tpp) ||
-        tp_gfx_is_weapon_carry_anim(tpp)) {
+        tp_gfx_is_on_fire_anim(tpp)) {
 
         //
         // Render the weapon and player on the same tile rules
@@ -735,9 +733,65 @@ bool Thing::get_coords (fpoint &blit_tl,
             map_loc = owner->mid_at;
         }
 
-        if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
+        set_submerged_offset(0);
+
+        fpoint sub_tile_tl(0, 0);
+        fpoint sub_tile_br(1, 1);
+
+        if ((map_loc.y < MAP_HEIGHT - 1) &&
+             level->is_chasm((int)map_loc.x, (int)map_loc.y + 1)) {
+        } else if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
+#if 0
+            const auto pct_visible_above_surface = 0.5;
+            if (owner) {
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
+                sub_tile_br = fpoint(1, pct_visible_above_surface);
+                blit_br.y -=
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            } else {
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                auto offset =
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
+            }
+#endif
+            is_in_water = true;
+        } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
+            const auto pct_visible_above_surface = 0.5;
+            if (owner) {
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
+                sub_tile_br = fpoint(1, pct_visible_above_surface);
+                blit_br.y -=
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+            } else {
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                auto offset =
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
+            }
+            is_in_water = true;
             is_in_lava = true;
         } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
+#if 0
+            if (owner) {
+                auto offset = owner->get_submerged_offset();
+                blit_br.y += offset;
+                blit_tl.y += offset;
+            } else {
+                const auto pct_visible_above_surface = 0.1;
+                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
+                auto offset =
+                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
+                set_submerged_offset(offset);
+                blit_tl.y += offset;
+            }
+#endif
             is_in_water = true;
         }
     }
@@ -803,8 +857,6 @@ void Thing::blit_internal (fpoint &blit_tl,
                            bool reflection)
 {_
     auto tpp = tp();
-    is_in_lava = false;
-    is_in_water = false;
 
     if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
         blit_shadow(tpp, tile, blit_tl, blit_br);
@@ -831,7 +883,18 @@ void Thing::blit_internal (fpoint &blit_tl,
     }
 
     if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
-        tile_blit_outline(tile, blit_tl, blit_br, c);
+        glcolor(c);
+        if (is_in_water) {
+#if 1
+            float above_water = 0.3;
+            blit_tl.y += TILE_HEIGHT * (1.0 - above_water);
+            fpoint br(blit_br.x, blit_tl.y + (TILE_HEIGHT * above_water));
+            tile_blit_outline_section(
+              tile, fpoint(0,0), fpoint(1,above_water), blit_tl, br);
+#endif
+        } else {
+            tile_blit_outline(tile, blit_tl, blit_br, c);
+        }
     } else {
         glcolor(c);
         tile_blit(tile, blit_tl, blit_br);

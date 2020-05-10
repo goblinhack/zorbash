@@ -61,6 +61,7 @@ typedef struct Monst_ {
     float        bounce_height = {};         // Percentage of tile height.
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
+    float        submerged_offset = {};      // GL co-orids
     fpoint       lunge_to;                   // When a monst attacks something
     fpoint       interpolated_mid_at;
     int          bounce_count = {};
@@ -183,7 +184,7 @@ public:
     uint32_t is_open:1            {};
     uint32_t is_sleeping:1        {};
     uint32_t is_starving:1        {};
-    uint32_t is_in_water:1        {};
+    uint32_t is_in_water:1       {};
     uint32_t is_in_lava:1         {};
     uint32_t is_waiting_to_move:1 {};
     /////////////////////////////////////////////////////////////////////////
@@ -252,6 +253,8 @@ public:
     void set_msg(std::string);
     std::string get_msg(void);
 
+    void set_submerged_offset(float);
+    float get_submerged_offset(void);
     uint32_t set_tick(uint32_t);
     uint32_t get_tick(void);
     uint32_t decr_tick(uint32_t);
