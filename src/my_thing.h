@@ -61,9 +61,9 @@ typedef struct Monst_ {
     float        bounce_height = {};         // Percentage of tile height.
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
-    float        submerged_offset = {};      // GL co-orids
     fpoint       lunge_to;                   // When a monst attacks something
     fpoint       interpolated_mid_at;
+    int          submerged_offset = {};      // GL co-orids
     int          bounce_count = {};
     int          gold = {};
     int          light_quality {};
@@ -145,12 +145,8 @@ public:
     spoint      last_attached;
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
-    //
-    // These coords are not offset from the map scroll. i.e. they are constant
-    // regardless of the map view.
-    //
-    fpoint      tl;
-    fpoint      br;
+    spoint      blit_tl;             // Last blit coords
+    spoint      blit_br;
     uint32_t    id;                         // Unique per thing.
     int16_t     tp_id                {-1};  // Common settings
     uint16_t    tile_curr            {};
@@ -253,8 +249,8 @@ public:
     void set_msg(std::string);
     std::string get_msg(void);
 
-    void set_submerged_offset(float);
-    float get_submerged_offset(void);
+    void set_submerged_offset(int);
+    int get_submerged_offset(void);
     uint32_t set_tick(uint32_t);
     uint32_t get_tick(void);
     uint32_t decr_tick(uint32_t);
@@ -786,13 +782,13 @@ public:
     void attach(void);
     void blit();
     void blit_upside_down();
-    void blit_internal(fpoint &blit_tl, fpoint &blit_br, const Tilep tile, const color &c, const bool reflection);
-    void blit_text(std::string const&, fpoint &tl, fpoint &br);
-    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
-    void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
-    void blit_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
-    void blit_wall_cladding(fpoint &tl, fpoint &br, const ThingTiles *tiles);
-    void blit_wall_shadow(fpoint &tl, fpoint &br, const ThingTiles *tiles);
+    void blit_internal(spoint &blit_tl, spoint &blit_br, const Tilep tile, const color &c, const bool reflection);
+    void blit_text(std::string const&, spoint &tl, spoint &br);
+    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const spoint &tl, const spoint &br);
+    void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const spoint &tl, const spoint &br);
+    void blit_shadow(const Tpp &tp, const Tilep &tile, const spoint &tl, const spoint &br);
+    void blit_wall_cladding(spoint &tl, spoint &br, const ThingTiles *tiles);
+    void blit_wall_shadow(spoint &tl, spoint &br, const ThingTiles *tiles);
     void lunge(fpoint tt);
     void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);
     void fadeup(double fadeup_height, double fadeup_fade, timestamp_t ms);
@@ -863,9 +859,9 @@ public:
     void weapon_set_use_anim_id(uint32_t weapon_use_anim_id);
     void weapon_sheath(void);
     void wield(Thingp w);
-    bool get_coords(fpoint &blit_tl, fpoint &blit_br, fpoint &pre_effect_blit_tl, fpoint &pre_effect_blit_br, Tilep &tile, bool reflection);
-    bool get_map_offset_coords(fpoint &blit_tl, fpoint &blit_br, Tilep &tile, bool reflection);
-    bool get_pre_effect_map_offset_coords(fpoint &blit_tl, fpoint &blit_br, Tilep &tile, bool reflection);
+    bool get_coords(spoint &blit_tl, spoint &blit_br, spoint &pre_effect_blit_tl, spoint &pre_effect_blit_br, Tilep &tile, bool reflection);
+    bool get_map_offset_coords(spoint &blit_tl, spoint &blit_br, Tilep &tile, bool reflection);
+    bool get_pre_effect_map_offset_coords(spoint &blit_tl, spoint &blit_br, Tilep &tile, bool reflection);
 } Thing;
 
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);

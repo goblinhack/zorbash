@@ -176,15 +176,15 @@ Tilep string2tile(std::wstring &s, int *len);
 void tile_get_coords(Tilep, float *x1, float *y1, float *x2, float *y2);
 void tile_blit_colored_fat(Tpp tp,
                            Tilep tile,
-                           fpoint tl,
-                           fpoint br,
+                           spoint tl,
+                           spoint br,
                            color color_tl,
                            color color_tr,
                            color color_bl,
                            color color_br);
 void tile_blit_colored(Tilep tile,
-                       fpoint tl,
-                       fpoint br,
+                       spoint tl,
+                       spoint br,
                        color color_tl,
                        color color_tr,
                        color color_bl,
@@ -195,117 +195,117 @@ void tile_blit_colored(Tilep tile,
 //
 void tile_blit(const Tpp &tp,
                const Tilep &tile,
-               const fpoint &tl,
-               const fpoint &br);
+               const spoint &tl,
+               const spoint &br);
 void tile_blit(const Tpp &tp,
                uint16_t index,
-               const fpoint &tl,
-               const fpoint &br);
+               const spoint &tl,
+               const spoint &br);
 void tile_blit(const Tilep &tile,
-               const fpoint &tl,
-               const fpoint &br);
+               const spoint &tl,
+               const spoint &br);
 void tile_blit(const Tilep &tile,
-               const fpoint &tl,
-               const fpoint &tr,
-               const fpoint &bl,
-               const fpoint &br);
+               const spoint &tl,
+               const spoint &tr,
+               const spoint &bl,
+               const spoint &br);
 void tile_blit(uint16_t index,
-               const fpoint &tl,
-               const fpoint &br);
+               const spoint &tl,
+               const spoint &br);
 void tile_blit_section(const Tilep &tile,
-                       const fpoint &tile_tl,
-                       const fpoint &tile_br,
-                       const fpoint &tl,
-                       const fpoint &br);
+                       const spoint &tile_tl,
+                       const spoint &tile_br,
+                       const spoint &tl,
+                       const spoint &br);
 void tile_blit_section(uint16_t index,
-                       const fpoint &tile_tl,
-                       const fpoint &tile_br,
-                       const fpoint &tl,
-                       const fpoint &br);
+                       const spoint &tile_tl,
+                       const spoint &tile_br,
+                       const spoint &tl,
+                       const spoint &br);
 void tile_blit_section_colored(const Tilep &tile,
-                               const fpoint &tile_tl,
-                               const fpoint &tile_br,
-                               const fpoint &tl,
-                               const fpoint &br,
+                               const spoint &tile_tl,
+                               const spoint &tile_br,
+                               const spoint &tl,
+                               const spoint &br,
                                color color_bl, color color_br,
                                color color_tl, color color_tr);
 void tile_blit_section_colored(uint16_t index,
-                               const fpoint &tile_tl,
-                               const fpoint &tile_br,
-                               const fpoint &tl,
-                               const fpoint &br,
+                               const spoint &tile_tl,
+                               const spoint &tile_br,
+                               const spoint &tl,
+                               const spoint &br,
                                color color_bl, color color_br,
                                color color_tl, color color_tr);
 void tile_blit_outline_section_colored(const Tilep &tile,
-                                       const fpoint &tile_tl,
-                                       const fpoint &tile_br,
-                                       const fpoint &tl,
-                                       const fpoint &br,
+                                       const spoint &tile_tl,
+                                       const spoint &tile_br,
+                                       const spoint &tl,
+                                       const spoint &br,
                                        color color_bl, color color_br,
                                        color color_tl, color color_tr);
 void tile_blit_outline_section_colored(uint16_t index,
-                                       const fpoint &tile_tl,
-                                       const fpoint &tile_br,
-                                       const fpoint &tl,
-                                       const fpoint &br,
+                                       const spoint &tile_tl,
+                                       const spoint &tile_br,
+                                       const spoint &tl,
+                                       const spoint &br,
                                        color color_bl, color color_br,
                                        color color_tl, color color_tr);
 void tile_blit_outline_section_colored(const Tilep &tile,
-                                       const fpoint &tile_tl,
-                                       const fpoint &tile_br,
-                                       const fpoint &tl,
-                                       const fpoint &br,
+                                       const spoint &tile_tl,
+                                       const spoint &tile_br,
+                                       const spoint &tl,
+                                       const spoint &br,
                                        color color_bl, color color_br,
                                        color color_tl, color color_tr,
                                        float scale);
 void tile_blit_outline_section_colored(uint16_t index,
-                                       const fpoint &tile_tl,
-                                       const fpoint &tile_br,
-                                       const fpoint &tl,
-                                       const fpoint &br,
+                                       const spoint &tile_tl,
+                                       const spoint &tile_br,
+                                       const spoint &tl,
+                                       const spoint &br,
                                        color color_bl, color color_br,
                                        color color_tl, color color_tr,
                                        float scale);
 void tile_blit_outline(const Tilep &tile,
-                       const fpoint &tl,
-                       const fpoint &br,
+                       const spoint &tl,
+                       const spoint &br,
                        const color &c);
 void tile_blit_outline(uint16_t index,
-                       const fpoint &tl,
-                       const fpoint &br,
+                       const spoint &tl,
+                       const spoint &br,
                        const color &c);
 void tile_blit_outline_section(uint16_t index,
-                               const fpoint &tile_tl,
-                               const fpoint &tile_br,
-                               const fpoint &tl,
-                               const fpoint &br);
+                               const spoint &tile_tl,
+                               const spoint &tile_br,
+                               const spoint &tl,
+                               const spoint &br);
 void tile_blit_outline_section(const Tilep &tile,
-                               const fpoint &tile_tl,
-                               const fpoint &tile_br,
-                               const fpoint &tl,
-                               const fpoint &br);
+                               const spoint &tile_tl,
+                               const spoint &tile_br,
+                               const spoint &tl,
+                               const spoint &br);
 void tile_blit_shadow(const Tpp &tp,
                       const Tilep &tile,
-                      const fpoint &tl,
-                      const fpoint &br);
+                      const spoint &tl,
+                      const spoint &br);
 void tile_blit_shadow(const Tpp &tp,
                       uint16_t index,
-                      const fpoint &tl,
-                      const fpoint &br);
+                      const spoint &tl,
+                      const spoint &br);
 void tile_blit_shadow_section(const Tpp &tp,
                               const Tilep &tile,
-                              const fpoint &tile_tl,
-                              const fpoint &tile_br,
-                              const fpoint &tl,
-                              const fpoint &br);
+                              const spoint &tile_tl,
+                              const spoint &tile_br,
+                              const spoint &tl,
+                              const spoint &br);
 void tile_blit_shadow_section(const Tpp &tp,
                               uint16_t index,
-                              const fpoint &tile_tl,
-                              const fpoint &tile_br,
-                              const fpoint &tl,
-                              const fpoint &br);
-void tile_blit_at(const Tilep &tile, const fpoint tl, const fpoint br);
-void tile_blit_at(uint16_t index, const fpoint tl, const fpoint br);
+                              const spoint &tile_tl,
+                              const spoint &tile_br,
+                              const spoint &tl,
+                              const spoint &br);
+void tile_blit_at(const Tilep &tile, const spoint tl, const spoint br);
+void tile_blit_at(uint16_t index, const spoint tl, const spoint br);
 void tile_blit(const Tilep &tile, const point at);
 void tile_blit(uint16_t index, const point at);
 

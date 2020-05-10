@@ -230,17 +230,17 @@ void Light::calculate (int last)
 
 void Light::render_triangle_fans (int last, int count)
 {
-    fpoint blit_tl, blit_br;
+    spoint blit_tl, blit_br;
     Tilep tile = {};
     if (!owner->get_pre_effect_map_offset_coords(blit_tl, blit_br, tile, 
                                                  false)) {
         return;
     }
 
-    fpoint sz = blit_tl - blit_br;
+    spoint sz = blit_tl - blit_br;
     if (sz.x < 0) { sz.x = -sz.x; }
     if (sz.y < 0) { sz.y = -sz.x; }
-    fpoint light_pos = (blit_tl + blit_br) / 2;
+    spoint light_pos = (blit_tl + blit_br) / 2;
     float tilew = game->config.tile_pix_width;
     float tileh = game->config.tile_pix_height;
     light_pos.x += offset.x * tilew;

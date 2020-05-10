@@ -748,7 +748,7 @@ Tilep string2tile (std::wstring &s, int *len)
 //
 // Blits a whole tile.
 //
-void tile_blit_at (const Tilep &tile, fpoint tl, fpoint br)
+void tile_blit_at (const Tilep &tile, spoint tl, spoint br)
 {
     blit(tile->gl_binding(),
         tile->x1, tile->y2, tile->x2, tile->y1, tl.x, tl.y, br.x, br.y);
@@ -759,8 +759,8 @@ void tile_blit_at (const Tilep &tile, fpoint tl, fpoint br)
 //
 void tile_blit_colored_fat (Tpp tp,
                             Tilep tile,
-                            fpoint tl,
-                            fpoint br,
+                            spoint tl,
+                            spoint br,
                             color color_tl,
                             color color_tr,
                             color color_bl,
@@ -803,8 +803,8 @@ void tile_blit_colored_fat (Tpp tp,
 }
 
 void tile_blit_colored (Tilep tile,
-                        fpoint tl,
-                        fpoint br,
+                        spoint tl,
+                        spoint br,
                         color color_tl,
                         color color_tr,
                         color color_bl,

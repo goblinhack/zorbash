@@ -11,7 +11,7 @@
 #include "my_level.h"
 #include "my_gl.h"
 
-void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
+void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
 {_
     double dw = game->config.one_pixel_width * 1;
     double dh = game->config.one_pixel_height * 1;
@@ -27,32 +27,32 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->top1_tile && !level->is_wall(x, y - 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit(tiles->top1_tile, tl2, br2);
     }
 
     if (tiles->bot1_tile && !level->is_wall(x, y + 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.y += dh;
         br2.y += dh;
         tile_blit(tiles->bot1_tile, tl2, br2);
     }
 
     if (tiles->left1_tile && !level->is_wall(x - 1, y)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tile_blit(tiles->left1_tile, tl2, br2);
     }
 
     if (tiles->right1_tile && !level->is_wall(x + 1, y)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
         tile_blit(tiles->right1_tile, tl2, br2);
@@ -67,8 +67,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         !level->is_wall(x - 1, y - 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y - 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tl2.y -= dh;
@@ -85,8 +85,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         !level->is_wall(x + 1, y - 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y - 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
         tl2.y -= dh;
@@ -103,8 +103,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         !level->is_wall(x - 1, y + 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y + 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tl2.y += dh;
@@ -121,8 +121,8 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         !level->is_wall(x + 1, y + 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y + 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x += dw;
         br2.x += dw;
         tl2.y += dh;
@@ -131,7 +131,7 @@ void Thing::blit_wall_cladding (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 }
 
-void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
+void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
 {_
     double dw = game->config.one_pixel_width * 1;
     double dh = game->config.one_pixel_height * 1;
@@ -149,8 +149,8 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->top2_tile && !level->is_wall(x, y - 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit(tiles->top2_tile, tl2, br2);
@@ -158,16 +158,16 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 
     if (tiles->bot2_tile && !level->is_wall(x, y + 1) &&
                             level->is_wall(x - 1, y)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.y += th;
         br2.y += th;
         tile_blit(tiles->bot2_tile, tl2, br2);
     }
 
     if (tiles->left2_tile && !level->is_wall(x - 1, y)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tile_blit(tiles->left2_tile, tl2, br2);
@@ -175,8 +175,8 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 
     if (tiles->right2_tile && !level->is_wall(x + 1, y) &&
                                level->is_wall(x, y - 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x += tw;
         br2.x += tw;
         tile_blit(tiles->right2_tile, tl2, br2);
@@ -191,8 +191,8 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         !level->is_wall(x - 1, y - 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y - 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tl2.y -= dh;
@@ -209,8 +209,8 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         !level->is_wall(x + 1, y - 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y - 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.x += tw;
         br2.x += tw;
         tile_blit(tiles->tr2_tile, tl2, br2);
@@ -225,8 +225,8 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         !level->is_wall(x - 1, y + 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y + 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.y += th;
         br2.y += th;
         tile_blit(tiles->bl2_tile, tl2, br2);
@@ -241,8 +241,8 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
         !level->is_wall(x + 1, y + 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y + 1)) {
-        fpoint tl2 = tl;
-        fpoint br2 = br;
+        spoint tl2 = tl;
+        spoint br2 = br;
         tl2.y += th;
         br2.y += th;
         tl2.x += tw;
@@ -252,13 +252,13 @@ void Thing::blit_wall_shadow (fpoint &tl, fpoint &br, const ThingTiles *tiles)
 }
 
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                                          const fpoint &blit_tl,
-                                          const fpoint &blit_br)
+                                          const spoint &blit_tl,
+                                          const spoint &blit_br)
 {_
-    fpoint shadow_bl(blit_tl.x, blit_br.y);
-    fpoint shadow_br(blit_br.x, blit_br.y);
-    fpoint shadow_tl = shadow_bl;
-    fpoint shadow_tr = shadow_br;
+    spoint shadow_bl(blit_tl.x, blit_br.y);
+    spoint shadow_br(blit_br.x, blit_br.y);
+    spoint shadow_tl = shadow_bl;
+    spoint shadow_tr = shadow_br;
 
     double dx = 1.0;
     double dy = 1.0;
@@ -332,37 +332,15 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     c.a = 150;
     glcolor(c);
     tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
-
-    c.a = 50;
-    glcolor(c);
-#if 0
-    fpoint faded_shadow_tl;
-    fpoint faded_shadow_tr;
-
-    faded_shadow_tl.x = shadow_tl.x + 0.07 * dx;
-    faded_shadow_tr.x = shadow_tr.x + 0.07 * dx;
-    faded_shadow_tl.y = shadow_tl.y + 0.02 * dy;
-    faded_shadow_tr.y = shadow_tr.y + 0.02 * dy;
-    ::blit(tile->gl_binding(),
-           shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
-
-    faded_shadow_tl.x = shadow_tl.x + 0.03 * dx;
-    faded_shadow_tr.x = shadow_tr.x + 0.03 * dx;
-    faded_shadow_tl.y = shadow_tl.y + 0.01 * dy;
-    faded_shadow_tr.y = shadow_tr.y + 0.01 * dy;
-    ::blit(tile->gl_binding(),
-           shadow_bl, shadow_br, faded_shadow_tl, faded_shadow_tr);
-#endif
-
     glcolor(WHITE);
 }
 
 void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                                      const fpoint &blit_tl,
-                                      const fpoint &blit_br)
+                                      const spoint &blit_tl,
+                                      const spoint &blit_br)
 {_
-    fpoint shadow_tl = blit_tl;
-    fpoint shadow_br = blit_br;
+    spoint shadow_tl = blit_tl;
+    spoint shadow_br = blit_br;
 
     float dx = game->config.one_pixel_width;
     float dy = game->config.one_pixel_width;
@@ -386,7 +364,7 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 }
 
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
-                         const fpoint &blit_tl, const fpoint &blit_br)
+                         const spoint &blit_tl, const spoint &blit_br)
 {_
     if (unlikely(!game->config.gfx_lights)) {
         return;
@@ -467,7 +445,7 @@ static int blit_msg_strlen (std::string const& text)
 }
 
 void Thing::blit_text (std::string const& text,
-                       fpoint& blit_tl, fpoint& blit_br)
+                       spoint& blit_tl, spoint& blit_br)
 {_
     Tilep tile;
     auto text_iter = text.begin();
@@ -531,10 +509,10 @@ void Thing::blit_text (std::string const& text,
     }
 }
 
-bool Thing::get_coords (fpoint &blit_tl,
-                        fpoint &blit_br,
-                        fpoint &pre_effect_blit_tl,
-                        fpoint &pre_effect_blit_br,
+bool Thing::get_coords (spoint &blit_tl,
+                        spoint &blit_br,
+                        spoint &pre_effect_blit_tl,
+                        spoint &pre_effect_blit_br,
                         Tilep &tile,
                         bool reflection)
 {_
@@ -735,78 +713,29 @@ bool Thing::get_coords (fpoint &blit_tl,
 
         set_submerged_offset(0);
 
-        fpoint sub_tile_tl(0, 0);
-        fpoint sub_tile_br(1, 1);
-
-        if ((map_loc.y < MAP_HEIGHT - 1) &&
-             level->is_chasm((int)map_loc.x, (int)map_loc.y + 1)) {
-        } else if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
-#if 0
-            const auto pct_visible_above_surface = 0.5;
-            if (owner) {
-                auto offset = owner->get_submerged_offset();
-                blit_br.y += offset;
-                blit_tl.y += offset;
-                sub_tile_br = fpoint(1, pct_visible_above_surface);
-                blit_br.y -=
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-            } else {
-                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset =
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                set_submerged_offset(offset);
-                blit_tl.y += offset;
-            }
-#endif
+        if (level->is_deep_water((int)map_loc.x, (int)map_loc.y)) {
             is_in_water = true;
+            set_submerged_offset(8);
         } else if (level->is_lava((int)map_loc.x, (int)map_loc.y)) {
-            const auto pct_visible_above_surface = 0.5;
-            if (owner) {
-                auto offset = owner->get_submerged_offset();
-                blit_br.y += offset;
-                blit_tl.y += offset;
-                sub_tile_br = fpoint(1, pct_visible_above_surface);
-                blit_br.y -=
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-            } else {
-                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset =
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                set_submerged_offset(offset);
-                blit_tl.y += offset;
-            }
-            is_in_water = true;
             is_in_lava = true;
+            set_submerged_offset(TILE_HEIGHT / 2);
         } else if (level->is_water((int)map_loc.x, (int)map_loc.y)) {
-#if 0
-            if (owner) {
-                auto offset = owner->get_submerged_offset();
-                blit_br.y += offset;
-                blit_tl.y += offset;
-            } else {
-                const auto pct_visible_above_surface = 0.1;
-                sub_tile_br = fpoint(1, 1.0 - pct_visible_above_surface);
-                auto offset =
-                  (blit_br.y - blit_tl.y) * pct_visible_above_surface;
-                set_submerged_offset(offset);
-                blit_tl.y += offset;
-            }
-#endif
+            set_submerged_offset(4);
             is_in_water = true;
         }
     }
 
-    tl = blit_tl;
-    br = blit_br;
+    this->blit_tl = blit_tl;
+    this->blit_br = blit_br;
 
     return (blit);
 }
 
-bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br,
+bool Thing::get_map_offset_coords (spoint &blit_tl, spoint &blit_br,
                                    Tilep &tile, bool reflection)
 {_
-    fpoint pre_effect_blit_tl;
-    fpoint pre_effect_blit_br;
+    spoint pre_effect_blit_tl;
+    spoint pre_effect_blit_br;
 
     auto blit = get_coords(blit_tl, blit_br,
                            pre_effect_blit_tl,
@@ -823,13 +752,13 @@ bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br,
     return (blit);
 }
 
-bool Thing::get_pre_effect_map_offset_coords (fpoint &blit_tl,
-                                              fpoint &blit_br,
+bool Thing::get_pre_effect_map_offset_coords (spoint &blit_tl,
+                                              spoint &blit_br,
                                               Tilep &tile,
                                               bool reflection)
 {_
-    fpoint pre_effect_blit_tl;
-    fpoint pre_effect_blit_br;
+    spoint pre_effect_blit_tl;
+    spoint pre_effect_blit_br;
 
     auto blit = get_coords(blit_tl, blit_br,
                            pre_effect_blit_tl,
@@ -850,8 +779,8 @@ bool Thing::get_pre_effect_map_offset_coords (fpoint &blit_tl,
     return (blit);
 }
 
-void Thing::blit_internal (fpoint &blit_tl,
-                           fpoint &blit_br,
+void Thing::blit_internal (spoint &blit_tl,
+                           spoint &blit_br,
                            const Tilep tile,
                            const color &c,
                            bool reflection)
@@ -882,21 +811,34 @@ void Thing::blit_internal (fpoint &blit_tl,
         glcolor(c);
     }
 
+    glcolor(c);
     if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
-        glcolor(c);
         if (is_in_water) {
-#if 1
-            float above_water = 0.3;
-            blit_tl.y += TILE_HEIGHT * (1.0 - above_water);
-            fpoint br(blit_br.x, blit_tl.y + (TILE_HEIGHT * above_water));
-            tile_blit_outline_section(
-              tile, fpoint(0,0), fpoint(1,above_water), blit_tl, br);
-#endif
+            blit_flush();
+
+            auto belowwater = get_submerged_offset();
+            auto abovewater = TILE_HEIGHT - belowwater;
+            auto y = blit_br.y;
+            auto owner = owner_get();
+            if (owner && owner->is_in_water) {
+                y = owner->blit_br.y;
+            }
+            glScissor(0, game->config.inner_pix_height - y,
+                      game->config.inner_pix_width, abovewater);
+            glEnable(GL_SCISSOR_TEST);
+            glTranslatef(0, belowwater, 0);
+            blit_init();
+            tile_blit_outline(tile, blit_tl, blit_br, c);
+            blit_flush();
+            glTranslatef(0, -belowwater, 0);
+            glDisable(GL_SCISSOR_TEST);
+
+            blit_init();
+
         } else {
             tile_blit_outline(tile, blit_tl, blit_br, c);
         }
     } else {
-        glcolor(c);
         tile_blit(tile, blit_tl, blit_br);
     }
 
@@ -914,7 +856,7 @@ void Thing::blit_internal (fpoint &blit_tl,
 
 void Thing::blit (void)
 {_
-    fpoint blit_tl, blit_br;
+    spoint blit_tl, blit_br;
     Tilep tile = {};
 
     if (!get_map_offset_coords(blit_tl, blit_br, tile, false)) {
@@ -926,7 +868,7 @@ void Thing::blit (void)
 
 void Thing::blit_upside_down (void)
 {_
-    fpoint blit_tl, blit_br;
+    spoint blit_tl, blit_br;
     Tilep tile = {};
     auto tpp = tp();
 

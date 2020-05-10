@@ -870,7 +870,7 @@ void Thing::set_msg (std::string v)
 ////////////////////////////////////////////////////////////////////////////
 // submerged_offset
 ////////////////////////////////////////////////////////////////////////////
-float Thing::get_submerged_offset (void)
+int Thing::get_submerged_offset (void)
 {_
     if (monstp) {
         verify(monstp);
@@ -880,7 +880,7 @@ float Thing::get_submerged_offset (void)
     }
 }
 
-void Thing::set_submerged_offset (float v)
+void Thing::set_submerged_offset (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
