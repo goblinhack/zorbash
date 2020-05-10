@@ -788,8 +788,11 @@ bool Thing::get_pre_effect_map_offset_coords (fpoint &blit_tl,
     return (blit);
 }
 
-void Thing::blit_internal (fpoint &blit_tl, fpoint &blit_br, 
-                           const Tilep tile, const color &c)
+void Thing::blit_internal (fpoint &blit_tl,
+                           fpoint &blit_br,
+                           const Tilep tile,
+                           const color &c,
+                           bool reflection)
 {_
     auto tpp = tp();
     is_in_lava = false;
@@ -829,7 +832,9 @@ void Thing::blit_internal (fpoint &blit_tl, fpoint &blit_br,
     glcolor(WHITE);
     get_tiles();
     if (is_wall()) {
-        blit_wall_shadow(blit_tl, blit_br, &tiles);
+        if (!reflection) {
+            blit_wall_shadow(blit_tl, blit_br, &tiles);
+        }
         blit_wall_cladding(blit_tl, blit_br, &tiles);
     }
 
@@ -845,7 +850,7 @@ void Thing::blit (void)
         return;
     }
 
-    blit_internal(blit_tl, blit_br, tile, WHITE);
+    blit_internal(blit_tl, blit_br, tile, WHITE, false);
 }
 
 void Thing::blit_upside_down (void)
@@ -864,5 +869,5 @@ void Thing::blit_upside_down (void)
 
     const color reflection = {255,255,255,200};
     glcolor(reflection);
-    blit_internal(blit_tl, blit_br, tile, reflection);
+    blit_internal(blit_tl, blit_br, tile, reflection, true);
 }
