@@ -268,16 +268,12 @@ void tile_blit_outline_section_colored(uint16_t index,
                                        float scale);
 void tile_blit_outline(const Tilep &tile,
                        const fpoint &tl,
-                       const fpoint &br);
+                       const fpoint &br,
+                       const color &c);
 void tile_blit_outline(uint16_t index,
                        const fpoint &tl,
-                       const fpoint &br);
-void tile_blit_outline(const Tilep &tile,
-                       const fpoint &tl,
-                       const fpoint &br);
-void tile_blit_outline(uint16_t index,
-                       const fpoint &tl,
-                       const fpoint &br);
+                       const fpoint &br,
+                       const color &c);
 void tile_blit_outline_section(uint16_t index,
                                const fpoint &tile_tl,
                                const fpoint &tile_br,

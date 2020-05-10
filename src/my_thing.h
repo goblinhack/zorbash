@@ -781,6 +781,8 @@ public:
     void animate();
     void attach(void);
     void blit();
+    void blit_upside_down();
+    void blit_internal(fpoint &blit_tl, fpoint &blit_br, const Tilep tile, const color &c);
     void blit_text(std::string const&, fpoint &tl, fpoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const fpoint &tl, const fpoint &br);

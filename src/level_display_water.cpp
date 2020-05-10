@@ -168,11 +168,39 @@ void Level::display_water (int fbo,
     }
     blit_flush();
 
+#if 1
+    blit_init();
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
+        for (auto y = miny; y < maxy; y++) {
+            for (auto x = minx; x < maxx; x++) {
+                if (g_render_black_and_white) {
+                    if (!is_visited(x, y)) {
+                        continue;
+                    }
+                }
+                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                    if (g_render_black_and_white) {
+                        if (t->is_monst() ||
+                            t->owner_get() ||
+                            t->get_light_count()) {
+                            continue;
+                        }
+                    }
+                    t->blit_upside_down();
+                } FOR_ALL_THINGS_END()
+            }
+        }
+    }
+    blit_flush();
+#endif
+
     /////////////////////////////////////////////////////////////////////
     // Merge the mask and tiles
     /////////////////////////////////////////////////////////////////////
     blit_fbo_bind(FBO_MASK3);
     glClear(GL_COLOR_BUFFER_BIT);
+    glcolor(WHITE);
     blit_fbo(FBO_MASK1);
     glBlendFunc(GL_DST_ALPHA, GL_ZERO);
     blit_fbo(FBO_MASK2);
@@ -210,61 +238,4 @@ void Level::display_water (int fbo,
     blit_fbo_bind(fbo);
     blit_fbo(FBO_MASK4);
     blit_fbo(FBO_MASK3);
-
-#if 0
-    //
-    // Blit the combined water to the main buffer.
-    //
-    glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
-    blit_fbo_bind(FBO_MASK1);
-    blit_fbo(FBO_MASK1);
-
-    //
-    // Add reflections
-    //
-    blit_init();
-    blit_fbo_bind(FBO_REFLECTION);
-    glClear(GL_COLOR_BUFFER_BIT);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    for (auto y = miny; y < maxy; y++) {
-        for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
-            for (auto x = minx; x < maxx; x++) {
-                if (unlikely(game->config.gfx_show_hidden)) {
-                    if (!level->is_dungeon(x, y)) {
-                        continue;
-                    }
-                }
-                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                    t->blit_upside_down(offset_x, offset_y, x, y);
-                } FOR_ALL_THINGS_AT_DEPTH_END()
-            }
-        }
-    }
-    blit_flush();
-
-    //
-    // Blend the mask of the water with the above inverted tiles
-    //
-    glBlendFunc(GL_DST_COLOR, GL_ZERO);
-    blit_fbo(FBO_LIGHT_MERGED);
-    glEnable(GL_COLOR_LOGIC_OP);
-    glLogicOp(GL_AND_INVERTED);
-    glDisable(GL_COLOR_LOGIC_OP);
-
-    //
-    // Finally blend the reflection onto the main buffer.
-    //
-    blit_fbo_bind(FBO_MAIN);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    color c = CYAN;
-    if (thing_map_black_and_white) {
-        c = GREY80;
-    }
-    c.a = 180;
-    glcolor(c);
-    blit_fbo(FBO_REFLECTION);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(WHITE);
-#endif
 }

@@ -1437,7 +1437,8 @@ void gl_ext_init (void)
 //
 // Blits a whole tile. Y co-ords are inverted.
 //
-void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br)
+void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br,
+                        const color &c)
 {
     double x1, x2, y1, y2;
 
@@ -1450,10 +1451,8 @@ void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br)
     y1 = tile->y1;
     y2 = tile->y2;
 
-    auto last_color = gl_last_color;
-    color c = BLACK;
-    c.a = last_color.a / 2;
-    glcolor(c);
+    color outline = {50,50,50,200};
+    glcolor(outline);
 
     const double dx = game->config.one_pixel_width;
     const double dy = game->config.one_pixel_height;
@@ -1475,14 +1474,14 @@ void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br)
     blit(tile->gl_binding(), x1, y2, x2, y1,
          tl.x, br.y - dy, br.x, tl.y - dy);
 
-    glcolor(last_color);
+    glcolor(c);
     blit(tile->gl_binding(), x1, y2, x2, y1, tl.x, br.y, br.x, tl.y);
-    glcolor(WHITE);
 }
 
-void tile_blit_outline (uint16_t index, const fpoint &tl, const fpoint &br)
+void tile_blit_outline (uint16_t index, const fpoint &tl, const fpoint &br,
+                        const color &c)
 {
-    tile_blit_outline(tile_index_to_tile(index), tl, br);
+    tile_blit_outline(tile_index_to_tile(index), tl, br, c);
 }
 
 //
