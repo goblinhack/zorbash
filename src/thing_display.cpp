@@ -534,8 +534,9 @@ void Thing::blit_text (std::string const& text,
 bool Thing::get_coords (fpoint &blit_tl,
                         fpoint &blit_br,
                         fpoint &pre_effect_blit_tl,
-                        fpoint &pre_effect_blit_br, 
-                        Tilep &tile)
+                        fpoint &pre_effect_blit_br,
+                        Tilep &tile,
+                        bool reflection)
 {_
     fpoint mid_at = get_interpolated_mid_at();
     int x = (int)mid_at.x;
@@ -703,8 +704,13 @@ bool Thing::get_coords (fpoint &blit_tl,
     } else if (fadeup < 0) {
         blit = false;
     } else {
-        blit_tl.y -= fadeup;
-        blit_br.y -= fadeup;
+        if (reflection) {
+            blit_tl.y += fadeup;
+            blit_br.y += fadeup;
+        } else {
+            blit_tl.y -= fadeup;
+            blit_br.y -= fadeup;
+        }
     }
 
     //
@@ -743,7 +749,7 @@ bool Thing::get_coords (fpoint &blit_tl,
 }
 
 bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br,
-                                   Tilep &tile)
+                                   Tilep &tile, bool reflection)
 {_
     fpoint pre_effect_blit_tl;
     fpoint pre_effect_blit_br;
@@ -751,7 +757,7 @@ bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br,
     auto blit = get_coords(blit_tl, blit_br,
                            pre_effect_blit_tl,
                            pre_effect_blit_br,
-                           tile);
+                           tile, reflection);
 
     float dx = - level->pixel_map_at.x;
     float dy = - level->pixel_map_at.y;
@@ -765,7 +771,8 @@ bool Thing::get_map_offset_coords (fpoint &blit_tl, fpoint &blit_br,
 
 bool Thing::get_pre_effect_map_offset_coords (fpoint &blit_tl,
                                               fpoint &blit_br,
-                                              Tilep &tile)
+                                              Tilep &tile,
+                                              bool reflection)
 {_
     fpoint pre_effect_blit_tl;
     fpoint pre_effect_blit_br;
@@ -773,7 +780,8 @@ bool Thing::get_pre_effect_map_offset_coords (fpoint &blit_tl,
     auto blit = get_coords(blit_tl, blit_br,
                            pre_effect_blit_tl,
                            pre_effect_blit_br,
-                           tile);
+                           tile,
+                           false);
 
     float dx = - level->pixel_map_at.x;
     float dy = - level->pixel_map_at.y;
@@ -846,7 +854,7 @@ void Thing::blit (void)
     fpoint blit_tl, blit_br;
     Tilep tile = {};
 
-    if (!get_map_offset_coords(blit_tl, blit_br, tile)) {
+    if (!get_map_offset_coords(blit_tl, blit_br, tile, false)) {
         return;
     }
 
@@ -857,15 +865,27 @@ void Thing::blit_upside_down (void)
 {_
     fpoint blit_tl, blit_br;
     Tilep tile = {};
+    auto tpp = tp();
 
-    if (!get_map_offset_coords(blit_tl, blit_br, tile)) {
+    if (!get_map_offset_coords(blit_tl, blit_br, tile, true)) {
         return;
     }
 
     auto diff = blit_br.y - blit_tl.y;
-    blit_tl.y += diff;
-    blit_br.y += diff;
     std::swap(blit_tl.y, blit_br.y);
+
+    if (tile && tile_get_height(tile) != TILE_HEIGHT) {
+        if (tp_gfx_oversized_but_sitting_on_the_ground(tpp)) {
+            blit_br.y += diff;
+            blit_tl.y += diff;
+        } else {
+            blit_br.y += TILE_HEIGHT;
+            blit_tl.y += TILE_HEIGHT;
+        }
+    } else {
+        blit_br.y += diff;
+        blit_tl.y += diff;
+    }
 
     const color reflection = {255,255,255,200};
     glcolor(reflection);
