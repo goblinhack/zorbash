@@ -13,7 +13,7 @@
 
 void Level::scroll_map (void)
 {_
-    const float bigstep = 4.0;
+    const float bigstep = 6.0;
     const float medstep = 2.0 / TILE_WIDTH;
     const float smallstep = 1.0 / TILE_WIDTH;
 

@@ -1451,7 +1451,7 @@ void tile_blit_outline (const Tilep &tile, const fpoint &tl, const fpoint &br,
     y1 = tile->y1;
     y2 = tile->y2;
 
-    color outline = {50,50,50,200};
+    color outline = {0,0,0,150};
     glcolor(outline);
 
     const double dx = game->config.one_pixel_width;
