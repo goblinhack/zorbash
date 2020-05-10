@@ -168,7 +168,9 @@ void Level::display_water (int fbo,
     }
     blit_flush();
 
-#if 1
+    /////////////////////////////////////////////////////////////////////
+    // Add reflections
+    /////////////////////////////////////////////////////////////////////
     blit_init();
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
@@ -178,6 +180,9 @@ void Level::display_water (int fbo,
                     if (!is_visited(x, y)) {
                         continue;
                     }
+                }
+                if (likely(!get(tile_map, x, y + 1))) {
+                    continue;
                 }
                 FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                     if (g_render_black_and_white) {
@@ -193,7 +198,6 @@ void Level::display_water (int fbo,
         }
     }
     blit_flush();
-#endif
 
     /////////////////////////////////////////////////////////////////////
     // Merge the mask and tiles
