@@ -44,7 +44,7 @@ public:
     uint16_t            max_light_rays;
     std::vector<Ray>    ray;
     std::vector<float>  cached_gl_cmds;
-    fpoint              cached_light_pos;
+    spoint              cached_light_pos;
 
     color               col;
 

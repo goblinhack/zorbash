@@ -84,8 +84,8 @@ void ascii_init (void)
 //
 // For drawing the mouse cursor.
 //
-static fpoint mouse_tile_tl;
-static fpoint mouse_tile_br;
+static spoint mouse_tile_tl;
+static spoint mouse_tile_br;
 static int mouse_found = false;
 
 static point scissors_tl;
@@ -795,16 +795,16 @@ void ascii_putf (int x, int y, color fg, color bg, std::wstring fmt, ...)
 }
 
 #ifdef ENABLE_ASCII_MOUSE
-static void ascii_display_mouse (fpoint mouse_tile_tl,
-                                 fpoint mouse_tile_br,
+static void ascii_display_mouse (spoint mouse_tile_tl,
+                                 spoint mouse_tile_br,
                                  point mouse_at)
 {_
     glcolor(GREEN);
 
     blit_init();
     tile_blit(tile_find_mand("C97"),
-              fpoint(mouse_tile_tl.x, mouse_tile_tl.y),
-              fpoint(mouse_tile_br.x, mouse_tile_br.y));
+              spoint(mouse_tile_tl.x, mouse_tile_tl.y),
+              spoint(mouse_tile_br.x, mouse_tile_br.y));
     blit_flush();
     //
     // Save where we are at
@@ -974,8 +974,8 @@ static void ascii_blit (void)
 
             const AsciiCell *cell = &getref(cells, x, y);
 
-            fpoint tile_tl;
-            fpoint tile_br;
+            spoint tile_tl;
+            spoint tile_br;
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;
@@ -1045,8 +1045,8 @@ static void ascii_blit (void)
 
             const AsciiCell *cell = &getref(cells, x, y);
 
-            fpoint tile_tl;
-            fpoint tile_br;
+            spoint tile_tl;
+            spoint tile_br;
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;
@@ -1061,8 +1061,8 @@ static void ascii_blit (void)
 
                 tile_blit_outline_section_colored(
                    cell->bg2_tile,
-                   fpoint(cell->bg2_tx, cell->bg2_ty),
-                   fpoint(cell->bg2_tx + cell->bg2_dx,
+                   spoint(cell->bg2_tx, cell->bg2_ty),
+                   spoint(cell->bg2_tx + cell->bg2_dx,
                           cell->bg2_ty + cell->bg2_dy),
                    tile_tl, tile_br,
                    bg2_color_tl,
@@ -1090,8 +1090,8 @@ static void ascii_blit (void)
 
             const AsciiCell *cell = &getref(cells, x, y);
 
-            fpoint tile_tl;
-            fpoint tile_br;
+            spoint tile_tl;
+            spoint tile_br;
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;
@@ -1106,8 +1106,8 @@ static void ascii_blit (void)
 
                 tile_blit_section_colored(
                    cell->bg2_tile,
-                   fpoint(cell->bg2_tx, cell->bg2_ty),
-                   fpoint(cell->bg2_tx + cell->bg2_dx,
+                   spoint(cell->bg2_tx, cell->bg2_ty),
+                   spoint(cell->bg2_tx + cell->bg2_dx,
                           cell->bg2_ty + cell->bg2_dy),
                    tile_tl, tile_br,
                    bg2_color_tl,
@@ -1124,8 +1124,8 @@ static void ascii_blit (void)
 
                 tile_blit_section_colored(
                    cell->fg2_tile,
-                   fpoint(cell->fg2_tx, cell->fg2_ty),
-                   fpoint(cell->fg2_tx + cell->fg2_dx,
+                   spoint(cell->fg2_tx, cell->fg2_ty),
+                   spoint(cell->fg2_tx + cell->fg2_dx,
                           cell->fg2_ty + cell->fg2_dy),
                    tile_tl, tile_br,
                    fg2_color_tl,
@@ -1147,8 +1147,8 @@ static void ascii_blit (void)
         for (x = 0; x < ASCII_WIDTH; x++) {
             const AsciiCell *cell = &getref(cells, x, y);
 
-            fpoint tile_tl;
-            fpoint tile_br;
+            spoint tile_tl;
+            spoint tile_br;
 
             tile_tl.x = tile_x;
             tile_tl.y = tile_y;

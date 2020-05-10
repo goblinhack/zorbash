@@ -135,9 +135,9 @@ void game_main_menu_tick (Widp w)
     }
     std::string t = "title" + std::to_string(frame);
     blit_init();
-    tile_blit(tile_find_mand(t.c_str()), 
-              fpoint(0,0), 
-              fpoint(game->config.outer_pix_width,
+    tile_blit(tile_find_mand(t.c_str()),
+              spoint(0,0),
+              spoint(game->config.outer_pix_width,
                      game->config.outer_pix_height));
     blit_flush();
 
