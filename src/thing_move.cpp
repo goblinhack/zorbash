@@ -195,7 +195,7 @@ double Thing::get_fadeup (void)
         (double)(t - get_timestamp_fadeup_begin()) /
         (double)(get_timestamp_fadeup_end() - get_timestamp_fadeup_begin());
 
-    int height = blit_br.y - blit_tl.y;
+    int height = last_blit_br.y - last_blit_tl.y;
 
     alpha = (uint8_t)(255.0 - (250.0 * time_step));
 

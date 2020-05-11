@@ -701,7 +701,9 @@ bool Thing::get_coords (spoint &blit_tl,
 
     if (is_monst() ||
         is_player() ||
-        tp_gfx_is_on_fire_anim(tpp)) {
+        tp_gfx_is_attack_anim(tpp) ||
+        tp_gfx_is_on_fire_anim(tpp) ||
+        tp_gfx_is_weapon_carry_anim(tpp)) {
 
         //
         // Render the weapon and player on the same tile rules
@@ -725,8 +727,8 @@ bool Thing::get_coords (spoint &blit_tl,
         }
     }
 
-    this->blit_tl = blit_tl;
-    this->blit_br = blit_br;
+    last_blit_tl = blit_tl;
+    last_blit_br = blit_br;
 
     return (blit);
 }
@@ -817,14 +819,15 @@ void Thing::blit_internal (spoint &blit_tl,
             blit_flush();
 
             auto belowwater = get_submerged_offset();
-            auto abovewater = TILE_HEIGHT - belowwater;
-            auto y = blit_br.y;
+            auto waterline = blit_br.y;
             auto owner = owner_get();
-            if (owner && owner->is_in_water) {
-                y = owner->blit_br.y;
+            if (owner) {
+                waterline = owner->last_blit_br.y;
             }
-            glScissor(0, game->config.inner_pix_height - y,
-                      game->config.inner_pix_width, abovewater);
+con("water %d me %d",waterline, blit_br.y);
+            glScissor(0, game->config.inner_pix_height - waterline,
+                      game->config.inner_pix_width,
+                      game->config.inner_pix_height);
             glEnable(GL_SCISSOR_TEST);
             glTranslatef(0, belowwater, 0);
             blit_init();

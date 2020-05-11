@@ -16,8 +16,8 @@ void Thing::cursor_hover_over_check (void)
 {
     if (is_cursor_can_hover_over()) {
         if (is_blitted) {
-            spoint tblit_tl = blit_tl;
-            spoint tblit_br = blit_br;
+            spoint tblit_tl = last_blit_tl;
+            spoint tblit_br = last_blit_br;
             int dx = - level->pixel_map_at.x;
             int dy = - level->pixel_map_at.y;
             tblit_tl.x += dx;
