@@ -780,6 +780,8 @@ public:
     bool collision_find_best_target(bool *, bool *);
     void animate();
     void attach(void);
+    uint8_t blit_begin_submerged(void);
+    void blit_end_submerged(uint8_t submerged);
     void blit();
     void blit_upside_down();
     void blit_internal(spoint &blit_tl, spoint &blit_br, const Tilep tile, const color &c, const bool reflection);

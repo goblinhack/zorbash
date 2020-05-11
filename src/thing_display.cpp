@@ -727,9 +727,6 @@ bool Thing::get_coords (spoint &blit_tl,
         }
     }
 
-    last_blit_tl = blit_tl;
-    last_blit_br = blit_br;
-
     return (blit);
 }
 
@@ -750,6 +747,11 @@ bool Thing::get_map_offset_coords (spoint &blit_tl, spoint &blit_br,
     blit_tl.y += dy;
     blit_br.x += dx;
     blit_br.y += dy;
+
+    if (!reflection) {
+        last_blit_tl = blit_tl;
+        last_blit_br = blit_br;
+    }
 
     return (blit);
 }
@@ -781,6 +783,35 @@ bool Thing::get_pre_effect_map_offset_coords (spoint &blit_tl,
     return (blit);
 }
 
+uint8_t Thing::blit_begin_submerged (void)
+{_
+    auto submerged = get_submerged_offset();
+    if (submerged) {
+        blit_flush();
+        auto waterline = last_blit_br.y;
+        auto owner = owner_get();
+        if (owner) {
+            waterline = owner->last_blit_br.y;
+        }
+        glScissor(0, game->config.inner_pix_height - waterline,
+                  game->config.inner_pix_width,
+                  game->config.inner_pix_height);
+        glEnable(GL_SCISSOR_TEST);
+        glTranslatef(0, submerged, 0);
+        blit_init();
+    }
+    return (submerged);
+}
+
+void Thing::blit_end_submerged (uint8_t submerged)
+{_
+    blit_flush();
+    glTranslatef(0, -submerged, 0);
+    glDisable(GL_SCISSOR_TEST);
+
+    blit_init();
+}
+
 void Thing::blit_internal (spoint &blit_tl,
                            spoint &blit_br,
                            const Tilep tile,
@@ -790,13 +821,19 @@ void Thing::blit_internal (spoint &blit_tl,
     auto tpp = tp();
 
     if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
-        blit_shadow(tpp, tile, blit_tl, blit_br);
+        if (auto submerged = blit_begin_submerged()) {
+            blit_shadow(tpp, tile, blit_tl, blit_br);
+            blit_end_submerged(submerged);
+        } else {
+            blit_shadow(tpp, tile, blit_tl, blit_br);
+        }
     }
 
     if (unlikely(is_msg())) {
         blit_text(get_msg(), blit_tl, blit_br);
     }
 
+    glcolor(c);
     if (unlikely(get_on_fire_anim_id())) {
         static uint32_t ts;
         static color c = WHITE;
@@ -813,31 +850,10 @@ void Thing::blit_internal (spoint &blit_tl,
         glcolor(c);
     }
 
-    glcolor(c);
     if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
-        if (is_in_water) {
-            blit_flush();
-
-            auto belowwater = get_submerged_offset();
-            auto waterline = blit_br.y;
-            auto owner = owner_get();
-            if (owner) {
-                waterline = owner->last_blit_br.y;
-            }
-con("water %d me %d",waterline, blit_br.y);
-            glScissor(0, game->config.inner_pix_height - waterline,
-                      game->config.inner_pix_width,
-                      game->config.inner_pix_height);
-            glEnable(GL_SCISSOR_TEST);
-            glTranslatef(0, belowwater, 0);
-            blit_init();
+        if (auto submerged = blit_begin_submerged()) {
             tile_blit_outline(tile, blit_tl, blit_br, c);
-            blit_flush();
-            glTranslatef(0, -belowwater, 0);
-            glDisable(GL_SCISSOR_TEST);
-
-            blit_init();
-
+            blit_end_submerged(submerged);
         } else {
             tile_blit_outline(tile, blit_tl, blit_br, c);
         }
