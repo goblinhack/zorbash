@@ -145,8 +145,8 @@ public:
     spoint      last_attached;
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
-    spoint      blit_tl;             // Last blit coords
-    spoint      blit_br;
+    spoint      last_blit_tl;        // Last blit coords
+    spoint      last_blit_br;
     uint32_t    id;                         // Unique per thing.
     int16_t     tp_id                {-1};  // Common settings
     uint16_t    tile_curr            {};
