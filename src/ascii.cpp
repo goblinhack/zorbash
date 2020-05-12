@@ -1106,8 +1106,8 @@ static void ascii_blit (void)
 
                 tile_blit_section_colored(
                    cell->bg2_tile,
-                   spoint(cell->bg2_tx, cell->bg2_ty),
-                   spoint(cell->bg2_tx + cell->bg2_dx,
+                   fpoint(cell->bg2_tx, cell->bg2_ty),
+                   fpoint(cell->bg2_tx + cell->bg2_dx,
                           cell->bg2_ty + cell->bg2_dy),
                    tile_tl, tile_br,
                    bg2_color_tl,
@@ -1124,8 +1124,8 @@ static void ascii_blit (void)
 
                 tile_blit_section_colored(
                    cell->fg2_tile,
-                   spoint(cell->fg2_tx, cell->fg2_ty),
-                   spoint(cell->fg2_tx + cell->fg2_dx,
+                   fpoint(cell->fg2_tx, cell->fg2_ty),
+                   fpoint(cell->fg2_tx + cell->fg2_dx,
                           cell->fg2_ty + cell->fg2_dy),
                    tile_tl, tile_br,
                    fg2_color_tl,
