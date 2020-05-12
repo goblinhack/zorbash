@@ -822,10 +822,6 @@ uint8_t Thing::blit_begin_reflection_submerged (void)
         if (owner) {
             waterline = owner->last_blit_br.y;
         }
-        glScissor(0, game->config.inner_pix_height - waterline,
-                  game->config.inner_pix_width,
-                  game->config.inner_pix_height);
-        glEnable(GL_SCISSOR_TEST);
         glTranslatef(0, -submerged, 0);
         blit_init();
     }
@@ -836,8 +832,6 @@ void Thing::blit_end_reflection_submerged (uint8_t submerged)
 {_
     blit_flush();
     glTranslatef(0, submerged, 0);
-    glDisable(GL_SCISSOR_TEST);
-
     blit_init();
 }
 
