@@ -812,6 +812,35 @@ void Thing::blit_end_submerged (uint8_t submerged)
     blit_init();
 }
 
+uint8_t Thing::blit_begin_reflection_submerged (void)
+{_
+    auto submerged = get_submerged_offset();
+    if (submerged) {
+        blit_flush();
+        auto waterline = last_blit_br.y;
+        auto owner = owner_get();
+        if (owner) {
+            waterline = owner->last_blit_br.y;
+        }
+        glScissor(0, game->config.inner_pix_height - waterline,
+                  game->config.inner_pix_width,
+                  game->config.inner_pix_height);
+        glEnable(GL_SCISSOR_TEST);
+        glTranslatef(0, -submerged, 0);
+        blit_init();
+    }
+    return (submerged);
+}
+
+void Thing::blit_end_reflection_submerged (uint8_t submerged)
+{_
+    blit_flush();
+    glTranslatef(0, submerged, 0);
+    glDisable(GL_SCISSOR_TEST);
+
+    blit_init();
+}
+
 void Thing::blit_internal (spoint &blit_tl,
                            spoint &blit_br,
                            const Tilep tile,
@@ -851,7 +880,14 @@ void Thing::blit_internal (spoint &blit_tl,
     }
 
     if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
-        if (auto submerged = blit_begin_submerged()) {
+        if (reflection) {
+            if (auto submerged = blit_begin_reflection_submerged()) {
+                tile_blit_outline(tile, blit_tl, blit_br, c);
+                blit_end_reflection_submerged(submerged);
+            } else {
+                tile_blit_outline(tile, blit_tl, blit_br, c);
+            }
+        } else if (auto submerged = blit_begin_submerged()) {
             tile_blit_outline(tile, blit_tl, blit_br, c);
             blit_end_submerged(submerged);
         } else {
