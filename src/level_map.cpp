@@ -32,7 +32,7 @@ void Level::update_hazard_map (void)
 
             if (level->is_lava(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
-                    for (auto dy = -2; dy <= 1; dy++) {
+                    for (auto dy = -2; dy <= 2; dy++) {
                         set(lava_tile_map, x+dx, y+dy, true);
                     }
                 }

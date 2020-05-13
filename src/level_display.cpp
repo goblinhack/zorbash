@@ -64,6 +64,7 @@ void Level::display_map_things (int fbo,
 
     display_water(fbo, minx, miny, maxx, maxy);
     display_deep_water(fbo, minx, miny, maxx, maxy);
+    display_lava(fbo, minx, miny, maxx, maxy);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(WHITE);
 

@@ -873,6 +873,23 @@ def init_32x32_deep_water():
         name="32x32_deep_water", width=32, height=32, arr=tiles)
 
 
+def init_32x32_lava():
+    tiles = [
+        "lava1a", "lava2a", "lava3a", "lava4a", "lava5a", "lava6a", "lava7a", "lava8a",
+        "lava1b", "lava2b", "lava3b", "lava4b", "lava5b", "lava6b", "lava7b", "lava8b",
+        "lava1c", "lava2c", "lava3c", "lava4c", "lava5c", "lava6c", "lava7c", "lava8c",
+        "lava1d", "lava2d", "lava3d", "lava4d", "lava5d", "lava6d", "lava7d", "lava8d",
+        "lava1e", "lava2e", "lava3e", "lava4e", "lava5e", "lava6e", "lava7e", "lava8e",
+        "lava1f", "lava2f", "lava3f", "lava4f", "lava5f", "lava6f", "lava7f", "lava8f",
+        "lava1g", "lava2g", "lava3g", "lava4g", "lava5g", "lava6g", "lava7g", "lava8g",
+        "lava1h", "lava2h", "lava3h", "lava4h", "lava5h", "lava6h", "lava7h", "lava8h",
+    ]
+
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/32x32_lava.tga",
+        name="32x32_lava", width=32, height=32, arr=tiles)
+
+
 def init_weapons_tiles():
     tiles = [
             "",
@@ -926,6 +943,7 @@ init_16x16()
 init_16x32()
 init_32x32()
 init_32x32_water()
+init_32x32_lava()
 init_32x32_deep_water()
 init_32x32_surface_effects()
 init_weapons_tiles()
