@@ -211,14 +211,14 @@ public:
                     best.path = path;
                     best.cost = cost;
 #ifdef DEBUG_ASTAR_PATH
-                    for (auto p : path) {
+                    for (const auto& p : path) {
                         set(astar_debug, p.x, p.y, (char)('A' + *path_debug));
                     }
                     (*path_debug)++;
 #endif
                 } else {
 #ifdef DEBUG_ASTAR_PATH
-                    for (auto p : path) {
+                    for (const auto& p : path) {
                         set(astar_debug, p.x, p.y, (char)('a' + *path_debug));
                     }
                     (*path_debug)++;

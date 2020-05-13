@@ -126,7 +126,7 @@ void wid_console_log (std::string s)
     auto d = split(s, chars_per_line);
 
     if (d) {
-        for (auto c : *d) {
+        for (const auto &c : *d) {
             wid_console_log_(string_to_wstring(c));
         }
     }
@@ -142,7 +142,7 @@ void wid_console_log (std::wstring s)
     auto d = split(s, chars_per_line);
 
     if (d) {
-        for (auto c : *d) {
+        for (const auto& c : *d) {
             wid_console_log_(c);
         }
     }

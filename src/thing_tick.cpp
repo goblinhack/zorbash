@@ -155,7 +155,7 @@ void things_tick (void)
     //
     // Active things are generally things that move or have a life span
     //
-    for (auto i : level->all_active_things) {
+    for (auto& i : level->all_active_things) {
         auto t = i.second;
         verify(t);
         if (t->is_monst()) {

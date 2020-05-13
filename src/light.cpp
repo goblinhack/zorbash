@@ -432,7 +432,7 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y) {
-                for (auto l : t->get_light()) {
+                for (auto& l : t->get_light()) {
                     if (level->player && (l->owner == level->player)) {
                         continue;
                     }

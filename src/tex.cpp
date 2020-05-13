@@ -57,10 +57,10 @@ uint8_t tex_init (void)
 
 void tex_fini (void)
 {_
-    for (auto t : textures) {
+    for (auto& t : textures) {
         delete t.second;
     }
-    for (auto t : black_and_white_textures) {
+    for (auto& t : black_and_white_textures) {
         delete t.second;
     }
 }

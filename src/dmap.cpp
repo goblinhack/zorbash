@@ -488,7 +488,7 @@ static std::vector<point> dmap_solve_ (const Dmap *D, const point start,
             return out;
         }
 
-        for (auto d : all_deltas) {
+        for (const auto& d : all_deltas) {
             auto t = at + d;
             auto tx = t.x;
             auto ty = t.y;

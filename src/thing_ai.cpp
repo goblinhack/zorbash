@@ -83,7 +83,7 @@ bool Thing::ai_is_obstacle_for_me (point p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto t : get(level->all_thing_ptrs_at, p.x, p.y)) {
+    for (auto& t : get(level->all_thing_ptrs_at, p.x, p.y)) {
         if (!t) {
             continue;
         }
@@ -295,7 +295,7 @@ void Thing::ai_get_next_hop (void)
     bool least_preferred_set = false;
     bool most_preferred_set = false;
 
-    for (auto goal : goals) {
+    for (auto& goal : goals) {
         auto goal_target = goal.at;
         incr(cell_totals, goal_target.x, goal_target.y, goal.score);
         auto score = get(cell_totals, goal_target.x, goal_target.y);
@@ -322,7 +322,7 @@ void Thing::ai_get_next_hop (void)
     //
     // Scale the goals so they will fit in the dmap.
     //
-    for (auto goal : goals) {
+    for (auto& goal : goals) {
         auto goal_target = goal.at;
         float score = get(cell_totals, goal_target.x, goal_target.y);
 #ifdef DEBUG_AI
@@ -383,7 +383,7 @@ void Thing::ai_get_next_hop (void)
     astar_debug = {};
     int index = 0;
 #endif
-    for (auto goal : goals) {
+    for (auto& goal : goals) {
 #ifdef DEBUG_ASTAR_PATH
         astar_debug = {};
 #endif
@@ -421,7 +421,7 @@ void Thing::ai_get_next_hop (void)
 
 #ifdef DEBUG_ASTAR_PATH
         if (!index) {
-            for (auto p : hops) {
+            for (auto& p : hops) {
                 set(astar_debug, p.x, p.y, '*');
             }
             auto start = point(0, 0);

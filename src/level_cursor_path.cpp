@@ -124,7 +124,7 @@ void Level::cursor_path_draw (point start, point end)
     auto p = dmap_solve_allow_diagonal(&d, start);
     game->cursor_move_path = p;
 
-    for (auto c : p) {
+    for (auto& c : p) {
         thing_new("cursor_path", fpoint(c.x , c.y));
     }
 }

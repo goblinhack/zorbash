@@ -131,7 +131,7 @@ void Thing::delete_light (void)
 {_
     if (monstp) {
         verify(monstp);
-        for (auto l : monstp->light) {
+        for (auto& l : monstp->light) {
             delete l;
         }
     }
