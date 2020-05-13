@@ -967,7 +967,7 @@ void Thing::blit_upside_down (void)
         blit_tl.y += diff;
     }
 
-    const color reflection = {255,255,255,200};
+    const color reflection = {155,155,155,200};
     glcolor(reflection);
     blit_internal(blit_tl, blit_br, tile, reflection, true);
 }
