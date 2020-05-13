@@ -89,6 +89,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_astar.o 		\
     $(OBJDIR)/thing_attach.o 		\
+    $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
@@ -96,15 +97,17 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_dead.o 		\
     $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_enemy.o 		\
+    $(OBJDIR)/thing_fadeup.o 		\
     $(OBJDIR)/thing_health.o 		\
     $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_hunger.o 		\
     $(OBJDIR)/thing_id.o 		\
+    $(OBJDIR)/thing_items.o 		\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
     $(OBJDIR)/thing_log.o 		\
-    $(OBJDIR)/thing_bounce.o 		\
+    $(OBJDIR)/thing_lunge.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_move_dir.o 		\

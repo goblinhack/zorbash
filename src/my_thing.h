@@ -224,8 +224,8 @@ public:
 
     std::vector<Lightp> & get_light(void);
     std::size_t get_light_count(void);
-    void new_light(fpoint at, fpoint offset, double strength, color col = WHITE);
-    void new_light(fpoint at, double strength, color col = WHITE);
+    void new_light(fpoint at, fpoint offset, float strength, color col = WHITE);
+    void new_light(fpoint at, float strength, color col = WHITE);
     void delete_light(void);
 
     void set_lunge_to(fpoint);
@@ -631,9 +631,9 @@ public:
     bool will_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void);
-    double get_bounce(void);
-    double get_fadeup(void);
-    double get_lunge(void);
+    float get_bounce(void);
+    float get_fadeup(void);
+    float get_lunge(void);
     void ai_get_next_hop(void);
     fpoint set_interpolated_mid_at(fpoint);
     fpoint get_interpolated_mid_at(void);
@@ -794,8 +794,8 @@ public:
     void blit_wall_cladding(spoint &tl, spoint &br, const ThingTiles *tiles);
     void blit_wall_shadow(spoint &tl, spoint &br, const ThingTiles *tiles);
     void lunge(fpoint tt);
-    void bounce(double bounce_height, double bounce_fade, timestamp_t ms, int bounce_count);
-    void fadeup(double fadeup_height, double fadeup_fade, timestamp_t ms);
+    void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
+    void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
     void carry(Thingp w);
     void collision_check_do();
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));

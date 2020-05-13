@@ -8,8 +8,8 @@
 #include "my_sprintf.h"
 #include "my_gl.h"
 
-void Thing::bounce (double bounce_height,
-                    double bounce_fade,
+void Thing::bounce (float bounce_height,
+                    float bounce_fade,
                     timestamp_t ms,
                     int bounce_count)
 {
@@ -22,7 +22,7 @@ void Thing::bounce (double bounce_height,
     is_bouncing = true;
 }
 
-double Thing::get_bounce (void)
+float Thing::get_bounce (void)
 {
     if (!is_bouncing) {
         return (0.0);
@@ -37,19 +37,19 @@ double Thing::get_bounce (void)
             bounce(
                 get_bounce_height() * get_bounce_fade(),
                 get_bounce_fade(),
-                (double)(get_timestamp_bounce_end() -
-                         get_timestamp_bounce_begin()) * get_bounce_fade(),
+                (float)(get_timestamp_bounce_end() -
+                        get_timestamp_bounce_begin()) * get_bounce_fade(),
                 get_bounce_count() - 1);
         }
 
         return (0);
     }
 
-    double time_step =
-        (double)(t - get_timestamp_bounce_begin()) /
-        (double)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
+    float time_step =
+        (float)(t - get_timestamp_bounce_begin()) /
+        (float)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
 
-    double height = 1.0;
+    float height = 1.0;
 
     height *= sin(time_step * RAD_180);
     height *= get_bounce_height();

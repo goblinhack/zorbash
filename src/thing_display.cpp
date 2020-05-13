@@ -13,8 +13,8 @@
 
 void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
 {_
-    double dw = game->config.one_pixel_width * 1;
-    double dh = game->config.one_pixel_height * 1;
+    float dw = game->config.one_pixel_width * 1;
+    float dh = game->config.one_pixel_height * 1;
 
     int x = (int) mid_at.x;
     int y = (int) mid_at.y;
@@ -133,10 +133,10 @@ void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
 
 void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
 {_
-    double dw = game->config.one_pixel_width * 1;
-    double dh = game->config.one_pixel_height * 1;
-    double tw = game->config.tile_pix_width;
-    double th = game->config.tile_pix_height;
+    float dw = game->config.one_pixel_width * 1;
+    float dh = game->config.one_pixel_height * 1;
+    float tw = game->config.tile_pix_width;
+    float th = game->config.tile_pix_height;
 
     int x = (int) mid_at.x;
     int y = (int) mid_at.y;
@@ -260,8 +260,8 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     spoint shadow_tl = shadow_bl;
     spoint shadow_tr = shadow_br;
 
-    double dx = 1.0;
-    double dy = 1.0;
+    float dx = 1.0;
+    float dy = 1.0;
     if (level->player) {
         if (get_owner_id() == level->player->id) {
             // use default shadow for carried items
@@ -269,7 +269,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
             fpoint p = level->player->get_interpolated_mid_at();
             fpoint d = get_interpolated_mid_at() -
                              level->player->get_interpolated_mid_at();
-            const double D = 16.0;
+            const float D = 16.0;
             dx = d.x / D;
             dy = d.y / D;
 
@@ -281,7 +281,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         // use default shadow
     }
 
-    double n = 0.0;
+    float n = 0.0;
     if (dy < 0) {
         dy = std::min(-n, dy);
     } else {
@@ -291,7 +291,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     //
     // Max length of shadow
     //
-    double m = 3;
+    float m = 3;
     if (dx < 0) {
         dx = std::max(-m, dx);
     } else {
@@ -312,8 +312,8 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         std::swap(shadow_tl, shadow_tr);
     }
 
-    double height = get_bounce() / 2.0;
-    double fadeup = get_fadeup();
+    float height = get_bounce() / 2.0;
+    float fadeup = get_fadeup();
     if (fadeup < 0) {
         return;
     }
@@ -605,7 +605,7 @@ bool Thing::get_coords (spoint &blit_tl,
     // Put larger tiles on the same y base as small ones.
     //
     if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tpp))) {
-        double y_offset =
+        float y_offset =
             (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
         blit_tl.y -= y_offset;
         blit_br.y -= y_offset;
@@ -637,10 +637,10 @@ bool Thing::get_coords (spoint &blit_tl,
                     is_dir_br()) {
                     std::swap(blit_tl.x, blit_br.x);
                 }
-                double w = blit_br.x - blit_tl.x;
-                double dw = w / flip_steps;
-                double tlx = blit_tl.x;
-                double brx = blit_br.x;
+                float w = blit_br.x - blit_tl.x;
+                float dw = w / flip_steps;
+                float tlx = blit_tl.x;
+                float brx = blit_br.x;
 
                 blit_tl.x = tlx + dw * diff;
                 blit_br.x = brx - dw * diff;
@@ -669,7 +669,7 @@ bool Thing::get_coords (spoint &blit_tl,
     // Boing.
     //
     if (unlikely(is_bouncing)) {
-        double b = get_bounce();
+        float b = get_bounce();
         blit_tl.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
         blit_br.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
     }
@@ -677,7 +677,7 @@ bool Thing::get_coords (spoint &blit_tl,
     //
     // Fading.
     //
-    double fadeup = get_fadeup();
+    float fadeup = get_fadeup();
     if (likely(fadeup == 0)) {
     } else if (fadeup < 0) {
         blit = false;
