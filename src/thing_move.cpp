@@ -140,11 +140,11 @@ void Thing::update_interpolated_position (void)
         update_light();
         is_waiting_to_move = true;
     } else {
-        double t = get_timestamp_move_end() - get_timestamp_move_begin();
-        double dt = time_get_time_ms_cached() - get_timestamp_move_begin();
-        double step = dt / t;
-        double dx = mid_at.x - last_mid_at.x;
-        double dy = mid_at.y - last_mid_at.y;
+        float t = get_timestamp_move_end() - get_timestamp_move_begin();
+        float dt = time_get_time_ms_cached() - get_timestamp_move_begin();
+        float step = dt / t;
+        float dx = mid_at.x - last_mid_at.x;
+        float dy = mid_at.y - last_mid_at.y;
 
         auto x = last_mid_at.x + dx * step;
         auto y = last_mid_at.y + dy * step;
@@ -154,77 +154,6 @@ void Thing::update_interpolated_position (void)
         set_interpolated_mid_at(new_pos);
         attach();
         update_light();
-    }
-}
-
-void Thing::fadeup (double fadeup_height,
-                    double fadeup_fade,
-                    timestamp_t ms)
-{
-    auto t = set_timestamp_fadeup_begin(time_get_time_ms_cached());
-    set_timestamp_fadeup_end(t + ms);
-
-    set_fadeup_height(fadeup_height);
-    set_fadeup_fade(fadeup_fade);
-    is_fadeup = true;
-}
-
-void Thing::lunge (fpoint to)
-{
-    auto t = set_timestamp_lunge_begin(time_get_time_ms_cached());
-    set_timestamp_lunge_end(t + 200);
-    set_lunge_to(to);
-}
-
-double Thing::get_fadeup (void)
-{
-    if (!is_fadeup) {
-        alpha = 255;
-        return (0.0);
-    }
-
-    auto t = time_get_time_ms_cached();
-
-    if (t >= get_timestamp_fadeup_end()) {
-        dead("fadeup finished");
-        alpha = 0;
-        return (-1);
-    }
-
-    double time_step =
-        (double)(t - get_timestamp_fadeup_begin()) /
-        (double)(get_timestamp_fadeup_end() - get_timestamp_fadeup_begin());
-
-    int height = last_blit_br.y - last_blit_tl.y;
-
-    alpha = (uint8_t)(255.0 - (250.0 * time_step));
-
-    height *= sin(time_step * RAD_90);
-    height *= get_fadeup_height();
-
-    return (height);
-}
-
-double Thing::get_lunge (void)
-{
-    if (!get_timestamp_lunge_begin()) {
-        return (0);
-    }
-
-    auto t = time_get_time_ms_cached();
-
-    if (t >= get_timestamp_lunge_end()) {
-        return (0);
-    }
-
-    double time_step =
-        (double)(t - get_timestamp_lunge_begin()) /
-        (double)(get_timestamp_lunge_end() - get_timestamp_lunge_begin());
-
-    if (time_step > 0.5) {
-        return (1.0 - time_step);
-    } else {
-        return time_step;
     }
 }
 
@@ -427,53 +356,4 @@ void Thing::move_to_immediately_delta (fpoint delta)
 {
     move_set_dir_from_delta(delta);
     update_pos(mid_at + delta, true);
-}
-
-void Thing::move_carried_items (void)
-{
-    //
-    // Light source follows the thing.
-    //
-    update_light();
-
-    //
-    // Weapons follow also.
-    //
-    if (get_weapon_id_carry_anim()) {
-        auto w = thing_find(get_weapon_id_carry_anim());
-        if (w) {
-            w->move_to(mid_at);
-            w->dir = dir;
-        }
-    }
-
-    if (get_weapon_id_use_anim()) {
-        auto w = thing_find(get_weapon_id_use_anim());
-        if (w) {
-            w->move_to(mid_at);
-            w->dir = dir;
-        }
-    }
-
-    //
-    // If something moves on the water, make a ripple
-    //
-    if (is_monst() || is_player()) {
-        if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
-            fpoint at(mid_at.x, mid_at.y);
-            if (random_range(0, 1000) > 500) {
-                thing_new(tp_name(tp_random_ripple()), at);
-            }
-        }
-    }
-
-    auto on_fire_anim_id = get_on_fire_anim_id();
-    if (on_fire_anim_id) {
-        auto w = thing_find(on_fire_anim_id);
-        if (w) {
-            w->move_to(mid_at);
-            w->dir = dir;
-        } else {
-        }
-    }
 }

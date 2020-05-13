@@ -113,7 +113,7 @@ std::size_t Thing::get_light_count (void)
     }
 }
 
-void Thing::new_light (fpoint at, fpoint offset, double strength, color col)
+void Thing::new_light (fpoint at, fpoint offset, float strength, color col)
 {_
     new_monst();
     auto l = light_new(this, at, offset, strength, col);
@@ -122,7 +122,7 @@ void Thing::new_light (fpoint at, fpoint offset, double strength, color col)
     monstp->light_col = col;
 }
 
-void Thing::new_light (fpoint at, double strength, color col)
+void Thing::new_light (fpoint at, float strength, color col)
 {_
     new_light(at, fpoint(0, 0), strength, col);
 }
