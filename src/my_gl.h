@@ -104,10 +104,12 @@ void gl_blitline(float tlx, float tly, float brx, float bry);
 //
 #define gl_push_rgba(p, r, g, b, a) \
 { \
-    *p++ = r; \
-    *p++ = g; \
-    *p++ = b; \
-    *p++ = a; \
+    auto c = (GLubyte*) p; \
+    *c++ = r; \
+    *c++ = g; \
+    *c++ = b; \
+    *c++ = a; \
+    p = (GLfloat*)c; \
 } \
 
 #define Vertex2f(x, y)                          \
@@ -370,10 +372,10 @@ gl_push (float **P,
          fpoint tr,
          fpoint bl,
          fpoint br,
-         float r1, float g1, float b1, float a1,
-         float r2, float g2, float b2, float a2,
-         float r3, float g3, float b3, float a3,
-         float r4, float g4, float b4, float a4)
+         uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1,
+         uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2,
+         uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
+         uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
 {
     float *p = *P;
 
@@ -436,10 +438,10 @@ gl_push (float **P,
          spoint tr,
          spoint bl,
          spoint br,
-         float r1, float g1, float b1, float a1,
-         float r2, float g2, float b2, float a2,
-         float r3, float g3, float b3, float a3,
-         float r4, float g4, float b4, float a4)
+         uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1,
+         uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2,
+         uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
+         uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
 {
     float *p = *P;
 
@@ -502,10 +504,10 @@ gl_push (float **P,
          float top,
          float right,
          float bottom,
-         float r1, float g1, float b1, float a1,
-         float r2, float g2, float b2, float a2,
-         float r3, float g3, float b3, float a3,
-         float r4, float g4, float b4, float a4)
+         uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1,
+         uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2,
+         uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
+         uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
 {
     fpoint tl(left, top);
     fpoint tr(right, top);
@@ -550,11 +552,10 @@ void blit (int tex,
     buf_tex = tex;
 
     color c = gl_color_current();
-
-    float r = ((float)c.r) / 255.0;
-    float g = ((float)c.g) / 255.0;
-    float b = ((float)c.b) / 255.0;
-    float a = ((float)c.a) / 255.0;
+    uint8_t r = c.r;
+    uint8_t g = c.g;
+    uint8_t b = c.b;
+    uint8_t a = c.a;
 
     gl_push(&bufp,
             bufp_end,
@@ -599,11 +600,10 @@ void blit (int tex,
     buf_tex = tex;
 
     color c = gl_color_current();
-
-    float r = ((float)c.r) / 255.0;
-    float g = ((float)c.g) / 255.0;
-    float b = ((float)c.b) / 255.0;
-    float a = ((float)c.a) / 255.0;
+    uint8_t r = c.r;
+    uint8_t g = c.g;
+    uint8_t b = c.b;
+    uint8_t a = c.a;
 
     gl_push(&bufp,
             bufp_end,
@@ -648,11 +648,10 @@ void blit (int tex,
     buf_tex = tex;
 
     color c = gl_color_current();
-
-    float r = ((float)c.r) / 255.0;
-    float g = ((float)c.g) / 255.0;
-    float b = ((float)c.b) / 255.0;
-    float a = ((float)c.a) / 255.0;
+    uint8_t r = c.r;
+    uint8_t g = c.g;
+    uint8_t b = c.b;
+    uint8_t a = c.a;
 
     gl_push(&bufp,
             bufp_end,
@@ -712,22 +711,22 @@ void blit_colored (int tex,
             top,
             right,
             bottom,
-            ((double)color_tl.r) / 255.0,
-            ((double)color_tl.g) / 255.0,
-            ((double)color_tl.b) / 255.0,
-            ((double)color_tl.a) / 255.0,
-            ((double)color_bl.r) / 255.0,
-            ((double)color_bl.g) / 255.0,
-            ((double)color_bl.b) / 255.0,
-            ((double)color_bl.a) / 255.0,
-            ((double)color_tr.r) / 255.0,
-            ((double)color_tr.g) / 255.0,
-            ((double)color_tr.b) / 255.0,
-            ((double)color_tr.a) / 255.0,
-            ((double)color_br.r) / 255.0,
-            ((double)color_br.g) / 255.0,
-            ((double)color_br.b) / 255.0,
-            ((double)color_br.a) / 255.0);
+            color_tl.r,
+            color_tl.g,
+            color_tl.b,
+            color_tl.a,
+            color_bl.r,
+            color_bl.g,
+            color_bl.b,
+            color_bl.a,
+            color_tr.r,
+            color_tr.g,
+            color_tr.b,
+            color_tr.a,
+            color_br.r,
+            color_br.g,
+            color_br.b,
+            color_br.a);
 }
 
 static inline

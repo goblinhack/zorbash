@@ -273,10 +273,10 @@ void Light::render_triangle_fans (int last, int count)
     if (!cached_gl_cmds.size()) {
 #endif
         auto c = col;
-        auto red   = ((float)c.r) / 255.0;
-        auto green = ((float)c.g) / 255.0;
-        auto blue  = ((float)c.b) / 255.0;
-        auto alpha = ((float)c.a) / 255.0;
+        uint8_t red   = c.r;
+        uint8_t green = c.g;
+        uint8_t blue  = c.b;
+        uint8_t alpha = c.a;
 
         cached_light_pos = light_pos;
 
