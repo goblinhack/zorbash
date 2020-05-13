@@ -15,7 +15,7 @@ bool Thing::is_enemy (Thingp attacker)
     }
 
     auto enemy = attacker->id;
-    for (auto e : monstp->enemies) {
+    for (const auto& e : monstp->enemies) {
         if (e == enemy) {
             return (true);
         }

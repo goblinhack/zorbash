@@ -143,7 +143,7 @@ void WidTextBox::log (std::string s)
     auto d = split(s, chars_per_line);
 
     if (d) {
-        for (auto c : *d) {
+        for (const auto& c : *d) {
             log_(string_to_wstring(c));
         }
     }
@@ -159,7 +159,7 @@ void WidTextBox::log (std::wstring s)
     auto d = split(s, chars_per_line);
 
     if (d) {
-        for (auto c : *d) {
+        for (const auto& c : *d) {
             log_(c);
         }
     }

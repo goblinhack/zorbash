@@ -1035,7 +1035,7 @@ void Dungeon::reset_possible_rooms (void)
     std::fill(cells.begin(), cells.end(), Charmap::SPACE);
     std::fill(cells_room.begin(), cells_room.end(), nullptr);
 
-    for (auto r : Room::all_rooms) {
+    for (auto& r : Room::all_rooms) {
         r->placed = false;
         r->skip = false;
         r->depth = 0;

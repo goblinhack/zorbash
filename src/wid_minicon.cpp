@@ -134,7 +134,7 @@ void wid_minicon_log (std::string s)
     auto d = split(s, chars_per_line);
 
     if (d) {
-        for (auto c : *d) {
+        for (const auto& c : *d) {
             wid_minicon_log_(string_to_wstring(c));
         }
     }
@@ -150,7 +150,7 @@ void wid_minicon_log (std::wstring s)
     auto d = split(s, chars_per_line);
 
     if (d) {
-        for (auto c : *d) {
+        for (const auto& c : *d) {
             wid_minicon_log_(c);
         }
     }
@@ -254,7 +254,7 @@ std::vector<std::wstring> wid_minicon_serialize (void)
 
 void wid_minicon_deserialize(std::vector<std::wstring> r)
 {_
-    for (auto s : r) {
+    for (const auto& s : r) {
         auto tmp = wstring_to_string(s);
         if (tmp.size()) {
             MINICON("%s", tmp.c_str());

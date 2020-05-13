@@ -178,7 +178,7 @@ void wid_dump (Widp w, int depth)
 
     printf("\n          %*s dump: [%s] text [%S] %d,%d to %d,%d ", depth * 2, "", wid_name(w).c_str(), wid_get_text(w).c_str(), tlx, tly, brx, bry);
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         wid_dump(child, depth + 2);
@@ -1976,7 +1976,7 @@ static void wid_destroy_delay (Widp *wp, int32_t delay)
         wid_mouse_motion_end();
     }
 
-    for (auto iter : w->tree2_children_unsorted) {
+    for (auto& iter : w->tree2_children_unsorted) {
         auto child = iter.second;
         wid_destroy(&child);
     }
@@ -2338,7 +2338,7 @@ static void wid_raise_override (Widp parent)
         wid_raise_internal(parent);
     }
 
-    for (auto iter : parent->children_display_sorted) {
+    for (auto& iter : parent->children_display_sorted) {
         auto w = iter.second;
 
         if (w->do_not_lower) {
@@ -2362,12 +2362,12 @@ void wid_raise (Widp w_in)
     // If some widget wants to be on top, let it.
     //
     std::vector<Widp> worklist;
-    for (auto iter : wid_top_level) {
+    for (auto& iter : wid_top_level) {
         auto w = iter.second;
         worklist.push_back(w);
     }
 
-    for (auto w : worklist) {
+    for (auto& w : worklist) {
         wid_raise_override(w);
     }
 
@@ -2412,7 +2412,7 @@ void wid_lower (Widp w_in)
     //
     // If some widget wants to be on top, let it.
     //
-    for (auto iter : wid_top_level) {
+    for (auto& iter : wid_top_level) {
         auto w = iter.second;
         if (w->do_not_raise) {
             wid_lower_internal(w);
@@ -2450,7 +2450,7 @@ static void wid_find_first_child_focus (Widp w, Widp *best)
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         wid_find_first_child_focus(child, best);
@@ -2487,7 +2487,7 @@ static void wid_find_specific_child_focus (Widp w, Widp *best,
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         wid_find_specific_child_focus(child, best, focus_order);
@@ -2564,7 +2564,7 @@ static void wid_find_last_child_focus (Widp w, Widp *best)
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         wid_find_last_child_focus(child, best);
@@ -2626,7 +2626,7 @@ static void wid_find_next_child_focus (Widp w, Widp *best)
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         wid_find_next_child_focus(child, best);
@@ -2678,7 +2678,7 @@ static void wid_find_prev_child_focus (Widp w, Widp *best)
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         wid_find_prev_child_focus(child, best);
@@ -2723,7 +2723,7 @@ Widp wid_find (Widp w, std::string name)
         return (w);
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         Widp ret {};
@@ -2752,7 +2752,7 @@ void wid_visible (Widp w)
     w->hidden = false;
 
     std::vector<Widp> worklist;
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
         wid_visible(child);
     }
@@ -2800,7 +2800,7 @@ void wid_hide (Widp w)
     }
 
     std::vector<Widp> worklist;
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
         wid_hide(child);
     }
@@ -2815,12 +2815,12 @@ static uint8_t wid_scroll_trough_mouse_down (Widp w,
     int32_t dy;
 
     std::vector<Widp> worklist;
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
         worklist.push_back(child);
     }
 
-    for (auto child : worklist) {
+    for (auto& child : worklist) {
         dx = 0;
         dy = 0;
 
@@ -2893,12 +2893,12 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
     }
 
     std::vector<Widp> worklist;
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
         worklist.push_back(child);
     }
 
-    for (auto child : worklist) {
+    for (auto& child : worklist) {
         if (dx || dy) {
             wid_set_mode(child, WID_MODE_ACTIVE);
         }
@@ -2939,7 +2939,7 @@ static void wid_adjust_scrollbar (Widp scrollbar, Widp owner)
     // adjust the scrollbar dimensions.
     //
     {
-        for (auto iter : owner->tree2_children_unsorted) {
+        for (auto& iter : owner->tree2_children_unsorted) {
             auto child = iter.second;
 
             int32_t tl_x, tl_y, br_x, br_y;
@@ -3070,7 +3070,7 @@ void wid_get_children_size (Widp owner, int32_t *w, int32_t *h)
     // Find out the space that the children take up then use this to
     // adjust the scrollbar dimensions.
     //
-    for (auto iter : owner->children_display_sorted) {
+    for (auto& iter : owner->children_display_sorted) {
 
         auto child = iter.second;
 
@@ -3161,12 +3161,12 @@ static void wid_update_internal (Widp w)
     // Clip all the children. Avoid this for speed for the main game window.
     //
     std::vector<Widp> worklist;
-    for (auto iter : w->tree2_children_unsorted) {
+    for (auto& iter : w->tree2_children_unsorted) {
         auto w = iter.second;
         worklist.push_back(w);
     }
 
-    for (auto child : worklist) {
+    for (auto& child : worklist) {
         wid_update_internal(child);
     }
 
@@ -3679,7 +3679,7 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         if (wid_focus_locked &&
@@ -3694,7 +3694,7 @@ static Widp wid_key_down_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         if (wid_focus_locked &&
@@ -3751,7 +3751,7 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         if (wid_focus_locked &&
@@ -3766,7 +3766,7 @@ static Widp wid_key_up_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         if (wid_focus_locked &&
@@ -3813,7 +3813,7 @@ static Widp wid_joy_button_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         if (wid_focus_locked &&
@@ -3864,7 +3864,7 @@ static Widp wid_mouse_down_handler_at (Widp w, int32_t x, int32_t y,
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         if (wid_focus_locked &&
@@ -3932,7 +3932,7 @@ static Widp wid_mouse_up_handler_at (Widp w, int32_t x, int32_t y, uint8_t stric
         }
     }
 
-    for (auto iter : w->children_display_sorted) {
+    for (auto& iter : w->children_display_sorted) {
         auto child = iter.second;
 
         if (wid_focus_locked &&
@@ -4014,7 +4014,7 @@ static void wid_children_move_delta_internal (Widp w, int32_t dx, int32_t dy)
     w->key.br.y += dy;
     wid_tree_attach(w);
 
-    for (auto iter : w->tree2_children_unsorted) {
+    for (auto& iter : w->tree2_children_unsorted) {
         auto child = iter.second;
 
         wid_children_move_delta_internal(child, dx, dy);
@@ -4056,12 +4056,12 @@ static void wid_move_delta_internal (Widp w, int32_t dx, int32_t dy)
     wid_tree_attach(w);
 
     std::vector<Widp> worklist;
-    for (auto iter : w->tree2_children_unsorted) {
+    for (auto& iter : w->tree2_children_unsorted) {
         auto w = iter.second;
         worklist.push_back(w);
     }
 
-    for (auto child : worklist) {
+    for (auto& child : worklist) {
         wid_children_move_delta_internal(child, dx, dy);
     }
 }
@@ -4375,7 +4375,7 @@ void wid_mouse_motion (int32_t x, int32_t y,
 
     uint8_t over = false;
 
-    for (auto iter : wid_top_level) {
+    for (auto& iter : wid_top_level) {
         auto w = iter.second;
 
         if (wid_focus_locked &&
@@ -5378,11 +5378,11 @@ static void wid_display (Widp w,
     }
 
     {
-        for (auto x = tl.x; x <= br.x; x++) {
+        for (auto& x = tl.x; x <= br.x; x++) {
             if (unlikely(!ascii_x_ok(x))) {
                 continue;
             }
-            for (auto y = tl.y; y <= br.y; y++) {
+            for (auto& y = tl.y; y <= br.y; y++) {
                 if (unlikely(!ascii_y_ok(y))) {
                     continue;
                 }
@@ -5480,7 +5480,7 @@ void wid_move_all (void)
     Widp wids[N];
     uint32_t n = 0;
 
-    for (auto iter : wid_top_level3) {
+    for (auto& iter : wid_top_level3) {
         auto w = iter.second;
         wids[n] = w;
         n++;
@@ -5565,12 +5565,12 @@ void wid_tick_all (void)
     }
 
     std::list<Widp> work;
-    for (auto iter : wid_top_level5) {
+    for (auto& iter : wid_top_level5) {
         auto w = iter.second;
         work.push_back(w);
     }
 
-    for (auto w : work) {
+    for (auto& w : work) {
         if (!w->on_tick) {
             ERR("wid on ticker tree, but no callback set");
         }

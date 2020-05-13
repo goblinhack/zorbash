@@ -32,7 +32,7 @@ static inline Bits<const TYPE&> bits(const TYPE& t)
 // Read/write POD types
 ////////////////////////////////////////////////////////////////////////////
 template<typename TYPE>
-static inline std::istream& operator>>(std::istream& in, Bits<TYPE&> b)
+static inline std::istream& operator>> (std::istream& in, Bits<TYPE&> b)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
     std::cout << "read " << sizeof(TYPE) << " bytes" << std::endl;
@@ -41,7 +41,7 @@ static inline std::istream& operator>>(std::istream& in, Bits<TYPE&> b)
 }
 
 template<typename TYPE>
-static inline std::ostream& operator<<(std::ostream &out, Bits<TYPE&> const b)
+static inline std::ostream& operator<< (std::ostream &out, Bits<TYPE&> const b)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
     std::cout << "write " << sizeof(TYPE) << " bytes" << std::endl;
@@ -54,7 +54,7 @@ static inline std::ostream& operator<<(std::ostream &out, Bits<TYPE&> const b)
 ////////////////////////////////////////////////////////////////////////////
 // Read/write std::string
 ////////////////////////////////////////////////////////////////////////////
-static inline std::istream& operator>>(std::istream& in, Bits<std::string &> v)
+static inline std::istream& operator>> (std::istream& in, Bits<std::string &> v)
 {
     my_size_t sz = 0;
     in >> bits(sz);
@@ -70,7 +70,7 @@ static inline std::istream& operator>>(std::istream& in, Bits<std::string &> v)
     return in;
 }
 
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<const std::string &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -81,7 +81,7 @@ static inline std::ostream& operator<<(std::ostream &out,
 }
 
 static inline
-std::ostream& operator<<(std::ostream &out, Bits<std::string &> const v)
+std::ostream& operator<< (std::ostream &out, Bits<std::string &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
     std::cout << "write '" << v.t << "'" << std::endl;
@@ -93,7 +93,7 @@ std::ostream& operator<<(std::ostream &out, Bits<std::string &> const v)
 ////////////////////////////////////////////////////////////////////////////
 // Read/write std::wstring
 ////////////////////////////////////////////////////////////////////////////
-static inline std::istream& operator>>(std::istream& in, Bits<std::wstring &> v)
+static inline std::istream& operator>> (std::istream& in, Bits<std::wstring &> v)
 {
     my_size_t sz = 0;
     in >> bits(sz);
@@ -112,8 +112,8 @@ static inline std::istream& operator>>(std::istream& in, Bits<std::wstring &> v)
     return in;
 }
 
-static inline std::ostream& operator<<(std::ostream &out,
-                                       Bits<const std::wstring &> const v)
+static inline std::ostream& operator<< (std::ostream &out,
+                                        Bits<const std::wstring &> const v)
 {
     my_size_t sz = v.t.size();
     out << bits(sz);
@@ -127,7 +127,7 @@ static inline std::ostream& operator<<(std::ostream &out,
 }
 
 static inline
-std::ostream& operator<<(std::ostream &out, Bits<std::wstring &> const v)
+std::ostream& operator<< (std::ostream &out, Bits<std::wstring &> const v)
 {
     my_size_t sz = v.t.size();
     out << bits(sz);
@@ -142,8 +142,8 @@ std::ostream& operator<<(std::ostream &out, Bits<std::wstring &> const v)
 
 ////////////////////////////////////////////////////////////////////////////
 // Read/write wchar_t
-////////////////////////////////////////////////////////////////////////////
-static inline std::istream& operator>>(std::istream& in, Bits<wchar_t &> v)
+//////////////////////// ////////////////////////////////////////////////////
+static inline std::istream& operator>> (std::istream& in, Bits<wchar_t &> v)
 {
     if (sizeof(wchar_t) == 4) {
         unsigned char _a, _b, _c, _d;
@@ -174,7 +174,7 @@ static inline std::istream& operator>>(std::istream& in, Bits<wchar_t &> v)
     return in;
 }
 
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<const wchar_t &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -207,7 +207,7 @@ static inline std::ostream& operator<<(std::ostream &out,
 }
 
 static inline
-std::ostream& operator<<(std::ostream &out, Bits<wchar_t &> const v)
+std::ostream& operator<< (std::ostream &out, Bits<wchar_t &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
     std::cout << "write const '" << v.t << "'" << std::endl;
@@ -244,7 +244,7 @@ std::ostream& operator<<(std::ostream &out, Bits<wchar_t &> const v)
 template <
   class T,
   template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<C<T> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -259,7 +259,7 @@ static inline std::ostream& operator<<(std::ostream &out,
 template <
   class T,
   template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<const C<T> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -274,7 +274,7 @@ static inline std::ostream& operator<<(std::ostream &out,
 template <
   class T,
   template <typename ELEM, typename ALLOC = std::allocator<ELEM> > class C>
-static inline std::istream& operator>>(std::istream &in, Bits<C<T> &> v)
+static inline std::istream& operator>> (std::istream &in, Bits<C<T> &> v)
 {
     my_size_t sz = 0;
     in >> bits(sz);
@@ -299,7 +299,7 @@ template <
   class T,
   std::size_t N,
   template <typename ELEM, std::size_t > class C>
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<C<T, N> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -315,7 +315,7 @@ template <
   class T,
   std::size_t N,
   template <typename ELEM, std::size_t > class C>
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<const C<T, N> &> const v)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -331,7 +331,7 @@ template <
   class T,
   std::size_t N,
   template <typename ELEM, std::size_t > class C>
-static inline std::istream& operator>>(std::istream &in, Bits<C<T, N> &> v)
+static inline std::istream& operator>> (std::istream &in, Bits<C<T, N> &> v)
 {
     my_size_t sz = 0;
     in >> bits(sz);
@@ -361,7 +361,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<M<K,V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -381,7 +381,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<M<K,const V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -401,7 +401,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::istream& operator>>(std::istream &in,
+static inline std::istream& operator>> (std::istream &in,
                                        Bits<M<K,V> &> m)
 {
     my_size_t sz = 0;
@@ -434,7 +434,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<M<K,V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -455,7 +455,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::ostream& operator<<(std::ostream &out,
+static inline std::ostream& operator<< (std::ostream &out,
                                        Bits<M<K,const V> &> const m)
 {
 #ifdef DEBUG_C_PLUS_PLUS_SERIALIZER
@@ -476,7 +476,7 @@ template <
                > class M,
     class K, class V >
 
-static inline std::istream& operator>>(std::istream &in,
+static inline std::istream& operator>> (std::istream &in,
                                        Bits<M<K,V> &> m)
 {
     my_size_t sz = 0;

@@ -32,7 +32,7 @@ void tile_fini (void)
         tile_init_done = false;
     }
 
-    for (auto t : all_tiles) {
+    for (auto& t : all_tiles) {
         verify(t.second);
         delete t.second;
     }
@@ -299,7 +299,7 @@ void tile_load_arr (std::string file, std::string name,
     pixel_size.w = width;
     pixel_size.h = height;
 
-    for (auto name : arr) {
+    for (auto& name : arr) {
         idx++;
 
         if (name != "") {

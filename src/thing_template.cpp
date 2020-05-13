@@ -43,7 +43,7 @@ void tp_fini (void)
     if (tp_init_done) {
         tp_init_done = false;
     }
-    for (auto tp : tp_name_map) {
+    for (auto& tp : tp_name_map) {
         delete tp.second;
     }
 }
@@ -104,7 +104,7 @@ Tilep tp_first_tile (Tpp tp)
 
 void tp_init_after_loading (void)
 {_
-    for (auto tp : tp_id_map) {
+    for (auto& tp : tp_id_map) {
         if (tp_is_monst(tp)) {
             tp_monst.push_back(tp);
         }

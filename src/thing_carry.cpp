@@ -16,7 +16,7 @@ void Thing::carry (Thingp what)
     }
 
     new_monst();
-    for (auto item : monstp->carrying) {
+    for (const auto& item : monstp->carrying) {
         if (item == what->id) {
             return;
         }

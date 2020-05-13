@@ -19,7 +19,7 @@ void room_init (void)
 
 void room_fini (void)
 {_
-    for (auto r : Room::all_rooms) {
+    for (auto& r : Room::all_rooms) {
         delete r;
     }
 }

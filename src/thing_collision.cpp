@@ -530,7 +530,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
     *target_attacked = false;
     *target_overlaps = false;
 
-    for (auto cand : thing_colls) {
+    for (auto& cand : thing_colls) {
         //
         // Don't be silly and hit yourself.
         //
@@ -864,7 +864,7 @@ bool Thing::collision_obstacle (fpoint p)
     //
     // Avoid threats and treat them as obstacles
     //
-    for (auto it : get(level->all_thing_ptrs_at, p.x, p.y)) {
+    for (const auto& it : get(level->all_thing_ptrs_at, p.x, p.y)) {
         if (!it) {
             continue;
         }

@@ -60,7 +60,7 @@ bool Level::is_anything_at (const int x, const int y)
         return (false);
     }
 
-    for (auto t : get(all_thing_ptrs_at, x, y)) {
+    for (auto& t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
             verify(t);
             return (true);
@@ -441,7 +441,7 @@ bool Level::is_monst (const int x, const int y)
         return (false);
     }
 
-    for (auto t : get(all_thing_ptrs_at, x, y)) {
+    for (auto& t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
             verify(t);
             auto tpp = t->tp();
@@ -464,7 +464,7 @@ bool Level::is_food (const int x, const int y)
         return (false);
     }
 
-    for (auto t : get(all_thing_ptrs_at, x, y)) {
+    for (auto& t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
             verify(t);
             auto tpp = t->tp();
@@ -555,7 +555,7 @@ bool Level::is_key (const int x, const int y)
         return (false);
     }
 
-    for (auto t : get(all_thing_ptrs_at, x, y)) {
+    for (auto& t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
             verify(t);
             auto tpp = t->tp();
@@ -610,7 +610,7 @@ bool Level::is_door (const int x, const int y)
         return (false);
     }
 
-    for (auto t : get(all_thing_ptrs_at, x, y)) {
+    for (auto& t : get(all_thing_ptrs_at, x, y)) {
         if (t) {
             verify(t);
             auto tpp = t->tp();
