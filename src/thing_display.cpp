@@ -665,6 +665,8 @@ bool Thing::get_coords (spoint &blit_tl,
     pre_effect_blit_tl = blit_tl;
     pre_effect_blit_br = blit_br;
 
+    auto owner = owner_get();
+
     //
     // Boing.
     //
@@ -672,6 +674,32 @@ bool Thing::get_coords (spoint &blit_tl,
         float b = get_bounce();
         blit_tl.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
         blit_br.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
+    }
+
+    //
+    // Lunge to attack.
+    //
+    float lunge;
+    if (owner) {
+        lunge = owner->get_lunge();
+    } else {
+        lunge = get_lunge();
+    }
+    if (unlikely(lunge > 0.0)) {
+        fpoint delta;
+        if (owner) {
+            delta = owner->get_lunge_to() - owner->get_interpolated_mid_at();
+        } else {
+            delta = get_lunge_to() - get_interpolated_mid_at();
+        }
+        float dx = -delta.x * lunge;
+        float dy = -delta.y * lunge;
+        dx = -delta.x * lunge * TILE_WIDTH;
+        dy = delta.y * lunge * TILE_HEIGHT;
+        blit_tl.x -= dx;
+        blit_br.x -= dx;
+        blit_tl.y += dy;
+        blit_br.y += dy;
     }
 
     //
@@ -694,17 +722,15 @@ bool Thing::get_coords (spoint &blit_tl,
     //
     // If the owner is submerged, so is the weapon
     //
-    auto owner = owner_get();
     if (owner && owner->is_in_water) {
         is_in_water = true;
     }
 
-    if (is_monst() ||
-        is_player() ||
-        tp_gfx_is_attack_anim(tpp) ||
-        tp_gfx_is_on_fire_anim(tpp) ||
-        tp_gfx_is_weapon_carry_anim(tpp)) {
-
+    if (unlikely(is_monst() ||
+                 is_player() ||
+                 tp_gfx_is_attack_anim(tpp) ||
+                 tp_gfx_is_on_fire_anim(tpp) ||
+                 tp_gfx_is_weapon_carry_anim(tpp))) {
         //
         // Render the weapon and player on the same tile rules
         //
