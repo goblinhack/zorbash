@@ -493,14 +493,14 @@ uint32_t NUMBER_BYTES_PER_VERTICE_2D = sizeof(GLfloat) *
                                        NUMBER_DIMENSIONS_PER_COORD_2D +
                                        sizeof(GLfloat) *
                                        NUMBER_DIMENSIONS_PER_COORD_2D +
-                                       sizeof(GLfloat) *
+                                       sizeof(GLubyte) *
                                        NUMBER_COMPONENTS_PER_COLOR;
 
 uint32_t NUMBER_BYTES_PER_VERTICE_3D = sizeof(GLfloat) *
                                        NUMBER_DIMENSIONS_PER_COORD_2D +
                                        sizeof(GLfloat) *
                                        NUMBER_DIMENSIONS_PER_COORD_3D +
-                                       sizeof(GLfloat) *
+                                       sizeof(GLubyte) *
                                        NUMBER_COMPONENTS_PER_COLOR;
 
 uint32_t NUMBER_FLOATS_PER_VERTICE_2D = NUMBER_BYTES_PER_VERTICE_2D / sizeof(float);
@@ -598,7 +598,7 @@ void blit_flush (void)
 
     glColorPointer(
         NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_FLOAT,
+        GL_UNSIGNED_BYTE,
         NUMBER_BYTES_PER_VERTICE_2D,
         ((char*)gl_array_buf) +
             sizeof(GLfloat) *        // skip (x,y)
@@ -653,7 +653,7 @@ void blit_flush_3d (void)
 
     glColorPointer(
         NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_FLOAT,
+        GL_UNSIGNED_BYTE,
         NUMBER_BYTES_PER_VERTICE_3D,
         ((char*)gl_array_buf) +
             sizeof(GLfloat) *        // skip (x,y)
@@ -689,7 +689,7 @@ void blit_flush_colored_triangles (void)
     static const GLsizei stride =
                         sizeof(GLfloat) *
                         NUMBER_DIMENSIONS_PER_COORD_2D +
-                        sizeof(GLfloat) *
+                        sizeof(GLubyte) *
                         NUMBER_COMPONENTS_PER_COLOR;
 
     nvertices = ((char*)bufp - (char*)gl_array_buf) / stride;
@@ -702,7 +702,7 @@ void blit_flush_colored_triangles (void)
 
     glColorPointer(
         NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_FLOAT,
+        GL_UNSIGNED_BYTE,
         stride,
         ((char*)gl_array_buf) +
             sizeof(GLfloat) *        // skip (x,y)
@@ -734,7 +734,7 @@ void blit_flush_triangle_fan (float *b, float *e)
     static const GLsizei stride =
                         sizeof(GLfloat) *
                         NUMBER_DIMENSIONS_PER_COORD_2D +
-                        sizeof(GLfloat) *
+                        sizeof(GLubyte) *
                         NUMBER_COMPONENTS_PER_COLOR;
 
     nvertices = ((char*)e - (char*)b) / stride;
@@ -747,7 +747,7 @@ void blit_flush_triangle_fan (float *b, float *e)
 
     glColorPointer(
         NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_FLOAT,
+        GL_UNSIGNED_BYTE,
         stride,
         ((char*)b) +
             sizeof(GLfloat) *        // skip (x,y)
@@ -797,7 +797,7 @@ void blit_flush_tex_triangle_fan (void)
 
     glColorPointer(
         NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_FLOAT,
+        GL_UNSIGNED_BYTE,
         NUMBER_BYTES_PER_VERTICE_2D,
         ((char*)gl_array_buf) +
             sizeof(GLfloat) *        // skip (x,y)
@@ -833,7 +833,7 @@ void blit_flush_triangle_strip (void)
     static const GLsizei stride =
                         sizeof(GLfloat) *
                         NUMBER_DIMENSIONS_PER_COORD_2D +
-                        sizeof(GLfloat) *
+                        sizeof(GLubyte) *
                         NUMBER_COMPONENTS_PER_COLOR;
 
     nvertices = ((char*)bufp - (char*)gl_array_buf) / stride;
@@ -846,7 +846,7 @@ void blit_flush_triangle_strip (void)
 
     glColorPointer(
         NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_FLOAT,
+        GL_UNSIGNED_BYTE,
         stride,
         ((char*)gl_array_buf) +
             sizeof(GLfloat) *        // skip (x,y)
