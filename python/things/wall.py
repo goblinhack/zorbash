@@ -23,18 +23,18 @@ def tp_init(name,
 
     x = tp.Tp(name)
 
+    x.set_a_or_an("a");
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
     x.set_collision_radius(0.40)
     x.set_gfx_large_shadow(True)
+    x.set_is_combustible(False)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_is_movement_blocking(True)
     x.set_is_obstacle(True)
     x.set_is_wall(True)
-    x.set_a_or_an("a");
-    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     if tiles is not None:

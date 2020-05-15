@@ -786,7 +786,7 @@ public:
     void blit_end_reflection_submerged(uint8_t submerged);
     void blit();
     void blit_upside_down();
-    void blit_internal(spoint &blit_tl, spoint &blit_br, const Tilep tile, const color &c, const bool reflection);
+    void blit_internal(spoint &blit_tl, spoint &blit_br, const Tilep tile, color c, const bool reflection);
     void blit_text(std::string const&, spoint &tl, spoint &br);
     void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const spoint &tl, const spoint &br);
     void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const spoint &tl, const spoint &br);

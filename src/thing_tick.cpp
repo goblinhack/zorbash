@@ -133,7 +133,6 @@ void things_tick (void)
     if (game->paused()) {
         return;
     }
-
     game->things_are_moving = false;
 
     //

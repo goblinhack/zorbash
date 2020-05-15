@@ -406,9 +406,18 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     if (unlikely(!tp_is_player(tpp))) {
         if (unlikely(tp_is_light_strength(tpp))) {
             std::string l = tp_light_color(tpp);
-            color c = string2color(l);
-            new_light(mid_at, (double) tp_is_light_strength(tpp), c);
-            has_light = true;
+            bool add_light = true;
+            if (tp_is_water(tpp) ||
+                tp_is_lava(tpp)) {
+                if (random_range(0, 100) < 50) {
+                    add_light = false;
+                }
+            }
+            if (add_light) {
+                color c = string2color(l);
+                new_light(mid_at, (double) tp_is_light_strength(tpp), c);
+                has_light = true;
+            }
         }
     }
     update_light();

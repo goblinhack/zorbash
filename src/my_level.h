@@ -28,7 +28,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
 
@@ -338,7 +338,7 @@ public:
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 
-    inline bool is_visited (const point &p)
+    inline uint8_t is_visited (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
@@ -346,12 +346,12 @@ public:
         return (get(_is_visited, p.x, p.y));
     }
 
-    inline bool is_visited_unsafe (const point &p)
+    inline uint8_t is_visited_unsafe (const point &p)
     {_
         return (get_unsafe(_is_visited, p.x, p.y));
     }
 
-    inline bool is_visited (const int x, const int y)
+    inline uint8_t is_visited (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
@@ -359,7 +359,7 @@ public:
         return (get(_is_visited, x, y));
     }
 
-    inline bool is_visited_unsafe (const int x, const int y)
+    inline uint8_t is_visited_unsafe (const int x, const int y)
     {_
         return (get_unsafe(_is_visited, x, y));
     }
@@ -369,12 +369,21 @@ public:
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_is_visited, x, y, true);
+
+        uint8_t v = get(_is_visited, x, y);
+        if (v < 255) {
+            v++;
+            set(_is_visited, x, y, v);
+        }
     }
 
     inline void set_visited_unsafe (const int x, const int y)
     {_
-        set_unsafe(_is_visited, x, y, true);
+        uint8_t v = get(_is_visited, x, y);
+        if (v < 255) {
+            v++;
+            set(_is_visited, x, y, v);
+        }
     }
 
     inline void unset_visited (const int x, const int y)
@@ -382,12 +391,12 @@ public:
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_is_visited, x, y, false);
+        set(_is_visited, x, y, (uint8_t)0);
     }
 
     inline void unset_visited_unsafe (const int x, const int y)
     {_
-        set_unsafe(_is_visited, x, y, false);
+        set_unsafe(_is_visited, x, y, (uint8_t)0);
     }
 
     //

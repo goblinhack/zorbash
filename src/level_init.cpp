@@ -515,8 +515,8 @@ static void level_place_floors (Dungeonp d,
 }
 
 static void level_place_floor_under_objects (Dungeonp d,
-                                            std::string what,
-                                            int depth)
+                                             std::string what,
+                                             int depth)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
@@ -535,116 +535,6 @@ static void level_place_floor_under_objects (Dungeonp d,
             }
 
             (void) thing_new(what, fpoint(x, y));
-
-            if (d->is_lava(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    auto n = thing_new(what, fpoint(x, y + 1));
-                    n->new_light(fpoint(x, y + 1.0), 2, ORANGE);
-                }
-            }
-            if (d->is_lava(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    auto n = thing_new(what, fpoint(x, y - 1));
-                    n->new_light(fpoint(x, y - 1.0), 2, ORANGE);
-                }
-            }
-            if (d->is_lava(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    auto n = thing_new(what, fpoint(x + 1, y));
-                    n->new_light(fpoint(x + 1.0, y), 2, ORANGE);
-                }
-            }
-            if (d->is_lava(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    auto n = thing_new(what, fpoint(x - 1, y));
-                    n->new_light(fpoint(x - 1.0, y), 2, ORANGE);
-                }
-            }
-
-            color c = CYAN;
-            c.a = 50;
-            double light_strength = 1.0;
-            if (d->is_water(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    auto n = thing_new(what, fpoint(x, y + 1));
-                    n->new_light(fpoint(x, y + 0.5), light_strength, c);
-                }
-            }
-            if (d->is_water(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    auto n = thing_new(what, fpoint(x, y - 1));
-                    n->new_light(fpoint(x, y - 0.5), light_strength, c);
-                }
-            }
-            if (d->is_water(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    auto n = thing_new(what, fpoint(x + 1, y));
-                    n->new_light(fpoint(x + 0.5, y), light_strength, c);
-                }
-            }
-            if (d->is_water(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    auto n = thing_new(what, fpoint(x - 1, y));
-                    n->new_light(fpoint(x - 0.5, y), light_strength, c);
-                }
-            }
-
-            if (d->is_monst(x, y + 1) ||
-                d->is_food(x, y + 1) ||
-                d->is_key(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    thing_new(what, fpoint(x, y + 1));
-                }
-            }
-            if (d->is_monst(x, y - 1) ||
-                d->is_food(x, y - 1) ||
-                d->is_key(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    thing_new(what, fpoint(x, y - 1));
-                }
-            }
-            if (d->is_monst(x + 1, y) ||
-                d->is_food(x + 1, y) ||
-                d->is_key(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    thing_new(what, fpoint(x + 1, y));
-                }
-            }
-            if (d->is_monst(x - 1, y) ||
-                d->is_food(x - 1, y) ||
-                d->is_key(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    thing_new(what, fpoint(x - 1, y));
-                }
-            }
-
-            c = DARKBLUE;
-            c.a = 200;
-            light_strength = 2.0;
-            if (d->is_deep_water(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
-                    auto n = thing_new(what, fpoint(x, y + 1));
-                    n->new_light(fpoint(x, y + 0.5), light_strength, c);
-                }
-            }
-            if (d->is_deep_water(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
-                    auto n = thing_new(what, fpoint(x, y - 1));
-                    n->new_light(fpoint(x, y - 0.5), light_strength, c);
-                }
-            }
-            if (d->is_deep_water(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
-                    auto n = thing_new(what, fpoint(x + 1, y));
-                    n->new_light(fpoint(x + 0.5, y), light_strength, c);
-                }
-            }
-            if (d->is_deep_water(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
-                    auto n = thing_new(what, fpoint(x - 1, y));
-                    n->new_light(fpoint(x - 0.5, y), light_strength, c);
-                }
-            }
 
             if (d->is_monst(x, y + 1) ||
                 d->is_food(x, y + 1) ||
