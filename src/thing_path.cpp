@@ -141,11 +141,14 @@ int thing_can_reach_player (point start)
 
         set(d->val, end.x, end.y, DMAP_IS_GOAL);
         dmap_process_allow_diagonals(d, tl, br);
-        // dmap_print(&d, start, dmap_start, dmap_end);
+        if (0) {
+            dmap_print(d, start, tl, br);
+        }
     }
 
     auto d = game->player_dmap;
-    auto p = dmap_solve_allow_diagonal(d, start);
+    //auto p = dmap_solve_allow_diagonal(d, start);
+    uint8_t cost = get(d->val, start.x, start.y);
 
-    return (p.size());
+    return (cost);
 }

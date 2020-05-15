@@ -427,8 +427,25 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
     //
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
+
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int g_blend_a;
+extern int g_blend_b;
+CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
+#endif
+
+    glBlendFunc(GL_CONSTANT_ALPHA, GL_ONE); // ok but boring
+    glBlendFunc(GL_DST_COLOR, GL_ONE); // good but artifacts
+    glBlendFunc(GL_DST_COLOR, GL_ONE); // good but light edge artifacts
+    glBlendFunc(GL_ZERO, GL_ONE); // good
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_COLOR); // brighter
+    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE_MINUS_CONSTANT_COLOR); // darker
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE); // good blending
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA); // good but ghost visible in light
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y) {
@@ -453,6 +470,10 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
                         auto dist =
                           thing_can_reach_player(point(l->at.x, l->at.y));
                         if (dist >= MAX_LIGHT_PLAYER_DISTANCE) {
+                            continue;
+                        }
+
+                        if (!dist) {
                             continue;
                         }
 

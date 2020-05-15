@@ -133,11 +133,6 @@ void Level::display_deep_water (int fbo,
             if (likely(!get(tile_map, x, y))) {
                 continue;
             }
-            if (likely(!game->config.gfx_show_hidden)) {
-                if (!is_visited(x, y)) {
-                    continue;
-                }
-            }
             int tx = (x & ~1);
             int ty = (y & ~1);
             int tlx = tx * TILE_WIDTH;

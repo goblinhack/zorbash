@@ -864,7 +864,7 @@ void Thing::blit_end_reflection_submerged (uint8_t submerged)
 void Thing::blit_internal (spoint &blit_tl,
                            spoint &blit_br,
                            const Tilep tile,
-                           const color &c,
+                           color c,
                            bool reflection)
 {_
     auto tpp = tp();
@@ -880,6 +880,13 @@ void Thing::blit_internal (spoint &blit_tl,
 
     if (unlikely(is_msg())) {
         blit_text(get_msg(), blit_tl, blit_br);
+    }
+
+    uint8_t fade = level->is_visited(mid_at.x, mid_at.y);
+    if (is_floor()) {
+        c.a = fade;
+    } else {
+        c.a = 255;
     }
 
     glcolor(c);
@@ -917,7 +924,6 @@ void Thing::blit_internal (spoint &blit_tl,
         tile_blit(tile, blit_tl, blit_br);
     }
 
-    glcolor(WHITE);
     get_tiles();
     if (is_wall()) {
         if (!reflection) {
@@ -967,7 +973,7 @@ void Thing::blit_upside_down (void)
         blit_tl.y += diff;
     }
 
-    const color reflection = {155,155,155,200};
+    color reflection = {155,155,155,200};
     glcolor(reflection);
     blit_internal(blit_tl, blit_br, tile, reflection, true);
 }
