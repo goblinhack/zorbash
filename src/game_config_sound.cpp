@@ -13,10 +13,8 @@ static WidPopup *game_config_sound_window;
 
 static void game_config_sound_destroy (void)
 {_
-    if (game_config_sound_window) {
-        delete game_config_sound_window;
-        game_config_sound_window = nullptr;
-    }
+    delete game_config_sound_window;
+    game_config_sound_window = nullptr;
     game->soft_unpause();
 }
 

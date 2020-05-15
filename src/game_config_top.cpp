@@ -14,10 +14,8 @@ static WidPopup *game_config_top_window;
 
 static void game_config_top_destroy (void)
 {_
-    if (game_config_top_window) {
-        delete game_config_top_window;
-        game_config_top_window = nullptr;
-    }
+    delete game_config_top_window;
+    game_config_top_window = nullptr;
 }
 
 uint8_t game_config_top_graphics (Widp w, int32_t x, int32_t y, uint32_t button)

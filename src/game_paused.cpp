@@ -52,10 +52,8 @@ static WidPopup *wid_paused_window;
 
 static void wid_paused_destroy (void)
 {_
-    if (wid_paused_window) {
-        delete wid_paused_window;
-        wid_paused_window = nullptr;
-    }
+    delete wid_paused_window;
+    wid_paused_window = nullptr;
     game->soft_unpause();
 }
 

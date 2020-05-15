@@ -51,7 +51,8 @@ void Thing::delete_age_map (void)
         verify(monstp);
         if (monstp->age_map) {
             oldptr(monstp->age_map);
-            delete monstp->age_map; monstp->age_map = 0;
+            delete monstp->age_map; 
+            monstp->age_map = 0;
         }
     }
 }
@@ -84,7 +85,8 @@ void Thing::delete_dmap_scent (void)
         verify(monstp);
         if (monstp->dmap_scent) {
             oldptr(monstp->dmap_scent);
-            delete monstp->dmap_scent; monstp->dmap_scent = 0;
+            delete monstp->dmap_scent; 
+            monstp->dmap_scent = 0;
         }
     }
 }

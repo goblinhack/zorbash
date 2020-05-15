@@ -460,10 +460,8 @@ static WidPopup *wid_save;
 
 static void wid_save_destroy (void)
 {_
-    if (wid_save) {
-        delete wid_save;
-        wid_save = nullptr;
-    }
+    delete wid_save;
+    wid_save = nullptr;
     game->hard_unpause();
 }
 

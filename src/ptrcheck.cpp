@@ -382,9 +382,7 @@ static Ptrcheck *ptrcheck_verify_pointer (const void *ptr,
         l->file = file;
         l->func = func;
         l->line = line;
-        if (l->tb) {
-            delete l->tb;
-        }
+        delete l->tb;
 
         l->tb = new Traceback();
         l->tb->init();
@@ -771,18 +769,11 @@ void ptrcheck_usage_cleanup (void)
         while (elem) {
             pc = elem->pc;
 
-            if (pc->allocated_by) {
-                delete (pc->allocated_by);
-            }
-
-            if (pc->freed_by) {
-                delete (pc->freed_by);
-            }
+            delete (pc->allocated_by);
+            delete (pc->freed_by);
 
             for (j=0; j < ENABLE_PTRCHECK_HISTORY; j++) {
-                if (pc->last_seen[j]) {
-                    delete (pc->last_seen[j]);
-                }
+                delete (pc->last_seen[j]);
             }
 
             next = elem->next;
