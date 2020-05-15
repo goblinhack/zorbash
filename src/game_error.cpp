@@ -17,10 +17,8 @@ static WidPopup *game_error_window;
 
 static void game_error_destroy (void)
 {_
-    if (game_error_window) {
-        delete game_error_window;
-        game_error_window = nullptr;
-    }
+    delete game_error_window;
+    game_error_window = nullptr;
     game->hard_unpause();
 }
 

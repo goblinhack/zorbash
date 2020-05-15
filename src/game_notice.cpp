@@ -13,10 +13,8 @@ static WidPopup *game_notice_window;
 
 void game_notice_destroy (void)
 {_
-    if (game_notice_window) {
-        delete game_notice_window;
-        game_notice_window = nullptr;
-    }
+    delete game_notice_window;
+    game_notice_window = nullptr;
     game->soft_unpause();
 }
 

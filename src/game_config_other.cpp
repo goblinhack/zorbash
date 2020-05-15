@@ -13,10 +13,8 @@ static WidPopup *game_config_other_window;
 
 static void game_config_other_destroy (void)
 {_
-    if (game_config_other_window) {
-        delete game_config_other_window;
-        game_config_other_window = nullptr;
-    }
+    delete game_config_other_window;
+    game_config_other_window = nullptr;
     game->soft_unpause();
 }
 

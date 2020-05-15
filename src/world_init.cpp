@@ -27,9 +27,7 @@ void World::new_level_at (point3d at, int seed)
 {_
     seed = 667;
     auto l = get(levels, at.x, at.y, at.z);
-    if (l) {
-        delete l;
-    }
+    delete l;
     level = new Level();
     set(levels, at.x, at.y, at.z, level);
     level->init(at, seed);

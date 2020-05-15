@@ -35,7 +35,6 @@ void thing_gc (void)
             t->log("garbage collect");
         }
         delete t;
-
     }
 
     level->all_gc_things.clear();

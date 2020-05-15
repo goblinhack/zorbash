@@ -14,10 +14,8 @@ static bool local_g_need_restart = false;
 
 static void game_config_gfx_destroy (void)
 {_
-    if (game_config_gfx_window) {
-        delete game_config_gfx_window;
-        game_config_gfx_window = nullptr;
-    }
+    delete game_config_gfx_window;
+    game_config_gfx_window = nullptr;
     game->soft_unpause();
 }
 

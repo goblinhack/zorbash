@@ -21,8 +21,6 @@ void Game::fini (void)
 
     world.fini();
 
-    if (player_dmap) {
-        delete player_dmap;
-        player_dmap = nullptr;
-    }
+    delete player_dmap;
+    player_dmap = nullptr;
 }

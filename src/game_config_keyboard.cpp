@@ -19,10 +19,8 @@ static_assert(sizeof(SDL_Scancode) <= sizeof(game->config.key_move_left));
 
 static void game_config_keyboard_destroy (void)
 {_
-    if (game_config_keyboard_window) {
-        delete game_config_keyboard_window;
-        game_config_keyboard_window = nullptr;
-    }
+    delete game_config_keyboard_window;
+    game_config_keyboard_window = nullptr;
     game->soft_unpause();
 }
 

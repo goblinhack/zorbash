@@ -13,10 +13,8 @@ static WidPopup *wid_dead_window;
 
 static void wid_dead_destroy (void)
 {_
-    if (wid_dead_window) {
-        delete wid_dead_window;
-        wid_dead_window = nullptr;
-    }
+    delete wid_dead_window;
+    wid_dead_window = nullptr;
     game->soft_unpause();
     game->fini();
     game->main_menu_select();

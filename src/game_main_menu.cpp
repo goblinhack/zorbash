@@ -16,10 +16,8 @@ static WidPopup *game_main_menu_window;
 
 static void game_main_menu_destroy (void)
 {_
-    if (game_main_menu_window) {
-        delete game_main_menu_window;
-        game_main_menu_window = nullptr;
-    }
+    delete game_main_menu_window;
+    game_main_menu_window = nullptr;
 }
 
 void game_main_menu_hide (void)
