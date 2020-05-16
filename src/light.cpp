@@ -8,11 +8,12 @@
 #include "my_tex.h"
 #include "my_thing.h"
 
-Thingp debug_thing;
+static Texp g_light_overlay_tex;
+static int g_light_overlay_texid;
+static float g_light_dim = 1.0;
+static Texp g_bloom_overlay_tex;
+static int g_bloom_overlay_texid;
 
-static Texp light_overlay_tex;
-static int light_overlay_texid;
-static float light_dim = 1.0;
 #undef DEBUG_LIGHT
 
 Light::Light (void)
@@ -270,6 +271,7 @@ void Light::render_triangle_fans (int last, int count)
 
     if (1) {
 #else
+if (level->player && (owner == level->player)) {
     if (!cached_gl_cmds.size()) {
 #endif
         auto c = col;
@@ -280,9 +282,9 @@ void Light::render_triangle_fans (int last, int count)
 
         cached_light_pos = light_pos;
 
-        red *= light_dim;
-        green *= light_dim;
-        blue *= light_dim;
+        red *= g_light_dim;
+        green *= g_light_dim;
+        blue *= g_light_dim;
         alpha *= 1.0 / (float)count;
 
         blit_init();
@@ -388,20 +390,63 @@ void Light::render_triangle_fans (int last, int count)
         float p2y = light_pos.y + lh;
 
         glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_SRC_ALPHA); // hard black light
-
         blit_init();
         glTranslatef(light_offset.x, light_offset.y, 0);
-        blit(light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+        blit(g_light_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
         glTranslatef(-light_offset.x, -light_offset.y, 0);
         blit_flush();
    }
 }
 
+#if 1
+if (level->player && (owner != level->player)) {
+    if (last) {
+        if (flicker > random_range(20, 30)) {
+            flicker = 0;
+        }
+
+        if (!flicker) {
+            flicker_radius = strength *
+                            (1.0 + ((float)(random_range(0, 10) / 100.0)));
+        }
+        flicker++;
+
+        float lw = flicker_radius * tilew;
+        float lh = flicker_radius * tileh;
+        float p1x = light_pos.x - lw;
+        float p1y = light_pos.y - lh;
+        float p2x = light_pos.x + lw;
+        float p2y = light_pos.y + lh;
+
+        glcolor(WHITE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA); //
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int g_blend_a;
+extern int g_blend_b;
+CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
+#endif
+
+        blit_init();
+        glTranslatef(light_offset.x, light_offset.y, 0);
+        blit(g_bloom_overlay_texid, 0, 0, 1, 1, p1x, p1y, p2x, p2y);
+        glTranslatef(-light_offset.x, -light_offset.y, 0);
+        blit_flush();
+        glcolor(WHITE);
+   }
+}
+#endif
+}
+
 void Light::render (int fbo, int last, int count)
 {
-    if (!light_overlay_tex) {
-        light_overlay_tex = tex_load("", "light", GL_LINEAR);
-        light_overlay_texid = tex_get_gl_binding(light_overlay_tex);
+    if (!g_light_overlay_tex) {
+        g_light_overlay_tex = tex_load("", "light", GL_NEAREST);
+        g_light_overlay_texid = tex_get_gl_binding(g_light_overlay_tex);
+        g_bloom_overlay_tex = tex_load("", "bloom", GL_NEAREST);
+        g_bloom_overlay_texid = tex_get_gl_binding(g_bloom_overlay_tex);
     }
 
     render_triangle_fans(last, count);
@@ -409,9 +454,17 @@ void Light::render (int fbo, int last, int count)
 
 void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 {
-    light_dim = 1.0;
+    g_light_dim = 1.0;
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int g_blend_a;
+extern int g_blend_b;
+CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
+#endif
 
     if (player) {
         auto lc = player->get_light_count();
@@ -421,16 +474,8 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
             c++;
         }
     }
+return;
 
-    glBlendFunc(GL_ZERO, GL_ONE); // good
-#if 0
-extern int vals[];
-extern std::string vals_str[];
-extern int g_blend_a;
-extern int g_blend_b;
-CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
-glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
-#endif
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
             FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y) {
@@ -442,7 +487,7 @@ glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
                     //
                     // Too far away from the player? Skip rendering.
                     //
-                    light_dim = 1.0;
+                    g_light_dim = 1.0;
 
                     if (level->player) {
                         auto p = level->player;
@@ -463,14 +508,25 @@ glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
                         }
 
                         if (dist > 0) {
-                            light_dim = 1.0 - (0.05 * (float)dist);
-                            if (light_dim <= 0) {
+                            g_light_dim = 1.0 - (0.05 * (float)dist);
+                            if (g_light_dim <= 0) {
                                 continue;
                             }
                         }
                     }
 
-                    l->render(fbo, false, 1);
+                    glBlendFunc(GL_ZERO, GL_ONE); // good
+                    glBlendFunc(GL_SRC_ALPHA, GL_ONE); // good but ghost vis in light
+#if 0
+extern int vals[];
+extern std::string vals_str[];
+extern int g_blend_a;
+extern int g_blend_b;
+CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
+glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
+#endif
+
+                    l->render(fbo, true, 1);
                 }
             } FOR_ALL_THINGS_END()
         }

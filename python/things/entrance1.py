@@ -10,6 +10,8 @@ def tp_init(name, real_name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_entrance(True)
     x.set_is_interesting(True)
+    x.set_is_light_strength(2)
+    x.set_light_color("white")
     x.set_a_or_an("the");
     x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_EXIT)

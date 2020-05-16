@@ -13,6 +13,8 @@ def tp_init(name, real_name, tiles=[]):
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_obstacle(True)
+    x.set_is_light_strength(3)
+    x.set_light_color("cyan")
     x.set_is_water(True)
     x.set_z_depth(zx.MAP_DEPTH_WATER)
 
