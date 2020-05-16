@@ -882,11 +882,12 @@ void Thing::blit_internal (spoint &blit_tl,
         blit_text(get_msg(), blit_tl, blit_br);
     }
 
-    uint8_t fade = level->is_visited(mid_at.x, mid_at.y);
-    if (is_floor()) {
+    uint8_t fade = level->is_fade_in_unsafe(mid_at.x, mid_at.y);
+    if (fade) {
+        level->incr_fade_in_unsafe(mid_at.x, mid_at.y);
         c.a = fade;
     } else {
-        c.a = 255;
+        c.a = 0;
     }
 
     glcolor(c);

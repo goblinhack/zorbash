@@ -58,6 +58,7 @@ void Level::clear (void)
     _is_deep_water = {};
     _is_dirt = {};
     _is_dungeon = {};
+    _is_fade_in = {};
     _is_floor = {};
     _is_gfx_large_shadow = {};
     _is_lava = {};
@@ -66,7 +67,6 @@ void Level::clear (void)
     _is_wall = {};
     _is_water = {};
 
-    next_thing_id = 1;
     timestamp_dungeon_created = time_get_time_ms();
     timestamp_dungeon_saved = 0;
 }

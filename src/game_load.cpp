@@ -245,6 +245,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* _is_deep_water */       in >> bits(my.t->_is_deep_water);
     /* _is_dirt */             in >> bits(my.t->_is_dirt);
     /* _is_dungeon */          in >> bits(my.t->_is_dungeon);
+    /* _is_fade_in */          in >> bits(my.t->_is_fade_in);
     /* _is_floor */            in >> bits(my.t->_is_floor);
     /* _is_gfx_large_shadow */ in >> bits(my.t->_is_gfx_large_shadow);
     /* _is_hazard */           in >> bits(my.t->_is_hazard);
@@ -265,7 +266,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* minimap_valid */        in >> bits(my.t->minimap_valid);
     /* mouse */                in >> bits(my.t->mouse);
     /* mouse_old */            in >> bits(my.t->mouse_old);
-    /* next_thing_id */        in >> bits(my.t->next_thing_id);
     /* seed */                 in >> bits(my.t->seed);
     /* world_at */             in >> bits(my.t->world_at);
 

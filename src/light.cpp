@@ -121,7 +121,7 @@ void Light::calculate (int last)
     // Walk the light rays in a circle. First pass is to find the nearest
     // walls.
     //
-    bool do_set_visited = last && (level->player && (owner == level->player));
+    bool do_set_visited = (level->player && (owner == level->player));
     float step_delta1 = 0.02;
     float step_delta2 = 0.05;
 
