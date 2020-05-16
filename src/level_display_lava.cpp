@@ -212,6 +212,9 @@ void Level::display_lava (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     color c = RED;
     c.a = 200;
+    if (g_render_black_and_white) {
+        c = BLACK;
+    }
     glcolor(c);
     glTranslatef(-1, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 1,  1, 0);
     glTranslatef( 0, -1, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  1, 0);
