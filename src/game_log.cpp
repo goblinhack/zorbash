@@ -77,7 +77,6 @@ void Level::log (std::string pfx)
     LOG("%s map_follow_player         %u", pfx.c_str(), map_follow_player);
     LOG("%s map_wanted_at             %s", pfx.c_str(), map_wanted_at.to_string().c_str());
     LOG("%s timestamp_dungeon_created %u", pfx.c_str(), timestamp_dungeon_created);
-    LOG("%s next_thing_id             %08X", pfx.c_str(), next_thing_id);
 
     LOG("%s all_things", pfx.c_str());
     for (auto x = 0; x < MAP_WIDTH; ++x) {

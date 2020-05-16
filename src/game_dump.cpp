@@ -77,7 +77,6 @@ void Level::dump (std::string pfx, std::ostream &out)
     out << pfx << "map_follow_player         " << map_follow_player << std::endl;
     out << pfx << "map_wanted_at             " << map_wanted_at << std::endl;
     out << pfx << "timestamp_dungeon_created " << timestamp_dungeon_created << std::endl;
-    out << pfx << "next_thing_id             " << next_thing_id << std::endl;
 
     out << pfx << "all_things" << std::endl;
     for (auto x = 0; x < MAP_WIDTH; ++x) {

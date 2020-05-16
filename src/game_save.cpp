@@ -201,6 +201,7 @@ std::ostream& operator<<(std::ostream &out,
     /* _is_deep_water */       out << bits(my.t->_is_deep_water);
     /* _is_dirt */             out << bits(my.t->_is_dirt);
     /* _is_dungeon */          out << bits(my.t->_is_dungeon);
+    /* _is_fade_in */          out << bits(my.t->_is_fade_in);
     /* _is_floor */            out << bits(my.t->_is_floor);
     /* _is_gfx_large_shadow */ out << bits(my.t->_is_gfx_large_shadow);
     /* _is_hazard */           out << bits(my.t->_is_hazard);
@@ -221,7 +222,6 @@ std::ostream& operator<<(std::ostream &out,
     /* minimap_valid */        out << bits(my.t->minimap_valid);
     /* mouse */                out << bits(my.t->mouse);
     /* mouse_old */            out << bits(my.t->mouse_old);
-    /* next_thing_id */        out << bits(my.t->next_thing_id);
     /* seed */                 out << bits(my.t->seed);
     /* world_at */             out << bits(my.t->world_at);
 
