@@ -882,17 +882,6 @@ void Thing::blit_internal (spoint &blit_tl,
         blit_text(get_msg(), blit_tl, blit_br);
     }
 
-    if (!is_wall() && !is_rock()) {
-        uint8_t fade = level->is_fade_in_unsafe(mid_at.x, mid_at.y);
-        if (fade) {
-            level->incr_fade_in_unsafe(mid_at.x, mid_at.y);
-            c.a = fade;
-        } else {
-            c.a = 0;
-        }
-    }
-
-    glcolor(c);
     if (unlikely(get_on_fire_anim_id())) {
         static uint32_t ts;
         static color c = WHITE;
@@ -906,8 +895,21 @@ void Thing::blit_internal (spoint &blit_tl,
                 c = RED;
             }
         }
-        glcolor(c);
     }
+
+#if 1
+    if (!is_wall() && !is_rock()) {
+        uint8_t fade = level->is_fade_in_unsafe(mid_at.x, mid_at.y);
+        if (fade) {
+            level->incr_fade_in_unsafe(mid_at.x, mid_at.y);
+            c.a = fade;
+        } else {
+            c.a = 0;
+        }
+    }
+#endif
+
+    glcolor(c);
 
     if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
         if (reflection) {
@@ -934,6 +936,8 @@ void Thing::blit_internal (spoint &blit_tl,
         }
         blit_wall_cladding(blit_tl, blit_br, &tiles);
     }
+
+    glcolor(WHITE);
 
     is_blitted = true;
 }

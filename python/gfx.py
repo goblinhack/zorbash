@@ -9,6 +9,10 @@ def init_light():
     zx.tex_load(file="data/gfx/light.tga", name="light")
 
 
+def init_bloom():
+    zx.tex_load(file="data/gfx/bloom.tga", name="bloom")
+
+
 def init_ui_status_bar():
     tiles = [
         "status-bar-11",
@@ -935,6 +939,7 @@ def init_claws_tiles():
 init_solid()
 init_title()
 init_light()
+init_bloom()
 init_ui_status_bar()
 init_ui_status_bar_title()
 init_ui_dead()

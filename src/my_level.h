@@ -370,8 +370,8 @@ public:
             return;
         }
         auto v = get(_is_fade_in, x, y);
-        if (v < 252) {
-            v+=3;
+        if (v < 200) {
+            v+=10;
             set(_is_fade_in, x, y, v);
         } else {
             set(_is_fade_in, x, y, (uint8_t)255);
@@ -381,8 +381,8 @@ public:
     inline void incr_fade_in_unsafe (const int x, const int y)
     {_
         auto v = get_unsafe(_is_fade_in, x, y);
-        if (v < 252) {
-            v+=3;
+        if (v < 200) {
+            v+=10;
             set_unsafe(_is_fade_in, x, y, v);
         } else {
             set(_is_fade_in, x, y, (uint8_t)255);
