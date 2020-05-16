@@ -134,10 +134,6 @@ void Thing::update_interpolated_position (void)
 {
     get_bounce();
     if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
-        detach();
-        set_interpolated_mid_at(mid_at);
-        attach();
-        update_light();
         is_waiting_to_move = true;
     } else {
         float t = get_timestamp_move_end() - get_timestamp_move_begin();
@@ -149,11 +145,13 @@ void Thing::update_interpolated_position (void)
         auto x = last_mid_at.x + dx * step;
         auto y = last_mid_at.y + dy * step;
 
-        detach();
-        fpoint new_pos(x, y);
-        set_interpolated_mid_at(new_pos);
-        attach();
-        update_light();
+        if ((x != last_mid_at.x) || (y != last_mid_at.y)) {
+            detach();
+            fpoint new_pos(x, y);
+            set_interpolated_mid_at(new_pos);
+            attach();
+            update_light();
+        }
     }
 }
 
