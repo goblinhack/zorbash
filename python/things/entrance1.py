@@ -13,8 +13,7 @@ def tp_init(name, real_name):
     x.set_is_light_strength(4)
     x.set_light_color("yellow")
     x.set_a_or_an("the");
-    x.set_is_combustible(False)
-    x.set_z_depth(zx.MAP_DEPTH_EXIT)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     delay = 1000
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=delay)

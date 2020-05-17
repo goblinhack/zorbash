@@ -15,7 +15,6 @@ def init1(name):
     x.set_gfx_show_outlined(True)
     x.set_is_loggable(False)
     x.set_is_movable(True)
-    x.set_is_combustible(False)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 10

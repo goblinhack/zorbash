@@ -6,7 +6,7 @@ import zx
 zx.map_load_room(entrance=True, room_data=[
 "      ^      ","             ","             ","             ","             ",
 "   ......... ","             ","             ","             ","      ^      ",
-"  .CCCCCCC.. ","      ^      ","             ","      ^      ","  CCC....wwW ",
+"  .CCCCCCC.. ","      ^      ","             ","      ^      ","  CCC..b.wwW ",
 " ..CCCCCCC.. ","    .....    ","    .....    ","    m....    ","  .CCC....ww ",
 " .CCCCCCCC.. ","    .LLL.    ","    .L.L.    ","    .L.L.    ","  .......mww ",
 "<.C..CC.....>","   <..S..>   ","   <..S..>   ","   <..S..    ","  .k..S...ww ",

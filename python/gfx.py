@@ -831,10 +831,10 @@ def init_32x32_surface_effects():
             "deep_water1.9", "deep_water1.10", "deep_water1.11", "deep_water1.12", "deep_water1.13", "deep_water1.14", "deep_water1.15", "deep_water1.16",
             "lava1.1", "lava1.2", "lava1.3", "lava1.4", "lava1.5", "lava1.6", "lava1.7", "lava1.8",
             "lava1.9", "lava1.10", "lava1.11", "lava1.12", "lava1.13", "lava1.14", "lava1.15", "lava1.16",
-            "", "", "", "", "", "", "", "",
-            "", "", "", "", "", "", "", "",
             "chasm1.1", "chasm1.2", "chasm1.3", "chasm1.4", "chasm1.5", "chasm1.6", "chasm1.7", "chasm1.8",
             "chasm1.9", "chasm1.10", "chasm1.11", "chasm1.12", "chasm1.13", "chasm1.14", "chasm1.15", "chasm1.16",
+            "", "", "", "", "", "", "", "",
+            "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "",
             "", "", "", "", "", "", "", "",
     ]
@@ -894,6 +894,23 @@ def init_32x32_lava():
         name="32x32_lava", width=32, height=32, arr=tiles)
 
 
+def init_32x32_chasm():
+    tiles = [
+        "chasm1a", "chasm2a", "chasm3a", "chasm4a", "chasm5a", "chasm6a", "chasm7a", "chasm8a",
+        "chasm1b", "chasm2b", "chasm3b", "chasm4b", "chasm5b", "chasm6b", "chasm7b", "chasm8b",
+        "chasm1c", "chasm2c", "chasm3c", "chasm4c", "chasm5c", "chasm6c", "chasm7c", "chasm8c",
+        "chasm1d", "chasm2d", "chasm3d", "chasm4d", "chasm5d", "chasm6d", "chasm7d", "chasm8d",
+        "chasm1e", "chasm2e", "chasm3e", "chasm4e", "chasm5e", "chasm6e", "chasm7e", "chasm8e",
+        "chasm1f", "chasm2f", "chasm3f", "chasm4f", "chasm5f", "chasm6f", "chasm7f", "chasm8f",
+        "chasm1g", "chasm2g", "chasm3g", "chasm4g", "chasm5g", "chasm6g", "chasm7g", "chasm8g",
+        "chasm1h", "chasm2h", "chasm3h", "chasm4h", "chasm5h", "chasm6h", "chasm7h", "chasm8h",
+    ]
+
+    zx.tile_load_arr_color_and_black_and_white(
+        file="data/gfx/32x32_chasm.tga",
+        name="32x32_chasm", width=32, height=32, arr=tiles)
+
+
 def init_weapons_tiles():
     tiles = [
             "",
@@ -949,6 +966,7 @@ init_16x32()
 init_32x32()
 init_32x32_water()
 init_32x32_lava()
+init_32x32_chasm()
 init_32x32_deep_water()
 init_32x32_surface_effects()
 init_weapons_tiles()

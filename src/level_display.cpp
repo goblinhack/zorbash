@@ -62,6 +62,7 @@ void Level::display_map_things (int fbo,
     }
     blit_flush();
 
+    display_chasm(fbo, minx, miny, maxx, maxy);
     display_water(fbo, minx, miny, maxx, maxy);
     display_deep_water(fbo, minx, miny, maxx, maxy);
     display_lava(fbo, minx, miny, maxx, maxy);
