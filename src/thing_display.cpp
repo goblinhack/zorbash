@@ -660,7 +660,7 @@ void Thing::blit_internal (spoint &blit_tl,
         uint8_t fade = level->is_fade_in_unsafe(mid_at.x, mid_at.y);
         if (fade) {
             level->incr_fade_in_unsafe(mid_at.x, mid_at.y);
-            c.a = fade;
+            c.a = std::min(c.a, fade);
         } else {
             c.a = 0;
         }
@@ -737,7 +737,6 @@ void Thing::blit_upside_down (void)
         blit_tl.y += diff;
     }
 
-    color reflection = {0,155,155,100};
-    glcolor(reflection);
+    color reflection = {100,100,100,200};
     blit_internal(blit_tl, blit_br, tile, reflection, true);
 }
