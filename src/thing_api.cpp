@@ -3584,11 +3584,7 @@ int Thing::incr_on_fire_count (void)
 fpoint Thing::get_interpolated_mid_at (void)
 {_
     if (monstp) {
-        if (monstp->interpolated_mid_at == fpoint(0, 0)) {
-            return (mid_at);
-        } else {
-            return (monstp->interpolated_mid_at);
-        }
+        return (monstp->interpolated_mid_at);
     } else {
         return (mid_at);
     }
