@@ -181,7 +181,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
                 }
                 if (exits_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_EXIT,       exits_string[x]);
+                    set(l->data, x, y, MAP_DEPTH_OBJ,       exits_string[x]);
                 }
                 if (monst_string[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
@@ -219,7 +219,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 set(l->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
                 set(l->data, x, y, MAP_DEPTH_CHASM,      chasm_string[x]);
                 set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
-                set(l->data, x, y, MAP_DEPTH_EXIT,       exits_string[x]);
+                set(l->data, x, y, MAP_DEPTH_OBJ,       exits_string[x]);
                 set(l->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
                 set(l->data, x, y, MAP_DEPTH_OBJ,       obj_strings[x]);
                 set(l->data, x, y, MAP_DEPTH_PLAYER,     ' ');
