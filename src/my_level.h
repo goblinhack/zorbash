@@ -223,6 +223,7 @@ public:
     void cursor_move(void);
     void cursor_path_draw(point start, point end);
     void cursor_path_create(void);
+    void cursor_path_clear(void);
     void clear(void);
     bool is_anything_at(const int x, const int y);
     bool is_anything_at(const point &p);

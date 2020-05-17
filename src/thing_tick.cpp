@@ -36,15 +36,6 @@ void Thing::achieve_goals_in_life (void)
         return;
     }
 
-    if (is_player()) {
-        //
-        // Make sure we have a path shown if we just completed one.
-        //
-        if (!monstp->move_path.size()) {
-            level->cursor_path_create();
-        }
-    }
-
     //
     // If there is a next hop to go to, do it.
     //
