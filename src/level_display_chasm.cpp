@@ -128,13 +128,15 @@ void Level::display_chasm (int fbo,
     blit_fbo_bind(FBO_MASK2);
     glBlendFunc(GL_ONE, GL_ZERO);
     auto tile_map = level->chasm_tile_map;
-    for (auto y = miny; y < maxy; y+=2) {
-        for (auto x = minx; x < maxx; x+=2) {
+    for (auto x = minx; x < maxx; x++) {
+        int in_chasm = 0;
+        for (auto y = miny; y < maxy; y++) {
             if (likely(!get(tile_map, x, y))) {
+                in_chasm = 0;
                 continue;
             }
-            int tx = (x & ~1);
-            int ty = (y & ~1);
+            int tx = (x &~1);
+            int ty = (y &~1);
             int tlx = tx * TILE_WIDTH;
             int tly = ty * TILE_HEIGHT;
             int brx = tlx + (2 * TILE_WIDTH);
@@ -145,10 +147,11 @@ void Level::display_chasm (int fbo,
             brx -= pixel_map_at.x;
             bry -= pixel_map_at.y;
 
-            auto tile = get(chasm,
-                            (x&~1) % CHASM_ACROSS,
-                            (y&~1) % CHASM_DOWN);
-                            // (y + (int)chasm_step2/4) % CHASM_DOWN);
+            int lx = (x / 2) % CHASM_ACROSS;
+            int ly = (in_chasm / 2) % CHASM_DOWN;
+            in_chasm++;
+            auto tile = get(chasm, lx, ly);
+
             auto x1 = tile->x1;
             auto x2 = tile->x2;
             auto y1 = tile->y1;
@@ -159,37 +162,6 @@ void Level::display_chasm (int fbo,
 //            y2 += one_pix * chasm_step2;
 
             blit(tile->gl_binding(), x1, y2, x2, y1, tlx, bry, brx, tly);
-        }
-    }
-    blit_flush();
-
-    /////////////////////////////////////////////////////////////////////
-    // Add reflections
-    /////////////////////////////////////////////////////////////////////
-    blit_init();
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
-                if (g_render_black_and_white) {
-                    if (!is_visited(x, y)) {
-                        continue;
-                    }
-                }
-                if (likely(!get(tile_map, x, y + 1))) {
-                    continue;
-                }
-                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                    if (g_render_black_and_white) {
-                        if (t->is_monst() ||
-                            t->owner_get() ||
-                            t->get_light_count()) {
-                            continue;
-                        }
-                    }
-                    t->blit_upside_down();
-                } FOR_ALL_THINGS_END()
-            }
         }
     }
     blit_flush();
@@ -210,17 +182,7 @@ void Level::display_chasm (int fbo,
     blit_fbo_bind(FBO_MASK4);
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glcolor(BLACK);
-    glTranslatef( 0, -4, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  4, 0);
-    glTranslatef(-2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  2, 0);
-    glTranslatef( 0, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  2, 0);
-    glTranslatef( 2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  2, 0);
-    glTranslatef(-2,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  0, 0);
-    glTranslatef( 2,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  0, 0);
-    glTranslatef(-2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2, -2, 0);
-    glTranslatef( 0,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -2, 0);
-    glTranslatef( 2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2, -2, 0);
-    color c = RED;
+    color c = BLACK;
     c.a = 200;
     if (g_render_black_and_white) {
         c = BLACK;

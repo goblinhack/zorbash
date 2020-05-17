@@ -164,37 +164,6 @@ void Level::display_lava (int fbo,
     blit_flush();
 
     /////////////////////////////////////////////////////////////////////
-    // Add reflections
-    /////////////////////////////////////////////////////////////////////
-    blit_init();
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    for (auto z = MAP_DEPTH_LAST_FLOOR_TYPE + 1; z < MAP_DEPTH; z++) {
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
-                if (g_render_black_and_white) {
-                    if (!is_visited(x, y)) {
-                        continue;
-                    }
-                }
-                if (likely(!get(tile_map, x, y + 1))) {
-                    continue;
-                }
-                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                    if (g_render_black_and_white) {
-                        if (t->is_monst() ||
-                            t->owner_get() ||
-                            t->get_light_count()) {
-                            continue;
-                        }
-                    }
-                    t->blit_upside_down();
-                } FOR_ALL_THINGS_END()
-            }
-        }
-    }
-    blit_flush();
-
-    /////////////////////////////////////////////////////////////////////
     // Merge the mask and tiles
     /////////////////////////////////////////////////////////////////////
     blit_fbo_bind(FBO_MASK3);
