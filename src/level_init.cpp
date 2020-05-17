@@ -813,7 +813,7 @@ static void level_place_floor_deco (Dungeonp d)
                 continue;
             }
 
-            if (random_range(0, 100) < 95) {
+            if (random_range(0, 100) < 90) {
                 continue;
             }
 
