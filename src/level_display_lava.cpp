@@ -211,9 +211,15 @@ void Level::display_lava (int fbo,
     glClear(GL_COLOR_BUFFER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glcolor(BLACK);
-    glTranslatef( 0, -4, 0); blit_fbo(FBO_MASK1); glTranslatef(0,  4, 0);
-    glTranslatef( -2, 0, 0); blit_fbo(FBO_MASK1); glTranslatef(2,  0, 0);
-    glTranslatef(  2, 0, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  0, 0);
+    glTranslatef( 0, -4, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  4, 0);
+    glTranslatef(-2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  2, 0);
+    glTranslatef( 0, -2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0,  2, 0);
+    glTranslatef( 2, -2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  2, 0);
+    glTranslatef(-2,  0, 0); blit_fbo(FBO_MASK1); glTranslatef( 2,  0, 0);
+    glTranslatef( 2,  0, 0); blit_fbo(FBO_MASK1); glTranslatef(-2,  0, 0);
+    glTranslatef(-2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 2, -2, 0);
+    glTranslatef( 0,  2, 0); blit_fbo(FBO_MASK1); glTranslatef( 0, -2, 0);
+    glTranslatef( 2,  2, 0); blit_fbo(FBO_MASK1); glTranslatef(-2, -2, 0);
     color c = RED;
     c.a = 200;
     if (g_render_black_and_white) {
