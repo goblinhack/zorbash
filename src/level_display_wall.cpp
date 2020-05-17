@@ -164,6 +164,13 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
         tl2.y += th;
         br2.y += th;
         tile_blit(tiles->bot2_tile, tl2, br2);
+
+        //
+        // Darker
+        //
+        if (level->is_chasm(x, y + 1)) {
+            tile_blit(tiles->bot2_tile, tl2, br2);
+        }
     }
 
     if (tiles->left2_tile && !level->is_wall(x - 1, y)) {
