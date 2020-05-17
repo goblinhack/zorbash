@@ -11,8 +11,8 @@
 
 float glapi_last_tex_right;
 float glapi_last_tex_bottom;
-float glapi_last_right;
-float glapi_last_bottom;
+GLushort glapi_last_right;
+GLushort glapi_last_bottom;
 static int in_2d_mode;
 
 #define GL_ERROR_CHECK() { \
@@ -482,7 +482,6 @@ void blit_fbo_unbind (void)
 // x and y per element.
 //
 #define NUMBER_DIMENSIONS_PER_COORD_2D 2
-#define NUMBER_DIMENSIONS_PER_COORD_3D 3
 
 //
 // r,g,b,a per element
@@ -491,21 +490,10 @@ void blit_fbo_unbind (void)
 
 uint32_t NUMBER_BYTES_PER_VERTICE_2D = sizeof(GLfloat) *
                                        NUMBER_DIMENSIONS_PER_COORD_2D +
-                                       sizeof(GLfloat) *
+                                       sizeof(GLushort) *
                                        NUMBER_DIMENSIONS_PER_COORD_2D +
                                        sizeof(GLubyte) *
                                        NUMBER_COMPONENTS_PER_COLOR;
-
-uint32_t NUMBER_BYTES_PER_VERTICE_3D = sizeof(GLfloat) *
-                                       NUMBER_DIMENSIONS_PER_COORD_2D +
-                                       sizeof(GLfloat) *
-                                       NUMBER_DIMENSIONS_PER_COORD_3D +
-                                       sizeof(GLubyte) *
-                                       NUMBER_COMPONENTS_PER_COLOR;
-
-uint32_t NUMBER_FLOATS_PER_VERTICE_2D = NUMBER_BYTES_PER_VERTICE_2D / sizeof(float);
-uint32_t NUMBER_FLOATS_PER_VERTICE_3D = NUMBER_BYTES_PER_VERTICE_3D / sizeof(float);
-
 //
 // Two arrays, xy and uv.
 //
@@ -590,7 +578,7 @@ void blit_flush (void)
 
     glVertexPointer(
         NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-        GL_FLOAT,
+        GL_SHORT,
         NUMBER_BYTES_PER_VERTICE_2D,
         ((char*)gl_array_buf) +
             sizeof(GLfloat) *        // skip (u,v)
@@ -601,115 +589,17 @@ void blit_flush (void)
         GL_UNSIGNED_BYTE,
         NUMBER_BYTES_PER_VERTICE_2D,
         ((char*)gl_array_buf) +
-            sizeof(GLfloat) *        // skip (x,y)
+            sizeof(GLushort) *       // skip (x,y)
             NUMBER_DIMENSIONS_PER_COORD_2D +
             sizeof(GLfloat) *        // skip (u,v)
             NUMBER_DIMENSIONS_PER_COORD_2D);
 
+    GL_ERROR_CHECK();
     glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) nvertices);
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-
-    blit_init();
-}
-
-void blit_flush_3d (void)
-{_
-    if (gl_array_buf == bufp) {
-        return;
-    }
-
-    //
-    // Display all the tiles selected above in one blast.
-    //
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-
-    static long nvertices;
-
-    nvertices = ((char*)bufp - (char*)gl_array_buf) /
-                    NUMBER_BYTES_PER_VERTICE_3D;
-
-    glBindTexture(GL_TEXTURE_2D, buf_tex);
-
-    glTexCoordPointer(
-        NUMBER_DIMENSIONS_PER_COORD_2D, // (u,v)
-        GL_FLOAT,
-        NUMBER_BYTES_PER_VERTICE_3D,
-        gl_array_buf);
-
-    glVertexPointer(
-        NUMBER_DIMENSIONS_PER_COORD_3D, // (x,y)
-        GL_FLOAT,
-        NUMBER_BYTES_PER_VERTICE_3D,
-        ((char*)gl_array_buf) +
-            sizeof(GLfloat) *        // skip (u,v)
-            NUMBER_DIMENSIONS_PER_COORD_2D);
-
-    glColorPointer(
-        NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_UNSIGNED_BYTE,
-        NUMBER_BYTES_PER_VERTICE_3D,
-        ((char*)gl_array_buf) +
-            sizeof(GLfloat) *        // skip (x,y)
-            NUMBER_DIMENSIONS_PER_COORD_3D +
-            sizeof(GLfloat) *        // skip (u,v)
-            NUMBER_DIMENSIONS_PER_COORD_2D);
-
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) nvertices);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-
-    blit_init();
-}
-
-void blit_flush_colored_triangles (void)
-{_
-    if (gl_array_buf == bufp) {
-        return;
-    }
-
-    //
-    // Display all the tiles selected above in one blast.
-    //
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-
-    static long nvertices;
-
-    static const GLsizei stride =
-                        sizeof(GLfloat) *
-                        NUMBER_DIMENSIONS_PER_COORD_2D +
-                        sizeof(GLubyte) *
-                        NUMBER_COMPONENTS_PER_COLOR;
-
-    nvertices = ((char*)bufp - (char*)gl_array_buf) / stride;
-
-    glVertexPointer(
-        NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-        GL_FLOAT,
-        stride,
-        gl_array_buf);
-
-    glColorPointer(
-        NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_UNSIGNED_BYTE,
-        stride,
-        ((char*)gl_array_buf) +
-            sizeof(GLfloat) *        // skip (x,y)
-            NUMBER_DIMENSIONS_PER_COORD_2D);
-
-    glDrawArrays(GL_TRIANGLES, 0, (GLsizei) nvertices);
-
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
 
@@ -732,7 +622,7 @@ void blit_flush_triangle_fan (float *b, float *e)
     static long nvertices;
 
     static const GLsizei stride =
-                        sizeof(GLfloat) *
+                        sizeof(GLushort) *
                         NUMBER_DIMENSIONS_PER_COORD_2D +
                         sizeof(GLubyte) *
                         NUMBER_COMPONENTS_PER_COLOR;
@@ -741,7 +631,7 @@ void blit_flush_triangle_fan (float *b, float *e)
 
     glVertexPointer(
         NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-        GL_FLOAT,
+        GL_SHORT,
         stride,
         b);
 
@@ -750,9 +640,10 @@ void blit_flush_triangle_fan (float *b, float *e)
         GL_UNSIGNED_BYTE,
         stride,
         ((char*)b) +
-            sizeof(GLfloat) *        // skip (x,y)
+            sizeof(GLushort) *        // skip (x,y)
             NUMBER_DIMENSIONS_PER_COORD_2D);
 
+    GL_ERROR_CHECK();
     glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
 
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -761,184 +652,56 @@ void blit_flush_triangle_fan (float *b, float *e)
     blit_init();
 }
 
-void blit_flush_tex_triangle_fan (void)
+void gl_blitquad (GLushort left, GLushort top, GLushort right, GLushort bottom)
 {
-    if (gl_array_buf == bufp) {
-        return;
-    }
+    GLushort xy[4*2];
+    GLushort *xyp = xy;
 
-    //
-    // Display all the tiles selected above in one blast.
-    //
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-
-    static long nvertices;
-
-    nvertices = ((char*)bufp - (char*)gl_array_buf) /
-                    NUMBER_BYTES_PER_VERTICE_2D;
-
-    glBindTexture(GL_TEXTURE_2D, buf_tex);
-
-    glTexCoordPointer(
-        NUMBER_DIMENSIONS_PER_COORD_2D, // (u,v)
-        GL_FLOAT,
-        NUMBER_BYTES_PER_VERTICE_2D,
-        gl_array_buf);
-
-    glVertexPointer(
-        NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-        GL_FLOAT,
-        NUMBER_BYTES_PER_VERTICE_2D,
-        ((char*)gl_array_buf) +
-            sizeof(GLfloat) *        // skip (x,y)
-            NUMBER_DIMENSIONS_PER_COORD_2D);
-
-    glColorPointer(
-        NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_UNSIGNED_BYTE,
-        NUMBER_BYTES_PER_VERTICE_2D,
-        ((char*)gl_array_buf) +
-            sizeof(GLfloat) *        // skip (x,y)
-            NUMBER_DIMENSIONS_PER_COORD_2D +
-            sizeof(GLfloat) *        // skip (u,v)
-            NUMBER_DIMENSIONS_PER_COORD_2D);
-
-    glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) nvertices);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-
-    blit_init();
-}
-
-void blit_flush_triangle_strip (void)
-{
-    if (gl_array_buf == bufp) {
-        return;
-    }
-
-    //
-    // Display all the tiles selected above in one blast.
-    //
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glEnableClientState(GL_COLOR_ARRAY);
-
-    static long nvertices;
-
-    static const GLsizei stride =
-                        sizeof(GLfloat) *
-                        NUMBER_DIMENSIONS_PER_COORD_2D +
-                        sizeof(GLubyte) *
-                        NUMBER_COMPONENTS_PER_COLOR;
-
-    nvertices = ((char*)bufp - (char*)gl_array_buf) / stride;
-
-    glVertexPointer(
-        NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-        GL_FLOAT,
-        stride,
-        gl_array_buf);
-
-    glColorPointer(
-        NUMBER_COMPONENTS_PER_COLOR, // (r,g,b,a)
-        GL_UNSIGNED_BYTE,
-        stride,
-        ((char*)gl_array_buf) +
-            sizeof(GLfloat) *        // skip (x,y)
-            NUMBER_DIMENSIONS_PER_COORD_2D);
-
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) nvertices);
-
-    glDisableClientState(GL_VERTEX_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-
-    blit_init();
-}
-
-void blit_flush_triangles (void)
-{
-    if (gl_array_buf == bufp) {
-        return;
-    }
-
-    //
-    // Display all the tiles selected above in one blast.
-    //
-    glEnableClientState(GL_VERTEX_ARRAY);
-
-    static long number_bytes_per_vertice_2d =
-                    sizeof(GLfloat) * NUMBER_DIMENSIONS_PER_COORD_2D;
-
-    long nvertices = ((char*)bufp - (char*)gl_array_buf) /
-                    number_bytes_per_vertice_2d;
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    glVertexPointer(
-        NUMBER_DIMENSIONS_PER_COORD_2D, // (x,y)
-        GL_FLOAT,
-        0, // stride
-        ((char*)gl_array_buf));
-
-    glDrawArrays(GL_TRIANGLES, 0, (GLsizei) nvertices);
-
-    glDisableClientState(GL_VERTEX_ARRAY);
-
-    blit_init();
-}
-
-void gl_blitquad (float left, float top, float right, float bottom)
-{
-    GLfloat xy[4*2];
-    GLfloat *xyp = xy;
-
-    Vertex2f(left, top);
-    Vertex2f(right, top);
-    Vertex2f(left, bottom);
-    Vertex2f(right, bottom);
+    Vertex2(left, top);
+    Vertex2(right, top);
+    Vertex2(left, bottom);
+    Vertex2(right, bottom);
 
     glEnableClientState(GL_VERTEX_ARRAY);
 
-    glVertexPointer(2, GL_FLOAT, 0, xy);
+    glVertexPointer(2, GL_SHORT, 0, xy);
+    GL_ERROR_CHECK();
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitsquare (float left, float top, float right, float bottom)
+void gl_blitsquare (GLushort left, GLushort top, GLushort right, GLushort bottom)
 {
-    GLfloat xy[4*2];
-    GLfloat *xyp = xy;
+    GLushort xy[4*2];
+    GLushort *xyp = xy;
 
-    Vertex2f(left, top);
-    Vertex2f(right, top);
-    Vertex2f(right, bottom);
-    Vertex2f(left, bottom);
+    Vertex2(left, top);
+    Vertex2(right, top);
+    Vertex2(right, bottom);
+    Vertex2(left, bottom);
 
     glEnableClientState(GL_VERTEX_ARRAY);
 
-    glVertexPointer(2, GL_FLOAT, 0, xy);
+    glVertexPointer(2, GL_SHORT, 0, xy);
+    GL_ERROR_CHECK();
     glDrawArrays(GL_LINE_LOOP, 0, 4);
 
     glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void gl_blitline (float left, float top, float right, float bottom)
+void gl_blitline (GLushort left, GLushort top, GLushort right, GLushort bottom)
 {
-    GLfloat xy[2*2];
-    GLfloat *xyp = xy;
+    GLushort xy[2*2];
+    GLushort *xyp = xy;
 
-    Vertex2f(left, top);
-    Vertex2f(right, bottom);
+    Vertex2(left, top);
+    Vertex2(right, bottom);
 
     glEnableClientState(GL_VERTEX_ARRAY);
 
-    glVertexPointer(2, GL_FLOAT, 0, xy);
+    glVertexPointer(2, GL_SHORT, 0, xy);
+    GL_ERROR_CHECK();
     glDrawArrays(GL_LINES, 0, 2);
 
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -1583,7 +1346,7 @@ void tile_blit (const Tilep &tile,
                 const spoint &bl,
                 const spoint &br)
 {
-    float x1, x2, y1, y2;
+    GLushort x1, x2, y1, y2;
 
     //
     // Only some walls have deco tiles, so the pointer is left null for
