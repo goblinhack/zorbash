@@ -91,7 +91,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     color c = BLACK;
     c.a = 150;
     glcolor(c);
-    tile_blit(tile, shadow_bl, shadow_br, shadow_bl, shadow_tr);
+    tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
     glcolor(WHITE);
 }
 

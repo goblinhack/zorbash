@@ -1346,7 +1346,7 @@ void tile_blit (const Tilep &tile,
                 const spoint &bl,
                 const spoint &br)
 {
-    GLushort x1, x2, y1, y2;
+    float x1, x2, y1, y2;
 
     //
     // Only some walls have deco tiles, so the pointer is left null for
@@ -1370,8 +1370,10 @@ void tile_blit (uint16_t index, const spoint &tl, const spoint &br)
 }
 
 void tile_blit_section (const Tilep &tile,
-                        const spoint &tile_tl, const spoint &tile_br,
-                        const spoint &tl, const spoint &br)
+                        const spoint &tile_tl,
+                        const spoint &tile_br,
+                        const spoint &tl,
+                        const spoint &br)
 {
     float x1, x2, y1, y2;
 
