@@ -49,8 +49,6 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
             std::string lava_string;
             std::string chasm_string;
             std::string walls_string;
-            std::string monst_string;
-            std::string exits_string;
             std::string obj_strings;
 
             for (auto& c : py_obj_to_string(o)) {
@@ -109,26 +107,16 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     walls_string += Charmap::SPACE;
                 }
 
-                if (m.is_monst) {
-                    monst_string += c;
-                } else {
-                    monst_string += Charmap::SPACE;
-                }
-
-                if (m.is_entrance ||
-                    m.is_exit) {
-                    exits_string += c;
-                } else {
-                    exits_string += Charmap::SPACE;
-                }
-
-                if (m.is_trap ||
-                    m.is_treasure ||
-                    m.is_blood ||
-                    m.is_food ||
+                if (m.is_blood ||
+                    m.is_entrance ||
+                    m.is_exit ||
                     m.is_floor_deco ||
-                    m.is_wall_deco ||
-                    m.is_key) {
+                    m.is_food ||
+                    m.is_key ||
+                    m.is_monst ||
+                    m.is_trap ||
+                    m.is_treasure ||
+                    m.is_wall_deco) {
                     obj_strings += c;
                 } else {
                     obj_strings += Charmap::SPACE;
@@ -155,10 +143,6 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 ERR("level walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), MAP_WIDTH);
             }
-            if (exits_string.size() != MAP_WIDTH){
-                ERR("level exits width mismatch, %d, expected %d",
-                    (int)exits_string.size(), MAP_WIDTH);
-            }
             if (obj_strings.size() != MAP_WIDTH){
                 ERR("level items width mismatch, %d, expected %d",
                     (int)obj_strings.size(), MAP_WIDTH);
@@ -180,16 +164,9 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 if (walls_string[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
                 }
-                if (exits_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_OBJ,       exits_string[x]);
-                }
-                if (monst_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
-                }
                 if (obj_strings[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_OBJ,       obj_strings[x]);
                 }
-                set(l->data, x, y, MAP_DEPTH_PLAYER,     ' ');
             }
 
             if (floor_string.size() != MAP_WIDTH){
@@ -204,10 +181,6 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 ERR("level walls width mismatch, %d, expected %d",
                     (int)walls_string.size(), MAP_WIDTH);
             }
-            if (exits_string.size() != MAP_WIDTH){
-                ERR("level exits width mismatch, %d, expected %d",
-                    (int)exits_string.size(), MAP_WIDTH);
-            }
             if (obj_strings.size() != MAP_WIDTH){
                 ERR("level items width mismatch, %d, expected %d",
                     (int)obj_strings.size(), MAP_WIDTH);
@@ -219,10 +192,6 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 set(l->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
                 set(l->data, x, y, MAP_DEPTH_CHASM,      chasm_string[x]);
                 set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
-                set(l->data, x, y, MAP_DEPTH_OBJ,       exits_string[x]);
-                set(l->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);
-                set(l->data, x, y, MAP_DEPTH_OBJ,       obj_strings[x]);
-                set(l->data, x, y, MAP_DEPTH_PLAYER,     ' ');
             }
         }
     }
