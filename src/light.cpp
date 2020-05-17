@@ -424,29 +424,9 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
         }
     }
 
-    glBlendFunc(GL_DST_COLOR, GL_ONE);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE); // best
-// visible
-glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE_MINUS_CONSTANT_ALPHA); // 2
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA); // 2
+    // glBlendFunc(GL_ZERO, GL_ONE); // basic
+    glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE_MINUS_CONSTANT_COLOR);
 
-glBlendFunc(GL_ZERO, GL_ONE); // hidden 1
-glBlendFunc(GL_ONE_MINUS_SRC_COLOR, GL_ONE_MINUS_CONSTANT_ALPHA); // 2
-
-glBlendFunc(GL_DST_COLOR, GL_ONE); // 3 hidden
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA); // 3
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // 3 hidden visible, lava has red glow
-glBlendFunc(GL_SRC_ALPHA_SATURATE, GL_ONE_MINUS_CONSTANT_COLOR); // 3
-#if 0
-glBlendEquation(GL_FUNC_ADD);
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-extern int vals[];
-extern std::string vals_str[];
-extern int g_blend_a;
-extern int g_blend_b;
-CON("glBlendFunc(%s, %s)", vals_str[g_blend_a].c_str(), vals_str[g_blend_b].c_str());
-glBlendFunc(vals[g_blend_a], vals[g_blend_b]);
-#endif
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
