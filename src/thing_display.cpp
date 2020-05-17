@@ -91,7 +91,7 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     color c = BLACK;
     c.a = 150;
     glcolor(c);
-    tile_blit(tile, shadow_bl, shadow_br, shadow_tl, shadow_tr);
+    tile_blit(tile, shadow_bl, shadow_br, shadow_bl, shadow_tr);
     glcolor(WHITE);
 }
 
@@ -671,10 +671,10 @@ void Thing::blit_internal (spoint &blit_tl,
     if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
         if (reflection) {
             if (auto submerged = blit_begin_reflection_submerged()) {
-                tile_blit_outline(tile, blit_tl, blit_br, c);
+                tile_blit(tile, blit_tl, blit_br);
                 blit_end_reflection_submerged(submerged);
             } else {
-                tile_blit_outline(tile, blit_tl, blit_br, c);
+                tile_blit(tile, blit_tl, blit_br);
             }
         } else if (auto submerged = blit_begin_submerged()) {
             tile_blit_outline(tile, blit_tl, blit_br, c);
@@ -737,7 +737,7 @@ void Thing::blit_upside_down (void)
         blit_tl.y += diff;
     }
 
-    color reflection = {155,155,155,200};
+    color reflection = {0,155,155,100};
     glcolor(reflection);
     blit_internal(blit_tl, blit_br, tile, reflection, true);
 }
