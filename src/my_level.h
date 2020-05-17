@@ -206,6 +206,7 @@ public:
 
     void display(void);
     void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_chasm(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void scroll_map(void);
@@ -371,7 +372,7 @@ public:
         }
         auto v = get(_is_fade_in, x, y);
         if (v < 200) {
-            v+=10;
+            v+=5;
             set(_is_fade_in, x, y, v);
         } else {
             set(_is_fade_in, x, y, (uint8_t)255);
@@ -382,7 +383,7 @@ public:
     {_
         auto v = get_unsafe(_is_fade_in, x, y);
         if (v < 200) {
-            v+=10;
+            v+=5;
             set_unsafe(_is_fade_in, x, y, v);
         } else {
             set(_is_fade_in, x, y, (uint8_t)255);

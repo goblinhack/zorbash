@@ -14,8 +14,7 @@ def tp_init(name,
     x.set_is_movement_blocking(True)
     x.set_is_wall_deco(True)
     x.set_a_or_an("a");
-    x.set_is_combustible(False)
-    x.set_z_depth(zx.MAP_DEPTH_WALLS_DECO)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     delay = 2500
     for t in tiles:

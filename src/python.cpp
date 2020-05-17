@@ -2072,19 +2072,15 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_WIDTH", MAP_WIDTH);
     PyModule_AddIntConstant(zx_mod, "MAP_HEIGHT", MAP_HEIGHT);
 
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_BLOOD", MAP_DEPTH_BLOOD);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_CHASM", MAP_DEPTH_CHASM);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_CURSOR", MAP_DEPTH_CURSOR);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_EXIT", MAP_DEPTH_EXIT);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FIRE", MAP_DEPTH_FIRE);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_FLOOR_DECO", MAP_DEPTH_FLOOR_DECO);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_ITEM", MAP_DEPTH_ITEM);
+    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_OBJ", MAP_DEPTH_OBJ);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_LAVA", MAP_DEPTH_LAVA);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_MONST", MAP_DEPTH_MONST);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_PLAYER", MAP_DEPTH_PLAYER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS", MAP_DEPTH_WALLS);
-    PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WALLS_DECO", MAP_DEPTH_WALLS_DECO);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WEAPON", MAP_DEPTH_WEAPON);
 

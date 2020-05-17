@@ -10,8 +10,7 @@ def tp_init(name):
     x.set_is_msg(True)
     x.set_is_no_tile(True)
     x.set_a_or_an("a");
-    x.set_is_combustible(False)
-    x.set_z_depth(zx.MAP_DEPTH_MONST)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     x.update()
 

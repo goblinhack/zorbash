@@ -42,7 +42,7 @@ def tp_init(name, real_name):
     x.set_stats_strength(9)
     x.set_weapon_use_anim("claws1")
     x.set_is_combustible(True)
-    x.set_z_depth(zx.MAP_DEPTH_MONST)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     delay = 200
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

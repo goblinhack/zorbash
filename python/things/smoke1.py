@@ -11,8 +11,7 @@ def tp_init(name):
     x.set_is_loggable(False)
     x.set_is_active(True)
     x.set_a_or_an("");
-    x.set_is_combustible(False)
-    x.set_z_depth(zx.MAP_DEPTH_MONST)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     delay = 50
     x.set_tile(tile=name + ".1", delay_ms=delay)
