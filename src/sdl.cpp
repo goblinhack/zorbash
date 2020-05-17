@@ -14,7 +14,6 @@
 #include "stb_image_write.h"
 
 static int sdl_get_mouse(void);
-static void sdl_screenshot_(void);
 
 uint8_t sdl_main_loop_running;
 uint8_t sdl_shift_held;
@@ -1366,7 +1365,7 @@ void sdl_loop (void)
 
                 if (unlikely(g_do_screenshot)) {
                     g_do_screenshot = 0;
-                    sdl_screenshot_();
+                    sdl_screenshot_do();
                 }
             }
         }
@@ -1398,45 +1397,6 @@ void sdl_loop (void)
 #ifdef ENABLE_ASCII_MOUSE
     SDL_ShowCursor(1);
 #endif
-}
-
-void sdl_screenshot (void)
-{_
-    g_do_screenshot = 1;
-}
-
-static void sdl_screenshot_ (void)
-{_
-    int w = game->config.inner_pix_width;
-    int h = game->config.inner_pix_height;
-
-    static int count;
-
-    glPixelStorei(GL_PACK_ALIGNMENT, 1);
-    glReadBuffer(GL_BACK_LEFT);
-
-    std::vector<uint8_t> pixels(3 * w * h);
-    glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
-
-    for(int line = 0; line != h/2; ++line) {
-        std::swap_ranges(pixels.begin() + 3 * w * line,
-                            pixels.begin() + 3 * w * (line+1),
-                            pixels.begin() + 3 * w * (h-line-1));
-    }
-
-    int components = 3;
-
-    char *png = dynprintf("screenshot.%d.png", count);
-    stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
-    MINICON("Screenshot: %s", png);
-    myfree(png);
-
-    char *tga = dynprintf("screenshot.%d.tga", count);
-    stbi_write_tga(tga, w, h, components, pixels.data());
-    MINICON("Screenshot: %s", tga);
-    myfree(tga);
-
-    count++;
 }
 
 void sdl_flush_display (void)
