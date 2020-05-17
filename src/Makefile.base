@@ -81,6 +81,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/python.o 			\
     $(OBJDIR)/room.o 			\
     $(OBJDIR)/sdl.o 			\
+    $(OBJDIR)/sdl_screenshot.o 		\
     $(OBJDIR)/slre.o 			\
     $(OBJDIR)/sprintf.o 		\
     $(OBJDIR)/stb_image.o 		\

@@ -95,7 +95,6 @@ typedef void(*on_sdl_key_grab_t)(SDL_Scancode);
 extern on_sdl_key_grab_t on_sdl_key_grab;
 
 extern std::array<uint8_t, SDL_MAX_BUTTONS> sdl_joy_buttons;
-extern void sdl_screenshot(void);
 extern uint8_t config_fps_counter_set(tokensp, void *context);
 extern void config_gfx_inverted_toggle(void);
 extern uint8_t config_gfx_inverted_set(tokensp, void *context);
@@ -115,4 +114,6 @@ extern uint8_t config_debug_mode(tokensp, void *context);
 extern uint8_t config_errored(tokensp, void *context);
 extern void config_gfx_vsync_update(void);
 extern void sdl_flush_display(void);
+extern void sdl_screenshot(void);
+extern void sdl_screenshot_do(void);
 #endif
