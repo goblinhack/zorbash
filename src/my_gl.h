@@ -58,17 +58,12 @@ void gl_enter_2_5d_mode(void);
 void gl_leave_2_5d_mode(void);
 
 void blit_flush(void);
-void blit_flush_3d(void);
-void blit_flush_triangles(void);
-void blit_flush_colored_triangles(void);
 void blit_flush_triangle_fan(void);
 void blit_flush_triangle_fan(float *begin, float *end);
-void blit_flush_triangle_strip(void);
-void blit_flush_tex_triangle_fan(void);
 void blit_fini(void);
-void gl_blitquad(float tlx, float tly, float brx, float bry);
-void gl_blitsquare(float tlx, float tly, float brx, float bry);
-void gl_blitline(float tlx, float tly, float brx, float bry);
+void gl_blitquad(GLushort tlx, GLushort tly, GLushort brx, GLushort bry);
+void gl_blitsquare(GLushort tlx, GLushort tly, GLushort brx, GLushort bry);
+void gl_blitline(GLushort tlx, GLushort tly, GLushort brx, GLushort bry);
 
 //
 // Push elements onto the array buffer.
@@ -84,19 +79,10 @@ void gl_blitline(float tlx, float tly, float brx, float bry);
 //
 #define gl_push_vertex(p, x, y) \
 { \
-    *p++ = x; \
-    *p++ = y; \
-}
-
-//
-// Push elements onto the array buffer.
-// Ok, why, z then y ? for isometric views, it's easier to think of z as up
-//
-#define gl_push_vertex_3d(p, x, z, y) \
-{ \
-    *p++ = x; \
-    *p++ = y; \
-    *p++ = z; \
+    auto c = (GLushort*) p; \
+    *c++ = x; \
+    *c++ = y; \
+    p = (GLfloat*)c; \
 }
 
 //
@@ -112,14 +98,9 @@ void gl_blitline(float tlx, float tly, float brx, float bry);
     p = (GLfloat*)c; \
 } \
 
-#define Vertex2f(x, y)                          \
-    *xyp++ = x;                                 \
+#define Vertex2(x, y) \
+    *xyp++ = x;       \
     *xyp++ = y;
-
-#define Vertex3f(x, y, z)                       \
-    *xyp++ = x;                                 \
-    *xyp++ = y;                                 \
-    *xyp++ = z;
 
 extern GLfloat *bufp;
 extern GLfloat *bufp_end;
@@ -129,8 +110,8 @@ extern void blit_init(void);
 
 extern float glapi_last_tex_right;
 extern float glapi_last_tex_bottom;
-extern float glapi_last_right;
-extern float glapi_last_bottom;
+extern GLushort glapi_last_right;
+extern GLushort glapi_last_bottom;
 
 //
 // gl_push_triangle
@@ -304,9 +285,7 @@ extern PFNGLDELETEBUFFERSARBPROC glDeleteBuffersARB_EXT;
 #endif
 
 extern uint32_t NUMBER_BYTES_PER_VERTICE_2D;
-extern uint32_t NUMBER_BYTES_PER_VERTICE_3D;
 extern uint32_t NUMBER_FLOATS_PER_VERTICE_2D;
-extern uint32_t NUMBER_FLOATS_PER_VERTICE_3D;
 
 void gl_ortho_set(int32_t width, int32_t height);
 
@@ -355,72 +334,6 @@ static inline void glcolor (color s)
 static inline void glcolorfast (color s)
 {
     gl_last_color = s;
-}
-
-//
-// gl_push
-//
-static inline void
-gl_push (float **P,
-         float *p_end,
-         uint8_t first,
-         float tex_left,
-         float tex_top,
-         float tex_right,
-         float tex_bottom,
-         fpoint tl,
-         fpoint tr,
-         fpoint bl,
-         fpoint br,
-         uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1,
-         uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2,
-         uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
-         uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
-{
-    float *p = *P;
-
-    if (unlikely(p >= p_end)) {
-        ERR("overflow on gl bug %s", __FUNCTION__);
-        return;
-    }
-
-    if (likely(!first)) {
-        //
-        // If there is a break in the triangle strip then make a degenerate
-        // triangle.
-        //
-        if ((glapi_last_right != bl.x) || (glapi_last_bottom != bl.y)) {
-            gl_push_texcoord(p, glapi_last_tex_right, glapi_last_tex_bottom);
-            gl_push_vertex(p, glapi_last_right, glapi_last_bottom);
-            gl_push_rgba(p, r4, g4, b4, a4);
-
-            gl_push_texcoord(p, tex_left,  tex_top);
-            gl_push_vertex(p, tl.x,  tl.y);
-            gl_push_rgba(p, r1, g1, b1, a1);
-        }
-    }
-
-    gl_push_texcoord(p, tex_left,  tex_top);
-    gl_push_vertex(p, tl.x,  tl.y);
-    gl_push_rgba(p, r1, g1, b1, a1);
-
-    gl_push_texcoord(p, tex_left,  tex_bottom);
-    gl_push_vertex(p, bl.x,  bl.y);
-    gl_push_rgba(p, r2, g2, b2, a2);
-
-    gl_push_texcoord(p, tex_right, tex_top);
-    gl_push_vertex(p, tr.x, tr.y);
-    gl_push_rgba(p, r3, g3, b3, a3);
-
-    gl_push_texcoord(p, tex_right, tex_bottom);
-    gl_push_vertex(p, br.x, br.y);
-    gl_push_rgba(p, r4, g4, b4, a4);
-
-    glapi_last_tex_right = tex_right;
-    glapi_last_tex_bottom = tex_bottom;
-    glapi_last_right = br.x;
-    glapi_last_bottom = br.y;
-    *P = p;
 }
 
 //
@@ -500,19 +413,19 @@ gl_push (float **P,
          float tex_top,
          float tex_right,
          float tex_bottom,
-         float left,
-         float top,
-         float right,
-         float bottom,
+         GLushort left,
+         GLushort top,
+         GLushort right,
+         GLushort bottom,
          uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1,
          uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2,
          uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
          uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
 {
-    fpoint tl(left, top);
-    fpoint tr(right, top);
-    fpoint bl(left, bottom);
-    fpoint br(right, bottom);
+    spoint tl(left, top);
+    spoint tr(right, top);
+    spoint bl(left, bottom);
+    spoint br(right, bottom);
 
     gl_push(P, p_end, first,
             tex_left,
@@ -532,10 +445,10 @@ void blit (int tex,
            float texMinY,
            float texMaxX,
            float texMaxY,
-           float left,
-           float top,
-           float right,
-           float bottom)
+           GLushort left,
+           GLushort top,
+           GLushort right,
+           GLushort bottom)
 {
     uint8_t first;
 
@@ -568,54 +481,6 @@ void blit (int tex,
             top,
             right,
             bottom,
-            r, g, b, a,
-            r, g, b, a,
-            r, g, b, a,
-            r, g, b, a);
-}
-
-static inline
-void blit (int tex,
-           float texMinX,
-           float texMinY,
-           float texMaxX,
-           float texMaxY,
-           fpoint tl,
-           fpoint tr,
-           fpoint bl,
-           fpoint br)
-{
-    uint8_t first;
-
-    if (unlikely(!buf_tex)) {
-        blit_init();
-        first = true;
-    } else if (unlikely(buf_tex != tex)) {
-        blit_flush();
-        first = true;
-    } else {
-        first = false;
-    }
-
-    buf_tex = tex;
-
-    color c = gl_color_current();
-    uint8_t r = c.r;
-    uint8_t g = c.g;
-    uint8_t b = c.b;
-    uint8_t a = c.a;
-
-    gl_push(&bufp,
-            bufp_end,
-            first,
-            texMinX,
-            texMinY,
-            texMaxX,
-            texMaxY,
-            tl,
-            tr,
-            bl,
-            br,
             r, g, b, a,
             r, g, b, a,
             r, g, b, a,
@@ -676,10 +541,10 @@ void blit_colored (int tex,
                    float texMinY,
                    float texMaxX,
                    float texMaxY,
-                   float left,
-                   float top,
-                   float right,
-                   float bottom,
+                   GLushort left,
+                   GLushort top,
+                   GLushort right,
+                   GLushort bottom,
                    color color_bl,
                    color color_br,
                    color color_tl,
@@ -730,19 +595,19 @@ void blit_colored (int tex,
 }
 
 static inline
-void blit (int tex, float left, float top, float right, float bottom)
+void blit (int tex, GLushort left, GLushort top, GLushort right, GLushort bottom)
 {
     blit(tex, 0, 0, 1, 1, left, top, right, bottom);
 }
 
 static inline
-void blit (int tex, fpoint tl, fpoint tr, fpoint bl, fpoint br)
+void blit (int tex, spoint tl, spoint tr, spoint bl, spoint br)
 {
     blit(tex, 0, 0, 1, 1, tl, tr, bl, br);
 }
 
 static inline
-void blit_colored (int tex, float left, float top, float right, float bottom,
+void blit_colored (int tex, GLushort left, GLushort top, GLushort right, float bottom,
                    color color_bl, color color_br,
                    color color_tl, color color_tr)
 {

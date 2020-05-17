@@ -1308,7 +1308,7 @@ void sdl_loop (void)
         blit_fbo_bind(FBO_FINAL);
         glClear(GL_COLOR_BUFFER_BIT);
         glcolor(WHITE);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
+        // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_COLOR);
         glBlendFunc(GL_ONE, GL_ZERO);
         blit_fbo_outer(FBO_MAP);
 
