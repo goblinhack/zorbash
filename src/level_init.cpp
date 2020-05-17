@@ -584,7 +584,7 @@ static void level_place_lava (Dungeonp d,
             (void) thing_new(what, fpoint(x, y));
 
             if (random_range(0, 100) < 20) {
-                thing_new("smoke1", fpoint(x, y), fpoint(0.5, 0.5));
+                thing_new("smoke1", fpoint(x, y));
             }
         }
     }
@@ -604,10 +604,6 @@ static void level_place_chasm (Dungeonp d,
             }
 
             (void) thing_new(what, fpoint(x, y));
-
-            if (random_range(0, 1000) < 10) {
-                thing_new("smoke1", fpoint(x, y), fpoint(0.5, 0.5));
-            }
         }
     }
 }

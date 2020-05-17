@@ -367,6 +367,8 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     if (tp_is_floor(tpp))       { level->set_floor(new_at.x, new_at.y); }
     if (tp_is_hazard(tpp))      { level->set_hazard(new_at.x, new_at.y); }
     if (tp_is_lava(tpp))        { level->set_lava(new_at.x, new_at.y); }
+    if (tp_is_chasm(tpp))        { level->set_chasm(new_at.x, new_at.y); }
+    if (tp_is_hazard(tpp))      { level->set_hazard(new_at.x, new_at.y); }
     if (tp_is_rock(tpp))        { level->set_rock(new_at.x, new_at.y); }
     if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
@@ -411,11 +413,8 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         if (unlikely(tp_is_light_strength(tpp))) {
             std::string l = tp_light_color(tpp);
             bool add_light = true;
-            if (tp_is_water(tpp) ||
-                tp_is_lava(tpp)) {
-                if (random_range(0, 100) < 50) {
-                    add_light = false;
-                }
+            if (random_range(0, 100) < 50) {
+                add_light = false;
             }
             if (add_light) {
                 color c = string2color(l);
@@ -481,6 +480,7 @@ void Thing::reinit (void)
     if (tp_is_floor(tpp))       { level->set_floor(new_at.x, new_at.y); }
     if (tp_is_hazard(tpp))      { level->set_hazard(new_at.x, new_at.y); }
     if (tp_is_lava(tpp))        { level->set_lava(new_at.x, new_at.y); }
+    if (tp_is_chasm(tpp))       { level->set_chasm(new_at.x, new_at.y); }
     if (tp_is_rock(tpp))        { level->set_rock(new_at.x, new_at.y); }
     if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
     if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
@@ -551,6 +551,7 @@ void Thing::destroy (void)
     if (is_floor())       { level->unset_floor(old_at.x, old_at.y); }
     if (is_hazard())      { level->unset_hazard(old_at.x, old_at.y); }
     if (is_lava())        { level->unset_lava(old_at.x, old_at.y); }
+    if (is_chasm())       { level->unset_chasm(old_at.x, old_at.y); }
     if (is_rock())        { level->unset_rock(old_at.x, old_at.y); }
     if (is_secret_door()) { level->unset_secret_door(old_at.x, old_at.y); }
     if (is_wall())        { level->unset_wall(old_at.x, old_at.y); }
