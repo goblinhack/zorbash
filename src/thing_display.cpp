@@ -27,13 +27,13 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
             // use default shadow for carried items
         } else if (this != level->player) {
             fpoint p = level->player->get_interpolated_mid_at();
-            fpoint d = get_interpolated_mid_at() -
-                             level->player->get_interpolated_mid_at();
+            fpoint o = get_interpolated_mid_at();
+            fpoint d = o - p;
             const float D = 16.0;
             dx = d.x / D;
             dy = d.y / D;
 
-            if (distance(mid_at, p) > TILES_ACROSS / 2) {
+            if (distance(o, p) > TILES_ACROSS / 2) {
                 return;
             }
         }
@@ -276,9 +276,9 @@ bool Thing::get_coords (spoint &blit_tl,
                         Tilep &tile,
                         bool reflection)
 {_
-    fpoint mid_at = get_interpolated_mid_at();
-    int x = (int)mid_at.x;
-    int y = (int)mid_at.y;
+    fpoint at = get_interpolated_mid_at();
+    int x = (int)at.x;
+    int y = (int)at.y;
 
     //
     // We render these offset form their owner, so if dead, then it is
@@ -322,8 +322,8 @@ bool Thing::get_coords (spoint &blit_tl,
 
     float tilew = game->config.tile_pix_width;
     float tileh = game->config.tile_pix_height;
-    float X = mid_at.x;
-    float Y = mid_at.y;
+    float X = at.x;
+    float Y = at.y;
 
     blit_tl.x = (float)X * tilew;
     blit_tl.y = (float)Y * tileh;
@@ -494,7 +494,7 @@ bool Thing::get_coords (spoint &blit_tl,
         //
         // Render the weapon and player on the same tile rules
         //
-        auto map_loc = mid_at;
+        auto map_loc = at;
         if (owner) {
             map_loc = owner->mid_at;
         }

@@ -398,6 +398,10 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         move_to_immediately(fpoint(mid_at.x + dx, mid_at.y + dy));
     }
 
+    //
+    // Set position prior to attach
+    //
+    set_interpolated_mid_at(mid_at);
     attach();
 
     //
