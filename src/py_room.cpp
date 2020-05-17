@@ -217,7 +217,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     set(r->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
                 }
                 if (exits_string[x] != ' ') {
-                    set(r->data, x, y, MAP_DEPTH_EXIT,       exits_string[x]);
+                    set(r->data, x, y, MAP_DEPTH_OBJ,       exits_string[x]);
                 }
                 if (monst_string[x] != ' ') {
                     set(r->data, x, y, MAP_DEPTH_MONST,      monst_string[x]);

@@ -17,7 +17,7 @@ def tp_init(name, real_name):
     x.set_is_interesting(True)
     x.set_a_or_an("the");
     x.set_is_combustible(True)
-    x.set_z_depth(zx.MAP_DEPTH_EXIT)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     x.set_tile(tile=name + ".1-closed")
 
