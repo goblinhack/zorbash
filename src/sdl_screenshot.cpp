@@ -23,7 +23,7 @@ void sdl_screenshot_do (void)
     int w = game->config.outer_pix_width;
     int h = game->config.outer_pix_height;
 
-    static int count;
+    static int count = 1;
 
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
     glReadBuffer(GL_BACK_LEFT);

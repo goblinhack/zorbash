@@ -15,7 +15,7 @@ def tp_init(name, real_name):
     x.set_is_loggable(False)
     x.set_is_nutrition_hd("1d4")
     x.set_stats_health_initial(4)
-    x.set_z_depth(zx.MAP_DEPTH_OBJ)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     x.set_tile(tile=name + ".100", is_hp_100_percent=True)
     x.set_tile(tile=name + ".75", is_hp_75_percent=True)

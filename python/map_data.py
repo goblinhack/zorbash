@@ -6,8 +6,8 @@ import zx
 zx.map_load_room(entrance=True, room_data=[
 "      ^      ","             ","             ","             ","             ",
 "   ......... ","             ","             ","             ","      ^      ",
-"  .CCCCCCC.. ","      ^      ","             ","      ^      ","  CCC....wwk ",
-" ..CCCCCCC.. ","    .....    ","    .....    ","    m....    ","  CCCC....ww ",
+"  .CCCCCCC.. ","      ^      ","             ","      ^      ","  CCC..b.wwk ",
+" ..CCCCCCC.. ","    .....    ","    .....    ","    m....    ","  CCCC..b.ww ",
 " .CCCCCCCC.. ","    .LLL.    ","    .L.L.    ","    .L.L.    ","  CCC....mww ",
 "<.C..CC.....>","   <..S..>   ","   <..S..>   ","   <..S..    ","  CCC.S...ww ",
 " .Ck..C..... ","    .L...    ","    .LmL.    ","    .L...    ","  C..www.... ",
