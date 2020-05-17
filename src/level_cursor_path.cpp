@@ -144,15 +144,7 @@ void Level::cursor_path_create (void)
         return;
     }
 
-    game->cursor_move_path.clear();
-
-    for (auto y = 0; y < MAP_HEIGHT; y++) {
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-            FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y) {
-                t->dead("eol");
-            } FOR_ALL_THINGS_END()
-        }
-    }
+    cursor_path_clear();
 
     //
     // If not following the player, draw the path
@@ -161,5 +153,31 @@ void Level::cursor_path_create (void)
         cursor_path_draw(
             point(level->player->mid_at.x, level->player->mid_at.y),
             point(level->cursor_at.x, level->cursor_at.y));
+    }
+}
+
+//
+// Using a dmap, solve the path to where the cursor is, creating a highlighted
+// path to follow.
+//
+void Level::cursor_path_clear (void)
+{_
+    if (game->paused()) {
+        return;
+    }
+
+    auto cursor = level->cursor;
+    if (!cursor) {
+        return;
+    }
+
+    game->cursor_move_path.clear();
+
+    for (auto y = 0; y < MAP_HEIGHT; y++) {
+        for (auto x = 0; x < MAP_WIDTH; x++) {
+            FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y) {
+                t->dead("eol");
+            } FOR_ALL_THINGS_END()
+        }
     }
 }

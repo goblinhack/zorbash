@@ -218,6 +218,12 @@ void player_tick (void)
         }
 
         if (key_pressed) {
+            //
+            // If we move manually, clear the path as it visually gets
+            // in the way
+            //
+            level->cursor_path_clear();
+
             fpoint future_pos = player->mid_at + fpoint(dx, dy);
             player->move(future_pos, up, down, left, right, attack, wait);
             last_key_pressed_when = time_get_time_ms_cached();
