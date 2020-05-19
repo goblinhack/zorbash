@@ -23,11 +23,7 @@ std::string Thing::a_or_an (void)
     std::string out = "";
 
     if (is_undead()) {
-        if (is_dead) {
-            out += "an inanimate ";
-        } else {
-            out += "an undead ";
-        }
+        out += "an undead ";
     } else {
         if (is_dead) {
             out += "a dead ";
@@ -60,11 +56,7 @@ std::string Thing::the (void)
     std::string out = "the ";
 
     if (is_undead()) {
-        if (is_dead) {
-            out += "inanimate ";
-        } else {
-            out += "undead ";
-        }
+        out += "undead ";
     } else {
         if (is_dead) {
             out += "dead ";

@@ -600,7 +600,7 @@ _
                 me->lunge(it->get_interpolated_mid_at());
             }
             if (best->hitter_killed_on_hitting) {
-                me->dead("self killed on hitting");
+                me->dead("suicide");
             }
             health_boost(it->is_nutrition());
             *target_attacked = true;
@@ -613,7 +613,7 @@ _
             if (me->is_attack_lunge()) {
                 me->lunge(it->get_interpolated_mid_at());
             }
-            me->dead("self killed on hitting");
+            me->dead("suicide");
             *target_attacked = true;
             return (true);
         } else {

@@ -176,7 +176,7 @@ void Level::cursor_path_clear (void)
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
             FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y) {
-                t->dead("eol");
+                t->dead("end of life");
             } FOR_ALL_THINGS_END()
         }
     }
