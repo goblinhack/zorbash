@@ -12,7 +12,7 @@
 
 void Thing::achieve_goals_in_life (void)
 {_
-    if (tp_is_loggable(tp())) {
+    if (is_loggable()) {
         log("achieve goals");
     }
 
@@ -89,7 +89,7 @@ void Thing::tick (void)
     update_interpolated_position();
 
     if (unlikely(is_dead)) {
-        if (tp_is_loggable(tp())) {
+        if (is_loggable()) {
             log("tick; died");
         }
         return;

@@ -78,6 +78,6 @@ void Thing::on_fire_tick (void)
         //
         // starvation is just annoying for players
         //
-        dead("Burned to death");
+        dead("burned to death");
     }
 }
