@@ -14,7 +14,6 @@ def key_init(name, real_name):
     x.set_is_key(True)
     x.set_is_light_strength(2)
     x.set_is_movable(True)
-    x.set_is_movement_blocking(True)
     x.set_light_color("yellow")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 

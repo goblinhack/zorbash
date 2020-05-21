@@ -173,10 +173,6 @@ void Level::init (point3d at, int seed_in)
     if (g_errored) { return; }
     level_place_corridor(dungeon, "corridor1", 0);
     if (g_errored) { return; }
-    level_place_floor_deco(dungeon);
-    if (g_errored) { return; }
-    level_place_wall_deco(dungeon);
-    if (g_errored) { return; }
 
     level_place_rocks(dungeon, 1, 6, 6, tries);
     if (g_errored) { return; }
@@ -240,13 +236,20 @@ void Level::init (point3d at, int seed_in)
     if (g_errored) { return; }
     level_place_food(dungeon);
     if (g_errored) { return; }
+    level_place_keys(dungeon);
+    if (g_errored) { return; }
     level_place_blood(dungeon);
     if (g_errored) { return; }
-    level_place_keys(dungeon);
+
+    //
+    // Less important stuff
+    //
+    level_place_floor_deco(dungeon);
+    if (g_errored) { return; }
+    level_place_wall_deco(dungeon);
     if (g_errored) { return; }
     game_mark_dungeon_tiles(dungeon);
     if (g_errored) { return; }
-
     scroll_map_to_player();
     if (g_errored) { return; }
 
