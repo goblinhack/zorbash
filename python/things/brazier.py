@@ -11,10 +11,10 @@ def tp_init(name, real_name, tiles=[]):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_floor_deco(True)
+    x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_light_strength(2)
     x.set_is_loggable(False)
-    x.set_is_movement_blocking(True)
     x.set_light_color("yellow")
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
