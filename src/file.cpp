@@ -3,8 +3,8 @@
 // See the README file for license info.
 //
 
-#if defined(__linux__)
-#endif
+#include <strings.h> // do not remove
+#include <string.h> // do not remove
 #include <sys/stat.h>
 #include <unistd.h>
 #include "my_main.h"

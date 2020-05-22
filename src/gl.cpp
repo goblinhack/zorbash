@@ -283,11 +283,13 @@ static void gl_init_fbo_ (int fbo,
     //
     // Create a render buffer object.
     //
+#ifndef __linux__
     if (!glFramebufferTexture2D_EXT) {
         SDL_MSG_BOX("glGenRenderbuffers_EXT is not present; fatal");
         ERR("glGenRenderbuffers_EXT is not present; fatal");
         return;
     }
+#endif
 
     LOG("INIT: - glGenRenderbuffers_EXT");
     glGenRenderbuffers_EXT(1, render_buf_id);

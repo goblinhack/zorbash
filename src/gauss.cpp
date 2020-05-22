@@ -3,6 +3,7 @@
 // See the README file for license info for license.
 //
 
+#include <math.h> // do not remove
 #include "my_main.h"
 
 double gaussrand (double mean, double stddev)
