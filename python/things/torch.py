@@ -1,0 +1,73 @@
+import zx
+import tp
+
+
+def tp_init(name, real_name, tiles=[]):
+    x = tp.Tp(name, real_name)
+
+    x.set_a_or_an("a");
+    x.set_ai_obstacle(True)
+    x.set_collision_circle(True)
+    x.set_collision_hit_priority(0)
+    x.set_collision_radius(0.40)
+    x.set_is_combustible(True)
+    x.set_is_flammable(True)
+    x.set_is_floor_deco(True)
+    x.set_is_gfx_animated(True)
+    x.set_is_gfx_oversized_but_sitting_on_the_ground(True)
+    x.set_is_gfx_show_outlined(True)
+    x.set_is_gfx_small_shadow_caster(True)
+    x.set_is_hazard(True)
+    x.set_is_interesting(True)
+    x.set_is_light_strength(2)
+    x.set_is_loggable(False)
+    x.set_is_movement_blocking(True)
+    x.set_is_shovable(True)
+    x.set_is_torch(True)
+    x.set_light_color("yellow")
+    x.set_normal_placement_rules(True)
+    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+
+    delay=50
+    for t in tiles:
+        x.set_tile(tile=t, delay_ms=delay)
+
+    x.update()
+
+def init():
+    tp_init(name="torch1", real_name="torch",
+            tiles=[
+                "torch1.1",
+                "torch1.2",
+                "torch1.3",
+                "torch1.4",
+                "torch1.5",
+                "torch1.6",
+                "torch1.7",
+                "torch1.8",
+                "torch1.9",
+                "torch1.10",
+                "torch1.11",
+                "torch1.12",
+                "torch1.13",
+                "torch1.14",
+                "torch1.15",
+                "torch1.16",
+                "torch1.17",
+                "torch1.18",
+                "torch1.19",
+                "torch1.20",
+                "torch1.21",
+                "torch1.22",
+                "torch1.23",
+                "torch1.24",
+                "torch1.25",
+                "torch1.26",
+                "torch1.27",
+                "torch1.28",
+                "torch1.29",
+                "torch1.30",
+                "torch1.31",
+                "torch1.32",
+                ])
+init()

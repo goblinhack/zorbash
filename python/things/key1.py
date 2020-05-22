@@ -10,11 +10,13 @@ def key_init(name, real_name):
     x.set_is_gfx_bounce_on_move(True)
     x.set_is_gfx_show_outlined(True)
     x.set_is_gfx_small_shadow_caster(True)
+    x.set_is_gfx_bounce_always(True)
     x.set_is_interesting(True)
     x.set_is_key(True)
     x.set_is_light_strength(2)
     x.set_is_movable(True)
     x.set_light_color("yellow")
+    x.set_normal_placement_rules(True)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=100)

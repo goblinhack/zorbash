@@ -210,10 +210,10 @@ public:
     int is_rrr24 {};
     int is_rrr25 {};
     int is_rrr26 {};
-    int is_rrr28 {};
-    int is_rrr29 {};
+    int is_torch {};
+    int is_gfx_bounce_always {};
     int is_rrr3 {};
-    int is_rrr30 {};
+    int normal_placement_rules {};
     int is_flammable {};
     int is_combustible {};
     int is_gfx_on_fire_anim {};
@@ -288,6 +288,9 @@ Tpp tp_random_dirt(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_blood_splatter(void);
 Tpp tp_random_key(void);
+Tpp tp_random_entrance(void);
+Tpp tp_random_exit(void);
+Tpp tp_random_torch(void);
 Tpp tp_random_blood(void);
 Tpp tp_random_wall(void);
 Tpp tp_random_rock(void);
@@ -561,22 +564,22 @@ static inline int tp_is_loggable (Tpp t)
     return (t->is_loggable);
 }
 
-static inline int tp_is_rrr28 (Tpp t)
+static inline int tp_is_torch (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr28);
+    return (t->is_torch);
 }
 
-static inline int tp_is_rrr29 (Tpp t)
+static inline int tp_is_gfx_bounce_always (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr29);
+    return (t->is_gfx_bounce_always);
 }
 
-static inline int tp_is_rrr30 (Tpp t)
+static inline int tp_normal_placement_rules (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr30);
+    return (t->normal_placement_rules);
 }
 
 static inline int tp_is_flammable (Tpp t)

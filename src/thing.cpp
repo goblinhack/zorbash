@@ -424,6 +424,10 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         }
     }
     update_light();
+
+    if (is_gfx_bounce_always()) {
+        bounce(0.2, 1.0, 500, 99999);
+    }
 }
 
 void Thing::reinit (void)

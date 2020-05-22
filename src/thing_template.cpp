@@ -18,8 +18,11 @@ static Tpidmap tp_monst;
 static Tpidmap tp_food;
 static Tpidmap tp_dirt;
 static Tpidmap tp_ripples;
-static Tpidmap tp_blood_splatters;
-static Tpidmap tp_keys;
+static Tpidmap tp_blood_splatter;
+static Tpidmap tp_key;
+static Tpidmap tp_entrance;
+static Tpidmap tp_exit;
+static Tpidmap tp_torch;
 static Tpidmap tp_blood;
 static Tpidmap tp_wall;
 static Tpidmap tp_rock;
@@ -118,10 +121,19 @@ void tp_init_after_loading (void)
             tp_ripples.push_back(tp);
         }
         if (tp_is_blood_splatter(tp)) {
-            tp_blood_splatters.push_back(tp);
+            tp_blood_splatter.push_back(tp);
         }
         if (tp_is_key(tp)) {
-            tp_keys.push_back(tp);
+            tp_key.push_back(tp);
+        }
+        if (tp_is_entrance(tp)) {
+            tp_entrance.push_back(tp);
+        }
+        if (tp_is_exit(tp)) {
+            tp_exit.push_back(tp);
+        }
+        if (tp_is_torch(tp)) {
+            tp_torch.push_back(tp);
         }
         if (tp_is_blood(tp)) {
             tp_blood.push_back(tp);
@@ -182,20 +194,47 @@ Tpp tp_random_ripple (void)
 
 Tpp tp_random_blood_splatter (void)
 {_
-    if (unlikely(!tp_blood_splatters.size())) {
-        ERR("no blood_splatters found");
+    if (unlikely(!tp_blood_splatter.size())) {
+        ERR("no blood_splatter found");
         return (nullptr);
     }
-    return get(tp_blood_splatters, myrand() % tp_blood_splatters.size());
+    return get(tp_blood_splatter, myrand() % tp_blood_splatter.size());
 }
 
 Tpp tp_random_key (void)
 {_
-    if (unlikely(!tp_keys.size())) {
-        ERR("no keys found");
+    if (unlikely(!tp_key.size())) {
+        ERR("no key found");
         return (nullptr);
     }
-    return get(tp_keys, myrand() % tp_keys.size());
+    return get(tp_key, myrand() % tp_key.size());
+}
+
+Tpp tp_random_entrance (void)
+{_
+    if (unlikely(!tp_entrance.size())) {
+        ERR("no entrance found");
+        return (nullptr);
+    }
+    return get(tp_entrance, myrand() % tp_entrance.size());
+}
+
+Tpp tp_random_exit (void)
+{_
+    if (unlikely(!tp_exit.size())) {
+        ERR("no exit found");
+        return (nullptr);
+    }
+    return get(tp_exit, myrand() % tp_exit.size());
+}
+
+Tpp tp_random_torch (void)
+{_
+    if (unlikely(!tp_torch.size())) {
+        ERR("no torch found");
+        return (nullptr);
+    }
+    return get(tp_torch, myrand() % tp_torch.size());
 }
 
 Tpp tp_random_blood (void)

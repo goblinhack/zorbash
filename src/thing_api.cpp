@@ -529,14 +529,14 @@ int Thing::is_loggable(void)
     return (tp_is_loggable(tp()));
 }
 
-int Thing::is_rrr28(void)
+int Thing::is_torch(void)
 {_
-    return (tp_is_rrr28(tp()));
+    return (tp_is_torch(tp()));
 }
 
-int Thing::is_rrr29(void)
+int Thing::is_gfx_bounce_always(void)
 {_
-    return (tp_is_rrr29(tp()));
+    return (tp_is_gfx_bounce_always(tp()));
 }
 
 int Thing::is_rrr3(void)
@@ -544,9 +544,9 @@ int Thing::is_rrr3(void)
     return (tp_is_rrr3(tp()));
 }
 
-int Thing::is_rrr30(void)
+int Thing::normal_placement_rules(void)
 {_
-    return (tp_is_rrr30(tp()));
+    return (tp_normal_placement_rules(tp()));
 }
 
 int Thing::is_flammable(void)

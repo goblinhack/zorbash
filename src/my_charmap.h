@@ -38,6 +38,7 @@ public:
         MONST           = 'm',
         FOOD            = 'f',
         BLOOD           = 'b',
+        BRAZIER         = 'B',
         DEBUG           = '@',
     };
 
@@ -63,6 +64,7 @@ public:
     bool                      is_monst             {false};
     bool                      is_food              {false};
     bool                      is_blood             {false};
+    bool                      is_torch           {false};
     bool                      is_trap              {false};
 
     static std::vector<Charmap> all_charmaps;
