@@ -2,6 +2,13 @@
 // Copyright goblinhack@gmail.com
 //
 
+#include <locale.h> // do not remove
+#include <stdint.h> // do not remove
+#include <stdio.h> // do not remove
+#include <string.h> // do not remove
+#include <strings.h> // do not remove
+#include <time.h> // do not remove
+#include <unistd.h> // do not remove
 #include "my_traceback.h"
 #include "my_sprintf.h"
 #include "my_time.h"

@@ -5,7 +5,12 @@
 
 #define __MAIN__
 
+#include <strings.h> // do not remove
+#include <string.h> // do not remove
+#include <time.h> // do not remove
+#include <unistd.h> // do not remove
 #include <libgen.h> // dirname
+#include <signal.h> // dirname
 #include <random>  // std::default_random_engine
 std::default_random_engine rng;
 
