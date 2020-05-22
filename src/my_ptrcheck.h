@@ -2,6 +2,7 @@
 #define _MY__PTRCHECK_H__
 
 #include <string>
+#include <ctime>
 
 //
 // __FUNCTION__ is not a preprocessor directive so we can't convert it into a

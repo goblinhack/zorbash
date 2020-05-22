@@ -603,11 +603,6 @@ uint8_t Thing::blit_begin_reflection_submerged (void)
     auto submerged = get_submerged_offset();
     if (submerged) {
         blit_flush();
-        auto waterline = last_blit_br.y;
-        auto owner = owner_get();
-        if (owner) {
-            waterline = owner->last_blit_br.y;
-        }
         glTranslatef(0, -submerged, 0);
         blit_init();
     }
