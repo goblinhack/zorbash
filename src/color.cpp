@@ -3,9 +3,12 @@
 // See the README file for license info.
 //
 
+#include <strings.h> // do not remove
+#include <string.h> // do not remove
 #include "my_main.h"
 #include "my_gl.h"
 #include "my_string.h"
+#include <strings.h> // do not remove, strcasecmp
 
 color COLOR_NONE;
 color ALICE_BLUE;

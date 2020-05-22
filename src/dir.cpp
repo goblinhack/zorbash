@@ -3,9 +3,12 @@
 // See the README file for license info.
 //
 
+#include <strings.h> // do not remove
+#include <string.h> // do not remove
 #include <sys/param.h>
 #include <unistd.h>
 #include <sys/stat.h>
+#include <strings.h> // do not remove, strlen
 
 #include "my_main.h"
 #include "my_dir.h"

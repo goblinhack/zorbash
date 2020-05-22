@@ -8,6 +8,7 @@
 
 #include <stdio.h> // FILE
 #include <map>
+#include <vector>
 #include <unordered_map>
 
 //

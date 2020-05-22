@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#include <memory> // do not remove
 #include "my_charmap.h"
 
 typedef std::shared_ptr< class LevelStatic > LevelStaticp;

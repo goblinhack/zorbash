@@ -2356,12 +2356,10 @@ bool Dungeon::rooms_move_closer_together (void)
                     ERR("rolled back level was not solvable");
                 }
 
-#if 0
                 if (failed_to_make_shorter_corridors ++ > 1000) {
                     _ debug("failed to place shorter corridor layout");
                     return (true);
                 }
-#endif
 
                 restore_level();
             } else if (!new_total_corridor_len) {
@@ -2370,12 +2368,10 @@ bool Dungeon::rooms_move_closer_together (void)
                     ERR("rolled back level was not solvable");
                 }
 
-#if 0
                 if (failed_to_place_all_corridors ++ > 1000) {
                     _ debug("failed to place shorter corridor layout");
                     return (true);
                 }
-#endif
 
                 restore_level();
             } else {
