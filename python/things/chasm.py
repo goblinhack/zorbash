@@ -9,7 +9,7 @@ def chasm_init(name, real_name, tiles=[], left_tiles=[]):
     x.set_is_chasm(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
-    x.set_is_obstacle(True)
+    x.set_ai_obstacle(True)
     x.set_z_depth(zx.MAP_DEPTH_CHASM)
 
     delay = 1250

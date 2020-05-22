@@ -3,17 +3,7 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
-// REMOVED #include "my_game.h"
-// REMOVED #include "my_traceback.h"
-// REMOVED #include "my_wid.h"
-// REMOVED #include "my_wid_console.h"
-// REMOVED #include "my_wid_minicon.h"
-// REMOVED #include "my_python.h"
-// REMOVED #include "my_console.h"
-// REMOVED #include "my_thing.h"
 #include "my_ascii.h"
-// REMOVED #include "my_log.h"
 
 void putf (FILE *fp, const char *s)
 {

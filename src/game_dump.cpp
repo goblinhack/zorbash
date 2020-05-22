@@ -4,7 +4,6 @@
 //
 
 #include "my_game.h"
-// REMOVED #include "my_dungeon.h"
 #include "my_thing.h"
 
 void Monst::dump (std::string pfx, std::ostream &out)
@@ -127,7 +126,7 @@ void Config::dump (std::string pfx, std::ostream &out)
     out << pfx << "fps_counter        " << fps_counter << std::endl;
     out << pfx << "gfx_inverted       " << gfx_inverted << std::endl;
     out << pfx << "gfx_minimap        " << gfx_minimap << std::endl;
-    out << pfx << "gfx_show_hidden    " << gfx_show_hidden << std::endl;
+    out << pfx << "is_gfx_show_hidden    " << is_gfx_show_hidden << std::endl;
     out << pfx << "gfx_lights         " << gfx_lights << std::endl;
     out << pfx << "gfx_zoom           " << gfx_zoom << std::endl;
     out << pfx << "debug_mode         " << debug_mode << std::endl;

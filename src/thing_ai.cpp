@@ -78,7 +78,7 @@ bool Thing::will_prefer_terrain (const Thingp itp)
     return (false);
 }
 
-bool Thing::ai_is_obstacle_for_me (point p)
+bool Thing::ai_ai_obstacle_for_me (point p)
 {_
     //
     // Avoid threats and treat them as obstacles
@@ -158,7 +158,7 @@ void Thing::ai_get_next_hop (void)
             auto X = x - minx;
             auto Y = y - miny;
 
-            if (ai_is_obstacle_for_me(p)) {
+            if (ai_ai_obstacle_for_me(p)) {
                 set(dmap_scent->val, X, Y, DMAP_IS_WALL);
             } else {
                 set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);

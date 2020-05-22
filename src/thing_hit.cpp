@@ -38,7 +38,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     cursor_path_stop();
 
-    if (tp_gfx_bounce_on_move(real_hitter->tp())) {
+    if (tp_is_gfx_bounce_on_move(real_hitter->tp())) {
         real_hitter->bounce(0.5, 0.1, 100, 3);
         real_hitter->move_set_dir_from_delta(delta);
     }
@@ -174,7 +174,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         if (is_door() || is_wall()) {
             if (!tp_is_explosion(hitter_tp)     &&
                 !tp_is_projectile(hitter_tp)    &&
-                !tp_gfx_is_attack_anim(hitter_tp)) {
+                !tp_is_gfx_attack_anim(hitter_tp)) {
                 //
                 // Not something that typically damages walls.
                 //
@@ -183,7 +183,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             }
         }
 
-        if (tp_gfx_is_attack_anim(hitter_tp)) {
+        if (tp_is_gfx_attack_anim(hitter_tp)) {
             //
             // Get the player using the weapon as the hitter.
             //

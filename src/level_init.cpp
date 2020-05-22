@@ -213,9 +213,10 @@ void Level::init (point3d at, int seed_in)
     if (g_errored) { return; }
     level_place_deep_water(dungeon, "deep_water1");
     if (g_errored) { return; }
-    //fluid_init();
-    level_place_random_blood(dungeon);
 
+    //
+    // Place the player
+    //
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (dungeon->is_entrance_at(x, y)) {
@@ -232,13 +233,26 @@ void Level::init (point3d at, int seed_in)
     }
     if (g_errored) { return; }
 
+    //
+    // Monsters and food
+    //
     level_place_monst(dungeon);
     if (g_errored) { return; }
     level_place_food(dungeon);
     if (g_errored) { return; }
+
+    //
+    // Items
+    //
     level_place_keys(dungeon);
     if (g_errored) { return; }
+
+    //
+    // Scary non essential stuff
+    //
     level_place_blood(dungeon);
+    if (g_errored) { return; }
+    level_place_random_blood(dungeon);
     if (g_errored) { return; }
 
     //
@@ -611,6 +625,28 @@ static void level_place_chasm (Dungeonp d,
     }
 }
 
+static void level_place_blood (Dungeonp d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            if (level->is_blood(x, y)) {
+                continue;
+            }
+
+            if (!d->is_blood(x, y)) {
+                continue;
+            }
+
+            auto tp = tp_random_blood();
+            if (!tp) {
+                return;
+            }
+
+            (void) thing_new(tp_name(tp), fpoint(x, y));
+        }
+    }
+}
+
 static void level_place_random_blood (Dungeonp d)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
@@ -738,40 +774,6 @@ static void level_place_food (Dungeonp d)
             }
 
             auto tp = tp_random_food();
-            if (!tp) {
-                return;
-            }
-
-            (void) thing_new(tp_name(tp), fpoint(x, y));
-        }
-    }
-}
-
-static void level_place_blood (Dungeonp d)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_blood(x, y)) {
-                continue;
-            }
-
-            if (!d->is_blood(x, y)) {
-                continue;
-            }
-
-            if (d->is_hazard(x, y) ||
-                d->is_hazard(x - 1, y) ||
-                d->is_hazard(x + 1, y) ||
-                d->is_hazard(x, y - 1) ||
-                d->is_hazard(x, y + 1) ||
-                d->is_hazard(x - 1, y - 1) ||
-                d->is_hazard(x + 1, y - 1) ||
-                d->is_hazard(x - 1, y + 1) ||
-                d->is_hazard(x + 1, y + 1)) {
-                continue;
-            }
-
-            auto tp = tp_random_blood();
             if (!tp) {
                 return;
             }

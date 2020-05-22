@@ -5,9 +5,9 @@ import tp
 def tp_init(name, real_name):
     x = tp.Tp(name, real_name)
 
-    x.set_gfx_large_shadow(True)
-    x.set_gfx_oversized_but_sitting_on_the_ground(True)
-    x.set_gfx_small_shadow_caster(True)
+    x.set_is_gfx_large_shadow(True)
+    x.set_is_gfx_oversized_but_sitting_on_the_ground(True)
+    x.set_is_gfx_small_shadow_caster(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_interesting(True)
     x.set_is_secret_door(True)

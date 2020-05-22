@@ -4,10 +4,7 @@
 //
 
 #include "my_game.h"
-// REMOVED #include "my_wid_minicon.h"
-// REMOVED #include "my_wid_console.h"
 #include "my_wid_popup.h"
-// REMOVED #include "my_ascii.h"
 #include "my_game_notice.h"
 
 static WidPopup *game_config_keyboard_window;

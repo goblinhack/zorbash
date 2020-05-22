@@ -4,11 +4,11 @@ import tp
 def tp_init(name):
     x = tp.Tp(name)
 
-    x.set_gfx_animated(True)
-    x.set_gfx_is_on_fire_anim(True)
-    x.set_gfx_oversized_but_sitting_on_the_ground(True)
-    x.set_gfx_small_shadow_caster(True)
-    x.set_gfx_show_outlined(True)
+    x.set_is_gfx_animated(True)
+    x.set_is_gfx_on_fire_anim(True)
+    x.set_is_gfx_oversized_but_sitting_on_the_ground(True)
+    x.set_is_gfx_small_shadow_caster(True)
+    x.set_is_gfx_show_outlined(True)
     x.set_is_active(True)
     x.set_is_interesting(True)
     x.set_is_loggable(False)

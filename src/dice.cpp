@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-// REMOVED #include <sstream>
 #include "my_main.h"
 #include "my_string.h"
 #include "my_dice.h"

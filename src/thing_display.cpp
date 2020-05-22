@@ -289,8 +289,8 @@ bool Thing::get_coords (spoint &blit_tl,
 
     if (unlikely(is_hidden)) {
         blit = false;
-    } else if (unlikely(tp_gfx_is_attack_anim(tpp) ||
-                        tp_gfx_is_weapon_carry_anim(tpp))) {
+    } else if (unlikely(tp_is_gfx_attack_anim(tpp) ||
+                        tp_is_gfx_weapon_carry_anim(tpp))) {
         //
         // Hide weapons that have swung
         //
@@ -302,7 +302,7 @@ bool Thing::get_coords (spoint &blit_tl,
         // Blit only if we need the cursor
         //
         blit = true;
-    } else if (unlikely(game->config.gfx_show_hidden)) {
+    } else if (unlikely(game->config.is_gfx_show_hidden)) {
         if (level->is_visited(x, y)) {
             if (is_wall()) {
                 glcolor(RED);
@@ -364,7 +364,7 @@ bool Thing::get_coords (spoint &blit_tl,
     //
     // Put larger tiles on the same y base as small ones.
     //
-    if (unlikely(tp_gfx_oversized_but_sitting_on_the_ground(tpp))) {
+    if (unlikely(tp_is_gfx_oversized_but_sitting_on_the_ground(tpp))) {
         float y_offset =
             (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
         blit_tl.y -= y_offset;
@@ -374,7 +374,7 @@ bool Thing::get_coords (spoint &blit_tl,
     //
     // Flipping
     //
-    if (unlikely(tp_gfx_animated_can_hflip(tpp))) {
+    if (unlikely(tp_is_gfx_animated_can_hflip(tpp))) {
         if (get_timestamp_flip_start()) {
             //
             // Slow flip
@@ -416,7 +416,7 @@ bool Thing::get_coords (spoint &blit_tl,
         }
     }
 
-    if (unlikely(tp_gfx_animated_can_vflip(tpp))) {
+    if (unlikely(tp_is_gfx_animated_can_vflip(tpp))) {
         if (is_dir_down() || is_dir_br() || is_dir_bl()) {
             std::swap(blit_tl.y, blit_br.y);
         }
@@ -488,9 +488,9 @@ bool Thing::get_coords (spoint &blit_tl,
 
     if (unlikely(is_monst() ||
                  is_player() ||
-                 tp_gfx_is_attack_anim(tpp) ||
-                 tp_gfx_is_on_fire_anim(tpp) ||
-                 tp_gfx_is_weapon_carry_anim(tpp))) {
+                 tp_is_gfx_attack_anim(tpp) ||
+                 tp_is_gfx_on_fire_anim(tpp) ||
+                 tp_is_gfx_weapon_carry_anim(tpp))) {
         //
         // Render the weapon and player on the same tile rules
         //
@@ -629,7 +629,7 @@ void Thing::blit_internal (spoint &blit_tl,
 {_
     auto tpp = tp();
 
-    if (unlikely(tp_gfx_small_shadow_caster(tpp))) {
+    if (unlikely(tp_is_gfx_small_shadow_caster(tpp))) {
         if (auto submerged = blit_begin_submerged()) {
             blit_shadow(tpp, tile, blit_tl, blit_br);
             blit_end_submerged(submerged);
@@ -668,7 +668,7 @@ void Thing::blit_internal (spoint &blit_tl,
 
     glcolor(c);
 
-    if (tp_gfx_show_outlined(tpp) && !g_render_black_and_white) {
+    if (tp_is_gfx_show_outlined(tpp) && !g_render_black_and_white) {
         if (reflection) {
             if (auto submerged = blit_begin_reflection_submerged()) {
                 tile_blit(tile, blit_tl, blit_br);
@@ -725,7 +725,7 @@ void Thing::blit_upside_down (void)
     std::swap(blit_tl.y, blit_br.y);
 
     if (tile && tile_get_height(tile) != TILE_HEIGHT) {
-        if (tp_gfx_oversized_but_sitting_on_the_ground(tpp)) {
+        if (tp_is_gfx_oversized_but_sitting_on_the_ground(tpp)) {
             blit_br.y += diff;
             blit_tl.y += diff;
         } else {

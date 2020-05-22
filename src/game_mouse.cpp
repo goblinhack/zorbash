@@ -5,8 +5,6 @@
 
 #include "my_game.h"
 #include "my_thing.h"
-// REMOVED #include "my_dmap.h"
-// REMOVED #include "my_globals.h"
 
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)

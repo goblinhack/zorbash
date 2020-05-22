@@ -5,8 +5,6 @@
 
 #include "my_main.h"
 #include "my_python.h"
-// REMOVED #include "my_size.h"
-// REMOVED #include "my_token.h"
 #include "my_command.h"
 #include "my_command_history.h"
 

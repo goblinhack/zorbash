@@ -1,4 +1,3 @@
-// REMOVED #include <string.h>
 #include <iostream>
 #include <iomanip>
 #include <vector>

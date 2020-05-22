@@ -4,15 +4,10 @@
 //
 
 #if defined(__linux__)
-// REMOVED #include <sys/errno.h>
 #endif
 #include <sys/stat.h>
 #include <unistd.h>
-// REMOVED #include <string.h>
-// REMOVED #include <time.h>
 #include "my_main.h"
-// REMOVED #include "my_file.h"
-// REMOVED #include "my_globals.h"
 
 unsigned char *file_read (const char *filename, int32_t *out_len)
 {_

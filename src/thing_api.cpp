@@ -179,34 +179,34 @@ int Thing::is_interesting(void)
     return (tp_is_interesting(tp()));
 }
 
-int Thing::gfx_animated(void)
+int Thing::is_gfx_animated(void)
 {_
-    return (tp_gfx_animated(tp()));
+    return (tp_is_gfx_animated(tp()));
 }
 
-int Thing::gfx_animated_can_vflip(void)
+int Thing::is_gfx_animated_can_vflip(void)
 {_
-    return (tp_gfx_animated_can_vflip(tp()));
+    return (tp_is_gfx_animated_can_vflip(tp()));
 }
 
-int Thing::gfx_animated_no_dir(void)
+int Thing::is_gfx_animated_no_dir(void)
 {_
-    return (tp_gfx_animated_no_dir(tp()));
+    return (tp_is_gfx_animated_no_dir(tp()));
 }
 
-int Thing::gfx_bounce_on_move(void)
+int Thing::is_gfx_bounce_on_move(void)
 {_
-    return (tp_gfx_bounce_on_move(tp()));
+    return (tp_is_gfx_bounce_on_move(tp()));
 }
 
-int Thing::gfx_animated_can_hflip(void)
+int Thing::is_gfx_animated_can_hflip(void)
 {_
-    return (tp_gfx_animated_can_hflip(tp()));
+    return (tp_is_gfx_animated_can_hflip(tp()));
 }
 
-int Thing::gfx_is_an_animation_only(void)
+int Thing::is_gfx_an_animation_only(void)
 {_
-    return (tp_gfx_is_an_animation_only(tp()));
+    return (tp_is_gfx_an_animation_only(tp()));
 }
 
 int Thing::is_floor_deco(void)
@@ -219,34 +219,34 @@ int Thing::is_wall_deco(void)
     return (tp_is_wall_deco(tp()));
 }
 
-int Thing::gfx_is_weapon_carry_anim(void)
+int Thing::is_gfx_weapon_carry_anim(void)
 {_
-    return (tp_gfx_is_weapon_carry_anim(tp()));
+    return (tp_is_gfx_weapon_carry_anim(tp()));
 }
 
-int Thing::gfx_is_attack_anim(void)
+int Thing::is_gfx_attack_anim(void)
 {_
-    return (tp_gfx_is_attack_anim(tp()));
+    return (tp_is_gfx_attack_anim(tp()));
 }
 
-int Thing::gfx_large_shadow(void)
+int Thing::is_gfx_large_shadow(void)
 {_
-    return (tp_gfx_large_shadow(tp()));
+    return (tp_is_gfx_large_shadow(tp()));
 }
 
-int Thing::gfx_show_outlined(void)
+int Thing::is_gfx_show_outlined(void)
 {_
-    return (tp_gfx_show_outlined(tp()));
+    return (tp_is_gfx_show_outlined(tp()));
 }
 
-int Thing::gfx_oversized_but_sitting_on_the_ground(void)
+int Thing::is_gfx_oversized_but_sitting_on_the_ground(void)
 {_
-    return (tp_gfx_oversized_but_sitting_on_the_ground(tp()));
+    return (tp_is_gfx_oversized_but_sitting_on_the_ground(tp()));
 }
 
-int Thing::gfx_small_shadow_caster(void)
+int Thing::is_gfx_small_shadow_caster(void)
 {_
-    return (tp_gfx_small_shadow_caster(tp()));
+    return (tp_is_gfx_small_shadow_caster(tp()));
 }
 
 int Thing::health_hunger_pct(void)
@@ -404,9 +404,9 @@ int Thing::is_movement_blocking(void)
     return (tp_is_movement_blocking(tp()));
 }
 
-int Thing::is_obstacle(void)
+int Thing::ai_obstacle(void)
 {_
-    return (tp_is_obstacle(tp()));
+    return (tp_ai_obstacle(tp()));
 }
 
 int Thing::is_player(void)
@@ -549,14 +549,14 @@ int Thing::is_rrr30(void)
     return (tp_is_rrr30(tp()));
 }
 
-int Thing::is_rrr31(void)
+int Thing::is_flammable(void)
 {_
-    return (tp_is_rrr31(tp()));
+    return (tp_is_flammable(tp()));
 }
 
-int Thing::gfx_is_on_fire_anim(void)
+int Thing::is_gfx_on_fire_anim(void)
 {_
-    return (tp_gfx_is_on_fire_anim(tp()));
+    return (tp_is_gfx_on_fire_anim(tp()));
 }
 
 int Thing::is_attack_shove_chance_d1000(void)
@@ -639,9 +639,9 @@ int Thing::is_rrr5(void)
     return (tp_is_rrr5(tp()));
 }
 
-int Thing::gfx_dead_anim(void)
+int Thing::is_gfx_dead_anim(void)
 {_
-    return (tp_gfx_dead_anim(tp()));
+    return (tp_is_gfx_dead_anim(tp()));
 }
 
 int Thing::is_rrr6(void)

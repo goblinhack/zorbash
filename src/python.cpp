@@ -3,12 +3,10 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
 #include "my_py_tp.h"
 #include "my_depth.h"
 #include "my_python.h"
 #include "my_py_sdl.h"
-// REMOVED #include "my_string.h"
 #include "my_ascii.h"
 #include "frameobject.h"
 
@@ -1657,20 +1655,20 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(collision_circle)
     TP_SET_DECL(collision_hit_priority)
     TP_SET_DECL(collision_radius)
-    TP_SET_DECL(gfx_animated)
-    TP_SET_DECL(gfx_animated_can_hflip)
-    TP_SET_DECL(gfx_animated_can_vflip)
-    TP_SET_DECL(gfx_animated_no_dir)
-    TP_SET_DECL(gfx_bounce_on_move)
-    TP_SET_DECL(gfx_dead_anim)
-    TP_SET_DECL(gfx_is_an_animation_only)
-    TP_SET_DECL(gfx_is_attack_anim)
-    TP_SET_DECL(gfx_is_on_fire_anim)
-    TP_SET_DECL(gfx_is_weapon_carry_anim)
-    TP_SET_DECL(gfx_large_shadow)
-    TP_SET_DECL(gfx_oversized_but_sitting_on_the_ground)
-    TP_SET_DECL(gfx_show_outlined)
-    TP_SET_DECL(gfx_small_shadow_caster)
+    TP_SET_DECL(is_gfx_animated)
+    TP_SET_DECL(is_gfx_animated_can_hflip)
+    TP_SET_DECL(is_gfx_animated_can_vflip)
+    TP_SET_DECL(is_gfx_animated_no_dir)
+    TP_SET_DECL(is_gfx_bounce_on_move)
+    TP_SET_DECL(is_gfx_dead_anim)
+    TP_SET_DECL(is_gfx_an_animation_only)
+    TP_SET_DECL(is_gfx_attack_anim)
+    TP_SET_DECL(is_gfx_on_fire_anim)
+    TP_SET_DECL(is_gfx_weapon_carry_anim)
+    TP_SET_DECL(is_gfx_large_shadow)
+    TP_SET_DECL(is_gfx_oversized_but_sitting_on_the_ground)
+    TP_SET_DECL(is_gfx_show_outlined)
+    TP_SET_DECL(is_gfx_small_shadow_caster)
     TP_SET_DECL(hunger_clock_freq_ms)
     TP_SET_DECL(is_active)
     TP_SET_DECL(is_attack_lunge)
@@ -1711,7 +1709,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_msg)
     TP_SET_DECL(is_no_tile)
     TP_SET_DECL(is_nutrition_hd)
-    TP_SET_DECL(is_obstacle)
+    TP_SET_DECL(ai_obstacle)
     TP_SET_DECL(is_player)
     TP_SET_DECL(is_projectile)
     TP_SET_DECL(is_ripple)
@@ -1739,7 +1737,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr29)
     TP_SET_DECL(is_rrr3)
     TP_SET_DECL(is_rrr30)
-    TP_SET_DECL(is_rrr31)
+    TP_SET_DECL(is_flammable)
     TP_SET_DECL(is_rrr4)
     TP_SET_DECL(is_rrr5)
     TP_SET_DECL(is_rrr6)
@@ -2879,8 +2877,6 @@ static void python_add_consts (void)
 
 }
 
-// REMOVED #include <cstdlib>
-// REMOVED #include <optional>
 std::string get_env(const char* env) {
     auto t = std::getenv(env);
     if (t) return t;

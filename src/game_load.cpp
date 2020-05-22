@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-// REMOVED #include <sstream>
 #include "my_game.h"
 #include "minilzo.h"
 #include "my_wid_minicon.h"
@@ -339,7 +338,7 @@ std::istream& operator>>(std::istream &in, Bits<Config &> my)
     in >> bits(my.t.fps_counter);
     in >> bits(my.t.gfx_inverted);
     in >> bits(my.t.gfx_minimap);
-    in >> bits(my.t.gfx_show_hidden);
+    in >> bits(my.t.is_gfx_show_hidden);
     in >> bits(my.t.gfx_lights);
     in >> bits(my.t.gfx_zoom);
     in >> bits(my.t.gfx_vsync_enable);

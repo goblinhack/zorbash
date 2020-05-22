@@ -4,11 +4,7 @@
 //
 
 #include "my_game.h"
-// REMOVED #include "my_wid_minicon.h"
-// REMOVED #include "my_wid_console.h"
 #include "my_wid_popup.h"
-// REMOVED #include "my_ascii.h"
-// REMOVED #include "my_thing.h"
 
 void Game::soft_pause (void)
 {_

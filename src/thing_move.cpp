@@ -66,7 +66,7 @@ bool Thing::move (fpoint future_pos,
     auto y = future_pos.y;
     auto delta = fpoint(x, y) - mid_at;
 
-    if (tp_gfx_bounce_on_move(tp())) {
+    if (tp_is_gfx_bounce_on_move(tp())) {
         if (get_bounce() == 0) {
             bounce(0.2 /* height */, 0.1 /* fade */, 200, 3);
         }
@@ -111,7 +111,7 @@ bool Thing::move (fpoint future_pos,
         }
     }
 
-    if (tp_gfx_animated_can_hflip(tp())) {
+    if (tp_is_gfx_animated_can_hflip(tp())) {
         if (future_pos.x > mid_at.x) {
             if (is_facing_left && !get_timestamp_flip_start()) {
                 set_timestamp_flip_start(time_get_time_ms_cached());
@@ -185,61 +185,6 @@ void Thing::update_pos (fpoint to, bool immediately)
     // Keep track of where this thing is on the grid
     //
     if (old_at != new_at) {
-        if (is_wall()) {
-            level->unset_wall(old_at.x, old_at.y);
-            level->set_wall(new_at.x, new_at.y);
-        }
-        if (is_floor()) {
-            level->unset_floor(old_at.x, old_at.y);
-            level->set_floor(new_at.x, new_at.y);
-        }
-        if (is_hazard()) {
-            level->unset_hazard(old_at.x, old_at.y);
-            level->set_hazard(new_at.x, new_at.y);
-        }
-        if (is_secret_door()) {
-            level->unset_secret_door(old_at.x, old_at.y);
-            level->set_secret_door(new_at.x, new_at.y);
-        }
-        if (is_corpse()) {
-            level->unset_corpse(old_at.x, old_at.y);
-            level->set_corpse(new_at.x, new_at.y);
-        }
-        if (is_lava()) {
-            level->unset_lava(old_at.x, old_at.y);
-            level->set_lava(new_at.x, new_at.y);
-        }
-        if (is_chasm()) {
-            level->unset_chasm(old_at.x, old_at.y);
-            level->set_chasm(new_at.x, new_at.y);
-        }
-        if (is_blood()) {
-            level->unset_blood(old_at.x, old_at.y);
-            level->set_blood(new_at.x, new_at.y);
-        }
-        if (is_water()) {
-            level->unset_water(old_at.x, old_at.y);
-            level->set_water(new_at.x, new_at.y);
-        }
-        if (is_deep_water()) {
-            level->unset_water(old_at.x, old_at.y);
-            level->set_water(new_at.x, new_at.y);
-            level->unset_deep_water(old_at.x, old_at.y);
-            level->set_deep_water(new_at.x, new_at.y);
-        }
-        if (is_corridor()) {
-            level->unset_corridor(old_at.x, old_at.y);
-            level->set_corridor(new_at.x, new_at.y);
-        }
-        if (is_dirt()) {
-            level->unset_dirt(old_at.x, old_at.y);
-            level->set_dirt(new_at.x, new_at.y);
-        }
-        if (tp_gfx_large_shadow(tpp)) {
-            level->unset_gfx_large_shadow(old_at.x, old_at.y);
-            level->set_gfx_large_shadow(new_at.x, new_at.y);
-        }
-
         if (is_player()) {
             if (((int)old_at.x != (int)new_at.x) ||
                 ((int)old_at.y != (int)new_at.y)) {
@@ -260,7 +205,9 @@ void Thing::update_pos (fpoint to, bool immediately)
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
+    detach();
     mid_at = to;
+    attach();
 
     if (!immediately) {
         set_timestamp_move_begin(time_get_time_ms_cached());
