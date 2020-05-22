@@ -3,10 +3,7 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
-// REMOVED #include "my_sdl.h"
 #include "my_console.h"
-// REMOVED #include "my_string.h"
 #include "my_thing_template.h"
 
 static inline void term_puts_fg (unsigned char a)

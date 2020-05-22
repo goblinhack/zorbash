@@ -3,11 +3,8 @@
 // See the README file for license info.
 //
 
-// REMOVED #include <string.h>
 #include "my_main.h"
-// REMOVED #include "my_ramdisk.h"
 #include "my_string.h"
-// REMOVED #include "my_globals.h"
 
 #define nUSE_ZLIB
 #define nUSE_MINIZ

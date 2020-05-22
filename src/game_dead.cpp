@@ -5,9 +5,7 @@
 
 #include "my_game.h"
 #include "my_wid_minicon.h"
-// REMOVED #include "my_wid_console.h"
 #include "my_wid_popup.h"
-// REMOVED #include "my_ascii.h"
 
 static WidPopup *wid_dead_window;
 

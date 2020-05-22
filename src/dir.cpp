@@ -6,7 +6,6 @@
 #include <sys/param.h>
 #include <unistd.h>
 #include <sys/stat.h>
-// REMOVED #include <string.h>
 
 #include "my_main.h"
 #include "my_dir.h"

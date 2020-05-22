@@ -3,11 +3,8 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
 #include "my_game.h"
 #include "my_traceback.h"
-// REMOVED #include "my_time.h"
-// REMOVED #include "my_level.h"
 #include "my_console.h"
 #include "my_wid_console.h"
 #include "my_log.h"

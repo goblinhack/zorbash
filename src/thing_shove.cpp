@@ -52,7 +52,14 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     it->move_to_immediately_delta(shove_delta);
-    it->msg(string_sprintf("%%fg=red$!"));
+    if (it->is_monst()) {
+        it->msg(string_sprintf("%%fg=red$!"));
+    }
+
+    if (it->is_flammable()) {
+        it->set_on_fire();
+        set_on_fire();
+    }
     return (THING_SHOVE_TRIED_AND_PASSED);
 }
 

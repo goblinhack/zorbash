@@ -3,11 +3,8 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
-// REMOVED #include "my_tile.h"
 #include "my_room.h"
 #include "my_range.h"
-// REMOVED #include <bitset>
 
 static int debug_enabled = false;
 

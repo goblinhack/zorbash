@@ -35,7 +35,7 @@ void Level::update_minimap (void)
         solid_tex_id = tex_get_gl_binding(solid_tex);
     }
 
-    if (unlikely(game->config.gfx_show_hidden)) {
+    if (unlikely(game->config.is_gfx_show_hidden)) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;

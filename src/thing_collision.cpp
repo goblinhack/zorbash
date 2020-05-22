@@ -543,7 +543,7 @@ _
         //
         // Skip things that aren't really hitable.
         //
-        if (tp_gfx_is_weapon_carry_anim(cand.target->tp())) {
+        if (tp_is_gfx_weapon_carry_anim(cand.target->tp())) {
             log("ignore %s skip, not hittable",
                 cand.target->to_string().c_str());
             continue;
@@ -779,7 +779,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
     //
     // Sword use hits?
     //
-    if (tp_gfx_is_attack_anim(me_tp)) {
+    if (tp_is_gfx_attack_anim(me_tp)) {
         if (tp_is_monst(it_tp)) {
             //
             // Weapon hits monster or generator.
@@ -818,28 +818,13 @@ bool Thing::collision_obstacle (Thingp it)
         return (false);
     }
     if (is_player()) {
-        if (it->is_wall()) {
-            return (true);
-        }
-        if (it->is_rock()) {
-            return (true);
-        }
-        if (it->is_door()) {
-            return (true);
-        }
         if (it->is_alive_monst()) {
             return (true);
         }
+        if (it->is_movement_blocking()) {
+            return (true);
+        }
     } else if (is_monst()) {
-        if (it->is_wall()) {
-            return (true);
-        }
-        if (it->is_rock()) {
-            return (true);
-        }
-        if (it->is_door()) {
-            return (true);
-        }
         if (is_water_hater()) {
             if (it->is_water()) {
                 return (true);
@@ -852,6 +837,9 @@ bool Thing::collision_obstacle (Thingp it)
             return (true);
         }
         if (it->is_player()) {
+            return (true);
+        }
+        if (it->is_movement_blocking()) {
             return (true);
         }
     }
@@ -901,7 +889,7 @@ _
     //
     // Sword use hits?
     //
-    if (tp_gfx_is_attack_anim(me_tp)) {
+    if (tp_is_gfx_attack_anim(me_tp)) {
         if (tp_is_monst(it_tp)) {
             //
             // Weapon hits monster or generator.

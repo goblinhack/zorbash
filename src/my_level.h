@@ -189,7 +189,7 @@ public:
         if (!(level)->is_oob(x, y)) {                                     \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) {       \
                 verify(t);                                                \
-                if (!t->is_interesting() && !t->is_obstacle()) {          \
+                if (!t->is_interesting() && !t->ai_obstacle()) {          \
                     continue;                                             \
                 }                                                         \
 
@@ -491,7 +491,7 @@ public:
         return (get_unsafe(_is_gfx_large_shadow, x, y));
     }
 
-    inline void set_gfx_large_shadow (const int x, const int y)
+    inline void set_is_gfx_large_shadow (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
@@ -499,12 +499,12 @@ public:
         set(_is_gfx_large_shadow, x, y, true);
     }
 
-    inline void set_gfx_large_shadow_unsafe (const int x, const int y)
+    inline void set_is_gfx_large_shadow_unsafe (const int x, const int y)
     {_
         set_unsafe(_is_gfx_large_shadow, x, y, true);
     }
 
-    inline void unset_gfx_large_shadow (const int x, const int y)
+    inline void unset_is_gfx_large_shadow (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
@@ -512,7 +512,7 @@ public:
         set(_is_gfx_large_shadow, x, y, false);
     }
 
-    inline void unset_gfx_large_shadow_unsafe (const int x, const int y)
+    inline void unset_is_gfx_large_shadow_unsafe (const int x, const int y)
     {_
         set_unsafe(_is_gfx_large_shadow, x, y, false);
     }

@@ -3,9 +3,7 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
 #include "my_game.h"
-// REMOVED #include "my_globals.h"
 
 Game::Game (std::string appdata)
 {_

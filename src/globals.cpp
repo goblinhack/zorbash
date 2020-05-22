@@ -3,7 +3,6 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
 #include "my_globals.h"
 
 class Game *game;

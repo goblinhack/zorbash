@@ -3,10 +3,8 @@
 // See the README file for license info.
 //
 
-// REMOVED #include "my_main.h"
 #include "my_game.h"
 #include "my_gl.h"
-// REMOVED #include "my_time.h"
 #include "my_thing_template.h"
 
 float glapi_last_tex_right;

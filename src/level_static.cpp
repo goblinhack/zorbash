@@ -3,13 +3,8 @@
 // See the README file for license info.
 //
 
-// REMOVED #include <bitset>
-// REMOVED #include "my_main.h"
 #include "my_level.h"
-// REMOVED #include "my_depth.h"
-// REMOVED #include "my_tile.h"
 #include "my_level_static.h"
-// REMOVED #include "my_range.h"
 
 static int debug_enabled = false;
 

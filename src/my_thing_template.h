@@ -140,21 +140,21 @@ public:
     int collision_check {};
     int collision_circle {};
     int collision_hit_priority {};
-    int gfx_animated {};
-    int gfx_animated_can_vflip {};
-    int gfx_animated_no_dir {};
-    int gfx_bounce_on_move {};
-    int gfx_animated_can_hflip {};
-    int gfx_dead_anim {};
-    int gfx_is_an_animation_only {};
+    int is_gfx_animated {};
+    int is_gfx_animated_can_vflip {};
+    int is_gfx_animated_no_dir {};
+    int is_gfx_bounce_on_move {};
+    int is_gfx_animated_can_hflip {};
+    int is_gfx_dead_anim {};
+    int is_gfx_an_animation_only {};
     int is_floor_deco {};
     int is_wall_deco {};
-    int gfx_is_weapon_carry_anim {};
-    int gfx_is_attack_anim {};
-    int gfx_large_shadow {};
-    int gfx_oversized_but_sitting_on_the_ground {};
-    int gfx_show_outlined {};
-    int gfx_small_shadow_caster {};
+    int is_gfx_weapon_carry_anim {};
+    int is_gfx_attack_anim {};
+    int is_gfx_large_shadow {};
+    int is_gfx_oversized_but_sitting_on_the_ground {};
+    int is_gfx_show_outlined {};
+    int is_gfx_small_shadow_caster {};
     int hunger_clock_freq_ms {};
     int internal_has_dir_anim {};
     int internal_has_hp_anim {};
@@ -186,7 +186,7 @@ public:
     int is_monst {};
     int is_movable {};
     int is_movement_blocking {};
-    int is_obstacle {};
+    int ai_obstacle {};
     int is_player {};
     int is_projectile {};
     int is_ripple {};
@@ -214,9 +214,9 @@ public:
     int is_rrr29 {};
     int is_rrr3 {};
     int is_rrr30 {};
-    int is_rrr31 {};
+    int is_flammable {};
     int is_combustible {};
-    int gfx_is_on_fire_anim {};
+    int is_gfx_on_fire_anim {};
     int is_attack_shove_chance_d1000 {};
     int is_hazard {};
     int is_attack_shove {};
@@ -381,22 +381,22 @@ static inline int tp_is_player (Tpp t)
     return (t->is_player);
 }
 
-static inline int tp_gfx_is_an_animation_only (Tpp t)
+static inline int tp_is_gfx_an_animation_only (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_is_an_animation_only);
+    return (t->is_gfx_an_animation_only);
 }
 
-static inline int tp_gfx_animated (Tpp t)
+static inline int tp_is_gfx_animated (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_animated);
+    return (t->is_gfx_animated);
 }
 
-static inline int tp_gfx_animated_no_dir (Tpp t)
+static inline int tp_is_gfx_animated_no_dir (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_animated_no_dir);
+    return (t->is_gfx_animated_no_dir);
 }
 
 static inline int tp_is_rrr1 (Tpp t)
@@ -579,10 +579,10 @@ static inline int tp_is_rrr30 (Tpp t)
     return (t->is_rrr30);
 }
 
-static inline int tp_is_rrr31 (Tpp t)
+static inline int tp_is_flammable (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr31);
+    return (t->is_flammable);
 }
 
 static inline int tp_is_combustible (Tpp t)
@@ -591,10 +591,10 @@ static inline int tp_is_combustible (Tpp t)
     return (t->is_combustible);
 }
 
-static inline int tp_gfx_is_attack_anim (Tpp t)
+static inline int tp_is_gfx_attack_anim (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_is_attack_anim);
+    return (t->is_gfx_attack_anim);
 }
 
 static inline int tp_is_attack_shove_chance_d1000 (Tpp t)
@@ -819,16 +819,16 @@ static inline int tp_is_cursor (Tpp t)
     return (t->is_cursor);
 }
 
-static inline int tp_gfx_dead_anim (Tpp t)
+static inline int tp_is_gfx_dead_anim (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->gfx_dead_anim);
+    return (t->is_gfx_dead_anim);
 }
 
-static inline int tp_is_obstacle (Tpp t)
+static inline int tp_ai_obstacle (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_obstacle);
+    return (t->ai_obstacle);
 }
 
 static inline int tp_is_attackable (Tpp t)
@@ -909,10 +909,10 @@ static inline int tp_ai_delay_after_moving_ms (Tpp t)
     return (t->ai_delay_after_moving_ms);
 }
 
-static inline int tp_gfx_bounce_on_move (Tpp t)
+static inline int tp_is_gfx_bounce_on_move (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_bounce_on_move);
+    return (t->is_gfx_bounce_on_move);
 }
 
 static inline int tp_is_corpse_on_death (Tpp t)
@@ -993,16 +993,16 @@ static inline int tp_is_blood (Tpp t)
     return (t->is_blood);
 }
 
-static inline int tp_gfx_animated_can_vflip (Tpp t)
+static inline int tp_is_gfx_animated_can_vflip (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_animated_can_vflip);
+    return (t->is_gfx_animated_can_vflip);
 }
 
-static inline int tp_gfx_small_shadow_caster (Tpp t)
+static inline int tp_is_gfx_small_shadow_caster (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_small_shadow_caster);
+    return (t->is_gfx_small_shadow_caster);
 }
 
 static inline int tp_is_corridor (Tpp t)
@@ -1011,10 +1011,10 @@ static inline int tp_is_corridor (Tpp t)
     return (t->is_corridor);
 }
 
-static inline int tp_gfx_oversized_but_sitting_on_the_ground (Tpp t)
+static inline int tp_is_gfx_oversized_but_sitting_on_the_ground (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_oversized_but_sitting_on_the_ground);
+    return (t->is_gfx_oversized_but_sitting_on_the_ground);
 }
 
 static inline int tp_is_interesting (Tpp t)
@@ -1095,16 +1095,16 @@ static inline int tp_weapon_use_distance (Tpp t)
     return (t->weapon_use_distance);
 }
 
-static inline int tp_gfx_is_weapon_carry_anim (Tpp t)
+static inline int tp_is_gfx_weapon_carry_anim (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_is_weapon_carry_anim);
+    return (t->is_gfx_weapon_carry_anim);
 }
 
-static inline int tp_gfx_is_on_fire_anim (Tpp t)
+static inline int tp_is_gfx_on_fire_anim (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_is_on_fire_anim);
+    return (t->is_gfx_on_fire_anim);
 }
 
 static inline int tp_is_weapon (Tpp t)
@@ -1113,22 +1113,22 @@ static inline int tp_is_weapon (Tpp t)
     return (t->is_weapon);
 }
 
-static inline int tp_gfx_show_outlined (Tpp t)
+static inline int tp_is_gfx_show_outlined (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_show_outlined);
+    return (t->is_gfx_show_outlined);
 }
 
-static inline int tp_gfx_large_shadow (Tpp t)
+static inline int tp_is_gfx_large_shadow (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_large_shadow);
+    return (t->is_gfx_large_shadow);
 }
 
-static inline int tp_gfx_animated_can_hflip (Tpp t)
+static inline int tp_is_gfx_animated_can_hflip (Tpp t)
 {_
     if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->gfx_animated_can_hflip);
+    return (t->is_gfx_animated_can_hflip);
 }
 
 static inline int tp_z_depth (Tpp t)

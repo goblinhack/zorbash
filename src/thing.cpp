@@ -110,7 +110,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         set_timestamp_born(time_get_time_ms_cached());
     }
 
-    if (tp_gfx_animated_can_hflip(tpp)) {
+    if (tp_is_gfx_animated_can_hflip(tpp)) {
         dir            = THING_DIR_LEFT;
         is_facing_left = true;
     } else {
@@ -300,7 +300,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     }
 
     auto tiles = tp_tiles(tpp);
-    if (tpp->gfx_animated) {
+    if (tpp->is_gfx_animated) {
         auto tile = tile_first(tiles);
         if (tile) {
             tile_curr = tile->global_index;
@@ -376,8 +376,8 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     if (tp_is_deep_water(tpp))  { level->set_water(new_at.x, new_at.y); }
     if (tp_is_deep_water(tpp))  { level->set_deep_water(new_at.x, new_at.y); }
 
-    if (tp_gfx_large_shadow(tpp)) {
-        level->set_gfx_large_shadow(new_at.x, new_at.y);
+    if (tp_is_gfx_large_shadow(tpp)) {
+        level->set_is_gfx_large_shadow(new_at.x, new_at.y);
     }
 
     if (tp_is_loggable(tpp)) {
@@ -488,8 +488,8 @@ void Thing::reinit (void)
     if (tp_is_deep_water(tpp))  { level->set_water(new_at.x, new_at.y); }
     if (tp_is_deep_water(tpp))  { level->set_deep_water(new_at.x, new_at.y); }
 
-    if (tp_gfx_large_shadow(tpp)) {
-        level->set_gfx_large_shadow(new_at.x, new_at.y);
+    if (tp_is_gfx_large_shadow(tpp)) {
+        level->set_is_gfx_large_shadow(new_at.x, new_at.y);
     }
 
     if (tp_is_loggable(tpp)) {
@@ -563,8 +563,8 @@ void Thing::destroy (void)
     if (unlikely(!tpp)) {
         ERR("no tp");
     } else {
-        if (tp_gfx_large_shadow(tpp)) {
-            level->unset_gfx_large_shadow(old_at.x, old_at.y);
+        if (tp_is_gfx_large_shadow(tpp)) {
+            level->unset_is_gfx_large_shadow(old_at.x, old_at.y);
         }
     }
 

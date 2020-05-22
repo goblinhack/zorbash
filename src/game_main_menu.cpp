@@ -5,10 +5,7 @@
 
 #include "my_game.h"
 #include "my_wid_minicon.h"
-// REMOVED #include "my_wid_console.h"
 #include "my_wid_popup.h"
-// REMOVED #include "my_ascii.h"
-// REMOVED #include "my_time.h"
 #include "my_game_status.h"
 #include "my_gl.h"
 
