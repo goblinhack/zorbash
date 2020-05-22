@@ -146,6 +146,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_blood             = true;
 
+    char_index              = Charmap::BRAZIER;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_torch           = true;
+
     char_index              = Charmap::TRAP;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

@@ -736,10 +736,10 @@ public:
     int is_rrr24(void);
     int is_rrr25(void);
     int is_rrr26(void);
-    int is_rrr28(void);
-    int is_rrr29(void);
+    int is_torch(void);
+    int is_gfx_bounce_always(void);
     int is_rrr3(void);
-    int is_rrr30(void);
+    int normal_placement_rules(void);
     int is_flammable(void);
     int is_rrr4(void);
     int is_rrr5(void);

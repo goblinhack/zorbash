@@ -18,35 +18,28 @@ static void level_place_rocks(Dungeonp d,
                               int block_height,
                               int tries);
 static void level_place_floors(Dungeonp d,
-                               std::string what,
+                               const std::string what,
                                int depth,
                                int variant,
                                int block_width,
                                int block_height,
                                int tries);
 static void level_place_floor_under_objects(Dungeonp d,
-                                            std::string what,
+                                            const std::string what,
                                             int depth);
-static void level_place_lava(Dungeonp d, std::string what);
-static void level_place_chasm(Dungeonp d, std::string what);
+static void level_place_lava(Dungeonp d, const std::string &what);
+static void level_place_normal_placement_rules(Dungeonp d);
+static void level_place_chasm(Dungeonp d, const std::string &what);
 static void level_place_random_blood(Dungeonp d);
-static void level_place_water(Dungeonp d, std::string what);
-static void level_place_deep_water(Dungeonp d, std::string what);
-static void level_place_monst(Dungeonp d);
-static void level_place_food(Dungeonp d);
-static void level_place_blood(Dungeonp d);
-static void level_place_keys(Dungeonp d);
+static void level_place_water(Dungeonp d, const std::string &what);
+static void level_place_deep_water(Dungeonp d, const std::string &what);
 static void level_place_floor_deco(Dungeonp d);
 static void level_place_wall_deco(Dungeonp d);
-static void level_place_remaining_floor(Dungeonp d, std::string what);
-static void level_place_corridor(Dungeonp d, std::string what, int depth);
+static void level_place_remaining_floor(Dungeonp d, const std::string &what);
+static void level_place_corridor(Dungeonp d, const std::string what, int depth);
 static void level_place_dirt(Dungeonp d);
-static void level_place_entrance(Dungeonp d, std::string what);
-static void level_place_exit(Dungeonp d, std::string what);
-static void level_place_secret_door(Dungeonp d, std::string what);
-static void level_place_door(Dungeonp d, std::string what);
-static void level_place_remaining_walls(Dungeonp d, std::string what);
-static void level_place_remaining_rocks(Dungeonp d, std::string what);
+static void level_place_remaining_walls(Dungeonp d, const std::string &what);
+static void level_place_remaining_rocks(Dungeonp d, const std::string &what);
 static void game_mark_dungeon_tiles(Dungeonp d);
 
 void Level::clear (void)
@@ -87,22 +80,14 @@ void Level::init (point3d at, int seed_in)
 
     auto dungeon = new Dungeon(MAP_WIDTH, MAP_HEIGHT, GRID_WIDTH,
                                GRID_HEIGHT, seed);
+    if (g_errored) { return; }
 #if 0
     //
     // Static level
     //
     auto dungeon = new Dungeon(0);
+    if (g_errored) { return; }
 #endif
-    if (g_errored) { return; }
-    // auto dungeon = new Dungeon(0);
-    level_place_entrance(dungeon, "entrance1");
-    if (g_errored) { return; }
-    level_place_exit(dungeon, "exit1");
-    if (g_errored) { return; }
-    level_place_door(dungeon, "door1");
-    if (g_errored) { return; }
-    level_place_secret_door(dungeon, "secret_door1");
-    if (g_errored) { return; }
 
     auto tries = 10000;
 
@@ -215,11 +200,17 @@ void Level::init (point3d at, int seed_in)
     if (g_errored) { return; }
 
     //
+    // Items that have no special placement rules
+    //
+    level_place_normal_placement_rules(dungeon);
+    if (g_errored) { return; }
+
+    //
     // Place the player
     //
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (dungeon->is_entrance_at(x, y)) {
+            if (dungeon->is_entrance(x, y)) {
                 auto t = thing_new("player1", fpoint(x, y));
                 auto w = thing_new("sword1", fpoint(x, y));
                 t->carry(w);
@@ -228,30 +219,16 @@ void Level::init (point3d at, int seed_in)
                 level->mouse = -1;
                 level->mouse_old = -1;
                 level->minimap_valid = false;
+                goto placed_player;
             }
         }
     }
-    if (g_errored) { return; }
-
-    //
-    // Monsters and food
-    //
-    level_place_monst(dungeon);
-    if (g_errored) { return; }
-    level_place_food(dungeon);
-    if (g_errored) { return; }
-
-    //
-    // Items
-    //
-    level_place_keys(dungeon);
+placed_player:
     if (g_errored) { return; }
 
     //
     // Scary non essential stuff
     //
-    level_place_blood(dungeon);
-    if (g_errored) { return; }
     level_place_random_blood(dungeon);
     if (g_errored) { return; }
 
@@ -585,8 +562,42 @@ static void level_place_floor_under_objects (Dungeonp d,
     }
 }
 
+static void level_place_normal_placement_rules (Dungeonp d)
+{_
+    for (auto x = 0; x < MAP_WIDTH; x++) {
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
+            Tpp tp {};
+
+            if (d->is_entrance(x, y)) {
+                tp = tp_random_entrance();
+            }
+            if (d->is_exit(x, y)) {
+                tp = tp_random_exit();
+            }
+            if (d->is_monst(x, y)) {
+                tp = tp_random_monst();
+            }
+            if (d->is_food(x, y)) {
+                tp = tp_random_food();
+            }
+            if (d->is_blood(x, y)) {
+                tp = tp_random_blood();
+            }
+            if (d->is_key(x, y)) {
+                tp = tp_random_key();
+            }
+            if (d->is_torch(x, y)) {
+                tp = tp_random_torch();
+            }
+            if (tp) {
+                (void) thing_new(tp_name(tp), fpoint(x, y));
+            }
+        }
+    }
+}
+
 static void level_place_lava (Dungeonp d,
-                             std::string what)
+                              const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -608,7 +619,7 @@ static void level_place_lava (Dungeonp d,
 }
 
 static void level_place_chasm (Dungeonp d,
-                              std::string what)
+                               const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -621,28 +632,6 @@ static void level_place_chasm (Dungeonp d,
             }
 
             (void) thing_new(what, fpoint(x, y));
-        }
-    }
-}
-
-static void level_place_blood (Dungeonp d)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_blood(x, y)) {
-                continue;
-            }
-
-            if (!d->is_blood(x, y)) {
-                continue;
-            }
-
-            auto tp = tp_random_blood();
-            if (!tp) {
-                return;
-            }
-
-            (void) thing_new(tp_name(tp), fpoint(x, y));
         }
     }
 }
@@ -697,7 +686,7 @@ static void level_place_random_blood (Dungeonp d)
     }
 }
 
-static void level_place_water (Dungeonp d, std::string what)
+static void level_place_water (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -718,7 +707,7 @@ static void level_place_water (Dungeonp d, std::string what)
     }
 }
 
-static void level_place_deep_water (Dungeonp d, std::string what)
+static void level_place_deep_water (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -735,73 +724,6 @@ static void level_place_deep_water (Dungeonp d, std::string what)
             if (!d->is_floor(x, y)) {
                 (void) thing_new("dirt3", fpoint(x, y));
             }
-        }
-    }
-}
-
-static void level_place_monst (Dungeonp d)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_monst(x, y)) {
-                continue;
-            }
-
-            if (!d->is_monst(x, y)) {
-                continue;
-            }
-
-            auto tp = tp_random_monst();
-            if (!tp) {
-                return;
-            }
-
-            (void) thing_new(tp_name(tp), fpoint(x, y));
-        }
-    }
-}
-
-static void level_place_food (Dungeonp d)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_food(x, y)) {
-                continue;
-            }
-
-            if (!d->is_food(x, y)) {
-                continue;
-            }
-
-            auto tp = tp_random_food();
-            if (!tp) {
-                return;
-            }
-
-            (void) thing_new(tp_name(tp), fpoint(x, y));
-        }
-    }
-}
-
-static void level_place_keys (Dungeonp d)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_key(x, y)) {
-                continue;
-            }
-
-            if (!d->is_key(x, y)) {
-                continue;
-            }
-
-            auto tp = tp_random_key();
-            if (!tp) {
-                return;
-            }
-
-            auto t = thing_new(tp_name(tp), fpoint(x, y));
-            t->bounce(0.2, 1.0, 500, 99999);
         }
     }
 }
@@ -894,7 +816,7 @@ static void level_place_wall_deco (Dungeonp d)
     }
 }
 
-static void level_place_remaining_floor (Dungeonp d, std::string what)
+static void level_place_remaining_floor (Dungeonp d, const std::string &what)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -908,7 +830,7 @@ static void level_place_remaining_floor (Dungeonp d, std::string what)
     }
 }
 
-static void level_place_corridor (Dungeonp d, std::string what, int depth)
+static void level_place_corridor (Dungeonp d, const std::string what, int depth)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
@@ -944,59 +866,7 @@ static void level_place_dirt (Dungeonp d)
     }
 }
 
-static void level_place_entrance (Dungeonp d, std::string what)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (!d->is_entrance_at(x, y)) {
-                continue;
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-        }
-    }
-}
-
-static void level_place_exit (Dungeonp d, std::string what)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (!d->is_exit_at(x, y)) {
-                continue;
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-        }
-    }
-}
-
-static void level_place_secret_door (Dungeonp d, std::string what)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (!d->is_secret_door(x, y)) {
-                continue;
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-        }
-    }
-}
-
-static void level_place_door (Dungeonp d, std::string what)
-{_
-    for (auto x = 0; x < MAP_WIDTH; x++) {
-        for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (!d->is_door(x, y)) {
-                continue;
-            }
-
-            (void) thing_new(what, fpoint(x, y));
-        }
-    }
-}
-
-static void level_place_remaining_walls (Dungeonp d, std::string what)
+static void level_place_remaining_walls (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -1013,7 +883,7 @@ static void level_place_remaining_walls (Dungeonp d, std::string what)
     }
 }
 
-static void level_place_remaining_rocks (Dungeonp d, std::string what)
+static void level_place_remaining_rocks (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {

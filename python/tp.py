@@ -257,14 +257,14 @@ class Tp:
     def set_is_loggable(self, value):
         zx.tp_set_is_loggable(self, value)
 
-    def set_is_rrr28(self, value):
-        zx.tp_set_is_rrr28(self, value)
+    def set_is_torch(self, value):
+        zx.tp_set_is_torch(self, value)
 
-    def set_is_rrr29(self, value):
-        zx.tp_set_is_rrr29(self, value)
+    def set_is_gfx_bounce_always(self, value):
+        zx.tp_set_is_gfx_bounce_always(self, value)
 
-    def set_is_rrr30(self, value):
-        zx.tp_set_is_rrr30(self, value)
+    def set_normal_placement_rules(self, value):
+        zx.tp_set_normal_placement_rules(self, value)
 
     def set_is_flammable(self, value):
         zx.tp_set_is_flammable(self, value)

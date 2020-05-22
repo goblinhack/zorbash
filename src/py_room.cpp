@@ -98,6 +98,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_dirt) {
                     floor_string += c;
                 } else if (m.is_blood       ||
+                           m.is_torch     ||
                            m.is_deep_water  ||
                            m.is_door        ||
                            m.is_entrance    ||
@@ -145,6 +146,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 }
 
                 if (m.is_blood ||
+                    m.is_torch ||
                     m.is_entrance ||
                     m.is_exit ||
                     m.is_floor_deco ||
