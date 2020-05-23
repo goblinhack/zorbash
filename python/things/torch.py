@@ -12,6 +12,7 @@ def tp_init(name, real_name, tiles=[]):
     x.set_collision_radius(0.40)
     x.set_is_combustible(True)
     x.set_is_flammable(True)
+    x.set_is_movable(True)
     x.set_is_floor_deco(True)
     x.set_is_gfx_animated(True)
     x.set_is_gfx_oversized_but_sitting_on_the_ground(True)
@@ -55,19 +56,5 @@ def init():
                 "torch1.16",
                 "torch1.17",
                 "torch1.18",
-                "torch1.19",
-                "torch1.20",
-                "torch1.21",
-                "torch1.22",
-                "torch1.23",
-                "torch1.24",
-                "torch1.25",
-                "torch1.26",
-                "torch1.27",
-                "torch1.28",
-                "torch1.29",
-                "torch1.30",
-                "torch1.31",
-                "torch1.32",
                 ])
 init()

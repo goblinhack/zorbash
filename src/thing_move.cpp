@@ -138,6 +138,7 @@ void Thing::update_interpolated_position (void)
     get_bounce();
     if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         if (mid_at != last_mid_at) {
+con("last_mid_at %f %f mid_at %f %f",last_mid_at.x,last_mid_at.y, mid_at.x,mid_at.y);
             update_pos = true;
             new_pos = mid_at;
             is_waiting_to_move = true;
@@ -148,6 +149,7 @@ void Thing::update_interpolated_position (void)
         float step = dt / t;
         float dx = mid_at.x - last_mid_at.x;
         float dy = mid_at.y - last_mid_at.y;
+con("b");
 
         new_pos.x = last_mid_at.x + dx * step;
         new_pos.y = last_mid_at.y + dy * step;
@@ -156,6 +158,7 @@ void Thing::update_interpolated_position (void)
 
     if (update_pos) {
         detach();
+con("move to %f %f", new_pos.x, new_pos.y);
         set_interpolated_mid_at(new_pos);
         attach();
         update_light();
