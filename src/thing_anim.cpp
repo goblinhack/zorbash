@@ -110,7 +110,6 @@ if (is_monst()) {
 log("tile %s", tile_name(tile).c_str());
 }
 #endif
-
             if (!is_dead) {
                 if (tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
@@ -119,8 +118,17 @@ log("tile %s", tile_name(tile).c_str());
 
                 auto health_max = get_stats_health_max();
                 auto health = get_stats_health();
-
+#ifdef DEBUG_ANIM
+if (is_monst()) {
+log("tile %s is not dead tiles", tile_name(tile).c_str());
+}
+#endif
                 if (tpp->internal_has_hp_anim()) {
+#ifdef DEBUG_ANIM
+if (is_monst()) {
+log("tile %s has hp anim tiles", tile_name(tile).c_str());
+}
+#endif
                     if (health < health_max / 4) {
                         if (!tile_is_hp_25_percent(tile)) {
                             tile = tile_next(tiles, tile);
@@ -238,7 +246,7 @@ log("tile %s got one", tile_name(tile).c_str());
             // ignore
             //
         } else {
-            log("could not find a good animation tile after %d tries; has %d tiles, have tile %s",
+            die("could not find a good animation tile after %d tries; has %d tiles, have tile %s",
                 tries, size, tile_name(tile).c_str());
             return;
         }
