@@ -673,7 +673,7 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
             tile->is_hp_50_percent ||
             tile->is_hp_75_percent ||
             tile->is_hp_100_percent ) {
-            tp->set_internal_has_dir_anim(true);
+            tp->set_internal_has_hp_anim(true);
         }
 
         if (up) {
