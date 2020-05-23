@@ -31,7 +31,7 @@ void thing_gc (void)
             continue;
         }
 
-        if (tp_is_loggable(t->tp())) {
+        if (t->is_loggable()) {
             t->log("garbage collect");
         }
         delete t;
@@ -79,6 +79,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     }
 
     tp_id = tpp->id;
+    tp_or_update();
 
     //
     // Must do this after TP assignment or logging will fail
@@ -97,20 +98,20 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         }
     }
 
-    if (tp_is_monst(tpp)) {
+    if (tpp->is_monst()) {
         new_dmap_scent();
         new_age_map();
     }
 
-    if (tp_is_player(tpp)) {
+    if (tpp->is_player()) {
         player = this;
     }
 
-    if (tp_is_monst(tpp) || tp_is_player(tpp) || tp_is_movable(tpp)) {
+    if (tpp->is_monst() || tpp->is_player() || tpp->is_movable()) {
         set_timestamp_born(time_get_time_ms_cached());
     }
 
-    if (tp_is_gfx_animated_can_hflip(tpp)) {
+    if (tpp->is_gfx_animated_can_hflip()) {
         dir            = THING_DIR_LEFT;
         is_facing_left = true;
     } else {
@@ -119,10 +120,10 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     }
     is_waiting_to_move = true;
 
-    is_hungry = tp_is_hunger_insatiable(tpp);
+    is_hungry = tpp->is_hunger_insatiable();
 
     {_
-        auto v = tp_stats_health_initial(tpp);
+        auto v = tpp->stats_health_initial();
         if (unlikely(v)) {
             set_stats_health(v);
             set_stats_health_max(v);
@@ -130,7 +131,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     }
 
     {_
-        auto v = tp_stats_defence(tpp);
+        auto v = tpp->stats_defence();
         if (unlikely(v)) {
             set_stats_defence(v);
             set_stats_defence_max(v);
@@ -138,169 +139,161 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     }
 
     {_
-        auto v = tp_stats_attack(tpp);
-        if (unlikely(v)) {
-            set_stats_attack(v);
-            set_stats_attack_max(v);
-        }
-    }
-
-    {_
-        auto v = tp_stats_attack_rate_tenths(tpp);
+        auto v = tpp->stats_attack_rate_tenths();
         if (unlikely(v)) {
             set_stats_attack_rate_tenths(v);
         }
     }
 
     {_
-        auto v = tp_lifespan_count(tpp);
+        auto v = tpp->lifespan_count();
         if (unlikely(v)) {
             set_lifespan_count(v);
         }
     }
 
     {_
-        auto v = tp_stats01(tpp);
+        auto v = tpp->stats01();
         if (unlikely(v)) {
             set_stats01(v);
         }
     }
 
     {_
-        auto v = tp_stats02(tpp);
+        auto v = tpp->stats02();
         if (unlikely(v)) {
             set_stats02(v);
         }
     }
 
     {_
-        auto v = tp_stats03(tpp);
+        auto v = tpp->stats03();
         if (unlikely(v)) {
             set_stats03(v);
         }
     }
 
     {_
-        auto v = tp_stats04(tpp);
+        auto v = tpp->stats04();
         if (unlikely(v)) {
             set_stats04(v);
         }
     }
 
     {_
-        auto v = tp_stats05(tpp);
+        auto v = tpp->stats05();
         if (unlikely(v)) {
             set_stats05(v);
         }
     }
 
     {_
-        auto v = tp_stats06(tpp);
+        auto v = tpp->stats06();
         if (unlikely(v)) {
             set_stats06(v);
         }
     }
 
     {_
-        auto v = tp_stats07(tpp);
+        auto v = tpp->stats07();
         if (unlikely(v)) {
             set_stats07(v);
         }
     }
 
     {_
-        auto v = tp_stats08(tpp);
+        auto v = tpp->stats08();
         if (unlikely(v)) {
             set_stats08(v);
         }
     }
 
     {_
-        auto v = tp_stats09(tpp);
+        auto v = tpp->stats09();
         if (unlikely(v)) {
             set_stats09(v);
         }
     }
 
     {_
-        auto v = tp_stats10(tpp);
+        auto v = tpp->stats10();
         if (unlikely(v)) {
             set_stats10(v);
         }
     }
 
     {_
-        auto v = tp_stats11(tpp);
+        auto v = tpp->stats11();
         if (unlikely(v)) {
             set_stats11(v);
         }
     }
 
     {_
-        auto v = tp_stats12(tpp);
+        auto v = tpp->stats12();
         if (unlikely(v)) {
             set_stats12(v);
         }
     }
 
     {_
-        auto v = tp_stats13(tpp);
+        auto v = tpp->stats13();
         if (unlikely(v)) {
             set_stats13(v);
         }
     }
 
     {_
-        auto v = tp_stats14(tpp);
+        auto v = tpp->stats14();
         if (unlikely(v)) {
             set_stats14(v);
         }
     }
 
     {_
-        auto v = tp_stats15(tpp);
+        auto v = tpp->stats15();
         if (unlikely(v)) {
             set_stats15(v);
         }
     }
 
     {_
-        auto v = tp_stats16(tpp);
+        auto v = tpp->stats16();
         if (unlikely(v)) {
             set_stats16(v);
         }
     }
 
     {_
-        auto v = tp_stats17(tpp);
+        auto v = tpp->stats17();
         if (unlikely(v)) {
             set_stats17(v);
         }
     }
 
     {_
-        auto v = tp_stats18(tpp);
+        auto v = tpp->stats18();
         if (unlikely(v)) {
             set_stats18(v);
         }
     }
 
     {_
-        auto v = tp_stats19(tpp);
+        auto v = tpp->stats19();
         if (unlikely(v)) {
             set_stats19(v);
         }
     }
 
     {_
-        auto v = tp_stats_strength(tpp);
+        auto v = tpp->stats_strength();
         if (unlikely(v)) {
             set_stats_strength(v);
         }
     }
 
-    auto tiles = tp_tiles(tpp);
-    if (tpp->is_gfx_animated) {
+    auto tiles = &tpp->tiles;
+    if (tpp->is_gfx_animated()) {
         auto tile = tile_first(tiles);
         if (tile) {
             tile_curr = tile->global_index;
@@ -316,7 +309,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         }
     }
 
-    if (unlikely(tp_is_player(tpp))) {
+    if (unlikely(tpp->is_player())) {
         if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
                 level->player->mid_at.x, level->player->mid_at.y, 
@@ -361,26 +354,26 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         return;
     }
 
-    if (tp_is_blood(tpp))       { level->set_blood(new_at.x, new_at.y); }
-    if (tp_is_corridor(tpp))    { level->set_corridor(new_at.x, new_at.y); }
-    if (tp_is_dirt(tpp))        { level->set_dirt(new_at.x, new_at.y); }
-    if (tp_is_floor(tpp))       { level->set_floor(new_at.x, new_at.y); }
-    if (tp_is_hazard(tpp))      { level->set_hazard(new_at.x, new_at.y); }
-    if (tp_is_lava(tpp))        { level->set_lava(new_at.x, new_at.y); }
-    if (tp_is_chasm(tpp))        { level->set_chasm(new_at.x, new_at.y); }
-    if (tp_is_hazard(tpp))      { level->set_hazard(new_at.x, new_at.y); }
-    if (tp_is_rock(tpp))        { level->set_rock(new_at.x, new_at.y); }
-    if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
-    if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
-    if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
-    if (tp_is_deep_water(tpp))  { level->set_water(new_at.x, new_at.y); }
-    if (tp_is_deep_water(tpp))  { level->set_deep_water(new_at.x, new_at.y); }
+    if (tpp->is_blood())       { level->set_blood(new_at.x, new_at.y); }
+    if (tpp->is_corridor())    { level->set_corridor(new_at.x, new_at.y); }
+    if (tpp->is_dirt())        { level->set_dirt(new_at.x, new_at.y); }
+    if (tpp->is_floor())       { level->set_floor(new_at.x, new_at.y); }
+    if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
+    if (tpp->is_lava())        { level->set_lava(new_at.x, new_at.y); }
+    if (tpp->is_chasm())        { level->set_chasm(new_at.x, new_at.y); }
+    if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
+    if (tpp->is_rock())        { level->set_rock(new_at.x, new_at.y); }
+    if (tpp->is_secret_door()) { level->set_secret_door(new_at.x, new_at.y); }
+    if (tpp->is_wall())        { level->set_wall(new_at.x, new_at.y); }
+    if (tpp->is_water())       { level->set_water(new_at.x, new_at.y); }
+    if (tpp->is_deep_water())  { level->set_water(new_at.x, new_at.y); }
+    if (tpp->is_deep_water())  { level->set_deep_water(new_at.x, new_at.y); }
 
-    if (tp_is_gfx_large_shadow(tpp)) {
+    if (tpp->is_gfx_large_shadow()) {
         level->set_is_gfx_large_shadow(new_at.x, new_at.y);
     }
 
-    if (tp_is_loggable(tpp)) {
+    if (tpp->is_loggable()) {
         log("created");
     }
 
@@ -409,16 +402,16 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     //
     // If not the player and has a light source, create the ligh
     //
-    if (unlikely(!tp_is_player(tpp))) {
-        if (unlikely(tp_is_light_strength(tpp))) {
-            std::string l = tp_light_color(tpp);
+    if (unlikely(!tpp->is_player())) {
+        if (unlikely(tpp->is_light_strength())) {
+            std::string l = tpp->light_color();
             bool add_light = true;
             if (random_range(0, 100) < 50) {
                 add_light = false;
             }
             if (add_light) {
                 color c = string2color(l);
-                new_light(mid_at, (double) tp_is_light_strength(tpp), c);
+                new_light(mid_at, (double) tpp->is_light_strength(), c);
                 has_light = true;
             }
         }
@@ -457,11 +450,11 @@ void Thing::reinit (void)
     // Probably safest to reset this else things might expire on load
     //
     timestamp_next_frame = 0;
-    if (tp_is_monst(tpp) || tp_is_player(tpp)) {
+    if (tpp->is_monst() || tpp->is_player()) {
         set_timestamp_born(time_get_time_ms_cached());
     }
 
-    if (unlikely(tp_is_player(tpp))) {
+    if (unlikely(tpp->is_player())) {
         if (level->player && (level->player != this)) {
             ERR("player exists in multiple places on map, %f, %f and %f, %f",
                 level->player->mid_at.x, level->player->mid_at.y,
@@ -478,25 +471,25 @@ void Thing::reinit (void)
         return;
     }
 
-    if (tp_is_blood(tpp))       { level->set_blood(new_at.x, new_at.y); }
-    if (tp_is_corridor(tpp))    { level->set_corridor(new_at.x, new_at.y); }
-    if (tp_is_dirt(tpp))        { level->set_dirt(new_at.x, new_at.y); }
-    if (tp_is_floor(tpp))       { level->set_floor(new_at.x, new_at.y); }
-    if (tp_is_hazard(tpp))      { level->set_hazard(new_at.x, new_at.y); }
-    if (tp_is_lava(tpp))        { level->set_lava(new_at.x, new_at.y); }
-    if (tp_is_chasm(tpp))       { level->set_chasm(new_at.x, new_at.y); }
-    if (tp_is_rock(tpp))        { level->set_rock(new_at.x, new_at.y); }
-    if (tp_is_secret_door(tpp)) { level->set_secret_door(new_at.x, new_at.y); }
-    if (tp_is_wall(tpp))        { level->set_wall(new_at.x, new_at.y); }
-    if (tp_is_water(tpp))       { level->set_water(new_at.x, new_at.y); }
-    if (tp_is_deep_water(tpp))  { level->set_water(new_at.x, new_at.y); }
-    if (tp_is_deep_water(tpp))  { level->set_deep_water(new_at.x, new_at.y); }
+    if (tpp->is_blood())       { level->set_blood(new_at.x, new_at.y); }
+    if (tpp->is_corridor())    { level->set_corridor(new_at.x, new_at.y); }
+    if (tpp->is_dirt())        { level->set_dirt(new_at.x, new_at.y); }
+    if (tpp->is_floor())       { level->set_floor(new_at.x, new_at.y); }
+    if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
+    if (tpp->is_lava())        { level->set_lava(new_at.x, new_at.y); }
+    if (tpp->is_chasm())       { level->set_chasm(new_at.x, new_at.y); }
+    if (tpp->is_rock())        { level->set_rock(new_at.x, new_at.y); }
+    if (tpp->is_secret_door()) { level->set_secret_door(new_at.x, new_at.y); }
+    if (tpp->is_wall())        { level->set_wall(new_at.x, new_at.y); }
+    if (tpp->is_water())       { level->set_water(new_at.x, new_at.y); }
+    if (tpp->is_deep_water())  { level->set_water(new_at.x, new_at.y); }
+    if (tpp->is_deep_water())  { level->set_deep_water(new_at.x, new_at.y); }
 
-    if (tp_is_gfx_large_shadow(tpp)) {
+    if (tpp->is_gfx_large_shadow()) {
         level->set_is_gfx_large_shadow(new_at.x, new_at.y);
     }
 
-    if (tp_is_loggable(tpp)) {
+    if (tpp->is_loggable()) {
         log("recreated");
     }
 
@@ -567,7 +560,7 @@ void Thing::destroy (void)
     if (unlikely(!tpp)) {
         ERR("no tp");
     } else {
-        if (tp_is_gfx_large_shadow(tpp)) {
+        if (tpp->is_gfx_large_shadow()) {
             level->unset_is_gfx_large_shadow(old_at.x, old_at.y);
         }
     }
@@ -658,7 +651,7 @@ void Thing::visible (void)
     }
 }
 
-uint8_t Thing::is_visible (void)
+uint8_t Thing::is_visible (void) const
 {_
     return (!is_hidden);
 }
@@ -776,7 +769,7 @@ void Thing::hooks_remove ()
     }
 }
 
-Thingp Thing::owner_get (void)
+Thingp Thing::owner_get (void) const
 {_
     auto id = get_owner_id();
     if (id) {
@@ -798,7 +791,7 @@ void Thing::set_owner (Thingp owner)
             return;
         }
 
-        if (tp_is_loggable(tp())) {
+        if (tp()->is_loggable()) {
             if (owner) {
                 log("set owner change %s->%s", old_owner->to_string().c_str(),
                     owner->to_string().c_str());
@@ -807,7 +800,7 @@ void Thing::set_owner (Thingp owner)
             }
         }
     } else {
-        if (tp_is_loggable(tp())) {
+        if (tp()->is_loggable()) {
             if (owner) {
                 log("set owner %s", owner->to_string().c_str());
             }
@@ -832,7 +825,7 @@ void Thing::remove_owner (void)
         return;
     }
 
-    if (tp_is_loggable(tp())) {
+    if (tp()->is_loggable()) {
         log("remove owner %s", old_owner->to_string().c_str());
     }
 

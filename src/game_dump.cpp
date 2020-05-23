@@ -31,7 +31,7 @@ void Thing::dump (std::string pfx, std::ostream &out)
 
     out << pfx << "id                  " << std::hex             << id << std::endl;
     auto tp = tp_find(tp_id);
-    out << pfx << "tp_id               " << tp_id                << " " << tp_name(tp) << std::endl;
+    out << pfx << "tp_id               " << tp_id                << " " << tp->name() << std::endl;
 
     if (monstp) {
         monstp->dump(pfx + "  ", out);

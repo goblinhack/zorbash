@@ -14,7 +14,7 @@ void Thing::get_tiles ()
     auto out = &tiles;
 
     auto curr = tile_index_to_tile(tile_curr);
-    auto tiles = tp_outline_tiles(tpp);
+    auto tiles = &tpp->outline_tiles;
     if (curr) {
         auto tile = tile_n(tiles, curr->index + curr->gfx_outline_index_offset);
         if (tile) {
@@ -27,7 +27,7 @@ void Thing::get_tiles ()
     }
     inited_tiles = true;
 
-    tiles = tp_left1_tiles(tpp);
+    tiles = &tpp->left1_tiles;
     auto tile = tile_n(tiles, n++);
     if (tile) {
         out->left1_tile = tile->global_index;
@@ -35,7 +35,7 @@ void Thing::get_tiles ()
         out->left1_tile = 0;
     }
 
-    tiles = tp_right1_tiles(tpp);
+    tiles = &tpp->right1_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->right1_tile = tile->global_index;
@@ -43,7 +43,7 @@ void Thing::get_tiles ()
         out->right1_tile = 0;
     }
 
-    tiles = tp_top1_tiles(tpp);
+    tiles = &tpp->top1_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->top1_tile = tile->global_index;
@@ -51,7 +51,7 @@ void Thing::get_tiles ()
         out->top1_tile = 0;
     }
 
-    tiles = tp_bot1_tiles(tpp);
+    tiles = &tpp->bot1_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->bot1_tile = tile->global_index;
@@ -59,7 +59,7 @@ void Thing::get_tiles ()
         out->bot1_tile = 0;
     }
 
-    tiles = tp_tl1_tiles(tpp);
+    tiles = &tpp->tl1_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tl1_tile = tile->global_index;
@@ -67,7 +67,7 @@ void Thing::get_tiles ()
         out->tl1_tile = 0;
     }
 
-    tiles = tp_tr1_tiles(tpp);
+    tiles = &tpp->tr1_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tr1_tile = tile->global_index;
@@ -75,7 +75,7 @@ void Thing::get_tiles ()
         out->tr1_tile = 0;
     }
 
-    tiles = tp_br1_tiles(tpp);
+    tiles = &tpp->br1_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->br1_tile = tile->global_index;
@@ -83,7 +83,7 @@ void Thing::get_tiles ()
         out->br1_tile = 0;
     }
 
-    tiles = tp_bl1_tiles(tpp);
+    tiles = &tpp->bl1_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->bl1_tile = tile->global_index;
@@ -91,7 +91,7 @@ void Thing::get_tiles ()
         out->bl1_tile = 0;
     }
 
-    tiles = tp_left2_tiles(tpp);
+    tiles = &tpp->left2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->left2_tile = tile->global_index;
@@ -99,7 +99,7 @@ void Thing::get_tiles ()
         out->left2_tile = 0;
     }
 
-    tiles = tp_right2_tiles(tpp);
+    tiles = &tpp->right2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->right2_tile = tile->global_index;
@@ -107,7 +107,7 @@ void Thing::get_tiles ()
         out->right2_tile = 0;
     }
 
-    tiles = tp_top2_tiles(tpp);
+    tiles = &tpp->top2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->top2_tile = tile->global_index;
@@ -115,7 +115,7 @@ void Thing::get_tiles ()
         out->top2_tile = 0;
     }
 
-    tiles = tp_bot2_tiles(tpp);
+    tiles = &tpp->bot2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->bot2_tile = tile->global_index;
@@ -123,7 +123,7 @@ void Thing::get_tiles ()
         out->bot2_tile = 0;
     }
 
-    tiles = tp_tl2_tiles(tpp);
+    tiles = &tpp->tl2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tl2_tile = tile->global_index;
@@ -131,7 +131,7 @@ void Thing::get_tiles ()
         out->tl2_tile = 0;
     }
 
-    tiles = tp_tr2_tiles(tpp);
+    tiles = &tpp->tr2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->tr2_tile = tile->global_index;
@@ -139,7 +139,7 @@ void Thing::get_tiles ()
         out->tr2_tile = 0;
     }
 
-    tiles = tp_br2_tiles(tpp);
+    tiles = &tpp->br2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->br2_tile = tile->global_index;
@@ -147,7 +147,7 @@ void Thing::get_tiles ()
         out->br2_tile = 0;
     }
 
-    tiles = tp_bl2_tiles(tpp);
+    tiles = &tpp->bl2_tiles;
     tile = tile_n(tiles, n++);
     if (tile) {
         out->bl2_tile = tile->global_index;

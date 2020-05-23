@@ -445,7 +445,7 @@ bool Level::is_monst (const int x, const int y)
         if (t) {
             verify(t);
             auto tpp = t->tp();
-            if (tp_is_monst(tpp)) {
+            if (tpp->is_monst()) {
                 return (true);
             }
         }
@@ -468,7 +468,7 @@ bool Level::is_food (const int x, const int y)
         if (t) {
             verify(t);
             auto tpp = t->tp();
-            if (tp_is_food(tpp)) {
+            if (tpp->is_food()) {
                 return (true);
             }
         }
@@ -559,7 +559,7 @@ bool Level::is_key (const int x, const int y)
         if (t) {
             verify(t);
             auto tpp = t->tp();
-            if (tp_is_key(tpp)) {
+            if (tpp->is_key()) {
                 return (true);
             }
         }
@@ -614,7 +614,7 @@ bool Level::is_door (const int x, const int y)
         if (t) {
             verify(t);
             auto tpp = t->tp();
-            if (tp_is_door(tpp)) {
+            if (tpp->is_door()) {
                 return (true);
             }
         }

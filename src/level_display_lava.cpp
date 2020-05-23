@@ -110,7 +110,7 @@ void Level::display_lava (int fbo,
             }
             FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
-                if (!tp_is_lava(tpp)) {
+                if (!tpp->is_lava()) {
                     continue;
                 }
                 t->blit();

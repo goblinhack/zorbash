@@ -36,17 +36,17 @@ void Thing::kill (const char *reason)
         ERR("no tp");
     } else {
         if (is_corpse_on_death()) {
-            if (tp_is_loggable(tpp)) {
+            if (tpp->is_loggable()) {
                 log("killed, leaves corpse");
             }
 
             level->set_corpse(mid_at.x, mid_at.y);
 
-            if (tp_is_bleeder(tpp)) {
+            if (tpp->is_bleeder()) {
                 int splatters = random_range(2, 10);
                 for (int splatter = 0; splatter < splatters; splatter++) {
                     auto tpp = tp_random_blood();
-                    (void) thing_new(tp_name(tpp),
+                    (void) thing_new(tpp->name(),
                                      fpoint(mid_at.x, mid_at.y),
                                      fpoint(0.25, 0.25));
                 }
@@ -54,7 +54,7 @@ void Thing::kill (const char *reason)
             return;
         }
 
-        if (tp_is_loggable(tpp)) {
+        if (tpp->is_loggable()) {
             log("killed");
         }
     }

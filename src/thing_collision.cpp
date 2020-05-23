@@ -396,8 +396,8 @@ static int circle_circle_collision (Thingp A,
     //fpoint A0, A1, A2, A3;
     //A->to_coords(&A0, &A1, &A2, &A3);
     //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
-    float A_radius = A->tp()->collision_radius;
-    float B_radius = B->tp()->collision_radius;
+    float A_radius = A->tp()->collision_radius();
+    float B_radius = B->tp()->collision_radius();
 
     //fpoint B0, B1, B2, B3;
     //B->to_coords(&B0, &B1, &B2, &B3);
@@ -438,8 +438,8 @@ static int circle_circle_collision (Thingp A,
     //fpoint A0, A1, A2, A3;
     //A->to_coords(&A0, &A1, &A2, &A3);
     //float A_radius = fmin((A1.x - A0.x) / 2.0, (A2.y - A0.y) / 2.0);
-    float A_radius = A->tp()->collision_radius;
-    float B_radius = B->tp()->collision_radius;
+    float A_radius = A->tp()->collision_radius();
+    float B_radius = B->tp()->collision_radius();
 
     //fpoint B0, B1, B2, B3;
     //B->to_coords(&B0, &B1, &B2, &B3);
@@ -483,7 +483,7 @@ thing_add_ai_possible_hit (Thingp target,
     thing_colls.push_back(
       ThingColl(target,
                 reason,
-                tp_collision_hit_priority(target->tp()),
+                target->tp()->collision_hit_priority(),
                 hitter_killed_on_hitting,
                 hitter_killed_on_hit_or_miss));
 }
@@ -543,7 +543,7 @@ _
         //
         // Skip things that aren't really hitable.
         //
-        if (tp_is_gfx_weapon_carry_anim(cand.target->tp())) {
+        if (cand.target->tp()->is_gfx_weapon_carry_anim()) {
             log("ignore %s skip, not hittable",
                 cand.target->to_string().c_str());
             continue;
@@ -602,7 +602,7 @@ _
             if (best->hitter_killed_on_hitting) {
                 me->dead("suicide");
             }
-            health_boost(it->is_nutrition());
+            health_boost(it->nutrition());
             *target_attacked = true;
         } else if (best->hitter_killed_on_hit_or_miss) {
             //
@@ -668,8 +668,8 @@ bool things_overlap (const Thingp A, const Thingp B)
     }
 
 #endif
-    if (tp_collision_circle(A->tp()) &&
-        tp_collision_circle(B->tp())) {
+    if (A->tp()->collision_circle() &&
+        B->tp()->collision_circle()) {
         if (circle_circle_collision(A, // circle
                                     B, // box
                                     nullptr)) {
@@ -725,8 +725,8 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
     }
 
 #endif
-    if (tp_collision_circle(A->tp()) &&
-        tp_collision_circle(B->tp())) {
+    if (A->tp()->collision_circle() &&
+        B->tp()->collision_circle()) {
         if (circle_circle_collision(A, // circle
                                     A_at,
                                     B, // box
@@ -779,8 +779,8 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
     //
     // Sword use hits?
     //
-    if (tp_is_gfx_attack_anim(me_tp)) {
-        if (tp_is_monst(it_tp)) {
+    if (me_tp->is_gfx_attack_anim()) {
+        if (it_tp->is_monst()) {
             //
             // Weapon hits monster or generator.
             //
@@ -889,8 +889,8 @@ _
     //
     // Sword use hits?
     //
-    if (tp_is_gfx_attack_anim(me_tp)) {
-        if (tp_is_monst(it_tp)) {
+    if (me_tp->is_gfx_attack_anim()) {
+        if (it_tp->is_monst()) {
             //
             // Weapon hits monster or generator.
             //

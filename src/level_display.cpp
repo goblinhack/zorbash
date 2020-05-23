@@ -53,7 +53,7 @@ void Level::display_map_things (int fbo,
                     }
 
                     auto tpp = t->tp();
-                    if (unlikely(tp_is_gfx_animated(tpp))) {
+                    if (unlikely(tpp->is_gfx_animated())) {
                         t->animate();
                     }
                 } FOR_ALL_THINGS_END()

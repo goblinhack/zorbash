@@ -101,8 +101,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->stats18);
     /* int         */ in >> bits(my.t->stats19);
     /* int         */ in >> bits(my.t->stats_strength);
-    /* int         */ in >> bits(my.t->stats_attack);
-    /* int         */ in >> bits(my.t->stats_attack_max);
     /* int         */ in >> bits(my.t->stats_attack_rate_tenths);
     /* int         */ in >> bits(my.t->lifespan_count);
     /* int         */ in >> bits(my.t->stats_defence);
@@ -155,7 +153,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
         return (in);
     }
 
-    my.t->tp_id = tpp->id;
+    my.t->id = tpp->id;
 
     uint32_t bits32;
     bool monst = (my.t->monstp != nullptr);

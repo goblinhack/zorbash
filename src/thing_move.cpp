@@ -66,7 +66,7 @@ bool Thing::move (fpoint future_pos,
     auto y = future_pos.y;
     auto delta = fpoint(x, y) - mid_at;
 
-    if (tp_is_gfx_bounce_on_move(tp())) {
+    if (tp()->is_gfx_bounce_on_move()) {
         if (get_bounce() == 0) {
             bounce(0.2 /* height */, 0.1 /* fade */, 200, 3);
         }
@@ -111,7 +111,7 @@ bool Thing::move (fpoint future_pos,
         }
     }
 
-    if (tp_is_gfx_animated_can_hflip(tp())) {
+    if (tp()->is_gfx_animated_can_hflip()) {
         if (future_pos.x > mid_at.x) {
             if (is_facing_left && !get_timestamp_flip_start()) {
                 set_timestamp_flip_start(time_get_time_ms_cached());
@@ -199,9 +199,9 @@ void Thing::update_pos (fpoint to, bool immediately)
     int speed;
     auto owner = owner_get();
     if (owner) {
-        speed = tp_stats_move_speed_ms(owner->tp());
+        speed = owner->tp()->stats_move_speed_ms();
     } else{
-        speed = tp_stats_move_speed_ms(tpp);
+        speed = tpp->stats_move_speed_ms();
     }
 
     //
@@ -219,7 +219,7 @@ void Thing::update_pos (fpoint to, bool immediately)
 
     move_carried_items();
 
-    if (tp_is_loggable(tpp)) {
+    if (tpp->is_loggable()) {
         dbg("moved");
     }
 }

@@ -55,7 +55,7 @@ void Thing::achieve_goals_in_life (void)
 
 void Thing::collision_check_do (void)
 {_
-    if (!tp_collision_check(tp())) {
+    if (!tp()->collision_check()) {
         return;
     }
 

@@ -8,7 +8,7 @@
 #include "my_thing.h"
 #include "my_sprintf.h"
 
-bool Thing::is_enemy (Thingp attacker)
+bool Thing::is_enemy (Thingp attacker) const
 {_
     if (unlikely(!monstp)) {
         return (false);

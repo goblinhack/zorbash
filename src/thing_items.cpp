@@ -41,7 +41,7 @@ void Thing::move_carried_items (void)
         if (level->is_water((int)mid_at.x, (int)mid_at.y)) {
             fpoint at(mid_at.x, mid_at.y);
             if (random_range(0, 1000) > 500) {
-                thing_new(tp_name(tp_random_ripple()), at);
+                thing_new(tp_random_ripple()->name(), at);
             }
         }
     }

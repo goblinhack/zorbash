@@ -82,7 +82,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    tp->__field__ = std::string(value ? value : "");                            \
+    tp->set_ ## __field__(std::string(value ? value : ""));                     \
     value = 0;                                                                  \
                                                                                 \
 done:                                                                           \
@@ -132,7 +132,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    tp->__field__ = std::string(value ? value : "");                            \
+    tp->set_ ## __field__(std::string(value ? value : ""));                     \
     value = 0;                                                                  \
     (__fn__)(tp);                                                               \
                                                                                 \
@@ -181,14 +181,14 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    tp->__field__ = (__str2val__)(value);                                       \
-    if (tp->__field__ == (__typeof__(tp->__field__))-1) {                       \
+    tp->set_ ## __field__((__str2val__)(value));                                \
+    if (tp->__field__() == (int)(tp->__field__())-1) {                          \
         ERR("%s, cannot find enum %s", __FUNCTION__, value);                    \
         goto done;                                                              \
     }                                                                           \
                                                                                 \
     DBG("python-to-c: %s(%s -> \"%s\"[%d])", __FUNCTION__, tp_name, value,      \
-        tp->__field__);                                                         \
+        tp->__field__());                                                       \
                                                                                 \
     value = 0;                                                                  \
                                                                                 \
@@ -234,7 +234,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    tp->__field__ = value;                                                      \
+    tp->set_ ## __field__(value);                                               \
                                                                                 \
 done:                                                                           \
     if (tp_name) {                                                              \
@@ -278,7 +278,7 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         goto done;                                                              \
     }                                                                           \
                                                                                 \
-    tp->__field__ = value;                                                      \
+    tp->set_ ## __field__(value);                                               \
                                                                                 \
 done:                                                                           \
     if (tp_name) {                                                              \
@@ -613,8 +613,8 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     }
 
     if (py_tile_name && *py_tile_name) {
-        auto t = tile_find(std::string(py_tile_name));
-        if (!t) {
+        auto tile = tile_find(std::string(py_tile_name));
+        if (!tile) {
             ERR("%s, cannot find tile '%s' for tp %s",
                 __FUNCTION__, py_tile_name, tp_name);
             Py_RETURN_NONE;
@@ -623,94 +623,94 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         //
         // Copy thie tile and make a unique copy if someone has grabbed it.
         //
-        if (t->in_use) {
-            t = new Tile(t);
+        if (tile->in_use) {
+            tile = new Tile(tile);
         }
 
-        t->index = tiles->size();
-        tiles->push_back(t);
-        t->in_use = true;
+        tile->index = tiles->size();
+        tiles->push_back(tile);
+        tile->in_use = true;
 
-        t->delay_ms = delay_ms;
-        t->is_moving = is_moving;
+        tile->delay_ms = delay_ms;
+        tile->is_moving = is_moving;
 
-        t->is_outline = is_outline;
-        t->is_join_horiz = is_join_horiz;
-        t->is_join_vert = is_join_vert;
-        t->is_join_node = is_join_node;
-        t->is_join_left = is_join_left;
-        t->is_join_right = is_join_right;
-        t->is_join_top = is_join_top;
-        t->is_join_bot = is_join_bot;
-        t->is_join_l90 = is_join_l90;
-        t->is_join_l180 = is_join_l180;
-        t->is_join_l = is_join_l;
-        t->is_join_l270 = is_join_l270;
-        t->is_join_t = is_join_t;
-        t->is_join_t90 = is_join_t90;
-        t->is_join_t180 = is_join_t180;
-        t->is_join_t270 = is_join_t270;
-        t->is_join_x = is_join_x;
+        tile->is_outline = is_outline;
+        tile->is_join_horiz = is_join_horiz;
+        tile->is_join_vert = is_join_vert;
+        tile->is_join_node = is_join_node;
+        tile->is_join_left = is_join_left;
+        tile->is_join_right = is_join_right;
+        tile->is_join_top = is_join_top;
+        tile->is_join_bot = is_join_bot;
+        tile->is_join_l90 = is_join_l90;
+        tile->is_join_l180 = is_join_l180;
+        tile->is_join_l = is_join_l;
+        tile->is_join_l270 = is_join_l270;
+        tile->is_join_t = is_join_t;
+        tile->is_join_t90 = is_join_t90;
+        tile->is_join_t180 = is_join_t180;
+        tile->is_join_t270 = is_join_t270;
+        tile->is_join_x = is_join_x;
 
-        t->is_yyy5 = is_yyy5;
-        t->is_yyy6 = is_yyy6;
-        t->is_yyy7 = is_yyy7;
-        t->is_yyy8 = is_yyy8;
-        t->is_yyy9 = is_yyy9;
-        t->is_yyy10 = is_yyy10;
-        t->is_hp_25_percent = is_hp_25_percent;
-        t->is_hp_50_percent = is_hp_50_percent;
-        t->is_hp_75_percent = is_hp_75_percent;
-        t->is_hp_100_percent = is_hp_100_percent;
-        t->gfx_outline_index_offset = gfx_outline_index_offset;
-        t->is_sleeping = is_sleeping;
-        t->is_open = is_open;
-        t->is_dead = is_dead;
-        t->is_end_of_anim = is_end_of_anim;
-        t->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
+        tile->is_yyy5 = is_yyy5;
+        tile->is_yyy6 = is_yyy6;
+        tile->is_yyy7 = is_yyy7;
+        tile->is_yyy8 = is_yyy8;
+        tile->is_yyy9 = is_yyy9;
+        tile->is_yyy10 = is_yyy10;
+        tile->is_hp_25_percent = is_hp_25_percent;
+        tile->is_hp_50_percent = is_hp_50_percent;
+        tile->is_hp_75_percent = is_hp_75_percent;
+        tile->is_hp_100_percent = is_hp_100_percent;
+        tile->gfx_outline_index_offset = gfx_outline_index_offset;
+        tile->is_sleeping = is_sleeping;
+        tile->is_open = is_open;
+        tile->is_dead = is_dead;
+        tile->is_end_of_anim = is_end_of_anim;
+        tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
 
-        if (t->is_hp_25_percent ||
-            t->is_hp_50_percent ||
-            t->is_hp_75_percent ||
-            t->is_hp_100_percent ) {
-            tp->internal_has_hp_anim = true;
+        if (tile->is_hp_25_percent ||
+            tile->is_hp_50_percent ||
+            tile->is_hp_75_percent ||
+            tile->is_hp_100_percent ) {
+            tp->set_internal_has_dir_anim(true);
         }
 
         if (up) {
             if (left) {
-                t->dir = THING_DIR_TL;
-                t->internal_has_dir_anim = true;
+                tile->dir = THING_DIR_TL;
+                tile->internal_has_dir_anim = true;
             } else if (right) {
-                t->dir = THING_DIR_TR;
-                t->internal_has_dir_anim = true;
+                tile->dir = THING_DIR_TR;
+                tile->internal_has_dir_anim = true;
             } else {
-                t->dir = THING_DIR_UP;
-                t->internal_has_dir_anim = true;
+                tile->dir = THING_DIR_UP;
+                tile->internal_has_dir_anim = true;
             }
         } else if (down) {
             if (left) {
-                t->dir = THING_DIR_BL;
-                t->internal_has_dir_anim = true;
+                tile->dir = THING_DIR_BL;
+                tile->internal_has_dir_anim = true;
             } else if (right) {
-                t->dir = THING_DIR_BR;
-                t->internal_has_dir_anim = true;
+                tile->dir = THING_DIR_BR;
+                tile->internal_has_dir_anim = true;
             } else {
-                t->dir = THING_DIR_DOWN;
-                t->internal_has_dir_anim = true;
+                tile->dir = THING_DIR_DOWN;
+                tile->internal_has_dir_anim = true;
             }
         } else if (left) {
-            t->dir = THING_DIR_LEFT;
-            t->internal_has_dir_anim = true;
+            tile->dir = THING_DIR_LEFT;
+            tile->internal_has_dir_anim = true;
         } else if (right) {
-            t->dir = THING_DIR_RIGHT;
-            t->internal_has_dir_anim = true;
+            tile->dir = THING_DIR_RIGHT;
+            tile->internal_has_dir_anim = true;
         } else if (none) {
-            t->dir = THING_DIR_NONE;
-            t->internal_has_dir_anim = true;
+            tile->dir = THING_DIR_NONE;
+            tile->internal_has_dir_anim = true;
         }
 
-        if (t->internal_has_dir_anim) {
-            tp->internal_has_dir_anim = true;
+        if (tile->internal_has_dir_anim) {
+            tp->set_internal_has_dir_anim(true);
         }
     } else {
         tiles->push_back(nullptr);
@@ -881,7 +881,7 @@ TP_BODY_SET_INT(is_rrr22)
 TP_BODY_SET_INT(is_rrr23)
 TP_BODY_SET_INT(is_rrr24)
 TP_BODY_SET_INT(is_rrr25)
-TP_BODY_SET_INT(is_rrr26)
+TP_BODY_SET_INT(is_dead_on_shove)
 TP_BODY_SET_INT(is_torch)
 TP_BODY_SET_INT(is_gfx_bounce_always)
 TP_BODY_SET_INT(is_rrr3)
@@ -921,7 +921,6 @@ TP_BODY_SET_INT(stats17)
 TP_BODY_SET_INT(stats18)
 TP_BODY_SET_INT(stats19)
 TP_BODY_SET_INT(lifespan_count)
-TP_BODY_SET_INT(stats_attack)
 TP_BODY_SET_INT(stats_attack_rate_tenths)
 TP_BODY_SET_INT(stats_defence)
 TP_BODY_SET_INT(stats_health_hunger_pct)
@@ -933,27 +932,27 @@ TP_BODY_SET_INT(weapon_damage)
 TP_BODY_SET_INT(weapon_use_delay_hundredths)
 TP_BODY_SET_INT(weapon_use_distance)
 TP_BODY_SET_INT(z_depth)
-TP_BODY_SET_STRING(is_nutrition_hd)
+TP_BODY_SET_STRING(nutrition_hd)
 TP_BODY_SET_STRING(name)
 TP_BODY_SET_STRING(stats_attack_hd)
 TP_BODY_SET_STRING(light_color)
-TP_BODY_SET_STRING(str_zzz1)
-TP_BODY_SET_STRING(str_zzz10)
-TP_BODY_SET_STRING(str_zzz11)
-TP_BODY_SET_STRING(str_zzz12)
-TP_BODY_SET_STRING(str_zzz13)
-TP_BODY_SET_STRING(str_zzz14)
-TP_BODY_SET_STRING(str_zzz15)
+TP_BODY_SET_STRING(zzz1)
+TP_BODY_SET_STRING(zzz10)
+TP_BODY_SET_STRING(zzz11)
+TP_BODY_SET_STRING(zzz12)
+TP_BODY_SET_STRING(zzz13)
+TP_BODY_SET_STRING(zzz14)
+TP_BODY_SET_STRING(spawn_on_death)
 TP_BODY_SET_STRING(a_or_an)
 TP_BODY_SET_STRING(real_name)
-TP_BODY_SET_STRING(str_zzz2)
-TP_BODY_SET_STRING(str_zzz3)
-TP_BODY_SET_STRING(str_zzz4)
-TP_BODY_SET_STRING(str_zzz5)
-TP_BODY_SET_STRING(str_zzz6)
-TP_BODY_SET_STRING(str_zzz7)
-TP_BODY_SET_STRING(str_zzz8)
-TP_BODY_SET_STRING(str_zzz9)
+TP_BODY_SET_STRING(zzz2)
+TP_BODY_SET_STRING(zzz3)
+TP_BODY_SET_STRING(zzz4)
+TP_BODY_SET_STRING(zzz5)
+TP_BODY_SET_STRING(zzz6)
+TP_BODY_SET_STRING(zzz7)
+TP_BODY_SET_STRING(zzz8)
+TP_BODY_SET_STRING(zzz9)
 TP_BODY_SET_STRING(weapon_carry_anim)
 TP_BODY_SET_STRING(weapon_use_anim)
 
@@ -989,8 +988,6 @@ PyObject *tp_update_ (PyObject *obj, PyObject *args, PyObject *keywds)
         ERR("%s, cannot find tp %s", __FUNCTION__, tp_name);
         goto done;
     }
-
-    tp_update(tp);
 
 done:
     if (tp_name) {

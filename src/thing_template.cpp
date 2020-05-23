@@ -58,8 +58,8 @@ Tpp tp_load (int id, std::string const& name, std::string const& real_name)
     }
 
     auto tp = new Tp();
-    tp->name = name;
-    tp->real_name = real_name;
+    tp->set_name(name);
+    tp->set_real_name(real_name);
 
     auto result = tp_name_map.insert(std::make_pair(name, tp));
     if (result.second == false) {
@@ -70,12 +70,6 @@ Tpp tp_load (int id, std::string const& name, std::string const& real_name)
     tp->id = tp_id_map.size();
 
     return (tp);
-}
-
-void tp_update (Tpp tp)
-{_
-    tp->is_nutrition = Dice(tp->is_nutrition_hd);
-    tp->attack_damage = Dice(tp->stats_attack_hd);
 }
 
 //
@@ -93,10 +87,10 @@ Tpp tp_find (uint32_t id)
 
 Tilep tp_first_tile (Tpp tp)
 {_
-    auto tiles = tp_tiles(tp);
+    auto tiles = &tp->tiles;
 
     if (!tiles || tiles->empty()) {
-        ERR("tp %s has no tiles", tp_name(tp).c_str());
+        ERR("tp %s has no tiles", tp->name().c_str());
     }
 
     //
@@ -108,49 +102,49 @@ Tilep tp_first_tile (Tpp tp)
 void tp_init_after_loading (void)
 {_
     for (auto& tp : tp_id_map) {
-        if (tp_is_monst(tp)) {
+        if (tp->is_monst()) {
             tp_monst.push_back(tp);
         }
-        if (tp_is_food(tp)) {
+        if (tp->is_food()) {
             tp_food.push_back(tp);
         }
-        if (tp_is_dirt(tp)) {
+        if (tp->is_dirt()) {
             tp_dirt.push_back(tp);
         }
-        if (tp_is_ripple(tp)) {
+        if (tp->is_ripple()) {
             tp_ripples.push_back(tp);
         }
-        if (tp_is_blood_splatter(tp)) {
+        if (tp->is_blood_splatter()) {
             tp_blood_splatter.push_back(tp);
         }
-        if (tp_is_key(tp)) {
+        if (tp->is_key()) {
             tp_key.push_back(tp);
         }
-        if (tp_is_entrance(tp)) {
+        if (tp->is_entrance()) {
             tp_entrance.push_back(tp);
         }
-        if (tp_is_exit(tp)) {
+        if (tp->is_exit()) {
             tp_exit.push_back(tp);
         }
-        if (tp_is_torch(tp)) {
+        if (tp->is_torch()) {
             tp_torch.push_back(tp);
         }
-        if (tp_is_blood(tp)) {
+        if (tp->is_blood()) {
             tp_blood.push_back(tp);
         }
-        if (tp_is_wall(tp)) {
+        if (tp->is_wall()) {
             tp_wall.push_back(tp);
         }
-        if (tp_is_rock(tp)) {
+        if (tp->is_rock()) {
             tp_rock.push_back(tp);
         }
-        if (tp_is_floor(tp)) {
+        if (tp->is_floor()) {
             tp_floor.push_back(tp);
         }
-        if (tp_is_floor_deco(tp)) {
+        if (tp->is_floor_deco()) {
             tp_deco.push_back(tp);
         }
-        if (tp_is_wall_deco(tp)) {
+        if (tp->is_wall_deco()) {
             tp_wall_deco.push_back(tp);
         }
     }

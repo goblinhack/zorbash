@@ -110,7 +110,7 @@ void Level::display_water (int fbo,
             }
             FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
-                if (!tp_is_water(tpp)) {
+                if (!tpp->is_water()) {
                     continue;
                 }
                 t->blit();

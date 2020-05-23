@@ -156,8 +156,7 @@ public:
         if (!(level)->is_oob(x, y)) {                               \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) { \
                 verify(t);                                          \
-                auto tpp = t->tp();                                 \
-                if (tpp->z_depth != z) {                            \
+                if (t->z_depth() != z) {                            \
                     continue;                                       \
                 }
 

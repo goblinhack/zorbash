@@ -772,10 +772,10 @@ void tile_blit_colored_fat (Tpp tp,
     double y2 = tile->y2;
 
     if (unlikely(tp != 0)) {
-        double left_off  = (double)tp_blit_left_off(tp);
-        double right_off = (double)tp_blit_right_off(tp);
-        double top_off   = (double)tp_blit_top_off(tp);
-        double bot_off   = (double)tp_blit_bot_off(tp);
+        double left_off  = (double)tp->blit_left_off();
+        double right_off = (double)tp->blit_right_off();
+        double top_off   = (double)tp->blit_top_off();
+        double bot_off   = (double)tp->blit_bot_off();
 
         double pct_w     = tile->pct_width;
         double pct_h     = tile->pct_height;

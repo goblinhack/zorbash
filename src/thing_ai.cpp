@@ -18,13 +18,13 @@ bool Thing::possible_to_attack (const Thingp itp)
     auto me = tp();
     auto it = itp->tp();
 
-    if (!tp_is_attackable(it)) {
+    if (!it->is_attackable()) {
         return (false);
     }
 
     if (is_alive_monst()) {
-        if (tp_is_meat_eater(me)) {
-            if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
+        if (me->is_meat_eater()) {
+            if (it->is_made_of_meat() || it->is_blood()) {
                 dbg("possible attack %s", itp->to_string().c_str());
                 return (true);
             }
@@ -44,8 +44,8 @@ bool Thing::will_avoid (const Thingp itp)
     auto me = tp();
     auto it = itp->tp();
 
-    if (tp_is_made_of_meat(me)) {
-        if (tp_is_meat_eater(it)) {
+    if (me->is_made_of_meat()) {
+        if (it->is_meat_eater()) {
             return (true);
         }
     }
@@ -57,8 +57,8 @@ bool Thing::will_eat (const Thingp itp)
     auto me = tp();
     auto it = itp->tp();
 
-    if (tp_is_meat_eater(me)) {
-        if (tp_is_made_of_meat(it) || tp_is_blood(it)) {
+    if (me->is_meat_eater()) {
+        if (it->is_made_of_meat() || it->is_blood()) {
             return (true);
         }
     }
@@ -70,8 +70,8 @@ bool Thing::will_prefer_terrain (const Thingp itp)
     auto me = tp();
     auto it = itp->tp();
 
-    if (tp_is_water_dweller(me)) {
-        if (tp_is_water(it) || tp_is_deep_water(it)) {
+    if (me->is_water_dweller()) {
+        if (it->is_water() || it->is_deep_water()) {
             return (true);
         }
     }
@@ -123,7 +123,7 @@ bool Thing::ai_ai_obstacle_for_me (point p)
     return (false);
 }
 
-uint8_t Thing::is_less_preferred_terrain (point p)
+uint8_t Thing::is_less_preferred_terrain (point p) const
 {_
     uint8_t pref = 0;
 
@@ -187,7 +187,7 @@ void Thing::ai_get_next_hop (void)
         //
         // Too far away to sense?
         //
-        if (get(dmap_scent->val, X, Y) > tpp->ai_scent_distance) {
+        if (get(dmap_scent->val, X, Y) > tpp->ai_scent_distance()) {
             set(dmap_scent->val, X, Y, DMAP_IS_WALL);
             continue;
         }

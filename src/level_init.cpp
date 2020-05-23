@@ -264,7 +264,7 @@ static void level_place_walls (Dungeonp d,
         ERR("level_place_walls failed");
         return;
     }
-    auto what = tp_name(tp);
+    auto what = tp->name();
 
     while (tries--) {
         auto x = random_range(0, MAP_WIDTH - block_width + 1);
@@ -346,7 +346,7 @@ static void level_place_rocks (Dungeonp d,
         ERR("level_place_rocks failed");
         return;
     }
-    auto what = tp_name(tp);
+    auto what = tp->name();
 
     while (tries--) {
         auto x = random_range(0, MAP_WIDTH - block_width + 1);
@@ -590,7 +590,7 @@ static void level_place_normal_placement_rules (Dungeonp d)
                 tp = tp_random_torch();
             }
             if (tp) {
-                (void) thing_new(tp_name(tp), fpoint(x, y));
+                (void) thing_new(tp->name(), fpoint(x, y));
             }
         }
     }
@@ -678,7 +678,7 @@ static void level_place_random_blood (Dungeonp d)
                 if (!tp) {
                     return;
                 }
-                (void) thing_new(tp_name(tp),
+                (void) thing_new(tp->name(),
                                  fpoint(x, y),
                                  fpoint(0.25, 0.25));
             }
@@ -777,7 +777,7 @@ static void level_place_floor_deco (Dungeonp d)
                 return;
             }
 
-            thing_new(tp_name(tp), fpoint(x, y));
+            thing_new(tp->name(), fpoint(x, y));
         }
     }
 }
@@ -808,10 +808,10 @@ static void level_place_wall_deco (Dungeonp d)
                 return;
             }
 
-            thing_new(tp_name(tp), fpoint(x, y));
+            thing_new(tp->name(), fpoint(x, y));
 
             tp = tp_random_wall();
-            thing_new(tp_name(tp), fpoint(x, y));
+            thing_new(tp->name(), fpoint(x, y));
         }
     }
 }
@@ -860,7 +860,7 @@ static void level_place_dirt (Dungeonp d)
                     return;
                 }
 
-                (void) thing_new(tp_name(tp), fpoint(x, y));
+                (void) thing_new(tp->name(), fpoint(x, y));
             }
         }
     }

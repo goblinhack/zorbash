@@ -5,7 +5,7 @@
 
 #include "my_thing.h"
 
-Thingp Thing::weapon_get ()
+Thingp Thing::weapon_get () const
 {_
     auto id = get_weapon_id();
     if (id) {
@@ -112,7 +112,7 @@ void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
     }
 }
 
-void Thing::weapon_get_use_offset (float *dx, float *dy)
+void Thing::weapon_get_use_offset (float *dx, float *dy) const
 {_
     *dx = 0;
     *dy = 0;
@@ -122,7 +122,7 @@ void Thing::weapon_get_use_offset (float *dx, float *dy)
         return;
     }
 
-    float dist_from_wielder = tp_weapon_use_distance(weapon->tp());
+    float dist_from_wielder = weapon->tp()->weapon_use_distance();
 
     //
     // Try current direction.
@@ -190,7 +190,7 @@ Thingp Thing::weapon_get_carry_anim (void)
     return (weapon_carry_anim);
 }
 
-Thingp Thing::weapon_get_use_anim (void)
+Thingp Thing::weapon_get_use_anim (void) const
 {_
     //
     // If this weapon_use_anim has its own thing id for animations then
@@ -221,7 +221,7 @@ void Thing::unwield (const char *why)
     }
 
     log("unwielding current weapon %s, why: %s",
-        tp_name(weapon->tp()).c_str(), why);
+        weapon->tp()->name().c_str(), why);
 
     sheath();
 }
@@ -233,7 +233,7 @@ void Thing::sheath (void)
         return;
     }
 
-    log("sheathing %s", tp_name(weapon->tp()).c_str());
+    log("sheathing %s", weapon->tp()->name().c_str());
 
     //
     // If this weapon has its own thing id for animations then destroy that.
@@ -256,16 +256,16 @@ void Thing::wield (Thingp weapon)
     auto weapon_tp = weapon->tp();
 
     if (weapon_get() == weapon) {
-        log("re-wielding: %s", tp_name(weapon_tp).c_str());
+        log("re-wielding: %s", weapon_tp->name().c_str());
     } else {
-        log("is wielding: %s", tp_name(weapon_tp).c_str());
+        log("is wielding: %s", weapon_tp->name().c_str());
 
         unwield("wield new weapon");
     }
 
-    auto carry_anim_as = tp_weapon_carry_anim(weapon_tp);
+    auto carry_anim_as = weapon_tp->weapon_carry_anim();
     if (carry_anim_as == "") {
-        err("could not wield weapon %s", tp_name(weapon_tp).c_str());
+        err("could not wield weapon %s", weapon_tp->name().c_str());
         return;
     }
 
@@ -307,10 +307,10 @@ void Thing::use (void)
 
     auto weapon_tp = weapon->tp();
 
-    auto swung_as = tp_weapon_use_anim(weapon_tp);
+    auto swung_as = weapon_tp->weapon_use_anim();
     if (swung_as == "") {
         die("could not use %s/%08X has no 'use' animation frame",
-            tp_name(weapon_tp).c_str(), weapon->id);
+            weapon_tp->name().c_str(), weapon->id);
         return;
     }
 

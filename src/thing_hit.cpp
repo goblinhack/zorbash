@@ -38,7 +38,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     cursor_path_stop();
 
-    if (tp_is_gfx_bounce_on_move(real_hitter->tp())) {
+    if (real_hitter->tp()->is_gfx_bounce_on_move()) {
         real_hitter->bounce(0.5, 0.1, 100, 3);
         real_hitter->move_set_dir_from_delta(delta);
     }
@@ -74,13 +74,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Blood splat
     //
-    thing_new(tp_name(tp_random_blood_splatter()), mid_at);
+    thing_new(tp_random_blood_splatter()->name(), mid_at);
 
     //
     // Visible claw attack?
     //
     if (is_monst() || is_player()) {
-        auto claws = tp_weapon_use_anim(real_hitter->tp());
+        auto claws = real_hitter->tp()->weapon_use_anim();
         if (claws != "") {
             auto claw_attack = thing_new(claws, mid_at);
             claw_attack->bounce(0.1, 0.1, 100, 3);
@@ -172,9 +172,9 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         //
         auto hitter_tp = hitter->tp();
         if (is_door() || is_wall()) {
-            if (!tp_is_explosion(hitter_tp)     &&
-                !tp_is_projectile(hitter_tp)    &&
-                !tp_is_gfx_attack_anim(hitter_tp)) {
+            if (!hitter_tp->is_explosion()     &&
+                !hitter_tp->is_projectile()    &&
+                !hitter_tp->is_gfx_attack_anim()) {
                 //
                 // Not something that typically damages walls.
                 //
@@ -183,7 +183,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             }
         }
 
-        if (tp_is_gfx_attack_anim(hitter_tp)) {
+        if (hitter_tp->is_gfx_attack_anim()) {
             //
             // Get the player using the weapon as the hitter.
             //
@@ -205,7 +205,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             }
 
             if (!damage) {
-                damage = tp_weapon_damage(weapon->tp());
+                damage = (weapon->tp()->weapon_damage());
             }
 
         } else if (hitter->owner_get()) {
@@ -230,7 +230,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             }
 
             if (!damage) {
-                damage = tp_weapon_damage(weapon->tp());
+                damage = (weapon->tp()->weapon_damage());
             }
         }
 

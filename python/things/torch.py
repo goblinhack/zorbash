@@ -25,6 +25,8 @@ def tp_init(name, real_name, tiles=[]):
     x.set_is_movement_blocking(True)
     x.set_is_shovable(True)
     x.set_is_torch(True)
+    x.set_is_dead_on_shove(True)
+    x.set_spawn_on_death("fire")
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
@@ -32,6 +34,8 @@ def tp_init(name, real_name, tiles=[]):
     delay=50
     for t in tiles:
         x.set_tile(tile=t, delay_ms=delay)
+
+    x.set_tile(tile=name + ".dead", is_dead=True, delay_ms=delay)
 
     x.update()
 

@@ -33,7 +33,7 @@ void Thing::animate (void)
         }
     }
 
-    auto tiles = tp_tiles(tpp);
+    auto tiles = &tpp->tiles;
     if (!tiles || tiles->empty()) {
         return;
     }
@@ -120,7 +120,7 @@ log("tile %s", tile_name(tile).c_str());
                 auto health_max = get_stats_health_max();
                 auto health = get_stats_health();
 
-                if (tpp->internal_has_hp_anim) {
+                if (tpp->internal_has_hp_anim()) {
                     if (health < health_max / 4) {
                         if (!tile_is_hp_25_percent(tile)) {
                             tile = tile_next(tiles, tile);
@@ -172,27 +172,27 @@ log("tile %s got dead", tile_name(tile).c_str());
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && is_dir_up()) {
+            } else if (tpp->internal_has_dir_anim() && is_dir_up()) {
                 if (!tile_is_dir_up(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && is_dir_down()) {
+            } else if (tpp->internal_has_dir_anim() && is_dir_down()) {
                 if (!tile_is_dir_down(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && is_dir_left()) {
+            } else if (tpp->internal_has_dir_anim() && is_dir_left()) {
                 if (!tile_is_dir_left(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && is_dir_right()) {
+            } else if (tpp->internal_has_dir_anim() && is_dir_right()) {
                 if (!tile_is_dir_right(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
-            } else if (tpp->internal_has_dir_anim && is_dir_none()) {
+            } else if (tpp->internal_has_dir_anim() && is_dir_none()) {
                 if (!tile_is_dir_none(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
@@ -238,7 +238,7 @@ log("tile %s got one", tile_name(tile).c_str());
             // ignore
             //
         } else {
-            err("could not find a good animation tile after %d tries; has %d tiles, have tile %s",
+            log("could not find a good animation tile after %d tries; has %d tiles, have tile %s",
                 tries, size, tile_name(tile).c_str());
             return;
         }
