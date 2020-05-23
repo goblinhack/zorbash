@@ -110,7 +110,7 @@ void Level::display_deep_water (int fbo,
             }
             FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
-                if (!tp_is_deep_water(tpp)) {
+                if (!tpp->is_deep_water()) {
                     continue;
                 }
                 t->blit();

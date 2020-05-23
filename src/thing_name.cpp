@@ -11,7 +11,7 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-std::string Thing::a_or_an (void)
+std::string Thing::a_or_an (void) const
 {_
     auto tpp = tp();
     verify(this);
@@ -31,20 +31,20 @@ std::string Thing::a_or_an (void)
     }
 
     if (out == "") {
-        auto prefix = tp_a_or_an(tpp);
+        auto prefix = tpp->a_or_an();
         if (prefix == "") {
-            out = tpp->real_name;
+            out = tpp->real_name();
         } else {
-            out = prefix + " " + tpp->real_name;
+            out = prefix + " " + tpp->real_name();
         }
     } else {
-        out += tpp->real_name;
+        out += tpp->real_name();
     }
 
     return (out);
 }
 
-std::string Thing::the (void)
+std::string Thing::the (void) const
 {_
     auto tpp = tp();
     verify(this);
@@ -63,12 +63,12 @@ std::string Thing::the (void)
         }
     }
 
-    out += tpp->real_name;
+    out += tpp->real_name();
 
     return (out);
 }
 
-std::string Thing::The (void)
+std::string Thing::The (void) const
 {_
     auto out = the();
     out[0] = toupper(out[0]);

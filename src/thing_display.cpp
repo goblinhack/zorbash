@@ -289,8 +289,8 @@ bool Thing::get_coords (spoint &blit_tl,
 
     if (unlikely(is_hidden)) {
         blit = false;
-    } else if (unlikely(tp_is_gfx_attack_anim(tpp) ||
-                        tp_is_gfx_weapon_carry_anim(tpp))) {
+    } else if (unlikely(tpp->is_gfx_attack_anim() ||
+                        tpp->is_gfx_weapon_carry_anim())) {
         //
         // Hide weapons that have swung
         //
@@ -364,7 +364,7 @@ bool Thing::get_coords (spoint &blit_tl,
     //
     // Put larger tiles on the same y base as small ones.
     //
-    if (unlikely(tp_is_gfx_oversized_but_sitting_on_the_ground(tpp))) {
+    if (unlikely(tpp->is_gfx_oversized_but_sitting_on_the_ground())) {
         float y_offset =
             (((tile_pix_height - TILE_HEIGHT) / TILE_HEIGHT) * tileh) / 2.0;
         blit_tl.y -= y_offset;
@@ -374,7 +374,7 @@ bool Thing::get_coords (spoint &blit_tl,
     //
     // Flipping
     //
-    if (unlikely(tp_is_gfx_animated_can_hflip(tpp))) {
+    if (unlikely(tpp->is_gfx_animated_can_hflip())) {
         if (get_timestamp_flip_start()) {
             //
             // Slow flip
@@ -416,7 +416,7 @@ bool Thing::get_coords (spoint &blit_tl,
         }
     }
 
-    if (unlikely(tp_is_gfx_animated_can_vflip(tpp))) {
+    if (unlikely(tpp->is_gfx_animated_can_vflip())) {
         if (is_dir_down() || is_dir_br() || is_dir_bl()) {
             std::swap(blit_tl.y, blit_br.y);
         }
@@ -488,9 +488,9 @@ bool Thing::get_coords (spoint &blit_tl,
 
     if (unlikely(is_monst() ||
                  is_player() ||
-                 tp_is_gfx_attack_anim(tpp) ||
-                 tp_is_gfx_on_fire_anim(tpp) ||
-                 tp_is_gfx_weapon_carry_anim(tpp))) {
+                 tpp->is_gfx_attack_anim() ||
+                 tpp->is_gfx_on_fire_anim() ||
+                 tpp->is_gfx_weapon_carry_anim())) {
         //
         // Render the weapon and player on the same tile rules
         //
@@ -569,7 +569,7 @@ bool Thing::get_pre_effect_map_offset_coords (spoint &blit_tl,
     return (blit);
 }
 
-uint8_t Thing::blit_begin_submerged (void)
+uint8_t Thing::blit_begin_submerged (void) const
 {_
     auto submerged = get_submerged_offset();
     if (submerged) {
@@ -589,7 +589,7 @@ uint8_t Thing::blit_begin_submerged (void)
     return (submerged);
 }
 
-void Thing::blit_end_submerged (uint8_t submerged)
+void Thing::blit_end_submerged (uint8_t submerged) const
 {_
     blit_flush();
     glTranslatef(0, -submerged, 0);
@@ -598,7 +598,7 @@ void Thing::blit_end_submerged (uint8_t submerged)
     blit_init();
 }
 
-uint8_t Thing::blit_begin_reflection_submerged (void)
+uint8_t Thing::blit_begin_reflection_submerged (void) const
 {_
     auto submerged = get_submerged_offset();
     if (submerged) {
@@ -609,7 +609,7 @@ uint8_t Thing::blit_begin_reflection_submerged (void)
     return (submerged);
 }
 
-void Thing::blit_end_reflection_submerged (uint8_t submerged)
+void Thing::blit_end_reflection_submerged (uint8_t submerged) const
 {_
     blit_flush();
     glTranslatef(0, submerged, 0);
@@ -624,7 +624,7 @@ void Thing::blit_internal (spoint &blit_tl,
 {_
     auto tpp = tp();
 
-    if (unlikely(tp_is_gfx_small_shadow_caster(tpp))) {
+    if (unlikely(tpp->is_gfx_small_shadow_caster())) {
         if (auto submerged = blit_begin_submerged()) {
             blit_shadow(tpp, tile, blit_tl, blit_br);
             blit_end_submerged(submerged);
@@ -663,7 +663,7 @@ void Thing::blit_internal (spoint &blit_tl,
 
     glcolor(c);
 
-    if (tp_is_gfx_show_outlined(tpp) && !g_render_black_and_white) {
+    if (tpp->is_gfx_show_outlined() && !g_render_black_and_white) {
         if (reflection) {
             if (auto submerged = blit_begin_reflection_submerged()) {
                 tile_blit(tile, blit_tl, blit_br);
@@ -720,7 +720,7 @@ void Thing::blit_upside_down (void)
     std::swap(blit_tl.y, blit_br.y);
 
     if (tile && tile_get_height(tile) != TILE_HEIGHT) {
-        if (tp_is_gfx_oversized_but_sitting_on_the_ground(tpp)) {
+        if (tpp->is_gfx_oversized_but_sitting_on_the_ground()) {
             blit_br.y += diff;
             blit_tl.y += diff;
         } else {

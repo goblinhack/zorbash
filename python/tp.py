@@ -158,8 +158,8 @@ class Tp:
     def set_str_zzz14(self, value):
         zx.tp_set_str_zzz14(self, value)
 
-    def set_str_zzz15(self, value):
-        zx.tp_set_str_zzz15(self, value)
+    def set_spawn_on_death(self, value):
+        zx.tp_set_spawn_on_death(self, value)
 
     def set_a_or_an(self, value):
         zx.tp_set_a_or_an(self, value)
@@ -251,8 +251,8 @@ class Tp:
     def set_is_rrr25(self, value):
         zx.tp_set_is_rrr25(self, value)
 
-    def set_is_rrr26(self, value):
-        zx.tp_set_is_rrr26(self, value)
+    def set_is_dead_on_shove(self, value):
+        zx.tp_set_is_dead_on_shove(self, value)
 
     def set_is_loggable(self, value):
         zx.tp_set_is_loggable(self, value)
@@ -353,8 +353,8 @@ class Tp:
     def set_is_rrr16(self, value):
         zx.tp_set_is_rrr16(self, value)
 
-    def set_is_nutrition_hd(self, value):
-        zx.tp_set_is_nutrition_hd(self, value)
+    def set_nutrition_hd(self, value):
+        zx.tp_set_nutrition_hd(self, value)
 
     def set_stats_attack_hd(self, value):
         zx.tp_set_stats_attack_hd(self, value)

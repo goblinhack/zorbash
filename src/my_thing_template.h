@@ -34,1435 +34,609 @@ enum {
     IS_JOIN_MAX,
 };
 
-class Tp
-{
-private:
-
+class Tp {
 public:
-    Tp (void)
-    {
+    //
+    // Used a lot, so avoid the cost of an accessor.
+    //
+    uint16_t id {};
+    uint8_t z_depth {};
+    //
+    // Modified on tile loading; easier to leave public
+    //
+    Tilemap bl1_tiles;
+    Tilemap bl2_tiles;
+    Tilemap bot1_tiles;
+    Tilemap bot2_tiles;
+    Tilemap br1_tiles;
+    Tilemap br2_tiles;
+    Tilemap horiz_tiles;
+    Tilemap l180_tiles;
+    Tilemap l270_tiles;
+    Tilemap l90_tiles;
+    Tilemap l_tiles;
+    Tilemap left1_tiles;
+    Tilemap left2_tiles;
+    Tilemap outline_tiles; // For water ripples
+    Tilemap right1_tiles;
+    Tilemap right2_tiles;
+    Tilemap t180_tiles;
+    Tilemap t270_tiles;
+    Tilemap t90_tiles;
+    Tilemap t_tiles;
+    Tilemap tiles; // Animation tiles.
+    Tilemap tl1_tiles;
+    Tilemap tl2_tiles;
+    Tilemap top1_tiles; // Adjacent tiles.
+    Tilemap top2_tiles;
+    Tilemap tr1_tiles;
+    Tilemap tr2_tiles;
+    Tilemap vert_tiles;
+    Tilemap x_tiles;
+private:
+    Dice _stats_attack_hd {};
+    Dice _nutrition_hd {};
+    float _collision_radius {};
+    fsize _sz;
+    int _ai_delay_after_moving_ms {};
+    int _ai_obstacle {};
+    int _ai_scent_distance {};
+    int _blit_bot_off {};
+    int _blit_left_off {};
+    int _blit_off {};
+    int _blit_right_off {};
+    int _blit_top_off {};
+    int _collision_attack {};
+    int _collision_box {};
+    int _collision_check {};
+    int _collision_circle {};
+    int _collision_hit_priority {};
+    int _hunger_clock_freq_ms {};
+    int _internal_has_dir_anim {};
+    int _internal_has_hp_anim {};
+    int _is_active {}; // e.g. a monst or player or something movable
+    int _is_attack_lunge {};
+    int _is_attack_shove {};
+    int _is_attack_shove_chance_d1000 {};
+    int _is_attackable {};
+    int _is_bleeder {};
+    int _is_blood {};
+    int _is_blood_splatter {};
+    int _is_chasm {};
+    int _is_combustible {};
+    int _is_corpse_on_death {};
+    int _is_corridor {};
+    int _is_cursor {};
+    int _is_cursor_can_hover_over {};
+    int _is_cursor_path {};
+    int _is_dead_on_shove {};
+    int _is_deep_water {};
+    int _is_dirt {};
+    int _is_door {};
+    int _is_entrance {};
+    int _is_exit {};
+    int _is_explosion {};
+    int _is_flammable {};
+    int _is_floor {};
+    int _is_floor_deco {};
+    int _is_food {};
+    int _is_gfx_an_animation_only {};
+    int _is_gfx_animated {};
+    int _is_gfx_animated_can_hflip {};
+    int _is_gfx_animated_can_vflip {};
+    int _is_gfx_animated_no_dir {};
+    int _is_gfx_attack_anim {};
+    int _is_gfx_bounce_always {};
+    int _is_gfx_bounce_on_move {};
+    int _is_gfx_dead_anim {};
+    int _is_gfx_large_shadow {};
+    int _is_gfx_on_fire_anim {};
+    int _is_gfx_oversized_but_sitting_on_the_ground {};
+    int _is_gfx_show_outlined {};
+    int _is_gfx_small_shadow_caster {};
+    int _is_gfx_weapon_carry_anim {};
+    int _is_hazard {};
+    int _is_hunger_insatiable {};
+    int _is_interesting {}; // e.g. something edible or a monst or lava
+    int _is_key {};
+    int _is_lava {};
+    int _is_light_strength {};
+    int _is_loggable {};
+    int _is_made_of_meat {};
+    int _is_meat_eater {};
+    int _is_monst {};
+    int _is_movable {};
+    int _is_movement_blocking {};
+    int _is_msg {};
+    int _is_no_tile {};
+    int _is_player {};
+    int _is_projectile {};
+    int _is_ripple {};
+    int _is_rock {};
+    int _is_rrr1 {};
+    int _is_rrr10 {};
+    int _is_rrr11 {};
+    int _is_rrr12 {};
+    int _is_rrr13 {};
+    int _is_rrr14 {};
+    int _is_rrr15 {};
+    int _is_rrr16 {};
+    int _is_rrr17 {};
+    int _is_rrr18 {};
+    int _is_rrr19 {};
+    int _is_rrr2 {};
+    int _is_rrr20 {};
+    int _is_rrr21 {};
+    int _is_rrr22 {};
+    int _is_rrr23 {};
+    int _is_rrr24 {};
+    int _is_rrr25 {};
+    int _is_rrr3 {};
+    int _is_rrr4 {};
+    int _is_rrr5 {};
+    int _is_rrr6 {};
+    int _is_rrr7 {};
+    int _is_rrr8 {};
+    int _is_rrr9 {};
+    int _is_secret_door {};
+    int _is_shovable {};
+    int _is_torch {};
+    int _is_undead {};
+    int _is_wall {};
+    int _is_wall_deco {};
+    int _is_water {};
+    int _is_water_dweller {};
+    int _is_water_hater {};
+    int _is_weapon {};
+    int _lifespan_count {};
+    int _normal_placement_rules {};
+    int _stats01 {};
+    int _stats02 {};
+    int _stats03 {};
+    int _stats04 {};
+    int _stats05 {};
+    int _stats06 {};
+    int _stats07 {};
+    int _stats08 {};
+    int _stats09 {};
+    int _stats10 {};
+    int _stats11 {};
+    int _stats12 {};
+    int _stats13 {};
+    int _stats14 {};
+    int _stats15 {};
+    int _stats16 {};
+    int _stats17 {};
+    int _stats18 {};
+    int _stats19 {};
+    int _stats_attack_rate_tenths {};
+    int _stats_defence {};
+    int _stats_health_hunger_pct {};
+    int _stats_health_initial {};
+    int _stats_health_starving_pct {};
+    int _stats_move_speed_ms {};
+    int _stats_strength {};
+    int _weapon_damage {};
+    int _weapon_use_delay_hundredths {};
+    int _weapon_use_distance {};
+    std::string _a_or_an;
+    std::string _attack;
+    std::string _light_color;
+    std::string _name;
+    std::string _nutrition;
+    std::string _real_name;
+    std::string _spawn_on_death;
+    std::string _weapon_carry_anim;
+    std::string _weapon_use_anim;
+    std::string _zzz10;
+    std::string _zzz11;
+    std::string _zzz12;
+    std::string _zzz13;
+    std::string _zzz14;
+    std::string _zzz1;
+    std::string _zzz2;
+    std::string _zzz3;
+    std::string _zzz4;
+    std::string _zzz5;
+    std::string _zzz6;
+    std::string _zzz7;
+    std::string _zzz8;
+    std::string _zzz9;
+public:
+    Tp (void) {
         newptr(this, "Tp");
     }
 
-    ~Tp (void)
-    {
+    ~Tp (void) {
         oldptr(this);
     }
 
-    uint16_t id {};
-
-    fsize sz;
-
-    std::string name;
-    std::string real_name;
-    std::string str_zzz1;
-    std::string str_zzz2;
-    std::string str_zzz3;
-    std::string str_zzz4;
-    std::string str_zzz5;
-    std::string str_zzz6;
-    std::string str_zzz7;
-    std::string str_zzz8;
-    std::string str_zzz9;
-    std::string str_zzz10;
-    std::string str_zzz11;
-    std::string str_zzz12;
-    std::string str_zzz13;
-    std::string str_zzz14;
-    std::string str_zzz15;
-    std::string a_or_an;
-    std::string light_color;
-    std::string weapon_carry_anim;
-    std::string weapon_use_anim;
-
-    //
-    // Animation tiles.
-    //
-    Tilemap tiles;
-
-    //
-    // Adjacent tiles.
-    //
-    Tilemap top1_tiles;
-    Tilemap bot1_tiles;
-    Tilemap left1_tiles;
-    Tilemap right1_tiles;
-    Tilemap tl1_tiles;
-    Tilemap tr1_tiles;
-    Tilemap bl1_tiles;
-    Tilemap br1_tiles;
-
-    //
-    // Lower level adjacent tiles (for shadows)
-    //
-    Tilemap top2_tiles;
-    Tilemap bot2_tiles;
-    Tilemap left2_tiles;
-    Tilemap right2_tiles;
-    Tilemap tl2_tiles;
-    Tilemap tr2_tiles;
-    Tilemap bl2_tiles;
-    Tilemap br2_tiles;
-
-    //
-    // Join tiles
-    //
-    Tilemap horiz_tiles;
-    Tilemap vert_tiles;
-    Tilemap l90_tiles;
-    Tilemap l180_tiles;
-    Tilemap l_tiles;
-    Tilemap l270_tiles;
-    Tilemap t_tiles;
-    Tilemap t90_tiles;
-    Tilemap t180_tiles;
-    Tilemap t270_tiles;
-    Tilemap x_tiles;
-
-    //
-    // For water ripples
-    //
-    Tilemap outline_tiles;
-
-    int blit_off {};
-    int blit_top_off {};
-    int blit_bot_off {};
-    int blit_left_off {};
-    int blit_right_off {};
-
-    Dice attack_damage;
-    Dice is_nutrition;
-    double collision_radius {};
-    int ai_delay_after_moving_ms {};
-    int ai_scent_distance {};
-    int collision_attack {};
-    int collision_box {};
-    int collision_check {};
-    int collision_circle {};
-    int collision_hit_priority {};
-    int is_gfx_animated {};
-    int is_gfx_animated_can_vflip {};
-    int is_gfx_animated_no_dir {};
-    int is_gfx_bounce_on_move {};
-    int is_gfx_animated_can_hflip {};
-    int is_gfx_dead_anim {};
-    int is_gfx_an_animation_only {};
-    int is_floor_deco {};
-    int is_wall_deco {};
-    int is_gfx_weapon_carry_anim {};
-    int is_gfx_attack_anim {};
-    int is_gfx_large_shadow {};
-    int is_gfx_oversized_but_sitting_on_the_ground {};
-    int is_gfx_show_outlined {};
-    int is_gfx_small_shadow_caster {};
-    int hunger_clock_freq_ms {};
-    int internal_has_dir_anim {};
-    int internal_has_hp_anim {};
-    int is_active {}; // e.g. a monst or player or something movable
-    int is_attackable {};
-    int is_bleeder {};
-    int is_blood {};
-    int is_corpse_on_death {};
-    int is_corridor {};
-    int is_cursor {};
-    int is_cursor_can_hover_over {};
-    int is_deep_water {};
-    int is_dirt {};
-    int is_door {};
-    int is_entrance {};
-    int is_exit {};
-    int is_explosion {};
-    int is_floor {};
-    int is_food {};
-    int is_hunger_insatiable {};
-    int is_interesting {}; // e.g. something edible or a monst or lava
-    int is_key {};
-    int is_lava {};
-    int is_chasm {};
-    int is_light_strength {};
-    int is_loggable {};
-    int is_made_of_meat {};
-    int is_meat_eater {};
-    int is_monst {};
-    int is_movable {};
-    int is_movement_blocking {};
-    int ai_obstacle {};
-    int is_player {};
-    int is_projectile {};
-    int is_ripple {};
-    int is_rock {};
-    int is_rrr1 {};
-    int is_rrr10 {};
-    int is_rrr11 {};
-    int is_rrr12 {};
-    int is_rrr13 {};
-    int is_rrr14 {};
-    int is_rrr15 {};
-    int is_rrr16 {};
-    int is_rrr17 {};
-    int is_rrr18 {};
-    int is_rrr19 {};
-    int is_rrr2 {};
-    int is_rrr20 {};
-    int is_rrr21 {};
-    int is_rrr22 {};
-    int is_rrr23 {};
-    int is_rrr24 {};
-    int is_rrr25 {};
-    int is_rrr26 {};
-    int is_torch {};
-    int is_gfx_bounce_always {};
-    int is_rrr3 {};
-    int normal_placement_rules {};
-    int is_flammable {};
-    int is_combustible {};
-    int is_gfx_on_fire_anim {};
-    int is_attack_shove_chance_d1000 {};
-    int is_hazard {};
-    int is_attack_shove {};
-    int is_shovable {};
-    int is_cursor_path {};
-    int is_rrr4 {};
-    int is_blood_splatter {};
-    int is_no_tile {};
-    int is_msg {};
-    int is_attack_lunge {};
-    int is_rrr5 {};
-    int is_rrr6 {};
-    int is_rrr7 {};
-    int is_rrr8 {};
-    int is_rrr9 {};
-    int is_secret_door {};
-    int is_undead {};
-    int is_wall {};
-    int is_water {};
-    int is_water_dweller {};
-    int is_water_hater {};
-    int is_weapon {};
-    int stats01 {};
-    int stats02 {};
-    int stats03 {};
-    int stats04 {};
-    int stats05 {};
-    int stats06 {};
-    int stats07 {};
-    int stats08 {};
-    int stats09 {};
-    int stats10 {};
-    int stats11 {};
-    int stats12 {};
-    int stats13 {};
-    int stats14 {};
-    int stats15 {};
-    int stats16 {};
-    int stats17 {};
-    int stats18 {};
-    int stats19 {};
-    int stats_strength {};
-    int stats_attack {};
-    int stats_attack_rate_tenths {};
-    int lifespan_count {};
-    int stats_defence {};
-    int stats_health_hunger_pct {};
-    int stats_health_initial {};
-    int stats_health_starving_pct {};
-    int stats_move_speed_ms {};
-    int weapon_damage {};
-    int weapon_use_delay_hundredths {};
-    int weapon_use_distance {};
-    std::string stats_attack_hd {};
-    std::string is_nutrition_hd {};
-
-    uint8_t z_depth {};
+    const Dice& nutrition_hd(void) const;
+    const Dice& stats_attack_hd(void) const;
+    const Tilemap *tp_bl1_tiles(void) const;
+    const Tilemap *tp_bl2_tiles(void) const;
+    const Tilemap *tp_bot1_tiles(void) const;
+    const Tilemap *tp_bot2_tiles(void) const;
+    const Tilemap *tp_br1_tiles(void) const;
+    const Tilemap *tp_br2_tiles(void) const;
+    const Tilemap *tp_horiz_tiles(void) const;
+    const Tilemap *tp_l180_tiles(void) const;
+    const Tilemap *tp_l270_tiles(void) const;
+    const Tilemap *tp_l90_tiles(void) const;
+    const Tilemap *tp_l_tiles(void) const;
+    const Tilemap *tp_left1_tiles(void) const;
+    const Tilemap *tp_left2_tiles(void) const;
+    const Tilemap *tp_outline_tiles(void) const;
+    const Tilemap *tp_right1_tiles(void) const;
+    const Tilemap *tp_right2_tiles(void) const;
+    const Tilemap *tp_t180_tiles(void) const;
+    const Tilemap *tp_t270_tiles(void) const;
+    const Tilemap *tp_t90_tiles(void) const;
+    const Tilemap *tp_t_tiles(void) const;
+    const Tilemap *tp_tiles(void) const;
+    const Tilemap *tp_tl1_tiles(void) const;
+    const Tilemap *tp_tl2_tiles(void) const;
+    const Tilemap *tp_top1_tiles(void) const;
+    const Tilemap *tp_top2_tiles(void) const;
+    const Tilemap *tp_tr1_tiles(void) const;
+    const Tilemap *tp_tr2_tiles(void) const;
+    const Tilemap *tp_vert_tiles(void) const;
+    const Tilemap *tp_x_tiles(void) const;
+    const std::string& light_color(void) const;
+    const std::string& name(void) const;
+    const std::string& nutrition_hd_str(void) const;
+    const std::string& real_name(void) const;
+    const std::string& spawn_on_death(void) const;
+    const std::string& stats_attack_hd_str(void) const;
+    const std::string& weapon_carry_anim(void) const;
+    const std::string& weapon_use_anim(void) const;
+    const std::string& zzz1(void) const;
+    const std::string& zzz10(void) const;
+    const std::string& zzz11(void) const;
+    const std::string& zzz12(void) const;
+    const std::string& zzz13(void) const;
+    const std::string& zzz14(void) const;
+    const std::string& zzz2(void) const;
+    const std::string& zzz3(void) const;
+    const std::string& zzz4(void) const;
+    const std::string& zzz5(void) const;
+    const std::string& zzz6(void) const;
+    const std::string& zzz7(void) const;
+    const std::string& zzz8(void) const;
+    const std::string& zzz9(void) const;
+    float collision_radius(void) const;
+    int ai_delay_after_moving_ms(void) const;
+    int ai_obstacle(void) const;
+    int ai_scent_distance(void) const;
+    int blit_bot_off(void) const;
+    int blit_left_off(void) const;
+    int blit_right_off(void) const;
+    int blit_top_off(void) const;
+    int collision_attack(void) const;
+    int collision_box(void) const;
+    int collision_check(void) const;
+    int collision_circle(void) const;
+    int collision_hit_priority(void) const;
+    int hunger_clock_freq_ms(void) const;
+    int internal_has_dir_anim(void) const;
+    int internal_has_hp_anim(void) const;
+    int is_active(void) const;
+    int is_attack_lunge(void) const;
+    int is_attack_shove(void) const;
+    int is_attack_shove_chance_d1000(void) const;
+    int is_attackable(void) const;
+    int is_bleeder(void) const;
+    int is_blood(void) const;
+    int is_blood_splatter(void) const;
+    int is_chasm(void) const;
+    int is_combustible(void) const;
+    int is_corpse_on_death(void) const;
+    int is_corridor(void) const;
+    int is_cursor(void) const;
+    int is_cursor_can_hover_over(void) const;
+    int is_cursor_path(void) const;
+    int is_dead_on_shove(void) const;
+    int is_deep_water(void) const;
+    int is_dirt(void) const;
+    int is_door(void) const;
+    int is_entrance(void) const;
+    int is_exit(void) const;
+    int is_explosion(void) const;
+    int is_flammable(void) const;
+    int is_floor(void) const;
+    int is_floor_deco(void) const;
+    int is_food(void) const;
+    int is_gfx_an_animation_only(void) const;
+    int is_gfx_animated(void) const;
+    int is_gfx_animated_can_hflip(void) const;
+    int is_gfx_animated_can_vflip(void) const;
+    int is_gfx_animated_no_dir(void) const;
+    int is_gfx_attack_anim(void) const;
+    int is_gfx_bounce_always(void) const;
+    int is_gfx_bounce_on_move(void) const;
+    int is_gfx_dead_anim(void) const;
+    int is_gfx_large_shadow(void) const;
+    int is_gfx_on_fire_anim(void) const;
+    int is_gfx_oversized_but_sitting_on_the_ground(void) const;
+    int is_gfx_show_outlined(void) const;
+    int is_gfx_small_shadow_caster(void) const;
+    int is_gfx_weapon_carry_anim(void) const;
+    int is_hazard(void) const;
+    int is_hunger_insatiable(void) const;
+    int is_interesting(void) const;
+    int is_key(void) const;
+    int is_lava(void) const;
+    int is_light_strength(void) const;
+    int is_loggable(void) const;
+    int is_made_of_meat(void) const;
+    int is_meat_eater(void) const;
+    int is_monst(void) const;
+    int is_movable(void) const;
+    int is_movement_blocking(void) const;
+    int is_msg(void) const;
+    int is_no_tile(void) const;
+    int is_player(void) const;
+    int is_projectile(void) const;
+    int is_ripple(void) const;
+    int is_rock(void) const;
+    int is_rrr1(void) const;
+    int is_rrr10(void) const;
+    int is_rrr11(void) const;
+    int is_rrr12(void) const;
+    int is_rrr13(void) const;
+    int is_rrr14(void) const;
+    int is_rrr15(void) const;
+    int is_rrr16(void) const;
+    int is_rrr17(void) const;
+    int is_rrr18(void) const;
+    int is_rrr19(void) const;
+    int is_rrr2(void) const;
+    int is_rrr20(void) const;
+    int is_rrr21(void) const;
+    int is_rrr22(void) const;
+    int is_rrr23(void) const;
+    int is_rrr24(void) const;
+    int is_rrr25(void) const;
+    int is_rrr3(void) const;
+    int is_rrr4(void) const;
+    int is_rrr5(void) const;
+    int is_rrr6(void) const;
+    int is_rrr7(void) const;
+    int is_rrr8(void) const;
+    int is_rrr9(void) const;
+    int is_secret_door(void) const;
+    int is_shovable(void) const;
+    int is_torch(void) const;
+    int is_undead(void) const;
+    int is_wall(void) const;
+    int is_wall_deco(void) const;
+    int is_water(void) const;
+    int is_water_dweller(void) const;
+    int is_water_hater(void) const;
+    int is_weapon(void) const;
+    int lifespan_count(void) const;
+    int normal_placement_rules(void) const;
+    int stats01(void) const;
+    int stats02(void) const;
+    int stats03(void) const;
+    int stats04(void) const;
+    int stats05(void) const;
+    int stats06(void) const;
+    int stats07(void) const;
+    int stats08(void) const;
+    int stats09(void) const;
+    int stats10(void) const;
+    int stats11(void) const;
+    int stats12(void) const;
+    int stats13(void) const;
+    int stats14(void) const;
+    int stats15(void) const;
+    int stats16(void) const;
+    int stats17(void) const;
+    int stats18(void) const;
+    int stats19(void) const;
+    int stats_attack_rate_tenths(void) const;
+    int stats_defence(void) const;
+    int stats_health_hunger_pct(void) const;
+    int stats_health_initial(void) const;
+    int stats_health_starving_pct(void) const;
+    int stats_move_speed_ms(void) const;
+    int stats_strength(void) const;
+    int weapon_damage(void) const;
+    int weapon_use_delay_hundredths(void) const;
+    int weapon_use_distance(void) const;
+    std::string a_or_an(void) const;
+    void set_a_or_an(const std::string &);
+    void set_ai_delay_after_moving_ms(int);
+    void set_ai_obstacle(int);
+    void set_ai_scent_distance(int);
+    void set_blit_bot_off(int);
+    void set_blit_left_off(int);
+    void set_blit_right_off(int);
+    void set_blit_top_off(int);
+    void set_collision_attack(int);
+    void set_collision_box(int);
+    void set_collision_check(int);
+    void set_collision_circle(int);
+    void set_collision_hit_priority(int);
+    void set_collision_radius(float);
+    void set_hunger_clock_freq_ms(int);
+    void set_internal_has_dir_anim(int);
+    void set_internal_has_hp_anim(int);
+    void set_is_active(int);
+    void set_is_attack_lunge(int);
+    void set_is_attack_shove(int);
+    void set_is_attack_shove_chance_d1000(int);
+    void set_is_attackable(int);
+    void set_is_bleeder(int);
+    void set_is_blood(int);
+    void set_is_blood_splatter(int);
+    void set_is_chasm(int);
+    void set_is_combustible(int);
+    void set_is_corpse_on_death(int);
+    void set_is_corridor(int);
+    void set_is_cursor(int);
+    void set_is_cursor_can_hover_over(int);
+    void set_is_cursor_path(int);
+    void set_is_dead_on_shove(int);
+    void set_is_deep_water(int);
+    void set_is_dirt(int);
+    void set_is_door(int);
+    void set_is_entrance(int);
+    void set_is_exit(int);
+    void set_is_explosion(int);
+    void set_is_flammable(int);
+    void set_is_floor(int);
+    void set_is_floor_deco(int);
+    void set_is_food(int);
+    void set_is_gfx_an_animation_only(int);
+    void set_is_gfx_animated(int);
+    void set_is_gfx_animated_can_hflip(int);
+    void set_is_gfx_animated_can_vflip(int);
+    void set_is_gfx_animated_no_dir(int);
+    void set_is_gfx_attack_anim(int);
+    void set_is_gfx_bounce_always(int);
+    void set_is_gfx_bounce_on_move(int);
+    void set_is_gfx_dead_anim(int);
+    void set_is_gfx_large_shadow(int);
+    void set_is_gfx_on_fire_anim(int);
+    void set_is_gfx_oversized_but_sitting_on_the_ground(int);
+    void set_is_gfx_show_outlined(int);
+    void set_is_gfx_small_shadow_caster(int);
+    void set_is_gfx_weapon_carry_anim(int);
+    void set_is_hazard(int);
+    void set_is_hunger_insatiable(int);
+    void set_is_interesting(int);
+    void set_is_key(int);
+    void set_is_lava(int);
+    void set_is_light_strength(int);
+    void set_is_loggable(int);
+    void set_is_made_of_meat(int);
+    void set_is_meat_eater(int);
+    void set_is_monst(int);
+    void set_is_movable(int);
+    void set_is_movement_blocking(int);
+    void set_is_msg(int);
+    void set_is_no_tile(int);
+    void set_is_player(int);
+    void set_is_projectile(int);
+    void set_is_ripple(int);
+    void set_is_rock(int);
+    void set_is_rrr1(int);
+    void set_is_rrr10(int);
+    void set_is_rrr11(int);
+    void set_is_rrr12(int);
+    void set_is_rrr13(int);
+    void set_is_rrr14(int);
+    void set_is_rrr15(int);
+    void set_is_rrr16(int);
+    void set_is_rrr17(int);
+    void set_is_rrr18(int);
+    void set_is_rrr19(int);
+    void set_is_rrr2(int);
+    void set_is_rrr20(int);
+    void set_is_rrr21(int);
+    void set_is_rrr22(int);
+    void set_is_rrr23(int);
+    void set_is_rrr24(int);
+    void set_is_rrr25(int);
+    void set_is_rrr3(int);
+    void set_is_rrr4(int);
+    void set_is_rrr5(int);
+    void set_is_rrr6(int);
+    void set_is_rrr7(int);
+    void set_is_rrr8(int);
+    void set_is_rrr9(int);
+    void set_is_secret_door(int);
+    void set_is_shovable(int);
+    void set_is_torch(int);
+    void set_is_undead(int);
+    void set_is_wall(int);
+    void set_is_wall_deco(int);
+    void set_is_water(int);
+    void set_is_water_dweller(int);
+    void set_is_water_hater(int);
+    void set_is_weapon(int);
+    void set_lifespan_count(int);
+    void set_light_color(const std::string &);
+    void set_name(const std::string &);
+    void set_normal_placement_rules(int);
+    void set_nutrition_hd(const std::string &);
+    void set_real_name(const std::string &);
+    void set_spawn_on_death(const std::string &);
+    void set_stats01(int);
+    void set_stats02(int);
+    void set_stats03(int);
+    void set_stats04(int);
+    void set_stats05(int);
+    void set_stats06(int);
+    void set_stats07(int);
+    void set_stats08(int);
+    void set_stats09(int);
+    void set_stats10(int);
+    void set_stats11(int);
+    void set_stats12(int);
+    void set_stats13(int);
+    void set_stats14(int);
+    void set_stats15(int);
+    void set_stats16(int);
+    void set_stats17(int);
+    void set_stats18(int);
+    void set_stats19(int);
+    void set_stats_attack_hd(const std::string &);
+    void set_stats_attack_rate_tenths(int);
+    void set_stats_defence(int);
+    void set_stats_health_hunger_pct(int);
+    void set_stats_health_initial(int);
+    void set_stats_health_starving_pct(int);
+    void set_stats_move_speed_ms(int);
+    void set_stats_strength(int);
+    void set_weapon_carry_anim(const std::string &);
+    void set_weapon_damage(int);
+    void set_weapon_use_anim(const std::string &);
+    void set_weapon_use_delay_hundredths(int);
+    void set_weapon_use_distance(int);
+    void set_z_depth(int);
+    void set_zzz1(const std::string &);
+    void set_zzz10(const std::string &);
+    void set_zzz11(const std::string &);
+    void set_zzz12(const std::string &);
+    void set_zzz13(const std::string &);
+    void set_zzz14(const std::string &);
+    void set_zzz2(const std::string &);
+    void set_zzz3(const std::string &);
+    void set_zzz4(const std::string &);
+    void set_zzz5(const std::string &);
+    void set_zzz6(const std::string &);
+    void set_zzz7(const std::string &);
+    void set_zzz8(const std::string &);
+    void set_zzz9(const std::string &);
 };
-
-uint8_t tp_init(void);
-void tp_fini(void);
-Tpp tp_load(int id, std::string const& file, std::string const& real_name);
-void tp_update(Tpp tp);
-Tpp tp_find(uint32_t id);
-void tp_init_after_loading(void);
-Tpp tp_random_monst(void);
-Tpp tp_random_food(void);
-Tpp tp_random_dirt(void);
-Tpp tp_random_ripple(void);
-Tpp tp_random_blood_splatter(void);
-Tpp tp_random_key(void);
-Tpp tp_random_entrance(void);
-Tpp tp_random_exit(void);
-Tpp tp_random_torch(void);
-Tpp tp_random_blood(void);
-Tpp tp_random_wall(void);
-Tpp tp_random_rock(void);
-Tpp tp_random_floor(void);
-Tpp tp_random_deco(void);
-Tpp tp_random_wall_deco(void);
-
-static inline int32_t tp_blit_top_off (Tpp &t)
-{_
-    return (t->blit_top_off);
-}
-
-static inline int32_t tp_blit_bot_off (Tpp &t)
-{_
-    return (t->blit_bot_off);
-}
-
-static inline int32_t tp_blit_left_off (Tpp &t)
-{_
-    return (t->blit_left_off);
-}
-
-static inline int32_t tp_blit_right_off (Tpp &t)
-{_
-    return (t->blit_right_off);
-}
-
-static inline int tp_to_id (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return -1; }
-    return (t->id);
-}
-
-static inline int tp_is_floor (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_floor);
-}
-
-static inline int tp_is_wall (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_wall);
-}
-
-static inline int tp_is_door (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_door);
-}
-
-static inline int tp_is_lava (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_lava);
-}
-
-static inline int tp_is_water (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_water);
-}
-
-static inline int tp_is_chasm (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_chasm);
-}
-
-static inline int tp_is_deep_water (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_deep_water);
-}
-
-static inline int tp_is_monst (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_monst);
-}
-
-static inline int tp_is_food (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_food);
-}
-
-static inline int tp_is_player (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_player);
-}
-
-static inline int tp_is_gfx_an_animation_only (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_an_animation_only);
-}
-
-static inline int tp_is_gfx_animated (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_animated);
-}
-
-static inline int tp_is_gfx_animated_no_dir (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_animated_no_dir);
-}
-
-static inline int tp_is_rrr1 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr1);
-}
-
-static inline int tp_is_rrr2 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr2);
-}
-
-static inline int tp_is_rrr3 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr3);
-}
-
-static inline int tp_is_rrr4 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr4);
-}
-
-static inline int tp_is_rrr5 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr5);
-}
-
-static inline int tp_is_rrr6 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr6);
-}
-
-static inline int tp_is_rrr7 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr7);
-}
-
-static inline int tp_is_rrr8 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr8);
-}
-
-static inline int tp_is_rrr9 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr9);
-}
-
-static inline int tp_is_rrr10 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr10);
-}
-
-static inline int tp_is_rrr11 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr11);
-}
-
-static inline int tp_is_rrr12 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr12);
-}
-
-static inline int tp_is_rrr13 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr13);
-}
-
-static inline int tp_is_rrr14 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr14);
-}
-
-static inline int tp_is_rrr15 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr15);
-}
-
-static inline int tp_is_rrr16 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr16);
-}
-
-static inline int tp_is_rrr17 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr17);
-}
-
-static inline int tp_is_rrr18 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr18);
-}
-
-static inline int tp_is_rrr19 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr19);
-}
-
-static inline int tp_is_rrr20 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr20);
-}
-
-static inline int tp_is_rrr21 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr21);
-}
-
-static inline int tp_is_rrr22 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr22);
-}
-
-static inline int tp_is_rrr23 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr23);
-}
-
-static inline int tp_is_rrr24 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr24);
-}
-
-static inline int tp_is_rrr25 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr25);
-}
-
-static inline int tp_is_rrr26 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rrr26);
-}
-
-static inline int tp_is_loggable (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_loggable);
-}
-
-static inline int tp_is_torch (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_torch);
-}
-
-static inline int tp_is_gfx_bounce_always (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_bounce_always);
-}
-
-static inline int tp_normal_placement_rules (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->normal_placement_rules);
-}
-
-static inline int tp_is_flammable (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_flammable);
-}
-
-static inline int tp_is_combustible (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_combustible);
-}
-
-static inline int tp_is_gfx_attack_anim (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_attack_anim);
-}
-
-static inline int tp_is_attack_shove_chance_d1000 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_attack_shove_chance_d1000);
-}
-
-static inline int tp_is_hazard (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_hazard);
-}
-
-static inline int tp_is_attack_shove (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_attack_shove);
-}
-
-static inline int tp_is_shovable (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_shovable);
-}
-
-static inline int tp_is_cursor_path (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_cursor_path);
-}
-
-static inline int tp_is_bleeder (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_bleeder);
-}
-
-static inline int tp_is_blood_splatter (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_blood_splatter);
-}
-
-static inline int tp_is_no_tile (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_no_tile);
-}
-
-static inline int tp_is_msg (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_msg);
-}
-
-static inline int tp_is_attack_lunge (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_attack_lunge);
-}
-
-static inline int tp_stats_defence (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats_defence);
-}
-
-static inline int tp_stats_attack (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats_attack);
-}
-
-static inline int tp_stats_attack_rate_tenths (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats_attack_rate_tenths);
-}
-
-static inline int tp_lifespan_count (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->lifespan_count);
-}
-
-static inline int tp_stats01 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats01);
-}
-
-static inline int tp_stats02 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats02);
-}
-
-static inline int tp_stats03 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats03);
-}
-
-static inline int tp_stats04 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats04);
-}
-
-static inline int tp_stats05 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats05);
-}
-
-static inline int tp_stats06 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats06);
-}
-
-static inline int tp_stats07 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats07);
-}
-
-static inline int tp_stats08 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats08);
-}
-
-static inline int tp_stats09 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats09);
-}
-
-static inline int tp_stats10 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats10);
-}
-
-static inline int tp_stats11 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats11);
-}
-
-static inline int tp_stats12 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats12);
-}
-
-static inline int tp_stats13 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats13);
-}
-
-static inline int tp_stats14 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats14);
-}
-
-static inline int tp_stats15 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats15);
-}
-
-static inline int tp_stats16 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats16);
-}
-
-static inline int tp_stats17 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats17);
-}
-
-static inline int tp_stats18 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats18);
-}
-
-static inline int tp_stats19 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats19);
-}
-
-static inline int tp_stats_strength (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->stats_strength);
-}
-
-static inline int tp_is_secret_door (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_secret_door);
-}
-
-static inline int tp_is_cursor_can_hover_over (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_cursor_can_hover_over);
-}
-
-static inline int tp_is_cursor (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_cursor);
-}
-
-static inline int tp_is_gfx_dead_anim (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return 0; }
-    return (t->is_gfx_dead_anim);
-}
-
-static inline int tp_ai_obstacle (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->ai_obstacle);
-}
-
-static inline int tp_is_attackable (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_attackable);
-}
-
-static inline int tp_is_water_hater (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_water_hater);
-}
-
-static inline int tp_is_hunger_insatiable (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_hunger_insatiable);
-}
-
-static inline int tp_is_undead (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_undead);
-}
-
-static inline int tp_is_rock (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_rock);
-}
-
-static inline std::string tp_is_nutrition_hd (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->is_nutrition_hd);
-}
-
-static inline std::string tp_stats_attack_hd (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->stats_attack_hd);
-}
-
-static inline int tp_collision_check (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->collision_check);
-}
-
-static inline int tp_collision_attack (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->collision_attack);
-}
-
-static inline int tp_is_water_dweller (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_water_dweller);
-}
-
-static inline int tp_collision_hit_priority (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->collision_hit_priority);
-}
-
-static inline double tp_collision_radius (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->collision_radius);
-}
-
-static inline int tp_ai_delay_after_moving_ms (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->ai_delay_after_moving_ms);
-}
-
-static inline int tp_is_gfx_bounce_on_move (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_bounce_on_move);
-}
-
-static inline int tp_is_corpse_on_death (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_corpse_on_death);
-}
-
-static inline int tp_is_meat_eater (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_meat_eater);
-}
-
-static inline int tp_is_made_of_meat (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_made_of_meat);
-}
-
-static inline int tp_is_active (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_active);
-}
-
-static inline int tp_stats_health_starving_pct (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->stats_health_starving_pct);
-}
-
-static inline int tp_stats_health_initial (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->stats_health_initial);
-}
-
-static inline int tp_stats_health_hunger_pct (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->stats_health_hunger_pct);
-}
-
-static inline int tp_hunger_clock_freq_ms (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->hunger_clock_freq_ms);
-}
-
-static inline int tp_ai_scent_distance (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->ai_scent_distance);
-}
-
-static inline int tp_is_ripple (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_ripple);
-}
-
-static inline int tp_is_light_strength (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_light_strength);
-}
-
-static inline int tp_is_dirt (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_dirt);
-}
-
-static inline int tp_is_blood (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_blood);
-}
-
-static inline int tp_is_gfx_animated_can_vflip (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_animated_can_vflip);
-}
-
-static inline int tp_is_gfx_small_shadow_caster (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_small_shadow_caster);
-}
-
-static inline int tp_is_corridor (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_corridor);
-}
-
-static inline int tp_is_gfx_oversized_but_sitting_on_the_ground (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_oversized_but_sitting_on_the_ground);
-}
-
-static inline int tp_is_interesting (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_interesting);
-}
-
-static inline int tp_is_exit (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_exit);
-}
-
-static inline int tp_is_entrance (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_entrance);
-}
-
-static inline int tp_is_floor_deco (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_floor_deco);
-}
-
-static inline int tp_is_wall_deco (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_wall_deco);
-}
-
-static inline int tp_stats_move_speed_ms (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->stats_move_speed_ms);
-}
-
-static inline int tp_weapon_use_delay_hundredths (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->weapon_use_delay_hundredths);
-}
-
-static inline int tp_collision_box (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->collision_box);
-}
-
-static inline int tp_collision_circle (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->collision_circle);
-}
-
-static inline int tp_weapon_damage (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->weapon_damage);
-}
-
-static inline int tp_is_projectile (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_projectile);
-}
-
-static inline int tp_is_explosion (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_explosion);
-}
-
-static inline int tp_weapon_use_distance (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->weapon_use_distance);
-}
-
-static inline int tp_is_gfx_weapon_carry_anim (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_weapon_carry_anim);
-}
-
-static inline int tp_is_gfx_on_fire_anim (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_on_fire_anim);
-}
-
-static inline int tp_is_weapon (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_weapon);
-}
-
-static inline int tp_is_gfx_show_outlined (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_show_outlined);
-}
-
-static inline int tp_is_gfx_large_shadow (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_large_shadow);
-}
-
-static inline int tp_is_gfx_animated_can_hflip (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_gfx_animated_can_hflip);
-}
-
-static inline int tp_z_depth (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->z_depth);
-}
-
-static inline int tp_is_movable (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_movable);
-}
-
-static inline int tp_is_movement_blocking (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_movement_blocking);
-}
-
-static inline int tp_is_key (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return false; }
-    return (t->is_key);
-}
-
-static inline std::string tp_name (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return "<no tp>"; }
-    return (t->name);
-}
-
-static inline std::string tp_str_zzz1 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz1);
-}
-
-static inline std::string tp_str_zzz2 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz2);
-}
-
-static inline std::string tp_str_zzz3 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz3);
-}
-
-static inline std::string tp_str_zzz4 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz4);
-}
-
-static inline std::string tp_str_zzz5 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz5);
-}
-
-static inline std::string tp_str_zzz6 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz6);
-}
-
-static inline std::string tp_str_zzz7 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz7);
-}
-
-static inline std::string tp_str_zzz8 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz8);
-}
-
-static inline std::string tp_str_zzz9 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz9);
-}
-
-static inline std::string tp_str_zzz10 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz10);
-}
-
-static inline std::string tp_str_zzz11 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz11);
-}
-
-static inline std::string tp_str_zzz12 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz12);
-}
-
-static inline std::string tp_str_zzz13 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz13);
-}
-
-static inline std::string tp_str_zzz14 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz14);
-}
-
-static inline std::string tp_str_zzz15 (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->str_zzz15);
-}
-
-static inline std::string tp_a_or_an (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->a_or_an);
-}
-
-static inline std::string tp_real_name (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->real_name);
-}
-
-static inline std::string tp_light_color (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->light_color);
-}
-
-static inline std::string tp_weapon_carry_anim (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->weapon_carry_anim);
-}
-
-static inline std::string tp_weapon_use_anim (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return ""; }
-    return (t->weapon_use_anim);
-}
-
-static inline Tilemap *tp_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tiles);
-}
-
-static inline Tilemap *tp_left1_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->left1_tiles);
-}
-
-static inline Tilemap *tp_right1_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->right1_tiles);
-}
-
-static inline Tilemap *tp_top1_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->top1_tiles);
-}
-
-static inline Tilemap *tp_bot1_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->bot1_tiles);
-}
-
-static inline Tilemap *tp_tl1_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tl1_tiles);
-}
-
-static inline Tilemap *tp_tr1_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tr1_tiles);
-}
-
-static inline Tilemap *tp_bl1_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->bl1_tiles);
-}
-
-static inline Tilemap *tp_br1_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->br1_tiles);
-}
-
-static inline Tilemap *tp_left2_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->left2_tiles);
-}
-
-static inline Tilemap *tp_right2_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->right2_tiles);
-}
-
-static inline Tilemap *tp_top2_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->top2_tiles);
-}
-
-static inline Tilemap *tp_bot2_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->bot2_tiles);
-}
-
-static inline Tilemap *tp_tl2_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tl2_tiles);
-}
-
-static inline Tilemap *tp_tr2_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->tr2_tiles);
-}
-
-static inline Tilemap *tp_bl2_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->bl2_tiles);
-}
-
-static inline Tilemap *tp_br2_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->br2_tiles);
-}
-
-static inline Tilemap *tp_outline_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->outline_tiles);
-}
-
-static inline Tilemap *tp_horiz_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->horiz_tiles);
-}
-
-static inline Tilemap *tp_vert_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->vert_tiles);
-}
-
-static inline Tilemap *tp_l90_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->l90_tiles);
-}
-
-static inline Tilemap *tp_l180_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->l180_tiles);
-}
-
-static inline Tilemap *tp_l_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->l_tiles);
-}
-
-static inline Tilemap *tp_l270_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->l270_tiles);
-}
-
-static inline Tilemap *tp_t_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->t_tiles);
-}
-
-static inline Tilemap *tp_t90_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->t90_tiles);
-}
-
-static inline Tilemap *tp_t180_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->t180_tiles);
-}
-
-static inline Tilemap *tp_t270_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->t270_tiles);
-}
-
-static inline Tilemap *tp_x_tiles (Tpp t)
-{_
-    if (unlikely(!t)) { ERR("no tp"); return nullptr; }
-    return (&t->x_tiles);
-}
-
-Tilep tp_first_tile(Tpp tp);
 
 Tpp string2tp(const char **s);
 Tpp string2tp(std::string &s, int *len);
 Tpp string2tp(std::wstring &s, int *len);
+Tpp tp_find(uint32_t id);
+Tpp tp_load(int id, std::string const& file, std::string const& real_name);
+Tpp tp_random_blood(void);
+Tpp tp_random_blood_splatter(void);
+Tpp tp_random_deco(void);
+Tpp tp_random_dirt(void);
+Tpp tp_random_entrance(void);
+Tpp tp_random_exit(void);
+Tpp tp_random_floor(void);
+Tpp tp_random_food(void);
+Tpp tp_random_key(void);
+Tpp tp_random_monst(void);
+Tpp tp_random_ripple(void);
+Tpp tp_random_rock(void);
+Tpp tp_random_torch(void);
+Tpp tp_random_wall(void);
+Tpp tp_random_wall_deco(void);
+uint8_t tp_init(void);
+void tp_fini(void);
+void tp_init_after_loading(void);
+Tilep tp_first_tile(Tpp);
 
 //
 // Find an existing thing.

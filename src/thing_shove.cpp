@@ -20,7 +20,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (!is_player()) {
-        if ((int)random_range(0, 1000) > tp_is_attack_shove_chance_d1000(tp())) {
+        if ((int)random_range(0, 1000) > tp()->is_attack_shove_chance_d1000()) {
             return (THING_SHOVE_NEVER_TRIED);
         }
     }
@@ -49,6 +49,13 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         MINICON("You shove %s!", it->the().c_str());
     } else if (it->is_player()) {
         MINICON("%s shoves you!", The().c_str());
+    }
+
+    if (it->is_dead_on_shove()) {
+        it->dead("shoved");
+        if (it->spawn_on_death() != "") {
+            thing_new(it->spawn_on_death(), this);
+        }
     }
 
     it->move_to_immediately_delta(shove_delta);

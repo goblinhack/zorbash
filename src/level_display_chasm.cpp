@@ -110,7 +110,7 @@ void Level::display_chasm (int fbo,
             }
             FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                 auto tpp = t->tp();
-                if (!tp_is_chasm(tpp)) {
+                if (!tpp->is_chasm()) {
                     continue;
                 }
                 t->blit();

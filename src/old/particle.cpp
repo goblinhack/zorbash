@@ -67,7 +67,7 @@ static void blit_text (std::string const& text,
                 auto tp = string2tp(tmp, &len);
                 text_iter += len;
 
-                tile = tp_first_tile(tp);
+                tile = tp_first_tile();
                 continue;
             } else if (std::string(text_iter, text_iter + 4) == "tex=") {
                 text_iter += 4;

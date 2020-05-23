@@ -11,7 +11,7 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-std::string Thing::to_string (void)
+std::string Thing::to_string (void) const
 {_
     auto tpp = tp();
     verify(this);
@@ -29,7 +29,7 @@ std::string Thing::to_string (void)
 //                               mid_at.x, mid_at.y));
     } else if (get_stats_health_max()) {
         return (string_sprintf("%08X(%s%s @%g,%g)",
-                               id, tpp->name.c_str(),
+                               id, tpp->name().c_str(),
                                is_dead ? "/dead" : "",
                                mid_at.x, mid_at.y));
 //        return (string_sprintf("%08X(%s%s hp %d/%d @%g,%g)",
@@ -40,7 +40,7 @@ std::string Thing::to_string (void)
 //                               mid_at.x, mid_at.y));
     } else {
         return (string_sprintf("%08X(%s%s @%g,%g)",
-                               id, tpp->name.c_str(),
+                               id, tpp->name().c_str(),
                                is_dead ? "/dead" : "",
                                mid_at.x, mid_at.y));
     }

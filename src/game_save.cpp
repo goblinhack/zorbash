@@ -80,8 +80,6 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int         */ out << bits(my.t->stats18);
     /* int         */ out << bits(my.t->stats19);
     /* int         */ out << bits(my.t->stats_strength);
-    /* int         */ out << bits(my.t->stats_attack);
-    /* int         */ out << bits(my.t->stats_attack_max);
     /* int         */ out << bits(my.t->stats_attack_rate_tenths);
     /* int         */ out << bits(my.t->lifespan_count);
     /* int         */ out << bits(my.t->stats_defence);
@@ -126,7 +124,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 
 std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 {_
-    std::string name(tp_id_map[my.t->tp_id - 1]->name);
+    const std::string name(tp_id_map[my.t->id - 1]->name());
     out << bits(name);
 
     bool monst = (my.t->monstp != nullptr);

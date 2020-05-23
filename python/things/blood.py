@@ -13,7 +13,7 @@ def tp_init(name, real_name):
     x.set_is_gfx_show_outlined(True)
     x.set_is_interesting(True)
     x.set_is_loggable(False)
-    x.set_is_nutrition_hd("1d4")
+    x.set_nutrition_hd("1d4")
     x.set_normal_placement_rules(True)
     x.set_stats_health_initial(4)
     x.set_z_depth(zx.MAP_DEPTH_WALLS)

@@ -122,6 +122,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_shove.o 		\
     $(OBJDIR)/thing_string.o 		\
     $(OBJDIR)/thing_template.o 		\
+    $(OBJDIR)/thing_template_api.o 	\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_tile.o 		\
     $(OBJDIR)/thing_weapon.o 		\
