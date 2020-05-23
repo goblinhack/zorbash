@@ -57,7 +57,6 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (it->is_flammable()) {
-        it->set_on_fire();
         set_on_fire();
     }
     return (THING_SHOVE_TRIED_AND_PASSED);

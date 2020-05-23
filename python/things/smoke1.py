@@ -12,7 +12,7 @@ def tp_init(name):
     x.set_a_or_an("");
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
-    delay = 50
+    delay = 150
     x.set_tile(tile=name + ".1", delay_ms=delay)
     x.set_tile(tile=name + ".2", delay_ms=delay)
     x.set_tile(tile=name + ".3", delay_ms=delay)
@@ -32,19 +32,6 @@ def tp_init(name):
     x.set_tile(tile=name + ".17", delay_ms=delay)
     x.set_tile(tile=name + ".18", delay_ms=delay)
     x.set_tile(tile=name + ".19", delay_ms=delay)
-    x.set_tile(tile=name + ".20", delay_ms=delay)
-    x.set_tile(tile=name + ".21", delay_ms=delay)
-    x.set_tile(tile=name + ".22", delay_ms=delay)
-    x.set_tile(tile=name + ".23", delay_ms=delay)
-    x.set_tile(tile=name + ".24", delay_ms=delay)
-    x.set_tile(tile=name + ".25", delay_ms=delay)
-    x.set_tile(tile=name + ".26", delay_ms=delay)
-    x.set_tile(tile=name + ".27", delay_ms=delay)
-    x.set_tile(tile=name + ".28", delay_ms=delay)
-    x.set_tile(tile=name + ".29", delay_ms=delay)
-    x.set_tile(tile=name + ".30", delay_ms=delay)
-    x.set_tile(tile=name + ".31", delay_ms=delay)
-    x.set_tile(tile=name + ".32", delay_ms=delay)
 
     x.update()
 

@@ -127,6 +127,26 @@ def init_16x16():
             "slime1.1.25", "slime1.2.25", "slime1.3.25", "slime1.4.25",
             "slime1.dead", "", "",
             ########################################################
+            "torch1.1", "torch1.2", "torch1.3",
+            "torch1.4", "torch1.5", "torch1.6",
+            "torch1.7", "torch1.8", "torch1.9",
+            "torch1.10", "torch1.11", "torch1.12",
+            "torch1.13", "torch1.14", "torch1.15",
+            "torch1.16", "torch1.17", "torch1.18",
+            "torch1.dead",
+            ########################################################
+            "smoke1.1", "smoke1.2", "smoke1.3",
+            "smoke1.4", "smoke1.5", "smoke1.6",
+            "smoke1.7", "smoke1.8", "smoke1.9",
+            "smoke1.10", "smoke1.11", "smoke1.12",
+            "smoke1.13", "smoke1.14", "smoke1.15",
+            "smoke1.16", "smoke1.17", "smoke1.18",
+            "smoke1.19",
+            ########################################################
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            ########################################################
+            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            ########################################################
             # floor1
             ########################################################
             "floor1.1.2x1.1", "floor1.1.2x1.2", "floor1.1.6x6.1",
@@ -566,80 +586,6 @@ def init_16x16():
         file="data/gfx/16x16.tga",
         name="16x16", width=16, height=16, arr=tiles)
 
-def init_16x32():
-    tiles = [
-            ########################################################
-            "smoke1.1",
-            "smoke1.2",
-            "smoke1.3",
-            "smoke1.4",
-            "smoke1.5",
-            "smoke1.6",
-            "smoke1.7",
-            "smoke1.8",
-            "smoke1.9",
-            "smoke1.10",
-            "smoke1.11",
-            "smoke1.12",
-            "smoke1.13",
-            "smoke1.14",
-            "smoke1.15",
-            "smoke1.16",
-            "smoke1.17",
-            "smoke1.18",
-            "smoke1.19",
-            "smoke1.20",
-            "smoke1.21",
-            "smoke1.22",
-            "smoke1.23",
-            "smoke1.24",
-            "smoke1.25",
-            "smoke1.26",
-            "smoke1.27",
-            "smoke1.28",
-            "smoke1.29",
-            "smoke1.30",
-            "smoke1.31",
-            "smoke1.32",
-            ########################################################
-            "torch1.1",
-            "torch1.2",
-            "torch1.3",
-            "torch1.4",
-            "torch1.5",
-            "torch1.6",
-            "torch1.7",
-            "torch1.8",
-            "torch1.9",
-            "torch1.10",
-            "torch1.11",
-            "torch1.12",
-            "torch1.13",
-            "torch1.14",
-            "torch1.15",
-            "torch1.16",
-            "torch1.17",
-            "torch1.18",
-            "torch1.19",
-            "torch1.20",
-            "torch1.21",
-            "torch1.22",
-            "torch1.23",
-            "torch1.24",
-            "torch1.25",
-            "torch1.26",
-            "torch1.27",
-            "torch1.28",
-            "torch1.29",
-            "torch1.30",
-            "torch1.31",
-            "torch1.32",
-    ]
-
-    zx.tile_load_arr_color_and_black_and_white(
-        file="data/gfx/16x32.tga",
-        name="16x32", width=16, height=32, arr=tiles)
-
 def init_32x32():
     tiles = [
             "exit1.1",
@@ -962,7 +908,6 @@ init_ui_status_bar_title()
 init_ui_dead()
 init_ui_action_bar()
 init_16x16()
-init_16x32()
 init_32x32()
 init_32x32_water()
 init_32x32_lava()
