@@ -163,12 +163,12 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_fadeup          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_hidden          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_hungry          << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_in_lava         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_move_done       << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_moving          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_open            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_sleeping        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_starving        << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_in_lava         << shift; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -192,6 +192,7 @@ std::ostream& operator<<(std::ostream &out,
     timestamp_t timestamp_dungeon_saved = time_get_time_ms();
     out << bits(timestamp_dungeon_saved);
 
+    /* _gfx_large_shadow */    out << bits(my.t->_gfx_large_shadow);
     /* _is_blood */            out << bits(my.t->_is_blood);
     /* _is_corpse */           out << bits(my.t->_is_corpse);
     /* _is_corridor */         out << bits(my.t->_is_corridor);
@@ -200,7 +201,6 @@ std::ostream& operator<<(std::ostream &out,
     /* _is_dungeon */          out << bits(my.t->_is_dungeon);
     /* _is_fade_in */          out << bits(my.t->_is_fade_in);
     /* _is_floor */            out << bits(my.t->_is_floor);
-    /* _is_gfx_large_shadow */ out << bits(my.t->_is_gfx_large_shadow);
     /* _is_hazard */           out << bits(my.t->_is_hazard);
     /* _is_lava */             out << bits(my.t->_is_lava);
     /* _is_rock */             out << bits(my.t->_is_rock);
@@ -273,7 +273,7 @@ std::ostream& operator<<(std::ostream &out, Bits<const Config & > const my)
     out << bits(my.t.fps_counter);
     out << bits(my.t.gfx_inverted);
     out << bits(my.t.gfx_minimap);
-    out << bits(my.t.is_gfx_show_hidden);
+    out << bits(my.t.gfx_show_hidden);
     out << bits(my.t.gfx_lights);
     out << bits(my.t.gfx_zoom);
     out << bits(my.t.gfx_vsync_enable);

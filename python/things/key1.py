@@ -6,11 +6,11 @@ def key_init(name, real_name):
     x = tp.Tp(name, real_name)
 
     x.set_a_or_an("an");
-    x.set_is_gfx_animated(True)
-    x.set_is_gfx_bounce_on_move(True)
-    x.set_is_gfx_show_outlined(True)
-    x.set_is_gfx_small_shadow_caster(True)
-    x.set_is_gfx_bounce_always(True)
+    x.set_gfx_animated(True)
+    x.set_gfx_bounce_on_move(True)
+    x.set_gfx_show_outlined(True)
+    x.set_gfx_small_shadow_caster(True)
+    x.set_gfx_bounce_always(True)
     x.set_is_interesting(True)
     x.set_is_key(True)
     x.set_is_light_strength(2)

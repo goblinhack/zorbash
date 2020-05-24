@@ -111,7 +111,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         set_timestamp_born(time_get_time_ms_cached());
     }
 
-    if (tpp->is_gfx_animated_can_hflip()) {
+    if (tpp->gfx_animated_can_hflip()) {
         dir            = THING_DIR_LEFT;
         is_facing_left = true;
     } else {
@@ -293,7 +293,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     }
 
     auto tiles = &tpp->tiles;
-    if (tpp->is_gfx_animated()) {
+    if (tpp->gfx_animated()) {
         auto tile = tile_first(tiles);
         if (tile) {
             tile_curr = tile->global_index;
@@ -360,7 +360,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     if (tpp->is_floor())       { level->set_floor(new_at.x, new_at.y); }
     if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
     if (tpp->is_lava())        { level->set_lava(new_at.x, new_at.y); }
-    if (tpp->is_chasm())        { level->set_chasm(new_at.x, new_at.y); }
+    if (tpp->is_chasm())       { level->set_chasm(new_at.x, new_at.y); }
     if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
     if (tpp->is_rock())        { level->set_rock(new_at.x, new_at.y); }
     if (tpp->is_secret_door()) { level->set_secret_door(new_at.x, new_at.y); }
@@ -369,8 +369,8 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     if (tpp->is_deep_water())  { level->set_water(new_at.x, new_at.y); }
     if (tpp->is_deep_water())  { level->set_deep_water(new_at.x, new_at.y); }
 
-    if (tpp->is_gfx_large_shadow()) {
-        level->set_is_gfx_large_shadow(new_at.x, new_at.y);
+    if (tpp->gfx_large_shadow()) {
+        level->set_gfx_large_shadow(new_at.x, new_at.y);
     }
 
     if (tpp->is_loggable()) {
@@ -418,7 +418,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     }
     update_light();
 
-    if (is_gfx_bounce_always()) {
+    if (gfx_bounce_always()) {
         bounce(0.2, 1.0, 500, 99999);
     }
 }
@@ -478,6 +478,7 @@ void Thing::reinit (void)
     if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
     if (tpp->is_lava())        { level->set_lava(new_at.x, new_at.y); }
     if (tpp->is_chasm())       { level->set_chasm(new_at.x, new_at.y); }
+    if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
     if (tpp->is_rock())        { level->set_rock(new_at.x, new_at.y); }
     if (tpp->is_secret_door()) { level->set_secret_door(new_at.x, new_at.y); }
     if (tpp->is_wall())        { level->set_wall(new_at.x, new_at.y); }
@@ -485,8 +486,8 @@ void Thing::reinit (void)
     if (tpp->is_deep_water())  { level->set_water(new_at.x, new_at.y); }
     if (tpp->is_deep_water())  { level->set_deep_water(new_at.x, new_at.y); }
 
-    if (tpp->is_gfx_large_shadow()) {
-        level->set_is_gfx_large_shadow(new_at.x, new_at.y);
+    if (tpp->gfx_large_shadow()) {
+        level->set_gfx_large_shadow(new_at.x, new_at.y);
     }
 
     if (tpp->is_loggable()) {
@@ -560,8 +561,8 @@ void Thing::destroy (void)
     if (unlikely(!tpp)) {
         ERR("no tp");
     } else {
-        if (tpp->is_gfx_large_shadow()) {
-            level->unset_is_gfx_large_shadow(old_at.x, old_at.y);
+        if (tpp->gfx_large_shadow()) {
+            level->unset_gfx_large_shadow(old_at.x, old_at.y);
         }
     }
 

@@ -7,8 +7,8 @@ def tp_init(name):
     x = tp.Tp(name, real_name)
 
     x.set_a_or_an("the");
-    x.set_is_gfx_animated(True)
-    x.set_is_gfx_show_outlined(True)
+    x.set_gfx_animated(True)
+    x.set_gfx_show_outlined(True)
     x.set_is_cursor_path(True)
     x.set_is_movable(True)
     x.set_z_depth(zx.MAP_DEPTH_WALLS)

@@ -4,7 +4,7 @@ import tp
 def tp_init(name):
     x = tp.Tp(name)
 
-    x.set_is_gfx_animated(True)
+    x.set_gfx_animated(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_is_ripple(True)

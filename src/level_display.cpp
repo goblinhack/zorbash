@@ -53,7 +53,7 @@ void Level::display_map_things (int fbo,
                     }
 
                     auto tpp = t->tp();
-                    if (unlikely(tpp->is_gfx_animated())) {
+                    if (unlikely(tpp->gfx_animated())) {
                         t->animate();
                     }
                 } FOR_ALL_THINGS_END()
@@ -140,11 +140,11 @@ void Level::display_map (void)
     int debug = 0;
     if (debug) {
         game->config.gfx_lights = 0;
-        game->config.is_gfx_show_hidden = 1;
+        game->config.gfx_show_hidden = 1;
         update_hazard_map();
     }
 
-    if (unlikely(game->config.is_gfx_show_hidden)) {
+    if (unlikely(game->config.gfx_show_hidden)) {
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

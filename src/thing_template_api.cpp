@@ -77,21 +77,21 @@ int Tp::is_flammable(void) const { return _is_flammable; }
 int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_floor_deco(void) const { return _is_floor_deco; }
 int Tp::is_food(void) const { return _is_food; }
-int Tp::is_gfx_an_animation_only(void) const { return _is_gfx_an_animation_only; }
-int Tp::is_gfx_animated(void) const { return _is_gfx_animated; }
-int Tp::is_gfx_animated_can_hflip(void) const { return _is_gfx_animated_can_hflip; }
-int Tp::is_gfx_animated_can_vflip(void) const { return _is_gfx_animated_can_vflip; }
-int Tp::is_gfx_animated_no_dir(void) const { return _is_gfx_animated_no_dir; }
-int Tp::is_gfx_attack_anim(void) const { return _is_gfx_attack_anim; }
-int Tp::is_gfx_bounce_always(void) const { return _is_gfx_bounce_always; }
-int Tp::is_gfx_bounce_on_move(void) const { return _is_gfx_bounce_on_move; }
-int Tp::is_gfx_dead_anim(void) const { return _is_gfx_dead_anim; }
-int Tp::is_gfx_large_shadow(void) const { return _is_gfx_large_shadow; }
-int Tp::is_gfx_on_fire_anim(void) const { return _is_gfx_on_fire_anim; }
-int Tp::is_gfx_oversized_but_sitting_on_the_ground(void) const { return _is_gfx_oversized_but_sitting_on_the_ground; }
-int Tp::is_gfx_show_outlined(void) const { return _is_gfx_show_outlined; }
-int Tp::is_gfx_small_shadow_caster(void) const { return _is_gfx_small_shadow_caster; }
-int Tp::is_gfx_weapon_carry_anim(void) const { return _is_gfx_weapon_carry_anim; }
+int Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
+int Tp::gfx_animated(void) const { return _gfx_animated; }
+int Tp::gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
+int Tp::gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
+int Tp::gfx_animated_no_dir(void) const { return _gfx_animated_no_dir; }
+int Tp::gfx_attack_anim(void) const { return _gfx_attack_anim; }
+int Tp::gfx_bounce_always(void) const { return _gfx_bounce_always; }
+int Tp::gfx_bounce_on_move(void) const { return _gfx_bounce_on_move; }
+int Tp::gfx_dead_anim(void) const { return _gfx_dead_anim; }
+int Tp::gfx_large_shadow(void) const { return _gfx_large_shadow; }
+int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
+int Tp::gfx_oversized_but_sitting_on_the_ground(void) const { return _gfx_oversized_but_sitting_on_the_ground; }
+int Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
+int Tp::gfx_small_shadow_caster(void) const { return _gfx_small_shadow_caster; }
+int Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
 int Tp::is_hazard(void) const { return _is_hazard; }
 int Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
 int Tp::is_interesting(void) const { return _is_interesting; }
@@ -220,21 +220,21 @@ void Tp::set_is_flammable(int v) { _is_flammable = v; }
 void Tp::set_is_floor(int v) { _is_floor = v; }
 void Tp::set_is_floor_deco(int v) { _is_floor_deco = v; }
 void Tp::set_is_food(int v) { _is_food = v; }
-void Tp::set_is_gfx_an_animation_only(int v) { _is_gfx_an_animation_only = v; }
-void Tp::set_is_gfx_animated(int v) { _is_gfx_animated = v; }
-void Tp::set_is_gfx_animated_can_hflip(int v) { _is_gfx_animated_can_hflip = v; }
-void Tp::set_is_gfx_animated_can_vflip(int v) { _is_gfx_animated_can_vflip = v; }
-void Tp::set_is_gfx_animated_no_dir(int v) { _is_gfx_animated_no_dir = v; }
-void Tp::set_is_gfx_attack_anim(int v) { _is_gfx_attack_anim = v; }
-void Tp::set_is_gfx_bounce_always(int v) { _is_gfx_bounce_always = v; }
-void Tp::set_is_gfx_bounce_on_move(int v) { _is_gfx_bounce_on_move = v; }
-void Tp::set_is_gfx_dead_anim(int v) { _is_gfx_dead_anim = v; }
-void Tp::set_is_gfx_large_shadow(int v) { _is_gfx_large_shadow = v; }
-void Tp::set_is_gfx_on_fire_anim(int v) { _is_gfx_on_fire_anim = v; }
-void Tp::set_is_gfx_oversized_but_sitting_on_the_ground(int v) { _is_gfx_oversized_but_sitting_on_the_ground = v; }
-void Tp::set_is_gfx_show_outlined(int v) { _is_gfx_show_outlined = v; }
-void Tp::set_is_gfx_small_shadow_caster(int v) { _is_gfx_small_shadow_caster = v; }
-void Tp::set_is_gfx_weapon_carry_anim(int v) { _is_gfx_weapon_carry_anim = v; }
+void Tp::set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
+void Tp::set_gfx_animated(int v) { _gfx_animated = v; }
+void Tp::set_gfx_animated_can_hflip(int v) { _gfx_animated_can_hflip = v; }
+void Tp::set_gfx_animated_can_vflip(int v) { _gfx_animated_can_vflip = v; }
+void Tp::set_gfx_animated_no_dir(int v) { _gfx_animated_no_dir = v; }
+void Tp::set_gfx_attack_anim(int v) { _gfx_attack_anim = v; }
+void Tp::set_gfx_bounce_always(int v) { _gfx_bounce_always = v; }
+void Tp::set_gfx_bounce_on_move(int v) { _gfx_bounce_on_move = v; }
+void Tp::set_gfx_dead_anim(int v) { _gfx_dead_anim = v; }
+void Tp::set_gfx_large_shadow(int v) { _gfx_large_shadow = v; }
+void Tp::set_gfx_on_fire_anim(int v) { _gfx_on_fire_anim = v; }
+void Tp::set_gfx_oversized_but_sitting_on_the_ground(int v) { _gfx_oversized_but_sitting_on_the_ground = v; }
+void Tp::set_gfx_show_outlined(int v) { _gfx_show_outlined = v; }
+void Tp::set_gfx_small_shadow_caster(int v) { _gfx_small_shadow_caster = v; }
+void Tp::set_gfx_weapon_carry_anim(int v) { _gfx_weapon_carry_anim = v; }
 void Tp::set_is_hazard(int v) { _is_hazard = v; }
 void Tp::set_is_hunger_insatiable(int v) { _is_hunger_insatiable = v; }
 void Tp::set_is_interesting(int v) { _is_interesting = v; }

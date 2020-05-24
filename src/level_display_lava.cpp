@@ -13,8 +13,8 @@
 #include "my_gl.h"
 
 void Level::display_lava (int fbo,
-                           uint16_t minx, uint16_t miny,
-                           uint16_t maxx, uint16_t maxy)
+                          uint16_t minx, uint16_t miny,
+                          uint16_t maxx, uint16_t maxy)
 {_
 #define LAVA_ACROSS 8
 #define LAVA_DOWN   8
@@ -103,7 +103,7 @@ void Level::display_lava (int fbo,
             if (likely(!level->is_lava(x, y))) {
                 continue;
             }
-            if (likely(!game->config.is_gfx_show_hidden)) {
+            if (likely(!game->config.gfx_show_hidden)) {
                 if (!is_visited(x, y)) {
                     continue;
                 }

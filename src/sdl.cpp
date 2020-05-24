@@ -950,11 +950,11 @@ uint8_t config_gfx_minimap_set (tokens_t *tokens, void *context)
 //
 void config_gfx_show_hidden_toggle (void)
 {_
-    if (!game->config.is_gfx_show_hidden) {
-        game->config.is_gfx_show_hidden = true;
+    if (!game->config.gfx_show_hidden) {
+        game->config.gfx_show_hidden = true;
         CON("gfx show hidden enabled");
     } else {
-        game->config.is_gfx_show_hidden = false;
+        game->config.gfx_show_hidden = false;
         CON("gfx show hidden disabled");
     }
 
@@ -971,12 +971,12 @@ uint8_t config_gfx_show_hidden_set (tokens_t *tokens, void *context)
     char *s = tokens->args[3];
 
     if (!s || (*s == '\0')) {
-        game->config.is_gfx_show_hidden = true;
+        game->config.gfx_show_hidden = true;
         CON("gfx show hidden enabled (default)");
     } else {
         int val = strtol(s, 0, 10) ? 1 : 0;
-        game->config.is_gfx_show_hidden = val;
-        if (game->config.is_gfx_show_hidden) {
+        game->config.gfx_show_hidden = val;
+        if (game->config.gfx_show_hidden) {
             CON("gfx show hidden enabled");
         } else {
             CON("gfx show hidden disabled");

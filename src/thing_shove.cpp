@@ -46,16 +46,31 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     }
 
     if (is_player()) {
-        MINICON("You shove %s!", it->the().c_str());
+        if (it->is_torch()) {
+            MINICON("You knock over %s!", it->the().c_str());
+        } else {
+            MINICON("You shove %s!", it->the().c_str());
+        }
     } else if (it->is_player()) {
         MINICON("%s shoves you!", The().c_str());
     }
 
     if (it->is_dead_on_shove()) {
         it->dead("shoved");
-        if (it->spawn_on_death() != "") {
-            thing_new(it->spawn_on_death(), this);
+        auto spawn_what = it->spawn_on_death();
+        if (spawn_what != "") {
+            auto spawn_at = it->mid_at + shove_delta;
+            if (it->collision_check_only(spawn_at)) {
+                spawn_at = mid_at;
+            }
+            if (spawn_at.x > mid_at.x) {
+                it->dir_set_left();
+            } else {
+                it->dir_set_right();
+            }
+            thing_new(spawn_what, spawn_at);
         }
+        return (THING_SHOVE_TRIED_AND_PASSED);
     }
 
     it->move_to_immediately_delta(shove_delta);

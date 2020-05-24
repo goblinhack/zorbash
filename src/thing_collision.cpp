@@ -543,7 +543,7 @@ _
         //
         // Skip things that aren't really hitable.
         //
-        if (cand.target->tp()->is_gfx_weapon_carry_anim()) {
+        if (cand.target->tp()->gfx_weapon_carry_anim()) {
             log("ignore %s skip, not hittable",
                 cand.target->to_string().c_str());
             continue;
@@ -779,7 +779,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
     //
     // Sword use hits?
     //
-    if (me_tp->is_gfx_attack_anim()) {
+    if (me_tp->gfx_attack_anim()) {
         if (it_tp->is_monst()) {
             //
             // Weapon hits monster or generator.
@@ -842,6 +842,13 @@ bool Thing::collision_obstacle (Thingp it)
         if (it->is_movement_blocking()) {
             return (true);
         }
+    } else if (is_torch()) {
+        //
+        // This is for a torch being knocked over.
+        //
+        if (it->is_movement_blocking()) {
+            return (true);
+        }
     }
 
     return (false);
@@ -889,7 +896,7 @@ _
     //
     // Sword use hits?
     //
-    if (me_tp->is_gfx_attack_anim()) {
+    if (me_tp->gfx_attack_anim()) {
         if (it_tp->is_monst()) {
             //
             // Weapon hits monster or generator.
