@@ -2,10 +2,10 @@ import zx
 import tp
 
 
-def tp_init(name, real_name):
-    x = tp.Tp(name, real_name)
+def tp_init(name, text_name):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("the");
+    x.set_text_a_or_an("the");
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
     x.set_collision_radius(0.40)
@@ -27,6 +27,6 @@ def tp_init(name, real_name):
     x.update()
 
 def init():
-    tp_init(name="door1", real_name="door")
+    tp_init(name="door1", text_name="door")
 
 init()

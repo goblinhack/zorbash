@@ -117,7 +117,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_move_dir.o 		\
     $(OBJDIR)/thing_msg.o 		\
-    $(OBJDIR)/thing_name.o 		\
+    $(OBJDIR)/thing_text.o 		\
     $(OBJDIR)/thing_on_fire.o 		\
     $(OBJDIR)/thing_path.o 		\
     $(OBJDIR)/thing_shove.o 		\

@@ -2,11 +2,11 @@ import zx
 import tp
 
 
-def tp_init(name, real_name, tiles=[]):
+def tp_init(name, text_name, tiles=[]):
 
-    x = tp.Tp(name, real_name)
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("the");
+    x.set_text_a_or_an("the");
     x.set_gfx_animated(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
@@ -22,7 +22,7 @@ def tp_init(name, real_name, tiles=[]):
     x.update()
 
 def init():
-    tp_init(name="water1", real_name="water",
+    tp_init(name="water1", text_name="water",
             tiles=[
                 "water1.1",
                 "water1.2",

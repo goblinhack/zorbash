@@ -2,10 +2,10 @@ import zx
 import tp
 
 
-def tp_init(name, real_name):
-    x = tp.Tp(name, real_name)
+def tp_init(name, text_name):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
@@ -23,6 +23,6 @@ def tp_init(name, real_name):
     x.update()
 
 def init():
-    tp_init(name="food_frog1", real_name="chocolate frog")
+    tp_init(name="food_frog1", text_name="chocolate frog")
 
 init()

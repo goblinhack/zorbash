@@ -2,10 +2,10 @@ import zx
 import tp
 
 
-def tp_init(name, real_name):
-    x = tp.Tp(name, real_name)
+def tp_init(name, text_name):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("the");
+    x.set_text_a_or_an("the");
     x.set_is_entrance(True)
     x.set_gfx_animated(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
@@ -33,6 +33,6 @@ def tp_init(name, real_name):
     x.update()
 
 def init():
-    tp_init(name="entrance1", real_name="dungeon entrance")
+    tp_init(name="entrance1", text_name="dungeon entrance")
 
 init()

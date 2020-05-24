@@ -28,7 +28,7 @@ void Thing::kill (const char *reason)
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
     } else if (is_loggable()) { 
-        MINICON("%s is dead, %s", The().c_str(), reason);
+        MINICON("%s is dead, %s", text_The().c_str(), reason);
     }
 
     const auto tpp = tp();

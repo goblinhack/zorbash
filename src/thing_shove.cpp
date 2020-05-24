@@ -29,30 +29,30 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     fpoint shove_pos = it->mid_at + shove_delta;
     if (it->collision_check_only(shove_pos)) {
         if (is_player()) {
-            MINICON("%s cannot be shoved!", it->The().c_str());
+            MINICON("%s cannot be shoved!", it->text_The().c_str());
         } else if (it->is_player()) {
-            MINICON("%s fails to shove you!", The().c_str());
+            MINICON("%s fails to shove you!", text_The().c_str());
         }
         return (THING_SHOVE_TRIED_AND_FAILED);
     }
 
     if (it->get_stats_strength() > get_stats_strength()) {
         if (is_player()) {
-            MINICON("%s is too strong to be shoved!", it->The().c_str());
+            MINICON("%s is too strong to be shoved!", it->text_The().c_str());
         } else if (it->is_player()) {
-            MINICON("%s is too weak to shove you!", The().c_str());
+            MINICON("%s is too weak to shove you!", text_The().c_str());
         }
         return (THING_SHOVE_TRIED_AND_FAILED);
     }
 
     if (is_player()) {
         if (it->is_torch()) {
-            MINICON("You knock over %s!", it->the().c_str());
+            MINICON("You knock over %s!", it->text_the().c_str());
         } else {
-            MINICON("You shove %s!", it->the().c_str());
+            MINICON("You shove %s!", it->text_the().c_str());
         }
     } else if (it->is_player()) {
-        MINICON("%s shoves you!", The().c_str());
+        MINICON("%s shoves you!", text_The().c_str());
     }
 
     if (it->is_dead_on_shove()) {

@@ -21,7 +21,7 @@ def init1(name):
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_movable(True)
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 20
@@ -67,7 +67,7 @@ def init2(name):
     x.set_is_active(True)
     x.set_is_loggable(False)
     x.set_is_movable(True)
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
 
     delay = 550
@@ -76,8 +76,8 @@ def init2(name):
 
     x.update()
 
-def init3(name, real_name):
-    x = tp.Tp(name, real_name)
+def init3(name, text_name):
+    x = tp.Tp(name, text_name)
 
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
@@ -86,7 +86,7 @@ def init3(name, real_name):
     x.set_is_loggable(True)
     x.set_is_movable(True)
     x.set_is_weapon(True)
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_weapon_carry_anim("sword1_carry_anim")
     x.set_weapon_use_anim("sword1_swing_anim")
     x.set_weapon_use_delay_hundredths(5)
@@ -100,6 +100,6 @@ def init3(name, real_name):
 def init():
     init1(name="sword1_swing_anim")
     init2(name="sword1_carry_anim")
-    init3(name="sword1", real_name="sword")
+    init3(name="sword1", text_name="sword")
 
 init()

@@ -1,10 +1,9 @@
 import zx
 import tp
 
-def tp_init(name, real_name):
-    x = tp.Tp(name, real_name)
+def tp_init(name, text_name):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("a");
     x.set_ai_delay_after_moving_ms(100)
     x.set_ai_scent_distance(40)
     x.set_collision_attack(True)
@@ -12,6 +11,11 @@ def tp_init(name, real_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
+    x.set_gfx_animated(True)
+    x.set_gfx_animated_can_hflip(True)
+    x.set_gfx_bounce_on_move(True)
+    x.set_gfx_show_outlined(True)
+    x.set_gfx_small_shadow_caster(True)
     x.set_is_active(True)
     x.set_is_attack_lunge(True)
     x.set_is_attack_shove(True)
@@ -19,11 +23,6 @@ def tp_init(name, real_name):
     x.set_is_attackable(True)
     x.set_is_combustible(True)
     x.set_is_corpse_on_death(True)
-    x.set_gfx_animated(True)
-    x.set_gfx_animated_can_hflip(True)
-    x.set_gfx_bounce_on_move(True)
-    x.set_gfx_show_outlined(True)
-    x.set_gfx_small_shadow_caster(True)
     x.set_is_hunger_insatiable(True)
     x.set_is_interesting(True)
     x.set_is_loggable(True)
@@ -42,6 +41,8 @@ def tp_init(name, real_name):
     x.set_stats_health_initial(10)
     x.set_stats_move_speed_ms(300)
     x.set_stats_strength(9)
+    x.set_text_a_or_an("a");
+    x.set_text_hits("claws");
     x.set_weapon_use_anim("claws1")
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
@@ -68,6 +69,6 @@ def tp_init(name, real_name):
     x.update()
 
 def init():
-    tp_init(name="mummy1", real_name="mummy")
+    tp_init(name="mummy1", text_name="mummy")
 
 init()

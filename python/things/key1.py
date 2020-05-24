@@ -2,10 +2,10 @@ import zx
 import tp
 
 
-def key_init(name, real_name):
-    x = tp.Tp(name, real_name)
+def key_init(name, text_name):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("an");
+    x.set_text_a_or_an("an");
     x.set_gfx_animated(True)
     x.set_gfx_bounce_on_move(True)
     x.set_gfx_show_outlined(True)
@@ -31,6 +31,6 @@ def key_init(name, real_name):
     x.update()
 
 def init():
-    key_init(name="key1", real_name="key")
+    key_init(name="key1", text_name="key")
 
 init()

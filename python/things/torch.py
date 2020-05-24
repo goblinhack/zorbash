@@ -2,10 +2,10 @@ import zx
 import tp
 
 
-def tp_init(name, real_name, tiles=[]):
-    x = tp.Tp(name, real_name)
+def tp_init(name, text_name, tiles=[]):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_ai_obstacle(True)
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
@@ -41,7 +41,7 @@ def tp_init(name, real_name, tiles=[]):
     x.update()
 
 def init():
-    tp_init(name="torch1", real_name="torch",
+    tp_init(name="torch1", text_name="torch",
             tiles=[
                 "torch1.1",
                 "torch1.2",

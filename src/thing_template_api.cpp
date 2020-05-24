@@ -16,25 +16,25 @@ const Dice& Tp::stats_attack_hd(void) const { return _stats_attack_hd; }
 const std::string& Tp::light_color(void) const { return _light_color; }
 const std::string& Tp::name(void) const { return _name; }
 const std::string& Tp::nutrition_hd_str(void) const { return _nutrition; }
-const std::string& Tp::real_name(void) const { return _real_name; }
+const std::string& Tp::text_name(void) const { return _text_name; }
 const std::string& Tp::spawn_on_death(void) const { return _spawn_on_death; }
 const std::string& Tp::stats_attack_hd_str(void) const { return _attack; }
 const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
 const std::string& Tp::weapon_use_anim(void) const { return _weapon_use_anim; }
-const std::string& Tp::zzz1(void) const { return _zzz1; }
-const std::string& Tp::zzz10(void) const { return _zzz10; }
-const std::string& Tp::zzz11(void) const { return _zzz11; }
-const std::string& Tp::zzz12(void) const { return _zzz12; }
-const std::string& Tp::zzz13(void) const { return _zzz13; }
-const std::string& Tp::zzz14(void) const { return _zzz14; }
-const std::string& Tp::zzz2(void) const { return _zzz2; }
-const std::string& Tp::zzz3(void) const { return _zzz3; }
-const std::string& Tp::zzz4(void) const { return _zzz4; }
-const std::string& Tp::zzz5(void) const { return _zzz5; }
-const std::string& Tp::zzz6(void) const { return _zzz6; }
-const std::string& Tp::zzz7(void) const { return _zzz7; }
-const std::string& Tp::zzz8(void) const { return _zzz8; }
-const std::string& Tp::zzz9(void) const { return _zzz9; }
+const std::string& Tp::str1(void) const { return _str1; }
+const std::string& Tp::str10(void) const { return _str10; }
+const std::string& Tp::str11(void) const { return _str11; }
+const std::string& Tp::str12(void) const { return _str12; }
+const std::string& Tp::str13(void) const { return _str13; }
+const std::string& Tp::text_hits(void) const { return _text_hits; }
+const std::string& Tp::str2(void) const { return _str2; }
+const std::string& Tp::str3(void) const { return _str3; }
+const std::string& Tp::str4(void) const { return _str4; }
+const std::string& Tp::str5(void) const { return _str5; }
+const std::string& Tp::str6(void) const { return _str6; }
+const std::string& Tp::str7(void) const { return _str7; }
+const std::string& Tp::str8(void) const { return _str8; }
+const std::string& Tp::str9(void) const { return _str9; }
 float Tp::collision_radius(void) const { return _collision_radius; }
 int Tp::ai_delay_after_moving_ms(void) const { return _ai_delay_after_moving_ms; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
@@ -176,8 +176,8 @@ int Tp::stats_strength(void) const { return _stats_strength; }
 int Tp::weapon_damage(void) const { return _weapon_damage; }
 int Tp::weapon_use_delay_hundredths(void) const { return _weapon_use_delay_hundredths; }
 int Tp::weapon_use_distance(void) const { return _weapon_use_distance; }
-std::string Tp::a_or_an(void) const { return _a_or_an; }
-void Tp::set_a_or_an(const std::string &v) { _a_or_an = v; }
+std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
+void Tp::set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
 void Tp::set_ai_delay_after_moving_ms(int v) { _ai_delay_after_moving_ms = v; }
 void Tp::set_ai_obstacle(int v) { _ai_obstacle = v; }
 void Tp::set_ai_scent_distance(int v) { _ai_scent_distance = v; }
@@ -293,7 +293,7 @@ void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_name(const std::string &v) { _name = v; }
 void Tp::set_normal_placement_rules(int v) { _normal_placement_rules = v; }
 void Tp::set_nutrition_hd(const std::string &v) { _nutrition_hd = v; }
-void Tp::set_real_name(const std::string &v) { _real_name = v; }
+void Tp::set_text_name(const std::string &v) { _text_name = v; }
 void Tp::set_spawn_on_death(const std::string &v) { _spawn_on_death = v; }
 void Tp::set_stats01(int v) { _stats01 = v; }
 void Tp::set_stats02(int v) { _stats02 = v; }
@@ -328,17 +328,17 @@ void Tp::set_weapon_use_anim(const std::string &v) { _weapon_use_anim = v; }
 void Tp::set_weapon_use_delay_hundredths(int v) { _weapon_use_delay_hundredths = v; }
 void Tp::set_weapon_use_distance(int v) { _weapon_use_distance = v; }
 void Tp::set_z_depth(int v) { z_depth = v; }
-void Tp::set_zzz1(const std::string &v) { _zzz1 = v; }
-void Tp::set_zzz10(const std::string &v) { _zzz10 = v; }
-void Tp::set_zzz11(const std::string &v) { _zzz11 = v; }
-void Tp::set_zzz12(const std::string &v) { _zzz12 = v; }
-void Tp::set_zzz13(const std::string &v) { _zzz13 = v; }
-void Tp::set_zzz14(const std::string &v) { _zzz14 = v; }
-void Tp::set_zzz2(const std::string &v) { _zzz2 = v; }
-void Tp::set_zzz3(const std::string &v) { _zzz3 = v; }
-void Tp::set_zzz4(const std::string &v) { _zzz4 = v; }
-void Tp::set_zzz5(const std::string &v) { _zzz5 = v; }
-void Tp::set_zzz6(const std::string &v) { _zzz6 = v; }
-void Tp::set_zzz7(const std::string &v) { _zzz7 = v; }
-void Tp::set_zzz8(const std::string &v) { _zzz8 = v; }
-void Tp::set_zzz9(const std::string &v) { _zzz9 = v; }
+void Tp::set_str1(const std::string &v) { _str1 = v; }
+void Tp::set_str10(const std::string &v) { _str10 = v; }
+void Tp::set_str11(const std::string &v) { _str11 = v; }
+void Tp::set_str12(const std::string &v) { _str12 = v; }
+void Tp::set_str13(const std::string &v) { _str13 = v; }
+void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
+void Tp::set_str2(const std::string &v) { _str2 = v; }
+void Tp::set_str3(const std::string &v) { _str3 = v; }
+void Tp::set_str4(const std::string &v) { _str4 = v; }
+void Tp::set_str5(const std::string &v) { _str5 = v; }
+void Tp::set_str6(const std::string &v) { _str6 = v; }
+void Tp::set_str7(const std::string &v) { _str7 = v; }
+void Tp::set_str8(const std::string &v) { _str8 = v; }
+void Tp::set_str9(const std::string &v) { _str9 = v; }

@@ -3401,22 +3401,22 @@ fpoint Thing::set_interpolated_mid_at (fpoint v)
     return (monstp->interpolated_mid_at = v);
 }
 
-const std::string& Thing::zzz1 (void) const {_ return (tp()->zzz1()); }
-const std::string& Thing::zzz2 (void) const {_ return (tp()->zzz2()); }
-const std::string& Thing::zzz3 (void) const {_ return (tp()->zzz3()); }
-const std::string& Thing::zzz4 (void) const {_ return (tp()->zzz4()); }
-const std::string& Thing::zzz5 (void) const {_ return (tp()->zzz5()); }
-const std::string& Thing::zzz6 (void) const {_ return (tp()->zzz6()); }
-const std::string& Thing::zzz7 (void) const {_ return (tp()->zzz7()); }
-const std::string& Thing::zzz8 (void) const {_ return (tp()->zzz8()); }
-const std::string& Thing::zzz9 (void) const {_ return (tp()->zzz9()); }
-const std::string& Thing::zzz10 (void) const {_ return (tp()->zzz10()); }
-const std::string& Thing::zzz11 (void) const {_ return (tp()->zzz11()); }
-const std::string& Thing::zzz12 (void) const {_ return (tp()->zzz12()); }
-const std::string& Thing::zzz13 (void) const {_ return (tp()->zzz13()); }
-const std::string& Thing::zzz14 (void) const {_ return (tp()->zzz14()); }
+const std::string& Thing::str1 (void) const {_ return (tp()->str1()); }
+const std::string& Thing::str2 (void) const {_ return (tp()->str2()); }
+const std::string& Thing::str3 (void) const {_ return (tp()->str3()); }
+const std::string& Thing::str4 (void) const {_ return (tp()->str4()); }
+const std::string& Thing::str5 (void) const {_ return (tp()->str5()); }
+const std::string& Thing::str6 (void) const {_ return (tp()->str6()); }
+const std::string& Thing::str7 (void) const {_ return (tp()->str7()); }
+const std::string& Thing::str8 (void) const {_ return (tp()->str8()); }
+const std::string& Thing::str9 (void) const {_ return (tp()->str9()); }
+const std::string& Thing::str10 (void) const {_ return (tp()->str10()); }
+const std::string& Thing::str11 (void) const {_ return (tp()->str11()); }
+const std::string& Thing::str12 (void) const {_ return (tp()->str12()); }
+const std::string& Thing::str13 (void) const {_ return (tp()->str13()); }
+const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }
 const std::string& Thing::spawn_on_death (void) const {_ return (tp()->spawn_on_death()); }
-const std::string& Thing::real_name (void) const {_ return (tp()->real_name()); }
+const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }
 const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }
 const std::string& Thing::weapon_use_anim (void) const {_ return (tp()->weapon_use_anim()); }

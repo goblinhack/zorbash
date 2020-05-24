@@ -3,10 +3,10 @@ import tp
 
 
 def tp_init(name):
-    real_name = "cursor path"
-    x = tp.Tp(name, real_name)
+    text_name = "cursor path"
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("the");
+    x.set_text_a_or_an("the");
     x.set_gfx_animated(True)
     x.set_gfx_show_outlined(True)
     x.set_is_cursor_path(True)

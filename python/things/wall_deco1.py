@@ -12,7 +12,7 @@ def tp_init(name,
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_is_wall_deco(True)
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_z_depth(zx.MAP_DEPTH_WALLS)
 
     delay = 2500
