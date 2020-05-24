@@ -24,10 +24,10 @@ void Thing::unset_on_fire (void)
     }
 }
 
-void Thing::set_on_fire (void)
+bool Thing::set_on_fire (void)
 {_
     if (get_on_fire_anim_id()) {
-        return;
+        return (false);
     }
 
     log("set on fire");
@@ -35,49 +35,5 @@ void Thing::set_on_fire (void)
     set_on_fire_anim_id(on_fire_anim->id);
     on_fire_anim->set_owner(this);
     move_carried_items();
-}
-
-void Thing::on_fire_tick (void)
-{_
-#if 0
-    auto id = get_on_fire_anim_id();
-    if (!id) {
-        return;
-    }
-
-    auto fire_anim = thing_find(id);
-    if (!fire_anim) {
-        return;
-    }
-
-    if (level->is_water(mid_at.x, mid_at.y)) {
-        decr_on_fire_count();
-        auto id = get_on_fire_anim_id();
-        if (!id) {
-            if (is_player()) {
-                MINICON("%%fg=yellow$You extinguish the flames!%%fg=reset$");
-            }
-            return;
-        }
-    }
-
-    auto damage = fire_anim->get_stats_attack();
-    if (is_player()) {
-        MINICON("%%fg=yellow$You take %d fire damage!%%fg=reset$", damage);
-    }
-
-    //
-    // Visible hit indication
-    //
-    msg(string_sprintf("%%fg=yellow$-%d ON FIRE!", damage));
-
-    decr_stats_health(damage);
-
-    if (get_stats_health() <= 1) {
-        //
-        // starvation is just annoying for players
-        //
-        dead("burned to death");
-    }
-#endif
+    return (true);
 }

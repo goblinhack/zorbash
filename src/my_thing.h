@@ -573,7 +573,7 @@ public:
     uint32_t get_on_fire_anim_id(void) const;
 
     void unset_on_fire(void);
-    void set_on_fire(void);
+    bool set_on_fire(void);
 
     uint32_t set_owner_id(uint32_t);
     uint32_t get_owner_id(void) const;
@@ -840,7 +840,6 @@ public:
     void init(std::string name, fpoint at, fpoint jitter);
     void kill(const char *reason);
     void kill(std::string &reason);
-    void lava_tick();
     void water_tick();
     void lifespan_tick();
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -854,7 +853,6 @@ public:
     void move_to_immediately(fpoint to);
     void move_to_immediately_delta(fpoint delta);
     void msg(std::string const &);
-    void on_fire_tick();
     void reinit(void);
     void remove_owner(void);
     void set_owner(Thingp owner);
