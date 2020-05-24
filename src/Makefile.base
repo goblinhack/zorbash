@@ -89,6 +89,10 @@ GAME_OBJECTS=				\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
+    $(OBJDIR)/thing_init.o 		\
+    $(OBJDIR)/thing_fini.o 		\
+    $(OBJDIR)/thing_gc.o 		\
+    $(OBJDIR)/thing_hooks.o 		\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_astar.o 		\
