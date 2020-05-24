@@ -5,9 +5,9 @@ def tp_init(name, real_name):
     x = tp.Tp(name, real_name)
 
     x.set_a_or_an("a");
-    x.set_is_gfx_animated(True)
-    x.set_is_gfx_oversized_but_sitting_on_the_ground(True)
-    x.set_is_gfx_show_outlined(True)
+    x.set_gfx_animated(True)
+    x.set_gfx_oversized_but_sitting_on_the_ground(True)
+    x.set_gfx_show_outlined(True)
     x.set_is_blood_splatter(True)
     x.set_is_interesting(False)
     x.set_is_loggable(False)

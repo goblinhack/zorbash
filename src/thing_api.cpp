@@ -179,34 +179,34 @@ int Thing::is_interesting(void) const
     return (tp()->is_interesting());
 }
 
-int Thing::is_gfx_animated(void) const
+int Thing::gfx_animated(void) const
 {_
-    return (tp()->is_gfx_animated());
+    return (tp()->gfx_animated());
 }
 
-int Thing::is_gfx_animated_can_vflip(void) const
+int Thing::gfx_animated_can_vflip(void) const
 {_
-    return (tp()->is_gfx_animated_can_vflip());
+    return (tp()->gfx_animated_can_vflip());
 }
 
-int Thing::is_gfx_animated_no_dir(void) const
+int Thing::gfx_animated_no_dir(void) const
 {_
-    return (tp()->is_gfx_animated_no_dir());
+    return (tp()->gfx_animated_no_dir());
 }
 
-int Thing::is_gfx_bounce_on_move(void) const
+int Thing::gfx_bounce_on_move(void) const
 {_
-    return (tp()->is_gfx_bounce_on_move());
+    return (tp()->gfx_bounce_on_move());
 }
 
-int Thing::is_gfx_animated_can_hflip(void) const
+int Thing::gfx_animated_can_hflip(void) const
 {_
-    return (tp()->is_gfx_animated_can_hflip());
+    return (tp()->gfx_animated_can_hflip());
 }
 
-int Thing::is_gfx_an_animation_only(void) const
+int Thing::gfx_an_animation_only(void) const
 {_
-    return (tp()->is_gfx_an_animation_only());
+    return (tp()->gfx_an_animation_only());
 }
 
 int Thing::is_floor_deco(void) const
@@ -219,34 +219,34 @@ int Thing::is_wall_deco(void) const
     return (tp()->is_wall_deco());
 }
 
-int Thing::is_gfx_weapon_carry_anim(void) const
+int Thing::gfx_weapon_carry_anim(void) const
 {_
-    return (tp()->is_gfx_weapon_carry_anim());
+    return (tp()->gfx_weapon_carry_anim());
 }
 
-int Thing::is_gfx_attack_anim(void) const
+int Thing::gfx_attack_anim(void) const
 {_
-    return (tp()->is_gfx_attack_anim());
+    return (tp()->gfx_attack_anim());
 }
 
-int Thing::is_gfx_large_shadow(void) const
+int Thing::gfx_large_shadow(void) const
 {_
-    return (tp()->is_gfx_large_shadow());
+    return (tp()->gfx_large_shadow());
 }
 
-int Thing::is_gfx_show_outlined(void) const
+int Thing::gfx_show_outlined(void) const
 {_
-    return (tp()->is_gfx_show_outlined());
+    return (tp()->gfx_show_outlined());
 }
 
-int Thing::is_gfx_oversized_but_sitting_on_the_ground(void) const
+int Thing::gfx_oversized_but_sitting_on_the_ground(void) const
 {_
-    return (tp()->is_gfx_oversized_but_sitting_on_the_ground());
+    return (tp()->gfx_oversized_but_sitting_on_the_ground());
 }
 
-int Thing::is_gfx_small_shadow_caster(void) const
+int Thing::gfx_small_shadow_caster(void) const
 {_
-    return (tp()->is_gfx_small_shadow_caster());
+    return (tp()->gfx_small_shadow_caster());
 }
 
 int Thing::health_hunger_pct(void) const
@@ -534,9 +534,9 @@ int Thing::is_torch(void) const
     return (tp()->is_torch());
 }
 
-int Thing::is_gfx_bounce_always(void) const
+int Thing::gfx_bounce_always(void) const
 {_
-    return (tp()->is_gfx_bounce_always());
+    return (tp()->gfx_bounce_always());
 }
 
 int Thing::is_rrr3(void) const
@@ -554,9 +554,9 @@ int Thing::is_flammable(void) const
     return (tp()->is_flammable());
 }
 
-int Thing::is_gfx_on_fire_anim(void) const
+int Thing::gfx_on_fire_anim(void) const
 {_
-    return (tp()->is_gfx_on_fire_anim());
+    return (tp()->gfx_on_fire_anim());
 }
 
 int Thing::is_attack_shove_chance_d1000(void) const
@@ -634,9 +634,9 @@ int Thing::is_rrr5(void) const
     return (tp()->is_rrr5());
 }
 
-int Thing::is_gfx_dead_anim(void) const
+int Thing::gfx_dead_anim(void) const
 {_
-    return (tp()->is_gfx_dead_anim());
+    return (tp()->gfx_dead_anim());
 }
 
 int Thing::is_rrr6(void) const

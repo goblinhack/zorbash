@@ -59,7 +59,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_dirt) {
                     floor_string += c;
                 } else if (m.is_blood       ||
-                           m.is_torch     ||
+                           m.is_torch       ||
                            m.is_deep_water  ||
                            m.is_door        ||
                            m.is_entrance    ||

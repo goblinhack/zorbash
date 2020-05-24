@@ -6,7 +6,7 @@ def tp_init(name, real_name, tiles=[]):
     x = tp.Tp(name, real_name)
 
     x.set_a_or_an("the");
-    x.set_is_gfx_animated(True)
+    x.set_gfx_animated(True)
     x.set_is_deep_water(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)

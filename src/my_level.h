@@ -23,7 +23,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gfx_large_shadow {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _gfx_large_shadow {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
@@ -464,56 +464,56 @@ public:
     //
     // Used in lighting, so inlined
     //
-    inline bool is_gfx_large_shadow (const point &p)
+    inline bool gfx_large_shadow (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_gfx_large_shadow, p.x, p.y));
+        return (get(_gfx_large_shadow, p.x, p.y));
     }
 
-    inline bool is_gfx_large_shadow_unsafe (const point &p)
+    inline bool gfx_large_shadow_unsafe (const point &p)
     {_
-        return (get_unsafe(_is_gfx_large_shadow, p.x, p.y));
+        return (get_unsafe(_gfx_large_shadow, p.x, p.y));
     }
 
-    inline bool is_gfx_large_shadow (const int x, const int y)
+    inline bool gfx_large_shadow (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_gfx_large_shadow, x, y));
+        return (get(_gfx_large_shadow, x, y));
     }
 
-    inline bool is_gfx_large_shadow_unsafe (const int x, const int y)
+    inline bool gfx_large_shadow_unsafe (const int x, const int y)
     {_
-        return (get_unsafe(_is_gfx_large_shadow, x, y));
+        return (get_unsafe(_gfx_large_shadow, x, y));
     }
 
-    inline void set_is_gfx_large_shadow (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_gfx_large_shadow, x, y, true);
-    }
-
-    inline void set_is_gfx_large_shadow_unsafe (const int x, const int y)
-    {_
-        set_unsafe(_is_gfx_large_shadow, x, y, true);
-    }
-
-    inline void unset_is_gfx_large_shadow (const int x, const int y)
+    inline void set_gfx_large_shadow (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_is_gfx_large_shadow, x, y, false);
+        set(_gfx_large_shadow, x, y, true);
     }
 
-    inline void unset_is_gfx_large_shadow_unsafe (const int x, const int y)
+    inline void set_gfx_large_shadow_unsafe (const int x, const int y)
     {_
-        set_unsafe(_is_gfx_large_shadow, x, y, false);
+        set_unsafe(_gfx_large_shadow, x, y, true);
+    }
+
+    inline void unset_gfx_large_shadow (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_gfx_large_shadow, x, y, false);
+    }
+
+    inline void unset_gfx_large_shadow_unsafe (const int x, const int y)
+    {_
+        set_unsafe(_gfx_large_shadow, x, y, false);
     }
 
     void init(point3d at, int seed);

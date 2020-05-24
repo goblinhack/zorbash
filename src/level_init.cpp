@@ -53,7 +53,7 @@ void Level::clear (void)
     _is_dungeon = {};
     _is_fade_in = {};
     _is_floor = {};
-    _is_gfx_large_shadow = {};
+    _gfx_large_shadow = {};
     _is_lava = {};
     _is_rock = {};
     _is_visited = {};

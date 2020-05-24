@@ -89,17 +89,17 @@ class Tp:
     def set_blit_right_off(self, value):
         zx.tp_set_blit_right_off(self, value)
 
-    def set_is_gfx_animated(self, value):
-        zx.tp_set_is_gfx_animated(self, value)
+    def set_gfx_animated(self, value):
+        zx.tp_set_gfx_animated(self, value)
 
-    def set_is_gfx_animated_no_dir(self, value):
-        zx.tp_set_is_gfx_animated_no_dir(self, value)
+    def set_gfx_animated_no_dir(self, value):
+        zx.tp_set_gfx_animated_no_dir(self, value)
 
-    def set_is_gfx_an_animation_only(self, value):
-        zx.tp_set_is_gfx_an_animation_only(self, value)
+    def set_gfx_an_animation_only(self, value):
+        zx.tp_set_gfx_an_animation_only(self, value)
 
-    def set_is_gfx_on_fire_anim(self, value):
-        zx.tp_set_is_gfx_on_fire_anim(self, value)
+    def set_gfx_on_fire_anim(self, value):
+        zx.tp_set_gfx_on_fire_anim(self, value)
 
     def set_is_monst(self, value):
         zx.tp_set_is_monst(self, value)
@@ -260,8 +260,8 @@ class Tp:
     def set_is_torch(self, value):
         zx.tp_set_is_torch(self, value)
 
-    def set_is_gfx_bounce_always(self, value):
-        zx.tp_set_is_gfx_bounce_always(self, value)
+    def set_gfx_bounce_always(self, value):
+        zx.tp_set_gfx_bounce_always(self, value)
 
     def set_normal_placement_rules(self, value):
         zx.tp_set_normal_placement_rules(self, value)
@@ -272,8 +272,8 @@ class Tp:
     def set_is_combustible(self, value):
         zx.tp_set_is_combustible(self, value)
 
-    def set_is_gfx_attack_anim(self, value):
-        zx.tp_set_is_gfx_attack_anim(self, value)
+    def set_gfx_attack_anim(self, value):
+        zx.tp_set_gfx_attack_anim(self, value)
 
     def set_is_attack_shove_chance_d1000(self, value):
         zx.tp_set_is_attack_shove_chance_d1000(self, value)
@@ -329,8 +329,8 @@ class Tp:
     def set_is_cursor(self, value):
         zx.tp_set_is_cursor(self, value)
 
-    def set_is_gfx_dead_anim(self, value):
-        zx.tp_set_is_gfx_dead_anim(self, value)
+    def set_gfx_dead_anim(self, value):
+        zx.tp_set_gfx_dead_anim(self, value)
 
     def set_ai_obstacle(self, value):
         zx.tp_set_ai_obstacle(self, value)
@@ -377,8 +377,8 @@ class Tp:
     def set_ai_delay_after_moving_ms(self, value):
         zx.tp_set_ai_delay_after_moving_ms(self, value)
 
-    def set_is_gfx_bounce_on_move(self, value):
-        zx.tp_set_is_gfx_bounce_on_move(self, value)
+    def set_gfx_bounce_on_move(self, value):
+        zx.tp_set_gfx_bounce_on_move(self, value)
 
     def set_is_loggable(self, value):
         zx.tp_set_is_loggable(self, value)
@@ -428,14 +428,14 @@ class Tp:
     def set_is_blood(self, value):
         zx.tp_set_is_blood(self, value)
 
-    def set_is_gfx_animated_can_vflip(self, value):
-        zx.tp_set_is_gfx_animated_can_vflip(self, value)
+    def set_gfx_animated_can_vflip(self, value):
+        zx.tp_set_gfx_animated_can_vflip(self, value)
 
     def set_is_corridor(self, value):
         zx.tp_set_is_corridor(self, value)
 
-    def set_is_gfx_oversized_but_sitting_on_the_ground(self, value):
-        zx.tp_set_is_gfx_oversized_but_sitting_on_the_ground(self, value)
+    def set_gfx_oversized_but_sitting_on_the_ground(self, value):
+        zx.tp_set_gfx_oversized_but_sitting_on_the_ground(self, value)
 
     def set_is_interesting(self, value):
         zx.tp_set_is_interesting(self, value)
@@ -476,20 +476,20 @@ class Tp:
     def set_weapon_use_distance(self, value):
         zx.tp_set_weapon_use_distance(self, value)
 
-    def set_is_gfx_weapon_carry_anim(self, value):
-        zx.tp_set_is_gfx_weapon_carry_anim(self, value)
+    def set_gfx_weapon_carry_anim(self, value):
+        zx.tp_set_gfx_weapon_carry_anim(self, value)
 
-    def set_is_gfx_attack_anim(self, value):
-        zx.tp_set_is_gfx_attack_anim(self, value)
+    def set_gfx_attack_anim(self, value):
+        zx.tp_set_gfx_attack_anim(self, value)
 
     def set_is_weapon(self, value):
         zx.tp_set_is_weapon(self, value)
 
-    def set_is_gfx_show_outlined(self, value):
-        zx.tp_set_is_gfx_show_outlined(self, value)
+    def set_gfx_show_outlined(self, value):
+        zx.tp_set_gfx_show_outlined(self, value)
 
-    def set_is_gfx_large_shadow(self, value):
-        zx.tp_set_is_gfx_large_shadow(self, value)
+    def set_gfx_large_shadow(self, value):
+        zx.tp_set_gfx_large_shadow(self, value)
 
     def set_z_depth(self, value):
         zx.tp_set_z_depth(self, value)
@@ -497,11 +497,11 @@ class Tp:
     def set_is_movable(self, value):
         zx.tp_set_is_movable(self, value)
 
-    def set_is_gfx_animated_can_hflip(self, value):
-        zx.tp_set_is_gfx_animated_can_hflip(self, value)
+    def set_gfx_animated_can_hflip(self, value):
+        zx.tp_set_gfx_animated_can_hflip(self, value)
 
-    def set_is_gfx_animated_can_vflip(self, value):
-        zx.tp_set_is_gfx_animated_can_vflip(self, value)
+    def set_gfx_animated_can_vflip(self, value):
+        zx.tp_set_gfx_animated_can_vflip(self, value)
 
     def set_is_movement_blocking(self, value):
         zx.tp_set_is_movement_blocking(self, value)
@@ -533,5 +533,5 @@ class Tp:
     def set_is_deep_water(self, value):
         zx.tp_set_is_deep_water(self, value)
 
-    def set_is_gfx_small_shadow_caster(self, value):
-        zx.tp_set_is_gfx_small_shadow_caster(self, value)
+    def set_gfx_small_shadow_caster(self, value):
+        zx.tp_set_gfx_small_shadow_caster(self, value)

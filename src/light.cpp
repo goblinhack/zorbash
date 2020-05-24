@@ -151,7 +151,7 @@ void Light::calculate (int last)
                 level->set_visited_unsafe(x, y);
             }
 
-            if (level->is_gfx_large_shadow_unsafe(x, y)) {
+            if (level->gfx_large_shadow_unsafe(x, y)) {
                 break;
             }
         }
@@ -179,7 +179,7 @@ void Light::calculate (int last)
                 level->set_visited_unsafe(x, y);
             }
 
-            if (!level->is_gfx_large_shadow_unsafe(x, y)) {
+            if (!level->gfx_large_shadow_unsafe(x, y)) {
                 break;
             }
 

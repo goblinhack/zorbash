@@ -103,7 +103,7 @@ void Level::display_deep_water (int fbo,
             if (likely(!level->is_deep_water(x, y))) {
                 continue;
             }
-            if (likely(!game->config.is_gfx_show_hidden)) {
+            if (likely(!game->config.gfx_show_hidden)) {
                 if (!is_visited(x, y)) {
                     continue;
                 }

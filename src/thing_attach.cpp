@@ -54,8 +54,8 @@ void Thing::attach (void)
     if (is_dirt()) {
         level->set_dirt(mx, my);
     }
-    if (is_gfx_large_shadow()) {
-        level->set_is_gfx_large_shadow(mx, my);
+    if (gfx_large_shadow()) {
+        level->set_gfx_large_shadow(mx, my);
     }
 }
 
@@ -106,8 +106,8 @@ void Thing::detach (void)
     if (is_dirt()) {
         level->unset_dirt(mx, my);
     }
-    if (is_gfx_large_shadow()) {
-        level->unset_is_gfx_large_shadow(mx, my);
+    if (gfx_large_shadow()) {
+        level->unset_gfx_large_shadow(mx, my);
     }
 
     level->remove_thing((int)last_attached.x, (int)last_attached.y, id);

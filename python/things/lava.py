@@ -7,12 +7,13 @@ def lava_init(name, real_name, tiles=[], left_tiles=[]):
 
     x.set_a_or_an("");
     x.set_ai_obstacle(True)
-    x.set_is_gfx_animated(True)
+    x.set_gfx_animated(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_lava(True)
     x.set_is_light_strength(3)
     x.set_light_color("red")
+    x.set_stats_attack_hd("1d6+1")
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
 
     delay = 1250

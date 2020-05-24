@@ -125,7 +125,7 @@ void Config::log (std::string pfx)
     LOG("%s fps_counter         %u", pfx.c_str(), fps_counter);
     LOG("%s gfx_inverted        %u", pfx.c_str(), gfx_inverted);
     LOG("%s gfx_minimap         %u", pfx.c_str(), gfx_minimap);
-    LOG("%s is_gfx_show_hidden     %u", pfx.c_str(), is_gfx_show_hidden);
+    LOG("%s gfx_show_hidden     %u", pfx.c_str(), gfx_show_hidden);
     LOG("%s gfx_lights          %u", pfx.c_str(), gfx_lights);
     LOG("%s gfx_zoom            %u", pfx.c_str(), gfx_zoom);
     LOG("%s debug_mode          %u", pfx.c_str(), debug_mode);
