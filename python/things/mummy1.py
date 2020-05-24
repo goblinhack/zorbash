@@ -33,6 +33,7 @@ def tp_init(name, text_name):
     x.set_is_shovable(True)
     x.set_is_undead(True)
     x.set_is_water_hater(100)
+    x.set_is_fire_hater(100)
     x.set_normal_placement_rules(True)
     x.set_stats_attack_hd("1d1+1")
     x.set_stats_attack_rate_tenths(3)

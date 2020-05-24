@@ -835,6 +835,11 @@ bool Thing::collision_obstacle (Thingp it)
                 return (true);
             }
         }
+        if (is_fire_hater()) {
+            if (it->is_lava() || it->is_fire()) {
+                return (true);
+            }
+        }
         if (it->is_hazard()) {
             return (true);
         }
