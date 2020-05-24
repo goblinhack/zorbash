@@ -80,7 +80,6 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->light_quality);
     /* int         */ in >> bits(my.t->light_strength);
     /* int         */ in >> bits(my.t->owned_count);
-    /* int         */ in >> bits(my.t->on_fire_count);
     /* int         */ in >> bits(my.t->stats01);
     /* int         */ in >> bits(my.t->stats02);
     /* int         */ in >> bits(my.t->stats03);
