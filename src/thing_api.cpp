@@ -514,9 +514,9 @@ int Thing::is_rrr24(void) const
     return (tp()->is_rrr24());
 }
 
-int Thing::is_rrr25(void) const
+int Thing::is_fire(void) const
 {_
-    return (tp()->is_rrr25());
+    return (tp()->is_fire());
 }
 
 int Thing::is_dead_on_shove(void) const

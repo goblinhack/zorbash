@@ -36,6 +36,11 @@ void Thing::achieve_goals_in_life (void)
         return;
     }
 
+    collision_check_do();
+    if (is_dead) {
+        return;
+    }
+
     //
     // If there is a next hop to go to, do it.
     //
@@ -59,22 +64,15 @@ void Thing::collision_check_do (void)
         return;
     }
 
-    if (time_have_x_tenths_passed_since(MAX_THING_COLL_DELAY_TENTHS,
-                                        get_timestamp_collision())) {
-        set_timestamp_collision(
-            time_get_time_ms() +
-            random_range(0, MAX_THING_COLL_DELAY_TENTHS));
+    bool target_attacked = false;
+    bool target_overlaps = false;
+    if (collision_check_and_handle_at(&target_attacked,
+                                      &target_overlaps)) {
+        return;
+    }
 
-        bool target_attacked = false;
-        bool target_overlaps = false;
-        if (collision_check_and_handle_at(&target_attacked,
-                                          &target_overlaps)) {
-            return;
-        }
-
-        if (target_attacked || target_overlaps) {
-            stop();
-        }
+    if (target_attacked || target_overlaps) {
+        stop();
     }
 }
 
@@ -105,7 +103,12 @@ void Thing::tick (void)
             achieve_goals_in_life();
             if (is_move_done) {
                 incr_tick();
-                is_waiting_to_move = false;
+                auto tick = get_tick();
+                if (tick < game->tick_current) {
+                    is_waiting_to_move = true;
+                } else {
+                    is_waiting_to_move = false;
+                }
             }
         }
     }

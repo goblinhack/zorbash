@@ -10,7 +10,7 @@ def tp_init(name):
     x.set_is_interesting(False)
     x.set_is_loggable(False)
     x.set_a_or_an("");
-    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 150
     x.set_tile(tile=name + ".1", delay_ms=delay)

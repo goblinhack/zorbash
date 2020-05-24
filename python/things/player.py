@@ -36,7 +36,7 @@ def tp_init(name, real_name):
     x.set_stats_move_speed_ms(75)
     x.set_stats_attack_hd("1d1+1")
     x.set_stats_strength(10)
-    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 550
     x.set_tile(tile=name + ".1", is_dir_left=True, is_moving=True,

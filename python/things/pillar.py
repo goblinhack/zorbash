@@ -6,15 +6,19 @@ def tp_init(name, real_name, tiles=[]):
 
     x = tp.Tp(name, real_name)
 
+    x.set_a_or_an("a");
+    x.set_ai_obstacle(True)
+    x.set_collision_circle(True)
+    x.set_collision_hit_priority(0)
+    x.set_collision_radius(0.40)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_floor_deco(True)
-    x.set_is_interesting(False)
+    x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_movement_blocking(True)
-    x.set_a_or_an("a");
-    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     for t in tiles:
         x.set_tile(tile=t)

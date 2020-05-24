@@ -754,7 +754,7 @@ public:
     int is_rrr22(void) const;
     int is_rrr23(void) const;
     int is_rrr24(void) const;
-    int is_rrr25(void) const;
+    int is_fire(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;

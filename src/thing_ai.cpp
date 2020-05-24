@@ -62,6 +62,9 @@ bool Thing::will_eat (const Thingp itp)
             return (true);
         }
     }
+    if (me->is_fire()) {
+        return (true);
+    }
     return (false);
 }
 

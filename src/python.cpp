@@ -1731,7 +1731,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr22)
     TP_SET_DECL(is_rrr23)
     TP_SET_DECL(is_rrr24)
-    TP_SET_DECL(is_rrr25)
+    TP_SET_DECL(is_fire)
     TP_SET_DECL(is_dead_on_shove)
     TP_SET_DECL(is_torch)
     TP_SET_DECL(gfx_bounce_always)
