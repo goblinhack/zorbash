@@ -479,9 +479,9 @@ int Thing::is_rrr18(void) const
     return (tp()->is_rrr18());
 }
 
-int Thing::is_rrr19(void) const
+int Thing::is_fire_hater(void) const
 {_
-    return (tp()->is_rrr19());
+    return (tp()->is_fire_hater());
 }
 
 int Thing::is_rrr2(void) const

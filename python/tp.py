@@ -230,8 +230,8 @@ class Tp:
     def set_is_rrr18(self, value):
         zx.tp_set_is_rrr18(self, value)
 
-    def set_is_rrr19(self, value):
-        zx.tp_set_is_rrr19(self, value)
+    def set_is_fire_hater(self, value):
+        zx.tp_set_is_fire_hater(self, value)
 
     def set_is_rrr20(self, value):
         zx.tp_set_is_rrr20(self, value)

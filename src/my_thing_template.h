@@ -163,7 +163,7 @@ private:
     int _is_rrr16 {};
     int _is_rrr17 {};
     int _is_rrr18 {};
-    int _is_rrr19 {};
+    int _is_fire_hater {};
     int _is_rrr2 {};
     int _is_rrr20 {};
     int _is_rrr21 {};
@@ -389,7 +389,7 @@ public:
     int is_rrr16(void) const;
     int is_rrr17(void) const;
     int is_rrr18(void) const;
-    int is_rrr19(void) const;
+    int is_fire_hater(void) const;
     int is_rrr2(void) const;
     int is_rrr20(void) const;
     int is_rrr21(void) const;
@@ -532,7 +532,7 @@ public:
     void set_is_rrr16(int);
     void set_is_rrr17(int);
     void set_is_rrr18(int);
-    void set_is_rrr19(int);
+    void set_is_fire_hater(int);
     void set_is_rrr2(int);
     void set_is_rrr20(int);
     void set_is_rrr21(int);
