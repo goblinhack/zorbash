@@ -860,24 +860,24 @@ def init_32x32_chasm():
 def init_weapons_tiles():
     tiles = [
             "",
-            "sword1_carry_anim.1",
-            "sword1_carry_anim.2",
-            "sword1_swing_anim_left.1",
-            "sword1_swing_anim_left.2",
-            "sword1_swing_anim_left.3",
-            "sword1_swing_anim_left.4",
-            "sword1_swing_anim_left.5",
-            "sword1_swing_anim_left.6",
+            "sword1_carry.1",
+            "sword1_carry.2",
+            "sword1_swing_left.1",
+            "sword1_swing_left.2",
+            "sword1_swing_left.3",
+            "sword1_swing_left.4",
+            "sword1_swing_left.5",
+            "sword1_swing_left.6",
             ##########################################################
             "",
             "",
             "",
-            "sword1_swing_anim_up.1",
-            "sword1_swing_anim_up.2",
-            "sword1_swing_anim_up.3",
-            "sword1_swing_anim_up.4",
-            "sword1_swing_anim_up.5",
-            "sword1_swing_anim_up.6",
+            "sword1_swing_up.1",
+            "sword1_swing_up.2",
+            "sword1_swing_up.3",
+            "sword1_swing_up.4",
+            "sword1_swing_up.5",
+            "sword1_swing_up.6",
     ]
 
     zx.tile_load_arr_color_and_black_and_white(

@@ -87,8 +87,8 @@ def init3(name, text_name):
     x.set_is_movable(True)
     x.set_is_weapon(True)
     x.set_text_a_or_an("a");
-    x.set_weapon_carry_anim("sword1_carry_anim")
-    x.set_weapon_use_anim("sword1_swing_anim")
+    x.set_weapon_carry_anim("sword1_carry")
+    x.set_weapon_use_anim("sword1_swing")
     x.set_weapon_use_delay_hundredths(5)
     x.set_weapon_use_distance(1)
     x.set_z_depth(zx.MAP_DEPTH_WEAPON)
@@ -98,8 +98,8 @@ def init3(name, text_name):
     x.update()
 
 def init():
-    init1(name="sword1_swing_anim")
-    init2(name="sword1_carry_anim")
+    init1(name="sword1_swing")
+    init2(name="sword1_carry")
     init3(name="sword1", text_name="sword")
 
 init()

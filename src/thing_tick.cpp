@@ -16,7 +16,7 @@ void Thing::achieve_goals_in_life (void)
         log("achieve goals at tick %d, game tick %u",
             get_tick(), game->tick_current);
     }
-
+_
     lifespan_tick();
     if (is_dead) {
         return;
@@ -68,7 +68,8 @@ void Thing::collision_check_do (void)
     }
 
     if (target_attacked || target_overlaps) {
-        stop();
+        move_finish();
+        cursor_path_stop();
     }
 }
 
