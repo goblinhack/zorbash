@@ -523,7 +523,7 @@ static void thing_possible_init (void)
 //
 bool Thing::collision_find_best_target (bool *target_attacked,
                                         bool *target_overlaps)
-{
+{_
     auto me = this;
     ThingColl *best = nullptr;
 
@@ -564,8 +564,8 @@ _
             //
             // If this target is closer, prefer it.
             //
-            auto me_pos = get_interpolated_mid_at();
-            auto best_pos = best->target->get_interpolated_mid_at();
+            auto me_pos = mid_at;
+            auto best_pos = best->target->mid_at;
 
             float dist_best = DISTANCE(me_pos.x,
                                        me_pos.y,
@@ -620,7 +620,9 @@ _
             log("collision: cannot hit %s", it->to_string().c_str());
         }
     } else {
-        log("collision: none");
+        if (is_loggable()) {
+            log("collision: none");
+        }
     }
 
     thing_possible_init();
@@ -1038,6 +1040,7 @@ bool Thing::collision_check_only (fpoint future_pos)
     }
 
     log("check for collisions");
+    _
     for (int16_t x = minx; x <= maxx; x++) {
         for (int16_t y = miny; y <= maxy; y++) {
             FOR_ALL_COLLISION_THINGS(level, it, x, y) {

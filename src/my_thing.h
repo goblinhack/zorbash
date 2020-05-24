@@ -840,7 +840,6 @@ public:
     void init(std::string name, fpoint at, fpoint jitter);
     void kill(const char *reason);
     void kill(std::string &reason);
-    void water_tick();
     void lifespan_tick();
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log(std::string prefix);
@@ -848,6 +847,7 @@ public:
     void lunge(fpoint tt);
     void move_carried_items(void);
     void move_delta(fpoint);
+    void move_finish(void);
     void move_set_dir_from_delta(fpoint);
     void move_to(fpoint to);
     void move_to_immediately(fpoint to);
@@ -857,7 +857,6 @@ public:
     void remove_owner(void);
     void set_owner(Thingp owner);
     void sheath(void);
-    void stop(void);
     void tick();
     void unwield(const char *why);
     void update_interpolated_position(void);
@@ -865,6 +864,7 @@ public:
     void update_pos(fpoint, bool immediately);
     void use(void);
     void visible();
+    void water_tick();
     void weapon_get_use_offset(float *dx, float *dy) const;
     void weapon_set_carry_anim(Thingp weapon_carry_anim);
     void weapon_set_carry_anim_id(uint32_t weapon_carry_anim_id);

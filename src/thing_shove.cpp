@@ -25,6 +25,13 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         }
     }
 
+    //
+    // If I'm on fire. set it on fire too!
+    //
+    if (get_on_fire_anim_id()) {
+        it->set_on_fire();
+    }
+
     fpoint shove_delta = delta;
     fpoint shove_pos = it->mid_at + shove_delta;
     if (it->collision_check_only(shove_pos)) {
@@ -78,9 +85,13 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         it->msg(string_sprintf("%%fg=red$!"));
     }
 
+    //
+    // If shoving somehing on fire! set yourself on fire!
+    //
     if (it->is_flammable()) {
         set_on_fire();
     }
+
     return (THING_SHOVE_TRIED_AND_PASSED);
 }
 

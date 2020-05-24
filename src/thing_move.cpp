@@ -8,13 +8,13 @@
 #include "my_sprintf.h"
 #include "my_gl.h"
 
-void Thing::stop (void)
+void Thing::move_finish (void)
 {
-    mid_at = get_interpolated_mid_at();
+    // why?
+    // mid_at = get_interpolated_mid_at();
     set_timestamp_move_begin(0);
     set_timestamp_move_end(0);
     update_interpolated_position();
-    cursor_path_stop();
 }
 
 bool Thing::move (fpoint future_pos)
@@ -137,9 +137,9 @@ void Thing::update_interpolated_position (void)
 
     get_bounce();
     if (!get_timestamp_move_end()) {
-        //
-        // Nothing to do
-        //
+        update_pos = true;
+        new_pos = mid_at;
+        last_mid_at = mid_at;
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
         is_waiting_to_move = true;
         if (mid_at != last_mid_at) {
@@ -290,6 +290,7 @@ void Thing::move_set_dir_from_delta (fpoint delta)
 
 void Thing::move_to (fpoint to)
 {
+    move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
     update_pos(to, false);
@@ -297,12 +298,14 @@ void Thing::move_to (fpoint to)
 
 void Thing::move_delta (fpoint delta)
 {
+    move_finish();
     move_set_dir_from_delta(delta);
     update_pos(mid_at + delta, false);
 }
 
 void Thing::move_to_immediately (fpoint to)
 {
+    move_finish();
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
     update_pos(to, true);
@@ -310,6 +313,7 @@ void Thing::move_to_immediately (fpoint to)
 
 void Thing::move_to_immediately_delta (fpoint delta)
 {
+    move_finish();
     move_set_dir_from_delta(delta);
     update_pos(mid_at + delta, true);
 }

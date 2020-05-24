@@ -11,12 +11,12 @@
 //
 #undef DEBUG_CRASH
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
+#define ENABLE_TRACING             // Function tracing
 
 //
 // Commonly changed settings
 //
 #ifdef DEBUG_CRASH
-#define ENABLE_TRACING             // Function tracing
 #define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history

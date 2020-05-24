@@ -42,7 +42,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         //
         // On fire?
         //
-    } else {
+    } else if (hitter->is_monst()) {
         switch (hitter->try_to_shove_into_hazard(this, delta)) {
             case THING_SHOVE_TRIED_AND_FAILED:
                 return (true);

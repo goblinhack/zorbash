@@ -44,7 +44,6 @@ bool Thing::possible_to_attack (const Thingp itp)
         }
     }
 
-
     return (false);
 }
 
@@ -493,5 +492,5 @@ void Thing::ai_get_next_hop (void)
     }
 
     is_tick_done = true;
-    stop();
+    move_finish();
 }
