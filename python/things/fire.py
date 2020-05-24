@@ -18,7 +18,7 @@ def tp_init(name):
     x.set_is_fire(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
-    x.set_is_loggable(False)
+    x.set_is_loggable(True)
     x.set_is_movable(True)
     x.set_is_water_hater(100)
     x.set_stats_attack_hd("1d4+1")
