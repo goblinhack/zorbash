@@ -35,6 +35,12 @@ bool Thing::possible_to_attack (const Thingp itp)
             return (true);
         }
     }
+    if (me->is_fire()) {
+        if (!it->is_fire()) {
+            dbg("possible attack %s", itp->to_string().c_str());
+            return (true);
+        }
+    }
 
     return (false);
 }
@@ -62,11 +68,7 @@ bool Thing::will_eat (const Thingp itp)
             return (true);
         }
     }
-    if (me->is_fire()) {
-        if (!it->is_fire()) {
-            return (true);
-        }
-    }
+
     return (false);
 }
 

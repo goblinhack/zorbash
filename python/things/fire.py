@@ -19,12 +19,13 @@ def tp_init(name):
     x.set_is_fire(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
+    x.set_is_loggable(False)
     x.set_is_movable(True)
     x.set_is_water_hater(100)
     x.set_stats_attack_hd("1d4+1")
     x.set_stats_attack_rate_tenths(3)
     x.set_stats_health_initial(10)
-    x.set_z_depth(zx.MAP_DEPTH_OBJ)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ2)
 
     delay = 75
     x.set_tile(tile=name + ".1", delay_ms=delay)

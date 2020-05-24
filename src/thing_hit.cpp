@@ -26,14 +26,6 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     //
-    // Keep hitting until all damage is used up or the thing is dead.
-    //
-    if (this == hitter) {
-        die("hitting thyself");
-        return (false);
-    }
-
-    //
     // If hit by something then abort following any path
     //
     cursor_path_stop();
@@ -46,19 +38,29 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Try to push the thing into a hazard if we can just to be sneaky
     //
-    switch (hitter->try_to_shove_into_hazard(this, delta)) {
-        case THING_SHOVE_TRIED_AND_FAILED:
-            return (true);
-        case THING_SHOVE_TRIED_AND_PASSED:
-            return (true);
-        case THING_SHOVE_NEVER_TRIED:
-            break;
+    if (this == hitter) {
+        //
+        // On fire?
+        //
+    } else {
+        switch (hitter->try_to_shove_into_hazard(this, delta)) {
+            case THING_SHOVE_TRIED_AND_FAILED:
+                return (true);
+            case THING_SHOVE_TRIED_AND_PASSED:
+                return (true);
+            case THING_SHOVE_NEVER_TRIED:
+                break;
+        }
     }
 
     if (is_player()) {
         MINICON("%%fg=yellow$%s hits for %d damage!%%fg=reset$",
                 real_hitter->The().c_str(), damage);
     } else {
+        if (real_hitter->is_player()) {
+            MINICON("You hit the %s for %d damage!",
+                    The().c_str(), damage);
+        }
         add_enemy(real_hitter);
     }
 
@@ -214,6 +216,8 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
                 damage = (weapon->tp()->weapon_damage());
             }
 
+        } else if (hitter->is_fire()) {
+            log(" fire always hits");
         } else if (hitter->owner_get()) {
             //
             // Get the player firing the weapon as the hitter.
@@ -238,14 +242,14 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             if (!damage) {
                 damage = (weapon->tp()->weapon_damage());
             }
-        }
 
-        //
-        // Don't let our own potion hit ourselves!
-        //
-        if (hitter == this) {
-            log(" ignore, do not hit self");
-            return (false);
+            //
+            // Don't let our own potion hit ourselves!
+            //
+            if (hitter == this) {
+                log(" ignore, do not hit self");
+                return (false);
+            }
         }
     }
 

@@ -39,6 +39,7 @@ void Thing::set_on_fire (void)
 
 void Thing::on_fire_tick (void)
 {_
+#if 0
     auto id = get_on_fire_anim_id();
     if (!id) {
         return;
@@ -56,8 +57,6 @@ void Thing::on_fire_tick (void)
             if (is_player()) {
                 MINICON("%%fg=yellow$You extinguish the flames!%%fg=reset$");
             }
-            auto smoke = thing_new("smoke1", fpoint((int)mid_at.x, (int)mid_at.y));
-            smoke->set_lifespan_count(4);
             return;
         }
     }
@@ -80,4 +79,5 @@ void Thing::on_fire_tick (void)
         //
         dead("burned to death");
     }
+#endif
 }

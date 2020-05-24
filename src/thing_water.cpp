@@ -22,11 +22,8 @@ void Thing::water_tick (void)
                     }
                 }
             }
-
-        } else {
-            if (get_on_fire_count()) {
-                decr_on_fire_count();
-            }
+            auto smoke = thing_new("smoke1", fpoint((int)mid_at.x, (int)mid_at.y));
+            smoke->set_lifespan_count(4);
         }
     }
 }

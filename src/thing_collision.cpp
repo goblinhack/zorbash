@@ -773,7 +773,12 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
     // Need this or shields attack the player.
     //
     if ((owner_it == me) || (owner_me == it)) {
-        return (true);
+        //
+        // If on fire, allow fire to burn its owner - you!
+        //
+        if (!is_fire()) {
+            return (true);
+        }
     }
 
     //
