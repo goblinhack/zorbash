@@ -141,7 +141,6 @@ void Thing::update_interpolated_position (void)
         new_pos = mid_at;
         last_mid_at = mid_at;
     } else if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
-        is_waiting_to_move = true;
         if (mid_at != last_mid_at) {
             update_pos = true;
             new_pos = mid_at;
@@ -213,7 +212,6 @@ void Thing::update_pos (fpoint to, bool immediately)
     attach();
 
     if (!immediately) {
-        is_waiting_to_move = false;
         set_timestamp_move_begin(time_get_time_ms_cached());
         set_timestamp_move_end(get_timestamp_move_begin() + speed);
     }

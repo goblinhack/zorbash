@@ -11,7 +11,7 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-#undef DEBUG_AI_VERBOSE
+#define DEBUG_AI_VERBOSE
 
 bool Thing::possible_to_attack (const Thingp itp)
 {_
