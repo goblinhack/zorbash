@@ -6,15 +6,23 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x = tp.Tp(name, text_name)
 
     x.set_ai_obstacle(True)
+    x.set_collision_attack(True)
+    x.set_collision_check(True)
+    x.set_collision_circle(True)
+    x.set_collision_hit_priority(100)
+    x.set_collision_radius(0.40)
     x.set_gfx_animated(True)
+    x.set_is_active(True)
     x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_lava(True)
     x.set_is_light_strength(3)
+    x.set_is_loggable(False)
     x.set_light_color("red")
-    x.set_stats_attack_hd("1d6+1")
+    x.set_stats_attack_hd("1d12+6")
+    x.set_stats_attack_rate_tenths(3)
     x.set_text_a_or_an("");
-    x.set_text_hits("tickles");
+    x.set_text_hits("BURNS and tickles");
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
 
     delay = 1250

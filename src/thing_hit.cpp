@@ -54,10 +54,24 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     }
 
     if (is_player()) {
-        MINICON("%%fg=yellow$%s %s for %d damage!%%fg=reset$",
-                real_hitter->text_The().c_str(),
-                real_hitter->text_hits().c_str(),
-                damage);
+        if (real_hitter->is_fire() ||
+            real_hitter->is_lava()) {
+            if (set_on_fire()) {
+                MINICON("%%fg=red$You are ON FIRE!%%fg=reset$");
+            }
+        }
+
+        if (damage > 10) {
+            MINICON("%%fg=red$%s %s for %d damage!%%fg=reset$",
+                    real_hitter->text_The().c_str(),
+                    real_hitter->text_hits().c_str(),
+                    damage);
+        } else {
+            MINICON("%%fg=yellow$%s %s for %d damage!%%fg=reset$",
+                    real_hitter->text_The().c_str(),
+                    real_hitter->text_hits().c_str(),
+                    damage);
+        }
     } else {
         if (real_hitter->is_player()) {
             MINICON("You hit the %s for %d damage!",
@@ -103,14 +117,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->text_a_or_an();
         auto reason = "killed by " + killer;
-        if (real_hitter->is_fire()) {
-            set_on_fire();
-        }
         dead(hitter, reason);
     } else {
-        if (real_hitter->is_fire()) {
-            set_on_fire();
-        }
         log("is hit by (%s) for %u, health now %d",
             real_hitter->to_string().c_str(), damage, h);
     }

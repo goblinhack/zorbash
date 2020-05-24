@@ -10,6 +10,7 @@
 #include "my_dmap.h"
 #include "my_sprintf.h"
 #include "my_thing.h"
+#include "my_game.h"
 
 Thingp thing_new (std::string tp_name, Thingp owner)
 {_
@@ -48,7 +49,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     //
     // Start off up to data with the player
     //
-    set_tick(get_tick());
+    set_tick(game->tick_current);
 
     //
     // Must do this after TP assignment or logging will fail

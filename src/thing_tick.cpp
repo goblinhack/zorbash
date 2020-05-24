@@ -27,16 +27,6 @@ void Thing::achieve_goals_in_life (void)
         return;
     }
 
-    lava_tick();
-    if (is_dead) {
-        return;
-    }
-
-    on_fire_tick();
-    if (is_dead) {
-        return;
-    }
-
     water_tick();
     if (is_dead) {
         return;

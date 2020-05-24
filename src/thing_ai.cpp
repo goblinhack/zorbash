@@ -35,12 +35,15 @@ bool Thing::possible_to_attack (const Thingp itp)
             return (true);
         }
     }
-    if (me->is_fire()) {
-        if (!it->is_fire()) {
-            dbg("possible attack %s", itp->to_string().c_str());
-            return (true);
+    if (me->is_fire() || me->is_lava()) {
+        if (it->is_combustible()) {
+            if (!it->is_fire() && !it->is_lava()) {
+                dbg("possible attack %s", itp->to_string().c_str());
+                return (true);
+            }
         }
     }
+
 
     return (false);
 }
