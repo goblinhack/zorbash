@@ -164,7 +164,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_hidden          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_hungry          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_in_lava         << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_move_done       << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_tick_done       << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_moving          << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_open            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_sleeping        << shift; shift++;

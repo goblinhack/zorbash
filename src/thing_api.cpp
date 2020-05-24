@@ -3417,9 +3417,20 @@ int Thing::decr_on_fire_count (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
+    if (!monstp->on_fire_count) {
+        return (0);
+    }
+
     auto n = (monstp->on_fire_count -= v);
     if (!monstp->on_fire_count) {
         unset_on_fire();
+        if (is_player()) {
+            MINICON("%%fg=green$You quench the flames!%%fg=reset$");
+        }
+    } else {
+        if (is_player()) {
+            MINICON("%%fg=green$The flames continue to burn! %d%%fg=reset$", monstp->on_fire_count);
+        }
     }
     if (is_player()) { game_status_wid_init(); }
     return (n);
@@ -3440,14 +3451,7 @@ int Thing::incr_on_fire_count (int v)
 
 int Thing::decr_on_fire_count (void)
 {_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->on_fire_count--);
-    if (!monstp->on_fire_count) {
-        unset_on_fire();
-    }
-    if (is_player()) { game_status_wid_init(); }
-    return (n);
+    return decr_on_fire_count(1);
 }
 
 int Thing::incr_on_fire_count (void)

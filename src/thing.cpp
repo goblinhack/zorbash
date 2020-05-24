@@ -378,6 +378,9 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
     }
 
 #if 0
+    //
+    // Jitter makes the eating of blood by monsts problematic
+    //
     if (unlikely(jitter != fpoint(0.0, 0.0))) {
         double dx = random_range(0, TILE_WIDTH);
         double dy = random_range(0, TILE_WIDTH);
@@ -677,24 +680,29 @@ void Thing::hooks_remove ()
     if (owner) {
         log("detach %08X from owner %s", id, owner->to_string().c_str());
 
+        if (id == owner->get_on_fire_anim_id()) {
+            log("detach on_fire_anim_id from owner %s", owner->to_string().c_str());
+            owner->set_on_fire_anim_id(0);
+        }
+
         if (id == owner->get_weapon_id()) {
             owner->unwield("remove hooks");
 
-            log("detach from owner %s", owner->to_string().c_str());
+            log("detach weapon_id from owner %s", owner->to_string().c_str());
             owner->set_weapon_id(0);
         }
 
         if (id == owner->get_weapon_id_carry_anim()) {
             owner->unwield("remove hooks");
 
-            log("detach from carry_anim owner %s", owner->to_string().c_str());
+            log("detach carry_anim from owner %s", owner->to_string().c_str());
             owner->weapon_set_carry_anim_id(0);
         }
 
         if (id == owner->get_weapon_id_use_anim()) {
             owner->unwield("remove hooks");
 
-            log("detach from use-anim owner %s", owner->to_string().c_str());
+            log("detach use_anim from owner %s", owner->to_string().c_str());
             owner->weapon_set_use_anim_id(0);
 
             //

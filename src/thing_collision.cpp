@@ -843,10 +843,7 @@ bool Thing::collision_obstacle (Thingp it)
             return (true);
         }
     } else if (is_torch()) {
-        //
-        // This is for a torch being knocked over.
-        //
-        if (it->is_movement_blocking()) {
+        if (it->is_wall() || it->is_rock()) {
             return (true);
         }
     }
