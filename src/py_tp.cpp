@@ -27,18 +27,18 @@ PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    char *tp_real_name = py_obj_attr_str(py_class, "real_name");
-    if (!tp_real_name) {
-        ERR("tp_load, missing tp real_name");
+    char *tp_text_name = py_obj_attr_str(py_class, "text_name");
+    if (!tp_text_name) {
+        ERR("tp_load, missing tp text_name");
         Py_RETURN_NONE;
     }
 
     static int id;
     id++;
-    tp_load(id, tp_name, tp_real_name);
+    tp_load(id, tp_name, tp_text_name);
 
     myfree(tp_name);
-    myfree(tp_real_name);
+    myfree(tp_text_name);
 
     Py_RETURN_NONE;
 }
@@ -936,23 +936,23 @@ TP_BODY_SET_STRING(nutrition_hd)
 TP_BODY_SET_STRING(name)
 TP_BODY_SET_STRING(stats_attack_hd)
 TP_BODY_SET_STRING(light_color)
-TP_BODY_SET_STRING(zzz1)
-TP_BODY_SET_STRING(zzz10)
-TP_BODY_SET_STRING(zzz11)
-TP_BODY_SET_STRING(zzz12)
-TP_BODY_SET_STRING(zzz13)
-TP_BODY_SET_STRING(zzz14)
+TP_BODY_SET_STRING(str1)
+TP_BODY_SET_STRING(str10)
+TP_BODY_SET_STRING(str11)
+TP_BODY_SET_STRING(str12)
+TP_BODY_SET_STRING(str13)
+TP_BODY_SET_STRING(text_hits)
 TP_BODY_SET_STRING(spawn_on_death)
-TP_BODY_SET_STRING(a_or_an)
-TP_BODY_SET_STRING(real_name)
-TP_BODY_SET_STRING(zzz2)
-TP_BODY_SET_STRING(zzz3)
-TP_BODY_SET_STRING(zzz4)
-TP_BODY_SET_STRING(zzz5)
-TP_BODY_SET_STRING(zzz6)
-TP_BODY_SET_STRING(zzz7)
-TP_BODY_SET_STRING(zzz8)
-TP_BODY_SET_STRING(zzz9)
+TP_BODY_SET_STRING(text_a_or_an)
+TP_BODY_SET_STRING(text_name)
+TP_BODY_SET_STRING(str2)
+TP_BODY_SET_STRING(str3)
+TP_BODY_SET_STRING(str4)
+TP_BODY_SET_STRING(str5)
+TP_BODY_SET_STRING(str6)
+TP_BODY_SET_STRING(str7)
+TP_BODY_SET_STRING(str8)
+TP_BODY_SET_STRING(str9)
 TP_BODY_SET_STRING(weapon_carry_anim)
 TP_BODY_SET_STRING(weapon_use_anim)
 

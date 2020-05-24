@@ -18,7 +18,10 @@ void Thing::lava_tick (void)
     if (level->is_lava(mid_at.x, mid_at.y)) {
         set_on_fire();
         if (is_player()) {
-            MINICON("%%fg=red$The lava burns!%%fg=reset$");
+            static auto lava = tp_find("lava1");
+            MINICON("%%fg=red$The %s %s!%%fg=reset$",
+                    lava->text_name().c_str(),
+                    lava->text_hits().c_str());
         }
     }
 }

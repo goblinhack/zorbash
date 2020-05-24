@@ -2,10 +2,10 @@ import zx
 import tp
 
 
-def tp_init(name, real_name):
-    x = tp.Tp(name, real_name)
+def tp_init(name, text_name):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
@@ -26,9 +26,9 @@ def tp_init(name, real_name):
     x.update()
 
 def init():
-    tp_init(name="blood1", real_name="pool of blood")
-    tp_init(name="blood2", real_name="pool of blood")
-    tp_init(name="blood3", real_name="pool of blood")
-    tp_init(name="blood4", real_name="pool of blood")
+    tp_init(name="blood1", text_name="pool of blood")
+    tp_init(name="blood2", text_name="pool of blood")
+    tp_init(name="blood3", text_name="pool of blood")
+    tp_init(name="blood4", text_name="pool of blood")
 
 init()

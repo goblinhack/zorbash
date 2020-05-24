@@ -411,8 +411,10 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         if (unlikely(tpp->is_light_strength())) {
             std::string l = tpp->light_color();
             bool add_light = true;
-            if (random_range(0, 100) < 50) {
-                add_light = false;
+            if (is_lava()) {
+                if (random_range(0, 100) < 50) {
+                    add_light = false;
+                }
             }
             if (add_light) {
                 color c = string2color(l);

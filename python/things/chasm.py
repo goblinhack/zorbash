@@ -2,10 +2,10 @@ import zx
 import tp
 
 
-def chasm_init(name, real_name, tiles=[], left_tiles=[]):
-    x = tp.Tp(name, real_name)
+def chasm_init(name, text_name, tiles=[], left_tiles=[]):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_ai_obstacle(True)
     x.set_is_chasm(True)
     x.set_is_hazard(True)
@@ -19,7 +19,7 @@ def chasm_init(name, real_name, tiles=[], left_tiles=[]):
     x.update()
 
 def init():
-    chasm_init(name="chasm1", real_name="chasm",
+    chasm_init(name="chasm1", text_name="chasm",
             tiles=[
                 "chasm1.1",
                 "chasm1.2",

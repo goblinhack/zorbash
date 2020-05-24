@@ -2,10 +2,9 @@ import zx
 import tp
 
 
-def lava_init(name, real_name, tiles=[], left_tiles=[]):
-    x = tp.Tp(name, real_name)
+def lava_init(name, text_name, tiles=[], left_tiles=[]):
+    x = tp.Tp(name, text_name)
 
-    x.set_a_or_an("");
     x.set_ai_obstacle(True)
     x.set_gfx_animated(True)
     x.set_is_hazard(True)
@@ -14,6 +13,8 @@ def lava_init(name, real_name, tiles=[], left_tiles=[]):
     x.set_is_light_strength(3)
     x.set_light_color("red")
     x.set_stats_attack_hd("1d6+1")
+    x.set_text_a_or_an("");
+    x.set_text_hits("tickles");
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
 
     delay = 1250
@@ -23,7 +24,7 @@ def lava_init(name, real_name, tiles=[], left_tiles=[]):
     x.update()
 
 def init():
-    lava_init(name="lava1", real_name="lava",
+    lava_init(name="lava1", text_name="lava",
             tiles=[
                 "lava1.1",
                 "lava1.2",

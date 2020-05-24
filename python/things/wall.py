@@ -23,7 +23,7 @@ def tp_init(name,
 
     x = tp.Tp(name)
 
-    x.set_a_or_an("a");
+    x.set_text_a_or_an("a");
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
     x.set_collision_radius(0.40)

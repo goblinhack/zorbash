@@ -4,13 +4,13 @@ import zx
 class Tp:
     """thing template"""
 
-    def __init__(self, name, real_name=None):
+    def __init__(self, name, text_name=None):
         self.name = name
 
-        if real_name is None:
-            self.real_name = name
+        if text_name is None:
+            self.text_name = name
         else:
-            self.real_name = real_name
+            self.text_name = text_name
 
         #
         # Load it into the game engine
@@ -116,56 +116,56 @@ class Tp:
     def set_is_player(self, value):
         zx.tp_set_is_player(self, value)
 
-    def set_str_zzz1(self, value):
-        zx.tp_set_str_zzz1(self, value)
+    def set_str1(self, value):
+        zx.tp_set_str1(self, value)
 
-    def set_str_zzz2(self, value):
-        zx.tp_set_str_zzz2(self, value)
+    def set_str_str2(self, value):
+        zx.tp_set_str_str2(self, value)
 
-    def set_str_zzz3(self, value):
-        zx.tp_set_str_zzz3(self, value)
+    def set_str_str3(self, value):
+        zx.tp_set_str_str3(self, value)
 
-    def set_str_zzz4(self, value):
-        zx.tp_set_str_zzz4(self, value)
+    def set_str_str4(self, value):
+        zx.tp_set_str_str4(self, value)
 
-    def set_str_zzz5(self, value):
-        zx.tp_set_str_zzz5(self, value)
+    def set_str_str5(self, value):
+        zx.tp_set_str_str5(self, value)
 
-    def set_str_zzz6(self, value):
-        zx.tp_set_str_zzz6(self, value)
+    def set_str_str6(self, value):
+        zx.tp_set_str_str6(self, value)
 
-    def set_str_zzz7(self, value):
-        zx.tp_set_str_zzz7(self, value)
+    def set_str_str7(self, value):
+        zx.tp_set_str_str7(self, value)
 
-    def set_str_zzz8(self, value):
-        zx.tp_set_str_zzz8(self, value)
+    def set_str_str8(self, value):
+        zx.tp_set_str_str8(self, value)
 
-    def set_str_zzz9(self, value):
-        zx.tp_set_str_zzz9(self, value)
+    def set_str_str9(self, value):
+        zx.tp_set_str_str9(self, value)
 
-    def set_str_zzz10(self, value):
-        zx.tp_set_str_zzz10(self, value)
+    def set_str10(self, value):
+        zx.tp_set_str10(self, value)
 
-    def set_str_zzz11(self, value):
-        zx.tp_set_str_zzz11(self, value)
+    def set_str11(self, value):
+        zx.tp_set_str11(self, value)
 
-    def set_str_zzz12(self, value):
-        zx.tp_set_str_zzz12(self, value)
+    def set_str12(self, value):
+        zx.tp_set_str12(self, value)
 
-    def set_str_zzz13(self, value):
-        zx.tp_set_str_zzz13(self, value)
+    def set_str13(self, value):
+        zx.tp_set_str13(self, value)
 
-    def set_str_zzz14(self, value):
-        zx.tp_set_str_zzz14(self, value)
+    def set_text_hits(self, value):
+        zx.tp_set_text_hits(self, value)
 
     def set_spawn_on_death(self, value):
         zx.tp_set_spawn_on_death(self, value)
 
-    def set_a_or_an(self, value):
-        zx.tp_set_a_or_an(self, value)
+    def set_text_a_or_an(self, value):
+        zx.tp_set_text_a_or_an(self, value)
 
-    def set_real_name(self, value):
-        zx.tp_set_real_name(self, value)
+    def set_text_name(self, value):
+        zx.tp_set_text_name(self, value)
 
     def set_light_color(self, value):
         zx.tp_set_light_color(self, value)
