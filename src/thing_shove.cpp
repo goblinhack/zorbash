@@ -32,6 +32,11 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         it->set_on_fire();
     }
 
+    //
+    // Annoy the thing being pushed
+    //
+    it->add_enemy(this);
+
     fpoint shove_delta = delta;
     fpoint shove_pos = it->mid_at + shove_delta;
     if (it->collision_check_only(shove_pos)) {

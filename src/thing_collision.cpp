@@ -1018,7 +1018,7 @@ bool Thing::collision_check_and_handle_at (fpoint future_pos,
 }
 
 bool Thing::collision_check_only (fpoint future_pos)
-{
+{_
     int minx = future_pos.x - thing_collision_tiles;
     while (minx < 0) {
         minx++;
@@ -1040,7 +1040,7 @@ bool Thing::collision_check_only (fpoint future_pos)
     }
 
     log("check for collisions");
-    _
+
     for (int16_t x = minx; x <= maxx; x++) {
         for (int16_t y = miny; y <= maxy; y++) {
             FOR_ALL_COLLISION_THINGS(level, it, x, y) {

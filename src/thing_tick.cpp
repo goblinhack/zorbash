@@ -90,6 +90,15 @@ void Thing::tick (void)
         return;
     }
 
+    bool is_waiting_to_move = false;
+
+    //
+    // Completed moving?
+    //
+    if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
+        is_waiting_to_move = true;
+    }
+
     if (is_waiting_to_move) {
         //
         // Tick on player move/change of the current tick
