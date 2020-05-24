@@ -35,7 +35,7 @@ def tp_init(name, real_name):
     x.set_is_undead(True)
     x.set_is_water_hater(100)
     x.set_normal_placement_rules(True)
-    x.set_stats_attack_rate_tenths(10)
+    x.set_stats_attack_rate_tenths(1)
     x.set_stats_defence(2)
     x.set_stats_health_hunger_pct(95)
     x.set_stats_health_initial(10)
@@ -43,7 +43,7 @@ def tp_init(name, real_name):
     x.set_stats_attack_hd("1d1+1")
     x.set_stats_strength(9)
     x.set_weapon_use_anim("claws1")
-    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 200
     x.set_tile(tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)

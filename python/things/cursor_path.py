@@ -11,7 +11,7 @@ def tp_init(name):
     x.set_gfx_show_outlined(True)
     x.set_is_cursor_path(True)
     x.set_is_movable(True)
-    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 50
     x.set_tile(tile=name + ".1", delay_ms=delay)

@@ -27,11 +27,10 @@ def tp_init(name, real_name, tiles=[]):
     x.set_is_movement_blocking(True)
     x.set_is_shovable(True)
     x.set_is_torch(True)
-    x.set_is_water_hater(100)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
     x.set_spawn_on_death("fire")
-    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay=50
     for t in tiles:

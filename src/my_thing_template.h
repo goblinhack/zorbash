@@ -170,7 +170,7 @@ private:
     int _is_rrr22 {};
     int _is_rrr23 {};
     int _is_rrr24 {};
-    int _is_rrr25 {};
+    int _is_fire {};
     int _is_rrr3 {};
     int _is_rrr4 {};
     int _is_rrr5 {};
@@ -396,7 +396,7 @@ public:
     int is_rrr22(void) const;
     int is_rrr23(void) const;
     int is_rrr24(void) const;
-    int is_rrr25(void) const;
+    int is_fire(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
@@ -539,7 +539,7 @@ public:
     void set_is_rrr22(int);
     void set_is_rrr23(int);
     void set_is_rrr24(int);
-    void set_is_rrr25(int);
+    void set_is_fire(int);
     void set_is_rrr3(int);
     void set_is_rrr4(int);
     void set_is_rrr5(int);

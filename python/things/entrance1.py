@@ -14,7 +14,7 @@ def tp_init(name, real_name):
     x.set_is_light_strength(4)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
-    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 1000
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=delay)

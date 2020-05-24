@@ -248,8 +248,8 @@ class Tp:
     def set_is_rrr24(self, value):
         zx.tp_set_is_rrr24(self, value)
 
-    def set_is_rrr25(self, value):
-        zx.tp_set_is_rrr25(self, value)
+    def set_is_fire(self, value):
+        zx.tp_set_is_fire(self, value)
 
     def set_is_dead_on_shove(self, value):
         zx.tp_set_is_dead_on_shove(self, value)

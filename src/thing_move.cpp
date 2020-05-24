@@ -137,10 +137,10 @@ void Thing::update_interpolated_position (void)
 
     get_bounce();
     if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
+        is_waiting_to_move = true;
         if (mid_at != last_mid_at) {
             update_pos = true;
             new_pos = mid_at;
-            is_waiting_to_move = true;
             last_mid_at = mid_at;
         }
     } else {

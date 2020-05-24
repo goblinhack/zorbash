@@ -377,6 +377,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         log("created");
     }
 
+#if 0
     if (unlikely(jitter != fpoint(0.0, 0.0))) {
         double dx = random_range(0, TILE_WIDTH);
         double dy = random_range(0, TILE_WIDTH);
@@ -392,6 +393,7 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
 
         move_to_immediately(fpoint(mid_at.x + dx, mid_at.y + dy));
     }
+#endif
 
     //
     // Set position prior to attach

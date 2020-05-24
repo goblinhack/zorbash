@@ -127,7 +127,7 @@ int Tp::is_rrr21(void) const { return _is_rrr21; }
 int Tp::is_rrr22(void) const { return _is_rrr22; }
 int Tp::is_rrr23(void) const { return _is_rrr23; }
 int Tp::is_rrr24(void) const { return _is_rrr24; }
-int Tp::is_rrr25(void) const { return _is_rrr25; }
+int Tp::is_fire(void) const { return _is_fire; }
 int Tp::is_rrr3(void) const { return _is_rrr3; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
@@ -270,7 +270,7 @@ void Tp::set_is_rrr21(int v) { _is_rrr21 = v; }
 void Tp::set_is_rrr22(int v) { _is_rrr22 = v; }
 void Tp::set_is_rrr23(int v) { _is_rrr23 = v; }
 void Tp::set_is_rrr24(int v) { _is_rrr24 = v; }
-void Tp::set_is_rrr25(int v) { _is_rrr25 = v; }
+void Tp::set_is_fire(int v) { _is_fire = v; }
 void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
