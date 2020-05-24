@@ -99,8 +99,14 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->a_or_an();
         auto reason = "killed by " + killer;
+        if (real_hitter->is_fire()) {
+            set_on_fire();
+        }
         dead(hitter, reason);
     } else {
+        if (real_hitter->is_fire()) {
+            set_on_fire();
+        }
         log("is hit by (%s) for %u, health now %d",
             real_hitter->to_string().c_str(), damage, h);
     }

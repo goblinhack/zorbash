@@ -11,7 +11,7 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-#define DEBUG_AI_VERBOSE
+#undef DEBUG_AI_VERBOSE
 
 bool Thing::possible_to_attack (const Thingp itp)
 {_
@@ -63,7 +63,9 @@ bool Thing::will_eat (const Thingp itp)
         }
     }
     if (me->is_fire()) {
-        return (true);
+        if (!it->is_fire()) {
+            return (true);
+        }
     }
     return (false);
 }
@@ -81,7 +83,7 @@ bool Thing::will_prefer_terrain (const Thingp itp)
     return (false);
 }
 
-bool Thing::ai_ai_obstacle_for_me (point p)
+bool Thing::ai_obstacle_for_me (point p)
 {_
     //
     // Avoid threats and treat them as obstacles
@@ -161,7 +163,7 @@ void Thing::ai_get_next_hop (void)
             auto X = x - minx;
             auto Y = y - miny;
 
-            if (ai_ai_obstacle_for_me(p)) {
+            if (ai_obstacle_for_me(p)) {
                 set(dmap_scent->val, X, Y, DMAP_IS_WALL);
             } else {
                 set(dmap_scent->val, X, Y, DMAP_IS_PASSABLE);
@@ -465,7 +467,7 @@ void Thing::ai_get_next_hop (void)
                                               &target_attacked,
                                               &target_overlaps);
             if (target_attacked) {
-                is_move_done = true;
+                is_tick_done = true;
                 log("cannot move to %f,%f, must attack", nh.x, nh.y);
                 return;
             } else {
@@ -473,13 +475,13 @@ void Thing::ai_get_next_hop (void)
                 continue;
             }
         } else {
-            is_move_done = true;
+            is_tick_done = true;
             log("move to %f,%f", nh.x, nh.y);
             move(nh);
             return;
         }
     }
 
-    is_move_done = true;
+    is_tick_done = true;
     stop();
 }

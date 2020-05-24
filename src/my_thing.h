@@ -173,12 +173,12 @@ public:
     uint32_t is_fadeup:1          {};
     uint32_t is_hidden:1          {};
     uint32_t is_hungry:1          {};
-    uint32_t is_move_done:1       {}; // has moved/hit and finished its move
+    uint32_t is_tick_done:1       {}; // has moved/hit and finished its move
     uint32_t is_moving:1          {};
     uint32_t is_open:1            {};
     uint32_t is_sleeping:1        {};
     uint32_t is_starving:1        {};
-    uint32_t is_in_water:1       {};
+    uint32_t is_in_water:1        {};
     uint32_t is_in_lava:1         {};
     uint32_t is_waiting_to_move:1 {};
     /////////////////////////////////////////////////////////////////////////
@@ -602,7 +602,7 @@ public:
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
-    bool ai_ai_obstacle_for_me(point p);
+    bool ai_obstacle_for_me(point p);
     bool attack(fpoint future_pos);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(fpoint, bool *, bool *, float radius);
@@ -849,6 +849,7 @@ public:
     void kill(const char *reason);
     void kill(std::string &reason);
     void lava_tick();
+    void water_tick();
     void lifespan_tick();
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log(std::string prefix);

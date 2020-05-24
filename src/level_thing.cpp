@@ -22,7 +22,10 @@ void Level::put_thing (int x, int y, uint32_t id)
         t->err("oob at (%d,%d) for put of %08X", x, y, id);
     }
 
-    int free_slot = -1;
+    int free_slot;
+    int retry = 0;
+do_retry:
+    free_slot = -1;
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (*idp == id) {
@@ -49,6 +52,27 @@ void Level::put_thing (int x, int y, uint32_t id)
 #endif
         *idp = id;
         return;
+    }
+
+    //
+    // Try to clean up some slots
+    //
+    if (retry < MAP_SLOTS) {
+        t->log("out of thing slots at (%d,%d) for put of %08X, try to cleanup", 
+               x, y, id);
+        for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+            auto idp = &getref(all_thing_ids_at, x, y, slot);
+            if (*idp) {
+                auto t = thing_find(*idp);
+                t->log("- slot %u", slot);
+                if (t->is_msg()) {
+                    t->dead("out of slots");
+                    t->detach();
+                    retry++;
+                    goto do_retry;
+                }
+            }
+        }
     }
 
     t->log("out of thing slots at (%d,%d) for put of %08X, see below:",

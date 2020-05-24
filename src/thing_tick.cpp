@@ -13,7 +13,8 @@
 void Thing::achieve_goals_in_life (void)
 {_
     if (is_loggable()) {
-        log("achieve goals");
+        log("achieve goals at tick %d, game tick %u",
+            get_tick(), game->tick_current);
     }
 
     lifespan_tick();
@@ -36,6 +37,11 @@ void Thing::achieve_goals_in_life (void)
         return;
     }
 
+    water_tick();
+    if (is_dead) {
+        return;
+    }
+
     collision_check_do();
     if (is_dead) {
         return;
@@ -54,7 +60,7 @@ void Thing::achieve_goals_in_life (void)
     if (get_dmap_scent()) {
         ai_get_next_hop();
     } else {
-        is_move_done = true;
+        is_tick_done = true;
     }
 }
 
@@ -99,16 +105,10 @@ void Thing::tick (void)
         //
         auto tick = get_tick();
         if (tick < game->tick_current) {
-            is_move_done = false;
+            is_tick_done = false;
             achieve_goals_in_life();
-            if (is_move_done) {
+            if (is_tick_done) {
                 incr_tick();
-                auto tick = get_tick();
-                if (tick < game->tick_current) {
-                    is_waiting_to_move = true;
-                } else {
-                    is_waiting_to_move = false;
-                }
             }
         }
     }

@@ -53,7 +53,7 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "is_facing_left      " << is_facing_left       << std::endl;
     out << pfx << "is_hidden           " << is_hidden            << std::endl;
     out << pfx << "is_hungry           " << is_hungry            << std::endl;
-    out << pfx << "is_move_done        " << is_move_done         << std::endl;
+    out << pfx << "is_tick_done        " << is_tick_done         << std::endl;
     out << pfx << "is_moving           " << is_moving            << std::endl;
     out << pfx << "is_open             " << is_open              << std::endl;
     out << pfx << "is_sleeping         " << is_sleeping          << std::endl;
