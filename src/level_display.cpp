@@ -171,7 +171,7 @@ void Level::display_map (void)
 
     pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
-    int debug = 1;
+    int debug = 0;
     if (debug) {
         game->config.gfx_lights = 0;
         game->config.gfx_show_hidden = 1;
