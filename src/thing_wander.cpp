@@ -77,36 +77,55 @@ std::vector<point> Thing::ai_create_path (point start, point end)
     set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
     dmap_process_allow_diagonals(&d, dmap_start, dmap_end);
-    // dmap_print(&d, start, dmap_start, dmap_end);
+#if 0
+    dmap_print(&d, start, dmap_start, dmap_end);
+#endif
     auto p = dmap_solve_allow_diagonal(&d, start);
     return p;
 }
 
-bool Thing::ai_choose_wander (point& wander_to)
+bool Thing::ai_choose_wander (point& nh)
 {_
-    int tries = (MAP_WIDTH * MAP_HEIGHT) / 2;
-
     log("choose wander location");
+    auto target = monstp->wander_target;
 
-    if (monstp->wander_path != point(0, 0)) {
-        auto l = ai_create_path(point(mid_at.x, mid_at.y),
-                                monstp->wander_path);
+    //
+    // Reached the target? Choose a new one.
+    //
+    if ((mid_at.x == target.x) && (mid_at.y == target.y)) {
+        target = point(0, 0);
+    }
+
+    //
+    // Try to use the same location.
+    //
+    if (target != point(0, 0)) {
+        auto l = ai_create_path(point(mid_at.x, mid_at.y), target);
         if (l.size()) {
-            wander_to = monstp->wander_path = l[0];
+            nh = l[0];
+            log("continue wander to %d,%d nh %d,%d", 
+                target.x, target.y, nh.x, nh.y);
             return (true);
         }
     }
 
+    //
+    // Choose a new wander location
+    //
+    monstp->wander_target = point(0, 0);
+    int tries = (MAP_WIDTH * MAP_HEIGHT) / 2;
     while (tries--) {
         auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
         auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
-        point p(x, y);
-        auto l = ai_create_path(point(mid_at.x, mid_at.y), point(x, y));
+        target = point(x, y);
+        auto l = ai_create_path(point(mid_at.x, mid_at.y), target);
         if (!l.size()) {
             continue;
         }
 
-        wander_to = monstp->wander_path = l[0];
+        monstp->wander_target = point(x, y);
+        nh = l[0];
+        log("wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
         return (true);
     }
 

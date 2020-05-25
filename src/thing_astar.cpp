@@ -11,7 +11,6 @@
 #include "my_thing.h"
 #include <vector>
 
-#define DEBUG_ASTAR_PATH
 #ifdef DEBUG_ASTAR_PATH
 std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> astar_debug {};
 #endif

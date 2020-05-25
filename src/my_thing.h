@@ -98,7 +98,7 @@ typedef struct Monst_ {
     std::list<uint32_t> carrying;
     std::vector<uint32_t> enemies;           // List of things that wronged us
     std::vector<point> move_path;
-    point       wander_path;
+    point        wander_target;
     std::string  msg;                        // Text that floats on screen
     timestamp_t  timestamp_ai_next {};
     timestamp_t  timestamp_born {};
@@ -594,7 +594,8 @@ public:
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
-    bool ai_obstacle_for_me(point p);
+    bool ai_obstacle_for_me(const point&);
+    bool ai_assess_next_hop(const fpoint&);
     bool attack(fpoint future_pos);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(fpoint, bool *, bool *, float radius);
