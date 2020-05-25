@@ -547,8 +547,8 @@ void Game::save_select (void)
     game->hard_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = {m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2};
-    point br = {m + WID_POPUP_WIDTH_WIDE / 2, ACTIONBAR_TL_Y - 2};
+    point tl = make_point(m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + WID_POPUP_WIDTH_WIDE / 2, ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     wid_save = new WidPopup(tl, br, tile_find_mand("save"), "ui_popup_wide");
@@ -565,8 +565,8 @@ void Game::save_select (void)
         auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
         auto p = wid_save->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "save slot");
-        point tl = {0, y_at};
-        point br = {width - 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 2, y_at + 2);
 
         std::string s = std::to_string(slot) + " ";
         if (!load(tmp_file, tmp)) {

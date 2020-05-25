@@ -8,7 +8,7 @@
 
 //#include <unordered_map>
 //#include <memory>
-//#include <set>
+#include <set>
 
 // Not used
 // typedef std::unordered_map< uint32_t, Thingp > Things;
@@ -97,7 +97,8 @@ typedef struct Monst_ {
     int          stats_health_max = {};
     std::list<uint32_t> carrying;
     std::vector<uint32_t> enemies;           // List of things that wronged us
-    std::vector<point>  move_path;
+    std::vector<point> move_path;
+    point       wander_path;
     std::string  msg;                        // Text that floats on screen
     timestamp_t  timestamp_ai_next {};
     timestamp_t  timestamp_born {};
@@ -139,11 +140,11 @@ public:
     Thing_ (void);
     ~Thing_ (void);
     Monst       *monstp              {};
-    spoint      last_attached;
+    point      last_attached;
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
-    spoint      last_blit_tl;        // Last blit coords
-    spoint      last_blit_br;
+    point      last_blit_tl;        // Last blit coords
+    point      last_blit_br;
     uint32_t    id;                         // Unique per thing.
     int16_t     tp_id                {-1};  // Common settings
     uint16_t    tile_curr            {};
@@ -608,9 +609,9 @@ public:
     bool collision_obstacle(Thingp);
     bool collision_obstacle(fpoint);
     bool cursor_path_pop_next_and_move(void);
-    bool get_coords(spoint &blit_tl, spoint &blit_br, spoint &pre_effect_blit_tl, spoint &pre_effect_blit_br, Tilep &tile, bool reflection);
-    bool get_map_offset_coords(spoint &blit_tl, spoint &blit_br, Tilep &tile, bool reflection);
-    bool get_pre_effect_map_offset_coords(spoint &blit_tl, spoint &blit_br, Tilep &tile, bool reflection);
+    bool get_coords(point &blit_tl, point &blit_br, point &pre_effect_blit_tl, point &pre_effect_blit_br, Tilep &tile, bool reflection);
+    bool get_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
+    bool get_pre_effect_map_offset_coords(point &blit_tl, point &blit_br, Tilep &tile, bool reflection);
     bool is_enemy(Thingp attacker) const;
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle);
@@ -646,6 +647,7 @@ public:
     fpoint get_interpolated_mid_at(void) const;
     fpoint set_interpolated_mid_at(fpoint);
     int ai_delay_after_moving_ms(void);
+    bool ai_choose_wander(point& wander_to);
     std::string text_The(void) const;
     std::string text_a_or_an(void) const;
     std::string text_the(void) const;
@@ -653,6 +655,7 @@ public:
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
     int ai_hit_if_possible(Thingp hitter);
     int ai_hit_if_possible(Thingp hitter, int damage);
+    std::vector<point> ai_create_path(point start, point end);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
@@ -789,14 +792,14 @@ public:
     void blit();
     void blit_end_reflection_submerged(uint8_t submerged) const;
     void blit_end_submerged(uint8_t submerged) const;
-    void blit_internal(spoint &blit_tl, spoint &blit_br, const Tilep tile, color c, const bool reflection);
-    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const spoint &tl, const spoint &br);
-    void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const spoint &tl, const spoint &br);
-    void blit_shadow(const Tpp &tp, const Tilep &tile, const spoint &tl, const spoint &br);
-    void blit_text(std::string const&, spoint &tl, spoint &br);
+    void blit_internal(point &blit_tl, point &blit_br, const Tilep tile, color c, const bool reflection);
+    void blit_non_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
+    void blit_player_owned_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
+    void blit_shadow(const Tpp &tp, const Tilep &tile, const point &tl, const point &br);
+    void blit_text(std::string const&, point &tl, point &br);
     void blit_upside_down();
-    void blit_wall_cladding(spoint &tl, spoint &br, const ThingTiles *tiles);
-    void blit_wall_shadow(spoint &tl, spoint &br, const ThingTiles *tiles);
+    void blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles);
+    void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
     void carry(Thingp w);
     void collision_check_do();

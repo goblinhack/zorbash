@@ -32,31 +32,65 @@ void Level::display_map_things (int fbo,
 
     blit_fbo_bind(fbo);
     blit_init();
-    for (auto z = 0; z < MAP_DEPTH; z++) {
-        for (auto y = miny; y < maxy; y++) {
-            for (auto x = minx; x < maxx; x++) {
-                if (g_render_black_and_white) {
+    if (game->config.gfx_show_hidden) {
+        for (auto z = 0; z < MAP_DEPTH; z++) {
+            for (auto y = miny; y < maxy; y++) {
+                for (auto x = minx; x < maxx; x++) {
+                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                        if (g_render_black_and_white) {
+                            if (t->is_monst() ||
+                                t->owner_get() ||
+                                t->get_light_count()) {
+                                continue;
+                            }
+                        }
+                        if (z <= MAP_DEPTH_FLOOR2) {
+                            t->blit();
+                        }
+
+                        auto tpp = t->tp();
+                        if (unlikely(tpp->gfx_animated())) {
+                            t->animate();
+                        }
+                    } FOR_ALL_THINGS_END()
+                }
+            }
+        }
+    } else if (g_render_black_and_white) {
+        for (auto z = 0; z < MAP_DEPTH; z++) {
+            for (auto y = miny; y < maxy; y++) {
+                for (auto x = minx; x < maxx; x++) {
                     if (!is_visited(x, y)) {
                         continue;
                     }
-                }
-                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
-                    if (g_render_black_and_white) {
+                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
                         if (t->is_monst() ||
                             t->owner_get() ||
                             t->get_light_count()) {
                             continue;
                         }
-                    }
-                    if (z == MAP_DEPTH_FLOOR) {
-                        t->blit();
-                    }
+                        if (z <= MAP_DEPTH_FLOOR2) {
+                            t->blit();
+                        }
+                    } FOR_ALL_THINGS_END()
+                }
+            }
+        }
+    } else {
+        for (auto z = 0; z < MAP_DEPTH; z++) {
+            for (auto y = miny; y < maxy; y++) {
+                for (auto x = minx; x < maxx; x++) {
+                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                        if (z <= MAP_DEPTH_FLOOR2) {
+                            t->blit();
+                        }
 
-                    auto tpp = t->tp();
-                    if (unlikely(tpp->gfx_animated())) {
-                        t->animate();
-                    }
-                } FOR_ALL_THINGS_END()
+                        auto tpp = t->tp();
+                        if (unlikely(tpp->gfx_animated())) {
+                            t->animate();
+                        }
+                    } FOR_ALL_THINGS_END()
+                }
             }
         }
     }
@@ -137,7 +171,7 @@ void Level::display_map (void)
 
     pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
-    int debug = 0;
+    int debug = 1;
     if (debug) {
         game->config.gfx_lights = 0;
         game->config.gfx_show_hidden = 1;

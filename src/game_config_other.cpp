@@ -142,8 +142,8 @@ void Game::config_other_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2};
-    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2};
+    point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     game_config_other_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
@@ -158,8 +158,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "configuration");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Configuration");
@@ -170,8 +170,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
-        point tl = {1, y_at};
-        point br = {6, y_at + 2};
+        point tl = make_point(1, y_at);
+        point br = make_point(6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_other_back);
         wid_set_pos(w, tl, br);
@@ -181,8 +181,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
-        point tl = {width - 16, y_at};
-        point br = {width - 11, y_at + 2};
+        point tl = make_point(width - 16, y_at);
+        point br = make_point(width - 11, y_at + 2);
         wid_set_style(w, WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_other_save);
         wid_set_pos(w, tl, br);
@@ -192,8 +192,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
-        point tl = {width - 9, y_at};
-        point br = {width - 2, y_at + 2};
+        point tl = make_point(width - 9, y_at);
+        point br = make_point(width - 2, y_at + 2);
         wid_set_style(w, WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_other_cancel);
         wid_set_pos(w, tl, br);
@@ -205,8 +205,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Debug mode");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -216,8 +216,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Debug mode value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_debug_mode_toggle);
@@ -234,8 +234,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "FPS counter");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -245,8 +245,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "FPS counter value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_other_fps_counter_toggle);
@@ -263,8 +263,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "SDL delay ms per frame");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -274,8 +274,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "SDL delay value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,  std::to_string(game->config.sdl_delay));
@@ -284,8 +284,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "SDL delay value +");
 
-        point tl = {width / 2 + 7 , y_at};
-        point br = {width / 2 + 9, y_at + 2};
+        point tl = make_point(width / 2 + 7 , y_at);
+        point br = make_point(width / 2 + 9, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_other_sdl_delay_incr);
@@ -295,8 +295,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "SDL delay value -");
 
-        point tl = {width / 2 + 10 , y_at};
-        point br = {width / 2 + 12, y_at + 2};
+        point tl = make_point(width / 2 + 10 , y_at);
+        point br = make_point(width / 2 + 12, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_other_sdl_delay_decr);

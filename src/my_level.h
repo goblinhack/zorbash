@@ -333,12 +333,6 @@ public:
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 
-    inline bool is_oob (const spoint p)
-    {_
-        return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
-                (p.y < 0) || (p.y >= MAP_HEIGHT));
-    }
-
     inline uint8_t is_fade_in (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {

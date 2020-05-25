@@ -70,8 +70,8 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
     }
 
     {
-        point tl = {0, + tile_size + 2};
-        point br = {inner_w, inner_h + tile_size};
+        point tl = make_point(0, + tile_size + 2);
+        point br = make_point(inner_w, inner_h + tile_size);
         wid_text_area = new WidTextBox(tl, br, wid_popup_container);
     }
 

@@ -61,8 +61,8 @@ void game_notice (std::string s)
 
     auto m = ASCII_WIDTH / 2;
     auto n = ASCII_HEIGHT / 2;
-    point tl = {m - WID_POPUP_WIDTH_NORMAL / 2, n - 5};
-    point br = {m + WID_POPUP_WIDTH_NORMAL / 2, n + 5};
+    point tl = make_point(m - WID_POPUP_WIDTH_NORMAL / 2, n - 5);
+    point br = make_point(m + WID_POPUP_WIDTH_NORMAL / 2, n + 5);
     auto width = br.x - tl.x;
 
     game_notice_window = new WidPopup(tl, br, nullptr, "ui_popup_notice");
@@ -77,8 +77,8 @@ void game_notice (std::string s)
         auto p = game_notice_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "notice");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 1};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 1);
         wid_set_shape_none(w);
         wid_set_on_mouse_up(w, game_notice_ok);
         wid_set_pos(w, tl, br);
@@ -90,8 +90,8 @@ void game_notice (std::string s)
         auto p = game_notice_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "ok");
 
-        point tl = {width / 2 - 4, y_at};
-        point br = {width / 2 + 4, y_at + 2};
+        point tl = make_point(width / 2 - 4, y_at);
+        point br = make_point(width / 2 + 4, y_at + 2);
         wid_set_style(w, WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_notice_ok);
         wid_set_pos(w, tl, br);

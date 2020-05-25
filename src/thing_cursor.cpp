@@ -16,8 +16,8 @@ void Thing::cursor_hover_over_check (void)
 {
     if (is_cursor_can_hover_over()) {
         if (is_blitted) {
-            spoint tblit_tl = last_blit_tl;
-            spoint tblit_br = last_blit_br;
+            point tblit_tl = last_blit_tl;
+            point tblit_br = last_blit_br;
 
             auto mx = mouse_x;
             auto my = mouse_y;

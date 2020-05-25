@@ -12,6 +12,7 @@
 #include "my_thing.h"
 
 #define DEBUG_AI_VERBOSE
+#define DEBUG_ASTAR_PATH
 
 bool Thing::possible_to_attack (const Thingp itp)
 {_
@@ -105,6 +106,9 @@ bool Thing::ai_obstacle_for_me (point p)
         if (t->is_door()) {
             return (true);
         }
+        if (t->is_movement_blocking()) {
+            return (true);
+        }
         if (t->is_hazard()) {
             return (true);
         }
@@ -156,15 +160,16 @@ void Thing::ai_get_next_hop (void)
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
 
-    const float minx = std::max(0,         (int)(mid_at.x - dx));
-    const float maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
+    const int minx = std::max(0,         (int)(mid_at.x - dx));
+    const int maxx = std::min(MAP_WIDTH, (int)(mid_at.x + dx - 1));
 
-    const float miny = std::max(0,          (int)(mid_at.y - dy));
-    const float maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
+    const int miny = std::max(0,          (int)(mid_at.y - dy));
+    const int maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
 
     point start((int)mid_at.x, (int)mid_at.y);
 
     auto dmap_scent = get_dmap_scent();
+    auto age_map = get_age_map();
 
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
@@ -288,7 +293,14 @@ void Thing::ai_get_next_hop (void)
     } }
 
     if (goals.empty()) {
-        CON("TODO WANDER");
+        point to;
+        if (ai_choose_wander(to)) {
+            auto X = to.x - minx;
+            auto Y = to.y - miny;
+con("wander to %d %d",to.x,to.y);
+            goals.insert(Goal(1, point(X, Y)));
+            set(dmap_scent->val, X, Y, DMAP_IS_GOAL);
+        }
     }
 
 #ifdef DEBUG_AI_VERBOSE
@@ -358,9 +370,9 @@ void Thing::ai_get_next_hop (void)
     }
 
     //
-    // Record we've been here. TODO not used yet.
+    // Record we've been here.
     //
-    // set(age_map->val, start.x, start.y, time_get_time_ms());
+    set(age_map->val, start.x, start.y, time_get_time_ms());
 
     //
     // Find the best next-hop to the best goal.
@@ -408,9 +420,6 @@ void Thing::ai_get_next_hop (void)
         auto hops_len = hops.size();
         point best;
 
-#ifdef DEBUG_ASTAR_PATH
-        dump(dmap, at, start, end);
-#endif
         if (hops_len >= 2) {
             auto hop0 = get(hops, hops_len - 1);
             auto hop1 = get(hops, hops_len - 2);
@@ -426,8 +435,7 @@ void Thing::ai_get_next_hop (void)
             continue;
         }
 
-        auto nh = fpoint(best.x + minx,
-                         best.y + miny);
+        auto nh = fpoint(best.x + minx, best.y + miny);
 
         log("assess (%d,%d) next (%d,%d) cost %d (lower pref)",
             (int)minx + goal.at.x, (int)miny + goal.at.y,

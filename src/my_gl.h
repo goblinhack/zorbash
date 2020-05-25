@@ -347,10 +347,10 @@ gl_push (float **P,
          float tex_top,
          float tex_right,
          float tex_bottom,
-         spoint tl,
-         spoint tr,
-         spoint bl,
-         spoint br,
+         point tl,
+         point tr,
+         point bl,
+         point br,
          uint8_t r1, uint8_t g1, uint8_t b1, uint8_t a1,
          uint8_t r2, uint8_t g2, uint8_t b2, uint8_t a2,
          uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
@@ -422,10 +422,10 @@ gl_push (float **P,
          uint8_t r3, uint8_t g3, uint8_t b3, uint8_t a3,
          uint8_t r4, uint8_t g4, uint8_t b4, uint8_t a4)
 {
-    spoint tl(left, top);
-    spoint tr(right, top);
-    spoint bl(left, bottom);
-    spoint br(right, bottom);
+    point tl(left, top);
+    point tr(right, top);
+    point bl(left, bottom);
+    point br(right, bottom);
 
     gl_push(P, p_end, first,
             tex_left,
@@ -493,10 +493,10 @@ void blit (int tex,
            float texMinY,
            float texMaxX,
            float texMaxY,
-           spoint tl,
-           spoint tr,
-           spoint bl,
-           spoint br)
+           point tl,
+           point tr,
+           point bl,
+           point br)
 {
     uint8_t first;
 
@@ -601,7 +601,7 @@ void blit (int tex, GLushort left, GLushort top, GLushort right, GLushort bottom
 }
 
 static inline
-void blit (int tex, spoint tl, spoint tr, spoint bl, spoint br)
+void blit (int tex, point tl, point tr, point bl, point br)
 {
     blit(tex, 0, 0, 1, 1, tl, tr, bl, br);
 }

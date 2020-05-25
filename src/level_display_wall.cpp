@@ -12,7 +12,7 @@
 #include "my_tex.h"
 #include "my_gl.h"
 
-void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
+void Thing::blit_wall_cladding (point &tl, point &br, const ThingTiles *tiles)
 {_
     float dw = game->config.one_pixel_width * 1;
     float dh = game->config.one_pixel_height * 1;
@@ -28,32 +28,32 @@ void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->top1_tile && !level->is_wall(x, y - 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit(tiles->top1_tile, tl2, br2);
     }
 
     if (tiles->bot1_tile && !level->is_wall(x, y + 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.y += dh;
         br2.y += dh;
         tile_blit(tiles->bot1_tile, tl2, br2);
     }
 
     if (tiles->left1_tile && !level->is_wall(x - 1, y)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tile_blit(tiles->left1_tile, tl2, br2);
     }
 
     if (tiles->right1_tile && !level->is_wall(x + 1, y)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x += dw;
         br2.x += dw;
         tile_blit(tiles->right1_tile, tl2, br2);
@@ -68,8 +68,8 @@ void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
         !level->is_wall(x - 1, y - 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y - 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tl2.y -= dh;
@@ -86,8 +86,8 @@ void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
         !level->is_wall(x + 1, y - 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y - 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x += dw;
         br2.x += dw;
         tl2.y -= dh;
@@ -104,8 +104,8 @@ void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
         !level->is_wall(x - 1, y + 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y + 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tl2.y += dh;
@@ -122,8 +122,8 @@ void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
         !level->is_wall(x + 1, y + 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y + 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x += dw;
         br2.x += dw;
         tl2.y += dh;
@@ -132,7 +132,7 @@ void Thing::blit_wall_cladding (spoint &tl, spoint &br, const ThingTiles *tiles)
     }
 }
 
-void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
+void Thing::blit_wall_shadow (point &tl, point &br, const ThingTiles *tiles)
 {_
     float dw = game->config.one_pixel_width * 1;
     float dh = game->config.one_pixel_height * 1;
@@ -150,8 +150,8 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->top2_tile && !level->is_wall(x, y - 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit(tiles->top2_tile, tl2, br2);
@@ -159,8 +159,8 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
 
     if (tiles->bot2_tile && !level->is_wall(x, y + 1) &&
                             level->is_wall(x - 1, y)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.y += th;
         br2.y += th;
         tile_blit(tiles->bot2_tile, tl2, br2);
@@ -174,8 +174,8 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
     }
 
     if (tiles->left2_tile && !level->is_wall(x - 1, y)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tile_blit(tiles->left2_tile, tl2, br2);
@@ -183,8 +183,8 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
 
     if (tiles->right2_tile && !level->is_wall(x + 1, y) &&
                                level->is_wall(x, y - 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x += tw;
         br2.x += tw;
         tile_blit(tiles->right2_tile, tl2, br2);
@@ -199,8 +199,8 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
         !level->is_wall(x - 1, y - 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y - 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x -= dw;
         br2.x -= dw;
         tl2.y -= dh;
@@ -217,8 +217,8 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
         !level->is_wall(x + 1, y - 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y - 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.x += tw;
         br2.x += tw;
         tile_blit(tiles->tr2_tile, tl2, br2);
@@ -233,8 +233,8 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
         !level->is_wall(x - 1, y + 1) &&
         !level->is_wall(x - 1, y) &&
         !level->is_wall(x, y + 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.y += th;
         br2.y += th;
         tile_blit(tiles->bl2_tile, tl2, br2);
@@ -249,8 +249,8 @@ void Thing::blit_wall_shadow (spoint &tl, spoint &br, const ThingTiles *tiles)
         !level->is_wall(x + 1, y + 1) &&
         !level->is_wall(x + 1, y) &&
         !level->is_wall(x, y + 1)) {
-        spoint tl2 = tl;
-        spoint br2 = br;
+        point tl2 = tl;
+        point br2 = br;
         tl2.y += th;
         br2.y += th;
         tl2.x += tw;

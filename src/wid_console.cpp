@@ -175,8 +175,8 @@ uint8_t wid_console_receive_input (Widp w, const SDL_KEYSYM *key)
 //
 static void wid_console_wid_create (void)
 {_
-    point tl = {0, 0};
-    point br = {ASCII_WIDTH - 1, ASCII_HEIGHT - 1};
+    point tl = make_point(0, 0);
+    point br = make_point(ASCII_WIDTH - 1, ASCII_HEIGHT - 1);
     int w = br.x - tl.x;
     int h = br.y - tl.y;
 
@@ -188,8 +188,8 @@ static void wid_console_wid_create (void)
     }
 
     {
-        point tl = {0, 0};
-        point br = {w, h};
+        point tl = make_point(0, 0);
+        point br = make_point(w, h);
 
         wid_console_container = wid_new_container(wid_console_window,
                                                       "wid console inner area");
@@ -207,15 +207,8 @@ static void wid_console_wid_create (void)
         for (row = 0; row < CONSOLE_HEIGHT; row++) {
             row_bottom --;
 
-            point tl = {
-                0,
-                row_bottom,
-            };
-
-            point br = {
-                CONSOLE_WIDTH,
-                row_bottom,
-            };
+            point tl = make_point(0, row_bottom);
+            point br = make_point(CONSOLE_WIDTH, row_bottom);
 
             child = wid_new_container(wid_console_container, "");
 

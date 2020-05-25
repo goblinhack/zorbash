@@ -36,8 +36,8 @@ uint8_t wid_test_init (void)
 static void wid_test_wid_create (void)
 {_
     {
-        point tl = {0, 2};
-        point br = {WID_POPUP_WIDTH_NORMAL, ACTIONBAR_TL_Y - 2};
+        point tl = make_point(0, 2);
+        point br = make_point(WID_POPUP_WIDTH_NORMAL, ACTIONBAR_TL_Y - 2);
         auto w = new WidPopup(tl, br, tile_find_mand("player1.pose"));
         w->log("%%fg=yellow$This is a really long descriptive string that is a bit boring");
     }

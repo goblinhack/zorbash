@@ -87,8 +87,8 @@ void game_error (std::string error)
     game->hard_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2};
-    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2};
+    point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     game_error_window =
@@ -120,8 +120,8 @@ void game_error (std::string error)
         auto p = game_error_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "dismiss");
 
-        point tl = {1, 4};
-        point br = {width - 3, 6};
+        point tl = make_point(1, 4);
+        point br = make_point(width - 3, 6);
 
         wid_set_style(w, WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_error_mouse_up);

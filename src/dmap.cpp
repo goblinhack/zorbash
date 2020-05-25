@@ -12,10 +12,9 @@ void dmap_print (const Dmap *d, point at, point start, point end)
     uint8_t x;
     uint8_t y;
 
-#if 1
-    LOG("DMAP: start %d,%d end %d %d at %d,%d\n",
+    LOG("DMAP: start %d,%d end %d %d at %d,%d",
         start.x, start.y, end.x, end.y, at.x, at.y);
-#endif
+
     for (y = start.y; y < end.y; y++) {
         std::string debug;
         for (x = start.x; x < end.x; x++) {

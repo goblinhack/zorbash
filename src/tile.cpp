@@ -189,30 +189,30 @@ void tile_load_arr (std::string file, std::string name,
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
-                point AT = {
+                point AT = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
-                };
+                );
 
-                point MAX = {
+                point MAX = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
-                };
+                );
 
-                point MIN = {
+                point MIN = make_point(
                     (pixel_size.w * x) + pixel_size.w - 1,
                     (pixel_size.h * y) + pixel_size.h - 1
-                };
+                );
 
                 int x1, y1;
 
                 for (y1=pixel_size.h - 1; y1>=0; y1--) {
                     for (x1=0; x1<pixel_size.w; x1++) {
 
-                        point at = {
+                        point at = make_point(
                             (pixel_size.w * x) + x1,
                             (pixel_size.h * y) + y1
-                        };
+                        );
 
                         color p = getPixel(s, at.x, at.y);
 
@@ -350,30 +350,30 @@ void tile_load_arr (std::string file, std::string name,
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
-                point AT = {
+                point AT = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
-                };
+                );
 
-                point MAX = {
+                point MAX = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
-                };
+                );
 
-                point MIN = {
+                point MIN = make_point(
                     (pixel_size.w * x) + pixel_size.w - 1,
                     (pixel_size.h * y) + pixel_size.h - 1
-                };
+                );
 
                 int x1, y1;
 
                 for (y1=pixel_size.h - 1; y1>=0; y1--) {
                     for (x1=0; x1<pixel_size.w; x1++) {
 
-                        point at = {
+                        point at = make_point(
                             (pixel_size.w * x) + x1,
                             (pixel_size.h * y) + y1
-                        };
+                        );
 
                         color p = getPixel(s, at.x, at.y);
 
@@ -520,30 +520,30 @@ void tile_load_arr_color_and_black_and_white (std::string file,
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
-                point AT = {
+                point AT = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
-                };
+                );
 
-                point MAX = {
+                point MAX = make_point(
                     pixel_size.w * x,
                     pixel_size.h * y
-                };
+                );
 
-                point MIN = {
+                point MIN = make_point(
                     (pixel_size.w * x) + pixel_size.w - 1,
                     (pixel_size.h * y) + pixel_size.h - 1
-                };
+                );
 
                 int x1, y1;
 
                 for (y1=pixel_size.h - 1; y1>=0; y1--) {
                     for (x1=0; x1<pixel_size.w; x1++) {
 
-                        point at = {
+                        point at = make_point(
                             (pixel_size.w * x) + x1,
                             (pixel_size.h * y) + y1
-                        };
+                        );
 
                         color p = getPixel(s, at.x, at.y);
 
@@ -748,7 +748,7 @@ Tilep string2tile (std::wstring &s, int *len)
 //
 // Blits a whole tile.
 //
-void tile_blit_at (const Tilep &tile, spoint tl, spoint br)
+void tile_blit_at (const Tilep &tile, point tl, point br)
 {
     blit(tile->gl_binding(),
         tile->x1, tile->y2, tile->x2, tile->y1, tl.x, tl.y, br.x, br.y);
@@ -759,8 +759,8 @@ void tile_blit_at (const Tilep &tile, spoint tl, spoint br)
 //
 void tile_blit_colored_fat (Tpp tp,
                             Tilep tile,
-                            spoint tl,
-                            spoint br,
+                            point tl,
+                            point br,
                             color color_tl,
                             color color_tr,
                             color color_bl,
@@ -803,8 +803,8 @@ void tile_blit_colored_fat (Tpp tp,
 }
 
 void tile_blit_colored (Tilep tile,
-                        spoint tl,
-                        spoint br,
+                        point tl,
+                        point br,
                         color color_tl,
                         color color_tr,
                         color color_bl,
