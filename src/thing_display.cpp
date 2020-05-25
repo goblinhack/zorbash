@@ -12,13 +12,13 @@
 #include "my_gl.h"
 
 void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                                          const spoint &blit_tl,
-                                          const spoint &blit_br)
+                                          const point &blit_tl,
+                                          const point &blit_br)
 {_
-    spoint shadow_bl(blit_tl.x, blit_br.y);
-    spoint shadow_br(blit_br.x, blit_br.y);
-    spoint shadow_tl = shadow_bl;
-    spoint shadow_tr = shadow_br;
+    point shadow_bl(blit_tl.x, blit_br.y);
+    point shadow_br(blit_br.x, blit_br.y);
+    point shadow_tl = shadow_bl;
+    point shadow_tr = shadow_br;
 
     float dx = 1.0;
     float dy = 1.0;
@@ -96,11 +96,11 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 }
 
 void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
-                                      const spoint &blit_tl,
-                                      const spoint &blit_br)
+                                      const point &blit_tl,
+                                      const point &blit_br)
 {_
-    spoint shadow_tl = blit_tl;
-    spoint shadow_br = blit_br;
+    point shadow_tl = blit_tl;
+    point shadow_br = blit_br;
 
     float dx = game->config.one_pixel_width;
     float dy = game->config.one_pixel_width;
@@ -124,7 +124,7 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 }
 
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
-                         const spoint &blit_tl, const spoint &blit_br)
+                         const point &blit_tl, const point &blit_br)
 {_
     if (unlikely(!game->config.gfx_lights)) {
         return;
@@ -205,7 +205,7 @@ static int blit_msg_strlen (std::string const& text)
 }
 
 void Thing::blit_text (std::string const& text,
-                       spoint& blit_tl, spoint& blit_br)
+                       point& blit_tl, point& blit_br)
 {_
     Tilep tile;
     auto text_iter = text.begin();
@@ -269,10 +269,10 @@ void Thing::blit_text (std::string const& text,
     }
 }
 
-bool Thing::get_coords (spoint &blit_tl,
-                        spoint &blit_br,
-                        spoint &pre_effect_blit_tl,
-                        spoint &pre_effect_blit_br,
+bool Thing::get_coords (point &blit_tl,
+                        point &blit_br,
+                        point &pre_effect_blit_tl,
+                        point &pre_effect_blit_br,
                         Tilep &tile,
                         bool reflection)
 {_
@@ -516,11 +516,11 @@ bool Thing::get_coords (spoint &blit_tl,
     return (blit);
 }
 
-bool Thing::get_map_offset_coords (spoint &blit_tl, spoint &blit_br,
+bool Thing::get_map_offset_coords (point &blit_tl, point &blit_br,
                                    Tilep &tile, bool reflection)
 {_
-    spoint pre_effect_blit_tl;
-    spoint pre_effect_blit_br;
+    point pre_effect_blit_tl;
+    point pre_effect_blit_br;
 
     auto blit = get_coords(blit_tl, blit_br,
                            pre_effect_blit_tl,
@@ -542,13 +542,13 @@ bool Thing::get_map_offset_coords (spoint &blit_tl, spoint &blit_br,
     return (blit);
 }
 
-bool Thing::get_pre_effect_map_offset_coords (spoint &blit_tl,
-                                              spoint &blit_br,
+bool Thing::get_pre_effect_map_offset_coords (point &blit_tl,
+                                              point &blit_br,
                                               Tilep &tile,
                                               bool reflection)
 {_
-    spoint pre_effect_blit_tl;
-    spoint pre_effect_blit_br;
+    point pre_effect_blit_tl;
+    point pre_effect_blit_br;
 
     auto blit = get_coords(blit_tl, blit_br,
                            pre_effect_blit_tl,
@@ -616,8 +616,8 @@ void Thing::blit_end_reflection_submerged (uint8_t submerged) const
     blit_init();
 }
 
-void Thing::blit_internal (spoint &blit_tl,
-                           spoint &blit_br,
+void Thing::blit_internal (point &blit_tl,
+                           point &blit_br,
                            const Tilep tile,
                            color c,
                            bool reflection)
@@ -651,7 +651,9 @@ void Thing::blit_internal (spoint &blit_tl,
         }
     }
 
-    { // if (!is_wall() && !is_rock()) {
+    if (game->config.gfx_show_hidden) {
+        c.a = 255;
+    } else {
         uint8_t fade = level->is_fade_in_unsafe(mid_at.x, mid_at.y);
         if (fade) {
             level->incr_fade_in_unsafe(mid_at.x, mid_at.y);
@@ -696,7 +698,7 @@ void Thing::blit_internal (spoint &blit_tl,
 
 void Thing::blit (void)
 {_
-    spoint blit_tl, blit_br;
+    point blit_tl, blit_br;
     Tilep tile = {};
 
     if (!get_map_offset_coords(blit_tl, blit_br, tile, false)) {
@@ -708,7 +710,7 @@ void Thing::blit (void)
 
 void Thing::blit_upside_down (void)
 {_
-    spoint blit_tl, blit_br;
+    point blit_tl, blit_br;
     Tilep tile = {};
     auto tpp = tp();
 

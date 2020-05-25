@@ -235,8 +235,8 @@ void Game::config_gfx_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT - 2};
-    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2};
+    point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT - 2);
+    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     game_config_gfx_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
@@ -251,8 +251,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "configuration");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Configuration");
@@ -263,8 +263,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
-        point tl = {1, y_at};
-        point br = {6, y_at + 2};
+        point tl = make_point(1, y_at);
+        point br = make_point(6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_gfx_back);
         wid_set_pos(w, tl, br);
@@ -274,8 +274,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
-        point tl = {width - 16, y_at};
-        point br = {width - 11, y_at + 2};
+        point tl = make_point(width - 16, y_at);
+        point br = make_point(width - 11, y_at + 2);
         wid_set_style(w, WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_gfx_save);
         wid_set_pos(w, tl, br);
@@ -285,8 +285,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
-        point tl = {width - 9, y_at};
-        point br = {width - 2, y_at + 2};
+        point tl = make_point(width - 9, y_at);
+        point br = make_point(width - 2, y_at + 2);
         wid_set_style(w, WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_gfx_cancel);
         wid_set_pos(w, tl, br);
@@ -298,8 +298,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Vertical sync");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -309,8 +309,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Vertical sync value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_vsync_enable_toggle);
@@ -327,8 +327,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Full screen");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -338,8 +338,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Full screen value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_fullscreen_toggle);
@@ -356,8 +356,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "High DPI");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -367,8 +367,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "High DPI value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_allow_highdpi_toggle);
@@ -385,8 +385,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Inverted graphics");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -396,8 +396,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Inverted graphics value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_inverted_toggle);
@@ -414,8 +414,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Resolution");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -425,8 +425,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Resolution value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 12, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 12, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
 
@@ -438,8 +438,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Resolution value +");
 
-        point tl = {width / 2 + 13 , y_at};
-        point br = {width / 2 + 15, y_at + 2};
+        point tl = make_point(width / 2 + 13 , y_at);
+        point br = make_point(width / 2 + 15, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_resolution_incr);
@@ -449,8 +449,8 @@ void Game::config_gfx_select (void)
         auto p = game_config_gfx_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Resolution value -");
 
-        point tl = {width / 2 + 16 , y_at};
-        point br = {width / 2 + 18, y_at + 2};
+        point tl = make_point(width / 2 + 16 , y_at);
+        point br = make_point(width / 2 + 18, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_resolution_decr);
@@ -462,8 +462,8 @@ void Game::config_gfx_select (void)
 //        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
 //        auto w = wid_new_square_button(p, "Zoom");
 //
-//        point tl = {0, y_at};
-//        point br = {width / 2, y_at + 2};
+//        point tl = make_point(0, y_at);
+//        point br = make_point(width / 2, y_at + 2);
 //        wid_set_shape_none(w);
 //        wid_set_pos(w, tl, br);
 //        wid_set_text_lhs(w, true);
@@ -473,8 +473,8 @@ void Game::config_gfx_select (void)
 //        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
 //        auto w = wid_new_square_button(p, "Zoom value");
 //
-//        point tl = {width / 2 , y_at};
-//        point br = {width / 2 + 6, y_at + 2};
+//        point tl = make_point(width / 2 , y_at);
+//        point br = make_point(width / 2 + 6, y_at + 2);
 //        wid_set_style(w, WID_STYLE_DARK);
 //        wid_set_pos(w, tl, br);
 //        wid_set_text(w, std::to_string(game->config.gfx_zoom));
@@ -483,8 +483,8 @@ void Game::config_gfx_select (void)
 //        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
 //        auto w = wid_new_square_button(p, "Zoom out");
 //
-//        point tl = {width / 2 + 7 , y_at};
-//        point br = {width / 2 + 9, y_at + 2};
+//        point tl = make_point(width / 2 + 7 , y_at);
+//        point br = make_point(width / 2 + 9, y_at + 2);
 //        wid_set_style(w, WID_STYLE_DARK);
 //        wid_set_pos(w, tl, br);
 //        wid_set_on_mouse_up(w, game_config_gfx_zoom_in);
@@ -494,8 +494,8 @@ void Game::config_gfx_select (void)
 //        auto p = game_config_gfx_window->wid_text_area->wid_text_area;
 //        auto w = wid_new_square_button(p, "Zoom in");
 //
-//        point tl = {width / 2 + 10 , y_at};
-//        point br = {width / 2 + 12, y_at + 2};
+//        point tl = make_point(width / 2 + 10 , y_at);
+//        point br = make_point(width / 2 + 12, y_at + 2);
 //        wid_set_style(w, WID_STYLE_DARK);
 //        wid_set_pos(w, tl, br);
 //        wid_set_on_mouse_up(w, game_config_gfx_zoom_out);

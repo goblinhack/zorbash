@@ -90,7 +90,7 @@ void Thing::animate (void)
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_blood()) {
 log("choose tiles");
 }
 #endif
@@ -106,7 +106,7 @@ log("choose tiles");
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_blood()) {
 log("tile %s", tile_name(tile).c_str());
 }
 #endif
@@ -119,14 +119,14 @@ log("tile %s", tile_name(tile).c_str());
                 auto health_max = get_stats_health_max();
                 auto health = get_stats_health();
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_blood()) {
 log("tile %s is not dead tiles", tile_name(tile).c_str());
 }
 #endif
                 if (tpp->internal_has_hp_anim()) {
 #ifdef DEBUG_ANIM
-if (is_monst()) {
-log("tile %s has hp anim tiles", tile_name(tile).c_str());
+if (is_blood()) {
+log("tile %s has hp anim tiles hp %d max %d", tile_name(tile).c_str(), health, health_max);
 }
 #endif
                     if (health < health_max / 4) {
@@ -162,7 +162,7 @@ log("tile %s has hp anim tiles", tile_name(tile).c_str());
 
             if (is_dead) {
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_blood()) {
 log("tile %s is dead", tile_name(tile).c_str());
 }
 #endif
@@ -171,7 +171,7 @@ log("tile %s is dead", tile_name(tile).c_str());
                     continue;
                 }
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_blood()) {
 log("tile %s got dead", tile_name(tile).c_str());
 }
 #endif
@@ -227,7 +227,7 @@ log("tile %s got dead", tile_name(tile).c_str());
                 }
             }
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_blood()) {
 log("tile %s got one", tile_name(tile).c_str());
 }
 #endif
@@ -257,7 +257,7 @@ log("tile %s got one", tile_name(tile).c_str());
     }
 
 #ifdef DEBUG_ANIM
-    if (is_monst()) {
+    if (is_blood()) {
         log("set %s", tile_name(tile).c_str());
     }
 #endif

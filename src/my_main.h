@@ -29,7 +29,7 @@
 #undef  ENABLE_FULL_TIMESTAMPS     // Full timestamps with date in logs
 
 #define DEBUG_AI                   // Monster AI decisions
-#undef DEBUG_ASTAR_PATH            // Astar AI path costs
+#define DEBUG_ASTAR_PATH            // Astar AI path costs
 
 //
 // Settings to override compiler errors

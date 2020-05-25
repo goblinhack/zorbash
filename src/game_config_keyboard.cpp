@@ -384,8 +384,8 @@ void Game::config_keyboard_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2};
-    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2};
+    point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     game_config_keyboard_window =
@@ -401,8 +401,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "The keys of mighty power");
 
-        point tl = {0, y_at};
-        point br = {width - 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "The keys of mighty power");
@@ -413,8 +413,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
-        point tl = {1, y_at};
-        point br = {8, y_at + 2};
+        point tl = make_point(1, y_at);
+        point br = make_point(8, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_keyboard_back);
         wid_set_pos(w, tl, br);
@@ -428,8 +428,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
-        point tl = {width - 16, y_at};
-        point br = {width - 11, y_at + 2};
+        point tl = make_point(width - 16, y_at);
+        point br = make_point(width - 11, y_at + 2);
         wid_set_style(w, WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_keyboard_save);
         wid_set_pos(w, tl, br);
@@ -439,8 +439,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
-        point tl = {width - 9, y_at};
-        point br = {width - 2, y_at + 2};
+        point tl = make_point(width - 9, y_at);
+        point br = make_point(width - 2, y_at + 2);
         wid_set_style(w, WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_keyboard_cancel);
         wid_set_pos(w, tl, br);
@@ -456,8 +456,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "");
 
-        point tl = {0, y_at};
-        point br = {46, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(46, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_keyboard_profile_wasd);
         wid_set_pos(w, tl, br);
@@ -468,8 +468,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "");
 
-        point tl = {0, y_at};
-        point br = {46, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(46, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_keyboard_profile_arrow_keys);
         wid_set_pos(w, tl, br);
@@ -488,8 +488,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Move up");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -499,8 +499,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -515,8 +515,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Move left");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -526,8 +526,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -542,8 +542,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Move down");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -553,8 +553,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -569,8 +569,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Move right");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -580,8 +580,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -601,8 +601,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Map up");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -612,8 +612,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -628,8 +628,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Map left");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -639,8 +639,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -655,8 +655,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Map down");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -666,8 +666,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -682,8 +682,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Map right");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -693,8 +693,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -714,8 +714,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Attack");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -725,8 +725,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -741,8 +741,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Wait");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -752,8 +752,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -773,8 +773,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "save");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -784,8 +784,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -800,8 +800,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "load");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -811,8 +811,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -832,8 +832,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "zoom_in");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -843,8 +843,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -859,8 +859,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "zoom_out");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -870,8 +870,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -891,8 +891,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "pause");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -902,8 +902,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -918,8 +918,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "quit");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -929,8 +929,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
@@ -945,8 +945,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "help");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -956,8 +956,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "value");
 
-        point tl = {width / 2 + 8, y_at};
-        point br = {width / 2 + 22, y_at + 2};
+        point tl = make_point(width / 2 + 8, y_at);
+        point br = make_point(width / 2 + 22, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,

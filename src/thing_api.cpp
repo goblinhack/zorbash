@@ -41,7 +41,17 @@ void Thing::new_age_map (void)
 //con("%s", __FUNCTION__);
     if (!monstp->age_map) {
         monstp->age_map = new AgeMap();
-        newptr(monstp->age_map, "Dmap age");
+        newptr(monstp->age_map, "age map");
+
+        //
+        // Setup random ages
+        //
+        auto age_map = monstp->age_map->val;
+        for (auto y = 0; y < MAP_HEIGHT; y++) { 
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                set(age_map, x, y, (timestamp_t)myrand());
+            }
+        }
     }
 }
 
@@ -76,6 +86,13 @@ void Thing::new_dmap_scent (void)
     if (!monstp->dmap_scent) {
         monstp->dmap_scent = new Dmap();
         newptr(monstp->dmap_scent, "AgeMap");
+
+        auto dmap = monstp->dmap_scent->val;
+        for (auto y = 0; y < MAP_HEIGHT; y++) { 
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                set(dmap, x, y, DMAP_IS_WALL);
+            }
+        }
     }
 }
 

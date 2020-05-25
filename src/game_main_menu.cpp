@@ -131,8 +131,8 @@ void game_main_menu_tick (Widp w)
     std::string t = "title" + std::to_string(frame);
     blit_init();
     tile_blit(tile_find_mand(t.c_str()),
-              spoint(0,0),
-              spoint(game->config.outer_pix_width,
+              point(0,0),
+              point(game->config.outer_pix_width,
                      game->config.outer_pix_height));
     blit_flush();
 
@@ -152,8 +152,8 @@ void Game::main_menu_select (void)
     }
     game_status_fini();
 
-    point tl = {ASCII_WIDTH - WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 16};
-    point br = {ASCII_WIDTH - 7, ASCII_HEIGHT - 1};
+    point tl = make_point(ASCII_WIDTH - WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 16);
+    point br = make_point(ASCII_WIDTH - 7, ASCII_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
     game_main_menu_window = new WidPopup(tl, br, nullptr, "");
@@ -169,8 +169,8 @@ void Game::main_menu_select (void)
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "New Game");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_new_game);
         wid_set_pos(w, tl, br);
@@ -181,8 +181,8 @@ void Game::main_menu_select (void)
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Load Game");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_load_game);
         wid_set_pos(w, tl, br);
@@ -193,8 +193,8 @@ void Game::main_menu_select (void)
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Options");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_config);
         wid_set_pos(w, tl, br);
@@ -205,8 +205,8 @@ void Game::main_menu_select (void)
         auto p = game_main_menu_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Quit Game");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_quit_game);
         wid_set_pos(w, tl, br);

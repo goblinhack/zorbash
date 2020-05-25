@@ -668,20 +668,48 @@ static void level_place_random_blood (Dungeonp d)
                 continue;
             }
 
+            if (d->is_entrance(x, y) ||
+                d->is_entrance(x - 1, y) ||
+                d->is_entrance(x + 1, y) ||
+                d->is_entrance(x, y - 1) ||
+                d->is_entrance(x, y + 1) ||
+                d->is_entrance(x - 1, y - 1) ||
+                d->is_entrance(x + 1, y - 1) ||
+                d->is_entrance(x - 1, y + 1) ||
+                d->is_entrance(x + 1, y + 1)) {
+                continue;
+            }
+
+            if (d->is_exit(x, y) ||
+                d->is_exit(x - 1, y) ||
+                d->is_exit(x + 1, y) ||
+                d->is_exit(x, y - 1) ||
+                d->is_exit(x, y + 1) ||
+                d->is_exit(x - 1, y - 1) ||
+                d->is_exit(x + 1, y - 1) ||
+                d->is_exit(x - 1, y + 1) ||
+                d->is_exit(x + 1, y + 1)) {
+                continue;
+            }
+
+            if (d->is_exit(x, y) ||
+                d->is_exit(x - 1, y) ||
+                d->is_exit(x + 1, y) ||
+                d->is_exit(x, y - 1) ||
+                d->is_exit(x, y + 1) ||
+                d->is_exit(x - 1, y - 1) ||
+                d->is_exit(x + 1, y - 1) ||
+                d->is_exit(x - 1, y + 1) ||
+                d->is_exit(x + 1, y + 1)) {
+                continue;
+            }
+
             if (random_range(0, 1000) > 20) {
                 continue;
             }
 
-            int splatters = random_range(2, 10);
-            for (int splatter = 0; splatter < splatters; splatter++) {
-                auto tp = tp_random_blood();
-                if (!tp) {
-                    return;
-                }
-                (void) thing_new(tp->name(),
-                                 fpoint(x, y),
-                                 fpoint(0.25, 0.25));
-            }
+            auto tp = tp_random_blood();
+            (void) thing_new(tp->name(), fpoint(x, y));
         }
     }
 }

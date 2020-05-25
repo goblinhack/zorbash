@@ -47,8 +47,8 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
     }
 
     {
-        point tl = {1, 1};
-        point br = {w - 1, h - 1};
+        point tl = make_point(1, 1);
+        point br = make_point(w - 1, h - 1);
 
         wid_text_area = wid_new_square_button(wid_text_box_container,
                                               "wid text inner area");
@@ -68,8 +68,8 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
 
         for (row = 0; row < scroll_height; row++) {
             row_bottom --;
-            point tl = { 0, row_bottom, };
-            point br = { w, row_bottom, };
+            point tl = make_point(0, row_bottom);
+            point br = make_point(w, row_bottom);
 
             child = wid_new_container(wid_text_area, "");
             children.push_back(child);

@@ -108,8 +108,8 @@ void Game::quit_select (void)
     if (game->started) {
         n = ASCII_HEIGHT / 3;
     }
-    point tl = {m - WID_POPUP_WIDTH_NORMAL / 2, n - 4};
-    point br = {m + WID_POPUP_WIDTH_NORMAL / 2, n + 5};
+    point tl = make_point(m - WID_POPUP_WIDTH_NORMAL / 2, n - 4);
+    point br = make_point(m + WID_POPUP_WIDTH_NORMAL / 2, n + 5);
     auto width = br.x - tl.x;
 
     game_quit_window = new WidPopup(tl, br, nullptr, "ui_popup_short");
@@ -124,8 +124,8 @@ void Game::quit_select (void)
         auto p = game_quit_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Quit");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_shape_none(w);
         wid_set_on_mouse_up(w, game_quit_yes);
         wid_set_pos(w, tl, br);
@@ -137,8 +137,8 @@ void Game::quit_select (void)
         auto p = game_quit_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Yes");
 
-        point tl = {0, y_at};
-        point br = {width / 2 - 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2 - 2, y_at + 2);
         wid_set_style(w, WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_quit_yes);
         wid_set_pos(w, tl, br);
@@ -149,8 +149,8 @@ void Game::quit_select (void)
         auto p = game_quit_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "No");
 
-        point tl = {width / 2 + 1, y_at};
-        point br = {width - 2, y_at + 2};
+        point tl = make_point(width / 2 + 1, y_at);
+        point br = make_point(width - 2, y_at + 2);
         wid_set_style(w, WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_quit_no);
         wid_set_pos(w, tl, br);

@@ -15,7 +15,7 @@ void Thing::attach (void)
     auto mx = (int16_t)(int)mid_at.x;
     auto my = (int16_t)(int)mid_at.y;
     is_attached = true;
-    last_attached = spoint(mx, my);
+    last_attached = point(mx, my);
 
     if (is_wall()) {
         level->set_wall(mx, my);

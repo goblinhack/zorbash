@@ -142,8 +142,8 @@ void Game::config_sound_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = {m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2};
-    point br = {m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2};
+    point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     game_config_sound_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
@@ -158,8 +158,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "configuration");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Configuration");
@@ -170,8 +170,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
-        point tl = {1, y_at};
-        point br = {6, y_at + 2};
+        point tl = make_point(1, y_at);
+        point br = make_point(6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_sound_back);
         wid_set_pos(w, tl, br);
@@ -181,8 +181,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
-        point tl = {width - 16, y_at};
-        point br = {width - 11, y_at + 2};
+        point tl = make_point(width - 16, y_at);
+        point br = make_point(width - 11, y_at + 2);
         wid_set_style(w, WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_sound_save);
         wid_set_pos(w, tl, br);
@@ -192,8 +192,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
-        point tl = {width - 9, y_at};
-        point br = {width - 2, y_at + 2};
+        point tl = make_point(width - 9, y_at);
+        point br = make_point(width - 2, y_at + 2);
         wid_set_style(w, WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_sound_cancel);
         wid_set_pos(w, tl, br);
@@ -205,8 +205,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects volume");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -216,8 +216,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects volume value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w, std::to_string(game->config.sound_volume));
@@ -226,8 +226,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects value +");
 
-        point tl = {width / 2 + 7 , y_at};
-        point br = {width / 2 + 9, y_at + 2};
+        point tl = make_point(width / 2 + 7 , y_at);
+        point br = make_point(width / 2 + 9, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_sound_effects_volume_incr);
@@ -237,8 +237,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects value -");
 
-        point tl = {width / 2 + 10 , y_at};
-        point br = {width / 2 + 12, y_at + 2};
+        point tl = make_point(width / 2 + 10 , y_at);
+        point br = make_point(width / 2 + 12, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_sound_effects_volume_decr);
@@ -250,8 +250,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Music volume");
 
-        point tl = {0, y_at};
-        point br = {width / 2, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width / 2, y_at + 2);
         wid_set_shape_none(w);
         wid_set_pos(w, tl, br);
         wid_set_text_lhs(w, true);
@@ -261,8 +261,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Music volume value");
 
-        point tl = {width / 2 , y_at};
-        point br = {width / 2 + 6, y_at + 2};
+        point tl = make_point(width / 2 , y_at);
+        point br = make_point(width / 2 + 6, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w, std::to_string(game->config.music_volume));
@@ -271,8 +271,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Music value +");
 
-        point tl = {width / 2 + 7 , y_at};
-        point br = {width / 2 + 9, y_at + 2};
+        point tl = make_point(width / 2 + 7 , y_at);
+        point br = make_point(width / 2 + 9, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_sound_music_volume_incr);
@@ -282,8 +282,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Music value -");
 
-        point tl = {width / 2 + 10 , y_at};
-        point br = {width / 2 + 12, y_at + 2};
+        point tl = make_point(width / 2 + 10 , y_at);
+        point br = make_point(width / 2 + 12, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_sound_music_volume_decr);

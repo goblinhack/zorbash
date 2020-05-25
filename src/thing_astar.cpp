@@ -11,6 +11,7 @@
 #include "my_thing.h"
 #include <vector>
 
+#define DEBUG_ASTAR_PATH
 #ifdef DEBUG_ASTAR_PATH
 std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> astar_debug {};
 #endif
@@ -120,10 +121,10 @@ public:
     {
         auto next_hop = current->at + delta;
 
-        if ((next_hop.x <= 0) ||
-            (next_hop.y <= 0) ||
-            (next_hop.x >= width - 1) ||
-            (next_hop.y >= height - 1)) {
+        if ((next_hop.x < 0) ||
+            (next_hop.y < 0) ||
+            (next_hop.x > width - 1) ||
+            (next_hop.y > height - 1)) {
             return;
         }
 
@@ -204,6 +205,7 @@ public:
             auto c = open_nodes.begin();
             Node *current = c->second;
 
+            // set(astar_debug, current->at.x, current->at.y, (char)('?'));
             if (current->at == goal) {
                 auto [path, cost] = create_path(dmap, current);
 

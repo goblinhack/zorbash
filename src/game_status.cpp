@@ -50,8 +50,8 @@ static void game_status_wid_create (void)
     game_status_fini();
 
     {_
-        point tl = {ACTIONBAR_TL_X, ACTIONBAR_TL_Y};
-        point br = {ACTIONBAR_BR_X, ACTIONBAR_BR_Y};
+        point tl = make_point(ACTIONBAR_TL_X, ACTIONBAR_TL_Y);
+        point br = make_point(ACTIONBAR_BR_X, ACTIONBAR_BR_Y);
         color c;
 
         wid_itembar = wid_new_square_window("text container1");
@@ -63,8 +63,8 @@ static void game_status_wid_create (void)
     int x = 0;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {0, 0};
-        point br = {ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(0, 0);
+        point br = make_point(ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -80,8 +80,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -97,8 +97,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -114,8 +114,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -131,8 +131,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -149,8 +149,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -166,8 +166,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -183,8 +183,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -200,8 +200,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -217,8 +217,8 @@ static void game_status_wid_create (void)
     x += ACTIONBAR_WIDTH;
     {_
         auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = {x, 0};
-        point br = {x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1};
+        point tl = make_point(x, 0);
+        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -235,8 +235,8 @@ static void game_status_wid_create (void)
     wid_update(wid_itembar);
 
     {_
-        point tl = {ASCII_WIDTH - SIDEBAR_WIDTH, 0};
-        point br = {ASCII_WIDTH - 1, ASCII_HEIGHT};
+        point tl = make_point(ASCII_WIDTH - SIDEBAR_WIDTH, 0);
+        point br = make_point(ASCII_WIDTH - 1, ASCII_HEIGHT);
         color c;
 
         wid_sidebar = wid_new_square_window("text container2");
@@ -248,8 +248,8 @@ static void game_status_wid_create (void)
     int y_at = 0;
     {_
         auto w = wid_new_square_button(wid_sidebar, "zorbash-0");
-        point tl = {0, y_at};
-        point br = {SIDEBAR_WIDTH - 1, y_at+1};
+        point tl = make_point(0, y_at);
+        point br = make_point(SIDEBAR_WIDTH - 1, y_at+1);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "zorbash-0");
@@ -258,8 +258,8 @@ static void game_status_wid_create (void)
     y_at += 2;
     {_
         auto w = wid_new_square_button(wid_sidebar, "zorbash-1");
-        point tl = {0, y_at};
-        point br = {SIDEBAR_WIDTH - 1, y_at+1};
+        point tl = make_point(0, y_at);
+        point br = make_point(SIDEBAR_WIDTH - 1, y_at+1);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "zorbash-1");
@@ -268,8 +268,8 @@ static void game_status_wid_create (void)
     y_at += 2;
     {_
         auto w = wid_new_square_button(wid_sidebar, "zorbash-2");
-        point tl = {0, y_at};
-        point br = {SIDEBAR_WIDTH - 1, y_at+1};
+        point tl = make_point(0, y_at);
+        point br = make_point(SIDEBAR_WIDTH - 1, y_at+1);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "zorbash-2");
@@ -280,8 +280,8 @@ static void game_status_wid_create (void)
 #if 0
     {_
         auto w = wid_new_square_button(wid_sidebar, "title box");
-        point tl = {0, y_at};
-        point br = {5, y_at + 5};
+        point tl = make_point(0, y_at);
+        point br = make_point(5, y_at + 5);
 
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_status_mouse_down);
@@ -293,8 +293,8 @@ static void game_status_wid_create (void)
     y_at += 3;
     {_
         auto w = wid_new_square_button(wid_sidebar, "title name");
-        point tl = {0, y_at + 4};
-        point br = {SIDEBAR_WIDTH, y_at + 4};
+        point tl = make_point(0, y_at + 4);
+        point br = make_point(SIDEBAR_WIDTH, y_at + 4);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, WID_STYLE_DARK;
@@ -304,8 +304,8 @@ static void game_status_wid_create (void)
 
     {_
         auto w = wid_new_square_button(wid_sidebar, "gold");
-        point tl = {7, y_at-3};
-        point br = {SIDEBAR_WIDTH, y_at-3};
+        point tl = make_point(7, y_at-3);
+        point br = make_point(SIDEBAR_WIDTH, y_at-3);
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=dollar-icon$%fg=gold$666");
@@ -315,8 +315,8 @@ static void game_status_wid_create (void)
 
     {_
         auto w = wid_new_square_button(wid_sidebar, "weight");
-        point tl = {7, y_at-2};
-        point br = {SIDEBAR_WIDTH, y_at-2};
+        point tl = make_point(7, y_at-2);
+        point br = make_point(SIDEBAR_WIDTH, y_at-2);
 
         wid_set_pos(w, tl, br);
         wid_set_text(w, L"%tile=CWEIGHT$%fg=green$150%fg=grey$lbs");
@@ -332,8 +332,8 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_square_button(wid_sidebar, "health-icon");
-        point tl = {0, y_at};
-        point br = {1, y_at + 1};
+        point tl = make_point(0, y_at);
+        point br = make_point(1, y_at + 1);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         int i = ((float)level->player->get_stats_health() /
@@ -347,8 +347,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "Health-status-bar");
-        point tl = {2, y_at};
-        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
+        point tl = make_point(2, y_at);
+        point br = make_point(tl.x + SIDEBAR_WIDTH - 3, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
 
@@ -363,8 +363,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "health-status");
-        point tl = {2, y_at + 1};
-        point br = {tl.x + SIDEBAR_WIDTH, tl.y};
+        point tl = make_point(2, y_at + 1);
+        point br = make_point(tl.x + SIDEBAR_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "health-status");
@@ -372,8 +372,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "health-value");
-        point tl = {3, y_at + 1};
-        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
+        point tl = make_point(3, y_at + 1);
+        point br = make_point(tl.x + SIDEBAR_WIDTH - 3, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -391,8 +391,8 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_square_button(wid_sidebar, "attack-icon");
-        point tl = {0, y_at};
-        point br = {1, y_at + 1};
+        point tl = make_point(0, y_at);
+        point br = make_point(1, y_at + 1);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "attack-icon");
@@ -400,8 +400,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "attack-status-bar");
-        point tl = {2, y_at};
-        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
+        point tl = make_point(2, y_at);
+        point br = make_point(tl.x + SIDEBAR_WIDTH - 3, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
 
@@ -416,8 +416,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "attack-status");
-        point tl = {2, y_at + 1};
-        point br = {tl.x + SIDEBAR_WIDTH, tl.y};
+        point tl = make_point(2, y_at + 1);
+        point br = make_point(tl.x + SIDEBAR_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "attack-status");
@@ -425,8 +425,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "attack-value");
-        point tl = {3, y_at + 1};
-        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
+        point tl = make_point(3, y_at + 1);
+        point br = make_point(tl.x + SIDEBAR_WIDTH - 3, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 
@@ -444,8 +444,8 @@ static void game_status_wid_create (void)
     ///////////////////////////////////////////////////////////////////////////
     {_
         auto w = wid_new_square_button(wid_sidebar, "defence-icon");
-        point tl = {0, y_at};
-        point br = {1, y_at + 1};
+        point tl = make_point(0, y_at);
+        point br = make_point(1, y_at + 1);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "defence-icon");
@@ -453,8 +453,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "defence-status-bar");
-        point tl = {2, y_at};
-        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
+        point tl = make_point(2, y_at);
+        point br = make_point(tl.x + SIDEBAR_WIDTH - 3, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
 
@@ -469,8 +469,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "defence-status");
-        point tl = {2, y_at + 1};
-        point br = {tl.x + SIDEBAR_WIDTH, tl.y};
+        point tl = make_point(2, y_at + 1);
+        point br = make_point(tl.x + SIDEBAR_WIDTH, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_bg_tilename(w, "defence-status");
@@ -478,8 +478,8 @@ static void game_status_wid_create (void)
     }
     {_
         auto w = wid_new_square_button(wid_sidebar, "defence-value");
-        point tl = {3, y_at + 1};
-        point br = {tl.x + SIDEBAR_WIDTH - 3, tl.y};
+        point tl = make_point(3, y_at + 1);
+        point br = make_point(tl.x + SIDEBAR_WIDTH - 3, tl.y);
         wid_set_pos(w, tl, br);
         wid_set_shape_none(w);
 

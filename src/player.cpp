@@ -141,92 +141,98 @@ void player_tick (void)
         last_key_pressed_when = time_get_time_ms_cached() - 1000;
     }
 
-    if ((time_get_time_ms_cached() - last_key_pressed_when) > (uint)delay) {
-        if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
-            up = true;
-        }
+    if ((time_get_time_ms_cached() - last_key_pressed_when) < (uint)delay) {
+        return;
+    }
 
-        if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
-            down = true;
-        }
+    if (wait) {
+        MINICON("You wait...");
+    }
 
-        if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
-            left = true;
-        }
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {
+        up = true;
+    }
 
-        if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_DOWN)) {
+        down = true;
+    }
+
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT)) {
+        left = true;
+    }
+
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_RIGHT)) {
+        right = true;
+    }
+
+    if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE)) {
+        attack = true;
+    }
+
+    if (sdl_joy_axes) {
+        if (sdl_joy_axes[3] > sdl_joy_deadzone) {
             right = true;
         }
 
-        if (get(sdl_joy_buttons, SDL_JOY_BUTTON_LEFT_FIRE)) {
-            attack = true;
+        if (sdl_joy_axes[3] < -sdl_joy_deadzone) {
+            left = true;
         }
 
-        if (sdl_joy_axes) {
-            if (sdl_joy_axes[3] > sdl_joy_deadzone) {
-                right = true;
-            }
-
-            if (sdl_joy_axes[3] < -sdl_joy_deadzone) {
-                left = true;
-            }
-
-            if (sdl_joy_axes[4] > sdl_joy_deadzone) {
-                down = true;
-            }
-
-            if (sdl_joy_axes[4] < -sdl_joy_deadzone) {
-                up = true;
-            }
-
-            if (sdl_joy_axes[0] > sdl_joy_deadzone) {
-                right = true;
-            }
-
-            if (sdl_joy_axes[0] < -sdl_joy_deadzone) {
-                left = true;
-            }
-
-            if (sdl_joy_axes[1] > sdl_joy_deadzone) {
-                down = true;
-            }
-
-            if (sdl_joy_axes[1] < -sdl_joy_deadzone) {
-                up = true;
-            }
+        if (sdl_joy_axes[4] > sdl_joy_deadzone) {
+            down = true;
         }
 
-        double d = 1.0;
-        double dx = 0.0;
-        double dy = 0.0;
-
-        if (left) {
-            dx = -d;
-        }
-        if (right) {
-            dx = d;
-        }
-        if (up) {
-            dy = -d;
-        }
-        if (down) {
-            dy = d;
+        if (sdl_joy_axes[4] < -sdl_joy_deadzone) {
+            up = true;
         }
 
-        if (up || down || left || right || attack || wait) {
-            key_pressed = true;
+        if (sdl_joy_axes[0] > sdl_joy_deadzone) {
+            right = true;
         }
 
-        if (key_pressed) {
-            //
-            // If we move manually, clear the path as it visually gets
-            // in the way
-            //
-            level->cursor_path_clear();
-
-            fpoint future_pos = player->mid_at + fpoint(dx, dy);
-            player->move(future_pos, up, down, left, right, attack, wait);
-            last_key_pressed_when = time_get_time_ms_cached();
+        if (sdl_joy_axes[0] < -sdl_joy_deadzone) {
+            left = true;
         }
+
+        if (sdl_joy_axes[1] > sdl_joy_deadzone) {
+            down = true;
+        }
+
+        if (sdl_joy_axes[1] < -sdl_joy_deadzone) {
+            up = true;
+        }
+    }
+
+    double d = 1.0;
+    double dx = 0.0;
+    double dy = 0.0;
+
+    if (left) {
+        dx = -d;
+    }
+    if (right) {
+        dx = d;
+    }
+    if (up) {
+        dy = -d;
+    }
+    if (down) {
+        dy = d;
+    }
+
+    if (up || down || left || right || attack || wait) {
+        key_pressed = true;
+    }
+
+    if (key_pressed) {
+        //
+        // If we move manually, clear the path as it visually gets
+        // in the way
+        //
+        level->cursor_path_clear();
+
+        fpoint future_pos = player->mid_at + fpoint(dx, dy);
+        player->move(future_pos, up, down, left, right, attack, wait);
+        last_key_pressed_when = time_get_time_ms_cached();
     }
 }

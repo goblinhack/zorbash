@@ -15,13 +15,13 @@ static const float damping = 0.2;
 static const float delta = 1.0;
 static const int near_radius = 2;
 
-static spoint point_to_grid (const fpoint &p)
+static point point_to_grid (const fpoint &p)
 {
-    return spoint(p.x * (PARTICLES_WIDTH / MAP_WIDTH),
+    return point(p.x * (PARTICLES_WIDTH / MAP_WIDTH),
                   p.y * (PARTICLES_HEIGHT / MAP_HEIGHT));
 }
 
-static spoint particle_to_grid (const Particlep p)
+static point particle_to_grid (const Particlep p)
 {
     return point_to_grid(p->at);
 }
@@ -590,7 +590,7 @@ bool Level::collision_check_particle (Particlep p, int16_t x, int16_t y)
 
 bool Level::collision_check_particle (Particlep p)
 {
-    const spoint c((int)p->at.x, (int)p->at.y);
+    const point c((int)p->at.x, (int)p->at.y);
     for (auto x = c.x - 1; x <= c.x + 1; x++) {
         for (auto y = c.y - 1; y <= c.y + 1; y++) {
             if (unlikely(is_oob(x, y))) {

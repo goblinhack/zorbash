@@ -125,10 +125,12 @@ void Game::config_top_select (void)
     }
     game_status_fini();
 
-    point tl = {ASCII_WIDTH / 2 - WID_POPUP_WIDTH_NORMAL / 2,
-                ASCII_HEIGHT / 2 - 4};
-    point br = {ASCII_WIDTH / 2 + WID_POPUP_WIDTH_NORMAL / 2 - 1,
-                ASCII_HEIGHT / 2 + 14};
+    point tl = make_point(
+                ASCII_WIDTH / 2 - WID_POPUP_WIDTH_NORMAL / 2,
+                ASCII_HEIGHT / 2 - 4);
+    point br = make_point(
+                ASCII_WIDTH / 2 + WID_POPUP_WIDTH_NORMAL / 2 - 1,
+                ASCII_HEIGHT / 2 + 14);
     auto width = br.x - tl.x - 2;
 
     game_config_top_window = new WidPopup(tl, br, nullptr, "");
@@ -143,8 +145,8 @@ void Game::config_top_select (void)
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "graphics");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_graphics);
         wid_set_pos(w, tl, br);
@@ -155,8 +157,8 @@ void Game::config_top_select (void)
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "sound");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_sound);
         wid_set_pos(w, tl, br);
@@ -167,8 +169,8 @@ void Game::config_top_select (void)
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "keyboard");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_keyboard);
         wid_set_pos(w, tl, br);
@@ -179,8 +181,8 @@ void Game::config_top_select (void)
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Other stuffs");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_other);
         wid_set_pos(w, tl, br);
@@ -191,8 +193,8 @@ void Game::config_top_select (void)
         auto p = game_config_top_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
-        point tl = {0, y_at};
-        point br = {width, y_at + 2};
+        point tl = make_point(0, y_at);
+        point br = make_point(width, y_at + 2);
         wid_set_style(w, WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_back);
         wid_set_pos(w, tl, br);

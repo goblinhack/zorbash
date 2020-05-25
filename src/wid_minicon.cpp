@@ -164,8 +164,8 @@ static void wid_minicon_wid_create (void)
     int h = MINICON_VIS_HEIGHT;
 
     {
-        point tl = {0, 0};
-        point br = {MINICON_VIS_WIDTH - 1, h};
+        point tl = make_point(0, 0);
+        point br = make_point(MINICON_VIS_WIDTH - 1, h);
 
         wid_minicon_window = wid_new_square_window("wid_minicon");
         wid_set_name(wid_minicon_window, "wid_minicon window");
@@ -174,8 +174,8 @@ static void wid_minicon_wid_create (void)
     }
 
     {
-        point tl = {0, 0};
-        point br = {MINICON_VIS_WIDTH - 1, h};
+        point tl = make_point(0, 0);
+        point br = make_point(MINICON_VIS_WIDTH - 1, h);
 
         wid_minicon_container = wid_new_container(wid_minicon_window,
                                                   "wid minicon container");
@@ -196,15 +196,8 @@ static void wid_minicon_wid_create (void)
 
         for (row = 0; row < MINICON_HEIGHT; row++) {
             row_bottom --;
-            point tl = {
-                0,
-                row_bottom,
-            };
-
-            point br = {
-                MINICON_WIDTH,
-                row_bottom,
-            };
+            point tl = make_point(0, row_bottom);
+            point br = make_point(MINICON_WIDTH, row_bottom);
 
             child = wid_new_container(wid_minicon_container, "");
 

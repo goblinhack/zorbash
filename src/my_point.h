@@ -376,9 +376,12 @@ public:
     }
 };
 
-typedef my_apoint<int16_t> spoint;
-typedef my_apoint<int> point;
+typedef my_apoint<int16_t> point;
 typedef my_apoint<float> fpoint;
+
+static inline point make_point (const int x, const int y) {
+    return point(x, y);
+}
 
 template<class T> class my_apoint3d
 {
