@@ -589,6 +589,12 @@ static void level_place_normal_placement_rules (Dungeonp d)
             if (d->is_torch(x, y)) {
                 tp = tp_random_torch();
             }
+            if (d->is_door(x, y)) {
+                tp = tp_random_door();
+            }
+            if (d->is_secret_door(x, y)) {
+                tp = tp_random_secret_door();
+            }
             if (tp) {
                 (void) thing_new(tp->name(), fpoint(x, y));
             }

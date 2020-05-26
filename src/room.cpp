@@ -49,7 +49,7 @@ Roomp Room::create_w_flip (void)
     /*
      * Flip the doors too
      */
-    auto z = MAP_DEPTH_WALLS; {
+    auto z = MAP_DEPTH_WALL; {
         for (auto y = 0; y < height; y++) {
             std::string s;
             for (auto x = 0; x < width; x++) {
@@ -104,7 +104,7 @@ Roomp Room::rotate_clockwise (void)
     /*
      * Rotate the doors too
      */
-    auto z = MAP_DEPTH_WALLS; {
+    auto z = MAP_DEPTH_WALL; {
         for (auto y = 0; y < height; y++) {
             std::string s;
             for (auto x = 0; x < width; x++) {
@@ -144,7 +144,7 @@ Roomp Room::rotate_clockwise (void)
 //
 void Room::find_doors (void)
 {
-    int z = MAP_DEPTH_WALLS;
+    int z = MAP_DEPTH_WALL;
 
     for (auto x : range<int>(0, width)) {
         for (auto y : range<int>(0, height)) {
@@ -196,7 +196,7 @@ void Room::dump (void)
 
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
-            auto c = get(data, x, y, MAP_DEPTH_WALLS);
+            auto c = get(data, x, y, MAP_DEPTH_WALL);
             if (!c || (c == ' ')) {
                 c = get(data, x, y, MAP_DEPTH_FLOOR);
             }

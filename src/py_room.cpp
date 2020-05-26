@@ -199,7 +199,7 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     set(r->data, x, y, MAP_DEPTH_CHASM,  chasm_string[x]);
                 }
                 if (walls_string[x] != ' ') {
-                    set(r->data, x, y, MAP_DEPTH_WALLS,  walls_string[x]);
+                    set(r->data, x, y, MAP_DEPTH_WALL,  walls_string[x]);
                 }
                 if (obj_strings[x] != ' ') {
                     set(r->data, x, y, MAP_DEPTH_OBJ,    obj_strings[x]);

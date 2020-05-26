@@ -164,7 +164,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     set(l->data, x, y, MAP_DEPTH_CHASM,      chasm_string[x]);
                 }
                 if (walls_string[x] != ' ') {
-                    set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
+                    set(l->data, x, y, MAP_DEPTH_WALL,      walls_string[x]);
                 }
                 if (obj_strings[x] != ' ') {
                     set(l->data, x, y, MAP_DEPTH_OBJ,       obj_strings[x]);
@@ -193,7 +193,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                 set(l->data, x, y, MAP_DEPTH_WATER,      water_string[x]);
                 set(l->data, x, y, MAP_DEPTH_LAVA,       lava_string[x]);
                 set(l->data, x, y, MAP_DEPTH_CHASM,      chasm_string[x]);
-                set(l->data, x, y, MAP_DEPTH_WALLS,      walls_string[x]);
+                set(l->data, x, y, MAP_DEPTH_WALL,      walls_string[x]);
             }
         }
     }
