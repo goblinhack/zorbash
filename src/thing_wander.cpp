@@ -76,7 +76,7 @@ std::vector<point> Thing::ai_create_path (point start, point end)
     set(d.val, end.x, end.y, DMAP_IS_GOAL);
     set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-    dmap_process_allow_diagonals(&d, dmap_start, dmap_end);
+    dmap_process(&d, dmap_start, dmap_end);
 #if 0
     dmap_print(&d, start, dmap_start, dmap_end);
 #endif

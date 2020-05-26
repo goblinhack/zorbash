@@ -97,6 +97,9 @@ void Level::cursor_path_draw (point start, point end)
             }
         }
     } else {
+        //
+        // Else avoid hazards
+        //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
@@ -119,7 +122,7 @@ void Level::cursor_path_draw (point start, point end)
     set(d.val, end.x, end.y, DMAP_IS_GOAL);
     set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-    dmap_process_allow_diagonals(&d, dmap_start, dmap_end);
+    dmap_process(&d, dmap_start, dmap_end);
     // dmap_print(&d, start, dmap_start, dmap_end);
     auto p = dmap_solve_allow_diagonal(&d, start);
     game->cursor_move_path = p;
