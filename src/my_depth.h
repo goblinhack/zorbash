@@ -13,9 +13,11 @@ enum {
     MAP_DEPTH_LAVA,
     MAP_DEPTH_CHASM,
 #define MAP_DEPTH_LAST_FLOOR_TYPE MAP_DEPTH_CHASM
-    MAP_DEPTH_WALL,
+    //
+    // Walls and player need to be the same depth or the player
+    // overlaps the wall
+    //
     MAP_DEPTH_OBJ,
-    MAP_DEPTH_OBJ2,
     MAP_DEPTH_WEAPON,
     MAP_DEPTH,
 };

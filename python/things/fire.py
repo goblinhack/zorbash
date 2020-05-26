@@ -26,7 +26,7 @@ def tp_init(name):
     x.set_stats_health_initial(10)
     x.set_text_a_or_an("");
     x.set_text_hits("burns");
-    x.set_z_depth(zx.MAP_DEPTH_OBJ2)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 75
     x.set_tile(tile=name + ".1", delay_ms=delay)
