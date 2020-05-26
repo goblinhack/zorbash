@@ -631,6 +631,8 @@ Tpp tp_random_monst(void);
 Tpp tp_random_ripple(void);
 Tpp tp_random_rock(void);
 Tpp tp_random_torch(void);
+Tpp tp_random_door(void);
+Tpp tp_random_secret_door(void);
 Tpp tp_random_wall(void);
 Tpp tp_random_wall_deco(void);
 uint8_t tp_init(void);

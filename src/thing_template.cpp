@@ -29,6 +29,8 @@ static Tpidmap tp_rock;
 static Tpidmap tp_floor;
 static Tpidmap tp_deco;
 static Tpidmap tp_wall_deco;
+static Tpidmap tp_door;
+static Tpidmap tp_secret_door;
 
 static uint8_t tp_init_done;
 
@@ -128,6 +130,12 @@ void tp_init_after_loading (void)
         }
         if (tp->is_torch()) {
             tp_torch.push_back(tp);
+        }
+        if (tp->is_door()) {
+            tp_door.push_back(tp);
+        }
+        if (tp->is_secret_door()) {
+            tp_secret_door.push_back(tp);
         }
         if (tp->is_blood()) {
             tp_blood.push_back(tp);
@@ -229,6 +237,24 @@ Tpp tp_random_torch (void)
         return (nullptr);
     }
     return get(tp_torch, myrand() % tp_torch.size());
+}
+
+Tpp tp_random_door (void)
+{_
+    if (unlikely(!tp_door.size())) {
+        ERR("no door found");
+        return (nullptr);
+    }
+    return get(tp_door, myrand() % tp_door.size());
+}
+
+Tpp tp_random_secret_door (void)
+{_
+    if (unlikely(!tp_secret_door.size())) {
+        ERR("no secret_door found");
+        return (nullptr);
+    }
+    return get(tp_secret_door, myrand() % tp_secret_door.size());
 }
 
 Tpp tp_random_blood (void)

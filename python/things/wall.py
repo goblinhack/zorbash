@@ -34,7 +34,7 @@ def tp_init(name,
     x.set_is_movement_blocking(True)
     x.set_ai_obstacle(True)
     x.set_is_wall(True)
-    x.set_z_depth(zx.MAP_DEPTH_WALLS)
+    x.set_z_depth(zx.MAP_DEPTH_WALL)
 
     if tiles is not None:
         for t in tiles:
