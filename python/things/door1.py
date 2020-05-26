@@ -20,7 +20,7 @@ def tp_init(name, text_name):
     x.set_normal_placement_rules(True)
     x.set_is_interesting(True)
     x.set_is_movement_blocking(True)
-    x.set_z_depth(zx.MAP_DEPTH_WALL)
+    x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     x.set_tile(tile=name + ".1-closed")
 
