@@ -702,7 +702,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
     {
         int x = 0;
         int y = 0;
-        int z = MAP_DEPTH_WALL;
+        int z = MAP_DEPTH_OBJ;
         int got = false;
 
         tree = w->grid->grid_of_trees[z] + (y * w->grid->width) + x;
@@ -738,7 +738,7 @@ static int get_map_tl_br (double *tl_x, double *tl_y, double *br_x, double *br_y
     {
         int x = MAP_WIDTH - 1;
         int y = MAP_HEIGHT - 1;
-        int z = MAP_DEPTH_WALL;
+        int z = MAP_DEPTH_OBJ;
         int got = false;
 
         tree = w->grid->grid_of_trees[z] + (y * w->grid->width) + x;

@@ -40,7 +40,7 @@ void LevelStatic::dump (void)
 
     for (auto y = 0; y < height; y++) {
         for (auto x = 0; x < width; x++) {
-            auto c = get(data, x, y, MAP_DEPTH_WALL);
+            auto c = get(data, x, y, MAP_DEPTH_OBJ);
             if (!c || (c == ' ')) {
                 c = get(data, x, y, MAP_DEPTH_FLOOR);
             }
