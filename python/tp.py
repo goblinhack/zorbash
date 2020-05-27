@@ -494,6 +494,9 @@ class Tp:
     def set_z_depth(self, value):
         zx.tp_set_z_depth(self, value)
 
+    def set_z_prio(self, value):
+        zx.tp_set_z_prio(self, value)
+
     def set_is_movable(self, value):
         zx.tp_set_is_movable(self, value)
 

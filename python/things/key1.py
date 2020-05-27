@@ -17,6 +17,7 @@ def key_init(name, text_name):
     x.set_is_movable(True)
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=100)

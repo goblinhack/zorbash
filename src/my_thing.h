@@ -140,11 +140,11 @@ public:
     Thing_ (void);
     ~Thing_ (void);
     Monst       *monstp              {};
-    point      last_attached;
+    point       last_attached;
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
-    point      last_blit_tl;        // Last blit coords
-    point      last_blit_br;
+    point       last_blit_tl;        // Last blit coords
+    point       last_blit_br;
     uint32_t    id;                         // Unique per thing.
     int16_t     tp_id                {-1};  // Common settings
     uint16_t    tile_curr            {};
@@ -772,6 +772,7 @@ public:
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
     int z_depth(void) const;
+    int z_prio(void) const;
     uint8_t blit_begin_reflection_submerged(void) const;
     uint8_t blit_begin_submerged(void) const;
     uint8_t is_dir_bl(void) const;

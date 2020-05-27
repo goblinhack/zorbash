@@ -726,6 +726,11 @@ int Thing::z_depth(void) const
     return (tp()->z_depth);
 }
 
+int Thing::z_prio(void) const
+{_
+    return (tp()->z_prio);
+}
+
 const std::string& Thing::stats_attack_hd(void) const
 {_
     return (tp()->stats_attack_hd_str());

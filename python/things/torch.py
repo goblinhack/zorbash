@@ -30,6 +30,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_light_color("yellow")
     x.set_normal_placement_rules(True)
     x.set_spawn_on_death("fire")
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay=50

@@ -12,6 +12,7 @@ def tp_init(name):
     x.set_is_active(True)
     x.set_is_cursor(True)
     x.set_is_movable(True)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     delay = 50

@@ -23,6 +23,7 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_stats_attack_rate_tenths(3)
     x.set_text_a_or_an("");
     x.set_text_hits("BURNS and tickles");
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
 
     delay = 1250
