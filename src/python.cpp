@@ -1816,6 +1816,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(weapon_use_delay_hundredths)
     TP_SET_DECL(weapon_use_distance)
     TP_SET_DECL(z_depth)
+    TP_SET_DECL(z_prio)
 
     {"tp_update",
         (PyCFunction)tp_update_,
@@ -2076,6 +2077,9 @@ static void python_add_consts (void)
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_OBJ", MAP_DEPTH_OBJ);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WATER", MAP_DEPTH_WATER);
     PyModule_AddIntConstant(zx_mod, "MAP_DEPTH_WEAPON", MAP_DEPTH_WEAPON);
+
+    PyModule_AddIntConstant(zx_mod, "MAP_PRIO_INFRONT", MAP_PRIO_INFRONT);
+    PyModule_AddIntConstant(zx_mod, "MAP_PRIO_NORMAL", MAP_PRIO_NORMAL);
 
     PyModule_AddIntConstant(zx_mod, "KMOD_LSHIFT", KMOD_LSHIFT);
     PyModule_AddIntConstant(zx_mod, "KMOD_RSHIFT", KMOD_RSHIFT);

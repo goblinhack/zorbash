@@ -45,6 +45,12 @@ do_retry:
     if (free_slot != -1) {
         auto idp = &getref(all_thing_ids_at, x, y, free_slot);
         level->all_thing_ptrs_at[x][y].push_back(t);
+
+        sort(level->all_thing_ptrs_at[x][y].begin(),
+             level->all_thing_ptrs_at[x][y].end(),
+             [](const Thingp &a, const Thingp &b) -> bool {
+               return a->z_prio() < b->z_prio();
+             });
 #ifdef ENABLE_THING_ID_LOGS
         if (t->is_loggable()) {
             t->log("put thing %08X at %u,%u slot %u", id, x, y, free_slot);

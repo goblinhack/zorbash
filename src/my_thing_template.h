@@ -41,6 +41,7 @@ public:
     //
     uint16_t id {};
     uint8_t z_depth {};
+    uint8_t z_prio {};
     //
     // Modified on tile loading; easier to leave public
     //
@@ -597,6 +598,7 @@ public:
     void set_weapon_use_delay_hundredths(int);
     void set_weapon_use_distance(int);
     void set_z_depth(int);
+    void set_z_prio(int);
     void set_str1(const std::string &);
     void set_str10(const std::string &);
     void set_str11(const std::string &);

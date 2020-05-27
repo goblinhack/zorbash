@@ -18,6 +18,7 @@ def tp_init(name, text_name, tiles=[]):
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_is_movement_blocking(True)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     for t in tiles:

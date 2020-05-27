@@ -22,4 +22,9 @@ enum {
     MAP_DEPTH,
 };
 
+enum {
+    MAP_PRIO_NORMAL,
+    MAP_PRIO_INFRONT,
+};
+
 #endif

@@ -10,6 +10,7 @@ def tp_init(name):
     x.set_is_movable(True)
     x.set_is_msg(True)
     x.set_is_no_tile(True)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 
     x.update()

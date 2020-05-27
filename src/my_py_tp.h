@@ -211,4 +211,5 @@ TP_SET_PROTO(weapon_use_anim)
 TP_SET_PROTO(weapon_use_delay_hundredths)
 TP_SET_PROTO(weapon_use_distance)
 TP_SET_PROTO(z_depth)
+TP_SET_PROTO(z_prio)
 #endif

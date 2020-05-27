@@ -328,6 +328,7 @@ void Tp::set_weapon_use_anim(const std::string &v) { _weapon_use_anim = v; }
 void Tp::set_weapon_use_delay_hundredths(int v) { _weapon_use_delay_hundredths = v; }
 void Tp::set_weapon_use_distance(int v) { _weapon_use_distance = v; }
 void Tp::set_z_depth(int v) { z_depth = v; }
+void Tp::set_z_prio(int v) { z_prio = v; }
 void Tp::set_str1(const std::string &v) { _str1 = v; }
 void Tp::set_str10(const std::string &v) { _str10 = v; }
 void Tp::set_str11(const std::string &v) { _str11 = v; }
