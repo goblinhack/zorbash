@@ -100,11 +100,12 @@ typedef struct Monst_ {
     std::vector<point> move_path;
     point        wander_target;
     std::string  msg;                        // Text that floats on screen
-    timestamp_t  timestamp_ai_next {};
+    uint32_t     tick_last_spawn {};
+    timestamp_t  timestamp_UNUSED1 {};
     timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
-    timestamp_t  timestamp_collision {};
+    timestamp_t  timestamp_UNUSED2 {};
     timestamp_t  timestamp_fadeup_begin {};
     timestamp_t  timestamp_fadeup_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
@@ -553,19 +554,26 @@ public:
     timestamp_t decr_timestamp_hunger_tick(void);
     timestamp_t incr_timestamp_hunger_tick(void);
 
-    timestamp_t set_timestamp_ai_next(timestamp_t);
-    timestamp_t get_timestamp_ai_next(void) const;
-    timestamp_t decr_timestamp_ai_next(timestamp_t);
-    timestamp_t incr_timestamp_ai_next(timestamp_t);
-    timestamp_t decr_timestamp_ai_next(void);
-    timestamp_t incr_timestamp_ai_next(void);
+    timestamp_t set_timestamp_UNUSED1(timestamp_t);
+    timestamp_t get_timestamp_UNUSED1(void) const;
+    timestamp_t decr_timestamp_UNUSED1(timestamp_t);
+    timestamp_t incr_timestamp_UNUSED1(timestamp_t);
+    timestamp_t decr_timestamp_UNUSED1(void);
+    timestamp_t incr_timestamp_UNUSED1(void);
 
-    timestamp_t set_timestamp_collision(timestamp_t);
-    timestamp_t get_timestamp_collision(void) const;
-    timestamp_t decr_timestamp_collision(timestamp_t);
-    timestamp_t incr_timestamp_collision(timestamp_t);
-    timestamp_t decr_timestamp_collision(void);
-    timestamp_t incr_timestamp_collision(void);
+    timestamp_t set_timestamp_UNUSED2(timestamp_t);
+    timestamp_t get_timestamp_UNUSED2(void) const;
+    timestamp_t decr_timestamp_UNUSED2(timestamp_t);
+    timestamp_t incr_timestamp_UNUSED2(timestamp_t);
+    timestamp_t decr_timestamp_UNUSED2(void);
+    timestamp_t incr_timestamp_UNUSED2(void);
+
+    uint32_t set_tick_last_spawn(uint32_t);
+    uint32_t get_tick_last_spawn(void) const;
+    uint32_t decr_tick_last_spawn(uint32_t);
+    uint32_t incr_tick_last_spawn(uint32_t);
+    uint32_t decr_tick_last_spawn(void);
+    uint32_t incr_tick_last_spawn(void);
 
     uint32_t set_on_fire_anim_id(uint32_t);
     uint32_t get_on_fire_anim_id(void) const;
@@ -588,12 +596,15 @@ public:
     //
     // Dice
     //
-    const std::string& stats_attack_dice (void) const;
-    const std::string& nutrition_dice (void) const;
-    const std::string& set_spawn_on_idle_dice (void) const;
-    int nutrition(void) const;
-    int get_stats_attack(void) const;
+    const std::string& get_nutrition_dice_str(void) const;
+    const std::string& get_spawn_on_idle_dice_str(void) const;
+    const std::string& get_stats_attack_dice_str(void) const;
+    int get_nutrition(void) const;
     int get_spawn_on_idle(void) const;
+    int get_stats_attack(void) const;
+    const Dice& get_nutrition_dice(void) const;
+    const Dice& get_spawn_on_idle_dice(void) const;
+    const Dice& get_stats_attack_dice(void) const;
 
     Thingp owner_get() const;
     Thingp weapon_get() const;

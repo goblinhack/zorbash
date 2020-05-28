@@ -37,6 +37,13 @@ _
         return;
     }
 
+#if 0
+    if (tick - tick_last_spawn > get_stats_attack()) {
+        auto d = get_stats_attack_dice();
+        CON("CALL %s", d->python_func);
+    }
+#endif
+
     //
     // If there is a next hop to go to, do it.
     //

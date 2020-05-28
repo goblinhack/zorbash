@@ -13,13 +13,16 @@
 
 //
 // Dice
-// 
-const std::string& Thing::stats_attack_dice (void) const {_ return (tp()->stats_attack_dice_str()); }
-const std::string& Thing::nutrition_dice (void) const {_ return (tp()->nutrition_dice_str()); }
-const std::string& Thing::set_spawn_on_idle_dice (void) const {_ return (tp()->spawn_on_idle_dice_str()); }
-int Thing::nutrition(void) const {_ return (tp()->nutrition_dice().roll()); }
+//
+const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->stats_attack_dice_str()); }
+const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
+const std::string& Thing::get_spawn_on_idle_dice_str (void) const {_ return (tp()->spawn_on_idle_dice_str()); }
+int Thing::get_nutrition (void) const {_ return (tp()->nutrition_dice().roll()); }
 int Thing::get_stats_attack (void) const {_ return (tp()->stats_attack_dice().roll()); }
 int Thing::get_spawn_on_idle (void) const {_ return (tp()->spawn_on_idle_dice().roll()); }
+const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_dice()); }
+const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->stats_attack_dice()); }
+const Dice& Thing::get_spawn_on_idle_dice (void) const {_ return (tp()->spawn_on_idle_dice()); }
 
 void Thing::new_monst (void)
 {_
@@ -2574,6 +2577,54 @@ int Thing::incr_owned_count (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// tick_last_spawn
+////////////////////////////////////////////////////////////////////////////
+uint32_t Thing::get_tick_last_spawn (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->tick_last_spawn);
+    } else {
+        return (0);
+    }
+}
+
+uint32_t Thing::set_tick_last_spawn (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_spawn = v);
+}
+
+uint32_t Thing::decr_tick_last_spawn (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_spawn -= v);
+}
+
+uint32_t Thing::incr_tick_last_spawn (uint32_t v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_spawn += v);
+}
+
+uint32_t Thing::decr_tick_last_spawn (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_spawn--);
+}
+
+uint32_t Thing::incr_tick_last_spawn (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->tick_last_spawn++);
+}
+
+////////////////////////////////////////////////////////////////////////////
 // timestamp_lunge_begin
 ////////////////////////////////////////////////////////////////////////////
 timestamp_t Thing::get_timestamp_lunge_begin (void) const
@@ -3198,99 +3249,99 @@ timestamp_t Thing::incr_timestamp_hunger_tick (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// timestamp_ai_next
+// timestamp_UNUSED1
 ////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_ai_next (void) const
+timestamp_t Thing::get_timestamp_UNUSED1 (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->timestamp_ai_next);
+        return (monstp->timestamp_UNUSED1);
     } else {
         return (0);
     }
 }
 
-timestamp_t Thing::set_timestamp_ai_next (timestamp_t v)
+timestamp_t Thing::set_timestamp_UNUSED1 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_ai_next = v);
+    return (monstp->timestamp_UNUSED1 = v);
 }
 
-timestamp_t Thing::decr_timestamp_ai_next (timestamp_t v)
+timestamp_t Thing::decr_timestamp_UNUSED1 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_ai_next -= v);
+    return (monstp->timestamp_UNUSED1 -= v);
 }
 
-timestamp_t Thing::incr_timestamp_ai_next (timestamp_t v)
+timestamp_t Thing::incr_timestamp_UNUSED1 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_ai_next += v);
+    return (monstp->timestamp_UNUSED1 += v);
 }
 
-timestamp_t Thing::decr_timestamp_ai_next (void)
+timestamp_t Thing::decr_timestamp_UNUSED1 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_ai_next--);
+    return (monstp->timestamp_UNUSED1--);
 }
 
-timestamp_t Thing::incr_timestamp_ai_next (void)
+timestamp_t Thing::incr_timestamp_UNUSED1 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_ai_next++);
+    return (monstp->timestamp_UNUSED1++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// timestamp_collision
+// timestamp_UNUSED2
 ////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_collision (void) const
+timestamp_t Thing::get_timestamp_UNUSED2 (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->timestamp_collision);
+        return (monstp->timestamp_UNUSED2);
     } else {
         return (0);
     }
 }
 
-timestamp_t Thing::set_timestamp_collision (timestamp_t v)
+timestamp_t Thing::set_timestamp_UNUSED2 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_collision = v);
+    return (monstp->timestamp_UNUSED2 = v);
 }
 
-timestamp_t Thing::decr_timestamp_collision (timestamp_t v)
+timestamp_t Thing::decr_timestamp_UNUSED2 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_collision -= v);
+    return (monstp->timestamp_UNUSED2 -= v);
 }
 
-timestamp_t Thing::incr_timestamp_collision (timestamp_t v)
+timestamp_t Thing::incr_timestamp_UNUSED2 (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_collision += v);
+    return (monstp->timestamp_UNUSED2 += v);
 }
 
-timestamp_t Thing::decr_timestamp_collision (void)
+timestamp_t Thing::decr_timestamp_UNUSED2 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_collision--);
+    return (monstp->timestamp_UNUSED2--);
 }
 
-timestamp_t Thing::incr_timestamp_collision (void)
+timestamp_t Thing::incr_timestamp_UNUSED2 (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_collision++);
+    return (monstp->timestamp_UNUSED2++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

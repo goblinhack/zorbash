@@ -602,7 +602,7 @@ _
             if (best->hitter_killed_on_hitting) {
                 me->dead("suicide");
             }
-            health_boost(it->nutrition());
+            health_boost(it->get_nutrition());
             *target_attacked = true;
         } else if (best->hitter_killed_on_hit_or_miss) {
             //
