@@ -3435,7 +3435,7 @@ const std::string& Thing::str9 (void) const {_ return (tp()->str9()); }
 const std::string& Thing::str10 (void) const {_ return (tp()->str10()); }
 const std::string& Thing::str11 (void) const {_ return (tp()->str11()); }
 const std::string& Thing::str12 (void) const {_ return (tp()->str12()); }
-const std::string& Thing::spawn_on_idle_str (void) const {_ return (tp()->spawn_on_idle_str()); }
+const std::string& Thing::spawn_on_idle_dice (void) const {_ return (tp()->spawn_on_idle_dice()); }
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }
 const std::string& Thing::spawn_on_death (void) const {_ return (tp()->spawn_on_death()); }
 const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }
