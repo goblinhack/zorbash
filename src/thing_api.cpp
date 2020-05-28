@@ -11,6 +11,16 @@
 #include "my_game_status.h"
 #include "my_thing.h"
 
+//
+// Dice
+// 
+const std::string& Thing::stats_attack_dice (void) const {_ return (tp()->stats_attack_dice_str()); }
+const std::string& Thing::nutrition_dice (void) const {_ return (tp()->nutrition_dice_str()); }
+const std::string& Thing::set_spawn_on_idle_dice (void) const {_ return (tp()->spawn_on_idle_dice_str()); }
+int Thing::nutrition(void) const {_ return (tp()->nutrition_dice().roll()); }
+int Thing::get_stats_attack (void) const {_ return (tp()->stats_attack_dice().roll()); }
+int Thing::get_spawn_on_idle (void) const {_ return (tp()->spawn_on_idle_dice().roll()); }
+
 void Thing::new_monst (void)
 {_
     if (unlikely(!monstp)) {
@@ -731,21 +741,6 @@ int Thing::z_prio(void) const
     return (tp()->z_prio);
 }
 
-const std::string& Thing::stats_attack_dice(void) const
-{_
-    return (tp()->stats_attack_dice_str());
-}
-
-const std::string& Thing::nutrition_dice(void) const
-{_
-    return (tp()->nutrition_dice_str());
-}
-
-int Thing::nutrition(void) const
-{_
-    return (tp()->nutrition_dice().roll());
-}
-
 ////////////////////////////////////////////////////////////////////////////
 // lunge_to
 ////////////////////////////////////////////////////////////////////////////
@@ -1252,14 +1247,6 @@ int Thing::incr_stats_defence_max (void)
     auto n = (monstp->stats_defence_max++);
     if (is_player()) { game_status_wid_init(); }
     return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
-// attack
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_attack (void) const
-{_
-    return (tp()->stats_attack_dice().roll());
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -3435,7 +3422,6 @@ const std::string& Thing::str9 (void) const {_ return (tp()->str9()); }
 const std::string& Thing::str10 (void) const {_ return (tp()->str10()); }
 const std::string& Thing::str11 (void) const {_ return (tp()->str11()); }
 const std::string& Thing::str12 (void) const {_ return (tp()->str12()); }
-const std::string& Thing::spawn_on_idle_dice (void) const {_ return (tp()->spawn_on_idle_dice()); }
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }
 const std::string& Thing::spawn_on_death (void) const {_ return (tp()->spawn_on_death()); }
 const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }

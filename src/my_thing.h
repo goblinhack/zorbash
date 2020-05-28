@@ -301,8 +301,6 @@ public:
     int decr_stats_defence_max(void);
     int incr_stats_defence_max(void);
 
-    int get_stats_attack(void) const;
-
     int set_stats_attack_rate_tenths(int);
     int get_stats_attack_rate_tenths(void) const;
     int decr_stats_attack_rate_tenths(int);
@@ -587,6 +585,16 @@ public:
     uint32_t set_weapon_id(uint32_t);
     uint32_t get_weapon_id(void) const;
 
+    //
+    // Dice
+    //
+    const std::string& stats_attack_dice (void) const;
+    const std::string& nutrition_dice (void) const;
+    const std::string& set_spawn_on_idle_dice (void) const;
+    int nutrition(void) const;
+    int get_stats_attack(void) const;
+    int get_spawn_on_idle(void) const;
+
     Thingp owner_get() const;
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);
@@ -622,17 +630,14 @@ public:
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void);
     const std::string& light_color(void) const;
-    const std::string& nutrition_dice(void) const;
     const std::string& text_name(void) const;
     const std::string& spawn_on_death(void) const;
-    const std::string& stats_attack_dice(void) const;
     const std::string& weapon_carry_anim(void) const;
     const std::string& weapon_use_anim(void) const;
     const std::string& str1(void) const;
     const std::string& str10(void) const;
     const std::string& str11(void) const;
     const std::string& str12(void) const;
-    const std::string& spawn_on_idle_dice(void) const;
     const std::string& text_hits(void) const;
     const std::string& str2(void) const;
     const std::string& str3(void) const;
@@ -727,7 +732,6 @@ public:
     int is_movement_blocking(void) const;
     int is_msg(void) const;
     int is_no_tile(void) const;
-    int nutrition(void) const;
     int is_player(void) const;
     int is_projectile(void) const;
     int is_ripple(void) const;

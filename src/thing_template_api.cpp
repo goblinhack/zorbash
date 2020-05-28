@@ -11,21 +11,29 @@
 #include "my_tile.h"
 #include "my_dice.h"
 
+//
+// Dice
+//
 const Dice& Tp::nutrition_dice(void) const { return _nutrition_dice; }
+const Dice& Tp::spawn_on_idle_dice(void) const { return _spawn_on_idle_dice; }
 const Dice& Tp::stats_attack_dice(void) const { return _stats_attack_dice; }
+const std::string& Tp::nutrition_dice_str(void) const { return _nutrition_dice_str; }
+const std::string& Tp::spawn_on_idle_dice_str(void) const { return _spawn_on_idle_dice_str; }
+const std::string& Tp::stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
+void Tp::set_nutrition_dice(const std::string &v) { _nutrition_dice = v; _nutrition_dice_str = v; }
+void Tp::set_spawn_on_idle_dice(const std::string &v) { _spawn_on_idle_dice = v; _spawn_on_idle_dice_str = v; }
+void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
+
 const std::string& Tp::light_color(void) const { return _light_color; }
 const std::string& Tp::name(void) const { return _name; }
-const std::string& Tp::nutrition_dice_str(void) const { return _nutrition; }
 const std::string& Tp::text_name(void) const { return _text_name; }
 const std::string& Tp::spawn_on_death(void) const { return _spawn_on_death; }
-const std::string& Tp::stats_attack_dice_str(void) const { return _attack; }
 const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
 const std::string& Tp::weapon_use_anim(void) const { return _weapon_use_anim; }
 const std::string& Tp::str1(void) const { return _str1; }
 const std::string& Tp::str10(void) const { return _str10; }
 const std::string& Tp::str11(void) const { return _str11; }
 const std::string& Tp::str12(void) const { return _str12; }
-const std::string& Tp::spawn_on_idle_dice(void) const { return _spawn_on_idle_dice; }
 const std::string& Tp::text_hits(void) const { return _text_hits; }
 const std::string& Tp::str2(void) const { return _str2; }
 const std::string& Tp::str3(void) const { return _str3; }
@@ -292,7 +300,6 @@ void Tp::set_lifespan_count(int v) { _lifespan_count = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_name(const std::string &v) { _name = v; }
 void Tp::set_normal_placement_rules(int v) { _normal_placement_rules = v; }
-void Tp::set_nutrition_dice(const std::string &v) { _nutrition_dice = v; }
 void Tp::set_text_name(const std::string &v) { _text_name = v; }
 void Tp::set_spawn_on_death(const std::string &v) { _spawn_on_death = v; }
 void Tp::set_stats01(int v) { _stats01 = v; }
@@ -314,7 +321,6 @@ void Tp::set_stats16(int v) { _stats16 = v; }
 void Tp::set_stats17(int v) { _stats17 = v; }
 void Tp::set_stats18(int v) { _stats18 = v; }
 void Tp::set_stats19(int v) { _stats19 = v; }
-void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; }
 void Tp::set_stats_attack_rate_tenths(int v) { _stats_attack_rate_tenths = v; }
 void Tp::set_stats_defence(int v) { _stats_defence = v; }
 void Tp::set_stats_health_hunger_pct(int v) { _stats_health_hunger_pct = v; }
@@ -333,7 +339,6 @@ void Tp::set_str1(const std::string &v) { _str1 = v; }
 void Tp::set_str10(const std::string &v) { _str10 = v; }
 void Tp::set_str11(const std::string &v) { _str11 = v; }
 void Tp::set_str12(const std::string &v) { _str12 = v; }
-void Tp::set_spawn_on_idle_dice(const std::string &v) { _spawn_on_idle_dice = v; }
 void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
 void Tp::set_str2(const std::string &v) { _str2 = v; }
 void Tp::set_str3(const std::string &v) { _str3 = v; }
