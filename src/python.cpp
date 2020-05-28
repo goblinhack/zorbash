@@ -1792,7 +1792,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(str10)
     TP_SET_DECL(str11)
     TP_SET_DECL(str12)
-    TP_SET_DECL(spawn_on_idle_str)
+    TP_SET_DECL(spawn_on_idle_dice)
     TP_SET_DECL(text_hits)
     TP_SET_DECL(spawn_on_death)
     TP_SET_DECL(str2)

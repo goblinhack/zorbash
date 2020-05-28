@@ -152,8 +152,8 @@ class Tp:
     def set_str12(self, value):
         zx.tp_set_str12(self, value)
 
-    def set_spawn_on_idle_str(self, value):
-        zx.tp_set_spawn_on_idle_str(self, value)
+    def set_spawn_on_idle_dice(self, value):
+        zx.tp_set_spawn_on_idle_dice(self, value)
 
     def set_text_hits(self, value):
         zx.tp_set_text_hits(self, value)

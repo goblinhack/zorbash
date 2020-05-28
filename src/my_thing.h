@@ -632,7 +632,7 @@ public:
     const std::string& str10(void) const;
     const std::string& str11(void) const;
     const std::string& str12(void) const;
-    const std::string& spawn_on_idle_str(void) const;
+    const std::string& spawn_on_idle_dice(void) const;
     const std::string& text_hits(void) const;
     const std::string& str2(void) const;
     const std::string& str3(void) const;

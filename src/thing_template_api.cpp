@@ -25,7 +25,7 @@ const std::string& Tp::str1(void) const { return _str1; }
 const std::string& Tp::str10(void) const { return _str10; }
 const std::string& Tp::str11(void) const { return _str11; }
 const std::string& Tp::str12(void) const { return _str12; }
-const std::string& Tp::spawn_on_idle_str(void) const { return _spawn_on_idle_str; }
+const std::string& Tp::spawn_on_idle_dice(void) const { return _spawn_on_idle_dice; }
 const std::string& Tp::text_hits(void) const { return _text_hits; }
 const std::string& Tp::str2(void) const { return _str2; }
 const std::string& Tp::str3(void) const { return _str3; }
@@ -333,7 +333,7 @@ void Tp::set_str1(const std::string &v) { _str1 = v; }
 void Tp::set_str10(const std::string &v) { _str10 = v; }
 void Tp::set_str11(const std::string &v) { _str11 = v; }
 void Tp::set_str12(const std::string &v) { _str12 = v; }
-void Tp::set_spawn_on_idle_str(const std::string &v) { _spawn_on_idle_str = v; }
+void Tp::set_spawn_on_idle_dice(const std::string &v) { _spawn_on_idle_dice = v; }
 void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
 void Tp::set_str2(const std::string &v) { _str2 = v; }
 void Tp::set_str3(const std::string &v) { _str3 = v; }

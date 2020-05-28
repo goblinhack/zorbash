@@ -233,7 +233,7 @@ private:
     std::string _str10;
     std::string _str11;
     std::string _str12;
-    std::string _spawn_on_idle_str;
+    std::string _spawn_on_idle_dice;
     std::string _str1;
     std::string _str2;
     std::string _str3;
@@ -295,7 +295,7 @@ public:
     const std::string& str10(void) const;
     const std::string& str11(void) const;
     const std::string& str12(void) const;
-    const std::string& spawn_on_idle_str(void) const;
+    const std::string& spawn_on_idle_dice(void) const;
     const std::string& text_hits(void) const;
     const std::string& str2(void) const;
     const std::string& str3(void) const;
@@ -603,7 +603,7 @@ public:
     void set_str10(const std::string &);
     void set_str11(const std::string &);
     void set_str12(const std::string &);
-    void set_spawn_on_idle_str(const std::string &);
+    void set_spawn_on_idle_dice(const std::string &);
     void set_text_hits(const std::string &);
     void set_str2(const std::string &);
     void set_str3(const std::string &);

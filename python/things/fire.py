@@ -1,6 +1,9 @@
 import zx
 import tp
 
+def tp_fire_spawn(name):
+    return "small_fire1"
+
 def tp_init(name):
     x = tp.Tp(name)
 
@@ -22,6 +25,7 @@ def tp_init(name):
     x.set_is_movable(True)
     x.set_is_water_hater(100)
     x.set_stats_attack_dice("1d4+1")
+    #x.set_spawn_on_idle_dice("1d1+1,tp_fire_spawn")
     x.set_stats_attack_rate_tenths(3)
     x.set_stats_health_initial(10)
     x.set_text_a_or_an("");
