@@ -16,7 +16,7 @@ def tp_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_loggable(False)
     x.set_normal_placement_rules(True)
-    x.set_nutrition_hd("1d4")
+    x.set_nutrition_dice("1d4")
     x.set_stats_health_initial(4)
     x.set_text_a_or_an("a");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)

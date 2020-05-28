@@ -14,7 +14,7 @@ def tp_init(name, text_name):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_interesting(True)
-    x.set_nutrition_hd("1d4")
+    x.set_nutrition_dice("1d4")
     x.set_normal_placement_rules(True)
     x.set_stats_health_initial(4)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
