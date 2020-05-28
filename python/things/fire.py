@@ -21,7 +21,7 @@ def tp_init(name):
     x.set_is_loggable(False)
     x.set_is_movable(True)
     x.set_is_water_hater(100)
-    x.set_stats_attack_hd("1d4+1")
+    x.set_stats_attack_dice("1d4+1")
     x.set_stats_attack_rate_tenths(3)
     x.set_stats_health_initial(10)
     x.set_text_a_or_an("");

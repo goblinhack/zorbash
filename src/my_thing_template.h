@@ -75,8 +75,8 @@ public:
     Tilemap vert_tiles;
     Tilemap x_tiles;
 private:
-    Dice _stats_attack_hd {};
-    Dice _nutrition_hd {};
+    Dice _stats_attack_dice {};
+    Dice _nutrition_dice {};
     float _collision_radius {};
     fsize _sz;
     int _ai_delay_after_moving_ms {};
@@ -233,7 +233,7 @@ private:
     std::string _str10;
     std::string _str11;
     std::string _str12;
-    std::string _str13;
+    std::string _spawn_on_idle_str;
     std::string _str1;
     std::string _str2;
     std::string _str3;
@@ -252,8 +252,8 @@ public:
         oldptr(this);
     }
 
-    const Dice& nutrition_hd(void) const;
-    const Dice& stats_attack_hd(void) const;
+    const Dice& nutrition_dice(void) const;
+    const Dice& stats_attack_dice(void) const;
     const Tilemap *tp_bl1_tiles(void) const;
     const Tilemap *tp_bl2_tiles(void) const;
     const Tilemap *tp_bot1_tiles(void) const;
@@ -285,17 +285,17 @@ public:
     const Tilemap *tp_x_tiles(void) const;
     const std::string& light_color(void) const;
     const std::string& name(void) const;
-    const std::string& nutrition_hd_str(void) const;
+    const std::string& nutrition_dice_str(void) const;
     const std::string& text_name(void) const;
     const std::string& spawn_on_death(void) const;
-    const std::string& stats_attack_hd_str(void) const;
+    const std::string& stats_attack_dice_str(void) const;
     const std::string& weapon_carry_anim(void) const;
     const std::string& weapon_use_anim(void) const;
     const std::string& str1(void) const;
     const std::string& str10(void) const;
     const std::string& str11(void) const;
     const std::string& str12(void) const;
-    const std::string& str13(void) const;
+    const std::string& spawn_on_idle_str(void) const;
     const std::string& text_hits(void) const;
     const std::string& str2(void) const;
     const std::string& str3(void) const;
@@ -562,7 +562,7 @@ public:
     void set_light_color(const std::string &);
     void set_name(const std::string &);
     void set_normal_placement_rules(int);
-    void set_nutrition_hd(const std::string &);
+    void set_nutrition_dice(const std::string &);
     void set_text_name(const std::string &);
     void set_spawn_on_death(const std::string &);
     void set_stats01(int);
@@ -584,7 +584,7 @@ public:
     void set_stats17(int);
     void set_stats18(int);
     void set_stats19(int);
-    void set_stats_attack_hd(const std::string &);
+    void set_stats_attack_dice(const std::string &);
     void set_stats_attack_rate_tenths(int);
     void set_stats_defence(int);
     void set_stats_health_hunger_pct(int);
@@ -603,7 +603,7 @@ public:
     void set_str10(const std::string &);
     void set_str11(const std::string &);
     void set_str12(const std::string &);
-    void set_str13(const std::string &);
+    void set_spawn_on_idle_str(const std::string &);
     void set_text_hits(const std::string &);
     void set_str2(const std::string &);
     void set_str3(const std::string &);

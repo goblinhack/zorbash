@@ -152,8 +152,8 @@ class Tp:
     def set_str12(self, value):
         zx.tp_set_str12(self, value)
 
-    def set_str13(self, value):
-        zx.tp_set_str13(self, value)
+    def set_spawn_on_idle_str(self, value):
+        zx.tp_set_spawn_on_idle_str(self, value)
 
     def set_text_hits(self, value):
         zx.tp_set_text_hits(self, value)
@@ -353,11 +353,11 @@ class Tp:
     def set_is_rrr16(self, value):
         zx.tp_set_is_rrr16(self, value)
 
-    def set_nutrition_hd(self, value):
-        zx.tp_set_nutrition_hd(self, value)
+    def set_nutrition_dice(self, value):
+        zx.tp_set_nutrition_dice(self, value)
 
-    def set_stats_attack_hd(self, value):
-        zx.tp_set_stats_attack_hd(self, value)
+    def set_stats_attack_dice(self, value):
+        zx.tp_set_stats_attack_dice(self, value)
 
     def set_collision_check(self, value):
         zx.tp_set_collision_check(self, value)
