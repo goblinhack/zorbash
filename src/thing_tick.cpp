@@ -139,11 +139,9 @@ void things_tick (void)
     //
     // Allows for debugging
     //
-#if 0
     if (wid_console_window && wid_console_window->visible) {
         return;
     }
-#endif
 
     // LOG("-");
 
