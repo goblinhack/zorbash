@@ -14,8 +14,8 @@ private:
     int sides {};
     int modifier {};
     std::string hd;
-    std::string python_func;
 public:
+    std::string python_func;
     Dice (void);
     std::string to_string (void) const;
     const char *to_cstring(void);

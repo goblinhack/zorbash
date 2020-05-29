@@ -9,6 +9,7 @@
 #include "my_main.h"
 #include "my_wid_console.h"
 #include "my_thing.h"
+#include "my_python.h"
 
 void Thing::achieve_goals_in_life (void)
 {_
@@ -16,7 +17,7 @@ void Thing::achieve_goals_in_life (void)
         log("achieve goals at tick %d, game tick %u",
             get_tick(), game->tick_current);
     }
-_
+
     lifespan_tick();
     if (is_dead) {
         return;
@@ -37,12 +38,13 @@ _
         return;
     }
 
-#if 0
-    if (tick - tick_last_spawn > get_stats_attack()) {
-        auto d = get_stats_attack_dice();
-        CON("CALL %s", d->python_func);
+    if (!std::empty(get_spawn_on_idle_dice_str())) {
+        if (get_tick() - get_tick_last_spawn() > (unsigned int)get_spawn_on_idle()) {
+            auto d = get_spawn_on_idle_dice();
+            con("CALL %s", d.python_func.c_str());
+            py_call_void_int(d.python_func.c_str(), 10);
+        }
     }
-#endif
 
     //
     // If there is a next hop to go to, do it.

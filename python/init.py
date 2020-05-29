@@ -58,3 +58,4 @@ def init2():
     console.hello()
 
 init1()
+from things import *
