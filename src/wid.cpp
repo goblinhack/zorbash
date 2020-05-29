@@ -2873,9 +2873,6 @@ static uint8_t wid_scroll_trough_mouse_motion (Widp w,
 
         dx = relx ? relx : -wheelx;
 
-        dx = ((int)(dx / ASCII_WIDTH)) * ASCII_WIDTH;
-        dy = ((int)(dy / ASCII_HEIGHT)) * ASCII_HEIGHT;
-
         if (dx < 0) {
             dx = -1;
         }
