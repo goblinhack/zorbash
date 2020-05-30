@@ -21,11 +21,15 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_corridor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_deep_water {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _gfx_large_shadow {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_large {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
@@ -226,79 +230,91 @@ public:
     void clear(void);
     bool is_anything_at(const int x, const int y);
     bool is_anything_at(const point &p);
-    bool is_door(const int x, const int y);
-    bool is_door(const point &p);
-    bool is_food(const int x, const int y);
-    bool is_food(const point &p);
-    bool is_key(const int x, const int y);
-    bool is_key(const point &p);
-    bool is_monst(const int x, const int y);
-    bool is_monst(const point &p);
 
     bool is_floor(const int x, const int y);
     bool is_floor(const point &p);
-    void set_floor(const int x, const int y);
-    void unset_floor(const int x, const int y);
+    void set_is_floor(const int x, const int y);
+    void unset_is_floor(const int x, const int y);
 
     bool is_corridor(const int x, const int y);
     bool is_corridor(const point &p);
-    void set_corridor(const int x, const int y);
-    void unset_corridor(const int x, const int y);
+    void set_is_corridor(const int x, const int y);
+    void unset_is_corridor(const int x, const int y);
 
     bool is_blood(const int x, const int y);
     bool is_blood(const point &p);
-    void set_blood(const int x, const int y);
-    void unset_blood(const int x, const int y);
+    void set_is_blood(const int x, const int y);
+    void unset_is_blood(const int x, const int y);
 
     bool is_wall(const int x, const int y);
     bool is_wall(const point &p);
-    void set_wall(const int x, const int y);
-    void unset_wall(const int x, const int y);
+    void set_is_wall(const int x, const int y);
+    void unset_is_wall(const int x, const int y);
 
     bool is_water(const int x, const int y);
     bool is_water(const point &p);
-    void set_water(const int x, const int y);
-    void unset_water(const int x, const int y);
+    void set_is_water(const int x, const int y);
+    void unset_is_water(const int x, const int y);
 
     bool is_lava(const int x, const int y);
     bool is_lava(const point &p);
-    void set_lava(const int x, const int y);
-    void unset_lava(const int x, const int y);
+    void set_is_lava(const int x, const int y);
+    void unset_is_lava(const int x, const int y);
 
     bool is_chasm(const int x, const int y);
     bool is_chasm(const point &p);
-    void set_chasm(const int x, const int y);
-    void unset_chasm(const int x, const int y);
+    void set_is_chasm(const int x, const int y);
+    void unset_is_chasm(const int x, const int y);
 
     bool is_hazard(const int x, const int y);
     bool is_hazard(const point &p);
-    void set_hazard(const int x, const int y);
-    void unset_hazard(const int x, const int y);
+    void set_is_hazard(const int x, const int y);
+    void unset_is_hazard(const int x, const int y);
 
     bool is_secret_door(const int x, const int y);
     bool is_secret_door(const point &p);
-    void set_secret_door(const int x, const int y);
-    void unset_secret_door(const int x, const int y);
+    void set_is_secret_door(const int x, const int y);
+    void unset_is_secret_door(const int x, const int y);
 
     bool is_corpse(const int x, const int y);
     bool is_corpse(const point &p);
-    void set_corpse(const int x, const int y);
-    void unset_corpse(const int x, const int y);
+    void set_is_corpse(const int x, const int y);
+    void unset_is_corpse(const int x, const int y);
+
+    bool is_monst(const int x, const int y);
+    bool is_monst(const point &p);
+    void set_is_monst(const int x, const int y);
+    void unset_is_monst(const int x, const int y);
+
+    bool is_door(const int x, const int y);
+    bool is_door(const point &p);
+    void set_is_door(const int x, const int y);
+    void unset_is_door(const int x, const int y);
+
+    bool is_key(const int x, const int y);
+    bool is_key(const point &p);
+    void set_is_key(const int x, const int y);
+    void unset_is_key(const int x, const int y);
+
+    bool is_food(const int x, const int y);
+    bool is_food(const point &p);
+    void set_is_food(const int x, const int y);
+    void unset_is_food(const int x, const int y);
 
     bool is_deep_water(const int x, const int y);
     bool is_deep_water(const point &p);
-    void set_deep_water(const int x, const int y);
-    void unset_deep_water(const int x, const int y);
+    void set_is_deep_water(const int x, const int y);
+    void unset_is_deep_water(const int x, const int y);
 
     bool is_dirt(const int x, const int y);
     bool is_dirt(const point &p);
-    void set_dirt(const int x, const int y);
-    void unset_dirt(const int x, const int y);
+    void set_is_dirt(const int x, const int y);
+    void unset_is_dirt(const int x, const int y);
 
     bool is_rock(const int x, const int y);
     bool is_rock(const point &p);
-    void set_rock(const int x, const int y);
-    void unset_rock(const int x, const int y);
+    void set_is_rock(const int x, const int y);
+    void unset_is_rock(const int x, const int y);
 
     bool is_dungeon(const int x, const int y);
     bool is_dungeon(const point &p);
@@ -341,9 +357,9 @@ public:
         return (get(_is_fade_in, p.x, p.y));
     }
 
-    inline uint8_t is_fade_in_unsafe (const point &p)
+    inline uint8_t is_fade_in_no_check (const point &p)
     {_
-        return (get_unsafe(_is_fade_in, p.x, p.y));
+        return (get_no_check(_is_fade_in, p.x, p.y));
     }
 
     inline uint8_t is_fade_in (const int x, const int y)
@@ -354,9 +370,9 @@ public:
         return (get(_is_fade_in, x, y));
     }
 
-    inline uint8_t is_fade_in_unsafe (const int x, const int y)
+    inline uint8_t is_fade_in_no_check (const int x, const int y)
     {_
-        return (get_unsafe(_is_fade_in, x, y));
+        return (get_no_check(_is_fade_in, x, y));
     }
 
     inline void incr_fade_in (const int x, const int y)
@@ -373,12 +389,12 @@ public:
         }
     }
 
-    inline void incr_fade_in_unsafe (const int x, const int y)
+    inline void incr_fade_in_no_check (const int x, const int y)
     {_
-        auto v = get_unsafe(_is_fade_in, x, y);
+        auto v = get_no_check(_is_fade_in, x, y);
         if (v < 200) {
             v+=5;
-            set_unsafe(_is_fade_in, x, y, v);
+            set_no_check(_is_fade_in, x, y, v);
         } else {
             set(_is_fade_in, x, y, (uint8_t)255);
         }
@@ -392,9 +408,9 @@ public:
         set(_is_fade_in, x, y, (uint8_t)0);
     }
 
-    inline void unset_fade_in_unsafe (const int x, const int y)
+    inline void unset_fade_in_no_check (const int x, const int y)
     {_
-        set_unsafe(_is_fade_in, x, y, (uint8_t)0);
+        set_no_check(_is_fade_in, x, y, (uint8_t)0);
     }
 
     inline uint8_t is_visited (const point &p)
@@ -405,9 +421,9 @@ public:
         return (get(_is_visited, p.x, p.y));
     }
 
-    inline uint8_t is_visited_unsafe (const point &p)
+    inline uint8_t is_visited_no_check (const point &p)
     {_
-        return (get_unsafe(_is_visited, p.x, p.y));
+        return (get_no_check(_is_visited, p.x, p.y));
     }
 
     inline uint8_t is_visited (const int x, const int y)
@@ -418,9 +434,9 @@ public:
         return (get(_is_visited, x, y));
     }
 
-    inline uint8_t is_visited_unsafe (const int x, const int y)
+    inline uint8_t is_visited_no_check (const int x, const int y)
     {_
-        return (get_unsafe(_is_visited, x, y));
+        return (get_no_check(_is_visited, x, y));
     }
 
     inline void set_visited (const int x, const int y)
@@ -434,12 +450,12 @@ public:
         }
     }
 
-    inline void set_visited_unsafe (const int x, const int y)
+    inline void set_visited_no_check (const int x, const int y)
     {_
-        if (!get_unsafe(_is_visited, x, y)) {
-            set_unsafe(_is_fade_in, x, y, (uint8_t)1);
+        if (!get_no_check(_is_visited, x, y)) {
+            set_no_check(_is_fade_in, x, y, (uint8_t)1);
         }
-        set_unsafe(_is_visited, x, y, true);
+        set_no_check(_is_visited, x, y, true);
     }
 
     inline void unset_visited (const int x, const int y)
@@ -450,64 +466,64 @@ public:
         set(_is_visited, x, y, false);
     }
 
-    inline void unset_visited_unsafe (const int x, const int y)
+    inline void unset_visited_no_check (const int x, const int y)
     {_
-        set_unsafe(_is_visited, x, y, false);
+        set_no_check(_is_visited, x, y, false);
     }
 
     //
     // Used in lighting, so inlined
     //
-    inline bool gfx_large_shadow (const point &p)
+    inline bool is_large (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_gfx_large_shadow, p.x, p.y));
+        return (get(_is_large, p.x, p.y));
     }
 
-    inline bool gfx_large_shadow_unsafe (const point &p)
+    inline bool is_large_no_check (const point &p)
     {_
-        return (get_unsafe(_gfx_large_shadow, p.x, p.y));
+        return (get_no_check(_is_large, p.x, p.y));
     }
 
-    inline bool gfx_large_shadow (const int x, const int y)
+    inline bool is_large (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_gfx_large_shadow, x, y));
+        return (get(_is_large, x, y));
     }
 
-    inline bool gfx_large_shadow_unsafe (const int x, const int y)
+    inline bool is_large_no_check (const int x, const int y)
     {_
-        return (get_unsafe(_gfx_large_shadow, x, y));
+        return (get_no_check(_is_large, x, y));
     }
 
-    inline void set_gfx_large_shadow (const int x, const int y)
-    {_
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_gfx_large_shadow, x, y, true);
-    }
-
-    inline void set_gfx_large_shadow_unsafe (const int x, const int y)
-    {_
-        set_unsafe(_gfx_large_shadow, x, y, true);
-    }
-
-    inline void unset_gfx_large_shadow (const int x, const int y)
+    inline void set_is_large (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_gfx_large_shadow, x, y, false);
+        set(_is_large, x, y, true);
     }
 
-    inline void unset_gfx_large_shadow_unsafe (const int x, const int y)
+    inline void set_is_large_no_check (const int x, const int y)
     {_
-        set_unsafe(_gfx_large_shadow, x, y, false);
+        set_no_check(_is_large, x, y, true);
+    }
+
+    inline void unset_is_large (const int x, const int y)
+    {_
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_large, x, y, false);
+    }
+
+    inline void unset_is_large_no_check (const int x, const int y)
+    {_
+        set_no_check(_is_large, x, y, false);
     }
 
     void init(point3d at, int seed);

@@ -654,9 +654,9 @@ void Thing::blit_internal (point &blit_tl,
     if (game->config.gfx_show_hidden) {
         c.a = 255;
     } else {
-        uint8_t fade = level->is_fade_in_unsafe(mid_at.x, mid_at.y);
+        uint8_t fade = level->is_fade_in_no_check(mid_at.x, mid_at.y);
         if (fade) {
-            level->incr_fade_in_unsafe(mid_at.x, mid_at.y);
+            level->incr_fade_in_no_check(mid_at.x, mid_at.y);
             c.a = std::min(c.a, fade);
         } else {
             c.a = 0;

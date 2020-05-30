@@ -723,7 +723,7 @@ public:
     int gfx_bounce_always(void) const;
     int gfx_bounce_on_move(void) const;
     int gfx_dead_anim(void) const;
-    int gfx_large_shadow(void) const;
+    int is_large(void) const;
     int gfx_on_fire_anim(void) const;
     int gfx_oversized_but_sitting_on_the_ground(void) const;
     int gfx_show_outlined(void) const;

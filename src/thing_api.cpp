@@ -259,9 +259,9 @@ int Thing::gfx_attack_anim(void) const
     return (tp()->gfx_attack_anim());
 }
 
-int Thing::gfx_large_shadow(void) const
+int Thing::is_large(void) const
 {_
-    return (tp()->gfx_large_shadow());
+    return (tp()->is_large());
 }
 
 int Thing::gfx_show_outlined(void) const

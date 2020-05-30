@@ -50,11 +50,14 @@ void Level::clear (void)
     _is_corridor = {};
     _is_deep_water = {};
     _is_dirt = {};
+    _is_door = {};
     _is_dungeon = {};
     _is_fade_in = {};
     _is_floor = {};
-    _gfx_large_shadow = {};
+    _is_food = {};
+    _is_large = {};
     _is_lava = {};
+    _is_monst = {};
     _is_rock = {};
     _is_visited = {};
     _is_wall = {};
@@ -280,7 +283,7 @@ static void level_place_walls (Dungeonp d,
                     continue;
                 }
 
-                if (!d->is_wall_unsafe(X, Y)) {
+                if (!d->is_wall_no_check(X, Y)) {
                     can_place_here = false;
                     break;
                 }
@@ -309,7 +312,7 @@ static void level_place_walls (Dungeonp d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                level->set_wall(X, Y);
+                level->set_is_wall(X, Y);
 
                 auto tilename = what + ".";
                 tilename += std::to_string(variant);
@@ -391,7 +394,7 @@ static void level_place_rocks (Dungeonp d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                level->set_rock(X, Y);
+                level->set_is_rock(X, Y);
 
                 auto tilename = what + ".";
                 tilename += std::to_string(variant);
@@ -480,7 +483,7 @@ static void level_place_floors (Dungeonp d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                level->set_floor(X, Y);
+                level->set_is_floor(X, Y);
 
                 auto new_thing = what + std::to_string(depth);
                 auto tilename = new_thing + ".";
@@ -514,7 +517,7 @@ static void level_place_floor_under_objects (Dungeonp d,
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
-            if (!d->is_floor_unsafe(x, y)) {
+            if (!d->is_floor_no_check(x, y)) {
                 continue;
             }
 

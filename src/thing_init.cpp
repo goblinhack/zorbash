@@ -323,24 +323,25 @@ void Thing::init (std::string name, fpoint born, fpoint jitter)
         return;
     }
 
-    if (tpp->is_blood())       { level->set_blood(new_at.x, new_at.y); }
-    if (tpp->is_corridor())    { level->set_corridor(new_at.x, new_at.y); }
-    if (tpp->is_dirt())        { level->set_dirt(new_at.x, new_at.y); }
-    if (tpp->is_floor())       { level->set_floor(new_at.x, new_at.y); }
-    if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
-    if (tpp->is_lava())        { level->set_lava(new_at.x, new_at.y); }
-    if (tpp->is_chasm())       { level->set_chasm(new_at.x, new_at.y); }
-    if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
-    if (tpp->is_rock())        { level->set_rock(new_at.x, new_at.y); }
-    if (tpp->is_secret_door()) { level->set_secret_door(new_at.x, new_at.y); }
-    if (tpp->is_wall())        { level->set_wall(new_at.x, new_at.y); }
-    if (tpp->is_water())       { level->set_water(new_at.x, new_at.y); }
-    if (tpp->is_deep_water())  { level->set_water(new_at.x, new_at.y); }
-    if (tpp->is_deep_water())  { level->set_deep_water(new_at.x, new_at.y); }
-
-    if (tpp->gfx_large_shadow()) {
-        level->set_gfx_large_shadow(new_at.x, new_at.y);
-    }
+    if (is_corpse())             { level->set_is_corpse(new_at.x, new_at.y); }
+    if (tpp->is_blood())         { level->set_is_blood(new_at.x, new_at.y); }
+    if (tpp->is_chasm())         { level->set_is_chasm(new_at.x, new_at.y); }
+    if (tpp->is_corridor())      { level->set_is_corridor(new_at.x, new_at.y); }
+    if (tpp->is_deep_water())    { level->set_is_deep_water(new_at.x, new_at.y); }
+    if (tpp->is_deep_water())    { level->set_is_water(new_at.x, new_at.y); }
+    if (tpp->is_dirt())          { level->set_is_dirt(new_at.x, new_at.y); }
+    if (tpp->is_door())          { level->set_is_door(new_at.x, new_at.y); }
+    if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
+    if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
+    if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
+    if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
+    if (tpp->is_large())         { level->set_is_large(new_at.x, new_at.y); }
+    if (tpp->is_lava())          { level->set_is_lava(new_at.x, new_at.y); }
+    if (tpp->is_monst())         { level->set_is_monst(new_at.x, new_at.y); }
+    if (tpp->is_rock())          { level->set_is_rock(new_at.x, new_at.y); }
+    if (tpp->is_secret_door())   { level->set_is_secret_door(new_at.x, new_at.y); }
+    if (tpp->is_wall())          { level->set_is_wall(new_at.x, new_at.y); }
+    if (tpp->is_water())         { level->set_is_water(new_at.x, new_at.y); }
 
     if (tpp->is_loggable()) {
         log("created");
@@ -447,24 +448,25 @@ void Thing::reinit (void)
         return;
     }
 
-    if (tpp->is_blood())       { level->set_blood(new_at.x, new_at.y); }
-    if (tpp->is_corridor())    { level->set_corridor(new_at.x, new_at.y); }
-    if (tpp->is_dirt())        { level->set_dirt(new_at.x, new_at.y); }
-    if (tpp->is_floor())       { level->set_floor(new_at.x, new_at.y); }
-    if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
-    if (tpp->is_lava())        { level->set_lava(new_at.x, new_at.y); }
-    if (tpp->is_chasm())       { level->set_chasm(new_at.x, new_at.y); }
-    if (tpp->is_hazard())      { level->set_hazard(new_at.x, new_at.y); }
-    if (tpp->is_rock())        { level->set_rock(new_at.x, new_at.y); }
-    if (tpp->is_secret_door()) { level->set_secret_door(new_at.x, new_at.y); }
-    if (tpp->is_wall())        { level->set_wall(new_at.x, new_at.y); }
-    if (tpp->is_water())       { level->set_water(new_at.x, new_at.y); }
-    if (tpp->is_deep_water())  { level->set_water(new_at.x, new_at.y); }
-    if (tpp->is_deep_water())  { level->set_deep_water(new_at.x, new_at.y); }
-
-    if (tpp->gfx_large_shadow()) {
-        level->set_gfx_large_shadow(new_at.x, new_at.y);
-    }
+    if (is_corpse())             { level->set_is_corpse(new_at.x, new_at.y); }
+    if (tpp->is_blood())         { level->set_is_blood(new_at.x, new_at.y); }
+    if (tpp->is_chasm())         { level->set_is_chasm(new_at.x, new_at.y); }
+    if (tpp->is_corridor())      { level->set_is_corridor(new_at.x, new_at.y); }
+    if (tpp->is_deep_water())    { level->set_is_deep_water(new_at.x, new_at.y); }
+    if (tpp->is_deep_water())    { level->set_is_water(new_at.x, new_at.y); }
+    if (tpp->is_dirt())          { level->set_is_dirt(new_at.x, new_at.y); }
+    if (tpp->is_door())          { level->set_is_door(new_at.x, new_at.y); }
+    if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
+    if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
+    if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
+    if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
+    if (tpp->is_large())         { level->set_is_large(new_at.x, new_at.y); }
+    if (tpp->is_lava())          { level->set_is_lava(new_at.x, new_at.y); }
+    if (tpp->is_monst())         { level->set_is_monst(new_at.x, new_at.y); }
+    if (tpp->is_rock())          { level->set_is_rock(new_at.x, new_at.y); }
+    if (tpp->is_secret_door())   { level->set_is_secret_door(new_at.x, new_at.y); }
+    if (tpp->is_wall())          { level->set_is_wall(new_at.x, new_at.y); }
+    if (tpp->is_water())         { level->set_is_water(new_at.x, new_at.y); }
 
     if (tpp->is_loggable()) {
         log("recreated");

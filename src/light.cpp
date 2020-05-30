@@ -148,10 +148,10 @@ void Light::calculate (int last)
             }
 
             if (do_set_visited) {
-                level->set_visited_unsafe(x, y);
+                level->set_visited_no_check(x, y);
             }
 
-            if (level->gfx_large_shadow_unsafe(x, y)) {
+            if (level->is_large_no_check(x, y)) {
                 break;
             }
         }
@@ -176,14 +176,14 @@ void Light::calculate (int last)
             }
 
             if (do_set_visited) {
-                level->set_visited_unsafe(x, y);
+                level->set_visited_no_check(x, y);
             }
 
-            if (!level->gfx_large_shadow_unsafe(x, y)) {
+            if (!level->is_large_no_check(x, y)) {
                 break;
             }
 
-            set_unsafe(is_nearest_wall, x, y, is_nearest_wall_val);
+            set_no_check(is_nearest_wall, x, y, is_nearest_wall_val);
         }
     }
 
@@ -219,10 +219,10 @@ void Light::calculate (int last)
                 }
 
                 if (do_set_visited) {
-                    level->set_visited_unsafe(x, y);
+                    level->set_visited_no_check(x, y);
                 }
 
-                if (get_unsafe(is_nearest_wall, x, y) != is_nearest_wall_val) {
+                if (get_no_check(is_nearest_wall, x, y) != is_nearest_wall_val) {
                     break;
                 }
             }

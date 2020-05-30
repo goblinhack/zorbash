@@ -113,21 +113,17 @@ bool Thing::ai_choose_wander (point& nh)
     // Choose a new wander location
     //
     monstp->wander_target = point(0, 0);
-    int tries = (MAP_WIDTH * MAP_HEIGHT) / 2;
-    while (tries--) {
-        auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
-        auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
-        target = point(x, y);
-        auto l = ai_create_path(point(mid_at.x, mid_at.y), target);
-        if (!l.size()) {
-            continue;
-        }
 
-        monstp->wander_target = point(x, y);
-        nh = l[0];
-        log("wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
-        return (true);
+    auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
+    auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
+    target = point(x, y);
+    auto l = ai_create_path(point(mid_at.x, mid_at.y), target);
+    if (!l.size()) {
+        return false;
     }
 
-    return false;
+    monstp->wander_target = point(x, y);
+    nh = l[0];
+    log("wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
+    return (true);
 }

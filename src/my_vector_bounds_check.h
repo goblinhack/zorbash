@@ -284,49 +284,49 @@ TYPE* getptr(std::vector<std::vector<std::vector<std::vector<TYPE> > > > &contai
 
 template<class TYPE>
 static inline
-void set_unsafe(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void set_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){_
     container[X] = v;
 }
 
 template<class TYPE>
 static inline
-void incr_unsafe(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void incr_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){_
     container[X] += v;
 }
 
 template<class TYPE>
 static inline
-void decr_unsafe(std::vector<TYPE>& container, std::size_t X, TYPE v){_
+void decr_no_check(std::vector<TYPE>& container, std::size_t X, TYPE v){_
     container[X] -= v;
 }
 
 template<class TYPE>
 static inline
-void incr_unsafe(std::vector<TYPE>& container, std::size_t X){_
+void incr_no_check(std::vector<TYPE>& container, std::size_t X){_
     container[X] ++;
 }
 
 template<class TYPE>
 static inline
-void decr_unsafe(std::vector<TYPE>& container, std::size_t X){_
+void decr_no_check(std::vector<TYPE>& container, std::size_t X){_
     container[X] --;
 }
 
 template<class TYPE>
 static inline
-TYPE get_unsafe(std::vector<TYPE> const &container, std::size_t X){_
+TYPE get_no_check(std::vector<TYPE> const &container, std::size_t X){_
     return (container[X]);
 }
 
 template<class TYPE>
 static inline
-TYPE& getref_unsafe(std::vector<TYPE> &container, std::size_t X){_
+TYPE& getref_no_check(std::vector<TYPE> &container, std::size_t X){_
     return (container[X]);
 }
 
 template<class TYPE>
 static inline
-TYPE* getptr_unsafe(std::vector<TYPE> &container, std::size_t X){_
+TYPE* getptr_no_check(std::vector<TYPE> &container, std::size_t X){_
     return (&container[X]);
 }
 
@@ -335,35 +335,35 @@ TYPE* getptr_unsafe(std::vector<TYPE> &container, std::size_t X){_
 //
 template<class TYPE>
 static inline
-void set_unsafe(std::vector<std::vector<TYPE> >& container,
+void set_no_check(std::vector<std::vector<TYPE> >& container,
                 std::size_t X, std::size_t Y, TYPE v){_
     container[X][Y] = v;
 }
 
 template<class TYPE>
 static inline
-void incr_unsafe(std::vector<std::vector<TYPE> >& container,
+void incr_no_check(std::vector<std::vector<TYPE> >& container,
                  std::size_t X, std::size_t Y, TYPE v){_
     container[X][Y] += v;
 }
 
 template<class TYPE>
 static inline
-void decr_unsafe(std::vector<std::vector<TYPE> >& container,
+void decr_no_check(std::vector<std::vector<TYPE> >& container,
                  std::size_t X, std::size_t Y, TYPE v){_
     container[X][Y] -= v;
 }
 
 template<class TYPE>
 static inline
-TYPE& getref_unsafe(std::vector<std::vector<TYPE> > &container,
+TYPE& getref_no_check(std::vector<std::vector<TYPE> > &container,
                     std::size_t X, std::size_t Y){_
     return (container[X][Y]);
 }
 
 template<class TYPE>
 static inline
-TYPE get_unsafe(std::vector<std::vector<TYPE> > const &container,
+TYPE get_no_check(std::vector<std::vector<TYPE> > const &container,
                 std::size_t X, std::size_t Y){_
     return (container[X][Y]);
 }
@@ -373,21 +373,21 @@ TYPE get_unsafe(std::vector<std::vector<TYPE> > const &container,
 //
 template<class TYPE>
 static inline
-void set_unsafe(std::vector<std::vector<std::vector<TYPE> > >& container,
+void set_no_check(std::vector<std::vector<std::vector<TYPE> > >& container,
                 std::size_t X, std::size_t Y, std::size_t Z, TYPE v){_
     container[X][Y][Z] = v;
 }
 
 template<class TYPE>
 static inline
-TYPE get_unsafe(std::vector<std::vector<std::vector<TYPE> > > const &container,
+TYPE get_no_check(std::vector<std::vector<std::vector<TYPE> > > const &container,
                 std::size_t X, std::size_t Y, std::size_t Z){_
     return (container[X][Y][Z]);
 }
 
 template<class TYPE>
 static inline
-TYPE& getref_unsafe(std::vector<std::vector<std::vector<TYPE> > > &container,
+TYPE& getref_no_check(std::vector<std::vector<std::vector<TYPE> > > &container,
                     std::size_t X, std::size_t Y, std::size_t Z){_
     return (container[X][Y][Z]);
 }
@@ -397,21 +397,21 @@ TYPE& getref_unsafe(std::vector<std::vector<std::vector<TYPE> > > &container,
 //
 template<class TYPE>
 static inline
-void set_unsafe(std::vector<std::vector<std::vector<std::vector<TYPE> > > >& container,
+void set_no_check(std::vector<std::vector<std::vector<std::vector<TYPE> > > >& container,
                 std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v){_
     container[X][Y][Z][I] = v;
 }
 
 template<class TYPE>
 static inline
-TYPE get_unsafe(std::vector<std::vector<std::vector<std::vector<TYPE> > > > const &container,
+TYPE get_no_check(std::vector<std::vector<std::vector<std::vector<TYPE> > > > const &container,
                 std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
     return (container[X][Y][Z][I]);
 }
 
 template<class TYPE>
 static inline
-TYPE& getref_unsafe(std::vector<std::vector<std::vector<std::vector<TYPE> > > > &container,
+TYPE& getref_no_check(std::vector<std::vector<std::vector<std::vector<TYPE> > > > &container,
                     std::size_t X, std::size_t Y, std::size_t Z, std::size_t I){_
     return (container[X][Y][Z][I]);
 }

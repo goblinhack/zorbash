@@ -26,15 +26,11 @@ void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _
 
 const std::string& Tp::light_color(void) const { return _light_color; }
 const std::string& Tp::name(void) const { return _name; }
-const std::string& Tp::text_name(void) const { return _text_name; }
 const std::string& Tp::spawn_on_death(void) const { return _spawn_on_death; }
-const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
-const std::string& Tp::weapon_use_anim(void) const { return _weapon_use_anim; }
 const std::string& Tp::str1(void) const { return _str1; }
 const std::string& Tp::str10(void) const { return _str10; }
 const std::string& Tp::str11(void) const { return _str11; }
 const std::string& Tp::str12(void) const { return _str12; }
-const std::string& Tp::text_hits(void) const { return _text_hits; }
 const std::string& Tp::str2(void) const { return _str2; }
 const std::string& Tp::str3(void) const { return _str3; }
 const std::string& Tp::str4(void) const { return _str4; }
@@ -43,6 +39,10 @@ const std::string& Tp::str6(void) const { return _str6; }
 const std::string& Tp::str7(void) const { return _str7; }
 const std::string& Tp::str8(void) const { return _str8; }
 const std::string& Tp::str9(void) const { return _str9; }
+const std::string& Tp::text_hits(void) const { return _text_hits; }
+const std::string& Tp::text_name(void) const { return _text_name; }
+const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
+const std::string& Tp::weapon_use_anim(void) const { return _weapon_use_anim; }
 float Tp::collision_radius(void) const { return _collision_radius; }
 int Tp::ai_delay_after_moving_ms(void) const { return _ai_delay_after_moving_ms; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
@@ -56,6 +56,20 @@ int Tp::collision_box(void) const { return _collision_box; }
 int Tp::collision_check(void) const { return _collision_check; }
 int Tp::collision_circle(void) const { return _collision_circle; }
 int Tp::collision_hit_priority(void) const { return _collision_hit_priority; }
+int Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
+int Tp::gfx_animated(void) const { return _gfx_animated; }
+int Tp::gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
+int Tp::gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
+int Tp::gfx_animated_no_dir(void) const { return _gfx_animated_no_dir; }
+int Tp::gfx_attack_anim(void) const { return _gfx_attack_anim; }
+int Tp::gfx_bounce_always(void) const { return _gfx_bounce_always; }
+int Tp::gfx_bounce_on_move(void) const { return _gfx_bounce_on_move; }
+int Tp::gfx_dead_anim(void) const { return _gfx_dead_anim; }
+int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
+int Tp::gfx_oversized_but_sitting_on_the_ground(void) const { return _gfx_oversized_but_sitting_on_the_ground; }
+int Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
+int Tp::gfx_small_shadow_caster(void) const { return _gfx_small_shadow_caster; }
+int Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
 int Tp::hunger_clock_freq_ms(void) const { return _hunger_clock_freq_ms; }
 int Tp::internal_has_dir_anim(void) const { return _internal_has_dir_anim; }
 int Tp::internal_has_hp_anim(void) const { return _internal_has_hp_anim; }
@@ -81,29 +95,17 @@ int Tp::is_door(void) const { return _is_door; }
 int Tp::is_entrance(void) const { return _is_entrance; }
 int Tp::is_exit(void) const { return _is_exit; }
 int Tp::is_explosion(void) const { return _is_explosion; }
+int Tp::is_fire(void) const { return _is_fire; }
+int Tp::is_fire_hater(void) const { return _is_fire_hater; }
 int Tp::is_flammable(void) const { return _is_flammable; }
 int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_floor_deco(void) const { return _is_floor_deco; }
 int Tp::is_food(void) const { return _is_food; }
-int Tp::gfx_an_animation_only(void) const { return _gfx_an_animation_only; }
-int Tp::gfx_animated(void) const { return _gfx_animated; }
-int Tp::gfx_animated_can_hflip(void) const { return _gfx_animated_can_hflip; }
-int Tp::gfx_animated_can_vflip(void) const { return _gfx_animated_can_vflip; }
-int Tp::gfx_animated_no_dir(void) const { return _gfx_animated_no_dir; }
-int Tp::gfx_attack_anim(void) const { return _gfx_attack_anim; }
-int Tp::gfx_bounce_always(void) const { return _gfx_bounce_always; }
-int Tp::gfx_bounce_on_move(void) const { return _gfx_bounce_on_move; }
-int Tp::gfx_dead_anim(void) const { return _gfx_dead_anim; }
-int Tp::gfx_large_shadow(void) const { return _gfx_large_shadow; }
-int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
-int Tp::gfx_oversized_but_sitting_on_the_ground(void) const { return _gfx_oversized_but_sitting_on_the_ground; }
-int Tp::gfx_show_outlined(void) const { return _gfx_show_outlined; }
-int Tp::gfx_small_shadow_caster(void) const { return _gfx_small_shadow_caster; }
-int Tp::gfx_weapon_carry_anim(void) const { return _gfx_weapon_carry_anim; }
 int Tp::is_hazard(void) const { return _is_hazard; }
 int Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
 int Tp::is_interesting(void) const { return _is_interesting; }
 int Tp::is_key(void) const { return _is_key; }
+int Tp::is_large(void) const { return _is_large; }
 int Tp::is_lava(void) const { return _is_lava; }
 int Tp::is_light_strength(void) const { return _is_light_strength; }
 int Tp::is_loggable(void) const { return _is_loggable; }
@@ -128,14 +130,12 @@ int Tp::is_rrr15(void) const { return _is_rrr15; }
 int Tp::is_rrr16(void) const { return _is_rrr16; }
 int Tp::is_rrr17(void) const { return _is_rrr17; }
 int Tp::is_rrr18(void) const { return _is_rrr18; }
-int Tp::is_fire_hater(void) const { return _is_fire_hater; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_rrr20(void) const { return _is_rrr20; }
 int Tp::is_rrr21(void) const { return _is_rrr21; }
 int Tp::is_rrr22(void) const { return _is_rrr22; }
 int Tp::is_rrr23(void) const { return _is_rrr23; }
 int Tp::is_rrr24(void) const { return _is_rrr24; }
-int Tp::is_fire(void) const { return _is_fire; }
 int Tp::is_rrr3(void) const { return _is_rrr3; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
@@ -185,7 +185,6 @@ int Tp::weapon_damage(void) const { return _weapon_damage; }
 int Tp::weapon_use_delay_hundredths(void) const { return _weapon_use_delay_hundredths; }
 int Tp::weapon_use_distance(void) const { return _weapon_use_distance; }
 std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
-void Tp::set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
 void Tp::set_ai_delay_after_moving_ms(int v) { _ai_delay_after_moving_ms = v; }
 void Tp::set_ai_obstacle(int v) { _ai_obstacle = v; }
 void Tp::set_ai_scent_distance(int v) { _ai_scent_distance = v; }
@@ -199,6 +198,20 @@ void Tp::set_collision_check(int v) { _collision_check = v; }
 void Tp::set_collision_circle(int v) { _collision_circle = v; }
 void Tp::set_collision_hit_priority(int v) { _collision_hit_priority = v; }
 void Tp::set_collision_radius(float v) { _collision_radius = v; }
+void Tp::set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
+void Tp::set_gfx_animated(int v) { _gfx_animated = v; }
+void Tp::set_gfx_animated_can_hflip(int v) { _gfx_animated_can_hflip = v; }
+void Tp::set_gfx_animated_can_vflip(int v) { _gfx_animated_can_vflip = v; }
+void Tp::set_gfx_animated_no_dir(int v) { _gfx_animated_no_dir = v; }
+void Tp::set_gfx_attack_anim(int v) { _gfx_attack_anim = v; }
+void Tp::set_gfx_bounce_always(int v) { _gfx_bounce_always = v; }
+void Tp::set_gfx_bounce_on_move(int v) { _gfx_bounce_on_move = v; }
+void Tp::set_gfx_dead_anim(int v) { _gfx_dead_anim = v; }
+void Tp::set_gfx_on_fire_anim(int v) { _gfx_on_fire_anim = v; }
+void Tp::set_gfx_oversized_but_sitting_on_the_ground(int v) { _gfx_oversized_but_sitting_on_the_ground = v; }
+void Tp::set_gfx_show_outlined(int v) { _gfx_show_outlined = v; }
+void Tp::set_gfx_small_shadow_caster(int v) { _gfx_small_shadow_caster = v; }
+void Tp::set_gfx_weapon_carry_anim(int v) { _gfx_weapon_carry_anim = v; }
 void Tp::set_hunger_clock_freq_ms(int v) { _hunger_clock_freq_ms = v; }
 void Tp::set_internal_has_dir_anim(int v) { _internal_has_dir_anim = v; }
 void Tp::set_internal_has_hp_anim(int v) { _internal_has_hp_anim = v; }
@@ -224,29 +237,17 @@ void Tp::set_is_door(int v) { _is_door = v; }
 void Tp::set_is_entrance(int v) { _is_entrance = v; }
 void Tp::set_is_exit(int v) { _is_exit = v; }
 void Tp::set_is_explosion(int v) { _is_explosion = v; }
+void Tp::set_is_fire(int v) { _is_fire = v; }
+void Tp::set_is_fire_hater(int v) { _is_fire_hater = v; }
 void Tp::set_is_flammable(int v) { _is_flammable = v; }
 void Tp::set_is_floor(int v) { _is_floor = v; }
 void Tp::set_is_floor_deco(int v) { _is_floor_deco = v; }
 void Tp::set_is_food(int v) { _is_food = v; }
-void Tp::set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
-void Tp::set_gfx_animated(int v) { _gfx_animated = v; }
-void Tp::set_gfx_animated_can_hflip(int v) { _gfx_animated_can_hflip = v; }
-void Tp::set_gfx_animated_can_vflip(int v) { _gfx_animated_can_vflip = v; }
-void Tp::set_gfx_animated_no_dir(int v) { _gfx_animated_no_dir = v; }
-void Tp::set_gfx_attack_anim(int v) { _gfx_attack_anim = v; }
-void Tp::set_gfx_bounce_always(int v) { _gfx_bounce_always = v; }
-void Tp::set_gfx_bounce_on_move(int v) { _gfx_bounce_on_move = v; }
-void Tp::set_gfx_dead_anim(int v) { _gfx_dead_anim = v; }
-void Tp::set_gfx_large_shadow(int v) { _gfx_large_shadow = v; }
-void Tp::set_gfx_on_fire_anim(int v) { _gfx_on_fire_anim = v; }
-void Tp::set_gfx_oversized_but_sitting_on_the_ground(int v) { _gfx_oversized_but_sitting_on_the_ground = v; }
-void Tp::set_gfx_show_outlined(int v) { _gfx_show_outlined = v; }
-void Tp::set_gfx_small_shadow_caster(int v) { _gfx_small_shadow_caster = v; }
-void Tp::set_gfx_weapon_carry_anim(int v) { _gfx_weapon_carry_anim = v; }
 void Tp::set_is_hazard(int v) { _is_hazard = v; }
 void Tp::set_is_hunger_insatiable(int v) { _is_hunger_insatiable = v; }
 void Tp::set_is_interesting(int v) { _is_interesting = v; }
 void Tp::set_is_key(int v) { _is_key = v; }
+void Tp::set_is_large(int v) { _is_large = v; }
 void Tp::set_is_lava(int v) { _is_lava = v; }
 void Tp::set_is_light_strength(int v) { _is_light_strength = v; }
 void Tp::set_is_loggable(int v) { _is_loggable = v; }
@@ -271,14 +272,12 @@ void Tp::set_is_rrr15(int v) { _is_rrr15 = v; }
 void Tp::set_is_rrr16(int v) { _is_rrr16 = v; }
 void Tp::set_is_rrr17(int v) { _is_rrr17 = v; }
 void Tp::set_is_rrr18(int v) { _is_rrr18 = v; }
-void Tp::set_is_fire_hater(int v) { _is_fire_hater = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_rrr20(int v) { _is_rrr20 = v; }
 void Tp::set_is_rrr21(int v) { _is_rrr21 = v; }
 void Tp::set_is_rrr22(int v) { _is_rrr22 = v; }
 void Tp::set_is_rrr23(int v) { _is_rrr23 = v; }
 void Tp::set_is_rrr24(int v) { _is_rrr24 = v; }
-void Tp::set_is_fire(int v) { _is_fire = v; }
 void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
@@ -300,7 +299,6 @@ void Tp::set_lifespan_count(int v) { _lifespan_count = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_name(const std::string &v) { _name = v; }
 void Tp::set_normal_placement_rules(int v) { _normal_placement_rules = v; }
-void Tp::set_text_name(const std::string &v) { _text_name = v; }
 void Tp::set_spawn_on_death(const std::string &v) { _spawn_on_death = v; }
 void Tp::set_stats01(int v) { _stats01 = v; }
 void Tp::set_stats02(int v) { _stats02 = v; }
@@ -328,18 +326,10 @@ void Tp::set_stats_health_initial(int v) { _stats_health_initial = v; }
 void Tp::set_stats_health_starving_pct(int v) { _stats_health_starving_pct = v; }
 void Tp::set_stats_move_speed_ms(int v) { _stats_move_speed_ms = v; }
 void Tp::set_stats_strength(int v) { _stats_strength = v; }
-void Tp::set_weapon_carry_anim(const std::string &v) { _weapon_carry_anim = v; }
-void Tp::set_weapon_damage(int v) { _weapon_damage = v; }
-void Tp::set_weapon_use_anim(const std::string &v) { _weapon_use_anim = v; }
-void Tp::set_weapon_use_delay_hundredths(int v) { _weapon_use_delay_hundredths = v; }
-void Tp::set_weapon_use_distance(int v) { _weapon_use_distance = v; }
-void Tp::set_z_depth(int v) { z_depth = v; }
-void Tp::set_z_prio(int v) { z_prio = v; }
 void Tp::set_str1(const std::string &v) { _str1 = v; }
 void Tp::set_str10(const std::string &v) { _str10 = v; }
 void Tp::set_str11(const std::string &v) { _str11 = v; }
 void Tp::set_str12(const std::string &v) { _str12 = v; }
-void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
 void Tp::set_str2(const std::string &v) { _str2 = v; }
 void Tp::set_str3(const std::string &v) { _str3 = v; }
 void Tp::set_str4(const std::string &v) { _str4 = v; }
@@ -348,3 +338,13 @@ void Tp::set_str6(const std::string &v) { _str6 = v; }
 void Tp::set_str7(const std::string &v) { _str7 = v; }
 void Tp::set_str8(const std::string &v) { _str8 = v; }
 void Tp::set_str9(const std::string &v) { _str9 = v; }
+void Tp::set_text_a_or_an(const std::string &v) { _text_a_or_an = v; }
+void Tp::set_text_hits(const std::string &v) { _text_hits = v; }
+void Tp::set_text_name(const std::string &v) { _text_name = v; }
+void Tp::set_weapon_carry_anim(const std::string &v) { _weapon_carry_anim = v; }
+void Tp::set_weapon_damage(int v) { _weapon_damage = v; }
+void Tp::set_weapon_use_anim(const std::string &v) { _weapon_use_anim = v; }
+void Tp::set_weapon_use_delay_hundredths(int v) { _weapon_use_delay_hundredths = v; }
+void Tp::set_weapon_use_distance(int v) { _weapon_use_distance = v; }
+void Tp::set_z_depth(int v) { z_depth = v; }
+void Tp::set_z_prio(int v) { z_prio = v; }

@@ -1887,7 +1887,7 @@ static void stbi__build_fast_ac(stbi__int16 *fast_ac, stbi__huffman *h)
    }
 }
 
-static void stbi__grow_buffer_unsafe(stbi__jpeg *j)
+static void stbi__grow_buffer_no_check(stbi__jpeg *j)
 {
    do {
       unsigned int b = j->nomore ? 0 : stbi__get8(j->s);
@@ -1914,7 +1914,7 @@ stbi_inline static int stbi__jpeg_huff_decode(stbi__jpeg *j, stbi__huffman *h)
    unsigned int temp;
    int c,k;
 
-   if (j->code_bits < 16) stbi__grow_buffer_unsafe(j);
+   if (j->code_bits < 16) stbi__grow_buffer_no_check(j);
 
    // look at the top FAST_BITS and determine what symbol ID it is,
    // if the code is <= FAST_BITS
@@ -1967,7 +1967,7 @@ stbi_inline static int stbi__extend_receive(stbi__jpeg *j, int n)
 {
    unsigned int k;
    int sgn;
-   if (j->code_bits < n) stbi__grow_buffer_unsafe(j);
+   if (j->code_bits < n) stbi__grow_buffer_no_check(j);
 
    sgn = (stbi__int32)j->code_buffer >> 31; // sign bit is always in MSB
    k = stbi_lrot(j->code_buffer, n);
@@ -1982,7 +1982,7 @@ stbi_inline static int stbi__extend_receive(stbi__jpeg *j, int n)
 stbi_inline static int stbi__jpeg_get_bits(stbi__jpeg *j, int n)
 {
    unsigned int k;
-   if (j->code_bits < n) stbi__grow_buffer_unsafe(j);
+   if (j->code_bits < n) stbi__grow_buffer_no_check(j);
    k = stbi_lrot(j->code_buffer, n);
    j->code_buffer = k & ~stbi__bmask[n];
    k &= stbi__bmask[n];
@@ -1993,7 +1993,7 @@ stbi_inline static int stbi__jpeg_get_bits(stbi__jpeg *j, int n)
 stbi_inline static int stbi__jpeg_get_bit(stbi__jpeg *j)
 {
    unsigned int k;
-   if (j->code_bits < 1) stbi__grow_buffer_unsafe(j);
+   if (j->code_bits < 1) stbi__grow_buffer_no_check(j);
    k = j->code_buffer;
    j->code_buffer <<= 1;
    --j->code_bits;
@@ -2023,7 +2023,7 @@ static int stbi__jpeg_decode_block(stbi__jpeg *j, short data[64], stbi__huffman 
    int diff,dc,k;
    int t;
 
-   if (j->code_bits < 16) stbi__grow_buffer_unsafe(j);
+   if (j->code_bits < 16) stbi__grow_buffer_no_check(j);
    t = stbi__jpeg_huff_decode(j, hdc);
    if (t < 0) return stbi__err("bad huffman code","Corrupt JPEG");
 
@@ -2040,7 +2040,7 @@ static int stbi__jpeg_decode_block(stbi__jpeg *j, short data[64], stbi__huffman 
    do {
       unsigned int zig;
       int c,r,s;
-      if (j->code_bits < 16) stbi__grow_buffer_unsafe(j);
+      if (j->code_bits < 16) stbi__grow_buffer_no_check(j);
       c = (j->code_buffer >> (32 - FAST_BITS)) & ((1 << FAST_BITS)-1);
       r = fac[c];
       if (r) { // fast-AC path
@@ -2076,7 +2076,7 @@ static int stbi__jpeg_decode_block_prog_dc(stbi__jpeg *j, short data[64], stbi__
    int t;
    if (j->spec_end != 0) return stbi__err("can't merge dc and ac", "Corrupt JPEG");
 
-   if (j->code_bits < 16) stbi__grow_buffer_unsafe(j);
+   if (j->code_bits < 16) stbi__grow_buffer_no_check(j);
 
    if (j->succ_high == 0) {
       // first scan for DC coefficient, must be first
@@ -2114,7 +2114,7 @@ static int stbi__jpeg_decode_block_prog_ac(stbi__jpeg *j, short data[64], stbi__
       do {
          unsigned int zig;
          int c,r,s;
-         if (j->code_bits < 16) stbi__grow_buffer_unsafe(j);
+         if (j->code_bits < 16) stbi__grow_buffer_no_check(j);
          c = (j->code_buffer >> (32 - FAST_BITS)) & ((1 << FAST_BITS)-1);
          r = fac[c];
          if (r) { // fast-AC path
@@ -2771,7 +2771,7 @@ static int stbi__parse_entropy_coded_data(stbi__jpeg *z)
                z->idct_block_kernel(z->img_comp[n].data+z->img_comp[n].w2*j*8+i*8, z->img_comp[n].w2, data);
                // every data block is an MCU, so countdown the restart interval
                if (--z->todo <= 0) {
-                  if (z->code_bits < 24) stbi__grow_buffer_unsafe(z);
+                  if (z->code_bits < 24) stbi__grow_buffer_no_check(z);
                   // if it's NOT a restart, then just bail, so we get corrupt data
                   // rather than no data
                   if (!STBI__RESTART(z->marker)) return 1;
@@ -2803,7 +2803,7 @@ static int stbi__parse_entropy_coded_data(stbi__jpeg *z)
                // after all interleaved components, that's an interleaved MCU,
                // so now count down the restart interval
                if (--z->todo <= 0) {
-                  if (z->code_bits < 24) stbi__grow_buffer_unsafe(z);
+                  if (z->code_bits < 24) stbi__grow_buffer_no_check(z);
                   if (!STBI__RESTART(z->marker)) return 1;
                   stbi__jpeg_reset(z);
                }
@@ -2834,7 +2834,7 @@ static int stbi__parse_entropy_coded_data(stbi__jpeg *z)
                }
                // every data block is an MCU, so countdown the restart interval
                if (--z->todo <= 0) {
-                  if (z->code_bits < 24) stbi__grow_buffer_unsafe(z);
+                  if (z->code_bits < 24) stbi__grow_buffer_no_check(z);
                   if (!STBI__RESTART(z->marker)) return 1;
                   stbi__jpeg_reset(z);
                }
@@ -2863,7 +2863,7 @@ static int stbi__parse_entropy_coded_data(stbi__jpeg *z)
                // after all interleaved components, that's an interleaved MCU,
                // so now count down the restart interval
                if (--z->todo <= 0) {
-                  if (z->code_bits < 24) stbi__grow_buffer_unsafe(z);
+                  if (z->code_bits < 24) stbi__grow_buffer_no_check(z);
                   if (!STBI__RESTART(z->marker)) return 1;
                   stbi__jpeg_reset(z);
                }
