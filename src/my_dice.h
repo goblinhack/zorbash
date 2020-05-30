@@ -16,6 +16,7 @@ private:
     std::string hd;
 public:
     std::string python_func;
+    std::string python_mod;
     Dice (void);
     std::string to_string (void) const;
     const char *to_cstring(void);
