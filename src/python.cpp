@@ -854,7 +854,6 @@ void py_exec (const char *str)
     char stdOutErr[] =
 "import sys\n\
 import zx\n\
-import builtin\n\
 class CatchOutErr:\n\
     def __init__(self):\n\
         self.value = ''\n\
@@ -866,21 +865,31 @@ sys.stderr = catchOutErr\n\
 ";
 
     PyObject *pModule = PyImport_AddModule("__main__");
+    py_err();
 
-    CON("EXEC: [%s]", str);
+    LOG("EXEC: [%s]", str);
     PyRun_SimpleString(stdOutErr);
+    py_err();
+
     PyRun_SimpleString(str);
+    py_err();
 
     PyObject *catcher = PyObject_GetAttrString(pModule, "catchOutErr");
-    PyObject *output = PyObject_GetAttrString(catcher, "value");
-
-    char *text = py_obj_to_str(output);
-    if (text) {
-        strchopc(text, '\n');
-        CON("%s", text);
-        myfree(text);
-    }
     py_err();
+
+    if (catcher) {
+        PyObject *output = PyObject_GetAttrString(catcher, "value");
+        py_err();
+
+        char *text = py_obj_to_str(output);
+        if (text) {
+            strchopc(text, '\n');
+            CON("%s", text);
+            myfree(text);
+        }
+    } else {
+        CON("no output");
+    }
 }
 
 static void py_add_to_path (const char *path)
