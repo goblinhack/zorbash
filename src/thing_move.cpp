@@ -135,7 +135,6 @@ void Thing::update_interpolated_position (void)
     bool update_pos = false;
     fpoint new_pos;
 
-    get_bounce();
     if (!get_timestamp_move_end()) {
         update_pos = true;
         new_pos = mid_at;
@@ -162,7 +161,10 @@ void Thing::update_interpolated_position (void)
         detach();
         set_interpolated_mid_at(new_pos);
         attach();
-        update_light();
+
+        if (get_light_count()) {
+            update_light();
+        }
     }
 }
 

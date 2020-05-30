@@ -48,7 +48,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         return (THING_SHOVE_TRIED_AND_FAILED);
     }
 
-    if (it->get_stats_strength() > get_stats_strength()) {
+    if (it->get_stats_strength() > get_stats_strength() + get_stats_attack()) {
         if (is_player()) {
             MINICON("%s is too strong to be shoved!", it->text_The().c_str());
         } else if (it->is_player()) {
