@@ -4877,7 +4877,6 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
     return nullptr;
 }
 
-#define DEBUG_GL_BLEND
 #ifdef DEBUG_GL_BLEND
 int vals[] = {
     GL_ZERO,
@@ -4924,8 +4923,9 @@ int g_blend_b;
 #endif
 
 #if 0
-glBlendEquation(GL_FUNC_ADD);
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//
+// Paste this code prior to the blend in question
+//
 extern int vals[];
 extern std::string vals_str[];
 extern int g_blend_a;
@@ -4940,6 +4940,7 @@ void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 
 #ifdef DEBUG_GL_BLEND
 if (wid_event_to_char(key) == '+') {
+    CON("DEBUG_GL_BLEND +");
     usleep(50);
     g_blend_a ++;
     if (g_blend_a >= (int)ARRAY_SIZE(vals)) {
@@ -4954,6 +4955,7 @@ if (wid_event_to_char(key) == '+') {
 }
 
 if (wid_event_to_char(key) == '-') {
+    CON("DEBUG_GL_BLEND -");
     usleep(50);
     g_blend_a --;
     if (g_blend_a < 0) {
@@ -4966,7 +4968,6 @@ if (wid_event_to_char(key) == '-') {
     return;
 }
 #endif
-
     if (wid_focus &&
         !wid_is_hidden(wid_focus) &&
         (wid_focus->on_key_down)) {
