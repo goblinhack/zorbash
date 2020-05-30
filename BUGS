@@ -1,8 +1,9 @@
+stand on torch and monsts will not attack
+make fire spread
+wander API too slow
 print("a b") hangs the shell
 - and + missing in shell
 light calculate only needs done each round pixel
-wander API too slow
-make fire spread
 mummies should avoid fire
 mummies should jump in water if on fire?
 mummies should resurrect unless burnt

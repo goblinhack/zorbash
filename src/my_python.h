@@ -10,94 +10,33 @@
 #include "my_point.h"
 #include <Python.h>
 
-extern PyObject *zx_mod;
-extern PyObject *builtins;
-
-void python_init(char *argv[]);
-void python_fini(void);
-void py_exec(const char *str);
-
-void py_call_void_module_with_list_of_points(const char *module,
-                                             const char *name,
-                                             std::vector<point> points);
-void py_call_void_int(const char *name, int val1);
-void py_call_void_int(PyObject *mod, const char *name, int val1);
-int py_call_ii(const char *name, int val1);
-
-void py_call_void_module_int(const char *module, const char *name, int val1);
-int py_call_int_module_int(const char *module, const char *name, int val1);
-int py_call_int_module_void(const char *module, const char *name);
-void py_call_void_module_void(const char *module, const char *name);
-
-void py_call_void_module_ptr_iiiiiiiiiiiiiiiiiii(const char *module,
-                                                 const char *name,
-                                                 void *val1,
-                                                 int val2,
-                                                 int val3,
-                                                 int val4,
-                                                 int val5,
-                                                 int val6,
-                                                 int val7,
-                                                 int val8,
-                                                 int val9,
-                                                 int val10,
-                                                 int val11,
-                                                 int val12,
-                                                 int val13,
-                                                 int val14,
-                                                 int val15,
-                                                 int val16,
-                                                 int val17,
-                                                 int val18,
-                                                 int val19,
-                                                 int val20);
-int py_call_int_module_ptr_iiiiii(const char *module, const char *name, void *val1, int, int, int, int, int, int);
-int py_call_int_module_ptr_iiiii(const char *module, const char *name, void *val1, int, int, int, int, int);
-int py_call_int_module_ptr_iiii(const char *module, const char *name, void *val1, int, int, int, int);
-int py_call_int_module_ptr_iii(const char *module, const char *name, void *val1, int, int, int);
-int py_call_int_module_ptr_ii(const char *module, const char *name, void *val1, int, int);
-int py_call_int_module_ptr_int(const char *module, const char *name, void *val1, int);
-int py_call_int_module_ptr(const char *module, const char *name, void *val1);
-int py_call_int_module_ptr_ptr(const char *module, const char *name, void *val1, void *val2);
-
-void py_call_void_module_ptr_iiiiiiii(const char *module, const char *name, void *val1, int, int, int, int, int, int, int, int);
-void py_call_void_module_ptr_iiiiiii(const char *module, const char *name, void *val1, int, int, int, int, int, int, int);
-void py_call_void_module_ptr_iiiiii(const char *module, const char *name, void *val1, int, int, int, int, int, int);
-void py_call_void_module_ptr_iiiii(const char *module, const char *name, void *val1, int, int, int, int, int);
-void py_call_void_module_ptr_iiii(const char *module, const char *name, void *val1, int, int, int, int);
-void py_call_void_module_ptr_iii(const char *module, const char *name, void *val1, int, int, int);
-void py_call_void_module_ptr_ii(const char *module, const char *name, void *val1, int, int);
-void py_call_void_module_ptr_int(const char *module, const char *name, void *val1, int);
-void py_call_void_module_ptr(const char *module, const char *name, void *val1);
-void py_call_void_module_ptr_ptr(const char *module, const char *name, void *val1, void *val2);
-
-void py_call_void(const char *name);
-
-void py_err(void);
-void py_trace(void);
-char *py_obj_to_str(const PyObject *py_str);
-std::string py_obj_to_string(const PyObject *py_str);
-int py_obj_to_int(PyObject *py_obj);
-uint64_t py_obj_to_uint64(PyObject *py_obj);
-double py_obj_to_double(PyObject *py_obj);
-
-PyObject *py_obj_attr(const PyObject *py_str, const char *attr);
-char *py_obj_attr_str(const PyObject *py_obj, const char *attr);
-int py_obj_attr_int(const PyObject *py_obj, const char *attr);
-uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr);
-double py_obj_attr_double(const PyObject *py_obj, const char *attr);
-
-PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *abs_to_pct_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *map_load_level_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *pct_to_abs_(PyObject *obj, PyObject *args, PyObject *keywds);
-
+PyObject *py_add_module(const char *mod);
+PyObject *py_obj_attr(const PyObject *py_str, const char *attr);
 PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds);
-
+PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tile_load_arr_color_and_black_and_white_(PyObject *obj, PyObject *args, PyObject *keywds);
-
-PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *map_load_level_(PyObject *obj, PyObject *args, PyObject *keywds);
+char *py_obj_attr_str(const PyObject *py_obj, const char *attr);
+char *py_obj_to_str(const PyObject *py_str);
+double py_obj_attr_double(const PyObject *py_obj, const char *attr);
+double py_obj_to_double(PyObject *py_obj);
+void py_call_void(const char *name);
+void py_call_void_int(const char *module, const char *name, int v1);
+void py_call_void_int_int(const char *module, const char *name, int v1, int v2);
+int py_obj_attr_int(const PyObject *py_obj, const char *attr);
+int py_obj_to_int(PyObject *py_obj);
+std::string py_obj_to_string(const PyObject *py_str);
+uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr);
+uint64_t py_obj_to_uint64(PyObject *py_obj);
+void py_err(void);
+void py_exec(const char *str);
+void py_trace(void);
+void python_fini(void);
+void python_init(char *argv[]);
 
 #define PY_PROTO(__fn__)                                                    \
 PyObject *__fn__ ## _ (PyObject *obj, PyObject *args, PyObject *keywds);

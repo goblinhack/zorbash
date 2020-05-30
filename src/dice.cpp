@@ -26,21 +26,41 @@ Dice::Dice (std::string s)
     hd = s;
 
     //
-    // Allow python function after ":" so "1d1+1:call_me()" is allowed
+    // Allow python function after ":" so "1d1+1:fire.call_me()" is allowed
     //
     for (auto d : split_tokens(s, ':')) {
         std::size_t found = d.find("()");
         if (found != std::string::npos) {
-            python_func = d.replace(found, 2, "");
+            //
+            // Parse the python function call
+            //
+            auto bare_func = d.replace(found, 2, "");
+            auto sp = split_tokens(bare_func, '.');
+            if (sp.size() == 2) {
+                //
+                // <module>.<func>()
+                //
+                python_mod = sp[0];
+                python_func = sp[1];
+            } else {
+                //
+                // <func>()
+                //
+                python_func = sp[0];
+            }
         } else {
+            //
+            // 1d6+1
+            //
             for (auto x : split_tokens(d, '+')) {
-                auto d = split_tokens(x, 'd');
-                if (d.size() == 2) {
-                    ndice = std::stoi(d[0]);
-                    sides = std::stoi(d[1]);
+                auto sp = split_tokens(x, 'd');
+                if (sp.size() == 2) {
+                    ndice = std::stoi(sp[0]);
+                    sides = std::stoi(sp[1]);
                 } else {
-                    modifier += std::stoi(d[0]);
+                    modifier += std::stoi(sp[0]);
                 }
+                // CON("new dice %dd%d+%d", ndice, sides, modifier);
             }
         }
     }
@@ -54,6 +74,7 @@ int Dice::roll(void) const
         tot += random_range(0, sides) + 1;
     }
     tot += modifier;
+    CON("roll %dd%d+%d => %d", ndice, sides, modifier, tot);
     return (tot);
 }
 
