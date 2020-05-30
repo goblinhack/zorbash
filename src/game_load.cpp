@@ -236,17 +236,21 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     my.t->timestamp_dungeon_created = new_timestamp_dungeon_created;
     my.t->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
 
-    /* _gfx_large_shadow */    in >> bits(my.t->_gfx_large_shadow);
     /* _is_blood */            in >> bits(my.t->_is_blood);
     /* _is_corpse */           in >> bits(my.t->_is_corpse);
     /* _is_corridor */         in >> bits(my.t->_is_corridor);
     /* _is_deep_water */       in >> bits(my.t->_is_deep_water);
     /* _is_dirt */             in >> bits(my.t->_is_dirt);
+    /* _is_door */             in >> bits(my.t->_is_door);
     /* _is_dungeon */          in >> bits(my.t->_is_dungeon);
     /* _is_fade_in */          in >> bits(my.t->_is_fade_in);
     /* _is_floor */            in >> bits(my.t->_is_floor);
+    /* _is_food */             in >> bits(my.t->_is_food);
     /* _is_hazard */           in >> bits(my.t->_is_hazard);
+    /* _is_key */              in >> bits(my.t->_is_key);
+    /* _is_large */            in >> bits(my.t->_is_large);
     /* _is_lava */             in >> bits(my.t->_is_lava);
+    /* _is_monst */            in >> bits(my.t->_is_monst);
     /* _is_rock */             in >> bits(my.t->_is_rock);
     /* _is_secret_door */      in >> bits(my.t->_is_secret_door);
     /* _is_visited */          in >> bits(my.t->_is_visited);

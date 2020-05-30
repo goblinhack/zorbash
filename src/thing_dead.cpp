@@ -40,7 +40,7 @@ void Thing::kill (const char *reason)
                 log("killed, leaves corpse");
             }
 
-            level->set_corpse(mid_at.x, mid_at.y);
+            level->set_is_corpse(mid_at.x, mid_at.y);
 
             if (tpp->is_bleeder()) {
                 int splatters = random_range(2, 10);

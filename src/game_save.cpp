@@ -192,17 +192,21 @@ std::ostream& operator<<(std::ostream &out,
     timestamp_t timestamp_dungeon_saved = time_get_time_ms();
     out << bits(timestamp_dungeon_saved);
 
-    /* _gfx_large_shadow */    out << bits(my.t->_gfx_large_shadow);
     /* _is_blood */            out << bits(my.t->_is_blood);
     /* _is_corpse */           out << bits(my.t->_is_corpse);
     /* _is_corridor */         out << bits(my.t->_is_corridor);
     /* _is_deep_water */       out << bits(my.t->_is_deep_water);
     /* _is_dirt */             out << bits(my.t->_is_dirt);
+    /* _is_door */             out << bits(my.t->_is_door);
     /* _is_dungeon */          out << bits(my.t->_is_dungeon);
     /* _is_fade_in */          out << bits(my.t->_is_fade_in);
     /* _is_floor */            out << bits(my.t->_is_floor);
+    /* _is_food */             out << bits(my.t->_is_food);
     /* _is_hazard */           out << bits(my.t->_is_hazard);
+    /* _is_key */              out << bits(my.t->_is_key);
+    /* _is_large */            out << bits(my.t->_is_large);
     /* _is_lava */             out << bits(my.t->_is_lava);
+    /* _is_monst */            out << bits(my.t->_is_monst);
     /* _is_rock */             out << bits(my.t->_is_rock);
     /* _is_secret_door */      out << bits(my.t->_is_secret_door);
     /* _is_visited */          out << bits(my.t->_is_visited);

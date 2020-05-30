@@ -46,29 +46,25 @@ void Thing::destroy (void)
     //
     point old_at((int)mid_at.x, (int)mid_at.y);
 
-    if (is_blood())       { level->unset_blood(old_at.x, old_at.y); }
-    if (is_corpse())      { level->unset_corpse(old_at.x, old_at.y); }
-    if (is_corridor())    { level->unset_corridor(old_at.x, old_at.y); }
-    if (is_dirt())        { level->unset_dirt(old_at.x, old_at.y); }
-    if (is_floor())       { level->unset_floor(old_at.x, old_at.y); }
-    if (is_hazard())      { level->unset_hazard(old_at.x, old_at.y); }
-    if (is_lava())        { level->unset_lava(old_at.x, old_at.y); }
-    if (is_chasm())       { level->unset_chasm(old_at.x, old_at.y); }
-    if (is_rock())        { level->unset_rock(old_at.x, old_at.y); }
-    if (is_secret_door()) { level->unset_secret_door(old_at.x, old_at.y); }
-    if (is_wall())        { level->unset_wall(old_at.x, old_at.y); }
-    if (is_water())       { level->unset_water(old_at.x, old_at.y); }
-    if (is_deep_water())  { level->unset_water(old_at.x, old_at.y); }
-    if (is_deep_water())  { level->unset_deep_water(old_at.x, old_at.y); }
-
-    auto tpp = tp();
-    if (unlikely(!tpp)) {
-        ERR("no tp");
-    } else {
-        if (tpp->gfx_large_shadow()) {
-            level->unset_gfx_large_shadow(old_at.x, old_at.y);
-        }
-    }
+    if (is_blood())         { level->unset_is_blood(old_at.x, old_at.y); }
+    if (is_chasm())         { level->unset_is_chasm(old_at.x, old_at.y); }
+    if (is_corpse())        { level->unset_is_corpse(old_at.x, old_at.y); }
+    if (is_corridor())      { level->unset_is_corridor(old_at.x, old_at.y); }
+    if (is_deep_water())    { level->unset_is_deep_water(old_at.x, old_at.y); }
+    if (is_deep_water())    { level->unset_is_water(old_at.x, old_at.y); }
+    if (is_dirt())          { level->unset_is_dirt(old_at.x, old_at.y); }
+    if (is_door())          { level->unset_is_door(old_at.x, old_at.x); }
+    if (is_floor())         { level->unset_is_floor(old_at.x, old_at.y); }
+    if (is_food())          { level->unset_is_food(old_at.x, old_at.y); }
+    if (is_hazard())        { level->unset_is_hazard(old_at.x, old_at.y); }
+    if (is_key())           { level->unset_is_key(old_at.x, old_at.x); }
+    if (is_large())         { level->unset_is_large(old_at.x, old_at.x); }
+    if (is_lava())          { level->unset_is_lava(old_at.x, old_at.y); }
+    if (is_monst())         { level->unset_is_monst(old_at.x, old_at.y); }
+    if (is_rock())          { level->unset_is_rock(old_at.x, old_at.y); }
+    if (is_secret_door())   { level->unset_is_secret_door(old_at.x, old_at.y); }
+    if (is_wall())          { level->unset_is_wall(old_at.x, old_at.y); }
+    if (is_water())         { level->unset_is_water(old_at.x, old_at.y); }
 
     if (is_player()) {
         level->player = nullptr;

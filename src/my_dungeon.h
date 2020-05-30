@@ -75,39 +75,39 @@ public:
     Dungeon(int level);
 
     Roomp *cell_rooms_addr(const int x, const int y);
-    Roomp *cell_rooms_addr_unsafe(const int x, const int y);
+    Roomp *cell_rooms_addr_no_check(const int x, const int y);
     Roomp getr(const int x, const int y);
-    Roomp getr_unsafe(const int x, const int y);
+    Roomp getr_no_check(const int x, const int y);
     bool can_place_room(Roomp r, int x, int y);
     bool create_cyclic_rooms(Grid *g);
     bool is_anything_at(const int x, const int y);
     bool is_anything_at(const int x, const int y, const int z);
-    bool is_anything_at_unsafe(const int x, const int y);
-    bool is_anything_at_unsafe(const int x, const int y, const int z);
+    bool is_anything_at_no_check(const int x, const int y);
+    bool is_anything_at_no_check(const int x, const int y, const int z);
     bool is_blood(const int x, const int y);
     bool is_chasm(const int x, const int y);
-    bool is_chasm_unsafe(const int x, const int y);
+    bool is_chasm_no_check(const int x, const int y);
     bool is_corridor(const int x, const int y);
-    bool is_corridor_unsafe(const int x, const int y);
-    bool is_deep_water_unsafe(const int x, const int y);
+    bool is_corridor_no_check(const int x, const int y);
+    bool is_deep_water_no_check(const int x, const int y);
     bool is_deep_water(const int x, const int y);
     bool is_dirt(const int x, const int y);
-    bool is_dirt_unsafe(const int x, const int y);
+    bool is_dirt_no_check(const int x, const int y);
     bool is_door(const int x, const int y);
-    bool is_door_unsafe(const int x, const int y);
+    bool is_door_no_check(const int x, const int y);
     bool is_entrance(const int x, const int y);
-    bool is_entrance_unsafe(const int x, const int y);
+    bool is_entrance_no_check(const int x, const int y);
     bool is_exit(const int x, const int y);
-    bool is_exit_unsafe(const int x, const int y);
+    bool is_exit_no_check(const int x, const int y);
     bool is_floor(const int x, const int y);
     bool is_floor_deco_at(const int x, const int y);
-    bool is_floor_unsafe(const int x, const int y);
+    bool is_floor_no_check(const int x, const int y);
     bool is_food(const int x, const int y);
     bool is_torch(const int x, const int y);
     bool is_hazard(const int x, const int y);
     bool is_key(const int x, const int y);
     bool is_lava(const int x, const int y);
-    bool is_lava_unsafe(const int x, const int y);
+    bool is_lava_no_check(const int x, const int y);
     bool is_monst(const int x, const int y);
     bool is_rock(const int x, const int y);
     bool is_secret_corridor_at(const int x, const int y);
@@ -115,15 +115,15 @@ public:
     bool is_treasure_at(const int x, const int y);
     bool is_wall(const int x, const int y);
     bool is_wall_deco_at(const int x, const int y);
-    bool is_wall_unsafe(const int x, const int y);
+    bool is_wall_no_check(const int x, const int y);
     bool is_water(const int x, const int y);
-    bool is_water_unsafe(const int x, const int y);
+    bool is_water_no_check(const int x, const int y);
     bool room_is_a_candidate(const Node *n, Roomp r);
     bool room_is_a_candidate_less_restrictive(const Node *n, Roomp r);
     bool rooms_move_closer_together(void);
     bool solve(int x, int y, Grid *g);
     char getc(const int x, const int y, const int z);
-    char getc_unsafe(const int x, const int y, const int z);
+    char getc_no_check(const int x, const int y, const int z);
     int draw_corridor(point start, point end, char w);
     int draw_corridors(void);
     int get_grid_depth_at(const int x, const int y);
@@ -139,7 +139,7 @@ public:
     void choose_room_doors(void);
     void create_node_map(void);
     void debug(const std::string s);
-    void dmap_set_walls(Dmap *d);
+    void dmap_set_is_walls(Dmap *d);
     void dump(void);
     void make_dungeon(void);
     void map_place_room_ptr(Roomp r, int x, int y);
@@ -147,7 +147,7 @@ public:
     void place_level(LevelStaticp l);
     void place_room(Roomp r, int x, int y);
     void putc(const int x, const int y, const int z, const char c);
-    void putc_unsafe(const int x, const int y, const int z, const char c);
+    void putc_no_check(const int x, const int y, const int z, const char c);
     void putr(const int x, const int y, Roomp r);
     void remove_all_doors(void);
     void reset_possible_rooms(void);
@@ -207,7 +207,7 @@ public:
         return (&getref(cells, offset(x, y, z)));
     }
 
-    char *cell_addr_unsafe (const int x, const int y, const int z)
+    char *cell_addr_no_check (const int x, const int y, const int z)
     {
         return (&getref(cells, offset(x, y, z)));
     }
