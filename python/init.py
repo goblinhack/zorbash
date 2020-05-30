@@ -32,6 +32,10 @@ def load_one_plugin(filename):
     if file_ext.lower() == '.py':
         py_mod = imp.load_source(mod_name, filename)
 
+        #for attr_name in dir(py_mod):
+        #    attr_value = getattr(py_mod, attr_name)
+        #    print(attr_name, attr_value, callable(attr_value))
+
     elif file_ext.lower() == '.pyc':
         py_mod = imp.load_compiled(mod_name, filename)
 
@@ -58,4 +62,3 @@ def init2():
     console.hello()
 
 init1()
-from things import *

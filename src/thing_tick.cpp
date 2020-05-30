@@ -42,7 +42,7 @@ void Thing::achieve_goals_in_life (void)
         if (get_tick() - get_tick_last_spawn() > (unsigned int)get_spawn_on_idle()) {
             auto d = get_spawn_on_idle_dice();
             con("CALL %s", d.python_func.c_str());
-            py_call_void_int(d.python_func.c_str(), 10);
+            py_call_void_int(builtins, d.python_func.c_str(), 10);
         }
     }
 
