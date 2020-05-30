@@ -94,6 +94,9 @@ bool Thing::ai_obstacle_for_me (const point &p)
         if (!t) {
             continue;
         }
+        if (t->is_dead) {
+            continue;
+        }
         if (t->is_wall()) {
             return (true);
         }

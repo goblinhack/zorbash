@@ -74,7 +74,7 @@ int Dice::roll(void) const
         tot += random_range(0, sides) + 1;
     }
     tot += modifier;
-    CON("roll %dd%d+%d => %d", ndice, sides, modifier, tot);
+    // CON("roll %dd%d+%d => %d", ndice, sides, modifier, tot);
     return (tot);
 }
 
