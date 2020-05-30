@@ -62,9 +62,9 @@ public:
     {
         if ((u < 0) || (u >= TTF_GLYPH_MAX)) {
             if (u == L'?') {
-                ERR("unicode char c 0x%x -> bad index", u);
+                DIE("unicode char 0x%x/%d -> bad index", u, u);
             } else {
-                ERR("unicode char c 0x%x -> bad index", u);
+                DIE("unicode char 0x%x/%d -> bad index", u, u);
             }
             return (unicode_to_tile(L'?'));
         }
@@ -73,9 +73,9 @@ public:
 
         if ((index < 0) || (index >= TTF_GLYPH_MAX)) {
             if (u == L'?') {
-                ERR("unicode char c 0x%x -> bad index %d", u, index);
+                DIE("unicode char 0x%x/%d -> bad index %d", u, u, index);
             } else {
-                ERR("unicode char c 0x%x -> bad index %d", u, index);
+                DIE("unicode char 0x%x/%d -> bad index %d", u, u, index);
             }
             return (unicode_to_tile(L'?'));
         }
@@ -91,9 +91,9 @@ public:
         tile = tile_find(tile_name);
         if (!tile) {
             if (u == L'?') {
-                ERR("unicode char c 0x%x -> not found as tile %s", u, tile_name);
+                DIE("unicode char 0x%x/%d -> not found as tile %s", u, u, tile_name);
             } else {
-                ERR("unicode char c 0x%x -> not found as tile %s", u, tile_name);
+                DIE("unicode char 0x%x/%d -> not found as tile %s", u, u, tile_name);
                 return (unicode_to_tile(L'?'));
             }
         }

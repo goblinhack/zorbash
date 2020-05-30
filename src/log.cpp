@@ -152,7 +152,7 @@ static void minicon_ (const char *fmt, va_list args)
     putchar('\n');
 
     wid_minicon_log(buf + len);
-    //wid_console_log(buf + len);
+    wid_console_log(buf + len);
     FLUSH_THE_CONSOLE();
 }
 
