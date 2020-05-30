@@ -30,6 +30,7 @@
 
 #undef DEBUG_AI                    // Monster AI decisions
 #undef DEBUG_ASTAR_PATH            // Astar AI path costs
+#undef DEBUG_GL_BLEND              // Use to debug specific blends
 
 //
 // Settings to override compiler errors
