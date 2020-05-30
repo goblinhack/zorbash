@@ -379,7 +379,9 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
     int bg_set = false;
     auto text_iter = text.begin();
 
-// printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, scissors_br.x, scissors_br.y, scissors_enabled);
+//printf("ascii_putf__ [%S]/%ld scissors x %d y %d scissors %d %d %d %d %d\n", 
+//text.c_str(), text.size(), x, y, scissors_tl.x, scissors_tl.y, 
+//scissors_br.x, scissors_br.y, scissors_enabled);
     if (unlikely(y < 0)) {
         return;
     }

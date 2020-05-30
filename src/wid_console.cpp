@@ -122,6 +122,9 @@ static void wid_console_log_ (std::wstring s)
 void wid_console_log (std::string s)
 {_
     int chars_per_line = CONSOLE_WIDTH;
+    if (!chars_per_line) {
+        chars_per_line = 80;
+    }
 
     auto d = split(s, chars_per_line);
 
@@ -138,6 +141,9 @@ void wid_console_log (std::string s)
 void wid_console_log (std::wstring s)
 {_
     int chars_per_line = CONSOLE_WIDTH;
+    if (!chars_per_line) {
+        chars_per_line = 80;
+    }
 
     auto d = split(s, chars_per_line);
 

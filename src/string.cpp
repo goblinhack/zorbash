@@ -526,47 +526,45 @@ shared_vector_string split (const char *text, uint32_t max_line_len)
 
         while (line_len < max_line_len) {
             c = *text;
+            if ((c == '\n') || (c == '\0')) {
+                break;
+            }
             line_len++;
 
-            if (c == '%') {
-                if (!found_format_string) {
+            if (!found_format_string) {
+                if (c == '%') {
                     found_format_string = true;
-                } else if (found_format_string) {
-                    text++;
-                    if (!strncmp(text, "fg=", 3)) {
-                        text += 3;
-                        line_len -= 2; /* for the %% */
-                        (void) string2color(&text);
-                        found_format_string = false;
-                        continue;
-                    } else if (!strncmp(text, "tp=", 3)) {
-                        text += 3;
-                        line_len -= 2; /* for the %% */
-                        (void) string2tp(&text);
-                        found_format_string = false;
-                        continue;
-                    } else if (!strncmp(text, "tex=", 4)) {
-                        text += 4;
-                        line_len -= 2; /* for the %% */
-                        (void) string2tex(&text);
-                        found_format_string = false;
-                        continue;
-                    } else if (!strncmp(text, "tile=", 5)) {
-                        text += 5;
-                        line_len -= 2; /* for the %% */
-                        (void) string2tile(&text);
-                        found_format_string = false;
-                        continue;
-                    } else {
-                        text--;
-                    }
-
-                    found_format_string = false;
                 }
-            } else if (c == '\n') {
-                break;
-            } else if (c == '\0') {
-                break;
+            } else if (found_format_string) {
+                if (!strncmp(text, "fg=", 3)) {
+                    text += 3;
+                    line_len -= 2; /* for the %% */
+                    (void) string2color(&text);
+                    found_format_string = false;
+                    continue;
+                } else if (!strncmp(text, "tp=", 3)) {
+                    text += 3;
+                    line_len -= 2; /* for the %% */
+                    (void) string2tp(&text);
+                    found_format_string = false;
+                    continue;
+                } else if (!strncmp(text, "tex=", 4)) {
+                    text += 4;
+                    line_len -= 2; /* for the %% */
+                    (void) string2tex(&text);
+                    found_format_string = false;
+                    continue;
+                } else if (!strncmp(text, "tile=", 5)) {
+                    text += 5;
+                    line_len -= 2; /* for the %% */
+                    (void) string2tile(&text);
+                    found_format_string = false;
+                    continue;
+                } else {
+                    text--;
+                }
+
+                found_format_string = false;
             }
 
             text++;
@@ -645,6 +643,7 @@ shared_vector_string split (const std::string &text, uint32_t max_line_len)
     auto line_start = text_start;
     auto line_end = text_start;
 
+//printf("SPLIT1 [%s] max_line_len %d\n", text.c_str(), max_line_len);
     if (!text.length()) {
         return (0);
     }
@@ -676,68 +675,66 @@ shared_vector_string split (const std::string &text, uint32_t max_line_len)
 
         while (line_len < max_line_len) {
             c = *text_iter;
+            if ((c == '\n') || (c == '\0')) {
+                break;
+            }
             line_len++;
 
-            if (c == '%') {
-                if (!found_format_string) {
+            if (!found_format_string) {
+                if (c == '%') {
                     found_format_string = true;
-                } else if (found_format_string) {
-                    text_iter++;
-                    if (std::string(text_iter, text_iter + 3) == "fg=") {
-                        text_iter += 3;
-                        line_len -= 2; /* for the %% */
-                        auto tmp = std::string(text_iter, text.end());
+                }
+            } else if (found_format_string) {
+                if (std::string(text_iter, text_iter + 3) == "fg=") {
+                    text_iter += 3;
+                    line_len -= 2; /* for the %% */
+                    auto tmp = std::string(text_iter, text.end());
 
-                        int len = 0;
-                        (void) string2color(tmp, &len);
-                        text_iter += len + 1;
-
-                        found_format_string = false;
-                        continue;
-                    } else if (std::string(text_iter, text_iter + 3) == "tp=") {
-                        text_iter += 3;
-                        line_len -= 2; /* for the %% */
-
-                        auto tmp = std::string(text_iter, text.end());
-
-                        int len = 0;
-                        (void) string2tp(tmp, &len);
-                        text_iter += len + 1;
-
-                        found_format_string = false;
-                        continue;
-                    } else if (std::string(text_iter, text_iter + 4) == "tex=") {
-                        text_iter += 4;
-                        line_len -= 2; /* for the %% */
-                        auto tmp = std::string(text_iter, text.end());
-
-                        int len = 0;
-                        (void) string2tex(tmp, &len);
-                        text_iter += len + 1;
-
-                        found_format_string = false;
-                        continue;
-                    } else if (std::string(text_iter, text_iter + 5) == "tile=") {
-                        text_iter += 5;
-                        line_len -= 2; /* for the %% */
-                        auto tmp = std::string(text_iter, text.end());
-
-                        int len = 0;
-                        (void) string2tile(tmp, &len);
-                        text_iter += len + 1;
-
-                        found_format_string = false;
-                        continue;
-                    } else {
-                        text_iter--;
-                    }
+                    int len = 0;
+                    (void) string2color(tmp, &len);
+                    text_iter += len + 1;
 
                     found_format_string = false;
+                    continue;
+                } else if (std::string(text_iter, text_iter + 3) == "tp=") {
+                    text_iter += 3;
+                    line_len -= 2; /* for the %% */
+
+                    auto tmp = std::string(text_iter, text.end());
+
+                    int len = 0;
+                    (void) string2tp(tmp, &len);
+                    text_iter += len + 1;
+
+                    found_format_string = false;
+                    continue;
+                } else if (std::string(text_iter, text_iter + 4) == "tex=") {
+                    text_iter += 4;
+                    line_len -= 2; /* for the %% */
+                    auto tmp = std::string(text_iter, text.end());
+
+                    int len = 0;
+                    (void) string2tex(tmp, &len);
+                    text_iter += len + 1;
+
+                    found_format_string = false;
+                    continue;
+                } else if (std::string(text_iter, text_iter + 5) == "tile=") {
+                    text_iter += 5;
+                    line_len -= 2; /* for the %% */
+                    auto tmp = std::string(text_iter, text.end());
+
+                    int len = 0;
+                    (void) string2tile(tmp, &len);
+                    text_iter += len + 1;
+
+                    found_format_string = false;
+                    continue;
+                } else {
+                    text_iter--;
                 }
-            } else if (c == '\n') {
-                break;
-            } else if (c == '\0') {
-                break;
+
+                found_format_string = false;
             }
 
             text_iter++;
@@ -788,6 +785,7 @@ shared_vector_string split (const std::string &text, uint32_t max_line_len)
         line_len = (uint32_t)(line_end - line_start);
         auto tmp = std::string(line_start, line_start + line_len);
 
+//printf("OUT [%s] max_line_len %d\n", tmp.c_str(), line_len);
         result->push_back(tmp);
 
         text_iter = line_end;
@@ -818,6 +816,8 @@ shared_vector_wstring split (const std::wstring &text, uint32_t max_line_len)
     if (!text.length()) {
         return (0);
     }
+//printf("SPLIT2 [%s] max_line_len %d\n", wstring_to_string(text).c_str(), 
+//max_line_len);
 
     auto result = std::make_shared< std::vector< std::wstring > > ();
 
@@ -846,67 +846,65 @@ shared_vector_wstring split (const std::wstring &text, uint32_t max_line_len)
 
         while (line_len < max_line_len) {
             c = *text_iter;
+            if ((c == '\n') || (c == '\0')) {
+                break;
+            }
             line_len++;
 
-            if (c == '%') {
-                if (!found_format_string) {
+            if (!found_format_string) {
+                if (c == '%') {
                     found_format_string = true;
-                } else if (found_format_string) {
-                    text_iter++;
-                    if (std::wstring(text_iter, text_iter + 3) == L"fg=") {
-                        text_iter += 3;
-                        line_len -= 2; /* for the %% */
-                        auto tmp = std::wstring(text_iter, text.end());
+                }
+            } else if (found_format_string) {
+                if (std::wstring(text_iter, text_iter + 3) == L"fg=") {
+                    text_iter += 3;
+                    line_len -= 2; /* for the %% */
+                    auto tmp = std::wstring(text_iter, text.end());
 
-                        int len = 0;
-                        (void) string2color(tmp, &len);
-                        text_iter += len + 1;
-
-                        found_format_string = false;
-                        continue;
-                    } else if (std::wstring(text_iter, text_iter + 3) == L"tp=") {
-                        text_iter += 3;
-                        line_len -= 2; /* for the %% */
-                        auto tmp = std::wstring(text_iter, text.end());
-
-                        int len = 0;
-                        (void) string2tp(tmp, &len);
-                        text_iter += len + 1;
-
-                        found_format_string = false;
-                        continue;
-                    } else if (std::wstring(text_iter, text_iter + 4) == L"tex=") {
-                        text_iter += 4;
-                        line_len -= 2; /* for the %% */
-                        auto tmp = std::wstring(text_iter, text.end());
-
-                        int len = 0;
-                        (void) string2tex(tmp, &len);
-                        text_iter += len + 1;
-
-                        found_format_string = false;
-                        continue;
-                    } else if (std::wstring(text_iter, text_iter + 5) == L"tile=") {
-                        text_iter += 5;
-                        line_len -= 2; /* for the %% */
-                        auto tmp = std::wstring(text_iter, text.end());
-
-                        int len = 0;
-                        (void) string2tile(tmp, &len);
-                        text_iter += len + 1;
-
-                        found_format_string = false;
-                        continue;
-                    } else {
-                        text_iter--;
-                    }
+                    int len = 0;
+                    (void) string2color(tmp, &len);
+                    text_iter += len + 1;
 
                     found_format_string = false;
+                    continue;
+                } else if (std::wstring(text_iter, text_iter + 3) == L"tp=") {
+                    text_iter += 3;
+                    line_len -= 2; /* for the %% */
+                    auto tmp = std::wstring(text_iter, text.end());
+
+                    int len = 0;
+                    (void) string2tp(tmp, &len);
+                    text_iter += len + 1;
+
+                    found_format_string = false;
+                    continue;
+                } else if (std::wstring(text_iter, text_iter + 4) == L"tex=") {
+                    text_iter += 4;
+                    line_len -= 2; /* for the %% */
+                    auto tmp = std::wstring(text_iter, text.end());
+
+                    int len = 0;
+                    (void) string2tex(tmp, &len);
+                    text_iter += len + 1;
+
+                    found_format_string = false;
+                    continue;
+                } else if (std::wstring(text_iter, text_iter + 5) == L"tile=") {
+                    text_iter += 5;
+                    line_len -= 2; /* for the %% */
+                    auto tmp = std::wstring(text_iter, text.end());
+
+                    int len = 0;
+                    (void) string2tile(tmp, &len);
+                    text_iter += len + 1;
+
+                    found_format_string = false;
+                    continue;
+                } else {
+                    text_iter--;
                 }
-            } else if (c == '\n') {
-                break;
-            } else if (c == '\0') {
-                break;
+
+                found_format_string = false;
             }
 
             text_iter++;
@@ -957,6 +955,8 @@ shared_vector_wstring split (const std::wstring &text, uint32_t max_line_len)
         line_len = (uint32_t)(line_end - line_start);
         auto tmp = std::wstring(line_start, line_start + line_len);
 
+//printf("OUT [%s] max_line_len %d\n", wstring_to_string(tmp).c_str(), 
+//line_len);
         result->push_back(tmp);
 
         text_iter = line_end;

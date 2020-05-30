@@ -10,7 +10,7 @@
 // It crashes? Enable this for more info
 //
 #undef DEBUG_CRASH
-#define ENABLE_CRASH_HANDLER       // Intercept SEGV
+#undef ENABLE_CRASH_HANDLER       // Intercept SEGV
 #define ENABLE_TRACING             // Function tracing
 
 //
@@ -209,7 +209,7 @@ extern int TILES_DOWN;
 #define CONSOLE_CURSOR_OTHER_COLOR  WHITE
 #define CONSOLE_TEXT_COLOR          GRAY
 #define CONSOLE_INPUT_COLOR         ORANGE
-#define CONSOLE_WIDTH               120
+#define CONSOLE_WIDTH               ASCII_WIDTH
 #define CONSOLE_HEIGHT              200
 #define CONSOLE_KEY1                '`'
 #define CONSOLE_KEY2                '~'
