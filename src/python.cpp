@@ -10,7 +10,8 @@
 #include "my_ascii.h"
 #include "frameobject.h"
 
-static PyObject *zx_mod;
+PyObject *zx_mod;
+PyObject *builtins;
 PyMODINIT_FUNC python_mouse_y_module_create(void);
 
 void py_call_void_module_int (const char *module, const char *name, int val1)
@@ -60,6 +61,28 @@ void py_call_void_int (const char *name, int val1)
     }
 
     PyObject *pFunc = PyObject_GetAttrString(zx_mod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(i)", val1);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        if (pValue) {
+            Py_DECREF(pValue);
+        }
+    } else {
+        ERR("cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+}
+
+void py_call_void_int (PyObject *mod, const char *name, int val1)
+{_
+    if (!mod) {
+        ERR("python module not inited yet");
+        return;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(mod, name);
     if (PyCallable_Check(pFunc)) {
         PyObject *pArgs = Py_BuildValue("(i)", val1);
         PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
@@ -1937,6 +1960,7 @@ void py_exec (const char *str)
     char stdOutErr[] =
 "import sys\n\
 import zx\n\
+import builtin\n\
 class CatchOutErr:\n\
     def __init__(self):\n\
         self.value = ''\n\
@@ -2957,6 +2981,13 @@ void python_init (char *argv[])
     LOG("INIT: Calling PyImport_ImportModule for init module");
 
     zx_mod = PyImport_ImportModule("init");
+    if (!zx_mod) {
+        py_err();
+        ERR("module init import failed");
+        return;
+    }
+
+    builtins = PyImport_ImportModule("builtins");
     if (!zx_mod) {
         py_err();
         ERR("module init import failed");

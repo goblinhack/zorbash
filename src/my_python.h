@@ -10,6 +10,9 @@
 #include "my_point.h"
 #include <Python.h>
 
+extern PyObject *zx_mod;
+extern PyObject *builtins;
+
 void python_init(char *argv[]);
 void python_fini(void);
 void py_exec(const char *str);
@@ -18,6 +21,7 @@ void py_call_void_module_with_list_of_points(const char *module,
                                              const char *name,
                                              std::vector<point> points);
 void py_call_void_int(const char *name, int val1);
+void py_call_void_int(PyObject *mod, const char *name, int val1);
 int py_call_ii(const char *name, int val1);
 
 void py_call_void_module_int(const char *module, const char *name, int val1);

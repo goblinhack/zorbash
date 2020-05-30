@@ -1,3 +1,5 @@
+print("a b") hangs the shell
+- and + missing in shell
 light calculate only needs done each round pixel
 wander API too slow
 make fire spread
