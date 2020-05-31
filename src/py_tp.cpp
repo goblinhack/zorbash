@@ -938,7 +938,7 @@ TP_BODY_SET_STRING(light_color)
 TP_BODY_SET_STRING(name)
 TP_BODY_SET_STRING(nutrition_dice)
 TP_BODY_SET_STRING(spawn_on_death)
-TP_BODY_SET_STRING(spawn_on_idle_dice)
+TP_BODY_SET_STRING(idle_tick_dice)
 TP_BODY_SET_STRING(stats_attack_dice)
 TP_BODY_SET_STRING(str1)
 TP_BODY_SET_STRING(str10)
@@ -1020,7 +1020,7 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    CON("python-to-c: %s(%d, %s)", __FUNCTION__, id, what);
+    DBG("python-to-c: %s(%d, %s)", __FUNCTION__, id, what);
 
     auto t = thing_find(id);
     if (!t) {

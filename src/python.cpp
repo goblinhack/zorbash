@@ -624,7 +624,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(right1_tile)
     TP_SET_DECL(right2_tile)
     TP_SET_DECL(spawn_on_death)
-    TP_SET_DECL(spawn_on_idle_dice)
+    TP_SET_DECL(idle_tick_dice)
     TP_SET_DECL(stats01)
     TP_SET_DECL(stats02)
     TP_SET_DECL(stats03)

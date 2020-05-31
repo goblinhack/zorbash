@@ -110,7 +110,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* std::vector<point> */    in >> bits(my.t->move_path);
     /* std::vector<uint32_t> */ in >> bits(my.t->enemies);
     /* std::string */ in >> bits(my.t->msg);
-    /* timestamp_t */ in >> bits(T); my.t->tick_last_spawn         = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->tick_last_did_something         = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_UNUSED1        = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_born          = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_bounce_begin  = load(T);

@@ -100,7 +100,7 @@ typedef struct Monst_ {
     std::vector<point> move_path;
     point        wander_target;
     std::string  msg;                        // Text that floats on screen
-    uint32_t     tick_last_spawn {};
+    uint32_t     tick_last_did_something {};
     timestamp_t  timestamp_UNUSED1 {};
     timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
@@ -568,12 +568,12 @@ public:
     timestamp_t decr_timestamp_UNUSED2(void);
     timestamp_t incr_timestamp_UNUSED2(void);
 
-    uint32_t set_tick_last_spawn(uint32_t);
-    uint32_t get_tick_last_spawn(void) const;
-    uint32_t decr_tick_last_spawn(uint32_t);
-    uint32_t incr_tick_last_spawn(uint32_t);
-    uint32_t decr_tick_last_spawn(void);
-    uint32_t incr_tick_last_spawn(void);
+    uint32_t set_tick_last_did_something(uint32_t);
+    uint32_t get_tick_last_did_something(void) const;
+    uint32_t decr_tick_last_did_something(uint32_t);
+    uint32_t incr_tick_last_did_something(uint32_t);
+    uint32_t decr_tick_last_did_something(void);
+    uint32_t incr_tick_last_did_something(void);
 
     uint32_t set_on_fire_anim_id(uint32_t);
     uint32_t get_on_fire_anim_id(void) const;
@@ -597,13 +597,13 @@ public:
     // Dice
     //
     const std::string& get_nutrition_dice_str(void) const;
-    const std::string& get_spawn_on_idle_dice_str(void) const;
+    const std::string& get_idle_tick_dice_str(void) const;
     const std::string& get_stats_attack_dice_str(void) const;
     int get_nutrition(void) const;
-    int get_spawn_on_idle(void) const;
+    int get_idle_tick(void) const;
     int get_stats_attack(void) const;
     const Dice& get_nutrition_dice(void) const;
-    const Dice& get_spawn_on_idle_dice(void) const;
+    const Dice& get_idle_tick_dice(void) const;
     const Dice& get_stats_attack_dice(void) const;
 
     Thingp owner_get() const;

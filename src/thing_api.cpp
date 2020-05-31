@@ -16,13 +16,13 @@
 //
 const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->stats_attack_dice_str()); }
 const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
-const std::string& Thing::get_spawn_on_idle_dice_str (void) const {_ return (tp()->spawn_on_idle_dice_str()); }
+const std::string& Thing::get_idle_tick_dice_str (void) const {_ return (tp()->idle_tick_dice_str()); }
 int Thing::get_nutrition (void) const {_ return (tp()->nutrition_dice().roll()); }
 int Thing::get_stats_attack (void) const {_ return (tp()->stats_attack_dice().roll()); }
-int Thing::get_spawn_on_idle (void) const {_ return (tp()->spawn_on_idle_dice().roll()); }
+int Thing::get_idle_tick (void) const {_ return (tp()->idle_tick_dice().roll()); }
 const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_dice()); }
 const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->stats_attack_dice()); }
-const Dice& Thing::get_spawn_on_idle_dice (void) const {_ return (tp()->spawn_on_idle_dice()); }
+const Dice& Thing::get_idle_tick_dice (void) const {_ return (tp()->idle_tick_dice()); }
 
 void Thing::new_monst (void)
 {_
@@ -2577,51 +2577,51 @@ int Thing::incr_owned_count (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// tick_last_spawn
+// tick_last_did_something
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_tick_last_spawn (void) const
+uint32_t Thing::get_tick_last_did_something (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->tick_last_spawn);
+        return (monstp->tick_last_did_something);
     } else {
         return (0);
     }
 }
 
-uint32_t Thing::set_tick_last_spawn (uint32_t v)
+uint32_t Thing::set_tick_last_did_something (uint32_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->tick_last_spawn = v);
+    return (monstp->tick_last_did_something = v);
 }
 
-uint32_t Thing::decr_tick_last_spawn (uint32_t v)
+uint32_t Thing::decr_tick_last_did_something (uint32_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->tick_last_spawn -= v);
+    return (monstp->tick_last_did_something -= v);
 }
 
-uint32_t Thing::incr_tick_last_spawn (uint32_t v)
+uint32_t Thing::incr_tick_last_did_something (uint32_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->tick_last_spawn += v);
+    return (monstp->tick_last_did_something += v);
 }
 
-uint32_t Thing::decr_tick_last_spawn (void)
+uint32_t Thing::decr_tick_last_did_something (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->tick_last_spawn--);
+    return (monstp->tick_last_did_something--);
 }
 
-uint32_t Thing::incr_tick_last_spawn (void)
+uint32_t Thing::incr_tick_last_did_something (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->tick_last_spawn++);
+    return (monstp->tick_last_did_something++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
