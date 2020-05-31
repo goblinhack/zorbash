@@ -2,9 +2,8 @@ import builtins
 import zx
 import tp
 
-def tp_small_fire_spawn(x, y):
-    zx.con(format("SPAWN FIRE {} {}".format(x, y)))
-    #tp_spawn("fire1", x, y)
+def spawn(me, x, y):
+    zx.tp_spawn_next_to(me, "fire")
 
 def tp_init(name):
     x = tp.Tp(name)
@@ -27,7 +26,7 @@ def tp_init(name):
     x.set_is_movable(True)
     x.set_is_water_hater(100)
     x.set_stats_attack_dice("1d3+1")
-    x.set_spawn_on_idle_dice("1d3+4:fire.tp_small_fire_spawn()")
+    x.set_spawn_on_idle_dice("1d3+4:small_fire.spawn()")
     x.set_stats_attack_rate_tenths(3)
     x.set_stats_health_initial(10)
     x.set_text_a_or_an("");
@@ -55,7 +54,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="small_fire1")
+    tp_init(name="small_fire")
 
 init()
-builtins.tp_fire_spawn = tp_fire_spawn

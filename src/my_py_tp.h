@@ -3,12 +3,13 @@
 // See the README file for license info.
 //
 
-
 #ifndef _MY_PY_TP_H_
 #define _MY_PY_TP_H_
 #include <Python.h>
 
+PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tp_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define TP_SET_PROTO(__field__)                                                     \
 PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds);
@@ -18,8 +19,6 @@ PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds)
         (PyCFunction)tp_set_ ## __field__,                                      \
         METH_VARARGS | METH_KEYWORDS,                                           \
         "set a " #__field__ " in a thing template"},                            \
-
-PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 TP_SET_PROTO(ai_delay_after_moving_ms)
 TP_SET_PROTO(ai_scent_distance)

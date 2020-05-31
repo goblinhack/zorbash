@@ -34,7 +34,7 @@ void py_call_void (const char *name)
     py_err();
 }
 
-void py_call_void_int (const char *module, const char *name, int val1)
+void py_call_void_fn (const char *module, const char *name, int val1)
 {_
     auto pmod = py_add_module(module);
     if (!pmod) {
@@ -56,7 +56,7 @@ void py_call_void_int (const char *module, const char *name, int val1)
     py_err();
 }
 
-void py_call_void_int_int (const char *module, const char *name, int val1, int val2)
+void py_call_void_fn (const char *module, const char *name, int val1, int val2)
 {_
     auto pmod = py_add_module(module);
     if (!pmod) {
@@ -66,6 +66,28 @@ void py_call_void_int_int (const char *module, const char *name, int val1, int v
     PyObject *pFunc = PyObject_GetAttrString(pmod, name);
     if (PyCallable_Check(pFunc)) {
         PyObject *pArgs = Py_BuildValue("(ii)", val1, val2);
+        PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
+        Py_DECREF(pArgs);
+        if (pValue) {
+            Py_DECREF(pValue);
+        }
+    } else {
+        ERR("cannot call python function %s(%d)", name, val1);
+    }
+
+    py_err();
+}
+
+void py_call_void_fn (const char *module, const char *name, int val1, int val2, int val3)
+{_
+    auto pmod = py_add_module(module);
+    if (!pmod) {
+        return;
+    }
+
+    PyObject *pFunc = PyObject_GetAttrString(pmod, name);
+    if (PyCallable_Check(pFunc)) {
+        PyObject *pArgs = Py_BuildValue("(iii)", val1, val2, val3);
         PyObject *pValue = PyObject_CallObject(pFunc, pArgs);
         Py_DECREF(pArgs);
         if (pValue) {
@@ -478,85 +500,9 @@ static PyMethodDef python_c_METHODS[] = {
      * The cast of the function is necessary since PyCFunction values
      * only take two PyObject *parameters, and some take three.
      */
-    {"con",
-        (PyCFunction)con_,
-        METH_VARARGS,
-        "log to the console"},
-
-    {"minicon",
-        (PyCFunction)minicon_,
-        METH_VARARGS,
-        "log to the mini console"},
-
-    {"puts",
-        (PyCFunction)puts_,
-        METH_VARARGS,
-        "log to the console"},
-
-    {"err",
-        (PyCFunction)err_,
-        METH_VARARGS,
-        "error to the log file"},
-
-    {"log",
-        (PyCFunction)log_,
-        METH_VARARGS,
-        "log to the log file"},
-
-    {"die",
-        (PyCFunction)die_,
-        METH_VARARGS,
-        "exit game with error"},
-
-    {"text_size",
-        (PyCFunction)text_size_,
-        METH_VARARGS | METH_KEYWORDS,
-        "text size in pixels"},
-
-    {"abs_to_pct",
-        (PyCFunction)abs_to_pct_,
-        METH_VARARGS | METH_KEYWORDS,
-        "abs to pct "},
-
-    {"pct_to_abs",
-        (PyCFunction)pct_to_abs_,
-        METH_VARARGS | METH_KEYWORDS,
-        "pct to abs"},
-
-    {"tex_load",
-        (PyCFunction)tex_load_,
-        METH_VARARGS | METH_KEYWORDS,
-        "load a texture"},
-
-    {"tile_load_arr",
-        (PyCFunction)tile_load_arr_,
-        METH_VARARGS | METH_KEYWORDS,
-        "load a tile array"},
-
-    {"tile_load_arr_color_and_black_and_white",
-        (PyCFunction)tile_load_arr_color_and_black_and_white_,
-        METH_VARARGS | METH_KEYWORDS,
-        "load a tile array in color and black and white"},
-
-    {"tp_load",
-        (PyCFunction)tp_load_,
-        METH_VARARGS | METH_KEYWORDS,
-        "load a thing template"},
-
-    {"map_load_room",
-        (PyCFunction)map_load_room_,
-        METH_VARARGS | METH_KEYWORDS,
-        "load a room"},
-
-    {"map_load_level",
-        (PyCFunction)map_load_level_,
-        METH_VARARGS | METH_KEYWORDS,
-        "load a level"},
-
-    TP_SET_DECL(text_a_or_an)
     TP_SET_DECL(ai_delay_after_moving_ms)
-    TP_SET_DECL(ai_scent_distance)
     TP_SET_DECL(ai_obstacle)
+    TP_SET_DECL(ai_scent_distance)
     TP_SET_DECL(bl1_tile)
     TP_SET_DECL(bl2_tile)
     TP_SET_DECL(blit_bot_off)
@@ -718,6 +664,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(str7)
     TP_SET_DECL(str8)
     TP_SET_DECL(str9)
+    TP_SET_DECL(text_a_or_an)
     TP_SET_DECL(text_hits)
     TP_SET_DECL(text_name)
     TP_SET_DECL(tile)
@@ -734,12 +681,23 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(weapon_use_distance)
     TP_SET_DECL(z_depth)
     TP_SET_DECL(z_prio)
-
-    {"tp_update",
-        (PyCFunction)tp_update_,
-        METH_VARARGS | METH_KEYWORDS,
-        ""},
-
+    {"abs_to_pct",       (PyCFunction)abs_to_pct_,       METH_VARARGS | METH_KEYWORDS, "abs to pct "},
+    {"con",              (PyCFunction)con_,              METH_VARARGS, "log to the console"},
+    {"die",              (PyCFunction)die_,              METH_VARARGS, "exit game with error"},
+    {"err",              (PyCFunction)err_,              METH_VARARGS, "error to the log file"},
+    {"log",              (PyCFunction)log_,              METH_VARARGS, "log to the log file"},
+    {"map_load_level",   (PyCFunction)map_load_level_,   METH_VARARGS | METH_KEYWORDS, "load a level"},
+    {"map_load_room",    (PyCFunction)map_load_room_,    METH_VARARGS | METH_KEYWORDS, "load a room"},
+    {"minicon",          (PyCFunction)minicon_,          METH_VARARGS, "log to the mini console"},
+    {"pct_to_abs",       (PyCFunction)pct_to_abs_,       METH_VARARGS | METH_KEYWORDS, "pct to abs"},
+    {"puts",             (PyCFunction)puts_,             METH_VARARGS, "log to the console"},
+    {"tex_load",         (PyCFunction)tex_load_,         METH_VARARGS | METH_KEYWORDS, "load a texture"},
+    {"text_size",        (PyCFunction)text_size_,        METH_VARARGS | METH_KEYWORDS, "text size in pixels"},
+    {"tile_load_arr",    (PyCFunction)tile_load_arr_,    METH_VARARGS | METH_KEYWORDS, "load a tile array"},
+    {"tp_load",          (PyCFunction)tp_load_,          METH_VARARGS | METH_KEYWORDS, "load a thing template"},
+    {"tp_spawn_next_to", (PyCFunction)tp_spawn_next_to_, METH_VARARGS | METH_KEYWORDS, "spawn a thing"},
+    {"tp_update",        (PyCFunction)tp_update_,        METH_VARARGS | METH_KEYWORDS, "update template"},
+    {"tile_load_arr_color_and_black_and_white", (PyCFunction)tile_load_arr_color_and_black_and_white_,                 METH_VARARGS | METH_KEYWORDS, "load a tile array in color and black and white"},
     PYFUNC_REF(SDLGetKeyState),
 
     {0, 0, 0, 0}   /* sentinel */

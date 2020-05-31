@@ -188,12 +188,12 @@ public:
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
-
 private:
     //
     // As this is called a lot, probably worth the memory
     //
     Tpp      mytp                 {};
+
 public:
     const Tpp tp_or_update(void)
     {
@@ -615,6 +615,7 @@ public:
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
     bool ai_obstacle_for_me(const point&);
     bool ai_assess_next_hop(const fpoint&);
+    bool ai_choose_wander(point& wander_to);
     bool attack(fpoint future_pos);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(fpoint, bool *, bool *, float radius);
@@ -636,20 +637,17 @@ public:
     bool move(fpoint future_pos);
     bool move(fpoint future_pos, uint8_t up, uint8_t down, uint8_t left, uint8_t right, uint8_t fire, uint8_t idle);
     bool possible_to_attack(const Thingp it);
+    bool spawn_next_to(const std::string& what);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void);
     const std::string& light_color(void) const;
-    const std::string& text_name(void) const;
     const std::string& spawn_on_death(void) const;
-    const std::string& weapon_carry_anim(void) const;
-    const std::string& weapon_use_anim(void) const;
     const std::string& str1(void) const;
     const std::string& str10(void) const;
     const std::string& str11(void) const;
     const std::string& str12(void) const;
-    const std::string& text_hits(void) const;
     const std::string& str2(void) const;
     const std::string& str3(void) const;
     const std::string& str4(void) const;
@@ -658,21 +656,19 @@ public:
     const std::string& str7(void) const;
     const std::string& str8(void) const;
     const std::string& str9(void) const;
+    const std::string& text_hits(void) const;
+    const std::string& text_name(void) const;
+    const std::string& weapon_carry_anim(void) const;
+    const std::string& weapon_use_anim(void) const;
     float get_bounce(void);
     float get_fadeup(void);
     float get_lunge(void);
     fpoint get_interpolated_mid_at(void) const;
     fpoint set_interpolated_mid_at(fpoint);
     int ai_delay_after_moving_ms(void);
-    bool ai_choose_wander(point& wander_to);
-    std::string text_The(void) const;
-    std::string text_a_or_an(void) const;
-    std::string text_the(void) const;
-    std::string to_string(void) const;
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
     int ai_hit_if_possible(Thingp hitter);
     int ai_hit_if_possible(Thingp hitter, int damage);
-    std::vector<point> ai_create_path(point start, point end);
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
     int attack(void) const;
@@ -682,6 +678,20 @@ public:
     int collision_circle(void) const;
     int collision_hit_priority(void) const;
     int defence(void) const;
+    int gfx_an_animation_only(void) const;
+    int gfx_animated(void) const;
+    int gfx_animated_can_hflip(void) const;
+    int gfx_animated_can_vflip(void) const;
+    int gfx_animated_no_dir(void) const;
+    int gfx_attack_anim(void) const;
+    int gfx_bounce_always(void) const;
+    int gfx_bounce_on_move(void) const;
+    int gfx_dead_anim(void) const;
+    int gfx_on_fire_anim(void) const;
+    int gfx_oversized_but_sitting_on_the_ground(void) const;
+    int gfx_show_outlined(void) const;
+    int gfx_small_shadow_caster(void) const;
+    int gfx_weapon_carry_anim(void) const;
     int health_hunger_pct(void) const;
     int health_initial(void) const;
     int health_starving_pct(void) const;
@@ -710,29 +720,17 @@ public:
     int is_entrance(void) const;
     int is_exit(void) const;
     int is_explosion(void) const;
+    int is_fire(void) const;
+    int is_fire_hater(void) const;
     int is_flammable(void) const;
     int is_floor(void) const;
     int is_floor_deco(void) const;
     int is_food(void) const;
-    int gfx_an_animation_only(void) const;
-    int gfx_animated(void) const;
-    int gfx_animated_can_hflip(void) const;
-    int gfx_animated_can_vflip(void) const;
-    int gfx_animated_no_dir(void) const;
-    int gfx_attack_anim(void) const;
-    int gfx_bounce_always(void) const;
-    int gfx_bounce_on_move(void) const;
-    int gfx_dead_anim(void) const;
-    int is_large(void) const;
-    int gfx_on_fire_anim(void) const;
-    int gfx_oversized_but_sitting_on_the_ground(void) const;
-    int gfx_show_outlined(void) const;
-    int gfx_small_shadow_caster(void) const;
-    int gfx_weapon_carry_anim(void) const;
     int is_hazard(void) const;
     int is_hunger_insatiable(void) const;
     int is_interesting(void) const;
     int is_key(void) const;
+    int is_large(void) const;
     int is_lava(void) const;
     int is_light_strength(void) const;
     int is_loggable(void) const;
@@ -757,14 +755,12 @@ public:
     int is_rrr16(void) const;
     int is_rrr17(void) const;
     int is_rrr18(void) const;
-    int is_fire_hater(void) const;
     int is_rrr2(void) const;
     int is_rrr20(void) const;
     int is_rrr21(void) const;
     int is_rrr22(void) const;
     int is_rrr23(void) const;
     int is_rrr24(void) const;
-    int is_fire(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
@@ -788,6 +784,11 @@ public:
     int weapon_use_distance(void) const;
     int z_depth(void) const;
     int z_prio(void) const;
+    std::string text_The(void) const;
+    std::string text_a_or_an(void) const;
+    std::string text_the(void) const;
+    std::string to_string(void) const;
+    std::vector<point> ai_create_path(point start, point end);
     uint8_t blit_begin_reflection_submerged(void) const;
     uint8_t blit_begin_submerged(void) const;
     uint8_t is_dir_bl(void) const;
@@ -856,7 +857,7 @@ public:
     void hide();
     void hooks_remove();
     void hunger_clock();
-    void init(std::string name, fpoint at, fpoint jitter);
+    void init(const std::string& name, fpoint at, fpoint jitter);
     void kill(const char *reason);
     void kill(std::string &reason);
     void lifespan_tick();
@@ -871,7 +872,7 @@ public:
     void move_to(fpoint to);
     void move_to_immediately(fpoint to);
     void move_to_immediately_delta(fpoint delta);
-    void msg(std::string const &);
+    void msg(const std::string&);
     void reinit(void);
     void remove_owner(void);
     void set_owner(Thingp owner);
@@ -898,8 +899,9 @@ public:
 //std::istream& operator>>(std::istream &in, Bits<Thing &> my);
 
 Thingp thing_find(const uint32_t id);
-Thingp thing_new(std::string tp_name, Thingp owner);
-Thingp thing_new(std::string tp_name, fpoint at, fpoint jitter = fpoint(0, 0));
+Thingp thing_new(const std::string& tp_name, Thingp owner);
+Thingp thing_new(const std::string& tp_name, const point at);
+Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
 void thing_gc(void);
