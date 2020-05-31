@@ -23,6 +23,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
@@ -283,6 +284,11 @@ public:
     bool is_corpse(const point &p);
     void set_is_corpse(const int x, const int y);
     void unset_is_corpse(const int x, const int y);
+
+    bool is_fire(const int x, const int y);
+    bool is_fire(const point &p);
+    void set_is_fire(const int x, const int y);
+    void unset_is_fire(const int x, const int y);
 
     bool is_monst(const int x, const int y);
     bool is_monst(const point &p);

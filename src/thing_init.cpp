@@ -336,6 +336,7 @@ void Thing::init (const std::string& name, const fpoint born, const fpoint jitte
     if (tpp->is_deep_water())    { level->set_is_water(new_at.x, new_at.y); }
     if (tpp->is_dirt())          { level->set_is_dirt(new_at.x, new_at.y); }
     if (tpp->is_door())          { level->set_is_door(new_at.x, new_at.y); }
+    if (tpp->is_fire())          { level->set_is_fire(new_at.x, new_at.y); }
     if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
     if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
     if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
@@ -461,6 +462,7 @@ void Thing::reinit (void)
     if (tpp->is_deep_water())    { level->set_is_water(new_at.x, new_at.y); }
     if (tpp->is_dirt())          { level->set_is_dirt(new_at.x, new_at.y); }
     if (tpp->is_door())          { level->set_is_door(new_at.x, new_at.y); }
+    if (tpp->is_fire())          { level->set_is_fire(new_at.x, new_at.y); }
     if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
     if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
     if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }

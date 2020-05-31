@@ -25,6 +25,7 @@ void Thing::attach (void)
     if (is_deep_water())    { level->set_is_water(mx, my); }
     if (is_dirt())          { level->set_is_dirt(mx, my); }
     if (is_door())          { level->set_is_door(mx, my); }
+    if (is_fire())          { level->set_is_fire(mx, my); }
     if (is_floor())         { level->set_is_floor(mx, my); }
     if (is_food())          { level->set_is_food(mx, my); }
     if (is_hazard())        { level->set_is_hazard(mx, my); }
@@ -58,6 +59,7 @@ void Thing::detach (void)
     if (is_deep_water())    { level->unset_is_water(mx, my); }
     if (is_dirt())          { level->unset_is_dirt(mx, my); }
     if (is_door())          { level->unset_is_door(mx, my); }
+    if (is_fire())          { level->unset_is_fire(mx, my); }
     if (is_floor())         { level->unset_is_floor(mx, my); }
     if (is_food())          { level->unset_is_food(mx, my); }
     if (is_hazard())        { level->unset_is_hazard(mx, my); }

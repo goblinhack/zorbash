@@ -530,6 +530,38 @@ void Level::unset_is_corpse (const int x, const int y)
     set(_is_corpse, x, y, false);
 }
 
+bool Level::is_fire (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_fire, p.x, p.y));
+}
+
+bool Level::is_fire (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_fire, x, y));
+}
+
+void Level::set_is_fire (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_fire, x, y, true);
+}
+
+void Level::unset_is_fire (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_fire, x, y, false);
+}
+
 bool Level::is_monst (const point &p)
 {_
     if (unlikely(is_oob(p.x, p.y))) {
