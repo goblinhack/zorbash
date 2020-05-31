@@ -49,7 +49,7 @@ bool Thing::spawn_next_to (const std::string& what)
 
     auto chosen = possible[random_range(0, cands)];
 
-    thing_new(what, cconst hosen);
+    thing_new(what, chosen);
 
     return (true);
 }
