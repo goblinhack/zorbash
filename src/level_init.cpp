@@ -52,7 +52,7 @@ void Level::clear (void)
     _is_dirt = {};
     _is_door = {};
     _is_dungeon = {};
-    _is_fade_in = {};
+    _fade_in_map = {};
     _is_floor = {};
     _is_food = {};
     _is_large = {};
