@@ -55,12 +55,14 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level_display_wall.o 	\
     $(OBJDIR)/level_display_water.o 	\
     $(OBJDIR)/level_fini.o 		\
+    $(OBJDIR)/level_heatmap.o 		\
     $(OBJDIR)/level_init.o 		\
     $(OBJDIR)/level_log.o 		\
     $(OBJDIR)/level_map.o 		\
     $(OBJDIR)/level_scroll.o 		\
     $(OBJDIR)/level_static.o 		\
     $(OBJDIR)/level_thing.o 		\
+    $(OBJDIR)/level_tick.o 		\
     $(OBJDIR)/light.o 			\
     $(OBJDIR)/light_log.o 		\
     $(OBJDIR)/log.o 			\

@@ -378,7 +378,7 @@ static int sdl_filter_events (void *userdata, SDL_Event *event)
         case SDL_JOYBUTTONUP:                 // Joystick button released
             return (1);
 
-        // Drop all other events */
+        // Drop all other events
         default:
             return (0);
     }
@@ -1292,8 +1292,9 @@ void sdl_loop (void)
             }
 
             if (!g_errored) {
-                player_tick();
-                things_tick();
+                if (level) {
+                    level->tick();
+                }
             }
 
             //

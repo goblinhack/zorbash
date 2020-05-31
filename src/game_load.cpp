@@ -236,6 +236,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     my.t->timestamp_dungeon_created = new_timestamp_dungeon_created;
     my.t->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
 
+    /* _fade_in_map */         in >> bits(my.t->_fade_in_map);
+    /* _heatmap */            in >> bits(my.t->_heatmap);
     /* _is_blood */            in >> bits(my.t->_is_blood);
     /* _is_corpse */           in >> bits(my.t->_is_corpse);
     /* _is_corridor */         in >> bits(my.t->_is_corridor);
@@ -243,7 +245,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* _is_dirt */             in >> bits(my.t->_is_dirt);
     /* _is_door */             in >> bits(my.t->_is_door);
     /* _is_dungeon */          in >> bits(my.t->_is_dungeon);
-    /* _fade_in_map */          in >> bits(my.t->_fade_in_map);
     /* _is_floor */            in >> bits(my.t->_is_floor);
     /* _is_food */             in >> bits(my.t->_is_food);
     /* _is_hazard */           in >> bits(my.t->_is_hazard);
@@ -265,12 +266,14 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* map_follow_player */    in >> bits(my.t->map_follow_player);
     /* map_wanted_at */        in >> bits(my.t->map_wanted_at);
     /* minimap_valid */        in >> bits(my.t->minimap_valid);
+    /* heatmap_valid */        in >> bits(my.t->heatmap_valid);
     /* mouse */                in >> bits(my.t->mouse);
     /* mouse_old */            in >> bits(my.t->mouse_old);
     /* seed */                 in >> bits(my.t->seed);
     /* world_at */             in >> bits(my.t->world_at);
 
     my.t->minimap_valid = false;
+    my.t->heatmap_valid = false;
     my.t->map_changed = true;
     my.t->cursor_needs_update = true;
     my.t->map_follow_player = true;
