@@ -78,12 +78,14 @@ private:
     //
     // Dice
     //
-    Dice _nutrition_dice {};
     Dice _idle_tick_dice {};
+    Dice _lifespan_dice {};
+    Dice _nutrition_dice {};
     Dice _stats_attack_dice {};
-    std::string _stats_attack_dice_str;
-    std::string _nutrition_dice_str;
     std::string _idle_tick_dice_str;
+    std::string _lifespan_dice_str;
+    std::string _nutrition_dice_str;
+    std::string _stats_attack_dice_str;
 
     float _collision_radius {};
     fsize _sz;
@@ -197,7 +199,6 @@ private:
     int _is_water_dweller {};
     int _is_water_hater {};
     int _is_weapon {};
-    int _lifespan_count {};
     int _normal_placement_rules {};
     int _stats01 {};
     int _stats02 {};
@@ -260,14 +261,24 @@ public:
     //
     // Dice
     //
-    const Dice& nutrition_dice(void) const;
     const Dice& idle_tick_dice(void) const;
-    const Dice& stats_attack_dice(void) const;
-    const std::string& nutrition_dice_str(void) const;
+    const int idle_tick(void) const;
     const std::string& idle_tick_dice_str(void) const;
-    const std::string& stats_attack_dice_str(void) const;
-    void set_nutrition_dice(const std::string &);
     void set_idle_tick_dice(const std::string &);
+
+    const Dice& lifespan_dice(void) const;
+    const int lifespan(void) const;
+    const std::string& lifespan_dice_str(void) const;
+    void set_lifespan_dice(const std::string &);
+
+    const Dice& nutrition_dice(void) const;
+    const int nutrition(void) const;
+    const std::string& nutrition_dice_str(void) const;
+    void set_nutrition_dice(const std::string &);
+
+    const Dice& stats_attack_dice(void) const;
+    const int stats_attack(void) const;
+    const std::string& stats_attack_dice_str(void) const;
     void set_stats_attack_dice(const std::string &);
 
     const Tilemap *tp_bl1_tiles(void) const;
@@ -428,7 +439,6 @@ public:
     int is_water_dweller(void) const;
     int is_water_hater(void) const;
     int is_weapon(void) const;
-    int lifespan_count(void) const;
     int normal_placement_rules(void) const;
     int stats01(void) const;
     int stats02(void) const;
@@ -570,7 +580,6 @@ public:
     void set_is_water_dweller(int);
     void set_is_water_hater(int);
     void set_is_weapon(int);
-    void set_lifespan_count(int);
     void set_light_color(const std::string &);
     void set_name(const std::string &);
     void set_normal_placement_rules(int);

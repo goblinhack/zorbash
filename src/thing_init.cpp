@@ -120,9 +120,9 @@ void Thing::init (const std::string& name, const fpoint born, const fpoint jitte
     }
 
     {_
-        auto v = tpp->lifespan_count();
+        auto v = tpp->lifespan();
         if (unlikely(v)) {
-            set_lifespan_count(v);
+            set_lifespan(v);
         }
     }
 
