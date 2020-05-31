@@ -26,7 +26,7 @@ def tp_init(name):
     x.set_is_movable(True)
     x.set_is_water_hater(100)
     x.set_stats_attack_dice("1d3+1")
-    x.set_spawn_on_idle_dice("1d3+4:small_fire.spawn()")
+    x.set_idle_tick_dice("1d20+20:small_fire.spawn()")
     x.set_stats_attack_rate_tenths(3)
     x.set_stats_health_initial(10)
     x.set_text_a_or_an("");

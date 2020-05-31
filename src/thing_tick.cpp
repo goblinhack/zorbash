@@ -38,14 +38,17 @@ void Thing::achieve_goals_in_life (void)
         return;
     }
 
-    if (!std::empty(get_spawn_on_idle_dice_str())) {
-        auto roll = get_spawn_on_idle();
-        if (get_tick() - get_tick_last_spawn() > (unsigned int)roll) {
-            auto d = get_spawn_on_idle_dice();
+    //
+    // Roll the dice and see if we do anything
+    //
+    if (!std::empty(get_idle_tick_dice_str())) {
+        auto roll = get_idle_tick();
+        if (get_tick() - get_tick_last_did_something() > (unsigned int)roll) {
+            auto d = get_idle_tick_dice();
             py_call_void_fn(d.python_mod.c_str(),
                             d.python_func.c_str(),
                             id, (int)mid_at.x, (int)mid_at.y);
-            set_tick_last_spawn(get_tick());
+            set_tick_last_did_something(get_tick());
         }
     }
 

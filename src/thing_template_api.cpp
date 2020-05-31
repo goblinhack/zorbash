@@ -15,13 +15,13 @@
 // Dice
 //
 const Dice& Tp::nutrition_dice(void) const { return _nutrition_dice; }
-const Dice& Tp::spawn_on_idle_dice(void) const { return _spawn_on_idle_dice; }
+const Dice& Tp::idle_tick_dice(void) const { return _idle_tick_dice; }
 const Dice& Tp::stats_attack_dice(void) const { return _stats_attack_dice; }
 const std::string& Tp::nutrition_dice_str(void) const { return _nutrition_dice_str; }
-const std::string& Tp::spawn_on_idle_dice_str(void) const { return _spawn_on_idle_dice_str; }
+const std::string& Tp::idle_tick_dice_str(void) const { return _idle_tick_dice_str; }
 const std::string& Tp::stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
 void Tp::set_nutrition_dice(const std::string &v) { _nutrition_dice = v; _nutrition_dice_str = v; }
-void Tp::set_spawn_on_idle_dice(const std::string &v) { _spawn_on_idle_dice = v; _spawn_on_idle_dice_str = v; }
+void Tp::set_idle_tick_dice(const std::string &v) { _idle_tick_dice = v; _idle_tick_dice_str = v; }
 void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
 
 const std::string& Tp::light_color(void) const { return _light_color; }

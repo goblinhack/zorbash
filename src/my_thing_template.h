@@ -79,11 +79,11 @@ private:
     // Dice
     //
     Dice _nutrition_dice {};
-    Dice _spawn_on_idle_dice {};
+    Dice _idle_tick_dice {};
     Dice _stats_attack_dice {};
     std::string _stats_attack_dice_str;
     std::string _nutrition_dice_str;
-    std::string _spawn_on_idle_dice_str;
+    std::string _idle_tick_dice_str;
 
     float _collision_radius {};
     fsize _sz;
@@ -261,13 +261,13 @@ public:
     // Dice
     //
     const Dice& nutrition_dice(void) const;
-    const Dice& spawn_on_idle_dice(void) const;
+    const Dice& idle_tick_dice(void) const;
     const Dice& stats_attack_dice(void) const;
     const std::string& nutrition_dice_str(void) const;
-    const std::string& spawn_on_idle_dice_str(void) const;
+    const std::string& idle_tick_dice_str(void) const;
     const std::string& stats_attack_dice_str(void) const;
     void set_nutrition_dice(const std::string &);
-    void set_spawn_on_idle_dice(const std::string &);
+    void set_idle_tick_dice(const std::string &);
     void set_stats_attack_dice(const std::string &);
 
     const Tilemap *tp_bl1_tiles(void) const;

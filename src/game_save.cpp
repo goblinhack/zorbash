@@ -89,7 +89,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* std::vector<point> */    out << bits(my.t->move_path);
     /* std::vector<uint32_t> */ out << bits(my.t->enemies);
     /* std::string */ out << bits(my.t->msg);
-    /* timestamp_t */ out << bits(my.t->tick_last_spawn);
+    /* timestamp_t */ out << bits(my.t->tick_last_did_something);
     /* timestamp_t */ out << bits(my.t->timestamp_UNUSED1);
     /* timestamp_t */ out << bits(my.t->timestamp_born);
     /* timestamp_t */ out << bits(my.t->timestamp_bounce_begin);
