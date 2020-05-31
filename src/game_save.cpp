@@ -199,7 +199,7 @@ std::ostream& operator<<(std::ostream &out,
     /* _is_dirt */             out << bits(my.t->_is_dirt);
     /* _is_door */             out << bits(my.t->_is_door);
     /* _is_dungeon */          out << bits(my.t->_is_dungeon);
-    /* _is_fade_in */          out << bits(my.t->_is_fade_in);
+    /* _fade_in_map */          out << bits(my.t->_fade_in_map);
     /* _is_floor */            out << bits(my.t->_is_floor);
     /* _is_food */             out << bits(my.t->_is_food);
     /* _is_hazard */           out << bits(my.t->_is_hazard);

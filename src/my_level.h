@@ -35,7 +35,8 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
-    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _is_fade_in {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _heat_map {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};
 
     //
     // When this Level was made. Used to restore timestamps relative to this.
@@ -349,30 +350,30 @@ public:
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 
-    inline uint8_t is_fade_in (const point &p)
+    inline uint8_t fade_in_map (const point &p)
     {_
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_fade_in, p.x, p.y));
+        return (get(_fade_in_map, p.x, p.y));
     }
 
-    inline uint8_t is_fade_in_no_check (const point &p)
+    inline uint8_t fade_in_map_no_check (const point &p)
     {_
-        return (get_no_check(_is_fade_in, p.x, p.y));
+        return (get_no_check(_fade_in_map, p.x, p.y));
     }
 
-    inline uint8_t is_fade_in (const int x, const int y)
+    inline uint8_t fade_in_map (const int x, const int y)
     {_
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_fade_in, x, y));
+        return (get(_fade_in_map, x, y));
     }
 
-    inline uint8_t is_fade_in_no_check (const int x, const int y)
+    inline uint8_t fade_in_map_no_check (const int x, const int y)
     {_
-        return (get_no_check(_is_fade_in, x, y));
+        return (get_no_check(_fade_in_map, x, y));
     }
 
     inline void incr_fade_in (const int x, const int y)
@@ -380,23 +381,23 @@ public:
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        auto v = get(_is_fade_in, x, y);
+        auto v = get(_fade_in_map, x, y);
         if (v < 200) {
             v+=5;
-            set(_is_fade_in, x, y, v);
+            set(_fade_in_map, x, y, v);
         } else {
-            set(_is_fade_in, x, y, (uint8_t)255);
+            set(_fade_in_map, x, y, (uint8_t)255);
         }
     }
 
     inline void incr_fade_in_no_check (const int x, const int y)
     {_
-        auto v = get_no_check(_is_fade_in, x, y);
+        auto v = get_no_check(_fade_in_map, x, y);
         if (v < 200) {
             v+=5;
-            set_no_check(_is_fade_in, x, y, v);
+            set_no_check(_fade_in_map, x, y, v);
         } else {
-            set(_is_fade_in, x, y, (uint8_t)255);
+            set(_fade_in_map, x, y, (uint8_t)255);
         }
     }
 
@@ -405,12 +406,12 @@ public:
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_is_fade_in, x, y, (uint8_t)0);
+        set(_fade_in_map, x, y, (uint8_t)0);
     }
 
     inline void unset_fade_in_no_check (const int x, const int y)
     {_
-        set_no_check(_is_fade_in, x, y, (uint8_t)0);
+        set_no_check(_fade_in_map, x, y, (uint8_t)0);
     }
 
     inline uint8_t is_visited (const point &p)
@@ -446,14 +447,14 @@ public:
         }
 
         if (!get(_is_visited, x, y)) {
-            set(_is_fade_in, x, y, (uint8_t)1);
+            set(_fade_in_map, x, y, (uint8_t)1);
         }
     }
 
     inline void set_visited_no_check (const int x, const int y)
     {_
         if (!get_no_check(_is_visited, x, y)) {
-            set_no_check(_is_fade_in, x, y, (uint8_t)1);
+            set_no_check(_fade_in_map, x, y, (uint8_t)1);
         }
         set_no_check(_is_visited, x, y, true);
     }
