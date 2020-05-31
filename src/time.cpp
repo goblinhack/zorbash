@@ -133,7 +133,7 @@ timestamp_t time_get_elapsed_tenths (timestamp_t val, timestamp_t since)
 
 void get_timestamp (char *buf, int32_t len)
 {
-#ifdef ENABLE_FULL_TIMESTAMPS
+#ifdef ENABLE_LOG_TIMESTAMPS
     char tmp[MAXSTR];
     string_timestamp(tmp, len);
     snprintf(buf, len, "%s %s", timestamp().c_str(), tmp);

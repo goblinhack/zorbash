@@ -6,31 +6,28 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
-//
-// It crashes? Enable this for more info
-//
-#undef DEBUG_CRASH
-#undef ENABLE_CRASH_HANDLER       // Intercept SEGV
+#define ENABLE_CRASH_HANDLER       // Intercept SEGV
+#undef  ENABLE_DEBUG_AI            // Monster AI decisions
+#undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
+#undef  ENABLE_DEBUG_CRASH         // Enable this for lots of sanity checks
+#undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
+#undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
+#undef  ENABLE_GFX_INVERSE_COLORS  // For vision impaired
+#undef  ENABLE_GFX_TILE_COLLISIONS // Not needed for roguelike
+#undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
+#undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
+#undef  ENABLE_UI_DEBUG            // User interface logs
+#define ENABLE_UI_DEBUG_EXTRA      // User interface logs with inheritance
 #define ENABLE_TRACING             // Function tracing
 
-//
-// Commonly changed settings
-//
-#ifdef DEBUG_CRASH
+#ifdef ENABLE_DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_PTRCHECK            // Check validity of pointers too
 #define ENABLE_PTRCHECK_HISTORY 2  // Per pointer history
 #define ENABLE_PTRCHECK_LEAK
-#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #define ENABLE_THING_ID_LOGS       // Thing ID allocations
+#undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #endif
-
-#undef  ENABLE_INVERTED_GFX        // For vision impaired
-#undef  ENABLE_FULL_TIMESTAMPS     // Full timestamps with date in logs
-
-#undef DEBUG_AI                    // Monster AI decisions
-#undef DEBUG_ASTAR_PATH            // Astar AI path costs
-#undef DEBUG_GL_BLEND              // Use to debug specific blends
 
 //
 // Settings to override compiler errors
@@ -84,18 +81,6 @@
 #else
 #  define PRI_SIZET "zu"
 #endif
-
-//
-// UI debugging
-//
-#undef  ENABLE_WID_DEBUG
-#undef  DEBUG_WID_FOCUS
-#ifdef  ENABLE_WID_DEBUG
-#define WID_FULL_LOGNAME
-#endif
-
-#undef  ENABLE_ASCII_MOUSE
-#define ENABLE_TILE_COLLISION_CHECKING
 
 ////////////////////////////////////////////////////////////////////////////
 // Tiles

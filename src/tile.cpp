@@ -53,6 +53,7 @@ Tile::Tile (const class Tile *tile)
     y1 = tile->y1;
     x2 = tile->x2;
     y2 = tile->y2;
+#ifdef ENABLE_GFX_TILE_COLLISIONS
     ox1 = tile->ox1;
     oy1 = tile->oy1;
     ox2 = tile->ox2;
@@ -61,6 +62,7 @@ Tile::Tile (const class Tile *tile)
     py1 = tile->py1;
     px2 = tile->px2;
     py2 = tile->py2;
+#endif
     set_gl_binding(tile->gl_binding());
     set_gl_binding_black_and_white(tile->gl_binding_black_and_white());
     tex = tile->tex;
@@ -170,7 +172,7 @@ void tile_load_arr (std::string file, std::string name,
             t->x2 = t->x1 + fw;
             t->y2 = t->y1 + fh;
 
-#ifdef ENABLE_TILE_COLLISION_CHECKING
+#ifdef ENABLE_GFX_TILE_COLLISIONS
             t->ox1 = t->x1;
             t->oy1 = t->y1;
             t->ox2 = t->x2;
@@ -184,7 +186,7 @@ void tile_load_arr (std::string file, std::string name,
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
-#ifdef ENABLE_TILE_COLLISION_CHECKING
+#ifdef ENABLE_GFX_TILE_COLLISIONS
             if ((pixel_size.w <= MAX_TILE_WIDTH) &&
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);
@@ -331,7 +333,7 @@ void tile_load_arr (std::string file, std::string name,
             t->x2 = t->x1 + fw;
             t->y2 = t->y1 + fh;
 
-#ifdef ENABLE_TILE_COLLISION_CHECKING
+#ifdef ENABLE_GFX_TILE_COLLISIONS
             t->ox1 = t->x1;
             t->oy1 = t->y1;
             t->ox2 = t->x2;
@@ -345,7 +347,7 @@ void tile_load_arr (std::string file, std::string name,
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
-#ifdef ENABLE_TILE_COLLISION_CHECKING
+#ifdef ENABLE_GFX_TILE_COLLISIONS
             if ((pixel_size.w <= MAX_TILE_WIDTH) &&
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);
@@ -501,7 +503,7 @@ void tile_load_arr_color_and_black_and_white (std::string file,
             t->x2 = t->x1 + fw;
             t->y2 = t->y1 + fh;
 
-#ifdef ENABLE_TILE_COLLISION_CHECKING
+#ifdef ENABLE_GFX_TILE_COLLISIONS
             t->ox1 = t->x1;
             t->oy1 = t->y1;
             t->ox2 = t->x2;
@@ -515,7 +517,7 @@ void tile_load_arr_color_and_black_and_white (std::string file,
             printf("Tile: %-10s %ux%u (%u, %u)", name.c_str(), width, height, x, y);
 #endif
 
-#ifdef ENABLE_TILE_COLLISION_CHECKING
+#ifdef ENABLE_GFX_TILE_COLLISIONS
             if ((pixel_size.w <= MAX_TILE_WIDTH) &&
                 (pixel_size.h <= MAX_TILE_HEIGHT)) {
                 SDL_Surface *s = tex_get_surface(tex);

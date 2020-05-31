@@ -15,7 +15,7 @@
 typedef class Config_ {
 public:
     bool               fps_counter                  = true;
-#ifdef ENABLE_INVERTED_GFX
+#ifdef ENABLE_GFX_INVERSE_COLORS
     bool               gfx_inverted                 = true;
 #else
     bool               gfx_inverted                 = false;

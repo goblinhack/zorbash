@@ -987,8 +987,8 @@ void wid_set_name (Widp w, std::string name)
         w->name = name;
     }
 
-#ifdef ENABLE_WID_DEBUG
-#ifdef WID_FULL_LOGNAME
+#ifdef ENABLE_UI_DEBUG
+#ifdef ENABLE_UI_DEBUG_EXTRA
     if (w->parent) {
         w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                     name.c_str(), w,
@@ -2041,8 +2041,8 @@ Widp wid_new_container (Widp parent, std::string name)
 {_
     Widp w = wid_new(parent);
 
-#ifdef ENABLE_WID_DEBUG
-#ifdef WID_FULL_LOGNAME
+#ifdef ENABLE_UI_DEBUG
+#ifdef ENABLE_UI_DEBUG_EXTRA
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                   name.c_str(), w,
                                   parent->to_string.c_str(), parent);
@@ -2092,8 +2092,8 @@ Widp wid_new_square_button (Widp parent, std::string name)
 
     Widp w = wid_new(parent);
 
-#ifdef ENABLE_WID_DEBUG
-#ifdef WID_FULL_LOGNAME
+#ifdef ENABLE_UI_DEBUG
+#ifdef ENABLE_UI_DEBUG_EXTRA
     w->to_string = string_sprintf("%s[%p] (parent %s[%p])",
                                   name.c_str(), w,
                                   parent->to_string.c_str(), parent);
@@ -4877,7 +4877,7 @@ static Widp wid_key_up_handler (int32_t x, int32_t y)
     return nullptr;
 }
 
-#ifdef DEBUG_GL_BLEND
+#ifdef ENABLE_DEBUG_GFX_GL_BLEND
 int vals[] = {
     GL_ZERO,
     GL_ONE,
@@ -4938,9 +4938,9 @@ void wid_key_down (const struct SDL_KEYSYM *key, int32_t x, int32_t y)
 {_
     Widp w {};
 
-#ifdef DEBUG_GL_BLEND
+#ifdef ENABLE_DEBUG_GFX_GL_BLEND
 if (wid_event_to_char(key) == '+') {
-    CON("DEBUG_GL_BLEND +");
+    CON("ENABLE_DEBUG_GFX_GL_BLEND +");
     usleep(50);
     g_blend_a ++;
     if (g_blend_a >= (int)ARRAY_SIZE(vals)) {
@@ -4955,7 +4955,7 @@ if (wid_event_to_char(key) == '+') {
 }
 
 if (wid_event_to_char(key) == '-') {
-    CON("DEBUG_GL_BLEND -");
+    CON("ENABLE_DEBUG_GFX_GL_BLEND -");
     usleep(50);
     g_blend_a --;
     if (g_blend_a < 0) {
@@ -5655,7 +5655,7 @@ void wid_display_all (void)
 
     ascii_clear_scissors();
 
-#ifdef DEBUG_WID_FOCUS
+#ifdef ENABLE_DEBUG_UI_FOCUS
     if (wid_focus) {
         ascii_putf(0, ASCII_HEIGHT-4, WHITE, GRAY, L"focus %s", to_string(wid_focus).c_str());
     }
