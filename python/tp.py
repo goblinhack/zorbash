@@ -317,8 +317,8 @@ class Tp:
     def set_stats_attack_rate_tenths(self, value):
         zx.tp_set_stats_attack_rate_tenths(self, value)
 
-    def set_lifespan_count(self, value):
-        zx.tp_set_lifespan_count(self, value)
+    def set_lifespan_dice(self, value):
+        zx.tp_set_lifespan_dice(self, value)
 
     def set_is_secret_door(self, value):
         zx.tp_set_is_secret_door(self, value)

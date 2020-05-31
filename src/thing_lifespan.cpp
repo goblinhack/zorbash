@@ -8,13 +8,13 @@
 
 void Thing::lifespan_tick (void)
 {_
-    if (!get_lifespan_count()) {
+    if (!get_lifespan()) {
         return;
     }
 
-    decr_lifespan_count();
+    decr_lifespan();
 
-    if (!get_lifespan_count()) {
+    if (!get_lifespan()) {
         dead("ran out of life");
         return;
     }

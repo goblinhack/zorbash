@@ -14,14 +14,24 @@
 //
 // Dice
 //
-const Dice& Tp::nutrition_dice(void) const { return _nutrition_dice; }
 const Dice& Tp::idle_tick_dice(void) const { return _idle_tick_dice; }
-const Dice& Tp::stats_attack_dice(void) const { return _stats_attack_dice; }
-const std::string& Tp::nutrition_dice_str(void) const { return _nutrition_dice_str; }
+const int Tp::idle_tick(void) const { return _idle_tick_dice.roll(); }
 const std::string& Tp::idle_tick_dice_str(void) const { return _idle_tick_dice_str; }
-const std::string& Tp::stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
-void Tp::set_nutrition_dice(const std::string &v) { _nutrition_dice = v; _nutrition_dice_str = v; }
 void Tp::set_idle_tick_dice(const std::string &v) { _idle_tick_dice = v; _idle_tick_dice_str = v; }
+
+const Dice& Tp::lifespan_dice(void) const { return _lifespan_dice; }
+const int Tp::lifespan(void) const { return _lifespan_dice.roll(); }
+const std::string& Tp::lifespan_dice_str(void) const { return _lifespan_dice_str; }
+void Tp::set_lifespan_dice(const std::string &v) { _lifespan_dice = v; _lifespan_dice_str = v; }
+
+const Dice& Tp::nutrition_dice(void) const { return _nutrition_dice; }
+const int Tp::nutrition(void) const { return _nutrition_dice.roll(); }
+const std::string& Tp::nutrition_dice_str(void) const { return _nutrition_dice_str; }
+void Tp::set_nutrition_dice(const std::string &v) { _nutrition_dice = v; _nutrition_dice_str = v; }
+
+const Dice& Tp::stats_attack_dice(void) const { return _stats_attack_dice; }
+const int Tp::stats_attack(void) const { return _stats_attack_dice.roll(); }
+const std::string& Tp::stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
 void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
 
 const std::string& Tp::light_color(void) const { return _light_color; }
@@ -153,7 +163,6 @@ int Tp::is_water(void) const { return _is_water; }
 int Tp::is_water_dweller(void) const { return _is_water_dweller; }
 int Tp::is_water_hater(void) const { return _is_water_hater; }
 int Tp::is_weapon(void) const { return _is_weapon; }
-int Tp::lifespan_count(void) const { return _lifespan_count; }
 int Tp::normal_placement_rules(void) const { return _normal_placement_rules; }
 int Tp::stats01(void) const { return _stats01; }
 int Tp::stats02(void) const { return _stats02; }
@@ -295,7 +304,6 @@ void Tp::set_is_water(int v) { _is_water = v; }
 void Tp::set_is_water_dweller(int v) { _is_water_dweller = v; }
 void Tp::set_is_water_hater(int v) { _is_water_hater = v; }
 void Tp::set_is_weapon(int v) { _is_weapon = v; }
-void Tp::set_lifespan_count(int v) { _lifespan_count = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_name(const std::string &v) { _name = v; }
 void Tp::set_normal_placement_rules(int v) { _normal_placement_rules = v; }

@@ -14,15 +14,21 @@
 //
 // Dice
 //
-const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->stats_attack_dice_str()); }
-const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
-const std::string& Thing::get_idle_tick_dice_str (void) const {_ return (tp()->idle_tick_dice_str()); }
-int Thing::get_nutrition (void) const {_ return (tp()->nutrition_dice().roll()); }
-int Thing::get_stats_attack (void) const {_ return (tp()->stats_attack_dice().roll()); }
-int Thing::get_idle_tick (void) const {_ return (tp()->idle_tick_dice().roll()); }
-const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_dice()); }
-const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->stats_attack_dice()); }
 const Dice& Thing::get_idle_tick_dice (void) const {_ return (tp()->idle_tick_dice()); }
+const std::string& Thing::get_idle_tick_dice_str (void) const {_ return (tp()->idle_tick_dice_str()); }
+int Thing::get_idle_tick (void) const {_ return (tp()->idle_tick_dice().roll()); }
+
+const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_dice()); }
+const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
+int Thing::get_nutrition (void) const {_ return (tp()->nutrition_dice().roll()); }
+
+const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->stats_attack_dice()); }
+const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->stats_attack_dice_str()); }
+int Thing::get_stats_attack (void) const {_ return (tp()->stats_attack_dice().roll()); }
+
+const Dice& Thing::get_lifespan_dice (void) const {_ return (tp()->lifespan_dice()); }
+const std::string& Thing::get_lifespan_dice_str (void) const {_ return (tp()->lifespan_dice_str()); }
+int Thing::get_lifespan_initial (void) const {_ return (tp()->lifespan_dice().roll()); }
 
 void Thing::new_monst (void)
 {_
@@ -1311,64 +1317,6 @@ int Thing::incr_stats_attack_rate_tenths (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// attacked_rate_tenths
-////////////////////////////////////////////////////////////////////////////
-int Thing::get_lifespan_count (void) const
-{_
-    if (monstp) {
-        verify(monstp);
-        return (monstp->lifespan_count);
-    } else {
-        return (0);
-    }
-}
-
-int Thing::set_lifespan_count (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->lifespan_count = v);
-    if (is_player()) { game_status_wid_init(); }
-    return (n);
-}
-
-int Thing::decr_lifespan_count (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->lifespan_count -= v);
-    if (is_player()) { game_status_wid_init(); }
-    return (n);
-}
-
-int Thing::incr_lifespan_count (int v)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->lifespan_count += v);
-    if (is_player()) { game_status_wid_init(); }
-    return (n);
-}
-
-int Thing::decr_lifespan_count (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->lifespan_count--);
-    if (is_player()) { game_status_wid_init(); }
-    return (n);
-}
-
-int Thing::incr_lifespan_count (void)
-{_
-    new_monst();
-//con("%s", __FUNCTION__);
-    auto n = (monstp->lifespan_count++);
-    if (is_player()) { game_status_wid_init(); }
-    return (n);
-}
-
-////////////////////////////////////////////////////////////////////////////
 // stats01
 ////////////////////////////////////////////////////////////////////////////
 int Thing::get_stats01 (void) const
@@ -2574,6 +2522,54 @@ int Thing::incr_owned_count (void)
     new_monst();
 //con("%s", __FUNCTION__);
     return (monstp->owned_count++);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// lifespan
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_lifespan (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->lifespan);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_lifespan (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->lifespan = v);
+}
+
+int Thing::decr_lifespan (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->lifespan -= v);
+}
+
+int Thing::incr_lifespan (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->lifespan += v);
+}
+
+int Thing::decr_lifespan (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->lifespan--);
+}
+
+int Thing::incr_lifespan (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    return (monstp->lifespan++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

@@ -69,6 +69,7 @@ typedef struct Monst_ {
     int          light_quality {};
     int          light_strength {};
     int          owned_count = {};           // How many things this thing owns.
+    int          lifespan = {};           // How many things this thing owns.
     int          stats01 = {};
     int          stats02 = {};
     int          stats03 = {};
@@ -90,7 +91,6 @@ typedef struct Monst_ {
     int          stats19 = {};
     int          stats_strength = {};
     int          stats_attack_rate_tenths = {};
-    int          lifespan_count = {};
     int          stats_defence = {};
     int          stats_defence_max = {};
     int          stats_health = {};
@@ -309,13 +309,6 @@ public:
     int decr_stats_attack_rate_tenths(void);
     int incr_stats_attack_rate_tenths(void);
 
-    int set_lifespan_count(int);
-    int get_lifespan_count(void) const;
-    int decr_lifespan_count(int);
-    int incr_lifespan_count(int);
-    int decr_lifespan_count(void);
-    int incr_lifespan_count(void);
-
     int set_stats01(int);
     int get_stats01(void) const;
     int decr_stats01(int);
@@ -463,6 +456,13 @@ public:
     int decr_owned_count(void);
     int incr_owned_count(void);
 
+    int set_lifespan(int);
+    int get_lifespan_initial(void) const;
+    int decr_lifespan(int);
+    int incr_lifespan(int);
+    int decr_lifespan(void);
+    int incr_lifespan(void);
+
     timestamp_t set_timestamp_lunge_begin(timestamp_t);
     timestamp_t get_timestamp_lunge_begin(void) const;
     timestamp_t decr_timestamp_lunge_begin(timestamp_t);
@@ -599,12 +599,15 @@ public:
     const std::string& get_nutrition_dice_str(void) const;
     const std::string& get_idle_tick_dice_str(void) const;
     const std::string& get_stats_attack_dice_str(void) const;
+    const std::string& get_lifespan_dice_str(void) const;
     int get_nutrition(void) const;
     int get_idle_tick(void) const;
     int get_stats_attack(void) const;
+    int get_lifespan(void) const;
     const Dice& get_nutrition_dice(void) const;
     const Dice& get_idle_tick_dice(void) const;
     const Dice& get_stats_attack_dice(void) const;
+    const Dice& get_lifespan_dice(void) const;
 
     Thingp owner_get() const;
     Thingp weapon_get() const;

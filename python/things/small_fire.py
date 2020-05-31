@@ -18,6 +18,7 @@ def tp_init(name):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
+    x.set_idle_tick_dice("1d20+20:small_fire.spawn()")
     x.set_is_active(True)
     x.set_is_fire(True)
     x.set_is_hazard(True)
@@ -25,8 +26,8 @@ def tp_init(name):
     x.set_is_loggable(False)
     x.set_is_movable(True)
     x.set_is_water_hater(100)
+    x.set_lifespan_dice("1d30+10")
     x.set_stats_attack_dice("1d3+1")
-    x.set_idle_tick_dice("1d20+20:small_fire.spawn()")
     x.set_stats_attack_rate_tenths(3)
     x.set_stats_health_initial(10)
     x.set_text_a_or_an("");
