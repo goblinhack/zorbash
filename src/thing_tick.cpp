@@ -42,9 +42,9 @@ void Thing::achieve_goals_in_life (void)
         auto roll = get_spawn_on_idle();
         if (get_tick() - get_tick_last_spawn() > (unsigned int)roll) {
             auto d = get_spawn_on_idle_dice();
-            py_call_void_int_int(d.python_mod.c_str(),
-                                 d.python_func.c_str(),
-                                 (int)mid_at.x, (int)mid_at.y);
+            py_call_void_fn(d.python_mod.c_str(),
+                            d.python_func.c_str(),
+                            id, (int)mid_at.x, (int)mid_at.y);
             set_tick_last_spawn(get_tick());
         }
     }

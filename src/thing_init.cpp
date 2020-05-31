@@ -12,12 +12,17 @@
 #include "my_thing.h"
 #include "my_game.h"
 
-Thingp thing_new (std::string tp_name, Thingp owner)
+Thingp thing_new (const std::string& tp_name, Thingp owner)
 {_
     return thing_new(tp_name, owner->mid_at);
 }
 
-Thingp thing_new (std::string name, fpoint at, fpoint jitter)
+Thingp thing_new (const std::string& name, const point at)
+{_
+    return thing_new(name, fpoint(at.x, at.y));
+}
+
+Thingp thing_new (const std::string& name, const fpoint at, const fpoint jitter)
 {_
     auto t = new struct Thing_();
     t->init(name, at, jitter);
@@ -29,7 +34,7 @@ Thing::Thing_ (void)
     newptr(this, "thing");
 }
 
-void Thing::init (std::string name, fpoint born, fpoint jitter)
+void Thing::init (const std::string& name, const fpoint born, const fpoint jitter)
 {_
     verify(this);
 
