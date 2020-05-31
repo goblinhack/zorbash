@@ -794,7 +794,7 @@ void ascii_putf (int x, int y, color fg, color bg, std::wstring fmt, ...)
     va_end(args);
 }
 
-#ifdef ENABLE_ASCII_MOUSE
+#ifdef ENABLE_UI_ASCII_MOUSE
 static void ascii_display_mouse (point mouse_tile_tl,
                                  point mouse_tile_br,
                                  point mouse_at)
@@ -1197,7 +1197,7 @@ void ascii_display (void)
     ascii_blit();
     blit_flush();
 
-#ifdef ENABLE_ASCII_MOUSE
+#ifdef ENABLE_UI_ASCII_MOUSE
     if (mouse_found) {
         ascii_display_mouse(mouse_tile_tl, mouse_tile_br, ascii.mouse_at);
     }

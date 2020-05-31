@@ -58,7 +58,7 @@ on_sdl_key_grab_t on_sdl_key_grab;
 
 void sdl_fini (void)
 {_
-#ifdef ENABLE_ASCII_MOUSE
+#ifdef ENABLE_UI_ASCII_MOUSE
     SDL_ShowCursor(0);
     SDL_ShowCursor(1);
 #endif
@@ -641,7 +641,7 @@ static void sdl_event (SDL_Event * event)
         break;
 
     case SDL_QUIT: {
-#ifdef ENABLE_ASCII_MOUSE
+#ifdef ENABLE_UI_ASCII_MOUSE
         SDL_ShowCursor(1);
 #endif
         DIE("Quit requested");
@@ -842,7 +842,7 @@ void sdl_exit (void)
 
     LOG("finishing: SDL main loop is exiting...");
 
-#ifdef ENABLE_ASCII_MOUSE
+#ifdef ENABLE_UI_ASCII_MOUSE
     SDL_ShowCursor(1);
 #endif
 
@@ -1211,7 +1211,7 @@ void sdl_loop (void)
 
     gl_enter_2d_mode();
 
-#ifdef ENABLE_ASCII_MOUSE
+#ifdef ENABLE_UI_ASCII_MOUSE
     SDL_ShowCursor(0);
 #endif
 
@@ -1392,7 +1392,7 @@ void sdl_loop (void)
 
     gl_leave_2d_mode();
 
-#ifdef ENABLE_ASCII_MOUSE
+#ifdef ENABLE_UI_ASCII_MOUSE
     SDL_ShowCursor(1);
 #endif
 }

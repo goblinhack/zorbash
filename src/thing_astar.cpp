@@ -11,7 +11,7 @@
 #include "my_thing.h"
 #include <vector>
 
-#ifdef DEBUG_ASTAR_PATH
+#ifdef ENABLE_DEBUG_AI_ASTAR
 std::array<std::array<char, MAP_HEIGHT>, MAP_WIDTH> astar_debug {};
 #endif
 
@@ -211,14 +211,14 @@ public:
                 if (cost < best.cost) {
                     best.path = path;
                     best.cost = cost;
-#ifdef DEBUG_ASTAR_PATH
+#ifdef ENABLE_DEBUG_AI_ASTAR
                     for (const auto& p : path) {
                         set(astar_debug, p.x, p.y, (char)('A' + *path_debug));
                     }
                     (*path_debug)++;
 #endif
                 } else {
-#ifdef DEBUG_ASTAR_PATH
+#ifdef ENABLE_DEBUG_AI_ASTAR
                     for (const auto& p : path) {
                         set(astar_debug, p.x, p.y, (char)('a' + *path_debug));
                     }
@@ -273,7 +273,7 @@ void astar_dump (const Dmap *dmap,
                 buf = " @ ";
             }
 
-#ifdef DEBUG_ASTAR_PATH
+#ifdef ENABLE_DEBUG_AI_ASTAR
             if (get(astar_debug, x, y)) {
                 buf[2] = get(astar_debug, x, y);
             }

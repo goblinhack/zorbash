@@ -264,7 +264,7 @@ void Thing::ai_get_next_hop (void)
         uint8_t terrain_score = is_less_preferred_terrain(p);
         int total_score = -(int)terrain_score;
 
-#ifdef DEBUG_AI
+#ifdef ENABLE_DEBUG_AI
 #define GOAL_ADD(score, msg) \
         total_score += (score); \
         got_one = true; \
@@ -353,7 +353,7 @@ void Thing::ai_get_next_hop (void)
         return;
     }
 
-#ifdef DEBUG_AI_VERBOSE
+#ifdef ENABLE_DEBUG_AI_VERBOSE
     log("initial goal map derived:");
     dmap_print(dmap_scent,
                point(start.x - minx, start.y - miny),
@@ -390,7 +390,7 @@ void Thing::ai_get_next_hop (void)
         }
     }
 
-#ifdef DEBUG_AI
+#ifdef ENABLE_DEBUG_AI
     log("sorted goals, %d (best) .. %d (worst)",
         (int)most_preferred, (int)least_preferred);
 #endif
@@ -401,7 +401,7 @@ void Thing::ai_get_next_hop (void)
     for (auto& goal : goals) {
         auto goal_target = goal.at;
         float score = get(cell_totals, goal_target.x, goal_target.y);
-#ifdef DEBUG_AI
+#ifdef ENABLE_DEBUG_AI
         auto orig_score = score;
 #endif
         score /= (most_preferred - least_preferred);
@@ -412,7 +412,7 @@ void Thing::ai_get_next_hop (void)
         uint8_t score8 = (int)score;
         set(dmap_scent->val, goal_target.x, goal_target.y, score8);
 
-#ifdef DEBUG_AI
+#ifdef ENABLE_DEBUG_AI
         dbg(" scale goal (%d,%d) %d to %d",
             (int)minx + goal.at.x, (int)miny + goal.at.y, 
             (int)orig_score, (int)score8);
@@ -427,7 +427,7 @@ void Thing::ai_get_next_hop (void)
     //
     // Find the best next-hop to the best goal.
     //
-#ifdef DEBUG_AI_VERBOSE
+#ifdef ENABLE_DEBUG_AI_VERBOSE
     log("goals:");
     dmap_print(dmap_scent,
                point(start.x - minx, start.y - miny),
@@ -455,12 +455,12 @@ void Thing::ai_get_next_hop (void)
     std::multiset<Next_hop> next_hops;
     char path_debug = '\0'; // astart path debug
 
-#ifdef DEBUG_ASTAR_PATH
+#ifdef ENABLE_DEBUG_AI_ASTAR
     astar_debug = {};
     int index = 0;
 #endif
     for (auto& goal : goals) {
-#ifdef DEBUG_ASTAR_PATH
+#ifdef ENABLE_DEBUG_AI_ASTAR
         astar_debug = {};
 #endif
         auto astar_end = goal.at;
@@ -486,7 +486,7 @@ void Thing::ai_get_next_hop (void)
 
         auto nh = fpoint(best.x + minx, best.y + miny);
 
-#ifdef DEBUG_ASTAR_PATH
+#ifdef ENABLE_DEBUG_AI_ASTAR
         if (!index) {
             for (auto& p : hops) {
                 set(astar_debug, p.x, p.y, '*');

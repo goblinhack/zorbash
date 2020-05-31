@@ -5,7 +5,7 @@
 
 #include "my_main.h"
 
-#ifdef ENABLE_WID_DEBUG
+#ifdef ENABLE_UI_DEBUG
 static void wid_log_ (Widp t, const char *fmt, va_list args)
 {
     char buf[MAXSTR];

@@ -14,7 +14,7 @@ typedef class Wid* Widp;
 #include "my_sdl.h"
 #include "my_wid_tiles.h"
 
-#ifdef ENABLE_WID_DEBUG
+#ifdef ENABLE_UI_DEBUG
 void WID_LOG(Widp, const char *fmt, ...) \
                      __attribute__ ((format (printf, 2, 3)));
 
