@@ -237,7 +237,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     my.t->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
 
     /* _fade_in_map */         in >> bits(my.t->_fade_in_map);
-    /* _heatmap */            in >> bits(my.t->_heatmap);
+    /* _heatmap */             in >> bits(my.t->_heatmap);
     /* _is_blood */            in >> bits(my.t->_is_blood);
     /* _is_corpse */           in >> bits(my.t->_is_corpse);
     /* _is_corridor */         in >> bits(my.t->_is_corridor);
@@ -245,6 +245,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* _is_dirt */             in >> bits(my.t->_is_dirt);
     /* _is_door */             in >> bits(my.t->_is_door);
     /* _is_dungeon */          in >> bits(my.t->_is_dungeon);
+    /* _is_fire */             in >> bits(my.t->_is_fire);
     /* _is_floor */            in >> bits(my.t->_is_floor);
     /* _is_food */             in >> bits(my.t->_is_food);
     /* _is_hazard */           in >> bits(my.t->_is_hazard);
