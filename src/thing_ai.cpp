@@ -145,9 +145,12 @@ uint8_t Thing::is_less_preferred_terrain (point p) const
             pref += is_water_hater();
         }
     }
-    if (level->is_lava(p)) {
+
+    auto heat = level->heatmap(p);
+    if (heat) {
+        auto hate_how_mych = is_fire_hater();
         if (is_fire_hater()) {
-            pref += is_fire_hater();
+            pref += hate_how_mych + heat;
         }
     }
     return (std::min(DMAP_MAX_LESS_PREFERRED_TERRAIN, pref));
