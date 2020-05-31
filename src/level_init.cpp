@@ -44,6 +44,8 @@ static void game_mark_dungeon_tiles(Dungeonp d);
 
 void Level::clear (void)
 {_
+    _fade_in_map = {};
+    _heatmap = {};
     _is_blood = {};
     _is_chasm = {};
     _is_corpse = {};
@@ -52,7 +54,6 @@ void Level::clear (void)
     _is_dirt = {};
     _is_door = {};
     _is_dungeon = {};
-    _fade_in_map = {};
     _is_floor = {};
     _is_food = {};
     _is_large = {};

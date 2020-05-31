@@ -35,8 +35,8 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _heat_map {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};
+    std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _heatmap {};
 
     //
     // When this Level was made. Used to restore timestamps relative to this.
@@ -70,6 +70,7 @@ public:
     point                      map_tl;        // visible map tl
     point                      map_br;        // visible map br
     bool                       minimap_valid {};
+    bool                       heatmap_valid {};
     int                        mouse {-1};    // ticks for every move
     int                        mouse_old {-1};
 
@@ -208,29 +209,30 @@ public:
                     continue;                                             \
                 }                                                         \
 
-    void display(void);
-    void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_chasm(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void scroll_map(void);
-    void display_anim(void);
-    void scroll_map_to_player(void);
-    void scroll_map_set_target(void);
-    void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
-    void display_map(void);
-    void update_map(void);
-    void update_minimap(void);
-    void update_hazard_map(void);
+    bool is_anything_at(const int x, const int y);
+    bool is_anything_at(const point &p);
+    void clear(void);
     void cursor_check_if_scroll_needed(void);
     void cursor_find_on_visible_things(const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
     void cursor_move(void);
-    void cursor_path_draw(point start, point end);
-    void cursor_path_create(void);
     void cursor_path_clear(void);
-    void clear(void);
-    bool is_anything_at(const int x, const int y);
-    bool is_anything_at(const point &p);
+    void cursor_path_create(void);
+    void cursor_path_draw(point start, point end);
+    void display(void);
+    void display_anim(void);
+    void display_chasm(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_deep_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_lava(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_map(void);
+    void display_map_things(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void display_water(const int fbo, const uint16_t minx, const uint16_t miny, const uint16_t maxx, const uint16_t maxy);
+    void scroll_map(void);
+    void scroll_map_set_target(void);
+    void scroll_map_to_player(void);
+    void tick(void);
+    void update_hazard_map(void);
+    void update_map(void);
+    void update_minimap(void);
 
     bool is_floor(const int x, const int y);
     bool is_floor(const point &p);
@@ -322,36 +324,46 @@ public:
     void set_dungeon(const int x, const int y);
     void unset_dungeon(const int x, const int y);
 
+    uint8_t heatmap(const point &p);
+    uint8_t heatmap_no_check(const point &p);
+    uint8_t heatmap(const int x, const int y);
+    uint8_t heatmap_no_check(const int x, const int y);
+    void incr_heatmap(const int x, const int y);
+    void incr_heatmap_no_check(const int x, const int y);
+    void unset_heatmap(const int x, const int y);
+    void unset_heatmap_no_check(const int x, const int y);
+    void update_heatmap(void);
+
     //
     // Used in lighting, so inlined
     //
     inline bool is_oob (const int x, const int y, const int z)
-    {_
+    {
         return ((x < 0) || (x >= MAP_WIDTH) ||
                 (y < 0) || (y >= MAP_HEIGHT) ||
                 (z < 0) || (z >= MAP_DEPTH));
     }
 
     inline bool is_oob (const int x, const int y)
-    {_
+    {
         return ((x < 0) || (x >= MAP_WIDTH) ||
                 (y < 0) || (y >= MAP_HEIGHT));
     }
 
     inline bool is_oob (const fpoint p)
-    {_
+    {
         return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 
     inline bool is_oob (const point p)
-    {_
+    {
         return ((p.x < 0) || (p.x >= MAP_WIDTH) ||
                 (p.y < 0) || (p.y >= MAP_HEIGHT));
     }
 
     inline uint8_t fade_in_map (const point &p)
-    {_
+    {
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
@@ -359,12 +371,12 @@ public:
     }
 
     inline uint8_t fade_in_map_no_check (const point &p)
-    {_
+    {
         return (get_no_check(_fade_in_map, p.x, p.y));
     }
 
     inline uint8_t fade_in_map (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
@@ -372,12 +384,12 @@ public:
     }
 
     inline uint8_t fade_in_map_no_check (const int x, const int y)
-    {_
+    {
         return (get_no_check(_fade_in_map, x, y));
     }
 
     inline void incr_fade_in (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return;
         }
@@ -391,7 +403,7 @@ public:
     }
 
     inline void incr_fade_in_no_check (const int x, const int y)
-    {_
+    {
         auto v = get_no_check(_fade_in_map, x, y);
         if (v < 200) {
             v+=5;
@@ -402,7 +414,7 @@ public:
     }
 
     inline void unset_fade_in (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return;
         }
@@ -410,12 +422,12 @@ public:
     }
 
     inline void unset_fade_in_no_check (const int x, const int y)
-    {_
+    {
         set_no_check(_fade_in_map, x, y, (uint8_t)0);
     }
 
     inline uint8_t is_visited (const point &p)
-    {_
+    {
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
@@ -423,12 +435,12 @@ public:
     }
 
     inline uint8_t is_visited_no_check (const point &p)
-    {_
+    {
         return (get_no_check(_is_visited, p.x, p.y));
     }
 
     inline uint8_t is_visited (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
@@ -436,12 +448,12 @@ public:
     }
 
     inline uint8_t is_visited_no_check (const int x, const int y)
-    {_
+    {
         return (get_no_check(_is_visited, x, y));
     }
 
     inline void set_visited (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return;
         }
@@ -452,7 +464,7 @@ public:
     }
 
     inline void set_visited_no_check (const int x, const int y)
-    {_
+    {
         if (!get_no_check(_is_visited, x, y)) {
             set_no_check(_fade_in_map, x, y, (uint8_t)1);
         }
@@ -460,7 +472,7 @@ public:
     }
 
     inline void unset_visited (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return;
         }
@@ -468,7 +480,7 @@ public:
     }
 
     inline void unset_visited_no_check (const int x, const int y)
-    {_
+    {
         set_no_check(_is_visited, x, y, false);
     }
 
@@ -476,7 +488,7 @@ public:
     // Used in lighting, so inlined
     //
     inline bool is_large (const point &p)
-    {_
+    {
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
@@ -484,12 +496,12 @@ public:
     }
 
     inline bool is_large_no_check (const point &p)
-    {_
+    {
         return (get_no_check(_is_large, p.x, p.y));
     }
 
     inline bool is_large (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
@@ -497,12 +509,12 @@ public:
     }
 
     inline bool is_large_no_check (const int x, const int y)
-    {_
+    {
         return (get_no_check(_is_large, x, y));
     }
 
     inline void set_is_large (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return;
         }
@@ -510,12 +522,12 @@ public:
     }
 
     inline void set_is_large_no_check (const int x, const int y)
-    {_
+    {
         set_no_check(_is_large, x, y, true);
     }
 
     inline void unset_is_large (const int x, const int y)
-    {_
+    {
         if (unlikely(is_oob(x, y))) {
             return;
         }
@@ -523,7 +535,7 @@ public:
     }
 
     inline void unset_is_large_no_check (const int x, const int y)
-    {_
+    {
         set_no_check(_is_large, x, y, false);
     }
 

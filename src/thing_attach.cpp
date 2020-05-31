@@ -36,6 +36,8 @@ void Thing::attach (void)
     if (is_secret_door())   { level->set_is_secret_door(mx, my); }
     if (is_wall())          { level->set_is_wall(mx, my); }
     if (is_water())         { level->set_is_water(mx, my); }
+
+    if (is_lava() || is_fire()) { level->heatmap_valid = false; }
 }
 
 void Thing::detach (void)
@@ -74,6 +76,8 @@ void Thing::detach (void)
     }
 
     level->remove_thing((int)last_attached.x, (int)last_attached.y, id);
+
+    if (is_lava() || is_fire()) { level->heatmap_valid = false; }
 }
 
 
