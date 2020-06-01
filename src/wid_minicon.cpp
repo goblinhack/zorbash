@@ -59,11 +59,24 @@ static void wid_minicon_reset_scroll (void)
     wid_move_to_bottom(wid_minicon_vert_scroll);
 }
 
-void wid_minicon_scroll (Widp w, std::wstring str)
+static void wid_minicon_scroll (Widp w, std::wstring str)
 {_
     Widp tmp {};
 
     wid_scroll_text(w);
+
+    //
+    // Get the wid on the bottom of the list/screen.
+    //
+    tmp = wid_get_head(w);
+    if (tmp) {
+        wid_set_text(tmp, str);
+    }
+}
+
+static void wid_minicon_replace (Widp w, std::wstring str)
+{_
+    Widp tmp {};
 
     //
     // Get the wid on the bottom of the list/screen.
@@ -105,11 +118,12 @@ static void wid_minicon_log_ (std::wstring s)
 
     if (last_msg == s) {
         s = last_msg + L" (x" + std::to_wstring(++last_msg_count) + L")";
+        wid_minicon_replace(wid_minicon_input_line, s);
     } else {
         last_msg = s;
         last_msg_count = 0;
+        wid_minicon_scroll(wid_minicon_input_line, s);
     }
-    wid_minicon_scroll(wid_minicon_input_line, s);
 }
 
 void wid_minicon_flush (void)
