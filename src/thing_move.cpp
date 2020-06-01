@@ -318,8 +318,14 @@ void Thing::move_to_immediately_delta (fpoint delta)
     update_pos(mid_at + delta, true);
 }
 
-bool Thing::move_to_try (const point& nh)
+bool Thing::move_to_check (const point& nh, const bool escaping)
 {_
+    if (escaping) {
+        log("escape to check %d,%d", nh.x, nh.y);
+    } else {
+        log("move to check %d,%d", nh.x, nh.y);
+    }
+
     //
     // Check to see if moving to this new location will hit something
     //
@@ -334,7 +340,7 @@ bool Thing::move_to_try (const point& nh)
         // see if we can hit the thing that is in the way.
         //
         log("move to %d,%d hit obstacle", nh.x, nh.y);
-
+_
         bool target_attacked = false;
         bool target_overlaps = false;
         collision_check_and_handle_nearby(fnh,
@@ -349,9 +355,29 @@ bool Thing::move_to_try (const point& nh)
             return (false);
         }
     } else {
+        log("move to %d,%d is ok", nh.x, nh.y);
+
+        if (!escaping) {
+            if (is_less_preferred_terrain(nh)) {_
+                log("but %d,%d is less preferred terrain, avoid", nh.x, nh.y);
+                return (false);
+            }
+        }
+
         is_tick_done = true;
-        log("move to %d,%d", nh.x, nh.y);
         move(fnh);
         return (true);
     }
+}
+
+bool Thing::move_to_or_attack (const point& nh)
+{_
+    log("move to or attack");
+    return move_to_check(nh, false);
+}
+
+bool Thing::move_to_or_escape (const point& nh)
+{_
+    log("move to or escape");
+    return move_to_check(nh, true);
 }

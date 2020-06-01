@@ -7,8 +7,9 @@
 #define _MY_MAIN_H_
 
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
-#define ENABLE_DEBUG_AI            // Monster AI decisions
-#define ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
+#undef  ENABLE_DEBUG_AI            // Monster AI decisions
+#undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
+#define ENABLE_DEBUG_AI_GOALS      // AI goal selection
 #undef  ENABLE_DEBUG_CRASH         // Enable this for lots of sanity checks
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
 #undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
