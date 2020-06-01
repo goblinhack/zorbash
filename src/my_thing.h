@@ -617,7 +617,9 @@ public:
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
     bool ai_obstacle_for_me(const point&);
-    bool move_to_try(const point&);
+    bool move_to_or_attack(const point&);
+    bool move_to_or_escape(const point&);
+    bool move_to_check(const point&, const bool escaping);
     bool attack(fpoint future_pos);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(fpoint, bool *, bool *, float radius);

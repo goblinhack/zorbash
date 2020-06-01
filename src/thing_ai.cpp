@@ -163,8 +163,8 @@ uint8_t Thing::is_less_preferred_terrain (point p) const
 
 void Thing::ai_get_next_hop (void)
 {_
-    log("AI (higher scores are preferred):");
-
+    log("AI");
+_
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
 
@@ -177,12 +177,14 @@ void Thing::ai_get_next_hop (void)
     point start((int)mid_at.x, (int)mid_at.y);
 
     if (monstp->wander_target != point(0, 0)) {
+        log("try to continue wander");
         if (ai_wander()) {
             return;
         }
     }
 
     if (is_less_preferred_terrain(start) >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+        log("on bad terrain, escape");
         if (ai_escape()) {
             return;
         }
@@ -216,6 +218,8 @@ void Thing::ai_get_next_hop (void)
     // Find all the possible goals we can smell.
     //
     std::multiset<Goal> goals;
+_
+    log("choose goals (higher scores are preferred):");
 
     auto tpp = tp();
     for (auto y = miny; y < maxy; y++) { for (auto x = minx; x < maxx; x++) {
@@ -235,7 +239,7 @@ void Thing::ai_get_next_hop (void)
         uint8_t terrain_score = is_less_preferred_terrain(p);
         int total_score = -(int)terrain_score;
 
-#ifdef ENABLE_DEBUG_AI
+#ifdef ENABLE_DEBUG_AI_GOALS
 #define GOAL_ADD(score, msg) \
         total_score += (score); \
         got_one = true; \
@@ -466,15 +470,7 @@ void Thing::ai_get_next_hop (void)
 
         auto nh = point(best.x + minx, best.y + miny);
 
-        if (is_less_preferred_terrain(nh)) {
-            log("move to %d,%d is less preferred terrain, avoid", nh.x, nh.y);
-            //
-            // To avoid goal see-sawing, break to wander?
-            //
-            break;
-        }
-
-        if (move_to_try(nh)) {
+        if (move_to_or_attack(nh)) {
             return;
         }
     }
