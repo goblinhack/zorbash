@@ -156,47 +156,9 @@ uint8_t Thing::is_less_preferred_terrain (point p) const
     return (std::min(DMAP_MAX_LESS_PREFERRED_TERRAIN, pref));
 }
 
-bool Thing::ai_assess_next_hop (const point& nh)
-{_
-    //
-    // Check to see if moving to this new location will hit something
-    //
-    // We need to look at the next-hop at the current time which may
-    // be vacant, but also to the future if a thing is moving to that
-    // spot; in which case we get an attach of opportunity.
-    //
-    auto fnh = fpoint(nh.x, nh.y);
-    if (collision_check_only(fnh)) {
-        //
-        // We would hit something and cannot do this move. However,
-        // see if we can hit the thing that is in the way.
-        //
-        log("move to %d,%d hit obstacle", nh.x, nh.y);
-
-        bool target_attacked = false;
-        bool target_overlaps = false;
-        collision_check_and_handle_nearby(fnh,
-                                          &target_attacked,
-                                          &target_overlaps);
-        if (target_attacked) {
-            is_tick_done = true;
-            log("cannot move to %d,%d, must attack", nh.x, nh.y);
-            return (true);
-        } else {
-            log("cannot move to %d,%d, obstacle", nh.x, nh.y);
-            return (false);
-        }
-    } else {
-        is_tick_done = true;
-        log("move to %d,%d", nh.x, nh.y);
-        move(fnh);
-        return (true);
-    }
-}
-
 void Thing::ai_get_next_hop (void)
 {_
-    log("AI (higher scores prefd):");
+    log("AI (higher scores are preferred):");
 
     const float dx = (MAP_WIDTH / 6);
     const float dy = (MAP_HEIGHT / 6);
@@ -210,19 +172,9 @@ void Thing::ai_get_next_hop (void)
     point start((int)mid_at.x, (int)mid_at.y);
 
     if (is_less_preferred_terrain(start) >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
-con("ON BAD TERRAIN WANDER");
-        auto tries = 10;
-        while (tries--) {
-            point nh;
-            monstp->wander_target = point(0, 0);
-            if (ai_choose_wander(nh)) {
-                if (ai_assess_next_hop(nh)) {
-                    return;
-                }
-            }
-con("TRY AGAIN");
+        if (ai_escape()) {
+            return;
         }
-        log("wander failed, need to choose a new next-hop");
     }
 
     auto dmap_scent = get_dmap_scent();
@@ -299,7 +251,7 @@ con("TRY AGAIN");
                     //
                     // If starving, prefer the thing with most health
                     //
-                    GOAL_ADD(it_stats_health, "eatp1");
+                    GOAL_ADD(it_stats_health, "eat-player");
                 }
             } else if (is_hungry) {
                 if (will_eat(it)) {
@@ -309,11 +261,11 @@ con("TRY AGAIN");
                     // go for the easier kill in preference.
                     //
                     if (it->is_player()) {
-                        GOAL_ADD(- health_diff, "eatp2");
+                        GOAL_ADD(- health_diff, "eat-player");
                     } else if (it->is_alive_monst()) {
-                        GOAL_ADD(- health_diff, "eatm1");
+                        GOAL_ADD(- health_diff, "eat-monst");
                     } else {
-                        GOAL_ADD(it_stats_health, "eatf1");
+                        GOAL_ADD(it_stats_health, "eat-food");
                     }
                 }
             }
@@ -322,7 +274,7 @@ con("TRY AGAIN");
                 //
                 // Prefer certain terrains over others. i.e. I prefer water.
                 //
-                GOAL_ADD(1, "preferred terrain");
+                GOAL_ADD(1, "preferred-terrain");
             }
 
             if (is_enemy(it)) {
@@ -334,7 +286,7 @@ con("TRY AGAIN");
                 float max_dist = ai_scent_distance();
 
                 if (dist < max_dist) {
-                    GOAL_ADD((int)(max_dist - dist) * 10, "attack enemy");
+                    GOAL_ADD((int)(max_dist - dist) * 10, "attack-enemy");
                 }
             }
         } FOR_ALL_THINGS_END();
@@ -349,22 +301,13 @@ con("TRY AGAIN");
         }
     } }
 
+    //
+    // No goals? Wander.
+    //
     if (goals.empty()) {
-        point nh;
-        if (ai_choose_wander(nh)) {
-            if (is_less_preferred_terrain(nh)) {
-                log("move to %d,%d is less preferred terrain, avoid", 
-                    nh.x, nh.y);
-                return;
-            }
-
-            if (ai_assess_next_hop(nh)) {
-                return;
-            }
-            monstp->wander_target = point(0, 0);
+        if (ai_wander()) {
+            return;
         }
-        log("wander failed, need to choose a new next-hop");
-        return;
     }
 
 #ifdef ENABLE_DEBUG_AI_VERBOSE
@@ -466,19 +409,31 @@ con("TRY AGAIN");
     // Modify the given goals with scores that indicate the cost of the
     // path to that goal. The result should be a sorted set of goals.
     //
-    std::multiset<Next_hop> next_hops;
+    std::multiset<Path> paths;
     char path_debug = '\0'; // astart path debug
 
-#ifdef ENABLE_DEBUG_AI_ASTAR
-    astar_debug = {};
-    int index = 0;
-#endif
     for (auto& goal : goals) {
 #ifdef ENABLE_DEBUG_AI_ASTAR
         astar_debug = {};
 #endif
         auto astar_end = goal.at;
         auto result = astar_solve(path_debug, astar_start, astar_end, dmap_scent);
+        paths.insert(result);
+
+        log(" goal (%d,%d) score %d -> cost %d", goal.at.x, goal.at.y,
+            (int)goal.score, (int)result.cost);
+
+#ifdef ENABLE_DEBUG_AI_ASTAR
+        for (auto& p : result.path) {
+            set(astar_debug, p.x, p.y, '*');
+        }
+        auto start = point(0, 0);
+        auto end = point(maxx - minx, maxy - miny);
+        astar_dump(dmap_scent, goal.at, start, end);
+#endif
+    }
+
+    for (auto& result : paths) {
         auto hops = result.path;
         auto hops_len = hops.size();
         point best;
@@ -500,27 +455,26 @@ con("TRY AGAIN");
 
         auto nh = point(best.x + minx, best.y + miny);
 
-#ifdef ENABLE_DEBUG_AI_ASTAR
-        if (!index) {
-            for (auto& p : hops) {
-                set(astar_debug, p.x, p.y, '*');
-            }
-            auto start = point(0, 0);
-            auto end = point(maxx - minx, maxy - miny);
-            astar_dump(dmap_scent, goal.at, start, end);
-        }
-        index++;
-#endif
         if (is_less_preferred_terrain(nh)) {
             log("move to %d,%d is less preferred terrain, avoid", nh.x, nh.y);
             continue;
         }
 
-        if (ai_assess_next_hop(nh)) {
+        if (move_to_try(nh)) {
             return;
         }
     }
 
+    //
+    // If we get here we found no goal. Try to wander.
+    //
+    if (ai_wander()) {
+        return;
+    }
+
+    //
+    // Ok our attempted move is done. We failed.
+    //
     is_tick_done = true;
     move_finish();
 }

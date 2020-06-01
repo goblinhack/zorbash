@@ -617,8 +617,7 @@ public:
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
     bool ai_obstacle_for_me(const point&);
-    bool ai_assess_next_hop(const point&);
-    bool ai_choose_wander(point& wander_to);
+    bool move_to_try(const point&);
     bool attack(fpoint future_pos);
     bool collision_check_and_handle(Thingp it, fpoint future_pos, int x, int y, int dx, int dy);
     bool collision_check_and_handle(fpoint, bool *, bool *, float radius);
@@ -791,7 +790,10 @@ public:
     std::string text_a_or_an(void) const;
     std::string text_the(void) const;
     std::string to_string(void) const;
-    bool ai_create_path (point &nh, const point start, const point end);
+    bool ai_create_path(point &nh, const point start, const point end);
+    bool ai_choose_wander(point& nh);
+    bool ai_wander(void);
+    bool ai_escape(void);
     uint8_t blit_begin_reflection_submerged(void) const;
     uint8_t blit_begin_submerged(void) const;
     uint8_t is_dir_bl(void) const;

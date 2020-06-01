@@ -317,3 +317,41 @@ void Thing::move_to_immediately_delta (fpoint delta)
     move_set_dir_from_delta(delta);
     update_pos(mid_at + delta, true);
 }
+
+bool Thing::move_to_try (const point& nh)
+{_
+    //
+    // Check to see if moving to this new location will hit something
+    //
+    // We need to look at the next-hop at the current time which may
+    // be vacant, but also to the future if a thing is moving to that
+    // spot; in which case we get an attach of opportunity.
+    //
+    auto fnh = fpoint(nh.x, nh.y);
+    if (collision_check_only(fnh)) {
+        //
+        // We would hit something and cannot do this move. However,
+        // see if we can hit the thing that is in the way.
+        //
+        log("move to %d,%d hit obstacle", nh.x, nh.y);
+
+        bool target_attacked = false;
+        bool target_overlaps = false;
+        collision_check_and_handle_nearby(fnh,
+                                          &target_attacked,
+                                          &target_overlaps);
+        if (target_attacked) {
+            is_tick_done = true;
+            log("cannot move to %d,%d, must attack", nh.x, nh.y);
+            return (true);
+        } else {
+            log("cannot move to %d,%d, obstacle", nh.x, nh.y);
+            return (false);
+        }
+    } else {
+        is_tick_done = true;
+        log("move to %d,%d", nh.x, nh.y);
+        move(fnh);
+        return (true);
+    }
+}
