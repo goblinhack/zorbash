@@ -117,13 +117,14 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
 
 bool Thing::ai_choose_wander (point& nh)
 {_
-    log("choose wander location");
-    auto target = monstp->wander_target;
+    log("ai wander");
 
     //
     // Reached the target? Choose a new one.
     //
+    auto target = monstp->wander_target;
     if ((mid_at.x == target.x) && (mid_at.y == target.y)) {
+        log("reached target");
         target = point(0, 0);
     }
 
@@ -134,9 +135,6 @@ bool Thing::ai_choose_wander (point& nh)
         if (ai_create_path(nh, point(mid_at.x, mid_at.y), target)) {
             return true;
         }
-        log("continue wander to %d,%d nh %d,%d",
-            target.x, target.y, nh.x, nh.y);
-        return true;
     }
 
     //
@@ -148,10 +146,58 @@ bool Thing::ai_choose_wander (point& nh)
     auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
     target = point(x, y);
     if (!ai_create_path(nh, point(mid_at.x, mid_at.y), target)) {
+        log("wander failed");
         return false;
     }
 
     monstp->wander_target = target;
     log("wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
     return true;
+}
+
+bool Thing::ai_wander (void)
+{_
+    log("ai wander");
+
+    point nh;
+    if (ai_choose_wander(nh)) {
+        if (is_less_preferred_terrain(nh)) {
+            log("wander failed, move to %d,%d is less preferred terrain", 
+                nh.x, nh.y);
+            return false;
+        }
+
+        if (move_to_try(nh)) {
+            return true;
+        }
+
+        //
+        // Set this so next time we will choose another target
+        //
+        monstp->wander_target = point(0, 0);
+    }
+
+    return false;
+}
+
+bool Thing::ai_escape (void)
+{_
+    log("ai escape");
+
+    auto tries = 10;
+    while (tries--) {
+        point nh;
+        if (ai_choose_wander(nh)) {
+            if (move_to_try(nh)) {
+                return true;
+            }
+
+            //
+            // Set this so next time we will choose another target
+            //
+            monstp->wander_target = point(0, 0);
+        }
+    }
+
+    return false;
 }

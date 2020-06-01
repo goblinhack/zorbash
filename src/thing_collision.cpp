@@ -539,7 +539,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
         }
 
         log("cand %s", cand.target->to_string().c_str());
-_
+
         //
         // Skip things that aren't really hitable.
         //
@@ -591,7 +591,7 @@ _
 
         auto it = best->target;
         log("best cand is %s", it->to_string().c_str());
-_
+
         damage = get_stats_attack();
         if (it->ai_hit_if_possible(me, damage)) {
             log("collision: will hit %s for %d damage",
@@ -618,10 +618,6 @@ _
             return (true);
         } else {
             log("collision: cannot hit %s", it->to_string().c_str());
-        }
-    } else {
-        if (is_loggable()) {
-            log("collision: none");
         }
     }
 

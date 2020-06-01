@@ -57,6 +57,14 @@ public:
 
     std::vector<point> path;
     int                cost {};
+
+    friend bool operator<(const class Path & lhs, const class Path & rhs) {
+        if (lhs.cost == rhs.cost) {
+            return lhs.path.size() < rhs.path.size();
+        } else {
+            return lhs.cost < rhs.cost; // Lower costs at the head
+        }
+    }
 };
 
 extern Path astar_solve(char path_debug, point s, point g, const Dmap *d);
