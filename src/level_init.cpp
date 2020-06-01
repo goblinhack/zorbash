@@ -34,6 +34,7 @@ static void level_place_random_blood(Dungeonp d);
 static void level_place_water(Dungeonp d, const std::string &what);
 static void level_place_deep_water(Dungeonp d, const std::string &what);
 static void level_place_floor_deco(Dungeonp d);
+static void level_place_random_floor_deco(Dungeonp d);
 static void level_place_wall_deco(Dungeonp d);
 static void level_place_remaining_floor(Dungeonp d, const std::string &what);
 static void level_place_corridor(Dungeonp d, const std::string what, int depth);
@@ -241,6 +242,8 @@ placed_player:
     // Less important stuff
     //
     level_place_floor_deco(dungeon);
+    if (g_errored) { return; }
+    level_place_random_floor_deco(dungeon);
     if (g_errored) { return; }
     level_place_wall_deco(dungeon);
     if (g_errored) { return; }
@@ -768,6 +771,28 @@ static void level_place_deep_water (Dungeonp d, const std::string &what)
 }
 
 static void level_place_floor_deco (Dungeonp d)
+{_
+    for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
+        for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
+            if (!d->is_floor(x, y)) {
+                continue;
+            }
+
+            if (!d->is_floor_deco_at(x, y)) {
+                continue;
+            }
+
+            auto tp = tp_random_deco();
+            if (!tp) {
+                return;
+            }
+
+            thing_new(tp->name(), fpoint(x, y));
+        }
+    }
+}
+
+static void level_place_random_floor_deco (Dungeonp d)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {

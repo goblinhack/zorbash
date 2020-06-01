@@ -11,9 +11,9 @@
 #include "my_math.h"
 #include "my_thing.h"
 
-std::vector<point> Thing::ai_create_path (point start, point end)
+bool Thing::ai_create_path (point &nh, const point start, const point end)
 {_
-    Dmap d {};
+    Dmap dmap {};
     point dmap_start = start;
     point dmap_end = end;
 
@@ -63,9 +63,14 @@ std::vector<point> Thing::ai_create_path (point start, point end)
                 level->is_hazard(x,y)                            ||
                 level->is_rock(x, y)                             ||
                 level->is_wall(x, y)) {
-                set(d.val, x, y, DMAP_IS_WALL);
+                set(dmap.val, x, y, DMAP_IS_WALL);
             } else {
-                set(d.val, x, y, DMAP_IS_PASSABLE);
+                auto c = is_less_preferred_terrain(point(x, y));
+                if (c >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+                    set(dmap.val, x, y, c);
+                } else {
+                    set(dmap.val, x, y, DMAP_IS_PASSABLE);
+                }
             }
         }
     }
@@ -73,15 +78,41 @@ std::vector<point> Thing::ai_create_path (point start, point end)
     dmap_start = point(minx, miny);
     dmap_end = point(maxx, maxy);
 
-    set(d.val, end.x, end.y, DMAP_IS_GOAL);
-    set(d.val, start.x, start.y, DMAP_IS_PASSABLE);
+    set(dmap.val, end.x, end.y, DMAP_IS_GOAL);
+    set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-    dmap_process(&d, dmap_start, dmap_end);
-#if 0
-    dmap_print(&d, start, dmap_start, dmap_end);
+    dmap_process(&dmap, dmap_start, dmap_end);
+#if 1
+    dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
-    auto p = dmap_solve_allow_diagonal(&d, start);
-    return p;
+    auto p = dmap_solve(&dmap, start);
+
+    char path_debug = '\0'; // astart path debug
+    auto result = astar_solve(path_debug, start, end, &dmap);
+    for (auto i : result.path) {
+        set(dmap.val, i.x, i.y, (uint8_t)0);
+    }
+    dmap_print(&dmap, start, dmap_start, dmap_end);
+
+    auto hops = result.path;
+    auto hops_len = hops.size();
+
+    if (hops_len >= 2) {
+        auto hop0 = get(hops, hops_len - 1);
+        auto hop1 = get(hops, hops_len - 2);
+        if (dmap_can_i_move_diagonally(&dmap, start, hop0, hop1)) {
+            nh = hop1;
+        } else {
+            nh = hop0;
+        }
+        return true;
+    } else if (hops_len >= 1) {
+        auto hop0 = get(hops, hops_len - 1);
+        nh = hop0;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 bool Thing::ai_choose_wander (point& nh)
@@ -100,13 +131,12 @@ bool Thing::ai_choose_wander (point& nh)
     // Try to use the same location.
     //
     if (target != point(0, 0)) {
-        auto l = ai_create_path(point(mid_at.x, mid_at.y), target);
-        if (l.size()) {
-            nh = l[0];
-            log("continue wander to %d,%d nh %d,%d", 
-                target.x, target.y, nh.x, nh.y);
-            return (true);
+        if (ai_create_path(nh, point(mid_at.x, mid_at.y), target)) {
+            return true;
         }
+        log("continue wander to %d,%d nh %d,%d",
+            target.x, target.y, nh.x, nh.y);
+        return true;
     }
 
     //
@@ -117,13 +147,11 @@ bool Thing::ai_choose_wander (point& nh)
     auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
     auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
     target = point(x, y);
-    auto l = ai_create_path(point(mid_at.x, mid_at.y), target);
-    if (!l.size()) {
+    if (!ai_create_path(nh, point(mid_at.x, mid_at.y), target)) {
         return false;
     }
 
-    monstp->wander_target = point(x, y);
-    nh = l[0];
+    monstp->wander_target = target;
     log("wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
-    return (true);
+    return true;
 }

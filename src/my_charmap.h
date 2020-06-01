@@ -21,7 +21,6 @@ public:
         DOOR_RIGHT      = '>',
         WALL            = 'x',
         DECO            = '|',
-        WALL_DECO       = 'X',
         FLOOR           = '.',
         DIRT            = ',',
         SECRET_CORRIDOR = '?',
