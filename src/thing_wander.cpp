@@ -158,23 +158,21 @@ bool Thing::ai_choose_wander (point& nh)
 bool Thing::ai_wander (void)
 {_
     log("ai wander");
+    auto tries = 10;
+    while (tries--) {
+        point nh;
+        if (ai_choose_wander(nh)) {
+            if (!is_less_preferred_terrain(nh)) {
+                if (move_to_try(nh)) {
+                    return true;
+                }
+            }
 
-    point nh;
-    if (ai_choose_wander(nh)) {
-        if (is_less_preferred_terrain(nh)) {
-            log("wander failed, move to %d,%d is less preferred terrain", 
-                nh.x, nh.y);
-            return false;
+            //
+            // Set this so next time we will choose another target
+            //
+            monstp->wander_target = point(0, 0);
         }
-
-        if (move_to_try(nh)) {
-            return true;
-        }
-
-        //
-        // Set this so next time we will choose another target
-        //
-        monstp->wander_target = point(0, 0);
     }
 
     return false;
@@ -183,7 +181,6 @@ bool Thing::ai_wander (void)
 bool Thing::ai_escape (void)
 {_
     log("ai escape");
-
     auto tries = 10;
     while (tries--) {
         point nh;

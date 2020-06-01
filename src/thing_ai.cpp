@@ -138,7 +138,7 @@ bool Thing::ai_obstacle_for_me (const point &p)
 
 uint8_t Thing::is_less_preferred_terrain (point p) const
 {_
-    uint8_t pref = 0;
+    int pref = 0;
 
     if (level->is_water(p)) {
         if (is_water_hater()) {
@@ -146,14 +146,19 @@ uint8_t Thing::is_less_preferred_terrain (point p) const
         }
     }
 
-    auto heat = level->heatmap(p);
+    int heat = level->heatmap(p);
     if (heat) {
-        auto hate_how_much = is_fire_hater();
+        int hate_how_much = is_fire_hater();
         if (is_fire_hater()) {
             pref += hate_how_much + heat;
         }
     }
-    return (std::min(DMAP_MAX_LESS_PREFERRED_TERRAIN, pref));
+
+    if (pref > DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+        pref = DMAP_MAX_LESS_PREFERRED_TERRAIN;
+    }
+
+    return (uint8_t) pref;
 }
 
 void Thing::ai_get_next_hop (void)
@@ -170,6 +175,12 @@ void Thing::ai_get_next_hop (void)
     const int maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
 
     point start((int)mid_at.x, (int)mid_at.y);
+
+    if (monstp->wander_target != point(0, 0)) {
+        if (ai_wander()) {
+            return;
+        }
+    }
 
     if (is_less_preferred_terrain(start) >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
         if (ai_escape()) {
@@ -457,7 +468,10 @@ void Thing::ai_get_next_hop (void)
 
         if (is_less_preferred_terrain(nh)) {
             log("move to %d,%d is less preferred terrain, avoid", nh.x, nh.y);
-            continue;
+            //
+            // To avoid goal see-sawing, break to wander?
+            //
+            break;
         }
 
         if (move_to_try(nh)) {
