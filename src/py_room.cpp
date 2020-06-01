@@ -110,8 +110,8 @@ PyObject *map_load_room_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_monst       ||
                            m.is_secret_door ||
                            m.is_trap        ||
-                           m.is_water       ||
-                           m.is_floor_deco) {
+                           m.is_water
+                           ) {
                     floor_string += Charmap::FLOOR;
                 } else {
                     floor_string += Charmap::SPACE;

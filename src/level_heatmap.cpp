@@ -67,9 +67,9 @@ void Level::update_heatmap (void)
 {
     _heatmap = {};
 
-    for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
-        for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
-            if (is_lava(x, y)) {
+    for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
+        for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
+            if (is_lava(x, y) || is_fire(x, y)) {
                 incr_heatmap_no_check(x+1, y+1);
                 incr_heatmap_no_check(x  , y+1);
                 incr_heatmap_no_check(x-1, y+1);
@@ -83,6 +83,20 @@ void Level::update_heatmap (void)
             }
         }
     }
+
+#if 0
+    for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
+        for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
+            if (get(_heatmap, x, y)) {
+printf("X");
+            } else {
+printf(".");
+            }
+        }
+printf("\n");
+    }
+printf("\n");
+#endif
 
     heatmap_valid = true;
 }

@@ -89,12 +89,7 @@ void Charmap::init_charmaps (void)
     char_index              = Charmap::DECO;
     c = &all_charmaps[char_index];
     c->c                    = char_index;
-    c->is_floor_deco    = true;
-
-    char_index              = Charmap::WALL_DECO;
-    c = &all_charmaps[char_index];
-    c->c                    = char_index;
-    c->is_wall_deco     = true;
+    c->is_floor_deco        = true;
 
     char_index              = Charmap::EXIT;
     c = &all_charmaps[char_index];

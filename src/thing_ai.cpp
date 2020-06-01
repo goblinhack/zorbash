@@ -148,28 +148,16 @@ uint8_t Thing::is_less_preferred_terrain (point p) const
 
     auto heat = level->heatmap(p);
     if (heat) {
-        auto hate_how_mych = is_fire_hater();
+        auto hate_how_much = is_fire_hater();
         if (is_fire_hater()) {
-            pref += hate_how_mych + heat;
+            pref += hate_how_much + heat;
         }
     }
     return (std::min(DMAP_MAX_LESS_PREFERRED_TERRAIN, pref));
 }
 
-bool Thing::ai_assess_next_hop (const fpoint& nh)
+bool Thing::ai_assess_next_hop (const point& nh)
 {_
-    const point nh_i((int)nh.x, (int)nh.y);
-
-    log("assess next-hop (%f,%f)", nh.x, nh.y);
-    if (is_less_preferred_terrain(nh_i)) {
-        log("move to %f,%f is less preferred terrain, avoid", nh.x, nh.y);
-        return (false);
-    }
-
-    if (mid_at == nh) {
-        return (false);
-    }
-
     //
     // Check to see if moving to this new location will hit something
     //
@@ -177,30 +165,31 @@ bool Thing::ai_assess_next_hop (const fpoint& nh)
     // be vacant, but also to the future if a thing is moving to that
     // spot; in which case we get an attach of opportunity.
     //
-    if (collision_check_only(nh)) {
+    auto fnh = fpoint(nh.x, nh.y);
+    if (collision_check_only(fnh)) {
         //
         // We would hit something and cannot do this move. However,
         // see if we can hit the thing that is in the way.
         //
-        log("move to %f,%f hit obstacle", nh.x, nh.y);
+        log("move to %d,%d hit obstacle", nh.x, nh.y);
 
         bool target_attacked = false;
         bool target_overlaps = false;
-        collision_check_and_handle_nearby(fpoint(nh.x, nh.y),
+        collision_check_and_handle_nearby(fnh,
                                           &target_attacked,
                                           &target_overlaps);
         if (target_attacked) {
             is_tick_done = true;
-            log("cannot move to %f,%f, must attack", nh.x, nh.y);
+            log("cannot move to %d,%d, must attack", nh.x, nh.y);
             return (true);
         } else {
-            log("cannot move to %f,%f, obstacle", nh.x, nh.y);
+            log("cannot move to %d,%d, obstacle", nh.x, nh.y);
             return (false);
         }
     } else {
         is_tick_done = true;
-        log("move to %f,%f", nh.x, nh.y);
-        move(nh);
+        log("move to %d,%d", nh.x, nh.y);
+        move(fnh);
         return (true);
     }
 }
@@ -219,6 +208,22 @@ void Thing::ai_get_next_hop (void)
     const int maxy = std::min(MAP_HEIGHT, (int)(mid_at.y + dy - 1));
 
     point start((int)mid_at.x, (int)mid_at.y);
+
+    if (is_less_preferred_terrain(start) >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
+con("ON BAD TERRAIN WANDER");
+        auto tries = 10;
+        while (tries--) {
+            point nh;
+            monstp->wander_target = point(0, 0);
+            if (ai_choose_wander(nh)) {
+                if (ai_assess_next_hop(nh)) {
+                    return;
+                }
+            }
+con("TRY AGAIN");
+        }
+        log("wander failed, need to choose a new next-hop");
+    }
 
     auto dmap_scent = get_dmap_scent();
     auto age_map = get_age_map();
@@ -347,7 +352,13 @@ void Thing::ai_get_next_hop (void)
     if (goals.empty()) {
         point nh;
         if (ai_choose_wander(nh)) {
-            if (ai_assess_next_hop(fpoint(nh.x, nh.y))) {
+            if (is_less_preferred_terrain(nh)) {
+                log("move to %d,%d is less preferred terrain, avoid", 
+                    nh.x, nh.y);
+                return;
+            }
+
+            if (ai_assess_next_hop(nh)) {
                 return;
             }
             monstp->wander_target = point(0, 0);
@@ -487,7 +498,7 @@ void Thing::ai_get_next_hop (void)
             continue;
         }
 
-        auto nh = fpoint(best.x + minx, best.y + miny);
+        auto nh = point(best.x + minx, best.y + miny);
 
 #ifdef ENABLE_DEBUG_AI_ASTAR
         if (!index) {
@@ -500,6 +511,11 @@ void Thing::ai_get_next_hop (void)
         }
         index++;
 #endif
+        if (is_less_preferred_terrain(nh)) {
+            log("move to %d,%d is less preferred terrain, avoid", nh.x, nh.y);
+            continue;
+        }
+
         if (ai_assess_next_hop(nh)) {
             return;
         }
