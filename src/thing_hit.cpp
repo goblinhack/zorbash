@@ -119,13 +119,13 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         //
         // Record who dun it.
         //
-        log("is killed by (%s) for %u, health now %d",
+        log("is killed by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->text_a_or_an();
         auto reason = "killed by " + killer;
         dead(hitter, reason);
     } else {
-        log("is hit by (%s) for %u, health now %d",
+        log("is hit by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
     }
 

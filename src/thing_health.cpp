@@ -9,6 +9,10 @@
 
 void Thing::health_boost (int v)
 {_
+    if (!v) {
+        return;
+    }
+
     auto old_health = get_stats_health();
     auto new_health = old_health + v;
     auto max_health = get_stats_health_max();

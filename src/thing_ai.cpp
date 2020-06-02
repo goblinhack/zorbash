@@ -18,11 +18,20 @@ _
     point start((int)mid_at.x, (int)mid_at.y);
 
     //
+    // If on fire, try and put it out!
+    //
+    if (is_on_fire() && is_fire_hater()) {
+        if (ai_on_fire()) {
+            return;
+        }
+    }
+
+    //
     // If going somewhere, continue
     //
     if (monstp->wander_target != point(0, 0)) {
         log("try to continue wander");
-        if (ai_wander()) {
+        if (ai_on_fire()) {
             return;
         }
     }
