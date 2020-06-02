@@ -616,7 +616,7 @@ public:
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
-    bool ai_obstacle_for_me(const point&);
+    bool is_obstacle_for_me(const point&);
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
     bool move_to_check(const point&, const bool escaping);
@@ -670,6 +670,7 @@ public:
     fpoint get_interpolated_mid_at(void) const;
     fpoint set_interpolated_mid_at(fpoint);
     int ai_delay_after_moving_ms(void);
+    int ai_choose_goal(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
     int ai_hit_if_possible(Thingp hitter);
     int ai_hit_if_possible(Thingp hitter, int damage);
