@@ -91,6 +91,8 @@ GAME_OBJECTS=				\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing.o 			\
     $(OBJDIR)/thing_ai.o 		\
+    $(OBJDIR)/thing_ai_goals.o 		\
+    $(OBJDIR)/thing_ai_wander.o 	\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_astar.o 		\
@@ -116,12 +118,14 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
+    $(OBJDIR)/thing_likes_and_dislikes.o \
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\
     $(OBJDIR)/thing_minimap.o 		\
     $(OBJDIR)/thing_move.o 		\
     $(OBJDIR)/thing_move_dir.o 		\
     $(OBJDIR)/thing_msg.o 		\
+    $(OBJDIR)/thing_obstacle.o 		\
     $(OBJDIR)/thing_on_fire.o 		\
     $(OBJDIR)/thing_path.o 		\
     $(OBJDIR)/thing_shove.o 		\
@@ -129,10 +133,10 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_string.o 		\
     $(OBJDIR)/thing_template.o 		\
     $(OBJDIR)/thing_template_api.o 	\
+    $(OBJDIR)/thing_terrain.o 		\
     $(OBJDIR)/thing_text.o 		\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_tile.o 		\
-    $(OBJDIR)/thing_wander.o 		\
     $(OBJDIR)/thing_water.o 		\
     $(OBJDIR)/thing_weapon.o 		\
     $(OBJDIR)/tile.o 			\
