@@ -540,14 +540,14 @@ int Thing::is_rrr22(void) const
     return (tp()->is_rrr22());
 }
 
-int Thing::is_rrr23(void) const
+int Thing::is_intelligent(void) const
 {_
-    return (tp()->is_rrr23());
+    return (tp()->is_intelligent());
 }
 
-int Thing::is_rrr24(void) const
+int Thing::is_double_damage_from_fire(void) const
 {_
-    return (tp()->is_rrr24());
+    return (tp()->is_double_damage_from_fire());
 }
 
 int Thing::is_fire(void) const

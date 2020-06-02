@@ -242,11 +242,11 @@ class Tp:
     def set_is_rrr22(self, value):
         zx.tp_set_is_rrr22(self, value)
 
-    def set_is_rrr23(self, value):
-        zx.tp_set_is_rrr23(self, value)
+    def set_is_intelligent(self, value):
+        zx.tp_set_is_intelligent(self, value)
 
-    def set_is_rrr24(self, value):
-        zx.tp_set_is_rrr24(self, value)
+    def set_is_double_damage_from_fire(self, value):
+        zx.tp_set_is_double_damage_from_fire(self, value)
 
     def set_is_fire(self, value):
         zx.tp_set_is_fire(self, value)
