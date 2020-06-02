@@ -51,6 +51,36 @@ static bool is_plausible_itanium_prefix(char* s) {
 }
 #endif
 
+//
+// See
+// https://stackoverflow.com/questions/4939636/function-to-mangle-demangle-functions
+//
+auto cppDemangle (const char *abiName)
+{
+    //
+    // This function allocates and returns storage in ret
+    //
+    int status;
+    char *ret = abi::__cxa_demangle(abiName, 0 /* output buffer */, 0 /* length */, &status);
+
+    auto deallocator = ( [](char *mem) { if (mem) free((void*)mem); } );
+
+    if (status) {
+        // 0: The demangling operation succeeded.
+        // -1: A memory allocation failure occurred.
+        // -2: mangled_name is not a valid name under the C++ ABI mangling rules.
+        // -3: One of the arguments is invalid.
+        std::unique_ptr<char, decltype(deallocator) > retval(nullptr, deallocator);
+    }
+
+    //
+    // Create a unique pointer to take ownership of the returned string so it
+    // is freed when that pointers goes out of scope
+    //
+    std::unique_ptr<char, decltype(deallocator) > retval(ret, deallocator);
+    return retval;
+}
+
 std::string Traceback::to_string (void)
 {
 #ifdef _WIN32
@@ -106,10 +136,9 @@ std::string Traceback::to_string (void)
                 cur += 1;
             }
 
-            int status = 0;
-            if (char *demangled = abi::__cxa_demangle(cur, 0, 0, &status)) {
-                sout += string_sprintf("%s%u %s\n", prefix, i, demangled);
-                free(demangled);
+            auto demangled = cppDemangle(cur);
+            if (demangled) {
+                sout += string_sprintf("%s%u %s\n", prefix, i, demangled.get());
                 done = true;
                 break;
             }

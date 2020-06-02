@@ -144,8 +144,8 @@ int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_rrr20(void) const { return _is_rrr20; }
 int Tp::is_rrr21(void) const { return _is_rrr21; }
 int Tp::is_rrr22(void) const { return _is_rrr22; }
-int Tp::is_rrr23(void) const { return _is_rrr23; }
-int Tp::is_rrr24(void) const { return _is_rrr24; }
+int Tp::is_intelligent(void) const { return _is_intelligent; }
+int Tp::is_double_damage_from_fire(void) const { return _is_double_damage_from_fire; }
 int Tp::is_rrr3(void) const { return _is_rrr3; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
@@ -285,8 +285,8 @@ void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_rrr20(int v) { _is_rrr20 = v; }
 void Tp::set_is_rrr21(int v) { _is_rrr21 = v; }
 void Tp::set_is_rrr22(int v) { _is_rrr22 = v; }
-void Tp::set_is_rrr23(int v) { _is_rrr23 = v; }
-void Tp::set_is_rrr24(int v) { _is_rrr24 = v; }
+void Tp::set_is_intelligent(int v) { _is_intelligent = v; }
+void Tp::set_is_double_damage_from_fire(int v) { _is_double_damage_from_fire = v; }
 void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }

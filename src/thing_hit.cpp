@@ -55,7 +55,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (is_fire_hater()) {
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
-            damage *= 2;
+            if (is_double_damage_from_fire()) {
+                damage *= 2;
+            }
         }
     }
 

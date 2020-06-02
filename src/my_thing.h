@@ -772,8 +772,8 @@ public:
     int is_rrr20(void) const;
     int is_rrr21(void) const;
     int is_rrr22(void) const;
-    int is_rrr23(void) const;
-    int is_rrr24(void) const;
+    int is_intelligent(void) const;
+    int is_double_damage_from_fire(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;

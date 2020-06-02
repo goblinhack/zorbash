@@ -149,6 +149,8 @@ bool Thing::ai_create_on_fire_path (point &nh,
 
 bool Thing::ai_on_fire_choose_target (point& nh)
 {_
+    point start(mid_at.x, mid_at.y);
+
     //
     // Reached the target? Choose a new one.
     //
@@ -164,7 +166,7 @@ bool Thing::ai_on_fire_choose_target (point& nh)
     }
 
     if (target != point(0, 0)) {
-        if (ai_create_on_fire_path(nh, point(mid_at.x, mid_at.y), target)) {
+        if (ai_create_on_fire_path(nh, start, target)) {
             return true;
         }
     }
@@ -178,15 +180,15 @@ bool Thing::ai_on_fire_choose_target (point& nh)
     while (attempts--) {
         auto tries = 1000;
         auto closest = std::numeric_limits<int>::max();
-        fpoint best;
+        point best;
         auto got_one = false;
 
         while (tries--) {
             auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
             auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
-            if (level->is_water(target.x, target.y)) {
-                auto p = fpoint(x, y);
-                if (distance(mid_at, p) < closest) {
+            auto p = point(x, y);
+            if (level->is_water(p)) {
+                if (distance(start, p) < closest) {
                     best = p;
                     got_one = true;
                 }
@@ -194,8 +196,8 @@ bool Thing::ai_on_fire_choose_target (point& nh)
         }
 
         if (got_one) {
-            target = point(best.x, best.y);
-            if (ai_create_on_fire_path(nh, point(mid_at.x, mid_at.y), target)) {
+            target = best;
+            if (ai_create_on_fire_path(nh, start, target)) {
                 monstp->wander_target = target;
                 log("on-fire move to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
                 return true;

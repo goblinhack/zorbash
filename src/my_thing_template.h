@@ -179,8 +179,8 @@ private:
     int _is_rrr20 {};
     int _is_rrr21 {};
     int _is_rrr22 {};
-    int _is_rrr23 {};
-    int _is_rrr24 {};
+    int _is_intelligent {};
+    int _is_double_damage_from_fire {};
     int _is_fire {};
     int _is_rrr3 {};
     int _is_rrr4 {};
@@ -420,8 +420,8 @@ public:
     int is_rrr20(void) const;
     int is_rrr21(void) const;
     int is_rrr22(void) const;
-    int is_rrr23(void) const;
-    int is_rrr24(void) const;
+    int is_intelligent(void) const;
+    int is_double_damage_from_fire(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
     int is_rrr5(void) const;
@@ -561,8 +561,8 @@ public:
     void set_is_rrr20(int);
     void set_is_rrr21(int);
     void set_is_rrr22(int);
-    void set_is_rrr23(int);
-    void set_is_rrr24(int);
+    void set_is_intelligent(int);
+    void set_is_double_damage_from_fire(int);
     void set_is_rrr3(int);
     void set_is_rrr4(int);
     void set_is_rrr5(int);
