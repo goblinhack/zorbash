@@ -90,7 +90,7 @@ typedef struct Monst_ {
     int          stats18 = {};
     int          stats19 = {};
     int          stats_strength = {};
-    int          stats_attack_rate_tenths = {};
+    int          tick_rate_tenths = {};
     int          stats_defence = {};
     int          stats_defence_max = {};
     int          stats_health = {};
@@ -110,8 +110,8 @@ typedef struct Monst_ {
     timestamp_t  timestamp_fadeup_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
     timestamp_t  timestamp_hunger_tick {};   // Ticks every time does something. Used from memory aging
-    timestamp_t  timestamp_last_attack {};
-    timestamp_t  timestamp_last_attacked {};
+    timestamp_t  timestamp_last_tick {};
+    timestamp_t  timestamp_last_ticked {};
     timestamp_t  timestamp_lunge_begin {};
     timestamp_t  timestamp_lunge_end {};
     timestamp_t  timestamp_move_begin {};
@@ -302,12 +302,12 @@ public:
     int decr_stats_defence_max(void);
     int incr_stats_defence_max(void);
 
-    int set_stats_attack_rate_tenths(int);
-    int get_stats_attack_rate_tenths(void) const;
-    int decr_stats_attack_rate_tenths(int);
-    int incr_stats_attack_rate_tenths(int);
-    int decr_stats_attack_rate_tenths(void);
-    int incr_stats_attack_rate_tenths(void);
+    int set_tick_rate_tenths(int);
+    int get_tick_rate_tenths(void) const;
+    int decr_tick_rate_tenths(int);
+    int incr_tick_rate_tenths(int);
+    int decr_tick_rate_tenths(void);
+    int incr_tick_rate_tenths(void);
 
     int set_stats01(int);
     int get_stats01(void) const;
@@ -505,19 +505,19 @@ public:
     timestamp_t decr_timestamp_fadeup_end(void);
     timestamp_t incr_timestamp_fadeup_end(void);
 
-    timestamp_t set_timestamp_last_attacked(timestamp_t);
-    timestamp_t get_timestamp_last_attacked(void) const;
-    timestamp_t decr_timestamp_last_attacked(timestamp_t);
-    timestamp_t incr_timestamp_last_attacked(timestamp_t);
-    timestamp_t decr_timestamp_last_attacked(void);
-    timestamp_t incr_timestamp_last_attacked(void);
+    timestamp_t set_timestamp_last_ticked(timestamp_t);
+    timestamp_t get_timestamp_last_ticked(void) const;
+    timestamp_t decr_timestamp_last_ticked(timestamp_t);
+    timestamp_t incr_timestamp_last_ticked(timestamp_t);
+    timestamp_t decr_timestamp_last_ticked(void);
+    timestamp_t incr_timestamp_last_ticked(void);
 
-    timestamp_t set_timestamp_last_attack(timestamp_t);
-    timestamp_t get_timestamp_last_attack(void) const;
-    timestamp_t decr_timestamp_last_attack(timestamp_t);
-    timestamp_t incr_timestamp_last_attack(timestamp_t);
-    timestamp_t decr_timestamp_last_attack(void);
-    timestamp_t incr_timestamp_last_attack(void);
+    timestamp_t set_timestamp_last_tick(timestamp_t);
+    timestamp_t get_timestamp_last_tick(void) const;
+    timestamp_t decr_timestamp_last_tick(timestamp_t);
+    timestamp_t incr_timestamp_last_tick(timestamp_t);
+    timestamp_t decr_timestamp_last_tick(void);
+    timestamp_t incr_timestamp_last_tick(void);
 
     timestamp_t set_timestamp_flip_start(timestamp_t);
     timestamp_t get_timestamp_flip_start(void) const;
@@ -814,7 +814,7 @@ public:
     uint8_t is_dir_up(void) const;
     uint8_t is_less_preferred_terrain(point p) const;
     uint8_t is_visible() const;
-    void achieve_goals_in_life();
+    bool achieve_goals_in_life();
     void add_enemy(Thingp attacker);
     void ai_get_next_hop(void);
     void animate();

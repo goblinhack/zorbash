@@ -101,7 +101,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->stats18);
     /* int         */ in >> bits(my.t->stats19);
     /* int         */ in >> bits(my.t->stats_strength);
-    /* int         */ in >> bits(my.t->stats_attack_rate_tenths);
+    /* int         */ in >> bits(my.t->tick_rate_tenths);
     /* int         */ in >> bits(my.t->stats_defence);
     /* int         */ in >> bits(my.t->stats_defence_max);
     /* int         */ in >> bits(my.t->stats_health);
@@ -120,8 +120,8 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* timestamp_t */ in >> bits(T); my.t->timestamp_fadeup_end    = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_flip_start    = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_hunger_tick   = load(T);
-    /* timestamp_t */ in >> bits(T); my.t->timestamp_last_attack   = load(T);
-    /* timestamp_t */ in >> bits(T); my.t->timestamp_last_attacked = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_last_tick   = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_last_ticked = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_lunge_begin   = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_lunge_end     = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_move_begin    = load(T);

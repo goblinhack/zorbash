@@ -11,8 +11,18 @@
 #include "my_thing.h"
 #include "my_python.h"
 
-void Thing::achieve_goals_in_life (void)
+bool Thing::achieve_goals_in_life (void)
 {_
+    //
+    // Don't do stuff too often
+    //
+    if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
+                                         get_timestamp_last_tick())) {
+        return false;
+    }
+
+    set_timestamp_last_tick(time_get_time_ms_cached());
+
     if (is_loggable()) {
         log("achieve goals at tick %d, game tick %u",
             get_tick(), game->tick_current);
@@ -20,22 +30,22 @@ void Thing::achieve_goals_in_life (void)
 
     lifespan_tick();
     if (is_dead) {
-        return;
+        return true;
     }
 
     hunger_clock();
     if (is_dead) {
-        return;
+        return true;
     }
 
     water_tick();
     if (is_dead) {
-        return;
+        return true;
     }
 
     collision_check_do();
     if (is_dead) {
-        return;
+        return true;
     }
 
     //
@@ -56,7 +66,7 @@ void Thing::achieve_goals_in_life (void)
     // If there is a next hop to go to, do it.
     //
     if (cursor_path_pop_next_and_move()) {
-        return;
+        return true;
     }
 
     //
@@ -67,6 +77,8 @@ void Thing::achieve_goals_in_life (void)
     } else {
         is_tick_done = true;
     }
+
+    return true;
 }
 
 void Thing::collision_check_do (void)
@@ -105,25 +117,26 @@ void Thing::tick (void)
         return;
     }
 
-    bool is_waiting_to_move = false;
+    bool is_waiting_to_tick = false;
 
     //
     // Completed moving?
     //
     if (time_get_time_ms_cached() >= get_timestamp_move_end()) {
-        is_waiting_to_move = true;
+        is_waiting_to_tick = true;
     }
 
-    if (is_waiting_to_move) {
+    if (is_waiting_to_tick) {
         //
         // Tick on player move/change of the current tick
         //
         auto tick = get_tick();
         if (tick < game->tick_current) {
             is_tick_done = false;
-            achieve_goals_in_life();
-            if (is_tick_done) {
-                incr_tick();
+            if (achieve_goals_in_life()) {
+                if (is_tick_done) {
+                    incr_tick();
+                }
             }
         }
     }

@@ -163,21 +163,6 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
 
     Thingp weapon = nullptr;
 
-    if (hitter) {
-        verify(hitter);
-
-        //
-        // Don't attack more than allowed
-        //
-        if (!time_have_x_tenths_passed_since(
-                hitter->get_stats_attack_rate_tenths(),
-                hitter->get_timestamp_last_attack())) {
-            log(" ignore, too-frequent attack");
-            return (false);
-        }
-        hitter->set_timestamp_last_attack(time_get_time_ms_cached());
-    }
-
     if (hitter && hitter->is_dead) {
         //
         // This case is hit if a ghost runs into a player. The ghost takes

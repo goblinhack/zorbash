@@ -175,7 +175,8 @@ bool Thing::ai_wander (void)
             monstp->wander_target = point(0, 0);
         }
     }
-
+_
+    log("no wander goal");
     return false;
 }
 
@@ -196,6 +197,7 @@ bool Thing::ai_escape (void)
             monstp->wander_target = point(0, 0);
         }
     }
-
+_
+    log("no escape goal");
     return false;
 }

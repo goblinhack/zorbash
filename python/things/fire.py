@@ -5,8 +5,8 @@ import tp
 def spawn(me, x, y):
     zx.tp_spawn_next_to(me, "small_fire")
 
-def tp_init(name):
-    x = tp.Tp(name)
+def tp_init(name, text_name):
+    x = tp.Tp(name, text_name)
 
     x.set_collision_attack(True)
     x.set_collision_check(True)
@@ -28,7 +28,7 @@ def tp_init(name):
     x.set_is_water_hater(100)
     x.set_lifespan_dice("1d30+10")
     x.set_stats_attack_dice("1d6+1")
-    x.set_stats_attack_rate_tenths(3)
+    x.set_tick_rate_tenths(3)
     x.set_stats_health_initial(10)
     x.set_text_a_or_an("");
     x.set_text_hits("burns");
@@ -55,6 +55,6 @@ def tp_init(name):
     x.update()
 
 def init():
-    tp_init(name="fire")
+    tp_init(name="fire", text_name="burning fire")
 
 init()

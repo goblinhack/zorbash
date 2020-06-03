@@ -1261,57 +1261,57 @@ int Thing::incr_stats_defence_max (void)
 ////////////////////////////////////////////////////////////////////////////
 // attack_rate_tenths
 ////////////////////////////////////////////////////////////////////////////
-int Thing::get_stats_attack_rate_tenths (void) const
+int Thing::get_tick_rate_tenths (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->stats_attack_rate_tenths);
+        return (monstp->tick_rate_tenths);
     } else {
         return (0);
     }
 }
 
-int Thing::set_stats_attack_rate_tenths (int v)
+int Thing::set_tick_rate_tenths (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack_rate_tenths = v);
+    auto n = (monstp->tick_rate_tenths = v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::decr_stats_attack_rate_tenths (int v)
+int Thing::decr_tick_rate_tenths (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack_rate_tenths -= v);
+    auto n = (monstp->tick_rate_tenths -= v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::incr_stats_attack_rate_tenths (int v)
+int Thing::incr_tick_rate_tenths (int v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack_rate_tenths += v);
+    auto n = (monstp->tick_rate_tenths += v);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::decr_stats_attack_rate_tenths (void)
+int Thing::decr_tick_rate_tenths (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack_rate_tenths--);
+    auto n = (monstp->tick_rate_tenths--);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
 
-int Thing::incr_stats_attack_rate_tenths (void)
+int Thing::incr_tick_rate_tenths (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    auto n = (monstp->stats_attack_rate_tenths++);
+    auto n = (monstp->tick_rate_tenths++);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
@@ -2909,99 +2909,99 @@ timestamp_t Thing::incr_timestamp_fadeup_end (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// timestamp_last_attacked
+// timestamp_last_ticked
 ////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_last_attacked (void) const
+timestamp_t Thing::get_timestamp_last_ticked (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->timestamp_last_attacked);
+        return (monstp->timestamp_last_ticked);
     } else {
         return (0);
     }
 }
 
-timestamp_t Thing::set_timestamp_last_attacked (timestamp_t v)
+timestamp_t Thing::set_timestamp_last_ticked (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attacked = v);
+    return (monstp->timestamp_last_ticked = v);
 }
 
-timestamp_t Thing::decr_timestamp_last_attacked (timestamp_t v)
+timestamp_t Thing::decr_timestamp_last_ticked (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attacked -= v);
+    return (monstp->timestamp_last_ticked -= v);
 }
 
-timestamp_t Thing::incr_timestamp_last_attacked (timestamp_t v)
+timestamp_t Thing::incr_timestamp_last_ticked (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attacked += v);
+    return (monstp->timestamp_last_ticked += v);
 }
 
-timestamp_t Thing::decr_timestamp_last_attacked (void)
+timestamp_t Thing::decr_timestamp_last_ticked (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attacked--);
+    return (monstp->timestamp_last_ticked--);
 }
 
-timestamp_t Thing::incr_timestamp_last_attacked (void)
+timestamp_t Thing::incr_timestamp_last_ticked (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attacked++);
+    return (monstp->timestamp_last_ticked++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// timestamp_last_attack
+// timestamp_last_tick
 ////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_last_attack (void) const
+timestamp_t Thing::get_timestamp_last_tick (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->timestamp_last_attack);
+        return (monstp->timestamp_last_tick);
     } else {
         return (0);
     }
 }
 
-timestamp_t Thing::set_timestamp_last_attack (timestamp_t v)
+timestamp_t Thing::set_timestamp_last_tick (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attack = v);
+    return (monstp->timestamp_last_tick = v);
 }
 
-timestamp_t Thing::decr_timestamp_last_attack (timestamp_t v)
+timestamp_t Thing::decr_timestamp_last_tick (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attack -= v);
+    return (monstp->timestamp_last_tick -= v);
 }
 
-timestamp_t Thing::incr_timestamp_last_attack (timestamp_t v)
+timestamp_t Thing::incr_timestamp_last_tick (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attack += v);
+    return (monstp->timestamp_last_tick += v);
 }
 
-timestamp_t Thing::decr_timestamp_last_attack (void)
+timestamp_t Thing::decr_timestamp_last_tick (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attack--);
+    return (monstp->timestamp_last_tick--);
 }
 
-timestamp_t Thing::incr_timestamp_last_attack (void)
+timestamp_t Thing::incr_timestamp_last_tick (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_last_attack++);
+    return (monstp->timestamp_last_tick++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
