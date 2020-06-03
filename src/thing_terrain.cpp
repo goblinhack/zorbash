@@ -22,7 +22,7 @@ uint8_t Thing::is_less_preferred_terrain (point p) const
     }
 
     int heat = level->heatmap(p);
-    if (heat) {
+    if (heat > 3) {
         int hate_how_much = is_fire_hater();
         if (is_fire_hater()) {
             pref += hate_how_much + heat;

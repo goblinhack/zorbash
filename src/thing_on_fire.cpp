@@ -216,7 +216,7 @@ bool Thing::ai_on_fire (void)
     while (tries--) {
         point nh;
         if (ai_on_fire_choose_target(nh)) {
-            if (move_to_or_attack(nh)) {
+            if (move_to_or_escape(nh)) {
                 return true;
             }
 

@@ -29,22 +29,24 @@ _
     }
 
     //
-    // If going somewhere, continue
-    //
-    if (monstp->wander_target != point(0, 0)) {
-        log("try to continue wander");
-        if (ai_on_fire()) {
-            return;
-        }
-    }
-
-    //
     // If somewhere bad, escape
     //
     if (is_less_preferred_terrain(start) >= DMAP_MAX_LESS_PREFERRED_TERRAIN) {
         log("on bad terrain, escape");
         if (ai_escape()) {
             return;
+        }
+    }
+
+    //
+    // If going somewhere, continue
+    //
+    if (monstp->wander_target != point(0, 0)) {
+        if (random_range(0, 100) < 90) {
+            log("try to continue wander");
+            if (ai_wander()) {
+                return;
+            }
         }
     }
 
