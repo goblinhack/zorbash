@@ -20,7 +20,7 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_is_loggable(False)
     x.set_light_color("red")
     x.set_stats_attack_dice("1d12+6")
-    x.set_stats_attack_rate_tenths(3)
+    x.set_tick_rate_tenths(10)
     x.set_text_a_or_an("");
     x.set_text_hits("BURNS and tickles");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
@@ -33,7 +33,7 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.update()
 
 def init():
-    lava_init(name="lava1", text_name="lava",
+    lava_init(name="lava1", text_name="broiling lava",
             tiles=[
                 "lava1.1",
                 "lava1.2",

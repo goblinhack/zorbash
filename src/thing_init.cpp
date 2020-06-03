@@ -113,9 +113,9 @@ void Thing::init (const std::string& name, const fpoint born, const fpoint jitte
     }
 
     {_
-        auto v = tpp->stats_attack_rate_tenths();
+        auto v = tpp->tick_rate_tenths();
         if (unlikely(v)) {
-            set_stats_attack_rate_tenths(v);
+            set_tick_rate_tenths(v);
         }
     }
 
@@ -404,6 +404,13 @@ void Thing::init (const std::string& name, const fpoint born, const fpoint jitte
     if (gfx_bounce_always()) {
         bounce(0.2, 1.0, 500, 99999);
     }
+
+    //
+    // Jitter the initial ticks so things don't all tick the same time
+    //
+    set_timestamp_last_tick(
+       time_get_time_ms_cached() +
+       random_range(0, get_tick_rate_tenths() * 100));
 }
 
 void Thing::reinit (void)

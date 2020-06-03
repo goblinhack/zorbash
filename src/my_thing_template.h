@@ -219,7 +219,7 @@ private:
     int _stats17 {};
     int _stats18 {};
     int _stats19 {};
-    int _stats_attack_rate_tenths {};
+    int _tick_rate_tenths {};
     int _stats_defence {};
     int _stats_health_hunger_pct {};
     int _stats_health_initial {};
@@ -459,7 +459,7 @@ public:
     int stats17(void) const;
     int stats18(void) const;
     int stats19(void) const;
-    int stats_attack_rate_tenths(void) const;
+    int tick_rate_tenths(void) const;
     int stats_defence(void) const;
     int stats_health_hunger_pct(void) const;
     int stats_health_initial(void) const;
@@ -603,7 +603,7 @@ public:
     void set_stats17(int);
     void set_stats18(int);
     void set_stats19(int);
-    void set_stats_attack_rate_tenths(int);
+    void set_tick_rate_tenths(int);
     void set_stats_defence(int);
     void set_stats_health_hunger_pct(int);
     void set_stats_health_initial(int);

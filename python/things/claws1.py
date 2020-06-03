@@ -2,8 +2,7 @@ import zx
 import tp
 
 
-def init1(name):
-    text_name = "claw attack"
+def init1(name, text_name):
     x = tp.Tp(name, text_name)
 
     x.set_text_a_or_an("a");
@@ -59,6 +58,6 @@ def init1(name):
 
 
 def init():
-    init1(name="claws1")
+    init1(name="claws1", text_name="claw attack")
 
 init()

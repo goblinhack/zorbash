@@ -80,7 +80,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int         */ out << bits(my.t->stats18);
     /* int         */ out << bits(my.t->stats19);
     /* int         */ out << bits(my.t->stats_strength);
-    /* int         */ out << bits(my.t->stats_attack_rate_tenths);
+    /* int         */ out << bits(my.t->tick_rate_tenths);
     /* int         */ out << bits(my.t->stats_defence);
     /* int         */ out << bits(my.t->stats_defence_max);
     /* int         */ out << bits(my.t->stats_health);
@@ -99,8 +99,8 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* timestamp_t */ out << bits(my.t->timestamp_fadeup_end);
     /* timestamp_t */ out << bits(my.t->timestamp_flip_start);
     /* timestamp_t */ out << bits(my.t->timestamp_hunger_tick);
-    /* timestamp_t */ out << bits(my.t->timestamp_last_attack);
-    /* timestamp_t */ out << bits(my.t->timestamp_last_attacked);
+    /* timestamp_t */ out << bits(my.t->timestamp_last_tick);
+    /* timestamp_t */ out << bits(my.t->timestamp_last_ticked);
     /* timestamp_t */ out << bits(my.t->timestamp_lunge_begin);
     /* timestamp_t */ out << bits(my.t->timestamp_lunge_end);
     /* timestamp_t */ out << bits(my.t->timestamp_move_begin);

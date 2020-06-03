@@ -54,7 +54,7 @@ _
     // Find all the possible goals we can smell.
     //
     std::multiset<Goal> goals;
-_
+
     log("choose goals (higher scores are preferred):");
 
     auto tpp = tp();
@@ -156,6 +156,7 @@ _
     // No goals?
     //
     if (goals.empty()) {
+        log("no goals found");
         return false;
     }
 

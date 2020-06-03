@@ -20,7 +20,7 @@ def chasm_init(name, text_name, tiles=[], left_tiles=[]):
     x.update()
 
 def init():
-    chasm_init(name="chasm1", text_name="chasm",
+    chasm_init(name="chasm1", text_name="yawning chasm",
             tiles=[
                 "chasm1.1",
                 "chasm1.2",

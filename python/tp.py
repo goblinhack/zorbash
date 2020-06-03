@@ -314,8 +314,8 @@ class Tp:
     def set_stats_attack(self, value):
         zx.tp_set_stats_attack(self, value)
 
-    def set_stats_attack_rate_tenths(self, value):
-        zx.tp_set_stats_attack_rate_tenths(self, value)
+    def set_tick_rate_tenths(self, value):
+        zx.tp_set_tick_rate_tenths(self, value)
 
     def set_lifespan_dice(self, value):
         zx.tp_set_lifespan_dice(self, value)
