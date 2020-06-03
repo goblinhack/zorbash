@@ -677,6 +677,7 @@ public:
     float get_lunge(void);
     fpoint get_interpolated_mid_at(void) const;
     fpoint set_interpolated_mid_at(fpoint);
+    point get_random_scent_target(void);
     int ai_choose_goal(void);
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);

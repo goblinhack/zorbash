@@ -143,9 +143,7 @@ bool Thing::ai_choose_wander (point& nh)
     //
     monstp->wander_target = point(0, 0);
 
-    auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
-    auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
-    target = point(x, y);
+    target = get_random_scent_target();
     if (!ai_create_path(nh, point(mid_at.x, mid_at.y), target)) {
         dbg("wander failed");
         return false;
