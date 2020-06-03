@@ -184,12 +184,10 @@ bool Thing::ai_on_fire_choose_target (point& nh)
         auto got_one = false;
 
         while (tries--) {
-            auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
-            auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
-            auto p = point(x, y);
-            if (level->is_water(p)) {
-                if (distance(start, p) < closest) {
-                    best = p;
+            auto target = get_random_scent_target();
+            if (level->is_water(target)) {
+                if (distance(start, target) < closest) {
+                    best = target;
                     got_one = true;
                 }
             }
