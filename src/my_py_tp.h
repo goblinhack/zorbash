@@ -10,6 +10,7 @@
 PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *tp_spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *tp_spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define TP_SET_PROTO(__field__)                                                     \
 PyObject *tp_set_ ## __field__ (PyObject *obj, PyObject *args, PyObject *keywds);

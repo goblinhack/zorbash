@@ -3,7 +3,7 @@ import zx
 import tp
 
 def spawn(me, x, y):
-    zx.tp_spawn_next_to(me, "small_fire")
+    zx.tp_spawn_next_to_or_on_monst(me, "small_fire")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
