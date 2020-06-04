@@ -1032,3 +1032,37 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     Py_RETURN_NONE;
 }
+
+PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject *keywds)
+{
+    char *what = nullptr;
+    int id = 0;
+
+    static char *kwlist[] = {(char*) "id", (char*) "what", 0};
+
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+        Py_RETURN_NONE;
+    }
+
+    if (!id) {
+        ERR("%s, missing 'id'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    if (!what) {
+        ERR("%s, missing 'what'", __FUNCTION__);
+        Py_RETURN_NONE;
+    }
+
+    DBG("python-to-c: %s(%d, %s)", __FUNCTION__, id, what);
+
+    auto t = thing_find(id);
+    if (!t) {
+        ERR("%s, cannot find thing %08X", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    t->spawn_next_to_or_on_monst(std::string(what));
+
+    Py_RETURN_NONE;
+}

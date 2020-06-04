@@ -650,6 +650,7 @@ public:
     bool move_to_or_escape(const point&);
     bool possible_to_attack(const Thingp it);
     bool spawn_next_to(const std::string& what);
+    bool spawn_next_to_or_on_monst(const std::string& what);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
