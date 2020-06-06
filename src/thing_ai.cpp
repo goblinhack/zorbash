@@ -36,6 +36,12 @@ _
         if (ai_escape()) {
             return;
         }
+
+        monstp->wander_target = point(0, 0);
+        log("cannot escape, try to wander");
+        if (ai_wander()) {
+            return;
+        }
     }
 
     //

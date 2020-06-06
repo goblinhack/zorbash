@@ -801,6 +801,10 @@ static void level_place_random_floor_deco (Dungeonp d)
                 continue;
             }
 
+            if (d->is_floor_deco_at(x, y)) {
+                continue;
+            }
+
             if (random_range(0, 100) < 95) {
                 continue;
             }

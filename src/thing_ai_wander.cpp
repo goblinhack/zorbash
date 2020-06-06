@@ -154,6 +154,11 @@ bool Thing::ai_choose_wander (point& nh)
         return false;
     }
 
+    if (target == point(mid_at.x, mid_at.y)) {
+        dbg("wander failed");
+        return false;
+    }
+
     monstp->wander_target = target;
 #ifdef ENABLE_DEBUG_AI_WANDER
     thing_new("ai_path2", fpoint(target.x , target.y));
@@ -165,7 +170,7 @@ bool Thing::ai_choose_wander (point& nh)
 bool Thing::ai_wander (void)
 {_
     log("ai wander");
-    auto tries = 10;
+    auto tries = 100;
     while (tries--) {
         point nh;
         if (ai_choose_wander(nh)) {
@@ -189,7 +194,7 @@ _
 bool Thing::ai_escape (void)
 {_
     log("ai escape");
-    auto tries = 10;
+    auto tries = 100;
     while (tries--) {
         point nh;
         if (ai_choose_wander(nh)) {
