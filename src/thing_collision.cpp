@@ -605,7 +605,12 @@ bool Thing::collision_find_best_target (bool *target_attacked,
         }
 
         damage = get_stats_attack();
-        if (it->ai_hit_if_possible(me, damage)) {
+
+        if (is_player() && will_eat(it)) {
+            carry(it);
+            log("collect %s", it->to_string().c_str());
+            return (true);
+        } else if (it->ai_hit_if_possible(me, damage)) {
             if (is_loggable_for_unimportant_stuff()) {
                 log("collision: will hit %s for %d damage",
                     it->to_string().c_str(), damage);
@@ -828,7 +833,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
         if (is_loggable_for_unimportant_stuff()) {
             log("candidate to eat %s", it->to_string().c_str());
         }
-        if (things_overlap(me, future_pos, it)) {
+        if (things_overlap(me, me->mid_at, it)) {
             thing_ai_possible_hit_add(it, "eat");
         }
     } else {
@@ -949,7 +954,7 @@ _
             log("cannot attack %s, no overlap", it->to_string().c_str());
         }
     } else if (will_eat(it)) {
-        if (things_overlap(me, A_at, it)) {
+        if (things_overlap(me, me->mid_at, it)) {
             log("can eat %s", it->to_string().c_str());
             return (true);
         } else {
@@ -972,6 +977,10 @@ bool Thing::collision_check_and_handle (fpoint future_pos,
                                         bool *target_overlaps,
                                         float radius)
 {
+    if (is_loggable_for_unimportant_stuff()) {
+        log("collision handle");
+    }
+_
     int minx = future_pos.x - radius;
     while (minx < 0) {
         minx++;
@@ -1043,8 +1052,19 @@ bool Thing::collision_check_and_handle_at (fpoint future_pos,
                                        0.0));
 }
 
+bool Thing::collision_check_and_handle_at (bool *target_attacked,
+                                           bool *target_overlaps)
+{
+    return (collision_check_and_handle_at(mid_at,
+                                          target_attacked, target_overlaps));
+}
+
 bool Thing::collision_check_only (fpoint future_pos)
-{_
+{
+    if (is_loggable_for_unimportant_stuff()) {
+        log("collision check only");
+    }
+_
     int minx = future_pos.x - thing_collision_tiles;
     while (minx < 0) {
         minx++;
@@ -1065,8 +1085,6 @@ bool Thing::collision_check_only (fpoint future_pos)
         maxy--;
     }
 
-    log("check for collisions");
-
     for (int16_t x = minx; x <= maxx; x++) {
         for (int16_t y = miny; y <= maxy; y++) {
             FOR_ALL_COLLISION_THINGS(level, it, x, y) {
@@ -1085,13 +1103,6 @@ bool Thing::collision_check_only (fpoint future_pos)
         }
     }
     return (false);
-}
-
-bool Thing::collision_check_and_handle_at (bool *target_attacked,
-                                           bool *target_overlaps)
-{
-    return (collision_check_and_handle_at(mid_at,
-                                          target_attacked, target_overlaps));
 }
 
 bool Thing::collision_check_only (void)

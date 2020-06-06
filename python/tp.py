@@ -236,8 +236,8 @@ class Tp:
     def set_is_rrr20(self, value):
         zx.tp_set_is_rrr20(self, value)
 
-    def set_is_rrr21(self, value):
-        zx.tp_set_is_rrr21(self, value)
+    def set_is_collectable(self, value):
+        zx.tp_set_is_collectable(self, value)
 
     def set_is_resurrectable(self, value):
         zx.tp_set_is_resurrectable(self, value)

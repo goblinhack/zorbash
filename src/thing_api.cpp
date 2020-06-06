@@ -535,9 +535,9 @@ int Thing::is_rrr20(void) const
     return (tp()->is_rrr20());
 }
 
-int Thing::is_rrr21(void) const
+int Thing::is_collectable(void) const
 {_
-    return (tp()->is_rrr21());
+    return (tp()->is_collectable());
 }
 
 int Thing::is_resurrectable(void) const

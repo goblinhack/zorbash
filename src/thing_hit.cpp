@@ -156,6 +156,14 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         return (false);
     }
 
+    if (is_resurrecting) {
+        return (false);
+    }
+
+    if (!is_active()) {
+        return (false);
+    }
+
     log("possible attack by (%s) for %u", 
         hitter->to_string().c_str(), damage);
 
