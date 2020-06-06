@@ -5,7 +5,7 @@ def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
 
     x.set_ai_delay_after_moving_ms(100)
-    x.set_ai_scent_distance(40)
+    x.set_ai_scent_distance(20)
     x.set_collision_attack(True)
     x.set_collision_check(True)
     x.set_collision_circle(True)
@@ -23,7 +23,7 @@ def tp_init(name, text_name):
     x.set_is_attackable(True)
     x.set_is_combustible(True)
     x.set_is_corpse_on_death(True)
-    #x.set_is_double_damage_from_fire(True)
+    x.set_is_double_damage_from_fire(True)
     x.set_is_fire_hater(100)
     x.set_is_hunger_insatiable(True)
     x.set_is_intelligent(True)

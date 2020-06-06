@@ -10,7 +10,7 @@
 point Thing::get_random_scent_target (void)
 {
     const int16_t d = ai_scent_distance();
-    auto tries = 100;
+    auto tries = 1000;
 
     while (tries--) {
         point start(mid_at.x, mid_at.y);
@@ -72,6 +72,9 @@ point Thing::get_random_scent_target (void)
     point start(mid_at.x, mid_at.y);
     int16_t dx = random_range(-d, d);
     int16_t dy = random_range(-d, d);
+    if (!dx && !dy) {
+        return start;
+    }
     auto x = std::min(
                 std::max(MAP_BORDER, start.x + dx), MAP_WIDTH - MAP_BORDER);
     auto y = std::min(
