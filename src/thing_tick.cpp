@@ -86,6 +86,28 @@ bool Thing::achieve_goals_in_life (void)
     return true;
 }
 
+bool Thing::achieve_goals_in_death (void)
+{_
+    //
+    // Don't do stuff too often
+    //
+    if (!time_have_x_tenths_passed_since(get_tick_rate_tenths(),
+                                         get_timestamp_last_tick())) {
+        return false;
+    }
+
+    set_timestamp_last_tick(time_get_time_ms_cached());
+
+    if (is_loggable_for_unimportant_stuff()) {
+        log("achieve death goals at tick %d, game tick %u",
+            get_tick(), game->tick_current);
+    }
+
+    resurrect_tick();
+
+    return true;
+}
+
 void Thing::collision_check_do (void)
 {_
     if (!tp()->collision_check()) {
@@ -107,11 +129,25 @@ void Thing::collision_check_do (void)
 
 void Thing::tick (void)
 {_
+    g_thing_callframes_depth = callframes_depth;
+
     if (unlikely(is_dead)) {
+        if (unlikely(is_resurrectable())) {
+            //
+            // Tick on player move/change of the current tick
+            //
+            auto tick = get_tick();
+            if (tick < game->tick_current) {
+                is_tick_done = false;
+                if (achieve_goals_in_death()) {
+                    if (is_tick_done) {
+                        incr_tick();
+                    }
+                }
+            }
+        }
         return;
     }
-
-    g_thing_callframes_depth = callframes_depth;
 
     update_interpolated_position();
 

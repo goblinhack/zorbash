@@ -30,6 +30,11 @@ const Dice& Thing::get_lifespan_dice (void) const {_ return (tp()->lifespan_dice
 const std::string& Thing::get_lifespan_dice_str (void) const {_ return (tp()->lifespan_dice_str()); }
 int Thing::get_lifespan_initial (void) const {_ return (tp()->lifespan_dice().roll()); }
 
+const Dice& Thing::get_resurrect_dice (void) const {_ return (tp()->resurrect_dice()); }
+const std::string& Thing::get_resurrect_dice_str (void) const {_ return (tp()->resurrect_dice_str()); }
+int Thing::get_resurrect (void) const {_ return (tp()->resurrect_dice().roll()); }
+bool Thing::get_resurrect_crit_roll (void) const {_ return (tp()->resurrect_dice().crit_roll()); }
+
 void Thing::new_monst (void)
 {_
     if (unlikely(!monstp)) {
@@ -535,9 +540,9 @@ int Thing::is_rrr21(void) const
     return (tp()->is_rrr21());
 }
 
-int Thing::is_rrr22(void) const
+int Thing::is_resurrectable(void) const
 {_
-    return (tp()->is_rrr22());
+    return (tp()->is_resurrectable());
 }
 
 int Thing::is_intelligent(void) const

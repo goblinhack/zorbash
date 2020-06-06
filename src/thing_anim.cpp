@@ -29,6 +29,12 @@ void Thing::animate (void)
                 dead("end of anim");
             }
 
+            if (tile_is_alive_on_end_of_anim(tile)) {
+                is_resurrecting = false;
+                is_resurrected = true;
+                is_dead = false;
+            }
+
             return;
         }
     }
@@ -90,7 +96,7 @@ void Thing::animate (void)
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_blood()) {
+if (is_monst()) {
 log("choose tiles");
 }
 #endif
@@ -106,7 +112,7 @@ log("choose tiles");
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_blood()) {
+if (is_monst()) {
 log("tile %s", tile_name(tile).c_str());
 }
 #endif
@@ -119,13 +125,13 @@ log("tile %s", tile_name(tile).c_str());
                 auto health_max = get_stats_health_max();
                 auto health = get_stats_health();
 #ifdef DEBUG_ANIM
-if (is_blood()) {
+if (is_monst()) {
 log("tile %s is not dead tiles", tile_name(tile).c_str());
 }
 #endif
                 if (tpp->internal_has_hp_anim()) {
 #ifdef DEBUG_ANIM
-if (is_blood()) {
+if (is_monst()) {
 log("tile %s has hp anim tiles hp %d max %d", tile_name(tile).c_str(), health, health_max);
 }
 #endif
@@ -160,9 +166,24 @@ log("tile %s has hp anim tiles hp %d max %d", tile_name(tile).c_str(), health, h
                 }
             }
 
-            if (is_dead) {
+            if (is_resurrecting) {
 #ifdef DEBUG_ANIM
-if (is_blood()) {
+if (is_monst()) {
+log("tile %s is resurrecting", tile_name(tile).c_str());
+}
+#endif
+                if (!tile_is_resurrecting(tile)) {
+                    tile = tile_next(tiles, tile);
+                    continue;
+                }
+#ifdef DEBUG_ANIM
+if (is_monst()) {
+log("tile %s got resurrecting", tile_name(tile).c_str());
+}
+#endif
+            } else if (is_dead) {
+#ifdef DEBUG_ANIM
+if (is_monst()) {
 log("tile %s is dead", tile_name(tile).c_str());
 }
 #endif
@@ -171,7 +192,7 @@ log("tile %s is dead", tile_name(tile).c_str());
                     continue;
                 }
 #ifdef DEBUG_ANIM
-if (is_blood()) {
+if (is_monst()) {
 log("tile %s got dead", tile_name(tile).c_str());
 }
 #endif
@@ -227,7 +248,7 @@ log("tile %s got dead", tile_name(tile).c_str());
                 }
             }
 #ifdef DEBUG_ANIM
-if (is_blood()) {
+if (is_monst()) {
 log("tile %s got one", tile_name(tile).c_str());
 }
 #endif
@@ -257,7 +278,7 @@ log("tile %s got one", tile_name(tile).c_str());
     }
 
 #ifdef DEBUG_ANIM
-    if (is_blood()) {
+    if (is_monst()) {
         log("set %s", tile_name(tile).c_str());
     }
 #endif

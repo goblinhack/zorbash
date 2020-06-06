@@ -119,6 +119,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
+    $(OBJDIR)/thing_resurrect.o 	\
     $(OBJDIR)/thing_likes_and_dislikes.o \
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\

@@ -345,6 +345,8 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
     int is_dead = 0;
     int is_end_of_anim = 0;
     int is_dead_on_end_of_anim = 0;
+    int is_alive_on_end_of_anim = 0;
+    int is_resurrecting = 0;
     char *py_tile_name = nullptr;
 
     static char *kwlist[] = {
@@ -398,11 +400,13 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         (char*) "is_dead",
         (char*) "is_end_of_anim",
         (char*) "is_dead_on_end_of_anim",
+        (char*) "is_resurrecting",
+        (char*) "is_alive_on_end_of_anim",
         0
     };
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds,
-                                     "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
+                                     "O|sssssiiisiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
                                      kwlist, &py_class,
                                      &py_tile_name,
                                      &fg,
@@ -452,7 +456,9 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
                                      &is_open,
                                      &is_dead,
                                      &is_end_of_anim,
-                                     &is_dead_on_end_of_anim
+                                     &is_dead_on_end_of_anim,
+                                     &is_resurrecting,
+                                     &is_alive_on_end_of_anim
                                      )) {
         return (0);
     }
@@ -669,6 +675,8 @@ static PyObject *tp_set_tile_dir (PyObject *obj,
         tile->is_dead = is_dead;
         tile->is_end_of_anim = is_end_of_anim;
         tile->is_dead_on_end_of_anim = is_dead_on_end_of_anim;
+        tile->is_alive_on_end_of_anim = is_alive_on_end_of_anim;
+        tile->is_resurrecting = is_resurrecting;
 
         if (tile->is_hp_25_percent ||
             tile->is_hp_50_percent ||
@@ -881,7 +889,7 @@ TP_BODY_SET_INT(is_smoke)
 TP_BODY_SET_INT(is_rrr2)
 TP_BODY_SET_INT(is_rrr20)
 TP_BODY_SET_INT(is_rrr21)
-TP_BODY_SET_INT(is_rrr22)
+TP_BODY_SET_INT(is_resurrectable)
 TP_BODY_SET_INT(is_intelligent)
 TP_BODY_SET_INT(is_double_damage_from_fire)
 TP_BODY_SET_INT(is_rrr3)
@@ -939,6 +947,7 @@ TP_BODY_SET_STRING(nutrition_dice)
 TP_BODY_SET_STRING(spawn_on_death)
 TP_BODY_SET_STRING(idle_tick_dice)
 TP_BODY_SET_STRING(stats_attack_dice)
+TP_BODY_SET_STRING(resurrect_dice)
 TP_BODY_SET_STRING(lifespan_dice)
 TP_BODY_SET_STRING(str1)
 TP_BODY_SET_STRING(str10)

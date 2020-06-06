@@ -41,7 +41,6 @@ void Thing::log (std::string pfx)
     LOG("%s tile_curr            %u", pfx.c_str(), tile_curr);
     LOG("%s timestamp_next_frame %u", pfx.c_str(), timestamp_next_frame);
     LOG("%s dir                  %u", pfx.c_str(), dir);
-    LOG("%s is_player            %u", pfx.c_str(), is_player());
     LOG("%s has_ever_moved       %u", pfx.c_str(), has_ever_moved);
     LOG("%s has_light            %u", pfx.c_str(), has_light);
     LOG("%s is_attached          %u", pfx.c_str(), is_attached);
@@ -53,12 +52,15 @@ void Thing::log (std::string pfx)
     LOG("%s is_facing_left       %u", pfx.c_str(), is_facing_left);
     LOG("%s is_hidden            %u", pfx.c_str(), is_hidden);
     LOG("%s is_hungry            %u", pfx.c_str(), is_hungry);
-    LOG("%s is_tick_done         %u", pfx.c_str(), is_tick_done);
+    LOG("%s is_in_lava           %u", pfx.c_str(), is_in_lava);
     LOG("%s is_moving            %u", pfx.c_str(), is_moving);
     LOG("%s is_open              %u", pfx.c_str(), is_open);
+    LOG("%s is_player            %u", pfx.c_str(), is_player());
+    LOG("%s is_resurrected       %u", pfx.c_str(), is_resurrected);
+    LOG("%s is_resurrecting      %u", pfx.c_str(), is_resurrecting);
     LOG("%s is_sleeping          %u", pfx.c_str(), is_sleeping);
     LOG("%s is_starving          %u", pfx.c_str(), is_starving);
-    LOG("%s is_in_lava           %u", pfx.c_str(), is_in_lava);
+    LOG("%s is_tick_done         %u", pfx.c_str(), is_tick_done);
 
     pfx = old_pfx;
     LOG("%s }", pfx.c_str());

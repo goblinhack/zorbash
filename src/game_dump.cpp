@@ -56,6 +56,8 @@ void Thing::dump (std::string pfx, std::ostream &out)
     out << pfx << "is_tick_done        " << is_tick_done         << std::endl;
     out << pfx << "is_moving           " << is_moving            << std::endl;
     out << pfx << "is_open             " << is_open              << std::endl;
+    out << pfx << "is_resurrecting     " << is_resurrecting      << std::endl;
+    out << pfx << "is_resurrected      " << is_resurrected       << std::endl;
     out << pfx << "is_sleeping         " << is_sleeping          << std::endl;
     out << pfx << "is_starving         " << is_starving          << std::endl;
     out << pfx << "is_blitted          " << is_blitted           << std::endl;

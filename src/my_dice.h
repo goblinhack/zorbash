@@ -22,6 +22,7 @@ public:
     const char *to_cstring(void);
     Dice (std::string s);
     int roll(void) const;
+    bool crit_roll(void) const;
     int operator ()() const;
 };
 #endif

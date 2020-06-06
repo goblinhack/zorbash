@@ -79,13 +79,19 @@ private:
     // Dice
     //
     Dice _idle_tick_dice {};
-    Dice _lifespan_dice {};
-    Dice _nutrition_dice {};
-    Dice _stats_attack_dice {};
     std::string _idle_tick_dice_str;
+
+    Dice _lifespan_dice {};
     std::string _lifespan_dice_str;
+
+    Dice _nutrition_dice {};
     std::string _nutrition_dice_str;
+
+    Dice _stats_attack_dice {};
     std::string _stats_attack_dice_str;
+
+    Dice _resurrect_dice {};
+    std::string _resurrect_dice_str;
 
     float _collision_radius {};
     fsize _sz;
@@ -178,7 +184,7 @@ private:
     int _is_rrr2 {};
     int _is_rrr20 {};
     int _is_rrr21 {};
-    int _is_rrr22 {};
+    int _is_resurrectable {};
     int _is_intelligent {};
     int _is_double_damage_from_fire {};
     int _is_fire {};
@@ -280,6 +286,11 @@ public:
     const int stats_attack(void) const;
     const std::string& stats_attack_dice_str(void) const;
     void set_stats_attack_dice(const std::string &);
+
+    const Dice& resurrect_dice(void) const;
+    const int resurrect(void) const;
+    const std::string& resurrect_dice_str(void) const;
+    void set_resurrect_dice(const std::string &);
 
     const Tilemap *tp_bl1_tiles(void) const;
     const Tilemap *tp_bl2_tiles(void) const;
@@ -419,7 +430,7 @@ public:
     int is_rrr2(void) const;
     int is_rrr20(void) const;
     int is_rrr21(void) const;
-    int is_rrr22(void) const;
+    int is_resurrectable(void) const;
     int is_intelligent(void) const;
     int is_double_damage_from_fire(void) const;
     int is_rrr3(void) const;
@@ -560,7 +571,7 @@ public:
     void set_is_rrr2(int);
     void set_is_rrr20(int);
     void set_is_rrr21(int);
-    void set_is_rrr22(int);
+    void set_is_resurrectable(int);
     void set_is_intelligent(int);
     void set_is_double_damage_from_fire(int);
     void set_is_rrr3(int);
