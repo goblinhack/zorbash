@@ -69,5 +69,11 @@ bool Thing::will_eat (const Thingp itp)
         }
     }
 
+    if (is_player()) {
+        if (it->is_collectable()) {
+            return (true);
+        }
+    }
+
     return (false);
 }

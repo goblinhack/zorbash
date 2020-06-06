@@ -6,13 +6,7 @@
 #ifndef _MY_THING_H_
 #define _MY_THING_H_
 
-//#include <unordered_map>
-//#include <memory>
 #include <set>
-
-// Not used
-// typedef std::unordered_map< uint32_t, Thingp > Things;
-
 #include <list>
 #include "my_time.h"
 #include "my_light.h"
@@ -782,7 +776,7 @@ public:
     int is_smoke(void) const;
     int is_rrr2(void) const;
     int is_rrr20(void) const;
-    int is_rrr21(void) const;
+    int is_collectable(void) const;
     int is_resurrectable(void) const;
     int is_intelligent(void) const;
     int is_double_damage_from_fire(void) const;

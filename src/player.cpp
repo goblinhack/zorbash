@@ -27,6 +27,8 @@ void player_tick (void)
         return;
     }
 
+    g_thing_callframes_depth = callframes_depth;
+
     int delay = 100;
 #if 0
     //

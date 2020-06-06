@@ -147,7 +147,7 @@ int Tp::tick_catches_up_on_attack(void) const { return _tick_catches_up_on_attac
 int Tp::is_temporary(void) const { return _is_temporary; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_rrr20(void) const { return _is_rrr20; }
-int Tp::is_rrr21(void) const { return _is_rrr21; }
+int Tp::is_collectable(void) const { return _is_collectable; }
 int Tp::is_resurrectable(void) const { return _is_resurrectable; }
 int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_double_damage_from_fire(void) const { return _is_double_damage_from_fire; }
@@ -288,7 +288,7 @@ void Tp::set_tick_catches_up_on_attack(int v) { _tick_catches_up_on_attack = v; 
 void Tp::set_is_temporary(int v) { _is_temporary = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_rrr20(int v) { _is_rrr20 = v; }
-void Tp::set_is_rrr21(int v) { _is_rrr21 = v; }
+void Tp::set_is_collectable(int v) { _is_collectable = v; }
 void Tp::set_is_resurrectable(int v) { _is_resurrectable = v; }
 void Tp::set_is_intelligent(int v) { _is_intelligent = v; }
 void Tp::set_is_double_damage_from_fire(int v) { _is_double_damage_from_fire = v; }

@@ -60,6 +60,7 @@ _
     // Find the best goal to go to
     //
     if (ai_choose_goal()) {
+        monstp->wander_target = point(0, 0);
         return;
     }
 

@@ -92,8 +92,10 @@ bool Thing::move (fpoint future_pos,
 
     if (is_player()) {
         game->tick_begin();
+        g_thing_callframes_depth = callframes_depth - 1;
+        log("player tick");
     }
-
+_
     if (is_player()) {
         if (mid_at != future_pos) {
             if (collision_check_only(future_pos)) {
