@@ -23,6 +23,7 @@ public:
     Dice (std::string s);
     int roll(void) const;
     bool crit_roll(void) const;
+    bool crit_roll_minus_modifier(void) const;
     int operator ()() const;
 };
 #endif

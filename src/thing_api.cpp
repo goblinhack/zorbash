@@ -33,7 +33,7 @@ int Thing::get_lifespan_initial (void) const {_ return (tp()->lifespan_dice().ro
 const Dice& Thing::get_resurrect_dice (void) const {_ return (tp()->resurrect_dice()); }
 const std::string& Thing::get_resurrect_dice_str (void) const {_ return (tp()->resurrect_dice_str()); }
 int Thing::get_resurrect (void) const {_ return (tp()->resurrect_dice().roll()); }
-bool Thing::get_resurrect_crit_roll (void) const {_ return (tp()->resurrect_dice().crit_roll()); }
+bool Thing::get_resurrect_success (void) const {_ return (tp()->resurrect_dice().crit_roll_minus_modifier()); }
 
 void Thing::new_monst (void)
 {_
