@@ -495,24 +495,24 @@ int Thing::is_rrr14(void) const
     return (tp()->is_rrr14());
 }
 
-int Thing::is_rrr15(void) const
+int Thing::is_loggable_for_important_stuff(void) const
 {_
-    return (tp()->is_rrr15());
+    return (tp()->is_loggable_for_important_stuff());
 }
 
-int Thing::is_rrr16(void) const
+int Thing::tick_catches_up_on_attack(void) const
 {_
-    return (tp()->is_rrr16());
+    return (tp()->tick_catches_up_on_attack());
 }
 
-int Thing::is_rrr17(void) const
+int Thing::is_temporary(void) const
 {_
-    return (tp()->is_rrr17());
+    return (tp()->is_temporary());
 }
 
-int Thing::is_rrr18(void) const
+int Thing::is_smoke(void) const
 {_
-    return (tp()->is_rrr18());
+    return (tp()->is_smoke());
 }
 
 int Thing::is_fire_hater(void) const
@@ -560,9 +560,9 @@ int Thing::is_dead_on_shove(void) const
     return (tp()->is_dead_on_shove());
 }
 
-int Thing::is_loggable(void) const
+int Thing::is_loggable_for_unimportant_stuff(void) const
 {_
-    return (tp()->is_loggable());
+    return (tp()->is_loggable_for_unimportant_stuff());
 }
 
 int Thing::is_torch(void) const

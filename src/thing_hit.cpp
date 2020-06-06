@@ -4,6 +4,7 @@
 //
 
 #include "my_main.h"
+#include "my_game.h"
 #include "my_tile.h"
 #include "my_thing.h"
 #include "my_sprintf.h"
@@ -95,6 +96,15 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         msg(string_sprintf("%%fg=red$-%d", damage));
     } else if (is_monst()) {
         msg(string_sprintf("%%fg=white$-%d", damage));
+    }
+
+    //
+    // Don't have things like lava doing catchup ticks when you
+    // run around and then stop on top of lava!
+    //
+    if (real_hitter->tick_catches_up_on_attack()) {
+        real_hitter->set_tick_last_did_something(game->tick_current);
+        real_hitter->set_tick(game->tick_current);
     }
 
     //

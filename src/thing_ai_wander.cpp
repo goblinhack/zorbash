@@ -96,9 +96,11 @@ bool Thing::ai_create_path (point &nh, const point start, const point end)
     }
     dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
+#ifdef ENABLE_DEBUG_AI_WANDER
     for (auto i : result.path) {
         thing_new("ai_path1", fpoint(i.x , i.y));
     }
+#endif
 
     auto hops = result.path;
     auto hops_len = hops.size();
@@ -153,7 +155,9 @@ bool Thing::ai_choose_wander (point& nh)
     }
 
     monstp->wander_target = target;
+#ifdef ENABLE_DEBUG_AI_WANDER
     thing_new("ai_path2", fpoint(target.x , target.y));
+#endif
     log("wander to %d,%d nh %d,%d", target.x, target.y, nh.x, nh.y);
     return true;
 }

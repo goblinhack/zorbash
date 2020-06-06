@@ -22,7 +22,7 @@ void Thing::destroy (void)
 {_
     verify(this);
 
-    if (is_loggable()) {
+    if (is_loggable_for_unimportant_stuff()) {
         log("destroy");
     }
 
@@ -64,6 +64,7 @@ void Thing::destroy (void)
     if (is_monst())         { level->unset_is_monst(old_at.x, old_at.y); }
     if (is_rock())          { level->unset_is_rock(old_at.x, old_at.y); }
     if (is_secret_door())   { level->unset_is_secret_door(old_at.x, old_at.y); }
+    if (is_smoke())         { level->unset_is_smoke(old_at.x, old_at.x); }
     if (is_wall())          { level->unset_is_wall(old_at.x, old_at.y); }
     if (is_water())         { level->unset_is_water(old_at.x, old_at.y); }
 
@@ -75,7 +76,7 @@ void Thing::destroy (void)
     delete_age_map();
     delete_light();
 
-    if (is_loggable()) {
+    if (is_loggable_for_unimportant_stuff()) {
         log("destroyed");
     }
 

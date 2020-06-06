@@ -23,7 +23,7 @@ bool Thing::achieve_goals_in_life (void)
 
     set_timestamp_last_tick(time_get_time_ms_cached());
 
-    if (is_loggable()) {
+    if (is_loggable_for_unimportant_stuff()) {
         log("achieve goals at tick %d, game tick %u",
             get_tick(), game->tick_current);
     }
@@ -39,6 +39,11 @@ bool Thing::achieve_goals_in_life (void)
     }
 
     water_tick();
+    if (is_dead) {
+        return true;
+    }
+
+    lava_tick();
     if (is_dead) {
         return true;
     }
@@ -111,7 +116,7 @@ void Thing::tick (void)
     update_interpolated_position();
 
     if (unlikely(is_dead)) {
-        if (is_loggable()) {
+        if (is_loggable_for_unimportant_stuff()) {
             log("tick; died");
         }
         return;

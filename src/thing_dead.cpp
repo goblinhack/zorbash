@@ -27,7 +27,7 @@ void Thing::kill (const char *reason)
         MINICON("%s", reason);
         MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
-    } else if (is_loggable()) { 
+    } else if (is_loggable_for_important_stuff()) {
         MINICON("%s is dead, %s", text_The().c_str(), reason);
     }
 
@@ -36,7 +36,7 @@ void Thing::kill (const char *reason)
         ERR("no tp");
     } else {
         if (is_corpse_on_death()) {
-            if (tpp->is_loggable()) {
+            if (tpp->is_loggable_for_important_stuff()) {
                 log("killed, leaves corpse");
             }
 
@@ -54,7 +54,7 @@ void Thing::kill (const char *reason)
             return;
         }
 
-        if (tpp->is_loggable()) {
+        if (tpp->is_loggable_for_important_stuff()) {
             log("killed");
         }
     }

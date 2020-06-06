@@ -30,7 +30,7 @@ do_retry:
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (*idp == id) {
 #ifdef ENABLE_THING_ID_LOGS
-            if (t->is_loggable()) {
+            if (t->is_loggable_for_unimportant_stuff()) {
                 t->log("found %08X at %u,%u slot %u", id, x, y, slot);
             }
 #endif
@@ -52,7 +52,7 @@ do_retry:
                return a->z_prio() < b->z_prio();
              });
 #ifdef ENABLE_THING_ID_LOGS
-        if (t->is_loggable()) {
+        if (t->is_loggable_for_unimportant_stuff()) {
             t->log("put thing %08X at %u,%u slot %u", id, x, y, free_slot);
         }
 #endif
@@ -71,7 +71,7 @@ do_retry:
             if (*idp) {
                 auto t = thing_find(*idp);
                 t->log("- slot %u", slot);
-                if (t->is_msg()) {
+                if (t->is_temporary()) {
                     t->dead("out of slots");
                     t->detach();
                     retry++;
@@ -139,7 +139,7 @@ void Level::remove_thing (int x, int y, uint32_t id)
 #endif
 
 #ifdef ENABLE_THING_ID_LOGS
-            if (t->is_loggable()) {
+            if (t->is_loggable_for_unimportant_stuff()) {
                 t->log("rem thing %08X at %u,%u slot %u", id, x, y, slot);
             }
 #endif

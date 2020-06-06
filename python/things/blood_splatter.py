@@ -10,7 +10,8 @@ def tp_init(name, text_name):
     x.set_gfx_show_outlined(True)
     x.set_is_blood_splatter(True)
     x.set_is_interesting(False)
-    x.set_is_loggable(False)
+    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_important_stuff(False)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
 

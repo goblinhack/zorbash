@@ -17,14 +17,16 @@ def lava_init(name, text_name, tiles=[], left_tiles=[]):
     x.set_is_interesting(True)
     x.set_is_lava(True)
     x.set_is_light_strength(3)
-    x.set_is_loggable(False)
+    x.set_is_loggable_for_important_stuff(True)
+    x.set_is_loggable_for_unimportant_stuff(False)
     x.set_light_color("red")
     x.set_stats_attack_dice("1d12+6")
-    x.set_tick_rate_tenths(10)
     x.set_text_a_or_an("");
-    x.set_text_hits("BURNS and tickles");
-    x.set_z_prio(zx.MAP_PRIO_NORMAL)
+    x.set_text_hits("BURNS (and tickles a bit)");
+    x.set_tick_catches_up_on_attack(True)
+    x.set_tick_rate_tenths(3)
     x.set_z_depth(zx.MAP_DEPTH_LAVA)
+    x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
     delay = 1250
     for t in tiles:

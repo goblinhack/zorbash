@@ -220,7 +220,7 @@ void Thing::update_pos (fpoint to, bool immediately)
 
     move_carried_items();
 
-    if (tpp->is_loggable()) {
+    if (tpp->is_loggable_for_unimportant_stuff()) {
         dbg("moved");
     }
 }
