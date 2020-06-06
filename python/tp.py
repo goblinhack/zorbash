@@ -218,17 +218,17 @@ class Tp:
     def set_is_rrr14(self, value):
         zx.tp_set_is_rrr14(self, value)
 
-    def set_is_rrr15(self, value):
-        zx.tp_set_is_rrr15(self, value)
+    def set_is_loggable_for_important_stuff(self, value):
+        zx.tp_set_is_loggable_for_important_stuff(self, value)
 
-    def set_is_rrr16(self, value):
-        zx.tp_set_is_rrr16(self, value)
+    def set_tick_catches_up_on_attack(self, value):
+        zx.tp_set_tick_catches_up_on_attack(self, value)
 
-    def set_is_rrr17(self, value):
-        zx.tp_set_is_rrr17(self, value)
+    def set_is_temporary(self, value):
+        zx.tp_set_is_temporary(self, value)
 
-    def set_is_rrr18(self, value):
-        zx.tp_set_is_rrr18(self, value)
+    def set_is_smoke(self, value):
+        zx.tp_set_is_smoke(self, value)
 
     def set_is_fire_hater(self, value):
         zx.tp_set_is_fire_hater(self, value)
@@ -254,8 +254,8 @@ class Tp:
     def set_is_dead_on_shove(self, value):
         zx.tp_set_is_dead_on_shove(self, value)
 
-    def set_is_loggable(self, value):
-        zx.tp_set_is_loggable(self, value)
+    def set_is_loggable_for_unimportant_stuff(self, value):
+        zx.tp_set_is_loggable_for_unimportant_stuff(self, value)
 
     def set_is_torch(self, value):
         zx.tp_set_is_torch(self, value)
@@ -350,8 +350,8 @@ class Tp:
     def set_is_undead(self, value):
         zx.tp_set_is_undead(self, value)
 
-    def set_is_rrr16(self, value):
-        zx.tp_set_is_rrr16(self, value)
+    def set_tick_catches_up_on_attack(self, value):
+        zx.tp_set_tick_catches_up_on_attack(self, value)
 
     def set_nutrition_dice(self, value):
         zx.tp_set_nutrition_dice(self, value)
@@ -380,8 +380,8 @@ class Tp:
     def set_gfx_bounce_on_move(self, value):
         zx.tp_set_gfx_bounce_on_move(self, value)
 
-    def set_is_loggable(self, value):
-        zx.tp_set_is_loggable(self, value)
+    def set_is_loggable_for_unimportant_stuff(self, value):
+        zx.tp_set_is_loggable_for_unimportant_stuff(self, value)
 
     def set_is_bleeder(self, value):
         zx.tp_set_is_bleeder(self, value)

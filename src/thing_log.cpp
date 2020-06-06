@@ -48,7 +48,7 @@ void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
 {
     verify(this);
 
-    if (tp()->is_loggable()) {
+    if (tp()->is_loggable_for_unimportant_stuff()) {
         auto t = this;
         char buf[MAXSTR];
         int len;
@@ -88,7 +88,7 @@ void Thing::dead_ (const char *fmt, va_list args)
 {
     verify(this);
 
-    if (tp()->is_loggable()) {
+    if (tp()->is_loggable_for_unimportant_stuff()) {
         auto t = this;
         char buf[MAXSTR];
         int len;
@@ -115,7 +115,7 @@ void Thing::dead (Thingp killer, std::string &reason)
 {
     verify(this);
 
-    if (tp()->is_loggable()) {
+    if (tp()->is_loggable_for_unimportant_stuff()) {
         auto t = this;
         char buf[MAXSTR];
         int len;
@@ -138,7 +138,7 @@ void Thing::dead (std::string &reason)
 {
     verify(this);
 
-    if (tp()->is_loggable()) {
+    if (tp()->is_loggable_for_unimportant_stuff()) {
         auto t = this;
         char buf[MAXSTR];
         int len;

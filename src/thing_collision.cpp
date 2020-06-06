@@ -538,14 +538,18 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             continue;
         }
 
-        log("cand %s", cand.target->to_string().c_str());
+        if (is_loggable_for_unimportant_stuff()) {
+            log("cand %s", cand.target->to_string().c_str());
+        }
 
         //
         // Skip things that aren't really hitable.
         //
         if (cand.target->tp()->gfx_weapon_carry_anim()) {
-            log("ignore %s skip, not hittable",
-                cand.target->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("ignore %s skip, not hittable",
+                    cand.target->to_string().c_str());
+            }
             continue;
         }
 
@@ -559,7 +563,9 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             // If this target is higher prio, prefer it.
             //
             best = &cand;
-            log("add %s", cand.target->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("add %s", cand.target->to_string().c_str());
+            }
         } else if (cand.priority == best->priority) {
             //
             // If this target is closer, prefer it.
@@ -578,10 +584,14 @@ bool Thing::collision_find_best_target (bool *target_attacked,
 
             if (dist_cand < dist_best) {
                 best = &cand;
-                log("add %s", cand.target->to_string().c_str());
+                if (is_loggable_for_unimportant_stuff()) {
+                    log("add %s", cand.target->to_string().c_str());
+                }
             }
         } else {
-            log("ignore %s", cand.target->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("ignore %s", cand.target->to_string().c_str());
+            }
         }
     }
 
@@ -590,12 +600,16 @@ bool Thing::collision_find_best_target (bool *target_attacked,
         *target_overlaps = true;
 
         auto it = best->target;
-        log("best cand is %s", it->to_string().c_str());
+        if (is_loggable_for_unimportant_stuff()) {
+            log("best cand is %s", it->to_string().c_str());
+        }
 
         damage = get_stats_attack();
         if (it->ai_hit_if_possible(me, damage)) {
-            log("collision: will hit %s for %d damage",
-                it->to_string().c_str(), damage);
+            if (is_loggable_for_unimportant_stuff()) {
+                log("collision: will hit %s for %d damage",
+                    it->to_string().c_str(), damage);
+            }
             if (me->is_attack_lunge()) {
                 me->lunge(it->get_interpolated_mid_at());
             }
@@ -608,8 +622,10 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             //
             // Missiles?
             //
-            log("collision: will hit %s and kill self",
-                it->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("collision: will hit %s and kill self",
+                    it->to_string().c_str());
+            }
             if (me->is_attack_lunge()) {
                 me->lunge(it->get_interpolated_mid_at());
             }
@@ -617,7 +633,9 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             *target_attacked = true;
             return (true);
         } else {
-            log("collision: cannot hit %s", it->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("collision: cannot hit %s", it->to_string().c_str());
+            }
         }
     }
 
@@ -787,7 +805,9 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
             //
             // Weapon hits monster or generator.
             //
-            log("candidate to attack %s", it->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("candidate to attack %s", it->to_string().c_str());
+            }
             if (things_overlap(me, future_pos, it)) {
                 thing_ai_possible_hit_add_hitter_killed_on_hitting(
                         it, "sword hit thing");
@@ -795,18 +815,26 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
         }
     } else if (possible_to_attack(it)) {
         if (things_overlap(me, future_pos, it)) {
-            log("candidate to attack %s", it->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("candidate to attack %s", it->to_string().c_str());
+            }
             thing_ai_possible_hit_add(it, "battle");
         } else {
-            log("cannot attack %s, no overlap", it->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("cannot attack %s, no overlap", it->to_string().c_str());
+            }
         }
     } else if (will_eat(it)) {
-        log("candidate to eat %s", it->to_string().c_str());
+        if (is_loggable_for_unimportant_stuff()) {
+            log("candidate to eat %s", it->to_string().c_str());
+        }
         if (things_overlap(me, future_pos, it)) {
             thing_ai_possible_hit_add(it, "eat");
         }
     } else {
-        log("cand ignore %s", it->to_string().c_str());
+        if (is_loggable_for_unimportant_stuff()) {
+            log("cand ignore %s", it->to_string().c_str());
+        }
     }
 
     return (true);
@@ -896,7 +924,9 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
         return (false);
     }
 
-    log("collision check with %s", it->to_string().c_str());
+    if (is_loggable_for_unimportant_stuff()) {
+        log("collision check with %s", it->to_string().c_str());
+    }
 _
     //
     // Sword use hits?

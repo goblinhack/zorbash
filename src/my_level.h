@@ -33,6 +33,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
@@ -543,6 +544,61 @@ public:
     inline void unset_is_large_no_check (const int x, const int y)
     {
         set_no_check(_is_large, x, y, false);
+    }
+
+    //
+    // Used in lighting, so inlined
+    //
+    inline bool is_smoke (const point &p)
+    {
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_smoke, p.x, p.y));
+    }
+
+    inline bool is_smoke_no_check (const point &p)
+    {
+        return (get_no_check(_is_smoke, p.x, p.y));
+    }
+
+    inline bool is_smoke (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_smoke, x, y));
+    }
+
+    inline bool is_smoke_no_check (const int x, const int y)
+    {
+        return (get_no_check(_is_smoke, x, y));
+    }
+
+    inline void set_is_smoke (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_smoke, x, y, true);
+    }
+
+    inline void set_is_smoke_no_check (const int x, const int y)
+    {
+        set_no_check(_is_smoke, x, y, true);
+    }
+
+    inline void unset_is_smoke (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_smoke, x, y, false);
+    }
+
+    inline void unset_is_smoke_no_check (const int x, const int y)
+    {
+        set_no_check(_is_smoke, x, y, false);
     }
 
     void init(point3d at, int seed);

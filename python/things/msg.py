@@ -9,6 +9,7 @@ def tp_init(name):
     x.set_gfx_show_outlined(True)
     x.set_is_movable(True)
     x.set_is_msg(True)
+    x.set_is_temporary(True)
     x.set_is_no_tile(True)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

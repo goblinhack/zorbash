@@ -8,7 +8,10 @@ def tp_init(name):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_interesting(False)
-    x.set_is_loggable(False)
+    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_important_stuff(False)
+    x.set_is_temporary(True)
+    x.set_is_smoke(True)
     x.set_text_a_or_an("");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
     x.set_z_depth(zx.MAP_DEPTH_OBJ)

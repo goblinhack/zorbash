@@ -19,7 +19,8 @@ def init1(name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_active(True)
     x.set_is_interesting(True)
-    x.set_is_loggable(False)
+    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_important_stuff(False)
     x.set_is_movable(True)
     x.set_text_a_or_an("a");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
@@ -66,7 +67,8 @@ def init2(name):
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_active(True)
-    x.set_is_loggable(False)
+    x.set_is_loggable_for_unimportant_stuff(False)
+    x.set_is_loggable_for_important_stuff(False)
     x.set_is_movable(True)
     x.set_text_a_or_an("a");
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
@@ -85,7 +87,8 @@ def init3(name, text_name):
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_is_loggable(True)
+    x.set_is_loggable_for_unimportant_stuff(True)
+    x.set_is_loggable_for_important_stuff(True)
     x.set_is_movable(True)
     x.set_is_weapon(True)
     x.set_text_a_or_an("a");

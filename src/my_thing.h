@@ -748,7 +748,7 @@ public:
     int is_large(void) const;
     int is_lava(void) const;
     int is_light_strength(void) const;
-    int is_loggable(void) const;
+    int is_loggable_for_unimportant_stuff(void) const;
     int is_made_of_meat(void) const;
     int is_meat_eater(void) const;
     int is_monst(void) const;
@@ -766,10 +766,10 @@ public:
     int is_rrr12(void) const;
     int is_rrr13(void) const;
     int is_rrr14(void) const;
-    int is_rrr15(void) const;
-    int is_rrr16(void) const;
-    int is_rrr17(void) const;
-    int is_rrr18(void) const;
+    int is_loggable_for_important_stuff(void) const;
+    int tick_catches_up_on_attack(void) const;
+    int is_temporary(void) const;
+    int is_smoke(void) const;
     int is_rrr2(void) const;
     int is_rrr20(void) const;
     int is_rrr21(void) const;
@@ -899,6 +899,7 @@ public:
     void use(void);
     void visible();
     void water_tick();
+    void lava_tick();
     void weapon_get_use_offset(float *dx, float *dy) const;
     void weapon_set_carry_anim(Thingp weapon_carry_anim);
     void weapon_set_carry_anim_id(uint32_t weapon_carry_anim_id);

@@ -116,9 +116,10 @@ int Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
 int Tp::is_interesting(void) const { return _is_interesting; }
 int Tp::is_key(void) const { return _is_key; }
 int Tp::is_large(void) const { return _is_large; }
+int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_lava(void) const { return _is_lava; }
 int Tp::is_light_strength(void) const { return _is_light_strength; }
-int Tp::is_loggable(void) const { return _is_loggable; }
+int Tp::is_loggable_for_unimportant_stuff(void) const { return _is_loggable_for_unimportant_stuff; }
 int Tp::is_made_of_meat(void) const { return _is_made_of_meat; }
 int Tp::is_meat_eater(void) const { return _is_meat_eater; }
 int Tp::is_monst(void) const { return _is_monst; }
@@ -136,10 +137,9 @@ int Tp::is_rrr11(void) const { return _is_rrr11; }
 int Tp::is_rrr12(void) const { return _is_rrr12; }
 int Tp::is_rrr13(void) const { return _is_rrr13; }
 int Tp::is_rrr14(void) const { return _is_rrr14; }
-int Tp::is_rrr15(void) const { return _is_rrr15; }
-int Tp::is_rrr16(void) const { return _is_rrr16; }
-int Tp::is_rrr17(void) const { return _is_rrr17; }
-int Tp::is_rrr18(void) const { return _is_rrr18; }
+int Tp::is_loggable_for_important_stuff(void) const { return _is_loggable_for_important_stuff; }
+int Tp::tick_catches_up_on_attack(void) const { return _tick_catches_up_on_attack; }
+int Tp::is_temporary(void) const { return _is_temporary; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_rrr20(void) const { return _is_rrr20; }
 int Tp::is_rrr21(void) const { return _is_rrr21; }
@@ -257,9 +257,10 @@ void Tp::set_is_hunger_insatiable(int v) { _is_hunger_insatiable = v; }
 void Tp::set_is_interesting(int v) { _is_interesting = v; }
 void Tp::set_is_key(int v) { _is_key = v; }
 void Tp::set_is_large(int v) { _is_large = v; }
+void Tp::set_is_smoke(int v) { _is_smoke = v; }
 void Tp::set_is_lava(int v) { _is_lava = v; }
 void Tp::set_is_light_strength(int v) { _is_light_strength = v; }
-void Tp::set_is_loggable(int v) { _is_loggable = v; }
+void Tp::set_is_loggable_for_unimportant_stuff(int v) { _is_loggable_for_unimportant_stuff = v; }
 void Tp::set_is_made_of_meat(int v) { _is_made_of_meat = v; }
 void Tp::set_is_meat_eater(int v) { _is_meat_eater = v; }
 void Tp::set_is_monst(int v) { _is_monst = v; }
@@ -277,10 +278,9 @@ void Tp::set_is_rrr11(int v) { _is_rrr11 = v; }
 void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
 void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
 void Tp::set_is_rrr14(int v) { _is_rrr14 = v; }
-void Tp::set_is_rrr15(int v) { _is_rrr15 = v; }
-void Tp::set_is_rrr16(int v) { _is_rrr16 = v; }
-void Tp::set_is_rrr17(int v) { _is_rrr17 = v; }
-void Tp::set_is_rrr18(int v) { _is_rrr18 = v; }
+void Tp::set_is_loggable_for_important_stuff(int v) { _is_loggable_for_important_stuff = v; }
+void Tp::set_tick_catches_up_on_attack(int v) { _tick_catches_up_on_attack = v; }
+void Tp::set_is_temporary(int v) { _is_temporary = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_rrr20(int v) { _is_rrr20 = v; }
 void Tp::set_is_rrr21(int v) { _is_rrr21 = v; }

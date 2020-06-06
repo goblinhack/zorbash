@@ -62,6 +62,7 @@ void Level::clear (void)
     _is_lava = {};
     _is_monst = {};
     _is_rock = {};
+    _is_smoke = {};
     _is_visited = {};
     _is_wall = {};
     _is_water = {};

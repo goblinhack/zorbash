@@ -35,6 +35,7 @@ void Thing::attach (void)
     if (is_monst())         { level->set_is_monst(mx, my); }
     if (is_rock())          { level->set_is_rock(mx, my); }
     if (is_secret_door())   { level->set_is_secret_door(mx, my); }
+    if (is_smoke())         { level->set_is_smoke(mx, my); }
     if (is_wall())          { level->set_is_wall(mx, my); }
     if (is_water())         { level->set_is_water(mx, my); }
 
@@ -69,6 +70,7 @@ void Thing::detach (void)
     if (is_monst())         { level->unset_is_monst(mx, my); }
     if (is_rock())          { level->unset_is_rock(mx, my); }
     if (is_secret_door())   { level->unset_is_secret_door(mx, my); }
+    if (is_smoke())         { level->unset_is_smoke(mx, my); }
     if (is_wall())          { level->unset_is_wall(mx, my); }
     if (is_water())         { level->unset_is_water(mx, my); }
 
