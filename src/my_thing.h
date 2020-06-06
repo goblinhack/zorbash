@@ -616,7 +616,7 @@ public:
 
     const std::string& get_resurrect_dice_str(void) const;
     int get_resurrect(void) const;
-    bool get_resurrect_crit_roll(void) const;
+    bool get_resurrect_success(void) const;
     const Dice& get_resurrect_dice(void) const;
 
     ThingShoved try_to_shove(Thingp it, fpoint delta);

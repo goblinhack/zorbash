@@ -10,29 +10,38 @@
 void Thing::resurrect_tick (void)
 {_
     //
-    // Roll a 0 treat as success.
+    // No respawn onto lava or things like that if we don't like that.
     //
-    auto crit_roll = get_resurrect_crit_roll();
-    if (crit_roll) {
-        //
-        // Resurrect, but weaker
-        //
-        if (!is_resurrecting) {
-            auto v = get_stats_health_max() / 2;
-            if (v > 0) {
-                is_resurrecting = true;
-                tile_curr = 0;
-                MINICON("%%fg=red$%s rises from the grave!",
-                        text_The().c_str());
-                set_stats_health(v);
-                set_stats_health_max(v);
+    if (is_less_preferred_terrain(point(mid_at.x, mid_at.y))) {
+        return;
+    }
 
-                //
-                // Catch up on ticks
-                //
-                set_tick_last_did_something(game->tick_current);
-                set_tick(game->tick_current);
-            }
+    //
+    // Succeed on crit
+    //
+    auto crit_roll = get_resurrect_success();
+    if (!crit_roll) {
+        return;
+    }
+
+    //
+    // Resurrect, but weaker
+    //
+    if (!is_resurrecting) {
+        auto v = get_stats_health_max() / 2;
+        if (v > 0) {
+            is_resurrecting = true;
+            tile_curr = 0;
+            MINICON("%%fg=red$%s rises from the grave!",
+                    text_The().c_str());
+            set_stats_health(v);
+            set_stats_health_max(v);
+
+            //
+            // Catch up on ticks
+            //
+            set_tick_last_did_something(game->tick_current);
+            set_tick(game->tick_current);
         }
     }
 }

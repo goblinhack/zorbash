@@ -81,6 +81,12 @@ int Dice::roll (void) const
 bool Dice::crit_roll (void) const
 {
     auto r = roll();
+    return r >= (ndice * sides);
+}
+
+bool Dice::crit_roll_minus_modifier (void) const
+{
+    auto r = roll();
     return r - modifier >= (ndice * sides);
 }
 
