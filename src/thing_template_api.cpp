@@ -34,6 +34,11 @@ const int Tp::stats_attack(void) const { return _stats_attack_dice.roll(); }
 const std::string& Tp::stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
 void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
 
+const Dice& Tp::resurrect_dice(void) const { return _resurrect_dice; }
+const int Tp::resurrect(void) const { return _resurrect_dice.roll(); }
+const std::string& Tp::resurrect_dice_str(void) const { return _resurrect_dice_str; }
+void Tp::set_resurrect_dice(const std::string &v) { _resurrect_dice = v; _resurrect_dice_str = v; }
+
 const std::string& Tp::light_color(void) const { return _light_color; }
 const std::string& Tp::name(void) const { return _name; }
 const std::string& Tp::spawn_on_death(void) const { return _spawn_on_death; }
@@ -143,7 +148,7 @@ int Tp::is_temporary(void) const { return _is_temporary; }
 int Tp::is_rrr2(void) const { return _is_rrr2; }
 int Tp::is_rrr20(void) const { return _is_rrr20; }
 int Tp::is_rrr21(void) const { return _is_rrr21; }
-int Tp::is_rrr22(void) const { return _is_rrr22; }
+int Tp::is_resurrectable(void) const { return _is_resurrectable; }
 int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_double_damage_from_fire(void) const { return _is_double_damage_from_fire; }
 int Tp::is_rrr3(void) const { return _is_rrr3; }
@@ -284,7 +289,7 @@ void Tp::set_is_temporary(int v) { _is_temporary = v; }
 void Tp::set_is_rrr2(int v) { _is_rrr2 = v; }
 void Tp::set_is_rrr20(int v) { _is_rrr20 = v; }
 void Tp::set_is_rrr21(int v) { _is_rrr21 = v; }
-void Tp::set_is_rrr22(int v) { _is_rrr22 = v; }
+void Tp::set_is_resurrectable(int v) { _is_resurrectable = v; }
 void Tp::set_is_intelligent(int v) { _is_intelligent = v; }
 void Tp::set_is_double_damage_from_fire(int v) { _is_double_damage_from_fire = v; }
 void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }

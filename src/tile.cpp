@@ -832,97 +832,107 @@ std::string tile_name (Tilep t)
 }
 
 uint32_t tile_delay_ms (Tilep t)
-{_
+{
     return (t->delay_ms);
 }
 
 uint8_t tile_is_moving (Tilep t)
-{_
+{
     return (t->is_moving);
 }
 
 uint8_t tile_is_yyy5 (Tilep t)
-{_
+{
     return (t->is_yyy5);
 }
 
 uint8_t tile_is_yyy6 (Tilep t)
-{_
+{
     return (t->is_yyy6);
 }
 
 uint8_t tile_is_yyy7 (Tilep t)
-{_
+{
     return (t->is_yyy7);
 }
 
 uint8_t tile_is_yyy8 (Tilep t)
-{_
+{
     return (t->is_yyy8);
 }
 
 uint8_t tile_is_yyy9 (Tilep t)
-{_
+{
     return (t->is_yyy9);
 }
 
 uint8_t tile_is_yyy10 (Tilep t)
-{_
+{
     return (t->is_yyy10);
 }
 
 uint8_t tile_is_hp_25_percent (Tilep t)
-{_
+{
     return (t->is_hp_25_percent);
 }
 
 uint8_t tile_is_hp_50_percent (Tilep t)
-{_
+{
     return (t->is_hp_50_percent);
 }
 
 uint8_t tile_is_hp_75_percent (Tilep t)
-{_
+{
     return (t->is_hp_75_percent);
 }
 
 uint8_t tile_is_hp_100_percent (Tilep t)
-{_
+{
     return (t->is_hp_100_percent);
 }
 
 uint8_t tile_gfx_outline_index_offset (Tilep t)
-{_
+{
     return (t->gfx_outline_index_offset);
 }
 
 uint8_t tile_is_sleeping (Tilep t)
-{_
+{
     return (t->is_sleeping);
 }
 
 uint8_t tile_is_open (Tilep t)
-{_
+{
     return (t->is_open);
 }
 
 uint8_t tile_is_dead (Tilep t)
-{_
+{
     return (t->is_dead);
 }
 
 uint8_t tile_is_end_of_anim (Tilep t)
-{_
+{
     return (t->is_end_of_anim);
 }
 
 uint8_t tile_is_dead_on_end_of_anim (Tilep t)
-{_
+{
     return (t->is_dead_on_end_of_anim);
 }
 
+uint8_t tile_is_alive_on_end_of_anim (Tilep t)
+{
+    return (t->is_alive_on_end_of_anim);
+}
+
+uint8_t tile_is_resurrecting (Tilep t)
+{
+    return (t->is_resurrecting);
+}
+
 Tilep tile_first (Tilemap *tiles)
-{_
+{
     if (!tiles || tiles->empty()) {
         return (0);
     }
@@ -931,7 +941,7 @@ Tilep tile_first (Tilemap *tiles)
 }
 
 Tilep tile_random (Tilemap *tiles)
-{_
+{
     if (!tiles || tiles->empty()) {
         return (0);
     }
@@ -940,7 +950,7 @@ Tilep tile_random (Tilemap *tiles)
 }
 
 Tilep tile_n (Tilemap *tiles, int n)
-{_
+{
     if (!tiles || tiles->empty()) {
         return (0);
     }
@@ -949,7 +959,7 @@ Tilep tile_n (Tilemap *tiles, int n)
 }
 
 Tilep tile_next (Tilemap *tiles, Tilep in)
-{_
+{
     if (!tiles || tiles->empty()) {
         return (0);
     }

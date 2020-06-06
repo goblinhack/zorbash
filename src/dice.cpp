@@ -66,7 +66,7 @@ Dice::Dice (std::string s)
     }
 }
 
-int Dice::roll(void) const
+int Dice::roll (void) const
 {
     auto n = ndice;
     auto tot = 0;
@@ -76,6 +76,12 @@ int Dice::roll(void) const
     tot += modifier;
     // CON("roll %dd%d+%d => %d", ndice, sides, modifier, tot);
     return (tot);
+}
+
+bool Dice::crit_roll (void) const
+{
+    auto r = roll();
+    return r - modifier >= (ndice * sides);
 }
 
 int Dice::operator ()() const

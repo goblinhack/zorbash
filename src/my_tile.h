@@ -120,6 +120,8 @@ public:
     bool is_dead {};
     bool is_end_of_anim {};
     bool is_dead_on_end_of_anim {};
+    bool is_resurrecting {};
+    bool is_alive_on_end_of_anim {};
     bool internal_has_dir_anim {};
 
 private:
@@ -340,6 +342,8 @@ uint8_t tile_is_open(Tilep);
 uint8_t tile_is_dead(Tilep);
 uint8_t tile_is_end_of_anim(Tilep);
 uint8_t tile_is_dead_on_end_of_anim(Tilep);
+uint8_t tile_is_alive_on_end_of_anim(Tilep);
+uint8_t tile_is_resurrecting(Tilep);
 
 Tilep tile_first(Tilemap *root);
 Tilep tile_random(Tilemap *root);

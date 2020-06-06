@@ -193,12 +193,14 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_hidden          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_hungry          = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_tick_done       = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_in_lava         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_moving          = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_open            = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_resurrected     = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_resurrecting    = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_sleeping        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_starving        = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_in_lava         = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_tick_done       = (bits32 >> shift) & 1; shift++;
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |

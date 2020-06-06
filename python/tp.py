@@ -239,8 +239,8 @@ class Tp:
     def set_is_rrr21(self, value):
         zx.tp_set_is_rrr21(self, value)
 
-    def set_is_rrr22(self, value):
-        zx.tp_set_is_rrr22(self, value)
+    def set_is_resurrectable(self, value):
+        zx.tp_set_is_resurrectable(self, value)
 
     def set_is_intelligent(self, value):
         zx.tp_set_is_intelligent(self, value)
@@ -358,6 +358,9 @@ class Tp:
 
     def set_stats_attack_dice(self, value):
         zx.tp_set_stats_attack_dice(self, value)
+
+    def set_resurrect_dice(self, value):
+        zx.tp_set_resurrect_dice(self, value)
 
     def set_collision_check(self, value):
         zx.tp_set_collision_check(self, value)

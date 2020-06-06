@@ -161,9 +161,9 @@ public:
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
-    uint32_t inited_tiles:1       {};
     uint32_t has_ever_moved:1     {};
     uint32_t has_light:1          {};
+    uint32_t inited_tiles:1       {};
     uint32_t is_attached:1        {};
     uint32_t is_being_destroyed:1 {};
     uint32_t is_blitted:1         {};
@@ -174,13 +174,15 @@ public:
     uint32_t is_fadeup:1          {};
     uint32_t is_hidden:1          {};
     uint32_t is_hungry:1          {};
-    uint32_t is_tick_done:1       {}; // has moved/hit and finished its move
+    uint32_t is_in_lava:1         {};
+    uint32_t is_in_water:1        {};
     uint32_t is_moving:1          {};
     uint32_t is_open:1            {};
+    uint32_t is_resurrected:1     {};
+    uint32_t is_resurrecting:1    {};
     uint32_t is_sleeping:1        {};
     uint32_t is_starving:1        {};
-    uint32_t is_in_water:1        {};
-    uint32_t is_in_lava:1         {};
+    uint32_t is_tick_done:1       {}; // has moved/hit and finished its move
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -597,17 +599,25 @@ public:
     // Dice
     //
     const std::string& get_nutrition_dice_str(void) const;
-    const std::string& get_idle_tick_dice_str(void) const;
-    const std::string& get_stats_attack_dice_str(void) const;
-    const std::string& get_lifespan_dice_str(void) const;
     int get_nutrition(void) const;
-    int get_idle_tick(void) const;
-    int get_stats_attack(void) const;
-    int get_lifespan(void) const;
     const Dice& get_nutrition_dice(void) const;
+
+    const std::string& get_idle_tick_dice_str(void) const;
+    int get_idle_tick(void) const;
     const Dice& get_idle_tick_dice(void) const;
-    const Dice& get_stats_attack_dice(void) const;
+
+    const std::string& get_lifespan_dice_str(void) const;
+    int get_lifespan(void) const;
     const Dice& get_lifespan_dice(void) const;
+
+    const std::string& get_stats_attack_dice_str(void) const;
+    int get_stats_attack(void) const;
+    const Dice& get_stats_attack_dice(void) const;
+
+    const std::string& get_resurrect_dice_str(void) const;
+    int get_resurrect(void) const;
+    bool get_resurrect_crit_roll(void) const;
+    const Dice& get_resurrect_dice(void) const;
 
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
@@ -773,7 +783,7 @@ public:
     int is_rrr2(void) const;
     int is_rrr20(void) const;
     int is_rrr21(void) const;
-    int is_rrr22(void) const;
+    int is_resurrectable(void) const;
     int is_intelligent(void) const;
     int is_double_damage_from_fire(void) const;
     int is_rrr3(void) const;
@@ -817,6 +827,7 @@ public:
     uint8_t is_less_preferred_terrain(point p) const;
     uint8_t is_visible() const;
     bool achieve_goals_in_life();
+    bool achieve_goals_in_death();
     void add_enemy(Thingp attacker);
     void ai_get_next_hop(void);
     void animate();
@@ -875,6 +886,7 @@ public:
     void kill(const char *reason);
     void kill(std::string &reason);
     void lifespan_tick();
+    void resurrect_tick();
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log(std::string prefix);
     void log_(const char *fmt, va_list args); // compile error without
