@@ -68,7 +68,8 @@ static void game_status_wid_create (void)
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
+        wid_set_text_top(w, true);
+        wid_set_text(w, " x1");
         wid_set_on_mouse_down(w, game_status_mouse_down);
 
         if (player->monstp) {
