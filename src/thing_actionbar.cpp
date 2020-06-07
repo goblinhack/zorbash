@@ -6,7 +6,7 @@
 #include "my_thing.h"
 #include "my_game_status.h"
 
-int Thing::actionbar_insert (Thingp what)
+int Thing::actionbar_id_insert (Thingp what)
 {_
     if (!is_player()) {
         return -1;
@@ -17,7 +17,7 @@ int Thing::actionbar_insert (Thingp what)
     }
 
     for (auto i = 0; i < ACTIONBAR_ITEMS; i++) {
-        auto a = monstp->actionbar[i];
+        auto a = monstp->actionbar_id[i];
         if (!a) {
             continue;
         }
@@ -29,11 +29,11 @@ int Thing::actionbar_insert (Thingp what)
     }
 
     for (auto i = 0; i < ACTIONBAR_ITEMS; i++) {
-        auto a = monstp->actionbar[i];
+        auto a = monstp->actionbar_id[i];
         if (a) {
             continue;
         }
-        monstp->actionbar[i] = what->id;
+        monstp->actionbar_id[i] = what->id;
         game_status_wid_init();
         return i;
     }
@@ -42,7 +42,7 @@ int Thing::actionbar_insert (Thingp what)
     return -1;
 }
 
-int Thing::actionbar_remove (Thingp what)
+int Thing::actionbar_id_remove (Thingp what)
 {_
     if (!is_player()) {
         return -1;
@@ -53,16 +53,43 @@ int Thing::actionbar_remove (Thingp what)
     }
 
     for (auto i = 0; i < ACTIONBAR_ITEMS; i++) {
-        auto a = monstp->actionbar[i];
+        auto a = monstp->actionbar_id[i];
         if (!a) {
             continue;
         }
         auto t = thing_find(a);
         if (t->tp() == what->tp()) {
-            monstp->actionbar[i] = 0;
+            monstp->actionbar_id[i] = 0;
             game_status_wid_init();
             return i;
         }
     }
     return -1;
+}
+
+int Thing::actionbar_id_slot_count (const int slot)
+{_
+    auto a = monstp->actionbar_id[slot];
+    if (!a) {
+        return 0;
+    }
+
+    if (!monstp) {
+        return 0;
+    }
+
+    auto t = thing_find(a);
+    if (!t) {
+        return 0;
+    }
+
+    auto count = 0;
+    for (auto oid : monstp->carrying) {
+        auto o = thing_find(oid);
+        if (o->tp() == t->tp()) {
+            count++;
+        }
+    }
+
+    return count;
 }

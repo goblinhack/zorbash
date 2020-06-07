@@ -107,7 +107,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->stats_health);
     /* int         */ in >> bits(my.t->stats_health_max);
     /* std::list<uint32_t> */   in >> bits(my.t->carrying);
-    /* std::array<uint32_t> */  in >> bits(my.t->actionbar);
+    /* std::array<uint32_t> */  in >> bits(my.t->actionbar_id);
     /* std::vector<point> */    in >> bits(my.t->move_path);
     /* std::vector<uint32_t> */ in >> bits(my.t->enemies);
     /* std::string */ in >> bits(my.t->msg);
