@@ -86,7 +86,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int         */ out << bits(my.t->stats_health);
     /* int         */ out << bits(my.t->stats_health_max);
     /* std::list<uint32_t> */   out << bits(my.t->carrying);
-    /* std::array<uint32_t> */  out << bits(my.t->actionbar);
+    /* std::array<uint32_t> */  out << bits(my.t->actionbar_id);
     /* std::vector<point> */    out << bits(my.t->move_path);
     /* std::vector<uint32_t> */ out << bits(my.t->enemies);
     /* std::string */ out << bits(my.t->msg);

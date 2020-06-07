@@ -69,11 +69,15 @@ static void game_status_wid_create (void)
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_top(w, true);
-        wid_set_text(w, " x1");
+
+        auto count = player->actionbar_id_slot_count(i);
+        if (count > 1) {
+            wid_set_text(w, " x" + std::to_string(count));
+        }
         wid_set_on_mouse_down(w, game_status_mouse_down);
 
         if (player->monstp) {
-            auto a = player->monstp->actionbar[i];
+            auto a = player->monstp->actionbar_id[i];
             if (a) {
                 auto it = thing_find(a);
                 if (it) {
