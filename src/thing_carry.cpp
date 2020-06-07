@@ -7,6 +7,16 @@
 
 void Thing::carry (Thingp what)
 {_
+    if (is_player()) {
+        if (actionbar_insert(what) < 0) {
+            return;
+        }
+    }
+
+    if (!monstp) {
+        return;
+    }
+
     auto existing_owner = what->owner_get();
     if (existing_owner) {
         if (existing_owner == this) {
@@ -37,9 +47,16 @@ void Thing::carry (Thingp what)
 
 void Thing::drop (Thingp what)
 {_
+    if (is_player()) {
+        if (actionbar_remove(what) < 0) {
+            return;
+        }
+    }
+
     if (!monstp) {
         return;
     }
+
     auto existing_owner = what->owner_get();
     if (existing_owner != this) {
         err("attempt to drop %s which is not carried", what->to_string().c_str());

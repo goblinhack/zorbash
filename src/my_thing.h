@@ -90,6 +90,7 @@ typedef struct Monst_ {
     int          stats_health = {};
     int          stats_health_max = {};
     std::list<uint32_t> carrying;
+    std::array<uint32_t, ACTIONBAR_ITEMS> actionbar;
     std::vector<uint32_t> enemies;           // List of things that wronged us
     std::vector<point> move_path;
     point        wander_target;
@@ -588,6 +589,9 @@ public:
 
     uint32_t set_weapon_id(uint32_t);
     uint32_t get_weapon_id(void) const;
+
+    int actionbar_remove(Thingp what);
+    int actionbar_insert(Thingp what);
 
     //
     // Dice
