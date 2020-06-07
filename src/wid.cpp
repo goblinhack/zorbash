@@ -322,26 +322,6 @@ void wid_set_pos_pct (Widp w, fpoint tl, fpoint br)
     wid_tree_attach(w);
 }
 
-void wid_set_context (Widp w, void *context)
-{_
-    w->context = context;
-}
-
-void *wid_get_context (Widp w)
-{_
-    return (w->context);
-}
-
-void wid_set_string_context (Widp w, std::string string_context)
-{_
-    w->string_context = string_context;
-}
-
-std::string wid_get_string_context (Widp w)
-{_
-    return (w->string_context);
-}
-
 void wid_set_int_context (Widp w, int int_context)
 {_
     w->int_context = int_context;
@@ -5376,11 +5356,11 @@ static void wid_display (Widp w,
     }
 
     {
-        for (auto& x = tl.x; x <= br.x; x++) {
+        for (auto x = tl.x; x <= br.x; x++) {
             if (unlikely(!ascii_x_ok(x))) {
                 continue;
             }
-            for (auto& y = tl.y; y <= br.y; y++) {
+            for (auto y = tl.y; y <= br.y; y++) {
                 if (unlikely(!ascii_y_ok(y))) {
                     continue;
                 }
