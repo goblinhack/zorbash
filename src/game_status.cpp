@@ -60,176 +60,39 @@ static void game_status_wid_create (void)
         wid_set_bg_tile(wid_itembar, tile_find_mand("ui_action_bar"));
     }
 
-    int x = 0;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(0, 0);
-        point br = make_point(ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-//        wid_set_fg_tilename(w, "food_frog1");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
+    for (auto i = 0, x = 0; i < ACTIONBAR_ITEMS; i++) {
         auto w = wid_new_square_button(wid_itembar, "text box2");
         point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
+        point br = make_point(x + ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
         wid_set_text_lhs(w, true);
         wid_set_text_bot(w, true);
         wid_set_on_mouse_down(w, game_status_mouse_down);
-//        wid_set_fg_tilename(w, "key1.1");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "food_frog1");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
+        if (player->monstp) {
+            auto a = player->monstp->actionbar[i];
+            if (a) {
+                auto it = thing_find(a);
+                if (it) {
+                    auto tpp = it->tp();
+                    auto tiles = &tpp->tiles;
+                    if (tiles) {
+                        auto tile = tile_first(tiles);
+                        if (tile) {
+                            wid_set_fg_tile(w, tile);
+                        }
+                    }
+                }
+            }
+        }
 
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "gem1.1");
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_OVER);
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "gem1.2");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "gem1.3");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "gem1.4");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "gem1.5");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "gem1.6");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
-    }
-    x += ACTIONBAR_WIDTH;
-    {_
-        auto w = wid_new_square_button(wid_itembar, "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x+ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
-
-        wid_set_pos(w, tl, br);
-        wid_set_style(w, -1);
-        wid_set_text_lhs(w, true);
-        wid_set_text_bot(w, true);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_fg_tilename(w, "sword1.1");
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_OVER);
-        wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
-        wid_set_mode(w, WID_MODE_NORMAL);
+        x += ACTIONBAR_WIDTH;
     }
 
     wid_update(wid_itembar);

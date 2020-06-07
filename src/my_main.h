@@ -230,6 +230,7 @@ extern int TILES_DOWN;
 //
 #define SIDEBAR_WIDTH               12
 
+#define ACTIONBAR_ITEMS             10
 #define ACTIONBAR_HEIGHT            3
 #define ACTIONBAR_WIDTH             3
 #define ACTIONBAR_TOT_WIDTH         (10 * ACTIONBAR_WIDTH)
