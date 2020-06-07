@@ -81,11 +81,37 @@ def init_ui_dead():
 
 def init_ui_action_bar():
     tiles = [
-        "ui_action_bar",
+        "ui_action_bar0",
+        "ui_action_bar1",
+        "ui_action_bar2",
+        "ui_action_bar3",
+        "ui_action_bar4",
+        "ui_action_bar5",
+        "ui_action_bar6",
+        "ui_action_bar7",
+        "ui_action_bar8",
+        "ui_action_bar9",
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_action_bar.tga",
-        name="ui_action_bar", width=600, height=72, arr=tiles)
+        name="ui_action_bar", width=60, height=72, arr=tiles)
+
+def init_ui_action_bar_highlight():
+    tiles = [
+        "ui_action_bar_highlight0",
+        "ui_action_bar_highlight1",
+        "ui_action_bar_highlight2",
+        "ui_action_bar_highlight3",
+        "ui_action_bar_highlight4",
+        "ui_action_bar_highlight5",
+        "ui_action_bar_highlight6",
+        "ui_action_bar_highlight7",
+        "ui_action_bar_highlight8",
+        "ui_action_bar_highlight9",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/ui_action_bar_highlight.tga",
+        name="ui_action_bar_highlight", width=60, height=72, arr=tiles)
 
 def init_16x16():
     tiles = [
@@ -923,6 +949,7 @@ init_ui_status_bar()
 init_ui_status_bar_title()
 init_ui_dead()
 init_ui_action_bar()
+init_ui_action_bar_highlight()
 init_16x16()
 init_32x32()
 init_32x32_water()

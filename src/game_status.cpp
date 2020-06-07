@@ -57,11 +57,35 @@ static void game_status_wid_create (void)
         wid_itembar = wid_new_square_window("text container1");
         wid_set_pos(wid_itembar, tl, br);
         wid_set_style(wid_itembar, -1);
-        wid_set_bg_tile(wid_itembar, tile_find_mand("ui_action_bar"));
     }
+
+    auto highlight_slot = 0;
+
+    std::array<Widp, ACTIONBAR_ITEMS> wid_items;
 
     for (auto i = 0, x = 0; i < ACTIONBAR_ITEMS; i++) {
         auto w = wid_new_square_button(wid_itembar, "text box2");
+        wid_items[i] = w;
+        point tl = make_point(x, 0);
+        point br = make_point(x + ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT);
+
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, -1);
+        wid_set_on_mouse_down(w, game_status_mouse_down);
+
+        if (i == highlight_slot) {
+            std::string tile = "ui_action_bar_highlight" + std::to_string(i);
+            wid_set_bg_tilename(w, tile.c_str());
+        } else {
+            std::string tile = "ui_action_bar" + std::to_string(i);
+            wid_set_bg_tilename(w, tile.c_str());
+        }
+
+        x += ACTIONBAR_WIDTH;
+    }
+
+    for (auto i = 0, x = 0; i < ACTIONBAR_ITEMS; i++) {
+        auto w = wid_new_square_button(wid_items[i], "text box2");
         point tl = make_point(x, 0);
         point br = make_point(x + ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
