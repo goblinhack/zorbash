@@ -59,7 +59,7 @@ static void game_status_wid_create (void)
         wid_set_style(wid_itembar, -1);
     }
 
-    auto highlight_slot = 0;
+    auto highlight_slot = 2;
 
     std::array<Widp, ACTIONBAR_ITEMS> wid_items;
 
@@ -84,10 +84,10 @@ static void game_status_wid_create (void)
         x += ACTIONBAR_WIDTH;
     }
 
-    for (auto i = 0, x = 0; i < ACTIONBAR_ITEMS; i++) {
+    for (auto i = 0; i < ACTIONBAR_ITEMS; i++) {
         auto w = wid_new_square_button(wid_items[i], "text box2");
-        point tl = make_point(x, 0);
-        point br = make_point(x + ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
+        point tl = make_point(0, 0);
+        point br = make_point(ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -121,7 +121,6 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_OVER);
         wid_set_color(w, WID_COLOR_BG, COLOR_NONE);
         wid_set_mode(w, WID_MODE_NORMAL);
-        x += ACTIONBAR_WIDTH;
     }
 
     wid_update(wid_itembar);
