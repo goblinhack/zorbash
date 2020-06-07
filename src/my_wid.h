@@ -110,8 +110,6 @@ uint8_t wid_init(void);
 uint8_t wid_is_always_hidden(Widp w);
 uint8_t wid_is_hidden(Widp w);
 uint8_t wid_receive_input(Widp, const SDL_KEYSYM *key);
-void *wid_get_context(Widp);
-std::string wid_get_string_context(Widp);
 int wid_get_int_context(Widp);
 void wid_always_hidden(Widp, uint8_t value);
 void wid_destroy(Widp *);
@@ -171,8 +169,6 @@ void wid_scroll_with_input(Widp, std::wstring str);
 void wid_set_active(Widp);
 void wid_set_bg_tilename(Widp, std::string name);
 void wid_set_color(Widp, wid_color col, color val);
-void wid_set_context(Widp w, void *context);
-void wid_set_string_context(Widp w, std::string);
 void wid_set_int_context(Widp w, int);
 void wid_set_cursor(Widp, uint32_t val);
 void wid_set_debug(Widp, uint8_t);
@@ -468,8 +464,6 @@ public:
     //
     // Client context
     //
-    void *context {};
-    std::string string_context;
     int int_context {-1};
 
     //

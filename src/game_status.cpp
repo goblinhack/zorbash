@@ -38,6 +38,18 @@ static uint8_t game_status_mouse_down (Widp w,
     return (true);
 }
 
+static void game_status_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
+{
+    auto slot = wid_get_int_context(w);
+    CON("mouse over begin %d", slot);
+}
+
+static void game_status_mouse_over_e (Widp w)
+{
+    auto slot = wid_get_int_context(w);
+    CON("mouse over end %d", slot);
+}
+
 //
 // Create the test
 //
@@ -54,7 +66,7 @@ static void game_status_wid_create (void)
         point br = make_point(ACTIONBAR_BR_X, ACTIONBAR_BR_Y);
         color c;
 
-        wid_itembar = wid_new_square_window("text container1");
+        wid_itembar = wid_new_square_window("actionbar");
         wid_set_pos(wid_itembar, tl, br);
         wid_set_style(wid_itembar, -1);
     }
@@ -64,14 +76,14 @@ static void game_status_wid_create (void)
     std::array<Widp, ACTIONBAR_ITEMS> wid_items;
 
     for (auto i = 0, x = 0; i < ACTIONBAR_ITEMS; i++) {
-        auto w = wid_new_square_button(wid_itembar, "text box2");
+        auto s = "actionbar" + std::to_string(0);
+        auto w = wid_new_square_button(wid_itembar, s);
         wid_items[i] = w;
         point tl = make_point(x, 0);
         point br = make_point(x + ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        wid_set_on_mouse_down(w, game_status_mouse_down);
 
         if (i == highlight_slot) {
             std::string tile = "ui_action_bar_highlight" + std::to_string(i);
@@ -85,7 +97,7 @@ static void game_status_wid_create (void)
     }
 
     for (auto i = 0; i < ACTIONBAR_ITEMS; i++) {
-        auto w = wid_new_square_button(wid_items[i], "text box2");
+        auto w = wid_new_square_button(wid_items[i], "actionbar icon");
         point tl = make_point(0, 0);
         point br = make_point(ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
 
@@ -94,11 +106,15 @@ static void game_status_wid_create (void)
         wid_set_text_lhs(w, true);
         wid_set_text_top(w, true);
 
+        wid_set_on_mouse_down(w, game_status_mouse_down);
+        wid_set_on_mouse_over_b(w, game_status_mouse_over_b);
+        wid_set_on_mouse_over_e(w, game_status_mouse_over_e);
+        wid_set_int_context(w, i);
+
         auto count = player->actionbar_id_slot_count(i);
         if (count > 1) {
             wid_set_text(w, " x" + std::to_string(count));
         }
-        wid_set_on_mouse_down(w, game_status_mouse_down);
 
         if (player->monstp) {
             auto a = player->monstp->actionbar_id[i];
