@@ -8,6 +8,7 @@ def tp_init(name):
 
     x.set_text_a_or_an("the");
     x.set_gfx_animated(True)
+    x.set_is_temporary(True)
     x.set_gfx_show_outlined(True)
     x.set_is_cursor_path(True)
     x.set_is_movable(True)
