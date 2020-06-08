@@ -230,18 +230,17 @@ extern int TILES_DOWN;
 //
 #define SIDEBAR_WIDTH               12
 
-#define ACTIONBAR_ITEMS             10
-#define ACTIONBAR_HEIGHT            3
-#define ACTIONBAR_WIDTH             3
-#define ACTIONBAR_TOT_WIDTH         (10 * ACTIONBAR_WIDTH)
-#define ACTIONBAR_TL_X              (ASCII_WIDTH / 2 - (ACTIONBAR_TOT_WIDTH / 2))
+#define ACTIONBAR_MAX_ITEMS         20
+#define ACTIONBAR_ITEM_HEIGHT       3
+#define ACTIONBAR_ITEM_WIDTH        3
 #define ACTIONBAR_TL_Y              (ASCII_HEIGHT - 4)
-#define ACTIONBAR_BR_X              ((ASCII_WIDTH / 2 + (ACTIONBAR_TOT_WIDTH / 2)) - 1)
 #define ACTIONBAR_BR_Y              (ASCII_HEIGHT - 1)
-#define INVENTORY_ITEM_WIDTH        2
-#define INVENTORY_ITEM_HEIGHT       2
-#define INVENTORY_DOWN              5
-#define INVENTORY_ACROSS            6
+
+// TODO
+//#define INVENTORY_ITEM_WIDTH        2
+//#define INVENTORY_ITEM_HEIGHT       2
+//#define INVENTORY_DOWN              5
+//#define INVENTORY_ACROSS            6
 
 ////////////////////////////////////////////////////////////////////////////
 // UI text

@@ -61,9 +61,16 @@ static void game_status_wid_create (void)
 
     game_status_fini();
 
+    auto highlight_slot = 2U;
+    auto actionbar_items = player->monstp->actionbar_id.size();
+
     {_
-        point tl = make_point(ACTIONBAR_TL_X, ACTIONBAR_TL_Y);
-        point br = make_point(ACTIONBAR_BR_X, ACTIONBAR_BR_Y);
+        auto w = ACTIONBAR_ITEM_WIDTH * actionbar_items;
+        auto m = (ASCII_WIDTH / 2);
+        auto x1 = m - (w / 2) + (ACTIONBAR_ITEM_WIDTH / 2);
+        auto x2 = w - (m - x1) + m;
+        point tl = make_point(x1, ACTIONBAR_TL_Y);
+        point br = make_point(x2, ACTIONBAR_BR_Y);
         color c;
 
         wid_itembar = wid_new_square_window("actionbar");
@@ -71,16 +78,14 @@ static void game_status_wid_create (void)
         wid_set_style(wid_itembar, -1);
     }
 
-    auto highlight_slot = 2;
+    std::vector<Widp> wid_items;
 
-    std::array<Widp, ACTIONBAR_ITEMS> wid_items;
-
-    for (auto i = 0, x = 0; i < ACTIONBAR_ITEMS; i++) {
+    for (auto i = 0U, x = 0U; i < actionbar_items; i++) {
         auto s = "actionbar" + std::to_string(0);
         auto w = wid_new_square_button(wid_itembar, s);
-        wid_items[i] = w;
+        wid_items.push_back(w);
         point tl = make_point(x, 0);
-        point br = make_point(x + ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT);
+        point br = make_point(x + ACTIONBAR_ITEM_WIDTH - 1, ACTIONBAR_ITEM_HEIGHT);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
@@ -93,13 +98,13 @@ static void game_status_wid_create (void)
             wid_set_bg_tilename(w, tile.c_str());
         }
 
-        x += ACTIONBAR_WIDTH;
+        x += ACTIONBAR_ITEM_WIDTH;
     }
 
-    for (auto i = 0; i < ACTIONBAR_ITEMS; i++) {
+    for (auto i = 0U; i < actionbar_items; i++) {
         auto w = wid_new_square_button(wid_items[i], "actionbar icon");
         point tl = make_point(0, 0);
-        point br = make_point(ACTIONBAR_WIDTH - 1, ACTIONBAR_HEIGHT - 1);
+        point br = make_point(ACTIONBAR_ITEM_WIDTH - 1, ACTIONBAR_ITEM_HEIGHT - 1);
 
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);

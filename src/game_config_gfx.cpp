@@ -236,7 +236,7 @@ void Game::config_gfx_select (void)
 
     auto m = ASCII_WIDTH / 2;
     point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT - 2);
-    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
+    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, tl.y + 10);
     auto width = br.x - tl.x;
 
     game_config_gfx_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");

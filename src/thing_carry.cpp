@@ -8,7 +8,7 @@
 void Thing::carry (Thingp what)
 {_
     if (is_player()) {
-        if (actionbar_id_insert(what) < 0) {
+        if (!actionbar_id_insert(what)) {
             return;
         }
     }
@@ -48,7 +48,7 @@ void Thing::carry (Thingp what)
 void Thing::drop (Thingp what)
 {_
     if (is_player()) {
-        if (actionbar_id_remove(what) < 0) {
+        if (!actionbar_id_remove(what)) {
             return;
         }
     }
