@@ -11,6 +11,7 @@
 #include "my_wid.h"
 #include "my_thing.h"
 #include "my_dmap.h"
+#include "my_game_status.h"
 
 void Thing::cursor_hover_over_check (void)
 {
@@ -26,6 +27,9 @@ void Thing::cursor_hover_over_check (void)
 
             if ((mx >= tblit_tl.x) && (mx <= tblit_br.x)) {
                 if ((my >= tblit_tl.y) && (my <= tblit_br.y)) {
+                    if (is_mouse_over_actionbar()) {
+                        return;
+                    }
                     level->cursor_at = mid_at;
                     level->cursor_found = true;
                 }

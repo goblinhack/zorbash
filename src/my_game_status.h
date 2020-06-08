@@ -13,3 +13,5 @@ uint8_t game_status_wid_init(void);
 // Global widgets.
 //
 extern Widp game_status_window;
+
+extern bool is_mouse_over_actionbar(void);
