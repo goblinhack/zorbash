@@ -9,14 +9,15 @@
 
 static void game_status_wid_create(void);
 
-Widp wid_itembar {};
+Widp wid_actionbar {};
 Widp wid_fake_itembar {};
 Widp wid_item_popup {};
 Widp wid_sidebar {};
+static auto highlight_slot = 0U;
 
 void game_status_fini (void)
 {_
-    wid_destroy(&wid_itembar);
+    wid_destroy(&wid_actionbar);
     wid_destroy(&wid_fake_itembar);
     wid_destroy(&wid_item_popup);
     wid_destroy(&wid_sidebar);
@@ -41,13 +42,15 @@ static uint8_t game_status_mouse_down (Widp w,
 static void game_status_mouse_over_b (Widp w, int32_t relx, int32_t rely, int32_t wheelx, int32_t wheely)
 {
     auto slot = wid_get_int_context(w);
-    CON("mouse over begin %d", slot);
+    highlight_slot = slot;
+    game_status_wid_create();
 }
 
 static void game_status_mouse_over_e (Widp w)
 {
     auto slot = wid_get_int_context(w);
-    CON("mouse over end %d", slot);
+    highlight_slot = slot;
+    game_status_wid_create();
 }
 
 //
@@ -61,7 +64,6 @@ static void game_status_wid_create (void)
 
     game_status_fini();
 
-    auto highlight_slot = 2U;
     auto actionbar_items = player->monstp->actionbar_id.size();
 
     {_
@@ -73,17 +75,17 @@ static void game_status_wid_create (void)
         point br = make_point(x2, ACTIONBAR_BR_Y);
         color c;
 
-        wid_itembar = wid_new_square_window("actionbar");
-        wid_set_pos(wid_itembar, tl, br);
-        wid_set_style(wid_itembar, -1);
+        wid_actionbar = wid_new_square_window("actionbar");
+        wid_set_pos(wid_actionbar, tl, br);
+        wid_set_style(wid_actionbar, -1);
     }
 
-    std::vector<Widp> wid_items;
+    std::vector<Widp> wid_actionbar_items;
 
     for (auto i = 0U, x = 0U; i < actionbar_items; i++) {
         auto s = "actionbar" + std::to_string(0);
-        auto w = wid_new_square_button(wid_itembar, s);
-        wid_items.push_back(w);
+        auto w = wid_new_square_button(wid_actionbar, s);
+        wid_actionbar_items.push_back(w);
         point tl = make_point(x, 0);
         point br = make_point(x + ACTIONBAR_ITEM_WIDTH - 1, ACTIONBAR_ITEM_HEIGHT);
 
@@ -102,7 +104,7 @@ static void game_status_wid_create (void)
     }
 
     for (auto i = 0U; i < actionbar_items; i++) {
-        auto w = wid_new_square_button(wid_items[i], "actionbar icon");
+        auto w = wid_new_square_button(wid_actionbar_items[i], "actionbar icon");
         point tl = make_point(0, 0);
         point br = make_point(ACTIONBAR_ITEM_WIDTH - 1, ACTIONBAR_ITEM_HEIGHT - 1);
 
@@ -144,7 +146,7 @@ static void game_status_wid_create (void)
         wid_set_mode(w, WID_MODE_NORMAL);
     }
 
-    wid_update(wid_itembar);
+    wid_update(wid_actionbar);
 
     {_
         point tl = make_point(ASCII_WIDTH - SIDEBAR_WIDTH, 0);
@@ -404,4 +406,48 @@ static void game_status_wid_create (void)
     y_at += 3;
 
     wid_update(wid_sidebar);
+}
+
+bool is_mouse_over_actionbar (void)
+{
+    extern Widp wid_actionbar;
+
+    if (wid_over) {
+        return false;
+    }
+
+    if (!wid_actionbar) {
+        return false;
+    }
+
+    //
+    // If we are in the portion of the lower screen above the itembar
+    // then do not scroll
+    //
+    int x = mouse_x;
+    int y = mouse_y;
+    pixel_to_ascii(&x, &y);
+
+    static int tlx, tly, brx, bry, cached;
+    if (cached != ASCII_HEIGHT) {
+        cached = ASCII_HEIGHT;
+    }
+
+    wid_get_tl_x_tl_y_br_x_br_y(wid_actionbar, &tlx, &tly, &brx, &bry);
+
+    //
+    // Add some border
+    //
+    tlx -= 1;
+    brx += 1;
+    tly -= 1;
+    bry += 1;
+
+    if ((x >= tlx) && (x < brx) && (y >= tly)) {
+        //CON("    actionbar %d %d %d", tlx, brx, x);
+        return true;
+    }
+    //CON("NOT actionbar %d %d %d", tlx, brx, x);
+
+    return false;
 }

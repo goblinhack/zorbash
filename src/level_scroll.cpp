@@ -10,6 +10,7 @@
 #include "my_gl.h"
 #include "my_thing.h"
 #include "my_wid.h"
+#include "my_game_status.h"
 
 void Level::scroll_map (void)
 {_
@@ -105,29 +106,7 @@ void Level::scroll_map_set_target (void)
         //
         // If over a widget, do not scroll
         //
-        extern Widp wid_itembar;
-        if (wid_over) {
-            return;
-        }
-        if (!wid_itembar) {
-            return;
-        }
-
-        //
-        // If we are in the portion of the lower screen above the itembar
-        // then do not scroll
-        //
-        int x = mouse_x;
-        int y = mouse_y;
-        pixel_to_ascii(&x, &y);
-
-        static int tlx, tly, brx, bry, cached;
-        if (cached != ASCII_HEIGHT) {
-            cached = ASCII_HEIGHT;
-            wid_get_tl_x_tl_y_br_x_br_y(wid_itembar, &tlx, &tly, &brx, &bry);
-        }
-
-        if ((x >= tlx) && (x <= brx) && (y >= tly - ASCII_HEIGHT / 4)) {
+        if (is_mouse_over_actionbar()) {
             return;
         }
 

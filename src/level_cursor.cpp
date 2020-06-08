@@ -9,6 +9,7 @@
 #include "my_tex.h"
 #include "my_gl.h"
 #include "my_thing.h"
+#include "my_game_status.h"
 
 void Level::cursor_check_if_scroll_needed (void)
 {
@@ -46,6 +47,10 @@ void Level::cursor_find_on_visible_things (
 void Level::cursor_move (void)
 {
     if (game->paused()) {
+        return;
+    }
+
+    if (is_mouse_over_actionbar()) {
         return;
     }
 
