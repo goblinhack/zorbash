@@ -26,6 +26,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_large {};
@@ -310,6 +311,11 @@ public:
     bool is_food(const point &p);
     void set_is_food(const int x, const int y);
     void unset_is_food(const int x, const int y);
+
+    bool is_treasure(const int x, const int y);
+    bool is_treasure(const point &p);
+    void set_is_treasure(const int x, const int y);
+    void unset_is_treasure(const int x, const int y);
 
     bool is_deep_water(const int x, const int y);
     bool is_deep_water(const point &p);

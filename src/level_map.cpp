@@ -689,3 +689,35 @@ void Level::unset_is_food (const int x, const int y)
     }
     set(_is_food, x, y, false);
 }
+
+bool Level::is_treasure (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_treasure, p.x, p.y));
+}
+
+bool Level::is_treasure (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_treasure, x, y));
+}
+
+void Level::set_is_treasure (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_treasure, x, y, true);
+}
+
+void Level::unset_is_treasure (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_treasure, x, y, false);
+}

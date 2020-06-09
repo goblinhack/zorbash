@@ -28,6 +28,7 @@ void Thing::attach (void)
     if (is_fire())          { level->set_is_fire(mx, my); }
     if (is_floor())         { level->set_is_floor(mx, my); }
     if (is_food())          { level->set_is_food(mx, my); }
+    if (is_treasure())      { level->set_is_treasure(mx, my); }
     if (is_hazard())        { level->set_is_hazard(mx, my); }
     if (is_key())           { level->set_is_key(mx, my); }
     if (is_large())         { level->set_is_large(mx, my); }
@@ -63,6 +64,7 @@ void Thing::detach (void)
     if (is_fire())          { level->unset_is_fire(mx, my); }
     if (is_floor())         { level->unset_is_floor(mx, my); }
     if (is_food())          { level->unset_is_food(mx, my); }
+    if (is_treasure())      { level->unset_is_treasure(mx, my); }
     if (is_hazard())        { level->unset_is_hazard(mx, my); }
     if (is_key())           { level->unset_is_key(mx, my); }
     if (is_large())         { level->unset_is_large(mx, my); }

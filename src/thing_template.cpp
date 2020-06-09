@@ -14,23 +14,24 @@
 Tpnamemap tp_name_map;
 Tpidmap tp_id_map;
 
-static Tpidmap tp_monst;
-static Tpidmap tp_food;
-static Tpidmap tp_dirt;
-static Tpidmap tp_ripples;
+static Tpidmap tp_blood;
 static Tpidmap tp_blood_splatter;
-static Tpidmap tp_key;
+static Tpidmap tp_deco;
+static Tpidmap tp_dirt;
+static Tpidmap tp_door;
 static Tpidmap tp_entrance;
 static Tpidmap tp_exit;
-static Tpidmap tp_torch;
-static Tpidmap tp_blood;
-static Tpidmap tp_wall;
-static Tpidmap tp_rock;
 static Tpidmap tp_floor;
-static Tpidmap tp_deco;
-static Tpidmap tp_wall_deco;
-static Tpidmap tp_door;
+static Tpidmap tp_food;
+static Tpidmap tp_key;
+static Tpidmap tp_monst;
+static Tpidmap tp_ripples;
+static Tpidmap tp_rock;
 static Tpidmap tp_secret_door;
+static Tpidmap tp_torch;
+static Tpidmap tp_treasure;
+static Tpidmap tp_wall;
+static Tpidmap tp_wall_deco;
 
 static uint8_t tp_init_done;
 
@@ -104,57 +105,24 @@ Tilep tp_first_tile (Tpp tp)
 void tp_init_after_loading (void)
 {_
     for (auto& tp : tp_id_map) {
-        if (tp->is_monst()) {
-            tp_monst.push_back(tp);
-        }
-        if (tp->is_food()) {
-            tp_food.push_back(tp);
-        }
-        if (tp->is_dirt()) {
-            tp_dirt.push_back(tp);
-        }
-        if (tp->is_ripple()) {
-            tp_ripples.push_back(tp);
-        }
-        if (tp->is_blood_splatter()) {
-            tp_blood_splatter.push_back(tp);
-        }
-        if (tp->is_key()) {
-            tp_key.push_back(tp);
-        }
-        if (tp->is_entrance()) {
-            tp_entrance.push_back(tp);
-        }
-        if (tp->is_exit()) {
-            tp_exit.push_back(tp);
-        }
-        if (tp->is_torch()) {
-            tp_torch.push_back(tp);
-        }
-        if (tp->is_door()) {
-            tp_door.push_back(tp);
-        }
-        if (tp->is_secret_door()) {
-            tp_secret_door.push_back(tp);
-        }
-        if (tp->is_blood()) {
-            tp_blood.push_back(tp);
-        }
-        if (tp->is_wall()) {
-            tp_wall.push_back(tp);
-        }
-        if (tp->is_rock()) {
-            tp_rock.push_back(tp);
-        }
-        if (tp->is_floor()) {
-            tp_floor.push_back(tp);
-        }
-        if (tp->is_floor_deco()) {
-            tp_deco.push_back(tp);
-        }
-        if (tp->is_wall_deco()) {
-            tp_wall_deco.push_back(tp);
-        }
+        if (tp->is_blood())          { tp_blood.push_back(tp); }
+        if (tp->is_blood_splatter()) { tp_blood_splatter.push_back(tp); }
+        if (tp->is_dirt())           { tp_dirt.push_back(tp); }
+        if (tp->is_door())           { tp_door.push_back(tp); }
+        if (tp->is_entrance())       { tp_entrance.push_back(tp); }
+        if (tp->is_exit())           { tp_exit.push_back(tp); }
+        if (tp->is_floor())          { tp_floor.push_back(tp); }
+        if (tp->is_floor_deco())     { tp_deco.push_back(tp); }
+        if (tp->is_food())           { tp_food.push_back(tp); }
+        if (tp->is_key())            { tp_key.push_back(tp); }
+        if (tp->is_monst())          { tp_monst.push_back(tp); }
+        if (tp->is_ripple())         { tp_ripples.push_back(tp); }
+        if (tp->is_rock())           { tp_rock.push_back(tp); }
+        if (tp->is_secret_door())    { tp_secret_door.push_back(tp); }
+        if (tp->is_torch())          { tp_torch.push_back(tp); }
+        if (tp->is_treasure())       { tp_treasure.push_back(tp); }
+        if (tp->is_wall())           { tp_wall.push_back(tp); }
+        if (tp->is_wall_deco())      { tp_wall_deco.push_back(tp); }
     }
 }
 
@@ -174,6 +142,15 @@ Tpp tp_random_food (void)
         return (nullptr);
     }
     return get(tp_food, myrand() % tp_food.size());
+}
+
+Tpp tp_random_treasure (void)
+{_
+    if (unlikely(!tp_treasure.size())) {
+        ERR("no treasures found");
+        return (nullptr);
+    }
+    return get(tp_treasure, myrand() % tp_treasure.size());
 }
 
 Tpp tp_random_dirt (void)

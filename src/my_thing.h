@@ -780,7 +780,7 @@ public:
     int is_temporary(void) const;
     int is_smoke(void) const;
     int is_rrr2(void) const;
-    int is_rrr20(void) const;
+    int is_treasure(void) const;
     int is_collectable(void) const;
     int is_resurrectable(void) const;
     int is_intelligent(void) const;

@@ -233,8 +233,8 @@ class Tp:
     def set_is_fire_hater(self, value):
         zx.tp_set_is_fire_hater(self, value)
 
-    def set_is_rrr20(self, value):
-        zx.tp_set_is_rrr20(self, value)
+    def set_is_treasure(self, value):
+        zx.tp_set_is_treasure(self, value)
 
     def set_is_collectable(self, value):
         zx.tp_set_is_collectable(self, value)
