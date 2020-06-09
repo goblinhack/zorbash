@@ -818,7 +818,7 @@ bool Dungeon::is_hazard (const int x, const int y)
     return false;
 }
 
-bool Dungeon::is_treasure_at (const int x, const int y)
+bool Dungeon::is_treasure (const int x, const int y)
 {
     if (is_oob(x, y)) {
         ERR("oob %s at (%d,%d)", __FUNCTION__, x, y);

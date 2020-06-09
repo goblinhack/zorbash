@@ -57,6 +57,7 @@ void Thing::destroy (void)
     if (is_fire())          { level->unset_is_fire(old_at.x, old_at.y); }
     if (is_floor())         { level->unset_is_floor(old_at.x, old_at.y); }
     if (is_food())          { level->unset_is_food(old_at.x, old_at.y); }
+    if (is_treasure())      { level->unset_is_treasure(old_at.x, old_at.y); }
     if (is_hazard())        { level->unset_is_hazard(old_at.x, old_at.y); }
     if (is_key())           { level->unset_is_key(old_at.x, old_at.x); }
     if (is_large())         { level->unset_is_large(old_at.x, old_at.x); }

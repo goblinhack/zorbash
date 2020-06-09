@@ -530,9 +530,9 @@ int Thing::is_rrr2(void) const
     return (tp()->is_rrr2());
 }
 
-int Thing::is_rrr20(void) const
+int Thing::is_treasure(void) const
 {_
-    return (tp()->is_rrr20());
+    return (tp()->is_treasure());
 }
 
 int Thing::is_collectable(void) const

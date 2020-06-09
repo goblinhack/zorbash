@@ -592,7 +592,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_temporary)
     TP_SET_DECL(is_smoke)
     TP_SET_DECL(is_rrr2)
-    TP_SET_DECL(is_rrr20)
+    TP_SET_DECL(is_treasure)
     TP_SET_DECL(is_collectable)
     TP_SET_DECL(is_resurrectable)
     TP_SET_DECL(is_intelligent)

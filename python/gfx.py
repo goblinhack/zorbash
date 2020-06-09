@@ -91,6 +91,16 @@ def init_ui_action_bar():
         "ui_action_bar7",
         "ui_action_bar8",
         "ui_action_bar9",
+        "ui_action_bar10",
+        "ui_action_bar11",
+        "ui_action_bar12",
+        "ui_action_bar13",
+        "ui_action_bar14",
+        "ui_action_bar15",
+        "ui_action_bar16",
+        "ui_action_bar17",
+        "ui_action_bar18",
+        "ui_action_bar19",
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_action_bar.tga",
@@ -108,6 +118,16 @@ def init_ui_action_bar_highlight():
         "ui_action_bar_highlight7",
         "ui_action_bar_highlight8",
         "ui_action_bar_highlight9",
+        "ui_action_bar_highlight10",
+        "ui_action_bar_highlight11",
+        "ui_action_bar_highlight12",
+        "ui_action_bar_highlight13",
+        "ui_action_bar_highlight14",
+        "ui_action_bar_highlight15",
+        "ui_action_bar_highlight16",
+        "ui_action_bar_highlight17",
+        "ui_action_bar_highlight18",
+        "ui_action_bar_highlight19",
     ]
     zx.tile_load_arr(
         file="data/gfx/ui_action_bar_highlight.tga",
@@ -130,7 +150,7 @@ def init_16x16():
             "key1.1",        "key1.2",        "key1.3",        "key1.4",
             "key1.5",        "food_frog1",    "gem1.1",        "gem1.2",
             "gem1.3",        "gem1.4",        "gem1.5",        "gem1.6",
-            "gem1.7",        "",              "blood1a",       "blood1.100",
+            "gem1.7",        "gem1.8",        "blood1a",       "blood1.100",
             "blood2.100",    "blood3.100",    "blood4.100",
             ########################################################
             "player1.1",     "player1.2",     "player1.3",     "player1.4",

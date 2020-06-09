@@ -58,6 +58,7 @@ void Level::clear (void)
     _is_fire = {};
     _is_floor = {};
     _is_food = {};
+    _is_treasure = {};
     _is_large = {};
     _is_lava = {};
     _is_monst = {};
@@ -541,6 +542,7 @@ static void level_place_floor_under_objects (Dungeonp d,
 
             if (d->is_monst(x, y + 1) ||
                 d->is_food(x, y + 1) ||
+                d->is_treasure(x, y + 1) ||
                 d->is_key(x, y + 1)) {
                 if (!level->is_floor(x, y + 1)) {
                     thing_new(what, fpoint(x, y + 1));
@@ -548,6 +550,7 @@ static void level_place_floor_under_objects (Dungeonp d,
             }
             if (d->is_monst(x, y - 1) ||
                 d->is_food(x, y - 1) ||
+                d->is_treasure(x, y - 1) ||
                 d->is_key(x, y - 1)) {
                 if (!level->is_floor(x, y - 1)) {
                     thing_new(what, fpoint(x, y - 1));
@@ -555,6 +558,7 @@ static void level_place_floor_under_objects (Dungeonp d,
             }
             if (d->is_monst(x + 1, y) ||
                 d->is_food(x + 1, y) ||
+                d->is_treasure(x + 1, y) ||
                 d->is_key(x + 1, y)) {
                 if (!level->is_floor(x + 1, y)) {
                     thing_new(what, fpoint(x + 1, y));
@@ -562,6 +566,7 @@ static void level_place_floor_under_objects (Dungeonp d,
             }
             if (d->is_monst(x - 1, y) ||
                 d->is_food(x - 1, y) ||
+                d->is_treasure(x - 1, y) ||
                 d->is_key(x - 1, y)) {
                 if (!level->is_floor(x - 1, y)) {
                     thing_new(what, fpoint(x - 1, y));
@@ -588,6 +593,9 @@ static void level_place_normal_placement_rules (Dungeonp d)
             }
             if (d->is_food(x, y)) {
                 tp = tp_random_food();
+            }
+            if (d->is_treasure(x, y)) {
+                tp = tp_random_treasure();
             }
             if (d->is_blood(x, y)) {
                 tp = tp_random_blood();
@@ -810,6 +818,7 @@ static void level_place_random_floor_deco (Dungeonp d)
             }
 
             if (d->is_food(x, y)        ||
+                d->is_treasure(x, y)    ||
                 d->is_door(x, y)        ||
                 d->is_key(x, y)         ||
                 d->is_blood(x, y)       ||
