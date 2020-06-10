@@ -191,15 +191,14 @@ static void game_status_wid_create (void)
     }
     y_at += 2;
 
-#if 0
     {_
         auto w = wid_new_square_button(wid_sidebar, "title box");
-        point tl = make_point(0, y_at);
-        point br = make_point(5, y_at + 5);
+        point tl = make_point(2, y_at);
+        point br = make_point(4, y_at + 2);
 
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_status_mouse_down);
-        wid_set_style(w, WID_STYLE_DARK;
+        wid_set_style(w, WID_STYLE_NONE);
         wid_set_bg_tilename(w, "player1.pose");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
@@ -207,39 +206,39 @@ static void game_status_wid_create (void)
     y_at += 3;
     {_
         auto w = wid_new_square_button(wid_sidebar, "title name");
-        point tl = make_point(0, y_at + 4);
-        point br = make_point(SIDEBAR_WIDTH, y_at + 4);
+        point tl = make_point(0, y_at - 1);
+        point br = make_point(SIDEBAR_WIDTH, y_at + 1);
 
         wid_set_pos(w, tl, br);
-        wid_set_style(w, WID_STYLE_DARK;
-        wid_set_text(w, L"Ser Hacksalot");
+        wid_set_style(w, WID_STYLE_NONE);
+        wid_set_text(w, L"Ser Hackalot");
         wid_set_shape_none(w);
     }
 
     {_
         auto w = wid_new_square_button(wid_sidebar, "gold");
-        point tl = make_point(7, y_at-3);
+        point tl = make_point(5, y_at-3);
         point br = make_point(SIDEBAR_WIDTH, y_at-3);
 
         wid_set_pos(w, tl, br);
-        wid_set_text(w, L"%tile=dollar-icon$%fg=gold$666");
+        auto g = std::to_string(player->get_gold());
+        wid_set_text(w, "%tile=dollar-icon$%fg=gold$" + g);
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }
 
     {_
         auto w = wid_new_square_button(wid_sidebar, "weight");
-        point tl = make_point(7, y_at-2);
+        point tl = make_point(5, y_at-2);
         point br = make_point(SIDEBAR_WIDTH, y_at-2);
 
         wid_set_pos(w, tl, br);
-        wid_set_text(w, L"%tile=CWEIGHT$%fg=green$150%fg=grey$lbs");
+        wid_set_text(w, L"%tile=weight-icon$%fg=green$150");
         wid_set_text_lhs(w, true);
         wid_set_shape_none(w);
     }
 
-    y_at += 1;
-#endif
+    y_at += 2;
 
     ///////////////////////////////////////////////////////////////////////////
     // Health

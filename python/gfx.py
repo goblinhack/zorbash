@@ -136,9 +136,9 @@ def init_ui_action_bar_highlight():
 def init_16x16():
     tiles = [
             "health5-icon",  "health4-icon",  "health3-icon",  "health2-icon",
-            "health1-icon",  "dollar-icon",   "defence-icon",  "attack-icon",
-            "magic-icon",    "karma-icon",    "save",          "load",
-            "bug",           "pause",         "dead",          "",
+            "health1-icon",  "dollar-icon",   "defence-icon",  "weight-icon",
+            "attack-icon",   "magic-icon",    "karma-icon",    "save",
+            "load",          "bug",           "pause",         "dead",
             "",              "",              "",
             ########################################################
             "nothing",       "cursor.1",      "cursor.2",      "cursor.3",
