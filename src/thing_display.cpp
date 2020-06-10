@@ -72,21 +72,26 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
         std::swap(shadow_tl, shadow_tr);
     }
 
-    float height = get_bounce() / 2.0;
+    float bounce = get_bounce();
+    float tileh = game->config.tile_pix_height;
+    float bh = (tileh / TILE_HEIGHT) * (int)(bounce * TILE_HEIGHT);
+
     float fadeup = get_fadeup();
     if (fadeup < 0) {
         return;
     }
-    height += fadeup;
 
-    shadow_tl.x -= height;
-    shadow_tr.x -= height;
-    shadow_bl.x -= height;
-    shadow_br.x -= height;
-    shadow_tl.y -= height;
-    shadow_tr.y -= height;
-    shadow_bl.y -= height;
-    shadow_br.y -= height;
+    bh += fadeup;
+
+    shadow_tl.y += bh;
+    shadow_tr.y += bh;
+    shadow_bl.y += bh;
+    shadow_br.y += bh;
+
+    shadow_tl.x -= bh;
+    shadow_tr.x -= bh;
+    shadow_bl.x -= bh;
+    shadow_br.x -= bh;
 
     color c = BLACK;
     c.a = 150;
@@ -431,9 +436,15 @@ bool Thing::get_coords (point &blit_tl,
     // Boing.
     //
     if (unlikely(is_bouncing)) {
-        float b = get_bounce();
-        blit_tl.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
-        blit_br.y -= (tileh / TILE_HEIGHT) * (int)(b * TILE_HEIGHT);
+        float bounce = get_bounce();
+        float bh = (tileh / TILE_HEIGHT) * (int)(bounce * TILE_HEIGHT);
+        if (reflection) {
+            blit_tl.y += bh;
+            blit_br.y += bh;
+        } else {
+            blit_tl.y -= bh;
+            blit_br.y -= bh;
+        }
     }
 
     //
