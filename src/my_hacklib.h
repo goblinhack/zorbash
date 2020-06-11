@@ -3,6 +3,7 @@
 // Copyright (c) Robert Patrick Rankin, 1991              */
 // NetHack may be freely redistributed.  See license for details. */
 
+#pragma once
 #ifndef _MY_HACKLIB_H_
 #define _MY_HACKLIB_H_
 //

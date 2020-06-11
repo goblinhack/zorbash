@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 #include <memory> // do not remove
 #include "my_charmap.h"
 

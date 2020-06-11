@@ -76,6 +76,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/py_level.o 		\
     $(OBJDIR)/py_room.o 		\
     $(OBJDIR)/py_sdl.o 			\
+    $(OBJDIR)/particle.o 		\
     $(OBJDIR)/py_tex.o 			\
     $(OBJDIR)/py_tile.o 		\
     $(OBJDIR)/py_tp.o 			\
@@ -89,7 +90,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/stb_image.o 		\
     $(OBJDIR)/string.o 			\
     $(OBJDIR)/tex.o 			\
-    $(OBJDIR)/thing.o 			\
+    $(OBJDIR)/thing_actionbar.o 	\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_ai_goals.o 		\
     $(OBJDIR)/thing_ai_wander.o 	\
@@ -99,18 +100,18 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_attach.o 		\
     $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_carry.o 		\
-    $(OBJDIR)/thing_actionbar.o 	\
     $(OBJDIR)/thing_collision.o 	\
-    $(OBJDIR)/thing_distance.o 		\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
     $(OBJDIR)/thing_dead.o 		\
     $(OBJDIR)/thing_display.o 		\
+    $(OBJDIR)/thing_distance.o 		\
     $(OBJDIR)/thing_enemy.o 		\
     $(OBJDIR)/thing_fadeup.o 		\
     $(OBJDIR)/thing_fini.o 		\
     $(OBJDIR)/thing_gc.o 		\
     $(OBJDIR)/thing_health.o 		\
+    $(OBJDIR)/thing_hide.o 		\
     $(OBJDIR)/thing_hit.o 		\
     $(OBJDIR)/thing_hooks.o 		\
     $(OBJDIR)/thing_hunger.o 		\
@@ -120,7 +121,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
-    $(OBJDIR)/thing_resurrect.o 	\
     $(OBJDIR)/thing_likes_and_dislikes.o \
     $(OBJDIR)/thing_log.o 		\
     $(OBJDIR)/thing_lunge.o 		\
@@ -131,6 +131,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_obstacle.o 		\
     $(OBJDIR)/thing_on_fire.o 		\
     $(OBJDIR)/thing_path.o 		\
+    $(OBJDIR)/thing_resurrect.o 	\
     $(OBJDIR)/thing_shove.o 		\
     $(OBJDIR)/thing_spawn.o 		\
     $(OBJDIR)/thing_string.o 		\
@@ -140,6 +141,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_text.o 		\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_tile.o 		\
+    $(OBJDIR)/thing_update.o 		\
     $(OBJDIR)/thing_water.o 		\
     $(OBJDIR)/thing_weapon.o 		\
     $(OBJDIR)/tile.o 			\

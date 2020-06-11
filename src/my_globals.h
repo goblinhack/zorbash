@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 #ifndef _MY_GLOBALS_H_
 #define _MY_GLOBALS_H_
 
@@ -22,18 +23,18 @@ struct Monst_;
 class Tile;
 class Tex;
 
-typedef class Light* Lightp;
-typedef struct Thing_* Thingp;
-typedef class World* Worldp;
-typedef class Level* Levelp;
-typedef struct Monst_* Monstp;
-typedef class Tile* Tilep;
-typedef class Tex* Texp;
-typedef class Tp* Tpp;
+using Lightp = class Light*;
+using Thingp = struct Thing_*;
+using Worldp = class World*;
+using Levelp = class Level*;
+using Monstp = struct Monst_*;
+using Tilep  = class Tile*;
+using Texp   = class Tex*;
+using Tpp    = class Tp*;
 
-typedef std::vector<Tilep> Tilemap;
-typedef std::vector<Tpp> Tpidmap;
-typedef std::unordered_map< std::string, Tpp > Tpnamemap;
+using Tilemap = std::vector<Tilep>;
+using Tpidmap = std::vector<Tpp>;
+using Tpnamemap = std::unordered_map< std::string, Tpp >;
 
 extern class Game *game;
 extern class World *world;

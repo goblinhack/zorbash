@@ -3,7 +3,7 @@
 // See the README file for license info.
 //
 
-
+#pragma once
 #ifndef _MY_MATH_UTIL_H_
 #define _MY_MATH_UTIL_H_
 
@@ -29,8 +29,8 @@ double gaussrand(double mean, double stddev);
 #undef DISTANCE3f
 #define DISTANCE3f(xa,ya,za,xb,yb,zb) \
     sqrt((double)(SQUARED((xb)-(xa))+\
-                 SQUARED((yb)-(ya))+\
-                 SQUARED((zb)-(za))))
+                  SQUARED((yb)-(ya))+\
+                  SQUARED((zb)-(za))))
 
 #define PI      3.14159265358979323846f // pi
 #define RAD_45  0.78539816339744830962f // pi/4

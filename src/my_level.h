@@ -3,12 +3,14 @@
 // See the README file for license info.
 //
 
+#pragma once
 #ifndef _MY_LEVEL_H_
 #define _MY_LEVEL_H_
 
 #include "my_point.h"
 #include "my_time.h"
 #include "my_depth.h"
+#include "my_particle.h"
 
 class Level {
 public:
@@ -119,6 +121,12 @@ public:
         std::vector<Thingp>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ptrs_at {};
 
+    /////////////////////////////////////////////////////////////////////////
+    // not worth saving
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+    /////////////////////////////////////////////////////////////////////////
+
     //
     // Animation loop counters for surface effects
     //
@@ -128,6 +136,17 @@ public:
     float deep_water_step2 {};
     int   lava_step1 {};
     float lava_step2 {};
+
+    //
+    // For things like move of items into inventory
+    //
+    std::vector<Particle> all_particles {};
+
+    /////////////////////////////////////////////////////////////////////////
+    // not worth saving
+    // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+    // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+    /////////////////////////////////////////////////////////////////////////
 
     Level (void)
     {_

@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 //
 // Create a vector of numbers
 //

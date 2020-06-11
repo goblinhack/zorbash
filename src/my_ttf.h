@@ -3,7 +3,7 @@
 // See the README file for license info.
 //
 
-
+#pragma once
 #include "my_font.h"
 
 #ifndef _MY_TTF_H_

@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 #ifndef _MY_WID_TILES_H_
 #define _MY_WID_TILES_H_
 
