@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 //
 // Implements layered cycles that can be used to then create a dungeon
 //

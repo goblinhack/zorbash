@@ -3,6 +3,10 @@
 // See the README file for license info.
 //
 
+#pragma once
+#ifndef _MY_ROOM_H_
+#define _MY_ROOM_H_
+
 #include "my_main.h"
 #include "my_point.h"
 #include "my_depth.h"
@@ -130,3 +134,4 @@ public:
 
 void room_init(void);
 void room_fini(void);
+#endif

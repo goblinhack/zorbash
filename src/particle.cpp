@@ -3,5 +3,5 @@
 // See the README file for license info.
 //
 
-#pragma once
-void game_error(std::string error);
+#include "my_particle.h"
+

@@ -3,9 +3,9 @@
 // See the README file for license info.
 //
 
+#pragma once
 #ifndef _MY_GETPUT_PIXEL_MACROS_H_
 #define _MY_GETPUT_PIXEL_MACROS_H_
-
 
 //
 // Quick row-color bit-shift lookups for certain common color screen size widths:

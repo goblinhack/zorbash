@@ -3,7 +3,7 @@
 // See the README file for license info.
 //
 
-
+#pragma once
 #ifndef _MY_TOKEN_H_
 #define _MY_TOKEN_H_
 

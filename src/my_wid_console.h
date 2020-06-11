@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 #include "my_main.h"
 
 void wid_console_fini(void);

@@ -1,6 +1,9 @@
 //
 // Copyright goblinhack@gmail.com
+// See the README file for license info.
 //
+
+#pragma once
 #ifndef _MY_TRACEBACK_H_
 #define _MY_TRACEBACK_H_
 

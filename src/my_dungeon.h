@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 #include "my_room.h"
 #include "my_dmap.h"
 #include "my_point.h"

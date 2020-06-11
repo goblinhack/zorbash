@@ -1,4 +1,5 @@
 
+#pragma once
 #define UNICODE_0xa0 /* 160 */ ' '
 #define UNICODE_0xa1 /* 161 */ '¡'
 #define UNICODE_0xa2 /* 162 */ '¢'

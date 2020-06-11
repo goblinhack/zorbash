@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 #ifndef _MY_LIGHT_H
 #define _MY_LIGHT_H
 

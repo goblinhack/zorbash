@@ -1,3 +1,8 @@
+//
+// Copyright goblinhack@gmail.com
+// See the README file for license info.
+//
+
 #pragma once
 #include <vector>
 #include "my_bounds_check.h"

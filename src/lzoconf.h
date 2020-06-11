@@ -24,7 +24,7 @@
    <markus@oberhumer.com>
    http://www.oberhumer.com/opensource/lzo/
  */
-
+#pragma once
 
 #ifndef __LZOCONF_H_INCLUDED
 #define __LZOCONF_H_INCLUDED 1

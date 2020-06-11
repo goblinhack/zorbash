@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 #ifndef _MY_LOG_H_
 #define _MY_LOG_H_
 

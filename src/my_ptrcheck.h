@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef _MY__PTRCHECK_H__
 #define _MY__PTRCHECK_H__
 

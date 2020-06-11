@@ -24,6 +24,7 @@
    <markus@oberhumer.com>
    http://www.oberhumer.com/opensource/lzo/
  */
+#pragma once
 
 /*
  * NOTE:

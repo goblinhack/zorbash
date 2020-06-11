@@ -3,7 +3,7 @@
 // See the README file for license info.
 //
 
-
+#pragma once
 #ifndef _MY_CALLSTACK_H_
 #define _MY_CALLSTACK_H_
 

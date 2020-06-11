@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#pragma once
 #include "my_main.h"
 #include "my_point.h"
 #include "my_size.h"

@@ -2,6 +2,8 @@
 // Copyright goblinhack@gmail.com
 // See the README file for license info.
 //
+#pragma once
+
 #ifndef _MY_ALLOC_H
 #define _MY_ALLOC_H
 
