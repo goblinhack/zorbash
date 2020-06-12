@@ -10,12 +10,21 @@
 #include "my_main.h"
 #include "my_point.h"
 
-typedef struct Particle_ {
+typedef class Particle_ {
 public:
-    fpoint start;
-    fpoint stop;
+    Particle_(point start, point stop,
+              uint32_t timestamp_start, uint32_t timestamp_stop,
+              Tilep tile) :
+        start(start),
+        stop(stop),
+        timestamp_start(timestamp_start),
+        timestamp_stop(timestamp_stop),
+        tile(tile) { }
+
+    point start;
+    point stop;
+    uint32_t timestamp_start;
     uint32_t timestamp_stop;
-    uint32_t timestamp_end;
     Tilep tile;
 } Particle;
 

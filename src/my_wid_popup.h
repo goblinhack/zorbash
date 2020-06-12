@@ -28,7 +28,9 @@ public:
 public:
     ~WidPopup();
     WidPopup (point tl, point br, Tilep title_tile=nullptr,
-              std::string background = "ui_popup");
+              std::string background = "ui_popup",
+              bool horiz_scroll=true,
+              bool vert_scoll=true);
 
 public:
     void log(std::string s);

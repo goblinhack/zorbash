@@ -413,8 +413,8 @@ void Game::config_keyboard_select (void)
         auto p = game_config_keyboard_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
-        point tl = make_point(1, y_at);
-        point br = make_point(8, y_at + 2);
+        point tl = make_point(0, y_at);
+        point br = make_point(7, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_keyboard_back);
         wid_set_pos(w, tl, br);

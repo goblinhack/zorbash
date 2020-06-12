@@ -22,6 +22,7 @@ void Level::display (void)
     }
 
     display_map();
+    display_particles();
 }
 
 void Level::display_map_things (int fbo,

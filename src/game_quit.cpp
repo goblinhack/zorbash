@@ -112,7 +112,8 @@ void Game::quit_select (void)
     point br = make_point(m + WID_POPUP_WIDTH_NORMAL / 2, n + 5);
     auto width = br.x - tl.x;
 
-    game_quit_window = new WidPopup(tl, br, nullptr, "ui_popup_short");
+    game_quit_window = new WidPopup(tl, br, nullptr, "ui_popup_short",
+                                    false, false);
     {_
         Widp w = game_quit_window->wid_popup_container;
         wid_set_on_key_up(w, game_quit_key_up);
