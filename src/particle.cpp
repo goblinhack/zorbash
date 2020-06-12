@@ -15,19 +15,15 @@
 void Level::new_particle (point start, point stop, uint32_t dur,
                           const Tilep tile)
 {
-CON("new particle ");
     uint32_t now = time_update_time_milli();
     all_particles.push_back(Particle(start, stop, now, now + dur, tile));
 }
 
 void Level::display_particles (void)
 {
-    return;
-CON("display particle ");
-    if (!all_particles.size()) {
+    if (all_particles.empty()) {
         return;
     }
-CON("display particle size %d",(int)all_particles.size());
 
     //
     // std::remove_if iterates over the whole vector and moves all "selected"
@@ -41,27 +37,24 @@ CON("display particle size %d",(int)all_particles.size());
 
     blit_init();
     auto now = time_update_time_milli();
-    all_particles.erase(
-        std::remove_if(all_particles.begin(), all_particles.end(),
-            [=] (Particle &p) {
-                float t = p.timestamp_stop - p.timestamp_start;
-                float dt = (now - p.timestamp_start) / t;
-CON("start %u stop %u", p.timestamp_start, p.timestamp_stop);
-CON("dt %f", dt);
-                if (dt > 1) {
-                    return true;
-                }
+    auto e = std::remove_if(all_particles.begin(), all_particles.end(),
+        [=] (Particle &p) {
+            float t = p.timestamp_stop - p.timestamp_start;
+            float dt = ((float)(now - p.timestamp_start)) / t;
+            if (dt > 1) {
+                return true;
+            }
 
-                auto d = p.stop - p.start;
-                point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
+            auto d = p.stop - p.start;
+            point at((d.x * dt) + p.start.x, (d.y * dt) + p.start.y);
 
-                point blit_tl(at.x - (TILE_WIDTH / 2), at.y - (TILE_HEIGHT / 2));
-                point blit_br(at.x + (TILE_WIDTH / 2), at.y + (TILE_HEIGHT / 2));
+            point blit_tl(at.x - (TILE_WIDTH / 2), at.y - (TILE_HEIGHT / 2));
+            point blit_br(at.x + (TILE_WIDTH / 2), at.y + (TILE_HEIGHT / 2));
 
-CON("%d %d", at.x, at.y);
-                tile_blit(p.tile, blit_tl, blit_br);
+            tile_blit(p.tile, blit_tl, blit_br);
 
-                return false;
-            }));
+            return false;
+        });
+    all_particles.erase(e, all_particles.end());
     blit_flush();
 }
