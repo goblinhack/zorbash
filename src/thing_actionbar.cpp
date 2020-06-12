@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#include "my_level.h"
 #include "my_thing.h"
 #include "my_game_status.h"
 
@@ -15,6 +16,10 @@ bool Thing::actionbar_id_insert (Thingp what)
     if (!monstp) {
         return false;
     }
+
+    level->new_particle((last_blit_tl + last_blit_br) / 2,
+                        point(0, 0), 1000,
+                        tile_index_to_tile(tile_curr));
 
     auto actionbar_items = player->monstp->actionbar_id.size();
     for (auto i = 0U; i < actionbar_items; i++) {

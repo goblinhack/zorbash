@@ -170,8 +170,8 @@ void Game::config_sound_select (void)
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
-        point tl = make_point(1, y_at);
-        point br = make_point(6, y_at + 2);
+        point tl = make_point(0, y_at);
+        point br = make_point(5, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_sound_back);
         wid_set_pos(w, tl, br);
@@ -200,7 +200,7 @@ void Game::config_sound_select (void)
         wid_set_text(w, "%%fg=white$C%%fg=reset$ancel");
     }
 
-    y_at += 3;
+    y_at += 4;
     {_
         auto p = game_config_sound_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Effects volume");

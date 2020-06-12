@@ -144,7 +144,7 @@ void Game::config_other_select (void)
     auto m = ASCII_WIDTH / 2;
     point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2);
     point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
-    auto width = br.x - tl.x;
+    auto width = br.x - tl.x - 2;
 
     game_config_other_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
     {_
@@ -170,8 +170,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Back");
 
-        point tl = make_point(1, y_at);
-        point br = make_point(6, y_at + 2);
+        point tl = make_point(0, y_at);
+        point br = make_point(5, y_at + 2);
         wid_set_style(w, WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_other_back);
         wid_set_pos(w, tl, br);
@@ -181,8 +181,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Save");
 
-        point tl = make_point(width - 16, y_at);
-        point br = make_point(width - 11, y_at + 2);
+        point tl = make_point(width - 14, y_at);
+        point br = make_point(width - 9, y_at + 2);
         wid_set_style(w, WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_other_save);
         wid_set_pos(w, tl, br);
@@ -192,8 +192,8 @@ void Game::config_other_select (void)
         auto p = game_config_other_window->wid_text_area->wid_text_area;
         auto w = wid_new_square_button(p, "Cancel");
 
-        point tl = make_point(width - 9, y_at);
-        point br = make_point(width - 2, y_at + 2);
+        point tl = make_point(width - 7, y_at);
+        point br = make_point(width - 0, y_at + 2);
         wid_set_style(w, WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_other_cancel);
         wid_set_pos(w, tl, br);

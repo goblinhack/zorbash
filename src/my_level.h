@@ -140,7 +140,7 @@ public:
     //
     // For things like move of items into inventory
     //
-    std::vector<Particle> all_particles {};
+    std::vector<Particle> all_particles;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
@@ -625,6 +625,9 @@ public:
     {
         set_no_check(_is_smoke, x, y, false);
     }
+
+    void new_particle(point start, point end, uint32_t dur, Tilep tile);
+    void display_particles(void);
 
     void init(point3d at, int seed);
     const char *to_cstring(void);

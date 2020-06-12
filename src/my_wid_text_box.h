@@ -31,7 +31,9 @@ public:
     Widp wid_vert_scroll {};
 
     ~WidTextBox();
-    WidTextBox (point tl, point br, Widp);
+    WidTextBox(point tl, point br, Widp,
+               bool horiz_scroll=true,
+               bool vert_scoll=true);
 
 private:
     void log_(std::wstring str);

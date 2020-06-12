@@ -177,7 +177,7 @@ extern int TILES_DOWN;
 #define WID_STYLE_MAX               6
 
 #define WID_POPUP_WIDTH_NORMAL      24
-#define WID_POPUP_WIDTH_WIDE        36
+#define WID_POPUP_WIDTH_WIDE        38
 #define WID_POPUP_WIDTH_WIDEST      48
 
 ////////////////////////////////////////////////////////////////////////////

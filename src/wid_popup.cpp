@@ -22,7 +22,9 @@ WidPopup::~WidPopup()
 }
 
 WidPopup::WidPopup (point tl, point br, Tilep title_tile,
-                    std::string background) :
+                    std::string background,
+                    bool horiz_scroll,
+                    bool vert_scoll) :
     tl(tl), br(br),
     title_tile(title_tile),
     background(background)
@@ -72,7 +74,8 @@ WidPopup::WidPopup (point tl, point br, Tilep title_tile,
     {
         point tl = make_point(0, + tile_size + 2);
         point br = make_point(inner_w, inner_h + tile_size);
-        wid_text_area = new WidTextBox(tl, br, wid_popup_container);
+        wid_text_area = new WidTextBox(tl, br, wid_popup_container,
+                                       horiz_scroll, vert_scoll);
     }
 
     wid_update(wid_popup_container);

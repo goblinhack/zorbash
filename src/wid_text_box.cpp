@@ -23,7 +23,8 @@ WidTextBox::~WidTextBox()
     wid_destroy(&wid_text_area);
 }
 
-WidTextBox::WidTextBox (point tl, point br, Widp parent) :
+WidTextBox::WidTextBox (point tl, point br, Widp parent,
+                        bool horiz_scroll, bool vert_scoll) :
     tl(tl), br(br), wid_parent(parent)
 {_
     int w = br.x - tl.x;
@@ -92,19 +93,29 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent) :
         wid_raise(wid_text_last);
     }
 
-    wid_vert_scroll =
-        wid_new_vert_scroll_bar(wid_text_box_container,
-                                "text box vert scroll", wid_text_area);
-    wid_horiz_scroll =
-        wid_new_horiz_scroll_bar(wid_text_box_container,
-                                 "text box horiz scroll", wid_text_area);
+    if (vert_scoll) {
+        wid_vert_scroll =
+            wid_new_vert_scroll_bar(wid_text_box_container,
+                                    "text box vert scroll", wid_text_area);
+    }
+
+    if (horiz_scroll) {
+        wid_horiz_scroll =
+            wid_new_horiz_scroll_bar(wid_text_box_container,
+                                    "text box horiz scroll", wid_text_area);
+    }
 
     wid_update(wid_text_box_container);
 
-    wid_hide(wid_get_parent(wid_vert_scroll));
-    wid_hide(wid_get_parent(wid_horiz_scroll));
-    wid_hide(wid_vert_scroll);
-    wid_hide(wid_horiz_scroll);
+    if (horiz_scroll) {
+        wid_hide(wid_get_parent(wid_horiz_scroll));
+        wid_hide(wid_horiz_scroll);
+    }
+
+    if (vert_scoll) {
+        wid_hide(wid_get_parent(wid_vert_scroll));
+        wid_hide(wid_vert_scroll);
+    }
 }
 
 //
