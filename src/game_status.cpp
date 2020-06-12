@@ -104,7 +104,8 @@ static void game_status_wid_create (void)
     }
 
     for (auto i = 0U; i < actionbar_items; i++) {
-        auto w = wid_new_square_button(wid_actionbar_items[i], "actionbar icon");
+        std::string name = "actionbar icon" + std::to_string(i);
+        auto w = wid_new_square_button(wid_actionbar_items[i], name);
         point tl = make_point(0, 0);
         point br = make_point(ACTIONBAR_ITEM_WIDTH - 1, ACTIONBAR_ITEM_HEIGHT - 1);
 

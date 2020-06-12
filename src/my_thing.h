@@ -591,6 +591,7 @@ public:
     uint32_t set_weapon_id(uint32_t);
     uint32_t get_weapon_id(void) const;
 
+    void actionbar_particle(Thingp what, int slot);
     bool actionbar_id_remove(Thingp what);
     bool actionbar_id_insert(Thingp what);
     int actionbar_id_slot_count(const int slot);

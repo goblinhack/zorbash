@@ -2697,7 +2697,7 @@ static void wid_find_prev_focus (void)
     }
 }
 
-Widp wid_find (Widp w, std::string name)
+Widp wid_find (Widp w, const std::string& name)
 {_
     if (strcasestr_(w->name.c_str(), name.c_str())) {
         return (w);
@@ -2713,8 +2713,20 @@ Widp wid_find (Widp w, std::string name)
             return (ret);
         }
     }
+    return (nullptr);
+}
 
-    DIE("wid not found");
+Widp wid_find (const std::string& name)
+{_
+    for (auto& iter : wid_top_level) {
+        auto w = iter.second;
+        auto r = wid_find(w, name);
+        if (r) {
+            return (r);
+        }
+    }
+    // LOG("wid [%s] not found", name.c_str());
+    return (nullptr);
 }
 
 void wid_always_hidden (Widp w, uint8_t value)
