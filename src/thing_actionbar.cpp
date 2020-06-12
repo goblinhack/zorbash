@@ -10,7 +10,6 @@
 
 void Thing::actionbar_particle (Thingp what, int slot)
 {_
-con("make %s", what->to_string().c_str());
     std::string name = "actionbar icon" + std::to_string(slot);
     auto w = wid_find(name);
     if (!w) {

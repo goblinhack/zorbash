@@ -13,6 +13,10 @@
 
 void Thing::hide (void)
 {_
+    if (is_hidden) {
+        return;
+    }
+
     is_hidden = true;
 
     //
@@ -22,10 +26,17 @@ void Thing::hide (void)
     if (weapon_carry_anim) {
         weapon_carry_anim->hide();
     }
+
+    log("is hidden");
 }
 
 void Thing::visible (void)
 {_
+    if (!is_hidden) {
+        return;
+    }
+
+    log("is visible");
     is_hidden = false;
 
     //
