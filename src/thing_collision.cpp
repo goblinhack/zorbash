@@ -480,6 +480,7 @@ thing_add_ai_possible_hit (Thingp target,
                            int hitter_killed_on_hitting,
                            int hitter_killed_on_hit_or_miss)
 {
+target->log("add poss");
     thing_colls.push_back(
       ThingColl(target,
                 reason,
@@ -524,6 +525,7 @@ static void thing_possible_init (void)
 bool Thing::collision_find_best_target (bool *target_attacked,
                                         bool *target_overlaps)
 {_
+    bool ret = false;
     auto me = this;
     ThingColl *best = nullptr;
 
@@ -609,7 +611,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
         if (is_player() && will_eat(it)) {
             carry(it);
             log("collect %s", it->to_string().c_str());
-            return (true);
+            ret = true;
         } else if (it->ai_hit_if_possible(me, damage)) {
             if (is_loggable_for_unimportant_stuff()) {
                 log("collision: will hit %s for %d damage",
@@ -636,7 +638,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
             }
             me->dead("suicide");
             *target_attacked = true;
-            return (true);
+            ret = true;
         } else {
             if (is_loggable_for_unimportant_stuff()) {
                 log("collision: cannot hit %s", it->to_string().c_str());
@@ -645,7 +647,7 @@ bool Thing::collision_find_best_target (bool *target_attacked,
     }
 
     thing_possible_init();
-    return (false);
+    return (ret);
 }
 
 bool things_overlap (const Thingp A, const Thingp B)
