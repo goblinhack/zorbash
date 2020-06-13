@@ -90,6 +90,9 @@ private:
     Dice _stats_attack_dice {};
     std::string _stats_attack_dice_str;
 
+    Dice _cash_dice {};
+    std::string _cash_dice_str;
+
     Dice _resurrect_dice {};
     std::string _resurrect_dice_str;
 
@@ -286,6 +289,11 @@ public:
     const int stats_attack(void) const;
     const std::string& stats_attack_dice_str(void) const;
     void set_stats_attack_dice(const std::string &);
+
+    const Dice& cash_dice(void) const;
+    const int cash(void) const;
+    const std::string& cash_dice_str(void) const;
+    void set_cash_dice(const std::string &);
 
     const Dice& resurrect_dice(void) const;
     const int resurrect(void) const;

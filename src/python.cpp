@@ -644,6 +644,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(stats18)
     TP_SET_DECL(stats19)
     TP_SET_DECL(stats_attack_dice)
+    TP_SET_DECL(cash_dice)
     TP_SET_DECL(resurrect_dice)
     TP_SET_DECL(lifespan_dice)
     TP_SET_DECL(tick_rate_tenths)

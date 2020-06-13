@@ -359,6 +359,9 @@ class Tp:
     def set_stats_attack_dice(self, value):
         zx.tp_set_stats_attack_dice(self, value)
 
+    def set_cash_dice(self, value):
+        zx.tp_set_cash_dice(self, value)
+
     def set_resurrect_dice(self, value):
         zx.tp_set_resurrect_dice(self, value)
 

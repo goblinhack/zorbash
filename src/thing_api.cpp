@@ -26,6 +26,10 @@ const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->stats_att
 const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->stats_attack_dice_str()); }
 int Thing::get_stats_attack (void) const {_ return (tp()->stats_attack_dice().roll()); }
 
+const Dice& Thing::get_cash_dice (void) const {_ return (tp()->cash_dice()); }
+const std::string& Thing::get_cash_dice_str (void) const {_ return (tp()->cash_dice_str()); }
+int Thing::get_cash (void) const {_ return (tp()->cash_dice().roll()); }
+
 const Dice& Thing::get_lifespan_dice (void) const {_ return (tp()->lifespan_dice()); }
 const std::string& Thing::get_lifespan_dice_str (void) const {_ return (tp()->lifespan_dice_str()); }
 int Thing::get_lifespan_initial (void) const {_ return (tp()->lifespan_dice().roll()); }
