@@ -153,14 +153,12 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
     // Cruel to let things keep on hitting you when you're dead
     //
     if (is_dead) {
+        // log("cannot hit, is dead");
         return (false);
     }
 
     if (is_resurrecting) {
-        return (false);
-    }
-
-    if (!is_active()) {
+        // log("cannot hit, is resurrecting");
         return (false);
     }
 
