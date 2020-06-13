@@ -615,6 +615,10 @@ public:
     int get_stats_attack(void) const;
     const Dice& get_stats_attack_dice(void) const;
 
+    const std::string& get_cash_dice_str(void) const;
+    int get_cash(void) const;
+    const Dice& get_cash_dice(void) const;
+
     const std::string& get_resurrect_dice_str(void) const;
     int get_resurrect(void) const;
     bool get_resurrect_success(void) const;

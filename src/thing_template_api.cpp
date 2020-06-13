@@ -34,6 +34,11 @@ const int Tp::stats_attack(void) const { return _stats_attack_dice.roll(); }
 const std::string& Tp::stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
 void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
 
+const Dice& Tp::cash_dice(void) const { return _cash_dice; }
+const int Tp::cash(void) const { return _cash_dice.roll(); }
+const std::string& Tp::cash_dice_str(void) const { return _cash_dice_str; }
+void Tp::set_cash_dice(const std::string &v) { _cash_dice = v; _cash_dice_str = v; }
+
 const Dice& Tp::resurrect_dice(void) const { return _resurrect_dice; }
 const int Tp::resurrect(void) const { return _resurrect_dice.roll(); }
 const std::string& Tp::resurrect_dice_str(void) const { return _resurrect_dice_str; }
