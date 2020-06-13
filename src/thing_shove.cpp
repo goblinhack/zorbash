@@ -19,6 +19,13 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         return (THING_SHOVE_NEVER_TRIED);
     }
 
+    //
+    // Sanity check
+    //
+    if ((fabs(delta.x) > 1) || (fabs(delta.y) > 1)) {
+        return (THING_SHOVE_NEVER_TRIED);
+    }
+
     if (!is_player()) {
         if ((int)random_range(0, 1000) > tp()->is_attack_shove_chance_d1000()) {
             return (THING_SHOVE_NEVER_TRIED);
@@ -85,7 +92,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
         return (THING_SHOVE_TRIED_AND_PASSED);
     }
 
-    it->move_to_immediately_delta(shove_delta);
+    it->move_to_immediately(shove_pos);
     if (it->is_monst()) {
         it->msg(string_sprintf("%%fg=red$!"));
     }
