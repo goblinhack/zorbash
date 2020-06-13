@@ -59,6 +59,7 @@ void Level::clear (void)
     _is_floor = {};
     _is_food = {};
     _is_treasure = {};
+    _is_gold = {};
     _is_large = {};
     _is_lava = {};
     _is_monst = {};
@@ -74,6 +75,7 @@ void Level::clear (void)
 
 void Level::init (point3d at, int seed_in)
 {_
+    is_starting = true;
     clear();
 
     world_at = at;
@@ -260,7 +262,9 @@ placed_player:
     log("-");
 
     update_map();
+
     game->started = true;
+    is_starting = false;
 }
 
 static void level_place_walls (Dungeonp d,
@@ -582,36 +586,17 @@ static void level_place_normal_placement_rules (Dungeonp d)
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             Tpp tp {};
 
-            if (d->is_entrance(x, y)) {
-                tp = tp_random_entrance();
-            }
-            if (d->is_exit(x, y)) {
-                tp = tp_random_exit();
-            }
-            if (d->is_monst(x, y)) {
-                tp = tp_random_monst();
-            }
-            if (d->is_food(x, y)) {
-                tp = tp_random_food();
-            }
-            if (d->is_treasure(x, y)) {
-                tp = tp_random_treasure();
-            }
-            if (d->is_blood(x, y)) {
-                tp = tp_random_blood();
-            }
-            if (d->is_key(x, y)) {
-                tp = tp_random_key();
-            }
-            if (d->is_torch(x, y)) {
-                tp = tp_random_torch();
-            }
-            if (d->is_door(x, y)) {
-                tp = tp_random_door();
-            }
-            if (d->is_secret_door(x, y)) {
-                tp = tp_random_secret_door();
-            }
+            if (d->is_blood(x, y))       { tp = tp_random_blood(); }
+            if (d->is_door(x, y))        { tp = tp_random_door(); }
+            if (d->is_entrance(x, y))    { tp = tp_random_entrance(); }
+            if (d->is_exit(x, y))        { tp = tp_random_exit(); }
+            if (d->is_food(x, y))        { tp = tp_random_food(); }
+            if (d->is_gold(x, y))        { tp = tp_random_gold(); }
+            if (d->is_key(x, y))         { tp = tp_random_key(); }
+            if (d->is_monst(x, y))       { tp = tp_random_monst(); }
+            if (d->is_secret_door(x, y)) { tp = tp_random_secret_door(); }
+            if (d->is_torch(x, y))       { tp = tp_random_torch(); }
+            if (d->is_treasure(x, y))    { tp = tp_random_treasure(); }
             if (tp) {
                 (void) thing_new(tp->name(), fpoint(x, y));
             }

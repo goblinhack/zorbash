@@ -23,6 +23,7 @@ static Tpidmap tp_entrance;
 static Tpidmap tp_exit;
 static Tpidmap tp_floor;
 static Tpidmap tp_food;
+static Tpidmap tp_gold;
 static Tpidmap tp_key;
 static Tpidmap tp_monst;
 static Tpidmap tp_ripples;
@@ -121,6 +122,7 @@ void tp_init_after_loading (void)
         if (tp->is_secret_door())    { tp_secret_door.push_back(tp); }
         if (tp->is_torch())          { tp_torch.push_back(tp); }
         if (tp->is_treasure())       { tp_treasure.push_back(tp); }
+        if (tp->is_gold())           { tp_gold.push_back(tp); }
         if (tp->is_wall())           { tp_wall.push_back(tp); }
         if (tp->is_wall_deco())      { tp_wall_deco.push_back(tp); }
     }
@@ -142,6 +144,15 @@ Tpp tp_random_food (void)
         return (nullptr);
     }
     return get(tp_food, myrand() % tp_food.size());
+}
+
+Tpp tp_random_gold (void)
+{_
+    if (unlikely(!tp_gold.size())) {
+        ERR("no golds found");
+        return (nullptr);
+    }
+    return get(tp_gold, myrand() % tp_gold.size());
 }
 
 Tpp tp_random_treasure (void)

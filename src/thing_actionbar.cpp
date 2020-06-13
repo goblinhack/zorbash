@@ -10,6 +10,13 @@
 
 void Thing::actionbar_particle (Thingp what, int slot)
 {_
+    //
+    // No animations at the start
+    //
+    if (level->is_starting) {
+        return;
+    }
+
     std::string name = "actionbar icon" + std::to_string(slot);
     auto w = wid_find(name);
     if (!w) {
