@@ -17,20 +17,46 @@ void Thing::actionbar_particle (Thingp what, int slot)
         return;
     }
 
-    std::string name = "actionbar icon" + std::to_string(slot);
-    auto w = wid_find(name);
-    if (!w) {
-        con("could not find wid %s", name.c_str());
-        return;
+    if (!what->is_gold()) {
+        std::string name = "actionbar icon" + std::to_string(slot);
+        auto w = wid_find(name);
+        if (!w) {
+            con("could not find wid %s", name.c_str());
+            return;
+        }
+
+        auto p = (w->abs_tl + w->abs_br) / 2;
+        p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
+        p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
+
+        level->new_particle((last_blit_tl + last_blit_br) / 2, p,
+                            size(TILE_WIDTH, TILE_HEIGHT), 500,
+                            tile_index_to_tile(what->tile_curr));
     }
 
-    auto p = (w->abs_tl + w->abs_br) / 2;
+    {
+        std::string name = "gold";
+        auto w = wid_find(name);
+        if (!w) {
+            con("could not find wid %s", name.c_str());
+            return;
+        }
 
-    p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
-    p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
+        auto p = (w->abs_tl + w->abs_br) / 2;
+        p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
+        p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
 
-    level->new_particle((last_blit_tl + last_blit_br) / 2, p, 200,
-                        tile_index_to_tile(what->tile_curr));
+        int cnt = random_range(1, 10);
+        for (int c = 0; c < cnt; c++) {
+            point s = (last_blit_tl + last_blit_br) / 2;
+            point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
+                    random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
+            std::string name = "gold1." + std::to_string(random_range(1, 8));
+            level->new_particle(s + j, p,
+                                size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
+                                tile_find_mand(name));
+        }
+    }
 }
 
 bool Thing::actionbar_id_insert (Thingp what)

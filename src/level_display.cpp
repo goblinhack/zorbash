@@ -23,6 +23,10 @@ void Level::display (void)
 
     display_map();
     display_particles();
+
+    if (!minimap_valid) {
+        update_minimap();
+    }
 }
 
 void Level::display_map_things (int fbo,
@@ -257,10 +261,6 @@ void Level::display_map (void)
     cursor_find_on_visible_things(minx, miny, maxx, maxy);
 
     blit_fbo_unbind();
-
-    if (!minimap_valid) {
-        update_minimap();
-    }
 }
 
 void Level::display_anim (void)

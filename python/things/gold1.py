@@ -5,6 +5,7 @@ import tp
 def gold_init(name, text_name):
     x = tp.Tp(name, text_name)
 
+    #x.set_cash_dice("1d6")
     x.set_collision_circle(True)
     x.set_collision_hit_priority(1)
     x.set_collision_radius(0.40)
