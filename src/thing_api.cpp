@@ -495,9 +495,9 @@ int Thing::is_rrr13(void) const
     return (tp()->is_rrr13());
 }
 
-int Thing::is_rrr14(void) const
+int Thing::is_gold(void) const
 {_
-    return (tp()->is_rrr14());
+    return (tp()->is_gold());
 }
 
 int Thing::is_loggable_for_important_stuff(void) const

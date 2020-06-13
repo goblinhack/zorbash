@@ -721,3 +721,35 @@ void Level::unset_is_treasure (const int x, const int y)
     }
     set(_is_treasure, x, y, false);
 }
+
+bool Level::is_gold (const point &p)
+{_
+    if (unlikely(is_oob(p.x, p.y))) {
+        return (false);
+    }
+    return (get(_is_gold, p.x, p.y));
+}
+
+bool Level::is_gold (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return (false);
+    }
+    return (get(_is_gold, x, y));
+}
+
+void Level::set_is_gold (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_gold, x, y, true);
+}
+
+void Level::unset_is_gold (const int x, const int y)
+{_
+    if (unlikely(is_oob(x, y))) {
+        return;
+    }
+    set(_is_gold, x, y, false);
+}

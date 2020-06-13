@@ -101,6 +101,11 @@ void Charmap::init_charmaps (void)
     c->c                    = char_index;
     c->is_key               = true;
 
+    char_index              = Charmap::GOLD;
+    c = &all_charmaps[char_index];
+    c->c                    = char_index;
+    c->is_gold              = true;
+
     char_index              = Charmap::LAVA;
     c = &all_charmaps[char_index];
     c->c                    = char_index;

@@ -141,7 +141,7 @@ int Tp::is_rrr10(void) const { return _is_rrr10; }
 int Tp::is_rrr11(void) const { return _is_rrr11; }
 int Tp::is_rrr12(void) const { return _is_rrr12; }
 int Tp::is_rrr13(void) const { return _is_rrr13; }
-int Tp::is_rrr14(void) const { return _is_rrr14; }
+int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_loggable_for_important_stuff(void) const { return _is_loggable_for_important_stuff; }
 int Tp::tick_catches_up_on_attack(void) const { return _tick_catches_up_on_attack; }
 int Tp::is_temporary(void) const { return _is_temporary; }
@@ -282,7 +282,7 @@ void Tp::set_is_rrr10(int v) { _is_rrr10 = v; }
 void Tp::set_is_rrr11(int v) { _is_rrr11 = v; }
 void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
 void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
-void Tp::set_is_rrr14(int v) { _is_rrr14 = v; }
+void Tp::set_is_gold(int v) { _is_gold = v; }
 void Tp::set_is_loggable_for_important_stuff(int v) { _is_loggable_for_important_stuff = v; }
 void Tp::set_tick_catches_up_on_attack(int v) { _tick_catches_up_on_attack = v; }
 void Tp::set_is_temporary(int v) { _is_temporary = v; }

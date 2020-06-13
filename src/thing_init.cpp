@@ -340,6 +340,7 @@ void Thing::init (const std::string& name, const fpoint born, const fpoint jitte
     if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
     if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
     if (tpp->is_treasure())      { level->set_is_treasure(new_at.x, new_at.y); }
+    if (tpp->is_gold())          { level->set_is_gold(new_at.x, new_at.y); }
     if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
     if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
     if (tpp->is_large())         { level->set_is_large(new_at.x, new_at.y); }
@@ -404,7 +405,7 @@ void Thing::init (const std::string& name, const fpoint born, const fpoint jitte
     update_light();
 
     if (gfx_bounce_always()) {
-        bounce(0.2, 1.0, 500, 99999);
+        bounce(0.2, 1.0, 500 + random_range(0, 50), 99999);
     }
 
     //
@@ -475,6 +476,7 @@ void Thing::reinit (void)
     if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
     if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
     if (tpp->is_treasure())      { level->set_is_treasure(new_at.x, new_at.y); }
+    if (tpp->is_gold())          { level->set_is_gold(new_at.x, new_at.y); }
     if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
     if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
     if (tpp->is_large())         { level->set_is_large(new_at.x, new_at.y); }

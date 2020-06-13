@@ -3,6 +3,7 @@
 // See the README file for license info.
 //
 
+#include "my_level.h"
 #include "my_thing.h"
 
 void Thing::carry (Thingp what)

@@ -29,6 +29,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_large {};
@@ -57,27 +58,23 @@ public:
     //
     // All randomness jumps off of this as the root
     //
-    int                        seed {};
-
-    //
-    // Something moved on the map; update caches
-    //
-    bool                       map_changed {};
-
-    bool                       cursor_needs_update {};
     bool                       cursor_found {};
+    bool                       cursor_needs_update {};
+    bool                       heatmap_valid {};
+    bool                       is_starting {}; // Loading level
+    bool                       map_changed {}; // Something moved on the map
+    bool                       map_follow_player {};
+    bool                       minimap_valid {};
     fpoint                     cursor_at;
     fpoint                     cursor_at_old;
-    bool                       map_follow_player {};
     fpoint                     map_at;        // map tile location
     fpoint                     map_wanted_at; // map scroll desired at
-    point                      pixel_map_at;  // map pixel location
-    point                      map_tl;        // visible map tl
-    point                      map_br;        // visible map br
-    bool                       minimap_valid {};
-    bool                       heatmap_valid {};
     int                        mouse {-1};    // ticks for every move
     int                        mouse_old {-1};
+    int                        seed {};
+    point                      map_br;        // visible map br
+    point                      map_tl;        // visible map tl
+    point                      pixel_map_at;  // map pixel location
 
     Thingp                     player = {};
     Thingp                     cursor = {};
@@ -335,6 +332,11 @@ public:
     bool is_treasure(const point &p);
     void set_is_treasure(const int x, const int y);
     void unset_is_treasure(const int x, const int y);
+
+    bool is_gold(const int x, const int y);
+    bool is_gold(const point &p);
+    void set_is_gold(const int x, const int y);
+    void unset_is_gold(const int x, const int y);
 
     bool is_deep_water(const int x, const int y);
     bool is_deep_water(const point &p);

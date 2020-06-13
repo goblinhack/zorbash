@@ -215,8 +215,8 @@ class Tp:
     def set_is_rrr13(self, value):
         zx.tp_set_is_rrr13(self, value)
 
-    def set_is_rrr14(self, value):
-        zx.tp_set_is_rrr14(self, value)
+    def set_is_gold(self, value):
+        zx.tp_set_is_gold(self, value)
 
     def set_is_loggable_for_important_stuff(self, value):
         zx.tp_set_is_loggable_for_important_stuff(self, value)

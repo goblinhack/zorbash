@@ -252,6 +252,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* _is_floor */            in >> bits(my.t->_is_floor);
     /* _is_food */             in >> bits(my.t->_is_food);
     /* _is_treasure */         in >> bits(my.t->_is_treasure);
+    /* _is_gold */             in >> bits(my.t->_is_gold);
     /* _is_hazard */           in >> bits(my.t->_is_hazard);
     /* _is_key */              in >> bits(my.t->_is_key);
     /* _is_large */            in >> bits(my.t->_is_large);

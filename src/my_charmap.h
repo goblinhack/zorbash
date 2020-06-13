@@ -12,60 +12,62 @@ class Charmap {
 public:
     enum {
         NONE            = '\0',
-        SPACE           = ' ',
+        BLOOD           = 'b',
+        BRAZIER         = 'B',
+        CHASM           = 'C',
         CORRIDOR        = '#',
-        SECRET_DOOR     = 'd',
+        DEBUG           = '@',
+        DECO            = '|',
+        DEEP_WATER      = 'W',
+        DIRT            = ',',
         DOOR            = 'D',
-        DOOR_UP         = '^',
         DOOR_DOWN       = 'v',
         DOOR_LEFT       = '<',
         DOOR_RIGHT      = '>',
-        WALL            = 'x',
-        DECO            = '|',
-        FLOOR           = '.',
-        DIRT            = ',',
-        SECRET_CORRIDOR = '?',
+        DOOR_UP         = '^',
         ENTRANCE        = 'S',
         EXIT            = 'E',
+        FLOOR           = '.',
+        FOOD            = 'f',
+        GOLD            = 'g',
         KEY             = 'k',
         LAVA            = 'L',
-        CHASM           = 'C',
-        WATER           = 'w',
-        DEEP_WATER      = 'W',
-        ROCK            = 'r',
-        TREASURE        = '$',
-        TRAP            = 'i',
         MONST           = 'm',
-        FOOD            = 'f',
-        BLOOD           = 'b',
-        BRAZIER         = 'B',
-        DEBUG           = '@',
+        ROCK            = 'r',
+        SECRET_CORRIDOR = '?',
+        SECRET_DOOR     = 'd',
+        SPACE           = ' ',
+        TRAP            = 'i',
+        TREASURE        = '$',
+        WALL            = 'x',
+        WATER           = 'w',
     };
 
     char                      c;
-    bool                      is_wall              {false};
-    bool                      is_rock              {false};
-    bool                      is_floor             {false};
+    bool                      is_blood             {false};
+    bool                      is_chasm             {false};
     bool                      is_corridor          {false};
+    bool                      is_deep_water        {false};
     bool                      is_dirt              {false};
-    bool                      is_secret_corridor   {false};
     bool                      is_door              {false};
-    bool                      is_secret_door       {false};
     bool                      is_entrance          {false};
-    bool                      is_floor_deco        {false};
-    bool                      is_wall_deco         {false};
     bool                      is_exit              {false};
+    bool                      is_floor             {false};
+    bool                      is_floor_deco        {false};
+    bool                      is_food              {false};
+    bool                      is_gold              {false};
     bool                      is_key               {false};
     bool                      is_lava              {false};
-    bool                      is_chasm             {false};
-    bool                      is_water             {false};
-    bool                      is_deep_water        {false};
-    bool                      is_treasure          {false};
     bool                      is_monst             {false};
-    bool                      is_food              {false};
-    bool                      is_blood             {false};
-    bool                      is_torch           {false};
+    bool                      is_rock              {false};
+    bool                      is_secret_corridor   {false};
+    bool                      is_secret_door       {false};
+    bool                      is_torch             {false};
     bool                      is_trap              {false};
+    bool                      is_treasure          {false};
+    bool                      is_wall              {false};
+    bool                      is_wall_deco         {false};
+    bool                      is_water             {false};
 
     static std::vector<Charmap> all_charmaps;
     static void init_charmaps(void);

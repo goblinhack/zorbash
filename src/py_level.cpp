@@ -67,6 +67,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                            m.is_floor_deco  ||
                            m.is_food        ||
                            m.is_treasure    ||
+                           m.is_gold        ||
                            m.is_key         ||
                            m.is_lava        ||
                            m.is_monst       ||
@@ -119,6 +120,7 @@ PyObject *map_load_level_ (PyObject *obj, PyObject *args, PyObject *keywds)
                     m.is_monst ||
                     m.is_trap ||
                     m.is_treasure ||
+                    m.is_gold ||
                     m.is_wall_deco) {
                     obj_strings += c;
                 } else {
