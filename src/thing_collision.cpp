@@ -760,7 +760,7 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
         if (circle_circle_collision(A, // circle
                                     A_at,
                                     B, // box
-                                    B->get_interpolated_mid_at(),
+                                    B->mid_at,
                                     nullptr)) {
             return (true);
         }
@@ -932,7 +932,8 @@ bool Thing::collision_check_only (Thingp it, fpoint A_at, int x, int y)
     }
 
     if (is_loggable_for_unimportant_stuff()) {
-        log("collision check with %s", it->to_string().c_str());
+        log("collision check @%f,%f with %s", 
+            A_at.x, A_at.y, it->to_string().c_str());
     }
 _
     //
