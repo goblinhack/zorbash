@@ -26,9 +26,9 @@ const Dice& Thing::get_stats_attack_dice (void) const {_ return (tp()->stats_att
 const std::string& Thing::get_stats_attack_dice_str (void) const {_ return (tp()->stats_attack_dice_str()); }
 int Thing::get_stats_attack (void) const {_ return (tp()->stats_attack_dice().roll()); }
 
-const Dice& Thing::get_cash_dice (void) const {_ return (tp()->cash_dice()); }
-const std::string& Thing::get_cash_dice_str (void) const {_ return (tp()->cash_dice_str()); }
-int Thing::get_cash (void) const {_ return (tp()->cash_dice().roll()); }
+const Dice& Thing::get_gold_value_dice (void) const {_ return (tp()->gold_value_dice()); }
+const std::string& Thing::get_gold_value_dice_str (void) const {_ return (tp()->gold_value_dice_str()); }
+int Thing::get_gold_value (void) const {_ return (tp()->gold_value_dice().roll()); }
 
 const Dice& Thing::get_lifespan_dice (void) const {_ return (tp()->lifespan_dice()); }
 const std::string& Thing::get_lifespan_dice_str (void) const {_ return (tp()->lifespan_dice_str()); }
@@ -494,9 +494,9 @@ int Thing::is_rrr12(void) const
     return (tp()->is_rrr12());
 }
 
-int Thing::is_rrr13(void) const
+int Thing::is_collected_as_gold(void) const
 {_
-    return (tp()->is_rrr13());
+    return (tp()->is_collected_as_gold());
 }
 
 int Thing::is_gold(void) const

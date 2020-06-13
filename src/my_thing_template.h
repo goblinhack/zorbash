@@ -90,8 +90,8 @@ private:
     Dice _stats_attack_dice {};
     std::string _stats_attack_dice_str;
 
-    Dice _cash_dice {};
-    std::string _cash_dice_str;
+    Dice _gold_value_dice {};
+    std::string _gold_value_dice_str;
 
     Dice _resurrect_dice {};
     std::string _resurrect_dice_str;
@@ -184,7 +184,7 @@ private:
     int _is_rrr10 {};
     int _is_rrr11 {};
     int _is_rrr12 {};
-    int _is_rrr13 {};
+    int _is_collected_as_gold {};
     int _is_gold {};
     int _is_rrr2 {};
     int _is_rrr3 {};
@@ -290,10 +290,10 @@ public:
     const std::string& stats_attack_dice_str(void) const;
     void set_stats_attack_dice(const std::string &);
 
-    const Dice& cash_dice(void) const;
+    const Dice& gold_value_dice(void) const;
     const int cash(void) const;
-    const std::string& cash_dice_str(void) const;
-    void set_cash_dice(const std::string &);
+    const std::string& gold_value_dice_str(void) const;
+    void set_gold_value_dice(const std::string &);
 
     const Dice& resurrect_dice(void) const;
     const int resurrect(void) const;
@@ -429,7 +429,7 @@ public:
     int is_rrr10(void) const;
     int is_rrr11(void) const;
     int is_rrr12(void) const;
-    int is_rrr13(void) const;
+    int is_collected_as_gold(void) const;
     int is_gold(void) const;
     int is_loggable_for_important_stuff(void) const;
     int tick_catches_up_on_attack(void) const;
@@ -575,7 +575,7 @@ public:
     void set_is_rrr10(int);
     void set_is_rrr11(int);
     void set_is_rrr12(int);
-    void set_is_rrr13(int);
+    void set_is_collected_as_gold(int);
     void set_is_gold(int);
     void set_is_rrr2(int);
     void set_is_rrr3(int);

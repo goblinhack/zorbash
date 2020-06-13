@@ -17,24 +17,7 @@ void Thing::actionbar_particle (Thingp what, int slot)
         return;
     }
 
-    if (!what->is_gold()) {
-        std::string name = "actionbar icon" + std::to_string(slot);
-        auto w = wid_find(name);
-        if (!w) {
-            con("could not find wid %s", name.c_str());
-            return;
-        }
-
-        auto p = (w->abs_tl + w->abs_br) / 2;
-        p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
-        p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
-
-        level->new_particle((last_blit_tl + last_blit_br) / 2, p,
-                            size(TILE_WIDTH, TILE_HEIGHT), 500,
-                            tile_index_to_tile(what->tile_curr));
-    }
-
-    {
+    if (what->is_collected_as_gold()) {
         std::string name = "gold";
         auto w = wid_find(name);
         if (!w) {
@@ -56,6 +39,21 @@ void Thing::actionbar_particle (Thingp what, int slot)
                                 size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
                                 tile_find_mand(name));
         }
+    } else {
+        std::string name = "actionbar icon" + std::to_string(slot);
+        auto w = wid_find(name);
+        if (!w) {
+            con("could not find wid %s", name.c_str());
+            return;
+        }
+
+        auto p = (w->abs_tl + w->abs_br) / 2;
+        p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
+        p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
+
+        level->new_particle((last_blit_tl + last_blit_br) / 2, p,
+                            size(TILE_WIDTH, TILE_HEIGHT), 500,
+                            tile_index_to_tile(what->tile_curr));
     }
 }
 
@@ -66,6 +64,14 @@ bool Thing::actionbar_id_insert (Thingp what)
     }
 
     if (!monstp) {
+        return false;
+    }
+
+    if (what->is_collected_as_gold()) {
+        game_status_wid_init();
+        incr_gold(what->get_gold_value());
+        actionbar_particle(what, monstp->actionbar_id.size() - 1);
+        what->dead("collected");
         return false;
     }
 

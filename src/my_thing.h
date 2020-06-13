@@ -615,9 +615,9 @@ public:
     int get_stats_attack(void) const;
     const Dice& get_stats_attack_dice(void) const;
 
-    const std::string& get_cash_dice_str(void) const;
-    int get_cash(void) const;
-    const Dice& get_cash_dice(void) const;
+    const std::string& get_gold_value_dice_str(void) const;
+    int get_gold_value(void) const;
+    const Dice& get_gold_value_dice(void) const;
 
     const std::string& get_resurrect_dice_str(void) const;
     int get_resurrect(void) const;
@@ -785,7 +785,7 @@ public:
     int is_rrr10(void) const;
     int is_rrr11(void) const;
     int is_rrr12(void) const;
-    int is_rrr13(void) const;
+    int is_collected_as_gold(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;

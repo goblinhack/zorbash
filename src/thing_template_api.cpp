@@ -34,10 +34,10 @@ const int Tp::stats_attack(void) const { return _stats_attack_dice.roll(); }
 const std::string& Tp::stats_attack_dice_str(void) const { return _stats_attack_dice_str; }
 void Tp::set_stats_attack_dice(const std::string &v) { _stats_attack_dice = v; _stats_attack_dice_str = v; }
 
-const Dice& Tp::cash_dice(void) const { return _cash_dice; }
-const int Tp::cash(void) const { return _cash_dice.roll(); }
-const std::string& Tp::cash_dice_str(void) const { return _cash_dice_str; }
-void Tp::set_cash_dice(const std::string &v) { _cash_dice = v; _cash_dice_str = v; }
+const Dice& Tp::gold_value_dice(void) const { return _gold_value_dice; }
+const int Tp::cash(void) const { return _gold_value_dice.roll(); }
+const std::string& Tp::gold_value_dice_str(void) const { return _gold_value_dice_str; }
+void Tp::set_gold_value_dice(const std::string &v) { _gold_value_dice = v; _gold_value_dice_str = v; }
 
 const Dice& Tp::resurrect_dice(void) const { return _resurrect_dice; }
 const int Tp::resurrect(void) const { return _resurrect_dice.roll(); }
@@ -145,7 +145,7 @@ int Tp::is_rrr1(void) const { return _is_rrr1; }
 int Tp::is_rrr10(void) const { return _is_rrr10; }
 int Tp::is_rrr11(void) const { return _is_rrr11; }
 int Tp::is_rrr12(void) const { return _is_rrr12; }
-int Tp::is_rrr13(void) const { return _is_rrr13; }
+int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_loggable_for_important_stuff(void) const { return _is_loggable_for_important_stuff; }
 int Tp::tick_catches_up_on_attack(void) const { return _tick_catches_up_on_attack; }
@@ -286,7 +286,7 @@ void Tp::set_is_rrr1(int v) { _is_rrr1 = v; }
 void Tp::set_is_rrr10(int v) { _is_rrr10 = v; }
 void Tp::set_is_rrr11(int v) { _is_rrr11 = v; }
 void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
-void Tp::set_is_rrr13(int v) { _is_rrr13 = v; }
+void Tp::set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
 void Tp::set_is_gold(int v) { _is_gold = v; }
 void Tp::set_is_loggable_for_important_stuff(int v) { _is_loggable_for_important_stuff = v; }
 void Tp::set_tick_catches_up_on_attack(int v) { _tick_catches_up_on_attack = v; }
