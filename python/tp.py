@@ -212,8 +212,8 @@ class Tp:
     def set_is_rrr12(self, value):
         zx.tp_set_is_rrr12(self, value)
 
-    def set_is_rrr13(self, value):
-        zx.tp_set_is_rrr13(self, value)
+    def set_is_collected_as_gold(self, value):
+        zx.tp_set_is_collected_as_gold(self, value)
 
     def set_is_gold(self, value):
         zx.tp_set_is_gold(self, value)
@@ -359,8 +359,8 @@ class Tp:
     def set_stats_attack_dice(self, value):
         zx.tp_set_stats_attack_dice(self, value)
 
-    def set_cash_dice(self, value):
-        zx.tp_set_cash_dice(self, value)
+    def set_gold_value_dice(self, value):
+        zx.tp_set_gold_value_dice(self, value)
 
     def set_resurrect_dice(self, value):
         zx.tp_set_resurrect_dice(self, value)
