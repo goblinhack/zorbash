@@ -628,7 +628,7 @@ public:
         set_no_check(_is_smoke, x, y, false);
     }
 
-    void new_particle(point start, point end, uint32_t dur, Tilep tile);
+    void new_particle(point start, point end, size sz, uint32_t dur, Tilep tile);
     void display_particles(void);
 
     void init(point3d at, int seed);
