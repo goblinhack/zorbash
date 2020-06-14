@@ -57,20 +57,17 @@ void Level::cursor_path_draw (point start, point end)
     //
     // Set up obstacles for the search
     //
-    auto level = game->level;
-    auto cursor = level->cursor;
-
     if (player &&
-        level->is_hazard((int)player->mid_at.x, (int)player->mid_at.y)) {
+        is_hazard((int)player->mid_at.x, (int)player->mid_at.y)) {
         //
         // If already on a hazard we can plot a course via hazards.
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-                    level->is_secret_door(x,y)                       ||
-                    level->is_rock(x, y)                             ||
-                    level->is_wall(x, y)) {
+                if ((is_monst(x,y) && !is_corpse(x,y)) ||
+                    is_secret_door(x,y)                       ||
+                    is_rock(x, y)                             ||
+                    is_wall(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -78,16 +75,16 @@ void Level::cursor_path_draw (point start, point end)
             }
         }
     } else if (cursor &&
-        level->is_hazard((int)cursor->mid_at.x, (int)cursor->mid_at.y)) {
+        is_hazard((int)cursor->mid_at.x, (int)cursor->mid_at.y)) {
         //
         // If the cursor is on a hazard we can plot a course via hazards.
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-                    level->is_secret_door(x,y)                       ||
-                    level->is_rock(x, y)                             ||
-                    level->is_wall(x, y)) {
+                if ((is_monst(x,y) && !is_corpse(x,y)) ||
+                    is_secret_door(x,y)                       ||
+                    is_rock(x, y)                             ||
+                    is_wall(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -100,11 +97,11 @@ void Level::cursor_path_draw (point start, point end)
         //
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-                    level->is_secret_door(x,y)                       ||
-                    level->is_hazard(x,y)                            ||
-                    level->is_rock(x, y)                             ||
-                    level->is_wall(x, y)) {
+                if ((is_monst(x,y) && !is_corpse(x,y)) ||
+                    is_secret_door(x,y)                       ||
+                    is_hazard(x,y)                            ||
+                    is_rock(x, y)                             ||
+                    is_wall(x, y)) {
                     set(d.val, x, y, DMAP_IS_WALL);
                 } else {
                     set(d.val, x, y, DMAP_IS_PASSABLE);
@@ -139,12 +136,6 @@ void Level::cursor_path_create (void)
         return;
     }
 
-    auto level = game->level;
-    if (!level) {
-        return;
-    }
-
-    auto cursor = level->cursor;
     if (!cursor) {
         return;
     }
@@ -154,10 +145,10 @@ void Level::cursor_path_create (void)
     //
     // If not following the player, draw the path
     //
-    if (level->player) {
+    if (player) {
         cursor_path_draw(
-            point(level->player->mid_at.x, level->player->mid_at.y),
-            point(level->cursor_at.x, level->cursor_at.y));
+            point(player->mid_at.x, player->mid_at.y),
+            point(cursor_at.x, cursor_at.y));
     }
 }
 
@@ -173,11 +164,6 @@ void Level::cursor_path_clear (void)
 
     auto level = game->level;
     if (!level) {
-        return;
-    }
-
-    auto cursor = level->cursor;
-    if (!cursor) {
         return;
     }
 

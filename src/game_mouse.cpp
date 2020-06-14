@@ -9,11 +9,17 @@
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
-    if (!game || !game->started || !world || !player) {
+    if (!game || !game->started) {
         return (false);
     }
-
     auto level = game->level;
+    if (!level) {
+        return (false);
+    }
+    auto player = level->player;
+    if (!player) {
+        return (false);
+    }
 
     //
     // Grab the current move path and start walking toward it. This will

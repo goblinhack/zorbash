@@ -82,7 +82,7 @@ void Thing::init (Levelp level,
     }
 
     if (tpp->is_player()) {
-        player = this;
+        level->player = this;
     }
 
     if (tpp->is_monst() || tpp->is_player() || tpp->is_movable()) {

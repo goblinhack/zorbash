@@ -105,8 +105,8 @@ void Thing::destroy (void)
 
     level->free_thing_id(this);
 
-    if (this == player) {
-        player = nullptr;
+    if (this == level->player) {
+        level->player = nullptr;
     }
 
     if (monstp) {

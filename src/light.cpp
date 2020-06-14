@@ -81,6 +81,11 @@ void Light::destroy (void)
 
 void Light::calculate (int last)
 {
+    auto player = level->player;
+    if (!player) {
+        return;
+    }
+
     //
     // Non player lights are just blitted textures
     //
@@ -240,6 +245,11 @@ void Light::calculate (int last)
 
 void Light::render_triangle_fans (int last, int count)
 {
+    auto player = level->player;
+    if (!player) {
+        return;
+    }
+
     point blit_tl, blit_br;
     Tilep tile = {};
     if (!owner->get_pre_effect_map_offset_coords(blit_tl, blit_br, tile,

@@ -89,6 +89,11 @@ void Thing::actionbar_particle (Thingp what, int slot, Thingp target)
 
 bool Thing::actionbar_id_insert (Thingp what)
 {_
+    auto player = level->player;
+    if (!player) {
+        return false;
+    }
+
     if (!is_player()) {
         return false;
     }
@@ -133,6 +138,11 @@ bool Thing::actionbar_id_insert (Thingp what)
 
 bool Thing::actionbar_id_remove (Thingp what)
 {_
+    auto player = level->player;
+    if (!player) {
+        return false;
+    }
+
     if (!is_player()) {
         return false;
     }
@@ -159,6 +169,11 @@ bool Thing::actionbar_id_remove (Thingp what)
 
 bool Thing::actionbar_id_remove (Thingp what, Thingp target)
 {_
+    auto player = level->player;
+    if (!player) {
+        return false;
+    }
+
     if (!is_player()) {
         return false;
     }

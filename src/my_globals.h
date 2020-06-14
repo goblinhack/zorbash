@@ -37,8 +37,6 @@ using Tpidmap = std::vector<Tpp>;
 using Tpnamemap = std::unordered_map< std::string, Tpp >;
 
 extern class Game *game;
-extern class World *world;
-extern struct Thing_ *player;
 
 extern Tpidmap tp_id_map;
 extern Tpnamemap tp_name_map;
