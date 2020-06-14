@@ -23,12 +23,15 @@ void World::clear (void)
     }
 }
 
-void World::new_level_at (point3d at, int seed)
+Levelp World::new_level_at (point3d at, int seed)
 {_
     seed = 667;
-    auto l = get(levels, at.x, at.y, at.z);
-    delete l;
-    level = new Level();
-    set(levels, at.x, at.y, at.z, level);
-    level->init(at, seed);
+    auto old_level = get(levels, at.x, at.y, at.z);
+    delete old_level;
+
+    auto new_level = new Level();
+    set(levels, at.x, at.y, at.z, new_level);
+    new_level->init(at, seed);
+
+    return new_level;
 }

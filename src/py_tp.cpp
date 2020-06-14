@@ -5,6 +5,8 @@
 
 #include "my_python.h"
 #include "my_thing_template.h"
+#include "my_game.h"
+#include "my_level.h"
 #include "my_thing.h"
 
 PyObject *tp_load_ (PyObject *obj, PyObject *args, PyObject *keywds)
@@ -1032,7 +1034,13 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 
     DBG("python-to-c: %s(%d, %s)", __FUNCTION__, id, what);
 
-    auto t = thing_find(id);
+    auto level = game->level;
+    if (!level) {
+        ERR("%s, cannot spawn thing %08X", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    auto t = level->thing_find(id);
     if (!t) {
         ERR("%s, cannot find thing %08X", __FUNCTION__, id);
         Py_RETURN_NONE;
@@ -1066,7 +1074,13 @@ PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject
 
     DBG("python-to-c: %s(%d, %s)", __FUNCTION__, id, what);
 
-    auto t = thing_find(id);
+    auto level = game->level;
+    if (!level) {
+        ERR("%s, cannot spawn thing %08X", __FUNCTION__, id);
+        Py_RETURN_NONE;
+    }
+
+    auto t = level->thing_find(id);
     if (!t) {
         ERR("%s, cannot find thing %08X", __FUNCTION__, id);
         Py_RETURN_NONE;

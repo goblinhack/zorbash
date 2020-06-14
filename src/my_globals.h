@@ -38,7 +38,6 @@ using Tpnamemap = std::unordered_map< std::string, Tpp >;
 
 extern class Game *game;
 extern class World *world;
-extern class Level *level;
 extern struct Thing_ *player;
 
 extern Tpidmap tp_id_map;

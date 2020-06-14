@@ -58,7 +58,12 @@ static void game_status_mouse_over_e (Widp w)
 //
 static void game_status_wid_create (void)
 {_
-    if (!level->player) {
+    auto level = game->level;
+    if (!level) {
+        return;
+    }
+
+    if (!player) {
         return;
     }
 
@@ -127,7 +132,7 @@ static void game_status_wid_create (void)
         if (player->monstp) {
             auto a = player->monstp->actionbar_id[i];
             if (a) {
-                auto it = thing_find(a);
+                auto it = level->thing_find(a);
                 if (it) {
                     auto tpp = it->tp();
                     auto tiles = &tpp->tiles;
@@ -250,8 +255,8 @@ static void game_status_wid_create (void)
         point br = make_point(1, y_at + 1);
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
-        int i = ((float)level->player->get_stats_health() /
-                 (float)level->player->get_stats_health_max()) *
+        int i = ((float)player->get_stats_health() /
+                 (float)player->get_stats_health_max()) *
                  (float)HEALTH_ICON_STEPS;
         i = std::min(i, HEALTH_ICON_STEPS);
         i = std::max(i, 1);
@@ -266,8 +271,8 @@ static void game_status_wid_create (void)
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
 
-        int i = ((float)level->player->get_stats_health() /
-                 (float)level->player->get_stats_health_max()) *
+        int i = ((float)player->get_stats_health() /
+                 (float)player->get_stats_health_max()) *
                  (float)STATUSBAR_ICON_STEPS - 1;
         i = std::min(i, STATUSBAR_ICON_STEPS - 1);
         i = std::max(i, 0);
@@ -292,8 +297,8 @@ static void game_status_wid_create (void)
         wid_set_shape_none(w);
 
         std::string s =
-            std::to_string(level->player->get_stats_health()) + "/" +
-            std::to_string(level->player->get_stats_health_max());
+            std::to_string(player->get_stats_health()) + "/" +
+            std::to_string(player->get_stats_health_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
@@ -319,8 +324,8 @@ static void game_status_wid_create (void)
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
 
-        int i = ((float)level->player->get_stats_attack() /
-                 (float)level->player->get_stats_attack_max()) *
+        int i = ((float)player->get_stats_attack() /
+                 (float)player->get_stats_attack_max()) *
                  (float)STATUSBAR_ICON_STEPS - 1;
         i = std::min(i, STATUSBAR_ICON_STEPS - 1);
         i = std::max(i, 0);
@@ -345,8 +350,8 @@ static void game_status_wid_create (void)
         wid_set_shape_none(w);
 
         std::string s =
-            std::to_string(level->player->get_stats_attack()) + "/" +
-            std::to_string(level->player->get_stats_attack_max());
+            std::to_string(player->get_stats_attack()) + "/" +
+            std::to_string(player->get_stats_attack_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }
@@ -372,8 +377,8 @@ static void game_status_wid_create (void)
         wid_set_pos(w, tl, br);
         wid_set_style(w, -1);
 
-        int i = ((float)level->player->get_stats_defence() /
-                 (float)level->player->get_stats_defence_max()) *
+        int i = ((float)player->get_stats_defence() /
+                 (float)player->get_stats_defence_max()) *
                  (float)STATUSBAR_ICON_STEPS - 1;
         i = std::min(i, STATUSBAR_ICON_STEPS - 1);
         i = std::max(i, 0);
@@ -398,8 +403,8 @@ static void game_status_wid_create (void)
         wid_set_shape_none(w);
 
         std::string s =
-            std::to_string(level->player->get_stats_defence()) + "/" +
-            std::to_string(level->player->get_stats_defence_max());
+            std::to_string(player->get_stats_defence()) + "/" +
+            std::to_string(player->get_stats_defence_max());
         wid_set_text(w, s);
         wid_set_text_rhs(w, true);
     }

@@ -33,7 +33,7 @@ void Level::cursor_find_on_visible_things (
     if (cursor_needs_update) {
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
-                FOR_ALL_THINGS(level, t, x, y) {
+                FOR_ALL_THINGS(game->level, t, x, y) {
                     t->cursor_hover_over_check();
                 } FOR_ALL_THINGS_END();
             }

@@ -18,6 +18,7 @@ void player_tick (void)
         return;
     }
 
+    auto level = game->level;
     if (!level) {
         return;
     }

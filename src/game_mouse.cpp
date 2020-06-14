@@ -9,21 +9,23 @@
 uint8_t
 game_mouse_down (int32_t x, int32_t y, uint32_t button)
 {_
-    if (!game || !game->started || !world || !level->player) {
+    if (!game || !game->started || !world || !player) {
         return (false);
     }
+
+    auto level = game->level;
 
     //
     // Grab the current move path and start walking toward it. This will
     // consume one move by the player.
     //
-    level->player->cursor_path_pop_first_move();
+    player->cursor_path_pop_first_move();
 
     //
     // Close enough to attack?
     //
-    if ((std::abs(level->player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
-        (std::abs(level->player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+    if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
+        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
         int x = level->cursor->mid_at.x;
         int y = level->cursor->mid_at.y;
         FOR_ALL_INTERESTING_THINGS(level, t, x, y) {

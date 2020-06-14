@@ -11,19 +11,15 @@
 #include "my_sprintf.h"
 #include "my_thing.h"
 
-void thing_gc (void)
+void Level::things_gc (void)
 {_
-    if (!level) {
-        return;
-    }
-
     for (;;) {
-        auto i = level->all_gc_things.begin();
-        if (i == level->all_gc_things.end()) {
+        auto i = all_gc_things.begin();
+        if (i == all_gc_things.end()) {
             break;
         }
         auto id = i->first;
-        level->all_gc_things.erase(i);
+        all_gc_things.erase(i);
 
         auto t = thing_find(id);
         if (!t) {
@@ -37,5 +33,5 @@ void thing_gc (void)
         delete t;
     }
 
-    level->all_gc_things.clear();
+    all_gc_things.clear();
 }

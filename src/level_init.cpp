@@ -7,42 +7,6 @@
 #include "my_dungeon.h"
 #include "my_thing.h"
 
-static void level_place_walls(Dungeonp d,
-                              int variant,
-                              int block_width,
-                              int block_height,
-                              int tries);
-static void level_place_rocks(Dungeonp d,
-                              int variant,
-                              int block_width,
-                              int block_height,
-                              int tries);
-static void level_place_floors(Dungeonp d,
-                               const std::string what,
-                               int depth,
-                               int variant,
-                               int block_width,
-                               int block_height,
-                               int tries);
-static void level_place_floor_under_objects(Dungeonp d,
-                                            const std::string what,
-                                            int depth);
-static void level_place_lava(Dungeonp d, const std::string &what);
-static void level_place_normal_placement_rules(Dungeonp d);
-static void level_place_chasm(Dungeonp d, const std::string &what);
-static void level_place_random_blood(Dungeonp d);
-static void level_place_water(Dungeonp d, const std::string &what);
-static void level_place_deep_water(Dungeonp d, const std::string &what);
-static void level_place_floor_deco(Dungeonp d);
-static void level_place_random_floor_deco(Dungeonp d);
-static void level_place_wall_deco(Dungeonp d);
-static void level_place_remaining_floor(Dungeonp d, const std::string &what);
-static void level_place_corridor(Dungeonp d, const std::string what, int depth);
-static void level_place_dirt(Dungeonp d);
-static void level_place_remaining_walls(Dungeonp d, const std::string &what);
-static void level_place_remaining_rocks(Dungeonp d, const std::string &what);
-static void game_mark_dungeon_tiles(Dungeonp d);
-
 void Level::clear (void)
 {_
     _fade_in_map = {};
@@ -101,31 +65,31 @@ void Level::init (point3d at, int seed_in)
 
     auto tries = 10000;
 
-    level_place_walls(dungeon, 1, 6, 6, tries);
+    place_walls(dungeon, 1, 6, 6, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 2, 6, 6, tries);
+    place_walls(dungeon, 2, 6, 6, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 1, 6, 3, tries);
+    place_walls(dungeon, 1, 6, 3, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 1, 3, 6, tries);
+    place_walls(dungeon, 1, 3, 6, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 1, 3, 3, tries);
+    place_walls(dungeon, 1, 3, 3, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 2, 3, 3, tries);
+    place_walls(dungeon, 2, 3, 3, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 1, 2, 2, tries);
+    place_walls(dungeon, 1, 2, 2, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 2, 2, 2, tries);
+    place_walls(dungeon, 2, 2, 2, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 3, 2, 2, tries);
+    place_walls(dungeon, 3, 2, 2, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 1, 2, 1, tries);
+    place_walls(dungeon, 1, 2, 1, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 2, 2, 1, tries);
+    place_walls(dungeon, 2, 2, 1, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 1, 1, 2, tries);
+    place_walls(dungeon, 1, 1, 2, tries);
     if (g_errored) { return; }
-    level_place_walls(dungeon, 2, 1, 2, tries);
+    place_walls(dungeon, 2, 1, 2, tries);
     if (g_errored) { return; }
 
     for (auto d = 1; d < 3; d++) {
@@ -135,84 +99,84 @@ void Level::init (point3d at, int seed_in)
 
             int tries = 100;
             switch (random_range(0, 5)) {
-                case 0: level_place_floors(dungeon, s, d, 1, 3, 3, tries); break;
-                case 1: level_place_floors(dungeon, s, d, 2, 3, 3, tries); break;
-                case 2: level_place_floors(dungeon, s, d, 1, 2, 2, tries); break;
-                case 3: level_place_floors(dungeon, s, d, 2, 2, 2, tries); break;
-                case 4: level_place_floors(dungeon, s, d, 3, 2, 2, tries); break;
+                case 0: place_floors(dungeon, s, d, 1, 3, 3, tries); break;
+                case 1: place_floors(dungeon, s, d, 2, 3, 3, tries); break;
+                case 2: place_floors(dungeon, s, d, 1, 2, 2, tries); break;
+                case 3: place_floors(dungeon, s, d, 2, 2, 2, tries); break;
+                case 4: place_floors(dungeon, s, d, 3, 2, 2, tries); break;
             }
         }
     }
 
-    level_place_floor_under_objects(dungeon, "floor1", 1);
+    place_floor_under_objects(dungeon, "floor1", 1);
     if (g_errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor2", 2);
+    place_floor_under_objects(dungeon, "floor2", 2);
     if (g_errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor3", 3);
+    place_floor_under_objects(dungeon, "floor3", 3);
     if (g_errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor4", 4);
+    place_floor_under_objects(dungeon, "floor4", 4);
     if (g_errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor5", 5);
+    place_floor_under_objects(dungeon, "floor5", 5);
     if (g_errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor6", 6);
+    place_floor_under_objects(dungeon, "floor6", 6);
     if (g_errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor7", 7);
+    place_floor_under_objects(dungeon, "floor7", 7);
     if (g_errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor8", 8);
+    place_floor_under_objects(dungeon, "floor8", 8);
     if (g_errored) { return; }
-    level_place_floor_under_objects(dungeon, "floor9", 9);
+    place_floor_under_objects(dungeon, "floor9", 9);
     if (g_errored) { return; }
-    level_place_remaining_walls(dungeon, "wall1");
+    place_remaining_walls(dungeon, "wall1");
     if (g_errored) { return; }
-    level_place_remaining_floor(dungeon, "floor1");
+    place_remaining_floor(dungeon, "floor1");
     if (g_errored) { return; }
-    level_place_corridor(dungeon, "corridor1", 0);
-    if (g_errored) { return; }
-
-    level_place_rocks(dungeon, 1, 6, 6, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 2, 6, 6, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 1, 6, 3, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 1, 3, 6, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 1, 3, 3, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 2, 3, 3, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 1, 2, 2, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 2, 2, 2, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 3, 2, 2, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 1, 2, 1, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 2, 2, 1, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 1, 1, 2, tries);
-    if (g_errored) { return; }
-    level_place_rocks(dungeon, 2, 1, 2, tries);
+    place_corridor(dungeon, "corridor1", 0);
     if (g_errored) { return; }
 
-    level_place_remaining_rocks(dungeon, "rock1");
+    place_rocks(dungeon, 1, 6, 6, tries);
     if (g_errored) { return; }
-    level_place_dirt(dungeon);
+    place_rocks(dungeon, 2, 6, 6, tries);
     if (g_errored) { return; }
-    level_place_lava(dungeon, "lava1");
+    place_rocks(dungeon, 1, 6, 3, tries);
     if (g_errored) { return; }
-    level_place_chasm(dungeon, "chasm1");
+    place_rocks(dungeon, 1, 3, 6, tries);
     if (g_errored) { return; }
-    level_place_water(dungeon, "water1");
+    place_rocks(dungeon, 1, 3, 3, tries);
     if (g_errored) { return; }
-    level_place_deep_water(dungeon, "deep_water1");
+    place_rocks(dungeon, 2, 3, 3, tries);
+    if (g_errored) { return; }
+    place_rocks(dungeon, 1, 2, 2, tries);
+    if (g_errored) { return; }
+    place_rocks(dungeon, 2, 2, 2, tries);
+    if (g_errored) { return; }
+    place_rocks(dungeon, 3, 2, 2, tries);
+    if (g_errored) { return; }
+    place_rocks(dungeon, 1, 2, 1, tries);
+    if (g_errored) { return; }
+    place_rocks(dungeon, 2, 2, 1, tries);
+    if (g_errored) { return; }
+    place_rocks(dungeon, 1, 1, 2, tries);
+    if (g_errored) { return; }
+    place_rocks(dungeon, 2, 1, 2, tries);
+    if (g_errored) { return; }
+
+    place_remaining_rocks(dungeon, "rock1");
+    if (g_errored) { return; }
+    place_dirt(dungeon);
+    if (g_errored) { return; }
+    place_lava(dungeon, "lava1");
+    if (g_errored) { return; }
+    place_chasm(dungeon, "chasm1");
+    if (g_errored) { return; }
+    place_water(dungeon, "water1");
+    if (g_errored) { return; }
+    place_deep_water(dungeon, "deep_water1");
     if (g_errored) { return; }
 
     //
     // Items that have no special placement rules
     //
-    level_place_normal_placement_rules(dungeon);
+    place_normal_placement_rules(dungeon);
     if (g_errored) { return; }
 
     //
@@ -224,11 +188,11 @@ void Level::init (point3d at, int seed_in)
                 auto t = thing_new("player1", fpoint(x, y));
                 auto w = thing_new("sword1", fpoint(x, y));
                 t->carry(w);
-                level->cursor = thing_new("cursor", fpoint(x, y));
-                level->map_follow_player = true;
-                level->mouse = -1;
-                level->mouse_old = -1;
-                level->minimap_valid = false;
+                cursor = thing_new("cursor", fpoint(x, y));
+                map_follow_player = true;
+                mouse = -1;
+                mouse_old = -1;
+                minimap_valid = false;
                 goto placed_player;
             }
         }
@@ -239,17 +203,17 @@ placed_player:
     //
     // Scary non essential stuff
     //
-    level_place_random_blood(dungeon);
+    place_random_blood(dungeon);
     if (g_errored) { return; }
 
     //
     // Less important stuff
     //
-    level_place_floor_deco(dungeon);
+    place_floor_deco(dungeon);
     if (g_errored) { return; }
-    level_place_random_floor_deco(dungeon);
+    place_random_floor_deco(dungeon);
     if (g_errored) { return; }
-    level_place_wall_deco(dungeon);
+    place_wall_deco(dungeon);
     if (g_errored) { return; }
     game_mark_dungeon_tiles(dungeon);
     if (g_errored) { return; }
@@ -267,15 +231,12 @@ placed_player:
     is_starting = false;
 }
 
-static void level_place_walls (Dungeonp d,
-                              int variant,
-                              int block_width,
-                              int block_height,
-                              int tries)
+void Level::place_walls (Dungeonp d, int variant, int block_width,
+                         int block_height, int tries)
 {_
     auto tp = tp_random_wall();
     if (!tp) {
-        ERR("level_place_walls failed");
+        ERR("place_walls failed");
         return;
     }
     auto what = tp->name();
@@ -303,7 +264,7 @@ static void level_place_walls (Dungeonp d,
                  * We place large blocks and avoid splatting them with
                  * smaller ones here.
                  */
-                if (level->is_wall(X, Y)) {
+                if (is_wall(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -323,7 +284,7 @@ static void level_place_walls (Dungeonp d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                level->set_is_wall(X, Y);
+                set_is_wall(X, Y);
 
                 auto tilename = what + ".";
                 tilename += std::to_string(variant);
@@ -349,15 +310,12 @@ static void level_place_walls (Dungeonp d,
     }
 }
 
-static void level_place_rocks (Dungeonp d,
-                              int variant,
-                              int block_width,
-                              int block_height,
-                              int tries)
+void Level::place_rocks (Dungeonp d, int variant, int block_width,
+                         int block_height, int tries)
 {_
     auto tp = tp_random_rock();
     if (!tp) {
-        ERR("level_place_rocks failed");
+        ERR("place_rocks failed");
         return;
     }
     auto what = tp->name();
@@ -381,11 +339,11 @@ static void level_place_rocks (Dungeonp d,
                     break;
                 }
 
-                /*
-                 * We place large blocks and avoid splatting them with
-                 * smaller ones here.
-                 */
-                if (level->is_rock(X, Y)) {
+                //
+                // We place large blocks and avoid splatting them with
+                // smaller ones here.
+                //
+                if (is_rock(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -405,7 +363,7 @@ static void level_place_rocks (Dungeonp d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                level->set_is_rock(X, Y);
+                set_is_rock(X, Y);
 
                 auto tilename = what + ".";
                 tilename += std::to_string(variant);
@@ -431,13 +389,9 @@ static void level_place_rocks (Dungeonp d,
     }
 }
 
-static void level_place_floors (Dungeonp d,
-                               std::string what,
-                               int depth,
-                               int variant,
-                               int block_width,
-                               int block_height,
-                               int tries)
+void Level::place_floors (Dungeonp d, std::string what, int depth,
+                          int variant, int block_width,
+                          int block_height, int tries)
 {_
     while (tries--) {
         auto x = random_range(0, MAP_WIDTH - block_width + 1);
@@ -465,16 +419,16 @@ static void level_place_floors (Dungeonp d,
                     break;
                 }
 
-                if (level->is_floor(x, y)) {
+                if (is_floor(x, y)) {
                     can_place_here = false;
                     continue;
                 }
 
-                /*
-                 * We place large blocks and avoid splatting them with
-                 * smaller ones here.
-                 */
-                if (level->is_floor(X, Y)) {
+                //
+                // We place large blocks and avoid splatting them with
+                // smaller ones here.
+                //
+                if (is_floor(X, Y)) {
                     can_place_here = false;
                     continue;
                 }
@@ -494,7 +448,7 @@ static void level_place_floors (Dungeonp d,
             auto Y = y + dy;
             for (auto dx = 0; dx < block_width; dx++) {
                 auto X = x + dx;
-                level->set_is_floor(X, Y);
+                set_is_floor(X, Y);
 
                 auto new_thing = what + std::to_string(depth);
                 auto tilename = new_thing + ".";
@@ -522,9 +476,7 @@ static void level_place_floors (Dungeonp d,
     }
 }
 
-static void level_place_floor_under_objects (Dungeonp d,
-                                             std::string what,
-                                             int depth)
+void Level::place_floor_under_objects (Dungeonp d, std::string what, int depth)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
@@ -532,7 +484,7 @@ static void level_place_floor_under_objects (Dungeonp d,
                 continue;
             }
 
-            if (level->is_floor(x, y)) {
+            if (is_floor(x, y)) {
                 continue;
             }
 
@@ -548,7 +500,7 @@ static void level_place_floor_under_objects (Dungeonp d,
                 d->is_food(x, y + 1) ||
                 d->is_treasure(x, y + 1) ||
                 d->is_key(x, y + 1)) {
-                if (!level->is_floor(x, y + 1)) {
+                if (!is_floor(x, y + 1)) {
                     thing_new(what, fpoint(x, y + 1));
                 }
             }
@@ -556,7 +508,7 @@ static void level_place_floor_under_objects (Dungeonp d,
                 d->is_food(x, y - 1) ||
                 d->is_treasure(x, y - 1) ||
                 d->is_key(x, y - 1)) {
-                if (!level->is_floor(x, y - 1)) {
+                if (!is_floor(x, y - 1)) {
                     thing_new(what, fpoint(x, y - 1));
                 }
             }
@@ -564,7 +516,7 @@ static void level_place_floor_under_objects (Dungeonp d,
                 d->is_food(x + 1, y) ||
                 d->is_treasure(x + 1, y) ||
                 d->is_key(x + 1, y)) {
-                if (!level->is_floor(x + 1, y)) {
+                if (!is_floor(x + 1, y)) {
                     thing_new(what, fpoint(x + 1, y));
                 }
             }
@@ -572,7 +524,7 @@ static void level_place_floor_under_objects (Dungeonp d,
                 d->is_food(x - 1, y) ||
                 d->is_treasure(x - 1, y) ||
                 d->is_key(x - 1, y)) {
-                if (!level->is_floor(x - 1, y)) {
+                if (!is_floor(x - 1, y)) {
                     thing_new(what, fpoint(x - 1, y));
                 }
             }
@@ -580,7 +532,7 @@ static void level_place_floor_under_objects (Dungeonp d,
     }
 }
 
-static void level_place_normal_placement_rules (Dungeonp d)
+void Level::place_normal_placement_rules (Dungeonp d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
@@ -604,12 +556,11 @@ static void level_place_normal_placement_rules (Dungeonp d)
     }
 }
 
-static void level_place_lava (Dungeonp d,
-                              const std::string &what)
+void Level::place_lava (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_lava(x, y)) {
+            if (is_lava(x, y)) {
                 continue;
             }
 
@@ -626,12 +577,11 @@ static void level_place_lava (Dungeonp d,
     }
 }
 
-static void level_place_chasm (Dungeonp d,
-                               const std::string &what)
+void Level::place_chasm (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_chasm(x, y)) {
+            if (is_chasm(x, y)) {
                 continue;
             }
 
@@ -644,11 +594,11 @@ static void level_place_chasm (Dungeonp d,
     }
 }
 
-static void level_place_random_blood (Dungeonp d)
+void Level::place_random_blood (Dungeonp d)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
-            if (level->is_blood(x, y)) {
+            if (is_blood(x, y)) {
                 continue;
             }
 
@@ -722,11 +672,11 @@ static void level_place_random_blood (Dungeonp d)
     }
 }
 
-static void level_place_water (Dungeonp d, const std::string &what)
+void Level::place_water (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_water(x, y)) {
+            if (is_water(x, y)) {
                 continue;
             }
 
@@ -743,11 +693,11 @@ static void level_place_water (Dungeonp d, const std::string &what)
     }
 }
 
-static void level_place_deep_water (Dungeonp d, const std::string &what)
+void Level::place_deep_water (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_deep_water(x, y)) {
+            if (is_deep_water(x, y)) {
                 continue;
             }
 
@@ -764,7 +714,7 @@ static void level_place_deep_water (Dungeonp d, const std::string &what)
     }
 }
 
-static void level_place_floor_deco (Dungeonp d)
+void Level::place_floor_deco (Dungeonp d)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
@@ -786,7 +736,7 @@ static void level_place_floor_deco (Dungeonp d)
     }
 }
 
-static void level_place_random_floor_deco (Dungeonp d)
+void Level::place_random_floor_deco (Dungeonp d)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
@@ -845,7 +795,7 @@ static void level_place_random_floor_deco (Dungeonp d)
     }
 }
 
-static void level_place_wall_deco (Dungeonp d)
+void Level::place_wall_deco (Dungeonp d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -879,21 +829,21 @@ static void level_place_wall_deco (Dungeonp d)
     }
 }
 
-static void level_place_remaining_floor (Dungeonp d, const std::string &what)
+void Level::place_remaining_floor (Dungeonp d, const std::string &what)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
             if (!d->is_floor(x, y)) {
                 continue;
             }
-            if (!level->is_floor(x, y)) {
+            if (!is_floor(x, y)) {
                 thing_new(what, fpoint(x, y));
             }
         }
     }
 }
 
-static void level_place_corridor (Dungeonp d, const std::string what, int depth)
+void Level::place_corridor (Dungeonp d, const std::string what, int depth)
 {_
     for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
         for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
@@ -913,7 +863,7 @@ static void level_place_corridor (Dungeonp d, const std::string what, int depth)
     }
 }
 
-static void level_place_dirt (Dungeonp d)
+void Level::place_dirt (Dungeonp d)
 {_
     for (auto x = 1; x < MAP_WIDTH - 1; x++) {
         for (auto y = 1; y < MAP_HEIGHT - 1; y++) {
@@ -929,11 +879,11 @@ static void level_place_dirt (Dungeonp d)
     }
 }
 
-static void level_place_remaining_walls (Dungeonp d, const std::string &what)
+void Level::place_remaining_walls (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_wall(x, y)) {
+            if (is_wall(x, y)) {
                 continue;
             }
 
@@ -946,11 +896,11 @@ static void level_place_remaining_walls (Dungeonp d, const std::string &what)
     }
 }
 
-static void level_place_remaining_rocks (Dungeonp d, const std::string &what)
+void Level::place_remaining_rocks (Dungeonp d, const std::string &what)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
-            if (level->is_rock(x, y)) {
+            if (is_rock(x, y)) {
                 continue;
             }
 
@@ -967,16 +917,16 @@ static void level_place_remaining_rocks (Dungeonp d, const std::string &what)
 // Keep track of which tiles were part of the original dungeon so we can
 // display things like just the walls without all the hidden stuff like rock
 //
-static void game_mark_dungeon_tiles (Dungeonp d)
+void Level::game_mark_dungeon_tiles (Dungeonp d)
 {_
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             if (d->is_floor(x, y) ||
                 d->is_corridor(x, y) ||
                 d->is_wall(x, y) ||
-                level->is_floor(x, y) ||
-                level->is_corridor(x, y)) {
-                level->set_dungeon(x, y);
+                is_floor(x, y) ||
+                is_corridor(x, y)) {
+                set_dungeon(x, y);
             }
         }
     }

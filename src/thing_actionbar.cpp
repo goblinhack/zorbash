@@ -111,7 +111,7 @@ bool Thing::actionbar_id_insert (Thingp what)
         if (!a) {
             continue;
         }
-        auto t = thing_find(a);
+        auto t = level->thing_find(a);
         if (t->tp() == what->tp()) {
             game_status_wid_init();
             actionbar_particle(what, i);
@@ -147,7 +147,7 @@ bool Thing::actionbar_id_remove (Thingp what)
         if (!a) {
             continue;
         }
-        auto t = thing_find(a);
+        auto t = level->thing_find(a);
         if (t->tp() == what->tp()) {
             monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
             game_status_wid_init();
@@ -173,7 +173,7 @@ bool Thing::actionbar_id_remove (Thingp what, Thingp target)
         if (!a) {
             continue;
         }
-        auto t = thing_find(a);
+        auto t = level->thing_find(a);
         if (t->tp() == what->tp()) {
             monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
             game_status_wid_init();
@@ -195,14 +195,14 @@ int Thing::actionbar_id_slot_count (const int slot)
         return 0;
     }
 
-    auto t = thing_find(a);
+    auto t = level->thing_find(a);
     if (!t) {
         return 0;
     }
 
     auto count = 0;
     for (auto oid : monstp->carrying) {
-        auto o = thing_find(oid);
+        auto o = level->thing_find(oid);
         if (o->tp() == t->tp()) {
             count++;
         }

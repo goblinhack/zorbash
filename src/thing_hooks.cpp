@@ -133,7 +133,7 @@ Thingp Thing::owner_get (void) const
 {_
     auto id = get_owner_id();
     if (id) {
-        return (thing_find(id));
+        return (level->thing_find(id));
     } else {
         return (nullptr);
     }

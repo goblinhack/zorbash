@@ -110,7 +110,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Blood splat
     //
-    thing_new(tp_random_blood_splatter()->name(), mid_at);
+    level->thing_new(tp_random_blood_splatter()->name(), mid_at);
 
     //
     // Visible claw attack?
@@ -118,7 +118,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (is_monst() || is_player()) {
         auto claws = real_hitter->tp()->weapon_use_anim();
         if (claws != "") {
-            auto claw_attack = thing_new(claws, mid_at);
+            auto claw_attack = level->thing_new(claws, mid_at);
             claw_attack->bounce(0.1, 0.1, 100, 3);
             claw_attack->move_set_dir_from_delta(delta);
         }

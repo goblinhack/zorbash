@@ -44,10 +44,10 @@ do_retry:
 
     if (free_slot != -1) {
         auto idp = &getref(all_thing_ids_at, x, y, free_slot);
-        level->all_thing_ptrs_at[x][y].push_back(t);
+        all_thing_ptrs_at[x][y].push_back(t);
 
-        sort(level->all_thing_ptrs_at[x][y].begin(),
-             level->all_thing_ptrs_at[x][y].end(),
+        sort(all_thing_ptrs_at[x][y].begin(),
+             all_thing_ptrs_at[x][y].end(),
              [](const Thingp &a, const Thingp &b) -> bool {
                return a->z_prio() < b->z_prio();
              });
@@ -122,7 +122,7 @@ void Level::remove_thing (int x, int y, uint32_t id)
         auto idp = &getref(all_thing_ids_at, x, y, slot);
         if (*idp == id) {
             *idp = 0;
-            auto v = &level->all_thing_ptrs_at[x][y];
+            auto v = &all_thing_ptrs_at[x][y];
             auto b = v->begin();
             auto e = v->end();
 

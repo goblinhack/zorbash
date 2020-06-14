@@ -46,7 +46,8 @@ void Thing::kill (const char *reason)
                 int splatters = random_range(2, 10);
                 for (int splatter = 0; splatter < splatters; splatter++) {
                     auto tpp = tp_random_blood();
-                    (void) thing_new(tpp->name(), mid_at, fpoint(0.25, 0.25));
+                    (void) level->thing_new(tpp->name(),
+                                            mid_at, fpoint(0.25, 0.25));
                 }
             }
             return;

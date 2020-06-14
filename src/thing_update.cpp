@@ -9,6 +9,7 @@
 #include "my_color.h"
 #include "my_dmap.h"
 #include "my_sprintf.h"
+#include "my_sprintf.h"
 #include "my_thing.h"
 
 void Thing::update_light (void)
@@ -23,17 +24,5 @@ void Thing::update_light (void)
         l->at = mid_at;
         l->calculate(c == lc - 1);
         c++;
-    }
-}
-
-void Thing::update_all (void)
-{_
-    for (auto slot = 0; slot < MAX_THINGS; slot++) {
-        auto p = getptr(level->all_thing_ptrs, slot);
-        auto t = p->ptr;
-        if (t) {
-            verify(t);
-            t->update_light();
-        }
     }
 }

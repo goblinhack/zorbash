@@ -240,7 +240,7 @@ std::ostream& operator<<(std::ostream &out,
             for (auto slot = 0; slot < MAP_SLOTS; ++slot) {
                 auto id = get(my.t->all_thing_ids_at, x, y, slot);
                 if (id) {
-                    const Thingp t = thing_find(id);
+                    const Thingp t = my.t->thing_find(id);
 #ifdef ENABLE_THING_ID_LOGS
                     t->log("save");
 #endif

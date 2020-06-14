@@ -22,7 +22,7 @@ void Thing::water_tick (void)
                     }
                 }
             }
-            auto smoke = thing_new("smoke1", fpoint((int)mid_at.x, (int)mid_at.y));
+            auto smoke = level->thing_new("smoke1", mid_at);
             smoke->set_lifespan(4);
         }
     }

@@ -41,7 +41,7 @@ void Level::display_map_things (int fbo,
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
-                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                         if (g_render_black_and_white) {
                             if (t->is_monst() ||
                                 t->owner_get() ||
@@ -68,7 +68,7 @@ void Level::display_map_things (int fbo,
                     if (!is_visited(x, y)) {
                         continue;
                     }
-                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                         if (t->is_monst() ||
                             t->owner_get() ||
                             t->get_light_count()) {
@@ -85,7 +85,7 @@ void Level::display_map_things (int fbo,
         for (auto z = 0; z < MAP_DEPTH; z++) {
             for (auto y = miny; y < maxy; y++) {
                 for (auto x = minx; x < maxx; x++) {
-                    FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                    FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                         if (z <= MAP_DEPTH_FLOOR2) {
                             t->blit();
                         }
@@ -121,7 +121,7 @@ void Level::display_map_things (int fbo,
                         continue;
                     }
                 }
-                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                     if (g_render_black_and_white) {
                         if (t->is_monst() ||
                             t->owner_get() ||

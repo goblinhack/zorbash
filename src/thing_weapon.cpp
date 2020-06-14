@@ -3,13 +3,14 @@
 // See the README file for license info.
 //
 
+#include "my_level.h"
 #include "my_thing.h"
 
 Thingp Thing::weapon_get () const
 {_
     auto id = get_weapon_id();
     if (id) {
-        return (thing_find(id));
+        return (level->thing_find(id));
     }
 
     return (nullptr);
@@ -24,7 +25,7 @@ void Thing::weapon_set_carry_anim_id (uint32_t weapon_carry_anim_id)
         return;
     }
 
-    weapon_carry_anim = thing_find(weapon_carry_anim_id);
+    weapon_carry_anim = level->thing_find(weapon_carry_anim_id);
 
     weapon_set_carry_anim(weapon_carry_anim);
 }
@@ -72,7 +73,7 @@ void Thing::weapon_set_use_anim_id (uint32_t weapon_use_anim_id)
         return;
     }
 
-    weapon_use_anim = thing_find(weapon_use_anim_id);
+    weapon_use_anim = level->thing_find(weapon_use_anim_id);
 
     weapon_set_use_anim(weapon_use_anim);
 }
@@ -184,7 +185,7 @@ Thingp Thing::weapon_get_carry_anim (void)
 
     auto id = get_weapon_id_carry_anim();
     if (id) {
-        weapon_carry_anim = thing_find(id);
+        weapon_carry_anim = level->thing_find(id);
     }
 
     return (weapon_carry_anim);
@@ -200,7 +201,7 @@ Thingp Thing::weapon_get_use_anim (void) const
 
     auto id = get_weapon_id_use_anim();
     if (id) {
-        weapon_use_anim = thing_find(id);
+        weapon_use_anim = level->thing_find(id);
     }
 
     return (weapon_use_anim);
@@ -269,7 +270,7 @@ void Thing::wield (Thingp weapon)
         return;
     }
 
-    auto carry_anim = thing_new(carry_anim_as, this);
+    auto carry_anim = level->thing_new(carry_anim_as, this);
 
     //
     // Set the weapon so we can use it later
@@ -323,7 +324,7 @@ void Thing::use (void)
     //
     // Save the thing id so the client wid can keep track of the weapon.
     //
-    auto use_anim = thing_new(swung_as, this);
+    auto use_anim = level->thing_new(swung_as, this);
 
     //
     // Attach to the parent thing.

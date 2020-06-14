@@ -27,7 +27,7 @@ public:
     void fini(void);
     void dump(std::string prefix, std::ostream &out);
     void log(std::string prefix);
-    void new_level_at(point3d at, int seed);
+    Levelp new_level_at(point3d at, int seed);
     friend std::ostream& operator<<(std::ostream &out, Bits<const World & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<World &> my);
 };

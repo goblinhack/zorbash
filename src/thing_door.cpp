@@ -22,7 +22,7 @@ bool Thing::open_door (Thingp it)
     }
 
     for (const auto& item : monstp->carrying) {
-        auto k = thing_find(item);
+        auto k = level->thing_find(item);
         if (k->is_key()) {
             used(k, it);
             it->detach();
