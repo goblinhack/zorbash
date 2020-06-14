@@ -760,7 +760,7 @@ public:
     int is_hunger_insatiable(void) const;
     int is_interesting(void) const;
     int is_key(void) const;
-    int is_large(void) const;
+    int is_light_blocker(void) const;
     int is_lava(void) const;
     int is_light_strength(void) const;
     int is_loggable_for_unimportant_stuff(void) const;
@@ -917,6 +917,7 @@ public:
     void visible();
     void water_tick();
     void lava_tick();
+    bool open_door(Thingp door);
     void weapon_get_use_offset(float *dx, float *dy) const;
     void weapon_set_carry_anim(Thingp weapon_carry_anim);
     void weapon_set_carry_anim_id(uint32_t weapon_carry_anim_id);

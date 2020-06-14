@@ -61,7 +61,7 @@ void Thing::destroy (void)
     if (is_gold())          { level->unset_is_gold(old_at.x, old_at.y); }
     if (is_hazard())        { level->unset_is_hazard(old_at.x, old_at.y); }
     if (is_key())           { level->unset_is_key(old_at.x, old_at.x); }
-    if (is_large())         { level->unset_is_large(old_at.x, old_at.x); }
+    if (is_light_blocker()) { level->unset_is_light_blocker(old_at.x, old_at.x); }
     if (is_lava())          { level->unset_is_lava(old_at.x, old_at.y); }
     if (is_monst())         { level->unset_is_monst(old_at.x, old_at.y); }
     if (is_rock())          { level->unset_is_rock(old_at.x, old_at.y); }

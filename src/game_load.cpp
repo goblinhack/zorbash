@@ -251,16 +251,16 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* _is_fire */             in >> bits(my.t->_is_fire);
     /* _is_floor */            in >> bits(my.t->_is_floor);
     /* _is_food */             in >> bits(my.t->_is_food);
-    /* _is_treasure */         in >> bits(my.t->_is_treasure);
     /* _is_gold */             in >> bits(my.t->_is_gold);
     /* _is_hazard */           in >> bits(my.t->_is_hazard);
     /* _is_key */              in >> bits(my.t->_is_key);
-    /* _is_large */            in >> bits(my.t->_is_large);
     /* _is_lava */             in >> bits(my.t->_is_lava);
+    /* _is_light_blocker */    in >> bits(my.t->_is_light_blocker);
     /* _is_monst */            in >> bits(my.t->_is_monst);
     /* _is_rock */             in >> bits(my.t->_is_rock);
     /* _is_secret_door */      in >> bits(my.t->_is_secret_door);
     /* _is_smoke */            in >> bits(my.t->_is_smoke);
+    /* _is_treasure */         in >> bits(my.t->_is_treasure);
     /* _is_visited */          in >> bits(my.t->_is_visited);
     /* _is_wall */             in >> bits(my.t->_is_wall);
     /* _is_water */            in >> bits(my.t->_is_water);

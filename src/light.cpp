@@ -151,7 +151,7 @@ void Light::calculate (int last)
                 level->set_visited_no_check(x, y);
             }
 
-            if (level->is_large_no_check(x, y)) {
+            if (level->is_light_blocker_no_check(x, y)) {
                 break;
             }
         }
@@ -179,7 +179,7 @@ void Light::calculate (int last)
                 level->set_visited_no_check(x, y);
             }
 
-            if (!level->is_large_no_check(x, y)) {
+            if (!level->is_light_blocker_no_check(x, y)) {
                 break;
             }
 

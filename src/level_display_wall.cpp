@@ -32,6 +32,8 @@ void Thing::blit_wall_cladding (point &tl, point &br, const ThingTiles *tiles)
         point br2 = br;
         tl2.y -= dh;
         br2.y -= dh;
+        tl2.y -= dh;
+        br2.y -= dh;
         tile_blit(tiles->top1_tile, tl2, br2);
     }
 
@@ -152,6 +154,8 @@ void Thing::blit_wall_shadow (point &tl, point &br, const ThingTiles *tiles)
     if (tiles->top2_tile && !level->is_wall(x, y - 1)) {
         point tl2 = tl;
         point br2 = br;
+        tl2.y -= dh;
+        br2.y -= dh;
         tl2.y -= dh;
         br2.y -= dh;
         tile_blit(tiles->top2_tile, tl2, br2);

@@ -125,7 +125,7 @@ int Tp::is_hazard(void) const { return _is_hazard; }
 int Tp::is_hunger_insatiable(void) const { return _is_hunger_insatiable; }
 int Tp::is_interesting(void) const { return _is_interesting; }
 int Tp::is_key(void) const { return _is_key; }
-int Tp::is_large(void) const { return _is_large; }
+int Tp::is_light_blocker(void) const { return _is_light_blocker; }
 int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_lava(void) const { return _is_lava; }
 int Tp::is_light_strength(void) const { return _is_light_strength; }
@@ -266,7 +266,7 @@ void Tp::set_is_hazard(int v) { _is_hazard = v; }
 void Tp::set_is_hunger_insatiable(int v) { _is_hunger_insatiable = v; }
 void Tp::set_is_interesting(int v) { _is_interesting = v; }
 void Tp::set_is_key(int v) { _is_key = v; }
-void Tp::set_is_large(int v) { _is_large = v; }
+void Tp::set_is_light_blocker(int v) { _is_light_blocker = v; }
 void Tp::set_is_smoke(int v) { _is_smoke = v; }
 void Tp::set_is_lava(int v) { _is_lava = v; }
 void Tp::set_is_light_strength(int v) { _is_light_strength = v; }

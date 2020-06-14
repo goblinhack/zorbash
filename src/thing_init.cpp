@@ -343,7 +343,7 @@ void Thing::init (const std::string& name, const fpoint born, const fpoint jitte
     if (tpp->is_gold())          { level->set_is_gold(new_at.x, new_at.y); }
     if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
     if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
-    if (tpp->is_large())         { level->set_is_large(new_at.x, new_at.y); }
+    if (tpp->is_light_blocker()) { level->set_is_light_blocker(new_at.x, new_at.y); }
     if (tpp->is_smoke())         { level->set_is_smoke(new_at.x, new_at.y); }
     if (tpp->is_lava())          { level->set_is_lava(new_at.x, new_at.y); }
     if (tpp->is_monst())         { level->set_is_monst(new_at.x, new_at.y); }
@@ -479,7 +479,7 @@ void Thing::reinit (void)
     if (tpp->is_gold())          { level->set_is_gold(new_at.x, new_at.y); }
     if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
     if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
-    if (tpp->is_large())         { level->set_is_large(new_at.x, new_at.y); }
+    if (tpp->is_light_blocker()) { level->set_is_light_blocker(new_at.x, new_at.y); }
     if (tpp->is_smoke())         { level->set_is_smoke(new_at.x, new_at.y); }
     if (tpp->is_lava())          { level->set_is_lava(new_at.x, new_at.y); }
     if (tpp->is_monst())         { level->set_is_monst(new_at.x, new_at.y); }

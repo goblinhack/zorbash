@@ -32,7 +32,6 @@ void Thing::attach (void)
     if (is_gold())          { level->set_is_gold(mx, my); }
     if (is_hazard())        { level->set_is_hazard(mx, my); }
     if (is_key())           { level->set_is_key(mx, my); }
-    if (is_large())         { level->set_is_large(mx, my); }
     if (is_lava())          { level->set_is_lava(mx, my); }
     if (is_monst())         { level->set_is_monst(mx, my); }
     if (is_rock())          { level->set_is_rock(mx, my); }
@@ -42,6 +41,12 @@ void Thing::attach (void)
     if (is_water())         { level->set_is_water(mx, my); }
 
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }
+
+    if (is_light_blocker()) {
+        if (!is_open) {
+            level->set_is_light_blocker(mx, my);
+        }
+    }
 }
 
 void Thing::detach (void)
@@ -69,7 +74,7 @@ void Thing::detach (void)
     if (is_gold())          { level->unset_is_gold(mx, my); }
     if (is_hazard())        { level->unset_is_hazard(mx, my); }
     if (is_key())           { level->unset_is_key(mx, my); }
-    if (is_large())         { level->unset_is_large(mx, my); }
+    if (is_light_blocker()) { level->unset_is_light_blocker(mx, my); }
     if (is_lava())          { level->unset_is_lava(mx, my); }
     if (is_monst())         { level->unset_is_monst(mx, my); }
     if (is_rock())          { level->unset_is_rock(mx, my); }
@@ -87,13 +92,3 @@ void Thing::detach (void)
 
     if (is_lava() || is_fire()) { level->heatmap_valid = false; }
 }
-
-
-
-
-
-
-
-
-
-

@@ -494,8 +494,8 @@ class Tp:
     def set_gfx_show_outlined(self, value):
         zx.tp_set_gfx_show_outlined(self, value)
 
-    def set_is_large(self, value):
-        zx.tp_set_is_large(self, value)
+    def set_is_light_blocker(self, value):
+        zx.tp_set_is_light_blocker(self, value)
 
     def set_z_depth(self, value):
         zx.tp_set_z_depth(self, value)
