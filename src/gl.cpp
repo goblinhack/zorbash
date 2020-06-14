@@ -251,7 +251,7 @@ static void gl_init_fbo_ (int fbo,
     CON("INIT: OpenGL create FBO, size %dx%d", tex_width, tex_height);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glGenTextures");
+    DBG("INIT: - glGenTextures");
     if (*fbo_tex_id) {
         glDeleteTextures(1, fbo_tex_id);
         *fbo_tex_id = 0;
@@ -259,11 +259,11 @@ static void gl_init_fbo_ (int fbo,
     glGenTextures(1, fbo_tex_id);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glBindTexture");
+    DBG("INIT: - glBindTexture");
     glBindTexture(GL_TEXTURE_2D, *fbo_tex_id);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glTexParameterf");
+    DBG("INIT: - glTexParameterf");
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     GL_ERROR_CHECK();
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -273,7 +273,7 @@ static void gl_init_fbo_ (int fbo,
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glTexImage2D");
+    DBG("INIT: - glTexImage2D");
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8,
                  tex_width, tex_height, 0,
                  GL_RGBA, GL_UNSIGNED_BYTE, 0);
@@ -291,38 +291,38 @@ static void gl_init_fbo_ (int fbo,
     }
 #endif
 
-    LOG("INIT: - glGenRenderbuffers_EXT");
+    DBG("INIT: - glGenRenderbuffers_EXT");
     glGenRenderbuffers_EXT(1, render_buf_id);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glBindRenderbuffer_EXT");
+    DBG("INIT: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, *render_buf_id);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glRenderbufferStorage_EXT");
+    DBG("INIT: - glRenderbufferStorage_EXT");
     glRenderbufferStorage_EXT(GL_RENDERBUFFER, GL_DEPTH_COMPONENT,
                               tex_width, tex_height);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glBindRenderbuffer_EXT");
+    DBG("INIT: - glBindRenderbuffer_EXT");
     glBindRenderbuffer_EXT(GL_RENDERBUFFER, 0);
     GL_ERROR_CHECK();
 
     //
     // Create a frame buffer object.
     //
-    LOG("INIT: - glGenFramebuffers_EXT");
+    DBG("INIT: - glGenFramebuffers_EXT");
     glGenFramebuffers_EXT(1, fbo_id);
     GL_ERROR_CHECK();
 
-    LOG("INIT: - glBindFramebuffer_EXT");
+    DBG("INIT: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, *fbo_id);
     GL_ERROR_CHECK();
 
     //
     // Attach the texture to FBO color attachment point
     //
-    LOG("INIT: - glFramebufferTexture2D_EXT");
+    DBG("INIT: - glFramebufferTexture2D_EXT");
     glFramebufferTexture2D_EXT(GL_FRAMEBUFFER,        // 1. fbo target: GL_FRAMEBUFFER
                                GL_COLOR_ATTACHMENT0,  // 2. attachment point
                                GL_TEXTURE_2D,         // 3. tex target: GL_TEXTURE_2D
@@ -333,7 +333,7 @@ static void gl_init_fbo_ (int fbo,
     //
     // Attach the renderbuffer to depth attachment point
     //
-    LOG("INIT: - glFramebufferRenderbuffer_EXT");
+    DBG("INIT: - glFramebufferRenderbuffer_EXT");
     glFramebufferRenderbuffer_EXT(GL_FRAMEBUFFER,      // 1. fbo target: GL_FRAMEBUFFER
                                   GL_DEPTH_ATTACHMENT, // 2. attachment point
                                   GL_RENDERBUFFER,     // 3. rbo target: GL_RENDERBUFFER
@@ -343,7 +343,7 @@ static void gl_init_fbo_ (int fbo,
     //
     // Check FBO status
     //
-    LOG("INIT: - glCheckFramebufferStatus_EXT");
+    DBG("INIT: - glCheckFramebufferStatus_EXT");
     GLenum status = glCheckFramebufferStatus_EXT(GL_FRAMEBUFFER);
     if (status && (status != GL_FRAMEBUFFER_COMPLETE)) {
         ERR("Failed to create framebuffer, error: %d", status);
@@ -385,7 +385,7 @@ static void gl_init_fbo_ (int fbo,
     GL_ERROR_CHECK();
 
     // switch back to window-system-provided framebuffer
-    LOG("INIT: - glBindFramebuffer_EXT");
+    DBG("INIT: - glBindFramebuffer_EXT");
     glBindFramebuffer_EXT(GL_FRAMEBUFFER, 0);
     GL_ERROR_CHECK();
 }

@@ -1708,6 +1708,56 @@ int Dungeon::draw_corridor (point start, point end, char w)
     }
 
     //
+    // Avoid this pattern as it would need a long door
+    //
+    // D
+    // ##
+    //  #D
+    // ...
+    //
+    {
+        auto x = start.x;
+        auto y = start.y;
+        if (is_anything_at_no_check(x, y + 1)) {
+            set(d.val, x-1, y, DMAP_IS_WALL);
+            set(d.val, x+1, y, DMAP_IS_WALL);
+        }
+        if (is_anything_at_no_check(x, y - 1)) {
+            set(d.val, x-1, y, DMAP_IS_WALL);
+            set(d.val, x+1, y, DMAP_IS_WALL);
+        }
+        if (is_anything_at_no_check(x + 1, y)) {
+            set(d.val, x, y-1, DMAP_IS_WALL);
+            set(d.val, x, y+1, DMAP_IS_WALL);
+        }
+        if (is_anything_at_no_check(x - 1, y)) {
+            set(d.val, x, y-1, DMAP_IS_WALL);
+            set(d.val, x, y+1, DMAP_IS_WALL);
+        }
+    }
+
+    {
+        auto x = end.x;
+        auto y = end.y;
+        if (is_anything_at_no_check(x, y + 1)) {
+            set(d.val, x-1, y, DMAP_IS_WALL);
+            set(d.val, x+1, y, DMAP_IS_WALL);
+        }
+        if (is_anything_at_no_check(x, y - 1)) {
+            set(d.val, x-1, y, DMAP_IS_WALL);
+            set(d.val, x+1, y, DMAP_IS_WALL);
+        }
+        if (is_anything_at_no_check(x + 1, y)) {
+            set(d.val, x, y-1, DMAP_IS_WALL);
+            set(d.val, x, y+1, DMAP_IS_WALL);
+        }
+        if (is_anything_at_no_check(x - 1, y)) {
+            set(d.val, x, y-1, DMAP_IS_WALL);
+            set(d.val, x, y+1, DMAP_IS_WALL);
+        }
+    }
+
+    //
     // Ensure adjoining corridors are not possible
     //
     for (auto y = miny + 1; y < maxy - 1; y++) {
