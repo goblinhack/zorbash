@@ -57,6 +57,36 @@ void Thing::actionbar_particle (Thingp what, int slot)
     }
 }
 
+//
+// Particle from the actionbar to a target
+//
+void Thing::actionbar_particle (Thingp what, int slot, Thingp target)
+{_
+    //
+    // No animations at the start
+    //
+    if (level->is_starting) {
+        return;
+    }
+
+    point where_to = (target->last_blit_tl + target->last_blit_br) / 2;
+
+    std::string name = "actionbar icon" + std::to_string(slot);
+    auto w = wid_find(name);
+    if (!w) {
+        con("could not find wid %s", name.c_str());
+        return;
+    }
+
+    auto p = (w->abs_tl + w->abs_br) / 2;
+    p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
+    p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
+
+    level->new_particle(p, where_to,
+                        size(TILE_WIDTH, TILE_HEIGHT), 500,
+                        tile_index_to_tile(what->tile_curr));
+}
+
 bool Thing::actionbar_id_insert (Thingp what)
 {_
     if (!is_player()) {
@@ -127,7 +157,7 @@ bool Thing::actionbar_id_remove (Thingp what)
     return false;
 }
 
-bool Thing::actionbar_id_remove (Thingp what, point used_where)
+bool Thing::actionbar_id_remove (Thingp what, Thingp target)
 {_
     if (!is_player()) {
         return false;
@@ -147,6 +177,7 @@ bool Thing::actionbar_id_remove (Thingp what, point used_where)
         if (t->tp() == what->tp()) {
             monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
             game_status_wid_init();
+            actionbar_particle(what, i, target);
             return true;
         }
     }

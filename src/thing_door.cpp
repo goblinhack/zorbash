@@ -24,7 +24,7 @@ bool Thing::open_door (Thingp it)
     for (const auto& item : monstp->carrying) {
         auto k = thing_find(item);
         if (k->is_key()) {
-            used(k, make_point(it->mid_at));
+            used(k, it);
             it->detach();
             it->is_open = true;
             it->attach();
