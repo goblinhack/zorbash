@@ -7,7 +7,6 @@
 
 class Game *game;
 class World *world;
-class Level *level;
 struct Thing_ *player;
 
 char *DATA_PATH;

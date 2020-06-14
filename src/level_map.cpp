@@ -19,18 +19,18 @@ void Level::update_hazard_map (void)
 
     for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-            if (level->is_water(x, y) || level->is_deep_water(x, y)) {
+            if (is_water(x, y) || is_deep_water(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
                         set(water_tile_map, x+dx, y+dy, true);
-                        if (level->is_deep_water(x, y)) {
+                        if (is_deep_water(x, y)) {
                             set(deep_water_tile_map, x+dx, y+dy, true);
                         }
                     }
                 }
             }
 
-            if (level->is_lava(x, y)) {
+            if (is_lava(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
                         set(lava_tile_map, x+dx, y+dy, true);
@@ -38,7 +38,7 @@ void Level::update_hazard_map (void)
                 }
             }
 
-            if (level->is_chasm(x, y)) {
+            if (is_chasm(x, y)) {
                 for (auto dx = -2; dx <= 2; dx++) {
                     for (auto dy = -2; dy <= 2; dy++) {
                         set(chasm_tile_map, x+dx, y+dy, true);

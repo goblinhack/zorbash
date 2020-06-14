@@ -39,6 +39,6 @@ void Thing::drop_all (void)
 
     while (!monstp->carrying.empty()) {
         auto id = *monstp->carrying.begin();
-        return (drop(thing_find(id)));
+        return (drop(level->thing_find(id)));
     }
 }

@@ -87,7 +87,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
             } else {
                 it->dir_set_right();
             }
-            thing_new(spawn_what, spawn_at);
+            level->thing_new(spawn_what, spawn_at);
         }
         return (THING_SHOVE_TRIED_AND_PASSED);
     }

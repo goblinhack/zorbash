@@ -12,20 +12,20 @@
 #include "my_thing.h"
 #include "my_game.h"
 
-Thingp thing_new (const std::string& tp_name, Thingp owner)
+Thingp Level::thing_new (const std::string& tp_name, Thingp owner)
 {_
     return thing_new(tp_name, owner->mid_at);
 }
 
-Thingp thing_new (const std::string& name, const point at)
+Thingp Level::thing_new (const std::string& name, const point at)
 {_
     return thing_new(name, fpoint(at.x, at.y));
 }
 
-Thingp thing_new (const std::string& name, const fpoint at, const fpoint jitter)
+Thingp Level::thing_new (const std::string& name, const fpoint at, const fpoint jitter)
 {_
     auto t = new struct Thing_();
-    t->init(name, at, jitter);
+    t->init(this, name, at, jitter);
     return (t);
 }
 
@@ -34,10 +34,13 @@ Thing::Thing_ (void)
     newptr(this, "thing");
 }
 
-void Thing::init (const std::string& name, const fpoint born, const fpoint jitter)
+void Thing::init (Levelp level,
+                  const std::string& name,
+                  const fpoint born, const fpoint jitter)
 {_
     verify(this);
 
+    this->level = level;
     mid_at      = born;
     last_mid_at = born;
 

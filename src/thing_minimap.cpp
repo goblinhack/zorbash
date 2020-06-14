@@ -39,36 +39,36 @@ void Level::update_minimap (void)
         for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
-                if (level->player &&
-                    (x == (int)level->player->mid_at.x) &&
-                    (y == (int)level->player->mid_at.y)) {
+                if (player &&
+                    (x == (int)player->mid_at.x) &&
+                    (y == (int)player->mid_at.y)) {
                     c = PINK;
-                } else if (level->is_door(x, y)) {
+                } else if (is_door(x, y)) {
                     c = RED;
-                } else if (level->is_lava(x, y)) {
+                } else if (is_lava(x, y)) {
                     c = ORANGE;
-                } else if (level->is_wall(x, y)) {
-                    if (level->is_visited(x, y)) {
+                } else if (is_wall(x, y)) {
+                    if (is_visited(x, y)) {
                         c = GRAY80;
                     } else {
                         c = GRAY70;
                     }
-                } else if (level->is_rock(x, y)) {
-                    if (level->is_visited(x, y)) {
+                } else if (is_rock(x, y)) {
+                    if (is_visited(x, y)) {
                         c = GRAY70;
                     } else {
                         c = GRAY60;
                     }
-                } else if (level->is_floor(x, y) ||
-                           level->is_corridor(x, y)) {
-                    if (level->is_visited(x, y)) {
+                } else if (is_floor(x, y) ||
+                           is_corridor(x, y)) {
+                    if (is_visited(x, y)) {
                         c = GRAY40;
                     } else {
                         c = GRAY20;
                     }
-                } else if (level->is_water(x, y)) {
+                } else if (is_water(x, y)) {
                     c = BLUE2;
-                } else if (level->is_dirt(x, y)) {
+                } else if (is_dirt(x, y)) {
                     c = GRAY20;
                 } else {
                     if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
@@ -80,8 +80,8 @@ void Level::update_minimap (void)
                     }
                 }
 
-                if ((x >= level->map_tl.x) && (x <= level->map_br.x) &&
-                    (y >= level->map_tl.y) && (y <= level->map_br.y)) {
+                if ((x >= map_tl.x) && (x <= map_br.x) &&
+                    (y >= map_tl.y) && (y <= map_br.y)) {
                 } else {
                     c.r /= 2;
                     c.g /= 2;
@@ -107,7 +107,7 @@ void Level::update_minimap (void)
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 color c = WHITE;
 
-                if (!level->is_visited(x, y)) {
+                if (!is_visited(x, y)) {
                     if (!x || !y || (x == MAP_WIDTH -1) || (y == MAP_HEIGHT - 1)) {
                         c = DARKGREEN;
                         c.a = 100;
@@ -115,43 +115,43 @@ void Level::update_minimap (void)
                         c = DARKGREEN;
                         c.a = 30;
                     }
-                } else if (level->player &&
-                    (x == (int)level->player->mid_at.x) &&
-                    (y == (int)level->player->mid_at.y)) {
+                } else if (player &&
+                    (x == (int)player->mid_at.x) &&
+                    (y == (int)player->mid_at.y)) {
                     c = PINK;
-                } else if (level->is_door(x, y)) {
+                } else if (is_door(x, y)) {
                     c = RED;
-                } else if (level->is_lava(x, y)) {
+                } else if (is_lava(x, y)) {
                     c = ORANGE;
-                } else if (level->is_wall(x, y)) {
-                       if (level->is_visited(x, y)) {
+                } else if (is_wall(x, y)) {
+                       if (is_visited(x, y)) {
                         c = GRAY80;
                     } else {
                         c = GRAY70;
                     }
-                } else if (level->is_rock(x, y)) {
-                       if (level->is_visited(x, y)) {
+                } else if (is_rock(x, y)) {
+                       if (is_visited(x, y)) {
                         c = GRAY70;
                     } else {
                         c = GRAY60;
                     }
-                } else if (level->is_floor(x, y) ||
-                           level->is_corridor(x, y)) {
-                    if (level->is_visited(x, y)) {
+                } else if (is_floor(x, y) ||
+                           is_corridor(x, y)) {
+                    if (is_visited(x, y)) {
                         c = GRAY40;
                     } else {
                         c = GRAY20;
                     }
-                } else if (level->is_water(x, y)) {
+                } else if (is_water(x, y)) {
                     c = BLUE2;
-                } else if (level->is_dirt(x, y)) {
+                } else if (is_dirt(x, y)) {
                     c = GRAY20;
                 } else {
                     c = BLACK;
                 }
 
-                if ((x >= level->map_tl.x) && (x <= level->map_br.x) &&
-                    (y >= level->map_tl.y) && (y <= level->map_br.y)) {
+                if ((x >= map_tl.x) && (x <= map_br.x) &&
+                    (y >= map_tl.y) && (y <= map_br.y)) {
                 } else {
                     c.r /= 2;
                     c.g /= 2;
@@ -173,5 +173,5 @@ void Level::update_minimap (void)
     blit_flush();
     blit_fbo_unbind();
     glEnable(GL_TEXTURE_2D);
-    level->minimap_valid = true;
+    minimap_valid = true;
 }

@@ -6,6 +6,7 @@
 #include "my_game.h"
 #include "my_gl.h"
 #include "my_tex.h"
+#include "my_level.h"
 #include "my_thing.h"
 
 static Texp g_light_overlay_tex;
@@ -38,6 +39,7 @@ Lightp light_new (Thingp owner,
                   color col)
 {_
     uint16_t max_light_rays;
+
     if (owner->is_player()) {
         max_light_rays = MAX_LIGHT_RAYS;
     } else {
@@ -48,6 +50,7 @@ Lightp light_new (Thingp owner,
 
     auto l = new Light(); // std::make_shared< class Light >();
 
+    l->level          = owner->level;
     l->at             = at;
     l->offset         = offset;
     l->strength       = strength;
@@ -128,7 +131,7 @@ void Light::calculate (int last)
     // Walk the light rays in a circle. First pass is to find the nearest
     // walls.
     //
-    bool do_set_visited = (level->player && (owner == level->player));
+    bool do_set_visited = (player && (owner == player));
     float step_delta1 = 0.02;
     float step_delta2 = 0.05;
 
@@ -301,7 +304,7 @@ void Light::render_triangle_fans (int last, int count)
             //
             // Non player lights fade
             //
-            if (level->player && (owner != level->player)) {
+            if (player && (owner != player)) {
                 alpha = 0.0;
             }
 
@@ -341,7 +344,7 @@ void Light::render_triangle_fans (int last, int count)
         //
         // Makes non player lights more intense
         //
-        if (level->player && (owner != level->player)) {
+        if (player && (owner != player)) {
             blit_flush_triangle_fan();
             blit_flush_triangle_fan();
             blit_flush_triangle_fan();
@@ -361,7 +364,7 @@ void Light::render_triangle_fans (int last, int count)
         //
         // Makes non player lights more intense
         //
-        if (level->player && (owner != level->player)) {
+        if (player && (owner != player)) {
             blit_flush_triangle_fan(b, e);
             blit_flush_triangle_fan(b, e);
             blit_flush_triangle_fan(b, e);
@@ -373,7 +376,7 @@ void Light::render_triangle_fans (int last, int count)
     // Blend a texture on top of all the above blending so we get smooth
     // fade off of the light.
     //
-    if (last && (level->player && (owner == level->player))) {
+    if (last && (player && (owner == player))) {
         if (flicker > random_range(20, 30)) {
             flicker = 0;
         }
@@ -412,7 +415,7 @@ void Light::render (int fbo, int last, int count)
     render_triangle_fans(last, count);
 }
 
-void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
+void Level::lights_render (int minx, int miny, int maxx, int maxy, int fbo)
 {
     if (player) {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -430,9 +433,10 @@ void lights_render (int minx, int miny, int maxx, int maxy, int fbo)
     blit_init();
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            FOR_ALL_LIGHTS_AT_DEPTH(level, t, x, y) {
+            FOR_ALL_LIGHTS_AT_DEPTH(this, t, x, y) {
                 for (auto& l : t->get_light()) {
-                    if (level->player && (l->owner == level->player)) {
+
+                    if (player && (l->owner == player)) {
                         continue;
                     }
 

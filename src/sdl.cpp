@@ -8,6 +8,7 @@
 #include "my_ascii.h"
 #include "my_thing.h"
 #include "my_player.h"
+#include "my_level.h"
 #include "my_wid_console.h"
 #include "stb_image_write.h"
 
@@ -958,8 +959,8 @@ void config_gfx_show_hidden_toggle (void)
         CON("gfx show hidden disabled");
     }
 
-    if (level) {
-        level->minimap_valid = false;
+    if (game->level) {
+        game->level->minimap_valid = false;
     }
 }
 
@@ -1038,8 +1039,8 @@ void config_gfx_zoom_in (void)
     config_gfx_zoom_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
-    if (level) {
-        level->scroll_map_to_player();
+    if (game->level) {
+        game->level->scroll_map_to_player();
     }
 }
 
@@ -1055,8 +1056,8 @@ void config_gfx_zoom_out (void)
     config_gfx_zoom_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
-    if (level) {
-        level->scroll_map_to_player();
+    if (game->level) {
+        game->level->scroll_map_to_player();
     }
 }
 
@@ -1083,8 +1084,8 @@ uint8_t config_gfx_zoom_set (tokens_t *tokens, void *context)
     config_gfx_zoom_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
-    if (level) {
-        level->scroll_map_to_player();
+    if (game->level) {
+        game->level->scroll_map_to_player();
     }
 
     return (true);
@@ -1162,8 +1163,8 @@ void config_update_all (void)
     config_gfx_vsync_update();
     CON("INIT: OpenGL enter 2D mode");
     gl_init_2d_mode();
-    if (level) {
-        level->scroll_map_to_player();
+    if (game->level) {
+        game->level->scroll_map_to_player();
     }
 }
 
@@ -1292,8 +1293,8 @@ void sdl_loop (void)
             }
 
             if (!g_errored) {
-                if (level) {
-                    level->tick();
+                if (game->level) {
+                    game->level->tick();
                 }
             }
 

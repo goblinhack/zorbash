@@ -100,7 +100,7 @@ void Level::display_lava (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (likely(!level->is_lava(x, y))) {
+            if (likely(!game->level->is_lava(x, y))) {
                 continue;
             }
             if (likely(!game->config.gfx_show_hidden)) {
@@ -108,7 +108,7 @@ void Level::display_lava (int fbo,
                     continue;
                 }
             }
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tpp->is_lava()) {
                     continue;
@@ -127,7 +127,7 @@ void Level::display_lava (int fbo,
     glcolor(WHITE);
     blit_fbo_bind(FBO_MASK2);
     glBlendFunc(GL_ONE, GL_ZERO);
-    auto tile_map = level->lava_tile_map;
+    auto tile_map = game->level->lava_tile_map;
     for (auto y = miny; y < maxy; y+=2) {
         for (auto x = minx; x < maxx; x+=2) {
             if (likely(!get(tile_map, x, y))) {

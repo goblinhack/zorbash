@@ -21,7 +21,7 @@ void Thing::unset_on_fire (void)
         return;
     }
 
-    auto fire_anim = thing_find(id);
+    auto fire_anim = level->thing_find(id);
     if (fire_anim) {
         log("unset on fire");
         fire_anim->dead("remove fire");
@@ -36,7 +36,7 @@ bool Thing::set_on_fire (void)
     }
 
     log("set on fire");
-    auto on_fire_anim = thing_new("fire", this);
+    auto on_fire_anim = level->thing_new("fire", this);
     set_on_fire_anim_id(on_fire_anim->id);
     on_fire_anim->set_owner(this);
     move_carried_items();

@@ -11,6 +11,7 @@
 #include "my_time.h"
 #include "my_depth.h"
 #include "my_particle.h"
+#include "my_dungeon.h"
 
 class Level {
 public:
@@ -630,6 +631,34 @@ public:
 
     void new_particle(point start, point end, size sz, uint32_t dur, Tilep tile);
     void display_particles(void);
+
+    void game_mark_dungeon_tiles(Dungeonp d);
+    void place_chasm(Dungeonp d, const std::string &what);
+    void place_corridor(Dungeonp d, const std::string what, int depth);
+    void place_deep_water(Dungeonp d, const std::string &what);
+    void place_dirt(Dungeonp d);
+    void place_floor_deco(Dungeonp d);
+    void place_floor_under_objects(Dungeonp d, const std::string what, int depth);
+    void place_floors(Dungeonp d, const std::string what, int depth, int variant, int block_width, int block_height, int tries);
+    void place_lava(Dungeonp d, const std::string &what);
+    void place_normal_placement_rules(Dungeonp d);
+    void place_random_blood(Dungeonp d);
+    void place_random_floor_deco(Dungeonp d);
+    void place_remaining_floor(Dungeonp d, const std::string &what);
+    void place_remaining_rocks(Dungeonp d, const std::string &what);
+    void place_remaining_walls(Dungeonp d, const std::string &what);
+    void place_rocks(Dungeonp d, int variant, int block_width, int block_height, int tries);
+    void place_wall_deco(Dungeonp d);
+    void place_walls(Dungeonp d, int variant, int block_width, int block_height, int tries);
+    void place_water(Dungeonp d, const std::string &what);
+    void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
+
+    Thingp thing_find(const uint32_t id);
+    Thingp thing_new(const std::string& tp_name, Thingp owner);
+    Thingp thing_new(const std::string& tp_name, const point at);
+    Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
+    void things_gc(void);
+    void things_tick(void);
 
     void init(point3d at, int seed);
     const char *to_cstring(void);

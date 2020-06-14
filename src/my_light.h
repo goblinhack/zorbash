@@ -23,33 +23,20 @@ private:
 public:
     Light (void);
     ~Light (void);
-    //
-    // Where the light is. Rays are calculated at this point and invalidated
-    // if the light moves.
-    //
+
+    Levelp             level {};
+    Thingp             owner {}; // The owner, so we don't block our own light.
+    color              col;
+    float              flicker_radius {};
+    float              strength {};
     fpoint             at;
     fpoint             offset;
-
-    //
-    // The owner of the light, so we don't block our own light.
-    //
-    Thingp             owner;
-
-    float              flicker_radius;
-    uint8_t            flicker {0};
-
-    //
-    // Precalculated light rays.
-    //
-    float               strength;
-    uint16_t            max_light_rays;
-    std::vector<Ray>    ray;
-    std::vector<float>  cached_gl_cmds;
     point              cached_light_pos;
-
-    color               col;
-
-    uint8_t             is_being_destroyed:1 {};
+    std::vector<Ray>   ray;
+    std::vector<float> cached_gl_cmds;
+    uint16_t           max_light_rays {};
+    uint8_t            flicker {0};
+    uint8_t            is_being_destroyed:1 {};
 
     void destroy();
     void destroyed(void);
@@ -76,6 +63,5 @@ extern Lightp light_new(Thingp owner,
                         fpoint offset,
                         float strength,
                         color col);
-extern void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
 
 #endif // LIGHT_H

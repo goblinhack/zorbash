@@ -10,8 +10,8 @@
 //
 // Find an existing thing.
 //
-Thingp thing_find (const uint32_t id)
+Thingp Level::thing_find (const uint32_t id)
 {_
-    return (level->find_thing_ptr(id));
+    return (find_thing_ptr(id));
 }
 

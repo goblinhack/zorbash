@@ -232,7 +232,7 @@ void Dungeon::make_dungeon (void)
 
 void Dungeon::debug (const std::string s)
 {_
-    // return;
+    return;
     LOG("dungeon (%u) %s", seed, s.c_str());
     LOG("===========================================================");
     dump();

@@ -233,8 +233,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
     in >> bits(my.t->timestamp_dungeon_created); old_timestamp_dungeon_created = my.t->timestamp_dungeon_created;
     in >> bits(my.t->timestamp_dungeon_saved);
-    auto dungeon_age = level->timestamp_dungeon_saved -
-                       level->timestamp_dungeon_created;
+    auto dungeon_age = my.t->timestamp_dungeon_saved -
+                       my.t->timestamp_dungeon_created;
     new_timestamp_dungeon_created = time_get_time_ms() - dungeon_age;
     my.t->timestamp_dungeon_created = new_timestamp_dungeon_created;
     my.t->timestamp_dungeon_saved = new_timestamp_dungeon_created + dungeon_age;
@@ -328,7 +328,6 @@ std::istream& operator>>(std::istream &in, Bits<class World &> my)
                 if (exists) {
                     CON("DUNGEON: loading level %d,%d,%d", p.x, p.y, p.z);
                     auto l = new Level();
-                    level = l;
                     set(my.t.levels, x, y, z, l);
                     in >> bits(l);
                     int eol;
@@ -416,6 +415,10 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.current_level);
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
+    my.t.level = get(my.t.world.levels,
+                     my.t.current_level.x,
+                     my.t.current_level.y,
+                     my.t.current_level.z);
     return (in);
 }
 

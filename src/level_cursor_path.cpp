@@ -57,7 +57,7 @@ void Level::cursor_path_draw (point start, point end)
     //
     // Set up obstacles for the search
     //
-    auto player = level->player;
+    auto level = game->level;
     auto cursor = level->cursor;
 
     if (player &&
@@ -139,6 +139,11 @@ void Level::cursor_path_create (void)
         return;
     }
 
+    auto level = game->level;
+    if (!level) {
+        return;
+    }
+
     auto cursor = level->cursor;
     if (!cursor) {
         return;
@@ -163,6 +168,11 @@ void Level::cursor_path_create (void)
 void Level::cursor_path_clear (void)
 {_
     if (game->paused()) {
+        return;
+    }
+
+    auto level = game->level;
+    if (!level) {
         return;
     }
 

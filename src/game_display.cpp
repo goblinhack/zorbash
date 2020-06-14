@@ -8,9 +8,10 @@
 
 void Game::display (void)
 {_
-    if (level) {
-        level->display();
+    if (!level) {
+        return;
     }
 
-    thing_gc();
+    level->display();
+    level->things_gc();
 }

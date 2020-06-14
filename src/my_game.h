@@ -126,30 +126,13 @@ public:
     std::string        save_file;
     std::string        appdata;
     std::string        saved_dir;
-
     Config             config;
     World              world;
-
-    //
-    // Where we are in the world.
-    //
-    point3d            current_level;
-
-    //
-    // All randomness jumps off of this as the root
-    //
-    int                seed {};
-
-    //
-    // Mouse cursor
-    //
-    fpoint             mouse_over;
-
-    //
-    // Current framerate
-    //
-    uint32_t           fps_value = {};
-
+    Levelp             level {};       // Current displayed level
+    point3d            current_level;  // Where we are in the world.
+    int                seed {};        // All randomness jumps off of this
+    fpoint             mouse_over;     // Mouse cursor
+    uint32_t           fps_value = {}; // Current framerate
     //
     // Used to drive the game forward. Each player move is one tick.
     // When things top moving, the tick is completed.

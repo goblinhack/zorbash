@@ -100,7 +100,7 @@ void Level::display_water (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (likely(!level->is_water(x, y))) {
+            if (likely(!is_water(x, y))) {
                 continue;
             }
             if (likely(!game->config.gfx_show_hidden)) {
@@ -108,7 +108,7 @@ void Level::display_water (int fbo,
                     continue;
                 }
             }
-            FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+            FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                 auto tpp = t->tp();
                 if (!tpp->is_water()) {
                     continue;
@@ -127,7 +127,7 @@ void Level::display_water (int fbo,
     glcolor(WHITE);
     blit_fbo_bind(FBO_MASK2);
     glBlendFunc(GL_ONE, GL_ZERO);
-    auto tile_map = level->water_tile_map;
+    auto tile_map = water_tile_map;
     for (auto y = miny; y < maxy; y+=2) {
         for (auto x = minx; x < maxx; x+=2) {
             if (likely(!get(tile_map, x, y))) {
@@ -179,7 +179,7 @@ void Level::display_water (int fbo,
                 if (likely(!get(tile_map, x, y + 1))) {
                     continue;
                 }
-                FOR_ALL_THINGS_AT_DEPTH(level, t, x, y, z) {
+                FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
                     if (g_render_black_and_white) {
                         if (t->is_monst() ||
                             t->owner_get() ||

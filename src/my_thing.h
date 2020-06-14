@@ -137,6 +137,7 @@ public:
     Thing_ (void);
     ~Thing_ (void);
     Monst       *monstp              {};
+    Level       *level               {};
     point       last_attached;
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
@@ -215,8 +216,6 @@ public:
         }
         DIE("no tp");
     }
-
-    static void update_all(void);
 
     void new_monst(void);
     void get_tiles(void);
@@ -890,7 +889,7 @@ public:
     void hide();
     void hooks_remove();
     void hunger_clock();
-    void init(const std::string& name, fpoint at, fpoint jitter);
+    void init(Levelp, const std::string& name, fpoint at, fpoint jitter);
     void kill(const char *reason);
     void kill(std::string &reason);
     void lifespan_tick();
@@ -934,15 +933,7 @@ public:
 //std::ostream& operator<<(std::ostream &out, Bits<const Thing & > const my);
 //std::istream& operator>>(std::istream &in, Bits<Thing &> my);
 
-Thingp thing_find(const uint32_t id);
-Thingp thing_new(const std::string& tp_name, Thingp owner);
-Thingp thing_new(const std::string& tp_name, const point at);
-Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
-void thing_gc(void);
-void things_tick(void);
-int thing_can_reach(point start, point end);
-int thing_can_reach_player(point start);
 
 #endif // _MY_THING_H_
