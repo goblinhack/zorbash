@@ -26,7 +26,7 @@ def tp_init(name,
     x.set_collision_circle(True)
     x.set_collision_hit_priority(0)
     x.set_collision_radius(0.40)
-    x.set_is_large(True)
+    x.set_is_light_blocker(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_interesting(False)
     x.set_is_loggable_for_unimportant_stuff(False)

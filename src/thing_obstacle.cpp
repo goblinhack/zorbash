@@ -20,41 +20,8 @@ bool Thing::is_obstacle_for_me (const point &p)
         if (!t) {
             continue;
         }
-        if (t->is_dead) {
-            continue;
-        }
-        if (t->is_wall()) {
-            return (true);
-        }
-        if (t->is_rock()) {
-            return (true);
-        }
-        if (t->is_door()) {
-            return (true);
-        }
-        if (t->is_movement_blocking()) {
-            return (true);
-        }
-        if (t->is_hazard()) {
-            return (true);
-        }
-        if (t == this) {
-            continue;
-        }
-        if (t->is_hidden) {
-            continue;
-        }
 
-        //
-        // Do not include this check. It stops monsts seeing down a corridor
-        // with a monst already in it
-        //
-        // if (t->is_alive_monst()) {
-        //   return (true);
-        // }
-        //
-
-        if (will_avoid(t)) {
+        if (collision_obstacle(t)) {
             return (true);
         }
     }

@@ -855,11 +855,13 @@ bool Thing::collision_obstacle (Thingp it)
     if (it->is_hidden) {
         return (false);
     }
-    if (is_player()) {
-        if (it->is_alive_monst()) {
+    if (it->is_movement_blocking()) {
+        if (!it->is_open) {
             return (true);
         }
-        if (it->is_movement_blocking()) {
+    }
+    if (is_player()) {
+        if (it->is_alive_monst()) {
             return (true);
         }
     } else if (is_monst()) {
@@ -876,17 +878,14 @@ bool Thing::collision_obstacle (Thingp it)
         if (it->is_hazard()) {
             return (true);
         }
-        if (it->is_alive_monst()) {
-            return (true);
-        }
-        if (it->is_player()) {
-            return (true);
-        }
-        if (it->is_movement_blocking()) {
-            return (true);
-        }
-    } else if (is_torch()) {
-        if (it->is_wall() || it->is_rock()) {
+        //
+        // Do not include this check. It stops monsts seeing down a corridor
+        // with a monst already in it
+        //
+        // if (it->is_alive_monst()) {
+        //     return (true);
+        // }
+        if (will_avoid(it)) {
             return (true);
         }
     }
@@ -948,6 +947,12 @@ _
             if (things_overlap(me, A_at, it)) {
                 return (true);
             }
+        }
+    } else if (it->is_door() && !it->is_open) {
+        if (things_overlap(me, A_at, it)) {
+            con("can open %s", it->to_string().c_str());
+            open_door(it);
+            return true; // blocks if we cannot open
         }
     } else if (possible_to_attack(it)) {
         if (things_overlap(me, A_at, it)) {

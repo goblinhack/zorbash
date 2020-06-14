@@ -7,7 +7,7 @@ def tp_init(name, text_name):
 
     x.set_text_a_or_an("a");
     x.set_is_cursor_can_hover_over(True)
-    x.set_is_large(True)
+    x.set_is_light_blocker(True)
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_small_shadow_caster(True)
     x.set_is_interesting(True)

@@ -28,16 +28,16 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_gold {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_hazard {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_key {};
-    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_large {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lava {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_light_blocker {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_monst {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_rock {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_secret_door {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
@@ -521,56 +521,56 @@ public:
     //
     // Used in lighting, so inlined
     //
-    inline bool is_large (const point &p)
+    inline bool is_light_blocker (const point &p)
     {
         if (unlikely(is_oob(p.x, p.y))) {
             return (false);
         }
-        return (get(_is_large, p.x, p.y));
+        return (get(_is_light_blocker, p.x, p.y));
     }
 
-    inline bool is_large_no_check (const point &p)
+    inline bool is_light_blocker_no_check (const point &p)
     {
-        return (get_no_check(_is_large, p.x, p.y));
+        return (get_no_check(_is_light_blocker, p.x, p.y));
     }
 
-    inline bool is_large (const int x, const int y)
+    inline bool is_light_blocker (const int x, const int y)
     {
         if (unlikely(is_oob(x, y))) {
             return (false);
         }
-        return (get(_is_large, x, y));
+        return (get(_is_light_blocker, x, y));
     }
 
-    inline bool is_large_no_check (const int x, const int y)
+    inline bool is_light_blocker_no_check (const int x, const int y)
     {
-        return (get_no_check(_is_large, x, y));
+        return (get_no_check(_is_light_blocker, x, y));
     }
 
-    inline void set_is_large (const int x, const int y)
-    {
-        if (unlikely(is_oob(x, y))) {
-            return;
-        }
-        set(_is_large, x, y, true);
-    }
-
-    inline void set_is_large_no_check (const int x, const int y)
-    {
-        set_no_check(_is_large, x, y, true);
-    }
-
-    inline void unset_is_large (const int x, const int y)
+    inline void set_is_light_blocker (const int x, const int y)
     {
         if (unlikely(is_oob(x, y))) {
             return;
         }
-        set(_is_large, x, y, false);
+        set(_is_light_blocker, x, y, true);
     }
 
-    inline void unset_is_large_no_check (const int x, const int y)
+    inline void set_is_light_blocker_no_check (const int x, const int y)
     {
-        set_no_check(_is_large, x, y, false);
+        set_no_check(_is_light_blocker, x, y, true);
+    }
+
+    inline void unset_is_light_blocker (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_light_blocker, x, y, false);
+    }
+
+    inline void unset_is_light_blocker_no_check (const int x, const int y)
+    {
+        set_no_check(_is_light_blocker, x, y, false);
     }
 
     //

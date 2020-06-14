@@ -58,13 +58,13 @@ void Level::clear (void)
     _is_fire = {};
     _is_floor = {};
     _is_food = {};
-    _is_treasure = {};
     _is_gold = {};
-    _is_large = {};
     _is_lava = {};
+    _is_light_blocker = {};
     _is_monst = {};
     _is_rock = {};
     _is_smoke = {};
+    _is_treasure = {};
     _is_visited = {};
     _is_wall = {};
     _is_water = {};

@@ -163,7 +163,7 @@ private:
     int _is_intelligent {};
     int _is_interesting {}; // e.g. something edible or a monst or lava
     int _is_key {};
-    int _is_large {};
+    int _is_light_blocker {};
     int _is_lava {};
     int _is_light_strength {};
     int _is_loggable_for_important_stuff {};
@@ -410,7 +410,7 @@ public:
     int is_hunger_insatiable(void) const;
     int is_interesting(void) const;
     int is_key(void) const;
-    int is_large(void) const;
+    int is_light_blocker(void) const;
     int is_lava(void) const;
     int is_light_strength(void) const;
     int is_loggable_for_unimportant_stuff(void) const;
@@ -554,7 +554,7 @@ public:
     void set_is_intelligent(int);
     void set_is_interesting(int);
     void set_is_key(int);
-    void set_is_large(int);
+    void set_is_light_blocker(int);
     void set_is_lava(int);
     void set_is_light_strength(int);
     void set_is_loggable_for_important_stuff(int);

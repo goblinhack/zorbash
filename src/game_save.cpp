@@ -207,16 +207,16 @@ std::ostream& operator<<(std::ostream &out,
     /* _is_fire */             out << bits(my.t->_is_fire);
     /* _is_floor */            out << bits(my.t->_is_floor);
     /* _is_food */             out << bits(my.t->_is_food);
-    /* _is_treasure */         out << bits(my.t->_is_treasure);
     /* _is_gold */             out << bits(my.t->_is_gold);
     /* _is_hazard */           out << bits(my.t->_is_hazard);
     /* _is_key */              out << bits(my.t->_is_key);
-    /* _is_large */            out << bits(my.t->_is_large);
     /* _is_lava */             out << bits(my.t->_is_lava);
+    /* _is_light_blocker */    out << bits(my.t->_is_light_blocker);
     /* _is_monst */            out << bits(my.t->_is_monst);
     /* _is_rock */             out << bits(my.t->_is_rock);
     /* _is_secret_door */      out << bits(my.t->_is_secret_door);
     /* _is_smoke */            out << bits(my.t->_is_smoke);
+    /* _is_treasure */         out << bits(my.t->_is_treasure);
     /* _is_visited */          out << bits(my.t->_is_visited);
     /* _is_wall */             out << bits(my.t->_is_wall);
     /* _is_water */            out << bits(my.t->_is_water);

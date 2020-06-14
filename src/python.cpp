@@ -566,7 +566,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_hunger_insatiable)
     TP_SET_DECL(is_interesting)
     TP_SET_DECL(is_key)
-    TP_SET_DECL(is_large)
+    TP_SET_DECL(is_light_blocker)
     TP_SET_DECL(is_lava)
     TP_SET_DECL(is_light_strength)
     TP_SET_DECL(is_loggable_for_unimportant_stuff)

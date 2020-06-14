@@ -274,9 +274,9 @@ int Thing::gfx_attack_anim(void) const
     return (tp()->gfx_attack_anim());
 }
 
-int Thing::is_large(void) const
+int Thing::is_light_blocker(void) const
 {_
-    return (tp()->is_large());
+    return (tp()->is_light_blocker());
 }
 
 int Thing::gfx_show_outlined(void) const
