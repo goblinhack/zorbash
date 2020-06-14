@@ -102,6 +102,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_drop.o 		\
+    $(OBJDIR)/thing_use.o 		\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\

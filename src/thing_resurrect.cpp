@@ -12,7 +12,7 @@ void Thing::resurrect_tick (void)
     //
     // No respawn onto lava or things like that if we don't like that.
     //
-    if (is_less_preferred_terrain(point(mid_at.x, mid_at.y))) {
+    if (is_less_preferred_terrain(make_point(mid_at))) {
         return;
     }
 

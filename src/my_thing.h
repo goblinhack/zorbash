@@ -593,6 +593,7 @@ public:
 
     void actionbar_particle(Thingp what, int slot);
     bool actionbar_id_remove(Thingp what);
+    bool actionbar_id_remove(Thingp what, point used_where);
     bool actionbar_id_insert(Thingp what);
     int actionbar_id_slot_count(const int slot);
 
@@ -878,6 +879,7 @@ public:
     void dir_set_tr(void);
     void dir_set_up(void);
     void drop(Thingp w);
+    void used(Thingp w, point where);
     void drop_all(void);
     void dump(std::string prefix, std::ostream &out);
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
