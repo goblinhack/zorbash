@@ -24,12 +24,10 @@ bool Thing::open_door (Thingp it)
     for (const auto& item : monstp->carrying) {
         auto k = thing_find(item);
         if (k->is_key()) {
-            drop(k);
+            used(k, make_point(it->mid_at));
             it->detach();
             it->is_open = true;
             it->attach();
-            k->detach();
-            k->dead("used");
             MINICON("The door opens");
             if (get_light_count()) {
                 update_light();

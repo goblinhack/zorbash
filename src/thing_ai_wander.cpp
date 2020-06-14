@@ -138,7 +138,7 @@ bool Thing::ai_choose_wander (point& nh)
     // Try to use the same location.
     //
     if (target != point(0, 0)) {
-        if (ai_create_path(nh, point(mid_at.x, mid_at.y), target)) {
+        if (ai_create_path(nh, make_point(mid_at), target)) {
             return true;
         }
     }
@@ -149,12 +149,12 @@ bool Thing::ai_choose_wander (point& nh)
     monstp->wander_target = point(0, 0);
 
     target = get_random_scent_target();
-    if (!ai_create_path(nh, point(mid_at.x, mid_at.y), target)) {
+    if (!ai_create_path(nh, make_point(mid_at), target)) {
         dbg("wander failed");
         return false;
     }
 
-    if (target == point(mid_at.x, mid_at.y)) {
+    if (target == make_point(mid_at)) {
         dbg("wander failed");
         return false;
     }

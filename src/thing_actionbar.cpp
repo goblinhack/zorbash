@@ -127,6 +127,32 @@ bool Thing::actionbar_id_remove (Thingp what)
     return false;
 }
 
+bool Thing::actionbar_id_remove (Thingp what, point used_where)
+{_
+    if (!is_player()) {
+        return false;
+    }
+
+    if (!monstp) {
+        return false;
+    }
+
+    auto actionbar_items = player->monstp->actionbar_id.size();
+    for (auto i = 0U; i < actionbar_items; i++) {
+        auto a = monstp->actionbar_id[i];
+        if (!a) {
+            continue;
+        }
+        auto t = thing_find(a);
+        if (t->tp() == what->tp()) {
+            monstp->actionbar_id.erase(monstp->actionbar_id.begin() + i);
+            game_status_wid_init();
+            return true;
+        }
+    }
+    return false;
+}
+
 int Thing::actionbar_id_slot_count (const int slot)
 {_
     auto a = monstp->actionbar_id[slot];
