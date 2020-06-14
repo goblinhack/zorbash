@@ -55,7 +55,7 @@ void Level::display_particles (void)
             blit_tl.y -= oy;
             blit_br.y -= oy;
 
-            tile_blit(p.tile, blit_tl, blit_br);
+            tile_blit_outline(p.tile, blit_tl, blit_br, WHITE);
 
             return false;
         });
