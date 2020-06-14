@@ -68,7 +68,6 @@ void Level::cursor_path_draw (point start, point end)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-                    level->is_door(x,y)                              ||
                     level->is_secret_door(x,y)                       ||
                     level->is_rock(x, y)                             ||
                     level->is_wall(x, y)) {
@@ -86,7 +85,6 @@ void Level::cursor_path_draw (point start, point end)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-                    level->is_door(x,y)                              ||
                     level->is_secret_door(x,y)                       ||
                     level->is_rock(x, y)                             ||
                     level->is_wall(x, y)) {
@@ -103,7 +101,6 @@ void Level::cursor_path_draw (point start, point end)
         for (auto y = miny; y < maxy; y++) {
             for (auto x = minx; x < maxx; x++) {
                 if ((level->is_monst(x,y) && !level->is_corpse(x,y)) ||
-                    level->is_door(x,y)                              ||
                     level->is_secret_door(x,y)                       ||
                     level->is_hazard(x,y)                            ||
                     level->is_rock(x, y)                             ||
