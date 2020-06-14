@@ -6,8 +6,6 @@
 #include "my_globals.h"
 
 class Game *game;
-class World *world;
-struct Thing_ *player;
 
 char *DATA_PATH;
 char *EXEC_DIR;

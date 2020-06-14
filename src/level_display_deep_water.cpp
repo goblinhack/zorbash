@@ -100,7 +100,7 @@ void Level::display_deep_water (int fbo,
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     for (auto y = miny; y < maxy; y++) {
         for (auto x = minx; x < maxx; x++) {
-            if (likely(!game->level->is_deep_water(x, y))) {
+            if (likely(!is_deep_water(x, y))) {
                 continue;
             }
             if (likely(!game->config.gfx_show_hidden)) {

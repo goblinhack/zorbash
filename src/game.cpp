@@ -13,6 +13,4 @@ Game::Game (std::string appdata)
     save_slot = 1;
     save_meta = string_timestamp();
     save_file = saved_dir + "saved-slot-" + std::to_string(save_slot);
-
-    ::world = &world;
 }

@@ -62,7 +62,7 @@ static void game_status_wid_create (void)
     if (!level) {
         return;
     }
-
+    auto player = level->player;
     if (!player) {
         return;
     }
