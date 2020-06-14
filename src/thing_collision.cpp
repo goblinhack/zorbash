@@ -950,7 +950,7 @@ _
         }
     } else if (it->is_door() && !it->is_open) {
         if (things_overlap(me, A_at, it)) {
-            con("can open %s", it->to_string().c_str());
+            log("can open %s", it->to_string().c_str());
             open_door(it);
             return true; // blocks if we cannot open
         }

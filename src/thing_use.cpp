@@ -6,10 +6,10 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-void Thing::used (Thingp what, point used_where)
+void Thing::used (Thingp what, Thingp target)
 {_
     if (is_player()) {
-        if (!actionbar_id_remove(what, used_where)) {
+        if (!actionbar_id_remove(what, target)) {
             return;
         }
     }
