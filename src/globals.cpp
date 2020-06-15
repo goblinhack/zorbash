@@ -19,15 +19,16 @@ FILE *g_log_stdout;
 FILE *g_log_stderr;
 
 bool g_croaked;
-bool g_errored;
-bool g_quitting;
-bool g_need_restart;
-bool g_render_black_and_white;
-bool g_opt_new_game;
-bool g_opt_fast_start;
-bool g_opt_debug_mode;
 bool g_do_screenshot;
+bool g_errored;
 bool g_grab_next_key;
+bool g_need_restart;
+bool g_opt_debug_mode;
+bool g_opt_fast_start;
+bool g_opt_new_game;
+bool g_quitting;
+bool g_render_black_and_white;
+int g_opt_seed;
 
 int TILES_ACROSS;
 int TILES_DOWN;

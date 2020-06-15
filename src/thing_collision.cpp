@@ -952,7 +952,13 @@ _
         if (things_overlap(me, A_at, it)) {
             log("can open %s", it->to_string().c_str());
             open_door(it);
-            return true; // blocks if we cannot open
+            return true; // blocks unless open
+        }
+    } else if (it->is_exit()) {
+        if (things_overlap(me, A_at, it)) {
+            log("can open %s", it->to_string().c_str());
+            open_exit(it);
+            return false;
         }
     } else if (possible_to_attack(it)) {
         if (things_overlap(me, A_at, it)) {

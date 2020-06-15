@@ -29,43 +29,39 @@ typedef class Dungeon *Dungeonp;
 class Dungeon {
 public:
     //
+    // Set on create fail
+    //
+    bool                                      failed {};
+    //
     // The. World.
     //
     std::vector<char>                         cells;
-
     //
     // For rollback when moving rooms around.
     //
     std::vector<char>                         cells_saved;
-
     //
     // Pointers from map position to room
     //
     std::vector<Roomp>                        cells_room;
-
     int map_width                             {MAP_WIDTH};
     int map_height                            {MAP_HEIGHT};
     int map_depth                             {MAP_DEPTH};
-
     std::array<std::array<int, MAP_HEIGHT>, MAP_WIDTH> map_jigsaw_buffer_water_depth {};
-
     //
     // High level view of the map.
     //
     int grid_width                           {0};
     int grid_height                          {0};
     Nodes                                    *nodes {};
-
     //
     // Root seed for the dungeon
     //
     uint32_t                                 seed;
-
     //
     // Room pointers on the above nodes map
     //
     Grid                                     grid {};
-
     //
     // Placed rooms
     //

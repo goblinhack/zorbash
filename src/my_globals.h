@@ -55,15 +55,16 @@ extern FILE *g_log_stdout;
 extern FILE *g_log_stderr;
 
 extern bool g_croaked;
-extern bool g_errored;
-extern bool g_quitting;
-extern bool g_need_restart;
-extern bool g_render_black_and_white;
-extern bool g_opt_new_game;
-extern bool g_opt_fast_start;
-extern bool g_opt_debug_mode;
 extern bool g_do_screenshot;
+extern bool g_errored;
 extern bool g_grab_next_key;
+extern bool g_need_restart;
+extern bool g_opt_debug_mode;
+extern bool g_opt_fast_start;
+extern bool g_opt_new_game;
+extern bool g_quitting;
+extern bool g_render_black_and_white;
+extern int g_opt_seed;
 
 //
 // Shorter callstack indent printing logs inside thing code

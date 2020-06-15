@@ -86,26 +86,11 @@
 #endif
 
 ////////////////////////////////////////////////////////////////////////////
-// Tiles
+// World
 ////////////////////////////////////////////////////////////////////////////
-
-//
-// Per screen
-//
-extern int TILES_ACROSS;
-extern int TILES_DOWN;
-
-//
-// Tile size of the player
-//
-#define TILE_WIDTH       16
-#define TILE_HEIGHT      16
-
-//
-// Largest tile for collisions
-//
-#define MAX_TILE_WIDTH   64
-#define MAX_TILE_HEIGHT  64
+#define LEVELS_DEEP     32
+#define LEVELS_ACROSS   MAP_WIDTH
+#define LEVELS_DOWN     MAP_HEIGHT
 
 ////////////////////////////////////////////////////////////////////////////
 // Level
@@ -127,28 +112,29 @@ extern int TILES_DOWN;
 #define MAP_HEIGHT      ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
 
 ////////////////////////////////////////////////////////////////////////////
-// Particles
+// Tiles
 ////////////////////////////////////////////////////////////////////////////
 //
-// Particle size in pixels
+// Per screen
 //
-#define PARTICLE_SLOTS   100
-#define PARTICLE_RADIUS  8
-#define PARTICLE_MAX     200
-#define PARTICLES_WIDTH  (MAP_WIDTH * (TILE_WIDTH / PARTICLE_RADIUS))
-#define PARTICLES_HEIGHT (MAP_HEIGHT * (TILE_HEIGHT / PARTICLE_RADIUS))
+extern int TILES_ACROSS;
+extern int TILES_DOWN;
+
+//
+// Tile size of the player
+//
+#define TILE_WIDTH      16
+#define TILE_HEIGHT     16
+
+//
+// Largest tile for collisions
+//
+#define MAX_TILE_WIDTH  64
+#define MAX_TILE_HEIGHT 64
 
 ////////////////////////////////////////////////////////////////////////////
-// World
+// Things
 ////////////////////////////////////////////////////////////////////////////
-#define LEVELS_DEEP   32
-#define LEVELS_ACROSS MAP_WIDTH
-#define LEVELS_DOWN   MAP_HEIGHT
-
-////////////////////////////////////////////////////////////////////////////
-// Things on map
-////////////////////////////////////////////////////////////////////////////
-
 #define MAP_SLOTS                   32
 #define MAX_THINGS                  (1 << 15)
 #define MAX_THINGS_MASK             (MAX_THINGS - 1)
@@ -157,7 +143,6 @@ extern int TILES_DOWN;
 ////////////////////////////////////////////////////////////////////////////
 // Lights
 ////////////////////////////////////////////////////////////////////////////
-
 //
 // Light sources
 //

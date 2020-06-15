@@ -157,7 +157,9 @@ void Dungeon::make_dungeon (void)
             break;
         }
 
-        debug("failed, redo from scratch");
+        debug("failed");
+        failed = true;
+        return;
     }
 
     //

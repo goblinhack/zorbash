@@ -91,7 +91,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/string.o 			\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing_actionbar.o 	\
-    $(OBJDIR)/thing_door.o 		\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_ai_goals.o 		\
     $(OBJDIR)/thing_ai_wander.o 	\
@@ -101,15 +100,16 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_attach.o 		\
     $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_carry.o 		\
-    $(OBJDIR)/thing_drop.o 		\
-    $(OBJDIR)/thing_use.o 		\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
     $(OBJDIR)/thing_dead.o 		\
     $(OBJDIR)/thing_display.o 		\
     $(OBJDIR)/thing_distance.o 		\
+    $(OBJDIR)/thing_door.o 		\
+    $(OBJDIR)/thing_drop.o 		\
     $(OBJDIR)/thing_enemy.o 		\
+    $(OBJDIR)/thing_exit.o 		\
     $(OBJDIR)/thing_fadeup.o 		\
     $(OBJDIR)/thing_fini.o 		\
     $(OBJDIR)/thing_gc.o 		\
@@ -145,6 +145,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_tick.o 		\
     $(OBJDIR)/thing_tile.o 		\
     $(OBJDIR)/thing_update.o 		\
+    $(OBJDIR)/thing_use.o 		\
     $(OBJDIR)/thing_water.o 		\
     $(OBJDIR)/thing_weapon.o 		\
     $(OBJDIR)/tile.o 			\
