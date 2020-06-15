@@ -83,7 +83,7 @@ Tpp tp_find (uint32_t id)
 {_
     auto result = get(tp_id_map, id - 1);
     if (!result) {
-        ERR("thing template %08X not found", id);
+        ERR("thing template %" PRIx32 " not found", id);
     }
 
     return (result);

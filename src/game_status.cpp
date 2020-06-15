@@ -131,8 +131,8 @@ static void game_status_wid_create (void)
 
         if (player->monstp) {
             auto a = player->monstp->actionbar_id[i];
-            if (a) {
-                auto it = level->thing_find(a);
+            if (a.id) {
+                auto it = level->thing_find(a.id);
                 if (it) {
                     auto tpp = it->tp();
                     auto tiles = &tpp->tiles;

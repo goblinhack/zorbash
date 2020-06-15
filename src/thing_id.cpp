@@ -10,33 +10,32 @@
 #include "my_dmap.h"
 #include "my_thing.h"
 
-Thingp Level::test_thing_ptr (uint32_t id)
+Thingp Level::test_thing_ptr (ThingId id)
 {_
-    auto index = id % MAX_THINGS;
+    auto index = id.id % MAX_THINGS;
     auto p = &all_thing_ptrs[index];
     if (unlikely(!p->ptr)) {
         return (nullptr);
     }
 
     if (unlikely(p->id != id)) {
-        ERR("invalid thing ptr, index %u, %08X != %08X", index, id, p->id);
+        ERR("invalid thing ptr, index %u, %" PRIx64 " != %" PRIx64 "", (int)index, id.id, p->id.id);
     }
 
     verify(p->ptr);
     return (p->ptr);
 }
 
-Thingp Level::find_thing_ptr (uint32_t id)
+Thingp Level::find_thing_ptr (ThingId id)
 {_
-    auto index = id % MAX_THINGS;
+    auto index = id.id % MAX_THINGS;
     auto p = &all_thing_ptrs[index];
     if (unlikely(!p->ptr)) {
-        ERR("thing ptr not found, index %u, %08X", index, id);
+        ERR("thing ptr not found, index %u, %" PRIx64 "", (int)index, id.id);
     }
 
     if (unlikely(p->id != id)) {
-        ERR("invalid thing ptr, index %u, %08X != %08X",
-            index, id, p->id);
+        ERR("invalid thing ptr, index %u, %" PRIx64 " != %" PRIx64 "", (int)index, id.id, p->id.id);
     }
 
     verify(p->ptr);
@@ -57,9 +56,10 @@ void Level::alloc_thing_id (Thingp t)
         auto p = getptr(all_thing_ptrs, index);
         if (!p->ptr) {
             p->ptr = t;
-            uint32_t idx = (myrand() & ~MAX_THINGS_MASK) | index;
-            t->id = idx;
-            p->id = idx;
+            uint64_t idx = (myrand() & ~MAX_THINGS_MASK) | index;
+            ThingId id(idx);
+            t->id = id;
+            p->id = id;
 
 #ifdef ENABLE_THING_ID_LOGS
             t->log("alloc index %u", index);
@@ -74,22 +74,22 @@ void Level::alloc_thing_id (Thingp t)
 
 void Level::free_thing_id (Thingp t)
 {_
-    uint32_t index = t->id & MAX_THINGS_MASK;
+    auto index = t->id.id & MAX_THINGS_MASK;
     auto p = getptr(all_thing_ptrs, index);
     if (!p->ptr) {
-        t->err("double free for thing %08X", t->id);
+        t->err("double free for thing %" PRIx64 "", t->id.id);
     }
 
     if (p->ptr != t) {
-        t->err("wrong owner trying to free thing %08X", t->id);
+        t->err("wrong owner trying to free thing %" PRIx64 "", t->id.id);
     }
 
     if (p->id != t->id) {
-        t->err("stale owner trying to free thing %08X", t->id);
+        t->err("stale owner trying to free thing %" PRIx64 "", t->id.id);
     }
 
 #ifdef ENABLE_THING_ID_LOGS
-    t->log("free index %u, %p, %08X", index, t, t->id);
+    t->log("free index %u, %p, %" PRIx64 "", (int)index, t, t->id.id);
 #endif
     p->ptr = nullptr;
     p->id = 0;
@@ -102,15 +102,13 @@ void Level::realloc_thing_id (Thingp t)
         t->err("trying to realloc when thing has no ID");
     }
 
-    uint32_t index = t->id & MAX_THINGS_MASK;
+    uint32_t index = t->id.id & MAX_THINGS_MASK;
     auto p = getptr(all_thing_ptrs, index);
     if (p->ptr) {
         if (p->ptr == t) {
-            t->err("index in use, cannot be realloc'd for same thing %08X",
-                   t->id);
+            t->err("index in use, cannot be realloc'd for same thing %" PRIx64 "", t->id.id);
         } else {
-            t->err("index in use by another thing %p, cannot be realloc'd by %p, %08X",
-                   p->ptr, t, t->id);
+            t->err("index in use by another thing %p, cannot be realloc'd by %p, %" PRIx64 "", p->ptr, t, t->id.id);
             p->ptr->err("realloc failed for ID, this is the current owner");
         }
     }

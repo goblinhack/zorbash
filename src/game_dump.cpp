@@ -29,7 +29,7 @@ void Thing::dump (std::string pfx, std::ostream &out)
     auto old_pfx = pfx;
     pfx += "  ";
 
-    out << pfx << "id                  " << std::hex             << id << std::endl;
+    out << pfx << "id                  " << std::hex             << id.id << std::endl;
     auto tp = tp_find(tp_id);
     out << pfx << "tp_id               " << tp_id                << " " << tp->name() << std::endl;
 
@@ -84,7 +84,7 @@ void Level::dump (std::string pfx, std::ostream &out)
         for (auto y = 0; y < MAP_HEIGHT; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y, z);
-                if (id) {
+                if (id.ok()) {
                     auto t = thing_find(id);
                     t->log("dump");
                     t->dump(pfx + "  ", out);

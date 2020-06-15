@@ -12,6 +12,7 @@
 #include "my_depth.h"
 #include "my_particle.h"
 #include "my_dungeon.h"
+#include "my_thing_id.h"
 
 class Level {
 public:
@@ -83,16 +84,16 @@ public:
     //
     // All things. The array index is part of the thing ID
     //
-    class Thing_entropy {
+    class ThingAndId {
     public:
-        Thingp   ptr {};
-        uint32_t id {};
+        Thingp  ptr {};
+        ThingId id {};
     };
-    std::array<class Thing_entropy, MAX_THINGS> all_thing_ptrs {};
+    std::array<class ThingAndId, MAX_THINGS> all_thing_ptrs {};
 
-    std::map<uint32_t, Thingp> all_things {};
-    std::map<uint32_t, Thingp> all_active_things {};
-    std::map<uint32_t, Thingp> all_gc_things {};
+    std::map<ThingId, Thingp> all_things {};
+    std::map<ThingId, Thingp> all_active_things {};
+    std::map<ThingId, Thingp> all_gc_things {};
 
     //
     // Tile maps for rendering solid blocks of water etc...
@@ -111,7 +112,7 @@ public:
     //
     std::array<
       std::array<
-        std::array<uint32_t, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
+        std::array<ThingId, MAP_SLOTS>, MAP_HEIGHT>, MAP_WIDTH>
           all_thing_ids_at {};
 
     std::array<
@@ -159,14 +160,14 @@ public:
     void alloc_thing_id(Thingp t);
     void realloc_thing_id(Thingp t);
     void free_thing_id(Thingp t);
-    Thingp test_thing_ptr(uint32_t id);
-    Thingp find_thing_ptr(uint32_t id);
+    Thingp test_thing_ptr(ThingId id);
+    Thingp find_thing_ptr(ThingId id);
 
-    void remove_thing(int x, int y, uint32_t id);
-    void remove_thing(point p, uint32_t id);
+    void remove_thing(int x, int y, ThingId id);
+    void remove_thing(point p, ThingId id);
 
-    void put_thing(int x, int y, uint32_t id);
-    void put_thing(point p, uint32_t id);
+    void put_thing(int x, int y, ThingId id);
+    void put_thing(point p, ThingId id);
 
     #define JOIN1(X,Y) X##Y
     #define JOIN(X,Y) JOIN1(X,Y)
@@ -653,7 +654,7 @@ public:
     void place_water(Dungeonp d, const std::string &what);
     void lights_render(int minx, int miny, int maxx, int maxy, int fbo);
 
-    Thingp thing_find(const uint32_t id);
+    Thingp thing_find(const ThingId id);
     Thingp thing_new(const std::string& tp_name, Thingp owner);
     Thingp thing_new(const std::string& tp_name, const point at);
     Thingp thing_new(const std::string& tp_name, const fpoint at, const fpoint jitter = fpoint(0, 0));

@@ -18,7 +18,7 @@ void Thing::move_carried_items (void)
     //
     // Weapons follow also.
     //
-    if (get_weapon_id_carry_anim()) {
+    if (get_weapon_id_carry_anim().ok()) {
         auto w = level->thing_find(get_weapon_id_carry_anim());
         if (w) {
             w->move_to(mid_at);
@@ -26,7 +26,7 @@ void Thing::move_carried_items (void)
         }
     }
 
-    if (get_weapon_id_use_anim()) {
+    if (get_weapon_id_use_anim().ok()) {
         auto w = level->thing_find(get_weapon_id_use_anim());
         if (w) {
             w->move_to(mid_at);
@@ -47,7 +47,7 @@ void Thing::move_carried_items (void)
     }
 
     auto on_fire_anim_id = get_on_fire_anim_id();
-    if (on_fire_anim_id) {_
+    if (on_fire_anim_id.ok()) {_
         auto w = level->thing_find(on_fire_anim_id);
         if (w) {
             w->move_to(mid_at);

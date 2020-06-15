@@ -62,7 +62,7 @@ bool Thing::achieve_goals_in_life (void)
             auto d = get_idle_tick_dice();
             py_call_void_fn(d.python_mod.c_str(),
                             d.python_func.c_str(),
-                            id, (int)mid_at.x, (int)mid_at.y);
+                            id.id, (int)mid_at.x, (int)mid_at.y);
             set_tick_last_did_something(get_tick());
         }
     }

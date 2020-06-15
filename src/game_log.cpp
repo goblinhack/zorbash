@@ -29,7 +29,6 @@ void Thing::log (std::string pfx)
     auto old_pfx = pfx;
     pfx += "  ";
 
-    LOG("%s id                  %08X", pfx.c_str(), id);
     LOG("%s tp_id               %d", pfx.c_str(), tp_id);
 
     if (monstp) {
@@ -84,7 +83,7 @@ void Level::log (std::string pfx)
         for (auto y = 0; y < MAP_HEIGHT; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y, z);
-                if (id) {
+                if (id.ok()) {
                     auto t = thing_find(id);
                     t->log(pfx + "  ");
                 }

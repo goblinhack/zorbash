@@ -12,6 +12,7 @@
 #include "my_time.h"
 #include "my_light.h"
 #include "my_thing_ai.h"
+#include "my_thing_id.h"
 
 typedef struct {
     uint16_t tile_outline;
@@ -90,18 +91,22 @@ typedef struct Monst_ {
     int          stats_defence_max = {};
     int          stats_health = {};
     int          stats_health_max = {};
-    std::list<uint32_t> carrying;
-    std::vector<uint32_t> actionbar_id;
-    std::vector<uint32_t> enemies;           // List of things that wronged us
-    std::vector<point> move_path;
+    ThingId      on_fire_id_anim {};
+    ThingId      owner_id {};                // Who created this thing?
+    ThingId      weapon_id {};               // Current weapon
+    ThingId      weapon_id_carry_anim {};
+    ThingId      weapon_id_use_anim {};
     point        wander_target;
+    std::list<ThingId> carrying;
     std::string  msg;                        // Text that floats on screen
-    uint32_t     tick_last_did_something {};
+    std::vector<ThingId> actionbar_id;
+    std::vector<ThingId> enemies;            // List of things that wronged us
+    std::vector<point> move_path;
     timestamp_t  timestamp_UNUSED1 {};
+    timestamp_t  timestamp_UNUSED2 {};
     timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
-    timestamp_t  timestamp_UNUSED2 {};
     timestamp_t  timestamp_fadeup_begin {};
     timestamp_t  timestamp_fadeup_end {};
     timestamp_t  timestamp_flip_start {};    // Used for animating the steps.
@@ -112,12 +117,8 @@ typedef struct Monst_ {
     timestamp_t  timestamp_lunge_end {};
     timestamp_t  timestamp_move_begin {};
     timestamp_t  timestamp_move_end {};
-    uint32_t     owner_id {};                // Who created this thing?
     uint32_t     tick = {};                  // Increments on completion of move
-    uint32_t     weapon_id {};               // Current weapon
-    uint32_t     weapon_id_carry_anim {};
-    uint32_t     weapon_id_use_anim {};
-    uint32_t     on_fire_id_anim {};
+    uint32_t     tick_last_did_something {};
     /////////////////////////////////////////////////////////////////////////
     // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
@@ -138,17 +139,17 @@ public:
     ~Thing_ (void);
     Monst       *monstp              {};
     Level       *level               {};
-    point       last_attached;
+    ThingId     id;                         // Unique per thing.
+    ThingTiles  tiles                {};
     fpoint      last_mid_at;         // Previous hop where we were.
     fpoint      mid_at;              // Grid coordinates.
-    point       last_blit_tl;        // Last blit coords
-    point       last_blit_br;
-    uint32_t    id;                         // Unique per thing.
     int16_t     tp_id                {-1};  // Common settings
+    point       last_attached;
+    point       last_blit_br;
+    point       last_blit_tl;        // Last blit coords
+    timestamp_t timestamp_next_frame {};
     uint16_t    tile_curr            {};
     uint8_t     alpha                {255}; // For fading
-    ThingTiles  tiles                {};
-    timestamp_t timestamp_next_frame {};
     uint32_t    dir:4                {};    // Direction
 
     /////////////////////////////////////////////////////////////////////////
@@ -572,23 +573,23 @@ public:
     uint32_t decr_tick_last_did_something(void);
     uint32_t incr_tick_last_did_something(void);
 
-    uint32_t set_on_fire_anim_id(uint32_t);
-    uint32_t get_on_fire_anim_id(void) const;
+    ThingId set_on_fire_anim_id(ThingId);
+    ThingId get_on_fire_anim_id(void) const;
 
     void unset_on_fire(void);
     bool set_on_fire(void);
 
-    uint32_t set_owner_id(uint32_t);
-    uint32_t get_owner_id(void) const;
+    ThingId set_owner_id(ThingId);
+    ThingId get_owner_id(void) const;
 
-    uint32_t set_weapon_id_carry_anim(uint32_t);
-    uint32_t get_weapon_id_carry_anim(void) const;
+    ThingId set_weapon_id_carry_anim(ThingId);
+    ThingId get_weapon_id_carry_anim(void) const;
 
-    uint32_t set_weapon_id_use_anim(uint32_t);
-    uint32_t get_weapon_id_use_anim(void) const;
+    ThingId set_weapon_id_use_anim(ThingId);
+    ThingId get_weapon_id_use_anim(void) const;
 
-    uint32_t set_weapon_id(uint32_t);
-    uint32_t get_weapon_id(void) const;
+    ThingId set_weapon_id(ThingId);
+    ThingId get_weapon_id(void) const;
 
     void actionbar_particle(Thingp what, int slot);
     void actionbar_particle(Thingp what, int slot, Thingp target);
@@ -632,6 +633,8 @@ public:
     Thingp weapon_get() const;
     Thingp weapon_get_carry_anim(void);
     Thingp weapon_get_use_anim(void) const;
+    bool achieve_goals_in_death();
+    bool achieve_goals_in_life();
     bool ai_choose_wander(point& nh);
     bool ai_create_on_fire_path(point &nh, const point start, const point end);
     bool ai_create_path(point &nh, const point start, const point end);
@@ -664,6 +667,8 @@ public:
     bool move_to_check(const point&, const bool escaping);
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
+    bool open_door(Thingp door);
+    bool open_exit(Thingp door);
     bool possible_to_attack(const Thingp it);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
@@ -694,7 +699,6 @@ public:
     float get_lunge(void);
     fpoint get_interpolated_mid_at(void) const;
     fpoint set_interpolated_mid_at(fpoint);
-    point get_random_scent_target(void);
     int ai_choose_goal(void);
     int ai_delay_after_moving_ms(void);
     int ai_hit_actual(Thingp hitter, Thingp real_hitter, int damage);
@@ -737,6 +741,8 @@ public:
     int is_blood(void) const;
     int is_blood_splatter(void) const;
     int is_chasm(void) const;
+    int is_collectable(void) const;
+    int is_collected_as_gold(void) const;
     int is_combustible(void) const;
     int is_corpse(void) const;
     int is_corpse_on_death(void) const;
@@ -748,6 +754,7 @@ public:
     int is_deep_water(void) const;
     int is_dirt(void) const;
     int is_door(void) const;
+    int is_double_damage_from_fire(void) const;
     int is_entrance(void) const;
     int is_exit(void) const;
     int is_explosion(void) const;
@@ -757,21 +764,19 @@ public:
     int is_floor(void) const;
     int is_floor_deco(void) const;
     int is_food(void) const;
+    int is_gold(void) const;
     int is_hazard(void) const;
     int is_hunger_insatiable(void) const;
+    int is_intelligent(void) const;
     int is_interesting(void) const;
     int is_key(void) const;
-    int is_light_blocker(void) const;
     int is_lava(void) const;
+    int is_light_blocker(void) const;
     int is_light_strength(void) const;
+    int is_loggable_for_important_stuff(void) const;
     int is_loggable_for_unimportant_stuff(void) const;
     int is_made_of_meat(void) const;
     int is_meat_eater(void) const;
-    int is_collectable(void) const;
-    int is_double_damage_from_fire(void) const;
-    int is_gold(void) const;
-    int is_intelligent(void) const;
-    int is_loggable_for_important_stuff(void) const;
     int is_monst(void) const;
     int is_movable(void) const;
     int is_movement_blocking(void) const;
@@ -786,7 +791,6 @@ public:
     int is_rrr10(void) const;
     int is_rrr11(void) const;
     int is_rrr12(void) const;
-    int is_collected_as_gold(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;
@@ -803,18 +807,19 @@ public:
     int is_treasure(void) const;
     int is_undead(void) const;
     int is_wall(void) const;
-    int tick_catches_up_on_attack(void) const;
     int is_wall_deco(void) const;
     int is_water(void) const;
     int is_water_dweller(void) const;
     int is_water_hater(void) const;
     int is_weapon(void) const;
     int normal_placement_rules(void) const;
+    int tick_catches_up_on_attack(void) const;
     int weapon_damage(void) const;
     int weapon_use_delay_hundredths(void) const;
     int weapon_use_distance(void) const;
     int z_depth(void) const;
     int z_prio(void) const;
+    point get_random_scent_target(void);
     std::string text_The(void) const;
     std::string text_a_or_an(void) const;
     std::string text_the(void) const;
@@ -832,8 +837,6 @@ public:
     uint8_t is_dir_up(void) const;
     uint8_t is_less_preferred_terrain(point p) const;
     uint8_t is_visible() const;
-    bool achieve_goals_in_life();
-    bool achieve_goals_in_death();
     void add_enemy(Thingp attacker);
     void ai_get_next_hop(void);
     void animate();
@@ -851,6 +854,7 @@ public:
     void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
     void carry(Thingp w);
+    void change_level(Levelp);
     void collision_check_do();
     void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args); // compile error without
@@ -879,7 +883,6 @@ public:
     void dir_set_tr(void);
     void dir_set_up(void);
     void drop(Thingp w);
-    void used(Thingp w, Thingp target);
     void drop_all(void);
     void dump(std::string prefix, std::ostream &out);
     void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -892,8 +895,8 @@ public:
     void init(Levelp, const std::string& name, fpoint at, fpoint jitter);
     void kill(const char *reason);
     void kill(std::string &reason);
+    void lava_tick();
     void lifespan_tick();
-    void resurrect_tick();
     void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void log(std::string prefix);
     void log_(const char *fmt, va_list args); // compile error without
@@ -908,6 +911,7 @@ public:
     void msg(const std::string&);
     void reinit(void);
     void remove_owner(void);
+    void resurrect_tick();
     void set_owner(Thingp owner);
     void sheath(void);
     void tick();
@@ -916,17 +920,15 @@ public:
     void update_light(void);
     void update_pos(fpoint, bool immediately);
     void use(void);
+    void used(Thingp w, Thingp target);
     void visible();
     void water_tick();
-    void lava_tick();
-    bool open_door(Thingp door);
-    bool open_exit(Thingp door);
     void weapon_get_use_offset(float *dx, float *dy) const;
     void weapon_set_carry_anim(Thingp weapon_carry_anim);
-    void weapon_set_carry_anim_id(uint32_t weapon_carry_anim_id);
+    void weapon_set_carry_anim_id(ThingId weapon_carry_anim_id);
     void weapon_set_placement(void);
     void weapon_set_use_anim(Thingp weapon_use_anim);
-    void weapon_set_use_anim_id(uint32_t weapon_use_anim_id);
+    void weapon_set_use_anim_id(ThingId weapon_use_anim_id);
     void weapon_sheath(void);
     void wield(Thingp w);
 } Thing;

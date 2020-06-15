@@ -6,20 +6,20 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-void Level::put_thing (int x, int y, uint32_t id)
+void Level::put_thing (int x, int y, ThingId id)
 {_
     auto t = thing_find(id);
 
-    if (!id) {
+    if (!id.id) {
         t->err("null id at (%d,%d)", x, y);
     }
 
     if (!t) {
-        t->err("oob at (%d,%d) for put of %08X", x, y, id);
+        t->err("oob at (%d,%d) for put of %" PRIx64 "", x, y, id.id);
     }
 
     if (is_oob(x, y)) {
-        t->err("oob at (%d,%d) for put of %08X", x, y, id);
+        t->err("oob at (%d,%d) for put of %" PRIx64 "", x, y, id.id);
     }
 
     int free_slot;
@@ -28,16 +28,16 @@ do_retry:
     free_slot = -1;
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
-        if (*idp == id) {
+        if (idp->id == id.id) {
 #ifdef ENABLE_THING_ID_LOGS
             if (t->is_loggable_for_unimportant_stuff()) {
-                t->log("found %08X at %u,%u slot %u", id, x, y, slot);
+                t->log("found %" PRIx64 " at %u,%u slot %u", id.id, x, y, slot);
             }
 #endif
             return;
         }
 
-        if ((!*idp) && (free_slot == -1)) {
+        if ((!idp->id) && (free_slot == -1)) {
             free_slot = slot;
         }
     }
@@ -53,7 +53,7 @@ do_retry:
              });
 #ifdef ENABLE_THING_ID_LOGS
         if (t->is_loggable_for_unimportant_stuff()) {
-            t->log("put thing %08X at %u,%u slot %u", id, x, y, free_slot);
+            t->log("put thing %" PRIx64 " at %u,%u slot %u", id.id, x, y, free_slot);
         }
 #endif
         *idp = id;
@@ -64,11 +64,10 @@ do_retry:
     // Try to clean up some slots
     //
     if (retry < MAP_SLOTS) {
-        t->log("out of thing slots at (%d,%d) for put of %08X, try to cleanup", 
-               x, y, id);
+        t->log("out of thing slots at (%d,%d) for put of %" PRIx64 ", try to cleanup", x, y, id.id);
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
             auto idp = &getref(all_thing_ids_at, x, y, slot);
-            if (*idp) {
+            if (idp->id) {
                 auto t = thing_find(*idp);
                 t->log("- slot %u", slot);
                 if (t->is_temporary()) {
@@ -81,47 +80,46 @@ do_retry:
         }
     }
 
-    t->log("out of thing slots at (%d,%d) for put of %08X, see below:",
-           x, y, id);
+    t->log("out of thing slots at (%d,%d) for put of %" PRIx64 ", see below:", x, y, id.id);
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
-        LOG("- slot %u %08X", slot, *idp);
+        LOG("- slot %u %" PRIx64 "", slot, idp->id);
     }
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
-        if (*idp) {
+        if (idp->id) {
             auto t = thing_find(*idp);
             t->log("- slot %u", slot);
         } else {
             t->log("- empty slot %u", slot);
         }
     }
-    t->err("out of thing slots at (%d,%d) for put of %08X", x, y, id);
+    t->err("out of thing slots at (%d,%d) for put of %" PRIx64 "", x, y, id.id);
 }
 
-void Level::put_thing (point p, uint32_t id)
+void Level::put_thing (point p, ThingId id)
 {_
     put_thing(p.x, p.y, id);
 }
 
-void Level::remove_thing (int x, int y, uint32_t id)
+void Level::remove_thing (int x, int y, ThingId id)
 {_
     auto t = thing_find(id);
     if (!t) {
-        ERR("oob at (%d,%d) for remove of %08X", x, y, id);
+        ERR("oob at (%d,%d) for remove of %" PRIx64 "", x, y, id.id);
     }
 
     if (is_oob(x, y)) {
-        t->err("oob at (%d,%d) for remove of %08X", x, y, id);
+        t->err("oob at (%d,%d) for remove of %" PRIx64 "", x, y, id.id);
         return;
     }
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
-        if (*idp == id) {
-            *idp = 0;
+        if (idp->id == id.id) {
+            idp->id = 0;
             auto v = &all_thing_ptrs_at[x][y];
             auto b = v->begin();
             auto e = v->end();
@@ -140,17 +138,16 @@ void Level::remove_thing (int x, int y, uint32_t id)
 
 #ifdef ENABLE_THING_ID_LOGS
             if (t->is_loggable_for_unimportant_stuff()) {
-                t->log("rem thing %08X at %u,%u slot %u", id, x, y, slot);
+                t->log("rem thing %" PRIx64 " at %u,%u slot %u", id.id, x, y, slot);
             }
 #endif
             return;
         }
     }
-    t->err("did not find thing in any slot at (%d,%d) for remove of %08X",
-           x, y, id);
+    t->err("did not find thing in any slot at (%d,%d) for remove of %" PRIx64 "", x, y, id.id);
 }
 
-void Level::remove_thing (point p, uint32_t id)
+void Level::remove_thing (point p, ThingId id)
 {_
     remove_thing(p.x, p.y, id);
 }

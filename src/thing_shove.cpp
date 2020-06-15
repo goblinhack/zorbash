@@ -35,7 +35,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
     //
     // If I'm on fire. set it on fire too!
     //
-    if (get_on_fire_anim_id()) {
+    if (get_on_fire_anim_id().ok()) {
         it->set_on_fire();
     }
 
