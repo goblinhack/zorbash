@@ -170,7 +170,7 @@ redo:
 
     set_max_depth();
 
-    if (max_depth < 3) {
+    if (max_depth < 2) {
         debug("redo, not enough depth challenges");
         goto redo;
     }
@@ -714,7 +714,7 @@ void Nodes::init_nodes (void)
         }
     }
 
-    auto obstacles = ((grid_width * grid_height) / 4) * 3;
+    auto obstacles = ((grid_width * grid_height) / 8) * 7;
 
     while (obstacles--) {
         auto x = random_range(0, grid_width);

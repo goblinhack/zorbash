@@ -469,6 +469,7 @@ static void usage (void)
     CON(" ");
     CON(" --new-game");
     CON(" --debug-mode");
+    CON(" --seed <number>");
     CON(" ");
     CON("Written by goblinhack@gmail.com");
 }
@@ -502,6 +503,15 @@ static void parse_args (int32_t argc, char *argv[])
         if (!strcasecmp(argv[i], "--debug-mode") ||
             !strcasecmp(argv[i], "-debug-mode")) {
             g_opt_debug_mode = true;
+            continue;
+        }
+
+        if (!strcasecmp(argv[i], "--seed") ||
+            !strcasecmp(argv[i], "-seed") ||
+            !strcasecmp(argv[i], "-s")) {
+
+            g_opt_seed = atoi(argv[i + 1]);
+            i++;
             continue;
         }
 

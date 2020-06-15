@@ -101,6 +101,7 @@ public:
     void hard_pause(void);
     void hard_unpause(void);
     void init(void);
+    void init_levels(void);
     void load(int slot);
     void load(void);
     void load_config(void);
@@ -128,11 +129,11 @@ public:
     std::string        saved_dir;
     Config             config;
     World              world;
-    Levelp             level {};       // Current displayed level
-    point3d            current_level;  // Where we are in the world.
-    int                seed {};        // All randomness jumps off of this
-    fpoint             mouse_over;     // Mouse cursor
-    uint32_t           fps_value = {}; // Current framerate
+    Levelp             level {};        // Current displayed level
+    point3d            current_level;   // Where we are in the world.
+    int                seed {};         // All randomness jumps off of this
+    fpoint             mouse_over;      // Mouse cursor
+    uint32_t           fps_value = {};  // Current framerate
     //
     // Used to drive the game forward. Each player move is one tick.
     // When things top moving, the tick is completed.

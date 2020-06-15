@@ -25,7 +25,6 @@ void World::clear (void)
 
 Levelp World::new_level_at (point3d at, int seed)
 {_
-    seed = 667;
     auto old_level = get(levels, at.x, at.y, at.z);
     delete old_level;
 
