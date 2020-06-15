@@ -9,7 +9,7 @@
 
 void Thing::get_tiles ()
 {_
-    auto n = id;
+    auto n = (uint32_t) id.id;
     auto tpp = tp();
     auto out = &tiles;
 

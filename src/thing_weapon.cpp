@@ -9,14 +9,14 @@
 Thingp Thing::weapon_get () const
 {_
     auto id = get_weapon_id();
-    if (id) {
+    if (id.ok()) {
         return (level->thing_find(id));
     }
 
     return (nullptr);
 }
 
-void Thing::weapon_set_carry_anim_id (uint32_t weapon_carry_anim_id)
+void Thing::weapon_set_carry_anim_id (ThingId weapon_carry_anim_id)
 {_
     Thingp weapon_carry_anim;
 
@@ -64,7 +64,7 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
     }
 }
 
-void Thing::weapon_set_use_anim_id (uint32_t weapon_use_anim_id)
+void Thing::weapon_set_use_anim_id (ThingId weapon_use_anim_id)
 {_
     Thingp weapon_use_anim;
 
@@ -184,7 +184,7 @@ Thingp Thing::weapon_get_carry_anim (void)
     Thingp weapon_carry_anim = 0;
 
     auto id = get_weapon_id_carry_anim();
-    if (id) {
+    if (id.ok()) {
         weapon_carry_anim = level->thing_find(id);
     }
 
@@ -200,7 +200,7 @@ Thingp Thing::weapon_get_use_anim (void) const
     Thingp weapon_use_anim = 0;
 
     auto id = get_weapon_id_use_anim();
-    if (id) {
+    if (id.ok()) {
         weapon_use_anim = level->thing_find(id);
     }
 
@@ -213,11 +213,11 @@ void Thing::unwield (const char *why)
         return;
     }
 
-    log("unwielding %08X, why: %s", get_weapon_id(), why);
+    log("unwielding %" PRIx64 ", why: %s", get_weapon_id().id, why);
 
     auto weapon = weapon_get();
     if (!weapon) {
-        log("could not unwield %08X, why: %s", get_weapon_id(), why);
+        log("could not unwield %" PRIx64 ", why: %s", get_weapon_id().id, why);
         return;
     }
 
@@ -293,7 +293,7 @@ void Thing::wield (Thingp weapon)
 
 void Thing::use (void)
 {_
-    if (get_weapon_id_use_anim()) {
+    if (get_weapon_id_use_anim().ok()) {
         //
         // Still using.
         //
@@ -310,8 +310,8 @@ void Thing::use (void)
 
     auto swung_as = weapon_tp->weapon_use_anim();
     if (swung_as == "") {
-        die("could not use %s/%08X has no 'use' animation frame",
-            weapon_tp->name().c_str(), weapon->id);
+        die("could not use %s/%" PRIx64 " has no 'use' animation frame",
+            weapon_tp->name().c_str(), weapon->id.id);
         return;
     }
 

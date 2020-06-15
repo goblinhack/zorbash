@@ -648,7 +648,7 @@ void Thing::blit_internal (point &blit_tl,
         blit_text(get_msg(), blit_tl, blit_br);
     }
 
-    if (unlikely(get_on_fire_anim_id())) {
+    if (unlikely(get_on_fire_anim_id().ok())) {
         static uint32_t ts;
         if (time_have_x_tenths_passed_since(1, ts)) {
             ts = time_get_time_ms_cached();

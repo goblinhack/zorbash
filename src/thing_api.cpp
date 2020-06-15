@@ -3352,7 +3352,7 @@ timestamp_t Thing::incr_timestamp_UNUSED2 (void)
 ////////////////////////////////////////////////////////////////////////////
 // owner_id
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_owner_id (void) const
+ThingId Thing::get_owner_id (void) const
 {_
     if (monstp) {
         verify(monstp);
@@ -3362,7 +3362,7 @@ uint32_t Thing::get_owner_id (void) const
     }
 }
 
-uint32_t Thing::set_owner_id (uint32_t v)
+ThingId Thing::set_owner_id (ThingId v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3372,7 +3372,7 @@ uint32_t Thing::set_owner_id (uint32_t v)
 ////////////////////////////////////////////////////////////////////////////
 // weapon_id_carry_anim
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_weapon_id_carry_anim (void) const
+ThingId Thing::get_weapon_id_carry_anim (void) const
 {_
     if (monstp) {
         return (monstp->weapon_id_carry_anim);
@@ -3381,7 +3381,7 @@ uint32_t Thing::get_weapon_id_carry_anim (void) const
     }
 }
 
-uint32_t Thing::set_weapon_id_carry_anim (uint32_t v)
+ThingId Thing::set_weapon_id_carry_anim (ThingId v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3391,7 +3391,7 @@ uint32_t Thing::set_weapon_id_carry_anim (uint32_t v)
 ////////////////////////////////////////////////////////////////////////////
 // weapon_id_use_anim
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_weapon_id_use_anim (void) const
+ThingId Thing::get_weapon_id_use_anim (void) const
 {_
     if (monstp) {
         return (monstp->weapon_id_use_anim);
@@ -3400,7 +3400,7 @@ uint32_t Thing::get_weapon_id_use_anim (void) const
     }
 }
 
-uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
+ThingId Thing::set_weapon_id_use_anim (ThingId v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
@@ -3410,10 +3410,10 @@ uint32_t Thing::set_weapon_id_use_anim (uint32_t v)
 ////////////////////////////////////////////////////////////////////////////
 // weapon_tp_id
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_weapon_id (void) const
+ThingId Thing::get_weapon_id (void) const
 {_
     if (monstp) {
-        // con("get weapon %08X", monstp->weapon_id);
+        // con("get weapon %" PRIx64 "", monstp->weapon_id);
         return (monstp->weapon_id);
     } else {
         // con("get weapon id => none");
@@ -3421,17 +3421,17 @@ uint32_t Thing::get_weapon_id (void) const
     }
 }
 
-uint32_t Thing::set_weapon_id (uint32_t v)
+ThingId Thing::set_weapon_id (ThingId v)
 {_
     new_monst();
-    // con("set weapon %08X", v);
+    // con("set weapon %" PRIx64 "", v);
     return (monstp->weapon_id = v);
 }
 
 ////////////////////////////////////////////////////////////////////////////
 // on_fire_id_anim
 ////////////////////////////////////////////////////////////////////////////
-uint32_t Thing::get_on_fire_anim_id (void) const
+ThingId Thing::get_on_fire_anim_id (void) const
 {_
     if (monstp) {
         return (monstp->on_fire_id_anim);
@@ -3440,10 +3440,10 @@ uint32_t Thing::get_on_fire_anim_id (void) const
     }
 }
 
-uint32_t Thing::set_on_fire_anim_id (uint32_t v)
+ThingId Thing::set_on_fire_anim_id (ThingId v)
 {_
     new_monst();
-//con("%s %08X", __FUNCTION__, v);
+//con("%s %" PRIx64 "", __FUNCTION__, v);
     return (monstp->on_fire_id_anim = v);
 }
 

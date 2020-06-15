@@ -125,7 +125,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 
 std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
 {_
-    const std::string name(tp_id_map[my.t->id - 1]->name());
+    const std::string name(tp_id_map[my.t->tp_id - 1]->name());
     out << bits(name);
 
     bool monst = (my.t->monstp != nullptr);
@@ -239,7 +239,7 @@ std::ostream& operator<<(std::ostream &out,
         for (auto y = 0; y < MAP_HEIGHT; ++y) {
             for (auto slot = 0; slot < MAP_SLOTS; ++slot) {
                 auto id = get(my.t->all_thing_ids_at, x, y, slot);
-                if (id) {
+                if (id.ok()) {
                     const Thingp t = my.t->thing_find(id);
 #ifdef ENABLE_THING_ID_LOGS
                     t->log("save");

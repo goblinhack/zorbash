@@ -22,12 +22,12 @@ void Thing::hooks_remove ()
     //
     Thingp owner = nullptr;
 
-    if (get_owner_id()) {
+    if (get_owner_id().ok()) {
         owner = owner_get();
     }
 
     if (owner) {
-        log("detach %08X from owner %s", id, owner->to_string().c_str());
+        log("detach %" PRIx64 " from owner %s", id.id, owner->to_string().c_str());
 
         if (id == owner->get_on_fire_anim_id()) {
             log("detach on_fire_anim_id from owner %s", owner->to_string().c_str());
@@ -73,7 +73,7 @@ void Thing::hooks_remove ()
             } else {
                 log("no carry_anim for owner %s", owner->to_string().c_str());
                 auto id = owner->get_weapon_id();
-                if (id) {
+                if (id.ok()) {
                     owner->wield(owner->weapon_get());
                 }
             }
@@ -109,8 +109,6 @@ void Thing::hooks_remove ()
     // Some things have lots of things they own
     //
     if (get_owned_count()) {
-        log("remove remaining %08X owned things", get_owned_count());
-
         //
         // Slow, but not used too often
         //
@@ -132,7 +130,7 @@ void Thing::hooks_remove ()
 Thingp Thing::owner_get (void) const
 {_
     auto id = get_owner_id();
-    if (id) {
+    if (id.ok()) {
         return (level->thing_find(id));
     } else {
         return (nullptr);

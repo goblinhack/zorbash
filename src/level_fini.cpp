@@ -22,9 +22,9 @@ void Level::fini (void)
         for (auto y = 0; y < MAP_HEIGHT; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y, z);
-                if (id) {
+                if (id.ok()) {
 #ifdef ENABLE_THING_ID_LOGS
-                    LOG("clean thing %08X at %u,%u", id, x, y);
+                    LOG("clean thing %" PRIx64 " at %u,%u", id, x, y);
 #endif
                     auto t = thing_find(id);
                     delete t;
@@ -44,8 +44,8 @@ void Level::fini (void)
         for (auto y = 0; y < MAP_HEIGHT; ++y) {
             for (auto z = 0; z < MAP_SLOTS; ++z) {
                 auto id = get(all_thing_ids_at, x, y, z);
-                if (id) {
-                    err("level fini: did not detach thing id %08X at %d,%d,%d", id, x, y, z);
+                if (id.ok()) {
+                    err("level fini: did not detach thing id %" PRIx64 " at %d,%d,%d", id.id, x, y, z);
                     auto t = thing_find(id);
                     t->err("level fini: did not detach thing id from all_thing_ids_at");
                 }
@@ -60,7 +60,7 @@ void Level::fini (void)
     for (auto slot = 0; slot < MAX_THINGS; slot++) {
         auto p = get(all_thing_ptrs, slot);
         if (p.ptr) {
-            err("level fini: did not detach thing %p/%08X", p.ptr, p.id);
+            err("level fini: did not detach thing %p/%" PRIx64 "", p.ptr, p.id.id);
             auto t = p.ptr;
             verify(t);
             t->err("level fini: did not detach thing from all_thing_ptrs_at");

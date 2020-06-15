@@ -167,7 +167,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     in >> bits(my.t->last_attached);
     in >> bits(my.t->mid_at);
     in >> bits(my.t->last_mid_at);
-    in >> bits(my.t->id); if (!my.t->id) { ERR("loaded a thing with no ID"); }
+    in >> bits(my.t->id.id); if (!my.t->id.id) { ERR("loaded a thing with no ID"); }
     in >> bits(my.t->tile_curr);
     in >> bits(T); my.t->timestamp_next_frame = load(T);
     uint8_t dir; in >> dir; my.t->dir = dir;
@@ -289,11 +289,11 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
         for (auto y = 0; y < MAP_WIDTH; ++y) {
             for (auto slot = 0; slot < MAP_SLOTS; ++slot) {
                 auto id = get(my.t->all_thing_ids_at, x, y, slot);
-                if (id) {
+                if (id.ok()) {
 #ifdef ENABLE_THING_ID_LOGS
                     auto o = my.t->test_thing_ptr(id);
                     if (o) {
-                        o->die("thing already exists for %08X", id);
+                        o->die("thing already exists for %" PRIx64 "", id);
                     }
 #endif
                     auto t = new Thing();
