@@ -135,8 +135,6 @@ void Level::init (point3d at, int seed_in)
 
     place_rocks(dungeon, 1, 6, 6, tries);
     if (g_errored) { return; }
-    place_rocks(dungeon, 2, 6, 6, tries);
-    if (g_errored) { return; }
     place_rocks(dungeon, 1, 6, 3, tries);
     if (g_errored) { return; }
     place_rocks(dungeon, 1, 3, 6, tries);

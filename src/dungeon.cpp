@@ -2212,7 +2212,7 @@ bool Dungeon::rooms_move_closer_together (void)
 
     auto failed_to_place_all_corridors = 0;
     auto failed_to_make_shorter_corridors = 0;
-    auto attempts_to_move_rooms_closer = 100;
+    auto attempts_to_move_rooms_closer = 20;
 
     choose_room_doors();
 
