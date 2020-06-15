@@ -13,11 +13,14 @@
 
 typedef class Particle_ {
 public:
-    Particle_(point start, point stop, size sz,
+    Particle_(point start, point stop,
+              point pixel_map_at,
+              size sz,
               uint32_t timestamp_start, uint32_t timestamp_stop,
               Tilep tile) :
         start(start),
         stop(stop),
+        pixel_map_at(pixel_map_at),
         sz(sz),
         timestamp_start(timestamp_start),
         timestamp_stop(timestamp_stop),
@@ -25,6 +28,7 @@ public:
 
     point start;
     point stop;
+    point pixel_map_at;
     size sz;
     uint32_t timestamp_start {};
     uint32_t timestamp_stop {};
