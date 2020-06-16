@@ -17,29 +17,29 @@ std::string Thing::to_string (void) const
     verify(this);
     verify(tpp);
     if (unlikely(!tpp)) {
-        return (string_sprintf("%" PRIx64 "(<no tp>%s @%g,%g)",
+        return (string_sprintf("%" PRIx32 "(<no tp>%s @%g,%g)",
                                id,
                                is_dead ? "/dead" : "",
                                mid_at.x, mid_at.y));
-//        return (string_sprintf("%" PRIx64 "(<no tp>%s hp %d/%d @%g,%g)",
+//        return (string_sprintf("%" PRIx32 "(<no tp>%s hp %d/%d @%g,%g)",
 //                               id,
 //                               is_dead ? "/dead" : "",
 //                               get_stats_health(),
 //                               get_stats_health_max(),
 //                               mid_at.x, mid_at.y));
     } else if (get_stats_health_max()) {
-        return (string_sprintf("%" PRIx64 "(%s%s @%g,%g)",
+        return (string_sprintf("%" PRIx32 "(%s%s @%g,%g)",
                                id, tpp->name().c_str(),
                                is_dead ? "/dead" : "",
                                mid_at.x, mid_at.y));
-//        return (string_sprintf("%" PRIx64 "(%s%s hp %d/%d @%g,%g)",
+//        return (string_sprintf("%" PRIx32 "(%s%s hp %d/%d @%g,%g)",
 //                               id, tpp->name.c_str(),
 //                               is_dead ? "/dead" : "",
 //                               get_stats_health(),
 //                               get_stats_health_max(),
 //                               mid_at.x, mid_at.y));
     } else {
-        return (string_sprintf("%" PRIx64 "(%s%s @%g,%g)",
+        return (string_sprintf("%" PRIx32 "(%s%s @%g,%g)",
                                id, tpp->name().c_str(),
                                is_dead ? "/dead" : "",
                                mid_at.x, mid_at.y));

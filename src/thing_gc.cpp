@@ -23,7 +23,7 @@ void Level::things_gc (void)
 
         auto t = thing_find(id);
         if (!t) {
-            ERR("thing %" PRIx64 " not found to garbage collect", id.id);
+            ERR("thing %" PRIx32 " not found to garbage collect", id.id);
             continue;
         }
 

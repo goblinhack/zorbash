@@ -224,7 +224,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 {_
     my.t->player = nullptr;
     my.t->cursor = nullptr;
-    my.t->all_thing_ptrs = {};
     my.t->all_thing_ids_at = {};
     my.t->all_thing_ptrs_at = {};
     my.t->all_things = {};
@@ -293,7 +292,7 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 #ifdef ENABLE_THING_ID_LOGS
                     auto o = my.t->test_thing_ptr(id);
                     if (o) {
-                        o->die("thing already exists for %" PRIx64 "", id);
+                        o->die("thing already exists for %" PRIx32 "", id);
                     }
 #endif
                     auto t = new Thing();
@@ -312,6 +311,9 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
 
 std::istream& operator>>(std::istream &in, Bits<class World &> my)
 {_
+    my.t.levels = {};
+    my.t.all_thing_ptrs = {};
+
     for (auto x = 0; x < LEVELS_ACROSS; ++x) {
         for (auto y = 0; y < LEVELS_DOWN; ++y) {
             for (auto z = 0; z < LEVELS_DEEP; ++z) {

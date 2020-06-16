@@ -4,15 +4,16 @@
 //
 
 #include "my_game.h"
-#include "my_thing.h"
+#include "my_world.h"
 #include "my_level.h"
+#include "my_thing.h"
 
 //
 // Find an existing thing.
 //
 Thingp Level::thing_find (const ThingId id)
 {_
-    return (find_thing_ptr(id));
+    return game->world.find_thing_ptr(id);
 }
 
 //
