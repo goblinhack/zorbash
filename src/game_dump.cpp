@@ -6,66 +6,6 @@
 #include "my_game.h"
 #include "my_thing.h"
 
-void Monst::dump (std::string pfx, std::ostream &out)
-{_
-    out << pfx << "Monst {" << std::endl;
-    auto old_pfx = pfx;
-    pfx += "  ";
-
-    if (age_map) {
-        out << pfx << "has age_map" << std::endl;
-    }
-    if (dmap_scent) {
-        out << pfx << "has dmap_scent" << std::endl;
-    }
-
-    pfx = old_pfx;
-    out << pfx << "}" << std::endl;
-}
-
-void Thing::dump (std::string pfx, std::ostream &out)
-{_
-    out << pfx << "Thing {" << std::endl;
-    auto old_pfx = pfx;
-    pfx += "  ";
-
-    out << pfx << "id                  " << std::hex             << id.id << std::endl;
-    auto tp = tp_find(tp_id);
-    out << pfx << "tp_id               " << tp_id                << " " << tp->name() << std::endl;
-
-    if (monstp) {
-        monstp->dump(pfx + "  ", out);
-    }
-
-    out << pfx << "mid_at              " << mid_at               << std::endl;
-    out << pfx << "last_mid_at         " << last_mid_at          << std::endl;
-    out << pfx << "tile_curr           " << tile_curr            << std::endl;
-    out << pfx << "timestamp_next_frame" << timestamp_next_frame << std::endl;
-    out << pfx << "dir                 " << dir                  << std::endl;
-    out << pfx << "is_player           " << is_player()          << std::endl;
-    out << pfx << "has_ever_moved      " << has_ever_moved       << std::endl;
-    out << pfx << "has_light           " << has_light            << std::endl;
-    out << pfx << "is_attached         " << is_attached          << std::endl;
-    out << pfx << "is_being_destroyed  " << is_being_destroyed   << std::endl;
-    out << pfx << "is_bloodied         " << is_bloodied          << std::endl;
-    out << pfx << "is_bouncing         " << is_bouncing          << std::endl;
-    out << pfx << "is_dead             " << is_dead              << std::endl;
-    out << pfx << "is_facing_left      " << is_facing_left       << std::endl;
-    out << pfx << "is_hidden           " << is_hidden            << std::endl;
-    out << pfx << "is_hungry           " << is_hungry            << std::endl;
-    out << pfx << "is_tick_done        " << is_tick_done         << std::endl;
-    out << pfx << "is_moving           " << is_moving            << std::endl;
-    out << pfx << "is_open             " << is_open              << std::endl;
-    out << pfx << "is_resurrecting     " << is_resurrecting      << std::endl;
-    out << pfx << "is_resurrected      " << is_resurrected       << std::endl;
-    out << pfx << "is_sleeping         " << is_sleeping          << std::endl;
-    out << pfx << "is_starving         " << is_starving          << std::endl;
-    out << pfx << "is_blitted          " << is_blitted           << std::endl;
-
-    pfx = old_pfx;
-    out << pfx << "}" << std::endl;
-}
-
 void Level::dump (std::string pfx, std::ostream &out)
 {_
     out << pfx << "World {" << std::endl;
@@ -87,7 +27,6 @@ void Level::dump (std::string pfx, std::ostream &out)
                 if (id.ok()) {
                     auto t = thing_find(id);
                     t->log("dump");
-                    t->dump(pfx + "  ", out);
                 }
             }
         }

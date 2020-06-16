@@ -25,9 +25,9 @@ bool Thing::open_door (Thingp it)
         auto k = level->thing_find(item);
         if (k->is_key()) {
             used(k, it);
-            it->detach();
+            it->level_pop();
             it->is_open = true;
-            it->attach();
+            it->level_push();
             MINICON("The door opens");
             if (get_light_count()) {
                 update_light();

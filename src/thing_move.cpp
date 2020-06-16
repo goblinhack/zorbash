@@ -160,9 +160,9 @@ void Thing::update_interpolated_position (void)
     }
 
     if (update_pos) {
-        detach();
+        level_pop();
         set_interpolated_mid_at(new_pos);
-        attach();
+        level_push();
 
         if (get_light_count()) {
             update_light();
@@ -211,9 +211,9 @@ void Thing::update_pos (fpoint to, bool immediately)
     // Moves are immediate, but we render the move in steps, hence keep
     // track of when we moved.
     //
-    detach();
+    level_pop();
     mid_at = to;
-    attach();
+    level_push();
 
     if (!immediately) {
         set_timestamp_move_begin(time_get_time_ms_cached());
@@ -311,6 +311,7 @@ void Thing::move_to_immediately (fpoint to)
     auto delta = to - mid_at;
     move_set_dir_from_delta(delta);
     update_pos(to, true);
+    move_finish();
 }
 
 void Thing::move_to_immediately_delta (fpoint delta)
@@ -318,6 +319,7 @@ void Thing::move_to_immediately_delta (fpoint delta)
     move_finish();
     move_set_dir_from_delta(delta);
     update_pos(mid_at + delta, true);
+    move_finish();
 }
 
 bool Thing::move_to_check (const point& nh, const bool escaping)
@@ -333,7 +335,7 @@ bool Thing::move_to_check (const point& nh, const bool escaping)
     //
     // We need to look at the next-hop at the current time which may
     // be vacant, but also to the future if a thing is moving to that
-    // spot; in which case we get an attach of opportunity.
+    // spot; in which case we get an attack of opportunity.
     //
     auto fnh = fpoint(nh.x, nh.y);
     if (collision_check_only(fnh)) {

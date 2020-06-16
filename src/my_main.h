@@ -22,7 +22,9 @@
 #undef  ENABLE_UI_DEBUG            // User interface logs
 #undef  ENABLE_UI_DEBUG_EXTRA      // User interface logs with inheritance
 #define ENABLE_TRACING             // Function tracing
+#undef  ENABLE_MAP_DEBUG           // Visible map, no lighting
 
+#define ENABLE_DEBUG_CRASH
 #ifdef ENABLE_DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_PTRCHECK            // Check validity of pointers too
@@ -31,7 +33,6 @@
 #define ENABLE_THING_ID_LOGS       // Thing ID allocations
 #undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #endif
-#define ENABLE_THING_ID_LOGS       // Thing ID allocations
 
 //
 // Settings to override compiler errors

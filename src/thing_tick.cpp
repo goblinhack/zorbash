@@ -48,6 +48,10 @@ bool Thing::achieve_goals_in_life (void)
         return true;
     }
 
+    if (exit_tick()) {
+        return true;
+    }
+
     collision_check_do();
     if (is_dead) {
         return true;
@@ -129,6 +133,9 @@ void Thing::collision_check_do (void)
 
 void Thing::tick (void)
 {_
+    //if (is_player()) {
+    //    log("tick");
+    //}
     g_thing_callframes_depth = callframes_depth;
 
     if (unlikely(is_dead)) {

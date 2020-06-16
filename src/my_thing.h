@@ -126,9 +126,6 @@ typedef struct Monst_ {
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
     /////////////////////////////////////////////////////////////////////////
-
-    void dump(std::string prefix, std::ostream &out);
-    void log(std::string prefix);
 } Monst;
 std::ostream& operator<<(std::ostream &out, Bits<const Monst & > const my);
 std::istream& operator>>(std::istream &in, Bits<Monst &> my);
@@ -213,9 +210,11 @@ public:
             return (mytp);
         }
         if (unlikely(tp_id == -1)) {
+            err("no tp set for tp_id %d", tp_id);
             return (nullptr);
         }
-        DIE("no tp");
+        err("no tp for tp_id %d", tp_id);
+        return (nullptr);
     }
 
     void new_monst(void);
@@ -668,14 +667,14 @@ public:
     bool move_to_or_attack(const point&);
     bool move_to_or_escape(const point&);
     bool open_door(Thingp door);
-    bool open_exit(Thingp door);
+    bool descend(void);
     bool possible_to_attack(const Thingp it);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
     bool will_avoid(const Thingp it);
     bool will_eat(const Thingp it);
     bool will_prefer_terrain(const Thingp it);
-    const char *to_cstring(void);
+    const char *to_cstring(void) const;
     const std::string& light_color(void) const;
     const std::string& spawn_on_death(void) const;
     const std::string& str1(void) const;
@@ -840,7 +839,6 @@ public:
     void add_enemy(Thingp attacker);
     void ai_get_next_hop(void);
     void animate();
-    void attach(void);
     void blit();
     void blit_end_reflection_submerged(uint8_t submerged) const;
     void blit_end_submerged(uint8_t submerged) const;
@@ -854,14 +852,18 @@ public:
     void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
     void carry(Thingp w);
-    void change_level(Levelp);
+    void level_change(Levelp);
+    void level_enter(void);
+    void level_leave(void);
+    void level_pop(void);
+    void level_push(void);
     void collision_check_do();
-    void con(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
-    void con_(const char *fmt, va_list args); // compile error without
+    void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
+    void con_(const char *fmt, va_list args) const; // compile error without
     void cursor_hover_over_check(void);
     void cursor_path_pop_first_move(void);
     void cursor_path_stop(void);
-    void dbg(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
+    void dbg(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void dead(Thingp killer, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
     void dead(Thingp killer, std::string &);
     void dead(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
@@ -870,7 +872,6 @@ public:
     void dead_(const char *fmt, va_list args); // compile error without
     void destroy();
     void destroyed(void);
-    void detach(void);
     void die(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
     void die_(const char *fmt, va_list args); // compile error without
     void dir_set_bl(void);
@@ -885,8 +886,8 @@ public:
     void drop(Thingp w);
     void drop_all(void);
     void dump(std::string prefix, std::ostream &out);
-    void err(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
-    void err_(const char *fmt, va_list args); // compile error without
+    void err(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
+    void err_(const char *fmt, va_list args) const; // compile error without
     void fadeup(float fadeup_height, float fadeup_fade, timestamp_t ms);
     void health_boost(int v);
     void hide();
@@ -896,10 +897,10 @@ public:
     void kill(const char *reason);
     void kill(std::string &reason);
     void lava_tick();
+    bool exit_tick();
     void lifespan_tick();
-    void log(const char *fmt, ...) __attribute__ ((format (printf, 2, 3)));
-    void log(std::string prefix);
-    void log_(const char *fmt, va_list args); // compile error without
+    void log(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
+    void log_(const char *fmt, va_list args) const; // compile error without
     void lunge(fpoint tt);
     void move_carried_items(void);
     void move_delta(fpoint);

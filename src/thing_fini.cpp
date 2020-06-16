@@ -15,6 +15,7 @@
 
 Thing::~Thing_ (void)
 {_
+    //log("destructor");
     verify(this);
     destroy();
     oldptr(this);
@@ -34,7 +35,8 @@ void Thing::destroy (void)
     }
     is_being_destroyed = true;
 
-    detach();
+    level_pop();
+    level_leave();
 
     unwield("owner is destroyed");
 
@@ -48,32 +50,6 @@ void Thing::destroy (void)
     //
     point old_at((int)mid_at.x, (int)mid_at.y);
 
-    if (is_blood())         { level->unset_is_blood(old_at.x, old_at.y); }
-    if (is_chasm())         { level->unset_is_chasm(old_at.x, old_at.y); }
-    if (is_corpse())        { level->unset_is_corpse(old_at.x, old_at.y); }
-    if (is_corridor())      { level->unset_is_corridor(old_at.x, old_at.y); }
-    if (is_deep_water())    { level->unset_is_deep_water(old_at.x, old_at.y); }
-    if (is_deep_water())    { level->unset_is_water(old_at.x, old_at.y); }
-    if (is_dirt())          { level->unset_is_dirt(old_at.x, old_at.y); }
-    if (is_door())          { level->unset_is_door(old_at.x, old_at.x); }
-    if (is_entrance())      { level->unset_is_entrance(old_at.x, old_at.y); }
-    if (is_exit())          { level->unset_is_exit(old_at.x, old_at.y); }
-    if (is_fire())          { level->unset_is_fire(old_at.x, old_at.y); }
-    if (is_floor())         { level->unset_is_floor(old_at.x, old_at.y); }
-    if (is_food())          { level->unset_is_food(old_at.x, old_at.y); }
-    if (is_gold())          { level->unset_is_gold(old_at.x, old_at.y); }
-    if (is_hazard())        { level->unset_is_hazard(old_at.x, old_at.y); }
-    if (is_key())           { level->unset_is_key(old_at.x, old_at.x); }
-    if (is_lava())          { level->unset_is_lava(old_at.x, old_at.y); }
-    if (is_light_blocker()) { level->unset_is_light_blocker(old_at.x, old_at.x); }
-    if (is_monst())         { level->unset_is_monst(old_at.x, old_at.y); }
-    if (is_rock())          { level->unset_is_rock(old_at.x, old_at.y); }
-    if (is_secret_door())   { level->unset_is_secret_door(old_at.x, old_at.y); }
-    if (is_smoke())         { level->unset_is_smoke(old_at.x, old_at.x); }
-    if (is_treasure())      { level->unset_is_treasure(old_at.x, old_at.y); }
-    if (is_wall())          { level->unset_is_wall(old_at.x, old_at.y); }
-    if (is_water())         { level->unset_is_water(old_at.x, old_at.y); }
-
     if (is_player()) {
         level->player = nullptr;
     }
@@ -84,27 +60,6 @@ void Thing::destroy (void)
 
     if (is_loggable_for_unimportant_stuff()) {
         log("destroyed");
-    }
-
-    {
-        auto f = level->all_things.find(id);
-        if (f != level->all_things.end()) {
-            level->all_things.erase(f);
-        }
-    }
-
-    if (is_active()) {
-        auto f = level->all_active_things.find(id);
-        if (f != level->all_active_things.end()) {
-            level->all_active_things.erase(f);
-        }
-    }
-
-    {
-        auto f = level->all_gc_things.find(id);
-        if (f != level->all_gc_things.end()) {
-            level->all_gc_things.erase(f);
-        }
     }
 
     game->world.free_thing_id(this);

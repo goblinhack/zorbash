@@ -63,18 +63,8 @@ void Thing::init (Levelp level,
     // Must do this after TP assignment or logging will fail
     //
     game->world.alloc_thing_id(this);
-
-    auto result = level->all_things.insert(std::pair(id, this));
-    if (result.second == false) {
-        err("failed to insert into thing map");
-    }
-
-    if (is_active()) {
-        auto result = level->all_active_things.insert(std::pair(id, this));
-        if (result.second == false) {
-            err("failed to insert into active thing map");
-        }
-    }
+    level_enter();
+    level_push();
 
     if (tpp->is_monst()) {
         new_dmap_scent();
@@ -325,36 +315,6 @@ void Thing::init (Levelp level,
         log("player created");
     }
 
-    point new_at((int)mid_at.x, (int)mid_at.y);
-    if ((new_at.x >= MAP_WIDTH) || (new_at.y >= MAP_HEIGHT)) {
-        ERR("new thing is oob at %d, %d", new_at.x, new_at.y);
-        return;
-    }
-
-    if (is_corpse())             { level->set_is_corpse(new_at.x, new_at.y); }
-    if (tpp->is_blood())         { level->set_is_blood(new_at.x, new_at.y); }
-    if (tpp->is_chasm())         { level->set_is_chasm(new_at.x, new_at.y); }
-    if (tpp->is_corridor())      { level->set_is_corridor(new_at.x, new_at.y); }
-    if (tpp->is_deep_water())    { level->set_is_deep_water(new_at.x, new_at.y); }
-    if (tpp->is_deep_water())    { level->set_is_water(new_at.x, new_at.y); }
-    if (tpp->is_dirt())          { level->set_is_dirt(new_at.x, new_at.y); }
-    if (tpp->is_door())          { level->set_is_door(new_at.x, new_at.y); }
-    if (tpp->is_fire())          { level->set_is_fire(new_at.x, new_at.y); }
-    if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
-    if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
-    if (tpp->is_treasure())      { level->set_is_treasure(new_at.x, new_at.y); }
-    if (tpp->is_gold())          { level->set_is_gold(new_at.x, new_at.y); }
-    if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
-    if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
-    if (tpp->is_light_blocker()) { level->set_is_light_blocker(new_at.x, new_at.y); }
-    if (tpp->is_smoke())         { level->set_is_smoke(new_at.x, new_at.y); }
-    if (tpp->is_lava())          { level->set_is_lava(new_at.x, new_at.y); }
-    if (tpp->is_monst())         { level->set_is_monst(new_at.x, new_at.y); }
-    if (tpp->is_rock())          { level->set_is_rock(new_at.x, new_at.y); }
-    if (tpp->is_secret_door())   { level->set_is_secret_door(new_at.x, new_at.y); }
-    if (tpp->is_wall())          { level->set_is_wall(new_at.x, new_at.y); }
-    if (tpp->is_water())         { level->set_is_water(new_at.x, new_at.y); }
-
     if (tpp->is_loggable_for_unimportant_stuff()) {
         log("created");
     }
@@ -384,7 +344,6 @@ void Thing::init (Levelp level,
     // Set position prior to attach
     //
     set_interpolated_mid_at(mid_at);
-    attach();
 
     //
     // If not the player and has a light source, create the ligh
@@ -430,18 +389,6 @@ void Thing::reinit (void)
         return;
     }
 
-    auto result = level->all_things.insert(std::pair(id, this));
-    if (result.second == false) {
-        err("failed to reinsert into thing map");
-    }
-
-    if (is_active()) {
-        auto result = level->all_active_things.insert(std::pair(id, this));
-        if (result.second == false) {
-            err("failed to reinsert into active thing map");
-        }
-    }
-
     //
     // Probably safest to reset this else things might expire on load
     //
@@ -467,32 +414,6 @@ void Thing::reinit (void)
         return;
     }
 
-    if (is_corpse())             { level->set_is_corpse(new_at.x, new_at.y); }
-    if (tpp->is_blood())         { level->set_is_blood(new_at.x, new_at.y); }
-    if (tpp->is_chasm())         { level->set_is_chasm(new_at.x, new_at.y); }
-    if (tpp->is_corridor())      { level->set_is_corridor(new_at.x, new_at.y); }
-    if (tpp->is_deep_water())    { level->set_is_deep_water(new_at.x, new_at.y); }
-    if (tpp->is_deep_water())    { level->set_is_water(new_at.x, new_at.y); }
-    if (tpp->is_dirt())          { level->set_is_dirt(new_at.x, new_at.y); }
-    if (tpp->is_door())          { level->set_is_door(new_at.x, new_at.y); }
-    if (tpp->is_entrance())      { level->set_is_entrance(new_at.x, new_at.y); }
-    if (tpp->is_exit())          { level->set_is_exit(new_at.x, new_at.y); }
-    if (tpp->is_fire())          { level->set_is_fire(new_at.x, new_at.y); }
-    if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
-    if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
-    if (tpp->is_gold())          { level->set_is_gold(new_at.x, new_at.y); }
-    if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
-    if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
-    if (tpp->is_lava())          { level->set_is_lava(new_at.x, new_at.y); }
-    if (tpp->is_light_blocker()) { level->set_is_light_blocker(new_at.x, new_at.y); }
-    if (tpp->is_monst())         { level->set_is_monst(new_at.x, new_at.y); }
-    if (tpp->is_rock())          { level->set_is_rock(new_at.x, new_at.y); }
-    if (tpp->is_secret_door())   { level->set_is_secret_door(new_at.x, new_at.y); }
-    if (tpp->is_smoke())         { level->set_is_smoke(new_at.x, new_at.y); }
-    if (tpp->is_treasure())      { level->set_is_treasure(new_at.x, new_at.y); }
-    if (tpp->is_wall())          { level->set_is_wall(new_at.x, new_at.y); }
-    if (tpp->is_water())         { level->set_is_water(new_at.x, new_at.y); }
-
     if (tpp->is_loggable_for_unimportant_stuff()) {
         log("recreated");
     }
@@ -501,7 +422,7 @@ void Thing::reinit (void)
     // Upon a load it was attached at save time but not now
     //
     if (is_attached) {
-        attach();
+        level_push();
     }
 
     update_light();
