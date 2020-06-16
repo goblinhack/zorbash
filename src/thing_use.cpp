@@ -29,6 +29,6 @@ void Thing::used (Thingp what, Thingp target)
 
     monstp->carrying.remove(what->id);
     log("used %s", what->to_string().c_str());
-    what->detach();
+    what->level_pop();
     what->dead("used");
 }

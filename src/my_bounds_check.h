@@ -15,6 +15,7 @@
 #endif
 
 #ifdef ENABLE_ASSERT
+#undef ASSERT
 #define ASSERT(x) \
     if (! (x)) {_ \
         std::cerr << "Assert '" << #x << "' failed at line " \

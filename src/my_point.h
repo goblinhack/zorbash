@@ -388,6 +388,10 @@ static inline point make_point (const fpoint& f) {
     return point(f.x, f.y);
 }
 
+static inline fpoint make_fpoint (const point& f) {
+    return fpoint(f.x, f.y);
+}
+
 template<class T> class my_apoint3d
 {
 public:

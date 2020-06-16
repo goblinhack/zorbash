@@ -43,6 +43,7 @@ void Level::tick (void)
     //
     // Active things are generally things that move or have a life span
     //
+    auto p = player;
     for (auto& i : all_active_things) {
         auto t = i.second;
         verify(t);
@@ -52,6 +53,11 @@ void Level::tick (void)
             }
         }
         t->tick();
+
+        if (player != p) {
+            log("level change detected");
+            break;
+        }
     }
 
     if (!game->things_are_moving) {

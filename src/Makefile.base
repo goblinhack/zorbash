@@ -97,7 +97,6 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_astar.o 		\
-    $(OBJDIR)/thing_attach.o 		\
     $(OBJDIR)/thing_bounce.o 		\
     $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_collision.o 	\

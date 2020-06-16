@@ -46,14 +46,17 @@ void Thing::weapon_set_carry_anim (Thingp new_weapon_carry_anim)
             log("change weapon carry_anim, %s->%s",
                 old_weapon_carry_anim->to_string().c_str(),
                 new_weapon_carry_anim->to_string().c_str());
+            new_weapon_carry_anim->set_owner(this);
         } else {
             log("remove weapon carry_anim, %s",
                 old_weapon_carry_anim->to_string().c_str());
         }
+        old_weapon_carry_anim->remove_owner();
     } else {
         if (new_weapon_carry_anim) {
             log("set weapon carry_anim, %s",
                 new_weapon_carry_anim->to_string().c_str());
+            new_weapon_carry_anim->set_owner(this);
         }
     }
 
@@ -78,36 +81,39 @@ void Thing::weapon_set_use_anim_id (ThingId weapon_use_anim_id)
     weapon_set_use_anim(weapon_use_anim);
 }
 
-void Thing::weapon_set_use_anim (Thingp weapon_use_anim)
+void Thing::weapon_set_use_anim (Thingp new_weapon_use_anim)
 {_
-    if (weapon_use_anim) {
-        verify(weapon_use_anim);
+    if (new_weapon_use_anim) {
+        verify(new_weapon_use_anim);
     }
 
     auto old_weapon_use_anim = weapon_get_use_anim();
 
     if (old_weapon_use_anim) {
-        if (old_weapon_use_anim == weapon_use_anim) {
+        if (old_weapon_use_anim == new_weapon_use_anim) {
             return;
         }
 
-        if (weapon_use_anim) {
+        if (new_weapon_use_anim) {
             log("change weapon use-anim %s->%s",
                 old_weapon_use_anim->to_string().c_str(),
-                weapon_use_anim->to_string().c_str());
+                new_weapon_use_anim->to_string().c_str());
+            new_weapon_use_anim->set_owner(this);
         } else {
             log("remove weapon use-anim %s",
                 old_weapon_use_anim->to_string().c_str());
         }
+        old_weapon_use_anim->remove_owner();
     } else {
-        if (weapon_use_anim) {
+        if (new_weapon_use_anim) {
             log("set weapon use-anim %s",
-                weapon_use_anim->to_string().c_str());
+                new_weapon_use_anim->to_string().c_str());
+            new_weapon_use_anim->set_owner(this);
         }
     }
 
-    if (weapon_use_anim) {
-        set_weapon_id_use_anim(weapon_use_anim->id);
+    if (new_weapon_use_anim) {
+        set_weapon_id_use_anim(new_weapon_use_anim->id);
     } else {
         set_weapon_id_use_anim(0);
     }

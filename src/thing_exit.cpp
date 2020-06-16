@@ -12,12 +12,16 @@
 #include "my_level.h"
 #include "my_thing.h"
 
-bool Thing::open_exit (Thingp it)
+bool Thing::exit_tick (void)
 {_
-    if (!it->is_exit()) {
-        return false;
+    if (level->is_exit(mid_at.x, mid_at.y)) {
+        return descend();
     }
+    return false;
+}
 
+bool Thing::descend (void)
+{_
     auto next_level = level->world_at + point3d(0, 0, 1);
 
     if (is_player()) {
@@ -34,19 +38,21 @@ bool Thing::open_exit (Thingp it)
                     game->level = l;
                     MINICON("You bravely descend");
                 }
-                change_level(l);
+                level_change(l);
 
+                log("move to new level entrance");
                 move_to_immediately(fpoint(x, y));
                 if (is_player()) {
                     l->scroll_map_to_player();
                     l->player = this;
                 }
 
+                log("moved to new level entrance");
                 return true;
             }
         }
     }
 
-    MINICON("The exit is forever blocked!");
-    return false;
+    log("moved to new level entrance");
+    return true;
 }

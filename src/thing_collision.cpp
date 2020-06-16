@@ -956,8 +956,8 @@ _
         }
     } else if (it->is_exit()) {
         if (things_overlap(me, A_at, it)) {
-            log("can open %s", it->to_string().c_str());
-            open_exit(it);
+            log("can exit %s", it->to_string().c_str());
+            // open_exit(it);
             return false;
         }
     } else if (possible_to_attack(it)) {

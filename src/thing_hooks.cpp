@@ -17,6 +17,8 @@
 //
 void Thing::hooks_remove ()
 {_
+    //log("hooks remove");
+
     //
     // We are owned by something. i.e. we are a sword.
     //
@@ -88,6 +90,7 @@ void Thing::hooks_remove ()
     {_
         auto item = weapon_get_carry_anim();
         if (item) {
+            log("hooks remove carry anim");
             weapon_set_carry_anim(nullptr);
             verify(item);
             item->remove_owner();
@@ -98,6 +101,7 @@ void Thing::hooks_remove ()
     {_
         auto item = weapon_get_use_anim();
         if (item) {
+            log("hooks remove use anim");
             weapon_set_use_anim(nullptr);
             verify(item);
             item->remove_owner();

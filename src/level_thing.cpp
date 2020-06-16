@@ -72,7 +72,7 @@ do_retry:
                 t->log("- slot %u", slot);
                 if (t->is_temporary()) {
                     t->dead("out of slots");
-                    t->detach();
+                    t->level_pop();
                     retry++;
                     goto do_retry;
                 }

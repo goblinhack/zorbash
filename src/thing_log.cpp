@@ -13,7 +13,7 @@
 #include "my_log.h"
 #include "my_thing.h"
 
-void Thing::log_ (const char *fmt, va_list args)
+void Thing::log_ (const char *fmt, va_list args) const
 {
     verify(this);
     auto t = this;
@@ -33,7 +33,7 @@ void Thing::log_ (const char *fmt, va_list args)
     putf(MY_STDOUT, buf);
 }
 
-void Thing::log (const char *fmt, ...)
+void Thing::log (const char *fmt, ...) const
 {
     verify(this);
     auto t = this;
@@ -199,7 +199,7 @@ void Thing::die (const char *fmt, ...)
     va_end(args);
 }
 
-void Thing::con_ (const char *fmt, va_list args)
+void Thing::con_ (const char *fmt, va_list args) const
 {
     verify(this);
     auto t = this;
@@ -223,7 +223,7 @@ void Thing::con_ (const char *fmt, va_list args)
     FLUSH_THE_CONSOLE();
 }
 
-void Thing::con (const char *fmt, ...)
+void Thing::con (const char *fmt, ...) const
 {
     verify(this);
     auto t = this;
@@ -234,7 +234,7 @@ void Thing::con (const char *fmt, ...)
     va_end(args);
 }
 
-void Thing::err_ (const char *fmt, va_list args)
+void Thing::err_ (const char *fmt, va_list args) const
 {
     verify(this);
     auto t = this;
@@ -244,8 +244,7 @@ void Thing::err_ (const char *fmt, va_list args)
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "ERROR: Thing %s: ",
-            t->to_cstring());
+    snprintf(buf + len, MAXSTR - len, "ERROR: Thing %s: ", t->to_cstring());
 
     len = (int)strlen(buf);
     vsnprintf(buf + len, MAXSTR - len, fmt, args);
@@ -263,7 +262,7 @@ void Thing::err_ (const char *fmt, va_list args)
     FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 }
 
-void Thing::err (const char *fmt, ...)
+void Thing::err (const char *fmt, ...) const
 {
     g_errored = true;
 
@@ -276,7 +275,7 @@ void Thing::err (const char *fmt, ...)
     va_end(args);
 }
 
-void Thing::dbg (const char *fmt, ...)
+void Thing::dbg (const char *fmt, ...) const
 {
     verify(this);
     if (game && !game->config.debug_mode) {

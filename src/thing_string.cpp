@@ -55,7 +55,7 @@ std::string Thing::to_string (void) const
     }
 }
 
-const char * Thing::to_cstring (void)
+const char * Thing::to_cstring (void) const
 {_
     return (to_string().c_str());
 }
