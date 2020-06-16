@@ -38,6 +38,13 @@ void Thing::destroy (void)
     level_pop();
     level_leave();
 
+    {
+        auto f = level->all_gc_things.find(id);
+        if (f != level->all_gc_things.end()) {
+            level->all_gc_things.erase(f);
+        }
+    }
+
     unwield("owner is destroyed");
 
     //

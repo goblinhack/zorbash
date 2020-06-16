@@ -8,6 +8,7 @@
 #define _MY_MAIN_H_
 
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
+#define ENABLE_TRACING             // Function tracing
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
 #undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
 #undef  ENABLE_DEBUG_AI_GOALS      // AI goal selection
@@ -18,13 +19,11 @@
 #undef  ENABLE_GFX_INVERSE_COLORS  // For vision impaired
 #undef  ENABLE_GFX_TILE_COLLISIONS // Not needed for roguelike
 #undef  ENABLE_LOG_TIMESTAMPS      // Full timestamps with date in logs
+#undef  ENABLE_MAP_DEBUG           // Visible map, no lighting
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
 #undef  ENABLE_UI_DEBUG            // User interface logs
 #undef  ENABLE_UI_DEBUG_EXTRA      // User interface logs with inheritance
-#define ENABLE_TRACING             // Function tracing
-#undef  ENABLE_MAP_DEBUG           // Visible map, no lighting
 
-#define ENABLE_DEBUG_CRASH
 #ifdef ENABLE_DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_PTRCHECK            // Check validity of pointers too

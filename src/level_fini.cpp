@@ -27,6 +27,9 @@ void Level::fini (void)
                     LOG("clean thing %" PRIx32 " at %d,%d", id.id, x, y);
 #endif
                     auto t = thing_find(id);
+#ifdef ENABLE_THING_ID_LOGS
+                    t->log("call delete");
+#endif
                     delete t;
                 }
             }
