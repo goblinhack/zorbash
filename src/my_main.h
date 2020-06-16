@@ -7,13 +7,14 @@
 #ifndef _MY_MAIN_H_
 #define _MY_MAIN_H_
 
+#undef  ENABLE_DEBUG_CRASH         // Enable this for lots of sanity checks
 #define ENABLE_CRASH_HANDLER       // Intercept SEGV
 #define ENABLE_TRACING             // Function tracing
+
 #undef  ENABLE_DEBUG_AI            // Monster AI decisions
 #undef  ENABLE_DEBUG_AI_ASTAR      // Astar AI path costs
 #undef  ENABLE_DEBUG_AI_GOALS      // AI goal selection
 #undef  ENABLE_DEBUG_AI_WANDER     // AI wander path selection
-#undef  ENABLE_DEBUG_CRASH         // Enable this for lots of sanity checks
 #undef  ENABLE_DEBUG_GFX_GL_BLEND  // Use to debug specific blends
 #undef  ENABLE_DEBUG_UI_FOCUS      // Which windows we are over
 #undef  ENABLE_GFX_INVERSE_COLORS  // For vision impaired
@@ -23,6 +24,7 @@
 #undef  ENABLE_UI_ASCII_MOUSE      // Show an in game mouse, not system mouse
 #undef  ENABLE_UI_DEBUG            // User interface logs
 #undef  ENABLE_UI_DEBUG_EXTRA      // User interface logs with inheritance
+
 #ifdef ENABLE_DEBUG_CRASH
 #define ENABLE_ASSERT              // DIE on errors, like array bound check
 #define ENABLE_PTRCHECK            // Check validity of pointers too
@@ -33,14 +35,14 @@
 #endif
 
 #define GRID_HEIGHT                5
-#define GRID_WIDTH                 5 // Rooms across and down
-#define LEVELS_ACROSS              MAP_WIDTH
+#define GRID_WIDTH                 5  // Rooms across and down
+#define LEVELS_ACROSS              MAP_WIDTH // World size
 #define LEVELS_DEEP                32
 #define LEVELS_DOWN                MAP_HEIGHT
 #define LIGHT_RAYS                 180
-#define MAP_BORDER                 10
+#define MAP_BORDER                 10 // Room border padding
 #define MAP_HEIGHT                 ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
-#define MAP_ROCK_BORDER            1
+#define MAP_ROCK_BORDER            1  // Map rock border
 #define MAP_SLOTS                  32
 #define MAP_WIDTH                  ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
 #define PLAYER_MOVE_SPEED_MS       100

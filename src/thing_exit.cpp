@@ -30,6 +30,10 @@ bool Thing::descend (void)
     }
 
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
+    if (!l) {
+        UI_MINICON("The exit is permanently blocked!");
+        return false;
+    }
 
     for (auto x = 0; x < MAP_WIDTH; x++) {
         for (auto y = 0; y < MAP_HEIGHT; y++) {
