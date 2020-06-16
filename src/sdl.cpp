@@ -314,12 +314,25 @@ uint8_t sdl_init (void)
 
     SDL_ClearError();
 
-    glClearColor(0, 0, 0, 0);
-    SDL_Delay(400); // avoids white flash on startup!
+    //
+    // Clear the screen, both buffers
+    //
+    glcolor(WHITE);
+    if (game->config.gfx_inverted) {
+        glClearColor(255, 255, 255, 255);
+    } else {
+        glClearColor(0, 0, 0, 0);
+    }
     glClear(GL_COLOR_BUFFER_BIT |
             GL_DEPTH_BUFFER_BIT |
             GL_ACCUM_BUFFER_BIT |
             GL_STENCIL_BUFFER_BIT);
+    SDL_GL_SwapWindow(window);
+    glClear(GL_COLOR_BUFFER_BIT |
+            GL_DEPTH_BUFFER_BIT |
+            GL_ACCUM_BUFFER_BIT |
+            GL_STENCIL_BUFFER_BIT);
+    SDL_GL_SwapWindow(window);
 
     config_gfx_zoom_update();
 
@@ -497,7 +510,7 @@ static void sdl_event (SDL_Event * event)
             event->motion.xrel, event->motion.yrel, mouse_down);
 
         wid_mouse_visible = 1;
-        mouse_tick ++;
+        mouse_tick++;
         wid_mouse_motion(mouse_x, mouse_y,
                          event->motion.xrel, event->motion.yrel,
                          0, 0);

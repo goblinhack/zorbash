@@ -19,6 +19,8 @@ void Level::clear (void)
     _is_dirt = {};
     _is_door = {};
     _is_dungeon = {};
+    _is_entrance = {};
+    _is_exit = {};
     _is_fire = {};
     _is_floor = {};
     _is_food = {};
@@ -42,6 +44,7 @@ void Level::init (point3d at, int seed)
     is_starting = true;
     clear();
 
+    this->seed = seed;
     world_at = at;
     mysrand(seed);
 
@@ -183,20 +186,22 @@ void Level::init (point3d at, int seed)
         if (g_errored) { return; }
 
         //
-        // Place the player
+        // Place the player if we do not have one.
         //
-        for (auto x = 0; x < MAP_WIDTH; x++) {
-            for (auto y = 0; y < MAP_HEIGHT; y++) {
-                if (dungeon->is_entrance(x, y)) {
-                    auto t = thing_new("player1", fpoint(x, y));
-                    auto w = thing_new("sword1", fpoint(x, y));
-                    t->carry(w);
-                    cursor = thing_new("cursor", fpoint(x, y));
-                    map_follow_player = true;
-                    mouse = -1;
-                    mouse_old = -1;
-                    minimap_valid = false;
-                    goto placed_player;
+        if (!game->level) {
+            for (auto x = 0; x < MAP_WIDTH; x++) {
+                for (auto y = 0; y < MAP_HEIGHT; y++) {
+                    if (dungeon->is_entrance(x, y)) {
+                        auto t = thing_new("player1", fpoint(x, y));
+                        auto w = thing_new("sword1", fpoint(x, y));
+                        t->carry(w);
+                        cursor = thing_new("cursor", fpoint(x, y));
+                        map_follow_player = true;
+                        mouse = -1;
+                        mouse_old = -1;
+                        minimap_valid = false;
+                        goto placed_player;
+                    }
                 }
             }
         }

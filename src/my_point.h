@@ -567,7 +567,7 @@ public:
     }
 };
 
-typedef my_apoint3d<int> point3d;
+typedef my_apoint3d<int16_t> point3d;
 typedef my_apoint3d<float> fpoint3d;
 
 #endif // _MY_POINT_H_

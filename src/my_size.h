@@ -96,7 +96,7 @@ public:
     }
 };
 
-typedef my_asize<int> size;
+typedef my_asize<int16_t> size;
 typedef my_asize<float> fsize;
 
 template<class T> class my_asize3d
@@ -192,7 +192,7 @@ public:
     }
 };
 
-typedef my_asize3d<int> size3d;
-typedef my_asize3d<double> fsize3d;
+typedef my_asize3d<int16_t> size3d;
+typedef my_asize3d<float> fsize3d;
 
 #endif // _MY_SIZE_H_

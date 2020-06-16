@@ -247,6 +247,8 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* _is_dirt */             in >> bits(my.t->_is_dirt);
     /* _is_door */             in >> bits(my.t->_is_door);
     /* _is_dungeon */          in >> bits(my.t->_is_dungeon);
+    /* _is_entrance */         in >> bits(my.t->_is_entrance);
+    /* _is_exit */             in >> bits(my.t->_is_exit);
     /* _is_fire */             in >> bits(my.t->_is_fire);
     /* _is_floor */            in >> bits(my.t->_is_floor);
     /* _is_food */             in >> bits(my.t->_is_food);
@@ -268,11 +270,11 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
     /* cursor_at_old */        in >> bits(my.t->cursor_at_old);
     /* cursor_found */         in >> bits(my.t->cursor_found);
     /* cursor_needs_update */  in >> bits(my.t->cursor_needs_update);
+    /* heatmap_valid */        in >> bits(my.t->heatmap_valid);
     /* map_at */               in >> bits(my.t->map_at);
     /* map_follow_player */    in >> bits(my.t->map_follow_player);
     /* map_wanted_at */        in >> bits(my.t->map_wanted_at);
     /* minimap_valid */        in >> bits(my.t->minimap_valid);
-    /* heatmap_valid */        in >> bits(my.t->heatmap_valid);
     /* mouse */                in >> bits(my.t->mouse);
     /* mouse_old */            in >> bits(my.t->mouse_old);
     /* seed */                 in >> bits(my.t->seed);
@@ -289,12 +291,6 @@ std::istream& operator>>(std::istream &in, Bits<Level * &> my)
             for (auto slot = 0; slot < MAP_SLOTS; ++slot) {
                 auto id = get(my.t->all_thing_ids_at, x, y, slot);
                 if (id.ok()) {
-#ifdef ENABLE_THING_ID_LOGS
-                    auto o = my.t->test_thing_ptr(id);
-                    if (o) {
-                        o->die("thing already exists for %" PRIx32 "", id);
-                    }
-#endif
                     auto t = new Thing();
                     in >> bits(t);
 #ifdef ENABLE_THING_ID_LOGS

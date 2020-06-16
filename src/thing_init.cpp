@@ -475,19 +475,21 @@ void Thing::reinit (void)
     if (tpp->is_deep_water())    { level->set_is_water(new_at.x, new_at.y); }
     if (tpp->is_dirt())          { level->set_is_dirt(new_at.x, new_at.y); }
     if (tpp->is_door())          { level->set_is_door(new_at.x, new_at.y); }
+    if (tpp->is_entrance())      { level->set_is_entrance(new_at.x, new_at.y); }
+    if (tpp->is_exit())          { level->set_is_exit(new_at.x, new_at.y); }
     if (tpp->is_fire())          { level->set_is_fire(new_at.x, new_at.y); }
     if (tpp->is_floor())         { level->set_is_floor(new_at.x, new_at.y); }
     if (tpp->is_food())          { level->set_is_food(new_at.x, new_at.y); }
-    if (tpp->is_treasure())      { level->set_is_treasure(new_at.x, new_at.y); }
     if (tpp->is_gold())          { level->set_is_gold(new_at.x, new_at.y); }
     if (tpp->is_hazard())        { level->set_is_hazard(new_at.x, new_at.y); }
     if (tpp->is_key())           { level->set_is_key(new_at.x, new_at.y); }
-    if (tpp->is_light_blocker()) { level->set_is_light_blocker(new_at.x, new_at.y); }
-    if (tpp->is_smoke())         { level->set_is_smoke(new_at.x, new_at.y); }
     if (tpp->is_lava())          { level->set_is_lava(new_at.x, new_at.y); }
+    if (tpp->is_light_blocker()) { level->set_is_light_blocker(new_at.x, new_at.y); }
     if (tpp->is_monst())         { level->set_is_monst(new_at.x, new_at.y); }
     if (tpp->is_rock())          { level->set_is_rock(new_at.x, new_at.y); }
     if (tpp->is_secret_door())   { level->set_is_secret_door(new_at.x, new_at.y); }
+    if (tpp->is_smoke())         { level->set_is_smoke(new_at.x, new_at.y); }
+    if (tpp->is_treasure())      { level->set_is_treasure(new_at.x, new_at.y); }
     if (tpp->is_wall())          { level->set_is_wall(new_at.x, new_at.y); }
     if (tpp->is_water())         { level->set_is_water(new_at.x, new_at.y); }
 

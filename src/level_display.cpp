@@ -12,6 +12,7 @@
 
 void Level::display (void)
 {_
+    //log("display");
     if (map_changed) {
         static int last_done;
         if (time_have_x_secs_passed_since(1, last_done)) {
@@ -176,7 +177,7 @@ void Level::display_map (void)
 
     pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
-    int debug = 0;
+    int debug = 1;
     if (debug) {
         game->config.gfx_lights = 0;
         game->config.gfx_show_hidden = 1;

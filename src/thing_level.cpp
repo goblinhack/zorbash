@@ -25,14 +25,18 @@ void Thing::change_level (Levelp l)
     if (level == l) {
         return;
     }
-    level = l;
-    log("change level");
 
-    {
-        auto it = owner_get();
-        if (it) {
-            it->change_level(l);
-        }
+    if (is_player()) {
+        level->player = nullptr;
+    }
+
+    log("change level");
+    detach();
+    level = l;
+    attach();
+
+    if (is_player()) {
+        level->player = this;
     }
 
     {

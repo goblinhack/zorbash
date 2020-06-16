@@ -27,6 +27,8 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dirt {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_door {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_dungeon {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_entrance {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_exit {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_fire {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_floor {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_food {};
@@ -321,6 +323,16 @@ public:
     bool is_gold(const point &p);
     void set_is_gold(const int x, const int y);
     void unset_is_gold(const int x, const int y);
+
+    bool is_entrance(const int x, const int y);
+    bool is_entrance(const point &p);
+    void set_is_entrance(const int x, const int y);
+    void unset_is_entrance(const int x, const int y);
+
+    bool is_exit(const int x, const int y);
+    bool is_exit(const point &p);
+    void set_is_exit(const int x, const int y);
+    void unset_is_exit(const int x, const int y);
 
     bool is_deep_water(const int x, const int y);
     bool is_deep_water(const point &p);

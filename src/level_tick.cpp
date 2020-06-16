@@ -14,6 +14,7 @@
 
 void Level::tick (void)
 {_
+    //log("tick");
     if (!game->started) {
         return;
     }
