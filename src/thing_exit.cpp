@@ -36,7 +36,7 @@ bool Thing::descend (void)
             if (l->is_entrance(x, y)) {
                 if (is_player()) {
                     game->level = l;
-                    MINICON("You bravely descend");
+                    UI_MINICON("You bravely descend");
                 }
                 level_change(l);
 

@@ -79,7 +79,7 @@ public:
     Texp tex {};
     Texp tex_black_and_white {};
 
-    std::array<std::array<uint8_t, MAX_TILE_HEIGHT>, MAX_TILE_WIDTH> pix {};
+    std::array<std::array<uint8_t, TILE_HEIGHT_MAX>, TILE_WIDTH_MAX> pix {};
 
     //
     // Delay in ms between frames.

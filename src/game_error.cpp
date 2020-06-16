@@ -26,9 +26,9 @@ uint8_t game_error_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -56,9 +56,9 @@ uint8_t game_error_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -87,8 +87,8 @@ void game_error (std::string error)
     game->hard_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2);
-    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     game_error_window =
@@ -123,7 +123,7 @@ void game_error (std::string error)
         point tl = make_point(1, 4);
         point br = make_point(width - 3, 6);
 
-        wid_set_style(w, WID_STYLE_RED);
+        wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_error_mouse_up);
 
         wid_set_pos(w, tl, br);

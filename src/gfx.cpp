@@ -245,7 +245,7 @@ static void gfx_init_text (void)
 
     std::vector<std::string> arr(tiles);
     tile_load_arr("data/ttf/loresfont.tga", "text", 
-                  FONT_WIDTH, FONT_HEIGHT, arr);
+                  UI_FONT_WIDTH, UI_FONT_HEIGHT, arr);
 }
 
 void gfx_init (void)

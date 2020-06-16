@@ -28,13 +28,13 @@ bool Thing::open_door (Thingp it)
             it->level_pop();
             it->is_open = true;
             it->level_push();
-            MINICON("The door opens");
+            UI_MINICON("The door opens");
             if (get_light_count()) {
                 update_light();
             }
             return true;
         }
     }
-    MINICON("You need a key");
+    UI_MINICON("You need a key");
     return false;
 }

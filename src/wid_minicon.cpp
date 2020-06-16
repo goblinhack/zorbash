@@ -143,7 +143,7 @@ void wid_minicon_flush (void)
 //
 void wid_minicon_log (std::string s)
 {_
-    int chars_per_line = MINICON_WIDTH;
+    int chars_per_line = UI_MINICON_WIDTH;
 
     auto d = split(s, chars_per_line);
 
@@ -159,7 +159,7 @@ void wid_minicon_log (std::string s)
 //
 void wid_minicon_log (std::wstring s)
 {_
-    int chars_per_line = MINICON_WIDTH;
+    int chars_per_line = UI_MINICON_WIDTH;
 
     auto d = split(s, chars_per_line);
 
@@ -175,11 +175,11 @@ void wid_minicon_log (std::wstring s)
 //
 static void wid_minicon_wid_create (void)
 {_
-    int h = MINICON_VIS_HEIGHT;
+    int h = UI_MINICON_VIS_HEIGHT;
 
     {
         point tl = make_point(0, 0);
-        point br = make_point(MINICON_VIS_WIDTH - 1, h);
+        point br = make_point(UI_MINICON_VIS_WIDTH - 1, h);
 
         wid_minicon_window = wid_new_square_window("wid_minicon");
         wid_set_name(wid_minicon_window, "wid_minicon window");
@@ -189,7 +189,7 @@ static void wid_minicon_wid_create (void)
 
     {
         point tl = make_point(0, 0);
-        point br = make_point(MINICON_VIS_WIDTH - 1, h);
+        point br = make_point(UI_MINICON_VIS_WIDTH - 1, h);
 
         wid_minicon_container = wid_new_container(wid_minicon_window,
                                                   "wid minicon container");
@@ -208,10 +208,10 @@ static void wid_minicon_wid_create (void)
         Widp child {};
         Widp prev {};
 
-        for (row = 0; row < MINICON_HEIGHT; row++) {
+        for (row = 0; row < UI_MINICON_HEIGHT; row++) {
             row_bottom --;
             point tl = make_point(0, row_bottom);
-            point br = make_point(MINICON_WIDTH, row_bottom);
+            point br = make_point(UI_MINICON_WIDTH, row_bottom);
 
             child = wid_new_container(wid_minicon_container, "");
 
@@ -226,7 +226,7 @@ static void wid_minicon_wid_create (void)
                 wid_minicon_input_line = child;
             }
 
-            wid_set_color(child, WID_COLOR_TEXT, MINICON_TEXT_COLOR);
+            wid_set_color(child, WID_COLOR_TEXT, UI_MINICON_TEXT_COLOR);
             wid_set_name(child, "minicon output");
         }
 
@@ -264,7 +264,7 @@ void wid_minicon_deserialize(std::vector<std::wstring> r)
     for (const auto& s : r) {
         auto tmp = wstring_to_string(s);
         if (tmp.size()) {
-            MINICON("%s", tmp.c_str());
+            UI_MINICON("%s", tmp.c_str());
         }
     }
 }

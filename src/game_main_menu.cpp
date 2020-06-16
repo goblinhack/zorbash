@@ -31,7 +31,7 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     wid_minicon_fini();
     wid_minicon_init();
     wid_visible(wid_minicon_window);
-    MINICON("Welcome to the lair of %%fg=red$Zorbash%%fg=reset$. Stay awhile, stay forever...");
+    UI_MINICON("Welcome to the lair of %%fg=red$Zorbash%%fg=reset$. Stay awhile, stay forever...");
     return (false);
 }
 
@@ -64,9 +64,9 @@ uint8_t game_main_menu_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -101,9 +101,9 @@ uint8_t game_main_menu_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -152,7 +152,7 @@ void Game::main_menu_select (void)
     }
     game_status_fini();
 
-    point tl = make_point(ASCII_WIDTH - WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 16);
+    point tl = make_point(ASCII_WIDTH - UI_WID_POPUP_WIDTH_NORMAL - 1, ASCII_HEIGHT - 16);
     point br = make_point(ASCII_WIDTH - 7, ASCII_HEIGHT - 1);
     auto width = br.x - tl.x - 2;
 
@@ -172,7 +172,7 @@ void Game::main_menu_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_new_game);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$N%%fg=reset$ew game");
@@ -184,7 +184,7 @@ void Game::main_menu_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_load_game);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$L%%fg=reset$oad game");
@@ -196,7 +196,7 @@ void Game::main_menu_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_config);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$O%%fg=reset$ptions");
@@ -208,7 +208,7 @@ void Game::main_menu_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_main_menu_quit_game);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$Q%%fg=reset$uit Game");

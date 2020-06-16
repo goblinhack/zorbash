@@ -439,7 +439,7 @@ Game::save (int slot)
         return;
     }
 
-    if (slot >= MAX_SAVE_SLOTS) {
+    if (slot >= UI_WID_SAVE_SLOTS) {
         return;
     }
 
@@ -487,9 +487,9 @@ uint8_t wid_save_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -532,9 +532,9 @@ uint8_t wid_save_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -563,8 +563,8 @@ void Game::save_select (void)
     game->hard_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = make_point(m - WID_POPUP_WIDTH_WIDE / 2, MINICON_VIS_HEIGHT + 2);
-    point br = make_point(m + WID_POPUP_WIDTH_WIDE / 2, ACTIONBAR_TL_Y - 2);
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDE / 2, UI_MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDE / 2, UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     wid_save = new WidPopup(tl, br, tile_find_mand("save"), "ui_popup_wide");
@@ -576,7 +576,7 @@ void Game::save_select (void)
     wid_save->log("Choose a save slot. %%fg=red$ESC%%fg=reset$ to cancel");
 
     int y_at = 2;
-    for (auto slot = 0; slot < MAX_SAVE_SLOTS; slot++) {
+    for (auto slot = 0; slot < UI_WID_SAVE_SLOTS; slot++) {
         Game tmp;
         auto tmp_file = saved_dir + "saved-slot-" + std::to_string(slot);
         auto p = wid_save->wid_text_area->wid_text_area;
@@ -587,10 +587,10 @@ void Game::save_select (void)
         std::string s = std::to_string(slot) + " ";
         if (!load(tmp_file, tmp)) {
             s += "<empty>";
-            wid_set_style(w, WID_STYLE_RED);
+            wid_set_style(w, UI_WID_STYLE_RED);
         } else {
             s += tmp.save_meta;
-            wid_set_style(w, WID_STYLE_GREEN);
+            wid_set_style(w, UI_WID_STYLE_GREEN);
         }
         wid_set_on_mouse_up(w, wid_save_mouse_up);
         wid_set_int_context(w, slot);

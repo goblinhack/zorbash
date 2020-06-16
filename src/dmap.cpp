@@ -393,11 +393,6 @@ static std::vector<point> dmap_solve_ (const Dmap *D, const point start,
         out.push_back(best);
         at = best;
         set(walked, best.x, best.y, true);
-#if 0
-        if ((int)out.size() > MAX_LIGHT_PLAYER_DISTANCE) {
-            return (out);
-        }
-#endif
     }
     return (out);
 }

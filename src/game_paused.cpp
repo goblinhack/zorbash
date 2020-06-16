@@ -63,9 +63,9 @@ uint8_t wid_paused_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -94,9 +94,9 @@ uint8_t wid_paused_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -123,7 +123,7 @@ void Game::pause_select (void)
     game->soft_pause();
 
     point tl = make_point(0, ASCII_HEIGHT - 14);
-    point br = make_point(WID_POPUP_WIDTH_NORMAL, ASCII_HEIGHT - 1);
+    point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, ASCII_HEIGHT - 1);
     auto width = br.x - tl.x - 1;
 
     wid_paused_window =
@@ -140,7 +140,7 @@ void Game::pause_select (void)
         point tl = make_point(0, 0);
         point br = make_point(width - 1, 2);
 
-        wid_set_style(w, WID_STYLE_RED);
+        wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_paused_mouse_up);
 
         wid_set_pos(w, tl, br);

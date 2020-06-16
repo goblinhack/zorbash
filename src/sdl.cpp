@@ -476,10 +476,10 @@ static void sdl_event (SDL_Event * event)
             if (time_have_x_tenths_passed_since(5, ts)) {
                 accel = 1.0;
             } else {
-                accel *= ENABLE_WHEEL_SCROLL_SPEED_SCALE;
+                accel *= UI_SCROLL_WHEEL_SCALE;
 
-                if (accel > ENABLE_WHEEL_MAX_SCROLL_SPEED_SCALE) {
-                    accel = ENABLE_WHEEL_MAX_SCROLL_SPEED_SCALE;
+                if (accel > UI_SCROLL_WHEEL_SCALE_MAX) {
+                    accel = UI_SCROLL_WHEEL_SCALE_MAX;
                 }
             }
 
@@ -817,10 +817,10 @@ static void sdl_tick (void)
     if ((mx != 0) || (my != 0)) {
         ts = time_get_time_ms_cached();
 
-        accel *= ENABLE_JOY_SCROLL_SPEED_SCALE;
+        accel *= UI_SCROLL_JOY_SCALE;
 
-        if (accel > ENABLE_JOY_MAX_SCROLL_SPEED_SCALE) {
-            accel = ENABLE_JOY_MAX_SCROLL_SPEED_SCALE;
+        if (accel > UI_SCROLL_JOY_SCALE_MAX) {
+            accel = UI_SCROLL_JOY_SCALE_MAX;
         }
 
         double x = mouse_x + ((double)mx * accel);
@@ -1274,7 +1274,7 @@ void sdl_loop (void)
         //
         int timestamp_now = time_update_time_milli();
 
-        if (unlikely(timestamp_now - timestamp_then > 10)) {
+        if (unlikely(timestamp_now - timestamp_then > UI_POLL_EVENTS_MS)) {
             //
             // Give up some CPU to allow events to arrive and time for the GPU
             // to process the above.
@@ -1476,11 +1476,11 @@ void config_gfx_zoom_update (void)
     CON("INIT: - inner    pix size    : %dx%d", game->config.inner_pix_width,
                                                 game->config.inner_pix_height);
 
-    game->config.ascii_gl_width = FONT_WIDTH;
-    game->config.ascii_gl_height = FONT_HEIGHT;
+    game->config.ascii_gl_width = UI_FONT_WIDTH;
+    game->config.ascii_gl_height = UI_FONT_HEIGHT;
 
-    ASCII_WIDTH  = (int)(game->config.outer_pix_width / FONT_WIDTH);
-    ASCII_HEIGHT = (int)(game->config.outer_pix_height / FONT_HEIGHT);
+    ASCII_WIDTH  = (int)(game->config.outer_pix_width / UI_FONT_WIDTH);
+    ASCII_HEIGHT = (int)(game->config.outer_pix_height / UI_FONT_HEIGHT);
 
     if (ASCII_WIDTH >= ASCII_WIDTH_MAX) {
         LOG("INIT: Exceeded console hit max width  : %d", ASCII_WIDTH);

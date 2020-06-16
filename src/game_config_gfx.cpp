@@ -175,9 +175,9 @@ uint8_t game_config_gfx_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -212,9 +212,9 @@ uint8_t game_config_gfx_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -235,8 +235,8 @@ void Game::config_gfx_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT - 2);
-    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_MINICON_VIS_HEIGHT - 2);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x - 2;
 
     game_config_gfx_window = new WidPopup(tl, br, nullptr, "ui_popup_widest");
@@ -265,7 +265,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(5, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_gfx_back);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
@@ -276,7 +276,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width - 14, y_at);
         point br = make_point(width - 9, y_at + 2);
-        wid_set_style(w, WID_STYLE_GREEN);
+        wid_set_style(w, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_gfx_save);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
@@ -287,7 +287,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width - 7, y_at);
         point br = make_point(width - 0, y_at + 2);
-        wid_set_style(w, WID_STYLE_RED);
+        wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_gfx_cancel);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$C%%fg=reset$ancel");
@@ -311,7 +311,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width / 2 , y_at);
         point br = make_point(width / 2 + 6, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_vsync_enable_toggle);
 
@@ -340,7 +340,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width / 2 , y_at);
         point br = make_point(width / 2 + 6, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_fullscreen_toggle);
 
@@ -369,7 +369,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width / 2 , y_at);
         point br = make_point(width / 2 + 6, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_allow_highdpi_toggle);
 
@@ -398,7 +398,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width / 2 , y_at);
         point br = make_point(width / 2 + 6, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_inverted_toggle);
 
@@ -427,7 +427,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width / 2 , y_at);
         point br = make_point(width / 2 + 12, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
 
         auto res = std::to_string(game->config.outer_pix_width) + "x" +
@@ -440,7 +440,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width / 2 + 13 , y_at);
         point br = make_point(width / 2 + 15, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_resolution_incr);
         wid_set_text(w, "+");
@@ -451,7 +451,7 @@ void Game::config_gfx_select (void)
 
         point tl = make_point(width / 2 + 16 , y_at);
         point br = make_point(width / 2 + 18, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_up(w, game_config_gfx_resolution_decr);
         wid_set_text(w, "-");
@@ -475,7 +475,7 @@ void Game::config_gfx_select (void)
 //
 //        point tl = make_point(width / 2 , y_at);
 //        point br = make_point(width / 2 + 6, y_at + 2);
-//        wid_set_style(w, WID_STYLE_DARK);
+//        wid_set_style(w, UI_WID_STYLE_DARK);
 //        wid_set_pos(w, tl, br);
 //        wid_set_text(w, std::to_string(game->config.gfx_zoom));
 //    }
@@ -485,7 +485,7 @@ void Game::config_gfx_select (void)
 //
 //        point tl = make_point(width / 2 + 7 , y_at);
 //        point br = make_point(width / 2 + 9, y_at + 2);
-//        wid_set_style(w, WID_STYLE_DARK);
+//        wid_set_style(w, UI_WID_STYLE_DARK);
 //        wid_set_pos(w, tl, br);
 //        wid_set_on_mouse_up(w, game_config_gfx_zoom_in);
 //        wid_set_text(w, "+");
@@ -496,7 +496,7 @@ void Game::config_gfx_select (void)
 //
 //        point tl = make_point(width / 2 + 10 , y_at);
 //        point br = make_point(width / 2 + 12, y_at + 2);
-//        wid_set_style(w, WID_STYLE_DARK);
+//        wid_set_style(w, UI_WID_STYLE_DARK);
 //        wid_set_pos(w, tl, br);
 //        wid_set_on_mouse_up(w, game_config_gfx_zoom_out);
 //        wid_set_text(w, "-");

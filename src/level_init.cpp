@@ -7,6 +7,11 @@
 #include "my_dungeon.h"
 #include "my_thing.h"
 
+Level::Level (void)
+{_
+    newptr(this, "level");
+}
+
 void Level::clear (void)
 {_
     _fade_in_map = {};
@@ -70,7 +75,6 @@ void Level::init (point3d at, int seed)
         auto dungeon = new Dungeon(0);
         if (g_errored) { return; }
 #endif
-
         auto tries = 10000;
 
         place_walls(dungeon, 1, 6, 6, tries);

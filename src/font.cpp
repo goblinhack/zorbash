@@ -63,14 +63,14 @@ uint8_t font_init (void)
     //
     // Generate bitmaps from TTF.
     //
-    auto tmp = std::string(TTF_PATH) + mybasename(FIXED_FONT, __FUNCTION__);
-    ttf_write_tga(tmp, FONT_SIZE, TTF_STYLE_NORMAL);
+    auto tmp = std::string(TTF_PATH) + mybasename(UI_FONT_NAME, __FUNCTION__);
+    ttf_write_tga(tmp, UI_FONT_PIXEL_SIZE, TTF_STYLE_NORMAL);
 
     DIE("generated fonts");
 #endif
 
-    fixed_font = font_load("fixed", (char*)FIXED_FONT,
-                           FONT_WIDTH,
+    fixed_font = font_load("fixed", (char*)UI_FONT_NAME,
+                           UI_FONT_WIDTH,
                            TTF_STYLE_NORMAL);
 
     return (true);

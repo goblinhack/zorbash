@@ -19,9 +19,9 @@ static void ascii_put_box__ (int style, Tilep bg_tile, Tilep fg_tile,
     static std::array<
                std::array<
                    std::array<Tilep, MAX_UI_SIZE>,
-                       MAX_UI_SIZE>, WID_STYLE_MAX> tiles = {};
+                       MAX_UI_SIZE>, UI_WID_STYLE_MAX> tiles = {};
 
-    if (style >= WID_STYLE_MAX) {
+    if (style >= UI_WID_STYLE_MAX) {
         ERR("unimplemented widget style %d", style);
         return;
     }

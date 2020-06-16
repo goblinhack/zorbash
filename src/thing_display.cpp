@@ -221,10 +221,10 @@ void Thing::blit_text (std::string const& text,
 
     int l = blit_msg_strlen(text);
 
-    blit_tl.x = ((blit_br.x + blit_tl.x) / 2) - (FONT_SIZE * l / 2);;
-    blit_br.x = blit_tl.x + FONT_SIZE - 1;
-    blit_tl.y = ((blit_br.y + blit_tl.y) / 2) - (FONT_SIZE * l / 2);;
-    blit_br.y = blit_tl.y + FONT_SIZE - 1;
+    blit_tl.x = ((blit_br.x + blit_tl.x) / 2) - (UI_FONT_PIXEL_SIZE * l / 2);
+    blit_br.x = blit_tl.x + UI_FONT_PIXEL_SIZE - 1;
+    blit_tl.y = ((blit_br.y + blit_tl.y) / 2) - (UI_FONT_PIXEL_SIZE * l / 2);
+    blit_br.y = blit_tl.y + UI_FONT_PIXEL_SIZE - 1;
 
     while (text_iter != text.end()) {
         auto c = *text_iter;
@@ -269,8 +269,8 @@ void Thing::blit_text (std::string const& text,
         tile_blit_outline(tile, blit_tl, blit_br, fg);
 
         tile = nullptr;
-        blit_tl.x += FONT_SIZE;
-        blit_br.x += FONT_SIZE;
+        blit_tl.x += UI_FONT_PIXEL_SIZE;
+        blit_br.x += UI_FONT_PIXEL_SIZE;
     }
 }
 

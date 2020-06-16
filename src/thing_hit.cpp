@@ -66,24 +66,24 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_fire() ||
             real_hitter->is_lava()) {
             if (set_on_fire()) {
-                MINICON("%%fg=red$You are ON FIRE!%%fg=reset$");
+                UI_MINICON("%%fg=red$You are ON FIRE!%%fg=reset$");
             }
         }
 
         if (damage > 10) {
-            MINICON("%%fg=red$%s %s for %d damage!%%fg=reset$",
+            UI_MINICON("%%fg=red$%s %s for %d damage!%%fg=reset$",
                     real_hitter->text_The().c_str(),
                     real_hitter->text_hits().c_str(),
                     damage);
         } else {
-            MINICON("%%fg=yellow$%s %s for %d damage!%%fg=reset$",
+            UI_MINICON("%%fg=yellow$%s %s for %d damage!%%fg=reset$",
                     real_hitter->text_The().c_str(),
                     real_hitter->text_hits().c_str(),
                     damage);
         }
     } else {
         if (real_hitter->is_player()) {
-            MINICON("You hit the %s for %d damage!",
+            UI_MINICON("You hit the %s for %d damage!",
                     text_The().c_str(), damage);
         }
         add_enemy(real_hitter);
