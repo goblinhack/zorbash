@@ -467,12 +467,12 @@ void ascii_putf__ (int x, int y, color fg, color bg, std::wstring const& text)
             }
 
             if (time_have_x_tenths_passed_since(10, last)) {
-                fg = CONSOLE_CURSOR_COLOR;
+                fg = UI_CURSOR_COLOR;
                 last = time_get_time_ms_cached();
             } else if (time_have_x_tenths_passed_since(5, last)) {
-                fg = CONSOLE_CURSOR_COLOR;
+                fg = UI_CURSOR_COLOR;
             } else {
-                fg = CONSOLE_CURSOR_OTHER_COLOR;
+                fg = UI_CURSOR_OTHER_COLOR;
             }
         }
 

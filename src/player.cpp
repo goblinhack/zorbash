@@ -30,16 +30,7 @@ void player_tick (void)
 
     g_thing_callframes_depth = callframes_depth;
 
-    int delay = 100;
-#if 0
-    //
-    // Always move
-    //
-    if ((time_get_time_ms_cached() -
-            player->get_timestamp_move_begin()) < delay) {
-        return;
-    }
-#endif
+    auto delay = PLAYER_MOVE_SPEED_MS;
 
     uint8_t right  = 0;
     uint8_t left   = 0;
@@ -91,14 +82,14 @@ void player_tick (void)
     }
 
     if (state[game->config.key_zoom_out]) {
-        MINICON("Zoom out");
+        UI_MINICON("Zoom out");
         CON("USERCFG: zoom out");
         config_gfx_zoom_out();
         some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_zoom_in]) {
-        MINICON("Zoom in");
+        UI_MINICON("Zoom in");
         CON("USERCFG: zoom in");
         config_gfx_zoom_in();
         some_key_event_was_pressed = true;
@@ -111,14 +102,14 @@ void player_tick (void)
     }
 
     if (state[game->config.key_save]) {
-        MINICON("Saving the game");
+        UI_MINICON("Saving the game");
         CON("USERCFG: saving the game");
         game->save_select();
         some_key_event_was_pressed = true;
     }
 
     if (state[game->config.key_pause]) {
-        MINICON("Pausing the game");
+        UI_MINICON("Pausing the game");
         CON("USERCFG: pausing the game");
         game->pause_select();
         some_key_event_was_pressed = true;
@@ -149,7 +140,7 @@ void player_tick (void)
     }
 
     if (wait) {
-        MINICON("You wait...");
+        UI_MINICON("You wait...");
     }
 
     if (get(sdl_joy_buttons, SDL_JOY_BUTTON_UP)) {

@@ -66,6 +66,9 @@ extern bool g_quitting;
 extern bool g_render_black_and_white;
 extern int g_opt_seed;
 
+extern int TILES_ACROSS;
+extern int TILES_DOWN;
+
 //
 // Shorter callstack indent printing logs inside thing code
 //

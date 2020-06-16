@@ -4,8 +4,8 @@
 //
 
 #pragma once
-#ifndef _MY_WID_POPUP_H_
-#define _MY_WID_POPUP_H_
+#ifndef _MY_UI_WID_POPUP_H_
+#define _MY_UI_WID_POPUP_H_
 
 #include "my_main.h"
 #include "my_wid_text_box.h"

@@ -29,9 +29,9 @@ uint8_t wid_dead_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -58,9 +58,9 @@ uint8_t wid_dead_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -87,7 +87,7 @@ void Game::dead_select (const char *reason)
     game->soft_pause();
 
     point tl = make_point(0, ASCII_HEIGHT - 24);
-    point br = make_point(WID_POPUP_WIDTH_NORMAL, ASCII_HEIGHT - 1);
+    point br = make_point(UI_WID_POPUP_WIDTH_NORMAL, ASCII_HEIGHT - 1);
     auto width = br.x - tl.x - 1;
 
     wid_dead_window = new WidPopup(tl, br, nullptr, "ui_dead");
@@ -129,7 +129,7 @@ void Game::dead_select (const char *reason)
         point tl = make_point(4, 16);
         point br = make_point(width - 5, 18);
 
-        wid_set_style(w, WID_STYLE_RED);
+        wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, wid_dead_mouse_up);
 
         wid_set_pos(w, tl, br);

@@ -3468,9 +3468,9 @@ uint8_t wid_receive_input (Widp w, const SDL_KEYSYM *key)
                         break;
                     }
 
-                case CONSOLE_KEY1:
-                case CONSOLE_KEY2:
-                case CONSOLE_KEY3:
+                case UI_CONSOLE_KEY1:
+                case UI_CONSOLE_KEY2:
+                case UI_CONSOLE_KEY3:
                     //
                     // Magic keys we use to toggle the console.
                     //
@@ -3528,7 +3528,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             switch ((int32_t)key->sym) {
                 case '1':
                     if (game && game->config.debug_mode) {
-                        MINICON("Show inverted toggle");
+                        UI_MINICON("Show inverted toggle");
                         CON("USERCFG: gfx show inverted toggle");
                         config_gfx_inverted_toggle();
                     }
@@ -3536,7 +3536,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 
                 case '2':
                     if (game && game->config.debug_mode) {
-                        MINICON("Show lights toggle");
+                        UI_MINICON("Show lights toggle");
                         CON("USERCFG: gfx show lights toggle");
                         config_gfx_lights_toggle();
                     }
@@ -3544,14 +3544,14 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 
                 case '3':
                     if (game && game->config.debug_mode) {
-                        MINICON("Show hidden objects toggle");
+                        UI_MINICON("Show hidden objects toggle");
                         CON("USERCFG: gfx show hidden toggle");
                         config_gfx_show_hidden_toggle();
                     }
                     break;
 
                 case 'r':
-                    MINICON("Creating a new dungeon");
+                    UI_MINICON("Creating a new dungeon");
                     CON("USERCFG: reloading dungeon, destroy old");
                     game->fini();
                     game->init();
@@ -3562,8 +3562,8 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             switch ((int32_t)key->sym) {
                 case '\\':
                     sdl_screenshot();
-                    MINICON("Screenshot taken");
-                    MINICON("USERCFG: screenshot taken");
+                    UI_MINICON("Screenshot taken");
+                    UI_MINICON("USERCFG: screenshot taken");
                     break;
 
                 case '?':

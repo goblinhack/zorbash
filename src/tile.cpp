@@ -187,8 +187,8 @@ void tile_load_arr (std::string file, std::string name,
 #endif
 
 #ifdef ENABLE_GFX_TILE_COLLISIONS
-            if ((pixel_size.w <= MAX_TILE_WIDTH) &&
-                (pixel_size.h <= MAX_TILE_HEIGHT)) {
+            if ((pixel_size.w <= TILE_WIDTH_MAX) &&
+                (pixel_size.h <= TILE_HEIGHT_MAX)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
                 point AT = make_point(
@@ -229,7 +229,7 @@ void tile_load_arr (std::string file, std::string name,
 #ifdef DEBUG_TILE
                             printf("X");
 #endif
-                            if ((x1 < MAX_TILE_WIDTH) && (y1 < MAX_TILE_HEIGHT)) {
+                            if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
                                 set(t->pix, x1, y1, (uint8_t)1);
                             }
                         } else if (p.a > 0) {
@@ -348,8 +348,8 @@ void tile_load_arr (std::string file, std::string name,
 #endif
 
 #ifdef ENABLE_GFX_TILE_COLLISIONS
-            if ((pixel_size.w <= MAX_TILE_WIDTH) &&
-                (pixel_size.h <= MAX_TILE_HEIGHT)) {
+            if ((pixel_size.w <= TILE_WIDTH_MAX) &&
+                (pixel_size.h <= TILE_HEIGHT_MAX)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
                 point AT = make_point(
@@ -390,7 +390,7 @@ void tile_load_arr (std::string file, std::string name,
 #ifdef DEBUG_TILE
                             printf("X");
 #endif
-                            if ((x1 < MAX_TILE_WIDTH) && (y1 < MAX_TILE_HEIGHT)) {
+                            if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
                                 set(t->pix, x1, y1, (uint8_t)1);
                             }
                         } else if (p.a > 0) {
@@ -518,8 +518,8 @@ void tile_load_arr_color_and_black_and_white (std::string file,
 #endif
 
 #ifdef ENABLE_GFX_TILE_COLLISIONS
-            if ((pixel_size.w <= MAX_TILE_WIDTH) &&
-                (pixel_size.h <= MAX_TILE_HEIGHT)) {
+            if ((pixel_size.w <= TILE_WIDTH_MAX) &&
+                (pixel_size.h <= TILE_HEIGHT_MAX)) {
                 SDL_Surface *s = tex_get_surface(tex);
 
                 point AT = make_point(
@@ -560,7 +560,7 @@ void tile_load_arr_color_and_black_and_white (std::string file,
 #ifdef DEBUG_TILE
                             printf("X");
 #endif
-                            if ((x1 < MAX_TILE_WIDTH) && (y1 < MAX_TILE_HEIGHT)) {
+                            if ((x1 < TILE_WIDTH_MAX) && (y1 < TILE_HEIGHT_MAX)) {
                                 set(t->pix, x1, y1, (uint8_t)1);
                             }
                         } else if (p.a > 0) {

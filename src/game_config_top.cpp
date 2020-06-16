@@ -60,9 +60,9 @@ uint8_t game_config_top_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -101,9 +101,9 @@ uint8_t game_config_top_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -126,10 +126,10 @@ void Game::config_top_select (void)
     game_status_fini();
 
     point tl = make_point(
-                ASCII_WIDTH / 2 - WID_POPUP_WIDTH_NORMAL / 2,
+                ASCII_WIDTH / 2 - UI_WID_POPUP_WIDTH_NORMAL / 2,
                 ASCII_HEIGHT / 2 - 4);
     point br = make_point(
-                ASCII_WIDTH / 2 + WID_POPUP_WIDTH_NORMAL / 2 - 1,
+                ASCII_WIDTH / 2 + UI_WID_POPUP_WIDTH_NORMAL / 2 - 1,
                 ASCII_HEIGHT / 2 + 14);
     auto width = br.x - tl.x - 2;
 
@@ -147,7 +147,7 @@ void Game::config_top_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_graphics);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$G%%fg=reset$raphics");
@@ -159,7 +159,7 @@ void Game::config_top_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_sound);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$S%%fg=reset$ound and music");
@@ -171,7 +171,7 @@ void Game::config_top_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_keyboard);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$K%%fg=reset$eyboard");
@@ -183,7 +183,7 @@ void Game::config_top_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_other);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$O%%fg=reset$ther stuffs");
@@ -195,7 +195,7 @@ void Game::config_top_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(width, y_at + 2);
-        wid_set_style(w, WID_STYLE_NORMAL);
+        wid_set_style(w, UI_WID_STYLE_NORMAL);
         wid_set_on_mouse_up(w, game_config_top_back);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "%%fg=white$B%%fg=reset$ack");

@@ -121,7 +121,7 @@ static void wid_console_log_ (std::wstring s)
 //
 void wid_console_log (std::string s)
 {_
-    int chars_per_line = CONSOLE_WIDTH;
+    int chars_per_line = UI_CONSOLE_WIDTH;
     if (!chars_per_line) {
         chars_per_line = 80;
     }
@@ -140,7 +140,7 @@ void wid_console_log (std::string s)
 //
 void wid_console_log (std::wstring s)
 {_
-    int chars_per_line = CONSOLE_WIDTH;
+    int chars_per_line = UI_CONSOLE_WIDTH;
     if (!chars_per_line) {
         chars_per_line = 80;
     }
@@ -200,21 +200,21 @@ static void wid_console_wid_create (void)
         wid_console_container = wid_new_container(wid_console_window,
                                                       "wid console inner area");
         wid_set_pos(wid_console_container, tl, br);
-        wid_set_style(wid_console_container, WID_STYLE_DARK);
+        wid_set_style(wid_console_container, UI_WID_STYLE_DARK);
     }
 
     {
         int32_t row;
-        int row_bottom = CONSOLE_HEIGHT - 1;
+        int row_bottom = UI_CONSOLE_HEIGHT - 1;
 
         Widp child {};
         Widp prev {};
 
-        for (row = 0; row < CONSOLE_HEIGHT; row++) {
+        for (row = 0; row < UI_CONSOLE_HEIGHT; row++) {
             row_bottom --;
 
             point tl = make_point(0, row_bottom);
-            point br = make_point(CONSOLE_WIDTH, row_bottom);
+            point br = make_point(UI_CONSOLE_WIDTH, row_bottom);
 
             child = wid_new_container(wid_console_container, "");
 
@@ -239,9 +239,9 @@ static void wid_console_wid_create (void)
                 wid_set_text_lhs(prefix, true);
                 wid_set_shape_none(prefix);
                 wid_set_text(prefix, L"\u0084");
-                wid_set_color(child, WID_COLOR_TEXT, CONSOLE_INPUT_COLOR);
+                wid_set_color(child, WID_COLOR_TEXT, UI_CONSOLE_INPUT_COLOR);
             } else {
-                wid_set_color(child, WID_COLOR_TEXT, CONSOLE_TEXT_COLOR);
+                wid_set_color(child, WID_COLOR_TEXT, UI_CONSOLE_TEXT_COLOR);
                 wid_set_name(child, "console output");
             }
         }

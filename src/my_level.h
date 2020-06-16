@@ -137,15 +137,8 @@ public:
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     /////////////////////////////////////////////////////////////////////////
 
-    Level (void)
-    {_
-        newptr(this, "level");
-    }
-
-    ~Level (void)
-    {_
-        oldptr(this);
-    }
+    Level (void);
+    ~Level (void);
 
     void remove_thing(int x, int y, ThingId id);
     void remove_thing(point p, ThingId id);

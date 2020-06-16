@@ -16,6 +16,7 @@ void Game::init (void)
     }
 
     current_level = point3d(LEVELS_ACROSS / 2, LEVELS_DOWN / 2, 1);
+    level = nullptr;
 
     world.clear();
     init_levels();
@@ -25,7 +26,7 @@ void Game::init (void)
     if (!l) {
         return;
     }
-    game->level = l;
+    level = l;
 }
 
 void Game::init_levels (void)

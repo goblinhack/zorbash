@@ -24,11 +24,11 @@ void Thing::kill (const char *reason)
     unwield("owner is dead");
 
     if (is_player()) {
-        MINICON("%s", reason);
-        MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
+        UI_MINICON("%s", reason);
+        UI_MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
     } else if (is_loggable_for_important_stuff()) {
-        MINICON("%s is dead, %s", text_The().c_str(), reason);
+        UI_MINICON("%s is dead, %s", text_The().c_str(), reason);
     }
 
     const auto tpp = tp();
@@ -58,7 +58,6 @@ void Thing::kill (const char *reason)
         }
     }
 
-    log("add to gc");
     auto result = level->all_gc_things.insert(std::pair(id, this));
     if (result.second == false) {
         err("failed to insert into gc thing map");

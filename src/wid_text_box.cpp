@@ -42,7 +42,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
             wid_set_shape_none(wid_text_box_container);
         } else {
             wid_text_box_container = wid_new_square_window("wid text box");
-            wid_set_style(wid_text_box_container, WID_STYLE_GREEN);
+            wid_set_style(wid_text_box_container, UI_WID_STYLE_GREEN);
         }
         wid_set_pos(wid_text_box_container, tl, br);
     }
@@ -86,7 +86,7 @@ WidTextBox::WidTextBox (point tl, point br, Widp parent,
                 wid_text_last = child;
             }
 
-            wid_set_color(child, WID_COLOR_TEXT, POPUP_TEXT_COLOR);
+            wid_set_color(child, WID_COLOR_TEXT, UI_POPUP_TEXT_COLOR);
             wid_set_name(child, "text_box output");
         }
 

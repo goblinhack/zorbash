@@ -18,6 +18,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/file_read.o 		\
     $(OBJDIR)/font.o 			\
     $(OBJDIR)/game.o 			\
+    $(OBJDIR)/game_config.o		\
     $(OBJDIR)/game_config_gfx.o		\
     $(OBJDIR)/game_config_keyboard.o	\
     $(OBJDIR)/game_config_other.o	\

@@ -37,9 +37,9 @@ uint8_t game_notice_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -61,8 +61,8 @@ void game_notice (std::string s)
 
     auto m = ASCII_WIDTH / 2;
     auto n = ASCII_HEIGHT / 2;
-    point tl = make_point(m - WID_POPUP_WIDTH_NORMAL / 2, n - 5);
-    point br = make_point(m + WID_POPUP_WIDTH_NORMAL / 2, n + 5);
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_NORMAL / 2, n - 5);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_NORMAL / 2, n + 5);
     auto width = br.x - tl.x;
 
     game_notice_window = new WidPopup(tl, br, nullptr, "ui_popup_notice");
@@ -92,7 +92,7 @@ void game_notice (std::string s)
 
         point tl = make_point(width / 2 - 4, y_at);
         point br = make_point(width / 2 + 4, y_at + 2);
-        wid_set_style(w, WID_STYLE_GREEN);
+        wid_set_style(w, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_notice_ok);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "ok");

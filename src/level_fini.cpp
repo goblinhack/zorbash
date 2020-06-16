@@ -3,8 +3,17 @@
 // See the README file for license info.
 //
 
+#include "my_game.h"
 #include "my_level.h"
 #include "my_thing.h"
+
+Level::~Level (void)
+{_
+    if (game->level == this) {
+        game->level = nullptr;
+    }
+    oldptr(this);
+}
 
 void Level::fini (void)
 {_

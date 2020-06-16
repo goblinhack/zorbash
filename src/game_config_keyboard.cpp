@@ -331,9 +331,9 @@ uint8_t game_config_keyboard_key_up (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -359,9 +359,9 @@ uint8_t game_config_keyboard_key_down (Widp w, const struct SDL_KEYSYM *key)
             default: {_
                 auto c = wid_event_to_char(key);
                 switch (c) {
-                    case CONSOLE_KEY1:
-                    case CONSOLE_KEY2:
-                    case CONSOLE_KEY3:
+                    case UI_CONSOLE_KEY1:
+                    case UI_CONSOLE_KEY2:
+                    case UI_CONSOLE_KEY3:
                         //
                         // Magic keys we use to toggle the console.
                         //
@@ -384,8 +384,8 @@ void Game::config_keyboard_select (void)
     game->soft_pause();
 
     auto m = ASCII_WIDTH / 2;
-    point tl = make_point(m - WID_POPUP_WIDTH_WIDEST / 2, MINICON_VIS_HEIGHT + 2);
-    point br = make_point(m + WID_POPUP_WIDTH_WIDEST / 2, ACTIONBAR_TL_Y - 2);
+    point tl = make_point(m - UI_WID_POPUP_WIDTH_WIDEST / 2, UI_MINICON_VIS_HEIGHT + 2);
+    point br = make_point(m + UI_WID_POPUP_WIDTH_WIDEST / 2, UI_ACTIONBAR_TL_Y - 2);
     auto width = br.x - tl.x;
 
     game_config_keyboard_window =
@@ -415,7 +415,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(7, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_keyboard_back);
         wid_set_pos(w, tl, br);
         if (started) {
@@ -430,7 +430,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width - 16, y_at);
         point br = make_point(width - 11, y_at + 2);
-        wid_set_style(w, WID_STYLE_GREEN);
+        wid_set_style(w, UI_WID_STYLE_GREEN);
         wid_set_on_mouse_up(w, game_config_keyboard_save);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Save");
@@ -441,7 +441,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width - 9, y_at);
         point br = make_point(width - 2, y_at + 2);
-        wid_set_style(w, WID_STYLE_RED);
+        wid_set_style(w, UI_WID_STYLE_RED);
         wid_set_on_mouse_up(w, game_config_keyboard_cancel);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Cancel");
@@ -458,7 +458,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(46, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_keyboard_profile_wasd);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Use W,A,S,D for moving, arrow keys for map");
@@ -470,7 +470,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(0, y_at);
         point br = make_point(46, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_on_mouse_up(w, game_config_keyboard_profile_arrow_keys);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Use arrow keys for moving, W,A,S,D for map");
@@ -501,7 +501,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_move_up));
@@ -528,7 +528,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_move_left));
@@ -555,7 +555,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_move_down));
@@ -582,7 +582,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_move_right));
@@ -614,7 +614,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_map_up));
@@ -641,7 +641,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_map_left));
@@ -668,7 +668,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_map_down));
@@ -695,7 +695,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_map_right));
@@ -727,7 +727,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_attack));
@@ -754,7 +754,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_wait));
@@ -786,7 +786,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_save));
@@ -813,7 +813,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_load));
@@ -845,7 +845,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_zoom_in));
@@ -872,7 +872,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_zoom_out));
@@ -904,7 +904,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_pause));
@@ -931,7 +931,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_quit));
@@ -958,7 +958,7 @@ void Game::config_keyboard_select (void)
 
         point tl = make_point(width / 2 + 8, y_at);
         point br = make_point(width / 2 + 22, y_at + 2);
-        wid_set_style(w, WID_STYLE_DARK);
+        wid_set_style(w, UI_WID_STYLE_DARK);
         wid_set_pos(w, tl, br);
         wid_set_text(w,
           SDL_GetScancodeName((SDL_Scancode)game->config.key_help));
