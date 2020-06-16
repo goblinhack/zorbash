@@ -23,7 +23,7 @@ void Thing::log_ (const char *fmt, va_list args)
     buf[0] = '\0';
     get_timestamp(buf, MAXSTR);
     len = (int)strlen(buf);
-    snprintf(buf + len, MAXSTR - len, "%35s:%*s",
+    snprintf(buf + len, MAXSTR - len, "%40s:%*s",
              t->to_string().c_str(),
              callframes_depth - g_thing_callframes_depth, "");
 

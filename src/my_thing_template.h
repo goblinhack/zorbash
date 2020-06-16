@@ -138,6 +138,7 @@ private:
     int _is_blood_splatter {};
     int _is_chasm {};
     int _is_collectable {};
+    int _is_collected_as_gold {};
     int _is_combustible {};
     int _is_corpse_on_death {};
     int _is_corridor {};
@@ -158,13 +159,14 @@ private:
     int _is_floor {};
     int _is_floor_deco {};
     int _is_food {};
+    int _is_gold {};
     int _is_hazard {};
     int _is_hunger_insatiable {};
     int _is_intelligent {};
     int _is_interesting {}; // e.g. something edible or a monst or lava
     int _is_key {};
-    int _is_light_blocker {};
     int _is_lava {};
+    int _is_light_blocker {};
     int _is_light_strength {};
     int _is_loggable_for_important_stuff {};
     int _is_loggable_for_unimportant_stuff {};
@@ -184,8 +186,6 @@ private:
     int _is_rrr10 {};
     int _is_rrr11 {};
     int _is_rrr12 {};
-    int _is_collected_as_gold {};
-    int _is_gold {};
     int _is_rrr2 {};
     int _is_rrr3 {};
     int _is_rrr4 {};

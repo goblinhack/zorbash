@@ -24,7 +24,7 @@ void Level::fini (void)
                 auto id = get(all_thing_ids_at, x, y, z);
                 if (id.ok()) {
 #ifdef ENABLE_THING_ID_LOGS
-                    LOG("clean thing %" PRIx32 " at %u,%u", id, x, y);
+                    LOG("clean thing %" PRIx32 " at %d,%d", id.id, x, y);
 #endif
                     auto t = thing_find(id);
                     delete t;

@@ -31,6 +31,7 @@
 #define ENABLE_THING_ID_LOGS       // Thing ID allocations
 #undef  ENABLE_PTRCHECK_DEBUG      // Debug ptrcheck itself
 #endif
+#define ENABLE_THING_ID_LOGS       // Thing ID allocations
 
 //
 // Settings to override compiler errors

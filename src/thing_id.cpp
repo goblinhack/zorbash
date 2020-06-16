@@ -25,7 +25,7 @@ Thingp World::find_thing_ptr (ThingId id)
 {_
     auto f = all_thing_ptrs.find(id);
     if (f == all_thing_ptrs.end()) {
-        ERR("thing ptr not found, %" PRIx32 "", id.id);
+        ERR("thing ptr not found for id, %" PRIx32 "", id.id);
         return nullptr;
     }
 

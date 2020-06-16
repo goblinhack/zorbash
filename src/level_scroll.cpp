@@ -80,7 +80,11 @@ void Level::scroll_map (void)
 
 void Level::scroll_map_to_player (void)
 {_
+    mouse = -1;
+    mouse_old = -1;
+    minimap_valid = false;
     map_follow_player = true;
+
     for (auto x = 0; x < 1000; x++) {
         scroll_map_set_target();
         scroll_map();

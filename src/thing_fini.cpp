@@ -56,19 +56,21 @@ void Thing::destroy (void)
     if (is_deep_water())    { level->unset_is_water(old_at.x, old_at.y); }
     if (is_dirt())          { level->unset_is_dirt(old_at.x, old_at.y); }
     if (is_door())          { level->unset_is_door(old_at.x, old_at.x); }
+    if (is_entrance())      { level->unset_is_entrance(old_at.x, old_at.y); }
+    if (is_exit())          { level->unset_is_exit(old_at.x, old_at.y); }
     if (is_fire())          { level->unset_is_fire(old_at.x, old_at.y); }
     if (is_floor())         { level->unset_is_floor(old_at.x, old_at.y); }
     if (is_food())          { level->unset_is_food(old_at.x, old_at.y); }
-    if (is_treasure())      { level->unset_is_treasure(old_at.x, old_at.y); }
     if (is_gold())          { level->unset_is_gold(old_at.x, old_at.y); }
     if (is_hazard())        { level->unset_is_hazard(old_at.x, old_at.y); }
     if (is_key())           { level->unset_is_key(old_at.x, old_at.x); }
-    if (is_light_blocker()) { level->unset_is_light_blocker(old_at.x, old_at.x); }
     if (is_lava())          { level->unset_is_lava(old_at.x, old_at.y); }
+    if (is_light_blocker()) { level->unset_is_light_blocker(old_at.x, old_at.x); }
     if (is_monst())         { level->unset_is_monst(old_at.x, old_at.y); }
     if (is_rock())          { level->unset_is_rock(old_at.x, old_at.y); }
     if (is_secret_door())   { level->unset_is_secret_door(old_at.x, old_at.y); }
     if (is_smoke())         { level->unset_is_smoke(old_at.x, old_at.x); }
+    if (is_treasure())      { level->unset_is_treasure(old_at.x, old_at.y); }
     if (is_wall())          { level->unset_is_wall(old_at.x, old_at.y); }
     if (is_water())         { level->unset_is_water(old_at.x, old_at.y); }
 

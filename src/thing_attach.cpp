@@ -25,10 +25,11 @@ void Thing::attach (void)
     if (is_deep_water())    { level->set_is_water(mx, my); }
     if (is_dirt())          { level->set_is_dirt(mx, my); }
     if (is_door())          { level->set_is_door(mx, my); }
+    if (is_entrance())      { level->set_is_entrance(mx, my); }
+    if (is_exit())          { level->set_is_exit(mx, my); }
     if (is_fire())          { level->set_is_fire(mx, my); }
     if (is_floor())         { level->set_is_floor(mx, my); }
     if (is_food())          { level->set_is_food(mx, my); }
-    if (is_treasure())      { level->set_is_treasure(mx, my); }
     if (is_gold())          { level->set_is_gold(mx, my); }
     if (is_hazard())        { level->set_is_hazard(mx, my); }
     if (is_key())           { level->set_is_key(mx, my); }
@@ -37,6 +38,7 @@ void Thing::attach (void)
     if (is_rock())          { level->set_is_rock(mx, my); }
     if (is_secret_door())   { level->set_is_secret_door(mx, my); }
     if (is_smoke())         { level->set_is_smoke(mx, my); }
+    if (is_treasure())      { level->set_is_treasure(mx, my); }
     if (is_wall())          { level->set_is_wall(mx, my); }
     if (is_water())         { level->set_is_water(mx, my); }
 
