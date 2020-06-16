@@ -9,8 +9,8 @@
 
 using ThingId = struct ThingId_ {
 public:
-    uint64_t id {};
-    ThingId_ (uint64_t id) : id(id) {}
+    uint32_t id {};
+    ThingId_ (uint32_t id) : id(id) {}
     ThingId_ () {}
 
     bool operator< (const ThingId_& rhs) const {

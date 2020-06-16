@@ -1014,9 +1014,9 @@ done:
 PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {
     char *what = nullptr;
-    uint64_t id = 0;
+    uint32_t id = 0;
 
-    static char *kwlist[] = {(char*) "Kd", (char*) "what", 0};
+    static char *kwlist[] = {(char*) "id", (char*) "what", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
         Py_RETURN_NONE;
@@ -1032,17 +1032,17 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
         Py_RETURN_NONE;
     }
 
-    DBG("python-to-c: %s(%llx, %s)", __FUNCTION__, id, what);
+    DBG("python-to-c: %s(%x, %s)", __FUNCTION__, id, what);
 
     auto level = game->level;
     if (!level) {
-        ERR("%s, cannot spawn thing %" PRIx64 "", __FUNCTION__, id);
+        ERR("%s, cannot spawn thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s, cannot find thing %" PRIx64 "", __FUNCTION__, id);
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
@@ -1054,9 +1054,9 @@ PyObject *tp_spawn_next_to_ (PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject *keywds)
 {
     char *what = nullptr;
-    uint64_t id = 0;
+    uint32_t id = 0;
 
-    static char *kwlist[] = {(char*) "Kd", (char*) "what", 0};
+    static char *kwlist[] = {(char*) "id", (char*) "what", 0};
 
     if (!PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
         Py_RETURN_NONE;
@@ -1072,17 +1072,17 @@ PyObject *tp_spawn_next_to_or_on_monst_ (PyObject *obj, PyObject *args, PyObject
         Py_RETURN_NONE;
     }
 
-    DBG("python-to-c: %s(%llx, %s)", __FUNCTION__, id, what);
+    DBG("python-to-c: %s(%x, %s)", __FUNCTION__, id, what);
 
     auto level = game->level;
     if (!level) {
-        ERR("%s, cannot spawn thing %" PRIx64 "", __FUNCTION__, id);
+        ERR("%s, cannot spawn thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 
     auto t = level->thing_find(ThingId(id));
     if (!t) {
-        ERR("%s, cannot find thing %" PRIx64 "", __FUNCTION__, id);
+        ERR("%s, cannot find thing %" PRIx32 "", __FUNCTION__, id);
         Py_RETURN_NONE;
     }
 

@@ -4,6 +4,8 @@
 //
 
 #include "my_main.h"
+#include "my_game.h"
+#include "my_world.h"
 #include "my_level.h"
 #include "my_depth.h"
 #include "my_color.h"
@@ -103,7 +105,7 @@ void Thing::destroy (void)
         }
     }
 
-    level->free_thing_id(this);
+    game->world.free_thing_id(this);
 
     if (this == level->player) {
         level->player = nullptr;

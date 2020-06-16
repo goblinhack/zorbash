@@ -15,11 +15,11 @@ void Level::put_thing (int x, int y, ThingId id)
     }
 
     if (!t) {
-        t->err("oob at (%d,%d) for put of %" PRIx64 "", x, y, id.id);
+        t->err("oob at (%d,%d) for put of %" PRIx32 "", x, y, id.id);
     }
 
     if (is_oob(x, y)) {
-        t->err("oob at (%d,%d) for put of %" PRIx64 "", x, y, id.id);
+        t->err("oob at (%d,%d) for put of %" PRIx32 "", x, y, id.id);
     }
 
     int free_slot;
@@ -31,7 +31,7 @@ do_retry:
         if (idp->id == id.id) {
 #ifdef ENABLE_THING_ID_LOGS
             if (t->is_loggable_for_unimportant_stuff()) {
-                t->log("found %" PRIx64 " at %u,%u slot %u", id.id, x, y, slot);
+                t->log("found %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
             }
 #endif
             return;
@@ -53,7 +53,7 @@ do_retry:
              });
 #ifdef ENABLE_THING_ID_LOGS
         if (t->is_loggable_for_unimportant_stuff()) {
-            t->log("put thing %" PRIx64 " at %u,%u slot %u", id.id, x, y, free_slot);
+            t->log("put thing %" PRIx32 " at %u,%u slot %u", id.id, x, y, free_slot);
         }
 #endif
         *idp = id;
@@ -64,7 +64,7 @@ do_retry:
     // Try to clean up some slots
     //
     if (retry < MAP_SLOTS) {
-        t->log("out of thing slots at (%d,%d) for put of %" PRIx64 ", try to cleanup", x, y, id.id);
+        t->log("out of thing slots at (%d,%d) for put of %" PRIx32 ", try to cleanup", x, y, id.id);
         for (auto slot = 0; slot < MAP_SLOTS; slot++) {
             auto idp = &getref(all_thing_ids_at, x, y, slot);
             if (idp->id) {
@@ -80,11 +80,11 @@ do_retry:
         }
     }
 
-    t->log("out of thing slots at (%d,%d) for put of %" PRIx64 ", see below:", x, y, id.id);
+    t->log("out of thing slots at (%d,%d) for put of %" PRIx32 ", see below:", x, y, id.id);
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
         auto idp = &getref(all_thing_ids_at, x, y, slot);
-        LOG("- slot %u %" PRIx64 "", slot, idp->id);
+        LOG("- slot %u %" PRIx32 "", slot, idp->id);
     }
 
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
@@ -96,7 +96,7 @@ do_retry:
             t->log("- empty slot %u", slot);
         }
     }
-    t->err("out of thing slots at (%d,%d) for put of %" PRIx64 "", x, y, id.id);
+    t->err("out of thing slots at (%d,%d) for put of %" PRIx32 "", x, y, id.id);
 }
 
 void Level::put_thing (point p, ThingId id)
@@ -108,11 +108,11 @@ void Level::remove_thing (int x, int y, ThingId id)
 {_
     auto t = thing_find(id);
     if (!t) {
-        ERR("oob at (%d,%d) for remove of %" PRIx64 "", x, y, id.id);
+        ERR("oob at (%d,%d) for remove of %" PRIx32 "", x, y, id.id);
     }
 
     if (is_oob(x, y)) {
-        t->err("oob at (%d,%d) for remove of %" PRIx64 "", x, y, id.id);
+        t->err("oob at (%d,%d) for remove of %" PRIx32 "", x, y, id.id);
         return;
     }
 
@@ -138,13 +138,13 @@ void Level::remove_thing (int x, int y, ThingId id)
 
 #ifdef ENABLE_THING_ID_LOGS
             if (t->is_loggable_for_unimportant_stuff()) {
-                t->log("rem thing %" PRIx64 " at %u,%u slot %u", id.id, x, y, slot);
+                t->log("rem thing %" PRIx32 " at %u,%u slot %u", id.id, x, y, slot);
             }
 #endif
             return;
         }
     }
-    t->err("did not find thing in any slot at (%d,%d) for remove of %" PRIx64 "", x, y, id.id);
+    t->err("did not find thing in any slot at (%d,%d) for remove of %" PRIx32 "", x, y, id.id);
 }
 
 void Level::remove_thing (point p, ThingId id)

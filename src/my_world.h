@@ -19,6 +19,10 @@ public:
                            LEVELS_ACROSS>
           levels {};
     //
+    // All things on all levels
+    //
+    std::map<ThingId, Thingp> all_thing_ptrs {};
+    //
     // Which level in the world
     //
     point3d at;
@@ -30,6 +34,13 @@ public:
     Levelp new_level_at(point3d at, int seed);
     friend std::ostream& operator<<(std::ostream &out, Bits<const World & > const my);
     friend std::istream& operator>>(std::istream &in, Bits<World &> my);
+
+    void alloc_thing_id(Thingp t);
+    void realloc_thing_id(Thingp t);
+    void free_thing_id(Thingp t);
+    Thingp test_thing_ptr(ThingId id);
+    Thingp find_thing_ptr(ThingId id);
+
 };
 
 #endif

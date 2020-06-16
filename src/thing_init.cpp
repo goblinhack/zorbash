@@ -62,7 +62,7 @@ void Thing::init (Levelp level,
     //
     // Must do this after TP assignment or logging will fail
     //
-    level->alloc_thing_id(this);
+    game->world.alloc_thing_id(this);
 
     auto result = level->all_things.insert(std::pair(id, this));
     if (result.second == false) {
@@ -423,7 +423,7 @@ void Thing::reinit (void)
 {_
     verify(this);
 
-    level->realloc_thing_id(this);
+    game->world.realloc_thing_id(this);
     const auto tpp = tp();
     if (unlikely(!tpp)) {
         ERR("no tp");

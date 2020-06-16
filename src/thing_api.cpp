@@ -3413,7 +3413,7 @@ ThingId Thing::set_weapon_id_use_anim (ThingId v)
 ThingId Thing::get_weapon_id (void) const
 {_
     if (monstp) {
-        // con("get weapon %" PRIx64 "", monstp->weapon_id);
+        // con("get weapon %" PRIx32 "", monstp->weapon_id);
         return (monstp->weapon_id);
     } else {
         // con("get weapon id => none");
@@ -3424,7 +3424,7 @@ ThingId Thing::get_weapon_id (void) const
 ThingId Thing::set_weapon_id (ThingId v)
 {_
     new_monst();
-    // con("set weapon %" PRIx64 "", v);
+    // con("set weapon %" PRIx32 "", v);
     return (monstp->weapon_id = v);
 }
 
@@ -3443,7 +3443,7 @@ ThingId Thing::get_on_fire_anim_id (void) const
 ThingId Thing::set_on_fire_anim_id (ThingId v)
 {_
     new_monst();
-//con("%s %" PRIx64 "", __FUNCTION__, v);
+//con("%s %" PRIx32 "", __FUNCTION__, v);
     return (monstp->on_fire_id_anim = v);
 }
 

@@ -77,20 +77,8 @@ public:
     point                      map_br;        // visible map br
     point                      map_tl;        // visible map tl
     point                      pixel_map_at;  // map pixel location
-
     Thingp                     player = {};
     Thingp                     cursor = {};
-
-    //
-    // All things. The array index is part of the thing ID
-    //
-    class ThingAndId {
-    public:
-        Thingp  ptr {};
-        ThingId id {};
-    };
-    std::array<class ThingAndId, MAX_THINGS> all_thing_ptrs {};
-
     std::map<ThingId, Thingp> all_things {};
     std::map<ThingId, Thingp> all_active_things {};
     std::map<ThingId, Thingp> all_gc_things {};
@@ -156,12 +144,6 @@ public:
     {_
         oldptr(this);
     }
-
-    void alloc_thing_id(Thingp t);
-    void realloc_thing_id(Thingp t);
-    void free_thing_id(Thingp t);
-    Thingp test_thing_ptr(ThingId id);
-    Thingp find_thing_ptr(ThingId id);
 
     void remove_thing(int x, int y, ThingId id);
     void remove_thing(point p, ThingId id);

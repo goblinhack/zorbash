@@ -27,7 +27,7 @@ void Thing::hooks_remove ()
     }
 
     if (owner) {
-        log("detach %" PRIx64 " from owner %s", id.id, owner->to_string().c_str());
+        log("detach %" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
 
         if (id == owner->get_on_fire_anim_id()) {
             log("detach on_fire_anim_id from owner %s", owner->to_string().c_str());
@@ -112,13 +112,8 @@ void Thing::hooks_remove ()
         //
         // Slow, but not used too often
         //
-        for (auto slot = 0; slot < MAX_THINGS; slot++) {
-            auto p = getptr(level->all_thing_ptrs, slot);
-            auto t = p->ptr;
-            if (!t) {
-                continue;
-            }
-            verify(t);
+        for (auto p : level->all_things) {
+            auto t = p.second;
             auto o = t->owner_get();
             if (o && (o == this)) {
                 t->remove_owner();
