@@ -75,8 +75,8 @@ run() {
 
     EXIT_CODE=.exit_code
     ($1 2>&1; echo $? > $EXIT_CODE) | tee $STDOUT
-
     MY_RET=`cat $EXIT_CODE`
+    /bin/rm $EXIT_CODE
 
     return $MY_RET
 }
