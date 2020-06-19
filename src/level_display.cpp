@@ -265,6 +265,8 @@ void Level::display_map (void)
     cursor_check_if_scroll_needed();
     cursor_find_on_visible_things(minx, miny, maxx, maxy);
 
+    display_blood();
+
     blit_fbo_unbind();
 }
 
@@ -299,4 +301,63 @@ void Level::display_anim (void)
             lava_step2 = 0;
         }
     }
+}
+
+void Level::display_blood (void)
+{
+    float pct =
+        ((float)player->get_stats_health() / 
+         (float)player->get_stats_health_max()) * 100;
+    if (pct > 35) {
+        return;
+    }
+
+    static int up = 4;
+    static int down = -8;
+    static int delta = up;
+    static int low = 20;
+    static int high = 240;
+    static int pulse = 1;
+    static color blood(255, 255, 255, 128);
+
+    if (player->is_dead) {
+        blood.a = 255;
+    } else {
+        blood.a += delta * pulse;
+    }
+    if (blood.a > high) {
+        blood.a = high;
+        delta = down;
+    }
+    if (blood.a < low) {
+        blood.a = low;
+        delta = up;
+    }
+    glcolor(blood);
+
+    auto t = "blood-0";
+    if (pct <= 35) {
+        t = "blood-0";
+        pulse = 1;
+    }
+    if (pct < 25) {
+        t = "blood-1";
+        pulse = 2;
+    }
+    if (pct < 10) {
+        t = "blood-2";
+        pulse = 2;
+    }
+    if (pct < 5) {
+        t = "blood-3";
+        pulse = 3;
+    }
+
+    blit_fbo_bind(FBO_MAP);
+    blit_init();
+    tile_blit(tile_find_mand(t),
+                point(0,0),
+                point(game->config.inner_pix_width,
+                      game->config.inner_pix_height));
+    blit_flush();
 }
