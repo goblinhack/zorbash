@@ -19,10 +19,12 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     // Cruel to let things keep on hitting you when you're dead
     //
     if (is_dead) {
+        hitter->log("hit fails, it's dead");
         return (false);
     }
 
     if (!damage) {
+        hitter->log("hit fails, no damage");
         return (false);
     }
 
@@ -72,19 +74,19 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 
         if (damage > 10) {
             UI_MINICON("%%fg=red$%s %s for %d damage!%%fg=reset$",
-                    real_hitter->text_The().c_str(),
-                    real_hitter->text_hits().c_str(),
-                    damage);
+                       real_hitter->text_The().c_str(),
+                       real_hitter->text_hits().c_str(),
+                       damage);
         } else {
             UI_MINICON("%%fg=yellow$%s %s for %d damage!%%fg=reset$",
-                    real_hitter->text_The().c_str(),
-                    real_hitter->text_hits().c_str(),
-                    damage);
+                       real_hitter->text_The().c_str(),
+                       real_hitter->text_hits().c_str(),
+                       damage);
         }
     } else {
         if (real_hitter->is_player()) {
             UI_MINICON("You hit the %s for %d damage!",
-                    text_The().c_str(), damage);
+                       text_The().c_str(), damage);
         }
         add_enemy(real_hitter);
     }
@@ -110,7 +112,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     //
     // Blood splat
     //
-    level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+    if (is_monst()) {
+        level->thing_new(tp_random_blood_splatter()->name(), mid_at);
+    }
 
     //
     // Visible claw attack?
@@ -135,7 +139,7 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
             real_hitter->to_string().c_str(), damage, h);
         std::string killer = real_hitter->text_a_or_an();
         auto reason = "killed by " + killer;
-        dead(hitter, reason);
+        dead(real_hitter, reason);
     } else {
         log("is hit by (%s) %u damage, health now %d",
             real_hitter->to_string().c_str(), damage, h);
@@ -149,21 +153,20 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
 //
 int Thing::ai_hit_if_possible (Thingp hitter, int damage)
 {_
+    hitter->log("possible hit %s for %u", to_string().c_str(), damage);
+_
     //
     // Cruel to let things keep on hitting you when you're dead
     //
     if (is_dead) {
-        // log("cannot hit, is dead");
+        hitter->log("no, it's dead");
         return (false);
     }
 
     if (is_resurrecting) {
-        // log("cannot hit, is resurrecting");
+        hitter->log("no, it's resurrecting");
         return (false);
     }
-
-    log("possible attack by (%s) for %u", 
-        hitter->to_string().c_str(), damage);
 
     //
     // If an arrow, who really fired it?
@@ -177,7 +180,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         }
     }
 
-    Thingp weapon = nullptr;
+//    Thingp weapon = nullptr;
 
     if (hitter && hitter->is_dead) {
         //
@@ -185,7 +188,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         // damage. We don't want the player to keep absorbing hits when
         // already dead though.
         //
-        log(" ignore, attacker is dead");
+        hitter->log("no, it's dead");
         return (false);
     }
 
@@ -198,25 +201,39 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
         // or similar effects. Limit it to explosions and the like.
         //
         auto hitter_tp = hitter->tp();
-        if (is_door() || is_wall()) {
+        if (is_door()) {
+            if (!hitter_tp->is_explosion()     &&
+                !hitter_tp->is_projectile()    &&
+                !hitter_tp->is_weapon()        &&
+                !hitter_tp->gfx_attack_anim()) {
+                //
+                // Not something that typically damages walls.
+                //
+                hitter->log("no, it's immune");
+                return (false);
+            }
+        }
+
+        if (is_wall()) {
             if (!hitter_tp->is_explosion()     &&
                 !hitter_tp->is_projectile()    &&
                 !hitter_tp->gfx_attack_anim()) {
                 //
                 // Not something that typically damages walls.
                 //
-                log(" ignore weapon, immune");
+                hitter->log("no, it's immune");
                 return (false);
             }
         }
 
+#if 0
         if (hitter_tp->gfx_attack_anim()) {
             //
             // Get the player using the weapon as the hitter.
             //
             hitter = hitter->owner_get();
             if (!hitter) {
-                log(" ignore weapon, no owner");
+                hitter->log("ignore %s, no owner", to_string().c_str());
                 return (false);
             }
 
@@ -227,7 +244,7 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             //
             weapon = hitter->weapon_get();
             if (!weapon) {
-                log(" ignore weapon, no weapon");
+                hitter->log("ignore %s, no weapon", to_string().c_str());
                 return (false);
             }
 
@@ -235,15 +252,19 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
                 damage = (weapon->tp()->weapon_damage());
             }
 
-        } else if (hitter->is_fire()) {
-            log(" fire always hits");
+        } else
+#endif
+        if (hitter->is_fire()) {
+            hitter->log("fire attack");
+        }
+#if 0
         } else if (hitter->owner_get()) {
             //
             // Get the player firing the weapon as the hitter.
             //
             hitter = hitter->owner_get();
             if (!hitter) {
-                log(" ignore hitter, no owner");
+                hitter->log("ignore %s, no owner", to_string().c_str());
                 return (false);
             }
 
@@ -254,24 +275,26 @@ int Thing::ai_hit_if_possible (Thingp hitter, int damage)
             //
             weapon = hitter->weapon_get();
             if (!weapon) {
-                log(" ignore hitter, no weapon");
+                hitter->log("ignore %s, no weapon", to_string().c_str());
                 return (false);
             }
 
             if (!damage) {
-                damage = (weapon->tp()->weapon_damage());
+                damage = weapon->tp()->weapon_damage();
             }
 
             //
             // Don't let our own potion hit ourselves!
             //
             if (hitter == this) {
-                log(" ignore, do not hit self");
+                hitter->log("ignore %s, self attack", to_string().c_str());
                 return (false);
             }
         }
+#endif
     }
 
+    hitter->log("hit succeeds");
     int hit_and_killed;
 
     hit_and_killed = ai_hit_actual(real_hitter, hitter, damage);

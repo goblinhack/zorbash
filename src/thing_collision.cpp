@@ -480,7 +480,6 @@ thing_add_ai_possible_hit (Thingp target,
                            int hitter_killed_on_hitting,
                            int hitter_killed_on_hit_or_miss)
 {
-target->log("add poss");
     thing_colls.push_back(
       ThingColl(target,
                 reason,
@@ -495,14 +494,14 @@ thing_ai_possible_hit_add (Thingp target, std::string reason)
     thing_add_ai_possible_hit(target, reason, false, false);
 }
 
+#if 0
 static void
 thing_ai_possible_hit_add_hitter_killed_on_hitting (Thingp target,
-                                                 std::string reason)
+                                                    std::string reason)
 {
     thing_add_ai_possible_hit(target, reason, true, false);
 }
 
-#if 0
 static void
 thing_ai_possible_hit_add_hitter_killed_on_hit_or_miss (Thingp target,
                                                      std::string reason)
@@ -602,11 +601,11 @@ bool Thing::collision_find_best_target (bool *target_attacked,
         *target_overlaps = true;
 
         auto it = best->target;
-        if (is_loggable_for_unimportant_stuff()) {
-            log("best cand is %s", it->to_string().c_str());
-        }
 
         damage = get_stats_attack();
+        if (is_loggable_for_unimportant_stuff()) {
+            log("best cand %s, damage %d", it->to_string().c_str(), damage);
+        }
 
         if (is_player() && will_eat(it)) {
             carry(it);
@@ -782,8 +781,6 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
                                         int x, int y, int dx, int dy)
 {
     auto me = this;
-    auto it_tp = it->tp();
-    auto me_tp = me->tp();
 
     if (it->is_dead) {
         return (true);
@@ -807,20 +804,7 @@ bool Thing::collision_check_and_handle (Thingp it, fpoint future_pos,
     //
     // Sword use hits?
     //
-    if (me_tp->gfx_attack_anim()) {
-        if (it_tp->is_monst()) {
-            //
-            // Weapon hits monster or generator.
-            //
-            if (is_loggable_for_unimportant_stuff()) {
-                log("candidate to attack %s", it->to_string().c_str());
-            }
-            if (things_overlap(me, future_pos, it)) {
-                thing_ai_possible_hit_add_hitter_killed_on_hitting(
-                        it, "sword hit thing");
-            }
-        }
-    } else if (possible_to_attack(it)) {
+    if (possible_to_attack(it)) {
         if (things_overlap(me, future_pos, it)) {
             if (is_loggable_for_unimportant_stuff()) {
                 log("candidate to attack %s", it->to_string().c_str());

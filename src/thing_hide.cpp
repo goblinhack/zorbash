@@ -27,7 +27,7 @@ void Thing::hide (void)
         weapon_carry_anim->hide();
     }
 
-    log("is hidden");
+    log("is now hidden");
 }
 
 void Thing::visible (void)
@@ -36,7 +36,7 @@ void Thing::visible (void)
         return;
     }
 
-    log("is visible");
+    log("is now visible");
     is_hidden = false;
 
     //

@@ -29,31 +29,41 @@ void Thing::hooks_remove ()
     }
 
     if (owner) {
-        log("detach %" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
+        if (is_loggable_for_unimportant_stuff()) {
+            log("detach %" PRIx32 " from owner %s", id.id, owner->to_string().c_str());
+        }
 
         if (id == owner->get_on_fire_anim_id()) {
-            log("detach on_fire_anim_id from owner %s", owner->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("detach on_fire_anim_id from owner %s", owner->to_string().c_str());
+            }
             owner->set_on_fire_anim_id(0);
         }
 
         if (id == owner->get_weapon_id()) {
             owner->unwield("remove hooks");
 
-            log("detach weapon_id from owner %s", owner->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("detach weapon_id from owner %s", owner->to_string().c_str());
+            }
             owner->set_weapon_id(0);
         }
 
         if (id == owner->get_weapon_id_carry_anim()) {
             owner->unwield("remove hooks");
 
-            log("detach carry_anim from owner %s", owner->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("detach carry_anim from owner %s", owner->to_string().c_str());
+            }
             owner->weapon_set_carry_anim_id(0);
         }
 
         if (id == owner->get_weapon_id_use_anim()) {
             owner->unwield("remove hooks");
 
-            log("detach use_anim from owner %s", owner->to_string().c_str());
+            if (is_loggable_for_unimportant_stuff()) {
+                log("detach use_anim from owner %s", owner->to_string().c_str());
+            }
             owner->weapon_set_use_anim_id(0);
 
             //
@@ -65,15 +75,21 @@ void Thing::hooks_remove ()
                 // But only if the owner is visible.
                 //
                 if (owner->is_visible()) {
-                    log("reapply carry_anim for owner %s",
-                        owner->to_string().c_str());
+                    if (is_loggable_for_unimportant_stuff()) {
+                        log("reapply carry_anim for owner %s",
+                             owner->to_string().c_str());
+                    }
                     carrying->visible();
                 } else {
-                    log("do not reapply carry_anim for invisible owner %s",
-                        owner->to_string().c_str());
+                    if (is_loggable_for_unimportant_stuff()) {
+                        log("do not reapply carry_anim for invisible owner %s",
+                             owner->to_string().c_str());
+                    }
                 }
             } else {
-                log("no carry_anim for owner %s", owner->to_string().c_str());
+                if (is_loggable_for_unimportant_stuff()) {
+                    log("no carry_anim for owner %s", owner->to_string().c_str());
+                }
                 auto id = owner->get_weapon_id();
                 if (id.ok()) {
                     owner->wield(owner->weapon_get());
@@ -90,7 +106,9 @@ void Thing::hooks_remove ()
     {_
         auto item = weapon_get_carry_anim();
         if (item) {
-            log("hooks remove carry anim");
+            if (is_loggable_for_unimportant_stuff()) {
+                log("hooks remove carry anim");
+            }
             weapon_set_carry_anim(nullptr);
             verify(item);
             item->remove_owner();
@@ -101,7 +119,9 @@ void Thing::hooks_remove ()
     {_
         auto item = weapon_get_use_anim();
         if (item) {
-            log("hooks remove use anim");
+            if (is_loggable_for_unimportant_stuff()) {
+                log("hooks remove use anim");
+            }
             weapon_set_use_anim(nullptr);
             verify(item);
             item->remove_owner();

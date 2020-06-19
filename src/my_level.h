@@ -185,14 +185,15 @@ public:
                 }                                                         \
 
     //
-    // Things that move around and things that do not, but are interesting,
-    // like food
+    // Things you can bump into
     //
     #define FOR_ALL_COLLISION_THINGS(level, t, x, y)                      \
         if (!(level)->is_oob(x, y)) {                                     \
             for (auto t : getref(level->all_thing_ptrs_at, x, y)) {       \
                 verify(t);                                                \
-                if (!t->is_interesting() && !t->ai_obstacle()) {          \
+                if (!t->is_interesting() &&                               \
+                    !t->is_attackable() &&                                \
+                    !t->ai_obstacle()) {                                  \
                     continue;                                             \
                 }                                                         \
 
