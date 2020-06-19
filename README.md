@@ -29,14 +29,15 @@ at you. Alternatively, race through the level as quick as you want, but never pa
 Or methodically move one step at a time, letting the monsters move in sync for a more
 classical roguelike experience.
 
-This is work in progress. It's sort of playable right now, but only the first level
-and I've still to get doors and keys to work, so you get to a door, you're stuck :)
+This is work in progress. It's sort of playable right now but only one monster type.
+Stay tuned.
 ```
 ![Alt text](screenshot.1.png?raw=true "")
 ![Alt text](screenshot.2.png?raw=true "")
 ![Alt text](screenshot.3.png?raw=true "")
 ![Alt text](screenshot.4.png?raw=true "")
 ![Alt text](screenshot.5.png?raw=true "")
+![Alt text](screenshot.6.png?raw=true "")
 <!--```diff -->
 <!--                       Hark! Hear now a tale untold -->
 <!--                       since ancient times of yore -->
