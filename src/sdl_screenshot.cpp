@@ -31,8 +31,8 @@ void sdl_screenshot_do (void)
 
     for(int line = 0; line != h/2; ++line) {
         std::swap_ranges(pixels.begin() + 3 * w * line,
-                            pixels.begin() + 3 * w * (line+1),
-                            pixels.begin() + 3 * w * (h-line-1));
+                         pixels.begin() + 3 * w * (line+1),
+                         pixels.begin() + 3 * w * (h-line-1));
     }
 
     int components = 3;
@@ -42,10 +42,12 @@ void sdl_screenshot_do (void)
     UI_MINICON("Screenshot: %s", png);
     myfree(png);
 
-    char *tga = dynprintf("screenshot.%d.tga", count);
-    stbi_write_tga(tga, w, h, components, pixels.data());
-    UI_MINICON("Screenshot: %s", tga);
-    myfree(tga);
+    if (0) {
+        char *tga = dynprintf("screenshot.%d.tga", count);
+        stbi_write_tga(tga, w, h, components, pixels.data());
+        UI_MINICON("Screenshot: %s", tga);
+        myfree(tga);
+    }
 
     count++;
 }
