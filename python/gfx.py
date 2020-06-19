@@ -48,6 +48,17 @@ def init_ui_status_bar_title():
         file="data/gfx/zorbash_small.tga",
         name="status_bar_title", width=240, height=48, arr=tiles)
 
+def init_ui_blood():
+    tiles = [
+        "blood-0",
+        "blood-1",
+        "blood-2",
+        "blood-3",
+    ]
+    zx.tile_load_arr(
+        file="data/gfx/blood.tga",
+        name="blood", width=360, height=225, arr=tiles)
+
 def init_title():
     tiles = [
         "title1", "title2", "title3", "title4",
@@ -995,3 +1006,4 @@ init_32x32_deep_water()
 init_32x32_surface_effects()
 init_weapons_tiles()
 init_claws_tiles()
+init_ui_blood()
