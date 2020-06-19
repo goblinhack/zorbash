@@ -356,11 +356,24 @@ void Thing::use (void)
     bool target_overlaps = false;
     auto hit_at = mid_at + fpoint(dx, dy);
 
-    log("attack @%f,%f",hit_at.x, hit_at.y);
+    log("attack at %f,%f",hit_at.x, hit_at.y);
+_
+    //
+    // Lunge at the target
+    //
     lunge(hit_at);
-    if (collision_check_and_handle_at(hit_at,
-                                      &target_attacked,
-                                      &target_overlaps)) {
-        return;
+
+    if (weapon) {
+        if (weapon->collision_check_and_handle_at(hit_at,
+                                                  &target_attacked,
+                                                  &target_overlaps)) {
+            return;
+        }
+    } else {
+        if (collision_check_and_handle_at(hit_at,
+                                          &target_attacked,
+                                          &target_overlaps)) {
+            return;
+        }
     }
 }

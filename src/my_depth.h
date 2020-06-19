@@ -19,7 +19,6 @@ enum {
     // overlaps the wall
     //
     MAP_DEPTH_OBJ,
-    MAP_DEPTH_OBJ2,
     MAP_DEPTH_WEAPON,
     MAP_DEPTH,
 };
