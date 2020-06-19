@@ -42,14 +42,16 @@ bool Thing::descend (void)
                     game->level = l;
                     UI_MINICON("You bravely descend");
                 }
-                level_change(l);
 
                 log("move to new level entrance");
                 move_to_immediately(fpoint(x, y));
+                level_change(l);
                 if (is_player()) {
-                    l->scroll_map_to_player();
                     l->player = this;
+                    l->scroll_map_to_player();
+                    l->minimap_valid = false;
                 }
+                update_light();
 
                 log("moved to new level entrance");
                 return true;
