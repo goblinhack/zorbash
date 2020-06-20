@@ -96,7 +96,7 @@ void Thing::animate (void)
     uint32_t tries = 0;
 
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_entrance()) {
 log("choose tiles");
 }
 #endif
@@ -112,7 +112,7 @@ log("choose tiles");
             }
             verify(tile);
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_entrance()) {
 log("tile %s", tile_name(tile).c_str());
 }
 #endif
@@ -125,13 +125,13 @@ log("tile %s", tile_name(tile).c_str());
                 auto health_max = get_stats_health_max();
                 auto health = get_stats_health();
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_entrance()) {
 log("tile %s is not dead tiles", tile_name(tile).c_str());
 }
 #endif
                 if (tpp->internal_has_hp_anim()) {
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_entrance()) {
 log("tile %s has hp anim tiles hp %d max %d", tile_name(tile).c_str(), health, health_max);
 }
 #endif
@@ -168,65 +168,78 @@ log("tile %s has hp anim tiles hp %d max %d", tile_name(tile).c_str(), health, h
 
             if (is_resurrecting) {
 #ifdef DEBUG_ANIM
-if (is_monst()) {
-log("tile %s is resurrecting", tile_name(tile).c_str());
-}
+if (is_entrance()) { log("tile %s is resurrecting", tile_name(tile).c_str()); }
 #endif
                 if (!tile_is_resurrecting(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
 #ifdef DEBUG_ANIM
-if (is_monst()) {
-log("tile %s got resurrecting", tile_name(tile).c_str());
-}
+if (is_entrance()) { log("tile %s got resurrecting", tile_name(tile).c_str()); }
 #endif
             } else if (is_dead) {
 #ifdef DEBUG_ANIM
-if (is_monst()) {
-log("tile %s is dead", tile_name(tile).c_str());
-}
+if (is_entrance()) { log("tile %s is dead", tile_name(tile).c_str()); }
 #endif
                 if (!tile_is_dead(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
 #ifdef DEBUG_ANIM
-if (is_monst()) {
-log("tile %s got dead", tile_name(tile).c_str());
-}
+if (is_entrance()) { log("tile %s got dead", tile_name(tile).c_str()); }
 #endif
             } else if (is_sleeping) {
+#ifdef DEBUG_ANIM
+if (is_entrance()) { log("tile %s is sleeping", tile_name(tile).c_str()); }
+#endif
                 if (!tile_is_sleeping(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
             } else if (tpp->internal_has_dir_anim() && is_dir_up()) {
+#ifdef DEBUG_ANIM
+if (is_entrance()) { log("tile %s is dir up", tile_name(tile).c_str()); }
+#endif
                 if (!tile_is_dir_up(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
             } else if (tpp->internal_has_dir_anim() && is_dir_down()) {
+#ifdef DEBUG_ANIM
+if (is_entrance()) { log("tile %s is dir down", tile_name(tile).c_str()); }
+#endif
                 if (!tile_is_dir_down(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
             } else if (tpp->internal_has_dir_anim() && is_dir_left()) {
+#ifdef DEBUG_ANIM
+if (is_entrance()) { log("tile %s is dir left", tile_name(tile).c_str()); }
+#endif
                 if (!tile_is_dir_left(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
             } else if (tpp->internal_has_dir_anim() && is_dir_right()) {
+#ifdef DEBUG_ANIM
+if (is_entrance()) { log("tile %s is dir right", tile_name(tile).c_str()); }
+#endif
                 if (!tile_is_dir_right(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
             } else if (tpp->internal_has_dir_anim() && is_dir_none()) {
+#ifdef DEBUG_ANIM
+if (is_entrance()) { log("tile %s is dir none", tile_name(tile).c_str()); }
+#endif
                 if (!tile_is_dir_none(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
                 }
             } else if (is_open) {
+#ifdef DEBUG_ANIM
+if (is_entrance()) { log("tile %s is open", tile_name(tile).c_str()); }
+#endif
                 if (!tile_is_open(tile)) {
                     tile = tile_next(tiles, tile);
                     continue;
@@ -248,7 +261,7 @@ log("tile %s got dead", tile_name(tile).c_str());
                 }
             }
 #ifdef DEBUG_ANIM
-if (is_monst()) {
+if (is_entrance()) {
 log("tile %s got one", tile_name(tile).c_str());
 }
 #endif
@@ -278,7 +291,7 @@ log("tile %s got one", tile_name(tile).c_str());
     }
 
 #ifdef DEBUG_ANIM
-    if (is_monst()) {
+    if (is_entrance()) {
         log("set %s", tile_name(tile).c_str());
     }
 #endif

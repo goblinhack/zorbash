@@ -50,6 +50,10 @@ bool Thing::achieve_goals_in_life (void)
         return true;
     }
 
+    if (entrance_tick()) {
+        return true;
+    }
+
     collision_check_do();
     if (is_dead) {
         return true;
