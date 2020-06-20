@@ -50,9 +50,11 @@ GAME_OBJECTS=				\
     $(OBJDIR)/level_cursor.o 		\
     $(OBJDIR)/level_cursor_path.o 	\
     $(OBJDIR)/level_display.o 		\
+    $(OBJDIR)/level_display_blood.o 	\
     $(OBJDIR)/level_display_chasm.o 	\
     $(OBJDIR)/level_display_deep_water.o \
     $(OBJDIR)/level_display_lava.o 	\
+    $(OBJDIR)/level_display_shake.o 	\
     $(OBJDIR)/level_display_wall.o 	\
     $(OBJDIR)/level_display_water.o 	\
     $(OBJDIR)/level_fini.o 		\

@@ -73,6 +73,7 @@ public:
     fpoint                     cursor_at_old;
     fpoint                     map_at;        // map tile location
     fpoint                     map_wanted_at; // map scroll desired at
+    float                      wobble = {};   // Fades when set
     int                        mouse {-1};    // ticks for every move
     int                        mouse_old {-1};
     int                        seed {};
@@ -233,6 +234,12 @@ public:
     void update_hazard_map(void);
     void update_map(void);
     void update_minimap(void);
+
+    void set_wobble(float);
+    float get_wobble(void) const;
+    float update_wobble(void);
+    bool screen_shake_begin(void);
+    void screen_shake_end(void);
 
     bool is_floor(const int x, const int y);
     bool is_floor(const point &p);
