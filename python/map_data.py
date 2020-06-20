@@ -8,7 +8,7 @@ zx.map_load_room(entrance=True, room_data=[
 "   ......... ","             ","             ","             ","      ^      ",
 "  .CCCCCCC.. ","      ^      ","             ","   m. ^      "," CCCC....www ",
 " ..CCCCCCC.. ","    .....    ","    .....    ","   ....x.    "," CCC.E..S.ww ",
-" .CCCCCCCC.. ","    .LLL.    ","    .L.L.    ","   ..B.x.    "," CCm......ww ",
+" .CCCCCCCC.. ","    .LLL.    ","    .L.L.    ","   ....x.    "," CCm......ww ",
 "<.C..CC.....>","   <..S..>   ","   <..S..>   "," <..SB.D.E   "," xxxxB..k... ",
 " .Ck..C..... ","    .L...    ","    .LmL.    ","   .LB.x.    "," ..$D....... ",
 " .C..CC.S... ","    .....    ","    .....    ","   .LL.x..   "," ...x......| ",

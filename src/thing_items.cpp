@@ -35,6 +35,18 @@ void Thing::move_carried_items (void)
     }
 
     //
+    // Move carried items too as when we attack, we will use say the
+    // carried sword and so it had better be in the same location.
+    //
+    for (auto oid : monstp->carrying) {
+        auto o = level->thing_find(oid);
+        if (o) {
+            o->move_to(mid_at);
+            o->dir = dir;
+        }
+    }
+
+    //
     // If something moves on the water, make a ripple
     //
     if (is_monst() || is_player()) {
