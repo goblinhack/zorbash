@@ -190,6 +190,15 @@ _
 
     if (hitter) {
         real_hitter = hitter->owner_get();
+
+        //
+        // If on fire, the fire is owned by the player. So don't make the
+        // player the real hitter.
+        //
+        if (real_hitter == this) {
+            real_hitter = nullptr;
+        }
+
         if (!real_hitter) {
             real_hitter = hitter;
         }
