@@ -158,7 +158,6 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_attached        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_being_destroyed << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;
-    /* uint32_t */ bits32 |= my.t->is_bloodied        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_bouncing        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_dead            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_facing_left     << shift; shift++;

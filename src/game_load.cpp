@@ -188,7 +188,6 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->is_attached        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
-    /* uint32_t */ my.t->is_bloodied        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_dead            = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;

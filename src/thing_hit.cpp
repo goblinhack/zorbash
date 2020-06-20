@@ -71,7 +71,9 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 UI_MINICON("%%fg=red$You are ON FIRE!%%fg=reset$");
             }
         }
-        if (damage > 10) {
+
+        if (damage > THING_DAMAGE_SHAKE_ABOVE) {
+            level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
             UI_MINICON("%%fg=red$%s %s for %d damage!%%fg=reset$",
                        real_hitter->text_The().c_str(),
                        real_hitter->text_hits().c_str(),
@@ -81,6 +83,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                        real_hitter->text_The().c_str(),
                        real_hitter->text_hits().c_str(),
                        damage);
+        }
+
+        if (is_bloodied()) {
+            level->set_wobble(damage / THING_DAMAGE_SHAKE_SCALE);
         }
     } else {
         if (real_hitter->is_player()) {

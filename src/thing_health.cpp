@@ -25,3 +25,15 @@ void Thing::health_boost (int v)
         log("health boost %d, %d -> %d", v, old_health, new_health);
     }
 }
+
+bool Thing::is_bloodied (void)
+{_
+    return get_stats_health_pct() <= THING_HEALTH_BLOODIED_PCT1;
+}
+
+float Thing::get_stats_health_pct (void)
+{_
+    float pct =
+        ((float)get_stats_health() / (float)get_stats_health_max()) * 100;
+    return pct;
+}

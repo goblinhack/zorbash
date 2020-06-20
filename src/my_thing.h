@@ -163,7 +163,6 @@ public:
     uint32_t is_attached:1        {};
     uint32_t is_being_destroyed:1 {};
     uint32_t is_blitted:1         {};
-    uint32_t is_bloodied:1        {};
     uint32_t is_bouncing:1        {};
     uint32_t is_dead:1            {};
     uint32_t is_facing_left:1     {};
@@ -290,6 +289,9 @@ public:
     int incr_stats_health_max(int);
     int decr_stats_health_max(void);
     int incr_stats_health_max(void);
+
+    float get_stats_health_pct(void);
+    bool is_bloodied(void);
 
     int set_stats_defence(int);
     int get_stats_defence(void) const;

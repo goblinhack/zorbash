@@ -35,23 +35,29 @@
 #endif
 
 #define GRID_HEIGHT                5
-#define GRID_WIDTH                 5  // Rooms across and down
+#define GRID_WIDTH                 5    // Rooms across and down
 #define LEVELS_ACROSS              MAP_WIDTH // World size
 #define LEVELS_DEEP                32
 #define LEVELS_DOWN                MAP_HEIGHT
-#define LIGHT_RAYS                 180
-#define MAP_BORDER                 10 // Room border padding
+#define LIGHT_RAYS                 180  // Max light rays cast
+#define MAP_BORDER                 10   // Room border padding
 #define MAP_HEIGHT                 ((GRID_HEIGHT*ROOM_HEIGHT) + (MAP_BORDER*2))
-#define MAP_ROCK_BORDER            1  // Map rock border
-#define MAP_SLOTS                  32
+#define MAP_ROCK_BORDER            1    // Map rock border
+#define MAP_SLOTS                  32   // Max things per map slot
 #define MAP_WIDTH                  ((GRID_WIDTH*ROOM_WIDTH) + (MAP_BORDER*2))
-#define PLAYER_MOVE_SPEED_MS       100
+#define PLAYER_MOVE_SPEED_MS       100  // Key repeat rate
 #define ROOM_HEIGHT                13
 #define ROOM_WIDTH                 13
+#define THING_DAMAGE_SHAKE_ABOVE   10   // Damage above this causes shakes
+#define THING_DAMAGE_SHAKE_SCALE   20.0 // Smaller means more shaking
+#define THING_HEALTH_BLOODIED_PCT1 35   // Some blood on the screen
+#define THING_HEALTH_BLOODIED_PCT2 25   // More...
+#define THING_HEALTH_BLOODIED_PCT3 15   // More...
+#define THING_HEALTH_BLOODIED_PCT4 5    // Lots of blood on screen
 #define TILE_HEIGHT                16
 #define TILE_HEIGHT_MAX            64
-#define TILE_WIDTH                 16 // Tile size of the player
-#define TILE_WIDTH_MAX             64 // Largest tile for collisions
+#define TILE_WIDTH                 16   // Tile size of the player
+#define TILE_WIDTH_MAX             64   // Largest tile for collisions
 #define TTF_CURSOR_CHAR            127
 #define TTF_GLYPH_MAX              134
 #define TTF_GLYPH_MIN              ' '
