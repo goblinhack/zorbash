@@ -691,8 +691,8 @@ def init_32x32():
             "entrance1.4",
             "entrance1.5",
             "entrance1.6",
-            "door1.1-closed",
-            "door1.1-open",
+            "entrance1.open",
+            "",
             ########################################################
             "blood_splatter1.1",
             "blood_splatter1.2",

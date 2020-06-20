@@ -259,6 +259,12 @@ void Thing::init (Levelp level,
         }
     }
 
+    if (unlikely(tpp->is_entrance())) {
+        if (level->world_at.z > 1) {
+            is_open = true;
+        }
+    }
+
     auto tiles = &tpp->tiles;
     if (tpp->gfx_animated()) {
         auto tile = tile_first(tiles);

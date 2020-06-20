@@ -342,12 +342,21 @@ std::ostream& operator<<(std::ostream &out,
     out << bits(my.t.save_file);
     out << bits(my.t.appdata);
     out << bits(my.t.saved_dir);
-    out << bits(my.t.seed);
-    out << bits(my.t.fps_value);
-    out << bits(my.t.started);
     out << bits(my.t.config);
     out << bits(my.t.world);
+
     out << bits(my.t.current_level);
+    out << bits(my.t.fps_value);
+    out << bits(my.t.hard_paused);
+    out << bits(my.t.last_pause);
+    out << bits(my.t.seed);
+    out << bits(my.t.soft_paused);
+    out << bits(my.t.started);
+    out << bits(my.t.things_are_moving);
+    out << bits(my.t.tick_completed);
+    out << bits(my.t.tick_current);
+    out << bits(my.t.tick_level_changed);
+
     out << bits(wid_minicon_serialize());
     out << bits(wid_console_serialize());
 

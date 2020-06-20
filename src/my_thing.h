@@ -676,6 +676,7 @@ public:
     bool move_to_or_escape(const point&);
     bool open_door(Thingp door);
     bool descend(void);
+    bool ascend(void);
     bool possible_to_attack(const Thingp it);
     bool spawn_next_to(const std::string& what);
     bool spawn_next_to_or_on_monst(const std::string& what);
@@ -907,6 +908,7 @@ public:
     void kill(std::string &reason);
     void lava_tick();
     bool exit_tick();
+    bool entrance_tick();
     void lifespan_tick();
     void log(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args) const; // compile error without

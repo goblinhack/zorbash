@@ -405,12 +405,21 @@ std::istream& operator>>(std::istream &in, Bits<class Game &> my)
     in >> bits(my.t.save_file); if (game_load_headers_only) { return (in); }
     in >> bits(my.t.appdata);
     in >> bits(my.t.saved_dir);
-    in >> bits(my.t.seed);
-    in >> bits(my.t.fps_value);
-    in >> bits(my.t.started);
     in >> bits(my.t.config);
     in >> bits(my.t.world);
+
     in >> bits(my.t.current_level);
+    in >> bits(my.t.fps_value);
+    in >> bits(my.t.hard_paused);
+    in >> bits(my.t.last_pause);
+    in >> bits(my.t.seed);
+    in >> bits(my.t.soft_paused);
+    in >> bits(my.t.started);
+    in >> bits(my.t.things_are_moving);
+    in >> bits(my.t.tick_completed);
+    in >> bits(my.t.tick_current);
+    in >> bits(my.t.tick_level_changed);
+
     std::vector<std::wstring> s; in >> bits(s); wid_minicon_deserialize(s);
                                  in >> bits(s); wid_console_deserialize(s);
     my.t.level = get(my.t.world.levels,
