@@ -356,7 +356,7 @@ void Thing::use (void)
     bool target_overlaps = false;
     auto hit_at = mid_at + fpoint(dx, dy);
 
-    log("attack at %f,%f",hit_at.x, hit_at.y);
+    log("attack at %f,%f delta %f,%f",hit_at.x, hit_at.y, dx, dy);
 _
     //
     // Lunge at the target
