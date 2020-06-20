@@ -95,3 +95,43 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
 
     return (true);
 }
+
+bool Thing::spawn_fire (const std::string& what)
+{
+    std::vector<point> possible;
+    static const std::vector<point> all_deltas = {
+        point(-1, -1),
+        point( 1, -1),
+        point(-1,  1),
+        point( 1,  1),
+        point(0, -1),
+        point(-1, 0),
+        point(1, 0),
+        point(0, 1),
+    };
+
+    for (const auto& d : all_deltas) {
+        auto x = mid_at.x + d.x;
+        auto y = mid_at.y + d.y;
+        auto p = point(x, y);
+
+        if (level->is_hazard(x,y)       ||
+            level->is_rock(x, y)        ||
+            level->is_wall(x, y)) {
+            continue;
+        }
+
+        possible.push_back(p);
+    }
+
+    auto cands = possible.size();
+    if (!cands) {
+        return false;
+    }
+
+    auto chosen = possible[random_range(0, cands)];
+
+    level->thing_new(what, chosen);
+
+    return (true);
+}

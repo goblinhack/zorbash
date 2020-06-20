@@ -182,6 +182,7 @@ void Level::display_map (void)
 #else
     int debug = false;
 #endif
+    debug = true;
     if (debug) {
         game->config.gfx_lights = 0;
         game->config.gfx_show_hidden = 1;

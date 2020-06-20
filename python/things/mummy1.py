@@ -39,7 +39,7 @@ def tp_init(name, text_name):
     x.set_is_undead(True)
     x.set_is_water_hater(100)
     x.set_normal_placement_rules(True)
-    x.set_resurrect_dice("1d10+10")
+    x.set_resurrect_dice("1d10+30")
     x.set_stats_attack_dice("1d1+1")
     x.set_stats_defence(2)
     x.set_stats_health_hunger_pct(95)

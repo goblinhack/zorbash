@@ -700,6 +700,7 @@ static PyMethodDef python_c_METHODS[] = {
     {"tp_load",                                 (PyCFunction)tp_load_,                                  METH_VARARGS | METH_KEYWORDS, "load a thing template"},
     {"tp_spawn_next_to",                        (PyCFunction)tp_spawn_next_to_,                         METH_VARARGS | METH_KEYWORDS, "spawn a thing"},
     {"tp_spawn_next_to_or_on_monst",            (PyCFunction)tp_spawn_next_to_or_on_monst_,             METH_VARARGS | METH_KEYWORDS, "spawn a thing"},
+    {"tp_spawn_fire",                           (PyCFunction)tp_spawn_fire,                             METH_VARARGS | METH_KEYWORDS, "spawn fire"},
     {"tp_update",                               (PyCFunction)tp_update_,                                METH_VARARGS | METH_KEYWORDS, "update template"},
     PYFUNC_REF(SDLGetKeyState),
 

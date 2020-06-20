@@ -3,7 +3,7 @@ import zx
 import tp
 
 def spawn(me, x, y):
-    zx.tp_spawn_next_to_or_on_monst(me, "fire")
+    zx.tp_spawn_fire(me, "fire")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -18,10 +18,9 @@ def tp_init(name, text_name):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_idle_tick_dice("1d20+20:small_fire.spawn()")
+    x.set_idle_tick_dice("1d2+10:small_fire.spawn()")
     x.set_is_active(True)
     x.set_is_fire(True)
-    x.set_is_hazard(True)
     x.set_is_interesting(True)
     x.set_is_loggable_for_unimportant_stuff(False)
     x.set_is_loggable_for_important_stuff(False)
