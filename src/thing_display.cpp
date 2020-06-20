@@ -676,6 +676,17 @@ void Thing::blit_internal (point &blit_tl,
 
     glcolor(c);
 
+    auto wobble = update_wobble();
+    if (wobble != 0.0) {
+        auto mid = (blit_tl + blit_br) / 2;
+        blit_flush();
+        blit_init();
+        glPushMatrix();
+        glTranslatef(mid.x, mid.y, 0);
+        glRotatef(wobble, 0.0f, 0.0f, 1.0f);
+        glTranslatef(-mid.x, -mid.y, 0);
+    }
+
     if (tpp->gfx_show_outlined() && !g_render_black_and_white) {
         if (reflection) {
             if (auto submerged = blit_begin_reflection_submerged()) {
@@ -700,6 +711,12 @@ void Thing::blit_internal (point &blit_tl,
             blit_wall_shadow(blit_tl, blit_br, &tiles);
         }
         blit_wall_cladding(blit_tl, blit_br, &tiles);
+    }
+
+    if (wobble != 0.0) {
+        blit_flush();
+        glPopMatrix();
+        blit_init();
     }
 
     glcolor(WHITE);
