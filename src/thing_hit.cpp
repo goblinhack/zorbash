@@ -71,7 +71,6 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
                 UI_MINICON("%%fg=red$You are ON FIRE!%%fg=reset$");
             }
         }
-
         if (damage > 10) {
             UI_MINICON("%%fg=red$%s %s for %d damage!%%fg=reset$",
                        real_hitter->text_The().c_str(),
@@ -87,6 +86,10 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         if (real_hitter->is_player()) {
             UI_MINICON("You hit the %s for %d damage!",
                        text_The().c_str(), damage);
+        }
+        if (real_hitter->is_fire() ||
+            real_hitter->is_lava()) {
+            set_on_fire();
         }
         add_enemy(real_hitter);
     }
@@ -115,8 +118,12 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (is_monst()) {
         level->thing_new(tp_random_blood_splatter()->name(), mid_at);
     }
-    wobble(180);
-    bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
+
+    if (real_hitter->is_player() ||
+        real_hitter->is_monst()) {
+        wobble(180);
+        bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
+    }
 
     //
     // Visible claw attack?
@@ -207,6 +214,8 @@ _
             if (!hitter_tp->is_explosion()     &&
                 !hitter_tp->is_projectile()    &&
                 !hitter_tp->is_weapon()        &&
+                !hitter_tp->is_fire()          &&
+                !hitter_tp->is_lava()          &&
                 !hitter_tp->gfx_attack_anim()) {
                 //
                 // Not something that typically damages walls.
@@ -299,7 +308,7 @@ _
     hitter->log("hit succeeds");
     int hit_and_killed;
 
-    hit_and_killed = ai_hit_actual(real_hitter, hitter, damage);
+    hit_and_killed = ai_hit_actual(hitter, real_hitter, damage);
 
     return (hit_and_killed);
 }

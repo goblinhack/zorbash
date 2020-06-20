@@ -43,6 +43,9 @@ bool Thing::set_on_fire (void)
     return (true);
 }
 
+//
+// When on fire, where to run to?
+//
 bool Thing::ai_create_on_fire_path (point &nh,
                                     const point start, const point end)
 {_

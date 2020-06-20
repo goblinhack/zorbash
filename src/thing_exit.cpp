@@ -31,7 +31,9 @@ bool Thing::descend (void)
 
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
-        UI_MINICON("The exit is permanently blocked!");
+        if (is_player()) {
+            UI_MINICON("The exit is permanently blocked!");
+        }
         return false;
     }
 
