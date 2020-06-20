@@ -16,6 +16,7 @@ def tp_init(name, text_name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_attackable(True)
     x.set_is_combustible(True)
+    x.set_is_corpse_on_death(True)
     x.set_is_cursor_can_hover_over(True)
     x.set_is_door(True)
     x.set_is_flammable(True)
@@ -29,8 +30,12 @@ def tp_init(name, text_name):
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    x.set_tile(tile=name + ".1-closed")
-    x.set_tile(tile=name + ".1-open", is_open=True)
+    x.set_tile(tile=name + ".100", is_hp_100_percent=True)
+    x.set_tile(tile=name + ".75", is_hp_75_percent=True)
+    x.set_tile(tile=name + ".50", is_hp_50_percent=True)
+    x.set_tile(tile=name + ".25", is_hp_25_percent=True)
+    x.set_tile(tile=name + ".dead", is_dead=True)
+    x.set_tile(tile=name + ".open", is_open=True)
 
     x.update()
 
