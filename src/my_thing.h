@@ -57,6 +57,7 @@ typedef struct Monst_ {
     float        bounce_height = {};         // Percentage of tile height.
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
+    float        wobble = {};                // Fades when set
     fpoint       lunge_to;                   // When a monst attacks something
     fpoint       interpolated_mid_at;
     int          submerged_offset = {};      // GL co-orids
@@ -251,6 +252,11 @@ public:
 
     void set_fadeup_fade(float);
     float get_fadeup_fade(void) const;
+
+    void set_wobble(float);
+    float get_wobble(void) const;
+    float update_wobble(void);
+    void wobble(float wobble);
 
     void set_msg(const std::string&);
     std::string get_msg(void) const;

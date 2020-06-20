@@ -112,6 +112,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_enemy.o 		\
     $(OBJDIR)/thing_exit.o 		\
     $(OBJDIR)/thing_fadeup.o 		\
+    $(OBJDIR)/thing_wobble.o 		\
     $(OBJDIR)/thing_fini.o 		\
     $(OBJDIR)/thing_gc.o 		\
     $(OBJDIR)/thing_health.o 		\

@@ -115,6 +115,8 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
     if (is_monst()) {
         level->thing_new(tp_random_blood_splatter()->name(), mid_at);
     }
+    wobble(180);
+    bounce(0.5 /* height */, 0.1 /* fade */, 100, 1);
 
     //
     // Visible claw attack?

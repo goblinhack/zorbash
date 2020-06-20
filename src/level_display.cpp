@@ -178,7 +178,7 @@ void Level::display_map (void)
     pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
 #ifdef ENABLE_MAP_DEBUG
-    int debug = true;;
+    int debug = true;
 #else
     int debug = false;
 #endif
