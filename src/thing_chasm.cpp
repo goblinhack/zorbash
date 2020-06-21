@@ -19,7 +19,7 @@ bool Thing::chasm_tick (void)
     }
 
     if (level->is_chasm(mid_at.x, mid_at.y)) {
-        fall(10, 1000);
+        fall(10, 750);
         return true;
     }
 
@@ -81,6 +81,8 @@ bool Thing::fall_to_next_level (void)
                 l->update_all_ticks();
             }
             update_light();
+            set_fall_height(0);
+            visible();
 
             log("finish fall to next level");
             return true;

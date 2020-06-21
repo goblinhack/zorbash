@@ -27,7 +27,7 @@ float Thing::get_fall (void)
 
     if (t >= get_timestamp_bounce_end()) {
         is_falling = false;
-        set_fall_height(0);
+        hide();
         fall_to_next_level();
         return (0);
     }
@@ -35,6 +35,10 @@ float Thing::get_fall (void)
     float time_step =
         (float)(t - get_timestamp_bounce_begin()) /
         (float)(get_timestamp_bounce_end() - get_timestamp_bounce_begin());
+
+    if (time_step > 0.5) {
+        hide();
+    }
 
     float height = get_fall_height() * time_step;
 
