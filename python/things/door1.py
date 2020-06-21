@@ -37,7 +37,10 @@ def tp_init(name, text_name):
     x.set_tile(tile=name + ".50", is_hp_50_percent=True)
     x.set_tile(tile=name + ".25", is_hp_25_percent=True)
     x.set_tile(tile=name + ".dead", is_dead=True)
-    x.set_tile(tile=name + ".open", is_open=True)
+    x.set_tile(tile=name + ".open", is_hp_100_percent=True, is_open=True)
+    x.set_tile(tile=name + ".open", is_hp_75_percent=True, is_open=True)
+    x.set_tile(tile=name + ".open", is_hp_50_percent=True, is_open=True)
+    x.set_tile(tile=name + ".open", is_hp_25_percent=True, is_open=True)
 
     x.update()
 
