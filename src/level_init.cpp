@@ -276,10 +276,10 @@ void Level::place_walls (Dungeonp d, int variant, int block_width,
                     break;
                 }
 
-                /*
-                 * We place large blocks and avoid splatting them with
-                 * smaller ones here.
-                 */
+                //
+                // We place large blocks and avoid splatting them with
+                // smaller ones here.
+                //
                 if (is_wall(X, Y)) {
                     can_place_here = false;
                     continue;

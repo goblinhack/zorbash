@@ -23,14 +23,14 @@ def key_init(name, text_name):
     x.set_z_depth(zx.MAP_DEPTH_OBJ)
     x.set_z_prio(zx.MAP_PRIO_NORMAL)
 
-    x.set_tile(tile=name + ".1", is_dir_none=True, delay_ms=100)
-    x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=100)
-    x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=100)
-    x.set_tile(tile=name + ".4", is_dir_none=True, delay_ms=100)
-    x.set_tile(tile=name + ".5", is_dir_none=True, delay_ms=100)
-    x.set_tile(tile=name + ".4", is_dir_none=True, delay_ms=100)
-    x.set_tile(tile=name + ".3", is_dir_none=True, delay_ms=100)
-    x.set_tile(tile=name + ".2", is_dir_none=True, delay_ms=100)
+    x.set_tile(tile=name + ".1", delay_ms=100)
+    x.set_tile(tile=name + ".2", delay_ms=100)
+    x.set_tile(tile=name + ".3", delay_ms=100)
+    x.set_tile(tile=name + ".4", delay_ms=100)
+    x.set_tile(tile=name + ".5", delay_ms=100)
+    x.set_tile(tile=name + ".4", delay_ms=100)
+    x.set_tile(tile=name + ".3", delay_ms=100)
+    x.set_tile(tile=name + ".2", delay_ms=100)
 
     x.update()
 

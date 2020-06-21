@@ -26,6 +26,10 @@ bool Thing::achieve_goals_in_life (void)
     log("achieve goals at tick %d, game tick %u",
         get_tick(), game->tick_current);
 
+    if (is_falling) {
+        return true;
+    }
+
     lifespan_tick();
     if (is_dead) {
         return true;

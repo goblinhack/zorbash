@@ -31,7 +31,7 @@ uint8_t game_main_menu_new_game (Widp w, int32_t x, int32_t y, uint32_t button)
     wid_minicon_fini();
     wid_minicon_init();
     wid_visible(wid_minicon_window);
-    UI_MINICON("Welcome to the lair of %%fg=red$Zorbash%%fg=reset$. Stay awhile, stay forever...");
+    MINICON("Welcome to the lair of %%fg=red$Zorbash%%fg=reset$. Stay awhile, stay forever...");
     return (false);
 }
 

@@ -685,7 +685,7 @@ uint8_t wid_load_mouse_up (Widp w, int32_t x, int32_t y, uint32_t button)
 
 void Game::load_select (void)
 {_
-    UI_MINICON("Loading a saved game");
+    MINICON("Loading a saved game");
     CON("USERCFG: loading a saved game, destroy old");
 
     if (wid_load) {

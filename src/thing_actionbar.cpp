@@ -125,7 +125,7 @@ bool Thing::actionbar_id_insert (Thingp what)
     }
 
     if (actionbar_items >= UI_ACTIONBAR_MAX_ITEMS) {
-        UI_MINICON("No space to carry %s which is not carried",
+        MINICON("No space to carry %s which is not carried",
                 what->text_The().c_str());
         return false;
     }

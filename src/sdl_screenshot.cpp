@@ -39,13 +39,13 @@ void sdl_screenshot_do (void)
 
     char *png = dynprintf("screenshot.%d.png", count);
     stbi_write_png(png, w, h, components, pixels.data(), 3 * w);
-    UI_MINICON("Screenshot: %s", png);
+    MINICON("Screenshot: %s", png);
     myfree(png);
 
     if (0) {
         char *tga = dynprintf("screenshot.%d.tga", count);
         stbi_write_tga(tga, w, h, components, pixels.data());
-        UI_MINICON("Screenshot: %s", tga);
+        MINICON("Screenshot: %s", tga);
         myfree(tga);
     }
 

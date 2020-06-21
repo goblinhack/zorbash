@@ -32,7 +32,7 @@ void Thing::resurrect_tick (void)
         if (v > 0) {
             is_resurrecting = true;
             tile_curr = 0;
-            UI_MINICON("%%fg=red$%s rises from the grave!",
+            MINICON("%%fg=red$%s rises from the grave!",
                     text_The().c_str());
             set_stats_health(v);
             set_stats_health_max(v);

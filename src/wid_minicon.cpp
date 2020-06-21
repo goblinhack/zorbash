@@ -264,7 +264,7 @@ void wid_minicon_deserialize(std::vector<std::wstring> r)
     for (const auto& s : r) {
         auto tmp = wstring_to_string(s);
         if (tmp.size()) {
-            UI_MINICON("%s", tmp.c_str());
+            MINICON("%s", tmp.c_str());
         }
     }
 }

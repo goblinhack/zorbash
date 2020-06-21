@@ -200,9 +200,9 @@ void LOG(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 // Consoles
 //
 void CON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
-void UI_MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
+void MINICON(const char *fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void CON(const wchar_t *fmt, ...);
-void UI_MINICON(const wchar_t *fmt, ...);
+void MINICON(const wchar_t *fmt, ...);
 void con(const wchar_t *fmt);
 void minicon(const wchar_t *fmt);
 
