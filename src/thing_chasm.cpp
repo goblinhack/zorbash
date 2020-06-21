@@ -55,6 +55,10 @@ bool Thing::fall_to_next_level (void)
         auto x = random_range(MAP_BORDER, MAP_WIDTH - MAP_BORDER);
         auto y = random_range(MAP_BORDER, MAP_HEIGHT - MAP_BORDER);
 
+        if (!level->is_dungeon(x, y)) {
+            continue;
+        }
+
         if (level->is_entrance(x, y) ||
             level->is_monst(x, y)    ||
             level->is_rock(x, y)     ||

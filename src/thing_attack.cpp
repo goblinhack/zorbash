@@ -20,6 +20,13 @@ bool Thing::possible_to_attack (const Thingp itp)
         return (false);
     }
 
+    //
+    // No attacking of open doors!
+    //
+    if (itp->is_open) {
+        return (false);
+    }
+
     if (is_alive_monst()) {
         if (me->is_meat_eater()) {
             if (it->is_made_of_meat() || it->is_blood()) {
