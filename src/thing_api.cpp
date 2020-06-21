@@ -489,9 +489,9 @@ int Thing::is_rrr11(void) const
     return (tp()->is_rrr11());
 }
 
-int Thing::is_rrr12(void) const
+int Thing::is_able_to_change_levels(void) const
 {_
-    return (tp()->is_rrr12());
+    return (tp()->is_able_to_change_levels());
 }
 
 int Thing::is_collected_as_gold(void) const

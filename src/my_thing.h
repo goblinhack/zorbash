@@ -52,21 +52,25 @@ typedef struct Monst_ {
     // | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
     // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
     /////////////////////////////////////////////////////////////////////////
+    ThingId      on_fire_id_anim {};
+    ThingId      owner_id {};                // Who created this thing?
+    ThingId      weapon_id {};               // Current weapon
+    ThingId      weapon_id_carry_anim {};
+    ThingId      weapon_id_use_anim {};
     color        light_col {};
     float        bounce_fade = {};           // 0.1; rapid, 0.9 slow
     float        bounce_height = {};         // Percentage of tile height.
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
     float        wobble = {};                // Fades when set
-    fpoint       lunge_to;                   // When a monst attacks something
     fpoint       interpolated_mid_at;
-    int          submerged_offset = {};      // GL co-orids
+    fpoint       lunge_to;                   // When a monst attacks something
     int          bounce_count = {};
     int          gold = {};
+    int          lifespan = {};           // How many things this thing owns.
     int          light_quality {};
     int          light_strength {};
     int          owned_count = {};           // How many things this thing owns.
-    int          lifespan = {};           // How many things this thing owns.
     int          stats01 = {};
     int          stats02 = {};
     int          stats03 = {};
@@ -86,17 +90,14 @@ typedef struct Monst_ {
     int          stats17 = {};
     int          stats18 = {};
     int          stats19 = {};
-    int          stats_strength = {};
-    int          tick_rate_tenths = {};
     int          stats_defence = {};
     int          stats_defence_max = {};
     int          stats_health = {};
     int          stats_health_max = {};
-    ThingId      on_fire_id_anim {};
-    ThingId      owner_id {};                // Who created this thing?
-    ThingId      weapon_id {};               // Current weapon
-    ThingId      weapon_id_carry_anim {};
-    ThingId      weapon_id_use_anim {};
+    int          stats_strength = {};
+    int          submerged_offset = {};      // GL co-orids
+    int          tick_rate_tenths = {};
+    point        level_changed_at;           // Avoid level change loops
     point        wander_target;
     std::list<ThingId> carrying;
     std::string  msg;                        // Text that floats on screen
@@ -799,7 +800,7 @@ public:
     int is_rrr1(void) const;
     int is_rrr10(void) const;
     int is_rrr11(void) const;
-    int is_rrr12(void) const;
+    int is_able_to_change_levels(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
     int is_rrr4(void) const;

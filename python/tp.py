@@ -209,8 +209,8 @@ class Tp:
     def set_is_rrr11(self, value):
         zx.tp_set_is_rrr11(self, value)
 
-    def set_is_rrr12(self, value):
-        zx.tp_set_is_rrr12(self, value)
+    def set_is_able_to_change_levels(self, value):
+        zx.tp_set_is_able_to_change_levels(self, value)
 
     def set_is_collected_as_gold(self, value):
         zx.tp_set_is_collected_as_gold(self, value)

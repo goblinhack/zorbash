@@ -2,7 +2,7 @@ import zx
 import tp
 
 
-def init1(name):
+def init_swing(name):
     x = tp.Tp(name)
 
     x.set_collision_attack(True)
@@ -58,7 +58,7 @@ def init1(name):
 
     x.update()
 
-def init2(name):
+def init_carry(name):
     x = tp.Tp(name)
 
     x.set_gfx_animated(True)
@@ -80,7 +80,7 @@ def init2(name):
 
     x.update()
 
-def init3(name, text_name):
+def init_weapon(name, text_name):
     x = tp.Tp(name, text_name)
 
     x.set_collision_attack(True)
@@ -110,8 +110,8 @@ def init3(name, text_name):
     x.update()
 
 def init():
-    init1(name="sword1_swing")
-    init2(name="sword1_carry")
-    init3(name="sword1", text_name="sword")
+    init_swing(name="sword1_swing")
+    init_carry(name="sword1_carry")
+    init_weapon(name="sword1", text_name="sword")
 
 init()

@@ -584,7 +584,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_rrr1)
     TP_SET_DECL(is_rrr10)
     TP_SET_DECL(is_rrr11)
-    TP_SET_DECL(is_rrr12)
+    TP_SET_DECL(is_able_to_change_levels)
     TP_SET_DECL(is_collected_as_gold)
     TP_SET_DECL(is_gold)
     TP_SET_DECL(is_loggable_for_important_stuff)

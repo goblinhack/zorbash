@@ -14,9 +14,10 @@
 
 bool Thing::exit_tick (void)
 {_
-    if (game->tick_level_changed >= game->tick_current) {
+    if (!is_able_to_change_levels()) {
         return false;
     }
+
     if (level->is_exit(mid_at.x, mid_at.y)) {
         return descend();
     }
@@ -25,6 +26,17 @@ bool Thing::exit_tick (void)
 
 bool Thing::descend (void)
 {_
+    if (!monstp) {
+        return false;
+    }
+
+    //
+    // No level change if we've not moved
+    //
+    if (make_point(mid_at) == monstp->level_changed_at) {
+        return false;
+    }
+
     auto next_level = level->world_at + point3d(0, 0, 1);
 
     if (is_player()) {
@@ -48,17 +60,23 @@ bool Thing::descend (void)
                     UI_MINICON("You bravely descend");
                 }
 
-                log("move to new level entrance");
+                log("move to next level entrance");
                 move_to_immediately(fpoint(x, y));
                 level_change(l);
                 if (is_player()) {
                     l->player = this;
                     l->scroll_map_to_player();
                     l->minimap_valid = false;
+                    //
+                    // Make sure all monsts on the new level are at the
+                    // same tick or they will get lots of free attacks
+                    //
+                    l->update_all_ticks();
+                    monstp->level_changed_at = make_point(mid_at);
                 }
                 update_light();
 
-                log("moved to new level entrance");
+                log("moved to next level entrance");
                 return true;
             }
         }

@@ -185,7 +185,7 @@ private:
     int _is_rrr1 {};
     int _is_rrr10 {};
     int _is_rrr11 {};
-    int _is_rrr12 {};
+    int _is_able_to_change_levels {};
     int _is_rrr2 {};
     int _is_rrr3 {};
     int _is_rrr4 {};
@@ -428,7 +428,7 @@ public:
     int is_rrr1(void) const;
     int is_rrr10(void) const;
     int is_rrr11(void) const;
-    int is_rrr12(void) const;
+    int is_able_to_change_levels(void) const;
     int is_collected_as_gold(void) const;
     int is_gold(void) const;
     int is_loggable_for_important_stuff(void) const;
@@ -574,7 +574,7 @@ public:
     void set_is_rrr1(int);
     void set_is_rrr10(int);
     void set_is_rrr11(int);
-    void set_is_rrr12(int);
+    void set_is_able_to_change_levels(int);
     void set_is_collected_as_gold(int);
     void set_is_gold(int);
     void set_is_rrr2(int);

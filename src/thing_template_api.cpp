@@ -144,7 +144,7 @@ int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rrr1(void) const { return _is_rrr1; }
 int Tp::is_rrr10(void) const { return _is_rrr10; }
 int Tp::is_rrr11(void) const { return _is_rrr11; }
-int Tp::is_rrr12(void) const { return _is_rrr12; }
+int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_loggable_for_important_stuff(void) const { return _is_loggable_for_important_stuff; }
@@ -285,7 +285,7 @@ void Tp::set_is_rock(int v) { _is_rock = v; }
 void Tp::set_is_rrr1(int v) { _is_rrr1 = v; }
 void Tp::set_is_rrr10(int v) { _is_rrr10 = v; }
 void Tp::set_is_rrr11(int v) { _is_rrr11 = v; }
-void Tp::set_is_rrr12(int v) { _is_rrr12 = v; }
+void Tp::set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
 void Tp::set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
 void Tp::set_is_gold(int v) { _is_gold = v; }
 void Tp::set_is_loggable_for_important_stuff(int v) { _is_loggable_for_important_stuff = v; }

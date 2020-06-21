@@ -26,8 +26,6 @@ void Thing::level_change (Levelp l)
         return;
     }
 
-    game->tick_level_changed = game->tick_current;
-
     auto old_level = level;
 
     log("change level");
