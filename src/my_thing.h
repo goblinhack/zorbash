@@ -677,6 +677,7 @@ public:
     bool move_to_or_escape(const point&);
     bool open_door(Thingp door);
     bool descend(void);
+    bool fall(void);
     bool ascend(void);
     bool possible_to_attack(const Thingp it);
     bool spawn_next_to(const std::string& what);
@@ -847,6 +848,8 @@ public:
     uint8_t is_dir_up(void) const;
     uint8_t is_less_preferred_terrain(point p) const;
     uint8_t is_visible() const;
+    bool entrance_tick();
+    bool exit_tick();
     void add_enemy(Thingp attacker);
     void ai_get_next_hop(void);
     void animate();
@@ -863,11 +866,7 @@ public:
     void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
     void carry(Thingp w);
-    void level_change(Levelp);
-    void level_enter(void);
-    void level_leave(void);
-    void level_pop(void);
-    void level_push(void);
+    bool chasm_tick();
     void collision_check_do();
     void con(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void con_(const char *fmt, va_list args) const; // compile error without
@@ -908,8 +907,11 @@ public:
     void kill(const char *reason);
     void kill(std::string &reason);
     void lava_tick();
-    bool exit_tick();
-    bool entrance_tick();
+    void level_change(Levelp);
+    void level_enter(void);
+    void level_leave(void);
+    void level_pop(void);
+    void level_push(void);
     void lifespan_tick();
     void log(const char *fmt, ...) const __attribute__ ((format (printf, 2, 3)));
     void log_(const char *fmt, va_list args) const; // compile error without

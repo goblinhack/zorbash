@@ -41,6 +41,11 @@ bool Thing::achieve_goals_in_life (void)
         return true;
     }
 
+    chasm_tick();
+    if (is_dead) {
+        return true;
+    }
+
     lava_tick();
     if (is_dead) {
         return true;
