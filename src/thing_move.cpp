@@ -55,6 +55,10 @@ bool Thing::move (fpoint future_pos,
         return (false);
     }
 
+    if (is_falling) {
+        return (false);
+    }
+
     if (idle) {
         if (is_player()) {
             game->tick_begin();

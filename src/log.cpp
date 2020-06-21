@@ -228,7 +228,7 @@ void CON (const wchar_t *fmt, ...)
     va_end(args);
 }
 
-void UI_MINICON (const char *fmt, ...)
+void MINICON (const char *fmt, ...)
 {
     va_list args;
 
@@ -237,7 +237,7 @@ void UI_MINICON (const char *fmt, ...)
     va_end(args);
 }
 
-void UI_MINICON (const wchar_t *fmt, ...)
+void MINICON (const wchar_t *fmt, ...)
 {
     va_list args;
 

@@ -15,7 +15,7 @@ void Thing::lava_tick (void)
         if (level->is_lava(mid_at.x, mid_at.y)) {
             if (!level->is_smoke(mid_at.x, mid_at.y)) {
                 if (is_player()) {
-                    UI_MINICON("Your feet burn!");
+                    MINICON("Your feet burn!");
                 }
                 auto smoke = level->thing_new("smoke1", mid_at);
                 smoke->set_lifespan(4);

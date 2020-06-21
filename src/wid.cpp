@@ -3528,7 +3528,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             switch ((int32_t)key->sym) {
                 case '1':
                     if (game && game->config.debug_mode) {
-                        UI_MINICON("Show inverted toggle");
+                        MINICON("Show inverted toggle");
                         CON("USERCFG: gfx show inverted toggle");
                         config_gfx_inverted_toggle();
                     }
@@ -3536,7 +3536,7 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 
                 case '2':
                     if (game && game->config.debug_mode) {
-                        UI_MINICON("Show lights toggle");
+                        MINICON("Show lights toggle");
                         CON("USERCFG: gfx show lights toggle");
                         config_gfx_lights_toggle();
                     }
@@ -3544,14 +3544,14 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
 
                 case '3':
                     if (game && game->config.debug_mode) {
-                        UI_MINICON("Show hidden objects toggle");
+                        MINICON("Show hidden objects toggle");
                         CON("USERCFG: gfx show hidden toggle");
                         config_gfx_show_hidden_toggle();
                     }
                     break;
 
                 case 'r':
-                    UI_MINICON("Creating a new dungeon");
+                    MINICON("Creating a new dungeon");
                     CON("USERCFG: reloading dungeon, destroy old");
                     game->fini();
                     game->init();
@@ -3562,8 +3562,8 @@ static uint8_t wid_receive_unhandled_input (const SDL_KEYSYM *key)
             switch ((int32_t)key->sym) {
                 case '\\':
                     sdl_screenshot();
-                    UI_MINICON("Screenshot taken");
-                    UI_MINICON("USERCFG: screenshot taken");
+                    MINICON("Screenshot taken");
+                    MINICON("USERCFG: screenshot taken");
                     break;
 
                 case '?':

@@ -49,7 +49,7 @@ bool Thing::ascend (void)
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
         if (is_player()) {
-            UI_MINICON("The entrance is permanently blocked!");
+            MINICON("The entrance is permanently blocked!");
         }
         return false;
     }
@@ -59,7 +59,7 @@ bool Thing::ascend (void)
             if (l->is_exit(x, y)) {
                 if (is_player()) {
                     game->level = l;
-                    UI_MINICON("You bravely ascend");
+                    MINICON("You bravely ascend");
                 }
 
                 log("move to previous level exit");

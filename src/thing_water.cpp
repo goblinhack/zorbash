@@ -18,7 +18,7 @@ void Thing::water_tick (void)
                 auto owner = owner_get();
                 if (owner) {
                     if (owner->is_player()) {
-                        UI_MINICON("%%fg=green$You quench the flames!%%fg=reset$");
+                        MINICON("%%fg=green$You quench the flames!%%fg=reset$");
                     }
                 }
             }

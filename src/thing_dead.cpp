@@ -10,6 +10,7 @@
 #include "my_dmap.h"
 #include "my_sprintf.h"
 #include "my_thing.h"
+#include "my_log.h"
 
 void Thing::kill (const char *reason)
 {_
@@ -24,11 +25,11 @@ void Thing::kill (const char *reason)
     unwield("owner is dead");
 
     if (is_player()) {
-        UI_MINICON("%s", reason);
-        UI_MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
+        MINICON("%s", reason);
+        MINICON("%%fg=red$Congratulations, you are dead!%%fg=reset$");
         game->dead_select(reason);
     } else if (is_loggable_for_important_stuff()) {
-        UI_MINICON("%s is dead, %s", text_The().c_str(), reason);
+        MINICON("%s is dead, %s", text_The().c_str(), reason);
     }
 
     const auto tpp = tp();
@@ -67,4 +68,139 @@ void Thing::kill (const char *reason)
 void Thing::kill (std::string &reason)
 {_
     kill(reason.c_str());
+}
+
+void Thing::dead_ (Thingp killer, const char *fmt, va_list args)
+{
+    verify(this);
+
+    if (tp()->is_loggable_for_unimportant_stuff()) {
+        auto t = this;
+        char buf[MAXSTR];
+        int len;
+
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSTR);
+        len = (int)strlen(buf);
+
+        if (killer) {
+            snprintf(buf + len, MAXSTR - len, "%s: killed by %s: ",
+                     t->to_string().c_str(),
+                     killer->to_string().c_str());
+        } else {
+            snprintf(buf + len, MAXSTR - len, "%s: killed: ",
+                     t->to_string().c_str());
+        }
+
+        len = (int)strlen(buf);
+        vsnprintf(buf + len, MAXSTR - len, fmt, args);
+
+        putf(MY_STDOUT, buf);
+
+        char reason[MAXSTR];
+        vsnprintf(reason, MAXSTR, fmt, args);
+        kill(reason);
+    } else {
+        kill("no reason");
+    }
+}
+
+void Thing::dead (Thingp killer, const char *fmt, ...)
+{
+    verify(this);
+    auto t = this;
+    va_list args;
+
+    va_start(args, fmt);
+    t->dead_(killer, fmt, args);
+    va_end(args);
+}
+
+void Thing::dead_ (const char *fmt, va_list args)
+{
+    verify(this);
+
+    if (tp()->is_loggable_for_unimportant_stuff()) {
+        auto t = this;
+        char buf[MAXSTR];
+        int len;
+
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSTR);
+        len = (int)strlen(buf);
+        snprintf(buf + len, MAXSTR - len, "%s: dead: ",
+                 t->to_string().c_str());
+
+        len = (int)strlen(buf);
+        vsnprintf(buf + len, MAXSTR - len, fmt, args);
+
+        putf(MY_STDOUT, buf);
+        char reason[MAXSTR];
+        vsnprintf(reason, MAXSTR, fmt, args);
+        kill(reason);
+    } else {
+        kill("no reason");
+    }
+}
+
+void Thing::dead (Thingp killer, std::string &reason)
+{
+    verify(this);
+
+    if (tp()->is_loggable_for_unimportant_stuff()) {
+        auto t = this;
+        char buf[MAXSTR];
+        int len;
+
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSTR);
+        len = (int)strlen(buf);
+
+        if (killer) {
+            snprintf(buf + len, MAXSTR - len, "%s: killed by %s: ",
+                    t->to_string().c_str(),
+                    killer->to_string().c_str());
+        } else {
+            snprintf(buf + len, MAXSTR - len, "%s: killed: ",
+                    t->to_string().c_str());
+        }
+
+        putf(MY_STDOUT, reason.c_str());
+        kill(reason);
+    } else {
+        kill("no reason");
+    }
+}
+
+void Thing::dead (std::string &reason)
+{
+    verify(this);
+
+    if (tp()->is_loggable_for_unimportant_stuff()) {
+        auto t = this;
+        char buf[MAXSTR];
+        int len;
+
+        buf[0] = '\0';
+        get_timestamp(buf, MAXSTR);
+        len = (int)strlen(buf);
+        snprintf(buf + len, MAXSTR - len, "%s: dead: ",
+                 t->to_string().c_str());
+
+        putf(MY_STDOUT, reason.c_str());
+        kill(reason);
+    } else {
+        kill("no reason");
+    }
+}
+
+void Thing::dead (const char *fmt, ...)
+{
+    verify(this);
+    auto t = this;
+    va_list args;
+
+    va_start(args, fmt);
+    t->dead_(fmt, args);
+    va_end(args);
 }
