@@ -109,6 +109,9 @@ bool Thing::achieve_goals_in_death (void)
 
     resurrect_tick();
 
+    set_tick_last_did_something(game->tick_current);
+    set_tick(game->tick_current);
+
     return true;
 }
 

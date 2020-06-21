@@ -127,6 +127,9 @@ _
 
     if (up || down || left || right) {
         move_delta(delta);
+        if (monstp) {
+            monstp->level_changed_at = point(0, 0);
+        }
     }
 
     return (true);
