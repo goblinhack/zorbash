@@ -74,6 +74,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* float       */ in >> bits(my.t->bounce_height);
     /* float       */ in >> bits(my.t->fadeup_fade);
     /* float       */ in >> bits(my.t->fadeup_height);
+    /* float       */ in >> bits(my.t->fall_height);
     /* float       */ in >> bits(my.t->wobble);
     /* fpoint      */ in >> bits(my.t->lunge_to);
     /* int         */ in >> bits(my.t->bounce_count);
@@ -115,11 +116,11 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* std::vector<point> */    in >> bits(my.t->move_path);
     /* std::vector<uint32_t> */ in >> bits(my.t->enemies);
     /* timestamp_t */ in >> bits(T); my.t->tick_last_did_something = load(T);
-    /* timestamp_t */ in >> bits(T); my.t->timestamp_UNUSED1       = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_fall_begin       = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_born          = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_bounce_begin  = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_bounce_end    = load(T);
-    /* timestamp_t */ in >> bits(T); my.t->timestamp_UNUSED2       = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_fall_end       = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_fadeup_begin  = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_fadeup_end    = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_flip_start    = load(T);
@@ -191,6 +192,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->is_being_destroyed = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_falling         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_dead            = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;

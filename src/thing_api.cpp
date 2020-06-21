@@ -800,6 +800,26 @@ void Thing::set_bounce_height (float v)
 }
 
 ////////////////////////////////////////////////////////////////////////////
+// fall_height
+////////////////////////////////////////////////////////////////////////////
+float Thing::get_fall_height (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->fall_height);
+    } else {
+        return (0);
+    }
+}
+
+void Thing::set_fall_height (float v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    monstp->fall_height = v;
+}
+
+////////////////////////////////////////////////////////////////////////////
 // bounce_fade
 ////////////////////////////////////////////////////////////////////////////
 float Thing::get_bounce_fade (void) const
@@ -3274,99 +3294,99 @@ timestamp_t Thing::incr_timestamp_hunger_tick (void)
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// timestamp_UNUSED1
+// timestamp_fall_begin
 ////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_UNUSED1 (void) const
+timestamp_t Thing::get_timestamp_fall_begin (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->timestamp_UNUSED1);
+        return (monstp->timestamp_fall_begin);
     } else {
         return (0);
     }
 }
 
-timestamp_t Thing::set_timestamp_UNUSED1 (timestamp_t v)
+timestamp_t Thing::set_timestamp_fall_begin (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED1 = v);
+    return (monstp->timestamp_fall_begin = v);
 }
 
-timestamp_t Thing::decr_timestamp_UNUSED1 (timestamp_t v)
+timestamp_t Thing::decr_timestamp_fall_begin (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED1 -= v);
+    return (monstp->timestamp_fall_begin -= v);
 }
 
-timestamp_t Thing::incr_timestamp_UNUSED1 (timestamp_t v)
+timestamp_t Thing::incr_timestamp_fall_begin (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED1 += v);
+    return (monstp->timestamp_fall_begin += v);
 }
 
-timestamp_t Thing::decr_timestamp_UNUSED1 (void)
+timestamp_t Thing::decr_timestamp_fall_begin (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED1--);
+    return (monstp->timestamp_fall_begin--);
 }
 
-timestamp_t Thing::incr_timestamp_UNUSED1 (void)
+timestamp_t Thing::incr_timestamp_fall_begin (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED1++);
+    return (monstp->timestamp_fall_begin++);
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// timestamp_UNUSED2
+// timestamp_fall_end
 ////////////////////////////////////////////////////////////////////////////
-timestamp_t Thing::get_timestamp_UNUSED2 (void) const
+timestamp_t Thing::get_timestamp_fall_end (void) const
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->timestamp_UNUSED2);
+        return (monstp->timestamp_fall_end);
     } else {
         return (0);
     }
 }
 
-timestamp_t Thing::set_timestamp_UNUSED2 (timestamp_t v)
+timestamp_t Thing::set_timestamp_fall_end (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED2 = v);
+    return (monstp->timestamp_fall_end = v);
 }
 
-timestamp_t Thing::decr_timestamp_UNUSED2 (timestamp_t v)
+timestamp_t Thing::decr_timestamp_fall_end (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED2 -= v);
+    return (monstp->timestamp_fall_end -= v);
 }
 
-timestamp_t Thing::incr_timestamp_UNUSED2 (timestamp_t v)
+timestamp_t Thing::incr_timestamp_fall_end (timestamp_t v)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED2 += v);
+    return (monstp->timestamp_fall_end += v);
 }
 
-timestamp_t Thing::decr_timestamp_UNUSED2 (void)
+timestamp_t Thing::decr_timestamp_fall_end (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED2--);
+    return (monstp->timestamp_fall_end--);
 }
 
-timestamp_t Thing::incr_timestamp_UNUSED2 (void)
+timestamp_t Thing::incr_timestamp_fall_end (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    return (monstp->timestamp_UNUSED2++);
+    return (monstp->timestamp_fall_end++);
 }
 
 ////////////////////////////////////////////////////////////////////////////

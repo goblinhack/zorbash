@@ -53,6 +53,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* float       */ out << bits(my.t->bounce_height);
     /* float       */ out << bits(my.t->fadeup_fade);
     /* float       */ out << bits(my.t->fadeup_height);
+    /* float       */ out << bits(my.t->fall_height);
     /* float       */ out << bits(my.t->wobble);
     /* fpoint      */ out << bits(my.t->lunge_to);
     /* int         */ out << bits(my.t->bounce_count);
@@ -94,11 +95,11 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* std::vector<uint32_t> */ out << bits(my.t->enemies);
     /* std::string */ out << bits(my.t->msg);
     /* timestamp_t */ out << bits(my.t->tick_last_did_something);
-    /* timestamp_t */ out << bits(my.t->timestamp_UNUSED1);
+    /* timestamp_t */ out << bits(my.t->timestamp_fall_begin);
     /* timestamp_t */ out << bits(my.t->timestamp_born);
     /* timestamp_t */ out << bits(my.t->timestamp_bounce_begin);
     /* timestamp_t */ out << bits(my.t->timestamp_bounce_end);
-    /* timestamp_t */ out << bits(my.t->timestamp_UNUSED2);
+    /* timestamp_t */ out << bits(my.t->timestamp_fall_end);
     /* timestamp_t */ out << bits(my.t->timestamp_fadeup_begin);
     /* timestamp_t */ out << bits(my.t->timestamp_fadeup_end);
     /* timestamp_t */ out << bits(my.t->timestamp_flip_start);
@@ -161,6 +162,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_being_destroyed << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_bouncing        << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_falling         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_dead            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_facing_left     << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_fadeup          << shift; shift++;
