@@ -102,6 +102,7 @@ public:
     void hard_unpause(void);
     void init(void);
     void init_levels(void);
+    void init_level(point3d);
     void load(int slot);
     void load(void);
     void load_config(void);

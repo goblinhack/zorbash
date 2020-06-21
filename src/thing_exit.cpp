@@ -14,6 +14,10 @@
 
 bool Thing::exit_tick (void)
 {_
+    if (owner_get()) {
+        return false;
+    }
+
     if (!is_able_to_change_levels()) {
         return false;
     }
@@ -38,10 +42,10 @@ bool Thing::descend (void)
     }
 
     auto next_level = level->world_at + point3d(0, 0, 1);
+    game->init_level(next_level);
 
     if (is_player()) {
         game->current_level = next_level;
-        game->init_levels();
     }
 
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);

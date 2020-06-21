@@ -29,6 +29,22 @@ void Game::init (void)
     level = l;
 }
 
+void Game::init_level (point3d p)
+{_
+    auto level_seed = seed + p.x + p.y + p.z;
+    auto l = get(world.levels, p.x, p.y, p.z);
+    if (!l) {
+        world.new_level_at(p, level_seed);
+        l = get(world.levels, p.x, p.y, p.z);
+        if (!l) {
+            ERR("no level created at %d,%d,%d",
+                game->current_level.x,
+                game->current_level.y,
+                game->current_level.z);
+        }
+    }
+}
+
 void Game::init_levels (void)
 {_
     //
@@ -37,17 +53,6 @@ void Game::init_levels (void)
     for (auto z = 0; z <= 0; z++) {
         auto level_at = current_level;
         level_at.z += z;
-        auto level_seed = seed + level_at.x + level_at.y + level_at.z;
-        auto l = get(world.levels, level_at.x, level_at.y, level_at.z);
-        if (!l) {
-            world.new_level_at(level_at, level_seed);
-            l = get(world.levels, level_at.x, level_at.y, level_at.z);
-            if (!l) {
-                ERR("no level created at %d,%d,%d",
-                    game->current_level.x,
-                    game->current_level.y,
-                    game->current_level.z);
-            }
-        }
+        init_level(level_at);
     }
 }
