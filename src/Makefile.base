@@ -102,6 +102,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_astar.o 		\
     $(OBJDIR)/thing_bounce.o 		\
+    $(OBJDIR)/thing_fall.o 		\
     $(OBJDIR)/thing_carry.o 		\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\

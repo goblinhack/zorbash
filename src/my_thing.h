@@ -62,6 +62,7 @@ typedef struct Monst_ {
     float        bounce_height = {};         // Percentage of tile height.
     float        fadeup_fade = {};           // 0.1; rapid, 0.9 slow
     float        fadeup_height = {};         // Percentage of tile height.
+    float        fall_height = {};           // y offset for falling
     float        wobble = {};                // Fades when set
     fpoint       interpolated_mid_at;
     fpoint       lunge_to;                   // When a monst attacks something
@@ -104,8 +105,8 @@ typedef struct Monst_ {
     std::vector<ThingId> actionbar_id;
     std::vector<ThingId> enemies;            // List of things that wronged us
     std::vector<point> move_path;
-    timestamp_t  timestamp_UNUSED1 {};
-    timestamp_t  timestamp_UNUSED2 {};
+    timestamp_t  timestamp_fall_begin {};
+    timestamp_t  timestamp_fall_end {};
     timestamp_t  timestamp_born {};
     timestamp_t  timestamp_bounce_begin {};
     timestamp_t  timestamp_bounce_end {};
@@ -165,6 +166,7 @@ public:
     uint32_t is_being_destroyed:1 {};
     uint32_t is_blitted:1         {};
     uint32_t is_bouncing:1        {};
+    uint32_t is_falling:1         {};
     uint32_t is_dead:1            {};
     uint32_t is_facing_left:1     {};
     uint32_t is_fadeup:1          {};
@@ -252,6 +254,9 @@ public:
 
     void set_fadeup_fade(float);
     float get_fadeup_fade(void) const;
+
+    void set_fall_height(float);
+    float get_fall_height(void) const;
 
     void set_wobble(float);
     float get_wobble(void) const;
@@ -560,19 +565,19 @@ public:
     timestamp_t decr_timestamp_hunger_tick(void);
     timestamp_t incr_timestamp_hunger_tick(void);
 
-    timestamp_t set_timestamp_UNUSED1(timestamp_t);
-    timestamp_t get_timestamp_UNUSED1(void) const;
-    timestamp_t decr_timestamp_UNUSED1(timestamp_t);
-    timestamp_t incr_timestamp_UNUSED1(timestamp_t);
-    timestamp_t decr_timestamp_UNUSED1(void);
-    timestamp_t incr_timestamp_UNUSED1(void);
+    timestamp_t set_timestamp_fall_begin(timestamp_t);
+    timestamp_t get_timestamp_fall_begin(void) const;
+    timestamp_t decr_timestamp_fall_begin(timestamp_t);
+    timestamp_t incr_timestamp_fall_begin(timestamp_t);
+    timestamp_t decr_timestamp_fall_begin(void);
+    timestamp_t incr_timestamp_fall_begin(void);
 
-    timestamp_t set_timestamp_UNUSED2(timestamp_t);
-    timestamp_t get_timestamp_UNUSED2(void) const;
-    timestamp_t decr_timestamp_UNUSED2(timestamp_t);
-    timestamp_t incr_timestamp_UNUSED2(timestamp_t);
-    timestamp_t decr_timestamp_UNUSED2(void);
-    timestamp_t incr_timestamp_UNUSED2(void);
+    timestamp_t set_timestamp_fall_end(timestamp_t);
+    timestamp_t get_timestamp_fall_end(void) const;
+    timestamp_t decr_timestamp_fall_end(timestamp_t);
+    timestamp_t incr_timestamp_fall_end(timestamp_t);
+    timestamp_t decr_timestamp_fall_end(void);
+    timestamp_t incr_timestamp_fall_end(void);
 
     uint32_t set_tick_last_did_something(uint32_t);
     uint32_t get_tick_last_did_something(void) const;
@@ -678,6 +683,7 @@ public:
     bool open_door(Thingp door);
     bool descend(void);
     bool fall(void);
+    bool fall_to_next_level(void);
     bool ascend(void);
     bool possible_to_attack(const Thingp it);
     bool spawn_next_to(const std::string& what);
@@ -706,6 +712,7 @@ public:
     const std::string& weapon_carry_anim(void) const;
     const std::string& weapon_use_anim(void) const;
     float get_bounce(void);
+    float get_fall(void);
     float get_fadeup(void);
     float get_lunge(void);
     fpoint get_interpolated_mid_at(void) const;
@@ -865,6 +872,7 @@ public:
     void blit_wall_cladding(point &tl, point &br, const ThingTiles *tiles);
     void blit_wall_shadow(point &tl, point &br, const ThingTiles *tiles);
     void bounce(float bounce_height, float bounce_fade, timestamp_t ms, int bounce_count);
+    void fall(float fall_height, timestamp_t ms);
     void carry(Thingp w);
     bool chasm_tick();
     void collision_check_do();

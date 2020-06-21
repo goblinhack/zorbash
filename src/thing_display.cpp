@@ -73,8 +73,9 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     }
 
     float bounce = get_bounce();
+    float fall = get_fall();
     float tileh = game->config.tile_pix_height;
-    float bh = (tileh / TILE_HEIGHT) * (int)(bounce * TILE_HEIGHT);
+    float bh = (tileh / TILE_HEIGHT) * (int)(bounce - fall * TILE_HEIGHT);
 
     float fadeup = get_fadeup();
     if (fadeup < 0) {
@@ -444,6 +445,21 @@ bool Thing::get_coords (point &blit_tl,
         } else {
             blit_tl.y -= bh;
             blit_br.y -= bh;
+        }
+    }
+
+    //
+    // Waaaaaaah
+    //
+    if (unlikely(is_falling)) {
+        float fall = get_fall();
+        float bh = (tileh / TILE_HEIGHT) * (int)(fall * TILE_HEIGHT);
+        if (reflection) {
+            blit_tl.y -= bh;
+            blit_br.y -= bh;
+        } else {
+            blit_tl.y += bh;
+            blit_br.y += bh;
         }
     }
 
