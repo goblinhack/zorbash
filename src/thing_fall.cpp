@@ -23,10 +23,12 @@ float Thing::get_fall (void)
         return (0.0);
     }
 
+    log("falling");
     auto t = time_get_time_ms_cached();
 
     if (t >= get_timestamp_bounce_end()) {
         is_falling = false;
+        log("end of falling");
         hide();
         fall_to_next_level();
         return (0);

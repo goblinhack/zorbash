@@ -14,15 +14,17 @@
 
 bool Thing::chasm_tick (void)
 {_
+    if (owner_get()) {
+        return false;
+    }
+
     if (is_falling) {
         return true;
     }
 
     if (level->is_chasm(mid_at.x, mid_at.y)) {
-        if (is_player()) {
-            fall(10, 750);
-            wobble(360);
-        }
+        fall(10, 750);
+        wobble(360);
         return true;
     }
 
@@ -35,18 +37,17 @@ bool Thing::fall_to_next_level (void)
         return false;
     }
 
-    auto next_level = level->world_at + point3d(0, 0, 1);
+    log("fall to next level");
 
+    auto next_level = level->world_at + point3d(0, 0, 1);
+    game->init_level(next_level);
     if (is_player()) {
         game->current_level = next_level;
-        game->init_levels();
     }
 
     auto l = get(game->world.levels, next_level.x, next_level.y, next_level.z);
     if (!l) {
-        if (is_player()) {
-            MINICON("The chasm is permanently blocked!");
-        }
+        MINICON("The chasm is permanently blocked!");
         return false;
     }
 
@@ -68,6 +69,8 @@ bool Thing::fall_to_next_level (void)
             if (is_player()) {
                 game->level = l;
                 MINICON("You tumble into the void!");
+            } else {
+                MINICON("%s tumbles into the void!", text_The().c_str());
             }
 
             log("fall to next level");
@@ -90,7 +93,9 @@ bool Thing::fall_to_next_level (void)
 
             auto damage = random_range(20, 50);
             auto h = decr_stats_health(damage);
-            MINICON("%%fg=red$You take %u fall damage!%%fg=reset$", damage);
+            if (is_player()) {
+                MINICON("%%fg=red$You take %u fall damage!%%fg=reset$", damage);
+            }
             bounce(2.0 /* height */, 0.5 /* fade */, 100, 3);
             level->thing_new(tp_random_blood_splatter()->name(), mid_at);
             if (h <= 0) {
