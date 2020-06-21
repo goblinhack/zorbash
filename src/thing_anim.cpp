@@ -5,7 +5,7 @@
 
 #include "my_thing.h"
 
-#define DEBUG_ANIM
+#undef DEBUG_ANIM
 
 void Thing::animate (void)
 {_
