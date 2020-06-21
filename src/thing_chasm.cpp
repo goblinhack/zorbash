@@ -19,10 +19,10 @@ bool Thing::chasm_tick (void)
     }
 
     if (level->is_chasm(mid_at.x, mid_at.y)) {
-        return fall();
+        fall(10, 1000);
+        return true;
     }
 
-    fall(10, 1000);
     return false;
 }
 
