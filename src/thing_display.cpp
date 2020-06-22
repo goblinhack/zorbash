@@ -451,16 +451,16 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Waaaaaaah
     //
-    if (unlikely(is_falling)) {
+    if (is_falling || (owner && owner->is_falling)) {
         float fall = get_fall();
-        float bh = (tileh / TILE_HEIGHT) * (int)(fall * TILE_HEIGHT);
-        if (reflection) {
-            blit_tl.y -= bh;
-            blit_br.y -= bh;
-        } else {
-            blit_tl.y += bh;
-            blit_br.y += bh;
+        if (owner) {
+            fall = owner->get_fall();
         }
+        auto s = ((blit_br.x - blit_tl.x - 1) / 2) * fall;
+        blit_tl.x += s;
+        blit_br.x -= s;
+        blit_tl.y += s;
+        blit_br.y -= s;
     }
 
     //
