@@ -756,13 +756,6 @@ bool things_overlap (const Thingp A, fpoint A_at, const Thingp B)
                                     nullptr)) {
             return (true);
         }
-        if (circle_circle_collision(A, // circle
-                                    A_at,
-                                    B, // box
-                                    B->mid_at,
-                                    nullptr)) {
-            return (true);
-        }
         return (false);
     }
 
