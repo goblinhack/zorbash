@@ -15,32 +15,8 @@ extern bool game_load_headers_only;
 bool game_save_config_only;
 int GAME_SAVE_MARKER_EOL = 123456;
 
-std::ostream& operator<<(std::ostream &out, Bits<AgeMapp & > const my)
-{_
-    out << bits(my.t->val);
-    return (out);
-}
-
-std::ostream& operator<<(std::ostream &out, Bits<Dmapp & > const my)
-{_
-    out << bits(my.t->val);
-    return (out);
-}
-
 std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
 {_
-    bool age_map = (my.t->age_map != nullptr);
-    out << bits(age_map);
-    if (age_map) {
-        out << bits(my.t->age_map);
-    }
-
-    bool dmap_scent = (my.t->dmap_scent != nullptr);
-    out << bits(dmap_scent);
-    if (dmap_scent) {
-        out << bits(my.t->dmap_scent);
-    }
-
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp
