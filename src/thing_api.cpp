@@ -89,7 +89,7 @@ void Thing::delete_age_map (void)
         verify(monstp);
         if (monstp->age_map) {
             oldptr(monstp->age_map);
-            delete monstp->age_map; 
+            delete monstp->age_map;
             monstp->age_map = 0;
         }
     }
