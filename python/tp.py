@@ -200,14 +200,14 @@ class Tp:
     def set_is_rrr8(self, value):
         zx.tp_set_is_rrr8(self, value)
 
-    def set_is_rrr9(self, value):
-        zx.tp_set_is_rrr9(self, value)
+    def set_is_parent_slime(self, value):
+        zx.tp_set_is_parent_slime(self, value)
 
-    def set_is_rrr10(self, value):
-        zx.tp_set_is_rrr10(self, value)
+    def set_is_baby_slime_eater(self, value):
+        zx.tp_set_is_baby_slime_eater(self, value)
 
-    def set_is_rrr11(self, value):
-        zx.tp_set_is_rrr11(self, value)
+    def set_is_baby_slime(self, value):
+        zx.tp_set_is_baby_slime(self, value)
 
     def set_is_able_to_change_levels(self, value):
         zx.tp_set_is_able_to_change_levels(self, value)

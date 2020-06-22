@@ -479,14 +479,14 @@ int Thing::is_rrr1(void) const
     return (tp()->is_rrr1());
 }
 
-int Thing::is_rrr10(void) const
+int Thing::is_baby_slime_eater(void) const
 {_
-    return (tp()->is_rrr10());
+    return (tp()->is_baby_slime_eater());
 }
 
-int Thing::is_rrr11(void) const
+int Thing::is_baby_slime(void) const
 {_
-    return (tp()->is_rrr11());
+    return (tp()->is_baby_slime());
 }
 
 int Thing::is_able_to_change_levels(void) const
@@ -699,9 +699,9 @@ int Thing::is_rrr8(void) const
     return (tp()->is_rrr8());
 }
 
-int Thing::is_rrr9(void) const
+int Thing::is_parent_slime(void) const
 {_
-    return (tp()->is_rrr9());
+    return (tp()->is_parent_slime());
 }
 
 int Thing::is_undead(void) const

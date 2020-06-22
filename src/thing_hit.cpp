@@ -23,6 +23,15 @@ int Thing::ai_hit_actual (Thingp hitter,      // an arrow / monst /...
         return (false);
     }
 
+    if (is_baby_slime()) {
+        if (hitter->is_baby_slime()) {
+            level->thing_new("slime2", mid_at);
+            dead("combined");
+            hitter->dead("combined");
+            return (true);
+        }
+    }
+
     if (!damage) {
         hitter->log("hit fails, no damage");
         return (false);

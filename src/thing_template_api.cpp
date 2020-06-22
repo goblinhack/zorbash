@@ -142,8 +142,8 @@ int Tp::is_projectile(void) const { return _is_projectile; }
 int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rrr1(void) const { return _is_rrr1; }
-int Tp::is_rrr10(void) const { return _is_rrr10; }
-int Tp::is_rrr11(void) const { return _is_rrr11; }
+int Tp::is_baby_slime_eater(void) const { return _is_baby_slime_eater; }
+int Tp::is_baby_slime(void) const { return _is_baby_slime; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_gold(void) const { return _is_gold; }
@@ -162,7 +162,7 @@ int Tp::is_rrr5(void) const { return _is_rrr5; }
 int Tp::is_rrr6(void) const { return _is_rrr6; }
 int Tp::is_rrr7(void) const { return _is_rrr7; }
 int Tp::is_rrr8(void) const { return _is_rrr8; }
-int Tp::is_rrr9(void) const { return _is_rrr9; }
+int Tp::is_parent_slime(void) const { return _is_parent_slime; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_torch(void) const { return _is_torch; }
@@ -283,8 +283,8 @@ void Tp::set_is_projectile(int v) { _is_projectile = v; }
 void Tp::set_is_ripple(int v) { _is_ripple = v; }
 void Tp::set_is_rock(int v) { _is_rock = v; }
 void Tp::set_is_rrr1(int v) { _is_rrr1 = v; }
-void Tp::set_is_rrr10(int v) { _is_rrr10 = v; }
-void Tp::set_is_rrr11(int v) { _is_rrr11 = v; }
+void Tp::set_is_baby_slime_eater(int v) { _is_baby_slime_eater = v; }
+void Tp::set_is_baby_slime(int v) { _is_baby_slime = v; }
 void Tp::set_is_able_to_change_levels(int v) { _is_able_to_change_levels = v; }
 void Tp::set_is_collected_as_gold(int v) { _is_collected_as_gold = v; }
 void Tp::set_is_gold(int v) { _is_gold = v; }
@@ -303,7 +303,7 @@ void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
 void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
 void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
 void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
-void Tp::set_is_rrr9(int v) { _is_rrr9 = v; }
+void Tp::set_is_parent_slime(int v) { _is_parent_slime = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
 void Tp::set_is_shovable(int v) { _is_shovable = v; }
 void Tp::set_is_torch(int v) { _is_torch = v; }

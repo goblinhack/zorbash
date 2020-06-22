@@ -34,6 +34,13 @@ bool Thing::possible_to_attack (const Thingp itp)
                 return (true);
             }
         }
+
+        if (me->is_baby_slime_eater()) {
+            if (it->is_baby_slime()) {
+                log("can attack %s", itp->to_string().c_str());
+                return (true);
+            }
+        }
     }
 
     if (is_player()) {

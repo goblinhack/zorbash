@@ -807,8 +807,8 @@ public:
     int is_ripple(void) const;
     int is_rock(void) const;
     int is_rrr1(void) const;
-    int is_rrr10(void) const;
-    int is_rrr11(void) const;
+    int is_baby_slime_eater(void) const;
+    int is_baby_slime(void) const;
     int is_able_to_change_levels(void) const;
     int is_rrr2(void) const;
     int is_rrr3(void) const;
@@ -817,7 +817,7 @@ public:
     int is_rrr6(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
-    int is_rrr9(void) const;
+    int is_parent_slime(void) const;
     int is_secret_door(void) const;
     int is_shovable(void) const;
     int is_smoke(void) const;

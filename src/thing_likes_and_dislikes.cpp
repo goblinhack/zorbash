@@ -21,6 +21,11 @@ bool Thing::will_avoid (const Thingp itp)
             return (true);
         }
     }
+    if (me->is_baby_slime()) {
+        if (it->is_parent_slime()) {
+            return (true);
+        }
+    }
     return (false);
 }
 
@@ -34,12 +39,15 @@ bool Thing::will_eat (const Thingp itp)
             return (true);
         }
     }
-
+    if (me->is_baby_slime_eater()) {
+        if (it->is_baby_slime()) {
+            return (true);
+        }
+    }
     if (is_player()) {
         if (it->is_collectable()) {
             return (true);
         }
     }
-
     return (false);
 }

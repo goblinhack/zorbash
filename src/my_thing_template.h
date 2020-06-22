@@ -183,8 +183,8 @@ private:
     int _is_ripple {};
     int _is_rock {};
     int _is_rrr1 {};
-    int _is_rrr10 {};
-    int _is_rrr11 {};
+    int _is_baby_slime_eater {};
+    int _is_baby_slime {};
     int _is_able_to_change_levels {};
     int _is_rrr2 {};
     int _is_rrr3 {};
@@ -193,7 +193,7 @@ private:
     int _is_rrr6 {};
     int _is_rrr7 {};
     int _is_rrr8 {};
-    int _is_rrr9 {};
+    int _is_parent_slime {};
     int _is_secret_door {};
     int _is_shovable {};
     int _is_smoke {};
@@ -426,8 +426,8 @@ public:
     int is_ripple(void) const;
     int is_rock(void) const;
     int is_rrr1(void) const;
-    int is_rrr10(void) const;
-    int is_rrr11(void) const;
+    int is_baby_slime_eater(void) const;
+    int is_baby_slime(void) const;
     int is_able_to_change_levels(void) const;
     int is_collected_as_gold(void) const;
     int is_gold(void) const;
@@ -447,7 +447,7 @@ public:
     int is_rrr6(void) const;
     int is_rrr7(void) const;
     int is_rrr8(void) const;
-    int is_rrr9(void) const;
+    int is_parent_slime(void) const;
     int is_secret_door(void) const;
     int is_shovable(void) const;
     int is_torch(void) const;
@@ -572,8 +572,8 @@ public:
     void set_is_ripple(int);
     void set_is_rock(int);
     void set_is_rrr1(int);
-    void set_is_rrr10(int);
-    void set_is_rrr11(int);
+    void set_is_baby_slime_eater(int);
+    void set_is_baby_slime(int);
     void set_is_able_to_change_levels(int);
     void set_is_collected_as_gold(int);
     void set_is_gold(int);
@@ -584,7 +584,7 @@ public:
     void set_is_rrr6(int);
     void set_is_rrr7(int);
     void set_is_rrr8(int);
-    void set_is_rrr9(int);
+    void set_is_parent_slime(int);
     void set_is_secret_door(int);
     void set_is_shovable(int);
     void set_is_smoke(int);
