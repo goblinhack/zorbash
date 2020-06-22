@@ -195,12 +195,26 @@ static void game_status_wid_create (void)
         wid_set_bg_tilename(w, "zorbash-2");
         wid_set_color(w, WID_COLOR_BG, WHITE);
     }
-    y_at += 2;
 
+    y_at += 2;
+    {_
+        auto w = wid_new_square_button(wid_sidebar, "level no");
+        point tl = make_point(0, y_at - 1);
+        point br = make_point(UI_SIDEBAR_WIDTH, y_at + 1);
+
+        auto s = dynprintf("Level %03d", level->world_at.z);
+        wid_set_pos(w, tl, br);
+        wid_set_style(w, UI_WID_STYLE_NONE);
+        wid_set_text(w, s);
+        wid_set_shape_none(w);
+        myfree(s);
+    }
+
+    y_at += 1;
     {_
         auto w = wid_new_square_button(wid_sidebar, "title box");
-        point tl = make_point(2, y_at);
-        point br = make_point(4, y_at + 2);
+        point tl = make_point(1, y_at);
+        point br = make_point(3, y_at + 2);
 
         wid_set_pos(w, tl, br);
         wid_set_on_mouse_down(w, game_status_mouse_down);
