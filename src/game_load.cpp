@@ -32,36 +32,8 @@ static timestamp_t load (timestamp_t T)
             new_timestamp_dungeon_created);
 }
 
-std::istream& operator>>(std::istream &in, Bits<AgeMapp &> my)
-{_
-    in >> bits(my.t->val);
-    return (in);
-}
-
-std::istream& operator>>(std::istream &in, Bits<Dmapp &> my)
-{_
-    in >> bits(my.t->val);
-    return (in);
-}
-
 std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
 {_
-    bool age_map;
-    in >> bits(age_map);
-    if (age_map) {
-        my.t->age_map = new AgeMap();
-        newptr(my.t->age_map, "Dmap age loaded");
-        in >> bits(my.t->age_map);
-    }
-
-    bool dmap_scent;
-    in >> bits(dmap_scent);
-    if (dmap_scent) {
-        my.t->dmap_scent = new Dmap();
-        newptr(my.t->dmap_scent, "Dmap scent loaded");
-        in >> bits(my.t->dmap_scent);
-    }
-
     /////////////////////////////////////////////////////////////////////////
     // Keep these sorted alphabetically to make it easier to see additions
     // and always update game_load.cpp and game_save.cpp

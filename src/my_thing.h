@@ -41,8 +41,9 @@ typedef enum {
 } ThingShoved;
 
 typedef struct Monst_ {
-    AgeMap       *age_map = {};              // How old a cell is
-    Dmap         *dmap_scent = {};
+public:
+    AgeMap       *_age_map = {};             // How old a cell is
+    Dmap         *_dmap_scent = {};
     std::vector<Lightp> light = {};          // Has light sources?
 
     /////////////////////////////////////////////////////////////////////////

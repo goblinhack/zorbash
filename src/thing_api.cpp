@@ -57,7 +57,7 @@ AgeMap *Thing::get_age_map (void)
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->age_map);
+        return (monstp->_age_map);
     } else {
         return (0);
     }
@@ -67,17 +67,17 @@ void Thing::new_age_map (void)
 {_
     new_monst();
 //con("%s", __FUNCTION__);
-    if (!monstp->age_map) {
-        monstp->age_map = new AgeMap();
-        newptr(monstp->age_map, "age map");
+    if (!monstp->_age_map) {
+        monstp->_age_map = new AgeMap();
+        newptr(monstp->_age_map, "age map");
 
         //
         // Setup random ages
         //
-        auto age_map = monstp->age_map->val;
-        for (auto y = 0; y < MAP_HEIGHT; y++) { 
+        auto _age_map = monstp->_age_map->val;
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
-                set(age_map, x, y, (timestamp_t)myrand());
+                set(_age_map, x, y, (timestamp_t)myrand());
             }
         }
     }
@@ -87,22 +87,22 @@ void Thing::delete_age_map (void)
 {_
     if (monstp) {
         verify(monstp);
-        if (monstp->age_map) {
-            oldptr(monstp->age_map);
-            delete monstp->age_map;
-            monstp->age_map = 0;
+        if (monstp->_age_map) {
+            oldptr(monstp->_age_map);
+            delete monstp->_age_map;
+            monstp->_age_map = 0;
         }
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// dmap_scent
+// _dmap_scent
 ////////////////////////////////////////////////////////////////////////////
 Dmap *Thing::get_dmap_scent (void)
 {_
     if (monstp) {
         verify(monstp);
-        return (monstp->dmap_scent);
+        return (monstp->_dmap_scent);
     } else {
         return (0);
     }
@@ -111,12 +111,12 @@ Dmap *Thing::get_dmap_scent (void)
 void Thing::new_dmap_scent (void)
 {_
     new_monst();
-    if (!monstp->dmap_scent) {
-        monstp->dmap_scent = new Dmap();
-        newptr(monstp->dmap_scent, "AgeMap");
+    if (!monstp->_dmap_scent) {
+        monstp->_dmap_scent = new Dmap();
+        newptr(monstp->_dmap_scent, "AgeMap");
 
-        auto dmap = monstp->dmap_scent->val;
-        for (auto y = 0; y < MAP_HEIGHT; y++) { 
+        auto dmap = monstp->_dmap_scent->val;
+        for (auto y = 0; y < MAP_HEIGHT; y++) {
             for (auto x = 0; x < MAP_WIDTH; x++) {
                 set(dmap, x, y, DMAP_IS_WALL);
             }
@@ -128,10 +128,10 @@ void Thing::delete_dmap_scent (void)
 {_
     if (monstp) {
         verify(monstp);
-        if (monstp->dmap_scent) {
-            oldptr(monstp->dmap_scent);
-            delete monstp->dmap_scent; 
-            monstp->dmap_scent = 0;
+        if (monstp->_dmap_scent) {
+            oldptr(monstp->_dmap_scent);
+            delete monstp->_dmap_scent;
+            monstp->_dmap_scent = 0;
         }
     }
 }
