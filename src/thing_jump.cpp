@@ -20,6 +20,10 @@ bool Thing::try_to_jump (void)
             continue;
         }
 
+        if (distance(mid_at, fpoint(x, y)) < 2) {
+            continue;
+        }
+
         if (!level->is_dungeon(x, y)) {
             continue;
         }
@@ -44,8 +48,20 @@ bool Thing::try_to_jump (void)
             }
         }
 
+        auto src = (last_blit_tl + last_blit_br) / 2;
+        auto dx = x - mid_at.x;
+        auto dy = y - mid_at.y;
+        auto w = TILE_WIDTH;
+        auto h = TILE_HEIGHT;
+        point dst(src.x + dx * w , src.y + dy * h );
+        level->new_particle(id, src, dst, size(w, h), d * 500,
+                            tile_index_to_tile(tile_curr));
+
+        is_jumping = true;
+        hide();
         move_to_immediately(fpoint(x, y));
-        wobble(5);
+        wobble(25);
+
         return (true);
     }
     return (false);

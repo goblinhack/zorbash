@@ -11,12 +11,22 @@
 #include "my_tile.h"
 #include "my_point.h"
 #include "my_gl.h"
+#include "my_thing.h"
+
+void Level::new_particle (ThingId id,
+                          point start, point stop, size sz, uint32_t dur,
+                          const Tilep tile)
+{
+    uint32_t now = time_update_time_milli();
+    all_particles.push_back(Particle(id, start, stop, pixel_map_at,
+                                     sz, now, now + dur, tile));
+}
 
 void Level::new_particle (point start, point stop, size sz, uint32_t dur,
                           const Tilep tile)
 {
     uint32_t now = time_update_time_milli();
-    all_particles.push_back(Particle(start, stop, pixel_map_at,
+    all_particles.push_back(Particle(NoThingId, start, stop, pixel_map_at,
                                      sz, now, now + dur, tile));
 }
 
@@ -43,6 +53,14 @@ void Level::display_particles (void)
             float t = p.timestamp_stop - p.timestamp_start;
             float dt = ((float)(now - p.timestamp_start)) / t;
             if (dt > 1) {
+                if (p.id.id) {
+                    auto t = thing_find(p.id);
+                    if (t) {
+                        t->log("end of jump");
+                        t->is_jumping = false;
+                        t->visible();
+                    }
+                }
                 return true;
             }
 

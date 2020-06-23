@@ -165,6 +165,7 @@ std::istream& operator>> (std::istream &in, Bits<Thingp &> my)
     /* uint32_t */ my.t->is_blitted         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_bouncing        = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_falling         = (bits32 >> shift) & 1; shift++;
+    /* uint32_t */ my.t->is_jumping         = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_dead            = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_facing_left     = (bits32 >> shift) & 1; shift++;
     /* uint32_t */ my.t->is_fadeup          = (bits32 >> shift) & 1; shift++;

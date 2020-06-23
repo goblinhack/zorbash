@@ -628,6 +628,7 @@ public:
     }
 
     void new_particle(point start, point end, size sz, uint32_t dur, Tilep tile);
+    void new_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile);
     void display_particles(void);
 
     void game_mark_dungeon_tiles(Dungeonp d);
