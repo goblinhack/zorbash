@@ -94,16 +94,16 @@ GAME_OBJECTS=				\
     $(OBJDIR)/string.o 			\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing_actionbar.o 	\
-    $(OBJDIR)/thing_attack.o 		\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_ai_goals.o 		\
     $(OBJDIR)/thing_ai_wander.o 	\
     $(OBJDIR)/thing_anim.o 		\
     $(OBJDIR)/thing_api.o 		\
     $(OBJDIR)/thing_astar.o 		\
+    $(OBJDIR)/thing_attack.o 		\
     $(OBJDIR)/thing_bounce.o 		\
-    $(OBJDIR)/thing_fall.o 		\
     $(OBJDIR)/thing_carry.o 		\
+    $(OBJDIR)/thing_chasm.o 		\
     $(OBJDIR)/thing_collision.o 	\
     $(OBJDIR)/thing_cursor.o 		\
     $(OBJDIR)/thing_cursor_path.o 	\
@@ -113,11 +113,10 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_door.o 		\
     $(OBJDIR)/thing_drop.o 		\
     $(OBJDIR)/thing_enemy.o 		\
-    $(OBJDIR)/thing_exit.o 		\
-    $(OBJDIR)/thing_chasm.o 		\
     $(OBJDIR)/thing_entrance.o 		\
+    $(OBJDIR)/thing_exit.o 		\
     $(OBJDIR)/thing_fadeup.o 		\
-    $(OBJDIR)/thing_wobble.o 		\
+    $(OBJDIR)/thing_fall.o 		\
     $(OBJDIR)/thing_fini.o 		\
     $(OBJDIR)/thing_gc.o 		\
     $(OBJDIR)/thing_health.o 		\
@@ -128,6 +127,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_id.o 		\
     $(OBJDIR)/thing_init.o 		\
     $(OBJDIR)/thing_items.o 		\
+    $(OBJDIR)/thing_jump.o 		\
     $(OBJDIR)/thing_lava.o 		\
     $(OBJDIR)/thing_level.o 		\
     $(OBJDIR)/thing_lifespan.o 		\
@@ -155,6 +155,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/thing_use.o 		\
     $(OBJDIR)/thing_water.o 		\
     $(OBJDIR)/thing_weapon.o 		\
+    $(OBJDIR)/thing_wobble.o 		\
     $(OBJDIR)/tile.o 			\
     $(OBJDIR)/time.o 			\
     $(OBJDIR)/token.o 			\

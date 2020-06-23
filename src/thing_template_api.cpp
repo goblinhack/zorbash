@@ -97,6 +97,7 @@ int Tp::is_active(void) const { return _is_active; }
 int Tp::is_attack_lunge(void) const { return _is_attack_lunge; }
 int Tp::is_attack_shove(void) const { return _is_attack_shove; }
 int Tp::is_attack_shove_chance_d1000(void) const { return _is_attack_shove_chance_d1000; }
+int Tp::is_jumper_chance_d1000(void) const { return _is_jumper_chance_d1000; }
 int Tp::is_attackable(void) const { return _is_attackable; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
@@ -160,8 +161,8 @@ int Tp::is_rrr3(void) const { return _is_rrr3; }
 int Tp::is_rrr4(void) const { return _is_rrr4; }
 int Tp::is_rrr5(void) const { return _is_rrr5; }
 int Tp::is_rrr6(void) const { return _is_rrr6; }
-int Tp::is_rrr7(void) const { return _is_rrr7; }
-int Tp::is_rrr8(void) const { return _is_rrr8; }
+int Tp::is_jumper_distance(void) const { return _is_jumper_distance; }
+int Tp::is_jumper(void) const { return _is_jumper; }
 int Tp::is_parent_slime(void) const { return _is_parent_slime; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
 int Tp::is_shovable(void) const { return _is_shovable; }
@@ -238,6 +239,7 @@ void Tp::set_is_active(int v) { _is_active = v; }
 void Tp::set_is_attack_lunge(int v) { _is_attack_lunge = v; }
 void Tp::set_is_attack_shove(int v) { _is_attack_shove = v; }
 void Tp::set_is_attack_shove_chance_d1000(int v) { _is_attack_shove_chance_d1000 = v; }
+void Tp::set_is_jumper_chance_d1000(int v) { _is_jumper_chance_d1000 = v; }
 void Tp::set_is_attackable(int v) { _is_attackable = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }
@@ -301,8 +303,8 @@ void Tp::set_is_rrr3(int v) { _is_rrr3 = v; }
 void Tp::set_is_rrr4(int v) { _is_rrr4 = v; }
 void Tp::set_is_rrr5(int v) { _is_rrr5 = v; }
 void Tp::set_is_rrr6(int v) { _is_rrr6 = v; }
-void Tp::set_is_rrr7(int v) { _is_rrr7 = v; }
-void Tp::set_is_rrr8(int v) { _is_rrr8 = v; }
+void Tp::set_is_jumper_distance(int v) { _is_jumper_distance = v; }
+void Tp::set_is_jumper(int v) { _is_jumper = v; }
 void Tp::set_is_parent_slime(int v) { _is_parent_slime = v; }
 void Tp::set_is_secret_door(int v) { _is_secret_door = v; }
 void Tp::set_is_shovable(int v) { _is_shovable = v; }
