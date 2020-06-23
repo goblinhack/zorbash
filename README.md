@@ -21,7 +21,7 @@
 <!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
 
 ```diff
-Zorbash is a roguelike that lets you choose the way you want play, turn-based or real-time.
+Zorbash is a roguelike that lets you choose the way you play, turn-based or real-time.
 
 How it works.
 
