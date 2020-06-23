@@ -11,7 +11,7 @@ using ThingId = struct ThingId_ {
 public:
     uint32_t id {};
     ThingId_ (uint32_t id) : id(id) {}
-    ThingId_ () {}
+    constexpr ThingId_ () {}
 
     bool operator< (const ThingId_& rhs) const {
         return (id < rhs.id);
@@ -29,5 +29,7 @@ public:
         return id != 0;
     }
 };
+
+constexpr auto NoThingId = ThingId_();
 
 #endif

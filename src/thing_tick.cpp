@@ -13,6 +13,10 @@
 
 bool Thing::achieve_goals_in_life (void)
 {_
+    if (is_jumping) {
+        return false;
+    }
+
     //
     // Don't do stuff too often
     //

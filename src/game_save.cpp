@@ -139,6 +139,7 @@ std::ostream& operator<< (std::ostream &out, Bits<const Thingp & > const my)
     /* uint32_t */ bits32 |= my.t->is_blitted         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_bouncing        << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_falling         << shift; shift++;
+    /* uint32_t */ bits32 |= my.t->is_jumping         << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_dead            << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_facing_left     << shift; shift++;
     /* uint32_t */ bits32 |= my.t->is_fadeup          << shift; shift++;

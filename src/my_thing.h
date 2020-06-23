@@ -168,6 +168,7 @@ public:
     uint32_t is_blitted:1         {};
     uint32_t is_bouncing:1        {};
     uint32_t is_falling:1         {};
+    uint32_t is_jumping:1         {};
     uint32_t is_dead:1            {};
     uint32_t is_facing_left:1     {};
     uint32_t is_fadeup:1          {};

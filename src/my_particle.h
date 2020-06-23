@@ -10,9 +10,25 @@
 #include "my_main.h"
 #include "my_point.h"
 #include "my_size.h"
+#include "my_thing_id.h"
 
 typedef class Particle_ {
 public:
+    Particle_(ThingId thing_id,
+              point start, point stop,
+              point pixel_map_at,
+              size sz,
+              uint32_t timestamp_start, uint32_t timestamp_stop,
+              Tilep tile) :
+        id(thing_id),
+        start(start),
+        stop(stop),
+        pixel_map_at(pixel_map_at),
+        sz(sz),
+        timestamp_start(timestamp_start),
+        timestamp_stop(timestamp_stop),
+        tile(tile) { }
+
     Particle_(point start, point stop,
               point pixel_map_at,
               size sz,
@@ -26,6 +42,7 @@ public:
         timestamp_stop(timestamp_stop),
         tile(tile) { }
 
+    ThingId id {};
     point start;
     point stop;
     point pixel_map_at;

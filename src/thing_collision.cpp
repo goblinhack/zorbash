@@ -829,7 +829,7 @@ bool Thing::collision_obstacle (Thingp it)
     if (it == this) {
         return (false);
     }
-    if (it->is_hidden || it->is_falling) {
+    if (it->is_hidden || it->is_falling || it->is_jumping) {
         return (false);
     }
     if (it->is_movement_blocking()) {
@@ -1001,7 +1001,7 @@ _
                     continue;
                 }
 
-                if (it->is_hidden || it->is_falling) {
+                if (it->is_hidden || it->is_falling || it->is_jumping) {
                     continue;
                 }
 
@@ -1083,7 +1083,7 @@ _
                     continue;
                 }
 
-                if (it->is_hidden || it->is_falling) {
+                if (it->is_hidden || it->is_falling || it->is_jumping) {
                     continue;
                 }
 
