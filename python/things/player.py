@@ -24,6 +24,8 @@ def tp_init(name, text_name):
     x.set_is_corpse_on_death(True)
     x.set_is_fire_hater(100)
     x.set_is_interesting(True)
+    x.set_is_jumper(True)
+    x.set_is_jumper_distance(2)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_made_of_meat(True)

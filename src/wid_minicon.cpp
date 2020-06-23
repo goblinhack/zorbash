@@ -117,7 +117,8 @@ static void wid_minicon_log_ (std::wstring s)
     wid_minicon_flush();
 
     if (last_msg == s) {
-        s = last_msg + L" (x" + std::to_wstring(++last_msg_count) + L")";
+        s = last_msg + L" (x" + std::to_wstring(last_msg_count + 2) + L")";
+        last_msg_count++;
         wid_minicon_replace(wid_minicon_input_line, s);
     } else {
         last_msg = s;
@@ -198,7 +199,7 @@ static void wid_minicon_wid_create (void)
         wid_set_style(wid_minicon_container, 1);
         color c = GRAY;
         c.a = 150;
-            wid_set_color(wid_minicon_container, WID_COLOR_BG, c);
+        wid_set_color(wid_minicon_container, WID_COLOR_BG, c);
     }
 
   {

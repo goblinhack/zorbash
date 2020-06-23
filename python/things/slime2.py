@@ -35,10 +35,10 @@ def tp_init(name, text_name):
     x.set_is_movable(True)
     x.set_is_movement_blocking(True)
     x.set_normal_placement_rules(True)
-    x.set_stats_attack_dice("1d1+3")
+    x.set_stats_attack_dice("1d5")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)
-    x.set_stats_health_initial(5)
+    x.set_stats_health_initial(25)
     x.set_stats_move_speed_ms(1000)
     x.set_stats_strength(1)
     x.set_text_a_or_an("a");
@@ -92,7 +92,7 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="slime2", text_name="slime")
+    tp_init(name="slime2", text_name="super slime")
 
 init()
 

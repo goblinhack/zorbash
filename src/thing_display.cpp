@@ -73,9 +73,8 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
     }
 
     float bounce = get_bounce();
-    float fall = get_fall();
     float tileh = game->config.tile_pix_height;
-    float bh = (tileh / TILE_HEIGHT) * (int)(bounce - fall * TILE_HEIGHT);
+    float bh = (tileh / TILE_HEIGHT) * (int)(bounce * TILE_HEIGHT);
 
     float fadeup = get_fadeup();
     if (fadeup < 0) {
@@ -380,58 +379,60 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Flipping
     //
-    if (unlikely(tpp->gfx_animated_can_hflip())) {
-        if (get_timestamp_flip_start()) {
-            //
-            // Slow flip
-            //
-            auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
-            timestamp_t flip_time = 100;
-            timestamp_t flip_steps = flip_time;
+    auto owner = owner_get();
+    auto falling = is_falling || (owner && owner->is_falling);
+    if (likely(!falling)) {
+        if (unlikely(tpp->gfx_animated_can_hflip())) {
+            if (get_timestamp_flip_start()) {
+                //
+                // Slow flip
+                //
+                auto diff = time_get_time_ms_cached() - get_timestamp_flip_start();
+                timestamp_t flip_time = 100;
+                timestamp_t flip_steps = flip_time;
 
-            if (diff > flip_time) {
-                set_timestamp_flip_start(0);
-                is_facing_left = !is_facing_left;
-                if (is_dir_left() ||
-                    is_dir_tl()   ||
-                    is_dir_bl()) {
+                if (diff > flip_time) {
+                    set_timestamp_flip_start(0);
+                    is_facing_left = !is_facing_left;
+                    if (is_dir_left() ||
+                        is_dir_tl()   ||
+                        is_dir_bl()) {
+                        std::swap(blit_tl.x, blit_br.x);
+                    }
+                } else {
+                    if (is_dir_right() ||
+                        is_dir_tr()   ||
+                        is_dir_br()) {
+                        std::swap(blit_tl.x, blit_br.x);
+                    }
+                    float w = blit_br.x - blit_tl.x;
+                    float dw = w / flip_steps;
+                    float tlx = blit_tl.x;
+                    float brx = blit_br.x;
+
+                    blit_tl.x = tlx + dw * diff;
+                    blit_br.x = brx - dw * diff;
                     std::swap(blit_tl.x, blit_br.x);
                 }
             } else {
-                if (is_dir_right() ||
-                    is_dir_tr()   ||
-                    is_dir_br()) {
+                //
+                // Fast flip
+                //
+                if (is_dir_right() || is_dir_tr() || is_dir_br()) {
                     std::swap(blit_tl.x, blit_br.x);
                 }
-                float w = blit_br.x - blit_tl.x;
-                float dw = w / flip_steps;
-                float tlx = blit_tl.x;
-                float brx = blit_br.x;
-
-                blit_tl.x = tlx + dw * diff;
-                blit_br.x = brx - dw * diff;
-                std::swap(blit_tl.x, blit_br.x);
-            }
-        } else {
-            //
-            // Fast flip
-            //
-            if (is_dir_right() || is_dir_tr() || is_dir_br()) {
-                std::swap(blit_tl.x, blit_br.x);
             }
         }
-    }
 
-    if (unlikely(tpp->gfx_animated_can_vflip())) {
-        if (is_dir_down() || is_dir_br() || is_dir_bl()) {
-            std::swap(blit_tl.y, blit_br.y);
+        if (unlikely(tpp->gfx_animated_can_vflip())) {
+            if (is_dir_down() || is_dir_br() || is_dir_bl()) {
+                std::swap(blit_tl.y, blit_br.y);
+            }
         }
     }
 
     pre_effect_blit_tl = blit_tl;
     pre_effect_blit_br = blit_br;
-
-    auto owner = owner_get();
 
     //
     // Boing.
@@ -451,12 +452,12 @@ bool Thing::get_coords (point &blit_tl,
     //
     // Waaaaaaah
     //
-    if (is_falling || (owner && owner->is_falling)) {
+    if (falling) {
         float fall = get_fall();
         if (owner) {
             fall = owner->get_fall();
         }
-        auto s = ((blit_br.x - blit_tl.x - 1) / 2) * fall;
+        auto s = ((blit_br.y - blit_tl.y - 1) / 2) * fall;
         blit_tl.x += s;
         blit_br.x -= s;
         blit_tl.y += s;
