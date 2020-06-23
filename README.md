@@ -21,16 +21,18 @@
 <!-- may be enough to drive the Zorbashians out. And then we can be free again. -->
 
 ```diff
-Zorbash is a fusion of turn based and real-time based gaming, called "borrowed time",
-which allows the player to do lots of moves in quick succession. The monsters will
-get the same number of moves, but they move at their own pace. Watch out if you clock
-up too many moves ahead. If you get stuck, the monsters might get lots of free hits
-at you. Alternatively, race through the level as quick as you want, but never pause.
-Or methodically move one step at a time, letting the monsters move in sync for a more
-classical roguelike experience.
+Zorbash is a fusion of turn based and real-time based gaming I call "borrowed time".
 
-This is work in progress. It's sort of playable right now but only one monster type.
-Stay tuned.
+This allows the player to do lots of moves in quick succession. The monsters will
+get the same number of moves, but they move at their own slow or fast pace.
+
+This can lead to a shock if you race around the level and bump into a monster with
+lots of saved up attacks!
+
+So play your own way, real-time or turn-based.
+
+This is work in progress. It's sort of playable right now but probably way too tough.
+Comments and suggestions welcome at this early stage.
 ```
 ![Alt text](screenshot.1.png?raw=true "")
 ![Alt text](screenshot.2.png?raw=true "")
