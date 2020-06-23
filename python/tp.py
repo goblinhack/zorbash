@@ -194,11 +194,11 @@ class Tp:
     def set_is_rrr6(self, value):
         zx.tp_set_is_rrr6(self, value)
 
-    def set_is_rrr7(self, value):
-        zx.tp_set_is_rrr7(self, value)
+    def set_is_jumper_distance(self, value):
+        zx.tp_set_is_jumper_distance(self, value)
 
-    def set_is_rrr8(self, value):
-        zx.tp_set_is_rrr8(self, value)
+    def set_is_jumper(self, value):
+        zx.tp_set_is_jumper(self, value)
 
     def set_is_parent_slime(self, value):
         zx.tp_set_is_parent_slime(self, value)
@@ -277,6 +277,9 @@ class Tp:
 
     def set_is_attack_shove_chance_d1000(self, value):
         zx.tp_set_is_attack_shove_chance_d1000(self, value)
+
+    def set_is_jumper_chance_d1000(self, value):
+        zx.tp_set_is_jumper_chance_d1000(self, value)
 
     def set_is_chasm(self, value):
         zx.tp_set_is_chasm(self, value)

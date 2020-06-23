@@ -89,6 +89,15 @@ bool Thing::achieve_goals_in_life (void)
         return true;
     }
 
+    if (is_jumper()) {
+        if ((int)random_range(0, 1000) < tp()->is_jumper_chance_d1000()) {
+            if (try_to_jump()) {
+                is_tick_done = true;
+                return true;
+            }
+        }
+    }
+
     //
     // If this thing has AI, it can try and reach goals
     //

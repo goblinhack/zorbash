@@ -609,6 +609,11 @@ int Thing::is_attack_shove_chance_d1000(void) const
     return (tp()->is_attack_shove_chance_d1000());
 }
 
+int Thing::is_jumper_chance_d1000(void) const
+{_
+    return (tp()->is_jumper_chance_d1000());
+}
+
 int Thing::is_hazard(void) const
 {_
     return (tp()->is_hazard());
@@ -689,14 +694,14 @@ int Thing::is_rrr6(void) const
     return (tp()->is_rrr6());
 }
 
-int Thing::is_rrr7(void) const
+int Thing::is_jumper_distance(void) const
 {_
-    return (tp()->is_rrr7());
+    return (tp()->is_jumper_distance());
 }
 
-int Thing::is_rrr8(void) const
+int Thing::is_jumper(void) const
 {_
-    return (tp()->is_rrr8());
+    return (tp()->is_jumper());
 }
 
 int Thing::is_parent_slime(void) const

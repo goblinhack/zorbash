@@ -132,6 +132,7 @@ private:
     int _is_attack_lunge {};
     int _is_attack_shove {};
     int _is_attack_shove_chance_d1000 {};
+    int _is_jumper_chance_d1000 {};
     int _is_attackable {};
     int _is_bleeder {};
     int _is_blood {};
@@ -191,8 +192,8 @@ private:
     int _is_rrr4 {};
     int _is_rrr5 {};
     int _is_rrr6 {};
-    int _is_rrr7 {};
-    int _is_rrr8 {};
+    int _is_jumper_distance {};
+    int _is_jumper {};
     int _is_parent_slime {};
     int _is_secret_door {};
     int _is_shovable {};
@@ -382,6 +383,7 @@ public:
     int is_attack_lunge(void) const;
     int is_attack_shove(void) const;
     int is_attack_shove_chance_d1000(void) const;
+    int is_jumper_chance_d1000(void) const;
     int is_attackable(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
@@ -445,8 +447,8 @@ public:
     int is_rrr4(void) const;
     int is_rrr5(void) const;
     int is_rrr6(void) const;
-    int is_rrr7(void) const;
-    int is_rrr8(void) const;
+    int is_jumper_distance(void) const;
+    int is_jumper(void) const;
     int is_parent_slime(void) const;
     int is_secret_door(void) const;
     int is_shovable(void) const;
@@ -523,6 +525,7 @@ public:
     void set_is_attack_lunge(int);
     void set_is_attack_shove(int);
     void set_is_attack_shove_chance_d1000(int);
+    void set_is_jumper_chance_d1000(int);
     void set_is_attackable(int);
     void set_is_bleeder(int);
     void set_is_blood(int);
@@ -582,8 +585,8 @@ public:
     void set_is_rrr4(int);
     void set_is_rrr5(int);
     void set_is_rrr6(int);
-    void set_is_rrr7(int);
-    void set_is_rrr8(int);
+    void set_is_jumper_distance(int);
+    void set_is_jumper(int);
     void set_is_parent_slime(int);
     void set_is_secret_door(int);
     void set_is_shovable(int);

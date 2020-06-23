@@ -640,6 +640,8 @@ public:
     bool get_resurrect_success(void) const;
     const Dice& get_resurrect_dice(void) const;
 
+    bool try_to_jump(void);
+
     ThingShoved try_to_shove(Thingp it, fpoint delta);
     ThingShoved try_to_shove(fpoint future_pos);
     ThingShoved try_to_shove_into_hazard(Thingp it, fpoint delta);
@@ -755,6 +757,7 @@ public:
     int is_attack_lunge(void) const;
     int is_attack_shove(void) const;
     int is_attack_shove_chance_d1000(void) const;
+    int is_jumper_chance_d1000(void) const;
     int is_attackable(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
@@ -815,8 +818,8 @@ public:
     int is_rrr4(void) const;
     int is_rrr5(void) const;
     int is_rrr6(void) const;
-    int is_rrr7(void) const;
-    int is_rrr8(void) const;
+    int is_jumper_distance(void) const;
+    int is_jumper(void) const;
     int is_parent_slime(void) const;
     int is_secret_door(void) const;
     int is_shovable(void) const;

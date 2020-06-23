@@ -70,10 +70,10 @@
 #include "my_pcg_basic.h"
 
 #define myrand()                     pcg32_random()
-#define mysrand(a)                   pcg32_srandom(a,a)
+#define mysrand(a)                   pcg32_srandom(a, a)
 
-#define random_range(a, b)           (pcg32_boundedrand(b - a) + a)
-#define random_range_inclusive(a, b) (pcg32_boundedrand(b - a + 1) + a)
+#define random_range(a, b)           (pcg32_boundedrand((b) - (a)) + (a))
+#define random_range_inclusive(a, b) (pcg32_boundedrand((b) - (a) + 1) + (a))
 
 ////////////////////////////////////////////////////////////////////////////
 // Misc
