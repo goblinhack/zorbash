@@ -78,8 +78,8 @@ private:
     //
     // Dice
     //
-    Dice _idle_tick_dice {};
-    std::string _idle_tick_dice_str;
+    Dice _on_idle_dice_do {};
+    std::string _on_idle_dice_do_str;
 
     Dice _lifespan_dice {};
     std::string _lifespan_dice_str;
@@ -241,9 +241,9 @@ private:
     int _weapon_use_distance {};
     std::string _light_color;
     std::string _name;
-    std::string _spawn_on_death;
+    std::string _spawn_on_shoved;
     std::string _str10;
-    std::string _str11;
+    std::string _on_death_do;
     std::string _str12;
     std::string _str1;
     std::string _str2;
@@ -271,10 +271,10 @@ public:
     //
     // Dice
     //
-    const Dice& idle_tick_dice(void) const;
+    const Dice& on_idle_dice_do(void) const;
     const int idle_tick(void) const;
-    const std::string& idle_tick_dice_str(void) const;
-    void set_idle_tick_dice(const std::string &);
+    const std::string& on_idle_dice_do_str(void) const;
+    void set_on_idle_dice_do(const std::string &);
 
     const Dice& lifespan_dice(void) const;
     const int lifespan(void) const;
@@ -332,10 +332,10 @@ public:
     const Tilemap *tp_x_tiles(void) const;
     const std::string& light_color(void) const;
     const std::string& name(void) const;
-    const std::string& spawn_on_death(void) const;
+    const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
     const std::string& str10(void) const;
-    const std::string& str11(void) const;
+    const std::string& on_death_do(void) const;
     const std::string& str12(void) const;
     const std::string& str2(void) const;
     const std::string& str3(void) const;
@@ -604,7 +604,7 @@ public:
     void set_light_color(const std::string &);
     void set_name(const std::string &);
     void set_normal_placement_rules(int);
-    void set_spawn_on_death(const std::string &);
+    void set_spawn_on_shoved(const std::string &);
     void set_stats01(int);
     void set_stats02(int);
     void set_stats03(int);
@@ -632,7 +632,7 @@ public:
     void set_stats_strength(int);
     void set_str1(const std::string &);
     void set_str10(const std::string &);
-    void set_str11(const std::string &);
+    void set_on_death_do(const std::string &);
     void set_str12(const std::string &);
     void set_str2(const std::string &);
     void set_str3(const std::string &);

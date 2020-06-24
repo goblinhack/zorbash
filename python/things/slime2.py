@@ -1,5 +1,12 @@
+import builtins
 import zx
 import tp
+
+def spawn(me, x, y):
+    zx.con("ELLO");
+    #zx.tp_spawn_monst(me, "slime1")
+    #zx.tp_spawn_monst(me, "slime1")
+    #zx.tp_spawn_monst(me, "slime1")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -44,6 +51,7 @@ def tp_init(name, text_name):
     x.set_stats_health_initial(25)
     x.set_stats_move_speed_ms(1000)
     x.set_stats_strength(1)
+    x.set_on_death_do("slime2.spawn()")
     x.set_text_a_or_an("a");
     x.set_text_hits("splats");
     x.set_tick_rate_tenths(3)
@@ -107,4 +115,3 @@ def init():
     tp_init(name="slime2", text_name="super slime")
 
 init()
-

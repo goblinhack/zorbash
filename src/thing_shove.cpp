@@ -76,7 +76,7 @@ ThingShoved Thing::try_to_shove (Thingp it, fpoint delta)
 
     if (it->is_dead_on_shove()) {
         it->dead("shoved");
-        auto spawn_what = it->spawn_on_death();
+        auto spawn_what = it->spawn_on_shoved();
         if (spawn_what != "") {
             auto spawn_at = it->mid_at + shove_delta;
             if (it->collision_check_only(spawn_at)) {

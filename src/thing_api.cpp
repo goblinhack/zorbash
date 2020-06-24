@@ -14,9 +14,9 @@
 //
 // Dice
 //
-const Dice& Thing::get_idle_tick_dice (void) const {_ return (tp()->idle_tick_dice()); }
-const std::string& Thing::get_idle_tick_dice_str (void) const {_ return (tp()->idle_tick_dice_str()); }
-int Thing::get_idle_tick (void) const {_ return (tp()->idle_tick_dice().roll()); }
+const Dice& Thing::get_on_idle_dice_do (void) const {_ return (tp()->on_idle_dice_do()); }
+const std::string& Thing::get_on_idle_dice_do_str (void) const {_ return (tp()->on_idle_dice_do_str()); }
+int Thing::get_idle_tick (void) const {_ return (tp()->on_idle_dice_do().roll()); }
 
 const Dice& Thing::get_nutrition_dice (void) const {_ return (tp()->nutrition_dice()); }
 const std::string& Thing::get_nutrition_dice_str (void) const {_ return (tp()->nutrition_dice_str()); }
@@ -3578,10 +3578,10 @@ const std::string& Thing::str7 (void) const {_ return (tp()->str7()); }
 const std::string& Thing::str8 (void) const {_ return (tp()->str8()); }
 const std::string& Thing::str9 (void) const {_ return (tp()->str9()); }
 const std::string& Thing::str10 (void) const {_ return (tp()->str10()); }
-const std::string& Thing::str11 (void) const {_ return (tp()->str11()); }
+const std::string& Thing::on_death_do (void) const {_ return (tp()->on_death_do()); }
 const std::string& Thing::str12 (void) const {_ return (tp()->str12()); }
 const std::string& Thing::text_hits (void) const {_ return (tp()->text_hits()); }
-const std::string& Thing::spawn_on_death (void) const {_ return (tp()->spawn_on_death()); }
+const std::string& Thing::spawn_on_shoved (void) const {_ return (tp()->spawn_on_shoved()); }
 const std::string& Thing::text_name (void) const {_ return (tp()->text_name()); }
 const std::string& Thing::light_color (void) const {_ return (tp()->light_color()); }
 const std::string& Thing::weapon_carry_anim (void) const {_ return (tp()->weapon_carry_anim()); }

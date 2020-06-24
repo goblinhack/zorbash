@@ -628,9 +628,9 @@ public:
     int get_nutrition(void) const;
     const Dice& get_nutrition_dice(void) const;
 
-    const std::string& get_idle_tick_dice_str(void) const;
+    const std::string& get_on_idle_dice_do_str(void) const;
     int get_idle_tick(void) const;
-    const Dice& get_idle_tick_dice(void) const;
+    const Dice& get_on_idle_dice_do(void) const;
 
     const std::string& get_lifespan_dice_str(void) const;
     int get_lifespan(void) const;
@@ -705,10 +705,10 @@ public:
     bool will_prefer_terrain(const Thingp it);
     const char *to_cstring(void) const;
     const std::string& light_color(void) const;
-    const std::string& spawn_on_death(void) const;
+    const std::string& spawn_on_shoved(void) const;
     const std::string& str1(void) const;
     const std::string& str10(void) const;
-    const std::string& str11(void) const;
+    const std::string& on_death_do(void) const;
     const std::string& str12(void) const;
     const std::string& str2(void) const;
     const std::string& str3(void) const;
