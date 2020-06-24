@@ -51,10 +51,12 @@ bool Thing::try_to_jump (void)
         auto src = (last_blit_tl + last_blit_br) / 2;
         auto dx = x - mid_at.x;
         auto dy = y - mid_at.y;
-        auto w = TILE_WIDTH;
-        auto h = TILE_HEIGHT;
-        point dst(src.x + dx * w , src.y + dy * h );
-        level->new_particle(id, src, dst, size(w, h), d * 500,
+        auto tw = TILE_WIDTH;
+        auto th = TILE_HEIGHT;
+        auto sz = size(last_blit_br.x - last_blit_tl.x,
+                       last_blit_br.y - last_blit_tl.y);
+        point dst(src.x + dx * tw , src.y + dy * th );
+        level->new_particle(id, src, dst, sz, 500,
                             tile_index_to_tile(tile_curr));
 
         is_jumping = true;

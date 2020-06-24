@@ -24,6 +24,7 @@ Thing::~Thing_ (void)
 void Thing::destroy (void)
 {_
     verify(this);
+    log("~Thing");
 
     if (is_loggable_for_unimportant_stuff()) {
         log("destroy");
@@ -37,13 +38,6 @@ void Thing::destroy (void)
 
     level_pop();
     level_leave();
-
-    {
-        auto f = level->all_gc_things.find(id);
-        if (f != level->all_gc_things.end()) {
-            level->all_gc_things.erase(f);
-        }
-    }
 
     unwield("owner is destroyed");
 
@@ -64,6 +58,16 @@ void Thing::destroy (void)
     delete_dmap_scent();
     delete_age_map();
     delete_light();
+
+    {
+        auto f = level->all_gc_things.find(id);
+        if (f != level->all_gc_things.end()) {
+            log("remove from gc");
+            level->all_gc_things.erase(f);
+        } else {
+            log("no need to gc");
+        }
+    }
 
     if (is_loggable_for_unimportant_stuff()) {
         log("destroyed");

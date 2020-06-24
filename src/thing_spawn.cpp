@@ -49,7 +49,8 @@ bool Thing::spawn_next_to (const std::string& what)
 
     auto chosen = possible[random_range(0, cands)];
 
-    level->thing_new(what, chosen);
+    auto c = level->thing_new(what, chosen);
+    c->inherit_from(this);
 
     return (true);
 }
@@ -91,7 +92,8 @@ bool Thing::spawn_next_to_or_on_monst (const std::string& what)
 
     auto chosen = possible[random_range(0, cands)];
 
-    level->thing_new(what, chosen);
+    auto c = level->thing_new(what, chosen);
+    c->inherit_from(this);
 
     return (true);
 }
@@ -131,7 +133,8 @@ bool Thing::spawn_fire (const std::string& what)
 
     auto chosen = possible[random_range(0, cands)];
 
-    level->thing_new(what, chosen);
+    auto c = level->thing_new(what, chosen);
+    c->inherit_from(this);
 
     return (true);
 }
