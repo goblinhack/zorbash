@@ -14,10 +14,10 @@
 //
 // Dice
 //
-const Dice& Tp::idle_tick_dice(void) const { return _idle_tick_dice; }
-const int Tp::idle_tick(void) const { return _idle_tick_dice.roll(); }
-const std::string& Tp::idle_tick_dice_str(void) const { return _idle_tick_dice_str; }
-void Tp::set_idle_tick_dice(const std::string &v) { _idle_tick_dice = v; _idle_tick_dice_str = v; }
+const Dice& Tp::on_idle_dice_do(void) const { return _on_idle_dice_do; }
+const int Tp::idle_tick(void) const { return _on_idle_dice_do.roll(); }
+const std::string& Tp::on_idle_dice_do_str(void) const { return _on_idle_dice_do_str; }
+void Tp::set_on_idle_dice_do(const std::string &v) { _on_idle_dice_do = v; _on_idle_dice_do_str = v; }
 
 const Dice& Tp::lifespan_dice(void) const { return _lifespan_dice; }
 const int Tp::lifespan(void) const { return _lifespan_dice.roll(); }
@@ -46,10 +46,10 @@ void Tp::set_resurrect_dice(const std::string &v) { _resurrect_dice = v; _resurr
 
 const std::string& Tp::light_color(void) const { return _light_color; }
 const std::string& Tp::name(void) const { return _name; }
-const std::string& Tp::spawn_on_death(void) const { return _spawn_on_death; }
+const std::string& Tp::spawn_on_shoved(void) const { return _spawn_on_shoved; }
 const std::string& Tp::str1(void) const { return _str1; }
 const std::string& Tp::str10(void) const { return _str10; }
-const std::string& Tp::str11(void) const { return _str11; }
+const std::string& Tp::on_death_do(void) const { return _on_death_do; }
 const std::string& Tp::str12(void) const { return _str12; }
 const std::string& Tp::str2(void) const { return _str2; }
 const std::string& Tp::str3(void) const { return _str3; }
@@ -319,7 +319,7 @@ void Tp::set_is_weapon(int v) { _is_weapon = v; }
 void Tp::set_light_color(const std::string &v) { _light_color = v; }
 void Tp::set_name(const std::string &v) { _name = v; }
 void Tp::set_normal_placement_rules(int v) { _normal_placement_rules = v; }
-void Tp::set_spawn_on_death(const std::string &v) { _spawn_on_death = v; }
+void Tp::set_spawn_on_shoved(const std::string &v) { _spawn_on_shoved = v; }
 void Tp::set_stats01(int v) { _stats01 = v; }
 void Tp::set_stats02(int v) { _stats02 = v; }
 void Tp::set_stats03(int v) { _stats03 = v; }
@@ -348,7 +348,7 @@ void Tp::set_stats_move_speed_ms(int v) { _stats_move_speed_ms = v; }
 void Tp::set_stats_strength(int v) { _stats_strength = v; }
 void Tp::set_str1(const std::string &v) { _str1 = v; }
 void Tp::set_str10(const std::string &v) { _str10 = v; }
-void Tp::set_str11(const std::string &v) { _str11 = v; }
+void Tp::set_on_death_do(const std::string &v) { _on_death_do = v; }
 void Tp::set_str12(const std::string &v) { _str12 = v; }
 void Tp::set_str2(const std::string &v) { _str2 = v; }
 void Tp::set_str3(const std::string &v) { _str3 = v; }

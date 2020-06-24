@@ -146,20 +146,20 @@ class Tp:
     def set_str10(self, value):
         zx.tp_set_str10(self, value)
 
-    def set_str11(self, value):
-        zx.tp_set_str11(self, value)
+    def set_on_death_do(self, value):
+        zx.tp_set_on_death_do(self, value)
 
     def set_str12(self, value):
         zx.tp_set_str12(self, value)
 
-    def set_idle_tick_dice(self, value):
-        zx.tp_set_idle_tick_dice(self, value)
+    def set_on_idle_dice_do(self, value):
+        zx.tp_set_on_idle_dice_do(self, value)
 
     def set_text_hits(self, value):
         zx.tp_set_text_hits(self, value)
 
-    def set_spawn_on_death(self, value):
-        zx.tp_set_spawn_on_death(self, value)
+    def set_spawn_on_shoved(self, value):
+        zx.tp_set_spawn_on_shoved(self, value)
 
     def set_text_a_or_an(self, value):
         zx.tp_set_text_a_or_an(self, value)

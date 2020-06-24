@@ -18,7 +18,7 @@ def tp_init(name, text_name):
     x.set_gfx_oversized_but_sitting_on_the_ground(True)
     x.set_gfx_show_outlined(True)
     x.set_gfx_small_shadow_caster(True)
-    x.set_idle_tick_dice("1d2+10:small_fire.spawn()")
+    x.set_on_idle_dice_do("1d2+10:small_fire.spawn()")
     x.set_is_active(True)
     x.set_is_fire(True)
     x.set_is_interesting(True)

@@ -10,6 +10,7 @@
 #include "my_dmap.h"
 #include "my_sprintf.h"
 #include "my_thing.h"
+#include "my_python.h"
 #include "my_log.h"
 
 void Thing::kill (const char *reason)
@@ -34,6 +35,21 @@ void Thing::kill (const char *reason)
 
     if (is_resurrectable()) {
         set_tick_resurrect_when(game->tick_current + get_resurrect());
+    }
+
+    auto on_death = on_death_do();
+    if (!std::empty(on_death)) {
+        auto t = split_tokens(on_death, '.');
+        if (t.size() == 2) {
+            auto mod = t[0];
+            auto fn = t[1];
+CON("%s  %s", mod.c_str(),fn.c_str());
+            py_call_void_fn(mod.c_str(), fn.c_str(),
+                            id.id, (int)mid_at.x, (int)mid_at.y);
+        } else {
+            ERR("bad on_death call [%s] expected mod:function, got %d elems",
+                on_death.c_str(), (int)on_death.size());
+        }
     }
 
     const auto tpp = tp();
