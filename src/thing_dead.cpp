@@ -82,6 +82,7 @@ void Thing::kill (const char *reason)
         }
     }
 
+    log("need to gc");
     auto result = level->all_gc_things.insert(std::pair(id, this));
     if (result.second == false) {
         err("failed to insert into gc thing map");

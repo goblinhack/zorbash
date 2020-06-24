@@ -94,6 +94,7 @@ GAME_OBJECTS=				\
     $(OBJDIR)/string.o 			\
     $(OBJDIR)/tex.o 			\
     $(OBJDIR)/thing_actionbar.o 	\
+    $(OBJDIR)/thing_inherit.o 		\
     $(OBJDIR)/thing_ai.o 		\
     $(OBJDIR)/thing_ai_goals.o 		\
     $(OBJDIR)/thing_ai_wander.o 	\

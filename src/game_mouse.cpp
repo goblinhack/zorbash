@@ -30,17 +30,19 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     //
     // Close enough to attack?
     //
-    if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
-        (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
-        int x = level->cursor->mid_at.x;
-        int y = level->cursor->mid_at.y;
-        FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
-            if (t != level->player) {
-                level->player->attack(level->cursor->mid_at);
-                return (true);
+    if (level->cursor) {_
+        if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
+            (std::abs(player->mid_at.y - level->cursor->mid_at.y) <= 1)) {
+            int x = level->cursor->mid_at.x;
+            int y = level->cursor->mid_at.y;
+            FOR_ALL_INTERESTING_THINGS(level, t, x, y) {
+                if (t != level->player) {
+                    level->player->attack(level->cursor->mid_at);
+                    return (true);
+                }
             }
+            FOR_ALL_THINGS_END()
         }
-        FOR_ALL_THINGS_END()
     }
     return (false);
 }
@@ -48,9 +50,5 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
 uint8_t
 game_mouse_up (int32_t x, int32_t y, uint32_t button)
 {_
-    if (!game) {
-        return (false);
-    }
-
     return (false);
 }
