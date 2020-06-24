@@ -1034,52 +1034,6 @@ static void ascii_blit (void)
     }
 
     //
-    // Tiles outline
-    //
-#if 0
-    tile_y = 0;
-    for (y = 0; y < ASCII_HEIGHT; y++) {
-
-        tile_x = 0;
-        for (x = 0; x < ASCII_WIDTH; x++) {
-
-            const AsciiCell *cell = &getref(cells, x, y);
-
-            point tile_tl;
-            point tile_br;
-
-            tile_tl.x = tile_x;
-            tile_tl.y = tile_y;
-            tile_br.x = tile_x + game->config.ascii_gl_width;
-            tile_br.y = tile_y + game->config.ascii_gl_height;
-
-            if (cell->bg2_tile) {
-                color bg2_color_tl = cell->bg2_color_tl;
-                color bg2_color_tr = cell->bg2_color_tr;
-                color bg2_color_bl = cell->bg2_color_bl;
-                color bg2_color_br = cell->bg2_color_br;
-
-                tile_blit_outline_section_colored(
-                   cell->bg2_tile,
-                   point(cell->bg2_tx, cell->bg2_ty),
-                   point(cell->bg2_tx + cell->bg2_dx,
-                          cell->bg2_ty + cell->bg2_dy),
-                   tile_tl, tile_br,
-                   bg2_color_tl,
-                   bg2_color_tr,
-                   bg2_color_bl,
-                   bg2_color_br,
-                   0.05 / cell->bg2_dx);
-            }
-
-            tile_x += game->config.ascii_gl_width;
-        }
-
-        tile_y += game->config.ascii_gl_height;
-    }
-#endif
-
-    //
     // Tiles
     //
     tile_y = 0;

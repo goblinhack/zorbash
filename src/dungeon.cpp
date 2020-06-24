@@ -1783,14 +1783,10 @@ int Dungeon::draw_corridor (point start, point end, char w)
     dmap_process(&d, dmap_start, dmap_end);
 
     auto p = dmap_solve(&d, start);
-#if 0
-    dmap_print(&d, start, dmap_start, dmap_end);
-#endif
 
     //
     // Too long a corridor?
     //
-#if 1
     if (p.size() > 25) {
         for (auto c : p) {
             putc(c.x, c.y, MAP_DEPTH_FLOOR, Charmap::DEBUG);
@@ -1798,7 +1794,6 @@ int Dungeon::draw_corridor (point start, point end, char w)
         DBG("failed to create corridor, too long a corridor");
         return (0);
     }
-#endif
 
     //
     // Check we can reach the end point
@@ -3369,21 +3364,6 @@ void Dungeon::water_gen (uint8_t map_fill_prob,
     }
 
     for (i=0; i < MAP_GENERATIONS; i++) {
-
-#if 0
-        for (y=2; y < maze_h-2; y++) {
-            for (x=2; x < maze_w-2; x++) {
-                if (get(map_curr, x, y)) {
-                    printf("W");
-                } else {
-                    printf(" ");
-                }
-            }
-            printf("\n");
-        }
-printf("----------------------------------\n");
-#endif
-
         cave_generation();
         std::copy(mbegin(map_save), mend(map_save), mbegin(map_curr));
         map_save = {};

@@ -363,10 +363,11 @@ uint8_t command_handle (const char *input,
     matches = command_matches(input, expandedtext, false, false,
                               execute_command, context);
     if (matches == 0) {
-#if 0
-        CON(">%%fg=red$Unknown command: \"%s\"%%fg=reset$", input);
-        return (false);
-#endif
+        //
+        // If unknown, run as python
+        //
+        // CON(">%%fg=red$Unknown command: \"%s\"%%fg=reset$", input);
+        // return (false);
         py_exec(input);
 
         history[g_history_at] = string_to_wstring(std::string(input));

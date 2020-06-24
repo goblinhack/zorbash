@@ -103,11 +103,6 @@ void dmap_process (Dmap *D, point tl, point br)
         set(D->val, x, maxy - 1, DMAP_IS_WALL);
     }
 
-#if 0
-    CON("dmap bounds %d,%d to %d,%d", minx, miny, maxx, maxy);
-    dmap_print(D);
-#endif
-
     for (y = miny + 1; y < maxy - 1; y++) {
         for (x = minx + 1; x < maxx - 1; x++) {
             set(orig, x, y, get(D->val, x, y));
@@ -124,19 +119,9 @@ void dmap_process (Dmap *D, point tl, point br)
         }
     }
 
-#if 0
-    dmap_print(D);
-
-    uint8_t count = 1;
-#endif
-
     do {
         changed = false;
 
-#if 0
-        printf("run %d %d %d\n", count, x, y);
-        count++;
-#endif
         for (y = miny + 1; y < maxy - 1; y++) {
             for (x = minx + 1; x < maxx - 1; x++) {
                 if (!get(orig_valid, x, y)) {
@@ -206,9 +191,6 @@ void dmap_process (Dmap *D, point tl, point br)
                 }
             }
         }
-#if 0
-        dmap_print(D);
-#endif
     } while (changed);
 
     //
