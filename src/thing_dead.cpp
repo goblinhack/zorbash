@@ -43,7 +43,10 @@ void Thing::kill (const char *reason)
         if (t.size() == 2) {
             auto mod = t[0];
             auto fn = t[1];
-CON("%s  %s", mod.c_str(),fn.c_str());
+            std::size_t found = fn.find("()");
+            if (found != std::string::npos) {
+                fn = fn.replace(found, 2, "");
+            }
             py_call_void_fn(mod.c_str(), fn.c_str(),
                             id.id, (int)mid_at.x, (int)mid_at.y);
         } else {

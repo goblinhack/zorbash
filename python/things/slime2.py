@@ -3,10 +3,9 @@ import zx
 import tp
 
 def spawn(me, x, y):
-    zx.con("ELLO");
-    #zx.tp_spawn_monst(me, "slime1")
-    #zx.tp_spawn_monst(me, "slime1")
-    #zx.tp_spawn_monst(me, "slime1")
+    zx.tp_spawn_next_to_or_on_monst(me, "slime1")
+    zx.tp_spawn_next_to_or_on_monst(me, "slime1")
+    zx.tp_spawn_next_to_or_on_monst(me, "slime1")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
