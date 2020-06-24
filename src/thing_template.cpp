@@ -130,8 +130,8 @@ void tp_init_after_loading (void)
 
 Tpp tp_random_monst (void)
 {_
-//CON("TODO using debug monster");
-//return (tp_find("mummy1"));
+CON("TODO using debug monster");
+return (tp_find("slime1"));
     if (unlikely(!tp_monst.size())) {
         ERR("no monsts found");
         return (nullptr);
