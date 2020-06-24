@@ -196,7 +196,6 @@ void Level::display_map (void)
     if (unlikely(game->config.gfx_show_hidden)) {
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         display_map_things(FBO_MAP, minx, miny, maxx, maxy);
     } else if (game->config.gfx_lights) {
         {
@@ -216,7 +215,6 @@ void Level::display_map (void)
             //
             blit_fbo_bind(FBO_MAP_HIDDEN);
             glClear(GL_COLOR_BUFFER_BIT);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             g_render_black_and_white = true;
             display_map_things(FBO_MAP_HIDDEN, minx, miny, maxx, maxy);
             g_render_black_and_white = false;
@@ -230,7 +228,6 @@ void Level::display_map (void)
             //
             blit_fbo_bind(FBO_MAP_VISIBLE);
             glClear(GL_COLOR_BUFFER_BIT);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
             glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
             blit_fbo(FBO_LIGHT);
@@ -260,7 +257,6 @@ void Level::display_map (void)
     } else {
         blit_fbo_bind(FBO_MAP);
         glClear(GL_COLOR_BUFFER_BIT);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         display_map_things(FBO_MAP, minx, miny, maxx, maxy);
     }
 
