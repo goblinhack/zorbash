@@ -43,6 +43,7 @@ public:
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_smoke {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_treasure {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_visited {};
+    std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_lit {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_wall {};
     std::array<std::array<bool, MAP_HEIGHT>, MAP_WIDTH> _is_water {};
     std::array<std::array<uint8_t, MAP_HEIGHT>, MAP_WIDTH> _fade_in_map {};
@@ -570,6 +571,58 @@ public:
     inline void unset_is_light_blocker_no_check (const int x, const int y)
     {
         set_no_check(_is_light_blocker, x, y, false);
+    }
+
+    inline bool is_lit (const point &p)
+    {
+        if (unlikely(is_oob(p.x, p.y))) {
+            return (false);
+        }
+        return (get(_is_lit, p.x, p.y));
+    }
+
+    inline bool is_lit_no_check (const point &p)
+    {
+        return (get_no_check(_is_lit, p.x, p.y));
+    }
+
+    inline bool is_lit (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return (false);
+        }
+        return (get(_is_lit, x, y));
+    }
+
+    inline bool is_lit_no_check (const int x, const int y)
+    {
+        return (get_no_check(_is_lit, x, y));
+    }
+
+    inline void set_is_lit (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_lit, x, y, true);
+    }
+
+    inline void set_is_lit_no_check (const int x, const int y)
+    {
+        set_no_check(_is_lit, x, y, true);
+    }
+
+    inline void unset_is_lit (const int x, const int y)
+    {
+        if (unlikely(is_oob(x, y))) {
+            return;
+        }
+        set(_is_lit, x, y, false);
+    }
+
+    inline void unset_is_lit_no_check (const int x, const int y)
+    {
+        set_no_check(_is_lit, x, y, false);
     }
 
     //

@@ -202,6 +202,7 @@ std::ostream& operator<<(std::ostream &out,
     /* _is_smoke */            out << bits(my.t->_is_smoke);
     /* _is_treasure */         out << bits(my.t->_is_treasure);
     /* _is_visited */          out << bits(my.t->_is_visited);
+    /* _is_lit */              out << bits(my.t->_is_lit);
     /* _is_wall */             out << bits(my.t->_is_wall);
     /* _is_water */            out << bits(my.t->_is_water);
     /* all_thing_ids_at */     out << bits(my.t->all_thing_ids_at);

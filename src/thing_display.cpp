@@ -15,6 +15,10 @@ void Thing::blit_non_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                           const point &blit_tl,
                                           const point &blit_br)
 {_
+    if (g_render_black_and_white) {
+        return;
+    }
+
     point shadow_bl(blit_tl.x, blit_br.y);
     point shadow_br(blit_br.x, blit_br.y);
     point shadow_tl = shadow_bl;
@@ -104,6 +108,10 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
                                       const point &blit_tl,
                                       const point &blit_br)
 {_
+    if (g_render_black_and_white) {
+        return;
+    }
+
     point shadow_tl = blit_tl;
     point shadow_br = blit_br;
 
@@ -131,6 +139,10 @@ void Thing::blit_player_owned_shadow (const Tpp &tpp, const Tilep &tile,
 void Thing::blit_shadow (const Tpp &tpp, const Tilep &tile,
                          const point &blit_tl, const point &blit_br)
 {_
+    if (g_render_black_and_white) {
+        return;
+    }
+
     if (unlikely(!game->config.gfx_lights)) {
         return;
     }
@@ -652,12 +664,21 @@ void Thing::blit_internal (point &blit_tl,
 {_
     auto tpp = tp();
 
-    if (unlikely(tpp->gfx_small_shadow_caster())) {
-        if (auto submerged = blit_begin_submerged()) {
-            blit_shadow(tpp, tile, blit_tl, blit_br);
-            blit_end_submerged(submerged);
-        } else {
-            blit_shadow(tpp, tile, blit_tl, blit_br);
+    if (g_render_black_and_white) {
+        if (is_monst()) {
+            if (!level->is_lit_no_check(mid_at.x, mid_at.y)) {
+                return;
+            }
+            c = BLACK;
+        }
+    } else {
+        if (unlikely(tpp->gfx_small_shadow_caster())) {
+            if (auto submerged = blit_begin_submerged()) {
+                blit_shadow(tpp, tile, blit_tl, blit_br);
+                blit_end_submerged(submerged);
+            } else {
+                blit_shadow(tpp, tile, blit_tl, blit_br);
+            }
         }
     }
 
