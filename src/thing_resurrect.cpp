@@ -10,17 +10,16 @@
 void Thing::resurrect_tick (void)
 {_
     //
-    // No respawn onto lava or things like that if we don't like that.
+    // Rise at the apointed time
     //
-    if (is_less_preferred_terrain(make_point(mid_at))) {
+    if (game->tick_current - get_tick_resurrect_when()) {
         return;
     }
 
     //
-    // Succeed on crit
+    // No respawn onto lava or things like that if we don't like that.
     //
-    auto crit_roll = get_resurrect_success();
-    if (!crit_roll) {
+    if (is_less_preferred_terrain(make_point(mid_at))) {
         return;
     }
 

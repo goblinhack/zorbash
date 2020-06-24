@@ -80,6 +80,7 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* int         */ in >> bits(my.t->stats_health_max);
     /* int         */ in >> bits(my.t->stats_strength);
     /* int         */ in >> bits(my.t->tick_rate_tenths);
+    /* int         */ in >> bits(my.t->tick_resurrect_when);
     /* point       */ in >> bits(my.t->level_changed_at);
     /* point       */ in >> bits(my.t->wander_target);
     /* std::array<uint32_t> */  in >> bits(my.t->actionbar_id);

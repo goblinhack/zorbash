@@ -37,7 +37,6 @@ int Thing::get_lifespan_initial (void) const {_ return (tp()->lifespan_dice().ro
 const Dice& Thing::get_resurrect_dice (void) const {_ return (tp()->resurrect_dice()); }
 const std::string& Thing::get_resurrect_dice_str (void) const {_ return (tp()->resurrect_dice_str()); }
 int Thing::get_resurrect (void) const {_ return (tp()->resurrect_dice().roll()); }
-bool Thing::get_resurrect_success (void) const {_ return (tp()->resurrect_dice().crit_roll_minus_modifier()); }
 
 void Thing::new_monst (void)
 {_
@@ -1366,6 +1365,64 @@ int Thing::incr_tick_rate_tenths (void)
     new_monst();
 //con("%s", __FUNCTION__);
     auto n = (monstp->tick_rate_tenths++);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+////////////////////////////////////////////////////////////////////////////
+// attack_resurrect_when
+////////////////////////////////////////////////////////////////////////////
+int Thing::get_tick_resurrect_when (void) const
+{_
+    if (monstp) {
+        verify(monstp);
+        return (monstp->tick_resurrect_when);
+    } else {
+        return (0);
+    }
+}
+
+int Thing::set_tick_resurrect_when (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->tick_resurrect_when = v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::decr_tick_resurrect_when (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->tick_resurrect_when -= v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::incr_tick_resurrect_when (int v)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->tick_resurrect_when += v);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::decr_tick_resurrect_when (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->tick_resurrect_when--);
+    if (is_player()) { game_status_wid_init(); }
+    return (n);
+}
+
+int Thing::incr_tick_resurrect_when (void)
+{_
+    new_monst();
+//con("%s", __FUNCTION__);
+    auto n = (monstp->tick_resurrect_when++);
     if (is_player()) { game_status_wid_init(); }
     return (n);
 }
