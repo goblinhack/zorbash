@@ -99,6 +99,7 @@ public:
     int          stats_strength = {};
     int          submerged_offset = {};      // GL co-orids
     int          tick_rate_tenths = {};
+    int          tick_resurrect_when = {};
     point        level_changed_at;           // Avoid level change loops
     point        wander_target;
     std::list<ThingId> carrying;
@@ -321,6 +322,13 @@ public:
     int incr_tick_rate_tenths(int);
     int decr_tick_rate_tenths(void);
     int incr_tick_rate_tenths(void);
+
+    int set_tick_resurrect_when(int);
+    int get_tick_resurrect_when(void) const;
+    int decr_tick_resurrect_when(int);
+    int incr_tick_resurrect_when(int);
+    int decr_tick_resurrect_when(void);
+    int incr_tick_resurrect_when(void);
 
     int set_stats01(int);
     int get_stats01(void) const;
@@ -638,7 +646,6 @@ public:
 
     const std::string& get_resurrect_dice_str(void) const;
     int get_resurrect(void) const;
-    bool get_resurrect_success(void) const;
     const Dice& get_resurrect_dice(void) const;
 
     bool try_to_jump(void);

@@ -32,6 +32,10 @@ void Thing::kill (const char *reason)
         MINICON("%s is dead, %s", text_The().c_str(), reason);
     }
 
+    if (is_resurrectable()) {
+        set_tick_resurrect_when(game->tick_current + get_resurrect());
+    }
+
     const auto tpp = tp();
     if (unlikely(!tpp)) {
         ERR("no tp");

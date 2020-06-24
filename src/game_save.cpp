@@ -63,6 +63,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* int         */ out << bits(my.t->stats_health_max);
     /* int         */ out << bits(my.t->stats_strength);
     /* int         */ out << bits(my.t->tick_rate_tenths);
+    /* int         */ out << bits(my.t->tick_resurrect_when);
     /* point       */ out << bits(my.t->level_changed_at);
     /* point       */ out << bits(my.t->wander_target);
     /* std::list<uint32_t> */   out << bits(my.t->carrying);
