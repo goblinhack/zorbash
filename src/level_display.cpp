@@ -75,7 +75,11 @@ void Level::display_map_things (int fbo,
                         continue;
                     }
                     FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (t->is_monst() ||
+                        if (t->is_monst()) {
+                            //t->blit();
+                            continue;
+                        }
+                        if (
                             t->owner_get() ||
                             t->get_light_count()) {
                             continue;

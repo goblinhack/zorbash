@@ -140,6 +140,7 @@ void Light::calculate (int last)
     float step_delta1 = 0.02;
     float step_delta2 = 0.05;
 
+    level->_is_lit = {};
     for (int i = 0; i < max_light_rays; i++) {
         auto r = &getref(ray, i);
         float step = 0.0;
@@ -158,6 +159,8 @@ void Light::calculate (int last)
             if (do_set_visited) {
                 level->set_visited_no_check(x, y);
             }
+
+            level->set_is_lit_no_check(x, y);
 
             if (level->is_light_blocker_no_check(x, y)) {
                 break;
@@ -393,7 +396,7 @@ void Light::render_triangle_fans (int last, int count)
 
         if (!flicker) {
             flicker_radius = strength *
-                            (1.0 + ((float)(random_range(0, 10) / 100.0)));
+                            (1.0 + ((float)(random_range(0, 5) / 100.0)));
         }
         flicker++;
 

@@ -37,6 +37,7 @@ void Level::clear (void)
     _is_smoke = {};
     _is_treasure = {};
     _is_visited = {};
+    _is_lit = {};
     _is_wall = {};
     _is_water = {};
 
