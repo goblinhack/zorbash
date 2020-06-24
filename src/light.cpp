@@ -275,7 +275,6 @@ void Light::render_triangle_fans (int last, int count)
     blit_fbo_bind(FBO_MAP);
     color c = RED;
     c.a = 150;
-#if 0
     glcolor(c);
     gl_blitline(blit_tl.x, blit_tl.y, blit_br.x, blit_tl.y);
     gl_blitline(blit_tl.x, blit_tl.y, blit_tl.x, blit_br.y);
@@ -285,7 +284,6 @@ void Light::render_triangle_fans (int last, int count)
     gl_blitline(blit_br.x, blit_tl.y, light_pos.x, light_pos.y);
     gl_blitline(blit_tl.x, blit_br.y, light_pos.x, light_pos.y);
     gl_blitline(blit_br.x, blit_br.y, light_pos.x, light_pos.y);
-#endif
 
     c = GREEN;
     c.a = 150;

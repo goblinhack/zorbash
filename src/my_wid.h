@@ -433,15 +433,8 @@ public:
     point abs_tl {};
     point abs_br {};
 
-#if 0
-    Texp tex {};
-#endif
     Tilep bg_tile {};
     Tilep fg_tile {};
-#if 0
-    Tilep first_tile {};
-    Tilep tile_curr {};
-#endif
 
     fsize texuv {};
 

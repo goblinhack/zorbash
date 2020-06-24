@@ -84,19 +84,5 @@ void Level::update_heatmap (void)
         }
     }
 
-#if 0
-    for (auto y = MAP_BORDER; y < MAP_HEIGHT - MAP_BORDER; y++) {
-        for (auto x = MAP_BORDER; x < MAP_WIDTH - MAP_BORDER; x++) {
-            if (get(_heatmap, x, y)) {
-printf("X");
-            } else {
-printf(".");
-            }
-        }
-printf("\n");
-    }
-printf("\n");
-#endif
-
     heatmap_valid = true;
 }

@@ -922,13 +922,6 @@ std::string to_string (Widp w)
     return (w->to_string);
 }
 
-#if 0
-const char * to_cstring (Widp w)
-{
-    return (to_string(w).c_str());
-}
-#endif
-
 std::string wid_name (Widp w)
 {_
     return (w->name);

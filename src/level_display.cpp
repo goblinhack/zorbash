@@ -75,11 +75,8 @@ void Level::display_map_things (int fbo,
                         continue;
                     }
                     FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) {
-                        if (t->is_monst()) {
-                            //t->blit();
-                            continue;
-                        }
-                        if (
+                        if (t->is_monst() ||
+                            t->is_floor() ||
                             t->owner_get() ||
                             t->get_light_count()) {
                             continue;
@@ -247,8 +244,6 @@ void Level::display_map (void)
             blit_fbo_bind(FBO_MAP);
             glClear(GL_COLOR_BUFFER_BIT);
             glcolor(WHITE);
-            glBlendFunc(GL_ONE, GL_ZERO);
-            blit_fbo(FBO_LIGHT);
             glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
             glcolor(GRAY50);
             blit_fbo(FBO_MAP_HIDDEN);
