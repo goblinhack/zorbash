@@ -22,7 +22,12 @@ bool Thing::cursor_path_pop_next_and_move (void)
             t->dead("end of life");
         } FOR_ALL_THINGS_END()
         monstp->move_path.erase(monstp->move_path.begin());
-        return (move(future_pos));
+        if (!move(future_pos)) {
+            cursor_path_stop();
+            return (false);
+        } else {
+            return (true);
+        }
     } else {
         return (false);
     }

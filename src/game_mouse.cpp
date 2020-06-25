@@ -30,6 +30,8 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
         return true;
     }
 
+    player->log("mouse move");
+
     //
     // Grab the current move path and start walking toward it. This will
     // consume one move by the player.
