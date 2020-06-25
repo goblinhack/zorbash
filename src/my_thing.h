@@ -984,5 +984,6 @@ public:
 
 bool things_overlap(Thingp t, Thingp o);
 bool things_overlap(Thingp t, fpoint t_at, Thingp o);
+bool things_overlap_attack(Thingp t, fpoint t_at, Thingp o);
 
 #endif // _MY_THING_H_

@@ -97,6 +97,7 @@ private:
     std::string _resurrect_dice_str;
 
     float _collision_radius {};
+    float _collision_attack_radius {};
     fsize _sz;
     int _ai_delay_after_moving_ms {};
     int _ai_obstacle {};
@@ -351,6 +352,7 @@ public:
     const std::string& weapon_carry_anim(void) const;
     const std::string& weapon_use_anim(void) const;
     float collision_radius(void) const;
+    float collision_attack_radius(void) const;
     int ai_delay_after_moving_ms(void) const;
     int ai_obstacle(void) const;
     int ai_scent_distance(void) const;
@@ -506,6 +508,7 @@ public:
     void set_collision_circle(int);
     void set_collision_hit_priority(int);
     void set_collision_radius(float);
+    void set_collision_attack_radius(float);
     void set_gfx_an_animation_only(int);
     void set_gfx_animated(int);
     void set_gfx_animated_can_hflip(int);

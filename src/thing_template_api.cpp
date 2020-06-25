@@ -64,6 +64,7 @@ const std::string& Tp::text_name(void) const { return _text_name; }
 const std::string& Tp::weapon_carry_anim(void) const { return _weapon_carry_anim; }
 const std::string& Tp::weapon_use_anim(void) const { return _weapon_use_anim; }
 float Tp::collision_radius(void) const { return _collision_radius; }
+float Tp::collision_attack_radius(void) const { return _collision_attack_radius; }
 int Tp::ai_delay_after_moving_ms(void) const { return _ai_delay_after_moving_ms; }
 int Tp::ai_obstacle(void) const { return _ai_obstacle; }
 int Tp::ai_scent_distance(void) const { return _ai_scent_distance; }
@@ -219,6 +220,7 @@ void Tp::set_collision_check(int v) { _collision_check = v; }
 void Tp::set_collision_circle(int v) { _collision_circle = v; }
 void Tp::set_collision_hit_priority(int v) { _collision_hit_priority = v; }
 void Tp::set_collision_radius(float v) { _collision_radius = v; }
+void Tp::set_collision_attack_radius(float v) { _collision_attack_radius = v; }
 void Tp::set_gfx_an_animation_only(int v) { _gfx_an_animation_only = v; }
 void Tp::set_gfx_animated(int v) { _gfx_animated = v; }
 void Tp::set_gfx_animated_can_hflip(int v) { _gfx_animated_can_hflip = v; }

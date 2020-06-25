@@ -3,9 +3,9 @@ import zx
 import tp
 
 def spawn(me, x, y):
-    zx.tp_spawn_next_to_or_on_monst(me, "slime1")
-    zx.tp_spawn_next_to_or_on_monst(me, "slime1")
-    zx.tp_spawn_next_to_or_on_monst(me, "slime1")
+    zx.tp_spawn_next_to(me, "slime1")
+    zx.tp_spawn_next_to(me, "slime1")
+    zx.tp_spawn_next_to(me, "slime1")
 
 def tp_init(name, text_name):
     x = tp.Tp(name, text_name)
@@ -17,6 +17,7 @@ def tp_init(name, text_name):
     x.set_collision_circle(True)
     x.set_collision_hit_priority(10)
     x.set_collision_radius(0.40)
+    x.set_collision_attack_radius(0.60)
     x.set_gfx_animated(True)
     x.set_gfx_animated_can_hflip(True)
     x.set_gfx_bounce_on_move(True)
@@ -35,7 +36,7 @@ def tp_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_jumper(True)
     x.set_is_jumper_chance_d1000(2)
-    x.set_is_jumper_on_low_hp_chance_d1000(1000)
+    x.set_is_jumper_on_low_hp_chance_d1000(500)
     x.set_is_jumper_distance(20)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)

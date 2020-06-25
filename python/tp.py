@@ -386,6 +386,9 @@ class Tp:
     def set_collision_radius(self, value):
         zx.tp_set_collision_radius(self, value)
 
+    def set_collision_attack_radius(self, value):
+        zx.tp_set_collision_attack_radius(self, value)
+
     def set_ai_delay_after_moving_ms(self, value):
         zx.tp_set_ai_delay_after_moving_ms(self, value)
 
