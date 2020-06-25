@@ -108,6 +108,12 @@ void Thing::level_enter (void)
             err("failed to insert into active thing map");
         }
     }
+
+    if (!level->cursor) {
+        if (!is_cursor()) {
+            level->cursor = level->thing_new("cursor", mid_at);
+        }
+    }
     level_push();
 }
 

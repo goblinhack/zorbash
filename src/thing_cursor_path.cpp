@@ -31,10 +31,22 @@ bool Thing::cursor_path_pop_next_and_move (void)
 void Thing::cursor_path_pop_first_move (void)
 {_
     if (game->cursor_move_path.size()) {
+        //
+        // A path to the target exists.
+        //
         new_monst();
         monstp->move_path = game->cursor_move_path;
         game->cursor_move_path.clear();
         cursor_path_pop_next_and_move();
+    } else if (level->cursor) {
+        //
+        // A path to the target does not exist. Jump?
+        //
+        point p = make_point(level->cursor->mid_at.x,
+                             level->cursor->mid_at.y);
+        if (try_to_jump(p)) {
+            game->tick_begin();
+        }
     }
 }
 

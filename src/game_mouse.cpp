@@ -12,13 +12,22 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     if (!game || !game->started) {
         return (false);
     }
+
     auto level = game->level;
     if (!level) {
         return (false);
     }
+
     auto player = level->player;
     if (!player) {
         return (false);
+    }
+
+    //
+    // If mid air, we're done. Let other things move.
+    //
+    if (player->is_jumping) {
+        return true;
     }
 
     //
@@ -26,9 +35,12 @@ game_mouse_down (int32_t x, int32_t y, uint32_t button)
     // consume one move by the player.
     //
     player->cursor_path_pop_first_move();
+    if (player->is_jumping) {
+        return true;
+    }
 
     //
-    // Close enough to attack?
+    // Have we moved close enough to attack?
     //
     if (level->cursor) {_
         if ((std::abs(player->mid_at.x - level->cursor->mid_at.x) <= 1) &&
