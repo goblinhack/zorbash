@@ -37,12 +37,12 @@ free attacks waiting.
 This is work in progress. It's sort of playable right now but probably way too tough.
 Comments and suggestions welcome at this early stage.
 ```
-![Alt text](screenshot.1.png?raw=true "")
-![Alt text](screenshot.2.png?raw=true "")
-![Alt text](screenshot.3.png?raw=true "")
-![Alt text](screenshot.4.png?raw=true "")
-![Alt text](screenshot.5.png?raw=true "")
-![Alt text](screenshot.6.png?raw=true "")
+![Alt text](pics/screenshot.1.png?raw=true "")
+![Alt text](pics/screenshot.2.png?raw=true "")
+![Alt text](pics/screenshot.3.png?raw=true "")
+![Alt text](pics/screenshot.4.png?raw=true "")
+![Alt text](pics/screenshot.5.png?raw=true "")
+![Alt text](pics/screenshot.6.png?raw=true "")
 <!--```diff -->
 <!--                       Hark! Hear now a tale untold -->
 <!--                       since ancient times of yore -->
