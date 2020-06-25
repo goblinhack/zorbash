@@ -12,8 +12,19 @@ bool Thing::try_to_jump (point to)
 {
     auto x = to.x;
     auto y = to.y;
+
+    if (is_player()) {
+        log("jump to %d,%d", x, y);
+    }
+
     if (level->is_oob(x, y)) {
         return false;
+    }
+
+    bool check_dest = true;
+
+    if (is_player()) {
+        check_dest = false;
     }
 
     auto fto = make_fpoint(to);
@@ -28,21 +39,32 @@ bool Thing::try_to_jump (point to)
         to = make_point(fto);
         x = to.x;
         y = to.y;
+        check_dest = true;
+        log("jump instead to %d,%d", x, y);
     }
 
-    if (!is_player()) {
+    if (is_monst()) {
         if (distance(mid_at, fpoint(x, y)) < 2) {
             return false;
         }
+    }
 
+    //
+    // No sneaky jumping onto doors to get passed them
+    //
+    if (level->is_rock(x, y) ||
+        level->is_door(x, y) ||
+        level->is_wall(x, y)) {
+        return false;
+    }
+
+    if (check_dest) {
         if (!level->is_dungeon(x, y)) {
             return false;
         }
 
         if (level->is_entrance(x, y) ||
             level->is_monst(x, y)    ||
-            level->is_rock(x, y)     ||
-            level->is_wall(x, y)     ||
             level->is_exit(x, y)) {
             return false;
         }
