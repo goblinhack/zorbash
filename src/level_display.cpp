@@ -28,7 +28,7 @@ void Level::display (void)
         screen_shake_end();
     }
 
-    display_particles();
+    display_external_particles();
 
     if (!minimap_valid) {
         update_minimap();
@@ -230,6 +230,7 @@ void Level::display_map (void)
             blit_fbo_bind(FBO_MAP_VISIBLE);
             glClear(GL_COLOR_BUFFER_BIT);
             display_map_things(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+            display_internal_particles();
             glBlendFunc(GL_DST_COLOR, GL_SRC_ALPHA_SATURATE);
             blit_fbo(FBO_LIGHT);
         }

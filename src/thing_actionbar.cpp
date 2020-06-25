@@ -35,9 +35,10 @@ void Thing::actionbar_particle (Thingp what, int slot)
             point j(random_range(0, TILE_WIDTH) - TILE_WIDTH / 2,
                     random_range(0, TILE_HEIGHT) - TILE_HEIGHT / 2);
             std::string name = "gold1." + std::to_string(random_range(1, 8));
-            level->new_particle(s + j, p,
-                                size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
-                                tile_find_mand(name));
+            level->new_external_particle(
+                     s + j, p,
+                     size(TILE_WIDTH / 2, TILE_HEIGHT / 2), 500,
+                     tile_find_mand(name));
         }
     } else {
         std::string name = "actionbar icon" + std::to_string(slot);
@@ -51,9 +52,10 @@ void Thing::actionbar_particle (Thingp what, int slot)
         p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
         p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
 
-        level->new_particle((last_blit_tl + last_blit_br) / 2, p,
-                            size(TILE_WIDTH, TILE_HEIGHT), 500,
-                            tile_index_to_tile(what->tile_curr));
+        level->new_external_particle(
+                 (last_blit_tl + last_blit_br) / 2, p,
+                 size(TILE_WIDTH, TILE_HEIGHT), 500,
+                 tile_index_to_tile(what->tile_curr));
     }
 }
 
@@ -82,9 +84,9 @@ void Thing::actionbar_particle (Thingp what, int slot, Thingp target)
     p.x = (game->config.inner_pix_width / ASCII_WIDTH) * p.x;
     p.y = (game->config.inner_pix_height / ASCII_HEIGHT) * p.y;
 
-    level->new_particle(p, where_to,
-                        size(TILE_WIDTH, TILE_HEIGHT), 500,
-                        tile_index_to_tile(what->tile_curr));
+    level->new_external_particle(p, where_to,
+                                 size(TILE_WIDTH, TILE_HEIGHT), 500,
+                                 tile_index_to_tile(what->tile_curr));
 }
 
 bool Thing::actionbar_id_insert (Thingp what)

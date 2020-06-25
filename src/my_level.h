@@ -129,9 +129,14 @@ public:
     float lava_step2 {};
 
     //
+    // For thing effects, like jumping
+    //
+    std::vector<Particle> all_internal_particles;
+
+    //
     // For things like move of items into inventory
     //
-    std::vector<Particle> all_particles;
+    std::vector<Particle> all_external_particles;
 
     /////////////////////////////////////////////////////////////////////////
     // not worth saving
@@ -680,9 +685,12 @@ public:
         set_no_check(_is_smoke, x, y, false);
     }
 
-    void new_particle(point start, point end, size sz, uint32_t dur, Tilep tile);
-    void new_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile);
-    void display_particles(void);
+    void new_internal_particle(point start, point end, size sz, uint32_t dur, Tilep tile);
+    void new_internal_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile);
+    void new_external_particle(point start, point end, size sz, uint32_t dur, Tilep tile);
+    void new_external_particle(ThingId, point start, point end, size sz, uint32_t dur, Tilep tile);
+    void display_internal_particles(void);
+    void display_external_particles(void);
 
     void game_mark_dungeon_tiles(Dungeonp d);
     void place_chasm(Dungeonp d, const std::string &what);
