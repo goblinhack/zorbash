@@ -657,6 +657,7 @@ public:
     const Dice& get_resurrect_dice(void) const;
 
     bool try_to_jump(void);
+    bool try_to_jump(point p);
     bool try_to_escape(void);
 
     ThingShoved try_to_shove(Thingp it, fpoint delta);
