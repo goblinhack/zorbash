@@ -182,17 +182,17 @@ class Tp:
     def set_is_rrr2(self, value):
         zx.tp_set_is_rrr2(self, value)
 
-    def set_is_rrr3(self, value):
-        zx.tp_set_is_rrr3(self, value)
+    def set_is_slime_parent(self, value):
+        zx.tp_set_is_slime_parent(self, value)
 
-    def set_is_rrr4(self, value):
-        zx.tp_set_is_rrr4(self, value)
+    def set_is_slime_eater(self, value):
+        zx.tp_set_is_slime_eater(self, value)
 
-    def set_is_rrr5(self, value):
-        zx.tp_set_is_rrr5(self, value)
+    def set_is_slime(self, value):
+        zx.tp_set_is_slime(self, value)
 
-    def set_is_rrr6(self, value):
-        zx.tp_set_is_rrr6(self, value)
+    def set_is_attack_eater(self, value):
+        zx.tp_set_is_attack_eater(self, value)
 
     def set_is_jumper_distance(self, value):
         zx.tp_set_is_jumper_distance(self, value)
@@ -200,14 +200,14 @@ class Tp:
     def set_is_jumper(self, value):
         zx.tp_set_is_jumper(self, value)
 
-    def set_is_parent_slime(self, value):
-        zx.tp_set_is_parent_slime(self, value)
+    def set_is_rrr4(self, value):
+        zx.tp_set_is_rrr4(self, value)
 
-    def set_is_baby_slime_eater(self, value):
-        zx.tp_set_is_baby_slime_eater(self, value)
+    def set_is_slime_baby_eater(self, value):
+        zx.tp_set_is_slime_baby_eater(self, value)
 
-    def set_is_baby_slime(self, value):
-        zx.tp_set_is_baby_slime(self, value)
+    def set_is_slime_baby(self, value):
+        zx.tp_set_is_slime_baby(self, value)
 
     def set_is_able_to_change_levels(self, value):
         zx.tp_set_is_able_to_change_levels(self, value)
@@ -407,8 +407,8 @@ class Tp:
     def set_is_meat_eater(self, value):
         zx.tp_set_is_meat_eater(self, value)
 
-    def set_is_made_of_meat(self, value):
-        zx.tp_set_is_made_of_meat(self, value)
+    def set_is_meat(self, value):
+        zx.tp_set_is_meat(self, value)
 
     def set_is_active(self, value):
         zx.tp_set_is_active(self, value)

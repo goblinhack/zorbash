@@ -16,13 +16,18 @@ bool Thing::will_avoid (const Thingp itp)
     auto me = tp();
     auto it = itp->tp();
 
-    if (me->is_made_of_meat()) {
+    if (me->is_meat()) {
         if (it->is_meat_eater()) {
             return (true);
         }
     }
-    if (me->is_baby_slime()) {
-        if (it->is_parent_slime()) {
+    if (me->is_slime_baby()) {
+        if (it->is_slime_parent()) {
+            return (true);
+        }
+    }
+    if (me->is_slime_baby()) {
+        if (it->is_slime_baby()) {
             return (true);
         }
     }
@@ -35,12 +40,12 @@ bool Thing::will_eat (const Thingp itp)
     auto it = itp->tp();
 
     if (me->is_meat_eater()) {
-        if (it->is_made_of_meat() || it->is_blood()) {
+        if (it->is_meat() || it->is_blood()) {
             return (true);
         }
     }
-    if (me->is_baby_slime_eater()) {
-        if (it->is_baby_slime()) {
+    if (me->is_slime_baby_eater()) {
+        if (it->is_slime_baby()) {
             return (true);
         }
     }

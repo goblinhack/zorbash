@@ -18,9 +18,12 @@ def tp_init(name, text_name):
     x.set_gfx_small_shadow_caster(True)
     x.set_is_active(True)
     x.set_is_attack_lunge(True)
+    x.set_is_attack_eater(True)
     x.set_is_attackable(True)
-    x.set_is_baby_slime(True)
-    x.set_is_baby_slime_eater(True)
+    x.set_is_slime(True)
+    x.set_is_slime_baby(True)
+    x.set_is_slime_baby_eater(True)
+    x.set_is_slime_eater(True)
     x.set_is_combustible(True)
     x.set_is_corpse_on_death(True)
     x.set_is_double_damage_from_fire(True)
@@ -29,8 +32,8 @@ def tp_init(name, text_name):
     x.set_is_interesting(True)
     x.set_is_jumper(True)
     x.set_is_jumper_chance_d1000(100)
-    x.set_is_jumper_on_low_hp_chance_d1000(500)
     x.set_is_jumper_distance(5)
+    x.set_is_jumper_on_low_hp_chance_d1000(500)
     x.set_is_loggable_for_important_stuff(True)
     x.set_is_loggable_for_unimportant_stuff(True)
     x.set_is_meat_eater(True)
@@ -38,6 +41,7 @@ def tp_init(name, text_name):
     x.set_is_movable(True)
     x.set_is_movement_blocking(True)
     x.set_normal_placement_rules(True)
+    x.set_nutrition_dice("1d4")
     x.set_stats_attack_dice("1d3")
     x.set_stats_defence(0)
     x.set_stats_health_hunger_pct(95)
@@ -88,7 +92,7 @@ def tp_init(name, text_name):
     x.update()
 
 def init():
-    tp_init(name="slime1", text_name="slime")
+    tp_init(name="slime1", text_name="baby slimer")
 
 init()
 
