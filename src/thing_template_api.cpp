@@ -98,6 +98,7 @@ int Tp::is_attack_lunge(void) const { return _is_attack_lunge; }
 int Tp::is_attack_shove(void) const { return _is_attack_shove; }
 int Tp::is_attack_shove_chance_d1000(void) const { return _is_attack_shove_chance_d1000; }
 int Tp::is_jumper_chance_d1000(void) const { return _is_jumper_chance_d1000; }
+int Tp::is_jumper_on_low_hp_chance_d1000(void) const { return _is_jumper_on_low_hp_chance_d1000; }
 int Tp::is_attackable(void) const { return _is_attackable; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_blood(void) const { return _is_blood; }
@@ -240,6 +241,7 @@ void Tp::set_is_attack_lunge(int v) { _is_attack_lunge = v; }
 void Tp::set_is_attack_shove(int v) { _is_attack_shove = v; }
 void Tp::set_is_attack_shove_chance_d1000(int v) { _is_attack_shove_chance_d1000 = v; }
 void Tp::set_is_jumper_chance_d1000(int v) { _is_jumper_chance_d1000 = v; }
+void Tp::set_is_jumper_on_low_hp_chance_d1000(int v) { _is_jumper_on_low_hp_chance_d1000 = v; }
 void Tp::set_is_attackable(int v) { _is_attackable = v; }
 void Tp::set_is_bleeder(int v) { _is_bleeder = v; }
 void Tp::set_is_blood(int v) { _is_blood = v; }

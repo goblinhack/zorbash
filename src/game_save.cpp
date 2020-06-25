@@ -72,6 +72,7 @@ std::ostream& operator<<(std::ostream &out, Bits<Monstp & > const my)
     /* std::vector<uint32_t> */ out << bits(my.t->enemies);
     /* std::string */ out << bits(my.t->msg);
     /* timestamp_t */ out << bits(my.t->tick_last_did_something);
+    /* timestamp_t */ out << bits(my.t->tick_last_escape);
     /* timestamp_t */ out << bits(my.t->timestamp_fall_begin);
     /* timestamp_t */ out << bits(my.t->timestamp_born);
     /* timestamp_t */ out << bits(my.t->timestamp_bounce_begin);

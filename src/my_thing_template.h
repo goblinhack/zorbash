@@ -133,6 +133,7 @@ private:
     int _is_attack_shove {};
     int _is_attack_shove_chance_d1000 {};
     int _is_jumper_chance_d1000 {};
+    int _is_jumper_on_low_hp_chance_d1000 {};
     int _is_attackable {};
     int _is_bleeder {};
     int _is_blood {};
@@ -384,6 +385,7 @@ public:
     int is_attack_shove(void) const;
     int is_attack_shove_chance_d1000(void) const;
     int is_jumper_chance_d1000(void) const;
+    int is_jumper_on_low_hp_chance_d1000(void) const;
     int is_attackable(void) const;
     int is_bleeder(void) const;
     int is_blood(void) const;
@@ -526,6 +528,7 @@ public:
     void set_is_attack_shove(int);
     void set_is_attack_shove_chance_d1000(int);
     void set_is_jumper_chance_d1000(int);
+    void set_is_jumper_on_low_hp_chance_d1000(int);
     void set_is_attackable(int);
     void set_is_bleeder(int);
     void set_is_blood(int);

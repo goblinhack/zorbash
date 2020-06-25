@@ -539,6 +539,7 @@ static PyMethodDef python_c_METHODS[] = {
     TP_SET_DECL(is_attack_shove)
     TP_SET_DECL(is_attack_shove_chance_d1000)
     TP_SET_DECL(is_jumper_chance_d1000)
+    TP_SET_DECL(is_jumper_on_low_hp_chance_d1000)
     TP_SET_DECL(is_attackable)
     TP_SET_DECL(is_bleeder)
     TP_SET_DECL(is_blood)

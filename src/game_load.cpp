@@ -89,11 +89,12 @@ std::istream& operator>>(std::istream &in, Bits<Monstp & > my)
     /* std::vector<point> */    in >> bits(my.t->move_path);
     /* std::vector<uint32_t> */ in >> bits(my.t->enemies);
     /* timestamp_t */ in >> bits(T); my.t->tick_last_did_something = load(T);
-    /* timestamp_t */ in >> bits(T); my.t->timestamp_fall_begin       = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->tick_last_escape        = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_fall_begin    = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_born          = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_bounce_begin  = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_bounce_end    = load(T);
-    /* timestamp_t */ in >> bits(T); my.t->timestamp_fall_end       = load(T);
+    /* timestamp_t */ in >> bits(T); my.t->timestamp_fall_end      = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_fadeup_begin  = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_fadeup_end    = load(T);
     /* timestamp_t */ in >> bits(T); my.t->timestamp_flip_start    = load(T);
